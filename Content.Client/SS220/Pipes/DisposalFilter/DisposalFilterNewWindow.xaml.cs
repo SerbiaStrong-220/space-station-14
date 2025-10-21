@@ -14,7 +14,7 @@ namespace Content.Client.SS220.Pipes.DisposalFilter;
 public sealed partial class DisposalFilterNewWindow : FancyWindow
 {
     public required DisposalFilterWindow MainWindow { get; init; }
-    public required FilterRule Filter { get; init; }
+    public required DisposalFilterRule Filter { get; init; }
     public required BoxContainer CurrentFilterContainer { get; set; }
 
     private static readonly ProtoId<TagPrototype> OreTag = "Ore";
@@ -29,7 +29,7 @@ public sealed partial class DisposalFilterNewWindow : FancyWindow
     }
 
     public DisposalFilterNewWindow(DisposalFilterWindow mainWindow,
-        FilterRule filter,
+        DisposalFilterRule filter,
         BoxContainer currentFilterContainer) : this()
     {
         MainWindow = mainWindow;
@@ -56,7 +56,7 @@ public sealed partial class DisposalFilterNewWindow : FancyWindow
     {
         var byNameWindow = new DisposalFilterByNameWindow();
 
-        var nameFilter = Filter.EnsureFilter<NameContainsFilter>();
+        var nameFilter = Filter.EnsureFilter<NameContainsDisposalFilter>();
         if (nameFilter is { ContainNames.Count: > 0 })
             byNameWindow.FilterByNameLineEdit.SetText(string.Join(", ", nameFilter.ContainNames));
 
@@ -68,16 +68,16 @@ public sealed partial class DisposalFilterNewWindow : FancyWindow
                 .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
                 .ToList();
 
-            Filter.EnsureFilter<NameContainsFilter>().AddEntry(names);
+            Filter.EnsureFilter<NameContainsDisposalFilter>().AddEntry(names);
+            MainWindow.Populate();
 
             byNameWindow.Close();
-            MainWindow.Populate();
         };
     }
 
     private void ToggleInWhitelist(object value)
     {
-        Filter.EnsureFilter<WhitelistFilter>().AddEntry(value);
+        Filter.EnsureFilter<WhitelistDisposalFilter>().AddEntry(value);
         MainWindow.Populate();
     }
 }

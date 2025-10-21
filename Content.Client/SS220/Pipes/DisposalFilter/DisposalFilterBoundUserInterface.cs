@@ -18,7 +18,7 @@ public sealed class DisposalFilterBoundUserInterface(EntityUid owner, Enum uiKey
         _window.OnConfirm += OnConfirm;
     }
 
-    private void OnConfirm(List<FilterRule> dirByRules, Direction baseDir)
+    private void OnConfirm(List<DisposalFilterRule> dirByRules, Direction baseDir)
     {
         SendMessage(new DisposalFilterBoundMessage(dirByRules, baseDir));
     }

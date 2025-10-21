@@ -79,7 +79,7 @@ public sealed class DisposalFilterSystem : EntitySystem
 
         var baseDir = ent.Comp.BaseDirection ?? localDir;
         var existingFilters = ent.Comp.FilterByDir.ToDictionary(f => f.OutputDir, f => f);
-        var newFilters = new List<FilterRule>();
+        var newFilters = new List<DisposalFilterRule>();
 
         foreach (var angle in degrees)
         {
@@ -92,7 +92,7 @@ public sealed class DisposalFilterSystem : EntitySystem
 
             newFilters.Add(existingFilters.TryGetValue(dir, out var existing)
                 ? existing
-                : new FilterRule { OutputDir = dir });
+                : new DisposalFilterRule { OutputDir = dir });
         }
 
         ent.Comp.FilterByDir = newFilters;

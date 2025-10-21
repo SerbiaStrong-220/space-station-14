@@ -6,7 +6,7 @@ namespace Content.Server.SS220.Pipes.DisposalFilter;
 public sealed partial class DisposalFilterComponent : Component
 {
     [DataField("filter")]
-    public List<FilterRule> FilterByDir = new();
+    public List<DisposalFilterRule> FilterByDir = new();
 
     /// <summary>
     /// Which <see cref="Direction"/> use, if none of the filters match the conditions/>

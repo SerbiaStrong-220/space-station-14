@@ -15,9 +15,9 @@ public sealed partial class DisposalFilterWindow : FancyWindow
 {
     // ReSharper disable ArrangeObjectCreationWhenTypeEvident
 
-    public event Action<List<FilterRule>, Direction>? OnConfirm;
+    public event Action<List<DisposalFilterRule>, Direction>? OnConfirm;
 
-    public List<FilterRule> FilterRules = new();
+    public List<DisposalFilterRule> FilterRules = new();
     public Direction BaseDir;
 
     private static readonly Thickness FilterTextMargin = new Thickness(5, 0, 0, 0);
@@ -44,7 +44,7 @@ public sealed partial class DisposalFilterWindow : FancyWindow
         RobustXamlLoader.Load(this);
     }
 
-    private void UpdateActiveFilters(FilterRule filter, BoxContainer filterContainer)
+    private void UpdateActiveFilters(DisposalFilterRule filter, BoxContainer filterContainer)
     {
         filterContainer.RemoveAllChildren();
 
@@ -118,7 +118,6 @@ public sealed partial class DisposalFilterWindow : FancyWindow
             requiredAllButton.OnPressed += args =>
             {
                 filter.RequiredAll = args.Button.Pressed;
-                OnConfirm?.Invoke(FilterRules, BaseDir);
             };
 
             var buttonContainer = new BoxContainer

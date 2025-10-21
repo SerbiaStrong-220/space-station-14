@@ -18,3 +18,9 @@ filter-MobState = Сущность
 filter-Stack = Стопка
 
 filter-Ore = Руда
+
+filter-disposal-by-name = По имени
+filter-disposal-is-ore = Предмет - руда
+filter-disposal-is-mob = Предмет - существо
+filter-disposal-is-mail = Предмет - почта
+filter-disposal-is-stack = Предмет - стопка

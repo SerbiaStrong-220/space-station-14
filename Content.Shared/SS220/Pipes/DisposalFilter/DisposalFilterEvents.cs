@@ -6,15 +6,15 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Pipes.DisposalFilter;
 
-public interface IFilterCondition
+public interface IDisposalFilterCondition
 {
     bool Matches(EntityUid ent, IEntityManager entMan);
 
-    IEnumerable<(string Text, Action Remove)> GetSubItems(Action<IFilterCondition> removeAction);
+    IEnumerable<(string Text, Action Remove)> GetSubItems(Action<IDisposalFilterCondition> removeAction);
 }
 
 [Serializable, NetSerializable]
-public sealed class NameContainsFilter : IFilterCondition
+public sealed class NameContainsDisposalFilter : IDisposalFilterCondition
 {
     [DataField] public List<string> ContainNames = new();
 
@@ -32,7 +32,7 @@ public sealed class NameContainsFilter : IFilterCondition
         return false;
     }
 
-    public IEnumerable<(string Text, Action Remove)> GetSubItems(Action<IFilterCondition> removeAction)
+    public IEnumerable<(string Text, Action Remove)> GetSubItems(Action<IDisposalFilterCondition> removeAction)
     {
         foreach (var name in ContainNames)
         {
@@ -56,7 +56,7 @@ public sealed class NameContainsFilter : IFilterCondition
 }
 
 [Serializable, NetSerializable]
-public sealed class WhitelistFilter : IFilterCondition
+public sealed class WhitelistDisposalFilter : IDisposalFilterCondition
 {
     [DataField] public EntityWhitelist Whitelist = new();
 
@@ -65,7 +65,7 @@ public sealed class WhitelistFilter : IFilterCondition
         return entMan.System<EntityWhitelistSystem>().IsWhitelistPass(Whitelist, ent);
     }
 
-    public IEnumerable<(string Text, Action Remove)> GetSubItems(Action<IFilterCondition> removeAction)
+    public IEnumerable<(string Text, Action Remove)> GetSubItems(Action<IDisposalFilterCondition> removeAction)
     {
         if (Whitelist.Components?.Length > 0)
         {
@@ -132,9 +132,9 @@ public sealed class WhitelistFilter : IFilterCondition
 }
 
 [Serializable, NetSerializable]
-public sealed class FilterRule
+public sealed class DisposalFilterRule
 {
-    [DataField] public List<IFilterCondition> Conditions = new();
+    [DataField] public List<IDisposalFilterCondition> Conditions = new();
     [DataField] public bool RequiredAll;
     [DataField] public Direction OutputDir = Direction.Invalid;
 
@@ -150,14 +150,14 @@ public sealed class FilterRule
             : results.Any(r => r);
     }
 
-    public T EnsureFilter<T>() where T : IFilterCondition, new()
+    public T EnsureFilter<T>() where T : IDisposalFilterCondition, new()
     {
         var filter = Conditions.OfType<T>().FirstOrDefault();
-        if (filter == null)
-        {
-            filter = IoCManager.Resolve<IDynamicTypeFactory>().CreateInstance<T>();
-            Conditions.Add(filter);
-        }
+        if (filter != null)
+            return filter;
+
+        filter = IoCManager.Resolve<IDynamicTypeFactory>().CreateInstance<T>();
+        Conditions.Add(filter);
 
         return filter;
     }
@@ -175,17 +175,17 @@ public enum DisposalFilterUiKey
 }
 
 [Serializable, NetSerializable]
-public sealed class DisposalFilterBoundState(List<FilterRule> dirByRules, Direction baseDir)
+public sealed class DisposalFilterBoundState(List<DisposalFilterRule> dirByRules, Direction baseDir)
     : BoundUserInterfaceState
 {
-    public List<FilterRule> DirByRules = dirByRules;
+    public List<DisposalFilterRule> DirByRules = dirByRules;
     public Direction BaseDir = baseDir;
 }
 
 [Serializable, NetSerializable]
-public sealed class DisposalFilterBoundMessage(List<FilterRule> dirByRules, Direction baseDir)
+public sealed class DisposalFilterBoundMessage(List<DisposalFilterRule> dirByRules, Direction baseDir)
     : BoundUserInterfaceMessage
 {
-    public List<FilterRule> DirByRules = dirByRules;
+    public List<DisposalFilterRule> DirByRules = dirByRules;
     public Direction BaseDir = baseDir;
 }
