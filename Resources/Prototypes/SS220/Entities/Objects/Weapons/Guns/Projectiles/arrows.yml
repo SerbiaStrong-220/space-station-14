@@ -1,0 +1,33 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: entity
+  parent: BaseArrow
+  id: ArrowClown
+  name: velcro arrow
+  description: It sticks so much... Is it really smeared with glue?!
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Projectiles/arrow_clown.rsi
+    layers:
+    - state: tail
+      color: fuchsia
+    - state: rod
+      color: yellow
+    - state: tip
+      color: yellow
+    - state: solution1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+  - type: SolutionContainerManager
+    solutions:
+      ammo:
+        maxVol: 20
+        reagents:
+        - ReagentId: SweetPrank
+          Quantity: 5
+        - ReagentId: Pax
+          Quantity: 5
+  - type: SolutionInjectOnEmbed
+    transferAmount: 10
+    solution: ammo
+  - type: SolutionTransfer
+    maxTransferAmount: 10

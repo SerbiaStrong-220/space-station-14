@@ -1,0 +1,17 @@
+- type: entity
+  id: CrateNoFunToyBox
+  name: the royal toy box
+  parent: CrateToyBox
+  suffix: Antag
+  components:
+  - type: StorageFill
+    contents:
+    - id: ClownCase
+    - id: ClothingOuterHardsuitKingClown
+    - id: ClothingBeltQuiverKingClown
+    - id: ClothingBackpackClownKing
+    - id: ClothingUniformJumpsuitClownKing
+    - id: ClothingShoesClownKing
+    - id: ClothingMaskClownKing
+    - id: ClothingHandsGlovesClownKing
+    - id: ClothingEyesGlassesGarGiga

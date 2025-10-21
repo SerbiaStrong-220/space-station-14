@@ -1,4 +1,48 @@
 - type: reagent
+  id: SweetPrank
+  name: reagent-name-sweet-prank
+  group: Narcotics
+  desc: reagent-desc-sweet-prank
+  flavor: sweet
+  color: "#00b408"
+  physicalDesc: reagent-physical-desc-crystalline
+  metabolisms:
+    Narcotic:
+      effects:
+      - !type:MovespeedModifier
+        walkSpeedModifier: 0.50
+        sprintSpeedModifier: 0.60
+      - !type:GenericStatusEffect
+        key: SeeingRainbows
+        component: SeeingRainbows
+        type: Add
+        time: 10
+        refresh: false
+        probability: 0.08
+      - !type:PopupMessage
+        type: Local
+        visualType: Medium
+        messages:
+        - "sweetprank-effect-pupils"
+        - "sweetprank-effect-eye-disconnect"
+        - "sweetprank-effect-eye-fun"
+        - "sweetprank-effect-blindness"
+        probability: 0.08
+      - !type:Emote
+        emote: Laugh
+        showInChat: true
+        probability: 0.08
+      - !type:Emote
+        emote: Whistle
+        showInChat: true
+        probability: 0.08
+      - !type:Emote
+        emote: Honk
+        showInChat: true
+        force: true
+        probability: 0.08
+        
+- type: reagent
   id: NeoNicotinoid
   name: reagent-name-neonicotinoid
   group: Narcotics
@@ -16,3 +60,4 @@
         damage:
           types:
             Cellular: 0.02 # Smoking causes less cancer.
+

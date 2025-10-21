@@ -1,0 +1,33 @@
+- type: entity
+  parent: BaseItem
+  id: SugarHammer
+  name: sugar hammer
+  description: Revenge is often served cold, but now it's also sweet.
+  components:
+    - type: Sprite
+      sprite: SS220/Objects/Weapons/Melee/sugar_hammer.rsi
+      state: icon
+    - type: Item
+      size: Normal
+      sprite: SS220/Objects/Weapons/Melee/sugar_hammer.rsi
+    - type: Appearance
+    - type: DisarmMalus
+      malus: 0
+    - type: MeleeWeapon
+      soundHit:
+        collection: RubberHammer
+        params:
+            variation: 0.03
+            volume: 3
+      damage:
+       types:
+         Blunt: 20
+    - type: SolutionContainerManager
+      solutions:
+        melee:
+          reagents:
+          - ReagentId: SweetPrank
+            Quantity: 1000000
+    - type: MeleeChemicalInjector
+      solution: melee
+      transferAmount: 10
