@@ -15,10 +15,10 @@ public sealed class UndereducatedClientSystem : EntitySystem
     [Dependency] private readonly IPlayerManager _playerManager = default!;
 
     private static readonly string[] LanguagesBlacklist =
-    {
-       SharedLanguageSystem.GalacticLanguage,
-       SharedLanguageSystem.UniversalLanguage
-    };
+    [
+        SharedLanguageSystem.GalacticLanguage,
+        SharedLanguageSystem.UniversalLanguage,
+    ];
 
     public override void Initialize()
     {
@@ -58,7 +58,7 @@ public sealed class UndereducatedClientSystem : EntitySystem
         }
     }
 
-    private bool TryGetSpokenLanguageList(LanguageComponent langComp, out List<string> availableLanguagesList)
+    private static bool TryGetSpokenLanguageList(LanguageComponent langComp, out List<string> availableLanguagesList)
     {
         availableLanguagesList = [];
 
@@ -70,10 +70,7 @@ public sealed class UndereducatedClientSystem : EntitySystem
             availableLanguagesList.Add(lang.Id);
         }
 
-        if (availableLanguagesList.Count > 0)
-            return true;
-
-        return false;
+        return availableLanguagesList.Count > 0;
     }
 
     private void OnPlayerDeattached(Entity<UndereducatedComponent> ent, ref PlayerDetachedEvent args)

@@ -9,6 +9,7 @@ using Content.Shared.SS220.Undereducated;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -56,20 +57,12 @@ public sealed partial class UndereducatedSystem : EntitySystem
     private void OnMapInit(Entity<UndereducatedComponent> ent, ref MapInitEvent _)
     {
         if (TryComp<HumanoidAppearanceComponent>(ent, out var apperance)
-            && SpeciesLanguageDict.TryGetValue(apperance.Species, out var language)
-            && _languageSystem.CanSpeak(ent, language))
-            ent.Comp.Language = language;
-        else if (TryComp<LanguageComponent>(ent, out var langComp))
-        {
-            foreach (var lang in langComp.AvailableLanguages)
-            {
-                if (lang.CanSpeak)
-                {
-                    ent.Comp.Language = lang.Id;
-                    break;
-                }
-            }
-        }
+            && SpeciesLanguageDict.TryGetValue(apperance.Species, out var raceLanguage)
+            && _languageSystem.CanSpeak(ent, raceLanguage))
+            ent.Comp.Language = raceLanguage;
+        else if (TryComp<LanguageComponent>(ent, out var langComp)
+                 && langComp.AvailableLanguages.FirstOrDefault() is { } language)
+            ent.Comp.Language = language.Id;
 
         Dirty(ent);
     }
@@ -93,18 +86,17 @@ public sealed partial class UndereducatedSystem : EntitySystem
     private bool TryGetLanguageTag(Entity<UndereducatedComponent> ent, [NotNullWhen(true)] out string? tag)
     {
         tag = null;
-        LanguagePrototype? languagePrototype;
 
         if (ent.Comp.Language.Length > 0
             && _languageSystem.CanSpeak(ent, ent.Comp.Language)
-            && _proto.TryIndex<LanguagePrototype>(ent.Comp.Language, out languagePrototype))
+            && _proto.TryIndex<LanguagePrototype>(ent.Comp.Language, out var languagePrototype))
         {
             tag = languagePrototype.KeyWithPrefix;
             return true;
         }
 
-        if (TryComp<HumanoidAppearanceComponent>(ent, out var apperance)
-            && SpeciesLanguageDict.TryGetValue(apperance.Species, out var language)
+        if (TryComp<HumanoidAppearanceComponent>(ent, out var appearance)
+            && SpeciesLanguageDict.TryGetValue(appearance.Species, out var language)
             && _proto.TryIndex<LanguagePrototype>(language, out languagePrototype))
         {
             tag = languagePrototype.KeyWithPrefix;
@@ -140,11 +132,8 @@ public sealed partial class UndereducatedSystem : EntitySystem
                         newMessage.Append(' ').Append(node.Language.KeyWithPrefix);
                 }
                 else
-                {
-                    //if (wordsCount == words.Length)
-                    //    newMessage.Append(node.Language.KeyWithPrefix).Append(' ');
                     newMessage.Append(word);
-                }
+
                 newMessage.Append(' ');
                 wordsCount--;
             }
