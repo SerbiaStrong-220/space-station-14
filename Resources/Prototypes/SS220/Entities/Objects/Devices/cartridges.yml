@@ -20,3 +20,20 @@
         state: icon
     - type: SuperMatterObserverReceiver
 
+- type: entity
+  parent: BaseItem
+  id: TimerCartridge
+  name: Timer cartridge
+  description: A program that allows you to see the current time and setup a timer.
+  components:
+  - type: Sprite
+    sprite: Objects/Devices/cartridge.rsi
+    state: cart-nav
+  - type: Cartridge
+    programName: timer-program-name
+    icon:
+      sprite: SS220/Interface/Misc/program_icons.rsi
+      state: timer
+  - type: UIFragment
+    ui: !type:TimerCartridgeUi
+  - type: TimerCartridge
