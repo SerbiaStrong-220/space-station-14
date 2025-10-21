@@ -36,4 +36,11 @@ public sealed partial class CultYoggHealComponent : Component
 
     [DataField, AutoNetworkedField]
     public SpriteSpecifier.Rsi Sprite = new(new("SS220/Effects/cult_yogg_healing.rsi"), "healingEffect");
+
+    /// <summary>
+    /// At what damage will the heal be cancelled?
+    /// It should be more damage from decompression
+    /// </summary>
+    [ViewVariables]
+    public int CancelDamageTreshhold = 3;
 }
