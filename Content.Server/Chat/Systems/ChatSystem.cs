@@ -880,8 +880,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             {
                 i++;
                 var isFirst = i == 1;
-                string msg = node.Message;
-                node.SetMessage(SanitizeMessage(msg, isFirst, isFirst && capitalize, punctuate, capitalizeTheWordI));
+                node.SetMessage(SanitizeMessage(node.Message, isFirst, isFirst && capitalize, punctuate, capitalizeTheWordI));
             });
 
             newMessage = languageMessage.GetMessageWithLanguageKeys();
