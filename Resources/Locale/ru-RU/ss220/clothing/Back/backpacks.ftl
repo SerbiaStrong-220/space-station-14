@@ -13,3 +13,13 @@ ent-ClothingBackpackBlueShieldHightFilled = { ent-ClothingBackpackBlueShield }
     .desc = { ent-ClothingBackpackBlueShield.desc }
 ent-ClothingBackpackParamedic = рюкзак парамедика
     .desc = Рюкзак, разработанный для полевых медиков, использующий наработки технологии карманных скафандров.
+
+ent-ClothingBackpackERTLeaderGammaFilled = { ent-ClothingBackpackERTLeader }
+    .suffix = Гамма ОБР, заполненный
+    .desc = { ent-ClothingBackpackERTLeader.desc }
+ent-ClothingBackpackERTSecurityGammaFilled = { ent-ClothingBackpackERTSecurity }
+    .suffix = Гамма ОБР, заполненный
+    .desc = { ent-ClothingBackpackERTSecurity.desc }
+ent-ClothingBackpackERTMedicalGammaFilled = { ent-ClothingBackpackERTMedical }
+    .suffix = Гамма ОБР, заполненный
+    .desc = { ent-ClothingBackpackERTMedical.desc }
