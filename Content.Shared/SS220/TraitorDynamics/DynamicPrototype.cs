@@ -18,7 +18,7 @@ public sealed partial class DynamicPrototype : IPrototype
     /// Value - maximum number of players allowed for this rule.
     /// </summary>
     [DataField]
-    public Dictionary<List<ProtoId<AntagPrototype>>, int> AntagLimits = new();
+    public Dictionary<ProtoId<AntagPrototype>, int> AntagLimits = new();
 
     [DataField]
     public int PlayersRequerment;

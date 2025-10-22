@@ -19,6 +19,7 @@ using System.Linq;
 using System.Text;
 using Content.Server.SS220.TraitorDynamics;
 using Content.Server.Codewords;
+using Content.Shared.GameTicking.Components;
 
 namespace Content.Server.GameTicking.Rules;
 
@@ -49,14 +50,13 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
         SubscribeLocalEvent<TraitorRuleComponent, ObjectivesTextPrependEvent>(OnObjectivesTextPrepend);
     }
 
+    // SS220 TraitorDynamics start
     protected override void Added(EntityUid uid, TraitorRuleComponent component, GameRuleComponent gameRule, GameRuleAddedEvent args)
     {
         base.Added(uid, component, gameRule, args);
-        SetCodewords(component, args.RuleEntity);
-        InitDynamic(uid, component); // SS220 Dynamics
+        InitDynamic(uid, component);
     }
 
-    // SS220 TraitorDynamics start
     protected override void Ended(EntityUid uid, TraitorRuleComponent component, GameRuleComponent gameRule, GameRuleEndedEvent args)
     {
         base.Ended(uid, component, gameRule, args);
