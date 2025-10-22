@@ -31,9 +31,9 @@ jobs:
         }' \
         $DISCORD_PUBLISH_NOTIFY
   # SS220 Discord Notifier end
-    # - name: Fail if we are attempting to run on the master branch
-    #   if: ${{GITHUB.REF_NAME == 'master' && github.repository == 'SerbiaStrong-220/space-station-14'}}
-    #   run: exit 1
+    - name: Fail if we are attempting to run on the master branch
+      if: ${{GITHUB.REF_NAME == 'master' && github.repository == 'SerbiaStrong-220/space-station-14'}}
+      run: exit 1
 
   # SS220 custom install start
    # - name: Install dependencies
@@ -121,21 +121,21 @@ jobs:
         }' \
         $DISCORD_PUBLISH_NOTIFY
     - name: SS220 PN2D - Success Release Update
-      if: ${{GITHUB.REF_NAME == 'map-cluster' && github.repository == 'SerbiaStrong-220/space-station-14' && success()}}
+      if: ${{GITHUB.REF_NAME == 'release' && github.repository == 'SerbiaStrong-220/space-station-14' && success()}}
       env:
-        DISCORD_PUBLISH_NOTIFY: ${{ secrets.DISCORD_PUBLISH_NOTIFY }}
+        DISCORD_PUBLISH_NOTIFY_RELEASE: ${{ secrets.DISCORD_PUBLISH_NOTIFY_RELEASE }}
       run: |
         curl -X POST -H "Content-Type: application/json" \
         -d '{
           "username": "SS220 Changelogger",
           "avatar_url": "https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/refs/heads/master/logo.png",
           "embeds": [{
-            "title": "Обновление отправлено на сервера :astronaut~1:>",
+            "title": "Обновление отправлено на сервера 🚀",
             "description": "Сервера автоматически перезапустятся для обновления в конце текущих раундов!",
             "color": 3447003
           }]
         }' \
-        $DISCORD_PUBLISH_NOTIFY
+        $DISCORD_PUBLISH_NOTIFY_RELEASE
 # SS220 Discord Notifier end
 
 # SS220 temp disable discord publish

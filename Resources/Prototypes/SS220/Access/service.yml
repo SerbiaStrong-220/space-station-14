@@ -1,0 +1,29 @@
+- type: accessLevel
+  id: Mime
+  name: id-card-access-level-mime
+
+- type: accessLevel
+  id: Librarian
+  name: id-card-access-level-librarian
+
+- type: accessLevel
+  id: Reporter
+  name: id-card-access-level-reporter
+
+- type: accessLevel
+  id: Musician
+  name: id-card-access-level-musician
+
+- type: accessLevel
+  id: Clown
+  name: id-card-access-level-clown
+
+# Группа полного доступа
+- type: accessGroup
+  id: ServiceSS220
+  tags:
+  - Mime
+  - Librarian
+  - Reporter
+  - Musician
+  - Clown
