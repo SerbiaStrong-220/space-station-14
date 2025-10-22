@@ -8,6 +8,8 @@ namespace Content.Shared.SS220.Detective.Camera;
 [Access(typeof(SharedDetectiveCameraAttachSystem), Friend = AccessPermissions.ReadWriteExecute, Other = AccessPermissions.Read)]
 public sealed partial class DetectiveCameraAttachComponent : Component
 {
+    public const string CellSlotId = "detective_camera_slot";
+
     [DataField]
     public bool Attached;
 
@@ -16,7 +18,4 @@ public sealed partial class DetectiveCameraAttachComponent : Component
 
     [DataField, AutoNetworkedField]
     public float DetachTime = 3f;
-
-    [DataField("сellSlotId"), AutoNetworkedField]
-    public string CellSlotId = "detective_camera_slot";
 }

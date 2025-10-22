@@ -244,7 +244,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             || (CultureInfo.CurrentCulture.IsNeutralCulture && CultureInfo.CurrentCulture.Name == "en");
 
         message = _chatManager.DeleteProhibitedCharacters(message, source); // SS220 delete prohibited characters
-        message = SanitizeInGameICMessage(source, message, out var emoteStr, shouldCapitalize, shouldPunctuate, shouldCapitalizeTheWordI);
+        message = SanitizeInGameICMessage(source, message, /* SS220 languages */ desiredType, out var emoteStr, shouldCapitalize, shouldPunctuate, shouldCapitalizeTheWordI);
 
         // Was there an emote in the message? If so, send it.
         if (player != null && emoteStr != message && emoteStr != null)
@@ -857,43 +857,40 @@ public sealed partial class ChatSystem : SharedChatSystem
     }
 
     // ReSharper disable once InconsistentNaming
-    private string SanitizeInGameICMessage(EntityUid source, string message, out string? emoteStr, bool capitalize = true, bool punctuate = false, bool capitalizeTheWordI = true)
+    private string SanitizeInGameICMessage(
+        EntityUid source,
+        string message,
+        InGameICChatType iCChatType, // SS220 Languages
+        out string? emoteStr,
+        bool capitalize = true,
+        bool punctuate = false,
+        bool capitalizeTheWordI = true)
     {
         var newMessage = message.Trim();
         // SS220 languages begin
-        var languageMessage = _languageSystem.SanitizeMessage(source, newMessage);
 
         var prefix = string.Empty;
-        var findEnglish = false;
+        var foundEnglish = false;
         string? newEmoteStr = null;
-        var i = 0;
-        languageMessage.ChangeInNodeMessage(msg =>
+        if (iCChatType is InGameICChatType.Speak or InGameICChatType.Whisper)
         {
-            i++;
-            if (i == 1) // only for 1st node
-                GetRadioKeycodePrefix(source, msg, out msg, out prefix);
-
-            var newLangMessage = ReplaceWords(msg);
-            newLangMessage = SanitizeMessageReplaceWords(newLangMessage);
-            _sanitizer.TrySanitizeEmoteShorthands(newLangMessage, source, out newLangMessage, out newEmoteStr, false);
-            if (!_sanitizer.CheckNoEnglish(source, newLangMessage))
-                findEnglish = true;
-
-            if (i == 1) // only for 1st node
+            var languageMessage = _languageSystem.SanitizeMessage(source, newMessage);
+            var i = 0;
+            languageMessage.ChangeInNodeMessage(msg =>
             {
-                if (capitalize)
-                    newLangMessage = SanitizeMessageCapital(newLangMessage);
-            }
+                i++;
+                var isFirst = i == 1;
+                return SanitizeMessage(msg, isFirst, isFirst && capitalize, punctuate, capitalizeTheWordI);
+            });
 
-            if (capitalizeTheWordI)
-                newLangMessage = SanitizeMessageCapitalizeTheWordI(newLangMessage, "i");
-            if (punctuate)
-                newLangMessage = SanitizeMessagePeriod(newLangMessage);
+            newMessage = languageMessage.GetMessageWithLanguageKeys();
+        }
+        else
+        {
+            newMessage = SanitizeMessage(message, true, capitalize, punctuate, capitalizeTheWordI);
+        }
 
-            return newLangMessage;
-        });
-
-        if (findEnglish)
+        if (foundEnglish)
         {
             emoteStr = "кашляет";
             return string.Empty;
@@ -914,10 +911,31 @@ public sealed partial class ChatSystem : SharedChatSystem
         //if (punctuate)
         //    newMessage = SanitizeMessagePeriod(newMessage);
 
-        newMessage = languageMessage.GetMessageWithLanguageKeys(false);
-        // SS220 languages end
-
         return prefix + newMessage;
+
+        string SanitizeMessage(string message, bool getRadioKeycodePrefix, bool capitalize = true, bool punctuate = false, bool capitalizeTheWordI = true)
+        {
+            var newMessage = ReplaceWords(message);
+            newMessage = SanitizeMessageReplaceWords(newMessage);
+
+            if (getRadioKeycodePrefix)
+                GetRadioKeycodePrefix(source, newMessage, out newMessage, out prefix);
+
+            _sanitizer.TrySanitizeEmoteShorthands(newMessage, source, out newMessage, out newEmoteStr);
+            if (!_sanitizer.CheckNoEnglish(source, newMessage))
+                foundEnglish = true;
+
+            if (capitalize)
+                newMessage = SanitizeMessageCapital(newMessage);
+            if (capitalizeTheWordI)
+                newMessage = SanitizeMessageCapitalizeTheWordI(newMessage, "i");
+            if (punctuate)
+                newMessage = SanitizeMessagePeriod(newMessage);
+
+            return newMessage;
+        }
+
+        // SS220 languages end
     }
 
     private string SanitizeInGameOOCMessage(string message)

@@ -31,7 +31,7 @@
   parent: BaseCultYoggRule
   components:
   - type: GameRule
-    minPlayers: 40 # WARNING: this should be always synced with other cult game rules and presets!
+    minPlayers: 35 # WARNING: this should be always synced with other cult game rules and presets!
   - type: CultYoggRule
     stages:
       Initial: {}

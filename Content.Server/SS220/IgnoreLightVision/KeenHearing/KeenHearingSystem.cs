@@ -33,6 +33,9 @@ public sealed class KeenHearingSystem : SharedAddIgnoreLightVisionOverlaySystem<
 
         while (entityQuery.MoveNext(out var uid, out var comp))
         {
+            if (comp.ToggleTime is null)
+                continue;
+
             if (_gameTiming.CurTime <= comp.ToggleTime)
                 continue;
 
@@ -65,7 +68,9 @@ public sealed class KeenHearingSystem : SharedAddIgnoreLightVisionOverlaySystem<
         }
 
         foreach (var action in actionsToDelete)
+        {
             _actions.RemoveAction(action);
+        }
     }
 
     private void OnKeenHearingAction(Entity<KeenHearingComponent> ent, ref UseKeenHearingEvent args)

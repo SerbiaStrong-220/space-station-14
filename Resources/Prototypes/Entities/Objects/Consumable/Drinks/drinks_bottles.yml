@@ -219,6 +219,11 @@
     fillBaseName: fill-
     inHandsMaxFillLevels: 3
     inHandsFillBaseName: -fill-
+    # TODO-SS220-SPRITES-?
+    # SS220-fix-middle-hand-sprites-begin
+    ignoreLocationSprite:
+      - middle
+    # SS220-fix-middle-hand-sprites-end
   - type: ExaminableSolution
 
 # Large Glass Bottles

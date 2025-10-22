@@ -99,8 +99,9 @@
   - type: SalvageMobRestrictions
 
 - type: entity
-  id: MobBearSpaceAIGoal
-  parent: MobBearSpace
+  id: MobBearSpaceGhostRoleGoal
+  parent: MobBearSpaceGhostRole
+  suffix: Ghost Role, With Goal
   description: It looks friendly. Why don't you give it a hug?
   components:
   - type: Emoting
@@ -116,3 +117,35 @@
     rules: ghost-role-information-freeagent-rules
     mindRoles:
     - MindRoleGhostRoleFreeAgent
+
+- type: entity
+  id: MobBearSpaceGhostRole
+  parent: MobBearSpace
+  suffix: Ghost Role
+  description: It looks friendly. Why don't you give it a hug?
+  components:
+  - type: GhostRole
+    makeSentient: true
+    allowSpeech: false
+    allowMovement: true
+    name: ghost-role-information-space-bear-name
+    description: ghost-role-information-space-bear-description
+    rules: ghost-role-information-freeagent-rules
+    mindRoles:
+    - MindRoleGhostRoleFreeAgent
+
+- type: entity
+  name: Space cobra
+  id: MobCobraSpaceGhostRole
+  suffix: GhostRole
+  parent: MobCobraSpace
+  description: Long fangs and a glowing hood, and the alluring look begs to come closer.
+  components:
+    - type: GhostRole
+      makeSentient: true
+      name: ghost-role-information-cobra-space-name
+      description: ghost-role-information-cobra-space-description
+      rules: ghost-role-information-snake-overall-rules
+      mindRoles:
+        - MindRoleGhostRoleTeamAntagonist
+    - type: GhostTakeoverAvailable

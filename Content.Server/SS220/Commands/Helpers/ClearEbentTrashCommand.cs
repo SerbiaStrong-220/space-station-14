@@ -1,11 +1,13 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using System.Linq;
 using Content.Server.Administration;
 using Content.Shared.Administration;
 using Content.Shared.Tag;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Console;
 using Robust.Shared.Containers;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.Commands.Helpers;
 
@@ -13,6 +15,9 @@ namespace Content.Server.SS220.Commands.Helpers;
 public sealed partial class ClearEbentTrashCommand : IConsoleCommand
 {
     [Dependency] private readonly IEntityManager _entMan = default!;
+
+    private static readonly ProtoId<TagPrototype> TrashTag = "Trash";
+    private const string MagazineTag = "Magazine";
 
     //SS220-clearebenttrash
     public string Command => "clearebenttrash";
@@ -32,10 +37,10 @@ public sealed partial class ClearEbentTrashCommand : IConsoleCommand
         var processed = 0;
         foreach (var ent in _entMan.GetEntities())
         {
-            if (_entMan.HasComponent<TagComponent>(ent))
+            if (_entMan.TryGetComponent<TagComponent>(ent, out var tagComp))
             {
-                if (tag.HasTag(ent, "Trash") && !containerSystem.IsEntityOrParentInContainer(ent)
-                    || !containerSystem.IsEntityOrParentInContainer(ent) && tag.HasTag(ent, "Magazine"))
+                if ((tag.HasTag(ent, TrashTag) || tagComp.Tags.Any(tagName => tagName.Id.Contains(MagazineTag))) &&
+                    !containerSystem.IsEntityOrParentInContainer(ent))
                 {
                     _entMan.DeleteEntity(ent);
                     processed++;
@@ -64,8 +69,10 @@ public sealed partial class ClearEbentTrashCommand : IConsoleCommand
         var query = _entMan.AllEntityQueryEnumerator<CartridgeAmmoComponent>();
         while (query.MoveNext(out var entity, out _))
         {
-            if (!containerSystem.IsEntityOrParentInContainer(entity))
-                _entMan.QueueDeleteEntity(entity);
+            if (containerSystem.IsEntityOrParentInContainer(entity))
+                continue;
+
+            _entMan.QueueDeleteEntity(entity);
             processed++;
         }
 
