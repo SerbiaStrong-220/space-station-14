@@ -36,9 +36,9 @@ public sealed partial class AfterDeMaterialize : DoAfterEvent
 public record struct CultYoggEnslavedEvent(EntityUid? Target);
 
 [Serializable, NetSerializable]
-public sealed class MiGoTeleportToTargetMessage(NetEntity? target) : BoundUserInterfaceMessage
+public sealed class MiGoTeleportToTargetMessage(NetEntity target) : BoundUserInterfaceMessage
 {
-    public NetEntity? Target = target;
+    public NetEntity Target = target;
 }
 
 

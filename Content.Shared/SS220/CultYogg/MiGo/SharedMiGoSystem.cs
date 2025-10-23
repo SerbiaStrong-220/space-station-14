@@ -543,14 +543,13 @@ public abstract class SharedMiGoSystem : EntitySystem
         if (args.Handled || !TryComp<ActorComponent>(ent, out var actor))
             return;
 
-        args.Handled = true;
-
-        _userInterfaceSystem.TryToggleUi(ent.Owner, MiGoUiKey.Teleport, actor.PlayerSession);
+        if (_userInterfaceSystem.TryToggleUi(ent.Owner, MiGoUiKey.Teleport, actor.PlayerSession))
+            args.Handled = true;
     }
 
-    private List<(string, NetEntity?)> GetTeleportsPoints()
+    private List<(string, NetEntity)> GetTeleportsPoints()
     {
-        List<(string, NetEntity?)> warps = [];
+        List<(string, NetEntity)> warps = [];
 
         var query = EntityQueryEnumerator<CultYoggComponent>();
 
@@ -569,10 +568,7 @@ public abstract class SharedMiGoSystem : EntitySystem
             return;
         }
 
-        if (args.Target == null)
-            return;
-
-        if (!TryGetEntity(args.Target.Value, out var target))
+        if (!TryGetEntity(args.Target, out var target))
             return;
 
         if (!HasComp<CultYoggComponent>(target))
@@ -596,7 +592,7 @@ public abstract class SharedMiGoSystem : EntitySystem
 
     private void WarpTo(EntityUid ent, EntityUid target)
     {
-        _adminLogger.Add(LogType.Teleport, $"MiGo {ToPrettyString(ent)} teleported to {ToPrettyString(target)}");
+        _adminLogger.Add(LogType.Teleport, $"MiGo {ToPrettyString(ent):user} teleported to {ToPrettyString(target):target}");
 
         var xform = Transform(ent);
         _transformSystem.SetCoordinates(ent, xform, Transform(target).Coordinates);

@@ -10,19 +10,15 @@ namespace Content.Client.SS220.CultYogg.MiGo.UI;
 [GenerateTypedNameReferences]
 public sealed partial class MiGoTeleportTarget : BoxContainer
 {
-    public NetEntity? TargetNetEnt;
-    public MiGoTeleportTarget(string name, NetEntity? target)
+    public NetEntity TargetNetEnt;
+
+    private static readonly Color ColorTarget = Color.FromHex("#343536");
+    public MiGoTeleportTarget(string name, NetEntity target)
     {
         RobustXamlLoader.Load(this);
 
-        Panel.PanelOverride = new StyleBoxFlat { BackgroundColor = Color.FromHex("#343536") };
-
-        if (target.HasValue)
-        {
-            TargetNetEnt = target.Value;
-            //DollView.SetEntity(target.Value); //for better visualisation,  maybe later
-        }
-
-        NameLabel.Text = name;//cause center aligment isnt working
+        Panel.PanelOverride = new StyleBoxFlat { BackgroundColor = ColorTarget };
+        TargetNetEnt = target;
+        NameLabel.Text = name;
     }
 }
