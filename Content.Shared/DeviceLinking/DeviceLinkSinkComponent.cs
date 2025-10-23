@@ -46,4 +46,9 @@ public sealed partial class DeviceLinkSinkComponent : Component
     /// </summary>
     [DataField]
     public int InvokeLimit = 10;
+
+    // ss220 add open/close ports to door start
+    [DataField]
+    public bool TriggerOnLink = true;
+    // ss220 add open/close ports to door end
 }

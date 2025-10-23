@@ -234,6 +234,7 @@
   minLimit: 0
   loadouts:
   - MaskTacSec
+  - SecTacGasMask
 
 - type: loadoutGroup
   id: SecurityGlasses
@@ -280,6 +281,7 @@
   - SecurityBeret
   - SecurityHat
   - PilotCapCap
+  - HelmetTacSec
 
 - type: loadoutGroup
   id: SecurityPilotOuterClothing
@@ -303,6 +305,16 @@
   - SecurityWinterBoots
   - BootsJackSec
   - DetectiveShoesBootsLaceup
+
+- type: loadoutGroup
+  id: DetectiveGlasses
+  name: loadout-group-detective-glasses
+  minLimit: 0
+  loadouts: 
+  - GlassesSecurity
+  - CyberGlassesSecurity
+  - GlassesBallistic
+  - NoirGlasses
 
 - type: loadoutGroup
   id: DetectiveNeck
@@ -474,6 +486,7 @@
   name: loadout-group-medical-neck
   loadouts:
   - WhiteScarf
+  - MedStethoscope
 
 - type: loadoutGroup
   id: MedicalGlasses

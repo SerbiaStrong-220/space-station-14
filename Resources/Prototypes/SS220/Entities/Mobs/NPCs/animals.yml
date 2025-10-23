@@ -273,6 +273,7 @@
     radius: 2
     netsync: false
   - type: Language
+    selectedLanguage: Binary
     availableLanguages:
     - id: Galactic
       canSpeak: false

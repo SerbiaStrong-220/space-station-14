@@ -2,6 +2,7 @@
 
 using System.IO;
 using Content.Shared.Corvax.CCCVars;
+using Content.Shared.SS220.CCVars;
 using Content.Shared.SS220.TTS;
 using Content.Shared.SS220.TTS.Commands;
 using Robust.Client.Audio;
@@ -35,8 +36,8 @@ public sealed partial class TTSSystem
     private float _volume = 0.0f;
     private float _radioVolume = 0.0f;
 
-    private const int MaxQueuedPerEntity = 20;
-    private const int MaxEntitiesQueued = 30;
+    private int _maxQueuedPerEntity = 20;
+    private int _maxEntitiesQueued = 30;
     private readonly Dictionary<EntityUid, Queue<PlayRequest>> _playQueues = new();
     private readonly Dictionary<EntityUid, EntityUid?> _playingStreams = new();
 
@@ -46,6 +47,8 @@ public sealed partial class TTSSystem
     {
         _sawmill = Logger.GetSawmill("tts");
 
+        Subs.CVar(_cfg, CCVars220.MaxQueuedPerEntity, (x) => _maxQueuedPerEntity = x, true);
+        Subs.CVar(_cfg, CCVars220.MaxEntitiesQueued, (x) => _maxEntitiesQueued = x, true);
         _cfg.OnValueChanged(CCCVars.TTSVolume, OnTtsVolumeChanged, true);
         _cfg.OnValueChanged(CCCVars.TTSRadioVolume, OnTtsRadioVolumeChanged, true);
 
@@ -173,14 +176,14 @@ public sealed partial class TTSSystem
     {
         if (!_playQueues.TryGetValue(entity, out var queue))
         {
-            if (_playQueues.Count >= MaxEntitiesQueued)
+            if (_playQueues.Count >= _maxEntitiesQueued)
                 return;
 
             queue = new();
             _playQueues.Add(entity, queue);
         }
 
-        if (queue.Count >= MaxQueuedPerEntity)
+        if (queue.Count >= _maxQueuedPerEntity)
             return;
 
         queue.Enqueue(request);
@@ -200,7 +203,7 @@ public sealed partial class TTSSystem
 
     private void PlayTtsBytes(TtsAudioData data, EntityUid? sourceUid = null, AudioParams? audioParams = null, bool globally = false)
     {
-        _sawmill.Debug($"Play TTS audio {data.Length} bytes from {sourceUid} entity");
+        // _sawmill.Debug($"Play TTS audio {data.Length} bytes from {sourceUid} entity"); // hide console tts flood, noinfo for players
         if (data.Length == 0)
             return;
 

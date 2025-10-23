@@ -89,6 +89,7 @@ public sealed partial class NoteEdit : FancyWindow
             NoteType = note.NoteType;
             TypeOption.AddItem(Loc.GetString("admin-note-editor-type-server-ban"), (int) NoteType.ServerBan);
             TypeOption.AddItem(Loc.GetString("admin-note-editor-type-role-ban"), (int) NoteType.RoleBan);
+            TypeOption.AddItem(Loc.GetString("admin-note-editor-type-species-ban"), (int)NoteType.SpeciesBan); // SS220 Species bans
             TypeOption.SelectId((int)NoteType);
             TypeOption.Disabled = true;
 
@@ -96,7 +97,7 @@ public sealed partial class NoteEdit : FancyWindow
 
             NoteSeverity = note.NoteSeverity ?? Shared.Database.NoteSeverity.Minor;
             SeverityOption.SelectId((int)NoteSeverity);
-            SeverityOption.Disabled = note.NoteType is not (NoteType.Note or NoteType.ServerBan or NoteType.RoleBan);
+            SeverityOption.Disabled = note.NoteType is not (NoteType.Note or NoteType.ServerBan or NoteType.RoleBan or /* SS220 Species bans */ NoteType.SpeciesBan);
 
             IsSecret = note.Secret;
             SecretCheckBox.Pressed = note.Secret;
