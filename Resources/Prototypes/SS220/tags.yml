@@ -23,6 +23,9 @@
   id: KRSPowerCell
 
 - type: Tag
+  id: LaserCarabinePowerCell
+
+- type: Tag
   id: WeaponRechargerWhitelist
 
 # ss220 shlepi
@@ -217,6 +220,14 @@
 
 - type: Tag
   id: WhitelistPdaIdPainter
+
+# SS220 Saber
+- type: Tag
+  id: MagazinePistolSubMachineGunAcp
+
+- type: Tag
+  id: CartridgeAmmoAcp
+# SS220 Saber end
 
 - type: Tag
   id: CultYoggStealthProvidable
