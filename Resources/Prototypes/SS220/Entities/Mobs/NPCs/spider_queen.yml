@@ -176,6 +176,7 @@
     - ActionSpawnWebTileBloodPoints
     - ActionSpawnSpiderWallWebDurableBloodPoints
     - ActionSpiderCoconning
+    - ActionPryingSpiderQueen
   - type: Hunger
     thresholds: # only animals and rats are derived from this prototype so let's override it here and in rats' proto
       Overfed: 150
@@ -316,6 +317,7 @@
     - ActionSpawnSpiderWallWebDurable
     - ActionSpawnSpiderCrystal
     - ActionSpawnSingleSpiderWebShortDelay
+    - ActionPryingSpiderQueen
   - type: Spider
     webPrototype: SpiderWebDespawned
   - type: MovementSpeedModifier
@@ -386,6 +388,7 @@
   - type: ActionGrant
     actions:
     - ActionSpawnSingleSpiderWebLongDelay
+    - ActionPryingSpiderQueen
 
 - type: entity
   parent:
@@ -472,6 +475,7 @@
   - type: ActionGrant
     actions:
     - ActionSpawnSingleSpiderWebLongDelay
+    - ActionPryingSpiderQueen
 
 - type: entity
   parent:
@@ -551,6 +555,7 @@
   - type: ActionGrant
     actions:
     - ActionSpawnSingleSpiderWebClown
+    - ActionPryingSpiderQueen
   - type: MovementSpeedModifier
     baseWalkSpeed : 3
     baseSprintSpeed : 3.7
