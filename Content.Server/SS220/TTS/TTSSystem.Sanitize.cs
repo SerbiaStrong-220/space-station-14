@@ -418,7 +418,7 @@ public sealed partial class TTSSystem
             {"de verdad", "Де Бердад"},
             {"posiblemente", "Посиблементе"},
             {"bastante", "Бастанте"},
-            {"suficiente", "Суфисьенте"},
+            {"suficiente", "Суфисьенте"}
             // ss220 fix spanish end
 
         };
