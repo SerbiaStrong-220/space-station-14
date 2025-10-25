@@ -251,7 +251,6 @@ public sealed partial class TTSSystem
             {"protección", "Протексьон"},
             {"escáner", "Эсканер"},
             {"sensor", "Сенсор"},
-            {"médico", "Медико"},
             {"herida", "Эрида"},
             {"hemorragia", "Эморахия"},
             {"medicamentos", "Медикаментос"},
@@ -418,7 +417,7 @@ public sealed partial class TTSSystem
             {"de verdad", "Де Бердад"},
             {"posiblemente", "Посиблементе"},
             {"bastante", "Бастанте"},
-            {"suficiente", "Суфисьенте"}
+            {"suficiente", "Суфисьенте"},
             // ss220 fix spanish end
 
         };
