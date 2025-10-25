@@ -43,7 +43,8 @@
     currentTemperature: 290
   # required for cooking to work
   - type: InternalTemperature
-    thickness: 0.02
+    thickness: 0.19 #SS220-grill-update-2 (0.02 -> 0.19)
+    conductivity: 0.43 #SS220-grill-update-2
     area: 0.02 # arbitrary number that sounds right for a slab of meat
   - type: Material
   - type: PhysicalComposition
@@ -100,12 +101,14 @@
   - type: SliceableFood
     count: 3
     slice: FoodMeatCutlet
-  - type: InternalTemperature
-    conductivity: 0.43
-  - type: Construction
-    graph: MeatSteak
-    node: start
-    defaultTarget: meat steak
+    #SS220-grill-update-2 begin
+#  - type: InternalTemperature
+#    conductivity: 0.43
+#  - type: Construction
+#    graph: MeatSteak
+#    node: start
+#    defaultTarget: meat steak
+  #SS220-grill-update-2 end
   - type: Tag
     tags:
     - Meat
@@ -115,6 +118,11 @@
       - state: plain-inhand-left
       right:
       - state: plain-inhand-right
+  #SS220-grill-update-2 begin
+  - type: Grillable
+    timeToCook: 120
+    cookingResult: FoodMeatCooked
+  #SS220-grill-update-2 end
 
 - type: entity
   name: raw human meat
@@ -388,6 +396,11 @@
     graph: CrabSteak
     node: start
     defaultTarget: cooked crab
+    #SS220-grill-update-2 begin
+  - type: InternalTemperature
+    conductivity: 0.58
+    area: 0.01
+    #SS220-grill-update-2 end
 
 - type: entity
   name: raw goliath meat
@@ -407,7 +420,8 @@
         - ReagentId: Fat
           Quantity: 3
   - type: InternalTemperature
-    thickness: 0.1 # very big, do cook it in lava
+    thickness: 0.27 # very big, do cook it in lava. SS220-grill-update-2
+    conductivity: 0.4 #SS220-grill-update-2
   - type: Construction
     graph: GoliathSteak
     node: start
@@ -458,6 +472,10 @@
       - state: dragon-inhand-left
       right:
       - state: dragon-inhand-right
+  #SS220-grill-update-2 begin
+  - type: InternalTemperature
+    conductivity: 0.41
+  #SS220-grill-update-2 end
 
 - type: entity
   name: raw rat meat
@@ -578,6 +596,51 @@
     slice: FoodMeatSpiderCutlet
   - type: Item
     heldPrefix: spider
+  #SS220-grill-update-2 begin
+  - type: Construction
+    graph: SpiderSteak
+    node: start
+    defaultTarget: spider steak
+  - type: InternalTemperature
+    conductivity: 0.42
+  #SS220-grill-update-2 end
+
+#SS220-grill-update-2 begin
+- type: entity
+  name: spider steak
+  parent: FoodMeatBase
+  id: FoodMeatSpiderSteak
+  description: A cooked spider. Smells primal.
+  components:
+  - type: Tag
+    tags:
+    - Cooked
+    - Meat
+    - Steak
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/meat.rsi
+    state: spider-grilled
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Protein
+          Quantity: 5
+  - type: SliceableFood
+    count: 3
+    slice: FoodMeatSpiderCutletCooked
+  - type: Construction
+    graph: SpiderSteak
+    node: spider steak
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: spider-inhand-left-grilled
+      right:
+      - state: spider-inhand-right-grilled
+#SS220-grill-update-2 end
 
 - type: entity
   name: raw spider leg
@@ -662,6 +725,49 @@
       - state: snake-inhand-left
       right:
       - state: snake-inhand-right
+  #SS220-grill-update-2 begin
+  - type: Construction
+    graph: SnakeSteak
+    node: start
+    defaultTarget: snake steak
+  - type: InternalTemperature
+    conductivity: 0.42
+  #SS220-grill-update-2 end
+
+#SS220-grill-update-2 begin
+- type: entity
+  name: snake steak
+  parent: FoodMeatBase
+  id: FoodMeatSnakeSteak
+  components:
+  - type: Tag
+    tags:
+    - Cooked
+    - Meat
+    - Steak
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/meat.rsi
+    state: snake-grilled
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 4
+        - ReagentId: Protein
+          Quantity: 8
+        - ReagentId: Toxin
+          Quantity: 1
+  - type: Construction
+    graph: SnakeSteak
+    node: snake steak
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: snake-inhand-left-grilled
+      right:
+      - state: snake-inhand-right-grilled
+#SS220-grill-update-2 end
 
 - type: entity
   name: raw xeno meat
@@ -841,8 +947,6 @@
     - Meat
   - type: Sprite
     state: raw_patty
-  - type: InternalTemperature
-    conductivity: 0.43
   - type: Construction
     graph: CookedPatty
     node: start
@@ -926,8 +1030,6 @@
     count: 10
     sliceTime: 5
     slice: FoodMeat #That's... So much meat
-  - type: InternalTemperature
-    conductivity: 0.43
   - type: Construction
     graph: AnomalyMeatSteak
     node: start
@@ -941,6 +1043,11 @@
       - state: plain-inhand-left
       right:
       - state: plain-inhand-right
+  #SS220-grill-update-2 begin
+  - type: InternalTemperature
+    conductivity: 0.4
+    thickness: 0.25
+  #SS220-grill-update-2 end
 
 # Cooked
 
@@ -1622,9 +1729,19 @@
 
 # Raw
 
+#SS220-grill-update-2 begin
+- type: entity
+  parent: FoodMeatBase
+  id: FoodCutletBase
+  abstract: true
+  components:
+  - type: InternalTemperature
+    thickness: 0.06
+#SS220-grill-update-2 end
+
 - type: entity
   name: raw cutlet
-  parent: FoodMeatBase
+  parent: FoodCutletBase #SS220-grill-update-2
   id: FoodMeatCutlet
   description: A raw meat cutlet.
   components:
@@ -1656,7 +1773,7 @@
 
 - type: entity
   name: raw bear cutlet
-  parent: FoodMeatBase
+  parent: FoodCutletBase #SS220-grill-update-2
   id: FoodMeatBearCutlet
   description: A very manly cutlet of raw bear meat.
   components:
@@ -1693,7 +1810,7 @@
 
 - type: entity
   name: raw penguin cutlet
-  parent: FoodMeatBase
+  parent: FoodCutletBase #SS220-grill-update-2
   id: FoodMeatPenguinCutlet
   description: A cutlet of raw penguin meat. Can be used as a substitute for fish in recipes.
   components:
@@ -1728,7 +1845,7 @@
 
 - type: entity
   name: raw chicken cutlet
-  parent: FoodMeatBase
+  parent: FoodCutletBase #SS220-grill-update-2
   id: FoodMeatChickenCutlet
   description: A cutlet of raw chicken. Remember to wash your hands!
   components:
@@ -1761,7 +1878,7 @@
 
 - type: entity
   name: raw duck cutlet
-  parent: FoodMeatBase
+  parent: FoodCutletBase #SS220-grill-update-2
   id: FoodMeatDuckCutlet
   description: A cutlet of raw duck. Remember to wash your hands!
   components:
@@ -1794,7 +1911,7 @@
 
 - type: entity
   name: raw lizard cutlet
-  parent: FoodMeatBase
+  parent: FoodCutletBase #SS220-grill-update-2
   id: FoodMeatLizardCutlet
   description: Delicious dino cutlet.
   components:
@@ -1832,7 +1949,7 @@
 
 - type: entity
   name: raw spider cutlet
-  parent: FoodMeatBase
+  parent: FoodCutletBase #SS220-grill-update-2
   id: FoodMeatSpiderCutlet
   description: A cutlet of raw spider meat. So Kafkaesque.
   components:
@@ -1866,7 +1983,7 @@
 
 - type: entity
   name: raw xeno cutlet
-  parent: FoodMeatBase
+  parent: FoodCutletBase #SS220-grill-update-2
   id: FoodMeatXenoCutlet
   description: A slab of raw xeno meat, dripping with acid.
   components:
@@ -1902,7 +2019,7 @@
 
 - type: entity
   name: raw killer tomato cutlet
-  parent: FoodMeatBase
+  parent: FoodCutletBase #SS220-grill-update-2
   id: FoodMeatTomatoCutlet
   description: A cutlet from a slab of tomato.
   components:
@@ -1918,7 +2035,7 @@
 
 - type: entity
   name: salami slice
-  parent: FoodMeatBase
+  parent: FoodCutletBase #SS220-grill-update-2
   id: FoodMeatSalamiSlice
   description: A slice of cured salami.
   components:
@@ -1940,7 +2057,7 @@
 
 - type: entity
   name: raw dragon cutlet
-  parent: FoodMeatBase
+  parent: FoodCutletBase #SS220-grill-update-2
   id: FoodMeatDragonCutlet
   description: A raw dragon meat cutlet.
   components:
