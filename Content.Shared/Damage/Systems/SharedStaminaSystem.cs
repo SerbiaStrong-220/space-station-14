@@ -186,12 +186,7 @@ public abstract partial class SharedStaminaSystem : EntitySystem
 
         foreach (var (ent, comp) in toHit)
         {
-            var oldDamage = comp.StaminaDamage;
-            TakeStaminaDamage(ent, damage / toHit.Count, comp, source: args.User, with: args.Weapon, sound: component.Sound);
-            if (comp.StaminaDamage.Equals(oldDamage))
-            {
-                _popup.PopupClient(Loc.GetString("stamina-resist"), ent, args.User);// PopupClient Сообщение о том что человек уже в крите по стамине, нужно его перести в  TakeStaminaDamage 242
-            }
+            TakeStaminaDamage(ent, damage / toHit.Count, comp, source: args.User, with: args.Weapon, sound: component.Sound, ignoreResist: component.IgnoreResistance /* SS220 Add ingnore resistance */);
         }
     }
 
