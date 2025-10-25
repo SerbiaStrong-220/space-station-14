@@ -101,12 +101,14 @@
   - type: SliceableFood
     count: 3
     slice: FoodMeatCutlet
-#  - type: InternalTemperature #SS220-grill-update-2. Unnecessary, parent already have it
-#    conductivity: 0.43 #SS220-grill-update-2. Unnecessary, parent already have it
-  - type: Construction
-    graph: MeatSteak
-    node: start
-    defaultTarget: meat steak
+    #SS220-grill-update-2 begin
+#  - type: InternalTemperature
+#    conductivity: 0.43
+#  - type: Construction
+#    graph: MeatSteak
+#    node: start
+#    defaultTarget: meat steak
+  #SS220-grill-update-2 end
   - type: Tag
     tags:
     - Meat
@@ -116,6 +118,11 @@
       - state: plain-inhand-left
       right:
       - state: plain-inhand-right
+  #SS220-grill-update-2 begin
+  - type: Grillable
+    timeToCook: 120
+    cookingResult: FoodMeatCooked
+  #SS220-grill-update-2 end
 
 - type: entity
   name: raw human meat

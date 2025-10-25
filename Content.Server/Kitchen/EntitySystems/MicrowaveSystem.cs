@@ -41,8 +41,6 @@ using Content.Shared.Stacks;
 using Content.Server.Construction.Components;
 using Content.Shared.Chat;
 using Content.Shared.Damage;
-using Content.Shared.Nutrition.Components;
-using Robust.Shared.Utility;
 
 namespace Content.Server.Kitchen.EntitySystems
 {
@@ -187,10 +185,6 @@ namespace Content.Server.Kitchen.EntitySystems
             var heatToAdd = time * component.BaseHeatMultiplier;
             foreach (var entity in component.Storage.ContainedEntities)
             {
-                // If the food is intended for the grill to cook, don't heat it up
-                if (HasComp<ConstructionComponent>(entity) && HasComp<EdibleComponent>(entity)) //SS220-grill-update-2
-                    continue;
-
                 if (TryComp<TemperatureComponent>(entity, out var tempComp))
                     _temperature.ChangeHeat(entity, heatToAdd * component.ObjectHeatMultiplier, false, tempComp);
 
