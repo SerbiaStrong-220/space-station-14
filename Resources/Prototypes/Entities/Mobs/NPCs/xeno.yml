@@ -5,6 +5,9 @@
   parent: SimpleSpaceMobBase
   description: They mostly come at night. Mostly.
   components:
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: XenoBurrower
   - type: Insulated
   - type: CombatMode
   - type: InputMover
@@ -56,14 +59,16 @@
   - type: MobState
     allowedStates:
     - Alive
+    - Critical
     - Dead
   - type: MobThresholds
     thresholds:
       0: Alive
-      50: Dead
+      50: Critical
+      150: Dead
   - type: SlowOnDamage
     speedModifierThresholds:
-      25: 0.5
+      75: 0.5
   - type: Stamina
     critThreshold: 200
   - type: Bloodstream
@@ -76,8 +81,9 @@
      collection: AlienClaw
     animation: WeaponArcBite
     damage:
-      groups:
-        Brute: 6
+      types:
+        Blunt: 15
+        Slash: 10
   - type: DamageStateVisuals
     states:
       Alive:
@@ -114,7 +120,7 @@
       - DoorBumpOpener
       - FootstepSound
   - type: NoSlip
-  - type: Perishable #Ummmm the acid kills a lot of the bacteria or something
+  - type: Perishable
     molsPerSecondPerUnitMass: 0.0005
   - type: Speech
     speechVerb: LargeMob
@@ -124,6 +130,9 @@
   parent: MobXeno
   id: MobXenoPraetorian
   components:
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: XenoPraetorian
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Aliens/Xenos/praetorian.rsi
@@ -134,12 +143,22 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      100: Dead
+      100: Critical
+      400: Dead
   - type: Stamina
     critThreshold: 300
   - type: SlowOnDamage
     speedModifierThresholds:
-      50: 0.7
+      200: 0.7
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 25
+        Slash: 20
+    angle: 0
+    soundHit:
+     collection: AlienClaw
+    animation: WeaponArcBite
   - type: Fixtures
     fixtures:
       fix1:
@@ -157,6 +176,9 @@
   parent: MobXeno
   id: MobXenoDrone
   components:
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: XenoDrone
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Aliens/Xenos/drone.rsi
@@ -167,14 +189,20 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      80: Dead
+      75: Critical
+      200: Dead
   - type: SlowOnDamage
     speedModifierThresholds:
-      40: 0.7
+      100: 0.7
   - type: MeleeWeapon
     damage:
-      groups:
-        Brute: 6
+      types:
+        Blunt: 20
+        Slash: 15
+    angle: 0
+    soundHit:
+     collection: AlienClaw
+    animation: WeaponArcBite
   - type: MovementSpeedModifier
     baseSprintSpeed: 4
   - type: Fixtures
@@ -194,6 +222,9 @@
   parent: MobXeno
   id: MobXenoQueen
   components:
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: XenoQueen
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Aliens/Xenos/queen.rsi
@@ -204,15 +235,21 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      300: Dead
+      200: Critical
+      800: Dead
   - type: SlowOnDamage
     speedModifierThresholds:
-      150: 0.7
+      400: 0.7
   - type: MovementSpeedModifier
   - type: MeleeWeapon
     damage:
-     groups:
-       Brute: 12
+      types:
+        Blunt: 30
+        Slash: 25
+    angle: 0
+    soundHit:
+     collection: AlienClaw
+    animation: WeaponArcBite
   - type: Fixtures
     fixtures:
       fix1:
@@ -233,6 +270,9 @@
   parent: MobXeno
   id: MobXenoRavager
   components:
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: XenoRavager
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Aliens/Xenos/ravager.rsi
@@ -243,16 +283,18 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      100: Dead
+      150: Critical
+      500: Dead
   - type: MovementSpeedModifier
     baseSprintSpeed: 4
   - type: MeleeWeapon
     damage:
-     groups:
-       Brute: 10
+      types:
+        Blunt: 35
+        Slash: 30
   - type: SlowOnDamage
     speedModifierThresholds:
-      50: 0.7
+      250: 0.7
   - type: Fixtures
     fixtures:
       fix1:
@@ -270,6 +312,9 @@
   parent: MobXeno
   id: MobXenoRunner
   components:
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: XenoRunner
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Aliens/Xenos/runner.rsi
@@ -277,12 +322,18 @@
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: running
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      20: Critical
+      120: Dead
   - type: MovementSpeedModifier
     baseSprintSpeed: 6.0
   - type: MeleeWeapon
     damage:
-     groups:
-       Brute: 5
+      types:
+        Blunt: 15
+        Slash: 10
   - type: Fixtures
     fixtures:
       fix1:
@@ -296,25 +347,13 @@
         - MobLayer
 
 - type: entity
-  name: rouny
-  parent: MobXenoRunner
-  id: MobXenoRouny
-  components:
-  - type: Sprite
-    drawdepth: Mobs
-    sprite: Mobs/Aliens/Xenos/rouny.rsi
-    offset: 0,0.6
-  - type: Butcherable
-    butcheringType: Spike
-    spawned:
-    - id: FoodMeatRouny
-      amount: 3
-
-- type: entity
   name: spitter
   parent: MobXeno
   id: MobXenoSpitter
   components:
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: XenoSpitter
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Aliens/Xenos/spitter.rsi
@@ -325,10 +364,11 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      50: Dead
+      60: Critical
+      180: Dead
   - type: SlowOnDamage
     speedModifierThresholds:
-      25: 0.7
+      120: 0.7
   - type: HTN
     rootTask:
       task: SimpleRangedHostileCompound
@@ -356,6 +396,21 @@
         - MobMask
         layer:
         - MobLayer
+
+- type: entity
+  name: rouny
+  parent: MobXenoRunner
+  id: MobXenoRouny
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: Mobs/Aliens/Xenos/rouny.rsi
+    offset: 0,0.6
+  - type: Butcherable
+    butcheringType: Spike
+    spawned:
+    - id: FoodMeatRouny
+      amount: 3
 
 - type: entity
   name: space adder
@@ -433,7 +488,7 @@
     state: Half
     visionRadius: 14
   - type: NoSlip
-      #SS220-fauna-update-ended
+    #SS220-fauna-update-ended
   - type: Tag
     tags:
     #- DoorBumpOpener #SS220-fauna-update (muted tag due to changes)
@@ -468,6 +523,7 @@
     maxTransferAmount: 1
 
 # Mob mapped to Xeno Station that can not be ghostrole / pry
+
 
 - type: entity
   name: '"Dale"'
@@ -513,7 +569,7 @@
      collection: AlienClaw
     animation: WeaponArcBite
     damage:
-     groups:
+     types:
        Brute: 5
   - type: DamageStateVisuals
     states:
