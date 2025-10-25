@@ -22,7 +22,6 @@ using Content.Shared.SS220.CultYogg.Altar;
 using Content.Shared.SS220.CultYogg.Buildings;
 using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.SS220.CultYogg.Sacraficials;
-using Content.Shared.Station;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Verbs;
 using Content.Shared.Zombies;
@@ -59,7 +58,6 @@ public abstract class SharedMiGoSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly SharedStationSystem _station = default!;
 
     /// <summary>
     /// Allows you to resolve dead-end situations where there are no cultists left, allowing you to recruit without feeding the mushroom
@@ -577,13 +575,13 @@ public abstract class SharedMiGoSystem : EntitySystem
             return;
         }
 
-        //do not allow MiGo teleport on other maps (not sure if i did it correctly)
-        var mapPos = _transformSystem.GetMapCoordinates(target.Value);
-        var station = _station.GetStationInMap(mapPos.MapId);
+        var migoMapCoord = _transformSystem.ToMapCoordinates(Transform(ent).Coordinates);
 
-        if (station == null)
+        var targetMapCoord = _transformSystem.ToMapCoordinates(Transform(target.Value).Coordinates);
+
+        if (migoMapCoord.MapId != targetMapCoord.MapId)
         {
-            _popup.PopupClient(Loc.GetString("cult-yogg-teleport-must-be-on-station"), ent.Owner);
+            _popup.PopupClient(Loc.GetString("cult-yogg-teleport-out-of-range"), ent.Owner);
             return;
         }
 
