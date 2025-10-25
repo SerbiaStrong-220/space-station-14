@@ -876,11 +876,11 @@ public sealed partial class ChatSystem : SharedChatSystem
         {
             var languageMessage = _languageSystem.SanitizeMessage(source, newMessage);
             var i = 0;
-            languageMessage.ChangeInNodeMessage(msg =>
+            languageMessage.ChangeNodes(node =>
             {
                 i++;
                 var isFirst = i == 1;
-                return SanitizeMessage(msg, isFirst, isFirst && capitalize, punctuate, capitalizeTheWordI);
+                node.SetMessage(SanitizeMessage(node.Message, isFirst, isFirst && capitalize, punctuate, capitalizeTheWordI));
             });
 
             newMessage = languageMessage.GetMessageWithLanguageKeys();
@@ -948,13 +948,19 @@ public sealed partial class ChatSystem : SharedChatSystem
 
     public string TransformSpeech(EntityUid sender, string message)
     {
+        // SS220 undereducated-trait begin
+        var ev = new TransformOriginalEvent(sender, message);
+        RaiseLocalEvent(sender, ev);
+        message = ev.Message;
+        // SS220 undereducated-trait end
         // SS220 languages begin
         var languageMessage = _languageSystem.SanitizeMessage(sender, message);
-        languageMessage.ChangeInNodeMessage(msg =>
+        languageMessage.ChangeNodes(node =>
         {
+            var msg = node.Message;
             var ev = new TransformSpeechEvent(sender, msg);
             RaiseLocalEvent(ev);
-            return ev.Message;
+            node.SetMessage(ev.Message);
         });
         var newMessage = languageMessage.GetMessageWithLanguageKeys();
         //var ev = new TransformSpeechEvent(sender, message);
@@ -1311,3 +1317,14 @@ public readonly struct RadioEventReceiver
     }
 }
 // SS220 Silicon TTS fix end
+public sealed class TransformOriginalEvent : EntityEventArgs
+{
+    public EntityUid Sender;
+    public string Message;
+
+    public TransformOriginalEvent(EntityUid sender, string message)
+    {
+        Sender = sender;
+        Message = message;
+    }
+}

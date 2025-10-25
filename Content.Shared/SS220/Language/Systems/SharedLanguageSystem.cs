@@ -15,8 +15,8 @@ public abstract partial class SharedLanguageSystem : EntitySystem
     [Dependency] private readonly LanguageManager _language = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
 
-    public readonly string UniversalLanguage = "Universal";
-    public readonly string GalacticLanguage = "Galactic";
+    public const string UniversalLanguage = "Universal";
+    public const string GalacticLanguage = "Galactic";
 
     public int Seed = 0;
 
@@ -225,7 +225,7 @@ public abstract partial class SharedLanguageSystem : EntitySystem
     /// </summary>
     public string SetColor(string message, LanguagePrototype proto)
     {
-        if (proto.Color == null)
+        if (proto.Color == null || string.IsNullOrEmpty(message))
             return message;
 
         var color = proto.Color.Value.ToHex();
