@@ -187,7 +187,6 @@ public sealed partial class TTSSystem
             {"offizier", "Оффизые"},
             {"offiziere", "Оффизыер"},
             {"offiziers", "Оффизыерс"},
-```json
             {"dein", "Даин"},
             {"irgendwo", "Иргентво"},
             {"wo ist", "Во ист"},
@@ -271,7 +270,6 @@ public sealed partial class TTSSystem
             {"riemen", "Римэн"},
             {"Anhalten!!!", "Анхальтэн!!!"},
             {"Halt!!!", "Хальт!!!"}
-```
             // ss220 fix deutch end
         };
 
