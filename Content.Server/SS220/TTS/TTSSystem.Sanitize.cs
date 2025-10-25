@@ -311,7 +311,6 @@ public sealed partial class TTSSystem
             {"le", "Ле"},
             {"nos", "Нос"},
             {"les", "Лес"},
-            {"les", "Лес"},
             {"querido", "Керидо"},
             {"querida", "Керида"},
             {"amor mío", "Амор Мио"},
