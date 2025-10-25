@@ -4,10 +4,12 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Content.Server.Chat.Systems;
 using Content.Server.VoiceMask;
+using Content.Shared.Chat;
 using Content.Shared.Corvax.CCCVars;
 using Content.Shared.Inventory;
 using Content.Shared.SS220.TTS;
 using Content.Shared.GameTicking;
+using Content.Shared.Humanoid;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -15,12 +17,14 @@ using Robust.Shared.Random;
 using Robust.Shared.Network;
 using Robust.Server.Player;
 using Content.Shared.SS220.Language.Systems;
+using Content.Shared.SS220.VoiceRangeModify; // ss220 add whisper range modify
 
 namespace Content.Server.SS220.TTS;
 
 // ReSharper disable once InconsistentNaming
 public sealed partial class TTSSystem : EntitySystem
 {
+    [Dependency] private readonly ChatSystem _chat = default!; // ss220 add whisper range modify
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly TTSManager _ttsManager = default!;
@@ -202,9 +206,9 @@ public sealed partial class TTSSystem : EntitySystem
     private async void OnEntitySpoke(EntityUid uid, TTSComponent component, EntitySpokeEvent args)
     {
         HashSet<EntityUid> receivers = new();
-        foreach (var receiver in Filter.Pvs(uid).Recipients)
+        foreach (var receiver in _chat.GetRecipients(uid, SharedChatSystem.VoiceRange))
         {
-            if (receiver.AttachedEntity is { } ent)
+            if (receiver.Key.AttachedEntity is { } ent)
                 receivers.Add(ent);
         }
 
@@ -399,10 +403,18 @@ public sealed partial class TTSSystem : EntitySystem
         var xform = xformQuery.GetComponent(receiver.AttachedEntity.Value);
         var distance = (sourcePos - _xforms.GetWorldPosition(xform, xformQuery)).Length();
 
-        if (distance > ChatSystem.WhisperMuffledRange)
+        // ss220 add whisper range modify start
+        var ev = new WhisperModifyRangeEvent(SharedChatSystem.WhisperClearRange, SharedChatSystem.WhisperMuffledRange);
+        RaiseLocalEvent(receiver.AttachedEntity.Value, ref ev, true);
+
+        var whisperClearRange = ev.WhisperClearRange;
+        var whisperMuffledRange = ev.WhisperMuffledRange;
+
+        if (distance > whisperMuffledRange)
             return;
 
-        if (distance > ChatSystem.WhisperClearRange)
+        if (distance > whisperClearRange)
+        // ss220 add whisper range modify end
         {
             if (obfTtsMessage == null)
             {
