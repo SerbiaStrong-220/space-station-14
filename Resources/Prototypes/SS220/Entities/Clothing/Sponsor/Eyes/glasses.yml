@@ -36,3 +36,8 @@
     sprite: SS220/Clothing/Sponsor/Eyes/Glasses/nanamigoggles.rsi
   - type: Clothing
     sprite: SS220/Clothing/Sponsor/Eyes/Glasses/nanamigoggles.rsi
+
+- type: entity
+  parent: [ ClothingSponsorGlassesJujutsuShlepa, ClothingEyesGlassesSunglasses ]
+  id: ClothingSponsorGlassesJujutsuShlepaSunglasses
+  suffix: Шлёпа, Солнцезащитные
