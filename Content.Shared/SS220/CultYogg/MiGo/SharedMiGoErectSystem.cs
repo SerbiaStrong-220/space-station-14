@@ -10,13 +10,12 @@ using Content.Shared.Maps;
 using Content.Shared.Popups;
 using Content.Shared.SS220.ChameleonStructure;
 using Content.Shared.SS220.CultYogg.Buildings;
-using Content.Shared.SS220.CultYogg.Corruption;
+using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.Stacks;
 using Content.Shared.Tag;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -253,6 +252,9 @@ public sealed class SharedMiGoErectSystem : EntitySystem
     private void AddVerbs(Entity<CultYoggBuildingFrameComponent> entity, ref GetVerbsEvent<Verb> args)
     {
         if (!args.CanAccess)
+            return;
+
+        if (!HasComp<CultYoggComponent>(args.User) && !HasComp<MiGoComponent>(args.User))//should be user or migo
             return;
 
         Verb destroyVerb = new()
