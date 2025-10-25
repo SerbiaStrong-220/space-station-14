@@ -230,7 +230,7 @@ public sealed partial class TTSSystem
             {"so", "Зо"},
             {"aber", "Абэр"},
             {"sehr", "Зеэр"},
-            {"nicht", "Ништ"},
+            {"nicht", "Нихт"},
             {"schon", "Шон"},
             {"zu", "Цу"},
             {"quartiermeister", "Квартирмайстэр"},
