@@ -377,6 +377,17 @@
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/truckershat-white.rsi
 
+- type: entity
+  parent: ClothingHeadHeadHatBaseFlippable
+  id: ClothingHeadHatTruckerGreen
+  name: green trucker hat
+  description: Formerly Chucks, this hat is yours now.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/truckershat-green.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/truckershat-green.rsi
+
   # Бармен
 - type: entity
   parent: ClothingHeadBase
