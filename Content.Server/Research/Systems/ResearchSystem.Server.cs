@@ -5,6 +5,7 @@ using Content.Server.Power.EntitySystems;
 using Content.Shared.Localizations;
 using Content.Shared.Research.Components;
 using Content.Shared.Research.Prototypes;
+using Content.Shared.SS220.RoundEndInfo;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.Research.Systems;
@@ -13,6 +14,9 @@ public sealed partial class ResearchSystem
 {
     [Dependency] private readonly LatheSystem _lathe = default!; //SS220-lathe-announcement-fix
     [Dependency] private readonly IPrototypeManager _proto = default!; //SS220-lathe-announcement-fix
+    //ss220 add additional info for round start
+    [Dependency] private readonly IRoundEndInfoManager _infoManager = default!;
+    //ss220 add additional info for round end
 
     private void InitializeServer()
     {
@@ -216,6 +220,12 @@ public sealed partial class ResearchSystem
         {
             RaiseLocalEvent(client, ref ev);
         }
+
+        //ss220 add additional info for round start
+        if (points > 0)
+            _infoManager.EnsureInfo<ResearchInfo>().TotalPoints += points;
+        //ss220 add additional info for round end
+
         Dirty(uid, component);
     }
 }

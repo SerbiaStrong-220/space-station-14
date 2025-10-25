@@ -3,12 +3,14 @@ using Content.Server.Actions;
 using Content.Server.Administration.Logs;
 using Content.Server.Stack;
 using Content.Server.Store.Components;
+using Content.Server.Traitor.Uplink;
 using Content.Shared.Actions;
 using Content.Shared.Database;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Mind;
 using Content.Shared.PDA.Ringer;
+using Content.Shared.SS220.RoundEndInfo;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
 using Content.Shared.UserInterface;
@@ -30,6 +32,9 @@ public sealed partial class StoreSystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly StackSystem _stack = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    //ss220 add additional info for round start
+    [Dependency] private readonly IRoundEndInfoManager _infoManager = default!;
+    //ss220 add additional info for round end
 
     private void InitializeUi()
     {
@@ -271,6 +276,17 @@ public sealed partial class StoreSystem
 
         listing.PurchaseAmount++; //track how many times something has been purchased
         _audio.PlayEntity(component.BuySuccessSound, msg.Actor, uid); //cha-ching!
+
+        //ss220 add additional info for round start
+        if (listing.Cost.TryGetValue(UplinkSystem.TelecrystalCurrencyPrototype, out var costTc))
+        {
+            if (_mind.TryGetMind(msg.Actor, out var mind, out _))
+            {
+                var tcAmount = costTc.Int();
+                _infoManager.EnsureInfo<AntagPurchaseInfo>().RecordPurchase(mind, listing.ID, tcAmount);
+            }
+        }
+        //ss220 add additional info for round end
 
         var buyFinished = new StoreBuyFinishedEvent
         {

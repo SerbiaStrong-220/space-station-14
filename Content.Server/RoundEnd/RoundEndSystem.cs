@@ -22,6 +22,7 @@ using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.Station.Components;
 using Timer = Robust.Shared.Timing.Timer;
 using Content.Server.SS220.GameTicking.Rules;
+using Content.Shared.SS220.RoundEndInfo;
 using Robust.Shared.Audio;
 
 namespace Content.Server.RoundEnd
@@ -43,6 +44,9 @@ namespace Content.Server.RoundEnd
         [Dependency] private readonly EmergencyShuttleSystem _shuttle = default!;
         [Dependency] private readonly SharedAudioSystem _audio = default!;
         [Dependency] private readonly StationSystem _stationSystem = default!;
+        //ss220 add additional info for round start
+        [Dependency] private readonly IRoundEndInfoManager _infoManager = default!;
+        //ss220 add additional info for round end
 
         public TimeSpan DefaultCooldownDuration { get; set; } = TimeSpan.FromSeconds(30);
 
@@ -222,6 +226,10 @@ namespace Content.Server.RoundEnd
                 };
                 _deviceNetworkSystem.QueuePacket(shuttle.Value, null, payload, net.TransmitFrequency);
             }
+
+            //ss220 add additional info for round start
+            _infoManager.EnsureInfo<EmergencyShuttleInfo>().RecordShuttle(shuttle);
+            //ss220 add additional info for round end
         }
 
         public void CancelRoundEndCountdown(EntityUid? requester = null, bool checkCooldown = true)

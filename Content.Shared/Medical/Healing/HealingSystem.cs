@@ -9,12 +9,15 @@ using Content.Shared.FixedPoint;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Mind; //ss220 add additional info for round
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.SS220.RoundEndInfo; //ss220 add additional info for round
 using Content.Shared.Stacks;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Network; //ss220 add additional info for round
 
 namespace Content.Shared.Medical.Healing;
 
@@ -30,6 +33,12 @@ public sealed class HealingSystem : EntitySystem
     [Dependency] private readonly MobThresholdSystem _mobThresholdSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
+
+    //ss220 add additional info for round start
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly IRoundEndInfoManager _infoManager = default!;
+    //ss220 add additional info for round end
 
     public override void Initialize()
     {
@@ -115,6 +124,11 @@ public sealed class HealingSystem : EntitySystem
         if (!args.Repeat && !dontRepeat)
             _popupSystem.PopupClient(Loc.GetString("medical-item-finished-using", ("item", args.Used)), target.Owner, args.User);
         args.Handled = true;
+
+        //ss220 add additional info for round start
+        if (_net.IsServer && _mind.TryGetMind(args.User, out var mind, out _))
+            _infoManager.EnsureInfo<HealingInfo>().RecordHealing(mind, -total.Int());
+        //ss220 add additional info for round end
     }
 
     private bool HasDamage(Entity<HealingComponent> healing, Entity<DamageableComponent> target)
