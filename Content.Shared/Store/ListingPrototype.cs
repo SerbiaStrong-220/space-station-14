@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Shared.FixedPoint;
+using Content.Shared.SS220.TraitorDynamics;
 using Content.Shared.SS220.Store.Listing; // ss220 tweak product event
 using Content.Shared.Store.Components;
 using Content.Shared.StoreDiscount.Components;
@@ -41,8 +42,9 @@ public partial class ListingData : IEquatable<ListingData>
         other.OriginalCost,
         other.RestockTime,
         other.DiscountDownTo,
-        other.DisableRefund
-    )
+        other.DisableRefund,
+        other.DynamicsPrices, // SS220 TraitorDynamics
+        other.CostFromCatalog) // SS220 TraitorDynamics
     {
 
     }
@@ -66,8 +68,9 @@ public partial class ListingData : IEquatable<ListingData>
         IReadOnlyDictionary<ProtoId<CurrencyPrototype>, FixedPoint2> originalCost,
         TimeSpan restockTime,
         Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> dataDiscountDownTo,
-        bool disableRefund
-    )
+        bool disableRefund,
+        Dictionary<ProtoId<DynamicPrototype>, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>> dynamicsPrices, // SS220 TraitorDynamics
+        IReadOnlyDictionary<ProtoId<CurrencyPrototype>, FixedPoint2> costFromCatalog) // SS220 TraitorDynamics
     {
         Name = name;
         DiscountCategory = discountCategory;
@@ -88,6 +91,9 @@ public partial class ListingData : IEquatable<ListingData>
         RestockTime = restockTime;
         DiscountDownTo = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>(dataDiscountDownTo);
         DisableRefund = disableRefund;
+        DynamicsPrices = new Dictionary<ProtoId<DynamicPrototype>,
+            Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>>(dynamicsPrices); // SS220 TraitorDynamics
+        CostFromCatalog = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>(costFromCatalog); // SS220 TraitorDynamics
     }
 
     [ViewVariables]
@@ -203,6 +209,15 @@ public partial class ListingData : IEquatable<ListingData>
     [DataField]
     public Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> DiscountDownTo = new();
 
+    // SS220 TraitorDynamics
+
+    [DataField]
+    public Dictionary<ProtoId<DynamicPrototype>, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>> DynamicsPrices = new();
+
+    [DataField]
+    public IReadOnlyDictionary<ProtoId<CurrencyPrototype>, FixedPoint2> CostFromCatalog = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>();
+    // SS220 TraitorDynamics
+
     /// <summary>
     /// Whether or not to disable refunding for the store when the listing is purchased from it.
     /// </summary>
@@ -302,8 +317,9 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
             listingData.OriginalCost,
             listingData.RestockTime,
             listingData.DiscountDownTo,
-            listingData.DisableRefund
-        )
+            listingData.DisableRefund,
+            listingData.DynamicsPrices,
+            listingData.CostFromCatalog) // SS220 TraitorDynamics
     {
     }
 
@@ -357,6 +373,37 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
 
         return true;
     }
+
+    // SS220 DynamicTraitor begin
+    /// <summary>
+    /// Sets an exact price for the listing, with help modifiers.
+    /// </summary>
+    /// <param name="newPrice">The new exact price to set</param>
+    /// <param name="modifierSourceId">Values for cost modification.</param>
+    public void SetExactPrice(string modifierSourceId, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> newPrice)
+    {
+        var mewModifier = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>();
+        foreach (var (currency, amount) in newPrice)
+        {
+            if (OriginalCost.TryGetValue(currency, out var originalCost))
+                mewModifier[currency] = amount - originalCost;
+        }
+        AddCostModifier(modifierSourceId, mewModifier);
+    }
+    /// <summary>
+    /// Sets new prices
+    /// </summary>
+    /// <param name="newCost"> new OriginalCost</param>
+    public void SetNewCost(Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> newCost)
+    {
+        OriginalCost = newCost.ToDictionary();
+    }
+
+    public void ReturnCostFromCatalog()
+    {
+        OriginalCost = CostFromCatalog;
+    }
+    // SS220 DynamicTraitor end
 
     /// <summary>
     /// Gets percent of reduced/increased cost that modifiers give respective to <see cref="ListingData.OriginalCost"/>.
