@@ -1,0 +1,49 @@
+- type: entity
+  parent: BaseAction
+  id: ActionSummonMagic
+  name: Summon Magic
+  description: Places a random magical item in front of everybody. Nothing could go wrong!
+  components:
+  - type: Magic
+  - type: Action
+    useDelay: 300
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/Antags/wizard-spell.rsi
+      state: magicmissile
+  - type: InstantAction
+    event: !type:RandomGlobalSpawnSpellEvent
+      makeSurvivorAntagonist: true
+      spawns:
+      - id: SpawnSpellbook
+        orGroup: Magics
+      - id: ForceWallSpellbook
+        orGroup: Magics
+      - id: BlinkBook
+        orGroup: Magics
+      - id: KnockSpellbook
+        orGroup: Magics
+      - id: FireballSpellbook
+        orGroup: Magics
+      - id: WeaponWandPolymorphCarp
+        orGroup: Magics
+      - id: WeaponWandPolymorphMonkey
+        orGroup: Magics
+      - id: WeaponWandFireball
+        orGroup: Magics
+      - id: WeaponWandPolymorphDoor
+        orGroup: Magics
+      - id: WeaponWandCluwne
+        orGroup: Magics
+      - id: WeaponWandPolymorphBread
+        orGroup: Magics
+      - id: WeaponStaffHealing
+        orGroup: Magics
+      - id: WeaponStaffPolymorphDoor
+        orGroup: Magics
+      - id: AnimationStaff
+        orGroup: Magics
+      - id: RGBStaff
+        orGroup: Magics
+  - type: SpeakOnAction
+    sentence: action-speech-spell-summon-magic

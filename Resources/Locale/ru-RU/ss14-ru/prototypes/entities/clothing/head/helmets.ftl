@@ -24,8 +24,10 @@ ent-ClothingHeadHelmetTemplar = шлем тамплиера
     .desc = DEUS VULT
 ent-ClothingHeadHelmetThunderdome = шлем громовержца
     .desc = Да начнётся битва!
-ent-ClothingHeadHelmetWizardHelm = шлем волшебника
+#SS220 Wizard Update Begin
+ent-ClothingHeadHelmetWizardHelm = шлем магуса
     .desc = Странного вида шлем, который, несомненно, принадлежал настоящему магу.
+#SS220 Wizard Update End
 ent-ClothingHeadHelmetFire = пожарный шлем
     .desc = Лучший друг борцов с огнём. Обеспечивает определённую жаростойкость и выглядит круто.
 ent-ClothingHeadHelmetERTLeader = шлем лидера ОБР

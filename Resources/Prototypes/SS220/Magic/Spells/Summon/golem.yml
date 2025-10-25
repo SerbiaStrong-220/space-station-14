@@ -1,0 +1,22 @@
+- type: entity
+  parent: BaseAction
+  id: ActionSummonGolem
+  name: Summon Golem
+  description: Summons a golem. Slow, but the opponent won't stay on his feet!
+  components:
+  - type: Action
+    useDelay: 300
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/Antags/wizard-spell.rsi
+      state: golem
+  - type: TargetAction
+    range: 4
+  - type: WorldTargetAction
+    event: !type:WorldSpawnSpellEvent
+      prototypes:
+      - id: MobGolemWizard
+        amount: 1
+      offset: 0, 1
+  - type: SpeakOnAction
+    sentence: action-speech-spell-summon-golem

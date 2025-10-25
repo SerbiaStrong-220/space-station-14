@@ -1,0 +1,53 @@
+- type: startingGear
+  id: WizardApprenticeClothing
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitWizard
+    back: ClothingBackpack
+    shoes: ClothingShoesWizard
+    id: WizardPDA
+    ears: ClothingHeadsetAltWizard
+    pocket1: WizardTeleportScroll
+
+- type: startingGear
+  parent: WizardApprenticeClothing
+  id: ApprenticeshipDestruction
+  equipment:
+    head: ClothingHeadHelmetWizardHelmRed
+    outerClothing: ClothingOuterArmorMagusred
+
+- type: startingGear
+  parent: WizardApprenticeClothing
+  id: ApprenticeshipFire
+  equipment:
+    head: ClothingHeadHatRedwizard
+    outerClothing: ClothingOuterWizardRed
+
+- type: startingGear
+  parent: WizardApprenticeClothing
+  id: ApprenticeshipKeeper
+  equipment:
+    head: ClothingHeadHelmetWizardHelm
+    outerClothing: ClothingOuterArmorMagusblue
+
+- type: startingGear
+  parent: WizardApprenticeClothing
+  id: ApprenticeshipRestoration
+  equipment:
+    outerClothing: ClothingOuterWizardWhite
+  inhand:
+    - WeaponStaffHealing
+
+- type: startingGear
+  parent: WizardApprenticeClothing
+  id: ApprenticeshipStealth
+  equipment:
+    belt: ClothingBeltUtilityFilled
+    hands: ClothingHandsGlovesColorYellow
+    outerClothing: ClothingOuterWizardBlack
+
+- type: startingGear
+  parent: WizardApprenticeClothing
+  id: ApprenticeshipTranslocation
+  equipment:
+    head: ClothingHeadHatVioletwizard
+    outerClothing: ClothingOuterWizardViolet

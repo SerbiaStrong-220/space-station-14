@@ -428,9 +428,18 @@
   description: An blue armored suit that provides good protection.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Armor/magusblue.rsi
+    sprite: SS220/Clothing/OuterClothing/Armor/magusblue.rsi #SS220 Wizard Update
   - type: Clothing
-    sprite: Clothing/OuterClothing/Armor/magusblue.rsi
+    sprite: SS220/Clothing/OuterClothing/Armor/magusblue.rsi #SS220 Wizard Update
+  - type: Armor #SS220 Wizard Update Begin
+    modifiers:
+      coefficients:
+        Blunt: 0.2
+        Slash: 0.3
+        Piercing: 0.3
+        Heat: 0.5
+        Radiation: 0.5
+        Caustic: 0.6 #SS220 Wizard Update End
 
 - type: entity
   parent: ClothingOuterArmorHeavy
@@ -439,9 +448,27 @@
   description: A red armored suit that provides good protection.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Armor/magusred.rsi
+    sprite: SS220/Clothing/OuterClothing/Armor/magusred.rsi #SS220 Wizard Update
   - type: Clothing
-    sprite: Clothing/OuterClothing/Armor/magusred.rsi
+    sprite: SS220/Clothing/OuterClothing/Armor/magusred.rsi #SS220 Wizard Update
+  - type: PressureProtection #SS220 Wizard Update Begin
+    highPressureMultiplier: 0.04
+  - type: TemperatureProtection
+    heatingCoefficient: 0.005
+    coolingCoefficient: 0.05
+  - type: FireProtection
+    reduction: 0.65 # doesnt have a full seal so not as good
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.4
+        Heat: 0.3
+        Cold: 0.3
+        Shock: 0.3
+        Radiation: 0.5
+        Caustic: 0.4 #SS220 Wizard Update End
 
 - type: entity
   parent: [ ClothingOuterBaseLarge, BaseMajorContraband, AllowSuitStorageClothing ]

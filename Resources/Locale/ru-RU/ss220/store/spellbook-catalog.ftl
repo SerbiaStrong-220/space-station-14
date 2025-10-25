@@ -1,38 +1,23 @@
-# Заклинания
-spellbook-voidapplause-name = Аплодисменты Бездны
-spellbook-voidapplause-desc = Поменяйтесь местами с целью. Неужели это не заставляет вас пуститься в пляс?
+# Destruction
+spellbook-flash-light-name = Вспышка
+spellbook-flash-light-desc = Создаёт ослепляющую вспышку света, которая оглушает всех существ с глазами. Будьте осторожны - без защиты глаз заклинание действует и на самого волшебника!
 
-spellbook-knock-name = Стук
-spellbook-knock-desc = Открывает все шлюзы, ящики и шкафы поблизости.
+spellbook-icearrow-name = Ледяная стрела
+spellbook-icearrow-desc = Выпускает перед волшебником ледяную стрелу. Стрела замораживает врага, значительно замедляя его.
 
-spellbook-repulse-name =  Отталкивание
-spellbook-repulse-desc = Скажите людям GITTAH`WEIGH и отшвырните их прочь.
+spellbook-emp-name = Электромагнитный импульс
+spellbook-emp-desc = Создаёт мощный электромагнитный импульс, нарушающий работу техники и электроники поблизости.
 
-spellbook-smoke-name = Дым
-spellbook-smoke-desc = Призывает облако дыма. Всё предельно ясно.
+spellbook-mutation-name = Мутация
+spellbook-mutation-desc = Заставляет тело волшебника мутировать, превращая его в чудовище. В этом состоянии волшебник получает постоянный урон, что ограничивает продолжительность его жизни.
 
-spellbook-mind-swap-name = Обмен Разумами
-spellbook-mind-swap-description = Поменяйтесь телами с другим человеком!
+# Support
+spellbook-healing-touch-name = Целебное касание
+spellbook-healing-touch-desc = Исцеляет существ, к которым прикасается волшебник.
 
-spellbook-smite-name = Кара
-spellbook-smite-desc = Ненавидите кого-то? ВЗОРВИТЕ их на куски! Требует мантию и шляпу волшебника.
+# Summon
+spellbook-summon-golem-name = Призыв голема
+spellbook-summon-golem-desc = Призывает голема - прочное существо, устойчивое ко многим видам повреждений и отлично сражающееся в ближнем бою.
 
-spellbook-cluwne-name = Проклятье клувня
-spellbook-cluwne-desc = Для случаев, когда Кары недостаточно. Требует мантию и шляпу волшебника.
-
-spellbook-slip-name = Скользкий путь
-spellbook-slip-desc = Познайте древние методы уборщиков и прокляните цель скользкостью. Требует мантию и шляпу волшебника.
-
-spellbook-item-recall-name = Призыв Предмета
-spellbook-item-recall-description = Помечайте предмет в руке и вызывайте его в любой момент щелчком пальцев!
-
-# Equipment
-
-spellbook-hammer-mjollnir-name = Мьёльнир
-spellbook-hammer-mjollnir-description = Держите мощь ГРОМА в руках. Отправляйте врагов в полёт ударом или броском!
-
-spellbook-hammer-singularity-name = Молот Сингулярности
-spellbook-hammer-singularity-description = Мечтали стать сингулярностью? Взмахните молотом, чтобы притянуть окружение — даже при промахе!
-
-spellbook-staff-animation-name = Посох оживления
-spellbook-staff-animation-description = Пробуждайте неодушевлённые предметы к жизни!
+spellbook-summon-contract-of-apprenticeship-name = Пакт об учиничестве
+spellbook-summon-contract-of-apprenticeship-desc = Позволяет заключить магический пакт, призывая на помощь ученика одной из школ волшебства.

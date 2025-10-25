@@ -12,7 +12,7 @@
   - type: AutoRecharge
     rechargeDuration: 30
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Basic/staves.rsi
+    sprite: SS220/Objects/Weapons/Magic/staff.rsi #SS220 Wizard Update
     layers:
     - state: nothing
     - state: nothing-unshaded
@@ -48,9 +48,12 @@
   - type: AutoRecharge
     rechargeDuration: 30
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Basic/staves.rsi
+    sprite: SS220/Objects/Weapons/Magic/staff.rsi #SS220 Wizard Update
     layers:
     - state: animation
+    - state: animation-unshaded #SS220 Wizard Update
+      shade: unshaded #SS220 Wizard Update
+      map: ["effect"]
   - type: ActionOnInteract
     requiresCharge: true
     actions:
@@ -60,8 +63,16 @@
     inhandVisuals:
       left:
       - state: animation-inhand-left
+       #SS220 Wizard Update Begin
+      - state: animation-inhand-left-unshaded
+        shader: unshaded
+       #SS220 Wizard Update End
       right:
       - state: animation-inhand-right
+       #SS220 Wizard Update Begin
+      - state: animation-inhand-right-unshaded
+        shader: unshaded
+       #SS220 Wizard Update End
   - type: Tag
     tags:
     - WizardWand
