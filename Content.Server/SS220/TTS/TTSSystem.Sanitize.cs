@@ -240,7 +240,7 @@ public sealed partial class TTSSystem
             {"temperatura", "Температура"},
             {"estabilizador", "Эстабилисадор"},
             {"panel", "Панель"},
-            {"cables", "Каблес"}
+            {"cables", "Каблес"},
             {"energía", "Энерхия"},
             {"batería", "Батерия"},
             {"generador", "Хенерадор"},
