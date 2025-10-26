@@ -27,7 +27,7 @@ accent-spanish-words-7-2 = дама
 accent-spanish-words-replace-7 = mujer
 
 accent-spanish-words-8 = о боже
-accent-spanish-words-8-2 = боже мой
+accent-spanish-words-8-2 = боже
 accent-spanish-words-replace-8 = dios mío
 
 accent-spanish-words-9 = идиот
@@ -53,7 +53,7 @@ accent-spanish-words-14 = привет
 accent-spanish-words-14-2 = здравствуй
 accent-spanish-words-replace-14 = hola
 
-accent-spanish-words-15 = пока
+accent-spanish-words-15 = увидимся
 accent-spanish-words-15-2 = прощай
 accent-spanish-words-replace-15 = adiós
 
