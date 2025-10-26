@@ -93,6 +93,8 @@
     Cellular: 1
     Radiation: 0.5
 
+    #xeno-buff-update-begin
+
 - type: damageModifierSet
   id: XenoBurrower
   coefficients:
@@ -217,6 +219,8 @@
     Slash: 8
     Piercing: 8
     Heat: 5
+
+    #xeno-buff-update-end
 
 - type: damageModifierSet
   id: RatKing

@@ -5,9 +5,11 @@
   parent: SimpleSpaceMobBase
   description: They mostly come at night. Mostly.
   components:
+    #SS220 xeno-buff-update begin
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: XenoBurrower
+    #SS220 xeno-buff-update end
   - type: Insulated
   - type: CombatMode
   - type: InputMover
@@ -59,16 +61,18 @@
   - type: MobState
     allowedStates:
     - Alive
-    - Critical
+    - Critical #SS220 xeno-buff-update
     - Dead
   - type: MobThresholds
     thresholds:
       0: Alive
+    #SS220 xeno-buff-update begin
       50: Critical
       150: Dead
+    #SS220 xeno-buff-update end
   - type: SlowOnDamage
     speedModifierThresholds:
-      75: 0.5
+      75: 0.5 # SS220 xeno-buff-update
   - type: Stamina
     critThreshold: 200
   - type: Bloodstream
@@ -81,9 +85,11 @@
      collection: AlienClaw
     animation: WeaponArcBite
     damage:
+    #SS220 xeno-buff-update begin
       types:
         Blunt: 15
         Slash: 10
+    #SS220 xeno-buff-update end
   - type: DamageStateVisuals
     states:
       Alive:
@@ -120,7 +126,7 @@
       - DoorBumpOpener
       - FootstepSound
   - type: NoSlip
-  - type: Perishable
+  - type: Perishable # SS220 xeno-buff-update
     molsPerSecondPerUnitMass: 0.0005
   - type: Speech
     speechVerb: LargeMob
@@ -130,9 +136,11 @@
   parent: MobXeno
   id: MobXenoPraetorian
   components:
+    #SS220 xeno-buff-update begin
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: XenoPraetorian
+    #SS220 xeno-buff-update end
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Aliens/Xenos/praetorian.rsi
@@ -143,13 +151,16 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      100: Critical
-      400: Dead
+    #SS220 xeno-buff-update begin
+      200: Critical
+      300: Dead
+    #SS220 xeno-buff-update end
   - type: Stamina
     critThreshold: 300
   - type: SlowOnDamage
     speedModifierThresholds:
-      200: 0.7
+    #SS220 xeno-buff-update begin
+      100: 0.7
   - type: MeleeWeapon
     damage:
       types:
@@ -159,6 +170,7 @@
     soundHit:
      collection: AlienClaw
     animation: WeaponArcBite
+    #SS220 xeno-buff-update end
   - type: Fixtures
     fixtures:
       fix1:
@@ -176,9 +188,11 @@
   parent: MobXeno
   id: MobXenoDrone
   components:
+    #SS220 xeno-buff-update begin
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: XenoDrone
+    #SS220 xeno-buff-update end
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Aliens/Xenos/drone.rsi
@@ -189,13 +203,16 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      75: Critical
+    #SS220 xeno-buff-update begin
+      100: Critical
       200: Dead
+    #SS220 xeno-buff-update end
   - type: SlowOnDamage
     speedModifierThresholds:
-      100: 0.7
+      50: 0.7 #SS220 xeno-buff-update
   - type: MeleeWeapon
     damage:
+    #SS220 xeno-buff-update begin
       types:
         Blunt: 20
         Slash: 15
@@ -203,6 +220,7 @@
     soundHit:
      collection: AlienClaw
     animation: WeaponArcBite
+    #SS220 xeno-buff-update end
   - type: MovementSpeedModifier
     baseSprintSpeed: 4
   - type: Fixtures
@@ -222,9 +240,11 @@
   parent: MobXeno
   id: MobXenoQueen
   components:
+    #SS220 xeno-buff-update begin
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: XenoQueen
+    #SS220 xeno-buff-update end
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Aliens/Xenos/queen.rsi
@@ -235,14 +255,17 @@
   - type: MobThresholds
     thresholds:
       0: Alive
+    #SS220 xeno-buff-update begin
       200: Critical
-      800: Dead
+      400: Dead
+    #SS220 xeno-buff-update end
   - type: SlowOnDamage
     speedModifierThresholds:
-      400: 0.7
+      100: 0.7 #SS220 xeno-buff-update
   - type: MovementSpeedModifier
   - type: MeleeWeapon
     damage:
+    #SS220 xeno-buff-update begin
       types:
         Blunt: 30
         Slash: 25
@@ -250,6 +273,7 @@
     soundHit:
      collection: AlienClaw
     animation: WeaponArcBite
+    #SS220 xeno-buff-update end
   - type: Fixtures
     fixtures:
       fix1:
@@ -270,9 +294,11 @@
   parent: MobXeno
   id: MobXenoRavager
   components:
+    #SS220 xeno-buff-update begin
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: XenoRavager
+    #SS220 xeno-buff-update end
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Aliens/Xenos/ravager.rsi
@@ -283,18 +309,22 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      150: Critical
+    #SS220 xeno-buff-update begin
+      250: Critical
       500: Dead
+    #SS220 xeno-buff-update end
   - type: MovementSpeedModifier
     baseSprintSpeed: 4
   - type: MeleeWeapon
     damage:
+    #SS220 xeno-buff-update begin
       types:
         Blunt: 35
         Slash: 30
+    #SS220 xeno-buff-update end
   - type: SlowOnDamage
     speedModifierThresholds:
-      250: 0.7
+      450: 0.7 #SS220 xeno-buff-update
   - type: Fixtures
     fixtures:
       fix1:
@@ -312,9 +342,11 @@
   parent: MobXeno
   id: MobXenoRunner
   components:
+    #SS220 xeno-buff-update begin
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: XenoRunner
+    #SS220 xeno-buff-update end
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Aliens/Xenos/runner.rsi
@@ -322,18 +354,22 @@
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: running
+    #SS220 xeno-buff-update begin
   - type: MobThresholds
     thresholds:
       0: Alive
-      20: Critical
+      60: Critical
       120: Dead
+    #SS220 xeno-buff-update end
   - type: MovementSpeedModifier
     baseSprintSpeed: 6.0
   - type: MeleeWeapon
     damage:
+    #SS220 xeno-buff-update begin
       types:
         Blunt: 15
         Slash: 10
+    #SS220 xeno-buff-update end
   - type: Fixtures
     fixtures:
       fix1:
@@ -351,9 +387,11 @@
   parent: MobXeno
   id: MobXenoSpitter
   components:
+    #SS220 xeno-buff-update begin
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: XenoSpitter
+    #SS220 xeno-buff-update end
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Aliens/Xenos/spitter.rsi
@@ -364,11 +402,13 @@
   - type: MobThresholds
     thresholds:
       0: Alive
+    #SS220 xeno-buff-update begin
       60: Critical
       180: Dead
+    #SS220 xeno-buff-update end
   - type: SlowOnDamage
     speedModifierThresholds:
-      120: 0.7
+      120: 0.7 #SS220 xeno-buff-update
   - type: HTN
     rootTask:
       task: SimpleRangedHostileCompound
@@ -397,6 +437,7 @@
         layer:
         - MobLayer
 
+    #SS220 xeno-buff-update begin
 - type: entity
   name: rouny
   parent: MobXenoRunner
@@ -411,6 +452,7 @@
     spawned:
     - id: FoodMeatRouny
       amount: 3
+    #SS220 xeno-buff-update end
 
 - type: entity
   name: space adder
@@ -424,7 +466,7 @@
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: purple_snake
-  - type: DamageStateVisuals
+  - type: DamageStateVisuals 
     states:
       Alive:
         Base: purple_snake
@@ -459,7 +501,7 @@
     angle: 0
     animation: WeaponArcBite
     damage:
-      types:
+      types: #SS220 xeno-buff-update
         Piercing: 5
   - type: SolutionContainerManager
     solutions:
