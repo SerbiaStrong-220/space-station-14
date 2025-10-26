@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Robust.Shared.GameStates;
 using Content.Shared.Damage;
+using Content.Shared.FixedPoint;
+using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.CultYogg.MiGo;
@@ -42,5 +43,5 @@ public sealed partial class CultYoggHealComponent : Component
     /// It should be more damage from decompression
     /// </summary>
     [ViewVariables]
-    public FixedPoint4 CancelDamageTreshhold = 3;
+    public FixedPoint2 CancelDamageTreshhold = 3;
 }

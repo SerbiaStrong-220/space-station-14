@@ -65,7 +65,7 @@ public sealed class CultYoggHealSystem : SharedCultYoggHealSystem
             if (healComp.NextIncidentTime > _time.CurTime)
                 continue;
 
-            Heal(ent, healComp);
+            Heal((ent, healComp));
 
             healComp.NextIncidentTime = _time.CurTime + healComp.TimeBetweenIncidents;
         }
@@ -79,12 +79,12 @@ public sealed class CultYoggHealSystem : SharedCultYoggHealSystem
         if (!TryComp<DamageableComponent>(ent, out var damageableComp))
             return;
 
-        _damageable.TryChangeDamage(ent, component.Heal, true, interruptsDoAfters: false, damageableComp);
+        _damageable.TryChangeDamage(ent, ent.Comp.Heal, true, interruptsDoAfters: false, damageableComp);
 
-        _bloodstreamSystem.TryModifyBleedAmount(ent, component.BloodlossModifier);
-        _bloodstreamSystem.TryModifyBloodLevel(ent, component.ModifyBloodLevel);
+        _bloodstreamSystem.TryModifyBleedAmount(ent.Owner, ent.Comp.BloodlossModifier);
+        _bloodstreamSystem.TryModifyBloodLevel(ent.Owner, ent.Comp.ModifyBloodLevel);
 
-        _stamina.TryTakeStamina(ent, component.ModifyStamina);
+        _stamina.TryTakeStamina(ent, ent.Comp.ModifyStamina);
 
         if (!_mobState.IsDead(ent, mobComp))
             return;
