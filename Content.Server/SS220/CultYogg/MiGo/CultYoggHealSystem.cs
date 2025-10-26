@@ -71,7 +71,7 @@ public sealed class CultYoggHealSystem : SharedCultYoggHealSystem
         }
     }
 
-    public void Heal(EntityUid ent, CultYoggHealComponent component)
+    public void Heal(Entity<CultYoggHealComponent> ent)
     {
         if (!TryComp<MobStateComponent>(ent, out var mobComp))
             return;
