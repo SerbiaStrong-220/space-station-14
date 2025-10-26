@@ -9,43 +9,49 @@ namespace Content.Shared.SS220.EmergencyShuttleControl;
 [RegisterComponent]
 public sealed partial class EmergencyShuttleLockdownComponent : Component
 {
-    [DataField, ViewVariables(VVAccess.ReadOnly)]
-    public bool IsActivated = default!;
+    [ViewVariables(VVAccess.ReadOnly)]
+    public bool IsActivated = default;
+
+    /// <summary>
+    ///     It allows the component to be activated at startup.
+    /// </summary>
+    [DataField]
+    public bool IsActivatedOnStartup = default;
 
     [DataField]
-    public bool IsInHandActive = default!;
+    public bool IsInHandActive = default;
 
     /// <summary>
     ///     Enables display of location in announce.
     /// </summary>
     [DataField]
-    public bool IsDisplayLocation = default!;
+    public bool IsDisplayLocation = default;
 
     /// <summary>
     ///     Enables display of coordinates in announce.
     /// </summary>
     [DataField]
-    public bool IsDisplayCoordinates = default!;
+    public bool IsDisplayCoordinates = default;
 
 
     /// <summary>
     ///     Enables checking location at a station for activation. If this is false, the component can always be activated.
     /// </summary>
     [DataField]
-    public bool IsOnlyInStationActive = default!;
+    public bool IsOnlyInStationActive = default;
 
     /// <summary>
     ///     Message above communication console, when shuttle is called during lockdown.
     /// </summary>
     [DataField]
-    public LocId WarningMessage = default!;
+    public LocId WarningMessage = default;
 
 
 
     #region Announce
 
     [DataField]
-    public Color AnnounceColor = default!;
+    public Color AnnounceColor = default;
 
     [DataField]
     public string OnActiveAudioPath = "/Audio/Misc/notice1.ogg";
@@ -54,7 +60,7 @@ public sealed partial class EmergencyShuttleLockdownComponent : Component
     public string OnDeactiveAudioPath = "/Audio/Misc/notice1.ogg";
 
     [DataField]
-    public LocId AnnounceTitle = default!;
+    public LocId AnnounceTitle = default;
 
     /// <summary>
     ///     The body of the message in the announce if IsActivated.

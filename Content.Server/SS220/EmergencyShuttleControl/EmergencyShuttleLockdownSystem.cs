@@ -13,6 +13,7 @@ using Content.Shared.Station.Components;
 using Microsoft.Extensions.DependencyModel;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
 using System.Linq;
@@ -36,6 +37,9 @@ public sealed class EmergencyShuttleLockdownSystem : EntitySystem
     {
         base.Initialize();
 
+        SubscribeLocalEvent<EmergencyShuttleLockdownComponent, ComponentStartup>(OnComponentStartup);
+        SubscribeLocalEvent<EmergencyShuttleLockdownComponent, ComponentShutdown>(OnComponentShutdown);
+
         SubscribeLocalEvent<CommunicationConsoleCallShuttleAttemptEvent>(OnShuttleCallAttempt);
 
         SubscribeLocalEvent<EmergencyShuttleLockdownComponent, EmergencyShuttleLockdownToggleActionEvent>(OnEmergencyShuttleLockdownToggleAction);
@@ -46,6 +50,17 @@ public sealed class EmergencyShuttleLockdownSystem : EntitySystem
     }
 
     #region Handlers
+    private void OnComponentStartup(Entity<EmergencyShuttleLockdownComponent> ent, ref ComponentStartup args)
+    {
+        if (ent.Comp.IsActivatedOnStartup)
+            Activate(ent);
+    }
+
+    private void OnComponentShutdown(Entity<EmergencyShuttleLockdownComponent> ent, ref ComponentShutdown args)
+    {
+        Deactivate(ent);
+    }
+
     private void OnShuttleCallAttempt(ref CommunicationConsoleCallShuttleAttemptEvent ev)
     {
         var lockdowns = _entityManager.AllComponents<EmergencyShuttleLockdownComponent>();
