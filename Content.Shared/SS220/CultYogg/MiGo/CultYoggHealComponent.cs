@@ -42,5 +42,5 @@ public sealed partial class CultYoggHealComponent : Component
     /// It should be more damage from decompression
     /// </summary>
     [ViewVariables]
-    public int CancelDamageTreshhold = 3;
+    public FixedPoint4 CancelDamageTreshhold = 3;
 }
