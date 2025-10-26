@@ -58,7 +58,8 @@ public sealed class EmergencyShuttleLockdownSystem : EntitySystem
 
     private void OnComponentShutdown(Entity<EmergencyShuttleLockdownComponent> ent, ref ComponentShutdown args)
     {
-        Deactivate(ent);
+        if (ent.Comp.IsActivated)
+            Deactivate(ent);
     }
 
     private void OnShuttleCallAttempt(ref CommunicationConsoleCallShuttleAttemptEvent ev)
