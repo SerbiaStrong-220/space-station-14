@@ -163,7 +163,8 @@ accent-german-words-68-1 = шаттле
 accent-german-words-replace-68 = pulkzerstorers
 accent-german-words-69 = шаттлов
 accent-german-words-replace-69 = pulkzerstorere
-
+#ss220-deutch-accent-update-end
+#ss220-german-fix-and-update-end
 accent-german-words-70 = твой
 accent-german-words-replace-70 = dein
 
@@ -352,4 +353,42 @@ accent-german-words-152 = Остановиться!!!
 accent-german-words-replace-152 = Anhalten!!!
 accent-german-words-153 = Стоять!!!
 accent-german-words-replace-153 = Halt!!!
-#ss220-deutch-accent-update-end
+accent-german-words-154 = ручка
+accent-german-words-replace-154 = stift
+accent-german-words-155 = чемодан
+accent-german-words-replace-155 = koffer
+accent-german-words-156 = мопс
+accent-german-words-replace-156 = mops
+accent-german-words-157 = круто
+accent-german-words-replace-157 = cool
+accent-german-words-158 = клёво
+accent-german-words-replace-158 = toll
+accent-german-words-159 = или
+accent-german-words-replace-159 = oder
+accent-german-words-160 = посмотри
+accent-german-words-replace-160 = guck mal
+accent-german-words-161 = всё
+accent-german-words-replace-161 = alles
+accent-german-words-162 = спокойной ночи
+accent-german-words-replace-162 = gute Nacht
+accent-german-words-163 = квадратный
+accent-german-words-replace-163 = quadratisch
+accent-german-words-164 = солнце
+accent-german-words-replace-164 = Sonne
+accent-german-words-165 = луна
+accent-german-words-replace-165 = Mond
+accent-german-words-166 = броня
+accent-german-words-replace-166 = panzer
+accent-german-words-167 = позже
+accent-german-words-replace-167 = spater
+accent-german-words-168 = помочь
+accent-german-words-replace-168 = helfen
+accent-german-words-169 = стул
+accent-german-words-replace-169 = stuhl
+accent-german-words-170 = старый
+accent-german-words-replace-170 = alt
+accent-german-words-171 = новый
+accent-german-words-replace-171 = neu
+accent-german-words-172 = без понятия
+accent-german-words-replace-172 = keine Ahnung
+#ss220-german-fix-and-update-end

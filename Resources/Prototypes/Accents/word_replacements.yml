@@ -1290,6 +1290,8 @@
     accent-german-words-68-2: accent-german-words-replace-68
     accent-german-words-68-1: accent-german-words-replace-68
     accent-german-words-69: accent-german-words-replace-69
+    #ss220-deutch-accent-update-end
+    #ss220-german-fix-and-update-begin
     accent-german-words-70: accent-german-words-replace-70
     accent-german-words-71: accent-german-words-replace-71
     accent-german-words-72: accent-german-words-replace-72
@@ -1378,7 +1380,26 @@
     accent-german-words-151: accent-german-words-replace-151
     accent-german-words-152: accent-german-words-replace-152
     accent-german-words-153: accent-german-words-replace-153
-    #ss220-deutch-accent-update-end
+    accent-german-words-154: accent-german-words-replace-154
+    accent-german-words-155: accent-german-words-replace-155
+    accent-german-words-156: accent-german-words-replace-156
+    accent-german-words-157: accent-german-words-replace-157
+    accent-german-words-158: accent-german-words-replace-158
+    accent-german-words-159: accent-german-words-replace-159
+    accent-german-words-160: accent-german-words-replace-160
+    accent-german-words-161: accent-german-words-replace-161
+    accent-german-words-162: accent-german-words-replace-162
+    accent-german-words-163: accent-german-words-replace-163
+    accent-german-words-164: accent-german-words-replace-164
+    accent-german-words-165: accent-german-words-replace-165
+    accent-german-words-166: accent-german-words-replace-166
+    accent-german-words-167: accent-german-words-replace-167
+    accent-german-words-168: accent-german-words-replace-168
+    accent-german-words-169: accent-german-words-replace-169
+    accent-german-words-170: accent-german-words-replace-170
+    accent-german-words-171: accent-german-words-replace-171
+    accent-german-words-172: accent-german-words-replace-172
+    #ss220-german-fix-and-update-end
 
 - type: accent
   id: russian

@@ -184,6 +184,8 @@ public sealed partial class TTSSystem
             {"pulkzerstorer", "Пулькцерштёрер"},
             {"pulkzerstorers", "Пулькцерштёрер"},
             {"pulkzerstorere", "Пулькцерштёрер"},
+            // ss220 fix deutch end
+            // ss220 german fix and update begin
             {"offizier", "Оффизые"},
             {"offiziere", "Оффизыер"},
             {"offiziers", "Оффизыерс"},
@@ -269,8 +271,26 @@ public sealed partial class TTSSystem
             {"schockstab", "Шокстаб"},
             {"riemen", "Римэн"},
             {"Anhalten!!!", "Анхальтэн!!!"},
-            {"Halt!!!", "Хальт!!!"}
-            // ss220 fix deutch end
+            {"Halt!!!", "Хальт!!!"},
+            {"stift", "Штифт"},
+            {"koffer", "Кофа"},
+            {"cool", "Куль"},
+            {"toll", "Толь"},
+            {"oder", "Ода"},
+            {"guck mal", "Гок маль"},
+            {"alles", "Алэс"},
+            {"gute Nacht", "Гутэ нахт"},
+            {"quadratisch", "Квадратиш"},
+            {"Sonne", "Зане"},
+            {"Mond", "Монд"},
+            {"panzer", "Панца"},
+            {"spater", "Шпата"},
+            {"helfen", "Хэльфен"},
+            {"stuhl", "Штуль"},
+            {"alt", "Альт"},
+            {"neu", "Ной"},
+            {"keine Ahnung", "Кайне анун"}
+            // ss220 german fix and update end
         };
 
     private static readonly IReadOnlyDictionary<string, string> ReverseTranslit =
