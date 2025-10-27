@@ -473,10 +473,9 @@
     - HEAD
     quickEquip: false
   # SS220-grilling-update-2 begin
-  - type: Construction
-    graph: BananaPeelGrilled
-    node: start
-    defaultTarget: banana peel grilled
+  - type: Grillable
+    timeToCook: 120
+    cookingResult: TrashBakedBananaPeel
   - type: Temperature
     currentTemperature: 290
   - type: InternalTemperature
@@ -515,14 +514,6 @@
     price:
       TrashBananaPeel: 2
   # ss220 clown uplink end
-  #SS220-grilling-update-2 begin
-  - type: Edible
-    requiresSpecialDigestion: true
-  - type: Tag
-    tags:
-    - Cooked
-  #SS220-grilling-update-2 end
-
 
 - type: entity
   name: mimana peel

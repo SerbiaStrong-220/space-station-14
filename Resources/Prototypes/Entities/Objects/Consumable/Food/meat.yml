@@ -597,12 +597,11 @@
   - type: Item
     heldPrefix: spider
   #SS220-grill-update-2 begin
-  - type: Construction
-    graph: SpiderSteak
-    node: start
-    defaultTarget: spider steak
   - type: InternalTemperature
     conductivity: 0.42
+  - type: Grillable
+    timeToCook: 120
+    cookingResult: FoodMeatSpiderSteak
   #SS220-grill-update-2 end
 
 #SS220-grill-update-2 begin
@@ -631,9 +630,6 @@
   - type: SliceableFood
     count: 3
     slice: FoodMeatSpiderCutletCooked
-  - type: Construction
-    graph: SpiderSteak
-    node: spider steak
   - type: Item
     inhandVisuals:
       left:
@@ -726,10 +722,9 @@
       right:
       - state: snake-inhand-right
   #SS220-grill-update-2 begin
-  - type: Construction
-    graph: SnakeSteak
-    node: start
-    defaultTarget: snake steak
+  - type: Grillable
+    timeToCook: 120
+    cookingResult: FoodMeatSnakeSteak
   - type: InternalTemperature
     conductivity: 0.42
   #SS220-grill-update-2 end
@@ -758,9 +753,6 @@
           Quantity: 8
         - ReagentId: Toxin
           Quantity: 1
-  - type: Construction
-    graph: SnakeSteak
-    node: snake steak
   - type: Item
     inhandVisuals:
       left:

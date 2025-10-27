@@ -39,16 +39,15 @@
   components:
   - type: Sprite
     state: shawarma
-  - type: Construction
-    graph: ShawarmaGrilled
-    node: start
-    defaultTarget: shawarma grilled
   - type: Temperature
     currentTemperature: 290
   - type: InternalTemperature
     conductivity: 0.4
     thickness: 0.008
     area: 0.0175 # ~7x25cm
+  - type: Grillable
+    timeToCook: 120
+    cookingResult: FoodShawarmaOnGrill
 
 - type: entity
   parent: FoodShawarmaBase
@@ -56,6 +55,3 @@
   components:
   - type: Sprite
     state: shawarmaGrill
-  - type: Construction
-    graph: ShawarmaGrilled
-    node: shawarma grilled
