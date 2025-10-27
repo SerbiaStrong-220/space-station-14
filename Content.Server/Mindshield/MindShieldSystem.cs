@@ -8,6 +8,8 @@ using Content.Shared.Implants;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Revolutionary.Components;
 using Content.Shared.Roles.Components;
+using Content.Shared.SS220.CombustingMindShield;
+using Content.Shared.SS220.CultYogg.Cultists;
 using Robust.Shared.Containers;
 
 namespace Content.Server.Mindshield;
@@ -58,6 +60,13 @@ public sealed class MindShieldSystem : EntitySystem
         {
             _adminLogManager.Add(LogType.Mind, LogImpact.Medium, $"{ToPrettyString(implanted)} was deconverted due to being implanted with a Mindshield.");
         }
+        //SS220 Cult hotfix 14 #3477 start
+        if (HasComp<CultYoggComponent>(implanted))
+        {
+            var comp = EnsureComp<CombustingMindShieldComponent>(implanted);
+            comp.Implant = implant;
+        }
+        //SS220 Cult hotfix 14 #3477 end 
     }
 
     private void OnImplantDraw(Entity<MindShieldImplantComponent> ent, ref EntGotRemovedFromContainerMessage args)

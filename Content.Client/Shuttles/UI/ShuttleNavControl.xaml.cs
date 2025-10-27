@@ -232,7 +232,17 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
 
                 var gridCentre = Vector2.Transform(gridBody.LocalCenter, curGridToView);
 
-                var gridDistance = (gridBody.LocalCenter - xform.LocalPosition).Length();
+                // ss220 add normally distance to any grids start
+                var gridTransform = xformQuery.GetComponent(grid);
+                var gridWorldPos = _transform.GetWorldPosition(gridTransform);
+                var ourWorldPos = _transform.GetWorldPosition(xform);
+
+                if (_consoleEntity != null)
+                    ourWorldPos = _transform.GetWorldPosition(_consoleEntity.Value);
+
+                var gridDistance = (gridWorldPos - ourWorldPos).Length();
+                // ss220 add normally distance to any grids end
+
                 var labelText = Loc.GetString("shuttle-console-iff-label", ("name", labelName),
                     ("distance", $"{gridDistance:0.0}"));
 

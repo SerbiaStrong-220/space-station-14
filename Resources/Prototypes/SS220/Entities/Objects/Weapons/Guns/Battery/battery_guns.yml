@@ -71,7 +71,7 @@
   - type: MagazineVisuals
     magState: mag
     steps: 6
-    zeroVisible: false
+    zeroVisible: true
   - type: Wieldable
   - type: GunWieldBonus
     minAngle: -2
@@ -156,6 +156,66 @@
         whitelist:
           tags:
             - KRSPowerCell
+
+- type: entity
+  name: IK 60 Laser Carbine
+  parent: BaseWeaponBlaster
+  id: WeaponLaserCarabine
+  description: A powerful laser carbine resembling a rifle, which relies more on battery cartridges than on an integrated power cell. It is used by NanoTrasen Corporate Security squads in combat operations.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Battery/laser_carabine.rsi
+    layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-0
+        map: ["enum.GunVisualLayers.Mag"]
+      - state: mag-unshaded-4
+        map: ["enum.GunVisualLayers.MagUnshaded"]
+        shader: unshaded
+  - type: Clothing
+    sprite: SS220/Objects/Weapons/Guns/Battery/laser_carabine.rsi
+    quickEquip: false
+    slots:
+      - Back
+      - suitStorage
+  - type: Gun
+    fireRate: 6.5
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+  - type: MagazineVisuals
+    magState: mag
+    steps: 5
+    zeroVisible: false
+  - type: ProjectileBatteryAmmoProvider
+    proto: BulletLaserCarabine
+    fireCost: 48
+  - type: BatteryWeaponFireModes
+    fireModes:
+      - proto: BulletLaserCarabine
+        name: firemode-name-blaster
+        fireCost: 48
+      - proto: BulletDisablerSmg
+        name: firemode-name-disabler
+        fireCost: 24
+  - type: Appearance
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,3,1
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: Magazine
+        startingItem: LaserCarabinePowerCell
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        whitelist:
+          tags:
+            - LaserCarabinePowerCell
 
 # Новые прототипы пишите выше
 # Death Squad

@@ -86,7 +86,7 @@
   - type: TransferIdentity
   - type: HiddenDescription
     entries:
-    - label: hidden-desc-DnaCopyImplant-medical
+    - label: corvax-hidden-desc-IllegalImplants-medical
       jobRequired:
       - Paramedic
       - MedicalDoctor
@@ -128,7 +128,7 @@
   - type: TriggerOnActivateImplant
   - type: HiddenDescription
     entries:
-    - label: hidden-desc-AdrenalImplant-medical
+    - label: corvax-hidden-desc-IllegalImplants-medical
       jobRequired:
       - Paramedic
       - MedicalDoctor
