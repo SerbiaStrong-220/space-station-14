@@ -1,5 +1,6 @@
 ﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.SS220.Cooking.Grilling;
 using Content.Shared.SS220.EntityEffects.Effects;
 using Robust.Client.GameObjects;
 
@@ -8,7 +9,7 @@ namespace Content.Client.SS220.Cooking.Grilling;
 /// <summary>
 /// This handles all grill related visuals
 /// </summary>
-public sealed class GrillSystem : EntitySystem
+public sealed class GrillSystem : SharedGrillSystem
 {
     [Dependency] private readonly SpriteSystem _spriteSystem = default!;
 
