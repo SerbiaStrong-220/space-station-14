@@ -411,6 +411,10 @@ public sealed partial class TTSSystem
             {"posiblemente", "Посиблементе"},
             {"bastante", "Бастанте"},
             {"suficiente", "Суфисьенте"},
+            {"cuál", "куаль"},
+            {"a dónde", "а донде"},
+            {"de dónde", "де донде"},
+            {"cómo", "комо"},
             // ss220 fix spanish end
 
         };

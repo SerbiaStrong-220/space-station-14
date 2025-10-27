@@ -42,7 +42,6 @@ accent-spanish-words-11 = капитан
 accent-spanish-words-replace-11 = capitán
 
 accent-spanish-words-12 = что
-accent-spanish-words-12-2 = как
 accent-spanish-words-replace-12 = qué
 
 accent-spanish-words-13 = спасибо
@@ -811,7 +810,9 @@ accent-spanish-words-208 = зачем
 accent-spanish-words-replace-208 = para qué
 
 accent-spanish-words-209 = какой
-accent-spanish-words-replace-209 = qué
+accent-spanish-words-209-2 = какая
+accent-spanish-words-209-3 = какое
+accent-spanish-words-replace-209 = cuál
 
 accent-spanish-words-210 = сколько
 accent-spanish-words-replace-210 = cuánto
@@ -875,3 +876,15 @@ accent-spanish-words-replace-229 = bastante
 
 accent-spanish-words-230 = достаточно
 accent-spanish-words-replace-230 = suficiente
+
+accent-spanish-words-231 = куда 
+accent-spanish-words-replace-231 = a dónde
+
+accent-spanish-words-232 = откуда
+accent-spanish-words-replace-232 = de dónde
+
+accent-spanish-words-233 = как
+accent-spanish-words-replace-233 = cómo
+
+
+

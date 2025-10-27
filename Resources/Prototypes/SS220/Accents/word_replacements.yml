@@ -25,7 +25,6 @@
     accent-spanish-words-10-2: accent-spanish-words-replace-10
     accent-spanish-words-11: accent-spanish-words-replace-11
     accent-spanish-words-12: accent-spanish-words-replace-12
-    accent-spanish-words-12-2: accent-spanish-words-replace-12
     accent-spanish-words-13: accent-spanish-words-replace-13
     accent-spanish-words-13-2: accent-spanish-words-replace-13
     accent-spanish-words-14: accent-spanish-words-replace-14
@@ -414,6 +413,7 @@
     accent-spanish-words-208-2: accent-spanish-words-replace-208
     accent-spanish-words-209: accent-spanish-words-replace-209
     accent-spanish-words-209-2: accent-spanish-words-replace-209
+    accent-spanish-words-209-3: accent-spanish-words-replace-209
     accent-spanish-words-210: accent-spanish-words-replace-210
     accent-spanish-words-210-2: accent-spanish-words-replace-210
     accent-spanish-words-211: accent-spanish-words-replace-211
@@ -456,3 +456,6 @@
     accent-spanish-words-229-2: accent-spanish-words-replace-229
     accent-spanish-words-230: accent-spanish-words-replace-230
     accent-spanish-words-230-2: accent-spanish-words-replace-230
+    accent-spanish-words-231: accent-spanish-words-replace-231
+    accent-spanish-words-232: accent-spanish-words-replace-232
+    accent-spanish-words-233: accent-spanish-words-replace-233
