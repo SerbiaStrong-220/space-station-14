@@ -99,7 +99,7 @@ public abstract class SharedGrillSystem : EntitySystem
         if (_audio.IsPlaying(grill.Comp.GrillingAudioStream))
             return;
 
-        var audioParams = AudioParams.Default.WithMaxDistance(10f).WithLoop(true);
+        var audioParams = AudioParams.Default.WithLoop(true);
         grill.Comp.GrillingAudioStream = _audio.PlayPvs(grill.Comp.GrillSound, grill, audioParams)?.Entity;
     }
 }
