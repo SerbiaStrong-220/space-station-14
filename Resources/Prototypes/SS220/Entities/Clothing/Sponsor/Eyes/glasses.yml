@@ -40,4 +40,4 @@
 - type: entity
   parent: [ ClothingSponsorGlassesJujutsuShlepa, ClothingEyesGlassesSunglasses ]
   id: ClothingSponsorGlassesJujutsuShlepaSunglasses
-  suffix: Шлёпа, Солнцезащитные
+  suffix: Floppa, Sunglasses

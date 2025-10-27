@@ -97,7 +97,7 @@
 - type: entity
   parent: [ ClothingSponsor1984, ClothingOuterCoatHoSTrench ]
   id: ClothingSponsor1984HoS
-  suffix: Шлёпа, Глава СБ
+  suffix: Floppa, HoS
   components:
   - type: ContainerContainer
     containers:
