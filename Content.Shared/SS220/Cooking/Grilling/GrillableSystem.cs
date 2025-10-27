@@ -14,6 +14,8 @@ public sealed class GrillableSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
 
+    private const float AlmostDoneCookPercentage = 0.75f;
+
     /// <inheritdoc/>
     public override void Initialize()
     {
@@ -27,17 +29,17 @@ public sealed class GrillableSystem : EntitySystem
         if (!args.IsInDetailsRange)
             return;
 
-        if (ent.Comp.CurrentCookTime == 0)
+        switch (ent.Comp.CurrentCookTime)
         {
-            args.PushMarkup(Loc.GetString("grillable-state-begin", ("target", Loc.GetEntityData(ent.Comp.CookingResult).Name)));
-        }
-        else if (ent.Comp.CurrentCookTime <= ent.Comp.TimeToCook * 0.75f)
-        {
-            args.PushMarkup(Loc.GetString("grillable-state-in-process"));
-        }
-        else if (ent.Comp.CurrentCookTime <= ent.Comp.TimeToCook)
-        {
-            args.PushMarkup(Loc.GetString("grillable-state-near-end"));
+            case <= 0:
+                args.PushMarkup(Loc.GetString("grillable-state-begin", ("target", Loc.GetEntityData(ent.Comp.CookingResult).Name)));
+                break;
+            case var currentCookTime when currentCookTime <= ent.Comp.TimeToCook * AlmostDoneCookPercentage:
+                args.PushMarkup(Loc.GetString("grillable-state-in-process"));
+                break;
+            case var currentCookTime when currentCookTime <= ent.Comp.TimeToCook:
+                args.PushMarkup(Loc.GetString("grillable-state-near-end"));
+                break;
         }
     }
 
