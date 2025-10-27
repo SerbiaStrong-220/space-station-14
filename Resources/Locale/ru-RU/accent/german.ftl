@@ -19,11 +19,11 @@ accent-german-words-9 = женщина
 accent-german-words-9-2 = леди
 accent-german-words-replace-9 = frau
 accent-german-words-10 = женщины
-accent-german-words-10-2 = леди
+accent-german-words-10-2 = дамы             #ss220 german-fix-and-update
 accent-german-words-replace-10 = frauen
-accent-german-words-11 = джентельмен
+accent-german-words-11 = господин             #ss220 german-fix-and-update
 accent-german-words-replace-11 = herr
-accent-german-words-12 = джентельмены
+accent-german-words-12 = господа             #ss220 german-fix-and-update
 accent-german-words-replace-12 = herren
 accent-german-words-13 = о боже
 accent-german-words-replace-13 = mein gott
@@ -51,8 +51,10 @@ accent-german-words-24 = шашлык
 accent-german-words-replace-24 = doner
 accent-german-words-25 = мышь
 accent-german-words-replace-25 = maus
-accent-german-words-26 = что
-accent-german-words-replace-26 = was
+#ss220-german-fix-and-update-begin
+accent-german-words-26 = что-то
+accent-german-words-replace-26 = etwas
+#ss220-german-fix-and-update-end
 accent-german-words-27 = благодарю
 accent-german-words-replace-27 = dankeschon
 accent-german-words-28 = спасибо
@@ -67,8 +69,10 @@ accent-german-words-32 = травка
 accent-german-words-32-2 = капуста
 accent-german-words-replace-32 = kraut
 accent-german-words-33 = водка
-#ss220 wodka --> Branntwein
-accent-german-words-replace-33 = Branntwein
+#ss220-german-fix-and-update-begin
+#ss220 wodka --> branntwein
+accent-german-words-replace-33 = branntwein
+#ss220-german-fix-and-update-end
 accent-german-words-34 = рюкзак
 accent-german-words-replace-34 = rucksack
 accent-german-words-35 = медикаменты
@@ -106,13 +110,14 @@ accent-german-words-replace-49 = guten Tag
 accent-german-words-50 = скорая
 accent-german-words-replace-50 = krankenwagen
 accent-german-words-51 = до встречи
-accent-german-words-51-2 = Досвидания
+accent-german-words-51-2 = до свидания             #ss220 german-fix-and-update
 accent-german-words-replace-51 = auf Wiedersehen
-accent-german-words-52 = пока
-accent-german-words-replace-52 = tschuss
-accent-german-words-53 = пока пока
-accent-german-words-53-2 = пока-пока
-accent-german-words-replace-53 = tschau
+#ss220-german-fix-and-update-begin
+accent-german-words-52 = пока-пока
+accent-german-words-replace-52 = tschau
+accent-german-words-53 = прощай
+accent-german-words-replace-53 = bis dann
+#ss220-german-fix-and-update-end
 accent-german-words-54 = фантастика
 accent-german-words-replace-54 = fantastisch
 accent-german-words-55 = генокрад
@@ -126,9 +131,9 @@ accent-german-words-57-2 = быстрее
 accent-german-words-replace-57 = schnell
 accent-german-words-58 = госпиталь
 accent-german-words-replace-58 = krankenhaus
-accent-german-words-59 = tesla coil
+accent-german-words-59 = катушка теслы             #ss220 german-fix-and-update
 accent-german-words-replace-59 = tesla coil
-accent-german-words-60 = tesla coils
+accent-german-words-60 = катушки теслы             #ss220 german-fix-and-update
 accent-german-words-replace-60 = tesla coils
 accent-german-words-61 = теслалуз
 accent-german-words-61-2 = теслуз
@@ -163,8 +168,9 @@ accent-german-words-68-1 = шаттле
 accent-german-words-replace-68 = pulkzerstorers
 accent-german-words-69 = шаттлов
 accent-german-words-replace-69 = pulkzerstorere
+
 #ss220-deutch-accent-update-end
-#ss220-german-fix-and-update-end
+#ss220-german-fix-and-update-begin
 accent-german-words-70 = твой
 accent-german-words-replace-70 = dein
 
@@ -353,6 +359,7 @@ accent-german-words-152 = Остановиться!!!
 accent-german-words-replace-152 = Anhalten!!!
 accent-german-words-153 = Стоять!!!
 accent-german-words-replace-153 = Halt!!!
+
 accent-german-words-154 = ручка
 accent-german-words-replace-154 = stift
 accent-german-words-155 = чемодан
