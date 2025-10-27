@@ -87,3 +87,34 @@
       - !type:Emote
         emote: Scream
         probability: 0.3
+
+- type: reagent
+  id: EssenceOfTheAbyss
+  name: reagent-name-essence-of-the-abyss
+  group: Narcotics
+  desc: reagent-desc-essence-of-the-abyss
+  physicalDesc: reagent-physical-desc-gloopy
+  color: "#0D0A10"
+  boilingPoint: 444.0
+  meltingPoint: 128.0
+  metabolisms:
+    Narcotic:
+      effects:
+      - !type:ModifyStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          reagent: EssenceOfTheAbyss
+          min: 8
+        effectProto: StatusEffectForcedSleeping
+        time: 3
+        type: Add
+      - !type:GenericStatusEffect
+        key: Muted
+        component: Muted
+        type: Add
+        time: 15
+        refresh: false
+        conditions:
+        - !type:ReagentThreshold
+          reagent: EssenceOfTheAbyss
+          min: 10
