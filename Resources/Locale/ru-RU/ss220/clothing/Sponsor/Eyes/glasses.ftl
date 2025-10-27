@@ -1,2 +1,2 @@
-ent-ClothingSponsorGlassesJujutsuShlepaSunglasses = { ClothingSponsorGlassesJujutsuShlepa }
+ent-ClothingSponsorGlassesJujutsuShlepaSunglasses = { ent-ClothingSponsorGlassesJujutsuShlepa }
     .suffix = Шлёпа, Солнцезащитные
