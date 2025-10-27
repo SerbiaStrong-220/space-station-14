@@ -38,6 +38,7 @@ public sealed class GrillSystem : SharedGrillSystem
                     var cookingSpeed = float.Lerp(0.5f, 1f, (currentAirTemperature - Atmospherics.FireMinimumTemperatureToExist) / 100f);
 
                     grillable.CurrentCookTime += (cookingSpeed + grill.CookingMultiplier) * frameTime;
+                    Dirty(ent, grillable);
 
                     var ev = new CookTimeChanged(ent);
                     RaiseLocalEvent(ent, ref ev);

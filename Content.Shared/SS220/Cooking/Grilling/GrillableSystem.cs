@@ -12,6 +12,7 @@ namespace Content.Shared.SS220.Cooking.Grilling;
 public sealed class GrillableSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -47,9 +48,10 @@ public sealed class GrillableSystem : EntitySystem
         {
             _audio.PlayPvs(ent.Comp.CookingDoneSound, ent, new AudioParams());
 
-            var transform = Transform(ent);
-            var newEntity = EntityManager.CreateEntityUninitialized(ent.Comp.CookingResult, transform.Coordinates);
-            EntityManager.InitializeAndStartEntity(newEntity);
+            EntityManager.Spawn(ent.Comp.CookingResult,
+                _transformSystem.GetMapCoordinates(ent),
+                null,
+                _transformSystem.GetWorldRotation(ent));
 
             PredictedDel(ent.Owner);
         }
