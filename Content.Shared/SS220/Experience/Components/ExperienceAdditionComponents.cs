@@ -15,6 +15,9 @@ public abstract partial class SkillBaseAddComponent : Component
 
     [DataField]
     public Dictionary<ProtoId<SkillTreePrototype>, SkillTreeExperienceInfo> Skills = new();
+
+    [DataField]
+    public HashSet<ProtoId<KnowledgePrototype>> Knowledges = new();
 }
 
 [RegisterComponent]

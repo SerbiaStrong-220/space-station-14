@@ -1,6 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.FixedPoint;
@@ -29,21 +28,56 @@ public sealed partial class ExperienceSystem : EntitySystem
     #endregion
 
     #region Skill getters
-    public HashSet<ProtoId<SkillPrototype>> GetAcquiredSkills(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree)
+
+    public bool HaveSkill(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, ProtoId<SkillPrototype> skill)
     {
+        if (!_prototype.Resolve(skillTree, out var treeProto))
+            return false;
+
+        if (HasComp<BypassSkillCheckComponent>(entity))
+            return true;
+
         if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
-            return [];
+            return false;
 
-        if (!entity.Comp.OverrideSkills.ContainsKey(skillTree) || !entity.Comp.Skills.ContainsKey(skillTree))
-            return [];
+        var treeInfo = entity.Comp.OverrideSkills.TryGetValue(skillTree, out var overrideSkills) ? overrideSkills :
+                        entity.Comp.Skills.TryGetValue(skillTree, out var skills) ? skills : null;
 
-        if (!_prototype.TryIndex(skillTree, out var treeProto))
-            return [];
+        if (treeInfo is null)
+            return false;
 
-        var treeInfo = entity.Comp.Skills[skillTree];
         var amountToTake = treeInfo.SkillStudied ? treeInfo.SkillLevel : treeInfo.SkillLevel - 1;
 
-        return [.. treeProto.SkillTree.Take(amountToTake)];
+        return treeProto.SkillTree.Take(amountToTake).Contains(skill);
+    }
+
+    public bool TryGetAcquiredSkills(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, ref HashSet<ProtoId<SkillPrototype>> resultSkills)
+    {
+        if (!_prototype.Resolve(skillTree, out var treeProto))
+            return false;
+
+        if (HasComp<BypassSkillCheckComponent>(entity))
+        {
+            resultSkills = [.. treeProto.SkillTree];
+            return true;
+        }
+
+        if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
+            return false;
+
+        if (!entity.Comp.OverrideSkills.ContainsKey(skillTree) || !entity.Comp.Skills.ContainsKey(skillTree))
+            return false;
+
+        var treeInfo = entity.Comp.OverrideSkills.TryGetValue(skillTree, out var overrideSkills) ? overrideSkills :
+                        entity.Comp.Skills.TryGetValue(skillTree, out var skills) ? skills : null;
+
+        if (treeInfo is null)
+            return false;
+
+        var amountToTake = treeInfo.SkillStudied ? treeInfo.SkillLevel : treeInfo.SkillLevel - 1;
+
+        resultSkills = [.. treeProto.SkillTree.Take(amountToTake)];
+        return true;
     }
 
     #endregion

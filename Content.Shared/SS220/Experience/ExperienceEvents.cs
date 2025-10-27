@@ -16,11 +16,20 @@ public record struct SkillTreeAddedEvent(ProtoId<SkillTreePrototype> SkillTree, 
     public SkillTreeExperienceInfo Info = Info;
 }
 
+[ByRefEvent]
+public record struct KnowledgeInitial(HashSet<ProtoId<KnowledgePrototype>> Knowledges);
+
 /// <summary>
 /// Event raised on gaining skill
 /// </summary>
 [ByRefEvent]
 public record struct SkillLevelGainedEvent(ProtoId<SkillTreePrototype> SkillTree, ProtoId<SkillPrototype> GainedSkill);
+
+[ByRefEvent]
+public record struct KnowledgeGainedEvent(ProtoId<KnowledgePrototype> Knowledge);
+
+[ByRefEvent]
+public record struct KnowledgeLostEvent(ProtoId<KnowledgePrototype> Knowledge);
 
 [ByRefEvent]
 public record struct SkillEntityOverrideCheckEvent<T>(bool Subscribed = false) where T : notnull;

@@ -1,0 +1,9 @@
+- type: knowledge
+  id: InformedPersonalKnowledge
+  knowledgeName: informed-personal-knowledge-name
+  knowledgeDescription: informed-personal-description
+
+- type: knowledge
+  id: CentCommKnowledge
+  knowledgeName: centcomm-knowledge-name
+  knowledgeDescription: centcomm-knowledge-description

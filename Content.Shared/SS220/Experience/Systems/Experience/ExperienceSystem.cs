@@ -2,6 +2,7 @@
 
 using Content.Shared.Administration.Logs;
 using Content.Shared.FixedPoint;
+using Content.Shared.Popups;
 using Content.Shared.SS220.Experience.SkillChecks;
 using Robust.Shared.Prototypes;
 
@@ -11,6 +12,7 @@ public sealed partial class ExperienceSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogManager = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     private const int StartSkillLevelIndex = 0;
     private const int StartSubLevelIndex = 0;
@@ -37,7 +39,7 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     private void OnSkillCheckEvent(Entity<ExperienceComponent> entity, ref SkillCheckEvent args)
     {
-        args.HasSkill = GetAcquiredSkills(entity.AsNullable(), args.TreeProto).Contains(args.SkillProto);
+        args.HasSkill = HaveSkill(entity.AsNullable(), args.TreeProto, args.SkillProto);
     }
 
     private void OnMapInit(Entity<ExperienceComponent> entity, ref MapInitEvent args)

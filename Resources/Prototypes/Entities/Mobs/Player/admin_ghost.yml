@@ -107,6 +107,10 @@
   - type: IgnoreUIRange
   - type: ShowAntagIcons
   # - type: ShowContrabandDetails # SS220-useless-info
+  # SS220-experience-update-begin
+  - type: BypassKnowledgeCheck
+  - type: BypassSkillCheck
+  # SS220-experience-update-end
   - type: Inventory
     templateId: aghost
   - type: Loadout

@@ -69,6 +69,24 @@ public sealed class KnowledgePrototype : IPrototype
     [ViewVariables]
     [IdDataField]
     public string ID { get; private set; } = default!;
+
+    /// <summary>
+    /// Some knowledges should give access to other knowledge's information, but should really be shown to player
+    /// </summary>
+    [DataField]
+    public HashSet<ProtoId<KnowledgePrototype>> AdditionalKnowledges = new();
+
+    [DataField(required: true)]
+    public LocId KnowledgeName = default;
+
+    [DataField(required: true)]
+    public LocId KnowledgeDescription = default;
+
+    [DataField]
+    public LocId? MessageOnAcquiring = null;
+
+    [DataField]
+    public LocId? MessageOnLosing = null;
 }
 
 [Prototype]
@@ -80,6 +98,9 @@ public sealed class AddSkillOnInitPrototype : IPrototype
 
     [DataField(required: true)]
     public Dictionary<ProtoId<SkillTreePrototype>, SkillTreeExperienceInfo> Skills = new();
+
+    [DataField(required: true)]
+    public HashSet<ProtoId<KnowledgePrototype>> Knowledges = new();
 }
 
 

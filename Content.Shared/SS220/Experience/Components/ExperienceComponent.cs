@@ -72,6 +72,13 @@ public sealed partial class ExperienceComponent : Component
     public HashSet<ProtoId<KnowledgePrototype>> ConstantKnowledge = new();
 
     /// <summary>
+    /// Contains resolved knowledges, this is not actual knowledges
+    /// </summary>
+    [AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadOnly)]
+    public HashSet<ProtoId<KnowledgePrototype>> ResolvedKnowledge = new();
+
+    /// <summary>
     /// This mask handles reiniting of experience to correctly process on spawn inits
     /// </summary>
     [AutoNetworkedField]

@@ -11,8 +11,13 @@ public sealed partial class ExperienceSystem : EntitySystem
     {
         SubscribeLocalEvent<ExperienceComponent, AfterExperienceInitComponentGained>(OnPlayerMobAfterSpawned);
 
-        // TODO if more this event like will be added make generic <T> version to bypass subscribe errors
-        SubscribeLocalEvent<SkillRoleAddComponent, SkillTreeAddedEvent>(SkillAddOnSkillTreeAdded);
+        SubscribeInitComponent<SkillRoleAddComponent>(SkillAddOnSkillTreeAdded, KnowledgeAddOnKnowledgeInitial);
+    }
+
+    private void SubscribeInitComponent<T>(EntityEventRefHandler<T, SkillTreeAddedEvent> handlerSkill, EntityEventRefHandler<T, KnowledgeInitial> handlerKnowledge) where T : SkillBaseAddComponent
+    {
+        SubscribeLocalEvent<T, SkillTreeAddedEvent>(handlerSkill);
+        SubscribeLocalEvent<T, KnowledgeInitial>(handlerKnowledge);
     }
 
     private void OnPlayerMobAfterSpawned(Entity<ExperienceComponent> entity, ref AfterExperienceInitComponentGained args)
@@ -47,6 +52,15 @@ public sealed partial class ExperienceSystem : EntitySystem
         entity.Comp.InitMask |= (byte)byteType;
 
         EnsureSkill(entity!);
+
+        var ev = new KnowledgeInitial([]);
+        RaiseLocalEvent(entity, ref ev);
+
+        foreach (var knowledge in ev.Knowledges)
+        {
+            if (!TryAddKnowledge(entity!, knowledge))
+                Log.Error($"Cant add knowledge {knowledge} to {ToPrettyString(entity)}");
+        }
     }
 
     private void SkillAddOnSkillTreeAdded(Entity<SkillRoleAddComponent> entity, ref SkillTreeAddedEvent args)
@@ -65,5 +79,13 @@ public sealed partial class ExperienceSystem : EntitySystem
             args.Info.SkillSublevel += info.SkillSublevel;
             args.Info.SkillStudied &= info.SkillStudied;
         }
+    }
+
+    private void KnowledgeAddOnKnowledgeInitial(Entity<SkillRoleAddComponent> entity, ref KnowledgeInitial args)
+    {
+        if (_prototype.TryIndex(entity.Comp.SkillAddId, out var skillAddProto))
+            args.Knowledges.UnionWith(skillAddProto.Knowledges);
+
+        args.Knowledges.UnionWith(entity.Comp.Knowledges);
     }
 }

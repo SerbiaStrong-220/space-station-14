@@ -26,12 +26,20 @@ public sealed partial class ExperienceViewWindow : FancyWindow
             SkillTreeExperienceContainer,
             FixedPoint4)>> _data = new();
 
+    private HashSet<ProtoId<KnowledgePrototype>> _knowledges = new();
+
     public ExperienceViewWindow()
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
 
         _sawmill = Logger.GetSawmill("experience-view-window");
+    }
+
+    public void SetKnowledge(HashSet<ProtoId<KnowledgePrototype>> knowledges)
+    {
+        _knowledges = knowledges;
+        Update();
     }
 
     public void SetSkillDictionary(Dictionary<ProtoId<SkillTreeGroupPrototype>,
@@ -75,6 +83,22 @@ public sealed partial class ExperienceViewWindow : FancyWindow
 
         if (divider is not null)
             ExperienceTreeGroupsContainer.RemoveChild(divider);
+
+
+        knowledgesContainer.RemoveAllChildren();
+
+        divider = null;
+        foreach (var knowledge in _knowledges)
+        {
+            divider = new();
+            var knowledgeControl = new KnowledgeLabel();
+            knowledgeControl.SetKnowledge(knowledge);
+            knowledgesContainer.AddChild(knowledgeControl);
+            knowledgesContainer.AddChild(divider);
+        }
+
+        if (divider is not null)
+            knowledgesContainer.RemoveChild(divider);
     }
 
     private void UpdateGroupPartially(ProtoId<SkillTreeGroupPrototype> key, IEnumerable<(ProtoId<SkillTreePrototype>, SkillTreeExperienceContainer, FixedPoint4)>? value)
