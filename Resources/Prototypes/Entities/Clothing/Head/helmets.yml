@@ -221,6 +221,9 @@
     color: "#21a52e"
     radius: 4.5
     energy: 3
+  - type: HandheldLight
+    blinkingBehaviourId: blinking
+    radiatingBehaviourId: radiating
     #SS220 Ninja Resprite End
 
 #Knight Helmet
