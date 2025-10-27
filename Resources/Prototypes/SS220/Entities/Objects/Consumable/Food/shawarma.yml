@@ -46,7 +46,6 @@
     thickness: 0.008
     area: 0.0175 # ~7x25cm
   - type: Grillable
-    timeToCook: 120
     cookingResult: FoodShawarmaOnGrill
 
 - type: entity

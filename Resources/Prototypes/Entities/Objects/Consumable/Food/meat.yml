@@ -600,7 +600,6 @@
   - type: InternalTemperature
     conductivity: 0.42
   - type: Grillable
-    timeToCook: 120
     cookingResult: FoodMeatSpiderSteak
   #SS220-grill-update-2 end
 
@@ -723,7 +722,6 @@
       - state: snake-inhand-right
   #SS220-grill-update-2 begin
   - type: Grillable
-    timeToCook: 120
     cookingResult: FoodMeatSnakeSteak
   - type: InternalTemperature
     conductivity: 0.42
