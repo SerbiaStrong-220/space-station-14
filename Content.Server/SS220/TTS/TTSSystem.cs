@@ -15,6 +15,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Network;
 using Robust.Server.Player;
 using Content.Shared.SS220.Language.Systems;
+using Content.Shared.SS220.CCVars;
 
 namespace Content.Server.SS220.TTS;
 
@@ -33,17 +34,23 @@ public sealed partial class TTSSystem : EntitySystem
 
     private ISawmill _sawmill = default!;
 
-    private const int MaxMessageChars = 100 * 2; // same as SingleBubbleCharLimit * 2
+    private int _maxMessageChars;
+    private int _maxAnnounceMessageChars;
     private bool _isEnabled = false;
-    private string _voiceId = "glados";
+
     public const float WhisperVoiceVolumeModifier = 0.6f; // how far whisper goes in world units
     public const int WhisperVoiceRange = 6; // how far whisper goes in world units
+
+    private readonly ProtoId<TTSVoicePrototype> _fallbackVoiceId = "father_grigori";
+    private ProtoId<TTSVoicePrototype> _fallbackAnnounceVoiceId = "glados";
 
     public override void Initialize()
     {
         base.Initialize();
+        _cfg.OnValueChanged(CCVars220.MaxCharInTTSAnnounceMessage, x => _maxAnnounceMessageChars = x, true);
+        _cfg.OnValueChanged(CCVars220.MaxCharInTTSMessage, x => _maxMessageChars = x, true);
         _cfg.OnValueChanged(CCCVars.TTSEnabled, v => _isEnabled = v, true);
-        _cfg.OnValueChanged(CCCVars.TTSAnnounceVoiceId, v => _voiceId = v, true);
+        _cfg.OnValueChanged(CCCVars.TTSAnnounceVoiceId, v => _fallbackAnnounceVoiceId = v, true);
 
         SubscribeLocalEvent<TransformSpeechEvent>(OnTransformSpeech);
         SubscribeLocalEvent<TTSComponent, EntitySpokeEvent>(OnEntitySpoke);
@@ -65,9 +72,9 @@ public sealed partial class TTSSystem : EntitySystem
         SetRandomVoice(ent);
     }
 
-    private void OnRadioReceiveEvent(RadioSpokeEvent args)
+    private void OnRadioReceiveEvent(ref RadioSpokeEvent args)
     {
-        if (!_isEnabled || args.Message.Length > MaxMessageChars)
+        if (!_isEnabled || args.Message.Length > _maxMessageChars)
             return;
 
         if (!TryComp(args.Source, out TTSComponent? senderComponent))
@@ -105,7 +112,7 @@ public sealed partial class TTSSystem : EntitySystem
     {
         if (!_prototypeManager.TryIndex(voiceId, out voicePrototype))
         {
-            return _prototypeManager.TryIndex("father_grigori", out voicePrototype);
+            return _prototypeManager.Resolve(_fallbackVoiceId, out voicePrototype);
         }
 
         return true;
@@ -129,16 +136,17 @@ public sealed partial class TTSSystem : EntitySystem
 
         if (string.IsNullOrWhiteSpace(voice))
         {
-            if (GetVoicePrototype(_voiceId, out var protoVoice))
+            if (GetVoicePrototype(_fallbackAnnounceVoiceId, out var protoVoice))
             {
                 voice = protoVoice.Speaker;
             }
         }
 
+        var ttsRequired = (args.PlayAudioMask & AudioWithTTSPlayOperation.PlayTTS) == AudioWithTTSPlayOperation.PlayTTS;
         ReferenceCounter<TtsAudioData>.Handle? ttsResponse = default;
 
-        if (_isEnabled
-            && args.Message.Length <= MaxMessageChars * 2
+        if (_isEnabled && ttsRequired
+            && args.Message.Length <= _maxAnnounceMessageChars
             && !string.IsNullOrWhiteSpace(voice))
         {
             ttsResponse = await GenerateTts(args.Message, voice, TtsKind.Announce);
@@ -147,10 +155,10 @@ public sealed partial class TTSSystem : EntitySystem
         var message = new MsgPlayAnnounceTts
         {
             AnnouncementSound = args.AnnouncementSound,
-            AnnouncementParams = args.AnnouncementSoundParams,
+            PlayAudioMask = args.PlayAudioMask
         };
 
-        if (ttsResponse.TryGetValue(out var audioData))
+        if (ttsRequired && ttsResponse.TryGetValue(out var audioData))
         {
             message.Data = audioData;
         }
@@ -188,7 +196,7 @@ public sealed partial class TTSSystem : EntitySystem
     private async void OnRequestGlobalTTS(RequestGlobalTTSEvent ev, EntitySessionEventArgs args)
     {
         if (!_isEnabled ||
-            ev.Text.Length > MaxMessageChars ||
+            ev.Text.Length > _maxMessageChars ||
             !GetVoicePrototype(ev.VoiceId, out var protoVoice))
             return;
 
@@ -243,7 +251,7 @@ public sealed partial class TTSSystem : EntitySystem
     private async void HandleEntitySpoke(EntityUid source, IEnumerable<EntityUid> receivers, string message, bool isRadio, string? obfuscatedMessage = null)
     {
         if (!_isEnabled ||
-            message.Length > MaxMessageChars ||
+            message.Length > _maxMessageChars ||
             !TryComp<TTSComponent>(source, out var component) ||
             component.VoicePrototypeId == null)
             return;
