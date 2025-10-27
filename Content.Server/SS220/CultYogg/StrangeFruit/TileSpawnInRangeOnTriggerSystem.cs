@@ -2,7 +2,6 @@
 
 using Content.Shared.Trigger;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.CultYogg.StrangeFruit;
 

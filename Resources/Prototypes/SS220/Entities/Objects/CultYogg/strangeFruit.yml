@@ -2,7 +2,7 @@
 
 - type: entity
   name: strange fruit
-  parent: BaseItem
+  parent: [BaseItem, CultYoggRestrictedItem]
   suffix: CultYogg
   id: ProductStrangeFruitCultYogg
   components:
