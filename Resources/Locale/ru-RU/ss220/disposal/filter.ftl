@@ -14,7 +14,7 @@ filter-name = Имя: { $name }
 filter-whitelist = Тэг: { $name }
 filter-Envelope = Посылка
 filter-Delivery = Письмо
-filter-MobState = Сущность
+filter-MobState = Существо
 filter-Stack = Стопка
 
 filter-Ore = Руда
