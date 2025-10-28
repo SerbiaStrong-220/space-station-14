@@ -87,6 +87,7 @@ public sealed class ExperienceViewerUIController : UIController, IOnStateEntered
             return;
 
         _window.SetSkillDictionary(data.SkillDictionary);
+        _window.SetKnowledge(data.Knowledges);
     }
 
     private void DeactivateButton()

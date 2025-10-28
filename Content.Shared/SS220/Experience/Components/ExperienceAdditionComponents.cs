@@ -11,7 +11,7 @@ namespace Content.Shared.SS220.Experience;
 public abstract partial class SkillBaseAddComponent : Component
 {
     [DataField(required: true)]
-    public ProtoId<AddSkillOnInitPrototype> SkillAddId;
+    public ProtoId<SkillAddPrototype> SkillAddId;
 
     [DataField]
     public Dictionary<ProtoId<SkillTreePrototype>, SkillTreeExperienceInfo> Skills = new();

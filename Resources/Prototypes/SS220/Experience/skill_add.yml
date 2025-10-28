@@ -1,4 +1,4 @@
-- type: addSkillOnInit
+- type: skillAdd
   id: BaseSkillAddition
   skills:
     Piloting:
@@ -8,3 +8,5 @@
       skillLevel: 2
       skillSubLevel: 0
       skillStudied: true
+  knowledges:
+  - InformedPersonalKnowledge

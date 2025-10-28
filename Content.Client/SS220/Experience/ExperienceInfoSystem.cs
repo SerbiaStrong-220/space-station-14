@@ -1,8 +1,8 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Linq;
 using Content.Shared.FixedPoint;
 using Content.Shared.SS220.Experience;
+using Content.Shared.SS220.Experience.Systems;
 using Robust.Client.Player;
 using Robust.Shared.Prototypes;
 
@@ -11,9 +11,12 @@ namespace Content.Client.SS220.Experience;
 public sealed class ExperienceInfoSystem : EntitySystem
 {
     [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private readonly ExperienceSystem _experience = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     public Action<ExperienceData>? OnExperienceUpdated;
+
+    private HashSet<ProtoId<KnowledgePrototype>> _knowledges = new();
 
     public void RequestLocalPlayerExperienceData()
     {
@@ -25,6 +28,9 @@ public sealed class ExperienceInfoSystem : EntitySystem
         var data = new ExperienceData();
 
         data.SkillDictionary = GetPlayerSkillData(entity.Value);
+
+        if (_experience.TryGetEntityKnowledge(entity.Value, ref _knowledges))
+            data.Knowledges = [.. _knowledges];
 
         OnExperienceUpdated?.Invoke(data);
     }
@@ -83,4 +89,6 @@ public sealed class ExperienceData
                     List<(ProtoId<SkillTreePrototype>,
                     SkillTreeExperienceContainer,
                     FixedPoint4)>>? SkillDictionary = null;
+
+    public HashSet<ProtoId<KnowledgePrototype>>? Knowledges = null;
 }

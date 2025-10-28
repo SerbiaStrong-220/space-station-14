@@ -210,7 +210,7 @@ public sealed partial class ExperienceSystem : EntitySystem
     /// 1. If <paramref name="proto"/> not null - ensure that we have more or equal skills that provided in proto <br/>
     /// 2. Ensures that skill entity have all needed skills components by implementing all skills ComponentRegistry by tree order
     /// </summary>
-    public void EnsureSkill(Entity<ExperienceComponent> entity, string containerId, ProtoId<AddSkillOnInitPrototype>? proto = null)
+    public void EnsureSkill(Entity<ExperienceComponent> entity, string containerId, ProtoId<SkillAddPrototype>? proto = null)
     {
         if (!ValidContainerId(containerId, entity))
             return;
@@ -224,7 +224,7 @@ public sealed partial class ExperienceSystem : EntitySystem
     /// <summary>
     /// Ensures that current entity have skills more or equal to that in provided proto
     /// </summary>
-    private void EnsureSkillTree(Entity<ExperienceComponent> entity, string containerId, ProtoId<AddSkillOnInitPrototype> proto)
+    private void EnsureSkillTree(Entity<ExperienceComponent> entity, string containerId, ProtoId<SkillAddPrototype> proto)
     {
         if (!_prototype.TryIndex(proto, out var addSkill))
             return;

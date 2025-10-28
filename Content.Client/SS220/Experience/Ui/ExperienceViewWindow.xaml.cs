@@ -36,10 +36,10 @@ public sealed partial class ExperienceViewWindow : FancyWindow
         _sawmill = Logger.GetSawmill("experience-view-window");
     }
 
-    public void SetKnowledge(HashSet<ProtoId<KnowledgePrototype>> knowledges)
+    public void SetKnowledge(HashSet<ProtoId<KnowledgePrototype>>? knowledges)
     {
-        _knowledges = knowledges;
-        Update();
+        _knowledges = knowledges is null ? [] : knowledges;
+        FinalizeUpdateKnowledge();
     }
 
     public void SetSkillDictionary(Dictionary<ProtoId<SkillTreeGroupPrototype>,
@@ -58,7 +58,7 @@ public sealed partial class ExperienceViewWindow : FancyWindow
 
         UpdateGroupPartially(key, value);
 
-        FinalizeUpdate();
+        FinalizeUpdateSkillTree();
     }
 
     private void Update()
@@ -66,31 +66,40 @@ public sealed partial class ExperienceViewWindow : FancyWindow
         foreach (var (key, value) in _data)
             UpdateGroupPartially(key, value);
 
-        FinalizeUpdate();
+        FinalizeUpdateSkillTree();
+        FinalizeUpdateKnowledge();
     }
 
-    private void FinalizeUpdate()
+    private void FinalizeUpdateSkillTree()
     {
         ExperienceTreeGroupsContainer.RemoveAllChildren();
 
         HighDivider? divider = null;
         foreach (var control in _cachedControls.Values.OrderBy((x) => x.Name))
         {
-            divider = new();
+            divider = new()
+            {
+                Margin = ExperienceUiStyleDefinitions.DividerThickness,
+            };
             ExperienceTreeGroupsContainer.AddChild(control);
             ExperienceTreeGroupsContainer.AddChild(divider);
         }
 
         if (divider is not null)
             ExperienceTreeGroupsContainer.RemoveChild(divider);
+    }
 
-
+    private void FinalizeUpdateKnowledge()
+    {
         knowledgesContainer.RemoveAllChildren();
 
-        divider = null;
-        foreach (var knowledge in _knowledges)
+        HighDivider? divider = null;
+        foreach (var knowledge in _knowledges.OrderBy((x) => x.Id))
         {
-            divider = new();
+            divider = new()
+            {
+                Margin = ExperienceUiStyleDefinitions.DividerThickness,
+            };
             var knowledgeControl = new KnowledgeLabel();
             knowledgeControl.SetKnowledge(knowledge);
             knowledgesContainer.AddChild(knowledgeControl);
@@ -123,5 +132,4 @@ public sealed partial class ExperienceViewWindow : FancyWindow
         ExperienceTreeGroupsContainer.AddChild(control);
         _cachedControls.Add(key, control);
     }
-
 }

@@ -1,7 +1,7 @@
 - type: knowledge
   id: InformedPersonalKnowledge
   knowledgeName: informed-personal-knowledge-name
-  knowledgeDescription: informed-personal-description
+  knowledgeDescription: informed-personal-knowledge-description
 
 - type: knowledge
   id: CentCommKnowledge

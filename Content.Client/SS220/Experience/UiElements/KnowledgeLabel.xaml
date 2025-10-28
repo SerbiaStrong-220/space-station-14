@@ -5,9 +5,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
-    xmlns:ExperienceUiElements="clr-namespace:Content.Client.SS220.Experience.UiElements">
+    xmlns:ExperienceUiElements="clr-namespace:Content.Client.SS220.Experience.UiElements"
+    xmlns:styleDef="clr-namespace:Content.Client.SS220.Experience.Ui">
     <BoxContainer Orientation="Vertical">
-        <RichTextLabel Name="KnowledgeName" Text="name-place-holder"/>
-        <RichTextLabel Name="KnowledgeDescription" Text="description-place-holder"/>
+        <RichTextLabel Name="KnowledgeName" Text="name-place-holder"
+            MouseFilter="Stop" TrackingTooltip="true" TooltipDelay="0.5"/>
     </BoxContainer>
 </ExperienceUiElements:KnowledgeLabel>

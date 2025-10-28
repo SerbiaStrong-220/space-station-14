@@ -118,7 +118,7 @@ namespace Content.Shared.Roles
         // SS220-Experience-update-begin
         [DataField]
         // TODO: uncomment [DataField(required: true)]
-        public ProtoId<AddSkillOnInitPrototype>? SkillOnInit { get; private set; }
+        public ProtoId<SkillAddPrototype>? SkillOnInit { get; private set; }
         // SS220-Experience-update-end
 
         /// <summary>
