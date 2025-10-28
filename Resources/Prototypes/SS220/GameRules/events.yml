@@ -1,7 +1,6 @@
 - type: entity
   id: BananaRain
   parent: BaseGameRule
-  categories: [ GameRules ]
   components:
   - type: StationEvent
     startAnnouncement: station-event-banana-rain-announcement
@@ -36,3 +35,14 @@
 #    specialEntries:
 #    - id: SpawnPointGhostSpaceQueen
 #      prob: 0.005
+
+- type: entity
+  id: RandomMindShieldCombustion
+  parent: BaseGameRule
+  components:
+  - type: StationEvent #ToDo_SS220 check parameters
+    earliestStart: 20
+    minimumPlayers: 25
+    weight: 0
+    duration: 20
+  - type: MindShieldCombustionRule
