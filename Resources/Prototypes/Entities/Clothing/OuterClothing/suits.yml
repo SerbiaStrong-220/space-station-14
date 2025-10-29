@@ -152,9 +152,9 @@
   description: This black technologically advanced, cybernetically-enhanced suit provides many abilities like invisibility or teleportation.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Suits/spaceninja.rsi
+    sprite: SS220/Clothing/OuterClothing/Suits/spaceninja.rsi #SS220 Ninja Resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Suits/spaceninja.rsi
+    sprite: SS220/Clothing/OuterClothing/Suits/spaceninja.rsi #SS220 Ninja Resprite
   # hardsuit stuff
   - type: PressureProtection
     highPressureMultiplier: 0.6

@@ -247,8 +247,10 @@
       max: 1
       pickPlayer: false
       startingGear: SpaceNinjaGear
-      roleLoadout:
-      - RoleSurvivalEVA
+      #SS220 Ninja Resprite Begin
+      # roleLoadout:
+      # - RoleSurvivalEVA
+      #SS220 Ninja Resprite End
       briefing:
         text: ninja-role-greeting
         color: Green

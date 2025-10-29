@@ -918,9 +918,9 @@
   description: Comfortable ninja suit, for convenience when relaxing and when you need to practice.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/ninja.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/ninja.rsi #SS220 Ninja Resprite
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/ninja.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/ninja.rsi #SS220 Ninja Resprite
 
 - type: entity
   parent: ClothingUniformBase
