@@ -108,6 +108,10 @@
   components:
   - type: Instrument
     program: 43
+  - type: SwappableInstrument
+    instrumentList:
+      "Arco": {43: 0}
+      "Pizzicato": {5: 1}
   - type: Sprite
     state: contrabass
   - type: Fixtures
