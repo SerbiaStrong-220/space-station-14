@@ -44,6 +44,7 @@ using Robust.Shared.Timing;
 using Content.Server.SS220.Language; // SS220-Add-Languages-end
 using Robust.Shared.Map;
 using Content.Shared.SS220.Language.Systems;
+using Content.Shared.SS220.VoiceRangeModify; // ss220 add whisper range modify
 
 namespace Content.Server.Chat.Systems;
 
@@ -610,7 +611,9 @@ public sealed partial class ChatSystem : SharedChatSystem
         var wrappedUnknownMessage = Loc.GetString("chat-manager-entity-whisper-unknown-wrap-message",
             ("message", FormattedMessage.EscapeText(obfuscatedMessage)));
 
-        foreach (var (session, data) in GetRecipients(source, WhisperMuffledRange))
+        // ss220 add whisper range modify start
+        foreach (var (session, data) in GetRecipients(source, WhisperMuffledRange, true))
+        // ss220 add whisper range modify end
         {
             EntityUid listener;
 
@@ -634,14 +637,23 @@ public sealed partial class ChatSystem : SharedChatSystem
             if (MessageRangeCheck(session, data, range) != MessageRangeCheckResult.Full)
                 continue; // Won't get logged to chat, and ghosts are too far away to see the pop-up, so we just won't send it to them.
 
-            if (data.Range <= WhisperClearRange || data.Observer)
+            // ss220 add whisper range modify start
+            var modifyWhisperEv = new WhisperModifyRangeEvent(WhisperClearRange, WhisperMuffledRange);
+            RaiseLocalEvent(playerEntity, ref modifyWhisperEv, true);
+
+            var whisperClearRange = modifyWhisperEv.WhisperClearRange;
+            var whisperMuffledRange = modifyWhisperEv.WhisperMuffledRange;
+            // ss220 add whisper range modify end
+
+            if (data.Range <= whisperClearRange || data.Observer)
                 _chatManager.ChatMessageToOne(ChatChannel.Whisper, scrambledMessage /* SS220 languages */, wrappedMessage, source, false, session.Channel);
             //If listener is too far, they only hear fragments of the message
-            else if (_examineSystem.InRangeUnOccluded(source, listener, WhisperMuffledRange))
+            else if (_examineSystem.InRangeUnOccluded(source, listener, whisperMuffledRange))
                 _chatManager.ChatMessageToOne(ChatChannel.Whisper, obfuscatedScrambledMessage /* SS220 languages */, wrappedobfuscatedMessage, source, false, session.Channel);
             //If listener is too far and has no line of sight, they can't identify the whisperer's identity
             else
                 _chatManager.ChatMessageToOne(ChatChannel.Whisper, obfuscatedScrambledMessage /* SS220 languages */, wrappedUnknownMessage, source, false, session.Channel);
+            // ss220 add whisper range modify end
         }
 
         _replay.RecordServerMessage(new ChatMessage(ChatChannel.Whisper, message, wrappedMessage, GetNetEntity(source), null, MessageRangeHideChatForReplay(range)));
@@ -1011,8 +1023,11 @@ public sealed partial class ChatSystem : SharedChatSystem
 
     /// <summary>
     ///     Returns list of players and ranges for all players withing some range. Also returns observers with a range of -1.
+    ///     SS220: Can return entity, which more than <see cref="voiceGetRange"/>, if in SpeciesPrototype changed whisper settings.
     /// </summary>
-    private Dictionary<ICommonSession, ICChatRecipientData> GetRecipients(EntityUid source, float voiceGetRange)
+    // ss220 add whisper range modify start
+    public Dictionary<ICommonSession, ICChatRecipientData> GetRecipients(EntityUid source, float defaultVoiceRange, bool isWhisper = false)
+    // ss220 add whisper range modify end
     {
         // TODO proper speech occlusion
 
@@ -1039,18 +1054,35 @@ public sealed partial class ChatSystem : SharedChatSystem
                            && ghostComp.IsEnabled;
             //ss220 add filter tts for ghost end
 
+            // ss220 add whisper range modify start
+            float voiceRange;
+
+            if (isWhisper)
+            {
+                var ev = new WhisperModifyRangeEvent(WhisperClearRange, WhisperMuffledRange);
+                RaiseLocalEvent(playerEntity, ref ev, true);
+                voiceRange = ev.WhisperMuffledRange;
+            }
+            else
+            {
+                var ev = new VoiceModifyRangeEvent(defaultVoiceRange);
+                RaiseLocalEvent(playerEntity, ref ev, true);
+                voiceRange = ev.VoiceRange;
+            }
+
             // even if they are a ghost hearer, in some situations we still need the range
-            if (sourceCoords.TryDistance(EntityManager, transformEntity.Coordinates, out var distance) && distance < voiceGetRange)
+            if (sourceCoords.TryDistance(EntityManager, transformEntity.Coordinates, out var distance) && distance < voiceRange)
             {
                 recipients.Add(player, new ICChatRecipientData(distance, observer));
                 continue;
             }
+            // ss220 add whisper range modify end
 
             if (observer)
                 recipients.Add(player, new ICChatRecipientData(-1, true));
         }
 
-        RaiseLocalEvent(new ExpandICChatRecipientsEvent(source, voiceGetRange, recipients));
+        RaiseLocalEvent(new ExpandICChatRecipientsEvent(source, defaultVoiceRange, recipients)); // ss220 add whisper range modify
         return recipients;
     }
 
