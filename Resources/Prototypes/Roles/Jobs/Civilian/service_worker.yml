@@ -5,7 +5,7 @@
   playTimeTracker: JobServiceWorker
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 3600 # SS220-RoleTime 2
+      time: 1h # SS220-RoleTime 2
   startingGear: ServiceWorkerGear
   icon: "JobIconServiceWorker"
   supervisors: job-supervisors-service

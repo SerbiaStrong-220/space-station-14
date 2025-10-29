@@ -22,8 +22,9 @@
   - type: Construction
     graph: TrashCan
     node: TrashCan
-  - type: RatKingRummageable
-    rummageLoot: RatKingLootTrashCans
+  - type: Rummageable
+    table: !type:NestedSelector
+      tableId: RatKingLootTrashCans
   - type: RegalRatSpawnLocation
   - type: Fixtures
     fixtures:

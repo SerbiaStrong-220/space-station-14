@@ -26,10 +26,7 @@
     allowMovement: true
     name: "Рокси"
     description: "Собака службы безопасности. Издевайтесь над офицерами, чтобы погладить их по голове и преследовать жестоких преступников по пятам"
-    requirements:
-    - !type:DepartmentTimeRequirement
-      department: Security
-      time: 14400 # SS220 - 4 hours
+    job: SecurityPet
   - type: GhostTakeoverAvailable
   - type: InteractionPopup
     successChance: 1

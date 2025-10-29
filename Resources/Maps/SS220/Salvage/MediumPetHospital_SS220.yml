@@ -23,6 +23,7 @@ entities:
     - type: Transform
       pos: -0.953125,1.828125
       parent: invalid
+    - type: SkipAutoVariantize        
     - type: MapGrid
       chunks:
         0,0:

@@ -1,3 +1,5 @@
+using System.Net;
+using System.Net.Sockets;
 using Content.Server.Administration.Managers;
 using Content.Server.Administration.Systems;
 using Content.Server.Chat.Managers;
@@ -5,12 +7,7 @@ using Content.Server.EUI;
 using Content.Shared.Administration;
 using Content.Shared.Database;
 using Content.Shared.Eui;
-using Content.Shared.Humanoid.Prototypes;
-using Content.Shared.Roles;
 using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
-using System.Net;
-using System.Net.Sockets;
 
 namespace Content.Server.Administration;
 
@@ -22,7 +19,6 @@ public sealed class BanPanelEui : BaseEui
     [Dependency] private readonly IPlayerLocator _playerLocator = default!;
     [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly IAdminManager _admins = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
     private readonly ISawmill _sawmill;
 
@@ -53,7 +49,7 @@ public sealed class BanPanelEui : BaseEui
         switch (msg)
         {
             case BanPanelEuiStateMsg.CreateBanRequest r:
-                BanPlayer(r.Player, r.IpAddress, r.UseLastIp, r.Hwid, r.UseLastHwid, r.Minutes, r.Severity, r.StatedRound, r.Reason, r.Roles, /* SS220 Species bans */ r.Species, r.Erase, r.PostBanInfo);
+                BanPlayer(r.Ban);
                 break;
             case BanPanelEuiStateMsg.GetPlayerInfoRequest r:
                 ChangePlayer(r.PlayerUsername);
@@ -61,29 +57,26 @@ public sealed class BanPanelEui : BaseEui
         }
     }
 
-    private async void BanPlayer(string? target, string? ipAddressString, bool useLastIp, ImmutableTypedHwid? hwid, bool useLastHwid, uint minutes, NoteSeverity severity, int statedRound, string reason, IReadOnlyCollection<string>? roles, /* SS220 Species bans */ string[]? species, bool erase, bool postBanInfo)
+    private async void BanPlayer(Ban ban)
     {
         if (!_admins.HasAdminFlag(Player, AdminFlags.Ban))
         {
             _sawmill.Warning($"{Player.Name} ({Player.UserId}) tried to create a ban with no ban flag");
+
             return;
         }
-        if (target == null && string.IsNullOrWhiteSpace(ipAddressString) && hwid == null)
+
+        if (ban.Target == null && string.IsNullOrWhiteSpace(ban.IpAddress) && ban.Hwid == null)
         {
             _chat.DispatchServerMessage(Player, Loc.GetString("ban-panel-no-data"));
+
             return;
         }
 
         (IPAddress, int)? addressRange = null;
-        if (ipAddressString is not null)
+        if (ban.IpAddress is not null)
         {
-            var hid = "0";
-            var split = ipAddressString.Split('/', 2);
-            ipAddressString = split[0];
-            if (split.Length > 1)
-                hid = split[1];
-
-            if (!IPAddress.TryParse(ipAddressString, out var ipAddress) || !uint.TryParse(hid, out var hidInt) || hidInt > Ipv6_CIDR || hidInt > Ipv4_CIDR && ipAddress.AddressFamily == AddressFamily.InterNetwork)
+            if (!IPAddress.TryParse(ban.IpAddress, out var ipAddress) || !uint.TryParse(ban.IpAddressHid, out var hidInt) || hidInt > Ipv6_CIDR || hidInt > Ipv4_CIDR && ipAddress.AddressFamily == AddressFamily.InterNetwork)
             {
                 _chat.DispatchServerMessage(Player, Loc.GetString("ban-panel-invalid-ip"));
                 return;
@@ -95,12 +88,12 @@ public sealed class BanPanelEui : BaseEui
             addressRange = (ipAddress, (int) hidInt);
         }
 
-        var targetUid = target is not null ? PlayerId : null;
-        addressRange = useLastIp && LastAddress is not null ? (LastAddress, LastAddress.AddressFamily == AddressFamily.InterNetworkV6 ? Ipv6_CIDR : Ipv4_CIDR) : addressRange;
-        var targetHWid = useLastHwid ? LastHwid : hwid;
-        if (target != null && target != PlayerName || Guid.TryParse(target, out var parsed) && parsed != PlayerId)
+        var targetUid = ban.Target is not null ? PlayerId : null;
+        addressRange = ban.UseLastIp && LastAddress is not null ? (LastAddress, LastAddress.AddressFamily == AddressFamily.InterNetworkV6 ? Ipv6_CIDR : Ipv4_CIDR) : addressRange;
+        var targetHWid = ban.UseLastHwid ? LastHwid : ban.Hwid;
+        if (ban.Target != null && ban.Target != PlayerName || Guid.TryParse(ban.Target, out var parsed) && parsed != PlayerId)
         {
-            var located = await _playerLocator.LookupIdByNameOrIdAsync(target);
+            var located = await _playerLocator.LookupIdByNameOrIdAsync(ban.Target);
             if (located == null)
             {
                 _chat.DispatchServerMessage(Player, Loc.GetString("cmd-ban-player"));
@@ -108,7 +101,7 @@ public sealed class BanPanelEui : BaseEui
             }
             targetUid = located.UserId;
             var targetAddress = located.LastAddress;
-            if (useLastIp && targetAddress != null)
+            if (ban.UseLastIp && targetAddress != null)
             {
                 if (targetAddress.IsIPv4MappedToIPv6)
                     targetAddress = targetAddress.MapToIPv4();
@@ -117,48 +110,69 @@ public sealed class BanPanelEui : BaseEui
                 var hid = targetAddress.AddressFamily == AddressFamily.InterNetworkV6 ? Ipv6_CIDR : Ipv4_CIDR;
                 addressRange = (targetAddress, hid);
             }
-            targetHWid = useLastHwid ? located.LastHWId : hwid;
+            targetHWid = ban.UseLastHwid ? located.LastHWId : ban.Hwid;
         }
 
-        if (roles?.Count > 0)
+        if (ban.BannedJobs?.Length > 0 || ban.BannedAntags?.Length > 0)
         {
             var now = DateTimeOffset.UtcNow;
-            foreach (var role in roles)
+            foreach (var role in ban.BannedJobs ?? [])
             {
-                if (_prototypeManager.HasIndex<JobPrototype>(role) ||
-                    _prototypeManager.HasIndex<AntagPrototype>(role)) // SS220 antag bans
-                {
-                    _banManager.CreateRoleBan(targetUid, target, Player.UserId, addressRange, targetHWid, role, minutes, severity, reason, now, postBanInfo);
-                }
-                else
-                {
-                    _sawmill.Warning($"{Player.Name} ({Player.UserId}) tried to issue a job ban with an invalid job: {role}");
-                }
+                _banManager.CreateRoleBan(
+                    targetUid,
+                    ban.Target,
+                    Player.UserId,
+                    addressRange,
+                    targetHWid,
+                    role,
+                    ban.BanDurationMinutes,
+                    ban.Severity,
+                    ban.Reason,
+                    now,
+                    ban.PostBanInfo
+                );
+            }
+
+            foreach (var role in ban.BannedAntags ?? [])
+            {
+                _banManager.CreateRoleBan(
+                    targetUid,
+                    ban.Target,
+                    Player.UserId,
+                    addressRange,
+                    targetHWid,
+                    role,
+                    ban.BanDurationMinutes,
+                    ban.Severity,
+                    ban.Reason,
+                    now,
+                    ban.PostBanInfo
+                );
+            }
+
+            foreach (var specie in ban.BannedSpecies ?? [])
+            {
+                _banManager.CreateSpeciesBan(
+                    targetUid,
+                    ban.Target,
+                    Player.UserId,
+                    addressRange,
+                    targetHWid,
+                    specie,
+                    ban.BanDurationMinutes,
+                    ban.Severity,
+                    ban.Reason,
+                    now,
+                    ban.PostBanInfo
+                );
             }
 
             Close();
+
             return;
         }
 
-        // SS220 Species bans begin
-        if (species?.Length > 0)
-        {
-            var now = DateTimeOffset.UtcNow;
-            foreach (var speciesId in species)
-            {
-                if (_prototypeManager.HasIndex<SpeciesPrototype>(speciesId))
-                    _banManager.CreateSpeciesBan(targetUid, target, Player.UserId, addressRange, targetHWid, speciesId, minutes, severity, reason, now, postBanInfo);
-                else
-                    _sawmill.Warning($"{Player.Name} ({Player.UserId}) tried to issue a species ban with an invalid speciesId: {speciesId}");
-            }
-
-            Close();
-            return;
-        }
-        // SS220 Species bans end
-
-        if (erase &&
-            targetUid != null)
+        if (ban.Erase && targetUid is not null)
         {
             try
             {
@@ -171,7 +185,19 @@ public sealed class BanPanelEui : BaseEui
             }
         }
 
-        _banManager.CreateServerBan(targetUid, target, Player.UserId, addressRange, targetHWid, minutes, severity, Player.Name, statedRound, reason, postBanInfo);
+        _banManager.CreateServerBan(
+            targetUid,
+            ban.Target,
+            Player.UserId,
+            addressRange,
+            targetHWid,
+            ban.BanDurationMinutes,
+            ban.Severity,
+            Player.Name, //SS220-add-admin-name-to-perm-bans
+            ban.StatedRound, // SS220-add-round-id-to-ban
+            ban.Reason,
+            ban.PostBanInfo // SS220-add-post-ban-info
+        );
 
         Close();
     }

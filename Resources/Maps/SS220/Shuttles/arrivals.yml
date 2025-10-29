@@ -18,6 +18,7 @@ entities:
       name: NT-CV "Arrivals 1101"
     - type: Transform
       parent: invalid
+    - type: SkipAutoVariantize        
     - type: MapGrid
       chunks:
         -1,-1:

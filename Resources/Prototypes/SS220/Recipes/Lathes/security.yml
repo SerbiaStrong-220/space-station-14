@@ -96,13 +96,6 @@
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
-  id: MagazinePistolCaselessRifle
-  result: MagazinePistolCaselessRifle
-  materials:
-    Steel: 135
-
-- type: latheRecipe
-  parent: BaseAmmoRecipe
   id: MagazineMagnumEmpty
   result: MagazineMagnumEmpty
   materials:

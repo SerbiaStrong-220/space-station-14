@@ -18,6 +18,7 @@ entities:
       name: Космический Обломок
     - type: Transform
       parent: invalid
+    - type: SkipAutoVariantize        
     - type: MapGrid
       chunks:
         -1,-1:

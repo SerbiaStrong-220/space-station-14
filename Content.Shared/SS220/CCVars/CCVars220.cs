@@ -136,14 +136,4 @@ public sealed partial class CCVars220
     /// </summary>
     public static readonly CVarDef<string> AdditionalBanInfo =
         CVarDef.Create("ban.additional_info", "", CVar.SERVERONLY | CVar.ARCHIVE);
-    /// <summary>
-    /// Maximum entity capacity for tts queue
-    /// </summary>
-    public static readonly CVarDef<int> MaxQueuedPerEntity =
-        CVarDef.Create("tts.max_queued_entity", 20, CVar.CLIENTONLY | CVar.ARCHIVE);
-    /// <summary>
-    /// Maximum of queued tts entities
-    /// </summary>
-    public static readonly CVarDef<int> MaxEntitiesQueued =
-        CVarDef.Create("tts.max_entities_queued", 30, CVar.CLIENTONLY | CVar.ARCHIVE);
 }

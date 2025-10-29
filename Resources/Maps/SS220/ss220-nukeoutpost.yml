@@ -66,6 +66,7 @@ entities:
       name: Syndicate Outpost
     - type: Transform
       parent: 1295
+    - type: SkipAutoVariantize  
     - type: MapGrid
       chunks:
         -1,-1:

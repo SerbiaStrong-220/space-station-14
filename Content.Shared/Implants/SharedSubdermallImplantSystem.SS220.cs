@@ -19,7 +19,7 @@ public abstract partial class SharedSubdermalImplantSystem : EntitySystem // SS2
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly SharedHumanoidAppearanceSystem _humanoidAppearance = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly SharedIdentitySystem _identity = default!;
+    [Dependency] private readonly IdentitySystem _identity = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     private const string BeakerSolution = "beaker"; //ss220 add adrenal implant

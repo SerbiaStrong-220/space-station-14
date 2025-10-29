@@ -1,0 +1,8 @@
+- type: job
+  id: DerelictBorg # just imagine here joke pls
+  name: job-name-derelict-borg
+  description: job-description-derelict-borg
+  playTimeTracker: JobDerelictBorg
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 10h

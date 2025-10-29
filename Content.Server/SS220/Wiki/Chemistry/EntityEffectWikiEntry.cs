@@ -19,7 +19,7 @@ public sealed class EntityEffectWikiEntry
         var entSysMng = IoCManager.Resolve<IEntitySystemManager>();
 
         Id = effect.GetType().Name;
-        Description = GuidebookEffectDescriptionToWiki(effect.GuidebookEffectDescription(protoMng, entSysMng) ?? "");
+        Description = GuidebookEffectDescriptionToWiki(effect.EntityEffectGuidebookText(protoMng, entSysMng) ?? "");
     }
 
     private string GuidebookEffectDescriptionToWiki(string guideBookText)

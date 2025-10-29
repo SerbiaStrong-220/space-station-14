@@ -14,9 +14,7 @@
       name: ghost-role-information-guardian-name
       description: ghost-role-information-guardian-description
       rules: ghost-role-information-familiar-rules
-      requirements: #SS220 ghostrole-times (20h overall) start
-      - !type:OverallPlaytimeRequirement
-        time: 72000 #SS220 ghostrole-times (20h overall) end
+      job: SyndicateReinforcement # SS220-add-playtime-restrictions
       mindRoles:
       - MindRoleGhostRoleFamiliar
       raffle:
@@ -129,9 +127,7 @@
       name: ghost-role-information-holoparasite-name
       description: ghost-role-information-holoparasite-description
       rules: ghost-role-information-familiar-rules
-      requirements: #SS220 ghostrole-times (20h overall) start
-      - !type:OverallPlaytimeRequirement
-        time: 72000 #SS220 ghostrole-times (20h overall) end
+      job: SyndicateReinforcement # SS220-add-playtime-restrictions
       raffle:
         settings: default
     - type: GhostTakeoverAvailable
@@ -171,9 +167,7 @@
       name: ghost-role-information-ifrit-name
       description: ghost-role-information-ifrit-description
       rules: ghost-role-information-familiar-rules
-      requirements: #SS220 ghostrole-times (20h overall) start
-      - !type:OverallPlaytimeRequirement
-        time: 72000 #SS220 ghostrole-times (20h overall) end
+      job: SyndicateReinforcement # SS220-add-playtime-restrictions
       raffle:
         settings: default
     - type: GhostTakeoverAvailable
@@ -209,9 +203,7 @@
       name: ghost-role-information-holoclown-name
       description: ghost-role-information-holoclown-description
       rules: ghost-role-information-familiar-rules
-      requirements: #SS220 ghostrole-times (20h overall) start
-      - !type:OverallPlaytimeRequirement
-        time: 72000 #SS220 ghostrole-times (20h overall) end
+      job: SyndicateReinforcement # SS220-add-playtime-restrictions
       raffle:
         settings: default
     - type: GhostTakeoverAvailable

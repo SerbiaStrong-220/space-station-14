@@ -2,6 +2,24 @@
 
 - type: entity
   parent: IDCardStandard
+  id: SecurityPilotIDCard
+  name: ID карта (пилот СБ)
+  components:
+  - type: Sprite
+    layers:
+    - state: default
+    - state: idpilot
+  - type: PresetIdCard
+    job: SecurityPilot
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+
+- type: entity
+  parent: IDCardStandard
   id: UsspIDCard
   suffix: Shitspawn, Ebent, FractWar
   name: ID карта СССП

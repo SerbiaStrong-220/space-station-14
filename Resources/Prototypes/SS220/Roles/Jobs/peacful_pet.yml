@@ -1,0 +1,8 @@
+- type: job
+  id: PeacefulPet # just imagine here joke pls
+  name: job-name-peaceful-pet
+  description: job-description-peaceful-pet
+  playTimeTracker: JobPeacefulPet
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 20h

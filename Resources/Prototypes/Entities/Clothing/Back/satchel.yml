@@ -70,6 +70,12 @@
   - type: Storage
     storageOpenSound:
       collection: BikeHorn
+      params:
+        variation: 0.125
+    storageInsertSound:
+      collection: FootstepClown
+      params:
+        variation: 0.125
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-textile
@@ -89,6 +95,9 @@
     microFiberMaterial: micro-fibers-textile
     microFiberColor: micro-fibers-white
 #SS220 Micro_fibers end
+  - type: Storage
+    storageOpenSound: null
+    storageInsertSound: null
 
 - type: entity
   parent: ClothingBackpackSatchel

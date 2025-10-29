@@ -255,10 +255,24 @@ binds:
   type: State
   key: E
   mod1: Shift
-- function: SmartEquipNeck #SS220-SmartEquipNeck begin
+  #SS220-SmartEquipNeck begin
+- function: SmartEquipNeck
   type: State
   key: H
-  mod1: Shift #SS220-SmartEquipNeck end
+  mod1: Shift
+  #SS220-SmartEquipNeck end
+- function: SmartEquipPocket1
+  type: State
+  key: F
+  mod1: Shift
+- function: SmartEquipPocket2
+  type: State
+  key: G
+  mod1: Shift
+- function: SmartEquipSuitStorage
+  type: State
+  key: H
+  mod1: Shift
 - function: OpenBackpack
   type: State
   key: V

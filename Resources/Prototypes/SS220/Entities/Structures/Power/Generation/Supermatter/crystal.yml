@@ -32,13 +32,15 @@
           - InteractImpassable
   - type: CollisionWake
     enabled: false
+  - type: AtmosDevice
+    joinSystem: true
   - type: SinguloFood
     energy: 5000
   - type: Explosive
     explosionType: Default
     maxIntensity: 60
     intensitySlope: 10
-    totalIntensity: 100000
+    totalIntensity: 25000
     maxTileBreak: 128
   - type: NameIdentifier
     group: GenericNumber

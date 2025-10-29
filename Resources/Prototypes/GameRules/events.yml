@@ -30,18 +30,43 @@
   table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
     children:
     # - id: ClosetSkeleton # SS220 No-Closet-Skeletons
-    - id: DragonSpawn
     - id: KingRatMigration
+    - id: RevenantSpawn
+    - !type:NestedSelector
+      tableId: DerelictBorgEventTable
+
+- type: entityTable
+  id: ModerateAntagEventsTable
+  table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
+    children:
+    - id: DragonSpawn
     - id: NinjaSpawn
     - id: ParadoxCloneSpawn
-    - id: RevenantSpawn
     - id: SleeperAgents
     - id: ZombieOutbreak
     - id: DarkReaperSpawn #ss220 darkreaper middle event
     - id: SpiderQueenSpawn #SS220 spider queen midround event
     # - id: LoneOpsSpawn # SS220 No-LoneOps
-    - id: DerelictCyborgSpawn
     - id: WizardSpawn
+    - !type:NestedSelector
+      tableId: DerelictBorgEventTable
+
+- type: entityTable
+  id: DerelictBorgEventTable #For Derelict Borg spawns
+  table: !type:GroupSelector
+    children:
+    - !type:GroupSelector # Standard NT Borgs
+      weight: 85
+      children:
+        - id: DerelictEngineerCyborgSpawn
+        - id: DerelictGenericCyborgSpawn
+        - id: DerelictJanitorCyborgSpawn
+        - id: DerelictMedicalCyborgSpawn
+        - id: DerelictMiningCyborgSpawn
+    - !type:GroupSelector # Other Borgs
+      weight: 15
+      children:
+        - id: DerelictSyndicateAssaultCyborgSpawn
 
 - type: entity
   id: BaseStationEvent
@@ -81,6 +106,7 @@
     startAnnouncementColor: "#18abf5"
     weight: 8
     duration: 35
+    playTTS: false # SS220-fix-double-announce-audio
     startAudio: # Corvax-Announcements
       path: /Audio/Corvax/Announcements/flux.ogg
       params:
@@ -99,6 +125,7 @@
     startAnnouncementColor: "#18abf5"
     weight: 8
     duration: 35
+    playTTS: false # SS220-fix-double-announce-audio
     startAudio: # Corvax-Announcements
       path: /Audio/Corvax/Announcements/blusp_anomalies.ogg
       params:
@@ -151,6 +178,10 @@
   - type: BureaucraticErrorRule
     ignoredJobs:
     - StationAi
+    - ResearchAssistant
+    - MedicalIntern
+    - SecurityCadet
+    - TechnicalAssistant
 
 - type: entity
   id: ClericalError
@@ -211,6 +242,8 @@
       pickPlayer: false
       mindRoles:
       - MindRoleDragon
+  - type: DynamicRuleCost
+    cost: 75
 
 - type: entity
   parent: BaseGameRule
@@ -279,6 +312,8 @@
         nameFormat: name-format-ninja
       mindRoles:
       - MindRoleNinja
+  - type: DynamicRuleCost
+    cost: 75
 
 - type: entity
   parent: BaseGameRule
@@ -315,6 +350,8 @@
         sound: /Audio/Misc/paradox_clone_greeting.ogg
       mindRoles:
       - MindRoleParadoxClone
+  - type: DynamicRuleCost
+    cost: 50
 
 - type: entity
   parent: BaseGameRule
@@ -337,7 +374,7 @@
     duration: 1
     earliestStart: 30
     reoccurrenceDelay: 60
-    minimumPlayers: 30  # SS 220 MidRound Wiz Req 30 players min
+    minimumPlayers: 30
   - type: AntagSelection
     agentName: wizard-round-end-name
     definitions:
@@ -382,6 +419,7 @@
   parent: BaseStationEventShortDelay
   components:
   - type: StationEvent
+    playTTS: false # SS220-fix-double-announce-audio
     startAnnouncement: station-event-gas-leak-start-announcement
     startAudio:
       path: /Audio/Announcements/gasleak_start.ogg # Corvax-Announcements
@@ -416,6 +454,7 @@
     weight: 5
     startAnnouncement: station-event-power-grid-check-start-announcement
     endAnnouncement: station-event-power-grid-check-end-announcement
+    playTTS: false # SS220-fix-double-announce-audio
     startAudio:
       path: /Audio/Announcements/power_off.ogg
       params:
@@ -432,6 +471,7 @@
     weight: 8
     startAnnouncement: station-event-solar-flare-start-announcement
     endAnnouncement: station-event-solar-flare-end-announcement
+    playTTS: false # SS220-fix-double-announce-audio
     startAudio: # Corvax-Announcements
       path: /Audio/Corvax/Announcements/comms_blackout.ogg
       params:
@@ -460,6 +500,7 @@
   components:
   - type: StationEvent
     startAnnouncement: station-event-vent-clog-start-announcement
+    playTTS: false # SS220-fix-double-announce-audio
     startAudio:
       path: /Audio/Announcements/ventclog.ogg # Corvax-Announcements
       params:
@@ -475,6 +516,7 @@
   parent: BaseStationEventShortDelay
   components:
   - type: StationEvent
+    playTTS: false # SS220-fix-double-announce-audio
     startAnnouncement: station-event-vent-creatures-start-announcement
   # SS220 MoreAnonces (sound and alert upgrades) bgn
     startAudio:
@@ -501,6 +543,7 @@
   components:
   - type: StationEvent
     startAnnouncement: station-event-vent-creatures-start-announcement
+    playTTS: false # SS220-fix-double-announce-audio
   # SS220 MoreAnonces (sound and alert upgrades) bgn
     startAudio:
       path: /Audio/SS220/Announcements/lifesigns.ogg
@@ -535,6 +578,7 @@
   components:
   - type: StationEvent
     startAnnouncement: station-event-vent-creatures-start-announcement
+    playTTS: false # SS220-fix-double-announce-audio
   # SS220 MoreAnonces (sound and alert upgrades) bgn
     startAudio:
       path: /Audio/SS220/Announcements/lifesigns.ogg
@@ -556,6 +600,7 @@
   components:
   - type: StationEvent
     startAnnouncement: station-event-vent-creatures-start-announcement
+    playTTS: false # SS220-fix-double-announce-audio
   # SS220 MoreAnonces (sound and alert upgrades) bgn
     startAudio:
       path: /Audio/SS220/Announcements/lifesigns.ogg
@@ -608,6 +653,8 @@
       # Corvax
       mindRoles:
       - MindRoleInitialInfected
+  - type: DynamicRuleCost
+    cost: 200
 
 - type: entity
   parent: BaseNukeopsRule
@@ -618,7 +665,7 @@
     earliestStart: 35
     weight: 5.5
     minimumPlayers: 20
-    duration: null # LoneOpsSpawn needs an infinite duration so that it inherits the NukeOpsRule things of an actually appropriate end scrreen (not always "Neutral outcome!") and... ending the game if the station is nuked.
+    duration: null # LoneOpsSpawn needs an infinite duration so that it inherits the NukeOpsRule things of an actually appropriate end screen (not always "Neutral outcome!") and... ending the game if the station is nuked.
   - type: RuleGrids
   - type: LoadMapRule
     gridPath: /Maps/Shuttles/ShuttleEvent/striker.yml
@@ -646,7 +693,9 @@
         factions:
         - Syndicate
       mindRoles:
-      - MindRoleNukeops
+      - MindRoleLoneops
+  - type: DynamicRuleCost
+    cost: 75
 
 - type: entity
   parent: BaseTraitorRule
@@ -697,6 +746,7 @@
   id: IonStorm
   components:
   - type: StationEvent
+    playTTS: false # SS220-fix-double-announce-audio
   # SS220 MoreAnonces (sound and alert upgrades) bgn
     #ss220 tweak ion storm start
     endAnnouncementColor: "#18abf5"
@@ -731,6 +781,7 @@
   parent: BaseStationEventShortDelay
   components:
   - type: StationEvent
+    playTTS: false # SS220-fix-double-announce-audio
   # SS220 MoreAnonces (sound and alert upgrades) bgn
     startAudio:
       path: /Audio/SS220/Announcements/greytide.ogg
@@ -765,10 +816,10 @@
 
 - type: entity
   parent: BaseGameRule
-  id: DerelictCyborgSpawn
+  id: DerelictEngineerCyborgSpawn
   components:
   - type: StationEvent
-    weight: 5
+    weight: 2.5
     earliestStart: 15
     reoccurrenceDelay: 20
     minimumPlayers: 4
@@ -776,10 +827,115 @@
   - type: SpaceSpawnRule
     spawnDistance: 0
   - type: AntagSpawner
-    prototype: PlayerBorgDerelict
+    prototype: PlayerEngineeringBorgDerelictGhostRole
+  - type: AntagSelection
+    definitions:
+    - spawnerPrototype: SpawnPointGhostDerelictEngineeringCyborg
+      min: 1
+      max: 1
+      pickPlayer: false
+
+- type: entity
+  parent: BaseGameRule
+  id: DerelictGenericCyborgSpawn
+  components:
+  - type: StationEvent
+    weight: 2.5
+    earliestStart: 15
+    reoccurrenceDelay: 20
+    minimumPlayers: 4
+    duration: null
+  - type: SpaceSpawnRule
+    spawnDistance: 0
+  - type: AntagSpawner
+    prototype: PlayerBorgDerelictGhostRole
   - type: AntagSelection
     definitions:
     - spawnerPrototype: SpawnPointGhostDerelictCyborg
+      min: 1
+      max: 1
+      pickPlayer: false
+
+- type: entity
+  parent: BaseGameRule
+  id: DerelictJanitorCyborgSpawn
+  components:
+  - type: StationEvent
+    weight: 2.5
+    earliestStart: 15
+    reoccurrenceDelay: 20
+    minimumPlayers: 4
+    duration: null
+  - type: SpaceSpawnRule
+    spawnDistance: 0
+  - type: AntagSpawner
+    prototype: PlayerJanitorBorgDerelictGhostRole
+  - type: AntagSelection
+    definitions:
+    - spawnerPrototype: SpawnPointGhostDerelictJanitorCyborg
+      min: 1
+      max: 1
+      pickPlayer: false
+
+- type: entity
+  parent: BaseGameRule
+  id: DerelictMedicalCyborgSpawn
+  components:
+  - type: StationEvent
+    weight: 2.5
+    earliestStart: 15
+    reoccurrenceDelay: 20
+    minimumPlayers: 4
+    duration: null
+  - type: SpaceSpawnRule
+    spawnDistance: 0
+  - type: AntagSpawner
+    prototype: PlayerMedicalBorgDerelictGhostRole
+  - type: AntagSelection
+    definitions:
+    - spawnerPrototype: SpawnPointGhostDerelictMedicalCyborg
+      min: 1
+      max: 1
+      pickPlayer: false
+
+- type: entity
+  parent: BaseGameRule
+  id: DerelictMiningCyborgSpawn
+  components:
+  - type: StationEvent
+    weight: 2.5
+    earliestStart: 15
+    reoccurrenceDelay: 20
+    minimumPlayers: 4
+    duration: null
+  - type: SpaceSpawnRule
+    spawnDistance: 0
+  - type: AntagSpawner
+    prototype: PlayerMiningBorgDerelictGhostRole
+  - type: AntagSelection
+    definitions:
+    - spawnerPrototype: SpawnPointGhostDerelictMiningCyborg
+      min: 1
+      max: 1
+      pickPlayer: false
+
+- type: entity
+  parent: BaseGameRule
+  id: DerelictSyndicateAssaultCyborgSpawn
+  components:
+  - type: StationEvent
+    weight: 2.5
+    earliestStart: 25
+    reoccurrenceDelay: 20
+    minimumPlayers: 15
+    duration: null
+  - type: SpaceSpawnRule
+    spawnDistance: 0
+  - type: AntagSpawner
+    prototype: PlayerBorgSyndicateDerelictGhostRole
+  - type: AntagSelection
+    definitions:
+    - spawnerPrototype: SpawnPointGhostDerelictSyndicateAssaultCyborg
       min: 1
       max: 1
       pickPlayer: false

@@ -75,7 +75,7 @@ public sealed class MimePowersSystem : EntitySystem
 
     private void OnMapInit(Entity<MimePowersComponent> ent, ref MapInitEvent args)
     {
-        _alertsSystem.ShowAlert(ent, ent.Comp.VowAlert);
+        _alertsSystem.ShowAlert(ent.Owner, ent.Comp.VowAlert);
         _actionsSystem.AddAction(ent, ref ent.Comp.InvisibleWallActionEntity, ent.Comp.InvisibleWallAction);
     }
     // SS220-fix-BorgChassisClownMime-end

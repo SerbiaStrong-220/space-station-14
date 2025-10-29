@@ -166,3 +166,5 @@ ent-ReagentGrinderIndustrialMachineCircuitboard = промышленный из�
 ent-CutterMachineCircuitboard = лазерный станок (машинная плата)
     .desc = { ent-BaseMachineCircuitboard.desc }
 #SS220 Loc-Change
+ent-SmartFridgeCircuitboard = умный холодильник (машинная плата)
+    .desc = Печатная плата для умного холодильника.

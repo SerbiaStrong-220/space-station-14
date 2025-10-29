@@ -1,5 +1,5 @@
 - type: entity
-  parent: [DrinkBottleVisualsAll, DrinkBottleGlassBaseFull]
+  parent: [DrinkBottleGlassBaseFull]
   id: DrinkVodkaKazakiBottleFull
   name: бутылка водки "Казаки"
   description: Невероятно мутная бутылка неизвестной марки. Сколько оно тут валялось?
@@ -22,7 +22,7 @@
   - type: Sealable
 
 - type: entity
-  parent: DrinkGlassBase
+  parent: DrinkGlass
   id: DrinkVodkaKazakiGlass
   name: cтакан водки "Казаки"
   description: На вид и запах как просроченная водка. Мутное...

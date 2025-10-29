@@ -11,7 +11,6 @@ using Robust.Shared.Audio.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
-using Robust.Shared.Utility;
 
 namespace Content.Client.SS220.TTS;
 
@@ -134,20 +133,10 @@ public sealed partial class TTSSystem
             if (queue.Count == 0)
                 queueUidsToRemove.Add(uid);
 
-            SoundPathSpecifier? soundPath = null;
-            AudioStream? audioStream = null;
-            (EntityUid Entity, AudioComponent Component)? stream = null;
-
+            AudioStream? audioStream;
+            (EntityUid Entity, AudioComponent Component)? stream;
             switch (request)
             {
-                case PlayRequestByPath requestByPath:
-                    soundPath = new SoundPathSpecifier(requestByPath.Path, requestByPath.Params);
-
-                    if (request.PlayGlobal)
-                        stream = _audio.PlayGlobal(soundPath, Filter.Local(), false);
-                    else
-                        stream = _audio.PlayEntity(soundPath, _fakeRecipient, uid);
-                    break;
                 case PlayRequestByAudioStream playRequestByAudio:
                     audioStream = playRequestByAudio.AudioStream;
 
@@ -156,6 +145,14 @@ public sealed partial class TTSSystem
                     else
                         stream = _audio.PlayEntity(audioStream, uid, null, request.Params);
                     break;
+
+                case PlayRequestBySoundSpecifier playRequestBySoundSpecifier:
+                    if (request.PlayGlobal)
+                        stream = _audio.PlayGlobal(playRequestBySoundSpecifier.Sound, Filter.Local(), false);
+                    else
+                        stream = _audio.PlayEntity(playRequestBySoundSpecifier.Sound, _fakeRecipient, uid);
+                    break;
+
                 default:
                     continue;
             }
@@ -195,9 +192,9 @@ public sealed partial class TTSSystem
         TryQueueRequest(entity, request);
     }
 
-    private void PlaySoundQueued(EntityUid entity, ResPath sound, AudioParams? audioParams = null, bool globally = false)
+    private void PlaySoundQueued(EntityUid entity, SoundSpecifier sound, bool globally = false)
     {
-        var request = new PlayRequestByPath(sound, audioParams, globally);
+        var request = new PlayRequestBySoundSpecifier(sound, globally);
         TryQueueRequest(entity, request);
     }
 
@@ -274,13 +271,13 @@ public sealed partial class TTSSystem
         }
     }
 
-    public sealed class PlayRequestByPath : PlayRequest
+    public sealed class PlayRequestBySoundSpecifier : PlayRequest
     {
-        public readonly ResPath Path;
+        public readonly SoundSpecifier Sound;
 
-        public PlayRequestByPath(ResPath path, AudioParams? audioParams = null, bool playGlobal = false) : base(audioParams, playGlobal)
+        public PlayRequestBySoundSpecifier(SoundSpecifier sound, bool playGlobal = false) : base(sound.Params, playGlobal)
         {
-            Path = path;
+            Sound = sound;
         }
     }
 }

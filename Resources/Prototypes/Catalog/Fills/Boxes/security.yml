@@ -160,3 +160,24 @@
       - state: box_security
       - state: recorder
 # SS220 Tape Recorder #32234 early merge end
+
+- type: entity
+  parent: BoxCardboard
+  id: BoxDetonator
+  name: detonator box
+  description: A box of explosive detonators and triggers.
+  components:
+  - type: Item
+    shape:
+    - 0,0,1,1
+  - type: StorageFill
+    contents:
+    - id: EmptyDetonator
+      amount: 3
+    - id: TimerTrigger
+      amount: 2
+    - id: VoiceTrigger
+  - type: Sprite
+    layers:
+    - state: box_security
+    - state: trigger

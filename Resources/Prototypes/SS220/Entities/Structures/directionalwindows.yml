@@ -9,6 +9,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: WallMount
     arc: 360 # interact despite grilles
   - type: Tag
@@ -114,6 +115,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: Sprite
     sprite: SS220/Structures/Windows/directionals/angular.rsi
     state: plasma_window
@@ -161,6 +163,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: Sprite
     sprite: SS220/Structures/Windows/directionals/angular.rsi
     state: reinforced_window
@@ -327,6 +330,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: Sprite
     sprite: SS220/Structures/Windows/directionals/angular.rsi
     state: uranium_window
@@ -374,6 +378,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: Sprite
     sprite: SS220/Structures/Windows/directionals/angular.rsi
     state: clock_window
@@ -422,6 +427,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: WallMount
     arc: 360 # interact despite grilles
   - type: Tag
@@ -537,6 +543,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: Sprite
     sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
     state: plasma_window
@@ -584,6 +591,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: Sprite
     sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
     state: reinforced_window
@@ -750,6 +758,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: Sprite
     sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
     state: uranium_window
@@ -797,6 +806,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: Sprite
     sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
     state: clock_window
@@ -845,6 +855,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: WallMount
     arc: 360 # interact despite grilles
   - type: Tag
@@ -950,6 +961,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: Sprite
     sprite: SS220/Structures/Windows/directionals/double.rsi
     state: plasma_window
@@ -1163,6 +1175,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: Sprite
     sprite: SS220/Structures/Windows/directionals/double.rsi
     state: uranium_window
@@ -1210,6 +1223,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: Sprite
     sprite: SS220/Structures/Windows/directionals/double.rsi
     state: clock_window
@@ -1383,6 +1397,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: Sprite
     sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
     state: plasma_window
@@ -1596,6 +1611,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: Sprite
     sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
     state: uranium_window
@@ -1643,6 +1659,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: Sprite
     sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
     state: clock_window

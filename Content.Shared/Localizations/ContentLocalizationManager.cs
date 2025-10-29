@@ -32,18 +32,23 @@ namespace Content.Shared.Localizations
             _loc.LoadCulture(culture);
             _loc.LoadCulture(fallbackCulture); // Corvax-Localization
             _loc.SetFallbackCluture(fallbackCulture); // Corvax-Localization
-            _loc.AddFunction(culture, "PRESSURE", FormatPressure);
-            _loc.AddFunction(culture, "POWERWATTS", FormatPowerWatts);
-            _loc.AddFunction(culture, "POWERJOULES", FormatPowerJoules);
-            // NOTE: ENERGYWATTHOURS() still takes a value in joules, but formats as watt-hours.
-            _loc.AddFunction(culture, "ENERGYWATTHOURS", FormatEnergyWattHours);
-            _loc.AddFunction(culture, "UNITS", FormatUnits);
-            _loc.AddFunction(culture, "TOSTRING", args => FormatToString(culture, args));
-            _loc.AddFunction(culture, "LOC", FormatLoc);
-            _loc.AddFunction(culture, "NATURALFIXED", FormatNaturalFixed);
-            _loc.AddFunction(culture, "NATURALPERCENT", FormatNaturalPercent);
-            _loc.AddFunction(culture, "PLAYTIME", FormatPlaytime);
-
+            // SS220-fix-loc-funcs-begin
+            var cultures = new List<CultureInfo>([culture, fallbackCulture]);
+            foreach (var tempCulture in cultures)
+            {
+                _loc.AddFunction(tempCulture, "PRESSURE", FormatPressure);
+                _loc.AddFunction(tempCulture, "POWERWATTS", FormatPowerWatts);
+                _loc.AddFunction(tempCulture, "POWERJOULES", FormatPowerJoules);
+                // NOTE: ENERGYWATTHOURS() still takes a value in joules, but formats as watt-hours.
+                _loc.AddFunction(tempCulture, "ENERGYWATTHOURS", FormatEnergyWattHours);
+                _loc.AddFunction(tempCulture, "UNITS", FormatUnits);
+                _loc.AddFunction(tempCulture, "TOSTRING", args => FormatToString(tempCulture, args));
+                _loc.AddFunction(tempCulture, "LOC", FormatLoc);
+                _loc.AddFunction(tempCulture, "NATURALFIXED", FormatNaturalFixed);
+                _loc.AddFunction(tempCulture, "NATURALPERCENT", FormatNaturalPercent);
+                _loc.AddFunction(tempCulture, "PLAYTIME", FormatPlaytime);
+            }
+            // SS220-fix-loc-funcs-end
 
             /*
              * The following language functions are specific to the english localization. When working on your own
@@ -182,7 +187,7 @@ namespace Content.Shared.Localizations
                 <= 0 => string.Empty,
                 1 => list[0],
                 2 => $"{list[0]} or {list[1]}",
-                _ => $"{string.Join(" or ", list)}"
+                _ => $"{string.Join(", ", list.GetRange(0, list.Count - 1))}, or {list[^1]}"
             };
         }
 

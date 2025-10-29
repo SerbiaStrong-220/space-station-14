@@ -10,21 +10,6 @@
   - CutterMachineCircuitboard
   - BorgChargerCircuitboard
 
-- type: latheRecipePack
-  id: CircuitFloorsStatic
-  recipes:
-  # SS220-sheetifier-rework-start
-  #- FloorGreenCircuit
-  #- FloorBlueCircuit
-  #- FloorRedCircuit
-  - TileGreenCircuit
-  - TileBlueCircuit
-  - TilePurpleCircuit
-  - TileYellowCircuit
-  - TileOrangeCircuit
-  - TileRedCircuit
-  #SS220-sheetifier-rework-end
-
 ## Dynamic
 
 - type: latheRecipePack
@@ -71,17 +56,6 @@
   - PKAUpgradeFireRate
   - WeaponTetherGun
   - WeaponGauntletGorilla
-
-- type: latheRecipePack
-  id: FauxTiles
-  recipes:
-  - FauxTileAstroGrass
-  - FauxTileMowedAstroGrass
-  - FauxTileJungleAstroGrass
-  - FauxTileAstroIce
-  - FauxTileAstroSnow
-  - FauxTileAstroAsteroidSand
-  - FauxTileAstroSand #SS220-beachCraftng
 
 # Only contains parts for making basic modular grenades, no actual explosives
 - type: latheRecipePack
