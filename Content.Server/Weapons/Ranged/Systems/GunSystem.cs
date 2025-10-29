@@ -1,6 +1,8 @@
 using System.Linq;
 using System.Numerics;
 using Content.Server.Cargo.Systems;
+using Content.Server.Mind;
+using Content.Server.SS220.RoundEndInfo;
 using Content.Server.Weapons.Ranged.Components;
 using Content.Shared.Cargo;
 using Content.Shared.Damage;
@@ -24,6 +26,7 @@ using Robust.Shared.Utility;
 using Robust.Shared.Containers;
 using Content.Shared.SS220.Weapons.Ranged.Events;
 using Content.Server.SS220.Shuttles.UI;
+using Content.Shared.SS220.RoundEndInfo;
 
 namespace Content.Server.Weapons.Ranged.Systems;
 
@@ -35,6 +38,10 @@ public sealed partial class GunSystem : SharedGunSystem
     [Dependency] private readonly SharedStaminaSystem _stamina = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
+    //ss220 add additional info for round start
+    [Dependency] private readonly IRoundEndInfoManager _infoManager = default!;
+    [Dependency] private readonly MindSystem _mind = default!;
+    //ss220 add additional info for round end
     [Dependency] private readonly ShuttleNavInfoSystem _shuttleNavInfo = default!; // SS220 Add projectiles & hitscan on shuttle nav
 
     private const float DamagePitchVariation = 0.05f;
@@ -295,6 +302,11 @@ public sealed partial class GunSystem : SharedGunSystem
         {
             FiredProjectiles = shotProjectiles,
         });
+
+        //ss220 add additional info for round start
+        if (user != null && _mind.TryGetMind(user.Value, out var mind, out _))
+            _infoManager.EnsureInfo<GunInfo>().Record(mind);
+        //ss220 add additional info for round end
 
         void CreateAndFireProjectiles(EntityUid ammoEnt, AmmoComponent ammoComp)
         {

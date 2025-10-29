@@ -8,11 +8,13 @@ using Content.Shared.Damage.Events;
 using Content.Shared.Database;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
+using Content.Shared.Mind; //ss220 add additional info for round
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Projectiles;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Rounding;
+using Content.Shared.SS220.RoundEndInfo; //ss220 add additional info for round
 using Content.Shared.SS220.StaminaConvertArmor;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
@@ -45,6 +47,11 @@ public abstract partial class SharedStaminaSystem : EntitySystem
     [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] protected readonly SharedStunSystem StunSystem = default!;
+
+    //ss220 add additional info for round start
+    [Dependency] private readonly IRoundEndInfoManager _infoManager = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
+    //ss220 add additional info for round end
 
     /// <summary>
     /// How much of a buffer is there between the stun duration and when stuns can be re-applied.
@@ -188,6 +195,11 @@ public abstract partial class SharedStaminaSystem : EntitySystem
         {
             TakeStaminaDamage(ent, damage / toHit.Count, comp, source: args.User, with: args.Weapon, sound: component.Sound, ignoreResist: component.IgnoreResistance /* SS220 Add ingnore resistance */);
         }
+
+        //ss220 add additional info for round start
+        if (_net.IsServer && _mind.TryGetMind(args.User, out var mind, out _))
+            _infoManager.EnsureInfo<StunBatonInfo>().Record(mind);
+        //ss220 add additional info for round end
     }
 
     private void OnProjectileHit(EntityUid uid, StaminaDamageOnCollideComponent component, ref ProjectileHitEvent args)

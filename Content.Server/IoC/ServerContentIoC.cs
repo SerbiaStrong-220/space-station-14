@@ -27,6 +27,7 @@ using Content.Server.ServerInfo;
 using Content.Server.ServerUpdates;
 using Content.Server.SS220.BackEndApi;
 using Content.Server.SS220.Discord;
+using Content.Server.SS220.RoundEndInfo;
 using Content.Server.Voting.Managers;
 using Content.Server.Worldgen.Tools;
 using Content.Shared.Administration.Logs;
@@ -35,6 +36,7 @@ using Content.Shared.Chat;
 using Content.Shared.Kitchen;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Players.RateLimiting;
+using Content.Shared.SS220.RoundEndInfo;
 
 namespace Content.Server.IoC
 {
@@ -75,6 +77,7 @@ namespace Content.Server.IoC
             IoCManager.Register<PoissonDiskSampler>();
             IoCManager.Register<DiscordPlayerManager>(); // SS220 discord player manager
             IoCManager.Register<DiscordBanPostManager>();  // SS220 discord ban post manager
+            IoCManager.Register<IRoundEndInfoManager, RoundEndInfoManager>(); //ss220 add additional info for round
             IoCManager.Register<ServerControlController>();
             IoCManager.Register<DiscordWebhook>();
             IoCManager.Register<VoteWebhooks>();
