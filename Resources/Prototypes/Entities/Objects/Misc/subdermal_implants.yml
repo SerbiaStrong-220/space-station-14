@@ -207,10 +207,11 @@
         - Hands # no use giving a mouse a storage implant, but a monkey is another story...
     - type: Storage
       grid:
-      - 0,0,0,1
-      - 1,0,1,0
-      - 1,2,1,2
-      - 2,1,2,2
+      - 0,0,3,2 # SS220 storageimplant rework start
+      maxItemSize: Large
+      blacklist:
+       tags:
+       - HighRiskItem # SS220 storageimplant rework end
     - type: ContainerContainer
       containers:
         storagebase: !type:Container

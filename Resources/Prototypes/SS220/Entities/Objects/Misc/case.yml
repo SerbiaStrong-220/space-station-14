@@ -72,6 +72,9 @@
         acts: [ "Destruction" ]
   - type: StaticPrice
     price: 200
+  - type: Tag
+    tags:
+    - HighRiskItem # no cheating the storageimplant system.
 
 - type: entity
   parent: GlassCaseEngravedKnuckleduster
