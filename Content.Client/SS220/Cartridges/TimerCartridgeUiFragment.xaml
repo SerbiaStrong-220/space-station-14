@@ -1,0 +1,30 @@
+<cartridges:TimerCartridgeUiFragment xmlns:cartridges="clr-namespace:Content.Client.SS220.Cartridges"
+                               xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                               xmlns="https://spacestation14.io" Margin="1 0 2 0"
+                               VerticalExpand="True">
+    <PanelContainer StyleClasses="BackgroundDark">
+        <!-- TODO: Giant NT logo on background -->
+    </PanelContainer>
+    <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+        <Control SetHeight="35" />
+        <BoxContainer Orientation="Vertical" HorizontalAlignment="Center" HorizontalExpand="True">
+            <RichTextLabel Name="CurrentTime" Text="NA:NA" HorizontalAlignment="Center" />
+            <RichTextLabel Name="CurrentDate" Text="Unknown date" HorizontalAlignment="Center" />
+            <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center">
+                <RichTextLabel Text="{Loc 'timer-cartridge-ui-shift-length-label'}" />
+                <RichTextLabel Name="ShiftLength" Text="Unknown" />
+            </BoxContainer>
+        </BoxContainer>
+        <Control SetHeight="35" />
+        <BoxContainer Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalExpand="True">
+            <RichTextLabel Text="{Loc 'timer-cartridge-ui-settings-label'}" />
+            <BoxContainer Name="TimerBox">
+                <!-- Filled by .xaml.cs -->
+            </BoxContainer>
+            <Button Name="ToggleTimer" Text="{Loc 'timer-cartridge-ui-toggle-timer-button'}" HorizontalExpand="true" />
+        </BoxContainer>
+        <BoxContainer HorizontalExpand="True" VerticalExpand="True" VerticalAlignment="Bottom">
+            <CheckBox Name="NotificationCheck" Text="{Loc 'timer-cartridge-ui-notification-checkbox'}" />
+        </BoxContainer>
+    </BoxContainer>
+</cartridges:TimerCartridgeUiFragment>
