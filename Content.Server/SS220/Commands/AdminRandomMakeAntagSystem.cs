@@ -4,7 +4,6 @@ using Content.Server.Administration;
 using Content.Server.Administration.Managers;
 using Content.Server.Antag;
 using Content.Server.Antag.Components;
-using Content.Server.Database;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Preferences.Managers;
