@@ -1,0 +1,35 @@
+#WIZARD
+- type: storeCategory
+  id: SpellbookDestruction
+  name: store-caregory-spellbook-destruction
+  priority: 0
+
+- type: storeCategory
+  id: SpellbookSpace
+  name: store-caregory-spellbook-space
+  priority: 1
+
+- type: storeCategory
+  id: SpellbookSupport
+  name: store-caregory-spellbook-support
+  priority: 2
+
+- type: storeCategory
+  id: SpellbookEquipment
+  name: store-caregory-spellbook-equipment
+  priority: 3
+
+- type: storeCategory
+  id: SpellbookPolymorph
+  name: store-caregory-spellbook-polymorph
+  priority: 4
+
+- type: storeCategory
+  id: SpellbookSummon
+  name: store-caregory-spellbook-summon
+  priority: 5
+
+- type: storeCategory
+  id: SpellbookVoid
+  name: store-caregory-spellbook-void
+  priority: 6

@@ -1,0 +1,26 @@
+- type: entity
+  parent: BaseAction
+  id: ActionMutation
+  name: Mutation
+  description: ###
+  components:
+  - type: Action
+    useDelay: 0
+    itemIconStyle: BigAction
+    icon: { sprite: SS220/Interface/Actions/Antags/wizard-spell.rsi, state: mutation}
+  - type: InstantAction
+    event: !type:PolymorphActionEvent
+      protoId: Mutant
+
+- type: polymorph
+  id: Mutant
+  configuration:
+    entity: MobMutant
+    forced: true
+    inventory: Drop
+    transferName: true
+    transferDamage: true
+    revertOnCrit: false
+    revertOnDeath: false
+    # polymorphSound: !type:SoundPathSpecifier
+    #   path: /Audio/Magic/forcewall.ogg

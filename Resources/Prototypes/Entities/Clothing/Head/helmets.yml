@@ -256,9 +256,9 @@
   description: Strange-looking helmet that most certainly belongs to a real magic user.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Helmets/wizardhelm.rsi
+    sprite: SS220/Clothing/Head/Helmets/wizardhelm.rsi #SS220 Wizard Update
   - type: Clothing
-    sprite: Clothing/Head/Helmets/wizardhelm.rsi
+    sprite: SS220/Clothing/Head/Helmets/wizardhelm.rsi #SS220 Wizard Update
   - type: IngestionBlocker
   - type: IdentityBlocker
   - type: HideLayerClothing

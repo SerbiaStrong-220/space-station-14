@@ -21,6 +21,27 @@
     },
     {
       "name": "nanotrasendiplomat"
+    },
+    {
+      "name": "wizard-apprentice"
+    },
+    {
+      "name": "wizard-apprentice-destruction"
+    },
+    {
+      "name": "wizard-apprentice-fire"
+    },
+    {
+      "name": "wizard-apprentice-keeper"
+    },
+    {
+      "name": "wizard-apprentice-restoration"
+    },
+    {
+      "name": "wizard-apprentice-stealth"
+    },
+    {
+      "name": "wizard-apprentice-translocation"
     }
   ]
 }
