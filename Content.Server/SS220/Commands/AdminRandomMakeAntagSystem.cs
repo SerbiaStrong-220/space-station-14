@@ -31,7 +31,7 @@ public sealed class MakeAntagCommand : IConsoleCommand
     public string Description => Loc.GetString("command-makerandomantag-description");
     public string Help => $"Usage: {Command}";
 
-    private readonly List<string> _antagTypes = new()
+    private readonly List<string> _antagTypes = new() // TODO: When will add a cult add a cultist there
     {
         "Traitor",
         "Thief",
