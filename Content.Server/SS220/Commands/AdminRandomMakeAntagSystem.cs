@@ -90,7 +90,7 @@ public sealed class MakeAntagCommand : IConsoleCommand
             if (role.MindIsAntagonist(mindId))//no double antaging
                 continue;
 
-            if (_entityManager.HasComponent<HumanoidAppearanceComponent>(player.AttachedEntity))//shouldn't be borg or cow
+            if (!_entityManager.HasComponent<HumanoidAppearanceComponent>(player.AttachedEntity))//shouldn't be borg or cow
                 continue;
 
             if (_entityManager.HasComponent<GhostComponent>(player.AttachedEntity))//ghost cant be antag
