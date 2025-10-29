@@ -1,0 +1,22 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: LockdownDebugItem
+  parent: BaseItem
+  name: Lockdown[DEBUG]
+  components:
+  - type: Sprite
+    sprite: Objects/Fun/Plushies/lizard.rsi
+    state: icon
+  - type: Item
+    size: Small
+  - type: EmergencyShuttleLockdown
+    warningMessage: debug-shuttle-lockdown-warning
+    isInHandActive: true
+    isOnlyInStationActive: true
+    isDisplayLocation: true
+    isDisplayCoordinates: true
+    announceColor: "#FFAE00FF"
+    announceTitle: debug-shuttle-lockdown-header
+    onActiveMessage: debug-shuttle-lockdown-on-announce
+    onDeactiveMessage: debug-shuttle-lockdown-off-announce
