@@ -104,6 +104,9 @@ public sealed class MakeAntagCommand : IConsoleCommand
                 case "InitialInfected":
                     antag.ForceMakeAntag<ZombieRuleComponent>(player, defaultRule);
                     break;
+                case "CultistOfYoggSothoth":
+                    antag.ForceMakeAntag<CultYoggRuleComponent>(player, defaultRule);
+                    break;
             }
             if (roleSystem.MindIsAntagonist(mindId)) // If he sucessfuly passed all checks and get his antag?
                 return player.AttachedEntity;
