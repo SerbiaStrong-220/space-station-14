@@ -12,6 +12,7 @@ using Content.Server.SS220.GameTicking.Rules.Components;
 using Content.Shared.Administration;
 using Content.Shared.GameTicking;
 using Content.Shared.Ghost;
+using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mind;
 using Content.Shared.Mindshield.Components;
@@ -87,6 +88,9 @@ public sealed class MakeAntagCommand : IConsoleCommand
                 continue;
 
             if (role.MindIsAntagonist(mindId))//no double antaging
+                continue;
+
+            if (_entityManager.HasComponent<HumanoidAppearanceComponent>(player.AttachedEntity))//shouldn't be borg or cow
                 continue;
 
             if (_entityManager.HasComponent<GhostComponent>(player.AttachedEntity))//ghost cant be antag
