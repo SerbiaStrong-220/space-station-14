@@ -24,6 +24,7 @@
     - id: SpiderClownSpawn
     - id: SpiderSpawn
     - id: VentClog
+    - id: RandomMindShieldCombustion #SS220 CombustedMindShieldEvent #3500
 
 - type: entityTable
   id: BasicAntagEventsTable
