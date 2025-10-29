@@ -1443,6 +1443,6 @@
   description: Makes you remember the time you did something funny.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/familiar_garbs.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/familiar_garbs.rsi # SS220 Minor Clothing Resprite
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/familiar_garbs.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/familiar_garbs.rsi # SS220 Minor Clothing Resprite
