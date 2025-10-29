@@ -381,4 +381,25 @@
     prototypeId: HandheldGPSBasic
   result: CultPinpointer
   corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: PinpointerBase
+  from:
+    parentPrototypeId: PinpointerBase
+  result: CultPinpointer
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: AnomalyLocatorUnpowered
+  from:
+    prototypeId: AnomalyLocatorUnpowered
+  result: CultPinpointer
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: AnomalyLocatorUnpoweredParent
+  from:
+    parentPrototypeId: AnomalyLocatorUnpowered
+  result: CultPinpointer
+  corruptionReverseEffect: ExorcismUncorruptEffect
 # Pinpointer end

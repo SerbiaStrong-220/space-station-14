@@ -111,7 +111,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    useDelay: 15
+    useDelay: 30
     itemIconStyle: NoItem
     icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: migoastral}
   - type: InstantAction
