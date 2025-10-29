@@ -115,7 +115,8 @@
         - id: PinpointerNuclearBomb
         - id: EmergencyMedipenDQ
           amount: 2
-
+        - id: StimpackDQ
+        
 - type: entity
   parent: ClothingBackpackERTSecurity
   id: ClothingBackpackDeathSquadSpecialistFilled
@@ -140,6 +141,7 @@
         - id: PinpointerNuclearBomb
         - id: EmergencyMedipenDQ
           amount: 6
+        - id: StimpackDQ
 
 - type: entity
   parent: ClothingBackpackBlueShieldHight
