@@ -36,7 +36,6 @@ public sealed class MakeAntagCommand : IConsoleCommand
         "Traitor",
         "Thief",
         "InitialInfected",
-        "CultistOfYoggSothoth"
     };
 
     public void Execute(IConsoleShell shell, string argStr, string[] args)
@@ -103,9 +102,6 @@ public sealed class MakeAntagCommand : IConsoleCommand
                     break;
                 case "InitialInfected":
                     antag.ForceMakeAntag<ZombieRuleComponent>(player, defaultRule);
-                    break;
-                case "CultistOfYoggSothoth":
-                    antag.ForceMakeAntag<CultYoggRuleComponent>(player, defaultRule);
                     break;
             }
             if (roleSystem.MindIsAntagonist(mindId)) // If he sucessfuly passed all checks and get his antag?
