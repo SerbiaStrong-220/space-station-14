@@ -48,6 +48,7 @@ using Content.Shared.SS220.Vehicle.Components;
 using Content.Shared.Damage;
 using Content.Shared.SS220.Language.Components;
 using Content.Server.SS220.Language;
+using Content.Shared.SS220.Language.Systems;
 
 namespace Content.Server.EntityEffects;
 
@@ -777,7 +778,7 @@ public sealed partial class EntityEffectSystem : EntitySystem // SS220-add-parti
 
         // SS220-Add-Languages begin
         var languageComp = EnsureComp<LanguageComponent>(uid);
-        var languageDef = _language.EnsureLanguage((uid, languageComp), _language.GalacticLanguage);
+        var languageDef = _language.EnsureLanguage((uid, languageComp), SharedLanguageSystem.GalacticLanguage);
         languageDef.CanSpeak = true;
         Dirty(uid, languageComp);
         // SS220-Add-Languages end

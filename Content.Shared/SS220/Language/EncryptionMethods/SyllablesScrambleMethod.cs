@@ -4,6 +4,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Content.Shared.Random.Helpers;
 using Content.Shared.SS220.Language.Systems;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Shared.SS220.Language.EncryptionMethods;
@@ -39,6 +40,9 @@ public sealed partial class SyllablesScrambleMethod : ScrambleMethod
     [DataField]
     public List<SyllablesSpecialCharacter> SpecialCharacters = new();
 
+    [DataField]
+    public string? ReplaceDictonary = null;
+
     private int _inputSeed;
     private bool _capitalize = false;
 
@@ -48,12 +52,14 @@ public sealed partial class SyllablesScrambleMethod : ScrambleMethod
             Syllables.Count == 0)
             return message;
 
-        var wordRegex = @"\S+";
+        var wordRegex = @"\w+";
         var matches = Regex.Matches(message, wordRegex);
         if (matches.Count <= 0)
             return message;
 
         var random = IoCManager.Resolve<IRobustRandom>();
+        var prototypeManager = IoCManager.Resolve<IPrototypeManager>();
+        var locManager = IoCManager.Resolve<ILocalizationManager>();
         _inputSeed = seed ?? random.Next();
         _capitalize = char.IsUpper(message[0]);
 
@@ -61,6 +67,11 @@ public sealed partial class SyllablesScrambleMethod : ScrambleMethod
         foreach (Match m in matches)
         {
             var word = m.Value.ToLower();
+            if (TryReplaceWord(word, prototypeManager, locManager, out var replaced))
+            {
+                result.Append(replaced);
+                continue;
+            }
             seed = _inputSeed + SharedLanguageSystem.GetSeedFromString(word);
             var scrambledWord = ScrambleWord(m.Value, seed.Value);
             result.Append(scrambledWord);
@@ -71,6 +82,38 @@ public sealed partial class SyllablesScrambleMethod : ScrambleMethod
 
         _capitalize = false;
         return result.ToString().Trim();
+    }
+
+    private bool TryReplaceWord(string word, IPrototypeManager prototypeManager, ILocalizationManager locManager, out string replaced)
+    {
+        replaced = "";
+
+        if (ReplaceDictonary == null || !prototypeManager.TryIndex<LanguageReplacementsPrototype>(ReplaceDictonary, out var prototype))
+            return false;
+
+        foreach (var (first, replace) in prototype.Replacements)
+        {
+            if (word.ToLower() == locManager.GetString(first))
+            {
+                var wordToReplace = locManager.GetString(replace);
+                if (_capitalize)
+                {
+                    _capitalize = false;
+                    wordToReplace = string.Concat(wordToReplace.Substring(0, 1).ToUpper(), wordToReplace.AsSpan(1));
+                    replaced += wordToReplace + " ";
+                }
+                else
+                {
+                    replaced += wordToReplace + " ";
+                }
+                break;
+            }
+        }
+
+        if (replaced.Length > 0)
+            return true;
+
+        return false;
     }
 
     private string ScrambleWord(string word, int seed)

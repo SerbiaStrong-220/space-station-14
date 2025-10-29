@@ -143,7 +143,7 @@ public abstract partial class SharedLanguageSystem
 
             if (buffer.Item2 == language)
             {
-                buffer.Item1 += messageWithoutTags;
+                buffer.Item1 += ' ' + messageWithoutTags;
                 continue;
             }
 
@@ -157,7 +157,7 @@ public abstract partial class SharedLanguageSystem
 
         if (buffer.Item2 != null)
         {
-            list.Add((buffer.Item1, buffer.Item2));
+            list.Add((buffer.Item1.TrimStart(), buffer.Item2));
         }
 
         list = [.. list.Select(x => (x.Item1.Trim(), x.Item2))]; // trim strings
@@ -291,12 +291,12 @@ public sealed partial class LanguageMessage
     }
 
     /// <summary>
-    /// Changes the message value of each <see cref="Nodes"/> by function
+    /// Changes each node from <see cref="Nodes"/> by action
     /// </summary>
-    public void ChangeInNodeMessage(Func<string, string> func)
+    public void ChangeNodes(Action<LanguageNode> action)
     {
         foreach (var node in Nodes)
-            node.SetMessage(func.Invoke(node.Message));
+            action.Invoke(node);
     }
 }
 
