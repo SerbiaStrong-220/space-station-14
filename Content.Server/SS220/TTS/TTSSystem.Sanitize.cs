@@ -300,6 +300,7 @@ public sealed partial class TTSSystem
             {"él", "Эль"},
             {"ella", "Элья"},
             {"ello", "Эльо"},
+            {"débil", "Дэбиль"},
             {"nosotros", "Носотрос"},
             {"ustedes", "Устедес"},
             {"ellos", "Эльос"},
@@ -358,7 +359,7 @@ public sealed partial class TTSSystem
             {"mami", "Мами"},
             {"hijito", "Ихито"},
             {"hijita", "Ихита"},
-            {"chamba", "Чамба"},
+            {"tío", "Тио"},
             {"dinero", "Динеро"},
             {"cuate", "Куате"},
             {"chica", "Чика"},
@@ -384,7 +385,7 @@ public sealed partial class TTSSystem
             {"en fin", "Эн Фин"},
             {"directamente", "Директаменте"},
             {"como si", "Комо Си"},
-            {"aquí", "Аки"},
+            {"aire, аирэ"},
             {"allí", "Айи"},
             {"dónde", "Донде"},
             {"cuándo", "Куандо"},
@@ -415,6 +416,9 @@ public sealed partial class TTSSystem
             {"a dónde", "а донде"},
             {"de dónde", "де донде"},
             {"cómo", "комо"},
+            {"caliente", "кальенте"},
+            {"huevo", "уэво"},
+            {"huesos", "уэсос"},
             // ss220 fix spanish end
 
         };

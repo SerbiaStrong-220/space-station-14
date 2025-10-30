@@ -4,6 +4,7 @@ accent-spanish-words-1-3 = угу
 accent-spanish-words-replace-1 = sí
 
 accent-spanish-words-2 = нет
+accent-spanish-words-2-2 = неа
 accent-spanish-words-replace-2 = no
 
 accent-spanish-words-3 = мой
@@ -124,7 +125,6 @@ accent-spanish-words-32-2 = огонь
 accent-spanish-words-replace-32 = fuego
 
 accent-spanish-words-33 = атмосфера
-accent-spanish-words-33-2 = воздух
 accent-spanish-words-replace-33 = atmósfera
 
 accent-spanish-words-34 = гравитация
@@ -180,7 +180,6 @@ accent-spanish-words-46-2 = воздухообмен
 accent-spanish-words-replace-46 = ventilación
 
 accent-spanish-words-47 = кислород
-accent-spanish-words-47-2 = воздух
 accent-spanish-words-replace-47 = oxígeno
 
 accent-spanish-words-48 = давление
@@ -188,7 +187,6 @@ accent-spanish-words-48-2 = напор
 accent-spanish-words-replace-48 = presión
 
 accent-spanish-words-49 = температура
-accent-spanish-words-49-2 = жар
 accent-spanish-words-replace-49 = temperatura
 
 accent-spanish-words-50 = стабилизатор
@@ -372,7 +370,7 @@ accent-spanish-words-94 = отстой
 accent-spanish-words-replace-94 = apesta
 
 accent-spanish-words-95 = жарко
-accent-spanish-words-95-2 = горячо
+accent-spanish-words-95-2 = жар
 accent-spanish-words-replace-95 = calor
 
 accent-spanish-words-96 = холодно
@@ -448,8 +446,9 @@ accent-spanish-words-replace-113 = él
 accent-spanish-words-114 = она
 accent-spanish-words-replace-114 = ella
 
-accent-spanish-words-115 = оно
-accent-spanish-words-replace-115 = ello
+accent-spanish-words-115 = слабый
+accent-spanish-words-115-2 = слабак
+accent-spanish-words-replace-115 = débil
 
 accent-spanish-words-116 = мы
 accent-spanish-words-replace-116 = nosotros
@@ -791,8 +790,8 @@ accent-spanish-words-replace-201 = directamente
 accent-spanish-words-202 = как бы
 accent-spanish-words-replace-202 = como si
 
-accent-spanish-words-203 = вот
-accent-spanish-words-replace-203 = aquí
+accent-spanish-words-203 = воздух
+accent-spanish-words-replace-203 = aire
 
 accent-spanish-words-204 = там
 accent-spanish-words-replace-204 = allí
@@ -886,5 +885,12 @@ accent-spanish-words-replace-232 = de dónde
 accent-spanish-words-233 = как
 accent-spanish-words-replace-233 = cómo
 
+accent-spanish-words-234 = горячий
+accent-spanish-words-234-2 = горячо
+accent-spanish-words-replace-234 = caliente
 
+accent-spanish-words-235 = яйцо
+accent-spanish-words-replace-235 = huevo
+accent-spanish-words-236 = кости
+accent-spanish-words-replace-236 = huesos
 
