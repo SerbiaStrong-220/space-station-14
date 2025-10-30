@@ -411,11 +411,11 @@ accent-spanish-words-replace-104 = seguro
 
 accent-spanish-words-105 = тихо
 accent-spanish-words-105-2 = безшумно
-accent-spanish-words-replace-105 = silencio
+accent-spanish-words-replace-105 = silenciosamente
 
 accent-spanish-words-106 = громко
 accent-spanish-words-106-2 = шумно
-accent-spanish-words-replace-106 = ruidoso
+accent-spanish-words-replace-106 = ruidosamente
 
 accent-spanish-words-107 = темно
 accent-spanish-words-107-2 = мрачно
@@ -687,7 +687,7 @@ accent-spanish-words-replace-174 = hijita
 
 accent-spanish-words-175 = чувак
 accent-spanish-words-175-2 = братан
-accent-spanish-words-replace-175 = chamba
+accent-spanish-words-replace-175 = tío
 
 accent-spanish-words-176 = деньги
 accent-spanish-words-176-2 = бабки
@@ -711,15 +711,15 @@ accent-spanish-words-replace-180 = chico
 
 accent-spanish-words-181 = ребята
 accent-spanish-words-181-2 = народ
-accent-spanish-words-replace-181 = güey
+accent-spanish-words-replace-181 = gente
 
 accent-spanish-words-182 = проблемка
-accent-spanish-words-182-2 = засада
-accent-spanish-words-replace-182 = bronca
+accent-spanish-words-182-2 = проблема
+accent-spanish-words-replace-182 = problemita
 
 accent-spanish-words-183 = скучно
 accent-spanish-words-183-2 = тоска
-accent-spanish-words-replace-183 = güeva
+accent-spanish-words-replace-183 = aburrido
 
 accent-spanish-words-184 = ленивый
 accent-spanish-words-184-2 = бездельник
@@ -731,11 +731,11 @@ accent-spanish-words-replace-185 = peda
 
 accent-spanish-words-186 = пьяный
 accent-spanish-words-186-2 = напившийся
-accent-spanish-words-replace-186 = pedo
+accent-spanish-words-replace-186 = borracho
 
 accent-spanish-words-187 = красивый
 accent-spanish-words-187-2 = симпатичный
-accent-spanish-words-replace-187 = chido
+accent-spanish-words-replace-187 = guapo
 
 accent-spanish-words-188 = урод
 accent-spanish-words-188-2 = страшный
@@ -747,7 +747,7 @@ accent-spanish-words-replace-189 = chingo
 
 accent-spanish-words-190 = мало
 accent-spanish-words-190-2 = немного
-accent-spanish-words-replace-190 = poquito
+accent-spanish-words-replace-190 = poco
 
 accent-spanish-words-191 = медленно
 accent-spanish-words-191-2 = неспешно
