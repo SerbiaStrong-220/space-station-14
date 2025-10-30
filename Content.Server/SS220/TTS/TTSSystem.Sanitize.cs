@@ -385,7 +385,7 @@ public sealed partial class TTSSystem
             {"en fin", "Эн Фин"},
             {"directamente", "Директаменте"},
             {"como si", "Комо Си"},
-            {"aire, аирэ"},
+            {"aire", "аирэ"},
             {"allí", "Айи"},
             {"dónde", "Донде"},
             {"cuándo", "Куандо"},
