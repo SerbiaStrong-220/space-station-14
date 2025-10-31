@@ -9,7 +9,7 @@ namespace Content.Client.SS220.Cooking.Grilling;
 /// <summary>
 /// This handles all grill related visuals
 /// </summary>
-public sealed class GrillSystem : SharedGrillSystem
+public sealed class GrillSystem : EntitySystem
 {
     [Dependency] private readonly SpriteSystem _spriteSystem = default!;
 
