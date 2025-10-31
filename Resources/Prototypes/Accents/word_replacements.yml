@@ -276,10 +276,10 @@
     accent-pirate-replaced-6: accent-pirate-replacement-6
     accent-pirate-replaced-7: accent-pirate-replacement-7
     accent-pirate-replaced-8: accent-pirate-replacement-8
-    accent-pirate-replaced-9: accent-pirate-replacement-9
-    accent-pirate-replaced-10: accent-pirate-replacement-10
-    accent-pirate-replaced-11: accent-pirate-replacement-11
-    accent-pirate-replaced-12: accent-pirate-replacement-12
+    # accent-pirate-replaced-9: accent-pirate-replacement-9 #SS220 BugFixs Begin
+    # accent-pirate-replaced-10: accent-pirate-replacement-10
+    # accent-pirate-replaced-11: accent-pirate-replacement-11
+    # accent-pirate-replaced-12: accent-pirate-replacement-12 #SS220 BugFixs End
     accent-pirate-replaced-13: accent-pirate-replacement-13
     accent-pirate-replaced-14: accent-pirate-replacement-14
     accent-pirate-replaced-15: accent-pirate-replacement-15
