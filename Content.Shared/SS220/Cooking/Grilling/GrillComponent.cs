@@ -9,7 +9,7 @@ namespace Content.Shared.SS220.Cooking.Grilling;
 /// <summary>
 /// This is used for grills
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
+[RegisterComponent, AutoGenerateComponentState]
 public sealed partial class GrillComponent : Component
 {
     /// <summary>
@@ -24,12 +24,11 @@ public sealed partial class GrillComponent : Component
 
     // Grill cooking speed modifier
     [DataField]
-    public float CookingMultiplier = 0;
+    public float CookingMultiplier;
 
     [ViewVariables, AutoNetworkedField]
     public bool IsGrillOn;
 
     // To keep track of the grilling sound
-    [AutoNetworkedField, NonSerialized]
     public EntityUid? GrillingAudioStream;
 }
