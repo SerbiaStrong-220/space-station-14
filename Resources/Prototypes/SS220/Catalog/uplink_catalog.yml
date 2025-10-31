@@ -273,7 +273,7 @@
   id: UplinkOuterElectrification
   name: uplink-outer-electrification-name
   description: uplink-outer-electrification-desc
-  icon: {sprite: Clothing/OuterClothing/Armor/security.rsi, state: icon}
+  icon: {sprite: SS220/Clothing/OuterClothing/Armor/security.rsi, state: icon}  #SS220 BugFix
   productEntity: ClothingOuterArmorElectricity
   cost:
     Telecrystal: 5
