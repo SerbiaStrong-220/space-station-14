@@ -106,6 +106,7 @@
     startAnnouncementColor: "#18abf5"
     weight: 8
     duration: 35
+    playTTS: false # SS220-fix-double-announce-audio
     startAudio: # Corvax-Announcements
       path: /Audio/Corvax/Announcements/flux.ogg
       params:
@@ -124,6 +125,7 @@
     startAnnouncementColor: "#18abf5"
     weight: 8
     duration: 35
+    playTTS: false # SS220-fix-double-announce-audio
     startAudio: # Corvax-Announcements
       path: /Audio/Corvax/Announcements/blusp_anomalies.ogg
       params:
@@ -417,6 +419,7 @@
   parent: BaseStationEventShortDelay
   components:
   - type: StationEvent
+    playTTS: false # SS220-fix-double-announce-audio
     startAnnouncement: station-event-gas-leak-start-announcement
     startAudio:
       path: /Audio/Announcements/gasleak_start.ogg # Corvax-Announcements
@@ -451,6 +454,7 @@
     weight: 5
     startAnnouncement: station-event-power-grid-check-start-announcement
     endAnnouncement: station-event-power-grid-check-end-announcement
+    playTTS: false # SS220-fix-double-announce-audio
     startAudio:
       path: /Audio/Announcements/power_off.ogg
       params:
@@ -467,6 +471,7 @@
     weight: 8
     startAnnouncement: station-event-solar-flare-start-announcement
     endAnnouncement: station-event-solar-flare-end-announcement
+    playTTS: false # SS220-fix-double-announce-audio
     startAudio: # Corvax-Announcements
       path: /Audio/Corvax/Announcements/comms_blackout.ogg
       params:
@@ -495,6 +500,7 @@
   components:
   - type: StationEvent
     startAnnouncement: station-event-vent-clog-start-announcement
+    playTTS: false # SS220-fix-double-announce-audio
     startAudio:
       path: /Audio/Announcements/ventclog.ogg # Corvax-Announcements
       params:
