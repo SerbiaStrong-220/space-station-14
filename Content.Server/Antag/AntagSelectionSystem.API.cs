@@ -8,10 +8,12 @@ using Content.Shared.Chat;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Mind;
 using Content.Shared.Preferences;
+using Content.Shared.Roles;
 using JetBrains.Annotations;
 using Robust.Shared.Audio;
 using Robust.Shared.Enums;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Antag;
 
@@ -416,4 +418,54 @@ public sealed partial class AntagSelectionSystem
 
         return result;
     }
+
+    // SS220 DynamicTraitor begin
+
+    public void SetAntagLimit(AntagSelectionComponent comp, string roleId, int? newMin = null, int? newMax = null)
+    {
+        for (var i = 0; i < comp.Definitions.Count; i++)
+        {
+            var def = comp.Definitions[i];
+
+            var hasRole = def.PrefRoles.Contains(roleId);
+
+            if (!hasRole)
+                continue;
+
+            if (newMin.HasValue)
+                def.Min = newMin.Value;
+
+            if (newMax.HasValue)
+                def.Max = newMax.Value;
+
+            comp.Definitions[i] = def;
+            return;
+        }
+    }
+
+    public void SetAntagLimit(Entity<AntagSelectionComponent?> ent, string roleId, int? newMin = null, int? newMax = null)
+    {
+        if (!Resolve(ent, ref ent.Comp, false))
+                return;
+
+        for (var i = 0; i < ent.Comp.Definitions.Count; i++)
+        {
+            var def = ent.Comp.Definitions[i];
+
+            var hasRole = def.PrefRoles.Contains(roleId);
+
+            if (!hasRole)
+                continue;
+
+            if (newMin.HasValue)
+                def.Min = newMin.Value;
+
+            if (newMax.HasValue)
+                def.Max = newMax.Value;
+
+            ent.Comp.Definitions[i] = def;
+            return;
+        }
+    }
+    // SS220 DynamicTraitor end
 }
