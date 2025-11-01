@@ -1,5 +1,6 @@
 ﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Atmos.Rotting;
 using Content.Shared.Examine;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -22,6 +23,13 @@ public sealed class GrillableSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<GrillableComponent, CookTimeChanged>(OnCookTimeChanged);
         SubscribeLocalEvent<GrillableComponent, ExaminedEvent>(OnGrillableExamined);
+        SubscribeLocalEvent<GrillableComponent, IsRottingEvent>(OnGrillableRotting);
+    }
+
+    // Stop rotting, if food is cooking
+    private void OnGrillableRotting(Entity<GrillableComponent> ent, ref IsRottingEvent args)
+    {
+        args.Handled = ent.Comp.IsCooking;
     }
 
     private void OnGrillableExamined(Entity<GrillableComponent> ent, ref ExaminedEvent args)

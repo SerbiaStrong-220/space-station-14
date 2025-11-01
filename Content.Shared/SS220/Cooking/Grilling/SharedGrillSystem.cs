@@ -52,6 +52,9 @@ public abstract class SharedGrillSystem : EntitySystem
     {
         RemComp<GrillingVisualComponent>(args.OtherEntity);
 
+        if (TryComp<GrillableComponent>(args.OtherEntity, out var grillable))
+            grillable.IsCooking = false;
+
         UpdateGrillVisuals(ent);
     }
 
@@ -71,19 +74,22 @@ public abstract class SharedGrillSystem : EntitySystem
         {
             foreach (var item in placer.PlacedEntities)
             {
-                if (HasComp<GrillableComponent>(item))
+                if (TryComp<GrillableComponent>(item, out var grillable))
                 {
                     if (grill.Comp.IsGrillOn)
                     {
                         playAudio = true;
                         var grillVisuals = EnsureComp<GrillingVisualComponent>(item);
                         grillVisuals.GrillingSprite = grill.Comp.GrillingSprite;
-                        Dirty(item, grillVisuals);
+                        grillable.IsCooking = true;
                     }
                     else
                     {
                         RemComp<GrillingVisualComponent>(item);
+                        grillable.IsCooking = false;
                     }
+
+                    Dirty(item, grillable);
                 }
             }
         }

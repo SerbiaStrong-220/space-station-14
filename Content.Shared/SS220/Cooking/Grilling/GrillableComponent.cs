@@ -20,6 +20,9 @@ public sealed partial class GrillableComponent : Component
     [ViewVariables, AutoNetworkedField]
     public float CurrentCookTime { get; set; }
 
+    [ViewVariables, AutoNetworkedField]
+    public bool IsCooking { get; set; }
+
     [ViewVariables]
     public SoundSpecifier CookingDoneSound = new SoundPathSpecifier("/Audio/Effects/sizzle.ogg");
 }
