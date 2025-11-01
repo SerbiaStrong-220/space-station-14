@@ -613,6 +613,9 @@
   name: коробка конфет
   description: Содержит в себе десяток конфет. Осторожно! Набор предметов не поместится в ваших руках!
   components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/Candy/box.rsi
+    state: icon
   - type: StorageFill
     contents:
     - id: SponsorFoodPackage
