@@ -86,9 +86,9 @@
   suffix: Electrification armor
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Armor/security.rsi
+    sprite: SS220/Clothing/OuterClothing/Armor/security.rsi #SS220 BugFix
   - type: Clothing
-    sprite: Clothing/OuterClothing/Armor/security.rsi
+    sprite: SS220/Clothing/OuterClothing/Armor/security.rsi #SS220 BugFix
   - type: StaminaConvertArmor
     damageType: Shock
     damageCoefficient: 0.3

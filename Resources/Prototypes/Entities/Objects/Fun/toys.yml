@@ -273,11 +273,11 @@
   description: Aiming this at Security may get you filled with lead.
   components:
   - type: Sprite
-    sprite: Objects/Fun/Foam/foam_crossbow.rsi
+    sprite: SS220/Objects/Fun/Foam/foam_crossbow.rsi #SS22 BugFixs
     state: icon
   - type: Item
     size: Normal
-    sprite: Objects/Fun/Foam/foam_crossbow.rsi
+    sprite: SS220/Objects/Fun/Foam/foam_crossbow.rsi #SS22 BugFixs
   - type: Gun
     fireRate: 0.5
     selectedMode: SemiAuto

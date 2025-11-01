@@ -24,7 +24,7 @@
       - Trash
   - type: Ammo
   - type: Sprite
-    sprite: Objects/Fun/Foam/foam_crossbow.rsi
+    sprite: SS220/Objects/Fun/Foam/foam_crossbow.rsi #SS22 BugFixs
     layers:
       - state: foamdart
   - type: EmbeddableProjectile
@@ -32,3 +32,5 @@
   - type: ThrowingAngle
     angle: 180
   - type: LandAtCursor
+  - type: Item #SS220 BugFixs
+    heldPrefix: foam #SS220 BugFixs
