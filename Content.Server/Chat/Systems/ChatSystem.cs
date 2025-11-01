@@ -570,8 +570,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         message = languageMessage.GetMessage(source, false);
 
         //SendInVoiceRange(ChatChannel.Local, message, wrappedMessage, source, range);
-        //var ev = new EntitySpokeEvent(source, message, originalMessage, null, null);
-        //RaiseLocalEvent(source, ev, true);
+        var ev = new EntitySpokeEvent(source, message, originalMessage, null, null, languageMessage);
+        RaiseLocalEvent(source, ev, true);
         //SS220-Add-Languages end
 
         // To avoid logging any messages sent by entities that are not players, like vendors, cloning, etc.
