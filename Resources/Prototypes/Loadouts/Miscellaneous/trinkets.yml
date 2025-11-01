@@ -262,6 +262,11 @@
       !type:RoleTimeRequirement
       role: JobClown
       time: 3600 # 1hr
+  sponsorTierLoadoutEffects: #SS220 BugFixs Begin
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier #SS220 BugFixs End
   storage:
     back:
     - OffsetCaneClown
@@ -275,6 +280,11 @@
       !type:RoleTimeRequirement
       role: JobMime
       time: 3600 # 1hr
+  sponsorTierLoadoutEffects: #SS220 BugFixs Begin
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier #SS220 BugFixs End
   storage:
     back:
     - OffsetCaneMime
@@ -288,6 +298,11 @@
       !type:DepartmentTimeRequirement
       department: Command
       time: 18000 # 5hr
+  sponsorTierLoadoutEffects: #SS220 BugFixs Begin
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier #SS220 BugFixs End
   storage:
     back:
     - OffsetCaneNT
@@ -301,6 +316,11 @@
       !type:RoleTimeRequirement
       role: JobLibrarian
       time: 3600 # 1hr same as Jamjar.
+  sponsorTierLoadoutEffects: #SS220 BugFixs Begin
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier #SS220 BugFixs End
   storage:
     back:
     - Cane
