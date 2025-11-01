@@ -1278,7 +1278,7 @@
       head:
         sizeMaps:
           32:
-            sprite: Mobs/Pets/Smile/smile_displacement.rsi
+            sprite: SS220/Mobs/Pets/Smile/smile_displacement.rsi #SS220 BugFixs
             state: head
   - type: MobThresholds
     thresholds:
