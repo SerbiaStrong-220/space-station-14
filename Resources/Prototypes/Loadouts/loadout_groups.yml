@@ -173,7 +173,7 @@
 - type: loadoutGroup
   id: CaptainNeck
   name: loadout-group-captain-neck
-  minLimit: 0
+  minLimit: 1 #SS220 Thief HeadCloak StealTarget Update
   loadouts:
   - CaptainCloak
   - CaptainCloakFormal
@@ -224,7 +224,7 @@
 - type: loadoutGroup
   id: HoPNeck
   name: loadout-group-hop-neck
-  minLimit: 0
+  minLimit: 1 #SS220 Thief HeadCloak StealTarget Update
   loadouts:
   - HoPCloak
   - HoPMantle
@@ -786,7 +786,7 @@
 - type: loadoutGroup
   id: QuartermasterNeck
   name: loadout-group-quartermaster-neck
-  minLimit: 0
+  minLimit: 1 #SS220 Thief HeadCloak StealTarget Update
   loadouts:
   - QuartermasterCloak
   - QuartermasterMantle
@@ -896,7 +896,7 @@
 - type: loadoutGroup
   id: ChiefEngineerNeck
   name: loadout-group-chief-engineer-neck
-  minLimit: 0
+  minLimit: 1 #SS220 Thief HeadCloak StealTarget Update
   loadouts:
   - ChiefEngineerCloak
   - ChiefEngineerMantle
@@ -1052,7 +1052,7 @@
 - type: loadoutGroup
   id: ResearchDirectorNeck
   name: loadout-group-research-director-neck
-  minLimit: 0
+  minLimit: 1 #SS220 Thief HeadCloak StealTarget Update
   loadouts:
   - ResearchDirectorMantle
   - ResearchDirectorCloak
@@ -1214,7 +1214,7 @@
 - type: loadoutGroup
   id: HeadofSecurityNeck
   name: loadout-group-head-of-security-neck
-  minLimit: 0
+  minLimit: 1 #SS220 Thief HeadCloak StealTarget Update
   loadouts:
   - HeadofSecurityCloak
   - HeadofSecurityMantle
@@ -1438,7 +1438,7 @@
 - type: loadoutGroup
   id: ChiefMedicalOfficerNeck
   name: loadout-group-chief-medical-officer-neck
-  minLimit: 0
+  minLimit: 1 #SS220 Thief HeadCloak StealTarget Update
   loadouts:
   - ChiefMedicalOfficerCloak
   - ChiefMedicalOfficerMantle
