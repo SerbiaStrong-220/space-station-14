@@ -15,6 +15,9 @@
     equipDelay: 1
     unequipDelay: 1
   - type: NoSlip
+  - type: ClothingSpeedModifier
+    walkModifier: 0.93
+    sprintModifier: 0.93
   - type: LimitedEquip
     items:
       - id: FoodLubroShroomCultDead

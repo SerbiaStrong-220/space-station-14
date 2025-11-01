@@ -35,6 +35,7 @@
   - type: Tag
     tags:
     - CultYoggStealthProvidable
+    - MiGoHandsWhitelist
 
 - type: entity
   parent: SheetTokl

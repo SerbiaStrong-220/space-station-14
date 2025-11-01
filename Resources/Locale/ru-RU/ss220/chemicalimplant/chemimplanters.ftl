@@ -1,4 +1,4 @@
-ent-ChemicalImplanter = Химический имплантер
+ent-ChemicalImplanter = химический имплантер
     .desc = Необычное устройство с иглой и съёмным контейнером
 
 ent-ActionUseChemicalImplant = Вскрыть

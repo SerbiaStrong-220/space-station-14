@@ -8,6 +8,7 @@
   - type: Tag
     tags:
     - ShellShotgunToy
+    - Cartridge
   - type: HiddenDescription
     entries:
     - label: hidden-desc-toy-weapons-ammo-syndicate
@@ -94,6 +95,7 @@
   - type: Tag
     tags:
     - CartridgeAntiMaterielToy
+    - Cartridge
   - type: HiddenDescription
     entries:
     - label: hidden-desc-toy-weapons-ammo-syndicate

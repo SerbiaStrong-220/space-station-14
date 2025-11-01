@@ -49,13 +49,13 @@ public sealed partial class CultYoggAltarSystem : SharedCultYoggAltarSystem
         }
 
         //send cooldown to a MiGo sacrifice action
-        var queryMiGo = EntityQueryEnumerator<MiGoComponent>(); //ToDo ask if this code is ok
+        var queryMiGo = EntityQueryEnumerator<MiGoComponent>();
         while (queryMiGo.MoveNext(out _, out var comp))
         {
-            var sacrAction = comp.MiGoSacrificeActionEntity;
-
             if (comp.MiGoErectActionEntity == null)
                 continue;
+
+            var sacrAction = comp.MiGoSacrificeActionEntity;
 
             if (!TryComp<ActionComponent>(sacrAction, out var actionComponent))
                 continue;

@@ -83,5 +83,53 @@ ent-AirlockBlueshield = { ent-AirlockCommand }
     .suffix = ОСЩ, Закрыто
 
 ent-AirlockBlueshieldGlass = { ent-AirlockCommandGlass }
-    .desc = { ent-AirlockMaint.desc }
+    .desc = { ent-Airlock.desc }
     .suffix = ОСЩ, Закрыто
+
+ent-AirlockClownAccess = { ent-AirlockClown }
+    .desc = { ent-ent-AirlockGlass.desc }
+    .suffix = Клоун, Закрыто, Доступ
+
+ent-AirlockLibrarian = { ent-Airlock }
+    .desc = { ent-Airlock.desc }
+    .suffix = Библиотекарь
+
+ent-AirlockGlassLibrarian = { ent-AirlockGlass }
+    .desc = { ent-AirlockGlass.desc }
+    .suffix = Библиотекарь
+
+ent-AirlockStandartGlassReporter = { ent-AirlockGlass }
+    .desc = { ent-AirlockGlass.desc }
+    .suffix = Репортёр
+
+ent-AirlockReporter = { ent-Airlock }
+    .desc = { ent-Airlock.desc }
+    .suffix = Репортёр
+
+ent-AirlockGlassReporter = { ent-AirlockGlass }
+    .desc = { ent-AirlockGlass.desc }
+    .suffix = Репортёр
+
+ent-AirlockMime = { ent-Airlock }
+    .desc = { ent-Airlock.desc }
+    .suffix = Мим
+
+ent-AirlockGlassMime = { ent-AirlockGlass }
+    .desc = { ent-AirlockGlass.desc }
+    .suffix = Мим
+
+ent-AirlockMusician = { ent-AirlockCommandGlass }
+    .desc = { ent-Airlock.desc }
+    .suffix = Музыкант
+
+ent-AirlockGlassMusician = { ent-AirlockGlass }
+    .desc = { ent-AirlockGlass.desc }
+    .suffix = Музыкант
+
+ent-AirlockMeidicalPsychologist = { ent-AirlockMedical }
+    .desc = { ent-AirlockMedical.desc }
+    .suffix = Медицинский, Психолог
+
+ent-AirlockMeidicalGlassPsychologist = { ent-AirlockMedicalGlass }
+    .desc = { ent-AirlockMedicalGlass.desc }
+    .suffix = Медицинский, Психолог

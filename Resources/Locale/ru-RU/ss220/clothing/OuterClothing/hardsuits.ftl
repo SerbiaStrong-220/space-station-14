@@ -12,3 +12,10 @@ ent-ClothingOuterHardsuitDeathsquadAlpha = скафандр специалист
 
 ent-ClothingOuterHardsuitCentcom = скафандр Центрального Командования
     .desc = Сочетание непоколебимой защиты и передовых технологий, воплощение мощи и стратегического превосходства.
+
+ent-ClothingOuterHardsuitERTLeaderGamma = скафандр лидера гамма ОБР
+    .desc = Защитный скафандр, используемый лидерами отряда быстрого реагирования.
+ent-ClothingOuterHardsuitERTMedicalGamma = скафандр медика гамма ОБР
+    .desc = Защитный скафандр, используемый медиками отряда быстрого реагирования.
+ent-ClothingOuterHardsuitERTSecurityGamma = скафандр офицера безопасности гамма ОБР
+    .desc = Защитный скафандр, используемый офицерами безопасности отряда быстрого реагирования.

@@ -25,10 +25,12 @@
 - type: accessLevel
   id: GenpopEnter
   name: id-card-access-level-genpop-enter
+  canBeSwitchableInReader: false #SS220 DoorElectronicsConfiguratorFix
 
 - type: accessLevel
   id: GenpopLeave
   name: id-card-access-level-genpop-leave
+  canBeSwitchableInReader: false #SS220 DoorElectronicsConfiguratorFix
 
 - type: accessGroup
   id: Security
