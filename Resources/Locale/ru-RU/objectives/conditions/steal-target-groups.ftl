@@ -13,7 +13,9 @@ steal-target-groups-nuke-disk = диск ядерной аутентификац
 steal-target-groups-weapon-energy-shot-gun = энергетический дробовик
 # Thief Collection
 steal-target-groups-figurines = фигурки
-steal-target-groups-heads-cloaks = плащи глав
+# SS220 #SS220 Thief HeadCloak StealTarget Update BEGIN
+steal-target-groups-heads-cloaks = плащи и мантии глав
+# SS220 #SS220 Thief HeadCloak StealTarget Update END
 steal-target-groups-heads-bedsheets = одеяла глав
 steal-target-groups-stamps = печати
 steal-target-groups-door-remotes = пульты от шлюзов
