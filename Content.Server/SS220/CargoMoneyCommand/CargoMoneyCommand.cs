@@ -114,7 +114,7 @@ public sealed class CargoMoneyCommand : IConsoleCommand
         }
 
         var cargoSystem = _entityManager.System<CargoSystem>();
-        if (!cargoSystem.BankHasAccount((bank, bankComp), account))
+        if (!cargoSystem.TryGetAccount((bank, bankComp), account, out _))
         {
             shell.WriteLine($"Bank with id {bank} doesn't have a \"{account}\" account");
             return;

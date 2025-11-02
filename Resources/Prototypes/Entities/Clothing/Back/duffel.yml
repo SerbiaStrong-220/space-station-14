@@ -87,6 +87,12 @@
   - type: Storage
     storageOpenSound:
       collection: BikeHorn
+      params:
+        variation: 0.125
+    storageInsertSound:
+      collection: FootstepClown
+      params:
+        variation: 0.125
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-textile
@@ -172,10 +178,8 @@
   - type: Sprite
     sprite: Clothing/Back/Duffels/mime.rsi
   - type: Storage
-    storageOpenSound:
-      collection: null
-    storageInsertSound:
-      collection: null
+    storageOpenSound: null
+    storageInsertSound: null
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-textile

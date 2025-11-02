@@ -1,6 +1,9 @@
 using System.Net;
 using Content.Shared.Database;
 using Content.Shared.Eui;
+using Content.Shared.Humanoid.Prototypes;
+using Content.Shared.Roles;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.Administration;
@@ -21,38 +24,9 @@ public sealed class BanPanelEuiState : EuiStateBase
 public static class BanPanelEuiStateMsg
 {
     [Serializable, NetSerializable]
-    public sealed class CreateBanRequest : EuiMessageBase
+    public sealed class CreateBanRequest(Ban ban) : EuiMessageBase
     {
-        public string? Player { get; set; }
-        public string? IpAddress { get; set; }
-        public ImmutableTypedHwid? Hwid { get; set; }
-        public uint Minutes { get; set; }
-        public string Reason { get; set; }
-        public NoteSeverity Severity { get; set; }
-        public string[]? Roles { get; set; }
-        public string[]? Species { get; set; } // SS220 Species bans
-        public bool UseLastIp { get; set; }
-        public bool UseLastHwid { get; set; }
-        public int StatedRound { get; set; }
-        public bool Erase { get; set; }
-        public bool PostBanInfo { get; set; } // SS220 Post ban info option
-
-        public CreateBanRequest(string? player, (IPAddress, int)? ipAddress, bool useLastIp, ImmutableTypedHwid? hwid, bool useLastHwid, uint minutes, string reason, NoteSeverity severity, int statedRound, string[]? roles, /* SS220 Species bans */ string[]? species, bool erase, bool postBanInfo)
-        {
-            Player = player;
-            IpAddress = ipAddress == null ? null : $"{ipAddress.Value.Item1}/{ipAddress.Value.Item2}";
-            UseLastIp = useLastIp;
-            Hwid = hwid;
-            UseLastHwid = useLastHwid;
-            Minutes = minutes;
-            Reason = reason;
-            Severity = severity;
-            Roles = roles;
-            Species = species;
-            StatedRound = statedRound;
-            Erase = erase;
-            PostBanInfo = postBanInfo;
-        }
+        public Ban Ban { get; } = ban;
     }
 
     [Serializable, NetSerializable]
@@ -65,4 +39,60 @@ public static class BanPanelEuiStateMsg
             PlayerUsername = username;
         }
     }
+}
+
+/// <summary>
+///     Contains all the data related to a particular ban action created by the BanPanel window.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed record Ban
+{
+    public Ban(
+        string? target,
+        (IPAddress, int)? ipAddressTuple,
+        bool useLastIp,
+        ImmutableTypedHwid? hwid,
+        bool useLastHwid,
+        uint banDurationMinutes,
+        string reason,
+        NoteSeverity severity,
+        int statedRound,
+        ProtoId<JobPrototype>[]? bannedJobs,
+        ProtoId<AntagPrototype>[]? bannedAntags,
+        ProtoId<SpeciesPrototype>[]? bannedSpecies, // SS220-species-ban
+        bool erase,
+        bool postBanInfo) // SS220 Post ban info option
+    {
+        Target = target;
+        IpAddress = ipAddressTuple?.Item1.ToString();
+        IpAddressHid = ipAddressTuple?.Item2.ToString() ?? "0";
+        UseLastIp = useLastIp;
+        Hwid = hwid;
+        UseLastHwid = useLastHwid;
+        BanDurationMinutes = banDurationMinutes;
+        Reason = reason;
+        Severity = severity;
+        StatedRound = statedRound;
+        BannedJobs = bannedJobs;
+        BannedAntags = bannedAntags;
+        BannedSpecies = bannedSpecies; // SS220-species-ban
+        Erase = erase;
+        PostBanInfo = postBanInfo; // SS220 Post ban info option
+    }
+
+    public readonly string? Target;
+    public readonly string? IpAddress;
+    public readonly string? IpAddressHid;
+    public readonly bool UseLastIp;
+    public readonly ImmutableTypedHwid? Hwid;
+    public readonly bool UseLastHwid;
+    public readonly uint BanDurationMinutes;
+    public readonly string Reason;
+    public readonly NoteSeverity Severity;
+    public readonly int StatedRound;
+    public readonly ProtoId<JobPrototype>[]? BannedJobs;
+    public readonly ProtoId<AntagPrototype>[]? BannedAntags;
+    public readonly ProtoId<SpeciesPrototype>[]? BannedSpecies;
+    public readonly bool Erase;
+    public readonly bool PostBanInfo;
 }

@@ -165,7 +165,17 @@
   - type: SolutionContainerManager
     solutions:
       battery:
+        temperature: 293.15
+        canReact: True
         maxVol: 5
+        name: null
+        reagents: []
+      food:
+        temperature: 293.15
+        canReact: True
+        maxVol: 0
+        name: food
+        reagents: []
   - type: InjectableSolution
     solution: battery
   - type: DrawableSolution
