@@ -393,7 +393,6 @@ public sealed partial class TTSSystem
             {"cuándo", "Куандо"},
             {"por qué", "Пор Ке"},
             {"para qué", "Пара Ке"},
-            {"qué", "Ке"},
             {"cuánto", "Куанто"},
             {"demasiado", "Демасьядо"},
             {"casi", "Каси"},
