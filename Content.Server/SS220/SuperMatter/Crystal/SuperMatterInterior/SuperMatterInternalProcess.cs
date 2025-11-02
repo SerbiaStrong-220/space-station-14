@@ -61,7 +61,7 @@ public static class SuperMatterInternalProcess
     public static float GetReleaseEnergyConversionEfficiency(float temperature, float pressure)
     {
         var resultEfficiency = ReleaseEnergyConversionEfficiencyFunction(temperature, pressure);
-        return Math.Clamp(resultEfficiency, 0.00002f, 0.003f);
+        return Math.Clamp(resultEfficiency, 0.0002f, 0.009f);
     }
 
     public static float GetZapToRadiationRatio(float temperature, float pressure, SuperMatterPhaseState smState)
@@ -151,7 +151,7 @@ public static class SuperMatterInternalProcess
         return ChemistryPotentialCoeff * MathF.Pow(normalizedCombined, 2) * MathF.Exp(-MathF.Pow(normalizedCombined, 2));
     }
 
-    private const float ReleaseEnergyConversionEfficiencyCoeff = 0.0011f;
+    private const float ReleaseEnergyConversionEfficiencyCoeff = 0.011f;
     private const float ReleaseEnergyConversionEfficiencyNormalizedCombinedCoeff = 0.0025f;
     private const float ReleaseEnergyConversionEfficiencyNormalizedTemperatureOffset = 20f;
     private const float ReleaseEnergyConversionEfficiencySlowerNormalizedPressureOffset = 80f;
@@ -162,8 +162,8 @@ public static class SuperMatterInternalProcess
         var normalizedPressure = pressure / TriplePointPressure;
         var normalizedCombined = normalizedPressure * normalizedTemperature / ChemistryPotentialCombinedStretchCoeff;
 
-        return ReleaseEnergyConversionEfficiencyCoeff * (temperature / (temperature + ReleaseEnergyConversionEfficiencyNormalizedTemperatureOffset)
-                                    + pressure / (pressure + ReleaseEnergyConversionEfficiencySlowerNormalizedPressureOffset)
+        return ReleaseEnergyConversionEfficiencyCoeff * ((temperature + 1 / (16 * temperature * temperature + 1)) / (temperature + ReleaseEnergyConversionEfficiencyNormalizedTemperatureOffset)
+                                    + (pressure + 1 / (pressure * pressure + 1)) / (pressure + ReleaseEnergyConversionEfficiencySlowerNormalizedPressureOffset)
                                     + MathF.Sqrt(normalizedCombined) * ReleaseEnergyConversionEfficiencyNormalizedCombinedCoeff);
     }
 
