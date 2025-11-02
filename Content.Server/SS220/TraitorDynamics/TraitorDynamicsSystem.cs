@@ -192,8 +192,8 @@ public sealed class TraitorDynamicsSystem : EntitySystem
                 continue;
 
             var rawValue = currentPrice * discount.Value;
-            var roundedValue = Math.Round(rawValue.Double(), MidpointRounding.AwayFromZero);
-            finalPrice[discount.Key] = Math.Max(currentPrice.Double() - roundedValue, 1);
+            var roundedValue = Math.Round(rawValue.Float(), MidpointRounding.AwayFromZero);
+            finalPrice[discount.Key] = Math.Max(currentPrice.Float() - roundedValue, 1);
         }
 
         return new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>(finalPrice);
