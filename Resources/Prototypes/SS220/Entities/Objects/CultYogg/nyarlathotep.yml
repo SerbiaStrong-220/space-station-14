@@ -27,7 +27,6 @@
   - type: CanMoveInAir
   - type: MovementIgnoreGravity
   - type: GravityAffected
-    weightless: false
   - type: Appearance
   - type: Physics
     bodyType: Dynamic

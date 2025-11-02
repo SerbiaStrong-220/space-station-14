@@ -47,6 +47,7 @@
   - type: SurveillanceCamera
     networkSet: true
     id: "Нагрудная камера"
+    active: false
   - type: Clothing
     sprite: SS220/Objects/Tools/bodycam.rsi
     quickEquip: false

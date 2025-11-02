@@ -15,6 +15,12 @@ namespace Content.Shared.GameTicking
         [Dependency] private readonly IReplayRecordingManager _replay = default!;
         [Dependency] private readonly IGameTiming _gameTiming = default!;
 
+        /// <summary>
+        ///     A list storing the start times of all game rules that have been started this round.
+        ///     Game rules can be started and stopped at any time, including midround.
+        /// </summary>
+        public abstract IReadOnlyList<(TimeSpan, string)> AllPreviousGameRules { get; }
+
         // See ideally these would be pulled from the job definition or something.
         // But this is easier, and at least it isn't hardcoded.
         //TODO: Move these, they really belong in StationJobsSystem or a cvar.
@@ -110,11 +116,13 @@ namespace Content.Shared.GameTicking
     [Serializable, NetSerializable]
     public sealed class TickerLobbyInfoEvent : EntityEventArgs
     {
+        public int RoundId; // SS220-add-round-id-info-for-client
         public string TextBlob { get; }
 
-        public TickerLobbyInfoEvent(string textBlob)
+        public TickerLobbyInfoEvent(string textBlob, int roundId) // SS220-add-round-id-info-for-client
         {
             TextBlob = textBlob;
+            RoundId = roundId; // SS220-add-round-id-info-for-client
         }
     }
 

@@ -354,3 +354,6 @@
 - type: Tag
   id: Legalposter
 # ss220 Posters update end
+
+- type: Tag
+  id: MiGoHandsWhitelist
