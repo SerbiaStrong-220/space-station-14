@@ -1,0 +1,37 @@
+- type: reaction
+  id: Opium
+  reactants:
+    Bicaridine:
+      amount: 1
+    Acetone:
+      amount: 2
+    Impedrezene:
+      amount: 2
+  products:
+    Opium: 1
+
+- type: reaction
+  id: Morphine
+  reactants:
+    Opium:
+      amount: 1
+    Phenol:
+      amount: 1
+    SodiumCarbonate:
+      amount: 1
+    Desoxyephedrine:
+      amount: 1
+  products:
+    Morphine: 4
+
+- type: reaction
+  id: Frontier
+  reactants:
+    Vestine:
+      amount: 1
+    Morphine:
+      amount: 1
+    SodiumHydroxide:
+      amount: 1
+  products:
+    Frontier: 3

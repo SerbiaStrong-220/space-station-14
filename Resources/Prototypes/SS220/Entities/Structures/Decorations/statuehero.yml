@@ -1,0 +1,12 @@
+- type: entity
+  parent: BaseStructure
+  id: StatueHero
+  name: памятный монумент герою
+  description: Посвящено герою, что навсегда остался в наших сердцах. Всем он был известен как "Килла". Благодаря монументу и добрым людям, которые общим трудом возвели его, можно сказать, что память о герое никогда не угаснет, ведь он продолжает служить вместе с нами, здесь, сейчас, всегда. Проходя мимо, прояви уважение, отдай честь!
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Decorations/hero_statue.rsi
+    state: admiral
+    noRot: true
+    drawdepth: Mobs
+    offset: "0.0,0.5"
