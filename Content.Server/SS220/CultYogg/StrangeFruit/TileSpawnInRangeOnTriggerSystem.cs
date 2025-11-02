@@ -20,7 +20,7 @@ public sealed class TileSpawnInRangeOnTriggerSystem : EntitySystem
         if (args.Key != null && !ent.Comp.KeysIn.Contains(args.Key))
             return;
 
-        if ( ent.Comp.Range < 0)
+        if (ent.Comp.Range < 0)
         {
             Log.Error("Range must be positive");
             return;
@@ -33,7 +33,7 @@ public sealed class TileSpawnInRangeOnTriggerSystem : EntitySystem
             for (var y = (int)mapcord.Y - ent.Comp.Range; y <= (int)mapcord.Y + ent.Comp.Range; y++)
             {
                 var nmap = new MapCoordinates(x, y, mapcord.MapId);
-                Spawn(ent.Comp.ProtoId, nmap);
+                Spawn(ent.Comp.Spawn, nmap);
             }
         }
         args.Handled = true;

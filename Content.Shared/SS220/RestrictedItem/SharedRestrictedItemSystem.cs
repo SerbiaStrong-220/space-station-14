@@ -63,7 +63,7 @@ public abstract class SharedRestrictedItemSystem : EntitySystem
             return true;
 
  
-_popup.PopupEntityPredicted(Loc.GetString(item.Comp.LocalizedPopup), item);
+        _popup.PopupPredicted(Loc.GetString(item.Comp.LocalizedPopup), item, user);
 
         if (!item.Comp.DamageOnFail.Empty)
             _damageable.TryChangeDamage(user, item.Comp.DamageOnFail, true);
