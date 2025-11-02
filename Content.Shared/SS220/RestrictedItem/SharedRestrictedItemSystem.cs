@@ -62,8 +62,8 @@ public abstract class SharedRestrictedItemSystem : EntitySystem
         if (!_whitelistSystem.IsWhitelistFail(item.Comp.Whitelist, user))
             return true;
 
-        if (_net.IsServer)//idk why
-            _popup.PopupEntity(Loc.GetString(item.Comp.LocalizedPopup), item);
+ 
+_popup.PopupEntityPredicted(Loc.GetString(item.Comp.LocalizedPopup), item);
 
         if (!item.Comp.DamageOnFail.Empty)
             _damageable.TryChangeDamage(user, item.Comp.DamageOnFail, true);
