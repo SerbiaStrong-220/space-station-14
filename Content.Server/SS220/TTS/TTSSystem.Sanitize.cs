@@ -130,6 +130,7 @@ public sealed partial class TTSSystem
             {"с4", "Си 4"}, // cyrillic
             {"c4", "Си 4"}, // latinic
             {"бсс", "Бэ Эс Эс"},
+            { "асн", "А Эс Эн"},
             // ss220 fix deutch begin
             {"ja", "Я"},
             {"mein", "Майн"},

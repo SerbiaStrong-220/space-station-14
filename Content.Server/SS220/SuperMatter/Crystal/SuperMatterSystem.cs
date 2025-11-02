@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Server.Atmos.Piping.Components;
 using Content.Server.SS220.SuperMatter.Crystal.Components;
 using Content.Server.SS220.SuperMatter.Crystal.SuperMatterInterior;
 using Content.Server.Tesla.Components;
@@ -35,6 +36,8 @@ public sealed partial class SuperMatterSystem
     {
         base.Initialize();
 
+        SubscribeLocalEvent<SuperMatterComponent, AtmosDeviceUpdateEvent>(SuperMatterUpdate);
+
         InitializeAnnouncement();
         InitializeEventHandler();
         InitializeDatabase();
@@ -65,27 +68,40 @@ public sealed partial class SuperMatterSystem
 
             var crystal = new Entity<SuperMatterComponent>(uid, smComp);
             UpdateDelayed(crystal, flooredFrameTime);
-            SuperMatterUpdate(crystal, flooredFrameTime);
         }
     }
 
-    private void SuperMatterUpdate(Entity<SuperMatterComponent> crystal, float frameTime)
+    private void SuperMatterUpdate(Entity<SuperMatterComponent> crystal, ref AtmosDeviceUpdateEvent args)
     {
+        // add here to give admins a way to freeze all logic
+        if (HasComp<AdminFrozenComponent>(crystal))
+            return;
+
+        if (!HasComp<MetaDataComponent>(crystal)
+            || MetaData(crystal).EntityLifeStage < EntityLifeStage.MapInitialized)
+            return;
+
+        var frameTime = MathF.Min(args.dt, 1f);
+
         crystal.Comp.UpdatesBetweenBroadcast++;
         if (!TryGetCrystalGasMixture(crystal.Owner, out var gasMixture))
         {
             Log.Error($"Got null GasMixture in {crystal}");
             return;
         }
+
         AddGasesToAccumulator(crystal.Comp, gasMixture);
         crystal.Comp.PressureAccumulator += gasMixture.Pressure;
+
         if (!crystal.Comp.Activated)
             return;
+
         // here we ask for values before update SM parameters
         // f.e. we save prev value for broadcast's accumulators
         var prevInternalEnergy = crystal.Comp.InternalEnergy;
         var prevMatter = crystal.Comp.Matter;
         var decayedMatter = CalculateDecayedMatter(crystal, gasMixture) * frameTime;
+
         // this method make changes in SM parameters!
         EvaluateDeltaInternalEnergy(crystal, gasMixture, frameTime);
         var smState = SuperMatterFunctions.GetSuperMatterPhase(crystal.Comp.Temperature, gasMixture.Pressure);
