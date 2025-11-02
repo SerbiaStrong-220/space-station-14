@@ -76,7 +76,7 @@ accent-german-words-32-2 = капуста
 accent-german-words-replace-32 = kraut
 accent-german-words-33 = водка
 #ss220-german-fix-and-update-begin
-    .desc = branntwein
+#ss220 wodka --> branntwein
 accent-german-words-replace-33 = branntwein
 #ss220-german-fix-and-update-end
 accent-german-words-34 = рюкзак
