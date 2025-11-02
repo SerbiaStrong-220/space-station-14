@@ -58,7 +58,7 @@ public sealed class SuperMatterObserverSystem : EntitySystem
             return;
 
         // kinda simulate servers and clients working
-        _nextUpdateTime += TimeSpan.FromSeconds(_updateDelay);
+        _nextUpdateTime = _gameTiming.CurTime + TimeSpan.FromSeconds(_updateDelay);
 
         foreach (var smReceiverOwner in new List<EntityUid>(_smReceiverUIOwnersToInit))
         {
