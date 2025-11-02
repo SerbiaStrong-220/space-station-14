@@ -1,4 +1,5 @@
 using Content.Shared.SS220.TraitorDynamics;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.TraitorDynamics;
 
@@ -6,5 +7,5 @@ namespace Content.Server.SS220.TraitorDynamics;
 public sealed partial class TraitorDynamicsComponent : Component
 {
     [DataField]
-    public DynamicPrototype? Dynamic;
+    public ProtoId<DynamicPrototype>? Dynamic;
 }

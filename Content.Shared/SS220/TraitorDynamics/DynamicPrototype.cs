@@ -1,3 +1,4 @@
+using Content.Shared.Dataset;
 using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
 
@@ -24,7 +25,7 @@ public sealed partial class DynamicPrototype : IPrototype
     public int PlayersRequerment;
 
     [DataField]
-    public ProtoId<DynamicNamePrototype> LoreNames;
+    public ProtoId<LocalizedDatasetPrototype>? LoreNames;
 
-    public LocId SelectedLoreName;
+    public LocId? SelectedLoreName;
 }

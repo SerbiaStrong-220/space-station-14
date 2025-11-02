@@ -113,10 +113,7 @@ public sealed partial class StoreSystem
         var showFooter = HasComp<RingerUplinkComponent>(store);
         //SS220 - show-in-uplink-type-dynamic-start
         var dynamic = _dynamics.GetCurrentDynamic();
-        LocId? dynamicName = null;
-
-        if (_proto.TryIndex(dynamic, out var dynamicProto))
-            dynamicName = dynamicProto.SelectedLoreName;
+        var dynamicName = _proto.TryIndex(dynamic, out var dynamicProto) ? dynamicProto.SelectedLoreName : null;
 
         var state = new StoreUpdateState(component.LastAvailableListings, allCurrency, showFooter, component.RefundAllowed, dynamicName);
         //SS220 - show-in-uplink-type-dynamic-end

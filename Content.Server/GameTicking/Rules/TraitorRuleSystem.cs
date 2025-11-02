@@ -266,12 +266,12 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
     }
 
     // SS220 Dynamics begin
-    private void InitDynamic(EntityUid ent, TraitorRuleComponent? rule)
+    private void InitDynamic(EntityUid uid, TraitorRuleComponent? rule)
     {
-        if (!Resolve(ent, ref rule))
+        if (!Resolve(uid, ref rule))
             return;
 
-        if (!TryComp<TraitorDynamicsComponent>(ent, out var dynamicComp))
+        if (!TryComp<TraitorDynamicsComponent>(uid, out var dynamicComp))
             return;
 
         if (dynamicComp.Dynamic != null)
