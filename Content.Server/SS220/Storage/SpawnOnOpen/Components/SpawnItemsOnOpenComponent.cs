@@ -3,7 +3,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Server.SS220.Storage.SpawnOnOpen.Components;
 
 [RegisterComponent]
-public sealed partial class SpawnItemsOnOpenComponent : Component
+public sealed partial class SpawnOnStorageOpenComponent : Component
 {
     /// <summary>
     ///     The list of entities to spawn,ALL OF WHICH WILL BE SPAWNED
