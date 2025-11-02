@@ -20,7 +20,7 @@ public sealed class TileSpawnInRangeOnTriggerSystem : EntitySystem
         if (args.Key != null && !ent.Comp.KeysIn.Contains(args.Key))
             return;
 
-        if (!(ent.Comp.Range > 0))
+        if ( ent.Comp.Range < 0)
         {
             Log.Error("Range must be positive");
             return;
