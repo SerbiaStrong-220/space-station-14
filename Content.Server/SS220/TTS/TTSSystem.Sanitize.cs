@@ -201,6 +201,7 @@ public sealed partial class TTSSystem
             {"idiota", "Идиота"},
             {"atención", "Атенсьон"},
             {"capitán", "Капитано"},
+            {"qué", "Ке"},
             {"gracias", "Грасьяс"},
             {"hola", "Ола"},
             {"adiós", "Адьос"},
