@@ -35,12 +35,11 @@ public sealed partial class TTSSystem : EntitySystem
 
         var audioParams = AudioParams.Default.WithVolume(volume);
 
-        // Play announcement sound
-        var announcementSoundPath = new ResPath(msg.AnnouncementSound);
-        PlaySoundQueued(AnnouncementUid, announcementSoundPath, audioParams, true);
+        if ((msg.PlayAudioMask & AudioWithTTSPlayOperation.PlayAudio) == AudioWithTTSPlayOperation.PlayAudio)
+            PlaySoundQueued(AnnouncementUid, msg.AnnouncementSound, true);
 
-        // Play announcement itself
-        PlayTtsBytes(msg.Data, AnnouncementUid, audioParams, true);
+        if ((msg.PlayAudioMask & AudioWithTTSPlayOperation.PlayTTS) == AudioWithTTSPlayOperation.PlayTTS)
+            PlayTtsBytes(msg.Data, AnnouncementUid, audioParams, true);
     }
 
     private void OnTtsAnnounceVolumeChanged(float volume)

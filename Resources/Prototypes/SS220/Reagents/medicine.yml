@@ -43,7 +43,7 @@
         amount: -2
       - !type:AdjustReagent
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
           reagent: Epinephrine
           min: 1
         reagent: Haloperidol
@@ -53,7 +53,7 @@
         amount: -2
       - !type:AdjustReagent
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
           reagent: Ephedrine
           min: 1
         reagent: Haloperidol
@@ -63,7 +63,7 @@
         amount: -2
       - !type:AdjustReagent
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
           reagent: THC
           min: 1
         reagent: Haloperidol
@@ -73,7 +73,7 @@
         amount: -2
       - !type:AdjustReagent
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
           reagent: SpaceDrugs
           min: 1
         reagent: Haloperidol
@@ -83,7 +83,7 @@
         amount: -2
       - !type:AdjustReagent
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
           reagent: Desoxyephedrine
           min: 1
         reagent: Haloperidol
@@ -102,11 +102,11 @@
         type: Remove
       - !type:GenericStatusEffect
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Haloperidol
         probability: 0.3
         key: ForcedSleep
         component: ForcedSleeping
-        refresh: false
 
 - type: reagent
   id: Harai
@@ -123,12 +123,10 @@
         key: Pacified
         component: Pacified
         time: 6.0
-        refresh: false
         type: Add
         conditions:
-        - !type:OrganType
-          type: Arachnid
-          shouldHave: true
+        - !type:MetabolizerTypeCondition
+          type: [ Arachnid ]
     Narcotic:
       effects:
       - !type:GenericStatusEffect
@@ -136,16 +134,13 @@
         component: SeeingRainbows
         type: Add
         time: 8
-        refresh: false
         conditions:
-        - !type:OrganType
-          type: Arachnid
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Arachnid ]
       - !type:HealthChange
         conditions:
-        - !type:OrganType
-          type: Arachnid
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Arachnid ]
         damage:
           types:
             Poison: 0.5
@@ -187,20 +182,22 @@
             Heat: 0.2
       - !type:AdjustTemperature
         conditions:
-        - !type:Temperature
+        - !type:TemperatureCondition
           max: 293.15
         amount: 100000
       - !type:HealthChange
         conditions:
-          - !type:ReagentThreshold
+          - !type:ReagentCondition
+            reagent: Nicotizine
             min: 30
         damage:
           types:
             Poison: 3
-      - !type:ChemVomit
+      - !type:Vomit
         probability: 0.15
         conditions:
-          - !type:ReagentThreshold
+          - !type:ReagentCondition
+            reagent: Nicotizine
             min: 30
       - !type:GenericStatusEffect
         key: PressureImmunity
@@ -221,7 +218,7 @@
       effects:
         - !type:HealthChange
           conditions:
-          - !type:Temperature
+          - !type:TemperatureCondition
             max: 213.0
           damage:
             types:
@@ -240,7 +237,9 @@
     Medicine:
       effects:
       - !type:ChemicalAdaptationEffect
+        reagent: Nicergoline
         duration: 1200
         modifier: 0.8
       - !type:BrainDamageTimerChange
+        reagent: Nicergoline
         addTime: 60

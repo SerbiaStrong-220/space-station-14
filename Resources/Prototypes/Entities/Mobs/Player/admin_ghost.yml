@@ -122,7 +122,7 @@
   components:
   - type: Action
     icon: { sprite: Structures/Machines/parts.rsi, state: box_0 }
-    iconOn: Structures/Machines/parts.rsi/box_2.png
+    iconOn: { sprite: Structures/Machines/parts.rsi, state: box_2 }
     keywords: [ "AI", "console", "interface" ]
     priority: -10
 
@@ -147,8 +147,8 @@
   description: View a Communications Interface.
   components:
   - type: Action
-    icon: Corvax/Interface/AdminActions/communications.png # Corvax-Resprite
-    iconOn: Corvax/Interface/AdminActions/communications.png # Corvax-Resprite
+    icon: { sprite: Interface/Actions/actions_ai.rsi, state: comms_console }
+    iconOn: { sprite: Interface/Actions/actions_ai.rsi, state: comms_console }
     keywords: [ "AI", "console", "interface" ]
     priority: -4
   - type: InstantAction
@@ -161,8 +161,8 @@
   description: View a Mass Scanner Interface.
   components:
   - type: Action
-    icon: Corvax/Interface/AdminActions/radar.png # Corvax-Resprite
-    iconOn: Corvax/Interface/AdminActions/radar.png # Corvax-Resprite
+    icon: { sprite: Interface/Actions/actions_ai.rsi, state: mass_scanner }
+    iconOn: { sprite: Interface/Actions/actions_ai.rsi, state: comms_console }
     keywords: [ "AI", "console", "interface" ]
     priority: -6
   - type: InstantAction
@@ -189,8 +189,8 @@
   description: View a Crew Monitoring Interface.
   components:
   - type: Action
-    icon: Corvax/Interface/AdminActions/monitoring.png # Corvax-Resprite
-    iconOn: Corvax/Interface/AdminActions/monitoring.png # Corvax-Resprite
+    icon: { sprite: Interface/Actions/actions_ai.rsi, state: crew_monitor }
+    iconOn: { sprite: Interface/Actions/actions_ai.rsi, state: crew_monitor }
     keywords: [ "AI", "console", "interface" ]
     priority: -8
   - type: InstantAction
@@ -203,8 +203,8 @@
   description: View a Station Records Interface.
   components:
   - type: Action
-    icon: Corvax/Interface/AdminActions/records.png # Corvax-Resprite
-    iconOn: Corvax/Interface/AdminActions/records.png # Corvax-Resprite
+    icon: { sprite: Interface/Actions/actions_ai.rsi, state: station_records }
+    iconOn: { sprite: Interface/Actions/actions_ai.rsi, state: station_records }
     keywords: [ "AI", "console", "interface" ]
     priority: -7
   - type: InstantAction
