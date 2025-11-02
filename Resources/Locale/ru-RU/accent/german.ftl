@@ -19,11 +19,17 @@ accent-german-words-9 = женщина
 accent-german-words-9-2 = леди
 accent-german-words-replace-9 = frau
 accent-german-words-10 = женщины
-accent-german-words-10-2 = дамы             #ss220 german-fix-and-update
+#ss220-german-fix-and-update-begin
+accent-german-words-10-2 = дамы
+#ss220-german-fix-and-update-end
 accent-german-words-replace-10 = frauen
-accent-german-words-11 = господин             #ss220 german-fix-and-update
+#ss220-german-fix-and-update-begin
+accent-german-words-11 = господин
+#ss220-german-fix-and-update-end
 accent-german-words-replace-11 = herr
-accent-german-words-12 = господа             #ss220 german-fix-and-update
+#ss220-german-fix-and-update-begin
+accent-german-words-12 = господа
+#ss220-german-fix-and-update-end
 accent-german-words-replace-12 = herren
 accent-german-words-13 = о боже
 accent-german-words-replace-13 = mein gott
@@ -70,7 +76,7 @@ accent-german-words-32-2 = капуста
 accent-german-words-replace-32 = kraut
 accent-german-words-33 = водка
 #ss220-german-fix-and-update-begin
-#ss220 wodka --> branntwein
+    .desc = branntwein
 accent-german-words-replace-33 = branntwein
 #ss220-german-fix-and-update-end
 accent-german-words-34 = рюкзак
@@ -110,7 +116,9 @@ accent-german-words-replace-49 = guten Tag
 accent-german-words-50 = скорая
 accent-german-words-replace-50 = krankenwagen
 accent-german-words-51 = до встречи
-accent-german-words-51-2 = до свидания             #ss220 german-fix-and-update
+#ss220-german-fix-and-update-begin
+accent-german-words-51-2 = до свидания
+#ss220-german-fix-and-update-end
 accent-german-words-replace-51 = auf Wiedersehen
 #ss220-german-fix-and-update-begin
 accent-german-words-52 = пока-пока
@@ -131,9 +139,13 @@ accent-german-words-57-2 = быстрее
 accent-german-words-replace-57 = schnell
 accent-german-words-58 = госпиталь
 accent-german-words-replace-58 = krankenhaus
-accent-german-words-59 = катушка теслы             #ss220 german-fix-and-update
+#ss220-german-fix-and-update-begin
+accent-german-words-59 = катушка теслы
+#ss220-german-fix-and-update-end
 accent-german-words-replace-59 = tesla coil
-accent-german-words-60 = катушки теслы             #ss220 german-fix-and-update
+#ss220-german-fix-and-update-begin
+accent-german-words-60 = катушки теслы
+#ss220-german-fix-and-update-end
 accent-german-words-replace-60 = tesla coils
 accent-german-words-61 = теслалуз
 accent-german-words-61-2 = теслуз
