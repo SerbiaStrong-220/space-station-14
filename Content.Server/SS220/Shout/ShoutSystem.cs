@@ -6,6 +6,7 @@ using Content.Server.Chat.Systems;
 using Content.Shared.SS220.Shout;
 using Robust.Shared.Random;
 using Robust.Shared.Prototypes;
+using Content.Shared.Chat;
 
 namespace Content.Server.SS220.Shout;
 
