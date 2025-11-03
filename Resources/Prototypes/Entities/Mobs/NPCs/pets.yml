@@ -1034,12 +1034,19 @@
   id: MobHamsterHamlet
   description: A grumpy, cute and fluffy hamster.
   components:
+  - type: MouthContainer
+  - type: ContainerContainer
+    containers:
+      mouth-slot: !type:ContainerSlot
   - type: Sprite
     drawdepth: SmallMobs
     sprite: Mobs/Pets/hamlet.rsi
     layers:
     - map: ["enum.DamageStateVisualLayers.Base", "movement"]
       state: hamster-0
+    - map: ["enum.MouthContainerVisualLayers.Cheeks"]
+      state: hamster-cheeks
+      visible: false
   - type: SpriteMovement
     movementLayers:
       movement:
