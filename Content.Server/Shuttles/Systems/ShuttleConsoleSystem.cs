@@ -59,11 +59,7 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         SubscribeLocalEvent<ShuttleConsoleComponent, ComponentShutdown>(OnConsoleShutdown);
         SubscribeLocalEvent<ShuttleConsoleComponent, PowerChangedEvent>(OnConsolePowerChange);
         SubscribeLocalEvent<ShuttleConsoleComponent, AnchorStateChangedEvent>(OnConsoleAnchorChange);
-
-        // ss220 add ui requires access start (#282)
-        SubscribeLocalEvent<ShuttleConsoleComponent, ActivatableUIOpenAttemptEvent>(OnConsoleUIOpenAttempt, after: [typeof(ActivatableUIRequiresAccessSystem)]);
-        // ss220 add ui requires access end
-
+        SubscribeLocalEvent<ShuttleConsoleComponent, AfterActivatableUIOpenEvent>(OnConsoleUIOpenAttempt);
         Subs.BuiEvents<ShuttleConsoleComponent>(ShuttleConsoleUiKey.Key, subs =>
         {
             subs.Event<ShuttleConsoleFTLBeaconMessage>(OnBeaconFTLMessage);
@@ -174,15 +170,9 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
     }
 
     private void OnConsoleUIOpenAttempt(EntityUid uid, ShuttleConsoleComponent component,
-        ActivatableUIOpenAttemptEvent args)
+        AfterActivatableUIOpenEvent args)
     {
-        // ss220 add ui requires access start (#282)
-        if (args.Cancelled)
-            return;
-        // ss220 add ui requires access end
-
-        if (!TryPilot(args.User, uid))
-            args.Cancel();
+        TryPilot(args.User, uid);
     }
 
     private void OnConsoleAnchorChange(EntityUid uid, ShuttleConsoleComponent component,

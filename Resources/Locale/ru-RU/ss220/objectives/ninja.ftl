@@ -16,3 +16,8 @@ objective-condition-intimidate-target-toxin-title = Заказ на устраш
 objective-condition-intimidate-target-toxin-desc = Вам заказали преподать урок члену экипажа станции. Отравите вашу цель несколько раз, пока она в ясном сознании.
 objective-condition-intimidate-target-toxin-desc-ssd= Цель впала в ССД, такой исход тоже возможен.
 objective-condition-intimidate-target-toxin-desc-success = Вы успешно преподали урок.
+
+ent-LeaveNoTraceObjective = Не раскрывайте себя
+    .desc = Не попадайтесь на глаза и избегайте внимания со стороны экипажа.
+
+imperial-ss220-ninja-reveal = РАСКРЫТ

@@ -6,6 +6,7 @@ using Content.Server.SS220.SuperMatter.Crystal.Components;
 using Content.Server.Station.Systems;
 using Content.Server.Tesla.Components;
 using Content.Server.Tesla.EntitySystems;
+using Content.Shared.Explosion.Components;
 using Content.Shared.SS220.SuperMatter.Functions;
 
 namespace Content.Server.SS220.SuperMatter.Crystal;
@@ -101,20 +102,29 @@ public sealed partial class SuperMatterSystem
                                                 crystal.Comp.PressureAccumulator / crystal.Comp.UpdatesBetweenBroadcast);
         SendAdminChatAlert(crystal, Loc.GetString("supermatter-admin-alert-delamination-end", ("state", smState)));
         EntityUid? spawnedUid = null;
-        switch (smState)
+
+        if (TryComp<ExplosiveComponent>(crystal, out var explosiveComponent))
         {
-            case SuperMatterPhaseState.ResonanceRegion:
-                _explosion.TriggerExplosive(crystal.Owner);
-                break;
-            case SuperMatterPhaseState.SingularityRegion:
-                spawnedUid = Spawn(crystal.Comp.SingularitySpawnPrototype, Transform(crystal.Owner).Coordinates);
-                break;
-            case SuperMatterPhaseState.TeslaRegion:
-                spawnedUid = Spawn(crystal.Comp.TeslaSpawnPrototype, Transform(crystal.Owner).Coordinates);
-                break;
-            default:
-                _explosion.TriggerExplosive(crystal.Owner);
-                break;
+            switch (smState)
+            {
+                case SuperMatterPhaseState.ResonanceRegion:
+                    explosiveComponent.ExplosionType = crystal.Comp.ResonanceRegionExplosion;
+
+                    break;
+
+                case SuperMatterPhaseState.SingularityRegion:
+                    explosiveComponent.ExplosionType = crystal.Comp.SingularityRegionExplosion;
+                    break;
+
+                case SuperMatterPhaseState.TeslaRegion:
+                    explosiveComponent.ExplosionType = crystal.Comp.TeslaRegionExplosion;
+                    break;
+
+                default:
+                    _explosion.TriggerExplosive(crystal.Owner);
+                    break;
+            }
+            _explosion.TriggerExplosive(crystal.Owner);
         }
 
         if (spawnedUid.HasValue
