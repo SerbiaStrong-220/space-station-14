@@ -2,7 +2,7 @@
   id: LightDynamic
   antagLimits:
     Traitor: 8
-    SleeperAgents: 4
+    TraitorSleeper: 4
   name: dynamic-light-name
   loreNames: NamesLightDynamic
 
@@ -10,7 +10,7 @@
   id: MediumDynamic
   antagLimits:
     Traitor: 6
-    SleeperAgents: 2
+    TraitorSleeper: 2
   name: dynamic-medium-name
   loreNames: NamesMediumDynamic
 
@@ -18,7 +18,7 @@
   id: HardDynamic
   antagLimits:
     Traitor: 4
-    SleeperAgents: 1
+    TraitorSleeper: 1
   playersRequerment: 25
   name: dynamic-hard-name
   loreNames: NamesHardDynamic

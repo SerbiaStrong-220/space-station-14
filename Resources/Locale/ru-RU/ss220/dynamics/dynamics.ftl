@@ -6,23 +6,23 @@ dynamic-type-label = Название операции:
 
 dynamic-unknown-name = НЕИЗВЕСТНО
 
-dynamic-light-lore-name-1 = укус тайпана
-dynamic-light-lore-name-2 = тихий шептун
-dynamic-light-lore-name-3 = скрытое эхо
-dynamic-light-lore-name-4 = холодный след
-dynamic-light-lore-name-5 = легкая паутина
+dynamic-light-lore-dataset-1 = укус тайпана
+dynamic-light-lore-dataset-2 = тихий шептун
+dynamic-light-lore-dataset-3 = скрытое эхо
+dynamic-light-lore-dataset-4 = холодный след
+dynamic-light-lore-dataset-5 = легкая паутина
 
-dynamic-medium-lore-name-1 = омни-вектор
-dynamic-medium-lore-name-2 = мутное шифрование
-dynamic-medium-lore-name-3 = тонкий лед
-dynamic-medium-lore-name-4 = решение Киберсана
-dynamic-medium-lore-name-5 = оглущающий звук
+dynamic-medium-lore-dataset-1 = омни-вектор
+dynamic-medium-lore-dataset-2 = мутное шифрование
+dynamic-medium-lore-dataset-3 = тонкий лед
+dynamic-medium-lore-dataset-4 = решение Киберсана
+dynamic-medium-lore-dataset-5 = оглущающий звук
 
-dynamic-hard-lore-name-1 = директива "Коллапс"
-dynamic-hard-lore-name-2 = давящий рев
-dynamic-hard-lore-name-3 = грохочущая буря
-dynamic-hard-lore-name-4 = разрушающее давление
-dynamic-hard-lore-name-5 = резкая помеха
+dynamic-hard-lore-dataset-1 = директива "Коллапс"
+dynamic-hard-lore-dataset-2 = давящий рев
+dynamic-hard-lore-dataset-3 = грохочущая буря
+dynamic-hard-lore-dataset-4 = разрушающее давление
+dynamic-hard-lore-dataset-5 = резкая помеха
 
 dynamic-light-name = [color=green]низкий[/color]
 dynamic-medium-name = [color=yellow]средний[/color]

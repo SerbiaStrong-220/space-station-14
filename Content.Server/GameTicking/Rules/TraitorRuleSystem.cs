@@ -188,11 +188,17 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
                     Loc.GetString("traitor-role-uplink-code-short", ("code", string.Join("-", code).Replace("sharp", "#"))));
                 return (code, briefing);
             }
+
+            Log.Error($"MakeTraitor {ToPrettyString(traitor)} failed to generate an uplink code on {ToPrettyString(pda)}.");
         }
         else if (pda is null && uplinked)
         {
             Log.Debug($"MakeTraitor {ToPrettyString(traitor)} - Uplink is implant");
             briefing += "\n" + Loc.GetString("traitor-role-uplink-implant-short");
+        }
+        else
+        {
+            Log.Error($"MakeTraitor failed on {ToPrettyString(traitor)} - No uplink could be added");
         }
 
         return (null, briefing);
@@ -260,12 +266,12 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
     }
 
     // SS220 Dynamics begin
-    private void InitDynamic(EntityUid ent, TraitorRuleComponent? rule)
+    private void InitDynamic(EntityUid uid, TraitorRuleComponent? rule)
     {
-        if (!Resolve(ent, ref rule))
+        if (!Resolve(uid, ref rule))
             return;
 
-        if (!TryComp<TraitorDynamicsComponent>(ent, out var dynamicComp))
+        if (!TryComp<TraitorDynamicsComponent>(uid, out var dynamicComp))
             return;
 
         if (dynamicComp.Dynamic != null)

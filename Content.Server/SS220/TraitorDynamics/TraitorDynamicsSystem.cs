@@ -43,7 +43,7 @@ public sealed class TraitorDynamicsSystem : EntitySystem
     [Dependency] private readonly StoreSystem _store = default!;
 
     [ValidatePrototypeId<WeightedRandomPrototype>]
-    private const string WeightsProto = "WeightedDynamicsList";
+    private readonly ProtoId<WeightedRandomPrototype> _weightsProto = "WeightedDynamicsList";
 
     private ProtoId<DynamicPrototype>? _currentDynamic = null;
 
@@ -192,8 +192,8 @@ public sealed class TraitorDynamicsSystem : EntitySystem
                 continue;
 
             var rawValue = currentPrice * discount.Value;
-            var roundedValue = Math.Round(rawValue.Double(), MidpointRounding.AwayFromZero);
-            finalPrice[discount.Key] = Math.Max(currentPrice.Double() - roundedValue, 1);
+            var roundedValue = Math.Round(rawValue.Float(), MidpointRounding.AwayFromZero);
+            finalPrice[discount.Key] = Math.Max(currentPrice.Float() - roundedValue, 1);
         }
 
         return new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>(finalPrice);
@@ -229,10 +229,10 @@ public sealed class TraitorDynamicsSystem : EntitySystem
         var ev = new DynamicSettedEvent(dynamicProto.ID);
         RaiseLocalEvent(ev);
 
-        if (dynamicProto.LoreNames == default || !_prototype.TryIndex(dynamicProto.LoreNames, out var namesProto))
+        if (dynamicProto.LoreNames == default || !_prototype.TryIndex(dynamicProto.LoreNames, out var datasetPrototype))
             return;
 
-        dynamicProto.SelectedLoreName = _random.Pick(namesProto.ListNames);
+        dynamicProto.SelectedLoreName = _random.Pick(datasetPrototype);
     }
 
     public void SetDynamic(string proto)
@@ -257,46 +257,40 @@ public sealed class TraitorDynamicsSystem : EntitySystem
     /// <returns></returns>
     public string GetRandomDynamic(int playerCount = 0, bool force = false)
     {
-        var validWeight = _prototype.Index<WeightedRandomPrototype>(WeightsProto);
+        var validWeight = _prototype.Index<WeightedRandomPrototype>(_weightsProto);
         var selectedDynamic = string.Empty;
 
         var originalProto = new Dictionary<string, float>(validWeight.Weights);
 
-        try
+        while (validWeight.Weights.Keys.Count > 0)
         {
-            while (validWeight.Weights.Keys.Count > 0)
+            var currentDynamic = validWeight.Pick(_random);
+
+            if (!_prototype.TryIndex<DynamicPrototype>(currentDynamic, out var dynamicProto))
             {
-                var currentDynamic = validWeight.Pick(_random);
-
-                if (!_prototype.TryIndex<DynamicPrototype>(currentDynamic, out var dynamicProto))
-                {
-                    validWeight.Weights.Remove(currentDynamic);
-                    continue;
-                }
-
-                if (playerCount == 0 || force)
-                {
-                    selectedDynamic = dynamicProto.ID;
-                    break;
-                }
-
-                if (playerCount >= dynamicProto.PlayersRequerment)
-                {
-                    selectedDynamic = dynamicProto.ID;
-                    break;
-                }
-
                 validWeight.Weights.Remove(currentDynamic);
+                continue;
             }
+
+            if (playerCount == 0 || force)
+            {
+                selectedDynamic = dynamicProto.ID;
+                break;
+            }
+
+            if (playerCount >= dynamicProto.PlayersRequerment)
+            {
+                selectedDynamic = dynamicProto.ID;
+                break;
+            }
+
+            validWeight.Weights.Remove(currentDynamic);
         }
 
-        finally
+        validWeight.Weights.Clear();
+        foreach (var k in originalProto)
         {
-            validWeight.Weights.Clear();
-            foreach (var k in originalProto)
-            {
-                validWeight.Weights[k.Key] = k.Value;
-            }
+            validWeight.Weights[k.Key] = k.Value;
         }
 
         return selectedDynamic;

@@ -11,6 +11,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Content.Shared.SS220.EntityEffects.Events;
+using Content.Shared.Chat;
 
 namespace Content.Server.SS220.CultYogg.Rave;
 
