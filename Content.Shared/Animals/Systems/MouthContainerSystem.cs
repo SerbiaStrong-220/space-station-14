@@ -35,7 +35,7 @@ public sealed class MouthContainerSystem : EntitySystem
     private void OnGetVerb(Entity<MouthContainerComponent> ent, ref GetVerbsEvent<Verb> args)
     {
         var toInsert = _hands.GetActiveItem(args.User);
-        if (CanInsert(ent, toInsert, ent))
+        if (CanInsert(ent, toInsert, ent)) //&& toInsert != null && _whitelistSystem.IsWhitelistFail(ent.Comp.EquipmentWhitelist, toInsert.Value)
         {
             var v = new Verb
             {
@@ -82,7 +82,7 @@ public sealed class MouthContainerSystem : EntitySystem
         var mouthComp = Comp<MouthContainerComponent>(subject);
         var toInsert = ent.Owner;
 
-        if (IsEmpty(mouthComp, subject) && subject != toInsert)
+        if (IsEmpty(mouthComp, subject) && subject != toInsert) // && _whitelistSystem.IsWhitelistFail(mouthComp.EquipmentWhitelist, toInsert)
         {
             var v = new Verb
             {
@@ -142,7 +142,7 @@ public sealed class MouthContainerSystem : EntitySystem
     }
 
 
-    public bool CanInsert(EntityUid uid, EntityUid? toInsert, MouthContainerComponent? component = null)
+    private bool CanInsert(EntityUid uid, EntityUid? toInsert, MouthContainerComponent? component = null)
     {
         if (!Resolve(uid, ref component))
             return false;
@@ -151,13 +151,9 @@ public sealed class MouthContainerSystem : EntitySystem
 
         return IsEmpty(component, uid);
     }
-    public bool IsEmpty(MouthContainerComponent component, EntityUid uid)
+
+    private bool IsEmpty(MouthContainerComponent component, EntityUid uid)
     {
         return component.MouthSlot.ContainedEntity == null;
     }
 }
-
-
-
-
-

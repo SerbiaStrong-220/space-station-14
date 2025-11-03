@@ -1038,6 +1038,10 @@
   - type: ContainerContainer
     containers:
       mouth-slot: !type:ContainerSlot
+  - type: MouthContainerVisuals
+  - type: Appearance
+    appearanceDataInit:
+      enum.MouthContainerVisuals.Stored: false
   - type: Sprite
     drawdepth: SmallMobs
     sprite: Mobs/Pets/hamlet.rsi
