@@ -73,7 +73,7 @@ public sealed class StoreBoundUserInterface : BoundUserInterface
 
                 UpdateListingsWithSearchFilter();
                 _menu?.SetFooterVisibility(msg.ShowFooter);
-                _menu?.SetFooterDynamic(msg.DynamicName); // SS220 DynamicTraitor
+                _menu?.AppendFooterDynamic(msg.DynamicName); // SS220 DynamicTraitor
                 _menu?.UpdateRefund(msg.AllowRefund);
                 break;
         }

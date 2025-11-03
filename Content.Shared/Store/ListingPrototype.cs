@@ -391,14 +391,27 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
         AddCostModifier(modifierSourceId, mewModifier);
     }
     /// <summary>
-    /// Sets new prices
+    /// Overwrites the current item cost with the provided <paramref name="newCost"/>.
     /// </summary>
-    /// <param name="newCost"> new OriginalCost</param>
+    /// <remarks>
+    /// This method sets the cost directly, completely ignoring and replacing any values
+    /// that might have been set by cost modifiers or previous adjustments. Use this when
+    /// you need explicit, absolute control over the price.
+    /// </remarks>
+    /// <param name="newCost">The new cost dictionary to assign.</param>
     public void SetNewCost(Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> newCost)
     {
         OriginalCost = newCost.ToDictionary();
     }
 
+    /// <summary>
+    /// Restores the item's cost to the original value defined in its prototype.yml
+    /// </summary>
+    /// <remarks>
+    /// Since the cost can be modified at runtime e.g., by <see cref="SetNewCost"/>,
+    /// this method provides a way to revert to the base, unmodified cost as it was
+    /// initially loaded from the prototype catalog. This is the "source of truth" price.
+    /// </remarks>
     public void ReturnCostFromCatalog()
     {
         OriginalCost = CostFromCatalog;

@@ -100,17 +100,12 @@ public sealed partial class StoreMenu : DefaultWindow
     }
 
     // SS220 DynamicTraitor begin
-    public void SetFooterDynamic(LocId? dynamicName)
+    public void AppendFooterDynamic(LocId? dynamicName)
     {
         if (!TraitorFooter.Visible)
             return;
 
-        if (!dynamicName.HasValue)
-        {
-            DynamicLabel.Text += " " + Loc.GetString("dynamic-unknown-name");
-            return;
-        }
-        DynamicLabel.Text += " " + Loc.GetString(dynamicName);
+        DynamicLabel.Text += " " + Loc.GetString(dynamicName ?? "dynamic-unknown-name");
     }
     // SS220 DynamicTraitor end
 
