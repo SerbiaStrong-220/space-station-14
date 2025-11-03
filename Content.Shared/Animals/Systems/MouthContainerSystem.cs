@@ -17,7 +17,6 @@ public sealed class MouthContainerSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
-
     public override void Initialize()
     {
         SubscribeLocalEvent<MouthContainerComponent, ComponentStartup>(OnStartup);
@@ -117,7 +116,7 @@ public sealed class MouthContainerSystem : EntitySystem
             return false;
 
         _container.Insert(toInsert.Value, component.MouthSlot);
-        // UpdateAppearance(uid, component);
+        UpdateAppearance(uid, component);
         _popup.PopupPredicted("Поместил", uid, uid);
         return true;
     }
@@ -132,15 +131,15 @@ public sealed class MouthContainerSystem : EntitySystem
         var toremove = component.MouthSlot.ContainedEntity.Value;
 
         _container.RemoveEntity(uid, toremove);
-        // UpdateAppearance(uid, component);
+        UpdateAppearance(uid, component);
         _popup.PopupPredicted("Вынул", uid, uid);
         return true;
     }
 
-    // private void UpdateAppearance(EntityUid uid, MouthContainerComponent component)
-    // {
-    //     Appearance.SetData(uid, MouthContainerVisuals.Stored, component.MouthSlot.ContainedEntity != null);
-    // }
+    private void UpdateAppearance(EntityUid uid, MouthContainerComponent component)
+    {
+        Appearance.SetData(uid, MouthContainerVisuals.Stored, component.MouthSlot.ContainedEntity != null);
+    }
 
 
     public bool CanInsert(EntityUid uid, EntityUid? toInsert, MouthContainerComponent? component = null)
@@ -154,10 +153,7 @@ public sealed class MouthContainerSystem : EntitySystem
     }
     public bool IsEmpty(MouthContainerComponent component, EntityUid uid)
     {
-        if (HasComp<MouthContainerComponent>(uid))
-            return component.MouthSlot.ContainedEntity == null;
-
-        return true;
+        return component.MouthSlot.ContainedEntity == null;
     }
 }
 

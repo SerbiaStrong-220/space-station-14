@@ -1044,8 +1044,8 @@
     layers:
     - map: ["enum.DamageStateVisualLayers.Base", "movement"]
       state: hamster-0
-    - map: ["enum.MouthContainerVisualLayers.Cheeks"]
-      state: hamster-cheeks
+    - state: hamster-cheeks
+      map: ["enum.MouthContainerVisualLayers.Cheeks"]
       visible: false
   - type: SpriteMovement
     movementLayers:
