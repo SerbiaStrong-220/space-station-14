@@ -15,4 +15,13 @@ public sealed partial class MouthContainerComponent : Component
     [DataField]
     public EntityWhitelist? EquipmentWhitelist;
 
+    [DataField]
+    public LocId InsertVerb = "insert-to-mouth";
+    [DataField]
+    public LocId EjectVerb = "eject-from-mouth";
+    [DataField]
+    public LocId InsertMessage = "insert-to-mouth-success";
+    [DataField]
+    public LocId EjectMessage = "eject-from-mouth-success";
+
 }

@@ -40,7 +40,7 @@ public sealed class MouthContainerSystem : EntitySystem
             var v = new Verb
             {
                 Priority = 1,
-                Text = "Поместить в рот",
+                Text = Loc.GetString(ent.Comp.InsertVerb),
                 Disabled = false,
                 Impact = LogImpact.Medium,
                 DoContactInteraction = true,
@@ -58,7 +58,7 @@ public sealed class MouthContainerSystem : EntitySystem
                 var v = new Verb
                 {
                     Priority = 1,
-                    Text = "Вынуть изо рта",
+                    Text = Loc.GetString(ent.Comp.EjectVerb),
                     Disabled = false,
                     Impact = LogImpact.Medium,
                     DoContactInteraction = true,
@@ -87,7 +87,7 @@ public sealed class MouthContainerSystem : EntitySystem
             var v = new Verb
             {
                 Priority = 1,
-                Text = "Поместить в рот",
+                Text = Loc.GetString(mouthComp.InsertVerb),
                 Disabled = false,
                 Impact = LogImpact.Medium,
                 DoContactInteraction = true,
@@ -117,7 +117,7 @@ public sealed class MouthContainerSystem : EntitySystem
 
         _container.Insert(toInsert.Value, component.MouthSlot);
         UpdateAppearance(uid, component);
-        _popup.PopupPredicted("Поместил", uid, uid);
+        _popup.PopupPredicted(Loc.GetString(component.InsertMessage), uid, uid);
         return true;
     }
     public bool TryEject(EntityUid uid, MouthContainerComponent? component = null)
@@ -132,7 +132,7 @@ public sealed class MouthContainerSystem : EntitySystem
 
         _container.RemoveEntity(uid, toremove);
         UpdateAppearance(uid, component);
-        _popup.PopupPredicted("Вынул", uid, uid);
+        _popup.PopupPredicted(Loc.GetString(component.EjectMessage), uid, uid);
         return true;
     }
 
