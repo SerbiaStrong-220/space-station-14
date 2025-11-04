@@ -4,7 +4,7 @@ meta:
   engineVersion: 267.3.0
   forkId: ""
   forkVersion: ""
-  time: 10/26/2025 19:48:11
+  time: 11/02/2025 17:37:59
   entityCount: 8668
 maps: []
 grids:
@@ -66799,7 +66799,7 @@ entities:
     - type: DeltaPressure
       gridUid: 1
     - type: Door
-      secondsUntilStateChange: -526007.6
+      secondsUntilStateChange: -526164.3
       state: Opening
 - proto: WindoorSecureArmoryLocked
   entities:
@@ -67369,6 +67369,7 @@ entities:
       pos: -14.5,-16.5
       parent: 1
     - type: DeltaPressure
+      maxEffectivePressure: 1000000
       gridUid: 1
   - uid: 8576
     components:
@@ -67377,6 +67378,7 @@ entities:
       pos: -13.5,-16.5
       parent: 1
     - type: DeltaPressure
+      maxEffectivePressure: 1000000
       gridUid: 1
   - uid: 8577
     components:
@@ -67385,6 +67387,7 @@ entities:
       pos: -11.5,-16.5
       parent: 1
     - type: DeltaPressure
+      maxEffectivePressure: 1000000
       gridUid: 1
   - uid: 8578
     components:
@@ -67393,6 +67396,7 @@ entities:
       pos: -10.5,-16.5
       parent: 1
     - type: DeltaPressure
+      maxEffectivePressure: 1000000
       gridUid: 1
   - uid: 8579
     components:
