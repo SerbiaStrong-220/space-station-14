@@ -10,7 +10,7 @@ public sealed class MouthContainerVisualizerSystem : VisualizerSystem<MouthConta
         if (args.Sprite == null)
             return;
 
-        if (AppearanceSystem.TryGetData<bool>(uid, MouthContainerVisuals.Stored, out var isStored, args.Component))
+        if (AppearanceSystem.TryGetData<bool>(uid, MouthContainerVisuals.Visible, out var isStored, args.Component))
             SpriteSystem.LayerSetVisible((uid, args.Sprite), MouthContainerVisualLayers.Cheeks, isStored);
     }
 }

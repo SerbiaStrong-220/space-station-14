@@ -9,6 +9,8 @@ public sealed partial class MouthContainerComponent : Component
     [ViewVariables]
     public ContainerSlot MouthSlot = default!;
 
+    public bool IsVisibleCheeks;
+
     [ViewVariables]
     public readonly string MouthSlotId = "mouth-slot";
 

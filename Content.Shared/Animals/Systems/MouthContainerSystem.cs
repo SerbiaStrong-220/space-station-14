@@ -4,6 +4,9 @@ using Content.Shared.Body.Events;
 using Content.Shared.Database;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Item;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
@@ -16,16 +19,20 @@ public sealed class MouthContainerSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
     [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<MouthContainerComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<MouthContainerComponent, BeingGibbedEvent>(OnEntityGibbedEvent);
         SubscribeLocalEvent<MouthContainerComponent, GetVerbsEvent<Verb>>(OnGetVerb);
+        SubscribeLocalEvent<MouthContainerComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<ItemComponent, GetVerbsEvent<Verb>>(OnGetVerbItem);
 
         base.Initialize();
     }
+
+
 
     private void OnStartup(EntityUid uid, MouthContainerComponent component, ComponentStartup args)
     {
@@ -35,7 +42,7 @@ public sealed class MouthContainerSystem : EntitySystem
     private void OnGetVerb(Entity<MouthContainerComponent> ent, ref GetVerbsEvent<Verb> args)
     {
         var toInsert = _hands.GetActiveItem(args.User);
-        if (CanInsert(ent, toInsert, ent)) //&& toInsert != null && _whitelistSystem.IsWhitelistFail(ent.Comp.EquipmentWhitelist, toInsert.Value)
+        if (CanInsert(ent, toInsert, ent) && toInsert != null) //&& _whitelistSystem.IsWhitelistFail(ent.Comp.EquipmentWhitelist, toInsert.Value)
         {
             var v = new Verb
             {
@@ -82,7 +89,7 @@ public sealed class MouthContainerSystem : EntitySystem
         var mouthComp = Comp<MouthContainerComponent>(subject);
         var toInsert = ent.Owner;
 
-        if (IsEmpty(mouthComp, subject) && subject != toInsert) // && _whitelistSystem.IsWhitelistFail(mouthComp.EquipmentWhitelist, toInsert)
+        if (IsEmpty(mouthComp, subject) && subject != toInsert) //&& _whitelistSystem.IsWhitelistFail(mouthComp.EquipmentWhitelist, toInsert)
         {
             var v = new Verb
             {
@@ -138,7 +145,29 @@ public sealed class MouthContainerSystem : EntitySystem
 
     private void UpdateAppearance(EntityUid uid, MouthContainerComponent component)
     {
-        Appearance.SetData(uid, MouthContainerVisuals.Stored, component.MouthSlot.ContainedEntity != null);
+        UpdateSprite(uid, component);
+        Appearance.SetData(uid, MouthContainerVisuals.Visible, component.IsVisibleCheeks);
+    }
+
+    private void OnMobStateChanged(Entity<MouthContainerComponent> ent, ref MobStateChangedEvent args)
+    {
+        UpdateAppearance(ent.Owner, ent.Comp);
+    }
+
+    public void UpdateSprite(EntityUid uid, MouthContainerComponent component)
+    {
+        component.IsVisibleCheeks = GetVisible();
+
+        bool GetVisible()
+        {
+            if (component.MouthSlot.ContainedEntity == null)
+                return false;
+
+            if (TryComp<MobStateComponent>(uid, out var mobState) && !_mobStateSystem.IsAlive(uid, mobState))
+                return false;
+
+            return true;
+        }
     }
 
 

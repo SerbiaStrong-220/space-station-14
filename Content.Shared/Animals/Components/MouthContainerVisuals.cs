@@ -5,7 +5,7 @@ namespace Content.Shared.Animals.Components
     [Serializable, NetSerializable]
     public enum MouthContainerVisuals
     {
-        Stored,
+        Visible,
     }
 
 }
