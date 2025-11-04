@@ -11,14 +11,7 @@
             "name": "icon"
         },
         {
-            "name": "icon-flash"
-        },
-        {
-            "name": "off-equipped-HELMET",
-            "directions": 4
-        },
-        {
-            "name": "on-equipped-HELMET",
+            "name": "equipped-HELMET",
             "directions": 4
         },
         {
