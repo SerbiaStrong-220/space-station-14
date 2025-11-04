@@ -1035,13 +1035,13 @@
   description: A grumpy, cute and fluffy hamster.
   components:
   - type: MouthContainer
+    whitelist:
+      sizes:
+      - Tiny
+      - Small
   - type: ContainerContainer
     containers:
       mouth-slot: !type:ContainerSlot
-        whitelist:
-          sizes:
-          - Tiny
-          - Small
   - type: MouthContainerVisuals
   - type: Appearance
     appearanceDataInit:

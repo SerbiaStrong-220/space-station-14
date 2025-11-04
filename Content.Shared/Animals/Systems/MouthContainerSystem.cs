@@ -42,12 +42,12 @@ public sealed class MouthContainerSystem : EntitySystem
     private void OnGetVerb(Entity<MouthContainerComponent> ent, ref GetVerbsEvent<Verb> args)
     {
         var toInsert = _hands.GetActiveItem(args.User);
-        if (CanInsert(ent, toInsert, ent) && toInsert != null) //&& _whitelistSystem.IsWhitelistFail(ent.Comp.EquipmentWhitelist, toInsert.Value)
+        if (CanInsert(ent, toInsert, ent))
         {
             var v = new Verb
             {
                 Priority = 1,
-                Text = Loc.GetString(ent.Comp.InsertVerb),
+                Text = Loc.GetString(ent.Comp.InsertVerbOut),
                 Disabled = false,
                 Impact = LogImpact.Medium,
                 DoContactInteraction = true,
@@ -62,10 +62,16 @@ public sealed class MouthContainerSystem : EntitySystem
         {
             if (ent.Comp.MouthSlot.ContainedEntity != null)
             {
+                var str = "";
+                if (args.User == args.Target)
+                    str = Loc.GetString(ent.Comp.EjectVerbIn);
+                else
+                    str = Loc.GetString(ent.Comp.EjectVerbOut);
+
                 var v = new Verb
                 {
                     Priority = 1,
-                    Text = Loc.GetString(ent.Comp.EjectVerb),
+                    Text = str,
                     Disabled = false,
                     Impact = LogImpact.Medium,
                     DoContactInteraction = true,
@@ -89,12 +95,12 @@ public sealed class MouthContainerSystem : EntitySystem
         var mouthComp = Comp<MouthContainerComponent>(subject);
         var toInsert = ent.Owner;
 
-        if (IsEmpty(mouthComp, subject) && subject != toInsert) //&& _whitelistSystem.IsWhitelistFail(mouthComp.EquipmentWhitelist, toInsert)
+        if (CanInsert(subject, toInsert, mouthComp))
         {
             var v = new Verb
             {
                 Priority = 1,
-                Text = Loc.GetString(mouthComp.InsertVerb),
+                Text = Loc.GetString(mouthComp.InsertVerbIn),
                 Disabled = false,
                 Impact = LogImpact.Medium,
                 DoContactInteraction = true,
@@ -119,12 +125,10 @@ public sealed class MouthContainerSystem : EntitySystem
             return false;
         if (!CanInsert(uid, toInsert.Value, component))
             return false;
-        if (_whitelistSystem.IsWhitelistFail(component.EquipmentWhitelist, toInsert.Value))
-            return false;
 
         _container.Insert(toInsert.Value, component.MouthSlot);
-        UpdateAppearance(uid, component);
         _popup.PopupPredicted(Loc.GetString(component.InsertMessage), uid, uid);
+        UpdateAppearance(uid, component);
         return true;
     }
     public bool TryEject(EntityUid uid, MouthContainerComponent? component = null)
@@ -138,8 +142,8 @@ public sealed class MouthContainerSystem : EntitySystem
         var toremove = component.MouthSlot.ContainedEntity.Value;
 
         _container.RemoveEntity(uid, toremove);
-        UpdateAppearance(uid, component);
         _popup.PopupPredicted(Loc.GetString(component.EjectMessage), uid, uid);
+        UpdateAppearance(uid, component);
         return true;
     }
 
@@ -176,6 +180,10 @@ public sealed class MouthContainerSystem : EntitySystem
         if (!Resolve(uid, ref component))
             return false;
         if (toInsert == null)
+            return false;
+        if (toInsert == uid)
+            return false;
+        if (_whitelistSystem.IsWhitelistFail(component.Whitelist, toInsert.Value))
             return false;
 
         return IsEmpty(component, uid);
