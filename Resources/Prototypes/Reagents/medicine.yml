@@ -1086,6 +1086,8 @@
         damage:
           types:
             Slash: -1.8 #ss220 combat medicine be-gone
+            # Slash: -2 # 8 per u SS220-off-value
+            # Heat: 0.2 # 0.8 per u SS220-off-value
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
