@@ -69,15 +69,12 @@ public sealed class TraitorDynamicsSystem : EntitySystem
     private void OnDynamicAdded(DynamicSettedEvent ev)
 {
     var dynamic = _prototype.Index(ev.Dynamic);
-    var rules = _gameTicker.GetAllGameRulePrototypes();
+    var rules = EntityQueryEnumerator<AntagSelectionComponent>();
 
-    var roleMap = new Dictionary<string, List<(EntityPrototype Rule, AntagSelectionComponent Comp)>>();
+    var roleMap = new Dictionary<string, List<(EntityUid Entity, AntagSelectionComponent Comp)>>();
 
-    foreach (var rule in rules)
+    while (rules.MoveNext(out var uid, out var selection))
     {
-        if (!rule.TryGetComponent<AntagSelectionComponent>(out var selection, EntityManager.ComponentFactory))
-            continue;
-
         foreach (var def in selection.Definitions)
         {
             var allRoles = def.PrefRoles.Select(p => p.Id);
@@ -86,11 +83,11 @@ public sealed class TraitorDynamicsSystem : EntitySystem
             {
                 if (!roleMap.TryGetValue(role, out var list))
                 {
-                    list = new List<(EntityPrototype, AntagSelectionComponent)>();
+                    list = new List<(EntityUid, AntagSelectionComponent)>();
                     roleMap[role] = list;
                 }
 
-                list.Add((rule, selection));
+                list.Add((uid, selection));
             }
         }
     }
