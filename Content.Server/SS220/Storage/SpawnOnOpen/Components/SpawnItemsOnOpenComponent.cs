@@ -1,15 +1,16 @@
 using Robust.Shared.Prototypes;
+using Content.Shared.EntityTable.EntitySelectors;
 
-namespace Content.Server.SS220.Storage.SpawnOnOpen.Components;
+namespace Content.Server.SS220.Storage.SpawnOnStorageOpen.Components;
 
 [RegisterComponent]
 public sealed partial class SpawnOnStorageOpenComponent : Component
 {
     /// <summary>
-    ///     The list of entities to spawn,ALL OF WHICH WILL BE SPAWNED
+    ///     Basically any class inheriting from <see cref="EntityTableSelector"/> will fit
     /// </summary>
-    [DataField("items")]
-    public List <EntProtoId> Item = new();
+    [DataField("selector")]
+    public EntityTableSelector Selector;
 
     [ViewVariables(VVAccess.ReadWrite)]
     [DataField("uses")]
