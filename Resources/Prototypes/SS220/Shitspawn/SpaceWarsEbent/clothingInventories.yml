@@ -36,7 +36,7 @@
     ClothingHandsMercGlovesCombat: 4
     ClothingHandsGlovesFingerless: 5
 
-    ClothingBeltSyndieHolster: 3
+    ClothingBeltHolster: 3
 
     ClothingShoesBootsCombat: 4
     ClothingShoesBootsMerc: 8
@@ -61,7 +61,7 @@
     ClothingOuterArmorBasicSlim: 4
     ClothingBeltMercWebbing: 4
     ClothingOuterVestHazard: 1
-    ClothingOuterVestWebMerc: 2
+    ClothingOuterVestWeb: 2
 
     ClothingNeckCloakNanotrasen: 3
 
@@ -94,7 +94,7 @@
 
     ClothingBeltMilitaryWebbing: 4
 
-    ClothingOuterHardsuitSyndie: 4
+    ClothingOuterHardsuitSyndie: 2
 
     ClothingOuterAerostaticBomberJacket: 2
     ClothingOuterArmorBobmer: 2
@@ -130,7 +130,7 @@
 
     ClothingBeltMercWebbing: 4
 
-    ClothingOuterHardsuitERTSecurity: 4
+    ClothingOuterHardsuitERTSecurity: 2
 
     ClothingOuterArmorBobmer: 4
     ClothingOuterCoatBomber: 4
