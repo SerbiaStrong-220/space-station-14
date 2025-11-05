@@ -348,6 +348,7 @@ public sealed class MobThresholdSystem : EntitySystem
 
         CheckThresholds(ent, mobState, ent, damageable);
         UpdateAllEffects((ent, ent, mobState, damageable), mobState.CurrentState);
+        Dirty(ent);
     }
     // SS220 modifiable_mob_thresholds end
     #endregion

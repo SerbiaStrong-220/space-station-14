@@ -68,7 +68,8 @@
   - type: UnpoweredFlashlight
   - type: PointLight
     enabled: false
-    radius: 1.5
+    radius: 1.7
+    falloff: 3
     softness: 5
     autoRot: true
   - type: Ringer
@@ -1730,8 +1731,8 @@
   - type: Instrument
     allowPercussion: false
     handheld: true
-    bank: 1
     program: 2
+    bank: 100 # Defined in space-station-14.sf2
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -1876,6 +1877,63 @@
       - NotekeeperCartridge
       - MessengerCartridgeClient # SS220 Messenger
       - NanoTaskCartridge
+
+- type: entity
+  parent: [ SyndiPDA, BaseSyndicateContraband ]
+  id: SyndiOperativePDA
+  name: syndicate operative PDA
+  description: Death to NT!
+  components:
+  - type: Pda
+    id: SyndiOperativeIDCard
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-syndi #SS220 PDA-Resprite-TODO
+  - type: Icon
+    sprite: SS220/Objects/Devices/pda.rsi #SS220 PDA-Resprite-TODO
+    state: pda-syndi #SS220 PDA-Resprite-TODO
+
+- type: entity
+  parent: [ SyndiOperativePDA, BaseSyndicateContraband ]
+  id: SyndiCorpsmanPDA
+  name: syndicate corpsman PDA
+  description: Commander... I need to cook!
+  components:
+  - type: Pda
+    id: SyndiCorpsmanIDCard
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-syndi-agent #SS220 PDA-Resprite-TODO
+  - type: Icon
+    sprite: SS220/Objects/Devices/pda.rsi #SS220 PDA-Resprite-TODO
+    state: pda-syndi-agent #SS220 PDA-Resprite-TODO
+  - type: CartridgeLoader
+    uiKey: enum.PdaUiKey.Key
+    preinstalled:
+      - NotekeeperCartridge
+      - NanoTaskCartridge
+      - MedTekCartridge
+
+- type: entity
+  parent: [ SyndiOperativePDA, BaseSyndicateContraband ]
+  id: SyndiCommanderPDA
+  name: syndicate commander PDA
+  description: So what are we, some kind of Nukie squad?
+  components:
+  - type: Pda
+    id: SyndiCommanderIDCard
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-syndi #SS220 PDA-Resprite-TODO
+  - type: Icon
+    sprite: SS220/Objects/Devices/pda.rsi #SS220 PDA-Resprite-TODO
+    state: pda-syndi #SS220 PDA-Resprite-TODO
 
 - type: entity
   parent: BaseSecurityPDA
@@ -2515,6 +2573,26 @@
   #ss220 add pdaidpainter end
 
 - type: entity
+  parent: BasePDA
+  id: SeniorCourierPDA
+  name: senior courier PDA
+  description: Smells like postage stamps and shuttle fuel.
+  components:
+  - type: Pda
+    id: CargoIDCard
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-cargo #SS220 PDA-Resprite-TODO
+  - type: PdaBorderColor
+    borderColor: "#e39751"
+    accentVColor: "#DFDFDF"
+  - type: Icon
+    sprite: Objects/Devices/pda.rsi #SS220 PDA-Resprite-TODO
+    state: pda-cargo #SS220 PDA-Resprite-TODO
+
+- type: entity
   parent: [ BaseMajorContraband, SyndiPDA ]
   id: PiratePDA
   name: pirate PDA
@@ -2588,7 +2666,7 @@
       - MessengerCartridgeClient # SS220 Messenger
 
 - type: entity
-  parent: [BasePDA, VoiceLock]
+  parent: [BasePDA, SelectableLock]
   id: ChameleonPDA
   name: passenger PDA
   description: Why isn't it gray?

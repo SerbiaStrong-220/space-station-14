@@ -28,6 +28,7 @@
     children:
     - id: FlashlightSeclite
     - id: WeaponDisabler
+    - id: WeaponTaser
     - id: ClothingBeltSecurityFilled
     - id: Flash
     - id: BodySecurityCamera #SS220-Bodycam
@@ -47,7 +48,7 @@
       amount: 2
     - id: NetworkConfigurator
     - id: Binoculars
-    - id: WeaponEnergyShotgun # SS220 Adding an energy shotgun to the warden
+    - id: WeaponEnergyShotgun
 
 - type: entityTable
   id: FillLockerWardenHarduit
@@ -75,6 +76,7 @@
       # prob: 0.8 #SS220-old-bug-save
     - id: BodySecurityCamera #SS220-Bodycam
     - id: WeaponDisabler
+    - id: WeaponTaser
     - id: ClothingUniformJumpsuitSecGrey
       prob: 0.3
     - id: ClothingHeadHelmetBasic
@@ -113,7 +115,7 @@
     # - id: ClothingEyesGlassesSecurity #SS220-brig-medic
     - id: ClothingEyesHudMedical #ss220-brig-medic
     # - id: WeaponDisabler
-    - id: TrackingImplanter
+    - id: WeaponTaser
       amount: 2
     - id: ClothingOuterHardsuitBrigmedic
     - id: OxygenTankFilled   #SS220 add-tanks-brigmed
