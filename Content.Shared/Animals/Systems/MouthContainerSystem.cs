@@ -44,7 +44,8 @@ public sealed class MouthContainerSystem : EntitySystem
 
     private void OnGetVerb(Entity<MouthContainerComponent> ent, ref GetVerbsEvent<Verb> args)
     {
-        var toInsert = _hands.GetActiveItem(args.User);
+        var subject = args.User;
+        var toInsert = _hands.GetActiveItem(subject);
         if (CanInsert(ent, toInsert, ent))
         {
             var v = new Verb
@@ -56,7 +57,7 @@ public sealed class MouthContainerSystem : EntitySystem
                 DoContactInteraction = true,
                 Act = () =>
                 {
-                    TryInsert(ent, toInsert, ent);
+                    TryInsert(ent, subject, toInsert, ent);
                 },
             };
             args.Verbs.Add(v);
@@ -105,7 +106,7 @@ public sealed class MouthContainerSystem : EntitySystem
                 DoContactInteraction = true,
                 Act = () =>
                 {
-                    TryInsert(subject, toInsert, mouthComp);
+                    TryInsert(subject, subject, toInsert, mouthComp);
                 },
             };
             args.Verbs.Add(v);
@@ -117,14 +118,14 @@ public sealed class MouthContainerSystem : EntitySystem
         TryEject(ent, ent);
     }
 
-    private void TryInsert(EntityUid uid, EntityUid? toInsert, MouthContainerComponent? component = null)
+    private void TryInsert(EntityUid uid, EntityUid subject, EntityUid? toInsert, MouthContainerComponent? component = null)
     {
         if (!Resolve(uid, ref component))
             return;
         if (!CanInsert(uid, toInsert!.Value, component))
             return;
 
-        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, uid, component.InsertDuration, new MouthContainerDoAfterEvent(toInsert.Value), uid, uid, uid)
+        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, subject, component.InsertDuration, new MouthContainerDoAfterEvent(toInsert.Value), uid, uid, uid)
         {
             BreakOnMove = true,
             BreakOnDamage = true,
