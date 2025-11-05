@@ -4,6 +4,7 @@ using Content.Shared.EntityTable;
 using Content.Shared.Storage.Components;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 
 using static Content.Shared.Storage.EntitySpawnCollection;
 
@@ -14,7 +15,6 @@ public sealed class SpawnOnStorageOpenSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly IEntityManager _entManager = default!;
     [Dependency] private readonly IPrototypeManager _protoManager = default!;
-    [Dependency] private readonly IPrototypeManager _protoManager = default!;
 
     public override void Initialize()
     {
@@ -24,18 +24,20 @@ public sealed class SpawnOnStorageOpenSystem : EntitySystem
 
     }
 
-    private void OnOpen(Entity<SpawnOnStorageOpenComponent> ent, StorageAfterOpenEvent args)
+    private void OnOpen(Entity<SpawnOnStorageOpenComponent> ent, ref StorageAfterOpenEvent args)
     {
-        if (component.Uses <= 0)
+        if (ent.Comp.Uses <= 0)
             return;
 
-        var coords = Transform(uid).Coordinates;
+        var coords = Transform(ent.Owner).Coordinates;
 
-        foreach (var item in component.Selector.GetSpawns(new Random(),_entManager,_protoManager,new EntityTableContext()))
+        var rand = new RobustRandom();
+
+        foreach (var item in ent.Comp.Selector.GetSpawns(rand.GetRandom(), _entManager,_protoManager,new EntityTableContext()))
         {
             Spawn(item, coords);
         }
 
-        component.Uses--;
+        ent.Comp.Uses--;
     }
 }

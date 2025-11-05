@@ -74,3 +74,26 @@
   components:
   - type: AccessReader
     access: [["Medical"], ["Command"], ["Security"]]
+
+- type: entity
+  parent: CrateBaseWeldable
+  id: Autocrate
+  name: Ящик-автоспавнер(пример исполнения)
+  components:
+  - type: Icon
+    sprite: Structures/Storage/Crates/generic.rsi
+  - type: Sprite
+    sprite: Structures/Storage/Crates/generic.rsi
+  - type: Reflect
+    reflects:
+    - Energy
+    reflectProb: 0.2
+    spread: 90
+  - type: Paintable
+    group: CrateSteel
+  - type: RadiationBlockingContainer
+    resistance: 2.5
+  - type: SpawnOnStorageOpen
+    selector: !type:EntSelector
+      id: Crowbar
+
