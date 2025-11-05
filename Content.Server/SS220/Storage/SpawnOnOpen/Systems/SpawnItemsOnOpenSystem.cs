@@ -14,6 +14,7 @@ public sealed class SpawnOnStorageOpenSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly IEntityManager _entManager = default!;
     [Dependency] private readonly IPrototypeManager _protoManager = default!;
+    [Dependency] private readonly IPrototypeManager _protoManager = default!;
 
     public override void Initialize()
     {
