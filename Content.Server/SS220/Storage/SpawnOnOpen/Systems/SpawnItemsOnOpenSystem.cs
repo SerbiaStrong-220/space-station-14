@@ -22,7 +22,8 @@ public sealed class SpawnOnStorageOpenSystem : EntitySystem
         SubscribeLocalEvent<SpawnOnStorageOpenComponent, StorageAfterOpenEvent>(OnOpen);
 
     }
-    private void OnOpen(EntityUid uid, SpawnOnStorageOpenComponent component, StorageAfterOpenEvent args)
+
+    private void OnOpen(Entity<SpawnOnStorageOpenComponent> ent, StorageAfterOpenEvent args)
     {
         if (component.Uses <= 0)
             return;
