@@ -9,7 +9,7 @@ public sealed partial class SpawnOnStorageOpenComponent : Component
     /// <summary>
     ///     Basically any class inheriting from <see cref="EntityTableSelector"/> will fit
     /// </summary>
-    [DataField("selector")]
+    [DataField(required: true)]
     public EntityTableSelector Selector;
 
     [DataField]
