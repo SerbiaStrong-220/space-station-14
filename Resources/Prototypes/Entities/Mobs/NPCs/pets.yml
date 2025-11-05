@@ -1035,10 +1035,16 @@
   description: A grumpy, cute and fluffy hamster.
   components:
   - type: MouthContainer
+    priority:
+      components:
+      - NukeDisk
     whitelist:
       sizes:
       - Tiny
       - Small
+    blacklist:
+      tags:
+      - HighRiskItem
   - type: ContainerContainer
     containers:
       mouth-slot: !type:ContainerSlot

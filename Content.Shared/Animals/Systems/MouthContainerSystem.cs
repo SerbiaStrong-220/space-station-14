@@ -2,6 +2,7 @@ using Content.Shared.Popups;
 using Content.Shared.Animals.Components;
 using Content.Shared.Body.Events;
 using Content.Shared.Database;
+using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Item;
 using Content.Shared.Mobs;
@@ -20,19 +21,21 @@ public sealed class MouthContainerSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
-    [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+
+
     public override void Initialize()
     {
         SubscribeLocalEvent<MouthContainerComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<MouthContainerComponent, BeingGibbedEvent>(OnEntityGibbedEvent);
         SubscribeLocalEvent<MouthContainerComponent, GetVerbsEvent<Verb>>(OnGetVerb);
         SubscribeLocalEvent<MouthContainerComponent, MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<MouthContainerComponent, MouthContainerDoAfterEvent>(InsertDoAfter);
         SubscribeLocalEvent<ItemComponent, GetVerbsEvent<Verb>>(OnGetVerbItem);
 
         base.Initialize();
     }
-
-
 
     private void OnStartup(EntityUid uid, MouthContainerComponent component, ComponentStartup args)
     {
@@ -60,30 +63,26 @@ public sealed class MouthContainerSystem : EntitySystem
         }
         else
         {
-            if (ent.Comp.MouthSlot.ContainedEntity != null)
-            {
-                var str = "";
-                if (args.User == args.Target)
-                    str = Loc.GetString(ent.Comp.EjectVerbIn);
-                else
-                    str = Loc.GetString(ent.Comp.EjectVerbOut);
+            if (ent.Comp.MouthSlot.ContainedEntity == null)
+                return;
+            string str;
+            str = Loc.GetString(args.User == args.Target ? ent.Comp.EjectVerbIn : ent.Comp.EjectVerbOut);
 
-                var v = new Verb
+            var v = new Verb
+            {
+                Priority = 1,
+                Text = str,
+                Disabled = false,
+                Impact = LogImpact.Medium,
+                DoContactInteraction = true,
+                Act = () =>
                 {
-                    Priority = 1,
-                    Text = str,
-                    Disabled = false,
-                    Impact = LogImpact.Medium,
-                    DoContactInteraction = true,
-                    Act = () =>
                     {
-                        {
-                            TryEject(ent, ent);
-                        }
-                    },
-                };
-                args.Verbs.Add(v);
-            }
+                        TryEject(ent, ent);
+                    }
+                },
+            };
+            args.Verbs.Add(v);
         }
     }
 
@@ -117,40 +116,57 @@ public sealed class MouthContainerSystem : EntitySystem
     {
         TryEject(ent, ent);
     }
-    public bool TryInsert(EntityUid uid, EntityUid? toInsert, MouthContainerComponent? component = null)
-    {
-        if (!Resolve(uid, ref component))
-            return false;
-        if (toInsert == null || component.MouthSlot.ContainedEntity == toInsert)
-            return false;
-        if (!CanInsert(uid, toInsert.Value, component))
-            return false;
 
-        _container.Insert(toInsert.Value, component.MouthSlot);
-        _popup.PopupPredicted(Loc.GetString(component.InsertMessage), uid, uid);
-        UpdateAppearance(uid, component);
-        return true;
-    }
-    public bool TryEject(EntityUid uid, MouthContainerComponent? component = null)
+    private void TryInsert(EntityUid uid, EntityUid? toInsert, MouthContainerComponent? component = null)
     {
         if (!Resolve(uid, ref component))
-            return false;
+            return;
+        if (!CanInsert(uid, toInsert!.Value, component))
+            return;
+
+        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, uid, component.InsertDuration, new MouthContainerDoAfterEvent(toInsert.Value), uid, uid, uid)
+        {
+            BreakOnMove = true,
+            BreakOnDamage = true,
+            MovementThreshold = 1.0f,
+        });
+    }
+
+    private void TryEject(EntityUid uid, MouthContainerComponent? component = null)
+    {
+        if (!Resolve(uid, ref component))
+            return;
 
         if (component.MouthSlot.ContainedEntity == null)
-            return false;
+            return;
 
         var toremove = component.MouthSlot.ContainedEntity.Value;
 
         _container.RemoveEntity(uid, toremove);
         _popup.PopupPredicted(Loc.GetString(component.EjectMessage), uid, uid);
         UpdateAppearance(uid, component);
-        return true;
+    }
+
+    private void InsertDoAfter(Entity<MouthContainerComponent> ent, ref MouthContainerDoAfterEvent args)
+    {
+        if (args.Cancelled || args.Handled || args.Args.Target == null)
+            return;
+
+        if (args.Target is not { Valid: true } target)
+            return;
+
+        if (!TryComp(target, out MouthContainerComponent? mouthContainer))
+            return;
+
+        _container.Insert(args.ToInsert, ent.Comp.MouthSlot);
+        _popup.PopupPredicted(Loc.GetString(ent.Comp.InsertMessage), ent.Owner, ent.Owner);
+        UpdateAppearance(ent.Owner, ent.Comp);
     }
 
     private void UpdateAppearance(EntityUid uid, MouthContainerComponent component)
     {
         UpdateSprite(uid, component);
-        Appearance.SetData(uid, MouthContainerVisuals.Visible, component.IsVisibleCheeks);
+        _appearance.SetData(uid, MouthContainerVisuals.Visible, component.IsVisibleCheeks);
     }
 
     private void OnMobStateChanged(Entity<MouthContainerComponent> ent, ref MobStateChangedEvent args)
@@ -158,9 +174,10 @@ public sealed class MouthContainerSystem : EntitySystem
         UpdateAppearance(ent.Owner, ent.Comp);
     }
 
-    public void UpdateSprite(EntityUid uid, MouthContainerComponent component)
+    private void UpdateSprite(EntityUid uid, MouthContainerComponent component)
     {
         component.IsVisibleCheeks = GetVisible();
+        return;
 
         bool GetVisible()
         {
@@ -174,7 +191,6 @@ public sealed class MouthContainerSystem : EntitySystem
         }
     }
 
-
     private bool CanInsert(EntityUid uid, EntityUid? toInsert, MouthContainerComponent? component = null)
     {
         if (!Resolve(uid, ref component))
@@ -183,13 +199,17 @@ public sealed class MouthContainerSystem : EntitySystem
             return false;
         if (toInsert == uid)
             return false;
+        if (_whitelistSystem.IsWhitelistPass(component.Priority, toInsert.Value))
+            return IsEmpty(component);
+        if (_whitelistSystem.IsWhitelistPass(component.Blacklist, toInsert.Value))
+            return false;
         if (_whitelistSystem.IsWhitelistFail(component.Whitelist, toInsert.Value))
             return false;
 
-        return IsEmpty(component, uid);
+        return IsEmpty(component);
     }
 
-    private bool IsEmpty(MouthContainerComponent component, EntityUid uid)
+    private static bool IsEmpty(MouthContainerComponent component)
     {
         return component.MouthSlot.ContainedEntity == null;
     }

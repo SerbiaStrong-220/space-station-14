@@ -16,6 +16,10 @@ public sealed partial class MouthContainerComponent : Component
 
     [DataField]
     public EntityWhitelist? Whitelist;
+    [DataField]
+    public EntityWhitelist? Priority;
+    [DataField]
+    public EntityWhitelist? Blacklist;
 
     [DataField]
     public LocId InsertVerbIn = "insert-to-mouth-in";
@@ -30,4 +34,6 @@ public sealed partial class MouthContainerComponent : Component
     [DataField]
     public LocId EjectMessage = "eject-from-mouth-success";
 
+    [DataField]
+    public float InsertDuration = 1f;
 }
