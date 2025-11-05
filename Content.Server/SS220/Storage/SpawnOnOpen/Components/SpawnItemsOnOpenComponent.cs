@@ -12,7 +12,6 @@ public sealed partial class SpawnOnStorageOpenComponent : Component
     [DataField("selector")]
     public EntityTableSelector Selector;
 
-    [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("uses")]
+    [DataField]
     public int Uses = 1;
 }
