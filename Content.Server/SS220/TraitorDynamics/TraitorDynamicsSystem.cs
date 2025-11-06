@@ -144,7 +144,6 @@ public sealed class TraitorDynamicsSystem : EntitySystem
     private void OnDynamicRemove(DynamicRemoveEvent ev)
     {
         _currentDynamic = null;
-        ResetDynamicPrices();
     }
 
     private void ApplyDynamicPrice(EntityUid store, IReadOnlyList<ListingDataWithCostModifiers> listings, ProtoId<DynamicPrototype> currentDynamic)
@@ -157,7 +156,9 @@ public sealed class TraitorDynamicsSystem : EntitySystem
             if (!listing.DynamicsPrices.TryGetValue(currentDynamic, out var dynamicPrice))
                 continue;
 
-            listing.SetNewCost(dynamicPrice);
+            var nameModifier= nameof(listing.DynamicsPrices);
+            listing.RemoveCostModifier(nameModifier);
+            listing.SetExactPrice(nameModifier, dynamicPrice);
 
             if (!listing.DiscountCategory.HasValue)
                 continue;
@@ -166,13 +167,13 @@ public sealed class TraitorDynamicsSystem : EntitySystem
                 continue;
 
             listing.RemoveCostModifier(listing.DiscountCategory.Value);
-            var finalPrices = ApplyDiscountsToPrice(dynamicPrice, listing, itemDiscount);
+            var discountModifier = GetDiscountModifier(dynamicPrice, listing, itemDiscount);
 
-            listing.SetExactPrice(listing.DiscountCategory.Value, finalPrices);
+            listing.AddCostModifier(listing.DiscountCategory.Value, discountModifier);
         }
     }
 
-    private Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> ApplyDiscountsToPrice(
+    private Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> GetDiscountModifier(
         Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> basePrice,
         ListingDataWithCostModifiers listing,
         ItemDiscounts itemDiscounts)
@@ -192,8 +193,8 @@ public sealed class TraitorDynamicsSystem : EntitySystem
                 continue;
 
             var rawValue = currentPrice * discount.Value;
-            var roundedValue = Math.Round(rawValue.Float(), MidpointRounding.AwayFromZero);
-            finalPrice[discount.Key] = Math.Max(currentPrice.Float() - roundedValue, 1);
+            var roundedValue =  rawValue+0.5; //Add 0.5 to round to nearest int
+            finalPrice[discount.Key] = -roundedValue.Int();
         }
 
         return new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>(finalPrice);
@@ -295,26 +296,6 @@ public sealed class TraitorDynamicsSystem : EntitySystem
 
         return selectedDynamic;
     }
-
-    private void ResetDynamicPrices()
-    {
-        var query = EntityQueryEnumerator<StoreComponent>();
-        while (query.MoveNext(out var store, out var comp))
-        {
-            if (!comp.UseDynamicPrices)
-                continue;
-
-            if (comp.AccountOwner == null)
-                continue;
-
-            var listings = _store.GetAvailableListings(comp.AccountOwner.Value, store, comp).ToArray();
-            foreach (var listing in listings)
-            {
-                listing.ReturnCostFromCatalog();
-            }
-        }
-    }
-
 
     /// <summary>
     /// Tries to find the type of dynamic while in Traitor game rule
