@@ -1,7 +1,6 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Systems;
 using Content.Server.Power.Components;
-using Content.Server.Radio.Components;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Radio;
@@ -17,12 +16,11 @@ using Robust.Shared.Utility;
 using Content.Shared.Access.Components;
 using Content.Shared.Inventory;
 using Content.Shared.PDA;
-using System.Globalization;
 using Content.Server.Popups;
 using Content.Server.SS220.Language;
-using System.Diagnostics.CodeAnalysis;
 using Content.Shared.SS220.Language.Systems;  // SS220-Add-Languages
-using Content.Server.SS220.Events; // SS220 borg-id-fix
+using Content.Server.SS220.Events;
+using Content.Server.Radio.Components; // SS220 borg-id-fix
 
 namespace Content.Server.Radio.EntitySystems;
 
@@ -113,7 +111,7 @@ public sealed class RadioSystem : EntitySystem
         var formattedName = $"[color={GetIdCardColor(messageSource)}]{GetIdCardName(messageSource)}{name}[/color]";
 
         SpeechVerbPrototype speech;
-        if (evt.SpeechVerb != null && _prototype.TryIndex(evt.SpeechVerb, out var evntProto))
+        if (evt.SpeechVerb != null && _prototype.Resolve(evt.SpeechVerb, out var evntProto))
             speech = evntProto;
         else
             speech = _chat.GetSpeechVerb(messageSource, message);
@@ -211,15 +209,17 @@ public sealed class RadioSystem : EntitySystem
         // SS220 languages begin
         foreach (var languageEv in languageRadioReceiveEvents)
         {
+            var radioSpokeEventLanguage = new RadioSpokeEvent(messageSource, languageEv.Key, channel, languageEv.Value.Receivers.ToArray());
             //ss220 add filter tts for ghost start
-            RaiseLocalEvent(new RadioSpokeEvent(messageSource, languageEv.Key, channel, languageEv.Value.Receivers.ToArray()));
+            RaiseLocalEvent(ref radioSpokeEventLanguage);
             //ss220 add filter tts for ghost end
         }
         // SS220 languages end
 
         // Dispatch TTS radio speech event for every receiver
         //ss220 add filter tts for ghost start
-        RaiseLocalEvent(new RadioSpokeEvent(messageSource, message, channel, ev.Receivers.ToArray()));
+        var radioSpokeEvent = new RadioSpokeEvent(messageSource, message, channel, ev.Receivers.ToArray());
+        RaiseLocalEvent(ref radioSpokeEvent);
         //ss220 add filter tts for ghost end
 
         if (name != Name(messageSource))
@@ -338,7 +338,7 @@ public sealed class RadioSystem : EntitySystem
 
     private void OnEncryptionChannelsChangeReceiver(Entity<IntrinsicRadioReceiverComponent> entity, ref EncryptionChannelsChangedEvent args)
     {
-        HashSet<string> channels = new();
+        HashSet<ProtoId<RadioChannelPrototype>> channels = new();
         channels.UnionWith(args.Component.Channels);
         channels.UnionWith(entity.Comp.Channels);
 

@@ -322,7 +322,6 @@
         reagents:
         - ReagentId: Beer
           Quantity: 30
-  - type: Drink
   - type: Sprite
     sprite: SS220/Objects/Sponsor/Drinks/beer_can.rsi
   - type: Item

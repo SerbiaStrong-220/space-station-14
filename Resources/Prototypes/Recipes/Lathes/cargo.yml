@@ -22,3 +22,10 @@
     Steel: 300
     Glass: 200
 # SS220 CARGO HUD ADD END
+
+- type: latheRecipe
+  id: UtilityKnife
+  result: UtilityKnife
+  completetime: 2
+  materials:
+    Steel: 100
