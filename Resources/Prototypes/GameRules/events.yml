@@ -765,6 +765,11 @@
     maxDuration: 1200
     #ss220 tweak ion storm end
   - type: IonStormRule
+  #ss220 mindshield destructiuon #3500 start
+  - type: AdditionalRuleChance
+    rules:
+      RandomMindShieldCombustion: 0.2
+  #ss220 mindshield destructiuon #3500 end
 
 - type: entity
   id: MimicVendorRule
