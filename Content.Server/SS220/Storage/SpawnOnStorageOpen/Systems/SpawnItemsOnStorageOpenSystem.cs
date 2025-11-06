@@ -1,7 +1,6 @@
 using Content.Server.SS220.Storage.SpawnOnStorageOpen.Components;
 using Content.Server.Storage.Components;
 using Content.Shared.EntityTable;
-using Content.Shared.Jaunt;
 using Content.Shared.Storage.Components;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
