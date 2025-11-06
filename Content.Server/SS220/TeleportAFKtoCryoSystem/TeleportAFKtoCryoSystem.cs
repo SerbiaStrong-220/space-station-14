@@ -111,7 +111,7 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
                 continue;
 
             if (!TeleportEntityToCryoStorage(pair.Key.Item1))
-                Log.Warning($"Cant find any cryo for {ToPrettyString(pair.Key.Item1)}! Deleting it....");
+                Log.Warning($"Cant find any cryo for {ToPrettyString(pair.Key.Item1)}! Removing from ssd teleport queue...");
 
             _toRemove.Add(pair.Key);
         }
