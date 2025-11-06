@@ -505,16 +505,16 @@
     solutions:
       injector:
         maxVol: 100
-#ss220 BS_syringe_tweak start
+  - type: Injector
+    delay: 2.5
+    injectOnly: false
+    #ss220 BS_syringe_tweak start
     transferAmounts:
     - 1
     - 5
     - 10
     - 50
-#ss220 BS_syringe_tweak end
-  - type: Injector
-    delay: 2.5
-    injectOnly: false
+    #ss220 BS_syringe_tweak end
   - type: SolutionContainerVisuals
     maxFillLevels: 2
     fillBaseName: syringe
