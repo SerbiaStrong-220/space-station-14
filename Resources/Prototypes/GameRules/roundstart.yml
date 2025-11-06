@@ -159,7 +159,7 @@
       fallbackRoles: [ NukeopsCommander, NukeopsMedic ]
       spawnerPrototype: SpawnPointNukeopsOperative
       max: 3
-      playerRatio: 25
+      playerRatio: 25 #ss220 Nukeops_balance_fix
       startingGear: SyndicateOperativeGearFull
       roleLoadout:
       - RoleSurvivalNukie
