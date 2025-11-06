@@ -77,8 +77,8 @@
 
 - type: entity
   parent: CrateBaseWeldable
-  id: Autocrate
-  name: Ящик-автоспавнер(пример исполнения)
+  id: CrateSpawnOnOpenExample
+  name: spawn-on-open crate (example)
   components:
   - type: Icon
     sprite: Structures/Storage/Crates/generic.rsi
