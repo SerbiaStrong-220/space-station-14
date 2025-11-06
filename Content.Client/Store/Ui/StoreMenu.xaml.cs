@@ -102,9 +102,6 @@ public sealed partial class StoreMenu : DefaultWindow
     // SS220 DynamicTraitor begin
     public void AppendFooterDynamic(LocId? dynamicName)
     {
-        if (!TraitorFooter.Visible)
-            return;
-
         DynamicLabel.Text += " " + Loc.GetString(dynamicName ?? "dynamic-unknown-name");
     }
     // SS220 DynamicTraitor end
@@ -198,6 +195,12 @@ public sealed partial class StoreMenu : DefaultWindow
             return string.Empty;
         }
 
+        //SS220 - TraitorDynamics - start
+        //if this is not a real discount, it’s just a decrease from dynamics
+        if (!listingDataWithCostModifiers.Categories.Contains("DiscountedItems"))
+            return string.Empty;
+        //SS220 - TraitorDynamics - end
+
         var relativeModifiersSummary = listingDataWithCostModifiers.GetModifiersSummaryRelative();
         if (relativeModifiersSummary.Count > 1)
         {
@@ -228,10 +231,10 @@ public sealed partial class StoreMenu : DefaultWindow
             var enumerator = relativeModifiersSummary.GetEnumerator();
             enumerator.MoveNext();
             var amount = enumerator.Current.Value;
-            //SS220-modifier-cannot-be-0%-start
-             if (amount == 0)
+            //SS220-dont-show-0-percent-start
+            if (amount == 0)
                  return string.Empty;
-            //SS220-modifier-cannot-be-0%-end
+            //SS220-dont-show-0-percent-end
             discountMessage = Loc.GetString(
                 "store-ui-discount-display",
                 ("amount", (amount.ToString("P0")))

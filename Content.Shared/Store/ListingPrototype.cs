@@ -43,8 +43,7 @@ public partial class ListingData : IEquatable<ListingData>
         other.RestockTime,
         other.DiscountDownTo,
         other.DisableRefund,
-        other.DynamicsPrices, // SS220 TraitorDynamics
-        other.CostFromCatalog) // SS220 TraitorDynamics
+        other.DynamicsPrices) // SS220 TraitorDynamics
     {
 
     }
@@ -69,8 +68,7 @@ public partial class ListingData : IEquatable<ListingData>
         TimeSpan restockTime,
         Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> dataDiscountDownTo,
         bool disableRefund,
-        Dictionary<ProtoId<DynamicPrototype>, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>> dynamicsPrices, // SS220 TraitorDynamics
-        IReadOnlyDictionary<ProtoId<CurrencyPrototype>, FixedPoint2> costFromCatalog) // SS220 TraitorDynamics
+        Dictionary<ProtoId<DynamicPrototype>, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>> dynamicsPrices) // SS220 TraitorDynamics
     {
         Name = name;
         DiscountCategory = discountCategory;
@@ -93,7 +91,6 @@ public partial class ListingData : IEquatable<ListingData>
         DisableRefund = disableRefund;
         DynamicsPrices = new Dictionary<ProtoId<DynamicPrototype>,
             Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>>(dynamicsPrices); // SS220 TraitorDynamics
-        CostFromCatalog = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>(costFromCatalog); // SS220 TraitorDynamics
     }
 
     [ViewVariables]
@@ -214,9 +211,6 @@ public partial class ListingData : IEquatable<ListingData>
     [DataField]
     public Dictionary<ProtoId<DynamicPrototype>, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>> DynamicsPrices = new();
 
-    [DataField]
-    public IReadOnlyDictionary<ProtoId<CurrencyPrototype>, FixedPoint2> CostFromCatalog = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>();
-    // SS220 TraitorDynamics
 
     /// <summary>
     /// Whether or not to disable refunding for the store when the listing is purchased from it.
@@ -318,8 +312,7 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
             listingData.RestockTime,
             listingData.DiscountDownTo,
             listingData.DisableRefund,
-            listingData.DynamicsPrices,
-            listingData.CostFromCatalog) // SS220 TraitorDynamics
+            listingData.DynamicsPrices)
     {
     }
 
@@ -389,32 +382,6 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
                 mewModifier[currency] = amount - originalCost;
         }
         AddCostModifier(modifierSourceId, mewModifier);
-    }
-    /// <summary>
-    /// Overwrites the current item cost with the provided <paramref name="newCost"/>.
-    /// </summary>
-    /// <remarks>
-    /// This method sets the cost directly, completely ignoring and replacing any values
-    /// that might have been set by cost modifiers or previous adjustments. Use this when
-    /// you need explicit, absolute control over the price.
-    /// </remarks>
-    /// <param name="newCost">The new cost dictionary to assign.</param>
-    public void SetNewCost(Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> newCost)
-    {
-        OriginalCost = newCost.ToDictionary();
-    }
-
-    /// <summary>
-    /// Restores the item's cost to the original value defined in its prototype.yml
-    /// </summary>
-    /// <remarks>
-    /// Since the cost can be modified at runtime e.g., by <see cref="SetNewCost"/>,
-    /// this method provides a way to revert to the base, unmodified cost as it was
-    /// initially loaded from the prototype catalog. This is the "source of truth" price.
-    /// </remarks>
-    public void ReturnCostFromCatalog()
-    {
-        OriginalCost = CostFromCatalog;
     }
     // SS220 DynamicTraitor end
 
