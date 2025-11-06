@@ -373,6 +373,7 @@
   - type: Injector
     injectOnly: false
     transferAmounts:
+    - 1 #ss220 BS_syringe_tweak
     - 5
     - 10
     - 15
@@ -504,6 +505,13 @@
     solutions:
       injector:
         maxVol: 100
+#ss220 BS_syringe_tweak start
+    transferAmounts:
+    - 1
+    - 5
+    - 10
+    - 50
+#ss220 BS_syringe_tweak end
   - type: Injector
     delay: 2.5
     injectOnly: false
