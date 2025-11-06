@@ -1,0 +1,156 @@
+- type: entity
+  parent: BaseItem
+  id: Vape
+  components:
+  - type: Clothing
+    slots: [ mask ]
+  - type: Vape
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Smokeables/Vapes/vape.rsi
+    layers:
+    - state: base_drip_tip
+    - map: [ "enum.VapeParts.Atomizer" ]
+      visible: false
+    - map: [ "enum.VapeParts.Cartridge" ]
+      visible: false
+  - type: ContainerContainer
+    containers:
+      atomizer: !type:ContainerSlot { }
+      cartridge: !type:ContainerSlot { }
+  - type: ItemSlots
+    slots:
+      atomizer:
+        name: vape-slot-component-slot-name-atomizer
+        insertSound: /Audio/SS220/Items/Vape/vape_atomizer_screwing.ogg
+        ejectSound: /Audio/SS220/Items/Vape/vape_atomizer_screwing.ogg
+        swap: false
+        startingItem: DefaultAtomizerVapePart
+        whitelist:
+          tags:
+          - VapePartAtomizer
+      cartridge:
+        name: vape-slot-component-slot-name-cartridge
+        swap: false
+        startingItem: DefaultCartridgeVapePart
+        whitelist:
+          tags:
+          - VapePartCartridge
+  - type: Appearance
+
+- type: entity
+  parent: BaseItem
+  id: BaseAtomizerVapePart
+  abstract: true
+  components:
+  - type: VapePart
+    rsi: { sprite: SS220/Objects/Consumable/Smokeables/Vapes/vape.rsi, state: base_atomizer }
+    partType: !type:AtomizerPartData
+      emaggedVolume: 40
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 20
+  - type: RefillableSolution
+    solution: smokable
+  - type: ExaminableSolution
+    solution: smokable
+  - type: Spillable
+    solution: smokable
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Smokeables/Vapes/vape.rsi
+    state: base_atomizer
+  - type: Tag
+    tags:
+    - VapePartAtomizer
+
+- type: entity
+  parent: BaseAtomizerVapePart
+  id: DefaultAtomizerVapePart
+  name: base atomizer vape part
+
+- type: entity
+  parent: BaseAtomizerVapePart
+  id: ExtendedAtomizerVapePart
+  name: extended atomizer vape part
+  components:
+  - type: VapePart
+    rsi: { sprite: SS220/Objects/Consumable/Smokeables/Vapes/vape.rsi, state: extended_atomizer }
+    partType: !type:AtomizerPartData
+      emaggedVolume: 80
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 40
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Smokeables/Vapes/vape.rsi
+    state: extended_atomizer
+
+- type: entity
+  parent: BaseAtomizerVapePart
+  id: SuperExtendedAtomizerVapePart
+  name: super extended atomizer vape part
+  components:
+  - type: VapePart
+    rsi: { sprite: SS220/Objects/Consumable/Smokeables/Vapes/vape.rsi, state: super_extended_atomizer }
+    partType: !type:AtomizerPartData
+      emaggedVolume: 120
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 60
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Smokeables/Vapes/vape.rsi
+    state: super_extended_atomizer
+
+- type: entity
+  parent: BaseItem
+  id: BaseCartridgeVapePart
+  abstract: true
+  components:
+  - type: VapePart
+    rsi: { sprite: SS220/Objects/Consumable/Smokeables/Vapes/vape.rsi, state: base_vape_cartridge }
+    partType: !type:CartridgePartData
+      consumptionRate: 0.30
+      durabilityConsumption: 0.1
+  - type: Sprite
+    # TODO ss220 sprites for vape parts (cartridges)
+    sprite: SS220/Objects/Consumable/Smokeables/Vapes/vape.rsi
+    state: base_vape_cartridge
+  - type: Tag
+    tags:
+    - VapePartCartridge
+
+- type: entity
+  parent: BaseCartridgeVapePart
+  id: DefaultCartridgeVapePart
+  name: super extended atomizer vape part
+
+- type: entity
+  parent: BaseCartridgeVapePart
+  id: ExtendedCartridgeVapePart
+  name: extended cartridge vape part
+  components:
+  - type: VapePart
+    rsi: { sprite: SS220/Objects/Consumable/Smokeables/Vapes/vape.rsi, state: extended_cartridge }
+    partType: !type:CartridgePartData
+      consumptionRate: 0.45
+      durabilityConsumption: 0.05
+  - type: Sprite
+    # TODO ss220 sprites for vape parts (cartridges)
+    sprite: SS220/Objects/Consumable/Smokeables/Vapes/vape.rsi
+    state: extended_cartridge
+
+- type: entity
+  parent: BaseCartridgeVapePart
+  id: SuperExtendedCartridgeVapePart
+  name: super extended cartridge vape part
+  components:
+  - type: VapePart
+    rsi: { sprite: SS220/Objects/Consumable/Smokeables/Vapes/vape.rsi, state: super_extended_cartridge }
+    partType: !type:CartridgePartData
+      consumptionRate: 0.60
+      durabilityConsumption: 0.01
+  - type: Sprite
+    # TODO ss220 sprites for vape parts (cartridges)
+    sprite: SS220/Objects/Consumable/Smokeables/Vapes/vape.rsi
+    state: super_extended_cartridge

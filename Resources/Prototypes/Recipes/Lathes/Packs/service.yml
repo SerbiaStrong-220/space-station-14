@@ -26,6 +26,15 @@
   - Holoprojector
   - WetFloorSign
   - WireBrush
+  # SS220 TWEAK VAPE START
+  - Vape
+  - DefaultAtomizerVapePart
+  - ExtendedAtomizerVapePart
+  - SuperExtendedAtomizerVapePart
+  - DefaultCartridgeVapePart
+  - ExtendedCartridgeVapePart
+  - SuperExtendedCartridgeVapePart
+  # SS220 TWEAK VAPE END
 
 - type: latheRecipePack
   id: ServiceBoardsStatic

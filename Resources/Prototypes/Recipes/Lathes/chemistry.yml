@@ -79,16 +79,18 @@
   materials:
     Glass: 50
 
-- type: latheRecipe
-  id: Vape
-  result: Vape
-  icon:
-    sprite: Objects/Consumable/Smokeables/Vapes/vape-standard.rsi
-    state: icon
-  completetime: 2
-  materials:
-    Plastic: 100
-    Steel: 250
+# SS220 TWEAK VAPE START
+#- type: latheRecipe
+#  id: Vape
+#  result: Vape
+#  icon:
+#    sprite: Objects/Consumable/Smokeables/Vapes/vape-standard.rsi
+#    state: icon
+#  completetime: 2
+#  materials:
+#    Plastic: 100
+#    Steel: 250
+# SS220 TWEAK VAPE END
 
 - type: latheRecipe
   id: BaseChemistryEmptyVial

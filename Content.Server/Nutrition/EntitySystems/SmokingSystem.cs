@@ -48,7 +48,7 @@ namespace Content.Server.Nutrition.EntitySystems
 
             InitializeCigars();
             InitializePipes();
-            InitializeVapes();
+            //InitializeVapes(); // SS220 TWEAK VAPE
         }
 
         private void OnExtinguishEvent(Entity<SmokableComponent> ent, ref ExtinguishEvent args)
