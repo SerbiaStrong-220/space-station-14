@@ -10,6 +10,7 @@ using Content.Shared.Bed.Cryostorage;
 using Content.Shared.Body.Components;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
+using Content.Shared.GameTicking;
 using Content.Shared.Mind.Components;
 using Content.Shared.Preferences;
 using Content.Shared.SS220.CCVars;
@@ -53,8 +54,11 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
 
         _cfg.OnValueChanged(CCVars220.AfkTeleportToCryo, SetAfkTeleportToCryo, true);
         _cfg.OnValueChanged(CCVars220.SDDTimeOut, SetSSDTimeout, true);
+
         _playerManager.PlayerStatusChanged += OnPlayerChange;
+
         SubscribeLocalEvent<CryostorageComponent, TeleportToCryoFinished>(HandleTeleportFinished);
+        SubscribeLocalEvent<RoundEndMessageEvent>(OnRoundEnd);
     }
 
     private void SetAfkTeleportToCryo(float value)
@@ -62,6 +66,12 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
 
     private void SetSSDTimeout(float value)
         => _ssdTimeout = TimeSpan.FromSeconds(value);
+
+    private void OnRoundEnd(RoundEndMessageEvent ev)
+    {
+        _entityEnteredSSDTimes.Clear();
+        _toRemove.Clear();
+    }
 
     public override void Shutdown()
     {
