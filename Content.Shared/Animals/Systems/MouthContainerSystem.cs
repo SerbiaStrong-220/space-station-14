@@ -73,6 +73,7 @@ public sealed class MouthContainerSystem : EntitySystem
     private void AddEjectVerb(EntityUid uid, ref GetVerbsEvent<AlternativeVerb> args, MouthContainerComponent component)
     {
         var str = Loc.GetString(args.User == args.Target ? component.EjectVerbIn : component.EjectVerbOut);
+        var subject = args.User;
 
         var verb = new AlternativeVerb
         {
@@ -80,7 +81,7 @@ public sealed class MouthContainerSystem : EntitySystem
             Text = str,
             Impact = LogImpact.Medium,
             DoContactInteraction = true,
-            Act = () => TryEject(uid, component)
+            Act = () => TryEject(uid, subject, component)
         };
         args.Verbs.Add(verb);
     }
@@ -131,16 +132,28 @@ public sealed class MouthContainerSystem : EntitySystem
         });
     }
 
-    private void TryEject(EntityUid uid, MouthContainerComponent? component = null)
+    private void TryEject(EntityUid uid, EntityUid subject, MouthContainerComponent? component = null)
     {
         if (!Resolve(uid, ref component) || component.MouthSlot.ContainedEntity == null)
             return;
 
         var toremove = component.MouthSlot.ContainedEntity.Value;
 
-        _container.RemoveEntity(uid, toremove);
-        _popup.PopupPredicted(Loc.GetString(component.EjectMessage), uid, uid);
-        UpdateAppearance(uid, component);
+        if (uid == subject)
+        {
+            _container.RemoveEntity(uid, component.MouthSlot.ContainedEntity.Value);
+            _popup.PopupPredicted(Loc.GetString(component.EjectMessage), uid, uid);
+        }
+        else
+        {
+            _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, uid, component.EjectDuration, new MouthContainerDoAfterEvent(toremove), uid, uid, uid)
+            {
+                BreakOnMove = true,
+                BreakOnDamage = true,
+                MovementThreshold = 1.0f,
+            });
+        }
+
     }
 
     private void InsertDoAfter(Entity<MouthContainerComponent> ent, ref MouthContainerDoAfterEvent args)
@@ -151,8 +164,17 @@ public sealed class MouthContainerSystem : EntitySystem
         if (!TryComp(target, out MouthContainerComponent? _))
             return;
 
-        _container.Insert(args.ToInsert, ent.Comp.MouthSlot);
-        _popup.PopupPredicted(Loc.GetString(ent.Comp.InsertMessage), ent.Owner, ent.Owner);
+        if (ent.Comp.MouthSlot.ContainedEntity == null)
+        {
+            _container.Insert(args.ToInsert, ent.Comp.MouthSlot);
+            _popup.PopupPredicted(Loc.GetString(ent.Comp.InsertMessage), ent.Owner, ent.Owner);
+        }
+        else
+        {
+            _container.RemoveEntity(ent.Owner, ent.Comp.MouthSlot.ContainedEntity.Value);
+            _popup.PopupPredicted(Loc.GetString(ent.Comp.EjectMessage), ent.Owner, ent.Owner);
+        }
+
         UpdateAppearance(ent.Owner, ent.Comp);
     }
 

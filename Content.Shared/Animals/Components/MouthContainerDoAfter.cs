@@ -7,7 +7,7 @@ namespace Content.Shared.Animals.Components;
 public sealed partial class MouthContainerDoAfterEvent : SimpleDoAfterEvent
 {
     [NonSerialized]
-    public EntityUid ToInsert = default!;
+    public EntityUid ToInsert;
 
     public MouthContainerDoAfterEvent(EntityUid toInsert)
     {

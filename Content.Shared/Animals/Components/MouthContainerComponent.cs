@@ -36,4 +36,6 @@ public sealed partial class MouthContainerComponent : Component
 
     [DataField]
     public float InsertDuration = 1f;
+    [DataField]
+    public float EjectDuration = 5f;
 }
