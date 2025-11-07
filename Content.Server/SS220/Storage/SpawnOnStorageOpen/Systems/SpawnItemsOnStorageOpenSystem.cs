@@ -50,7 +50,7 @@ public sealed class SpawnOnStorageOpenSystem : EntitySystem
 
     private void OnMapInit(Entity<SpawnOnStorageOpenComponent> ent, ref MapInitEvent args)
     {
-        if(!EntityManager.TryGetComponent(ent.Owner,out EntityStorageComponent? cmp))
+        if(!TryComp(ent.Owner, out EntityStorageComponent? cmp))
         {
             return;
         }
