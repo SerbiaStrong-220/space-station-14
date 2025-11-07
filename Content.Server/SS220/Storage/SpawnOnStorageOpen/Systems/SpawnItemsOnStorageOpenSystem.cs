@@ -42,10 +42,12 @@ public sealed class SpawnOnStorageOpenSystem : EntitySystem
 
         ent.Comp.Uses--;
     }
+
     private void OnOpen(Entity<SpawnOnStorageOpenComponent> ent, ref StorageAfterOpenEvent args)
     {
         SpawnTriggered(ent);
     }
+
     private void OnMapInit(Entity<SpawnOnStorageOpenComponent> ent, ref MapInitEvent args)
     {
         if(!EntityManager.TryGetComponent(ent.Owner,out EntityStorageComponent? cmp))
