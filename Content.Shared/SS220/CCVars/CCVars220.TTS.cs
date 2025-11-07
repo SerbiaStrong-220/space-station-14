@@ -5,6 +5,24 @@ namespace Content.Shared.SS220.CCVars;
 public sealed partial class CCVars220
 {
     /// <summary>
+    /// Master switch for receiving tts
+    /// </summary>
+    public static readonly CVarDef<bool> SendTTS =
+        CVarDef.Create("tts.receive_tts", true, CVar.CLIENT | CVar.REPLICATED | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Master switch for receiving tts
+    /// </summary>
+    public static readonly CVarDef<bool> PlayDifferentRadioTogether =
+        CVarDef.Create("tts.play_different_radio_together", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Master switch for receiving tts
+    /// </summary>
+    public static readonly CVarDef<bool> PlayDifferentTalkingTogether =
+        CVarDef.Create("tts.play_different_talk_together", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
     /// Maximum entity capacity for tts queue
     /// </summary>
     public static readonly CVarDef<int> MaxQueuedPerEntity =
