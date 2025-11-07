@@ -26,7 +26,7 @@ public sealed class SpawnOnStorageOpenSystem : EntitySystem
 
     }
 
-    private void SpawnTriggered(Entity<SpawnOnStorageOpenComponent> ent)
+    private void TriggerSpawn(Entity<SpawnOnStorageOpenComponent> ent)
     {
         if (LifeStage(ent.Owner) != EntityLifeStage.MapInitialized)
             return;
