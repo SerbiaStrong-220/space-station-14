@@ -116,14 +116,14 @@ public sealed class MouthContainerSystem : EntitySystem
         TryEject(ent, ent);
     }
 
-    private void TryInsert(EntityUid uid, EntityUid subject, EntityUid? toInsert, MouthContainerComponent? component = null)
+    private void TryInsert(EntityUid uid, EntityUid subject, EntityUid toInsert, MouthContainerComponent? component = null)
     {
         if (!Resolve(uid, ref component))
             return;
-        if (!CanInsert(uid, toInsert!.Value, component))
+        if (!CanInsert(uid, toInsert, component))
             return;
 
-        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, subject, component.InsertDuration, new MouthContainerDoAfterEvent(toInsert.Value), uid, uid, uid)
+        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, subject, component.InsertDuration, new MouthContainerDoAfterEvent(toInsert), uid, uid, uid)
         {
             BreakOnMove = true,
             BreakOnDamage = true,
