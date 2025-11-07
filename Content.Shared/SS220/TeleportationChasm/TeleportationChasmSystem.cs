@@ -2,16 +2,17 @@
 
 using Content.Shared.ActionBlocker;
 using Content.Shared.Labels.Components;
+using Content.Shared.Light.Components;
 using Content.Shared.Movement.Events;
 using Content.Shared.SS220.Photocopier.Forms;
 using Content.Shared.Station.Components;
 using Content.Shared.StepTrigger.Systems;
 using Content.Shared.Storage;
-using Content.Shared.Tiles;
 using Content.Shared.Weapons.Misc;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Physics;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -63,6 +64,7 @@ public sealed class TeleportationChasmSystem : EntitySystem
         foreach (var uid in toRemove)
         {
             RemComp<TeleportationChasmFallingComponent>(uid);
+            _blocker.UpdateCanMove(uid);
         }
     }
 
@@ -113,11 +115,11 @@ public sealed class TeleportationChasmSystem : EntitySystem
         //    validLocations.Add(transform.Coordinates);
         //}
 
-        var locations = EntityQueryEnumerator<FloorTileComponent>();//smth else
-        while (locations.MoveNext(out _, out _))
+        var locations = EntityQueryEnumerator<PoweredLightComponent, TransformComponent>();//not sure
+        while (locations.MoveNext(out _, out _, out var transform))
         {
-            if (!TryComp<TransformComponent>(ent, out var transform))
-                continue;
+            //if (!TryComp<TransformComponent>(ent, out var transform))
+            //    continue;
 
             validLocations.Add(transform.Coordinates);
         }
