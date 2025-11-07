@@ -1,5 +1,3 @@
-using Content.Shared.Popups;
-using Content.Shared.Animals.Components;
 using Content.Shared.Body.Events;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
@@ -8,11 +6,12 @@ using Content.Shared.Item;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 
-namespace Content.Shared.Animals.Systems;
+namespace Content.Shared.SS220.Animals.MouthContainer;
 
 public sealed class MouthContainerSystem : EntitySystem
 {
@@ -31,7 +30,8 @@ public sealed class MouthContainerSystem : EntitySystem
         SubscribeLocalEvent<MouthContainerComponent, BeingGibbedEvent>(OnEntityGibbedEvent);
         SubscribeLocalEvent<MouthContainerComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerb);
         SubscribeLocalEvent<MouthContainerComponent, MobStateChangedEvent>(OnMobStateChanged);
-        SubscribeLocalEvent<MouthContainerComponent, MouthContainerDoAfterEvent>(InsertDoAfter);
+        SubscribeLocalEvent<MouthContainerComponent, MouthContainerDoAfterEvent>(
+            InsertDoAfter);
         SubscribeLocalEvent<ItemComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerbItem);
 
         base.Initialize();
@@ -57,7 +57,11 @@ public sealed class MouthContainerSystem : EntitySystem
         }
     }
 
-    private void AddInsertVerb(EntityUid uid, ref GetVerbsEvent<AlternativeVerb> args, EntityUid user, EntityUid item, MouthContainerComponent component)
+    private void AddInsertVerb(EntityUid uid,
+        ref GetVerbsEvent<AlternativeVerb> args,
+        EntityUid user,
+        EntityUid item,
+        MouthContainerComponent component)
     {
         var verb = new AlternativeVerb
         {
@@ -70,7 +74,9 @@ public sealed class MouthContainerSystem : EntitySystem
         args.Verbs.Add(verb);
     }
 
-    private void AddEjectVerb(EntityUid uid, ref GetVerbsEvent<AlternativeVerb> args, MouthContainerComponent component)
+    private void AddEjectVerb(EntityUid uid,
+        ref GetVerbsEvent<AlternativeVerb> args,
+        MouthContainerComponent component)
     {
         var str = Loc.GetString(args.User == args.Target ? component.EjectVerbIn : component.EjectVerbOut);
         var subject = args.User;
@@ -117,83 +123,99 @@ public sealed class MouthContainerSystem : EntitySystem
         TryEject(ent, ent);
     }
 
-    private void TryInsert(EntityUid uid, EntityUid subject, EntityUid toInsert, MouthContainerComponent? component = null)
-{
-    if (!Resolve(uid, ref component))
-        return;
-    if (!CanInsert(uid, toInsert, component))
-        return;
-
-    if (!Exists(toInsert))
-        return;
-
-    _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, subject, component.InsertDuration, new MouthContainerDoAfterEvent(toInsert), uid, uid, uid)
+    private void TryInsert(EntityUid uid,
+        EntityUid subject,
+        EntityUid toInsert,
+        MouthContainerComponent? component = null)
     {
-        BreakOnMove = true,
-        BreakOnDamage = true,
-        MovementThreshold = 1.0f,
-    });
-}
+        if (!Resolve(uid, ref component))
+            return;
+        if (!CanInsert(uid, toInsert, component))
+            return;
 
-private void TryEject(EntityUid uid, EntityUid subject, MouthContainerComponent? component = null)
-{
-    if (!Resolve(uid, ref component) || component.MouthSlot.ContainedEntity == null)
-        return;
+        if (!Exists(toInsert))
+            return;
 
-    var toremove = component.MouthSlot.ContainedEntity.Value;
-
-    if (!Exists(toremove))
-        return;
-
-    if (uid == subject)
-    {
-        _container.RemoveEntity(uid, component.MouthSlot.ContainedEntity.Value);
-        _popup.PopupPredicted(Loc.GetString(component.EjectMessage), uid, uid);
-        UpdateAppearance(uid, component);
-    }
-    else
-    {
-        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, uid, component.EjectDuration, new MouthContainerDoAfterEvent(toremove), uid, uid, uid)
+        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager,
+            subject,
+            component.InsertDuration,
+            new MouthContainerDoAfterEvent(toInsert),
+            uid,
+            uid,
+            uid)
         {
             BreakOnMove = true,
             BreakOnDamage = true,
             MovementThreshold = 1.0f,
         });
     }
-}
 
-private void InsertDoAfter(Entity<MouthContainerComponent> ent, ref MouthContainerDoAfterEvent args)
-{
-    if (args.Cancelled || args.Handled || args.Target is not { Valid: true } target)
-        return;
-
-    if (!TryComp(target, out MouthContainerComponent? _))
-        return;
-
-    if (!Exists(ent) || !Exists(args.ToInsert))
-        return;
-
-    if (ent.Comp.MouthSlot.ContainedEntity == null)
+    private void TryEject(EntityUid uid, EntityUid subject, MouthContainerComponent? component = null)
     {
-        if (Exists(args.ToInsert) && _container.CanInsert(args.ToInsert, ent.Comp.MouthSlot))
+        if (!Resolve(uid, ref component) || component.MouthSlot.ContainedEntity == null)
+            return;
+
+        var toremove = component.MouthSlot.ContainedEntity.Value;
+
+        if (!Exists(toremove))
+            return;
+
+        if (uid == subject)
         {
-            _container.Insert(args.ToInsert, ent.Comp.MouthSlot);
-            _popup.PopupPredicted(Loc.GetString(ent.Comp.InsertMessage), ent.Owner, ent.Owner);
+            _container.RemoveEntity(uid, component.MouthSlot.ContainedEntity.Value);
+            _popup.PopupPredicted(Loc.GetString(component.EjectMessage), uid, uid);
+            UpdateAppearance(uid, component);
+        }
+        else
+        {
+            _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager,
+                uid,
+                component.EjectDuration,
+                new MouthContainerDoAfterEvent(toremove),
+                uid,
+                uid,
+                uid)
+            {
+                BreakOnMove = true,
+                BreakOnDamage = true,
+                MovementThreshold = 1.0f,
+            });
         }
     }
-    else
-    {
-        var containedEntity = ent.Comp.MouthSlot.ContainedEntity.Value;
-        if (Exists(containedEntity))
-        {
-            _container.RemoveEntity(ent.Owner, containedEntity);
-            _popup.PopupPredicted(Loc.GetString(ent.Comp.EjectMessage), ent.Owner, ent.Owner);
-        }
-    }
 
-    UpdateAppearance(ent.Owner, ent.Comp);
-    args.Handled = true;
-}
+    private void InsertDoAfter(Entity<MouthContainerComponent> ent,
+        ref MouthContainerDoAfterEvent args)
+    {
+        if (args.Cancelled || args.Handled || args.Target is not { Valid: true } target)
+            return;
+
+        if (!TryComp(target, out MouthContainerComponent? _))
+            return;
+
+        if (!Exists(ent) || !Exists(args.ToInsert))
+            return;
+
+        if (ent.Comp.MouthSlot.ContainedEntity == null)
+        {
+            if (Exists(args.ToInsert) && _container.CanInsert(args.ToInsert, ent.Comp.MouthSlot))
+            {
+                _container.Insert(args.ToInsert, ent.Comp.MouthSlot);
+                _popup.PopupPredicted(Loc.GetString(ent.Comp.InsertMessage), ent.Owner, ent.Owner);
+            }
+        }
+        else
+        {
+            var containedEntity = ent.Comp.MouthSlot.ContainedEntity.Value;
+            if (Exists(containedEntity))
+            {
+                _container.RemoveEntity(ent.Owner, containedEntity);
+                _popup.PopupPredicted(Loc.GetString(ent.Comp.EjectMessage), ent.Owner, ent.Owner);
+            }
+        }
+
+        UpdateAppearance(ent.Owner, ent.Comp);
+        args.Handled = true;
+    }
 
     private void UpdateAppearance(EntityUid uid, MouthContainerComponent component)
     {

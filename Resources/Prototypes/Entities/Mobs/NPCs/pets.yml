@@ -1034,6 +1034,7 @@
   id: MobHamsterHamlet
   description: A grumpy, cute and fluffy hamster.
   components:
+  #SS220 Mouth container begin
   - type: MouthContainer
     priority:
       components:
@@ -1052,15 +1053,19 @@
   - type: Appearance
     appearanceDataInit:
       enum.MouthContainerVisuals.Visible: false
+  #SS220 Mouth container end
   - type: Sprite
     drawdepth: SmallMobs
     sprite: Mobs/Pets/hamlet.rsi
     layers:
     - map: ["enum.DamageStateVisualLayers.Base", "movement"]
       state: hamster-0
+    #SS220 Mouth container begin
     - state: hamster-cheeks
+      sprite: SS220/Mobs/Pets/hamlet.rsi
       map: ["enum.MouthContainerVisualLayers.Cheeks"]
       visible: false
+    #SS220 Mouth container end
   - type: SpriteMovement
     movementLayers:
       movement:

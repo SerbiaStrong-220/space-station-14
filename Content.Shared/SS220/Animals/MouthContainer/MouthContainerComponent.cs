@@ -1,7 +1,7 @@
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 
-namespace Content.Shared.Animals.Components;
+namespace Content.Shared.SS220.Animals.MouthContainer;
 
 [RegisterComponent]
 public sealed partial class MouthContainerComponent : Component

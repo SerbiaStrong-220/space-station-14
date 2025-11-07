@@ -1,7 +1,7 @@
 ﻿using Content.Shared.DoAfter;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.Animals.Components;
+namespace Content.Shared.SS220.Animals.MouthContainer;
 
 [Serializable, NetSerializable]
 public sealed partial class MouthContainerDoAfterEvent : SimpleDoAfterEvent

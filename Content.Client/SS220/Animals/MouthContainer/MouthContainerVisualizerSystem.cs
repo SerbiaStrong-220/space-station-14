@@ -1,7 +1,7 @@
-﻿using Content.Shared.Animals.Components;
+﻿using Content.Shared.SS220.Animals.MouthContainer;
 using Robust.Client.GameObjects;
 
-namespace Content.Client.Animals;
+namespace Content.Client.SS220.Animals.MouthContainer;
 
 public sealed class MouthContainerVisualizerSystem : VisualizerSystem<MouthContainerVisualsComponent>
 {
