@@ -30,8 +30,7 @@ public sealed class MouthContainerSystem : EntitySystem
         SubscribeLocalEvent<MouthContainerComponent, BeingGibbedEvent>(OnEntityGibbedEvent);
         SubscribeLocalEvent<MouthContainerComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerb);
         SubscribeLocalEvent<MouthContainerComponent, MobStateChangedEvent>(OnMobStateChanged);
-        SubscribeLocalEvent<MouthContainerComponent, MouthContainerDoAfterEvent>(
-            InsertDoAfter);
+        SubscribeLocalEvent<MouthContainerComponent, MouthContainerDoAfterEvent>(InsertDoAfter);
         SubscribeLocalEvent<ItemComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerbItem);
 
         base.Initialize();
@@ -50,10 +49,11 @@ public sealed class MouthContainerSystem : EntitySystem
         if (CanInsert(ent, toInsert, ent))
         {
             AddInsertVerb(ent, ref args, subject, toInsert!.Value, ent.Comp);
+
         }
-        else if (ent.Comp.MouthSlot.ContainedEntity != null)
+        if (ent.Comp.MouthSlot.ContainedEntity != null)
         {
-            AddEjectVerb(ent, ref args, ent.Comp);
+            AddEjectVerb(ent.Owner, ref args, ent.Comp);
         }
     }
 
@@ -165,35 +165,42 @@ public sealed class MouthContainerSystem : EntitySystem
             _container.RemoveEntity(uid, component.MouthSlot.ContainedEntity.Value);
             _popup.PopupPredicted(Loc.GetString(component.EjectMessage), uid, uid);
             UpdateAppearance(uid, component);
+            return;
         }
-        else
+
+
+        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager,
+            subject,
+            component.EjectDuration,
+            new MouthContainerDoAfterEvent(uid),
+            uid,
+            uid,
+            uid)
         {
-            _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager,
-                uid,
-                component.EjectDuration,
-                new MouthContainerDoAfterEvent(toremove),
-                uid,
-                uid,
-                uid)
-            {
-                BreakOnMove = true,
-                BreakOnDamage = true,
-                MovementThreshold = 1.0f,
-            });
-        }
+            BreakOnMove = true,
+            BreakOnDamage = true,
+            MovementThreshold = 1.0f,
+        });
     }
 
     private void InsertDoAfter(Entity<MouthContainerComponent> ent,
         ref MouthContainerDoAfterEvent args)
     {
         if (args.Cancelled || args.Handled || args.Target is not { Valid: true } target)
+        {
             return;
+        }
+
 
         if (!TryComp(target, out MouthContainerComponent? _))
+        {
             return;
+        }
 
         if (!Exists(ent) || !Exists(args.ToInsert))
+        {
             return;
+        }
 
         if (ent.Comp.MouthSlot.ContainedEntity == null)
         {
