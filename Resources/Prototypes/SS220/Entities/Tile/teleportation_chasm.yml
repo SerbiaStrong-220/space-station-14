@@ -1,0 +1,49 @@
+- type: entity
+  id: FloorTeleportationChasmEntity
+  name: teleportation chasm
+  description: It can take you on a very long journey.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: TeleportationChasm
+  - type: StepTrigger
+    requiredTriggeredSpeed: 0
+    intersectRatio: 0.4
+    blacklist:
+      tags:
+      - Catwalk
+  - type: Transform
+    anchored: true
+  - type: Clickable
+  - type: Sprite
+    sprite: Tiles/Planet/Chasms/basalt_chasm.rsi
+    drawdepth: BelowFloor
+    layers:
+    - state: chasm
+  - type: Icon
+    sprite: Tiles/Planet/Chasms/basalt_chasm.rsi
+    state: full
+  - type: IconSmooth
+    key: chasm
+    additionalKeys:
+    - walls
+    base: chasm
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        layer:
+        - WallLayer
+        mask:
+        - ItemMask
+        density: 1000
+        hard: false
+  - type: Tag
+    tags:
+    - HideContextMenu
