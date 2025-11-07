@@ -118,65 +118,82 @@ public sealed class MouthContainerSystem : EntitySystem
     }
 
     private void TryInsert(EntityUid uid, EntityUid subject, EntityUid toInsert, MouthContainerComponent? component = null)
-    {
-        if (!Resolve(uid, ref component))
-            return;
-        if (!CanInsert(uid, toInsert, component))
-            return;
+{
+    if (!Resolve(uid, ref component))
+        return;
+    if (!CanInsert(uid, toInsert, component))
+        return;
 
-        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, subject, component.InsertDuration, new MouthContainerDoAfterEvent(toInsert), uid, uid, uid)
+    if (!Exists(toInsert))
+        return;
+
+    _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, subject, component.InsertDuration, new MouthContainerDoAfterEvent(toInsert), uid, uid, uid)
+    {
+        BreakOnMove = true,
+        BreakOnDamage = true,
+        MovementThreshold = 1.0f,
+    });
+}
+
+private void TryEject(EntityUid uid, EntityUid subject, MouthContainerComponent? component = null)
+{
+    if (!Resolve(uid, ref component) || component.MouthSlot.ContainedEntity == null)
+        return;
+
+    var toremove = component.MouthSlot.ContainedEntity.Value;
+
+    if (!Exists(toremove))
+        return;
+
+    if (uid == subject)
+    {
+        _container.RemoveEntity(uid, component.MouthSlot.ContainedEntity.Value);
+        _popup.PopupPredicted(Loc.GetString(component.EjectMessage), uid, uid);
+        UpdateAppearance(uid, component);
+    }
+    else
+    {
+        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, uid, component.EjectDuration, new MouthContainerDoAfterEvent(toremove), uid, uid, uid)
         {
             BreakOnMove = true,
             BreakOnDamage = true,
             MovementThreshold = 1.0f,
         });
     }
+}
 
-    private void TryEject(EntityUid uid, EntityUid subject, MouthContainerComponent? component = null)
+private void InsertDoAfter(Entity<MouthContainerComponent> ent, ref MouthContainerDoAfterEvent args)
+{
+    if (args.Cancelled || args.Handled || args.Target is not { Valid: true } target)
+        return;
+
+    if (!TryComp(target, out MouthContainerComponent? _))
+        return;
+
+    if (!Exists(ent) || !Exists(args.ToInsert))
+        return;
+
+    if (ent.Comp.MouthSlot.ContainedEntity == null)
     {
-        if (!Resolve(uid, ref component) || component.MouthSlot.ContainedEntity == null)
-            return;
-
-        var toremove = component.MouthSlot.ContainedEntity.Value;
-
-        if (uid == subject)
-        {
-            _container.RemoveEntity(uid, component.MouthSlot.ContainedEntity.Value);
-            _popup.PopupPredicted(Loc.GetString(component.EjectMessage), uid, uid);
-        }
-        else
-        {
-            _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, uid, component.EjectDuration, new MouthContainerDoAfterEvent(toremove), uid, uid, uid)
-            {
-                BreakOnMove = true,
-                BreakOnDamage = true,
-                MovementThreshold = 1.0f,
-            });
-        }
-
-    }
-
-    private void InsertDoAfter(Entity<MouthContainerComponent> ent, ref MouthContainerDoAfterEvent args)
-    {
-        if (args.Cancelled || args.Handled || args.Target is not { Valid: true } target)
-            return;
-
-        if (!TryComp(target, out MouthContainerComponent? _))
-            return;
-
-        if (ent.Comp.MouthSlot.ContainedEntity == null)
+        if (Exists(args.ToInsert) && _container.CanInsert(args.ToInsert, ent.Comp.MouthSlot))
         {
             _container.Insert(args.ToInsert, ent.Comp.MouthSlot);
             _popup.PopupPredicted(Loc.GetString(ent.Comp.InsertMessage), ent.Owner, ent.Owner);
         }
-        else
+    }
+    else
+    {
+        var containedEntity = ent.Comp.MouthSlot.ContainedEntity.Value;
+        if (Exists(containedEntity))
         {
-            _container.RemoveEntity(ent.Owner, ent.Comp.MouthSlot.ContainedEntity.Value);
+            _container.RemoveEntity(ent.Owner, containedEntity);
             _popup.PopupPredicted(Loc.GetString(ent.Comp.EjectMessage), ent.Owner, ent.Owner);
         }
-
-        UpdateAppearance(ent.Owner, ent.Comp);
     }
+
+    UpdateAppearance(ent.Owner, ent.Comp);
+    args.Handled = true;
+}
 
     private void UpdateAppearance(EntityUid uid, MouthContainerComponent component)
     {
