@@ -23,7 +23,6 @@ public sealed class MouthContainerSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
 
-
     public override void Initialize()
     {
         SubscribeLocalEvent<MouthContainerComponent, ComponentStartup>(OnStartup);
@@ -32,7 +31,6 @@ public sealed class MouthContainerSystem : EntitySystem
         SubscribeLocalEvent<MouthContainerComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<MouthContainerComponent, MouthContainerDoAfterEvent>(InsertDoAfter);
         SubscribeLocalEvent<ItemComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerbItem);
-
         base.Initialize();
     }
 
@@ -45,12 +43,11 @@ public sealed class MouthContainerSystem : EntitySystem
     {
         var subject = args.User;
         var toInsert = _hands.GetActiveItem(subject);
-
         if (CanInsert(ent, toInsert, ent))
         {
             AddInsertVerb(ent, ref args, subject, toInsert!.Value, ent.Comp);
-
         }
+
         if (ent.Comp.MouthSlot.ContainedEntity != null)
         {
             AddEjectVerb(ent.Owner, ref args, ent.Comp);
@@ -69,25 +66,22 @@ public sealed class MouthContainerSystem : EntitySystem
             Text = Loc.GetString(component.InsertVerbOut),
             Impact = LogImpact.Medium,
             DoContactInteraction = true,
-            Act = () => TryInsert(uid, user, item, component)
+            Act = () => TryInsert(uid, user, item, component),
         };
         args.Verbs.Add(verb);
     }
 
-    private void AddEjectVerb(EntityUid uid,
-        ref GetVerbsEvent<AlternativeVerb> args,
-        MouthContainerComponent component)
+    private void AddEjectVerb(EntityUid uid, ref GetVerbsEvent<AlternativeVerb> args, MouthContainerComponent component)
     {
         var str = Loc.GetString(args.User == args.Target ? component.EjectVerbIn : component.EjectVerbOut);
         var subject = args.User;
-
         var verb = new AlternativeVerb
         {
             Priority = 1,
             Text = str,
             Impact = LogImpact.Medium,
             DoContactInteraction = true,
-            Act = () => TryEject(uid, subject, component)
+            Act = () => TryEject(uid, subject, component),
         };
         args.Verbs.Add(verb);
     }
@@ -99,7 +93,6 @@ public sealed class MouthContainerSystem : EntitySystem
             return;
         var mouthComp = Comp<MouthContainerComponent>(subject);
         var toInsert = ent.Owner;
-
         if (CanInsert(subject, toInsert, mouthComp))
         {
             var v = new AlternativeVerb
@@ -109,10 +102,7 @@ public sealed class MouthContainerSystem : EntitySystem
                 Disabled = false,
                 Impact = LogImpact.Medium,
                 DoContactInteraction = true,
-                Act = () =>
-                {
-                    TryInsert(subject, subject, toInsert, mouthComp);
-                },
+                Act = () => { TryInsert(subject, subject, toInsert, mouthComp); },
             };
             args.Verbs.Add(v);
         }
@@ -132,34 +122,24 @@ public sealed class MouthContainerSystem : EntitySystem
             return;
         if (!CanInsert(uid, toInsert, component))
             return;
-
         if (!Exists(toInsert))
             return;
-
         _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager,
             subject,
             component.InsertDuration,
             new MouthContainerDoAfterEvent(toInsert),
             uid,
             uid,
-            uid)
-        {
-            BreakOnMove = true,
-            BreakOnDamage = true,
-            MovementThreshold = 1.0f,
-        });
+            uid) { BreakOnMove = true, BreakOnDamage = true, MovementThreshold = 1.0f, });
     }
 
     private void TryEject(EntityUid uid, EntityUid subject, MouthContainerComponent? component = null)
     {
         if (!Resolve(uid, ref component) || component.MouthSlot.ContainedEntity == null)
             return;
-
         var toremove = component.MouthSlot.ContainedEntity.Value;
-
         if (!Exists(toremove))
             return;
-
         if (uid == subject)
         {
             _container.RemoveEntity(uid, component.MouthSlot.ContainedEntity.Value);
@@ -168,40 +148,23 @@ public sealed class MouthContainerSystem : EntitySystem
             return;
         }
 
-
         _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager,
             subject,
             component.EjectDuration,
             new MouthContainerDoAfterEvent(uid),
             uid,
             uid,
-            uid)
-        {
-            BreakOnMove = true,
-            BreakOnDamage = true,
-            MovementThreshold = 1.0f,
-        });
+            uid) { BreakOnMove = true, BreakOnDamage = true, MovementThreshold = 1.0f, });
     }
 
-    private void InsertDoAfter(Entity<MouthContainerComponent> ent,
-        ref MouthContainerDoAfterEvent args)
+    private void InsertDoAfter(Entity<MouthContainerComponent> ent, ref MouthContainerDoAfterEvent args)
     {
         if (args.Cancelled || args.Handled || args.Target is not { Valid: true } target)
-        {
             return;
-        }
-
-
         if (!TryComp(target, out MouthContainerComponent? _))
-        {
             return;
-        }
-
         if (!Exists(ent) || !Exists(args.ToInsert))
-        {
             return;
-        }
-
         if (ent.Comp.MouthSlot.ContainedEntity == null)
         {
             if (Exists(args.ToInsert) && _container.CanInsert(args.ToInsert, ent.Comp.MouthSlot))
@@ -251,7 +214,6 @@ public sealed class MouthContainerSystem : EntitySystem
         if (_whitelistSystem.IsWhitelistPass(component.Blacklist, toInsert.Value) ||
             _whitelistSystem.IsWhitelistFail(component.Whitelist, toInsert.Value))
             return false;
-
         return IsEmpty(component);
     }
 
