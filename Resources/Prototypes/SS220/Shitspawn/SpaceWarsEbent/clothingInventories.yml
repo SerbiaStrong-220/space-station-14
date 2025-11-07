@@ -24,7 +24,7 @@
 
     ClothingUniformJumpsuitParamedicSyndie: 1
 
-    ClothingBackpackSyndicate: 8
+    ClothingMilitaryBackpack: 8
     ClothingBackpack: 8
     ClothingBackpackEngineering: 1
     ClothingBackpackMedical: 1
@@ -90,7 +90,7 @@
     ClothingHeadPilotCapCap: 3
 
     ClothingEyesGlassesCommand: 3
-    ClothingEyesHudSyndChem: 3
+    ClothingEyesGlassesBallistic: 3
 
     ClothingBeltMilitaryWebbing: 4
 
@@ -102,7 +102,7 @@
 
     ClothingNeckCloakBi: 4
 
-    ClothingBackpackSyndicate: 4
+    ClothingMilitaryBackpack: 4
 
     EventCaptureFlagSynd: 8
     ClothingMaskGasSyndicate: 4
@@ -111,7 +111,7 @@
     ClothingHandsMercGlovesCombat: 3
     ClothingHandsGlovesFingerless: 3
 
-    ClothingBeltSyndieHolster: 3
+    ClothingBeltHolster: 3
 
     ClothingShoesBootsCombat: 4
     ClothingShoesBootsMerc: 4
@@ -170,11 +170,11 @@
 
     ClothingNeckCloakPirateCap: 2
 
-    ClothingBackpackSyndicate: 2
+    ClothingMilitaryBackpack: 2
 
     EventCaptureFlagSynd: 2
 
-    ClothingBeltSyndieHolster: 2
+    ClothingBeltHolster: 2
 
     ClothingHandsGlovesRobohands: 2
     ClothingHandsGlovesColorRed: 2
