@@ -26,7 +26,7 @@ public sealed class SpawnOnStorageOpenSystem : EntitySystem
 
     }
 
-    private void SpawnTriggered(Entity<SpawnOnStorageOpenComponent> ent)
+    private void TriggerSpawn(Entity<SpawnOnStorageOpenComponent> ent)
     {
         if (LifeStage(ent.Owner) != EntityLifeStage.MapInitialized)
             return;
@@ -42,19 +42,21 @@ public sealed class SpawnOnStorageOpenSystem : EntitySystem
 
         ent.Comp.Uses--;
     }
+
     private void OnOpen(Entity<SpawnOnStorageOpenComponent> ent, ref StorageAfterOpenEvent args)
     {
-        SpawnTriggered(ent);
+        TriggerSpawn(ent);
     }
+
     private void OnMapInit(Entity<SpawnOnStorageOpenComponent> ent, ref MapInitEvent args)
     {
-        if(!EntityManager.TryGetComponent(ent.Owner,out EntityStorageComponent? cmp))
+        if (!TryComp(ent.Owner, out EntityStorageComponent? cmp))
         {
             return;
         }
-        if(cmp.Open==true)
+        if (cmp.Open == true)
         {
-            SpawnTriggered(ent);
+            TriggerSpawn(ent);
         }
     }
 }
