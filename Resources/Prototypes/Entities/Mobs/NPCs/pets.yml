@@ -1036,9 +1036,6 @@
   components:
   #SS220 Mouth container begin
   - type: MouthContainer
-    priority:
-      components:
-      - NukeDisk
     whitelist:
       sizes:
       - Tiny
