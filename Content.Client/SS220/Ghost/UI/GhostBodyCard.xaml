@@ -1,0 +1,16 @@
+<local:GhostBodyCard xmlns="https://spacestation14.io"
+                          xmlns:local="clr-namespace:Content.Client.SS220.Ghost.UI"
+                          HorizontalAlignment="Center">
+    <GridContainer Columns="2">
+        <BoxContainer Orientation="Vertical">
+            <BoxContainer Orientation="Horizontal">
+                <Label Text="BODY: "/>
+                <Label Name="BodyNameLabel"/>
+            </BoxContainer>
+        </BoxContainer>
+        <BoxContainer Orientation="Vertical">
+            <Button Name="FollowButton" Text="FOLLOW"/>
+            <Button Name="ToBodyButton" Text="RETURN"/>
+        </BoxContainer>
+    </GridContainer>
+</local:GhostBodyCard>

@@ -1,0 +1,20 @@
+<local:GhostBodyMenuWindow xmlns="https://spacestation14.io"
+                           xmlns:local="clr-namespace:Content.Client.SS220.Ghost.UI"
+                           MinSize="450 450"
+                           SetSize="450 450">
+    <BoxContainer Orientation="Vertical"
+                  HorizontalExpand="True"
+                  SizeFlagsStretchRatio="0.4">
+        <ScrollContainer Name="GhostScroll"
+                         VerticalExpand="True"
+                         HorizontalExpand="True"
+                         HScrollEnabled="False">
+            <BoxContainer Name="Body"
+                          Orientation="Vertical"
+                          VerticalExpand="True"
+                          SeparationOverride="5">
+                
+            </BoxContainer>
+        </ScrollContainer>
+    </BoxContainer>
+</local:GhostBodyMenuWindow>

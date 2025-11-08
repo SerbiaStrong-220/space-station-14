@@ -1,7 +1,9 @@
-﻿<widgets:GhostGui xmlns="https://spacestation14.io"
+<widgets:GhostGui xmlns="https://spacestation14.io"
                   xmlns:widgets="clr-namespace:Content.Client.UserInterface.Systems.Ghost.Widgets"
+                  xmlns:addition="clr-namespace:Content.Client.SS220.Ghost.UI"
                   HorizontalAlignment="Center">
     <BoxContainer Orientation="Horizontal">
+        <addition:GhostAdditionGui> </addition:GhostAdditionGui>
         <Button Name="ReturnToBodyButton" Text="{Loc ghost-gui-return-to-body-button}" />
         <Button Name="GhostWarpButton" Text="{Loc ghost-gui-ghost-warp-button}" />
         <Button Name="GhostRolesButton" />

@@ -15,7 +15,8 @@ using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.SS220.Containers; //SS220-cryo-mobs-fix
 using Content.Server.Polymorph.Systems; //SS220-cryo-mobs-fix
-using Content.Shared.Body.Systems; //SS220-cryo-mobs-fix
+using Content.Shared.Body.Systems;
+using Content.Server.SS220.GhostExtension; //SS220-cryo-mobs-fix
 
 namespace Content.Server.Mind;
 
@@ -231,13 +232,17 @@ public sealed class MindSystem : SharedMindSystem
         }
 
         var oldEntity = mind.OwnedEntity;
+
+        var tempArgs = new MindTransferedEvent(entity, oldEntity);
+        RaiseLocalEvent(ref tempArgs);
+
         if (TryComp(oldEntity, out MindContainerComponent? oldContainer))
         {
             oldContainer.Mind = null;
             mind.OwnedEntity = null;
             Entity<MindComponent> mindEnt = (mindId, mind);
             Entity<MindContainerComponent> containerEnt = (oldEntity.Value, oldContainer);
-            RaiseLocalEvent(oldEntity.Value, new MindRemovedMessage(mindEnt, containerEnt));
+            RaiseLocalEvent(oldEntity.Value, new MindRemovedMessage(mindEnt, containerEnt), true);
             RaiseLocalEvent(mindId, new MindGotRemovedEvent(mindEnt, containerEnt));
             Dirty(oldEntity.Value, oldContainer);
         }

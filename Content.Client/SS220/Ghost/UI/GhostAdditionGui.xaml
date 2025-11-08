@@ -1,0 +1,8 @@
+<local:GhostAdditionGui xmlns="https://spacestation14.io"
+                          xmlns:local="clr-namespace:Content.Client.SS220.Ghost.UI"
+                          HorizontalAlignment="Center">
+    <BoxContainer Orientation="Horizontal">
+        <Button Name="RespawnButton" Text="RESPAWN"/>
+        <Button Name="ReturnToBodyButton" Text="TOBODY"/>
+    </BoxContainer>
+</local:GhostAdditionGui>

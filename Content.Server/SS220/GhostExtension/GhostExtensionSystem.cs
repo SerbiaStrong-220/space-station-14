@@ -1,55 +1,119 @@
-using Content.Server.Ghost;
+using Content.Server.Mind;
+using Content.Shared.Bed.Cryostorage;
 using Content.Shared.Ghost;
-using Content.Shared.Interaction.Events;
-using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
+using Content.Shared.SS220.Mind;
 
 namespace Content.Server.SS220.GhostExtension;
 public sealed class GhostExtensionSystem : EntitySystem
 {
+    [Dependency] private readonly EntityManager _entityManager = default!;
+    [Dependency] private readonly MindSystem _mindSystem = default!;
+
+    private EntityQuery<GhostComponent> _ghostQuery;
     public override void Initialize()
     {
-        /*SubscribeLocalEvent<GhostEvent>
-        SubscribeLocalEvent<GhostComponent, ComponentStartup>(OnMindSturtup);
-        SubscribeAllEvent<MindContainerComponent, SuicideEvent>(OnSuicide);*/
-        SubscribeLocalEvent<GhostComponent, ComponentStartup>(OnGhostStartup, before: [typeof(GhostSystem)]);
-        //SubscribeLocalEvent<GhostComponent, MapInitEvent>(OnMapInit);
-        //SubscribeLocalEvent<GhostComponent, ComponentShutdown>(OnGhostShutdown);
-        SubscribeNetworkEvent<GhostReturnToBodyRequest>(OnGhostReturnToBodyRequest);
+        _ghostQuery = GetEntityQuery<GhostComponent>();
+
+        SubscribeNetworkEvent<ExtensionReturnActionEvent>(OnExtensionReturnActionEvent);
+        SubscribeNetworkEvent<GhostBodyListRequestEvent>(OnGhostBodyListRequestEvent);
+        SubscribeNetworkEvent<ExtensionRespawnActionEvent>(OnRespawnActionEvent);
+        SubscribeLocalEvent<MindTransferedEvent>(OnMindTransferedEvent);
     }
 
-    private void OnGhostStartup(Entity<GhostComponent> ent, ref ComponentStartup args)
+    private void OnExtensionReturnActionEvent(ExtensionReturnActionEvent ev, EntitySessionEventArgs args)
     {
+        var target = GetEntity(ev.Target);
 
+        var mind = _mindSystem.GetMind(args.SenderSession.UserId);
+
+        if (target is null || mind is null || !ValidateEntity((EntityUid)target))
+            return;
+
+        _mindSystem.TransferTo((EntityUid)mind, (EntityUid)target);
     }
 
-    private void OnSuicide(Entity<MindContainerComponent> ent, ref SuicideEvent args)
+    private void OnGhostBodyListRequestEvent(GhostBodyListRequestEvent ev, EntitySessionEventArgs args)
     {
+        if (args.SenderSession.AttachedEntity is not { Valid: true } entity
+                || !_ghostQuery.HasComp(entity))
+        {
+            Log.Warning($"User {args.SenderSession.Name} sent a {nameof(GhostWarpsRequestEvent)} without being a ghost.");
+            return;
+        }
 
+        if (!TryComp<MindExtensionComponent>(args.SenderSession.AttachedEntity, out var mindExt))
+            return;
+
+        var bodyList = new List<BodyCont>();
+        foreach (var ent in mindExt.Trail)
+        {
+            string entInfo;
+            bool isAvaible = ValidateEntity(ent);
+
+            if (_entityManager.EntityExists(ent))
+            {
+                entInfo = $"{Comp<MetaDataComponent>(ent).EntityName}";
+            }
+            else
+            {
+                entInfo = "(DELETED)";
+
+            }
+
+            bodyList.Add(new BodyCont(GetNetEntity(ent), entInfo, isAvaible));
+        }
+
+        RaiseNetworkEvent(new GhostBodyListResponseEvent(bodyList), args.SenderSession.Channel);
     }
 
-    private void OnMindSturtup(Entity<GhostComponent> ent, ref ComponentStartup args)
+    private void OnRespawnActionEvent(ExtensionRespawnActionEvent ev)
     {
-
+        if (TryGetEntity(ev.Invoker, out var entity))
+            RaiseLocalEvent((EntityUid)entity, new RespawnActionEvent());
     }
 
-    private void OnGhostReturnToBodyRequest(GhostReturnToBodyRequest ev, EntitySessionEventArgs args)
+    private void OnMindTransferedEvent(ref MindTransferedEvent ev)
     {
-        //throw new NotImplementedException();
-    }
+        var trail = new HashSet<EntityUid>();
 
-    /*private void OnGhostShutdown(Entity<GhostComponent> ent, ref ComponentShutdown args)
-    {
-        //throw new NotImplementedException();
-    }
+        if (TryComp<MindExtensionComponent>(ev.OldEntity, out var oldMindExt))
+        {
+            trail = oldMindExt.Trail;
+            _entityManager.RemoveComponent<MindExtensionComponent>((EntityUid)ev.OldEntity);
+        }
 
-    private void OnMapInit(Entity<GhostComponent> ent, ref MapInitEvent args)
-    {
-        //throw new NotImplementedException();
-    }
+        if (ev.NewEntity is null)
+            return;
 
-    private void OnGhostStartup(Entity<GhostComponent> ent, ref ComponentStartup args)
+        if (!TryComp<GhostComponent>(ev.NewEntity, out var ghost))
+            trail.Add((EntityUid)ev.NewEntity);
+
+        if (TryComp<MindExtensionComponent>(ev.NewEntity, out var newMindExt))
+        {
+            newMindExt.Trail = trail;
+        }
+        else
+        {
+            _entityManager.AddComponent((EntityUid)ev.NewEntity, new MindExtensionComponent() { Trail = trail });
+        }
+    }
+    private bool ValidateEntity(EntityUid entity)
     {
-        //throw new NotImplementedException();
-    }*/
+        bool isAvaible = true;
+
+        if (!_entityManager.EntityExists(entity))
+            isAvaible = false;
+
+        if (TryComp<CryostorageContainedComponent>(entity, out var cryo))
+            isAvaible = false;
+
+        if (TryComp<MindContainerComponent>(entity, out var mind) && mind.Mind is not null)
+            isAvaible = false;
+
+        return isAvaible;
+    }
 }
+
+[ByRefEvent]
+public record struct MindTransferedEvent(EntityUid? NewEntity, EntityUid? OldEntity);
