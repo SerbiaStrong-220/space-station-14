@@ -11,7 +11,7 @@ public sealed partial class MouthContainerComponent : Component
 
     public bool IsVisibleCheeks;
 
-    [ViewVariables]
+    [DataField]
     public readonly string MouthSlotId = "mouth-slot";
 
     [DataField]
