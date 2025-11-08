@@ -34,7 +34,7 @@ public sealed class MouthContainerSystem : EntitySystem
         base.Initialize();
     }
 
-    private void OnStartup(EntityUid uid, MouthContainerComponent component, ComponentStartup args)
+    private void OnStartup(Entity<MouthContainerComponent> ent, ComponentStartup args)
     {
         component.MouthSlot = _container.EnsureContainer<ContainerSlot>(uid, component.MouthSlotId);
     }
