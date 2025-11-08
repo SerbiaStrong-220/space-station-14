@@ -7,7 +7,4 @@ namespace Content.Shared.SS220.Animals.MouthContainer
     {
         Visible,
     }
-
 }
-
-
