@@ -47,9 +47,7 @@
     name: ghost-role-information-revenant-name
     description: ghost-role-information-revenant-description
     rules: ghost-role-information-antagonist-rules
-    requirements: #SS220 ghostrole-times (20h overall) start
-      - !type:OverallPlaytimeRequirement
-        time: 72000 #SS220 ghostrole-times (20h overall) end
+    job: Revenant
     mindRoles:
     - MindRoleGhostRoleSoloAntagonist
     raffle:
@@ -78,6 +76,9 @@
         type: StoreBoundUserInterface
   - type: Visibility
     layer: 2 #ghost vis layer
+  - type: ActionGrant
+    actions:
+    - ActionRevenantShop
   - type: Store
     categories:
     - RevenantAbilities

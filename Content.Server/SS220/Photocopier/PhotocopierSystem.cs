@@ -21,6 +21,7 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Audio.Systems;
 using Content.Shared.Power;
+using Content.Shared.Chat;
 
 namespace Content.Server.SS220.Photocopier;
 

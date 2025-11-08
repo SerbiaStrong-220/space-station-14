@@ -1,7 +1,7 @@
 - type: entity
   name: Glass Vase
   description: strangely shaped glass vase, what is it for?
-  parent: DrinkGlassBase
+  parent: DrinkGlass
   id: GlassVase
   components:
   - type: Sprite
@@ -22,6 +22,7 @@
   - type: SolutionContainerVisuals
     maxFillLevels: 9
     fillBaseName: fill
+    inHandsMaxFillLevels: 0
     metamorphicDefaultSprite:
       sprite: SS220/Objects/Consumable/Flowers/vase_overlay.rsi
       state: icon
