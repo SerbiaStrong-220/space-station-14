@@ -1052,7 +1052,9 @@
   - type: MouthContainerVisuals
   - type: Appearance
     appearanceDataInit:
-      enum.MouthContainerVisuals.Visible: false
+      enum.MouthContainerVisuals.Visible:
+        !type:Boolean
+        false
   #SS220 Mouth container end
   - type: Sprite
     drawdepth: SmallMobs
