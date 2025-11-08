@@ -14,7 +14,7 @@ namespace Content.Shared.SS220.CultYogg.Rave;
 
 public abstract class SharedRaveSystem : EntitySystem
 {
-    private readonly EntProtoId _effectPrototype = "Rave";
+    private readonly EntProtoId _statusEffectPrototype = "Rave";
 
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -30,18 +30,18 @@ public abstract class SharedRaveSystem : EntitySystem
         SubscribeLocalEvent<RaveComponent, OnSaintWaterDrinkEvent>(OnSaintWaterDrinked);
     }
 
-    private void OnStartup(Entity<RaveComponent> uid, ref ComponentStartup args)
+    private void OnStartup(Entity<RaveComponent> ent, ref ComponentStartup args)
     {
-        SetNextPhraseTimer(uid.Comp);
-        SetNextSoundTimer(uid.Comp);
+        SetNextPhraseTimer(ent);
+        SetNextSoundTimer(ent);
     }
 
-    private void OnExamined(Entity<RaveComponent> uid, ref ExaminedEvent args)
+    private void OnExamined(Entity<RaveComponent> ent, ref ExaminedEvent args)
     {
         if (!HasComp<ShowCultYoggIconsComponent>(args.Examiner))
             return;
 
-        args.PushMarkup($"[color=green]{Loc.GetString("cult-yogg-shroom-markup", ("ent", uid))}[/color]");
+        args.PushMarkup($"[color=green]{Loc.GetString("cult-yogg-shroom-markup", ("ent", ent))}[/color]");
     }
 
     public override void Update(float frameTime)
@@ -49,42 +49,45 @@ public abstract class SharedRaveSystem : EntitySystem
         base.Update(frameTime);
 
         var query = EntityQueryEnumerator<RaveComponent>();
-        while (query.MoveNext(out var uid, out var raving))
+        while (query.MoveNext(out var ent, out var raving))
         {
             if (raving.NextPhraseTime <= _timing.CurTime)
             {
-                Mumble((uid, raving));
+                Mumble((ent, raving));
 
-                SetNextPhraseTimer(raving);
+                SetNextPhraseTimer((ent, raving));
             }
 
             if (raving.NextSoundTime > _timing.CurTime)
                 continue;
 
-            _audio.PlayEntity(raving.RaveSoundCollection, uid, uid);
-            SetNextSoundTimer(raving);
+            _audio.PlayLocal(raving.RaveSoundCollection, ent, ent);
+            SetNextSoundTimer((ent, raving));
         }
     }
 
     protected virtual void Mumble(Entity<RaveComponent> ent) { }
 
-    private void SetNextPhraseTimer(RaveComponent comp)
+    private void SetNextPhraseTimer(Entity<RaveComponent> ent)
     {
-        comp.NextPhraseTime = _timing.CurTime + ((comp.MinIntervalPhrase < comp.MaxIntervalPhrase)
-        ? _random.Next(comp.MinIntervalPhrase, comp.MaxIntervalPhrase)
-        : comp.MaxIntervalPhrase);
+        ent.Comp.NextPhraseTime = _timing.CurTime + ((ent.Comp.MinIntervalPhrase < ent.Comp.MaxIntervalPhrase)
+        ? _random.Next(ent.Comp.MinIntervalPhrase, ent.Comp.MaxIntervalPhrase)
+        : ent.Comp.MaxIntervalPhrase);
+
+        Dirty(ent, ent.Comp);
     }
 
-    private void SetNextSoundTimer(RaveComponent comp)
+    private void SetNextSoundTimer(Entity<RaveComponent> ent)
     {
-        comp.NextSoundTime = _timing.CurTime + ((comp.MinIntervalSound < comp.MaxIntervalSound)
-        ? _random.Next(comp.MinIntervalSound, comp.MaxIntervalSound)
-        : comp.MaxIntervalSound);
+        ent.Comp.NextSoundTime = _timing.CurTime + ((ent.Comp.MinIntervalSound < ent.Comp.MaxIntervalSound)
+        ? _random.Next(ent.Comp.MinIntervalSound, ent.Comp.MaxIntervalSound)
+        : ent.Comp.MaxIntervalSound);
+
+        Dirty(ent, ent.Comp);
     }
 
     private void OnSaintWaterDrinked(Entity<RaveComponent> uid, ref OnSaintWaterDrinkEvent args)
     {
-        _statusEffectsSystem.TryRemoveStatusEffect(uid, _effectPrototype);
+        _statusEffectsSystem.TryRemoveStatusEffect(uid, _statusEffectPrototype);
     }
-
 }

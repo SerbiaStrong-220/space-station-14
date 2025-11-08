@@ -13,7 +13,7 @@ public sealed class RaveSystem : SharedRaveSystem
 {
     [Dependency] private readonly IPlayerManager _playerManager = default!;
 
-    private readonly EntProtoId _effectPrototype = "Rave";
+    private readonly EntProtoId _effectPrototype = "CultYoggRaveEffect";
 
     public override void Initialize()
     {
