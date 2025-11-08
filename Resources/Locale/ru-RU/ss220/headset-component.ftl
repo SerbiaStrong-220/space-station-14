@@ -7,3 +7,6 @@ chat-radio-traders = Торговцы
 chat-radio-honk = Хонк-сквад
 
 chat-radio-law = Юридический
+
+chat-radio-nanotrasen-operatives = Силы Нанотрейзен
+chat-radio-syndicate-operatives = Силы Синдиката

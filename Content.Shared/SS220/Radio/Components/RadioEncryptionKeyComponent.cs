@@ -1,0 +1,22 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+using Content.Shared.FixedPoint;
+using Robust.Shared.GameStates;
+
+namespace Content.Shared.SS220.Radio.Components;
+
+/// <summary>
+/// Handles handheld radio ui and is authoritative on the channels a radio can access.
+/// </summary>
+[RegisterComponent, NetworkedComponent]
+public sealed partial class RadioEncryptionKeyComponent : Component
+{
+    /// <summary>
+    /// Bordering radio channel
+    /// </summary>
+    [ViewVariables(VVAccess.ReadOnly)]
+    public FixedPoint2 LowerFrequencyBorder;
+
+    [ViewVariables(VVAccess.ReadOnly)]
+    public FixedPoint2 UpperFrequencyBorder;
+}

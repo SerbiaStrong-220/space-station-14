@@ -1,0 +1,19 @@
+- type: radioChannel
+  id: RadioNanotrasen
+  name: chat-radio-nanotrasen-operatives
+  keycode: 'ъ'
+  frequency: 1429
+  minFrequency: 12.9
+  maxFrequency: 15.9
+  color: "#2681a5"
+  longRange: true
+
+- type: radioChannel
+  id: RadioSyndicate
+  name: chat-radio-syndicate-operatives
+  keycode: 'э'
+  frequency: 1492
+  minFrequency: 15.92
+  maxFrequency: 18.92
+  color: "#ab1a1a"
+  longRange: true

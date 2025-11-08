@@ -1,0 +1,23 @@
+- type: entity
+  parent: EncryptionKey
+  id: EncryptionNanotrasenOperative
+  suffix: Shitspawn, Ebent, Space Wars
+  name: ключ шифрования оперативников НаноТрейзен
+  components:
+  - type: RadioEncryptionKey
+  - type: EncryptionKey
+    channels:
+    - RadioNanotrasen
+    defaultChannel: RadioNanotrasen
+
+- type: entity
+  parent: EncryptionKey
+  id: EncryptionSyndicateOperative
+  suffix: Shitspawn, Ebent, Space Wars
+  name: ключ шифрования оперативников Синдиката
+  components:
+  - type: RadioEncryptionKey
+  - type: EncryptionKey
+    channels:
+    - RadioSyndicate
+    defaultChannel: RadioSyndicate
