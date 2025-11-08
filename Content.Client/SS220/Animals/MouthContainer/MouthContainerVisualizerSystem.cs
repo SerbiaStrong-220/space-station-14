@@ -17,5 +17,5 @@ public sealed class MouthContainerVisualizerSystem : VisualizerSystem<MouthConta
 
 public enum MouthContainerVisualLayers : byte
 {
-    Cheeks
+    Cheeks,
 }

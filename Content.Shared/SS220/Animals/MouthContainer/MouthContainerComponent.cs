@@ -1,26 +1,31 @@
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared.SS220.Animals.MouthContainer;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent]
 public sealed partial class MouthContainerComponent : Component
 {
+    /// <summary>
+    ///     MouthSlot.
+    /// </summary>
     [ViewVariables]
     public ContainerSlot MouthSlot = default!;
-
-    public bool IsVisibleCheeks;
-
     [DataField]
-    public readonly string MouthSlotId = "mouth-slot";
+    public string MouthSlotId = "mouth-slot";
 
+    /// <summary>
+    ///     Whitelists.
+    /// </summary>
     [DataField]
     public EntityWhitelist? Whitelist;
     [DataField]
-    public EntityWhitelist? Priority;
-    [DataField]
     public EntityWhitelist? Blacklist;
 
+    /// <summary>
+    ///     Locales.
+    /// </summary>
     [DataField]
     public LocId InsertVerbIn = "insert-to-mouth-in";
     [DataField]
@@ -34,6 +39,9 @@ public sealed partial class MouthContainerComponent : Component
     [DataField]
     public LocId EjectMessage = "eject-from-mouth-success";
 
+    /// <summary>
+    ///     Do-After durations.
+    /// </summary>
     [DataField]
     public float InsertDuration = 1f;
     [DataField]

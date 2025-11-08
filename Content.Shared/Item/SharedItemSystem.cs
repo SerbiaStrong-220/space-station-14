@@ -1,8 +1,10 @@
+using Content.Shared.Database;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Verbs;
 using Content.Shared.Examine;
 using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.SS220.Animals.MouthContainer;
 using Content.Shared.Storage;
 using JetBrains.Annotations;
 using Robust.Shared.Collections;
@@ -18,11 +20,13 @@ public abstract class SharedItemSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private   readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] protected readonly SharedContainerSystem Container = default!;
+    [Dependency] private readonly MouthContainerSystem _mouthSystem = default!;
 
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<ItemComponent, GetVerbsEvent<InteractionVerb>>(AddPickupVerb);
+        SubscribeLocalEvent<ItemComponent, GetVerbsEvent<AlternativeVerb>>(OnGetAltVerb);
         SubscribeLocalEvent<ItemComponent, InteractHandEvent>(OnHandInteract);
         SubscribeLocalEvent<ItemComponent, AfterAutoHandleStateEvent>(OnItemAutoState);
 
@@ -136,6 +140,33 @@ public abstract class SharedItemSystem : EntitySystem
             verb.Text = Loc.GetString("pick-up-verb-get-data-text");
 
         args.Verbs.Add(verb);
+    }
+
+    /// <summary>
+    ///     Transmits item on get alternative verb to MouthContainerSystem.
+    /// </summary>
+    private void OnGetAltVerb(Entity<ItemComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        var subject = args.User;
+
+        if (HasComp<MouthContainerComponent>(subject))
+        {
+            var mouthComp = Comp<MouthContainerComponent>(subject);
+            var toInsert = ent.Owner;
+            if (_mouthSystem.CanInsert(subject, toInsert))
+            {
+                var v = new AlternativeVerb
+                {
+                    Priority = 1,
+                    Text = Loc.GetString(mouthComp.InsertVerbIn),
+                    Disabled = false,
+                    Impact = LogImpact.Medium,
+                    DoContactInteraction = true,
+                    Act = () => { _mouthSystem.TryInsert(subject, subject, toInsert); },
+                };
+                args.Verbs.Add(v);
+            }
+        }
     }
 
     private void OnExamine(EntityUid uid, ItemComponent component, ExaminedEvent args)
