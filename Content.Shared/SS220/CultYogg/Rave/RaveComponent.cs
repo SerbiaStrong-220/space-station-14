@@ -1,13 +1,10 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.SS220.CultYogg.Rave;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
 
-namespace Content.Server.SS220.CultYogg.Rave;
+namespace Content.Shared.SS220.CultYogg.Rave;
 
-[RegisterComponent, NetworkedComponent]
-public sealed partial class RaveComponent : SharedRaveComponent
+public sealed partial class RaveComponent : Component
 {
     /// <summary>
     /// The minimum time in seconds between pronouncing rleh phrase.
@@ -57,4 +54,6 @@ public sealed partial class RaveComponent : SharedRaveComponent
     /// </summary>
     [DataField]
     public SoundSpecifier RaveSoundCollection = new SoundCollectionSpecifier("RaveSounds");
+
+    public EntityUid? EffectEntity = null;
 }
