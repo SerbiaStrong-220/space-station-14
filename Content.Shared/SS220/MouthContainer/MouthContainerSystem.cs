@@ -10,7 +10,7 @@ using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 
-namespace Content.Shared.SS220.Animals.MouthContainer;
+namespace Content.Shared.SS220.MouthContainer;
 
 public sealed class MouthContainerSystem : EntitySystem
 {

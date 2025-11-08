@@ -4,7 +4,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Verbs;
 using Content.Shared.Examine;
 using Content.Shared.Item.ItemToggle.Components;
-using Content.Shared.SS220.Animals.MouthContainer;
+using Content.Shared.SS220.MouthContainer;
 using Content.Shared.Storage;
 using JetBrains.Annotations;
 using Robust.Shared.Collections;
@@ -149,9 +149,9 @@ public abstract class SharedItemSystem : EntitySystem
     {
         var subject = args.User;
 
-        if (HasComp<MouthContainerComponent>(subject))
+        if (HasComp<SS220.MouthContainer.MouthContainerComponent>(subject))
         {
-            var mouthComp = Comp<MouthContainerComponent>(subject);
+            var mouthComp = Comp<SS220.MouthContainer.MouthContainerComponent>(subject);
             var toInsert = ent.Owner;
             if (_mouthSystem.CanInsert(subject, toInsert))
             {

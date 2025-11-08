@@ -1,4 +1,4 @@
-﻿namespace Content.Client.SS220.Animals.MouthContainer;
+﻿namespace Content.Client.SS220.MouthContainer;
 
 [RegisterComponent]
 public sealed partial class MouthContainerVisualsComponent : Component;
