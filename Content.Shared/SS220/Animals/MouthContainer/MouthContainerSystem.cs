@@ -113,10 +113,9 @@ public sealed class MouthContainerSystem : EntitySystem
         TryEject(ent, ent);
     }
 
-    private void TryInsert(EntityUid uid,
+    private void TryInsert(Entity<MouthContainerComponent?> ent,
         EntityUid subject,
-        EntityUid toInsert,
-        MouthContainerComponent? component = null)
+        EntityUid toInsert)
     {
         if (!Resolve(uid, ref component))
             return;
