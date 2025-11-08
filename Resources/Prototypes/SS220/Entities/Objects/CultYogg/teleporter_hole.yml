@@ -1,0 +1,38 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: SelfLinkedPortalBlue
+  parent: BaseSelfLinkedPortalEnter
+  components:
+  - type: Sprite
+    layers:
+      - sprite: SS220/Structures/CultYogg/fungus_hydroponic.rsi
+        state: base
+  - type: PointLight
+    color: SkyBlue
+    radius: 3
+    energy: 1
+    netsync: false
+  - type: SelfLinkedTeleport
+  - type: Tag
+    tags:
+    - CultYoggTeleportEnter
+
+
+- type: entity
+  id: SelfLinkedPortalBlue
+  parent: BaseSelfLinkedPortalExit
+  components:
+  - type: Sprite
+    layers:
+      - sprite: SS220/Structures/CultYogg/fungus_hydroponic.rsi
+        state: base
+  - type: PointLight
+    color: SkyBlue
+    radius: 3
+    energy: 1
+    netsync: false
+  - type: SelfLinkedTeleport
+  - type: Tag
+    tags:
+    - CultYoggTeleportExit

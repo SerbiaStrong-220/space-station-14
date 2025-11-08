@@ -11,3 +11,30 @@
         components:
         - CultYogg
 
+- type: entity
+  id: BaseSelfLinkedPortal
+  abstract: true
+  name: self linked portal
+  description: Transports you to a linked destination!
+  components:
+  - type: Transform
+    anchored: True
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/CultYogg/fungus_hydroponic.rsi #ToDo_SS220 tweak all visual and physic
+  - type: Fixtures
+    fixtures:
+      portalFixture:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.48,0.25,0.48"
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
+        hard: false
+  - type: SelfLinkedTeleport
