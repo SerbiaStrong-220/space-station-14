@@ -4,6 +4,7 @@ using Robust.Shared.Audio;
 
 namespace Content.Shared.SS220.CultYogg.Rave;
 
+[RegisterComponent]
 public sealed partial class RaveComponent : Component
 {
     /// <summary>

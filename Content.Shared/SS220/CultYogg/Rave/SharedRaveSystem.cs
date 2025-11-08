@@ -1,24 +1,20 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.Chat;
-using Content.Shared.Dataset;
 using Content.Shared.Examine;
 using Content.Shared.SS220.CultYogg.CultYoggIcons;
 using Content.Shared.SS220.EntityEffects.Events;
 using Content.Shared.StatusEffect;
 using Content.Shared.StatusEffectNew;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using System;
 
 namespace Content.Shared.SS220.CultYogg.Rave;
 
 public abstract class SharedRaveSystem : EntitySystem
 {
-    public const string EffectKey = "Rave";
+    private readonly EntProtoId _effectPrototype = "Rave";
 
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -47,8 +43,6 @@ public abstract class SharedRaveSystem : EntitySystem
 
         args.PushMarkup($"[color=green]{Loc.GetString("cult-yogg-shroom-markup", ("ent", uid))}[/color]");
     }
-
-
 
     public override void Update(float frameTime)
     {
@@ -90,7 +84,7 @@ public abstract class SharedRaveSystem : EntitySystem
 
     private void OnSaintWaterDrinked(Entity<RaveComponent> uid, ref OnSaintWaterDrinkEvent args)
     {
-        _statusEffectsSystem.TryRemoveStatusEffect(uid, EffectKey);
+        _statusEffectsSystem.TryRemoveStatusEffect(uid, _effectPrototype);
     }
 
 }
