@@ -3,7 +3,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared.SS220.Animals.MouthContainer;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class MouthContainerComponent : Component
 {
     [ViewVariables]
