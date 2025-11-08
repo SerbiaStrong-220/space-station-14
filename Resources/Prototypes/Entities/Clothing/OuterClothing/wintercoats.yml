@@ -20,7 +20,7 @@
         Heat: 0.90
     priceMultiplier: 0
   - type: ZombificationResistance
-    zombificationResistanceCoefficient: 0.55
+    zombificationResistanceCoefficient: 0.65 #SS220 sec-wintercoat-buff 
   - type: Edible
     requiresSpecialDigestion: true
   - type: SolutionContainerManager
@@ -823,6 +823,15 @@
       - state: SEC-inhand-left
       right:
       - state: SEC-inhand-right
+  #SS220 sec-wintercoat-buff START
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.85
+        Slash: 0.85
+        Piercing: 0.85
+        Heat: 0.90
+  #SS220 sec-wintercoat-buff END
   - type: Clothing
     sprite: Clothing/OuterClothing/WinterCoats/coat.rsi
     clothingVisuals:
