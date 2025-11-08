@@ -88,6 +88,6 @@ public abstract class SharedRaveSystem : EntitySystem
 
     private void OnSaintWaterDrinked(Entity<RaveComponent> uid, ref OnSaintWaterDrinkEvent args)
     {
-        _statusEffectsSystem.TryRemoveStatusEffect(uid, _statusEffectPrototype);
+        _statusEffectsSystem.TryRemoveStatusEffect(uid, _statusEffectPrototype);//ToDo_SS220 it isn't working cause can't find status Entity
     }
 }
