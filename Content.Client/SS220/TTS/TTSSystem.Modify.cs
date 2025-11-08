@@ -1,7 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Globalization;
-using System.Linq;
 using Content.Shared.SS220.CCVars;
 using Content.Shared.SS220.TTS;
 
@@ -40,6 +38,12 @@ public sealed partial class TTSSystem : EntitySystem
                 break;
 
             case TtsKind.Radio:
+                if (!_playDifferentRadioTogether)
+                    ttsMetadata.Subkind = string.Empty;
+
+                break;
+
+            case TtsKind.Telepathy:
                 if (!_playDifferentRadioTogether)
                     ttsMetadata.Subkind = string.Empty;
 

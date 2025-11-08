@@ -48,7 +48,7 @@ public sealed partial class TTSSystem
         _sawmill = Logger.GetSawmill("tts");
 
         // remove if Robust PR for clientCVar subs merged
-        _cfg.OnValueChanged(CCVars220.SendTTS, x => RaiseNetworkEvent(new SessionSendTTSMessage(x)), true);
+        _cfg.OnValueChanged(CCVars220.RecieveTTS, x => RaiseNetworkEvent(new SessionSendTTSMessage(x)), true);
         //end
 
         Subs.CVar(_cfg, CCVars220.MaxQueuedPerEntity, (x) => _maxQueuedPerEntity = x, true);
@@ -232,7 +232,7 @@ public sealed partial class TTSSystem
         var volume = AdjustVolume(msg.Metadata.Kind);
         var audioParams = AudioParams.Default.WithVolume(volume);
 
-        QueuePlayTts(msg.Data, msg.Metadata, GetEntity(msg.SourceUid), audioParams);
+        QueuePlayTts(msg.Data, msg.Metadata, GetEntity(msg.SourceUid), audioParams, msg.Metadata.Kind == TtsKind.Telepathy);
     }
 
     private float AdjustVolume(TtsKind kind)

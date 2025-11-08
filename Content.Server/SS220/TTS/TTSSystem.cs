@@ -30,8 +30,6 @@ public sealed partial class TTSSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _xforms = default!;
     [Dependency] private readonly TTSManager _ttsManager = default!;
 
-    private ISawmill _sawmill = default!;
-
     private int _maxMessageChars;
     private int _maxAnnounceMessageChars;
     private bool _isEnabled = false;
@@ -63,8 +61,6 @@ public sealed partial class TTSSystem : EntitySystem
         SubscribeLocalEvent<TTSComponent, MapInitEvent>(OnInit);
 
         SubscribeNetworkEvent<RequestGlobalTTSEvent>(OnRequestGlobalTTS);
-
-        _sawmill = _log.GetSawmill("TTSSystem");
 
         // remove if Robust PR for clientCVar subs merged
         SubscribeNetworkEvent<SessionSendTTSMessage>((msg, args) =>
@@ -496,8 +492,9 @@ public sealed partial class TTSSystem : EntitySystem
             ServerSendMessage(new MsgPlayTts
             {
                 Data = audioData,
+                // we may need to differ source and entity where we play
                 SourceUid = GetNetEntity(receiver),
-                Metadata = new(TtsKind.Telepathy, args.Channel is null ? string.Empty : args.Channel.ID)
+                Metadata = new(TtsKind.Telepathy, args.Channel is null ? string.Empty : args.Channel)
             }, session);
         }
     }
@@ -518,15 +515,11 @@ public sealed partial class TTSSystem : EntitySystem
             var textSsml = ToSsmlText(textSanitized, ssmlTraits);
 
             return await _ttsManager.ConvertTextToSpeech(speaker, textSanitized, kind);
-
-            //return isRadio
-            //    ? await _ttsManager.ConvertTextToSpeechRadio(speaker, textSanitized)
-            //    : await _ttsManager.ConvertTextToSpeech(speaker, textSanitized, isRadio: false);
         }
         catch (Exception e)
         {
             // Catch TTS exceptions to prevent a server crash.
-            _sawmill.Error($"TTS System error: {e.Message}");
+            Log.Error($"TTS System error: {e.Message}");
         }
 
         return default;

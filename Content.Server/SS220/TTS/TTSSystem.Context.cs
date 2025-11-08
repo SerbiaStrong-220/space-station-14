@@ -35,7 +35,7 @@ public static class TtsContextMaker
     {
         return new()
         {
-            InternalChannelPrototype = args.Channel?.ID,
+            InternalChannelPrototype = args.Channel,
             IsRadio = true,
             SpeakerContext = New(entityManager, args.Source)
         };

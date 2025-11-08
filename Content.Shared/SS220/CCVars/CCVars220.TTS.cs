@@ -7,7 +7,7 @@ public sealed partial class CCVars220
     /// <summary>
     /// Master switch for receiving tts
     /// </summary>
-    public static readonly CVarDef<bool> SendTTS =
+    public static readonly CVarDef<bool> RecieveTTS =
         CVarDef.Create("tts.receive_tts", true, CVar.CLIENT | CVar.REPLICATED | CVar.ARCHIVE);
 
     /// <summary>
@@ -21,6 +21,10 @@ public sealed partial class CCVars220
     /// </summary>
     public static readonly CVarDef<bool> PlayDifferentTalkingTogether =
         CVarDef.Create("tts.play_different_talk_together", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+
+    public static readonly CVarDef<bool> UseFFMpegProcessing =
+        CVarDef.Create("tts.use_ffmpeg_processing", true, CVar.SERVERONLY | CVar.ARCHIVE);
 
     /// <summary>
     /// Maximum entity capacity for tts queue
