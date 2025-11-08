@@ -15,7 +15,7 @@ public static class TtsContextMaker
     {
         return new()
         {
-            InternalChannelPrototype = args.Channel?.ID,
+            ChannelPrototype = args.Channel?.ID,
             IsRadio = args.IsRadio,
             SpeakerContext = New(entityManager, args.Source)
         };
@@ -25,7 +25,7 @@ public static class TtsContextMaker
     {
         return new()
         {
-            InternalChannelPrototype = args.Channel.ID,
+            ChannelPrototype = args.Channel.ID,
             IsRadio = true,
             SpeakerContext = New(entityManager, args.Source)
         };
@@ -35,7 +35,7 @@ public static class TtsContextMaker
     {
         return new()
         {
-            InternalChannelPrototype = args.Channel,
+            ChannelPrototype = args.Channel,
             IsRadio = true,
             SpeakerContext = New(entityManager, args.Source)
         };
@@ -59,14 +59,11 @@ public static class TtsContextMaker
     #endregion
 }
 
-public sealed class TtsContext
+public readonly record struct TtsContext
 {
     public bool IsRadio { get; init; }
-    public string ChannelPrototype => InternalChannelPrototype is null ? string.Empty : InternalChannelPrototype;
-
+    public string? ChannelPrototype { init; get; }
     public TtsSpeakerContext SpeakerContext { get; init; }
-
-    public string? InternalChannelPrototype { init; private get; }
 
     public bool Valid => SpeakerContext.Valid;
 }

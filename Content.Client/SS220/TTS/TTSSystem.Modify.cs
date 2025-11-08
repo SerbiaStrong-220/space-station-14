@@ -23,29 +23,29 @@ public sealed partial class TTSSystem : EntitySystem
         {
             case TtsKind.Default:
                 if (_playDifferentTalkingTogether)
-                    ttsMetadata.Subkind = source == EntityUid.FirstUid ? string.Empty : GetNetEntity(source).Id.ToString();
+                    ttsMetadata.Subkind = source == EntityUid.FirstUid ? TtsMetadata.NullChannel : GetNetEntity(source).Id.ToString();
                 else
-                    ttsMetadata.Subkind = string.Empty;
+                    ttsMetadata.Subkind = TtsMetadata.NullChannel;
 
                 break;
 
             case TtsKind.Whisper:
                 if (_playDifferentTalkingTogether)
-                    ttsMetadata.Subkind = source == EntityUid.FirstUid ? string.Empty : GetNetEntity(source).Id.ToString();
+                    ttsMetadata.Subkind = source == EntityUid.FirstUid ? TtsMetadata.NullChannel : GetNetEntity(source).Id.ToString();
                 else
-                    ttsMetadata.Subkind = string.Empty;
+                    ttsMetadata.Subkind = TtsMetadata.NullChannel;
 
                 break;
 
             case TtsKind.Radio:
                 if (!_playDifferentRadioTogether)
-                    ttsMetadata.Subkind = string.Empty;
+                    ttsMetadata.Subkind = TtsMetadata.NullChannel;
 
                 break;
 
             case TtsKind.Telepathy:
                 if (!_playDifferentRadioTogether)
-                    ttsMetadata.Subkind = string.Empty;
+                    ttsMetadata.Subkind = TtsMetadata.NullChannel;
 
                 break;
         }
