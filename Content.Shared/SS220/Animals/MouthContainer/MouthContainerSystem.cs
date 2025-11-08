@@ -205,7 +205,7 @@ public sealed class MouthContainerSystem : EntitySystem
                                      _mobStateSystem.IsAlive(uid, mobState));
     }
 
-    private bool CanInsert(EntityUid uid, EntityUid? toInsert, MouthContainerComponent? component = null)
+    private bool CanInsert(Entity<MouthContainerComponent?> ent, EntityUid? toInsert)
     {
         if (!Resolve(uid, ref component) || toInsert == null || toInsert == uid)
             return false;
