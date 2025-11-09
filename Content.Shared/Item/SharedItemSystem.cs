@@ -142,6 +142,7 @@ public abstract class SharedItemSystem : EntitySystem
         args.Verbs.Add(verb);
     }
 
+    // SS220 mouth container begin
     /// <summary>
     ///     Transmits item on get alternative verb to MouthContainerSystem.
     /// </summary>
@@ -168,6 +169,7 @@ public abstract class SharedItemSystem : EntitySystem
             }
         }
     }
+    // SS220 mouth container end
 
     private void OnExamine(EntityUid uid, ItemComponent component, ExaminedEvent args)
     {
