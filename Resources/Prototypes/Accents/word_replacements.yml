@@ -1265,9 +1265,16 @@
     accent-german-words-49: accent-german-words-replace-49
     accent-german-words-50: accent-german-words-replace-50
     accent-german-words-51: accent-german-words-replace-51
+    #ss220-german-fix-and-update-begin
     accent-german-words-51-2: accent-german-words-replace-51
+    //Досвидания-до свидания
+    #ss220-german-fix-and-update-end
     accent-german-words-52: accent-german-words-replace-52
     accent-german-words-53: accent-german-words-replace-53
+    #ss220-german-fix-and-update-begin
+    accent-german-words-53-2: accent-german-words-replace-53
+    //Удален
+    #ss220-german-fix-and-update-end
     accent-german-words-54: accent-german-words-replace-54
     accent-german-words-55: accent-german-words-replace-55
     accent-german-words-56: accent-german-words-replace-56
