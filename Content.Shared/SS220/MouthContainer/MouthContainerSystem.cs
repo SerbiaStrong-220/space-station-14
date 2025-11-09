@@ -115,7 +115,7 @@ public sealed class MouthContainerSystem : EntitySystem
         _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager,
             user,
             ent.Comp.InsertDuration,
-            new MouthContainerDoAfterEvent(toInsert),
+            new MouthContainerDoAfterEvent(new NetEntity(toInsert.Id)),
             ent.Owner,
             ent.Owner,
             ent.Owner) { BreakOnMove = true, BreakOnDamage = true, MovementThreshold = 1.0f, });
@@ -152,7 +152,7 @@ public sealed class MouthContainerSystem : EntitySystem
         _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager,
             subject,
             component.EjectDuration,
-            new MouthContainerDoAfterEvent(uid),
+            new MouthContainerDoAfterEvent(new NetEntity(uid.Id)),
             uid,
             uid,
             uid) { BreakOnMove = true, BreakOnDamage = true, MovementThreshold = 1.0f, });
@@ -163,20 +163,21 @@ public sealed class MouthContainerSystem : EntitySystem
     /// </summary>
     private void InsertDoAfter(Entity<MouthContainerComponent> ent, ref MouthContainerDoAfterEvent args)
     {
+        var toInsert = new EntityUid(args.ToInsert.Id);
         if (args.Cancelled || args.Handled || args.Target is not { Valid: true } target)
             return;
 
         if (!TryComp(target, out MouthContainerComponent? _))
             return;
 
-        if (!Exists(ent) || !Exists(args.ToInsert))
+        if (!Exists(ent) || !Exists(toInsert))
             return;
 
         if (ent.Comp.MouthSlot.ContainedEntity == null)
         {
-            if (Exists(args.ToInsert) && _container.CanInsert(args.ToInsert, ent.Comp.MouthSlot))
+            if (Exists(toInsert) && _container.CanInsert(toInsert, ent.Comp.MouthSlot))
             {
-                _container.Insert(args.ToInsert, ent.Comp.MouthSlot);
+                _container.Insert(toInsert, ent.Comp.MouthSlot);
                 _popup.PopupPredicted(Loc.GetString(ent.Comp.InsertMessage), ent.Owner, ent.Owner);
             }
         }
