@@ -20,7 +20,7 @@ public abstract class SharedItemSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private   readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] protected readonly SharedContainerSystem Container = default!;
-    [Dependency] private readonly MouthContainerSystem _mouthSystem = default!;
+    [Dependency] private readonly MouthContainerSystem _mouthSystem = default!; // SS220 mouth container
 
     public override void Initialize()
     {
