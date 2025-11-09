@@ -39,7 +39,7 @@ public sealed partial class EncryptionKeySystem : EntitySystem
         SubscribeLocalEvent<EncryptionKeyComponent, ExaminedEvent>(OnKeyExamined);
         SubscribeLocalEvent<EncryptionKeyHolderComponent, ExaminedEvent>(OnHolderExamined);
 
-        SubscribeLocalEvent<RadioEncryptionKeyComponent, MapInitEvent>(OnRadioEncryptionMapInit);
+        SubscribeLocalEvent<RadioEncryptionKeyComponent, MapInitEvent>(OnRadioEncryptionMapInit); // SS220-add-frequency-radio
         SubscribeLocalEvent<EncryptionKeyHolderComponent, InventoryRelayedEvent<GetFrequencyRadioEvent>>(OnGetFrequencyRadioEvent); // SS220-add-frequency-radio
         SubscribeLocalEvent<EncryptionKeyHolderComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<EncryptionKeyHolderComponent, InteractUsingEvent>(OnInteractUsing);
