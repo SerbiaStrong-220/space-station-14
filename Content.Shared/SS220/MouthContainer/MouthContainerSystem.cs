@@ -32,9 +32,9 @@ public sealed class MouthContainerSystem : EntitySystem
         base.Initialize();
     }
 
-    private void OnStartup(Entity<MouthContainerComponent> ent, ComponentStartup args)
+    private void OnStartup(Entity<MouthContainerComponent> ent, ref ComponentStartup args)
     {
-        component.MouthSlot = _container.EnsureContainer<ContainerSlot>(uid, component.MouthSlotId);
+        ent.Comp.MouthSlot = _container.EnsureContainer<ContainerSlot>(ent.Owner, ent.Comp.MouthSlotId);
     }
 
     /// <summary>
@@ -44,9 +44,10 @@ public sealed class MouthContainerSystem : EntitySystem
     {
         var subject = args.User;
         var toInsert = _hands.GetActiveItem(subject);
-        if (CanInsert(ent!, toInsert))
+        if (CanInsert(ent, toInsert))
         {
-            AddMouthContainerVerb(ent, ref args, toInsert!.Value);
+            if (toInsert != null)
+                AddMouthContainerVerb(ent, ref args, toInsert.Value);
         }
 
         if (ent.Comp.MouthSlot.ContainedEntity != null)
@@ -73,7 +74,7 @@ public sealed class MouthContainerSystem : EntitySystem
                 Text = Loc.GetString(ent.Comp.InsertVerbOut),
                 Impact = LogImpact.Medium,
                 DoContactInteraction = true,
-                Act = () => TryInsert(ent!, user, toInsert.Value),
+                Act = () => TryInsert(ent, user, toInsert.Value),
             };
         }
         else
@@ -103,19 +104,16 @@ public sealed class MouthContainerSystem : EntitySystem
     /// <summary>
     ///     Try to insert to MouthSlot. Launches the progress bar from inside and outside.
     /// </summary>
-    public void TryInsert(Entity<MouthContainerComponent?> ent, EntityUid subject, EntityUid toInsert)
+    public void TryInsert(Entity<MouthContainerComponent> ent, EntityUid user, EntityUid toInsert)
     {
-        if (!Resolve(ent.Owner, ref ent.Comp))
-            return;
-
-        if (!CanInsert(ent.Owner, toInsert))
+        if (!CanInsert(ent, toInsert))
             return;
 
         if (!Exists(toInsert))
             return;
 
         _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager,
-            subject,
+            user,
             ent.Comp.InsertDuration,
             new MouthContainerDoAfterEvent(toInsert),
             ent.Owner,
@@ -130,19 +128,24 @@ public sealed class MouthContainerSystem : EntitySystem
     {
         var uid = ent.Owner;
         var component = ent.Comp;
-        var toremove = component.MouthSlot.ContainedEntity!.Value;
+        if (component.MouthSlot.ContainedEntity != null)
+        {
+            var toremove = component.MouthSlot.ContainedEntity.Value;
 
-        if (!Resolve(uid, ref component))
-            return;
+            if (!Resolve(uid, ref component))
+                return;
 
-        if (!Exists(toremove))
-            return;
+            if (!Exists(toremove))
+                return;
+        }
 
         if (uid == subject)
         {
-            _container.RemoveEntity(uid, component.MouthSlot.ContainedEntity!.Value);
+            if (component.MouthSlot.ContainedEntity != null)
+                _container.RemoveEntity(uid, component.MouthSlot.ContainedEntity.Value);
             _popup.PopupPredicted(Loc.GetString(component.EjectMessage), uid, uid);
             UpdateAppearance(uid, component);
+
             return;
         }
 
@@ -197,7 +200,7 @@ public sealed class MouthContainerSystem : EntitySystem
     private void UpdateAppearance(EntityUid uid, MouthContainerComponent component)
     {
         var visible = component.MouthSlot.ContainedEntity != null && (!TryComp<MobStateComponent>(uid, out var mobState) || _mobStateSystem.IsAlive(uid, mobState));
-        _appearance.SetData(uid, MouthContainerVisuals.Visible, viible);
+        _appearance.SetData(uid, MouthContainerVisuals.Visible, visible);
     }
 
     /// <summary>
@@ -211,9 +214,9 @@ public sealed class MouthContainerSystem : EntitySystem
     /// <summary>
     ///     Check can item be inserted in MouthSlot.
     /// </summary>
-    public bool CanInsert(Entity<MouthContainerComponent?> ent, EntityUid? toInsert)
+    public bool CanInsert(Entity<MouthContainerComponent> ent, EntityUid? toInsert)
     {
-        if (!Resolve(ent.Owner, ref ent.Comp) || toInsert == null || toInsert == ent.Owner)
+        if (toInsert == null || toInsert == ent.Owner)
             return false;
 
         if (_whitelistSystem.IsWhitelistPass(ent.Comp.Blacklist, toInsert.Value) ||
@@ -226,8 +229,8 @@ public sealed class MouthContainerSystem : EntitySystem
     /// <summary>
     ///     Check is MouthSlot empty.
     /// </summary>
-    private static bool IsEmpty(MouthContainerComponent component)
+    private static bool IsEmpty(MouthContainerComponent? component)
     {
-        return component.MouthSlot.ContainedEntity == null;
+        return component?.MouthSlot.ContainedEntity == null;
     }
 }

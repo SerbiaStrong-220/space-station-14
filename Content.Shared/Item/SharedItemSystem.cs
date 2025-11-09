@@ -148,13 +148,12 @@ public abstract class SharedItemSystem : EntitySystem
     /// </summary>
     private void OnGetAltVerb(Entity<ItemComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
-        var subject = args.User;
+        var user = args.User;
 
-        if (HasComp<SS220.MouthContainer.MouthContainerComponent>(subject))
+        if (TryComp<MouthContainerComponent>(user, out var mouthComp))
         {
-            var mouthComp = Comp<SS220.MouthContainer.MouthContainerComponent>(subject);
             var toInsert = ent.Owner;
-            if (_mouthSystem.CanInsert(subject, toInsert))
+            if (_mouthSystem.CanInsert((user, mouthComp), toInsert))
             {
                 var v = new AlternativeVerb
                 {
@@ -163,7 +162,7 @@ public abstract class SharedItemSystem : EntitySystem
                     Disabled = false,
                     Impact = LogImpact.Medium,
                     DoContactInteraction = true,
-                    Act = () => { _mouthSystem.TryInsert(subject, subject, toInsert); },
+                    Act = () => { _mouthSystem.TryInsert((user, mouthComp), user, toInsert); },
                 };
                 args.Verbs.Add(v);
             }

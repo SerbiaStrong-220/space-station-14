@@ -6,25 +6,22 @@ namespace Content.Shared.SS220.MouthContainer;
 [RegisterComponent]
 public sealed partial class MouthContainerComponent : Component
 {
-    /// <summary>
-    ///     MouthSlot.
-    /// </summary>
+    #region Mouthslot
     [ViewVariables]
     public ContainerSlot MouthSlot = default!;
     [DataField]
     public string MouthSlotId = "mouth-slot";
+    #endregion
 
-    /// <summary>
-    ///     Whitelists.
-    /// </summary>
+
+    #region Whitelists
     [DataField]
     public EntityWhitelist? Whitelist;
     [DataField]
     public EntityWhitelist? Blacklist;
+    #endregion
 
-    /// <summary>
-    ///     Locales.
-    /// </summary>
+    #region Locales
     [DataField]
     public LocId InsertVerbIn = "insert-to-mouth-in";
     [DataField]
@@ -37,12 +34,12 @@ public sealed partial class MouthContainerComponent : Component
     public LocId InsertMessage = "insert-to-mouth-success";
     [DataField]
     public LocId EjectMessage = "eject-from-mouth-success";
+    #endregion
 
-    /// <summary>
-    ///     Do-After durations.
-    /// </summary>
+    #region Do-After-Durations
     [DataField]
     public float InsertDuration = 1f;
     [DataField]
     public float EjectDuration = 5f;
+    #endregion
 }
