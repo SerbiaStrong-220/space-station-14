@@ -1,7 +1,10 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Server.Database;
 using Content.Server.SS220.StationEvents.Components;
 using Content.Server.StationEvents.Events;
+using Content.Shared.Administration.Logs;
+using Content.Shared.Database;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Implants.Components;
 using Content.Shared.Mindshield.Components;
@@ -13,6 +16,7 @@ namespace Content.Server.SS220.StationEvents.Events;
 public sealed class MindShieldCombustionRule : StationEventSystem<MindShieldCombustionRuleComponent>
 {
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     protected override void Started(EntityUid uid, MindShieldCombustionRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {
         base.Started(uid, component, gameRule, args);
@@ -25,6 +29,12 @@ public sealed class MindShieldCombustionRule : StationEventSystem<MindShieldComb
         while (queryImplants.MoveNext(out var ent, out _))
         {
             validTargets.Add(ent);
+        }
+
+        if (validTargets.Count == 0)
+        {
+            _adminLog.Add(LogType.EventStopped, $"{uid:event} цфы stopped due to lack of entities with mindshield");
+            return;
         }
 
         var combustionOwner = _random.Pick(validTargets);
