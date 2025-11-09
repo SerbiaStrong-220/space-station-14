@@ -79,9 +79,13 @@ public abstract class SharedRaveSystem : EntitySystem
 
     private void SetNextSoundTimer(Entity<RaveComponent> ent)
     {
-        ent.Comp.NextSoundTime = _timing.CurTime + ((ent.Comp.MinIntervalSound < ent.Comp.MaxIntervalSound)
-        ? _random.Next(ent.Comp.MinIntervalSound, ent.Comp.MaxIntervalSound)
-        : ent.Comp.MaxIntervalSound);
+        TimeSpan randomTime;
+        if (ent.Comp.MinIntervalSound < ent.Comp.MaxIntervalSound)
+            randomTime = _random.Next(ent.Comp.MinIntervalSound, ent.Comp.MaxIntervalSound);
+        else
+            randomTime = ent.Comp.MaxIntervalSound;
+
+        ent.Comp.NextSoundTime = _timing.CurTime + randomTime;
 
         Dirty(ent, ent.Comp);
     }
