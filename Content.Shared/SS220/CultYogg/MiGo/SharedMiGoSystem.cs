@@ -498,7 +498,7 @@ public abstract class SharedMiGoSystem : EntitySystem
 
         if (HasComp<MindShieldComponent>(target))
         {
-            reason = Loc.GetString("Разум кандидата защищен майндщидлом");
+            reason = Loc.GetString("cult-yogg-enslave-mindshield");
             return false;
         }
 
