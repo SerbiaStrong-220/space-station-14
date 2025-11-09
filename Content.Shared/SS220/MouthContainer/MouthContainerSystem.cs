@@ -196,7 +196,8 @@ public sealed class MouthContainerSystem : EntitySystem
     /// </summary>
     private void UpdateAppearance(EntityUid uid, MouthContainerComponent component)
     {
-        _appearance.SetData(uid, MouthContainerVisuals.Visible, component.MouthSlot.ContainedEntity != null && (!TryComp<MobStateComponent>(uid, out var mobState) || _mobStateSystem.IsAlive(uid, mobState)));
+        var visible = component.MouthSlot.ContainedEntity != null && (!TryComp<MobStateComponent>(uid, out var mobState) || _mobStateSystem.IsAlive(uid, mobState));
+        _appearance.SetData(uid, MouthContainerVisuals.Visible, viible);
     }
 
     /// <summary>
