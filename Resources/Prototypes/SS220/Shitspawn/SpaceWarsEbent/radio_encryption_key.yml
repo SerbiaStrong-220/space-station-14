@@ -10,6 +10,14 @@
     - RadioNanotrasen
     defaultChannel: RadioNanotrasen
     defaultRadioChannel: RadioNanotrasen
+  - type: Item
+    sprite: Objects/Devices/encryption_keys.rsi
+  - type: Sprite
+    sprite: Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: crypt_blue
+    - state: nano_label
+
 
 - type: entity
   parent: EncryptionKey
@@ -23,3 +31,10 @@
     - RadioSyndicate
     defaultChannel: RadioSyndicate
     defaultRadioChannel: RadioSyndicate
+  - type: Item
+    sprite: Objects/Devices/encryption_keys.rsi
+  - type: Sprite
+    sprite: Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: crypt_red
+    - state: synd_label

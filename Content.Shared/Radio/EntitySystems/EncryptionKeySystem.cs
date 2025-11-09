@@ -53,7 +53,7 @@ public sealed partial class EncryptionKeySystem : EntitySystem
     {
         if (!TryComp<EncryptionKeyComponent>(entity, out var encryptionKey))
         {
-            Log.Error($"Entity {ToPrettyString(entity)} has {nameof(RadioEncryptionKeyComponent)} but don have {nameof(EncryptionKeyComponent)}");
+            Log.Warning($"Entity {ToPrettyString(entity)} has {nameof(RadioEncryptionKeyComponent)} but don have {nameof(EncryptionKeyComponent)}");
             return;
         }
 
