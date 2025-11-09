@@ -2,9 +2,11 @@
   id: RadioNanotrasen
   name: chat-radio-nanotrasen-operatives
   keycode: 'ъ'
+  frequencyRadio: true
   frequency: 1429
   minFrequency: 12.9
   maxFrequency: 15.9
+  frequencyChanelName: nanotrasen-operatives-frequency-channel-name
   color: "#2681a5"
   longRange: true
 
@@ -12,8 +14,10 @@
   id: RadioSyndicate
   name: chat-radio-syndicate-operatives
   keycode: 'э'
-  frequency: 1492
+  frequencyRadio: true
+  frequency: 1692
   minFrequency: 15.92
   maxFrequency: 18.92
+  frequencyChanelName: syndicate-operatives-frequency-channel-name
   color: "#ab1a1a"
   longRange: true

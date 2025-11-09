@@ -31,6 +31,17 @@ public sealed partial class RadioChannelPrototype : IHearableChannelPrototype //
 
     [DataField]
     public FixedPoint2 MaxFrequency { get; private set; } = 0;
+
+    /// <summary>
+    /// Defines when to use frequency logic for this channel
+    /// </summary>
+    [DataField]
+    [ViewVariables(VVAccess.ReadOnly)]
+    public bool FrequencyRadio = false;
+
+    [DataField]
+    [ViewVariables(VVAccess.ReadOnly)]
+    public LocId FrequencyChanelName = "base-frequency-channel-name";
     // SS220-radio-headset-end
 
     [DataField("color")]

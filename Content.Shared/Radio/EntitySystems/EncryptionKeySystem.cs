@@ -4,8 +4,10 @@ using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.Radio.Components;
+using Content.Shared.SS220.Radio.Components;
 using Content.Shared.Tools.Components;
 using Content.Shared.Wires;
 using Robust.Shared.Audio.Systems;
@@ -37,12 +39,65 @@ public sealed partial class EncryptionKeySystem : EntitySystem
         SubscribeLocalEvent<EncryptionKeyComponent, ExaminedEvent>(OnKeyExamined);
         SubscribeLocalEvent<EncryptionKeyHolderComponent, ExaminedEvent>(OnHolderExamined);
 
+        SubscribeLocalEvent<RadioEncryptionKeyComponent, MapInitEvent>(OnRadioEncryptionMapInit);
+        SubscribeLocalEvent<EncryptionKeyHolderComponent, InventoryRelayedEvent<GetFrequencyRadioEvent>>(OnGetFrequencyRadioEvent); // SS220-add-frequency-radio
         SubscribeLocalEvent<EncryptionKeyHolderComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<EncryptionKeyHolderComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<EncryptionKeyHolderComponent, EntInsertedIntoContainerMessage>(OnContainerModified);
         SubscribeLocalEvent<EncryptionKeyHolderComponent, EntRemovedFromContainerMessage>(OnContainerModified);
         SubscribeLocalEvent<EncryptionKeyHolderComponent, EncryptionRemovalFinishedEvent>(OnKeyRemoval);
     }
+
+    // SS220-add-frequency-radio-begin
+    private void OnRadioEncryptionMapInit(Entity<RadioEncryptionKeyComponent> entity, ref MapInitEvent _)
+    {
+        if (!TryComp<EncryptionKeyComponent>(entity, out var encryptionKey))
+        {
+            Log.Error($"Entity {ToPrettyString(entity)} has {nameof(RadioEncryptionKeyComponent)} but don have {nameof(EncryptionKeyComponent)}");
+            return;
+        }
+
+        if (encryptionKey.DefaultRadioChannel is null)
+        {
+            Log.Error($"Entity {ToPrettyString(entity)} should have not null value in DefaultRadioChannel to be used as radio encryption headset");
+            return;
+        }
+
+        if (!_protoManager.Resolve(encryptionKey.DefaultRadioChannel, out var radioChannelPrototype))
+            return;
+
+        entity.Comp.LowerFrequencyBorder = radioChannelPrototype.MinFrequency;
+        entity.Comp.UpperFrequencyBorder = radioChannelPrototype.MaxFrequency;
+        entity.Comp.RadioFrequency = radioChannelPrototype.MinFrequency;
+        Dirty(entity);
+    }
+
+    private void OnGetFrequencyRadioEvent(Entity<EncryptionKeyHolderComponent> entity, ref InventoryRelayedEvent<GetFrequencyRadioEvent> args)
+    {
+        foreach (var keyEntity in entity.Comp.KeyContainer.ContainedEntities)
+        {
+            if (!TryComp<RadioEncryptionKeyComponent>(keyEntity, out var radioEncryptionKey))
+                continue;
+
+            if (!TryComp<EncryptionKeyComponent>(keyEntity, out var encryptionKey))
+            {
+                Log.Error($"To use radio encryption entity {ToPrettyString(keyEntity)} also must have EncryptionKeyComponent in it!");
+                continue;
+            }
+
+            if (!_protoManager.TryIndex(encryptionKey.DefaultRadioChannel, out var radioChannelPrototype))
+            {
+                Log.Error($"EncryptionKey {ToPrettyString(keyEntity)} must have DefaultRadioChannel and that channel must be marked with FrequencyRadio=true in its proto");
+                continue;
+            }
+
+            args.Args.Channel = radioChannelPrototype;
+            args.Args.Frequency = radioEncryptionKey.RadioFrequency;
+
+            return;
+        }
+    }
+    // SS220-add-frequency-radio-end
 
     private void OnKeyRemoval(EntityUid uid, EncryptionKeyHolderComponent component, EncryptionRemovalFinishedEvent args)
     {
@@ -187,6 +242,19 @@ public sealed partial class EncryptionKeySystem : EntitySystem
                     "examine-encryption-channel");
             }
         }
+
+        // SS220-add-frequency-radio-begin
+        foreach (var keyEntity in component.KeyContainer.ContainedEntities)
+        {
+            if (!TryComp<RadioEncryptionKeyComponent>(keyEntity, out var radioEncryptionKey))
+                continue;
+
+            args.PushMarkup(Loc.GetString("examine-key-holder-radio-encryption-key", ("min", radioEncryptionKey.LowerFrequencyBorder.Float()),
+                ("max", radioEncryptionKey.UpperFrequencyBorder.Float()), ("freq", radioEncryptionKey.RadioFrequency.Float())));
+
+            return;
+        }
+        // SS220-add-frequency-radio-end
     }
 
     private void OnKeyExamined(EntityUid uid, EncryptionKeyComponent component, ExaminedEvent args)
@@ -199,6 +267,14 @@ public sealed partial class EncryptionKeySystem : EntitySystem
             args.PushMarkup(Loc.GetString("examine-encryption-channels-prefix"));
             AddChannelsExamine(component.Channels, component.DefaultChannel, args, _protoManager, "examine-encryption-channel");
         }
+
+        // SS220-add-frequency-radio-begin
+        if (!TryComp<RadioEncryptionKeyComponent>(uid, out var radioEncryptionKey))
+            return;
+
+        args.PushMarkup(Loc.GetString("examine-radio-encryption-key", ("min", radioEncryptionKey.LowerFrequencyBorder.Float()),
+            ("max", radioEncryptionKey.UpperFrequencyBorder.Float()), ("freq", radioEncryptionKey.RadioFrequency.Float())));
+        // SS220-add-frequency-radio-end
     }
 
     /// <summary>

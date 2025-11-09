@@ -9,6 +9,7 @@
     channels:
     - RadioNanotrasen
     defaultChannel: RadioNanotrasen
+    defaultRadioChannel: RadioNanotrasen
 
 - type: entity
   parent: EncryptionKey
@@ -21,3 +22,4 @@
     channels:
     - RadioSyndicate
     defaultChannel: RadioSyndicate
+    defaultRadioChannel: RadioSyndicate

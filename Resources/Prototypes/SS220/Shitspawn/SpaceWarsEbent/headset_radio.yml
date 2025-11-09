@@ -3,6 +3,7 @@
   id: ClothingHeadsetNanotrasenForces
   suffix: Shitspawn, Ebent, Space Wars
   name: гарнитура сил НаноТрейзен
+  description: Гарнитура оперативников НаноТрейзен. Имеет встроенный радиоканал с возможностью изменять частоту
   components:
   - type: ContainerFill
     containers:
@@ -20,6 +21,7 @@
   id: ClothingHeadsetSyndicateForces
   suffix: Shitspawn, Ebent, Space Wars
   name: гарнитура сил Синдиката
+  description: Гарнитура оперативников НаноТрейзен. Имеет встроенный радиоканал с возможностью изменять частоту
   components:
   - type: ContainerFill
     containers:
