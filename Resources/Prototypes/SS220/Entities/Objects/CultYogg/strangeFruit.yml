@@ -2,29 +2,28 @@
 
 - type: entity
   name: strange fruit
-  parent: BaseItem
+  parent: [BaseItem, CultYoggRestrictedItem]
   suffix: CultYogg
   id: ProductStrangeFruitCultYogg
   components:
-  - type: FlavorProfile
-    flavors:
-      - menacing
   - type: Sprite
     sprite: SS220/Objects/CultYogg/strangefruit.rsi
     state: icon
   - type: Produce
     seedId: StrangeFruit
-  - type: Extractable
-    grindableSolutionName: food
   - type: Tag
     tags:
-    - Omnivorous
     - CultYoggStealthProvidable
+  - type: TriggerOnUse
   - type: TimerTrigger
     delay: 5
   - type: TileSpawnInRangeOnTrigger
-    kudzuProtoId: StrangeKudzu
+    keysIn:
+    - timer
+    spawn: StrangeKudzu
   - type: DeleteOnTrigger
+    keysIn:
+    - timer
 
 
 - type: entity

@@ -1,23 +1,26 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Linq;
 using Content.Server.Administration;
+using Content.Server.Administration.Managers;
 using Content.Server.Antag;
+using Content.Server.Antag.Components;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules.Components;
+using Content.Server.Preferences.Managers;
+using Content.Server.Roles;
+using Content.Server.SS220.GameTicking.Rules.Components;
 using Content.Shared.Administration;
 using Content.Shared.GameTicking;
-using Content.Shared.IdentityManagement;
-using Robust.Server.Player;
-using Robust.Shared.Console;
-using Robust.Shared.Random;
 using Content.Shared.Ghost;
-using Content.Server.Administration.Managers;
-using Content.Server.Roles;
+using Content.Shared.Humanoid;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Mind;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Preferences;
-using Content.Server.Preferences.Managers;
+using Robust.Server.Player;
+using Robust.Shared.Console;
+using Robust.Shared.Random;
+using System.Linq;
 
 namespace Content.Server.SS220.Commands;
 
@@ -26,17 +29,17 @@ public sealed class MakeAntagCommand : IConsoleCommand
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IServerPreferencesManager _pref = default!;
-
     public string Command => "makerandomantag";
     public string Description => Loc.GetString("command-makerandomantag-description");
     public string Help => $"Usage: {Command}";
 
-    private readonly List<string> _antagTypes = new() // TODO: When will add a cult add a cultist there
-    {
+    private readonly List<string> _antagTypes =
+    [
         "Traitor",
         "Thief",
         "InitialInfected",
-    };
+        "CultistOfYoggSothoth"
+    ];
 
     public void Execute(IConsoleShell shell, string argStr, string[] args)
     {
@@ -64,8 +67,8 @@ public sealed class MakeAntagCommand : IConsoleCommand
         var gameTicker = _entityManager.System<GameTicker>();
         var random = IoCManager.Resolve<IRobustRandom>();
         var mindSystem = _entityManager.System<SharedMindSystem>();
-        var roleSystem = _entityManager.System<RoleSystem>();
-        var banSystem = IoCManager.Resolve<IBanManager>();
+        var role = _entityManager.System<RoleSystem>();
+        var banManager = IoCManager.Resolve<IBanManager>();
 
         var players = playerManager.Sessions
             .Where(x => gameTicker.PlayerGameStatuses[x.UserId] == PlayerGameStatus.JoinedGame)
@@ -80,19 +83,29 @@ public sealed class MakeAntagCommand : IConsoleCommand
             if (!mindSystem.TryGetMind(player.UserId, out var mindId)) // Is it player or a cow?
                 continue;
 
-            if (banSystem.GetRoleBans(player.UserId) is { } roleBans &&
+            if (banManager.GetRoleBans(player.UserId) is { } roleBans &&
                 roleBans.Contains("Job:" + defaultRule)) // Do he have a roleban on THIS antag?
                 continue;
 
-            if (roleSystem.MindIsAntagonist(mindId) ||
-                _entityManager.HasComponent<GhostComponent>(player.AttachedEntity) ||
-                _entityManager.HasComponent<MindShieldComponent>(player.AttachedEntity)) // Is he already lucky boy or he is ghost or he is CAPTIAN?
+            if (role.MindIsAntagonist(mindId))//no double antaging
+                continue;
+
+            if (!_entityManager.HasComponent<HumanoidAppearanceComponent>(player.AttachedEntity))//shouldn't be borg or cow
+                continue;
+
+            if (_entityManager.HasComponent<GhostComponent>(player.AttachedEntity))//ghost cant be antag
+                continue;
+
+            if (_entityManager.HasComponent<MindShieldComponent>(player.AttachedEntity))//no no for antag roles
+                continue;
+
+            if (_entityManager.HasComponent<AntagImmuneComponent>(player.AttachedEntity))//idk what is this, obr?
                 continue;
 
             if (!pref.AntagPreferences.Contains(defaultRule)) // Do he want to be a chosen antag or no?
                 continue;
 
-            switch (defaultRule) // TODO: When will add a cult add a cultist there too. U can add more for fun if u want.
+            switch (defaultRule)
             {
                 case "Traitor":
                     antag.ForceMakeAntag<TraitorRuleComponent>(player, defaultRule);
@@ -103,8 +116,12 @@ public sealed class MakeAntagCommand : IConsoleCommand
                 case "InitialInfected":
                     antag.ForceMakeAntag<ZombieRuleComponent>(player, defaultRule);
                     break;
+                case "CultistOfYoggSothoth":
+                    antag.ForceMakeAntag<CultYoggRuleComponent>(player, defaultRule);
+                    break;
             }
-            if (roleSystem.MindIsAntagonist(mindId)) // If he sucessfuly passed all checks and get his antag?
+
+            if (role.MindIsAntagonist(mindId)) // If he sucessfuly passed all checks and get his antag?
                 return player.AttachedEntity;
         }
         return null;
