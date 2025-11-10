@@ -23,6 +23,6 @@
     SS220
     -->
     <PackageVersion Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.0" />
-    <PackageVersion Include="FFMpegCore" Version="5.1.0" />
+    <PackageVersion Include="FFMpegCore" Version="5.4.0" />
   </ItemGroup>
 </Project>
