@@ -64,6 +64,17 @@ public sealed partial class ShuttleSystem
         if (!args.Show)
         {
             AddIFFFlag(xform.GridUid.Value, IFFFlags.Hide);
+            // ss220 fractwar begin
+            var curtime = _gameTiming.CurTime;
+
+            if (component.StealthCooldown != TimeSpan.Zero)
+                component.CooldownUntil = curtime + component.StealthCooldown;
+
+            if (component.StealthTime != TimeSpan.Zero)
+                component.StealthUntil = curtime + component.StealthTime;
+
+            SendIFFConsoleState(uid, component, null);
+            // ss220 fractwar end
         }
         else
         {
@@ -111,4 +122,43 @@ public sealed partial class ShuttleSystem
             });
         }
     }
+
+    //ss220 fractwar begin
+    public void UpdateIFF()
+    {
+        var curtime = _gameTiming.CurTime;
+        var iffs = EntityQueryEnumerator<IFFConsoleComponent, TransformComponent>();
+        while (iffs.MoveNext(out var consoleEnt,out var iffConsole, out var transform)) // iff iff iff iffffffff
+        {
+            if (!TryComp<IFFComponent>(transform.GridUid, out var iff))
+                continue;
+
+            if (curtime > iffConsole.StealthUntil && iffConsole.StealthUntil != TimeSpan.Zero)
+                RemoveIFFFlag(transform.GridUid.Value, IFFFlags.Hide, iff);
+
+            if (iffConsole.StealthCooldown == TimeSpan.Zero)
+                continue;
+
+            SendIFFConsoleState(consoleEnt, iffConsole, iff);
+        }
+    }
+
+    private TimeSpan GetRemainingTime(TimeSpan until, TimeSpan curtime)
+    {
+        return until > curtime ? until - curtime : TimeSpan.Zero;
+    }
+
+    private void SendIFFConsoleState(EntityUid consoleEnt, IFFConsoleComponent iffConsole, IFFComponent? iff)
+    {
+        var curtime = _gameTiming.CurTime;
+
+        _uiSystem.SetUiState(consoleEnt, IFFConsoleUiKey.Key, new IFFConsoleBoundUserInterfaceState()
+        {
+            AllowedFlags = iffConsole.AllowedFlags,
+            Flags = iff?.Flags ?? iffConsole.AllowedFlags,
+            Cooldown = GetRemainingTime(iffConsole.CooldownUntil, curtime),
+            StealthDuration = GetRemainingTime(iffConsole.StealthUntil, curtime),
+        });
+    }
+    //ss220 fractwar end
 }
