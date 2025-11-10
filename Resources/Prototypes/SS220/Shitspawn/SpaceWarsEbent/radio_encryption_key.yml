@@ -9,7 +9,7 @@
     channels:
     - RadioNanotrasen
     defaultChannel: RadioNanotrasen
-    defaultRadioChannel: RadioNanotrasen
+    DefaultFrequencyChannel: RadioNanotrasen
   - type: Item
     sprite: Objects/Devices/encryption_keys.rsi
   - type: Sprite
@@ -30,7 +30,7 @@
     channels:
     - RadioSyndicate
     defaultChannel: RadioSyndicate
-    defaultRadioChannel: RadioSyndicate
+    DefaultFrequencyChannel: RadioSyndicate
   - type: Item
     sprite: Objects/Devices/encryption_keys.rsi
   - type: Sprite
