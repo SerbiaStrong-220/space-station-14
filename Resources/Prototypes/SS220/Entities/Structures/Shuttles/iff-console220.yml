@@ -2,7 +2,7 @@
   parent: BaseComputerAiAccess
   id: ComputerIFFEbent
   name: IFF computer
-  suffix: FractWar
+  suffix: SpaceWar
   components:
   - type: IFFConsole
     stealthCooldown: 120

@@ -64,7 +64,7 @@ public sealed partial class ShuttleSystem
         if (!args.Show)
         {
             AddIFFFlag(xform.GridUid.Value, IFFFlags.Hide);
-            // ss220 fractwar begin
+            // ss220 spacewar begin
             var curtime = _gameTiming.CurTime;
 
             if (component.StealthCooldown != TimeSpan.Zero)
@@ -74,7 +74,7 @@ public sealed partial class ShuttleSystem
                 component.StealthUntil = curtime + component.StealthTime;
 
             SendIFFConsoleState(uid, component, null);
-            // ss220 fractwar end
+            // ss220 spacewar end
         }
         else
         {
@@ -123,7 +123,7 @@ public sealed partial class ShuttleSystem
         }
     }
 
-    //ss220 fractwar begin
+    //ss220 spacewar begin
     public void UpdateIFF()
     {
         var curtime = _gameTiming.CurTime;
@@ -160,5 +160,5 @@ public sealed partial class ShuttleSystem
             StealthDuration = GetRemainingTime(iffConsole.StealthUntil, curtime),
         });
     }
-    //ss220 fractwar end
+    //ss220 spacewar end
 }

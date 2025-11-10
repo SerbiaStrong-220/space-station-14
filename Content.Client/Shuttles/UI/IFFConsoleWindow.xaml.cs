@@ -82,7 +82,7 @@ public sealed partial class IFFConsoleWindow : FancyWindow,
             ShowVesselOffButton.Disabled = true;
             ShowVesselOnButton.Disabled = true;
         }
-        // ss220 fractwar begin
+        // ss220 spacewar begin
         if (state.StealthDuration != TimeSpan.Zero)
         {
             StealthDuration.Visible = true;
@@ -109,6 +109,6 @@ public sealed partial class IFFConsoleWindow : FancyWindow,
             StealthCooldown.Text = Loc.GetString("iff-stealth-ready");
             ShowVesselOffButton.Disabled = (state.AllowedFlags & IFFFlags.Hide) == 0;
         }
-        // ss220 fractwar end
+        // ss220 spacewar end
     }
 }
