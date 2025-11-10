@@ -2,7 +2,8 @@
   parent: EncryptionKey
   id: EncryptionNanotrasenOperative
   suffix: Shitspawn, Ebent, Space Wars
-  name: ключ шифрования оперативников НаноТрейзен
+  name: продвинутый ключ шифрования оперативников НаноТрейзен.
+  description: Имеет общую частоту сил НаноТрейзен и настраиваемый радиоканал.
   components:
   - type: RadioEncryptionKey
   - type: EncryptionKey
@@ -18,12 +19,24 @@
     - state: crypt_blue
     - state: nano_label
 
+- type: entity
+  parent: EncryptionNanotrasenOperative
+  id: EncryptionOnlyFrequencyNanotrasenOperative
+  suffix: Shitspawn, Ebent, Space Wars
+  name: ключ шифрования оперативников НаноТрейзен.
+  description: Имеет настраиваемый радиоканал НаноТрейзен.
+  components:
+  - type: EncryptionKey
+    defaultFrequencyChannel: RadioNanotrasen
+    channels: []
+    defaultChannel: null
 
 - type: entity
   parent: EncryptionKey
   id: EncryptionSyndicateOperative
   suffix: Shitspawn, Ebent, Space Wars
-  name: ключ шифрования оперативников Синдиката
+  name: продвинутый ключ шифрования оперативников Синдиката
+  description: Имеет общую частоту сил Синдиката и настраиваемый радиоканал.
   components:
   - type: RadioEncryptionKey
   - type: EncryptionKey
@@ -38,3 +51,15 @@
     layers:
     - state: crypt_red
     - state: synd_label
+
+- type: entity
+  parent: EncryptionSyndicateOperative
+  id: EncryptionOnlyFrequencySyndicateOperative
+  suffix: Shitspawn, Ebent, Space Wars
+  name: ключ шифрования оперативников Синдиката.
+  description: Имеет настраиваемый радиоканал Синдиката.
+  components:
+  - type: EncryptionKey
+    defaultFrequencyChannel: RadioSyndicate
+    channels: []
+    defaultChannel: null

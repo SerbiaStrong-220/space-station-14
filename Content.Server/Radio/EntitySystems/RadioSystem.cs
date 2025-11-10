@@ -21,7 +21,7 @@ using Content.Server.SS220.Language;
 using Content.Shared.SS220.Language.Systems;  // SS220-Add-Languages
 using Content.Server.SS220.Events;
 using Content.Server.Radio.Components;
-using Content.Shared.FixedPoint; // SS220 borg-id-fix
+using Content.Shared.FixedPoint;
 
 namespace Content.Server.Radio.EntitySystems;
 
@@ -160,7 +160,8 @@ public sealed class RadioSystem : EntitySystem
         {
             if (!radio.ReceiveAllChannels)
             {
-                if (!radio.Channels.Contains(channel.ID) || (TryComp<IntercomComponent>(receiver, out var intercom) &&
+                if (!(radio.Channels.Contains(channel.ID) || radio.FrequencyChannels.Contains(channel.ID)  /* SS220-add-frequency-radio */)
+                || (TryComp<IntercomComponent>(receiver, out var intercom) &&
                                                              !intercom.SupportedChannels.Contains(channel.ID)))
                     continue;
             }

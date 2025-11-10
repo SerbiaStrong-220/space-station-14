@@ -2,8 +2,8 @@
   parent: ClothingHeadsetIAA
   id: ClothingHeadsetNanotrasenForces
   suffix: Shitspawn, Ebent, Space Wars
-  name: гарнитура сил НаноТрейзен
-  description: Гарнитура оперативников НаноТрейзен. Имеет встроенный радиоканал с возможностью изменять частоту
+  name: Тактическая гарнитура "Страж-2570"
+  description: Вершина корпоративной разработки в области личной защиты и связи.
   components:
   - type: ContainerFill
     containers:
@@ -17,11 +17,21 @@
         type: HeadsetBoundUserInterface
 
 - type: entity
+  parent: ClothingHeadsetNanotrasenForces
+  id: ClothingHeadsetFrequencyNanotrasenForces
+  suffix: Shitspawn, Ebent, Space Wars
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionOnlyFrequencyNanotrasenOperative
+
+- type: entity
   parent: ClothingHeadsetAltSyndicate
   id: ClothingHeadsetSyndicateForces
   suffix: Shitspawn, Ebent, Space Wars
-  name: гарнитура сил Синдиката
-  description: Гарнитура оперативников НаноТрейзен. Имеет встроенный радиоканал с возможностью изменять частоту
+  name: Тактическая гарнитура "Гром"
+  description: Средство связи и огневой поддержки для штурмовых групп и диверсантов.
   components:
   - type: ContainerFill
     containers:
@@ -34,4 +44,12 @@
       enum.HeadsetKey.Key:
         type: HeadsetBoundUserInterface
 
-
+- type: entity
+  parent: ClothingHeadsetSyndicateForces
+  id: ClothingHeadsetFrequencySyndicateForces
+  suffix: Shitspawn, Ebent, Space Wars
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionOnlyFrequencySyndicateOperative
