@@ -20,7 +20,7 @@ public sealed partial class HeadsetEncryptionRadioSetting : BoxContainer
 
         SubmitButton.OnPressed += args =>
         {
-            FrequencySetterSpinBox.Value = ValidateFrequencyInput(FrequencySetterSpinBox.Value) ? FrequencySetterSpinBox.Value : _minFrequency;
+            FrequencySetterSpinBox.Value = Math.Clamp(FrequencySetterSpinBox.Value, _minFrequency, _maxFrequency);
             OnFrequencySubmit?.Invoke(args, FixedPoint2.FromCents(FrequencySetterSpinBox.Value));
             ChangeApplyState(ApplyButtonStateEnum.ChangesSaved);
         };
@@ -30,29 +30,25 @@ public sealed partial class HeadsetEncryptionRadioSetting : BoxContainer
     {
         FrequencySetterSpinBox.ClearButtons();
 
-        FrequencySetterSpinBox.AddLeftButton(-100, "-100");
+        FrequencySetterSpinBox.AddLeftButton(-50, "-50");
         FrequencySetterSpinBox.AddLeftButton(-10, "-10");
         FrequencySetterSpinBox.AddLeftButton(-1, "-1");
         FrequencySetterSpinBox.AddRightButton(1, "1");
         FrequencySetterSpinBox.AddRightButton(10, "10");
-        FrequencySetterSpinBox.AddRightButton(100, "100");
+        FrequencySetterSpinBox.AddRightButton(50, "50");
 
         _minFrequency = minValue;
         _maxFrequency = maxValue;
 
+
+
         // it should be here to Force SpinBox UpdateButtonCanPress() cause its private
-        FrequencySetterSpinBox.Value = ValidateFrequencyInput(value) ? value : _minFrequency;
+        FrequencySetterSpinBox.Value = Math.Clamp(value, _minFrequency, _maxFrequency);
         FrequencySetterSpinBox.ValueChanged += (_) =>
         {
             ChangeApplyState(ApplyButtonStateEnum.ChangesNotSaved);
         };
     }
-
-    private bool ValidateFrequencyInput(int value)
-    {
-        return value >= _minFrequency && value < _maxFrequency;
-    }
-
     private void ChangeApplyState(ApplyButtonStateEnum state)
     {
         switch (state)
