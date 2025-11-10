@@ -99,7 +99,7 @@ public sealed class MouthContainerSystem : EntitySystem
         _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager,
             user,
             ent.Comp.InsertDuration,
-            new MouthContainerDoAfterInsertEvent(new NetEntity(toInsert.Id)),
+            new MouthContainerDoAfterInsertEvent(GetNetEntity(toInsert)),
             ent.Owner,
             ent.Owner,
             ent.Owner) { BreakOnMove = true, BreakOnDamage = true, MovementThreshold = 1.0f, });
@@ -147,7 +147,7 @@ public sealed class MouthContainerSystem : EntitySystem
     /// </summary>
     private void InsertDoAfter(Entity<MouthContainerComponent> ent, ref MouthContainerDoAfterInsertEvent args)
     {
-        var toInsert = new EntityUid(args.ToInsert.Id);
+        var toInsert = GetEntity(args.ToInsert);
         if (args.Cancelled || args.Handled)
             return;
 
