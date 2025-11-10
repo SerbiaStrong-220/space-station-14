@@ -1,5 +1,4 @@
 ﻿using Content.Server.Body.Systems;
-using Content.Server.Kitchen.Components;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Body.Components;
 using Content.Shared.Database;
@@ -8,6 +7,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Kitchen;
+using Content.Shared.Kitchen.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.Components;
@@ -17,6 +17,8 @@ using Content.Shared.Storage;
 using Content.Shared.Verbs;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
+using Robust.Shared.Audio;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 
@@ -33,6 +35,8 @@ public sealed class SharpSystem : EntitySystem
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly IRobustRandom _robustRandom = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    //SS220-butchering-update
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {
@@ -73,6 +77,14 @@ public sealed class SharpSystem : EntitySystem
         if (!sharp.Butchering.Add(target))
             return false;
 
+        //SS220-butchering-update begin
+        if (!_audio.IsPlaying(butcher.ButcheringAudioStream))
+        {
+            var audioParams = AudioParams.Default.WithMaxDistance(10f);
+            butcher.ButcheringAudioStream = _audio.PlayPvs(butcher.ButcheringSound, target, audioParams)?.Entity;
+        }
+        //SS220-butchering-update end
+
         // if the user isn't the entity with the sharp component,
         // they will need to be holding something with their hands, so we set needHand to true
         // so that the doafter can be interrupted if they drop the item in their hands
@@ -94,6 +106,9 @@ public sealed class SharpSystem : EntitySystem
         if (args.Handled || !TryComp<ButcherableComponent>(args.Args.Target, out var butcher))
             return;
 
+        //SS220-butchering-update
+        _audio.Stop(butcher.ButcheringAudioStream);
+
         if (args.Cancelled)
         {
             component.Butchering.Remove(args.Args.Target.Value);
@@ -102,19 +117,25 @@ public sealed class SharpSystem : EntitySystem
 
         component.Butchering.Remove(args.Args.Target.Value);
 
-        if (_containerSystem.IsEntityInContainer(args.Args.Target.Value))
-        {
-            args.Handled = true;
-            return;
-        }
-
         var spawnEntities = EntitySpawnCollection.GetSpawns(butcher.SpawnedEntities, _robustRandom);
         var coords = _transform.GetMapCoordinates(args.Args.Target.Value);
         EntityUid popupEnt = default!;
-        foreach (var proto in spawnEntities)
+
+        if (_containerSystem.TryGetContainingContainer(args.Args.Target.Value, out var container))
         {
-            // distribute the spawned items randomly in a small radius around the origin
-            popupEnt = Spawn(proto, coords.Offset(_robustRandom.NextVector2(0.25f)));
+            foreach (var proto in spawnEntities)
+            {
+                // distribute the spawned items randomly in a small radius around the origin
+                popupEnt = SpawnInContainerOrDrop(proto, container.Owner, container.ID);
+            }
+        }
+        else
+        {
+            foreach (var proto in spawnEntities)
+            {
+                // distribute the spawned items randomly in a small radius around the origin
+                popupEnt = Spawn(proto, coords.Offset(_robustRandom.NextVector2(0.25f)));
+            }
         }
 
         // only show a big popup when butchering living things.

@@ -399,8 +399,8 @@ public abstract class SharedDarkReaperSystem : EntitySystem
         {
             if (fixturesComp.Fixtures.TryGetValue("fix1", out var fixture))
             {
-                var mask = (int)(isMaterial ? CollisionGroup.MobMask : CollisionGroup.GhostImpassable);
-                var layer = (int)(isMaterial ? CollisionGroup.MobLayer : CollisionGroup.None);
+                var mask = (int)(isMaterial ? CollisionGroup.MobMask : CollisionGroup.None);
+                var layer = (int)(isMaterial ? CollisionGroup.MobLayer : CollisionGroup.GhostImpassable);
                 _physics.SetCollisionMask(uid, "fix1", fixture, mask);
                 _physics.SetCollisionLayer(uid, "fix1", fixture, layer);
             }

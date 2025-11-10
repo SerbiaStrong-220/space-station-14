@@ -26,6 +26,7 @@
   - type: StandingState
   - type: CanMoveInAir
   - type: MovementIgnoreGravity
+  - type: GravityAffected
   - type: Appearance
   - type: Physics
     bodyType: Dynamic

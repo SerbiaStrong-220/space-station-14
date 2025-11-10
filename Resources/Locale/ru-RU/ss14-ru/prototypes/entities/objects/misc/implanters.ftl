@@ -1,7 +1,9 @@
 ent-BaseImplanter = имплантер
     .desc = Шприц, специально предназначенный для введения и извлечения подкожных имплантов.
-ent-Implanter = { ent-BaseImplanter }
-    .desc = Одноразовый шприц, специально предназначенный для введения и извлечения подкожных имплантов.
+ent-Implanter = экстрактор имплантов
+    .desc =
+        Шприц двойного назначения, предназначенный для удаления определённых подкожных имплантатов. После извлечения имплант хранится внутри и может быть повторно введён.
+        ПРЕДУПРЕЖДЕНИЕ: Ошибка оператора, такая как выбор отсутствующего типа импланта, приведёт к серьёзной генетической травме оператора.
 ent-ImplanterAdmeme = { ent-Implanter }
     .suffix = Адмемы
     .desc = { ent-Implanter.desc }
@@ -40,19 +42,19 @@ ent-EmpImplanter = { ent-Implanter }
     .suffix = ЭМИ
     .desc = { ent-Implanter.desc }
 ent-DnaScramblerImplanter = { ent-Implanter }
-    .suffix = миксер ДНК
+    .suffix = Миксер ДНК
     .desc = { ent-Implanter.desc }
 ent-DeathRattleImplanter = { ent-Implanter }
-    .suffix = предсмертный хрип
+    .suffix = Предсмертный хрип
     .desc = { ent-Implanter.desc }
 ent-MindShieldImplanter = { ent-Implanter }
     .suffix = Защита разума
     .desc = { ent-Implanter.desc }
 ent-DeathAcidifierImplanter = { ent-Implanter }
-    .suffix = растворитель
+    .suffix = Растворитель
     .desc = { ent-Implanter.desc }
 ent-ScramImplanter = { ent-Implanter }
-    .suffix = побег
+    .suffix = Побег
     .desc = { ent-Implanter.desc }
 ent-RadioImplanterCentcomm = { ent-Implanter }
     .suffix = Радио ЦК

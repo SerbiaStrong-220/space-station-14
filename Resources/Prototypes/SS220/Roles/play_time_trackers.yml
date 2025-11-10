@@ -17,6 +17,9 @@
   id: JobMagistrate
 
 - type: playTimeTracker
+  id: JobSecurityPet
+
+- type: playTimeTracker
   id: JobSeniorEngineer
 
 - type: playTimeTracker
@@ -32,9 +35,51 @@
   id: JobSeniorService
 
 - type: playTimeTracker
+  id: JobPeacefulPet
+
+- type: playTimeTracker
+  id: JobDerelictBorg
+
+- type: playTimeTracker
   id: Prisoner
 
+- type: playTimeTracker
+  id: DeathSquadLeader
+
+- type: playTimeTracker
+  id: DeathSquadHealer
+
+- type: playTimeTracker
+  id: DeathSquadOperative
+
 # Antags
+- type: playTimeTracker
+  id: AntahAggressiveAnimals
+
+- type: playTimeTracker
+  id: AntagDarkReaper
+
+- type: playTimeTracker
+  id: AntagRevenant
+
+- type: playTimeTracker
+  id: AntagSpiderQueen
+
+- type: playTimeTracker
+  id: AntagSpaceDragon
+
+- type: playTimeTracker
+  id: AntagSpiderQueenServant
+
+- type: playTimeTracker
+  id: AntagNinja
+
+- type: playTimeTracker
+  id: AntagSyndicateBorg
+
+- type: playTimeTracker
+  id: AntagSyndicateReinforcement
+
 - type: playTimeTracker
   id: AntagNukeops
 

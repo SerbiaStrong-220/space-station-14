@@ -9,16 +9,30 @@
       part: TorsoAnimal
       connections:
       - right arm
+      - far right arm
       - left arm
+      - far left arm
     right arm:
       part: RightArmDiona
       connections:
       - right hand
+    far right arm:
+      part: RightArmDiona
+      connections:
+      - far right hand
     left arm:
       part: LeftArmDiona
       connections:
       - left hand
+    far left arm:
+      part: LeftArmDiona
+      connections:
+      - far left hand
     right hand:
       part: RightHandDiona
+    far right hand:
+      part: RightHandDiona
     left hand:
+      part: LeftHandDiona
+    far left hand:
       part: LeftHandDiona

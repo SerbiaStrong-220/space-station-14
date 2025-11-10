@@ -210,6 +210,15 @@
       visible: false
   - type: Icon
     state: pda-bs
+  - type: CartridgeLoader
+    uiKey: enum.PdaUiKey.Key
+    preinstalled:
+      - CrewManifestCartridge
+      - NotekeeperCartridge
+      - NanoTaskCartridge
+      - NewsReaderCartridge
+      - MedTekCartridge
+      - MessengerCartridgeClient # SS220 Messenger
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -330,6 +339,18 @@
         visible: false
     - type: Icon
       state: pda-centcomnew
+    - type: CartridgeLoader
+      uiKey: enum.PdaUiKey.Key
+      preinstalled:
+      - CrewManifestCartridge
+      - NotekeeperCartridge
+      - NanoTaskCartridge
+      - NewsReaderCartridge
+      - MedTekCartridge
+      - MessengerCartridgeClient # SS220 Messenger
+      - AstroNavCartridge
+      - WantedListCartridge
+      - LogProbeCartridge
 
 - type: entity
   parent: BasePDA

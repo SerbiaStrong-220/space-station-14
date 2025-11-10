@@ -29,6 +29,10 @@ public sealed partial class AlertLevelPrototype : IPrototype
 [DataDefinition]
 public sealed partial class AlertLevelDetail
 {
+    // SS220-add-announce-over-tts-begin
+    [DataField]
+    public bool PlayTTS = false;
+    // SS220-add-announce-over-tts-end
     /// <summary>
     /// What is announced upon this alert level change. Can be a localized string.
     /// </summary>

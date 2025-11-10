@@ -18,7 +18,7 @@ on:
 jobs:
   update-wiki:
     name: Build and Publish JSON blobs to wiki
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout Master
