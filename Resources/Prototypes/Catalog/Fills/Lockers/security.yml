@@ -117,9 +117,10 @@
     # - id: ClothingEyesGlassesSecurity #SS220-brig-medic
     - id: ClothingEyesHudMedical #ss220-brig-medic
     # - id: WeaponDisabler
+    # SS220 No tasers begin
     # - id: WeaponTaser
     #  amount: 2
-    # SS220 No tasers
+    # SS220 No tasers end
     - id: ClothingOuterHardsuitBrigmedic
     - id: OxygenTankFilled   #SS220 add-tanks-brigmed
     - id: NitrogenTankFilled #SS220 add-tanks-brigmed
