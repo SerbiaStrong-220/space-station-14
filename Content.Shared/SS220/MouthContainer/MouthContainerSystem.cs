@@ -28,7 +28,8 @@ public sealed class MouthContainerSystem : EntitySystem
         SubscribeLocalEvent<MouthContainerComponent, BeingGibbedEvent>(OnEntityGibbedEvent);
         SubscribeLocalEvent<MouthContainerComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerb);
         SubscribeLocalEvent<MouthContainerComponent, MobStateChangedEvent>(OnMobStateChanged);
-        SubscribeLocalEvent<MouthContainerComponent, MouthContainerDoAfterEvent>(InsertDoAfter);
+        SubscribeLocalEvent<MouthContainerComponent, MouthContainerDoAfterInsertEvent>(InsertDoAfter);
+        SubscribeLocalEvent<MouthContainerComponent, MouthContainerDoAfterEjectEvent>(EjectDoAfter);
         base.Initialize();
     }
 
@@ -44,29 +45,11 @@ public sealed class MouthContainerSystem : EntitySystem
     {
         var subject = args.User;
         var toInsert = _hands.GetActiveItem(subject);
-        if (CanInsert(ent, toInsert))
-        {
-            if (toInsert != null)
-                AddMouthContainerVerb(ent, ref args, toInsert.Value);
-        }
 
-        if (ent.Comp.MouthSlot.ContainedEntity != null)
-        {
-            AddMouthContainerVerb(ent, ref args);
-        }
-    }
-
-    /// <summary>
-    ///     Adds options for interacting with the MouthSlot to the context menu.
-    /// </summary>
-    private void AddMouthContainerVerb(Entity<MouthContainerComponent> ent,
-        ref GetVerbsEvent<AlternativeVerb> args,
-        EntityUid? toInsert = null)
-    {
         var user = args.User;
         AlternativeVerb verb;
 
-        if (toInsert != null)
+        if (toInsert != null && CanInsert(ent, toInsert))
         {
             verb = new AlternativeVerb
             {
@@ -76,20 +59,21 @@ public sealed class MouthContainerSystem : EntitySystem
                 DoContactInteraction = true,
                 Act = () => TryInsert(ent, user, toInsert.Value),
             };
-        }
-        else
-        {
-            var str = Loc.GetString(user == args.Target ? ent.Comp.EjectVerbIn : ent.Comp.EjectVerbOut);
-            verb = new AlternativeVerb
-            {
-                Priority = 1,
-                Text = str,
-                Impact = LogImpact.Medium,
-                DoContactInteraction = true,
-                Act = () => TryEject(ent, user),
-            };
+            args.Verbs.Add(verb);
         }
 
+        if (ent.Comp.MouthSlot.ContainedEntity == null)
+            return;
+
+        var str = Loc.GetString(user == args.Target ? ent.Comp.EjectVerbIn : ent.Comp.EjectVerbOut);
+        verb = new AlternativeVerb
+        {
+            Priority = 1,
+            Text = str,
+            Impact = LogImpact.Medium,
+            DoContactInteraction = true,
+            Act = () => TryEject(ent, user),
+        };
         args.Verbs.Add(verb);
     }
 
@@ -115,7 +99,7 @@ public sealed class MouthContainerSystem : EntitySystem
         _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager,
             user,
             ent.Comp.InsertDuration,
-            new MouthContainerDoAfterEvent(new NetEntity(toInsert.Id)),
+            new MouthContainerDoAfterInsertEvent(new NetEntity(toInsert.Id)),
             ent.Owner,
             ent.Owner,
             ent.Owner) { BreakOnMove = true, BreakOnDamage = true, MovementThreshold = 1.0f, });
@@ -124,7 +108,7 @@ public sealed class MouthContainerSystem : EntitySystem
     /// <summary>
     ///     Try to eject from MouthSlot. Launches the progress bar from outside. Eject instantly from inside.
     /// </summary>
-    private void TryEject(Entity<MouthContainerComponent> ent, EntityUid subject)
+    private void TryEject(Entity<MouthContainerComponent> ent, EntityUid user)
     {
         var uid = ent.Owner;
         var component = ent.Comp;
@@ -139,7 +123,7 @@ public sealed class MouthContainerSystem : EntitySystem
                 return;
         }
 
-        if (uid == subject)
+        if (uid == user)
         {
             if (component.MouthSlot.ContainedEntity != null)
                 _container.RemoveEntity(uid, component.MouthSlot.ContainedEntity.Value);
@@ -150,9 +134,9 @@ public sealed class MouthContainerSystem : EntitySystem
         }
 
         _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager,
-            subject,
+            user,
             component.EjectDuration,
-            new MouthContainerDoAfterEvent(new NetEntity(uid.Id)),
+            new MouthContainerDoAfterEjectEvent(),
             uid,
             uid,
             uid) { BreakOnMove = true, BreakOnDamage = true, MovementThreshold = 1.0f, });
@@ -161,27 +145,37 @@ public sealed class MouthContainerSystem : EntitySystem
     /// <summary>
     ///     Insert item after progressbar.
     /// </summary>
-    private void InsertDoAfter(Entity<MouthContainerComponent> ent, ref MouthContainerDoAfterEvent args)
+    private void InsertDoAfter(Entity<MouthContainerComponent> ent, ref MouthContainerDoAfterInsertEvent args)
     {
         var toInsert = new EntityUid(args.ToInsert.Id);
-        if (args.Cancelled || args.Handled || args.Target is not { Valid: true } target)
-            return;
-
-        if (!TryComp(target, out MouthContainerComponent? _))
+        if (args.Cancelled || args.Handled)
             return;
 
         if (!Exists(ent) || !Exists(toInsert))
             return;
 
-        if (ent.Comp.MouthSlot.ContainedEntity == null)
+        if (ent.Comp.MouthSlot.ContainedEntity == null && _container.CanInsert(toInsert, ent.Comp.MouthSlot))
         {
-            if (Exists(toInsert) && _container.CanInsert(toInsert, ent.Comp.MouthSlot))
-            {
-                _container.Insert(toInsert, ent.Comp.MouthSlot);
-                _popup.PopupPredicted(Loc.GetString(ent.Comp.InsertMessage), ent.Owner, ent.Owner);
-            }
+            _container.Insert(toInsert, ent.Comp.MouthSlot);
+            _popup.PopupPredicted(Loc.GetString(ent.Comp.InsertMessage), ent.Owner, ent.Owner);
         }
-        else
+
+        UpdateAppearance(ent.Owner, ent.Comp);
+        args.Handled = true;
+    }
+
+    /// <summary>
+    ///     Eject item after progressbar.
+    /// </summary>
+    private void EjectDoAfter(Entity<MouthContainerComponent> ent, ref MouthContainerDoAfterEjectEvent args)
+    {
+        if (args.Cancelled || args.Handled)
+            return;
+
+        if (!Exists(ent))
+            return;
+
+        if (ent.Comp.MouthSlot.ContainedEntity != null)
         {
             var containedEntity = ent.Comp.MouthSlot.ContainedEntity.Value;
             if (Exists(containedEntity))
