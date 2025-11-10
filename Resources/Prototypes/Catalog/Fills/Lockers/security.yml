@@ -28,8 +28,7 @@
     children:
     - id: FlashlightSeclite
     - id: WeaponDisabler
-    # - id: WeaponTaser
-    # SS220 No tasers
+    # - id: WeaponTase #SS220 No tasers
     - id: ClothingBeltSecurityFilled
     - id: Flash
     - id: BodySecurityCamera #SS220-Bodycam
@@ -77,8 +76,7 @@
       # prob: 0.8 #SS220-old-bug-save
     - id: BodySecurityCamera #SS220-Bodycam
     - id: WeaponDisabler
-    # - id: WeaponTaser
-    # SS220 No tasers
+    # - id: WeaponTase #SS220 No tasers
     - id: ClothingUniformJumpsuitSecGrey
       prob: 0.3
     - id: ClothingHeadHelmetBasic
