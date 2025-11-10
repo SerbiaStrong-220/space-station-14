@@ -1080,7 +1080,7 @@
   color: "#283332"
   metabolisms:
     Medicine:
-      metabolismRate: 0.25
+      metabolismRate: 0.1 #SS220 rollback "Rebalance advanced Brute chems, and more" for brute chems
       effects:
       - !type:HealthChange
         damage:
@@ -1107,7 +1107,7 @@
   color: "#b9bf93"
   metabolisms:
     Medicine:
-      metabolismRate: 0.25
+      metabolismRate: 0.1 #SS220 rollback "Rebalance advanced Brute chems, and more" for brute chems
       effects:
       - !type:HealthChange
         damage:
@@ -1133,7 +1133,7 @@
   color: "#ff3636"
   metabolisms:
     Medicine:
-      metabolismRate: 0.25
+      metabolismRate: 0.1 #SS220 rollback "Rebalance advanced Brute chems, and more" for brute chems
       effects:
       - !type:HealthChange
         damage:

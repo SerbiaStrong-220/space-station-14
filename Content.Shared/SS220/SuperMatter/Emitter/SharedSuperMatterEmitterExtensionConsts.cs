@@ -10,7 +10,7 @@ public sealed class SuperMatterEmitterExtensionConsts
     {
         return BaseMatter * MathF.Sqrt(power / BaseMatterPowerDivider);
     }
-    private const float BaseEnergy = 60f;
+    private const float BaseEnergy = 80f;
     private const float BaseEnergyPowerDivider = 300f;
     public static float GetEnergyFromPower(float power)
     {

@@ -176,7 +176,7 @@
 - type: loadoutGroup
   id: CaptainNeck
   name: loadout-group-captain-neck
-  minLimit: 0
+  minLimit: 1 #SS220 Thief HeadCloak StealTarget Update
   loadouts:
   - CaptainCloak
   - CaptainCloakFormal
@@ -227,7 +227,7 @@
 - type: loadoutGroup
   id: HoPNeck
   name: loadout-group-hop-neck
-  minLimit: 0
+  minLimit: 1 #SS220 Thief HeadCloak StealTarget Update
   loadouts:
   - HoPCloak
   - HoPMantle
@@ -797,7 +797,7 @@
 - type: loadoutGroup
   id: QuartermasterNeck
   name: loadout-group-quartermaster-neck
-  minLimit: 0
+  minLimit: 1 #SS220 Thief HeadCloak StealTarget Update
   loadouts:
   - QuartermasterCloak
   - QuartermasterMantle
@@ -914,7 +914,7 @@
 - type: loadoutGroup
   id: ChiefEngineerNeck
   name: loadout-group-chief-engineer-neck
-  minLimit: 0
+  minLimit: 1 #SS220 Thief HeadCloak StealTarget Update
   loadouts:
   - ChiefEngineerCloak
   - ChiefEngineerMantle
@@ -1070,7 +1070,7 @@
 - type: loadoutGroup
   id: ResearchDirectorNeck
   name: loadout-group-research-director-neck
-  minLimit: 0
+  minLimit: 1 #SS220 Thief HeadCloak StealTarget Update
   loadouts:
   - ResearchDirectorMantle
   - ResearchDirectorCloak
@@ -1117,6 +1117,7 @@
   loadouts:
   - RoboticistCap
   - SkullBandana
+  - ScientistBeret #SS220 Add-Scientist-Beret
   # - ScientificBeret  #SS220 Seniors roles
 
 - type: loadoutGroup
@@ -1232,7 +1233,7 @@
 - type: loadoutGroup
   id: HeadofSecurityNeck
   name: loadout-group-head-of-security-neck
-  minLimit: 0
+  minLimit: 1 #SS220 Thief HeadCloak StealTarget Update
   loadouts:
   - HeadofSecurityCloak
   - HeadofSecurityMantle
@@ -1246,7 +1247,7 @@
   - HeadofSecurityCoat
   - HeadofSecurityWinterCoat
   - WinterHoSUnarmored #ss220 sec loadout update
-  - Outer1984 #SS220-Two Floppa Iteration
+  - Outer1984HoS #SS220-Two Floppa Iteration
   - CyberVestSecurity #SS220-Two Floppa Iteration
   - HeadofSecurityBomber #SS220 HoSNEWBomber
 
@@ -1456,7 +1457,7 @@
 - type: loadoutGroup
   id: ChiefMedicalOfficerNeck
   name: loadout-group-chief-medical-officer-neck
-  minLimit: 0
+  minLimit: 1 #SS220 Thief HeadCloak StealTarget Update
   loadouts:
   - ChiefMedicalOfficerCloak
   - ChiefMedicalOfficerMantle

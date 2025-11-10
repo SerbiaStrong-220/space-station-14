@@ -3,7 +3,6 @@
 using Content.Shared.Corvax.CCCVars;
 using Content.Shared.SS220.TTS;
 using Robust.Shared.Audio;
-using Robust.Shared.Utility;
 
 namespace Content.Client.SS220.TTS;
 
@@ -11,7 +10,7 @@ namespace Content.Client.SS220.TTS;
 public sealed partial class TTSSystem : EntitySystem
 {
     internal float VolumeAnnounce = 0f;
-    internal EntityUid AnnouncementUid = EntityUid.Invalid;
+    internal EntityUid AnnouncementUid = EntityUid.FirstUid;
 
     private void InitializeAnnounces()
     {
@@ -36,10 +35,10 @@ public sealed partial class TTSSystem : EntitySystem
         var audioParams = AudioParams.Default.WithVolume(volume);
 
         if ((msg.PlayAudioMask & AudioWithTTSPlayOperation.PlayAudio) == AudioWithTTSPlayOperation.PlayAudio)
-            PlaySoundQueued(AnnouncementUid, msg.AnnouncementSound, true);
+            PlaySoundQueued(AnnouncementUid, msg.AnnouncementSound, new(TtsKind.Announce, ""), true);
 
         if ((msg.PlayAudioMask & AudioWithTTSPlayOperation.PlayTTS) == AudioWithTTSPlayOperation.PlayTTS)
-            PlayTtsBytes(msg.Data, AnnouncementUid, audioParams, true);
+            QueuePlayTts(msg.Data, new(TtsKind.Announce, ""), AnnouncementUid, audioParams, true);
     }
 
     private void OnTtsAnnounceVolumeChanged(float volume)

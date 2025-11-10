@@ -372,6 +372,8 @@
     #   offset: *icon-offset
     #   state: SeniorEngineer
     # SS220-own-sprites-end
+  - type: PresetIdCard #SS220 fix-idcard-notpreset
+    job: SeniorEngineer #SS220 fix-idcard-notpreset
 
 #Medical
 
@@ -510,6 +512,8 @@
     #   offset: *icon-offset
     #   state: SeniorPhysician
     # SS220-own-sprites-end
+  - type: PresetIdCard #SS220 fix-idcard-notpreset
+    job: SeniorPhysician #SS220 fix-idcard-notpreset
 
 #Science
 
@@ -579,6 +583,8 @@
     #   offset: *icon-offset
     #   state: SeniorResearcher
     # SS220-own-sprites-end
+  - type: PresetIdCard #SS220 fix-idcard-notpreset
+    job: SeniorResearcher #SS220 fix-idcard-notpreset
 
 #Security
 
@@ -694,6 +700,8 @@
     #   offset: *icon-offset
     #   state: Brigmedic
       # SS220-own-sprites-end
+  - type: PresetIdCard #SS220 fix-idcard-notpreset
+    job: Brigmedic #SS220 fix-idcard-notpreset
 
 - type: entity
   parent: SecurityIDCard
@@ -715,6 +723,8 @@
     #   offset: *icon-offset
     #   state: SeniorOfficer
     # SS220-own-sprites-end
+  - type: PresetIdCard #SS220 fix-idcard-notpreset
+    job: SeniorOfficer #SS220 fix-idcard-notpreset
 
 #Service
 
