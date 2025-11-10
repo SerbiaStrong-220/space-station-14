@@ -18,7 +18,7 @@ public sealed class HeadsetToggledSystem : SharedHeadsetToggledSystem
     {
         var headSet = GetEntity(args.Owner);
 
-        (FixedPoint2 minFrequency, FixedPoint2 maxFrequency, FixedPoint2 frequency)? frequencySetting = null;
+        RadioFrequencySettings? frequencySetting = null;
         if (TryComp<EncryptionKeyHolderComponent>(headSet, out var keyHolder))
         {
             foreach (var key in keyHolder.KeyContainer.ContainedEntities)
@@ -26,7 +26,7 @@ public sealed class HeadsetToggledSystem : SharedHeadsetToggledSystem
                 if (!TryComp<RadioEncryptionKeyComponent>(key, out var radioEncryption))
                     continue;
 
-                frequencySetting = (radioEncryption.LowerFrequencyBorder, radioEncryption.UpperFrequencyBorder, radioEncryption.RadioFrequency);
+                frequencySetting = new(radioEncryption.LowerFrequencyBorder, radioEncryption.UpperFrequencyBorder, radioEncryption.RadioFrequency);
                 break;
             }
         }

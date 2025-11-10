@@ -39,14 +39,18 @@ public sealed class HeadsetBoundInterfaceState : BoundUserInterfaceState
 {
     public List<(string Key, Color Color, string Name, bool Enabled)> Channels { get; }
 
-    public (FixedPoint2 minValue, FixedPoint2 maxValue, FixedPoint2 value)? RadioFrequencySettings { get; init; }
+    public RadioFrequencySettings? FrequencySettings { get; init; }
 
-    public HeadsetBoundInterfaceState(List<(string Key, Color Color, string Name, bool Enabled)> channels, (FixedPoint2 minValue, FixedPoint2 maxValue, FixedPoint2 value)? radioFrequencySettings = null)
+    public HeadsetBoundInterfaceState(List<(string Key, Color Color, string Name, bool Enabled)> channels, RadioFrequencySettings? frequencySettings = null)
     {
         Channels = channels;
-        RadioFrequencySettings = radioFrequencySettings;
+        FrequencySettings = frequencySettings;
     }
 }
+
+[Serializable, NetSerializable]
+public record struct RadioFrequencySettings(FixedPoint2 MinValue, FixedPoint2 MaxValue, FixedPoint2 Value) { }
+
 
 [Serializable, NetSerializable]
 public sealed partial class HeadsetSetListEvent : EntityEventArgs

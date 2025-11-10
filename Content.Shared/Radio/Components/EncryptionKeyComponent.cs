@@ -25,6 +25,6 @@ public sealed partial class EncryptionKeyComponent : Component
     ///     This is the channel that will be used when we use channel as radio.
     /// </summary>
     [DataField]
-    public ProtoId<RadioChannelPrototype>? DefaultRadioChannel;
+    public ProtoId<RadioChannelPrototype>? DefaultFrequencyChannel;
     // SS220-add-frequency-radio-end
 }

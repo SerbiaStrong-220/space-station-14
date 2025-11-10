@@ -42,9 +42,9 @@ public sealed partial class HeadsetBoundUserInterface : BoundUserInterface
 
         _window.SetChannels(s.Channels);
 
-        _window.RadioSetting.Visible = s.RadioFrequencySettings is not null;
-        if (s.RadioFrequencySettings is not null)
-            _window.SetRadioSettings(s.RadioFrequencySettings.Value);
+        _window.RadioSetting.Visible = s.FrequencySettings is not null;
+        if (s.FrequencySettings is not null)
+            _window.SetRadioSettings(s.FrequencySettings.Value);
     }
 
     protected override void Dispose(bool disposing)

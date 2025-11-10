@@ -57,13 +57,13 @@ public sealed partial class EncryptionKeySystem : EntitySystem
             return;
         }
 
-        if (encryptionKey.DefaultRadioChannel is null)
+        if (encryptionKey.DefaultFrequencyChannel is null)
         {
             Log.Error($"Entity {ToPrettyString(entity)} should have not null value in DefaultRadioChannel to be used as radio encryption headset");
             return;
         }
 
-        if (!_protoManager.Resolve(encryptionKey.DefaultRadioChannel, out var radioChannelPrototype))
+        if (!_protoManager.Resolve(encryptionKey.DefaultFrequencyChannel, out var radioChannelPrototype))
             return;
 
         entity.Comp.LowerFrequencyBorder = radioChannelPrototype.MinFrequency;
@@ -85,7 +85,7 @@ public sealed partial class EncryptionKeySystem : EntitySystem
                 continue;
             }
 
-            if (!_protoManager.TryIndex(encryptionKey.DefaultRadioChannel, out var radioChannelPrototype))
+            if (!_protoManager.TryIndex(encryptionKey.DefaultFrequencyChannel, out var radioChannelPrototype))
             {
                 Log.Error($"EncryptionKey {ToPrettyString(keyEntity)} must have DefaultRadioChannel and that channel must be marked with FrequencyRadio=true in its proto");
                 continue;
