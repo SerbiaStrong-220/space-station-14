@@ -57,7 +57,7 @@ public sealed class MouthContainerSystem : EntitySystem
                 Text = Loc.GetString(ent.Comp.InsertVerbOut),
                 Impact = LogImpact.Medium,
                 DoContactInteraction = true,
-                Act = () => TryInsert(ent, user, toInsert.Value),
+                Act = () => TryStartInsert(ent, user, toInsert.Value),
             };
             args.Verbs.Add(verb);
         }
@@ -72,7 +72,7 @@ public sealed class MouthContainerSystem : EntitySystem
             Text = str,
             Impact = LogImpact.Medium,
             DoContactInteraction = true,
-            Act = () => TryEject(ent, user),
+            Act = () => TryStartEject(ent, user),
         };
         args.Verbs.Add(verb);
     }
@@ -82,33 +82,65 @@ public sealed class MouthContainerSystem : EntitySystem
     /// </summary>
     private void OnEntityGibbedEvent(Entity<MouthContainerComponent> ent, ref BeingGibbedEvent args)
     {
-        TryEject(ent, ent);
+        TryEject(ent);
+    }
+
+    /// <summary>
+    ///     Try to insert.
+    /// </summary>
+    private void TryInsert(Entity<MouthContainerComponent> ent, EntityUid toInsert)
+    {
+        if (ent.Comp.MouthSlot.ContainedEntity != null || !_container.CanInsert(toInsert, ent.Comp.MouthSlot))
+            return;
+
+        _container.Insert(toInsert, ent.Comp.MouthSlot);
+        _popup.PopupPredicted(Loc.GetString(ent.Comp.InsertMessage), ent.Owner, ent.Owner);
+        UpdateAppearance(ent);
+    }
+    /// <summary>
+    ///     Try to eject.
+    /// </summary>
+    private void TryEject(Entity<MouthContainerComponent> ent)
+    {
+        if (ent.Comp.MouthSlot.ContainedEntity == null)
+            return;
+
+        _container.RemoveEntity(ent.Owner, ent.Comp.MouthSlot.ContainedEntity.Value);
+        _popup.PopupPredicted(Loc.GetString(ent.Comp.EjectMessage), ent.Owner, ent.Owner);
+        UpdateAppearance(ent);
     }
 
     /// <summary>
     ///     Try to insert to MouthSlot. Launches the progress bar from inside and outside.
     /// </summary>
-    public void TryInsert(Entity<MouthContainerComponent> ent, EntityUid user, EntityUid toInsert)
+    public void TryStartInsert(Entity<MouthContainerComponent> ent, EntityUid user, EntityUid toInsert)
     {
+        var uid = ent.Owner;
+        var component = ent.Comp;
         if (!CanInsert(ent, toInsert))
             return;
 
         if (!Exists(toInsert))
             return;
 
+        var duration = component.InsertUserDuration;
+
+        if (uid == user)
+            duration = component.InsertDuration;
+
         _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager,
             user,
-            ent.Comp.InsertDuration,
+            duration,
             new MouthContainerDoAfterInsertEvent(GetNetEntity(toInsert)),
-            ent.Owner,
-            ent.Owner,
-            ent.Owner) { BreakOnMove = true, BreakOnDamage = true, MovementThreshold = 1.0f, });
+            uid,
+            uid,
+            uid) { BreakOnMove = true, BreakOnDamage = true, MovementThreshold = 1.0f, });
     }
 
     /// <summary>
     ///     Try to eject from MouthSlot. Launches the progress bar from outside. Eject instantly from inside.
     /// </summary>
-    private void TryEject(Entity<MouthContainerComponent> ent, EntityUid user)
+    private void TryStartEject(Entity<MouthContainerComponent> ent, EntityUid user)
     {
         var uid = ent.Owner;
         var component = ent.Comp;
@@ -123,19 +155,14 @@ public sealed class MouthContainerSystem : EntitySystem
                 return;
         }
 
-        if (uid == user)
-        {
-            if (component.MouthSlot.ContainedEntity != null)
-                _container.RemoveEntity(uid, component.MouthSlot.ContainedEntity.Value);
-            _popup.PopupPredicted(Loc.GetString(component.EjectMessage), uid, uid);
-            UpdateAppearance(uid, component);
+        var duration = component.EjectUserDuration;
 
-            return;
-        }
+        if (uid == user)
+            duration = component.EjectDuration;
 
         _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager,
             user,
-            component.EjectDuration,
+            duration,
             new MouthContainerDoAfterEjectEvent(),
             uid,
             uid,
@@ -154,13 +181,8 @@ public sealed class MouthContainerSystem : EntitySystem
         if (!Exists(ent) || !Exists(toInsert))
             return;
 
-        if (ent.Comp.MouthSlot.ContainedEntity == null && _container.CanInsert(toInsert, ent.Comp.MouthSlot))
-        {
-            _container.Insert(toInsert, ent.Comp.MouthSlot);
-            _popup.PopupPredicted(Loc.GetString(ent.Comp.InsertMessage), ent.Owner, ent.Owner);
-        }
+        TryInsert(ent, toInsert);
 
-        UpdateAppearance(ent.Owner, ent.Comp);
         args.Handled = true;
     }
 
@@ -175,25 +197,18 @@ public sealed class MouthContainerSystem : EntitySystem
         if (!Exists(ent))
             return;
 
-        if (ent.Comp.MouthSlot.ContainedEntity != null)
-        {
-            var containedEntity = ent.Comp.MouthSlot.ContainedEntity.Value;
-            if (Exists(containedEntity))
-            {
-                _container.RemoveEntity(ent.Owner, containedEntity);
-                _popup.PopupPredicted(Loc.GetString(ent.Comp.EjectMessage), ent.Owner, ent.Owner);
-            }
-        }
+        TryEject(ent);
 
-        UpdateAppearance(ent.Owner, ent.Comp);
         args.Handled = true;
     }
 
     /// <summary>
     ///     Toggle MouthContainerVisuals.
     /// </summary>
-    private void UpdateAppearance(EntityUid uid, MouthContainerComponent component)
+    private void UpdateAppearance(Entity<MouthContainerComponent> ent)
     {
+        var component = ent.Comp;
+        var uid = ent.Owner;
         var visible = component.MouthSlot.ContainedEntity != null && (!TryComp<MobStateComponent>(uid, out var mobState) || _mobStateSystem.IsAlive(uid, mobState));
         _appearance.SetData(uid, MouthContainerVisuals.Visible, visible);
     }
@@ -203,7 +218,7 @@ public sealed class MouthContainerSystem : EntitySystem
     /// </summary>
     private void OnMobStateChanged(Entity<MouthContainerComponent> ent, ref MobStateChangedEvent args)
     {
-        UpdateAppearance(ent.Owner, ent.Comp);
+        UpdateAppearance(ent);
     }
 
     /// <summary>

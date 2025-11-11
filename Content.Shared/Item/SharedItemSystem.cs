@@ -162,7 +162,7 @@ public abstract class SharedItemSystem : EntitySystem
                     Disabled = false,
                     Impact = LogImpact.Medium,
                     DoContactInteraction = true,
-                    Act = () => _mouthSystem.TryInsert((user, mouthComp), user, toInsert),
+                    Act = () => _mouthSystem.TryStartInsert((user, mouthComp), user, toInsert),
                 };
                 args.Verbs.Add(v);
             }

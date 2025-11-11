@@ -38,8 +38,12 @@ public sealed partial class MouthContainerComponent : Component
 
     #region Do-After-Durations
     [DataField]
+    public float InsertUserDuration = 3f;
+    [DataField]
+    public float EjectUserDuration = 5f;
+    [DataField]
     public float InsertDuration = 1f;
     [DataField]
-    public float EjectDuration = 5f;
+    public float EjectDuration = 0f;
     #endregion
 }
