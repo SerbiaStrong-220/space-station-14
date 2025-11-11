@@ -202,9 +202,9 @@
       #220 Buff SMG begin
       minAngle: 21
       maxAngle: 32
-      fireRate: 6.5
       #220 Buff SMG end
-      burstFireRate: 19.5
+      fireRate: 6.5
+      burstFireRate: 19.5 #220 Buff SMG
       soundGunshot:
         path: /Audio/Weapons/Guns/Gunshots/atreides.ogg
       selectedMode: Burst
@@ -264,7 +264,7 @@
     boltClosed: null
   - type: Gun
     #220 Buff SMG begin
-    fireRate: 5.5
+    fireRate: 6
     minAngle: 2
     maxAngle: 16
     #220 Buff SMG end
