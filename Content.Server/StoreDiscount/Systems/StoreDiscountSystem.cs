@@ -77,8 +77,6 @@ public sealed class StoreDiscountSystem : EntitySystem
         discountComponent.Discounts = discounts;
 
         // SS220 TraitorDynamics - start
-        SetCostFromCatalog(ev.Listings);
-
         var newEv = new StoreDiscountsInitializedEvent(ev.TargetUser, ev.Store, ev.Listings);
         RaiseLocalEvent(ref newEv);
         // SS220 TraitorDynamics - end
@@ -450,7 +448,7 @@ public sealed class StoreDiscountSystem : EntitySystem
 
         foreach (var (currency, discountAmount) in discountData.DiscountAmountByCurrency)
         {
-            if (!listing.CostFromCatalog.TryGetValue(currency, out var originalPrice))
+            if (!listing.OriginalCost.TryGetValue(currency, out var originalPrice))
                 continue;
 
             if (originalPrice <= 0 || discountAmount >= 0) // discount modifier is negative value
@@ -462,14 +460,6 @@ public sealed class StoreDiscountSystem : EntitySystem
         }
 
         return discounts;
-    }
-
-    private void SetCostFromCatalog(IReadOnlyList<ListingDataWithCostModifiers> listings)
-    {
-        foreach (var listing in listings)
-        {
-            listing.CostFromCatalog = listing.OriginalCost;
-        }
     }
     //SS220 - dynamics - end
 }
