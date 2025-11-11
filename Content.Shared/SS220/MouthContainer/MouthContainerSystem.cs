@@ -224,8 +224,8 @@ public sealed class MouthContainerSystem : EntitySystem
     /// <summary>
     ///     Check is MouthSlot empty.
     /// </summary>
-    private static bool IsEmpty(MouthContainerComponent? component)
+    private static bool IsEmpty(MouthContainerComponent component)
     {
-        return component?.MouthSlot.ContainedEntity == null;
+        return component.MouthSlot.ContainedEntity == null;
     }
 }
