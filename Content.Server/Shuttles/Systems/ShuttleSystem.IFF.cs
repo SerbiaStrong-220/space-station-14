@@ -127,8 +127,8 @@ public sealed partial class ShuttleSystem
     public void UpdateIFF()
     {
         var curtime = _gameTiming.CurTime;
-        var iffs = EntityQueryEnumerator<IFFConsoleComponent, TransformComponent>();
-        while (iffs.MoveNext(out var consoleEnt,out var iffConsole, out var transform)) // iff iff iff iffffffff
+        var consoles = EntityQueryEnumerator<IFFConsoleComponent, TransformComponent>();
+        while (consoles.MoveNext(out var consoleEnt,out var iffConsole, out var transform))
         {
             if (!TryComp<IFFComponent>(transform.GridUid, out var iff))
                 continue;
