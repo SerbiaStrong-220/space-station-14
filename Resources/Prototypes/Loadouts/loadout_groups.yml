@@ -21,6 +21,9 @@
   - CigPackBlack
   - CigarCase
   - CigarGold
+  - BoxFolderBaseThreePapers
+  - BoxFolderPlasticClipboardThreePapers
+  - BoxFolderClipboardThreePapers
   - ClothingNeckLGBTPin
   - ClothingNeckAllyPin
   - ClothingNeckAromanticPin
@@ -173,7 +176,7 @@
 - type: loadoutGroup
   id: CaptainNeck
   name: loadout-group-captain-neck
-  minLimit: 0
+  minLimit: 1 #SS220 Thief HeadCloak StealTarget Update
   loadouts:
   - CaptainCloak
   - CaptainCloakFormal
@@ -224,7 +227,7 @@
 - type: loadoutGroup
   id: HoPNeck
   name: loadout-group-hop-neck
-  minLimit: 0
+  minLimit: 1 #SS220 Thief HeadCloak StealTarget Update
   loadouts:
   - HoPCloak
   - HoPMantle
@@ -338,6 +341,13 @@
   - BartenderVest
   - BartenderApron
   - BartenderWintercoat
+
+- type: loadoutGroup
+  id: BartenderGoldenShaker
+  name: loadout-group-bartender-shaker
+  minLimit: 0
+  loadouts:
+  - BartenderGoldenShaker
 
 - type: loadoutGroup
   id: ChefHead
@@ -470,10 +480,11 @@
   minLimit: 1
   loadouts:
   - Bible
-  - BibleDruid
   - BibleNanoTrasen
-  - BibleSatanic
-  - BibleTanakh
+  - BibleDruid
+  - BibleHonk
+  - BibleRatvar
+  - BibleNarsie
 
 - type: loadoutGroup
   id: JanitorHead
@@ -786,7 +797,7 @@
 - type: loadoutGroup
   id: QuartermasterNeck
   name: loadout-group-quartermaster-neck
-  minLimit: 0
+  minLimit: 1 #SS220 Thief HeadCloak StealTarget Update
   loadouts:
   - QuartermasterCloak
   - QuartermasterMantle
@@ -847,6 +858,13 @@
   - CargoWinterBoots
 
 - type: loadoutGroup
+  id: CargoTechnicianID
+  name: loadout-group-cargo-technician-id
+  loadouts:
+  - CargoTechnicianPDA
+  - SeniorCourierPDA
+
+- type: loadoutGroup
   id: SalvageSpecialistBackpack
   name: loadout-group-salvage-specialist-backpack
   loadouts:
@@ -896,7 +914,7 @@
 - type: loadoutGroup
   id: ChiefEngineerNeck
   name: loadout-group-chief-engineer-neck
-  minLimit: 0
+  minLimit: 1 #SS220 Thief HeadCloak StealTarget Update
   loadouts:
   - ChiefEngineerCloak
   - ChiefEngineerMantle
@@ -1052,7 +1070,7 @@
 - type: loadoutGroup
   id: ResearchDirectorNeck
   name: loadout-group-research-director-neck
-  minLimit: 0
+  minLimit: 1 #SS220 Thief HeadCloak StealTarget Update
   loadouts:
   - ResearchDirectorMantle
   - ResearchDirectorCloak
@@ -1099,6 +1117,7 @@
   loadouts:
   - RoboticistCap
   - SkullBandana
+  - ScientistBeret #SS220 Add-Scientist-Beret
   # - ScientificBeret  #SS220 Seniors roles
 
 - type: loadoutGroup
@@ -1214,7 +1233,7 @@
 - type: loadoutGroup
   id: HeadofSecurityNeck
   name: loadout-group-head-of-security-neck
-  minLimit: 0
+  minLimit: 1 #SS220 Thief HeadCloak StealTarget Update
   loadouts:
   - HeadofSecurityCloak
   - HeadofSecurityMantle
@@ -1228,7 +1247,7 @@
   - HeadofSecurityCoat
   - HeadofSecurityWinterCoat
   - WinterHoSUnarmored #ss220 sec loadout update
-  - Outer1984 #SS220-Two Floppa Iteration
+  - Outer1984HoS #SS220-Two Floppa Iteration
   - CyberVestSecurity #SS220-Two Floppa Iteration
   - HeadofSecurityBomber #SS220 HoSNEWBomber
 
@@ -1438,11 +1457,12 @@
 - type: loadoutGroup
   id: ChiefMedicalOfficerNeck
   name: loadout-group-chief-medical-officer-neck
-  minLimit: 0
+  minLimit: 1 #SS220 Thief HeadCloak StealTarget Update
   loadouts:
   - ChiefMedicalOfficerCloak
   - ChiefMedicalOfficerMantle
   - ParadeCloakCMO #SS220-CMOParade
+  - CMOStethoscope #SS220-SethoscopeForAll
 
 - type: loadoutGroup
   id: ChiefMedicalOfficerShoes

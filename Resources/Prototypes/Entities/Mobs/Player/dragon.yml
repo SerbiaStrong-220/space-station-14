@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ SimpleSpaceMobBase, FlyingMobBase ]
+  parent: [ SimpleSpaceMobBase, FlyingMobBase, MobPassiveCollision ] #SS220 PR: Tweak Carp Damage
   id: BaseMobDragon
   suffix: ""
   name: space dragon
@@ -103,7 +103,6 @@
       types: {}
   - type: StatusEffects # Overwriting basesimplemob to remove flash, getting flashed as dragon just feelsbad
     allowed:
-    - Stutter
     - Electrocution
     - TemporaryBlindness
     - Pacified

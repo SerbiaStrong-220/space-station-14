@@ -132,7 +132,7 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
         // SS220 Holopad adapt begin
         if (TryComp<TTSComponent>(args.MessageSource, out var sourceTts))
         {
-            var ttsComponent = EnsureComp<TTSComponent>(entity);
+            var ttsComponent = EnsureComp<TTSComponent>(speaker);
             ttsComponent.VoicePrototypeId = sourceTts.VoicePrototypeId;
         }
         // SS220 Holopad adapt end
@@ -375,7 +375,7 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
         name = FormattedMessage.EscapeText(name);
 
         SpeechVerbPrototype speech;
-        if (ev.SpeechVerb != null && _prototype.TryIndex(ev.SpeechVerb, out var evntProto))
+        if (ev.SpeechVerb != null && _prototype.Resolve(ev.SpeechVerb, out var evntProto))
             speech = evntProto;
         else
             speech = _chat.GetSpeechVerb(messageSource, message);

@@ -11,3 +11,13 @@ ent-ClothingBackpackBlueShieldHight = { ent-ClothingBackpackBlueShield }
 ent-ClothingBackpackBlueShieldHightFilled = { ent-ClothingBackpackBlueShield }
     .suffix = Тяжелый скафандр, заполненный
     .desc = { ent-ClothingBackpackBlueShield.desc }
+
+ent-ClothingBackpackERTLeaderGammaFilled = { ent-ClothingBackpackERTLeader }
+    .suffix = Гамма ОБР, заполненный
+    .desc = { ent-ClothingBackpackERTLeader.desc }
+ent-ClothingBackpackERTSecurityGammaFilled = { ent-ClothingBackpackERTSecurity }
+    .suffix = Гамма ОБР, заполненный
+    .desc = { ent-ClothingBackpackERTSecurity.desc }
+ent-ClothingBackpackERTMedicalGammaFilled = { ent-ClothingBackpackERTMedical }
+    .suffix = Гамма ОБР, заполненный
+    .desc = { ent-ClothingBackpackERTMedical.desc }

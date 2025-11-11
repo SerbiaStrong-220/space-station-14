@@ -73,6 +73,7 @@
   - type: StorageFill
     contents:
       - id: SheetPlasteel
+        amount: 3 #SS220-plasteelfix
 
 - type: entity
   id: CrateMaterialPlasma

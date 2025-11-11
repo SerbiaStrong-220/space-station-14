@@ -8,6 +8,8 @@ using Content.Shared.Implants;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Revolutionary.Components;
 using Content.Shared.Roles.Components;
+using Content.Shared.SS220.CombustingMindShield;
+using Content.Shared.SS220.CultYogg.Cultists;
 using Robust.Shared.Containers;
 
 namespace Content.Server.Mindshield;
@@ -29,7 +31,7 @@ public sealed class MindShieldSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<MindShieldImplantComponent, ImplantImplantedEvent>(OnImplantImplanted);
-        SubscribeLocalEvent<MindShieldImplantComponent, EntGotRemovedFromContainerMessage>(OnImplantDraw);
+        SubscribeLocalEvent<MindShieldImplantComponent, ImplantRemovedEvent>(OnImplantRemoved);
     }
 
     private void OnImplantImplanted(Entity<MindShieldImplantComponent> ent, ref ImplantImplantedEvent ev)
@@ -37,8 +39,8 @@ public sealed class MindShieldSystem : EntitySystem
         if (ev.Implanted == null)
             return;
 
-        EnsureComp<MindShieldComponent>(ev.Implanted.Value);
-        MindShieldRemovalCheck(ev.Implanted.Value, ev.Implant);
+        EnsureComp<MindShieldComponent>(ev.Implanted);
+        MindShieldRemovalCheck(ev.Implanted, ev.Implant);
     }
 
     /// <summary>
@@ -58,11 +60,18 @@ public sealed class MindShieldSystem : EntitySystem
         {
             _adminLogManager.Add(LogType.Mind, LogImpact.Medium, $"{ToPrettyString(implanted)} was deconverted due to being implanted with a Mindshield.");
         }
+        //SS220 Cult hotfix 14 #3477 start
+        if (HasComp<CultYoggComponent>(implanted))
+        {
+            var comp = EnsureComp<CombustingMindShieldComponent>(implanted);
+            comp.Implant = implant;
+        }
+        //SS220 Cult hotfix 14 #3477 end 
     }
 
-    private void OnImplantDraw(Entity<MindShieldImplantComponent> ent, ref EntGotRemovedFromContainerMessage args)
+    private void OnImplantRemoved(Entity<MindShieldImplantComponent> ent, ref ImplantRemovedEvent args)
     {
-        RemComp<MindShieldComponent>(args.Container.Owner);
+        RemComp<MindShieldComponent>(args.Implanted);
     }
 }
 

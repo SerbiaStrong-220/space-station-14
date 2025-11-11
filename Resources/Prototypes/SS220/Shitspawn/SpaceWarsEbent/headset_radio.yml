@@ -1,0 +1,37 @@
+- type: entity
+  parent: ClothingHeadsetIAA
+  id: ClothingHeadsetNanotrasenForces
+  suffix: Shitspawn, Ebent, Space Wars
+  name: гарнитура сил НаноТрейзен
+  description: Гарнитура оперативников НаноТрейзен. Имеет встроенный радиоканал с возможностью изменять частоту
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionNanotrasenOperative
+  - type: ActivatableUI
+    key: enum.HeadsetKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.HeadsetKey.Key:
+        type: HeadsetBoundUserInterface
+
+- type: entity
+  parent: ClothingHeadsetAltSyndicate
+  id: ClothingHeadsetSyndicateForces
+  suffix: Shitspawn, Ebent, Space Wars
+  name: гарнитура сил Синдиката
+  description: Гарнитура оперативников НаноТрейзен. Имеет встроенный радиоканал с возможностью изменять частоту
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionSyndicateOperative
+  - type: ActivatableUI
+    key: enum.HeadsetKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.HeadsetKey.Key:
+        type: HeadsetBoundUserInterface
+
+

@@ -15,7 +15,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client.SS220.Hallucination;
 
-public sealed class HallucinationSystem : EntitySystem
+public sealed class HallucinationSystem : SharedHallucinationSystem
 {
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly TransformSystem _transformSystem = default!;
@@ -102,5 +102,15 @@ public sealed class HallucinationSystem : EntitySystem
         var lifeTime = _random.NextFloat(hallucination.TimeParams.HallucinationMinTime, hallucination.TimeParams.HallucinationMaxTime);
         var timedDespawnComp = EnsureComp<TimedDespawnComponent>(spawnedEntityUid);
         timedDespawnComp.Lifetime = lifeTime;
+    }
+
+    public override bool TryAdd(EntityUid target, HallucinationSetting hallucination)
+    {
+        return false;
+    }
+
+    public override bool Remove(Entity<SharedHallucinationComponent> entity, HallucinationSetting hallucination)
+    {
+        return false;
     }
 }

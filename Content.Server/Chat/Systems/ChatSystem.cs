@@ -44,6 +44,8 @@ using Robust.Shared.Timing;
 using Content.Server.SS220.Language; // SS220-Add-Languages-end
 using Robust.Shared.Map;
 using Content.Shared.SS220.Language.Systems;
+using Content.Shared.SS220.TTS;
+using Content.Shared.FixedPoint;
 
 namespace Content.Server.Chat.Systems;
 
@@ -86,7 +88,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     public override void Initialize()
     {
         base.Initialize();
-        CacheEmotes();
+
         Subs.CVar(_configurationManager, CCVars.LoocEnabled, OnLoocEnabledChanged, true);
         Subs.CVar(_configurationManager, CCVars.DeadLoocEnabled, OnDeadLoocEnabledChanged, true);
         Subs.CVar(_configurationManager, CCVars.CritLoocEnabled, OnCritLoocEnabledChanged, true);
@@ -244,7 +246,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             || (CultureInfo.CurrentCulture.IsNeutralCulture && CultureInfo.CurrentCulture.Name == "en");
 
         message = _chatManager.DeleteProhibitedCharacters(message, source); // SS220 delete prohibited characters
-        message = SanitizeInGameICMessage(source, message, out var emoteStr, shouldCapitalize, shouldPunctuate, shouldCapitalizeTheWordI);
+        message = SanitizeInGameICMessage(source, message, /* SS220 languages */ desiredType, out var emoteStr, shouldCapitalize, shouldPunctuate, shouldCapitalizeTheWordI);
 
         // Was there an emote in the message? If so, send it.
         if (player != null && emoteStr != message && emoteStr != null)
@@ -277,9 +279,9 @@ public sealed partial class ChatSystem : SharedChatSystem
         // This message may have a radio prefix, and should then be whispered to the resolved radio channel
         if (checkRadioPrefix)
         {
-            if (TryProccessRadioMessage(source, message, out var modMessage, out var channel))
+            if (TryProccessRadioMessage(source, message, out var modMessage, out var channel, out var frequency /*SS220-add-frequency-radio */))
             {
-                SendEntityWhisper(source, modMessage, range, channel, nameOverride, hideLog, ignoreActionBlocker);
+                SendEntityWhisper(source, modMessage, range, channel, nameOverride, hideLog, ignoreActionBlocker, frequency: frequency /*SS220-add-frequency-radio */);
                 return;
             }
         }
@@ -371,8 +373,10 @@ public sealed partial class ChatSystem : SharedChatSystem
         string? sender = null,
         bool playSound = true,
         SoundSpecifier? announcementSound = null,
-        Color? colorOverride = null
-        )
+        Color? colorOverride = null,
+        bool playTTS = true, // SS220-fix-double-event-announce
+        bool playPrerecordedSound = true, // SS220-fix-double-event-announce
+        ProtoId<TTSVoicePrototype>? voiceId = null) // SS2220-tts
     {
         sender ??= Loc.GetString("chat-manager-sender-announcement");
 
@@ -380,10 +384,23 @@ public sealed partial class ChatSystem : SharedChatSystem
         _chatManager.ChatMessageToAll(ChatChannel.Radio, message, wrappedMessage, default, false, true, colorOverride);
         if (playSound)
         {
-            _audio.PlayGlobal(announcementSound == null ? DefaultAnnouncementSound
-                : sender == Loc.GetString("admin-announce-announcer-default") ? CentComAnnouncementSound // Corvax-Announcements: Support custom alert sound from admin panel
-                : _audio.ResolveSound(announcementSound),
-                Filter.Broadcast(), true, AudioParams.Default.WithVolume(-2f));
+            // TODO upstream prettier...
+            var centcommAnnounce = sender == Loc.GetString("admin-announce-announcer-default");
+            var defaultAnnounceSound = centcommAnnounce ? CentComAnnouncementSound : DefaultAnnouncementSound;
+            // TODO upstream-we-need-better-way...
+            // SS220-announce-TTS-begin
+            var mask = AudioWithTTSPlayOperation.NotPlay;
+
+            if (playTTS)
+                mask |= AudioWithTTSPlayOperation.PlayTTS;
+
+            if (playPrerecordedSound)
+                mask |= AudioWithTTSPlayOperation.PlayAudio;
+
+            RaiseLocalEvent(new AnnouncementSpokeEvent(Filter.Broadcast(), announcementSound ?? defaultAnnounceSound, mask, FormattedMessage.RemoveMarkupPermissive(wrappedMessage.Replace(':', '.')), voiceId)); // ss220-tts-announcement
+            // _audio.PlayGlobal(announcementSound ?? defaultAnnounceSound, Filter.Broadcast(), true, AudioParams.Default.WithVolume(-2f)); // wizden & SS220 Default -> default
+            // SS220-announce-TTS-end
+
         }
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Global station announcement from {sender}: {message}");
     }
@@ -405,16 +422,30 @@ public sealed partial class ChatSystem : SharedChatSystem
         string? sender = null,
         bool playSound = true,
         SoundSpecifier? announcementSound = null,
-        Color? colorOverride = null)
+        Color? colorOverride = null,
+        bool playTTS = true, // SS220-fix-double-event-announce
+        bool playPrerecordedSound = true, // SS220-fix-double-event-announce
+        ProtoId<TTSVoicePrototype>? voiceId = null) // SS2220-tts
     {
         sender ??= Loc.GetString("chat-manager-sender-announcement");
 
         var wrappedMessage = Loc.GetString("chat-manager-sender-announcement-wrap-message", ("sender", sender), ("message", FormattedMessage.EscapeText(message)));
         _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, wrappedMessage, source ?? default, false, true, colorOverride);
-        RaiseLocalEvent(new AnnouncementSpokeEvent(filter, DefaultAnnouncementSound, AudioParams.Default, message, null)); // ss220-tts-announcement
+
         if (playSound)
         {
-            _audio.PlayGlobal(announcementSound?.ToString() ?? DefaultAnnouncementSound, filter, true, AudioParams.Default.WithVolume(-2f));
+            // SS220-announce-TTS-begin
+            var mask = AudioWithTTSPlayOperation.NotPlay;
+
+            if (playTTS)
+                mask |= AudioWithTTSPlayOperation.PlayTTS;
+
+            if (playPrerecordedSound)
+                mask |= AudioWithTTSPlayOperation.PlayAudio;
+
+            RaiseLocalEvent(new AnnouncementSpokeEvent(filter, announcementSound ?? DefaultAnnouncementSound, mask, FormattedMessage.RemoveMarkupPermissive(wrappedMessage), voiceId)); // ss220-tts-announcement
+            // _audio.PlayGlobal(announcementSound ?? DefaultAnnouncementSound, filter, true, AudioParams.Default.WithVolume(-2f)); // wizden
+            // SS220-announce-TTS-end
         }
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Station Announcement from {sender}: {message}");
     }
@@ -433,9 +464,11 @@ public sealed partial class ChatSystem : SharedChatSystem
         string message,
         string? sender = null,
         bool playDefaultSound = true,
-        SoundSpecifier? announcementSound = null,//SS220 CluwneComms
+        SoundSpecifier? announcementSound = null,
         Color? colorOverride = null,
-        string? voiceId = null)
+        bool playTTS = true, // SS220-fix-double-event-announce
+        bool playPrerecordedSound = true, // SS220-fix-double-event-announce
+        ProtoId<TTSVoicePrototype>? voiceId = null) // SS2220-tts
     {
         sender ??= Loc.GetString("chat-manager-sender-announcement");
 
@@ -454,16 +487,21 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, wrappedMessage, source, false, true, colorOverride);
 
-        //SS220 CluwneComms start
-        //made here cause  "announcementSound?.ToString()" returning shit
-        string? key = null;
-
-        if (announcementSound is SoundPathSpecifier path)
-            key = path.Path.ToString();
-        //SS220 CluwneComms end
-
         if (playDefaultSound)
-            RaiseLocalEvent(new AnnouncementSpokeEvent(filter, key?.ToString() ?? DefaultAnnouncementSound, AudioParams.Default, message, voiceId));//SS220 CluwneComms
+        {
+            // SS220-announce-TTS-begin
+            var mask = AudioWithTTSPlayOperation.NotPlay;
+
+            if (playTTS)
+                mask |= AudioWithTTSPlayOperation.PlayTTS;
+
+            if (playPrerecordedSound)
+                mask |= AudioWithTTSPlayOperation.PlayAudio;
+
+            RaiseLocalEvent(new AnnouncementSpokeEvent(filter, announcementSound ?? DefaultAnnouncementSound, mask, message, voiceId));
+            // _audio.PlayGlobal(announcementSound ?? DefaultAnnouncementSound, filter, true, AudioParams.Default.WithVolume(-2f)); // wizden
+            // SS220-announce-TTS-end
+        }
 
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Station Announcement on {station} from {sender}: {message}");
     }
@@ -503,7 +541,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             RaiseLocalEvent(source, nameEv);
             name = nameEv.VoiceName;
             // Check for a speech verb override
-            if (nameEv.SpeechVerb != null && _prototypeManager.TryIndex(nameEv.SpeechVerb, out var proto))
+            if (nameEv.SpeechVerb != null && _prototypeManager.Resolve(nameEv.SpeechVerb, out var proto))
                 speech = proto;
         }
 
@@ -568,7 +606,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         RadioChannelPrototype? channel,
         string? nameOverride,
         bool hideLog = false,
-        bool ignoreActionBlocker = false
+        bool ignoreActionBlocker = false,
+        FixedPoint2? frequency = null // SS220-add-radio-frequency
         )
     {
         if (!_actionBlocker.CanSpeak(source) && !ignoreActionBlocker)
@@ -647,7 +686,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         _replay.RecordServerMessage(new ChatMessage(ChatChannel.Whisper, message, wrappedMessage, GetNetEntity(source), null, MessageRangeHideChatForReplay(range)));
 
         // SS220 languages begin
-        var ev = new EntitySpokeEvent(source, message, originalMessage, channel, obfuscatedMessage, languageMessage);
+        var ev = new EntitySpokeEvent(source, message, originalMessage, channel, obfuscatedMessage, languageMessage, frequency);
         RaiseLocalEvent(source, ev, true);
 
         var defaultLanguageId = _languageSystem.GetSelectedLanguage(source)?.ID ?? "none";
@@ -671,7 +710,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             }
     }
 
-    private void SendEntityEmote(
+    protected override void SendEntityEmote(
         EntityUid source,
         string action,
         ChatTransmitRange range,
@@ -857,43 +896,40 @@ public sealed partial class ChatSystem : SharedChatSystem
     }
 
     // ReSharper disable once InconsistentNaming
-    private string SanitizeInGameICMessage(EntityUid source, string message, out string? emoteStr, bool capitalize = true, bool punctuate = false, bool capitalizeTheWordI = true)
+    private string SanitizeInGameICMessage(
+        EntityUid source,
+        string message,
+        InGameICChatType iCChatType, // SS220 Languages
+        out string? emoteStr,
+        bool capitalize = true,
+        bool punctuate = false,
+        bool capitalizeTheWordI = true)
     {
         var newMessage = message.Trim();
         // SS220 languages begin
-        var languageMessage = _languageSystem.SanitizeMessage(source, newMessage);
 
         var prefix = string.Empty;
-        var findEnglish = false;
+        var foundEnglish = false;
         string? newEmoteStr = null;
-        var i = 0;
-        languageMessage.ChangeInNodeMessage(msg =>
+        if (iCChatType is InGameICChatType.Speak or InGameICChatType.Whisper)
         {
-            i++;
-            if (i == 1) // only for 1st node
-                GetRadioKeycodePrefix(source, msg, out msg, out prefix);
-
-            var newLangMessage = ReplaceWords(msg);
-            newLangMessage = SanitizeMessageReplaceWords(newLangMessage);
-            _sanitizer.TrySanitizeEmoteShorthands(newLangMessage, source, out newLangMessage, out newEmoteStr, false);
-            if (!_sanitizer.CheckNoEnglish(source, newLangMessage))
-                findEnglish = true;
-
-            if (i == 1) // only for 1st node
+            var languageMessage = _languageSystem.SanitizeMessage(source, newMessage);
+            var i = 0;
+            languageMessage.ChangeInNodeMessage(msg =>
             {
-                if (capitalize)
-                    newLangMessage = SanitizeMessageCapital(newLangMessage);
-            }
+                i++;
+                var isFirst = i == 1;
+                return SanitizeMessage(msg, isFirst, isFirst && capitalize, punctuate, capitalizeTheWordI);
+            });
 
-            if (capitalizeTheWordI)
-                newLangMessage = SanitizeMessageCapitalizeTheWordI(newLangMessage, "i");
-            if (punctuate)
-                newLangMessage = SanitizeMessagePeriod(newLangMessage);
+            newMessage = languageMessage.GetMessageWithLanguageKeys();
+        }
+        else
+        {
+            newMessage = SanitizeMessage(message, true, capitalize, punctuate, capitalizeTheWordI);
+        }
 
-            return newLangMessage;
-        });
-
-        if (findEnglish)
+        if (foundEnglish)
         {
             emoteStr = "кашляет";
             return string.Empty;
@@ -914,10 +950,31 @@ public sealed partial class ChatSystem : SharedChatSystem
         //if (punctuate)
         //    newMessage = SanitizeMessagePeriod(newMessage);
 
-        newMessage = languageMessage.GetMessageWithLanguageKeys(false);
-        // SS220 languages end
-
         return prefix + newMessage;
+
+        string SanitizeMessage(string message, bool getRadioKeycodePrefix, bool capitalize = true, bool punctuate = false, bool capitalizeTheWordI = true)
+        {
+            var newMessage = ReplaceWords(message);
+            newMessage = SanitizeMessageReplaceWords(newMessage);
+
+            if (getRadioKeycodePrefix)
+                GetRadioKeycodePrefix(source, newMessage, out newMessage, out prefix);
+
+            _sanitizer.TrySanitizeEmoteShorthands(newMessage, source, out newMessage, out newEmoteStr);
+            if (!_sanitizer.CheckNoEnglish(source, newMessage))
+                foundEnglish = true;
+
+            if (capitalize)
+                newMessage = SanitizeMessageCapital(newMessage);
+            if (capitalizeTheWordI)
+                newMessage = SanitizeMessageCapitalizeTheWordI(newMessage, "i");
+            if (punctuate)
+                newMessage = SanitizeMessagePeriod(newMessage);
+
+            return newMessage;
+        }
+
+        // SS220 languages end
     }
 
     private string SanitizeInGameOOCMessage(string message)
@@ -1187,13 +1244,15 @@ public sealed class EntitySpokeEvent : EntityEventArgs
     public readonly string? ObfuscatedMessage; // not null if this was a whisper
     public readonly bool IsRadio; // radio message is always a whisper
 
+    public FixedPoint2? Frequency;// SS220-frequency-radio
+
     /// <summary>
     ///     If the entity was trying to speak into a radio, this was the channel they were trying to access. If a radio
     ///     message gets sent on this channel, this should be set to null to prevent duplicate messages.
     /// </summary>
     public RadioChannelPrototype? Channel;
 
-    public EntitySpokeEvent(EntityUid source, string message, string originalMessage, RadioChannelPrototype? channel, string? obfuscatedMessage, LanguageMessage? languageMessage = null /* SS220 languages */)
+    public EntitySpokeEvent(EntityUid source, string message, string originalMessage, RadioChannelPrototype? channel, string? obfuscatedMessage, LanguageMessage? languageMessage = null /* SS220 languages */, FixedPoint2? frequency = null /* SS220-frequency-radio */)
     {
         Source = source;
         Message = message;
@@ -1202,6 +1261,7 @@ public sealed class EntitySpokeEvent : EntityEventArgs
         Channel = channel;
         ObfuscatedMessage = obfuscatedMessage;
         IsRadio = channel != null;
+        Frequency = frequency;
     }
 }
 
@@ -1227,58 +1287,46 @@ public enum InGameOOCChatType : byte
     Dead
 }
 
-/// <summary>
-///     Controls transmission of chat.
-/// </summary>
-public enum ChatTransmitRange : byte
-{
-    /// Acts normal, ghosts can hear across the map, etc.
-    Normal,
-    /// Normal but ghosts are still range-limited.
-    GhostRangeLimit,
-    /// Hidden from the chat window.
-    HideChat,
-    /// Ghosts can't hear or see it at all. Regular players can if in-range.
-    NoGhosts
-}
 
+// Upstream-TODO-make it good
+//SS220-add-annoucement-tts
 public sealed class AnnouncementSpokeEvent : EntityEventArgs
 {
     public readonly Filter Source;
-    public readonly string AnnouncementSound;
-    public readonly AudioParams AnnouncementSoundParams;
+    public readonly SoundSpecifier AnnouncementSound;
     public readonly string Message;
-    public readonly string? SpokeVoiceId;
+    public readonly ProtoId<TTSVoicePrototype>? SpokeVoiceId;
+    public readonly AudioWithTTSPlayOperation PlayAudioMask = AudioWithTTSPlayOperation.PlayAll;
 
-    public AnnouncementSpokeEvent(Filter source, string announcementSound, AudioParams announcementSoundParams, string message, string? spokeVoiceId)
+    public AnnouncementSpokeEvent(Filter source, SoundSpecifier announcementSound, AudioWithTTSPlayOperation playAudioMask, string message, ProtoId<TTSVoicePrototype>? spokeVoiceId)
     {
         Source = source;
         Message = message;
         AnnouncementSound = announcementSound;
-        AnnouncementSoundParams = announcementSoundParams;
         SpokeVoiceId = spokeVoiceId;
+        PlayAudioMask = playAudioMask;
     }
 }
 
-//ss220 add filter tts for ghost start
-public sealed class RadioSpokeEvent : EntityEventArgs
+[ByRefEvent]
+public record struct RadioSpokeEvent
 {
     public readonly EntityUid Source;
     public readonly string Message;
     public readonly RadioChannelPrototype Channel;
     public readonly RadioEventReceiver[] Receivers; // SS220 Silicon TTS fix
+    public readonly FixedPoint2? Frequency;
 
-    public RadioSpokeEvent(EntityUid source, string message, RadioChannelPrototype channel, RadioEventReceiver[] receivers)
+    public RadioSpokeEvent(EntityUid source, string message, RadioChannelPrototype channel, RadioEventReceiver[] receivers, FixedPoint2? frequency = null /* SS220-frequency-radio */)
     {
         Source = source;
         Message = message;
         Channel = channel;
         Receivers = receivers;
+        Frequency = frequency;
     }
 }
-//ss220 add filter tts for ghost end
 
-// SS220 Silicon TTS fix begin
 public readonly struct RadioEventReceiver
 {
     public EntityUid Actor { get; }
@@ -1292,4 +1340,4 @@ public readonly struct RadioEventReceiver
         PlayTarget = playTarget;
     }
 }
-// SS220 Silicon TTS fix end
+// SS220-TTS-end
