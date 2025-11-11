@@ -74,11 +74,15 @@
     zeroVisible: true
   - type: Wieldable
   - type: GunWieldBonus
-    minAngle: -2
-    maxAngle: -13
+    #220 Buff SMG begin
+    minAngle: -19
+    maxAngle: -16
+    #220 Buff SMG end
   - type: Gun
-    minAngle: 17
-    maxAngle: 29
+    #220 Buff SMG begin
+    minAngle: 21
+    maxAngle: 32
+    #220 Buff SMG end
     angleIncrease: 3
     angleDecay: 16
     soundGunshot:
