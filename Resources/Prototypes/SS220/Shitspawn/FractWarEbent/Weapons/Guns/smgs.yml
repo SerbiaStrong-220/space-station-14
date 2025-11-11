@@ -19,12 +19,16 @@
     sprite: SS220/Shitspawn/FractWarEbent/Objects/Weapons/Guns/SMGs/ussp_ppsh.rsi
   - type: Wieldable
   - type: GunWieldBonus
-    minAngle: -2
-    maxAngle: -13
+    #220 Buff SMG begin
+    minAngle: -19
+    maxAngle: -16
+    #220 Buff SMG end
   - type: Gun
-    minAngle: 17
-    maxAngle: 29
-    shotsPerBurst: 6
+    #220 Buff SMG begin
+    minAngle: 21
+    maxAngle: 32
+    shotsPerBurst: 5
+    #220 Buff SMG end
     availableModes:
     - SemiAuto
     - Burst
