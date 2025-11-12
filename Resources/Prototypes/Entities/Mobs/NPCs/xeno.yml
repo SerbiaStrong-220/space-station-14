@@ -26,12 +26,21 @@
         true
       NavSmash: !type:Bool
         true
+    #SS220 xeno-buff-update begin
+  - type: Insulated
+  - type: ThermalVision
+    state: Half
+  - type: NoSlip
   - type: Prying
     pryPowered: true
     force: true
-    speedModifier: 1.5
+    #speedModifier: 1.5 "Удален"
     useSound:
       path: /Audio/Items/crowbar.ogg
+  - type: Telepathy
+    canSend: true
+    telepathyChannelPrototype: TelepathyChannelXeno
+    #SS220 xeno-buff-update end
   - type: Reactive
     groups:
       Flammable: [Touch]
@@ -61,7 +70,9 @@
   - type: MobState
     allowedStates:
     - Alive
-    - Critical #SS220 xeno-buff-update
+    #SS220 xeno-buff-update begin
+    - Critical #SS220
+    #SS220 xeno-buff-update end
     - Dead
   - type: MobThresholds
     thresholds:
@@ -182,6 +193,21 @@
         - MobMask
         layer:
         - MobLayer
+    #SS220 xeno-buff-update begin
+  - type: Insulated
+  - type: ThermalVision
+    state: Half
+  - type: NoSlip
+  - type: Prying
+    pryPowered: true
+    force: true
+    useSound:
+      path: /Audio/Items/crowbar.ogg
+  - type: Telepathy
+    canSend: true
+    telepathyChannelPrototype: TelepathyChannelXeno
+    #SS220 xeno-buff-update end
+
 
 - type: entity
   name: drone
@@ -234,6 +260,20 @@
         - MobMask
         layer:
         - MobLayer
+    #SS220 xeno-buff-update begin
+  - type: Insulated
+  - type: ThermalVision
+    state: Half
+  - type: NoSlip
+  - type: Prying
+    pryPowered: true
+    force: true
+    useSound:
+      path: /Audio/Items/crowbar.ogg
+  - type: Telepathy
+    canSend: true
+    telepathyChannelPrototype: TelepathyChannelXeno
+    #SS220 xeno-buff-update end
 
 - type: entity
   name: queen
@@ -288,6 +328,20 @@
   - type: Tag
     tags:
     - CannotSuicide
+    #SS220 xeno-buff-update begin
+  - type: Insulated
+  - type: ThermalVision
+    state: Half
+  - type: NoSlip
+  - type: Prying
+    pryPowered: true
+    force: true
+    useSound:
+      path: /Audio/Items/crowbar.ogg
+  - type: Telepathy
+    canSend: true
+    telepathyChannelPrototype: TelepathyChannelXeno
+    #SS220 xeno-buff-update end
 
 - type: entity
   name: ravager
@@ -336,6 +390,20 @@
         - MobMask
         layer:
         - MobLayer
+    #SS220 xeno-buff-update begin
+  - type: Insulated
+  - type: ThermalVision
+    state: Half
+  - type: NoSlip
+  - type: Prying
+    pryPowered: true
+    force: true
+    useSound:
+      path: /Audio/Items/crowbar.ogg
+  - type: Telepathy
+    canSend: true
+    telepathyChannelPrototype: TelepathyChannelXeno
+    #SS220 xeno-buff-update end
 
 - type: entity
   name: runner
@@ -381,6 +449,20 @@
         - MobMask
         layer:
         - MobLayer
+    #SS220 xeno-buff-update begin
+  - type: Insulated
+  - type: ThermalVision
+    state: Half
+  - type: NoSlip
+  - type: Prying
+    pryPowered: true
+    force: true
+    useSound:
+      path: /Audio/Items/crowbar.ogg
+  - type: Telepathy
+    canSend: true
+    telepathyChannelPrototype: TelepathyChannelXeno
+    #SS220 xeno-buff-update end
 
 - type: entity
   name: spitter
@@ -436,6 +518,20 @@
         - MobMask
         layer:
         - MobLayer
+    #SS220 xeno-buff-update begin
+  - type: Insulated
+  - type: ThermalVision
+    state: Half
+  - type: NoSlip
+  - type: Prying
+    pryPowered: true
+    force: true
+    useSound:
+      path: /Audio/Items/crowbar.ogg
+  - type: Telepathy
+    canSend: true
+    telepathyChannelPrototype: TelepathyChannelXeno
+    #SS220 xeno-buff-update end
 
     #SS220 xeno-buff-update begin
 - type: entity
@@ -452,6 +548,18 @@
     spawned:
     - id: FoodMeatRouny
       amount: 3
+  - type: Insulated
+  - type: ThermalVision
+    state: Half
+  - type: NoSlip
+  - type: Prying
+    pryPowered: true
+    force: true
+    useSound:
+      path: /Audio/Items/crowbar.ogg
+  - type: Telepathy
+    canSend: true
+    telepathyChannelPrototype: TelepathyChannelXeno
     #SS220 xeno-buff-update end
 
 - type: entity
