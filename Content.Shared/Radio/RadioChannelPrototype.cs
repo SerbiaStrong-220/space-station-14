@@ -1,3 +1,4 @@
+using Content.Shared.FixedPoint;
 using Content.Shared.SS220.TTS;
 using Robust.Shared.Prototypes;
 
@@ -23,6 +24,25 @@ public sealed partial class RadioChannelPrototype : IHearableChannelPrototype //
 
     [DataField("frequency")]
     public int Frequency { get; private set; } = 0;
+
+    // SS220-radio-headset-begin
+    [DataField]
+    public FixedPoint2 MinFrequency { get; private set; } = 0;
+
+    [DataField]
+    public FixedPoint2 MaxFrequency { get; private set; } = 0;
+
+    /// <summary>
+    /// Defines when to use frequency logic for this channel
+    /// </summary>
+    [DataField]
+    [ViewVariables(VVAccess.ReadOnly)]
+    public bool FrequencyRadio = false;
+
+    [DataField]
+    [ViewVariables(VVAccess.ReadOnly)]
+    public LocId FrequencyChanelName = "base-frequency-channel-name";
+    // SS220-radio-headset-end
 
     [DataField("color")]
     public Color Color { get; private set; } = Color.Lime;

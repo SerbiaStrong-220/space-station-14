@@ -1,28 +1,4 @@
 ﻿Entries:
-- author: Bomjojuk
-  changes:
-  - message: "\u0412 \u043F\u0443\u043B\u043B \u0441\u043E\u0431\u044B\u0442\u0438\
-      \u0439 \u043F\u043E\u0442\u0435\u0440\u044F\u043D\u043D\u044B\u0445 \u0434\u043E\
-      \u0431\u0430\u0432\u043B\u0435\u043D \u043D\u043E\u0432\u044B\u0439 \u0448\u0430\
-      \u0442\u0442\u043B"
-    type: Add
-  - message: "\u0412 \u043F\u0443\u043B\u043B \u0440\u0430\u043D\u0434\u043E\u043C\
-      \u043D\u044B\u0445 \u0441\u043E\u0431\u044B\u0442\u0438\u0439 \u0432\u043E\u0437\
-      \u0432\u0440\u0430\u0449\u0435\u043D\u044B \u043F\u043E\u0442\u0435\u0440\u044F\
-      \u043D\u043D\u044B\u0435 \u0448\u0430\u0442\u0442\u043B\u044B"
-    type: Tweak
-  id: 729
-  time: '2024-12-28T22:21:01.0000000+00:00'
-  url: https://github.com/SerbiaStrong-220/space-station-14/pull/2220
-- author: Burenov, Surxnavi, UrPrice, Stalen, Ady4
-  changes:
-  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D \u043A\u0443\u043B\u044C\
-      \u0442 \u0432 \u043F\u0440\u0430\u0432\u0438\u043B\u0430 \u0441\u0435\u0440\u0432\
-      \u0435\u0440\u0430!"
-    type: Add
-  id: 730
-  time: '2024-12-28T23:10:03.0000000+00:00'
-  url: https://github.com/SerbiaStrong-220/space-station-14/pull/2420
 - author: UrPrice
   changes:
   - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u043D\u0435\
@@ -7473,3 +7449,23 @@
   id: 1228
   time: '2025-11-09T20:05:25.0000000+00:00'
   url: https://github.com/SerbiaStrong-220/space-station-14/pull/3550
+- author: VitenkaGamer74
+  changes:
+  - message: "\u0422\u0430\u0437\u0435\u0440 \u0443\u0431\u0440\u0430\u043D \u0438\
+      \u0437 \u0448\u043A\u0430\u0444\u043E\u0432 \u0421\u0411, \u0441\u043C\u043E\
+      \u0442\u0440\u0438\u0442\u0435\u043B\u044F, \u0413\u0421\u0411 \u0438 \u0431\
+      \u0440\u0438\u0433\u043C\u0435\u0434\u0438\u043A\u0430"
+    type: Remove
+  id: 1229
+  time: '2025-11-10T12:57:32.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/3566
+- author: Abiergo, Blaze
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B \u043D\u043E\u0432\
+      \u044B\u0435 \u0441\u043B\u043E\u0432\u0430 \u0434\u043B\u044F \u0437\u0430\u043C\
+      \u0435\u043D\u044B \u0432 \u043D\u0435\u043C\u0435\u0446\u043A\u043E\u043C \u0430\
+      \u043A\u0446\u0435\u043D\u0442\u0435"
+    type: Add
+  id: 1230
+  time: '2025-11-11T05:12:42.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/3490
