@@ -628,9 +628,7 @@
     allowMovement: true
     name: spider-royQueen-name
     description: spider-royQueen-desc
-    requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 216000 # 60h
+    job: SpiderQueen
     raffle:
       settings: default
   - type: GhostTakeoverAvailable #Ghost role
@@ -646,9 +644,7 @@
     allowMovement: true
     name: spider-royDrone-name
     description: spider-royDrone-desc
-    requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 18000 # 5h
+    job: SpiderQueenServant
     raffle:
       settings: short
   - type: GhostTakeoverAvailable #Ghost role
@@ -664,9 +660,7 @@
     allowMovement: true
     name: spider-royHunter-name
     description: spider-royHunter-desc
-    requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 18000 # 5h
+    job: SpiderQueenServant
     raffle:
       settings: short
   - type: GhostTakeoverAvailable #Ghost role
@@ -682,9 +676,7 @@
     allowMovement: true
     name: spider-royGhost-name
     description: spider-royGhost-desc
-    requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 18000 # 5h
+    job: SpiderQueenServant
     raffle:
       settings: short
   - type: GhostTakeoverAvailable #Ghost role
@@ -700,9 +692,7 @@
     allowMovement: true
     name: spider-royShooter-name
     description: spider-royShooter-desc
-    requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 3600 # 5h
+    job: SpiderQueenServant
     raffle:
       settings: short
   - type: GhostTakeoverAvailable #Ghost role
@@ -718,9 +708,7 @@
     allowMovement: true
     name: spider-royLittle-name
     description: spider-royLittle-desc
-    requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 3600 # 1h
+    job: SpiderQueenServant
     raffle:
       settings: short
   - type: GhostTakeoverAvailable #Ghost role

@@ -1,0 +1,20 @@
+- type: job
+  id: AggressiveAnimals
+  name: job-name-aggressive-animals
+  description: job-description-aggressive-animals
+  playTimeTracker: AntahAggressiveAnimals
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 20h
+
+- type: job
+  id: SpaceDragon
+  name: job-name-space-dragon
+  description: job-description-space-dragon
+  playTimeTracker: AntagSpaceDragon
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 20h
+
+
+

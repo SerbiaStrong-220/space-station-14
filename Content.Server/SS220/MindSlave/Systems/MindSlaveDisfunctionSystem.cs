@@ -80,10 +80,7 @@ public sealed class MindSlaveDisfunctionSystem : EntitySystem
 
     private void OnProviderImplanted(Entity<MindSlaveDisfunctionProviderComponent> entity, ref ImplantImplantedEvent args)
     {
-        if (args.Implanted == null)
-            return;
-
-        var disfunctionComponent = EnsureComp<MindSlaveDisfunctionComponent>(args.Implanted.Value);
+        var disfunctionComponent = EnsureComp<MindSlaveDisfunctionComponent>(args.Implanted);
         disfunctionComponent.DisfunctionParameters = entity.Comp.Disfunction;
     }
 

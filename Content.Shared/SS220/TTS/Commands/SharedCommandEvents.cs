@@ -8,3 +8,9 @@ namespace Content.Shared.SS220.TTS.Commands;
 public sealed class TtsQueueResetMessage : EntityEventArgs
 {
 }
+
+[Serializable, NetSerializable]
+public sealed class SessionSendTTSMessage(bool value) : EntityEventArgs
+{
+    public bool Value { get; init; } = value;
+}
