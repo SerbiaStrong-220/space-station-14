@@ -1,0 +1,23 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: BaseItem
+  id: VoidKey
+  name: void key
+  description: Opens portals to the VOID
+  components:
+  - type: Sprite
+    sprite: Objects/Fun/push_horn.rsi
+    state: icon
+  - type: Item
+    sprite: Objects/Fun/push_horn.rsi
+    size: Tiny
+  - type: EmitSoundOnUse
+    handle: false
+    sound: "/Audio/Items/Toys/pushHornHonk.ogg"
+  - type: UseDelay
+    delay: 10
+  - type: TriggerOnUse
+  - type: SpawnOnTrigger
+    proto: PlushieMigo
+    useMapCoords: true

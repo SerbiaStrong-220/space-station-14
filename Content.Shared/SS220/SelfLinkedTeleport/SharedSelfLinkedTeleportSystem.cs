@@ -1,20 +1,23 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Administration.Logs;
+using Content.Shared.Chemistry.Components;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
+using Content.Shared.Foldable;
 using Content.Shared.Popups;
-using Content.Shared.SS220.CultYogg.MiGo;
+using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.SelfLinkedTeleport;
 
 /// <summary>
 /// </summary>
-public sealed class SelfLinkedTeleportSystem : EntitySystem
+public abstract class SharedSelfLinkedTeleportSystem : EntitySystem
 {
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
@@ -26,47 +29,10 @@ public sealed class SelfLinkedTeleportSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<SelfLinkedTeleportComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<SelfLinkedTeleportComponent, ComponentRemove>(OnRemove);
         SubscribeLocalEvent<SelfLinkedTeleportComponent, GetVerbsEvent<Verb>>(OnGetVerb);
-        SubscribeLocalEvent<SelfLinkedTeleportComponent, CanDropDraggedEvent>(OnCanDropOn);
+        SubscribeLocalEvent<SelfLinkedTeleportComponent, CanDropTargetEvent>(OnCanDropTarget);
         SubscribeLocalEvent<SelfLinkedTeleportComponent, DragDropTargetEvent>(OnDragDropTarget);
         SubscribeLocalEvent<SelfLinkedTeleportComponent, SelfLinkedTeleportDoAfterEvent>(OnTeleportDoAfter);
-    }
-
-    private void OnMapInit(Entity<SelfLinkedTeleportComponent> ent, ref MapInitEvent args)//not sure about an event type
-    {
-        var locations = EntityQueryEnumerator<SelfLinkedTeleportComponent>();
-        while (locations.MoveNext(out var uid, out var teleport))
-        {
-            if (uid == ent.Owner)//shouldn't be linked to itself
-                continue;
-
-            if (TerminatingOrDeleted(uid))
-                continue;
-
-            if (teleport.LinkedEntity != null)//if its already linked = find next one
-                continue;
-
-            if (_whitelist.IsWhitelistFail(ent.Comp.UserWhitelist, uid))
-                continue;
-
-            ent.Comp.LinkedEntity = uid;//ToDo_SS220 maybe it should be incapsulated in function
-            teleport.LinkedEntity = ent;
-        }
-    }
-
-    private void OnRemove(Entity<SelfLinkedTeleportComponent> ent, ref ComponentRemove args)
-    {
-        if (ent.Comp.LinkedEntity == null)
-            return;
-
-        if (TryComp<SelfLinkedTeleportComponent>(ent, out var linkedTeleporterComp))
-        {
-            linkedTeleporterComp.LinkedEntity = null;
-        }
-
-        ent.Comp.LinkedEntity = null;
     }
 
     private void OnGetVerb(Entity<SelfLinkedTeleportComponent> ent, ref GetVerbsEvent<Verb> args)//Not sure maybe it should be "InteractionVerb"
@@ -91,19 +57,18 @@ public sealed class SelfLinkedTeleportSystem : EntitySystem
         args.Verbs.Add(teleportVerb);
     }
 
-    private void OnCanDropOn(Entity<SelfLinkedTeleportComponent> ent, ref CanDropDraggedEvent args)//wtf
+    private void OnCanDropTarget(Entity<SelfLinkedTeleportComponent> ent, ref CanDropTargetEvent args)
     {
-        args.CanDrop |= args.Target == args.User; //should be not only that
+        if (_whitelist.IsWhitelistFail(ent.Comp.UserWhitelist, args.User))
+            return;
 
-        if (args.CanDrop)
-            args.Handled = true;
+        args.CanDrop = true;
+        args.Handled = true;
     }
 
     private void OnDragDropTarget(Entity<SelfLinkedTeleportComponent> ent, ref DragDropTargetEvent args)
     {
-        //ToDo_SS220 add dragdrop
-
-        WarpTo(ent, args.Dragged);
+        StartTeleport(ent, args.User);
     }
 
     private void StartTeleport(Entity<SelfLinkedTeleportComponent> ent, EntityUid user)
@@ -138,14 +103,5 @@ public sealed class SelfLinkedTeleportSystem : EntitySystem
         WarpTo(ent, args.User);
     }
 
-    private void WarpTo(Entity<SelfLinkedTeleportComponent> ent, EntityUid user)
-    {
-        if (ent.Comp.LinkedEntity == null)
-            return;
-
-        _adminLogger.Add(LogType.Teleport, $"{ToPrettyString(user):user} used linked telepoter {ToPrettyString(ent):teleport enter} and was teleported to {ToPrettyString(ent.Comp.LinkedEntity.Value):teleport exit}");
-
-        var xform = Transform(user);
-        _transformSystem.SetCoordinates(user, xform, Transform(ent.Comp.LinkedEntity.Value).Coordinates);
-    }
+    protected virtual void WarpTo(Entity<SelfLinkedTeleportComponent> ent, EntityUid user) { }
 }

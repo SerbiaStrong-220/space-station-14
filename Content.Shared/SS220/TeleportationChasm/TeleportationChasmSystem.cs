@@ -124,6 +124,8 @@ public sealed class TeleportationChasmSystem : EntitySystem
             validLocations.Add(transform.Coordinates);
         }
 
+        //CheckTileOccupied -- mayve delete all tiles from here?
+
         var teleportLocation = _random.Pick(validLocations);
 
         var xform = Transform(ent);
