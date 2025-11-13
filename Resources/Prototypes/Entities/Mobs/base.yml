@@ -34,7 +34,7 @@
   - type: Examiner
   - type: Eye
   - type: ContentEye
-    maxZoom: 0.6666667, 0.6666667 #SS220 zoom limitation
+    maxZoom: 0.6666667, 0.6666667 #SS220 zoom limitation 3582
   - type: CameraRecoil
   - type: MindContainer
   - type: TTS # Corvax-TTS
