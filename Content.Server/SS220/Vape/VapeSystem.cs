@@ -40,6 +40,9 @@ public sealed class VapeSystem : SharedVapeSystem
             if (!Solution.TryGetRefillableSolution(comp.AtomizerEntity.Value, out _, out var sol))
                 continue;
 
+            if (!Solution.TryGetSolution(comp.User.Value, BloodstreamComponent.DefaultChemicalsSolutionName, out var userSol))
+                continue;
+
             if (!TryComp<VapePartComponent>(comp.CartridgeEntity, out var cartPart))
                 continue;
 
@@ -58,9 +61,6 @@ public sealed class VapeSystem : SharedVapeSystem
                 Popup.PopupEntity(Loc.GetString("vape-empty-solution"), comp.User.Value, comp.User.Value);
                 continue;
             }
-
-            if (!Solution.TryGetSolution(comp.User.Value, BloodstreamComponent.DefaultChemicalsSolutionName, out var userSol))
-                continue;
 
             if (Solution.TryTransferSolution(userSol.Value, sol, inhaleAmount))
             {
@@ -89,7 +89,7 @@ public sealed class VapeSystem : SharedVapeSystem
 
                 foreach (var damage in comp.Damage.DamageDict)
                 {
-                    newDamage.DamageDict.Add(damage.Key, damage.Value * frameTime);
+                    newDamage.DamageDict.Add(damage.Key, damage.Value.Float() * frameTime);
                 }
 
                 Damage.TryChangeDamage(comp.User.Value, newDamage, true);

@@ -24,7 +24,7 @@ public sealed partial class VapeComponent : Component
     {
         DamageDict = new Dictionary<string, FixedPoint2>
         {
-            { "Heat", 0.24},
+            { "Heat", 0.31},
         },
     };
 
