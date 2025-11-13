@@ -6,6 +6,9 @@
   suffix: SpaceWar
   components:
   - type: IFFConsole
+    allowedFlags:
+    - Hide
+    - HideLabel
     stealthCooldown: 120
     stealthTime: 20
   - type: Anchorable
