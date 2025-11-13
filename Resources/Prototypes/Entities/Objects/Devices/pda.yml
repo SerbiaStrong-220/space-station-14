@@ -2587,7 +2587,7 @@
        pda-seniorcourier #SS220 Resprite Senior Courier PDA
   - type: PdaBorderColor
     borderColor: "#e39751"
-    accentVColor: "#4b474f"
+    accentVColor: "#4b474f" #SS220 Resprite Senior Courier PDA
   - type: Icon
     sprite: SS220/Objects/Devices/pda.rsi #SS220 Resprite Senior Courier PDA
     state: pda-seniorcourier #SS220 Resprite Senior Courier PDA
