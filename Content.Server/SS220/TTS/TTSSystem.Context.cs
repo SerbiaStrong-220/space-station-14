@@ -15,7 +15,7 @@ public static class TtsContextMaker
     {
         return new()
         {
-            ChannelPrototype = args.Channel?.ID,
+            ChannelPrototype = args.Channel?.ID + args.Frequency?.ToString(),
             IsRadio = args.IsRadio,
             SpeakerContext = New(entityManager, args.Source)
         };
@@ -25,7 +25,7 @@ public static class TtsContextMaker
     {
         return new()
         {
-            ChannelPrototype = args.Channel.ID,
+            ChannelPrototype = args.Channel.ID + args.Frequency?.ToString(),
             IsRadio = true,
             SpeakerContext = New(entityManager, args.Source)
         };
