@@ -1,6 +1,7 @@
 using Content.Shared.Body.Events;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
+using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -43,10 +44,14 @@ public sealed class MouthContainerSystem : EntitySystem
     /// </summary>
     private void OnGetVerb(Entity<MouthContainerComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
-        var subject = args.User;
-        var toInsert = _hands.GetActiveItem(subject);
-
         var user = args.User;
+
+        var isAlive = !TryComp<MobStateComponent>(user, out var mobState) || _mobStateSystem.IsAlive(user, mobState);
+        if (user != args.Target && !HasComp<HandsComponent>(user) || !isAlive)
+            return;
+
+        var toInsert = _hands.GetActiveItem(user);
+
         AlternativeVerb verb;
 
         if (toInsert != null && CanInsert(ent, toInsert))
@@ -97,6 +102,7 @@ public sealed class MouthContainerSystem : EntitySystem
         _popup.PopupPredicted(Loc.GetString(ent.Comp.InsertMessage), ent.Owner, ent.Owner);
         UpdateAppearance(ent);
     }
+
     /// <summary>
     ///     Try to eject.
     /// </summary>
@@ -106,8 +112,6 @@ public sealed class MouthContainerSystem : EntitySystem
             return;
 
         _container.RemoveEntity(ent.Owner, ent.Comp.MouthSlot.ContainedEntity.Value);
-        _popup.PopupPredicted(Loc.GetString(ent.Comp.EjectMessage), ent.Owner, ent.Owner);
-        UpdateAppearance(ent);
     }
 
     /// <summary>
@@ -197,7 +201,13 @@ public sealed class MouthContainerSystem : EntitySystem
         if (!Exists(ent))
             return;
 
+        if (ent.Comp.MouthSlot.ContainedEntity != null)
+            _hands.TryPickupAnyHand(args.User, ent.Comp.MouthSlot.ContainedEntity.Value);
+
         TryEject(ent);
+
+        _popup.PopupPredicted(Loc.GetString(ent.Comp.EjectMessage), ent.Owner, ent.Owner);
+        UpdateAppearance(ent);
 
         args.Handled = true;
     }
@@ -209,7 +219,8 @@ public sealed class MouthContainerSystem : EntitySystem
     {
         var component = ent.Comp;
         var uid = ent.Owner;
-        var visible = component.MouthSlot.ContainedEntity != null && (!TryComp<MobStateComponent>(uid, out var mobState) || _mobStateSystem.IsAlive(uid, mobState));
+        var visible = component.MouthSlot.ContainedEntity != null &&
+                      (!TryComp<MobStateComponent>(uid, out var mobState) || _mobStateSystem.IsAlive(uid, mobState));
         _appearance.SetData(uid, MouthContainerVisuals.Visible, visible);
     }
 
