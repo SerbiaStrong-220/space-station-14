@@ -38,6 +38,11 @@
     Poison:
       effects:
       - !type:ChemElixirOfLiberationEffect
+      - !type:GenericStatusEffect
+        key: Muted
+        component: Muted
+        type: Remove
+        time: 60
 
 - type: reagent
   id: CultYoggVenomancerAcid
