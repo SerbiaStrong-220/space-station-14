@@ -179,6 +179,9 @@
   - type: LockedWiresPanel
   - type: Damageable
     damageContainer: Silicon
+    damageModifierSet: Silicon #SS220 Add Silicon Resistance Begin
+  - type: ExplosionResistance
+    damageCoefficient: 0.7 #SS220 Add Silicon Resistance End
   - type: Destructible
     thresholds:
     - trigger:
@@ -382,6 +385,11 @@
       Unsexed: UnisexSiliconSyndicate
   - type: PointLight
     color: "#dd200b"
+  - type: Damageable #SS220 Add Silicon Resistance Begin
+    damageContainer: Silicon
+    damageModifierSet: SiliconSyndicate
+  - type: ExplosionResistance
+    damageCoefficient: 0.4 #SS220 Add Silicon Resistance End
 
 - type: entity
   id: BaseBorgChassisDerelict
