@@ -47,7 +47,7 @@ public sealed class MouthContainerSystem : EntitySystem
         var user = args.User;
 
         var isAlive = !TryComp<MobStateComponent>(user, out var mobState) || _mobStateSystem.IsAlive(user, mobState);
-        if (user != args.Target && !HasComp<HandsComponent>(user) || !isAlive)
+        if (user != args.Target && _hands.GetHandCount(user) <= 0 || !isAlive)
             return;
 
         var toInsert = _hands.GetActiveItem(user);
