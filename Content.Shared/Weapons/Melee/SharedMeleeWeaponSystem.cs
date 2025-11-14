@@ -520,6 +520,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             var missEvent = new MeleeHitEvent(new List<EntityUid>(), user, meleeUid, damage, null);
             RaiseLocalEvent(meleeUid, missEvent);
             _meleeSound.PlaySwingSound(user, meleeUid, component);
+            RaiseLocalEvent(user, new LightAttackPerformedEvent(null, meleeUid, GetCoordinates(ev.Coordinates))); // SS220-MartialArts
             return;
         }
 
@@ -590,6 +591,8 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         {
             DoDamageEffect(targets, user, targetXform);
         }
+
+        RaiseLocalEvent(user, new LightAttackPerformedEvent(target.Value, meleeUid, targetXform.Coordinates)); // SS220-MartialArts
     }
 
     protected abstract void DoDamageEffect(List<EntityUid> targets, EntityUid? user,  TransformComponent targetXform);
@@ -915,6 +918,11 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         if (attemptEvent.Cancelled)
             return false;
+
+        // SS220-MartialArts-Begin
+        // i'm struggling where to put this block, i hope it will fit here
+        RaiseLocalEvent(user, new DisarmAttackPerformedEvent(target.Value, Transform(target.Value).Coordinates));
+        // SS220-MartialArts-End
 
         var chance = CalculateDisarmChance(user, target.Value, inTargetHand, combatMode);
 

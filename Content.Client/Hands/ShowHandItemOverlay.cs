@@ -1,14 +1,18 @@
 using System.Numerics;
 using Content.Client.Hands.Systems;
+using Content.Client.SS220.MartialArts;
 using Content.Shared.CCVar;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
+using Robust.Client.Player;
+using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
 using Robust.Shared.Graphics;
 using Robust.Shared.Map;
+using Robust.Shared.Utility;
 using Direction = Robust.Shared.Maths.Direction;
 
 namespace Content.Client.Hands
@@ -19,6 +23,13 @@ namespace Content.Client.Hands
         [Dependency] private readonly IInputManager _inputManager = default!;
         [Dependency] private readonly IClyde _clyde = default!;
         [Dependency] private readonly IEntityManager _entMan = default!;
+        [Dependency] private readonly IPlayerManager _player = default!; // SS220-MartialArts
+        [Dependency] private readonly IResourceCache _resourceCache = default!; // SS220-MartialArts
+
+        private readonly MartialArtsSystem _martial = default!; // SS220-MartialArts
+
+        private static readonly ResPath MartialArtsActionsRsi =
+            new ResPath("/Textures/SS220/Interface/Misc/martial_arts_actions.rsi"); // SS220-MartialArts
 
         private HandsSystem? _hands;
         private readonly IRenderTexture _renderBackbuffer;
@@ -39,6 +50,8 @@ namespace Content.Client.Hands
                 {
                     Filter = true
                 }, nameof(ShowHandItemOverlay));
+
+            _martial = _entMan.System<MartialArtsSystem>(); // SS220-MartialArts
         }
 
         protected override void DisposeBehavior()
@@ -76,6 +89,35 @@ namespace Content.Client.Hands
 
             _hands ??= _entMan.System<HandsSystem>();
             var handEntity = _hands.GetActiveHandEntity();
+
+            // SS220-MartialArts-Start
+            if (_player.LocalEntity != null)
+            {
+                var combo = _martial.GetPerformedSteps(_player.LocalEntity.Value);
+
+                if (combo is { Count: > 0 })
+                {
+                    var color = Color.White.WithAlpha(0.75f);
+                    for (var i = 0; i < combo.Count; i++)
+                    {
+                        var rsiActual = _resourceCache.GetResource<RSIResource>(MartialArtsActionsRsi).RSI;
+                        if (!rsiActual.TryGetState(combo[i].ToString().ToLower(), out var state))
+                            continue;
+
+                        var texture = state.Frame0;
+
+                        var size = texture.Size;
+
+                        var offsetVec2 = new Vector2(-offsetVec.X,
+                            (2f * i + 1f - combo.Count) * texture.Size.Y / 1.8f);
+
+                        screen.DrawTextureRect(texture,
+                            UIBox2.FromDimensions(mousePos.Position - size / 2 + offsetVec2, size),
+                            color);
+                    }
+                }
+            }
+            // SS220-MartialArts-End
 
             if (handEntity == null || !_entMan.TryGetComponent(handEntity, out SpriteComponent? sprite))
                 return;

@@ -1,0 +1,26 @@
+- type: martialArt
+  id: DebugMartialArt # Боевое искусство: Путь Разработчика (Дебаг)
+  sequences:
+  - name: ConsequtiveSlap # Приём: Последовательный удар лещом
+    steps: [ Harm, Harm, Grab, Push ] # Удар, Удар, Хватание, Толкание
+    entry:
+      conditions:
+      - !type:IsDownCombatCondition # Если цель стоит на ногах
+        invert: true
+      effects:
+      - !type:ApplyDamageCombatEffect # Нанести 8 ушибов
+        damage:
+          types:
+            Blunt: 8
+      - !type:ApplyStaminaCombatEffect # Нанести 50 урона стамине
+        damage: 50
+        ignoreResist: true
+  - name: GrabGrab # Приём: Хвать-Хвать
+    steps: [ Grab, Grab ] # Хватание, Хватание
+    entry:
+      conditions:
+      - !type:IsDownCombatCondition # Если цель стоит на ногах
+        invert: true
+      effects:
+      - !type:KnockdownCombatEffect # Сбить с ног на 5 секунд
+        time: 5
