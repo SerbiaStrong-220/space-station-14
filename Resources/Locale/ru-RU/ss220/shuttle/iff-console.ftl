@@ -1,2 +1,2 @@
-iff-stealth-ready = СТЕЛС СИСТЕМЫ ГОТОВЫ
-iff-stealth-cooldown = ПЕРЕЗАРЯДКА СТЕЛС СИСТЕМ: {$cooldown}
+iff-stealth-ready = Система маскировки готова к запуску
+iff-stealth-cooldown = Системы маскировки перезаряжаются, и будут недоступны ещё: {$cooldown}
