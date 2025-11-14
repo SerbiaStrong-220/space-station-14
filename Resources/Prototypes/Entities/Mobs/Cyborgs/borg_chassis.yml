@@ -50,7 +50,7 @@
     selectedBorgType: mining
   - type: Damageable #SS220 Add Silicon Resistance Begin
     damageContainer: Silicon
-    damageModifierSet: SiliconSiliconMining #SS220 Add Silicon Resistance End
+    damageModifierSet: SiliconMining #SS220 Add Silicon Resistance End
 
 - type: entity
   id: BorgChassisEngineer
