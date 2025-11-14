@@ -35,8 +35,8 @@
   - type: Eye
   - type: ContentEye
     #SS220 zoom limitation 3582 start
-    maxZoom: 0.6666667, 0.6666667
-    targetZoom: 0.6666667, 0.6666667
+    maxZoom: 0.75, 0.75
+    targetZoom: 0.75, 0.75
     #SS220 zoom limitation 3582 end
   - type: CameraRecoil
   - type: MindContainer
