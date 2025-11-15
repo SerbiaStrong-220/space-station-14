@@ -87,10 +87,23 @@ public sealed class DragonRiftSystem : EntitySystem
                 _navMap.SetBeaconEnabled(uid, true);
             }
 
+            // ss220 add shark for rifts start
+            if (comp is { State: DragonRiftState.Finished, AlreadySpawnShark: false })
+            {
+                var ent = Spawn(comp.SpawnSharkPrototype, xform.Coordinates);
+
+                if (comp.Dragon != null)
+                    _npc.SetBlackboard(ent, NPCBlackboard.FollowTarget, new EntityCoordinates(comp.Dragon.Value, Vector2.Zero));
+
+                comp.AlreadySpawnShark = true;
+                Dirty(uid, comp);
+            }
+            // ss220 add shark for rifts end
+
             if (comp.SpawnAccumulator > comp.SpawnCooldown)
             {
                 comp.SpawnAccumulator -= comp.SpawnCooldown;
-                var ent = Spawn(comp.SpawnPrototype, xform.Coordinates);
+                var ent = Spawn(comp.SpawnCarpPrototype, xform.Coordinates);
 
                 // Update their look to match the leader.
                 if (TryComp<RandomSpriteComponent>(comp.Dragon, out var randomSprite))
