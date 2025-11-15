@@ -65,28 +65,30 @@ public sealed class ItemOfferSystem : SharedItemOfferSystem
         base.Update(frameTime);
 
         var enumerator = EntityQueryEnumerator<ItemReceiverComponent, TransformComponent>();
-        while (enumerator.MoveNext(out var uid, out var comp, out var transform))
+        while (enumerator.MoveNext(out var uid, out var comp, out _))
         {
             var receiverPos = Transform(comp.Giver).Coordinates;
             var giverPos = Transform(uid).Coordinates;
             receiverPos.TryDistance(EntityManager, giverPos, out var distance);
             var giverHands = Comp<HandsComponent>(comp.Giver);
+
+            if (distance < comp.ReceiveRange)
+                continue;
+
             if (distance > comp.ReceiveRange)
             {
-                if (distance > comp.ReceiveRange)
-                {
-                    _alerts.ClearAlert(uid, _itemOfferAlert);
-                    _entMan.RemoveComponent<ItemReceiverComponent>(uid);
-                }
-                //FunTust: added a new variable responsible for whether the object is still in the hand during transmission
+                _alerts.ClearAlert(uid, _itemOfferAlert);
+                _entMan.RemoveComponent<ItemReceiverComponent>(uid);
+            }
 
-                var foundInHand = _hands.IsHolding((comp.Giver, giverHands), comp.Item!.Value);
+            //FunTust: added a new variable responsible for whether the object is still in the hand during transmission
 
-                if (!foundInHand)
-                {
-                    _alerts.ClearAlert(uid, _itemOfferAlert);
-                    _entMan.RemoveComponent<ItemReceiverComponent>(uid);
-                }
+            var foundInHand = _hands.IsHolding((comp.Giver, giverHands), comp.Item!.Value);
+
+            if (!foundInHand)
+            {
+                _alerts.ClearAlert(uid, _itemOfferAlert);
+                _entMan.RemoveComponent<ItemReceiverComponent>(uid);
             }
         }
     }
@@ -98,23 +100,23 @@ public sealed class ItemOfferSystem : SharedItemOfferSystem
 
         _hands.PickupOrDrop(itemReceiver.Giver, itemReceiver.Item!.Value);
 
+        if (!_hands.TryPickupAnyHand(receiver, itemReceiver.Item!.Value))
+            return;
+
+        if (itemReceiver == null)
+            return;
+
+        _hands.PickupOrDrop(itemReceiver.Giver, itemReceiver.Item!.Value);
+
         if (_hands.TryPickupAnyHand(receiver, itemReceiver.Item!.Value))
         {
-            if (itemReceiver == null)
-                return;
-
-            _hands.PickupOrDrop(itemReceiver.Giver, itemReceiver.Item!.Value);
-            if (_hands.TryPickupAnyHand(receiver, itemReceiver.Item!.Value))
-            {
-                var loc = Loc.GetString("loc-item-offer-transfer",
-                    ("user", itemReceiver.Giver),
-                    ("item", itemReceiver.Item),
-                    ("target", receiver));
-                _popupSystem.PopupEntity(loc, itemReceiver.Giver, PopupType.Medium);
-                _alerts.ClearAlert(receiver, _itemOfferAlert);
-                _entMan.RemoveComponent<ItemReceiverComponent>(receiver);
-            }
-            ;
+            var loc = Loc.GetString("loc-item-offer-transfer",
+                ("user", itemReceiver.Giver),
+                ("item", itemReceiver.Item),
+                ("target", receiver));
+            _popupSystem.PopupEntity(loc, itemReceiver.Giver, PopupType.Medium);
+            _alerts.ClearAlert(receiver, _itemOfferAlert);
+            _entMan.RemoveComponent<ItemReceiverComponent>(receiver);
         }
     }
 

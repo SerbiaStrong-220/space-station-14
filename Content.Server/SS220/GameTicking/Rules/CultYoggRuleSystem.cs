@@ -409,7 +409,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         EnsureComp<ZombieImmuneComponent>(uid);//they are practically mushrooms
 
         if (HasComp<MindShieldComponent>(uid))
-            EnsureComp<CombustingMindShieldComponent>(uid);//if somehow we get here with mindshield, del this
+            EnsureComp<CombustingMindShieldComponent>(uid);//if somehow we get here with mindshield, del him with special component
 
         DirtyEntity(uid);
     }
