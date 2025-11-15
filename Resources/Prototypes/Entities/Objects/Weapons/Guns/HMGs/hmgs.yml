@@ -30,18 +30,10 @@
   - type: StaticPrice
     price: 500
   # No chamber because HMG may want its own
-  #SS220 zoom limitation 3582 start
-  - type: Wieldable
-    unwieldOnUse: false
-  - type: CursorOffsetRequiresWield
-  - type: EyeCursorOffset
-    maxOffset: 6
-    pvsIncrease: 0.3
-  #SS220 zoom limitation 3582 end
 
 - type: entity
   name: minigun
-  id: WeaponMinigun #ToDo_SS200, its broken somehow, check on master
+  id: WeaponMinigun
   parent: [ BaseWeaponHeavyMachineGun]
   description: Vzzzzzt! Rahrahrahrah! Vrrrrr! Uses .10 rifle ammo.
   components:

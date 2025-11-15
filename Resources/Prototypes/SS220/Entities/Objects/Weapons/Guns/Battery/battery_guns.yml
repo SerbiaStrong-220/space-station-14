@@ -83,9 +83,15 @@
     angleDecay: 16
     soundGunshot:
       path: /Audio/SS220/Weapons/Guns/Gunshots/blaster_nt.ogg
+  #SS220 zoom limitation 3582 start
+  - type: CursorOffsetRequiresWield
+  - type: EyeCursorOffset
+    maxOffset: 7
+    pvsIncrease: 0.3
+  #SS220 zoom limitation 3582 end
 
 - type: entity
-  id: WeaponBlasterKRS #ToDo_SS220 isn't wotking
+  id: WeaponBlasterKRS
   parent: BaseWeaponBlaster
   name: krs
   description: An old reliable blaster rifle. There is only a semi-automatic type of shooting.
@@ -121,7 +127,7 @@
             - KRSPowerCell
 
 - type: entity
-  id: WeaponBlasterKRV #ToDo_SS220 isn't wotking
+  id: WeaponBlasterKRV
   parent: BaseWeaponBlaster
   name: KRV
   description: An advanced blaster rifle. Used by special operatives.
@@ -160,7 +166,7 @@
 - type: entity
   name: IK 60 Laser Carbine
   parent: BaseWeaponBlaster
-  id: WeaponLaserCarabine #ToDo_SS220 isn't wotking
+  id: WeaponLaserCarabine
   description: A powerful laser carbine resembling a rifle, which relies more on battery cartridges than on an integrated power cell. It is used by NanoTrasen Corporate Security squads in combat operations.
   components:
   - type: Sprite
@@ -222,7 +228,7 @@
 - type: entity
   name: pulse rifle
   parent: BaseWeaponBattery
-  id: WeaponPulseRifle2 #ToDo_SS220 isn't wotking
+  id: WeaponPulseRifle2
   description: A heavy-duty energy rifle capable of annihilating any structures.
   suffix: Винтовка, Death Squad
   components:
@@ -260,7 +266,7 @@
 - type: entity
   name: pulse shotgun
   parent: BaseWeaponBattery
-  id: WeaponPulseShotgun #ToDo_SS220 isn't wotking
+  id: WeaponPulseShotgun
   description: An energy shotgun with the latest treatment technology.
   suffix: Death Squad
   components:

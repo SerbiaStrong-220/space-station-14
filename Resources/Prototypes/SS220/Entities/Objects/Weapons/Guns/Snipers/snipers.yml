@@ -1,7 +1,7 @@
 - type: entity
   name: fusee
   parent: [ BaseItem, BaseGunWieldable ]
-  id: WeaponFusee #ToDo_SS220 isn't wotking
+  id: WeaponFusee
   description: Guns at the ready! Aim! Fire!
   components:
   - type: EmitSoundOnLand

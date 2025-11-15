@@ -145,7 +145,7 @@
 
 - type: entity
   name: C-20r ROW #I think ROW stands for Recharging Onboard Weapon so i'm following the L6C's example
-  id: WeaponSubMachineGunC20rROW #ToDo_SS220 isn't wotking
+  id: WeaponSubMachineGunC20rROW
   parent: BaseItem
   description: A burst-fire C-20r submachine gun for use by cyborgs. Creates .35 caliber ammo on the fly from an internal ammo fabricator, which slowly self-charges.
   components:
@@ -183,6 +183,15 @@
     autoRecharge: true
     autoRechargeRate: 25
   - type: AmmoCounter
+  #SS220 zoom limitation 3582 start
+  - type: Wieldable
+    unwieldOnUse: false
+  - type: CursorOffsetRequiresWield
+  - type: EyeCursorOffset
+    maxOffset: 7
+    pvsIncrease: 0.3
+  #SS220 zoom limitation 3582 end
+
 
 - type: entity
   name: Drozd

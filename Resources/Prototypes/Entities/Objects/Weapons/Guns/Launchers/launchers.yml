@@ -245,7 +245,7 @@
   parent:
   - BaseItem
   - PowerCellSlotMediumItem
-  id: WeaponTetherGun #ToDo_SS220 isn't wotking, and idk how its should
+  id: WeaponTetherGun
   description: Manipulates gravity around objects to fling them at high velocities.
   components:
     - type: Item

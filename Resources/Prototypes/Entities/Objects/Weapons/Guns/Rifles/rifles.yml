@@ -237,7 +237,7 @@
 
 - type: entity
   parent: WeaponRifleLecter
-  id: WeaponRifleLecterXL8 #ToDo_SS220 tweak offset
+  id: WeaponRifleLecterXL8
   name: XL8
   description: |-
     The Experimental Lecter 8

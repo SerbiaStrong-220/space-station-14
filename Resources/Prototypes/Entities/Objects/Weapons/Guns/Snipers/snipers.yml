@@ -180,7 +180,7 @@
 - type: entity
   name: flintlock pistol
   parent: [BaseWeaponSniper, BaseMajorContraband]
-  id: WeaponPistolFlintlock #ToDo_SS220 isn't wotking, and i think its ok
+  id: WeaponPistolFlintlock
   description: A pirate's companion. Yarrr! Uses .45 magnum ammo.
   components:
   - type: Gun

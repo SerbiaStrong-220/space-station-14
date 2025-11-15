@@ -175,7 +175,7 @@
 - type: entity
   name: svalinn laser pistol
   parent: [BaseWeaponPowerCellSmall, BaseSecurityContraband]
-  id: WeaponLaserSvalinn #ToDo_SS220 isn't wotking
+  id: WeaponLaserSvalinn
   description: A cheap and widely used laser pistol.
   components:
   - type: Sprite
@@ -201,6 +201,14 @@
     proto: RedLightLaser
     fireCost: 50
   # SS220 EDIT END
+  #SS220 zoom limitation 3582 start
+  - type: Wieldable
+    unwieldOnUse: false
+  - type: CursorOffsetRequiresWield
+  - type: EyeCursorOffset
+    maxOffset: 6
+    pvsIncrease: 0.3
+  #SS220 zoom limitation 3582 end
 
 - type: entity
   name: retro laser blaster
@@ -265,7 +273,7 @@
 - type: entity
   name: tesla gun
   parent: [BaseWeaponBattery, BaseMajorContraband]
-  id: WeaponTeslaGun #ToDo_SS220 isn't wotking
+  id: WeaponTeslaGun
   description: The power of the primordial element of lightning in your hands.
   components:
   - type: Item
@@ -294,6 +302,15 @@
     steps: 5
     zeroVisible: true
   - type: Appearance
+  #SS220 zoom limitation 3582 start
+  - type: Wieldable
+    unwieldOnUse: false
+  - type: CursorOffsetRequiresWield
+  - type: EyeCursorOffset
+    maxOffset: 7
+    pvsIncrease: 0.3
+  #SS220 zoom limitation 3582 end
+
 
 - type: entity
   name: laser carbine
@@ -463,7 +480,7 @@
 - type: entity
   name: portable particle decelerator
   parent: [BaseWeaponBattery, BaseEngineeringContraband]
-  id: WeaponParticleDecelerator #ToDo_SS220 isn't wotking
+  id: WeaponParticleDecelerator
   description: A portable particle decelerator capable of decomposing a tesla or singularity.
   components:
     - type: Item
@@ -598,7 +615,7 @@
 - type: entity
   name: disabler SMG
   parent: [BaseWeaponBattery, BaseSecurityContraband]
-  id: WeaponDisablerSMG #ToDo_SS220 isn't wotking
+  id: WeaponDisablerSMG
   description: Advanced weapon that exhausts organic targets, weakening them until they collapse.
   components:
   - type: Item
@@ -635,13 +652,34 @@
   - type: StaticPrice
     price: 260
   - type: PacifismAllowedGun
+  #SS220 zoom limitation 3582 start
+  - type: Wieldable
+    unwieldOnUse: false
+  #SS220 zoom limitation 3582 end
 
 - type: entity
   name: taser
-  parent: [BaseWeaponBatterySmall, BaseSecurityContraband] 
-  id: WeaponTaser #ToDo_SS220 delete wielding cause pointless
+  #SS220 zoom limitation 3582 start
+  parent: [BaseWeaponBattery, BaseSecurityContraband]
+  #parent: [BaseWeaponBatterySmall, BaseSecurityContraband]
+  #SS220 zoom limitation 3582 end
+  id: WeaponTaser
   description: A low-capacity, energy-based stun gun used by security teams to subdue targets at close range.
   components:
+  #SS220 zoom limitation 3582 start
+  - type: Item
+    heldPrefix: taser4
+    size: Small
+    shape:
+    - 0,0,1,0
+    - 0,1,0,1
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Battery/taser.rsi
+    quickEquip: false
+    slots:
+    - Belt
+    - suitStorage
+  #SS220 zoom limitation 3582 end
   - type: Tag
     tags:
     - Taser
@@ -654,10 +692,12 @@
     - state: mag-unshaded-0
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
-  - type: Item
-    heldPrefix: taser4
-  - type: Clothing
-    quickEquip: false
+  #SS220 zoom limitation 3582 start
+  #- type: Item
+  #  heldPrefix: taser4
+  #- type: Clothing
+  #  quickEquip: false
+  #SS220 zoom limitation 3582 end
   - type: Gun
     fireRate: 0.5
     soundGunshot:
@@ -919,7 +959,7 @@
 - type: entity
   name: energy shotgun
   parent: [BaseWeaponBattery, BaseGunWieldable]
-  id: WeaponEnergyShotgun #ToDo_SS220 tweak offset
+  id: WeaponEnergyShotgun
   description: A one-of-a-kind prototype energy weapon that uses various shotgun configurations. It offers the possibility of both lethal and non-lethal shots, making it a versatile weapon.
   components:
   - type: Sprite
@@ -958,11 +998,17 @@
   - type: Battery
     maxCharge: 1200 # SS220-shotgun-battery
     startingCharge: 1200 # SS220-shotgun-battery
+  #SS220 zoom limitation 3582 start
+  - type: CursorOffsetRequiresWield
+  - type: EyeCursorOffset
+    maxOffset: 5
+    pvsIncrease: 0.3
+  #SS220 zoom limitation 3582 end
 
 - type: entity
   name: energy magnum
   parent: [BaseWeaponBatterySmall, BaseGrandTheftContraband]
-  id: WeaponEnergyMagnum #ToDo_SS220 tweak offset
+  id: WeaponEnergyMagnum
   description: A high powered self-charging energy pistol designed for elite security personnel. It has has three firing modes allowing for either high damage, window piercing, or non-lethal disabling.
   components:
   - type: Sprite

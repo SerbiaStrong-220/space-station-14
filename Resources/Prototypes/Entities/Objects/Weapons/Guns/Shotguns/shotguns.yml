@@ -59,7 +59,7 @@
   name: Bulldog
   # Don't parent to BaseWeaponShotgun because it differs significantly
   parent: [BaseItem, BaseGunWieldable]
-  id: WeaponShotgunBulldog #ToDo_SS220 isn't wotking
+  id: WeaponShotgunBulldog
   description: An automatic magazine-fed shotgun for close-quarters combat. Kicks like a mule on steroids. Uses .50 shotgun shells.
   components:
   - type: EmitSoundOnLand
@@ -117,6 +117,12 @@
   - type: Appearance
   - type: StaticPrice
     price: 5000
+  #SS220 zoom limitation 3582 start
+  - type: CursorOffsetRequiresWield
+  - type: EyeCursorOffset
+    maxOffset: 5
+    pvsIncrease: 0.3
+  #SS220 zoom limitation 3582 end
 
 - type: entity
   name: double-barreled shotgun
