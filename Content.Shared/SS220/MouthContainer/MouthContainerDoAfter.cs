@@ -6,7 +6,7 @@ namespace Content.Shared.SS220.MouthContainer;
 [Serializable, NetSerializable]
 public sealed partial class MouthContainerDoAfterInsertEvent : SimpleDoAfterEvent
 {
-    public NetEntity ToInsert { get; private set; }
+    public readonly NetEntity ToInsert;
 
     public MouthContainerDoAfterInsertEvent(NetEntity toInsert)
     {
