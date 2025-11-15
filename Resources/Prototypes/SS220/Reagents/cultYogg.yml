@@ -24,7 +24,7 @@
         - !type:ComponentCondition
             inverted: true
             components:
-              - CultYogg
+            - CultYogg
 
 - type: reagent
   id: ElixirOfLiberation
@@ -108,6 +108,10 @@
         - !type:ReagentCondition
           reagent: EssenceOfTheAbyss
           min: 8
+        - !type:ComponentCondition
+          inverted: true
+          components:
+          - BibleUser #Not sure, cause its on server
         effectProto: StatusEffectForcedSleeping
         time: 3
         type: Add
@@ -120,3 +124,7 @@
         - !type:ReagentCondition
           reagent: EssenceOfTheAbyss
           min: 10
+        - !type:ComponentCondition
+          inverted: true
+          components:
+          - BibleUser #Not sure, cause its on server
