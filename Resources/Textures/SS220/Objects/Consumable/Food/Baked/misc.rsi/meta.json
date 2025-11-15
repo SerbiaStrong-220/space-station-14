@@ -1,0 +1,23 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "waffles sprited by @mishutka09",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "waffles"
+        },
+        {
+            "name": "waffles-roffle"
+        },
+        {
+            "name": "waffles-soy"
+        },
+        {
+            "name": "waffles-soylent"
+        }
+    ]
+}
