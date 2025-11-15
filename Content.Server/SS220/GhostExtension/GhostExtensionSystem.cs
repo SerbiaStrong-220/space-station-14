@@ -1,14 +1,21 @@
 using Content.Server.Mind;
 using Content.Shared.Bed.Cryostorage;
+using Content.Shared.Forensics.Components;
 using Content.Shared.Ghost;
+using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
+using Content.Shared.SS220.GhostExtension;
 using Content.Shared.SS220.Mind;
+using Robust.Shared.Network;
+using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Server.SS220.GhostExtension;
 public sealed class GhostExtensionSystem : EntitySystem
 {
     [Dependency] private readonly EntityManager _entityManager = default!;
     [Dependency] private readonly MindSystem _mindSystem = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
 
     private EntityQuery<GhostComponent> _ghostQuery;
     public override void Initialize()
@@ -19,15 +26,19 @@ public sealed class GhostExtensionSystem : EntitySystem
         SubscribeNetworkEvent<GhostBodyListRequestEvent>(OnGhostBodyListRequestEvent);
         SubscribeNetworkEvent<ExtensionRespawnActionEvent>(OnRespawnActionEvent);
         SubscribeLocalEvent<MindTransferedEvent>(OnMindTransferedEvent);
+
+        //TODO: Установить связь таймера с UI. Выявлять суицидника.
     }
 
+    //TODO: Задумайся, оно вообще надо?
+    private List<Entity<MindExtensionComponent>> _timers = new();
     private void OnExtensionReturnActionEvent(ExtensionReturnActionEvent ev, EntitySessionEventArgs args)
     {
         var target = GetEntity(ev.Target);
 
         var mind = _mindSystem.GetMind(args.SenderSession.UserId);
 
-        if (target is null || mind is null || !ValidateEntity((EntityUid)target))
+        if (target is null || mind is null || !ValidateEntity((EntityUid)target, args))
             return;
 
         _mindSystem.TransferTo((EntityUid)mind, (EntityUid)target);
@@ -39,17 +50,28 @@ public sealed class GhostExtensionSystem : EntitySystem
                 || !_ghostQuery.HasComp(entity))
         {
             Log.Warning($"User {args.SenderSession.Name} sent a {nameof(GhostWarpsRequestEvent)} without being a ghost.");
+
+            RaiseNetworkEvent(new GhostBodyListResponseEvent([]), args.SenderSession.Channel);
             return;
         }
 
-        if (!TryComp<MindExtensionComponent>(args.SenderSession.AttachedEntity, out var mindExt))
+        if (!TryComp<MindExtensionContainerComponent>(args.SenderSession.AttachedEntity, out var mindContExt))
+        {
+            RaiseNetworkEvent(new GhostBodyListResponseEvent([]), args.SenderSession.Channel);
             return;
+        }
+
+        if (!TryComp<MindExtensionComponent>(mindContExt.MindExtension, out var mindExt))
+        {
+            RaiseNetworkEvent(new GhostBodyListResponseEvent([]), args.SenderSession.Channel);
+            return;
+        }
 
         var bodyList = new List<BodyCont>();
         foreach (var ent in mindExt.Trail)
         {
             string entInfo;
-            bool isAvaible = ValidateEntity(ent);
+            bool isAvaible = ValidateEntity(ent, args);
 
             if (_entityManager.EntityExists(ent))
             {
@@ -67,38 +89,71 @@ public sealed class GhostExtensionSystem : EntitySystem
         RaiseNetworkEvent(new GhostBodyListResponseEvent(bodyList), args.SenderSession.Channel);
     }
 
-    private void OnRespawnActionEvent(ExtensionRespawnActionEvent ev)
+    private void OnRespawnActionEvent(ExtensionRespawnActionEvent ev, EntitySessionEventArgs args)
     {
-        if (TryGetEntity(ev.Invoker, out var entity))
-            RaiseLocalEvent((EntityUid)entity, new RespawnActionEvent());
-    }
-
-    private void OnMindTransferedEvent(ref MindTransferedEvent ev)
-    {
-        var trail = new HashSet<EntityUid>();
-
-        if (TryComp<MindExtensionComponent>(ev.OldEntity, out var oldMindExt))
+        if (!TryComp<MindExtensionContainerComponent>(args.SenderSession.AttachedEntity, out var mindContExt))
         {
-            trail = oldMindExt.Trail;
-            _entityManager.RemoveComponent<MindExtensionComponent>((EntityUid)ev.OldEntity);
+            return;
         }
 
+        if (!TryComp<MindExtensionComponent>(mindContExt.MindExtension, out var mindExt))
+        {
+            return;
+        }
+
+        if (!mindExt.IsIC && mindExt.RespawnTimer < _gameTiming.CurTime)
+            RaiseLocalEvent((EntityUid)args.SenderSession.AttachedEntity, new RespawnActionEvent());
+    }
+    private void OnMindTransferedEvent(ref MindTransferedEvent ev)
+    {
         if (ev.NewEntity is null)
             return;
 
-        if (!TryComp<GhostComponent>(ev.NewEntity, out var ghost))
-            trail.Add((EntityUid)ev.NewEntity);
+        var mindExts = _entityManager.AllComponents<MindExtensionComponent>();
+        var user = ev.PlayerSession;
+        var mindExtEnt = mindExts.FirstOrNull(x => x.Component.PlayerSession == user);
 
-        if (TryComp<MindExtensionComponent>(ev.NewEntity, out var newMindExt))
+        if (ev.PlayerSession is null)
+            throw new NotImplementedException();
+
+        if (mindExtEnt is null)
         {
-            newMindExt.Trail = trail;
+            var newEnt = _entityManager.CreateEntityUninitialized(null);
+            var mindExtComponent = new MindExtensionComponent() { PlayerSession = (NetUserId)ev.PlayerSession };
+
+            _entityManager.AddComponent(newEnt, mindExtComponent);
+            _entityManager.InitializeEntity(newEnt);
+            mindExtEnt = new(newEnt, mindExtComponent);
+        }
+
+        var mindExt = mindExtEnt.Value.Component;
+        var mindExtCont = new MindExtensionContainerComponent() { MindExtension = mindExtEnt.Value.Uid };
+
+        if (TryComp<MindExtensionContainerComponent>(ev.OldEntity, out var oldMindExt))
+        {
+            _entityManager.RemoveComponent<MindExtensionComponent>((EntityUid)ev.OldEntity);
+        }
+
+        if (!TryComp<GhostComponent>(ev.NewEntity, out var ghost))
+            mindExt.Trail.Add((EntityUid)ev.NewEntity);
+
+        if (!TryComp<DnaComponent>(ev.NewEntity, out var dna))
+        {
+            if (mindExt.IsIC == true)
+                mindExt.RespawnTimer = _gameTiming.CurTime + TimeSpan.FromSeconds(mindExt.RespawnAccumulatorMax);
+
+            mindExt.IsIC = false;
         }
         else
+            mindExt.IsIC = true;
+
+        if (TryComp<MindExtensionContainerComponent>(ev.NewEntity, out var newMindExt))
         {
-            _entityManager.AddComponent((EntityUid)ev.NewEntity, new MindExtensionComponent() { Trail = trail });
+            newMindExt.MindExtension = mindExtCont.MindExtension;
         }
+        _entityManager.AddComponent((EntityUid)ev.NewEntity, mindExtCont);
     }
-    private bool ValidateEntity(EntityUid entity)
+    private bool ValidateEntity(EntityUid entity, EntitySessionEventArgs args)
     {
         bool isAvaible = true;
 
@@ -108,12 +163,14 @@ public sealed class GhostExtensionSystem : EntitySystem
         if (TryComp<CryostorageContainedComponent>(entity, out var cryo))
             isAvaible = false;
 
-        if (TryComp<MindContainerComponent>(entity, out var mind) && mind.Mind is not null)
-            isAvaible = false;
+        //При Visit MindConatainer может остаться, как и Mind. Нужно проверить, не является-ли этот Mind своим.
+        if (TryComp<MindContainerComponent>(entity, out var mindContainer) && mindContainer.Mind is not null)
+            if (TryComp<MindComponent>(mindContainer.Mind, out var mind) && mind.UserId != args.SenderSession.UserId)
+                isAvaible = false;
 
         return isAvaible;
     }
 }
 
 [ByRefEvent]
-public record struct MindTransferedEvent(EntityUid? NewEntity, EntityUid? OldEntity);
+public record struct MindTransferedEvent(EntityUid? NewEntity, EntityUid? OldEntity, NetUserId? PlayerSession);

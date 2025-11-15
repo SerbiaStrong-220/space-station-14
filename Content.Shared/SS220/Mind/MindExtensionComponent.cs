@@ -1,4 +1,4 @@
-using Content.Shared.Ghost;
+using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Mind;
@@ -6,8 +6,17 @@ namespace Content.Shared.SS220.Mind;
 [RegisterComponent]
 public sealed partial class MindExtensionComponent : Component
 {
+    public NetUserId PlayerSession;
+
     [ViewVariables(VVAccess.ReadOnly)]
     public HashSet<EntityUid> Trail = [];
+
+    [ViewVariables(VVAccess.ReadWrite), DataField("riftAccumulator")]
+    public TimeSpan? RespawnTimer = default!;
+
+    public float RespawnAccumulatorMax = 1200f;
+
+    public bool IsIC = true;
 }
 
 
@@ -52,6 +61,12 @@ public sealed class GhostBodyListResponseEvent : EntityEventArgs
     {
         Bodies = bodies;
     }
+}
+
+[Serializable, NetSerializable]
+public sealed class SignalTimerBoundUserInterfaceState : BoundUserInterfaceState
+{
+    public TimeSpan TriggerTime;
 }
 
 [Serializable, NetSerializable]

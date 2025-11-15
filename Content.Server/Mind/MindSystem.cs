@@ -134,11 +134,17 @@ public sealed class MindSystem : SharedMindSystem
             return;
         }
 
+        //TODO: Я тут был, надо оформить
+        var oldEntity = mind.OwnedEntity;
+
         if (HasComp<VisitingMindComponent>(entity))
         {
             Log.Error($"Attempted to visit an entity that already has a visiting mind. Entity: {ToPrettyString(entity)}");
             return;
         }
+
+        var tempArgs = new MindTransferedEvent(entity, oldEntity, mind.UserId);
+        RaiseLocalEvent(ref tempArgs);
 
         mind.VisitingEntity = entity;
 
@@ -233,7 +239,8 @@ public sealed class MindSystem : SharedMindSystem
 
         var oldEntity = mind.OwnedEntity;
 
-        var tempArgs = new MindTransferedEvent(entity, oldEntity);
+        //TODO: Я тут был, надо оформить
+        var tempArgs = new MindTransferedEvent(entity, oldEntity, mind.UserId);
         RaiseLocalEvent(ref tempArgs);
 
         if (TryComp(oldEntity, out MindContainerComponent? oldContainer))
