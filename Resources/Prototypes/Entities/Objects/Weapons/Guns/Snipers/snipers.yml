@@ -42,6 +42,12 @@
         ents: []
   - type: StaticPrice
     price: 500
+  #SS220 zoom limitation 3582 start
+  - type: CursorOffsetRequiresWield
+  - type: EyeCursorOffset
+    maxOffset: 10
+    pvsIncrease: 0.3
+  #SS220 zoom limitation 3582 end
 
 - type: entity
   name: Kardashev-Mosin
@@ -127,7 +133,7 @@
     sprintModifier: 0.25
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
-    maxOffset: 3
+    maxOffset: 14 #SS220 zoom limitation 3582
     pvsIncrease: 0.3
   - type: StaticPrice
     price: 3500
@@ -174,7 +180,7 @@
 - type: entity
   name: flintlock pistol
   parent: [BaseWeaponSniper, BaseMajorContraband]
-  id: WeaponPistolFlintlock
+  id: WeaponPistolFlintlock #ToDo_SS220 isn't wotking, and i think its ok
   description: A pirate's companion. Yarrr! Uses .45 magnum ammo.
   components:
   - type: Gun

@@ -24,6 +24,12 @@
     containers:
       ballistic-ammo: !type:Container
         ents: []
+  #SS220 zoom limitation 3582 start
+  - type: CursorOffsetRequiresWield
+  - type: EyeCursorOffset
+    maxOffset: 7
+    pvsIncrease: 0.3
+  #SS220 zoom limitation 3582 end
 
 - type: entity
   name: china lake
@@ -153,6 +159,10 @@
       right:
       - state: rocket0-inhand-right
   ##ss220-end
+  #SS220 zoom limitation 3582 start
+  - type: Wieldable
+    unwieldOnUse: false
+  #SS220 zoom limitation 3582 end
 
 
 - type: entity
@@ -189,6 +199,10 @@
     steps: 2
     zeroVisible: true
   - type: Appearance
+  #SS220 zoom limitation 3582 start
+  - type: Wieldable
+    unwieldOnUse: false
+  #SS220 zoom limitation 3582 end
 
 - type: entity
   name: pirate cannon
@@ -221,13 +235,17 @@
       proto: CannonBall
       soundInsert:
         path: /Audio/Weapons/Guns/Gunshots/grenade_launcher.ogg
+  #SS220 zoom limitation 3582 start
+    - type: Wieldable
+      unwieldOnUse: false
+  #SS220 zoom limitation 3582 end
 
 - type: entity
   name: tether gun
   parent:
   - BaseItem
   - PowerCellSlotMediumItem
-  id: WeaponTetherGun
+  id: WeaponTetherGun #ToDo_SS220 isn't wotking, and idk how its should
   description: Manipulates gravity around objects to fling them at high velocities.
   components:
     - type: Item

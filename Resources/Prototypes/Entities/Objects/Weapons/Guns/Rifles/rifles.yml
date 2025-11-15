@@ -59,6 +59,12 @@
       gun_chamber: !type:ContainerSlot
   - type: StaticPrice
     price: 500
+  #SS220 zoom limitation 3582 start
+  - type: CursorOffsetRequiresWield
+  - type: EyeCursorOffset
+    maxOffset: 7
+    pvsIncrease: 0.3
+  #SS220 zoom limitation 3582 end
 
 - type: entity
   name: AKMS
@@ -231,7 +237,7 @@
 
 - type: entity
   parent: WeaponRifleLecter
-  id: WeaponRifleLecterXL8
+  id: WeaponRifleLecterXL8 #ToDo_SS220 tweak offset
   name: XL8
   description: |-
     The Experimental Lecter 8
@@ -312,7 +318,7 @@
     sprintModifier: 0.75
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
-    maxOffset: 2
+    maxOffset: 10 #SS220 zoom limitation 3582 start
     pvsIncrease: 0.2
   - type: ContainerContainer
     containers:

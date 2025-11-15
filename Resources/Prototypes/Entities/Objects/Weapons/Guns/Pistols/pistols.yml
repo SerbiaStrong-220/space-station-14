@@ -74,6 +74,14 @@
   - type: Appearance
   - type: StaticPrice
     price: 500
+  #SS220 zoom limitation 3582 start
+  - type: Wieldable
+    unwieldOnUse: false
+  - type: CursorOffsetRequiresWield
+  - type: EyeCursorOffset
+    maxOffset: 5
+    pvsIncrease: 0.3
+  #SS220 zoom limitation 3582 end
 
 - type: entity
   name: viper
@@ -113,7 +121,7 @@
 - type: entity
   name: echis
   parent: [ BaseItem]
-  id: WeaponPistolEchis
+  id: WeaponPistolEchis #ToDo_SS220 isn't wotking
   description: A cyborg-mounted weapon system based on the Viper pistol. Creates ammunition on the fly from an internal fabricator, which slowly self-charges.
   components:
   - type: Gun
