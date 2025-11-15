@@ -1,9 +1,9 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Power.SMES;
 using Content.Shared.DeviceNetwork.Components;
+using Content.Shared.Power.Components;
 using Content.Shared.SMES;
 using Robust.Server.GameObjects;
 

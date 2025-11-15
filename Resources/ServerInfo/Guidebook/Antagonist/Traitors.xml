@@ -1,114 +1,120 @@
 <Document>
-  # Предатели
+  # Traitors
 
-  - Предатель - это антагонист, нанятый Синдикатом. Они имеют доступ к различным инструментам и оружию Синдиката через [color=#a4885c]Аплинк[/color].
-  - Предатели могут использовать кодовые слова, чтобы идентифицировать себя друг с другом для сотрудничества.
-  - В раунде предателем может стать любой игрок, кроме глав отделов, капитана и сотрудников службы безопасности.
-  - Предатели должны в первую очередь сосредоточиться на том, чтобы успешно выполнить свои задачи к концу раунда.
-
-  ## Аплинк
   <Box>
-    <GuideEntityEmbed Entity="BaseUplinkRadio40TC" Caption="Аплинк"/>
+    [color=#999999][italic]"WHISKEY. ECHO. WHISKEY. LIMA. ALPHA. DELTA. АГЕНТ, ВЫ ПРИВЕДЕНЫ В ДЕЙСТВИЕ."[/italic][/color]
   </Box>
-  - [color=#a4885c]Аплинк[/color] - самый важный инструмент Предателя, так как с его помощью можно покупать инструменты и оружие за [color=#a4885c]телекристаллы[/color] (ТК).
   <Box>
+    <GuideEntityEmbed Entity="PosterContrabandSyndicateRecruitment" Caption=""/>
+  </Box>
+  Предатели — это антагонисты, нанятые [color=#ff0000]Синдикатом.[/color] Вы — тайный агент, имеющий доступ к различным инструментам и оружию через свой [bold]аплинк[/bold].
+  Вы также получаете [bold]кодовые слова[/bold] для идентификации других агентов, и скоординированная команда предателей может добиться [italic]ошеломляющих результатов.[/italic]
+
+  Кто угодно, кроме [textlink="капитана и подчинённых НаноТрейзен" link="Command"] или членов [textlink="Службы безопасности" link="Security"], может быть предателем.
+
+  ## Аплинк и его активация
+  [color=cyan]Аплинк[/color] — ваш самый важный инструмент как предателя. Вы можете обменять 20 [color=red]телекристаллов[/color] (TC), с которыми вы начинаете, на предметы, которые помогут вам в достижении ваших целей.
+
+  Нажав [color=yellow][bold][keybind="OpenCharacterMenu"][/bold][/color], вы увидите свой личный код аплинка. [bold]Установив этот код в качестве мелодии звонка на своем ПДА, вы откроете аплинк.[/bold]
+  Нажав [color=yellow][bold][keybind="OpenCharacterMenu"] [/bold][/color] также позволяет вам просматривать свои цели и кодовые слова.
+
+  Если у вас нет КПК при активации, вам будет предоставлен [color=cyan]имплант связи[/color] [bold]за полную [color=red]TC[/color] стоимость импланта.[/bold]
+  Активировать его можно из панели быстрого доступа.
+  <Box>
+    <GuideEntityEmbed Entity="PassengerPDA" Caption="ПДА"/>
     <GuideEntityEmbed Entity="Telecrystal" Caption="Телекристаллы"/>
-  </Box>
-  - [color=#a4885c]Телекристаллы[/color] даются в самом начале, чтобы дать предателям преимущество на станции. Другие предатели могут обменивать свои [color=#a4885c]телекристаллы[/color] друг с другом, повышая их обычное количество.
-  - Использование [color=#a4885c]КПК[/color] и установка нужного рингтона-кода к аплинку даёт вам множество возможностей для борьбы со станцией и её экипажем.
-  <Box>
-  <GuideEntityEmbed Entity="PassengerPDA" Caption="КПК"/>
-  </Box>
-  Не забудьте заблокировать свой [color=#a4885c]КПК[/color], чтобы никто не смог увидеть аплинк!
-  - Различные приспособления включают:
-  <Box>
-    <GuideEntityEmbed Entity="WeaponPistolViper" Caption="Пистолеты и винтовки"/>
-    <GuideEntityEmbed Entity="FireAxe" State="icon" Caption="Ближнее оружие"/>
-    <GuideEntityEmbed Entity="C4" Caption=" Взрывчатку"/>
-    <GuideEntityEmbed Entity="Syringe" Caption="Импланты"/>
-    <GuideEntityEmbed Entity="ClothingBackpackDuffelSyndicate" Caption="Различные наборы"/>
+    <GuideEntityEmbed Entity="BaseUplinkRadio" Caption="Аплинк имплант"/>
   </Box>
 
-  ## Цели
+  [bold]Обязательно закройте аплинк в вашем ПДА, чтобы никто другой не мог его увидеть.[/bold] Вы же не хотите, чтобы [color=#cb0000]Служба безопасности[/color] заметила его и конфисковала!
 
-  - Став предателем, вы получите список задач, начиная от побега живым, кражи чего-то, и заканчивая убийством. Использование [color=#a4885c]Аплинка[/color] поможет вам справиться с большинством из этих задач.
+  Имплантированный аплинк обычно недоступен для других людей, поэтому он не имеют никаких мер безопасности. Однако его можно извлечь с помощью пустого имплантора.
 
-  ## Список возможных целей
-
-  - Убить или не дать покинуть станцию случайному не предателю.
-  - Убить или не дать покинуть станцию случайному предателю.
-  - Убить или не дать покинуть станцию случайному главе отдела.
-  - Не дать умереть случайно выбранному предателю.
-  - Сбежать на эвакуационном шаттле живым и без наручников.
-  - Помогите случайно выбранному предателю завершить 2/3 его целей.
-  - Умереть славной смертью.
-  - Украсть у Капитана [color=#a4885c]ID карту[/color].
   <Box>
-    <GuideEntityEmbed Entity="CaptainIDCard" Caption="ID карта капитана"/>
+    <GuideEntityEmbed Entity="WeaponPistolCobra" Caption="Вооружение"/>
+    <GuideEntityEmbed Entity="MagazineBoxLightRifle" State="icon" Caption="Боеприпасы"/>
+    <GuideEntityEmbed Entity="C4" Caption="Взрывчатка"/>
+    <GuideEntityEmbed Entity="ClothingOuterHardsuitSyndie" Caption="Экипировка"/>
+    <GuideEntityEmbed Entity="Stimpack" Caption="Химикаты"/>
   </Box>
-  - Украсть у Капитана [color=#a4885c]Антикварный Лазерный Пистолет[/color].
   <Box>
-    <GuideEntityEmbed Entity="WeaponAntiqueLaser" Caption="Капитанский Антикварный Лазерный Пистолет"/>
+    <GuideEntityEmbed Entity="ChameleonProjector" Caption="Обман"/>
+    <GuideEntityEmbed Entity="Emag" Caption="Сбой"/>
+    <GuideEntityEmbed Entity="StorageImplanter" Caption="Импланты"/>
+    <GuideEntityEmbed Entity="MobMonkeySyndicateAgentNukeops" Caption="Союзники"/>
+    <GuideEntityEmbed Entity="ClothingEyesGlassesOutlawGlasses" Caption="Безделушки"/>
   </Box>
-  - Украсть у Капитана [color=#a4885c]Джетпак[/color].
 
-  The purchases that you make should be to help you with your objectives. Some gear may not be of use to you, and you'll have to choose between being sneaky or going loud.
+  Покупки, которые вы делаете, должны помогать вам в достижении ваших целей. Некоторые предметы снаряжения могут оказаться вам не нужны, и вам придется выбирать между скрытностью и открытостью.
 
-  ## Coordination
-  Codewords are words or phrases that every traitor will know. They provide a discreet way to identify or establish contact with a fellow traitor, which can be useful if your objectives include [italic][color=cyan]helping them with their objectives.[/color][/italic]
+  ## Координация
+  Кодовые слова — это слова или фразы, которые знают все предатели. Они позволяют незаметно идентифицировать или установить контакт с другим предателем, что может быть полезно, если ваши цели включают [italic][color=cyan]помощь им в достижении их целей.[/color][/italic]
 
-  When you find some friends, [bold]you can withdraw [color=red]telecrystals[/color] from your uplink to give to them.[/bold] They can put these in their own uplink to spend for themselves.
+  Когда вы найдете коллег по скрытой деятельности, [bold]вы можете снять [color=red]телекристаллы[/color] со своего аплинка, чтобы отдать их им.[/bold] Они могут поместить их в свой аплинк, чтобы потратить их.
 
-  Some offers available on your uplink require more than 20 TC to purchase, so if you want them you'll have to share.
+  Некоторые предложения, доступные на вашем аплинке, требуют более 20 TC для покупки, поэтому, если вы хотите их, вам придется поделиться.
 
-  ## Assassination
-  One of your objectives may be to [italic][color=cyan]kill or maroon a crewmember.[/color][/italic]
+  ## Убийство
+  Одной из ваших целей может быть [italic][color=cyan]убийство или изоляция члена экипажа.[/color][/italic]
 
-  You can [color=cyan]maroon[/color] your target by [bold]preventing them from reaching CentComm[/bold] via the evacuation shuttle or an escape pod.
+  Вы можете [color=cyan]изолировать[/color] свою цель, [bold]не давая ей добраться до Станции Центрального Командования (АСН "Севастополь")[/bold] на эвакуационном шаттле или спасательной капсуле.
 
-  If you can't maroon your target or they're too important to leave alive, you'll have to get your hands dirty and [color=cyan]murder[/color] them. Make sure your target is not alive when the [bold]evacuation shuttle gets to CentComm,[/bold] and don't let them be resuscitated.
+  Если вы не можете этого сделать или она слишком важна, чтобы оставить ее в живых, вам придется запачкать руки и [color=cyan]убить[/color] ее. Убедитесь, что ваша цель не жива, когда [bold]эвакуационный челнок прибудет на Станцию Центрального Командования (АСН "Севастополь")[/bold]
 
-  Remember, the Syndicate want only your targets dead. [color=red]Try to avoid mass murder or major damage to the station,[/color] as the more innocent lives you take, the more of a liability you become.
+  Помните, синдикат хочет только смерти ваших целей. [color=red]Старайтесь избегать массовых убийств или серьезных повреждений станции,[/color] поскольку чем больше невинных жизней вы унесете, тем большей обузой вы станете.
 
-  ## Evasion & Self-Termination
-  Your objectives may require you to [italic][color=cyan]make it to CentComm without being killed or captured.[/color][/italic] Don't let [color=#cb0000]Security[/color] stop you, complete your other objectives and [bold]come back alive.[/bold]
+  ## Уклонение и самоуничтожение
+  Ваши задачи могут потребовать от вас [italic][color=cyan]добраться до Станции Центрального Командования (АСН "Севастополь"), не будучи убитым или захваченным.[/color][/italic] Не позволяйте [color=#cb0000]охране[/color] остановить вас, выполните другие задачи и [bold]вернитесь живым.[/bold]
 
-  Alternatively, your objectives may require you to [italic][color=cyan]die a glorious death.[/color][/italic] [bold]Make sure you don't come back from the dead,[/bold] or else you may wake up in cuffs.
+  В качестве альтернативы, ваши задачи могут потребовать от вас [italic][color=cyan]погибнуть славной смертью.[/color][/italic] [bold]Убедитесь, что вы не вернетесь из мертвых,[/bold] иначе вы можете проснуться в наручниках.
 
-  ## Appropriation
-  More often than not, you'll have to [italic][color=cyan]steal a possession of a department head.[/color][/italic]
+  ## Присвоение
 
-  The target may be in their office, or on their person. It may become necessary to kill whoever is carrying it, if you cannot pickpocket them.
+  Чаще всего вам придется [italic][color=cyan]украсть имущество начальника отдела.[/color][/italic]
 
-  Some of the things you may be tasked with include:
-  - Stealing the [color=yellow]Captain[/color]'s [bold]ID Card[/bold], [bold]antique laser pistol[/bold], [bold]jetpack[/bold], or [bold]nuclear authentication disk[/bold].
+  Цель может находиться в  офисе или при главе. Если вы не можете украсть её или получить другим путём, может возникнуть необходимость ввести в критическое состояние  того, кто её носит.
+
+  ## Эвакуационный шаттл
+
+  Помните перелёты в космосе представляют огромную опасность, несмотря на кажущееся спокойствие. Синдикат не разрешает никаких враждебных действий или попыток краж на эвакуационных шаттлах.
+
+  Среди ваших задач могут быть следующие:
+  - Украсть у [color=yellow]капитана[/color] [bold]золотую ID карту[/bold], [bold]антикварный лазерный пистолет[/bold], [bold]реактивный ранец[/bold] или [bold]диск ядерной аутентификации[/bold].
   <Box>
-    <GuideEntityEmbed Entity="JetpackCaptainFilled" Caption="Джетпак Капитана"/>
+    <GuideEntityEmbed Entity="CaptainIDCard" Caption=""/>
+    <GuideEntityEmbed Entity="WeaponAntiqueLaser" Caption=""/>
+    <GuideEntityEmbed Entity="JetpackCaptainFilled" Caption=""/>
+    <GuideEntityEmbed Entity="NukeDisk" Caption=""/>
   </Box>
-  - Украсть у Главного Врача [color=#a4885c]Гипоспрей[/color].
+  - Кража у [color=#5b97bc]главного врача[/color] или его подопечных [bold]гипоспрея[/bold] или [bold]портативного монитора экипажа[/bold].
   <Box>
-    <GuideEntityEmbed Entity="Hypospray" Caption="Гипоспрей Главврача"/>
+    <GuideEntityEmbed Entity="Hypospray" Caption=""/>
+    <GuideEntityEmbed Entity="HandheldCrewMonitorEmpty" Caption=""/>
   </Box>
-  - Украсть у Научного Руководителя [color=#a4885c]Скафандр[/color].
+  - Кража у [color=#c96dbf]научного руководителя[/color] [bold]экспериментального скафандра[/bold] или [bold]ручного телепортера[/bold].
   <Box>
-    <GuideEntityEmbed Entity="ClothingOuterHardsuitRd" Caption="Скафандр Научрука"/>
+    <GuideEntityEmbed Entity="ClothingOuterHardsuitRd" Caption=""/>
+    <GuideEntityEmbed Entity="HandTeleporter" Caption=""/>
   </Box>
-  - Украсть у Научного Руководителя [color=#a4885c]Ручной Телепорт[/color].
+  - Кража у [color=#cb0000]Главы службы безопасности[/color][bold]мультифазового энергетического пистолета[/bold] или [bold]секретных документов[/bold].
   <Box>
-    <GuideEntityEmbed Entity="HandTeleporter" Caption="Ручной Телепорт"/>
+    <GuideEntityEmbed Entity="WeaponMultiPhaseEnergyGun" Caption=""/>
+    <GuideEntityEmbed Entity="BookSecretDocuments" Caption=""/>
   </Box>
-  - Украсть у Старшего Инженера [color=#a4885c]Продвинутные Магнитные Сапоги[/color].
+  - Кража у [color=#f39f27]старшего инженера[/color] [bold]продвинутых магнитных ботинок[/bold] или [bold]продвинутого РСУ[/bold].
   <Box>
-    <GuideEntityEmbed Entity="ClothingShoesBootsMagAdv" Caption="Продвинутые Магнитные Сапоги"/>
+    <GuideEntityEmbed Entity="ClothingShoesBootsMagAdv" Caption=""/>
+    <GuideEntityEmbed Entity="RCDCE" Caption=""/>
   </Box>
-  - Украсть [color=#a4885c]Диск Ядерной Авторизации[/color].
+  - Кража у [color=#b18644]квартирмейстера[/color] [bold]цифровой доски запросов[/bold] или его личного [bold]кастета[/bold].
   <Box>
-    <GuideEntityEmbed Entity="NukeDisk" Caption="Диск Ядерной Авторизации"/>
+    <GuideEntityEmbed Entity="BoxFolderQmClipboard" Caption=""/>
+    <GuideEntityEmbed Entity="EngravedKnuckleduster" Caption=""/>
   </Box>
-  - Украсть [color=#a4885c]Мясо корги[/color].
+  - Разделать Иана, собаку [color=#9fed58]главы персонала[/color], и получить [bold]мясо корги[/bold].
   <Box>
-  <GuideEntityEmbed Entity="MobCorgiIan" Caption="Корги"/>
-  <GuideEntityEmbed Entity="FoodMeatCorgi" Caption="Мясо корги"/>
+    <GuideEntityEmbed Entity="MobCorgiIan" Caption=""/>
+    <GuideEntityEmbed Entity="FoodMeatCorgi" Caption=""/>
   </Box>
 
 </Document>
