@@ -45,9 +45,11 @@ public sealed class MouthContainerSystem : EntitySystem
     private void OnGetVerb(Entity<MouthContainerComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
         var user = args.User;
+        if (user == args.Target)
+            return;
 
         var isAlive = !TryComp<MobStateComponent>(user, out var mobState) || _mobStateSystem.IsAlive(user, mobState);
-        if (user != args.Target && _hands.GetHandCount(user) <= 0 || !isAlive)
+        if (!isAlive || _hands.GetHandCount(user) <= 0)
             return;
 
         var toInsert = _hands.GetActiveItem(user);
