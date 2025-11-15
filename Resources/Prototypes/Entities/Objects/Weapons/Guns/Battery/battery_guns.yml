@@ -31,12 +31,12 @@
     startingCharge: 1000
   - type: StaticPrice
     price: 500
-  #SS220 zoom limitation 3582 start
+  #SS220 Zoom_tweaks 3582 start
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
     maxOffset: 7
     pvsIncrease: 0.3
-  #SS220 zoom limitation 3582 end
+  #SS220 Zoom_tweaks 3582 end
 
 - type: entity
   parent: [BaseWeaponBattery, BaseGunWieldable]
@@ -115,10 +115,10 @@
   - type: ContainerContainer
     containers:
       cell_slot: !type:ContainerSlot
-  #SS220 zoom limitation 3582 start
+  #SS220 Zoom_tweaks 3582 start
   - type: Wieldable
     unwieldOnUse: false
-  #SS220 zoom limitation 3582 end
+  #SS220 Zoom_tweaks 3582 end
 
 - type: entity
   id: BaseWeaponBatterySmall
@@ -143,14 +143,14 @@
     slots:
     - Belt
     - suitStorage
-  #SS220 zoom limitation 3582 start
+  #SS220 Zoom_tweaks 3582 start
   - type: Wieldable
     unwieldOnUse: false
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
     maxOffset: 5
     pvsIncrease: 0.3
-  #SS220 zoom limitation 3582 end
+  #SS220 Zoom_tweaks 3582 end
 
 - type: entity
   id: BaseWeaponPowerCellSmall
@@ -201,14 +201,14 @@
     proto: RedLightLaser
     fireCost: 50
   # SS220 EDIT END
-  #SS220 zoom limitation 3582 start
+  #SS220 Zoom_tweaks 3582 start
   - type: Wieldable
     unwieldOnUse: false
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
     maxOffset: 6
     pvsIncrease: 0.3
-  #SS220 zoom limitation 3582 end
+  #SS220 Zoom_tweaks 3582 end
 
 - type: entity
   name: retro laser blaster
@@ -302,14 +302,14 @@
     steps: 5
     zeroVisible: true
   - type: Appearance
-  #SS220 zoom limitation 3582 start
+  #SS220 Zoom_tweaks 3582 start
   - type: Wieldable
     unwieldOnUse: false
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
     maxOffset: 7
     pvsIncrease: 0.3
-  #SS220 zoom limitation 3582 end
+  #SS220 Zoom_tweaks 3582 end
 
 
 - type: entity
@@ -652,21 +652,21 @@
   - type: StaticPrice
     price: 260
   - type: PacifismAllowedGun
-  #SS220 zoom limitation 3582 start
+  #SS220 Zoom_tweaks 3582 start
   - type: Wieldable
     unwieldOnUse: false
-  #SS220 zoom limitation 3582 end
+  #SS220 Zoom_tweaks 3582 end
 
 - type: entity
   name: taser
-  #SS220 zoom limitation 3582 start
+  #SS220 Zoom_tweaks 3582 start
   parent: [BaseWeaponBattery, BaseSecurityContraband]
   #parent: [BaseWeaponBatterySmall, BaseSecurityContraband]
-  #SS220 zoom limitation 3582 end
+  #SS220 Zoom_tweaks 3582 end
   id: WeaponTaser
   description: A low-capacity, energy-based stun gun used by security teams to subdue targets at close range.
   components:
-  #SS220 zoom limitation 3582 start
+  #SS220 Zoom_tweaks 3582 start
   - type: Item
     heldPrefix: taser4
     size: Small
@@ -679,7 +679,7 @@
     slots:
     - Belt
     - suitStorage
-  #SS220 zoom limitation 3582 end
+  #SS220 Zoom_tweaks 3582 end
   - type: Tag
     tags:
     - Taser
@@ -692,12 +692,12 @@
     - state: mag-unshaded-0
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
-  #SS220 zoom limitation 3582 start
+  #SS220 Zoom_tweaks 3582 start
   #- type: Item
   #  heldPrefix: taser4
   #- type: Clothing
   #  quickEquip: false
-  #SS220 zoom limitation 3582 end
+  #SS220 Zoom_tweaks 3582 end
   - type: Gun
     fireRate: 0.5
     soundGunshot:
@@ -998,12 +998,12 @@
   - type: Battery
     maxCharge: 1200 # SS220-shotgun-battery
     startingCharge: 1200 # SS220-shotgun-battery
-  #SS220 zoom limitation 3582 start
+  #SS220 Zoom_tweaks 3582 start
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
     maxOffset: 5
     pvsIncrease: 0.3
-  #SS220 zoom limitation 3582 end
+  #SS220 Zoom_tweaks 3582 end
 
 - type: entity
   name: energy magnum

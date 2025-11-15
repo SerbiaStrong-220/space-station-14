@@ -48,12 +48,12 @@
         ents: []
   - type: StaticPrice
     price: 500
-  #SS220 zoom limitation 3582 start
+  #SS220 Zoom_tweaks 3582 start
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
     maxOffset: 5
     pvsIncrease: 0.3
-  #SS220 zoom limitation 3582 end
+  #SS220 Zoom_tweaks 3582 end
 
 - type: entity
   name: Bulldog
@@ -117,12 +117,12 @@
   - type: Appearance
   - type: StaticPrice
     price: 5000
-  #SS220 zoom limitation 3582 start
+  #SS220 Zoom_tweaks 3582 start
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
     maxOffset: 5
     pvsIncrease: 0.3
-  #SS220 zoom limitation 3582 end
+  #SS220 Zoom_tweaks 3582 end
 
 - type: entity
   name: double-barreled shotgun
@@ -237,10 +237,10 @@
     graph: ShotgunSawn
     node: shotgunsawn
     deconstructionTarget: null
-  #SS220 zoom limitation 3582 start
+  #SS220 Zoom_tweaks 3582 start
   - type: Wieldable
     unwieldOnUse: false
-  #SS220 zoom limitation 3582 end
+  #SS220 Zoom_tweaks 3582 end
 
 - type: entity
   name: sawn-off shotgun
@@ -289,10 +289,10 @@
     node: HDpistol
   - type: StaticPrice
     price: 0
-  #SS220 zoom limitation 3582 start
+  #SS220 Zoom_tweaks 3582 start
   - type: Wieldable
     unwieldOnUse: false
-  #SS220 zoom limitation 3582 end
+  #SS220 Zoom_tweaks 3582 end
 
 - type: entity
   name: blunderbuss

@@ -67,14 +67,14 @@
       gun_chamber: !type:ContainerSlot
   - type: StaticPrice
     price: 500
-  #SS220 zoom limitation 3582 start
+  #SS220 Zoom_tweaks 3582 start
   - type: Wieldable
     unwieldOnUse: false
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
     maxOffset: 6
     pvsIncrease: 0.3
-  #SS220 zoom limitation 3582 end
+  #SS220 Zoom_tweaks 3582 end
 
 - type: entity
   name: Atreides
@@ -183,14 +183,14 @@
     autoRecharge: true
     autoRechargeRate: 25
   - type: AmmoCounter
-  #SS220 zoom limitation 3582 start
+  #SS220 Zoom_tweaks 3582 start
   - type: Wieldable
     unwieldOnUse: false
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
     maxOffset: 7
     pvsIncrease: 0.3
-  #SS220 zoom limitation 3582 end
+  #SS220 Zoom_tweaks 3582 end
 
 
 - type: entity

@@ -83,12 +83,12 @@
     angleDecay: 16
     soundGunshot:
       path: /Audio/SS220/Weapons/Guns/Gunshots/blaster_nt.ogg
-  #SS220 zoom limitation 3582 start
+  #SS220 Zoom_tweaks 3582 start
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
     maxOffset: 7
     pvsIncrease: 0.3
-  #SS220 zoom limitation 3582 end
+  #SS220 Zoom_tweaks 3582 end
 
 - type: entity
   id: WeaponBlasterKRS

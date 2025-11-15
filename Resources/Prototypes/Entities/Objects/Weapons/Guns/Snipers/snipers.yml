@@ -42,12 +42,12 @@
         ents: []
   - type: StaticPrice
     price: 500
-  #SS220 zoom limitation 3582 start
+  #SS220 Zoom_tweaks 3582 start
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
     maxOffset: 10
     pvsIncrease: 0.3
-  #SS220 zoom limitation 3582 end
+  #SS220 Zoom_tweaks 3582 end
 
 - type: entity
   name: Kardashev-Mosin
@@ -133,7 +133,7 @@
     sprintModifier: 0.25
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
-    maxOffset: 14 #SS220 zoom limitation 3582
+    maxOffset: 14 #SS220 Zoom_tweaks 3582
     pvsIncrease: 0.3
   - type: StaticPrice
     price: 3500
