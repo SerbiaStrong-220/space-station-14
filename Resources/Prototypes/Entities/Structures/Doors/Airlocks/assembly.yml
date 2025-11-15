@@ -202,7 +202,7 @@
   suffix: Salvage
   components:
   - type: Sprite
-    sprite: SS220/Structures/Doors/Airlocks/Standart/salvage.rsi #SS220 salvage_airlock
+    sprite: SS220/Structures/Doors/Airlocks/Standard/salvage.rsi #SS220 salvage_airlock
     state: "assembly"
 
 - type: entity
