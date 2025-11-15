@@ -111,7 +111,7 @@
         - !type:ComponentCondition
           inverted: true
           components:
-          - BibleUser #Not sure, cause its on server
+          - BibleUser
         effectProto: StatusEffectForcedSleeping
         time: 3
         type: Add
@@ -127,4 +127,4 @@
         - !type:ComponentCondition
           inverted: true
           components:
-          - BibleUser #Not sure, cause its on server
+          - BibleUser
