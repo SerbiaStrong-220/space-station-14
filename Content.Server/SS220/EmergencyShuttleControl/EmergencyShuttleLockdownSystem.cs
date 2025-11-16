@@ -13,11 +13,8 @@ using Content.Shared.Station.Components;
 using Microsoft.Extensions.DependencyModel;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
-using System.Linq;
-using System.Text;
 
 namespace Content.Server.SS220.EmergencyShuttleControl;
 /// <summary>
@@ -178,14 +175,14 @@ public sealed class EmergencyShuttleLockdownSystem : EntitySystem
             playSound: false,
             colorOverride: ent.Comp.AnnounceColor);
 
-        SoundSpecifier announceAudioPath;
+        SoundSpecifier announceSound;
 
         if (ent.Comp.IsActive)
-            announceAudioPath = ent.Comp.OnActiveAudioPath;
+            announceSound = ent.Comp.ActivateSound;
         else
-            announceAudioPath = ent.Comp.OnDeactiveAudioPath;
+            announceSound = ent.Comp.DeactiveSound;
 
-        _audio.PlayGlobal(announceAudioPath, Filter.Broadcast(), true);
+        _audio.PlayGlobal(announceSound, Filter.Broadcast(), true);
     }
 
     /// <summary>

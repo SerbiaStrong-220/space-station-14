@@ -59,7 +59,7 @@ public sealed partial class EmergencyShuttleLockdownComponent : Component
     public SoundSpecifier ActivateSound = new SoundPathSpecifier("/Audio/Misc/notice1.ogg");
 
     [DataField]
-    public SoundSpecifier OnDeactiveAudioPath = new SoundPathSpecifier("/Audio/Misc/notice1.ogg");
+    public SoundSpecifier DeactiveSound = new SoundPathSpecifier("/Audio/Misc/notice1.ogg");
 
     [DataField]
     public LocId AnnounceTitle = string.Empty;
