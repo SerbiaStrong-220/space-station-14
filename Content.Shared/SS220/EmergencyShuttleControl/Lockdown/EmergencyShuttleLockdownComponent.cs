@@ -54,7 +54,7 @@ public sealed partial class EmergencyShuttleLockdownComponent : Component
     public Color AnnounceColor = default;
 
     [DataField]
-    public string OnActiveAudioPath = "/Audio/Misc/notice1.ogg";
+    public SoundSpecifier ActivateSound = new SoundPathSpecifier("/Audio/Misc/notice1.ogg");
 
     [DataField]
     public string OnDeactiveAudioPath = "/Audio/Misc/notice1.ogg";
