@@ -13,6 +13,7 @@ public sealed class AdditionalRuleChanceSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly GameTicker _ticker = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
+
     public override void Initialize()
     {
         base.Initialize();
