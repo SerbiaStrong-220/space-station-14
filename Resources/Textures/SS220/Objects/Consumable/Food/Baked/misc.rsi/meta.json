@@ -1,12 +1,15 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "waffles sprited by @mishutka09",
+    "copyright": "waffles sprited by @mishutka09, tray sprited by EstKemran (Github)",
     "size": {
         "x": 32,
         "y": 32
     },
     "states": [
+        {
+            "name": "tray"
+        },
         {
             "name": "waffles"
         },
