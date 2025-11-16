@@ -14,6 +14,9 @@
       "name": "primed"
     },
     {
+      "name": "equipped-BELT"
+    },
+    {
       "name": "inhand-left",
       "directions": 4
     },
