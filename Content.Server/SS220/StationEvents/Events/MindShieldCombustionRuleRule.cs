@@ -17,6 +17,7 @@ public sealed class MindShieldCombustionRule : StationEventSystem<MindShieldComb
 {
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+
     protected override void Started(EntityUid uid, MindShieldCombustionRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {
         base.Started(uid, component, gameRule, args);
