@@ -286,8 +286,8 @@
     quickEquip: true
   - type: IngestionBlocker
   - type: TemperatureProtection
-    heatingCoefficient: 0.01
-    coolingCoefficient: 0.2
+    heatingCoefficient: 0.5
+    coolingCoefficient: 0.8
   - type: FireProtection
     reduction: 0.15 # not fully sealed so less protection
   - type: IdentityBlocker
@@ -314,8 +314,8 @@
     quickEquip: true
   - type: IngestionBlocker
   - type: TemperatureProtection
-    heatingCoefficient: 0.01
-    coolingCoefficient: 0.2
+    heatingCoefficient: 0.3
+    coolingCoefficient: 0.8
   - type: FireProtection
     reduction: 0.2
   - type: PressureProtection
@@ -613,8 +613,6 @@
     modifiers:
       coefficients:
         Blunt: 0.95
-  - type: StaminaResistance
-    damageCoefficient: 0.95
   - type: Construction
     graph: cardHelmet
     node: cardhelmet

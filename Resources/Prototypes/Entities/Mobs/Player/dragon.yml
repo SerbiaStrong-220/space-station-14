@@ -103,7 +103,6 @@
       types: {}
   - type: StatusEffects # Overwriting basesimplemob to remove flash, getting flashed as dragon just feelsbad
     allowed:
-    - Stutter
     - Electrocution
     - TemporaryBlindness
     - Pacified
@@ -203,6 +202,7 @@
   - type: GuideHelp
     guides:
     - MinorAntagonists
+  - type: Insulated # SS220 Insulated Dragon and Carp
 
 - type: entity
   categories: [ HideSpawnMenu ]

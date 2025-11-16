@@ -76,7 +76,7 @@
         - id: C4
         - id: PinpointerNuclear
         - id: WeaponPulsePistol
-        - id: StimpackMini
+        - id: StimpackERT
         - id: LaserCarabinePowerCell
         - id: LaserCarabinePowerCell
         - id: LaserCarabinePowerCell
@@ -101,7 +101,7 @@
         - id: C4
         - id: PinpointerNuclear
         - id: WeaponPulsePistol
-        - id: StimpackMini
+        - id: StimpackERT
         - id: LaserCarabinePowerCell
         - id: LaserCarabinePowerCell
         - id: LaserCarabinePowerCell
@@ -133,3 +133,4 @@
         - id: LaserCarabinePowerCell
         - id: LaserCarabinePowerCell
         - id: LaserCarabinePowerCell
+        - id: StimpackERT

@@ -4,7 +4,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.ChemicalAdaptation;
 
-public abstract class SharedChemicalAdaptationSystem : EntitySystem
+public sealed class ChemicalAdaptationSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _time = default!;
 

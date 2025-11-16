@@ -66,9 +66,9 @@
   id: ClothingOuterHardsuitSyndieFake
   components:
     - type: Sprite
-      sprite: Clothing/OuterClothing/Hardsuits/syndicate.rsi
+      sprite: SS220/Clothing/OuterClothing/Hardsuits/syndicate.rsi # SS220-hardsuir-resprite
     - type: Clothing
-      sprite: Clothing/OuterClothing/Hardsuits/syndicate.rsi
+      sprite: SS220/Clothing/OuterClothing/Hardsuits/syndicate.rsi # SS220-hardsuir-resprite
     - type: ToggleableClothing
       clothingPrototype: ClothingHeadHelmetHardsuitSyndieFake
     - type: SpecialSounds
@@ -85,9 +85,9 @@
   description: An elite version of the blood-red hardsuit, with improved mobility and fireproofing. This one is just a cloth replica.
   components:
     - type: Sprite
-      sprite: Clothing/OuterClothing/Hardsuits/syndieelite.rsi
+      sprite: SS220/Clothing/OuterClothing/Hardsuits/syndieelite.rsi # SS220-hardsuir-resprite
     - type: Clothing
-      sprite: Clothing/OuterClothing/Hardsuits/syndieelite.rsi
+      sprite: SS220/Clothing/OuterClothing/Hardsuits/syndieelite.rsi # SS220-hardsuir-resprite
     - type: ToggleableClothing
       clothingPrototype: ClothingHeadHelmetHardsuitSyndieEliteFake
     - type: SpecialSounds
@@ -104,9 +104,9 @@
   description: A heavily armored and agile advanced hardsuit specifically designed for field medic operations. This one is just a cloth replica.
   components:
     - type: Sprite
-      sprite: Clothing/OuterClothing/Hardsuits/syndiemedic.rsi
+      sprite: SS220/Clothing/OuterClothing/Hardsuits/syndiemedic.rsi # SS220-hardsuir-resprite
     - type: Clothing
-      sprite: Clothing/OuterClothing/Hardsuits/syndiemedic.rsi
+      sprite: SS220/Clothing/OuterClothing/Hardsuits/syndiemedic.rsi # SS220-hardsuir-resprite
     - type: ToggleableClothing
       clothingPrototype: ClothingHeadHelmetHardsuitSyndieMedicFake
     - type: SpecialSounds
@@ -123,9 +123,9 @@
   description: A bulked up version of the blood-red hardsuit, purpose-built for the commander of a syndicate operative squad. This one is just a cloth replica.
   components:
     - type: Sprite
-      sprite: Clothing/OuterClothing/Hardsuits/syndiecommander.rsi
+      sprite: SS220/Clothing/OuterClothing/Hardsuits/syndiecommander.rsi # SS220-hardsuir-resprite
     - type: Clothing
-      sprite: Clothing/OuterClothing/Hardsuits/syndiecommander.rsi
+      sprite: SS220/Clothing/OuterClothing/Hardsuits/syndiecommander.rsi # SS220-hardsuir-resprite
     - type: ToggleableClothing
       clothingPrototype: ClothingHeadHelmetHardsuitSyndieCommanderFake
     - type: SpecialSounds
@@ -142,9 +142,9 @@
   description: A suit made by the cutting edge R&D department at cybersun to be hyper resilient. This one is just a cloth replica.
   components:
     - type: Sprite
-      sprite: Clothing/OuterClothing/Hardsuits/cybersun.rsi
+      sprite: SS220/Clothing/OuterClothing/Hardsuits/cybersun.rsi # SS220-hardsuir-resprite
     - type: Clothing
-      sprite: Clothing/OuterClothing/Hardsuits/cybersun.rsi
+      sprite: SS220/Clothing/OuterClothing/Hardsuits/cybersun.rsi # SS220-hardsuir-resprite
     - type: ToggleableClothing
       clothingPrototype: ClothingHeadHelmetHardsuitCybersunFake
     - type: SpecialSounds
