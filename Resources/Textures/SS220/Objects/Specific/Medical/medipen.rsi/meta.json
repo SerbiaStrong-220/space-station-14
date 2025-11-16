@@ -122,6 +122,14 @@
       "name": "dexpen_empty"
     },
     {
+      "name": "medipen-inhand-left",
+        "directions": 4
+    },
+    {
+      "name": "medipen-inhand-right",
+        "directions": 4
+    },
+    {
       "name": "base-needle-inhand-left",
         "directions": 4
     },
