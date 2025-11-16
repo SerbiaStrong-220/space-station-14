@@ -17,6 +17,7 @@ using Robust.Shared.GameObjects;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
 using System.Linq;
+using System.Text;
 
 namespace Content.Server.SS220.EmergencyShuttleControl;
 /// <summary>
@@ -37,12 +38,12 @@ public sealed class EmergencyShuttleLockdownSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<EmergencyShuttleLockdownComponent, ComponentStartup>(OnComponentStartup);
+        SubscribeLocalEvent<EmergencyShuttleLockdownComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<EmergencyShuttleLockdownComponent, ComponentShutdown>(OnComponentShutdown);
 
         SubscribeLocalEvent<CommunicationConsoleCallShuttleAttemptEvent>(OnShuttleCallAttempt);
 
-        SubscribeLocalEvent<EmergencyShuttleLockdownComponent, EmergencyShuttleLockdownToggleActionEvent>(OnEmergencyShuttleLockdownToggleAction);
+        SubscribeLocalEvent<EmergencyShuttleLockdownComponent, EmergencyShuttleLockdownToggleActionEvent>(OnToggleAction);
         SubscribeLocalEvent<EmergencyShuttleLockdownComponent, EmergencyShuttleLockdownActivateActionEvent>(OnEmergencyShuttleLockdownActivateActionEvent);
         SubscribeLocalEvent<EmergencyShuttleLockdownComponent, EmergencyShuttleLockdownDeactivateActionEvent>(OnEmergencyShuttleLockdownDeactivateActionEvent);
 
@@ -50,7 +51,7 @@ public sealed class EmergencyShuttleLockdownSystem : EntitySystem
     }
 
     #region Handlers
-    private void OnComponentStartup(Entity<EmergencyShuttleLockdownComponent> ent, ref ComponentStartup args)
+    private void OnMapInit(Entity<EmergencyShuttleLockdownComponent> ent, ref MapInitEvent args)
     {
         if (ent.Comp.IsActivatedOnStartup)
             Activate(ent);
@@ -58,25 +59,26 @@ public sealed class EmergencyShuttleLockdownSystem : EntitySystem
 
     private void OnComponentShutdown(Entity<EmergencyShuttleLockdownComponent> ent, ref ComponentShutdown args)
     {
-        if (ent.Comp.IsActivated)
-            Deactivate(ent);
+        Deactivate(ent);
     }
 
     private void OnShuttleCallAttempt(ref CommunicationConsoleCallShuttleAttemptEvent ev)
     {
-        var lockdowns = _entityManager.AllComponents<EmergencyShuttleLockdownComponent>();
-        var temp = lockdowns.Where(x => x.Component.IsActivated);
-        if (temp.Count() > 0)
+        var query = EntityQueryEnumerator<EmergencyShuttleLockdownComponent>();
+        while (query.MoveNext(out _, out var comp))
         {
+            if (!comp.IsActive)
+                continue;
+
             ev.Cancelled = true;
-            ev.Reason = Loc.GetString(temp.First().Component.WarningMessage);
-            return;
+            ev.Reason = Loc.GetString(comp.WarningMessage);
+            break;
         }
     }
 
-    private void OnEmergencyShuttleLockdownToggleAction(Entity<EmergencyShuttleLockdownComponent> ent, ref EmergencyShuttleLockdownToggleActionEvent args)
+    private void OnToggleAction(Entity<EmergencyShuttleLockdownComponent> ent, ref EmergencyShuttleLockdownToggleActionEvent args)
     {
-        if (ent.Comp.IsActivated)
+        if (ent.Comp.IsActive)
             Deactivate(ent);
         else
             Activate(ent);
@@ -108,12 +110,14 @@ public sealed class EmergencyShuttleLockdownSystem : EntitySystem
 
     private void Activate(Entity<EmergencyShuttleLockdownComponent> ent)
     {
-        if (!_emergency.EmergencyShuttleArrived && ValidateGridInStation(ent))
+        if (!ent.Comp.IsActive &&
+            !_emergency.EmergencyShuttleArrived &&
+            ValidateGridInStation(ent))
         {
-            ent.Comp.IsActivated = true;
+            ent.Comp.IsActive = true;
             _roundEnd.CancelRoundEndCountdown(ent.Owner, false);
 
-            var args = new EmergencyShuttleLockdownActiveEvent();
+            var args = new EmergencyShuttleLockdownActivatedEvent();
             RaiseLocalEvent(ent, ref args);
 
             SendAnounce(ent);
@@ -122,9 +126,10 @@ public sealed class EmergencyShuttleLockdownSystem : EntitySystem
 
     private void Deactivate(Entity<EmergencyShuttleLockdownComponent> ent)
     {
-        if (!_emergency.EmergencyShuttleArrived && ValidateGridInStation(ent))
+        if (ent.Comp.IsActive &&
+            !_emergency.EmergencyShuttleArrived)
         {
-            ent.Comp.IsActivated = false;
+            ent.Comp.IsActive = false;
 
             var args = new EmergencyShuttleLockdownDeactiveEvent();
             RaiseLocalEvent(ent, ref args);
@@ -137,7 +142,7 @@ public sealed class EmergencyShuttleLockdownSystem : EntitySystem
     {
         LocId? messageBody;
 
-        if (ent.Comp.IsActivated)
+        if (ent.Comp.IsActive)
             messageBody = ent.Comp.OnActiveMessage;
         else
             messageBody = ent.Comp.OnDeactiveMessage;
@@ -173,14 +178,14 @@ public sealed class EmergencyShuttleLockdownSystem : EntitySystem
             playSound: false,
             colorOverride: ent.Comp.AnnounceColor);
 
-        string announceAudioPath;
+        SoundSpecifier announceAudioPath;
 
-        if (ent.Comp.IsActivated)
+        if (ent.Comp.IsActive)
             announceAudioPath = ent.Comp.OnActiveAudioPath;
         else
             announceAudioPath = ent.Comp.OnDeactiveAudioPath;
 
-        _audio.PlayGlobal(new ResolvedPathSpecifier(announceAudioPath), Filter.Broadcast(), true);
+        _audio.PlayGlobal(announceAudioPath, Filter.Broadcast(), true);
     }
 
     /// <summary>

@@ -1,5 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Robust.Shared.Audio;
+
 namespace Content.Shared.SS220.EmergencyShuttleControl;
 
 /// <summary>
@@ -10,71 +12,71 @@ namespace Content.Shared.SS220.EmergencyShuttleControl;
 public sealed partial class EmergencyShuttleLockdownComponent : Component
 {
     [ViewVariables(VVAccess.ReadOnly)]
-    public bool IsActivated = default;
+    public bool IsActive;
 
     /// <summary>
     ///     It allows the component to be activated at startup.
     /// </summary>
     [DataField]
-    public bool IsActivatedOnStartup = default;
+    public bool IsActivatedOnStartup;
 
     [DataField]
-    public bool IsInHandActive = default;
+    public bool IsInHandActive;
 
     /// <summary>
     ///     Enables display of location in announce.
     /// </summary>
     [DataField]
-    public bool IsDisplayLocation = default;
+    public bool IsDisplayLocation;
 
     /// <summary>
     ///     Enables display of coordinates in announce.
     /// </summary>
     [DataField]
-    public bool IsDisplayCoordinates = default;
+    public bool IsDisplayCoordinates;
 
 
     /// <summary>
     ///     Enables checking location at a station for activation. If this is false, the component can always be activated.
     /// </summary>
     [DataField]
-    public bool IsOnlyInStationActive = default;
+    public bool IsOnlyInStationActive;
 
     /// <summary>
     ///     Message above communication console, when shuttle is called during lockdown.
     /// </summary>
     [DataField]
-    public LocId WarningMessage = default;
+    public LocId WarningMessage = string.Empty;
 
 
 
     #region Announce
 
     [DataField]
-    public Color AnnounceColor = default;
+    public Color AnnounceColor = Color.Red;
 
     [DataField]
     public SoundSpecifier ActivateSound = new SoundPathSpecifier("/Audio/Misc/notice1.ogg");
 
     [DataField]
-    public string OnDeactiveAudioPath = "/Audio/Misc/notice1.ogg";
+    public SoundSpecifier OnDeactiveAudioPath = new SoundPathSpecifier("/Audio/Misc/notice1.ogg");
 
     [DataField]
-    public LocId AnnounceTitle = default;
+    public LocId AnnounceTitle = string.Empty;
 
     /// <summary>
     ///     The body of the message in the announce if IsActivated.
     ///     If this is null, there will be no notification at all.
     /// </summary>
     [DataField]
-    public LocId? OnActiveMessage = default!;
+    public LocId? OnActiveMessage;
 
     /// <summary>
     ///     The body of the message in the announce if !IsActivated.
     ///     If this is null, there will be no notification at all.
     /// </summary>
     [DataField]
-    public LocId? OnDeactiveMessage = default!;
+    public LocId? OnDeactiveMessage;
 
     #endregion
 }

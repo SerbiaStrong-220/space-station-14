@@ -6,4 +6,4 @@ namespace Content.Shared.SS220.EmergencyShuttleControl.Lockdown;
 ///     This is invoked when the <see cref="EmergencyShuttleLockdownComponent"/> has been activated by EntitySystem.
 /// </summary>
 [ByRefEvent]
-public record struct EmergencyShuttleLockdownActiveEvent;
+public record struct EmergencyShuttleLockdownActivatedEvent;
