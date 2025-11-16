@@ -2,6 +2,7 @@ using System.Collections.Frozen;
 using System.Text.RegularExpressions;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Chat.Prototypes;
+using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
 using Content.Shared.Radio;
 using Content.Shared.Speech;
@@ -140,6 +141,16 @@ public abstract partial class SharedChatSystem : EntitySystem
         if (!(input.StartsWith(RadioChannelPrefix) || input.StartsWith(RadioChannelAltPrefix)))
             return;
 
+        // SS220-add-radio-frequency-end
+        if (input.StartsWith(RadioChannelPrefix) && char.IsWhiteSpace(input[1]))
+        {
+            // we live whitespace, cause next it behaves like channel key
+            prefix = input[..2];
+            output = input[2..];
+            return;
+        }
+        // SS220-add-radio-frequency-end
+
         if (!_keyCodes.TryGetValue(char.ToLower(input[1]), out _))
             return;
 
@@ -162,10 +173,12 @@ public abstract partial class SharedChatSystem : EntitySystem
         string input,
         out string output,
         out RadioChannelPrototype? channel,
+        out FixedPoint2? frequency, // SS220-add-frequency-radio
         bool quiet = false)
     {
         output = input.Trim();
         channel = null;
+        frequency = null; // SS220-add-frequency-radio
 
         if (input.Length == 0)
             return false;
@@ -180,7 +193,8 @@ public abstract partial class SharedChatSystem : EntitySystem
         if (!(input.StartsWith(RadioChannelPrefix) || input.StartsWith(RadioChannelAltPrefix)))
             return false;
 
-        if (input.Length < 2 || char.IsWhiteSpace(input[1]))
+        // if (input.Length < 2 || char.IsWhiteSpace(input[1])) // [wizden-code] SS220-add-frequency-radio-begin
+        if (input.Length < 2) // SS220-add-frequency-radio-begin
         {
             output = SanitizeMessageCapital(input[1..].TrimStart());
             if (!quiet)
@@ -201,6 +215,11 @@ public abstract partial class SharedChatSystem : EntitySystem
                 _prototypeManager.TryIndex(ev.Channel, out channel);
             return true;
         }
+
+        // SS220-add-frequency-radio-begin
+        if (char.IsWhiteSpace(channelKey) && TryGetFrequencyRadioChannel(source, out channel, out frequency))
+            return true;
+        // SS220-add-frequency-radio-end
 
         if (!_keyCodes.TryGetValue(channelKey, out channel) && !quiet)
         {
