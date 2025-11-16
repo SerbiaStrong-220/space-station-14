@@ -78,8 +78,11 @@
         - Carp
         - DoorBumpOpener
         - CannotSuicide
-    - type: ReplacementAccent
-      accent: genericAggressive
+  # - type: ReplacementAccent #SS220 Dragon & Carp Language Begin
+  #   accent: genericAggressive
+    - type: Language
+      availableLanguages:
+      - id: Carpish #SS220 Dragon & Carp Language End
     - type: Speech
       speechVerb: LargeMob
     - type: InteractionPopup
@@ -116,6 +119,11 @@
       sprite: Mobs/Aliens/Carps/magic.rsi
     - type: TypingIndicator
       proto: guardian
+    - type: Language #SS220 Dragon & Carp Language Begin
+      availableLanguages:
+      - id: Carpish
+      - id: Galactic
+        canSpeak: false #SS220 Dragon & Carp Language End
 
 - type: entity
   name: holocarp
@@ -139,6 +147,11 @@
             - Opaque
     - type: TypingIndicator
       proto: robot
+    - type: Language #SS220 Dragon & Carp Language Begin
+      availableLanguages:
+      - id: Carpish
+      - id: Galactic
+        canSpeak: false #SS220 Dragon & Carp Language End
 
 - type: entity
   parent: MobCarp
