@@ -391,6 +391,50 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
     /// </summary>
     public IReadOnlyDictionary<ProtoId<CurrencyPrototype>, float> GetModifiersSummaryRelative()
     {
+        // SS220 Dynamics begin
+        var modifiersSummaryAbsoluteValues = GetModifiersAbsoluteValues(); // SS220 Dynamics
+        var relativeModifiedPercent = new Dictionary<ProtoId<CurrencyPrototype>, float>();
+        foreach (var (currency, discountAmount) in modifiersSummaryAbsoluteValues)
+        {
+            if (OriginalCost.TryGetValue(currency, out var originalAmount))
+            {
+                var discountPercent = (float)discountAmount.Value / originalAmount.Value;
+                relativeModifiedPercent.Add(currency, discountPercent);
+            }
+        }
+
+        return relativeModifiedPercent;
+    }
+   // SS220 Dynamics end
+    // SS220 Dynamics begin
+    public IReadOnlyDictionary<ProtoId<CurrencyPrototype>, float> GetDynamicRelative()
+    {
+        var modifiersSummaryAbsoluteValues = GetModifiersAbsoluteValues();
+        var relativeModifiedPercent = new Dictionary<ProtoId<CurrencyPrototype>, float>();
+
+
+        foreach (var (currency, discountAmount) in modifiersSummaryAbsoluteValues)
+        {
+            if (OriginalCost.TryGetValue(currency, out var originalAmount))
+            {
+                if (!CostModifiersBySourceId.TryGetValue(nameof(DynamicsPrices), out var dynamicsPrice))
+                    continue;
+
+                var dynamicValue = dynamicsPrice.FirstOrDefault(x => x.Key == currency).Value;
+                var nominator = originalAmount + discountAmount;
+                var denominator = originalAmount + dynamicValue;
+                if (denominator <= FixedPoint2.Zero)
+                    continue;
+
+                var discountPercent = -(float)( nominator / denominator);
+                relativeModifiedPercent.Add(currency, discountPercent);
+            }
+        }
+        return relativeModifiedPercent;
+    }
+
+    private Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> GetModifiersAbsoluteValues()
+    {
         var modifiersSummaryAbsoluteValues = CostModifiersBySourceId.Aggregate(
             new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>(),
             (accumulator, x) =>
@@ -404,19 +448,9 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
                 return accumulator;
             }
         );
-        var relativeModifiedPercent = new Dictionary<ProtoId<CurrencyPrototype>, float>();
-        foreach (var (currency, discountAmount) in modifiersSummaryAbsoluteValues)
-        {
-            if (OriginalCost.TryGetValue(currency, out var originalAmount))
-            {
-                var discountPercent = (float)discountAmount.Value / originalAmount.Value;
-                relativeModifiedPercent.Add(currency, discountPercent);
-            }
-        }
-
-        return relativeModifiedPercent;
-
+        return modifiersSummaryAbsoluteValues;
     }
+    // SS220 Dynamics end
 
     private Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> ApplyAllModifiers()
     {
