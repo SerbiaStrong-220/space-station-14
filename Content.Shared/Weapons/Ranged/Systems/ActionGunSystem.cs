@@ -34,7 +34,7 @@ public sealed class ActionGunSystem : EntitySystem
 
     private void OnShoot(Entity<ActionGunComponent> ent, ref ActionGunShootEvent args)
     {
-        // ss220 fix visible cooldown on dragon breath gun start
+        // SS220-MIT fix visible cooldown on dragon breath gun start
         if (!TryComp<GunComponent>(ent.Comp.Gun, out var gun) || ent.Comp.ActionEntity == null)
             return;
 
@@ -45,7 +45,7 @@ public sealed class ActionGunSystem : EntitySystem
             return;
 
         _actions.SetCooldown(args.Action.Owner, TimeSpan.FromSeconds(recharge.RechargeCooldown));
-        // ss220 fix visible cooldown on dragon breath gun end
+        // SS220-MIT fix visible cooldown on dragon breath gun end
     }
 }
 
