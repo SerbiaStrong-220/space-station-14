@@ -1,13 +1,15 @@
 // © SS220, MIT, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.txt
 
-using Content.Shared.GameTicking.Components;
-using Content.Server.GameTicking.Rules;
-using Content.Server.SS220.GameTicking.Rules.Components;
-using Content.Server.Voting.Managers;
-using Content.Server.Voting;
 using Content.Server.Administration.Logs;
-using Content.Shared.Database;
+using Content.Server.GameTicking;
+using Content.Server.GameTicking.Rules;
 using Content.Server.RoundEnd;
+using Content.Server.SS220.GameTicking.Rules.Components;
+using Content.Server.Voting;
+using Content.Server.Voting.Managers;
+using Content.Shared.Database;
+using Content.Shared.GameTicking.Components;
+using Prometheus;
 using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.GameTicking.Rules;
@@ -15,34 +17,39 @@ namespace Content.Server.SS220.GameTicking.Rules;
 public sealed class EmergencyShuttleAutoVoteRuleSystem : GameRuleSystem<EmergencyShuttleAutoVoteRuleComponent>
 {
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
+    [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly RoundEndSystem _roundEnd = default!;
     [Dependency] private readonly IVoteManager _voteManager = default!;
 
-    protected override void Started(EntityUid uid, EmergencyShuttleAutoVoteRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
+    private static readonly Histogram EvacCallTime = Metrics.CreateHistogram(
+        "vote_evac_call_time", "Round time when emergency shuttle was called by vote or force called by its round duration settings");
+
+    private static readonly Histogram VoteTimeResult = Metrics.CreateHistogram(
+        "vote_evac_result",
+        "Gives information of vote result against round time in HOURS",
+        new HistogramConfiguration()
+        {
+            LabelNames = new[] { "result" },
+            Buckets = Histogram.LinearBuckets(1, 0.2, 10)
+        }
+        );
+
+    protected override void ActiveTick(EntityUid uid, EmergencyShuttleAutoVoteRuleComponent component, GameRuleComponent gameRule, float frameTime)
     {
-        base.Started(uid, component, gameRule, args);
+        if (_gameTiming.CurTime > component.ForceEvacTime)
+        {
+            CallUnRecallableEmergencyShuttle();
+            _gameTicker.EndGameRule(uid, gameRule);
+        }
+
+        if (_gameTiming.CurTime < component.VoteStartTime)
+            return;
+
+        if (_gameTiming.CurTime < component.LastEvacVoteTime + component.IntervalBetweenVotes)
+            return;
 
         MakeEmergencyShuttleVote(component);
-    }
-
-    public override void Update(float frameTime)
-    {
-        base.Update(frameTime);
-
-        foreach (var autoRecall in EntityQuery<EmergencyShuttleAutoVoteRuleComponent>())
-        {
-            if (_gameTiming.CurTime > autoRecall.ForceEvacTime)
-                MakeEmergencyShuttleVote(autoRecall);
-
-            if (_gameTiming.CurTime < autoRecall.VoteStartTime)
-                return;
-
-            if (_gameTiming.CurTime < autoRecall.LastEvacVoteTime + autoRecall.IntervalBetweenVotes)
-                return;
-
-            MakeEmergencyShuttleVote(autoRecall);
-        }
     }
 
     private void MakeEmergencyShuttleVote(EmergencyShuttleAutoVoteRuleComponent component)
@@ -51,7 +58,7 @@ public sealed class EmergencyShuttleAutoVoteRuleSystem : GameRuleSystem<Emergenc
 
         var voteOptions = new VoteOptions()
         {
-            Title = Loc.GetString("ui-vote-restart-title"),
+            Title = Loc.GetString("ui-vote-auto-emergency-shuttle-title"),
             Options =
             {
                 (Loc.GetString("ui-vote-auto-emergency-shuttle-yes"), true),
@@ -73,14 +80,21 @@ public sealed class EmergencyShuttleAutoVoteRuleSystem : GameRuleSystem<Emergenc
 
             _adminLog.Add(LogType.Vote, LogImpact.Medium, $"Auto call emergency shuttle vote finished, result is {callEvac}");
 
+            VoteTimeResult.WithLabels(callEvac.ToString()).Observe(_gameTiming.CurTime.TotalHours);
+
             if (!callEvac)
                 return;
 
-            _roundEnd.RequestRoundEnd(null, false, "round-end-system-shuttle-auto-called-announcement");
-
-            var ev = new EmergencyShuttleCalledByVote();
-            RaiseLocalEvent(ref ev);
+            CallUnRecallableEmergencyShuttle();
         };
+    }
+
+    private void CallUnRecallableEmergencyShuttle()
+    {
+        _roundEnd.RequestRoundEnd(null, false, "round-end-system-shuttle-auto-called-announcement");
+        EvacCallTime.Observe(_gameTiming.CurTime.TotalSeconds);
+        var ev = new EmergencyShuttleCalledByVote();
+        RaiseLocalEvent(ref ev);
     }
 }
 
