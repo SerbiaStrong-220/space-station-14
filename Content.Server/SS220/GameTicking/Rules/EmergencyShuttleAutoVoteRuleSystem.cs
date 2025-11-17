@@ -8,12 +8,14 @@ using Content.Server.Voting;
 using Content.Server.Administration.Logs;
 using Content.Shared.Database;
 using Content.Server.RoundEnd;
+using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.GameTicking.Rules;
 
 public sealed class EmergencyShuttleAutoVoteRuleSystem : GameRuleSystem<EmergencyShuttleAutoVoteRuleComponent>
 {
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly RoundEndSystem _roundEnd = default!;
     [Dependency] private readonly IVoteManager _voteManager = default!;
 
@@ -21,18 +23,32 @@ public sealed class EmergencyShuttleAutoVoteRuleSystem : GameRuleSystem<Emergenc
     {
         base.Started(uid, component, gameRule, args);
 
-        MakeEmergencyShuttleVote();
+        MakeEmergencyShuttleVote(component);
     }
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
+        foreach (var autoRecall in EntityQuery<EmergencyShuttleAutoVoteRuleComponent>())
+        {
+            if (_gameTiming.CurTime > autoRecall.ForceEvacTime)
+                MakeEmergencyShuttleVote(autoRecall);
 
+            if (_gameTiming.CurTime < autoRecall.VoteStartTime)
+                return;
+
+            if (_gameTiming.CurTime < autoRecall.LastEvacVoteTime + autoRecall.IntervalBetweenVotes)
+                return;
+
+            MakeEmergencyShuttleVote(autoRecall);
+        }
     }
 
-    private void MakeEmergencyShuttleVote()
+    private void MakeEmergencyShuttleVote(EmergencyShuttleAutoVoteRuleComponent component)
     {
+        component.LastEvacVoteTime = _gameTiming.CurTime;
+
         var voteOptions = new VoteOptions()
         {
             Title = Loc.GetString("ui-vote-restart-title"),

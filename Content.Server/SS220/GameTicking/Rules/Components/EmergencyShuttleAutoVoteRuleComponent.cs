@@ -9,6 +9,13 @@ namespace Content.Server.SS220.GameTicking.Rules.Components;
 public sealed partial class EmergencyShuttleAutoVoteRuleComponent : Component
 {
     /// <summary>
+    /// When lats vote was made
+    /// </summary>
+    [AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public TimeSpan LastEvacVoteTime = TimeSpan.Zero;
+
+    /// <summary>
     /// Time after round start when we want to make first vote for round end
     /// </summary>
     [DataField]

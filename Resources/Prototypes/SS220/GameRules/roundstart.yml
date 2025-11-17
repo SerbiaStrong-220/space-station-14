@@ -84,3 +84,10 @@
   categories: [ GameRules ]
   components:
   - type: EmergencyShuttleAutoCallRule
+
+- type: entity
+  id: EmergencyShuttleAutoVote
+  parent: BaseGameRule
+  categories: [ GameRules ]
+  components:
+  - type: EmergencyShuttleAutoVoteRule
