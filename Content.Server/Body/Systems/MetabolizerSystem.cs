@@ -18,6 +18,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.SS220.Narcotics;
+using Content.Shared.Random.Helpers;
 using Robust.Shared.Collections;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -212,6 +213,9 @@ public sealed class MetabolizerSystem : SharedMetabolizerSystem
                 foreach (var effect in entry.Effects)
                 {
                     if (scale < effect.MinScale)
+                        continue;
+
+                    if (effect.Probability < 1.0f && !_random.Prob(effect.Probability))
                         continue;
 
                     // See if conditions apply
