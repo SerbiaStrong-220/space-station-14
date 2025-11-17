@@ -74,7 +74,7 @@ namespace Content.Server.RoundEnd
         }
 
         // SS220-MIT-evac-vote-begin
-        private void OnEvacByVote(EmergencyShuttleCalledByVote ev)
+        private void OnEvacByVote(ref EmergencyShuttleCalledByVote ev)
         {
             _calledByVote = ev.Called;
         }
