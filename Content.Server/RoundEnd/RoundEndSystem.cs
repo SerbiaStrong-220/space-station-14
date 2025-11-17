@@ -62,7 +62,7 @@ namespace Content.Server.RoundEnd
         private bool _autoCalledBefore = false;
         private bool _autoCallEnabled = false;
 
-        private bool _calledByVote = false; // SS220-MIT-evac-vote
+        private bool _blockedCallRecall = false; // SS220-MIT-evac-vote
 
         public override void Initialize()
         {
@@ -76,7 +76,7 @@ namespace Content.Server.RoundEnd
         // SS220-MIT-evac-vote-begin
         private void OnEvacByVote(ref EmergencyShuttleCalledByVote ev)
         {
-            _calledByVote = ev.Called;
+            _blockedCallRecall = ev.Block    ;
         }
         // SS220-MIT-evac-vote-end
 
@@ -109,6 +109,7 @@ namespace Content.Server.RoundEnd
             SetAutoCallTime();
             _autoCalledBefore = false;
             _autoCallEnabled = false;
+            _blockedCallRecall = false; // SS220-MIT-evac-vote
             RaiseLocalEvent(RoundEndSystemChangedEvent.Default);
         }
 
@@ -136,7 +137,7 @@ namespace Content.Server.RoundEnd
 
         public bool CanCallOrRecall()
         {
-            return _cooldownTokenSource == null && !_calledByVote; // SS220-MIT-evac-vote
+            return _cooldownTokenSource == null && !_blockedCallRecall; // SS220-MIT-evac-vote
         }
 
         public bool IsRoundEndRequested()
@@ -242,6 +243,7 @@ namespace Content.Server.RoundEnd
             if (_countdownTokenSource == null) return;
             _countdownTokenSource.Cancel();
             _countdownTokenSource = null;
+            _blockedCallRecall = false; // SS220-MIT-add-evac-vote
 
             if (requester != null)
             {

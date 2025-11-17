@@ -22,6 +22,8 @@ public sealed class EmergencyShuttleAutoVoteRuleSystem : GameRuleSystem<Emergenc
     [Dependency] private readonly RoundEndSystem _roundEnd = default!;
     [Dependency] private readonly IVoteManager _voteManager = default!;
 
+    private TimeSpan RoundTime => _gameTiming.CurTime - _gameTicker.RoundStartTimeSpan;
+
     private static readonly Histogram EvacCallTime = Metrics.CreateHistogram(
         "vote_evac_call_time", "Round time when emergency shuttle was called by vote or force called by its round duration settings");
 
@@ -37,16 +39,16 @@ public sealed class EmergencyShuttleAutoVoteRuleSystem : GameRuleSystem<Emergenc
 
     protected override void ActiveTick(EntityUid uid, EmergencyShuttleAutoVoteRuleComponent component, GameRuleComponent gameRule, float frameTime)
     {
-        if (_gameTiming.CurTime > component.ForceEvacTime)
+        if (RoundTime > component.ForceEvacTime)
         {
             CallUnRecallableEmergencyShuttle();
             _gameTicker.EndGameRule(uid, gameRule);
         }
 
-        if (_gameTiming.CurTime < component.VoteStartTime)
+        if (RoundTime < component.VoteStartTime)
             return;
 
-        if (_gameTiming.CurTime < component.LastEvacVoteTime + component.IntervalBetweenVotes)
+        if (RoundTime < component.LastEvacVoteTime + component.IntervalBetweenVotes)
             return;
 
         MakeEmergencyShuttleVote(component);
@@ -54,7 +56,7 @@ public sealed class EmergencyShuttleAutoVoteRuleSystem : GameRuleSystem<Emergenc
 
     private void MakeEmergencyShuttleVote(EmergencyShuttleAutoVoteRuleComponent component)
     {
-        component.LastEvacVoteTime = _gameTiming.CurTime;
+        component.LastEvacVoteTime = RoundTime;
 
         var voteOptions = new VoteOptions()
         {
@@ -80,7 +82,7 @@ public sealed class EmergencyShuttleAutoVoteRuleSystem : GameRuleSystem<Emergenc
 
             _adminLog.Add(LogType.Vote, LogImpact.Medium, $"Auto call emergency shuttle vote finished, result is {callEvac}");
 
-            VoteTimeResult.WithLabels(callEvac.ToString()).Observe(_gameTiming.CurTime.TotalHours);
+            VoteTimeResult.WithLabels(callEvac.ToString()).Observe(RoundTime.TotalHours);
 
             if (!callEvac)
                 return;
@@ -92,11 +94,16 @@ public sealed class EmergencyShuttleAutoVoteRuleSystem : GameRuleSystem<Emergenc
     private void CallUnRecallableEmergencyShuttle()
     {
         _roundEnd.RequestRoundEnd(null, false, "round-end-system-shuttle-auto-called-announcement");
-        EvacCallTime.Observe(_gameTiming.CurTime.TotalSeconds);
+
+        EvacCallTime.Observe(RoundTime.TotalHours);
+
         var ev = new EmergencyShuttleCalledByVote();
         RaiseLocalEvent(ref ev);
     }
 }
 
 [ByRefEvent]
-public record struct EmergencyShuttleCalledByVote(bool Called = true);
+public record struct EmergencyShuttleCalledByVote()
+{
+    public bool Block = true;
+}
