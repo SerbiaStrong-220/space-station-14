@@ -195,12 +195,11 @@ public sealed partial class StoreMenu : DefaultWindow
             return string.Empty;
         }
 
+        //SS220 - TraitorDynamics - begin
         //if this is not a real discount, it’s just a decrease from dynamics
         if (!listingDataWithCostModifiers.Categories.Contains("DiscountedItems"))
             return string.Empty;
-        //SS220 - TraitorDynamics - end
 
-        // SS220 Dynamics begin
         IReadOnlyDictionary<ProtoId<CurrencyPrototype>, float> relativeModifiersSummary;
         var dynamics = nameof(listingDataWithCostModifiers.DynamicsPrices);
         if (listingDataWithCostModifiers.CostModifiersBySourceId.ContainsKey(dynamics))
