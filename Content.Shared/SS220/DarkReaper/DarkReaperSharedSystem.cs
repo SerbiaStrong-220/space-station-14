@@ -1,22 +1,25 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Linq;
-using System.Numerics;
 using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
+using Content.Shared.Examine;
 using Content.Shared.Explosion.Components;
+using Content.Shared.Ghost;
 using Content.Shared.Humanoid;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Components;
-using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Pulling.Components;
+using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.NPC.Components;
+using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Content.Shared.Weapons.Melee;
@@ -31,9 +34,8 @@ using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using Content.Shared.Actions.Components;
-using Content.Shared.StatusEffectNew;
-using Content.Shared.NPC.Prototypes;
+using System.Linq;
+using System.Numerics;
 
 namespace Content.Shared.SS220.DarkReaper;
 
@@ -78,6 +80,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
         SubscribeLocalEvent<DarkReaperComponent, GetMeleeDamageEvent>(OnGetMeleeDamage);
         SubscribeLocalEvent<DarkReaperComponent, DamageModifyEvent>(OnDamageModify);
         SubscribeLocalEvent<DarkReaperComponent, ReaperBloodMistEvent>(OnBloodMistAction);
+        SubscribeLocalEvent<DarkReaperComponent, ExamineAttemptEvent>(OnExamineAttempt);
 
         SubscribeLocalEvent<DarkReaperComponent, AfterMaterialize>(OnAfterMaterialize);
         SubscribeLocalEvent<DarkReaperComponent, AfterDeMaterialize>(OnAfterDeMaterialize);
@@ -85,7 +88,6 @@ public abstract class SharedDarkReaperSystem : EntitySystem
     }
 
     private readonly ProtoId<TagPrototype> _doorBumpOpenerTag = "DoorBumpOpener";
-    private readonly ProtoId<TagPrototype> _hideContextMenuTag = "HideContextMenu";
     private readonly ProtoId<NpcFactionPrototype> _simpleHostileFraction = "SimpleHostile";
     private readonly ProtoId<NpcFactionPrototype> _darkReaperPassive = "DarkReaperPassive";
 
@@ -415,7 +417,6 @@ public abstract class SharedDarkReaperSystem : EntitySystem
         {
             EnsureComp<PullerComponent>(uid).NeedsHands = false;
             _tag.AddTag(uid, _doorBumpOpenerTag);
-            _tag.RemoveTag(uid, _hideContextMenuTag);
 
             if (TryComp<ExplosionResistanceComponent>(uid, out var explosionResistanceComponent))
                 explosionResistanceComponent.DamageCoefficient = 1f; //full damage
@@ -429,7 +430,6 @@ public abstract class SharedDarkReaperSystem : EntitySystem
         else
         {
             _tag.RemoveTag(uid, _doorBumpOpenerTag);
-            _tag.AddTag(uid, _hideContextMenuTag);
             comp.StunScreamStart = null;
             comp.MaterializedStart = null;
 
@@ -582,22 +582,17 @@ public abstract class SharedDarkReaperSystem : EntitySystem
         // insallah
         QueueDel(ent);
     }
+
+    private void OnExamineAttempt(Entity<DarkReaperComponent> ent, ref ExamineAttemptEvent args)//Won't be required if we redo reaper on invisibility system
+    {
+        if (HasComp<GhostComponent>(args.Examiner))
+            return;
+
+        if (ent.Comp.PhysicalForm)
+            return;
+
+        args.Cancel();
+        return;
+    }
 }
 
-[Serializable, NetSerializable]
-public sealed partial class AfterMaterialize : DoAfterEvent
-{
-    public override DoAfterEvent Clone() => this;
-}
-
-[Serializable, NetSerializable]
-public sealed partial class AfterDeMaterialize : DoAfterEvent
-{
-    public override DoAfterEvent Clone() => this;
-}
-
-[Serializable, NetSerializable]
-public sealed partial class AfterConsumed : DoAfterEvent
-{
-    public override AfterConsumed Clone() => this;
-}
