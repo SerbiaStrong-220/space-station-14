@@ -19,5 +19,53 @@
     delay: 10
   - type: TriggerOnUse
   - type: SpawnOnTrigger
-    proto: PlushieMigo
+    proto: VoidPortalSpawn
     useMapCoords: true
+
+- type: entity
+  id: VoidPortalSpawn
+  components:
+  - type: Sprite
+    noRot: true
+    drawdepth: Ghosts
+    sprite: SS220/Objects/CultYogg/portal.rsi
+    layers:
+    - state: portal_open
+      shader: unshaded
+  # spawn animation lasts 1.6 seconds
+  - type: TimedDespawn
+    lifetime: 1.6
+  - type: SpawnOnDespawn
+    prototype: VoidPortal
+
+- type: entity
+  id: VoidPortal
+  components:
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Sprite
+    noRot: true
+    drawdepth: Ghosts
+    sprite: SS220/Objects/CultYogg/portal.rsi
+    layers:
+    - state: portal_loop
+      shader: unshaded
+  # spawn animation lasts 2 seconds, we loop 3 times
+  - type: TimedDespawn
+    lifetime: 6
+  - type: SpawnOnDespawn
+    prototype: VoidPortalClosed
+
+- type: entity
+  id: VoidPortalClosed
+  components:
+  - type: Sprite
+    noRot: true
+    drawdepth: Ghosts
+    sprite: SS220/Objects/CultYogg/portal.rsi
+    layers:
+    - state: portal_close
+      shader: unshaded
+  # spawn animation lasts 1.2 seconds, but somehow its get +0.1 wtf
+  - type: TimedDespawn
+    lifetime: 1.1

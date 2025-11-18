@@ -3,6 +3,8 @@
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
+using Content.Shared.Movement.Pulling.Components;
+using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
 using Content.Shared.SS220.SelfLinkedTeleport;
 using Content.Shared.Whitelist;
@@ -17,6 +19,7 @@ public sealed class SelfLinkedTeleportSystem : SharedSelfLinkedTeleportSystem
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly PullingSystem _pulling = default!;
 
     public override void Initialize()
     {
@@ -92,17 +95,17 @@ public sealed class SelfLinkedTeleportSystem : SharedSelfLinkedTeleportSystem
         return;
     }
 
-    protected override void WarpTo(Entity<SelfLinkedTeleportComponent> ent, EntityUid user)
+    protected override void WarpTo(Entity<SelfLinkedTeleportComponent> ent, EntityUid target, EntityUid user)
     {
-        if (ent.Comp.LinkedEntity == null)
-        {
-            _popup.PopupClient(Loc.GetString("udder-system-dry"), user);//ToDo_SS220 add popup
+        if (ent.Comp.LinkedEntity == null)//we shouldn't interact  at all if we are  here
             return;
-        }
 
-        _adminLogger.Add(LogType.Teleport, $"{ToPrettyString(user):user} used linked telepoter {ToPrettyString(ent):teleport enter} and was teleported to {ToPrettyString(ent.Comp.LinkedEntity.Value):teleport exit}");
+        if (TryComp<PullableComponent>(target, out var pullingSystemComp))
+            _pulling.TryStopPull(target, pullingSystemComp);
 
-        var xform = Transform(user);
-        _transformSystem.SetCoordinates(user, xform, Transform(ent.Comp.LinkedEntity.Value).Coordinates);
+        _adminLogger.Add(LogType.Teleport, $"{ToPrettyString(user):user} used linked telepoter {ToPrettyString(ent):teleport enter} and tried teleport {ToPrettyString(target):target} to {ToPrettyString(ent.Comp.LinkedEntity.Value):teleport exit}");
+
+        var xform = Transform(target);
+        _transformSystem.SetCoordinates(target, xform, Transform(ent.Comp.LinkedEntity.Value).Coordinates);
     }
 }

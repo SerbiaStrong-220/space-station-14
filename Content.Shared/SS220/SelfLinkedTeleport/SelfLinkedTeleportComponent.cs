@@ -17,33 +17,9 @@ public sealed partial class SelfLinkedTeleportComponent : Component
     public EntityUid? LinkedEntity;
 
     /// <summary>
-    ///     Which entities can use teleportation
-    /// </summary>
-    [DataField]
-    public EntityWhitelist? UserWhitelist;
-
-    /// <summary>
-    ///     Message when whitelisting is rejected
-    /// </summary>
-    [DataField]
-    public LocId? WhitelistRejectedLoc;
-
-    /// <summary>
     ///     Which entities can it linked to
     /// </summary>
     [DataField]
     public EntityWhitelist? WhitelistLinked;
-
-    /// <summary>
-    ///     Should we have doAfter when we are using teleport
-    /// </summary>
-    [DataField]
-    public bool ShouldHaveDelay = true;
-
-    /// <summary>
-    ///     How long we are entering teleport
-    /// </summary>
-    [DataField]
-    public TimeSpan TeleportDoAfterTime = TimeSpan.FromSeconds(3);
 }
 

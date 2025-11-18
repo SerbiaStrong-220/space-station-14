@@ -3,9 +3,10 @@
 using Content.Shared.DoAfter;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.SS220.SelfLinkedTeleport;
+namespace Content.Shared.SS220.InteractionTeleport;
 
-/// <summary>
-/// </summary>
 [Serializable, NetSerializable]
-public sealed partial class SelfLinkedTeleportDoAfterEvent : SimpleDoAfterEvent { }
+public sealed partial class InteractionTeleportDoAfterEvent : SimpleDoAfterEvent { }
+
+[ByRefEvent, Serializable]
+public record struct TeleportTargetEvent(EntityUid Target, EntityUid User);

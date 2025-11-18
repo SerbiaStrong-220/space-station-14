@@ -54,4 +54,3 @@ cult-yogg-altar-used = Нерушимая конструкция теперь л
 
 cult-yogg-dropped-items = Вы избавились от грибных предметов
 cult-yogg-dropped-items-not-first = и вы избавились от грибных предметов
-

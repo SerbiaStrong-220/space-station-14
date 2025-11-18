@@ -37,4 +37,5 @@
         layer:
         - WallLayer
         hard: false
+  - type: InteractionTeleport
   - type: SelfLinkedTeleport
