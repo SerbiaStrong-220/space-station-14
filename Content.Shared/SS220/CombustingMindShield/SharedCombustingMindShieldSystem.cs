@@ -15,7 +15,6 @@ public sealed class SharedCombustingMindShieldSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<CombustingMindShieldComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<MindShieldComponent, ComponentRemove>(OnRemove);
     }
 
     private void OnStartup(Entity<CombustingMindShieldComponent> ent, ref ComponentStartup args)
@@ -43,14 +42,7 @@ public sealed class SharedCombustingMindShieldSystem : EntitySystem
         foreach (var ent in onRemove)
         {
             RemComp<CombustingMindShieldComponent>(ent);
-            RemComp<MindShieldComponent>(ent);//Maybe we should target implant itself?
             _popup.PopupClient(Loc.GetString("combisting-mindshield-deleted"), ent);
         }
-    }
-
-    private void OnRemove(Entity<MindShieldComponent> ent, ref ComponentRemove args)
-    {
-        if (HasComp<CombustingMindShieldComponent>(ent))//not sure about this check
-            RemCompDeferred<CombustingMindShieldComponent>(ent);//in case somebody will delete mind shield before it deletion
     }
 }

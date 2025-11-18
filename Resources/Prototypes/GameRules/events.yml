@@ -769,7 +769,7 @@
   - type: AdditionalRules
     rules:
       combustion: !type:EntSelector
-        id: MindShieldCombustionRule
+        id: RandomMindShieldCombustion
         prob: 0.2
   #ss220 mindshield destructiuon #3500 end
 

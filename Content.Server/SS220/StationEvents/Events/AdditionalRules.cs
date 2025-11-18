@@ -1,20 +1,16 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Administration.Logs;
-using Content.Server.GameTicking;
 using Content.Server.SS220.StationEvents.Components;
+using Content.Server.StationEvents;
 using Content.Shared.Database;
-using Content.Shared.EntityTable;
-using Robust.Shared.Random;
 
 namespace Content.Server.SS220.StationEvents.Events;
 
 public sealed class AdditionalRulesSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly GameTicker _ticker = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly EntityTableSystem _entityTable = default!;
+    [Dependency] private readonly EventManagerSystem _event = default!;
 
     public override void Initialize()
     {
@@ -27,13 +23,15 @@ public sealed class AdditionalRulesSystem : EntitySystem
     {
         foreach (var kvp in ent.Comp.Rules)
         {
-            var rule = _entityTable.GetSpawns(kvp.Value);
+            var table = kvp.Value;
+            if (table == null)
+                continue;
 
-            _ticker.AddGameRule(kvp.Key);
+            _event.RunRandomEvent(table);
 
-            _adminLogger.Add(LogType.EventStarted,
-                $"{ToPrettyString(ent):entity} added a game rule [{kvp.Key}]" +
-                $" via a chance on AdditionalRulesComponent.");
+            _adminLogger.Add(LogType.EventRan,
+                $"{ToPrettyString(ent):entity} additionally tried to run the EntityTableSelector [{kvp.Key}]" +
+                $" via an AdditionalRulesComponent.");
         }
     }
 }
