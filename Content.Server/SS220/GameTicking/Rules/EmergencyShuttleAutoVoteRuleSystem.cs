@@ -76,7 +76,7 @@ public sealed class EmergencyShuttleAutoVoteRuleSystem : GameRuleSystem<Emergenc
         {
             bool callEvac;
             if (args.Winner == null)
-                callEvac = true;
+                callEvac = false;
             else
                 callEvac = (bool)args.Winner;
 
