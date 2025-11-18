@@ -38,13 +38,12 @@ public sealed class ActionGunSystem : EntitySystem
         if (!TryComp<GunComponent>(ent.Comp.Gun, out var gun) || ent.Comp.ActionEntity == null)
             return;
 
-        if (!TryComp<RechargeBasicEntityAmmoComponent>(ent.Comp.Gun, out var recharge))
-            return;
-
         if (!_gun.AttemptShoot(ent, ent.Comp.Gun.Value, gun, args.Target))
             return;
 
-        _actions.SetCooldown(args.Action.Owner, TimeSpan.FromSeconds(recharge.RechargeCooldown));
+        if (TryComp<RechargeBasicEntityAmmoComponent>(ent.Comp.Gun, out var recharge)) // just for future cases
+            _actions.SetCooldown(args.Action.Owner, TimeSpan.FromSeconds(recharge.RechargeCooldown));
+
         // SS220-MIT fix visible cooldown on dragon breath gun end
     }
 }
