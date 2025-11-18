@@ -13,8 +13,8 @@
   - type: AntagSelection
     definitions:
     - prefRoles: [ CultistOfYoggSothoth ]
-      max: 4
-      playerRatio: 10
+      max: 5
+      playerRatio: 9
       blacklist:
         components:
         - BibleUser
