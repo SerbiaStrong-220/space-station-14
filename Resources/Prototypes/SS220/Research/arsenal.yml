@@ -1,0 +1,13 @@
+#SS220 new PortableRecharger 
+- type: technology
+  id: PortableReloadingEquipment
+  name: research-technology-portable-reloading-equipment
+  icon:
+    sprite: Objects/Power/portable_recharger.rsi
+    state: charging
+  discipline: Arsenal
+  tier: 2
+  cost: 9000
+  recipeUnlocks:
+  - PortableRecharger
+#SS220 new PortableRecharger end

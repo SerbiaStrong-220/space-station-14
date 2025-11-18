@@ -6,6 +6,8 @@
   components:
   - type: Item
     size: Huge
+    shape:
+    - 0,0,4,1
   - type: Sprite
     sprite: Objects/Power/portable_recharger.rsi
     state: charging
