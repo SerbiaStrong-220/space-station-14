@@ -5,6 +5,7 @@
     TraitorSleeper: 4
   name: dynamic-light-name
   loreNames: NamesLightDynamic
+  briefingName: dynamic-light-briefing-name
 
 - type: dynamic
   id: MediumDynamic
@@ -13,6 +14,7 @@
     TraitorSleeper: 2
   name: dynamic-medium-name
   loreNames: NamesMediumDynamic
+  briefingName: dynamic-medium-briefing-name
 
 - type: dynamic
   id: HardDynamic
@@ -22,3 +24,4 @@
   playersRequerment: 25
   name: dynamic-hard-name
   loreNames: NamesHardDynamic
+  briefingName: dynamic-hard-briefing-name
