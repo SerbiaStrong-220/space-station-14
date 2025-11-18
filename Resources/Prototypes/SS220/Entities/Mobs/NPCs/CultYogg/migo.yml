@@ -84,7 +84,7 @@
     - id: Galactic
       canSpeak: true
   - type: ThermalVision
-    state: Full
+    state: Half
     visionRadius: 14
   #visual
   - type: PointLight
