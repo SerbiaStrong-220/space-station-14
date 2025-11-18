@@ -5,7 +5,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.EntityEffects.Effects;
 
-public sealed partial class StaminaDamage : EntityEffectBase<StaminaDamage>
+public sealed partial class StaminaChange : EntityEffectBase<StaminaChange>
 {
     [DataField(required: true)]
     public float Value;

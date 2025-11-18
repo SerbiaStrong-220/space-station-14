@@ -1,0 +1,65 @@
+- type: entity
+  parent: EncryptionKey
+  id: EncryptionNanotrasenOperative
+  suffix: Shitspawn, Ebent, Space Wars
+  name: продвинутый ключ шифрования оперативников НаноТрейзен.
+  description: Имеет общую частоту сил НаноТрейзен и настраиваемый радиоканал.
+  components:
+  - type: RadioEncryptionKey
+  - type: EncryptionKey
+    channels:
+    - RadioNanotrasen
+    defaultChannel: RadioNanotrasen
+    defaultFrequencyChannel: RadioNanotrasen
+  - type: Item
+    sprite: Objects/Devices/encryption_keys.rsi
+  - type: Sprite
+    sprite: Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: crypt_blue
+    - state: nano_label
+
+- type: entity
+  parent: EncryptionNanotrasenOperative
+  id: EncryptionOnlyFrequencyNanotrasenOperative
+  suffix: Shitspawn, Ebent, Space Wars
+  name: ключ шифрования оперативников НаноТрейзен.
+  description: Имеет настраиваемый радиоканал НаноТрейзен.
+  components:
+  - type: EncryptionKey
+    defaultFrequencyChannel: RadioNanotrasen
+    channels: []
+    defaultChannel: null
+
+- type: entity
+  parent: EncryptionKey
+  id: EncryptionSyndicateOperative
+  suffix: Shitspawn, Ebent, Space Wars
+  name: продвинутый ключ шифрования оперативников Синдиката
+  description: Имеет общую частоту сил Синдиката и настраиваемый радиоканал.
+  components:
+  - type: RadioEncryptionKey
+  - type: EncryptionKey
+    channels:
+    - RadioSyndicate
+    defaultChannel: RadioSyndicate
+    defaultFrequencyChannel: RadioSyndicate
+  - type: Item
+    sprite: Objects/Devices/encryption_keys.rsi
+  - type: Sprite
+    sprite: Objects/Devices/encryption_keys.rsi
+    layers:
+    - state: crypt_red
+    - state: synd_label
+
+- type: entity
+  parent: EncryptionSyndicateOperative
+  id: EncryptionOnlyFrequencySyndicateOperative
+  suffix: Shitspawn, Ebent, Space Wars
+  name: ключ шифрования оперативников Синдиката.
+  description: Имеет настраиваемый радиоканал Синдиката.
+  components:
+  - type: EncryptionKey
+    defaultFrequencyChannel: RadioSyndicate
+    channels: []
+    defaultChannel: null

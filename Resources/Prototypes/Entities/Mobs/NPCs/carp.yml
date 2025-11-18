@@ -187,6 +187,7 @@
       canSend: true
       telepathyChannelPrototype: TelepathyChannelSpaceDragon
     # SS220 Telepathy end
+    - type: Insulated # SS220 Insulated Dragon and Carp
 
 - type: entity
   id: MobCarpDungeon

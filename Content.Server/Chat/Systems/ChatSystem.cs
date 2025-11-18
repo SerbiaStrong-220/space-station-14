@@ -45,6 +45,7 @@ using Content.Server.SS220.Language; // SS220-Add-Languages-end
 using Robust.Shared.Map;
 using Content.Shared.SS220.Language.Systems;
 using Content.Shared.SS220.TTS;
+using Content.Shared.FixedPoint;
 
 namespace Content.Server.Chat.Systems;
 
@@ -278,9 +279,9 @@ public sealed partial class ChatSystem : SharedChatSystem
         // This message may have a radio prefix, and should then be whispered to the resolved radio channel
         if (checkRadioPrefix)
         {
-            if (TryProccessRadioMessage(source, message, out var modMessage, out var channel))
+            if (TryProccessRadioMessage(source, message, out var modMessage, out var channel, out var frequency /*SS220-add-frequency-radio */))
             {
-                SendEntityWhisper(source, modMessage, range, channel, nameOverride, hideLog, ignoreActionBlocker);
+                SendEntityWhisper(source, modMessage, range, channel, nameOverride, hideLog, ignoreActionBlocker, frequency: frequency /*SS220-add-frequency-radio */);
                 return;
             }
         }
@@ -605,7 +606,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         RadioChannelPrototype? channel,
         string? nameOverride,
         bool hideLog = false,
-        bool ignoreActionBlocker = false
+        bool ignoreActionBlocker = false,
+        FixedPoint2? frequency = null // SS220-add-radio-frequency
         )
     {
         if (!_actionBlocker.CanSpeak(source) && !ignoreActionBlocker)
@@ -684,7 +686,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         _replay.RecordServerMessage(new ChatMessage(ChatChannel.Whisper, message, wrappedMessage, GetNetEntity(source), null, MessageRangeHideChatForReplay(range)));
 
         // SS220 languages begin
-        var ev = new EntitySpokeEvent(source, message, originalMessage, channel, obfuscatedMessage, languageMessage);
+        var ev = new EntitySpokeEvent(source, message, originalMessage, channel, obfuscatedMessage, languageMessage, frequency);
         RaiseLocalEvent(source, ev, true);
 
         var defaultLanguageId = _languageSystem.GetSelectedLanguage(source)?.ID ?? "none";
@@ -1242,13 +1244,15 @@ public sealed class EntitySpokeEvent : EntityEventArgs
     public readonly string? ObfuscatedMessage; // not null if this was a whisper
     public readonly bool IsRadio; // radio message is always a whisper
 
+    public FixedPoint2? Frequency;// SS220-frequency-radio
+
     /// <summary>
     ///     If the entity was trying to speak into a radio, this was the channel they were trying to access. If a radio
     ///     message gets sent on this channel, this should be set to null to prevent duplicate messages.
     /// </summary>
     public RadioChannelPrototype? Channel;
 
-    public EntitySpokeEvent(EntityUid source, string message, string originalMessage, RadioChannelPrototype? channel, string? obfuscatedMessage, LanguageMessage? languageMessage = null /* SS220 languages */)
+    public EntitySpokeEvent(EntityUid source, string message, string originalMessage, RadioChannelPrototype? channel, string? obfuscatedMessage, LanguageMessage? languageMessage = null /* SS220 languages */, FixedPoint2? frequency = null /* SS220-frequency-radio */)
     {
         Source = source;
         Message = message;
@@ -1257,6 +1261,7 @@ public sealed class EntitySpokeEvent : EntityEventArgs
         Channel = channel;
         ObfuscatedMessage = obfuscatedMessage;
         IsRadio = channel != null;
+        Frequency = frequency;
     }
 }
 
@@ -1310,13 +1315,15 @@ public record struct RadioSpokeEvent
     public readonly string Message;
     public readonly RadioChannelPrototype Channel;
     public readonly RadioEventReceiver[] Receivers; // SS220 Silicon TTS fix
+    public readonly FixedPoint2? Frequency;
 
-    public RadioSpokeEvent(EntityUid source, string message, RadioChannelPrototype channel, RadioEventReceiver[] receivers)
+    public RadioSpokeEvent(EntityUid source, string message, RadioChannelPrototype channel, RadioEventReceiver[] receivers, FixedPoint2? frequency = null /* SS220-frequency-radio */)
     {
         Source = source;
         Message = message;
         Channel = channel;
         Receivers = receivers;
+        Frequency = frequency;
     }
 }
 
