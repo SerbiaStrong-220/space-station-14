@@ -1,6 +1,6 @@
 dynamic-was-set = Был установлен динамик агентов: {$dynamic}
 dynamic-show-end-round = В раунде был динамик агентов: {$dynamic}
-dynamic-supply-level = Уровень снабжения агентов в секторе:  {$dynamic}
+dynamic-supply-level = Намерение Синдиката: {$dynamic}
 dynamic-traitor-tile = Динамические предатели
 dynamic-type-label = Название операции:
 
@@ -24,6 +24,6 @@ dynamic-hard-lore-dataset-3 = грохочущая буря
 dynamic-hard-lore-dataset-4 = разрушающее давление
 dynamic-hard-lore-dataset-5 = резкая помеха
 
-dynamic-light-name = [color=green]низкий[/color]
-dynamic-medium-name = [color=yellow]средний[/color]
-dynamic-hard-name = [color=red]высокий[/color]
+dynamic-light-name = [color=green]Незаметное исполнение[/color]
+dynamic-medium-name = [color=yellow]Умеренный риск[/color]
+dynamic-hard-name = [color=red]Активное столкновение[/color]
