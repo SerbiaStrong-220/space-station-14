@@ -114,7 +114,7 @@
   - type: SolutionContainerManager
     solutions:
       beaker:
-        maxVol: 90
+        maxVol: 76.5
         canReact: false
         reagents:
         - ReagentId: Rororium
