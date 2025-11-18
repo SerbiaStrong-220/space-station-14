@@ -22,4 +22,3 @@ public sealed partial class SelfLinkedTeleportComponent : Component
     [DataField]
     public EntityWhitelist? WhitelistLinked;
 }
-

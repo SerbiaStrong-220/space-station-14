@@ -27,7 +27,7 @@ public abstract class SharedSelfLinkedTeleportSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<SelfLinkedTeleportComponent, TeleportTargetEvent>(OnTeleportTarget);
-        SubscribeLocalEvent<SelfLinkedTeleportComponent, CanDropTargetEvent>(OnCanDropTarget);
+        //SubscribeLocalEvent<SelfLinkedTeleportComponent, CanDropTargetEvent>(OnCanDropTarget);
     }
 
     private void OnCanDropTarget(Entity<SelfLinkedTeleportComponent> ent, ref CanDropTargetEvent args)

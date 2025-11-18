@@ -10,7 +10,7 @@ namespace Content.Shared.SS220.InteractionTeleport;
 
 /// <summary>
 /// </summary>
-public abstract class SharedInteractionTeleportSystem : EntitySystem
+public sealed class SharedInteractionTeleportSystem : EntitySystem
 {
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
