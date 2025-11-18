@@ -25,11 +25,7 @@ public sealed partial class DynamicPrototype : IPrototype
     public int PlayersRequerment;
 
     [DataField]
-
     public ProtoId<LocalizedDatasetPrototype>? LoreNames;
-
-    [DataField]
-    public LocId BriefingName;
 
     public LocId? SelectedLoreName;
 }
