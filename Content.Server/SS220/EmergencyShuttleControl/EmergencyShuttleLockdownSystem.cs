@@ -10,6 +10,7 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.SS220.EmergencyShuttleControl;
 using Content.Shared.SS220.EmergencyShuttleControl.Lockdown;
 using Content.Shared.Station.Components;
+using JetBrains.FormatRipper.Elf;
 using Microsoft.Extensions.DependencyModel;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -31,6 +32,8 @@ public sealed class EmergencyShuttleLockdownSystem : EntitySystem
     [Dependency] private readonly EmergencyShuttleSystem _emergency = default!;
     [Dependency] private readonly RoundEndSystem _roundEnd = default!;
 
+    private const string AnnounceLocationLoc = "shuttle-lockdown-announce-locate";
+
     public override void Initialize()
     {
         base.Initialize();
@@ -39,10 +42,6 @@ public sealed class EmergencyShuttleLockdownSystem : EntitySystem
         SubscribeLocalEvent<EmergencyShuttleLockdownComponent, ComponentShutdown>(OnComponentShutdown);
 
         SubscribeLocalEvent<CommunicationConsoleCallShuttleAttemptEvent>(OnShuttleCallAttempt);
-
-        SubscribeLocalEvent<EmergencyShuttleLockdownComponent, EmergencyShuttleLockdownToggleActionEvent>(OnToggleAction);
-        SubscribeLocalEvent<EmergencyShuttleLockdownComponent, EmergencyShuttleLockdownActivateActionEvent>(OnEmergencyShuttleLockdownActivateActionEvent);
-        SubscribeLocalEvent<EmergencyShuttleLockdownComponent, EmergencyShuttleLockdownDeactivateActionEvent>(OnEmergencyShuttleLockdownDeactivateActionEvent);
 
         SubscribeLocalEvent<EmergencyShuttleLockdownComponent, UseInHandEvent>(OnUseInHand);
     }
@@ -73,39 +72,19 @@ public sealed class EmergencyShuttleLockdownSystem : EntitySystem
         }
     }
 
-    private void OnToggleAction(Entity<EmergencyShuttleLockdownComponent> ent, ref EmergencyShuttleLockdownToggleActionEvent args)
+    private void OnUseInHand(Entity<EmergencyShuttleLockdownComponent> ent, ref UseInHandEvent e)
     {
-        if (ent.Comp.IsActive)
-            Deactivate(ent);
-        else
-            Activate(ent);
-    }
-
-    private void OnEmergencyShuttleLockdownDeactivateActionEvent(
-        Entity<EmergencyShuttleLockdownComponent> ent,
-        ref EmergencyShuttleLockdownDeactivateActionEvent args)
-    {
-        Activate(ent);
-    }
-
-    private void OnEmergencyShuttleLockdownActivateActionEvent(
-        Entity<EmergencyShuttleLockdownComponent> ent,
-        ref EmergencyShuttleLockdownActivateActionEvent args)
-    {
-        Deactivate(ent);
-    }
-
-    private void OnUseInHand(Entity<EmergencyShuttleLockdownComponent> entity, ref UseInHandEvent e)
-    {
-        if (entity.Comp.IsInHandActive)
+        if (ent.Comp.IsInHandActive)
         {
-            var args = new EmergencyShuttleLockdownToggleActionEvent();
-            RaiseLocalEvent(entity, ref args);
+            Toggle(ent);
         }
     }
     #endregion
 
-    private void Activate(Entity<EmergencyShuttleLockdownComponent> ent)
+    /// <summary>
+    ///     Sets the component to the active state if it was previously deactivated.
+    /// </summary>
+    public void Activate(Entity<EmergencyShuttleLockdownComponent> ent)
     {
         if (!ent.Comp.IsActive &&
             !_emergency.EmergencyShuttleArrived &&
@@ -115,74 +94,35 @@ public sealed class EmergencyShuttleLockdownSystem : EntitySystem
             _roundEnd.CancelRoundEndCountdown(ent.Owner, false);
 
             var args = new EmergencyShuttleLockdownActivatedEvent();
-            RaiseLocalEvent(ent, ref args);
+            RaiseLocalEvent(ent, ref args, true);
 
             SendAnounce(ent);
         }
     }
 
-    private void Deactivate(Entity<EmergencyShuttleLockdownComponent> ent)
+    /// <summary>
+    ///     Sets the component to the inactive state if it was previously activated.
+    /// </summary>
+    public void Deactivate(Entity<EmergencyShuttleLockdownComponent> ent)
     {
         if (ent.Comp.IsActive &&
             !_emergency.EmergencyShuttleArrived)
         {
             ent.Comp.IsActive = false;
 
-            var args = new EmergencyShuttleLockdownDeactiveEvent();
-            RaiseLocalEvent(ent, ref args);
+            var args = new EmergencyShuttleLockdownDeactivatedEvent();
+            RaiseLocalEvent(ent, ref args, true);
 
             SendAnounce(ent);
         }
     }
 
-    private void SendAnounce(Entity<EmergencyShuttleLockdownComponent> ent)
+    public void Toggle(Entity<EmergencyShuttleLockdownComponent> ent)
     {
-        LocId? messageBody;
-
         if (ent.Comp.IsActive)
-            messageBody = ent.Comp.OnActiveMessage;
+            Deactivate(ent);
         else
-            messageBody = ent.Comp.OnDeactiveMessage;
-
-        //If there is no message body, there should be no announce.
-        if (messageBody is null)
-            return;
-
-        //If displaying coordinates is disabled, this should be empty.
-        string position = "";
-        if (ent.Comp.IsDisplayLocation || ent.Comp.IsDisplayCoordinates)
-        {
-            position += "\n" + Loc.GetString("shuttle-lockdown-announce-locate");
-
-            if (ent.Comp.IsDisplayLocation)
-                position += FormattedMessage.RemoveMarkupOrThrow(
-                    _navMap.GetNearestBeaconString((ent, Transform(ent.Owner))));
-
-            if (ent.Comp.IsDisplayCoordinates)
-            {
-                var coordinates = _transform.GetWorldPosition(ent.Owner);
-                position += " " + Loc.GetString("shuttle-lockdown-announce-locate-coordinates",
-                    ("coordinates", $" ({coordinates.X}, {coordinates.Y})"));
-            }
-        }
-
-        var announceMessage = Loc.GetString(messageBody,
-            ("position", position));
-
-        _chat.DispatchGlobalAnnouncement(
-            message: announceMessage,
-            sender: Loc.GetString(ent.Comp.AnnounceTitle),
-            playSound: false,
-            colorOverride: ent.Comp.AnnounceColor);
-
-        SoundSpecifier announceSound;
-
-        if (ent.Comp.IsActive)
-            announceSound = ent.Comp.ActivateSound;
-        else
-            announceSound = ent.Comp.DeactiveSound;
-
-        _audio.PlayGlobal(announceSound, Filter.Broadcast(), true);
+            Activate(ent);
     }
 
     /// <summary>
@@ -212,4 +152,73 @@ public sealed class EmergencyShuttleLockdownSystem : EntitySystem
 
         return false;
     }
+
+    #region Announce
+
+    private void SendAnounce(Entity<EmergencyShuttleLockdownComponent> ent)
+    {
+        LocId? messageBody;
+
+        if (ent.Comp.IsActive)
+            messageBody = ent.Comp.OnActiveMessage;
+        else
+            messageBody = ent.Comp.OnDeactiveMessage;
+
+        //If there is no message body, there should be no announce.
+        if (messageBody is null)
+            return;
+
+        //If displaying coordinates is disabled, this should be empty.
+        string position = "";
+        if (ent.Comp.IsDisplayLocation && ent.Comp.IsDisplayCoordinates)
+        {
+            position = Loc.GetString(AnnounceLocationLoc,
+                ("locationType", "both"),
+                GetCoordinatesArgument(ent),
+                GetLocationArgument(ent));
+        }
+        else if (ent.Comp.IsDisplayCoordinates)
+        {
+            position = Loc.GetString(AnnounceLocationLoc,
+                ("locationType", "coords"),
+                GetCoordinatesArgument(ent));
+        }
+        else if (ent.Comp.IsDisplayLocation)
+        {
+            position = Loc.GetString(AnnounceLocationLoc,
+                ("locationType", "location"),
+                GetLocationArgument(ent));
+        }
+
+        var announceMessage = Loc.GetString(messageBody,
+            ("position", position));
+
+        _chat.DispatchGlobalAnnouncement(
+            message: announceMessage,
+            sender: Loc.GetString(ent.Comp.AnnounceTitle),
+            playSound: false,
+            colorOverride: ent.Comp.AnnounceColor);
+
+        SoundSpecifier announceSound;
+
+        if (ent.Comp.IsActive)
+            announceSound = ent.Comp.ActivateSound;
+        else
+            announceSound = ent.Comp.DeactiveSound;
+
+        _audio.PlayGlobal(announceSound, Filter.Broadcast(), true);
+    }
+    private (string, object) GetCoordinatesArgument(Entity<EmergencyShuttleLockdownComponent> ent)
+    {
+        var coordinates = _transform.GetWorldPosition(ent.Owner);
+        return ("coords", $"({Math.Round(coordinates.X)}, {Math.Round(coordinates.Y)})");
+    }
+    private (string, object) GetLocationArgument(Entity<EmergencyShuttleLockdownComponent> ent)
+    {
+        return ("location",
+                FormattedMessage.RemoveMarkupOrThrow(
+                    _navMap.GetNearestBeaconString((ent, Transform(ent.Owner)))));
+    }
+
+    #endregion
 }
