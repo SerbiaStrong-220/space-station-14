@@ -46,7 +46,7 @@ public sealed class VapeSystem : SharedVapeSystem
             if (!TryComp<VapePartComponent>(comp.CartridgeEntity, out var cartPart))
                 continue;
 
-            if (cartPart.PartType is not CartridgePartData cartridge)
+            if (cartPart.PartData is not CartridgePartData cartridge)
                 continue;
 
             var inhaleAmount = cartridge.ConsumptionRate * frameTime;

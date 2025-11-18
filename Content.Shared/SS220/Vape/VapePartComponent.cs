@@ -12,7 +12,7 @@ public sealed partial class VapePartComponent : Component
 {
     [DataField]
     [AutoNetworkedField]
-    public BaseVapePartData PartType;
+    public BaseVapePartData PartData;
 
     [DataField("rsi")]
     public SpriteSpecifier RSIForVape; // TODO SS220 Rename field
@@ -28,10 +28,10 @@ public abstract partial class BaseVapePartData
     public float MaxDurability = 100f;
 
     [DataField]
-    public float CurrentDurability;
-
-    [DataField]
     public float DurabilityConsumption = 0.03f;
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public float CurrentDurability;
 }
 
 [Serializable, NetSerializable, DataDefinition]

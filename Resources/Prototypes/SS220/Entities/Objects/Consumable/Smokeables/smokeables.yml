@@ -44,7 +44,7 @@
   components:
   - type: VapePart
     rsi: { sprite: SS220/Objects/Consumable/Smokeables/Vapes/vape.rsi, state: base_atomizer }
-    partType: !type:AtomizerPartData
+    partData: !type:AtomizerPartData
       emaggedVolume: 40
   - type: SolutionContainerManager
     solutions:
@@ -75,7 +75,7 @@
   components:
   - type: VapePart
     rsi: { sprite: SS220/Objects/Consumable/Smokeables/Vapes/vape.rsi, state: extended_atomizer }
-    partType: !type:AtomizerPartData
+    partData: !type:AtomizerPartData
       emaggedVolume: 80
   - type: SolutionContainerManager
     solutions:
@@ -92,7 +92,7 @@
   components:
   - type: VapePart
     rsi: { sprite: SS220/Objects/Consumable/Smokeables/Vapes/vape.rsi, state: super_extended_atomizer }
-    partType: !type:AtomizerPartData
+    partData: !type:AtomizerPartData
       emaggedVolume: 120
   - type: SolutionContainerManager
     solutions:
@@ -109,9 +109,9 @@
   components:
   - type: VapePart
     rsi: { sprite: SS220/Objects/Consumable/Smokeables/Vapes/vape.rsi, state: base_vape_cartridge }
-    partType: !type:CartridgePartData
+    partData: !type:CartridgePartData
       consumptionRate: 0.30
-      durabilityConsumption: 0.1
+      durabilityConsumption: 0.2
   - type: Sprite
     # TODO ss220 sprites for vape parts (cartridges)
     sprite: SS220/Objects/Consumable/Smokeables/Vapes/vape.rsi
@@ -132,9 +132,9 @@
   components:
   - type: VapePart
     rsi: { sprite: SS220/Objects/Consumable/Smokeables/Vapes/vape.rsi, state: extended_cartridge }
-    partType: !type:CartridgePartData
+    partData: !type:CartridgePartData
       consumptionRate: 0.45
-      durabilityConsumption: 0.05
+      durabilityConsumption: 0.1
   - type: Sprite
     # TODO ss220 sprites for vape parts (cartridges)
     sprite: SS220/Objects/Consumable/Smokeables/Vapes/vape.rsi
@@ -147,7 +147,7 @@
   components:
   - type: VapePart
     rsi: { sprite: SS220/Objects/Consumable/Smokeables/Vapes/vape.rsi, state: super_extended_cartridge }
-    partType: !type:CartridgePartData
+    partData: !type:CartridgePartData
       consumptionRate: 0.60
       durabilityConsumption: 0.01
   - type: Sprite

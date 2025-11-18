@@ -60,7 +60,7 @@ public abstract class SharedVapeSystem : EntitySystem
             return;
         }
 
-        if (ent.Comp.AtomizerEntity == null || !Solution.TryGetRefillableSolution(ent.Comp.AtomizerEntity.Value, out _, out var sol))
+        if (ent.Comp.AtomizerEntity == null || !Solution.TryGetRefillableSolution(ent.Comp.AtomizerEntity.Value, out _, out _))
         {
             args.Reason = Loc.GetString("vape-no-solution-or-atomizer");
             args.Cancel();
@@ -80,9 +80,9 @@ public abstract class SharedVapeSystem : EntitySystem
     private void OnExamined(Entity<VapeComponent> ent, ref ExaminedEvent args)
     {
         if (TryComp<VapePartComponent>(ent.Comp.CartridgeEntity, out var cartPart) &&
-            cartPart.PartType is CartridgePartData cartridge)
+            cartPart.PartData is CartridgePartData cartridge)
         {
-            var durability = MathF.Round(cartridge.CurrentDurability / cartridge.MaxDurability * 100f);
+            var durability = cartridge.CurrentDurability / cartridge.MaxDurability;
             args.PushMarkup(Loc.GetString("vape-examine-cartridge-durability", ("currentDurability", durability)));
         }
     }
@@ -98,13 +98,12 @@ public abstract class SharedVapeSystem : EntitySystem
         if (!TryComp<VapePartComponent>(ent.Comp.AtomizerEntity.Value, out var vapePart))
             return;
 
-        if (vapePart.PartType is not AtomizerPartData atomizer)
+        if (vapePart.PartData is not AtomizerPartData atomizer)
             return;
 
         if (atomizer.EmaggedVolume.HasValue)
             sol.MaxVolume = atomizer.EmaggedVolume.Value;
 
-        args.Type = EmagType.Interaction;
         args.Handled = true;
 
         ent.Comp.IsEmagged = true;
@@ -113,7 +112,7 @@ public abstract class SharedVapeSystem : EntitySystem
 
     private void OnMapInit(Entity<VapePartComponent> ent, ref MapInitEvent args)
     {
-        if (ent.Comp.PartType is not { } data)
+        if (ent.Comp.PartData is not { } data)
             return;
 
         data.CurrentDurability = data.MaxDurability;
@@ -125,7 +124,7 @@ public abstract class SharedVapeSystem : EntitySystem
         if (!TryComp<VapePartComponent>(entity, out var vapePart))
             return;
 
-        switch (vapePart.PartType)
+        switch (vapePart.PartData)
         {
             case AtomizerPartData:
                 ent.Comp.AtomizerEntity = inserted ? entity : null;

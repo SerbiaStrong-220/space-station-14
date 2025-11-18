@@ -24,8 +24,8 @@ vape-no-solution-or-atomizer = Отсутствует бак для жидкос
 vape-no-cartridge = Отсутствует испаритель
 vape-empty-solution = Бак для жидкости пустой
 vape-cartridge-no-durability = Испаритель перегорел
-vape-examine-atomizer-durability = Прочность атомайзера: {$currentDurability}%
-vape-examine-cartridge-durability = Прочность испарителя: {$currentDurability}%
+vape-examine-atomizer-durability = Прочность атомайзера: {NATURALPERCENT($currentDurability, 2)}
+vape-examine-cartridge-durability = Прочность испарителя: {NATURALPERCENT($currentDurability, 2)}
 
 vape-slot-component-slot-name-atomizer = Бак
 vape-slot-component-slot-name-cartridge = Испаритель
