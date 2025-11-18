@@ -21,11 +21,11 @@ public sealed partial class EmergencyShuttleAutoVoteRuleComponent : Component
     /// How much time we wait before next vote
     /// </summary>
     [DataField]
-    public TimeSpan IntervalBetweenVotes = TimeSpan.FromMinutes(15f);
+    public TimeSpan IntervalBetweenVotes = TimeSpan.FromMinutes(30f);
 
     /// <summary>
     /// Round duration after which we force evac call
     /// </summary>
     [DataField]
-    public TimeSpan? ForceEvacTime = TimeSpan.FromHours(2.5f);
+    public TimeSpan? ForceEvacTime = null;
 }
