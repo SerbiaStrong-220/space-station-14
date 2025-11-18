@@ -67,6 +67,7 @@ public partial class InventorySystem
         //ss220 add electricity armor start
         SubscribeLocalEvent<InventoryComponent, BeforeStatusEffectAddedRelayEvent>(RefRelayInventoryEvent);
         //ss220 add electricity armor end
+        SubscribeLocalEvent<InventoryComponent, GetFrequencyRadioEvent>(RefRelayInventoryEvent); // SS220-add-frequency-radio
         SubscribeLocalEvent<InventoryComponent, GetExplosionResistanceEvent>(RefRelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, IsWeightlessEvent>(RefRelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, GetSpeedModifierContactCapEvent>(RefRelayInventoryEvent);
