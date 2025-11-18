@@ -2,11 +2,7 @@
 
 using Content.Shared.Examine;
 using Content.Shared.SS220.CultYogg.CultYoggIcons;
-using Content.Shared.SS220.EntityEffects.Events;
-using Content.Shared.StatusEffect;
-using Content.Shared.StatusEffectNew;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -14,8 +10,6 @@ namespace Content.Shared.SS220.CultYogg.Rave;
 
 public abstract class SharedRaveSystem : EntitySystem
 {
-    private readonly EntProtoId _statusEffectPrototype = "Rave";
-
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -27,7 +21,6 @@ public abstract class SharedRaveSystem : EntitySystem
 
         SubscribeLocalEvent<RaveComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<RaveComponent, ExaminedEvent>(OnExamined);
-        SubscribeLocalEvent<RaveComponent, OnSaintWaterDrinkEvent>(OnSaintWaterDrinked);
     }
 
     private void OnStartup(Entity<RaveComponent> ent, ref ComponentStartup args)
@@ -88,10 +81,5 @@ public abstract class SharedRaveSystem : EntitySystem
         ent.Comp.NextSoundTime = _timing.CurTime + randomTime;
 
         Dirty(ent, ent.Comp);
-    }
-
-    private void OnSaintWaterDrinked(Entity<RaveComponent> uid, ref OnSaintWaterDrinkEvent args)
-    {
-        _statusEffectsSystem.TryRemoveStatusEffect(uid, _statusEffectPrototype);//ToDo_SS220 it isn't working cause can't find status Entity
     }
 }
