@@ -10,7 +10,6 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.SS220.EmergencyShuttleControl;
 using Content.Shared.SS220.EmergencyShuttleControl.Lockdown;
 using Content.Shared.Station.Components;
-using JetBrains.FormatRipper.Elf;
 using Microsoft.Extensions.DependencyModel;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
