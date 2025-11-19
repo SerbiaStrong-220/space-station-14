@@ -155,8 +155,8 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
 
     private void UpdateAlert(Entity<DarkReaperComponent> entity)
     {
-        _alerts.ClearAlert(entity, _deadscoreStage1Alert);
-        _alerts.ClearAlert(entity, _deadscoreStage2Alert);
+        _alerts.ClearAlert(entity.Owner, _deadscoreStage1Alert);
+        _alerts.ClearAlert(entity.Owner, _deadscoreStage2Alert);
 
         string alert;
         switch (entity.Comp.CurrentStage)
@@ -190,12 +190,12 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
 
         if (severity <= 0)
         {
-            _alerts.ClearAlert(entity, _deadscoreStage1Alert);
-            _alerts.ClearAlert(entity, _deadscoreStage2Alert);
+            _alerts.ClearAlert(entity.Owner, _deadscoreStage1Alert);
+            _alerts.ClearAlert(entity.Owner, _deadscoreStage2Alert);
             return;
         }
 
-        _alerts.ShowAlert(entity, alert, (short)severity);
+        _alerts.ShowAlert(entity.Owner, alert, (short)severity);
     }
 
     protected override void OnCompInit(Entity<DarkReaperComponent> ent, ref ComponentStartup args)

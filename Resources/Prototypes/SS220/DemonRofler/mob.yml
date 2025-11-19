@@ -19,7 +19,6 @@
   - type: Tag
     tags:
     - DoorBumpOpener
-    - HideContextMenu
   - type: StatusEffects
     allowed: []
   - type: ContainerContainer
@@ -79,6 +78,7 @@
     - Normal
   - type: ContentEye
     maxZoom: 1.2, 1.2
+    targetZoom: 1.2, 1.2
   - type: Examiner
   - type: Alerts
   - type: GenericVisualizer
