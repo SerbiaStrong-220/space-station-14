@@ -28,13 +28,17 @@ public abstract class SharedContractorSystem : EntitySystem
         if (ent.Comp.AvailableItems.Count > 0)
             return;
 
-        foreach (var itemPrototype in _prototypeManager.EnumeratePrototypes<SharedContractorItemPrototype>())
+        var prototypes = _prototypeManager.EnumeratePrototypes<SharedContractorItemPrototype>();
+
+        foreach (var itemPrototype in prototypes)
         {
-            foreach (var item in itemPrototype.Items)
+            foreach (var (name, data) in itemPrototype.Items)
             {
-               ent.Comp.AvailableItems.Add(item.Key, item.Value);
+               ent.Comp.AvailableItems.Add(name, data);
             }
         }
+
+        Dirty(ent);
     }
 
     /// <summary>
@@ -55,7 +59,6 @@ public abstract class SharedContractorSystem : EntitySystem
         contractorComponent.PdaEntity = ent.Owner;
 
         ent.Comp.PdaOwner = GetNetEntity(args.Actor);
-
         Dirty(ent);
     }
 
@@ -70,13 +73,13 @@ public abstract class SharedContractorSystem : EntitySystem
         if (ev.Actor != GetEntity(ent.Comp.PdaOwner))
             return;
 
-        if (ev.Price.Quantity is <= 0)
+        if (ev.Data.Quantity is <= 0)
             return;
 
-        if (contractorComponent.Reputation < ev.Price.Amount)
+        if (contractorComponent.Reputation < ev.Data.Price)
             return;
 
-        contractorComponent.Reputation -= ev.Price.Amount.Int();
+        contractorComponent.Reputation -= ev.Data.Price.Int();
 
         var coordinates = Transform(ev.Actor).Coordinates;
         var itemToSpawn = Spawn(ev.Item, coordinates);
@@ -85,8 +88,8 @@ public abstract class SharedContractorSystem : EntitySystem
 
         ent.Comp.AvailableItems[ev.Item].Quantity--;
         Dirty(ent);
-        _uiSystem.ServerSendUiMessage(ent.Owner, ContractorPdaKey.Key, new ContractorUpdateStatsMessage());
 
+        _uiSystem.ServerSendUiMessage(ent.Owner, ContractorPdaKey.Key, new ContractorUpdateStatsMessage());
         Dirty(ev.Actor, contractorComponent);
     }
 }
@@ -95,16 +98,10 @@ public abstract class SharedContractorSystem : EntitySystem
 /// Event for opening a portal
 /// </summary>
 [Serializable, NetSerializable]
-public sealed partial class OpenPortalContractorEvent : DoAfterEvent
-{
-    public override DoAfterEvent Clone() => this;
-}
+public sealed partial class OpenPortalContractorEvent : SimpleDoAfterEvent;
 
 /// <summary>
 /// Event for teleporting target to station
 /// </summary>
 [Serializable, NetSerializable]
-public sealed partial class TeleportTargetToStationEvent : DoAfterEvent
-{
-    public override DoAfterEvent Clone() => this;
-}
+public sealed partial class TeleportTargetToStationEvent : SimpleDoAfterEvent;

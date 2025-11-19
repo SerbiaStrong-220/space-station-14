@@ -14,15 +14,15 @@
                 <PanelContainer SetSize="16 12" VerticalAlignment="Center" Margin="0 0 70 0" StyleClasses="ContractorExecutionImage"/>
             </Button>
             <ScrollContainer Name="ContractsList" Margin="0 40 0 0" VScrollEnabled="True" HorizontalExpand="True" VerticalExpand="True" HScrollEnabled="False">
-                <BoxContainer Name="ContractsListPanel" Orientation="Vertical" Margin="5 0 3 0" VerticalAlignment="Top" Access="Public" SeparationOverride="10"/>
-                <BoxContainer Name="HubPanel" Margin="0 0 0 50" Visible="False" Orientation="Vertical" Access="Public" SeparationOverride="5"  HorizontalExpand="True" VerticalExpand="True"/>
+                <BoxContainer Name="ContractsListPanel" Orientation="Vertical" Margin="5 0 3 0" VerticalAlignment="Top" Access="Public" HorizontalExpand="True" VerticalExpand="True" SeparationOverride="10"/>
+                <BoxContainer Name="HubPanel" Margin="0 0 0 50" Visible="False" Orientation="Vertical" Access="Public" SeparationOverride="5" HorizontalExpand="True" VerticalExpand="True"/>
             </ScrollContainer>
         </PanelContainer>
-        <Button Name="ContractsButton" Access="Public" Margin="102 185 332 494" SetSize="100 20" VerticalAlignment="Top" StyleClasses="ContractorButtonStyle" ToggleMode="True">
+        <Button Name="ContractsButton" Access="Public" Pressed="True" Margin="102 184 332 494" SetSize="100 20" VerticalAlignment="Top" StyleClasses="ContractorButtonStyle" ToggleMode="True">
             <PanelContainer SetSize="14 10" Margin="0 3 65 0" VerticalAlignment="Center" StyleClasses="ContractorContractsImage"/>
             <Label Text="Контракты" Margin="25 0 0 0" VerticalAlignment="Center" StyleClasses="ContractorLabelStyle"/>
         </Button>
-        <Button Name="HubButton" Access="Public" Margin="224 185 260 494" SetSize="100 20" VerticalAlignment="Top" StyleClasses="ContractorButtonStyle" ToggleMode="True">
+        <Button Name="HubButton" Access="Public" Pressed="False" Margin="224 185 260 494" SetSize="100 20" VerticalAlignment="Top" StyleClasses="ContractorButtonStyle" ToggleMode="True">
             <PanelContainer SetSize="14 10" Margin="0 3 60 0" VerticalAlignment="Center" StyleClasses="ContractorHubImage"/>
             <Label Text="Магазин" Margin="30 0 0 0" VerticalAlignment="Center" StyleClasses="ContractorLabelStyle"/>
         </Button>

@@ -70,9 +70,14 @@ public sealed partial class ContractorComponent : Component
     [AutoNetworkedField]
     public float? BlockUntil;
 
-    public readonly int ReputationAward = 2;
+    [DataField]
+    public int ReputationAward = 2;
 
+    [DataField]
     public int MaxAvailableContracts = 5;
+
+    [DataField]
+    public int PenaltyForAbort = 1;
 }
 
 [Serializable]
@@ -81,5 +86,14 @@ public struct ContractorContract
 {
     public string Name;
     public ProtoId<JobPrototype> Job;
-    public List<(NetEntity Uid, string Location, FixedPoint2 TcReward, Difficulty Difficulty)> AmountPositions;
+    public List<ContractorExecutionData> AmountPositions;
+}
+
+[Serializable, NetSerializable]
+public record struct ContractorExecutionData
+{
+    public NetEntity Target;
+    public string Location;
+    public FixedPoint2 TcReward;
+    public Difficulty Difficulty;
 }

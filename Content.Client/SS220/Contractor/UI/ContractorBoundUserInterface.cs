@@ -68,7 +68,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
         if (_contractorPdaComponent.PdaOwner == null)
             return;
 
-        var group = new ButtonGroup();
+        var group = new ButtonGroup(false);
 
         _menu.ContractsButton.Group = group;
         _menu.HubButton.Group = group;
@@ -97,12 +97,12 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
         UpdateBlockTimer(castState.BlockExecutionTime, _menu.ExecutionLabel);
     }
 
-    private void UpdateButtonState(Button button, bool? isEnabled, float? blockTime)
+    private static void UpdateButtonState(Button button, bool? isEnabled, float? blockTime)
     {
         button.Disabled = isEnabled != true || blockTime is > 0;
     }
 
-    private void UpdateBlockTimer(float? blockUntil, Label timerLabel)
+    private static void UpdateBlockTimer(float? blockUntil, Label timerLabel)
     {
         if (blockUntil is null or <= 0f)
         {
@@ -241,7 +241,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
                 Margin = new Thickness(30, 0, 0, 0),
             };
 
-            iconTargetSprite.SetupCharacterSpriteView(profile, _prototypeManager.Index(contract.Job).ID, true);
+            iconTargetSprite.SetupCharacterSpriteView(profile, _prototypeManager.Index(contract.Job).ID);
 
             _photoWindow.OnClose += () => _photoWindow = null;
 
@@ -325,7 +325,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
                 SendMessage(new ContractorNewContractAcceptedMessage(target,
                     contract,
                     amountPosition.TcReward,
-                    amountPosition.Uid));
+                    amountPosition.Target));
 
                 abortButton.Visible = true;
 
@@ -374,89 +374,25 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
         {
             var protoItem = _prototypeManager.Index(item.Key);
 
-            var shopItemContainer = new BoxContainer
-            {
-                Orientation = BoxContainer.LayoutOrientation.Vertical,
-                SeparationOverride = 5,
-                HorizontalExpand = true,
-                VerticalExpand = true,
-                VerticalAlignment = Control.VAlignment.Top,
-                Margin = new Thickness(5, 5, 5, 5),
-            };
+            var shopItemContainer = new ContractorHubMenu();
 
-            var topRow = new BoxContainer
-            {
-                Orientation = BoxContainer.LayoutOrientation.Horizontal,
-                SeparationOverride = 10,
-                HorizontalExpand = true,
-                VerticalAlignment = Control.VAlignment.Center,
-            };
-
-            var itemIcon = new EntityPrototypeView
-            {
-                Scale = new Vector2(1.4f, 1.4f),
-                VerticalAlignment = Control.VAlignment.Center,
-                HorizontalAlignment = Control.HAlignment.Left,
-            };
-
-            itemIcon.SetPrototype(protoItem);
-
-            var itemNameLabel = new RichTextLabel
-            {
-                Text = protoItem.Name,
-                HorizontalExpand = true,
-                VerticalAlignment = Control.VAlignment.Center,
-            };
+            shopItemContainer.ItemIcon.SetPrototype(protoItem);
+            shopItemContainer.ItemName.Text = protoItem.Name;
 
             if (item.Value.Quantity >= 0)
-                itemNameLabel.Text += Loc.GetString("contractor-uplink-in-stock", ("quantity", item.Value.Quantity));
+                shopItemContainer.ItemName.Text += "\n" + Loc.GetString("contractor-uplink-in-stock", ("quantity", item.Value.Quantity));
 
-            var buyButton = new Button
-            {
-                Text = Loc.GetString("contractor-uplink-buy-text", ("price", item.Value.Amount)),
-                HorizontalExpand = false,
-                VerticalExpand = false,
-                StyleClasses = { "OpenBoth" },
-                MinSize = new Vector2(120, 30),
-                Disabled = item.Value.Quantity <= 0,
-            };
+            shopItemContainer.BuyButtonLabel.Text = Loc.GetString("contractor-uplink-buy-text", ("price", item.Value.Price));
+            shopItemContainer.BuyButton.Disabled = item.Value.Quantity <= 0;
 
-            buyButton.OnPressed += _ =>
+            shopItemContainer.BuyButton.OnPressed += _ =>
             {
                 SendMessage(new ContractorHubBuyItemMessage(item.Key, item.Value));
             };
 
-            topRow.AddChild(itemIcon);
-            topRow.AddChild(itemNameLabel);
-            topRow.AddChild(buyButton);
-
-            var itemDescriptionLabel = new RichTextLabel
-            {
-                HorizontalExpand = true,
-                VerticalExpand = true,
-            };
-
-            itemDescriptionLabel.SetMessage(protoItem.Description);
-
-            var descriptionContainer = new BoxContainer
-            {
-                Orientation = BoxContainer.LayoutOrientation.Vertical,
-                HorizontalExpand = true,
-                VerticalExpand = true,
-            };
-
-            descriptionContainer.AddChild(itemDescriptionLabel);
-
-            shopItemContainer.AddChild(topRow);
-            shopItemContainer.AddChild(descriptionContainer);
-
-            var lowerDivider = new PanelContainer
-            {
-                StyleClasses = { "HighDivider" },
-            };
+            shopItemContainer.ItemDescription.SetMessage(protoItem.Description);
 
             _menu.HubPanel.AddChild(shopItemContainer);
-            _menu.HubPanel.AddChild(lowerDivider);
         }
     }
 
@@ -468,6 +404,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
         _menu.ContractorTopLabel.Text = Loc.GetString("contractor-uplink-available-contracts");
         _menu.HubPanel.Visible = false;
         _menu.ContractsListPanel.Visible = true;
+        _menu.ExecutionButton.Visible = true;
     }
 
     public void OnHubButtonPressed()
@@ -478,6 +415,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
         _menu.ContractorTopLabel.Text = Loc.GetString("contractor-uplink-available-items");
         _menu.HubPanel.Visible = true;
         _menu.ContractsListPanel.Visible = false;
+        _menu.ExecutionButton.Visible = false;
     }
 
     public void OnExecutionButtonPressed()

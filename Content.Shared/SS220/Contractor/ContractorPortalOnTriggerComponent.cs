@@ -14,4 +14,7 @@ public sealed partial class ContractorPortalOnTriggerComponent : Component
 
     [DataField]
     public NetEntity? TargetEntity;
+
+    [DataField]
+    public TimeSpan TimeForTeleportBack = TimeSpan.FromSeconds(5); // just for debug
 }

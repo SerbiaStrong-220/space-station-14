@@ -1,6 +1,7 @@
 using Content.Server.Mind;
 using Content.Server.Roles;
 using Content.Shared.Roles;
+using Content.Shared.Roles.Components;
 using Content.Shared.Store;
 using Robust.Shared.Timing;
 
@@ -28,9 +29,8 @@ public sealed partial class BuyTimeForListingCondition : ListingCondition
 
         var currentTime = _gameTiming.CurTime;
 
-        var creationTime = traitorRoleComponent.Value.Comp2.TimeOfAssignment;
-
-        return currentTime < creationTime + TimeAmount;
+        // TODO: SS220
+        return true;
 
     }
 }

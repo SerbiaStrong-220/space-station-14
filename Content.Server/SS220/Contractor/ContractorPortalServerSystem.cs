@@ -89,7 +89,6 @@ public sealed class ContractorPortalServerSystem : EntitySystem
         contractorComponent.BlockUntil = TimeBlockBetweenContract;
 
         _contractorServer.GenerateContracts((contractorEntity, contractorComponent)); // generate new contracts
-
         _transformSystem.SetCoordinates(args.OtherEntity, Transform(targetComponent.PortalOnTajpanEntity.Value).Coordinates);
 
         Dirty(contractorComponent.PdaEntity!.Value, contractorPdaComponent);
@@ -97,7 +96,7 @@ public sealed class ContractorPortalServerSystem : EntitySystem
 
         _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager,
             args.OtherEntity,
-            5f,
+            ent.Comp.TimeForTeleportBack,
             new TeleportTargetToStationEvent(),
             args.OtherEntity,
             args.OtherEntity)

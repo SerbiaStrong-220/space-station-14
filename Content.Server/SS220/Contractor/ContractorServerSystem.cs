@@ -13,6 +13,7 @@ using Content.Shared.Ghost;
 using Content.Shared.Mind;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
+using Content.Shared.Roles.Components;
 using Content.Shared.SS220.Contractor;
 using Content.Shared.SSDIndicator;
 using Content.Shared.Store;
@@ -357,15 +358,23 @@ public sealed class ContractorServerSystem : SharedContractorSystem
         }
     }
 
-    private List<(NetEntity Uid, string Location, FixedPoint2 TcReward, Difficulty Difficulty)> GeneratePositionsForTarget()
+    private List<ContractorExecutionData> GeneratePositionsForTarget()
     {
-        var allLocations = new List<(NetEntity Uid, string Location, FixedPoint2 TcReward, Difficulty Difficulty)>();
+        var allLocations = new List<ContractorExecutionData>();
 
         var query = EntityQueryEnumerator<ContractorWarpPointComponent>();
 
         while (query.MoveNext(out var uid, out var comp))
         {
-            allLocations.Add((GetNetEntity(uid), comp.LocationName, comp.AmountTc, comp.Difficulty));
+            var data = new ContractorExecutionData
+            {
+                Target = GetNetEntity(uid),
+                Location = comp.LocationName,
+                TcReward = comp.AmountTc,
+                Difficulty = comp.Difficulty,
+            };
+
+            allLocations.Add(data);
         }
 
         var easyLocations = allLocations.Where(loc => loc.Difficulty == Difficulty.Easy).ToList();
@@ -376,14 +385,14 @@ public sealed class ContractorServerSystem : SharedContractorSystem
         _random.Shuffle(mediumLocations);
         _random.Shuffle(hardLocations);
 
-        var result = new List<(NetEntity, string, FixedPoint2, Difficulty)>
+        var result = new List<ContractorExecutionData>
         {
             easyLocations.FirstOrDefault(),
             mediumLocations.FirstOrDefault(),
-            hardLocations.FirstOrDefault()
+            hardLocations.FirstOrDefault(),
         };
 
-        return result.Where(loc => loc.Item1.Valid).ToList();
+        return result.Where(loc => loc.Target.Valid).ToList();
     }
 
     private bool IsCloseWithPosition(EntityUid contractor)
@@ -407,7 +416,6 @@ public sealed class ContractorServerSystem : SharedContractorSystem
 
         var isCloseToPortal = (contractorPosition - targetPortalPosition).Length() < 1f &&
                               (targetPosition - targetPortalPosition).Length() < 1f;
-
 
         return isCloseToPortal;
     }
@@ -433,7 +441,7 @@ public sealed class ContractorServerSystem : SharedContractorSystem
         }
 
         contractorComponent.MaxAvailableContracts--;
-        contractorComponent.Reputation--;
+        contractorComponent.Reputation -= contractorComponent.PenaltyForAbort;
         contractorComponent.CurrentContractEntity = null;
         contractorComponent.CurrentContractData = null;
 

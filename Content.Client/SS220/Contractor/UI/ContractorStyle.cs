@@ -11,7 +11,7 @@ public sealed class ContractorStyle : QuickStyle
 {
     private readonly IResourceCache _cache = IoCManager.Resolve<IResourceCache>();
 
-    private StyleBoxTexture CreateStyleBox(string texturePath, float scale = 2f, float marginLeft = 0f, float marginRight = 0f, float marginTop = 0f, float marginBottom = 0f)
+    private StyleBoxTexture CreateStyleBox(string texturePath, float scale = 1.5f, float marginLeft = 0f, float marginRight = 0f, float marginTop = 0f, float marginBottom = 0f)
     {
         return new StyleBoxTexture()
         {

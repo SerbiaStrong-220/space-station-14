@@ -3,11 +3,13 @@
   id: ContractorItems
   items:
     ContractorBaton:
-      amount: 2.0
+      price: 2.0
       quantity: 2
     Crowbar:
-      amount: 4.0
+      price: 4.0
       quantity: 2
+    Table:
+      price: 8.0
 
 # Contractor warp point
 - type: entity

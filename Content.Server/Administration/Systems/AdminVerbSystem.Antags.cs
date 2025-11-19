@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Server.Antag;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules.Components;
@@ -13,6 +14,13 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Content.Server.SS220.GameTicking.Rules.Components;
+using Content.Server.Traitor.Uplink;
+using Content.Shared.FixedPoint;
+using Content.Shared.Implants.Components;
+using Content.Shared.Roles.Components;
+using Content.Shared.SS220.Contractor;
+using Content.Shared.Store.Components;
+using Robust.Shared.Map;
 
 namespace Content.Server.Administration.Systems;
 
@@ -22,6 +30,7 @@ public sealed partial class AdminVerbSystem
     [Dependency] private readonly ZombieSystem _zombie = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly OutfitSystem _outfit = default!;
+    [Dependency] private readonly UplinkSystem _uplink = default!;
 
     private static readonly EntProtoId DefaultTraitorRule = "Traitor";
     private static readonly EntProtoId DefaultInitialInfectedRule = "Zombie";

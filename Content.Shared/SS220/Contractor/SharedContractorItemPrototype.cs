@@ -7,7 +7,7 @@ namespace Content.Shared.SS220.Contractor;
 /// <summary>
 /// This is a prototype for contractor items in uplink.
 /// </summary>
-[Serializable, NetSerializable, Prototype("contractorItems")]
+[Prototype("contractorItems")]
 public sealed partial class SharedContractorItemPrototype : IPrototype
 {
     [DataField("items")]
@@ -23,7 +23,7 @@ public sealed partial class SharedContractorItemPrototype : IPrototype
 public sealed partial class ContractorItemData
 {
     [DataField]
-    public FixedPoint2 Amount;
+    public FixedPoint2 Price;
 
     [DataField]
     public int? Quantity;
