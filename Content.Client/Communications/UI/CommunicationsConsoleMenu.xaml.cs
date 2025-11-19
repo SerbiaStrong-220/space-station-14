@@ -42,8 +42,10 @@ namespace Content.Client.Communications.UI
             //var maxAnnounceLength = _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength);
             //MessageInput.OnTextChanged += (args) =>
 
+            // SS220 add pin button begin
             var pinButton = PinUISystem.AddPinButtonBeforeTarget(this, CloseButton);
             pinButton.Margin = new Thickness(0, 0, 5, 0);
+            // SS220 add pin button end
 
             MessageInput.Edit.Placeholder = new Rope.Leaf(_loc.GetString("comms-console-menu-announcement-placeholder"));
 
