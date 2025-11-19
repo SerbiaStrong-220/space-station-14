@@ -91,6 +91,9 @@ public sealed class SharedInteractionTeleportSystem : EntitySystem
 
     private void OnTeleportDoAfter(Entity<InteractionTeleportComponent> ent, ref InteractionTeleportDoAfterEvent args)
     {
+        if (args.Cancelled)
+            return;
+
         if (args.Target == null)
             return;
 
