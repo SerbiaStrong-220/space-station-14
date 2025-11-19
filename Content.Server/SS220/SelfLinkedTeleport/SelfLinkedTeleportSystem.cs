@@ -92,6 +92,7 @@ public sealed class SelfLinkedTeleportSystem : SharedSelfLinkedTeleportSystem
         }
 
         ent.Comp.LinkedEntity = null;
+        Dirty(ent);
 
         return;
     }
