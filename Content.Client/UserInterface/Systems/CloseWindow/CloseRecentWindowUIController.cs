@@ -108,6 +108,23 @@ public sealed class CloseRecentWindowUIController : UIController
         recentlyInteractedWindows.Add(window);
     }
 
+    // ss220 add pin for ui start
+    public BaseWindow? GetMostRecentlyInteractedWindow()
+    {
+        for (var i = recentlyInteractedWindows.Count - 1; i >= 0; i--)
+        {
+            var window = recentlyInteractedWindows[i];
+
+            if (!window.IsOpen)
+                continue;
+
+            return window;
+        }
+
+        return null;
+    }
+    // ss220 add pin for ui end
+
     private BaseWindow? GetWindowForControl(Control? control)
     {
         if (control == null)

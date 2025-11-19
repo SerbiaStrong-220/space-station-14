@@ -1,5 +1,5 @@
 using System.Linq;
-using Content.Client.SS220.UserInterface;
+using Content.Client.SS220.UserInterface.Controls; // ss220 add pin for ui
 using Content.Client.SS220.UserInterface.System.PinUI;
 using Content.Shared.Access;
 using Content.Shared.Access.Systems;
@@ -16,7 +16,7 @@ using static Content.Shared.Access.Components.IdCardConsoleComponent;
 namespace Content.Client.Access.UI
 {
     [GenerateTypedNameReferences]
-    public sealed partial class IdCardConsoleWindow : DefaultWindow
+    public sealed partial class IdCardConsoleWindow : DefaultWindow, IPinnableWindow // ss220 add pin for ui
     {
         [Dependency] private readonly IConfigurationManager _cfgManager = default!;
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;

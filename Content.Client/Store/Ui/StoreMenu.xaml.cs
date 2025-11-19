@@ -2,6 +2,7 @@ using System.Linq;
 using System.Text;
 using Content.Client.Actions;
 using Content.Client.Message;
+using Content.Client.SS220.UserInterface.Controls; // ss220 add pin for ui
 using Content.Client.SS220.UserInterface.System.PinUI;
 using Content.Shared.FixedPoint;
 using Content.Shared.Store;
@@ -16,7 +17,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Client.Store.Ui;
 
 [GenerateTypedNameReferences]
-public sealed partial class StoreMenu : DefaultWindow
+public sealed partial class StoreMenu : DefaultWindow, IPinnableWindow // ss220 add pin for ui
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;

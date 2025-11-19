@@ -30,14 +30,6 @@ public sealed class WristWatchBoundUserInterface : BoundUserInterface
         _pinUI = _entityManager.System<PinUISystem>();
     }
 
-    protected override void UpdateState(BoundUserInterfaceState state)
-    {
-        base.UpdateState(state);
-
-        if (state is PinControlState)
-            _pinUI.SetPinned(_menu);
-    }
-
     public void RefreshStyle()
     {
         RetrieveStyleFrom(Owner);

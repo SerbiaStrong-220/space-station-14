@@ -5,7 +5,7 @@ using Robust.Client.UserInterface.CustomControls;
 namespace Content.Client.SS220.UserInterface.Controls;
 
 [Virtual]
-public sealed partial class PinnableDefaultWindow : DefaultWindow
+public sealed partial class PinnableDefaultWindow : DefaultWindow, IPinnableWindow
 {
     public PinnableDefaultWindow()
     {
@@ -13,3 +13,5 @@ public sealed partial class PinnableDefaultWindow : DefaultWindow
         pinButton.Margin = new Thickness(0, 0, 5, 0);
     }
 }
+
+public interface IPinnableWindow;

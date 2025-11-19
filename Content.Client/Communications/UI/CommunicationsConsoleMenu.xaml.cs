@@ -1,4 +1,5 @@
 using System.Globalization;
+using Content.Client.SS220.UserInterface.Controls; // ss220 add pin for ui
 using Content.Client.SS220.UserInterface.System.PinUI;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.CCVar;
@@ -11,7 +12,7 @@ using Robust.Shared.Utility;
 namespace Content.Client.Communications.UI
 {
     [GenerateTypedNameReferences]
-    public sealed partial class CommunicationsConsoleMenu : FancyWindow
+    public sealed partial class CommunicationsConsoleMenu : FancyWindow, IPinnableWindow // ss220 add pin for ui
     {
         [Dependency] private readonly IConfigurationManager _cfg = default!;
         [Dependency] private readonly IGameTiming _timing = default!;

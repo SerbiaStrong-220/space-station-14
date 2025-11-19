@@ -1,18 +1,19 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.SS220.PinnableUI;
-using Content.Shared.UserInterface;
-using Content.Shared.Verbs;
+using Content.Client.SS220.UserInterface.Controls;
+using Content.Client.UserInterface.Systems.Info;
+using Content.Shared.SS220.Input;
+using Robust.Client.Input;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
-using Robust.Shared.Timing;
+using Robust.Shared.Input.Binding;
 
 namespace Content.Client.SS220.UserInterface.System.PinUI;
 
 public sealed class PinUISystem : EntitySystem
 {
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private readonly IInputManager _input = default!;
+    [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
 
     public Action<PinStateChangedArgs>? OnPinStateChanged;
 
@@ -22,34 +23,19 @@ public sealed class PinUISystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<PinnableUIComponent, GetVerbsEvent<Verb>>(OnGetVerbs);
+        _input.SetInputCommand(KeyFunctions220.PinUI,
+            InputCmdHandler.FromDelegate(_ => HandlePinUI()));
     }
 
-    private void OnGetVerbs(Entity<PinnableUIComponent> ent, ref GetVerbsEvent<Verb> args)
+    private void HandlePinUI()
     {
-        if (!args.CanAccess || !args.CanInteract || !TryComp<ActivatableUIComponent>(ent, out var activatable))
+        var controller = _uiManager.GetUIController<CloseRecentWindowUIController>();
+
+        var window = controller.GetMostRecentlyInteractedWindow();
+        if (window is not IPinnableWindow)
             return;
 
-        if (activatable.Key == null)
-            return;
-
-        if (!_ui.IsUiOpen(ent.Owner, activatable.Key))
-            return;
-
-        if (!_gameTiming.IsFirstTimePredicted)
-            return;
-
-        var verb = new Verb
-        {
-            Act = () =>
-            {
-                _ui.SetUiState(ent.Owner, activatable.Key, new PinControlState());
-            },
-            Text = Loc.GetString("verb-pin-ui"),
-            Icon = ent.Comp.Icon,
-        };
-
-        args.Verbs.Add(verb);
+        SetPinned(window);
     }
 
     public static TextureButton AddPinButtonBeforeTarget(Control linkedControl, Control target)
@@ -92,5 +78,3 @@ public sealed class PinUISystem : EntitySystem
 }
 
 public record struct PinStateChangedArgs(Control Control, bool Pinned);
-
-public sealed partial class PinControlState : BoundUserInterfaceState;

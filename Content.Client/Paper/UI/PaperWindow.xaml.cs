@@ -12,14 +12,13 @@ using Robust.Client.UserInterface.RichText;
 using Content.Client.UserInterface.RichText;
 using Robust.Shared.Input;
 using Content.Client.SS220.Language;
-using Content.Client.SS220.UserInterface;
+using Content.Client.SS220.UserInterface.Controls; // ss220 add pin for ui
 using Robust.Client.Player;
-using Content.Client.SS220.UserInterface.System.PinUI;
 
 namespace Content.Client.Paper.UI
 {
     [GenerateTypedNameReferences, Virtual]
-    public partial class PaperWindow : BaseWindow
+    public partial class PaperWindow : BaseWindow, IPinnableWindow // ss220 add pin for ui
     {
         [Dependency] private readonly IInputManager _inputManager = default!;
         [Dependency] private readonly IResourceCache _resCache = default!;

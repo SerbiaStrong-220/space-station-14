@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Numerics;
 using Content.Client.Resources;
-using Content.Client.SS220.UserInterface;
+using Content.Client.SS220.UserInterface.Controls; // ss220 add pin for ui
 using Content.Client.SS220.UserInterface.System.PinUI;
 using Content.Client.Viewport;
 using Content.Shared.DeviceNetwork;
@@ -19,7 +19,7 @@ using Robust.Shared.Utility;
 namespace Content.Client.SurveillanceCamera.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class SurveillanceCameraMonitorWindow : DefaultWindow
+public sealed partial class SurveillanceCameraMonitorWindow : DefaultWindow, IPinnableWindow // ss220 add pin for ui
 {
     private static readonly ProtoId<ShaderPrototype> CameraStaticShader = "CameraStatic";
 
