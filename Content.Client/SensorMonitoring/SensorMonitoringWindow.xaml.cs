@@ -2,7 +2,7 @@ using System.Linq;
 using System.Numerics;
 using Content.Client.Computer;
 using Content.Client.SS220.UserInterface.Controls; // ss220 add pin for ui
-using Content.Client.SS220.UserInterface.System.PinUI;
+using Content.Client.SS220.UserInterface.System.PinUI; //ss220 add pin for ui
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.SensorMonitoring;

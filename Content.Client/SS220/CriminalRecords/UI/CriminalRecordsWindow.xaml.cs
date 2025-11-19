@@ -14,7 +14,7 @@ using Robust.Shared.Utility;
 using System.Linq;
 using System.Threading;
 using Content.Client.SS220.UserInterface.Controls;
-using Content.Client.SS220.UserInterface.System.PinUI;
+using Content.Client.SS220.UserInterface.System.PinUI; //ss220 add pin for ui
 using Timer = Robust.Shared.Timing.Timer;
 
 namespace Content.Client.SS220.CriminalRecords.UI;

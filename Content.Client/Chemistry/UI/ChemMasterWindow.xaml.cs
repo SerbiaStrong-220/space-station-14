@@ -15,7 +15,7 @@ using Content.Shared.FixedPoint;
 using Robust.Client.Graphics;
 using static Robust.Client.UserInterface.Controls.BoxContainer;
 using Robust.Client.GameObjects;
-using Content.Client.SS220.UserInterface.System.PinUI;
+using Content.Client.SS220.UserInterface.System.PinUI; //ss220 add pin for ui
 
 namespace Content.Client.Chemistry.UI
 {

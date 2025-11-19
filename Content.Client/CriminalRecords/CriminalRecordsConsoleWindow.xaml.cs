@@ -18,7 +18,7 @@ using System.Numerics;
 using Content.Client.SS220.UserInterface.Controls; // ss220 add pin for ui
 using Content.Shared.StatusIcon;
 using Robust.Client.GameObjects;
-using Content.Client.SS220.UserInterface.System.PinUI;
+using Content.Client.SS220.UserInterface.System.PinUI; //ss220 add pin for ui
 
 namespace Content.Client.CriminalRecords;
 

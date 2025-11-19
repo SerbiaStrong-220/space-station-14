@@ -1,6 +1,6 @@
 using Content.Client.Gameplay;
 using Content.Client.Info;
-using Content.Client.SS220.UserInterface.System.PinUI;
+using Content.Client.SS220.UserInterface.System.PinUI; //ss220 add pin for ui
 using Robust.Client.Input;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
