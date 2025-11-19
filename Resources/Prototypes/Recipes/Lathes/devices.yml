@@ -219,7 +219,8 @@
     Glass: 400
     Gold: 100
 
-- type: latheRecipe #SS220 Energy crossbow
+ #SS220 Energy crossbow begin
+- type: latheRecipe
   id: WeaponEnergyCrossbow
   result: WeaponEnergyCrossbow
   completetime: 5
@@ -228,3 +229,24 @@
     Silver: 750
     Plasma: 1500
     Uranium: 600
+ #SS220 Energy crossbow end
+
+- type: latheRecipe
+  id: CableDetStack1
+  result: CableDetStack1
+  categories:
+  - Weapons
+  completetime: 2
+  materials:
+    Plastic: 50
+    Plasma: 25
+    Gold: 20
+
+- type: latheRecipe
+  id: EmptyDetonator
+  result: EmptyDetonator
+  categories:
+  - Weapons
+  completetime: 3
+  materials:
+    Steel: 100

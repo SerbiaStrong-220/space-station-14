@@ -98,11 +98,14 @@
   - FauxTileAstroGrass
   - FauxTileMowedAstroGrass
   - FauxTileJungleAstroGrass
+  - FauxTileDarkAstroGrass
+  - FauxTileLightAstroGrass
   - FauxTileAstroIce
   - FauxTileAstroSnow
   - FauxTileAstroSand #SS220-beachCraftng
 
   - FauxTileAstroAsteroidSand
+  - FauxTileDesertAstroSand
 
 - type: technology
   id: BiochemicalStasis

@@ -62,8 +62,8 @@ public abstract class SharedRestrictedItemSystem : EntitySystem
         if (!_whitelistSystem.IsWhitelistFail(item.Comp.Whitelist, user))
             return true;
 
-        if (_net.IsServer)
-            _popup.PopupEntity(Loc.GetString(item.Comp.LocalizedPopup), item);
+ 
+        _popup.PopupPredicted(Loc.GetString(item.Comp.LocalizedPopup), item, user);
 
         if (!item.Comp.DamageOnFail.Empty)
             _damageable.TryChangeDamage(user, item.Comp.DamageOnFail, true);
@@ -81,7 +81,7 @@ public abstract class SharedRestrictedItemSystem : EntitySystem
         // trying to unequip all item's with component
         foreach (var item in _inventory.GetHandOrInventoryEntities(ent))
         {
-            if (!TryComp<RestrictedItemComponent>(item, out var restrictedComp)) //ToDo_SS220 make check for a whitelist
+            if (!HasComp<RestrictedItemComponent>(item)) //ToDo_SS220 make check for a whitelist
                 continue;
 
             _transform.DropNextTo(item, ent);

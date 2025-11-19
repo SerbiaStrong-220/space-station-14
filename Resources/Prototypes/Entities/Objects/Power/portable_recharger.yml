@@ -6,6 +6,10 @@
   components:
   - type: Item
     size: Huge
+    # SS220 PortableRecharger begin
+    shape:
+    - 0,0,4,1
+    # SS220 PortableRecharger end
   - type: Sprite
     sprite: Objects/Power/portable_recharger.rsi
     state: charging

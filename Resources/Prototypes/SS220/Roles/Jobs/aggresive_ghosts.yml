@@ -1,0 +1,20 @@
+- type: job
+  id: DarkReaper # yes even it HAS WORK BUT NOT YOU
+  name: job-name-dark-reaper
+  description: job-description-dark-reaper
+  playTimeTracker: AntagDarkReaper
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 20h
+
+- type: job
+  id: Revenant
+  name: job-name-revenant
+  description: job-description-revenant
+  playTimeTracker: AntagRevenant
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 20h
+
+
+

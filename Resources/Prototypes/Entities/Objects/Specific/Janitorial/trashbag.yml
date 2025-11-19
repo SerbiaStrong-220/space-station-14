@@ -20,8 +20,9 @@
       collection: trashBagRustle
     whitelist:
       tags:
-        - Cartridge
         - Trash
+        - Grenade
+        - ToyGrenade
   - type: UseDelay
     delay: 0.5
   - type: Tag

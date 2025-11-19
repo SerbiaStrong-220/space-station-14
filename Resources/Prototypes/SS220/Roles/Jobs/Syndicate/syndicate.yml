@@ -10,3 +10,33 @@
   access:
   - SyndicateAgent
   - Maintenance
+
+- type: job
+  id: SyndicateBorg
+  name: job-name-syndicate-borg
+  description: job-description-syndicate-borg
+  playTimeTracker: AntagSyndicateBorg # Your syndie/NT views also influence your work :pepeAngry:
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 20h
+    - !type:RoleTimeRequirement
+      role: JobBorg
+      time: 10h
+  applyTraits: false
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: RenameStart
+
+- type: job
+  id: SyndicateReinforcement
+  name: job-name-syndicate-reinforcement
+  description: job-description-syndicate-reinforcement
+  playTimeTracker: AntagSyndicateReinforcement
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 72000
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: RenameStart
