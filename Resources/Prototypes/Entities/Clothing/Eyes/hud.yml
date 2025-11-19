@@ -7,6 +7,10 @@
   - type: ShowMindShieldIcons
   - type: ShowCriminalRecordIcons
   # - type: ShowContrabandDetails # SS220-unused-info
+  # ss220 add criminal records for hud's start
+  - type: SecHudRecords
+    verbSprite: SS220/Interface/VerbIcons/protection_glasses.png
+  # ss220 add criminal records for hud's end
 
 - type: entity
   id: ShowMedicalIcons
@@ -30,6 +34,7 @@
     damageContainers:
     - Inorganic
     - Silicon
+  - type: ShowAccessReaderSettings
 
 - type: entity
   parent: [ClothingEyesBase, ShowMedicalIcons]

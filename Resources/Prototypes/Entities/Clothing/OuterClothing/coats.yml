@@ -161,7 +161,7 @@
     modifiers:
       coefficients:
         Slash: 0.95
-  - type: Food
+  - type: Edible
     requiresSpecialDigestion: true
   - type: SolutionContainerManager
     solutions:
@@ -422,6 +422,10 @@
     microFiberMaterial: micro-fibers-cotton
     microFiberColor: micro-fibers-brown
 #SS220 Micro_fibers end
+  # SS220 add-pirateaccent-tricord-and-coat BEGIN
+  - type: AddAccentClothing
+    accent: PirateAccent
+  # SS220 add-pirateaccent-tricord-and-coat END
 
 - type: entity
   parent: [ClothingOuterArmorWarden, ClothingOuterStorageBase, BaseSecurityContraband]

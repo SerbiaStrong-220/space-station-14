@@ -83,7 +83,7 @@
     icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: heal}
   - type: TargetAction
   - type: EntityTargetAction
-    event: !type:MiGoHealEvent
+    event: !type:MiGoHealActionEvent
       heal:
         types:
           Slash: -6
@@ -111,11 +111,11 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    useDelay: 15
+    useDelay: 30
     itemIconStyle: NoItem
     icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: migoastral}
   - type: InstantAction
-    event: !type:MiGoAstralEvent
+    event: !type:MiGoAstralActionEvent
 
 - type: entity
   id: ActionMiGoErect
@@ -128,7 +128,7 @@
     itemIconStyle: NoItem
     icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: build}
   - type: InstantAction
-    event: !type:MiGoErectEvent
+    event: !type:MiGoErectActionEvent
 
 - type: entity
   id: ActionMiGoSacrifice
@@ -141,4 +141,29 @@
     itemIconStyle: NoItem
     icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: "summon"}
   - type: InstantAction
-    event: !type:MiGoSacrificeEvent
+    event: !type:MiGoSacrificeActionEvent
+
+- type: entity
+  id: ActionMiGoToggleLight
+  name: Inner Light
+  description: Awaken the bioluminescence visible only to the mind of Mi-Go.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: "migo_light"}
+    itemIconStyle: NoItem
+    clientExclusive: true
+  - type: InstantAction
+    event: !type:MiGoToggleLightEvent
+
+- type: entity
+  id: ActionMiGoTeleport
+  name: Teleport
+  description: While in the astral plane, you can teleport to the selected cultist.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: "migo_teleport"}
+  - type: InstantAction
+    event: !type:MiGoTeleportActionEvent

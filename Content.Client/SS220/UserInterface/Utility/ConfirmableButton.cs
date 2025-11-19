@@ -2,48 +2,79 @@
 
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 using System.Threading.Tasks;
 
 namespace Content.Client.SS220.UserInterface.Utility;
 
+/// <summary>
+///     A button that requires some confirmation clicks before executing its action.
+/// </summary>
 [Virtual]
 public class ConfirmableButton : Button
 {
     [Dependency] private readonly IGameTiming _gameTiming = default!;
 
-    public Action? OnConfirmed;
+    public event Action? OnConfirmed;
+    public event Action? OnTimeout;
 
     [ViewVariables]
-    public ConfirmableButtonClicksAction ClicksActionWhenConfirmed = ConfirmableButtonClicksAction.Reset;
+    public ConfirmableButtonClicksCounterAction CounterActionOnConfirmed = ConfirmableButtonClicksCounterAction.Reset;
     [ViewVariables]
-    public ConfirmableButtonClicksAction ClicksActionWhenNotConfirmed = ConfirmableButtonClicksAction.Reset;
-
-    [ViewVariables]
-    public float ConfirmDelayMillisecond { get; set; }
-
-    public TimeSpan ConfirmDelay => TimeSpan.FromMilliseconds(ConfirmDelayMillisecond);
+    public ConfirmableButtonClicksCounterAction CounterActionOnTimeout = ConfirmableButtonClicksCounterAction.Reset;
 
     [ViewVariables]
-    public uint ClicksForConfirm { get; set; }
+    public float TimeoutDelayMilliseconds { get; set; } = 3000f;
+    public TimeSpan TimeoutDelay => TimeSpan.FromMilliseconds(TimeoutDelayMilliseconds);
 
     [ViewVariables]
-    public string? DefaultText;
+    public uint ClicksForConfirm
+    {
+        get => _clicksForConfirm;
+        set => _clicksForConfirm = Math.Max(1, value);
+    }
+    private uint _clicksForConfirm = 2;
+
     [ViewVariables]
-    public Color? DefaultColor;
+    public string? DefaultText
+    {
+        get => _defaultState.Text;
+        set
+        {
+            var state = _defaultState;
+            state.Text = value;
+            SetClickState(0, state);
+        }
+    }
 
-    private TimeSpan _lastClick = TimeSpan.Zero;
+    [ViewVariables]
+    public Color? DefaultColor
+    {
+        get => _defaultState.Color;
+        set
+        {
+            var state = _defaultState;
+            state.Color = value;
+            SetClickState(0, state);
+        }
+    }
 
-    private int _loopedUpdateRate = 10;
+    private ConfirmableButtonState _defaultState = new();
 
-    private int _curClicks = 0;
-    private Dictionary<uint, ConfirmableButtonState> _clickStates = new();
+    private static readonly TimeSpan LoopedUpdateDelay = TimeSpan.FromMilliseconds(100);
+
+    private TimeSpan _timeout = TimeSpan.Zero;
+
+    private uint _clicks = 0;
+    private readonly Dictionary<uint, ConfirmableButtonState> _clickStates = [];
 
     public ConfirmableButton()
     {
         IoCManager.InjectDependencies(this);
 
-        OnPressed += _ => ProcessClick();
-        SetClickState(0, new ConfirmableButtonState(DefaultText, DefaultColor));
+        OnPressed += _ => IncreaseCounter();
+
+        SetClickState(0, _defaultState);
         LoopedUpdate();
     }
 
@@ -54,17 +85,17 @@ public class ConfirmableButton : Button
 
     public ConfirmableButton(string? text, Color? overrideColor) : this(new ConfirmableButtonState(text, overrideColor)) { }
 
-
     public void SetClickState(Dictionary<uint, ConfirmableButtonState> clickStates)
     {
         foreach (var (key, value) in clickStates)
-        {
             SetClickState(key, value);
-        }
     }
 
     public void SetClickState(uint click, ConfirmableButtonState state)
     {
+        if (click == 0)
+            _defaultState = state;
+
         _clickStates[click] = state;
         UpdateState();
     }
@@ -74,21 +105,22 @@ public class ConfirmableButton : Button
         if (Disposed)
             return;
 
-        if (_curClicks >= ClicksForConfirm)
+        DebugTools.Assert(ClicksForConfirm != 0);
+        if (_clicks >= ClicksForConfirm)
             Confirmed();
 
-        if (_curClicks != 0 && _gameTiming.CurTime >= _lastClick + ConfirmDelay)
-            NotConfirmed();
+        if (_clicks != 0 && _gameTiming.CurTime >= _timeout)
+            Timeout();
 
         UpdateState();
     }
 
     private async void LoopedUpdate()
     {
-        await Task.Delay(1000 / _loopedUpdateRate);
+        await Task.Delay(LoopedUpdateDelay);
         LoopedUpdate();
 
-        if (_curClicks > 0)
+        if (_clicks != 0)
             Update();
     }
 
@@ -97,71 +129,69 @@ public class ConfirmableButton : Button
         if (Disposed)
             return;
 
-        if (_clickStates.TryGetValue((uint)_curClicks, out var state))
+        if (_clickStates.TryGetValue(_clicks, out var state))
         {
             Text = state.Text;
-            ModulateSelfOverride = state.OverrideColor;
+            ModulateSelfOverride = state.Color;
         }
-    }
-
-    private void ProcessClick()
-    {
-        _lastClick = _gameTiming.CurTime;
-        IncreaseClicks();
     }
 
     private void Confirmed()
     {
         OnConfirmed?.Invoke();
-        ProcessActionWithClicks(ClicksActionWhenConfirmed);
+        ProcessCounterAction(CounterActionOnConfirmed);
     }
 
-    private void NotConfirmed()
+    private void Timeout()
     {
-        ProcessActionWithClicks(ClicksActionWhenNotConfirmed);
+        OnTimeout?.Invoke();
+        ProcessCounterAction(CounterActionOnTimeout);
     }
 
-    private void ResetClicks()
+    public void SetClicksCounter(uint value)
     {
-        _curClicks = 0;
+        _timeout = _gameTiming.CurTime + TimeoutDelay;
+        _clicks = value;
         Update();
     }
 
-    private void IncreaseClicks()
+    public void ResetCounter()
     {
-        _curClicks++;
-        Update();
+        SetClicksCounter(0);
     }
 
-    private void DecreaseClicks()
+    public void IncreaseCounter()
     {
-        var newValue = _curClicks - 1;
-        _curClicks = Math.Max(newValue, 0);
-        Update();
+        SetClicksCounter(_clicks + 1);
     }
 
-    private void ProcessActionWithClicks(ConfirmableButtonClicksAction action)
+    public void DecreaseCounter()
+    {
+        SetClicksCounter(_clicks - 1);
+    }
+
+    private void ProcessCounterAction(ConfirmableButtonClicksCounterAction action)
     {
         switch (action)
         {
-            case ConfirmableButtonClicksAction.Decrease:
-                DecreaseClicks();
+            case ConfirmableButtonClicksCounterAction.Decrease:
+                DecreaseCounter();
                 break;
 
-            case ConfirmableButtonClicksAction.Increase:
-                DecreaseClicks();
+            case ConfirmableButtonClicksCounterAction.Increase:
+                IncreaseCounter();
                 break;
 
-            case ConfirmableButtonClicksAction.Reset:
-                ResetClicks();
+            case ConfirmableButtonClicksCounterAction.Reset:
+                ResetCounter();
                 break;
         }
     }
 }
 
-public record struct ConfirmableButtonState(string? Text, Color? OverrideColor);
+public record struct ConfirmableButtonState(string? Text, Color? Color);
 
-public enum ConfirmableButtonClicksAction
+public enum ConfirmableButtonClicksCounterAction
 {
     None,
     Decrease,

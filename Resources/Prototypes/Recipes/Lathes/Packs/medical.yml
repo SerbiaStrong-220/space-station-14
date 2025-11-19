@@ -16,6 +16,7 @@
   - PillCanister
   - HandLabeler
   - BaseChemistryEmptyVial
+  - Dropper
 
 - type: latheRecipePack
   parent: BasicChemistryStatic
@@ -42,6 +43,7 @@
   - Defibrillator
   - HandheldHealthAnalyzer
   - DiseaseSwab
+  - DiseaseSwabNarcotic #ss220 add narcotic test
   - BodyBag
   - WhiteCane
   - MedAutoinjector #ss220 Autoinjecors update

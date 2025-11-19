@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Shared.Chat;
 using Content.Shared.Chat.Prototypes;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -46,7 +47,11 @@ public sealed class AutoEmoteSystem : EntitySystem
 
                 if (autoEmotePrototype.WithChat)
                 {
-                    _chatSystem.TryEmoteWithChat(uid, autoEmotePrototype.EmoteId, autoEmotePrototype.HiddenFromChatWindow ? ChatTransmitRange.HideChat : ChatTransmitRange.Normal);
+                    _chatSystem.TryEmoteWithChat(uid,
+                        autoEmotePrototype.EmoteId,
+                        autoEmotePrototype.HiddenFromChatWindow ? ChatTransmitRange.HideChat : ChatTransmitRange.Normal,
+                        ignoreActionBlocker: autoEmotePrototype.IgnoreActionBlocker,
+                        forceEmote: autoEmotePrototype.Force);
                 }
                 else
                 {
@@ -130,7 +135,26 @@ public sealed class AutoEmoteSystem : EntitySystem
         autoEmotePrototype ??= _prototypeManager.Index<AutoEmotePrototype>(autoEmotePrototypeId);
 
         var curTime = _gameTiming.CurTime;
-        var time = curTime + autoEmotePrototype.Interval;
+
+        // ss220 add chronic cough start
+        TimeSpan interval;
+
+        if (autoEmotePrototype.Interval is { } fixedInterval)
+        {
+            interval = fixedInterval;
+        }
+        else if (autoEmotePrototype is { MinInterval: { } min, MaxInterval: { } max })
+        {
+            interval = _random.Next(min, max);
+        }
+        else
+        {
+            return false;
+        }
+
+        var time = curTime + interval;
+        // ss220 add chronic cough end
+
         autoEmote.EmoteTimers[autoEmotePrototypeId] = time;
 
         if (autoEmote.NextEmoteTime > time || autoEmote.NextEmoteTime <= curTime)

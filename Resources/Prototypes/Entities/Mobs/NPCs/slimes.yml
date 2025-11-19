@@ -74,15 +74,15 @@
     - reagents: [ Water, SpaceCleaner ]
       methods: [ Touch ]
       effects:
-      - !type:WashCreamPieReaction
+      - !type:WashCreamPie
     - reagents: [ Water ]
       methods: [ Touch ]
       effects:
       - !type:HealthChange
-        scaleByQuantity: true
+        scaling: true
         damage:
           types:
-            Heat: 0.15
+            Heat: 0.05 #Same as slime species
       - !type:PopupMessage
         type: Local
         messages: [ "slime-hurt-by-water-popup" ]
@@ -110,6 +110,7 @@
     speechSounds: Slime
   - type: TypingIndicator
     proto: slime
+  - type: NoSlip #SS220-fauna-update
 
 - type: entity
   name: basic slime
@@ -142,6 +143,13 @@
   - type: HTN
     rootTask:
       task: SimpleHostileCompound
+  #SS220-fauna-damagesets-begin
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: MobBasicSlime
+  - type: StaminaResistance
+    damageCoefficient: 0.2
+  #SS220-fauna-damagesets-ended
 
 - type: entity
   name: blue slime

@@ -37,6 +37,7 @@
   id: EmergencyShuttleRepealAll
   name: id-card-access-level-emergency-shuttle-repeal
   canAddToIdCard: false
+  canBeSwitchableInReader: false #SS220 DoorElectronicsConfiguratorFix
 
 - type: accessLevel
   id: Cryogenics
