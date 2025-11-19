@@ -13,6 +13,7 @@ using Content.Shared.Ensnaring.Components;
 using Content.Shared.Hands.Components;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Input;
+using Content.Shared.Interaction; // ss220 add "E" activation for strippable inv
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Strip.Components;
@@ -224,6 +225,13 @@ namespace Content.Client.Inventory
                 _ui.GetUIController<VerbMenuUIController>().OpenVerbMenu(slot.Entity.Value);
                 ev.Handle();
             }
+            // ss220 add "E" activation for strippable inv start
+            else if (ev.Function == ContentKeyFunctions.ActivateItemInWorld)
+            {
+                EntMan.RaisePredictiveEvent(new InteractInventorySlotEvent(EntMan.GetNetEntity(slot.Entity.Value), altInteract: false));
+                ev.Handle();
+            }
+            // ss220 add "E" activation for strippable inv end
         }
 
         private void AddInventoryButton(EntityUid invUid, string slotId, InventoryComponent inv)

@@ -23,14 +23,12 @@
   name: plastic crate
   components:
   - type: Icon
-    sprite: Structures/Storage/Crates/plastic.rsi
+    sprite: SS220/Structures/Storage/Crates/plastic.rsi #SS220 Crate-tg-resprite
   - type: Sprite
-    sprite: Structures/Storage/Crates/plastic.rsi
+    sprite: SS220/Structures/Storage/Crates/plastic.rsi #SS220 Crate-tg-resprite
 #SS220 Crate-tg-resprite begin
     offset: 0, 0
     layers:
-    - state: base
-      map: ["enum.StorageVisualLayers.Base"]
     - state: closed
       map: ["enum.StorageVisualLayers.Door"]
     - state: welded
@@ -486,6 +484,8 @@
   - type: Sprite
     sprite: Structures/Storage/Crates/cage.rsi
     offset: 0, 0 #SS220 Crate-tg-resprite
+    drawdepth: LargeObjects
+    snapCardinals: true
     layers:
     - state: base
     - state: closed
@@ -531,12 +531,12 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.4,-0.4,0.4,0.29"
+          bounds: "-0.4,-0.2,0.4,0.29"
         density: 80
         mask:
-        - CrateMask
+        - TabletopMachineMask
         layer:
-        - LargeMobLayer
+        - TabletopMachineLayer
   - type: StaticPrice
     price: 75
 
@@ -577,6 +577,8 @@
         - CrateMask #this is so they can go under plastic flaps
         layer:
         - MachineLayer
+  - type: Paintable
+    group: null
 
 - type: entity
   id: CrateLockBoxEngineering
@@ -944,8 +946,9 @@
       map: ["enum.PaperLabelVisuals.Layer"]
   - type: Cart #SS220-Cart-system
 #SS220 RatKing tweaks and changes start
-  - type: RatKingRummageable
-    rummageLoot: RatKingLootTrashCans
+  - type: Rummageable
+    table: !type:NestedSelector
+      tableId: RatKingLootTrashCans
   - type: RegalRatSpawnLocation
 #SS220 RatKing tweaks and changes here
 #SS220 CollisionTrash bgn

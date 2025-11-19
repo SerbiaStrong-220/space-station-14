@@ -76,6 +76,14 @@
   equipment:
     outerClothing: ClothingSponsorCoatJujutsuShlepa
 
+- type: loadout
+  id: Outer1984
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HugeShlopaSponsorTier
+  equipment:
+    outerClothing: ClothingSponsor1984
+
 # Glasses
 - type: loadout
   id: Sunglasses
@@ -88,7 +96,7 @@
   - !type:GroupLoadoutEffect
     proto: BigShlopaSponsorTier
   equipment:
-    eyes: ClothingSponsorGlassesJujutsuShlepa
+    eyes: ClothingSponsorGlassesJujutsuShlepaSunglasses
 
 # Back
 - type: loadout
@@ -106,3 +114,13 @@
   id: LawHeadsetAlt
   equipment:
     ears: ClothingHeadsetAltLaw
+
+- type: loadout
+  id: IAAHeadset
+  equipment:
+    ears: ClothingHeadsetIAA
+
+- type: loadout
+  id: IAAHeadsetAlt
+  equipment:
+    ears: ClothingHeadsetAltIAA

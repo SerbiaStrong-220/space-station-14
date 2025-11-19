@@ -1,8 +1,8 @@
 - type: entity
   id: MobDarkReaper
   parent:
+  - Incorporeal
   - BaseMob
-  - FlyingMobBase
   name: Тёмный Жнец
   description: Ужасающая тварь, выглядящая так, словно её сшили из случайных кусков человеческой плоти.
   components:
@@ -19,7 +19,6 @@
   - type: Tag
     tags:
     - DoorBumpOpener
-    - HideContextMenu
   - type: StatusEffects
     allowed: []
   - type: ContainerContainer
@@ -32,6 +31,7 @@
   - type: RadiationBlockingContainer
     resistance: 5
   - type: ExplosionResistance
+  - type: NoSlip
 
   # Visuals and appearance
   - type: Sprite
@@ -78,6 +78,7 @@
     - Normal
   - type: ContentEye
     maxZoom: 1.2, 1.2
+    targetZoom: 1.2, 1.2
   - type: Examiner
   - type: Alerts
   - type: GenericVisualizer
@@ -109,7 +110,7 @@
           !type:PhysShapeCircle
           radius: 0.40
         density: 80
-        mask:
+        layer:
         - GhostImpassable
   - type: MovementIgnoreGravity
   - type: DoAfter

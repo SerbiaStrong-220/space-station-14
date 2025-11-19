@@ -164,7 +164,7 @@ public sealed class TelepathySystem : EntitySystem
 
         if (senderUid != null && HasComp<TTSComponent>(senderUid))
         {
-            RaiseLocalEvent(new TelepathySpokeEvent(senderUid.Value, message, [.. telephatyTtsRecievers], prototype));
+            RaiseLocalEvent(new TelepathySpokeEvent(senderUid.Value, message, [.. telephatyTtsRecievers], rightTelepathyChannel));
         }
     }
 
@@ -180,7 +180,11 @@ public sealed class TelepathySystem : EntitySystem
             netSource,
             null
         );
+
         if (!TryComp(receiverUid, out ActorComponent? actor))
+            return;
+
+        if (actor.PlayerSession == null)
             return;
 
         _netMan.ServerSendMessage(new MsgChatMessage() { Message = message }, actor.PlayerSession.Channel);

@@ -23,10 +23,10 @@
     #   time: 9000 # 2.5 hours
     # off
     - !type:OverallPlaytimeRequirement
-      time: 180000 # SS220-RoleTime
+      time: 50h # SS220-RoleTime
     - !type:DepartmentTimeRequirement
       department: Civilian
-      time: 72000 # SS220-RoleTime 2
+      time: 20h # SS220-RoleTime 2
     - !type:AgeRequirement
       requiredAge: 20
     - !type:SpeciesRequirement #SS220-jobbans begin
@@ -67,6 +67,14 @@
   - Atmospherics
   - Medical
   - Paramedic #SS220 PaNfixes
+#SS220 New_accesses_and_some_tweaks start
+  - Clown
+  - Librarian
+  - Psychologist
+  - Reporter
+  - Mime
+  - Musician
+#SS220 New_accesses_and_some_tweaks end
   special:
   - !type:AddComponentSpecial
     components:
@@ -80,7 +88,7 @@
     id: HoPPDA
     gloves: ClothingHandsGlovesHop
     ears: ClothingHeadsetAltCommand
-    belt: BoxFolderClipboard
+    belt: BoxFolderClipboardThreePapers
     eyes: ClothingEyesHudCommand
   storage:
     back:

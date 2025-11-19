@@ -42,10 +42,16 @@ public sealed partial class IngestionSystem
         var ev = new GetUtensilsEvent();
         RaiseLocalEvent(target, ref ev);
 
+        // SS220-Ingestion-popup-fix begin
+        // Target doesn't require to use Utensil here, get out
+        if (ev.RequiredTypes == UtensilType.None)
+            return false;
+        // SS220-Ingestion-popup-fix end
+
         //Prevents food usage with a wrong utensil
-        if ((ev.Types & utensil.Comp.Types) == 0)
+        if (ev.Types != UtensilType.None && (ev.Types & utensil.Comp.Types) == 0)
         {
-            _popup.PopupClient(Loc.GetString("ingestion-try-use-wrong-utensil", ("verb", GetEdibleVerb(target)),("food", target), ("utensil", utensil.Owner)), user, user);
+            _popup.PopupClient(Loc.GetString("ingestion-try-use-wrong-utensil", ("verb", GetEdibleVerb(target)), ("food", target), ("utensil", utensil.Owner)), user, user);
             return true;
         }
 
@@ -66,14 +72,13 @@ public sealed partial class IngestionSystem
             return;
 
         // TODO: Once we have predicted randomness delete this for something sane...
-        var seed = SharedRandomExtensions.HashCodeCombine(new() {(int)_timing.CurTick.Value, GetNetEntity(entity).Id, GetNetEntity(userUid).Id });
+        var seed = SharedRandomExtensions.HashCodeCombine(new() { (int)_timing.CurTick.Value, GetNetEntity(entity).Id, GetNetEntity(userUid).Id });
         var rand = new System.Random(seed);
 
         if (!rand.Prob(entity.Comp.BreakChance))
             return;
 
         _audio.PlayPredicted(entity.Comp.BreakSound, userUid, userUid, AudioParams.Default.WithVolume(-2f));
-        // Not prediced because no random predicted
         PredictedDel(entity.Owner);
     }
 

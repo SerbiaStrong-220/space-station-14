@@ -18,7 +18,7 @@
 #Empty mini blue
 - type: entity
   id: JetpackMiniBlue
-  parent: BaseJetpack
+  parent: JetpackMini
   name: mini jetpack
   description: It's a jetpack. It can hold 1.5 L of gas.
   suffix: Empty

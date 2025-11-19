@@ -14,15 +14,42 @@
   components:
   #cultists comps
   - type: MiGo
-    # showInHands: false
-    # disableExplosionRecursion: true
-    # canBeStripped: false
     eraseWhitelist:
       components:
       - CultYoggBuilding
       - CultYoggBuildingFrame
   - type: Body
     prototype: MiGoBody
+  - type: Hands
+    hands:
+      body_part_slot_far right hand:
+        location: Right
+        whitelist:
+          tags:
+          - MiGoHandsWhitelist
+      body_part_slot_right hand:
+        location: Right
+        whitelist:
+          tags:
+          - MiGoHandsWhitelist
+      body_part_slot_left hand:
+        location: Left
+        whitelist:
+          tags:
+          - MiGoHandsWhitelist
+      body_part_slot_far left hand:
+        location: Left
+        whitelist:
+          tags:
+          - MiGoHandsWhitelist
+    sortedHands:
+    - body_part_slot_far right hand
+    - body_part_slot_right hand
+    - body_part_slot_left hand
+    - body_part_slot_far left hand
+    showInHands: false
+    disableExplosionRecursion: true
+    canBeStripped: false
   - type: ComplexInteraction #For UI opening only
   - type: ShowHealthBars
   - type: Telepathy
@@ -34,6 +61,8 @@
     interfaces:
       enum.MiGoUiKey.Erect:
         type: MiGoErectBoundUserInterface
+      enum.MiGoUiKey.Teleport:
+        type: MiGoTeleportBoundUserInterface
   - type: ShowCultYoggIcons
   - type: NpcFactionMember
     factions:
@@ -58,6 +87,11 @@
     state: Half
     visionRadius: 14
   #visual
+  - type: PointLight
+    netsync: false
+    radius: 6
+    castShadows: false
+    enabled: false
   - type: Sprite
     drawdepth: Mobs
     sprite: SS220/Mobs/CultYogg/MiGo.rsi
@@ -69,7 +103,7 @@
       Alive:
         Base: alive
       Critical:
-        Base: dead
+        Base: critical
       Dead:
         Base: dead
   - type: Visibility

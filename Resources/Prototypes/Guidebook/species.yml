@@ -3,17 +3,16 @@
   name: guide-entry-species
   text: "/ServerInfo/Guidebook/Mobs/Species.xml"
   children:
-  # SS220 guidebook-species-translation begin
-    - Arachnid
-    - Vox
-    - Dwarf
-    - Diona
-    - Moth
-    - SlimePerson
-    - Tajaran
-    - Reptilian
-    - Human
-  # SS220 guidebook-species-translation end
+  - Arachnid
+  - Diona
+  - Dwarf
+  - Human
+  - Moth
+  - Reptilian
+  - SlimePerson
+  - Vox
+  - Tajaran # SS220-add
+  - Vulpkanin
 
 - type: guideEntry
   id: Arachnid
@@ -54,3 +53,8 @@
   id: Vox
   name: species-name-vox
   text: "/ServerInfo/Guidebook/Mobs/Vox.xml"
+
+- type: guideEntry
+  id: Vulpkanin
+  name: species-name-vulpkanin
+  text: "/ServerInfo/Guidebook/Mobs/Vulpkanin.xml"

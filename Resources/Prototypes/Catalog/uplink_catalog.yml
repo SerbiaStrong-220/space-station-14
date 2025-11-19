@@ -842,6 +842,15 @@
           - SurplusBundle
 
 # Deception
+- type: listing
+  id: UplinkSyndicateIDCard
+  name: uplink-syndicate-id-card-name
+  description: uplink-syndicate-id-card-desc
+  productEntity: SyndicateIDCard
+  cost:
+    Telecrystal: 1
+  categories:
+  - UplinkDeception
 
 - type: listing
   id: UplinkAgentIDCard
@@ -1801,7 +1810,7 @@
   id: UplinkHardsuitSyndie
   name: uplink-hardsuit-syndie-name
   description: uplink-hardsuit-syndie-desc
-  icon: { sprite: /Textures/Clothing/OuterClothing/Hardsuits/syndicate.rsi, state: icon }
+  icon: { sprite: /Textures/SS220/Clothing/OuterClothing/Hardsuits/syndicate.rsi, state: icon }  # SS220-hardsuir-resprite
   productEntity: ClothingBackpackDuffelSyndicateHardsuitBundle
   discountCategory: veryRareDiscounts
   discountDownTo:
@@ -1849,7 +1858,7 @@
   id: UplinkHardsuitSyndieElite
   name: uplink-hardsuit-syndieelite-name
   description: uplink-hardsuit-syndieelite-desc
-  icon: { sprite: /Textures/Clothing/OuterClothing/Hardsuits/syndieelite.rsi, state: icon }
+  icon: { sprite: /Textures/SS220/Clothing/OuterClothing/Hardsuits/syndieelite.rsi, state: icon } # SS220-hardsuir-resprite
   productEntity: ClothingBackpackDuffelSyndicateEliteHardsuitBundle
   cost:
     Telecrystal: 12
@@ -2137,6 +2146,7 @@
     whitelist:
     - Botanist
     - HeadOfPersonnel
+    - SeniorService # SS220 add-seniorservice-work-sections-uplink
 
 - type: listing
   id: uplinkRiggedBoxingGlovesPassenger
@@ -2311,6 +2321,7 @@
     - Clown
     - Mime
     - HeadOfPersonnel
+    - SeniorService # SS220 add-seniorservice-work-sections-uplink
 
 - type: listing
   id: UplinkChimpUpgradeKit
@@ -2346,6 +2357,7 @@
     whitelist:
     - Janitor
     - HeadOfPersonnel
+    - SeniorService # SS220 add-seniorservice-work-sections-uplink
   - !type:BuyerWhitelistCondition
     blacklist:
       components:
@@ -2371,6 +2383,7 @@
     - Scientist
     - ResearchDirector
     - Chef
+    - SeniorService # SS220 add-seniorservice-work-sections-uplink
 
 - type: listing
   id: UplinkCaneBlade
@@ -2382,7 +2395,7 @@
   discountDownTo:
     Telecrystal: 2
   cost:
-    Telecrystal: 5
+    Telecrystal: 3
   categories:
   - UplinkJob
   conditions:
@@ -2412,6 +2425,7 @@
     whitelist:
     - Chef
     - Mime
+    - SeniorService # SS220 add-seniorservice-work-sections-uplink
 
 - type: listing
   id: UplinkContrabandLighter
