@@ -72,6 +72,7 @@ public sealed class SelfLinkedTeleportSystem : SharedSelfLinkedTeleportSystem
 
             return;
         }
+        Dirty(ent);
     }
 
     public void DeleteLink(Entity<SelfLinkedTeleportComponent> ent)
