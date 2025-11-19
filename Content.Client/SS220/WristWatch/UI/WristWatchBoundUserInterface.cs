@@ -1,7 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Client.GameTicking.Managers;
-using Content.Client.SS220.UserInterface.System.PinUI;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -16,7 +15,6 @@ public sealed class WristWatchBoundUserInterface : BoundUserInterface
     [Dependency] private readonly EntityManager _entityManager = default!;
 
     private readonly ClientGameTicker _gameTicker = default!;
-    private readonly PinUISystem _pinUI = default!;
 
     [ViewVariables]
     private WristWatchMenu? _menu;
@@ -27,7 +25,6 @@ public sealed class WristWatchBoundUserInterface : BoundUserInterface
     public WristWatchBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         _gameTicker = _entityManager.System<ClientGameTicker>();
-        _pinUI = _entityManager.System<PinUISystem>();
     }
 
     public void RefreshStyle()
