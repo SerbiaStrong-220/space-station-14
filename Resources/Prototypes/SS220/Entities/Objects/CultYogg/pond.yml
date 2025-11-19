@@ -27,9 +27,12 @@
       drink:
         maxVol: 30
         reagents:
-        - ReagentId: Nocturine
+        - ReagentId: EssenceOfTheAbyss
           Quantity: 30
-  - type: Drink
+  - type: Edible
+    solution: drink
+    edible: Drink
+    destroyOnEmpty: false
   - type: DrawableSolution
     solution: drink
   - type: DrainableSolution

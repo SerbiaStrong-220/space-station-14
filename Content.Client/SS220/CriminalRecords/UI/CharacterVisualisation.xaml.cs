@@ -11,6 +11,8 @@ using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Content.Shared.Clothing;
+using Content.Shared.Humanoid;
+using Robust.Client.GameObjects;
 using Robust.Client.Player;
 
 namespace Content.Client.SS220.CriminalRecords.UI;
@@ -22,9 +24,23 @@ public sealed partial class CharacterVisualisation : BoxContainer
     private readonly IPrototypeManager _prototype;
     private readonly IPlayerManager _player;
     private readonly ClientInventorySystem _inventorySystem;
+    private readonly SpriteSystem _sprite;
     private EntityUid _previewDummy;
-    private readonly SpriteView _face;
-    private readonly SpriteView _side;
+
+    private readonly SpriteView? _face;
+    private readonly SpriteView? _side;
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public Vector2 FaceScale { get; set; } = new Vector2(5f, 5f);
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public Vector2 SideScale { get; set; } = new Vector2(5f, 5f);
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public bool IsOnlyFace { get; set; }
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public bool IsOnlySide { get; set; }
 
     public CharacterVisualisation()
     {
@@ -34,22 +50,68 @@ public sealed partial class CharacterVisualisation : BoxContainer
         _prototype = IoCManager.Resolve<IPrototypeManager>();
         _player = IoCManager.Resolve<IPlayerManager>();
         _inventorySystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<ClientInventorySystem>();
+        _sprite = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<SpriteSystem>();
 
-        _face = new SpriteView { Scale = new Vector2(5, 5) };
-        _side = new SpriteView { Scale = new Vector2(5, 5), OverrideDirection = Direction.East };
+        if (IsOnlyFace || !IsOnlySide)
+        {
+            _face = new SpriteView
+            {
+                Scale = FaceScale,
+            };
+            AddChild(_face);
+        }
 
-        AddChild(_face);
-        AddChild(_side);
+        if (IsOnlySide || !IsOnlyFace)
+        {
+            _side = new SpriteView
+            {
+                Scale = SideScale,
+                OverrideDirection = Direction.East,
+            };
+            AddChild(_side);
+        }
     }
 
     public void ResetCharacterSpriteView()
     {
-        _face.SetEntity(null);
-        _side.SetEntity(null);
+        _face?.SetEntity(null);
+        _side?.SetEntity(null);
         _entMan.DeleteEntity(_previewDummy);
     }
 
-    public void SetupCharacterSpriteView(HumanoidCharacterProfile profile, string jobPrototype, bool onlyFaceSide = false)
+    private void SetEntity()
+    {
+        if (IsOnlyFace && !IsOnlySide)
+        {
+            _face?.SetEntity(_previewDummy);
+        }
+        else if (IsOnlySide && !IsOnlyFace)
+        {
+            _side?.SetEntity(_previewDummy);
+        }
+        else
+        {
+            _face?.SetEntity(_previewDummy);
+            _side?.SetEntity(_previewDummy);
+        }
+    }
+
+    public void SetupEntitySpriteView(EntityUid target, EntProtoId dollPrototype)
+    {
+        var appearanceSystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<HumanoidAppearanceSystem>();
+
+        _entMan.DeleteEntity(_previewDummy);
+        _previewDummy = _entMan.SpawnEntity(dollPrototype, MapCoordinates.Nullspace);
+        _entMan.EnsureComponent<HumanoidAppearanceComponent>(_previewDummy);
+        _entMan.EnsureComponent<SpriteComponent>(_previewDummy);
+
+        appearanceSystem.CloneAppearance(target, _previewDummy);
+        _sprite.CopySprite(target, _previewDummy);
+
+        SetEntity();
+    }
+
+    public void SetupCharacterSpriteView(HumanoidCharacterProfile profile, string jobPrototype)
     {
         var appearanceSystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<HumanoidAppearanceSystem>();
 
@@ -60,15 +122,7 @@ public sealed partial class CharacterVisualisation : BoxContainer
         var realJobPrototype = _prototype.Index<JobPrototype>(jobPrototype);
         GiveDummyJobClothes(_previewDummy, profile, realJobPrototype);
 
-        _face.SetEntity(_previewDummy);
-
-        if (onlyFaceSide)
-        {
-            RemoveChild(_side);
-            return;
-        }
-
-        _side.SetEntity(_previewDummy);
+        SetEntity();
     }
 
     private void GiveDummyJobClothes(EntityUid dummy, HumanoidCharacterProfile profile, JobPrototype job)

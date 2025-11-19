@@ -13,6 +13,7 @@
   access:
   - Medical
   - Maintenance
+  - Psychologist #SS220 New_accesses_and_some_tweaks
   extendedAccess:
   - Chemistry
   #SS220 LimitationRevive - start

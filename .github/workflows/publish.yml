@@ -21,7 +21,14 @@ jobs:
         DISCORD_PUBLISH_NOTIFY: ${{ secrets.DISCORD_PUBLISH_NOTIFY }}
       run: |
         curl -X POST -H "Content-Type: application/json" \
-        -d '{"username": "GitHub Publish Changes", "avatar_url": "https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/refs/heads/master/logo.png", "content": "<a:nian:1179921939301670992> Запущено обновление по `${{GITHUB.REF_NAME}}` ветке!"}' \
+        -d '{"username": "GitHub Publish Changes",
+        "avatar_url": "https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/refs/heads/master/logo.png",
+        "embeds": [{
+            "title": "<a:nian:1179921939301670992> Запущено обновление по `${{GITHUB.REF_NAME}}` ветке!",
+            "description": "При успешном обновлении, сервера на этой ветке будут обновлены",
+            "color": 12341258
+          }]
+        }' \
         $DISCORD_PUBLISH_NOTIFY
   # SS220 Discord Notifier end
     - name: Fail if we are attempting to run on the master branch
@@ -70,7 +77,7 @@ jobs:
       run: dotnet build Content.Packaging --configuration Release --no-restore /m
 
     - name: Package server
-      run: dotnet run --project Content.Packaging server --platform win-x64 --platform linux-x64 --platform osx-x64 --platform linux-arm64
+      run: dotnet run --project Content.Packaging server --platform win-x64 --platform win-arm64 --platform linux-x64 --platform linux-arm64 --platform osx-x64 --platform osx-arm64
 
     - name: Package client
       run: dotnet run --project Content.Packaging client --no-wipe-release
@@ -81,13 +88,21 @@ jobs:
         PUBLISH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
         GITHUB_REPOSITORY: ${{ vars.GITHUB_REPOSITORY }}
   # SS220 Discord Notifier bgn
+  # Обновление получено, сервер автоматически перезапустится для обновления в конце этого раунда.
     - name: SS220 PN2D - End
       if: success()
       env:
         DISCORD_PUBLISH_NOTIFY: ${{ secrets.DISCORD_PUBLISH_NOTIFY }}
       run: |
         curl -X POST -H "Content-Type: application/json" \
-        -d '{"username": "GitHub Publish Changes", "avatar_url": "https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/refs/heads/master/logo.png", "content": "✅ Успешно обновление по `${{GITHUB.REF_NAME}}` ветке!"}' \
+        -d '{"username": "GitHub Publish Changes",
+        "avatar_url": "https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/refs/heads/master/logo.png",
+        "embeds": [{
+            "title": "✅ Успешно обновление по `${{GITHUB.REF_NAME}}` ветке!",
+            "description": "Обновление прошло успешно.",
+            "color": 7584042
+          }]
+        }' \
         $DISCORD_PUBLISH_NOTIFY
     - name: SS220 PN2D - Failure
       if: failure()
@@ -95,8 +110,32 @@ jobs:
         DISCORD_PUBLISH_NOTIFY: ${{ secrets.DISCORD_PUBLISH_NOTIFY }}
       run: |
         curl -X POST -H "Content-Type: application/json" \
-        -d '{"username": "GitHub Publish Changes", "avatar_url": "https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/refs/heads/master/logo.png", "content": "❌ Неуспешно обновление по `${{GITHUB.REF_NAME}}` ветке!"}' \
+        -d '{
+          "username": "GitHub Publish Changes",
+          "avatar_url": "https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/refs/heads/master/logo.png",
+          "embeds": [{
+            "title": "❌ Нуспешно обновление по `${{GITHUB.REF_NAME}}` ветке!",
+            "description": "При попытке обновить сервера столкнулись с ошибкой.",
+            "color": 12345610
+          }]
+        }' \
         $DISCORD_PUBLISH_NOTIFY
+    - name: SS220 PN2D - Success Release Update
+      if: ${{GITHUB.REF_NAME == 'release' && github.repository == 'SerbiaStrong-220/space-station-14' && success()}}
+      env:
+        DISCORD_PUBLISH_NOTIFY_RELEASE: ${{ secrets.DISCORD_PUBLISH_NOTIFY_RELEASE }}
+      run: |
+        curl -X POST -H "Content-Type: application/json" \
+        -d '{
+          "username": "SS220 Changelogger",
+          "avatar_url": "https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/refs/heads/master/logo.png",
+          "embeds": [{
+            "title": "Обновление отправлено на сервера 🚀",
+            "description": "Сервера автоматически перезапустятся для обновления в конце текущих раундов!",
+            "color": 3447003
+          }]
+        }' \
+        $DISCORD_PUBLISH_NOTIFY_RELEASE
 # SS220 Discord Notifier end
 
 # SS220 temp disable discord publish

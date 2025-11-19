@@ -103,11 +103,13 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
             _guidebook.ToggleGuidebook();
         };
 
-        _escapeWindow.DiscordLinkButton.OnPressed += _ =>
+        // SS220 dlinkbutton-to-resetttscache bgn
+        _escapeWindow.TTSQueueResetButton.OnPressed += _ =>
         {
             CloseEscapeWindow();
-            _console.ExecuteCommand("discordlink");
+            _console.ExecuteCommand("ttsqueuereset");
         };
+        // SS220 dlinkbutton-to-resetttscache end
 
         // Hide wiki button if we don't have a link for it.
         _escapeWindow.WikiButton.Visible = _cfg.GetCVar(CCVars.InfoLinksWiki) != "";
