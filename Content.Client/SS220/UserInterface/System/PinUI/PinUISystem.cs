@@ -19,6 +19,8 @@ public sealed class PinUISystem : EntitySystem
 
     private readonly HashSet<Control> _pinnedControls = new();
 
+    private static readonly Thickness BaseMargin = new(0, 0, 5, 0);
+
     public override void Initialize()
     {
         base.Initialize();
@@ -40,12 +42,13 @@ public sealed class PinUISystem : EntitySystem
 
     public static TextureButton AddPinButtonBeforeTarget(Control linkedControl,
         Control target,
-        int marginLeft = 0,
-        int marginTop = 0,
-        int marginRight = 5,
-        int marginBottom = 0)
+        Thickness? margin = null)
     {
         var button = new PinButton(linkedControl);
+
+        margin ??= BaseMargin;
+        button.Margin = margin.Value;
+
         var parent = target.Parent;
         if (parent == null)
             return button;
@@ -54,7 +57,6 @@ public sealed class PinUISystem : EntitySystem
         parent.AddChild(button);
         button.SetPositionInParent(index);
 
-        button.Margin = new Thickness(marginLeft, marginTop, marginRight, marginBottom);
         return button;
     }
 
