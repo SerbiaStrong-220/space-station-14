@@ -1,6 +1,6 @@
 - type: weightedRandom
   id: WeightedDynamicsList
   weights:
-    MediumDynamic: 0.5
-    LightDynamic: 0.35
-    HardDynamic: 0.15
+    MediumDynamic: 1
+    LightDynamic: 1
+    HardDynamic: 1

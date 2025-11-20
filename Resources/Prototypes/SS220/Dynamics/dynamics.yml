@@ -19,6 +19,8 @@
   antagLimits:
     Traitor: 4
     TraitorSleeper: 1
-  playersRequerment: 25
+  playersRequirement: 25
+  departmentLimits:
+    Security: 5
   name: dynamic-hard-name
   loreNames: NamesHardDynamic

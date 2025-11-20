@@ -1,12 +1,13 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.Antag;
 using Content.Server.Antag.Components;
 using Content.Server.Chat.Managers;
+using Content.Server.CrewManifest;
 using Content.Server.GameTicking;
 using Content.Server.RoundEnd;
+using Content.Server.Station.Systems;
 using Content.Server.Store.Systems;
 using Content.Server.StoreDiscount.Systems;
 using Content.Shared.Database;
@@ -16,8 +17,10 @@ using Content.Shared.Random.Helpers;
 using Content.Shared.SS220.TraitorDynamics;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
+using Prometheus;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using System.Linq;
 
 namespace Content.Server.SS220.TraitorDynamics;
 
@@ -34,15 +37,18 @@ namespace Content.Server.SS220.TraitorDynamics;
 public sealed class TraitorDynamicsSystem : EntitySystem
 {
     [Dependency] private readonly AntagSelectionSystem _antag = default!;
+    [Dependency] private readonly IAdminLogManager _admin = default!;
+    [Dependency] private readonly IChatManager _chatManager = default!;
+    [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly CrewManifestSystem _crewManifest = default!;
+    [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly StoreDiscountSystem _discount = default!;
-    [Dependency] private readonly IAdminLogManager _admin = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly StoreSystem _store = default!;
 
-    [ValidatePrototypeId<WeightedRandomPrototype>]
+    private static Counter _chosenDynamicsModes = default!;
+
     private readonly ProtoId<WeightedRandomPrototype> _weightsProto = "WeightedDynamicsList";
 
     private ProtoId<DynamicPrototype>? _currentDynamic = null;
@@ -50,6 +56,14 @@ public sealed class TraitorDynamicsSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+
+        _chosenDynamicsModes = Metrics.CreateCounter(
+            "dynamic_traitors_modes",
+            "Shows what mode of dynamic traitor was choosen or forced by admins",
+            new CounterConfiguration()
+            {
+                LabelNames = ["dynamicPrototypeId"]
+            });
 
         SubscribeLocalEvent<RoundEndTextAppendEvent>(OnRoundEndAppend);
         SubscribeLocalEvent<DynamicSettedEvent>(OnDynamicAdded);
@@ -67,57 +81,59 @@ public sealed class TraitorDynamicsSystem : EntitySystem
     }
 
     private void OnDynamicAdded(DynamicSettedEvent ev)
-{
-    var dynamic = _prototype.Index(ev.Dynamic);
-    var rules = EntityQueryEnumerator<AntagSelectionComponent>();
-
-    var roleMap = new Dictionary<string, List<(EntityUid Entity, AntagSelectionComponent Comp)>>();
-
-    while (rules.MoveNext(out var uid, out var selection))
     {
-        foreach (var def in selection.Definitions)
+        _chosenDynamicsModes.WithLabels([ev.Dynamic]).Inc();
+
+        var dynamic = _prototype.Index(ev.Dynamic);
+        var rules = EntityQueryEnumerator<AntagSelectionComponent>();
+
+        var roleMap = new Dictionary<string, List<(EntityUid Entity, AntagSelectionComponent Comp)>>();
+
+        while (rules.MoveNext(out var uid, out var selection))
         {
-            var allRoles = def.PrefRoles.Select(p => p.Id);
-
-            foreach (var role in allRoles)
+            foreach (var def in selection.Definitions)
             {
-                if (!roleMap.TryGetValue(role, out var list))
-                {
-                    list = new List<(EntityUid, AntagSelectionComponent)>();
-                    roleMap[role] = list;
-                }
+                var allRoles = def.PrefRoles.Select(p => p.Id);
 
-                list.Add((uid, selection));
+                foreach (var role in allRoles)
+                {
+                    if (!roleMap.TryGetValue(role, out var list))
+                    {
+                        list = new List<(EntityUid, AntagSelectionComponent)>();
+                        roleMap[role] = list;
+                    }
+
+                    list.Add((uid, selection));
+                }
             }
         }
-    }
 
-    foreach (var (roleProto, limit) in dynamic.AntagLimits)
-    {
-        var roleId = roleProto.Id;
-
-        if (!roleMap.TryGetValue(roleId, out var entries))
-            continue;
-
-        foreach (var (_, comp) in entries)
+        foreach (var (roleProto, limit) in dynamic.AntagLimits)
         {
-            _antag.SetAntagLimit(comp, roleId, newMax: limit);
+            var roleId = roleProto.Id;
+
+            if (!roleMap.TryGetValue(roleId, out var entries))
+                continue;
+
+            foreach (var (_, comp) in entries)
+            {
+                _antag.SetAntagLimit(comp, roleId, newMax: limit);
+            }
+        }
+
+        var query = EntityQueryEnumerator<StoreComponent>();
+        while (query.MoveNext(out var store, out var comp))
+        {
+            if (!comp.UseDynamicPrices)
+                continue;
+
+            if (comp.AccountOwner == null)
+                continue;
+
+            var listings = _store.GetAvailableListings(comp.AccountOwner.Value, store, comp).ToArray();
+            ApplyDynamicPrice(store, listings, dynamic.ID);
         }
     }
-
-    var query = EntityQueryEnumerator<StoreComponent>();
-    while (query.MoveNext(out var store, out var comp))
-    {
-        if (!comp.UseDynamicPrices)
-            continue;
-
-        if (comp.AccountOwner == null)
-            continue;
-
-        var listings = _store.GetAvailableListings(comp.AccountOwner.Value, store, comp).ToArray();
-        ApplyDynamicPrice(store, listings, dynamic.ID);
-    }
-}
 
     private void OnRoundEndAppend(RoundEndTextAppendEvent ev)
     {
@@ -200,10 +216,10 @@ public sealed class TraitorDynamicsSystem : EntitySystem
     /// <summary>
     /// Gets and sets a random dynamic based on the current number of ready players.
     /// </summary>
-    public void SetRandomDynamic()
+    public void SetRandomDynamic(EntityUid? station = null)
     {
         var countPlayers = _gameTicker.ReadyPlayerCount();
-        var dynamic = GetRandomDynamic(countPlayers);
+        var dynamic = GetRandomDynamic(countPlayers, station: station);
         SetDynamic(dynamic);
     }
 
@@ -235,7 +251,7 @@ public sealed class TraitorDynamicsSystem : EntitySystem
 
     public void SetDynamic(string proto)
     {
-        if (!_prototype.TryIndex<DynamicPrototype>(proto, out var dynamicProto, true))
+        if (!_prototype.Resolve<DynamicPrototype>(proto, out var dynamicProto))
             return;
 
         SetDynamic(dynamicProto);
@@ -253,43 +269,40 @@ public sealed class TraitorDynamicsSystem : EntitySystem
     /// <param name="playerCount"> current number of ready players, by this indicator the required number is compared </param>
     /// <param name="force"> ignore player checks and force any dynamics </param>
     /// <returns></returns>
-    public string GetRandomDynamic(int playerCount = 0, bool force = false)
+    public string GetRandomDynamic(int playerCount = 0, bool force = false, EntityUid? station = null)
     {
-        var validWeight = _prototype.Index<WeightedRandomPrototype>(_weightsProto);
-        var selectedDynamic = string.Empty;
+        var prototypeWeights = _prototype.Index<WeightedRandomPrototype>(_weightsProto);
+        var resultWeights = new Dictionary<string, float>();
+        (var _, var crewManifestEntries) = station is not null ? _crewManifest.GetCrewManifest(station.Value) : (null, null);
 
-        var originalProto = new Dictionary<string, float>(validWeight.Weights);
-
-        while (validWeight.Weights.Keys.Count > 0)
+        foreach (var (id, weight) in prototypeWeights.Weights)
         {
-            var currentDynamic = validWeight.Pick(_random);
-
-            if (!_prototype.TryIndex<DynamicPrototype>(currentDynamic, out var dynamicProto))
-            {
-                validWeight.Weights.Remove(currentDynamic);
+            if (!_prototype.TryIndex<DynamicPrototype>(id, out var dynamicProto))
                 continue;
-            }
 
-            if (playerCount == 0 || force)
+            if (!(playerCount >= dynamicProto.PlayersRequirement))
+                continue;
+
+            var requirementMatch = true;
+            foreach (var (departmentId, playerLimit) in dynamicProto.DepartmentLimits)
             {
-                selectedDynamic = dynamicProto.ID;
-                break;
+                if (!_prototype.Resolve(departmentId, out var departmentPrototype))
+                    continue;
+
+                if (crewManifestEntries is null)
+                    continue;
+
+                if (crewManifestEntries.Entries.Count(x => departmentPrototype.Roles.Contains(x.JobPrototype)) < playerLimit)
+                    requirementMatch = false;
             }
 
-            if (playerCount >= dynamicProto.PlayersRequerment)
-            {
-                selectedDynamic = dynamicProto.ID;
-                break;
-            }
+            if (!requirementMatch)
+                continue;
 
-            validWeight.Weights.Remove(currentDynamic);
+            resultWeights.Add(id, weight);
         }
 
-        validWeight.Weights.Clear();
-        foreach (var k in originalProto)
-        {
-            validWeight.Weights[k.Key] = k.Value;
-        }
+        var selectedDynamic = (playerCount == 0 || force) ? _random.Pick(prototypeWeights.Weights) : _random.Pick(resultWeights);
 
         return selectedDynamic;
     }

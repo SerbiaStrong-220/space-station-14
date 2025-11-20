@@ -20,6 +20,7 @@ using System.Text;
 using Content.Server.SS220.TraitorDynamics;
 using Content.Server.Codewords;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.StationRecords;
 
 namespace Content.Server.GameTicking.Rules;
 
@@ -48,19 +49,39 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
 
         SubscribeLocalEvent<TraitorRuleComponent, AfterAntagEntitySelectedEvent>(AfterEntitySelected);
         SubscribeLocalEvent<TraitorRuleComponent, ObjectivesTextPrependEvent>(OnObjectivesTextPrepend);
+
+        SubscribeLocalEvent<TraitorRuleComponent, BeforeAntagSelection>(OnBeforeAntagSelection);
     }
 
     // SS220 TraitorDynamics start
-    protected override void Added(EntityUid uid, TraitorRuleComponent component, GameRuleComponent gameRule, GameRuleAddedEvent args)
+    private void OnBeforeAntagSelection(Entity<TraitorRuleComponent> entity, ref BeforeAntagSelection _)
     {
-        base.Added(uid, component, gameRule, args);
-        InitDynamic(uid, component);
+        InitDynamic(entity.AsNullable(), GetStationWithRecords());
     }
 
     protected override void Ended(EntityUid uid, TraitorRuleComponent component, GameRuleComponent gameRule, GameRuleEndedEvent args)
     {
         base.Ended(uid, component, gameRule, args);
+
         _dynamics.RemoveDynamic();
+    }
+
+    private EntityUid? GetStationWithRecords()
+    {
+        // here goes float to use RobustRandom
+        EntityUid? station = null;
+        int? recordCount = null;
+        var query = AllEntityQuery<StationRecordsComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            var thisEntryRecordCount = comp.Records.Keys.Count;
+
+            // care here I use that null always give false!
+            recordCount = recordCount > thisEntryRecordCount ? recordCount : thisEntryRecordCount;
+            station = recordCount == thisEntryRecordCount ? uid : station;
+        }
+
+        return station;
     }
     // SS220 TraitorDynamics end
 
@@ -266,12 +287,12 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
     }
 
     // SS220 Dynamics begin
-    private void InitDynamic(EntityUid uid, TraitorRuleComponent? rule)
+    private void InitDynamic(Entity<TraitorRuleComponent?> rule, EntityUid? station)
     {
-        if (!Resolve(uid, ref rule))
+        if (!Resolve(rule.Owner, ref rule.Comp))
             return;
 
-        if (!TryComp<TraitorDynamicsComponent>(uid, out var dynamicComp))
+        if (!TryComp<TraitorDynamicsComponent>(rule, out var dynamicComp))
             return;
 
         if (dynamicComp.Dynamic != null)
@@ -287,7 +308,7 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
             return;
         }
 
-        _dynamics.SetRandomDynamic();
+        _dynamics.SetRandomDynamic(station);
     }
     // SS220 Dynamics end
 }

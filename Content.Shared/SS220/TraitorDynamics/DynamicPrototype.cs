@@ -22,7 +22,14 @@ public sealed partial class DynamicPrototype : IPrototype
     public Dictionary<ProtoId<AntagPrototype>, int> AntagLimits = new();
 
     [DataField]
-    public int PlayersRequerment;
+    public int PlayersRequirement;
+
+    /// <summary>
+    /// Minimum players in department required to add this dynamic to dynamics random pool <br/>
+    /// if it states 5 than if players 5 or more it will be added
+    /// </summary>
+    [DataField]
+    public Dictionary<ProtoId<DepartmentPrototype>, int> DepartmentLimits = new();
 
     [DataField]
     public ProtoId<LocalizedDatasetPrototype>? LoreNames;
