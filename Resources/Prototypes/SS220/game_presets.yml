@@ -40,6 +40,17 @@
   - CultYoggRuleHighPop
   - NoNewCrewAntagsStationEventScheduler
   - EmergencyShuttleAutoVote
+
+- type: gamePreset
+  id: DynamicTraitor
+  name: dynamic-traitor-tile
+  description: traitor-description
+  minPlayers: 5
+  rules:
+  - TraitorDynamic
+  - BasicStationEventScheduler
+  - EmergencyShuttleAutoVote
+
 # event schedulers
 
 - type: entity

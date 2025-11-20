@@ -78,8 +78,11 @@
         - Carp
         - DoorBumpOpener
         - CannotSuicide
-    - type: ReplacementAccent
-      accent: genericAggressive
+  # - type: ReplacementAccent #SS220 Dragon & Carp Language Begin
+  #   accent: genericAggressive
+    - type: Language
+      availableLanguages:
+      - id: Carpish #SS220 Dragon & Carp Language End
     - type: Speech
       speechVerb: LargeMob
     - type: InteractionPopup
@@ -116,6 +119,11 @@
       sprite: Mobs/Aliens/Carps/magic.rsi
     - type: TypingIndicator
       proto: guardian
+    - type: Language #SS220 Dragon & Carp Language Begin
+      availableLanguages:
+      - id: Carpish
+      - id: Galactic
+        canSpeak: false #SS220 Dragon & Carp Language End
 
 - type: entity
   name: holocarp
@@ -139,6 +147,11 @@
             - Opaque
     - type: TypingIndicator
       proto: robot
+    - type: Language #SS220 Dragon & Carp Language Begin
+      availableLanguages:
+      - id: Carpish
+      - id: Galactic
+        canSpeak: false #SS220 Dragon & Carp Language End
 
 - type: entity
   parent: MobCarp
@@ -158,10 +171,10 @@
   suffix: "Salvage Ruleset"
   components:
     - type: SalvageMobRestrictions
-    - type: MobThresholds
-      thresholds:
-        0: Alive
-        30: Dead
+    # - type: MobThresholds  # SS220 Revert Wizden balance #38131 BEGIN
+    #   thresholds:
+    #     0: Alive
+    #     30: Dead  # SS220 Revert Wizden balance #38131 END
 
 - type: entity
   name: space carp
@@ -234,7 +247,7 @@
     - type: MobThresholds
       thresholds:
         0: Alive
-        82: Dead # Might seem random, but this brings up the hits to kill with a crusher mark to 3
+        150: Dead # SS220 Revert Wizden balance #38131
     - type: Stamina
       critThreshold: 150
     - type: DamageStateVisuals

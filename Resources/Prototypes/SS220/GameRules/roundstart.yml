@@ -91,3 +91,9 @@
   categories: [ GameRules ]
   components:
   - type: EmergencyShuttleAutoVoteRule
+
+- type: entity
+  id: TraitorDynamic
+  parent: Traitor
+  components:
+  - type: TraitorDynamics
