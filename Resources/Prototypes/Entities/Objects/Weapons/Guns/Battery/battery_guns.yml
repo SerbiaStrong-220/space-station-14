@@ -21,6 +21,7 @@
   - type: AmmoCounter
   - type: Gun
     fireRate: 2
+    projectileSpeed: 25 # SS220 Bullet Speed
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -80,6 +81,7 @@
   - type: AmmoCounter
   - type: Gun
     fireRate: 2
+    projectileSpeed: 25 # SS220 Bullet Speed
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
