@@ -12,3 +12,4 @@ ent-MobCobraSpaceGhostRole = { ent-MobCobraSpace }
 
 ent-MobSharkDragon = космическая акула
     .desc = { ent-MobShark.desc }
+    .suffix = ВыводокДракона

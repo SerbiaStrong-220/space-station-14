@@ -1,7 +1,8 @@
 - type: entity
+  parent: MobShark
   id: MobSharkDragon
   name: space shark
-  parent: MobShark
+  suffix: DragonBrood
   components:
   - type: GhostRole
     allowMovement: true
@@ -19,3 +20,12 @@
   - type: Telepathy
     canSend: true
     telepathyChannelPrototype: TelepathyChannelSpaceDragon
+  - type: Insulated
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: SharkDragon
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 17 # SS220 DragonShark Buff, 10 -> 17
+        Bloodloss: 5
