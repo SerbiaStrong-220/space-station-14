@@ -9,7 +9,7 @@ namespace Content.Client.SS220.Cooking.Grilling;
 /// <summary>
 /// This handles all grill related visuals
 /// </summary>
-public sealed class GrillSystem : EntitySystem
+public sealed class GrillSystem : SharedGrillSystem
 {
     [Dependency] private readonly SpriteSystem _spriteSystem = default!;
 
@@ -19,6 +19,7 @@ public sealed class GrillSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+
         SubscribeLocalEvent<GrillingVisualComponent, AfterAutoHandleStateEvent>(AddGrillVisuals);
         SubscribeLocalEvent<GrillingVisualComponent, ComponentShutdown>(RemoveGrillVisuals);
     }
