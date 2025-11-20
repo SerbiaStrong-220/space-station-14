@@ -56,12 +56,10 @@ public sealed class GrillableSystem : EntitySystem
         // Cooking is done
         if (ent.Comp.CurrentCookTime >= ent.Comp.TimeToCook)
         {
-            _audio.PlayPvs(ent.Comp.CookingDoneSound, ent, new AudioParams());
+            var newEnt = EntityManager.Spawn(ent.Comp.CookingResult,
+                _transformSystem.GetMapCoordinates(ent));
 
-            EntityManager.Spawn(ent.Comp.CookingResult,
-                _transformSystem.GetMapCoordinates(ent),
-                null,
-                _transformSystem.GetWorldRotation(ent));
+            _audio.PlayPvs(ent.Comp.CookingDoneSound, newEnt);
 
             PredictedDel(ent.Owner);
         }
