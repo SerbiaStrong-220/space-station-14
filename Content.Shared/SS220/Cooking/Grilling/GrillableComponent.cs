@@ -1,5 +1,6 @@
 ﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Atmos;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 
@@ -25,4 +26,8 @@ public sealed partial class GrillableComponent : Component
 
     [ViewVariables]
     public SoundSpecifier CookingDoneSound = new SoundPathSpecifier("/Audio/Effects/sizzle.ogg");
+
+    [DataField]
+    // 473f - ideal grill temp in Kelvins
+    public float IdealGrillingTemperature = (200 + Atmospherics.T0C);
 }

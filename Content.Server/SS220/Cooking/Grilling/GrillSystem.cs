@@ -13,9 +13,6 @@ namespace Content.Server.SS220.Cooking.Grilling;
 /// </summary>
 public sealed class GrillSystem : SharedGrillSystem
 {
-    // 473f - ideal grill temp in Kelvins
-    private const float IdealGrillingTemperature = (200 + Atmospherics.T0C);
-
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -41,7 +38,7 @@ public sealed class GrillSystem : SharedGrillSystem
                             break;
 
                         case >= Atmospherics.FireMinimumTemperatureToExist:
-                            var currentAirTemperature = Math.Clamp(temp.Temperature, Atmospherics.FireMinimumTemperatureToExist, IdealGrillingTemperature);
+                            var currentAirTemperature = Math.Clamp(temp.Temperature, Atmospherics.FireMinimumTemperatureToExist, grillable.IdealGrillingTemperature);
                             cookingSpeed = float.Lerp(0.5f, 1f,(currentAirTemperature - Atmospherics.FireMinimumTemperatureToExist) / 100f);
 
                             break;
