@@ -13,8 +13,8 @@ public sealed class PinButton : TextureButton
 
     private readonly PinUISystem _pinUISystem;
 
-    private static readonly Color DefaultColor = Color.FromHex("#4B596A");
-    private static readonly Color PressedColor = Color.Green;
+    public Color NormalColor { get; set; } = Color.FromHex("#4B596A");
+    public Color PressedColor { get; set; } = Color.Green;
 
     public Control? LinkedControl
     {
@@ -29,7 +29,7 @@ public sealed class PinButton : TextureButton
 
         _pinUISystem = _entityManager.System<PinUISystem>();
         TextureNormal = _resourceCache.GetTexture("/Textures/SS220/Interface/Misc/pin.png");
-        Modulate = DefaultColor;
+        Modulate = NormalColor;
         ToggleMode = true;
         VerticalAlignment = VAlignment.Center;
         OnToggled += args => SetPinned(args.Pressed);
@@ -56,7 +56,7 @@ public sealed class PinButton : TextureButton
             return;
 
         Pressed = args.Pinned;
-        Modulate = args.Pinned ? PressedColor : DefaultColor;
+        Modulate = args.Pinned ? PressedColor : NormalColor;
     }
 
     private void SetPinned(bool pinned)

@@ -10,12 +10,12 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using System.Linq;
 using System.Numerics;
-using Content.Client.SS220.UserInterface.Controls; // ss220 add pin for ui
+using Content.Client.SS220.UserInterface.Controls;
 using Content.Shared.FixedPoint;
 using Robust.Client.Graphics;
 using static Robust.Client.UserInterface.Controls.BoxContainer;
 using Robust.Client.GameObjects;
-using Content.Client.SS220.UserInterface.System.PinUI; //ss220 add pin for ui
+using Content.Client.SS220.UserInterface.System.PinUI;
 
 namespace Content.Client.Chemistry.UI
 {
@@ -100,8 +100,7 @@ namespace Content.Client.Chemistry.UI
             Tabs.SetTabTitle(1, Loc.GetString("chem-master-window-output-tab"));
 
             // SS220 add pin button begin
-            var pinButton = PinUISystem.AddPinButtonBeforeTarget(this, CloseButton);
-            pinButton.Margin = new Thickness(0, 0, 5, 0);
+            PinUISystem.AddPinButtonBeforeTarget(this, CloseButton);
             // SS220 add pin button end
         }
 

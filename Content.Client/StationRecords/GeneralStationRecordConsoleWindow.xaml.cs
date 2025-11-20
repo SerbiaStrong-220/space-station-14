@@ -1,8 +1,8 @@
 using System.Numerics;
 using Content.Client.Humanoid;
 using Content.Client.Inventory;
-using Content.Client.SS220.UserInterface.Controls; // ss220 add pin for ui
-using Content.Client.SS220.UserInterface.System.PinUI; //ss220 add pin for ui
+using Content.Client.SS220.UserInterface.Controls;
+using Content.Client.SS220.UserInterface.System.PinUI;
 using Content.Shared.GameTicking;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Preferences;
@@ -84,8 +84,7 @@ public sealed partial class GeneralStationRecordConsoleWindow : DefaultWindow, I
         };
 
         // SS220 add pin button begin
-        var pinButton = PinUISystem.AddPinButtonBeforeTarget(this, CloseButton);
-        pinButton.Margin = new Thickness(0, 0, 5, 0);
+        PinUISystem.AddPinButtonBeforeTarget(this, CloseButton);
         // SS220 add pin button end
     }
 

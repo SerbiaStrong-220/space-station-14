@@ -38,7 +38,12 @@ public sealed class PinUISystem : EntitySystem
         SetPinned(window);
     }
 
-    public static TextureButton AddPinButtonBeforeTarget(Control linkedControl, Control target)
+    public static TextureButton AddPinButtonBeforeTarget(Control linkedControl,
+        Control target,
+        int marginLeft = 0,
+        int marginTop = 0,
+        int marginRight = 5,
+        int marginBottom = 0)
     {
         var button = new PinButton(linkedControl);
         var parent = target.Parent;
@@ -49,6 +54,7 @@ public sealed class PinUISystem : EntitySystem
         parent.AddChild(button);
         button.SetPositionInParent(index);
 
+        button.Margin = new Thickness(marginLeft, marginTop, marginRight, marginBottom);
         return button;
     }
 

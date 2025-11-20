@@ -1,8 +1,8 @@
 using System.Linq;
 using System.Numerics;
 using Content.Client.Resources;
-using Content.Client.SS220.UserInterface.Controls; // ss220 add pin for ui
-using Content.Client.SS220.UserInterface.System.PinUI; //ss220 add pin for ui
+using Content.Client.SS220.UserInterface.Controls;
+using Content.Client.SS220.UserInterface.System.PinUI;
 using Content.Client.Viewport;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.SurveillanceCamera;
@@ -107,8 +107,7 @@ public sealed partial class SurveillanceCameraMonitorWindow : DefaultWindow, IPi
         // SS220 Camera-Map end
 
         // SS220 add pin button begin
-        var pinButton = PinUISystem.AddPinButtonBeforeTarget(this, CloseButton);
-        pinButton.Margin = new Thickness(0, 0, 5, 0);
+        PinUISystem.AddPinButtonBeforeTarget(this, CloseButton);
         // SS220 add pin button end
     }
 

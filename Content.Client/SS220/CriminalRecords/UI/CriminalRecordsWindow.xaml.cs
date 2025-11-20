@@ -100,8 +100,7 @@ public sealed partial class CriminalRecordsWindow : FancyWindow, IPinnableWindow
 
         StatusColorIndicator.PanelOverride = _indicatorOverride;
 
-        var pinButton = PinUISystem.AddPinButtonBeforeTarget(this, CloseButton);
-        pinButton.Margin = new Thickness(0, 0, 5, 0);
+        PinUISystem.AddPinButtonBeforeTarget(this, CloseButton);
 
         MessageInput.Placeholder = new Rope.Leaf(Loc.GetString("criminal-records-ui-message-placeholder"));
         //MessageInput.OnKeyBindDown += _ => MessageInputChanged(); // Doesn't work 24.09.2023 textedit is broken

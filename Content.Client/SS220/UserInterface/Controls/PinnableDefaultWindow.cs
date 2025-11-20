@@ -9,9 +9,11 @@ public sealed partial class PinnableDefaultWindow : DefaultWindow, IPinnableWind
 {
     public PinnableDefaultWindow()
     {
-        var pinButton = PinUISystem.AddPinButtonBeforeTarget(this, CloseButton);
-        pinButton.Margin = new Thickness(0, 0, 5, 0);
+        PinUISystem.AddPinButtonBeforeTarget(this, CloseButton);
     }
 }
 
+/// <summary>
+/// Interface that marks this window can be pinned by hotkey
+/// </summary>
 public interface IPinnableWindow;

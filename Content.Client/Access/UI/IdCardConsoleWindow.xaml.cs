@@ -1,6 +1,6 @@
 using System.Linq;
-using Content.Client.SS220.UserInterface.Controls; // ss220 add pin for ui
-using Content.Client.SS220.UserInterface.System.PinUI; //ss220 add pin for ui
+using Content.Client.SS220.UserInterface.Controls;
+using Content.Client.SS220.UserInterface.System.PinUI;
 using Content.Shared.Access;
 using Content.Shared.Access.Systems;
 using Content.Shared.CCVar;
@@ -110,8 +110,7 @@ namespace Content.Client.Access.UI
             }
 
             // SS220 add pin button begin
-            var pinButton = PinUISystem.AddPinButtonBeforeTarget(this, CloseButton);
-            pinButton.Margin = new Thickness(0, 0, 5, 0);
+            PinUISystem.AddPinButtonBeforeTarget(this, CloseButton);
             // SS220 add pin button end
         }
 

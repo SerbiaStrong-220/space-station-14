@@ -15,10 +15,10 @@ using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using System.Linq;
 using System.Numerics;
-using Content.Client.SS220.UserInterface.Controls; // ss220 add pin for ui
+using Content.Client.SS220.UserInterface.Controls;
 using Content.Shared.StatusIcon;
 using Robust.Client.GameObjects;
-using Content.Client.SS220.UserInterface.System.PinUI; //ss220 add pin for ui
+using Content.Client.SS220.UserInterface.System.PinUI;
 
 namespace Content.Client.CriminalRecords;
 
@@ -149,8 +149,7 @@ public sealed partial class CriminalRecordsConsoleWindow : FancyWindow, IPinnabl
         };
 
         // SS220 add pin button begin
-        var pinButton = PinUISystem.AddPinButtonBeforeTarget(this, CloseButton);
-        pinButton.Margin = new Thickness(0, 0, 5, 0);
+        PinUISystem.AddPinButtonBeforeTarget(this, CloseButton);
         // SS220 add pin button end
     }
 

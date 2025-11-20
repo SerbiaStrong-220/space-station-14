@@ -12,7 +12,7 @@ using Robust.Client.UserInterface.RichText;
 using Content.Client.UserInterface.RichText;
 using Robust.Shared.Input;
 using Content.Client.SS220.Language;
-using Content.Client.SS220.UserInterface.Controls; // ss220 add pin for ui
+using Content.Client.SS220.UserInterface.Controls;
 using Robust.Client.Player;
 
 namespace Content.Client.Paper.UI
