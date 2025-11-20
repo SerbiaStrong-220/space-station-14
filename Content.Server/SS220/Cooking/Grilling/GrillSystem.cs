@@ -20,10 +20,7 @@ public sealed class GrillSystem : SharedGrillSystem
     {
         base.Update(frameTime);
         var query = EntityQueryEnumerator<GrillComponent, ItemPlacerComponent, ApcPowerReceiverComponent>();
-        while (query.MoveNext(out _,
-                   out var grill,
-                   out var placer,
-                   out var power))
+        while (query.MoveNext(out _, out var grill, out var placer, out var power))
         {
             if (!power.Powered || !grill.IsGrillOn)
                 continue;
@@ -33,9 +30,22 @@ public sealed class GrillSystem : SharedGrillSystem
                 if (TryComp<InternalTemperatureComponent>(ent, out var temp) &&
                     TryComp<GrillableComponent>(ent, out var grillable))
                 {
+                    float cookingSpeed = 0;
+
                     // Cook faster, when approaching 200 degrees Celsius
-                    var currentAirTemperature = Math.Clamp(temp.Temperature, Atmospherics.FireMinimumTemperatureToExist, IdealGrillingTemperature);
-                    var cookingSpeed = float.Lerp(0.5f, 1f, (currentAirTemperature - Atmospherics.FireMinimumTemperatureToExist) / 100f);
+                    switch (temp.Temperature)
+                    {
+                        case < Atmospherics.FireMinimumTemperatureToExist:
+                            cookingSpeed = 0.5f;
+
+                            break;
+
+                        case >= Atmospherics.FireMinimumTemperatureToExist:
+                            var currentAirTemperature = Math.Clamp(temp.Temperature, Atmospherics.FireMinimumTemperatureToExist, IdealGrillingTemperature);
+                            cookingSpeed = float.Lerp(0.5f, 1f,(currentAirTemperature - Atmospherics.FireMinimumTemperatureToExist) / 100f);
+
+                            break;
+                    }
 
                     grillable.CurrentCookTime += (cookingSpeed + grill.CookingMultiplier) * frameTime;
                     Dirty(ent, grillable);
