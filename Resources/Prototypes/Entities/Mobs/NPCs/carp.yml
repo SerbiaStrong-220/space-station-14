@@ -171,10 +171,10 @@
   suffix: "Salvage Ruleset"
   components:
     - type: SalvageMobRestrictions
-    - type: MobThresholds
-      thresholds:
-        0: Alive
-        30: Dead
+    # - type: MobThresholds  # SS220 Revert Wizden balance #38131 BEGIN
+    #   thresholds:
+    #     0: Alive
+    #     30: Dead  # SS220 Revert Wizden balance #38131 END
 
 - type: entity
   name: space carp
@@ -247,7 +247,7 @@
     - type: MobThresholds
       thresholds:
         0: Alive
-        82: Dead # Might seem random, but this brings up the hits to kill with a crusher mark to 3
+        150: Dead # SS220 Revert Wizden balance #38131
     - type: Stamina
       critThreshold: 150
     - type: DamageStateVisuals
