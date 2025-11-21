@@ -8,14 +8,13 @@ namespace Content.Server.SS220.CombustingMindShield;
 /// Allows you to limit the lifespan of the mindshield
 /// </summary>
 
-[RegisterComponent, NetworkedComponent]
-[AutoGenerateComponentState]
+[RegisterComponent]
 public sealed partial class CombustingMindShieldComponent : Component
 {
     /// <summary>
     /// When Mindshield will cease to exist
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan? CombustionTime;
 
     /// <summary>
@@ -24,6 +23,5 @@ public sealed partial class CombustingMindShieldComponent : Component
     [DataField]
     public TimeSpan BeforeCombustionTime = TimeSpan.FromSeconds(180);
 
-    [AutoNetworkedField]
     public EntityUid? Implant;
 }
