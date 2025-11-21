@@ -5,7 +5,7 @@ using Content.Shared.EntityTable.EntitySelectors;
 namespace Content.Server.SS220.StationEvents.Components;
 
 /// <summary>
-/// Component when it is necessary to add a gamerule with a chance during initialization
+/// A component when you want to add a table of other events along with this one
 /// </summary>
 [RegisterComponent]
 public sealed partial class AdditionalRulesComponent : Component
