@@ -9,12 +9,13 @@ namespace Content.Shared.SS220.CombustingMindShield;
 /// </summary>
 
 [RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState]
 public sealed partial class CombustingMindShieldComponent : Component
 {
     /// <summary>
     /// When Mindshield will cease to exist
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
+    [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public TimeSpan? CombustionTime;
 
     /// <summary>
@@ -23,5 +24,6 @@ public sealed partial class CombustingMindShieldComponent : Component
     [DataField]
     public TimeSpan BeforeCombustionTime = TimeSpan.FromSeconds(180);
 
+    [AutoNetworkedField]
     public EntityUid? Implant;
 }

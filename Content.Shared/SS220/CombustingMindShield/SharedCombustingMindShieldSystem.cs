@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Implants.Components;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Popups;
 using Robust.Shared.Timing;
@@ -19,6 +20,18 @@ public sealed class SharedCombustingMindShieldSystem : EntitySystem
 
     private void OnStartup(Entity<CombustingMindShieldComponent> ent, ref ComponentStartup args)
     {
+        if (TryComp<ImplantedComponent>(ent, out var implanted))
+        {
+            foreach (var implant in implanted.ImplantContainer.ContainedEntities)
+            {
+                if (!HasComp<MindShieldImplantComponent>(implant))
+                    continue;
+
+                ent.Comp.Implant = implant;
+                break;
+            }
+        }
+
         ent.Comp.CombustionTime = _time.CurTime + ent.Comp.BeforeCombustionTime;
         _popup.PopupClient(Loc.GetString("combisting-mindshield-startup"), ent);
     }

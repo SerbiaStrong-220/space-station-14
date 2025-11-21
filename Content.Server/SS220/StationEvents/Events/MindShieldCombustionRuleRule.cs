@@ -33,17 +33,6 @@ public sealed class MindShieldCombustionRule : StationEventSystem<MindShieldComb
 
         var combustionOwner = _random.Pick(validTargets);
 
-        var comp = EnsureComp<CombustingMindShieldComponent>(combustionOwner);
-        if (TryComp<ImplantedComponent>(combustionOwner, out var implanted))
-        {
-            foreach (var implant in implanted.ImplantContainer.ContainedEntities)
-            {
-                if (!HasComp<MindShieldImplantComponent>(implant))
-                    continue;
-
-                comp.Implant = implant;
-                break;
-            }
-        }
+        EnsureComp<CombustingMindShieldComponent>(combustionOwner);
     }
 }

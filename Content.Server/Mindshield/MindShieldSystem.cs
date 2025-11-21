@@ -32,6 +32,7 @@ public sealed class MindShieldSystem : EntitySystem
 
         SubscribeLocalEvent<MindShieldImplantComponent, ImplantImplantedEvent>(OnImplantImplanted);
         SubscribeLocalEvent<MindShieldImplantComponent, ImplantRemovedEvent>(OnImplantRemoved);
+        SubscribeLocalEvent<MindShieldComponent, ComponentRemove>(OnRemove);//SS220 CombustedMindShieldEvent #3500
     }
 
     private void OnImplantImplanted(Entity<MindShieldImplantComponent> ent, ref ImplantImplantedEvent ev)
@@ -72,7 +73,12 @@ public sealed class MindShieldSystem : EntitySystem
     private void OnImplantRemoved(Entity<MindShieldImplantComponent> ent, ref ImplantRemovedEvent args)
     {
         RemComp<MindShieldComponent>(args.Implanted);
-        RemCompDeferred<CombustingMindShieldComponent>(args.Implanted);//SS220 CombustedMindShieldEvent #3500
     }
+    //SS220 CombustedMindShieldEvent #3500 start
+    private void OnRemove(Entity<MindShieldImplantComponent> ent, ref ComponentRemove args)
+    {
+        RemComp<CombustingMindShieldComponent>(ent);
+    }
+    //SS220 CombustedMindShieldEvent #3500 end
 }
 
