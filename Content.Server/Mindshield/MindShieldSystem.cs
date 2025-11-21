@@ -75,7 +75,7 @@ public sealed class MindShieldSystem : EntitySystem
         RemComp<MindShieldComponent>(args.Implanted);
     }
     //SS220 CombustedMindShieldEvent #3500 start
-    private void OnRemove(Entity<MindShieldImplantComponent> ent, ref ComponentRemove args)
+    private void OnRemove(Entity<MindShieldComponent> ent, ref ComponentRemove args)
     {
         RemComp<CombustingMindShieldComponent>(ent);
     }
