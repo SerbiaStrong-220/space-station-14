@@ -766,7 +766,7 @@
     #ss220 tweak ion storm end
   - type: IonStormRule
   #ss220 mindshield destructiuon #3500 start
-  - type: AdditionalRules
+  - type: ExtraEvents
     rules:
       combustion: !type:EntSelector
         id: RandomMindShieldCombustion

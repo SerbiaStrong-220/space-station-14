@@ -8,7 +8,7 @@ namespace Content.Server.SS220.StationEvents.Components;
 /// A component when you want to add a table of other events along with this one
 /// </summary>
 [RegisterComponent]
-public sealed partial class AdditionalRulesComponent : Component
+public sealed partial class ExtraEventsComponent : Component
 {
     [DataField(required: true)]
     public Dictionary<string, EntityTableSelector> Rules = [];

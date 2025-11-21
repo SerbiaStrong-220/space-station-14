@@ -7,7 +7,7 @@ using Content.Shared.Database;
 
 namespace Content.Server.SS220.StationEvents.Events;
 
-public sealed class AdditionalRulesSystem : EntitySystem
+public sealed class ExtraEventsSystem : EntitySystem
 {
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly EventManagerSystem _event = default!;
@@ -16,10 +16,10 @@ public sealed class AdditionalRulesSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<AdditionalRulesComponent, ComponentInit>(OnInit);
+        SubscribeLocalEvent<ExtraEventsComponent, ComponentInit>(OnInit);
     }
 
-    private void OnInit(Entity<AdditionalRulesComponent> ent, ref ComponentInit args)
+    private void OnInit(Entity<ExtraEventsComponent> ent, ref ComponentInit args)
     {
         foreach (var kvp in ent.Comp.Rules)
         {
@@ -30,7 +30,7 @@ public sealed class AdditionalRulesSystem : EntitySystem
             _event.RunRandomEvent(table);
 
             _adminLogger.Add(LogType.EventRan,
-                $"{ToPrettyString(ent):event} additionally tried to run the EntityTableSelector [{kvp.Key}]  via an AdditionalRulesComponent.");
+                $"{ToPrettyString(ent):event} additionally tried to run the EntityTableSelector [{kvp.Key}]  via an ExtraEventsComponent.");
         }
     }
 }
