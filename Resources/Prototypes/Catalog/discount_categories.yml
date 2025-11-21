@@ -1,3 +1,4 @@
+#SS220 DicountRareBuff bgn
 - type: discountCategory
   id: rareDiscounts # Dirty-cheap items that are rarely used and can be discounted to 0-ish cost to encourage usage.
   weight: 30
@@ -11,3 +12,4 @@
   id: veryRareDiscounts # Casually used items that are widely used but can be (rarely) discounted for epic lulz.
   weight: 20
   maxItems: 2
+#SS220 DicountRareBuff end
