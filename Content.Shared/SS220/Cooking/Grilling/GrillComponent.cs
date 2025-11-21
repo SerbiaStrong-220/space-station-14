@@ -24,7 +24,7 @@ public sealed partial class GrillComponent : Component
 
     // Grill cooking speed modifier
     [DataField]
-    public float CookingMultiplier;
+    public float CookingSpeed;
 
     [ViewVariables, AutoNetworkedField]
     public bool IsGrillOn;
