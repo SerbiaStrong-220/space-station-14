@@ -4,7 +4,7 @@ using Content.Server.SS220.StationEvents.Events;
 
 namespace Content.Server.SS220.StationEvents.Components;
 
-[RegisterComponent, Access(typeof(CableRandomSpawnRule))]
+[RegisterComponent]
 public sealed partial class MindShieldCombustionRuleComponent : Component
 {
 }
