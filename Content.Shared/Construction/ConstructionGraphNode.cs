@@ -20,7 +20,7 @@ namespace Content.Shared.Construction
         public string Name { get; private set; } = default!;
 
         [DataField("nodeName")]
-        public LocId? LocalizedName { get; private set; } //SS220-grill-update-2
+        public LocId? NameLocId { get; private set; } //SS220-grill-update-2
 
         [ViewVariables]
         public IReadOnlyList<ConstructionGraphEdge> Edges => _edges;
