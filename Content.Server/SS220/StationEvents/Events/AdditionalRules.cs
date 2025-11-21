@@ -30,8 +30,7 @@ public sealed class AdditionalRulesSystem : EntitySystem
             _event.RunRandomEvent(table);
 
             _adminLogger.Add(LogType.EventRan,
-                $"{ToPrettyString(ent):event} additionally tried to run the EntityTableSelector [{kvp.Key}]" +
-                $" via an AdditionalRulesComponent.");
+                $"{ToPrettyString(ent):event} additionally tried to run the EntityTableSelector [{kvp.Key}]  via an AdditionalRulesComponent.");
         }
     }
 }
