@@ -5,9 +5,9 @@ using Content.Shared.Mindshield.Components;
 using Content.Shared.Popups;
 using Robust.Shared.Timing;
 
-namespace Content.Shared.SS220.CombustingMindShield;
+namespace Content.Server.SS220.CombustingMindShield;
 
-public sealed class SharedCombustingMindShieldSystem : EntitySystem
+public sealed class CombustingMindShieldSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _time = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -22,7 +22,9 @@ public sealed class SharedCombustingMindShieldSystem : EntitySystem
     {
         if (TryComp<ImplantedComponent>(ent, out var implanted))
         {
-            foreach (var implant in implanted.ImplantContainer.ContainedEntities)
+            var implants = implanted.ImplantContainer.ContainedEntities;
+
+            foreach (var implant in implants)
             {
                 if (!HasComp<MindShieldImplantComponent>(implant))
                     continue;

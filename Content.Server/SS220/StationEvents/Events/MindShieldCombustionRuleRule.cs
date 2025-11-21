@@ -1,11 +1,11 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Server.SS220.CombustingMindShield;
 using Content.Server.SS220.StationEvents.Components;
 using Content.Server.StationEvents.Events;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Implants.Components;
 using Content.Shared.Mindshield.Components;
-using Content.Shared.SS220.CombustingMindShield;
 using Robust.Shared.Random;
 
 namespace Content.Server.SS220.StationEvents.Events;
