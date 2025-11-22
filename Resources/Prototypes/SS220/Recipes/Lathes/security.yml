@@ -156,3 +156,22 @@
     Plastic: 300
     Gold: 250
     Silver: 500
+
+- type: latheRecipe
+  id: WeaponLaserSMG
+  result: WeaponLaserSMG
+  completetime: 5
+  materials:
+    Steel: 2000
+    Plastic: 1000
+    Gold: 350
+    Plasma: 1000
+
+- type: latheRecipe
+  id: LaserSMGPowerCell
+  result: LaserSMGPowerCell
+  completetime: 5
+  materials:
+    Steel: 500
+    Gold: 350
+    Plasma: 500
