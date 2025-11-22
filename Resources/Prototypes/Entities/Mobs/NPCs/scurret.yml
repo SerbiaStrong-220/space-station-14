@@ -206,8 +206,8 @@
     #SS220 Languages tweaks begin
     - type: Language
       availableLanguages:
-    - id: Galactic
-      canSpeak: false
+      - id: Galactic
+        canSpeak: false
     #SS220 Languages tweaks end
 
 # Spawnable ESS have a ghost role, equipment, a random name and a random colour.
