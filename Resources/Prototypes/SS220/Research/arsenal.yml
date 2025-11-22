@@ -11,7 +11,7 @@
   - PortableRecharger
 
 - type: technology
-  id: Plasma Converter Acceleration
+  id: PlasmaConverterAcceleration
   name: research-technology-plasma-converter-acceleration
   icon:
     sprite: SS220/Objects/Weapons/Guns/Battery/laser_carabine.rsi
