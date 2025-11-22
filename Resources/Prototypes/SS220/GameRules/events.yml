@@ -41,9 +41,9 @@
   parent: BaseGameRule
   components:
   - type: StationEvent
-    earliestStart: 0
+    earliestStart: 20
     duration: 20
     minimumPlayers: 1
-    maxOccurrences: 2
+    maxOccurrences: 1
     weight: 1
   - type: MindShieldCombustionRule
