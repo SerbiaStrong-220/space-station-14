@@ -76,7 +76,7 @@ namespace Content.Server.RoundEnd
         // SS220-MIT-evac-vote-begin
         private void OnEvacByVote(ref EmergencyShuttleCalledByVote ev)
         {
-            _blockedCallRecall = ev.Block    ;
+            _blockedCallRecall = ev.Block;
         }
         // SS220-MIT-evac-vote-end
 

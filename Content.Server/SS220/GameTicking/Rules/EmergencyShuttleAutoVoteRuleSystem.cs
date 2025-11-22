@@ -1,4 +1,4 @@
-// © SS220, MIT, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.txt
+// © SS220, MIT, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 
 using Content.Server.Administration.Logs;
 using Content.Server.GameTicking;
@@ -74,11 +74,9 @@ public sealed class EmergencyShuttleAutoVoteRuleSystem : GameRuleSystem<Emergenc
 
         vote.OnFinished += (_, args) =>
         {
-            bool callEvac;
-            if (args.Winner == null)
-                callEvac = false;
-            else
-                callEvac = (bool)args.Winner;
+            var callEvac = false;
+            if (args.Winner is bool winner)
+                callEvac = winner;
 
             _adminLog.Add(LogType.Vote, LogImpact.Medium, $"Auto call emergency shuttle vote finished, result is {callEvac}");
 
