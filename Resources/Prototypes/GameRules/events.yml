@@ -499,7 +499,7 @@
     rules:
       combustion: !type:EntSelector
         id: RandomMindShieldCombustion
-        prob: 0.2
+        prob: 0.1
   #ss220 mindshield destructiuon #3500 end
 
 - type: entity
@@ -777,7 +777,7 @@
     rules:
       combustion: !type:EntSelector
         id: RandomMindShieldCombustion
-        prob: 0.2
+        prob: 0.1
   #ss220 mindshield destructiuon #3500 end
 
 - type: entity
@@ -820,19 +820,19 @@
     rules:
       combustion: !type:EntSelector
         id: RandomMindShieldCombustion
-        prob: 0.2
+        prob: 0.1
   #ss220 mindshield destructiuon #3500 end
-  
+
 - type: entity
   parent: BaseGameRule
   id: SmugglerStashVariationPass
   components:
   - type: StationEvent
-    earliestStart: 0
+    earliestStart: 20
     duration: 1
     minimumPlayers: 1
-    maxOccurrences: 2
-    weight: 10
+    maxOccurrences: 1
+    weight: 1
   - type: RandomSpawnRule
     prototype: RandomSatchelSpawner
 
