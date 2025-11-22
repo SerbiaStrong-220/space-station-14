@@ -4097,3 +4097,9 @@
   - type: NpcFactionMember
     factions:
     - NanoTrasen
+  #SS220 Languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: true
+  #SS220 Languages tweaks end
