@@ -336,7 +336,7 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
     public void AddCostModifier(string modifierSourceId, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> modifiers)
     {
         CostModifiersBySourceId.Add(modifierSourceId, modifiers);
-        if (_costModified != null)
+        if (CostModifiersBySourceId.Count > 1) //SS220 DynamicsTraitors
         {
             _costModified = ApplyAllModifiers();
         }
@@ -346,7 +346,7 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
     public void RemoveCostModifier(string modifierSourceId)
     {
         CostModifiersBySourceId.Remove(modifierSourceId);
-        if (_costModified != null)
+        if (CostModifiersBySourceId.Count > 1) //SS220 DynamicsTraitors
         {
             _costModified = ApplyAllModifiers();
         }
@@ -421,13 +421,13 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
                     continue;
 
                 var dynamicValue = dynamicsPrice.FirstOrDefault(x => x.Key == currency).Value;
-                var nominator = originalAmount + discountAmount;
-                var denominator = originalAmount + dynamicValue;
-                if (denominator <= FixedPoint2.Zero)
+                var finalPrice = originalAmount + discountAmount;
+                var baseDynamicPrice = originalAmount + dynamicValue;
+                if (baseDynamicPrice <= FixedPoint2.Zero)
                     continue;
 
-                var discountPercent = -(float)( nominator / denominator);
-                relativeModifiedPercent.Add(currency, discountPercent);
+                var discountPercent = (finalPrice - baseDynamicPrice) / baseDynamicPrice;
+                relativeModifiedPercent.Add(currency, (float)discountPercent);
             }
         }
         return relativeModifiedPercent;
@@ -452,7 +452,7 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
     }
     // SS220 Dynamics end
 
-    private Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> ApplyAllModifiers()
+    public Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> ApplyAllModifiers()
     {
         var dictionary = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>(OriginalCost);
         foreach (var (_, modifier) in CostModifiersBySourceId)
