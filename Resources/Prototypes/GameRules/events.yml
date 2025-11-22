@@ -494,6 +494,13 @@
     extraCount: 2
     lightBreakChancePerSecond: 0.0003
     doorToggleChancePerSecond: 0.001
+  #ss220 mindshield destructiuon #3500 start
+  - type: ExtraEvents
+    rules:
+      combustion: !type:EntSelector
+        id: RandomMindShieldCombustion
+        prob: 0.2
+  #ss220 mindshield destructiuon #3500 end
 
 - type: entity
   id: VentClog
@@ -808,7 +815,14 @@
     - Service
     blacklist:
     - External # don't space everything
-
+  #ss220 mindshield destructiuon #3500 start
+  - type: ExtraEvents
+    rules:
+      combustion: !type:EntSelector
+        id: RandomMindShieldCombustion
+        prob: 0.2
+  #ss220 mindshield destructiuon #3500 end
+  
 - type: entity
   parent: BaseGameRule
   id: SmugglerStashVariationPass
