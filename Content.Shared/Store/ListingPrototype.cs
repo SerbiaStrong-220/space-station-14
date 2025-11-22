@@ -452,7 +452,7 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
     }
     // SS220 Dynamics end
 
-    public Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> ApplyAllModifiers()
+    private Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> ApplyAllModifiers()
     {
         var dictionary = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>(OriginalCost);
         foreach (var (_, modifier) in CostModifiersBySourceId)
