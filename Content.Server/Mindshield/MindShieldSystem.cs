@@ -87,5 +87,6 @@ public sealed class MindShieldSystem : EntitySystem
     {
         EnsureComp<CombustingMindShieldComponent>(ent);
     }
-    //Cult hotfix 16 #3599 end}
+    //Cult hotfix 16 #3599 end
+}
 
