@@ -1,0 +1,60 @@
+- type: martialArt
+  id: CorporateJudo
+  sequences:
+  - name: corporate-judo-discombobulate
+    steps: [ Push, Grab ]
+    entry:
+      effects:
+      - !type:ApplyStatusEffectCombatEffect
+        effect: SlowedDown
+        time: 5
+        timeLimit: 30
+        refresh: false
+      - !type:ApplyStaminaCombatEffect
+        damage: 10
+        ignoreResist: true
+  - name: corporate-judo-eye-poke
+    steps: [ Push, Harm ]
+    entry:
+      effects:
+      - !type:ApplyStatusEffectCombatEffect
+        effect: TemporaryBlindness
+        time: 5
+        timeLimit: 30
+        refresh: false
+      - !type:ApplyDamageCombatEffect
+        damage:
+          types:
+            Blunt: 10
+  - name: corporate-judo-throw
+    steps: [ Grab, Push ]
+    entry:
+      conditions:
+      - !type:IsDownCombatCondition
+        invert: true
+      effects:
+      - !type:ApplyStaminaCombatEffect
+        damage: 25
+        ignoreResist: true
+      - !type:KnockdownCombatEffect
+        time: 7
+  - name: corporate-judo-armbar
+    steps: [ Push, Push, Grab ]
+    entry:
+      conditions:
+      - !type:IsDownCombatCondition
+      effects:
+      - !type:ApplyStaminaCombatEffect
+        damage: 45
+        ignoreResist: true
+      - !type:KnockdownCombatEffect
+        time: 7
+  - name: corporate-judo-wheel-throw
+    steps: [ Grab, Harm, Push ]
+    entry:
+      effects:
+      - !type:ApplyStaminaCombatEffect
+        damage: 120
+        ignoreResist: true
+      - !type:KnockdownCombatEffect
+        time: 15

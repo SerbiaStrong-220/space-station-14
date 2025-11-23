@@ -49,6 +49,8 @@
   - !type:AddComponentSpecial
     components:
     - type: DefibrillatorSkill
+    - type: MartialArtist
+      martialArt: CloseQuartersCombat
 
 - type: startingGear
   id: BlueShieldGear

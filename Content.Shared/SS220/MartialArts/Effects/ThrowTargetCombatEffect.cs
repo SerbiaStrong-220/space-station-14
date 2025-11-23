@@ -28,7 +28,7 @@ public sealed partial class ThrowTargetCombatEffect : CombatSequenceEffect
 
         var direction = transform.GetMapCoordinates(target, targetXform).Position - transform.GetMapCoordinates(user, userXform).Position;
         var normalized = direction.Normalized();
-        var coordinates = userXform.Coordinates.Offset(normalized * Distance);
+        var coordinates = targetXform.Coordinates.Offset(normalized * Distance);
 
         throwing.TryThrow(target, coordinates, BaseThrowSpeed, user, PushbackRatio);
     }

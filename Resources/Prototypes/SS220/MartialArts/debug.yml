@@ -15,6 +15,12 @@
       - !type:ApplyStaminaCombatEffect # Нанести 50 урона стамине
         damage: 50
         ignoreResist: true
+  - name: DontStopPushing # Приём: Не останавливайтесь, пушьте!
+    steps: [ Push, Push, Push ] # Толкание, Толкание, Толкание
+    entry:
+      effects:
+      - !type:KnockdownCombatEffect # Сбить с ног на 5 секунд
+        time: 5
   - name: GrabGrab # Приём: Хвать-Хвать
     steps: [ Grab, Grab ] # Хватание, Хватание
     entry:

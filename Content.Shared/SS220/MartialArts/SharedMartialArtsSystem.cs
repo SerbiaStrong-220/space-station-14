@@ -1,6 +1,8 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared.Interaction;
+using Content.Shared.Popups;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -10,6 +12,53 @@ public abstract partial class SharedMartialArtsSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<GrantMartialArtComponent, ActivateInWorldEvent>(OnActivateGrant);
+    }
+
+    private void OnActivateGrant(EntityUid uid, GrantMartialArtComponent comp, ActivateInWorldEvent ev)
+    {
+        if (ev.Handled)
+            return;
+
+        if (!TryComp<MartialArtistComponent>(ev.User, out var artist))
+            return;
+
+        if (TryGrantMartialArt(ev.User, comp.MartialArt, false, artist))
+        {
+            if (comp.DestroyAfterUse)
+                QueueDel(uid);
+        }
+        else
+        {
+            _popup.PopupClient(Loc.GetString("martial-arts-cant-grant"), ev.User);
+        }
+
+        ev.Handled = true;
+    }
+
+    public bool TryGrantMartialArt(EntityUid user, ProtoId<MartialArtPrototype> martialArt, bool overrideExisting = false, MartialArtistComponent? artist = null)
+    {
+        if (!Resolve(user, ref artist))
+            return false;
+
+        if (artist.MartialArt != null && !overrideExisting)
+            return false;
+
+        if (artist.MartialArt != null)
+        {
+            // TODO: shutdown effects
+        }
+        artist.MartialArt = martialArt;
+        // TODO: setup effects
+
+        return true;
+    }
 
     /// <summary>
     /// Checks current combo for timeout and breaks it if combo timed out

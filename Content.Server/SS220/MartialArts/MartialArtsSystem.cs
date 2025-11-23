@@ -33,12 +33,11 @@ public sealed partial class MartialArtsSystem : SharedMartialArtsSystem
             return;
 
         PerformStep(user, target, CombatSequenceStep.Push, artist);
-        _color.RaiseEffect(Color.Aqua, new List<EntityUid>() { target }, Filter.Pvs(user, entityManager: EntityManager));
+        _color.RaiseEffect(Color.Aqua, [ target ], Filter.Pvs(user, entityManager: EntityManager));
     }
 
     public void OnHarm(EntityUid user, MartialArtistComponent artist, ref LightAttackPerformedEvent ev)
     {
-        Log.Info("OnHarm raised");
         if (ev.Target is not { } target)
             return;
 
@@ -48,9 +47,8 @@ public sealed partial class MartialArtsSystem : SharedMartialArtsSystem
         if (!CanBeAttackedWithMartialArts(target))
             return;
 
-        Log.Info("OnHarm checks passed, performing");
         PerformStep(user, target, CombatSequenceStep.Harm, artist);
-        _color.RaiseEffect(Color.Red, new List<EntityUid>() { target }, Filter.Pvs(user, entityManager: EntityManager));
+        _color.RaiseEffect(Color.Red, [target], Filter.Pvs(user, entityManager: EntityManager));
     }
 
     public void OnGrab(EntityUid user, MartialArtistComponent artist, ref PullStartedMessage ev)
@@ -66,6 +64,6 @@ public sealed partial class MartialArtsSystem : SharedMartialArtsSystem
             return;
 
         PerformStep(user, ev.PulledUid, CombatSequenceStep.Grab, artist);
-        _color.RaiseEffect(Color.Yellow, new List<EntityUid>() { ev.PulledUid }, Filter.Pvs(user, entityManager: EntityManager));
+        _color.RaiseEffect(Color.Yellow, [ ev.PulledUid ], Filter.Pvs(user, entityManager: EntityManager));
     }
 }

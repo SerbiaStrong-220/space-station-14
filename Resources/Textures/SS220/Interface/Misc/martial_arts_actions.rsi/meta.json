@@ -8,16 +8,16 @@
     },
     "states": [
         {
-            "name": "disarm"
+            "name": "grab"
         },
         {
             "name": "harm"
         },
         {
-            "name": "grab"
+            "name": "help"
         },
         {
-            "name": "help"
+            "name": "push"
         }
     ]
 }
