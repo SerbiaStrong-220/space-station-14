@@ -2,6 +2,7 @@
 
 using Content.Shared.Alert;
 using Content.Shared.FixedPoint;
+using Content.Shared.Roles;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -168,7 +169,7 @@ public sealed partial class MiGoComponent : Component
     /// Added job
     /// </summary>
     [ViewVariables]
-    public string JobName = "MiGoJob";
+    public ProtoId<JobPrototype> JobName = "MiGoJob";
 }
 
 [NetSerializable, Serializable]
