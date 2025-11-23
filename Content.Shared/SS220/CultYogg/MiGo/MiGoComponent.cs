@@ -163,6 +163,12 @@ public sealed partial class MiGoComponent : Component
     [DataField]
     public ProtoId<AlertPrototype> AstralAlert = "MiGoAstralAlert";
     #endregion
+
+    /// <summary>
+    /// Added job
+    /// </summary>
+    [ViewVariables]
+    public string JobName = "MiGoJob";
 }
 
 [NetSerializable, Serializable]

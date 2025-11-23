@@ -2,10 +2,6 @@ ghost-role-information-corrupted-mob-cultyogg-name = Искаженное кул
 ghost-role-information-corrupted-mob-cultyogg-description = Слушайтесь членов культа. Уничтожьте любую угрозу культу.
 ghost-role-information-corrupted-mob-cultyogg-rules = Вы животное, зараженное Ми-Гомицелием. Вы теперь всецело повинуетесь членам культа, сокрушите неверующих
 
-ghost-role-information-migo-name = Ми-Го
-ghost-role-information-migo-description = Дитя Тёмного Бога.
-ghost-role-information-migo-rules = Вы - возвысившийся культист. Ваша задача - постройка баз, вербовка новых служителей, лечение и разведка.
-
 # Lost souls roles begin
 ghost-role-information-lost-cargo-technical-name = Пропавший грузчик
 ghost-role-information-lost-cargo-technical-description = Что-то пошло не так, и ваш грузовой шаттл с грузом был телепо…

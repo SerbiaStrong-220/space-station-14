@@ -160,12 +160,3 @@
     tags:
     - CannotSuicide
     - DoorBumpOpener
-  #- type: GhostRole
-    #name: ghost-role-information-migo-name
-    #description: ghost-role-information-migo-description
-    #rules: ghost-role-information-migo-rules
-    #job: MiGo
-    #mindRoles:
-    #  - MindRoleCultYogg
-    #reregister: true
-  #- type: GhostTakeoverAvailable
