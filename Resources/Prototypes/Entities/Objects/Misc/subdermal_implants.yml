@@ -256,6 +256,7 @@
     implantAction: ActionActivateFreedomImplant
     whitelist:
       components:
+      - Ensnaring
       - Cuffable # useless if you cant be cuffed
   - type: TriggerOnActivateImplant
   - type: UncuffOnTrigger
