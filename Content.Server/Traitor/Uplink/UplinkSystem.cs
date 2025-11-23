@@ -42,18 +42,19 @@ public sealed class UplinkSystem : EntitySystem
         EntityUid user,
         FixedPoint2 balance,
         EntityUid? uplinkEntity = null,
-        bool giveDiscounts = false)
+        bool giveDiscounts = false,
+        bool useDynamics = false) // SS220 DynamicTraitor
     {
         // Try to find target item if none passed
 
         uplinkEntity ??= FindUplinkTarget(user);
 
         if (uplinkEntity == null)
-            return ImplantUplink(user, balance, giveDiscounts);
+            return ImplantUplink(user, balance, giveDiscounts, useDynamics); // SS220 DynamicTraitor
 
         EnsureComp<UplinkComponent>(uplinkEntity.Value);
 
-        SetUplink(user, uplinkEntity.Value, balance, giveDiscounts);
+        SetUplink(user, uplinkEntity.Value, balance, giveDiscounts, useDynamics); // SS220 DynamicTraitor
 
         // TODO add BUI. Currently can't be done outside of yaml -_-
         // ^ What does this even mean?
@@ -64,7 +65,7 @@ public sealed class UplinkSystem : EntitySystem
     /// <summary>
     /// Configure TC for the uplink
     /// </summary>
-    private void SetUplink(EntityUid user, EntityUid uplink, FixedPoint2 balance, bool giveDiscounts)
+    private void SetUplink(EntityUid user, EntityUid uplink, FixedPoint2 balance, bool giveDiscounts, bool useDynamics) // SS220 DynamicTraitor
     {
         if (!_mind.TryGetMind(user, out var mind, out _))
             return;
@@ -72,6 +73,7 @@ public sealed class UplinkSystem : EntitySystem
         var store = EnsureComp<StoreComponent>(uplink);
 
         store.AccountOwner = mind;
+        store.UseDynamicPrices = useDynamics; // SS220 Dynamics
 
         store.Balance.Clear();
         _store.TryAddCurrency(new Dictionary<string, FixedPoint2> { { TelecrystalCurrencyPrototype, balance } },
@@ -90,7 +92,7 @@ public sealed class UplinkSystem : EntitySystem
     /// <summary>
     /// Implant an uplink as a fallback measure if the traitor had no PDA
     /// </summary>
-    private bool ImplantUplink(EntityUid user, FixedPoint2 balance, bool giveDiscounts)
+    private bool ImplantUplink(EntityUid user, FixedPoint2 balance, bool giveDiscounts, bool useDynamics) // SS220 DynamicTraitor
     {
         if (!_proto.Resolve<ListingPrototype>(FallbackUplinkCatalog, out var catalog))
             return false;
@@ -111,7 +113,7 @@ public sealed class UplinkSystem : EntitySystem
             return false;
         }
 
-        SetUplink(user, implant.Value, balance, giveDiscounts);
+        SetUplink(user, implant.Value, balance, giveDiscounts, useDynamics);
         return true;
     }
 

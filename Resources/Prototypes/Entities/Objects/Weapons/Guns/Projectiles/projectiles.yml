@@ -70,7 +70,7 @@
       projectile:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.1,-0.1,0.1,0.1"
+          bounds: "-0.1,-0.10,0.1,0.30" #SS220 BulletSpeed
         hard: false
         mask:
         - Impassable
@@ -550,7 +550,7 @@
     impactEffect: BulletImpactEffectKinetic
     damage:
       types:
-        Blunt: 15
+        Blunt: 25 # SS220 Revert Wizden balance #38131
         Structural: 30
   # Short lifespan
   - type: TimedDespawn
