@@ -28,6 +28,7 @@ namespace Content.Client.Hands
 
         private readonly MartialArtsSystem _martial = default!; // SS220-MartialArts
 
+        private static readonly Color MartialArtsIconsModulate = Color.White.WithAlpha(0.75f); // SS220-MartialArts
         private static readonly ResPath MartialArtsActionsRsi =
             new ResPath("/Textures/SS220/Interface/Misc/martial_arts_actions.rsi"); // SS220-MartialArts
 
@@ -97,7 +98,6 @@ namespace Content.Client.Hands
 
                 if (combo is { Count: > 0 })
                 {
-                    var color = Color.White.WithAlpha(0.75f);
                     for (var i = 0; i < combo.Count; i++)
                     {
                         var rsiActual = _resourceCache.GetResource<RSIResource>(MartialArtsActionsRsi).RSI;
@@ -108,12 +108,12 @@ namespace Content.Client.Hands
 
                         var size = texture.Size;
 
-                        var offsetVec2 = new Vector2(-offsetVec.X,
+                        var offsetVec2 = new Vector2(-offset,
                             (2f * i + 1f - combo.Count) * texture.Size.Y / 1.8f);
 
                         screen.DrawTextureRect(texture,
-                            UIBox2.FromDimensions(mousePos.Position - size / 2 + offsetVec2, size),
-                            color);
+                            UIBox2.FromDimensions(mousePos.Position + offsetVec2 - size / 2, size),
+                            MartialArtsIconsModulate);
                     }
                 }
             }

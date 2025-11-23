@@ -6,26 +6,24 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.MartialArts;
 
-[RegisterComponent, NetworkedComponent, Access(typeof(SharedMartialArtsSystem))]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, Access(typeof(SharedMartialArtsSystem))]
 public sealed partial class MartialArtistComponent : Component
 {
     [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [AutoNetworkedField]
     public ProtoId<MartialArtPrototype>? MartialArt;
 
     [DataField]
-    public List<CombatSequenceStep> CurrentSteps = new();
+    [AutoNetworkedField]
+    public List<CombatSequenceStep> CurrentSteps = [];
 
     [DataField]
+    [AutoNetworkedField]
     public TimeSpan LastStepPerformedAt = TimeSpan.Zero;
 
     [DataField]
+    [AutoNetworkedField]
     public TimeSpan SequenceTimeout = TimeSpan.FromSeconds(2);
-
-    [DataField]
-    public float UpdateRate = 1; // per second
-
-    [DataField]
-    public float UpdateAccumulator = 0;
 }
 
 [Serializable, NetSerializable]

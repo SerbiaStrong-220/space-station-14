@@ -9,7 +9,7 @@ namespace Content.Shared.SS220.MartialArts;
 public partial struct CombatSequence
 {
     [DataField]
-    public string? Name; // TODO: remove, used for debug purposes
+    public LocId Name;
 
     [DataField(required: true)]
     public List<CombatSequenceStep> Steps = new();
@@ -22,13 +22,13 @@ public partial struct CombatSequence
 public partial struct CombatSequenceEntry
 {
     [DataField]
-    public List<CombatSequenceCondition> Conditions = new();
+    public CombatSequenceCondition[] Conditions = [];
 
     [DataField]
-    public List<CombatSequenceEffect> Effects = new();
+    public CombatSequenceEffect[] Effects = [];
 
     [DataField]
-    public List<CombatSequenceEntry> Entries = new();
+    public CombatSequenceEntry[] Entries = [];
 }
 
 public enum CombatSequenceStep
