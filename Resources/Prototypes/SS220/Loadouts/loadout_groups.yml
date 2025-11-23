@@ -283,6 +283,7 @@
   - SecurityBeret
   - SecurityHat
   - PilotCapCap
+  - PilotBeret
   - HelmetTacSec
 
 - type: loadoutGroup

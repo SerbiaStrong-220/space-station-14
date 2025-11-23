@@ -94,7 +94,10 @@ public sealed partial class StoreComponent : Component
     [ViewVariables, DataField]
     public TimeSpan? CurrencyInsertTime;
     //SS220-insert-currency-doafter end
-
+    // ss220 dynamics
+    [DataField]
+    public bool UseDynamicPrices = false;
+    // ss220 dynamics
     #region audio
     /// <summary>
     /// The sound played to the buyer when a purchase is succesfully made.
