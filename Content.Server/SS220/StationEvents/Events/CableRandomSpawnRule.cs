@@ -1,20 +1,18 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+using Content.Server.Power.Components;
 using Content.Server.StationEvents.Events;
+using Content.Server.SS220.StationEvents.Components;
+using Content.Shared.GameTicking.Components;
+using Content.Shared.Station.Components;
 using Content.Shared.Storage;
 using Robust.Shared.Map;
 using Robust.Shared.Random;
-using Content.Server.Power.Components;
-using Content.Shared.GameTicking.Components;
-using Content.Shared.Station.Components;
 
-namespace Content.Server.SS220.StationEvents;
+namespace Content.Server.SS220.StationEvents.Events;
 
 public sealed class CableRandomSpawnRule : StationEventSystem<CableRandomSpawnRuleComponent>
 {
-    /*
-     * DO NOT COPY PASTE THIS TO MAKE YOUR MOB EVENT.
-     * USE THE PROTOTYPE.
-     */
-
     protected override void Started(EntityUid uid, CableRandomSpawnRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {
         base.Started(uid, component, gameRule, args);

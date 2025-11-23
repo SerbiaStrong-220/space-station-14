@@ -2,13 +2,13 @@
 
 using Robust.Shared.GameStates;
 
-namespace Content.Shared.SS220.CombustingMindShield;
+namespace Content.Server.SS220.CombustingMindShield;
 
 /// <summary>
 /// Allows you to limit the lifespan of the mindshield
 /// </summary>
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent]
 public sealed partial class CombustingMindShieldComponent : Component
 {
     /// <summary>
