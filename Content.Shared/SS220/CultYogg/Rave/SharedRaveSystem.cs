@@ -2,7 +2,6 @@
 
 using Content.Shared.Examine;
 using Content.Shared.SS220.CultYogg.CultYoggIcons;
-using Robust.Shared.Audio.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -10,10 +9,8 @@ namespace Content.Shared.SS220.CultYogg.Rave;
 
 public abstract class SharedRaveSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly StatusEffectNew.StatusEffectsSystem _statusEffectsSystem = default!;
 
     public override void Initialize()
     {
@@ -54,12 +51,14 @@ public abstract class SharedRaveSystem : EntitySystem
             if (raving.NextSoundTime > _timing.CurTime)
                 continue;
 
-            _audio.PlayLocal(raving.RaveSoundCollection, ent, ent);
+            PlaySound((ent, raving));
             SetNextSoundTimer((ent, raving));
         }
     }
 
     protected virtual void Mumble(Entity<RaveComponent> ent) { }
+
+    protected virtual void PlaySound(Entity<RaveComponent> ent) { }
 
     private void SetNextPhraseTimer(Entity<RaveComponent> ent)
     {
