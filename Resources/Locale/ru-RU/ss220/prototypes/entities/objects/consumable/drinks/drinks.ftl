@@ -13,3 +13,5 @@ ent-DrinkBacchusGlass = { ent-DrinkGlass }
 ent-DrinkXlebnuldieselGlass = { ent-DrinkGlass }
     .suffix = стакан коктейля "Хлебнулдизель"
     .desc = { ent-DrinkGlass.desc }
+ent-DrinkSkoomalGlass = Скума
+    .desc = { ent-DrinkShakeBase.desc }

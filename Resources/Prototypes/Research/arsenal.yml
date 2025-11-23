@@ -241,7 +241,7 @@
   recipeUnlocks:
   - WeaponAdvancedLaser
   - WeaponEnergyCrossbow #SS220 Energy crossbow
-  - PortableRecharger
+  # - PortableRecharger SS220 PortableRecharger 
 
 - type: technology
   id: ThermalWeaponry
