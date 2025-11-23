@@ -2,7 +2,6 @@
 
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
-using Content.Shared.DoAfter;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
@@ -11,8 +10,6 @@ using Content.Shared.Whitelist;
 
 namespace Content.Server.SS220.SelfLinkedTeleport;
 
-/// <summary>
-/// </summary>
 public sealed class SelfLinkedTeleportSystem : SharedSelfLinkedTeleportSystem
 {
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
@@ -39,12 +36,16 @@ public sealed class SelfLinkedTeleportSystem : SharedSelfLinkedTeleportSystem
         if (ent.Comp.LinkedEntity == null)
             return;
 
-        if (TryComp<SelfLinkedTeleportComponent>(ent, out var linkedTeleporterComp))
-        {
-            linkedTeleporterComp.LinkedEntity = null;
-        }
+        if (TryComp<SelfLinkedTeleportComponent>(ent.Comp.LinkedEntity, out var linkedTeleporterComp))
+            SoftClearLink((ent.Comp.LinkedEntity.Value, linkedTeleporterComp));
 
         ent.Comp.LinkedEntity = null;
+    }
+
+    public void SoftClearLink(Entity<SelfLinkedTeleportComponent> ent)
+    {
+        ent.Comp.LinkedEntity = null;
+        TryFindNewLink(ent);
     }
 
     public void TryFindNewLink(Entity<SelfLinkedTeleportComponent> ent)
@@ -69,32 +70,11 @@ public sealed class SelfLinkedTeleportSystem : SharedSelfLinkedTeleportSystem
 
             ent.Comp.LinkedEntity = uid;
             teleport.LinkedEntity = ent;
+            Dirty(uid, teleport);
 
-            return;
+            break;
         }
         Dirty(ent);
-    }
-
-    public void DeleteLink(Entity<SelfLinkedTeleportComponent> ent)
-    {
-        if (ent.Comp.LinkedEntity == null)
-        {
-            Log.Error($"SelfLinkedTeleport {ent} tried to remove a link that doesn't exist");
-            return;
-        }
-
-        var linkedEnt = ent.Comp.LinkedEntity.Value;
-
-        if (TryComp<SelfLinkedTeleportComponent>(linkedEnt, out var linkedTeleporterComp))//looks wierd
-        {
-            linkedTeleporterComp.LinkedEntity = null;
-            TryFindNewLink((linkedEnt, linkedTeleporterComp));
-        }
-
-        ent.Comp.LinkedEntity = null;
-        Dirty(ent);
-
-        return;
     }
 
     protected override void WarpTo(Entity<SelfLinkedTeleportComponent> ent, EntityUid target, EntityUid user)
@@ -102,8 +82,9 @@ public sealed class SelfLinkedTeleportSystem : SharedSelfLinkedTeleportSystem
         if (ent.Comp.LinkedEntity == null)//we shouldn't interact  at all if we are  here
             return;
 
-        if (TryComp<PullableComponent>(target, out var pullingSystemComp))//ToDo_SS220 figure out how to stop pulls
-            _pulling.TryStopPull(target, pullingSystemComp);
+        //ToDo_SS220 figure out pulling shit and check migo
+        if (TryComp(ent, out PullerComponent? puller) && TryComp(puller.Pulling, out PullableComponent? pullable))
+            _pulling.TryStopPull(puller.Pulling.Value, pullable);
 
         _adminLogger.Add(LogType.Teleport, $"{ToPrettyString(user):user} used linked telepoter {ToPrettyString(ent):teleport enter} and tried teleport {ToPrettyString(target):target} to {ToPrettyString(ent.Comp.LinkedEntity.Value):teleport exit}");
 

@@ -4,6 +4,7 @@ using Content.Shared.ActionBlocker;
 using Content.Shared.Labels.Components;
 using Content.Shared.Light.Components;
 using Content.Shared.Movement.Events;
+using Content.Shared.SS220.InteractionTeleport;
 using Content.Shared.SS220.Photocopier.Forms;
 using Content.Shared.Station.Components;
 using Content.Shared.StepTrigger.Systems;
@@ -130,5 +131,7 @@ public sealed class TeleportationChasmSystem : EntitySystem
 
         var xform = Transform(ent);
         _transformSystem.SetCoordinates(ent, xform, teleportLocation);
+
+        //ToDo_SS220 figure out how to add special effects after teleportation
     }
 }

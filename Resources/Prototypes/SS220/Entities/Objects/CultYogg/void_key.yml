@@ -23,22 +23,6 @@
     useMapCoords: true
 
 - type: entity
-  id: VoidPortalSpawn
-  components:
-  - type: Sprite
-    noRot: true
-    drawdepth: Ghosts
-    sprite: SS220/Objects/CultYogg/portal.rsi
-    layers:
-    - state: portal_open
-      shader: unshaded
-  # spawn animation lasts 1.6 seconds
-  - type: TimedDespawn
-    lifetime: 1.6
-  - type: SpawnOnDespawn
-    prototype: VoidPortal
-
-- type: entity
   id: VoidPortal
   components:
   - type: InteractionOutline
@@ -55,6 +39,26 @@
     lifetime: 6
   - type: SpawnOnDespawn
     prototype: VoidPortalClosed
+  - type: InteractionTeleport
+  #- type: SelfLinkedTeleport #ToDo_SS220m add teleport to smth else
+  - type: AfterTeleportEffects
+
+#Animation entities for a better immersions
+- type: entity
+  id: VoidPortalSpawn
+  components:
+  - type: Sprite
+    noRot: true
+    drawdepth: Ghosts
+    sprite: SS220/Objects/CultYogg/portal.rsi
+    layers:
+    - state: portal_open
+      shader: unshaded
+  # spawn animation lasts 1.6 seconds
+  - type: TimedDespawn
+    lifetime: 1.6
+  - type: SpawnOnDespawn
+    prototype: VoidPortal
 
 - type: entity
   id: VoidPortalClosed

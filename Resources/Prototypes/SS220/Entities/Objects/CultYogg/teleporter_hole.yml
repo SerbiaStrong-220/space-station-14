@@ -2,18 +2,17 @@
 
 - type: entity
   id: CultYoggTeleportEnter
-  parent: BaseSelfLinkedPortal
+  parent: BaseSelfLinkedPortalCult
   components:
   - type: Sprite
     layers:
       - sprite: SS220/Structures/CultYogg/fungus_hydroponic.rsi
         state: base
-  - type: PointLight
+  - type: PointLight #ToDo_SS220 figure out color differentiation
     color: SkyBlue
     radius: 3
     energy: 1
     netsync: false
-  - type: InteractionTeleport
   - type: SelfLinkedTeleport
   - type: Tag
     tags:
@@ -22,13 +21,13 @@
 
 - type: entity
   id: CultYoggTeleportExit
-  parent: BaseSelfLinkedPortal
+  parent: BaseSelfLinkedPortalCult
   components:
   - type: Sprite
     layers:
       - sprite: SS220/Structures/CultYogg/fungus_hydroponic.rsi
         state: base
-  - type: PointLight
+  - type: PointLight #ToDo_SS220 figure out color differentiation
     color: SkyBlue
     radius: 3
     energy: 1

@@ -47,3 +47,4 @@
   - type: Tag
     tags:
     - HideContextMenu
+  - type: AfterTeleportEffects

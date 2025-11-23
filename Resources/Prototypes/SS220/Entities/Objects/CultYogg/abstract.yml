@@ -12,7 +12,7 @@
         - CultYogg
 
 - type: entity
-  id: BaseSelfLinkedPortal
+  id: BaseSelfLinkedPortalCult
   abstract: true
   name: self linked portal
   description: Transports you to a linked destination!
@@ -39,3 +39,4 @@
         hard: false
   - type: InteractionTeleport
   - type: SelfLinkedTeleport
+  - type: AfterTeleportEffects
