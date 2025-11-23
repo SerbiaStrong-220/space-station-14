@@ -13,10 +13,27 @@
     radius: 3
     energy: 1
     netsync: false
-  - type: SelfLinkedTeleport
+  - type: SelfLinkedTeleport #ToDo_SS220 add whitelist
   - type: Tag
     tags:
     - CultYoggTeleportEnter
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Electronic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: monitorBroken
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
 
 
 - type: entity
@@ -32,7 +49,7 @@
     radius: 3
     energy: 1
     netsync: false
-  - type: SelfLinkedTeleport
+  - type: SelfLinkedTeleport #ToDo_SS220 add whitelist
   - type: Tag
     tags:
     - CultYoggTeleportExit

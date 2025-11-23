@@ -13,6 +13,7 @@
 
 - type: entity
   id: BaseSelfLinkedPortalCult
+  parent: BaseStructure
   abstract: true
   name: self linked portal
   description: Transports you to a linked destination!
@@ -37,6 +38,6 @@
         layer:
         - WallLayer
         hard: false
-  - type: InteractionTeleport
+  - type: InteractionTeleport #ToDo_SS220 add whitelist
   - type: SelfLinkedTeleport
   - type: AfterTeleportEffects
