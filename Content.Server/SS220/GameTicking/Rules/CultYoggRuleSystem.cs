@@ -16,9 +16,7 @@ using Content.Server.SS220.CultYogg.Sacraficials;
 using Content.Server.SS220.GameTicking.Rules.Components;
 using Content.Server.SS220.Objectives.Components;
 using Content.Server.SS220.Objectives.Systems;
-using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
-using Content.Server.Zombies;
 using Content.Shared.Audio;
 using Content.Shared.Database;
 using Content.Shared.GameTicking.Components;
@@ -405,6 +403,9 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
         EnsureComp<ShowCultYoggIconsComponent>(uid);//icons of cultists and sacraficials
         EnsureComp<ZombieImmuneComponent>(uid);//they are practically mushrooms
+
+        var cultifiedEv = new GotCultifiedEvent();
+        RaiseLocalEvent(uid, ref cultifiedEv);
 
         DirtyEntity(uid);
     }
