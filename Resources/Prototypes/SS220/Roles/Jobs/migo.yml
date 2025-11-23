@@ -5,7 +5,6 @@
   name: job-name-migo
   description: job-description-migo
   playTimeTracker: CultistOfYogg
-  antagonist: true
   requirements:
   - !type:OverallPlaytimeRequirement
     time: 20h
