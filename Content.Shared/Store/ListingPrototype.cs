@@ -336,7 +336,7 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
     public void AddCostModifier(string modifierSourceId, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> modifiers)
     {
         CostModifiersBySourceId.Add(modifierSourceId, modifiers);
-        if (CostModifiersBySourceId.Count > 1) //SS220 DynamicsTraitors
+        if (_costModified != null)
         {
             _costModified = ApplyAllModifiers();
         }
@@ -346,7 +346,7 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
     public void RemoveCostModifier(string modifierSourceId)
     {
         CostModifiersBySourceId.Remove(modifierSourceId);
-        if (CostModifiersBySourceId.Count > 1) //SS220 DynamicsTraitors
+        if (_costModified != null)
         {
             _costModified = ApplyAllModifiers();
         }
@@ -460,6 +460,14 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
             ApplyModifier(dictionary, modifier);
         }
 
+        foreach (var currency in dictionary.Keys.ToList())
+        {
+            if (dictionary[currency] < FixedPoint2.Zero)
+            {
+                dictionary[currency] = FixedPoint2.Zero;
+            }
+        }
+
         return dictionary;
     }
 
@@ -473,11 +481,13 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
             if (applyTo.TryGetValue(currency, out var currentAmount))
             {
                 var modifiedAmount = currentAmount + modifyBy;
-                if (modifiedAmount < 0)
-                {
-                    modifiedAmount = 0;
+                //SS220 TraitorDynamics - start it shouldn't be checked here
+                // if (modifiedAmount < 0)
+                // {
+                //     modifiedAmount = 0;
                     // no negative cost allowed
-                }
+                // }
+                //SS220 TraitorDynamics - end
                 applyTo[currency] = modifiedAmount;
             }
         }
