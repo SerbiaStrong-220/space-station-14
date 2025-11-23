@@ -41,7 +41,7 @@ public sealed class SharedInteractionTeleportSystem : EntitySystem
             Text = Loc.GetString("teleport-use-verb"),
             Act = () =>
             {
-                StartTeleport(ent, user, user);
+                TryStartTeleport(ent, user, user);
             }
         };
         args.Verbs.Add(teleportVerb);
@@ -61,15 +61,15 @@ public sealed class SharedInteractionTeleportSystem : EntitySystem
 
     private void OnDragDropTarget(Entity<InteractionTeleportComponent> ent, ref DragDropTargetEvent args)
     {
-        StartTeleport(ent, args.Dragged, args.User);
+        TryStartTeleport(ent, args.Dragged, args.User);
     }
 
-    private void StartTeleport(Entity<InteractionTeleportComponent> ent, EntityUid target, EntityUid user)
+    private bool TryStartTeleport(Entity<InteractionTeleportComponent> ent, EntityUid target, EntityUid user)
     {
         if (!ent.Comp.ShouldHaveDelay)
         {
             SendTeleporting(ent, target, user);
-            return;
+            return true;
         }
 
         var teleportDoAfter = new DoAfterArgs(EntityManager, user, ent.Comp.TeleportDoAfterTime, new InteractionTeleportDoAfterEvent(), ent, target)
@@ -86,7 +86,10 @@ public sealed class SharedInteractionTeleportSystem : EntitySystem
         if (started)
         {
             _popup.PopupPredicted(Loc.GetString("teleport-user-started"), ent, user, PopupType.MediumCaution);
+            return true;
         }
+        else
+            return false;
     }
 
     private void OnTeleportDoAfter(Entity<InteractionTeleportComponent> ent, ref InteractionTeleportDoAfterEvent args)
