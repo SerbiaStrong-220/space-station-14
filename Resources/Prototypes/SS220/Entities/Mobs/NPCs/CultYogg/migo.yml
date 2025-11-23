@@ -128,8 +128,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      200: Critical
-      250: Dead
+      100: Critical
+      150: Dead
   - type: Destructible
     thresholds:
     - trigger:
@@ -160,11 +160,12 @@
     tags:
     - CannotSuicide
     - DoorBumpOpener
-  - type: GhostTakeoverAvailable
-  - type: GhostRole
-    name: ghost-role-information-migo-name
-    description: ghost-role-information-migo-description
-    rules: ghost-role-information-migo-rules
-    job: MiGo
-    mindRoles:
-    - MindRoleCultYogg
+  #- type: GhostRole
+    #name: ghost-role-information-migo-name
+    #description: ghost-role-information-migo-description
+    #rules: ghost-role-information-migo-rules
+    #job: MiGo
+    #mindRoles:
+    #  - MindRoleCultYogg
+    #reregister: true
+  #- type: GhostTakeoverAvailable
