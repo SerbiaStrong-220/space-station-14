@@ -11,7 +11,6 @@ public abstract class SharedRaveSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-
     public override void Initialize()
     {
         base.Initialize();
@@ -52,6 +51,7 @@ public abstract class SharedRaveSystem : EntitySystem
                 continue;
 
             PlaySound((ent, raving));
+
             SetNextSoundTimer((ent, raving));
         }
     }

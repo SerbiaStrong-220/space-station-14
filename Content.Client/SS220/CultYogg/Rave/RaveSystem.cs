@@ -4,7 +4,6 @@ using Content.Client.SS220.TextureFade;
 using Content.Shared.SS220.CultYogg.Rave;
 using Content.Shared.SS220.EntityEffects.Events;
 using Robust.Client.Player;
-using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
@@ -12,7 +11,6 @@ namespace Content.Client.SS220.CultYogg.Rave;
 
 public sealed class RaveSystem : SharedRaveSystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
 
     private readonly EntProtoId _effectPrototype = "CultYoggRaveEffect";
@@ -75,10 +73,5 @@ public sealed class RaveSystem : SharedRaveSystem
 
         overlay.SetUniformProgressionSpeed(0.01f);
         overlay.DeleteAfterFadedOut = true;
-    }
-
-    protected override void PlaySound(Entity<RaveComponent> ent)
-    {
-        _audio.PlayLocal(ent.Comp.RaveSoundCollection, ent, ent);
     }
 }
