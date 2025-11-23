@@ -19,3 +19,5 @@ ent-ClothingUniformJumpsuitSalvageSpecialistTurtleneck = водолазка ут
 ent-ClothingUniformJumpsuitBrigmedicTurtleneck = водолазка бригмедика
     .desc = Водолазка бригмедика.
     .suffix = За время в игре
+ent-ClothingUniformJumpsuitHoPTurtleneck = водолазка главы персонала
+    .desc = Водолазка, впитывающая запах кофе и ответственности. Обязательно к ношению при любой бумажной буре.

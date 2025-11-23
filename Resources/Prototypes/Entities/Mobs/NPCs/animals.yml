@@ -3187,6 +3187,10 @@
   id: MobCat
   description: Feline pet, very funny.
   components:
+#SS220 cat organ begin 
+  - type: Body
+    prototype: AnimalCat
+#SS220 cat organ end 
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Pets/cat.rsi
