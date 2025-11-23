@@ -1,8 +1,10 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Atmos.Components;
 using Content.Shared.Tag;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -75,7 +77,7 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
     /// <summary>
     ///     Check if this entity prototype is valid target for chameleon item.
     /// </summary>
-    public bool IsValidTarget(EntityPrototype proto, string? requiredTag = null)
+    public bool IsValidByTag(EntityPrototype proto, string? requiredTag = null)
     {
         if (proto.Abstract || proto.HideSpawnMenu)
             return false;
@@ -98,19 +100,19 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
     /// <summary>
     ///     Change chameleon structure name, description and sprite to mimic other entity prototype.
     /// </summary>
-    public void SetPrototype(Entity<ChameleonStructureComponent> ent, string? protoId, bool forceUpdate = false)
+    public bool TrySetPrototype(Entity<ChameleonStructureComponent> ent, string? protoId, bool forceUpdate = false)
     {
         // check that wasn't already selected
         // forceUpdate on component init ignores this check
         if (ent.Comp.Prototype == protoId && !forceUpdate)
-            return;
+            return false;
 
         // make sure that it is valid change
         if (string.IsNullOrEmpty(protoId) || !_proto.TryIndex(protoId, out EntityPrototype? proto))
-            return;
+            return false;
 
-        if (!IsValidTarget(proto, ent.Comp.RequireTag) && !(ent.Comp.ProtoList is not null && ent.Comp.ProtoList.Contains(proto)))
-            return;
+        if (!IsValidProto(ent, proto))
+            return false;
 
         ent.Comp.Prototype = protoId;
         UpdateVisuals(ent);
@@ -118,10 +120,41 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
         UpdateUi(ent);
         Dirty(ent, ent.Comp);
 
-        if (!TryComp<AppearanceComponent>(ent, out var appearance))//it fixes wrong layer states
-            return;
+        if (TryComp<AppearanceComponent>(ent, out var appearance))
+            Dirty(ent, appearance);
 
-        Dirty(ent, appearance);
+        return true;
+    }
+
+    public bool IsValidProto(Entity<ChameleonStructureComponent> ent, EntityPrototype proto)
+    {
+        if (IsValidByTag(proto, ent.Comp.RequireTag))
+            return true;
+
+        if (ent.Comp.ProtoList is null)
+            return false;
+
+        if (ent.Comp.ProtoList.Contains(proto))
+            return true;
+
+        if (!ent.Comp.AllowChildProto)
+            return false;
+
+        var parents = proto.Parents;
+
+        if (parents == null)
+            return false;
+
+        foreach (var parentId in parents)
+        {
+            if (!_proto.TryIndex(parentId, out EntityPrototype? parentProto))
+                continue;
+
+            if (IsValidProto(ent, parentProto))
+                return true;
+        }
+
+        return false;
     }
 
     protected void UpdateData(Entity<ChameleonStructureComponent> ent)
@@ -133,7 +166,7 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
         foreach (var proto in prototypes)
         {
             // check if this is valid clothing
-            if (!IsValidTarget(proto, ent.Comp.RequireTag))
+            if (!IsValidByTag(proto, ent.Comp.RequireTag))
                 continue;
 
             ent.Comp.ListData.Add(proto.ID);

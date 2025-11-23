@@ -32,6 +32,7 @@ public sealed class MindShieldSystem : EntitySystem
 
         SubscribeLocalEvent<MindShieldImplantComponent, ImplantImplantedEvent>(OnImplantImplanted);
         SubscribeLocalEvent<MindShieldImplantComponent, ImplantRemovedEvent>(OnImplantRemoved);
+        SubscribeLocalEvent<MindShieldComponent, GotCultifiedEvent>(OnGotCultified);//Cult hotfix 16 #3599
     }
 
     private void OnImplantImplanted(Entity<MindShieldImplantComponent> ent, ref ImplantImplantedEvent ev)
@@ -73,5 +74,12 @@ public sealed class MindShieldSystem : EntitySystem
     {
         RemComp<MindShieldComponent>(args.Implanted);
     }
+
+    //Cult hotfix 16 #3599 start
+    private void OnGotCultified(Entity<MindShieldComponent> ent, ref GotCultifiedEvent _)
+    {
+        EnsureComp<CombustingMindShieldComponent>(ent);
+    }
+    //Cult hotfix 16 #3599 end
 }
 

@@ -16,23 +16,19 @@ using Content.Server.SS220.CultYogg.Sacraficials;
 using Content.Server.SS220.GameTicking.Rules.Components;
 using Content.Server.SS220.Objectives.Components;
 using Content.Server.SS220.Objectives.Systems;
-using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
-using Content.Server.Zombies;
 using Content.Shared.Audio;
 using Content.Shared.Database;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
-using Content.Shared.Mindshield.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
-using Content.Shared.SS220.CombustingMindShield;
 using Content.Shared.SS220.CultYogg.Altar;
 using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.SS220.CultYogg.CultYoggIcons;
@@ -408,8 +404,8 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         EnsureComp<ShowCultYoggIconsComponent>(uid);//icons of cultists and sacraficials
         EnsureComp<ZombieImmuneComponent>(uid);//they are practically mushrooms
 
-        if (HasComp<MindShieldComponent>(uid))
-            EnsureComp<CombustingMindShieldComponent>(uid);//if somehow we get here with mindshield, del him with special component
+        var cultifiedEv = new GotCultifiedEvent();
+        RaiseLocalEvent(uid, ref cultifiedEv);
 
         DirtyEntity(uid);
     }

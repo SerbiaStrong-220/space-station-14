@@ -103,21 +103,13 @@ public sealed class ItemOfferSystem : SharedItemOfferSystem
         if (!_hands.TryPickupAnyHand(receiver, itemReceiver.Item!.Value))
             return;
 
-        if (itemReceiver == null)
-            return;
-
-        _hands.PickupOrDrop(itemReceiver.Giver, itemReceiver.Item!.Value);
-
-        if (_hands.TryPickupAnyHand(receiver, itemReceiver.Item!.Value))
-        {
-            var loc = Loc.GetString("loc-item-offer-transfer",
-                ("user", itemReceiver.Giver),
-                ("item", itemReceiver.Item),
-                ("target", receiver));
-            _popupSystem.PopupEntity(loc, itemReceiver.Giver, PopupType.Medium);
-            _alerts.ClearAlert(receiver, _itemOfferAlert);
-            _entMan.RemoveComponent<ItemReceiverComponent>(receiver);
-        }
+        var loc = Loc.GetString("loc-item-offer-transfer",
+            ("user", itemReceiver.Giver),
+            ("item", itemReceiver.Item),
+            ("target", receiver));
+        _popupSystem.PopupEntity(loc, itemReceiver.Giver, PopupType.Medium);
+        _alerts.ClearAlert(receiver, _itemOfferAlert);
+        _entMan.RemoveComponent<ItemReceiverComponent>(receiver);
     }
 
     protected override void DoItemOffer(EntityUid user, EntityUid target)

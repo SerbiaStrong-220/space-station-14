@@ -33,7 +33,7 @@ public abstract class SharedItemOfferSystem : EntitySystem
         if (HasComp<UnremoveableComponent>(item))
             return;
 
-        if (TryComp<StuckOnEquipComponent>(item, out var equip) && equip.IsStuck)//not sure it should be here ot in a momemt of transfering
+        if (TryComp<StuckOnEquipComponent>(item, out var equip) && equip.IsStuck)
             return;
 
         var user = args.User;
