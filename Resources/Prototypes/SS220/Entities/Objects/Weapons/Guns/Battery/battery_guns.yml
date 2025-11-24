@@ -78,6 +78,10 @@
     minAngle: -19
     maxAngle: -16
     #220 Buff SMG end
+    #220 Buff SMG begin
+    minAngle: -19
+    maxAngle: -16
+    #220 Buff SMG end
   - type: Gun
     #220 Buff SMG begin
     minAngle: 21
