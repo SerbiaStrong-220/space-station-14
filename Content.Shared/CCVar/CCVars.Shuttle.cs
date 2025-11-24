@@ -117,7 +117,7 @@ public sealed partial class CCVars
     ///     Is the emergency shuttle allowed to be early launched.
     /// </summary>
     public static readonly CVarDef<bool> EmergencyEarlyLaunchAllowed =
-        CVarDef.Create("shuttle.emergency_early_launch_allowed", false, CVar.SERVERONLY);
+        CVarDef.Create("shuttle.emergency_early_launch_allowed", false, CVar.SERVER | CVar.REPLICATED);
 
     /// <summary>
     ///     How long the emergency shuttle remains docked with the station, in seconds.
@@ -258,7 +258,7 @@ public sealed partial class CCVars
     /// </summary>
     [CVarControl(AdminFlags.VarEdit)]
     public static readonly CVarDef<float> ImpactSlowdown =
-        CVarDef.Create("shuttle.impact.slowdown", 8f, CVar.SERVERONLY);
+        CVarDef.Create("shuttle.impact.slowdown", 4f, CVar.SERVERONLY); //SS220 Shuttle collision damage tweak
 
     /// <summary>
     /// Minimum velocity change from impact for special throw effects (e.g. stuns, beakers breaking) to occur

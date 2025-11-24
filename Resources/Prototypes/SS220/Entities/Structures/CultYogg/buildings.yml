@@ -136,6 +136,9 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
   - type: CultYoggBuilding
     eraseTime: 3
   - type: ChameleonStructure
@@ -254,7 +257,7 @@
     fuel: 5
     time: 3
   - type: Airlock
-    openUnlitVisible: true # Corvax-Resprite-Airlocks
+    openUnlitVisible: true
   - type: NavMapDoor
   - type: DoorBolt
   - type: Appearance
@@ -339,6 +342,16 @@
      - AirlockScience
      - AirlockCargo
      - AirlockClown
+     - AirlockExternalGlass
+     - AirlockGlass
+     - AirlockSecurityGlass
+     - AirlockCommandGlass
+     - AirlockVirologyGlass
+     - AirlockHydroponicsGlass
+     - AirlockEngineeringGlass
+     - AirlockMedicalGlass
+     - AirlockScienceGlass
+     - AirlockCargoGlass
   - type: CultYoggBuilding
     eraseTime: 3
   - type: HiddenDescription

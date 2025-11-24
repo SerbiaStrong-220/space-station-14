@@ -7,3 +7,35 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
+
+- type: construction
+  id: DisposalFilterPipeY
+  graph: DisposalPipe
+  name: construction-graph-disposal-y-filter
+  startNode: start
+  targetNode: filter
+  category: construction-category-utilities
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  mirror: DisposalFilterPipeYFlipped
+
+- type: construction
+  id: DisposalFilterPipeYFlipped
+  graph: DisposalPipe
+  name: construction-graph-disposal-y-filter-flipped
+  startNode: start
+  targetNode: filterflipped
+  category: construction-category-utilities
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  mirror: DisposalFilterPipeY
+
+- type: construction
+  id: DisposalFilterPipeX
+  graph: DisposalPipe
+  name: construction-graph-disposal-x-filter
+  startNode: start
+  targetNode: xfilter
+  category: construction-category-utilities
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false

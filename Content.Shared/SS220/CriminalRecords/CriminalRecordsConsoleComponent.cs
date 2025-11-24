@@ -140,3 +140,17 @@ public sealed class DeleteCriminalRecordStatus : BoundUserInterfaceMessage
         Time = time;
     }
 }
+
+[Serializable, NetSerializable]
+public sealed class UpdateCriminalRecordStatusEvent(
+    NetEntity target,
+    NetEntity user,
+    string reason,
+    ProtoId<CriminalStatusPrototype>? statusProto)
+    : EntityEventArgs
+{
+    public NetEntity Target = target;
+    public NetEntity User = user;
+    public string Reason = reason;
+    public ProtoId<CriminalStatusPrototype>? StatusProto = statusProto;
+}

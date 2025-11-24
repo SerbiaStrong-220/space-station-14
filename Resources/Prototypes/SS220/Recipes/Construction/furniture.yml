@@ -1,0 +1,12 @@
+- type: construction
+  id: MannequinLimbs
+  graph: MannequinLimbs
+  startNode: start
+  targetNode: mannequinlimbs
+  category: construction-category-furniture
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: true
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked

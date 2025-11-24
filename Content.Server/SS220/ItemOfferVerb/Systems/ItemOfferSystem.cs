@@ -5,25 +5,25 @@ using Content.Server.Popups;
 using Content.Server.SS220.ItemOfferVerb.Components;
 using Content.Shared.Alert;
 using Content.Shared.Hands.Components;
+using Content.Shared.Interaction;
 using Content.Shared.Popups;
-using Content.Shared.SS220.ItemOfferVerb;
-using Content.Shared.Verbs;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Interaction.Components;
 using Robust.Shared.Input.Binding;
 using Content.Shared.SS220.Input;
+using Content.Shared.SS220.ItemOffer;
+using Content.Shared.SS220.ItemOffer.Verb;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.ItemOfferVerb.Systems;
 
-public sealed class ItemOfferSystem : EntitySystem
+public sealed class ItemOfferSystem : SharedItemOfferSystem
 {
     [Dependency] private readonly EntityManager _entMan = default!;
     [Dependency] private readonly PopupSystem _popupSystem = default!;
     [Dependency] private readonly AlertsSystem _alerts = default!;
     [Dependency] private readonly HandsSystem _hands = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
 
     private readonly ProtoId<AlertPrototype> _itemOfferAlert = "ItemOffer";
 
@@ -31,7 +31,6 @@ public sealed class ItemOfferSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<HandsComponent, GetVerbsEvent<EquipmentVerb>>(AddOfferVerb);
         SubscribeLocalEvent<ItemReceiverComponent, ItemOfferAlertEvent>(OnItemOffserAlertClicked);
 
         CommandBinds.Builder
@@ -45,10 +44,14 @@ public sealed class ItemOfferSystem : EntitySystem
         if (!args.EntityUid.IsValid() || !EntityManager.EntityExists(args.EntityUid))
             return false;
 
-        if (args.Session?.AttachedEntity == null)
+        var user = args.Session?.AttachedEntity;
+        if (user == null)
             return false;
 
-        DoItemOffer(args.Session.AttachedEntity.Value, args.EntityUid);
+        if (!_interaction.InRangeAndAccessible(user.Value, args.EntityUid))
+            return false;
+
+        DoItemOffer(user.Value, args.EntityUid);
         return true;
     }
 
@@ -62,48 +65,32 @@ public sealed class ItemOfferSystem : EntitySystem
         base.Update(frameTime);
 
         var enumerator = EntityQueryEnumerator<ItemReceiverComponent, TransformComponent>();
-        while (enumerator.MoveNext(out var uid, out var comp, out var transform))
+        while (enumerator.MoveNext(out var uid, out var comp, out _))
         {
             var receiverPos = Transform(comp.Giver).Coordinates;
             var giverPos = Transform(uid).Coordinates;
             receiverPos.TryDistance(EntityManager, giverPos, out var distance);
             var giverHands = Comp<HandsComponent>(comp.Giver);
+
+            if (distance < comp.ReceiveRange)
+                continue;
+
             if (distance > comp.ReceiveRange)
             {
-                if (distance > comp.ReceiveRange)
-                {
-                    _alerts.ClearAlert(uid, _itemOfferAlert);
-                    _entMan.RemoveComponent<ItemReceiverComponent>(uid);
-                }
-                //FunTust: added a new variable responsible for whether the object is still in the hand during transmission
+                _alerts.ClearAlert(uid, _itemOfferAlert);
+                _entMan.RemoveComponent<ItemReceiverComponent>(uid);
+            }
 
-                var foundInHand = _hands.IsHolding((comp.Giver, giverHands), comp.Item!.Value);
+            //FunTust: added a new variable responsible for whether the object is still in the hand during transmission
 
-                if (!foundInHand)
-                {
-                    _alerts.ClearAlert(uid, _itemOfferAlert);
-                    _entMan.RemoveComponent<ItemReceiverComponent>(uid);
-                }
+            var foundInHand = _hands.IsHolding((comp.Giver, giverHands), comp.Item!.Value);
+
+            if (!foundInHand)
+            {
+                _alerts.ClearAlert(uid, _itemOfferAlert);
+                _entMan.RemoveComponent<ItemReceiverComponent>(uid);
             }
         }
-    }
-
-    //TODO-SS220-move-to-shared-for-prediction
-    private void AddOfferVerb(EntityUid uid, HandsComponent component, GetVerbsEvent<EquipmentVerb> args)
-    {
-        if (!args.CanInteract || !args.CanAccess || _hands.GetActiveItem(args.User) == null)
-            return;
-
-        var verb = new EquipmentVerb()
-        {
-            Text = Loc.GetString("offer-verb-text"),
-            Act = () =>
-            {
-                DoItemOffer(args.User, uid);
-            },
-        };
-
-        args.Verbs.Add(verb);
     }
 
     public void TransferItemInHands(EntityUid receiver, ItemReceiverComponent? itemReceiver)
@@ -113,27 +100,19 @@ public sealed class ItemOfferSystem : EntitySystem
 
         _hands.PickupOrDrop(itemReceiver.Giver, itemReceiver.Item!.Value);
 
-        if (_hands.TryPickupAnyHand(receiver, itemReceiver.Item!.Value))
-        {
-            if (itemReceiver == null)
-                return;
+        if (!_hands.TryPickupAnyHand(receiver, itemReceiver.Item!.Value))
+            return;
 
-            _hands.PickupOrDrop(itemReceiver.Giver, itemReceiver.Item!.Value);
-            if (_hands.TryPickupAnyHand(receiver, itemReceiver.Item!.Value))
-            {
-                var loc = Loc.GetString("loc-item-offer-transfer",
-                    ("user", itemReceiver.Giver),
-                    ("item", itemReceiver.Item),
-                    ("target", receiver));
-                _popupSystem.PopupEntity(loc, itemReceiver.Giver, PopupType.Medium);
-                _alerts.ClearAlert(receiver, _itemOfferAlert);
-                _entMan.RemoveComponent<ItemReceiverComponent>(receiver);
-            }
-            ;
-        }
+        var loc = Loc.GetString("loc-item-offer-transfer",
+            ("user", itemReceiver.Giver),
+            ("item", itemReceiver.Item),
+            ("target", receiver));
+        _popupSystem.PopupEntity(loc, itemReceiver.Giver, PopupType.Medium);
+        _alerts.ClearAlert(receiver, _itemOfferAlert);
+        _entMan.RemoveComponent<ItemReceiverComponent>(receiver);
     }
 
-    private void DoItemOffer(EntityUid user, EntityUid target)
+    protected override void DoItemOffer(EntityUid user, EntityUid target)
     {
         if (!TryComp<HandsComponent>(target, out var handsComponent))
             return;

@@ -13,8 +13,8 @@
   - type: AntagSelection
     definitions:
     - prefRoles: [ CultistOfYoggSothoth ]
-      max: 4
-      playerRatio: 10
+      max: 5
+      playerRatio: 9
       blacklist:
         components:
         - BibleUser
@@ -31,7 +31,7 @@
   parent: BaseCultYoggRule
   components:
   - type: GameRule
-    minPlayers: 40 # WARNING: this should be always synced with other cult game rules and presets!
+    minPlayers: 35 # WARNING: this should be always synced with other cult game rules and presets!
   - type: CultYoggRule
     stages:
       Initial: {}
@@ -84,3 +84,16 @@
   categories: [ GameRules ]
   components:
   - type: EmergencyShuttleAutoCallRule
+
+- type: entity
+  id: EmergencyShuttleAutoVote
+  parent: BaseGameRule
+  categories: [ GameRules ]
+  components:
+  - type: EmergencyShuttleAutoVoteRule
+
+- type: entity
+  id: TraitorDynamic
+  parent: Traitor
+  components:
+  - type: TraitorDynamics

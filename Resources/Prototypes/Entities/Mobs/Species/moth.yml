@@ -78,7 +78,7 @@
   - type: Flammable
     damage:
       types:
-        Heat: 4.5 # moths burn more easily
+        Heat: 2.5 # moths burn more easily
   - type: Temperature # Moths hate the heat and thrive in the cold.
     heatDamageThreshold: 320
     coldDamageThreshold: 230
@@ -124,12 +124,13 @@
       - map: [ "shoes" ]
       - map: [ "ears" ]
       - map: [ "eyes" ]
+      - map: [ "outerClothing" ] #SS220 tweak layers of belts
       - map: [ "belt" ]
       - map: [ "id" ]
-      - map: [ "outerClothing" ]
       - map: [ "enum.HumanoidVisualLayers.Tail" ] #in the utopian future we should probably have a wings enum inserted here so everyhting doesn't break
       - map: [ "back" ]
       - map: [ "neck" ]
+      - map: [ "enum.HumanoidVisualLayers.SnoutCover" ]
       - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
       - map: [ "enum.HumanoidVisualLayers.Hair" ]
       - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
@@ -144,6 +145,7 @@
         visible: false
   # SS220-Add-Languages begin
   - type: Language
+    selectedLanguage: Galactic
     availableLanguages:
     - id: Galactic
     - id: Tkachi

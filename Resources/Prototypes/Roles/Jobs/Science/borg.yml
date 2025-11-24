@@ -8,11 +8,11 @@
   requirements:
   - !type:RoleTimeRequirement
     role: JobBorg
-    time: 72000 # SS220-AITime-20H
+    time: 20h # SS220-AITime-20H
   # SS220-AITime-begin
   - !type:DepartmentTimeRequirement
     department: Command
-    time: 108000 # SS220-AITime-30H
+    time: 30h # SS220-AITime-30H
   # SS220-AITime-end
   canBeAntag: false
   icon: JobIconStationAi
@@ -32,7 +32,7 @@
   playTimeTracker: JobBorg
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 72000 # SS220-RoleTime
+      time: 20h # SS220-RoleTime
   canBeAntag: false
   icon: JobIconBorg
   supervisors: job-supervisors-rd

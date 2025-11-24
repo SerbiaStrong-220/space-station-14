@@ -341,7 +341,7 @@
   - type: TimedDespawn #delete the egg after the chicken spawns
     lifetime: 21
 
-- type: entity # TODO: figure out how to make these guys gib when stepped on
+- type: entity
   name: cockroach
   parent: [ SimpleMobBase, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   id: MobCockroach
@@ -426,8 +426,13 @@
       - !type:GibBehavior
         recursive: false
   - type: NonSpreaderZombie
-  - type: SentienceTarget
-    flavorKind: station-event-random-sentience-flavor-organic
+  - type: StepTrigger
+    requiredTriggeredSpeed: 1
+  - type: TriggerOnStepTrigger
+  - type: RandomChanceTriggerCondition
+    successChance: 0.2
+  - type: GibOnTrigger
+  - type: ProtectedFromStepTriggers
   - type: MeleeWeapon
     soundHit:
       path: /Audio/Effects/bite.ogg
@@ -840,6 +845,7 @@
       behaviors:
       - !type:GibBehavior
         recursive: false
+  - type: ZombieImmune
 
 - type: entity
   name: cow
@@ -1209,6 +1215,8 @@
         true
       NavSmash: !type:Bool
         true
+  - type: Puller
+    needsHands: false
   - type: Prying
     pryPowered: true
     force: true
@@ -1220,8 +1228,6 @@
       0: Alive
       200: Critical
       250: Dead
-  - type: StaminaResistance
-    damageCoefficient: 0.40
 
 - type: entity
   name: kangaroo
@@ -1460,7 +1466,7 @@
     - reagents: [ Water, SpaceCleaner ]
       methods: [ Touch ]
       effects:
-      - !type:WashCreamPieReaction
+      - !type:WashCreamPie
   - type: Crawler
 
 
@@ -1565,9 +1571,7 @@
     name: ghost-role-information-monkey-name
     description: ghost-role-information-monkey-description
     rules: ghost-role-information-syndicate-reinforcement-rules
-    requirements: #SS220 ghostrole-times (20h overall) start
-        - !type:OverallPlaytimeRequirement
-          time: 72000 #SS220 ghostrole-times (20h overall) end
+    job: SyndicateReinforcement # SS220-add-playtime-restrictions
     mindRoles:
     # This is for syndicate monkeys that randomly gain sentience, thus have no summoner to team with
     - MindRoleGhostRoleSoloAntagonist
@@ -1907,7 +1911,7 @@
         Base: dead-0
       Dead:
         Base: splat-0
-  - type: Food
+  - type: Edible #SS220-kebab-assembly-fix
   - type: FlavorProfile
     flavors:
     - meaty
@@ -2097,6 +2101,12 @@
   parent: MobMouse
   id: MobMouseCancer
   components:
+  - type: GhostRole
+    name: ghost-role-information-cancer-mouse-name
+    description: ghost-role-information-cancer-mouse-description
+    rules: ghost-role-information-freeagent-rules
+    mindRoles:
+    - MindRoleGhostRoleFreeAgent
   - type: Sprite
     color: LightGreen
   - type: PointLight
@@ -2464,7 +2474,7 @@
   - type: MobMover
   - type: HTN
     rootTask:
-      task: SimpleHostileCompound
+      task: GrenadePenguinCompound
   - type: NpcFactionMember
     factions:
     - Syndicate
@@ -2512,9 +2522,9 @@
     beepInterval: 1
   - type: Explosive
     explosionType: Default
-    maxIntensity: 20
-    intensitySlope: 20
-    totalIntensity: 225
+    maxIntensity: 10
+    intensitySlope: 3
+    totalIntensity: 150
   - type: ExplodeOnTrigger
     keysIn:
     - timer
@@ -2604,6 +2614,13 @@
     thresholds:
       0: Alive
       90: Dead
+  #SS220-fauna-damagesets-begin
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: MobBasicSpider
+  - type: StaminaResistance
+    damageCoefficient: 0.2
+  #SS220-fauna-damagesets-ended
   - type: SolutionContainerManager
     solutions:
       melee:
@@ -2626,6 +2643,8 @@
     interactSuccessSpawn: EffectHearts
     interactSuccessSound:
       path: /Audio/Animals/snake_hiss.ogg
+  - type: Puller
+    needsHands: false
   - type: NoSlip
   - type: Spider
   - type: IgnoreSpiderWeb
@@ -2663,6 +2682,12 @@
       groups:
         Brute: -0.07
         Burn: -0.07
+  #SS220-fuana-update-begin
+  - type: Magboots
+  - type: ThermalVision
+    state: Half
+    visionRadius: 14
+  #SS220-fauna-update-ended
 
 - type: entity
   parent: MobSpiderBase
@@ -3064,8 +3089,6 @@
       amount: 2
   - type: ReplacementAccent
     accent: dog
-  - type: SentienceTarget
-    flavorKind: station-event-random-sentience-flavor-corgi
   - type: Tag
     tags:
     - VimPilot
@@ -3164,6 +3187,10 @@
   id: MobCat
   description: Feline pet, very funny.
   components:
+#SS220 cat organ begin 
+  - type: Body
+    prototype: AnimalCat
+#SS220 cat organ end 
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Pets/cat.rsi
@@ -3175,6 +3202,18 @@
     availableLanguages:
     - id: Feline
       canSpeak: true
+    - id: Doggish
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+    - id: SolCommon
+      canSpeak: false
     - id: Galactic
       canSpeak: false
 #SS220 Animalistic Languages end
@@ -3217,8 +3256,8 @@
     spawned:
     - id: FoodMeat
       amount: 3
-  - type: ReplacementAccent
-    accent: cat
+  # - type: ReplacementAccent
+  #   accent: cat
   - type: InteractionPopup
     successChance: 0.7
     interactSuccessString: petting-success-cat
@@ -3303,9 +3342,7 @@
     allowMovement: true
     description: ghost-role-information-SyndiCat-description
     rules: ghost-role-information-SyndiCat-rules
-    requirements: #SS220 ghostrole-times (20h overall) start
-      - !type:OverallPlaytimeRequirement
-        time: 72000 #SS220 ghostrole-times (20h overall) end
+    job: SyndicateReinforcement # SS220-add-playtime-restrictions
     mindRoles:
     - MindRoleGhostRoleTeamAntagonist
     raffle:

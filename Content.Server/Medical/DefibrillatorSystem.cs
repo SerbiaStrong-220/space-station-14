@@ -217,7 +217,7 @@ public sealed class DefibrillatorSystem : EntitySystem
         }
 
         if (selfDamage)
-            _electrocution.TryDoElectrocution(user, null, component.ZapDamage * component.ZapСoeffDamage,
+            _electrocution.TryDoElectrocution(user, null, component.ZapDamage * component.ZapCoeffDamage,
                 component.WritheDuration, true, ignoreInsulation: true);
 
         //SS220 LimitationRevive - end

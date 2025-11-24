@@ -135,25 +135,25 @@
     path: /Audio/SS220/Lobby/you_see_her.ogg
 
 - type: jukebox
-  id: Vivaldi_Spring
+  id: vivaldi_Spring
   name: Vivaldi - Spring
   path:
-    path: /Audio/SS220/JukeBox/Vivaldi_Spring.ogg
+    path: /Audio/SS220/Jukebox/Vivaldi_Spring.ogg
 
 - type: jukebox
-  id: Vivaldi_Autumn
+  id: vivaldi_Autumn
   name: Vivaldi - Autumn
   path:
-    path: /Audio/SS220/JukeBox/Vivaldi_Autumn.ogg
+    path: /Audio/SS220/Jukebox/Vivaldi_Autumn.ogg
 
 - type: jukebox
-  id: Vivaldi_Summer
+  id: vivaldi_Summer
   name: Vivaldi - Summer
   path:
-    path: /Audio/SS220/JukeBox/Vivaldi_Summer.ogg
+    path: /Audio/SS220/Jukebox/Vivaldi_Summer.ogg
 
 - type: jukebox
-  id: Vivaldi_Winter
+  id: vivaldi_Winter
   name: Vivaldi - Winter
   path:
-    path: /Audio/SS220/JukeBox/Vivaldi_Winter.ogg
+    path: /Audio/SS220/Jukebox/Vivaldi_Winter.ogg
