@@ -37,7 +37,7 @@
   suffix: Magistrate, Locked
   components:
   - type: Sprite
-    sprite: SS220/Structures/Doors/Airlocks/Standart/magistrate.rsi
+    sprite: SS220/Structures/Doors/Airlocks/Standard/magistrate.rsi
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsMagistrate ]
@@ -272,7 +272,7 @@
   suffix: USSP
   components:
   - type: Sprite
-    sprite: SS220/Structures/Doors/Airlocks/Standart/ussp_basic.rsi
+    sprite: SS220/Structures/Doors/Airlocks/Standard/ussp_basic.rsi
 
 - type: entity
   parent: AirlockUssp
@@ -289,7 +289,7 @@
   suffix: USSP, Locked, Command
   components:
   - type: Sprite
-    sprite: SS220/Structures/Doors/Airlocks/Standart/ussp_command.rsi
+    sprite: SS220/Structures/Doors/Airlocks/Standard/ussp_command.rsi
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsUsspLockedCommand ]
@@ -300,7 +300,7 @@
   suffix: USSP, Locked, Medical
   components:
   - type: Sprite
-    sprite: SS220/Structures/Doors/Airlocks/Standart/ussp_med.rsi
+    sprite: SS220/Structures/Doors/Airlocks/Standard/ussp_med.rsi
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsUsspLockedMedical ]
@@ -311,7 +311,7 @@
   suffix: USSP, Locked, Engineering
   components:
   - type: Sprite
-    sprite: SS220/Structures/Doors/Airlocks/Standart/ussp_eng.rsi
+    sprite: SS220/Structures/Doors/Airlocks/Standard/ussp_eng.rsi
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsUsspLockedEngineering ]
@@ -324,7 +324,7 @@
   description: Necessary for connecting two space craft together.
   components:
   - type: Sprite
-    sprite: SS220/Structures/Doors/Airlocks/Standart/ussp_shuttle.rsi
+    sprite: SS220/Structures/Doors/Airlocks/Standard/ussp_shuttle.rsi
 
 - type: entity
   parent: AirlockShuttleUssp

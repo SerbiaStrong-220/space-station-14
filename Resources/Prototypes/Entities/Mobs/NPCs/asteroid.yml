@@ -54,7 +54,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      150: Dead
+      250: Dead # SS220 Revert Wizden balance #38131
   - type: MeleeWeapon
     soundHit:
       path: "/Audio/Weapons/smash.ogg"
@@ -375,7 +375,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      45: Dead
+      75: Dead # SS220 Revert Wizden balance #38131
   - type: MeleeWeapon
     angle: 0
     animation: WeaponArcBite

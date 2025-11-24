@@ -86,6 +86,7 @@ namespace Content.Client.Input
             human.AddFunction(ContentKeyFunctions.RotateObjectCounterclockwise);
             human.AddFunction(ContentKeyFunctions.FlipObject);
             human.AddFunction(KeyFunctions220.ResistFire); // SS220 resist fire bind
+            human.AddFunction(KeyFunctions220.PinUI); // ss220 add pin for ui
             human.AddFunction(ContentKeyFunctions.ArcadeUp);
             human.AddFunction(ContentKeyFunctions.ArcadeDown);
             human.AddFunction(ContentKeyFunctions.ArcadeLeft);

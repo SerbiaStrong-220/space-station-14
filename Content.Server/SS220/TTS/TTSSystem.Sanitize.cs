@@ -173,7 +173,7 @@ public sealed partial class TTSSystem
             {"krankenwagen", "Кранкн Вагн"},
             {"auf", "Ау"},
             {"wiedersehen", "Фидерзеин"},
-            {"tschuss", "Чус"},
+            {"bis dann", "Бис данн"},
             {"tschau", "Чау"},
             {"fantastisch", "Фантастиш"},
             {"doppelganger", "Доппэльгнгэа"},
