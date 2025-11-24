@@ -139,7 +139,7 @@ public abstract class SharedCultYoggSystem : EntitySystem
 
     private bool TryCorruptInteractions(Entity<CultYoggComponent> ent, EntityUid target)
     {
-        var effectEv = new CorruptInteraction();
+        var effectEv = new CorruptInteractionEvent();
         RaiseLocalEvent(target, ref effectEv);
 
         if (effectEv.Handled == true)
