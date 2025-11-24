@@ -10,6 +10,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.SS220.CultYogg.Corruption;
 using Content.Shared.Whitelist;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.CultYogg.Cultists;
@@ -90,17 +91,10 @@ public abstract class SharedCultYoggSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (_whitelist.IsWhitelistPass(uid.Comp.CorruptInteractionsWhitelist, args.Target))
+        if (TryCorruptInteractions(uid, args.Target))
         {
-            var effectEv = new CorruptInteraction();
-            RaiseLocalEvent(args.Target, ref effectEv);
-
-            if (effectEv.Handled)
-            {
-                args.Handled = true;
-                //ToDo_SS220 add lesser cooldawn
-                return;
-            }
+            args.Handled = true;
+            return;
         }
 
         if (_cultYoggCorruptedSystem.IsCorrupted(args.Target))
@@ -141,6 +135,17 @@ public abstract class SharedCultYoggSystem : EntitySystem
             return;
         }
         args.Handled = true;
+    }
+
+    private bool TryCorruptInteractions(Entity<CultYoggComponent> ent, EntityUid target)
+    {
+        var effectEv = new CorruptInteraction();
+        RaiseLocalEvent(target, ref effectEv);
+
+        if (effectEv.Handled == true)
+            return true;
+
+        return false;
     }
     #endregion
 

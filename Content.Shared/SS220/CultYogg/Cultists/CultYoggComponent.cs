@@ -98,11 +98,4 @@ public sealed partial class CultYoggComponent : Component
     /// </summary>
     [ViewVariables]
     public EntProtoId CorruptionEffect = "CorruptingEffect";
-
-    [ViewVariables]
-    public EntityWhitelist CorruptInteractionsWhitelist = new()
-    {
-        Tags = ["CorruptInteractions"]
-    };
-
 }

@@ -112,6 +112,7 @@
           inverted: true
           components:
           - BibleUser
+          - CultYogg
         effectProto: StatusEffectForcedSleeping
         time: 3
         type: Add
@@ -128,3 +129,4 @@
           inverted: true
           components:
           - BibleUser
+          - CultYogg
