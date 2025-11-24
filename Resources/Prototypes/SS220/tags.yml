@@ -357,6 +357,3 @@
 
 - type: Tag
   id: MiGoHandsWhitelist
-
-- type: Tag
-  id: CorruptInteractions

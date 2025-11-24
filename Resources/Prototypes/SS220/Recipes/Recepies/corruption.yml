@@ -403,3 +403,19 @@
   result: CultPinpointer
   corruptionReverseEffect: ExorcismUncorruptEffect
 # Pinpointer end
+
+# Mask start
+- type: corrupted
+  id: ClothingMaskGas
+  from:
+    parentPrototypeId: ClothingMaskGas
+  result: CultPinpointer #ToDo_SS220 add prototype
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: ClothingMaskGasParent
+  from:
+    prototypeId: ClothingMaskGas
+  result: CultPinpointer #ToDo_SS220 add prototype
+  corruptionReverseEffect: ExorcismUncorruptEffect
+# Mask end
