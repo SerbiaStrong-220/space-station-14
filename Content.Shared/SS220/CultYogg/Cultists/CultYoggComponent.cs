@@ -47,10 +47,10 @@ public sealed partial class CultYoggComponent : Component
     /// </summary>
 
     [ViewVariables, AutoNetworkedField]
-    public float HungerCost = 20f;
+    public float HungerCost = 10f;
 
     [ViewVariables, AutoNetworkedField]
-    public float ThirstCost = 20f;
+    public float ThirstCost = 10f;
 
     [ViewVariables, AutoNetworkedField]
     public string PukedEntity = "FoodMiGomyceteCult"; //what will be puked out
