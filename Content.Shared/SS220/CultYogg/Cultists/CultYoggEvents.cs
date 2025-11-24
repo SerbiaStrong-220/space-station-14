@@ -26,3 +26,9 @@ public record struct CultYoggSacrificedTargetEvent(Entity<CultYoggAltarComponent
 
 [ByRefEvent]
 public record struct GotCultifiedEvent;
+
+[ByRefEvent]
+public record struct CorruptInteraction()
+{
+    public bool Handled = false;
+}
