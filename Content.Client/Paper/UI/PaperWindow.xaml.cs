@@ -12,12 +12,13 @@ using Robust.Client.UserInterface.RichText;
 using Content.Client.UserInterface.RichText;
 using Robust.Shared.Input;
 using Content.Client.SS220.Language;
+using Content.Client.SS220.UserInterface.Controls;
 using Robust.Client.Player;
 
 namespace Content.Client.Paper.UI
 {
     [GenerateTypedNameReferences, Virtual]
-    public partial class PaperWindow : BaseWindow
+    public partial class PaperWindow : BaseWindow, IPinnableWindow // ss220 add pin for ui
     {
         [Dependency] private readonly IInputManager _inputManager = default!;
         [Dependency] private readonly IResourceCache _resCache = default!;
@@ -113,6 +114,8 @@ namespace Content.Client.Paper.UI
 
             SaveButton.Text = Loc.GetString("paper-ui-save-button",
                 ("keybind", _inputManager.GetKeyFunctionButtonString(EngineKeyFunctions.MultilineTextSubmit)));
+
+            PinButton.LinkedControl = this; // SS220 pin button
         }
 
         /// <summary>
