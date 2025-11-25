@@ -13,12 +13,14 @@ using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using System.Linq;
 using System.Threading;
+using Content.Client.SS220.UserInterface.Controls;
+using Content.Client.SS220.UserInterface.System.PinUI;
 using Timer = Robust.Shared.Timing.Timer;
 
 namespace Content.Client.SS220.CriminalRecords.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class CriminalRecordsWindow : FancyWindow
+public sealed partial class CriminalRecordsWindow : FancyWindow, IPinnableWindow
 {
     private readonly IEntitySystemManager _sysMan;
     private readonly IPrototypeManager _prototype;
@@ -97,6 +99,8 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
         };
 
         StatusColorIndicator.PanelOverride = _indicatorOverride;
+
+        PinUISystem.AddPinButtonBeforeTarget(this, CloseButton);
 
         MessageInput.Placeholder = new Rope.Leaf(Loc.GetString("criminal-records-ui-message-placeholder"));
         //MessageInput.OnKeyBindDown += _ => MessageInputChanged(); // Doesn't work 24.09.2023 textedit is broken

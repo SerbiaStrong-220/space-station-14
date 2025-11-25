@@ -66,7 +66,7 @@ public abstract class SharedCryostorageSystem : EntitySystem
             return;
 
         var containedComp = EnsureComp<CryostorageContainedComponent>(args.Entity);
-        _actionsSystem.AddAction(args.Entity, ref comp.LeaveActionUid, comp.LeaveActionID, uid); // 220 cryo action
+        _actionsSystem.AddAction(args.Entity, ref comp.LeaveActionUid, comp.LeaveActionId, uid); // 220 cryo action
         var delay = Mind.TryGetMind(args.Entity, out _, out _) ? comp.GracePeriod : comp.NoMindGracePeriod;
         containedComp.GracePeriodEndTime = Timing.CurTime + delay;
         containedComp.Cryostorage = ent;

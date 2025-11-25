@@ -126,6 +126,7 @@
   - type: Telepathy
     canSend: true
     telepathyChannelPrototype: TelepathyChannelHive
+  - type: FlashImmunity
 
 - type: entity
   parent: BaseMobSpiderQueen

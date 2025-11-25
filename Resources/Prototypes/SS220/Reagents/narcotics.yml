@@ -125,7 +125,7 @@
           types:
             Cellular: 10.0
             Poison: 5.0
-      - !type:StaminaDamage
+      - !type:StaminaChange
         conditions:
         - !type:ReagentCondition
           reagent: Frontier
@@ -152,7 +152,7 @@
         statusEffectId: MobThresholdsModifierFrontier
         duration: 5
         refresh: false
-      - !type:StaminaDamage
+      - !type:StaminaChange
         probability: 0.1
         value: 10
       - !type:Hallucination

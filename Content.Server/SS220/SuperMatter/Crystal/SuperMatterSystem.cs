@@ -108,23 +108,23 @@ public sealed partial class SuperMatterSystem
         var crystalTemperature = crystal.Comp.Temperature;
         var pressure = gasMixture.Pressure;
 
-        var releasedEnergyPerFrame = crystal.Comp.InternalEnergy * GetReleaseEnergyConversionEfficiency(crystalTemperature, pressure)
+        var releasedEnergy = frameTime * crystal.Comp.InternalEnergy * GetReleaseEnergyConversionEfficiency(crystalTemperature, pressure)
                         * (SuperMatterGasResponse.GetGasInfluenceReleaseEnergyEfficiency(gasMixture) + 1);
-        crystal.Comp.AccumulatedRadiationEnergy += releasedEnergyPerFrame * GetZapToRadiationRatio(crystalTemperature, pressure, smState);
-        crystal.Comp.AccumulatedZapEnergy += releasedEnergyPerFrame * (1 - GetZapToRadiationRatio(crystalTemperature, pressure, smState));
+        crystal.Comp.AccumulatedRadiationEnergy += releasedEnergy * GetZapToRadiationRatio(crystalTemperature, pressure, smState);
+        crystal.Comp.AccumulatedZapEnergy += releasedEnergy * (1 - GetZapToRadiationRatio(crystalTemperature, pressure, smState));
 
-        crystal.Comp.InternalEnergy -= releasedEnergyPerFrame;
+        crystal.Comp.InternalEnergy -= releasedEnergy;
 
         EjectGases(decayedMatter, crystalTemperature, smState, gasMixture);
         crystal.Comp.Matter -= decayedMatter;
-        crystal.Comp.Temperature += releasedEnergyPerFrame / GetHeatCapacity(crystalTemperature, prevMatter) - decayedMatter / crystal.Comp.Matter * crystalTemperature;
+        crystal.Comp.Temperature += releasedEnergy / GetHeatCapacity(crystalTemperature, prevMatter) - decayedMatter / crystal.Comp.Matter * crystalTemperature;
 
-        _atmosphere.AddHeat(gasMixture, ReleasedEnergyToGasHeat * releasedEnergyPerFrame);
+        _atmosphere.AddHeat(gasMixture, ReleasedEnergyToGasHeat * releasedEnergy);
         AddIntegrityDamage(crystal.Comp, GetIntegrityDamage(crystal.Comp) * frameTime);
 
         // Update Accumulators for Broadcasting to Clients
-        crystal.Comp.MatterDervAccumulator = (crystal.Comp.Matter - prevMatter) / frameTime;
-        crystal.Comp.InternalEnergyDervAccumulator = (crystal.Comp.InternalEnergy - prevInternalEnergy) / frameTime;
+        crystal.Comp.MatterDervAccumulator += (crystal.Comp.Matter - prevMatter) / frameTime;
+        crystal.Comp.InternalEnergyDervAccumulator += (crystal.Comp.InternalEnergy - prevInternalEnergy) / frameTime;
     }
 
     private void UpdateDelayed(Entity<SuperMatterComponent> crystal, float frameTime)
