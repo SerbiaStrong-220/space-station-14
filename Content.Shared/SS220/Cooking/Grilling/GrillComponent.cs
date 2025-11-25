@@ -22,7 +22,6 @@ public sealed partial class GrillComponent : Component
     [DataField(required: true), AutoNetworkedField]
     public SpriteSpecifier.Rsi? GrillingSprite;
 
-    // Grill cooking speed modifier
     [DataField]
     public float CookingSpeed;
 

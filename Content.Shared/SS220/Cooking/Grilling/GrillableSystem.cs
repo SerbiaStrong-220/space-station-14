@@ -2,7 +2,6 @@
 
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Examine;
-using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared.SS220.Cooking.Grilling;
