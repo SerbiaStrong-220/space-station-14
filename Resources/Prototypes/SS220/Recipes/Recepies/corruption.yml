@@ -406,14 +406,14 @@
 
 # Mask start
 - type: corrupted
-  id: ClothingMaskGas
+  id: ClothingMaskGasParent
   from:
     parentPrototypeId: ClothingMaskGas
   result: CultPinpointer #ToDo_SS220 add prototype
   corruptionReverseEffect: ExorcismUncorruptEffect
 
 - type: corrupted
-  id: ClothingMaskGasParent
+  id: ClothingMaskGas
   from:
     prototypeId: ClothingMaskGas
   result: CultPinpointer #ToDo_SS220 add prototype
