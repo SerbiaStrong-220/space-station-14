@@ -2,6 +2,7 @@
     xmlns:paper="clr-namespace:Content.Client.Paper.UI"
     xmlns:paper220="clr-namespace:Content.Client.SS220.Paper.UI"
     xmlns:pin220="clr-namespace:Content.Client.SS220.UserInterface.System.PinUI"
+    xmlns:signature="clr-namespace:Content.Client.SS220.Signature"
     MouseFilter="Stop" Resizable="True" MinSize="150 150"
     SetSize="510 660"> <!-- Provide some reasonable sizes by default. Can be changed by the component -->
 
@@ -37,6 +38,21 @@
                             <Label Name="FillStatus" StyleClasses="LabelSecondaryColor"/>
                         </BoxContainer>
                         <TextureButton Name="FooterImage" HorizontalAlignment="Center" VerticalAlignment="Top" MouseFilter="Ignore"/>
+                        <!-- SS220 ADD SIGNATURE START -->
+                        <BoxContainer Name="SignatureContainer" Access="Public" Orientation="Horizontal" VerticalAlignment="Center">
+                            <Label Text="{Loc 'paper-ui-signature-label'}" Modulate="Black" HorizontalAlignment="Left"/>
+                            <signature:SignatureControl Name="Signature"
+                                                        SetSize="250 100"
+                                                        CanvasSize="250 100"
+                                                        Access="Public"
+                                                        MouseFilter="Stop"
+                                                        HorizontalExpand="True"
+                                                        VerticalExpand="True"
+                                                        VerticalAlignment="Bottom"
+                                                        HorizontalAlignment="Right"/>
+                            <Button Text="{Loc 'paper-ui-signature-load-from-profile-label'}" StyleClasses="OpenBoth" Name="LoadSignatureButton" SetSize="96 32"/>
+                        </BoxContainer>
+                        <!-- SS220 ADD SIGNATURE END -->
                     </BoxContainer>
                     <paper:StampCollection Name="StampDisplay" VerticalAlignment="Bottom" Margin="6"/>
 

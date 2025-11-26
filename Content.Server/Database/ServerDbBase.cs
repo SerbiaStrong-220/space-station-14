@@ -17,6 +17,7 @@ using Content.Shared.Humanoid.Markings;
 using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
+using Content.Shared.SS220.Signature;
 using Content.Shared.Traits;
 using Microsoft.EntityFrameworkCore;
 using Robust.Shared.Enums;
@@ -265,6 +266,8 @@ namespace Content.Server.Database
                 loadouts[role.RoleName] = loadout;
             }
 
+            var signatureData = SignatureData.Deserialize(profile.SignatureData); // ss220 add signature
+
             return new HumanoidCharacterProfile(
                 profile.CharacterName,
                 profile.FlavorText,
@@ -288,7 +291,8 @@ namespace Content.Server.Database
                 (PreferenceUnavailableMode) profile.PreferenceUnavailable,
                 antags.ToHashSet(),
                 traits.ToHashSet(),
-                loadouts
+                loadouts,
+                signatureData // ss220 add signature
             );
         }
 
@@ -320,6 +324,13 @@ namespace Content.Server.Database
             profile.Markings = markings;
             profile.Slot = slot;
             profile.PreferenceUnavailable = (DbPreferenceUnavailableMode) humanoid.PreferenceUnavailable;
+
+            // ss220 add signature start
+            if (humanoid.SignatureData != null)
+            {
+                profile.SignatureData = humanoid.SignatureData.Serialize();
+            }
+            // ss220 add signature end
 
             profile.Jobs.Clear();
             profile.Jobs.AddRange(

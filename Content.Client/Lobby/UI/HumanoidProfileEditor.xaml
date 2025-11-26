@@ -3,6 +3,7 @@
          xmlns:humanoid="clr-namespace:Content.Client.Humanoid"
          xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
          xmlns:ui="clr-namespace:Content.Client.Lobby.UI"
+         xmlns:signature="clr-namespace:Content.Client.SS220.Signature"
          HorizontalExpand="True">
         <!-- Left side -->
         <BoxContainer Orientation="Vertical" Margin="10 10 10 10" HorizontalExpand="True">
@@ -147,6 +148,32 @@
                 <BoxContainer Name="CAfkPreferences" Orientation="Vertical" Margin="10">
                     <!-- Afk preferences -->
                    <CheckBox Name="CTeleportAfkToCryoStorage" Text="{Loc 'humanoid-profile-editor-afkPreferences-teleport-to-cryo-storage'}"/> <!-- SS220 loc fix -->
+                <!-- SS220 ADD SIGNATURE START -->
+                </BoxContainer>
+                <BoxContainer Name="OtherContainer" Orientation="Vertical" Margin="10">
+                    <BoxContainer Name="SavedSignatureContainer" Orientation="Horizontal" Margin="10">
+                        <RichTextLabel Text="{Loc 'humanoid-profile-signature-saved-label'}"/>
+                        <BoxContainer>
+                            <BoxContainer Orientation="Vertical">
+                                <Label Text="{Loc 'humanoid-profile-signature-brush-write'}" HorizontalAlignment="Center"/>
+                                <ItemList Name="BrushWriteSizesList" SetSize="120 60" Margin="0 0 0 20"/>
+
+                                <Label Text="{Loc 'humanoid-profile-signature-brush-erase'}" HorizontalAlignment="Center"/>
+                                <ItemList Name="BrushEraseSizesList" SetSize="120 60"/>
+                            </BoxContainer>
+                            <signature:SignatureControl Name="Signature"
+                                                        SetSize="250 100"
+                                                        CanvasSize="250 100"
+                                                        Access="Public"
+                                                        MouseFilter="Stop"
+                                                        HorizontalExpand="True"
+                                                        VerticalExpand="True"
+                                                        Margin="20 0 0 0"
+                                                        VerticalAlignment="Center"
+                                                        HorizontalAlignment="Right"/>
+                        </BoxContainer>
+                    </BoxContainer>
+                    <!-- SS220 ADD SIGNATURE END -->
                 </BoxContainer>
             </TabContainer>
         </BoxContainer>
