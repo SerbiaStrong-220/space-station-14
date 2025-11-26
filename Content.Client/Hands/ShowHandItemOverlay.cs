@@ -28,9 +28,16 @@ namespace Content.Client.Hands
 
         private readonly MartialArtsSystem _martial = default!; // SS220-MartialArts
 
-        private static readonly Color MartialArtsIconsModulate = Color.White.WithAlpha(0.75f); // SS220-MartialArts
+        // SS220-MartialArts-Start
+        private static readonly Color MartialArtsIconsModulate = Color.White.WithAlpha(0.75f);
         private static readonly ResPath MartialArtsActionsRsi =
-            new ResPath("/Textures/SS220/Interface/Misc/martial_arts_actions.rsi"); // SS220-MartialArts
+            new ResPath("/Textures/SS220/Interface/Misc/martial_arts_actions.rsi");
+
+        private const float PerformedStepsVerticalMultiplier = 2f;
+        private const float PerformedStepsIndexOffset = 1f;
+        private const float PerformedStepsYDivisor = 1.8f;
+        private const float PerformedStepsHalfDivisor = 2f;
+        // SS220-MartialArts-End
 
         private HandsSystem? _hands;
         private readonly IRenderTexture _renderBackbuffer;
@@ -98,9 +105,10 @@ namespace Content.Client.Hands
 
                 if (combo is { Count: > 0 })
                 {
+                    var rsiActual = _resourceCache.GetResource<RSIResource>(MartialArtsActionsRsi).RSI;
+
                     for (var i = 0; i < combo.Count; i++)
                     {
-                        var rsiActual = _resourceCache.GetResource<RSIResource>(MartialArtsActionsRsi).RSI;
                         if (!rsiActual.TryGetState(combo[i].ToString().ToLower(), out var state))
                             continue;
 
@@ -109,10 +117,10 @@ namespace Content.Client.Hands
                         var size = texture.Size;
 
                         var offsetVec2 = new Vector2(-offset,
-                            (2f * i + 1f - combo.Count) * texture.Size.Y / 1.8f);
+                            (PerformedStepsVerticalMultiplier * i + PerformedStepsIndexOffset - combo.Count) * texture.Size.Y / PerformedStepsYDivisor);
 
                         screen.DrawTextureRect(texture,
-                            UIBox2.FromDimensions(mousePos.Position + offsetVec2 - size / 2, size),
+                            UIBox2.FromDimensions(mousePos.Position + offsetVec2 - size / PerformedStepsHalfDivisor, size),
                             MartialArtsIconsModulate);
                     }
                 }
