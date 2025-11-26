@@ -1,7 +1,8 @@
 - type: martialArt
   id: DebugMartialArt # Боевое искусство: Путь Разработчика (Дебаг)
+  name: martial-art-debug
   sequences:
-  - name: ConsequtiveSlap # Приём: Последовательный удар лещом
+  - name: martial-art-debug-consequtive-slap # Приём: Последовательный удар лещом
     steps: [ Harm, Harm, Grab, Push ] # Удар, Удар, Хватание, Толкание
     entry:
       conditions:
@@ -15,13 +16,13 @@
       - !type:ApplyStaminaCombatEffect # Нанести 50 урона стамине
         damage: 50
         ignoreResist: true
-  - name: DontStopPushing # Приём: Не останавливайтесь, пушьте!
+  - name: martial-art-debug-dont-stop-pushing # Приём: Не останавливайтесь, пушьте!
     steps: [ Push, Push, Push ] # Толкание, Толкание, Толкание
     entry:
       effects:
       - !type:KnockdownCombatEffect # Сбить с ног на 5 секунд
         time: 5
-  - name: GrabGrab # Приём: Хвать-Хвать
+  - name: martial-art-debug-grab-grab # Приём: Хвать-Хвать
     steps: [ Grab, Grab ] # Хватание, Хватание
     entry:
       conditions:

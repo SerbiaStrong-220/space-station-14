@@ -1,7 +1,8 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using System.Diagnostics.CodeAnalysis;
-using Content.Shared.Interaction;
+using Content.Shared.Administration.Logs;
+using Content.Shared.Database;
 using Content.Shared.Popups;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -13,49 +14,71 @@ public abstract partial class SharedMartialArtsSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<GrantMartialArtComponent, ActivateInWorldEvent>(OnActivateGrant);
-    }
-
-    private void OnActivateGrant(EntityUid uid, GrantMartialArtComponent comp, ActivateInWorldEvent ev)
-    {
-        if (ev.Handled)
-            return;
-
-        if (!TryComp<MartialArtistComponent>(ev.User, out var artist))
-            return;
-
-        if (TryGrantMartialArt(ev.User, comp.MartialArt, false, artist))
-        {
-            if (comp.DestroyAfterUse)
-                QueueDel(uid);
-        }
-        else
-        {
-            _popup.PopupClient(Loc.GetString("martial-arts-cant-grant"), ev.User);
-        }
-
-        ev.Handled = true;
-    }
-
-    public bool TryGrantMartialArt(EntityUid user, ProtoId<MartialArtPrototype> martialArt, bool overrideExisting = false, MartialArtistComponent? artist = null)
+    public bool TryGrantMartialArt(EntityUid user, ProtoId<MartialArtPrototype> martialArt, bool overrideExisting = false, bool popups = true, MartialArtistComponent? artist = null)
     {
         if (!Resolve(user, ref artist))
             return false;
 
-        if (artist.MartialArt != null && !overrideExisting)
+        if (!CanHaveMartialArts(user))
+            return false;
+
+        if (!_prototype.TryIndex(martialArt, out var proto))
             return false;
 
         if (artist.MartialArt != null)
         {
-            // TODO: shutdown effects
+            if (!overrideExisting)
+                return false;
+
+            RevokeMartialArt(user, popups, artist);
         }
+
         artist.MartialArt = martialArt;
+
         // TODO: setup effects
+
+        if (popups)
+            _popup.PopupClient(Loc.GetString("martial-arts-granted-art", ("art", proto.Name)), user);
+
+        _adminLog.Add(LogType.Experience, LogImpact.Medium, $"{ToPrettyString(user):player} was granted with \"{proto.ID:martial art}\"");
+
+        return true;
+    }
+
+    public void RevokeMartialArt(EntityUid user, bool popups = true, MartialArtistComponent? artist = null)
+    {
+        if (!Resolve(user, ref artist))
+            return;
+
+        if (artist.MartialArt == null)
+            return;
+
+        _prototype.TryIndex(artist.MartialArt, out var proto);
+
+        artist.MartialArt = null;
+
+        // TODO: shutdown effects
+
+        if (popups)
+            _popup.PopupClient(Loc.GetString("martial-arts-revoked-art", ("art", proto?.Name ?? "martial-arts-unknown")), user);
+
+        _adminLog.Add(LogType.Experience, LogImpact.Medium, $"\"{proto?.ID:martial art}\" has been revoked for {ToPrettyString(user):player}");
+    }
+
+    public bool HasMartialArt(EntityUid user, MartialArtistComponent? artist = null)
+    {
+        if (!Resolve(user, ref artist))
+            return false;
+
+        return artist.MartialArt != null;
+    }
+
+    public bool CanHaveMartialArts(EntityUid user, MartialArtistComponent? artist = null)
+    {
+        if (!Resolve(user, ref artist))
+            return false;
 
         return true;
     }

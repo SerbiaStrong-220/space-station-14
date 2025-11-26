@@ -10,6 +10,9 @@ public sealed partial class MartialArtPrototype : IPrototype
     [IdDataField]
     public string ID { get; private set; } = string.Empty;
 
+    [DataField(required: true)]
+    public LocId Name;
+
     [DataField]
     public List<CombatSequence> Sequences = new();
 

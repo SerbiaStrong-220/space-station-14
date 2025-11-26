@@ -492,5 +492,9 @@ public enum LogType
     /// </summary>
     AdminCommand = 10000,
 
+    /// <summary>
+    /// All related to experience system
+    /// </summary>
+    Experience = 10001,
     //SS220 log types end
 }

@@ -1,7 +1,8 @@
 - type: martialArt
   id: CloseQuartersCombat
+  name: martial-art-cqc
   sequences:
-  - name: cqc-slam
+  - name: martial-art-cqc-slam
     steps: [ Grab, Harm ]
     entry:
       conditions:
@@ -14,7 +15,7 @@
             Blunt: 10
       - !type:KnockdownCombatEffect
         time: 12
-  - name: cqc-kick
+  - name: martial-art-cqc-kick
     steps: [ Harm, Harm ]
     entry:
       effects:
@@ -37,7 +38,7 @@
         - !type:ApplyStaminaCombatEffect
           damage: 45
           ignoreResist: true
-  - name: cqc-restrain
+  - name: martial-art-cqc-restrain
     steps: [ Grab, Grab ]
     entry:
       effects:
@@ -46,14 +47,14 @@
       - !type:ApplyStaminaCombatEffect
         damage: 20
         ignoreResist: true
-  - name: cqc-pressure
+  - name: martial-art-cqc-pressure
     steps: [ Push, Grab ]
     entry:
       effects:
       - !type:ApplyStaminaCombatEffect
         damage: 60
         ignoreResist: true
-  - name: cqc-consequtive-cqc
+  - name: martial-art-cqc-consequtive-cqc
     steps: [ Push, Push, Grab ]
     entry:
       effects:

@@ -1,7 +1,8 @@
 - type: martialArt
   id: CorporateJudo
+  name: martial-art-judo
   sequences:
-  - name: corporate-judo-discombobulate
+  - name: martial-art-judo-discombobulate
     steps: [ Push, Grab ]
     entry:
       effects:
@@ -13,7 +14,7 @@
       - !type:ApplyStaminaCombatEffect
         damage: 10
         ignoreResist: true
-  - name: corporate-judo-eye-poke
+  - name: martial-art-judo-eye-poke
     steps: [ Push, Harm ]
     entry:
       effects:
@@ -26,7 +27,7 @@
         damage:
           types:
             Blunt: 10
-  - name: corporate-judo-throw
+  - name: martial-art-judo-throw
     steps: [ Grab, Push ]
     entry:
       conditions:
@@ -38,7 +39,7 @@
         ignoreResist: true
       - !type:KnockdownCombatEffect
         time: 7
-  - name: corporate-judo-armbar
+  - name: martial-art-judo-armbar
     steps: [ Push, Push, Grab ]
     entry:
       conditions:
@@ -49,7 +50,7 @@
         ignoreResist: true
       - !type:KnockdownCombatEffect
         time: 7
-  - name: corporate-judo-wheel-throw
+  - name: martial-art-judo-wheel-throw
     steps: [ Grab, Harm, Push ]
     entry:
       effects:
