@@ -13,7 +13,7 @@ public sealed partial class GrantMartialArtsSystem : EntitySystem
 {
     [Dependency] private readonly SharedMartialArtsSystem _martialArts = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly GameTiming _timing = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
 
     public override void Initialize()

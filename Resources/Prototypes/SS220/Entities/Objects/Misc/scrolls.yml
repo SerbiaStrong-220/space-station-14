@@ -16,6 +16,7 @@
   - type: StaticPrice
     price: 3000
   - type: TriggerOnActivate
+  - type: DeleteOnTrigger
   - type: MartialArtOnTrigger
     martialArt: CloseQuartersCombat
 
