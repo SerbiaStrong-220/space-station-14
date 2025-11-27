@@ -1,4 +1,5 @@
 ﻿using Content.Shared.Anomaly;
+using Content.Shared.Destructible.Thresholds;
 using Content.Shared.Materials;
 using Content.Shared.Radio;
 using Robust.Shared.Audio;
@@ -69,4 +70,15 @@ public sealed partial class AnomalyGeneratorComponent : Component
     /// </summary>
     [DataField("generatingFinishedSound")]
     public SoundSpecifier? GeneratingFinishedSound;
+
+    //ss220 add anomaly place start
+    [DataField]
+    public EntityUid? EmaggedUser;
+
+    [DataField]
+    public EntityUid? ChosenBeacon;
+
+    [DataField]
+    public MinMax EmaggedDistance = new(5, 15);
+    //ss220 add anomaly place end
 }

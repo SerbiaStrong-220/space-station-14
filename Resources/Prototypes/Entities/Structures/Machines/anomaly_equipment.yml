@@ -261,6 +261,9 @@
   - type: Physics
     bodyType: Static
   - type: AnomalyGenerator
+    emaggedDistance:
+      min: 1
+      max: 15
     generatingSound:
       path: /Audio/Machines/anomaly_generate.ogg
     generatingFinishedSound:
