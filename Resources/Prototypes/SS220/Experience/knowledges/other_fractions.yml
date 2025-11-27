@@ -1,0 +1,4 @@
+- type: knowledge
+  id: NinjaKnowledge
+  knowledgeName: ninja-knowledge-name
+  knowledgeDescription: ninja-knowledge-description

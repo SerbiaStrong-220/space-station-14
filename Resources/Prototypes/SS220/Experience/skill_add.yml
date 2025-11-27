@@ -1,0 +1,12 @@
+- type: skillAdd
+  id: BaseSkillAddition
+  skills:
+    Piloting:
+      skillLevel: 1
+      skillStudied: true
+    CombatTraining:
+      skillLevel: 2
+      skillSubLevel: 0
+      skillStudied: true
+  knowledges:
+  - InformedPersonalKnowledge

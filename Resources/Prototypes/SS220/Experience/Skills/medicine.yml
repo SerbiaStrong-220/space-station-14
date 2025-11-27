@@ -1,0 +1,54 @@
+- type: skill
+  id: MedicineInitial
+  levelInfo:
+    maximumSublevel: 5
+  levelDescription:
+    skillName: medicine-initial-name
+    skillDescription: medicine-initial-desc
+  components:
+  - type: SkillMedicineMachineUse
+    healthAnalyzerInfoShuffleChance: 0.6
+    defibrillatorSelfDamageChance: 0.6
+    defibrillatorFailureChance: 0
+
+- type: skill
+  id: MedicineBase
+  levelInfo:
+    maximumSublevel: 5
+  levelDescription:
+    skillName: medicine-base-name
+    skillDescription: medicine-base-desc
+  components:
+  - type: SkillMedicineMachineUse
+    healthAnalyzerInfoShuffleChance: 0.2
+    defibrillatorSelfDamageChance: 0.2
+    defibrillatorFailureChance: 0
+
+- type: skill
+  id: MedicineTrained
+  levelInfo:
+    maximumSublevel: 5
+  levelDescription:
+    skillName: medicine-trained-name
+    skillDescription: medicine-trained-desc
+  components:
+  - type: SkillMedicineMachineUse
+    healthAnalyzerInfoShuffleChance: 0
+    defibrillatorSelfDamageChance: 0
+    defibrillatorFailureChance: 0
+
+- type: skill
+  id: MedicineProfessional
+  levelInfo:
+    maximumSublevel: 5
+  levelDescription:
+    skillName: medicine-professional-name
+    skillDescription: medicine-professional-desc
+  components:
+  - type: SkillMedicineDoAfter
+    durationScale: 0.8
+    # To ensure removing debuffs
+  - type: SkillMedicineMachineUse
+    healthAnalyzerInfoShuffleChance: 0
+    defibrillatorSelfDamageChance: 0
+    defibrillatorFailureChance: 0

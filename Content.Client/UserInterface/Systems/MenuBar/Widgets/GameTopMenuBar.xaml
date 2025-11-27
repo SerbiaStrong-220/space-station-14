@@ -3,6 +3,7 @@
            xmlns:style="clr-namespace:Content.Client.Stylesheets"
            xmlns:ic="clr-namespace:Robust.Shared.Input;assembly=Robust.Shared"
            xmlns:is="clr-namespace:Content.Shared.Input;assembly=Content.Shared"
+           xmlns:is220="clr-namespace:Content.Shared.SS220.Input;assembly=Content.Shared"
            xmlns:xe="clr-namespace:Content.Client.UserInterface.XamlExtensions"
            xmlns:ui="clr-namespace:Content.Client.UserInterface.Controls"
            xmlns:widgets="clr-namespace:Content.Client.UserInterface.Systems.MenuBar.Widgets"
@@ -43,6 +44,18 @@
         HorizontalExpand="True"
         AppendStyleClass="{x:Static style:StyleBase.ButtonSquare}"
         />
+    <!-- SS220-experience-update-begin -->
+    <ui:MenuButton
+        Name="ExperienceViewButton"
+        Access="Internal"
+        Icon="{xe:Tex '/Textures/Interface/students-cap.svg.192dpi.png'}"
+        ToolTip="{Loc 'game-hud-open-experience-view-button-tooltip'}"
+        BoundKey = "{x:Static is220:KeyFunctions220.OpenExperienceViewerMenu}"
+        MinSize="42 64"
+        HorizontalExpand="True"
+        AppendStyleClass="{x:Static style:StyleBase.ButtonSquare}"
+        />
+    <!-- SS220-experience-update-end -->
     <ui:MenuButton
         Name="EmotesButton"
         Access="Internal"

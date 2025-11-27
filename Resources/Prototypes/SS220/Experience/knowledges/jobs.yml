@@ -1,0 +1,24 @@
+- type: knowledge
+  id: ScienceKnowledge
+  knowledgeName: science-knowledge-name
+  knowledgeDescription: science-knowledge-description
+
+- type: knowledge
+  id: MedicalKnowledge
+  knowledgeName: medical-knowledge-name
+  knowledgeDescription: medical-knowledge-description
+
+- type: knowledge
+  id: BotanyKnowledge
+  knowledgeName: botany-knowledge-name
+  knowledgeDescription: botany-knowledge-description
+
+- type: knowledge
+  id: CargoKnowledge
+  knowledgeName: cargo-knowledge-name
+  knowledgeDescription: cargo-knowledge-description
+
+- type: knowledge
+  id: SecurityKnowledge
+  knowledgeName: security-knowledge-name
+  knowledgeDescription: security-knowledge-description
