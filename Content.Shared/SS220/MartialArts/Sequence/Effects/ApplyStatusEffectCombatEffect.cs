@@ -3,7 +3,7 @@
 using Content.Shared.StatusEffect;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.SS220.MartialArts.Effects;
+namespace Content.Shared.SS220.MartialArts.Sequence.Effects;
 
 // TODO: when wizards will fully migrate to new status effects, we have to migrate this too
 public sealed partial class ApplyStatusEffectCombatEffect : CombatSequenceEffect

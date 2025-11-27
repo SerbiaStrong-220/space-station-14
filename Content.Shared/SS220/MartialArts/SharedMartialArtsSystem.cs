@@ -2,8 +2,15 @@
 
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Administration.Logs;
-using Content.Shared.Database;
+using Content.Shared.Alert;
+using Content.Shared.Effects;
+using Content.Shared.Inventory.Events;
+using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Popups;
+using Content.Shared.Trigger;
+using Content.Shared.Weapons.Melee.Events;
+using Robust.Shared.Containers;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -15,72 +22,70 @@ public abstract partial class SharedMartialArtsSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
+    [Dependency] private readonly AlertsSystem _alerts = default!;
 
-    public bool TryGrantMartialArt(EntityUid user, ProtoId<MartialArtPrototype> martialArt, bool overrideExisting = false, bool popups = true, MartialArtistComponent? artist = null)
+    private static readonly ProtoId<AlertPrototype> CooldownAlert = "MartialArtCooldown";
+
+    public override void Initialize()
     {
-        if (!Resolve(user, ref artist))
-            return false;
+        base.Initialize();
 
-        if (!CanHaveMartialArts(user))
-            return false;
+        SubscribeLocalEvent<MartialArtistComponent, DisarmAttackPerformedEvent>(OnDisarm);
+        SubscribeLocalEvent<MartialArtistComponent, LightAttackPerformedEvent>(OnHarm);
+        SubscribeLocalEvent<MartialArtistComponent, PullStartedMessage>(OnGrab);
 
-        if (!_prototype.TryIndex(martialArt, out var proto))
-            return false;
-
-        if (artist.MartialArt != null)
-        {
-            if (!overrideExisting)
-                return false;
-
-            RevokeMartialArt(user, popups, artist);
-        }
-
-        artist.MartialArt = martialArt;
-
-        // TODO: setup effects
-
-        if (popups)
-            _popup.PopupClient(Loc.GetString("martial-arts-granted-art", ("art", proto.Name)), user);
-
-        _adminLog.Add(LogType.Experience, LogImpact.Medium, $"{ToPrettyString(user):player} was granted with \"{proto.ID:martial art}\"");
-
-        return true;
+        SubscribeLocalEvent<MartialArtOnTriggerComponent, TriggerEvent>(OnTrigger);
+        SubscribeLocalEvent<MartialArtOnEquipComponent, GotEquippedEvent>(OnEquipped);
+        SubscribeLocalEvent<MartialArtOnEquipComponent, GotUnequippedEvent>(OnUnequipped);
+        SubscribeLocalEvent<MartialArtOnEquipComponent, ComponentShutdown>(OnShutdown);
     }
 
-    public void RevokeMartialArt(EntityUid user, bool popups = true, MartialArtistComponent? artist = null)
+    private void OnDisarm(EntityUid user, MartialArtistComponent artist, ref DisarmAttackPerformedEvent ev)
     {
-        if (!Resolve(user, ref artist))
+        if (ev.Target is not { } target)
             return;
 
         if (artist.MartialArt == null)
             return;
 
-        _prototype.TryIndex(artist.MartialArt, out var proto);
+        if (!CanBeAttackedWithMartialArts(target))
+            return;
 
-        artist.MartialArt = null;
-
-        // TODO: shutdown effects
-
-        if (popups)
-            _popup.PopupClient(Loc.GetString("martial-arts-revoked-art", ("art", proto?.Name ?? "martial-arts-unknown")), user);
-
-        _adminLog.Add(LogType.Experience, LogImpact.Medium, $"\"{proto?.ID:martial art}\" has been revoked for {ToPrettyString(user):player}");
+        PerformStep(user, target, CombatSequenceStep.Push, artist);
+        _color.RaiseEffect(Color.Aqua, new List<EntityUid> { target }, Filter.Pvs(user, entityManager: EntityManager));
     }
 
-    public bool HasMartialArt(EntityUid user, MartialArtistComponent? artist = null)
+    private void OnHarm(EntityUid user, MartialArtistComponent artist, ref LightAttackPerformedEvent ev)
     {
-        if (!Resolve(user, ref artist))
-            return false;
+        if (ev.Target is not { } target)
+            return;
 
-        return artist.MartialArt != null;
+        if (artist.MartialArt == null)
+            return;
+
+        if (!CanBeAttackedWithMartialArts(target))
+            return;
+
+        PerformStep(user, target, CombatSequenceStep.Harm, artist);
+        _color.RaiseEffect(Color.Red, new List<EntityUid> { target }, Filter.Pvs(user, entityManager: EntityManager));
     }
 
-    public bool CanHaveMartialArts(EntityUid user, MartialArtistComponent? artist = null)
+    private void OnGrab(EntityUid user, MartialArtistComponent artist, ref PullStartedMessage ev)
     {
-        if (!Resolve(user, ref artist))
-            return false;
+        // cuz this event is raised on both at the time
+        if (user != ev.PullerUid)
+            return;
 
-        return true;
+        if (artist.MartialArt == null)
+            return;
+
+        if (!CanBeAttackedWithMartialArts(ev.PulledUid))
+            return;
+
+        PerformStep(user, ev.PulledUid, CombatSequenceStep.Grab, artist);
+        _color.RaiseEffect(Color.Yellow, new List<EntityUid> { ev.PulledUid }, Filter.Pvs(user, entityManager: EntityManager));
     }
 
     /// <summary>
@@ -101,13 +106,27 @@ public abstract partial class SharedMartialArtsSystem : EntitySystem
         return artist.LastStepPerformedAt + artist.SequenceTimeout > _timing.CurTime;
     }
 
+    private bool IsInCooldown(EntityUid user, MartialArtistComponent? artist = null)
+    {
+        if (!Resolve(user, ref artist))
+            return false;
+
+        return _timing.CurTime < artist.LastSequencePerformedAt + artist.LastSequenceCooldown;
+    }
+
     public void PerformStep(EntityUid user, EntityUid target, CombatSequenceStep step, MartialArtistComponent? artist = null)
     {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
         Log.Info("PerformStep called");
         if (!Resolve(user, ref artist))
             return;
 
         if (artist.MartialArt is not { } martialArt)
+            return;
+
+        if (IsInCooldown(user, artist))
             return;
 
         Log.Info($"Performing step \"{step}\" for user ({user}) with target ({target})");
@@ -167,6 +186,13 @@ public abstract partial class SharedMartialArtsSystem : EntitySystem
         ResetSequence(user, artist);
 
         PerformSequenceEntry(user, target, artist, sequence.Entry, sequence);
+
+        _popup.PopupClient(Loc.GetString("martial-arts-performed-sequence", ("sequence", Loc.GetString(sequence.Name))), user);
+
+        artist.LastSequencePerformedAt = _timing.CurTime;
+        artist.LastSequenceCooldown = sequence.Cooldown;
+
+        _alerts.ShowAlert(user, CooldownAlert, null, (artist.LastSequencePerformedAt, artist.LastSequencePerformedAt + artist.LastSequenceCooldown), autoRemove: true);
     }
 
     private void PerformSequenceEntry(EntityUid user, EntityUid target, MartialArtistComponent artist, CombatSequenceEntry entry, CombatSequence sequence)
@@ -196,7 +222,9 @@ public abstract partial class SharedMartialArtsSystem : EntitySystem
         }
     }
 
-    /// Called when sequence breaks, due to misstep, not met condition or just timeout
+    /// <summary>
+    /// Called to clear current sequence state
+    /// </summary>
     private void ResetSequence(EntityUid user, MartialArtistComponent artist)
     {
         Log.Info($"Sequence reset for user ({user})");

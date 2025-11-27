@@ -2,7 +2,7 @@
 
 using Content.Shared.Damage;
 
-namespace Content.Shared.SS220.MartialArts.Effects;
+namespace Content.Shared.SS220.MartialArts.Sequence.Effects;
 
 public sealed partial class ApplyDamageCombatEffect : CombatSequenceEffect
 {

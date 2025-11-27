@@ -2,7 +2,7 @@
 
 using Content.Shared.Stunnable;
 
-namespace Content.Shared.SS220.MartialArts.Effects;
+namespace Content.Shared.SS220.MartialArts.Sequence.Effects;
 
 public sealed partial class StunTargetCombatEffect : CombatSequenceEffect
 {

@@ -20,6 +20,43 @@
   - type: MartialArtOnTrigger
     martialArt: CloseQuartersCombat
 
+- type: entity
+  parent: ClothingBeltSecurity
+  id: ClothingBeltCorporateJudo
+  name: Corporate Judo Belt
+  description: Teaches the wearer NT Corporate Judo.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Belt/judobelt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Belt/judobelt.rsi
+  - type: Storage
+    whitelist:
+      tags:
+      - CigPack
+      - Taser
+      - SecBeltEquip
+      - Radio
+      - Sidearm
+      - MagazinePistol
+      - MagazineMagnum
+      - CombatKnife
+      - Truncheon
+      - HandGrenade
+      components:
+      - FlashOnTrigger
+      - SmokeOnTrigger
+      - Flash
+      - Handcuff
+      - BallisticAmmoProvider
+      - CartridgeAmmo
+      - DoorRemote
+      - Whistle
+      - BalloonPopper
+      - ScatteringGrenade
+  - type: MartialArtOnEquip
+    martialArt: CorporateJudo
+
 # - type: entity
 #   parent: [ BaseItem, BaseSyndicateContraband ]
 #   id: SleepingCarpScroll

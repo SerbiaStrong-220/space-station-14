@@ -16,6 +16,9 @@ public partial struct CombatSequence
 
     [DataField(required: true)]
     public CombatSequenceEntry Entry = default!;
+
+    [DataField]
+    public TimeSpan Cooldown = TimeSpan.FromSeconds(3);
 }
 
 [DataDefinition]

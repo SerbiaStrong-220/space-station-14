@@ -2,7 +2,7 @@
 
 using Content.Shared.Standing;
 
-namespace Content.Shared.SS220.MartialArts.Conditions;
+namespace Content.Shared.SS220.MartialArts.Sequence.Conditions;
 
 public sealed partial class IsDownCombatCondition : CombatSequenceCondition
 {
