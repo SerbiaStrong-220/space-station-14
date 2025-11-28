@@ -32,10 +32,10 @@ ent-ClothingOuterHardsuitBrigmedic = скафандр бригмедика
 ent-ClothingOuterHardsuitWarden = скафандр смотрителя
     .suffix = СБ, служба безопасности
     .desc = Специальный костюм для борьбы с беспорядками, защищающий от опасной среды с низким давлением.
-##SS220 Quartermaster_Hardsuit_add begin
+# SS220 Quartermaster_Hardsuit_add begin
 ent-ClothingOuterHardsuitLuxury = элитный шахтёрский скафандр
     .desc = Отремонтированный шахтёрский скафандр, покрытый золотым напылением, чтобы подчеркнуть ваше благосостояние. Внутренняя часть скафандра дополнена графеновой подкладкой, что облегчила сам скафандр ценой его защитных свойств.
-##SS220 Quartermaster_Hardsuit_add end
+# SS220 Quartermaster_Hardsuit_add end
 ent-ClothingOuterHardsuitSyndie = кроваво-красный скафандр
     .suffix = Ядерный Оперативник
     .desc = Тяжелобронированный скафандр, предназначенный для специальных операций. Собственность Мародёров Горлекса.

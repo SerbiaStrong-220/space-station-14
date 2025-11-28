@@ -166,7 +166,7 @@
   parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
   id: ClothingHeadHelmetHardsuitQuartermaster
   name: quartermaster hardsuit helmet
-  description: A special helmet designed for work in a hazardous, low pressure environment. Has reinforced plating for wildlife encounters and dual floodlights.
+  description: A prototype of a special helmet for the Quartermaster to perform his duties in hazardous and low-pressure environments.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Head/Hardsuits/quartermaster.rsi
