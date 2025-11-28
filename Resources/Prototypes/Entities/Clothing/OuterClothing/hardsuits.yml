@@ -629,7 +629,7 @@
     #SS220 Quartermaster_Hardsuit_add end
     # SS220 add stamina resistance begin
   - type: StaminaResistance
-    damageCoefficient: 0.2
+    damageCoefficient: 0.8
   # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
     walkModifier: 0.9
