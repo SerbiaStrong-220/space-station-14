@@ -68,7 +68,6 @@ public sealed partial class MartialArtsSystem : EntitySystem
     {
         if (artist.CurrentSteps.Count > 0 && !CheckSequenceTimeout(artist))
         {
-            Log.Info($"Sequence of user ({user}) timed out");
             ResetSequence(user, artist);
         }
     }
@@ -78,7 +77,6 @@ public sealed partial class MartialArtsSystem : EntitySystem
         if (!_timing.IsFirstTimePredicted)
             return;
 
-        Log.Info("PerformStep called");
         if (!Resolve(user, ref artist))
             return;
 
@@ -88,7 +86,6 @@ public sealed partial class MartialArtsSystem : EntitySystem
         if (!CanAttack(user, artist))
             return;
 
-        Log.Info($"Performing step \"{step}\" for user ({user}) with target ({target})");
         RefreshSequence(user, artist);
 
         var sequences = GetSequences(martialArt);
@@ -97,15 +94,12 @@ public sealed partial class MartialArtsSystem : EntitySystem
 
         if (!TryGetSequence(artist.CurrentSteps, sequences, out var sequence, out var complete))
         {
-            Log.Info($"Failed to get sequence for user ({user})");
             ResetSequence(user, artist);
             return;
         }
 
         if (complete)
         {
-            Log.Info($"Sequence \"{Loc.GetString(sequence.Value.Name)}\" completed, performing checks and complition");
-
             PerformSequence(user, target, artist, sequence.Value);
         }
     }
@@ -240,14 +234,12 @@ public sealed partial class MartialArtsSystem : EntitySystem
         {
             if (!condition.Execute(user, target, artist) ^ condition.Invert)
             {
-                Log.Info($"Conditions check failed for \"{Loc.GetString(sequence.Name)}\"");
                 ResetSequence(user, artist);
                 return;
             }
         }
 
         // effects
-        Log.Info($"Performing effects of sequence \"{Loc.GetString(sequence.Name)}\"");
         foreach (var effect in entry.Effects)
         {
             effect.Execute(user, target, artist);
@@ -265,7 +257,6 @@ public sealed partial class MartialArtsSystem : EntitySystem
     /// </summary>
     private void ResetSequence(EntityUid user, MartialArtistComponent artist)
     {
-        Log.Info($"Sequence reset for user ({user})");
         artist.CurrentSteps = [];
         artist.LastStepPerformedAt = TimeSpan.Zero;
         Dirty(user, artist);

@@ -1,6 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Whitelist;
@@ -27,12 +26,8 @@ public sealed partial class WeaponRestrictionMartialArtEffectSystem : BaseMartia
         if (!TryEffect(uid, out var effect))
             return;
 
-        Log.Info("Got attempt attack event");
-
         if ((effect.Whitelist == null || _whitelist.IsWhitelistPass(effect.Whitelist, ev.Weapon)) && (effect.Blacklist == null || _whitelist.IsWhitelistFail(effect.Blacklist, ev.Weapon)))
             return;
-
-        Log.Info("Whitelist and blacklist pass");
 
         _popup.PopupClient(Loc.GetString("martial-art-effects-weapon-restriction-popup"), uid, uid);
 
