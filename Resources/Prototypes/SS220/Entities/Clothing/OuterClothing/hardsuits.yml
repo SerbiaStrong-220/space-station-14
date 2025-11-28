@@ -401,7 +401,7 @@
   description: A special suit that protects against hazardous, low pressure environments. Has reinforced plating for wildlife encounters.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/quatermaster.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/quartermaster.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Hardsuits/quartermaster.rsi
     #   outerClothing:
