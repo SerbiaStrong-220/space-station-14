@@ -83,16 +83,3 @@ public sealed partial class MartialArtEffectShutdownEvent<TEffect> : EntityEvent
         Effect = effect;
     }
 }
-
-// mainly needed just to be able to subscribe the same event multiple times from different systems 
-// public sealed partial class MartialArtEffectRelayEvent<T, TEffect> : EntityEventArgs where TEffect : BaseMartialArtEffect
-// {
-//     public T Event;
-//     public TEffect Effect;
-
-//     public MartialArtEffectRelayEvent(T ev, TEffect effect)
-//     {
-//         Event = ev;
-//         Effect = effect;
-//     }
-// }

@@ -7,33 +7,6 @@ namespace Content.Shared.SS220.MartialArts;
 
 public sealed partial class MartialArtsSystem
 {
-    // private void InitializeEffectsRelay()
-    // {
-    //     SubscribeLocalEvent<MartialArtistComponent, AttackAttemptEvent>(HandleRelay);
-    // }
-
-    // private void HandleRelay<T>(EntityUid user, MartialArtistComponent artist, ref T ev)
-    // {
-    //     Log.Info($"Received relay {ev} event");
-
-    //     var effects = GetMartialArtEffects(user, artist);
-
-    //     foreach (var effect in effects)
-    //     {
-    //         RaiseRelayEvent(user, ref ev, effect);
-    //     }
-    // }
-
-    // private void RaiseRelayEvent<T, TEffect>(EntityUid user, ref T ev, TEffect effect) where TEffect : BaseMartialArtEffect
-    // {
-    //     Log.Info($"Raise relayed event {ev} for effect {effect}");
-
-    //     var relayEvent = new MartialArtEffectRelayEvent<T, TEffect>(ev, effect);
-    //     RaiseLocalEvent(user, relayEvent);
-
-    //     ev = relayEvent.Event;
-    // }
-
     private void StartupEffects(EntityUid user, MartialArtPrototype martialArt)
     {
         foreach (var effect in martialArt.Effects)
