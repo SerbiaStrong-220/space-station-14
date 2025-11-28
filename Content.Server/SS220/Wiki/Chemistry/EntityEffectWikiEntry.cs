@@ -26,11 +26,11 @@ public sealed class EntityEffectWikiEntry
 
     public static string GetEntityEffectWikiDescription(EntityEffect effect, IPrototypeManager protoMng, IEntitySystemManager entSysMng)
     {
-        if (effect.EntityEffectGuidebookText(protoMng, entSysMng) is not { } description)
+        if (effect.EntityEffectGuidebookText(protoMng, entSysMng) is not { } effectDesc)
             return string.Empty;
 
-        description = Loc.GetString("wiki-entity-effect-description",
-            ("effect", description),
+        var fullDesc = Loc.GetString("wiki-entity-effect-description",
+            ("effect", effectDesc),
             ("chance", effect.Probability),
             ("conditionCount", effect.Conditions?.Length ?? 0),
             ("conditions",
@@ -38,7 +38,7 @@ public sealed class EntityEffectWikiEntry
                     effect.Conditions?.Select(x => x.EntityConditionGuidebookText(protoMng)).ToList() ?? []
                 )));
 
-        return GuidebookEffectDescriptionToWiki(description);
+        return GuidebookEffectDescriptionToWiki(fullDesc);
     }
 
     private static string GuidebookEffectDescriptionToWiki(string guideBookText)
