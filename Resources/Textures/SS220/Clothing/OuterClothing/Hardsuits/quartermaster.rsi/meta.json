@@ -11,6 +11,14 @@
       "name": "icon"
     },
     {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
       "name": "equipped-OUTERCLOTHING",
       "directions": 4
     },
@@ -24,14 +32,6 @@
     },
     {
       "name": "equipped-OUTERCLOTHING-reptilian",
-      "directions": 4
-    },
-    {
-      "name": "inhand-left",
-      "directions": 4
-    },
-    {
-      "name": "inhand-right",
       "directions": 4
     }
   ]
