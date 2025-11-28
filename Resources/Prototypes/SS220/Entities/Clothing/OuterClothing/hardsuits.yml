@@ -338,13 +338,13 @@
         Slash: 0.35
         Piercing: 0.25
         Heat: 0.3
-        Radiation: 0.1  
+        Radiation: 0.1
         Caustic: 0.4
   - type: StaminaResistance
     damageCoefficient: 0.1
   - type: ClothingSpeedModifier
-    walkModifier: 1 
-    sprintModifier: 1 
+    walkModifier: 1
+    sprintModifier: 1
 
 #ERT Medic Gamma Hardsuit
 - type: entity
@@ -361,7 +361,7 @@
         Slash: 0.4
         Piercing: 0.4
         Heat: 0.35
-        Radiation: 0.1  
+        Radiation: 0.1
         Caustic: 0.5
   - type: StaminaResistance
     damageCoefficient: 0.1
@@ -385,10 +385,52 @@
         Slash: 0.4
         Piercing: 0.3
         Heat: 0.35
-        Radiation: 0.1  
+        Radiation: 0.1
         Caustic: 0.5
   - type: StaminaResistance
     damageCoefficient: 0.1
   - type: ClothingSpeedModifier
     walkModifier: 0.9
     sprintModifier: 0.9
+
+#Quartermaster Hardsuit
+- type: entity
+  parent: [ClothingOuterHardsuitBase]
+  id: ClothingOuterHardsuitQuartermaster
+  name: quartermaster hardsuit
+  description: A special suit that protects against hazardous, low pressure environments. Has reinforced plating for wildlife encounters.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/quatermaster.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/quartermaster.rsi
+    #   outerClothing:
+    #   - state: equipped-OUTERCLOTHING
+    #   - state: equipped-OUTERCLOTHING-unshaded
+    #     shader: unshaded
+  - type: PressureProtection
+    highPressureMultiplier: 0.5
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.75
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.8
+        Slash: 0.75
+        Piercing: 0.8
+        Heat: 0.8
+        Radiation: 0.7
+        Caustic: 0.8
+  - type: StaminaResistance
+    damageCoefficient: 0.75
+  - type: ClothingSpeedModifier
+    walkModifier: 0.95
+    sprintModifier: 0.9
+  - type: HeldSpeedModifier
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitQuartermaster
+  - type: Tag
+    tags:
+    - Hardsuit
+    - WhitelistChameleon
