@@ -8,7 +8,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.MartialArts;
 
-public abstract partial class SharedMartialArtsSystem
+public sealed partial class MartialArtsSystem
 {
     private void OnTrigger(EntityUid uid, MartialArtOnTriggerComponent comp, TriggerEvent ev)
     {
@@ -93,7 +93,7 @@ public abstract partial class SharedMartialArtsSystem
 
         artist.MartialArt = martialArt;
 
-        // TODO: setup effects
+        StartupEffects(user, proto);
 
         if (popups)
             _popup.PopupClient(Loc.GetString("martial-arts-granted-art", ("art", Loc.GetString(proto.Name))), user, user);
@@ -115,7 +115,8 @@ public abstract partial class SharedMartialArtsSystem
 
         artist.MartialArt = null;
 
-        // TODO: shutdown effects
+        if (proto != null)
+            ShutdownEffects(user, proto);
 
         if (popups)
             _popup.PopupClient(Loc.GetString("martial-arts-revoked-art", ("art", Loc.GetString(proto?.Name ?? "martial-arts-unknown"))), user, user);

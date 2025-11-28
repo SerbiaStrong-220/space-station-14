@@ -6,7 +6,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.MartialArts;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, Access(typeof(SharedMartialArtsSystem))]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, Access(typeof(MartialArtsSystem))]
 public sealed partial class MartialArtistComponent : Component
 {
     [DataField, ViewVariables(VVAccess.ReadWrite)]

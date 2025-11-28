@@ -436,6 +436,22 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         DirtyField(weaponUid, weapon, nameof(MeleeWeaponComponent.NextAttack));
 
         // Do this AFTER attack so it doesn't spam every tick
+
+        // SS220-Extend Weapon Logic-Start
+        var userEv = new AttemptMeleeUserEvent(weaponUid);
+        RaiseLocalEvent(user, ref userEv);
+
+        if (userEv.Cancelled)
+        {
+            if (userEv.Message != null)
+            {
+                PopupSystem.PopupClient(userEv.Message, weaponUid, user);
+            }
+
+            return false;
+        }
+        // SS220-Extend Weapon Logic-End
+
         var ev = new AttemptMeleeEvent();
         RaiseLocalEvent(weaponUid, ref ev);
 

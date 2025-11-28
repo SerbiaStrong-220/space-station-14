@@ -1,6 +1,11 @@
 - type: martialArt
   id: CorporateJudo
   name: martial-art-judo
+  effects:
+  - !type:WeaponRestrictionMartialArtEffect
+    blacklist:
+      components:
+      - Stunbaton
   sequences:
   - name: martial-art-judo-discombobulate
     steps: [ Push, Grab ]

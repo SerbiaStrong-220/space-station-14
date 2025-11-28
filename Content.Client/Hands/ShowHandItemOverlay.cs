@@ -1,7 +1,7 @@
 using System.Numerics;
 using Content.Client.Hands.Systems;
-using Content.Client.SS220.MartialArts;
 using Content.Shared.CCVar;
+using Content.Shared.SS220.MartialArts;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;

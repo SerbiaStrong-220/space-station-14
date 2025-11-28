@@ -1,12 +1,15 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Alert;
 using Content.Shared.Effects;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Popups;
+using Content.Shared.SS220.MartialArts.Effects;
 using Content.Shared.Trigger;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Containers;
@@ -16,7 +19,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.MartialArts;
 
-public abstract partial class SharedMartialArtsSystem : EntitySystem
+public sealed partial class MartialArtsSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -25,6 +28,7 @@ public abstract partial class SharedMartialArtsSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
     [Dependency] private readonly AlertsSystem _alerts = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
 
     private static readonly ProtoId<AlertPrototype> CooldownAlert = "MartialArtCooldown";
 
@@ -40,6 +44,104 @@ public abstract partial class SharedMartialArtsSystem : EntitySystem
         SubscribeLocalEvent<MartialArtOnEquipComponent, GotEquippedEvent>(OnEquipped);
         SubscribeLocalEvent<MartialArtOnEquipComponent, GotUnequippedEvent>(OnUnequipped);
         SubscribeLocalEvent<MartialArtOnEquipComponent, ComponentShutdown>(OnShutdown);
+
+        // InitializeEffectsRelay();
+    }
+
+    #region Public API
+
+    public List<BaseMartialArtEffect> GetMartialArtEffects(EntityUid user, MartialArtistComponent? artist = null)
+    {
+        if (!Resolve(user, ref artist))
+            return [];
+
+        if (!_prototype.TryIndex(artist.MartialArt, out var martialArt))
+            return [];
+
+        return martialArt.Effects.ToList();
+    }
+
+    /// <summary>
+    /// Checks current combo for timeout and breaks it if combo timed out
+    /// </summary>
+    public void RefreshSequence(EntityUid user, MartialArtistComponent artist)
+    {
+        if (artist.CurrentSteps.Count > 0 && !CheckSequenceTimeout(artist))
+        {
+            Log.Info($"Sequence of user ({user}) timed out");
+            ResetSequence(user, artist);
+        }
+    }
+
+    public void PerformStep(EntityUid user, EntityUid target, CombatSequenceStep step, MartialArtistComponent? artist = null)
+    {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
+        Log.Info("PerformStep called");
+        if (!Resolve(user, ref artist))
+            return;
+
+        if (artist.MartialArt is not { } martialArt)
+            return;
+
+        if (!CanAttack(user, artist))
+            return;
+
+        Log.Info($"Performing step \"{step}\" for user ({user}) with target ({target})");
+        RefreshSequence(user, artist);
+
+        var sequences = GetSequences(martialArt);
+
+        AddStep(user, artist, step);
+
+        if (!TryGetSequence(artist.CurrentSteps, sequences, out var sequence, out var complete))
+        {
+            Log.Info($"Failed to get sequence for user ({user})");
+            ResetSequence(user, artist);
+            return;
+        }
+
+        if (complete)
+        {
+            Log.Info($"Sequence \"{Loc.GetString(sequence.Value.Name)}\" completed, performing checks and complition");
+
+            PerformSequence(user, target, artist, sequence.Value);
+        }
+    }
+
+    public bool CanBeAttackedWithMartialArts(EntityUid target)
+    {
+        return HasComp<MartialArtsTargetComponent>(target);
+    }
+
+    public List<CombatSequenceStep> GetPerformedSteps(EntityUid artist)
+    {
+        if (!TryComp<MartialArtistComponent>(artist, out var comp))
+            return [];
+
+        if (!CheckSequenceTimeout(comp))
+            return [];
+
+        return comp.CurrentSteps;
+    }
+
+    #endregion
+
+    #region Private API
+
+    private bool CanAttack(EntityUid user, MartialArtistComponent? artist = null)
+    {
+        if (!Resolve(user, ref artist))
+            return false;
+
+        if (!_hands.ActiveHandIsEmpty(user))
+            return false;
+
+        if (IsInCooldown(user, artist))
+            return false;
+
+        return true;
     }
 
     private void OnDisarm(EntityUid user, MartialArtistComponent artist, ref DisarmAttackPerformedEvent ev)
@@ -88,18 +190,6 @@ public abstract partial class SharedMartialArtsSystem : EntitySystem
         _color.RaiseEffect(Color.Yellow, new List<EntityUid> { ev.PulledUid }, Filter.Pvs(user, entityManager: EntityManager));
     }
 
-    /// <summary>
-    /// Checks current combo for timeout and breaks it if combo timed out
-    /// </summary>
-    public void RefreshSequence(EntityUid user, MartialArtistComponent artist)
-    {
-        if (artist.CurrentSteps.Count > 0 && !CheckSequenceTimeout(artist))
-        {
-            Log.Info($"Sequence of user ({user}) timed out");
-            ResetSequence(user, artist);
-        }
-    }
-
     /// <returns>true for valid sequence and false for timed out</returns>
     private bool CheckSequenceTimeout(MartialArtistComponent artist)
     {
@@ -114,64 +204,12 @@ public abstract partial class SharedMartialArtsSystem : EntitySystem
         return _timing.CurTime < artist.LastSequencePerformedAt + artist.LastSequenceCooldown;
     }
 
-    public void PerformStep(EntityUid user, EntityUid target, CombatSequenceStep step, MartialArtistComponent? artist = null)
-    {
-        if (!_timing.IsFirstTimePredicted)
-            return;
-
-        Log.Info("PerformStep called");
-        if (!Resolve(user, ref artist))
-            return;
-
-        if (artist.MartialArt is not { } martialArt)
-            return;
-
-        if (IsInCooldown(user, artist))
-            return;
-
-        Log.Info($"Performing step \"{step}\" for user ({user}) with target ({target})");
-        RefreshSequence(user, artist);
-
-        var sequences = GetSequences(martialArt);
-
-        AddStep(user, artist, step);
-
-        if (!TryGetSequence(artist.CurrentSteps, sequences, out var sequence, out var complete))
-        {
-            Log.Info($"Failed to get sequence for user ({user})");
-            ResetSequence(user, artist);
-            return;
-        }
-
-        if (complete)
-        {
-            Log.Info($"Sequence \"{Loc.GetString(sequence.Value.Name)}\" completed, performing checks and complition");
-
-            PerformSequence(user, target, artist, sequence.Value);
-        }
-    }
-
-    public bool CanBeAttackedWithMartialArts(EntityUid target)
-    {
-        return HasComp<MartialArtsTargetComponent>(target);
-    }
-
-    public List<CombatSequenceStep> GetPerformedSteps(EntityUid artist)
-    {
-        if (!TryComp<MartialArtistComponent>(artist, out var comp))
-            return [];
-
-        if (!CheckSequenceTimeout(comp))
-            return [];
-
-        return comp.CurrentSteps;
-    }
-
     private List<CombatSequence> GetSequences(ProtoId<MartialArtPrototype> martialArt)
     {
         if (!_prototype.TryIndex(martialArt, out var proto))
             return [];
-        return proto.Sequences;
+
+        return proto.Sequences.ToList();
     }
 
     private void AddStep(EntityUid user, MartialArtistComponent artist, CombatSequenceStep step)
@@ -276,4 +314,6 @@ public abstract partial class SharedMartialArtsSystem : EntitySystem
 
         return false;
     }
+
+    #endregion
 }
