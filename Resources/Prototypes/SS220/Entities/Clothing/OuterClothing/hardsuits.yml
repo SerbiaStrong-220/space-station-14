@@ -398,7 +398,7 @@
   parent: [ClothingOuterHardsuitBase]
   id: ClothingOuterHardsuitQuartermaster
   name: quartermaster hardsuit
-  description: A special suit that protects against hazardous, low pressure environments. Has reinforced plating for wildlife encounters.
+  description: Prototype of a new hardsuit for the Quartermaster, so that he can perform his duties in a dangerous environment.
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Hardsuits/quartermaster.rsi

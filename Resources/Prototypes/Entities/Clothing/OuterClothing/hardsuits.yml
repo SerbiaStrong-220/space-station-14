@@ -597,7 +597,7 @@
   parent: ClothingOuterHardsuitBase
   id: ClothingOuterHardsuitLuxury #DO NOT MAP - https://github.com/space-wizards/space-station-14/pull/19738#issuecomment-1703486738
   name: luxury mining hardsuit
-  description: A refurbished miner's spacesuit, covered with gold dusting to emphasize your well-being. The inside of the suit is complemented by a graphene lining, which has lightened the suit itself at the cost of its protective properties. #SS220 Quartermaster_Hardsuit_add
+  description: A refurbished miner's hardsuit, covered with gold dusting to emphasize your worthiness. The inside of the suit is complemented by a graphene lining, which has lightened the suit itself at the cost of its protective properties. #SS220 Quartermaster_Hardsuit_add
   categories: [ DoNotMap ]
   components:
   - type: Sprite

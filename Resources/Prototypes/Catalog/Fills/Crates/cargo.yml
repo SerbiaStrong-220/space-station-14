@@ -2,7 +2,7 @@
   id: CrateCargoLuxuryHardsuit
   parent: CratePirate
   name: luxury mining hardsuit crate
-  description: Finally, a hardsuit Quartermasters could call their own. Centcomm has heard you, now stop asking.
+  description: A hardsuit that will emphasize your worthiness against the rest. #SS220 Quartermaster_Hardsuit_add
   components:
   - type: StorageFill
     contents:
