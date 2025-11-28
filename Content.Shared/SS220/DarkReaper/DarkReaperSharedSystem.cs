@@ -560,7 +560,12 @@ public abstract class SharedDarkReaperSystem : EntitySystem
 
         // Get everthing that was consumed out before deleting
         if (_container.TryGetContainer(ent, DarkReaperComponent.ConsumedContainerId, out var container))
+        {
+            foreach (var consumed in container.ContainedEntities)
+                SetPaused(consumed, false);
+
             _container.EmptyContainer(container);
+        }
 
         // Make it blow up on pieces after deth
         var gibPoolAsArray = ent.Comp.SpawnOnDeathPool.ToArray();

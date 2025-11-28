@@ -1,14 +1,16 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Atmos.Components;
+using Content.Server.Damage.Components;
 using Content.Server.Stunnable;
 using Content.Server.Temperature.Systems;
-using Content.Server.Damage.Components;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Alert;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Damage;
 using Content.Shared.Database;
+using Content.Shared.FixedPoint;
+using Content.Shared.Hands;
 using Content.Shared.IgnitionSource;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
@@ -16,22 +18,21 @@ using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Rejuvenate;
+using Content.Shared.SS220.Input;
 using Content.Shared.Temperature;
+using Content.Shared.Temperature.Components;
 using Content.Shared.Throwing;
 using Content.Shared.Timing;
 using Content.Shared.Toggleable;
 using Content.Shared.Weapons.Melee.Events;
-using Content.Shared.FixedPoint;
-using Content.Shared.Hands;
-using Content.Shared.Temperature.Components;
 using Robust.Server.Audio;
+using Robust.Shared.Input.Binding;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Random;
-using Robust.Shared.Input.Binding;
-using Content.Shared.SS220.Input;
 using Robust.Shared.Player;
+using Robust.Shared.Random;
+using YamlDotNet.Core;
 
 namespace Content.Server.Atmos.EntitySystems
 {
@@ -136,7 +137,11 @@ namespace Content.Server.Atmos.EntitySystems
                 return;
             }
 
-            flammable.FireStacks += component.FireStacks;
+            // SS220 Fix mob damage inside Dark Reaper begin
+            //flammable.FireStacks += component.FireStacks;
+
+            AdjustFireStacks(uid, component.FireStacks, flammable);
+            // SS220 Fix mob damage inside Dark Reaper end
             Ignite(otherEnt, uid, flammable);
             component.Count--;
 
@@ -314,6 +319,11 @@ namespace Content.Server.Atmos.EntitySystems
 
         public void SetFireStacks(EntityUid uid, float stacks, FlammableComponent? flammable = null, bool ignite = false)
         {
+            // SS220 Fix mob damage inside Dark Reaper begin
+            if (IsPaused(uid))
+                return;
+            // SS220 Fix mob damage inside Dark Reaper end
+
             if (!Resolve(uid, ref flammable))
                 return;
 
@@ -353,6 +363,11 @@ namespace Content.Server.Atmos.EntitySystems
         public void Ignite(EntityUid uid, EntityUid ignitionSource, FlammableComponent? flammable = null,
             EntityUid? ignitionSourceUser = null)
         {
+            // SS220 Fix mob damage inside Dark Reaper begin
+            if (IsPaused(uid))
+                return;
+            // SS220 Fix mob damage inside Dark Reaper end
+
             if (!Resolve(uid, ref flammable))
                 return;
 
