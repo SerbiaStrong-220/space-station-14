@@ -615,7 +615,6 @@
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
     #SS220 Quartermaster_Hardsuit_add start
-  categories: [ DoNotMap ]
   - type: ExplosionResistance
     damageCoefficient: 0.8
   - type: Armor
@@ -628,7 +627,6 @@
         Radiation: 0.5
         Caustic: 0.8
     #SS220 Quartermaster_Hardsuit_add end
-  categories: [ DoNotMap ]
     # SS220 add stamina resistance begin
   - type: StaminaResistance
     damageCoefficient: 0.2
