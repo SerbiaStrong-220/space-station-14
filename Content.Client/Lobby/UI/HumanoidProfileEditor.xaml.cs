@@ -467,7 +467,7 @@ namespace Content.Client.Lobby.UI
 
             foreach (var writeSize in Enum.GetValues<PenWriteSize>())
             {
-                BrushWriteSizesList.AddItem(Loc.GetString("pen-brush-write-" + writeSize), metadata: (int)writeSize);
+                BrushWriteSizesList.AddItem(Loc.GetString($"pen-brush-write-{writeSize}"), metadata: (int)writeSize);
             }
 
             BrushWriteSizesList.OnItemSelected += args =>
@@ -478,7 +478,7 @@ namespace Content.Client.Lobby.UI
 
             foreach (var eraseSize in Enum.GetValues<PenEraseSize>())
             {
-                BrushEraseSizesList.AddItem(Loc.GetString("pen-brush-write-" + eraseSize), metadata: (int)eraseSize);
+                BrushEraseSizesList.AddItem(Loc.GetString($"pen-brush-write-{eraseSize}"), metadata: (int)eraseSize);
             }
 
             BrushEraseSizesList.OnItemSelected += args =>
