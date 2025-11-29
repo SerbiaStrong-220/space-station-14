@@ -76,16 +76,11 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (!entity.Comp.StudyingProgress.ContainsKey(skillTree))
             entity.Comp.StudyingProgress.Add(skillTree, StartLearningProgress);
 
-        var result = entity.Comp.StudyingProgress[skillTree] + delta;
-        if (result >= EndLearningProgress)
-        {
-            InternalProgressSublevel(entity!, skillTree);
-            return true;
-        }
+        entity.Comp.StudyingProgress[skillTree] += delta;
 
+        TryProgressSublevel(entity!, skillTree);
         TryProgressLevel(entity!, skillTree);
 
-        entity.Comp.StudyingProgress[skillTree] = FixedPoint4.Clamp(result, StartLearningProgress, EndLearningProgress);
         DirtyField(entity, nameof(ExperienceComponent.StudyingProgress));
         return true;
     }

@@ -30,8 +30,10 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
     private Color _unavailableLevelColor = Color.Red;
     private Color _gainedLevelColor = Color.Green;
 
-    private ShaderInstance _fillingShaderInstance;
-    private readonly ProtoId<ShaderPrototype> _fillingShaderProto = "CircleMask";
+    private ShaderInstance _subLevelFillingShaderInstance;
+    private ShaderInstance _levelFillingShaderInstance;
+
+    private readonly ProtoId<ShaderPrototype> _fillingShaderProto = "HorizontalSpriteFill";
 
     // general info
     private int _numberOfSublevels;
@@ -53,7 +55,8 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
 
-        _fillingShaderInstance = _prototype.Index(_fillingShaderProto).InstanceUnique();
+        _subLevelFillingShaderInstance = _prototype.Index(_fillingShaderProto).InstanceUnique();
+        _levelFillingShaderInstance = _prototype.Index(_fillingShaderProto).InstanceUnique();
 
         Margin = ExperienceUiStyleDefinitions.BaseTabLikeThickness;
 
@@ -94,7 +97,7 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
             else if (i > resultLevel)
                 TreeLevelsContainer.AddChild(GetVisualRect(0f, 1f, 0f, color));
             else
-                TreeLevelsContainer.AddChild(GetVisualRect((float)(_currentSubLevel / _numberOfSublevels), 1f, 0f, color));
+                TreeLevelsContainer.AddChild(GetVisualRect(_currentSubLevel, _numberOfSublevels, 0f, color, _levelFillingShaderInstance));
         }
 
         SublevelsContainer.RemoveAllChildren();
@@ -105,7 +108,7 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
             else if (i > _currentSubLevel)
                 SublevelsContainer.AddChild(GetExperienceSublevelVisualRect(ExperienceSystem.StartLearningProgress));
             else
-                SublevelsContainer.AddChild(GetExperienceSublevelVisualRect(_progress));
+                SublevelsContainer.AddChild(GetExperienceSublevelVisualRect(_progress, shader: _subLevelFillingShaderInstance));
         }
 
         SubmitButton.Visible = _haveFreePoints;
@@ -114,8 +117,6 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
     public void SetProgressAndUpdate(FixedPoint4 progress)
     {
         _progress = progress;
-        var normedParameter = (progress - ExperienceSystem.StartLearningProgress) / (ExperienceSystem.EndLearningProgress - ExperienceSystem.StartLearningProgress);
-        _fillingShaderInstance.SetParameter("CircleMult", normedParameter.Float());
 
         Update();
     }
@@ -181,12 +182,12 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
         return ExperienceUiStyleDefinitions.RichExperienceTooltip(hover);
     }
 
-    private TextureRect GetExperienceSublevelVisualRect(FixedPoint4 fillingRatio)
+    private TextureRect GetExperienceSublevelVisualRect(FixedPoint4 fillingRatio, Color? color = null, in ShaderInstance? shader = null)
     {
-        return GetVisualRect(fillingRatio, ExperienceSystem.EndLearningProgress, ExperienceSystem.StartLearningProgress);
+        return GetVisualRect(fillingRatio.Float(), ExperienceSystem.EndLearningProgress.Float(), ExperienceSystem.StartLearningProgress.Float(), color, shader);
     }
 
-    private TextureRect GetVisualRect(FixedPoint4 fillingRatio, FixedPoint4 endValue, FixedPoint4 firstValue, Color? color = null)
+    private TextureRect GetVisualRect(float fillingRatio, float endValue, float firstValue, Color? color = null, in ShaderInstance? shader = null)
     {
         var control = new TextureRect();
 
@@ -206,8 +207,17 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
             return control;
         }
 
+        var background = new TextureRect
+        {
+            TexturePath = _emptyBarResPath.CanonPath,
+            HorizontalAlignment = HAlignment.Center,
+            VerticalAlignment = VAlignment.Center
+        };
+
+        control.AddChild(background);
+        shader?.SetParameter("Fillness", (fillingRatio + firstValue) / (endValue - firstValue));
+        control.ShaderOverride = shader;
         control.TexturePath = _fullBarResPath.CanonPath;
-        control.ShaderOverride = _fillingShaderInstance;
 
         return control;
     }

@@ -47,10 +47,6 @@ public sealed class ExperienceInfoSystem : EntitySystem
 
         data.SkillDictionary = GetPlayerSkillData(entity.Value);
 
-        if (data.SkillDictionary is not null)
-            Log.Info(string.Join('#', data.SkillDictionary.Select(x => $"{x.Key}: {string.Join('|', x.Value.Select(x => x.Item2.Info.ToString()))}")));
-
-
         if (_experience.TryGetEntityKnowledge(entity.Value, ref _knowledges))
             data.Knowledges = [.. _knowledges];
 

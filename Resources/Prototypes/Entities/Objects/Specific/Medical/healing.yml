@@ -12,7 +12,7 @@
   - type: LearningOnDoAfterEndWith
     progress:
       Medicine:
-        baseLearning: 1
+        baseLearning: 0.2
         maxProgress: 1
   # Inherited
   - type: StaticPrice

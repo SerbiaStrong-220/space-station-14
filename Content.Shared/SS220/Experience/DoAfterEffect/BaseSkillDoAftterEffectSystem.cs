@@ -18,7 +18,7 @@ public abstract partial class BaseSkillDoAfterEffectSystem<T1, T2> : EntitySyste
                                                                                     where T2 : DoAfterEvent
 {
     [Dependency] protected readonly ExperienceSystem Experience = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public readonly Color FasterDoAfterBarColor = Color.FromHex("#ffd726ff");
@@ -103,7 +103,7 @@ public abstract partial class BaseSkillDoAfterEffectSystem<T1, T2> : EntitySyste
     protected virtual void OnDoAfterEnd(Entity<T1> entity, ref DoAfterBeforeComplete args)
     {
         // TODO: Once we have predicted randomness delete this for something sane...
-        var seed = SharedRandomExtensions.HashCodeCombine(new() { (int)_timing.CurTick.Value, GetNetEntity(entity).Id, GetNetEntity(args.Args.User).Id });
+        var seed = SharedRandomExtensions.HashCodeCombine(new() { (int)_gameTiming.CurTick.Value, GetNetEntity(entity).Id, GetNetEntity(args.Args.User).Id });
         var rand = new System.Random(seed);
 
         if (!rand.Prob(entity.Comp.FailureChance))

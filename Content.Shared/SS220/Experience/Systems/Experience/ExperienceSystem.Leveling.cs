@@ -2,6 +2,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Database;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
