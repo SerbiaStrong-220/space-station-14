@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
-  "copyright": "sprite by creamy (Discord) for SS220",
+  "copyright": "sprite by creamy for SS220",
   "size": {
     "x": 32,
     "y": 32
@@ -11,15 +11,19 @@
       "name": "icon"
     },
     {
-      "name": "equipped-INNERCLOTHING",
+      "name": "equipped-MASK",
       "directions": 4
     },
     {
-      "name": "folded-equipped-INNERCLOTHING",
+      "name": "equipped-MASK-hamlet",
       "directions": 4
     },
     {
-      "name": "equipped-INNERCLOTHING-monkey",
+      "name": "equipped-MASK-reptilian",
+      "directions": 4
+    },
+    {
+      "name": "equipped-MASK-vox",
       "directions": 4
     },
     {
