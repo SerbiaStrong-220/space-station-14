@@ -10,11 +10,14 @@ using Content.Client.UserInterface.Systems.MenuBar.Widgets;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Utility;
 using Robust.Client.UserInterface;
+using Robust.Client.Player;
 
 namespace Content.Client.SS220.Experience;
 
 public sealed class ExperienceViewerUIController : UIController, IOnStateEntered<GameplayState>, IOnStateExited<GameplayState>, IOnSystemChanged<ExperienceInfoSystem>
 {
+    [Dependency] private readonly IPlayerManager _player = default!;
+
     [UISystemDependency] private readonly ExperienceInfoSystem _experienceInfo = default!;
 
     private ExperienceViewWindow? _window;
@@ -56,13 +59,13 @@ public sealed class ExperienceViewerUIController : UIController, IOnStateEntered
     public void OnSystemLoaded(ExperienceInfoSystem system)
     {
         system.OnExperienceUpdated += ExperienceUpdated;
-        // _player.LocalPlayerDetached += CharacterDetached;
+        _player.LocalPlayerDetached += CharacterDetached;
     }
 
     public void OnSystemUnloaded(ExperienceInfoSystem system)
     {
         system.OnExperienceUpdated -= ExperienceUpdated;
-        // _player.LocalPlayerDetached -= CharacterDetached;
+        _player.LocalPlayerDetached -= CharacterDetached;
     }
 
     public void UnloadButton()
@@ -88,6 +91,11 @@ public sealed class ExperienceViewerUIController : UIController, IOnStateEntered
 
         _window.SetSkillDictionary(data.SkillDictionary);
         _window.SetKnowledge(data.Knowledges);
+    }
+
+    private void CharacterDetached(EntityUid uid)
+    {
+        CloseWindow();
     }
 
     private void DeactivateButton()

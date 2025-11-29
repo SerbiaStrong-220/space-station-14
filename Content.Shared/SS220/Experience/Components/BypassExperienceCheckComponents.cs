@@ -9,11 +9,11 @@ namespace Content.Shared.SS220.Experience;
 /// This is used to mark entity which bypasses knowledge's checks
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public abstract partial class BypassKnowledgeCheckComponent : Component { }
+public sealed partial class BypassKnowledgeCheckComponent : Component { }
 
 /// <summary>
 /// This is used to mark entity which bypasses skill's checks
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public abstract partial class BypassSkillCheckComponent : Component { }
+public sealed partial class BypassSkillCheckComponent : Component { }
 

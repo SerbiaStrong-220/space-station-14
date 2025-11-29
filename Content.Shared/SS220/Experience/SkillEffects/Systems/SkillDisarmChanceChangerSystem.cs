@@ -14,7 +14,7 @@ public sealed class SkillDisarmChanceChangerSystem : EntitySystem
     {
         base.Initialize();
 
-        _experience.RelayEventToSkillEntity<GetDisarmChanceMultiplierEvent>();
+        _experience.RelayEventToSkillEntity<SkillDisarmChanceChangerComponent, GetDisarmChanceMultiplierEvent>();
 
         SubscribeLocalEvent<SkillDisarmChanceChangerComponent, GetDisarmChanceMultiplierEvent>(OnDisarmAttempt);
     }

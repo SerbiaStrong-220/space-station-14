@@ -9,6 +9,11 @@
     size: Small
     sprite: Objects/Specific/Medical/medical.rsi
     heldPrefix: ointment
+  - type: LearningOnDoAfterEndWith
+    progress:
+      Medicine:
+        baseLearning: 1
+        maxProgress: 1
   # Inherited
   - type: StaticPrice
     price: 0

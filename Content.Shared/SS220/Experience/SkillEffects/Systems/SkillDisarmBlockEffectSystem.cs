@@ -14,7 +14,7 @@ public sealed class SkillDisarmBlockEffectSystem : EntitySystem
     {
         base.Initialize();
 
-        _experience.RelayEventToSkillEntity<DisarmAttemptEvent>();
+        _experience.RelayEventToSkillEntity<SkillDisarmBlockEffectComponent, DisarmAttemptEvent>();
 
         SubscribeLocalEvent<SkillDisarmBlockEffectComponent, DisarmAttemptEvent>(OnDisarmAttempt);
     }

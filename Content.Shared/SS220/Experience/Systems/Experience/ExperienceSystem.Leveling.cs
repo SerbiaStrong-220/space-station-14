@@ -14,12 +14,12 @@ public sealed partial class ExperienceSystem : EntitySystem
     /// <summary>
     ///  CARE this method are not making adminlog!
     /// </summary>
-    private bool TryProgressTree(SkillTreeExperienceInfo info, SkillTreePrototype treeProto)
+    private bool TryProgressTree(SkillTreeExperienceInfo info, SkillTreePrototype treeProto, Entity<ExperienceComponent>? entity = null)
     {
         if (!CanProgressTree(info, treeProto))
             return false;
 
-        InternalProgressTree(info, treeProto, null);
+        InternalProgressTree(info, treeProto, entity);
         return true;
     }
 
@@ -149,6 +149,12 @@ public sealed partial class ExperienceSystem : EntitySystem
     {
         DebugTools.Assert(CanProgressLevel(info, skillTree));
 
+        if (info.SkillStudied)
+        {
+            TryProgressTree(info, skillTree, entity);
+            return;
+        }
+
         if (!TryGetCurrentSkillPrototype(info, skillTree, out var skillPrototype))
         {
             Log.Error($"Cant get current skill proto for tree {skillTree.ID} and info is {info}");
@@ -189,8 +195,6 @@ public sealed partial class ExperienceSystem : EntitySystem
         info.SkillSublevel++;
 
         DirtyFields(entity.AsNullable(), null, [nameof(ExperienceComponent.Skills), nameof(ExperienceComponent.StudyingProgress)]);
-
-        TryProgressLevel(entity, skillTree);
     }
 
     private bool ResolveInfoAndTree(Entity<ExperienceComponent> entity, ProtoId<SkillTreePrototype> skillTree,

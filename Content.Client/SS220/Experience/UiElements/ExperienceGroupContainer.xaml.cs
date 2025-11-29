@@ -15,6 +15,7 @@ namespace Content.Client.SS220.Experience.UiElements;
 public sealed partial class ExperienceGroupContainer : BoxContainer
 {
     private ProtoId<SkillTreeGroupPrototype>? _groupProto = null;
+    private Dictionary<ProtoId<SkillTreePrototype>, ExperienceTreeContainer> _cachedTreeContainers = new();
 
     private string _name = string.Empty;
 
@@ -30,19 +31,19 @@ public sealed partial class ExperienceGroupContainer : BoxContainer
         Margin = ExperienceUiStyleDefinitions.BaseTabLikeThickness;
     }
 
-    /// <summary>
-    /// Separate update to boost performance
-    /// </summary>
     public void UpdateWithList(IEnumerable<(ProtoId<SkillTreePrototype>, SkillTreeExperienceContainer, FixedPoint4)> skillTrees, ProtoId<SkillTreeGroupPrototype> groupProto)
     {
-        SkillTreeContainer.RemoveAllChildren();
-
         _groupProto = groupProto;
         foreach (var (skillTree, skillInfo, progress) in skillTrees)
         {
-            var control = new ExperienceTreeContainer();
-            control.SetInfo(skillTree, skillInfo, progress);
-            SkillTreeContainer.AddChild(control);
+            if (!_cachedTreeContainers.TryGetValue(skillTree, out var cachedControl))
+            {
+                cachedControl = new ExperienceTreeContainer();
+                SkillTreeContainer.AddChild(cachedControl);
+                _cachedTreeContainers.Add(skillTree, cachedControl);
+            }
+
+            cachedControl.SetInfo(skillTree, skillInfo, progress);
         }
     }
 

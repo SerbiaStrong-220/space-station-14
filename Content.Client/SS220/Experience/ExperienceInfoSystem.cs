@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using System.Linq;
 using Content.Shared.FixedPoint;
 using Content.Shared.SS220.Experience;
 using Content.Shared.SS220.Experience.Systems;
@@ -18,21 +19,42 @@ public sealed class ExperienceInfoSystem : EntitySystem
 
     private HashSet<ProtoId<KnowledgePrototype>> _knowledges = new();
 
-    public void RequestLocalPlayerExperienceData()
+    public override void Initialize()
     {
-        var entity = _playerManager.LocalEntity;
+        SubscribeLocalEvent<ExperienceComponent, AfterAutoHandleStateEvent>(OnAfterAutoHandleState);
+    }
 
-        if (entity is null)
+    private void OnAfterAutoHandleState(Entity<ExperienceComponent> entity, ref AfterAutoHandleStateEvent args)
+    {
+        if (_playerManager.LocalEntity != entity)
             return;
 
+        RequestLocalPlayerExperienceData();
+    }
+
+    public void RequestLocalPlayerExperienceData()
+    {
+        OnExperienceUpdated?.Invoke(GetLocalPlayerExperienceData());
+    }
+
+    private ExperienceData GetLocalPlayerExperienceData()
+    {
+        var entity = _playerManager.LocalEntity;
         var data = new ExperienceData();
 
+        if (entity is null)
+            return data;
+
         data.SkillDictionary = GetPlayerSkillData(entity.Value);
+
+        if (data.SkillDictionary is not null)
+            Log.Info(string.Join('#', data.SkillDictionary.Select(x => $"{x.Key}: {string.Join('|', x.Value.Select(x => x.Item2.Info.ToString()))}")));
+
 
         if (_experience.TryGetEntityKnowledge(entity.Value, ref _knowledges))
             data.Knowledges = [.. _knowledges];
 
-        OnExperienceUpdated?.Invoke(data);
+        return data;
     }
 
     public Dictionary<ProtoId<SkillTreeGroupPrototype>, List<(ProtoId<SkillTreePrototype>, SkillTreeExperienceContainer, FixedPoint4)>>?

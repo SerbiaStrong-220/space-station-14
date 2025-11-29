@@ -114,3 +114,28 @@ public sealed partial class SkillTreeExperienceInfo
         return $"level: {SkillLevel}. Sublevel: {SkillSublevel}. Studied: {SkillStudied}";
     }
 }
+
+/// <summary>
+/// This struct used for more complex behavior then just add number to progress level <br/>
+/// It can be used for raising / learning shape or falling \ depending on LearningDecreaseFactorPerLevel <br/>
+/// Also keep in mind that
+/// </summary>
+[DataDefinition]
+[Serializable, NetSerializable]
+public partial struct LearningInformation
+{
+    [DataField(required: true)]
+    public FixedPoint4 BaseLearning;
+
+    [DataField]
+    public int? PeakLearningLevel;
+
+    [DataField]
+    public FixedPoint4? LearningDecreaseFactorPerLevel;
+
+    [DataField]
+    public FixedPoint4 MinProgress = 0f;
+
+    [DataField]
+    public FixedPoint4 MaxProgress = 0.05f; // out of head base number, feel free to change if needed
+}

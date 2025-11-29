@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Damage;
 using Content.Shared.Hands.Components;
-using Content.Shared.SS220.ChangeSpeedDoAfters;
 using Content.Shared.SS220.ChangeSpeedDoAfters.Events;
 using Content.Shared.Tag;
 using Robust.Shared.GameStates;
@@ -204,6 +203,8 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         //ss220 add traits end
 
         var doAfter = new DoAfter(id.Value.Index, args, GameTiming.CurTime);
+
+        doAfter.BarColorOverride = args.BarColorOverride; //SS220-change-doafter-bar-color
 
         // Networking yay
         args.NetTarget = GetNetEntity(args.Target);

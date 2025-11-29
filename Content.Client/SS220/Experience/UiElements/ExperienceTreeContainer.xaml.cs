@@ -56,6 +56,12 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
         _fillingShaderInstance = _prototype.Index(_fillingShaderProto).InstanceUnique();
 
         Margin = ExperienceUiStyleDefinitions.BaseTabLikeThickness;
+
+        ShowSubLevelsButton.OnPressed += (_) =>
+            SubdataContainer.Visible = !SubdataContainer.Visible;
+
+        // TODO visuals
+        SubmitButton.OnPressed += (args) => OnAddSubLevelPressed?.Invoke(args);
     }
 
     public void SetInfo(ProtoId<SkillTreePrototype> protoId, SkillTreeExperienceContainer skillInfo, FixedPoint4 progress)
@@ -78,7 +84,7 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
 
         var resultLevel = _overrideLevel is null ? _currentLevel : _overrideLevel.Value;
 
-        // TODO
+        TreeLevelsContainer.RemoveAllChildren();
         for (var i = 0; i < _skillsTree.Count; i++)
         {
             var color = GetColorForLevel(ref i);
@@ -91,9 +97,7 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
                 TreeLevelsContainer.AddChild(GetVisualRect((float)(_currentSubLevel / _numberOfSublevels), 1f, 0f, color));
         }
 
-        ShowSubLevelsButton.OnPressed += (_) =>
-            SubdataContainer.Visible = !SubdataContainer.Visible;
-
+        SublevelsContainer.RemoveAllChildren();
         for (var i = 0; i < _numberOfSublevels; i++)
         {
             if (i < _currentSubLevel)
@@ -105,8 +109,6 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
         }
 
         SubmitButton.Visible = _haveFreePoints;
-        // TODO visuals
-        SubmitButton.OnPressed += (args) => OnAddSubLevelPressed?.Invoke(args);
     }
 
     public void SetProgressAndUpdate(FixedPoint4 progress)

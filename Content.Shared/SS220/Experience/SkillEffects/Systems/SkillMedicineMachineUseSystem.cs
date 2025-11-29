@@ -14,8 +14,8 @@ public sealed class SkillMedicineMachineUseSystem : EntitySystem
     {
         base.Initialize();
 
-        _experience.RelayEventToSkillEntity<GetHealthAnalyzerShuffleChance>();
-        _experience.RelayEventToSkillEntity<GetDefibrillatorUseChances>();
+        _experience.RelayEventToSkillEntity<SkillMedicineMachineUseComponent, GetHealthAnalyzerShuffleChance>();
+        _experience.RelayEventToSkillEntity<SkillMedicineMachineUseComponent, GetDefibrillatorUseChances>();
 
         SubscribeLocalEvent<SkillMedicineMachineUseComponent, GetHealthAnalyzerShuffleChance>(OnGetHealthAnalyzerShuffleChance);
         SubscribeLocalEvent<SkillMedicineMachineUseComponent, GetDefibrillatorUseChances>(OnGetDefibrillatorUseChances);

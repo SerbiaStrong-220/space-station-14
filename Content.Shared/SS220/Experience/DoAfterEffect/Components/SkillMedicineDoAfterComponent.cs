@@ -8,7 +8,13 @@ namespace Content.Shared.SS220.Experience.DoAfterEffect.Components;
 /// Provides changes in <see cref="HealingDoAfterEvent"/>
 /// </summary>
 [RegisterComponent]
-[NetworkedComponent, AutoGenerateComponentState(true)]
-public sealed partial class SkillMedicineDoAfterComponent : BaseSkillDoAfterEffectComponent { }
+[NetworkedComponent, AutoGenerateComponentState]
+public sealed partial class SkillMedicineDoAfterComponent : BaseSkillDoAfterEffectComponent
+{
+    public SkillMedicineDoAfterComponent() : base()
+    {
+        SkillTreeGroup = "Medicine";
+    }
+}
 
 

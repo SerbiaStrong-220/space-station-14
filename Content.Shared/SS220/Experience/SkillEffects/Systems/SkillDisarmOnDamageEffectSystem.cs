@@ -24,7 +24,7 @@ public sealed class SkillDisarmOnDamageEffectSystem : EntitySystem
     {
         base.Initialize();
 
-        _experience.RelayEventToSkillEntity<DamageChangedEvent>();
+        _experience.RelayEventToSkillEntity<SkillDisarmOnDamageEffectComponent, DamageChangedEvent>();
 
         SubscribeLocalEvent<SkillDisarmOnDamageEffectComponent, DamageChangedEvent>(OnDamageChangedEvent);
     }

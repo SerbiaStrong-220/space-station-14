@@ -109,10 +109,10 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     #region Event relays
 
-    public void RelayEventToSkillEntity<T>() where T : notnull
+    public void RelayEventToSkillEntity<TComp, TEvent>() where TEvent : notnull where TComp : Component
     {
-        SubscribeLocalEvent<SkillComponent, SkillEntityOverrideCheckEvent<T>>(OnOverrideSkillEntityCheck);
-        SubscribeLocalEvent<ExperienceComponent, T>(RelayEventToSkillEntity);
+        SubscribeLocalEvent<ExperienceComponent, TEvent>(RelayEventToSkillEntity);
+        SubscribeLocalEvent<TComp, SkillEntityOverrideCheckEvent<TEvent>>(OnOverrideSkillEntityCheck);
     }
 
     public void AddToAdminLogs<T>(Entity<T> entity, string message, LogImpact logImpact = LogImpact.Low) where T : IComponent
@@ -132,15 +132,17 @@ public sealed partial class ExperienceSystem : EntitySystem
         _adminLogManager.Add(LogType.Experience, logImpact, $"{ToPrettyString(container.Owner):user} {message} because of {nameof(T)}");
     }
 
-    private void OnOverrideSkillEntityCheck<T>(Entity<SkillComponent> entity, ref SkillEntityOverrideCheckEvent<T> args) where T : notnull
+    private void OnOverrideSkillEntityCheck<TComp, TEvent>(Entity<TComp> entity, ref SkillEntityOverrideCheckEvent<TEvent> args) where TEvent : notnull where TComp : Component
     {
         args.Subscribed = true;
     }
 
     private void RelayEventToSkillEntity<T>(Entity<ExperienceComponent> entity, ref T args) where T : notnull
     {
-        var overrideSkillEntity = entity.Comp.ExperienceContainer.ContainedEntity;
+        var overrideSkillEntity = entity.Comp.OverrideExperienceContainer.ContainedEntity;
         var skillEntity = entity.Comp.ExperienceContainer.ContainedEntity;
+
+        DebugTools.Assert(overrideSkillEntity != skillEntity);
 
         if (overrideSkillEntity is null && skillEntity is null)
         {
@@ -156,21 +158,16 @@ public sealed partial class ExperienceSystem : EntitySystem
             return;
         }
 
-        var overrideEv = new SkillEntityOverrideCheckEvent<T>();
+        var overrideEntityEv = new SkillEntityOverrideCheckEvent<T>();
 
         if (overrideSkillEntity is not null)
-        {
-            RaiseLocalEvent(overrideSkillEntity.Value, ref overrideEv);
+            RaiseLocalEvent(overrideSkillEntity.Value, ref overrideEntityEv);
 
-            if (overrideEv.Subscribed)
-            {
-                RaiseLocalEvent(overrideSkillEntity.Value, ref args);
-                return;
-            }
-        }
+        var targetEntity = overrideEntityEv.Subscribed ? overrideSkillEntity : skillEntity;
 
-        if (!overrideEv.Subscribed && skillEntity is not null)
-            RaiseLocalEvent(skillEntity.Value, ref args);
+        if (targetEntity is not null)
+            RaiseLocalEvent(targetEntity.Value, ref args);
+
     }
 
     #endregion

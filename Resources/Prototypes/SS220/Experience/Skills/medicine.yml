@@ -10,6 +10,10 @@
     healthAnalyzerInfoShuffleChance: 0.6
     defibrillatorSelfDamageChance: 0.6
     defibrillatorFailureChance: 0
+  - type: SkillMedicineDoAfter
+    durationScale: 1.4
+    failureChance: 0.1
+    failurePopup: healing-item-use-failure
 
 - type: skill
   id: MedicineBase
@@ -23,6 +27,9 @@
     healthAnalyzerInfoShuffleChance: 0.2
     defibrillatorSelfDamageChance: 0.2
     defibrillatorFailureChance: 0
+  - type: SkillMedicineDoAfter
+    durationScale: 1
+    failurePopup: healing-item-use-failure
 
 - type: skill
   id: MedicineTrained
@@ -36,6 +43,9 @@
     healthAnalyzerInfoShuffleChance: 0
     defibrillatorSelfDamageChance: 0
     defibrillatorFailureChance: 0
+  - type: SkillMedicineDoAfter
+    durationScale: 0.8
+    failurePopup: healing-item-use-failure
 
 - type: skill
   id: MedicineProfessional
@@ -46,7 +56,8 @@
     skillDescription: medicine-professional-desc
   components:
   - type: SkillMedicineDoAfter
-    durationScale: 0.8
+    durationScale: 0.6
+    failurePopup: healing-item-use-failure
     # To ensure removing debuffs
   - type: SkillMedicineMachineUse
     healthAnalyzerInfoShuffleChance: 0

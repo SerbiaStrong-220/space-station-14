@@ -5,6 +5,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
 using Content.Shared.SS220.Experience.SkillChecks;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.Experience.Systems;
 
@@ -13,6 +14,7 @@ public sealed partial class ExperienceSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogManager = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
 
     private const int StartSkillLevelIndex = 0;
     private const int StartSubLevelIndex = 0;
@@ -49,8 +51,25 @@ public sealed partial class ExperienceSystem : EntitySystem
         InitializeExperienceComp(entity, InitGainedExperienceType.MapInit);
     }
 
-    public bool TryChangeStudyingProgress(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, float delta)
+    public bool TryChangeStudyingProgress(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, LearningInformation info)
     {
+        if (!Resolve(entity.Owner, ref entity.Comp, false))
+            return false;
+
+        TryGetSkillTreeLevel(entity, skillTree, out var level);
+
+        var levelDeltaModifier = info.LearningDecreaseFactorPerLevel * (level - info.PeakLearningLevel) ?? 0;
+        var delta = info.BaseLearning + levelDeltaModifier;
+
+        return TryChangeStudyingProgress(entity, skillTree, FixedPoint4.Clamp(delta, info.MinProgress, info.MaxProgress));
+    }
+
+    public bool TryChangeStudyingProgress(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, FixedPoint4 delta)
+    {
+        // for unpredicted events
+        if (!_gameTiming.IsFirstTimePredicted)
+            return false;
+
         if (!Resolve(entity.Owner, ref entity.Comp, false))
             return false;
 
@@ -58,13 +77,16 @@ public sealed partial class ExperienceSystem : EntitySystem
             entity.Comp.StudyingProgress.Add(skillTree, StartLearningProgress);
 
         var result = entity.Comp.StudyingProgress[skillTree] + delta;
-        if (result > EndLearningProgress)
+        if (result >= EndLearningProgress)
         {
             InternalProgressSublevel(entity!, skillTree);
             return true;
         }
 
+        TryProgressLevel(entity!, skillTree);
+
         entity.Comp.StudyingProgress[skillTree] = FixedPoint4.Clamp(result, StartLearningProgress, EndLearningProgress);
+        DirtyField(entity, nameof(ExperienceComponent.StudyingProgress));
         return true;
     }
 

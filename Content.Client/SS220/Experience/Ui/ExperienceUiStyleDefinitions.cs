@@ -8,8 +8,13 @@ namespace Content.Client.SS220.Experience.Ui;
 
 public static class ExperienceUiStyleDefinitions
 {
-    public static readonly Thickness BaseTabLikeThickness = new(10f, 0f, 0f, 0f);
-    public static readonly Thickness DividerThickness = new(10f, 0f, 15f, 0f);
+    // TODO I f**p somewhere
+    public static readonly float RightMargin = 30f;
+    public static readonly float LeftMargin = 10f;
+
+    public static readonly Thickness BaseTabLikeThickness = new(LeftMargin, 0f, 0f, 0f);
+    public static readonly Thickness DividerThickness = new(LeftMargin, 0f, RightMargin, 0f);
+    public static readonly Thickness DividerOnlyRightThickness = new(0f, 0f, RightMargin, 0f);
 
     public static readonly float ToolTipStretchModifier = 1.5f;
     public static readonly float TooltipMaxWidth = 500f;
