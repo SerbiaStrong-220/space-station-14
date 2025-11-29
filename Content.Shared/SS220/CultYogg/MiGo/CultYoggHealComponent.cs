@@ -44,4 +44,7 @@ public sealed partial class CultYoggHealComponent : Component
     /// </summary>
     [ViewVariables]
     public FixedPoint2 CancelDamageTreshhold = 3;
+
+    [ViewVariables]
+    public bool ShouldStopOnDamage = true;
 }
