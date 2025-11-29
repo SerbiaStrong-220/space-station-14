@@ -70,20 +70,14 @@ public sealed class SignatureControl : Control
 
     private SignatureData EnsureSize(SignatureData original)
     {
-        if (original.Width == (int)CanvasSize.X &&
-            original.Height == (int)CanvasSize.Y)
-            return original;
+        var w = (int)CanvasSize.X;
+        var h = (int)CanvasSize.Y;
 
-        var clone = new SignatureData((int)CanvasSize.X, (int)CanvasSize.Y);
+        if (original.Width == w && original.Height == h)
+            return original.Clone();
 
-        for (var y = 0; y < Math.Min(original.Height, clone.Height); y++)
-        {
-            for (var x = 0; x < Math.Min(original.Width, clone.Width); x++)
-            {
-                if (original.GetPixel(x, y))
-                    clone.SetPixel(x, y);
-            }
-        }
+        var clone = new SignatureData(w, h);
+        original.CopyTo(clone);
 
         return clone;
     }

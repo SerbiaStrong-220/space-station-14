@@ -71,6 +71,26 @@ public sealed class SignatureData
         return copy;
     }
 
+    public void CopyTo(SignatureData clone)
+    {
+        var minWidth  = Math.Min(Width,  clone.Width);
+        var minHeight = Math.Min(Height, clone.Height);
+
+        for (var y = 0; y < minHeight; y++)
+        {
+            var originalOffset = y * Width;
+            var cloneOffset = y * clone.Width;
+
+            Array.Copy(
+                Pixels,
+                originalOffset,
+                clone.Pixels,
+                cloneOffset,
+                minWidth
+            );
+        }
+    }
+
     #region Serialization
     public string Serialize()
     {
