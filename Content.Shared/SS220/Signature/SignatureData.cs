@@ -82,7 +82,7 @@ public sealed class SignatureData
 
         for (var i = 0; i < Pixels.Length; i++)
         {
-            sb.Append(Pixels[i] == 1 ? '1' : '0');
+            sb.Append(Pixels[i]);
         }
 
         return sb.ToString();
@@ -113,12 +113,7 @@ public sealed class SignatureData
         for (var i = 0; i < pixelsString.Length; i++)
         {
             var c = pixelsString[i];
-            inst.Pixels[i] = c switch
-            {
-                '1' => 1,
-                '0' => 0,
-                _ => throw new ArgumentOutOfRangeException(),
-            };
+            inst.Pixels[i] = (byte)(c - '0'); // '1' == 49, '0' is 48
         }
 
         return inst;
