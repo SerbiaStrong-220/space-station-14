@@ -85,7 +85,7 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
     {
         base.OnAfterConsumed(ent, ref args);
 
-        if (args.Target is not { } target)
+        if (args is not { Cancelled: false, Target: { } target })
             return;
 
         TryConsumeTarget(ent, target);

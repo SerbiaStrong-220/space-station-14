@@ -265,17 +265,17 @@ public sealed class MobConsumedByDarkReaperTest
         await server.WaitPost(() =>
         {
             Assert.That(mobThresholdsSys.TryGetThresholdForState(mob, Shared.Mobs.MobState.Dead, out var deadThreshold));
-            var mobDeathDamageSpecifier = new DamageSpecifier()
+            var deathDamage = new DamageSpecifier()
             {
                 DamageDict = new()
                 {
-                    { deathDamageType, deadThreshold.Value * 1.1f },
+                    { deathDamageType, deadThreshold.Value },
                 }
             };
 
-            var changedDamage = damageableSys.TryChangeDamage(mob, mobDeathDamageSpecifier, ignoreResistances: true, ignoreGlobalModifiers: true);
+            var changedDamage = damageableSys.TryChangeDamage(mob, deathDamage, ignoreResistances: true, ignoreGlobalModifiers: true);
             Assert.That(changedDamage, Is.Not.Null);
-            Assert.That(changedDamage.GetTotal(), Is.EqualTo(mobDeathDamageSpecifier.GetTotal()));
+            Assert.That(changedDamage.GetTotal(), Is.EqualTo(deathDamage.GetTotal()));
             Assert.That(mobStateSys.IsDead(mob));
 
             reaperSys.ChangeForm(reaper, true);
