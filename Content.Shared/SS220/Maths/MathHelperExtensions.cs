@@ -12,11 +12,14 @@ public static partial class MathHelperExtensions
     /// <summary>
     /// Substracts the <paramref name="cutters"/> from the <paramref name="boxes"/> returning the remaining sections
     /// </summary>
-    public static IEnumerable<Box2> SubstructBox(IEnumerable<Box2> boxes, IEnumerable<Box2> cutters)
+    public static IEnumerable<Box2> SubstructBoxes(IEnumerable<Box2> boxes, IEnumerable<Box2> cutters, bool unionResult = true)
     {
-        var result = boxes.ToList().AsEnumerable();
+        var result = boxes.ToList();
         foreach (var cutter in cutters)
-            result = SubstructBox(result, cutter);
+            result.AddRange(SubstructBox(result, cutter));
+
+        if (unionResult)
+            result = [.. UnionInEqualSizedBoxes(boxes)];
 
         return result;
     }
@@ -24,11 +27,14 @@ public static partial class MathHelperExtensions
     /// <summary>
     /// Substracts the <paramref name="cutter"/> from the <paramref name="boxes"/> returning the remaining sections
     /// </summary>
-    public static IEnumerable<Box2> SubstructBox(IEnumerable<Box2> boxes, Box2 cutter)
+    public static IEnumerable<Box2> SubstructBox(IEnumerable<Box2> boxes, Box2 cutter, bool unionResult = true)
     {
         var result = new List<Box2>();
         foreach (var box in boxes)
             result.AddRange(SubstructBox(box, cutter));
+
+        if (unionResult)
+            result = [.. UnionInEqualSizedBoxes(boxes)];
 
         return result;
     }
@@ -71,38 +77,33 @@ public static partial class MathHelperExtensions
 
         foreach (var box in boxes)
         {
-            var currentParts = new List<Box2> { box };
-
-            foreach (var existing in result)
+            // Названо parts т.к. в случае пересечений с другими боксами - текущий бокс дробится на непересекающиеся части
+            var parts = new List<Box2> { box };
+            foreach (var exist in result)
             {
                 var newParts = new List<Box2>();
-                foreach (var part in currentParts)
+                foreach (var part in parts)
                 {
-                    if (part.IntersectPercentage(existing) > 0)
+                    if (part.IntersectPercentage(exist) > 0)
                     {
-                        var subParts = SubstructBox(part, existing);
+                        // Если текущий бокс пересекается с другими боксами - то вырезает его и продолжает проверки с его остатками
+                        var subParts = SubstructBox(part, exist);
                         newParts.AddRange(subParts);
                     }
                     else
                     {
+                        // Если текущий бокс не пересекается с другими боксами - то продолжает проверку с ним
                         newParts.Add(part);
                     }
                 }
-                currentParts = newParts;
+
+                parts = newParts;
             }
 
-            result.AddRange(currentParts);
+            result.AddRange(parts);
         }
 
         return result;
-    }
-
-    /// <summary>
-    /// Returns a new array of boxes in which all intersections in <paramref name="boxes"/> has removed
-    /// </summary>
-    public static void GetNonOverlappingBoxes(ref IEnumerable<Box2> boxes)
-    {
-        boxes = GetNonOverlappingBoxes(boxes);
     }
 
     /// <summary>
@@ -130,20 +131,6 @@ public static partial class MathHelperExtensions
 
         union = totalArea == Box2.Area(result) ? result : null;
         return union != null;
-    }
-
-    /// <summary>
-    /// Tries to combine <paramref name="boxes"/> into a single box without changing the total area
-    /// </summary>
-    public static bool TryUnionInEqualSizedBox(IEnumerable<Box2> boxes, [NotNullWhen(true)] out Box2? union)
-    {
-        union = null;
-        if (!boxes.Any())
-            return false;
-
-        var box = boxes.First();
-        boxes = boxes.Skip(1);
-        return TryUnionInEqualSizedBox(box, boxes, out union);
     }
 
     /// <summary>
@@ -219,14 +206,6 @@ public static partial class MathHelperExtensions
         }
     }
 
-    /// <summary>
-    /// Returns a new array of boxes in which, if possibe, the <paramref name="boxes"/> are combined without changing the total area
-    /// </summary>
-    public static void UnionInEqualSizedBoxes(ref IEnumerable<Box2> boxes)
-    {
-        boxes = UnionInEqualSizedBoxes(boxes);
-    }
-
     /// <inheritdoc cref="GetCombinations{T}(T[], int, int)"/>
     public static IEnumerable<IEnumerable<T>> GetCombinations<T>(T[] array, int k)
     {
@@ -263,20 +242,20 @@ public static partial class MathHelperExtensions
     /// <summary>
     /// Returns an array of all boxes in the grid that the other <paramref name="boxes"/> intersects with
     /// </summary>
-    public static IEnumerable<Box2> GetIntersectsGridBoxes(IEnumerable<Box2> boxes, float gridSize = 1f)
+    public static IEnumerable<Box2> GetIntersectsLatticeBoxes(IEnumerable<Box2> boxes, float latticeSize = 1f)
     {
-        return GetIntersectsGridBoxes(boxes, new Vector2(gridSize, gridSize));
+        return GetIntersectsLatticeBoxes(boxes, new Vector2(latticeSize, latticeSize));
     }
 
     /// <summary>
     /// Returns an array of all boxes in the grid that the other <paramref name="boxes"/> intersects with
     /// </summary>
-    public static IEnumerable<Box2> GetIntersectsGridBoxes(IEnumerable<Box2> boxes, Vector2 gridSize)
+    public static IEnumerable<Box2> GetIntersectsLatticeBoxes(IEnumerable<Box2> boxes, Vector2 latticeSize)
     {
         var result = new HashSet<Box2>();
         foreach (var box in boxes)
         {
-            var gridBoxes = GetIntersectsGridBoxes(box, gridSize);
+            var gridBoxes = GetIntersectsLatticeBoxes(box, latticeSize);
             foreach (var gridBox in gridBoxes)
                 result.Add(gridBox);
         }
@@ -287,29 +266,29 @@ public static partial class MathHelperExtensions
     /// <summary>
     /// Returns an array of all boxes in the grid that the other <paramref name="box"/> intersects with
     /// </summary>
-    public static IEnumerable<Box2> GetIntersectsGridBoxes(Box2 box, float gridSize = 1f)
+    public static IEnumerable<Box2> GetIntersectsLatticeBoxes(Box2 box, float gridSize = 1f)
     {
-        return GetIntersectsGridBoxes(box, new Vector2(gridSize, gridSize));
+        return GetIntersectsLatticeBoxes(box, new Vector2(gridSize, gridSize));
     }
 
     /// <summary>
     /// Returns an array of all boxes in the grid that the other <paramref name="box"/> intersects with
     /// </summary>
-    public static IEnumerable<Box2> GetIntersectsGridBoxes(Box2 box, Vector2 gridSize)
+    public static IEnumerable<Box2> GetIntersectsLatticeBoxes(Box2 box, Vector2 latticeSize)
     {
         var result = new HashSet<Box2>();
-        var attachedBox = AttachToGrid(box, gridSize);
+        var attachedBox = AttachToLattice(box, latticeSize);
         var y = attachedBox.Bottom;
         while (y < attachedBox.Top)
         {
             var x = attachedBox.Left;
             while (x < attachedBox.Right)
             {
-                var gridBox = new Box2(x, y, x + gridSize.X, y + gridSize.Y);
+                var gridBox = new Box2(x, y, x + latticeSize.X, y + latticeSize.Y);
                 result.Add(gridBox);
-                x += gridSize.X;
+                x += latticeSize.X;
             }
-            y += gridSize.Y;
+            y += latticeSize.Y;
         }
 
         return result;
@@ -362,35 +341,35 @@ public static partial class MathHelperExtensions
     }
 
     /// <inheritdoc cref="AttachToGrid(Box2, Vector2)"/>
-    public static Box2 AttachToGrid(Box2 box, float gridSize = 1f)
+    public static Box2 AttachToLattice(Box2 box, float latticeSize = 1f)
     {
-        return AttachToGrid(box, new Vector2(gridSize, gridSize));
+        return AttachToLattice(box, new Vector2(latticeSize, latticeSize));
     }
 
     /// <summary>
     /// Creates a new <see cref="Box2"/> based on the <paramref name="box"/> and the specified <paramref name="gridSize"/>
     /// It aligns the original box to fit within the grid.
     /// </summary>
-    public static Box2 AttachToGrid(Box2 box, Vector2 gridSize)
+    public static Box2 AttachToLattice(Box2 box, Vector2 latticeSize)
     {
-        var left = (float)Math.Floor(box.Left / gridSize.X) * gridSize.X;
-        var bottom = (float)Math.Floor(box.Bottom / gridSize.Y) * gridSize.Y;
-        var right = (float)Math.Ceiling(box.Right / gridSize.X) * gridSize.X;
-        var top = (float)Math.Ceiling(box.Top / gridSize.Y) * gridSize.Y;
+        var left = (float)Math.Floor(box.Left / latticeSize.X) * latticeSize.X;
+        var bottom = (float)Math.Floor(box.Bottom / latticeSize.Y) * latticeSize.Y;
+        var right = (float)Math.Ceiling(box.Right / latticeSize.X) * latticeSize.X;
+        var top = (float)Math.Ceiling(box.Top / latticeSize.Y) * latticeSize.Y;
 
         if (right == left)
-            right += gridSize.X;
+            right += latticeSize.X;
 
         if (top == bottom)
-            top += gridSize.Y;
+            top += latticeSize.Y;
 
         return new Box2(left, bottom, right, top);
     }
 
     /// <inheritdoc cref="AttachToGrid(ref Box2, Vector2)"/>
-    public static void AttachToGrid(ref Box2 box, float gridSize = 1f)
+    public static void AttachToLattice(ref Box2 box, float latticeSize = 1f)
     {
-        AttachToGrid(ref box, new Vector2(gridSize, gridSize));
+        AttachToLattice(ref box, new Vector2(latticeSize, latticeSize));
     }
 
     /// <summary>
@@ -398,43 +377,27 @@ public static partial class MathHelperExtensions
     /// and the specified <paramref name="gridSize"/>.
     /// It aligns the original box to fit within the grid.
     /// </summary>
-    public static void AttachToGrid(ref Box2 box, Vector2 gridSize)
+    public static void AttachToLattice(ref Box2 box, Vector2 latticeSize)
     {
-        box = AttachToGrid(box, gridSize);
+        box = AttachToLattice(box, latticeSize);
     }
 
     /// <inheritdoc cref="AttachToGrid(IEnumerable{Box2}, Vector2)"/>
-    public static IEnumerable<Box2> AttachToGrid(IEnumerable<Box2> boxes, float gridSize = 1f)
+    public static IEnumerable<Box2> AttachToLattice(IEnumerable<Box2> boxes, float latticeSize = 1f)
     {
-        return AttachToGrid(boxes, new Vector2(gridSize, gridSize));
+        return AttachToLattice(boxes, new Vector2(latticeSize, latticeSize));
     }
 
     /// <summary>
     /// Creates a new array of <see cref="Box2"/> based on the <paramref name="box"/> and the specified <paramref name="gridSize"/>.
     /// It aligns the original box to fit within the grid.
     /// </summary>
-    public static IEnumerable<Box2> AttachToGrid(IEnumerable<Box2> boxes, Vector2 gridSize)
+    public static IEnumerable<Box2> AttachToLattice(IEnumerable<Box2> boxes, Vector2 gridSize)
     {
-        var result = new HashSet<Box2>();
+        var result = new List<Box2>();
         foreach (var box in boxes)
-            result.Add(AttachToGrid(box, gridSize));
+            result.Add(AttachToLattice(box, gridSize));
 
         return result;
-    }
-
-    /// <inheritdoc cref="AttachToGrid(ref IEnumerable{Box2}, Vector2)"/>
-    public static void AttachToGrid(ref IEnumerable<Box2> boxes, float gridSize = 1f)
-    {
-        AttachToGrid(ref boxes, new Vector2(gridSize, gridSize));
-    }
-
-    /// <summary>
-    /// Changes the input <paramref name="boxes"/> by creating a new array of <see cref="Box2"/> based on the <paramref name="boxes"/>
-    /// and the specified <paramref name="gridSize"/>.
-    /// It aligns the original box to fit within the grid.
-    /// </summary>
-    public static void AttachToGrid(ref IEnumerable<Box2> boxes, Vector2 gridSize)
-    {
-        boxes = AttachToGrid(boxes, gridSize);
     }
 }

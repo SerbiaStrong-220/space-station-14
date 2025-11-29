@@ -7,7 +7,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using System.Linq;
 using System.Numerics;
-using static Content.Shared.SS220.Zones.ZoneParams;
 
 namespace Content.Shared.SS220.Zones.Systems;
 
@@ -47,7 +46,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
 
         var entitiesToLeave = zone.Comp.EnteredEntities.ToHashSet();
         var entitiesToEnter = new HashSet<EntityUid>();
-        var curEntities = GetInZoneEntities(zone, RegionType.Active);
+        var curEntities = GetInZoneEntities(zone, RegionTy.Active);
         foreach (var entity in curEntities)
         {
             if (entitiesToLeave.Remove(entity))
@@ -167,81 +166,6 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return result;
     }
 
-    /// <summary>
-    /// Removes intersections of boxes and, if possible, unite adjacent boxes (if this does not affect the total area)
-    /// </summary>
-    public void RecalculateZoneRegions(Entity<ZoneComponent> zone)
-    {
-        zone.Comp.ZoneParams.RecalculateRegions();
-        Dirty(zone, zone.Comp);
-    }
-
-    /// <inheritdoc cref="AttachToGrid(EntityUid, Box2)"/>
-    public Box2 AttachToGrid(NetEntity container, Box2 box)
-    {
-        return AttachToGrid(GetEntity(container), box);
-    }
-
-    /// <summary>
-    /// Creates a new <see cref="Box2"/> based on the <paramref name="box"/>.
-    /// It aligns the original box to fit within the grid.
-    /// </summary>
-    public Box2 AttachToGrid(EntityUid container, Box2 box)
-    {
-        if (TryComp<MapGridComponent>(container, out var mapGrid))
-            return MathHelperExtensions.AttachToGrid(box, mapGrid.TileSize);
-
-        return MathHelperExtensions.AttachToGrid(box);
-    }
-
-    /// <inheritdoc cref="AttachToGrid(EntityUid, ref Box2)"/>
-    public void AttachToGrid(NetEntity container, ref Box2 box)
-    {
-        AttachToGrid(GetEntity(container), ref box);
-    }
-
-    /// <summary>
-    /// Changes the input <paramref name="box"/> by creating a new <see cref="Box2"/> based on the <paramref name="box"/>.
-    /// It aligns the original box to fit within the grid.
-    /// </summary>
-    public void AttachToGrid(EntityUid container, ref Box2 box)
-    {
-        box = AttachToGrid(container, box);
-    }
-
-    /// <inheritdoc cref="AttachToGrid(EntityUid, IEnumerable{Box2})"/>
-    public IEnumerable<Box2> AttachToGrid(NetEntity container, IEnumerable<Box2> boxes)
-    {
-        return AttachToGrid(GetEntity(container), boxes);
-    }
-
-    /// <summary>
-    /// Creates a new array of <see cref="Box2"/> based on the <paramref name="boxes"/>.
-    /// It aligns the original box to fit within the grid.
-    /// </summary>
-    public IEnumerable<Box2> AttachToGrid(EntityUid container, IEnumerable<Box2> boxes)
-    {
-        if (TryComp<MapGridComponent>(container, out var mapGrid))
-            return MathHelperExtensions.AttachToGrid(boxes, mapGrid.TileSize);
-
-        return MathHelperExtensions.AttachToGrid(boxes);
-    }
-
-    /// <inheritdoc cref="AttachToGrid(EntityUid, ref IEnumerable{Box2})"/>
-    public void AttachToGrid(NetEntity container, ref IEnumerable<Box2> boxes)
-    {
-        AttachToGrid(GetEntity(container), ref boxes);
-    }
-
-    /// <summary>
-    /// Changes the input <paramref name="boxes"/> by creating a new array of <see cref="Box2"/> based on the <paramref name="boxes"/>.
-    /// It aligns the original box to fit within the grid.
-    /// </summary>
-    public void AttachToGrid(EntityUid container, ref IEnumerable<Box2> boxes)
-    {
-        boxes = AttachToGrid(container, boxes);
-    }
-
     public int GetZonesCount()
     {
         var result = 0;
@@ -274,7 +198,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
     public IEnumerable<Box2> CutSpace(Entity<MapGridComponent> grid, IEnumerable<Box2> boxes, out IEnumerable<Box2> spaceBoxes)
     {
         spaceBoxes = GetSpaceBoxes(grid, boxes);
-        return MathHelperExtensions.SubstructBox(boxes, spaceBoxes);
+        return MathHelperExtensions.SubstructBoxes(boxes, spaceBoxes);
     }
 
     /// <inheritdoc cref="CutSpace(Entity{MapGridComponent}, IEnumerable{Box2}, out IEnumerable{Box2})"/>
@@ -326,8 +250,8 @@ public abstract partial class SharedZonesSystem : EntitySystem
                 result.Add(gridBox);
         }
 
-        var excess = MathHelperExtensions.SubstructBox(result, boxes);
-        return MathHelperExtensions.SubstructBox(result, excess);
+        var excess = MathHelperExtensions.SubstructBoxes(result, boxes);
+        return MathHelperExtensions.SubstructBoxes(result, excess);
     }
 
     public EntityCoordinates? GetRandomCoordinateInZone(Entity<ZoneComponent> zone, RegionType regionType)
@@ -341,16 +265,6 @@ public abstract partial class SharedZonesSystem : EntitySystem
         var y = _random.NextFloat(box.Bottom, box.Top);
 
         return new EntityCoordinates(zone.Comp.ZoneParams.Container, x, y);
-    }
-
-    public bool IsValidContainer(NetEntity netEntity)
-    {
-        return IsValidContainer(GetEntity(netEntity));
-    }
-
-    public bool IsValidContainer(EntityUid uid)
-    {
-        return uid.IsValid() && (HasComp<MapComponent>(uid) || HasComp<MapGridComponent>(uid));
     }
 
     public List<Box2Rotated> GetWorldRegion(Entity<ZoneComponent> zone, RegionType regionType)
@@ -395,6 +309,13 @@ public abstract partial class SharedZonesSystem : EntitySystem
     public IEnumerable<EntityPrototype> EnumerateZonePrototypes()
     {
         return _prototype.Categories[ZonesCategoryId];
+    }
+
+    public bool IsValidParent(EntityUid parent)
+    {
+        return parent.IsValid()
+            && Exists(parent)
+            && (HasComp<MapGridComponent>(parent) || HasComp<MapComponent>(parent));
     }
 }
 

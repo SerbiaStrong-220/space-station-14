@@ -1,16 +1,16 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.Prototypes;
-using Content.Shared.SS220.Zones;
+using Content.Shared.SS220.Maths;
 using Content.Shared.SS220.Zones.Components;
 using Content.Shared.SS220.Zones.Systems;
 using Robust.Server.GameObjects;
 using Robust.Server.GameStates;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
 using System.Linq;
 using System.Numerics;
-using static Content.Shared.SS220.Zones.ZoneParams;
 
 namespace Content.Server.SS220.Zones.Systems;
 
@@ -68,7 +68,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
             var coords = _map.GridTileToLocal(args.Entity, args.Entity, entry.GridIndices);
             var zones = GetZonesByPoint(coords, RegionType.Original);
             foreach (var zone in zones)
-                RecalculateZoneRegions(zone);
+                RecalculateZoneAreas(zone);
         }
     }
 
@@ -79,7 +79,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         string? name = null,
         Color? color = null,
         bool attachToGrid = false,
-        CutSpaceOptions cutSpaceOption = CutSpaceOptions.None)
+        ZoneSpaceOption cutSpaceOption = ZoneSpaceOption.None)
     {
         try
         {
@@ -115,7 +115,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         string? name = null,
         Color? color = null,
         bool attachToGrid = false,
-        CutSpaceOptions cutSpaceOption = CutSpaceOptions.None)
+        ZoneSpaceOption cutSpaceOption = ZoneSpaceOption.None)
     {
         try
         {
@@ -156,7 +156,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         string? name = null,
         Color? color = null,
         bool attachToGrid = false,
-        CutSpaceOptions cutSpaceOption = CutSpaceOptions.None)
+        ZoneSpaceOption cutSpaceOption = ZoneSpaceOption.None)
     {
         var region = points.Select(p => Box2.FromTwoPoints(p.Item1, p.Item2));
         return CreateZone(container, region, protoId, name, color, attachToGrid, cutSpaceOption);
@@ -170,7 +170,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         string? name = null,
         Color? color = null,
         bool attachToGrid = false,
-        CutSpaceOptions cutSpaceOption = CutSpaceOptions.None)
+        ZoneSpaceOption cutSpaceOption = ZoneSpaceOption.None)
     {
         var @params = new ZoneParams()
         {
@@ -188,41 +188,91 @@ public sealed partial class ZonesSystem : SharedZonesSystem
     /// <summary>
     /// Creates new zone
     /// </summary>
-    public (Entity<ZoneComponent>? Zone, string? FailReason) CreateZone(ZoneParams @params)
+    public (Entity<ZoneComponent>? Zone, string? FailReason) CreateZone(
+        EntityUid parent,
+        EntProtoId<ZoneComponent> protoId,
+        IEnumerable<Box2> region,
+        string? name = null)
     {
-        @params = @params.GetCopy();
-        if (@params.OriginalRegion.Count <= 0)
+        if (!region.Any())
             return (null, "Can't create a zone with an empty region");
 
-        var container = @params.Container;
-        if (!IsValidContainer(container))
-            return (null, "Can't create a zone with an invalid container");
+        if (!IsValidParent(parent))
+            return (null, "Can't create a zone with an invalid parent");
 
-        if (!_prototype.TryIndex<EntityPrototype>(@params.ProtoID, out var proto))
+        if (!_prototype.TryIndex<EntityPrototype>(protoId, out var proto))
             return (null, "Can't create a zone with an invalid prototype id");
 
         if (!proto.HasComponent<ZoneComponent>())
             return (null, $"Can't create a zone with prototype that doesn't has a {nameof(ZoneComponent)}");
 
-        if (string.IsNullOrEmpty(@params.Name))
-            @params.Name = $"Zone {GetZonesCount() + 1}";
+        if (string.IsNullOrEmpty(name))
+            name = $"Zone {GetZonesCount() + 1}";
 
         @params.RecalculateRegions();
 
-        var zone = Spawn(@params.ProtoID, Transform(container).Coordinates);
+        var zone = Spawn(protoId, Transform(parent).Coordinates);
         _pvsOverride.AddGlobalOverride(zone);
-        _transform.AttachToGridOrMap(zone);
+        _transform.SetParent(zone, parent);
 
         var zoneComp = EnsureComp<ZoneComponent>(zone);
-        zoneComp.ZoneParams = @params;
-        _metaData.SetEntityName(zone, @params.Name);
+        _metaData.SetEntityName(zone, name);
         Dirty(zone, zoneComp);
 
-        var zoneContainer = EnsureComp<ZonesContainerComponent>(container);
-        zoneContainer.Zones.Add(GetNetEntity(zone));
-        Dirty(container, zoneContainer);
+
+
+        //var zoneContainer = EnsureComp<ZonesContainerComponent>(container);
+        //zoneContainer.Zones.Add(GetNetEntity(zone));
+        //Dirty(container, zoneContainer);
 
         return ((zone, zoneComp), null);
+    }
+
+    private void RecalculateZoneAreas(Entity<ZoneComponent> ent)
+    {
+        var original = ent.Comp.Area.AsEnumerable();
+
+        var parent = Transform(ent).ParentUid;
+
+        if (ent.Comp.AttachToLattice)
+        {
+            float latticeSize;
+            if (TryComp<MapGridComponent>(parent, out var mapGrid))
+                latticeSize = mapGrid.TileSize;
+            else
+                latticeSize = 1f;
+
+            original = MathHelperExtensions.AttachToLattice(original, latticeSize);
+        }
+
+        IEnumerable<Box2> disabled = [];
+        switch (ent.Comp.SpaceOption)
+        {
+            case ZoneSpaceOption.Disable:
+                disabled = GetSpaceBoxes(parent, original);
+                break;
+
+            case ZoneSpaceOption.Cut:
+                original = CutSpace(parent, original, out _);
+                break;
+        }
+
+        disabled = RecalculateArea(disabled);
+        ent.Comp.DisabledArea = [.. disabled];
+
+        original = RecalculateArea(original);
+        ent.Comp.Area = [.. original];
+
+        var active = MathHelperExtensions.SubstructBoxes(original, disabled);
+        active = RecalculateArea(active);
+        ent.Comp.ActiveArea = [.. active];
+
+        static IEnumerable<Box2> RecalculateArea(IEnumerable<Box2> boxes)
+        {
+            var result = MathHelperExtensions.GetNonOverlappingBoxes(boxes);
+            result = MathHelperExtensions.UnionInEqualSizedBoxes(result);
+            return result;
+        }
     }
 
     public void ChangeZone(Entity<ZoneComponent> zone, ZoneParams newParams)

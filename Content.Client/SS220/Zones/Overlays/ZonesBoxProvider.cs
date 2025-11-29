@@ -54,9 +54,9 @@ public sealed partial class ZonesBoxesOverlayProvider : BoxesOverlayProvider
     {
         pixelGridSize ??= new Vector2i(32, 32);
         var pixelBox = Box2.FromTwoPoints(box.BottomLeft * pixelGridSize.Value, box.TopRight * pixelGridSize.Value);
-        var textureGridRects = MathHelperExtensions.GetIntersectsGridBoxes(pixelBox, texture.Size);
+        var textureGridRects = MathHelperExtensions.GetIntersectsLatticeBoxes(pixelBox, texture.Size);
         var excess = MathHelperExtensions.SubstructBox(textureGridRects, pixelBox);
-        textureGridRects = MathHelperExtensions.SubstructBox(textureGridRects, excess);
+        textureGridRects = MathHelperExtensions.SubstructBoxes(textureGridRects, excess);
 
         var result = new List<AtlasedBoxData>();
         foreach (var rect in textureGridRects)
