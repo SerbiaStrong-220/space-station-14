@@ -166,29 +166,25 @@ public sealed class SignatureControl : Control
         var radius = _currentMode == SignatureDrawMode.Erase ? BrushEraseSize : BrushWriteSize;
         var half = radius / 2;
 
-        for (var yy = -half; yy <= half; yy++)
+        var minX = Math.Max(0, x - half);
+        var maxX = Math.Min(Data.Width  - 1, x + half);
+        var minY = Math.Max(0, y - half);
+        var maxY = Math.Min(Data.Height - 1, y + half);
+
+        var write = _currentMode == SignatureDrawMode.Write;
+
+        for (var py = minY; py <= maxY; py++)
         {
-            for (var xx = -half; xx <= half; xx++)
+            for (var px = minX; px <= maxX; px++)
             {
-                var px = x + xx;
-                var py = y + yy;
-
-                if (px < 0 || px >= Data.Width || py < 0 || py >= Data.Height)
-                    continue;
-
-                switch (_currentMode)
-                {
-                    case SignatureDrawMode.Write:
-                        Data.SetPixel(px, py);
-                        break;
-                    case SignatureDrawMode.Erase:
-                        Data.ErasePixel(px, py);
-                        break;
-                }
-
-                _dirty = true;
+                if (write)
+                    Data.SetPixel(px, py);
+                else
+                    Data.ErasePixel(px, py);
             }
         }
+
+        _dirty = true;
     }
 
     private void DrawLine(int x0, int y0, int x1, int y1)

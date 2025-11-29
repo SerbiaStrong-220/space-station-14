@@ -293,7 +293,7 @@ namespace Content.Client.Paper.UI
             // ss220 add signature start
             Signature.Editable = isEditing;
             SignatureContainer.Visible = Signature.Data != null || isEditing;
-            LoadSignatureButton.Visible = isEditing;
+            SignatureSettingsContainer.Visible = isEditing;
             // ss220 add signature end
 
             var msg = new FormattedMessage();

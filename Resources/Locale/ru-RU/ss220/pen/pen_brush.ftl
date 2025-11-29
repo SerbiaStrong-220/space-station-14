@@ -10,7 +10,7 @@ pen-brush-erase-medium = Средний (4px)
 pen-brush-erase-normal = Обычный (2px)
 
 paper-ui-signature-label = Подпись:
-paper-ui-signature-load-from-profile-label = Загрузить
+paper-ui-signature-load-from-profile-label = Из профиля
 
 humanoid-profile-signature-saved-label = Сохранённая подпись:
 humanoid-profile-signature-brush-write = Шрифт ручки
