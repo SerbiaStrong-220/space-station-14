@@ -23,9 +23,14 @@ public sealed class SignatureData
         return Pixels[y * Width + x] == 1;
     }
 
-    public void SetPixel(int x, int y, bool erase = false)
+    public void SetPixel(int x, int y)
     {
-        Pixels[y * Width + x] = erase ? (byte)0 : (byte)1;
+        Pixels[y * Width + x] = 1;
+    }
+
+    public void ErasePixel(int x, int y)
+    {
+        Pixels[y * Width + x] = 0;
     }
 
     public void Clear()

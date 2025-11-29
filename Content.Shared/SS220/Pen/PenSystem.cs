@@ -11,6 +11,20 @@ public sealed class PenSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
 
+    public readonly Dictionary<int, LocId> PenBrushWriteNames = new()
+    {
+        [1] = "pen-brush-write-normal",
+        [2] = "pen-brush-write-medium",
+        [4] = "pen-brush-write-large",
+    };
+
+    public readonly Dictionary<int, LocId> PenBrushEraseNames = new()
+    {
+        [2] = "pen-brush-erase-normal",
+        [4] = "pen-brush-erase-medium",
+        [6] = "pen-brush-erase-large",
+    };
+
     public override void Initialize()
     {
         SubscribeLocalEvent<PenComponent, GetVerbsEvent<Verb>>(OnGetVerbs);
@@ -19,6 +33,9 @@ public sealed class PenSystem : EntitySystem
 
     private void OnGetVerbs(Entity<PenComponent> ent, ref GetVerbsEvent<Verb> args)
     {
+        if (!args.CanInteract)
+            return;
+
         args.Verbs.UnionWith(CreateVerb(ent, args.User));
     }
 
@@ -31,40 +48,40 @@ public sealed class PenSystem : EntitySystem
     {
         List<Verb> verbs = [];
 
-        foreach (var writeSize in Enum.GetValues<PenWriteSize>())
+        foreach (var writeSize in PenBrushWriteNames)
         {
             var writeVerb = new Verb
             {
-                Text = Loc.GetString("pen-brush-write-" + writeSize),
-                Disabled = ent.Comp.BrushWriteSize == (int)writeSize,
+                Text = Loc.GetString(writeSize.Value),
+                Disabled = ent.Comp.BrushWriteSize == writeSize.Key,
                 Act = () =>
                 {
-                    ent.Comp.BrushWriteSize = (int)writeSize;
+                    ent.Comp.BrushWriteSize = writeSize.Key;
                     Dirty(ent);
 
                     UpdateUI(ent, user);
                 },
-                Priority = (int)writeSize,
+                Priority = -writeSize.Key,
                 Category = VerbCategory.PenWriteSize,
             };
 
             verbs.Add(writeVerb);
         }
 
-        foreach (var eraseSize in Enum.GetValues<PenEraseSize>())
+        foreach (var eraseSize in PenBrushEraseNames)
         {
             var eraseVerb = new Verb
             {
-                Text = Loc.GetString("pen-brush-erase-" + eraseSize),
-                Disabled = ent.Comp.BrushEraseSize == (int)eraseSize,
+                Text = Loc.GetString(eraseSize.Value),
+                Disabled = ent.Comp.BrushEraseSize == eraseSize.Key,
                 Act = () =>
                 {
-                    ent.Comp.BrushEraseSize = (int)eraseSize;
+                    ent.Comp.BrushEraseSize = eraseSize.Key;
                     Dirty(ent);
 
                     UpdateUI(ent, user);
                 },
-                Priority = (int)eraseSize,
+                Priority = -eraseSize.Key,
                 Category = VerbCategory.PenEraseSize,
             };
 
@@ -117,20 +134,4 @@ public sealed class PenSystem : EntitySystem
             _ui.SetUiState(ent.Owner, ui.Key, state);
         }
     }
-}
-
-[Serializable, NetSerializable]
-public enum PenWriteSize
-{
-    Normal = 1,
-    Medium = 2,
-    Large = 4,
-}
-
-[Serializable, NetSerializable]
-public enum PenEraseSize
-{
-    Normal = 2,
-    Medium = 4,
-    Large = 6,
 }

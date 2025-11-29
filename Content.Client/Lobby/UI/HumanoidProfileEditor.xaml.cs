@@ -56,6 +56,7 @@ namespace Content.Client.Lobby.UI
         private readonly LobbyUIController _controller;
 
         private readonly SpriteSystem _sprite;
+        private readonly PenSystem _pen;
 
         // CCvar.
         private int _maxNameLength;
@@ -139,6 +140,8 @@ namespace Content.Client.Lobby.UI
             _random = IoCManager.Resolve<IRobustRandom>();
             _controller = UserInterfaceManager.GetUIController<LobbyUIController>();
             _sprite = _entManager.System<SpriteSystem>();
+
+            _pen = _entManager.System<PenSystem>();
 
             _maxNameLength = _cfgManager.GetCVar(CCVars.MaxNameLength);
             _allowFlavorText = _cfgManager.GetCVar(CCVars.FlavorText);
@@ -465,9 +468,9 @@ namespace Content.Client.Lobby.UI
             TabContainer.SetTabTitle(6, Loc.GetString("humanoid-profile-editor-other-tab"));
             Signature.SignatureChanged += SetSignatureData;
 
-            foreach (var writeSize in Enum.GetValues<PenWriteSize>())
+            foreach (var writeSize in _pen.PenBrushWriteNames)
             {
-                BrushWriteSizesList.AddItem(Loc.GetString($"pen-brush-write-{writeSize}"), metadata: (int)writeSize);
+                BrushWriteSizesList.AddItem(Loc.GetString(writeSize.Value), metadata: writeSize.Key);
             }
 
             BrushWriteSizesList.OnItemSelected += args =>
@@ -476,9 +479,9 @@ namespace Content.Client.Lobby.UI
                     Signature.BrushWriteSize = (int)args.ItemList[args.ItemIndex].Metadata!;
             };
 
-            foreach (var eraseSize in Enum.GetValues<PenEraseSize>())
+            foreach (var eraseSize in _pen.PenBrushEraseNames)
             {
-                BrushEraseSizesList.AddItem(Loc.GetString($"pen-brush-write-{eraseSize}"), metadata: (int)eraseSize);
+                BrushEraseSizesList.AddItem(Loc.GetString(eraseSize.Value), metadata: eraseSize.Key);
             }
 
             BrushEraseSizesList.OnItemSelected += args =>

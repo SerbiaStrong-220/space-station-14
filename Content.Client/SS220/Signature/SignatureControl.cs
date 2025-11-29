@@ -3,6 +3,7 @@ using Content.Shared.SS220.Signature;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Shared.Input;
+using Robust.Shared.Threading;
 
 namespace Content.Client.SS220.Signature;
 
@@ -19,10 +20,14 @@ public sealed class SignatureControl : Control
 
     public bool Editable { get; set; } = true;
 
+    public Color BackgroundColor { get; set; } = Color.FromHex("#ffffff88");
+
+    public Color BorderColor { get; set; } = Color.Black.WithAlpha(0.4f);
+
     public event Action<SignatureData?>? SignatureChanged;
 
+    private SignatureDrawMode _currentMode = SignatureDrawMode.Write;
     private bool _isDrawing;
-    private bool _isErasing;
 
     private (int x, int y)? _lastPixel;
 
@@ -93,9 +98,9 @@ public sealed class SignatureControl : Control
         Data ??= new SignatureData((int)CanvasSize.X, (int)CanvasSize.Y);
 
         if (args.Function == EngineKeyFunctions.UIClick)
-            _isErasing = false;
+            _currentMode = SignatureDrawMode.Write;
         else if (args.Function == EngineKeyFunctions.UIRightClick)
-            _isErasing = true;
+            _currentMode = SignatureDrawMode.Erase;
         else
             return;
 
@@ -120,7 +125,6 @@ public sealed class SignatureControl : Control
             return;
 
         _isDrawing = false;
-        _isErasing = false;
         _lastPixel = null;
 
         SignatureChanged?.Invoke(Data);
@@ -166,7 +170,7 @@ public sealed class SignatureControl : Control
         if (Data == null)
             return;
 
-        var radius = _isErasing ? BrushEraseSize : BrushWriteSize;
+        var radius = _currentMode == SignatureDrawMode.Erase ? BrushEraseSize : BrushWriteSize;
         var half = radius / 2;
 
         for (var yy = -half; yy <= half; yy++)
@@ -179,19 +183,14 @@ public sealed class SignatureControl : Control
                 if (px < 0 || px >= Data.Width || py < 0 || py >= Data.Height)
                     continue;
 
-                if (_isErasing)
+                switch (_currentMode)
                 {
-                    if (!Data.GetPixel(px, py))
-                        continue;
-
-                    Data.SetPixel(px, py, true);
-                }
-                else
-                {
-                    if (Data.GetPixel(px, py))
-                        continue;
-
-                    Data.SetPixel(px, py);
+                    case SignatureDrawMode.Write:
+                        Data.SetPixel(px, py);
+                        break;
+                    case SignatureDrawMode.Erase:
+                        Data.ErasePixel(px, py);
+                        break;
                 }
 
                 _dirty = true;
@@ -290,8 +289,8 @@ public sealed class SignatureControl : Control
 
         if (Editable)
         {
-            handle.DrawRect(rect, Color.FromHex("#ffffff88"));
-            handle.DrawRect(rect, Color.Black.WithAlpha(0.4f), false);
+            handle.DrawRect(rect, BackgroundColor);
+            handle.DrawRect(rect, BorderColor, false);
         }
 
         UpdateCanvas(handle);
@@ -299,4 +298,10 @@ public sealed class SignatureControl : Control
         if (_canvas != null)
             handle.DrawTextureRect(_canvas.Texture, rect);
     }
+}
+
+public enum SignatureDrawMode
+{
+    Write,
+    Erase,
 }
