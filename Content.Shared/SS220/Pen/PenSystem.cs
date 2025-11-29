@@ -2,7 +2,6 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Paper;
 using Content.Shared.SS220.Signature;
 using Content.Shared.Verbs;
-using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Pen;
 

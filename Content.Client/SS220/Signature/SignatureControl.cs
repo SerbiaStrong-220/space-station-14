@@ -3,7 +3,6 @@ using Content.Shared.SS220.Signature;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Shared.Input;
-using Robust.Shared.Threading;
 
 namespace Content.Client.SS220.Signature;
 
