@@ -34,3 +34,6 @@ ghost-role-information-small-space-adder-name = Маленькая космич�
 ghost-role-information-cobra-space-name = Космическая кобра
 ghost-role-information-cobra-space-description = Когда вас заметят - будет слишком поздно. Выползайте на охоту!
 ghost-role-information-snake-overall-rules = Охотьтесь вместе со своими сородичами или самостоятельно устраивайте засады, главное - не мешайте своим сородичам.
+
+ghost-role-information-sentient-shark-name = Разумная акула
+ghost-role-information-sentient-shark-description = Помогите дракону навести хаос на станции!

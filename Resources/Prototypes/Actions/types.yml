@@ -173,7 +173,7 @@
     itemIconStyle: BigAction
     priority: -20
     icon:
-      sprite: Objects/Weapons/Grenades/empgrenade.rsi
+      sprite: SS220/Objects/Weapons/Grenades/empgrenade.rsi #SS220 From cabinet to 3/4, Part 2
       state: icon
 
 - type: entity
@@ -186,7 +186,7 @@
   #SS220-underused-uplinks-stuff end
   components:
   - type: LimitedCharges
-    maxCharges: 12 #SS220 changed
+    maxCharges: 2 #SS220 changed
   - type: Action
     checkCanInteract: false
     useDelay: 5

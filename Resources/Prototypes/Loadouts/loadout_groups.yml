@@ -223,6 +223,8 @@
   loadouts:
   - HoPJumpsuit
   - HoPJumpskirt
+  - HoPJumpsuitTurtleneck #SS220 HoP Turtleneck
+  - HoPJumpskirtTurtleneck #SS220 HoP Turtleneck
 
 - type: loadoutGroup
   id: HoPNeck

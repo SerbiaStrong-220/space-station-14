@@ -143,7 +143,7 @@ construction-graph-tag-fire-extinguisher = огнетушитель
 construction-graph-tag-fire-helmet = пожарный шлем
 
 # salvage
-construction-graph-tag-spationaut-hardsuit = скафандр спасителя
+construction-graph-tag-spationaut-hardsuit = лёгкий скафандр утилизатора
 
 ## ss220 specific
 

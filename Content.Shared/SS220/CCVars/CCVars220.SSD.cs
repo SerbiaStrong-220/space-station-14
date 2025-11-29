@@ -12,6 +12,6 @@ public sealed partial class CCVars220
     /// <summary>
     /// After passing this time we remove entity from ssd queue in ANY case
     /// </summary>
-    public static readonly CVarDef<float> SDDTimeOut =
+    public static readonly CVarDef<float> SSDTimeOut =
         CVarDef.Create("afk.ssd_timeout", 2400f, CVar.SERVERONLY);
 }
