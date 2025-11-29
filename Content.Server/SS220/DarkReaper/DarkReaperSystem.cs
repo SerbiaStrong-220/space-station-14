@@ -138,6 +138,7 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
         }
 
         _container.Insert(target, container);
+        SetPaused(target, true);
         _damageable.TryChangeDamage(ent.Owner, ent.Comp.HealPerConsume, true, origin: ent);
 
         ent.Comp.Consumed++;
