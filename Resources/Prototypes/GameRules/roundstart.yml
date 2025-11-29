@@ -124,6 +124,10 @@
     - prefRoles: [ NukeopsCommander ]
       fallbackRoles: [ Nukeops, NukeopsMedic ]
       spawnerPrototype: SpawnPointNukeopsCommander
+      #ss220 ratio-fix bgn
+      max: 1
+      playerRatio: 1
+      #ss220 ratio-fix end
       startingGear: SyndicateCommanderGearFull
       roleLoadout:
       - RoleSurvivalNukie
@@ -141,6 +145,10 @@
     - prefRoles: [ NukeopsMedic ]
       fallbackRoles: [ Nukeops, NukeopsCommander ]
       spawnerPrototype: SpawnPointNukeopsMedic
+      #ss220 ratio-fix bgn
+      max: 1
+      playerRatio: 1
+      #ss220 ratio-fix end
       startingGear: SyndicateOperativeMedicFull
       roleLoadout:
       - RoleSurvivalNukie
@@ -159,7 +167,7 @@
       fallbackRoles: [ NukeopsCommander, NukeopsMedic ]
       spawnerPrototype: SpawnPointNukeopsOperative
       max: 3
-      playerRatio: 25 #ss220 Nukeops_balance_fix
+      playerRatio: 23 #ss220 Nukeops_balance_fix
       startingGear: SyndicateOperativeGearFull
       roleLoadout:
       - RoleSurvivalNukie
