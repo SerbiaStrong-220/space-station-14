@@ -14,8 +14,6 @@ public sealed class GrillableSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
 
-    private const float AlmostDoneCookPercentage = 0.75f;
-
     /// <inheritdoc/>
     public override void Initialize()
     {
@@ -41,7 +39,7 @@ public sealed class GrillableSystem : EntitySystem
             case <= 0:
                 args.PushMarkup(Loc.GetString("grillable-state-begin", ("target", Loc.GetEntityData(ent.Comp.CookingResult).Name)));
                 break;
-            case var currentCookTime when currentCookTime <= ent.Comp.TimeToCook * AlmostDoneCookPercentage:
+            case var currentCookTime when currentCookTime <= ent.Comp.TimeToCook * ent.Comp.AlmostDoneCookPercentage:
                 args.PushMarkup(Loc.GetString("grillable-state-in-process"));
                 break;
             case var currentCookTime when currentCookTime <= ent.Comp.TimeToCook:

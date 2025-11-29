@@ -4,9 +4,7 @@ using Content.Shared.Placeable;
 using Content.Shared.SS220.EntityEffects.Effects;
 using Content.Shared.Temperature;
 using Content.Shared.Temperature.Systems;
-using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.EntitySerialization;
 using Robust.Shared.Network;
 
 namespace Content.Shared.SS220.Cooking.Grilling;
@@ -31,7 +29,7 @@ public abstract class SharedGrillSystem : EntitySystem
 
     private void OnHeaterSettingChanged(Entity<GrillComponent> ent, ref SharedEntityHeaterSystem.HeaterSettingChangedEvent args)
     {
-        ent.Comp.IsGrillOn = args.Setting != EntityHeaterSetting.Off;
+        ent.Comp.GrillSettings = args.Setting;
         Dirty(ent);
 
         UpdateGrillVisuals(ent);
@@ -63,7 +61,7 @@ public abstract class SharedGrillSystem : EntitySystem
 
     private void OnItemPlaced(Entity<GrillComponent> ent, ref ItemPlacedEvent args)
     {
-        if (!ent.Comp.IsGrillOn)
+        if (ent.Comp.GrillSettings == EntityHeaterSetting.Off)
             return;
 
         UpdateGrillVisuals(ent);
@@ -72,47 +70,54 @@ public abstract class SharedGrillSystem : EntitySystem
     private void UpdateGrillVisuals(Entity<GrillComponent> grill)
     {
         var playAudio = false;
-
-        if (TryComp<ItemPlacerComponent>(grill, out var placer))
+        if (!TryComp<ItemPlacerComponent>(grill, out var placer))
         {
-            foreach (var item in placer.PlacedEntities)
+            _audio.Stop(grill.Comp.GrillingAudioStream);
+            return;
+        }
+
+        foreach (var item in placer.PlacedEntities)
+        {
+            if (!TryComp<GrillableComponent>(item, out var grillable))
+                continue;
+
+            if (grill.Comp.GrillSettings == EntityHeaterSetting.Off)
             {
-                if (!TryComp<GrillableComponent>(item, out var grillable))
-                    continue;
-
-                if (grill.Comp.IsGrillOn)
-                {
-                    playAudio = true;
-                    var grillVisuals = EnsureComp<GrillingVisualComponent>(item);
-                    grillVisuals.GrillingSprite = grill.Comp.GrillingSprite;
-                    grillable.IsCooking = true;
-                }
-                else
-                {
-                    RemComp<GrillingVisualComponent>(item);
-                    grillable.IsCooking = false;
-                }
-
-                Dirty(item, grillable);
+                RemComp<GrillingVisualComponent>(item);
+                grillable.IsCooking = false;
             }
+            else
+            {
+                playAudio = true;
+                var grillVisuals = EnsureComp<GrillingVisualComponent>(item);
+                grillVisuals.GrillingSprite = grill.Comp.GrillingSprite;
+                grillable.IsCooking = true;
+            }
+
+            Dirty(item, grillable);
         }
 
-        if (_net.IsServer)
-        {
-            if(playAudio)
-                PlayGrillAudio(grill);
-            else
-                _audio.Stop(grill.Comp.GrillingAudioStream);
-        }
+        _audio.Stop(grill.Comp.GrillingAudioStream);
+        if (playAudio && _net.IsServer)
+            PlayGrillAudio(grill, GetPitchFromSetting(grill.Comp.GrillSettings));
+
     }
 
-    private void PlayGrillAudio(Entity<GrillComponent> grill)
+    private void PlayGrillAudio(Entity<GrillComponent> grill, float pitch)
     {
-        if (_audio.IsPlaying(grill.Comp.GrillingAudioStream))
-            return;
-
-        var audioParams = AudioParams.Default.WithLoop(true);
+        var audioParams = grill.Comp.GrillSound.Params.WithPitchScale(pitch);
         grill.Comp.GrillingAudioStream = _audio.PlayPvs(grill.Comp.GrillSound, grill, audioParams)?.Entity;
+    }
+
+    private float GetPitchFromSetting(EntityHeaterSetting setting)
+    {
+        return setting switch
+        {
+            EntityHeaterSetting.High => 1.5f,
+            EntityHeaterSetting.Medium => 1.1f,
+            EntityHeaterSetting.Low => 0.9f,
+            _ => 1f
+        };
     }
 }
 

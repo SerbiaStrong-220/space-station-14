@@ -9,7 +9,8 @@ namespace Content.Shared.SS220.Cooking.Grilling;
 /// <summary>
 /// This is used for entities that can be cooked on the grill
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
+[RegisterComponent]
+[NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class GrillableComponent : Component
 {
     [DataField]
@@ -18,16 +19,19 @@ public sealed partial class GrillableComponent : Component
     [DataField]
     public string CookingResult;
 
+    [DataField]
+    public float AlmostDoneCookPercentage = 0.75f;
+
+    [DataField]
+    // 473f - ideal grill temp in Kelvins
+    public float IdealGrillingTemperature = (200 + Atmospherics.T0C);
+
+    [DataField]
+    public SoundSpecifier CookingDoneSound = new SoundPathSpecifier("/Audio/Effects/sizzle.ogg");
+
     [ViewVariables, AutoNetworkedField]
     public float CurrentCookTime;
 
     [ViewVariables, AutoNetworkedField]
     public bool IsCooking;
-
-    [ViewVariables]
-    public SoundSpecifier CookingDoneSound = new SoundPathSpecifier("/Audio/Effects/sizzle.ogg");
-
-    [DataField]
-    // 473f - ideal grill temp in Kelvins
-    public float IdealGrillingTemperature = (200 + Atmospherics.T0C);
 }

@@ -19,7 +19,7 @@ public sealed class GrillSystem : SharedGrillSystem
         var query = EntityQueryEnumerator<GrillComponent, ItemPlacerComponent, ApcPowerReceiverComponent>();
         while (query.MoveNext(out _, out var grill, out var placer, out var power))
         {
-            if (!power.Powered || !grill.IsGrillOn)
+            if (!power.Powered || grill.GrillSettings == Shared.Temperature.EntityHeaterSetting.Off)
                 continue;
 
             foreach (var ent in placer.PlacedEntities)
