@@ -9,7 +9,7 @@ public sealed partial class MindExtensionComponent : Component
     public NetUserId PlayerSession;
 
     [ViewVariables(VVAccess.ReadOnly)]
-    public HashSet<EntityUid> Trail = [];
+    public Dictionary<EntityUid, TrailPointMetaData> Trail = [];
 
     [ViewVariables(VVAccess.ReadWrite), DataField("riftAccumulator")]
     public TimeSpan? RespawnTimer = default!;
@@ -64,10 +64,35 @@ public sealed class GhostBodyListResponseEvent : EntityEventArgs
 }
 
 [Serializable, NetSerializable]
-public sealed class SignalTimerBoundUserInterfaceState : BoundUserInterfaceState
+public sealed class UpdateRespawnTime : EntityEventArgs
 {
-    public TimeSpan TriggerTime;
+    public TimeSpan Time;
+
+    public UpdateRespawnTime(TimeSpan time)
+    {
+        Time = time;
+    }
 }
 
 [Serializable, NetSerializable]
-public record struct BodyCont(NetEntity Id, string Name, bool IsAvailble);
+public record struct BodyCont(NetEntity Id, TrailPointMetaData MetaData, BodyStateToEnter State);
+
+[Serializable, NetSerializable]
+public enum BodyStateToEnter
+{
+    Avaible,
+    Abandoned,
+    Engaged,
+    InCryo,
+    Destroyed
+}
+
+[Serializable, NetSerializable]
+public record class TrailPointMetaData
+{
+    public bool IsAbandoned { get; set; } = false;
+
+    public string EntityName { get; set; } = string.Empty;
+
+    public string EntityDescription { get; set; } = string.Empty;
+}

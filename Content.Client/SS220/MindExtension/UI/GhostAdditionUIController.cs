@@ -4,16 +4,18 @@ using Content.Shared.Ghost;
 using Content.Shared.SS220.Mind;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
-using Robust.Shared.ContentPack;
+using Robust.Shared.Timing;
 
-namespace Content.Client.SS220.Ghost.UI;
-public sealed partial class GhostAdditionUIController : UIController, IOnSystemChanged<GhostExtensionSystem>
+namespace Content.Client.SS220.MindExtension.UI;
+public sealed partial class GhostAdditionUIController : UIController, IOnSystemChanged<MindExtensionSystem>
 {
     [Dependency] private readonly IEntityNetworkManager _net = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
 
-    [UISystemDependency] private readonly GhostSystem? _system = default;
-    [UISystemDependency] private readonly GhostExtensionSystem _extensionSystem = default!;
+    [UISystemDependency] private readonly MindExtensionSystem _extensionSystem = default!;
+
     private GhostAdditionGui? Gui => UIManager.GetActiveUIWidgetOrNull<GhostAdditionGui>();
+
     public override void Initialize()
     {
         base.Initialize();
@@ -21,6 +23,14 @@ public sealed partial class GhostAdditionUIController : UIController, IOnSystemC
         var gameplayStateLoad = UIManager.GetUIController<GameplayStateLoadController>();
         gameplayStateLoad.OnScreenLoad += OnScreenLoad;
         gameplayStateLoad.OnScreenUnload += OnScreenUnload;
+    }
+    public override void FrameUpdate(FrameEventArgs args)
+    {
+        if (_extensionSystem?.RespawnTime is null)
+            return;
+
+        var temp = (TimeSpan)_extensionSystem.RespawnTime - _gameTiming.CurTime;
+        Gui?.SetRespawnTimer(temp, _gameTiming.CurTime);
     }
     private void OnScreenLoad()
     {
@@ -52,12 +62,12 @@ public sealed partial class GhostAdditionUIController : UIController, IOnSystemC
         Gui.ReturnToBodyPressed -= RequestReturnToBody;
     }
 
-    public void OnSystemLoaded(GhostExtensionSystem system)
+    public void OnSystemLoaded(MindExtensionSystem system)
     {
         system.GhostBodyListResponse += OnGhostBodyListResponse;
     }
 
-    public void OnSystemUnloaded(GhostExtensionSystem system)
+    public void OnSystemUnloaded(MindExtensionSystem system)
     {
         system.GhostBodyListResponse -= OnGhostBodyListResponse;
     }

@@ -16,7 +16,7 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Shared.SS220.Containers; //SS220-cryo-mobs-fix
 using Content.Server.Polymorph.Systems; //SS220-cryo-mobs-fix
 using Content.Shared.Body.Systems;
-using Content.Server.SS220.GhostExtension; //SS220-cryo-mobs-fix
+using Content.Server.SS220.MindExtension; //SS220
 
 namespace Content.Server.Mind;
 

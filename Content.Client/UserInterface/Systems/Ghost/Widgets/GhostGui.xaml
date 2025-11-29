@@ -1,6 +1,6 @@
 <widgets:GhostGui xmlns="https://spacestation14.io"
                   xmlns:widgets="clr-namespace:Content.Client.UserInterface.Systems.Ghost.Widgets"
-                  xmlns:addition="clr-namespace:Content.Client.SS220.Ghost.UI"
+                  xmlns:addition="clr-namespace:Content.Client.SS220.MindExtension.UI"
                   HorizontalAlignment="Center">
     <BoxContainer Orientation="Horizontal">
         <addition:GhostAdditionGui> </addition:GhostAdditionGui>

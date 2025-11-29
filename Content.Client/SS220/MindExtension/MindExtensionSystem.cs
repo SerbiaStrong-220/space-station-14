@@ -1,25 +1,25 @@
-using Content.Client.Players;
-using Content.Shared.Ghost;
-using Content.Shared.Mind;
 using Content.Shared.SS220.Mind;
-using Robust.Client.GameObjects;
 using Robust.Client.Player;
 
-namespace Content.Client.SS220.Ghost;
+namespace Content.Client.SS220.MindExtension;
 
-//Написать нормальную клиентскую логику.
-public sealed class GhostExtensionSystem : EntitySystem
+public sealed class MindExtensionSystem : EntitySystem
 {
     [Dependency] private readonly IPlayerManager _temp = default!;
-    [Dependency] private readonly SharedMindExtensionSystem _sharedMindExtensionSystem = default!;
-
 
     public event Action<GhostBodyListResponseEvent>? GhostBodyListResponse;
+    public TimeSpan? RespawnTime { get; private set; }
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeNetworkEvent<GhostBodyListResponseEvent>(OnGhostBodyListResponseEvent);
+        SubscribeNetworkEvent<UpdateRespawnTime>(OnUpdateRespawnTime);
+    }
+
+    private void OnUpdateRespawnTime(UpdateRespawnTime ev)
+    {
+        RespawnTime = ev.Time;
     }
 
     private void OnGhostBodyListResponseEvent(GhostBodyListResponseEvent ev)

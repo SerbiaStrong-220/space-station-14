@@ -7,7 +7,7 @@ using Robust.Client.UserInterface.XAML;
 using System.Linq;
 using System.Numerics;
 
-namespace Content.Client.SS220.Ghost.UI;
+namespace Content.Client.SS220.MindExtension.UI;
 
 [GenerateTypedNameReferences]
 public sealed partial class GhostBodyMenuWindow : DefaultWindow

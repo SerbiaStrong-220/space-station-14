@@ -1,5 +1,5 @@
 <local:GhostBodyMenuWindow xmlns="https://spacestation14.io"
-                           xmlns:local="clr-namespace:Content.Client.SS220.Ghost.UI"
+                           xmlns:local="clr-namespace:Content.Client.SS220.MindExtension.UI"
                            MinSize="450 450"
                            SetSize="450 450">
     <BoxContainer Orientation="Vertical"
