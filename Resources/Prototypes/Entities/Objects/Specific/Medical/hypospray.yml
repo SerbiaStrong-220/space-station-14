@@ -22,6 +22,7 @@
     solution: hypospray
   - type: ExaminableSolution
     solution: hypospray
+    exactVolume: true
   - type: Hypospray
     onlyAffectsMobs: false
   - type: UseDelay
@@ -61,6 +62,7 @@
     solution: hypospray
   - type: ExaminableSolution
     solution: hypospray
+    exactVolume: true
   - type: Hypospray
     onlyAffectsMobs: false
   - type: UseDelay
@@ -118,12 +120,12 @@
   id: ChemicalMedipen
   components:
   - type: Sprite
-    sprite: Objects/Specific/Medical/medipen.rsi
+    sprite: SS220/Objects/Specific/Medical/medipen.rsi #SS220 Repsrite Medipen
     layers:
     - state: firstaid
       map: ["enum.SolutionContainerLayers.Fill"]
   - type: Item
-    sprite: Objects/Specific/Medical/medipen.rsi
+    sprite: SS220/Objects/Specific/Medical/medipen.rsi #SS220 Repsrite Medipen
     inhandVisuals:
       left:
       - state: base-needle-inhand-left
@@ -142,6 +144,7 @@
         maxVol: 15
   - type: ExaminableSolution
     solution: pen
+    exactVolume: true
   - type: Hypospray
     solutionName: pen
     transferAmount: 15
@@ -168,7 +171,7 @@
   description: A rapid and safe way to stabilize patients in critical condition for personnel without advanced medical knowledge. Beware, as it's easy to overdose on epinephrine and tranexamic acid.
   components:
   - type: Sprite
-    sprite: Objects/Specific/Medical/medipen.rsi
+    sprite: SS220/Objects/Specific/Medical/medipen.rsi #SS220 Repsrite Medipen
     layers:
     - state: medipen
       map: ["enum.SolutionContainerLayers.Fill"]
@@ -205,7 +208,7 @@
         color: "#573d9e"
       - state: base-colorB-inhand-right
   - type: Sprite
-    sprite: Objects/Specific/Medical/medipen.rsi
+    sprite: SS220/Objects/Specific/Medical/medipen.rsi #SS220 Repsrite Medipen
     layers:
     - state: penacid
       map: ["enum.SolutionContainerLayers.Fill"]
@@ -242,7 +245,7 @@
         color: "#c73333"
       - state: base-colorB-inhand-right
   - type: Sprite
-    sprite: Objects/Specific/Medical/medipen.rsi
+    sprite: SS220/Objects/Specific/Medical/medipen.rsi #SS220 Repsrite Medipen
     layers:
     - state: bicpen
       map: ["enum.SolutionContainerLayers.Fill"]
@@ -284,7 +287,7 @@
         color: "#427485"
       - state: base-colorB-inhand-right
   - type: Sprite
-    sprite: Objects/Specific/Medical/medipen.rsi
+    sprite: SS220/Objects/Specific/Medical/medipen.rsi #SS220 Repsrite Medipen
     layers:
     - state: dermpen
       map: ["enum.SolutionContainerLayers.Fill"]
@@ -326,7 +329,7 @@
         color: "#e3832f"
       - state: base-colorB-inhand-right
   - type: Sprite
-    sprite: Objects/Specific/Medical/medipen.rsi
+    sprite: SS220/Objects/Specific/Medical/medipen.rsi #SS220 Repsrite Medipen
     layers:
     - state: arithpen
       map: ["enum.SolutionContainerLayers.Fill"]
@@ -368,7 +371,7 @@
         color: "#c7be5d"
       - state: base-colorB-inhand-right
   - type: Sprite
-    sprite: Objects/Specific/Medical/medipen.rsi
+    sprite: SS220/Objects/Specific/Medical/medipen.rsi #SS220 Repsrite Medipen
     layers:
     - state: punctpen
       map: ["enum.SolutionContainerLayers.Fill"]
@@ -410,7 +413,7 @@
         color: "#c7a45d"
       - state: base-colorB-inhand-right
   - type: Sprite
-    sprite: Objects/Specific/Medical/medipen.rsi
+    sprite: SS220/Objects/Specific/Medical/medipen.rsi #SS220 Repsrite Medipen
     layers:
     - state: pyrapen
       map: ["enum.SolutionContainerLayers.Fill"]
@@ -452,7 +455,7 @@
         color: "#5d81c7"
       - state: base-colorB-inhand-right
   - type: Sprite
-    sprite: Objects/Specific/Medical/medipen.rsi
+    sprite: SS220/Objects/Specific/Medical/medipen.rsi #SS220 Repsrite Medipen
     layers:
     - state: dexpen
       map: ["enum.SolutionContainerLayers.Fill"]
@@ -494,7 +497,7 @@
         color: "#a84597"
       - state: base-colorB-inhand-right
   - type: Sprite
-    sprite: Objects/Specific/Medical/medipen.rsi
+    sprite: SS220/Objects/Specific/Medical/medipen.rsi #SS220 Repsrite Medipen
     layers:
     - state: hypovolemic
       map: [ "enum.SolutionContainerLayers.Fill" ]
@@ -539,7 +542,7 @@
       - state: base-colorB-inhand-right
         color: "#c62933"
   - type: Sprite
-    sprite: Objects/Specific/Medical/medipen.rsi
+    sprite: SS220/Objects/Specific/Medical/medipen.rsi #SS220 Repsrite Medipen
     layers:
     - state: stimpen
       map: ["enum.SolutionContainerLayers.Fill"]
@@ -560,7 +563,7 @@
     onlyAffectsMobs: false
     injectOnly: true
   - type: StaticPrice
-    price: 500
+    price: 1500
 
 - type: entity
   name: hyperzine microinjector
@@ -583,7 +586,7 @@
       - state: base-colorB-inhand-right
         color: "#c62933"
   - type: Sprite
-    sprite: Objects/Specific/Medical/medipen.rsi
+    sprite: SS220/Objects/Specific/Medical/medipen.rsi #SS220 Repsrite Medipen
     layers:
     - state: microstimpen
       map: ["enum.SolutionContainerLayers.Fill"]
@@ -599,7 +602,7 @@
     changeColor: false
     emptySpriteName: microstimpen_empty
   - type: StaticPrice
-    price: 100
+    price: 583 # 3500 for 6 as a freaky fraction
 
 - type: entity
   name: combat medipen
@@ -620,7 +623,7 @@
         color: "#5bcaca"
       - state: base-colorB-inhand-right
   - type: Sprite
-    sprite: Objects/Specific/Medical/medipen.rsi
+    sprite: SS220/Objects/Specific/Medical/medipen.rsi #SS220 Repsrite Medipen
     layers:
     - state: morphen
       map: ["enum.SolutionContainerLayers.Fill"]
@@ -643,7 +646,7 @@
     onlyAffectsMobs: false
     injectOnly: true
   - type: StaticPrice
-    price: 500
+    price: 1500
 
 - type: entity
   name: pen
@@ -658,10 +661,12 @@
         maxVol: 10
   - type: RefillableSolution
     solution: hypospray
-# Corvax-HiddenDesc-Start
-  #- type: ExaminableSolution
-  #  solution: hypospray
-# Corvax-HiddenDesc-End
+  # Corvax-HiddenDesc-Start
+  # - type: ExaminableSolution
+  #   solution: hypospray
+  #   heldOnly: true # Allow examination only when held in hand.
+  #   exactVolume: true
+  # Corvax-HiddenDesc-End
   - type: Hypospray
     onlyAffectsMobs: false
   - type: UseDelay
@@ -709,7 +714,7 @@
   description: A rapid dose of Weh. Contains juice that makes you Weh.
   components:
   - type: Sprite
-    sprite: Objects/Specific/Medical/medipen.rsi
+    sprite: SS220/Objects/Specific/Medical/medipen.rsi #SS220 Repsrite Medipen
     layers:
     - state: medipen
       map: [ "enum.SolutionContainerLayers.Fill" ]

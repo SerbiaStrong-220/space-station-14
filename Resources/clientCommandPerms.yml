@@ -40,6 +40,7 @@
     - replay_load
     - saveconfig
     - chatwindow
+    - ttsqueuereset
 
 - Flags: DEBUG
   Commands:
@@ -73,13 +74,18 @@
     - fullstatereset
     - exec # macro moment #SS220 exec-command-perms-change
     - dumpentities
+    - showaccessreaders
 
 - Flags: MAPPING
   Commands:
     - mapping
+    - mappingclientsidesetup
+    - showsubfloor
+    - showsubfloorforever
     - toggleautosave
     - toggledecals
-    - "zones:control_window" # SS220 Zones
+    - showaccessreaders
+    - zones:control_window # SS220 Zones
 
 - Flags: QUERY
   Commands:

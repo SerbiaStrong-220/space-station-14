@@ -605,8 +605,8 @@
       amount: 1
 # SS220 Dangerous chemistry update begin
   effects:
-    - !type:EmpReactionEffect
-      rangePerUnit: 0.2
+    - !type:Emp
+      rangeModifier: 0.2
       maxRange: 2
       energyConsumption: 50
       duration: 10
@@ -635,7 +635,7 @@
     Blood:
       amount: 3
     Omnizine:
-      amount: 1
+      amount: 3  #SS220 New_accesses_and_some_tweaks
     Cryoxadone:
       amount: 2
   products:

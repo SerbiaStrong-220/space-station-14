@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ SimpleSpaceMobBase, FlyingMobBase ]
+  parent: [ SimpleSpaceMobBase, FlyingMobBase, MobPassiveCollision ] #SS220 PR: Tweak Carp Damage
   id: BaseMobDragon
   suffix: ""
   name: space dragon
@@ -103,14 +103,10 @@
       types: {}
   - type: StatusEffects # Overwriting basesimplemob to remove flash, getting flashed as dragon just feelsbad
     allowed:
-    - SlowedDown
-    - Stutter
     - Electrocution
-    - ForcedSleep
     - TemporaryBlindness
     - Pacified
     - RadiationProtection
-    - Drowsiness
     - Adrenaline
   - type: Temperature
     heatDamageThreshold: 800
@@ -141,8 +137,12 @@
         Piercing: 15
         Slash: 15
   - type: Devourer
-    foodPreference: Humanoid
-    shouldStoreDevoured: true
+    foodPreferenceWhitelist:
+      components:
+      - HumanoidAppearance
+    stomachStorageWhitelist:
+      components:
+      - MobState
     chemical: Ichor
     healRate: 25.0 #SS220 Antag balance
     whitelist:
@@ -160,8 +160,15 @@
     tags:
     - CannotSuicide
     - DoorBumpOpener
-  - type: ReplacementAccent #SS220 No talking dragons
-    accent: genericAggressive
+    - StunImmune
+  # - type: ReplacementAccent #SS220 Dragon & Carp Language Begin
+  #   accent: genericAggressive
+  - type: Language
+    availableLanguages:
+    - id: Dragon
+    - id: Carpish
+    - id: Galactic
+      canSpeak: false #SS220 Dragon & Carp Language End
     # ss220 lowTTKUpdate
   - type: Damageable
     damageContainer: Biological
@@ -201,6 +208,7 @@
   - type: GuideHelp
     guides:
     - MinorAntagonists
+  - type: Insulated # SS220 Insulated Dragon and Carp
 
 - type: entity
   categories: [ HideSpawnMenu ]

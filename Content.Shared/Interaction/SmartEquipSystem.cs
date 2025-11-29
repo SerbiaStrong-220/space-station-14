@@ -5,13 +5,17 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Input;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
+using Content.Shared.SS220.CCVars;
 using Content.Shared.Stacks;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Whitelist;
+using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Input.Binding;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.Interaction;
 
@@ -28,14 +32,49 @@ public sealed class SmartEquipSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly IConfigurationManager _configuration = default!; // SS220-better-smart-equip
+    [Dependency] private readonly INetManager _netManager = default!; // SS220-better-smart-equip
+    [Dependency] private readonly ISharedPlayerManager _playerManager = default!; // SS220-better-smart-equip
+
+    private bool _clientTryToPickUpStorageInSuitContainer = true; // SS220-better-smart-equip
+
+    private Dictionary<ICommonSession, bool> _clientsSettingForTryToPickUpStorageInSuitContainer = new();  // SS220-better-smart-equip
 
     /// <inheritdoc/>
     public override void Initialize()
     {
+        // SS220-better-smart-equip-begins
+        if (_netManager.IsClient)
+            _configuration.OnValueChanged(CCVars220.TryToPickUpStorageInSuitContainer, x =>
+            {
+                _clientTryToPickUpStorageInSuitContainer = x;
+                var ev = new SessionTryToPickUpStorageInSuitContainerMessage(x);
+                RaiseNetworkEvent(ev);
+            }, true);
+        else
+        {
+            SubscribeNetworkEvent<SessionTryToPickUpStorageInSuitContainerMessage>((msg, args) =>
+            {
+                if (_clientsSettingForTryToPickUpStorageInSuitContainer.ContainsKey(args.SenderSession))
+                    _clientsSettingForTryToPickUpStorageInSuitContainer[args.SenderSession] = msg.Value;
+                else
+                    _clientsSettingForTryToPickUpStorageInSuitContainer.Add(args.SenderSession, msg.Value);
+            });
+            _playerManager.PlayerStatusChanged += (_, x) =>
+            {
+                if (x.NewStatus == Robust.Shared.Enums.SessionStatus.Disconnected)
+                    _clientsSettingForTryToPickUpStorageInSuitContainer.Remove(x.Session);
+            };
+        }
+        // SS220-better-smart-equip-end
+
         CommandBinds.Builder
             .Bind(ContentKeyFunctions.SmartEquipBackpack, InputCmdHandler.FromDelegate(HandleSmartEquipBackpack, handle: false, outsidePrediction: false))
             .Bind(ContentKeyFunctions.SmartEquipBelt, InputCmdHandler.FromDelegate(HandleSmartEquipBelt, handle: false, outsidePrediction: false))
             .Bind(ContentKeyFunctions.SmartEquipNeck, InputCmdHandler.FromDelegate(HandleSmartEquipNeck, handle: false, outsidePrediction: false)) //#SS220-SmartEquipNeck
+            .Bind(ContentKeyFunctions.SmartEquipPocket1, InputCmdHandler.FromDelegate(HandleSmartEquipPocket1, handle: false, outsidePrediction: false))
+            .Bind(ContentKeyFunctions.SmartEquipPocket2, InputCmdHandler.FromDelegate(HandleSmartEquipPocket2, handle: false, outsidePrediction: false))
+            .Bind(ContentKeyFunctions.SmartEquipSuitStorage, InputCmdHandler.FromDelegate(HandleSmartEquipSuitStorage, handle: false, outsidePrediction: false))
             .Register<SmartEquipSystem>();
     }
 
@@ -56,14 +95,38 @@ public sealed class SmartEquipSystem : EntitySystem
         HandleSmartEquip(session, "belt");
     }
 
-//#SS220-SmartEquipNeck begin
+    //#SS220-SmartEquipNeck begin
     private void HandleSmartEquipNeck(ICommonSession? session)
     {
         HandleSmartEquip(session, "neck");
     }
-//#SS220-SmartEquipNeck end
+    //#SS220-SmartEquipNeck end
+    private void HandleSmartEquipPocket1(ICommonSession? session)
+    {
+        HandleSmartEquip(session, "pocket1");
+    }
 
-    private void HandleSmartEquip(ICommonSession? session, string equipmentSlot)
+    private void HandleSmartEquipPocket2(ICommonSession? session)
+    {
+        HandleSmartEquip(session, "pocket2");
+    }
+
+    private void HandleSmartEquipSuitStorage(ICommonSession? session)
+    {
+        // SS220-better-smart-equip-begin
+        if (_netManager.IsClient)
+            HandleSmartEquip(session, "suitstorage", _clientTryToPickUpStorageInSuitContainer);
+        else if (session is not null && _clientsSettingForTryToPickUpStorageInSuitContainer.TryGetValue(session, out var value))
+            HandleSmartEquip(session, "suitstorage", value);
+        else
+        {
+            Log.Error($"Cant handle HandleSmartEquip for session! Attached entity is {session?.AttachedEntity}");
+            HandleSmartEquip(session, "suitstorage");
+        }
+        // SS220-better-smart-equip-end
+    }
+
+    private void HandleSmartEquip(ICommonSession? session, string equipmentSlot, bool tryToPickUpStorage = false) // SS220-better-smart-equip
     {
         if (session is not { } playerSession)
             return;
@@ -72,10 +135,10 @@ public sealed class SmartEquipSystem : EntitySystem
             return;
 
         // early out if we don't have any hands or a valid inventory slot
-        if (!TryComp<HandsComponent>(uid, out var hands) || hands.ActiveHand == null)
+        if (!TryComp<HandsComponent>(uid, out var hands) || hands.ActiveHandId == null)
             return;
 
-        var handItem = hands.ActiveHand.HeldEntity;
+        var handItem = _hands.GetActiveItem((uid, hands));
 
         // can the user interact, and is the item interactable? e.g. virtual items
         if (!_actionBlocker.CanInteract(uid, handItem))
@@ -88,7 +151,7 @@ public sealed class SmartEquipSystem : EntitySystem
         }
 
         // early out if we have an item and cant drop it at all
-        if (handItem != null && !_hands.CanDropHeld(uid, hands.ActiveHand))
+        if (handItem != null && !_hands.CanDropHeld(uid, hands.ActiveHandId))
         {
             _popup.PopupClient(Loc.GetString("smart-equip-cant-drop"), uid, uid);
             return;
@@ -129,10 +192,20 @@ public sealed class SmartEquipSystem : EntitySystem
                 return;
             }
 
-            _hands.TryDrop(uid, hands.ActiveHand, handsComp: hands);
-            _inventory.TryEquip(uid, handItem.Value, equipmentSlot, predicted: true, checkDoafter:true);
+            _hands.TryDrop((uid, hands), hands.ActiveHandId!);
+            _inventory.TryEquip(uid, handItem.Value, equipmentSlot, predicted: true, checkDoafter: true);
             return;
         }
+
+        // SS220-better-equip-begin
+        if (tryToPickUpStorage && handItem == null
+            && _inventory.CanUnequip(uid, equipmentSlot, out var _))
+        {
+            if (_inventory.TryUnequip(uid, equipmentSlot, inventory: inventory, predicted: true, checkDoafter: true)
+                && _hands.TryPickup(uid, slotItem, handsComp: hands))
+                return;
+        }
+        // SS220-better-equip-end
 
         // case 2 (storage item):
         if (TryComp<StorageComponent>(slotItem, out var storage))
@@ -157,8 +230,8 @@ public sealed class SmartEquipSystem : EntitySystem
                 return;
             }
 
-            _hands.TryDrop(uid, hands.ActiveHand, handsComp: hands);
-            _storage.Insert(slotItem, handItem.Value, out var stacked, out _);
+            _hands.TryDrop((uid, hands), hands.ActiveHandId!);
+            _storage.Insert(slotItem, handItem.Value, out var stacked, out _, user: uid);
 
             // if the hand item stacked with the things in inventory, but there's no more space left for the rest
             // of the stack, place the stack back in hand rather than dropping it on the floor
@@ -230,3 +303,11 @@ public sealed class SmartEquipSystem : EntitySystem
         _hands.TryPickup(uid, slotItem, handsComp: hands);
     }
 }
+
+// SS220-better-smart-equip-begin
+[Serializable, NetSerializable]
+public sealed class SessionTryToPickUpStorageInSuitContainerMessage(bool value) : EntityEventArgs
+{
+    public bool Value = value;
+}
+// SS220-better-smart-equip-end

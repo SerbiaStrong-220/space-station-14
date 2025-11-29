@@ -10,13 +10,17 @@ using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.SS220.CultYogg.MiGo;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
+using Content.Server.Administration.Logs;
+using Content.Shared.Database;
 
 namespace Content.Server.SS220.CultYogg.Altar;
 
 public sealed partial class CultYoggAltarSystem : SharedCultYoggAltarSystem
 {
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
+    [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly BodySystem _body = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -34,6 +38,7 @@ public sealed partial class CultYoggAltarSystem : SharedCultYoggAltarSystem
         if (!TryComp<AppearanceComponent>(ent, out var appearanceComp))
             return;
 
+        _adminLog.Add(LogType.RoundFlow, LogImpact.Medium, $"Cult Yogg sacrificed {ToPrettyString(args.Target.Value):target}");
         _body.GibBody(args.Target.Value, true);
         ent.Comp.Used = true;
 
@@ -41,20 +46,20 @@ public sealed partial class CultYoggAltarSystem : SharedCultYoggAltarSystem
         RemComp<DestructibleComponent>(ent);
 
         var query = EntityQueryEnumerator<GameRuleComponent, CultYoggRuleComponent>();
-        while (query.MoveNext(out var uid, out _, out var cultRule))
+        while (query.MoveNext(out var uid, out _, out _))
         {
             var ev = new CultYoggSacrificedTargetEvent(ent);
             RaiseLocalEvent(uid, ref ev, true);
         }
 
         //send cooldown to a MiGo sacrifice action
-        var queryMiGo = EntityQueryEnumerator<MiGoComponent>(); //ToDo ask if this code is ok
-        while (queryMiGo.MoveNext(out var uid, out var comp))
+        var queryMiGo = EntityQueryEnumerator<MiGoComponent>();
+        while (queryMiGo.MoveNext(out _, out var comp))
         {
-            var sacrAction = comp.MiGoSacrificeActionEntity;
-
             if (comp.MiGoErectActionEntity == null)
                 continue;
+
+            var sacrAction = comp.MiGoSacrificeActionEntity;
 
             if (!TryComp<ActionComponent>(sacrAction, out var actionComponent))
                 continue;

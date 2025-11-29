@@ -27,6 +27,7 @@ public abstract class SharedCryostorageSystem : EntitySystem
     [Dependency] protected readonly ISharedAdminLogManager AdminLog = default!;
     [Dependency] protected readonly SharedMindSystem Mind = default!;
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!; // 220 cryo action
+    [Dependency] private readonly MetaDataSystem _meta = default!;
 
     protected EntityUid? PausedMap { get; private set; }
 
@@ -65,7 +66,7 @@ public abstract class SharedCryostorageSystem : EntitySystem
             return;
 
         var containedComp = EnsureComp<CryostorageContainedComponent>(args.Entity);
-        _actionsSystem.AddAction(args.Entity, ref comp.LeaveActionUid, comp.LeaveActionID, uid); // 220 cryo action
+        _actionsSystem.AddAction(args.Entity, ref comp.LeaveActionUid, comp.LeaveActionId, uid); // 220 cryo action
         var delay = Mind.TryGetMind(args.Entity, out _, out _) ? comp.GracePeriod : comp.NoMindGracePeriod;
         containedComp.GracePeriodEndTime = Timing.CurTime + delay;
         containedComp.Cryostorage = ent;
@@ -164,7 +165,7 @@ public abstract class SharedCryostorageSystem : EntitySystem
         if (PausedMap == null || !Exists(PausedMap))
             return;
 
-        EntityManager.DeleteEntity(PausedMap.Value);
+        Del(PausedMap.Value);
         PausedMap = null;
     }
 
@@ -173,8 +174,10 @@ public abstract class SharedCryostorageSystem : EntitySystem
         if (PausedMap != null && Exists(PausedMap))
             return;
 
-        PausedMap = _map.CreateMap();
-        _map.SetPaused(PausedMap.Value, true);
+        var mapUid = _map.CreateMap();
+        _meta.SetEntityName(mapUid, Loc.GetString("cryostorage-paused-map-name"));
+        _map.SetPaused(mapUid, true);
+        PausedMap = mapUid;
     }
 
     public bool IsInPausedMap(Entity<TransformComponent?> entity)

@@ -1,14 +1,22 @@
 using System.Collections.Frozen;
 using System.Text.RegularExpressions;
+using Content.Shared.ActionBlocker;
+using Content.Shared.Chat.Prototypes;
+using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
 using Content.Shared.Radio;
 using Content.Shared.Speech;
+using Content.Shared.Whitelist;
+using Robust.Shared.Audio;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.Chat;
 
-public abstract class SharedChatSystem : EntitySystem
+public abstract partial class SharedChatSystem : EntitySystem
 {
     public const char RadioCommonPrefix = ';';
     public const char RadioChannelPrefix = ':';
@@ -24,18 +32,28 @@ public abstract class SharedChatSystem : EntitySystem
     public const char EmotesAltPrefix = '*';
     public const char DefaultChannelKey = 'р';
     //ss220-telepathy
-    public const char TelepathyChannelPrefix = '|';
+    public const char TelepathyChannelPrefix = '=';
 
-    [ValidatePrototypeId<RadioChannelPrototype>]
-    public const string CommonChannel = "Common";
+    public const int VoiceRange = 10; // how far voice goes in world units
+    public const int WhisperClearRange = 2; // how far whisper goes while still being understandable, in world units
+    public const int WhisperMuffledRange = 5; // how far whisper goes at all, in world units
+    public static readonly SoundSpecifier DefaultAnnouncementSound
+        = new SoundPathSpecifier("/Audio/Announcements/announce.ogg");
+    public static readonly SoundSpecifier CentComAnnouncementSound // (SS220) Corvax-Announcements
+        = new SoundPathSpecifier("/Audio/Corvax/Announcements/centcomm.ogg"); // (SS220) Corvax-Announcements
 
-    public static string DefaultChannelPrefix = $"{RadioChannelPrefix}{DefaultChannelKey}";
+    public static readonly ProtoId<RadioChannelPrototype> CommonChannel = "Common";
 
-    [ValidatePrototypeId<SpeechVerbPrototype>]
-    public const string DefaultSpeechVerb = "Default";
+    public static readonly string DefaultChannelPrefix = $"{RadioChannelPrefix}{DefaultChannelKey}";
+    public static readonly ProtoId<SpeechVerbPrototype> DefaultSpeechVerb = "Default";
 
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
     /// <summary>
     /// Cache of the keycodes for faster lookup.
@@ -45,15 +63,21 @@ public abstract class SharedChatSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        DebugTools.Assert(_prototypeManager.HasIndex<RadioChannelPrototype>(CommonChannel));
+
+        DebugTools.Assert(_prototypeManager.HasIndex(CommonChannel));
+
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypeReload);
         CacheRadios();
+        CacheEmotes();
     }
 
     protected virtual void OnPrototypeReload(PrototypesReloadedEventArgs obj)
     {
         if (obj.WasModified<RadioChannelPrototype>())
             CacheRadios();
+
+        if (obj.WasModified<EmotePrototype>())
+            CacheEmotes();
     }
 
     private void CacheRadios()
@@ -69,13 +93,13 @@ public abstract class SharedChatSystem : EntitySystem
     public SpeechVerbPrototype GetSpeechVerb(EntityUid source, string message, SpeechComponent? speech = null)
     {
         if (!Resolve(source, ref speech, false))
-            return _prototypeManager.Index<SpeechVerbPrototype>(DefaultSpeechVerb);
+            return _prototypeManager.Index(DefaultSpeechVerb);
 
         // check for a suffix-applicable speech verb
         SpeechVerbPrototype? current = null;
         foreach (var (str, id) in speech.SuffixSpeechVerbs)
         {
-            var proto = _prototypeManager.Index<SpeechVerbPrototype>(id);
+            var proto = _prototypeManager.Index(id);
             if (message.EndsWith(Loc.GetString(str)) && proto.Priority >= (current?.Priority ?? 0))
             {
                 current = proto;
@@ -83,7 +107,7 @@ public abstract class SharedChatSystem : EntitySystem
         }
 
         // if no applicable suffix verb return the normal one used by the entity
-        return current ?? _prototypeManager.Index<SpeechVerbPrototype>(speech.SpeechVerb);
+        return current ?? _prototypeManager.Index(speech.SpeechVerb);
     }
 
     /// <summary>
@@ -117,6 +141,16 @@ public abstract class SharedChatSystem : EntitySystem
         if (!(input.StartsWith(RadioChannelPrefix) || input.StartsWith(RadioChannelAltPrefix)))
             return;
 
+        // SS220-add-radio-frequency-end
+        if (input.StartsWith(RadioChannelPrefix) && char.IsWhiteSpace(input[1]))
+        {
+            // we live whitespace, cause next it behaves like channel key
+            prefix = input[..2];
+            output = input[2..];
+            return;
+        }
+        // SS220-add-radio-frequency-end
+
         if (!_keyCodes.TryGetValue(char.ToLower(input[1]), out _))
             return;
 
@@ -139,10 +173,12 @@ public abstract class SharedChatSystem : EntitySystem
         string input,
         out string output,
         out RadioChannelPrototype? channel,
+        out FixedPoint2? frequency, // SS220-add-frequency-radio
         bool quiet = false)
     {
         output = input.Trim();
         channel = null;
+        frequency = null; // SS220-add-frequency-radio
 
         if (input.Length == 0)
             return false;
@@ -157,7 +193,8 @@ public abstract class SharedChatSystem : EntitySystem
         if (!(input.StartsWith(RadioChannelPrefix) || input.StartsWith(RadioChannelAltPrefix)))
             return false;
 
-        if (input.Length < 2 || char.IsWhiteSpace(input[1]))
+        // if (input.Length < 2 || char.IsWhiteSpace(input[1])) // [wizden-code] SS220-add-frequency-radio-begin
+        if (input.Length < 2) // SS220-add-frequency-radio-begin
         {
             output = SanitizeMessageCapital(input[1..].TrimStart());
             if (!quiet)
@@ -178,6 +215,11 @@ public abstract class SharedChatSystem : EntitySystem
                 _prototypeManager.TryIndex(ev.Channel, out channel);
             return true;
         }
+
+        // SS220-add-frequency-radio-begin
+        if (char.IsWhiteSpace(channelKey) && TryGetFrequencyRadioChannel(source, out channel, out frequency))
+            return true;
+        // SS220-add-frequency-radio-end
 
         if (!_keyCodes.TryGetValue(channelKey, out channel) && !quiet)
         {
@@ -300,4 +342,31 @@ public abstract class SharedChatSystem : EntitySystem
         tagStart += tag.Length + 2;
         return rawmsg.Substring(tagStart, tagEnd - tagStart);
     }
+
+    protected virtual void SendEntityEmote(
+        EntityUid source,
+        string action,
+        ChatTransmitRange range,
+        string? nameOverride,
+        bool hideLog = false,
+        bool checkEmote = true,
+        bool ignoreActionBlocker = false,
+        NetUserId? author = null
+        )
+    { }
+}
+
+/// <summary>
+/// Controls transmission of chat.
+/// </summary>
+public enum ChatTransmitRange : byte
+{
+    /// Acts normal, ghosts can hear across the map, etc.
+    Normal,
+    /// Normal but ghosts are still range-limited.
+    GhostRangeLimit,
+    /// Hidden from the chat window.
+    HideChat,
+    /// Ghosts can't hear or see it at all. Regular players can if in-range.
+    NoGhosts
 }

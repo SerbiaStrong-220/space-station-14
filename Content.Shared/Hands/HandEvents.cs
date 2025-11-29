@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
 using JetBrains.Annotations;
 using Robust.Shared.Map;
 using Robust.Shared.Serialization;
@@ -157,6 +158,32 @@ namespace Content.Shared.Hands
     }
 
     /// <summary>
+    /// Raised against an item being picked up before it is actually inserted
+    /// into the pick-up-ers hand container. This can be handled with side
+    /// effects, and may be canceled preventing the pickup in a way that
+    /// <see cref="SharedHandsSystem.CanPickupToHand"/> and similar don't see.
+    /// </summary>
+    /// <param name="User">The user picking up the item.</param>
+    /// <param name="Cancelled">
+    /// If true, the item will not be equipped into the user's hand.
+    /// </param>
+    [ByRefEvent]
+    public record struct BeforeGettingEquippedHandEvent(EntityUid User, bool Cancelled = false);
+
+    /// <summary>
+    /// Raised against a mob picking up and item before it is actually inserted
+    /// into the pick-up-ers hand container. This can be handled with side
+    /// effects, and may be canceled preventing the pickup in a way that
+    /// <see cref="SharedHandsSystem.CanPickupToHand"/> and similar don't see.
+    /// </summary>
+    /// <param name="Item">The item being picked up.</param>
+    /// <param name="Cancelled">
+    /// If true, the item will not be equipped into the user's hand.
+    /// </param>
+    [ByRefEvent]
+    public record struct BeforeEquippingHandEvent(EntityUid Item, bool Cancelled = false);
+
+    /// <summary>
     ///     Raised when putting an entity into a hand slot
     /// </summary>
     [PublicAPI]
@@ -177,11 +204,17 @@ namespace Content.Shared.Hands
         /// </summary>
         public Hand Hand { get; }
 
-        public EquippedHandEvent(EntityUid user, EntityUid equipped, Hand hand)
+        //ss220-cult-hand-hide-items-begin
+        public string HandId { get; }
+        //ss220-cult-hand-hide-items-begin
+
+        public EquippedHandEvent(EntityUid user, EntityUid equipped, Hand hand,
+                                                        string handId) //ss220-cult-hand-hide-items
         {
             User = user;
             Equipped = equipped;
             Hand = hand;
+            HandId = handId; //ss220-cult-hand-hide-items
         }
     }
 
@@ -206,11 +239,17 @@ namespace Content.Shared.Hands
         /// </summary>
         public Hand Hand { get; }
 
-        public UnequippedHandEvent(EntityUid user, EntityUid unequipped, Hand hand)
+        //ss220-cult-hand-hide-items-begin
+        public string HandId { get; }
+        //ss220-cult-hand-hide-items-begin
+
+        public UnequippedHandEvent(EntityUid user, EntityUid unequipped, Hand hand,
+                                                                string handId) //ss220-cult-hand-hide-items
         {
             User = user;
             Unequipped = unequipped;
             Hand = hand;
+            HandId = handId; //ss220-cult-hand-hide-items
         }
     }
 
@@ -219,7 +258,7 @@ namespace Content.Shared.Hands
     /// </summary>
     public sealed class GotEquippedHandEvent : EquippedHandEvent
     {
-        public GotEquippedHandEvent(EntityUid user, EntityUid unequipped, Hand hand) : base(user, unequipped, hand) { }
+        public GotEquippedHandEvent(EntityUid user, EntityUid unequipped, Hand hand, string handId) : base(user, unequipped, hand, handId) { }
     }
 
     /// <summary>
@@ -227,7 +266,7 @@ namespace Content.Shared.Hands
     /// </summary>
     public sealed class GotUnequippedHandEvent : UnequippedHandEvent
     {
-        public GotUnequippedHandEvent(EntityUid user, EntityUid unequipped, Hand hand) : base(user, unequipped, hand) { }
+        public GotUnequippedHandEvent(EntityUid user, EntityUid unequipped, Hand hand, string handId) : base(user, unequipped, hand, handId) { }
     }
 
     /// <summary>
@@ -235,7 +274,7 @@ namespace Content.Shared.Hands
     /// </summary>
     public sealed class DidEquipHandEvent : EquippedHandEvent
     {
-        public DidEquipHandEvent(EntityUid user, EntityUid unequipped, Hand hand) : base(user, unequipped, hand) { }
+        public DidEquipHandEvent(EntityUid user, EntityUid unequipped, Hand hand, string handId) : base(user, unequipped, hand, handId) { }
     }
 
     /// <summary>
@@ -243,7 +282,7 @@ namespace Content.Shared.Hands
     /// </summary>
     public sealed class DidUnequipHandEvent : UnequippedHandEvent
     {
-        public DidUnequipHandEvent(EntityUid user, EntityUid unequipped, Hand hand) : base(user, unequipped, hand) { }
+        public DidUnequipHandEvent(EntityUid user, EntityUid unequipped, Hand hand, string handId) : base(user, unequipped, hand, handId) { }
     }
 
     /// <summary>
@@ -338,11 +377,11 @@ namespace Content.Shared.Hands
     [Serializable, NetSerializable]
     public sealed class DidSwitchHandEvent : EntityEventArgs
     {
-        public string HandName { get; }
+        public string HandId { get; }
 
-        public DidSwitchHandEvent(string handName)
+        public DidSwitchHandEvent(string handId)
         {
-            HandName = handName;
+            HandId = handId;
         }
     }
     //SS220 Cult_update2 end

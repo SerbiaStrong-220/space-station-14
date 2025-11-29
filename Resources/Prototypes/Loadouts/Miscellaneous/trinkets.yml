@@ -6,12 +6,14 @@
     requirement:
       !type:DepartmentTimeRequirement
       department: Command
-      time: 3600 # 1 hour
+      time: 1h
+  # SS220-sponsor-tier-begin
   sponsorTierLoadoutEffects:
   - !type:GroupLoadoutEffect
     proto: SeniorDevTeamTier
   - !type:GroupLoadoutEffect
     proto: AdministratorSponsorTier
+  # SS220-sponsor-tier-end
 
 # Flowers
 - type: loadout
@@ -31,7 +33,7 @@
   id: Headphones
   storage:
     back:
-    - ClothingNeckHeadphones
+    - ClothingMultipleHeadphones
 
 # Toys
 - type: loadout
@@ -61,30 +63,35 @@
   storage:
     back:
     - Lighter
+  groupBy: "smokeables"
 
 - type: loadout
   id: CigPackGreen
   storage:
     back:
     - CigPackGreen
+  groupBy: "smokeables"
 
 - type: loadout
   id: CigPackRed
   storage:
     back:
     - CigPackRed
+  groupBy: "smokeables"
 
 - type: loadout
   id: CigPackBlue
   storage:
     back:
     - CigPackBlue
+  groupBy: "smokeables"
 
 - type: loadout
   id: CigPackBlack
   storage:
     back:
     - CigPackBlack
+  groupBy: "smokeables"
 
 - type: loadout
   id: CigarCase
@@ -94,6 +101,7 @@
   storage:
     back:
     - CigarCase
+  groupBy: "smokeables"
 
 - type: loadout
   id: CigarGold
@@ -103,6 +111,32 @@
   storage:
     back:
     - CigarGold
+  groupBy: "smokeables"
+
+# Folders
+- type: loadout
+  id: BoxFolderBaseThreePapers
+  storage:
+    back:
+    - BoxFolderBaseThreePapers
+  groupBy: "folders"
+
+- type: loadout
+  id: BoxFolderPlasticClipboardThreePapers
+  storage:
+    back:
+    - BoxFolderPlasticClipboardThreePapers
+  groupBy: "folders"
+
+- type: loadout
+  id: BoxFolderClipboardThreePapers
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: Command
+  storage:
+    back:
+    - BoxFolderClipboardThreePapers
+  groupBy: "folders"
 
 # Pins
 - type: loadout
@@ -110,108 +144,214 @@
   storage:
     back:
     - ClothingNeckLGBTPin
+  groupBy: "pin"
 
 - type: loadout
   id: ClothingNeckAllyPin
   storage:
     back:
     - ClothingNeckAllyPin
+  groupBy: "pin"
 
 - type: loadout
   id: ClothingNeckAromanticPin
   storage:
     back:
     - ClothingNeckAromanticPin
+  groupBy: "pin"
 
 - type: loadout
   id: ClothingNeckAsexualPin
   storage:
     back:
     - ClothingNeckAsexualPin
-
-- type: loadout
-  id: ClothingNeckAroacePin
-  storage:
-    back:
-    - ClothingNeckAroacePin
+  groupBy: "pin"
 
 - type: loadout
   id: ClothingNeckBisexualPin
   storage:
     back:
     - ClothingNeckBisexualPin
+  groupBy: "pin"
 
 - type: loadout
   id: ClothingNeckGayPin
   storage:
     back:
     - ClothingNeckGayPin
+  groupBy: "pin"
 
 - type: loadout
   id: ClothingNeckIntersexPin
   storage:
     back:
     - ClothingNeckIntersexPin
+  groupBy: "pin"
 
 - type: loadout
   id: ClothingNeckLesbianPin
   storage:
     back:
     - ClothingNeckLesbianPin
+  groupBy: "pin"
 
 - type: loadout
   id: ClothingNeckNonBinaryPin
   storage:
     back:
     - ClothingNeckNonBinaryPin
+  groupBy: "pin"
 
 - type: loadout
   id: ClothingNeckPansexualPin
   storage:
     back:
     - ClothingNeckPansexualPin
-
-- type: loadout
-  id: ClothingNeckPluralPin
-  storage:
-    back:
-    - ClothingNeckPluralPin
+  groupBy: "pin"
 
 - type: loadout
   id: ClothingNeckOmnisexualPin
   storage:
     back:
     - ClothingNeckOmnisexualPin
+  groupBy: "pin"
 
 - type: loadout
   id: ClothingNeckGenderqueerPin
   storage:
     back:
     - ClothingNeckGenderqueerPin
-
-- type: loadout
-  id: ClothingNeckGenderfluidPin
-  storage:
-    back:
-    - ClothingNeckGenderfluidPin
+  groupBy: "pin"
 
 - type: loadout
   id: ClothingNeckTransPin
   storage:
     back:
     - ClothingNeckTransPin
+  groupBy: "pin"
 
 - type: loadout
   id: ClothingNeckAutismPin
   storage:
     back:
     - ClothingNeckAutismPin
+  groupBy: "pin"
 
 - type: loadout
   id: ClothingNeckGoldAutismPin
   storage:
     back:
     - ClothingNeckGoldAutismPin
+  groupBy: "pin"
+
+- type: loadout
+  id: ClothingNeckAroacePin
+  storage:
+    back:
+    - ClothingNeckAroacePin
+  groupBy: "pin"
+
+- type: loadout
+  id: ClothingNeckPluralPin
+  storage:
+    back:
+    - ClothingNeckPluralPin
+  groupBy: "pin"
+
+- type: loadout
+  id: ClothingNeckGenderfluidPin
+  storage:
+    back:
+    - ClothingNeckGenderfluidPin
+  groupBy: "pin"
+
+# Canes
+# The white cane is intentionally not included here. Thats for the blind.
+- type: loadout
+  id: OffsetCane
+  storage:
+    back:
+    - OffsetCane
+  groupBy: "canes"
+
+- type: loadout
+  id: OffsetCaneWood
+  storage:
+    back:
+    - OffsetCaneWood
+  groupBy: "canes"
+
+- type: loadout
+  id: OffsetCaneClown
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobClown
+      time: 3600 # 1hr
+  sponsorTierLoadoutEffects: #SS220 BugFixs Begin
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier #SS220 BugFixs End
+  storage:
+    back:
+    - OffsetCaneClown
+  groupBy: "canes"
+
+- type: loadout
+  id: OffsetCaneMime
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobMime
+      time: 3600 # 1hr
+  sponsorTierLoadoutEffects: #SS220 BugFixs Begin
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier #SS220 BugFixs End
+  storage:
+    back:
+    - OffsetCaneMime
+  groupBy: "canes"
+
+- type: loadout
+  id: OffsetCaneNT
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:DepartmentTimeRequirement
+      department: Command
+      time: 18000 # 5hr
+  sponsorTierLoadoutEffects: #SS220 BugFixs Begin
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier #SS220 BugFixs End
+  storage:
+    back:
+    - OffsetCaneNT
+  groupBy: "canes"
+
+- type: loadout
+  id: Cane
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobLibrarian
+      time: 3600 # 1hr same as Jamjar.
+  sponsorTierLoadoutEffects: #SS220 BugFixs Begin
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier #SS220 BugFixs End
+  storage:
+    back:
+    - Cane
+  groupBy: "canes"
 
 # Towels
 - type: loadout
@@ -220,15 +360,16 @@
   - !type:JobRequirementLoadoutEffect
     requirement:
       !type:OverallPlaytimeRequirement
-      time: 36000 # 10hr
+      time: 10h
   storage:
     back:
     - TowelColorWhite
-  sponsorTierLoadoutEffects:
+  sponsorTierLoadoutEffects: #SS220-senior-pomidor-begin
   - !type:GroupLoadoutEffect
     proto: SeniorDevTeamTier
   - !type:GroupLoadoutEffect
-    proto: AdministratorSponsorTier
+    proto: AdministratorSponsorTier #SS220-senior-pomidor-end
+  groupBy: "towels"
 
 - type: loadout
   id: TowelColorSilver
@@ -236,15 +377,16 @@
   - !type:JobRequirementLoadoutEffect
     requirement:
       !type:OverallPlaytimeRequirement
-      time: 1800000 # 500hr
+      time: 500h
   storage:
     back:
     - TowelColorSilver
-  sponsorTierLoadoutEffects:
+  sponsorTierLoadoutEffects: #SS220-senior-pomidor-begin
   - !type:GroupLoadoutEffect
     proto: SeniorDevTeamTier
   - !type:GroupLoadoutEffect
-    proto: AdministratorSponsorTier
+    proto: AdministratorSponsorTier #SS220-senior-pomidor-end
+  groupBy: "towels"
 
 - type: loadout
   id: TowelColorGold
@@ -252,15 +394,16 @@
   - !type:JobRequirementLoadoutEffect
     requirement:
       !type:OverallPlaytimeRequirement
-      time: 3600000 # 1000hr
+      time: 1000h
   storage:
     back:
     - TowelColorGold
-  sponsorTierLoadoutEffects:
+  sponsorTierLoadoutEffects: #SS220-senior-pomidor-begin
   - !type:GroupLoadoutEffect
     proto: SeniorDevTeamTier
   - !type:GroupLoadoutEffect
-    proto: AdministratorSponsorTier
+    proto: AdministratorSponsorTier #SS220-senior-pomidor-end
+  groupBy: "towels"
 
 - type: loadout
   id: TowelColorLightBrown
@@ -269,15 +412,16 @@
     requirement:
       !type:DepartmentTimeRequirement
       department: Cargo
-      time: 360000 # 100hr
+      time: 100h
   storage:
     back:
     - TowelColorLightBrown
-  sponsorTierLoadoutEffects:
+  sponsorTierLoadoutEffects: #SS220-senior-pomidor-begin
   - !type:GroupLoadoutEffect
     proto: SeniorDevTeamTier
   - !type:GroupLoadoutEffect
-    proto: AdministratorSponsorTier
+    proto: AdministratorSponsorTier #SS220-senior-pomidor-end
+  groupBy: "towels"
 
 - type: loadout
   id: TowelColorGreen
@@ -286,15 +430,16 @@
     requirement:
       !type:DepartmentTimeRequirement
       department: Civilian
-      time: 360000 # 100hr
+      time: 100h
   storage:
     back:
     - TowelColorGreen
-  sponsorTierLoadoutEffects:
+  sponsorTierLoadoutEffects: #SS220-senior-pomidor-begin
   - !type:GroupLoadoutEffect
     proto: SeniorDevTeamTier
   - !type:GroupLoadoutEffect
-    proto: AdministratorSponsorTier
+    proto: AdministratorSponsorTier #SS220-senior-pomidor-end
+  groupBy: "towels"
 
 - type: loadout
   id: TowelColorDarkBlue
@@ -303,15 +448,16 @@
     requirement:
       !type:DepartmentTimeRequirement
       department: Command
-      time: 360000 # 100hr
+      time: 100h
   storage:
     back:
     - TowelColorDarkBlue
-  sponsorTierLoadoutEffects:
+  sponsorTierLoadoutEffects: #SS220-senior-pomidor-begin
   - !type:GroupLoadoutEffect
     proto: SeniorDevTeamTier
   - !type:GroupLoadoutEffect
-    proto: AdministratorSponsorTier
+    proto: AdministratorSponsorTier #SS220-senior-pomidor-end
+  groupBy: "towels"
 
 - type: loadout
   id: TowelColorOrange
@@ -320,15 +466,16 @@
     requirement:
       !type:DepartmentTimeRequirement
       department: Engineering
-      time: 360000 # 100hr
+      time: 100h
   storage:
     back:
     - TowelColorOrange
-  sponsorTierLoadoutEffects:
+  sponsorTierLoadoutEffects: #SS220-senior-pomidor-begin
   - !type:GroupLoadoutEffect
     proto: SeniorDevTeamTier
   - !type:GroupLoadoutEffect
-    proto: AdministratorSponsorTier
+    proto: AdministratorSponsorTier #SS220-senior-pomidor-end
+  groupBy: "towels"
 
 - type: loadout
   id: TowelColorLightBlue
@@ -337,15 +484,16 @@
     requirement:
       !type:DepartmentTimeRequirement
       department: Medical
-      time: 360000 # 100hr
+      time: 100h
   storage:
     back:
     - TowelColorLightBlue
-  sponsorTierLoadoutEffects:
+  sponsorTierLoadoutEffects:  #SS220-senior-pomidor-begin
   - !type:GroupLoadoutEffect
     proto: SeniorDevTeamTier
   - !type:GroupLoadoutEffect
-    proto: AdministratorSponsorTier
+    proto: AdministratorSponsorTier  #SS220-senior-pomidor-end
+  groupBy: "towels"
 
 - type: loadout
   id: TowelColorPurple
@@ -354,15 +502,16 @@
     requirement:
       !type:DepartmentTimeRequirement
       department: Science
-      time: 360000 # 100hr
+      time: 100h
   storage:
     back:
     - TowelColorPurple
-  sponsorTierLoadoutEffects:
+  sponsorTierLoadoutEffects:  #SS220-senior-pomidor-begin
   - !type:GroupLoadoutEffect
     proto: SeniorDevTeamTier
   - !type:GroupLoadoutEffect
-    proto: AdministratorSponsorTier
+    proto: AdministratorSponsorTier  #SS220-senior-pomidor-end
+  groupBy: "towels"
 
 - type: loadout
   id: TowelColorRed
@@ -371,15 +520,16 @@
     requirement:
       !type:DepartmentTimeRequirement
       department: Security
-      time: 360000 # 100hr
+      time: 100h
   storage:
     back:
     - TowelColorRed
-  sponsorTierLoadoutEffects:
+  sponsorTierLoadoutEffects:  #SS220-senior-pomidor-begin
   - !type:GroupLoadoutEffect
     proto: SeniorDevTeamTier
   - !type:GroupLoadoutEffect
-    proto: AdministratorSponsorTier
+    proto: AdministratorSponsorTier  #SS220-senior-pomidor-end
+  groupBy: "towels"
 
 - type: loadout
   id: TowelColorGray
@@ -388,15 +538,16 @@
     requirement:
       !type:RoleTimeRequirement
       role: JobPassenger
-      time: 360000 # 100hr
+      time: 100h
   storage:
     back:
     - TowelColorGray
-  sponsorTierLoadoutEffects:
+  sponsorTierLoadoutEffects:  #SS220-senior-pomidor-begin
   - !type:GroupLoadoutEffect
     proto: SeniorDevTeamTier
   - !type:GroupLoadoutEffect
-    proto: AdministratorSponsorTier
+    proto: AdministratorSponsorTier  #SS220-senior-pomidor-end
+  groupBy: "towels"
 
 - type: loadout
   id: TowelColorBlack
@@ -405,15 +556,16 @@
     requirement:
       !type:RoleTimeRequirement
       role: JobChaplain
-      time: 360000 # 100hr
+      time: 100h
   storage:
     back:
     - TowelColorBlack
-  sponsorTierLoadoutEffects:
+  sponsorTierLoadoutEffects:  #SS220-senior-pomidor-begin
   - !type:GroupLoadoutEffect
     proto: SeniorDevTeamTier
   - !type:GroupLoadoutEffect
-    proto: AdministratorSponsorTier
+    proto: AdministratorSponsorTier  #SS220-senior-pomidor-end
+  groupBy: "towels"
 
 - type: loadout
   id: TowelColorDarkGreen
@@ -422,15 +574,16 @@
     requirement:
       !type:RoleTimeRequirement
       role: JobLibrarian
-      time: 360000 # 100hr
+      time: 100h
   storage:
     back:
     - TowelColorDarkGreen
-  sponsorTierLoadoutEffects:
+  sponsorTierLoadoutEffects:  #SS220-senior-pomidor-begin
   - !type:GroupLoadoutEffect
     proto: SeniorDevTeamTier
   - !type:GroupLoadoutEffect
-    proto: AdministratorSponsorTier
+    proto: AdministratorSponsorTier  #SS220-senior-pomidor-end
+  groupBy: "towels"
 
 - type: loadout
   id: TowelColorMaroon
@@ -439,15 +592,16 @@
     requirement:
       !type:RoleTimeRequirement
       role: JobLawyer
-      time: 360000 # 100hr
+      time: 100h
   storage:
     back:
     - TowelColorMaroon
-  sponsorTierLoadoutEffects:
+  sponsorTierLoadoutEffects:  #SS220-senior-pomidor-begin
   - !type:GroupLoadoutEffect
     proto: SeniorDevTeamTier
   - !type:GroupLoadoutEffect
-    proto: AdministratorSponsorTier
+    proto: AdministratorSponsorTier  #SS220-senior-pomidor-end
+  groupBy: "towels"
 
 - type: loadout
   id: TowelColorYellow
@@ -456,15 +610,16 @@
     requirement:
       !type:RoleTimeRequirement
       role: JobClown
-      time: 360000 # 100hr
+      time: 100h
   storage:
     back:
     - TowelColorYellow
-  sponsorTierLoadoutEffects:
+  sponsorTierLoadoutEffects:  #SS220-senior-pomidor-begin
   - !type:GroupLoadoutEffect
     proto: SeniorDevTeamTier
   - !type:GroupLoadoutEffect
-    proto: AdministratorSponsorTier
+    proto: AdministratorSponsorTier  #SS220-senior-pomidor-end
+  groupBy: "towels"
 
 - type: loadout
   id: TowelColorMime
@@ -473,12 +628,13 @@
     requirement:
       !type:RoleTimeRequirement
       role: JobMime
-      time: 360000 # 100hr
+      time: 100h
   storage:
     back:
     - TowelColorMime
-  sponsorTierLoadoutEffects:
+  sponsorTierLoadoutEffects:  #SS220-senior-pomidor-begin
   - !type:GroupLoadoutEffect
     proto: SeniorDevTeamTier
   - !type:GroupLoadoutEffect
-    proto: AdministratorSponsorTier
+    proto: AdministratorSponsorTier  #SS220-senior-pomidor-end
+  groupBy: "towels"

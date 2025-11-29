@@ -13,6 +13,7 @@
     tags:
     - SuitEVA
     - MonkeyWearable
+    - CorgiWearable
     - WhitelistChameleon
 
 #Syndicate EVA
@@ -39,6 +40,8 @@
       Female: FemaleEvil
       Unsexed: MaleEvil
   #ss220 special_sounds end
+  - type: StaticPrice
+    price: 1000 # Helmet is 500
 
 #Emergency EVA
 - type: entity
@@ -74,18 +77,31 @@
           tags:
           - Radio
   #ss220 handheld radio on outer clothing end
+  - type: Tag
+    tags:
+    - CorgiWearable
+    - ScurretWearable
+    - MonkeyWearable
+    - WhitelistChameleon
 
 #Prisoner EVA
 - type: entity
   parent: ClothingOuterEVASuitBase
   id:  ClothingOuterHardsuitEVAPrisoner
   name: prisoner EVA suit
-  description: A lightweight space suit for prisoners to protect them from the vacuum of space during emergencies.
+  description: An emergency EVA suit meant for prisoners. It's horribly slow and lacking in temperature protection, but enough to buy you time from the harsh vacuum of space.
   components:
   - type: Sprite
     sprite: Clothing/OuterClothing/Suits/eva_prisoner.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Suits/eva_prisoner.rsi
+  - type: ClothingSpeedModifier
+    walkModifier: 0.7
+    sprintModifier: 0.7
+  - type: HeldSpeedModifier
+  - type: TemperatureProtection
+    heatingCoefficient: 0.75
+    coolingCoefficient: 0.5
   - type: Tag
     tags:
     - SuitEVA
@@ -184,3 +200,7 @@
           tags:
           - Radio
   #ss220 handheld radio on outer clothing end
+  - type: Tag
+    tags:
+    - CorgiWearable
+    - WhitelistChameleon

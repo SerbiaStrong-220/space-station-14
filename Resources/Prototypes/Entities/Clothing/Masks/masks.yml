@@ -331,6 +331,8 @@
   - type: PhysicalComposition
     materialComposition:
       Plastic: 25
+  - type: StaticPrice
+    price: 5
 
 - type: entity
   parent: ClothingMaskBase
@@ -349,6 +351,9 @@
   - type: IngestionBlocker
   - type: AddAccentClothing
     accent: MumbleAccent
+  - type: EmoteBlocker
+    blocksCategories:
+    - Vocal
   - type: Construction
     graph: Muzzle
     node: muzzle
@@ -397,6 +402,14 @@
     sprite: Clothing/Mask/swat.rsi
   - type: Clothing
     sprite: Clothing/Mask/swat.rsi
+    #SS220 - add-smart-mask-swat-and-blueshield - start
+  - type: UserInterface
+    interfaces:
+      enum.SmartGasMaskUiKey.Key:
+        type: SmartGasMaskBoundUserInterface
+  - type: SmartGasMask
+    selectablePrototypes: ["AlertSmartGasMaskHalt", "AlertSmartGasMaskSupport"]
+    #SS220 - add-smart-mask-swat-and-blueshield - end
   - type: Tag
     tags:
     - WhitelistChameleon
@@ -451,6 +464,12 @@
     - Hair
     - Snout
     hideOnToggle: true
+  - type: UserInterface #SS220 - Smart gas mask - start
+    interfaces:
+      enum.SmartGasMaskUiKey.Key:
+        type: SmartGasMaskBoundUserInterface
+  - type: SmartGasMask
+    selectablePrototypes: ["AlertSmartGasMaskHalt", "AlertSmartGasMaskERTSupport"] #SS220 - Smart gas mask - end
   - type: FlashImmunity
   - type: EyeProtection
   - type: Armor
@@ -680,6 +699,24 @@
     sprite: Clothing/Mask/scaredmime.rsi
 
 - type: entity
+  parent: [ClothingMaskMime, BaseSecurityContraband]
+  id: ClothingMaskMimeSecurity
+  name: security mime mask
+  description: You have the right to remain silent.
+  components:
+  - type: Sprite
+    sprite: Clothing/Mask/mime_security.rsi
+  - type: Clothing
+    sprite: Clothing/Mask/mime_security.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.95
+
+- type: entity
   parent: ClothingMaskBase
   id: ClothingMaskItalianMoustache
   name: italian moustache
@@ -710,6 +747,13 @@
   - type: EyeProtection
   - type: BreathMask
   - type: IdentityBlocker
+# SS220 PaNfixes start
+  - type: VoiceMask
+  - type: UserInterface
+    interfaces:
+      enum.VoiceMaskUIKey.Key:
+        type: VoiceMaskBoundUserInterface
+# SS220 PaNfixes end
 
 - type: entity
   parent: ClothingMaskGas
@@ -733,6 +777,7 @@
   - type: Tag
     tags:
     - WhitelistChameleon
+    - WeldingMask #SS220-clothingWeldingMaskGas-tweak
 
 # Entity tables
 - type: entityTable

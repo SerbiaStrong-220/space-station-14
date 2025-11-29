@@ -22,7 +22,7 @@
         amount: 9
 
 - type: entity
-  parent: PersonalAI
+  parent: EncryptionKeysPersonalAI #ss220 fix
   id: TherapeuticPai
   name: терапевтический ПИИ
   description: "Для тех кому нужно с кем-нибудь поговорить. Внимание: производитель не несёт ответсвенность за потенциальную зависимость от продукта."

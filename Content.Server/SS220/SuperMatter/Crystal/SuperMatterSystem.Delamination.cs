@@ -1,16 +1,17 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Server.AlertLevel;
 using Content.Server.Explosion.EntitySystems;
-using Content.Server.SS220.SuperMatterCrystal.Components;
+using Content.Server.SS220.SuperMatter.Crystal.Components;
 using Content.Server.Station.Systems;
 using Content.Server.Tesla.Components;
 using Content.Server.Tesla.EntitySystems;
-using Content.Shared.Singularity.Components;
+using Content.Shared.Explosion.Components;
 using Content.Shared.SS220.SuperMatter.Functions;
 
-namespace Content.Server.SS220.SuperMatterCrystal;
+namespace Content.Server.SS220.SuperMatter.Crystal;
 
-public sealed partial class SuperMatterSystem : EntitySystem
+public sealed partial class SuperMatterSystem
 {
     [Dependency] private readonly ExplosionSystem _explosion = default!;
     [Dependency] private readonly AlertLevelSystem _alertLevel = default!;
@@ -38,6 +39,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
 
         TryChangeStationAlertLevel(crystal, comp.DelaminateAlertLevel, out comp.PreviousAlertLevel);
     }
+
     public void StopDelamination(Entity<SuperMatterComponent> crystal)
     {
         var (crystalUid, comp) = crystal;
@@ -77,39 +79,52 @@ public sealed partial class SuperMatterSystem : EntitySystem
             var ev = new SuperMatterDelaminateTimeChanged(crystal.Comp.TimeOfDelamination);
             RaiseLocalEvent(crystal, ev);
         }
+
         if (crystal.Comp.AccumulatedRegenerationDelamination > IntegrityRegenerationEnd)
             StopDelamination(crystal);
+
         if (_gameTiming.CurTime > crystal.Comp.TimeOfDelamination)
         {
             Delaminate(crystal);
             return;
         }
+
         if (_gameTiming.CurTime > crystal.Comp.NextDamageStationAnnouncement)
         {
             crystal.Comp.NextDamageStationAnnouncement += TimeSpan.FromSeconds(IntegrityDamageStationAnnouncementDelay);
             StationAnnounceIntegrity(crystal, AnnounceIntegrityTypeEnum.Delamination);
         }
     }
+
     private void Delaminate(Entity<SuperMatterComponent> crystal)
     {
         var smState = SuperMatterFunctions.GetSuperMatterPhase(crystal.Comp.Temperature,
                                                 crystal.Comp.PressureAccumulator / crystal.Comp.UpdatesBetweenBroadcast);
         SendAdminChatAlert(crystal, Loc.GetString("supermatter-admin-alert-delamination-end", ("state", smState)));
         EntityUid? spawnedUid = null;
-        switch (smState)
+
+        if (TryComp<ExplosiveComponent>(crystal, out var explosiveComponent))
         {
-            case SuperMatterPhaseState.ResonanceRegion:
-                _explosion.TriggerExplosive(crystal.Owner);
-                break;
-            case SuperMatterPhaseState.SingularityRegion:
-                spawnedUid = Spawn(crystal.Comp.SingularitySpawnPrototype, Transform(crystal.Owner).Coordinates);
-                break;
-            case SuperMatterPhaseState.TeslaRegion:
-                spawnedUid = Spawn(crystal.Comp.TeslaSpawnPrototype, Transform(crystal.Owner).Coordinates);
-                break;
-            default:
-                _explosion.TriggerExplosive(crystal.Owner);
-                break;
+            switch (smState)
+            {
+                case SuperMatterPhaseState.ResonanceRegion:
+                    explosiveComponent.ExplosionType = crystal.Comp.ResonanceRegionExplosion;
+
+                    break;
+
+                case SuperMatterPhaseState.SingularityRegion:
+                    explosiveComponent.ExplosionType = crystal.Comp.SingularityRegionExplosion;
+                    break;
+
+                case SuperMatterPhaseState.TeslaRegion:
+                    explosiveComponent.ExplosionType = crystal.Comp.TeslaRegionExplosion;
+                    break;
+
+                default:
+                    _explosion.TriggerExplosive(crystal.Owner);
+                    break;
+            }
+            _explosion.TriggerExplosive(crystal.Owner);
         }
 
         if (spawnedUid.HasValue

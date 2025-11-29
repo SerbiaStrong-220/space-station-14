@@ -21,6 +21,7 @@ using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Damage.ForceSay;
 using Content.Shared.Decals;
+using Content.Shared.FixedPoint;
 using Content.Shared.Input;
 using Content.Shared.Radio;
 using Content.Shared.Roles.RoleCodeword;
@@ -44,9 +45,10 @@ using Robust.Shared.Replays;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
+
 namespace Content.Client.UserInterface.Systems.Chat;
 
-public sealed class ChatUIController : UIController
+public sealed partial class ChatUIController : UIController
 {
     [Dependency] private readonly IClientAdminManager _admin = default!;
     [Dependency] private readonly IChatManager _manager = default!;
@@ -69,8 +71,7 @@ public sealed class ChatUIController : UIController
     [UISystemDependency] private readonly MindSystem? _mindSystem = default!;
     [UISystemDependency] private readonly RoleCodewordSystem? _roleCodewordSystem = default!;
 
-    [ValidatePrototypeId<ColorPalettePrototype>]
-    private const string ChatNamePalette = "ChatNames";
+    private static readonly ProtoId<ColorPalettePrototype> ChatNamePalette = "ChatNames";
     private string[] _chatNameColors = default!;
     private bool _chatNameColorsEnabled;
 
@@ -239,7 +240,7 @@ public sealed class ChatUIController : UIController
         gameplayStateLoad.OnScreenLoad += OnScreenLoad;
         gameplayStateLoad.OnScreenUnload += OnScreenUnload;
 
-        var nameColors = _prototypeManager.Index<ColorPalettePrototype>(ChatNamePalette).Colors.Values.ToArray();
+        var nameColors = _prototypeManager.Index(ChatNamePalette).Colors.Values.ToArray();
         _chatNameColors = new string[nameColors.Length];
         for (var i = 0; i < nameColors.Length; i++)
         {
@@ -248,6 +249,7 @@ public sealed class ChatUIController : UIController
 
         _config.OnValueChanged(CCVars.ChatWindowOpacity, OnChatWindowOpacityChanged);
 
+        InitializeHighlights();
     }
 
     public void OnScreenLoad()
@@ -434,6 +436,8 @@ public sealed class ChatUIController : UIController
     private void OnAttachedChanged(EntityUid uid)
     {
         UpdateChannelPermissions();
+
+        UpdateAutoFillHighlights();
     }
 
     private void AddSpeechBubble(ChatMessage msg, SpeechBubble.SpeechType speechType)
@@ -700,54 +704,55 @@ public sealed class ChatUIController : UIController
         return channel;
     }
 
-    private bool TryGetRadioChannel(string text, out RadioChannelPrototype? radioChannel)
+    private bool TryGetRadioChannel(string text, out RadioChannelPrototype? radioChannel, out FixedPoint2? frequency /*SS220-add-frequency-radio */)
     {
         radioChannel = null;
+        frequency = null; // SS220-add-frequency-radio;
         return _player.LocalEntity is EntityUid { Valid: true } uid
            && _chatSys != null
-           && _chatSys.TryProccessRadioMessage(uid, text, out _, out radioChannel, quiet: true);
+           && _chatSys.TryProccessRadioMessage(uid, text, out _, out radioChannel, out frequency /*SS220-add-frequency-radio */, quiet: true);
     }
 
     public void UpdateSelectedChannel(ChatBox box)
     {
-        var (prefixChannel, _, radioChannel) = SplitInputContents(box.ChatInput.Input.Text.ToLower());
+        var (prefixChannel, _, radioChannel, frequency) = SplitInputContents(box.ChatInput.Input.Text.ToLower());
 
         if (prefixChannel == ChatSelectChannel.None)
             box.ChatInput.ChannelSelector.UpdateChannelSelectButton(box.SelectedChannel, null);
         else
-            box.ChatInput.ChannelSelector.UpdateChannelSelectButton(prefixChannel, radioChannel);
+            box.ChatInput.ChannelSelector.UpdateChannelSelectButton(prefixChannel, radioChannel, frequency  /*SS220-add-frequency-radio */);
     }
 
-    public (ChatSelectChannel chatChannel, string text, RadioChannelPrototype? radioChannel) SplitInputContents(string text)
+    public (ChatSelectChannel chatChannel, string text, RadioChannelPrototype? radioChannel, FixedPoint2? frequency /*SS220-add-frequency-radio */) SplitInputContents(string text)
     {
         text = text.Trim();
         if (text.Length == 0)
-            return (ChatSelectChannel.None, text, null);
+            return (ChatSelectChannel.None, text, null, null /*SS220-add-frequency-radio */);
 
         // We only cut off prefix only if it is not a radio or local channel, which both map to the same /say command
         // because ????????
 
         ChatSelectChannel chatChannel;
-        if (TryGetRadioChannel(text, out var radioChannel))
+        if (TryGetRadioChannel(text, out var radioChannel, out var frequency /*SS220-add-frequency-radio */))
             chatChannel = ChatSelectChannel.Radio;
         else
             chatChannel = PrefixToChannel.GetValueOrDefault(text[0]);
 
         if ((CanSendChannels & chatChannel) == 0)
-            return (ChatSelectChannel.None, text, null);
+            return (ChatSelectChannel.None, text, null, null /*SS220-add-frequency-radio */);
 
         if (chatChannel == ChatSelectChannel.Radio)
-            return (chatChannel, text, radioChannel);
+            return (chatChannel, text, radioChannel, frequency /*SS220-add-frequency-radio */);
 
         if (chatChannel == ChatSelectChannel.Local)
         {
             if (_ghost?.IsGhost != true)
-                return (chatChannel, text, null);
+                return (chatChannel, text, null, null /*SS220-add-frequency-radio */);
             else
                 chatChannel = ChatSelectChannel.Dead;
         }
 
-        return (chatChannel, text[1..].TrimStart(), null);
+        return (chatChannel, text[1..].TrimStart(), null, null /*SS220-add-frequency-radio */);
     }
 
     public void SendMessage(ChatBox box, ChatSelectChannel channel)
@@ -762,7 +767,7 @@ public sealed class ChatUIController : UIController
         if (string.IsNullOrWhiteSpace(text))
             return;
 
-        (var prefixChannel, text, var _) = SplitInputContents(text);
+        (var prefixChannel, text, var _, var _ /*SS220-add-frequency-radio */) = SplitInputContents(text);
 
         // Check if message is longer than the character limit
         if (text.Length > MaxMessageLength)
@@ -849,6 +854,12 @@ public sealed class ChatUIController : UIController
             var grammar = _ent.GetComponentOrNull<GrammarComponent>(_ent.GetEntity(msg.SenderEntity));
             if (grammar != null && grammar.ProperNoun == true)
                 msg.WrappedMessage = SharedChatSystem.InjectTagInsideTag(msg, "Name", "color", GetNameColor(SharedChatSystem.GetStringInsideTag(msg, "Name")));
+        }
+
+        // Color any words chosen by the client.
+        foreach (var highlight in _highlights)
+        {
+            msg.WrappedMessage = SharedChatSystem.InjectTagAroundString(msg, highlight, "color", _highlightsColor);
         }
 
         // Color any codewords for minds that have roles that use them

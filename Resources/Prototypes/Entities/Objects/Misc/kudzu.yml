@@ -75,7 +75,7 @@
         methods: [Touch]
         effects:
         - !type:HealthChange
-          scaleByQuantity: true
+          scaling: true
           damage:
             types:
               Heat: 0.5
@@ -94,7 +94,7 @@
         - MiGoInAstral
         #ss220 fix damage migo in astral end
     - type: Food
-      requiredStomachs: 2 # ruminants have 4 stomachs but i dont care to give them literally 4 stomachs. 2 is good
+      requiresSpecialDigestion: true
       delay: 0.5
     - type: FlavorProfile
       flavors:
@@ -105,6 +105,9 @@
           reagents:
           - ReagentId: Nutriment
             Quantity: 2
+    - type: Tag
+      tags:
+      - Ruminant
 
 - type: entity
   id: WeakKudzu
@@ -259,17 +262,9 @@
             Quantity: 2
           - ReagentId: Protein
             Quantity: 1
-            #SS220 bon appétit start
-          - ReagentId: Razorium
-            Quantity: 7
-            #SS220 bon appétit end
-    - type: Respirator
-      damage:
-        types:
-          Asphyxiation: 0.25
-      damageRecovery:
-        types:
-          Asphyxiation: -0.25
+    - type: AutoEmote # Meat Kudzu used to have respirator, but couldn't breathe so all it would do is gasp.
+      emotes:
+      - MeatGasp
     - type: Tag
       tags:
       - Meat

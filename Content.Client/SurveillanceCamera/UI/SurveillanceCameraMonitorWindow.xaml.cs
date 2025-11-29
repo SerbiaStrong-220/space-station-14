@@ -1,6 +1,8 @@
 using System.Linq;
 using System.Numerics;
 using Content.Client.Resources;
+using Content.Client.SS220.UserInterface.Controls;
+using Content.Client.SS220.UserInterface.System.PinUI;
 using Content.Client.Viewport;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.SurveillanceCamera;
@@ -17,8 +19,10 @@ using Robust.Shared.Utility;
 namespace Content.Client.SurveillanceCamera.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class SurveillanceCameraMonitorWindow : DefaultWindow
+public sealed partial class SurveillanceCameraMonitorWindow : DefaultWindow, IPinnableWindow // ss220 add pin for ui
 {
+    private static readonly ProtoId<ShaderPrototype> CameraStaticShader = "CameraStatic";
+
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IResourceCache _resourceCache = default!;
 
@@ -74,7 +78,7 @@ public sealed partial class SurveillanceCameraMonitorWindow : DefaultWindow
 
         // This could be done better. I don't want to deal with stylesheets at the moment.
         var texture = _resourceCache.GetTexture("/Textures/Interface/Nano/square_black.png");
-        var shader = _prototypeManager.Index<ShaderPrototype>("CameraStatic").Instance().Duplicate();
+        var shader = _prototypeManager.Index(CameraStaticShader).Instance().Duplicate();
 
         CameraView.ViewportSize = new Vector2i(500, 500);
         CameraView.Eye = _defaultEye; // sure
@@ -101,8 +105,11 @@ public sealed partial class SurveillanceCameraMonitorWindow : DefaultWindow
 
         MapViewerControls.AttachToViewer(MapViewer);
         // SS220 Camera-Map end
-    }
 
+        // SS220 add pin button begin
+        PinUISystem.AddPinButtonBeforeTarget(this, CloseButton);
+        // SS220 add pin button end
+    }
 
     // The UI class should get the eye from the entity, and then
     // pass it here so that the UI can change its view.

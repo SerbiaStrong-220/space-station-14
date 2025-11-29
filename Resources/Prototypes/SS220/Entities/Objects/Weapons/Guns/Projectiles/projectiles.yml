@@ -1,4 +1,54 @@
 - type: entity
+  name : Bullet bolt
+  id: BaseBlasterBullet
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Reflective
+    reflective:
+    - Energy
+  - type: FlyBySound
+    sound:
+      collection: EnergyMiss
+      params:
+        volume: 5
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+    layers:
+    - state: omnilaser
+      shader: unshaded
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.15,-0.3,0.15,0.3"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
+      fly-by: &flybyfixture
+        shape: !type:PhysShapeCircle
+          radius: 1.5
+        layer:
+        - Impassable
+        - MidImpassable
+        - HighImpassable
+        - LowImpassable
+        hard: False
+  - type: Ammo
+  - type: Projectile
+    impactEffect: BulletImpactEffectBlaster
+    damage:
+      types:
+        Heat: 20
+        Piercing: 6
+    soundHit:
+      collection: WeakHit
+    forceSound: true
+
+- type: entity
   name: mini energy crossbow bolt
   id: BulletMiniEnergyCrossbow
   parent: BaseBullet
@@ -87,6 +137,8 @@
     damage:
       types:
         Blunt: 12
+    shuttleNavInfo:
+      enabled: true
 
 
 - type: entity
@@ -294,8 +346,8 @@
       - state: grenade
   - type: SpawnOnTrigger
     proto: GrenadeFlashEffect
-  - type: ActiveTimerTrigger
-    timeRemaining: 0.3
+  - type: TimerTrigger
+    delay: 0.3
   - type: DeleteOnTrigger
 
 - type: entity
@@ -468,6 +520,27 @@
   - type: Tag
     tags:
     - HideContextMenu
+
+- type: entity
+  name : Laser Carabine bolt
+  id: BulletLaserCarabine
+  parent: BulletDisabler
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Projectiles/redprojectile.rsi
+    layers:
+    - state: redlaser
+      shader: unshaded
+  - type: Projectile
+    impactEffect: BulletImpactEffectBlaster
+    damage:
+      types:
+        Heat: 29
+        Piercing: 10
+    soundHit:
+      collection: WeakHit
+    forceSound: true
 
 #HOCebent
 - type: entity

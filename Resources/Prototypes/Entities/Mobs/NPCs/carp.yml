@@ -1,7 +1,7 @@
 - type: entity
   name: space carp
   id: BaseMobCarp
-  parent: [ SimpleSpaceMobBase, FlyingMobBase, MobCombat ]
+  parent: [ SimpleSpaceMobBase, FlyingMobBase, MobCombat, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   description: It's a space carp.
   abstract: true
   components:
@@ -68,16 +68,21 @@
         path: /Audio/Effects/bite.ogg
       damage:
         types:
-          Blunt: 5
-          Slash: 7
+          Blunt: 6 #SS220 tweak-carp-damage BEGIN
+          Slash: 9
+          Bloodloss: 2 #SS220 tweak-carp-damage END
     - type: TypingIndicator
       proto: alien
     - type: Tag
       tags:
         - Carp
         - DoorBumpOpener
-    - type: ReplacementAccent
-      accent: genericAggressive
+        - CannotSuicide
+  # - type: ReplacementAccent #SS220 Dragon & Carp Language Begin
+  #   accent: genericAggressive
+    - type: Language
+      availableLanguages:
+      - id: Carpish #SS220 Dragon & Carp Language End
     - type: Speech
       speechVerb: LargeMob
     - type: InteractionPopup
@@ -114,6 +119,11 @@
       sprite: Mobs/Aliens/Carps/magic.rsi
     - type: TypingIndicator
       proto: guardian
+    - type: Language #SS220 Dragon & Carp Language Begin
+      availableLanguages:
+      - id: Carpish
+      - id: Galactic
+        canSpeak: false #SS220 Dragon & Carp Language End
 
 - type: entity
   name: holocarp
@@ -137,6 +147,11 @@
             - Opaque
     - type: TypingIndicator
       proto: robot
+    - type: Language #SS220 Dragon & Carp Language Begin
+      availableLanguages:
+      - id: Carpish
+      - id: Galactic
+        canSpeak: false #SS220 Dragon & Carp Language End
 
 - type: entity
   parent: MobCarp
@@ -156,6 +171,10 @@
   suffix: "Salvage Ruleset"
   components:
     - type: SalvageMobRestrictions
+    # - type: MobThresholds  # SS220 Revert Wizden balance #38131 BEGIN
+    #   thresholds:
+    #     0: Alive
+    #     30: Dead  # SS220 Revert Wizden balance #38131 END
 
 - type: entity
   name: space carp
@@ -172,10 +191,6 @@
       rules: ghost-role-information-space-dragon-summoned-carp-rules
       mindRoles:
       - MindRoleGhostRoleTeamAntagonistFlock
-# SS220-partial-revert-raffle-Begin
-#      raffle:
-#        settings: short
-# SS220-partial-revert-reffle-End
     - type: GhostTakeoverAvailable
     - type: HTN
       rootTask:
@@ -185,6 +200,7 @@
       canSend: true
       telepathyChannelPrototype: TelepathyChannelSpaceDragon
     # SS220 Telepathy end
+    - type: Insulated # SS220 Insulated Dragon and Carp
 
 - type: entity
   id: MobCarpDungeon
@@ -231,7 +247,7 @@
     - type: MobThresholds
       thresholds:
         0: Alive
-        150: Dead
+        150: Dead # SS220 Revert Wizden balance #38131
     - type: Stamina
       critThreshold: 150
     - type: DamageStateVisuals

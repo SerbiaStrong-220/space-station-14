@@ -4,9 +4,7 @@
   suffix: Law
   components:
   - type: Sprite
-    sprite: SS220/Structures/Doors/Airlocks/Standart/law.rsi
-  - type: PaintableAirlock
-    department: Law
+    sprite: SS220/Structures/Doors/Airlocks/Standard/law.rsi
   - type: Wires
     layoutId: AirlockSecurity
 
@@ -17,8 +15,6 @@
   components:
   - type: Sprite
     sprite: SS220/Structures/Doors/Airlocks/Glass/law.rsi
-  - type: PaintableAirlock
-    department: Security
   - type: Wires
     layoutId: AirlockSecurity
 
@@ -28,9 +24,7 @@
   suffix: Security/Lawyer
   components:
   - type: Sprite
-    sprite: SS220/Structures/Doors/Airlocks/Standart/law_sec.rsi
-  - type: PaintableAirlock
-    department: Security
+    sprite: SS220/Structures/Doors/Airlocks/Standard/law_sec.rsi
   - type: Wires
     layoutId: AirlockSecurity
 
@@ -41,7 +35,115 @@
   components:
   - type: Sprite
     sprite: SS220/Structures/Doors/Airlocks/Glass/law_sec.rsi
-  - type: PaintableAirlock
-    department: Security
   - type: Wires
     layoutId: AirlockSecurity
+
+#SS220 New_accesses_and_some_tweaks start
+- type: entity
+  parent: AirlockClown
+  id: AirlockClownLocked
+  suffix: Clown, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsClown ]
+
+- type: entity
+  parent: Airlock
+  id: AirlockLibrarianLocked
+  suffix: Librarian
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsLibrarian ]
+
+- type: entity
+  parent: AirlockStandardGlass
+  id: AirlockGlassLibrarianLocked
+  suffix: Librarian
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsLibrarian ]
+
+- type: entity
+  parent: AirlockStandardGlass
+  id: AirlockStandartGlassReporterLocked
+  suffix: Reporter
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsReporter ]
+
+- type: entity
+  parent: Airlock
+  id: AirlockReporterLocked
+  suffix: Reporter
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsReporter ]
+
+- type: entity
+  parent: AirlockGlass
+  id: AirlockGlassReporterLocked
+  suffix: Reporter
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsReporter ]
+
+- type: entity
+  parent: AirlockStandardGlass
+  id: AirlockGlassMimeLocked
+  suffix: Mime
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsMime ]
+
+- type: entity
+  parent: Airlock
+  id: AirlockMimeLocked
+  suffix: Mime
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsMime ]
+
+- type: entity
+  parent: AirlockStandardGlass
+  id: AirlockGlassMusicianLocked
+  suffix: Musician
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsMusician ]
+
+- type: entity
+  parent: Airlock
+  id: AirlockMusicianLocked
+  suffix: Musician
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsMusician ]
+
+- type: entity
+  parent: AirlockMedical
+  id: AirlockMeidicalPsychologistLocked
+  suffix: Medical, Psychologist
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsPsychologist ]
+
+- type: entity
+  parent: AirlockMedicalGlass
+  id: AirlockMeidicalGlassPsychologistLocked
+  suffix: Medical, Psychologist
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsPsychologist ]
+#SS220 New_accesses_and_some_tweaks end

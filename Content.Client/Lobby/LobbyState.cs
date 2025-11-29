@@ -3,6 +3,7 @@ using Content.Client.GameTicking.Managers;
 using Content.Client.LateJoin;
 using Content.Client.Lobby.UI;
 using Content.Client.Message;
+using Content.Client.Playtime;
 using Content.Client.UserInterface.Systems.Chat;
 using Content.Client.Voting;
 using Content.Shared.CCVar;
@@ -26,6 +27,7 @@ namespace Content.Client.Lobby
         [Dependency] private readonly IUserInterfaceManager _userInterfaceManager = default!;
         [Dependency] private readonly IGameTiming _gameTiming = default!;
         [Dependency] private readonly IVoteManager _voteManager = default!;
+        [Dependency] private readonly ClientsidePlaytimeTrackingManager _playtimeTracking = default!;
 
         private ClientGameTicker _gameTicker = default!;
         private ContentAudioSystem _contentAudioSystem = default!;
@@ -170,6 +172,7 @@ namespace Content.Client.Lobby
         private void LobbyLateJoinStatusUpdated()
         {
             Lobby!.ReadyButton.Disabled = _gameTicker.DisallowedLateJoin;
+            Lobby!.UpdateSpeciesBanStatus(); // SS220 Species bans
         }
 
         private void UpdateLobbyUi()
@@ -184,17 +187,39 @@ namespace Content.Client.Lobby
             else
             {
                 Lobby!.StartTime.Text = string.Empty;
+                Lobby!.ReadyButton.Pressed = _gameTicker.AreWeReady;
                 Lobby!.ReadyButton.Text = Loc.GetString(Lobby!.ReadyButton.Pressed ? "lobby-state-player-status-ready": "lobby-state-player-status-not-ready");
                 Lobby!.ReadyButton.ToggleMode = true;
                 Lobby!.ReadyButton.Disabled = false;
-                Lobby!.ReadyButton.Pressed = _gameTicker.AreWeReady;
                 Lobby!.ObserveButton.Disabled = true;
             }
+
+            Lobby!.UpdateSpeciesBanStatus(); // SS220 Species bans
 
             if (_gameTicker.ServerInfoBlob != null)
             {
                 Lobby!.ServerInfo.SetInfoBlob(_gameTicker.ServerInfoBlob);
             }
+
+            var minutesToday = _playtimeTracking.PlaytimeMinutesToday;
+            if (minutesToday > 60)
+            {
+                Lobby!.PlaytimeComment.Visible = true;
+
+                var hoursToday = Math.Round(minutesToday / 60f, 1);
+
+                var chosenString = minutesToday switch
+                {
+                    < 180 => "lobby-state-playtime-comment-normal",
+                    < 360 => "lobby-state-playtime-comment-concerning",
+                    < 720 => "lobby-state-playtime-comment-grasstouchless",
+                    _ => "lobby-state-playtime-comment-selfdestructive"
+                };
+
+                Lobby.PlaytimeComment.SetMarkup(Loc.GetString(chosenString, ("hours", hoursToday)));
+            }
+            else
+                Lobby!.PlaytimeComment.Visible = false;
         }
 
         private void UpdateLobbySoundtrackInfo(LobbySoundtrackChangedEvent ev)

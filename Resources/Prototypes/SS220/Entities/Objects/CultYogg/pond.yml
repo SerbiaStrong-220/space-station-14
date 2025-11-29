@@ -25,11 +25,19 @@
   - type: SolutionContainerManager
     solutions:
       drink:
-        maxVol: 10
+        maxVol: 30
         reagents:
-        - ReagentId: Nocturine
-          Quantity: 10
+        - ReagentId: EssenceOfTheAbyss
+          Quantity: 30
+  - type: Edible
+    solution: drink
+    edible: Drink
+    destroyOnEmpty: false
   - type: DrawableSolution
+    solution: drink
+  - type: DrainableSolution
+    solution: drink
+  - type: ExaminableSolution
     solution: drink
   - type: Sprite
     sprite: SS220/Structures/CultYogg/yoggpond.rsi
@@ -39,6 +47,7 @@
   - type: Transform
   - type: CultPond
     solutionName: drink
+    refillCooldown: 15
   - type: CultYoggBuilding
     eraseTime: 5
     spawnOnErase:

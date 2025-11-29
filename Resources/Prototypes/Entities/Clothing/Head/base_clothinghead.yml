@@ -16,7 +16,7 @@
   - type: Item
     size: Small
     storedRotation: -90
-  - type: Food
+  - type: Edible
     requiresSpecialDigestion: true
   - type: SolutionContainerManager
     solutions:
@@ -101,8 +101,8 @@
         id: blinking
         interpolate: Nearest
         maxDuration: 1.0
-        minValue: 0.1
-        maxValue: 2.0
+        startValue: 0.1
+        endValue: 2.0
         isLooped: true
   - type: PowerCellSlot
     cellSlotId: cell_slot
@@ -156,6 +156,7 @@
     - Snout
     - HeadTop
     - HeadSide
+    - FacialHair
 
 - type: entity
   abstract: true
@@ -209,6 +210,7 @@
     - Snout
     - HeadTop
     - HeadSide
+    - FacialHair
 
 - type: entity
   abstract: true
@@ -258,8 +260,8 @@
         id: blinking
         interpolate: Nearest
         maxDuration: 1.0
-        minValue: 0.1
-        maxValue: 2.0
+        startValue: 0.1
+        endValue: 2.0
         isLooped: true
   - type: Battery
     maxCharge: 600 #lights drain 3/s but recharge of 2 makes this 1/s. Therefore 600 is 10 minutes of light.

@@ -23,15 +23,10 @@
   id: KRSPowerCell
 
 - type: Tag
+  id: LaserCarabinePowerCell
+
+- type: Tag
   id: WeaponRechargerWhitelist
-
-# READD-VEHICLES
-- type: Tag
-  id: JanicartKeys
-
-- type: Tag
-  id: VehicleKey
-######
 
 # ss220 shlepi
 - type: Tag
@@ -226,6 +221,14 @@
 - type: Tag
   id: WhitelistPdaIdPainter
 
+# SS220 Saber
+- type: Tag
+  id: MagazinePistolSubMachineGunAcp
+
+- type: Tag
+  id: CartridgeAmmoAcp
+# SS220 Saber end
+
 - type: Tag
   id: CultYoggStealthProvidable
 
@@ -332,3 +335,25 @@
 - type: Tag
   id: CultYoggInnerHandToggleable
 # ss220 Cult_update2 end
+
+# ss220 ChameleonStructure start
+- type: Tag
+  id: WhitelistChameleonStructureWall
+
+- type: Tag
+  id: WhitelistChameleonStructureAirlock
+
+- type: Tag
+  id: WhitelistChameleonStructureSecretDoor
+# ss220 ChameleonStructure end
+
+# ss220 Posters update start
+- type: Tag
+  id: Contrposter
+
+- type: Tag
+  id: Legalposter
+# ss220 Posters update end
+
+- type: Tag
+  id: MiGoHandsWhitelist

@@ -60,7 +60,7 @@
       - id: ClothingHeadHatPaper
       - id: ClothingHeadHatPirate
       - id: ClothingMaskSterile
-      - id: ClothingNeckHeadphones
+      - id: ClothingMultipleHeadphones
       - id: ClothingNeckTieRed
       - id: ClothingOuterCoatGentle
       - !type:AllSelector
@@ -115,9 +115,10 @@
         - id: ClothingNeckCloakGay
         - id: ClothingNeckCloakEnby
         - id: ClothingNeckCloakPan
-      - id: ToySkeleton
+      - id: ToyFigurineSkeleton
       - id: Basketball
       - id: Football
+      - id: TennisBall
       - id: BalloonNT
       - id: BalloonCorgi
       - id: MysteryFigureBox
@@ -189,6 +190,8 @@
       - id: ClothingWristWatch # SS220 Wristwatch
       - id: CigPackWEH #SS220 Cigarettes
       - id: RubberStampGreytide
+      - id: MysteryLighterBox
+      - id: GoldenPersonalAI
 
 - type: entity
   name: Maint Loot Spawner
@@ -354,6 +357,7 @@
       weight: 95
       children:
       - id: Machete
+      - id: Claymore
       - id: BaseBallBat
       - id: CombatKnife
       - id: Spear
@@ -419,6 +423,11 @@
         - Spaceshroom
       chance: 0.6
       offset: 0.0
+      #SS220 anti shroom meta start
+      rarePrototypes:
+        - FoodMiGomyceteCult
+      rareChance: 0.03
+      #SS220 anti shroom meta end
 
 
 - type: entityTable

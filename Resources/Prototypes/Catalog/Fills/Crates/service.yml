@@ -2,7 +2,7 @@
   id: CrateServiceJanitorialSupplies
   parent: CratePlastic
   name: janitorial supplies crate
-  description: Fight back against dirt and grime with Nanotrasen's Janitorial Essentials(tm)! Contains three buckets, caution signs, and cleaner grenades. Also has a single mop, broom, spray cleaner, rag, and trash bag.
+  description: Fight back against dirt and grime with Nanotrasen's Janitorial Essentials(tm)! Contains three buckets, caution signs, and cleaner grenades. Also has a single mop, broom, spray cleaner, wire brush, rag, and trash bag.
   components:
   - type: StorageFill
     contents:
@@ -22,6 +22,19 @@
       - id: BoxCleanerGrenades
       - id: BearTrap #SS220 TrapSystem
         amount: 2 #SS220 TrapSystem
+      - id: WireBrush
+        amount: 2
+
+- type: entity
+  id: CrateServiceCleanerGrenades
+  parent: CratePlastic
+  name: bulk cleanades crate
+  description: Contains two boxes of cleaner grenades, for those deeply-entrenched stains.
+  components:
+  - type: StorageFill
+    contents:
+      - id: BoxCleanerGrenades
+        amount: 2
 
 - type: entity
   id: CrateServiceReplacementLights
@@ -133,15 +146,17 @@
   - type: StorageFill
     contents:
     - id: Paper
-      amount: 15
+      amount: 12
+    - id: PaperOffice
+      amount: 6
     - id: Pen
       amount: 2
-    - id: BoxFolderClipboard
+    - id: BoxFolderClipboardEmpty
       amount: 2
     - id: HandLabeler
-    - id: BoxFolderBlue
-    - id: BoxFolderRed
-    - id: BoxFolderYellow
+    - id: BoxFolderBlueEmpty
+    - id: BoxFolderRedEmpty
+    - id: BoxFolderYellowEmpty
     - id: NewtonCradle
     - id: BoxEnvelope
     - id: DeviceCalculator # SS220 Calculator
@@ -283,8 +298,9 @@
   parent: CrateTrashCart
   components:
     #SS220 RatKing tweaks and changes start here
-    - type: RatKingRummageable
-      rummageLoot: RatKingLootTrashCans
+    - type: Rummageable
+      table: !type:NestedSelector
+        tableId: RatKingLootTrashCans
     - type: RegalRatSpawnLocation
     #SS220 Ratking tweaks and changes end here
     - type: StorageFill

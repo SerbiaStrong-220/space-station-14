@@ -217,7 +217,7 @@
   # Командование
 - type: entity
   parent: BoxFolderBaseSS220
-  id: BoxFolderСaptain
+  id: BoxFolderCaptain
   name: папка капитана
   components:
   - type: Sprite
@@ -473,3 +473,140 @@
   - type: Construction
     graph: PaperAirplane
     node: paperairplane
+
+# Бумаги о целях:
+
+- type: entity
+  parent: PaperNtFormCc
+  id: PaperStationGoalShuttle
+  suffix: Цель мед шаттл
+  components:
+    - type: Paper
+      contentSize: 10000
+      content: station-goal-saveplanet
+
+- type: entity
+  parent: PaperNtFormCc
+  id: PaperStationGoalSingulo
+  suffix: Цель сингулярность
+  components:
+    - type: Paper
+      contentSize: 10000
+      content: station-goal-singularity
+
+- type: entity
+  parent: PaperNtFormCc
+  id: PaperStationGoalSolars
+  suffix: Цель соляры
+  components:
+    - type: Paper
+      contentSize: 10000
+      content: station-goal-solar-panels
+
+- type: entity
+  parent: PaperNtFormCc
+  id: PaperStationGoalArtifacts
+  suffix: Цель артефакты
+  components:
+    - type: Paper
+      contentSize: 10000
+      content: station-goal-artifacts
+
+- type: entity
+  parent: PaperNtFormCc
+  id: PaperStationGoalBank
+  suffix: Цель храниище
+  components:
+    - type: Paper
+      contentSize: 10000
+      content: station-goal-bank
+
+- type: entity
+  parent: PaperNtFormCc
+  id: PaperStationGoalZoo
+  suffix: Цель зоопарк
+  components:
+    - type: Paper
+      contentSize: 10000
+      content: station-goal-zoo
+
+- type: entity
+  parent: PaperNtFormCc
+  id: PaperStationGoalTesla
+  suffix: Цель тесла
+  components:
+    - type: Paper
+      contentSize: 10000
+      content: station-goal-tesla
+
+- type: entity
+  parent: PaperNtFormCc
+  id: PaperStationGoalXeno
+  suffix: Цель ксенобио
+  components:
+    - type: Paper
+      contentSize: 10000
+      content: station-goal-delta-xeno-repair
+
+- type: entity
+  parent: PaperNtFormCc
+  id: PaperStationGoalSavePlanet
+  suffix: Цель шаттл с припасами
+  components:
+    - type: Paper
+      contentSize: 10000
+      content: station-goal-saveplanet
+
+- type: entity
+  parent: PaperNtFormCc
+  id: PaperStationGoalExpedition
+  suffix: Цель экспы
+  components:
+    - type: Paper
+      contentSize: 10000
+      content: station-goal-expedition
+
+- type: entity
+  parent: PaperNtFormCc
+  id: PaperStationGoalGuests
+  suffix: Цель гости
+  components:
+    - type: Paper
+      contentSize: 10000
+      content: station-goal-guests
+
+- type: entity
+  parent: PaperNtFormCc
+  id: PaperStationGoalPneumatictubes
+  suffix: Цель пневмотрубы
+  components:
+    - type: Paper
+      contentSize: 10000
+      content: station-goal-pneumatictubes
+
+- type: entity
+  parent: PaperNtFormCc
+  id: PaperStationGoalRobotics
+  suffix: Цель боргизация
+  components:
+    - type: Paper
+      contentSize: 10000
+      content: station-goal-robotisation
+
+- type: entity
+  parent: PaperNtFormCc
+  id: PaperStationGoalHomekeepers
+  suffix: Цель обр комплекс
+  components:
+    - type: Paper
+      contentSize: 10000
+      content: station-goal-homekeepers
+
+- type: entity
+  parent: PaperNtFormCc
+  id: PaperStationGoalPVO
+  suffix: Цель пво
+  components:
+    - type: Paper
+      contentSize: 10000
+      content: station-goal-complexPVO

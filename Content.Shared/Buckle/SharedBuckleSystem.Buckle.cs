@@ -13,20 +13,20 @@ using Content.Shared.Popups;
 using Content.Shared.SS220.Buckle;
 using Content.Shared.SS220.Vehicle.Components;
 using Content.Shared.Pulling.Events;
-using Content.Shared.Rotation;
 using Content.Shared.Standing;
 using Content.Shared.Storage.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
-using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Robust.Shared.Network;
+using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Movement.Pulling.Components;
 
 namespace Content.Shared.Buckle;
 
@@ -34,8 +34,11 @@ public abstract partial class SharedBuckleSystem
 {
     public static ProtoId<AlertCategoryPrototype> BuckledAlertCategory = "Buckled";
 
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly INetManager _netManager = default!;
+
+    private const float MaxPullingDistance = 2f;
 
     private void InitializeBuckle()
     {
@@ -65,6 +68,8 @@ public abstract partial class SharedBuckleSystem
         });
 
         SubscribeLocalEvent<BuckleComponent, ModifyUncuffDurationEvent>(OnBuckleModifyUncuffDuration); // SS220 Add uncuff time modifier when buckled
+        SubscribeLocalEvent<ActivePullerComponent, BuckleAttemptEvent>(OnBuckleAttempt); // SS220-add-predicted-unbuckle-on-pulling
+
     }
 
     private void OnBuckleComponentShutdown(Entity<BuckleComponent> ent, ref ComponentShutdown args)
@@ -247,16 +252,16 @@ public abstract partial class SharedBuckleSystem
             Dirty(buckle.Comp.BuckledTo.Value, old);
         }
 
-        if (strap is {} strapEnt && Resolve(strapEnt.Owner, ref strapEnt.Comp))
+        if (strap is { } strapEnt && Resolve(strapEnt.Owner, ref strapEnt.Comp))
         {
             strapEnt.Comp.BuckledEntities.Add(buckle);
             buckle.Comp.FastenedSeatbelt = strapEnt.Comp.HasSeatbelt;
             Dirty(strapEnt);
-            _alerts.ShowAlert(buckle, strapEnt.Comp.BuckledAlertType);
+            _alerts.ShowAlert(buckle.Owner, strapEnt.Comp.BuckledAlertType);
         }
         else
         {
-            _alerts.ClearAlertCategory(buckle, BuckledAlertCategory);
+            _alerts.ClearAlertCategory(buckle.Owner, BuckledAlertCategory);
         }
 
         buckle.Comp.BuckledTo = strap;
@@ -322,7 +327,7 @@ public abstract partial class SharedBuckleSystem
         //ss220 fix buckle with two hands start
         if (TryComp<HandsComponent>(user, out var handsComponent) && HasComp<VehicleComponent>(strapUid))
         {
-            if(!handsComponent.IsAnyHandFree())
+            if (_hands.CountFreeHands(user.Value) == 0)
             {
                 if (_netManager.IsServer && popup)
                     _popup.PopupEntity(Loc.GetString("buckle-component-both-hands-in-use"), user.Value, user.Value);
@@ -546,9 +551,9 @@ public abstract partial class SharedBuckleSystem
     private void Unbuckle(Entity<BuckleComponent> buckle, Entity<StrapComponent> strap, EntityUid? user)
     {
         if (user == buckle.Owner)
-            _adminLogger.Add(LogType.Action, LogImpact.Low, $"{user} unbuckled themselves from {strap}");
+            _adminLogger.Add(LogType.Action, LogImpact.Low, $"{ToPrettyString(user):user} unbuckled themselves from {ToPrettyString(strap):strap}");
         else if (user != null)
-            _adminLogger.Add(LogType.Action, LogImpact.Low, $"{user} unbuckled {buckle} from {strap}");
+            _adminLogger.Add(LogType.Action, LogImpact.Low, $"{ToPrettyString(user):user} unbuckled {ToPrettyString(buckle):target} from {ToPrettyString(strap):strap}");
 
         _audio.PlayPredicted(strap.Comp.UnbuckleSound, strap, user);
 
@@ -616,8 +621,14 @@ public abstract partial class SharedBuckleSystem
         if (_gameTiming.CurTime < buckle.Comp.BuckleTime + buckle.Comp.Delay)
             return false;
 
-        if (user != null && !_interaction.InRangeUnobstructed(user.Value, strap.Owner, buckle.Comp.Range, popup: popup))
-            return false;
+        if (user != null)
+        {
+            if (!_interaction.InRangeUnobstructed(user.Value, strap.Owner, buckle.Comp.Range, popup: popup))
+                return false;
+
+            if (user.Value != buckle.Owner && !ActionBlocker.CanComplexInteract(user.Value))
+                return false;
+        }
 
         var unbuckleAttempt = new UnbuckleAttemptEvent(strap, buckle!, user, popup);
         RaiseLocalEvent(buckle, ref unbuckleAttempt);
@@ -663,4 +674,28 @@ public abstract partial class SharedBuckleSystem
             TryBuckle(args.Target.Value, args.User, args.Used.Value, popup: false);
         }
     }
+    // SS220-add-predicted-unbuckle-on-pulling-begin
+    private void OnBuckleAttempt(Entity<ActivePullerComponent> entity, ref BuckleAttemptEvent args)
+    {
+        PullerComponent? pullerComponent = null;
+        if (!Resolve(entity, ref pullerComponent))
+            return;
+
+        if (pullerComponent.Pulling is null)
+            return;
+
+        var pulledEntityPosition = _transform.GetWorldPosition(pullerComponent.Pulling.Value);
+        var strapPosition = _transform.GetWorldPosition(args.Strap);
+
+        var diffDistance = pulledEntityPosition - strapPosition;
+
+        if (!(diffDistance.LengthSquared() > MaxPullingDistance * MaxPullingDistance))
+            return;
+
+        args.Cancelled = true;
+
+        if (args.Popup)
+            _popup.PopupClient(Loc.GetString("buckle-stopped-out-of-pulling-range"), args.Strap, args.Buckle);
+    }
+    // SS220-add-predicted-unbuckle-on-pulling-end
 }

@@ -12,6 +12,8 @@
     - Energy
     reflectProb: 0.2
     spread: 90
+  - type: Paintable
+    group: CrateSteel
   - type: RadiationBlockingContainer
     resistance: 2.5
 
@@ -21,14 +23,12 @@
   name: plastic crate
   components:
   - type: Icon
-    sprite: Structures/Storage/Crates/plastic.rsi
+    sprite: SS220/Structures/Storage/Crates/plastic.rsi #SS220 Crate-tg-resprite
   - type: Sprite
-    sprite: Structures/Storage/Crates/plastic.rsi
+    sprite: SS220/Structures/Storage/Crates/plastic.rsi #SS220 Crate-tg-resprite
 #SS220 Crate-tg-resprite begin
     offset: 0, 0
     layers:
-    - state: base
-      map: ["enum.StorageVisualLayers.Base"]
     - state: closed
       map: ["enum.StorageVisualLayers.Door"]
     - state: welded
@@ -48,6 +48,8 @@
     - entity_storage
   - type: StaticPrice
     price: 100
+  - type: Paintable
+    group: CratePlastic
 
 - type: entity
   parent: CratePlastic
@@ -80,6 +82,8 @@
     node: done
     containers:
     - entity_storage
+  - type: Paintable
+    group: null
 
 - type: entity
   parent: CratePlastic
@@ -480,6 +484,8 @@
   - type: Sprite
     sprite: Structures/Storage/Crates/cage.rsi
     offset: 0, 0 #SS220 Crate-tg-resprite
+    drawdepth: LargeObjects
+    snapCardinals: true
     layers:
     - state: base
     - state: closed
@@ -525,12 +531,12 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.4,-0.4,0.4,0.29"
+          bounds: "-0.4,-0.2,0.4,0.29"
         density: 80
         mask:
-        - CrateMask
+        - TabletopMachineMask
         layer:
-        - LargeMobLayer
+        - TabletopMachineLayer
   - type: StaticPrice
     price: 75
 
@@ -571,6 +577,8 @@
         - CrateMask #this is so they can go under plastic flaps
         layer:
         - MachineLayer
+  - type: Paintable
+    group: null
 
 - type: entity
   id: CrateLockBoxEngineering
@@ -778,7 +786,7 @@
   parent: CrateGeneric
   id: CrateCoffin
   name: coffin
-  description: A comfy coffin, excelent place for the vampires and corpses.
+  description: A comfy coffin, excellent place for the vampires and corpses.
   components:
   - type: Sprite
     offset: 0, 0 #SS220 Crate-tg-resprite
@@ -938,8 +946,9 @@
       map: ["enum.PaperLabelVisuals.Layer"]
   - type: Cart #SS220-Cart-system
 #SS220 RatKing tweaks and changes start
-  - type: RatKingRummageable
-    rummageLoot: RatKingLootTrashCans
+  - type: Rummageable
+    table: !type:NestedSelector
+      tableId: RatKingLootTrashCans
   - type: RegalRatSpawnLocation
 #SS220 RatKing tweaks and changes here
 #SS220 CollisionTrash bgn
@@ -958,6 +967,8 @@
         - HighImpassable
         - MidImpassable
 #SS220 CollisionTrash end
+  - type: Paintable
+    group: null
 
 - type: entity
   parent: CrateBaseSecure
@@ -988,6 +999,8 @@
   - type: AccessReader
     access: [["Janitor"]]
   - type: Cart #SS220-Cart-system
+  - type: Paintable
+    group: null
 
 - type: entity
   parent: CrateBaseWeldable

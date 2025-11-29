@@ -38,6 +38,10 @@ namespace Content.Server.Database
         public DbSet<ServerBanHit> ServerBanHit { get; set; } = default!;
         public DbSet<ServerRoleBan> RoleBan { get; set; } = default!;
         public DbSet<ServerRoleUnban> RoleUnban { get; set; } = default!;
+        // SS220 species ban begin
+        public DbSet<ServerSpeciesBan> SpeciesBan { get; set; } = default!;
+        public DbSet<ServerSpeciesUnban> SpeciesUnban { get; set; } = default!;
+        // SS220 species ban end
         public DbSet<PlayTime> PlayTime { get; set; } = default!;
         public DbSet<UploadedResourceLog> UploadedResourceLog { get; set; } = default!;
         public DbSet<AdminNote> AdminNotes { get; set; } = null!;
@@ -182,6 +186,24 @@ namespace Content.Server.Database
             modelBuilder.Entity<ServerRoleBan>().ToTable(t =>
                 t.HasCheckConstraint("HaveEitherAddressOrUserIdOrHWId", "address IS NOT NULL OR player_user_id IS NOT NULL OR hwid IS NOT NULL"));
 
+            // SS220 Species bans begin
+            modelBuilder.Entity<ServerSpeciesBan>()
+                .HasIndex(p => p.PlayerUserId);
+
+            modelBuilder.Entity<ServerSpeciesBan>()
+                .HasIndex(p => p.Address);
+
+            modelBuilder.Entity<ServerSpeciesBan>()
+                .HasIndex(p => p.PlayerUserId);
+
+            modelBuilder.Entity<ServerSpeciesUnban>()
+                .HasIndex(p => p.BanId)
+                .IsUnique();
+
+            modelBuilder.Entity<ServerSpeciesBan>().ToTable(t =>
+                t.HasCheckConstraint("HaveEitherAddressOrUserIdOrHWId", "address IS NOT NULL OR player_user_id IS NOT NULL OR hwid IS NOT NULL"));
+            // SS220 Species bans end
+
             modelBuilder.Entity<Player>()
                 .HasIndex(p => p.UserId)
                 .IsUnique();
@@ -324,6 +346,22 @@ namespace Content.Server.Database
                 .HasPrincipalKey(author => author.UserId)
                 .OnDelete(DeleteBehavior.SetNull);
 
+            // SS220 Species bans begin
+            modelBuilder.Entity<ServerSpeciesBan>()
+                .HasOne(ban => ban.CreatedBy)
+                .WithMany(author => author.AdminServerSpeciesBansCreated)
+                .HasForeignKey(ban => ban.BanningAdmin)
+                .HasPrincipalKey(author => author.UserId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<ServerSpeciesBan>()
+                .HasOne(ban => ban.LastEditedBy)
+                .WithMany(author => author.AdminServerSpeciesBansLastEdited)
+                .HasForeignKey(ban => ban.LastEditedById)
+                .HasPrincipalKey(author => author.UserId)
+                .OnDelete(DeleteBehavior.SetNull);
+            // SS220 Species bans end
+
             modelBuilder.Entity<RoleWhitelist>()
                 .HasOne(w => w.Player)
                 .WithMany(p => p.JobWhitelists)
@@ -361,6 +399,18 @@ namespace Content.Server.Database
                 .OwnsOne(p => p.HWId)
                 .Property(p => p.Type)
                 .HasDefaultValue(HwidType.Legacy);
+
+            // SS220 Species bans begin
+            modelBuilder.Entity<ServerSpeciesBan>()
+                .OwnsOne(p => p.HWId)
+                .Property(p => p.Hwid)
+                .HasColumnName("hwid");
+
+            modelBuilder.Entity<ServerSpeciesBan>()
+                .OwnsOne(p => p.HWId)
+                .Property(p => p.Type)
+                .HasDefaultValue(HwidType.Legacy);
+            // SS220 Species bans end
 
             modelBuilder.Entity<ConnectionLog>()
                 .OwnsOne(p => p.HWId)
@@ -595,6 +645,10 @@ namespace Content.Server.Database
         public List<ServerBan> AdminServerBansLastEdited { get; set; } = null!;
         public List<ServerRoleBan> AdminServerRoleBansCreated { get; set; } = null!;
         public List<ServerRoleBan> AdminServerRoleBansLastEdited { get; set; } = null!;
+        // SS220 Species bans begin
+        public List<ServerSpeciesBan> AdminServerSpeciesBansCreated { get; set; } = null!;
+        public List<ServerSpeciesBan> AdminServerSpeciesBansLastEdited { get; set; } = null!;
+        // SS220 Species bans end
         public List<RoleWhitelist> JobWhitelists { get; set; } = null!;
     }
 
@@ -1051,6 +1105,53 @@ namespace Content.Server.Database
 
         public DateTime UnbanTime { get; set; }
     }
+
+    // SS220 species ban begin
+    [Table("server_species_ban"), Index(nameof(PlayerUserId))]
+    public sealed class ServerSpeciesBan : IBanCommon<ServerSpeciesUnban>
+    {
+        public int Id { get; set; }
+        public int? RoundId { get; set; }
+        public Round? Round { get; set; }
+        public Guid? PlayerUserId { get; set; }
+        [Required] public TimeSpan PlaytimeAtNote { get; set; }
+        public NpgsqlInet? Address { get; set; }
+        public TypedHwid? HWId { get; set; }
+
+        public DateTime BanTime { get; set; }
+
+        public DateTime? ExpirationTime { get; set; }
+
+        public string Reason { get; set; } = null!;
+
+        public NoteSeverity Severity { get; set; }
+        [ForeignKey("CreatedBy")] public Guid? BanningAdmin { get; set; }
+        public Player? CreatedBy { get; set; }
+
+        [ForeignKey("LastEditedBy")] public Guid? LastEditedById { get; set; }
+        public Player? LastEditedBy { get; set; }
+        public DateTime? LastEditedAt { get; set; }
+
+        public ServerSpeciesUnban? Unban { get; set; }
+        public bool Hidden { get; set; }
+
+        public string SpeciesId { get; set; } = null!;
+    }
+
+    [Table("server_species_unban")]
+    public sealed class ServerSpeciesUnban : IUnbanCommon
+    {
+        [Column("species_unban_id")] public int Id { get; set; }
+
+        public int BanId { get; set; }
+        public ServerSpeciesBan Ban { get; set; } = null!;
+
+        public Guid? UnbanningAdmin { get; set; }
+
+        public DateTime UnbanTime { get; set; }
+
+    }
+    // SS220 species ban end
 
     [Table("play_time")]
     public sealed class PlayTime

@@ -27,16 +27,23 @@
       startingGear: ThiefGear
       components:
       - type: Pacified
+      - type: Thieving
+        stripTimeReduction: 2
+        stealthy: true
       mindRoles:
       - MindRoleThief
       briefing:
         sound: "/Audio/Misc/thief_greeting.ogg"
+  - type: DynamicRuleCost
+    cost: 75
 
 # Needs testing
 - type: entity
   parent: BaseWizardRule
   id: SubWizard
   components:
+  - type: GameRule
+    minPlayers: 30 # SS 220 Wiz Req 30 players min
   - type: AntagSelection
     agentName: wizard-round-end-name
     selectionTime: PrePlayerSpawn

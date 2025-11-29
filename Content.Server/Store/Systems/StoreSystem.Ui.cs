@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Server.Actions;
 using Content.Server.Administration.Logs;
+using Content.Server.SS220.TraitorDynamics;
 using Content.Server.Stack;
 using Content.Server.Store.Components;
 using Content.Shared.Actions;
@@ -30,6 +31,7 @@ public sealed partial class StoreSystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly StackSystem _stack = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private readonly TraitorDynamicsSystem _dynamics = default!; //SS220 - show-in-uplink-type-dynamic
 
     private void InitializeUi()
     {
@@ -109,8 +111,12 @@ public sealed partial class StoreSystem
 
         // only tell operatives to lock their uplink if it can be locked
         var showFooter = HasComp<RingerUplinkComponent>(store);
+        //SS220 - show-in-uplink-type-dynamic-start
+        var dynamic = _dynamics.GetCurrentDynamic();
+        var dynamicName = _proto.TryIndex(dynamic, out var dynamicProto) ? dynamicProto.SelectedLoreName : null;
 
-        var state = new StoreUpdateState(component.LastAvailableListings, allCurrency, showFooter, component.RefundAllowed);
+        var state = new StoreUpdateState(component.LastAvailableListings, allCurrency, showFooter, component.RefundAllowed, dynamicName);
+        //SS220 - show-in-uplink-type-dynamic-end
         _ui.SetUiState(store, StoreUiKey.Key, state);
     }
 
@@ -248,13 +254,16 @@ public sealed partial class StoreSystem
                 HandleRefundComp(uid, component, upgradeActionId.Value);
         }
 
-        if (listing.ProductEvent != null)
+        // ss220 tweak product event start
+        if (listing.ProductEvent is { } ev)
         {
-            if (!listing.RaiseProductEventOnUser)
-                RaiseLocalEvent(listing.ProductEvent);
-            else
-                RaiseLocalEvent(buyer, listing.ProductEvent);
+            ev.Listing = listing;
+            ev.Purchaser = buyer;
+            ev.StoreUid = uid;
+
+            RaiseLocalEvent(!listing.RaiseProductEventOnUser ? uid : buyer, (object) ev, broadcast: true);
         }
+        // ss220 tweak product event end
 
         if (listing.DisableRefund)
         {
@@ -271,6 +280,7 @@ public sealed partial class StoreSystem
 
         var buyFinished = new StoreBuyFinishedEvent
         {
+            User = buyer, // ss220 tweak product event start
             PurchasedItem = listing,
             StoreUid = uid
         };
@@ -352,7 +362,7 @@ public sealed partial class StoreSystem
 
             _actionContainer.RemoveAction(purchase, logMissing: false);
 
-            EntityManager.DeleteEntity(purchase);
+            Del(purchase);
         }
 
         component.BoughtEntities.Clear();
@@ -401,6 +411,7 @@ public sealed partial class StoreSystem
 /// <param name="PurchasedItem">ListingItem that was purchased.</param>
 [ByRefEvent]
 public readonly record struct StoreBuyFinishedEvent(
+    EntityUid User, // ss220 tweak product event
     EntityUid StoreUid,
     ListingDataWithCostModifiers PurchasedItem
 );

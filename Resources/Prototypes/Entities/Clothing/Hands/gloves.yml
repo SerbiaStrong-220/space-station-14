@@ -248,6 +248,7 @@
     - components:
       - type: BatteryDrainer
       - type: StunProvider
+        cooldown: 10
         noPowerPopup: ninja-no-power
         whitelist:
           components:
@@ -451,7 +452,7 @@
     default: ClothingHandsGlovesNorthStar
 #SS220 Chameleon tweak end
   - type: StaticPrice
-    price: 0
+    price: 2500
   - type: Tag
     tags:
     - Kangaroo
@@ -591,6 +592,8 @@
     tags:
     - WhitelistChameleon
     - Kangaroo
+  - type: StaticPrice
+    price: 2000
 
 - type: entity
   name: stun knuckle dusters

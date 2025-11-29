@@ -26,10 +26,9 @@ public sealed class UplinkSystem : EntitySystem
     [Dependency] private readonly RingerSystem _ringer = default!;
     //ss220 adduplink command generate code and open uplink end
 
-    [ValidatePrototypeId<CurrencyPrototype>]
-    public const string TelecrystalCurrencyPrototype = "Telecrystal";
-    private const string FallbackUplinkImplant = "UplinkImplant";
-    private const string FallbackUplinkCatalog = "UplinkUplinkImplanter";
+    public static readonly ProtoId<CurrencyPrototype> TelecrystalCurrencyPrototype = "Telecrystal";
+    private static readonly EntProtoId FallbackUplinkImplant = "UplinkImplant";
+    private static readonly ProtoId<ListingPrototype> FallbackUplinkCatalog = "UplinkUplinkImplanter";
 
     /// <summary>
     /// Adds an uplink to the target
@@ -43,18 +42,19 @@ public sealed class UplinkSystem : EntitySystem
         EntityUid user,
         FixedPoint2 balance,
         EntityUid? uplinkEntity = null,
-        bool giveDiscounts = false)
+        bool giveDiscounts = false,
+        bool useDynamics = false) // SS220 DynamicTraitor
     {
         // Try to find target item if none passed
 
         uplinkEntity ??= FindUplinkTarget(user);
 
         if (uplinkEntity == null)
-            return ImplantUplink(user, balance, giveDiscounts);
+            return ImplantUplink(user, balance, giveDiscounts, useDynamics); // SS220 DynamicTraitor
 
         EnsureComp<UplinkComponent>(uplinkEntity.Value);
 
-        SetUplink(user, uplinkEntity.Value, balance, giveDiscounts);
+        SetUplink(user, uplinkEntity.Value, balance, giveDiscounts, useDynamics); // SS220 DynamicTraitor
 
         // TODO add BUI. Currently can't be done outside of yaml -_-
         // ^ What does this even mean?
@@ -65,7 +65,7 @@ public sealed class UplinkSystem : EntitySystem
     /// <summary>
     /// Configure TC for the uplink
     /// </summary>
-    private void SetUplink(EntityUid user, EntityUid uplink, FixedPoint2 balance, bool giveDiscounts)
+    private void SetUplink(EntityUid user, EntityUid uplink, FixedPoint2 balance, bool giveDiscounts, bool useDynamics) // SS220 DynamicTraitor
     {
         if (!_mind.TryGetMind(user, out var mind, out _))
             return;
@@ -73,6 +73,7 @@ public sealed class UplinkSystem : EntitySystem
         var store = EnsureComp<StoreComponent>(uplink);
 
         store.AccountOwner = mind;
+        store.UseDynamicPrices = useDynamics; // SS220 Dynamics
 
         store.Balance.Clear();
         _store.TryAddCurrency(new Dictionary<string, FixedPoint2> { { TelecrystalCurrencyPrototype, balance } },
@@ -91,11 +92,9 @@ public sealed class UplinkSystem : EntitySystem
     /// <summary>
     /// Implant an uplink as a fallback measure if the traitor had no PDA
     /// </summary>
-    private bool ImplantUplink(EntityUid user, FixedPoint2 balance, bool giveDiscounts)
+    private bool ImplantUplink(EntityUid user, FixedPoint2 balance, bool giveDiscounts, bool useDynamics) // SS220 DynamicTraitor
     {
-        var implantProto = new string(FallbackUplinkImplant);
-
-        if (!_proto.TryIndex<ListingPrototype>(FallbackUplinkCatalog, out var catalog))
+        if (!_proto.Resolve<ListingPrototype>(FallbackUplinkCatalog, out var catalog))
             return false;
 
         if (!catalog.Cost.TryGetValue(TelecrystalCurrencyPrototype, out var cost))
@@ -106,12 +105,15 @@ public sealed class UplinkSystem : EntitySystem
         else
             balance = balance - cost;
 
-        var implant = _subdermalImplant.AddImplant(user, implantProto);
+        var implant = _subdermalImplant.AddImplant(user, FallbackUplinkImplant);
 
         if (!HasComp<StoreComponent>(implant))
+        {
+            Log.Error($"Implant does not have the store component {implant}");
             return false;
+        }
 
-        SetUplink(user, implant.Value, balance, giveDiscounts);
+        SetUplink(user, implant.Value, balance, giveDiscounts, useDynamics);
         return true;
     }
 
@@ -124,20 +126,19 @@ public sealed class UplinkSystem : EntitySystem
         // Try to find PDA in inventory
         if (_inventorySystem.TryGetContainerSlotEnumerator(user, out var containerSlotEnumerator))
         {
-            while (containerSlotEnumerator.MoveNext(out var pdaUid))
+            while (containerSlotEnumerator.MoveNext(out var containerSlot))
             {
-                if (!pdaUid.ContainedEntity.HasValue)
-                    continue;
+                var pdaUid = containerSlot.ContainedEntity;
 
-                if (HasComp<PdaComponent>(pdaUid.ContainedEntity.Value) || HasComp<StoreComponent>(pdaUid.ContainedEntity.Value))
-                    return pdaUid.ContainedEntity.Value;
+                if (HasComp<PdaComponent>(pdaUid) && HasComp<StoreComponent>(pdaUid))
+                    return pdaUid;
             }
         }
 
         // Also check hands
         foreach (var item in _handsSystem.EnumerateHeld(user))
         {
-            if (HasComp<PdaComponent>(item) || HasComp<StoreComponent>(item))
+            if (HasComp<PdaComponent>(item) && HasComp<StoreComponent>(item))
                 return item;
         }
 

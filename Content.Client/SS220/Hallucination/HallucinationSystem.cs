@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using System.Linq;
 using Content.Shared.Random.Helpers;
 using Content.Shared.SS220.Hallucination;
@@ -11,9 +12,10 @@ using System.Numerics;
 using Robust.Shared.Timing;
 using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
+
 namespace Content.Client.SS220.Hallucination;
 
-public sealed class HallucinationSystem : EntitySystem
+public sealed class HallucinationSystem : SharedHallucinationSystem
 {
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly TransformSystem _transformSystem = default!;
@@ -29,6 +31,7 @@ public sealed class HallucinationSystem : EntitySystem
 
         SubscribeLocalEvent<HallucinationComponent, ComponentHandleState>(HandleState);
     }
+
     public override void FrameUpdate(float frameTime)
     {
         base.FrameUpdate(frameTime);
@@ -39,16 +42,17 @@ public sealed class HallucinationSystem : EntitySystem
         for (int i = 0; i < hallucinationComponent.HallucinationSpawnerTimers.Count; i++)
         {
             var nextHallucinationSpawnTime = hallucinationComponent.HallucinationSpawnerTimers[i];
-            if (_gameTiming.CurTime > nextHallucinationSpawnTime)
-            {
-                var hallucination = hallucinationComponent.Hallucinations[i];
-                MakeHallucination(hallucination);
+            if (_gameTiming.CurTime <= nextHallucinationSpawnTime)
+                continue;
 
-                var timeBetweenHallucination = TimeSpan.FromSeconds(hallucination.TimeParams.BetweenHallucinations);
-                hallucinationComponent.HallucinationSpawnerTimers[i] = _gameTiming.CurTime + timeBetweenHallucination;
-            }
+            var hallucination = hallucinationComponent.Hallucinations[i];
+            MakeHallucination(hallucination);
+
+            var timeBetweenHallucination = TimeSpan.FromSeconds(hallucination.TimeParams.BetweenHallucinations);
+            hallucinationComponent.HallucinationSpawnerTimers[i] = _gameTiming.CurTime + timeBetweenHallucination;
         }
     }
+
     /// <summary>
     /// Specific handler for hallucination due to bound between timer and hallucinationSettings. Probably saving the same order as in server
     /// </summary>
@@ -82,6 +86,7 @@ public sealed class HallucinationSystem : EntitySystem
         DebugTools.Assert(entity.Comp.Hallucinations.Count == state.Hallucinations.Count);
         DebugTools.Assert(entity.Comp.Hallucinations.Count == entity.Comp.HallucinationSpawnerTimers.Count);
     }
+
     private void MakeHallucination(HallucinationSetting hallucination)
     {
         var randomWeightedPrototypes = _prototypeManager.Index(hallucination.RandomEntities);
@@ -97,5 +102,15 @@ public sealed class HallucinationSystem : EntitySystem
         var lifeTime = _random.NextFloat(hallucination.TimeParams.HallucinationMinTime, hallucination.TimeParams.HallucinationMaxTime);
         var timedDespawnComp = EnsureComp<TimedDespawnComponent>(spawnedEntityUid);
         timedDespawnComp.Lifetime = lifeTime;
+    }
+
+    public override bool TryAdd(EntityUid target, HallucinationSetting hallucination)
+    {
+        return false;
+    }
+
+    public override bool Remove(Entity<SharedHallucinationComponent> entity, HallucinationSetting hallucination)
+    {
+        return false;
     }
 }

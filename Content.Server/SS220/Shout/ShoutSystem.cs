@@ -4,9 +4,9 @@ using Content.Shared.ActionBlocker;
 using Robust.Shared.Audio.Systems;
 using Content.Server.Chat.Systems;
 using Content.Shared.SS220.Shout;
-using Content.Shared.Dataset;
 using Robust.Shared.Random;
 using Robust.Shared.Prototypes;
+using Content.Shared.Chat;
 
 namespace Content.Server.SS220.Shout;
 
@@ -46,7 +46,7 @@ public sealed class ShoutSystem : EntitySystem
 
         if (args.ShoutPhrases != null)
         {
-            if (!_proto.TryIndex<LocalizedDatasetPrototype>(args.ShoutPhrases, out var placeholder))//i dont like nested ifs, but idk how to make it more pretty
+            if (!_proto.TryIndex(args.ShoutPhrases, out var placeholder))//i dont like nested ifs, but idk how to make it more pretty
                 return;
 
             var localizedPhrase = Loc.GetString(_random.Pick(placeholder.Values));

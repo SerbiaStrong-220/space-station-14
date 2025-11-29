@@ -158,6 +158,8 @@
       types:
         Slash: 14
 # SS220 Throwable Changes end
+  - type: StealTarget
+    stealGroup: CaptainSword
 
 - type: entity
   name: katana
@@ -212,6 +214,8 @@
   id: EnergyKatana
   description: A katana infused with strong energy.
   components:
+  - type: Contraband
+    severity: HighlyIllegal
   - type: Sprite
     sprite: Objects/Weapons/Melee/energykatana.rsi
   - type: MeleeWeapon
@@ -239,6 +243,10 @@
   - type: Reflect
     slotFlags:
     - NONE
+  # SS220-fix katana throw angle-begin
+  - type: ThrowingAngle
+    angle: 305 # handly found value
+  # SS220-fix katana throw angle-end
 
 #Greatswords
 - type: entity

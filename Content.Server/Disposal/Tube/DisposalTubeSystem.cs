@@ -102,7 +102,7 @@ namespace Content.Server.Disposal.Tube
         /// <param name="msg">A user interface message from the client.</param>
         private void OnUiAction(EntityUid uid, DisposalRouterComponent router, SharedDisposalRouterComponent.UiActionMessage msg)
         {
-            if (!EntityManager.EntityExists(msg.Actor))
+            if (!Exists(msg.Actor))
                 return;
 
             if (TryComp<PhysicsComponent>(uid, out var physBody) && physBody.BodyType != BodyType.Static)
@@ -423,21 +423,48 @@ namespace Content.Server.Disposal.Tube
                 return false;
 
             var xform = Transform(uid);
-            var holder = Spawn(entry.HolderPrototypeId, _transform.GetMapCoordinates(uid, xform: xform));
-            var holderComponent = Comp<DisposalHolderComponent>(holder);
 
-            foreach (var entity in from.Container.ContainedEntities.ToArray())
+            // ss220 add filter for disposals start
+            List<Entity<DisposalHolderComponent>> holders = new();
+
+            foreach (var item in from.Container.ContainedEntities.ToArray())
             {
-                _disposableSystem.TryInsert(holder, entity, holderComponent);
+                bool inserted = false;
+
+                foreach (var holderContainer in holders)
+                {
+                    if (holderContainer.Comp.Container.ContainedEntities.All(itemProto =>
+                            Prototype(itemProto)?.ID == Prototype(item)?.ID))
+                    {
+                        _containerSystem.Insert(item, holderContainer.Comp.Container);
+                        inserted = true;
+                        break;
+                    }
+                }
+
+                if (!inserted)
+                {
+                    var holder = Spawn(entry.HolderPrototypeId, _transform.GetMapCoordinates(uid, xform: xform));
+                    var holderComponent = Comp<DisposalHolderComponent>(holder);
+
+                    _containerSystem.Insert(item, holderComponent.Container);
+                    _atmosSystem.Merge(holderComponent.Air, from.Air);
+                    from.Air.Clear();
+
+                    if (tags != null)
+                        holderComponent.Tags.UnionWith(tags);
+
+                    holders.Add((holder, holderComponent));
+                }
             }
 
-            _atmosSystem.Merge(holderComponent.Air, from.Air);
-            from.Air.Clear();
+            foreach (var holder in holders)
+            {
+                _disposableSystem.EnterTube(holder, uid, holder.Comp);
+            }
 
-            if (tags != null)
-                holderComponent.Tags.UnionWith(tags);
-
-            return _disposableSystem.EnterTube(holder, uid, holderComponent);
+            return holders.Count != 0;
+            // ss220 add filter for disposals end
         }
     }
 }

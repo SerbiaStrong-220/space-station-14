@@ -202,21 +202,21 @@ public sealed class DefibrillatorSystem : EntitySystem
         ICommonSession? session = null;
 
         //SS220 LimitationRevive - start
-        var successZap = false;
+        var successZap = true;
 
-        if (TryComp<DefibrillatorSkillComponent>(user, out var defibSkillComp))
-        {
-            if (_random.Prob(defibSkillComp.ChanceWithMedSkill))
-                successZap = true;
-        }
-        else
-        {
-            if (_random.Prob(component.ChanceWithoutMedSkill))
-                successZap = true;
-        }
+        // if (TryComp<DefibrillatorSkillComponent>(user, out var defibSkillComp))
+        // {
+        //     if (_random.Prob(defibSkillComp.ChanceWithMedSkill))
+        //         successZap = true;
+        // }
+        // else
+        // {
+        //     if (_random.Prob(component.ChanceWithoutMedSkill))
+        //         successZap = true;
+        // }
 
-        if (HasComp<GhostComponent>(user)) //for admins with aghost
-            successZap = true;
+        // if (HasComp<GhostComponent>(user)) //for admins with aghost
+        //     successZap = true;
         //SS220 LimitationRevive - end
         var dead = true;
         if (_rotting.IsRotten(target))
@@ -241,9 +241,9 @@ public sealed class DefibrillatorSystem : EntitySystem
             _chatManager.TrySendInGameICMessage(uid, Loc.GetString("defibrillator-unsuccessful-zap"),
                 InGameICChatType.Speak, true);
 
-            var debuffEv = new AddReviweDebuffsEvent();
+            var debuffEv = new AddReviveDebuffsEvent();
             RaiseLocalEvent(target, ref debuffEv);
-            _electrocution.TryDoElectrocution(user, null, component.ZapDamage * component.ZapСoeffDamage,
+            _electrocution.TryDoElectrocution(user, null, component.ZapDamage * component.ZapCoeffDamage,
                 component.WritheDuration, true, ignoreInsulation: true);
         }
         //SS220 LimitationRevive - end

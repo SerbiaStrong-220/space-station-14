@@ -8,8 +8,8 @@
     useDelay: 10
     itemIconStyle: BigAction
     icon:
-      sprite: Objects/Magic/magicactions.rsi
-      state: spell_default
+      sprite: SS220/Objects/Magic/scrolls.rsi #SS220 Resprite of Magic Scrolls
+      state: default #SS220 Resprite of Magic Scrolls
   - type: TargetAction
     range: 4
   - type: WorldTargetAction

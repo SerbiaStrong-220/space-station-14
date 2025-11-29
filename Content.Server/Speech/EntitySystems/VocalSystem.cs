@@ -1,11 +1,10 @@
 using Content.Server.Actions;
 using Content.Server.Chat.Systems;
-using Content.Server.Speech.Components;
+using Content.Shared.Chat;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Humanoid;
 using Content.Shared.Speech;
 using Content.Shared.Speech.Components;
-using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -33,6 +32,25 @@ public sealed class VocalSystem : EntitySystem
         SubscribeLocalEvent<VocalComponent, ScreamActionEvent>(OnScreamAction);
         SubscribeLocalEvent<VocalComponent, InitSpecialSoundsEvent>(InitSpecialSounds);// SS220 Chat-Special-Emote
         SubscribeLocalEvent<VocalComponent, UnloadSpecialSoundsEvent>(UnloadSpecialSounds);// SS220 Chat-Special-Emote
+    }
+
+    /// <summary>
+    /// Copy this component's datafields from one entity to another.
+    /// This can't use CopyComp because of the ScreamActionEntity DataField, which should not be copied.
+    /// <summary>
+    public void CopyComponent(Entity<VocalComponent?> source, EntityUid target)
+    {
+        if (!Resolve(source, ref source.Comp))
+            return;
+
+        var targetComp = EnsureComp<VocalComponent>(target);
+        targetComp.Sounds = source.Comp.Sounds;
+        targetComp.ScreamId = source.Comp.ScreamId;
+        targetComp.Wilhelm = source.Comp.Wilhelm;
+        targetComp.WilhelmProbability = source.Comp.WilhelmProbability;
+        LoadSounds(target, targetComp);
+
+        Dirty(target, targetComp);
     }
 
     private void OnMapInit(EntityUid uid, VocalComponent component, MapInitEvent args)
@@ -77,8 +95,11 @@ public sealed class VocalSystem : EntitySystem
             return;
         }
 
+        if (component.EmoteSounds is not { } sounds)
+            return;
+
         // just play regular sound based on emote proto
-        args.Handled = _chat.TryPlayEmoteSound(uid, component.EmoteSounds, args.Emote);
+        args.Handled = _chat.TryPlayEmoteSound(uid, _proto.Index(sounds), args.Emote);
     }
 
     private void OnScreamAction(EntityUid uid, VocalComponent component, ScreamActionEvent args)
@@ -98,7 +119,10 @@ public sealed class VocalSystem : EntitySystem
             return true;
         }
 
-        return _chat.TryPlayEmoteSound(uid, component.EmoteSounds, component.ScreamId);
+        if (component.EmoteSounds is not { } sounds)
+            return false;
+
+        return _chat.TryPlayEmoteSound(uid, _proto.Index(sounds), component.ScreamId);
     }
 
     private void LoadSounds(EntityUid uid, VocalComponent component, Sex? sex = null)
@@ -110,7 +134,11 @@ public sealed class VocalSystem : EntitySystem
 
         if (!component.Sounds.TryGetValue(sex.Value, out var protoId))
             return;
-        _proto.TryIndex(protoId, out component.EmoteSounds);
+
+        if (!_proto.HasIndex(protoId))
+            return;
+
+        component.EmoteSounds = protoId;
     }
 
     // SS220 Chat-Special-Emote begin
@@ -138,10 +166,15 @@ public sealed class VocalSystem : EntitySystem
         if (!itemComponent.Sounds.TryGetValue(sex.Value, out var protoId))
             return;
 
-        if (!_proto.TryIndex(protoId, out itemComponent.EmoteSounds))
-            return;
+        itemComponent.EmoteSounds = protoId;
 
-        component.SpecialEmoteSounds.Add(itemUid, itemComponent.EmoteSounds);
+        if (!_proto.TryIndex(protoId, out var emoteProto))
+        {
+            Log.Error($"Cant index proto {protoId} for usage in special emotes");
+            return;
+        }
+
+        component.SpecialEmoteSounds.Add(itemUid, emoteProto);
     }
     private void InitSpecialSounds(EntityUid uid, VocalComponent component, InitSpecialSoundsEvent args)
     {

@@ -9,7 +9,6 @@ using Content.Server.GameTicking;
 using Content.Server.Screens.Components;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
-using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Shared.Database;
 using Content.Shared.DeviceNetwork;
@@ -20,6 +19,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Content.Shared.DeviceNetwork.Components;
+using Content.Shared.Station.Components;
 using Timer = Robust.Shared.Timing.Timer;
 using Content.Server.SS220.GameTicking.Rules;
 using Robust.Shared.Audio;
@@ -62,13 +62,23 @@ namespace Content.Server.RoundEnd
         private bool _autoCalledBefore = false;
         private bool _autoCallEnabled = false;
 
+        private bool _blockedCallRecall = false; // SS220-MIT-evac-vote
+
         public override void Initialize()
         {
             base.Initialize();
             SubscribeLocalEvent<RoundRestartCleanupEvent>(_ => Reset());
-            SubscribeLocalEvent<EmergencyShuttleAutoCallStartedEvent>(OnAutoShuttleEnable);
+            SubscribeLocalEvent<EmergencyShuttleAutoCallStartedEvent>(OnAutoShuttleEnable); // SS220-auto-evac-game-rule
+            SubscribeLocalEvent<EmergencyShuttleCalledByVote>(OnEvacByVote);
             SetAutoCallTime();
         }
+
+        // SS220-MIT-evac-vote-begin
+        private void OnEvacByVote(ref EmergencyShuttleCalledByVote ev)
+        {
+            _blockedCallRecall = ev.Block;
+        }
+        // SS220-MIT-evac-vote-end
 
         private void OnAutoShuttleEnable(EmergencyShuttleAutoCallStartedEvent ev)
         {
@@ -99,6 +109,7 @@ namespace Content.Server.RoundEnd
             SetAutoCallTime();
             _autoCalledBefore = false;
             _autoCallEnabled = false;
+            _blockedCallRecall = false; // SS220-MIT-evac-vote
             RaiseLocalEvent(RoundEndSystemChangedEvent.Default);
         }
 
@@ -107,10 +118,10 @@ namespace Content.Server.RoundEnd
         /// </summary>
         public EntityUid? GetStation()
         {
-            AllEntityQuery<StationEmergencyShuttleComponent, StationDataComponent>().MoveNext(out _, out _, out var data);
+            AllEntityQuery<StationEmergencyShuttleComponent, StationDataComponent>().MoveNext(out var uid, out _, out var data);
             if (data == null)
                 return null;
-            var targetGrid = _stationSystem.GetLargestGrid(data);
+            var targetGrid = _stationSystem.GetLargestGrid((uid, data));
             return targetGrid == null ? null : Transform(targetGrid.Value).MapUid;
         }
 
@@ -126,7 +137,7 @@ namespace Content.Server.RoundEnd
 
         public bool CanCallOrRecall()
         {
-            return _cooldownTokenSource == null;
+            return _cooldownTokenSource == null && !_blockedCallRecall; // SS220-MIT-evac-vote
         }
 
         public bool IsRoundEndRequested()
@@ -232,6 +243,7 @@ namespace Content.Server.RoundEnd
             if (_countdownTokenSource == null) return;
             _countdownTokenSource.Cancel();
             _countdownTokenSource = null;
+            _blockedCallRecall = false; // SS220-MIT-add-evac-vote
 
             if (requester != null)
             {

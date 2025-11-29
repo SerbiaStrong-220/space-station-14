@@ -43,6 +43,7 @@
   loadouts:
   - GlassesCommand
   - MagistrateMonocle
+  - EyesHudCommand
 
 - type: loadoutGroup
   id: MagistrateJumpsuit
@@ -121,6 +122,7 @@
   - GlassesJensen
   - Sunglasses
   - GlassesujutsuShlepa
+  - EyesHudCommand
 
 - type: loadoutGroup
   id: IAABackpacks
@@ -133,8 +135,8 @@
   name: loadout-group-iaa-headset
   minLimit: 1
   loadouts:
-  - LawHeadset
-  - LawHeadsetAlt
+  - IAAHeadset
+  - IAAHeadsetAlt
   # Агент Внутренних Дел (Конец)
 
   # Адвокат (Начало)
@@ -144,6 +146,14 @@
   minLimit: 0
   loadouts:
   - OuterClothingJujutsuShlepa
+
+- type: loadoutGroup
+  id: LawyerHeadset
+  name: loadout-group-lawyer-headset
+  minLimit: 1
+  loadouts:
+  - LawHeadset
+  - LawHeadsetAlt
   # Адвокат (Конец)
 
   # Офицер "Синий Щит" (Начало)
@@ -226,6 +236,8 @@
   minLimit: 0
   loadouts:
   - MaskTacSec
+  - SecTacGasMask
+  - MaskSecBalaclava
 
 - type: loadoutGroup
   id: SecurityGlasses
@@ -272,6 +284,8 @@
   - SecurityBeret
   - SecurityHat
   - PilotCapCap
+  - PilotBeret
+  - HelmetTacSec
 
 - type: loadoutGroup
   id: SecurityPilotOuterClothing
@@ -295,26 +309,28 @@
   - SecurityWinterBoots
   - BootsJackSec
   - DetectiveShoesBootsLaceup
+
+- type: loadoutGroup
+  id: DetectiveGlasses
+  name: loadout-group-detective-glasses
+  minLimit: 0
+  loadouts: 
+  - GlassesSecurity
+  - CyberGlassesSecurity
+  - GlassesBallistic
+  - NoirGlasses
+
+- type: loadoutGroup
+  id: DetectiveNeck
+  name: loadout-group-detective-neck
+  loadouts:
+  - DefaultDetectiveHolster
+  - HolsterLegendaryMarksman
+  - HolsterBlackAngel
   # Детектив (Конец)
 #! Служба безопасности (Конец)
 
 #! Медицинский отдел (Начало)
-
-  # Главный врач (Начало)
-- type: loadoutGroup
-  id: ChefMedicalNeck
-  minLimit: 0
-  name: loadout-group-chef-medical-neck
-  loadouts:
-  - WhiteScarf
-  - CoderNeck
-  - MapperNeck
-  - SpriterNeck
-  - TrackerExpertNeck
-  - AdministratorNeck
-  - HeadDeveloperNeck
-  - WikiEditorsNeck
-  # Главный врач (Конец)
 
   # Ведущий врач (Начало)
 - type: loadoutGroup
@@ -458,6 +474,7 @@
   name: loadout-group-medical-neck
   loadouts:
   - WhiteScarf
+  - MedStethoscope
 
 - type: loadoutGroup
   id: MedicalGlasses
@@ -492,12 +509,11 @@
   id: ChiefMedicalOfficerGlasses
   name: loadout-group-chief-medical-officer-eyes
   loadouts:
-  - Glasses
-  - CyberMedVisor
-  - CMOCorpGlasses
   - MedicalHud
   - MedicalEyePatchHud
+  - CyberMedVisor
   - Glasses
+  - CMOCorpGlasses
   - GlassesJamjar
   - GlassesJensen
 #! Медицинский отдел (Конец)

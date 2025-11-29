@@ -1,7 +1,6 @@
 using Content.Server.Access.Systems;
 using Content.Server.Humanoid;
-using Content.Server.IdentityManagement;
-using Content.Server.Mind.Commands;
+using Content.Server.Mind;
 using Content.Server.PDA;
 using Content.Server.Station.Components;
 using Content.Shared.Access.Components;
@@ -11,6 +10,7 @@ using Content.Shared.Clothing;
 using Content.Shared.DetailExaminable;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
+using Content.Shared.IdentityManagement;
 using Content.Shared.PDA;
 using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
@@ -41,6 +41,7 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
     [Dependency] private readonly MetaDataSystem _metaSystem = default!;
     [Dependency] private readonly PdaSystem _pdaSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly MindSystem _mindSystem = default!;
 
     /// <summary>
     /// Attempts to spawn a player character onto the given station.
@@ -88,7 +89,7 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
         EntityUid? station,
         EntityUid? entity = null)
     {
-        _prototypeManager.TryIndex(job ?? string.Empty, out var prototype);
+        _prototypeManager.Resolve(job, out var prototype);
         RoleLoadout? loadout = null;
 
         // Need to get the loadout up-front to handle names if we use an entity spawn override.
@@ -110,8 +111,8 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
         if (prototype?.JobEntity != null)
         {
             DebugTools.Assert(entity is null);
-            var jobEntity = EntityManager.SpawnEntity(prototype.JobEntity, coordinates);
-            MakeSentientCommand.MakeSentient(jobEntity, EntityManager);
+            var jobEntity = Spawn(prototype.JobEntity, coordinates);
+            _mindSystem.MakeSentient(jobEntity);
 
             // Make sure custom names get handled, what is gameticker control flow whoopy.
             if (loadout != null)
@@ -168,7 +169,7 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
 
     private void DoJobSpecials(ProtoId<JobPrototype>? job, EntityUid entity)
     {
-        if (!_prototypeManager.TryIndex(job ?? string.Empty, out JobPrototype? prototype))
+        if (!_prototypeManager.Resolve(job, out JobPrototype? prototype))
             return;
 
         foreach (var jobSpecial in prototype.Special)
@@ -199,7 +200,7 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
         _cardSystem.TryChangeFullName(cardId, characterName, card);
         _cardSystem.TryChangeJobTitle(cardId, jobPrototype.LocalizedName, card);
 
-        if (_prototypeManager.TryIndex(jobPrototype.Icon, out var jobIcon))
+        if (_prototypeManager.Resolve(jobPrototype.Icon, out var jobIcon))
             _cardSystem.TryChangeJobIcon(cardId, jobIcon, card);
 
         var extendedAccess = false;

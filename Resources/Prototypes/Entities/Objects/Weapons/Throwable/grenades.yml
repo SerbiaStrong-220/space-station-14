@@ -19,7 +19,8 @@
     quickEquip: false
     slots:
     - Belt
-  - type: OnUseTimerTrigger
+  - type: TriggerOnUse
+  - type: TimerTrigger
     delay: 3
   - type: Damageable
     damageContainer: Inorganic
@@ -30,6 +31,7 @@
         damage: 10
       behaviors:
       - !type:TriggerBehavior
+        keyOut: timer # explode immediately
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: Appearance
@@ -43,6 +45,16 @@
   - type: Tag
     tags:
     - HandGrenade
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape: !type:PhysShapeCircle
+          radius: 0.2
+        density: 20 # derived from base_item
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
 
 - type: entity
   name: explosive grenade
@@ -51,13 +63,15 @@
   id: ExGrenade
   components:
   - type: ExplodeOnTrigger
+    keysIn:
+    - timer
   - type: Explosive
     explosionType: Default
     maxIntensity: 10
     intensitySlope: 3
     totalIntensity: 120 # about a ~4 tile radius
     canCreateVacuum: false
-  - type: OnUseTimerTrigger
+  - type: TimerTrigger
     beepSound:
       path: "/Audio/Effects/beep1.ogg"
       params:
@@ -72,16 +86,26 @@
   id: GrenadeFlashBang
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/flashbang.rsi
+    sprite: SS220/Objects/Weapons/Grenades/flashbang.rsi #SS220 From cabinet to 3/4, Part 2
   - type: FlashOnTrigger
+    keysIn:
+    - timer
     range: 7
     stun: true # 220 flash grenade stun
-  - type: SoundOnTrigger
+  - type: EmitSoundOnTrigger
+    keysIn:
+    - timer
     sound:
       path: "/Audio/Effects/flash_bang.ogg"
+    positional: true
   - type: DeleteOnTrigger
+    keysIn:
+    - timer
   - type: SpawnOnTrigger
+    keysIn:
+    - timer
     proto: GrenadeFlashEffect
+    predicted: true
   - type: Appearance
   - type: TimerTriggerVisuals
     primingSound:
@@ -118,7 +142,7 @@
   id: SyndieMiniBomb
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/syndgrenade.rsi
+    sprite: SS220/Objects/Weapons/Grenades/syndgrenade.rsi #SS220 From cabinet to 3/4, Part 2
   - type: ExplosionResistance
     damageCoefficient: 0.1
   - type: Destructible
@@ -133,11 +157,14 @@
         damage: 45
       behaviors:
       - !type:TriggerBehavior
+        keyOut: timer # immediately explode
       - !type:DoActsBehavior
         acts: ["Destruction"]
-  - type: OnUseTimerTrigger
+  - type: TimerTrigger
     delay: 5
   - type: ExplodeOnTrigger
+    keysIn:
+    - timer
   - type: Explosive
     explosionType: Minibomb
     totalIntensity: 200
@@ -149,6 +176,8 @@
       path: /Audio/Effects/minibombcountdown.ogg
       params:
         volume: 12
+  - type: StaticPrice
+    price: 2000
 
 - type: entity
   name: self destruct
@@ -158,13 +187,17 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ExplodeOnTrigger
+    keysIn:
+    - timer
   - type: Explosive
     explosionType: Minibomb
     totalIntensity: 400
     intensitySlope: 30
     maxIntensity: 125
+    deleteAfterExplosion: false
+    repeatable: true
     canCreateVacuum: true
-  - type: OnUseTimerTrigger
+  - type: TimerTrigger
     delay: 4.5
     beepSound:
       path: /Audio/Effects/Grenades/SelfDestruct/SDS_Charge2.ogg
@@ -181,8 +214,8 @@
   description: Grenade that simulates the power of a singularity, pulling things in a heap.
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/singularitygrenade.rsi
-  - type: OnUseTimerTrigger
+    sprite: SS220/Objects/Weapons/Grenades/singularitygrenade.rsi #SS220 From cabinet to 3/4, Part 2
+  - type: TimerTrigger
     delay: 3
     beepInterval: 0.46
     beepSound:
@@ -194,14 +227,20 @@
       path: /Audio/Effects/Grenades/Supermatter/smbeep.ogg
       params:
         volume: -5
-  - type: SoundOnTrigger
-    removeOnTrigger: true
+  - type: EmitSoundOnTrigger
+    keysIn:
+    - timer
     sound:
       path: /Audio/Effects/Grenades/Supermatter/supermatter_start.ogg
-      volume: 5
+      params:
+        volume: 5
   - type: AnchorOnTrigger
+    keysIn:
+    - timer
     removeOnTrigger: true
   - type: TwoStageTrigger
+    keysIn:
+    - timer
     triggerDelay: 10.45
     components:
       - type: AmbientSound
@@ -225,12 +264,19 @@
         radius: 6
         softness: 1
         offset: "0, 0"
-      - type: SoundOnTrigger
+      - type: EmitSoundOnTrigger
         sound:
           path: /Audio/Effects/Grenades/Supermatter/supermatter_end.ogg
           params:
             volume: 5
+        positional: true
+        keysIn:
+        - stageTwo
       - type: DeleteOnTrigger
+        keysIn:
+        - stageTwo
+  - type: StaticPrice
+    price: 1000
 
 - type: entity
   name: whitehole grenade
@@ -239,15 +285,21 @@
   id: WhiteholeGrenade
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/whiteholegrenade.rsi
-  - type: OnUseTimerTrigger
+    sprite: SS220/Objects/Weapons/Grenades/whiteholegrenade.rsi #SS220 From cabinet to 3/4, Part 2
+  - type: TimerTrigger
     delay: 3
     beepInterval: 0.69
-  - type: SoundOnTrigger
-    removeOnTrigger: true
+  - type: EmitSoundOnTrigger
+    keysIn:
+    - timer
     sound:
       path: /Audio/Effects/Grenades/Supermatter/whitehole_start.ogg
-      volume: 5
+      params:
+        volume: 5
+  - type: AnchorOnTrigger
+    keysIn:
+    - timer
+    removeOnTrigger: true
   - type: TwoStageTrigger
     triggerDelay: 11.14
     components:
@@ -272,12 +324,19 @@
         radius: 6
         softness: 1
         offset: "0, 0"
-      - type: SoundOnTrigger
+      - type: EmitSoundOnTrigger
+        keysIn:
+        - stageTwo
         sound:
           path: /Audio/Effects/Grenades/Supermatter/supermatter_end.ogg
           params:
             volume: 15
+        positional: true
       - type: DeleteOnTrigger
+        keysIn:
+        - stageTwo
+  - type: StaticPrice
+    price: 1000
 
 - type: entity
   name: the nuclear option
@@ -286,10 +345,12 @@
   id: NuclearGrenade
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/nukenade.rsi
-  - type: OnUseTimerTrigger
+    sprite: SS220/Objects/Weapons/Grenades/nukenade.rsi #SS220 From cabinet to 3/4, Part 2
+  - type: TimerTrigger
     delay: 5
   - type: ExplodeOnTrigger
+    keysIn:
+    - timer
   - type: Explosive
     explosionType: Default
     totalIntensity: 20000 # ~15 tile radius.
@@ -302,6 +363,7 @@
         damage: 50
       behaviors:
       - !type:TriggerBehavior
+        keyOut: timer # immediately explode
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: Appearance
@@ -321,7 +383,7 @@
       params:
         volume: 2
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/modular.rsi
+    sprite: SS220/Objects/Weapons/Grenades/modular.rsi #SS220 From cabinet to 3/4, Part 2
     layers:
     - state: empty
       map: [ "enum.ConstructionVisuals.Layer" ]
@@ -369,15 +431,21 @@
   id: EmpGrenade
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/empgrenade.rsi
+    sprite: SS220/Objects/Weapons/Grenades/empgrenade.rsi #SS220 From cabinet to 3/4, Part 2
   - type: EmpOnTrigger
+    keysIn:
+    - timer
     range: 5.5
     energyConsumption: 50000
   - type: DeleteOnTrigger
+    keysIn:
+    - timer
   - type: Appearance
   - type: TimerTriggerVisuals
     primingSound:
       path: /Audio/Effects/countdown.ogg
+  - type: StaticPrice
+    price: 666 # 2000 for 3, I love fractions
 
 - type: entity
   name: holy hand grenade
@@ -386,15 +454,17 @@
   id: HolyHandGrenade
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/holyhandgrenade.rsi
+    sprite: SS220/Objects/Weapons/Grenades/holyhandgrenade.rsi #SS220 From cabinet to 3/4, Part 2
   - type: ExplodeOnTrigger
+    keysIn:
+    - timer
   - type: Explosive
     explosionType: Default # same as macrobomb
     totalIntensity: 3500
     intensitySlope: 15
     maxIntensity: 70
     canCreateVacuum: true
-  - type: OnUseTimerTrigger
+  - type: TimerTrigger
     delay: 3 # by canon
   - type: PointLight
     radius: 7
@@ -417,6 +487,8 @@
         - Scientist
         - Borg
 # Corvax-HiddenDesc-End
+  - type: StaticPrice
+    price: 10000
 
 - type: entity
   parent: [ GrenadeBase, BaseSecurityContraband ]
@@ -425,13 +497,20 @@
   description: A tactical grenade that releases a large, long-lasting cloud of smoke when used.
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/smoke.rsi
+    sprite: SS220/Objects/Weapons/Grenades/smoke.rsi #SS220 From cabinet to 3/4, Part 2
   - type: SmokeOnTrigger
+    keysIn:
+    - timer
     duration: 30
     spreadAmount: 50
-  - type: SoundOnTrigger
+  - type: EmitSoundOnTrigger
+    keysIn:
+    - timer
     sound: /Audio/Items/smoke_grenade_smoke.ogg
+    positional: true
   - type: DeleteOnTrigger
+    keysIn:
+    - timer
   - type: TimerTriggerVisuals
     primingSound:
       path: /Audio/Items/smoke_grenade_prime.ogg
@@ -445,6 +524,8 @@
   - type: Sprite
     sprite: Objects/Weapons/Grenades/janitor.rsi
   - type: SmokeOnTrigger
+    keysIn:
+    - timer
     duration: 15
     spreadAmount: 50
     smokePrototype: Foam
@@ -460,14 +541,17 @@
   description: A riot control tear gas grenade. Causes irritation, pain and makes you cry your eyes out.
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/tear_gas.rsi
+    sprite: SS220/Objects/Weapons/Grenades/tear_gas.rsi #SS220 From cabinet to 3/4, Part 2
   - type: SmokeOnTrigger
+    keysIn:
+    - timer
     duration: 10
     spreadAmount: 30
+    smokePrototype: TearGasSmokeWhite
     solution:
       reagents:
       - ReagentId: TearGas
-        Quantity: 50
+        Quantity: 20
 
 - type: entity
   parent: [ SmokeGrenade ]
@@ -476,10 +560,12 @@
   description: An emergency tool used for patching hull breaches with special quick-set metal foam. Almost as good as real floors!
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/metalfoam.rsi
-  - type: OnUseTimerTrigger
+    sprite: SS220/Objects/Weapons/Grenades/metalfoam.rsi #SS220 From cabinet to 3/4, Part 2
+  - type: TimerTrigger
     delay: 5
   - type: SmokeOnTrigger
+    keysIn:
+    - timer
     duration: 10
     spreadAmount: 20
     smokePrototype: AluminiumMetalFoam
@@ -494,20 +580,24 @@
   components:
   - type: Sprite
     sprite: Objects/Weapons/Grenades/airboom.rsi
-  - type: SoundOnTrigger
+  - type: EmitSoundOnTrigger
+    keysIn:
+    - timer
     sound: /Audio/Items/smoke_grenade_smoke.ogg
   - type: TimerTriggerVisuals
     primingSound:
       path: /Audio/Items/smoke_grenade_prime.ogg
-  - type: OnUseTimerTrigger
+  - type: TimerTrigger
     delay: 3
   - type: ReleaseGasOnTrigger
+    keysIn:
+    - timer
     removeFraction: 0.25
     air:
       volume: 1000
       moles: # Target is 3117.84 mols total for filling 30 tiles (goal is 101.325 kPa @ 20C)
-      - 654.7464 # oxygen
-      - 2463.0936 # nitrogen
+        Oxygen: 654.7464 # oxygen
+        Nitrogen: 2463.0936 # nitrogen
       temperature: 293.15
   - type: StaticPrice
     price: 350
@@ -529,17 +619,25 @@
   - type: Sprite
     sprite: Objects/Weapons/Grenades/grenade.rsi
   - type: DeleteOnTrigger
-  #- type: SpawnOnTrigger #ss220 toys
-  #  proto: GrenadeFlashEffect #ss220 toys
-  - type: SoundOnTrigger
+    keysIn:
+    - timer
+  - type: SpawnOnTrigger
+    keysIn:
+    - timer
+    proto: GrenadeFlashEffect
+    predicted: true
+  - type: EmitSoundOnTrigger
+    keysIn:
+    - timer
     sound:
       path: /Audio/Effects/Emotes/parp1.ogg
+    positional: true
   - type: Appearance
   - type: TimerTriggerVisuals
     primingSound:
       path: /Audio/Effects/countdown.ogg
   #ss220 toys begin #it will explode like a real one, but zero damage :jokerge:
-  - type: OnUseTimerTrigger
+  - type: TimerTrigger
     delay: 3.5
   - type: ExplodeOnTrigger
   - type: Explosive
@@ -568,12 +666,15 @@
   id: SyndieTrickyBomb
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/syndgrenade.rsi
-  - type: OnUseTimerTrigger
+    sprite: SS220/Objects/Weapons/Grenades/syndgrenade.rsi #SS220 From cabinet to 3/4, Part 2
+  - type: TimerTrigger
     delay: 5
-  - type: SoundOnTrigger
+  - type: EmitSoundOnTrigger
+    keysIn:
+    - timer
     sound:
       path: /Audio/Effects/Emotes/parp1.ogg
+    positional: true
   - type: Appearance
   - type: TimerTriggerVisuals
     primingSound:
@@ -587,3 +688,5 @@
     intensitySlope: 0.01
     maxIntensity: 1
   #ss220 toys end
+  - type: StaticPrice
+    price: 1000

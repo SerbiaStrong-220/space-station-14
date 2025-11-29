@@ -5,7 +5,7 @@
   components:
   - type: Action
     itemIconStyle: BigAction
-    useDelay: 120 # [2 minutes * 60 seconds]
+    useDelay: 30 # [2 minutes * 60 seconds] #SS220-tajaran-keen-fix
     priority: -2
     icon:
       sprite: SS220/Interface/Actions/keen_hearing.rsi

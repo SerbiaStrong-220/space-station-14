@@ -1,6 +1,6 @@
 ﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.SS220.GhostHearing;
+using Content.Shared.SS220.TTS;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Telepathy;
@@ -22,10 +22,10 @@ public sealed partial class TelepathyChannelPrototype : IHearableChannelPrototyp
 [DataDefinition]
 public sealed partial class ChannelParameters()
 {
-    [DataField("name")]
+    [DataField]
     public string Name { get; private set; } = string.Empty;
 
-    [DataField("color")]
+    [DataField]
     public Color Color { get; private set; } = Color.Lime;
 
     public ChannelParameters(string name, Color color) : this()

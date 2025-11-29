@@ -1,9 +1,9 @@
-using Content.Server.Body.Components;
 using Content.Server.Body.Systems;
 using Content.Server.DoAfter;
 using Content.Server.Fluids.EntitySystems;
 using Content.Server.Forensics.Components;
 using Content.Server.Popups;
+using Content.Shared.Body.Events;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Chemistry.Components;
@@ -13,6 +13,7 @@ using Content.Shared.Cloning;
 using Content.Shared.DoAfter;
 using Content.Shared.Forensics;
 using Content.Shared.Forensics.Components;
+using Content.Shared.Forensics.Systems;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
@@ -21,13 +22,13 @@ using Robust.Shared.Random;
 using Content.Shared.Verbs;
 using Robust.Shared.Utility;
 using Robust.Shared.Containers;
-using Content.Server.SS220.Forensics;
+using Content.Server.SS220.Forensics.Components;
 using Content.Shared.Cloning.Events;
 using Content.Shared.Hands.Components;
 
 namespace Content.Server.Forensics
 {
-    public sealed class ForensicsSystem : EntitySystem
+    public sealed class ForensicsSystem : SharedForensicsSystem
     {
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly InventorySystem _inventory = default!;
@@ -338,6 +339,8 @@ namespace Content.Server.Forensics
                 component.Fingerprints.Add(fingerprint.Fingerprint ?? "");
         }
 
+        // TODO: Delete this. A lot of systems are manually raising this method event instead of calling the identical <see cref="TransferDna"/> method.
+        // According to our code conventions we should not use method events.
         private void OnTransferDnaEvent(EntityUid uid, DnaComponent component, ref TransferDnaEvent args)
         {
             if (component.DNA == null)
@@ -358,12 +361,7 @@ namespace Content.Server.Forensics
         //SS220 Micro_fibers end
 
         #region Public API
-
-        /// <summary>
-        /// Give the entity a new, random DNA string and call an event to notify other systems like the bloodstream that it has been changed.
-        /// Does nothing if it does not have the DnaComponent.
-        /// </summary>
-        public void RandomizeDNA(Entity<DnaComponent?> ent)
+        public override void RandomizeDNA(Entity<DnaComponent?> ent)
         {
             if (!Resolve(ent, ref ent.Comp, false))
                 return;
@@ -375,11 +373,7 @@ namespace Content.Server.Forensics
             RaiseLocalEvent(ent.Owner, ref ev);
         }
 
-        /// <summary>
-        /// Give the entity a new, random fingerprint string.
-        /// Does nothing if it does not have the FingerprintComponent.
-        /// </summary>
-        public void RandomizeFingerprint(Entity<FingerprintComponent?> ent)
+        public override void RandomizeFingerprint(Entity<FingerprintComponent?> ent)
         {
             if (!Resolve(ent, ref ent.Comp, false))
                 return;
@@ -388,13 +382,7 @@ namespace Content.Server.Forensics
             Dirty(ent);
         }
 
-        /// <summary>
-        /// Transfer DNA from one entity onto the forensics of another
-        /// </summary>
-        /// <param name="recipient">The entity receiving the DNA</param>
-        /// <param name="donor">The entity applying its DNA</param>
-        /// <param name="canDnaBeCleaned">If this DNA be cleaned off of the recipient. e.g. cleaning a knife vs cleaning a puddle of blood</param>
-        public void TransferDna(EntityUid recipient, EntityUid donor, bool canDnaBeCleaned = true)
+        public override void TransferDna(EntityUid recipient, EntityUid donor, bool canDnaBeCleaned = true)
         {
             if (TryComp<DnaComponent>(donor, out var donorComp) && donorComp.DNA != null)
             {

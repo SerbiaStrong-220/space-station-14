@@ -143,7 +143,7 @@ construction-graph-tag-fire-extinguisher = огнетушитель
 construction-graph-tag-fire-helmet = пожарный шлем
 
 # salvage
-construction-graph-tag-spationaut-hardsuit = скафандр спасителя
+construction-graph-tag-spationaut-hardsuit = лёгкий скафандр утилизатора
 
 ## ss220 specific
 
@@ -185,3 +185,7 @@ construction-graph-tag-energy-sword = энергомеч
 construction-graph-tag-toy-energy-sword = игрушечный энергомеч
 
 construction-graph-tag-power-cell-high = батарея высокой ёмкости
+
+# posters
+construction-graph-tag-Contrposter = Недопустимый постер
+construction-graph-tag-Legalposter = Допустимый постер

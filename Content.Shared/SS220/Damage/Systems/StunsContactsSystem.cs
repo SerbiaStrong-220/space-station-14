@@ -48,16 +48,17 @@ public sealed class StunsContactsSystem : EntitySystem
     private bool TryEffectEntity(EntityUid targetUid, Entity<StunsContactsComponent> source)
     {
         if (!source.Comp.TimeEntitiesStunned.TryGetValue(targetUid, out var timeLastStunned)
-            && _stun.TryParalyze(targetUid, source.Comp.StunTime, true, null))
+            && _stun.TryUpdateParalyzeDuration(targetUid, source.Comp.StunTime))
         {
-            DebugTools.Assert(source.Comp.TimeEntitiesStunned.TryAdd(targetUid, _timing.CurTime));
+            var debugFlag = source.Comp.TimeEntitiesStunned.TryAdd(targetUid, _timing.CurTime);
+            DebugTools.Assert(debugFlag);
             return true;
         }
 
         if (_timing.CurTime < timeLastStunned + source.Comp.StunDelayTime + source.Comp.StunTime)
             return false;
 
-        if (_stun.TryParalyze(targetUid, source.Comp.StunTime, true, null))
+        if (_stun.TryUpdateParalyzeDuration(targetUid, source.Comp.StunTime))
         {
             DebugTools.Assert(source.Comp.TimeEntitiesStunned.ContainsKey(targetUid));
             source.Comp.TimeEntitiesStunned[targetUid] = _timing.CurTime;

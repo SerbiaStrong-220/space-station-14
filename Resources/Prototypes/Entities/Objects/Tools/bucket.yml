@@ -1,15 +1,13 @@
 - type: entity
-  parent: BaseItem
+  parent: [ DrinkBaseMaterialStrongPlastic, DrinkBase, DrinkVisualsFill ]
   id: Bucket
   name: bucket
   description: It's a boring old bucket.
   components:
-  - type: Drink
-    solution: bucket
-    ignoreEmpty: true
-  - type: Clickable
+  - type: Edible
+    utensil: Spoon
   - type: Sprite
-    sprite: Objects/Tools/bucket.rsi
+    sprite: SS220/Objects/Tools/bucket.rsi #SS220 Resprite Buckets
     layers:
     - state: icon
     - map: ["enum.SolutionContainerLayers.Fill"]
@@ -18,56 +16,39 @@
   - type: Item
     size: Normal
   - type: Clothing
-    sprite: Objects/Tools/bucket.rsi
+    sprite: SS220/Objects/Tools/bucket.rsi #SS220 Resprite Buckets
     slots:
     - HEAD
     quickEquip: false
   - type: SolutionContainerManager
     solutions:
-      bucket:
+      drink:
         maxVol: 250
-  - type: MixableSolution
-    solution: bucket
   - type: SolutionTransfer
     transferAmount: 100
     maxTransferAmount: 100
     minTransferAmount: 10
-    canChangeTransferAmount: true
-  - type: UserInterface
-    interfaces:
-      enum.TransferAmountUiKey.Key:
-        type: TransferAmountBoundUserInterface
-  - type: MeleeWeapon
-    soundNoDamage:
-      path: "/Audio/Effects/Fluids/splat.ogg"
-    damage:
-      types:
-        Blunt: 0
-  - type: Spillable
-    solution: bucket
   - type: SpillWhenWorn
-    solution: bucket
-  - type: DrawableSolution
-    solution: bucket
-  - type: RefillableSolution
-    solution: bucket
-  - type: DrainableSolution
-    solution: bucket
-  - type: SolutionItemStatus
-    solution: bucket
-  - type: Appearance
+    solution: drink
   - type: SolutionContainerVisuals
-    maxFillLevels: 3
+    inHandsMaxFillLevels: 0
+    maxFillLevels: 4 #SS220 Resprite Buckets
     fillBaseName: fill-
-  - type: ExaminableSolution
-    solution: bucket
   - type: Tag
     tags:
       - Bucket
   - type: PhysicalComposition
     materialComposition:
       Plastic: 50
-  - type: DnaSubstanceTrace
+  # SS220 Resprite Buckets Begin
+  - type: Blindfold
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+  # SS220 Resprite Buckets End
 
 - type: entity
   parent: Bucket
@@ -77,5 +58,5 @@
   components:
   - type: SolutionContainerManager
     solutions:
-      bucket:
+      drink:
         maxVol: 500

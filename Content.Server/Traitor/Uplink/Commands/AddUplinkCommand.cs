@@ -1,115 +1,107 @@
 using Content.Server.Administration;
 using Content.Shared.Administration;
-using Content.Shared.CCVar;
-using Content.Shared.FixedPoint;
 using Robust.Server.Player;
-using Robust.Shared.Configuration;
 using Robust.Shared.Console;
 using Robust.Shared.Player;
 
-namespace Content.Server.Traitor.Uplink.Commands
+namespace Content.Server.Traitor.Uplink.Commands;
+
+[AdminCommand(AdminFlags.Admin)]
+public sealed class AddUplinkCommand : LocalizedEntityCommands
 {
-    [AdminCommand(AdminFlags.Admin)]
-    public sealed class AddUplinkCommand : IConsoleCommand
+    [Dependency] private readonly UplinkSystem _uplinkSystem = default!;
+    [Dependency] private readonly IPlayerManager _playerManager = default!;
+
+    public override string Command => "adduplink";
+
+    public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {
-        [Dependency] private readonly IEntityManager _entManager = default!;
-        [Dependency] private readonly IPlayerManager _playerManager = default!;
-
-        public string Command => "adduplink";
-
-        public string Description => Loc.GetString("add-uplink-command-description");
-
-        public string Help => Loc.GetString("add-uplink-command-help");
-
-
-        public CompletionResult GetCompletion(IConsoleShell shell, string[] args)
+        if (args.Length > 3)
         {
-            return args.Length switch
-            {
-                1 => CompletionResult.FromHintOptions(CompletionHelper.SessionNames(), Loc.GetString("add-uplink-command-completion-1")),
-                2 => CompletionResult.FromHint(Loc.GetString("add-uplink-command-completion-2")),
-                3 => CompletionResult.FromHint(Loc.GetString("add-uplink-command-completion-3")),
-                _ => CompletionResult.Empty
-            };
+            shell.WriteError(Loc.GetString("shell-wrong-arguments-number"));
+            return;
         }
 
-        public void Execute(IConsoleShell shell, string argStr, string[] args)
+        ICommonSession? session;
+        if (args.Length > 0)
         {
-            if (args.Length > 3)
+            // Get player entity
+            if (!_playerManager.TryGetSessionByUsername(args[0], out session))
             {
-                shell.WriteError(Loc.GetString("shell-wrong-arguments-number"));
+                shell.WriteLine(Loc.GetString("shell-target-player-does-not-exist"));
+                return;
+            }
+        }
+        else
+            session = shell.Player;
+
+        if (session?.AttachedEntity is not { } user)
+        {
+            shell.WriteLine(Loc.GetString("add-uplink-command-error-1"));
+            return;
+        }
+
+        // Get target item
+        EntityUid? uplinkEntity = null;
+        if (args.Length >= 2)
+        {
+            if (!int.TryParse(args[1], out var itemId))
+            {
+                shell.WriteLine(Loc.GetString("shell-entity-uid-must-be-number"));
                 return;
             }
 
-            ICommonSession? session;
-            if (args.Length > 0)
-            {
-                // Get player entity
-                if (!_playerManager.TryGetSessionByUsername(args[0], out session))
-                {
-                    shell.WriteLine(Loc.GetString("shell-target-player-does-not-exist"));
-                    return;
-                }
-            }
-            else
-            {
-                session = shell.Player;
-            }
+            var eNet = new NetEntity(itemId);
 
-            if (session?.AttachedEntity is not { } user)
+            if (!EntityManager.TryGetEntity(eNet, out var eUid))
             {
-                shell.WriteLine(Loc.GetString("add-uplink-command-error-1"));
+                shell.WriteLine(Loc.GetString("shell-invalid-entity-id"));
                 return;
             }
 
-            // Get target item
-            EntityUid? uplinkEntity = null;
-            if (args.Length >= 2)
+            uplinkEntity = eUid;
+        }
+
+        var isDiscounted = false;
+        if (args.Length >= 3)
+        {
+            if (!bool.TryParse(args[2], out isDiscounted))
             {
-                if (!int.TryParse(args[1], out var itemID))
-                {
-                    shell.WriteLine(Loc.GetString("shell-entity-uid-must-be-number"));
-                    return;
-                }
-
-                var eNet = new NetEntity(itemID);
-
-                if (!_entManager.TryGetEntity(eNet, out var eUid))
-                {
-                    shell.WriteLine(Loc.GetString("shell-invalid-entity-id"));
-                    return;
-                }
-
-                uplinkEntity = eUid;
+                shell.WriteLine(Loc.GetString("shell-invalid-bool"));
+                return;
             }
+        }
 
-            bool isDiscounted = false;
-            if (args.Length >= 3)
+        // Finally add uplink
+        if (!_uplinkSystem.AddUplink(user, 20, uplinkEntity: uplinkEntity, giveDiscounts: isDiscounted))
+            shell.WriteLine(Loc.GetString("add-uplink-command-error-2"));
+            // SS220 DynamicTraitor
+            var useDynamics = false;
+            if (args.Length >= 4)
             {
-                if (!bool.TryParse(args[2], out isDiscounted))
+                if (!bool.TryParse(args[3], out useDynamics))
                 {
                     shell.WriteLine(Loc.GetString("shell-invalid-bool"));
                     return;
                 }
             }
+            // SS220 DynamicTraitor
 
-            // Finally add uplink
-            var uplinkSys = _entManager.System<UplinkSystem>();
+        // ss220-add-code-and-open-uplink-begin
+        // check pr #2988
+        if (uplinkEntity != null)
+            _uplinkSystem.GenerateCodeAndOpenUplink(uplinkEntity.Value);
+        // ss220-add-code-and-open-uplink-end
+    }
 
-            //ss220 adduplink command generate code and open uplink start
-
-            uplinkEntity ??= uplinkSys.FindUplinkTarget(user);
-
-            if (uplinkSys.AddUplink(user, 20, uplinkEntity: uplinkEntity, giveDiscounts: isDiscounted))
-            {
-                if (uplinkEntity != null)
-                    uplinkSys.GenerateCodeAndOpenUplink(uplinkEntity.Value);
-
-                return;
-            }
-
-            shell.WriteLine(Loc.GetString("add-uplink-command-error-2"));
-            //ss220 adduplink command generate code and open uplink end
-        }
+    public override CompletionResult GetCompletion(IConsoleShell shell, string[] args)
+    {
+        return args.Length switch
+        {
+            1 => CompletionResult.FromHintOptions(CompletionHelper.SessionNames(), Loc.GetString("add-uplink-command-completion-1")),
+            2 => CompletionResult.FromHint(Loc.GetString("add-uplink-command-completion-2")),
+            3 => CompletionResult.FromHint(Loc.GetString("add-uplink-command-completion-3")),
+            _ => CompletionResult.Empty,
+        };
     }
 }

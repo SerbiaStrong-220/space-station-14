@@ -2,11 +2,14 @@ using Content.Server.Administration.Logs;
 using Content.Server.Mind;
 using Content.Server.Popups;
 using Content.Server.Roles;
+using Content.Server.SS220.CombustingMindShield;
 using Content.Server.SS220.MindSlave;
 using Content.Shared.Database;
 using Content.Shared.Implants;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Revolutionary.Components;
+using Content.Shared.Roles.Components;
+using Content.Shared.SS220.CultYogg.Cultists;
 using Robust.Shared.Containers;
 
 namespace Content.Server.Mindshield;
@@ -28,7 +31,9 @@ public sealed class MindShieldSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<MindShieldImplantComponent, ImplantImplantedEvent>(OnImplantImplanted);
-        SubscribeLocalEvent<MindShieldImplantComponent, EntGotRemovedFromContainerMessage>(OnImplantDraw);
+        SubscribeLocalEvent<MindShieldImplantComponent, ImplantRemovedEvent>(OnImplantRemoved);
+		SubscribeLocalEvent<MindShieldComponent, ComponentRemove>(OnRemove);//SS220 CombustedMindShieldEvent #3500
+		SubscribeLocalEvent<MindShieldComponent, GotCultifiedEvent>(OnGotCultified);//Cult hotfix 16 #3599
     }
 
     private void OnImplantImplanted(Entity<MindShieldImplantComponent> ent, ref ImplantImplantedEvent ev)
@@ -36,8 +41,8 @@ public sealed class MindShieldSystem : EntitySystem
         if (ev.Implanted == null)
             return;
 
-        EnsureComp<MindShieldComponent>(ev.Implanted.Value);
-        MindShieldRemovalCheck(ev.Implanted.Value, ev.Implant);
+        EnsureComp<MindShieldComponent>(ev.Implanted);
+        MindShieldRemovalCheck(ev.Implanted, ev.Implant);
     }
 
     /// <summary>
@@ -57,11 +62,31 @@ public sealed class MindShieldSystem : EntitySystem
         {
             _adminLogManager.Add(LogType.Mind, LogImpact.Medium, $"{ToPrettyString(implanted)} was deconverted due to being implanted with a Mindshield.");
         }
+        //SS220 Cult hotfix 14 #3477 start
+        if (HasComp<CultYoggComponent>(implanted))
+        {
+            var comp = EnsureComp<CombustingMindShieldComponent>(implanted);
+            comp.Implant = implant;
+        }
+        //SS220 Cult hotfix 14 #3477 end
     }
 
-    private void OnImplantDraw(Entity<MindShieldImplantComponent> ent, ref EntGotRemovedFromContainerMessage args)
+    private void OnImplantRemoved(Entity<MindShieldImplantComponent> ent, ref ImplantRemovedEvent args)
     {
-        RemComp<MindShieldComponent>(args.Container.Owner);
+        RemComp<MindShieldComponent>(args.Implanted);
     }
+
+    //SS220 CombustedMindShieldEvent #3500 start
+    private void OnRemove(Entity<MindShieldComponent> ent, ref ComponentRemove args)
+    {
+        RemComp<CombustingMindShieldComponent>(ent);
+    }
+    //SS220 CombustedMindShieldEvent #3500 end
+    //Cult hotfix 16 #3599 start
+    private void OnGotCultified(Entity<MindShieldComponent> ent, ref GotCultifiedEvent _)
+    {
+        EnsureComp<CombustingMindShieldComponent>(ent);
+    }
+    //Cult hotfix 16 #3599 end
 }
 

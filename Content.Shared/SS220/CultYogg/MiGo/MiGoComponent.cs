@@ -2,6 +2,7 @@
 
 using Content.Shared.Alert;
 using Content.Shared.FixedPoint;
+using Content.Shared.Roles;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -11,11 +12,14 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.SS220.CultYogg.MiGo;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedMiGoSystem), Friend = AccessPermissions.ReadWriteExecute, Other = AccessPermissions.Read)]
+[Access(typeof(SharedMiGoSystem), typeof(SharedMiGoErectSystem), Friend = AccessPermissions.ReadWriteExecute, Other = AccessPermissions.Read)]
 public sealed partial class MiGoComponent : Component
 {
     #region Abilities
     /// ABILITIES ///
+    [DataField]
+    public EntProtoId MiGoToggleLightAction = "ActionMiGoToggleLight";
+
     [DataField]
     public EntProtoId MiGoEnslavementAction = "ActionMiGoEnslavement";
 
@@ -30,6 +34,12 @@ public sealed partial class MiGoComponent : Component
 
     [DataField]
     public EntProtoId MiGoSacrificeAction = "ActionMiGoSacrifice";
+
+    [DataField]
+    public EntProtoId MiGoTeleportAction = "ActionMiGoTeleport";
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? MiGoToggleLightActionEntity;
 
     [DataField, AutoNetworkedField]
     public EntityUid? MiGoEnslavementActionEntity;
@@ -48,13 +58,16 @@ public sealed partial class MiGoComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntityUid? MiGoSacrificeActionEntity;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? MiGoTeleportActionEntity;
     #endregion
 
     /// <summary>
     /// The effect necessary for enslavement
-    /// <summary>
+    /// </summary>
     [ViewVariables]
-    public string RequiedEffect = "Rave";//Required effect for enslavement
+    public string RequiedEffect = "Rave";
 
     [DataField]
     public SoundSpecifier? EnslavingSound = new SoundPathSpecifier("/Audio/SS220/CultYogg/migo_slave.ogg");
@@ -67,13 +80,20 @@ public sealed partial class MiGoComponent : Component
 
     /// <summary>
     /// How long healing effect will occure
-    /// <summary>
+    /// </summary>
     [ViewVariables]
     public TimeSpan HealingEffectTime = TimeSpan.FromSeconds(15);
 
     /// <summary>
-    /// How long does it take to erect a building
+    /// How far from altar MiGo can start action
+    /// </summary>
+    [ViewVariables]
+    public float SaraficeStartRange = 1f;
+
+    #region Building
     /// <summary>
+    /// How long does it take to erect a building
+    /// </summary>
     [ViewVariables, DataField]
     public TimeSpan ErectDoAfterSeconds = TimeSpan.FromSeconds(3);
 
@@ -90,10 +110,22 @@ public sealed partial class MiGoComponent : Component
     [DataField(required: true)]
     public EntityWhitelist? EraseWhitelist = new();
 
+    /// <summary>
+    /// How long capturing DoAfter will occure
+    /// <summary>
+    [ViewVariables]
+    public TimeSpan CaptureDoAfterTime = TimeSpan.FromSeconds(5);
+
+    /// <summary>
+    /// List of capruring results
+    /// <summary>
+    public Dictionary<string, TimeSpan> CaptureCooldowns = [];
+    #endregion
+
     #region Astral
     /// <summary>
     /// Flag to check if the target is in the astral plane
-    /// <summary>
+    /// </summary>
     [ViewVariables, AutoNetworkedField]
     public bool IsPhysicalForm = true;//Is MiGo in phisycal form?
 
@@ -115,7 +147,7 @@ public sealed partial class MiGoComponent : Component
 
     /// How long MiGo can be in astral
     [DataField, AutoNetworkedField]
-    public TimeSpan AstralDuration = TimeSpan.FromSeconds(15);
+    public TimeSpan AstralDuration = TimeSpan.FromSeconds(35);
 
     [AutoNetworkedField]
     public TimeSpan? MaterializationTime;
@@ -127,35 +159,17 @@ public sealed partial class MiGoComponent : Component
     public float MaterialMovementSpeed = 6f; //ToDo check this thing
 
     [ViewVariables, DataField, AutoNetworkedField]
-    public float UnMaterialMovementSpeed = 18f;//ToDo check this thing
+    public float UnMaterialMovementSpeed = 15f;//ToDo check this thing
 
     [DataField]
     public ProtoId<AlertPrototype> AstralAlert = "MiGoAstralAlert";
     #endregion
 
-    #region Replacement
     /// <summary>
-    ///Replacement required cause MiGo is key character among
-    /// <summary>
-
-    //Marking if entity can be gibbed and replaced
-    public bool MayBeReplaced = false;
-
-    //Should the timer count down the time
-    public bool ShouldBeCounted = false;
-
-    /// <summary>
-    /// How long it takes to be able to replace this migo
+    /// Added job
     /// </summary>
     [ViewVariables]
-    public TimeSpan BeforeReplacementCooldown = TimeSpan.FromSeconds(300);
-
-    /// <summary>
-    /// Buffer to markup when time has come
-    /// </summary>
-    [DataField]
-    public TimeSpan? ReplacementEventTime;
-    #endregion
+    public ProtoId<JobPrototype> JobName = "MiGoJob";
 }
 
 [NetSerializable, Serializable]
@@ -164,6 +178,7 @@ public enum MiGoTimerVisualLayers : byte
     Digit1,
     Digit2
 }
+
 [Serializable, NetSerializable]
 public enum MiGoVisual
 {

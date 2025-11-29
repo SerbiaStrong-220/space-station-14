@@ -19,6 +19,15 @@
         tags:
         - NukeOpsUplink
         - LoneOpsUplink
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 12
+    MediumDynamic:
+      Telecrystal: 11
+    HardDynamic:
+      Telecrystal: 11
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkOrigami
@@ -36,6 +45,15 @@
       tags:
       - NukeOpsUplink
       - LoneOpsUplink
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 4
+    HardDynamic:
+      Telecrystal: 8
+#ss220 dynamic-price end
 
 # Implants
 
@@ -58,6 +76,15 @@
         tags:
         - NukeOpsUplink
         - LoneOpsUplink
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 10
+    MediumDynamic:
+      Telecrystal: 8
+    HardDynamic:
+      Telecrystal: 8
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkMindslaveSurgeryFixBundle
@@ -77,6 +104,15 @@
     blacklist:
       components:
       - SurplusBundle
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 4
+    MediumDynamic:
+      Telecrystal: 4
+    HardDynamic:
+      Telecrystal: 4
+#ss220 dynamic-price end
 # JobItems
 
 - type: listing
@@ -162,6 +198,19 @@
   categories:
   - UplinkPointless
 
+#Posters
+
+- type: listing
+  id: UplinkContrabandPosters
+  name: uplink-contraband-poster-name
+  description: uplink-contraband-poster-desc
+  icon: { sprite: SS220/Objects/Misc/Contrposter.rsi, state: contrposter }
+  productEntity: BoxContraPosters
+  cost:
+    Telecrystal: 1
+  categories:
+  - UplinkPointless
+
 - type: listing
   id: UplinkThermalGlasses
   name: uplink-thermal-glasses-name
@@ -175,6 +224,15 @@
     Telecrystal: 2 #ss220-uplink-discounts
   categories:
   - UplinkWearables
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 3
+    HardDynamic:
+      Telecrystal: 3
+#ss220 dynamic-price end
 
 - type: listing
   id: ThermalVisorImplanter
@@ -189,6 +247,15 @@
     Telecrystal: 5 #ss220-uplink-discounts
   categories:
   - UplinkImplants
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 5
+    MediumDynamic:
+      Telecrystal: 5
+    HardDynamic:
+      Telecrystal: 6
+#ss220 dynamic-price end
 
 - type: listing
   id: DnaCopyImplanter
@@ -203,6 +270,15 @@
     Telecrystal: 8
   categories:
   - UplinkImplants
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 8
+    MediumDynamic:
+      Telecrystal: 10
+    HardDynamic:
+      Telecrystal: 14
+#ss220 dynamic-price end
 
 - type: listing
   id: AdrenalImplanter
@@ -217,6 +293,15 @@
     Telecrystal: 7
   categories:
   - UplinkImplants
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 9
+    MediumDynamic:
+      Telecrystal: 7
+    HardDynamic:
+      Telecrystal: 5
+#ss220 dynamic-price end
 
 - type: listing
   id: ClothingHeadHelmetSwatSyndicate
@@ -231,6 +316,15 @@
     Telecrystal: 3 #ss220-uplink-discounts
   categories:
   - UplinkWearables
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 4
+    MediumDynamic:
+      Telecrystal: 3
+    HardDynamic:
+      Telecrystal: 2
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkBorgModuleFlamingAxe
@@ -244,6 +338,15 @@
     Telecrystal: 3
   categories:
   - UplinkDisruption
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 3
+    MediumDynamic:
+      Telecrystal: 3
+    HardDynamic:
+      Telecrystal: 3
+#ss220 dynamic-price end
 
 - type: listing
   id: ClothingSilentShoes
@@ -255,26 +358,26 @@
     Telecrystal: 1
   categories:
   - UplinkWearables
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+#ss220 dynamic-price end
 
-# READD-VEHICLES
 - type: listing
-  id: UplinkSyndicateSegwayCrate
-  name: uplink-syndicate-segway-crate-name
-  description: uplink-syndicate-segway-crate-desc
-  icon: { sprite: /Textures/Objects/Vehicles/syndicatesegway.rsi, state: icon }
-  productEntity: CrateFunSyndicateSegway
-  discountCategory: usualDiscounts
-  discountDownTo:
-    Telecrystal: 2
+  id: UplinkOuterElectrification
+  name: uplink-outer-electrification-name
+  description: uplink-outer-electrification-desc
+  icon: {sprite: SS220/Clothing/OuterClothing/Armor/security.rsi, state: icon}  #SS220 BugFix
+  productEntity: ClothingOuterArmorElectricity
   cost:
     Telecrystal: 5
   categories:
-  - UplinkDeception
-  conditions:
-  - !type:BuyerWhitelistCondition
-    blacklist:
-      components:
-      - SurplusBundle
+  - UplinkWearables
 
 #SS220 SpicyUPD begin
 - type: listing
@@ -352,6 +455,15 @@
     Telecrystal: 4
   categories:
   - UplinkDisruption
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 4
+    HardDynamic:
+      Telecrystal: 7
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkDetectorAi
@@ -364,5 +476,30 @@
     Telecrystal: 1
   cost:
     Telecrystal: 2
+  categories:
+  - UplinkDisruption
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 6
+#ss220 dynamic-price end
+
+- type: listing
+  id: UplinkShutdownNearestApc
+  name: uplink-shutdown-nearest-apc
+  description: uplink-shutdown-nearest-apc-desc
+  icon: { sprite: Interface/Actions/actions_ai.rsi, state: door_overcharge_on }
+  productEvent: !type:ShutdownNearestApcEvent
+    radius: 6
+  raiseProductEventOnUser: true
+  cost:
+    Telecrystal: 4
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 2
   categories:
   - UplinkDisruption

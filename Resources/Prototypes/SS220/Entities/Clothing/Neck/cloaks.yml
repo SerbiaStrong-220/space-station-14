@@ -18,6 +18,8 @@
   components:
   - type: Sprite
     sprite: SS220/Clothing/Neck/Cloaks/captain_white_formal.rsi
+  - type: StealTarget
+    stealGroup: HeadCloak
 
 - type: entity
   parent: ClothingNeckBase
@@ -90,3 +92,36 @@
   - type: ContainerContainer
     containers:
       toggleable-clothing: !type:ContainerSlot {}
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCMOParadeCloak
+  name: chief medical officer's parade cloak
+  description: The owner has seen everything and more. From the dwarf under the bahus to the smoking chemist in the lab.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Cloaks/cmo_parade_cloak.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Neck/Cloaks/cmo_parade_cloak.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: fold-flip-verb
+    foldVerbText: fold-flip-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: flipped
+    foldedHeldPrefix: flipped
+  - type: StealTarget #SS220 Thief HeadCloak StealTarget Update
+    stealGroup: HeadCloak #SS220 Thief HeadCloak StealTarget Update
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakCEDark
+  name: chief engineer's dark cloak
+  description: The dark cloak of the chief engineer for years of service as the head of the engineering department.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Neck/Cloaks/ce_dark.rsi
+  - type: StealTarget
+    stealGroup: HeadCloak

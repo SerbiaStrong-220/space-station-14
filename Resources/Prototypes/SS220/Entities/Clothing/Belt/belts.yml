@@ -58,7 +58,6 @@
         name: clothing-boots-sidearm
         whitelist:
           tags:
-            - Sidearm
             - Medkit
           components:
             - Stunbaton
@@ -455,7 +454,8 @@
         - WetFloorSign
         - HolosignProjector
         - Plunger
-        - JanicartKeys # SS220 Readd-Vehicles
+        - GoldenPlunger
+        - WireBrush
       components:
         - LightReplacer
         - SmokeOnTrigger
@@ -475,6 +475,7 @@
         amount: 2
       - id: FlashlightLantern
       - id: LightReplacer
+      - id: WireBrush
 
 - type: entity
   parent: ClothingBeltMedical
@@ -501,3 +502,23 @@
     - id: Gauze
     - id: EmergencyMedipen
       amount: 3
+
+- type: entity
+  parent: ClothingBeltSecurityMedical
+  id: ClothingBeltERTGammaMedicalFilled
+  description: Can hold various medical equipment.
+  suffix: ERT, Filled
+  name: ERT medical belt
+  components:
+    - type: StorageFill
+      contents:
+        - id: CombatMedipen
+          amount: 4
+        - id: PunctAutoInjector
+          amount: 4
+        - id: PyraAutoInjector
+          amount: 4
+        - id: AirlossAutoInjector
+          amount: 2
+        - id: SyringeSaline
+          amount: 2
