@@ -2,7 +2,7 @@
 
 using Robust.Shared.Audio;
 
-namespace Content.Shared.SS220.EmergencyShuttleControl;
+namespace Content.Server.SS220.EmergencyShuttleControl;
 
 /// <summary>
 ///     A component that allows you to hold the evacuation shuttle call and make announcements upon activation/deactivation.

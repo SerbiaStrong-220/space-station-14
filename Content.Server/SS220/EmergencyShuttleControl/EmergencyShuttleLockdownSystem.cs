@@ -7,8 +7,6 @@ using Content.Server.RoundEnd;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Station.Systems;
 using Content.Shared.Interaction.Events;
-using Content.Shared.SS220.EmergencyShuttleControl;
-using Content.Shared.SS220.EmergencyShuttleControl.Lockdown;
 using Content.Shared.Station.Components;
 using Microsoft.Extensions.DependencyModel;
 using Robust.Shared.Audio;
