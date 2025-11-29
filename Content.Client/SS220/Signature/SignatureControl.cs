@@ -263,15 +263,32 @@ public sealed class SignatureControl : Control
         handle.RenderInRenderTarget(_canvas,
             () =>
             {
+                // Run-length encoding method
                 for (var y = 0; y < Data.Height; y++)
                 {
+                    var startX = -1;
+
                     for (var x = 0; x < Data.Width; x++)
                     {
-                        if (!Data.GetPixel(x, y))
-                            continue;
+                        var px = Data.GetPixel(x, y);
 
-                        var r = new UIBox2i(x, y, x + 1, y + 1);
-                        handle.DrawRect(r, Color.Black);
+                        if (px)
+                        {
+                            if (startX == -1)
+                                startX = x;
+                        }
+                        else if (startX != -1)
+                        {
+                            var rect = new UIBox2i(startX, y, x, y + 1);
+                            handle.DrawRect(rect, Color.Black);
+                            startX = -1;
+                        }
+                    }
+
+                    if (startX != -1)
+                    {
+                        var rect = new UIBox2i(startX, y, Data.Width, y + 1);
+                        handle.DrawRect(rect, Color.Black);
                     }
                 }
             },
