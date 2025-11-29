@@ -299,10 +299,13 @@ public sealed class SharedKitchenSpikeSystem : EntitySystem
         var entry = butcherable.SpawnedEntities[index];
 
         var uid = PredictedSpawnNextToOrDrop(entry.PrototypeId, ent);
-        _metaDataSystem.SetEntityName(uid,
-            Loc.GetString("comp-kitchen-spike-meat-name",
-                ("name", Name(uid)),
-                ("victim", args.Target)));
+        //SS220 Cult hotfix 17 #3641 start
+        if (butcherable.WillRenameEnt)
+            _metaDataSystem.SetEntityName(uid,
+                Loc.GetString("comp-kitchen-spike-meat-name",
+                    ("name", Name(uid)),
+                    ("victim", args.Target)));
+        //SS220 Cult hotfix 17 #3641 end
 
         // Decrease the amount since we spawned an entity from that entry.
         entry.Amount--;
