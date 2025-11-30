@@ -210,7 +210,7 @@ public sealed class MartialArtsTest
     [Test]
     public async Task AllSequencesReachableTest()
     {
-        await using var pair = await PoolManager.Instance.GetPair();
+        await using var pair = await PoolManager.GetServerClient();
         var server = pair.Server;
 
         var artsSys = server.EntMan.System<MartialArtsSystem>();
