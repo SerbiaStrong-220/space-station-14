@@ -493,8 +493,13 @@ public enum LogType
     AdminCommand = 10000,
 
     /// <summary>
+    /// Logs related to roundflow like changing stages of cult or any antag progression
+    /// </summary>
+    RoundFlow = 10001,
+
+    /// <summary>
     /// All related to experience system
     /// </summary>
-    Experience = 10001,
+    Experience = 10002,
     //SS220 log types end
 }

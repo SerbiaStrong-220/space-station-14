@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Original is taken from Skyrat-tg at commit https://github.com/Skyrat-SS13/Skyrat-tg/tree/4a4c00429fb86c9b5dc00e6c523f0826cce0cc03",
+  "copyright": "Original is taken from Skyrat-tg at commit https://github.com/Skyrat-SS13/Skyrat-tg/tree/4a4c00429fb86c9b5dc00e6c523f0826cce0cc03, resprited by femboiithighs (Discord) for SS220",
   "size": {
     "x": 32,
     "y": 32
@@ -11,8 +11,14 @@
       "name": "clocks",
       "delays": [
         [
-          1.6, 1.1,
-		  1.6, 1.1
+          0.2,
+          0.35,
+          0.5,
+          0.3,
+          0.2,
+          0.35,
+          0.5,
+          0.3
         ]
       ]
     }

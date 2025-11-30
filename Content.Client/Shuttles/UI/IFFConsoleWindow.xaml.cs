@@ -82,5 +82,33 @@ public sealed partial class IFFConsoleWindow : FancyWindow,
             ShowVesselOffButton.Disabled = true;
             ShowVesselOnButton.Disabled = true;
         }
+        // ss220 spacewar begin
+        if (state.StealthDuration != TimeSpan.Zero)
+        {
+            StealthDuration.Visible = true;
+            StealthDuration.Text = state.StealthDuration.ToString("mm\\:ss");
+        }
+        else
+        {
+            StealthDuration.Visible = false;
+        }
+
+        var cooldown = state.Cooldown.ToString("mm\\:ss");
+        StealthCooldown.Text = Loc.GetString("iff-stealth-cooldown", ("cooldown",cooldown));
+
+        if (state.Cooldown != TimeSpan.Zero)
+        {
+            if ((state.Flags & IFFFlags.Hide) == 0x0)
+            {
+                ShowVesselOffButton.Pressed = false;
+                ShowVesselOffButton.Disabled = true;
+            }
+        }
+        else
+        {
+            StealthCooldown.Text = Loc.GetString("iff-stealth-ready");
+            ShowVesselOffButton.Disabled = (state.AllowedFlags & IFFFlags.Hide) == 0;
+        }
+        // ss220 spacewar end
     }
 }

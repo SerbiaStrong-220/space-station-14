@@ -9,3 +9,13 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+
+- type: construction
+  id: SingingFishCraft
+  graph: SingingFish
+  startNode: start
+  targetNode: SingingFishNode
+  category: construction-category-structures
+  placementMode: SnapgridCenter
+  objectType: Structure
+  canBuildInImpassable: true
