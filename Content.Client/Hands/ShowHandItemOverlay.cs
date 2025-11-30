@@ -98,34 +98,7 @@ namespace Content.Client.Hands
             _hands ??= _entMan.System<HandsSystem>();
             var handEntity = _hands.GetActiveHandEntity();
 
-            // SS220-MartialArts-Start
-            if (_player.LocalEntity != null)
-            {
-                var combo = _martial.GetPerformedSteps(_player.LocalEntity.Value);
-
-                if (combo is { Count: > 0 })
-                {
-                    var rsiActual = _resourceCache.GetResource<RSIResource>(MartialArtsActionsRsi).RSI;
-
-                    for (var i = 0; i < combo.Count; i++)
-                    {
-                        if (!rsiActual.TryGetState(combo[i].ToString().ToLower(), out var state))
-                            continue;
-
-                        var texture = state.Frame0;
-
-                        var size = texture.Size;
-
-                        var offsetVec2 = new Vector2(-offset,
-                            (PerformedStepsVerticalMultiplier * i + PerformedStepsIndexOffset - combo.Count) * texture.Size.Y / PerformedStepsYDivisor);
-
-                        screen.DrawTextureRect(texture,
-                            UIBox2.FromDimensions(mousePos.Position + offsetVec2 - size / PerformedStepsHalfDivisor, size),
-                            MartialArtsIconsModulate);
-                    }
-                }
-            }
-            // SS220-MartialArts-End
+            DrawPerformedSteps(screen, mousePos, offset); // SS220-MartialArts
 
             if (handEntity == null || !_entMan.TryGetComponent(handEntity, out SpriteComponent? sprite))
                 return;
@@ -140,5 +113,46 @@ namespace Content.Client.Hands
 
             screen.DrawTexture(_renderBackbuffer.Texture, mousePos.Position - halfSize + offsetVec, Color.White.WithAlpha(0.75f));
         }
+
+        // SS220-MartialArts-Start
+        private void DrawPerformedSteps(DrawingHandleScreen screen, ScreenCoordinates mousePos, float offset)
+        {
+            if (_player.LocalEntity != null)
+            {
+                var combo = _martial.GetPerformedSteps(_player.LocalEntity.Value);
+
+                if (combo is { Count: > 0 })
+                {
+                    if (!_resourceCache.TryGetResource<RSIResource>(MartialArtsActionsRsi, out var rsiResource))
+                    {
+                        DebugTools.Assert($"Couldn't get resource for martial arts actions, expected path: {MartialArtsActionsRsi.CanonPath}");
+                        return;
+                    }
+
+                    var rsiActual = rsiResource.RSI;
+
+                    for (var i = 0; i < combo.Count; i++)
+                    {
+                        if (!rsiActual.TryGetState(combo[i].ToString().ToLower(), out var state))
+                        {
+                            DebugTools.Assert($"No RSI state could be found for state \"{combo[i].ToString().ToLower()}\" in {rsiActual.Path}");
+                            continue;
+                        }
+
+                        var texture = state.Frame0;
+
+                        var size = texture.Size;
+
+                        var offsetVec2 = new Vector2(-offset,
+                            (PerformedStepsVerticalMultiplier * i + PerformedStepsIndexOffset - combo.Count) * texture.Size.Y / PerformedStepsYDivisor);
+
+                        screen.DrawTextureRect(texture,
+                            UIBox2.FromDimensions(mousePos.Position + offsetVec2 - size / PerformedStepsHalfDivisor, size),
+                            MartialArtsIconsModulate);
+                    }
+                }
+            }
+        }
+        // SS220-MartialArts-End
     }
 }

@@ -11,6 +11,7 @@ using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Popups;
 using Content.Shared.SS220.MartialArts.Effects;
 using Content.Shared.Trigger;
+using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
@@ -29,6 +30,7 @@ public sealed partial class MartialArtsSystem : EntitySystem
     [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
     [Dependency] private readonly AlertsSystem _alerts = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
 
     private static readonly ProtoId<AlertPrototype> CooldownAlert = "MartialArtCooldown";
 
@@ -129,7 +131,7 @@ public sealed partial class MartialArtsSystem : EntitySystem
         if (!Resolve(user, ref artist))
             return false;
 
-        if (!_hands.ActiveHandIsEmpty(user))
+        if (_melee.TryGetWeapon(user, out var meleeUid, out _) && meleeUid != user)
             return false;
 
         if (IsInCooldown(user, artist))
@@ -190,7 +192,7 @@ public sealed partial class MartialArtsSystem : EntitySystem
         return artist.LastStepPerformedAt + artist.SequenceTimeout > _timing.CurTime;
     }
 
-    private bool IsInCooldown(EntityUid user, MartialArtistComponent? artist = null)
+    public bool IsInCooldown(EntityUid user, MartialArtistComponent? artist = null)
     {
         if (!Resolve(user, ref artist))
             return false;
@@ -262,7 +264,8 @@ public sealed partial class MartialArtsSystem : EntitySystem
         Dirty(user, artist);
     }
 
-    private bool TryGetSequence(List<CombatSequenceStep> subsequence, List<CombatSequence> sequences, [NotNullWhen(true)] out CombatSequence? found, out bool complete)
+    // made public for tests
+    public bool TryGetSequence(List<CombatSequenceStep> subsequence, List<CombatSequence> sequences, [NotNullWhen(true)] out CombatSequence? found, out bool complete)
     {
         found = null;
         complete = false;
