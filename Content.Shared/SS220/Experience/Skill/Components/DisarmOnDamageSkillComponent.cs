@@ -3,11 +3,11 @@
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 
-namespace Content.Shared.SS220.Experience.SkillEffects.Components;
+namespace Content.Shared.SS220.Experience.Skill.Components;
 
 [RegisterComponent]
-[NetworkedComponent, AutoGenerateComponentState(true)]
-public sealed partial class SkillDisarmOnDamageEffectComponent : Component
+[NetworkedComponent, AutoGenerateComponentState]
+public sealed partial class DisarmOnDamageSkillComponent : Component
 {
     [DataField(required: true)]
     [AutoNetworkedField]

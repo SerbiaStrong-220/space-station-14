@@ -6,11 +6,10 @@
     skillName: medicine-initial-name
     skillDescription: medicine-initial-desc
   components:
-  - type: SkillMedicineMachineUse
+  - type: MedicineMachineUseSkill
     healthAnalyzerInfoShuffleChance: 0.6
     defibrillatorSelfDamageChance: 0.6
-    defibrillatorFailureChance: 0
-  - type: SkillMedicineDoAfter
+  - type: MedicineDoAfterSkill
     durationScale: 1.4
     failureChance: 0.1
     failurePopup: healing-item-use-failure
@@ -23,13 +22,11 @@
     skillName: medicine-base-name
     skillDescription: medicine-base-desc
   components:
-  - type: SkillMedicineMachineUse
+  - type: MedicineMachineUseSkill
     healthAnalyzerInfoShuffleChance: 0.2
     defibrillatorSelfDamageChance: 0.2
-    defibrillatorFailureChance: 0
-  - type: SkillMedicineDoAfter
+  - type: MedicineDoAfterSkill
     durationScale: 1
-    failurePopup: healing-item-use-failure
 
 - type: skill
   id: MedicineTrained
@@ -39,13 +36,10 @@
     skillName: medicine-trained-name
     skillDescription: medicine-trained-desc
   components:
-  - type: SkillMedicineMachineUse
-    healthAnalyzerInfoShuffleChance: 0
-    defibrillatorSelfDamageChance: 0
-    defibrillatorFailureChance: 0
-  - type: SkillMedicineDoAfter
+  - type: MedicineDoAfterSkill
     durationScale: 0.8
     failurePopup: healing-item-use-failure
+  - type: MedicineMachineUseSkill
 
 - type: skill
   id: MedicineProfessional
@@ -55,11 +49,7 @@
     skillName: medicine-professional-name
     skillDescription: medicine-professional-desc
   components:
-  - type: SkillMedicineDoAfter
+  - type: MedicineDoAfterSkill
     durationScale: 0.6
     failurePopup: healing-item-use-failure
-    # To ensure removing debuffs
-  - type: SkillMedicineMachineUse
-    healthAnalyzerInfoShuffleChance: 0
-    defibrillatorSelfDamageChance: 0
-    defibrillatorFailureChance: 0
+  - type: MedicineMachineUseSkill

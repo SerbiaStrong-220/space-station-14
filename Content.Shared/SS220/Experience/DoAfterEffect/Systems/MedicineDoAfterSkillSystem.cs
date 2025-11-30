@@ -5,4 +5,4 @@ using Content.Shared.SS220.Experience.DoAfterEffect.Components;
 
 namespace Content.Shared.SS220.Experience.DoAfterEffect.Systems;
 
-public sealed class SkillMedicineDoAfterSystem : BaseSkillDoAfterEffectSystem<SkillMedicineDoAfterComponent, HealingDoAfterEvent>;
+public sealed class MedicineDoAfterSkillSystem : BaseDoAfterSkillSystem<MedicineDoAfterSkillComponent, HealingDoAfterEvent>;

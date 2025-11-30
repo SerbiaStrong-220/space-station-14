@@ -2,14 +2,14 @@
 
 using Robust.Shared.GameStates;
 
-namespace Content.Shared.SS220.Experience.SkillEffects.Components;
+namespace Content.Shared.SS220.Experience.Skill.Components;
 
 /// <summary>
 /// This is used to stop entity from being disarmed
 /// </summary>
 [RegisterComponent]
-[NetworkedComponent, AutoGenerateComponentState(true)]
-public sealed partial class SkillMedicineMachineUseComponent : Component
+[NetworkedComponent, AutoGenerateComponentState]
+public sealed partial class MedicineMachineUseSkillComponent : Component
 {
     [DataField]
     [AutoNetworkedField]

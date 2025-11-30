@@ -1,19 +1,20 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using System.Linq;
 using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
-using Content.Shared.SS220.Experience.SkillEffects.Components;
+using Content.Shared.SS220.Experience.Skill.Components;
 using Content.Shared.SS220.Experience.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
-namespace Content.Shared.SS220.Experience.SkillEffects.Systems;
+namespace Content.Shared.SS220.Experience.Skill.Systems;
 
-public sealed class SkillDisarmOnDamageEffectSystem : EntitySystem
+public sealed class DisarmOnDamageSkillSystem : EntitySystem
 {
     [Dependency] private readonly ExperienceSystem _experience = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
@@ -24,12 +25,12 @@ public sealed class SkillDisarmOnDamageEffectSystem : EntitySystem
     {
         base.Initialize();
 
-        _experience.RelayEventToSkillEntity<SkillDisarmOnDamageEffectComponent, DamageChangedEvent>();
+        _experience.RelayEventToSkillEntity<DisarmOnDamageSkillComponent, DamageChangedEvent>();
 
-        SubscribeLocalEvent<SkillDisarmOnDamageEffectComponent, DamageChangedEvent>(OnDamageChangedEvent);
+        SubscribeLocalEvent<DisarmOnDamageSkillComponent, DamageChangedEvent>(OnDamageChangedEvent);
     }
 
-    public void OnDamageChangedEvent(Entity<SkillDisarmOnDamageEffectComponent> entity, ref DamageChangedEvent args)
+    public void OnDamageChangedEvent(Entity<DisarmOnDamageSkillComponent> entity, ref DamageChangedEvent args)
     {
         if (args.DamageDelta is null)
             return;
@@ -45,6 +46,9 @@ public sealed class SkillDisarmOnDamageEffectSystem : EntitySystem
             return;
 
         if (!_experience.TryGetExperienceEntityFromSkillEntity(entity.Owner, out var experienceEntity))
+            return;
+
+        if (_hands.EnumerateHeld(experienceEntity.Value.Owner).Count() == 0)
             return;
 
         foreach (var hand in _hands.EnumerateHands(experienceEntity.Value.Owner))

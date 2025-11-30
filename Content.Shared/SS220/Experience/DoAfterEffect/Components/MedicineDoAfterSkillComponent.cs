@@ -9,9 +9,9 @@ namespace Content.Shared.SS220.Experience.DoAfterEffect.Components;
 /// </summary>
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class SkillMedicineDoAfterComponent : BaseSkillDoAfterEffectComponent
+public sealed partial class MedicineDoAfterSkillComponent : BaseDoAfterSkillComponent
 {
-    public SkillMedicineDoAfterComponent() : base()
+    public MedicineDoAfterSkillComponent() : base()
     {
         SkillTreeGroup = "Medicine";
     }

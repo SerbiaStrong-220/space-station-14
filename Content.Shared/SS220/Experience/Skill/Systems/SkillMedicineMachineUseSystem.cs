@@ -1,12 +1,11 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.Actions.Events;
-using Content.Shared.SS220.Experience.SkillEffects.Components;
+using Content.Shared.SS220.Experience.Skill.Components;
 using Content.Shared.SS220.Experience.Systems;
 
-namespace Content.Shared.SS220.Experience.SkillEffects.Systems;
+namespace Content.Shared.SS220.Experience.Skill.Systems;
 
-public sealed class SkillMedicineMachineUseSystem : EntitySystem
+public sealed class MedicineMachineUseSkillSystem : EntitySystem
 {
     [Dependency] private readonly ExperienceSystem _experience = default!;
 
@@ -14,20 +13,20 @@ public sealed class SkillMedicineMachineUseSystem : EntitySystem
     {
         base.Initialize();
 
-        _experience.RelayEventToSkillEntity<SkillMedicineMachineUseComponent, GetHealthAnalyzerShuffleChance>();
-        _experience.RelayEventToSkillEntity<SkillMedicineMachineUseComponent, GetDefibrillatorUseChances>();
+        _experience.RelayEventToSkillEntity<MedicineMachineUseSkillComponent, GetHealthAnalyzerShuffleChance>();
+        _experience.RelayEventToSkillEntity<MedicineMachineUseSkillComponent, GetDefibrillatorUseChances>();
 
-        SubscribeLocalEvent<SkillMedicineMachineUseComponent, GetHealthAnalyzerShuffleChance>(OnGetHealthAnalyzerShuffleChance);
-        SubscribeLocalEvent<SkillMedicineMachineUseComponent, GetDefibrillatorUseChances>(OnGetDefibrillatorUseChances);
+        SubscribeLocalEvent<MedicineMachineUseSkillComponent, GetHealthAnalyzerShuffleChance>(OnGetHealthAnalyzerShuffleChance);
+        SubscribeLocalEvent<MedicineMachineUseSkillComponent, GetDefibrillatorUseChances>(OnGetDefibrillatorUseChances);
     }
 
-    private void OnGetHealthAnalyzerShuffleChance(Entity<SkillMedicineMachineUseComponent> entity, ref GetHealthAnalyzerShuffleChance args)
+    private void OnGetHealthAnalyzerShuffleChance(Entity<MedicineMachineUseSkillComponent> entity, ref GetHealthAnalyzerShuffleChance args)
     {
         var newChance = ComputeNewChance(entity.Comp.HealthAnalyzerInfoShuffleChance, args.ShuffleChance);
         args.ShuffleChance = MathF.Max(newChance, 0f);
     }
 
-    private void OnGetDefibrillatorUseChances(Entity<SkillMedicineMachineUseComponent> entity, ref GetDefibrillatorUseChances args)
+    private void OnGetDefibrillatorUseChances(Entity<MedicineMachineUseSkillComponent> entity, ref GetDefibrillatorUseChances args)
     {
         var newFailureChance = ComputeNewChance(entity.Comp.DefibrillatorFailureChance, args.FailureChance);
         var newSelfDamageChance = ComputeNewChance(entity.Comp.DefibrillatorSelfDamageChance, args.SelfDamageChance);

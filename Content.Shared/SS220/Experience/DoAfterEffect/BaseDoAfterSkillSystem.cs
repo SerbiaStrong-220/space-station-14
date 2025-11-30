@@ -14,7 +14,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.Experience.DoAfterEffect;
 
-public abstract partial class BaseSkillDoAfterEffectSystem<T1, T2> : EntitySystem where T1 : BaseSkillDoAfterEffectComponent
+public abstract partial class BaseDoAfterSkillSystem<T1, T2> : EntitySystem where T1 : BaseDoAfterSkillComponent
                                                                                     where T2 : DoAfterEvent
 {
     [Dependency] protected readonly ExperienceSystem Experience = default!;

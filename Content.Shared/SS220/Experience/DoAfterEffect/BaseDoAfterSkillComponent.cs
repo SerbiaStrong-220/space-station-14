@@ -8,7 +8,7 @@ namespace Content.Shared.SS220.Experience.DoAfterEffect;
 /// <summary>
 /// This component hold data for changing DoAfter events parameters started by entity with <see cref="ExperienceComponent"/>
 /// </summary>
-public abstract partial class BaseSkillDoAfterEffectComponent : Component
+public abstract partial class BaseDoAfterSkillComponent : Component
 {
     [DataField]
     [AutoNetworkedField]

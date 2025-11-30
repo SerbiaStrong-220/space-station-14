@@ -2,11 +2,11 @@
 
 using Robust.Shared.GameStates;
 
-namespace Content.Shared.SS220.Experience.SkillEffects.Components;
+namespace Content.Shared.SS220.Experience.Skill.Components;
 
 [RegisterComponent]
-[NetworkedComponent, AutoGenerateComponentState(true)]
-public sealed partial class SkillDisarmChanceChangerComponent : Component
+[NetworkedComponent, AutoGenerateComponentState]
+public sealed partial class DisarmChanceChangerSkillComponent : Component
 {
     [DataField(required: true)]
     [AutoNetworkedField]
