@@ -3,7 +3,7 @@
 using Content.Shared.Examine;
 using Robust.Shared.Containers;
 
-namespace Content.Server.SS220.HiddenDescription;
+namespace Content.Shared.SS220.HiddenDescription;
 
 public sealed class HiddenDescriptionContainerShowerSystem : EntitySystem
 {
