@@ -244,6 +244,8 @@ public sealed class MartialArtsTest
                 }
             }
         }
+
+        await pair.CleanReturnAsync();
     }
 
     private static async Task<(Entity<MartialArtistComponent, MeleeWeaponComponent> Artist, EntityUid Mob)> PrepareMobs(Pair.TestPair pair, EntityCoordinates spawnCoords)
