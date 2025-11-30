@@ -32,7 +32,7 @@ public abstract partial class SharedChatSystem : EntitySystem
     public const char EmotesAltPrefix = '*';
     public const char DefaultChannelKey = 'р';
     //ss220-telepathy
-    public const char TelepathyChannelPrefix = '|';
+    public const char TelepathyChannelPrefix = '=';
 
     public const int VoiceRange = 10; // how far voice goes in world units
     public const int WhisperClearRange = 2; // how far whisper goes while still being understandable, in world units
