@@ -1,0 +1,52 @@
+- type: skill
+  id: ConstructionInitial
+  levelInfo:
+    maximumSublevel: 5
+  levelDescription:
+    skillName: construction-initial-name
+    skillDescription: construction-initial-desc
+  components:
+  - type: ConstructionDoAfterSkill
+    durationScale: 1.3
+    failureChance: 0.6
+    failurePopup: construction-fail-with-reinforced-material
+    complexMaterials:
+    - ReinforcedGlass
+    - ReinforcedPlasmaGlass
+    - ReinforcedUraniumGlass
+    - Plasteel
+
+- type: skill
+  id: ConstructionBase
+  levelInfo:
+    maximumSublevel: 5
+  levelDescription:
+    skillName: construction-base-name
+    skillDescription: construction-base-desc
+  components:
+  - type: ConstructionDoAfterSkill
+    durationScale: 1
+    failureChance: 0.4
+    failurePopup: construction-fail-with-reinforced-material
+
+- type: skill
+  id: ConstructionTrained
+  levelInfo:
+    maximumSublevel: 5
+  levelDescription:
+    skillName: construction-trained-name
+    skillDescription: construction-trained-desc
+  components:
+  - type: ConstructionDoAfterSkill
+    durationScale: 1
+
+- type: skill
+  id: ConstructionProfessional
+  levelInfo:
+    maximumSublevel: 5
+  levelDescription:
+    skillName: construction-professional-name
+    skillDescription: construction-professional-desc
+  components:
+  - type: ConstructionDoAfterSkill
+    durationScale: 0.7
