@@ -15,7 +15,7 @@ public sealed partial class MessengerUiFragment : BoxContainer
     public event Action<uint, string>? OnMessageSendButtonPressed;
     public event Action<uint>? OnHistoryViewPressed;
     public event Action<bool>? OnBackButtonPressed;
-    public event Action<uint, bool>? OnClearChatPressed;
+    public event Action<uint>? OnClearChatPressed;
 
     public uint CurrentChat;
     public string? SearchString;
@@ -33,7 +33,7 @@ public sealed partial class MessengerUiFragment : BoxContainer
 
         ClearCurrentChatButton.OnPressed += _ =>
         {
-            OnClearChatPressed?.Invoke(CurrentChat, false);
+            OnClearChatPressed?.Invoke(CurrentChat);
             MessageInput.Clear();
         };
 

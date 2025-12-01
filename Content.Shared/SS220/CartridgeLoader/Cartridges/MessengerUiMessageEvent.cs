@@ -45,8 +45,7 @@ public sealed class MessengerUpdateStateUiEvent : CartridgeMessageEvent
 }
 
 [Serializable, NetSerializable]
-public sealed class MessengerClearChatUiMessageEvent(uint chatId, bool deleteAll) : CartridgeMessageEvent
+public sealed class MessengerClearChatUiMessageEvent(uint chatId) : CartridgeMessageEvent
 {
     public uint ChatId = chatId;
-    public bool DeleteAll = deleteAll;
 }

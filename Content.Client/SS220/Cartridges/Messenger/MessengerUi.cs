@@ -55,9 +55,9 @@ public sealed partial class MessengerUi : UIFragment
             userInterface.SendMessage(new CartridgeUiMessage(message));
         };
 
-        _fragment.OnClearChatPressed += (chatId, deleteAll) =>
+        _fragment.OnClearChatPressed += chatId =>
         {
-            var message = new MessengerClearChatUiMessageEvent(chatId, deleteAll);
+            var message = new MessengerClearChatUiMessageEvent(chatId);
             userInterface.SendMessage(new CartridgeUiMessage(message));
         };
 
