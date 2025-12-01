@@ -10,5 +10,8 @@ public abstract partial class CombatSequenceCondition
 
     protected IEntityManager Entity => IoCManager.Resolve<IEntityManager>();
 
-    public abstract bool Execute(EntityUid user, EntityUid target, MartialArtistComponent artist);
+    public virtual bool Execute(EntityUid user, EntityUid target, MartialArtistComponent artist)
+    {
+        return true;
+    }
 }

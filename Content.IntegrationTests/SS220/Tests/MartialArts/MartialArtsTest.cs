@@ -24,6 +24,10 @@ public sealed class MartialArtsTest
 - type: martialArt
   id: DummyMartialArt
   name: martial-art-debug
+  effects:
+  - !type:BonusDamageMartialArtEffect
+    bonusDamageTargetUp: 7
+    bonusDamageTargetDown: 5
   sequences:
   - name: martial-art-debug-consequtive-slap
     steps: [ Harm, Grab, Push ]

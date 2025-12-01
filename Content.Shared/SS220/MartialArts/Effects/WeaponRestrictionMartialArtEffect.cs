@@ -35,7 +35,7 @@ public sealed partial class WeaponRestrictionMartialArtEffectSystem : BaseMartia
     }
 }
 
-public sealed partial class WeaponRestrictionMartialArtEffect : BaseMartialArtEffect
+public sealed partial class WeaponRestrictionMartialArtEffect : MartialArtEffectBase<WeaponRestrictionMartialArtEffect>
 {
     [DataField]
     public EntityWhitelist? Whitelist;

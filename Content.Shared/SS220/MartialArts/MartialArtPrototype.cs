@@ -18,5 +18,5 @@ public sealed partial class MartialArtPrototype : IPrototype
     public CombatSequence[] Sequences = [];
 
     [DataField]
-    public BaseMartialArtEffect[] Effects = [];
+    public HashSet<MartialArtEffect> Effects = [];
 }

@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Alert;
+using Content.Shared.CombatMode;
 using Content.Shared.Effects;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory.Events;
@@ -20,7 +21,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.MartialArts;
 
-public sealed partial class MartialArtsSystem : EntitySystem
+public sealed partial class MartialArtsSystem : EntitySystem, IMartialArtEffectEventRaiser
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -29,7 +30,7 @@ public sealed partial class MartialArtsSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
     [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
 
     private static readonly ProtoId<AlertPrototype> CooldownAlert = "MartialArtCooldown";
@@ -42,17 +43,19 @@ public sealed partial class MartialArtsSystem : EntitySystem
         SubscribeLocalEvent<MartialArtistComponent, LightAttackPerformedEvent>(OnHarm);
         SubscribeLocalEvent<MartialArtistComponent, PullStartedMessage>(OnGrab);
 
+        SubscribeLocalEvent<MartialArtistComponent, ComponentShutdown>(OnShutdown);
+
         SubscribeLocalEvent<MartialArtOnTriggerComponent, TriggerEvent>(OnTrigger);
         SubscribeLocalEvent<MartialArtOnEquipComponent, GotEquippedEvent>(OnEquipped);
         SubscribeLocalEvent<MartialArtOnEquipComponent, GotUnequippedEvent>(OnUnequipped);
-        SubscribeLocalEvent<MartialArtOnEquipComponent, ComponentShutdown>(OnShutdown);
+        SubscribeLocalEvent<MartialArtOnEquipComponent, ComponentShutdown>(OnEquipShutdown);
 
         // InitializeEffectsRelay();
     }
 
     #region Public API
 
-    public List<BaseMartialArtEffect> GetMartialArtEffects(EntityUid user, MartialArtistComponent? artist = null)
+    public List<MartialArtEffect> GetMartialArtEffects(EntityUid user, MartialArtistComponent? artist = null)
     {
         if (!Resolve(user, ref artist))
             return [];
@@ -174,6 +177,9 @@ public sealed partial class MartialArtsSystem : EntitySystem
     {
         // cuz this event is raised on both at the time
         if (user != ev.PullerUid)
+            return;
+
+        if (!_combatMode.IsInCombatMode(user))
             return;
 
         if (artist.MartialArt == null)

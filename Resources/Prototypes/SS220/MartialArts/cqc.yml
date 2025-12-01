@@ -1,6 +1,16 @@
 - type: martialArt
   id: CloseQuartersCombat
   name: martial-art-cqc
+  effects:
+  - !type:DisarmChanceMartialArtEffect
+    chance: 0.5
+    toHand: true
+  - !type:LegSweepMartialArtEffect
+    bonusDamageTargetUp: 10
+    knockdownTime: 1
+  - !type:BonusDamageMartialArtEffect
+    bonusDamageTargetUp: 7
+    bonusDamageTargetDown: 5
   sequences:
   - name: martial-art-cqc-slam
     steps: [ Grab, Harm ]
@@ -55,7 +65,7 @@
         damage: 60
         ignoreResist: true
   - name: martial-art-cqc-consequtive-cqc
-    steps: [ Push, Push, Grab ]
+    steps: [ Push, Push, Harm ]
     entry:
       effects:
       - !type:ApplyStaminaCombatEffect

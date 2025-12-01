@@ -56,7 +56,7 @@ public sealed partial class MartialArtsSystem
         comp.Granted = false;
     }
 
-    private void OnShutdown(EntityUid uid, MartialArtOnEquipComponent comp, ComponentShutdown ev)
+    private void OnEquipShutdown(EntityUid uid, MartialArtOnEquipComponent comp, ComponentShutdown ev)
     {
         if (!_timing.IsFirstTimePredicted)
             return;
