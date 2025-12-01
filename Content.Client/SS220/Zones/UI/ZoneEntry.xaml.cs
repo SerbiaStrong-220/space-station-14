@@ -36,7 +36,7 @@ public sealed partial class ZoneEntry : ContainerButton
         BackgroundPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = Color.FromHex("#2F2F3B") };
         AddStyleClass(StyleClassButton);
         DeleteZoneButton.SetClickState(_confirmableButtonStates);
-        DeleteZoneButton.OnConfirmed += () => _zones.ExecuteDeleteZone(ZoneEntity.Owner);
+        DeleteZoneButton.OnConfirmed += () => _zones.DeleteZoneRequest(_entityManager.GetNetEntity(entity));
 
         Refresh();
     }
@@ -44,7 +44,9 @@ public sealed partial class ZoneEntry : ContainerButton
     public void Refresh()
     {
         IDLabel.Text = _entityManager.GetNetEntity(ZoneEntity).ToString();
-        NameLabel.Text = string.IsNullOrEmpty(ZoneEntity.Comp.ZoneParams.Name) ? "Unknown" : ZoneEntity.Comp.ZoneParams.Name;
+        NameLabel.Text = _entityManager.TryGetComponent<MetaDataComponent>(ZoneEntity, out var zoneMeta)
+            ? zoneMeta.EntityName
+            : "Unknown";
     }
 
     public string GetFilteringString()

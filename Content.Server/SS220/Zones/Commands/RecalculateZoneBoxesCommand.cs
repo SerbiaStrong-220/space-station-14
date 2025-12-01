@@ -46,11 +46,13 @@ public sealed partial class RecalculateZoneBoxesCommand : LocalizedCommands
         List<CompletionOption> GetZonesList()
         {
             var result = new List<CompletionOption>();
-            var query = _entityManager.AllEntityQueryEnumerator<ZoneComponent>();
-            while (query.MoveNext(out var uid, out var zoneComp))
+            var query = _entityManager.AllEntityQueryEnumerator<MetaDataComponent, ZoneComponent>();
+            while (query.MoveNext(out var uid, out var metaDataComp, out var zoneComp))
             {
-                var option = new CompletionOption(_entityManager.GetNetEntity(uid).ToString());
-                option.Hint = zoneComp.ZoneParams.Name;
+                var option = new CompletionOption(_entityManager.GetNetEntity(uid).ToString())
+                {
+                    Hint = metaDataComp.EntityName
+                };
                 result.Add(option);
             }
 

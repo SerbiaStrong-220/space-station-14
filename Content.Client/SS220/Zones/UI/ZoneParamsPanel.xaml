@@ -25,14 +25,10 @@
                     </Button>
                 </BoxContainer>
                 <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin ="5 2">
-                    <Label Name="ContainerNetIDLabel" Text="{Loc zone-params-panel-container-net-id-label}" MouseFilter="Stop"/>
-                    <LineEdit Name="ContainerNetIDLineEdit" HorizontalExpand="True" Margin="10 0 0 0"/>
+                    <Label Name="ParentNetIDLabel" Text="{Loc zone-params-panel-container-net-id-label}" MouseFilter="Stop"/>
+                    <LineEdit Name="ParentNetIDLineEdit" HorizontalExpand="True" Margin="10 0 0 0"/>
                 </BoxContainer>
-                <CheckBox Name="AttachToGridCheckbox" Text="{Loc zone-params-panel-attach-to-grid-check-box}" LeftAlign="False" Margin ="5 2" />
-                <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin ="5 2">
-                    <Label Name="CutSpaceOptionLabel" Text="{Loc zone-params-panel-cut-space-option-label}" HorizontalExpand="True" MouseFilter="Stop"/>
-                    <OptionButton Name="CutSpaceOptionSelector" Margin="10 0 0 0"/>
-                </BoxContainer>
+                <CheckBox Name="AttachToLatticeCheckbox" Text="{Loc zone-params-panel-attach-to-grid-check-box}" LeftAlign="False" Margin ="5 2" />
             </BoxContainer>
         </BoxContainer>
         <BoxContainer Orientation="Vertical" VerticalExpand="True" Margin ="5 5" MinSize="250 250">

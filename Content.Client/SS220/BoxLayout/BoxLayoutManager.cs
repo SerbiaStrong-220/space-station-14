@@ -1,6 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Client.SS220.Overlays;
-using Content.Shared.Input;
 using Content.Shared.SS220.Maths;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -155,7 +154,7 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
             if (_entity.TryGetComponent<MapGridComponent>(parent, out var mapGrid))
                 gridSize = mapGrid.TileSize;
 
-            MathHelperExtensions.AttachToGrid(ref box, gridSize);
+            MathHelperExtensions.AttachToLattice(ref box, gridSize);
         }
 
         return new BoxParams()
@@ -241,7 +240,7 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
                 if (_entityManager.TryGetComponent<MapGridComponent>(parent, out var mapGrid))
                     gridSize = mapGrid.TileSize;
 
-                MathHelperExtensions.AttachToGrid(ref box, gridSize);
+                MathHelperExtensions.AttachToLattice(ref box, gridSize);
             }
 
             list.Add(new BoxesOverlay.BoxOverlayData(parent, box, _boxLayoutManager.Color.WithAlpha(0.5f)));

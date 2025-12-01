@@ -2,8 +2,6 @@
 using static Content.Client.SS220.Overlays.BoxesOverlay;
 using Content.Shared.SS220.Zones.Components;
 using Content.Client.SS220.Zones.Systems;
-using Robust.Client.ResourceManagement;
-using Content.Client.Resources;
 using Robust.Client.Graphics;
 using System.Numerics;
 using Content.Shared.SS220.Maths;
@@ -13,7 +11,6 @@ namespace Content.Client.SS220.Zones.Overlays;
 public sealed partial class ZonesBoxesOverlayProvider : BoxesOverlayProvider
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IResourceCache _cache = default!;
 
     private readonly ZonesSystem _zones;
 
@@ -25,26 +22,13 @@ public sealed partial class ZonesBoxesOverlayProvider : BoxesOverlayProvider
     public override List<BoxOverlayData> GetBoxesDatas()
     {
         List<BoxOverlayData> overlayData = [];
-        var query = _entityManager.AllEntityQueryEnumerator<ZonesContainerComponent>();
-        while (query.MoveNext(out var parent, out var container))
+        var query = _entityManager.AllEntityQueryEnumerator<ZoneComponent>();
+        while (query.MoveNext(out var uid, out var zoneComp))
         {
-            foreach (var netZone in container.Zones)
-            {
-                var zone = _entityManager.GetEntity(netZone);
-                if (!_entityManager.TryGetComponent<ZoneComponent>(zone, out var zoneComp))
-                    continue;
-
-                var @params = zoneComp.ZoneParams;
-                var alpha = zone == _zones.ControlWindow.SelectedZoneEntry?.ZoneEntity.Owner ? 0.25f : 0.125F;
-                var color = @params.Color.WithAlpha(alpha);
-                foreach (var box in @params.ActiveRegion)
-                    overlayData.Add(new BoxOverlayData(parent, box, color));
-
-                var cutedTexture = _cache.GetTexture("/Textures/SS220/Interface/Zones/stripes.svg.192dpi.png");
-                foreach (var box in @params.DisabledRegion)
-                    foreach (var atlasedData in GetAtlases(box, cutedTexture))
-                        overlayData.Add(new BoxOverlayData(parent, atlasedData.Box, color, atlasedData.Atlas));
-            }
+            var alpha = uid == _zones.ControlWindow.SelectedZoneEntry?.ZoneEntity.Owner ? 0.25f : 0.125F;
+            var color = zoneComp.Color.WithAlpha(alpha);
+            foreach (var box in zoneComp.Area)
+                overlayData.Add(new BoxOverlayData(uid, box, color));
         }
 
         return overlayData;

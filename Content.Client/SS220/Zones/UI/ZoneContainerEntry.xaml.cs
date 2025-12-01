@@ -13,14 +13,14 @@ using System.Linq;
 namespace Content.Client.SS220.Zones.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class ZoneContainerEntry : BoxContainer
+public sealed partial class ZoneParentEntry : BoxContainer
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IClientConsoleHost _clientConsoleHost = default!;
 
     private readonly ZonesSystem _zones;
 
-    public Entity<ZonesContainerComponent> ZonesContainer;
+    public EntityUid ZonesParent;
 
     public Dictionary<EntityUid, ZoneEntry> ZoneEntries = new();
 
@@ -34,31 +34,31 @@ public sealed partial class ZoneContainerEntry : BoxContainer
         [1] = new ConfirmableButtonState(Loc.GetString("zones-control-are-you-sure"), StyleNano.ButtonColorCautionDefault)
     };
 
-    public ZoneContainerEntry(Entity<ZonesContainerComponent> entity)
+    public ZoneParentEntry(Entity<ZonesContainerComponent> entity)
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
 
         _zones = _entityManager.System<ZonesSystem>();
-        ZonesContainer = entity;
+        ZonesParent = entity;
 
         CollapseButtonTexture.AddStyleClass(OptionButton.StyleClassOptionTriangle);
         ZoneContainerButton.AddStyleClass(ContainerButton.StyleClassButton);
-        ZoneContainerButton.OnPressed += _ => _clientConsoleHost.ExecuteCommand($"vv {_entityManager.GetNetEntity(ZonesContainer)}");
+        ZoneContainerButton.OnPressed += _ => _clientConsoleHost.ExecuteCommand($"vv {_entityManager.GetNetEntity(ZonesParent)}");
         CollapseButton.OnPressed += _ => SetCollapsed(!_collapsed);
         ContainerBackgroundPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = Color.FromHex("#2F2F3B") };
         DeleteContainerButton.SetClickState(_confirmableButtonStates);
-        DeleteContainerButton.OnConfirmed += () => _zones.ExecuteDeleteZonesContainer(ZonesContainer.Owner);
+        DeleteContainerButton.OnConfirmed += () => _zones.ExecuteDeleteZonesContainer(ZonesParent.Owner);
 
         Refresh();
     }
 
     public void Refresh()
     {
-        ContainerIDLabel.Text = _entityManager.GetNetEntity(ZonesContainer).ToString();
+        ContainerIDLabel.Text = _entityManager.GetNetEntity(ZonesParent).ToString();
 
         var name = "Unknown";
-        if (_entityManager.TryGetComponent<MetaDataComponent>(ZonesContainer, out var meta) &&
+        if (_entityManager.TryGetComponent<MetaDataComponent>(ZonesParent, out var meta) &&
             !string.IsNullOrEmpty(meta.EntityName) && !string.IsNullOrWhiteSpace(meta.EntityName))
             name = meta.EntityName;
 
@@ -67,7 +67,7 @@ public sealed partial class ZoneContainerEntry : BoxContainer
         var toDelete = ZoneEntries.ToDictionary();
         var toAdd = new Dictionary<EntityUid, ZoneEntry>();
 
-        foreach (var netEnt in ZonesContainer.Comp.Zones)
+        foreach (var netEnt in ZonesParent.Comp.Zones)
         {
             if (!_entityManager.TryGetEntity(netEnt, out var entity) ||
                 !_entityManager.TryGetComponent<ZoneComponent>(entity, out var zoneComp))

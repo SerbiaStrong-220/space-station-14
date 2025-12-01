@@ -21,7 +21,7 @@ public sealed partial class ZonesControlWindow : DefaultWindow
 
     private readonly ZonesSystem _zones;
 
-    private Dictionary<EntityUid, ZoneContainerEntry> _zoneContainerEntries = new();
+    private Dictionary<EntityUid, ZoneParentEntry> _zoneContainerEntries = new();
 
     public ZoneEntry? SelectedZoneEntry
     {
@@ -71,7 +71,7 @@ public sealed partial class ZonesControlWindow : DefaultWindow
     {
 
         var toDelete = _zoneContainerEntries.ToDictionary();
-        var toAdd = new Dictionary<EntityUid, ZoneContainerEntry>();
+        var toAdd = new Dictionary<EntityUid, ZoneParentEntry>();
 
         var query = _entityManager.AllEntityQueryEnumerator<ZonesContainerComponent>();
         while (query.MoveNext(out var uid, out var zoneData))
@@ -114,9 +114,9 @@ public sealed partial class ZonesControlWindow : DefaultWindow
         _zoneContainerEntries = sorted;
     }
 
-    private ZoneContainerEntry GetZoneContainerEntry(Entity<ZonesContainerComponent> entity)
+    private ZoneParentEntry GetZoneContainerEntry(Entity<ZonesContainerComponent> entity)
     {
-        var entry = new ZoneContainerEntry(entity);
+        var entry = new ZoneParentEntry(entity);
         entry.ZoneEntryToggled += OnZoneEntryToggled;
         return entry;
     }

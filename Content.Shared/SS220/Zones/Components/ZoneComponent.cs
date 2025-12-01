@@ -2,7 +2,6 @@
 using Content.Shared.SS220.Zones.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Zones.Components;
 
@@ -12,27 +11,10 @@ namespace Content.Shared.SS220.Zones.Components;
 /// in which various events can occur, as well as with entities entering, staying inside, and leaving the zone.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(SharedZonesSystem), Other = AccessPermissions.ReadExecute)]
 [EntityCategory("Zones")]
 public sealed partial class ZoneComponent : Component
 {
-    ///// <summary>
-    ///// The entity that this zone is assigned to.
-    ///// Used to determine local coordinates
-    ///// </summary>
-    //public EntityUid Parent = EntityUid.Invalid;
-
-    ///// <summary>
-    ///// Name of the zone
-    ///// </summary>
-    //[DataField, ViewVariables]
-    //public string Name = string.Empty;
-
-    /// <summary>
-    /// ID of the zone's entity prototype
-    /// </summary>
-    //[DataField, ViewVariables(VVAccess.ReadOnly)]
-    //public EntProtoId<ZoneComponent> ProtoID = DefaultZoneId;
-
     /// <summary>
     /// Current color of the zone
     /// </summary>
@@ -45,50 +27,15 @@ public sealed partial class ZoneComponent : Component
     [DataField, AutoNetworkedField]
     public bool AttachToLattice;
 
-    [DataField, AutoNetworkedField]
-    public ZoneSpaceOption SpaceOption = ZoneSpaceOption.None;
-
     /// <summary>
     /// Original size of the zone
     /// </summary>
-    [DataField(readOnly: true), AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public List<Box2> Area = [];
-
-    /// <summary>
-    /// Disabled zone size
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public List<Box2> DisabledArea = [];
-
-    /// <summary>
-    /// The <see cref="Area"/> with the cut-out <see cref="DisabledRegion"/>
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public List<Box2> ActiveArea = [];
 
     /// <summary>
     /// An array of entities currently located in the zone
     /// </summary>
     [ViewVariables]
     public HashSet<EntityUid> EnteredEntities = [];
-}
-
-public enum ZoneSpaceOption
-{
-    None,
-    Disable,
-    Cut
-}
-
-public enum ZoneRegionType
-{
-    Original,
-    Active,
-    Disabled
-}
-
-[Serializable, NetSerializable]
-public sealed class ZoneComponentState(ZoneParamsState state) : IComponentState
-{
-    public readonly ZoneParamsState State = state;
 }

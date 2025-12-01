@@ -1,12 +1,10 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Shared.SS220.Maths;
 using Content.Shared.SS220.Zones.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using System.Linq;
-using System.Numerics;
 
 namespace Content.Shared.SS220.Zones.Systems;
 
@@ -27,9 +25,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
 
         var query = EntityQueryEnumerator<ZoneComponent>();
         while (query.MoveNext(out var uid, out var zoneComp))
-        {
             UpdateInZoneEntities((uid, zoneComp));
-        }
     }
 
     /// <summary>
@@ -46,7 +42,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
 
         var entitiesToLeave = zone.Comp.EnteredEntities.ToHashSet();
         var entitiesToEnter = new HashSet<EntityUid>();
-        var curEntities = GetInZoneEntities(zone, RegionTy.Active);
+        var curEntities = GetInZoneEntities(zone);
         foreach (var entity in curEntities)
         {
             if (entitiesToLeave.Remove(entity))
@@ -74,19 +70,19 @@ public abstract partial class SharedZonesSystem : EntitySystem
     /// Returns entities located in the <paramref name="zone"/>.
     /// The check is performed at the <see cref="TransformComponent.Coordinates"/> of the entities.
     /// </summary>
-    public IEnumerable<EntityUid> GetInZoneEntities(Entity<ZoneComponent> zone, RegionType regionType = RegionType.Original)
+    public IEnumerable<EntityUid> GetInZoneEntities(Entity<ZoneComponent> zone)
     {
         HashSet<EntityUid> entities = [];
-        var container = zone.Comp.ZoneParams.Container;
-        if (!container.IsValid())
+
+        var xform = Transform(zone);
+        if (!IsValidParent(xform.ParentUid))
             return entities;
 
-        var mapId = Transform(container).MapID;
-        foreach (var bounds in GetWorldRegion(zone, regionType))
+        foreach (var bounds in GetWorldArea(zone))
         {
-            foreach (var uid in _entityLookup.GetEntitiesIntersecting(mapId, bounds, LookupFlags.Dynamic | LookupFlags.Static))
+            foreach (var uid in _entityLookup.GetEntitiesIntersecting(xform.MapID, bounds, LookupFlags.Dynamic | LookupFlags.Static))
             {
-                if (InZone(zone, uid, regionType))
+                if (InZone(zone, uid))
                     entities.Add(uid);
             }
         }
@@ -94,73 +90,57 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return entities;
     }
 
-    /// <inheritdoc cref="InZone(Entity{ZoneComponent}, MapCoordinates, RegionType)"/>
-    public bool InZone(Entity<ZoneComponent> zone, EntityUid entity, RegionType regionType = RegionType.Active)
-    {
-        return InZone(zone, _transform.GetMapCoordinates(entity), regionType);
-    }
-
-    /// <inheritdoc cref="InZone(Entity{ZoneComponent}, MapCoordinates, RegionType)"/>
-    public bool InZone(Entity<ZoneComponent> zone, EntityCoordinates point, RegionType regionType = RegionType.Active)
-    {
-        if (zone.Comp.ZoneParams.Container != point.EntityId)
-            return false;
-
-        return InZone(zone, _transform.ToMapCoordinates(point), regionType);
-    }
-
     /// <summary>
     /// Determines whether the <paramref name="point"/> is located inside the <paramref name="zone"/>.
     /// </summary>
-    public bool InZone(Entity<ZoneComponent> zone, MapCoordinates point, RegionType regionType = RegionType.Active)
+    public bool InZone(Entity<ZoneComponent> ent, EntityCoordinates point)
     {
-        var container = zone.Comp.ZoneParams.Container;
-        if (!container.IsValid())
-            return false;
-
-        if (Transform(container).MapID != point.MapId)
-            return false;
-
-        var localPos = Vector2.Transform(point.Position, _transform.GetInvWorldMatrix(container));
-        foreach (var box in zone.Comp.ZoneParams.GetRegion(regionType))
+        if (point.EntityId != ent.Owner)
         {
-            if (box.Contains(localPos))
+            return InZone(ent, _transform.ToMapCoordinates(point));
+        }
+
+        foreach (var box in ent.Comp.Area)
+        {
+            if (box.Contains(point.Position))
                 return true;
         }
 
         return false;
     }
 
-    /// <inheritdoc cref="GetZonesByPoint(MapCoordinates, RegionType)"/>
-    public IEnumerable<Entity<ZoneComponent>> GetZonesByPoint(MapId mapId, Vector2 point, RegionType regionType = RegionType.Active)
+
+    public bool InZone(Entity<ZoneComponent> zone, MapCoordinates point)
     {
-        return GetZonesByPoint(new MapCoordinates(point, mapId), regionType);
+        var xform = Transform(zone);
+        if (xform.MapID != point.MapId)
+            return false;
+
+        return InZone(zone, _transform.ToCoordinates((zone, xform), point));
     }
 
-    /// <inheritdoc cref="GetZonesByPoint(MapCoordinates, RegionType)"/>
-    public IEnumerable<Entity<ZoneComponent>> GetZonesByPoint(EntityCoordinates point, RegionType regionType = RegionType.Active)
+    /// <inheritdoc cref="InZone(Entity{ZoneComponent}, MapCoordinates, RegionType)"/>
+    public bool InZone(Entity<ZoneComponent> zone, EntityUid entity)
     {
-        return GetZonesByPoint(_transform.ToMapCoordinates(point), regionType);
+        return InZone(zone, _transform.GetMapCoordinates(entity));
     }
 
     /// <summary>
     /// Returns zones containing a <paramref name="point"/>
     /// </summary>
-    public IEnumerable<Entity<ZoneComponent>> GetZonesByPoint(MapCoordinates point, RegionType regionType = RegionType.Active)
+    public IEnumerable<Entity<ZoneComponent>> GetZonesByPoint(MapCoordinates point)
     {
-        HashSet<Entity<ZoneComponent>> result = new();
+        HashSet<Entity<ZoneComponent>> result = [];
 
-        var query = AllEntityQuery<ZonesContainerComponent>();
-        while (query.MoveNext(out var uid, out var container))
+        var query = AllEntityQuery<ZoneComponent>();
+        while (query.MoveNext(out var uid, out var comp))
         {
             if (Transform(uid).MapID != point.MapId)
                 continue;
 
-            foreach (var zone in GetZonesFromContainer((uid, container)))
-            {
-                if (InZone(zone, point, regionType))
-                    result.Add(zone);
-            }
+            var zone = (uid, comp);
+            if (InZone(zone, point))
+                result.Add(zone);
         }
 
         return result;
@@ -176,108 +156,30 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return result;
     }
 
-    /// <inheritdoc cref="CutSpace(Entity{MapGridComponent}, IEnumerable{Box2}, out IEnumerable{Box2})"/>
-    public IEnumerable<Box2> CutSpace(NetEntity parent, IEnumerable<Box2> boxes, out IEnumerable<Box2> spaceBoxes)
-    {
-        return CutSpace(GetEntity(parent), boxes, out spaceBoxes);
-    }
+    //public EntityCoordinates? GetRandomCoordinateInZone(Entity<ZoneComponent> zone, RegionType regionType)
+    //{
+    //    var region = zone.Comp.ZoneParams.GetRegion(regionType);
+    //    if (region.Count <= 0)
+    //        return null;
 
-    /// <inheritdoc cref="CutSpace(Entity{MapGridComponent}, IEnumerable{Box2}, out IEnumerable{Box2})"/>
-    public IEnumerable<Box2> CutSpace(EntityUid parent, IEnumerable<Box2> boxes, out IEnumerable<Box2> spaceBoxes)
-    {
-        spaceBoxes = [];
-        if (!TryComp<MapGridComponent>(parent, out var mapGrid))
-            return [];
+    //    var box = _random.Pick(region);
+    //    var x = _random.NextFloat(box.Left, box.Right);
+    //    var y = _random.NextFloat(box.Bottom, box.Top);
 
-        return CutSpace((parent, mapGrid), boxes, out spaceBoxes);
-    }
+    //    return new EntityCoordinates(zone.Comp.ZoneParams.Container, x, y);
+    //}
 
-    /// <summary>
-    /// Cuts out the area located in space from the input <paramref name="boxes"/>
-    /// </summary>
-    public IEnumerable<Box2> CutSpace(Entity<MapGridComponent> grid, IEnumerable<Box2> boxes, out IEnumerable<Box2> spaceBoxes)
-    {
-        spaceBoxes = GetSpaceBoxes(grid, boxes);
-        return MathHelperExtensions.SubstructBoxes(boxes, spaceBoxes);
-    }
-
-    /// <inheritdoc cref="CutSpace(Entity{MapGridComponent}, IEnumerable{Box2}, out IEnumerable{Box2})"/>
-    public void CutSpace(NetEntity parent, ref IEnumerable<Box2> boxes, out IEnumerable<Box2> spaceBoxes)
-    {
-        CutSpace(GetEntity(parent), ref boxes, out spaceBoxes);
-    }
-
-    /// <inheritdoc cref="CutSpace(Entity{MapGridComponent}, IEnumerable{Box2}, out IEnumerable{Box2})"/>
-    public void CutSpace(EntityUid parent, ref IEnumerable<Box2> boxes, out IEnumerable<Box2> spaceBoxes)
-    {
-        spaceBoxes = [];
-        if (!TryComp<MapGridComponent>(parent, out var mapGrid))
-        {
-            boxes = [];
-            return;
-        }
-
-        CutSpace((parent, mapGrid), ref boxes, out spaceBoxes);
-    }
-
-    /// <inheritdoc cref="CutSpace(Entity{MapGridComponent}, IEnumerable{Box2}, out IEnumerable{Box2})"/>
-    public void CutSpace(Entity<MapGridComponent> grid, ref IEnumerable<Box2> boxes, out IEnumerable<Box2> spaceBoxes)
-    {
-        boxes = CutSpace(grid, boxes, out spaceBoxes);
-    }
-
-    /// <inheritdoc cref="GetSpaceBoxes(EntityUid, IEnumerable{Box2})"/>
-    public IEnumerable<Box2> GetSpaceBoxes(NetEntity parent, IEnumerable<Box2> boxes)
-    {
-        return GetSpaceBoxes(GetEntity(parent), boxes);
-    }
-
-    /// <summary>
-    /// Returns the area located in space from the input <paramref name="boxes"/>
-    /// </summary>
-    public IEnumerable<Box2> GetSpaceBoxes(EntityUid parent, IEnumerable<Box2> boxes)
-    {
-        if (!TryComp<MapGridComponent>(parent, out var mapGrid))
-            return boxes;
-
-        var result = new List<Box2>();
-        var gridBoxes = MathHelperExtensions.GetIntersectsGridBoxes(boxes, mapGrid.TileSize);
-        foreach (var gridBox in gridBoxes)
-        {
-            var coords = new EntityCoordinates(parent, gridBox.Center);
-            var tileRef = _map.GetTileRef((parent, mapGrid), coords);
-            if (tileRef.Tile.IsEmpty)
-                result.Add(gridBox);
-        }
-
-        var excess = MathHelperExtensions.SubstructBoxes(result, boxes);
-        return MathHelperExtensions.SubstructBoxes(result, excess);
-    }
-
-    public EntityCoordinates? GetRandomCoordinateInZone(Entity<ZoneComponent> zone, RegionType regionType)
-    {
-        var region = zone.Comp.ZoneParams.GetRegion(regionType);
-        if (region.Count <= 0)
-            return null;
-
-        var box = _random.Pick(region);
-        var x = _random.NextFloat(box.Left, box.Right);
-        var y = _random.NextFloat(box.Bottom, box.Top);
-
-        return new EntityCoordinates(zone.Comp.ZoneParams.Container, x, y);
-    }
-
-    public List<Box2Rotated> GetWorldRegion(Entity<ZoneComponent> zone, RegionType regionType)
+    public List<Box2Rotated> GetWorldArea(Entity<ZoneComponent> ent)
     {
         var world = new List<Box2Rotated>();
-        var local = zone.Comp.ZoneParams.GetRegion(regionType);
-        if (local.Count <= 0)
+        var area = ent.Comp.Area;
+        if (area.Count <= 0)
             return world;
 
-        var container = zone.Comp.ZoneParams.Container;
+        var parent = Transform(ent).ParentUid;
         var xformQuery = GetEntityQuery<TransformComponent>();
-        var (_, containerRot, matrix) = _transform.GetWorldPositionRotationMatrix(container, xformQuery);
-        foreach (var box in local)
+        var (_, containerRot, matrix) = _transform.GetWorldPositionRotationMatrix(parent, xformQuery);
+        foreach (var box in area)
         {
             var worldAABB = matrix.TransformBox(box);
             var worldBounds = new Box2Rotated(worldAABB, containerRot, worldAABB.Center);
@@ -285,25 +187,6 @@ public abstract partial class SharedZonesSystem : EntitySystem
         }
 
         return world;
-    }
-
-    public HashSet<Entity<ZoneComponent>> GetZonesFromContainer(Entity<ZonesContainerComponent> entity)
-    {
-        HashSet<Entity<ZoneComponent>> result = new();
-        foreach (var netUid in entity.Comp.Zones)
-        {
-            var uid = GetEntity(netUid);
-            if (TryComp<ZoneComponent>(uid, out var comp))
-                result.Add((uid, comp));
-        }
-
-        return result;
-    }
-
-    public static bool NeedRecreate(ZoneParams originalParams, ZoneParams newParams)
-    {
-        return newParams.Container != originalParams.Container ||
-            newParams.ProtoID != originalParams.ProtoID;
     }
 
     public IEnumerable<EntityPrototype> EnumerateZonePrototypes()

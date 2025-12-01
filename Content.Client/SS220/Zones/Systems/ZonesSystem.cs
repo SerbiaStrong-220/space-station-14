@@ -8,7 +8,7 @@ using Content.Shared.SS220.Zones;
 using Content.Shared.SS220.Zones.Components;
 using Content.Shared.SS220.Zones.Systems;
 using Robust.Client.Console;
-using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.Zones.Systems;
 
@@ -38,46 +38,11 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         }
 
         _clientAdmin.AdminStatusUpdated += OnAdminStatusUpdated;
-
-        SubscribeLocalEvent<ZoneComponent, ComponentShutdown>(OnZoneShutdown);
-        SubscribeLocalEvent<ZoneComponent, ComponentHandleState>(OnZoneHandleState);
-
-        SubscribeLocalEvent<ZonesContainerComponent, ComponentShutdown>(OnContainerShutdown);
-        SubscribeLocalEvent<ZonesContainerComponent, ComponentHandleState>(OnContainerHandleState);
     }
 
     private void OnAdminStatusUpdated()
     {
         SetOverlay(_overlayProvider.Active);
-    }
-
-    private void OnZoneShutdown(Entity<ZoneComponent> entity, ref ComponentShutdown args)
-    {
-        ControlWindow.RefreshEntries();
-    }
-
-    private void OnZoneHandleState(Entity<ZoneComponent> entity, ref ComponentHandleState args)
-    {
-        if (args.Current is not ZoneComponentState state)
-            return;
-
-        entity.Comp.ZoneParams.HandleState(state.State);
-        ControlWindow.RefreshEntries();
-    }
-
-    private void OnContainerShutdown(Entity<ZonesContainerComponent> entity, ref ComponentShutdown args)
-    {
-        ControlWindow.RefreshEntries();
-    }
-
-
-    private void OnContainerHandleState(Entity<ZonesContainerComponent> entity, ref ComponentHandleState args)
-    {
-        if (args.Current is not ZonesContainerComponentState state)
-            return;
-
-        entity.Comp.Zones = state.Zones;
-        ControlWindow.RefreshEntries();
     }
 
     public void SetOverlay(bool value)
@@ -88,25 +53,33 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         _overlayProvider.Active = value;
     }
 
-    public void ExecuteDeleteZonesContainer(EntityUid container)
+    public void CreateZoneRequest(
+        NetEntity parent,
+        EntProtoId<ZoneComponent> protoId,
+        List<Box2> area,
+        string? name = null,
+        Color? color = null,
+        bool attachToLattice = false)
     {
-        _clientConsoleHost.ExecuteCommand($"zones:delete_container {GetNetEntity(container)}");
+        var msg = new CreateZoneRequestMessage(parent, protoId, area, name, color, attachToLattice);
+        RaiseNetworkEvent(msg);
     }
 
-    public void ExecuteDeleteZone(EntityUid zone)
+    public void ChangeZoneRequest(
+        NetEntity zone,
+        NetEntity? parent = null,
+        List<Box2>? area = null,
+        string? name = null,
+        Color? color = null,
+        bool? attachToLattice = null)
     {
-        _clientConsoleHost.ExecuteCommand($"zones:delete {GetNetEntity(zone)}");
+        var msg = new ChangeZoneRequestMessage(zone, parent, area, name, color, attachToLattice);
+        RaiseNetworkEvent(msg);
     }
 
-    public void ExecuteCreateZone(ZoneParams @params)
+    public void DeleteZoneRequest(NetEntity zone)
     {
-        var tags = string.Join(' ', @params.GetTags());
-        _clientConsoleHost.ExecuteCommand($"zones:create {tags}");
-    }
-
-    public void ExecuteChangeZone(Entity<ZoneComponent> zone, ZoneParams newParams)
-    {
-        var tags = string.Join(' ', newParams.GetTags());
-        _clientConsoleHost.ExecuteCommand($"zones:change {GetNetEntity(zone)} {tags}");
+        var msg = new DeleteZoneRequestMessage(zone);
+        RaiseNetworkEvent(msg);
     }
 }

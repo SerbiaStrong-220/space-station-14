@@ -11,10 +11,10 @@ public interface IBoxLayoutManager
     event Action<BoxParams>? Ended;
     event Action? Cancelled;
 
-    public EntityUid? Parent { get; }
-    public Vector2? Point1 { get; }
-    public Vector2? Point2 { get; }
-    public Color Color { get; }
+    EntityUid? Parent { get; }
+    Vector2? Point1 { get; }
+    Vector2? Point2 { get; }
+    Color Color { get; }
     bool Active { get; }
     bool AttachToGrid { get; set; }
     BoxParams? CurParams { get; }

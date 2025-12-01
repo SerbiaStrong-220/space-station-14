@@ -305,41 +305,6 @@ public static partial class MathHelperExtensions
               box.Contains(inner.TopRight, closedRegion);
     }
 
-    /// <summary>
-    /// Trying to get <see cref="Box2"/> from <paramref name="input"/>
-    /// </summary>
-    /// <remarks>
-    /// For successful parsing, the string must look like this:
-    /// <code>"{<paramref name="left"/>}, {<paramref name="bottom"/>}, {<paramref name="right"/>}, {<paramref name="top"/>}"</code>
-    /// Where <paramref name="left"/>, <paramref name="bottom"/>, <paramref name="right"/>, <paramref name="top"/>
-    /// - is <see langword="float"/> number
-    /// </remarks>
-    public static bool TryParseBox2(string input, [NotNullWhen(true)] out Box2? box)
-    {
-        box = null;
-        var pattern = @"-?\d+(?:[.,]\d+)?";
-        var regex = new Regex(pattern, RegexOptions.Compiled);
-        var matches = regex.Matches(input);
-        if (matches.Count != 4)
-            return false;
-
-        var numbers = new float[4];
-        for (var i = 0; i < matches.Count; i++)
-        {
-            var value = matches[i].Value.Replace(',', '.');
-            if (float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out var number))
-                numbers[i] = number;
-            else
-                return false;
-        }
-
-        if (numbers.Length != 4)
-            return false;
-
-        box = new Box2(numbers[0], numbers[1], numbers[2], numbers[3]);
-        return true;
-    }
-
     /// <inheritdoc cref="AttachToGrid(Box2, Vector2)"/>
     public static Box2 AttachToLattice(Box2 box, float latticeSize = 1f)
     {
