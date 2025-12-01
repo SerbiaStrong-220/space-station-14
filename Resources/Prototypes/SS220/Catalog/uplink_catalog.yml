@@ -420,6 +420,15 @@
     Telecrystal: 6
   cost:
     Telecrystal: 10
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 8
+    MediumDynamic:
+      Telecrystal: 10
+    HardDynamic:
+      Telecrystal: 12
+#ss220 dynamic-price end
   categories:
   - UplinkWeaponry
   conditions:
