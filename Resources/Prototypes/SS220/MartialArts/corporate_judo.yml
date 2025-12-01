@@ -12,7 +12,7 @@
     entry:
       effects:
       - !type:ApplyStatusEffectCombatEffect
-        effect: SlowedDown
+        effect: StatusEffectMartialArtSlowdown
         time: 5
         timeLimit: 30
         refresh: false
@@ -23,8 +23,9 @@
     steps: [ Push, Harm ]
     entry:
       effects:
-      - !type:ApplyStatusEffectCombatEffect
+      - !type:ApplyOldStatusEffectCombatEffect
         effect: TemporaryBlindness
+        component: TemporaryBlindness
         time: 5
         timeLimit: 30
         refresh: false

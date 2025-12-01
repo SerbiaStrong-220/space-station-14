@@ -1,37 +1,55 @@
-// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-
-using Content.Shared.StatusEffect;
+using Content.Shared.StatusEffectNew;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.MartialArts.Sequence.Effects;
 
-// TODO: when wizards will fully migrate to new status effects, we have to migrate this too
 public sealed partial class ApplyStatusEffectCombatEffect : CombatSequenceEffect
 {
     [DataField("effect", required: true)]
-    public ProtoId<StatusEffectPrototype> StatusEffect;
+    public EntProtoId StatusEffect;
 
     [DataField]
     public TimeSpan Time = TimeSpan.FromSeconds(10);
 
+    /// <summary>
+    /// Ignored if refresh is set to true
+    /// </summary>
     [DataField]
     public TimeSpan? TimeLimit = null;
 
     [DataField]
-    public bool Refresh = false;
+    public bool Refresh = true;
 
     public override void Execute(EntityUid user, EntityUid target, MartialArtistComponent artist)
     {
         var status = Entity.System<StatusEffectsSystem>();
 
-        var targetTime = Time;
-
-        if (TimeLimit != null && status.TryGetTime(target, StatusEffect, out var time))
+        if (Refresh)
         {
-            var curTime = time.Value.Item2 - time.Value.Item1;
-            targetTime = curTime + Time < TimeLimit.Value ? curTime + Time : TimeLimit.Value;
+            status.TrySetStatusEffectDuration(target, StatusEffect, Time);
+            return;
         }
 
-        status.TryAddStatusEffect(target, StatusEffect, targetTime, Refresh);
+        var targetTime = Time;
+
+        if (status.TryGetTime(target, StatusEffect, out var effect))
+        {
+            var (_, endTime, startTime) = effect;
+
+            if (endTime == null)
+                return;
+
+            if (startTime == null)
+                return;
+
+            if (TimeLimit != null && !Refresh)
+            {
+                var curTime = endTime.Value - startTime.Value;
+
+                targetTime = curTime + Time < TimeLimit.Value ? curTime + Time : TimeLimit.Value;
+            }
+        }
+
+        status.TryAddStatusEffectDuration(target, StatusEffect, targetTime);
     }
 }
