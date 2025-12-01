@@ -42,6 +42,7 @@ public sealed partial class MartialArtsSystem : EntitySystem, IMartialArtEffectE
         SubscribeLocalEvent<MartialArtistComponent, DisarmAttackPerformedEvent>(OnDisarm);
         SubscribeLocalEvent<MartialArtistComponent, LightAttackPerformedEvent>(OnHarm);
         SubscribeLocalEvent<MartialArtistComponent, PullStartedMessage>(OnGrab);
+        SubscribeLocalEvent<MartialArtistComponent, PullStoppedMessage>(OnPullStopped);
 
         SubscribeLocalEvent<MartialArtistComponent, ComponentShutdown>(OnShutdown);
 
@@ -171,6 +172,17 @@ public sealed partial class MartialArtsSystem : EntitySystem, IMartialArtEffectE
 
         PerformStep(user, target, CombatSequenceStep.Harm, artist);
         _color.RaiseEffect(Color.Red, new List<EntityUid> { target }, Filter.Pvs(user, entityManager: EntityManager));
+    }
+
+    private void OnPullStopped(EntityUid user, MartialArtistComponent artist, ref PullStoppedMessage ev)
+    {
+        if (user != ev.PullerUid)
+            return;
+
+        if (!artist.CurrentSteps.Contains(CombatSequenceStep.Grab))
+            return;
+
+        ResetSequence(user, artist);
     }
 
     private void OnGrab(EntityUid user, MartialArtistComponent artist, ref PullStartedMessage ev)
