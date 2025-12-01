@@ -15,116 +15,66 @@ public sealed class MessengerUiState : BoundUserInterfaceState
 }
 
 [Serializable, NetSerializable]
-public sealed class MessengerChatUiState
+public sealed class MessengerChatUiState(
+    uint id,
+    string? name,
+    MessengerChatKind kind,
+    HashSet<uint> members,
+    HashSet<uint> messages,
+    uint? lastMessage,
+    int sortNumber)
 {
-    public uint Id;
-    public string Name;
-    public MessengerChatKind Kind;
-    public HashSet<uint> Members;
-    public HashSet<uint> Messages;
-    public uint? LastMessage;
-    public int SortNumber;
-    public bool NewMessages;
+    public uint Id = id;
+    public string Name = name ?? "unknown";
+    public MessengerChatKind Kind = kind;
+    public HashSet<uint> Members = members;
+    public HashSet<uint> Messages = messages;
+    public uint? LastMessage = lastMessage;
+    public int SortNumber = sortNumber;
+    public bool NewMessages = true;
     public bool ForceUpdate;
-
-    public MessengerChatUiState(
-        uint id,
-        string? name,
-        MessengerChatKind kind,
-        HashSet<uint> members,
-        HashSet<uint> messages,
-        uint? lastMessage,
-        int sortNumber)
-    {
-        Id = id;
-        Name = name ?? "unknown";
-        Kind = kind;
-        Members = members;
-        Messages = messages;
-        LastMessage = lastMessage;
-        SortNumber = sortNumber;
-        NewMessages = true;
-    }
 }
 
 [Serializable, NetSerializable]
-public sealed class MessengerClientContactUiState : BoundUserInterfaceState
+public sealed class MessengerClientContactUiState(MessengerContact clientContact) : BoundUserInterfaceState
 {
-    public MessengerContact ClientContact;
-
-    public MessengerClientContactUiState(MessengerContact clientContact)
-    {
-        ClientContact = clientContact;
-    }
+    public MessengerContact ClientContact = clientContact;
 }
 
 [Serializable, NetSerializable]
-public sealed class MessengerContactUiState : BoundUserInterfaceState
+public sealed class MessengerContactUiState(List<MessengerContact> contacts) : BoundUserInterfaceState
 {
-    public List<MessengerContact> Contacts;
-
-    public MessengerContactUiState(List<MessengerContact> contacts)
-    {
-        Contacts = contacts;
-    }
+    public List<MessengerContact> Contacts = contacts;
 }
 
 [Serializable, NetSerializable]
-public sealed class MessengerMessagesUiState : BoundUserInterfaceState
+public sealed class MessengerMessagesUiState(List<MessengerMessage> messages) : BoundUserInterfaceState
 {
     // uint - chatId
-    public List<MessengerMessage> Messages;
-
-    public MessengerMessagesUiState(List<MessengerMessage> messages)
-    {
-        Messages = messages;
-    }
+    public List<MessengerMessage> Messages = messages;
 }
 
 [Serializable, NetSerializable]
-public sealed class MessengerChatUpdateUiState : BoundUserInterfaceState
+public sealed class MessengerChatUpdateUiState(List<MessengerChat> chats) : BoundUserInterfaceState
 {
-    public List<MessengerChat> Chats;
-
-    public MessengerChatUpdateUiState(List<MessengerChat> chats)
-    {
-        Chats = chats;
-    }
+    public List<MessengerChat> Chats = chats;
 }
 
 [Serializable, NetSerializable]
-public sealed class MessengerErrorUiState : BoundUserInterfaceState
+public sealed class MessengerErrorUiState(string text) : BoundUserInterfaceState
 {
-    public string Text;
-
-    public MessengerErrorUiState(string text)
-    {
-        Text = text;
-    }
+    public string Text = text;
 }
 
 [Serializable, NetSerializable]
-public sealed class MessengerNewChatMessageUiState : BoundUserInterfaceState
+public sealed class MessengerNewChatMessageUiState(uint chatId, MessengerMessage message) : BoundUserInterfaceState
 {
-    public uint ChatId;
-    public MessengerMessage Message;
-
-    public MessengerNewChatMessageUiState(uint chatId, MessengerMessage message)
-    {
-        ChatId = chatId;
-        Message = message;
-    }
+    public uint ChatId = chatId;
+    public MessengerMessage Message = message;
 }
 
 [Serializable, NetSerializable]
-public sealed class MessengerDeleteMsgInChatUiState : BoundUserInterfaceState
+public sealed class MessengerDeleteMsgInChatUiState(uint? chatId) : BoundUserInterfaceState
 {
-    public uint? ChatId;
-    public bool DeleteAll;
-
-    public MessengerDeleteMsgInChatUiState(uint? chatId, bool deleteAll = false)
-    {
-        ChatId = chatId;
-        DeleteAll = deleteAll;
-    }
+    public uint? ChatId = chatId;
 }

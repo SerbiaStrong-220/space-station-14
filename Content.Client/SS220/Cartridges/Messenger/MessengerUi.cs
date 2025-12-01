@@ -5,10 +5,12 @@ using Content.Client.UserInterface.Fragments;
 using Content.Shared.CartridgeLoader;
 using Content.Shared.SS220.CartridgeLoader.Cartridges;
 using Content.Shared.SS220.Messenger;
+using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 
 namespace Content.Client.SS220.Cartridges.Messenger;
 
+[UsedImplicitly]
 public sealed partial class MessengerUi : UIFragment
 {
     private MessengerUiState? _messengerUiState;
@@ -30,6 +32,7 @@ public sealed partial class MessengerUi : UIFragment
     {
         _currentView = ChatsList;
         _fragment = new MessengerUiFragment();
+
         _fragment.ChatsSearch.OnTextChanged += args =>
         {
             _fragment.SearchString = string.IsNullOrWhiteSpace(args.Text) ? null : args.Text.ToLower();
@@ -49,15 +52,13 @@ public sealed partial class MessengerUi : UIFragment
         _fragment.OnMessageSendButtonPressed += (chatId, text) =>
         {
             var message = new MessengerSendMessageUiEvent(chatId, text);
-            var ms = new CartridgeUiMessage(message);
-            userInterface.SendMessage(ms);
+            userInterface.SendMessage(new CartridgeUiMessage(message));
         };
 
         _fragment.OnClearChatPressed += (chatId, deleteAll) =>
         {
             var message = new MessengerClearChatUiMessageEvent(chatId, deleteAll);
-            var ms = new CartridgeUiMessage(message);
-            userInterface.SendMessage(ms);
+            userInterface.SendMessage(new CartridgeUiMessage(message));
         };
 
         _fragment.OnBackButtonPressed += _ =>
@@ -65,26 +66,16 @@ public sealed partial class MessengerUi : UIFragment
             _fragment.SearchString = null;
 
             if (_currentView != ChatsList)
-            {
                 _currentView--;
-            }
 
-            switch (_currentView)
-            {
-                case ChatsList:
-                {
-                    if (_messengerUiState != null)
-                        _fragment?.UpdateChatsState(_messengerUiState);
-                    break;
-                }
-            }
+            if (_currentView == ChatsList && _messengerUiState != null)
+                _fragment.UpdateChatsState(_messengerUiState);
         };
 
         if (_messengerUiState == null)
         {
             var message = new MessengerUpdateStateUiEvent(true);
-            var ms = new CartridgeUiMessage(message);
-            userInterface.SendMessage(ms);
+            userInterface.SendMessage(new CartridgeUiMessage(message));
             return;
         }
 
@@ -118,7 +109,6 @@ public sealed partial class MessengerUi : UIFragment
             _messengerUiState!.Messages[messengerMessage.Id] = messengerMessage;
 
             var chat = GetOrCreateChat(messengerMessage.ChatId);
-
             chat.Messages.Add(messengerMessage.Id);
             chat.LastMessage = chat.Messages.Max();
         }
@@ -140,21 +130,9 @@ public sealed partial class MessengerUi : UIFragment
         if (state.ChatId == null)
             return;
 
-        _messengerUiState!.Chats[state.ChatId.Value].Messages.Clear();
-
         var chat = GetOrCreateChat(state.ChatId.Value);
-
         chat.Messages.Clear();
         chat.LastMessage = null;
-    }
-
-    private void DeleteAllMsgInAllChatsState(MessengerDeleteMsgInChatUiState state)
-    {
-        foreach (var chat in _messengerUiState!.Chats)
-        {
-            chat.Value.Messages.Clear();
-            chat.Value.LastMessage = null;
-        }
     }
 
     private void ChatUpdateState(MessengerChatUpdateUiState state)
@@ -168,7 +146,7 @@ public sealed partial class MessengerUi : UIFragment
                 chatUi.LastMessage = messengerChat.LastMessageId ?? chatUi.LastMessage;
                 chatUi.Messages.UnionWith(messengerChat.MessagesId);
                 chatUi.NewMessages = true;
-                break;
+                continue;
             }
 
             var newState = new MessengerChatUiState(
@@ -182,7 +160,6 @@ public sealed partial class MessengerUi : UIFragment
 
             _messengerUiState.Chats.Add(messengerChat.Id, newState);
         }
-
     }
 
     private void ErrorUiState(MessengerErrorUiState state)
@@ -194,10 +171,15 @@ public sealed partial class MessengerUi : UIFragment
     {
         _errorText = null;
 
-        if (state is MessengerUiState uiState)
+        switch (state)
         {
-            DefaultState(uiState);
-            return;
+            case MessengerUiState uiState:
+                DefaultState(uiState);
+                return;
+            case MessengerErrorUiState errorUiState:
+                ErrorUiState(errorUiState);
+                UpdateUiState();
+                return;
         }
 
         if (_messengerUiState == null)
@@ -208,31 +190,25 @@ public sealed partial class MessengerUi : UIFragment
             case MessengerClientContactUiState clientContactUiState:
                 ClientContactState(clientContactUiState);
                 break;
+
             case MessengerContactUiState contactUiState:
                 ContactUiState(contactUiState);
                 break;
+
             case MessengerMessagesUiState messagesUiState:
                 MessagesUiState(messagesUiState);
                 break;
+
             case MessengerNewChatMessageUiState newChatMessageUiState:
                 NewChatMessageState(newChatMessageUiState);
                 break;
-            case MessengerDeleteMsgInChatUiState deleteMsgInChatUiState:
-            {
-                if (deleteMsgInChatUiState.DeleteAll)
-                {
-                    DeleteAllMsgInAllChatsState(deleteMsgInChatUiState);
-                    break;
-                }
 
+            case MessengerDeleteMsgInChatUiState deleteMsgInChatUiState:
                 DeleteMsgInChatState(deleteMsgInChatUiState);
                 break;
-            }
+
             case MessengerChatUpdateUiState chatUpdateUiState:
                 ChatUpdateState(chatUpdateUiState);
-                break;
-            case MessengerErrorUiState errorUiState:
-                ErrorUiState(errorUiState);
                 break;
         }
 
@@ -247,45 +223,45 @@ public sealed partial class MessengerUi : UIFragment
                 chatId,
                 null,
                 MessengerChatKind.Contact,
-                new HashSet<uint>(),
-                new HashSet<uint>(),
+                [],
+                [],
                 null,
                 0);
         }
 
-        if (!_messengerUiState.Chats.TryGetValue(chatId, out var chat))
+        if (_messengerUiState.Chats.TryGetValue(chatId, out var chat))
+            return chat;
+
+        chat = new MessengerChatUiState(
+            chatId,
+            null,
+            MessengerChatKind.Contact,
+            [],
+            [],
+            null,
+            _messengerUiState.Chats.Count)
         {
-            chat = new MessengerChatUiState(chatId,
-                null,
-                MessengerChatKind.Contact,
-                new HashSet<uint>(),
-                new HashSet<uint>(),
-                null,
-                _messengerUiState.Chats.Count);
+            ForceUpdate = true,
+        };
 
-            chat.ForceUpdate = true;
-
-            _messengerUiState.Chats.Add(chatId, chat);
-        }
+        _messengerUiState.Chats.Add(chatId, chat);
 
         return chat;
     }
 
     private void ValidateState(BoundUserInterface userInterface)
     {
+        if (_messengerUiState == null)
+            return;
+
         var receivedContacts = new HashSet<uint>();
         var receivedMessages = new HashSet<uint>();
         var receivedChats = new HashSet<uint>();
 
-        if (_messengerUiState == null)
-            return;
-
         foreach (var (chatId, chat) in _messengerUiState.Chats)
         {
             if (!chat.ForceUpdate)
-            {
                 receivedChats.Add(chatId);
-            }
 
             chat.ForceUpdate = false;
         }
@@ -306,19 +282,17 @@ public sealed partial class MessengerUi : UIFragment
 
     private void UpdateUiState()
     {
-        switch (_currentView)
+        if (_messengerUiState != null)
         {
-            case ChatsList:
+            switch (_currentView)
             {
-                if (_messengerUiState != null)
+                case ChatsList:
                     _fragment?.UpdateChatsState(_messengerUiState);
-                break;
-            }
-            case ChatHistory:
-            {
-                if (_messengerUiState != null)
+                    break;
+
+                case ChatHistory:
                     _fragment?.UpdateChatHistoryState(_messengerUiState);
-                break;
+                    break;
             }
         }
 
@@ -333,7 +307,7 @@ public sealed partial class MessengerUi : UIFragment
 
         var chats = _messengerUiState.Chats;
 
-        if (!chats.ContainsKey(chatId))
+        if (!chats.TryGetValue(chatId, out var chatToMove))
             return;
 
         var favoriteId = _messengerUiState.Chats
@@ -341,7 +315,6 @@ public sealed partial class MessengerUi : UIFragment
             .Select(pair => pair.Key)
             .FirstOrDefault();
 
-        var chatToMove = chats[chatId];
         if (chatToMove.Id == favoriteId)
             return;
 
@@ -353,5 +326,4 @@ public sealed partial class MessengerUi : UIFragment
 
         chatToMove.SortNumber = 1;
     }
-
 }

@@ -9,206 +9,191 @@ namespace Content.Server.SS220.Messenger;
 [RegisterComponent]
 public sealed partial class MessengerServerComponent : Component
 {
-    [DataField(("serverName"))] public string Name = "";
+    [DataField("serverName")]
+    public string Name = "";
 
     // store EntityUid as authentication entity to contactKey
-    private readonly Dictionary<EntityUid, ContactKey> _clientToContact = new();
+    private readonly Dictionary<EntityUid, ContactId> _clientToContact = new();
 
     // store contact info by contactKey
-    private readonly SequenceDataStore<ContactKey, MessengerContact> _contactsStore = new();
+    private readonly SequencedStore<ContactId, MessengerContact> _contactsStore = new();
 
-    // store chat info by chat key
-    private readonly SequenceDataStore<ChatKey, MessengerChat> _chatsStore = new();
+    // store chat info by chat id
+    private readonly SequencedStore<ChatId, MessengerChat> _chatsStore = new();
 
-    // store message info by message key
-    private readonly SequenceDataStore<MessageKey, MessengerMessage> _messagesStore = new();
+    // store message info by message id
+    private readonly SequencedStore<MessageId, MessengerMessage> _messagesStore = new();
 
     // store chats which can find any contact connected to server
-    private readonly HashSet<ChatKey> _publicChats = new();
+    private readonly HashSet<ChatId> _publicChats = new();
 
     // store chats which can find only invited contact, like private chats
-    private readonly SequenceDataStore<ContactKey, HashSet<ChatKey>> _privateChats = new();
+    private readonly SequencedStore<ContactId, HashSet<ChatId>> _privateChats = new();
 
-    public List<KeyValuePair<EntityUid, ContactKey>> GetClientToContact()
+    public List<KeyValuePair<EntityUid, ContactId>> GetClientToContact()
     {
-        return new List<KeyValuePair<EntityUid, ContactKey>>(_clientToContact);
+        return [.._clientToContact];
     }
 
-    public bool GetContactKey(EntityUid client, [NotNullWhen(true)] out ContactKey? key)
+    public bool GetContactId(EntityUid client, [NotNullWhen(true)] out ContactId? id)
     {
-        key = null;
+        id = null;
 
         if (!_clientToContact.TryGetValue(client, out var value))
             return false;
 
-        key = value;
-
+        id = value;
         return true;
     }
 
-    public MessengerContact GetContact(ContactKey key)
+    public MessengerContact GetContact(ContactId id)
     {
-        var messengerContact = _contactsStore.Get(key);
-        if (messengerContact == null)
-            return new();
-        messengerContact.Id = key.Id;
-        return messengerContact;
+        var contact = _contactsStore.Get(id);
+        if (contact == null)
+            return new MessengerContact();
+
+        contact.Id = id.Id;
+        return contact;
     }
 
-    public HashSet<ChatKey> GetPrivateChats(ContactKey key)
+    public HashSet<ChatId> GetPrivateChats(ContactId contact)
     {
-        var chats = _privateChats.Get(key);
-
-        return chats == null ? new() : new HashSet<ChatKey>(chats);
+        var chats = _privateChats.Get(contact);
+        return chats == null ? [] : [..chats];
     }
 
-    public HashSet<ChatKey> GetPublicChats()
+    public HashSet<ChatId> GetPublicChats()
     {
-        return new HashSet<ChatKey>(_publicChats);
+        return [.._publicChats];
     }
 
-    public ContactKey AddEntityContact(EntityUid uid, string name, string netAddress)
+    public ContactId AddEntityContact(EntityUid uid, string name, string netAddress)
     {
-        if (_clientToContact.TryGetValue(uid, out var contact))
-            return contact;
+        if (_clientToContact.TryGetValue(uid, out var existing))
+            return existing;
 
-        var contactKey = _contactsStore.Add(new MessengerContact(name, netAddress));
-        _clientToContact.Add(uid, contactKey);
+        var contactId = _contactsStore.Add(new MessengerContact(name, netAddress));
+        _clientToContact.Add(uid, contactId);
 
-        return contactKey;
+        return contactId;
     }
 
-    public void UpdateContactName(ContactKey key, string? name)
+    public void UpdateContactName(ContactId id, string? name)
     {
         if (name == null)
             return;
 
-        var contact = _contactsStore.Get(key);
-
+        var contact = _contactsStore.Get(id);
         if (contact == null)
             return;
 
         contact.Name = name;
     }
 
-    public ChatKey AddChat(MessengerChat chat)
+    public ChatId AddChat(MessengerChat chat)
     {
         return _chatsStore.Add(chat);
     }
 
-    public MessengerChat GetChat(ChatKey key)
+    public MessengerChat GetChat(ChatId id)
     {
-        var chat = _chatsStore.Get(key);
-
+        var chat = _chatsStore.Get(id);
         if (chat == null)
-            return new();
+            return new MessengerChat();
 
-        chat.Id = key.Id;
+        chat.Id = id.Id;
         return chat;
     }
 
-    public MessageKey AddMessage(MessengerMessage message)
+    public MessageId AddMessage(MessengerMessage message)
     {
         return _messagesStore.Add(message);
     }
 
-    public bool DeleteMessage(MessageKey key)
+    public bool DeleteMessage(MessageId id)
     {
-        return _messagesStore.Delete(key);
+        return _messagesStore.Delete(id);
     }
 
     public void ClearAllMessages()
     {
-        foreach (var key in _messagesStore.GetAllKeys())
+        foreach (var msgId in _messagesStore.GetAllKeys())
         {
-            _messagesStore.Delete(key);
+            _messagesStore.Delete(msgId);
         }
 
-        foreach (var chatKey in _chatsStore.GetAllKeys())
+        foreach (var chatId in _chatsStore.GetAllKeys())
         {
-            var chat = _chatsStore.Get(chatKey);
+            var chat = _chatsStore.Get(chatId);
             if (chat == null)
                 continue;
 
             chat.MessagesId.Clear();
             chat.LastMessageId = null;
 
-            _chatsStore.Set(chatKey, chat);
+            _chatsStore.Set(chatId, chat);
         }
     }
 
-    public MessengerMessage GetMessage(MessageKey key)
+    public MessengerMessage GetMessage(MessageId id)
     {
-        var message = _messagesStore.Get(key);
-
+        var message = _messagesStore.Get(id);
         if (message == null)
-            return new();
+            return new MessengerMessage();
 
-        message.Id = key.Id;
+        message.Id = id.Id;
         return message;
     }
 
-    public void AddPublicChat(ChatKey chatKey)
+    public void AddPublicChat(ChatId chatId)
     {
-        _publicChats.Add(chatKey);
+        _publicChats.Add(chatId);
     }
 
-    public void AddPrivateChats(ContactKey contact, List<ChatKey> chats)
+    public void AddPrivateChats(ContactId contact, List<ChatId> chats)
     {
-        AddKeyToHasSet(_privateChats, contact, chats);
+        AddKeyToHashSet(_privateChats, contact, chats);
     }
 
-    public void AddPrivateChats(ContactKey contact, ChatKey chat)
+    public void AddPrivateChats(ContactId contact, ChatId chat)
     {
-        AddPrivateChats(contact, new List<ChatKey> { chat });
+        AddPrivateChats(contact, [chat]);
     }
 
-    private void AddKeyToHasSet<TKey, TValue>(SequenceDataStore<TKey, HashSet<TValue>> storage,
+    private void AddKeyToHashSet<TKey, TValue>(
+        SequencedStore<TKey, HashSet<TValue>> storage,
         TKey key,
-        List<TValue> list) where TKey : IId, new()
+        List<TValue> list)
+        where TKey : ISequenceKey, new()
     {
-        var existList = storage.Get(key);
+        var existing = storage.Get(key);
 
-        if (existList == null)
+        if (existing == null)
         {
-            storage.Set(key, new HashSet<TValue>(list));
+            storage.Set(key, [..list]);
             return;
         }
 
-        existList.UnionWith(list);
-
-        storage.Set(key, existList);
+        existing.UnionWith(list);
+        storage.Set(key, existing);
     }
 }
 
-public sealed class ContactKey : Key
+public interface ISequenceKey
 {
-    public ContactKey() { }
-    public ContactKey(uint id) : base(id) { }
+    uint Id { get; init; }
 }
 
-public sealed class MessageKey : Key
-{
-    public MessageKey() { }
-    public MessageKey(uint id) : base(id) { }
-}
-
-public sealed class ChatKey : Key
-{
-    public ChatKey() { }
-    public ChatKey(uint id) : base(id) { }
-}
-
-public abstract class Key : IId
+public abstract class SequenceKey : ISequenceKey
 {
     public uint Id { get; init; }
 
-    protected Key()
+    protected SequenceKey()
     {
         Id = 0;
     }
 
-    protected Key(uint id)
+    protected SequenceKey(uint id)
     {
         Id = id;
     }
@@ -220,35 +205,49 @@ public abstract class Key : IId
 
     public override bool Equals(object? obj)
     {
-        return obj is Key key && Equals(key);
-    }
-
-    private bool Equals(Key p)
-    {
-        return Id == p.Id;
+        return obj is SequenceKey other && Id == other.Id;
     }
 }
 
-public sealed class SequenceDataStore<TKey, TValue> where TKey : IId, new() where TValue : notnull, new()
+public sealed class ContactId : SequenceKey
+{
+    public ContactId() { }
+    public ContactId(uint id) : base(id) { }
+}
+
+public sealed class MessageId : SequenceKey
+{
+    public MessageId() { }
+    public MessageId(uint id) : base(id) { }
+}
+
+public sealed class ChatId : SequenceKey
+{
+    public ChatId() { }
+    public ChatId(uint id) : base(id) { }
+}
+
+public sealed class SequencedStore<TKey, TValue>
+    where TKey : ISequenceKey, new()
+    where TValue : notnull
 {
     private uint _sequence;
     private readonly Dictionary<uint, TValue> _storage = new();
 
     public TKey Add(TValue value)
     {
-        if (!_storage.TryAdd(_sequence, value))
+        while (!_storage.TryAdd(_sequence, value))
         {
             _sequence++;
-            Add(value);
         }
 
-        var t = new TKey
+        var key = new TKey
         {
-            Id = _sequence
+            Id = _sequence,
         };
 
         _sequence++;
-        return t;
+        return key;
     }
 
     public void Set(TKey key, TValue value)
@@ -258,7 +257,9 @@ public sealed class SequenceDataStore<TKey, TValue> where TKey : IId, new() wher
 
     public TValue? Get(TKey key)
     {
-        return !_storage.TryGetValue(key.Id, out var value) ? default : value;
+        return _storage.TryGetValue(key.Id, out var value)
+            ? value
+            : default;
     }
 
     public bool Delete(TKey key)
@@ -268,12 +269,9 @@ public sealed class SequenceDataStore<TKey, TValue> where TKey : IId, new() wher
 
     public IEnumerable<TKey> GetAllKeys()
     {
-        return _storage.Keys.Select(id => new TKey { Id = id });
+        foreach (var id in _storage.Keys)
+        {
+            yield return new TKey { Id = id };
+        }
     }
-
-}
-
-public interface IId
-{
-    public uint Id { get; init; }
 }

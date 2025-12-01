@@ -6,16 +6,10 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.SS220.CartridgeLoader.Cartridges;
 
 [Serializable, NetSerializable]
-public sealed class MessengerSendMessageUiEvent : CartridgeMessageEvent
+public sealed class MessengerSendMessageUiEvent(uint chatId, string messageText) : CartridgeMessageEvent
 {
-    public readonly uint ChatId;
-    public readonly string MessageText;
-
-    public MessengerSendMessageUiEvent(uint chatId, string messageText)
-    {
-        ChatId = chatId;
-        MessageText = messageText;
-    }
+    public readonly uint ChatId = chatId;
+    public readonly string MessageText = messageText;
 }
 
 [Serializable, NetSerializable]
@@ -51,14 +45,8 @@ public sealed class MessengerUpdateStateUiEvent : CartridgeMessageEvent
 }
 
 [Serializable, NetSerializable]
-public sealed class MessengerClearChatUiMessageEvent : CartridgeMessageEvent
+public sealed class MessengerClearChatUiMessageEvent(uint chatId, bool deleteAll) : CartridgeMessageEvent
 {
-    public uint ChatId;
-    public bool DeleteAll;
-
-    public MessengerClearChatUiMessageEvent(uint chatId, bool deleteAll)
-    {
-        ChatId = chatId;
-        DeleteAll = deleteAll;
-    }
+    public uint ChatId = chatId;
+    public bool DeleteAll = deleteAll;
 }

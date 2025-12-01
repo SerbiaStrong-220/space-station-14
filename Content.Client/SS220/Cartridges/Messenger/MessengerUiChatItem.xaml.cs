@@ -9,6 +9,11 @@ namespace Content.Client.SS220.Cartridges.Messenger;
 [GenerateTypedNameReferences]
 public sealed partial class MessengerUiChatItem : BoxContainer
 {
+    public MessengerUiChatItem()
+    {
+        RobustXamlLoader.Load(this);
+    }
+
     public MessengerUiChatItem(
         string chatName,
         string lastMessage,
@@ -22,11 +27,6 @@ public sealed partial class MessengerUiChatItem : BoxContainer
         LastMessage.Text = Truncate(lastMessage, 40);
 
         OpenChatHistoryButton.OnPressed += onPressedOpenChatHistory;
-    }
-
-    public MessengerUiChatItem()
-    {
-        RobustXamlLoader.Load(this);
     }
 
     private static string? Truncate(string? value, int maxLength, string truncationSuffix = "…")

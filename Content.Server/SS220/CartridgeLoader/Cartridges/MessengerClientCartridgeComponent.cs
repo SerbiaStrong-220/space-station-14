@@ -19,6 +19,9 @@ public sealed partial class MessengerClientCartridgeComponent : Component
 
     // When true, component try to send full state of messenger
     public bool SendState;
+
+    public TimeSpan NextServerScanTime;
+    public TimeSpan ServerScanInterval = TimeSpan.FromSeconds(5);
 }
 
 public sealed class ServerInfo

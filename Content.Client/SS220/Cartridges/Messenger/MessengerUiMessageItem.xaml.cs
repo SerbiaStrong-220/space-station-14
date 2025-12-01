@@ -10,15 +10,20 @@ namespace Content.Client.SS220.Cartridges.Messenger;
 [GenerateTypedNameReferences]
 public sealed partial class MessengerUiMessageItem : BoxContainer
 {
-    private static readonly StyleBoxFlat _styleBoxRight = new()
+    private static readonly StyleBoxFlat StyleBoxRight = new()
     {
         BackgroundColor = Color.FromHex("#03adfc20"),
     };
 
-    private static readonly StyleBoxFlat _styleBoxLeft = new()
+    private static readonly StyleBoxFlat StyleBoxLeft = new()
     {
         BackgroundColor = Color.FromHex("#59595920"),
     };
+
+    public MessengerUiMessageItem()
+    {
+        RobustXamlLoader.Load(this);
+    }
 
     public MessengerUiMessageItem(string message, TimeSpan timeSpan, Label.AlignMode alignMode, HAlignment hAlignment)
     {
@@ -26,10 +31,10 @@ public sealed partial class MessengerUiMessageItem : BoxContainer
         switch (hAlignment)
         {
             case HAlignment.Right:
-                MessageContainer.PanelOverride = _styleBoxRight;
+                MessageContainer.PanelOverride = StyleBoxRight;
                 break;
             case HAlignment.Left:
-                MessageContainer.PanelOverride = _styleBoxLeft;
+                MessageContainer.PanelOverride = StyleBoxLeft;
                 break;
         }
 
@@ -39,10 +44,5 @@ public sealed partial class MessengerUiMessageItem : BoxContainer
 
         TimeLabel.Text = $"{timeSpan:hh\\:mm\\:ss}";
         TimeLabel.Align = alignMode;
-    }
-
-    public MessengerUiMessageItem()
-    {
-        RobustXamlLoader.Load(this);
     }
 }

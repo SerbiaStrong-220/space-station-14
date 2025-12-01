@@ -28,21 +28,13 @@ public sealed partial class MessengerUiFragment : BoxContainer
         HorizontalExpand = true;
         VerticalExpand = true;
 
-        SendButton.OnPressed += _ =>
-        {
-            OnMessageSendButtonPressed?.Invoke(CurrentChat, MessageInput.Text);
-            MessageInput.Clear();
-        };
+        SendButton.OnPressed += _ => SendMessage();
+        MessageInput.OnTextEntered += _ => SendMessage();
 
         ClearCurrentChatButton.OnPressed += _ =>
         {
             OnClearChatPressed?.Invoke(CurrentChat, false);
             MessageInput.Clear();
-        };
-
-        ClearAllChatButton.OnPressed += _ =>
-        {
-            OnClearChatPressed?.Invoke(CurrentChat, true);
         };
 
         BackButton.OnPressed += _ =>
@@ -51,16 +43,26 @@ public sealed partial class MessengerUiFragment : BoxContainer
         };
     }
 
+    private void SendMessage()
+    {
+        OnMessageSendButtonPressed?.Invoke(CurrentChat, MessageInput.Text);
+        MessageInput.Clear();
+    }
+
     public void UpdateChatsState(MessengerUiState messengerUiState)
     {
         ChatsContainer.RemoveAllChildren();
 
-        var chatsSorted = messengerUiState.Chats.Select(val => val.Value).OrderBy(c => c.SortNumber).ToList();
+        var chatsSorted = messengerUiState.Chats
+            .Select(pair => pair.Value)
+            .OrderBy(c => c.SortNumber)
+            .ToList();
 
-        if (SearchString != null)
+        if (!string.IsNullOrWhiteSpace(SearchString))
         {
             chatsSorted = chatsSorted
-                .Where(messengerChatUiState => messengerChatUiState.Name.ToLower().Contains(SearchString)).ToList();
+                .Where(chat => chat.Name.Contains(SearchString, StringComparison.OrdinalIgnoreCase))
+                .ToList();
         }
 
         foreach (var chat in chatsSorted)
@@ -69,10 +71,10 @@ public sealed partial class MessengerUiFragment : BoxContainer
             var chatName = ChatName(messengerUiState, chat);
 
             if (chat.LastMessage != null &&
-                messengerUiState.Messages.TryGetValue(chat.LastMessage.Value, out var lastMsg))
+                messengerUiState.Messages.TryGetValue(chat.LastMessage.Value, out var lastMsg) &&
+                !string.IsNullOrEmpty(lastMsg.Text))
             {
-                if (lastMsg.Text != string.Empty)
-                    lastMessage = lastMsg.Text;
+                lastMessage = lastMsg.Text;
             }
 
             ChatsContainer.AddChild(new MessengerUiChatItem(
@@ -107,8 +109,8 @@ public sealed partial class MessengerUiFragment : BoxContainer
             if (!messengerUiState.Contacts.TryGetValue(chatMember, out var contact))
                 continue;
 
-            if (contact.Name != null)
-                return contact.Name;
+            if (!string.IsNullOrEmpty(contact.Name))
+                return contact.Name!;
         }
 
         return chat.Name;
@@ -127,28 +129,23 @@ public sealed partial class MessengerUiFragment : BoxContainer
                 if (!messengerUiState.Messages.TryGetValue(msgId, out var message))
                     continue;
 
-                if (SearchString != null && !message.Text.ToLower().Contains(SearchString))
+                if (!string.IsNullOrWhiteSpace(SearchString) &&
+                    !message.Text.Contains(SearchString!, StringComparison.OrdinalIgnoreCase))
+                {
                     continue;
-
-                if (message.FromContactId == messengerUiState.ClientContact.Id)
-                {
-                    var messageItem = new MessengerUiMessageItem(
-                        message.Text,
-                        message.Time,
-                        Label.AlignMode.Right,
-                        HAlignment.Right);
-
-                    ChatsContainer.AddChild(messageItem);
                 }
-                else
-                {
-                    var messageItem = new MessengerUiMessageItem(message.Text,
-                        message.Time,
-                        Label.AlignMode.Left,
-                        HAlignment.Left);
 
-                    ChatsContainer.AddChild(messageItem);
-                }
+                var fromClient = message.FromContactId == messengerUiState.ClientContact.Id;
+                var align = fromClient ? Label.AlignMode.Right : Label.AlignMode.Left;
+                var hAlign = fromClient ? HAlignment.Right : HAlignment.Left;
+
+                var messageItem = new MessengerUiMessageItem(
+                    message.Text,
+                    message.Time,
+                    align,
+                    hAlign);
+
+                ChatsContainer.AddChild(messageItem);
             }
 
             ChatNameLabel.Text = ChatName(messengerUiState, chat);
@@ -171,6 +168,7 @@ public sealed partial class MessengerUiFragment : BoxContainer
         MessageInput.Visible = false;
         SendButton.Visible = false;
         ClearCurrentChatButton.Visible = false;
+
         ErrorLabel.Visible = true;
         ErrorLabel.Text = err;
     }

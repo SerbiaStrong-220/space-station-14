@@ -1,21 +1,25 @@
 <messenger:MessengerUiFragment xmlns:messenger="clr-namespace:Content.Client.SS220.Cartridges.Messenger"
                                xmlns="https://spacestation14.io" Margin="1 0 2 0">
-    <PanelContainer StyleClasses="BackgroundDark"></PanelContainer>
+    <PanelContainer StyleClasses="BackgroundDark"/>
     <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
         <BoxContainer>
-            <LineEdit Name="ChatsSearch" Access="Public" HorizontalExpand="true" PlaceHolder="{Loc 'messenger-ui-search-line'}"/>
-            <Button Name="ClearAllChatButton" StyleClasses="OpenBoth" SetWidth="220" Text="{Loc 'messenger-ui-delete-all'}"/>
+            <LineEdit Name="ChatsSearch" Access="Public" HorizontalExpand="True" PlaceHolder="{Loc 'messenger-ui-search-line'}"/>
         </BoxContainer>
         <Button Visible="False" Name="BackButton" Text="{Loc 'messenger-ui-back-button'}"/>
-        <Label Visible="False" Name="ChatNameLabel" Align="Center"></Label>
+        <Label Visible="False" Name="ChatNameLabel" Align="Center"/>
         <ScrollContainer HorizontalExpand="False" VerticalExpand="True">
-            <BoxContainer Orientation="Vertical" Name="ChatsContainer" HorizontalExpand="False" VerticalExpand="True"></BoxContainer>
+            <BoxContainer Orientation="Vertical" Name="ChatsContainer" HorizontalExpand="False" VerticalExpand="True"/>
         </ScrollContainer>
         <LineEdit Name="MessageInput" Visible="False" HorizontalExpand="True" SetHeight="32"/>
         <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
             <Button Name="SendButton" StyleClasses="OpenRight" HorizontalExpand="True" Visible="False" Text="{Loc 'messenger-ui-send-message-button'}"/>
-            <Button Name="ClearCurrentChatButton" StyleClasses="OpenLeft" SetWidth="120" Visible="False" Text="{Loc 'messenger-ui-delete'}"/>
+            <TextureButton Name="ClearCurrentChatButton"
+                           StyleClasses="OpenBoth"
+                           SetSize="24 24"
+                           Modulate="Red"
+                           Visible="False"
+                           TexturePath="/Textures/SS220/Interface/Misc/pipe_filter/clear_filter.png"/>
         </BoxContainer>
-        <Label Visible="False" Name="ErrorLabel"></Label>
+        <Label Visible="False" Name="ErrorLabel"/>
     </BoxContainer>
 </messenger:MessengerUiFragment>
