@@ -876,7 +876,6 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         var ev = new DisarmChanceModifierEvent(chance);
         RaiseLocalEvent(disarmer, ev);
         chance = ev.BaseChance + ev.Bonus;
-        Log.Info($"Disarm chance: {chance}");
         // SS220-Extended Weapon Logic-End
 
         return Math.Clamp(chance, 0f, 1f);
