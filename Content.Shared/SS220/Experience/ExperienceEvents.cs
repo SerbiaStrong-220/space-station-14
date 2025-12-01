@@ -11,14 +11,10 @@ namespace Content.Shared.SS220.Experience;
 /// <param name="SkillTree"> Id of added <see cref="SkillTreePrototype"/> </param>
 /// <param name="Info"> This struct contains additions to start level, all higher than max level will be correctly added </param>
 [ByRefEvent]
-public record struct SkillTreeAddedEvent(ProtoId<SkillTreePrototype> SkillTree, SkillTreeExperienceInfo Info)
-{
-    public ProtoId<SkillTreePrototype> SkillTree { get; init; } = SkillTree;
-    public SkillTreeExperienceInfo Info = Info;
-}
+public record struct SkillTreeAddedEvent(ProtoId<SkillTreePrototype> SkillTree, SkillTreeExperienceInfo Info, bool DenyChanges = false);
 
 [ByRefEvent]
-public record struct KnowledgeInitial(HashSet<ProtoId<KnowledgePrototype>> Knowledges);
+public record struct KnowledgeInitial(HashSet<ProtoId<KnowledgePrototype>> Knowledges, bool DenyChanges = false);
 
 /// <summary>
 /// Event raised on gaining skill

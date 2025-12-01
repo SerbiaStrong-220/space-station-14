@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Experience;
@@ -20,5 +21,11 @@ public abstract partial class SkillBaseAddComponent : Component
     public HashSet<ProtoId<KnowledgePrototype>> Knowledges = new();
 }
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class SkillRoleAddComponent : SkillBaseAddComponent { }
+
+[RegisterComponent, NetworkedComponent]
+public sealed partial class SkillBackgroundAddComponent : SkillBaseAddComponent { }
+
+[RegisterComponent, NetworkedComponent]
+public sealed partial class SkillForcedAddComponent : SkillBaseAddComponent { }

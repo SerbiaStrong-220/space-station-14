@@ -11,7 +11,9 @@ public sealed partial class ExperienceSystem : EntitySystem
     {
         SubscribeLocalEvent<ExperienceComponent, AfterExperienceInitComponentGained>(OnPlayerMobAfterSpawned);
 
+        SubscribeInitComponent<SkillForcedAddComponent>(SkillAddOnSkillTreeAdded, KnowledgeAddOnKnowledgeInitial);
         SubscribeInitComponent<SkillRoleAddComponent>(SkillAddOnSkillTreeAdded, KnowledgeAddOnKnowledgeInitial);
+        SubscribeInitComponent<SkillBackgroundAddComponent>(SkillAddOnSkillTreeAdded, KnowledgeAddOnKnowledgeInitial);
     }
 
     private void SubscribeInitComponent<T>(EntityEventRefHandler<T, SkillTreeAddedEvent> handlerSkill, EntityEventRefHandler<T, KnowledgeInitial> handlerKnowledge) where T : SkillBaseAddComponent
@@ -45,7 +47,7 @@ public sealed partial class ExperienceSystem : EntitySystem
             if (!treeProto.CanBeShownOnInit)
                 continue;
 
-            // Not logging reiniting cause it defined behavior for out case
+            // Not logging reiniting cause it defined behavior for our case
             InitExperienceSkillTree(entity, treeProto, false);
         }
 
@@ -63,8 +65,11 @@ public sealed partial class ExperienceSystem : EntitySystem
         }
     }
 
-    private void SkillAddOnSkillTreeAdded(Entity<SkillRoleAddComponent> entity, ref SkillTreeAddedEvent args)
+    private void SkillAddOnSkillTreeAdded<T>(Entity<T> entity, ref SkillTreeAddedEvent args) where T : SkillBaseAddComponent
     {
+        if (args.DenyChanges)
+            return;
+
         if (_prototype.TryIndex(entity.Comp.SkillAddId, out var skillAddProto)
             && skillAddProto.Skills.TryGetValue(args.SkillTree, out var infoProto))
         {
@@ -81,8 +86,11 @@ public sealed partial class ExperienceSystem : EntitySystem
         }
     }
 
-    private void KnowledgeAddOnKnowledgeInitial(Entity<SkillRoleAddComponent> entity, ref KnowledgeInitial args)
+    private void KnowledgeAddOnKnowledgeInitial<T>(Entity<T> entity, ref KnowledgeInitial args) where T : SkillBaseAddComponent
     {
+        if (args.DenyChanges)
+            return;
+
         if (_prototype.TryIndex(entity.Comp.SkillAddId, out var skillAddProto))
             args.Knowledges.UnionWith(skillAddProto.Knowledges);
 
