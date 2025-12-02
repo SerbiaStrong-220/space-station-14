@@ -2,6 +2,7 @@
 
 using Content.Shared.Alert;
 using Content.Shared.FixedPoint;
+using Content.Shared.Roles;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -163,6 +164,12 @@ public sealed partial class MiGoComponent : Component
     [DataField]
     public ProtoId<AlertPrototype> AstralAlert = "MiGoAstralAlert";
     #endregion
+
+    /// <summary>
+    /// Added job
+    /// </summary>
+    [ViewVariables]
+    public ProtoId<JobPrototype> JobName = "MiGoJob";
 }
 
 [NetSerializable, Serializable]

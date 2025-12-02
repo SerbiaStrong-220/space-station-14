@@ -492,5 +492,10 @@ public enum LogType
     /// </summary>
     AdminCommand = 10000,
 
+    /// <summary>
+    /// Logs related to roundflow like changing stages of cult or any antag progression
+    /// </summary>
+    RoundFlow = 10001,
+
     //SS220 log types end
 }

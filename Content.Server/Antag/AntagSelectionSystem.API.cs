@@ -421,4 +421,35 @@ public sealed partial class AntagSelectionSystem
 
         return result;
     }
+
+    // SS220 DynamicTraitor begin
+
+    public void SetAntagLimit(AntagSelectionComponent comp, string roleId, int? newMin = null, int? newMax = null)
+    {
+        for (var i = 0; i < comp.Definitions.Count; i++)
+        {
+            var def = comp.Definitions[i];
+
+            if (!def.PrefRoles.Contains(roleId))
+                continue;
+
+            if (newMin.HasValue)
+                def.Min = newMin.Value;
+
+            if (newMax.HasValue)
+                def.Max = newMax.Value;
+
+            comp.Definitions[i] = def;
+            return;
+        }
+    }
+
+    public void SetAntagLimit(Entity<AntagSelectionComponent?> ent, string roleId, int? newMin = null, int? newMax = null)
+    {
+         if (!Resolve(ent, ref ent.Comp))
+                    return;
+
+         SetAntagLimit(ent.Comp, roleId, newMin, newMax);
+    }
+    // SS220 DynamicTraitor end
 }
