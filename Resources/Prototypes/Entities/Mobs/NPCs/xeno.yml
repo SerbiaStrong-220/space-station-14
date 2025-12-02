@@ -78,7 +78,7 @@
     thresholds:
       0: Alive
     #SS220 xeno-buff-update begin
-      50: Critical
+      100: Critical
       150: Dead
     #SS220 xeno-buff-update end
   - type: SlowOnDamage
@@ -164,7 +164,7 @@
       0: Alive
     #SS220 xeno-buff-update begin
       200: Critical
-      300: Dead
+      250: Dead
     #SS220 xeno-buff-update end
   - type: Stamina
     critThreshold: 300
@@ -176,7 +176,8 @@
     damage:
       types:
         Blunt: 25
-        Slash: 20
+        Slash: 10
+        Structural: 50
     angle: 0
     soundHit:
      collection: AlienClaw
@@ -240,7 +241,7 @@
     damage:
     #SS220 xeno-buff-update begin
       types:
-        Blunt: 20
+        Blunt: 10
         Slash: 15
     angle: 0
     soundHit:
@@ -296,8 +297,8 @@
     thresholds:
       0: Alive
     #SS220 xeno-buff-update begin
-      200: Critical
-      400: Dead
+      250: Critical
+      300: Dead
     #SS220 xeno-buff-update end
   - type: SlowOnDamage
     speedModifierThresholds:
@@ -309,6 +310,7 @@
       types:
         Blunt: 30
         Slash: 25
+        Structural: 70
     angle: 0
     soundHit:
      collection: AlienClaw
@@ -364,8 +366,8 @@
     thresholds:
       0: Alive
     #SS220 xeno-buff-update begin
-      250: Critical
-      500: Dead
+      200: Critical
+      250: Dead
     #SS220 xeno-buff-update end
   - type: MovementSpeedModifier
     baseSprintSpeed: 4
@@ -373,8 +375,8 @@
     damage:
     #SS220 xeno-buff-update begin
       types:
-        Blunt: 35
-        Slash: 30
+        Blunt: 15
+        Slash: 40
     #SS220 xeno-buff-update end
   - type: SlowOnDamage
     speedModifierThresholds:
@@ -400,6 +402,10 @@
     force: true
     useSound:
       path: /Audio/Items/crowbar.ogg
+  - type: JumpAbility
+    jumpDistance: 4
+    jumpSound: /Audio/Effects/toss.ogg
+    jumpThrowSpeed: 22
   - type: Telepathy
     canSend: true
     telepathyChannelPrototype: TelepathyChannelXeno
@@ -459,6 +465,10 @@
     force: true
     useSound:
       path: /Audio/Items/crowbar.ogg
+  - type: JumpAbility
+    jumpDistance: 6
+    jumpSound: /Audio/Effects/toss.ogg
+    jumpThrowSpeed: 33
   - type: Telepathy
     canSend: true
     telepathyChannelPrototype: TelepathyChannelXeno
@@ -485,8 +495,8 @@
     thresholds:
       0: Alive
     #SS220 xeno-buff-update begin
-      60: Critical
-      180: Dead
+      70: Critical
+      100: Dead
     #SS220 xeno-buff-update end
   - type: SlowOnDamage
     speedModifierThresholds:

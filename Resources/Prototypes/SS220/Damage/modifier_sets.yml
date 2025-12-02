@@ -101,13 +101,13 @@
     Blunt: 0.9
     Slash: 0.7
     Piercing: 0.8
-    Heat: 1.3
+    Heat: 1.4
     Shock: 1.1
     Cold: 0.8
     Poison: 0.3
     Radiation: 0.2
     Cellular: 0.4
-    Caustic: 0.3
+    Caustic: 0.8
 
 - type: damageModifierSet
   id: XenoLonePraetorian
@@ -121,7 +121,7 @@
     Poison: 0.15
     Radiation: 0.08
     Cellular: 0.25
-    Caustic: 0.2
+    Caustic: 0.8
   flatReductions:
     Blunt: 3
 
@@ -131,18 +131,18 @@
     Blunt: 0.9
     Slash: 0.7
     Piercing: 0.8
-    Heat: 1.3
+    Heat: 1.5
     Shock: 1.1
     Cold: 0.8
     Poison: 0.3
     Radiation: 0.2
     Cellular: 0.4
-    Caustic: 0.3
+    Caustic: 0.8
 
 - type: damageModifierSet
   id: XenoDrone
   coefficients:
-    Blunt: 0.8
+    Blunt: 1.1
     Slash: 0.6
     Piercing: 0.7
     Heat: 1.4
@@ -151,12 +151,12 @@
     Poison: 0.2
     Radiation: 0.1
     Cellular: 0.3
-    Caustic: 0.2
+    Caustic: 0.8
 
 - type: damageModifierSet
   id: XenoSpitter
   coefficients:
-    Blunt: 0.8
+    Blunt: 1.3
     Slash: 0.6
     Piercing: 0.7
     Heat: 1.4
@@ -165,24 +165,25 @@
     Poison: 0.2
     Radiation: 0.1
     Cellular: 0.3
-    Caustic: 0.2
+    Caustic: 0.8
 
 - type: damageModifierSet
   id: XenoPraetorian
   coefficients:
-    Blunt: 0.6
+    Blunt: 0.9
     Slash: 0.5
-    Piercing: 0.5
-    Heat: 1.2
+    Piercing: 0.2
+    Heat: 1.1
     Shock: 0.8
     Cold: 0.6
     Poison: 0.1
     Radiation: 0.05
     Cellular: 0.2
-    Caustic: 0.1
+    Caustic: 0.8
   flatReductions:
     Blunt: 5
     Slash: 3
+    Piercing: 5
 
 - type: damageModifierSet
   id: XenoRavager
@@ -190,13 +191,13 @@
     Blunt: 0.6
     Slash: 0.5
     Piercing: 0.5
-    Heat: 1.2
+    Heat: 1.4
     Shock: 0.8
     Cold: 0.6
     Poison: 0.1
     Radiation: 0.05
     Cellular: 0.2
-    Caustic: 0.1
+    Caustic: 0.8
   flatReductions:
     Blunt: 5
     Slash: 3
@@ -207,13 +208,13 @@
     Blunt: 0.4
     Slash: 0.3
     Piercing: 0.3
-    Heat: 1.1
+    Heat: 1.3
     Shock: 0.5
     Cold: 0.4
-    Poison: 0.0
+    Poison: 0.2
     Radiation: 0.0
     Cellular: 0.1
-    Caustic: 0.0
+    Caustic: 0.8
   flatReductions:
     Blunt: 10
     Slash: 8
