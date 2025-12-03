@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Shared.SS220.Maths;
 using Content.Shared.SS220.Zones.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -18,6 +19,8 @@ public abstract partial class SharedZonesSystem : EntitySystem
 
     public static readonly ProtoId<EntityCategoryPrototype> ZonesCategoryId = "Zones";
     public const string ZoneCommandsPrefix = "zones:";
+
+    public const string DefaultZoneProtoId = "ZoneDefault";
 
     public override void Update(float frameTime)
     {
@@ -156,6 +159,29 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return result;
     }
 
+    public Box2 AttachToLattice(EntityUid parent, Box2 box)
+    {
+        var latticeSize = TryComp<MapGridComponent>(parent, out var mapGrid) ? mapGrid.TileSize : 1f;
+        return MathHelperExtensions.AttachToLattice(box, latticeSize);
+    }
+
+    public IEnumerable<Box2> AttachToLattice(EntityUid parent, IEnumerable<Box2> area)
+    {
+        var latticeSize = TryComp<MapGridComponent>(parent, out var mapGrid) ? mapGrid.TileSize : 1f;
+        return MathHelperExtensions.AttachToLattice(area, latticeSize);
+    }
+
+    public IEnumerable<Box2> RecalculateArea(IEnumerable<Box2> area, EntityUid parent, bool attachToLattice)
+    {
+        if (attachToLattice)
+            area = AttachToLattice(parent, area);
+
+        area = MathHelperExtensions.GetNonOverlappingBoxes(area);
+        area = MathHelperExtensions.UnionInEqualSizedBoxes(area);
+
+        return area;
+    }
+
     //public EntityCoordinates? GetRandomCoordinateInZone(Entity<ZoneComponent> zone, RegionType regionType)
     //{
     //    var region = zone.Comp.ZoneParams.GetRegion(regionType);
@@ -199,6 +225,11 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return parent.IsValid()
             && Exists(parent)
             && (HasComp<MapGridComponent>(parent) || HasComp<MapComponent>(parent));
+    }
+
+    public EntityUid GetZoneParent(EntityUid zone)
+    {
+        return Transform(zone).ParentUid;
     }
 }
 

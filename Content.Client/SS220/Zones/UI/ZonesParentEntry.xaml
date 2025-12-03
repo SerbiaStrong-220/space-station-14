@@ -8,14 +8,13 @@
         <ContainerButton Name="CollapseButton">
             <TextureRect Name="CollapseButtonTexture"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2 0"/>
         </ContainerButton>
-        <ContainerButton Name="ZoneContainerButton" HorizontalExpand="True">
-            <PanelContainer Name="ContainerBackgroundPanel" HorizontalExpand="True">
+        <ContainerButton Name="ParentButton" HorizontalExpand="True">
+            <PanelContainer Name="ParentBackgroundPanel" HorizontalExpand="True">
                 <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="5 0">
-                    <Label Name="ContainerIDLabel"/>
+                    <Label Name="ParentIDLabel"/>
                     <cc:VSeparator Margin="10 0"/>
-                    <Label Name="ContainerNameLabel"  HorizontalExpand="True"/>
+                    <Label Name="ParentNameLabel"  HorizontalExpand="True"/>
                     <cc:VSeparator Margin="10 0"/>
-                    <ut220:ConfirmableButton Name="DeleteContainerButton" Access="Public"/>
                 </BoxContainer>
             </PanelContainer>
         </ContainerButton>

@@ -158,21 +158,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         var area = ent.Comp.Area.ToList().AsEnumerable();
 
         var parent = Transform(ent).ParentUid;
-
-        if (ent.Comp.AttachToLattice)
-        {
-            float latticeSize;
-            if (TryComp<MapGridComponent>(parent, out var mapGrid))
-                latticeSize = mapGrid.TileSize;
-            else
-                latticeSize = 1f;
-
-            area = MathHelperExtensions.AttachToLattice(area, latticeSize);
-        }
-
-        area = MathHelperExtensions.GetNonOverlappingBoxes(area);
-        area = MathHelperExtensions.UnionInEqualSizedBoxes(area);
-        ent.Comp.Area = [.. area];
+        ent.Comp.Area = [.. RecalculateArea(area, parent, ent.Comp.AttachToLattice)];
 
         Dirty(ent);
     }

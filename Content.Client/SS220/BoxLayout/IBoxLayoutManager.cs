@@ -8,7 +8,7 @@ namespace Content.Client.SS220.BoxLayout;
 public interface IBoxLayoutManager
 {
     event Action? Started;
-    event Action<BoxParams>? Ended;
+    event Action<BoxArgs>? Ended;
     event Action? Cancelled;
 
     EntityUid? Parent { get; }
@@ -17,10 +17,10 @@ public interface IBoxLayoutManager
     Color Color { get; }
     bool Active { get; }
     bool AttachToGrid { get; set; }
-    BoxParams? CurParams { get; }
+    BoxArgs? CurParams { get; }
 
     void Initialize();
-    BoxParams? GetBoxParams();
+    BoxArgs? GetBoxParams();
     void Cancel();
     void StartNew();
     void SetColor(Color? newColor);

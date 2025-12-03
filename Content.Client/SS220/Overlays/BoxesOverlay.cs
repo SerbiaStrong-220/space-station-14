@@ -115,8 +115,7 @@ public sealed class BoxesOverlay : Overlay
         public abstract List<BoxOverlayData> GetBoxesDatas();
     }
 
-    [Virtual]
-    public class BoxOverlayData(EntityUid parent, Box2? box = null, Color? color = null, Texture? texture = null)
+    public struct BoxOverlayData(EntityUid parent, Box2? box = null, Color? color = null, Texture? texture = null)
     {
         public EntityUid Parent = parent;
 

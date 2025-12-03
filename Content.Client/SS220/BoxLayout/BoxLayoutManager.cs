@@ -24,7 +24,7 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
     public static Color DefaultColor = Color.Green;
 
     public event Action? Started;
-    public event Action<BoxParams>? Ended;
+    public event Action<BoxArgs>? Ended;
     public event Action? Cancelled;
 
     public bool Active => _active;
@@ -37,7 +37,7 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
     }
     private bool _attachToGrid;
 
-    public BoxParams? CurParams => GetBoxParams();
+    public BoxArgs? CurParams => GetBoxParams();
 
     private BoxLayoutBoxesOverlayProvider _overlayProvider = default!;
 
@@ -139,7 +139,7 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
         }
     }
 
-    public BoxParams? GetBoxParams()
+    public BoxArgs? GetBoxParams()
     {
         if (_point1 is not { } p1 || _point2 is not { } p2 || _parent is not { } parent)
             return null;
@@ -157,7 +157,7 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
             MathHelperExtensions.AttachToLattice(ref box, gridSize);
         }
 
-        return new BoxParams()
+        return new BoxArgs()
         {
             Parent = parent,
             Box = box
@@ -207,7 +207,7 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
         return _eye.ScreenToMap(_input.MouseScreenPosition);
     }
 
-    public struct BoxParams
+    public struct BoxArgs
     {
         public EntityUid Parent;
         public Box2 Box;
