@@ -10,13 +10,12 @@ using Content.Shared.Maps;
 using Content.Shared.Popups;
 using Content.Shared.SS220.ChameleonStructure;
 using Content.Shared.SS220.CultYogg.Buildings;
-using Content.Shared.SS220.CultYogg.Corruption;
+using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.Stacks;
 using Content.Shared.Tag;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -255,6 +254,9 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         if (!args.CanAccess)
             return;
 
+        if (!HasComp<CultYoggComponent>(args.User) && !HasComp<MiGoComponent>(args.User))//should be user or migo
+            return;
+
         Verb destroyVerb = new()
         {
             Text = Loc.GetString("cult-yogg-building-frame-verb-destroy"),
@@ -357,7 +359,6 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         if (args.Recipe == null)
             return;
 
-
         if (args.Target is { } target)
         {
             var prototypeId = MetaData(target).EntityPrototype;
@@ -383,12 +384,15 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         var newEntity = SpawnAtPosition(replacement.ReplacementProto, xform.Coordinates);
         Transform(newEntity).LocalRotation = rot;
 
-        if (TryComp<ChameleonStructureComponent>(newEntity, out var structureChameleon))
-        {
-            _chameleonStructureSystem.SetPrototype((newEntity, structureChameleon), buildingProto.ID);//make it chameleon if possible
-        }
-
         Del(buildingUid);
+
+        var oldProto = buildingProto.ID;
+
+        if (!TryComp<ChameleonStructureComponent>(newEntity, out var structureChameleon))
+            return;
+
+
+        _chameleonStructureSystem.TrySetPrototype((newEntity, structureChameleon), oldProto);//make it chameleon if possible
     }
 
     /// <summary>

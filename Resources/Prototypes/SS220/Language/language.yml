@@ -389,3 +389,38 @@
     specialCharacters:
       - character: " "
     syllables: [хрю, хрю-хрю]
+
+- type: language
+  id: Dragon
+  key: drg
+  name: "language-dragon-name"
+  description: "language-dragon-desc"
+  color: "#8A2BE2"
+  scrambleMethod: !type:SyllablesScrambleMethod
+    specialCharacters:
+      - character: " "
+      - character: ". "
+        capitalize: true
+        weight: 0.25
+      - character: "-"
+        weight: 0.35
+    syllables: [грр, ррах, зхар, дре, дра, изх, орр, кха, шра, гру, дарр,
+                вры, зжах, тра, ахр, ужх, зра, трр, раж, аар, шкор,
+                раалл, горр, варх, кри, зхарр, грак, хрр, ррра]
+
+- type: language
+  id: Carpish
+  key: crp
+  name: "language-carpish-name"
+  description: "language-carpish-desc"
+  color: "#9932CC"
+  scrambleMethod: !type:SyllablesScrambleMethod
+    specialCharacterChance: 0.65
+    specialCharacters:
+      - character: " "
+      - character: ". "
+        capitalize: true
+        weight: 0.15
+    syllables: [грр, ррр, врр, рр, ррг, гр, ррх, ррв, хрр, рх, рррг,
+                гр, вр, хр, рг, ррхг, ррвг, грр, вррг, хррг]
+

@@ -51,7 +51,7 @@
   - type: ClusterGrenadeVisuals
     state: base
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/clusterbang.rsi
+    sprite: SS220/Objects/Weapons/Grenades/clusterbang.rsi #SS220 From cabinet to 3/4, Part 2
     state: base-0
 
 - type: entity
@@ -62,7 +62,7 @@
   suffix: Full
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/clusterbang.rsi
+    sprite: SS220/Objects/Weapons/Grenades/clusterbang.rsi #SS220 From cabinet to 3/4, Part 2
     layers:
     - state: icon
       map: ["enum.TriggerVisualLayers.Base"]
@@ -87,6 +87,7 @@
     - timer
     sound:
       path: "/Audio/Machines/door_lock_off.ogg"
+    positional: true
 
 - type: entity
   parent: [ScatteringGrenadeBase] # SS220 Remove BaseSyndicateContraband
@@ -95,7 +96,7 @@
   description: Why use one grenade when you can use three at once!
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/clusterbomb.rsi
+    sprite: SS220/Objects/Weapons/Grenades/clusterbomb.rsi #SS220 From cabinet to 3/4, Part 2
     layers:
     - state: icon
       map: ["enum.TriggerVisualLayers.Base"]
@@ -114,6 +115,7 @@
     - timer
     sound:
       path: "/Audio/Machines/door_lock_off.ogg"
+    positional: true
   - type: StaticPrice
     price: 2500
 
@@ -140,6 +142,7 @@
     - timer
     sound:
       path: "/Audio/Items/bikehorn.ogg"
+    positional: true
 
 - type: entity
   parent: [SoapSyndie, ScatteringGrenadeBase] # SS220 Remove BaseSyndicateContraband
@@ -167,6 +170,7 @@
     - timer
     sound:
       path: "/Audio/Effects/flash_bang.ogg"
+    positional: true
   - type: StaticPrice
     price: 1000
 
@@ -199,3 +203,4 @@
     - timer
     sound:
       path: "/Audio/Weapons/Guns/Gunshots/batrifle.ogg"
+    positional: true

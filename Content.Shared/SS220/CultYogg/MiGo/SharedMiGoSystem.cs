@@ -21,6 +21,7 @@ using Content.Shared.Roles.Components;
 using Content.Shared.SS220.CultYogg.Altar;
 using Content.Shared.SS220.CultYogg.Buildings;
 using Content.Shared.SS220.CultYogg.Cultists;
+using Content.Shared.SS220.CultYogg.Rave;
 using Content.Shared.SS220.CultYogg.Sacraficials;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Verbs;
@@ -408,7 +409,7 @@ public abstract class SharedMiGoSystem : EntitySystem
         {
             var fixture = fixtures.Fixtures.First();
 
-            var mask = (int)(isMaterial ? CollisionGroup.FlyingMobMask : CollisionGroup.GhostImpassable);
+            var mask = (int)(isMaterial ? CollisionGroup.FlyingMobMask : CollisionGroup.None);
             var layer = (int)(isMaterial ? CollisionGroup.FlyingMobLayer : CollisionGroup.None);
 
             _physics.SetCollisionMask(uid, fixture.Key, fixture.Value, mask, fixtures);
@@ -437,24 +438,27 @@ public abstract class SharedMiGoSystem : EntitySystem
     #endregion
 
     #region Enslave
-    private void OnMiGoEnslaveAction(Entity<MiGoComponent> entity, ref MiGoEnslavementActionEvent args)
+    private void OnMiGoEnslaveAction(Entity<MiGoComponent> ent, ref MiGoEnslavementActionEvent args)
     {
         if (args.Handled)
             return;
 
-        var (uid, comp) = entity;
+        var (uid, comp) = ent;
         if (!comp.IsPhysicalForm)
             return;
 
         var target = args.Target;
-        if (!CanEnslaveTarget(entity, target, out var reason))
+        if (!CanEnslaveTarget(ent, target, out var reason))
         {
             _popup.PopupClient(reason, target, uid);
+            _adminLogger.Add(LogType.Action, $"MiGo {ToPrettyString(ent):user} failed to enslave {ToPrettyString(target):target} because \"{reason}\"");
             return;
         }
 
-        StartEnslaveDoAfter(entity, target);
+        StartEnslaveDoAfter(ent, target);
         args.Handled = true;
+
+        _adminLogger.Add(LogType.Action, $"MiGo {ToPrettyString(ent):user} successfully enslaved {ToPrettyString(target):target}");
     }
 
     protected void StartEnslaveDoAfter(Entity<MiGoComponent> entity, EntityUid target)
@@ -492,13 +496,19 @@ public abstract class SharedMiGoSystem : EntitySystem
             return false;
         }
 
-        if (HasComp<RevolutionaryComponent>(target) || HasComp<MindShieldComponent>(target) || HasComp<ZombieComponent>(target))
+        if (HasComp<MindShieldComponent>(target))
+        {
+            reason = Loc.GetString("cult-yogg-enslave-mindshield");
+            return false;
+        }
+
+        if (HasComp<RevolutionaryComponent>(target) || HasComp<ZombieComponent>(target))
         {
             reason = Loc.GetString("cult-yogg-enslave-another-fraction");
             return false;
         }
 
-        if (!_statusEffectsSystem.HasStatusEffect(target, ent.Comp.RequiedEffect) && !IsEslavementSimplified)
+        if (!HasComp<RaveComponent>(target) && !IsEslavementSimplified)
         {
             reason = Loc.GetString("cult-yogg-enslave-should-eat-shroom");
             return false;

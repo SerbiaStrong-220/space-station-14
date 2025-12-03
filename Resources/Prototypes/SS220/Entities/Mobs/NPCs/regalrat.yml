@@ -1,18 +1,28 @@
 #Different action to loot trashpiles with own weights
-- type: weightedRandomEntity
-  id: RatKingLootTrashPiles
-  weights:
-    RandomSpawner100: 75
-    FoodCheeseSlice: 20
-    FoodCheese: 5
 
-- type: weightedRandomEntity
+- type: entityTable
+  id: RatKingLootTrashPiles
+  table: !type:GroupSelector
+    children:
+    - id: RandomSpawner100
+      weight: 75
+    - id: FoodCheeseSlice
+      weight: 20
+    - id: FoodCheese
+      weight: 5
+
+- type: entityTable
   id: RatKingLootTrashCans
-  weights:
-    RandomSpawner100: 50
-    MobCockroach: 25
-    FoodTacoRat: 20
-    FoodCheese: 5
+  table: !type:GroupSelector
+    children:
+    - id: RandomSpawner100
+      weight: 50
+    - id: MobCockroach
+      weight: 25
+    - id: FoodTacoRat
+      weight: 20
+    - id: FoodCheese
+      weight: 5
 
 - type: entity
   id: ActionRatKingRummage

@@ -2,6 +2,7 @@
 
 using Content.Shared.Alert;
 using Content.Shared.FixedPoint;
+using Content.Shared.Roles;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -146,7 +147,7 @@ public sealed partial class MiGoComponent : Component
 
     /// How long MiGo can be in astral
     [DataField, AutoNetworkedField]
-    public TimeSpan AstralDuration = TimeSpan.FromSeconds(15);
+    public TimeSpan AstralDuration = TimeSpan.FromSeconds(35);
 
     [AutoNetworkedField]
     public TimeSpan? MaterializationTime;
@@ -158,11 +159,17 @@ public sealed partial class MiGoComponent : Component
     public float MaterialMovementSpeed = 6f; //ToDo check this thing
 
     [ViewVariables, DataField, AutoNetworkedField]
-    public float UnMaterialMovementSpeed = 18f;//ToDo check this thing
+    public float UnMaterialMovementSpeed = 15f;//ToDo check this thing
 
     [DataField]
     public ProtoId<AlertPrototype> AstralAlert = "MiGoAstralAlert";
     #endregion
+
+    /// <summary>
+    /// Added job
+    /// </summary>
+    [ViewVariables]
+    public ProtoId<JobPrototype> JobName = "MiGoJob";
 }
 
 [NetSerializable, Serializable]

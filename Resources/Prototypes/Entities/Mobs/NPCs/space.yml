@@ -34,7 +34,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      80: Dead
+      100: Dead # SS220 Revert Wizden balance #38131
   - type: Stamina
     critThreshold: 150
   - type: MovementAlwaysTouching
@@ -176,10 +176,10 @@
     spawned:
     - id: FoodMeat
       amount: 1
-  - type: MobThresholds
-    thresholds:
-      0: Alive
-      60: Dead
+  # - type: MobThresholds # SS220 Revert Wizden balance #38131 BEGIN
+  #   thresholds:
+  #     0: Alive
+  #     60: Dead # SS220 Revert Wizden balance #38131 END
 
 - type: entity
   id: MobKangarooSpaceSalvage
@@ -211,7 +211,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      45: Dead
+      90: Dead # SS220 Revert Wizden balance #38131
   - type: Stamina
     critThreshold: 150
   - type: DamageStateVisuals
@@ -312,7 +312,7 @@
     - type: MobThresholds
       thresholds:
         0: Alive
-        45: Dead
+        90: Dead # SS220 Revert Wizden balance #38131
     #SS220-fauna-damagesets-begin
     - type: Damageable
       damageContainer: Biological
@@ -541,7 +541,7 @@
       methods: [Touch, Ingestion, Injection]
       effects:
       - !type:HealthChange
-        scaleByQuantity: true
+        scaling: true
         damage:
           types:
             Caustic: 1

@@ -2,16 +2,17 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server.Antag.Components;
 using Content.Server.GameTicking.Rules.Components;
-using Content.Server.Objectives;
 using Content.Shared.Antag;
 using Content.Shared.Chat;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Mind;
 using Content.Shared.Preferences;
+using Content.Shared.Roles;
 using JetBrains.Annotations;
 using Robust.Shared.Audio;
 using Robust.Shared.Enums;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Antag;
 
@@ -161,33 +162,37 @@ public sealed partial class AntagSelectionSystem
     }
 
     /// <summary>
-    /// Checks if a given session has the primary antag preferences for a given definition
+    /// Checks if a given session has enabled the antag preferences for a given definition,
+    /// and if it is blocked by any requirements or bans.
     /// </summary>
-    public bool HasPrimaryAntagPreference(ICommonSession? session, AntagSelectionDefinition def)
+    /// <returns>Returns true if at least one role from the provided list passes every condition</returns>>
+    public bool ValidAntagPreference(ICommonSession? session, List<ProtoId<AntagPrototype>> roles)
     {
         if (session == null)
             return true;
 
-        if (def.PrefRoles.Count == 0)
+        if (roles.Count == 0)
             return false;
 
-        var pref = (HumanoidCharacterProfile) _pref.GetPreferences(session.UserId).SelectedCharacter;
-        return pref.AntagPreferences.Any(p => def.PrefRoles.Contains(p));
-    }
-
-    /// <summary>
-    /// Checks if a given session has the fallback antag preferences for a given definition
-    /// </summary>
-    public bool HasFallbackAntagPreference(ICommonSession? session, AntagSelectionDefinition def)
-    {
-        if (session == null)
-            return true;
-
-        if (def.FallbackRoles.Count == 0)
+        if (!_pref.TryGetCachedPreferences(session.UserId, out var pref))
             return false;
 
-        var pref = (HumanoidCharacterProfile) _pref.GetPreferences(session.UserId).SelectedCharacter;
-        return pref.AntagPreferences.Any(p => def.FallbackRoles.Contains(p));
+        var character = (HumanoidCharacterProfile) pref.SelectedCharacter;
+
+        var valid = false;
+
+        // Check each individual antag role
+        foreach (var role in roles)
+        {
+            var list = new List<ProtoId<AntagPrototype>>{role};
+
+            if (character.AntagPreferences.Contains(role)
+                && !_ban.IsRoleBanned(session, list)
+                && _playTime.IsAllowed(session, list))
+                valid = true;
+        }
+
+        return valid;
     }
 
     /// <summary>
@@ -416,4 +421,35 @@ public sealed partial class AntagSelectionSystem
 
         return result;
     }
+
+    // SS220 DynamicTraitor begin
+
+    public void SetAntagLimit(AntagSelectionComponent comp, string roleId, int? newMin = null, int? newMax = null)
+    {
+        for (var i = 0; i < comp.Definitions.Count; i++)
+        {
+            var def = comp.Definitions[i];
+
+            if (!def.PrefRoles.Contains(roleId))
+                continue;
+
+            if (newMin.HasValue)
+                def.Min = newMin.Value;
+
+            if (newMax.HasValue)
+                def.Max = newMax.Value;
+
+            comp.Definitions[i] = def;
+            return;
+        }
+    }
+
+    public void SetAntagLimit(Entity<AntagSelectionComponent?> ent, string roleId, int? newMin = null, int? newMax = null)
+    {
+         if (!Resolve(ent, ref ent.Comp))
+                    return;
+
+         SetAntagLimit(ent.Comp, roleId, newMin, newMax);
+    }
+    // SS220 DynamicTraitor end
 }

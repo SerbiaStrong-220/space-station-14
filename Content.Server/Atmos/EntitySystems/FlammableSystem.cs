@@ -1,7 +1,6 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Atmos.Components;
 using Content.Server.Stunnable;
-using Content.Server.Temperature.Components;
 using Content.Server.Temperature.Systems;
 using Content.Server.Damage.Components;
 using Content.Shared.ActionBlocker;
@@ -24,6 +23,7 @@ using Content.Shared.Toggleable;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands;
+using Content.Shared.Temperature.Components;
 using Robust.Server.Audio;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
@@ -136,7 +136,11 @@ namespace Content.Server.Atmos.EntitySystems
                 return;
             }
 
-            flammable.FireStacks += component.FireStacks;
+            // SS220 Fix mob damage inside Dark Reaper begin
+            //flammable.FireStacks += component.FireStacks;
+
+            AdjustFireStacks(uid, component.FireStacks, flammable);
+            // SS220 Fix mob damage inside Dark Reaper end
             Ignite(otherEnt, uid, flammable);
             component.Count--;
 
@@ -314,6 +318,11 @@ namespace Content.Server.Atmos.EntitySystems
 
         public void SetFireStacks(EntityUid uid, float stacks, FlammableComponent? flammable = null, bool ignite = false)
         {
+            // SS220 Fix mob damage inside Dark Reaper begin
+            if (IsPaused(uid))
+                return;
+            // SS220 Fix mob damage inside Dark Reaper end
+
             if (!Resolve(uid, ref flammable))
                 return;
 
@@ -353,6 +362,11 @@ namespace Content.Server.Atmos.EntitySystems
         public void Ignite(EntityUid uid, EntityUid ignitionSource, FlammableComponent? flammable = null,
             EntityUid? ignitionSourceUser = null)
         {
+            // SS220 Fix mob damage inside Dark Reaper begin
+            if (IsPaused(uid))
+                return;
+            // SS220 Fix mob damage inside Dark Reaper end
+
             if (!Resolve(uid, ref flammable))
                 return;
 

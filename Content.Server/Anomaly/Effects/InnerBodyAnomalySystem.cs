@@ -18,6 +18,7 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Content.Server.SS220.Bed.Cryostorage; //SS220 Cryo-anomaly-fix
+using Content.Shared.Teleportation.Components;
 
 namespace Content.Server.Anomaly.Effects;
 
@@ -89,7 +90,7 @@ public sealed class InnerBodyAnomalySystem : SharedInnerBodyAnomalySystem
 
     private void AddAnomalyToBody(Entity<InnerBodyAnomalyComponent> ent)
     {
-        if (!_proto.TryIndex(ent.Comp.InjectionProto, out var injectedAnom))
+        if (!_proto.Resolve(ent.Comp.InjectionProto, out var injectedAnom))
             return;
 
         if (ent.Comp.Injected)
@@ -200,6 +201,7 @@ public sealed class InnerBodyAnomalySystem : SharedInnerBodyAnomalySystem
     private void OnAnomalyShutdown(Entity<InnerBodyAnomalyComponent> ent, ref AnomalyShutdownEvent args)
     {
         RemoveAnomalyFromBody(ent);
+        RemCompDeferred<PortalTimeoutComponent>(ent); // ss220 fix anomaly portal
         RemCompDeferred<InnerBodyAnomalyComponent>(ent);
     }
 
@@ -213,7 +215,7 @@ public sealed class InnerBodyAnomalySystem : SharedInnerBodyAnomalySystem
         if (!ent.Comp.Injected)
             return;
 
-        if (_proto.TryIndex(ent.Comp.InjectionProto, out var injectedAnom))
+        if (_proto.Resolve(ent.Comp.InjectionProto, out var injectedAnom))
             EntityManager.RemoveComponents(ent, injectedAnom.Components);
 
         _stun.TryUpdateParalyzeDuration(ent, TimeSpan.FromSeconds(ent.Comp.StunDuration));

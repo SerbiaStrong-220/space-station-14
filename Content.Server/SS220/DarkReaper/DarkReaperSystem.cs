@@ -88,18 +88,27 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
         if (args is not { Cancelled: false, Target: { } target })
             return;
 
-        if (!ent.Comp.PhysicalForm || !target.IsValid() || EntityManager.IsQueuedForDeletion(target) ||
-            !_mobState.IsDead(target))
-            return;
+        TryConsumeTarget(ent, target);
+    }
+
+    public bool TryConsumeTarget(Entity<DarkReaperComponent> ent, EntityUid target)
+    {
+        if (!ent.Comp.PhysicalForm)
+            return false;
+
+        if (!target.IsValid()
+            || EntityManager.IsQueuedForDeletion(target)
+            || !_mobState.IsDead(target))
+            return false;
 
         if (!_container.TryGetContainer(ent.Owner, DarkReaperComponent.ConsumedContainerId, out var container))
-            return;
+            return false;
 
         if (!_container.CanInsert(target, container))
-            return;
+            return false;
 
-        if (_buckle.IsBuckled(args.Target.Value))
-            _buckle.TryUnbuckle(args.Target.Value, args.Target.Value, true);
+        if (_buckle.IsBuckled(target))
+            _buckle.TryUnbuckle(target, target, true);
 
         // spawn gore
         Spawn(ent.Comp.EntityToSpawnAfterConsuming, Transform(target).Coordinates);
@@ -129,7 +138,8 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
         }
 
         _container.Insert(target, container);
-        _damageable.TryChangeDamage(ent.Owner, ent.Comp.HealPerConsume, true, origin: args.Args.User);
+        SetPaused(target, true);
+        _damageable.TryChangeDamage(ent.Owner, ent.Comp.HealPerConsume, true, origin: ent);
 
         ent.Comp.Consumed++;
         var stageBefore = ent.Comp.CurrentStage;
@@ -148,15 +158,17 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
             _chat.DispatchStationAnnouncement(stationUid ?? ent, announcement, sender, false, null, Color.Red);//SS220 CluwneComms
         }
 
-        // update consoom counter alert
+        // update consume counter alert
         UpdateAlert(ent);
         Dirty(ent);
+
+        return true;
     }
 
     private void UpdateAlert(Entity<DarkReaperComponent> entity)
     {
-        _alerts.ClearAlert(entity, _deadscoreStage1Alert);
-        _alerts.ClearAlert(entity, _deadscoreStage2Alert);
+        _alerts.ClearAlert(entity.Owner, _deadscoreStage1Alert);
+        _alerts.ClearAlert(entity.Owner, _deadscoreStage2Alert);
 
         string alert;
         switch (entity.Comp.CurrentStage)
@@ -190,12 +202,12 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
 
         if (severity <= 0)
         {
-            _alerts.ClearAlert(entity, _deadscoreStage1Alert);
-            _alerts.ClearAlert(entity, _deadscoreStage2Alert);
+            _alerts.ClearAlert(entity.Owner, _deadscoreStage1Alert);
+            _alerts.ClearAlert(entity.Owner, _deadscoreStage2Alert);
             return;
         }
 
-        _alerts.ShowAlert(entity, alert, (short)severity);
+        _alerts.ShowAlert(entity.Owner, alert, (short)severity);
     }
 
     protected override void OnCompInit(Entity<DarkReaperComponent> ent, ref ComponentStartup args)

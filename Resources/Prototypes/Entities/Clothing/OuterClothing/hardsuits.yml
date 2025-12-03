@@ -597,7 +597,7 @@
   parent: ClothingOuterHardsuitBase
   id: ClothingOuterHardsuitLuxury #DO NOT MAP - https://github.com/space-wizards/space-station-14/pull/19738#issuecomment-1703486738
   name: luxury mining hardsuit
-  description: A refurbished mining hardsuit, fashioned after the Quartermaster's colors. Graphene lining provides less protection, but is much easier to move.
+  description: A refurbished miner's hardsuit, covered with gold dusting to emphasize your worthiness. The inside of the suit is complemented by a graphene lining, which has lightened the suit itself at the cost of its protective properties. #SS220 Quartermaster_Hardsuit_add
   categories: [ DoNotMap ]
   components:
   - type: Sprite
@@ -614,17 +614,23 @@
   - type: PressureProtection
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
+    #SS220 Quartermaster_Hardsuit_add start
   - type: ExplosionResistance
-    damageCoefficient: 0.9
+    damageCoefficient: 0.8
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.9
-        Slash: 0.8
-        Piercing: 0.9
-        Heat: 0.9
+        Blunt: 0.75
+        Slash: 0.7
+        Piercing: 0.75
+        Heat: 0.8
         Radiation: 0.5
         Caustic: 0.8
+    #SS220 Quartermaster_Hardsuit_add end
+    # SS220 add stamina resistance begin
+  - type: StaminaResistance
+    damageCoefficient: 0.8
+  # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
     walkModifier: 0.9
     sprintModifier: 0.9
@@ -641,11 +647,11 @@
   description: A heavily armored hardsuit designed for work in special operations. Property of Gorlex Marauders.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/syndicate.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/syndicate.rsi  # SS220-hardsuir-resprite
   - type: Item
     size: Huge
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/syndicate.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/syndicate.rsi  # SS220-hardsuir-resprite
   - type: PressureProtection
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
@@ -698,9 +704,9 @@
   description: A heavily armored and agile advanced hardsuit specifically designed for field medic operations.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/syndiemedic.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/syndiemedic.rsi # SS220-hardsuir-resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/syndiemedic.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/syndiemedic.rsi # SS220-hardsuir-resprite
   - type: PressureProtection
     highPressureMultiplier: 0.2
     lowPressureMultiplier: 1000
@@ -737,9 +743,9 @@
   description: An elite version of the blood-red hardsuit, with improved radiation resistance and fireproofing. Property of Gorlex Marauders.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/syndieelite.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/syndieelite.rsi # SS220-hardsuir-resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/syndieelite.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/syndieelite.rsi # SS220-hardsuir-resprite
   - type: PressureProtection
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
@@ -797,9 +803,9 @@
   description: A bulked up version of the blood-red hardsuit, purpose-built for the commander of a syndicate operative squad. Has significantly improved armor for those deadly front-lines firefights.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/syndiecommander.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/syndiecommander.rsi # SS220-hardsuir-resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/syndiecommander.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/syndiecommander.rsi # SS220-hardsuir-resprite
   - type: PressureProtection
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
@@ -849,9 +855,9 @@
   description: A suit made by the cutting edge R&D department at cybersun to be hyper resilient.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/cybersun.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/cybersun.rsi # SS220-hardsuir-resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/cybersun.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/cybersun.rsi # SS220-hardsuir-resprite
   - type: PressureProtection
     highPressureMultiplier: 0.2
     lowPressureMultiplier: 1000
@@ -1056,9 +1062,9 @@
   description: A protective hardsuit worn by the leader of an emergency response team.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertleader.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ERTSuits/ertleader.rsi # SS220-hardsuits-resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertleader.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ERTSuits/ertleader.rsi # SS220-hardsuits-resprite
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitERTLeader
 
@@ -1084,9 +1090,9 @@
   description: A protective hardsuit worn by the engineers of an emergency response team.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertengineer.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ERTSuits/ertengineer.rsi # SS220-hardsuits-resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertengineer.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ERTSuits/ertengineer.rsi # SS220-hardsuits-resprite
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitERTEngineer
   - type: FireProtection
@@ -1100,9 +1106,9 @@
   description: A protective hardsuit worn by the medics of an emergency response team.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertmedical.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ERTSuits/ertmedical.rsi # SS220-hardsuits-resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertmedical.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ERTSuits/ertmedical.rsi # SS220-hardsuits-resprite
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitERTMedical
 
@@ -1114,9 +1120,9 @@
   description: A protective hardsuit worn by the security officers of an emergency response team.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertsecurity.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ERTSuits/ertsecurity.rsi # SS220-hardsuits-resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertsecurity.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ERTSuits/ertsecurity.rsi # SS220-hardsuits-resprite
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitERTSecurity
   - type: Tag
@@ -1132,9 +1138,9 @@
   description: A protective hardsuit worn by the janitors of an emergency response team.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertjanitor.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ERTSuits/ertjanitor.rsi # SS220-hardsuits-resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertjanitor.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/ERTSuits/ertjanitor.rsi # SS220-hardsuits-resprite
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitERTJanitor
 
@@ -1146,9 +1152,9 @@
   description: An advanced hardsuit favored by commandos for use in special operations.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/deathsquad.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/deathsquad.rsi # SS220-hardsuits-resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/deathsquad.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/deathsquad.rsi # SS220-hardsuits-resprite
   - type: PressureProtection
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
@@ -1159,7 +1165,7 @@
     damageCoefficient: 0.2
   - type: FireProtection
     reduction: 0.8
-  - type: StaminaResistance
+  - type: StaminaResistance # do not add these to other equipment or mobs, we don't want to microbalance these everywhere
     damageCoefficient: 0.15 # Needs 21 hits with a disabler to stun :godo:
   - type: Armor
     modifiers:
@@ -1204,9 +1210,9 @@
   description: A lightweight yet strong exosuit used for special cleanup operations.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/cburn.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/cburn.rsi # SS220-hardsuits-resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/cburn.rsi
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/cburn.rsi # SS220-hardsuits-resprite
   - type: PressureProtection
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000

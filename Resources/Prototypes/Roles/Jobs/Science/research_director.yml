@@ -6,7 +6,7 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Science
-      time: 180000 # SS220-RoleTime
+      time: 50h # SS220-RoleTime
     - !type:AgeRequirement
       requiredAge: 20
     - !type:SpeciesRequirement #SS220-jobbans begin
