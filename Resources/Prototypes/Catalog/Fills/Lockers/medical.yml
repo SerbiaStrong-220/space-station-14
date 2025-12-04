@@ -121,7 +121,7 @@
   id: LockerFillParamedic
   table: !type:AllSelector
     children:
-    - id: ClothingOuterHardsuitVoidParamed
+    - id: ClothingBackpackParamedic #SS220 Modsuit
     - id: ClothingOuterCoatParamedicWB
     - id: ClothingHeadHatParamedicsoft
     - id: ClothingOuterWinterPara
