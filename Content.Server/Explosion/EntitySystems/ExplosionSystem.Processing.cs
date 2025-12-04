@@ -440,6 +440,11 @@ public sealed partial class ExplosionSystem
         float? fireStacksOnIgnite,
         EntityUid? cause)
     {
+        // SS220 Fix mob damage inside Dark Reaper begin
+        if (IsPaused(uid))
+            return;
+        // SS220 Fix mob damage inside Dark Reaper end
+
         if (originalDamage != null)
         {
             GetEntitiesToDamage(uid, originalDamage, id);
@@ -470,7 +475,11 @@ public sealed partial class ExplosionSystem
         {
             if (_flammableQuery.TryGetComponent(uid, out var flammable))
             {
-                flammable.FireStacks += fireStacksOnIgnite.Value;
+                // SS220 Fix mob damage inside Dark Reaper begin
+                // flammable.FireStacks += fireStacksOnIgnite.Value;
+
+                _flammableSystem.AdjustFireStacks(uid, fireStacksOnIgnite.Value, flammable);
+                // SS220 Fix mob damage inside Dark Reaper end
                 _flammableSystem.Ignite(uid, uid, flammable);
             }
         }
