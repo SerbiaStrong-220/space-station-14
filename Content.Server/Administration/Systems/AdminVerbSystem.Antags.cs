@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Server.Antag;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules.Components;
@@ -13,6 +14,13 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Content.Server.SS220.GameTicking.Rules.Components;
+using Content.Server.Traitor.Uplink;
+using Content.Shared.FixedPoint;
+using Content.Shared.Implants.Components;
+using Content.Shared.Roles.Components;
+using Content.Shared.SS220.Contractor;
+using Content.Shared.Store.Components;
+using Robust.Shared.Map;
 
 namespace Content.Server.Administration.Systems;
 
@@ -22,6 +30,7 @@ public sealed partial class AdminVerbSystem
     [Dependency] private readonly ZombieSystem _zombie = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly OutfitSystem _outfit = default!;
+    [Dependency] private readonly UplinkSystem _uplink = default!;
 
     private static readonly EntProtoId DefaultTraitorRule = "Traitor";
     private static readonly EntProtoId DefaultInitialInfectedRule = "Zombie";
@@ -67,6 +76,48 @@ public sealed partial class AdminVerbSystem
             Message = string.Join(": ", traitorName, Loc.GetString("admin-verb-make-traitor")),
         };
         args.Verbs.Add(traitor);
+
+        //ss220 add verb for shitspawn contractor start
+        Verb contractor = new()
+        {
+            Text = Loc.GetString("admin-verb-make-contractor"),
+            Category = VerbCategory.Antag,
+            Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/Structures/Wallmounts/posters.rsi"), "poster2_legit"),
+            Act = () =>
+            {
+                if (!_mindSystem.TryGetMind(targetPlayer, out var mindId, out var mind))
+                    return;
+
+                if (!_role.MindHasRole<TraitorRoleComponent>(mindId))
+                {
+                    _antag.ForceMakeAntag<TraitorRuleComponent>(targetPlayer, DefaultTraitorRule);
+                }
+
+                var uplink = _uplink.FindUplinkTarget(targetPlayer.AttachedEntity!.Value);
+
+                if (uplink is null)
+                {
+                    if (!TryComp<ImplantedComponent>(targetPlayer.AttachedEntity.Value, out var implanted))
+                        return;
+
+                    uplink = implanted.ImplantContainer.ContainedEntities
+                        .FirstOrDefault(entity => Prototype(entity)?.ID == "UplinkImplant");
+                }
+
+                var uplinkComp = EnsureComp<StoreComponent>(uplink.Value);
+                uplinkComp.Balance["Telecrystal"] -= FixedPoint2.New(20);
+
+                EnsureComp<ContractorComponent>(targetPlayer.AttachedEntity!.Value);
+
+                var box = Spawn("BoxContractor", MapCoordinates.Nullspace);
+                uplinkComp.FullListingsCatalog.FirstOrDefault(boxContractor => boxContractor.ID == "UplinkContractor")!.PurchaseAmount++;
+                _handsSystem.PickupOrDrop(targetPlayer.AttachedEntity.Value, box);
+            },
+            Impact = LogImpact.High,
+            Message = Loc.GetString("admin-verb-make-contractor"),
+        };
+        args.Verbs.Add(contractor);
+        //ss220 add verb for shitspawn contractor end
 
         var initialInfectedName = Loc.GetString("admin-verb-text-make-initial-infected");
         Verb initialInfected = new()
