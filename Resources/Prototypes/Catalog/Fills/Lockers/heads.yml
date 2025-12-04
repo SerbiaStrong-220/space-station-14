@@ -245,6 +245,7 @@
     - id: CigPackMED #SS220 Cigarettes
     - id: MedTekCartridge
     - id: BoxBottleChief #SS220 Limitation Revive
+    - id: DefibrillatorCompact # SS220 Compact Defib
 
 # Hardsuit table, used for suit storage as well
 - type: entityTable

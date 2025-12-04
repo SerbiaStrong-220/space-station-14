@@ -87,7 +87,8 @@
     size: Normal
   - type: ToggleCellDraw
   - type: PowerCellDraw
-    useRate: 100
+    useRate: 144 #SS220 Compact Defib
+    drawRate: 0 #SS220 Compact Defib
   - type: Defibrillator
     zapHeal:
       types:
