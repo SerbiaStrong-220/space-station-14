@@ -101,10 +101,13 @@ public sealed class FieldShieldProviderSystem : EntitySystem
 
     private void OnShieldDamageModify(Entity<FieldShieldComponent> entity, ref DamageModifyEvent args)
     {
-        if (entity.Comp.ShieldCharge <= 0 || args.OriginalDamage.GetTotal() < entity.Comp.ShieldData.DamageThreshold)
+        if (args.OriginalDamage.GetTotal() < entity.Comp.ShieldData.DamageThreshold)
             return;
 
         UpdateShieldTimer(entity);
+
+        if (entity.Comp.ShieldCharge <= 0)
+            return;
 
         DecreaseShieldCharges(entity);
         args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, entity.Comp.ShieldData.Modifiers);

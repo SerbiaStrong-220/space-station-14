@@ -1,8 +1,9 @@
-field-shield-provider-examine = Снаряжение обладает эмиттером персонального полевого щита. Время зарядки щита { $ChargeTime }, щит способен выдержать { $MaxCharge } { $MaxCharges ->
-                    [one] удара
+field-shield-provider-examine = Снаряжение обладает эмиттером персонального полевого щита. Время зарядки щита { $ChargeTime }, щит способен выдержать { $MaxCharge } { $MaxCharge ->
+                    [one] удар
+                    [two] удара
                     *[other] ударов
                     }.
-field-shield-self-examine = Щит способен выдержать { $Charges } из { $MaxCharge } { $MaxCharges ->
+field-shield-self-examine = Щит способен выдержать { $Charges } из { $MaxCharge } { $MaxCharge ->
                     [one] удара
                     *[other] ударов
                     }.
