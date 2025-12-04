@@ -202,4 +202,27 @@ public sealed partial class QuickDialogSystem
         );
     }
     //SS220-RenameStart - end
+
+    // ss220 add transfer on drag start
+    [PublicAPI]
+    public void OpenDialog(ICommonSession session, string title, string description, string prompt, Action<bool> okAction,
+        Action? cancelAction = null)
+    {
+        OpenDialogInternal(
+            session,
+            title,
+            description,
+            new List<QuickDialogEntry>(),
+            QuickDialogButtonFlag.OkButton | QuickDialogButtonFlag.CancelButton,
+            (ev =>
+            {
+                if ((ev.ButtonPressed & QuickDialogButtonFlag.OkButton) != 0)
+                    okAction.Invoke(true);
+                else
+                    cancelAction?.Invoke();
+            }),
+            cancelAction ?? (() => { })
+        );
+    }
+    // ss220 add transfer on drag end
 }
