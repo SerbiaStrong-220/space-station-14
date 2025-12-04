@@ -175,3 +175,45 @@
   name: The Drunken Sailor
   path:
     path: /Audio/SS220/Jukebox/The_Drunken_Sailor.ogg
+
+- type: jukebox
+  id: O_Fortuna
+  name: Carmina Burana - Carl Orff
+  path:
+    path: /Audio/SS220/Jukebox/MIT_Concert-Choir_O_Fortuna.ogg
+
+- type: jukebox
+  id: Toccata_And_Fugue
+  name: Bach - Toccata and Fugue in D Minor
+  path:
+    path: /Audio/SS220/Jukebox/Illinois_Brass_Band_Bach_Toccata_and_Fugue_in_D_Minor.ogg
+
+- type: jukebox
+  id: The_Hall_Of_The_Mountain_King
+  name: Grieg - In the Hall of the Mountain King
+  path:
+    path: /Audio/SS220/Jukebox/Grieg_In_the_Hall_of_the_Mountain_King.ogg
+
+- type: jukebox
+  id: Ave_Maria
+  name: Franz Schubert - Ave Maria, Ellens Gesang III
+  path:
+    path: /Audio/SS220/Jukebox/Franz_Schubert_Ave_Maria_Ellens_Gesang_III_D839_(From Alive).ogg
+
+- type: jukebox
+  id: Cancan
+  name: Offenbach - Orpheus in the Underworld - Overture, Can Can section
+  path:
+    path: /Audio/SS220/Jukebox/Cancan.ogg
+
+- type: jukebox
+  id: Rondo_Alla_Turca
+  name: Mozart - Rondo Alla Turca
+  path:
+    path: /Audio/SS220/Jukebox/08_Wolfgang_Amadeus_Mozart_Rondo_Alla_Turca_1783.ogg
+
+- type: jukebox
+  id: Dance_Of_The_Sugar_Plum_Fairy
+  name: Tchaikovsky - Dance of the Sugar Plum Fairy
+  path:
+    path: /Audio/SS220/Jukebox/23_Peter_Ilyich_Tchaikovsky_Nutcracker_Dance_Of_The_Sugar_Plum_Fairy_1892.ogg
