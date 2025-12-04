@@ -40,6 +40,13 @@ public sealed partial class ButcherableComponent : Component
 
     public EntityUid? ButcheringAudioStream;
     //SS220-butchering-update end
+    //SS220 Cult hotfix 17 #3641 start
+    /// <summary>
+    /// If it is necessary or not to rename the entities spawned during cutting.
+    /// </summary>
+    [DataField]
+    public bool WillRenameEnt = true;
+    //SS220 Cult hotfix 17 #3641 end
 }
 
 public enum ButcheringType : byte

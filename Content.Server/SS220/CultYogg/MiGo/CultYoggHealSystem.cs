@@ -48,6 +48,9 @@ public sealed class CultYoggHealSystem : SharedCultYoggHealSystem
         if (!args.DamageIncreased || args.DamageDelta == null)
             return;
 
+        if(!ent.Comp.ShouldStopOnDamage)
+            return;
+
         var delta = args.DamageDelta.GetTotal();
         if (delta < ent.Comp.CancelDamageTreshhold)
             return;
