@@ -662,6 +662,24 @@
         Heat: 0.6 #ss-220 armReb
         Radiation: 0.5
         Caustic: 0.5
+  # SS220-MIT-add-field-shields-begin
+  - type: FieldShieldProvider
+    rechargeShieldData:
+      rechargeTime: 15
+    shieldData:
+      shieldMaxCharge: 1
+      shieldSprite:
+        sprite: SS220/Effects/field_shield.rsi
+        state: red
+      shieldBlockSound:
+        # path: /Weapons/block_metal1.ogg
+        # params:
+        #   volume: -2
+    lightData:
+      color: "#D82000"
+      radius: 1
+      energy: 4
+  # SS220-MIT-add-field-shields-end
   # SS220 add stamina resistance begin
   - type: StaminaResistance
     damageCoefficient: 0.3
