@@ -19,9 +19,10 @@ public sealed class FieldShieldVisualizerSystem : EntitySystem
 
     /// <summary> Afaik minimum radius to at least show light. prototypes qol field </summary>
     private const float MinimalLightRadius = 1.5f;
-
     /// <summary> Afaik minimum energy to at least show light. prototypes qol field </summary>
     private const float MinimalLightEnergy = 1f;
+
+    private const float MinimalShieldAlpha = 0.4f;
 
     public override void Initialize()
     {
@@ -96,9 +97,14 @@ public sealed class FieldShieldVisualizerSystem : EntitySystem
         if (!_sprite.LayerMapTryGet((entity, sprite), FieldShieldVisualLayers.Shield, out var index, false))
             return;
 
-        var shieldWork = entity.Comp.ShieldCharge > 0 || _gameTiming.CurTime > entity.Comp.RechargeStartTime + entity.Comp.RechargeShieldData.RechargeTime;
+        var shieldCharge = _gameTiming.CurTime > entity.Comp.RechargeStartTime + entity.Comp.RechargeShieldData.RechargeTime ? entity.Comp.ShieldData.ShieldMaxCharge : entity.Comp.ShieldCharge;
+        var shieldChargeRelative = Math.Clamp((float)shieldCharge / entity.Comp.ShieldData.ShieldMaxCharge, 0f, 1f);
+        var shieldWork = shieldCharge > 0;
 
         _sprite.LayerSetVisible((entity, sprite), index, shieldWork);
+
+        var alphaChannelFromShieldCharge = shieldChargeRelative * (1f - MinimalShieldAlpha) + MinimalShieldAlpha;
+        _sprite.LayerSetColor((entity, sprite), index, Color.White.WithAlpha(alphaChannelFromShieldCharge));
 
         if (!shieldWork)
         {
@@ -113,8 +119,12 @@ public sealed class FieldShieldVisualizerSystem : EntitySystem
         var light = EnsureComp<PointLightComponent>(entity.Comp.LightEntity.Value);
 
         _lights.SetColor(entity.Comp.LightEntity.Value, entity.Comp.LightData.Color, light);
-        _lights.SetRadius(entity.Comp.LightEntity.Value, MinimalLightRadius + entity.Comp.LightData.Radius, light);
-        _lights.SetEnergy(entity.Comp.LightEntity.Value, MinimalLightEnergy + entity.Comp.LightData.Energy, light);
+
+        var lightRadius = MinimalLightRadius + entity.Comp.LightData.Radius * shieldChargeRelative;
+        var lightEnergy = MinimalLightEnergy + entity.Comp.LightData.Energy * shieldChargeRelative;
+
+        _lights.SetRadius(entity.Comp.LightEntity.Value, lightRadius, light);
+        _lights.SetEnergy(entity.Comp.LightEntity.Value, lightEnergy, light);
     }
 }
 

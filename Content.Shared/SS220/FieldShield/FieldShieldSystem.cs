@@ -83,6 +83,9 @@ public sealed class FieldShieldProviderSystem : EntitySystem
 
     private void OnFieldShieldBeforeDamage(Entity<FieldShieldComponent> entity, ref BeforeDamageChangedEvent args)
     {
+        if (args.Cancelled)
+            return;
+
         if (args.Damage.GetTotal() > entity.Comp.ShieldData.MaxDamageConsumable
             || args.Damage.GetTotal() < entity.Comp.ShieldData.DamageThreshold)
             return;
@@ -98,7 +101,7 @@ public sealed class FieldShieldProviderSystem : EntitySystem
 
     private void OnShieldDamageModify(Entity<FieldShieldComponent> entity, ref DamageModifyEvent args)
     {
-        if (entity.Comp.ShieldCharge <= 0)
+        if (entity.Comp.ShieldCharge <= 0 || args.OriginalDamage.GetTotal() < entity.Comp.ShieldData.DamageThreshold)
             return;
 
         UpdateShieldTimer(entity);

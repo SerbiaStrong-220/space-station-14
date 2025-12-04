@@ -99,7 +99,10 @@ public partial struct ShieldData
 
     [DataField]
     [AutoNetworkedField]
-    public SoundSpecifier? ShieldBlockSound;
+    public SoundSpecifier? ShieldBlockSound = new SoundPathSpecifier("/Audio/SS220/Effects/FieldShield/basscannon.ogg")
+    {
+        Params = AudioParams.Default.WithPitchScale(1.3f).WithVariation(0.15f).WithVolume(-2f)
+    };
 }
 
 [DataDefinition]
