@@ -2,7 +2,7 @@
 
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.Messenger;
+namespace Content.Shared.SS220.Messenger;
 
 [Serializable, NetSerializable]
 public sealed class MessengerChat
@@ -23,7 +23,7 @@ public sealed class MessengerChat
 
     public MessengerChat()
     {
-        Name = "";
+        Name = string.Empty;
         Kind = MessengerChatKind.Contact;
         MembersId = new();
     }
@@ -53,31 +53,20 @@ public sealed class MessengerContact
 
     public MessengerContact()
     {
-        Name = "";
+        Name = string.Empty;
     }
 }
 
 [Serializable, NetSerializable]
-public sealed class MessengerMessage
+public sealed class MessengerMessage(uint chatId, uint fromContactId, TimeSpan time, string text)
 {
     public uint Id;
-    public uint ChatId;
-    public uint FromContactId;
-    public TimeSpan Time;
-    public string Text;
+    public uint ChatId = chatId;
+    public uint FromContactId = fromContactId;
+    public TimeSpan Time = time;
+    public string Text = text;
 
-    public MessengerMessage(uint chatId, uint fromContactId, TimeSpan time, string text)
+    public MessengerMessage() : this(0, 0, TimeSpan.Zero, string.Empty)
     {
-        ChatId = chatId;
-        FromContactId = fromContactId;
-        Time = time;
-        Text = text;
-    }
-
-    public MessengerMessage()
-    {
-        FromContactId = 0;
-        Time = new TimeSpan();
-        Text = "";
     }
 }
