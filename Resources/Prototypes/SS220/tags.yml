@@ -357,3 +357,9 @@
 
 - type: Tag
   id: MiGoHandsWhitelist
+
+- type: Tag
+  id: VapePartAtomizer
+
+- type: Tag
+  id: VapePartCartridge
