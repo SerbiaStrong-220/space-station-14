@@ -597,7 +597,7 @@
   parent: ClothingOuterHardsuitBase
   id: ClothingOuterHardsuitLuxury #DO NOT MAP - https://github.com/space-wizards/space-station-14/pull/19738#issuecomment-1703486738
   name: luxury mining hardsuit
-  description: A refurbished mining hardsuit, fashioned after the Quartermaster's colors. Graphene lining provides less protection, but is much easier to move.
+  description: A refurbished miner's hardsuit, covered with gold dusting to emphasize your worthiness. The inside of the suit is complemented by a graphene lining, which has lightened the suit itself at the cost of its protective properties. #SS220 Quartermaster_Hardsuit_add
   categories: [ DoNotMap ]
   components:
   - type: Sprite
@@ -614,17 +614,23 @@
   - type: PressureProtection
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
+    #SS220 Quartermaster_Hardsuit_add start
   - type: ExplosionResistance
-    damageCoefficient: 0.9
+    damageCoefficient: 0.8
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.9
-        Slash: 0.8
-        Piercing: 0.9
-        Heat: 0.9
+        Blunt: 0.75
+        Slash: 0.7
+        Piercing: 0.75
+        Heat: 0.8
         Radiation: 0.5
         Caustic: 0.8
+    #SS220 Quartermaster_Hardsuit_add end
+    # SS220 add stamina resistance begin
+  - type: StaminaResistance
+    damageCoefficient: 0.8
+  # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
     walkModifier: 0.9
     sprintModifier: 0.9
