@@ -19,7 +19,7 @@ public static partial class MathHelperExtensions
             result.AddRange(SubstructBox(result, cutter));
 
         if (unionResult)
-            result = [.. UnionInEqualSizedBoxes(boxes)];
+            result = [.. UnionInEqualSizedBoxes(result)];
 
         return result;
     }
@@ -34,7 +34,7 @@ public static partial class MathHelperExtensions
             result.AddRange(SubstructBox(box, cutter));
 
         if (unionResult)
-            result = [.. UnionInEqualSizedBoxes(boxes)];
+            result = [.. UnionInEqualSizedBoxes(result)];
 
         return result;
     }

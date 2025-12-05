@@ -30,7 +30,7 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
     public bool Active => _active;
     private bool _active;
 
-    public bool AttachToGrid
+    public bool AttachToLattice
     {
         get => _attachToGrid;
         set => _attachToGrid = value;
@@ -148,7 +148,7 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
         if (box == Box2.Empty)
             return null;
 
-        if (AttachToGrid)
+        if (AttachToLattice)
         {
             var gridSize = 1f;
             if (_entity.TryGetComponent<MapGridComponent>(parent, out var mapGrid))
@@ -188,7 +188,7 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
         _point2 = null;
         _parent = null;
         SetColor(null);
-        AttachToGrid = false;
+        AttachToLattice = false;
     }
 
     public void SetColor(Color? newColor)
@@ -234,7 +234,7 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
             var point2 = transform.ToCoordinates(parent, mapCoords).Position;
             var box = Box2.FromTwoPoints(point1, point2);
 
-            if (_boxLayoutManager.AttachToGrid)
+            if (_boxLayoutManager.AttachToLattice)
             {
                 var gridSize = 1f;
                 if (_entityManager.TryGetComponent<MapGridComponent>(parent, out var mapGrid))

@@ -31,6 +31,7 @@ public sealed class CreateZoneRequestMessage(
 public sealed class ChangeZoneRequestMessage(
     NetEntity zone,
     NetEntity? parent = null,
+    EntProtoId<ZoneComponent>? protoId = null,
     List<Box2>? area = null,
     string? name = null,
     Color? color = null,
@@ -39,6 +40,8 @@ public sealed class ChangeZoneRequestMessage(
     public NetEntity Zone = zone;
 
     public NetEntity? Parent = parent;
+
+    public EntProtoId<ZoneComponent>? ProtoId = protoId;
 
     public List<Box2>? Area = area;
 

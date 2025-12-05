@@ -48,6 +48,8 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
     public ZoneParams OriginalParams { get; private set; } = default!;
 
+    public ZoneParams CurrentParams => ChangedParams ?? OriginalParams;
+
     private BoxLayoutMode _layoutMode = BoxLayoutMode.Adding;
 
     private ZoneParamsBoxesOverlayProvider _overlayProvider;
@@ -178,7 +180,7 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
         OriginalParams = GetZoneParams(ZoneEntity);
 
-        var showedParams = _changedParams ?? OriginalParams;
+        var showedParams = CurrentParams;
 
         NameLineEdit.Text = showedParams.Name;
         PrototypeIDLineEdit.Text = showedParams.ProtoId;
@@ -244,17 +246,16 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
         _layoutMode = mode;
 
-        var curParams = ChangedParams ?? OriginalParams;
         switch (mode)
         {
             case BoxLayoutMode.Adding:
                 _boxLayoutManager.StartNew();
-                _boxLayoutManager.AttachToGrid = curParams.AttachToLattice;
+                _boxLayoutManager.AttachToLattice = CurrentParams.AttachToLattice;
                 break;
 
             case BoxLayoutMode.Cutting:
                 _boxLayoutManager.StartNew();
-                _boxLayoutManager.AttachToGrid = curParams.AttachToLattice;
+                _boxLayoutManager.AttachToLattice = CurrentParams.AttachToLattice;
                 _boxLayoutManager.SetColor(Color.Red);
                 break;
         }
@@ -290,7 +291,7 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
     private void OnLayoutEnded(BoxLayoutManager.BoxArgs args)
     {
-        var newParams = ChangedParams ?? OriginalParams;
+        var newParams = CurrentParams;
         if (!newParams.Parent.IsValid())
             newParams.Parent = args.Parent;
         else if (args.Parent != newParams.Parent)
@@ -308,9 +309,6 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
             case BoxLayoutMode.Cutting:
                 var cutter = args.Box;
-                if (newParams.AttachToLattice)
-                    cutter = _zones.AttachToLattice(newParams.Parent, cutter);
-
                 newArea = [.. MathHelperExtensions.SubstructBox(newArea, cutter)];
                 break;
         }
@@ -363,11 +361,9 @@ public sealed partial class ZoneParamsPanel : PanelContainer
     {
         ChangeParams(cur =>
         {
-            area = [.. _zones.RecalculateArea(area, cur.Parent, cur.AttachToLattice)];
-
             cur.Area = area;
             return cur;
-        });
+        }, recalculate: true);
     }
 
     private void ChangeName(string name)
@@ -415,14 +411,17 @@ public sealed partial class ZoneParamsPanel : PanelContainer
         {
             cur.AttachToLattice = value;
             return cur;
-        });
+        }, recalculate: value);
     }
 
-    private void ChangeParams(Func<ZoneParams, ZoneParams> func, bool refresh = true)
+    private void ChangeParams(Func<ZoneParams, ZoneParams> func, bool refresh = true, bool recalculate = false)
     {
-        var cur = _changedParams ?? OriginalParams;
-        _changedParams = func.Invoke(cur);
+        var result = func.Invoke(CurrentParams);
 
+        if (recalculate)
+            result.Area = [.. _zones.RecalculateArea(result.Area, result.Parent, result.AttachToLattice)];
+
+        _changedParams = result;
         if (refresh)
             Refresh();
     }

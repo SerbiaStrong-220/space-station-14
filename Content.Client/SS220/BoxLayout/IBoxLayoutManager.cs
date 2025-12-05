@@ -16,7 +16,7 @@ public interface IBoxLayoutManager
     Vector2? Point2 { get; }
     Color Color { get; }
     bool Active { get; }
-    bool AttachToGrid { get; set; }
+    bool AttachToLattice { get; set; }
     BoxArgs? CurParams { get; }
 
     void Initialize();

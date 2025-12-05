@@ -68,12 +68,13 @@ public sealed partial class ZonesSystem : SharedZonesSystem
     public void ChangeZoneRequest(
         NetEntity zone,
         NetEntity? parent = null,
+        EntProtoId<ZoneComponent>? protoId = null,
         List<Box2>? area = null,
         string? name = null,
         Color? color = null,
         bool? attachToLattice = null)
     {
-        var msg = new ChangeZoneRequestMessage(zone, parent, area, name, color, attachToLattice);
+        var msg = new ChangeZoneRequestMessage(zone, parent, protoId, area, name, color, attachToLattice);
         RaiseNetworkEvent(msg);
     }
 

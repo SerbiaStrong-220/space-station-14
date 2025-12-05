@@ -65,11 +65,20 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         if (!_admin.HasAdminFlag(args.SenderSession, Shared.Administration.AdminFlags.Mapping))
             return;
 
-        var uid = GetEntity(msg.Zone);
+        if (!TryGetEntity(msg.Zone, out var uid))
+            return;
+
         if (!TryComp<ZoneComponent>(uid, out var zoneComp))
             return;
 
-        var zone = (uid, zoneComp);
+        Entity<ZoneComponent> zone = (uid.Value, zoneComp);
+        if (msg.ProtoId is { } protoId)
+        {
+            var newZone = ChangeZoneProto(zone, protoId);
+            if (newZone != null)
+                zone = newZone.Value;
+        }
+
         if (msg.Parent is { } parent)
             SetZoneParent(zone, GetEntity(parent), recalculate: false);
 
@@ -161,6 +170,27 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         ent.Comp.Area = [.. RecalculateArea(area, parent, ent.Comp.AttachToLattice)];
 
         Dirty(ent);
+    }
+
+    public Entity<ZoneComponent>? ChangeZoneProto(Entity<ZoneComponent> ent, EntProtoId<ZoneComponent> protoId)
+    {
+        var metaData = MetaData(ent);
+        if (protoId.Id != metaData.EntityPrototype?.ID)
+            return null;
+
+        var result = CreateZone(
+                Transform(ent).ParentUid,
+                protoId,
+                ent.Comp.Area,
+                metaData.EntityName,
+                ent.Comp.Color,
+                ent.Comp.AttachToLattice);
+
+        if (result.Zone is not { } newZone)
+            return null;
+
+        DeleteZone(ent);
+        return newZone;
     }
 
     public bool SetZoneParent(Entity<ZoneComponent> ent, EntityUid parent, bool recalculate = true)

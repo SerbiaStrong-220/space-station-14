@@ -97,7 +97,7 @@ public sealed partial class ZonesControlWindow : DefaultWindow
             if (_zoneParentEntries.TryGetValue(parent, out var entry))
                 entry.ZoneEntries.Add(value);
             else
-                _zoneParentEntries[parent] = new ZonesParentEntry(parent, [value]);
+                _zoneParentEntries[parent] = new ZonesParentEntry(parent, new() { value });
 
             _zoneEntries.Add(key, value);
         }
@@ -258,8 +258,15 @@ public sealed partial class ZonesControlWindow : DefaultWindow
         };
         creatingButton.OnPressed += _ =>
         {
-            var @params = ZoneParams.GetParams();
-            _zones.ExecuteCreateZone(@params);
+            var @params = ZoneParams.CurrentParams;
+            _zones.CreateZoneRequest(
+                _entityManager.GetNetEntity(@params.Parent),
+                @params.ProtoId,
+                @params.Area,
+                @params.Name,
+                @params.Color,
+                @params.AttachToLattice);
+
             SetOptions(ZoneOptions.None);
         };
         box.AddChild(creatingButton);
@@ -293,11 +300,17 @@ public sealed partial class ZonesControlWindow : DefaultWindow
         {
             if (SelectedZoneEntry?.ZoneEntity is { } zone)
             {
-                var newParams = ZoneParams.GetParams();
-                if (SharedZonesSystem.NeedRecreate(zone.Comp.ZoneParams, newParams))
-                    ThrowRecreateWarning(zone, newParams, applyButton.GlobalPosition);
-                else
-                    ExecuteChange(zone, newParams);
+                var newParams = ZoneParams.CurrentParams;
+                _zones.ChangeZoneRequest(
+                    _entityManager.GetNetEntity(zone),
+                    _entityManager.GetNetEntity(newParams.Parent),
+                    newParams.ProtoId,
+                    newParams.Area,
+                    newParams.Name,
+                    newParams.Color,
+                    newParams.AttachToLattice);
+
+                SetOptions(ZoneOptions.None);
             }
         };
         box.AddChild(applyButton);
@@ -311,42 +324,6 @@ public sealed partial class ZonesControlWindow : DefaultWindow
         box.AddChild(cancelButton);
 
         return box;
-
-        void ThrowRecreateWarning(Entity<ZoneComponent> zone, ZoneParams newParams, Vector2? position = null)
-        {
-            if (_openedWarningWindow != null)
-                return;
-
-            _openedWarningWindow = new ZoneWarningWindow();
-            var text = Loc.GetString("zones-control-recreate-warning-text");
-            _openedWarningWindow.WarningLabel.SetMessage(text);
-
-            if (position != null)
-            {
-                _openedWarningWindow.Open(position.Value);
-            }
-            else
-                _openedWarningWindow.OpenCentered();
-
-            _openedWarningWindow.ConfirmButton.OnPressed += _ =>
-            {
-                ExecuteChange(zone, newParams);
-                _openedWarningWindow.Close();
-            };
-
-            _openedWarningWindow.CancelButton.OnPressed += _ =>
-            {
-                _openedWarningWindow.Close();
-            };
-
-            _openedWarningWindow.OnClose += () => _openedWarningWindow = null;
-        }
-
-        void ExecuteChange(Entity<ZoneComponent> zone, ZoneParams newParams)
-        {
-            _zones.ExecuteChangeZone(zone, newParams);
-            SetOptions(ZoneOptions.None);
-        }
     }
 
     private enum ZoneOptions
