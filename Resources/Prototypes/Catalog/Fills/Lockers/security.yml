@@ -97,6 +97,7 @@
     # - id: BookSpaceLaw #SS220 space-law
     #   prob: 0.5 #SS220 space-law
     - id: BookSpaceLaws #SS220 space-law
+    - id: ClothingBeltCorporateJudo # SS220-CorporateJudo
 
 - type: entity
   id: LockerBrigmedicFilled

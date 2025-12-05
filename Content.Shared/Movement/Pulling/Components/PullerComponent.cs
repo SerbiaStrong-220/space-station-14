@@ -38,12 +38,22 @@ public sealed partial class PullerComponent : Component
     /// <summary>
     ///     Does this entity need hands to be able to pull something?
     /// </summary>
-    [DataField] 
+    [DataField]
     [Access(Other = AccessPermissions.ReadWriteExecute)] //SS220 DarkReaper Access
     public bool NeedsHands = true;
 
     [DataField]
     public ProtoId<AlertPrototype> PullingAlert = "Pulling";
+
+    // SS220-PullingCooldown-Start
+    [DataField]
+    [AutoNetworkedField]
+    public TimeSpan LastPullAt = TimeSpan.Zero;
+
+    [DataField]
+    [AutoNetworkedField]
+    public TimeSpan PullCooldown = TimeSpan.FromSeconds(2);
+    // SS220-PullingCooldown-End
 }
 
 public sealed partial class StopPullingAlertEvent : BaseAlertEvent;
