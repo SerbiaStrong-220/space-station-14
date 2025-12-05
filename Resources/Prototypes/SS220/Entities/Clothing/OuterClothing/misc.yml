@@ -81,7 +81,7 @@
     sprite: SS220/Clothing/OuterClothing/Misc/scarlet_typhoon.rsi
 
 - type: entity
-  parent: ClothingOuterBaseMedium
+  parent: [ClothingOuterBaseMedium, ClothingOuterArmorBase]
   id: ClothingOuterArmorElectricity
   suffix: Electrification armor
   components:
