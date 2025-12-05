@@ -517,4 +517,11 @@ public sealed partial class AdminLogManager : SharedAdminLogManager, IAdminLogMa
     {
         return _db.CountAdminLogs(round);
     }
+
+    // ss220 add signature start
+    public Task<JsonDocument?> GetJsonByLogId(int logId, DateTime time)
+    {
+        return _db.GetJsonByLogId(logId, time);
+    }
+    // ss220 add signature end
 }

@@ -12,6 +12,7 @@ using Robust.Shared.Utility;
 using System.Linq;
 using System.Numerics;
 using System.Runtime.InteropServices;
+using Content.Shared.SS220.Signature;
 using static Robust.Client.UserInterface.Controls.BaseButton;
 using static Robust.Client.UserInterface.Controls.LineEdit;
 
@@ -25,6 +26,10 @@ public sealed partial class AdminLogsControl : Control
     private readonly PopupSystem _popup = default!;
     // SS220-add-logs-copying-end
 
+    // ss220 add signature start
+    private readonly IEntityManager _entMan = default!;
+    // ss220 add signature end
+
     private readonly Comparer<AdminLogTypeButton> _adminLogTypeButtonComparer =
         Comparer<AdminLogTypeButton>.Create((a, b) =>
             string.Compare(a.Type.ToString(), b.Type.ToString(), StringComparison.Ordinal));
@@ -32,6 +37,12 @@ public sealed partial class AdminLogsControl : Control
     private readonly Comparer<AdminLogPlayerButton> _adminLogPlayerButtonComparer =
         Comparer<AdminLogPlayerButton>.Create((a, b) =>
             string.Compare(a.Text, b.Text, StringComparison.Ordinal));
+
+    // ss220 add signature start
+    private const string SignatureShowButtonOpenBoth = "OpenBoth";
+    private static readonly Vector2 SignatureShowButtonSize = new(169, 32);
+    private static readonly LocId SignatureShowButtonLabel = "admin-logs-signature-show-button-label";
+    // ss220 add signature end
 
     public AdminLogsControl()
     {
@@ -46,6 +57,7 @@ public sealed partial class AdminLogsControl : Control
 
         _clipboard = IoCManager.Resolve<IClipboardManager>();
         _popup = IoCManager.Resolve<EntityManager>().System<PopupSystem>();
+        _entMan = IoCManager.Resolve<IEntityManager>(); // ss220 add signature
 
         EarlyBorderTime.OnTextEntered += OnEarlyDateTimeChanged;
         EarlyBorderTime.OnTextChanged += (_) => EarlyBorderTime.ModulateSelfOverride = null;
@@ -531,7 +543,34 @@ public sealed partial class AdminLogsControl : Control
                 ShownLogs++;
             }
 
+            // ss220 add signature start
+            Button? signatureShowButton = null;
+
+            if (log.Message.Contains(SignatureLogData.SignatureLogTag))
+            {
+                var id = log.Id;
+                var date = log.Date;
+                signatureShowButton = new Button
+                {
+                    SetSize = SignatureShowButtonSize,
+                    Text = Loc.GetString(SignatureShowButtonLabel),
+                    StyleClasses = { SignatureShowButtonOpenBoth },
+                };
+
+                signatureShowButton.OnPressed += _ =>
+                {
+                    _entMan.RaisePredictiveEvent(new RequestSignatureAdminMessage(id, date));
+                };
+            }
+            // ss220 add signature end
+
             LogsContainer.AddChild(label);
+
+            // ss220 add signature start
+            if (signatureShowButton is not null)
+                LogsContainer.AddChild(signatureShowButton);
+            // ss220 add signature end
+
             LogsContainer.AddChild(separator);
         }
 

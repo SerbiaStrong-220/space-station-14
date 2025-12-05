@@ -839,6 +839,10 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("TEXT")
                         .HasColumnName("sex");
 
+                    b.Property<string>("SignatureData")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("signature_data");
+
                     b.Property<string>("SkinColor")
                         .IsRequired()
                         .HasColumnType("TEXT")

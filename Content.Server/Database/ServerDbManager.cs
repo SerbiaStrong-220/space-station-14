@@ -288,6 +288,7 @@ namespace Content.Server.Database
         IAsyncEnumerable<SharedAdminLog> GetAdminLogs(LogFilter? filter = null);
         IAsyncEnumerable<JsonDocument> GetAdminLogsJson(LogFilter? filter = null);
         Task<int> CountAdminLogs(int round);
+        Task<JsonDocument?> GetJsonByLogId(int logId, DateTime time); // ss220 add signature
 
         #endregion
 
@@ -864,6 +865,14 @@ namespace Content.Server.Database
             DbReadOpsMetric.Inc();
             return RunDbCommand(() => _db.CountAdminLogs(round));
         }
+
+        // ss220 add signature start
+        public Task<JsonDocument?> GetJsonByLogId(int logId, DateTime time)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetJsonByLogId(logId, time));
+        }
+        // ss220 add signature end
 
         public Task<bool> GetWhitelistStatusAsync(NetUserId player)
         {
