@@ -237,6 +237,7 @@
   loadouts:
   - MaskTacSec
   - SecTacGasMask
+  - MaskSecBalaclava
 
 - type: loadoutGroup
   id: SecurityGlasses
@@ -283,6 +284,7 @@
   - SecurityBeret
   - SecurityHat
   - PilotCapCap
+  - PilotBeret
   - HelmetTacSec
 
 - type: loadoutGroup

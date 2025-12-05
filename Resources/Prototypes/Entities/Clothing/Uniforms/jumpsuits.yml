@@ -314,7 +314,7 @@
   description: Rather bland and inoffensive. Perfect for vanishing off the face of the universe.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/hop.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/hop.rsi #SS220 HoP jumpskirt repsrite
 
 - type: entity
   parent: [ClothingUniformBase]
@@ -858,7 +858,7 @@
     price: 500
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformFoldableBase] #SS220 folded-equipped-INNERCLOTHING resprite
   id: ClothingUniformJumpsuitTacticool
   name: tacticool jumpsuit
   description: Uniform for subpar operative LARPers performing tactical insulated glove theft in deep space.

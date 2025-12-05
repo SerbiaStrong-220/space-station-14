@@ -62,3 +62,8 @@
   id: rrranta
   flavorType: Complex
   description: flavor-complex-rrranta
+
+- type: flavor
+  id: Skooma
+  flavorType: Complex
+  description: flavor-complex-skooma

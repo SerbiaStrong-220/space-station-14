@@ -128,8 +128,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      200: Critical
-      250: Dead
+      140: Critical
+      150: Dead
   - type: Destructible
     thresholds:
     - trigger:
