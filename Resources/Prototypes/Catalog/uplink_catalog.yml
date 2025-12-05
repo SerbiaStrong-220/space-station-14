@@ -357,6 +357,15 @@
     Telecrystal: 18
   categories:
   - UplinkWeaponry
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 20
+    MediumDynamic:
+      Telecrystal: 16
+    HardDynamic:
+      Telecrystal: 9
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkBulldogBundle
@@ -2429,29 +2438,6 @@
       Telecrystal: 4
     HardDynamic:
       Telecrystal: 2
-#ss220 dynamic-price end
-
-# TODO: Revert back to normal thieving gloves when clothes dyeing is added
-- type: listing
-  id: UplinkgClothingThievingGloves
-  name: uplink-clothing-chameleon-thieving-gloves-name
-  description: uplink-clothing-chameleon-thieving-gloves-desc
-  productEntity: ClothingHandsChameleonThief
-  discountCategory: veryRareDiscounts
-  discountDownTo:
-    Telecrystal: 1 #ss220-uplink-discounts
-  cost:
-    Telecrystal: 2 #ss220-uplink-discounts
-  categories:
-  - UplinkWearables
-#ss220 dynamic-price bgn
-  dynamicsPrices:
-    LightDynamic:
-      Telecrystal: 2
-    MediumDynamic:
-      Telecrystal: 4
-    HardDynamic:
-      Telecrystal: 8
 #ss220 dynamic-price end
 
 - type: listing
