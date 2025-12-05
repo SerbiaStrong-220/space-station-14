@@ -1,26 +1,18 @@
 using Content.Shared.Forensics.Components;
 using Content.Shared.Ghost;
-using Content.Shared.SS220.GhostExtension;
-using Content.Shared.SS220.Mind;
 using Robust.Shared.Network;
 using Robust.Server.Player;
 using Robust.Shared.Timing;
+using Content.Shared.SS220.MindExtension.Events;
+using Content.Shared.SS220.MindExtension;
 
 namespace Content.Server.SS220.MindExtension;
 
-public sealed class MindRespawnSystem : EntitySystem
+public partial class MindExtensionSystem : EntitySystem //MindRespawnSystem
 {
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeNetworkEvent<ExtensionRespawnActionEvent>(OnRespawnActionEvent);
-
-        //TODO: Установить связь таймера с UI. Выявлять суицидника.
-    }
 
     private void OnRespawnActionEvent(ExtensionRespawnActionEvent ev, EntitySessionEventArgs args)
     {
@@ -38,14 +30,14 @@ public sealed class MindRespawnSystem : EntitySystem
             RaiseLocalEvent((EntityUid)args.SenderSession.AttachedEntity, new RespawnActionEvent());
     }
 
-    public void SetRespawnTimer(MindExtensionComponent component, EntityUid newEntity, NetUserId session)
+    private void SetRespawnTimer(MindExtensionComponent component, EntityUid newEntity, NetUserId session)
     {
         if (!TryComp<DnaComponent>(newEntity, out var dna))
         {
             if (component.IsIC == true)
             {
-                component.RespawnTimer = _gameTiming.CurTime + TimeSpan.FromSeconds(component.RespawnAccumulatorMax);
-                var ev = new UpdateRespawnTime((TimeSpan)component.RespawnTimer);
+                component.RespawnTimer = _gameTiming.CurTime + TimeSpan.FromSeconds(component.RespawnTime);
+                var ev = new UpdateRespawnTimeMessage((TimeSpan)component.RespawnTimer);
                 RaiseNetworkEvent(ev, _playerManager.GetSessionById(session));
             }
 

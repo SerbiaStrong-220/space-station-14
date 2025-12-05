@@ -663,12 +663,12 @@ namespace Content.Server.Ghost
             //   (If the mob survives, that's a bug. Ghosting is kept regardless.)
             var canReturn = canReturnGlobal && _mind.IsCharacterDeadPhysically(mind);
 
-            if (playerEntity is not null)
+            /*if (playerEntity is not null)
                 _mindExtension.GhostAttempt((EntityUid)playerEntity, canReturn);
             else
             {
 
-            }
+            }*/
 
             if (_configurationManager.GetCVar(CCVars.GhostKillCrit) &&
                 canReturnGlobal &&

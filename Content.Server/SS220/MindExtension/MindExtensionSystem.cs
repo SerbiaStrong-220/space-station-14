@@ -1,166 +1,167 @@
+using Content.Server.Administration.Managers;
+using Content.Server.Administration.Systems;
 using Content.Server.Mind;
+using Content.Shared.Bed.Cryostorage;
 using Content.Shared.Ghost;
+using Content.Shared.Mind;
+using Content.Shared.Mind.Components;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.SS220.GhostExtension;
-using Content.Shared.SS220.Mind;
 using Content.Shared.SS220.MindExtension;
+using Content.Shared.SS220.MindExtension.Events;
 using Robust.Shared.Network;
+using Robust.Shared.Utility;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Server.SS220.MindExtension;
 
-public sealed class MindExtensionSystem : SharedMindExtensionSystem
+public sealed partial class MindExtensionSystem : EntitySystem
 {
     [Dependency] private readonly EntityManager _entityManager = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
-
-    [Dependency] private readonly MindRespawnSystem _mindRespawn = default!;
+    [Dependency] private readonly IAdminManager _admin = default!;
 
     private EntityQuery<GhostComponent> _ghostQuery;
+    private EntityQuery<MindExtensionComponent> _mindExtQuery;
     public override void Initialize()
     {
         base.Initialize();
 
         _ghostQuery = GetEntityQuery<GhostComponent>();
+        _mindExtQuery = GetEntityQuery<MindExtensionComponent>();
+
+        SubscribeNetworkEvent<ExtensionRespawnActionEvent>(OnRespawnActionEvent);
 
         SubscribeNetworkEvent<ExtensionReturnActionEvent>(OnExtensionReturnActionEvent);
-        SubscribeNetworkEvent<GhostBodyListRequestEvent>(OnGhostBodyListRequestEvent);
+        SubscribeNetworkEvent<GhostBodyListRequest>(OnGhostBodyListRequestEvent);
 
         SubscribeLocalEvent<MindTransferedEvent>(OnMindTransferedEvent);
         SubscribeLocalEvent<SuicidedEvent>(OnSuicidedEvent);
         SubscribeLocalEvent<GhostedEvent>(OnGhostedEvent);
-        //SubscribeLocalEvent<MindSwappedEvent>(OnMindSwappedEvent);
     }
 
-    #region Handlers
-    private void OnExtensionReturnActionEvent(ExtensionReturnActionEvent ev, EntitySessionEventArgs args)
+    public Entity<MindExtensionComponent> GetMindExtension(NetUserId player)
     {
-        //Нужно найти MindExtension и сверить с Trail. Сверить с IsAvaible.
-        if (!TryGetMindExtension(args.SenderSession.UserId, out var mindExtEnt))
-            return;
+        var mindExts = _entityManager.AllComponents<MindExtensionComponent>();
+        var entity = mindExts.FirstOrNull(x => x.Component.PlayerSession == player);
 
-        //Нужно проверить целевую энтити на легальность интервенции.
-        if (!TryGetEntity(ev.Target, out var target))
-            return;
+        if (entity is not null)
+            return (Entity<MindExtensionComponent>)entity;
 
-        //Нужно найти mind, который нужно будет переместить.
-        if (!_mind.TryGetMind(args.SenderSession.UserId, out var mind))
-            return;
-
-        if (IsAvaibleToEnterEntity((EntityUid)target, mindExtEnt.Value.Comp, args.SenderSession.UserId) != BodyStateToEnter.Avaible)
-            return;
-
-        _mind.TransferTo((EntityUid)mind, (EntityUid)target);
-        _mind.UnVisit((EntityUid)mind);
+        return CreateExtensionEntity(player);
     }
-    private void OnGhostBodyListRequestEvent(GhostBodyListRequestEvent ev, EntitySessionEventArgs args)
+    public bool TryGetMindExtension(NetUserId player, [NotNullWhen(true)] out Entity<MindExtensionComponent>? entity)
     {
-        // Нужно проверить, гост-ли отправляет запрос.
-        if (args.SenderSession.AttachedEntity is not { Valid: true } entity
-                || !_ghostQuery.HasComp(entity))
-        {
-            Log.Warning($"User {args.SenderSession.Name} sent a {nameof(GhostWarpsRequestEvent)} without being a ghost.");
+        var mindExts = _entityManager.AllComponents<MindExtensionComponent>();
+        entity = mindExts.FirstOrNull(x => x.Component.PlayerSession == player);
 
-            RaiseNetworkEvent(new GhostBodyListResponseEvent([]), args.SenderSession.Channel);
-            return;
-        }
-
-        // Нужно проверить наличие компонента-контейнера и компонента MindExtension.
-        if (!TryComp<MindExtensionContainerComponent>(args.SenderSession.AttachedEntity, out var mindContExt))
-        {
-            RaiseNetworkEvent(new GhostBodyListResponseEvent([]), args.SenderSession.Channel);
-            return;
-        }
-
-        if (!TryComp<MindExtensionComponent>(mindContExt.MindExtension, out var mindExt))
-        {
-            RaiseNetworkEvent(new GhostBodyListResponseEvent([]), args.SenderSession.Channel);
-            return;
-        }
-
-        var bodyList = new List<BodyCont>();
-        foreach (var pair in mindExt.Trail)
-        {
-            var state = IsAvaibleToEnterEntity(pair.Key, mindExt, args.SenderSession.UserId);
-
-            bodyList.Add(new BodyCont(GetNetEntity(pair.Key), pair.Value, state));
-        }
-
-        RaiseNetworkEvent(new GhostBodyListResponseEvent(bodyList), args.SenderSession.Channel);
+        return entity is not null;
     }
-    private void OnMindTransferedEvent(ref MindTransferedEvent ev)
+
+    public bool TryGetMindExtension(MindExtensionContainerComponent container, [NotNullWhen(true)] out Entity<MindExtensionComponent>? entity)
     {
-        if (ev.Player is null)
+        entity = null;
+
+        if (container.MindExtension is null)
+            return false;
+
+        entity = _mindExtQuery.Get((EntityUid)container.MindExtension);
+
+        return entity is not null;
+    }
+
+    private (EntityUid Uid, MindExtensionComponent Component) CreateExtensionEntity(NetUserId playerSession)
+    {
+        var newEnt = _entityManager.CreateEntityUninitialized(null);
+        var mindExtComponent = new MindExtensionComponent() { PlayerSession = playerSession };
+
+        _entityManager.AddComponent(newEnt, mindExtComponent);
+        _entityManager.InitializeEntity(newEnt);
+        return new(newEnt, mindExtComponent);
+    }
+
+    #region Helpers
+    private bool CheckEntityAbandoned(EntityUid entity)
+    {
+        //Если ливаем не из тела, то норм.
+        if (!TryComp<MobStateComponent>(entity, out var mobState))
+            return false;
+
+        //Если ливаем из мертвого тела, то норм.
+        switch (mobState.CurrentState)
+        {
+            case Shared.Mobs.MobState.Invalid:
+                return false;
+            case Shared.Mobs.MobState.Dead:
+                return false;
+        }
+
+        //Если ливаем из живого тела, то пока пиздося с гарантом, кроме случая суицида.
+        return true;
+    }
+
+    private void ChangeOrAddTrailPoint(MindExtensionComponent comp, EntityUid entity, bool isAbandoned)
+    {
+        if (!IsAvaibleToRememberEntity(entity))
             return;
 
-        TryComp<MetaDataComponent>(ev.OldEntity, out var metaData);
-
-        //Нужно создать пустую энтитю с MindExtComp, если ее нет.
-        if (!TryGetMindExtension((NetUserId)ev.Player, out var mindExtEnt))
-            mindExtEnt = CreateExtensionEntity((NetUserId)ev.Player);
-
-        var mindExt = mindExtEnt.Value.Comp;
-
-        //На всякий удалить старый MindContainer.
-        if (TryComp<MindExtensionContainerComponent>(ev.OldEntity, out var oldMindExt))
+        if (comp.Trail.ContainsKey(entity))
         {
-            ChangeOrAddTrailPoint(mindExt, (EntityUid)ev.OldEntity, CheckEntityAbandoned((EntityUid)ev.OldEntity));
-            _entityManager.RemoveComponent<MindExtensionContainerComponent>((EntityUid)ev.OldEntity);
-        }
-
-        if (ev.NewEntity is null)
+            comp.Trail[entity].IsAbandoned = isAbandoned;
             return;
-
-        ChangeOrAddTrailPoint(mindExt, (EntityUid)ev.NewEntity, false);
-
-        _mindRespawn.SetRespawnTimer(mindExt, (EntityUid)ev.NewEntity, (NetUserId)ev.Player);
-
-        var mindExtCont = new MindExtensionContainerComponent() { MindExtension = mindExtEnt.Value.Owner };
-
-        //Если компонент уже есть, просто заменить ему ИД на православный.
-        if (TryComp<MindExtensionContainerComponent>(ev.NewEntity, out var newMindExt))
-        {
-            newMindExt.MindExtension = mindExtCont.MindExtension;
         }
-        else
+
+        TryComp(entity, out MetaDataComponent? metaData);
+
+        comp.Trail.Add(entity, new TrailPointMetaData()
         {
-            _entityManager.AddComponent((EntityUid)ev.NewEntity, mindExtCont);
-        }
+            EntityName = metaData?.EntityName ?? "",
+            EntityDescription = metaData?.EntityDescription ?? "",
+            IsAbandoned = isAbandoned
+        });
     }
-    private void OnSuicidedEvent(ref SuicidedEvent ev)
-    {
-        Suicide(ev.Invoker, ev.Player);
-    }
-    private void OnGhostedEvent(ref GhostedEvent ev)
-    {
-        GhostAttempt(ev.OldEntity, ev.CanReturn);
-    }
+
     #endregion
-    public void GhostAttempt(EntityUid oldEntity, bool canReturn)
+
+    #region Validators
+    private bool IsAvaibleToRememberEntity(EntityUid? entity)
     {
-        if (!TryComp<MindExtensionContainerComponent>(oldEntity, out var oldMindExt))
-            return;
+        if (HasComp<GhostComponent>(entity))
+            return false;
 
-        if (!TryGetMindExtension(oldMindExt, out var mindExt))
-            return;
-
-        ChangeOrAddTrailPoint(mindExt, oldEntity, CheckEntityAbandoned(oldEntity));
+        return true;
     }
-    public void Suicide(EntityUid invoker, NetUserId player)
+
+    private BodyStateToEnter IsAvaibleToEnterEntity(
+        EntityUid target,
+        MindExtensionComponent mindExtension,
+        NetUserId session)
     {
-        // Если сущность жива, то делать нечего.
-        if (!(_mobState.IsCritical(invoker) || _mobState.IsDead(invoker)))
-            return;
 
-        if (!TryGetMindExtension(player, out var mindExtEnt))
-            return;
+        if (!_entityManager.EntityExists(target))
+            return BodyStateToEnter.Destroyed;
 
-        ChangeOrAddTrailPoint(
-            comp: mindExtEnt.Value.Comp,
-            entity: invoker,
-            // Все просто, сущность доступна при суициде в крите/после смерти.
-            isAbandoned: false);
+        if (TryComp<CryostorageContainedComponent>(target, out var cryo))
+            return BodyStateToEnter.InCryo;
+
+        //При Visit MindConatainer может остаться, как и Mind. Нужно проверить, не является-ли этот Mind своим.
+        //Если Mind не свой, значит тело занято.
+        if (TryComp<MindContainerComponent>(target, out var mindContainer) && mindContainer.Mind is not null)
+            if (TryComp<MindComponent>(mindContainer.Mind, out var mind) && mind.UserId != session)
+                return BodyStateToEnter.Engaged;
+
+        if (mindExtension.Trail.TryGetValue(target, out var metaData))
+        {
+            if (metaData.IsAbandoned)
+                return BodyStateToEnter.Abandoned;
+        }
+
+        return BodyStateToEnter.Avaible;
     }
+
+
+    #endregion
 }
 
 [ByRefEvent]

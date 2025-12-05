@@ -1,4 +1,4 @@
-using Content.Shared.SS220.Mind;
+using Content.Shared.SS220.MindExtension.Events;
 using Robust.Client.Player;
 
 namespace Content.Client.SS220.MindExtension;
@@ -7,22 +7,22 @@ public sealed class MindExtensionSystem : EntitySystem
 {
     [Dependency] private readonly IPlayerManager _temp = default!;
 
-    public event Action<GhostBodyListResponseEvent>? GhostBodyListResponse;
+    public event Action<GhostBodyListResponse>? GhostBodyListResponse;
     public TimeSpan? RespawnTime { get; private set; }
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeNetworkEvent<GhostBodyListResponseEvent>(OnGhostBodyListResponseEvent);
-        SubscribeNetworkEvent<UpdateRespawnTime>(OnUpdateRespawnTime);
+        SubscribeNetworkEvent<GhostBodyListResponse>(OnGhostBodyListResponseEvent);
+        SubscribeNetworkEvent<UpdateRespawnTimeMessage>(OnUpdateRespawnTime);
     }
 
-    private void OnUpdateRespawnTime(UpdateRespawnTime ev)
+    private void OnUpdateRespawnTime(UpdateRespawnTimeMessage ev)
     {
         RespawnTime = ev.Time;
     }
 
-    private void OnGhostBodyListResponseEvent(GhostBodyListResponseEvent ev)
+    private void OnGhostBodyListResponseEvent(GhostBodyListResponse ev)
     {
         GhostBodyListResponse?.Invoke(ev);
     }
@@ -42,7 +42,7 @@ public sealed class MindExtensionSystem : EntitySystem
 
     public void RequestBodies()
     {
-        RaiseNetworkEvent(new GhostBodyListRequestEvent());
+        RaiseNetworkEvent(new GhostBodyListRequest());
     }
     public void MoveToBody(NetEntity id)
     {

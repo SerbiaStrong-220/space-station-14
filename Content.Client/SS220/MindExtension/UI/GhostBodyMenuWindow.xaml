@@ -1,7 +1,8 @@
 <local:GhostBodyMenuWindow xmlns="https://spacestation14.io"
                            xmlns:local="clr-namespace:Content.Client.SS220.MindExtension.UI"
                            MinSize="450 450"
-                           SetSize="450 450">
+                           SetSize="450 450"
+                           Title="Список посещенных сущностей">
     <BoxContainer Orientation="Vertical"
                   HorizontalExpand="True"
                   SizeFlagsStretchRatio="0.4">
@@ -9,8 +10,9 @@
                          VerticalExpand="True"
                          HorizontalExpand="True"
                          HScrollEnabled="False">
-            <BoxContainer Name="Body"
+            <BoxContainer Name="BodyList"
                           Orientation="Vertical"
+                          HorizontalExpand="True"
                           VerticalExpand="True"
                           SeparationOverride="5">
                 

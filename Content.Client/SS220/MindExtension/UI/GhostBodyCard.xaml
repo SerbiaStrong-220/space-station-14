@@ -1,15 +1,30 @@
 <local:GhostBodyCard xmlns="https://spacestation14.io"
-                          xmlns:local="clr-namespace:Content.Client.SS220.MindExtension.UI"
-                          HorizontalAlignment="Center">
-    <GridContainer Columns="2">
-        <BoxContainer Orientation="Vertical">
-            <Label Name="BodyNameLabel"/>
-            <Label Name="BodyStateLabel"/>
-            <Label Name="BodyDescriptionLabel"/>
+                     xmlns:local="clr-namespace:Content.Client.SS220.MindExtension.UI"
+                     HorizontalExpand="true">
+
+    <BoxContainer Name="Border"
+                  HorizontalExpand="True"
+                  Margin="10 0 10 10">
+        
+        <BoxContainer HorizontalExpand="True"
+                      Margin="1">
+            
+            <BoxContainer Orientation="Vertical">
+                <Label Name="BodyNameLabel"/>
+                <Label Name="BodyStateLabel"
+                          HorizontalExpand="True"/>
+                <Label Name="BodyDescriptionLabel"
+                          HorizontalExpand="False"/>
+            </BoxContainer>
+
+            <BoxContainer Orientation="Vertical"
+                          HorizontalAlignment="Right"
+                          MinWidth="100"
+                          HorizontalExpand="True">
+                <Button Name="FollowButton" Text="Следовать" Disabled="true"/>
+                <Button Name="ToBodyButton" Text="Вернуться в тело" Disabled="true"/>
+            </BoxContainer>
         </BoxContainer>
-        <BoxContainer Orientation="Vertical">
-            <Button Name="FollowButton" Text="Следовать" Disabled="true"/>
-            <Button Name="ToBodyButton" Text="Вернуться в тело" Disabled="true"/>
-        </BoxContainer>
-    </GridContainer>
+    </BoxContainer>
+
 </local:GhostBodyCard>

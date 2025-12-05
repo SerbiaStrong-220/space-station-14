@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 
-namespace Content.Shared.SS220.GhostExtension;
+namespace Content.Shared.SS220.MindExtension;
 
 [RegisterComponent]
 public sealed partial class MindExtensionContainerComponent : Component

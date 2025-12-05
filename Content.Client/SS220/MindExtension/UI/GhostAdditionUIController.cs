@@ -1,7 +1,6 @@
-using Content.Client.Ghost;
 using Content.Client.UserInterface.Systems.Gameplay;
 using Content.Shared.Ghost;
-using Content.Shared.SS220.Mind;
+using Content.Shared.SS220.MindExtension.Events;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
 using Robust.Shared.Timing;
@@ -102,7 +101,7 @@ public sealed partial class GhostAdditionUIController : UIController, IOnSystemC
     #endregion
 
     #region EsEvents
-    private void OnGhostBodyListResponse(GhostBodyListResponseEvent ev)
+    private void OnGhostBodyListResponse(GhostBodyListResponse ev)
     {
         Gui?.BodyMenuWindow.UpdateBodies(ev.Bodies);
         Gui?.BodyMenuWindow.Populate();
