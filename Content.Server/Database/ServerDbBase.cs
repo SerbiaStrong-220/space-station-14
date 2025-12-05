@@ -1172,6 +1172,16 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             return await db.DbContext.AdminLog.CountAsync(log => log.RoundId == round);
         }
 
+        // ss220 add signature start
+        public async Task<JsonDocument?> GetJsonByLogId(int logId, DateTime time)
+        {
+            await using var db = await GetDb();
+            var log = await db.DbContext.AdminLog.Where(log => log.Date == time).FirstOrDefaultAsync(x => x.Id == logId);
+
+            return log?.Json;
+        }
+        // ss220 add signature end
+
         #endregion
 
         #region Whitelist

@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Text;
+using JetBrains.Annotations;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Signature;
@@ -141,6 +142,20 @@ public sealed class SignatureData
     #endregion Serialization
 }
 
+[Serializable]
+public sealed class SignatureLogData(SignatureData data)
+{
+    [UsedImplicitly]
+    public string Serialized { get; } = data.Serialize();
+
+    public const string SignatureLogTag = "[Signature]";
+
+    public override string ToString()
+    {
+        return $"Signature({data.Width}x{data.Height})";
+    }
+}
+
 [Serializable, NetSerializable]
 public sealed class SignatureSubmitMessage(SignatureData data) : BoundUserInterfaceMessage
 {
@@ -161,4 +176,17 @@ public sealed class UpdatePenBrushPaperState(int brushWriteSize, int brushEraseS
 {
     public int BrushWriteSize = brushWriteSize;
     public int BrushEraseSize = brushEraseSize;
+}
+
+[Serializable, NetSerializable]
+public sealed class RequestSignatureAdminMessage(int logId, DateTime time) : BoundUserInterfaceMessage
+{
+    public int LogId = logId;
+    public DateTime Time = time;
+}
+
+[Serializable, NetSerializable]
+public sealed class SendSignatureToAdminEvent(SignatureData data) : EntityEventArgs
+{
+    public SignatureData Data = data;
 }

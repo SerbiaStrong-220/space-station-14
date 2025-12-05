@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Client.Lobby;
 using Content.Shared.Paper;
 using Content.Shared.Preferences;
@@ -15,6 +16,7 @@ public sealed class SignatureSystem : SharedSignatureSystem
         base.Initialize();
 
         SubscribeLocalEvent<PaperComponent, ApplySavedSignature>(OnApplySavedSignature);
+        SubscribeNetworkEvent<SendSignatureToAdminEvent>(OnSignature);
     }
 
     private void OnApplySavedSignature(Entity<PaperComponent> ent, ref ApplySavedSignature args)
@@ -26,5 +28,14 @@ public sealed class SignatureSystem : SharedSignatureSystem
 
         var state = new UpdateSignatureDataState(profile.SignatureData);
         _ui.SetUiState(ent.Owner, PaperComponent.PaperUiKey.Key, state);
+    }
+
+    private static void OnSignature(SendSignatureToAdminEvent ev)
+    {
+        var canvasSize = new Vector2(ev.Data.Width, ev.Data.Height);
+        var window = new SignatureWindow(canvasSize);
+        window.Signature.SetSignature(ev.Data);
+
+        window.OpenCentered();
     }
 }
