@@ -109,14 +109,12 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-BibleNecronomicon-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: corvax-hidden-desc-BibleNecronomicon-service
-      jobRequired:
-        - Chaplain
-        - Librarian
+    - [SyndicateAgentKnowledge, corvax-hidden-desc-BibleNecronomicon-syndicate]
+    - [SupernaturalBookKnowledge, corvax-hidden-desc-BibleNecronomicon-service]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [SupernaturalBookKnowledge, null]
+    hiddenName: ent-Bible
 # Corvax-HiddenDesc-End
 
 - type: entity

@@ -12,22 +12,14 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-HoloparasiteInjector-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: corvax-hidden-desc-HoloparasiteInjector-research
-      jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
-    - label: corvax-hidden-desc-IllegalImplants-medical
-      jobRequired:
-        - Paramedic
-        - MedicalDoctor
-        - ChiefMedicalOfficer
-        - Brigmedic #SS220 brigmedic implanters fix
+    - [SyndicateAgentKnowledge, corvax-hidden-desc-HoloparasiteInjector-syndicate]
+    - [ScienceKnowledge, corvax-hidden-desc-HoloparasiteInjector-research]
+    - [MedicalKnowledge, corvax-hidden-desc-IllegalImplants-medical]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ScienceKnowledge, null]
+    - [MedicalKnowledge, ent-HoloparasiteInjector]
+    hiddenName: ent-HoloparasiteInjector
 # Corvax-HiddenDesc-End
 
 - type: entity
@@ -41,22 +33,14 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-HoloClownInjector-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: corvax-hidden-desc-HoloClownInjector-research
-      jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
-    - label: corvax-hidden-desc-IllegalImplants-medical
-      jobRequired:
-        - Paramedic
-        - MedicalDoctor
-        - ChiefMedicalOfficer
-        - Brigmedic #SS220 brigmedic implanters fix
+    - [SyndicateAgentKnowledge, corvax-hidden-desc-HoloClownInjector-syndicate]
+    - [ScienceKnowledge, corvax-hidden-desc-HoloClownInjector-research]
+    - [MedicalKnowledge, corvax-hidden-desc-IllegalImplants-medical]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ScienceKnowledge, null]
+    - [MedicalKnowledge, ent-HoloClownInjector]
+    hiddenName: ent-HoloClownInjector
 # Corvax-HiddenDesc-End
 
 - type: entity

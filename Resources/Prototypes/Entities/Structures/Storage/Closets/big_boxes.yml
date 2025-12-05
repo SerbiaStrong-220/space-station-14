@@ -91,20 +91,16 @@
     - type: StealthOnMove
       passiveVisibilityRate: -1
       movementVisibilityRate: 0
-# Corvax-HiddenDesc-Start
+    # Corvax-HiddenDesc-Start
     - type: HiddenDescription
       entries:
-      - label: corvax-hidden-desc-StealthBox-syndicate
-        whitelistMindRoles:
-        - TraitorRole
-        - NukeOperative
-      - label: corvax-hidden-desc-StealthBox-research
-        jobRequired:
-          - ResearchAssistant
-          - ResearchDirector
-          - Scientist
-          - Borg
-# Corvax-HiddenDesc-End
+      - [SyndicateAgentKnowledge, corvax-hidden-desc-StealthBox-syndicate]
+      - [ScienceKnowledge, corvax-hidden-desc-StealthBox-research]
+      nameEntries:
+      - [SyndicateAgentKnowledge, null]
+      - [ScienceKnowledge, null]
+      hiddenName: ent-BaseBigBox
+    # Corvax-HiddenDesc-End
 
 - type: entity
   id: BigBox

@@ -22,16 +22,12 @@
 # Corvax-HiddenDesc-Start
     - type: HiddenDescription
       entries:
-      - label: corvax-hidden-desc-Chameleon-syndicate
-        whitelistMindRoles:
-        - TraitorRole
-        - NukeOperative
-      - label: corvax-hidden-desc-Chameleon-research
-        jobRequired:
-          - ResearchAssistant
-          - ResearchDirector
-          - Scientist
-          - Borg
+      - [SyndicateAgentKnowledge, corvax-hidden-desc-Chameleon-syndicate]
+      - [ScienceKnowledge, corvax-hidden-desc-Chameleon-research]
+      nameEntries:
+      - [SyndicateAgentKnowledge, null]
+      - [ScienceKnowledge, null]
+      hiddenName: null
 # Corvax-HiddenDesc-End
 
 - type: entity
@@ -52,27 +48,15 @@
     # Corvax-HiddenDesc-Start
     - type: HiddenDescription
       entries:
-      - label: corvax-hidden-desc-Chameleon-syndicate
-        whitelistMindRoles:
-        - TraitorRole
-        - NukeOperative
-      - label: corvax-hidden-desc-VoiceMasker-syndicate
-        whitelistMindRoles:
-        - TraitorRole
-        - NukeOperative
-      - label: corvax-hidden-desc-Chameleon-research
-        jobRequired:
-          - ResearchAssistant
-          - ResearchDirector
-          - Scientist
-          - Borg
-      - label: corvax-hidden-desc-VoiceMasker-research
-        jobRequired:
-          - ResearchAssistant
-          - ResearchDirector
-          - Scientist
-          - Borg
-# Corvax-HiddenDesc-End
+      - [SyndicateAgentKnowledge, corvax-hidden-desc-Chameleon-syndicate]
+      - [SyndicateAgentKnowledge, corvax-hidden-desc-VoiceMasker-syndicate]
+      - [ScienceKnowledge, corvax-hidden-desc-Chameleon-research]
+      - [ScienceKnowledge, corvax-hidden-desc-VoiceMasker-research]
+      nameEntries:
+      - [SyndicateAgentKnowledge, null]
+      - [ScienceKnowledge, null]
+      hiddenName: null
+    # Corvax-HiddenDesc-End
     - type: UserInterface
       interfaces:
         enum.ChameleonUiKey.Key:

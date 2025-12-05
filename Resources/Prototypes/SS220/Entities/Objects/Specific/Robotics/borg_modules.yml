@@ -48,16 +48,12 @@
       icon: { sprite: SS220/Interface/Actions/actions_borg.rsi, state: syndicate-fireaxe-module }
     - type: HiddenDescription
       entries:
-      - label: hidden-desc-flaming-axe-module-syndicate
-        whitelistMindRoles:
-        - TraitorRole
-        - NukeOperative
-      - label: hidden-desc-flaming-axe-module-research
-        jobRequired:
-          - ResearchAssistant
-          - ResearchDirector
-          - Scientist
-          - Borg
+      - [SyndicateAgentKnowledge, hidden-desc-flaming-axe-module-syndicate]
+      - [ScienceKnowledge, hidden-desc-flaming-axe-module-research]
+      nameEntries:
+      - [SyndicateAgentKnowledge, null]
+      - [ScienceKnowledge, null]
+      hiddenName: BaseBorgModule-ent
 
 - type: entity
   id: BorgModuleMime

@@ -3,6 +3,7 @@
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Experience;
 
@@ -19,6 +20,7 @@ public sealed partial class AffectedByMentorComponent : Component
 }
 
 [DataDefinition]
+[Serializable, NetSerializable]
 public partial struct MentorEffectData : IComparable<MentorEffectData>
 {
     [DataField(required: true)]

@@ -2,3 +2,8 @@
   id: NinjaKnowledge
   knowledgeName: ninja-knowledge-name
   knowledgeDescription: ninja-knowledge-description
+
+- type: knowledge
+  id: CultYoggKnowledge
+  knowledgeName: cult-yogg-knowledge-name
+  knowledgeDescription: cult-yogg-knowledge-description

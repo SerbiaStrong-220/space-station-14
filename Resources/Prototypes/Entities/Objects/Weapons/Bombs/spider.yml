@@ -49,13 +49,10 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-SpiderCharge-ninja
-      whitelistMindRoles:
-      - NinjaRole
-    - label: corvax-hidden-desc-SpiderCharge-research
-      jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
+    - [NinjaKnowledge, corvax-hidden-desc-SpiderCharge-ninja]
+    - [ScienceKnowledge, corvax-hidden-desc-SpiderCharge-research]
+    nameEntries:
+    - [NinjaKnowledge, null]
+    - [ScienceKnowledge, null]
+    hiddenName: ent-SpiderCharge
 # Corvax-HiddenDesc-End

@@ -239,9 +239,10 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-ThievingGloves-thief
-      whitelistMindRoles:
-      - ThiefRole
+    - [NinjaKnowledge, corvax-hidden-desc-ThievingGloves-thief]
+    nameEntries:
+    - [NinjaKnowledge, null]
+    hiddenName: ent-ClothingHandsBase
 # Corvax-HiddenDesc-End
   - type: NinjaGloves
     abilities:
@@ -392,13 +393,12 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-ThievingGloves-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: corvax-hidden-desc-ThievingGloves-thief
-      whitelistMindRoles:
-      - ThiefRole
+    - [SyndicateAgentKnowledge, corvax-hidden-desc-ThievingGloves-syndicate]
+    - [ThiefKnowledge, corvax-hidden-desc-ThievingGloves-thief]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ThiefKnowledge, null]
+    hiddenName: ent-ClothingHandsGlovesColorBlack
 # Corvax-HiddenDesc-End
 
 - type: entity

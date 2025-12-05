@@ -17,14 +17,10 @@
 # Corvax-HiddenDesc-Start
     - type: HiddenDescription
       entries:
-      - label: corvax-hidden-desc-Chameleon-syndicate
-        whitelistMindRoles:
-        - TraitorRole
-        - NukeOperative
-      - label: corvax-hidden-desc-Chameleon-research
-        jobRequired:
-          - ResearchAssistant
-          - ResearchDirector
-          - Scientist
-          - Borg
+      - [SyndicateAgentKnowledge, corvax-hidden-desc-Chameleon-syndicate]
+      - [ScienceKnowledge, corvax-hidden-desc-Chameleon-research]
+      nameEntries:
+      - [SyndicateAgentKnowledge, null]
+      - [ScienceKnowledge, null]
+      hiddenName: null
 # Corvax-HiddenDesc-End

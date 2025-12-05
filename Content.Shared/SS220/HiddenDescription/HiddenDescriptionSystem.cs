@@ -6,7 +6,7 @@ using Content.Shared.SS220.Experience.Systems;
 
 namespace Content.Shared.SS220.HiddenDescription;
 
-public sealed partial class HiddenDescriptionSystem : EntitySystem
+public abstract class SharedHiddenDescriptionSystem : EntitySystem
 {
     [Dependency] private readonly ExperienceSystem _experience = default!;
 
@@ -17,9 +17,11 @@ public sealed partial class HiddenDescriptionSystem : EntitySystem
         SubscribeLocalEvent<HiddenDescriptionComponent, ExaminedEvent>(OnExamine);
     }
 
-    private void OnExamine(Entity<HiddenDescriptionComponent> hiddenDesc, ref ExaminedEvent args)
+    private void OnExamine(Entity<HiddenDescriptionComponent> entity, ref ExaminedEvent args)
     {
-        PushExamineInformation(hiddenDesc.Comp, ref args);
+        PushExamineInformation(entity.Comp, ref args);
+
+        Dirty(entity);
     }
 
     public void PushExamineInformation(HiddenDescriptionComponent component, ref ExaminedEvent args)

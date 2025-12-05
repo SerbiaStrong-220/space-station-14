@@ -60,22 +60,14 @@
 # Corvax-HiddenDesc-Start
     - type: HiddenDescription
       entries:
-      - label: corvax-hidden-desc-PowerSink-syndicate
-        whitelistMindRoles:
-        - TraitorRole
-        - NukeOperative
-      - label: corvax-hidden-desc-PowerSink-engineering
-        jobRequired:
-          - ChiefEngineer
-          - AtmosphericTechnician
-          - StationEngineer
-          - TechnicalAssistant
-      - label: corvax-hidden-desc-PowerSink-research
-        jobRequired:
-          - ResearchAssistant
-          - ResearchDirector
-          - Scientist
-          - Borg
+      - [SyndicateAgentKnowledge, corvax-hidden-desc-PowerSink-syndicate]
+      - [EngineerKnowledge, corvax-hidden-desc-PowerSink-engineering]
+      - [ScienceKnowledge, corvax-hidden-desc-PowerSink-research]
+      nameEntries:
+      - [SyndicateAgentKnowledge, null]
+      - [EngineerKnowledge, null]
+      - [ScienceKnowledge, null]
+      hiddenName: ent-PowerSink
 # Corvax-HiddenDesc-End
     - type: StaticPrice
       price: 3000

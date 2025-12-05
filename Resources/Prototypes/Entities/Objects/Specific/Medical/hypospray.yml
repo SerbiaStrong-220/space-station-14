@@ -673,20 +673,16 @@
     delay: 0.5
   - type: StaticPrice # A new shitcurity meta
     price: 75
-# Corvax-HiddenDesc-Start
+  # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-Hypopen-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: corvax-hidden-desc-Hypopen-research
-      jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
-# Corvax-HiddenDesc-End
+    - [SyndicateAgentKnowledge, corvax-hidden-desc-Hypopen-syndicate]
+    - [ScienceKnowledge, corvax-hidden-desc-Hypopen-research]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ScienceKnowledge, null]
+    hiddenName: ent-Pen
+  # Corvax-HiddenDesc-End
   - type: EmitSoundOnUse
     handle: false # don't want the sound to stop the self-inject from triggering
 

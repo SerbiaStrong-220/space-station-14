@@ -8,8 +8,8 @@ namespace Content.Shared.SS220.Experience;
 /// Same event data and handler for all types of SkillBaseAddComponent that can be changed by players (including admins) <br/>
 /// Base event that hold data for adding or setting someones Experience
 /// </summary>
-[Serializable, NetSerializable]
-public sealed class AddExperienceUpdate<T> where T : SkillBaseAddComponent
-{
+// [Serializable, NetSerializable]
+// public sealed class AddExperienceUpdate<T> where T : SkillBaseAddComponent
+// {
 
-}
+// }

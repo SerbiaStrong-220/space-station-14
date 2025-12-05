@@ -10,14 +10,12 @@
           - BulletFoam
     - type: HiddenDescription
       entries:
-      - label: hidden-desc-toy-weapons-magazine-syndicate
-        whitelistMindRoles:
-        - TraitorRole
-        - NukeOperative
-      - label: hidden-desc-toy-weapons-magazine-clown
-        jobRequired:
-          - Clown
-          - Mime
+      - [SyndicateAgentKnowledge, hidden-desc-toy-weapons-magazine-syndicate]
+      - [ServiceActorKnowledge, hidden-desc-toy-weapons-magazine-clown]
+      nameEntries:
+      - [SyndicateAgentKnowledge, null]
+      - [ServiceActorKnowledge, null]
+      hiddenName: ent-BaseMagazineToy
 
 #pistol
 - type: entity

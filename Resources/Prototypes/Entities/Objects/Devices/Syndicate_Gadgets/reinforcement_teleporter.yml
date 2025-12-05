@@ -37,22 +37,14 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-ReinforcementRadioSyndicate-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: corvax-hidden-desc-ReinforcementRadio-engineering
-      jobRequired:
-        - ChiefEngineer
-        - AtmosphericTechnician
-        - StationEngineer
-        - TechnicalAssistant
-    - label: corvax-hidden-desc-ReinforcementRadio-research
-      jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
+    - [SyndicateAgentKnowledge, corvax-hidden-desc-ReinforcementRadioSyndicate-syndicate]
+    - [EngineerKnowledge, corvax-hidden-desc-ReinforcementRadio-engineering]
+    - [ScienceKnowledge, corvax-hidden-desc-ReinforcementRadio-research]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [EngineerKnowledge, null]
+    - [ScienceKnowledge, null]
+    hiddenName: ent-ReinforcementRadio
 # Corvax-HiddenDesc-End
 
 - type: entity
@@ -95,22 +87,14 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-ReinforcementRadioSyndicateMonkey-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: corvax-hidden-desc-ReinforcementRadio-engineering
-      jobRequired:
-        - ChiefEngineer
-        - AtmosphericTechnician
-        - StationEngineer
-        - TechnicalAssistant
-    - label: corvax-hidden-desc-ReinforcementRadio-research
-      jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
+    - [SyndicateAgentKnowledge, corvax-hidden-desc-ReinforcementRadioSyndicateMonkey-syndicate]
+    - [EngineerKnowledge, corvax-hidden-desc-ReinforcementRadio-engineering]
+    - [ScienceKnowledge, corvax-hidden-desc-ReinforcementRadio-research]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [EngineerKnowledge, null]
+    - [ScienceKnowledge, null]
+    hiddenName: ent-ReinforcementRadio
 # Corvax-HiddenDesc-End
 
 
@@ -167,20 +151,12 @@
 # Corvax-HiddenDesc-Start
     - type: HiddenDescription
       entries:
-      - label: corvax-hidden-desc-ReinforcementRadioSyndicateCyborgAssault-syndicate
-        whitelistMindRoles:
-        - TraitorRole
-        - NukeOperative
-      - label: corvax-hidden-desc-ReinforcementRadio-engineering
-        jobRequired:
-          - ChiefEngineer
-          - AtmosphericTechnician
-          - StationEngineer
-          - TechnicalAssistant
-      - label: corvax-hidden-desc-ReinforcementRadio-research
-        jobRequired:
-          - ResearchAssistant
-          - ResearchDirector
-          - Scientist
-          - Borg
+      - [SyndicateAgentKnowledge, corvax-hidden-desc-ReinforcementRadioSyndicateCyborgAssault-syndicate]
+      - [EngineerKnowledge, corvax-hidden-desc-ReinforcementRadio-engineering]
+      - [ScienceKnowledge, corvax-hidden-desc-ReinforcementRadio-research]
+      nameEntries:
+      - [SyndicateAgentKnowledge, null]
+      - [EngineerKnowledge, null]
+      - [ScienceKnowledge, null]
+      hiddenName: ent-ReinforcementRadio
 # Corvax-HiddenDesc-End

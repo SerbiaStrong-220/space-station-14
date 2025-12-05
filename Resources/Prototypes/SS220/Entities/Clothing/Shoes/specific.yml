@@ -267,24 +267,12 @@
   # HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - label: hidden-desc-SilentShoes-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: hidden-desc-SilentShoes-research
-      jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
-    - label: corvax-hidden-desc-Chameleon-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: corvax-hidden-desc-Chameleon-research
-      jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
-# HiddenDesc-End
+    - [SyndicateAgentKnowledge, hidden-desc-SilentShoes-syndicate]
+    - [SyndicateAgentKnowledge, corvax-hidden-desc-Chameleon-syndicate]
+    - [ScienceKnowledge, hidden-desc-SilentShoes-research]
+    - [ScienceKnowledge, corvax-hidden-desc-Chameleon-research]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ScienceKnowledge, null]
+    hiddenName: null
+  # HiddenDesc-End

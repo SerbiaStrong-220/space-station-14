@@ -2,6 +2,7 @@
 
 using System.Linq;
 using Content.Shared.Database;
+using Content.Shared.Inventory;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -14,6 +15,8 @@ public sealed partial class ExperienceSystem : EntitySystem
     // private HashSet<EntityUid> _entityToEnsure = new();
 
     [Dependency] private readonly SharedContainerSystem _container = default!;
+
+    private HashSet<Type> _subscribedToExperienceComponentTypes = new();
 
     private void InitializeSkillEntityEvents()
     {
@@ -111,7 +114,9 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     public void RelayEventToSkillEntity<TComp, TEvent>() where TEvent : notnull where TComp : Component
     {
-        SubscribeLocalEvent<ExperienceComponent, TEvent>(RelayEventToSkillEntity);
+        if (_subscribedToExperienceComponentTypes.Add(typeof(TEvent)))
+            SubscribeLocalEvent<ExperienceComponent, TEvent>(RelayEventToSkillEntity);
+
         SubscribeLocalEvent<TComp, SkillEntityOverrideCheckEvent<TEvent>>(OnOverrideSkillEntityCheck);
     }
 

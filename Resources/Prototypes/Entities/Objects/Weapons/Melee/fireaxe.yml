@@ -84,14 +84,10 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-FireAxeFlaming-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: corvax-hidden-desc-FireAxeFlaming-research
-      jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
+    - [SyndicateAgentKnowledge, corvax-hidden-desc-FireAxeFlaming-syndicate]
+    - [ScienceKnowledge, corvax-hidden-desc-FireAxeFlaming-research]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ScienceKnowledge, null]
+    hiddenName: ent-FireAxe
 # Corvax-HiddenDesc-End

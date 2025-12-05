@@ -4,6 +4,11 @@
   knowledgeDescription: syndicate-agent-knowledge-description
 
 - type: knowledge
+  id: ThiefKnowledge
+  knowledgeName: syndicate-agent-knowledge-name
+  knowledgeDescription: syndicate-agent-knowledge-description
+
+- type: knowledge
   id: NuclearOperativeKnowledge
   knowledgeName: nuclear-operative-knowledge-name
   knowledgeDescription: nuclear-operative-knowledge-description

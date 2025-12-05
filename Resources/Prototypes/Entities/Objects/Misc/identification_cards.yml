@@ -1587,16 +1587,12 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-AgentIDCard-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: corvax-hidden-desc-AgentIDCard-research
-      jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
+    - [SyndicateAgent, corvax-hidden-desc-AgentIDCard-syndicate]
+    - [ScienceKnowledge, corvax-hidden-desc-AgentIDCard-research]
+    entries:
+    - [SyndicateAgent, null]
+    - [ScienceKnowledge, null]
+    hiddenName: null
 # Corvax-HiddenDesc-End
 
 - type: entity

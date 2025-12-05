@@ -12,22 +12,13 @@
   - type: MimeRelic
   - type: HiddenDescription
     entries:
-    - label: hidden-desc-SacredRelicMime-mime
-      jobRequired:
-        - Mime
-    - label: hidden-desc-SacredRelicMime-chaplain
-      jobRequired:
-        - Chaplain
-    - label: hidden-desc-SacredRelicMime-security
-      jobRequired:
-        - HeadOfSecurity
-        - Detective
-        - SecurityCadet
-        - SecurityOfficer
-        - Warden
-    - label: hidden-desc-SacredRelicMime-research
-      jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg           
+    - [ServiceActorKnowledge, hidden-desc-SacredRelicMime-mime]
+    - [SupernaturalBookKnowledge, hidden-desc-SacredRelicMime-chaplain]
+    - [SecurityKnowledge, hidden-desc-SacredRelicMime-security]
+    - [ScienceKnowledge, hidden-desc-SacredRelicMime-research]
+    nameEntries:
+    - [ServiceActorKnowledge, null]
+    - [SupernaturalBookKnowledge, null]
+    - [SecurityKnowledge, null]
+    - [ScienceKnowledge, null]
+    hiddenName: null

@@ -22,14 +22,12 @@
   components:
   - type: HiddenDescription
     entries:
-    - label: hidden-desc-toy-armour-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: hidden-desc-toy-armour-clown
-      jobRequired:
-        - Clown
-        - Mime
+    - [SyndicateAgentKnowledge, hidden-desc-toy-armour-syndicate]
+    - [ServiceActorKnowledge, hidden-desc-toy-armour-clown]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ServiceActorKnowledge, null]
+    hiddenName: ent-BaseClothingOuterFake
 
 - type: entity
   parent: BaseClothingOuterFake

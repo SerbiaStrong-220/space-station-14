@@ -8,7 +8,7 @@ namespace Content.Shared.SS220.HiddenDescription;
 public sealed class HiddenDescriptionContainerShowerSystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly HiddenDescriptionSystem _hiddenDescription = default!;
+    [Dependency] private readonly SharedHiddenDescriptionSystem _hiddenDescription = default!;
 
     public override void Initialize()
     {

@@ -34,23 +34,10 @@
     # hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-LegalImplants-medical
-      jobRequired:
-      - Paramedic
-      - MedicalDoctor
-      - SeniorPhysician
-      - Brigmedic
-      - ChiefMedicalOfficer
-    - label: corvax-hidden-desc-SadTromboneImplanter-research
-      jobRequired:
-      - ResearchAssistant
-      - ResearchDirector
-      - Scientist
-      - Borg
-    - label: corvax-hidden-desc-SadTromboneImplanter-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
+    - [MedicalKnowledge, corvax-hidden-desc-LegalImplants-medical]
+    - [SyndicateAgentKnowledge, corvax-hidden-desc-SadTromboneImplanter-syndicate]
+    - [ScienceKnowledge, corvax-hidden-desc-SadTromboneImplanter-research]
+    hiddenName: null
     # hidden-desc-end
 
 - type: entity
@@ -77,23 +64,10 @@
   # hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-LegalImplants-medical
-      jobRequired:
-      - Paramedic
-      - MedicalDoctor
-      - SeniorPhysician
-      - Brigmedic
-      - ChiefMedicalOfficer
-    - label: corvax-hidden-desc-LightImplanter-research
-      jobRequired:
-      - ResearchAssistant
-      - ResearchDirector
-      - Scientist
-      - Borg
-    - label: corvax-hidden-desc-LightImplanter-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
+    - [MedicalKnowledge, corvax-hidden-desc-LegalImplants-medical]
+    - [SyndicateAgentKnowledge, corvax-hidden-desc-LightImplanter-syndicate]
+    - [ScienceKnowledge, corvax-hidden-desc-LightImplanter-research]
+    hiddenName: null
   # hidden-desc-end
 
 - type: entity
@@ -118,23 +92,10 @@
     # hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-LegalImplants-medical
-      jobRequired:
-      - Paramedic
-      - MedicalDoctor
-      - SeniorPhysician
-      - Brigmedic
-      - ChiefMedicalOfficer
-    - label: corvax-hidden-desc-BikeHornImplanter-research
-      jobRequired:
-      - ResearchAssistant
-      - ResearchDirector
-      - Scientist
-      - Borg
-    - label: corvax-hidden-desc-BikeHornImplanter-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
+    - [MedicalKnowledge, corvax-hidden-desc-LegalImplants-medical]
+    - [SyndicateAgentKnowledge, corvax-hidden-desc-BikeHornImplanter-syndicate]
+    - [ScienceKnowledge, corvax-hidden-desc-BikeHornImplanter-research]
+    hiddenName: null
     # hidden-desc-end
 
 #Security implants
@@ -164,32 +125,11 @@
       # hidden-desc-begin
     - type: HiddenDescription
       entries:
-      - label: corvax-hidden-desc-LegalImplants-medical
-        jobRequired:
-        - Paramedic
-        - MedicalDoctor
-        - SeniorPhysician
-        - Brigmedic
-        - ChiefMedicalOfficer
-      - label: corvax-hidden-desc-TrackingImplanter-research
-        jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
-      - label: hidden-desc-TrackingImplanter-security
-        jobRequired:
-        - Captain
-        - HeadOfSecurity
-        - SeniorOfficer
-        - SecurityOfficer
-        - Warden
-        - Detective
-        - BlueShield
-      - label: corvax-hidden-desc-TrackingImplanter-syndicate
-        whitelistMindRoles:
-        - TraitorRole
-        - NukeOperative
+      - [MedicalKnowledge, corvax-hidden-desc-LegalImplants-medical]
+      - [SyndicateAgentKnowledge, corvax-hidden-desc-TrackingImplanter-syndicate]
+      - [ScienceKnowledge, corvax-hidden-desc-TrackingImplanter-research]
+      - [SecurityKnowledge, hidden-desc-TrackingImplanter-security]
+      hiddenName: null
       # hidden-desc-end
 #Traitor implants
 
@@ -209,7 +149,7 @@
     - type: Storage
       grid:
       # SS220 storageimplant rework start
-      - 0,0,3,2 
+      - 0,0,3,2
       maxItemSize: Large
       blacklist:
        tags:
@@ -226,23 +166,10 @@
     # hidden-desc-begin
     - type: HiddenDescription
       entries:
-      - label: corvax-hidden-desc-IllegalImplants-medical
-        jobRequired:
-        - Paramedic
-        - MedicalDoctor
-        - SeniorPhysician
-        - Brigmedic
-        - ChiefMedicalOfficer
-      - label: corvax-hidden-desc-StorageImplanter-research
-        jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
-      - label: corvax-hidden-desc-StorageImplanter-syndicate
-        whitelistMindRoles:
-        - TraitorRole
-        - NukeOperative
+      - [MedicalKnowledge, corvax-hidden-desc-IllegalImplants-medical]
+      - [SyndicateAgentKnowledge, corvax-hidden-desc-StorageImplanter-syndicate]
+      - [ScienceKnowledge, corvax-hidden-desc-StorageImplanter-research]
+      hiddenName: null
     # hidden-desc-end
 
 - type: entity
@@ -263,23 +190,10 @@
   # hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-IllegalImplants-medical
-      jobRequired:
-      - Paramedic
-      - MedicalDoctor
-      - SeniorPhysician
-      - Brigmedic
-      - ChiefMedicalOfficer
-    - label: corvax-hidden-desc-FreedomImplanter-research
-      jobRequired:
-      - ResearchAssistant
-      - ResearchDirector
-      - Scientist
-      - Borg
-    - label: corvax-hidden-desc-FreedomImplanter-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
+    - [MedicalKnowledge, corvax-hidden-desc-IllegalImplants-medical]
+    - [SyndicateAgentKnowledge, corvax-hidden-desc-FreedomImplanter-syndicate]
+    - [ScienceKnowledge, corvax-hidden-desc-FreedomImplanter-research]
+    hiddenName: null
   # hidden-desc-end
 
 - type: entity
@@ -296,23 +210,10 @@
     # hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-IllegalImplants-medical
-      jobRequired:
-      - Paramedic
-      - MedicalDoctor
-      - SeniorPhysician
-      - Brigmedic
-      - ChiefMedicalOfficer
-    - label: corvax-hidden-desc-RadioImplant-research
-      jobRequired:
-      - ResearchAssistant
-      - ResearchDirector
-      - Scientist
-      - Borg
-    - label: corvax-hidden-desc-RadioImplant-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
+    - [MedicalKnowledge, corvax-hidden-desc-IllegalImplants-medical]
+    - [SyndicateAgentKnowledge, corvax-hidden-desc-RadioImplant-syndicate]
+    - [ScienceKnowledge, corvax-hidden-desc-RadioImplant-research]
+    hiddenName: null
     # hidden-desc-end
 
 - type: entity
@@ -337,23 +238,10 @@
   # hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-IllegalImplants-medical
-      jobRequired:
-      - Paramedic
-      - MedicalDoctor
-      - SeniorPhysician
-      - Brigmedic
-      - ChiefMedicalOfficer
-    - label: corvax-hidden-desc-UplinkImplanter-research
-      jobRequired:
-      - ResearchAssistant
-      - ResearchDirector
-      - Scientist
-      - Borg
-    - label: corvax-hidden-desc-UplinkImplanter-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
+    - [MedicalKnowledge, corvax-hidden-desc-IllegalImplants-medical]
+    - [SyndicateAgentKnowledge, corvax-hidden-desc-UplinkImplanter-syndicate]
+    - [ScienceKnowledge, corvax-hidden-desc-UplinkImplanter-research]
+    hiddenName: null
   # hidden-desc-end
 
 - type: entity
@@ -373,23 +261,10 @@
   # hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-IllegalImplants-medical
-      jobRequired:
-      - Paramedic
-      - MedicalDoctor
-      - SeniorPhysician
-      - Brigmedic
-      - ChiefMedicalOfficer
-    - label: corvax-hidden-desc-EmpImplanter-research
-      jobRequired:
-      - ResearchAssistant
-      - ResearchDirector
-      - Scientist
-      - Borg
-    - label: corvax-hidden-desc-EmpImplanter-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
+    - [MedicalKnowledge, corvax-hidden-desc-IllegalImplants-medical]
+    - [SyndicateAgentKnowledge, corvax-hidden-desc-EmpImplanter-syndicate]
+    - [ScienceKnowledge, corvax-hidden-desc-EmpImplanter-research]
+    hiddenName: null
   # hidden-desc-end
 
 - type: entity
@@ -407,23 +282,10 @@
   # hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-IllegalImplants-medical
-      jobRequired:
-      - Paramedic
-      - MedicalDoctor
-      - SeniorPhysician
-      - Brigmedic
-      - ChiefMedicalOfficer
-    - label: corvax-hidden-desc-ScramImplanter-research
-      jobRequired:
-      - ResearchAssistant
-      - ResearchDirector
-      - Scientist
-      - Borg
-    - label: corvax-hidden-desc-ScramImplanter-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
+    - [MedicalKnowledge, corvax-hidden-desc-IllegalImplants-medical]
+    - [SyndicateAgentKnowledge, corvax-hidden-desc-ScramImplanter-syndicate]
+    - [ScienceKnowledge, corvax-hidden-desc-ScramImplanter-research]
+    hiddenName: null
   # hidden-desc-end
 
 - type: entity
@@ -445,23 +307,10 @@
   # hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-IllegalImplants-medical
-      jobRequired:
-      - Paramedic
-      - MedicalDoctor
-      - SeniorPhysician
-      - Brigmedic
-      - ChiefMedicalOfficer
-    - label: corvax-hidden-desc-DnaScramblerImplanter-research
-      jobRequired:
-      - ResearchAssistant
-      - ResearchDirector
-      - Scientist
-      - Borg
-    - label: corvax-hidden-desc-DnaScramblerImplanter-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
+    - [MedicalKnowledge, corvax-hidden-desc-IllegalImplants-medical]
+    - [SyndicateAgentKnowledge, corvax-hidden-desc-DnaScramblerImplanter-syndicate]
+    - [ScienceKnowledge, corvax-hidden-desc-DnaScramblerImplanter-research]
+    hiddenName: null
   # hidden-desc-begin
 
 - type: entity
@@ -515,23 +364,10 @@
   # hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-IllegalImplants-medical
-      jobRequired:
-      - Paramedic
-      - MedicalDoctor
-      - SeniorPhysician
-      - Brigmedic
-      - ChiefMedicalOfficer
-    - label: corvax-hidden-desc-MicroBombImplanter-research
-      jobRequired:
-      - ResearchAssistant
-      - ResearchDirector
-      - Scientist
-      - Borg
-    - label: corvax-hidden-desc-MicroBombImplanter-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
+    - [MedicalKnowledge, corvax-hidden-desc-IllegalImplants-medical]
+    - [SyndicateAgentKnowledge, corvax-hidden-desc-MicroBombImplanter-syndicate]
+    - [ScienceKnowledge, corvax-hidden-desc-MicroBombImplanter-research]
+    hiddenName: null
   # hidden-desc-end
 
 
@@ -580,23 +416,10 @@
     # hidden-desc-begin
     - type: HiddenDescription
       entries:
-      - label: corvax-hidden-desc-IllegalImplants-medical
-        jobRequired:
-        - Paramedic
-        - MedicalDoctor
-        - SeniorPhysician
-        - Brigmedic
-        - ChiefMedicalOfficer
-      - label: corvax-hidden-desc-MacroBombImplanter-research
-        jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
-      - label: corvax-hidden-desc-MacroBombImplanter-syndicate
-        whitelistMindRoles:
-        - TraitorRole
-        - NukeOperative
+      - [MedicalKnowledge, corvax-hidden-desc-IllegalImplants-medical]
+      - [SyndicateAgentKnowledge, corvax-hidden-desc-MacroBombImplanter-syndicate]
+      - [ScienceKnowledge, corvax-hidden-desc-MacroBombImplanter-research]
+      hiddenName: null
     # hidden-desc-end
 
 - type: entity
@@ -627,23 +450,10 @@
   # hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-IllegalImplants-medical
-      jobRequired:
-      - Paramedic
-      - MedicalDoctor
-      - SeniorPhysician
-      - Brigmedic
-      - ChiefMedicalOfficer
-    - label: corvax-hidden-desc-DeathAcidifierImplanter-research
-      jobRequired:
-      - ResearchAssistant
-      - ResearchDirector
-      - Scientist
-      - Borg
-    - label: corvax-hidden-desc-DeathAcidifierImplanter-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
+    - [MedicalKnowledge, corvax-hidden-desc-IllegalImplants-medical]
+    - [SyndicateAgentKnowledge, corvax-hidden-desc-DeathAcidifierImplanter-syndicate]
+    - [ScienceKnowledge, corvax-hidden-desc-DeathAcidifierImplanter-research]
+    hiddenName: null
   # hidden-desc-end
 
 - type: entity
@@ -667,23 +477,10 @@
     # hidden-desc-begin
     - type: HiddenDescription
       entries:
-      - label: corvax-hidden-desc-IllegalImplants-medical
-        jobRequired:
-        - Paramedic
-        - MedicalDoctor
-        - SeniorPhysician
-        - Brigmedic
-        - ChiefMedicalOfficer
-      - label: corvax-hidden-desc-DeathRattleImplanter-research
-        jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
-      - label: corvax-hidden-desc-DeathRattleImplanter-syndicate
-        whitelistMindRoles:
-        - TraitorRole
-        - NukeOperative
+      - [MedicalKnowledge, corvax-hidden-desc-IllegalImplants-medical]
+      - [SyndicateAgentKnowledge, corvax-hidden-desc-DeathRattleImplanter-syndicate]
+      - [ScienceKnowledge, corvax-hidden-desc-DeathRattleImplanter-research]
+      hiddenName: null
     # hidden-desc-end
 
 - type: entity
@@ -698,27 +495,14 @@
     implantComponents:
     - type: FakeMindShield # TODO: put the component on the implant and use implant relay events for the status icon
   - type: FakeMindShieldImplant
-    # hidden-desc-begin
+  # hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-IllegalImplants-medical
-      jobRequired:
-      - Paramedic
-      - MedicalDoctor
-      - SeniorPhysician
-      - Brigmedic
-      - ChiefMedicalOfficer
-    - label: corvax-hidden-desc-FakeMindShieldImplant-research
-      jobRequired:
-      - ResearchAssistant
-      - ResearchDirector
-      - Scientist
-      - Borg
-    - label: corvax-hidden-desc-FakeMindShieldImplant-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    # hidden-desc-end
+    - [MedicalKnowledge, corvax-hidden-desc-IllegalImplants-medical]
+    - [SyndicateAgentKnowledge, corvax-hidden-desc-FakeMindShieldImplant-syndicate]
+    - [ScienceKnowledge, corvax-hidden-desc-FakeMindShieldImplant-research]
+    hiddenName: null
+  # hidden-desc-end
 
 # Sec and Command implants
 
@@ -731,36 +515,15 @@
   components:
    - type: SubdermalImplant
    - type: MindShieldImplant
-    # hidden-desc-begin, also yeah mapping slide in 1 space =|
+   # hidden-desc-begin, also yeah mapping slide in 1 space =|
    - type: HiddenDescription
      entries:
-     - label: corvax-hidden-desc-LegalImplants-medical
-       jobRequired:
-        - Paramedic
-        - MedicalDoctor
-        - SeniorPhysician
-        - Brigmedic
-        - ChiefMedicalOfficer
-     - label: corvax-hidden-desc-MindShieldImplanter-research
-       jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
-     - label: hidden-desc-MindShieldImplanter-security
-       jobRequired:
-        - Captain
-        - HeadOfSecurity
-        - SeniorOfficer
-        - SecurityOfficer
-        - Warden
-        - Detective
-        - BlueShield
-     - label: corvax-hidden-desc-MindShieldImplanter-syndicate
-       whitelistMindRoles:
-        - TraitorRole
-        - NukeOperative
-    # hidden-desc-end
+     - [MedicalKnowledge, corvax-hidden-desc-IllegalImplants-medical]
+     - [SyndicateAgentKnowledge, corvax-hidden-desc-MindShieldImplanter-syndicate]
+     - [SecurityKnowledge, corvax-hidden-desc-MindShieldImplanter-security]
+     - [ScienceKnowledge, corvax-hidden-desc-MindShieldImplanter-research]
+     hiddenName: null
+   # hidden-desc-end
 
 # Centcomm implants
 

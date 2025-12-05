@@ -24,11 +24,11 @@ using Content.Shared.Toggleable;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Random;//SS220 LimitationRevive
-using Content.Server.SS220.DefibrillatorSkill; //SS220 LimitationRevive
 using Content.Server.SS220.LimitationRevive; //SS220 LimitationRevive
 using Content.Shared.Ghost; //SS220 LimitationRevive
 using Content.Shared.Inventory;
-using Content.Shared.SS220.Experience.SkillEffects.Components;
+
+using Content.Shared.SS220.Experience.Skill.Components;
 
 namespace Content.Server.Medical;
 

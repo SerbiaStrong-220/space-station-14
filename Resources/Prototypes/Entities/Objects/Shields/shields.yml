@@ -536,20 +536,14 @@
 # Corvax-HiddenDesc-Start
     - type: HiddenDescription
       entries:
-      - label: corvax-hidden-desc-EnergyShield-syndicate
-        whitelistMindRoles:
-        - TraitorRole
-        - NukeOperative
-      - label: corvax-hidden-desc-EnergyShield-security
-        jobRequired:
-          - HeadOfSecurity
-          - Detective
-          - SecurityCadet
-          - SecurityOfficer
-          - Warden
-      - label: corvax-hidden-desc-EnergyShield-cargo
-        jobRequired:
-          - SalvageSpecialist
+      - [SyndicateAgentKnowledge, corvax-hidden-desc-EnergyShield-syndicate]
+      - [SecurityKnowledge, corvax-hidden-desc-EnergyShield-security]
+      - [CargoKnowledge, corvax-hidden-desc-EnergyShield-cargo]
+      nameEntries:
+      - [SyndicateAgentKnowledge, null]
+      - [SecurityKnowledge, null]
+      - [CargoKnowledge, null]
+      hiddenName: ent-EnergyShield
 # Corvax-HiddenDesc-End
 
 - type: entity
@@ -568,20 +562,14 @@
 # Corvax-HiddenDesc-Start
     - type: HiddenDescription
       entries:
-      - label: corvax-hidden-desc-EnergyShield-syndicate
-        whitelistMindRoles:
-        - TraitorRole
-        - NukeOperative
-      - label: corvax-hidden-desc-EnergyShield-security
-        jobRequired:
-          - HeadOfSecurity
-          - Detective
-          - SecurityCadet
-          - SecurityOfficer
-          - Warden
-      - label: corvax-hidden-desc-EnergyShield-cargo
-        jobRequired:
-          - SalvageSpecialist
+      - [SyndicateAgentKnowledge, corvax-hidden-desc-EnergyShield-syndicate]
+      - [SecurityKnowledge, corvax-hidden-desc-EnergyShield-security]
+      - [CargoKnowledge, corvax-hidden-desc-EnergyShield-cargo]
+      nameEntries:
+      - [SyndicateAgentKnowledge, null]
+      - [SecurityKnowledge, null]
+      - [CargoKnowledge, null]
+      hiddenName: ent-BrokenEnergyShield
 # Corvax-HiddenDesc-End
 
 - type: entity

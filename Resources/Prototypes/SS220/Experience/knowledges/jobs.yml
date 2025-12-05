@@ -4,9 +4,24 @@
   knowledgeDescription: science-knowledge-description
 
 - type: knowledge
+  id: EngineerKnowledge
+  knowledgeName: engineer-knowledge-name
+  knowledgeDescription: engineer-knowledge-description
+
+- type: knowledge
   id: MedicalKnowledge
   knowledgeName: medical-knowledge-name
   knowledgeDescription: medical-knowledge-description
+
+- type: knowledge
+  id: ServiceActorKnowledge
+  knowledgeName: service-actor-knowledge-name
+  knowledgeDescription: service-actor-knowledge-description
+
+- type: knowledge
+  id: SupernaturalBookKnowledge
+  knowledgeName: super-natural-book-knowledge-name
+  knowledgeDescription: super-natural-book-knowledge-description
 
 - type: knowledge
   id: BotanyKnowledge

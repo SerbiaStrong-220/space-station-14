@@ -29,9 +29,9 @@ using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-using Content.Shared.SS220.Experience.SkillEffects.Components;
 using Robust.Client.Player;
 using Robust.Shared.Random;
+using Content.Shared.SS220.Experience.Skill.Components;
 
 namespace Content.Client.HealthAnalyzer.UI
 {

@@ -75,20 +75,14 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-EnergySword-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: corvax-hidden-desc-EnergySword-security
-      jobRequired:
-        - HeadOfSecurity
-        - Detective
-        - SecurityCadet
-        - SecurityOfficer
-        - Warden
-    - label: corvax-hidden-desc-EnergySword-cargo
-      jobRequired:
-        - SalvageSpecialist
+    - [NinjaKnowledge,  corvax-hidden-desc-EnergySword-syndicate]
+    - [SecurityKnowledge, corvax-hidden-desc-EnergySword-security]
+    - [CargoKnowledge,  corvax-hidden-desc-EnergySword-cargo]
+    nameEntries:
+    - [NinjaKnowledge, null]
+    - [SecurityKnowledge, null]
+    - [CargoKnowledge, null]
+    hiddenName: ent-BaseMeleeWeaponEnergy
 # Corvax-HiddenDesc-End
 
 - type: entity
@@ -272,20 +266,16 @@
   - type: Tag
     tags:
     - Write
-# Corvax-HiddenDesc-Start
+  # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-EnergyDagger-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: corvax-hidden-desc-EnergyDagger-research
-      jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
-# Corvax-HiddenDesc-End
+    - [SyndicateAgentKnowledge, corvax-hidden-desc-EnergyDagger-syndicate]
+    - [ScienceKnowledge, corvax-hidden-desc-EnergyDagger-research]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ScienceKnowledge, null]
+    hiddenName: ent-EnergyDagger
+  # Corvax-HiddenDesc-End
 
 - type: entity
   parent: [BaseItem]
@@ -333,15 +323,23 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
+    - [SecurityKnowledge, corvax-hidden-desc-EnergyCutlass-security]
+    - [CargoKnowledge, corvax-hidden-desc-EnergyCutlass-cargo]
+    nameEntries:
+    - [SecurityKnowledge, null]
+    - [CargoKnowledge, null]
+    hiddenName: ent-EnergyCutlass
+  - type: HiddenDescription
+    entries:
     #- label: corvax-hidden-desc-EnergyCutlass-pirate #У нас нету в игре PirateRole, грусть
-    - label: corvax-hidden-desc-EnergyCutlass-security
+    - label:
       jobRequired:
         - HeadOfSecurity
         - Detective
         - SecurityCadet
         - SecurityOfficer
         - Warden
-    - label: corvax-hidden-desc-EnergyCutlass-cargo
+    - label:
       jobRequired:
         - SalvageSpecialist
 # Corvax-HiddenDesc-End

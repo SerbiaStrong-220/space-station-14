@@ -20,16 +20,11 @@
 # Corvax-HiddenDesc-Start
     - type: HiddenDescription
       entries:
-      - label: corvax-hidden-desc-Chameleon-syndicate
-        whitelistMindRoles:
-        - TraitorRole
-        - NukeOperative
-      - label: corvax-hidden-desc-Chameleon-research
-        jobRequired:
-          - ResearchAssistant
-          - ResearchDirector
-          - Scientist
-          - Borg
+      - [SyndicateAgentKnowledge, corvax-hidden-desc-Chameleon-syndicate]
+      - [ScienceKnowledge, corvax-hidden-desc-Chameleon-research]
+      nameEntries:
+      - [SyndicateAgentKnowledge, null]
+      hiddenName: null
 # Corvax-HiddenDesc-End
 
 - type: entity
@@ -43,24 +38,14 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-Chameleon-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: corvax-hidden-desc-ThievingGloves-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: corvax-hidden-desc-Chameleon-thief
-      whitelistMindRoles:
-      - ThiefRole
-    - label: corvax-hidden-desc-ThievingGloves-thief
-      whitelistMindRoles:
-      - ThiefRole
-    - label: corvax-hidden-desc-Chameleon-research
-      jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
+    - [SyndicateAgentKnowledge, corvax-hidden-desc-Chameleon-syndicate]
+    - [SyndicateAgentKnowledge,corvax-hidden-desc-ThievingGloves-syndicate]
+    - [ThiefKnowledge, corvax-hidden-desc-Chameleon-thief]
+    - [ThiefKnowledge, corvax-hidden-desc-ThievingGloves-thief]
+    - [ScienceKnowledge, corvax-hidden-desc-Chameleon-research]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ThiefKnowledge, null]
+    - [ScienceKnowledge, null]
+    hiddenName: null
 # Corvax-HiddenDesc-End
