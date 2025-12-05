@@ -77,6 +77,12 @@ public sealed class FieldShieldVisualizerSystem : EntitySystem
         _sprite.LayerSetVisible((entity, sprite), FieldShieldVisualLayers.Shield, false);
 
         sprite.LayerSetShader(FieldShieldVisualLayers.Shield, "unshaded");
+
+        if (_sprite.LayerMapTryGet((entity, sprite), FieldShieldVisualLayers.Shield, out var layer, false)
+                && entity.Comp.ShieldData.ShieldSprite != null)
+            _sprite.LayerSetSprite((entity, sprite), FieldShieldVisualLayers.Shield, entity.Comp.ShieldData.ShieldSprite);
+
+        EnsureComp<UpdateQueuedFieldShieldComponent>(entity);
     }
 
     private void OnAfterHandledState(Entity<FieldShieldComponent> entity, ref AfterAutoHandleStateEvent _)

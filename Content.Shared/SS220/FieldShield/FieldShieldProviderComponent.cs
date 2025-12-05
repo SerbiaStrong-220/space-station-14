@@ -10,6 +10,14 @@ public sealed partial class FieldShieldProviderComponent : Component
 {
     [DataField]
     [AutoNetworkedField]
+    public bool LockOnEmp = true;
+
+    [ViewVariables]
+    [AutoNetworkedField]
+    public TimeSpan UnLockAfterEmpTime;
+
+    [DataField]
+    [AutoNetworkedField]
     public ShieldData ShieldData = default;
 
     [DataField]

@@ -9,3 +9,4 @@ field-shield-self-examine = The shield can withstand { $Charges } of { $MaxCharg
 field-shield-other-examine = The field shield protects the owner.
 
 field-shield-provider-cant-equip-when-you-already-have-one = You cannot have more than one piece of equipment with a shield!
+field-shield-provider-cant-unequip-when-emped = The equipment's electronics do not respond, it cannot be removed!

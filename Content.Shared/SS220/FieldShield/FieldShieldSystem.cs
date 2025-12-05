@@ -1,6 +1,7 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.
 
 using Content.Shared.Damage;
+using Content.Shared.Emp;
 using Content.Shared.Examine;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Popups;
@@ -25,12 +26,16 @@ public sealed class FieldShieldProviderSystem : EntitySystem
         SubscribeLocalEvent<FieldShieldProviderComponent, ExaminedEvent>(OnFieldShieldProviderExamined);
 
         SubscribeLocalEvent<FieldShieldProviderComponent, BeingEquippedAttemptEvent>(OnBeingEquippedAttempt);
+        SubscribeLocalEvent<FieldShieldProviderComponent, BeingUnequippedAttemptEvent>(OnUneqippingAttempt);
 
         SubscribeLocalEvent<FieldShieldProviderComponent, GotEquippedEvent>(OnProviderEquipped);
         SubscribeLocalEvent<FieldShieldProviderComponent, GotUnequippedEvent>(OnProviderUnequipped);
 
         SubscribeLocalEvent<FieldShieldComponent, BeforeDamageChangedEvent>(OnFieldShieldBeforeDamage);
         SubscribeLocalEvent<FieldShieldComponent, DamageModifyEvent>(OnShieldDamageModify);
+
+        SubscribeLocalEvent<FieldShieldProviderComponent, EmpPulseEvent>(OnFieldShieldProviderEmpPulse);
+        SubscribeLocalEvent<FieldShieldComponent, EmpPulseEvent>(OnFieldShieldEmpPulse);
     }
 
     private void OnFieldShieldExamined(Entity<FieldShieldComponent> entity, ref ExaminedEvent args)
@@ -60,6 +65,15 @@ public sealed class FieldShieldProviderSystem : EntitySystem
         args.Cancel();
 
         _popup.PopupClient(Loc.GetString("field-shield-provider-cant-equip-when-you-already-have-one"), args.Equipee);
+    }
+
+    private void OnUneqippingAttempt(Entity<FieldShieldProviderComponent> entity, ref BeingUnequippedAttemptEvent args)
+    {
+        if (_gameTiming.CurTime > entity.Comp.UnLockAfterEmpTime)
+            return;
+
+        args.Cancel();
+        _popup.PopupClient(Loc.GetString("field-shield-provider-cant-unequip-when-emped"), args.Unequipee, PopupType.SmallCaution);
     }
 
     private void OnProviderEquipped(Entity<FieldShieldProviderComponent> entity, ref GotEquippedEvent args)
@@ -128,5 +142,23 @@ public sealed class FieldShieldProviderSystem : EntitySystem
 
         entity.Comp.RechargeStartTime = _gameTiming.CurTime;
         DirtyField(entity!, nameof(FieldShieldComponent.RechargeStartTime));
+    }
+
+    private void OnFieldShieldProviderEmpPulse(Entity<FieldShieldProviderComponent> entity, ref EmpPulseEvent args)
+    {
+        if (!entity.Comp.LockOnEmp)
+            return;
+
+        args.Affected = true;
+        entity.Comp.UnLockAfterEmpTime = _gameTiming.CurTime + entity.Comp.RechargeShieldData.RechargeTime * (entity.Comp.RechargeShieldData.EmpRechargeMultiplier - 1);
+    }
+
+    private void OnFieldShieldEmpPulse(Entity<FieldShieldComponent> entity, ref EmpPulseEvent args)
+    {
+        args.Affected = true;
+        // cause of naming it goes -1f.
+        entity.Comp.RechargeStartTime = _gameTiming.CurTime + entity.Comp.RechargeShieldData.RechargeTime * (entity.Comp.RechargeShieldData.EmpRechargeMultiplier - 1);
+        entity.Comp.ShieldCharge = 0;
+        Dirty(entity);
     }
 }

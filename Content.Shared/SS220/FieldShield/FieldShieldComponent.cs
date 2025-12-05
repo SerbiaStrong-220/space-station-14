@@ -21,15 +21,15 @@ public sealed partial class FieldShieldComponent : Component
     [AutoNetworkedField]
     public int ShieldCharge = 0;
 
-    [ViewVariables]
+    [DataField]
     [AutoNetworkedField]
     public RechargeShieldData RechargeShieldData = default;
 
-    [ViewVariables]
+    [DataField]
     [AutoNetworkedField]
     public ShieldData ShieldData = default;
 
-    [ViewVariables]
+    [DataField]
     [AutoNetworkedField]
     public ShieldLightData LightData = default;
 
@@ -48,9 +48,14 @@ public partial struct RechargeShieldData
     [AutoNetworkedField]
     public TimeSpan RechargeTime = TimeSpan.FromSeconds(15f);
 
+    [DataField]
+    [AutoNetworkedField]
+    public float EmpRechargeMultiplier = 4f;
+
     /// <summary>
     /// Lower than this damage won't start recharge time again
     /// </summary>
+    [DataField]
     [AutoNetworkedField]
     public FixedPoint4 DamageThreshold = 1f;
 }
