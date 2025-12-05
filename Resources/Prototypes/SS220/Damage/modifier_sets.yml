@@ -113,8 +113,8 @@
   id: XenoLonePraetorian
   coefficients:
     Blunt: 0.7
-    Slash: 0.6
-    Piercing: 0.6
+    Slash: 0.8
+    Piercing: 0.8
     Heat: 1.3
     Shock: 0.9
     Cold: 0.7
@@ -129,7 +129,7 @@
   id: XenoRunner
   coefficients:
     Blunt: 0.9
-    Slash: 0.7
+    Slash: 0.9
     Piercing: 0.8
     Heat: 1.5
     Shock: 1.1
@@ -143,8 +143,8 @@
   id: XenoDrone
   coefficients:
     Blunt: 1.1
-    Slash: 0.6
-    Piercing: 0.7
+    Slash: 0.8
+    Piercing: 0.8
     Heat: 1.4
     Shock: 1.0
     Cold: 0.7
@@ -170,7 +170,7 @@
 - type: damageModifierSet
   id: XenoPraetorian
   coefficients:
-    Blunt: 0.9
+    Blunt: 0.7
     Slash: 0.5
     Piercing: 0.2
     Heat: 1.1
@@ -188,9 +188,9 @@
 - type: damageModifierSet
   id: XenoRavager
   coefficients:
-    Blunt: 0.6
-    Slash: 0.5
-    Piercing: 0.5
+    Blunt: 0.7
+    Slash: 0.7
+    Piercing: 0.6
     Heat: 1.4
     Shock: 0.8
     Cold: 0.6

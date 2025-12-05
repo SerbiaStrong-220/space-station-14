@@ -175,7 +175,7 @@
   - type: MeleeWeapon
     damage:
       types:
-        Blunt: 25
+        Blunt: 20
         Slash: 10
         Structural: 50
     angle: 0
@@ -308,8 +308,8 @@
     damage:
     #SS220 xeno-buff-update begin
       types:
-        Blunt: 30
-        Slash: 25
+        Blunt: 15
+        Slash: 30
         Structural: 70
     angle: 0
     soundHit:
@@ -376,7 +376,7 @@
     #SS220 xeno-buff-update begin
       types:
         Blunt: 15
-        Slash: 40
+        Slash: 25
     #SS220 xeno-buff-update end
   - type: SlowOnDamage
     speedModifierThresholds:
