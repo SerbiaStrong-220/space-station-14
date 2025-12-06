@@ -8,6 +8,8 @@
     sprite: Decals/Flora/flora_bushes.rsi
     noRot: true
     offset: 0, 0.15
+  - type: Physics
+    bodyType: Static
   - type: Fixtures
     fixtures:
       fix1:
@@ -17,7 +19,6 @@
         density: 1000
         layer:
         - WallLayer
-        offset: 0, 0.15
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Wood
@@ -58,6 +59,8 @@
     sprite: Decals/Flora/flora_bushessnow.rsi
     noRot: true
     offset: 0,0.1
+  - type: Physics
+    bodyType: Static
   - type: Fixtures
     fixtures:
       fix1:
@@ -67,7 +70,6 @@
         density: 500
         layer:
         - WallLayer
-        offset: 0,0.1
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Wood
