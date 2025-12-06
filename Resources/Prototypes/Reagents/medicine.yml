@@ -588,11 +588,7 @@
   plantMetabolism:
     - !type:PlantAdjustToxins
       amount: 6
-    - !type:PlantPhalanximine
-      conditions:
-      - !type:ReagentCondition
-        reagent: Phalanximine
-        min: 4
+    - !type:PlantPhalanximine {}
   metabolisms:
     Medicine:
       metabolismRate: 0.1
