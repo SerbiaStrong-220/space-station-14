@@ -38,6 +38,8 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Server.SS220.BackEndApi;
+using Content.Shared.SS220.CCVars;
+using Content.Server.SS220.Wiki.Generators;
 
 namespace Content.Server.Entry
 {
@@ -168,15 +170,31 @@ namespace Content.Server.Entry
             if (!string.IsNullOrEmpty(dest))
             {
                 var resPath = new ResPath(dest).ToRootedPath();
-                var file = _res.UserData.OpenWriteText(resPath.WithName("chemicals_prototypes" + dest)); // SS220 Wiki
+                var file = _res.UserData.OpenWriteText(resPath.WithName("chem_" + dest));
                 ChemistryJsonGenerator.PublishJson(file);
                 file.Flush();
-                file = _res.UserData.OpenWriteText(resPath.WithName("reactions_prototypes" + dest)); // SS220 Wiki
+                file = _res.UserData.OpenWriteText(resPath.WithName("react_" + dest));
                 ReactionJsonGenerator.PublishJson(file);
                 file.Flush();
                 Dependencies.Resolve<IBaseServer>().Shutdown("Data generation done");
                 return;
             }
+
+            // SS220 wiki begin
+            if (_cfg.GetCVar(CCVars220.GenerateWikiDataRun))
+            {
+                var resPath = new ResPath(_cfg.GetCVar(CCVars220.ChemicalsJsonSavePath) + ".json").ToRootedPath();
+                var file = _res.UserData.OpenWriteText(resPath);
+                SS220WikiChemicalsJsonGenerator.PublishJson(file);
+
+                resPath = new ResPath(_cfg.GetCVar(CCVars220.ReactionsJsonSavePath) + ".json").ToRootedPath();
+                file = _res.UserData.OpenWriteText(resPath);
+                SS220WikiReactionsJsonGenerator.PublishJson(file);
+
+                Dependencies.Resolve<IBaseServer>().Shutdown("Wiki data generation done");
+                return;
+            }
+            // SS220 wiki end
 
             _recipe.Initialize();
             _admin.Initialize();
