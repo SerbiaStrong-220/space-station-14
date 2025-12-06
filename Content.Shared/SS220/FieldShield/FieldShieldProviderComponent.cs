@@ -5,7 +5,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared.SS220.FieldShield;
 
 [RegisterComponent]
-[NetworkedComponent, AutoGenerateComponentState]
+[NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true)]
 public sealed partial class FieldShieldProviderComponent : Component
 {
     [DataField]

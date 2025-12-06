@@ -22,6 +22,8 @@ public sealed class FieldShieldProviderSystem : EntitySystem
     {
         base.Initialize();
 
+        SubscribeLocalEvent<FieldShieldComponent, MapInitEvent>(OnFieldShieldMapInit);
+
         SubscribeLocalEvent<FieldShieldComponent, ExaminedEvent>(OnFieldShieldExamined);
         SubscribeLocalEvent<FieldShieldProviderComponent, ExaminedEvent>(OnFieldShieldProviderExamined);
 
@@ -36,6 +38,12 @@ public sealed class FieldShieldProviderSystem : EntitySystem
 
         SubscribeLocalEvent<FieldShieldProviderComponent, EmpPulseEvent>(OnFieldShieldProviderEmpPulse);
         SubscribeLocalEvent<FieldShieldComponent, EmpPulseEvent>(OnFieldShieldEmpPulse);
+    }
+
+    private void OnFieldShieldMapInit(Entity<FieldShieldComponent> entity, ref MapInitEvent _)
+    {
+        entity.Comp.RechargeStartTime = _gameTiming.CurTime;
+        DirtyField(entity!, nameof(FieldShieldComponent.RechargeStartTime));
     }
 
     private void OnFieldShieldExamined(Entity<FieldShieldComponent> entity, ref ExaminedEvent args)
@@ -73,7 +81,7 @@ public sealed class FieldShieldProviderSystem : EntitySystem
             return;
 
         args.Cancel();
-        _popup.PopupClient(Loc.GetString("field-shield-provider-cant-unequip-when-emped"), args.Unequipee, PopupType.SmallCaution);
+        args.Reason = "field-shield-provider-cant-unequip-when-emped";
     }
 
     private void OnProviderEquipped(Entity<FieldShieldProviderComponent> entity, ref GotEquippedEvent args)
@@ -140,7 +148,7 @@ public sealed class FieldShieldProviderSystem : EntitySystem
         if (_gameTiming.CurTime > entity.Comp.RechargeStartTime + entity.Comp.RechargeShieldData.RechargeTime)
             entity.Comp.ShieldCharge = entity.Comp.ShieldData.ShieldMaxCharge;
 
-        entity.Comp.RechargeStartTime = _gameTiming.CurTime;
+        entity.Comp.RechargeStartTime = _gameTiming.CurTime > entity.Comp.RechargeStartTime ? _gameTiming.CurTime : entity.Comp.RechargeStartTime;
         DirtyField(entity!, nameof(FieldShieldComponent.RechargeStartTime));
     }
 
@@ -151,6 +159,7 @@ public sealed class FieldShieldProviderSystem : EntitySystem
 
         args.Affected = true;
         entity.Comp.UnLockAfterEmpTime = _gameTiming.CurTime + entity.Comp.RechargeShieldData.RechargeTime * (entity.Comp.RechargeShieldData.EmpRechargeMultiplier - 1);
+        DirtyField(entity!, nameof(FieldShieldProviderComponent.UnLockAfterEmpTime));
     }
 
     private void OnFieldShieldEmpPulse(Entity<FieldShieldComponent> entity, ref EmpPulseEvent args)
