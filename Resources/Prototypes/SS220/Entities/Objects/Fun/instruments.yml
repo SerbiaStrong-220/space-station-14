@@ -1,0 +1,42 @@
+- type: entity
+  name: стойка с микрофоном
+  parent: BasePlaceableInstrumentRotatable
+  id: MicStand
+  description: Щас спою!
+  components:
+  - type: Instrument
+    program: 52
+  - type: SwappableInstrument
+    instrumentList:
+      "Aah": {52: 0}
+      "Ooh": {53: 0}
+      "Kweh": {4: 100} # Defined in space-station-14.sf2
+      "Waa": {5: 100} # Defined in space-station-14.sf2
+      "Wah": {6: 100} # Defined in space-station-14.sf2
+  - type: Sprite
+    sprite: SS220/Objects/Instruments/mic_stand.rsi
+    state: atlas
+    noRot: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.25
+        density: 100
+        mask:
+        - TableMask
+
+- type: entity
+  id: BigDrumsInstrument
+  parent: BasePlaceableInstrumentRotatable
+  name: ударная установка
+  description: ба-дум тсс!
+  components:
+  - type: Instrument
+    program: 0
+    bank: 20 # Defined in Serbia-Strong-220.sf2
+    allowPercussion: true
+  - type: Sprite
+    sprite: SS220/Objects/Instruments/drum_kit.rsi
+    state: drum
