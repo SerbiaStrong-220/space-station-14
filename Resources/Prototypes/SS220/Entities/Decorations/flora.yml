@@ -1,0 +1,301 @@
+- type: entity
+  id: BaseBush
+  name: bush
+  description: A generic bush.
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    noRot: true
+    offset: 0, 0.15
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.01,0.01"
+        density: 1000
+        layer:
+        - WallLayer
+        offset: 0, 0.15
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/chop.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: BaseBushSnow
+  name: bush
+  description: A generic bush.
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushessnow.rsi
+    noRot: true
+    offset: 0,0.1
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.01,0.01"
+        density: 500
+        layer:
+        - WallLayer
+        offset: 0,0.1
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/chop.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: BaseBush
+  id: FloraBushG
+  name: Кустик
+  description: Красивый куст.
+  components:
+  - type: Sprite
+    layers:
+    - state: bushg1
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        bushg1: ""
+        bushg2: ""
+        bushg3: ""
+        bushg4: ""
+
+- type: entity
+  parent: BaseBush
+  id: FloraBushH
+  name: Молодой бамбук
+  description: Прорастёт через ваших врагов.
+  components:
+  - type: Sprite
+    layers:
+    - state: bushh1
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        bushh1: ""
+        bushh2: ""
+        bushh3: ""
+
+- type: entity
+  parent: BaseBush
+  id: FloraBushI
+  name: Трава и сорняки
+  description: Ничего необычного
+  components:
+  - type: Sprite
+    layers:
+    - state: bushi1
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        bushi1: ""
+        bushi2: ""
+        bushi3: ""
+        bushi4: ""
+
+- type: entity
+  parent: BaseBush
+  id: FloraBushJ
+  name: Папоротник
+  description: Обычно его готовят пока не распустились бутоны.
+  components:
+  - type: Sprite
+    layers:
+    - state: bushj1
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        bushj1: ""
+        bushj2: ""
+        bushj3: ""
+
+- type: entity
+  parent: BaseBush
+  id: FloraBushK
+  name: Бансай
+  description: Красивое дерево.
+  components:
+  - type: Sprite
+    layers:
+    - state: bushk1
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        bushk1: ""
+        bushk2: ""
+        bushk3: ""
+
+- type: entity
+  parent: BaseBush
+  id: FloraBushL
+  name: Вечнозеленый куст
+  description: Очень похож на недоросшую изгородь.
+  components:
+  - type: Sprite
+    layers:
+    - state: bushl1
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        bushl1: ""
+        bushl2: ""
+        bushl3: ""
+        bushl4: ""
+
+- type: entity
+  parent: BaseBush
+  id: FloraBushM
+  name: Карликовая Ель
+  description: Иголки, иголки такие приятные на вкус, как смола.
+  components:
+  - type: Sprite
+    layers:
+    - state: bushm1
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        bushm1: ""
+        bushm2: ""
+        bushm3: ""
+        bushm4: ""
+
+- type: entity
+  parent: BaseBush
+  id: FloraBushN
+  name: Акация
+  description: Часто украшает оранжереи и теплицы.
+  components:
+  - type: Sprite
+    state: bushn1
+
+- type: entity
+  parent: BaseBushSnow
+  id: FloraBushSnowA
+  name: Калина 
+  description: Ягоды отлично помогают с давлением.
+  components:
+  - type: Sprite
+    layers:
+    - state: bushsnowa1
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        bushsnowa1: ""
+        bushsnowa2: ""
+        bushsnowa3: ""
+
+- type: entity
+  parent: BaseBushSnow
+  id: FloraBushSnowB
+  name: Калина пустая
+  description: Простой куст.
+  components:
+  - type: Sprite
+    layers:
+    - state: bushsnowb1
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        bushsnowb1: ""
+        bushsnowb2: ""
+        bushsnowb3: ""
+
+- type: entity
+  parent: BaseBush
+  id: FloraBushD
+  name: Куст
+  description: Самый обычный но красивый куст.
+  components:
+  - type: Sprite
+    layers:
+    - state: bushd1
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        bushd1: ""
+        bushd2: ""
+        bushd3: ""
+        bushd4: ""
+
+- type: entity
+  parent: BaseBush
+  id: FloraBushE
+  name: Камыш
+  description: Обычно путают с рогозом.
+  components:
+  - type: Sprite
+    layers:
+    - state: bushe1
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        bushe1: ""
+        bushe2: ""
+        bushe3: ""
+        bushe4: ""
