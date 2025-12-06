@@ -13658,22 +13658,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -39.5,-14.5
       parent: 2
-- proto: CoordinatesDisk
-  entities:
-  - uid: 9805
-    components:
-    - type: MetaData
-      name: диск координат (Центральное командование)
-    - type: Transform
-      parent: 9804
-    - type: ShuttleDestinationCoordinates
-      destination: invalid
-    - type: Physics
-      canCollide: False
-    - type: Label
-      currentLabel: Центральное командование
-    - type: NameModifier
-      baseName: диск координат
 - proto: CrateDecKit
   entities:
   - uid: 6872
@@ -35803,8 +35787,6 @@ entities:
     components:
     - type: MetaData
       name: Форма НТ-ЦК-КОМ-УВД
-    - type: Transform
-      parent: 2040
     - type: Paper
       stampState: paper_stamp-centcom
       stampedBy:
@@ -36883,11 +36865,6 @@ entities:
     - type: Transform
       pos: 23.062344,27.786135
       parent: 2
-  - uid: 6715
-    components:
-    - type: Transform
-      pos: 21.421719,26.599121
-      parent: 2
     - type: Physics
       bodyStatus: InAir
     - type: Fixtures
@@ -36935,11 +36912,6 @@ entities:
     - type: Transform
       pos: 21.656094,28.362694
       parent: 2
-  - uid: 6717
-    components:
-    - type: Transform
-      pos: 21.421719,26.599121
-      parent: 2
     - type: Physics
       bodyStatus: InAir
     - type: Fixtures
@@ -36981,53 +36953,6 @@ entities:
       playLandSound: True
       landTime: 3168.9275339
       thrownTime: 3168.8968311
-      thrower: invalid
-  - uid: 6718
-    components:
-    - type: Transform
-      pos: 21.421719,26.599121
-      parent: 2
-    - type: Physics
-      bodyStatus: InAir
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.25,-0.25
-            - 0.25,-0.25
-            - 0.25,0.25
-            - -0.25,0.25
-          mask:
-          - Impassable
-          - HighImpassable
-          layer: []
-          density: 20
-          hard: True
-          restitution: 0.3
-          friction: 0.2
-        throw-fixture:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.25,-0.25
-            - 0.25,-0.25
-            - 0.25,0.25
-            - -0.25,0.25
-          mask:
-          - Impassable
-          - HighImpassable
-          - BulletImpassable
-          layer: []
-          density: 1
-          hard: False
-          restitution: 0
-          friction: 0.4
-    - type: ThrownItem
-      playLandSound: True
-      landTime: 3170.2455825
-      thrownTime: 3170.1634965
       thrower: invalid
 - proto: PartRodMetal
   entities:
