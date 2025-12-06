@@ -668,6 +668,20 @@
         Heat: 0.6 #ss-220 armReb
         Radiation: 0.5
         Caustic: 0.5
+  # SS220-MIT-add-field-shields-begin
+  - type: FieldShieldProvider
+    rechargeShieldData:
+      rechargeTime: 15
+    shieldData:
+      shieldMaxCharge: 1
+      shieldSprite:
+        sprite: SS220/Effects/field_shield.rsi
+        state: red
+    lightData:
+      color: "#D82000"
+      radius: 1
+      energy: 4
+  # SS220-MIT-add-field-shields-end
   # SS220 add stamina resistance begin
   - type: StaminaResistance
     damageCoefficient: 0.3
@@ -725,6 +739,20 @@
   - type: StaminaResistance
     damageCoefficient: 0.1
   # SS220 add stamina resistance end
+  # SS220-MIT-add-field-shields-begin
+  - type: FieldShieldProvider
+    rechargeShieldData:
+      rechargeTime: 15
+    shieldData:
+      shieldMaxCharge: 2
+      shieldSprite:
+        sprite: SS220/Effects/field_shield.rsi
+        state: red
+    lightData:
+      color: "#D82000"
+      radius: 1
+      energy: 4
+  # SS220-MIT-add-field-shields-end
   - type: ClothingSpeedModifier
     walkModifier: 0.9 #ss-220 armReb
     sprintModifier: 0.9 #ss-220 armReb
@@ -771,6 +799,20 @@
   - type: StaminaResistance
     damageCoefficient: 0.1
   # SS220 add stamina resistance end
+  # SS220-MIT-add-field-shields-begin
+  - type: FieldShieldProvider
+    rechargeShieldData:
+      rechargeTime: 15
+    shieldData:
+      shieldMaxCharge: 2
+      shieldSprite:
+        sprite: SS220/Effects/field_shield.rsi
+        state: red
+    lightData:
+      color: "#D82000"
+      radius: 1
+      energy: 4
+  # SS220-MIT-add-field-shields-end
   - type: Item
     size: Huge
   #ss220 elite-suitReb begin
@@ -826,6 +868,20 @@
   - type: StaminaResistance
     damageCoefficient: 0.1
   # SS220 add stamina resistance end
+  # SS220-MIT-add-field-shields-begin
+  - type: FieldShieldProvider
+    rechargeShieldData:
+      rechargeTime: 15
+    shieldData:
+      shieldMaxCharge: 2
+      shieldSprite:
+        sprite: SS220/Effects/field_shield.rsi
+        state: red
+    lightData:
+      color: "#D82000"
+      radius: 1
+      energy: 4
+  # SS220-MIT-add-field-shields-end
   - type: ClothingSpeedModifier
     walkModifier: 0.9
     sprintModifier: 0.9
@@ -880,6 +936,20 @@
   - type: StaminaResistance
     damageCoefficient: 0.1
   # SS220 add stamina resistance end
+  # SS220-MIT-add-field-shields-begin
+  - type: FieldShieldProvider
+    rechargeShieldData:
+      rechargeTime: 40
+    shieldData:
+      shieldMaxCharge: 6
+      shieldSprite:
+        sprite: SS220/Effects/field_shield.rsi
+        state: red
+    lightData:
+      color: "#D82000"
+      radius: 1.5
+      energy: 6
+  # SS220-MIT-add-field-shields-end
   - type: ClothingSpeedModifier
     walkModifier: 0.65
     sprintModifier: 0.65
@@ -1067,6 +1137,20 @@
     sprite: SS220/Clothing/OuterClothing/Hardsuits/ERTSuits/ertleader.rsi # SS220-hardsuits-resprite
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitERTLeader
+  # SS220-MIT-add-field-shields-begin
+  - type: FieldShieldProvider
+    rechargeShieldData:
+      rechargeTime: 15
+    shieldData:
+      shieldMaxCharge: 2
+      shieldSprite:
+        sprite: SS220/Effects/field_shield.rsi
+        state: blue
+    lightData:
+      color: "#0061d8"
+      radius: 1
+      energy: 4
+  # SS220-MIT-add-field-shields-end
 
 #ERT Chaplain Hardsuit
 - type: entity
@@ -1111,6 +1195,20 @@
     sprite: SS220/Clothing/OuterClothing/Hardsuits/ERTSuits/ertmedical.rsi # SS220-hardsuits-resprite
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitERTMedical
+  # SS220-MIT-add-field-shields-begin
+  - type: FieldShieldProvider
+    rechargeShieldData:
+      rechargeTime: 15
+    shieldData:
+      shieldMaxCharge: 2
+      shieldSprite:
+        sprite: SS220/Effects/field_shield.rsi
+        state: blue
+    lightData:
+      color: "#0061d8"
+      radius: 1
+      energy: 4
+  # SS220-MIT-add-field-shields-end
 
 #ERT Security Hardsuit
 - type: entity
@@ -1129,6 +1227,20 @@
     tags:
     - Hardsuit
     - WhitelistChameleon
+  # SS220-MIT-add-field-shields-begin
+  - type: FieldShieldProvider
+    rechargeShieldData:
+      rechargeTime: 15
+    shieldData:
+      shieldMaxCharge: 1
+      shieldSprite:
+        sprite: SS220/Effects/field_shield.rsi
+        state: blue
+    lightData:
+      color: "#0061d8"
+      radius: 1
+      energy: 4
+  # SS220-MIT-add-field-shields-end
 
 #ERT Janitor Hardsuit
 - type: entity
@@ -1244,6 +1356,20 @@
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetCBURN
+  # SS220-MIT-add-field-shields-begin
+  - type: FieldShieldProvider
+    rechargeShieldData:
+      rechargeTime: 15
+    shieldData:
+      shieldMaxCharge: 2
+      shieldSprite:
+        sprite: SS220/Effects/field_shield.rsi
+        state: blue
+    lightData:
+      color: "#0061d8"
+      radius: 1
+      energy: 4
+  # SS220-MIT-add-field-shields-end
 
 #MISC. HARDSUITS
 #Clown Hardsuit

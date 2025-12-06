@@ -124,6 +124,20 @@
       - id: Binary
 #      - id: Codespeak
 #SS220 languages revive end
+    # SS220-field-shield-begin
+    - type: FieldShield
+      rechargeShieldData:
+        rechargeTime: 40
+      shieldData:
+        shieldMaxCharge: 6
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
+      lightData:
+        color: "#D82000"
+        radius: 1.5
+        energy: 6
+    # SS220-field-shield-end
     - type: Sprite
       layers:
         - state: synd_sec

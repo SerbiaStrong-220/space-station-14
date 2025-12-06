@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "/tg/station at https://github.com/tgstation/tgstation/blob/HEAD/icons/effects/effects.dmi. edited by Alwayswannahunt",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "blue",
+      "delays": [
+        [
+          0.15,
+          0.13,
+          0.1,
+          0.1,
+          0.1,
+          0.15,
+          0.17
+        ]
+      ]
+    },
+    {
+      "name": "red",
+      "delays": [
+        [
+          0.15,
+          0.13,
+          0.1,
+          0.1,
+          0.1,
+          0.15,
+          0.17
+        ]
+      ]
+    }
+    ]
+}
