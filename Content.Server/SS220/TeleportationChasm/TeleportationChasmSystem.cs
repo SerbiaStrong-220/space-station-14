@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Server.Station.Systems;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Construction.EntitySystems;
@@ -8,6 +9,7 @@ using Content.Shared.SS220.TeleportationChasm;
 using Content.Shared.Station;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -24,6 +26,7 @@ public sealed class TeleportationChasmSystem : SharedTeleportationChasmSystem
     [Dependency] private readonly AnchorableSystem _anchorable = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private readonly StationSystem _stationSystem = default!;
 
     public override void Initialize()
     {
@@ -57,60 +60,55 @@ public sealed class TeleportationChasmSystem : SharedTeleportationChasmSystem
 
     private void TeleportToRandomLocation(EntityUid ent)
     {
-        if (_station.GetStations().FirstOrNull() is not { } station) // only "proper" way i found
+        if (_station.GetStations().FirstOrNull() is not { } station) // only "proper" way to find THE station
             return;
 
         var validLocations = new List<EntityCoordinates>();
 
         var locations = EntityQueryEnumerator<PoweredLightComponent, TransformComponent>();
-        while (locations.MoveNext(out _, out _, out var transform))
+        while (locations.MoveNext(out var uid, out _, out var transform))
         {
-            if (transform.GridUid == null)
-                continue;
+            var owningStation = _stationSystem.GetOwningStation(uid);//rude, but  working
 
-            if (transform.GridUid != station)
+            if (owningStation != station)
                 continue;
 
             validLocations.Add(transform.Coordinates);
         }
 
-        if (!TryComp<MapGridComponent>(station, out var gridComp))//ToDo_SS220 oh we have no mapgrid here...
-            return;
-
-        if (TryTeleportFromCoordList(validLocations, (station, gridComp), ent))//What happens if there is not a single location left?
+        if (TryTeleportFromCoordList(validLocations, ent))
         {
             //_adminLog.Add(LogType.Teleport, $"{uid:event}");//ToDo_SS220 add admin log
         }
-
     }
 
-    public bool IsLocationValid(EntityCoordinates coords, Entity<MapGridComponent> gridUid)
-    {
-        var tileIndices = _map.TileIndicesFor(gridUid, coords);
-
-        if (!_anchorable.TileFree(gridUid, tileIndices))
-            return false;
-
-        return true;
-    }
-
-    private bool TryTeleportFromCoordList(List<EntityCoordinates> coords, Entity<MapGridComponent> gridUid, EntityUid teleported)
+    private bool TryTeleportFromCoordList(List<EntityCoordinates> coords, EntityUid teleported)
     {
         if (coords.Count == 0)
         {
-            Log.Warning($"I couldn't teleport the {teleported} because there were no locations left to teleport to.");
+            Log.Warning($"I couldn't teleport the {teleported} because there were no locations left to teleport to");
             return false;
         }
 
         var teleportLocation = _random.Pick(coords);
-        if (IsLocationValid(teleportLocation, gridUid))
+
+        //ToDo_SS220 figure outsmth, cause Physics from teleported entity isn't what happened
+        /*
+        if (!TryComp<PhysicsComponent>(teleported, out var physicsComp))
         {
-            var xform = Transform(teleported);
-            _transformSystem.SetCoordinates(teleported, xform, teleportLocation);
-            return true;
+            Log.Warning($"I couldn't teleport the {teleported} because it has no PhysicsComponent");
+            return false;
         }
 
-        coords.Remove(teleportLocation);
-        return TryTeleportFromCoordList(coords, gridUid, teleported);
+        if (!_anchorable.TileFree(teleportLocation, physicsComp))
+        {
+            coords.Remove(teleportLocation);
+            return TryTeleportFromCoordList(coords, teleported);
+        }
+        */
+
+        var xform = Transform(teleported);
+        _transformSystem.SetCoordinates(teleported, xform, teleportLocation);
+        return true;
     }
 }
