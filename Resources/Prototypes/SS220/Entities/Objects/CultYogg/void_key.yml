@@ -1,0 +1,76 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: BaseItem
+  id: VoidKey
+  name: void key
+  description: Opens portals to the VOID
+  components:
+  - type: Sprite
+    sprite: Objects/Fun/push_horn.rsi #ToDo_SS220 add sprite when you get it
+    state: icon
+  - type: Item
+    sprite: Objects/Fun/push_horn.rsi
+    size: Tiny
+  - type: EmitSoundOnUse
+    handle: false
+    sound: "/Audio/Items/Toys/pushHornHonk.ogg" #ToDo_SS220 figure out if sound is required
+  - type: UseDelay
+    delay: 10
+  - type: TriggerOnUse
+  - type: SpawnOnTrigger
+    proto: VoidPortalSpawn
+    useMapCoords: true
+
+- type: entity
+  id: VoidPortal
+  components:
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Sprite
+    noRot: true
+    drawdepth: Ghosts
+    sprite: SS220/Objects/CultYogg/portal.rsi
+    layers:
+    - state: portal_loop
+      shader: unshaded
+  # spawn animation lasts 2 seconds, we loop
+  - type: TimedDespawn
+    lifetime: 12
+  - type: SpawnOnDespawn
+    prototype: VoidPortalClosed
+  - type: InteractionTeleport
+  - type: RandomTeleport
+    targetsComponent: "PoweredLight" #ToDo_SS220 make special entity + component for this
+  - type: AfterTeleportEffects
+
+#Animation entities for a better immersions
+- type: entity
+  id: VoidPortalSpawn
+  components:
+  - type: Sprite
+    noRot: true
+    drawdepth: Ghosts
+    sprite: SS220/Objects/CultYogg/portal.rsi
+    layers:
+    - state: portal_open
+      shader: unshaded
+  # spawn animation lasts 1.6 seconds
+  - type: TimedDespawn
+    lifetime: 1.6
+  - type: SpawnOnDespawn
+    prototype: VoidPortal
+
+- type: entity
+  id: VoidPortalClosed
+  components:
+  - type: Sprite
+    noRot: true
+    drawdepth: Ghosts
+    sprite: SS220/Objects/CultYogg/portal.rsi
+    layers:
+    - state: portal_close
+      shader: unshaded
+  # spawn animation lasts 1.2 seconds, but somehow its get +0.1 wtf
+  - type: TimedDespawn
+    lifetime: 1.1

@@ -357,3 +357,9 @@
 
 - type: Tag
   id: MiGoHandsWhitelist
+
+- type: Tag
+  id: CultYoggTeleportEnter
+
+- type: Tag
+  id: CultYoggTeleportExit

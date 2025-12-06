@@ -1,0 +1,114 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+using Content.Server.Station.Systems;
+using Content.Shared.ActionBlocker;
+using Content.Shared.Administration.Logs;
+using Content.Shared.Construction.EntitySystems;
+using Content.Shared.Light.Components;
+using Content.Shared.SS220.TeleportationChasm;
+using Content.Shared.Station;
+using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
+using Robust.Shared.Physics.Components;
+using Robust.Shared.Random;
+using Robust.Shared.Timing;
+using Robust.Shared.Utility;
+
+namespace Content.Server.SS220.TeleportationChasm;
+
+public sealed class TeleportationChasmSystem : SharedTeleportationChasmSystem
+{
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
+    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedStationSystem _station = default!;
+    [Dependency] private readonly AnchorableSystem _anchorable = default!;
+    [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private readonly StationSystem _stationSystem = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+    }
+
+    public override void Update(float frameTime)//we cant teleport in shared, cause wierd shit happened
+    {
+        base.Update(frameTime);
+
+        List<EntityUid> toRemove = [];
+
+        var query = EntityQueryEnumerator<TeleportationChasmFallingComponent>();
+        while (query.MoveNext(out var uid, out var chasm))
+        {
+            if (_timing.CurTime < chasm.NextDeletionTime)
+                continue;
+
+            TeleportToRandomLocation(uid);
+
+            toRemove.Add(uid);
+        }
+
+        foreach (var uid in toRemove)
+        {
+            RemComp<TeleportationChasmFallingComponent>(uid);
+            _blocker.UpdateCanMove(uid);
+            DirtyEntity(uid);
+        }
+    }
+
+    private void TeleportToRandomLocation(EntityUid ent)
+    {
+        if (_station.GetStations().FirstOrNull() is not { } station) // only "proper" way to find THE station
+            return;
+
+        var validLocations = new List<EntityCoordinates>();
+
+        var locations = EntityQueryEnumerator<PoweredLightComponent, TransformComponent>();
+        while (locations.MoveNext(out var uid, out _, out var transform))
+        {
+            var owningStation = _stationSystem.GetOwningStation(uid);//rude, but working
+
+            if (owningStation != station)
+                continue;
+
+            validLocations.Add(transform.Coordinates);
+        }
+
+        if (TryTeleportFromCoordList(validLocations, ent))
+        {
+            //_adminLog.Add(LogType.Teleport, $"{uid:event}");//ToDo_SS220 add admin log
+        }
+    }
+
+    private bool TryTeleportFromCoordList(List<EntityCoordinates> coords, EntityUid teleported)
+    {
+        if (coords.Count == 0)
+        {
+            Log.Warning($"I couldn't teleport the {teleported} because there were no locations left to teleport to");
+            return false;
+        }
+
+        var teleportLocation = _random.Pick(coords);
+
+        //ToDo_SS220 figure outsmth, cause Physics from teleported entity isn't what happened
+        /*
+        if (!TryComp<PhysicsComponent>(teleported, out var physicsComp))
+        {
+            Log.Warning($"I couldn't teleport the {teleported} because it has no PhysicsComponent");
+            return false;
+        }
+
+        if (!_anchorable.TileFree(teleportLocation, physicsComp))
+        {
+            coords.Remove(teleportLocation);
+            return TryTeleportFromCoordList(coords, teleported);
+        }
+        */
+
+        var xform = Transform(teleported);
+        _transformSystem.SetCoordinates(teleported, xform, teleportLocation);
+        return true;
+    }
+}

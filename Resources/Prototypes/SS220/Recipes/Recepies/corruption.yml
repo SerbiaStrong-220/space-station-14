@@ -262,20 +262,6 @@
     prototypeId: Fork
   result: CultYoggCocoonSedativeSting
   corruptionReverseEffect: ExorcismUncorruptEffect
-
-- type: corrupted
-  id: KnifePlasticSedativestingCultYogg
-  from:
-    prototypeId: KnifePlastic
-  result: CultYoggCocoonSedativeSting
-  corruptionReverseEffect: ExorcismUncorruptEffect
-
-- type: corrupted
-  id: KnifeSedativestingCultYogg
-  from:
-    parentPrototypeId: BaseKnife
-  result: CultYoggCocoonSedativeSting
-  corruptionReverseEffect: ExorcismUncorruptEffect
 #SedativeSting end
 
 # Hardsuit beginning
@@ -403,3 +389,19 @@
   result: CultPinpointer
   corruptionReverseEffect: ExorcismUncorruptEffect
 # Pinpointer end
+
+# Telepoter beginning
+- type: corrupted
+  id: KnifeSedativestingCultYogg
+  from:
+    parentPrototypeId: BaseKnife
+  result: VoidKey
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: KnifePlasticSedativestingCultYogg
+  from:
+    prototypeId: KnifePlastic
+  result: VoidKey
+  corruptionReverseEffect: ExorcismUncorruptEffect
+# Telepoter end
