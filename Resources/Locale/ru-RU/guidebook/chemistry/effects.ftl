@@ -14,7 +14,7 @@
        *[other] насыщают
     }
 
-# SS220 fix locale names begin
+# SS220 fix loc ids begin
 entity-effect-guidebook-spawn-entity =
     { $chance ->
         [1] Создаёт
@@ -582,4 +582,4 @@ entity-effect-guidebook-plant-seeds-remove =
         [1] Убирает
        *[other] убирают
     } семена из растения
-# SS220 fix locale names end
+# SS220 fix loc ids end

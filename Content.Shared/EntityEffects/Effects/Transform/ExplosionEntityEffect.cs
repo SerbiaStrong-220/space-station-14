@@ -50,7 +50,7 @@ public sealed partial class ExplosionEffect : EntityEffectBase<ExplosionEffect>
     public float TileBreakScale = 1f;
 
     public override string EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => Loc.GetString("entity-effect-guidebook-explosion" /* SS220 fix loc name */, ("chance", Probability));
+        => Loc.GetString("entity-effect-guidebook-explosion" /* SS220 fix loc id */, ("chance", Probability));
 
     public override LogImpact? Impact => LogImpact.High;
 }
