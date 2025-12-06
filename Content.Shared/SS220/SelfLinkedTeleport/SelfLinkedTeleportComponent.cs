@@ -6,19 +6,20 @@ using Robust.Shared.GameStates;
 namespace Content.Shared.SS220.SelfLinkedTeleport;
 
 /// <summary>
+/// If you want to create a kind of linked tunnel that will find its own exit when initialized or the linked exit is lost
 /// </summary>
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class SelfLinkedTeleportComponent : Component
 {
     /// <summary>
-    ///     Аnother part of the teleport
+    ///     The entity to which or from which the teleport will be performed
     /// </summary>
-    [ViewVariables]
+    [ViewVariables, AutoNetworkedField]
     public EntityUid? LinkedEntity;
 
     /// <summary>
     ///     Which entities can it linked to
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntityWhitelist? WhitelistLinked;
 }
