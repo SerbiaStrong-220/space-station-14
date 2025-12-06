@@ -7,14 +7,14 @@
   description: Opens portals to the VOID
   components:
   - type: Sprite
-    sprite: Objects/Fun/push_horn.rsi
+    sprite: Objects/Fun/push_horn.rsi #ToDo_SS220 add sprite when you get it
     state: icon
   - type: Item
     sprite: Objects/Fun/push_horn.rsi
     size: Tiny
   - type: EmitSoundOnUse
     handle: false
-    sound: "/Audio/Items/Toys/pushHornHonk.ogg"
+    sound: "/Audio/Items/Toys/pushHornHonk.ogg" #ToDo_SS220 figure out if sound is required
   - type: UseDelay
     delay: 10
   - type: TriggerOnUse
