@@ -88,6 +88,13 @@
   - type: EmergencyShuttleAutoCallRule
 
 - type: entity
+  id: EmergencyShuttleAutoVote
+  parent: BaseGameRule
+  categories: [ GameRules ]
+  components:
+  - type: EmergencyShuttleAutoVoteRule
+
+- type: entity
   id: TraitorDynamic
   parent: Traitor
   components:
