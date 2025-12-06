@@ -77,7 +77,7 @@ public sealed class SelfLinkedTeleportSystem : SharedSelfLinkedTeleportSystem
         Dirty(ent);
     }
 
-    protected override void WarpTo(Entity<SelfLinkedTeleportComponent> ent, EntityUid target, EntityUid user)
+    protected override void Warp(Entity<SelfLinkedTeleportComponent> ent, EntityUid target, EntityUid user)
     {
         if (ent.Comp.LinkedEntity == null)//we shouldn't interact  at all if we are  here
             return;

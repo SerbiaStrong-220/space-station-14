@@ -68,7 +68,7 @@ public sealed class TeleportationChasmSystem : SharedTeleportationChasmSystem
         var locations = EntityQueryEnumerator<PoweredLightComponent, TransformComponent>();
         while (locations.MoveNext(out var uid, out _, out var transform))
         {
-            var owningStation = _stationSystem.GetOwningStation(uid);//rude, but  working
+            var owningStation = _stationSystem.GetOwningStation(uid);//rude, but working
 
             if (owningStation != station)
                 continue;

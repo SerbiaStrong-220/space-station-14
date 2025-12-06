@@ -34,13 +34,14 @@
     layers:
     - state: portal_loop
       shader: unshaded
-  # spawn animation lasts 2 seconds, we loop 3 times
+  # spawn animation lasts 2 seconds, we loop
   - type: TimedDespawn
-    lifetime: 6
+    lifetime: 12
   - type: SpawnOnDespawn
     prototype: VoidPortalClosed
-  - type: InteractionTeleport #ToDo_SS220 figure out doafter + TimedDespawn cause should be time for using
-  #- type: SelfLinkedTeleport #ToDo_SS220 add teleport to smth else
+  - type: InteractionTeleport
+  - type: RandomTeleport
+    targetsComponent: "PoweredLight" #ToDo_SS220 make special entity + component for this
   - type: AfterTeleportEffects
 
 #Animation entities for a better immersions

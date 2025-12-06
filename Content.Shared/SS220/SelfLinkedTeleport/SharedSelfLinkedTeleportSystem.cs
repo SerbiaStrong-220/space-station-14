@@ -15,11 +15,11 @@ public abstract class SharedSelfLinkedTeleportSystem : EntitySystem
 
     private void OnTeleportTarget(Entity<SelfLinkedTeleportComponent> ent, ref TeleportTargetEvent args)
     {
-        WarpTo(ent, args.Target, args.User);
+        Warp(ent, args.Target, args.User);
 
         var ev = new TargetTeleportedEvent(args.Target);
         RaiseLocalEvent(ent, ref ev);
     }
 
-    protected virtual void WarpTo(Entity<SelfLinkedTeleportComponent> ent, EntityUid target, EntityUid user) { }
+    protected virtual void Warp(Entity<SelfLinkedTeleportComponent> ent, EntityUid target, EntityUid user) { }
 }

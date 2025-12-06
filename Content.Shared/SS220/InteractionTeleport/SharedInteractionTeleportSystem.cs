@@ -8,8 +8,6 @@ using Content.Shared.Whitelist;
 
 namespace Content.Shared.SS220.InteractionTeleport;
 
-/// <summary>
-/// </summary>
 public sealed class SharedInteractionTeleportSystem : EntitySystem
 {
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
@@ -51,8 +49,7 @@ public sealed class SharedInteractionTeleportSystem : EntitySystem
     {
         if (_whitelist.IsWhitelistFail(ent.Comp.UserWhitelist, args.Dragged))
         {
-            if (ent.Comp.WhitelistRejectedLoc != null)
-                _popup.PopupPredicted(ent.Comp.WhitelistRejectedLoc, ent, args.User, PopupType.MediumCaution);
+            _popup.PopupPredicted(ent.Comp.WhitelistRejectedLoc, ent, args.User, PopupType.MediumCaution);//if message is null == will be return anyway
             return;
         }
         args.CanDrop = true;
