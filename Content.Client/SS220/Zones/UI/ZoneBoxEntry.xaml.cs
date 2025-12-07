@@ -22,6 +22,20 @@ public sealed partial class ZoneBoxEntry : PanelContainer
     }
     private Box2 _box;
 
+    public bool Editable
+    {
+        get => _editable;
+        set
+        {
+            LeftLineEdit.Editable = value;
+            BottomLineEdit.Editable = value;
+            TopLineEdit.Editable = value;
+            RightLineEdit.Editable = value;
+            _editable = value;
+        }
+    }
+    private bool _editable = true;
+
     public ZoneBoxEntry() : this(null) { }
 
     public ZoneBoxEntry(Box2? box)

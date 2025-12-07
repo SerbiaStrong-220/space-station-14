@@ -62,7 +62,9 @@ public sealed class BoxesOverlay : Overlay
 
     private void DrawBox(in OverlayDrawArgs args, BoxOverlayData data)
     {
-        var xform = _entManager.GetComponent<TransformComponent>(data.Parent);
+        if (!_entManager.TryGetComponent<TransformComponent>(data.Parent, out var xform))
+            return;
+
         if (xform.MapID != args.MapId)
             return;
 

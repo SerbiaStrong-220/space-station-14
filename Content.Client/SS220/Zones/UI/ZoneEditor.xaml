@@ -30,6 +30,10 @@
                 </BoxContainer>
                 <CheckBox Name="AttachToLatticeCheckbox" Text="{Loc zone-params-panel-attach-to-grid-check-box}" LeftAlign="False" Margin ="5 2" />
             </BoxContainer>
+            <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                <Button Name="ApplyButton" HorizontalExpand="True" Text="{Loc zones-control-apply-button}"/>
+                <Button Name="CancelButton" HorizontalExpand="True" Text="{Loc zones-control-cancel-button}"/>
+            </BoxContainer>
         </BoxContainer>
         <BoxContainer Orientation="Vertical" VerticalExpand="True" Margin ="5 5" MinSize="250 250">
             <PanelContainer Name="SizeOptionsBackground" HorizontalExpand="True" VerticalExpand="True">

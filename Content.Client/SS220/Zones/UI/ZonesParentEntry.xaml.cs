@@ -16,7 +16,7 @@ public sealed partial class ZonesParentEntry : BoxContainer
 
     public EntityUid ZonesParent;
 
-    public List<ZoneEntry> ZoneEntries = [];
+    public Dictionary<EntityUid, ZoneEntry> ZoneEntries = [];
 
     public Action<ZoneEntry>? ZoneEntryToggled;
 
@@ -35,7 +35,7 @@ public sealed partial class ZonesParentEntry : BoxContainer
         CollapseButton.OnPressed += _ => SetCollapsed(!_collapsed);
         ParentBackgroundPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = Color.FromHex("#2F2F3B") };
 
-        ZoneEntries = entries;
+        ZoneEntries = entries.ToDictionary(x => x.ZoneEntity.Owner, x => x);
         Refresh();
     }
 
@@ -52,16 +52,16 @@ public sealed partial class ZonesParentEntry : BoxContainer
         SortEntries(refresh: false);
 
         ZonesBox.RemoveAllChildren();
-        foreach (var entry in ZoneEntries)
+        foreach (var entry in ZoneEntries.Values)
+        {
             ZonesBox.AddChild(entry);
-
-        foreach (var value in ZoneEntries)
-            value.Refresh();
+            entry.Refresh();
+        }
     }
 
     public void SortEntries(bool refresh = true)
     {
-        ZoneEntries = [.. ZoneEntries.OrderBy(e => e.ZoneEntity)];
+        ZoneEntries = ZoneEntries.OrderBy(e => e.Key).ToDictionary();
 
         if (refresh)
             Refresh();
@@ -95,7 +95,7 @@ public sealed partial class ZonesParentEntry : BoxContainer
         bool ApplyToZoneEntries(string? filter)
         {
             var isVisible = false;
-            foreach (var entry in ZoneEntries)
+            foreach (var entry in ZoneEntries.Values)
             {
                 if (string.IsNullOrEmpty(filter))
                 {

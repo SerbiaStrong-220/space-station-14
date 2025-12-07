@@ -10,7 +10,7 @@ namespace Content.Shared.SS220.Zones.Components;
 /// A zone can be used to determine a certain area on the <see cref="ZoneParams.Container"/>
 /// in which various events can occur, as well as with entities entering, staying inside, and leaving the zone.
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(raiseAfterAutoHandleState: true)]
 [Access(typeof(SharedZonesSystem), Other = AccessPermissions.ReadExecute)]
 [EntityCategory("Zones")]
 public sealed partial class ZoneComponent : Component

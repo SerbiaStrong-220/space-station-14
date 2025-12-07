@@ -18,7 +18,7 @@ using System.Linq;
 namespace Content.Client.SS220.Zones.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class ZoneParamsPanel : PanelContainer
+public sealed partial class ZoneEditor : PanelContainer
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IBoxLayoutManager _boxLayoutManager = default!;
@@ -26,13 +26,8 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
     private readonly ZonesSystem _zones = default!;
 
-    public Entity<ZoneComponent>? ZoneEntity
-    {
-        get => _zoneEntity;
-        set => SetZoneEntity(value);
-    }
-
-    private Entity<ZoneComponent>? _zoneEntity;
+    public event Action<ZoneParams>? OnApply;
+    public event Action<ZoneParams>? OnCancel;
 
     public ZoneParams? ChangedParams
     {
@@ -50,22 +45,26 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
     public ZoneParams CurrentParams => ChangedParams ?? OriginalParams;
 
+    public ZoneEditorSetting EditorSetting { get; private set; } = ZoneEditorSetting.ReadWrite;
+
     private BoxLayoutMode _layoutMode = BoxLayoutMode.Adding;
 
-    private ZoneParamsBoxesOverlayProvider _overlayProvider;
+    private readonly ZoneEditorBoxesOverlayProvider _overlayProvider;
 
-    private ZonePrototypeSelectorPopup _prototypeSelectorPopup = new();
-    private ZoneColorSelectorPopup _colorSelectorPopup = new();
+    private readonly ZonePrototypeSelectorPopup _prototypeSelectorPopup = new();
+    private readonly ZoneColorSelectorPopup _colorSelectorPopup = new();
 
-    public ZoneParamsPanel() : this(null) { }
+    public ZoneEditor() : this(null) { }
 
-    public ZoneParamsPanel(Entity<ZoneComponent>? entity)
+    public ZoneEditor(Entity<ZoneComponent> ent, ZoneEditorSetting setting = ZoneEditorSetting.ReadWrite) : this(GetZoneParams(ent), setting) { }
+
+    public ZoneEditor(ZoneParams? @params, ZoneEditorSetting setting = ZoneEditorSetting.ReadWrite)
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
 
         var overlay = BoxesOverlay.GetOverlay();
-        if (overlay.TryGetProvider<ZoneParamsBoxesOverlayProvider>(out var provider))
+        if (overlay.TryGetProvider<ZoneEditorBoxesOverlayProvider>(out var provider))
             _overlayProvider = provider;
         else
         {
@@ -88,10 +87,14 @@ public sealed partial class ZoneParamsPanel : PanelContainer
         PrototypeSelectorButton.AddStyleClass(StyleNano.StyleClassChatFilterOptionButton);
         ColorSelectorButton.AddStyleClass(StyleNano.StyleClassChatFilterOptionButton);
 
+        ApplyButton.OnPressed += _ => OnApply?.Invoke(CurrentParams);
+        CancelButton.OnPressed += _ => OnCancel?.Invoke(CurrentParams);
+
         InitInteractions();
         InitTooltips();
 
-        SetZoneEntity(entity, refresh: false);
+        SetEditorSetting(setting, refresh: false);
+        SetOriginalParams(@params, refresh: false);
         Refresh();
     }
 
@@ -141,7 +144,7 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
         ColorSelectorButton.OnPressed += _ =>
         {
-            var color = ZoneEntity != null ? ZoneEntity.Value.Comp.Color : Color.Gray;
+            var color = CurrentParams.Color;
             _colorSelectorPopup.SetColor(color);
 
             var globalPos = ColorSelectorButton.GlobalPosition;
@@ -178,8 +181,6 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
         CancelLayout();
 
-        OriginalParams = GetZoneParams(ZoneEntity);
-
         var showedParams = CurrentParams;
 
         NameLineEdit.Text = showedParams.Name;
@@ -203,6 +204,7 @@ public sealed partial class ZoneParamsPanel : PanelContainer
             Box2ListContainer.AddChild(entry);
         }
 
+        RefreshEditable();
         _overlayProvider.Refresh();
     }
 
@@ -211,22 +213,28 @@ public sealed partial class ZoneParamsPanel : PanelContainer
         ChangedParams = null;
     }
 
-    public void SetZoneEntity(Entity<ZoneComponent>? ent, bool refresh = true)
+    public void SetOriginalParams(Entity<ZoneComponent> ent, bool refresh = true)
     {
-        _zoneEntity = ent;
-        OriginalParams = GetZoneParams(ent);
+        SetOriginalParams(GetZoneParams(ent, _entityManager), refresh);
+    }
+
+    public void SetOriginalParams(ZoneParams? @params, bool refresh = true)
+    {
+        OriginalParams = @params ?? new ZoneParams();
 
         if (refresh)
             Refresh();
     }
 
-    private ZoneParams GetZoneParams(Entity<ZoneComponent>? ent)
+    private static ZoneParams GetZoneParams(Entity<ZoneComponent>? ent, IEntityManager? entityManager = null)
     {
         if (ent is null)
             return new ZoneParams();
 
-        _entityManager.TryGetComponent<TransformComponent>(ent, out var xform);
-        _entityManager.TryGetComponent<MetaDataComponent>(ent, out var metaData);
+        entityManager ??= IoCManager.Resolve<EntityManager>();
+
+        entityManager.TryGetComponent<TransformComponent>(ent, out var xform);
+        entityManager.TryGetComponent<MetaDataComponent>(ent, out var metaData);
 
         return new ZoneParams()
         {
@@ -339,6 +347,38 @@ public sealed partial class ZoneParamsPanel : PanelContainer
         _overlayProvider.Active = active;
     }
 
+    public void SetEditorSetting(ZoneEditorSetting setting, bool refresh = true)
+    {
+        EditorSetting = setting;
+
+        if (refresh)
+            Refresh();
+    }
+
+    private void RefreshEditable()
+    {
+        var editable = EditorSetting is ZoneEditorSetting.ReadWrite;
+
+        NameLineEdit.Editable = editable;
+        PrototypeIDLineEdit.Editable = editable;
+        HexColorLineEdit.Editable = editable;
+        ParentNetIDLineEdit.Editable = editable;
+
+        AttachToLatticeCheckbox.Disabled = !editable;
+        ApplyButton.Disabled = !editable;
+        CancelButton.Disabled = !editable;
+        AddBoxButton.Disabled = !editable;
+        CutBoxButton.Disabled = !editable;
+
+        foreach (var child in Box2ListContainer.Children)
+        {
+            if (child is not ZoneBoxEntry entry)
+                continue;
+
+            entry.Editable = editable;
+        }
+    }
+
     #region params changes
     private void ChangeParent(string parent)
     {
@@ -416,6 +456,9 @@ public sealed partial class ZoneParamsPanel : PanelContainer
 
     private void ChangeParams(Func<ZoneParams, ZoneParams> func, bool refresh = true, bool recalculate = false)
     {
+        if (EditorSetting is not ZoneEditorSetting.ReadWrite)
+            return;
+
         var result = func.Invoke(CurrentParams);
 
         if (recalculate)
@@ -433,9 +476,15 @@ public sealed partial class ZoneParamsPanel : PanelContainer
         Cutting
     }
 
-    private sealed class ZoneParamsBoxesOverlayProvider() : BoxesOverlay.BoxesOverlayProvider()
+    public enum ZoneEditorSetting
     {
-        public ZoneParamsPanel? Panel;
+        ReadOnly,
+        ReadWrite
+    }
+
+    private sealed class ZoneEditorBoxesOverlayProvider() : BoxesOverlay.BoxesOverlayProvider()
+    {
+        public ZoneEditor? Panel;
         private (EntityUid Parent, List<Box2> Boxes)? _addedBoxes;
         private (EntityUid Parent, List<Box2> Boxes)? _deletedBoxes;
 

@@ -7,14 +7,12 @@ using Content.Shared.Administration;
 using Content.Shared.SS220.Zones;
 using Content.Shared.SS220.Zones.Components;
 using Content.Shared.SS220.Zones.Systems;
-using Robust.Client.Console;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.Zones.Systems;
 
 public sealed partial class ZonesSystem : SharedZonesSystem
 {
-    [Dependency] private readonly IClientConsoleHost _clientConsoleHost = default!;
     [Dependency] private readonly IClientAdminManager _clientAdmin = default!;
 
     public ZonesControlWindow ControlWindow = default!;
@@ -38,11 +36,31 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         }
 
         _clientAdmin.AdminStatusUpdated += OnAdminStatusUpdated;
+
+        SubscribeLocalEvent<ZoneComponent, ComponentInit>(OnInit);
+        SubscribeLocalEvent<ZoneComponent, ComponentShutdown>(OnShutdown);
+        SubscribeLocalEvent<ZoneComponent, AfterAutoHandleStateEvent>(OnAfterAutoHandleState);
     }
+
+    private void OnInit(Entity<ZoneComponent> ent, ref ComponentInit args)
+    {
+        ControlWindow.Refresh();
+    }
+
+    private void OnShutdown(Entity<ZoneComponent> ent, ref ComponentShutdown args)
+    {
+        ControlWindow.Refresh();
+    }
+
+    private void OnAfterAutoHandleState(Entity<ZoneComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        ControlWindow.Refresh();
+    }
+
 
     private void OnAdminStatusUpdated()
     {
-        SetOverlay(_overlayProvider.Active);
+        ResetOverlay();
     }
 
     public void SetOverlay(bool value)
@@ -82,5 +100,10 @@ public sealed partial class ZonesSystem : SharedZonesSystem
     {
         var msg = new DeleteZoneRequestMessage(zone);
         RaiseNetworkEvent(msg);
+    }
+
+    private void ResetOverlay()
+    {
+        SetOverlay(_overlayProvider.Active);
     }
 }
