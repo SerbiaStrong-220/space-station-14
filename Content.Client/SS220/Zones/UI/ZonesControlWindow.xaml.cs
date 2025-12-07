@@ -17,6 +17,7 @@ public sealed partial class ZonesControlWindow : DefaultWindow
 
     private readonly ZonesSystem _zones;
 
+    private Dictionary<EntityUid, EntityUid> _zoneParents = [];
     private Dictionary<EntityUid, ZonesParentEntry> _zoneParentEntries = [];
 
     public ZoneEntry? EditingZoneEntry { get; private set; }
@@ -186,6 +187,7 @@ public sealed partial class ZonesControlWindow : DefaultWindow
 
         CreateNewZoneButton.Pressed = false;
         ZoneEditor.SetOverlay(false);
+        ZoneEditor.ClearChanges();
         ZoneEditorPanel.Visible = false;
 
         ZoneEditor.OnApply -= OnCreateZoneApplied;

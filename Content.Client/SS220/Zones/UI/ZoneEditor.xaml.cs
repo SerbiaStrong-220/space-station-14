@@ -492,15 +492,19 @@ public sealed partial class ZoneEditor : PanelContainer
 
         public void Refresh()
         {
-            if (Panel == null)
-            {
-                _addedBoxes = null;
-                _deletedBoxes = null;
-                return;
-            }
+            _addedBoxes = null;
+            _deletedBoxes = null;
 
-            _addedBoxes = GetChanges(Panel.OriginalParams, Panel.ChangedParams);
-            _deletedBoxes = GetChanges(Panel.ChangedParams, Panel.OriginalParams);
+            if (Panel == null)
+                return;
+
+            var changed = Panel.ChangedParams;
+            if (changed == null)
+                return;
+
+            var original = Panel.OriginalParams;
+            _addedBoxes = GetChanges(original, changed.Value);
+            _deletedBoxes = GetChanges(changed.Value, original);
         }
 
         public override List<BoxesOverlay.BoxOverlayData> GetBoxesDatas()
@@ -526,20 +530,14 @@ public sealed partial class ZoneEditor : PanelContainer
             return result;
         }
 
-        private static (EntityUid Parent, List<Box2> Boxes)? GetChanges(ZoneParams? original, ZoneParams? changed)
+        private static (EntityUid Parent, List<Box2> Boxes) GetChanges(ZoneParams original, ZoneParams changed)
         {
-            if (changed is null)
-                return null;
-
-            if (original is null)
-                return (changed.Value.Parent, changed.Value.Area.ToList());
-
-            var originalParent = original.Value.Parent;
-            var changedParent = changed.Value.Parent;
+            var originalParent = original.Parent;
+            var changedParent = changed.Parent;
 
             var result = originalParent == changedParent
-                ? [.. MathHelperExtensions.SubstructBoxes(changed.Value.Area, original.Value.Area)]
-                : changed.Value.Area.ToList();
+                ? [.. MathHelperExtensions.SubstructBoxes(changed.Area, original.Area)]
+                : changed.Area.ToList();
 
             return (changedParent, result);
         }

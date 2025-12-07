@@ -8,7 +8,7 @@ using Content.Shared.SS220.Zones.Systems;
 using Robust.Server.GameObjects;
 using Robust.Server.GameStates;
 using Robust.Server.Player;
-using Robust.Shared.Map.Components;
+using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -139,6 +139,9 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         var zoneComp = EnsureComp<ZoneComponent>(uid);
         var zone = (uid, zoneComp);
 
+        var xform = Transform(uid);
+        xform.GridTraversal = false;
+
         SetZoneParent(zone, parent, recalculate: false);
         SetZoneArea(zone, area, recalculate: false);
         SetZoneName(zone, name);
@@ -198,8 +201,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         if (!IsValidParent(parent))
             return false;
 
-        _transform.SetParent(ent, parent);
-        _transform.SetLocalPosition(ent, new Vector2(0, 0));
+        _transform.SetCoordinates((ent, Transform(ent), MetaData(ent)), new EntityCoordinates(parent, Vector2.Zero), Angle.Zero);
 
         if (recalculate)
             RecalculateZoneAreas(ent);

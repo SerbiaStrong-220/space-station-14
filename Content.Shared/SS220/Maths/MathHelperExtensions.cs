@@ -16,7 +16,7 @@ public static partial class MathHelperExtensions
     {
         var result = boxes.ToList();
         foreach (var cutter in cutters)
-            result.AddRange(SubstructBox(result, cutter));
+            result = [.. SubstructBox(result, cutter)];
 
         if (unionResult)
             result = [.. UnionInEqualSizedBoxes(result)];
