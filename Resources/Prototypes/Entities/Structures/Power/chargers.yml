@@ -175,6 +175,7 @@
           tags:
           - WeaponRechargerWhitelist
           # SS220 Added WeaponRechargerWhitelist tag for charging support end
+          - DefibrillatorCompactWhitelist # SS220 Compact Defib
         blacklist:
           tags:
           - PotatoBattery
@@ -202,6 +203,10 @@
           - ProjectileBatteryAmmoProvider
           - Stunbaton
           - PowerCell
+          # SS220 Compact Defib-start
+          tags:
+          - DefibrillatorCompactWhitelist
+          # SS220 Compact Defib-ended
         blacklist:
           tags:
           - PotatoBattery
@@ -243,6 +248,7 @@
           tags:
           - WeaponRechargerWhitelist
           # SS220 Added WeaponRechargerWhitelist tag for charging support end
+          - DefibrillatorCompactWhitelist # SS220 Compact Defib
         blacklist:
           tags:
           - PotatoBattery
