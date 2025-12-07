@@ -68,7 +68,7 @@
 
 - type: entity
   id: DefibrillatorCompact # This should be a research item at some point
-  parent: [ BaseDefibrillator, PowerCellSlotMediumItem ]
+  parent: [ BaseDefibrillator] #SS220 Compact Defib-start
   name: compact defibrillator
   description: Now in fun size!
   components:
@@ -93,6 +93,18 @@
   - type: Tag
     tags:
     - DefibrillatorCompactWhitelist
+  - type: ContainerContainer
+    containers:
+      cell_slot: !type:ContainerSlot { }
+  - type: PowerCellSlot
+    cellSlotId: cell_slot
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellMedium
+        locked: true
+        disableEject: true
   # SS220 Compact Defib-ended
   - type: Defibrillator
     zapHeal:
