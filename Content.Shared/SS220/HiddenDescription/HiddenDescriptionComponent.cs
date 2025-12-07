@@ -16,7 +16,7 @@ public sealed partial class HiddenDescriptionComponent : Component
 {
     [AutoNetworkedField]
     [DataField(required: true)]
-    public Dictionary<ProtoId<KnowledgePrototype>, LocId> Entries = new();
+    public Dictionary<ProtoId<KnowledgePrototype>, List<LocId>> Entries = new();
 
     /// <summary>
     /// If this field is null, that mean we skip any renaming because entity do itself

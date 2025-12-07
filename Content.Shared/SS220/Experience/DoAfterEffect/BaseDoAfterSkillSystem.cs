@@ -112,7 +112,7 @@ public abstract partial class BaseDoAfterSkillSystem<T1, T2> : EntitySystem wher
         args.Cancel = true;
 
         if (entity.Comp.FailurePopup is not null)
-            _popup.PopupPredicted(Loc.GetString(entity.Comp.FailurePopup), args.Args.User, args.Args.User, PopupType.SmallCaution);
+            _popup.PopupEntity(Loc.GetString(entity.Comp.FailurePopup), args.Args.User, args.Args.User, PopupType.SmallCaution);
     }
 
     private bool TryGetLearningProgressInfo<T>(Entity<T?> entity, ProtoId<SkillTreePrototype>? treeId, [NotNullWhen(true)] out LearningInformation? learningInformation) where T : BaseLearningOnDoAfterWithComponent

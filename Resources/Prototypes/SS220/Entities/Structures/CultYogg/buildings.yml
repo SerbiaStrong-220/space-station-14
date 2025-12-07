@@ -98,7 +98,7 @@
         type: ChameleonStructureBoundUserInterface
   - type: HiddenDescription
     entries:
-    - [CultYoggKnowledge, hidden-desc-chameleon-structure-cultyogg]
+      CultYoggKnowledge: [ hidden-desc-chameleon-structure-cultyogg ]
     nameEntries:
     - [CultYoggKnowledge, null]
     hiddenName: ent-BaseWall
@@ -157,7 +157,7 @@
         type: ChameleonStructureBoundUserInterface
   - type: HiddenDescription
     entries:
-    - [CultYoggKnowledge, hidden-desc-chameleon-structure-cultyogg]
+      CultYoggKnowledge: [ hidden-desc-chameleon-structure-cultyogg ]
     nameEntries:
     - [CultYoggKnowledge, null]
     hiddenName: ent-CultYoggDoor
@@ -358,7 +358,7 @@
     eraseTime: 3
   - type: HiddenDescription
     entries:
-    - [CultYoggKnowledge, hidden-desc-chameleon-structure-cultyogg]
+      CultYoggKnowledge: [ hidden-desc-chameleon-structure-cultyogg ]
     nameEntries:
     - [CultYoggKnowledge, null]
     hiddenName: ent-CultYoggAirlock

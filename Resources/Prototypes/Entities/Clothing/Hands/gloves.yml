@@ -239,7 +239,7 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - [NinjaKnowledge, corvax-hidden-desc-ThievingGloves-thief]
+      NinjaKnowledge: [ corvax-hidden-desc-ThievingGloves-thief ]
     nameEntries:
     - [NinjaKnowledge, null]
     hiddenName: ent-ClothingHandsBase
@@ -393,8 +393,8 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - [SyndicateAgentKnowledge, corvax-hidden-desc-ThievingGloves-syndicate]
-    - [ThiefKnowledge, corvax-hidden-desc-ThievingGloves-thief]
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-ThievingGloves-syndicate ]
+      ThiefKnowledge: [ corvax-hidden-desc-ThievingGloves-thief ]
     nameEntries:
     - [SyndicateAgentKnowledge, null]
     - [ThiefKnowledge, null]

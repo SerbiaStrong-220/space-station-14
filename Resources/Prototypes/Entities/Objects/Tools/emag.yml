@@ -15,9 +15,9 @@
   # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - [SyndicateAgentKnowledge, corvax-hidden-desc-Emag-syndicate]
-    - [ScienceKnowledge, corvax-hidden-desc-Emag-research]
-    - [EngineerKnowledge, corvax-hidden-desc-Emag-engineering]
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-Emag-syndicate ]
+      ScienceKnowledge: [ corvax-hidden-desc-Emag-research ]
+      EngineerKnowledge: [ corvax-hidden-desc-Emag-engineering ]
     nameEntries:
     - [SyndicateAgentKnowledge, null]
     - [ScienceKnowledge, null]

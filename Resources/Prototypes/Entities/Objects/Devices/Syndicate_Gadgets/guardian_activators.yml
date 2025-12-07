@@ -12,9 +12,9 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - [SyndicateAgentKnowledge, corvax-hidden-desc-HoloparasiteInjector-syndicate]
-    - [ScienceKnowledge, corvax-hidden-desc-HoloparasiteInjector-research]
-    - [MedicalKnowledge, corvax-hidden-desc-IllegalImplants-medical]
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-HoloparasiteInjector-syndicate ]
+      ScienceKnowledge: [ corvax-hidden-desc-HoloparasiteInjector-research ]
+      MedicalKnowledge: [ corvax-hidden-desc-IllegalImplants-medical ]
     nameEntries:
     - [SyndicateAgentKnowledge, null]
     - [ScienceKnowledge, null]
@@ -33,9 +33,9 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - [SyndicateAgentKnowledge, corvax-hidden-desc-HoloClownInjector-syndicate]
-    - [ScienceKnowledge, corvax-hidden-desc-HoloClownInjector-research]
-    - [MedicalKnowledge, corvax-hidden-desc-IllegalImplants-medical]
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-HoloClownInjector-syndicate ]
+      ScienceKnowledge: [ corvax-hidden-desc-HoloClownInjector-research ]
+      MedicalKnowledge: [ corvax-hidden-desc-IllegalImplants-medical ]
     nameEntries:
     - [SyndicateAgentKnowledge, null]
     - [ScienceKnowledge, null]

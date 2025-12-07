@@ -60,14 +60,14 @@
   - type: Tag
     tags:
     - ToyGrenade
-    - type: HiddenDescription
-      entries:
-      - [SyndicateAgentKnowledge, hidden-desc-toy-weapons-explosive-syndicate]
-      - [ServiceActorKnowledge, hidden-desc-toy-weapons-explosive-clown]
-      nameEntries:
-      - [SyndicateAgentKnowledge, null]
-      - [ServiceActorKnowledge, null]
-      hiddenName: ent-BaseGrenadeToy
+  - type: HiddenDescription
+    entries:
+      SyndicateAgentKnowledge: [ hidden-desc-toy-weapons-explosive-syndicate ]
+      ServiceActorKnowledge: [ hidden-desc-toy-weapons-explosive-clown ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ServiceActorKnowledge, null]
+    hiddenName: ent-BaseGrenadeToy
 
 #funny kaboom. Totally harmless!
 - type: entity
@@ -163,11 +163,11 @@
     tags:
     - ToyGrenade
     - Grenade #will fit into normal China Lake.
-    - type: HiddenDescription
-      entries:
-      - [SyndicateAgentKnowledge, hidden-desc-toy-weapons-lubebomb-syndicate]
-      - [ServiceActorKnowledge, hidden-desc-toy-weapons-lubebomb-clown]
-      nameEntries:
-      - [SyndicateAgentKnowledge, null]
-      - [ServiceActorKnowledge, null]
-      hiddenName: ent-GrenadeLubeToy
+  - type: HiddenDescription
+    entries:
+      SyndicateAgentKnowledge: [ hidden-desc-toy-weapons-lubebomb-syndicate ]
+      ServiceActorKnowledge: [ hidden-desc-toy-weapons-lubebomb-clown ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ServiceActorKnowledge, null]
+    hiddenName: ent-GrenadeLubeToy

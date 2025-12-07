@@ -30,9 +30,9 @@
     toolType: Specific
   - type: HiddenDescription
     entries:
-    - [MedicalKnowledge, hidden-desc-implant-manipulator-medical]
-    - [SyndicateAgentKnowledge, hidden-desc-implant-mindslave-fixer-manipulator-syndicate]
-    - [ScienceKnowledge, hidden-desc-implant-manipulator-research]
+      MedicalKnowledge: [ hidden-desc-implant-manipulator-medical ]
+      SyndicateAgentKnowledge: [ hidden-desc-implant-mindslave-fixer-manipulator-syndicate ]
+      ScienceKnowledge: [ hidden-desc-implant-manipulator-research ]
     nameEntries:
     - [MedicalKnowledge, null]
     - [SyndicateAgentKnowledge, null]

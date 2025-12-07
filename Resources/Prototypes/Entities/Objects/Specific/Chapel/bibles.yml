@@ -109,8 +109,8 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - [SyndicateAgentKnowledge, corvax-hidden-desc-BibleNecronomicon-syndicate]
-    - [SupernaturalBookKnowledge, corvax-hidden-desc-BibleNecronomicon-service]
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-BibleNecronomicon-syndicate ]
+      SupernaturalBookKnowledge: [ corvax-hidden-desc-BibleNecronomicon-service ]
     nameEntries:
     - [SyndicateAgentKnowledge, null]
     - [SupernaturalBookKnowledge, null]

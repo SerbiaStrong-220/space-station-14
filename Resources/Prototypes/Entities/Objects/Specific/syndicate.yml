@@ -25,9 +25,9 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - [SyndicateAgentKnowledge, corvax-hidden-desc-Telecrystal-syndicate]
-    - [ScienceKnowledge, corvax-hidden-desc-Telecrystal-research]
-    - [CargoKnowledge, corvax-hidden-desc-Telecrystal-cargo]
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-Telecrystal-syndicate ]
+      ScienceKnowledge: [ corvax-hidden-desc-Telecrystal-research ]
+      CargoKnowledge: [ corvax-hidden-desc-Telecrystal-cargo ]
     nameEntries:
     - [SyndicateAgentKnowledge, null]
     - [ScienceKnowledge, null]

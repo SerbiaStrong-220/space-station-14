@@ -1587,9 +1587,9 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - [SyndicateAgent, corvax-hidden-desc-AgentIDCard-syndicate]
-    - [ScienceKnowledge, corvax-hidden-desc-AgentIDCard-research]
-    entries:
+      SyndicateAgent: [ corvax-hidden-desc-AgentIDCard-syndicate ]
+      ScienceKnowledge: [ corvax-hidden-desc-AgentIDCard-research ]
+    nameEntries:
     - [SyndicateAgent, null]
     - [ScienceKnowledge, null]
     hiddenName: null

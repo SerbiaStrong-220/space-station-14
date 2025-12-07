@@ -49,8 +49,8 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - [NinjaKnowledge, corvax-hidden-desc-SpiderCharge-ninja]
-    - [ScienceKnowledge, corvax-hidden-desc-SpiderCharge-research]
+      NinjaKnowledge: [ corvax-hidden-desc-SpiderCharge-ninja ]
+      ScienceKnowledge: [ corvax-hidden-desc-SpiderCharge-research ]
     nameEntries:
     - [NinjaKnowledge, null]
     - [ScienceKnowledge, null]

@@ -26,8 +26,8 @@
 # Corvax-HiddenDesc-Start
     - type: HiddenDescription
       entries:
-      - [SyndicateAgentKnowledge, corvax-hidden-desc-Chameleon-syndicate]
-      - [ScienceKnowledge, corvax-hidden-desc-Chameleon-research]
+        SyndicateAgentKnowledge: [ corvax-hidden-desc-Chameleon-syndicate ]
+        ScienceKnowledge: [ corvax-hidden-desc-Chameleon-research ]
       nameEntries:
       - [SyndicateAgentKnowledge, null]
       - [ScienceKnowledge, null]

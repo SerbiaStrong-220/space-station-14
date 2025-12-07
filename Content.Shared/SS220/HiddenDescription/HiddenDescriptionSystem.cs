@@ -29,12 +29,15 @@ public abstract class SharedHiddenDescriptionSystem : EntitySystem
         if (!TryComp<ExperienceComponent>(args.Examiner, out var experience))
             return;
 
-        foreach (var (knowledge, locId) in component.Entries)
+        foreach (var (knowledge, locIds) in component.Entries)
         {
             if (!_experience.HaveKnowledge((args.Examiner, experience), knowledge))
                 continue;
 
-            args.PushMarkup(Loc.GetString(locId), component.PushPriority);
+            foreach (var locId in locIds)
+            {
+                args.PushMarkup(Loc.GetString(locId), component.PushPriority);
+            }
         }
     }
 

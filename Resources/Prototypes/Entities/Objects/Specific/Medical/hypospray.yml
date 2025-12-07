@@ -676,8 +676,8 @@
   # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - [SyndicateAgentKnowledge, corvax-hidden-desc-Hypopen-syndicate]
-    - [ScienceKnowledge, corvax-hidden-desc-Hypopen-research]
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-Hypopen-syndicate ]
+      ScienceKnowledge: [ corvax-hidden-desc-Hypopen-research ]
     nameEntries:
     - [SyndicateAgentKnowledge, null]
     - [ScienceKnowledge, null]

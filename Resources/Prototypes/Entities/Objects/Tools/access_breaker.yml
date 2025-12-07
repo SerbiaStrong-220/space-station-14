@@ -16,9 +16,9 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - [SyndicateAgentKnowledge, corvax-hidden-desc-access-breaker-syndicate]
-    - [ScienceKnowledge, corvax-hidden-desc-access-breaker-research]
-    - [EngineerKnowledge, corvax-hidden-desc-access-breaker-engineering]
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-access-breaker-syndicate ]
+      ScienceKnowledge: [ corvax-hidden-desc-access-breaker-research ]
+      EngineerKnowledge: [ corvax-hidden-desc-access-breaker-engineering ]
     nameEntries:
     - [SyndicateAgentKnowledge, null]
     - [ScienceKnowledge, null]

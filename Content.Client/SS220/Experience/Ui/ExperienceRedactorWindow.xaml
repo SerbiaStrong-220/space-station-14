@@ -1,0 +1,44 @@
+<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+
+<controls:FancyWindow
+    xmlns="https://spacestation14.io"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+    xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    xmlns:styleDef="clr-namespace:Content.Client.SS220.Experience.Ui"
+    Title="{Loc 'experience-view-redactor-title'}"
+    Resizable="True"
+    MinSize="280 480"
+    SetSize="280 480"
+    RectClipContent="False">
+    <Control>
+        <PanelContainer>
+            <PanelContainer.PanelOverride>
+                <gfx:StyleBoxFlat BackgroundColor="#1B1B1E"/>
+            </PanelContainer.PanelOverride>
+        </PanelContainer>
+        <BoxContainer Orientation="Vertical">
+            <BoxContainer Name="CharacterInfoContainer" Orientation="Horizontal">
+                <RichTextLabel Name="CharacterName" Text="Name place holder"/>
+                <RichTextLabel Name="OccupationName" Text="occupation name holder"/>
+                <RichTextLabel Name="AntagName" Text="antag name holder"/>
+            </BoxContainer>
+            <BoxContainer Name="ExperienceInfoContainer" Orientation="Vertical">
+                <BoxContainer Name="ExperienceVerification" Orientation="Horizontal">
+                    <RichTextLabel Name="BypassSkillCheckStatus" Text="bypass skill check holder"/>
+                    <RichTextLabel Name="BypassKnowledgeStatus" Text="bypass knowledge holder"/>
+                    <RichTextLabel Name="InitMaskShower" Text="init mask holder"/>
+                </BoxContainer>
+                <BoxContainer Name="SkillRedactor" Orientation="Vertical">
+
+                </BoxContainer>
+                <BoxContainer Name="KnowledgeRedactor" Orientation="Vertical">
+
+                </BoxContainer>
+            </BoxContainer>
+            <BoxContainer Name="SubmitButtonContainer" Orientation="Horizontal">
+
+            </BoxContainer>
+        </BoxContainer>
+    </Control>
+</controls:FancyWindow>

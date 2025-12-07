@@ -23,9 +23,9 @@
         progressionPopup: "mindslave-disfunction-progress-popup"
     - type: HiddenDescription
       entries:
-      - [MedicalKnowledge, hidden-desc-MindSlaveImplant-medical]
-      - [SyndicateAgentKnowledge, hidden-desc-MindSlaveImplant-syndicate]
-      - [ScienceKnowledge, hidden-desc-MindSlaveImplant-research]
+        MedicalKnowledge: [ hidden-desc-MindSlaveImplant-medical ]
+        SyndicateAgentKnowledge: [ hidden-desc-MindSlaveImplant-syndicate ]
+        ScienceKnowledge: [ hidden-desc-MindSlaveImplant-research ]
       hiddenName: null
 
 - type: entity
@@ -43,9 +43,9 @@
         - ThermalImplant
     - type: HiddenDescription
       entries:
-      - [MedicalKnowledge, corvax-hidden-desc-IllegalImplants-medical]
-      - [SyndicateAgentKnowledge, hidden-desc-ThermalGoogles-syndicate]
-      - [ScienceKnowledge, hidden-desc-ThermalVisorImplanter-research]
+        MedicalKnowledge: [ corvax-hidden-desc-IllegalImplants-medical ]
+        SyndicateAgentKnowledge: [ hidden-desc-ThermalGoogles-syndicate ]
+        ScienceKnowledge: [ hidden-desc-ThermalVisorImplanter-research ]
       hiddenName: null
 
 - type: entity
@@ -60,9 +60,9 @@
   - type: TransferIdentity
   - type: HiddenDescription
     entries:
-    - [MedicalKnowledge, corvax-hidden-desc-IllegalImplants-medical]
-    - [SyndicateAgentKnowledge, hidden-desc-DnaCopyImplant-syndicate]
-    - [ScienceKnowledge, hidden-desc-DnaCopyImplant-research]
+      MedicalKnowledge: [ corvax-hidden-desc-IllegalImplants-medical ]
+      SyndicateAgentKnowledge: [ hidden-desc-DnaCopyImplant-syndicate ]
+      ScienceKnowledge: [ hidden-desc-DnaCopyImplant-research ]
     hiddenName: null
 
 - type: entity
@@ -89,8 +89,8 @@
   - type: TriggerOnActivateImplant
   - type: HiddenDescription
     entries:
-    - [MedicalKnowledge, corvax-hidden-desc-IllegalImplants-medical]
-    - [SyndicateAgentKnowledge, hidden-desc-AdrenalImplant-syndicate]
-    - [ScienceKnowledge, hidden-desc-AdrenalImplant-research]
+      MedicalKnowledge: [ corvax-hidden-desc-IllegalImplants-medical ]
+      SyndicateAgentKnowledge: [ hidden-desc-AdrenalImplant-syndicate ]
+      ScienceKnowledge: [ hidden-desc-AdrenalImplant-research ]
     hiddenName: null
 

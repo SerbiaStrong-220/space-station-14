@@ -75,9 +75,9 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - [NinjaKnowledge,  corvax-hidden-desc-EnergySword-syndicate]
-    - [SecurityKnowledge, corvax-hidden-desc-EnergySword-security]
-    - [CargoKnowledge,  corvax-hidden-desc-EnergySword-cargo]
+      NinjaKnowledge: [ corvax-hidden-desc-EnergySword-syndicate ]
+      SecurityKnowledge: [ corvax-hidden-desc-EnergySword-security ]
+      CargoKnowledge: [ corvax-hidden-desc-EnergySword-cargo ]
     nameEntries:
     - [NinjaKnowledge, null]
     - [SecurityKnowledge, null]
@@ -269,8 +269,8 @@
   # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - [SyndicateAgentKnowledge, corvax-hidden-desc-EnergyDagger-syndicate]
-    - [ScienceKnowledge, corvax-hidden-desc-EnergyDagger-research]
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-EnergyDagger-syndicate ]
+      ScienceKnowledge: [ corvax-hidden-desc-EnergyDagger-research ]
     nameEntries:
     - [SyndicateAgentKnowledge, null]
     - [ScienceKnowledge, null]
@@ -323,25 +323,12 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - [SecurityKnowledge, corvax-hidden-desc-EnergyCutlass-security]
-    - [CargoKnowledge, corvax-hidden-desc-EnergyCutlass-cargo]
+      SecurityKnowledge: [ corvax-hidden-desc-EnergyCutlass-security ]
+      CargoKnowledge: [ corvax-hidden-desc-EnergyCutlass-cargo ]
     nameEntries:
     - [SecurityKnowledge, null]
     - [CargoKnowledge, null]
     hiddenName: ent-EnergyCutlass
-  - type: HiddenDescription
-    entries:
-    #- label: corvax-hidden-desc-EnergyCutlass-pirate #У нас нету в игре PirateRole, грусть
-    - label:
-      jobRequired:
-        - HeadOfSecurity
-        - Detective
-        - SecurityCadet
-        - SecurityOfficer
-        - Warden
-    - label:
-      jobRequired:
-        - SalvageSpecialist
 # Corvax-HiddenDesc-End
 
 - type: entity

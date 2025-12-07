@@ -209,8 +209,8 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - [SyndicateAgentKnowledge, corvax-hidden-desc-WetFloorSignMineExplosive-syndicate]
-    - [ScienceKnowledge,  corvax-hidden-desc-WetFloorSignMineExplosive-research]
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-WetFloorSignMineExplosive-syndicate ]
+      ScienceKnowledge: [ corvax-hidden-desc-WetFloorSignMineExplosive-research ]
     nameEntries:
     - [SyndicateAgentKnowledge, null]
     - [ScienceKnowledge, null]

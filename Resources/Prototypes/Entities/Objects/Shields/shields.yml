@@ -536,9 +536,9 @@
 # Corvax-HiddenDesc-Start
     - type: HiddenDescription
       entries:
-      - [SyndicateAgentKnowledge, corvax-hidden-desc-EnergyShield-syndicate]
-      - [SecurityKnowledge, corvax-hidden-desc-EnergyShield-security]
-      - [CargoKnowledge, corvax-hidden-desc-EnergyShield-cargo]
+        SyndicateAgentKnowledge: [ corvax-hidden-desc-EnergyShield-syndicate ]
+        SecurityKnowledge: [ corvax-hidden-desc-EnergyShield-security ]
+        CargoKnowledge: [ corvax-hidden-desc-EnergyShield-cargo ]
       nameEntries:
       - [SyndicateAgentKnowledge, null]
       - [SecurityKnowledge, null]
@@ -562,9 +562,9 @@
 # Corvax-HiddenDesc-Start
     - type: HiddenDescription
       entries:
-      - [SyndicateAgentKnowledge, corvax-hidden-desc-EnergyShield-syndicate]
-      - [SecurityKnowledge, corvax-hidden-desc-EnergyShield-security]
-      - [CargoKnowledge, corvax-hidden-desc-EnergyShield-cargo]
+        SyndicateAgentKnowledge: [ corvax-hidden-desc-EnergyShield-syndicate ]
+        SecurityKnowledge: [ corvax-hidden-desc-EnergyShield-security ]
+        CargoKnowledge: [ corvax-hidden-desc-EnergyShield-cargo ]
       nameEntries:
       - [SyndicateAgentKnowledge, null]
       - [SecurityKnowledge, null]

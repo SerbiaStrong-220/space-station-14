@@ -143,8 +143,8 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - [NinjaKnowledge, corvax-hidden-desc-NoSlip-ninja]
-    - [ScienceKnowledge, corvax-hidden-desc-NoSlip-research]
+      NinjaKnowledge: [ corvax-hidden-desc-NoSlip-ninja ]
+      ScienceKnowledge: [ corvax-hidden-desc-NoSlip-research ]
     nameEntries:
     - [NinjaKnowledge, null]
     - [ScienceKnowledge, null]
@@ -213,8 +213,8 @@
 # Corvax-HiddenDesc-Start
     - type: HiddenDescription
       entries:
-      - [SyndicateAgentKnowledge, corvax-hidden-desc-Chameleon-syndicate]
-      - [ScienceKnowledge, corvax-hidden-desc-Chameleon-research]
+        SyndicateAgentKnowledge: [ corvax-hidden-desc-Chameleon-syndicate ]
+        ScienceKnowledge: [ corvax-hidden-desc-Chameleon-research ]
       nameEntries:
       - [SyndicateAgentKnowledge, null]
       - [ScienceKnowledge, null]
@@ -232,10 +232,12 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - [SyndicateAgentKnowledge, corvax-hidden-desc-Chameleon-syndicate]
-    - [SyndicateAgentKnowledge, corvax-hidden-desc-NoSlip-syndicate]
-    - [ScienceKnowledge, corvax-hidden-desc-Chameleon-research]
-    - [ScienceKnowledge, corvax-hidden-desc-NoSlip-research]
+      SyndicateAgentKnowledge:
+        - corvax-hidden-desc-Chameleon-syndicate
+        - corvax-hidden-desc-NoSlip-syndicate
+      ScienceKnowledge:
+        - corvax-hidden-desc-Chameleon-research
+        - corvax-hidden-desc-NoSlip-research
     nameEntries:
     - [SyndicateAgentKnowledge, null]
     - [ScienceKnowledge, null]

@@ -119,8 +119,8 @@
       default: ClothingEyesGlassesThermal
     - type: HiddenDescription
       entries:
-      - [SyndicateAgentKnowledge, hidden-desc-ThermalGoogles-syndicate]
-      - [ScienceKnowledge, hidden-desc-ThermalGoogles-research]
+        SyndicateAgentKnowledge: [ hidden-desc-ThermalGoogles-syndicate ]
+        ScienceKnowledge: [ hidden-desc-ThermalGoogles-research ]
       nameEntries:
       - [SyndicateAgentKnowledge, null]
       - [ScienceKnowledge, null]

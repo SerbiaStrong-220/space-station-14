@@ -37,9 +37,9 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - [SyndicateAgentKnowledge, corvax-hidden-desc-ReinforcementRadioSyndicate-syndicate]
-    - [EngineerKnowledge, corvax-hidden-desc-ReinforcementRadio-engineering]
-    - [ScienceKnowledge, corvax-hidden-desc-ReinforcementRadio-research]
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-ReinforcementRadioSyndicate-syndicate ]
+      EngineerKnowledge: [ corvax-hidden-desc-ReinforcementRadio-engineering ]
+      ScienceKnowledge: [ corvax-hidden-desc-ReinforcementRadio-research ]
     nameEntries:
     - [SyndicateAgentKnowledge, null]
     - [EngineerKnowledge, null]
@@ -87,9 +87,9 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - [SyndicateAgentKnowledge, corvax-hidden-desc-ReinforcementRadioSyndicateMonkey-syndicate]
-    - [EngineerKnowledge, corvax-hidden-desc-ReinforcementRadio-engineering]
-    - [ScienceKnowledge, corvax-hidden-desc-ReinforcementRadio-research]
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-ReinforcementRadioSyndicateMonkey-syndicate ]
+      EngineerKnowledge: [ corvax-hidden-desc-ReinforcementRadio-engineering ]
+      ScienceKnowledge: [ corvax-hidden-desc-ReinforcementRadio-research ]
     nameEntries:
     - [SyndicateAgentKnowledge, null]
     - [EngineerKnowledge, null]
@@ -151,9 +151,9 @@
 # Corvax-HiddenDesc-Start
     - type: HiddenDescription
       entries:
-      - [SyndicateAgentKnowledge, corvax-hidden-desc-ReinforcementRadioSyndicateCyborgAssault-syndicate]
-      - [EngineerKnowledge, corvax-hidden-desc-ReinforcementRadio-engineering]
-      - [ScienceKnowledge, corvax-hidden-desc-ReinforcementRadio-research]
+        SyndicateAgentKnowledge: [ corvax-hidden-desc-ReinforcementRadioSyndicateCyborgAssault-syndicate ]
+        EngineerKnowledge: [ corvax-hidden-desc-ReinforcementRadio-engineering ]
+        ScienceKnowledge: [ corvax-hidden-desc-ReinforcementRadio-research ]
       nameEntries:
       - [SyndicateAgentKnowledge, null]
       - [EngineerKnowledge, null]

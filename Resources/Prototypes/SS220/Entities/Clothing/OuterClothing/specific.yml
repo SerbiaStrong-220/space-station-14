@@ -22,8 +22,8 @@
   components:
   - type: HiddenDescription
     entries:
-    - [SyndicateAgentKnowledge, hidden-desc-toy-armour-syndicate]
-    - [ServiceActorKnowledge, hidden-desc-toy-armour-clown]
+      SyndicateAgentKnowledge: [ hidden-desc-toy-armour-syndicate ]
+      ServiceActorKnowledge: [ hidden-desc-toy-armour-clown ]
     nameEntries:
     - [SyndicateAgentKnowledge, null]
     - [ServiceActorKnowledge, null]

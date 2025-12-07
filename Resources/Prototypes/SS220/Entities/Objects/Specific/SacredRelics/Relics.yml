@@ -12,10 +12,10 @@
   - type: MimeRelic
   - type: HiddenDescription
     entries:
-    - [ServiceActorKnowledge, hidden-desc-SacredRelicMime-mime]
-    - [SupernaturalBookKnowledge, hidden-desc-SacredRelicMime-chaplain]
-    - [SecurityKnowledge, hidden-desc-SacredRelicMime-security]
-    - [ScienceKnowledge, hidden-desc-SacredRelicMime-research]
+      ServiceActorKnowledge: [ hidden-desc-SacredRelicMime-mime ]
+      SupernaturalBookKnowledge: [ hidden-desc-SacredRelicMime-chaplain ]
+      SecurityKnowledge: [ hidden-desc-SacredRelicMime-security ]
+      ScienceKnowledge: [ hidden-desc-SacredRelicMime-research ]
     nameEntries:
     - [ServiceActorKnowledge, null]
     - [SupernaturalBookKnowledge, null]

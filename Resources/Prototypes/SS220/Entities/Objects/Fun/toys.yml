@@ -90,8 +90,8 @@
     clumsyProof: true
   - type: HiddenDescription
     entries:
-    - [SyndicateAgentKnowledge,  hidden-desc-toy-weapons-syndicate]
-    - [ServiceActorKnowledge, hidden-desc-toy-weapons-clown]
+      SyndicateAgentKnowledge: [ hidden-desc-toy-weapons-syndicate ]
+      ServiceActorKnowledge: [ hidden-desc-toy-weapons-clown ]
     nameEntries:
     - [SyndicateAgentKnowledge, null]
     - [ServiceActorKnowledge, null]
@@ -345,7 +345,7 @@
     - type: Appearance
     - type: HiddenDescription
       entries:
-      - [SyndicateAgentKnowledge,  hidden-desc-toy-weapons-syndicate]
+        SyndicateAgentKnowledge: [ hidden-desc-toy-weapons-syndicate ]
       nameEntries:
       - [SyndicateAgentKnowledge, null]
       hiddenName: ent-EnergyShieldToy

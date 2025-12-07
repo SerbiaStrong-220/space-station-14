@@ -94,8 +94,8 @@
     # Corvax-HiddenDesc-Start
     - type: HiddenDescription
       entries:
-      - [SyndicateAgentKnowledge, corvax-hidden-desc-StealthBox-syndicate]
-      - [ScienceKnowledge, corvax-hidden-desc-StealthBox-research]
+        SyndicateAgentKnowledge: [ corvax-hidden-desc-StealthBox-syndicate ]
+        ScienceKnowledge: [ corvax-hidden-desc-StealthBox-research ]
       nameEntries:
       - [SyndicateAgentKnowledge, null]
       - [ScienceKnowledge, null]

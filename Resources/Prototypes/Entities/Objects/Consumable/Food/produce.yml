@@ -1941,8 +1941,8 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - [SyndicateAgentKnowledge, corvax-hidden-desc-Gatfruit-syndicate]
-    - [BotanyKnowledge, corvax-hidden-desc-Gatfruit-botanist]
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-Gatfruit-syndicate ]
+      BotanyKnowledge: [ corvax-hidden-desc-Gatfruit-botanist ]
     nameEntries:
     - [SyndicateAgentKnowledge, null]
     - [BotanyKnowledge, null]

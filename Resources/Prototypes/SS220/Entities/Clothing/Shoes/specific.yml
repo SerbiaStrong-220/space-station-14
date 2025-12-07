@@ -267,10 +267,12 @@
   # HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - [SyndicateAgentKnowledge, hidden-desc-SilentShoes-syndicate]
-    - [SyndicateAgentKnowledge, corvax-hidden-desc-Chameleon-syndicate]
-    - [ScienceKnowledge, hidden-desc-SilentShoes-research]
-    - [ScienceKnowledge, corvax-hidden-desc-Chameleon-research]
+      SyndicateAgentKnowledge:
+        - hidden-desc-SilentShoes-syndicate
+        - corvax-hidden-desc-Chameleon-syndicate
+      ScienceKnowledge:
+        - hidden-desc-SilentShoes-research
+        - corvax-hidden-desc-Chameleon-research
     nameEntries:
     - [SyndicateAgentKnowledge, null]
     - [ScienceKnowledge, null]

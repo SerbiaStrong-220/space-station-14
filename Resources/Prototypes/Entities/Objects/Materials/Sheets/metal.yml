@@ -52,6 +52,11 @@
     - steel
     - steel_2
     - steel_3
+  # ss220-experience-begin
+  - type: LearningOnDoAfterEndWith
+    progress:
+      Construction: 0.10
+  # ss220-experience-end
   - type: Sprite
     state: steel_3
     layers:
@@ -117,6 +122,11 @@
     - brass
     - brass_2
     - brass_3
+  # ss220-experience-begin
+  - type: LearningOnDoAfterEndWith
+    progress:
+      Construction: 0.15
+  # ss220-experience-end
   - type: Sprite
     state: brass_3
     layers:
@@ -180,6 +190,11 @@
     - plasteel
     - plasteel_2
     - plasteel_3
+  # ss220-experience-begin
+  - type: LearningOnDoAfterEndWith
+    progress:
+      Construction: 0.15
+  # ss220-experience-end
   - type: Sprite
     state: plasteel_3
     layers:
@@ -205,7 +220,7 @@
           Quantity: 0.2
         #SS220 tweak produce lead end
         canReact: false
-      
+
 
 - type: entity
   parent: SheetPlasteel

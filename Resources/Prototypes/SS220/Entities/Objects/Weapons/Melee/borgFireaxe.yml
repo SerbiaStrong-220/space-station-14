@@ -58,8 +58,8 @@
   # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - [SyndicateAgentKnowledge, corvax-hidden-desc-FireAxeFlaming-syndicate]
-    - [ScienceKnowledge, corvax-hidden-desc-FireAxeFlaming-research]
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-FireAxeFlaming-syndicate ]
+      ScienceKnowledge: [ corvax-hidden-desc-FireAxeFlaming-research ]
     nameEntries:
     - [SyndicateAgentKnowledge, null]
     - [ScienceKnowledge, null]

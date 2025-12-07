@@ -60,9 +60,9 @@
 # Corvax-HiddenDesc-Start
     - type: HiddenDescription
       entries:
-      - [SyndicateAgentKnowledge, corvax-hidden-desc-PowerSink-syndicate]
-      - [EngineerKnowledge, corvax-hidden-desc-PowerSink-engineering]
-      - [ScienceKnowledge, corvax-hidden-desc-PowerSink-research]
+        SyndicateAgentKnowledge: [ corvax-hidden-desc-PowerSink-syndicate ]
+        EngineerKnowledge: [ corvax-hidden-desc-PowerSink-engineering ]
+        ScienceKnowledge: [ corvax-hidden-desc-PowerSink-research ]
       nameEntries:
       - [SyndicateAgentKnowledge, null]
       - [EngineerKnowledge, null]

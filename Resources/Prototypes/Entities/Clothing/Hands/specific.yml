@@ -20,8 +20,8 @@
 # Corvax-HiddenDesc-Start
     - type: HiddenDescription
       entries:
-      - [SyndicateAgentKnowledge, corvax-hidden-desc-Chameleon-syndicate]
-      - [ScienceKnowledge, corvax-hidden-desc-Chameleon-research]
+        SyndicateAgentKnowledge: [ corvax-hidden-desc-Chameleon-syndicate ]
+        ScienceKnowledge: [ corvax-hidden-desc-Chameleon-research ]
       nameEntries:
       - [SyndicateAgentKnowledge, null]
       hiddenName: null
@@ -38,11 +38,13 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - [SyndicateAgentKnowledge, corvax-hidden-desc-Chameleon-syndicate]
-    - [SyndicateAgentKnowledge,corvax-hidden-desc-ThievingGloves-syndicate]
-    - [ThiefKnowledge, corvax-hidden-desc-Chameleon-thief]
-    - [ThiefKnowledge, corvax-hidden-desc-ThievingGloves-thief]
-    - [ScienceKnowledge, corvax-hidden-desc-Chameleon-research]
+      SyndicateAgentKnowledge:
+        - corvax-hidden-desc-Chameleon-syndicate
+        - corvax-hidden-desc-ThievingGloves-syndicate
+      ThiefKnowledge:
+        - corvax-hidden-desc-Chameleon-thief
+        - corvax-hidden-desc-ThievingGloves-thief
+      ScienceKnowledge: [ corvax-hidden-desc-Chameleon-research ]
     nameEntries:
     - [SyndicateAgentKnowledge, null]
     - [ThiefKnowledge, null]

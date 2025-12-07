@@ -476,8 +476,8 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - [SyndicateAgentKnowledge, corvax-hidden-desc-HolyHandGrenade-syndicate]
-    - [ScienceKnowledge, corvax-hidden-desc-HolyHandGrenade-research]
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-HolyHandGrenade-syndicate ]
+      ScienceKnowledge: [ corvax-hidden-desc-HolyHandGrenade-research ]
     nameEntries:
     - [SyndicateAgentKnowledge, null]
     - [ScienceKnowledge, null]
@@ -645,8 +645,8 @@
     maxTileBreak: 0
   - type: HiddenDescription
     entries:
-    - [SyndicateAgentKnowledge, hidden-desc-toy-weapons-explosive-syndicate]
-    - [ServiceActorKnowledge, hidden-desc-toy-weapons-explosive-clown]
+      SyndicateAgentKnowledge: [ hidden-desc-toy-weapons-explosive-syndicate ]
+      ServiceActorKnowledge: [ hidden-desc-toy-weapons-explosive-clown ]
     nameEntries:
     - [SyndicateAgentKnowledge, null]
     - [ServiceActorKnowledge, null]

@@ -48,8 +48,8 @@
       icon: { sprite: SS220/Interface/Actions/actions_borg.rsi, state: syndicate-fireaxe-module }
     - type: HiddenDescription
       entries:
-      - [SyndicateAgentKnowledge, hidden-desc-flaming-axe-module-syndicate]
-      - [ScienceKnowledge, hidden-desc-flaming-axe-module-research]
+        SyndicateAgentKnowledge: [ hidden-desc-flaming-axe-module-syndicate ]
+        ScienceKnowledge: [ hidden-desc-flaming-axe-module-research ]
       nameEntries:
       - [SyndicateAgentKnowledge, null]
       - [ScienceKnowledge, null]

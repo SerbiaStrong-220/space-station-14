@@ -65,6 +65,11 @@
     - glass
     - glass_2
     - glass_3
+  # ss220-experience-begin
+  - type: LearningOnDoAfterEndWith
+    progress:
+      Construction: 0.10
+  # ss220-experience-end
   - type: Sprite
     state: glass_3
     layers:
@@ -126,6 +131,11 @@
     - rglass
     - rglass_2
     - rglass_3
+  # ss220-experience-begin
+  - type: LearningOnDoAfterEndWith
+    progress:
+      Construction: 0.15
+  # ss220-experience-end
   - type: Sprite
     state: rglass_3
     layers:
@@ -206,6 +216,11 @@
     - pglass
     - pglass_2
     - pglass_3
+  # ss220-experience-begin
+  - type: LearningOnDoAfterEndWith
+    progress:
+      Construction: 0.12
+  # ss220-experience-end
   - type: Sprite
     state: pglass_3
     layers:
@@ -284,6 +299,11 @@
     - rpglass
     - rpglass_2
     - rpglass_3
+  # ss220-experience-begin
+  - type: LearningOnDoAfterEndWith
+    progress:
+      Construction: 0.18
+  # ss220-experience-end
   - type: Sprite
     state: rpglass_3
     layers:
@@ -342,6 +362,11 @@
     - uglass
     - uglass_2
     - uglass_3
+  # ss220-experience-begin
+  - type: LearningOnDoAfterEndWith
+    progress:
+      Construction: 0.12
+  # ss220-experience-end
   - type: Sprite
     state: uglass_3
     layers:
@@ -419,6 +444,11 @@
     - ruglass
     - ruglass_2
     - ruglass_3
+  # ss220-experience-begin
+  - type: LearningOnDoAfterEndWith
+    progress:
+      Construction: 0.18
+  # ss220-experience-end
   - type: Sprite
     state: ruglass_3
     layers:
@@ -477,6 +507,11 @@
     - cglass
     - cglass_2
     - cglass_3
+  # ss220-experience-begin
+  - type: LearningOnDoAfterEndWith
+    progress:
+      Construction: 0.15
+  # ss220-experience-end
   - type: Sprite
     state: cglass_3
     layers:

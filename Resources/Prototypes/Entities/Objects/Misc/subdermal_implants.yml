@@ -34,9 +34,9 @@
     # hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - [MedicalKnowledge, corvax-hidden-desc-LegalImplants-medical]
-    - [SyndicateAgentKnowledge, corvax-hidden-desc-SadTromboneImplanter-syndicate]
-    - [ScienceKnowledge, corvax-hidden-desc-SadTromboneImplanter-research]
+      MedicalKnowledge: [ corvax-hidden-desc-LegalImplants-medical ]
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-SadTromboneImplanter-syndicate ]
+      ScienceKnowledge: [ corvax-hidden-desc-SadTromboneImplanter-research ]
     hiddenName: null
     # hidden-desc-end
 
@@ -64,9 +64,9 @@
   # hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - [MedicalKnowledge, corvax-hidden-desc-LegalImplants-medical]
-    - [SyndicateAgentKnowledge, corvax-hidden-desc-LightImplanter-syndicate]
-    - [ScienceKnowledge, corvax-hidden-desc-LightImplanter-research]
+      MedicalKnowledge: [ corvax-hidden-desc-LegalImplants-medical ]
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-LightImplanter-syndicate ]
+      ScienceKnowledge: [ corvax-hidden-desc-LightImplanter-research ]
     hiddenName: null
   # hidden-desc-end
 
@@ -92,9 +92,9 @@
     # hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - [MedicalKnowledge, corvax-hidden-desc-LegalImplants-medical]
-    - [SyndicateAgentKnowledge, corvax-hidden-desc-BikeHornImplanter-syndicate]
-    - [ScienceKnowledge, corvax-hidden-desc-BikeHornImplanter-research]
+      MedicalKnowledge: [ corvax-hidden-desc-LegalImplants-medical ]
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-BikeHornImplanter-syndicate ]
+      ScienceKnowledge: [ corvax-hidden-desc-BikeHornImplanter-research ]
     hiddenName: null
     # hidden-desc-end
 
@@ -125,10 +125,10 @@
       # hidden-desc-begin
     - type: HiddenDescription
       entries:
-      - [MedicalKnowledge, corvax-hidden-desc-LegalImplants-medical]
-      - [SyndicateAgentKnowledge, corvax-hidden-desc-TrackingImplanter-syndicate]
-      - [ScienceKnowledge, corvax-hidden-desc-TrackingImplanter-research]
-      - [SecurityKnowledge, hidden-desc-TrackingImplanter-security]
+        MedicalKnowledge: [ corvax-hidden-desc-LegalImplants-medical ]
+        SyndicateAgentKnowledge: [ corvax-hidden-desc-TrackingImplanter-syndicate ]
+        ScienceKnowledge: [ corvax-hidden-desc-TrackingImplanter-research ]
+        SecurityKnowledge: [ hidden-desc-TrackingImplanter-security ]
       hiddenName: null
       # hidden-desc-end
 #Traitor implants
@@ -166,9 +166,9 @@
     # hidden-desc-begin
     - type: HiddenDescription
       entries:
-      - [MedicalKnowledge, corvax-hidden-desc-IllegalImplants-medical]
-      - [SyndicateAgentKnowledge, corvax-hidden-desc-StorageImplanter-syndicate]
-      - [ScienceKnowledge, corvax-hidden-desc-StorageImplanter-research]
+        MedicalKnowledge: [ corvax-hidden-desc-IllegalImplants-medical ]
+        SyndicateAgentKnowledge: [ corvax-hidden-desc-StorageImplanter-syndicate ]
+        ScienceKnowledge: [ corvax-hidden-desc-StorageImplanter-research ]
       hiddenName: null
     # hidden-desc-end
 
@@ -190,9 +190,9 @@
   # hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - [MedicalKnowledge, corvax-hidden-desc-IllegalImplants-medical]
-    - [SyndicateAgentKnowledge, corvax-hidden-desc-FreedomImplanter-syndicate]
-    - [ScienceKnowledge, corvax-hidden-desc-FreedomImplanter-research]
+      MedicalKnowledge: [ corvax-hidden-desc-IllegalImplants-medical ]
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-FreedomImplanter-syndicate ]
+      ScienceKnowledge: [ corvax-hidden-desc-FreedomImplanter-research ]
     hiddenName: null
   # hidden-desc-end
 
@@ -210,9 +210,9 @@
     # hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - [MedicalKnowledge, corvax-hidden-desc-IllegalImplants-medical]
-    - [SyndicateAgentKnowledge, corvax-hidden-desc-RadioImplant-syndicate]
-    - [ScienceKnowledge, corvax-hidden-desc-RadioImplant-research]
+      MedicalKnowledge: [ corvax-hidden-desc-IllegalImplants-medical ]
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-RadioImplant-syndicate ]
+      ScienceKnowledge: [ corvax-hidden-desc-RadioImplant-research ]
     hiddenName: null
     # hidden-desc-end
 
@@ -238,9 +238,9 @@
   # hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - [MedicalKnowledge, corvax-hidden-desc-IllegalImplants-medical]
-    - [SyndicateAgentKnowledge, corvax-hidden-desc-UplinkImplanter-syndicate]
-    - [ScienceKnowledge, corvax-hidden-desc-UplinkImplanter-research]
+      MedicalKnowledge: [ corvax-hidden-desc-IllegalImplants-medical ]
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-UplinkImplanter-syndicate ]
+      ScienceKnowledge: [ corvax-hidden-desc-UplinkImplanter-research ]
     hiddenName: null
   # hidden-desc-end
 
@@ -261,9 +261,9 @@
   # hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - [MedicalKnowledge, corvax-hidden-desc-IllegalImplants-medical]
-    - [SyndicateAgentKnowledge, corvax-hidden-desc-EmpImplanter-syndicate]
-    - [ScienceKnowledge, corvax-hidden-desc-EmpImplanter-research]
+      MedicalKnowledge: [ corvax-hidden-desc-IllegalImplants-medical ]
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-EmpImplanter-syndicate ]
+      ScienceKnowledge: [ corvax-hidden-desc-EmpImplanter-research ]
     hiddenName: null
   # hidden-desc-end
 
@@ -282,9 +282,9 @@
   # hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - [MedicalKnowledge, corvax-hidden-desc-IllegalImplants-medical]
-    - [SyndicateAgentKnowledge, corvax-hidden-desc-ScramImplanter-syndicate]
-    - [ScienceKnowledge, corvax-hidden-desc-ScramImplanter-research]
+      MedicalKnowledge: [ corvax-hidden-desc-IllegalImplants-medical ]
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-ScramImplanter-syndicate ]
+      ScienceKnowledge: [ corvax-hidden-desc-ScramImplanter-research ]
     hiddenName: null
   # hidden-desc-end
 
@@ -307,9 +307,9 @@
   # hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - [MedicalKnowledge, corvax-hidden-desc-IllegalImplants-medical]
-    - [SyndicateAgentKnowledge, corvax-hidden-desc-DnaScramblerImplanter-syndicate]
-    - [ScienceKnowledge, corvax-hidden-desc-DnaScramblerImplanter-research]
+      MedicalKnowledge: [ corvax-hidden-desc-IllegalImplants-medical ]
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-DnaScramblerImplanter-syndicate ]
+      ScienceKnowledge: [ corvax-hidden-desc-DnaScramblerImplanter-research ]
     hiddenName: null
   # hidden-desc-begin
 
@@ -364,9 +364,9 @@
   # hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - [MedicalKnowledge, corvax-hidden-desc-IllegalImplants-medical]
-    - [SyndicateAgentKnowledge, corvax-hidden-desc-MicroBombImplanter-syndicate]
-    - [ScienceKnowledge, corvax-hidden-desc-MicroBombImplanter-research]
+      MedicalKnowledge: [ corvax-hidden-desc-IllegalImplants-medical ]
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-MicroBombImplanter-syndicate ]
+      ScienceKnowledge: [ corvax-hidden-desc-MicroBombImplanter-research ]
     hiddenName: null
   # hidden-desc-end
 
@@ -416,9 +416,9 @@
     # hidden-desc-begin
     - type: HiddenDescription
       entries:
-      - [MedicalKnowledge, corvax-hidden-desc-IllegalImplants-medical]
-      - [SyndicateAgentKnowledge, corvax-hidden-desc-MacroBombImplanter-syndicate]
-      - [ScienceKnowledge, corvax-hidden-desc-MacroBombImplanter-research]
+        MedicalKnowledge: [ corvax-hidden-desc-IllegalImplants-medical ]
+        SyndicateAgentKnowledge: [ corvax-hidden-desc-MacroBombImplanter-syndicate ]
+        ScienceKnowledge: [ corvax-hidden-desc-MacroBombImplanter-research ]
       hiddenName: null
     # hidden-desc-end
 
@@ -450,9 +450,9 @@
   # hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - [MedicalKnowledge, corvax-hidden-desc-IllegalImplants-medical]
-    - [SyndicateAgentKnowledge, corvax-hidden-desc-DeathAcidifierImplanter-syndicate]
-    - [ScienceKnowledge, corvax-hidden-desc-DeathAcidifierImplanter-research]
+      MedicalKnowledge: [ corvax-hidden-desc-IllegalImplants-medical ]
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-DeathAcidifierImplanter-syndicate ]
+      ScienceKnowledge: [ corvax-hidden-desc-DeathAcidifierImplanter-research ]
     hiddenName: null
   # hidden-desc-end
 
@@ -477,9 +477,9 @@
     # hidden-desc-begin
     - type: HiddenDescription
       entries:
-      - [MedicalKnowledge, corvax-hidden-desc-IllegalImplants-medical]
-      - [SyndicateAgentKnowledge, corvax-hidden-desc-DeathRattleImplanter-syndicate]
-      - [ScienceKnowledge, corvax-hidden-desc-DeathRattleImplanter-research]
+        MedicalKnowledge: [ corvax-hidden-desc-IllegalImplants-medical ]
+        SyndicateAgentKnowledge: [ corvax-hidden-desc-DeathRattleImplanter-syndicate ]
+        ScienceKnowledge: [ corvax-hidden-desc-DeathRattleImplanter-research ]
       hiddenName: null
     # hidden-desc-end
 
@@ -498,9 +498,9 @@
   # hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - [MedicalKnowledge, corvax-hidden-desc-IllegalImplants-medical]
-    - [SyndicateAgentKnowledge, corvax-hidden-desc-FakeMindShieldImplant-syndicate]
-    - [ScienceKnowledge, corvax-hidden-desc-FakeMindShieldImplant-research]
+      MedicalKnowledge: [ corvax-hidden-desc-IllegalImplants-medical ]
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-FakeMindShieldImplant-syndicate ]
+      ScienceKnowledge: [ corvax-hidden-desc-FakeMindShieldImplant-research ]
     hiddenName: null
   # hidden-desc-end
 
@@ -518,10 +518,10 @@
    # hidden-desc-begin, also yeah mapping slide in 1 space =|
    - type: HiddenDescription
      entries:
-     - [MedicalKnowledge, corvax-hidden-desc-IllegalImplants-medical]
-     - [SyndicateAgentKnowledge, corvax-hidden-desc-MindShieldImplanter-syndicate]
-     - [SecurityKnowledge, corvax-hidden-desc-MindShieldImplanter-security]
-     - [ScienceKnowledge, corvax-hidden-desc-MindShieldImplanter-research]
+      MedicalKnowledge: [ corvax-hidden-desc-IllegalImplants-medical ]
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-MindShieldImplanter-syndicate ]
+      SecurityKnowledge: [ corvax-hidden-desc-MindShieldImplanter-security ]
+      ScienceKnowledge: [ corvax-hidden-desc-MindShieldImplanter-research ]
      hiddenName: null
    # hidden-desc-end
 

@@ -65,10 +65,6 @@ public sealed partial class ExperienceComponent : Component
 
     [AutoNetworkedField]
     [ViewVariables(VVAccess.ReadOnly)]
-    public HashSet<ProtoId<KnowledgePrototype>> Knowledge = new();
-
-    [AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadOnly)]
     public HashSet<ProtoId<KnowledgePrototype>> ConstantKnowledge = new();
 
     /// <summary>
