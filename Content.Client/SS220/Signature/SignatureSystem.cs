@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Client.Administration.Managers;
 using Content.Client.Lobby;
 using Content.Shared.Paper;
 using Content.Shared.Preferences;
@@ -10,6 +11,7 @@ public sealed class SignatureSystem : SharedSignatureSystem
 {
     [Dependency] private readonly IClientPreferencesManager _preferences = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly IClientAdminManager _admin = default!;
 
     public override void Initialize()
     {
@@ -30,8 +32,11 @@ public sealed class SignatureSystem : SharedSignatureSystem
         _ui.SetUiState(ent.Owner, PaperComponent.PaperUiKey.Key, state);
     }
 
-    private static void OnSignature(SendSignatureToAdminEvent ev)
+    private void OnSignature(SendSignatureToAdminEvent ev)
     {
+        if (!_admin.IsAdmin())
+            return;
+
         var canvasSize = new Vector2(ev.Data.Width, ev.Data.Height);
         var window = new SignatureWindow(canvasSize);
         window.Signature.SetSignature(ev.Data);
