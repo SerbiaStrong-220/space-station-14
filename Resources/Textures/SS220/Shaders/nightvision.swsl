@@ -5,8 +5,8 @@ uniform highp float MinLight;
 void fragment()
 {
     highp vec4 tex = zTextureSpec(LIGHT_TEXTURE, UV);
-    highp float l = tex.r;
-    highp float base = max(l, MinLight);
+    highp float lightLevel = tex.r;
+    highp float base = max(lightLevel, MinLight);
     base = clamp(base, 0.0, 1.0);
 
     COLOR = vec4(base, base, base, 1.0);

@@ -24,6 +24,7 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
             BrightBoost = ent.Comp.BrightBoost,
             Gamma = ent.Comp.Gamma,
             NoiseAmount = ent.Comp.NoiseAmount,
+            VisionColor = ent.Comp.VisionColor,
         });
     }
 

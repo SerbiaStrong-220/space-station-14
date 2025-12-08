@@ -6,6 +6,8 @@ uniform highp float BrightBoost;
 uniform highp float Gamma;
 uniform highp float NoiseAmount;
 
+uniform highp vec3 VisionColor;
+
 highp float rand(highp vec2 p)
 {
     return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
@@ -14,19 +16,17 @@ highp float rand(highp vec2 p)
 void fragment()
 {
     highp vec4 tex = zTextureSpec(SCREEN_TEXTURE, UV);
-    highp float g = zGrayscale(tex.rgb);
+    highp float grayScale = zGrayscale(tex.rgb);
 
-    highp float base = max(g, MinLight);
-    highp float bright = max(0.0, g - BrightThreshold);
+    highp float base = max(grayScale, MinLight);
+    highp float bright = max(0.0, grayScale - BrightThreshold);
     highp float boosted = base + bright * BrightBoost;
 
     boosted = boosted / (1.0 + boosted * 0.7);
     boosted = pow(boosted, Gamma);
     boosted = clamp(boosted, 0.0, 1.0);
 
-    highp vec3 green = vec3(0.15, 1.0, 0.15);
-    highp vec3 col = green * boosted;
-
+    highp vec3 col = VisionColor * boosted;
     highp float noise = (rand(UV * 1100.0) - 0.5) * NoiseAmount;
     col += noise;
     col = clamp(col, 0.0, 1.0);
