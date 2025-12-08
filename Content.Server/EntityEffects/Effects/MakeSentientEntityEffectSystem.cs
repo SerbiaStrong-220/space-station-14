@@ -5,7 +5,6 @@ using Content.Shared.EntityEffects;
 using Content.Shared.EntityEffects.Effects;
 using Content.Shared.Mind.Components;
 using Content.Shared.SS220.Language.Components;
-using Content.Shared.SS220.Language.Systems;
 
 namespace Content.Server.EntityEffects.Effects;
 
@@ -16,7 +15,7 @@ namespace Content.Server.EntityEffects.Effects;
 /// <inheritdoc cref="EntityEffectSystem{T,TEffect}"/>
 public sealed partial class MakeSentientEntityEffectSystem : EntityEffectSystem<MetaDataComponent, MakeSentient>
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!; //ss220-cognizine-language-fix
+    [Dependency] private readonly LanguageSystem _language = default!; //ss220-cognizine-language-fix
     protected override void Effect(Entity<MetaDataComponent> entity, ref EntityEffectEvent<MakeSentient> args)
     {
         // Let affected entities speak normally to make this effect different from, say, the "random sentience" event
@@ -32,8 +31,7 @@ public sealed partial class MakeSentientEntityEffectSystem : EntityEffectSystem<
         // SS220-cognizine-language-fix-begin
         if (TryComp<LanguageComponent>(entity, out var languageComp))
         {
-            var languageSystem = _entityManager.System<LanguageSystem>();
-            languageSystem.AddLanguages((entity, languageComp), [languageSystem.GalacticLanguage], true);
+            _language.EnsureLanguage((entity, languageComp), _language.GalacticLanguage, true);
         }
         // SS220-cognizine-language-fix-end
 

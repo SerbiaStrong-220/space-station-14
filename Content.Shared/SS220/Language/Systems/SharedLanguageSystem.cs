@@ -83,12 +83,15 @@ public abstract partial class SharedLanguageSystem : EntitySystem
     /// <summary>
     /// Ensures that the entity has a <see cref="LanguageDefinition"/> in <see cref="LanguageComponent.AvailableLanguages"/>
     /// </summary>
-    public LanguageDefinition EnsureLanguage(Entity<LanguageComponent> entity, string languageId)
+    public LanguageDefinition EnsureLanguage(Entity<LanguageComponent> entity, string languageId, bool canSpeak = false)
     {
         var definition = GetLanguageDef(entity, languageId);
         definition ??= AddLanguage(entity, languageId);
         if (definition is null)
             throw new Exception($"Failed to ensure language \"{languageId}\" for entity {ToPrettyString(entity)}");
+
+        definition.CanSpeak = canSpeak;
+        Dirty(entity);
 
         return definition;
     }
