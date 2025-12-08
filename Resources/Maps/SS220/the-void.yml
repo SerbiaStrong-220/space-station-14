@@ -4,8 +4,8 @@ meta:
   engineVersion: 267.4.0
   forkId: ""
   forkVersion: ""
-  time: 12/07/2025 10:38:07
-  entityCount: 3201
+  time: 12/08/2025 14:53:48
+  entityCount: 3202
 maps:
 - 4449
 grids:
@@ -161,10 +161,10 @@ entities:
     - type: ImplicitRoof
     - type: GridPathfinding
     - type: Gravity
-      enabled: true
-      inherent: true
       gravityShakeSound: !type:SoundPathSpecifier
         path: /Audio/Effects/alert.ogg
+      inherent: True
+      enabled: True
     - type: DecalGrid
       chunkCollection:
         version: 2
@@ -15689,6 +15689,15 @@ entities:
     - type: Transform
       pos: 22.5,31.5
       parent: 1
+- proto: GhostWarpPoint
+  entities:
+  - uid: 3200
+    components:
+    - type: Transform
+      pos: 21.5,26.5
+      parent: 1
+    - type: MetaData
+      name: Бездна
 - proto: VoidTeleportEnter
   entities:
   - uid: 3100
