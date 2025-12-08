@@ -56,7 +56,7 @@ namespace Content.Client.Lobby.UI
         private readonly LobbyUIController _controller;
 
         private readonly SpriteSystem _sprite;
-        private readonly PenSystem _pen;
+        private readonly PenSystem _pen; // ss220 add signature
 
         // CCvar.
         private int _maxNameLength;
@@ -141,7 +141,7 @@ namespace Content.Client.Lobby.UI
             _controller = UserInterfaceManager.GetUIController<LobbyUIController>();
             _sprite = _entManager.System<SpriteSystem>();
 
-            _pen = _entManager.System<PenSystem>();
+            _pen = _entManager.System<PenSystem>(); // ss220 add signature
 
             _maxNameLength = _cfgManager.GetCVar(CCVars.MaxNameLength);
             _allowFlavorText = _cfgManager.GetCVar(CCVars.FlavorText);
