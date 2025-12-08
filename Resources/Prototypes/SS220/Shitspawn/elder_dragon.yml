@@ -1,0 +1,444 @@
+- type: entity
+  parent: [ SimpleSpaceMobBase, FlyingMobBase, MobPassiveCollision ]
+  id: MobElderDragon
+  suffix: Shitspawn, Lanc
+  name: elrich space dragon
+  description: Really old really angry flying leviathan, loosely related to space carps.
+  components:
+  - type: Bloodstream
+    bloodMaxVolume: 1000
+  - type: GhostRole
+    allowMovement: true
+    allowSpeech: true
+    makeSentient: true
+    name: ghost-role-information-elder-space-dragon-name
+    description: ghost-role-information-elder-space-dragon-description
+    rules: ghost-role-information-space-dragon-rules
+    mindRoles:
+    - MindRoleElderDragon
+    raffle:
+      settings: default
+  - type: GhostTakeoverAvailable
+ # - type: HTN
+ #   rootTask:
+ #     task: XenoCompound
+ #   blackboard:
+ #     NavInteract: !type:Bool
+ #       true
+ #     NavPry: !type:Bool
+ #       true
+ #     NavSmash: !type:Bool
+ #       true
+  - type: NpcFactionMember
+    factions:
+    - Dragon
+  - type: Speech
+    speechVerb: LargeMob
+  - type: CombatMode
+  - type: MobMover
+  - type: InputMover
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 4
+    baseSprintSpeed: 6
+    baseWeightlessModifier: 1.5
+  - type: Sprite
+    sprite: SS220/Shitspawn/ElderDragon/elderdragon.rsi
+    noRot: true
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: elder_dragon
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: alive-unshaded
+      shader: unshaded
+  - type: Appearance
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: elder_dragon
+      Dead:
+        Base: dead
+  - type: Physics
+    bodyType: KinematicController
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.50 #ehhh
+        density: 100
+        mask:
+        - FlyingMobMask
+        layer:
+        - FlyingMobLayer
+  - type: MobState
+  - type: MobStateActions
+    actions:
+      Critical:
+      - ActionCritSuccumb
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      750: Critical
+      800: Dead
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      650: 0.7
+      700: 0.5
+  - type: Flammable
+    damage:
+      types: {}
+  - type: StatusEffects
+    allowed:
+    - TemporaryBlindness
+    - Pacified
+    - RadiationProtection
+    - Adrenaline
+  - type: Temperature
+    heatDamageThreshold: 1200
+  - type: Metabolizer
+    solutionOnBody: false
+    updateInterval: 0.25
+    metabolizerTypes: [ Dragon ]
+    groups:
+    - id: Medicine
+    - id: Poison
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatDragon
+      amount: 8
+    - id: OldCaptainSabre
+      amount: 1
+  - type: InteractionPopup
+    successChance: 0.25
+    interactSuccessString: petting-success-dragon
+    interactFailureString: petting-failure-dragon
+    interactFailureSound:
+      path: /Audio/Animals/space_dragon_roar.ogg
+    soundPerceivedByOthers: false
+  - type: MeleeWeapon
+    altDisarm: false
+    soundHit:
+      path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
+    damage:
+      types:
+        Piercing: 25
+        Slash: 25
+  - type: Tag
+    tags:
+    - CannotSuicide
+    - DoorBumpOpener
+    - StunImmune
+  - type: Language
+    availableLanguages:
+    - id: Carpish
+      canSpeak: true
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: Dragon
+  - type: Puller
+    needsHands: false
+  - type: Telepathy
+    canSend: true
+    telepathyChannelPrototype: TelepathyChannelSpaceDragon
+  - type: Prying
+    pryPowered: true
+    force: true
+    speedModifier: 1.5
+    useSound:
+      path: /Audio/Items/crowbar.ogg
+  - type: Dragon
+    riftPrototype: EldrichCarpRift
+    spawnRiftAction: ActionSpawnEldrichRift
+    weakenedDuration: 30
+  - type: ActionGun
+    action: ActionDragonsBreath
+    gunProto: EldrichDragonsBreathGun
+  - type: Devourer
+    structureDevourTime: 5
+    foodPreferenceWhitelist:
+      components:
+      - HumanoidAppearance
+    stomachStorageWhitelist:
+      components:
+      - MobState
+    chemical: Ichor
+    healRate: 35.0
+    whitelist:
+      components:
+      - MobState
+      - Door
+      tags:
+      - Wall
+    blacklist:
+      components:
+      - BorgChassis
+  - type: Insulated
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  id: EldrichDragonsBreathGun
+  suffix: Shitspawn, Lanc
+  name: dragon's lung
+  description: For dragon's breathing.
+  components:
+  - type: RechargeBasicEntityAmmo
+    rechargeCooldown: 5
+    rechargeSound:
+      path: /Audio/Animals/space_dragon_roar.ogg
+  - type: BasicEntityAmmoProvider
+    proto: ProjectileEldrichDragonsBreath
+    capacity: 1
+    count: 1
+  - type: Gun
+    soundGunshot:
+      path: /Audio/Animals/space_dragon_roar.ogg
+    soundEmpty: null
+    projectileSpeed: 5
+
+- type: entity
+  parent: BaseAction
+  id: ActionSpawnEldrichRift
+  suffix: Shitspawn, Lanc
+  name: Summon Carp Rift
+  description: Summons a carp rift that will periodically spawns carps.
+  components:
+  - type: Action
+    icon:
+      sprite: SS220/Shitspawn/ElderDragon/carp_rift.rsi
+      state: icon
+    useDelay: 1
+    priority: 3
+  - type: InstantAction
+    event: !type:DragonSpawnRiftActionEvent
+
+# MOVE IT TO RESPECTIVE FOLDERS IF BASICEVENT
+
+#DragonsBreath proj
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseBulletTrigger
+  id: ProjectileEldrichDragonsBreath
+  name: dragon's breath
+  description: Try not to get toasted.
+  components:
+  - type: PointLight
+    color: "#E25822"
+    radius: 5.0
+    energy: 8.0
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/magic.rsi
+    layers:
+    - state: fireball
+      shader: unshaded
+  - type: IgnitionSource
+    temperature: 1100
+    ignited: true
+  - type: RepeatingTrigger
+    delay: 0.7 # explo is bigger so less explosions
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: FireBomb
+    totalIntensity: 13 # ~2 tile radius ~14dmg per explo to cap's armor
+    intensitySlope: 1
+    maxIntensity: 120
+    canCreateVacuum: false
+    deleteAfterExplosion: false
+    repeatable: true
+  - type: TimedDespawn
+    lifetime: 6
+
+#portal
+- type: entity
+  id: EldrichCarpRift
+  suffix: Shitspawn, Lanc
+  name: eldrich carp rift
+  description: Strange looking rift, something dark can be seen on the other side.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: DragonRift
+    spawn: MobSharkEldrichDragon
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Fixtures
+  - type: Sprite
+    layers:
+    - sprite: SS220/Shitspawn/ElderDragon/carp_rift.rsi 
+      state: icon
+  - type: InteractionOutline
+  - type: Clickable
+  - type: PointLight
+    enabled: true
+    color: "#366db5"
+    radius: 10.0
+    energy: 5.0
+    netsync: false
+  - type: NavMapBeacon
+    color: "#ff0000"
+    text: eldrich carp rift
+    enabled: false
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 500
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: EmitSoundOnSpawn
+    sound:
+      path: /Audio/Weapons/Guns/Gunshots/rocket_launcher.ogg
+
+
+#portal child
+- type: entity
+  name: SharkDragon
+  id: MobSharkEldrichDragon
+  suffix: Shitspawn, Lanc
+  parent: [ SimpleSpaceMobBase, FlyingMobBase, MobCombat, MobPassiveCollision ]
+  components:
+    - type: InputMover
+    - type: MobMover
+    - type: GhostRole
+      allowMovement: true
+      allowSpeech: true
+      makeSentient: true
+      name: ghost-role-information-elder-dragon-shark-name 
+      description: ghost-role-information-elder-dragon-shark-description
+      rules: ghost-role-information-space-dragon-summoned-carp-rules
+      mindRoles:
+      - MindRoleGhostRoleTeamAntagonistFlock
+    - type: GhostTakeoverAvailable
+    - type: HTN
+      rootTask:
+        task: DragonCarpCompound
+    - type: NpcFactionMember
+      factions:
+      - Dragon
+    - type: Insulated
+    - type: Sprite
+      sprite: Mobs/Aliens/Carps/sharkminnow.rsi
+      layers:
+      - map: [ "enum.DamageStateVisualLayers.Base" ]
+        state: alive
+      - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+        state: mouth
+        shader: unshaded
+    - type: Physics
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape:
+            !type:PhysShapeCircle
+            radius: 0.40
+          density: 100
+          mask:
+            - FlyingMobMask
+          layer:
+            - FlyingMobLayer
+    - type: MobThresholds
+      thresholds:
+        0: Alive
+        100: Dead
+    - type: Stamina
+      critThreshold: 150
+    - type: DamageStateVisuals
+      states:
+        Alive:
+          Base: alive
+          BaseUnshaded: mouth
+        Dead:
+          Base: dead
+          BaseUnshaded: dead_mouth
+    - type: Body
+      prototype: Bloodsucker
+      requiredLegs: 1
+    - type: Butcherable
+      spawned:
+        - id: FoodMeatFish
+          amount: 4
+        - id: MaterialToothSharkminnow1
+          amount: 3
+    - type: CombatMode
+    - type: MeleeWeapon
+      damage:
+        types:
+          Slash: 10
+          Bloodloss: 5
+    - type: Language
+      availableLanguages:
+      - id: Carpish
+    - type: Speech
+      speechVerb: LargeMob
+    - type: Telepathy
+      canSend: true
+      telepathyChannelPrototype: TelepathyChannelSpaceDragon
+
+
+#loot sword 
+- type: entity
+  name: forgotten captain's sabre
+  parent: [ BaseSword]
+  id: OldCaptainSabre
+  suffix: Shitspawn, Lanc
+  description: Old ceremonial weapon once belonged to the unknown heroic captain, was stuck in dragon's stomach for unknown amount of time.
+  components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/sword.ogg
+      params:
+        volume: 2
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/captain_sabre.rsi
+  - type: MeleeWeapon
+    attackRate: 1.6
+    damage:
+      types:
+        Slash: 20 #this is boss drop, kinda needs to be better then usual
+        Caustic: 5 #imbued with dragon's stomach fluids
+    soundHit:
+        path: /Audio/Weapons/bladeslice.ogg
+  - type: Reflect
+    reflectProb: .3
+    spread: 90
+  - type: Item
+    storedSprite:
+      state: storage
+      sprite: Objects/Weapons/Melee/captain_sabre_storage_64x.rsi
+    shape:
+    - 0,0,0,3
+  - type: Tag
+    tags:
+    - CaptainSabre
+  - type: DisarmMalus
+    malus: 0.01
+  - type: LandAtCursor
+  - type: ThrowingAngle
+    angle: 225
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+    offset: -0.15,0.0
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 17
+        Caustic: 5
+
+# Role
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRoleElderDragon
+  name: Elder dragon Role
+  components:
+  - type: MindRole
+    antagPrototype: Dragon
+    roleType: TeamAntagonist
+    subtype: role-subtype-dragon
+    exclusiveAntag: true
+  - type: DragonRole
