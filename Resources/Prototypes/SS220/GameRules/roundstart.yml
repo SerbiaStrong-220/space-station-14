@@ -10,7 +10,7 @@
       min: 120
       max: 180
   - type: LoadMapRule
-    mapPath: /Maps/SS220/ss220-nukeoutpost.yml #ToDo_SS220 change this to cultists map
+    mapPath: /Maps/SS220/the-void.yml
   - type: CultYoggRule
   - type: AntagSelection
     definitions:

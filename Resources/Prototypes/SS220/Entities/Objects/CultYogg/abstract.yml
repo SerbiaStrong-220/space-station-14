@@ -38,6 +38,9 @@
         layer:
         - WallLayer
         hard: false
-  - type: InteractionTeleport #ToDo_SS220 add whitelist
+  - type: InteractionTeleport
+    userWhitelist:
+      components:
+      - CultYogg
+    whitelistRejectedLoc: cult-yogg-teleport-user-whitelist-rejection
   - type: SelfLinkedTeleport
-  - type: AfterTeleportEffects

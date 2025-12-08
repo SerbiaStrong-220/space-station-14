@@ -47,13 +47,17 @@ public sealed class SharedInteractionTeleportSystem : EntitySystem
 
     private void OnCanDropTarget(Entity<InteractionTeleportComponent> ent, ref CanDropTargetEvent args) //why not working
     {
+        if(args.Handled)
+            return;
+
+        args.Handled = true;
+
         if (_whitelist.IsWhitelistFail(ent.Comp.UserWhitelist, args.Dragged))
         {
-            _popup.PopupPredicted(ent.Comp.WhitelistRejectedLoc, ent, args.User, PopupType.MediumCaution);//if message is null == will be return anyway
+            _popup.PopupPredicted(Loc.GetString(ent.Comp.WhitelistRejectedLoc), ent, args.User, PopupType.MediumCaution);//if message is null == will be return anyway
             return;
         }
         args.CanDrop = true;
-        args.Handled = true;
     }
 
     private void OnDragDropTarget(Entity<InteractionTeleportComponent> ent, ref DragDropTargetEvent args)
