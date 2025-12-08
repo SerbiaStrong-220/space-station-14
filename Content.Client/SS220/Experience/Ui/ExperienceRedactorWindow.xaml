@@ -19,6 +19,7 @@
         </PanelContainer>
         <BoxContainer Orientation="Vertical">
             <BoxContainer Name="CharacterInfoContainer" Orientation="Horizontal">
+                <OptionButton Name="ExperienceEntityOption"/>
                 <RichTextLabel Name="CharacterName" Text="Name place holder"/>
                 <RichTextLabel Name="OccupationName" Text="occupation name holder"/>
                 <RichTextLabel Name="AntagName" Text="antag name holder"/>
@@ -31,9 +32,14 @@
                 </BoxContainer>
                 <BoxContainer Name="SkillRedactor" Orientation="Vertical">
 
+                    <!-- Added by code -->
                 </BoxContainer>
                 <BoxContainer Name="KnowledgeRedactor" Orientation="Vertical">
-
+                    <BoxContainer Orientation="Horizontal">
+                        <RichTextLabel Text="{Loc 'experience-redactor-knowledge-name'}"/>
+                        <OptionButton Name="KnowledgeOption"/>
+                    </BoxContainer>
+                    <!-- Added by code -->
                 </BoxContainer>
             </BoxContainer>
             <BoxContainer Name="SubmitButtonContainer" Orientation="Horizontal">
