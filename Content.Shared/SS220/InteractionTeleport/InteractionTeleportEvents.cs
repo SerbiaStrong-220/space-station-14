@@ -25,3 +25,9 @@ public record struct TeleportTargetEvent(EntityUid Target, EntityUid User);
 /// <param name="Target"></param>
 [ByRefEvent, Serializable]
 public record struct TargetTeleportedEvent(EntityUid Target);
+
+/// <summary>
+///     If we want to check the functionality of the teleport
+/// </summary>
+[ByRefEvent, Serializable]
+public record struct TeleportUseAttemptEvent(EntityUid Target, EntityUid User, bool Cancelled = false);

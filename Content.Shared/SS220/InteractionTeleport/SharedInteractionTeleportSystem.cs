@@ -68,6 +68,12 @@ public sealed class SharedInteractionTeleportSystem : EntitySystem
 
     private bool TryStartTeleport(Entity<InteractionTeleportComponent> ent, EntityUid target, EntityUid user)
     {
+        var ev = new TeleportUseAttemptEvent(target, user);
+        RaiseLocalEvent(ent, ref ev);
+
+        if (ev.Cancelled)
+            return false;
+
         if (!ent.Comp.ShouldHaveDelay)
         {
             SendTeleporting(ent, target, user);

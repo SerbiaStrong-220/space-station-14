@@ -3,11 +3,11 @@
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Construction.EntitySystems;
+using Content.Shared.Database;
 using Content.Shared.Light.Components;
 using Content.Shared.SS220.TeleportationChasm;
 using Content.Shared.Station;
 using Robust.Shared.Map;
-using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -23,7 +23,6 @@ public sealed class TeleportationChasmSystem : SharedTeleportationChasmSystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedStationSystem _station = default!;
     [Dependency] private readonly AnchorableSystem _anchorable = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
 
     public override void Initialize()
@@ -75,9 +74,7 @@ public sealed class TeleportationChasmSystem : SharedTeleportationChasmSystem
         }
 
         if (TryTeleportFromCoordList(validLocations, ent))
-        {
-            //_adminLog.Add(LogType.Teleport, $"{uid:event}");//ToDo_SS220 add admin log
-        }
+            _adminLog.Add(LogType.Teleport, $"{ent:targer} got teleported on random location on station");
     }
 
     private bool TryTeleportFromCoordList(List<EntityCoordinates> coords, EntityUid teleported)

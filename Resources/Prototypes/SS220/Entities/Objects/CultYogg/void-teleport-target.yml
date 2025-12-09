@@ -2,10 +2,19 @@
 
 - type: entity
   id: VoidTeleportTarget
+  placement:
+    mode: SnapgridCenter
+    snap:
+      - Wall
   components:
+  - type: Appearance
+  - type: Transform
+    anchored: true
   - type: Sprite
-    noRot: true
-    sprite: SS220/Objects/CultYogg/portal.rsi #ToDo_SS220 add kudzu for tests, then delete this
-    layers:
-    - state: portal_open
-      shader: unshaded
+    sprite: SS220/Objects/CultYogg/strangefruit.rsi
+    state: kudzu_11
+    drawdepth: HighFloorObjects
+  - type: RandomTeleportTarget
+  - type: Tag
+    tags:
+    - VoidTeleporationTarget

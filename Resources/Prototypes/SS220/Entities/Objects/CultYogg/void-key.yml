@@ -1,7 +1,7 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
-  parent: CultYoggRestrictedItem
+  parent: [BaseItem, CultYoggRestrictedItem]
   id: VoidKey
   name: void key
   description: Opens portals to the VOID
@@ -42,7 +42,10 @@
       components:
       - HumanoidAppearance
   - type: RandomTeleport
-    targetsComponent: "PoweredLight" #ToDo_SS220 make special entity + component for this
+    targetsComponent: "RandomTeleportTarget"
+    whitelist:
+      tags:
+      - VoidTeleporationTarget
   - type: AfterTeleportEffects
 
 #Animation entities for a better immersions

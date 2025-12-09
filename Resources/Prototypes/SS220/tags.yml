@@ -363,3 +363,6 @@
 
 - type: Tag
   id: CultYoggTeleportExit
+
+- type: Tag
+  id: VoidTeleporationTarget

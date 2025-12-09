@@ -1,5 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Whitelist;
+
 namespace Content.Server.SS220.RandomTeleport;
 
 /// <summary>
@@ -10,4 +12,7 @@ public sealed partial class RandomTeleportComponent : Component
 {
     [DataField(required: true)]
     public string? TargetsComponent;
+
+    [DataField("whitelist")]
+    public EntityWhitelist? TeleportTargetWhitelist;
 }

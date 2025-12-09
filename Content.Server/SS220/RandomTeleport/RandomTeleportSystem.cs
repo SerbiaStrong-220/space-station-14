@@ -2,6 +2,7 @@
 
 using Content.Shared.Administration.Logs;
 using Content.Shared.SS220.InteractionTeleport;
+using Content.Shared.Whitelist;
 using Robust.Shared.Map;
 using Robust.Shared.Random;
 
@@ -13,6 +14,7 @@ public sealed class RandomTeleportSystem : EntitySystem
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly IComponentFactory _componentFactory = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {
@@ -43,6 +45,9 @@ public sealed class RandomTeleportSystem : EntitySystem
         var query1 = EntityManager.AllEntityQueryEnumerator(registration.Type);
         while (query1.MoveNext(out var target, out _))
         {
+            if (_whitelist.IsWhitelistFail(ent.Comp.TeleportTargetWhitelist, target))
+                continue;
+
             validLocations.Add(Transform(target).Coordinates);
         }
 
