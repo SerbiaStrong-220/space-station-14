@@ -80,16 +80,16 @@
   id: CultYoggTeleporterBuilding
   order: 7
   frame: CultYoggBuildingFrame
-  result: CultYoggTeleportEnter
+  result: VoidTeleportEnter
   materials:
-  - stack: Cablelive #ToDo_SS220 twweak resources
-    count: 5
-    icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: coillv}
+  - stack: CableMVlive
+    count: 2
+    icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: coilmv}
   - stack: CableHVlive
-    count: 5
+    count: 7
     icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: coilhv}
   - stack: Tokl
-    count: 8
+    count: 3
     icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: tokl}
 
 
