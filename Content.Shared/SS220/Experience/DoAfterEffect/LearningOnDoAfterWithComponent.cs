@@ -15,7 +15,7 @@ public sealed partial class LearningOnDoAfterEndWithComponent : BaseLearningOnDo
 
 public abstract partial class BaseLearningOnDoAfterWithComponent : Component
 {
-    [DataField]
+    [DataField(required: true)]
     [AutoNetworkedField]
     public Dictionary<ProtoId<SkillTreePrototype>, LearningInformation> Progress = new();
 }

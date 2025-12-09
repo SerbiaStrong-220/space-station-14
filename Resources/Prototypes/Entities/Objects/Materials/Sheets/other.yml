@@ -94,7 +94,8 @@
   # ss220-experience-begin
   - type: LearningOnDoAfterEndWith
     progress:
-      Construction: 0.10
+      Construction:
+        baseLearning: 0.10
   # ss220-experience-end
   - type: Sprite
     state: plasma_3
@@ -164,7 +165,8 @@
   # ss220-experience-begin
   - type: LearningOnDoAfterEndWith
     progress:
-      Construction: 0.08
+      Construction:
+        baseLearning: 0.08
   # ss220-experience-end
   - type: Sprite
     state: plastic_3
@@ -231,7 +233,8 @@
   # ss220-experience-begin
   - type: LearningOnDoAfterEndWith
     progress:
-      Construction: 0.15
+      Construction:
+        baseLearning: 0.15
   # ss220-experience-end
   - type: Sprite
     state: uranium_3
@@ -290,7 +293,8 @@
     # ss220-experience-begin
     - type: LearningOnDoAfterEndWith
       progress:
-        Construction: 0.08
+        Construction:
+          baseLearning: 0.08
     # ss220-experience-end
     - type: Item
       sprite: Objects/Materials/Sheets/meaterial.rsi

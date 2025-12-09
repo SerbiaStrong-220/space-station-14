@@ -18,7 +18,7 @@ public sealed partial class ExperienceViewWindow : FancyWindow
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     private ISawmill _sawmill = default!;
-    private Dictionary<ProtoId<SkillTreeGroupPrototype>, ExperienceGroupContainer> _cachedControls = new();
+    private Dictionary<ProtoId<SkillTreeGroupPrototype>, ExperienceSkillTreeGroupContainer> _cachedControls = new();
 
     private Dictionary<ProtoId<SkillTreeGroupPrototype>,
             List<(ProtoId<SkillTreePrototype>,
@@ -125,7 +125,7 @@ public sealed partial class ExperienceViewWindow : FancyWindow
 
         if (!_cachedControls.TryGetValue(key, out var cachedControl))
         {
-            cachedControl = new ExperienceGroupContainer();
+            cachedControl = new ExperienceSkillTreeGroupContainer();
             ExperienceTreeGroupsContainer.AddChild(cachedControl);
             _cachedControls.Add(key, cachedControl);
         }

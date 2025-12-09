@@ -12,7 +12,7 @@ using Robust.Shared.Utility;
 namespace Content.Client.SS220.Experience.UiElements;
 
 [GenerateTypedNameReferences]
-public sealed partial class ExperienceGroupContainer : BoxContainer
+public sealed partial class ExperienceSkillTreeGroupContainer : BoxContainer
 {
     private ProtoId<SkillTreeGroupPrototype>? _groupProto = null;
     private Dictionary<ProtoId<SkillTreePrototype>, ExperienceTreeContainer> _cachedTreeContainers = new();
@@ -24,7 +24,7 @@ public sealed partial class ExperienceGroupContainer : BoxContainer
         get => _name;
     }
 
-    public ExperienceGroupContainer()
+    public ExperienceSkillTreeGroupContainer()
     {
         RobustXamlLoader.Load(this);
 

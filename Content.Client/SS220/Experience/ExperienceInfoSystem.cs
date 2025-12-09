@@ -16,6 +16,7 @@ public sealed class ExperienceInfoSystem : EntitySystem
 
     public Action<ExperienceData>? OnExperienceUpdated;
 
+    /// <summary> Temporary collection for methods</summary>
     private HashSet<ProtoId<KnowledgePrototype>> _knowledges = new();
 
     public override void Initialize()
@@ -33,30 +34,29 @@ public sealed class ExperienceInfoSystem : EntitySystem
 
     public void RequestLocalPlayerExperienceData()
     {
-        OnExperienceUpdated?.Invoke(GetLocalPlayerExperienceData());
+        OnExperienceUpdated?.Invoke(GetEntityExperienceData(_playerManager.LocalEntity));
     }
 
-    private ExperienceData GetLocalPlayerExperienceData()
+    public ExperienceData GetEntityExperienceData(EntityUid? uid)
     {
-        var entity = _playerManager.LocalEntity;
         var data = new ExperienceData();
 
-        if (entity is null)
+        if (uid is null)
             return data;
 
-        data.SkillDictionary = GetPlayerSkillData(entity.Value);
+        data.SkillDictionary = GetPlayerSkillData(uid.Value);
 
-        if (_experience.TryGetEntityKnowledge(entity.Value, ref _knowledges))
+        if (_experience.TryGetEntityKnowledge(uid.Value, ref _knowledges))
             data.Knowledges = [.. _knowledges];
 
         return data;
     }
 
-    public Dictionary<ProtoId<SkillTreeGroupPrototype>, List<(ProtoId<SkillTreePrototype>, SkillTreeExperienceContainer, FixedPoint4)>>?
+    public Dictionary<ProtoId<SkillTreeGroupPrototype>, List<(ProtoId<SkillTreePrototype>, SkillTreeExperienceContainer, FixedPoint4)>>
         GetPlayerSkillData(EntityUid? uid)
     {
         if (!TryComp<ExperienceComponent>(uid, out var experienceComponent))
-            return null;
+            return new();
 
         var progressDict = experienceComponent.StudyingProgress;
         var skillDict = experienceComponent.Skills;
@@ -99,13 +99,12 @@ public sealed class SkillTreeExperienceContainer(SkillTreeExperienceInfo info, S
     public SkillTreeExperienceInfo? OverrideInfo = overrideInfo;
 }
 
-
 public sealed class ExperienceData
 {
     public Dictionary<ProtoId<SkillTreeGroupPrototype>,
                     List<(ProtoId<SkillTreePrototype>,
                     SkillTreeExperienceContainer,
-                    FixedPoint4)>>? SkillDictionary = null;
+                    FixedPoint4)>> SkillDictionary = new();
 
-    public HashSet<ProtoId<KnowledgePrototype>>? Knowledges = null;
+    public HashSet<ProtoId<KnowledgePrototype>> Knowledges = new();
 }

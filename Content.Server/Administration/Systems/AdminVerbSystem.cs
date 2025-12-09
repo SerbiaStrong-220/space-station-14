@@ -38,6 +38,7 @@ using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
 
 using static Content.Shared.Configurable.ConfigurationComponent;
+using Content.Shared.SS220.Experience;
 
 namespace Content.Server.Administration.Systems
 {
@@ -565,6 +566,24 @@ namespace Content.Server.Administration.Systems
                     args.Verbs.Add(verb);
                 }
             }
+
+            // SS220-add-experience-begin
+            if (HasComp<InventoryComponent>(args.Target))
+            {
+                if (_groupController.CanCommand(player, "experienceredactor"))
+                {
+                    Verb verb = new()
+                    {
+                        Text = Loc.GetString("experience-redactor-verb-text"),
+                        Category = VerbCategory.Debug,
+                        Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/students-cap.svg.192dpi.png")),
+                        Act = () => RaiseNetworkEvent(new OpenExperienceRedactorRequest(GetNetEntity(args.Target))),
+                        Impact = LogImpact.Medium
+                    };
+                    args.Verbs.Add(verb);
+                }
+            }
+            // SS220-add-experience-end
 
             // In range unoccluded verb
             if (_groupController.CanCommand(player, "inrangeunoccluded"))

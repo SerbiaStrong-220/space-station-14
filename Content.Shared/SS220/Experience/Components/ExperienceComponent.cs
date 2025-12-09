@@ -109,6 +109,13 @@ public sealed partial class SkillTreeExperienceInfo
     {
         return $"level: {SkillLevel}. Sublevel: {SkillSublevel}. Studied: {SkillStudied}";
     }
+
+    public SkillTreeExperienceInfo(SkillTreeExperienceInfo other)
+    {
+        SkillLevel = other.SkillLevel;
+        SkillSublevel = other.SkillSublevel;
+        SkillStudied = other.SkillStudied;
+    }
 }
 
 /// <summary>

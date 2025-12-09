@@ -30,16 +30,21 @@
                     <RichTextLabel Name="BypassKnowledgeStatus" Text="bypass knowledge holder"/>
                     <RichTextLabel Name="InitMaskShower" Text="init mask holder"/>
                 </BoxContainer>
-                <BoxContainer Name="SkillRedactor" Orientation="Vertical">
-
-                    <!-- Added by code -->
-                </BoxContainer>
-                <BoxContainer Name="KnowledgeRedactor" Orientation="Vertical">
+                <ScrollContainer HScrollEnabled="False">
+                    <BoxContainer Name="SkillRedactor" Orientation="Vertical">
+                        <!-- Added by code -->
+                    </BoxContainer>
+                </ScrollContainer>
+                <BoxContainer Name="KnowledgeInfoContainer" Orientation="Vertical">
                     <BoxContainer Orientation="Horizontal">
                         <RichTextLabel Text="{Loc 'experience-redactor-knowledge-name'}"/>
                         <OptionButton Name="KnowledgeOption"/>
                     </BoxContainer>
-                    <!-- Added by code -->
+                    <ScrollContainer HScrollEnabled="False">
+                        <BoxContainer Name="KnowledgeRedactor" Orientation="Vertical">
+                            <!-- Added by code -->
+                        </BoxContainer>
+                    </ScrollContainer>
                 </BoxContainer>
             </BoxContainer>
             <BoxContainer Name="SubmitButtonContainer" Orientation="Horizontal">
