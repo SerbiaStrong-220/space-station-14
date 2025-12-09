@@ -15,6 +15,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Utility;
 
 namespace Content.Server.SS220.EmergencyShuttleControl;
+
 /// <summary>
 ///     System that manages the cancellation of emergency shuttle call.
 /// </summary>
@@ -205,11 +206,13 @@ public sealed class EmergencyShuttleLockdownSystem : EntitySystem
 
         _audio.PlayGlobal(announceSound, Filter.Broadcast(), true);
     }
+
     private (string, object) GetCoordinatesArgument(Entity<EmergencyShuttleLockdownComponent> ent)
     {
         var coordinates = _transform.GetWorldPosition(ent.Owner);
         return ("coords", $"({Math.Round(coordinates.X)}, {Math.Round(coordinates.Y)})");
     }
+
     private (string, object) GetLocationArgument(Entity<EmergencyShuttleLockdownComponent> ent)
     {
         return ("location",

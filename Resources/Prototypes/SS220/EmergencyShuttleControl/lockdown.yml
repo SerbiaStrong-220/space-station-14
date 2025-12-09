@@ -3,7 +3,8 @@
 - type: entity
   id: LockdownDebugItem
   parent: BaseItem
-  name: Lockdown[DEBUG]
+  name: emergency shuttle lockdown
+  suffix: Debug
   components:
   - type: Sprite
     sprite: Objects/Fun/Plushies/lizard.rsi
