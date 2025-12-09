@@ -12,9 +12,6 @@
       prob: 0.50
     - id: ClothingHeadsetAltCargo
     - id: DoorRemoteCargo
-    - id: RubberStampApproved
-    - id: RubberStampDenied
-    - id: RubberStampQm
     # - id: SalvageShuttleConsoleCircuitboard SS220-upstream-merge
     - id: Telescopichka # SS220 Telescopic Baton
     - id: ClothingWristWatchGold # SS220 Wrist Watch
@@ -24,6 +21,10 @@
     - id: DeviceCalculator # SS220 Calculator
     # - id: ClothingHandsKnuckleDustersQM # SS220-QM-own-knuckle-duster
     - id: MailTeleporterMachineCircuitboard
+    #SS220 Quartermaster_hardsuit_add begin
+    - id: ClothingOuterHardsuitQuartermaster
+    - id: OxygenTankFilled
+    #SS220 Quartermaster_hardsuit_add end
 
 - type: entity
   id: LockerQuarterMasterFilled

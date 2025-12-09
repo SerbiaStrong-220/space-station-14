@@ -13,7 +13,9 @@
         [1] Насыщает
        *[other] насыщают
     }
-reagent-effect-guidebook-create-entity-reaction-effect =
+
+# SS220 fix loc ids begin
+entity-effect-guidebook-spawn-entity =
     { $chance ->
         [1] Создаёт
        *[other] создают
@@ -21,32 +23,38 @@ reagent-effect-guidebook-create-entity-reaction-effect =
         [1] { $entname }
        *[other] { $amount } { $entname }
     }
-reagent-effect-guidebook-explosion-reaction-effect =
+
+entity-effect-guidebook-explosion =
     { $chance ->
         [1] Вызывает
        *[other] вызывают
     } взрыв
-reagent-effect-guidebook-emp-reaction-effect =
+
+entity-effect-guidebook-emp =
     { $chance ->
         [1] Вызывает
        *[other] вызывают
     } электромагнитный импульс
-reagent-effect-guidebook-flash-reaction-effect =
+
+entity-effect-guidebook-flash =
     { $chance ->
         [1] Вызывает
        *[other] вызывают
     } ослепительную вспышку
-reagent-effect-guidebook-foam-area-reaction-effect =
+
+entity-effect-guidebook-foam-area =
     { $chance ->
         [1] Создаёт
        *[other] создают
     } большое количество пены
-reagent-effect-guidebook-smoke-area-reaction-effect =
+
+entity-effect-guidebook-smoke-area =
     { $chance ->
         [1] Создаёт
        *[other] создают
     } большое количество дыма
-reagent-effect-guidebook-satiate-thirst =
+
+entity-effect-guidebook-satiate-thirst =
     { $chance ->
         [1] Утоляет
        *[other] утоляют
@@ -54,7 +62,8 @@ reagent-effect-guidebook-satiate-thirst =
         [1] жажду средне
        *[other] жажду на { NATURALFIXED($relative, 3) }x от обычного
     }
-reagent-effect-guidebook-satiate-hunger =
+
+entity-effect-guidebook-satiate-hunger =
     { $chance ->
         [1] Насыщает
        *[other] насыщают
@@ -62,7 +71,8 @@ reagent-effect-guidebook-satiate-hunger =
         [1] голод средне
        *[other] голод на { NATURALFIXED($relative, 3) }x от обычного
     }
-reagent-effect-guidebook-health-change =
+
+entity-effect-guidebook-health-change =
     { $chance ->
         [1]
             { $healsordeals ->
@@ -77,7 +87,8 @@ reagent-effect-guidebook-health-change =
                *[both] изменяют здоровье на
             }
     } { $changes }
-reagent-effect-guidebook-even-health-change =
+
+entity-effect-guidebook-even-health-change =
     { $chance ->
         [1]
             { $healsordeals ->
@@ -92,7 +103,8 @@ reagent-effect-guidebook-even-health-change =
                *[both] равномерно изменяют здоровье на
             }
     } { $changes }
-reagent-effect-guidebook-status-effect =
+
+entity-effect-guidebook-status-effect-old =
     { $type ->
         [update]
             { $chance ->
@@ -127,7 +139,8 @@ reagent-effect-guidebook-status-effect =
                *[other] удаляют
             } { NATURALFIXED($time, 3) } от { LOC($key) }
     }
-reagent-effect-guidebook-status-effect-delay =
+
+entity-effect-guidebook-status-effect =
     { $type ->
         [add]
             { $chance ->
@@ -156,12 +169,47 @@ reagent-effect-guidebook-status-effect-delay =
                     [few] секунды
                     *[other] секунд
                 } от { LOC($key) }
-    } после { NATURALFIXED($delay, 3) } { $time ->
-                    [one] секунду
-                    [few] секунды
-                    *[other] секунд
-                } задержки
-reagent-effect-guidebook-knockdown =
+    } { $delay ->
+        [0] немедленно
+        *[other] после { NATURALFIXED($delay, 3) } { $time ->
+                [one] секунду
+                [few] секунды
+                *[other] секунд
+            } задержки
+    }
+
+entity-effect-guidebook-status-effect-indef =
+    { $type ->
+        [update]
+                { $chance ->
+                    [1] Вызывает
+                    *[other] вызывают
+                } постоянный {LOC($key)}
+        [add]
+                { $chance ->
+                    [1] Вызывает
+                    *[other] вызывают
+                } постоянный {LOC($key)}
+        [set]
+                { $chance ->
+                    [1] Вызывает
+                    *[other] вызывают
+                } постоянный {LOC($key)}
+        *[remove]
+                { $chance ->
+                    [1] Удаляет
+                    *[other] удаляют
+                } {LOC($key)}
+    } { $delay ->
+        [0] немедленно
+        *[other] после { NATURALFIXED($delay, 3) } { $time ->
+                [one] секунду
+                [few] секунды
+                *[other] секунд
+            } задержки
+    }
+
+entity-effect-guidebook-knockdown =
     { $type ->
         [update]
             { $chance ->
@@ -200,12 +248,14 @@ reagent-effect-guidebook-knockdown =
                     *[other] секунд
                 } от нокдауна
     }
-reagent-effect-guidebook-set-solution-temperature-effect =
+
+entity-effect-guidebook-set-solution-temperature-effect =
     { $chance ->
         [1] Устанавливает
        *[other] устанавливают
     } температуру раствора точно { NATURALFIXED($temperature, 2) }k
-reagent-effect-guidebook-adjust-solution-temperature-effect =
+
+entity-effect-guidebook-adjust-solution-temperature-effect =
     { $chance ->
         [1]
             { $deltasign ->
@@ -221,7 +271,8 @@ reagent-effect-guidebook-adjust-solution-temperature-effect =
         [1] не более { NATURALFIXED($maxtemp, 2) }k
        *[-1] не менее { NATURALFIXED($mintemp, 2) }k
     }
-reagent-effect-guidebook-adjust-reagent-reagent =
+
+entity-effect-guidebook-adjust-reagent-reagent =
     { $chance ->
         [1]
             { $deltasign ->
@@ -237,7 +288,8 @@ reagent-effect-guidebook-adjust-reagent-reagent =
         [1] к
        *[-1] из
     } раствора
-reagent-effect-guidebook-adjust-reagent-group =
+
+entity-effect-guidebook-adjust-reagent-group =
     { $chance ->
         [1]
             { $deltasign ->
@@ -253,7 +305,8 @@ reagent-effect-guidebook-adjust-reagent-group =
         [1] к
        *[-1] из
     } раствора
-reagent-effect-guidebook-adjust-temperature =
+
+entity-effect-guidebook-adjust-temperature =
     { $chance ->
         [1]
             { $deltasign ->
@@ -269,32 +322,38 @@ reagent-effect-guidebook-adjust-temperature =
         [1] к телу
        *[-1] из тела
     }, в котором он метабилизируется
-reagent-effect-guidebook-chem-cause-disease =
+
+entity-effect-guidebook-chem-cause-disease =
     { $chance ->
         [1] Вызывает
        *[other] вызывают
     } болезнь { $disease }
-reagent-effect-guidebook-chem-cause-random-disease =
+
+entity-effect-guidebook-chem-cause-random-disease =
     { $chance ->
         [1] Вызывает
        *[other] вызывают
     } болезнь { $diseases }
-reagent-effect-guidebook-jittering =
+
+entity-effect-guidebook-jittering =
     { $chance ->
         [1] Вызывает
        *[other] вызывают
     } тряску
-reagent-effect-guidebook-chem-clean-bloodstream =
+
+entity-effect-guidebook-clean-bloodstream =
     { $chance ->
         [1] Очищает
        *[other] очищают
     } кровеносную систему от других веществ
-reagent-effect-guidebook-cure-disease =
+
+entity-effect-guidebook-cure-disease =
     { $chance ->
         [1] Излечивает
        *[other] излечивают
     } болезнь
-reagent-effect-guidebook-cure-eye-damage =
+
+entity-effect-guidebook-eye-damage =
     { $chance ->
         [1]
             { $deltasign ->
@@ -307,12 +366,14 @@ reagent-effect-guidebook-cure-eye-damage =
                *[-1] излечивают
             }
     } повреждения глаз
-reagent-effect-guidebook-chem-vomit =
+
+entity-effect-guidebook-vomit =
     { $chance ->
         [1] Вызывает
        *[other] вызывают
     } рвоту
-reagent-effect-guidebook-create-gas =
+
+entity-effect-guidebook-create-gas =
     { $chance ->
         [1] Создаёт
        *[other] создают
@@ -320,47 +381,56 @@ reagent-effect-guidebook-create-gas =
         [1] моль
        *[other] моль
     } газа { $gas }
-reagent-effect-guidebook-drunk =
+
+entity-effect-guidebook-drunk =
     { $chance ->
         [1] Вызывает
        *[other] вызывают
     } опьянение
-reagent-effect-guidebook-electrocute =
+
+entity-effect-guidebook-electrocute =
     { $chance ->
         [1] Бьёт током
        *[other] бьют током
     } употребившего в течении { NATURALFIXED($time, 3) }
-reagent-effect-guidebook-emote =
+
+entity-effect-guidebook-emote =
     { $chance ->
         [1] Вызывает
        *[other] вызвать
     }  у цели [bold][color=white]{ $emote }[/color][/bold]
-reagent-effect-guidebook-extinguish-reaction =
+
+entity-effect-guidebook-extinguish-reactio =
     { $chance ->
         [1] Гасит
        *[other] гасят
     } огонь
-reagent-effect-guidebook-flammable-reaction =
+
+entity-effect-guidebook-flammable-reaction =
     { $chance ->
         [1] Повышает
        *[other] повышают
     } воспламеняемость
-reagent-effect-guidebook-ignite =
+
+entity-effect-guidebook-ignite =
     { $chance ->
         [1] Поджигает
        *[other] поджигают
     } употребившего
-reagent-effect-guidebook-make-sentient =
+
+entity-effect-guidebook-make-sentient =
     { $chance ->
         [1] Делает
        *[other] делают
     } употребившего разумным
-reagent-effect-guidebook-make-polymorph =
+
+entity-effect-guidebook-make-polymorph =
     { $chance ->
         [1] Превращает
        *[other] превращают
     } употребившего в { $entityname }
-reagent-effect-guidebook-modify-bleed-amount =
+
+entity-effect-guidebook-modify-bleed-amount =
     { $chance ->
         [1]
             { $deltasign ->
@@ -373,7 +443,8 @@ reagent-effect-guidebook-modify-bleed-amount =
                *[-1] ослабляют
             }
     } кровотечение
-reagent-effect-guidebook-modify-blood-level =
+
+entity-effect-guidebook-modify-blood-level =
     { $chance ->
         [1]
             { $deltasign ->
@@ -386,37 +457,50 @@ reagent-effect-guidebook-modify-blood-level =
                *[-1] понижают
             }
     } уровень крови в организме
-reagent-effect-guidebook-paralyze =
+
+entity-effect-guidebook-paralyze =
     { $chance ->
         [1] Парализует
        *[other] парализуют
     } употребившего минимум на { NATURALFIXED($time, 3) }
-reagent-effect-guidebook-movespeed-modifier =
+
+entity-effect-guidebook-movespeed-modifie =
     { $chance ->
         [1] Делает
        *[other] делают
     } скорость передвижения { NATURALFIXED($walkspeed, 3) }x от стандартной минимум на { NATURALFIXED($time, 3) }
-reagent-effect-guidebook-reset-narcolepsy =
+
+entity-effect-guidebook-reset-narcolepsy =
     { $chance ->
         [1] Предотвращает
        *[other] предотвращают
     } приступы нарколепсии
-reagent-effect-guidebook-wash-cream-pie-reaction =
+
+entity-effect-guidebook-wash-cream-pie-reaction =
     { $chance ->
         [1] Смывает
        *[other] смывают
     } кремовый пирог с лица
-reagent-effect-guidebook-cure-zombie-infection =
+
+entity-effect-guidebook-cure-zombie-infection =
     { $chance ->
         [1] Лечит
        *[other] лечат
     } зомби-вирус
-reagent-effect-guidebook-cause-zombie-infection =
+
+entity-effect-guidebook-cause-zombie-infection =
     { $chance ->
         [1] Заражает
        *[other] заражают
     } человека зомби-вирусом
-reagent-effect-guidebook-reduce-rotting =
+
+entity-effect-guidebook-innoculate-zombie-infection =
+    { $chance ->
+        [1] Лечит
+       *[other] лечат
+    } зомби-вирус и обеспечивает иммунитет к нему в будущем
+
+entity-effect-guidebook-reduce-rotting =
     { $chance ->
         [1] Регенерирует
        *[other] регенерируют
@@ -425,12 +509,8 @@ reagent-effect-guidebook-reduce-rotting =
         [few] секунды
        *[other] секунд
     } гниения
-reagent-effect-guidebook-innoculate-zombie-infection =
-    { $chance ->
-        [1] Лечит
-       *[other] лечат
-    } зомби-вирус и обеспечивает иммунитет к нему в будущем
-reagent-effect-guidebook-area-reaction =
+
+entity-effect-guidebook-area-reaction =
     { $chance ->
         [1] Вызывает
        *[other] вызывают
@@ -439,53 +519,67 @@ reagent-effect-guidebook-area-reaction =
         [few] секунды
        *[other] секунд
     }
-reagent-effect-guidebook-artifact-unlock =
-    { $chance ->
-        [1] Помогает
-       *[other] помогают
-    } разблокировать инопланетный артефакт.
-reagent-effect-guidebook-add-to-solution-reaction =
+
+entity-effect-guidebook-add-to-solution-reaction =
     { $chance ->
         [1] Заставляет
        *[other] заставляют
     } химикаты, применённые к объекту, добавиться во внутренний контейнер для растворов этого объекта
-reagent-effect-guidebook-artifact-durability-restore =
+
+entity-effect-guidebook-artifact-unlock =
+    { $chance ->
+        [1] Помогает
+       *[other] помогают
+    } разблокировать инопланетный артефакт.
+
+entity-effect-guidebook-artifact-durability-restore =
     Восстанавливает { $restored } { $restored ->
         [1] прочность
        *[other] прочности
     } активного узла космического артефакта.
-reagent-effect-guidebook-plant-attribute =
+
+entity-effect-guidebook-plant-attribute =
     { $chance ->
         [1] Изменяет
        *[other] изменяют
-    } { $attribute } за [color={ $colorName }]{ $amount }[/color]
-reagent-effect-guidebook-plant-cryoxadone =
+    } { $attribute } за {$positive ->
+        [true] [color=red]{$amount}[/color]
+        *[false] [color=green]{$amount}[/color]
+    }
+
+entity-effect-guidebook-plant-cryoxadone =
     { $chance ->
         [1] Омолаживает
        *[other] омолаживают
     } растение, в зависимости от возраста растения и времени его роста
-reagent-effect-guidebook-plant-phalanximine =
+
+entity-effect-guidebook-plant-phalanximine =
     { $chance ->
         [1] Восстанавливает
        *[other] восстанавливают
     } жизнеспособность растения, ставшего нежизнеспособным в результате мутации
-reagent-effect-guidebook-plant-diethylamine =
+
+entity-effect-guidebook-plant-diethylamine =
     { $chance ->
         [1] Повышает
        *[other] повышают
     } продолжительность жизни растения и/или его базовое здоровье с шансом 10% на единицу
-reagent-effect-guidebook-plant-robust-harvest =
+
+entity-effect-guidebook-plant-robust-harvest =
     { $chance ->
         [1] Повышает
        *[other] повышают
     } потенцию растения путём { $increase } до максимума в { $limit }. Приводит к тому, что растение теряет свои семена, когда потенция достигает { $seedlesstreshold }. Попытка повысить потенцию свыше { $limit } может вызвать снижение урожайности с вероятностью 10%
-reagent-effect-guidebook-plant-seeds-add =
+
+entity-effect-guidebook-plant-seeds-add =
     { $chance ->
         [1] Восстанавливает
        *[other] восстанавливают
     } семена растения
-reagent-effect-guidebook-plant-seeds-remove =
+
+entity-effect-guidebook-plant-seeds-remove =
     { $chance ->
         [1] Убирает
        *[other] убирают
     } семена из растения
+# SS220 fix loc ids end
