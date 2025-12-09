@@ -10,10 +10,10 @@
   - type: Appearance
   - type: Transform
     anchored: true
-  - type: Sprite
-    sprite: SS220/Objects/CultYogg/strangefruit.rsi
-    state: kudzu_11
-    drawdepth: HighFloorObjects
+  #- type: Sprite
+  #  sprite: SS220/Objects/CultYogg/strangefruit.rsi
+  #  state: kudzu_11
+  #  drawdepth: HighFloorObjects
   - type: RandomTeleportTarget
   - type: Tag
     tags:
