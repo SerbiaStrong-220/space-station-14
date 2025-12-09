@@ -50,6 +50,11 @@
   - TraitorDynamic
   - BasicStationEventScheduler
   - EmergencyShuttleAutoVote
+  - DummyNonAntagChance
+  - SubGamemodesRule
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlFriendlyEventScheduler
+  - BasicRoundstartVariation
 
 # event schedulers
 
