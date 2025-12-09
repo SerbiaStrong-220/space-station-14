@@ -8,8 +8,8 @@
     xmlns:styleDef="clr-namespace:Content.Client.SS220.Experience.Ui"
     Title="{Loc 'experience-view-redactor-title'}"
     Resizable="True"
-    MinSize="280 480"
-    SetSize="280 480"
+    MinSize="320 240"
+    SetSize="800 480"
     RectClipContent="False">
     <Control>
         <PanelContainer>
@@ -17,38 +17,39 @@
                 <gfx:StyleBoxFlat BackgroundColor="#1B1B1E"/>
             </PanelContainer.PanelOverride>
         </PanelContainer>
-        <BoxContainer Orientation="Vertical">
+        <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True" Margin="10 0">
             <BoxContainer Name="CharacterInfoContainer" Orientation="Horizontal">
                 <OptionButton Name="ExperienceEntityOption"/>
-                <RichTextLabel Name="CharacterName" Text="Name place holder"/>
-                <RichTextLabel Name="OccupationName" Text="occupation name holder"/>
-                <RichTextLabel Name="AntagName" Text="antag name holder"/>
+                <RichTextLabel Name="CharacterName" Text="Name place holder" Margin="5 0"/>
+                <RichTextLabel Name="OccupationName" Text="occupation name holder" Margin="5 0"/>
+                <RichTextLabel Name="AntagName" Text="antag name holder" Margin="5 0"/>
             </BoxContainer>
-            <BoxContainer Name="ExperienceInfoContainer" Orientation="Vertical">
+            <BoxContainer Name="ExperienceInfoContainer" HorizontalExpand="True" VerticalExpand="True" Orientation="Vertical">
                 <BoxContainer Name="ExperienceVerification" Orientation="Horizontal">
-                    <RichTextLabel Name="BypassSkillCheckStatus" Text="bypass skill check holder"/>
-                    <RichTextLabel Name="BypassKnowledgeStatus" Text="bypass knowledge holder"/>
-                    <RichTextLabel Name="InitMaskShower" Text="init mask holder"/>
+                    <RichTextLabel Name="BypassSkillCheckStatus" Text="bypass skill check holder" Margin="5 0"/>
+                    <RichTextLabel Name="BypassKnowledgeStatus" Text="bypass knowledge holder" Margin="5 0"/>
+                    <RichTextLabel Name="InitMaskShower" Text="init mask holder" Margin="5 0"/>
                 </BoxContainer>
-                <ScrollContainer HScrollEnabled="False">
-                    <BoxContainer Name="SkillRedactor" Orientation="Vertical">
+                <ScrollContainer HScrollEnabled="False" VerticalExpand="True" HorizontalExpand="True" Margin="0 5">
+                    <BoxContainer Name="SkillRedactor" VerticalExpand="True" HorizontalExpand="True" Orientation="Vertical" Margin="0 5">
                         <!-- Added by code -->
                     </BoxContainer>
                 </ScrollContainer>
-                <BoxContainer Name="KnowledgeInfoContainer" Orientation="Vertical">
+                <BoxContainer Name="KnowledgeInfoContainer"  VerticalExpand="True" HorizontalExpand="True" Orientation="Vertical" Margin="0 5">
                     <BoxContainer Orientation="Horizontal">
-                        <RichTextLabel Text="{Loc 'experience-redactor-knowledge-name'}"/>
+                        <Label Text="{Loc 'experience-redactor-knowledge-name'}"/>
                         <OptionButton Name="KnowledgeOption"/>
                     </BoxContainer>
-                    <ScrollContainer HScrollEnabled="False">
-                        <BoxContainer Name="KnowledgeRedactor" Orientation="Vertical">
+                    <ScrollContainer HScrollEnabled="False" VerticalExpand="True" HorizontalExpand="True" Margin="10 5">
+                        <BoxContainer Name="KnowledgeRedactor" VerticalExpand="True" HorizontalExpand="True"
+                            HorizontalAlignment="Left" Orientation="Vertical" Margin="0 5">
                             <!-- Added by code -->
                         </BoxContainer>
                     </ScrollContainer>
                 </BoxContainer>
             </BoxContainer>
             <BoxContainer Name="SubmitButtonContainer" Orientation="Horizontal">
-
+                <Button Name="SubmitButton" Text="+SuBmIt+"/>
             </BoxContainer>
         </BoxContainer>
     </Control>

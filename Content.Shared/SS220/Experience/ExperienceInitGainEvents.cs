@@ -23,7 +23,4 @@ public enum InitGainedExperienceType : byte
 /// Raised directed on an entity when all spawning and post spawn procedures are done
 /// </summary>
 [ByRefEvent]
-public record struct AfterExperienceInitComponentGained()
-{
-    public InitGainedExperienceType Type { init; get; } = InitGainedExperienceType.JobInit;
-}
+public readonly record struct AfterExperienceInitComponentGained(InitGainedExperienceType Type = InitGainedExperienceType.JobInit);

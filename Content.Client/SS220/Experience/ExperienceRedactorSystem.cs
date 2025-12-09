@@ -1,33 +1,29 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using System.Linq;
+using Content.Client.SS220.Experience.Ui;
 using Content.Shared.SS220.Experience;
-using Content.Shared.SS220.Experience.Systems;
-using Robust.Client.Player;
+using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.Experience;
 
 public sealed class ExperienceRedactorSystem : EntitySystem
 {
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly ExperienceSystem _experience = default!;
     [Dependency] private readonly ExperienceInfoSystem _experienceInfo = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IUserInterfaceManager _userInterface = default!;
 
     public Dictionary<int, KnowledgePrototype> CachedIndexedKnowledge { private set; get; } = new();
 
-    /// <summary>
-    /// This field contains data for changes done in experience component before sending it to server <br/>
-    /// Validates changes in debug version
-    /// </summary>
-    public ExperienceData ExperienceData = new();
+    private ExperienceRedactorWindow? _window;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypeReload);
+        SubscribeNetworkEvent<OpenExperienceRedactorRequest>(OnRedactorRequest);
 
         ReloadCachedIndexedKnowledge();
     }
@@ -40,32 +36,21 @@ public sealed class ExperienceRedactorSystem : EntitySystem
         ReloadCachedIndexedKnowledge();
     }
 
-    public ExperienceData UpdateExperienceData(EntityUid uid)
+    private void OnRedactorRequest(OpenExperienceRedactorRequest args)
     {
-        ExperienceData = _experienceInfo.GetEntityExperienceData(uid);
-        return ExperienceData;
+        _window?.Close();
+        _window = _userInterface.CreateWindow<ExperienceRedactorWindow>();
+        _window?.OpenCentered();
+
+        if (args.Target is null)
+            return;
+
+        _window?.SelectEntity(GetEntity(args.Target.Value));
     }
 
-    public void RemoveKnowledge(int index)
+    public void SendChange(EntityUid target, ExperienceData data)
     {
-        if (!CachedIndexedKnowledge.TryGetValue(index, out var knowledgePrototype))
-        {
-            Log.Error($"Tried to remove unknown indexed knowledge with index {index}!");
-            return;
-        }
-
-        ExperienceData.Knowledges.Remove(knowledgePrototype.ID);
-    }
-
-    public void AddKnowledge(int index)
-    {
-        if (!CachedIndexedKnowledge.TryGetValue(index, out var knowledgePrototype))
-        {
-            Log.Error($"Tried to add unknown indexed knowledge with index {index}!");
-            return;
-        }
-
-        ExperienceData.Knowledges.Add(knowledgePrototype.ID);
+        RaiseNetworkEvent(new ChangeEntityExperienceRequest(GetNetEntity(target), data));
     }
 
     private void ReloadCachedIndexedKnowledge()

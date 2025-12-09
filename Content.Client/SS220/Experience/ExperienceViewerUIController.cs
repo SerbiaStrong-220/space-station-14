@@ -11,6 +11,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Utility;
 using Robust.Client.UserInterface;
 using Robust.Client.Player;
+using Content.Shared.SS220.Experience;
 
 namespace Content.Client.SS220.Experience;
 

@@ -119,6 +119,13 @@ public sealed partial class ExperienceSystem : EntitySystem
     {
         var treeProto = _prototype.Index(tree);
 
+        if (treeProto.SkillTree.Count <= info.SkillLevel)
+        {
+            info.SkillLevel = treeProto.SkillTree.Count;
+            info.SkillStudied = true;
+            info.SkillSublevel = 0;
+        }
+
         if (!CanProgressTree(info, treeProto))
         {
             info.SkillSublevel = 0;

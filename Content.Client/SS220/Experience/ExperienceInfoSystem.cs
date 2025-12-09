@@ -44,7 +44,7 @@ public sealed class ExperienceInfoSystem : EntitySystem
         if (uid is null)
             return data;
 
-        data.SkillDictionary = GetPlayerSkillData(uid.Value);
+        data.SkillDictionary = GetEntitySkillData(uid.Value);
 
         if (_experience.TryGetEntityKnowledge(uid.Value, ref _knowledges))
             data.Knowledges = [.. _knowledges];
@@ -53,15 +53,15 @@ public sealed class ExperienceInfoSystem : EntitySystem
     }
 
     public Dictionary<ProtoId<SkillTreeGroupPrototype>, List<(ProtoId<SkillTreePrototype>, SkillTreeExperienceContainer, FixedPoint4)>>
-        GetPlayerSkillData(EntityUid? uid)
+        GetEntitySkillData(Entity<ExperienceComponent?> entity)
     {
-        if (!TryComp<ExperienceComponent>(uid, out var experienceComponent))
+        if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
             return new();
 
-        var progressDict = experienceComponent.StudyingProgress;
-        var skillDict = experienceComponent.Skills;
+        var progressDict = entity.Comp.StudyingProgress;
+        var skillDict = entity.Comp.Skills;
 
-        var overrideSkills = experienceComponent.OverrideSkills;
+        var overrideSkills = entity.Comp.OverrideSkills;
 
         Dictionary<ProtoId<SkillTreeGroupPrototype>,
                     List<(ProtoId<SkillTreePrototype>,
@@ -72,7 +72,7 @@ public sealed class ExperienceInfoSystem : EntitySystem
         {
             if (!_prototype.Resolve(key, out var keyProto))
             {
-                Log.Error($"Cant resolve skill prototype with id {key} on entity {ToPrettyString(uid)}");
+                Log.Error($"Cant resolve skill prototype with id {key} on entity {ToPrettyString(entity)}");
                 continue;
             }
 
@@ -91,20 +91,4 @@ public sealed class ExperienceInfoSystem : EntitySystem
 
         return result;
     }
-}
-
-public sealed class SkillTreeExperienceContainer(SkillTreeExperienceInfo info, SkillTreeExperienceInfo? overrideInfo = null)
-{
-    public SkillTreeExperienceInfo Info = info;
-    public SkillTreeExperienceInfo? OverrideInfo = overrideInfo;
-}
-
-public sealed class ExperienceData
-{
-    public Dictionary<ProtoId<SkillTreeGroupPrototype>,
-                    List<(ProtoId<SkillTreePrototype>,
-                    SkillTreeExperienceContainer,
-                    FixedPoint4)>> SkillDictionary = new();
-
-    public HashSet<ProtoId<KnowledgePrototype>> Knowledges = new();
 }

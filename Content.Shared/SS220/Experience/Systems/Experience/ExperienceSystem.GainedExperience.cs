@@ -11,7 +11,8 @@ public sealed partial class ExperienceSystem : EntitySystem
     {
         SubscribeLocalEvent<ExperienceComponent, AfterExperienceInitComponentGained>(OnPlayerMobAfterSpawned);
 
-        SubscribeInitComponent<SkillForcedAddComponent>(SkillAddOnSkillTreeAdded, KnowledgeAddOnKnowledgeInitial);
+        SubscribeInitComponent<SkillForcedAddComponent>(SkillForceSetOnSkillTreeAdded, KnowledgeForceSetOnKnowledgeInitial);
+
         SubscribeInitComponent<SkillRoleAddComponent>(SkillAddOnSkillTreeAdded, KnowledgeAddOnKnowledgeInitial);
         SubscribeInitComponent<SkillBackgroundAddComponent>(SkillAddOnSkillTreeAdded, KnowledgeAddOnKnowledgeInitial);
     }
@@ -65,12 +66,27 @@ public sealed partial class ExperienceSystem : EntitySystem
         }
     }
 
+    private void SkillForceSetOnSkillTreeAdded<T>(Entity<T> entity, ref SkillTreeAddedEvent args) where T : SkillBaseAddComponent
+    {
+        if (args.DenyChanges)
+            return;
+
+        args.DenyChanges = true;
+
+        if (entity.Comp.Skills.TryGetValue(args.SkillTree, out var info))
+        {
+            args.Info.SkillLevel = info.SkillLevel;
+            args.Info.SkillSublevel = info.SkillSublevel;
+            args.Info.SkillStudied = info.SkillStudied;
+        }
+    }
+
     private void SkillAddOnSkillTreeAdded<T>(Entity<T> entity, ref SkillTreeAddedEvent args) where T : SkillBaseAddComponent
     {
         if (args.DenyChanges)
             return;
 
-        if (_prototype.TryIndex(entity.Comp.SkillAddId, out var skillAddProto)
+        if (entity.Comp.SkillAddId is not null && _prototype.TryIndex(entity.Comp.SkillAddId, out var skillAddProto)
             && skillAddProto.Skills.TryGetValue(args.SkillTree, out var infoProto))
         {
             args.Info.SkillLevel += infoProto.SkillLevel;
@@ -86,12 +102,22 @@ public sealed partial class ExperienceSystem : EntitySystem
         }
     }
 
+    private void KnowledgeForceSetOnKnowledgeInitial<T>(Entity<T> entity, ref KnowledgeInitial args) where T : SkillBaseAddComponent
+    {
+        if (args.DenyChanges)
+            return;
+
+        args.DenyChanges = true;
+
+        args.Knowledges = entity.Comp.Knowledges;
+    }
+
     private void KnowledgeAddOnKnowledgeInitial<T>(Entity<T> entity, ref KnowledgeInitial args) where T : SkillBaseAddComponent
     {
         if (args.DenyChanges)
             return;
 
-        if (_prototype.TryIndex(entity.Comp.SkillAddId, out var skillAddProto))
+        if (entity.Comp.SkillAddId is not null && _prototype.TryIndex(entity.Comp.SkillAddId, out var skillAddProto))
             args.Knowledges.UnionWith(skillAddProto.Knowledges);
 
         args.Knowledges.UnionWith(entity.Comp.Knowledges);

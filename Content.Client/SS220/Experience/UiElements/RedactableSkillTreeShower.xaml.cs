@@ -34,7 +34,10 @@ public sealed partial class RedactableSkillTreeShower : BoxContainer
         if (!_prototype.Resolve(skillTreeId, out var skillTree))
             return;
 
-        _maxLevel = skillTree.SkillTree.Count - 1;
+        _skillTreeId = skillTreeId;
+        SkillTreeName.SetMessage(Loc.GetString(skillTree.SkillTreeName));
+
+        _maxLevel = skillTree.SkillTree.Count;
         _maxSublevels = [.. skillTree.SkillTree.Select(x => _prototype.Index(x).LevelInfo.MaximumSublevel)];
 
         _skillTreeInfo = new(info.Info);
