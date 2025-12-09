@@ -82,8 +82,7 @@ public sealed class SelfLinkedTeleportSystem : SharedSelfLinkedTeleportSystem
         if (ent.Comp.LinkedEntity == null)//we shouldn't interact  at all if we are  here
             return;
 
-        //ToDo_SS220 figure out pulling shit and check migo
-        if (TryComp(ent, out PullerComponent? puller) && TryComp(puller.Pulling, out PullableComponent? pullable))
+        if (TryComp(user, out PullerComponent? puller) && TryComp(puller.Pulling, out PullableComponent? pullable))
             _pulling.TryStopPull(puller.Pulling.Value, pullable);
 
         _adminLogger.Add(LogType.Teleport, $"{ToPrettyString(user):user} used linked telepoter {ToPrettyString(ent):teleport enter} and tried teleport {ToPrettyString(target):target} to {ToPrettyString(ent.Comp.LinkedEntity.Value):teleport exit}");
