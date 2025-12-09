@@ -170,8 +170,9 @@ public sealed class FieldShieldProviderSystem : EntitySystem
 
     private void UpdateShieldTimer(Entity<FieldShieldComponent> entity)
     {
-        entity.Comp.RechargeEndTime = _gameTiming.CurTime > entity.Comp.RechargeEndTime
-                                        ? _gameTiming.CurTime + entity.Comp.RechargeShieldData.RechargeTime
+        var newRechargeTime = _gameTiming.CurTime + entity.Comp.RechargeShieldData.RechargeTime;
+        entity.Comp.RechargeEndTime = newRechargeTime > entity.Comp.RechargeEndTime
+                                        ? newRechargeTime
                                         : entity.Comp.RechargeEndTime;
 
         // ensure comp breaks prediction reset

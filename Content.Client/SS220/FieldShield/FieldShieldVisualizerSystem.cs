@@ -80,12 +80,8 @@ public sealed class FieldShieldVisualizerSystem : EntitySystem
         if (!_sprite.LayerMapTryGet((entity, sprite), FieldShieldVisualLayers.Shield, out var index, false))
             return;
 
-        var shieldCharge = _gameTiming.CurTime > entity.Comp.RechargeEndTime + entity.Comp.RechargeShieldData.RechargeTime
-                            ? entity.Comp.ShieldData.ShieldMaxCharge
-                            : entity.Comp.ShieldCharge;
-
-        var shieldChargeRelative = Math.Clamp((float)shieldCharge / entity.Comp.ShieldData.ShieldMaxCharge, 0f, 1f);
-        var shieldWork = shieldCharge > 0;
+        var shieldChargeRelative = Math.Clamp((float)entity.Comp.ShieldCharge / entity.Comp.ShieldData.ShieldMaxCharge, 0f, 1f);
+        var shieldWork = entity.Comp.ShieldCharge > 0;
 
         _sprite.LayerSetVisible((entity, sprite), index, shieldWork);
 
