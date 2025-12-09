@@ -11,13 +11,13 @@
     - type: Gun
       soundGunshot: /Audio/SS220/Weapons/Guns/CultYogg/spitballer_shot.ogg
       soundEmpty: null
-      fireRate: 13
+      fireRate: 0.5
       projectileSpeed: 9
     - type: BasicEntityAmmoProvider
       proto: SpitballerGunBullet
-      capacity: 1
+      capacity: 3
     - type: RechargeBasicEntityAmmo
-      rechargeCooldown: 10
+      rechargeCooldown: 7
       rechargeSound: /Audio/SS220/Weapons/Guns/CultYogg/spitballer_reload.ogg
     - type: Sprite
       sprite: SS220/Objects/Weapons/Guns/CultYogg/cult_yogg_spitballer.rsi

@@ -87,13 +87,13 @@
       heal:
         types:
           Slash: -6
-          Blunt: -6
+          Blunt: -10
           Piercing: -6
           Heat: -4
           Cold: -4
           Shock: -4
           Radiation: -1
-          Сerebral: -20
+          Cerebral: -20
           Caustic: -3
           Cellular: -5
           Poison: -3
@@ -103,6 +103,7 @@
       modifyStamina: -5
       bloodlossModifier: -1
       modifyBloodLevel: 2
+      ModifyBleed: -1.5
 
 - type: entity
   id: ActionMiGoAstral
