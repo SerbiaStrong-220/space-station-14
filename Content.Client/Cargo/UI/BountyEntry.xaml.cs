@@ -11,6 +11,7 @@ using Serilog;
 
 namespace Content.Client.Cargo.UI;
 
+
 [GenerateTypedNameReferences]
 public sealed partial class BountyEntry : BoxContainer
 {

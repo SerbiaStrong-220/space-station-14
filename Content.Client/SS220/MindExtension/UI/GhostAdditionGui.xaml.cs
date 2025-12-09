@@ -20,8 +20,6 @@ public sealed partial class GhostAdditionGui : UIWidget
 
         RespawnButton.OnPressed += _ => RespawnPressed?.Invoke();
         BodyMenuButton.OnPressed += _ => ReturnToBodyPressed?.Invoke();
-
-        BodyMenuButton.Text = Loc.GetString("mind-ext-body-menu-button");
     }
 
     public void SetRespawnTimer(TimeSpan respawnTime, TimeSpan currentTime)

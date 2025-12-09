@@ -1,6 +1,4 @@
-using Content.Shared.Ghost;
 using Content.Shared.SS220.MindExtension;
-using Content.Shared.SS220.MindExtension.Events;
 using Robust.Shared.Network;
 
 namespace Content.Server.SS220.MindExtension;
@@ -61,8 +59,9 @@ public partial class MindExtensionSystem : EntitySystem //MindTransferSystem
     public void Suicide(EntityUid invoker, NetUserId player)
     {
         // Если сущность жива, то делать нечего.
-        if (!(_mobState.IsCritical(invoker) || _mobState.IsDead(invoker)))
-            return;
+        // P.S. Даже если сущность жива, делать есть чего.
+        /*if (!(_mobState.IsCritical(invoker) || _mobState.IsDead(invoker)))
+            return;*/
 
         if (!TryGetMindExtension(player, out var mindExtEnt))
             return;
