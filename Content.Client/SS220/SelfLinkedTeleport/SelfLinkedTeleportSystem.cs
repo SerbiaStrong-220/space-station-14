@@ -4,8 +4,6 @@ using Content.Shared.SS220.SelfLinkedTeleport;
 
 namespace Content.Client.SS220.SelfLinkedTeleport;
 
-/// <summary>
-/// </summary>
 public sealed class SelfLinkedTeleportSystem : SharedSelfLinkedTeleportSystem
 {
     public override void Initialize()

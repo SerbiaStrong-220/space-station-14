@@ -1,6 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Server.Station.Systems;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Construction.EntitySystems;
@@ -26,7 +25,6 @@ public sealed class TeleportationChasmSystem : SharedTeleportationChasmSystem
     [Dependency] private readonly AnchorableSystem _anchorable = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly StationSystem _stationSystem = default!;
 
     public override void Initialize()
     {
@@ -68,7 +66,7 @@ public sealed class TeleportationChasmSystem : SharedTeleportationChasmSystem
         var locations = EntityQueryEnumerator<PoweredLightComponent, TransformComponent>();
         while (locations.MoveNext(out var uid, out _, out var transform))
         {
-            var owningStation = _stationSystem.GetOwningStation(uid);//rude, but working
+            var owningStation = _station.GetOwningStation(uid);//rude, but working
 
             if (owningStation != station)
                 continue;
