@@ -1,4 +1,3 @@
-using System.Linq;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Components;
 using Content.Shared.Administration.Logs;
@@ -21,6 +20,7 @@ using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Item;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Events;
+using Content.Shared.Paper;
 using Content.Shared.Popups;
 using Content.Shared.Pulling.Events;
 using Content.Shared.Rejuvenate;
@@ -34,6 +34,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
+using System.Linq;
 using PullableComponent = Content.Shared.Movement.Pulling.Components.PullableComponent;
 
 namespace Content.Shared.Cuffs
@@ -94,7 +95,14 @@ namespace Content.Shared.Cuffs
         private void CheckInteract(Entity<CuffableComponent> ent, ref InteractionAttemptEvent args)
         {
             if (!ent.Comp.CanStillInteract)
-                args.Cancelled = true;
+            {
+                // SS220 cuffed reading
+                if (!HasComp<PaperComponent>(args.Target))
+                {
+                    args.Cancelled = true;
+                }
+                // SS220 cuffed reading
+            }
         }
 
         private void OnUncuffAttempt(ref UncuffAttemptEvent args)
