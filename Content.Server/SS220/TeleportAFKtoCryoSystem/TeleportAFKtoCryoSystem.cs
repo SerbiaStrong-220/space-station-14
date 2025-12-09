@@ -24,6 +24,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using System.Linq;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.TeleportAFKtoCryoSystem;
 
@@ -53,7 +54,7 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
         base.Initialize();
 
         _cfg.OnValueChanged(CCVars220.AfkTeleportToCryo, SetAfkTeleportToCryo, true);
-        _cfg.OnValueChanged(CCVars220.SDDTimeOut, SetSSDTimeout, true);
+        _cfg.OnValueChanged(CCVars220.SSDTimeOut, SetSSDTimeout, true);
 
         _playerManager.PlayerStatusChanged += OnPlayerChange;
 
@@ -78,7 +79,7 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
         base.Shutdown();
 
         _cfg.UnsubValueChanged(CCVars220.AfkTeleportToCryo, SetAfkTeleportToCryo);
-        _cfg.UnsubValueChanged(CCVars220.SDDTimeOut, SetSSDTimeout);
+        _cfg.UnsubValueChanged(CCVars220.SSDTimeOut, SetSSDTimeout);
 
         _playerManager.PlayerStatusChanged -= OnPlayerChange;
     }
@@ -174,15 +175,19 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
         if (station is null)
             return false;
 
+        // this cant be null, cauze GetOwningStation check xform.GridUid, but..., just for sure
+        if (xform.GridUid == null)
+            return false;
+
         if (TargetAlreadyInCryo(target))
             return true;
 
         HashSet<Entity<CryostorageComponent>> cryoStorageOnGrid = new();
-        _entityLookup.GetGridEntities(station.Value, cryoStorageOnGrid);
+        _entityLookup.GetGridEntities(xform.GridUid.Value, cryoStorageOnGrid);
 
         foreach (var cryo in cryoStorageOnGrid)
         {
-            if (TryTeleportToCryo(target, cryo, station.Value, cryo.Comp.TeleportPortralID))
+            if (TryTeleportToCryo(target, cryo, station.Value, cryo.Comp.TeleportPortalId))
                 return true;
         }
 
@@ -194,7 +199,7 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
         return EntityQuery<CryostorageComponent>().Any(comp => comp.StoredPlayers.Contains(target));
     }
 
-    private bool TryTeleportToCryo(EntityUid target, EntityUid cryopodUid, EntityUid station, string teleportPortralID)
+    private bool TryTeleportToCryo(EntityUid target, EntityUid cryopodUid, EntityUid station, EntProtoId teleportPortalId)
     {
         if (station != _station.GetOwningStation(cryopodUid))
             return false;
@@ -209,7 +214,7 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
             return true;
         }
 
-        var portal = Spawn(teleportPortralID, Transform(target).Coordinates);
+        var portal = Spawn(teleportPortalId, Transform(target).Coordinates);
 
         if (TryComp<AmbientSoundComponent>(portal, out var ambientSoundComponent))
             _audioSystem.PlayPvs(ambientSoundComponent.Sound, portal);
