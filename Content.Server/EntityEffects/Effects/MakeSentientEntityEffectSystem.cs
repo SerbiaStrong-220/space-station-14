@@ -16,6 +16,7 @@ namespace Content.Server.EntityEffects.Effects;
 public sealed partial class MakeSentientEntityEffectSystem : EntityEffectSystem<MetaDataComponent, MakeSentient>
 {
     [Dependency] private readonly LanguageSystem _language = default!; //ss220-cognizine-language-fix
+
     protected override void Effect(Entity<MetaDataComponent> entity, ref EntityEffectEvent<MakeSentient> args)
     {
         // Let affected entities speak normally to make this effect different from, say, the "random sentience" event
@@ -26,14 +27,16 @@ public sealed partial class MakeSentientEntityEffectSystem : EntityEffectSystem<
             RemComp<ReplacementAccentComponent>(entity);
             // TODO: Make MonkeyAccent a replacement accent and remove MonkeyAccent code-smell.
             RemComp<MonkeyAccentComponent>(entity);
-        }
 
-        // SS220-cognizine-language-fix-begin
-        if (TryComp<LanguageComponent>(entity, out var languageComp))
-        {
-            _language.EnsureLanguage((entity, languageComp), _language.GalacticLanguage, true);
+            // SS220-cognizine-language-fix-begin
+            if (TryComp<LanguageComponent>(entity, out var languageComp))
+            {
+                var definition = _language.EnsureLanguage((entity, languageComp), _language.GalacticLanguage);
+                definition.CanSpeak = true;
+                Dirty(entity, languageComp);
+            }
+            // SS220-cognizine-language-fix-end
         }
-        // SS220-cognizine-language-fix-end
 
         // Stops from adding a ghost role to things like people who already have a mind
         if (TryComp<MindContainerComponent>(entity, out var mindContainer) && mindContainer.HasMind)
