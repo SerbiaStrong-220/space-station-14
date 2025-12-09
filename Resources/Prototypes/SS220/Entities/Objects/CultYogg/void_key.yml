@@ -40,6 +40,9 @@
   - type: SpawnOnDespawn
     prototype: VoidPortalClosed
   - type: InteractionTeleport
+    userWhitelist:
+      components:
+      - HumanoidAppearance
   - type: RandomTeleport
     targetsComponent: "PoweredLight" #ToDo_SS220 make special entity + component for this
   - type: AfterTeleportEffects

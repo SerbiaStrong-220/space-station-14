@@ -32,6 +32,6 @@ public sealed partial class InteractionTeleportComponent : Component
     ///     How long we are entering teleport
     /// </summary>
     [DataField]
-    public TimeSpan TeleportDoAfterTime = TimeSpan.FromSeconds(5);
+    public TimeSpan TeleportDoAfterTime = TimeSpan.FromSeconds(3);
 }
 
