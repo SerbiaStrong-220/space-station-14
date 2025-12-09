@@ -1,14 +1,17 @@
 using Content.Server.Administration.Managers;
 using Content.Server.Administration.Systems;
 using Content.Server.Mind;
+using Content.Server.Silicons.Borgs;
 using Content.Shared.Bed.Cryostorage;
 using Content.Shared.Ghost;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.SS220.MindExtension;
 using Content.Shared.SS220.MindExtension.Events;
+using Robust.Server.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
@@ -21,6 +24,9 @@ public sealed partial class MindExtensionSystem : EntitySystem
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly IAdminManager _admin = default!;
+    [Dependency] private readonly BorgSystem _borg = default!;
+    [Dependency] private readonly ContainerSystem _container = default!;
+
 
     private EntityQuery<GhostComponent> _ghostQuery;
     private EntityQuery<MindExtensionComponent> _mindExtQuery;
@@ -103,12 +109,22 @@ public sealed partial class MindExtensionSystem : EntitySystem
 
     private void ChangeOrAddTrailPoint(MindExtensionComponent comp, EntityUid entity, bool isAbandoned)
     {
-        if (!IsAvaibleToRememberEntity(entity))
+        if (HasComp<GhostComponent>(entity))
             return;
+
+        if (TryComp<BorgChassisComponent>(entity, out var chassisComp))
+        {
+            if (chassisComp?.BrainContainer.ContainedEntity is null)
+                return;
+
+            entity = (EntityUid)chassisComp.BrainContainer.ContainedEntity;
+        }
 
         if (comp.Trail.ContainsKey(entity))
         {
-            comp.Trail[entity].IsAbandoned = isAbandoned;
+            var trailMetaData = comp.Trail[entity];
+            trailMetaData.IsAbandoned = isAbandoned;
+            comp.Trail[entity] = trailMetaData;
             return;
         }
 
@@ -121,45 +137,6 @@ public sealed partial class MindExtensionSystem : EntitySystem
             IsAbandoned = isAbandoned
         });
     }
-
-    #endregion
-
-    #region Validators
-    private bool IsAvaibleToRememberEntity(EntityUid? entity)
-    {
-        if (HasComp<GhostComponent>(entity))
-            return false;
-
-        return true;
-    }
-
-    private BodyStateToEnter IsAvaibleToEnterEntity(
-        EntityUid target,
-        MindExtensionComponent mindExtension,
-        NetUserId session)
-    {
-
-        if (!_entityManager.EntityExists(target))
-            return BodyStateToEnter.Destroyed;
-
-        if (TryComp<CryostorageContainedComponent>(target, out var cryo))
-            return BodyStateToEnter.InCryo;
-
-        //При Visit MindConatainer может остаться, как и Mind. Нужно проверить, не является-ли этот Mind своим.
-        //Если Mind не свой, значит тело занято.
-        if (TryComp<MindContainerComponent>(target, out var mindContainer) && mindContainer.Mind is not null)
-            if (TryComp<MindComponent>(mindContainer.Mind, out var mind) && mind.UserId != session)
-                return BodyStateToEnter.Engaged;
-
-        if (mindExtension.Trail.TryGetValue(target, out var metaData))
-        {
-            if (metaData.IsAbandoned)
-                return BodyStateToEnter.Abandoned;
-        }
-
-        return BodyStateToEnter.Avaible;
-    }
-
 
     #endregion
 }

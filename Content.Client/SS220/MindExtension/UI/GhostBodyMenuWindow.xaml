@@ -1,22 +1,37 @@
 <local:GhostBodyMenuWindow xmlns="https://spacestation14.io"
                            xmlns:local="clr-namespace:Content.Client.SS220.MindExtension.UI"
-                           MinSize="450 450"
-                           SetSize="450 450"
-                           Title="Список посещенных сущностей">
+                           xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                           Title="{Loc 'mind-ext-body-menu'}"
+                           SetSize="570 450"
+                           MinSize="500 450">
     <BoxContainer Orientation="Vertical"
-                  HorizontalExpand="True"
-                  SizeFlagsStretchRatio="0.4">
-        <ScrollContainer Name="GhostScroll"
-                         VerticalExpand="True"
-                         HorizontalExpand="True"
-                         HScrollEnabled="False">
-            <BoxContainer Name="BodyList"
-                          Orientation="Vertical"
-                          HorizontalExpand="True"
-                          VerticalExpand="True"
-                          SeparationOverride="5">
-                
+                  VerticalExpand="True"
+                  HorizontalExpand="True">
+        <PanelContainer HorizontalExpand="True"
+                        VerticalExpand="True">
+            <PanelContainer.PanelOverride>
+                <gfx:StyleBoxFlat BackgroundColor="#1B1B1E" />
+            </PanelContainer.PanelOverride>
+            <ScrollContainer Name="GhostScroll"
+                             VerticalExpand="True"
+                             HorizontalExpand="True"
+                             HScrollEnabled="False">
+                <BoxContainer Name="BodyList"
+                              Orientation="Vertical"
+                              HorizontalExpand="True"
+                              VerticalExpand="True">
+
+                </BoxContainer>
+            </ScrollContainer>
+        </PanelContainer>
+
+        <!--Footer-->
+        <BoxContainer Orientation="Vertical">
+            <PanelContainer StyleClasses="LowDivider"/>
+            <BoxContainer Orientation="Horizontal" Margin="10 2 5 0" VerticalAlignment="Bottom">
+                <Label Text="{Loc 'mind-ext-body-menu-footer'}" StyleClasses="WindowFooterText"/>
             </BoxContainer>
-        </ScrollContainer>
+        </BoxContainer>
     </BoxContainer>
+    
 </local:GhostBodyMenuWindow>

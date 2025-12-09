@@ -1,30 +1,41 @@
 <local:GhostBodyCard xmlns="https://spacestation14.io"
                      xmlns:local="clr-namespace:Content.Client.SS220.MindExtension.UI"
-                     HorizontalExpand="true">
+                     xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
+                     HorizontalExpand="True"
+                     Margin="10 10 10 0">
 
-    <BoxContainer Name="Border"
-                  HorizontalExpand="True"
-                  Margin="10 0 10 10">
-        
-        <BoxContainer HorizontalExpand="True"
-                      Margin="1">
-            
-            <BoxContainer Orientation="Vertical">
-                <Label Name="BodyNameLabel"/>
-                <Label Name="BodyStateLabel"
-                          HorizontalExpand="True"/>
-                <Label Name="BodyDescriptionLabel"
-                          HorizontalExpand="False"/>
-            </BoxContainer>
+    <PanelContainer StyleClasses="AngleRect"
+                    HorizontalExpand="True">
+
+        <PanelContainer HorizontalExpand="True">
 
             <BoxContainer Orientation="Vertical"
-                          HorizontalAlignment="Right"
-                          MinWidth="100"
+                          Margin="0 0 190 0"
                           HorizontalExpand="True">
-                <Button Name="FollowButton" Text="Следовать" Disabled="true"/>
-                <Button Name="ToBodyButton" Text="Вернуться в тело" Disabled="true"/>
+                <Label Name="BodyNameLabel"
+                       StyleClasses="LabelKeyText"/>
+                <Label Name="BodyStateLabel"
+                       StyleClasses="LabelSubText"/>
+                <RichTextLabel Name="BodyDescriptionLabel"
+                               StyleClasses="LabelSubText"/>
             </BoxContainer>
-        </BoxContainer>
-    </BoxContainer>
+
+            <customControls:VSeparator Margin="0 5 180 5"
+                                       HorizontalAlignment="Right"
+                                       SetWidth="1"/>
+            
+            <BoxContainer Orientation="Vertical"
+                          HorizontalAlignment="Right"
+                          VerticalAlignment="Center"
+                          MinWidth="170">
+                <Button Name="FollowButton"
+                        Disabled="true"
+                        Text="{Loc 'mind-ext-follow-button'}"/>
+                <Button Name="ToBodyButton"
+                        Disabled="true"
+                        Text="{Loc 'mind-ext-return-button'}"/>
+            </BoxContainer>
+        </PanelContainer>
+    </PanelContainer>
 
 </local:GhostBodyCard>

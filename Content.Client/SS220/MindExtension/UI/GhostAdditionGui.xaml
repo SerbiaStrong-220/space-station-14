@@ -3,6 +3,6 @@
                           HorizontalAlignment="Center">
     <BoxContainer Orientation="Horizontal">
         <Button Name="RespawnButton" Text="RESPAWN"/>
-        <Button Name="ReturnToBodyButton" Text="Вернуться к прошлой жизни"/>
+        <Button Name="BodyMenuButton" Text="Вернуться к прошлой жизни"/>
     </BoxContainer>
 </local:GhostAdditionGui>

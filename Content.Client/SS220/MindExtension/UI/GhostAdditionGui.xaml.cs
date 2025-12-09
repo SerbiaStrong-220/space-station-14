@@ -19,19 +19,22 @@ public sealed partial class GhostAdditionGui : UIWidget
         BodyMenuWindow = new GhostBodyMenuWindow();
 
         RespawnButton.OnPressed += _ => RespawnPressed?.Invoke();
-        ReturnToBodyButton.OnPressed += _ => ReturnToBodyPressed?.Invoke();
+        BodyMenuButton.OnPressed += _ => ReturnToBodyPressed?.Invoke();
+
+        BodyMenuButton.Text = Loc.GetString("mind-ext-body-menu-button");
     }
 
     public void SetRespawnTimer(TimeSpan respawnTime, TimeSpan currentTime)
     {
         if (respawnTime > currentTime)
         {
-            RespawnButton.Text = $"В лобби {respawnTime.Minutes}:{respawnTime.Seconds}";
+            RespawnButton.Text = $"{Loc.GetString("mind-ext-respawn-button")}" +
+                $" {respawnTime.Minutes}:{respawnTime.Seconds}";
             RespawnButton.Disabled = true;
         }
         else
         {
-            RespawnButton.Text = $"В лобби";
+            RespawnButton.Text = Loc.GetString("mind-ext-respawn-button");
             RespawnButton.Disabled = false;
         }
 
