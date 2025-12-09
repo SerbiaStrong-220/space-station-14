@@ -5,15 +5,18 @@
   parent: BaseSelfLinkedPortalCult
   components:
   - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/CultYogg/portal_gates.rsi
     layers:
-      - sprite: SS220/Structures/CultYogg/fungus_hydroponic.rsi
-        state: base
+      - state: base
+      - state: portal
+        shader: unshaded
   - type: PointLight #ToDo_SS220 figure out color differentiation
     color: SkyBlue
     radius: 3
     energy: 1
     netsync: false
-  - type: SelfLinkedTeleport #ToDo_SS220 add whitelist
+  - type: SelfLinkedTeleport
     whitelistLinked:
       tags:
       - CultYoggTeleportExit
@@ -22,7 +25,7 @@
     - CultYoggTeleportEnter
   - type: Damageable
     damageContainer: Inorganic
-    damageModifierSet: Electronic
+    damageModifierSet: Metallic
   - type: Destructible
     thresholds:
     - trigger:
@@ -31,22 +34,21 @@
       behaviors:
       - !type:PlaySoundBehavior
         sound:
-          collection: GlassBreak
-      - !type:ChangeConstructionNodeBehavior
-        node: monitorBroken
+          collection: MetalBreak
       - !type:DoActsBehavior
         acts: ["Destruction"]
-
-
 
 - type: entity
   id: VoidTeleportExit
   parent: BaseSelfLinkedPortalCult
   components:
   - type: Sprite
+    noRot: true
+    sprite: SS220/Structures/CultYogg/portal_gates.rsi
     layers:
-      - sprite: SS220/Structures/CultYogg/fungus_hydroponic.rsi
-        state: base
+      - state: base
+      - state: portal
+        shader: unshaded
   - type: PointLight #ToDo_SS220 figure out color differentiation
     color: SkyBlue
     radius: 3

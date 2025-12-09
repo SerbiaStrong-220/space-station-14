@@ -15698,7 +15698,7 @@ entities:
       parent: 1
     - type: MetaData
       name: Бездна
-- proto: VoidTeleportEnter
+- proto: VoidTeleportExit
   entities:
   - uid: 3100
     components:
