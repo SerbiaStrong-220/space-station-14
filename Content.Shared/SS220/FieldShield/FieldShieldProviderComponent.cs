@@ -16,15 +16,15 @@ public sealed partial class FieldShieldProviderComponent : Component
     [AutoNetworkedField]
     public TimeSpan UnLockAfterEmpTime;
 
-    [DataField]
+    [DataField(required: true)]
     [AutoNetworkedField]
-    public ShieldData ShieldData = default;
+    public FieldShieldData ShieldData;
 
-    [DataField]
+    [DataField(required: true)]
     [AutoNetworkedField]
-    public RechargeShieldData RechargeShieldData = default;
+    public FieldShieldRechargeData RechargeShieldData;
 
-    [DataField]
+    [DataField(required: true)]
     [AutoNetworkedField]
-    public ShieldLightData LightData = default;
+    public FieldShieldLightData LightData;
 }

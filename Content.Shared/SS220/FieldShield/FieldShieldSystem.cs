@@ -6,6 +6,7 @@ using Content.Shared.Examine;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.FieldShield;
@@ -23,6 +24,7 @@ public sealed class FieldShieldProviderSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<FieldShieldComponent, MapInitEvent>(OnFieldShieldMapInit);
+        SubscribeLocalEvent<FieldShieldComponent, ComponentRemove>(OnFieldShieldRemove);
 
         SubscribeLocalEvent<FieldShieldComponent, ExaminedEvent>(OnFieldShieldExamined);
         SubscribeLocalEvent<FieldShieldProviderComponent, ExaminedEvent>(OnFieldShieldProviderExamined);
@@ -40,21 +42,44 @@ public sealed class FieldShieldProviderSystem : EntitySystem
         SubscribeLocalEvent<FieldShieldComponent, EmpPulseEvent>(OnFieldShieldEmpPulse);
     }
 
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var fieldShields = EntityQueryEnumerator<FieldShieldComponent, UpdateQueuedFieldShieldComponent>();
+
+        while (fieldShields.MoveNext(out var uid, out var comp, out var updateComp))
+        {
+            if (_gameTiming.CurTime < comp.RechargeEndTime)
+                continue;
+
+            RemCompDeferred(uid, updateComp);
+            comp.ShieldCharge = comp.ShieldData.ShieldMaxCharge;
+
+            DirtyField(uid, comp, nameof(FieldShieldComponent.ShieldCharge));
+        }
+    }
+
     private void OnFieldShieldMapInit(Entity<FieldShieldComponent> entity, ref MapInitEvent _)
     {
-        entity.Comp.RechargeStartTime = _gameTiming.CurTime;
-        DirtyField(entity!, nameof(FieldShieldComponent.RechargeStartTime));
+        entity.Comp.RechargeEndTime = _gameTiming.CurTime + entity.Comp.RechargeShieldData.RechargeTime;
+
+        EnsureComp<UpdateQueuedFieldShieldComponent>(entity);
+        DirtyField(entity!, nameof(FieldShieldComponent.RechargeEndTime));
+    }
+
+    private void OnFieldShieldRemove(Entity<FieldShieldComponent> entity, ref ComponentRemove _)
+    {
+        RemCompDeferred<UpdateQueuedFieldShieldComponent>(entity);
     }
 
     private void OnFieldShieldExamined(Entity<FieldShieldComponent> entity, ref ExaminedEvent args)
     {
-        var charges = entity.Comp.RechargeStartTime + entity.Comp.RechargeShieldData.RechargeTime > _gameTiming.CurTime ? entity.Comp.ShieldCharge : entity.Comp.ShieldData.ShieldMaxCharge;
-
         if (entity.Owner == args.Examiner)
         {
-            args.PushMarkup(Loc.GetString("field-shield-self-examine", ("Charges", charges), ("MaxCharge", entity.Comp.ShieldData.ShieldMaxCharge)), ForceFieldPushPriority);
+            args.PushMarkup(Loc.GetString("field-shield-self-examine", ("Charges", entity.Comp.ShieldCharge), ("MaxCharge", entity.Comp.ShieldData.ShieldMaxCharge)), ForceFieldPushPriority);
         }
-        else if (charges > 0)
+        else if (entity.Comp.ShieldCharge > 0)
         {
             args.PushMarkup(Loc.GetString("field-shield-other-examine"), ForceFieldPushPriority);
         }
@@ -94,7 +119,7 @@ public sealed class FieldShieldProviderSystem : EntitySystem
         shieldComp.RechargeShieldData = entity.Comp.RechargeShieldData;
         shieldComp.LightData = entity.Comp.LightData;
 
-        shieldComp.RechargeStartTime = _gameTiming.CurTime;
+        shieldComp.RechargeEndTime = _gameTiming.CurTime + entity.Comp.RechargeShieldData.RechargeTime;
         Dirty(args.Equipee, shieldComp);
     }
 
@@ -145,11 +170,15 @@ public sealed class FieldShieldProviderSystem : EntitySystem
 
     private void UpdateShieldTimer(Entity<FieldShieldComponent> entity)
     {
-        if (_gameTiming.CurTime > entity.Comp.RechargeStartTime + entity.Comp.RechargeShieldData.RechargeTime)
-            entity.Comp.ShieldCharge = entity.Comp.ShieldData.ShieldMaxCharge;
+        entity.Comp.RechargeEndTime = _gameTiming.CurTime > entity.Comp.RechargeEndTime
+                                        ? _gameTiming.CurTime + entity.Comp.RechargeShieldData.RechargeTime
+                                        : entity.Comp.RechargeEndTime;
 
-        entity.Comp.RechargeStartTime = _gameTiming.CurTime > entity.Comp.RechargeStartTime ? _gameTiming.CurTime : entity.Comp.RechargeStartTime;
-        DirtyField(entity!, nameof(FieldShieldComponent.RechargeStartTime));
+        // ensure comp breaks prediction reset
+        if (_gameTiming.IsFirstTimePredicted)
+            EnsureComp<UpdateQueuedFieldShieldComponent>(entity);
+
+        DirtyField(entity!, nameof(FieldShieldComponent.RechargeEndTime));
     }
 
     private void OnFieldShieldProviderEmpPulse(Entity<FieldShieldProviderComponent> entity, ref EmpPulseEvent args)
@@ -166,7 +195,7 @@ public sealed class FieldShieldProviderSystem : EntitySystem
     {
         args.Affected = true;
         // cause of naming it goes -1f.
-        entity.Comp.RechargeStartTime = _gameTiming.CurTime + entity.Comp.RechargeShieldData.RechargeTime * (entity.Comp.RechargeShieldData.EmpRechargeMultiplier - 1);
+        entity.Comp.RechargeEndTime = _gameTiming.CurTime + entity.Comp.RechargeShieldData.RechargeTime * entity.Comp.RechargeShieldData.EmpRechargeMultiplier;
         entity.Comp.ShieldCharge = 0;
         Dirty(entity);
     }

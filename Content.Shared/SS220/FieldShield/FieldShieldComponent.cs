@@ -15,23 +15,23 @@ public sealed partial class FieldShieldComponent : Component
 {
     [ViewVariables]
     [AutoNetworkedField]
-    public TimeSpan RechargeStartTime;
+    public TimeSpan RechargeEndTime;
 
     [ViewVariables]
     [AutoNetworkedField]
     public int ShieldCharge = 0;
 
-    [DataField]
+    [DataField(required: true)]
     [AutoNetworkedField]
-    public RechargeShieldData RechargeShieldData = default;
+    public FieldShieldRechargeData RechargeShieldData;
 
-    [DataField]
+    [DataField(required: true)]
     [AutoNetworkedField]
-    public ShieldData ShieldData = default;
+    public FieldShieldData ShieldData;
 
-    [DataField]
+    [DataField(required: true)]
     [AutoNetworkedField]
-    public ShieldLightData LightData = default;
+    public FieldShieldLightData LightData;
 
     /// <summary>
     ///     Client side point-light entity.
@@ -42,7 +42,7 @@ public sealed partial class FieldShieldComponent : Component
 
 [DataDefinition]
 [Serializable, NetSerializable]
-public partial struct RechargeShieldData
+public partial struct FieldShieldRechargeData
 {
     [DataField]
     [AutoNetworkedField]
@@ -62,7 +62,7 @@ public partial struct RechargeShieldData
 
 [DataDefinition]
 [Serializable, NetSerializable]
-public partial struct ShieldData
+public partial struct FieldShieldData
 {
     [DataField]
     [AutoNetworkedField]
@@ -112,7 +112,7 @@ public partial struct ShieldData
 
 [DataDefinition]
 [Serializable, NetSerializable]
-public partial struct ShieldLightData
+public partial struct FieldShieldLightData
 {
     [DataField]
     [AutoNetworkedField]

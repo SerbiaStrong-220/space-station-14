@@ -33,26 +33,6 @@ public sealed class FieldShieldVisualizerSystem : EntitySystem
         SubscribeLocalEvent<FieldShieldComponent, AfterAutoHandleStateEvent>(OnAfterHandledState);
     }
 
-    public override void FrameUpdate(float frameTime)
-    {
-        base.FrameUpdate(frameTime);
-
-        var fieldShields = EntityQueryEnumerator<FieldShieldComponent, UpdateQueuedFieldShieldComponent>();
-
-        while (fieldShields.MoveNext(out var uid, out var comp, out var updateComp))
-        {
-            if (_gameTiming.CurTime < comp.RechargeStartTime + comp.RechargeShieldData.RechargeTime)
-                continue;
-
-            RemCompDeferred(uid, updateComp);
-
-            if (!TryComp<SpriteComponent>(uid, out var sprite) || !TryComp(uid, out AppearanceComponent? appearance))
-                continue;
-
-            UpdateAppearance((uid, comp), sprite, appearance);
-        }
-    }
-
     private void OnShutdown(Entity<FieldShieldComponent> entity, ref ComponentShutdown args)
     {
         if (entity.Comp.LightEntity != null)
@@ -81,8 +61,6 @@ public sealed class FieldShieldVisualizerSystem : EntitySystem
         if (_sprite.LayerMapTryGet((entity, sprite), FieldShieldVisualLayers.Shield, out var layer, false)
                 && entity.Comp.ShieldData.ShieldSprite != null)
             _sprite.LayerSetSprite((entity, sprite), FieldShieldVisualLayers.Shield, entity.Comp.ShieldData.ShieldSprite);
-
-        EnsureComp<UpdateQueuedFieldShieldComponent>(entity);
     }
 
     private void OnAfterHandledState(Entity<FieldShieldComponent> entity, ref AfterAutoHandleStateEvent _)
@@ -95,7 +73,6 @@ public sealed class FieldShieldVisualizerSystem : EntitySystem
             _sprite.LayerSetSprite((entity, sprite), FieldShieldVisualLayers.Shield, entity.Comp.ShieldData.ShieldSprite);
 
         UpdateAppearance(entity, sprite, appearance);
-        EnsureComp<UpdateQueuedFieldShieldComponent>(entity);
     }
 
     private void UpdateAppearance(Entity<FieldShieldComponent> entity, SpriteComponent sprite, AppearanceComponent appearance)
@@ -103,7 +80,10 @@ public sealed class FieldShieldVisualizerSystem : EntitySystem
         if (!_sprite.LayerMapTryGet((entity, sprite), FieldShieldVisualLayers.Shield, out var index, false))
             return;
 
-        var shieldCharge = _gameTiming.CurTime > entity.Comp.RechargeStartTime + entity.Comp.RechargeShieldData.RechargeTime ? entity.Comp.ShieldData.ShieldMaxCharge : entity.Comp.ShieldCharge;
+        var shieldCharge = _gameTiming.CurTime > entity.Comp.RechargeEndTime + entity.Comp.RechargeShieldData.RechargeTime
+                            ? entity.Comp.ShieldData.ShieldMaxCharge
+                            : entity.Comp.ShieldCharge;
+
         var shieldChargeRelative = Math.Clamp((float)shieldCharge / entity.Comp.ShieldData.ShieldMaxCharge, 0f, 1f);
         var shieldWork = shieldCharge > 0;
 
