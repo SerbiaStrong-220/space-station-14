@@ -85,22 +85,8 @@ public sealed class TeleportationChasmSystem : SharedTeleportationChasmSystem
             return false;
         }
 
+        //I didnt found normal ways to check empty tiles
         var teleportLocation = _random.Pick(coords);
-
-        //ToDo_SS220 figure outsmth, cause Physics from teleported entity isn't what happened
-        /*
-        if (!TryComp<PhysicsComponent>(teleported, out var physicsComp))
-        {
-            Log.Warning($"I couldn't teleport the {teleported} because it has no PhysicsComponent");
-            return false;
-        }
-
-        if (!_anchorable.TileFree(teleportLocation, physicsComp))
-        {
-            coords.Remove(teleportLocation);
-            return TryTeleportFromCoordList(coords, teleported);
-        }
-        */
 
         var xform = Transform(teleported);
         _transformSystem.SetCoordinates(teleported, xform, teleportLocation);
