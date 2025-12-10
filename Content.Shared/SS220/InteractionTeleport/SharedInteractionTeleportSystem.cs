@@ -80,7 +80,7 @@ public sealed class SharedInteractionTeleportSystem : EntitySystem
             return true;
         }
 
-        var teleportDoAfter = new DoAfterArgs(EntityManager, user,ent.Comp.TeleportDoAfterTime, new InteractionTeleportDoAfterEvent(), ent, target)
+        var teleportDoAfter = new DoAfterArgs(EntityManager, user, ent.Comp.TeleportDoAfterTime.Value, new InteractionTeleportDoAfterEvent(), ent, target)
         {
             BreakOnDamage = false,
             BreakOnMove = true,

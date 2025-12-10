@@ -51,6 +51,7 @@ public sealed class TeleportationChasmSystem : SharedTeleportationChasmSystem
         {
             RemCompDeferred<TeleportationChasmFallingComponent>(uid);
             _blocker.UpdateCanMove(uid);
+            DirtyEntity(uid);
         }
     }
 
@@ -72,7 +73,7 @@ public sealed class TeleportationChasmSystem : SharedTeleportationChasmSystem
             validLocations.Add(transform.Coordinates);
         }
 
-        TryTeleportFromCoordList(validLocations, ent)
+        TryTeleportFromCoordList(validLocations, ent);
     }
 
     private bool TryTeleportFromCoordList(List<EntityCoordinates> coords, EntityUid teleported)
