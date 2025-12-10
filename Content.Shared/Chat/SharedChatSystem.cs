@@ -144,6 +144,9 @@ public abstract partial class SharedChatSystem : EntitySystem
         if (!(input.StartsWith(RadioChannelPrefix) || input.StartsWith(RadioChannelAltPrefix)))
             return;
 
+        if (input.Length < 3)
+            return;
+
         // SS220-add-radio-frequency-end
         if (input.StartsWith(RadioChannelPrefix) && char.IsWhiteSpace(input[1]))
         {
