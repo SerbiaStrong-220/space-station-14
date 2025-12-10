@@ -81,7 +81,7 @@ public sealed class TeleportationChasmSystem : SharedTeleportationChasmSystem
     {
         if (coords.Count == 0)
         {
-            Log.Warning($"I couldn't teleport the {teleported} because there were no locations left to teleport to");
+            Log.Warning($"TeleportationChasm couldn't teleport the {teleported} because there were no locations left to teleport to");
             return false;
         }
 

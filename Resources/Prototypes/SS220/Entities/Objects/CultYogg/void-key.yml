@@ -12,11 +12,6 @@
   - type: Item
     sprite: SS220/Objects/CultYogg/voidkey.rsi
     size: Tiny
-  - type: EmitSoundOnUse
-    volume: -8
-    range: 2
-    sound:
-      path: /Audio/SS220/DarkReaper/jnec_gate_ambience.ogg
   - type: UseDelay
     delay: 10
   - type: TriggerOnUse
@@ -42,6 +37,7 @@
   - type: SpawnOnDespawn
     prototype: VoidPortalClosed
   - type: InteractionTeleport
+    teleportDoAfterTime: 3
     userWhitelist:
       components:
       - HumanoidAppearance

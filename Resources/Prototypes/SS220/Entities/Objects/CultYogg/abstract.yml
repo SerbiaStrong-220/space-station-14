@@ -36,6 +36,7 @@
         - WallLayer
         hard: false
   - type: InteractionTeleport
+    teleportDoAfterTime: 3
     userWhitelist:
       components:
       - CultYogg

@@ -37,23 +37,19 @@ public sealed class SelfLinkedTeleportSystem : SharedSelfLinkedTeleportSystem
             return;
 
         if (TryComp<SelfLinkedTeleportComponent>(ent.Comp.LinkedEntity, out var linkedTeleporterComp))
-            SoftClearLink((ent.Comp.LinkedEntity.Value, linkedTeleporterComp));
+            TryFindNewLink((ent.Comp.LinkedEntity.Value, linkedTeleporterComp));
 
         ent.Comp.LinkedEntity = null;
         UpdateVisuals(ent);
     }
 
-    public void SoftClearLink(Entity<SelfLinkedTeleportComponent> ent)
+    public bool TryFindNewLink(Entity<SelfLinkedTeleportComponent> ent)
     {
         ent.Comp.LinkedEntity = null;
         UpdateVisuals(ent);
-        TryFindNewLink(ent);
-    }
 
-    public void TryFindNewLink(Entity<SelfLinkedTeleportComponent> ent)
-    {
         if (ent.Comp.LinkedEntity != null)
-            return;
+            return true;
 
         var locations = EntityQueryEnumerator<SelfLinkedTeleportComponent>();
         while (locations.MoveNext(out var uid, out var teleport))
@@ -75,10 +71,12 @@ public sealed class SelfLinkedTeleportSystem : SharedSelfLinkedTeleportSystem
             UpdateVisuals(ent);
             UpdateVisuals((uid, teleport));
             Dirty(uid, teleport);
+            Dirty(ent);
 
-            break;
+            return true;
         }
-        Dirty(ent);
+
+        return false;
     }
 
     protected override void Warp(Entity<SelfLinkedTeleportComponent> ent, EntityUid target, EntityUid user)

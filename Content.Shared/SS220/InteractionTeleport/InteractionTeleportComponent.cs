@@ -23,15 +23,9 @@ public sealed partial class InteractionTeleportComponent : Component
     public LocId? WhitelistRejectedLoc;
 
     /// <summary>
-    ///     Should we have doAfter when we are using teleport
-    /// </summary>
-    [DataField]
-    public bool ShouldHaveDelay = true;
-
-    /// <summary>
     ///     How long we are entering teleport
     /// </summary>
     [DataField]
-    public TimeSpan TeleportDoAfterTime = TimeSpan.FromSeconds(3);
+    public TimeSpan? TeleportDoAfterTime;
 }
 
