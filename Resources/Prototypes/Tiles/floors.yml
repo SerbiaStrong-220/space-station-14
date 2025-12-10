@@ -1968,8 +1968,8 @@
   name: tiles-web
   tags: [ tile-tag-other ] # SS220 Tiles Resprite
   sprite: /Textures/Tiles/Misc/Web/web_tile.png
-  baseTurf: Plating
-  isSubfloor: false
+  baseTurf: Space
+  isSubfloor: true
   deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepCarpet
