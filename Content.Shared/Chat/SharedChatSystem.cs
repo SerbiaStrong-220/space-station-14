@@ -126,8 +126,6 @@ public abstract partial class SharedChatSystem : EntitySystem
 
         // If the string is less than 2, then it's probably supposed to be an emote.
         // No one is sending empty radio messages!
-        if (input.Length <= 2)
-            return;
 
         // SS220 language begin
         if (input.StartsWith(RadioCommonPrefix))
@@ -150,6 +148,15 @@ public abstract partial class SharedChatSystem : EntitySystem
             return;
         }
         // SS220-add-radio-frequency-end
+
+        // SS220-fix-radio-prefix-begin
+        if (input.Length < 2)
+        {
+            prefix = input[..1];
+            output = input[1..];
+            return;
+        }
+        // SS220-fix-radio-prefix-end
 
         if (!_keyCodes.TryGetValue(char.ToLower(input[1]), out _))
             return;
