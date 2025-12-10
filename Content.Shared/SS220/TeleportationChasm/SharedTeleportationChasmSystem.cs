@@ -36,15 +36,15 @@ public abstract class SharedTeleportationChasmSystem : EntitySystem
         StartFalling(ent, args.Tripper);
     }
 
-    public void StartFalling(Entity<TeleportationChasmComponent> ent, EntityUid tripper, bool playSound = true)
+    public void StartFalling(Entity<TeleportationChasmComponent> ent, EntityUid target, bool playSound = true)
     {
-        var falling = AddComp<TeleportationChasmFallingComponent>(tripper);
+        var falling = AddComp<TeleportationChasmFallingComponent>(target);
 
         falling.NextDeletionTime = _timing.CurTime + falling.DeletionTime;
-        _blocker.UpdateCanMove(tripper);
+        _blocker.UpdateCanMove(target);
 
         if (playSound)
-            _audio.PlayPredicted(ent.Comp.FallingSound, ent, tripper);
+            _audio.PlayPredicted(ent.Comp.FallingSound, ent, target);
     }
 
     private void OnStepTriggerAttempt(Entity<TeleportationChasmComponent> ent, ref StepTriggerAttemptEvent args)
