@@ -5,7 +5,7 @@
   placement:
     mode: SnapgridCenter
     snap:
-      - Wall
+    - Wall
   components:
   - type: Appearance
   - type: Transform
