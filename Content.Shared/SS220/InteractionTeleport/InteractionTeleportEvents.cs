@@ -5,9 +5,6 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.InteractionTeleport;
 
-/// <summary>
-/// InteractionTeleportComponent DoAfter
-/// </summary>
 [Serializable, NetSerializable]
 public sealed partial class InteractionTeleportDoAfterEvent : SimpleDoAfterEvent { }
 
