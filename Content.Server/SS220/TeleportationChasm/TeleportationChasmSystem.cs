@@ -49,7 +49,7 @@ public sealed class TeleportationChasmSystem : SharedTeleportationChasmSystem
 
         foreach (var uid in toRemove)
         {
-            RemComp<TeleportationChasmFallingComponent>(uid);
+            RemCompDeferred<TeleportationChasmFallingComponent>(uid);
             _blocker.UpdateCanMove(uid);
             DirtyEntity(uid);
         }
