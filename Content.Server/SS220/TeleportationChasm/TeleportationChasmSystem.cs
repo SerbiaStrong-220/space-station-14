@@ -51,7 +51,6 @@ public sealed class TeleportationChasmSystem : SharedTeleportationChasmSystem
         {
             RemCompDeferred<TeleportationChasmFallingComponent>(uid);
             _blocker.UpdateCanMove(uid);
-            DirtyEntity(uid);
         }
     }
 
