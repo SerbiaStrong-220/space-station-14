@@ -57,7 +57,6 @@ public sealed class RandomTeleportSystem : EntitySystem
 
         var teleportLocation = _random.Pick(validLocations);
 
-        //ToDo_SS220 figure out pulling canceling
         if (TryComp(user, out PullerComponent? puller) && TryComp(puller.Pulling, out PullableComponent? pullable))
             _pulling.TryStopPull(puller.Pulling.Value, pullable);
 
