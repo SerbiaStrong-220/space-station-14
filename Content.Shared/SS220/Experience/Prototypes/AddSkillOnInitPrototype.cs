@@ -16,4 +16,7 @@ public sealed class SkillAddPrototype : IPrototype
 
     [DataField(required: true)]
     public HashSet<ProtoId<KnowledgePrototype>> Knowledges = new();
+
+    [DataField]
+    public int AddSublevelPoints;
 }

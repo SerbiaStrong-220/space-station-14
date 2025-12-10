@@ -86,12 +86,14 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (args.DenyChanges)
             return;
 
-        if (entity.Comp.SkillAddId is not null && _prototype.TryIndex(entity.Comp.SkillAddId, out var skillAddProto)
-            && skillAddProto.Skills.TryGetValue(args.SkillTree, out var infoProto))
+        if (entity.Comp.SkillAddId is not null && _prototype.TryIndex(entity.Comp.SkillAddId, out var skillAddProto))
         {
-            args.Info.SkillLevel += infoProto.SkillLevel;
-            args.Info.SkillSublevel += infoProto.SkillSublevel;
-            args.Info.SkillStudied &= infoProto.SkillStudied;
+            if (skillAddProto.Skills.TryGetValue(args.SkillTree, out var infoProto))
+            {
+                args.Info.SkillLevel += infoProto.SkillLevel;
+                args.Info.SkillSublevel += infoProto.SkillSublevel;
+                args.Info.SkillStudied &= infoProto.SkillStudied;
+            }
         }
 
         if (entity.Comp.Skills.TryGetValue(args.SkillTree, out var info))

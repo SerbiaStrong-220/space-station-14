@@ -80,10 +80,14 @@ public sealed partial class ExperienceComponent : Component
     [AutoNetworkedField]
     [ViewVariables(VVAccess.ReadOnly)]
     public byte InitMask = (byte)InitGainedExperienceType.NotInitialized;
+
+    [AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public int FreeSublevelPoints = 0;
 }
 
-[Serializable, NetSerializable]
 [DataDefinition]
+[Serializable, NetSerializable]
 public sealed partial class SkillTreeExperienceInfo
 {
     /// <summary>

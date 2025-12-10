@@ -10,3 +10,4 @@
       skillStudied: true
   knowledges:
   - InformedPersonalKnowledge
+  addSublevelPoints: 10
