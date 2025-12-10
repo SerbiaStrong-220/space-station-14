@@ -101,9 +101,8 @@
         groups:
           Airloss: -5
       modifyStamina: -5
-      bloodlossModifier: -1
-      modifyBloodLevel: 2
-      ModifyBleed: -1.5
+      bloodlossModifier: -6
+      modifyBloodLevel: 10
 
 - type: entity
   id: ActionMiGoAstral
