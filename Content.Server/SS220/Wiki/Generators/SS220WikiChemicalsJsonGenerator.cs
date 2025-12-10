@@ -1,7 +1,6 @@
-using System.IO;
-using System.Linq;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Server.GuideGenerator;
+using Content.Server.SS220.Wiki.Chemistry;
 using Content.Shared.Chemistry.Reaction;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
@@ -9,10 +8,14 @@ using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
+using System.IO;
+using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
-namespace Content.Server.GuideGenerator;
+namespace Content.Server.SS220.Wiki.Generators;
 
-public sealed class ChemistryJsonGenerator
+public static class SS220WikiChemicalsJsonGenerator
 {
     public static void PublishJson(StreamWriter file)
     {
@@ -21,7 +24,7 @@ public sealed class ChemistryJsonGenerator
             prototype
                 .EnumeratePrototypes<ReagentPrototype>()
                 .Where(x => !x.Abstract)
-                .Select(x => new ReagentEntry(x))
+                .Select(x => new ReagentWikiEntry(x))
                 .ToDictionary(x => x.Id, x => x);
 
         var reactions =
@@ -40,6 +43,7 @@ public sealed class ChemistryJsonGenerator
         var serializeOptions = new JsonSerializerOptions
         {
             WriteIndented = true,
+            NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals, // SS220 Wiki
             Converters =
             {
                 new UniversalJsonConverter<EntityEffect>(),
@@ -51,6 +55,7 @@ public sealed class ChemistryJsonGenerator
         };
 
         file.Write(JsonSerializer.Serialize(prototypes, serializeOptions));
+        file.Flush();
     }
 
     public sealed class FixedPointJsonConverter : JsonConverter<FixedPoint2>
