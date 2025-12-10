@@ -37,7 +37,6 @@ public sealed class RandomTeleportSystem : EntitySystem
 
     private void Warp(Entity<RandomTeleportComponent> ent, EntityUid teleported, EntityUid user)
     {
-
         if (ent.Comp.TargetsComponent is null)
             return;
 
