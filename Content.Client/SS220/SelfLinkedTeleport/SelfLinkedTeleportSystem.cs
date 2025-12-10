@@ -6,8 +6,4 @@ namespace Content.Client.SS220.SelfLinkedTeleport;
 
 public sealed class SelfLinkedTeleportSystem : SharedSelfLinkedTeleportSystem
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-    }
 }
