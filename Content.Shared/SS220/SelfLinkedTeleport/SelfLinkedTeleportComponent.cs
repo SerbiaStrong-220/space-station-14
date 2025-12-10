@@ -7,7 +7,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.SS220.SelfLinkedTeleport;
 
 /// <summary>
-/// If you want to create a kind of linked tunnel that will find its own exit when initialized or the linked exit is lost
+/// This component allows you to create a teleport side that will look for the second side when the component is initialized.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class SelfLinkedTeleportComponent : Component
