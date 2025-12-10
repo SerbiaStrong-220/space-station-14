@@ -12,7 +12,11 @@
   - type: Item
     sprite: SS220/Objects/CultYogg/voidkey.rsi
     size: Tiny
-  #Maybe should add EmitSoundOnUse, not sure
+  - type: EmitSoundOnUse
+    volume: -8
+    range: 2
+    sound:
+      path: /Audio/SS220/DarkReaper/jnec_gate_ambience.ogg
   - type: UseDelay
     delay: 10
   - type: TriggerOnUse
