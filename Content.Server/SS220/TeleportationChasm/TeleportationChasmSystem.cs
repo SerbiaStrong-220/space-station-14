@@ -1,14 +1,10 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.ActionBlocker;
-using Content.Shared.Administration.Logs;
-using Content.Shared.Construction.EntitySystems;
-using Content.Shared.Database;
 using Content.Shared.Light.Components;
 using Content.Shared.SS220.TeleportationChasm;
 using Content.Shared.Station;
 using Robust.Shared.Map;
-using Robust.Shared.Physics.Components;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -22,8 +18,6 @@ public sealed class TeleportationChasmSystem : SharedTeleportationChasmSystem
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedStationSystem _station = default!;
-    [Dependency] private readonly AnchorableSystem _anchorable = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
 
     public override void Initialize()
     {
@@ -49,7 +43,7 @@ public sealed class TeleportationChasmSystem : SharedTeleportationChasmSystem
 
         foreach (var uid in toRemove)
         {
-            RemComp<TeleportationChasmFallingComponent>(uid);
+            RemCompDeferred<TeleportationChasmFallingComponent>(uid);
             _blocker.UpdateCanMove(uid);
         }
     }
