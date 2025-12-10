@@ -45,10 +45,8 @@ public sealed class TeleportationChasmFallingVisualsSystem : EntitySystem
 
     private void OnComponentRemove(Entity<TeleportationChasmFallingComponent> ent, ref ComponentRemove args)
     {
-        if (!TryComp<SpriteComponent>(ent, out var sprite))
-            return;
-
-        _sprite.SetScale((ent, sprite), ent.Comp.OriginalScale);
+        if (TryComp<SpriteComponent>(ent, out var sprite))
+            _sprite.SetScale((ent, sprite), ent.Comp.OriginalScale);
 
         if (!TryComp<AnimationPlayerComponent>(ent, out var player))
             return;
