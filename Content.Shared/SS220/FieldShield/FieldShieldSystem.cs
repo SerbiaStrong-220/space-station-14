@@ -17,7 +17,7 @@ public sealed class FieldShieldProviderSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
 
-    private const int ForceFieldPushPriority = 2;
+    private const int FieldShieldPushPriority = 2;
 
     public override void Initialize()
     {
@@ -77,11 +77,11 @@ public sealed class FieldShieldProviderSystem : EntitySystem
     {
         if (entity.Owner == args.Examiner)
         {
-            args.PushMarkup(Loc.GetString("field-shield-self-examine", ("Charges", entity.Comp.ShieldCharge), ("MaxCharge", entity.Comp.ShieldData.ShieldMaxCharge)), ForceFieldPushPriority);
+            args.PushMarkup(Loc.GetString("field-shield-self-examine", ("Charges", entity.Comp.ShieldCharge), ("MaxCharge", entity.Comp.ShieldData.ShieldMaxCharge)), FieldShieldPushPriority);
         }
         else if (entity.Comp.ShieldCharge > 0)
         {
-            args.PushMarkup(Loc.GetString("field-shield-other-examine"), ForceFieldPushPriority);
+            args.PushMarkup(Loc.GetString("field-shield-other-examine"), FieldShieldPushPriority);
         }
     }
 
