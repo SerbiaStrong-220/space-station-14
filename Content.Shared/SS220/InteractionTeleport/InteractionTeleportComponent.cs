@@ -24,6 +24,7 @@ public sealed partial class InteractionTeleportComponent : Component
 
     /// <summary>
     ///     How long we are entering teleport
+    ///     Null if DoAfter shouldn't happen
     /// </summary>
     [DataField]
     public TimeSpan? TeleportDoAfterTime;

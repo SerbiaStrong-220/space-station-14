@@ -74,13 +74,13 @@ public sealed class SharedInteractionTeleportSystem : EntitySystem
         if (ev.Cancelled)
             return false;
 
-        if (!ent.Comp.ShouldHaveDelay)
+        if (ent.Comp.TeleportDoAfterTime is null)
         {
             SendTeleporting(ent, target, user);
             return true;
         }
 
-        var teleportDoAfter = new DoAfterArgs(EntityManager, user, ent.Comp.TeleportDoAfterTime, new InteractionTeleportDoAfterEvent(), ent, target)
+        var teleportDoAfter = new DoAfterArgs(EntityManager, user,ent.Comp.TeleportDoAfterTime, new InteractionTeleportDoAfterEvent(), ent, target)
         {
             BreakOnDamage = false,
             BreakOnMove = true,
