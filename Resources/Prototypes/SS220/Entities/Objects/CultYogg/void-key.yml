@@ -46,7 +46,6 @@
     whitelist:
       tags:
       - VoidTeleporationTarget
-  - type: AfterTeleportEffects
 
 #Animation entities for a better immersions
 - type: entity
