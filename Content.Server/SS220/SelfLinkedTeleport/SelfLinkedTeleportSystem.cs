@@ -40,11 +40,13 @@ public sealed class SelfLinkedTeleportSystem : SharedSelfLinkedTeleportSystem
             SoftClearLink((ent.Comp.LinkedEntity.Value, linkedTeleporterComp));
 
         ent.Comp.LinkedEntity = null;
+        UpdateVisuals(ent);
     }
 
     public void SoftClearLink(Entity<SelfLinkedTeleportComponent> ent)
     {
         ent.Comp.LinkedEntity = null;
+        UpdateVisuals(ent);
         TryFindNewLink(ent);
     }
 
@@ -70,6 +72,8 @@ public sealed class SelfLinkedTeleportSystem : SharedSelfLinkedTeleportSystem
 
             ent.Comp.LinkedEntity = uid;
             teleport.LinkedEntity = ent;
+            UpdateVisuals(ent);
+            UpdateVisuals((uid, teleport));
             Dirty(uid, teleport);
 
             break;

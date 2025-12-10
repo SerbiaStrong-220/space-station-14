@@ -10,12 +10,16 @@
     layers:
       - state: base
       - state: portal
+        map: ["portalLayer"]
         shader: unshaded
-  - type: PointLight #ToDo_SS220 figure out color differentiation
+        visible: false
+  - type: Appearance
+  - type: PointLight #maybe later figure out color differentiation
     color: SkyBlue
     radius: 3
     energy: 1
-    netsync: false
+    netsync: true
+    enabled: false
   - type: SelfLinkedTeleport
     whitelistLinked:
       tags:
@@ -37,6 +41,12 @@
           collection: MetalBreak
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: GenericVisualizer
+    visuals:
+      enum.SelfLinkedVisuals.State:
+        portalLayer:
+          True: {visible: true}
+          False: {visible: false}
 
 - type: entity
   id: VoidTeleportExit
@@ -48,16 +58,26 @@
     layers:
       - state: base
       - state: portal
+        map: ["portalLayer"]
         shader: unshaded
-  - type: PointLight #ToDo_SS220 figure out color differentiation
+        visible: false
+  - type: Appearance
+  - type: PointLight #maybe later figure out color differentiation
     color: SkyBlue
     radius: 3
     energy: 1
-    netsync: false
-  - type: SelfLinkedTeleport #ToDo_SS220 add whitelist
+    netsync: true
+    enabled: false
+  - type: SelfLinkedTeleport
     whitelistLinked:
       tags:
       - CultYoggTeleportEnter
   - type: Tag
     tags:
     - CultYoggTeleportExit
+  - type: GenericVisualizer
+    visuals:
+      enum.SelfLinkedVisuals.State:
+        portalLayer:
+          True: {visible: true}
+          False: {visible: false}

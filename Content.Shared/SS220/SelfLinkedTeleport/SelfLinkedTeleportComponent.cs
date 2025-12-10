@@ -2,6 +2,7 @@
 
 using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.SelfLinkedTeleport;
 
@@ -22,4 +23,10 @@ public sealed partial class SelfLinkedTeleportComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntityWhitelist? WhitelistLinked;
+}
+
+[Serializable, NetSerializable]
+public enum SelfLinkedVisuals : byte
+{
+    State
 }
