@@ -20,7 +20,7 @@
   completetime: 1
   materials:
     Steel: 1500
-    Plastic: 500  
+    Plastic: 500
 
 - type: latheRecipe
   id: ClothingBeltMilitaryWebbing
@@ -39,13 +39,13 @@
     Gold: 500
 
 - type: latheRecipe
-  id: WeaponCrusherGlaive 
+  id: WeaponCrusherGlaive
   result: WeaponCrusherGlaive
   completetime: 3
   materials:
     Steel: 2500
     Plasma: 1500
-    Gold: 1000   
+    Gold: 1000
 
 - type: latheRecipe
   id: ToySword
@@ -60,3 +60,57 @@
   completetime: 1
   materials:
     Plastic: 1600
+
+- type: latheRecipe
+  id: Vape
+  result: Vape
+  completetime: 2
+  materials:
+    Plastic: 150
+    Steel: 350
+
+- type: latheRecipe
+  id: DefaultAtomizerVapePart
+  result: DefaultAtomizerVapePart
+  completetime: 1
+  materials:
+    Plastic: 100
+    Steel: 150
+
+- type: latheRecipe
+  id: ExtendedAtomizerVapePart
+  result: ExtendedAtomizerVapePart
+  completetime: 1
+  materials:
+    Plastic: 200
+    Steel: 300
+
+- type: latheRecipe
+  id: SuperExtendedAtomizerVapePart
+  result: SuperExtendedAtomizerVapePart
+  completetime: 1
+  materials:
+    Plastic: 400
+    Steel: 600
+
+- type: latheRecipe
+  id: DefaultCartridgeVapePart
+  result: DefaultCartridgeVapePart
+  completetime: 1
+  materials:
+    Steel: 100
+
+- type: latheRecipe
+  id: ExtendedCartridgeVapePart
+  result: ExtendedCartridgeVapePart
+  completetime: 1
+  materials:
+    Steel: 200
+
+- type: latheRecipe
+  id: SuperExtendedCartridgeVapePart
+  result: SuperExtendedCartridgeVapePart
+  completetime: 1
+  materials:
+    Steel: 300
+    Gold: 100
