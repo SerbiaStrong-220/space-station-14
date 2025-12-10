@@ -8,11 +8,11 @@
     noRot: true
     sprite: SS220/Structures/CultYogg/portal_gates.rsi
     layers:
-      - state: base
-      - state: portal
-        map: ["portalLayer"]
-        shader: unshaded
-        visible: false
+    - state: base
+    - state: portal
+      map: ["portalLayer"]
+      shader: unshaded
+      visible: false
   - type: Appearance
   - type: PointLight #maybe later figure out color differentiation
     color: SkyBlue
