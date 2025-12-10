@@ -49,7 +49,7 @@ public sealed class TeleportationChasmSystem : SharedTeleportationChasmSystem
 
         foreach (var uid in toRemove)
         {
-            RemComp<TeleportationChasmFallingComponent>(uid);
+            RemCompDeferred<TeleportationChasmFallingComponent>(uid);
             _blocker.UpdateCanMove(uid);
             DirtyEntity(uid);
         }
@@ -73,8 +73,7 @@ public sealed class TeleportationChasmSystem : SharedTeleportationChasmSystem
             validLocations.Add(transform.Coordinates);
         }
 
-        if (TryTeleportFromCoordList(validLocations, ent))
-            _adminLog.Add(LogType.Teleport, $"{ent:targer} got teleported on random location on station");
+        TryTeleportFromCoordList(validLocations, ent)
     }
 
     private bool TryTeleportFromCoordList(List<EntityCoordinates> coords, EntityUid teleported)
