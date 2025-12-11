@@ -1,14 +1,11 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.Administration.Logs;
 using Content.Shared.Paper;
 
 namespace Content.Shared.SS220.Signature;
 
 public abstract class SharedSignatureSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-
     public override void Initialize()
     {
         SubscribeLocalEvent<PaperComponent, SignatureSubmitMessage>(OnSubmitSignature);
