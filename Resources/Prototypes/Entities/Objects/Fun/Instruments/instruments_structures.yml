@@ -108,12 +108,12 @@
   components:
   - type: Instrument
     program: 43
-# SS220-contrabass swapable-start
+# SS220-contrabass swappable-start
   - type: SwappableInstrument
     instrumentList:
       "Arco": {43: 0}
       "Pzzicato": {1: 20} # Defined in Serbia-Strong-220.sf2
-# SS220-contrabass swapable-ended
+# SS220-contrabass swappable-ended
   - type: Sprite
     state: contrabass
   - type: Fixtures
