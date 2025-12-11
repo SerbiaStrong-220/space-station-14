@@ -1,0 +1,24 @@
+- type: entity
+  parent: MiniSyringe
+  id: AdvancedMiniSyringe
+  name: advanced mini syringe
+  description: Pinnacle of mini syringe design-this one is fitted with pneumatic autoinjection system and has its volume doubled thanks to bluespace tech used in it
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      injector:
+        maxVol: 10
+  - type: SolutionInjectOnEmbed
+    transferAmount: 10
+    solution: injector
+  - type: SolutionInjectWhileEmbedded
+    transferAmount: 1
+    solution: injector
+    updateInterval: 2
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Medical/minisyringeadvanced.rsi
+    layers:
+      - state: minisyringeadv1
+        map: ["enum.SolutionContainerLayers.Fill"]
+        visible: false
+      - state: syringeprojadvanced
