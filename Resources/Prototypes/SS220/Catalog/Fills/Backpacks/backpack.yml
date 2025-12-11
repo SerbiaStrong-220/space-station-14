@@ -195,6 +195,41 @@
       - id: PillAmbuzolPlus
       - id: WeaponShotgunSawn
 
+# CounterIntelligence
+- type: entity
+  parent: ClothingBackpackERTSecurity
+  id: ClothingBackpackCIAgentFilled
+  name: CI Agent Backpack
+  suffix: Filled
+  components:
+   - type: StorageFill
+     contents:
+      - id: BoxSurvivalCentcom
+      - id: CrowbarRed
+      - id: MedicatedSuture
+      - id: RegenerativeMesh
+      - id: MedkitCombatFilled
+      - id: BoxFlashbang
+      - id: DeathRattleImplanterCentcomm
+
+- type: entity
+  parent: ClothingBackpackNoirSatchel
+  id: ClothingBackpackCIOfficerFilled
+  name: CI Officer Satchel
+  suffix: Filled
+  components:
+   - type: StorageFill
+     contents:
+      - id: BoxSurvivalCentcom
+      - id: RubberStampDenied
+      - id: RubberStampApproved
+      - id: RubberStampDoAP
+      - id: MedkitCombatFilled
+      - id: NTbaton
+      - id: BoxFolderCentComm
+      - id: ExpensiveLighterNanotrasen
+      - id: DeathRattleImplanterCentcomm
+
 # Svarshik's toys
 - type: entity
   parent: ClothingBackpackSatchel

@@ -277,7 +277,6 @@
   components:
   - type: StorageFill
     contents:
-      - id: MedkitCombatFilled
       - id: BoxMagazineRifle
         amount: 2
       - id: BoxHandcuff
@@ -293,9 +292,7 @@
       - id: ClothingHeadHelmetSwat
       - id: ClothingOuterArmorHeavy
       - id: ClothingEyesThermalGlassesSecurity
-      - id: ClothingBackpackERTSecurity
-      - id: DeathRattleImplanterCentcomm
-      - id: BoxFlashbang
+      - id: ClothingBackpackCIAgentFilled
 
 - type: entity
   id: LockerCIOfficerFilled
@@ -305,9 +302,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: MedkitCombatFilled
       - id: ClothingHeadsetAltCentComm
-      - id: NTbaton
       - id: WeaponRifleM90GrenadeLauncher
       - id: MagazineRifle
         amount: 5
@@ -316,13 +311,9 @@
       - id: CentcomNewPDA
       - id: ClothingMaskGasSecurity
       - id: ClothingOuterCoatDetectiveDark
-      - id: ClothingBackpackNoirSatchel
+      - id: ClothingBackpackCIOfficerFilled
       - id: ClothingHandsGlovesCombat
       - id: ClothingNeckScarfStripedBlack
       - id: ClothingEyesGlassesCommand
       - id: ClothingShoesBootsJack
       - id: ClothingUniformJumpsuitLawyerBlackSyndieLobbyingBundle
-      - id: RubberStampDoAP
-      - id: RubberStampApproved
-      - id: RubberStampDenied
-      - id: DeathRattleImplanterCentcomm
