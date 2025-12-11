@@ -44,7 +44,7 @@
       shader: unshaded
   # spawn animation lasts 2 seconds, we loop
   - type: TimedDespawn
-    lifetime: 8
+    lifetime: 12
   - type: SpawnOnDespawn
     prototype: VoidPortalClosed
   - type: InteractionTeleport
