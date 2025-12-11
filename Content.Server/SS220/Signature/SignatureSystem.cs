@@ -5,6 +5,7 @@ using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Popups;
 using Content.Shared.Database;
+using Content.Shared.Paper;
 using Content.Shared.SS220.Signature;
 
 namespace Content.Server.SS220.Signature;
@@ -29,10 +30,7 @@ public sealed class SignatureSystem : SharedSignatureSystem
             return;
 
         if (!_adminManager.IsAdmin(ev.SenderSession, true))
-        {
-            _adminLog.Add(LogType.AdminMessage, LogImpact.Extreme, $"User {ToPrettyString(userEnt.Value)} try to request signature, but not an admin.");
             return;
-        }
 
         var log = await _adminLog.GetJsonByLogId(args.LogId, args.Time);
         if (log == null)
@@ -58,7 +56,7 @@ public sealed class SignatureSystem : SharedSignatureSystem
             if (string.IsNullOrEmpty(serialized))
                 continue;
 
-            var sig = SignatureData.Deserialize(serialized);
+            var sig = SignatureSerializer.Deserialize(serialized);
             if (sig == null)
                 continue;
 
@@ -73,5 +71,15 @@ public sealed class SignatureSystem : SharedSignatureSystem
 
         var req = new SendSignatureToAdminEvent(signature);
         RaiseNetworkEvent(req, ev.SenderSession);
+    }
+
+    protected override void AfterSubmitSignature(Entity<PaperComponent, SignatureComponent> ent, ref SignatureSubmitMessage args, bool changedSignature)
+    {
+        base.AfterSubmitSignature(ent, ref args, changedSignature);
+
+        var verboseChangedSignature = changedSignature ? "changed signature" : "written without changing signature";
+
+        if (ent.Comp2.Data is not null)
+            _adminLog.Add(LogType.Chat, LogImpact.Medium, $"{ToPrettyString(args.Actor):user} has {verboseChangedSignature} {new SignatureLogData(ent.Comp2.Data)} on {ToPrettyString(ent):target}");
     }
 }

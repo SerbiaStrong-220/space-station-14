@@ -1,8 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using System.Linq;
-using System.Text;
-using JetBrains.Annotations;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Signature;
@@ -59,10 +57,7 @@ public sealed class SignatureData
         hash.Add(Width);
         hash.Add(Height);
 
-        foreach(var p in Pixels)
-        {
-            hash.Add(p);
-        }
+        hash.AddBytes(Pixels);
 
         return hash.ToHashCode();
     }
@@ -93,102 +88,5 @@ public sealed class SignatureData
             );
         }
     }
-
-    #region Serialization
-    public string Serialize()
-    {
-        var sb = new StringBuilder(Width * Height + 16);
-        sb.Append(Height);
-        sb.Append('|');
-        sb.Append(Width);
-        sb.Append('|');
-
-        for (var i = 0; i < Pixels.Length; i++)
-        {
-            sb.Append(Pixels[i]);
-        }
-
-        return sb.ToString();
-    }
-
-    public static SignatureData? Deserialize(string? data)
-    {
-        if (string.IsNullOrEmpty(data))
-            return null;
-
-        var parts = data.Split('|');
-        if (parts.Length != 3)
-            return null;
-
-        if (!int.TryParse(parts[0], out var height))
-            return null;
-
-        if (!int.TryParse(parts[1], out var width))
-            return null;
-
-        var pixelsString = parts[2];
-
-        var inst = new SignatureData(width, height);
-
-        if (pixelsString.Length != inst.Pixels.Length)
-            return null;
-
-        for (var i = 0; i < pixelsString.Length; i++)
-        {
-            var c = pixelsString[i];
-            inst.Pixels[i] = (byte)(c - '0'); // '1' == 49, '0' is 48
-        }
-
-        return inst;
-    }
-    #endregion Serialization
 }
 
-[Serializable]
-public sealed class SignatureLogData(SignatureData data)
-{
-    [UsedImplicitly]
-    public string Serialized { get; } = data.Serialize();
-
-    public const string SignatureLogTag = "[Signature]";
-
-    public override string ToString()
-    {
-        return $"Signature({data.Width}x{data.Height})";
-    }
-}
-
-[Serializable, NetSerializable]
-public sealed class SignatureSubmitMessage(SignatureData data) : BoundUserInterfaceMessage
-{
-    public SignatureData Data = data;
-}
-
-[Serializable, NetSerializable]
-public sealed class ApplySavedSignature : BoundUserInterfaceMessage;
-
-[Serializable, NetSerializable]
-public sealed class UpdateSignatureDataState(SignatureData data) : BoundUserInterfaceState
-{
-    public SignatureData Data = data;
-}
-
-[Serializable, NetSerializable]
-public sealed class UpdatePenBrushPaperState(int brushWriteSize, int brushEraseSize) : BoundUserInterfaceState
-{
-    public int BrushWriteSize = brushWriteSize;
-    public int BrushEraseSize = brushEraseSize;
-}
-
-[Serializable, NetSerializable]
-public sealed class RequestSignatureAdminMessage(int logId, DateTime time) : BoundUserInterfaceMessage
-{
-    public int LogId = logId;
-    public DateTime Time = time;
-}
-
-[Serializable, NetSerializable]
-public sealed class SendSignatureToAdminEvent(SignatureData data) : EntityEventArgs
-{
-    public SignatureData Data = data;
-}

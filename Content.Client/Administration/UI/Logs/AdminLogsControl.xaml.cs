@@ -546,7 +546,7 @@ public sealed partial class AdminLogsControl : Control
             // ss220 add signature start
             Button? signatureShowButton = null;
 
-            if (log.Message.Contains(SignatureLogData.SignatureLogTag))
+            if (log.Message.Contains(AbstractSignatureLogData.SignatureLogTag))
             {
                 var id = log.Id;
                 var date = log.Date;

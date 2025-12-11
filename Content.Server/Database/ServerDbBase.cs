@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.SS220.Database;
+using Content.Server.SS220.Signature;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Database;
@@ -266,7 +267,7 @@ namespace Content.Server.Database
                 loadouts[role.RoleName] = loadout;
             }
 
-            var signatureData = SignatureData.Deserialize(profile.SignatureData); // ss220 add signature
+            var signatureData = SignatureSerializer.Deserialize(profile.SignatureData); // ss220 add signature
 
             return new HumanoidCharacterProfile(
                 profile.CharacterName,
@@ -328,7 +329,7 @@ namespace Content.Server.Database
             // ss220 add signature start
             if (humanoid.SignatureData != null)
             {
-                profile.SignatureData = humanoid.SignatureData.Serialize();
+                profile.SignatureData = SignatureSerializer.Serialize(humanoid.SignatureData);
             }
             // ss220 add signature end
 
