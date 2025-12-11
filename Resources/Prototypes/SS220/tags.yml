@@ -357,7 +357,10 @@
 
 - type: Tag
   id: MiGoHandsWhitelist
-  
+
+- type: Tag
+  id: DefibrillatorCompact
+
 - type: Tag
   id: CultYoggTeleportEnter
 
