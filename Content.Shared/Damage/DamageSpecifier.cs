@@ -324,6 +324,18 @@ namespace Content.Shared.Damage
             return containsMemeber;
         }
 
+        // SS220-EasierModifiers-Start
+        public void AddDamageEvenly(float bonus)
+        {
+            var types = DamageDict.Count;
+
+            foreach (var entry in DamageDict)
+            {
+                DamageDict[entry.Key] += bonus / types;
+            }
+        }
+        // SS220-EasierModifiers-End
+
         /// <summary>
         ///     Returns a dictionary using <see cref="DamageGroupPrototype.ID"/> keys, with values calculated by adding
         ///     up the values for each damage type in that group
