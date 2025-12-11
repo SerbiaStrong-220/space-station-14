@@ -269,3 +269,14 @@
     Glass: 100
     Plastic: 100
 
+# SS220 Adding AdvancedLauncherSyringe begin
+- type: latheRecipe
+  id: AdvancedMiniSyringe
+  result: AdvancedMiniSyringe
+  completetime: 2
+  materials:
+    Steel: 200
+    Glass: 200
+    Plastic: 200
+    Plasma: 50
+# SS220 Adding AdvancedLauncherSyringe end
