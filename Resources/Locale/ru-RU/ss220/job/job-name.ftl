@@ -5,6 +5,8 @@ job-name-cc-default = ЦК
 job-name-cc-agent = агент ЦК
 job-name-cc-oficier = офицер ЦК
 job-name-cc-operational-oficier = полевой офицер ЦК
+job-name-cc-ci-agent = агент Контрразведки
+job-name-cc-ci-officer = офицер Контрразведки
 
 job-name-cburn-agent = агент РХБЗ
 job-name-cburn-leader = лидер отряда РХБЗ

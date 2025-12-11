@@ -2139,43 +2139,6 @@
   - type: Icon #SS220 PDA-Resprite
     state: pda-cburn #SS220 PDA-Resprite
 
-# SS220 More_Centcomm_Prototypes start
-- type: entity
-  parent: BasePDA
-  id: CBURNLeaderPDA
-  name: CBURN Leader PDA
-  description: Smells like rotten flesh.
-  components:
-  - type: Pda
-    id: CBURNIDLeadercard
-  #SS220 PDA-Resprite-Begin
-  - type: Appearance
-    appearanceDataInit:
-     enum.PdaVisuals.PdaType:
-       !type:String
-       pda-cburn
-  #SS220 PDA-Resprite-End
-  - type: PdaBorderColor
-    borderColor: "#7a998d" #SS220 PDA-Resprite
-#    accentHColor: "#447987" #SS220 PDA-Resprite
-#    accentVColor: "#447987" #SS220 PDA-Resprite
-  - type: Sprite #SS220 PDA-Resprite-Start
-    layers:
-    - map: [ "enum.PdaVisualLayers.Base" ]
-      state: "pda" #ss220 fix
-    - state: "screen-nt"
-      shader: "unshaded"
-    - state: "light_overlay"
-      map: [ "enum.PdaVisualLayers.Flashlight" ]
-      shader: "unshaded"
-      visible: false
-    - state: "id_overlay"
-      map: [ "enum.PdaVisualLayers.IdLight" ]
-      visible: false #SS220 PDA-Resprite-End
-  - type: Icon #SS220 PDA-Resprite
-    state: pda-cburn #SS220 PDA-Resprite
-# SS220 More_Centcomm_Prototypes end
-
 - type: entity
   parent: BasePDA
   id: PsychologistPDA

@@ -93,6 +93,10 @@ ent-DetectiveIDCard = detective ID card
     .desc = { ent-IDCardStandard.desc }
 ent-CBURNIDcard = CBURN ID card
     .desc = { ent-CentcomIDCard.desc }
+# SS220 More_Centcomm_Prototypes start
+ent-CBURNIDLeadercard = CBURN Leader ID card
+    .desc = { ent-CentcomIDCard.desc }
+# SS220 More_Centcomm_Prototypes end
 ent-CluwneIDCard = cluwne ID card
     .suffix = Unremoveable
     .desc = { ent-IDCardStandard.desc }

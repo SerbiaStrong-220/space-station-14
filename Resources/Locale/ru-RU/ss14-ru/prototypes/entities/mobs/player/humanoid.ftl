@@ -47,6 +47,11 @@ ent-RandomHumanoidSpawnerERTMedicalEVA = ОБР медик
 ent-RandomHumanoidSpawnerCBURNUnit = Агент РХБЗ
     .suffix = Роль ОБР
     .desc = { "" }
+# SS220 More_Centcomm_Prototypes start
+ent-RandomHumanoidSpawnerCBURNLeader = Лидер отряда РХБЗ
+    .suffix = Роль ОБР
+    .desc = { "" }
+# SS220 More_Centcomm_Prototypes end
 ent-RandomHumanoidSpawnerCentcomOfficial = Представитель Центком
     .desc = { "" }
 ent-RandomHumanoidSpawnerSyndicateAgent = Агент Синдиката

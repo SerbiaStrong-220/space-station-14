@@ -76,6 +76,10 @@ ent-ERTLeaderPDA = ERT PDA
     .desc = Red for firepower.
 ent-CBURNPDA = CBURN PDA
     .desc = Smells like rotten flesh.
+# SS220 More_Centcomm_Prototypes start
+ent-CBURNLeaderPDA = CBURN Leader PDA
+    .desc = Smells like rotten flesh.
+# SS220 More_Centcomm_Prototypes end
 ent-PsychologistPDA = psychologist PDA
     .desc = Looks immaculately cleaned.
 ent-ReporterPDA = reporter PDA

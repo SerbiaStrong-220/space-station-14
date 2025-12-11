@@ -198,3 +198,50 @@
     jobTitle: job-name-dq-specialist
   - type: PresetIdCard
     job:  DeathsquadHealer
+
+# CBURNLeader
+- type: entity
+  parent: IDCardStandard
+  id: CBURNIDLeadercard
+  name: CBURN ID Leader card
+  suffix: CBURN
+  components:
+  - type: Sprite
+    layers:
+    - state: centcom
+    # layers:
+    # - state: centcom
+    # - state: stripe_top
+    #   color: *color-centcomm-top
+    # - state: stripe_bottom
+    #   color: *color-centcomm-bottom
+    # - sprite: *icon-rsi
+    #   offset: *icon-offset
+    #   state: CBURN
+  - type: Item
+    heldPrefix: blue
+  - type: PresetIdCard
+    job: CBURNLeader
+
+# CI
+- type: entity
+  parent: CentcomIDCard
+  id: CIAgentIDCard
+  name: ID карта Агента Контрразведки
+  description: Карта, необходимая для доступа в различные части станций и кораблей.
+  components:
+    - type: IdCard
+      jobTitle: job-name-cc-ci-agent
+    - type: PresetIdCard
+      job: CIAgent
+
+- type: entity
+  parent: CentcomIDCard
+  id: CIOfficerIDCard
+  name: ID карта Офицера Контрразведки
+  description: Карта, необходимая для доступа в различные части станций и кораблей.
+  components:
+    - type: IdCard
+      jobTitle: job-name-cc-ci-officer
+    - type: PresetIdCard
+      job: CIOffcier

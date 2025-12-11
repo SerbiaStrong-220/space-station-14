@@ -567,40 +567,6 @@
       - NamesMilitaryLast
       nameFormat: name-format-ert
 
-# SS220 More_Centcomm_Prototypes start
-- type: entity
-  id: RandomHumanoidSpawnerCBURNLeaderUnit
-  name: CBURN Leader
-  suffix: ERTRole
-  components:
-    - type: Sprite
-      sprite: Markers/jobs.rsi
-      state: cburn
-    - type: RandomHumanoidSpawner
-      settings: CBURNLeader
-
-- type: randomHumanoidSettings
-  id: CBURNLeader
-  speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
-  parent: EventHumanoidCentcomm
-  components:
-    - type: Loadout
-      prototypes: [CBURNLeaderGear]
-      roleLoadout: [ RoleSurvivalEVA ]
-    - type: GhostRole
-      name: ghost-role-information-cburn-agent-name
-      description: ghost-role-information-cburn-agent-description
-      rules: ghost-role-information-nonantagonist-rules
-      raffle:
-        settings: short
-      job: CBURNLeader
-    - type: RandomMetadata
-      nameSegments:
-      - NamesMilitaryFirst
-      - NamesMilitaryLast
-      nameFormat: name-format-ert
-# SS220 More_Centcomm_Prototypes end
-
 ## Central Command
 
 - type: entity

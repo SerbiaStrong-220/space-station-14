@@ -25,6 +25,10 @@ ent-RandomHumanoidSpawnerERTMedicalEVA = ERT medic
     .desc = { ent-RandomHumanoidSpawnerERTMedical.desc }
 ent-RandomHumanoidSpawnerCBURNUnit = CBURN Agent
     .desc = { "" }
+# SS220 More_Centcomm_Prototypes start
+ent-RandomHumanoidSpawnerCBURNLeader = CBURN Leader
+    .desc = { "" }
+# SS220 More_Centcomm_Prototypes end
 ent-RandomHumanoidSpawnerCentcomOfficial = CentCom official
     .desc = { "" }
 ent-RandomHumanoidSpawnerSyndicateAgent = Syndicate Agent
