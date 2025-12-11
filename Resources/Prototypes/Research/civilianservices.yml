@@ -208,7 +208,7 @@
   - PushHorn
   - BorgModuleAdvancedClowning
 
-# SS220 Adding AdvancedLauncherSyringe begin
+# SS220 Change LauncherSyringe tier begin
 - type: technology
   id: LauncherSyringe
   name: research-technology-launcher-syringe
@@ -221,7 +221,7 @@
   recipeUnlocks:
   - LauncherSyringe
   - MiniSyringe
-# SS220 Adding AdvancedLauncherSyringe end
+# SS220 Change LauncherSyringe tier end
 
 # Tier 3
 
@@ -249,9 +249,6 @@
   recipeUnlocks:
   - BluespaceBeaker
   - SyringeBluespace
-  # SS220 Adding AdvancedLauncherSyringe begin
-  - AdvancedMiniSyringe
-  # SS220 Adding AdvancedLauncherSyringe end
 
 #- type: technology
 #  id: LauncherSyringe
