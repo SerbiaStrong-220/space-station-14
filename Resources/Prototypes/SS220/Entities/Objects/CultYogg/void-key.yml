@@ -18,6 +18,17 @@
   - type: SpawnOnTrigger
     proto: VoidPortalSpawn
     useMapCoords: true
+  - type: MeleeWeapon
+    attackRate: 1.5
+    damage:
+      types:
+        Slash: 15.5
+  - type: ThrowingAngle
+    angularVelocity: true # spins
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 10
 
 - type: entity
   id: VoidPortal
