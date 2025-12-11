@@ -356,9 +356,7 @@
 # ss220 Posters update end
 
 - type: Tag
-  id: MiGoHandsWhitelist
-
-- type: Tag
+  id: MiGoHandsWhitelist- type: Tag
   id: CultYoggTeleportEnter
 
 - type: Tag
