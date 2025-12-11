@@ -30,3 +30,13 @@
   cost: 500
   category: cargoproduct-category-name-fun
   group: market
+
+- type: cargoProduct
+  id: BigDrumsInstrument
+  icon:
+    sprite: SS220/Objects/Instruments/drum_kit.rsi
+    state: drum
+  product: BigDrumsInstrument
+  cost: 1500
+  category: cargoproduct-category-name-fun
+  group: market
