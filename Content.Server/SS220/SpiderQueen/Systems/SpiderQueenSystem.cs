@@ -4,17 +4,13 @@ using Content.Server.Chat.Systems;
 using Content.Server.Interaction;
 using Content.Server.Pinpointer;
 using Content.Server.SS220.SpiderQueen.Components;
-using Content.Shared.Administration.Logs;
 using Content.Shared.Coordinates.Helpers;
-using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Maps;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
-using Content.Shared.Physics;
-using Content.Shared.Popups;
 using Content.Shared.SS220.SpiderQueen;
 using Content.Shared.SS220.SpiderQueen.Components;
 using Content.Shared.SS220.SpiderQueen.Systems;
@@ -24,15 +20,11 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Physics;
 using Robust.Shared.Physics.Collision.Shapes;
-using Robust.Shared.Physics.Components;
-using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using System.Linq;
 using System.Numerics;
 
 namespace Content.Server.SS220.SpiderQueen.Systems;
@@ -52,13 +44,8 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly HungerSystem _hunger = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly TileSystem _tile = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly IEntityManager _entManager = default!;
     [Dependency] private readonly InteractionSystem _interaction = default!;
 
     public override void Initialize()
