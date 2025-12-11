@@ -107,4 +107,45 @@
   components:
   - type: AccessReader
     access: [["Psychologist"]]
+
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsParamedic
+  suffix: Paramedic, Locked
+  components:
+  - type: AccessReader
+    access: [["Paramedic"]]
 #SS220 New_accesses_and_some_tweaks end
+
+#SS220 More_Centcomm_Prototypes
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsCentralCommandBSO
+  suffix: BSO, Locked
+  components:
+  - type: AccessReader
+    access: [["CentralCommandBSO"]]
+
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsCentralCommandERT
+  suffix: ERT, Locked
+  components:
+  - type: AccessReader
+    access: [["CentralCommandERT"]]
+
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsCentralCommandCBURN
+  suffix: CBURN, Locked
+  components:
+  - type: AccessReader
+    access: [["CentralCommandBSO"]]
+
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsCentralCommandDeathSquad
+  suffix: DeathSquad, Locked
+  components:
+  - type: AccessReader
+    access: [["CentralCommandDeathSquad"]]

@@ -110,3 +110,6 @@
 
 - type: playTimeTracker
   id: CultistOfYogg
+
+- type: playTimeTracker
+  id: JobCBURNLeader

@@ -109,7 +109,7 @@
   components:
   - type: ContainerFill
     containers:
-      board: [ DoorElectronicsCentralCommand ]
+      board: [ DoorElectronicsCentralCommandERT ]
 
 - type: entity
   parent: AirlockGlassCentcomm
@@ -118,7 +118,7 @@
   components:
   - type: ContainerFill
     containers:
-      board: [ DoorElectronicsCentralCommand ]
+      board: [ DoorElectronicsCentralCommandBSO ]
 
 - type: entity
   parent: AirlockGlassCentcomm
@@ -127,7 +127,7 @@
   components:
   - type: ContainerFill
     containers:
-      board: [ DoorElectronicsCentralCommand ]
+      board: [ DoorElectronicsCentralCommandDeathSquad ]
 
 - type: entity
   parent: AirlockGlassCentcomm
@@ -136,7 +136,7 @@
   components:
   - type: ContainerFill
     containers:
-      board: [ DoorElectronicsCentralCommand ]
+      board: [ DoorElectronicsCentralCommandCBURN ]
 
 - type: entity
   parent: Airlock
@@ -166,7 +166,7 @@
   components:
   - type: ContainerFill
     containers:
-      board: [ DoorElectronicsCentralCommand ]
+      board: [ DoorElectronicsCentralCommandBSO ]
 
 - type: entity
   parent: AirlockCentcomm
@@ -175,7 +175,7 @@
   components:
   - type: ContainerFill
     containers:
-      board: [ DoorElectronicsCentralCommand ]
+      board: [ DoorElectronicsCentralCommandERT ]
 
 - type: entity
   parent: AirlockCentcomm
@@ -184,7 +184,7 @@
   components:
   - type: ContainerFill
     containers:
-      board: [ DoorElectronicsCentralCommand ]
+      board: [ DoorElectronicsCentralCommandDeathSquad ]
 
 
 - type: entity
@@ -194,7 +194,43 @@
   components:
   - type: ContainerFill
     containers:
-      board: [ DoorElectronicsCentralCommand ]
+      board: [ DoorElectronicsCentralCommandCBURN ]
+
+- type: entity
+  parent: HighSecCentralCommandLocked
+  id: HighSecCentcommLockedBSO
+  suffix: ЦК, Закрыто, Оперативник "Синий Щит"
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsCentralCommandBSO ]
+
+- type: entity
+  parent: HighSecCentralCommandLocked
+  id: HighSecCentcommLockedERT
+  suffix: ЦК, Закрыто, ОБР
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsCentralCommandERT ]
+
+- type: entity
+  parent: HighSecCentralCommandLocked
+  id: HighSecCentcommLockedCBURN
+  suffix: ЦК, Закрыто, Отряд РХБЗ
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsCentralCommandCBURN ]
+
+- type: entity
+  parent: HighSecCentralCommandLocked
+  id: HighSecCentcommLockedDeathSquad
+  suffix: ЦК, Закрыто, Эскадрон Смерти
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsCentralCommandDeathSquad ]
 
 #USSP
 - type: entity

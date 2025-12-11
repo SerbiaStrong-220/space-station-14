@@ -6,6 +6,7 @@
   components:
   - type: StorageFill
     contents:
+      - id: BoxSurvivalCentcom
       - id: WeaponDisabler
       - id: MedicatedSuture
       - id: RegenerativeMesh
@@ -20,6 +21,7 @@
   components:
   - type: StorageFill
     contents:
+      - id: BoxSurvivalCentcom
       - id: BoxCandle
       - id: BoxBodyBag
       - id: DrinkWaterMelonJuiceJug
@@ -38,6 +40,7 @@
   components:
   - type: StorageFill
     contents:
+      - id: BoxSurvivalCentcom
       - id: trayScanner
       - id: RCD
       - id: RCDAmmo
@@ -56,6 +59,7 @@
   components:
    - type: StorageFill
      contents:
+      - id: BoxSurvivalCentcom
       - id: WeaponDisabler
       - id: MedicatedSuture
       - id: RegenerativeMesh
@@ -70,6 +74,7 @@
   components:
   - type: StorageFill
     contents:
+      - id: BoxSurvivalCentcom
       - id: Hypospray
       - id: MedkitAdvancedFilled
       - id: CrowbarRed
@@ -84,12 +89,23 @@
   components:
   - type: StorageFill
     contents:
+      - id: BoxSurvivalCentcom
       - id: LightReplacer
       - id: BoxLightMixed
         amount: 2
       - id: Soap
       - id: CrowbarRed
       - id: AdvMopItem
+
+- type: entity
+  parent: ClothingBackpackERTJanitor
+  id: ClothingBackpackERTJanitorFilledGrenadeCleanade
+  suffix: Filled, GrenadeCleanade
+  components:
+  - type: StorageFill
+    contents:
+    - id: GrenadeCleanade
+      amount: 24
 
 - type: entity
   parent: ClothingBackpackERTSecurity
@@ -116,7 +132,8 @@
         - id: EmergencyMedipenDQ
           amount: 2
         - id: StimpackDQ
-        
+        - id: BoxSurvivalCentcom
+
 - type: entity
   parent: ClothingBackpackERTSecurity
   id: ClothingBackpackDeathSquadSpecialistFilled
@@ -142,6 +159,7 @@
         - id: EmergencyMedipenDQ
           amount: 6
         - id: StimpackDQ
+        - id: BoxSurvivalCentcom
 
 - type: entity
   parent: ClothingBackpackBlueShieldHight
@@ -149,13 +167,33 @@
   components:
   - type: StorageFill
     contents:
-      - id: BoxSurvivalSecurity
+      - id: BoxSurvivalCentcom
       - id: WeaponBlasterKRV
       - id: BlasterPowerCellPulse
         amount: 3
       - id: FlashlightSeclite
       - id: MedkitCombatFilled
       - id: BlueShieldGasMask
+
+# CBURNleader
+- type: entity
+  parent: ClothingBackpackERTLeader
+  id: ClothingBackpackCBURNLeaderFilled
+  name: CBURN leader backpack
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: BoxSurvivalCentcom
+      - id: MedicatedSuture
+      - id: RegenerativeMesh
+      - id: CrowbarRed
+      - id: BoxShotgunIncendiary
+        amount: 2
+      - id: GrenadeFlashBang
+        amount: 2
+      - id: PillAmbuzolPlus
+      - id: WeaponShotgunSawn
 
 # Svarshik's toys
 - type: entity

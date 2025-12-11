@@ -1,0 +1,46 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: job
+  id: CBURNLeader
+  name: job-name-cburn-leader
+  description: job-description-cburn-leader
+  playTimeTracker: JobCBURNLeader
+  setPreference: false
+  startingGear: CBURNLeaderGear
+  icon: "JobIconNanotrasen"
+  supervisors: job-supervisors-centcom
+  canBeAntag: false
+  accessGroups:
+  - AllAccess
+  access:
+  - CentralCommand
+  - CentralCommandCBURN
+  departmentsToIgnoreInTitles:
+  - Command
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant, DeathRattleImplantCentcomm ]
+  - !type:AddComponentSpecial
+    components:
+    - type: DefibrillatorSkill
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 20h
+    - !type:DepartmentTimeRequirement
+      department: Command
+      time: 10h
+
+- type: startingGear
+  id: CBURNLeaderGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitERTLeader
+    back: ClothingBackpackCBURNLeaderFilled
+    mask: ClothingMaskGasERT
+    eyes: ClothingEyesGlassesSecurity
+    ears: ClothingHeadsetAltCentCom
+    gloves: ClothingHandsGlovesCombat
+    outerClothing: ClothingOuterHardsuitCBURNLeader
+    shoes: ClothingShoesBootsCombatFilled
+    id: CBURNPDA
+    pocket1: HandheldRadio

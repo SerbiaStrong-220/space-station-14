@@ -1,3 +1,4 @@
+#DeathSquad
 - type: entity
   id: LockerDeathsquadOperativeFilled
   suffix: Filled
@@ -49,3 +50,279 @@
     - id: WeaponPulseShotgun
     - id: ClothingOuterHardsuitDeathsquadAlpha
     - id: ClothingBackpackDeathSquadSpecialistFilled
+
+#ERT
+- type: entity
+  id: LockerErtCommanderFilled
+  suffix: Filled
+  parent: LockerErtCommander
+  components:
+  - type: StorageFill
+    contents:
+    - id: ClothingUniformJumpsuitERTLeader
+    - id: ClothingBackpackERTLeaderFilled
+    - id: ClothingHeadHelmetERTLeader
+    - id: ClothingHeadsetAltCentComm
+    - id: ClothingHandsGlovesCombat
+    - id: ClothingShoesBootsJackSecFilled
+    - id: ClothingEyesThermalGlassesSecurity
+    - id: ClothingBeltSecurityFilled
+    - id: ClothingOuterArmorBulletproof
+    - id: WeaponPistolN1984
+    - id: MagazineMagnum
+    - id: FlashlightSeclite
+
+- type: entity
+  id: LockerErtSecurityFilled
+  suffix: Filled
+  parent: LockerErtSecurity
+  components:
+  - type: StorageFill
+    contents:
+    - id: ClothingUniformJumpsuitERTSecurity
+    - id: ClothingBackpackERTSecurityFilled
+    - id: ClothingHeadHelmetERTSecurity
+    - id: ClothingHeadsetAltCentComm
+    - id: ClothingHandsGlovesCombat
+    - id: ClothingShoesBootsJackSecFilled
+    - id: ClothingBeltSecurityFilled
+    - id: ClothingOuterArmorBulletproof
+    - id: ClothingEyesGlassesSecurity
+    - id: WeaponPistolMk58
+    - id: MagazinePistol
+    - id: FlashlightSeclite
+
+- type: entity
+  id: LockerErtMedicFilled
+  suffix: Filled
+  parent: LockerErtMedic
+  components:
+  - type: StorageFill
+    contents:
+    - id: ClothingUniformJumpsuitERTMedic
+    - id: ClothingBackpackERTMedicalFilled
+    - id: ClothingHeadHelmetERTMedic
+    - id: ClothingHeadsetAltCentComm
+    - id: ClothingHandsGlovesNitrile
+    - id: ClothingShoesBootsJackSecFilled
+    - id: ClothingBeltMedicalFilled
+    - id: ClothingOuterArmorBasicSlim
+    - id: ClothingEyesHudMedSec
+    - id: MedkitCombatFilled
+      amount: 2
+    - id: DefibrillatorCompact
+    - id: FlashlightSeclite
+
+- type: entity
+  id: LockerErtEngineerFilled
+  suffix: Filled
+  parent: LockerErtEngineer
+  components:
+  - type: StorageFill
+    contents:
+    - id: ClothingUniformJumpsuitERTEngineer
+    - id: ClothingBackpackERTEngineerFilled
+    - id: ClothingHeadHelmetERTEngineer
+    - id: ClothingHeadsetAltCentComm
+    - id: ClothingHandsGlovesCombat
+    - id: ClothingShoesBootsJackSecFilled
+    - id: ClothingMaskWeldingGas
+    - id: ClothingBeltChiefEngineerFilled
+    - id: ClothingOuterArmorBasicSlim
+    - id: MedkitAdvancedFilled
+    - id: FlashlightSeclite
+
+- type: entity
+  id: LockerErtJanitorFilled
+  suffix: Filled
+  parent: LockerErtJanitor
+  components:
+  - type: StorageFill
+    contents:
+    - id: ClothingUniformJumpsuitERTJanitor
+    - id: ClothingBackpackERTJanitorFilled
+    - id: ClothingHeadHelmetERTJanitor
+    - id: ClothingHeadsetAltCentComm
+    - id: ClothingEyesGlassesCommand
+    - id: ClothingBeltJanitorFilled
+    - id: ClothingShoesGaloshes
+    - id: ClothingHandsGlovesColorPurple
+    - id: ClothingOuterArmorBasicSlim
+    - id: MedkitAdvancedFilled
+    - id: WeaponLauncherHydra
+    - id: ClothingBackpackERTJanitorFilledGrenadeCleanade
+    - id: FlashlightSeclite
+
+- type: entity
+  id: LockerErtChaplainFilled
+  suffix: Filled
+  parent: LockerErtChaplain
+  components:
+  - type: StorageFill
+    contents:
+    - id: ClothingUniformJumpsuitERTChaplain
+    - id: ClothingBackpackERTChaplain
+    - id: ClothingHeadHatFez
+    - id: ClothingOuterHoodieChaplain
+    - id: ClothingHeadsetAltCentComm
+    - id: ClothingEyesGlassesCommand
+    - id: ClothingHandsGlovesCombat
+    - id: ClothingBeltStorageWaistbag
+    - id: ClothingNeckStoleChaplain
+    - id: HolyWaterJug
+      amount: 2
+    - id: FoodBakedBunHotX
+      amount: 4
+    - id: Claymore
+    - id: FlashlightSeclite
+
+#Pilots
+- type: entity
+  id: LockerCentcommPilotFilled
+  name: шкаф пилота ЦК
+  suffix: Filled
+  parent: LockerCentcomm
+  components:
+  - type: StorageFill
+    contents:
+    - id: ClothingUniformJumpsuitERTSecurity
+    - id: ClothingBackpackERTSecurityFilled
+    - id: ClothingHeadHelmetERTSecurity
+    - id: ClothingHeadsetAltCentComm
+    - id: ClothingHandsGlovesCombat
+    - id: ClothingShoesBootsJackSecFilled
+    - id: ClothingBeltSecurityFilled
+    - id: ClothingOuterArmorBulletproof
+    - id: ClothingEyesGlassesSecurity
+    - id: JetpackVoidFilled
+    - id: WeaponGrapplingGun
+    - id: HandheldGPSBasic
+    - id: WeaponPulsePistol
+    - id: WeaponPistolMk58
+    - id: MagazinePistol
+    - id: FlashlightSeclite
+
+#CBURN
+- type: entity
+  id: LockerCburnFilled
+  suffix: Filled
+  parent: LockerCburn
+  components:
+  - type: StorageFill
+    contents:
+    - id: ClothingUniformJumpsuitERTSecurity
+    - id: ClothingBackpackDuffelCBURNFilled
+    - id: ClothingHeadsetAltCentComm
+    - id: ClothingHandsGlovesCombat
+    - id: ClothingShoesBootsJackSecFilled
+    - id: ClothingBeltSecurityFilled
+    - id: ClothingEyesGlassesSecurity
+    - id: WeaponRevolverInspector
+    - id: SpeedLoaderMagnumIncendiary
+      amount: 3
+    - id: FlashlightSeclite
+
+- type: entity
+  id: LockerCburnCommanderFilled
+  suffix: Filled
+  parent: LockerCburnCommander
+  components:
+  - type: StorageFill
+    contents:
+    - id: ClothingUniformJumpsuitERTLeader
+    - id: ClothingBackpackERTLeaderFilled
+    - id: ClothingHeadHatBeretNanoTrasenOfficer
+    - id: ClothingHeadsetAltCentComm
+    - id: ClothingHandsGlovesCombat
+    - id: ClothingShoesBootsJackSecFilled
+    - id: ClothingEyesThermalGlassesSecurity
+    - id: ClothingBeltSecurityFilled
+    - id: WeaponPistolN1984
+    - id: MagazineMagnum
+      amount: 2
+    - id: MedkitCombatFilled
+    - id: ChemistryBottleAmbuzolPlus
+    - id: FlashlightSeclite
+
+#BSO
+- type: entity
+  id: LockerBlueshieldOperativeFilled
+  suffix: Filled
+  parent: LockerBlueshieldOperative
+  components:
+  - type: StorageFill
+    contents:
+    - id: ClothingHeadBeretBlueshield
+    - id: ClothingUniformJumpsuitBlueShieldTurtle
+    - id: ClothingShoesBootsBlueShieldJackFilled
+    - id: ClothingHeadsetAltCentComm
+    - id: ClothingBeltWebbingBlueShield
+    - id: ClothingOuterArmorBlueShieldScale
+    - id: ClothingOuterArmorBlueShieldAssault
+    - id: ClothingBeltHolster
+    - id: PowerCellMicroreactor
+      amount: 2
+    - id: WeaponSubMachineGunAtreides
+    - id: MedkitCombatFilled
+    - id: DefibrillatorCompact
+    - id: BoxMagazinePistolSubMachineGun
+    - id: BoxHandcuff
+
+#CI
+- type: entity
+  id: LockerCIAgentFilled
+  name: шкаф агента Контрразведки
+  suffix: Filled
+  parent: LockerCentcomm
+  components:
+  - type: StorageFill
+    contents:
+      - id: MedkitCombatFilled
+      - id: BoxMagazineRifle
+        amount: 2
+      - id: BoxHandcuff
+      - id: WeaponRifleM90GrenadeLauncher
+      - id: ClothingHeadsetAltCentComm
+      - id: CentcomNewPDA
+      - id: ClothingBeltMilitaryWebbing
+      - id: ClothingHandsGlovesPowergloveDisabler
+      - id: ClothingNeckScarfStripedBlack
+      - id: ClothingShoesBootsMagAdv
+      - id: ClothingUniformTacticalSecurity
+      - id: BlueShieldSWAT
+      - id: ClothingHeadHelmetSwat
+      - id: ClothingOuterArmorHeavy
+      - id: ClothingEyesThermalGlassesSecurity
+      - id: ClothingBackpackERTSecurity
+      - id: DeathRattleImplanterCentcomm
+      - id: BoxFlashbang
+
+- type: entity
+  id: LockerCIOfficerFilled
+  name: шкаф офицера Контрразведки
+  suffix: Filled
+  parent: LockerCentcomm
+  components:
+  - type: StorageFill
+    contents:
+      - id: MedkitCombatFilled
+      - id: ClothingHeadsetAltCentComm
+      - id: NTbaton
+      - id: WeaponRifleM90GrenadeLauncher
+      - id: MagazineRifle
+        amount: 5
+      - id: ClothingHeadHatSyndieMAA
+      - id: ClothingBeltMilitaryWebbing
+      - id: CentcomNewPDA
+      - id: ClothingMaskGasSecurity
+      - id: ClothingOuterCoatDetectiveDark
+      - id: ClothingBackpackNoirSatchel
+      - id: ClothingHandsGlovesCombat
+      - id: ClothingNeckScarfStripedBlack
+      - id: ClothingEyesGlassesCommand
+      - id: ClothingShoesBootsJack
+      - id: ClothingUniformJumpsuitLawyerBlackSyndieLobbyingBundle
+      - id: RubberStampDoAP
+      - id: RubberStampApproved
+      - id: RubberStampDenied
+      - id: DeathRattleImplanterCentcomm

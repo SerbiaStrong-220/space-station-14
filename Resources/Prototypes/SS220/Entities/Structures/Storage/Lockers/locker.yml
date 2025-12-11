@@ -106,6 +106,19 @@
     access: [ [ "CentralCommandCBURN" ] ]
 
 - type: entity
+  id: LockerCburnCommander
+  parent: LockerDoubleBase
+  name: шкаф командира отряда РХБЗ
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: armory_steel_locker
+    stateDoorOpen: wardrobe_open
+    stateDoorClosed: armory_door
+  - type: AccessReader
+    access: [ [ "CentralCommandCBURN" ] ]
+
+- type: entity
   id: LockerDeathsquad
   parent: LockerBase
   name: шкаф отряда Эскадрона Смерти
@@ -137,6 +150,21 @@
     stateBaseClosed: deathsquad
     stateDoorOpen: medsteel_open
     stateDoorClosed: deathsquadspecialist_door
+
+- type: entity
+  id: LockerBlueshieldOperative
+  parent: LockerBaseSecure
+  name: шкаф оперативника "Синий Щит"
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Storage/closet.rsi
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: blueshield
+    stateDoorOpen: steeldarklocker_open
+    stateDoorClosed: blueshield_door
+  - type: AccessReader
+    access: [ [ "CentralCommandBSO" ] ]
 
 #Командование
 - type: entity

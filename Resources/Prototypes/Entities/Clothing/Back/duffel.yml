@@ -365,7 +365,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: BoxSurvivalEngineering
+    - id: BoxSurvivalCentcom #SS220 More_Centcomm_Prototypes
     - id: WeaponShotgunDoubleBarreled
     - id: BoxShotgunIncendiary
       amount: 2
