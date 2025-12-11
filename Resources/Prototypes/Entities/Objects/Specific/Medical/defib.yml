@@ -92,7 +92,7 @@
     drawRate: 0
   - type: Tag
     tags:
-    - DefibrillatorCompactWhitelist
+    - DefibrillatorCompact
   - type: ContainerContainer
     containers:
       cell_slot: !type:ContainerSlot { }
