@@ -1957,6 +1957,33 @@
   - type: PresetIdCard
     job: CBURN
 
+# SS220 More_Centcomm_Prototypes start
+- type: entity
+  parent: IDCardStandard
+  id: CBURNIDLeadercard
+  name: CBURN ID Leader card
+  suffix: CBURN
+  components:
+  - type: Sprite
+    # SS220-own-sprites-begin
+    layers:
+    - state: centcom
+    # layers:
+    # - state: centcom
+    # - state: stripe_top
+    #   color: *color-centcomm-top
+    # - state: stripe_bottom
+    #   color: *color-centcomm-bottom
+    # - sprite: *icon-rsi
+    #   offset: *icon-offset
+    #   state: CBURN
+    # SS220-own-sprites-end
+  - type: Item
+    heldPrefix: blue
+  - type: PresetIdCard
+    job: CBURNLeader
+# SS220 More_Centcomm_Prototypes end
+
 - type: entity
   parent: IDCardStandard
   id: UniversalIDCard
