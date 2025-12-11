@@ -282,7 +282,7 @@
       - id: BoxHandcuff
       - id: WeaponRifleM90GrenadeLauncher
       - id: ClothingHeadsetAltCentComm
-      - id: CentcomNewPDA
+      - id: CentcomCIAgentPDA
       - id: ClothingBeltMilitaryWebbing
       - id: ClothingHandsGlovesPowergloveDisabler
       - id: ClothingNeckScarfStripedBlack
@@ -308,7 +308,7 @@
         amount: 5
       - id: ClothingHeadHatSyndieMAA
       - id: ClothingBeltMilitaryWebbing
-      - id: CentcomNewPDA
+      - id: CentcomCIOfficerPDA
       - id: ClothingMaskGasSecurity
       - id: ClothingOuterCoatDetectiveDark
       - id: ClothingBackpackCIOfficerFilled
