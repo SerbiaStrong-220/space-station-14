@@ -40,9 +40,9 @@ public abstract class SharedSelfLinkedTeleportSystem : EntitySystem
     private void OnExamined(Entity<SelfLinkedTeleportComponent> ent, ref ExaminedEvent args)
     {
         if (ent.Comp.LinkedEntity == null)
-            args.PushMarkup("linked-teleport-no-exit");
+            args.PushMarkup(Loc.GetString("linked-teleport-no-exit"));
         else
-            args.PushMarkup("linked-teleport-has-link");
+            args.PushMarkup(Loc.GetString("linked-teleport-has-link"));
     }
 
     protected virtual void Warp(Entity<SelfLinkedTeleportComponent> ent, EntityUid target, EntityUid user) { }
