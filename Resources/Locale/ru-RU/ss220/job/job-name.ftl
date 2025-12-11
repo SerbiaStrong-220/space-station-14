@@ -7,6 +7,7 @@ job-name-cc-oficier = офицер ЦК
 job-name-cc-operational-oficier = полевой офицер ЦК
 
 job-name-cburn-agent = агент РХБЗ
+job-name-cburn-leader = лидер отряда РХБЗ
 job-name-cc-bs-operative = оперативник "Синий Щит"
 job-name-ert-commander = лидер отряда ОБР
 job-name-ert-chaplain = священник ОБР

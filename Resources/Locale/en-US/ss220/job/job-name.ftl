@@ -6,6 +6,7 @@ job-name-cc-oficier = central command oficier
 job-name-cc-operational-oficier = operational central command oficier
 
 job-name-cburn-agent = CBURN agent
+job-name-cburn-leader = CBURN Ledaer
 job-name-cc-bs-operative = Blue Shield Operative
 job-name-ert-commander = ERT Leader
 job-name-ert-chaplain = ERT Chaplain
