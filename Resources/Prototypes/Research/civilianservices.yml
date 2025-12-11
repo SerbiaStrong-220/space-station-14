@@ -248,6 +248,7 @@
   cost: 10000
   recipeUnlocks:
   - BluespaceBeaker
+  - AdvancedMiniSyringe
   - SyringeBluespace
 
 #- type: technology
