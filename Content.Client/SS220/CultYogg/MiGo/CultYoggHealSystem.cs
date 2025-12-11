@@ -5,8 +5,4 @@ namespace Content.Client.SS220.CultYogg.MiGo;
 
 public sealed partial class CultYoggHealSystem : SharedCultYoggHealSystem
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-    }
 }

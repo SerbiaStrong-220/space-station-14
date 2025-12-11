@@ -1,8 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Damage;
-using Content.Shared.Mobs;
-using Content.Shared.Mobs.Components;
 using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.Tools.Components;
 using Content.Shared.Tools.Systems;
