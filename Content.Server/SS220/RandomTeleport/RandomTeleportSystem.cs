@@ -54,6 +54,9 @@ public sealed class RandomTeleportSystem : EntitySystem
             validLocations.Add(Transform(target).Coordinates);
         }
 
+        if (validLocations.Count == 0)
+            return;
+
         var teleportLocation = _random.Pick(validLocations);
 
         if (TryComp(user, out PullerComponent? puller) && TryComp(puller.Pulling, out PullableComponent? pullable))
