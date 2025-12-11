@@ -231,3 +231,18 @@
   - type: HideLayerClothing
     slots:
     - Snout
+
+- type: entity
+  parent: ClothingMaskBase
+  id: ClothingMaskBalaclava
+  name: balaclava
+  description: For privacy lovers. Before the first glance at the ID.
+  components: 
+  - type: Sprite
+    sprite: SS220/Clothing/Mask/balaclava.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Mask/balaclava.rsi
+  - type: HideLayerClothing
+    slots:
+    - Hair
+ 

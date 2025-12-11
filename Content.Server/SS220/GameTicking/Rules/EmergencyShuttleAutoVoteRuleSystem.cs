@@ -4,6 +4,7 @@ using Content.Server.Administration.Logs;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
 using Content.Server.RoundEnd;
+using Content.Server.Shuttles.Systems;
 using Content.Server.SS220.GameTicking.Rules.Components;
 using Content.Server.Voting;
 using Content.Server.Voting.Managers;
@@ -21,6 +22,7 @@ public sealed class EmergencyShuttleAutoVoteRuleSystem : GameRuleSystem<Emergenc
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly RoundEndSystem _roundEnd = default!;
     [Dependency] private readonly IVoteManager _voteManager = default!;
+    [Dependency] private readonly EmergencyShuttleSystem _emergencyShuttle = default!;
 
     private TimeSpan RoundTime => _gameTiming.CurTime - _gameTicker.RoundStartTimeSpan;
 
@@ -50,6 +52,12 @@ public sealed class EmergencyShuttleAutoVoteRuleSystem : GameRuleSystem<Emergenc
 
         if (RoundTime < component.LastEvacVoteTime + component.IntervalBetweenVotes)
             return;
+
+        if (_emergencyShuttle.EmergencyShuttleArrived)
+        {
+            _gameTicker.EndGameRule(uid, gameRule);
+            return;
+        }
 
         MakeEmergencyShuttleVote(component);
     }
