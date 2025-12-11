@@ -15,3 +15,13 @@
   - CombatTrainingBase
   - CombatTrainingTrained
   - CombatTrainingProfessional
+
+- type: skillTree
+  id: PhysicalTraining
+  skillGroupId: SkillGroupGeneral
+  skillTreeName: physical-training-skill-tree-name
+  skillTree:
+  - PhysicalTrainingInitial
+  - PhysicalTrainingBase
+  - PhysicalTrainingTrained
+  - PhysicalTrainingProfessional

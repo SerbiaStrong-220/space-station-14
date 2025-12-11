@@ -16,8 +16,10 @@ namespace Content.Client.SS220.Experience.Ui;
 public sealed partial class ExperienceViewWindow : FancyWindow
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
-
     private ISawmill _sawmill = default!;
+
+    public Action<PlayerChangeSkill>? OnSubmitChangeAction;
+
     private Dictionary<ProtoId<SkillTreeGroupPrototype>, ExperienceSkillTreeGroupContainer> _cachedControls = new();
 
     private Dictionary<ProtoId<SkillTreeGroupPrototype>,
@@ -27,12 +29,19 @@ public sealed partial class ExperienceViewWindow : FancyWindow
 
     private HashSet<ProtoId<KnowledgePrototype>> _knowledges = new();
 
+    private int _freeSublevelPoints;
+
     public ExperienceViewWindow()
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
 
         _sawmill = Logger.GetSawmill("experience-view-window");
+
+        SubmitButton.OnPressed += (_) => OnSubmitChangeAction?.Invoke(new PlayerChangeSkill
+        {
+            SkillSublevels = GetChangedSublevels()
+        });
     }
 
     public void SetKnowledge(HashSet<ProtoId<KnowledgePrototype>>? knowledges)
@@ -60,6 +69,33 @@ public sealed partial class ExperienceViewWindow : FancyWindow
         FinalizeUpdateSkillTree();
     }
 
+    public void SetFreeSublevelPoints(int freeSublevelPoints)
+    {
+        _freeSublevelPoints = freeSublevelPoints;
+        UpdateSublevel();
+    }
+
+    public Dictionary<ProtoId<SkillTreePrototype>, int> GetChangedSublevels()
+    {
+        var result = new Dictionary<ProtoId<SkillTreePrototype>, int>();
+
+        foreach (var child in ExperienceTreeGroupsContainer.Children)
+        {
+            if (child is not ExperienceSkillTreeGroupContainer groupContainer)
+                continue;
+
+            foreach (var groupChild in groupContainer.Children)
+            {
+                if (groupChild is not ExperienceTreeContainer treeContainer)
+                    continue;
+
+                result.Add(treeContainer.SkillTreeId, treeContainer.SpendPoints);
+            }
+        }
+
+        return result;
+    }
+
     private void Update()
     {
         if (_data.Count == 0)
@@ -70,6 +106,7 @@ public sealed partial class ExperienceViewWindow : FancyWindow
 
         FinalizeUpdateSkillTree();
         FinalizeUpdateKnowledge();
+        UpdateSublevel();
     }
 
     private void FinalizeUpdateSkillTree()
@@ -134,5 +171,28 @@ public sealed partial class ExperienceViewWindow : FancyWindow
 
         cachedControl.SetGroupName(FormattedMessage.FromMarkupPermissive(Loc.GetString(keyProto.GroupName)));
         cachedControl.UpdateWithList(value, key);
+
+        UpdateSublevel();
+    }
+
+    private void UpdateSublevel()
+    {
+        var canChange = _freeSublevelPoints > 0;
+
+        SubmitButton.Visible = canChange;
+
+        foreach (var child in ExperienceTreeGroupsContainer.Children)
+        {
+            if (child is not ExperienceSkillTreeGroupContainer groupContainer)
+                continue;
+
+            foreach (var groupChild in groupContainer.SkillTreeContainer.Children)
+            {
+                if (groupChild is not ExperienceTreeContainer treeContainer)
+                    continue;
+
+                treeContainer.HaveFreePoints = canChange;
+            }
+        }
     }
 }

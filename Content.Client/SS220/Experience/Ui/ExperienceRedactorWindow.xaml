@@ -49,7 +49,7 @@
                 </BoxContainer>
             </BoxContainer>
             <BoxContainer Name="SubmitButtonContainer" Orientation="Horizontal">
-                <Button Name="SubmitButton" Text="+SuBmIt+"/>
+                <Button Name="SubmitButton" Text="{Loc 'experience-view-redactor-submit-button-text'}"/>
             </BoxContainer>
         </BoxContainer>
     </Control>

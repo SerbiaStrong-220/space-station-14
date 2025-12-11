@@ -19,6 +19,9 @@ public abstract partial class SkillBaseAddComponent : Component
 
     [DataField]
     public HashSet<ProtoId<KnowledgePrototype>> Knowledges = new();
+
+    [DataField]
+    public int AddSublevelPoints;
 }
 
 [RegisterComponent, NetworkedComponent]
@@ -28,4 +31,4 @@ public sealed partial class SkillRoleAddComponent : SkillBaseAddComponent { }
 public sealed partial class SkillBackgroundAddComponent : SkillBaseAddComponent { }
 
 [RegisterComponent, NetworkedComponent]
-public sealed partial class SkillForcedAddComponent : SkillBaseAddComponent { }
+public sealed partial class SkillAdminForcedAddComponent : SkillBaseAddComponent { }

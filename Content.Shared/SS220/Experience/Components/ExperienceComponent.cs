@@ -75,7 +75,7 @@ public sealed partial class ExperienceComponent : Component
     public HashSet<ProtoId<KnowledgePrototype>> ResolvedKnowledge = new();
 
     /// <summary>
-    /// This mask handles reiniting of experience to correctly process on spawn inits
+    /// This mask used to handle reiniting of experience to correctly process inits
     /// </summary>
     [AutoNetworkedField]
     [ViewVariables(VVAccess.ReadOnly)]

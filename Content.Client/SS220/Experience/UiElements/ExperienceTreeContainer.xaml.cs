@@ -21,8 +21,6 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
-    public event Action<BaseButton.ButtonEventArgs>? OnAddSubLevelPressed;
-
     // common
     private ResPath _fullBarResPath = new ResPath("/Textures/SS220/Interface/ExperienceView/full-bar.png");
     private ResPath _emptyBarResPath = new ResPath("/Textures/SS220/Interface/ExperienceView/empty-bar.png");
@@ -36,6 +34,8 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
     private readonly ProtoId<ShaderPrototype> _fillingShaderProto = "HorizontalSpriteFill";
 
     // general info
+    public ProtoId<SkillTreePrototype> SkillTreeId { private set; get; }
+
     private int _numberOfSublevels;
     private ResPath? _skillIconResPath = null;
     private string _skillTreeName = string.Empty;
@@ -47,8 +47,20 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
     private int? _overrideLevel = null;
     // progress
     private FixedPoint4 _progress;
-    // level up data (TODO)
-    private bool _haveFreePoints = true;
+
+    // free points spend info
+    public bool HaveFreePoints
+    {
+        get => _haveFreePoints;
+        set
+        {
+            _haveFreePoints = value;
+            Update();
+        }
+    }
+    private bool _haveFreePoints = false;
+
+    public int SpendPoints { private set; get; }
 
     public ExperienceTreeContainer()
     {
@@ -64,11 +76,17 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
             SubdataContainer.Visible = !SubdataContainer.Visible;
 
         // TODO visuals
-        SubmitButton.OnPressed += (args) => OnAddSubLevelPressed?.Invoke(args);
+        AddSublevelPoint.OnPressed += (args) =>
+        {
+            SpendPoints++;
+            Update();
+        };
     }
 
     public void SetInfo(ProtoId<SkillTreePrototype> protoId, SkillTreeExperienceContainer skillInfo, FixedPoint4 progress)
     {
+        SpendPoints = 0;
+
         UnpackSkillTreeInfo(skillInfo);
         UnpackTreeProto(protoId);
 
@@ -111,7 +129,10 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
                 SublevelsContainer.AddChild(GetExperienceSublevelVisualRect(_progress, shader: _subLevelFillingShaderInstance));
         }
 
-        SubmitButton.Visible = _haveFreePoints;
+        SpendPointsShower.Visible = _haveFreePoints;
+        AddSublevelPoint.Visible = _haveFreePoints;
+
+        SpendPointsShower.SetMessage(Loc.GetString("experience-tree-container-spend-points", ("SpendPointsSign", int.Sign(SpendPoints)), ("SpendPoints", SpendPoints)));
     }
 
     public void SetProgressAndUpdate(FixedPoint4 progress)
@@ -143,6 +164,8 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
             return;
 
         var proto = _prototype.Index(protoId);
+
+        SkillTreeId = protoId;
 
         _skillsTree = proto.SkillTree;
         _skillTreeName = Loc.GetString(proto.SkillTreeName);

@@ -85,13 +85,14 @@ public sealed class ExperienceViewerUIController : UIController, IOnStateEntered
         ExperienceViewButton.OnPressed += ExperienceViewButtonPressed;
     }
 
-    private void ExperienceUpdated(ExperienceData data)
+    private void ExperienceUpdated(ExperienceData data, int freePoints)
     {
         if (_window == null)
             return;
 
         _window.SetSkillDictionary(data.SkillDictionary);
         _window.SetKnowledge(data.Knowledges);
+        _window.SetFreeSublevelPoints(freePoints);
     }
 
     private void CharacterDetached(EntityUid uid)

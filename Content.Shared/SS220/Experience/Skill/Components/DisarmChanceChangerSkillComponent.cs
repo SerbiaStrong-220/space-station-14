@@ -10,5 +10,9 @@ public sealed partial class DisarmChanceChangerSkillComponent : Component
 {
     [DataField(required: true)]
     [AutoNetworkedField]
-    public float Multiplier;
+    public float DisarmByMultiplier;
+
+    [DataField(required: true)]
+    [AutoNetworkedField]
+    public float DisarmedMultiplier;
 }

@@ -95,7 +95,7 @@ public sealed partial class ExperienceSystem : EntitySystem
             entity.Comp.StudyingProgress.Remove(skillTree);
         }
 
-        var ev = new SkillTreeAddedEvent
+        var ev = new SkillTreeAdded
         {
             SkillTree = skillTree,
             Info = new SkillTreeExperienceInfo

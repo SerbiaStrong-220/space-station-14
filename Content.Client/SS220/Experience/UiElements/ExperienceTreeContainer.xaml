@@ -6,8 +6,8 @@
     xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
     xmlns:styleDef="clr-namespace:Content.Client.SS220.Experience.Ui"
-    xmlns:ExperienceUiElements="clr-namespace:Content.Client.SS220.Experience.UiElements">
-    <BoxContainer Name="ContentContainer" Orientation="Vertical" Margin="0 2">
+    xmlns:ExperienceUiElements="clr-namespace:Content.Client.SS220.Experience.UiElements" VerticalExpand="False">
+    <BoxContainer Name="ContentContainer" Orientation="Vertical" Margin="0 2" HorizontalExpand="True">
         <BoxContainer Orientation="Vertical" Margin="{x:Static styleDef:ExperienceUiStyleDefinitions.BaseTabLikeThickness}">
             <BoxContainer Name ="InfoContainer" Orientation="Horizontal" MouseFilter="Stop" TrackingTooltip="true" TooltipDelay="0.5">
                 <TextureRect Name="TreeIconRect"/>
@@ -20,11 +20,13 @@
                 </BoxContainer>
             </BoxContainer>
         </BoxContainer>
-        <BoxContainer Name="SubdataContainer" Orientation="Horizontal" Visible="False" Margin="20 2 0 2">
-            <TextureButton Name="SubmitButton" TexturePath="/Textures/SS220/Interface/ExperienceView/add-button.png"  Margin="0 0 5 0"/>
-            <BoxContainer Name="SublevelsContainer" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <BoxContainer Name="SubdataContainer" Orientation="Horizontal" Visible="False" Margin="20 2 0 2"
+            VerticalAlignment="Top" HorizontalExpand="True" VerticalExpand="False">
+            <TextureButton Name="AddSublevelPoint" TexturePath="/Textures/SS220/Interface/ExperienceView/add-button.png" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0 0 5 0"/>
+            <BoxContainer Name="SublevelsContainer" HorizontalAlignment="Center" VerticalAlignment="Top">
                 <!-- Sublevels visual added by code -->
             </BoxContainer>
+            <RichTextLabel Name="SpendPointsShower" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </BoxContainer>
     </BoxContainer>
 </ExperienceUiElements:ExperienceTreeContainer>

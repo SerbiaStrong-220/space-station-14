@@ -8,7 +8,7 @@
     xmlns:ExperienceUiElements="clr-namespace:Content.Client.SS220.Experience.UiElements">
     <BoxContainer Name="GroupContainer" Orientation="Vertical" HorizontalExpand="True">
         <RichTextLabel Name="GroupName" Text="place-holder"/>
-        <BoxContainer Name="SkillTreeContainer" Orientation="Vertical">
+        <BoxContainer Name="SkillTreeContainer" Access="Public" Orientation="Vertical">
             <!-- Added here by code -->
         </BoxContainer>
     </BoxContainer>

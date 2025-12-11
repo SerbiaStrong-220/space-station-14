@@ -7,4 +7,11 @@ namespace Content.Shared.Weapons.Melee.Events;
 /// </summary>
 /// <param name="Multiplier">this could like chance to not disarm...</param>
 [ByRefEvent]
-public record struct GetDisarmChanceMultiplierEvent(EntityUid Disarmer, EntityUid Disarmed, EntityUid? InTargetHand, float Multiplier);
+public record struct GetDisarmChanceDisarmedMultiplierEvent(EntityUid Disarmer, EntityUid Disarmed, EntityUid? InTargetHand, float Multiplier);
+
+/// <summary>
+/// Event raised on disarmer amd disarmed entity to get <see cref="Multiplier"/>
+/// </summary>
+/// <param name="Multiplier">this could like chance to not disarm...</param>
+[ByRefEvent]
+public record struct GetDisarmChanceDisarmerMultiplierEvent(EntityUid Disarmer, EntityUid Disarmed, EntityUid? InTargetHand, float Multiplier);

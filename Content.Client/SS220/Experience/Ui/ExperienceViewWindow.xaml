@@ -8,8 +8,8 @@
     xmlns:styleDef="clr-namespace:Content.Client.SS220.Experience.Ui"
     Title="{Loc 'experience-view-panel-title'}"
     Resizable="True"
-    MinSize="400 320"
-    SetSize="400 320"
+    MinSize="400 420"
+    SetSize="400 420"
     RectClipContent="False">
     <Control>
         <PanelContainer>

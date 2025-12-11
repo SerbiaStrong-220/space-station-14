@@ -50,7 +50,7 @@ public sealed class ExperienceRedactorSystem : EntitySystem
 
     public void SendChange(EntityUid target, ExperienceData data)
     {
-        RaiseNetworkEvent(new ChangeEntityExperienceRequest(GetNetEntity(target), data));
+        RaiseNetworkEvent(new ChangeEntityExperienceAdminRequest(GetNetEntity(target), data));
     }
 
     private void ReloadCachedIndexedKnowledge()

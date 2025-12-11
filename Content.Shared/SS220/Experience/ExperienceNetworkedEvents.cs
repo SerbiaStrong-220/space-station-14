@@ -13,10 +13,16 @@ public sealed class OpenExperienceRedactorRequest(NetEntity? target = null) : En
 }
 
 [Serializable, NetSerializable]
-public sealed class ChangeEntityExperienceRequest(NetEntity target, ExperienceData data) : EntityEventArgs
+public sealed class ChangeEntityExperienceAdminRequest(NetEntity target, ExperienceData data) : EntityEventArgs
 {
     public NetEntity Target = target;
     public ExperienceData Data = data;
+}
+
+[Serializable, NetSerializable]
+public sealed class ChangeEntityExperiencePlayerRequest(PlayerChangeSkill changeSkill) : EntityEventArgs
+{
+    public PlayerChangeSkill ChangeSkill = changeSkill;
 }
 
 [Serializable, NetSerializable]
@@ -35,4 +41,10 @@ public sealed class ExperienceData
                     FixedPoint4)>> SkillDictionary = new();
 
     public HashSet<ProtoId<KnowledgePrototype>> Knowledges = new();
+}
+
+[Serializable, NetSerializable]
+public sealed class PlayerChangeSkill
+{
+    public Dictionary<ProtoId<SkillTreePrototype>, int> SkillSublevels = new();
 }

@@ -45,7 +45,6 @@ namespace Content.Client.HealthAnalyzer.UI
         private readonly IPrototypeManager _prototypes;
         private readonly IResourceCache _cache;
 
-
         // SS220-experience-update-begin
         private const float TemperatureRandomScaleAmplitude = 0.3f;
         private const float BloodRandomScaleAmplitude = 0.3f;

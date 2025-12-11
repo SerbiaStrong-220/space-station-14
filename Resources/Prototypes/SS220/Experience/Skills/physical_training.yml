@@ -1,47 +1,47 @@
 - type: skill
-  id: CombatTrainingInitial
+  id: PhysicalTrainingInitial
   levelInfo:
     maximumSublevel: 5
   levelDescription:
     skillName: combat-training-initial-name
     skillDescription: combat-training-initial-desc
   components:
-  - type: DisarmChanceChangerSkill
-    multiplier
+  - type: DisarmOnDamageSkill
+    disarmChance: 0.5
+    damageThreshold: 15.
 
 - type: skill
-  id: CombatTrainingBase
+  id: PhysicalTrainingBase
   levelInfo:
     maximumSublevel: 5
   levelDescription:
     skillName: combat-training-base-name
     skillDescription: combat-training-base-desc
   components:
-  - type: DisarmChanceChangerSkill
+  - type: DisarmOnDamageSkill
     disarmChance: 0.5
     damageThreshold: 20.
 
 - type: skill
-  id: CombatTrainingTrained
+  id: PhysicalTrainingTrained
   levelInfo:
     maximumSublevel: 5
   levelDescription:
     skillName: combat-training-trained-name
     skillDescription: combat-training-trained-desc
   components:
-  - type: DisarmChanceChangerSkill
+  - type: DisarmOnDamageSkill
     disarmChance: 0.3
     damageThreshold: 30.
 
 - type: skill
-  id: CombatTrainingProfessional
+  id: PhysicalTrainingProfessional
   levelInfo:
     maximumSublevel: 5
   levelDescription:
     skillName: combat-training-professional-name
     skillDescription: combat-training-professional-desc
   components:
-  - type: DisarmChanceChangerSkill
+  - type: DisarmOnDamageSkill
     disarmChance: 0.2
     damageThreshold: 40.
-  - type: DisarmBlockSkill

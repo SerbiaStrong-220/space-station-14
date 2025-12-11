@@ -14,13 +14,20 @@ public sealed class DisarmChanceChangerSkillSystem : EntitySystem
     {
         base.Initialize();
 
-        _experience.RelayEventToSkillEntity<DisarmChanceChangerSkillComponent, GetDisarmChanceMultiplierEvent>();
+        _experience.RelayEventToSkillEntity<DisarmChanceChangerSkillComponent, GetDisarmChanceDisarmerMultiplierEvent>();
+        _experience.RelayEventToSkillEntity<DisarmChanceChangerSkillComponent, GetDisarmChanceDisarmedMultiplierEvent>();
 
-        SubscribeLocalEvent<DisarmChanceChangerSkillComponent, GetDisarmChanceMultiplierEvent>(OnDisarmAttempt);
+        SubscribeLocalEvent<DisarmChanceChangerSkillComponent, GetDisarmChanceDisarmerMultiplierEvent>(OnDisarmDisarmedAttempt);
+        SubscribeLocalEvent<DisarmChanceChangerSkillComponent, GetDisarmChanceDisarmedMultiplierEvent>(OnDisarmDisarmerAttempt);
     }
 
-    private void OnDisarmAttempt(Entity<DisarmChanceChangerSkillComponent> entity, ref GetDisarmChanceMultiplierEvent args)
+    private void OnDisarmDisarmedAttempt(Entity<DisarmChanceChangerSkillComponent> entity, ref GetDisarmChanceDisarmerMultiplierEvent args)
     {
-        args.Multiplier *= entity.Comp.Multiplier;
+        args.Multiplier *= entity.Comp.DisarmedMultiplier;
+    }
+
+    private void OnDisarmDisarmerAttempt(Entity<DisarmChanceChangerSkillComponent> entity, ref GetDisarmChanceDisarmedMultiplierEvent args)
+    {
+        args.Multiplier *= entity.Comp.DisarmByMultiplier;
     }
 }

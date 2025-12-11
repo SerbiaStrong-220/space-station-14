@@ -15,8 +15,9 @@ public enum InitGainedExperienceType : byte
     NotInitialized = 1 << 0,
     MapInit = 1 << 1,
     JobInit = 1 << 2,
+    BackgroundInit = 1 << 3,
     // this flag should always be bigger than others
-    AdminForced = 1 << 3
+    AdminForced = 1 << 4
 }
 
 /// <summary>

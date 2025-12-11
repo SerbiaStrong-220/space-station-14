@@ -14,7 +14,7 @@ public sealed class ExperienceInfoSystem : EntitySystem
     [Dependency] private readonly ExperienceSystem _experience = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
-    public Action<ExperienceData>? OnExperienceUpdated;
+    public Action<ExperienceData, int>? OnExperienceUpdated;
 
     /// <summary> Temporary collection for methods</summary>
     private HashSet<ProtoId<KnowledgePrototype>> _knowledges = new();
@@ -34,7 +34,15 @@ public sealed class ExperienceInfoSystem : EntitySystem
 
     public void RequestLocalPlayerExperienceData()
     {
-        OnExperienceUpdated?.Invoke(GetEntityExperienceData(_playerManager.LocalEntity));
+        OnExperienceUpdated?.Invoke(GetEntityExperienceData(_playerManager.LocalEntity), GetFreeSublevelPoints(_playerManager.LocalEntity));
+    }
+
+    public int GetFreeSublevelPoints(EntityUid? uid)
+    {
+        if (!TryComp<ExperienceComponent>(uid, out var experienceComponent))
+            return 0;
+
+        return experienceComponent.FreeSublevelPoints;
     }
 
     public ExperienceData GetEntityExperienceData(EntityUid? uid)
