@@ -440,7 +440,10 @@
     removalTime: 0.25
     embedOnThrow: false
   - type: SolutionInjectWhileEmbedded
-    transferAmount: 1
+  #SS220 mini syringe update begin
+    transferAmount: 2
+  #SS220 mini syringe update end
+    #transferAmount: 1
     solution: injector
     updateInterval: 2
   - type: SolutionInjectOnEmbed
