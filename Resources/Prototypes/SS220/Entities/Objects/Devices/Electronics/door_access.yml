@@ -140,7 +140,7 @@
   suffix: CBURN, Locked
   components:
   - type: AccessReader
-    access: [["CentralCommandBSO"]]
+    access: [["CentralCommandCBURN"]]
 
 - type: entity
   parent: DoorElectronics
