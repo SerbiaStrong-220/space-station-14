@@ -114,6 +114,7 @@
   - type: BypassInteractionChecks
   - type: ExplosionResistance
     damageCoefficient: 0
+  - type: TransferOnDrag #ss220 add mind transfer on drag
 
 - type: entity
   abstract: true
