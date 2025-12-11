@@ -1,5 +1,6 @@
 using Content.Server.Power.EntitySystems;
 using Content.Shared.Bed.Cryostorage;
+using Content.Shared.Ghost;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Silicons.Borgs.Components;
@@ -12,6 +13,17 @@ namespace Content.Server.SS220.MindExtension;
 
 public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
 {
+    private void SubscribeTrailSystemEvents()
+    {
+        SubscribeNetworkEvent<ExtensionReturnActionEvent>(OnExtensionReturnActionEvent);
+        SubscribeNetworkEvent<GhostBodyListRequest>(OnGhostBodyListRequestEvent);
+
+
+        SubscribeNetworkEvent<DeleteTrailPointRequest>(OnDeleteTrailPointRequest);
+    }
+
+    #region Handlers
+
     private void OnExtensionReturnActionEvent(ExtensionReturnActionEvent ev, EntitySessionEventArgs args)
     {
         //Нужно найти MindExtension и сверить с Trail. Сверить с IsAvaible.
@@ -27,14 +39,15 @@ public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
             return;
 
         if (!_admin.IsAdmin(args.SenderSession) &&
-            IsAvaibleToEnterEntity((EntityUid)target,
+            IsAvaibleToEnterEntity(target.Value,
             mindExtEnt.Value.Comp,
             args.SenderSession.UserId) != BodyStateToEnter.Avaible)
             return;
 
-        _mind.TransferTo((EntityUid)mind, (EntityUid)target);
-        _mind.UnVisit((EntityUid)mind);
+        _mind.TransferTo(mind.Value, target.Value);
+        _mind.UnVisit(mind.Value);
     }
+
     private void OnGhostBodyListRequestEvent(GhostBodyListRequest ev, EntitySessionEventArgs args)
     {
         // Нужно проверить наличие компонента-контейнера и компонента MindExtension.
@@ -80,6 +93,53 @@ public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
         }
 
         RaiseNetworkEvent(new GhostBodyListResponse(bodyList), args.SenderSession.Channel);
+    }
+
+    private void OnDeleteTrailPointRequest(DeleteTrailPointRequest ev, EntitySessionEventArgs args)
+    {
+        var mindExt = GetMindExtension(args.SenderSession.UserId);
+
+        if (!TryGetEntity(ev.Entity, out var ent))
+            return;
+
+        if (mindExt.Comp.Trail.Remove(ent.Value))
+        {
+            var eventArgs = new DeleteTrailPointResponse(ev.Entity);
+            RaiseNetworkEvent(eventArgs, args.SenderSession.Channel);
+        }
+    }
+
+    #endregion
+
+    private void ChangeOrAddTrailPoint(MindExtensionComponent comp, EntityUid entity, bool isAbandoned)
+    {
+        if (HasComp<GhostComponent>(entity))
+            return;
+
+        if (TryComp<BorgChassisComponent>(entity, out var chassisComp))
+        {
+            if (chassisComp.BrainContainer.ContainedEntity is null)
+                return;
+
+            entity = chassisComp.BrainContainer.ContainedEntity.Value;
+        }
+
+        if (comp.Trail.ContainsKey(entity))
+        {
+            var trailMetaData = comp.Trail[entity];
+            trailMetaData.IsAbandoned = isAbandoned;
+            comp.Trail[entity] = trailMetaData;
+            return;
+        }
+
+        TryComp(entity, out MetaDataComponent? metaData);
+
+        comp.Trail.Add(entity, new TrailPointMetaData()
+        {
+            EntityName = metaData?.EntityName ?? "",
+            EntityDescription = metaData?.EntityDescription ?? "",
+            IsAbandoned = isAbandoned
+        });
     }
 
     private BodyStateToEnter IsAvaibleToEnterEntity(

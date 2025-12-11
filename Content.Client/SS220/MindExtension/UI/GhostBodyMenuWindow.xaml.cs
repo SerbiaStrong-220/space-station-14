@@ -9,6 +9,7 @@ namespace Content.Client.SS220.MindExtension.UI;
 public sealed partial class GhostBodyMenuWindow : DefaultWindow
 {
     private IEnumerable<TrailPoint>? _bodies;
+    private Dictionary<NetEntity, GhostBodyCard> BodyCards = new Dictionary<NetEntity, GhostBodyCard>();
 
     public Action<NetEntity>? FollowBodyAction;
     public Action<NetEntity>? ToBodyAction;
@@ -17,14 +18,26 @@ public sealed partial class GhostBodyMenuWindow : DefaultWindow
     {
         RobustXamlLoader.Load(this);
     }
+
     public void UpdateBodies(IEnumerable<TrailPoint> bodies)
     {
         _bodies = bodies;
     }
+
     public void Populate()
     {
         BodyList.DisposeAllChildren();
+        BodyCards.Clear();
         AddButtons();
+    }
+
+    public void DeleteBodyCard(NetEntity entity)
+    {
+        if (!BodyCards.TryGetValue(entity, out var card))
+            return;
+
+        BodyList.RemoveChild(card);
+        BodyCards.Remove(entity);
     }
 
     private void AddButtons()
@@ -38,6 +51,7 @@ public sealed partial class GhostBodyMenuWindow : DefaultWindow
             bodyCard.ToBodyAction += ToBodyAction;
 
             BodyList.AddChild(bodyCard);
+            BodyCards.Add(body.Id, bodyCard);
         }
     }
 }

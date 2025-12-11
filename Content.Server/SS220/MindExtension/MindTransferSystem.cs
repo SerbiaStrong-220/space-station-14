@@ -5,28 +5,35 @@ namespace Content.Server.SS220.MindExtension;
 
 public partial class MindExtensionSystem : EntitySystem //MindTransferSystem
 {
+    private void SubscribeTransferSystemEvents()
+    {
+        SubscribeLocalEvent<MindTransferedEvent>(OnMindTransferedEvent);
+        SubscribeLocalEvent<SuicidedEvent>(OnSuicidedEvent);
+        SubscribeLocalEvent<GhostedEvent>(OnGhostedEvent);
+    }
+
     #region Handlers
     private void OnMindTransferedEvent(ref MindTransferedEvent ev)
     {
         if (ev.Player is null)
             return;
 
-        var mindExtEnt = GetMindExtension((NetUserId)ev.Player);
+        var mindExtEnt = GetMindExtension(ev.Player.Value);
 
         var mindExt = mindExtEnt.Comp;
 
         //На всякий удалить старый MindContainer.
         if (TryComp<MindExtensionContainerComponent>(ev.OldEntity, out var oldMindExt))
         {
-            ChangeOrAddTrailPoint(mindExt, (EntityUid)ev.OldEntity, CheckEntityAbandoned((EntityUid)ev.OldEntity));
-            _entityManager.RemoveComponent<MindExtensionContainerComponent>((EntityUid)ev.OldEntity);
+            ChangeOrAddTrailPoint(mindExt, ev.OldEntity.Value, CheckEntityAbandoned(ev.OldEntity.Value));
+            _entityManager.RemoveComponent<MindExtensionContainerComponent>(ev.OldEntity.Value);
         }
 
         if (ev.NewEntity is null)
             return;
 
-        ChangeOrAddTrailPoint(mindExt, (EntityUid)ev.NewEntity, false);
-        SetRespawnTimer(mindExt, (EntityUid)ev.NewEntity, (NetUserId)ev.Player);
+        ChangeOrAddTrailPoint(mindExt, ev.NewEntity.Value, false);
+        SetRespawnTimer(mindExt, ev.NewEntity.Value, ev.Player.Value);
 
         var mindExtCont = new MindExtensionContainerComponent() { MindExtension = mindExtEnt.Owner };
 
@@ -34,7 +41,7 @@ public partial class MindExtensionSystem : EntitySystem //MindTransferSystem
         if (TryComp<MindExtensionContainerComponent>(ev.NewEntity, out var newMindExt))
             newMindExt.MindExtension = mindExtCont.MindExtension;
         else
-            _entityManager.AddComponent((EntityUid)ev.NewEntity, mindExtCont);
+            _entityManager.AddComponent(ev.NewEntity.Value, mindExtCont);
     }
     private void OnSuicidedEvent(ref SuicidedEvent ev)
     {

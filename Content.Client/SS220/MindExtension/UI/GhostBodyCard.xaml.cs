@@ -33,11 +33,11 @@ public sealed partial class GhostBodyCard : UIWidget
                 ToBodyButton.Disabled = false;
 
                 BodyStateLabel.FontColorOverride = Color.Green;
-                BodyStateLabel.Text = "(Доступен)";
+                BodyStateLabel.Text = Loc.GetString("mind-ext-body-state-avaible");
                 break;
             case BodyStateToEnter.Abandoned:
                 FollowButton.Disabled = false;
-                BodyStateLabel.Text = "(Безвозвратно вами покинут)";
+                BodyStateLabel.Text = Loc.GetString("mind-ext-body-state-abandoned");
                 if (body.ByAdmin)
                 {
                     ToBodyButton.Disabled = false;
@@ -46,7 +46,7 @@ public sealed partial class GhostBodyCard : UIWidget
                 break;
             case BodyStateToEnter.Engaged:
                 FollowButton.Disabled = false;
-                BodyStateLabel.Text = "(Занят другим игроком)";
+                BodyStateLabel.Text = Loc.GetString("mind-ext-body-state-engaged");
                 if (body.ByAdmin)
                 {
                     ToBodyButton.Disabled = false;
@@ -54,10 +54,10 @@ public sealed partial class GhostBodyCard : UIWidget
                 }
                 break;
             case BodyStateToEnter.InCryo:
-                BodyStateLabel.Text = "(Помещен в криохранилище)";
+                BodyStateLabel.Text = Loc.GetString("mind-ext-body-state-incryo");
                 break;
             case BodyStateToEnter.Destroyed:
-                BodyStateLabel.Text = "(Уничтожен)";
+                BodyStateLabel.Text = Loc.GetString("mind-ext-body-state-destroyed");
                 break;
         }
 

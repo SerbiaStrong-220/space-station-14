@@ -1,18 +1,14 @@
 using Content.Server.Administration.Managers;
-using Content.Server.Administration.Systems;
 using Content.Server.Mind;
 using Content.Server.Silicons.Borgs;
-using Content.Shared.Bed.Cryostorage;
 using Content.Shared.Ghost;
-using Content.Shared.Mind;
-using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.SS220.MindExtension;
-using Content.Shared.SS220.MindExtension.Events;
 using Robust.Server.Containers;
+using Robust.Server.Player;
 using Robust.Shared.Network;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
 
@@ -24,6 +20,8 @@ public sealed partial class MindExtensionSystem : EntitySystem
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly IAdminManager _admin = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly BorgSystem _borg = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
 
@@ -37,14 +35,9 @@ public sealed partial class MindExtensionSystem : EntitySystem
         _ghostQuery = GetEntityQuery<GhostComponent>();
         _mindExtQuery = GetEntityQuery<MindExtensionComponent>();
 
-        SubscribeNetworkEvent<ExtensionRespawnActionEvent>(OnRespawnActionEvent);
-
-        SubscribeNetworkEvent<ExtensionReturnActionEvent>(OnExtensionReturnActionEvent);
-        SubscribeNetworkEvent<GhostBodyListRequest>(OnGhostBodyListRequestEvent);
-
-        SubscribeLocalEvent<MindTransferedEvent>(OnMindTransferedEvent);
-        SubscribeLocalEvent<SuicidedEvent>(OnSuicidedEvent);
-        SubscribeLocalEvent<GhostedEvent>(OnGhostedEvent);
+        SubscribeRespawnSystemEvents();
+        SubscribeTrailSystemEvents();
+        SubscribeTransferSystemEvents();
     }
 
     public Entity<MindExtensionComponent> GetMindExtension(NetUserId player)
@@ -72,7 +65,7 @@ public sealed partial class MindExtensionSystem : EntitySystem
         if (container.MindExtension is null)
             return false;
 
-        entity = _mindExtQuery.Get((EntityUid)container.MindExtension);
+        entity = _mindExtQuery.Get(container.MindExtension.Value);
 
         return entity is not null;
     }
@@ -105,37 +98,6 @@ public sealed partial class MindExtensionSystem : EntitySystem
 
         //Если ливаем из живого тела, то пока пиздося с гарантом, кроме случая суицида.
         return true;
-    }
-
-    private void ChangeOrAddTrailPoint(MindExtensionComponent comp, EntityUid entity, bool isAbandoned)
-    {
-        if (HasComp<GhostComponent>(entity))
-            return;
-
-        if (TryComp<BorgChassisComponent>(entity, out var chassisComp))
-        {
-            if (chassisComp?.BrainContainer.ContainedEntity is null)
-                return;
-
-            entity = (EntityUid)chassisComp.BrainContainer.ContainedEntity;
-        }
-
-        if (comp.Trail.ContainsKey(entity))
-        {
-            var trailMetaData = comp.Trail[entity];
-            trailMetaData.IsAbandoned = isAbandoned;
-            comp.Trail[entity] = trailMetaData;
-            return;
-        }
-
-        TryComp(entity, out MetaDataComponent? metaData);
-
-        comp.Trail.Add(entity, new TrailPointMetaData()
-        {
-            EntityName = metaData?.EntityName ?? "",
-            EntityDescription = metaData?.EntityDescription ?? "",
-            IsAbandoned = isAbandoned
-        });
     }
 
     #endregion

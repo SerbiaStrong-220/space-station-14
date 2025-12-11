@@ -73,8 +73,6 @@ namespace Content.Server.Ghost
         [Dependency] private readonly TagSystem _tag = default!;
         [Dependency] private readonly NameModifierSystem _nameMod = default!;
 
-        [Dependency] private readonly MindExtensionSystem _mindExtension = default!;
-
         private EntityQuery<GhostComponent> _ghostQuery;
         private EntityQuery<PhysicsComponent> _physicsQuery;
 
@@ -650,8 +648,6 @@ namespace Content.Server.Ghost
             if (position == default)
                 return false;
 
-            //TODO: СЮДА СМОТРИИИИИИИИИИИИИИИИИИИИИИИИИИИ
-
 
             // Ok, so, this is the master place for the logic for if ghosting is "too cheaty" to allow returning.
             // There's no reason at this time to move it to any other place, especially given that the 'side effects required' situations would also have to be moved.
@@ -662,13 +658,6 @@ namespace Content.Server.Ghost
             //   we're succumbing - the mob is killed. Therefore, character is dead. Ghosting OK.
             //   (If the mob survives, that's a bug. Ghosting is kept regardless.)
             var canReturn = canReturnGlobal && _mind.IsCharacterDeadPhysically(mind);
-
-            /*if (playerEntity is not null)
-                _mindExtension.GhostAttempt((EntityUid)playerEntity, canReturn);
-            else
-            {
-
-            }*/
 
             if (_configurationManager.GetCVar(CCVars.GhostKillCrit) &&
                 canReturnGlobal &&

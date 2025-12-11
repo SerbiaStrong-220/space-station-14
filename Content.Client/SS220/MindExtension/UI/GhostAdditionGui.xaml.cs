@@ -22,12 +22,12 @@ public sealed partial class GhostAdditionGui : UIWidget
         BodyMenuButton.OnPressed += _ => ReturnToBodyPressed?.Invoke();
     }
 
-    public void SetRespawnTimer(TimeSpan respawnTime, TimeSpan currentTime)
+    public void SetRespawnRemainTimer(TimeSpan respawnRemainTime)
     {
-        if (respawnTime > currentTime)
+        if (respawnRemainTime > TimeSpan.Zero)
         {
             RespawnButton.Text = $"{Loc.GetString("mind-ext-respawn-button")}" +
-                $" {respawnTime.Minutes}:{respawnTime.Seconds}";
+                $" {respawnRemainTime.Minutes}:{respawnRemainTime.Seconds}";
             RespawnButton.Disabled = true;
         }
         else
@@ -36,6 +36,12 @@ public sealed partial class GhostAdditionGui : UIWidget
             RespawnButton.Disabled = false;
         }
 
+    }
+
+    public void LockRespawnTimer()
+    {
+        RespawnButton.Text = Loc.GetString("mind-ext-respawn-button");
+        RespawnButton.Disabled = true;
     }
 }
 

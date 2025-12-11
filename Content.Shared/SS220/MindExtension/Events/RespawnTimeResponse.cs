@@ -3,11 +3,11 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.SS220.MindExtension.Events;
 
 [Serializable, NetSerializable]
-public sealed class UpdateRespawnTimeMessage : EntityEventArgs
+public sealed class RespawnTimeResponse : EntityEventArgs
 {
-    public TimeSpan Time;
+    public TimeSpan? Time;
 
-    public UpdateRespawnTimeMessage(TimeSpan time)
+    public RespawnTimeResponse(TimeSpan? time)
     {
         Time = time;
     }

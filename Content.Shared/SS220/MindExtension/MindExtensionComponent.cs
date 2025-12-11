@@ -14,8 +14,8 @@ public sealed partial class MindExtensionComponent : Component
     public TimeSpan? RespawnTimer = default!;
 
     [ViewVariables(VVAccess.ReadWrite)]
-    public float RespawnTime = 1200f;
+    public TimeSpan RespawnTime = TimeSpan.FromMinutes(20);
 
 
-    public bool IsIC = true;
+    public bool RespawnAvaible = false;
 }

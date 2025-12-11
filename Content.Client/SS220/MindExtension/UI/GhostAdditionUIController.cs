@@ -23,13 +23,16 @@ public sealed partial class GhostAdditionUIController : UIController, IOnSystemC
         gameplayStateLoad.OnScreenLoad += OnScreenLoad;
         gameplayStateLoad.OnScreenUnload += OnScreenUnload;
     }
+
     public override void FrameUpdate(FrameEventArgs args)
     {
-        if (_extensionSystem?.RespawnTime is null)
-            return;
-
-        var temp = (TimeSpan)_extensionSystem.RespawnTime - _gameTiming.CurTime;
-        Gui?.SetRespawnTimer(temp, _gameTiming.CurTime);
+        if (_extensionSystem?.RespawnTime is not null)
+        {
+            var respawnRemainTime = _extensionSystem.RespawnTime.Value - _gameTiming.CurTime;
+            Gui?.SetRespawnRemainTimer(respawnRemainTime);
+        }
+        else
+            Gui?.LockRespawnTimer();
     }
     private void OnScreenLoad()
     {
@@ -40,6 +43,7 @@ public sealed partial class GhostAdditionUIController : UIController, IOnSystemC
     {
         UnloadGui();
     }
+
     public void LoadGui()
     {
         if (Gui == null)
@@ -49,7 +53,6 @@ public sealed partial class GhostAdditionUIController : UIController, IOnSystemC
         Gui.ReturnToBodyPressed += RequestReturnToBody;
         Gui.BodyMenuWindow.FollowBodyAction += OnFollowBodyAction;
         Gui.BodyMenuWindow.ToBodyAction += OnToBodyAction;
-
     }
 
     public void UnloadGui()
@@ -64,11 +67,17 @@ public sealed partial class GhostAdditionUIController : UIController, IOnSystemC
     public void OnSystemLoaded(MindExtensionSystem system)
     {
         system.GhostBodyListResponse += OnGhostBodyListResponse;
+        system.DeleteTrailPointResponse += OnDeleteTrailPointResponse;
+
+        system.RequestRespawnTimer();
     }
 
     public void OnSystemUnloaded(MindExtensionSystem system)
     {
         system.GhostBodyListResponse -= OnGhostBodyListResponse;
+        system.DeleteTrailPointResponse -= OnDeleteTrailPointResponse;
+
+        system.RequestRespawnTimer();
     }
 
     #region UiEvents
@@ -101,10 +110,17 @@ public sealed partial class GhostAdditionUIController : UIController, IOnSystemC
     #endregion
 
     #region EsEvents
+
     private void OnGhostBodyListResponse(GhostBodyListResponse ev)
     {
         Gui?.BodyMenuWindow.UpdateBodies(ev.Bodies);
         Gui?.BodyMenuWindow.Populate();
     }
+
+    private void OnDeleteTrailPointResponse(DeleteTrailPointResponse response)
+    {
+        Gui?.BodyMenuWindow.DeleteBodyCard(response.Entity);
+    }
+
     #endregion
 }

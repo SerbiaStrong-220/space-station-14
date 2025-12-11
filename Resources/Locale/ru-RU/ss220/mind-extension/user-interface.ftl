@@ -4,6 +4,12 @@ mind-ext-body-menu = Список посещенных сущностей
 mind-ext-body-menu-footer = Можно вернуться к жизни одного из ваших персонажей, если вы не покинули тело до его смерти.
 mind-ext-body-menu-button = Вернуться к прошлой жизни
 
+mind-ext-body-state-avaible = (Доступен)
+mind-ext-body-state-abandoned = (Покинут)
+mind-ext-body-state-engaged = (Занят игроком)
+mind-ext-body-state-incryo = (В крио)
+mind-ext-body-state-destroyed = (Уничтожен)
+
 mind-ext-return-button = Вернуться
 mind-ext-follow-button = Следовать
 
