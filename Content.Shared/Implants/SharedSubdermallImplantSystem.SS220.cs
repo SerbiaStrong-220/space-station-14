@@ -40,7 +40,7 @@ public abstract partial class SharedSubdermalImplantSystem : EntitySystem // SS2
         if (!_solutionContainer.TryGetSolution(new(uid, implantSolutionComp), "beaker", out var beakerSolution))
             return;
 
-        var transferAmount = beakerSolution.Value.Comp.Solution.Volume;
+        var transferAmount = beakerSolution.Value.Comp.Solution.MaxVolume;
         if (TryComp<LimitedChargesComponent>(args.Action, out var limitedCharges))
             transferAmount /= limitedCharges.MaxCharges;
 
@@ -126,7 +126,7 @@ public abstract partial class SharedSubdermalImplantSystem : EntitySystem // SS2
         if (!_solutionContainer.TryGetSolution((args.Performer, solutionUserComp), ChemicalSolution, out var solutionUser))
             return;
 
-        var quantity = solutionImplant.Value.Comp.Solution.Volume;
+        var quantity = solutionImplant.Value.Comp.Solution.MaxVolume;
         if (TryComp<LimitedChargesComponent>(args.Action, out var actionCharges))
             quantity /= actionCharges.MaxCharges;
 
