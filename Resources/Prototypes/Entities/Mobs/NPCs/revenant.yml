@@ -138,3 +138,9 @@
     tags:
     - SlowImmune
     - KnockdownImmune
+  #SS220 Cult hotfix 17 #3641 start
+  - type: DamageCorruptInteraction
+    damage:
+      types:
+        Heat: 30
+  #SS220 Cult hotfix 17 #3641 end

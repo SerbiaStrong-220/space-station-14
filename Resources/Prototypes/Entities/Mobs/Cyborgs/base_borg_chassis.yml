@@ -267,6 +267,12 @@
     - id: Universal
   # SS220-Add-Languages end
   - type: DefibrillatorSkill #SS220 LimitationRevive
+  #SS220 Cult hotfix 17 #3641 start
+  - type: DamageCorruptInteraction
+    damage:
+      types:
+        Heat: 50
+  #SS220 Cult hotfix 17 #3641 end
 
 - type: entity
   abstract: true
