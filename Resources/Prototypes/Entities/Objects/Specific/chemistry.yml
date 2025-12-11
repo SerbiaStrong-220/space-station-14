@@ -469,7 +469,7 @@
     onlyCollideWhenShot: true
     damage:
       types:
-        Piercing: 5
+        Piercing: 0
   - type: Tag
     tags:
     - Syringe

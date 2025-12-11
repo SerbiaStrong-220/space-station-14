@@ -22,3 +22,9 @@
         map: ["enum.SolutionContainerLayers.Fill"]
         visible: false
       - state: syringeprojadvanced
+  - type: SolutionContainerVisuals
+    maxFillLevels: 3
+    fillBaseName: minisyringeadv
+    inHandsMaxFillLevels: 3
+    inHandsFillBaseName: -fill-
+
