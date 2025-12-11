@@ -1,8 +1,8 @@
 - type: entity
-  name: стойка с микрофоном
+  name: microphone stand
   parent: BasePlaceableInstrumentRotatable
   id: MicStand
-  description: Щас спою!
+  description: I'll sing right now!
   components:
   - type: Instrument
     program: 52
@@ -30,8 +30,8 @@
 - type: entity
   id: BigDrumsInstrument
   parent: BasePlaceableInstrumentRotatable
-  name: ударная установка
-  description: ба-дум тсс!
+  name: drum kit
+  description: ba-dum shh!
   components:
   - type: Instrument
     program: 0
