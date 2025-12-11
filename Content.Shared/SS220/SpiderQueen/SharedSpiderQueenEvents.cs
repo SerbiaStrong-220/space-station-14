@@ -52,6 +52,12 @@ public sealed partial class SpiderTileSpawnActionEvent : WorldTargetActionEvent
     public string Prototype;
 
     /// <summary>
+    /// A tile prototype to spawn in space
+    /// </summary>
+    [DataField]
+    public string? InSpacePrototype;
+
+    /// <summary>
     /// The cost of blood points to use this action
     /// </summary>
     [DataField]
@@ -149,6 +155,11 @@ public sealed partial class SpiderTileSpawnDoAfterEvent : SimpleDoAfterEvent
     /// A tile prototype to spawn
     /// </summary>
     public string Prototype;
+
+    /// <summary>
+    /// A tile prototype to spawn in space
+    /// </summary>
+    public string? InSpacePrototype;
 
     /// <summary>
     /// The coordinates of the location that the user targeted.

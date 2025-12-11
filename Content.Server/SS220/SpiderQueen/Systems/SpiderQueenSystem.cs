@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Chat.Systems;
+using Content.Server.Interaction;
 using Content.Server.Pinpointer;
 using Content.Server.SS220.SpiderQueen.Components;
 using Content.Shared.Administration.Logs;
@@ -17,25 +18,20 @@ using Content.Shared.Popups;
 using Content.Shared.SS220.SpiderQueen;
 using Content.Shared.SS220.SpiderQueen.Components;
 using Content.Shared.SS220.SpiderQueen.Systems;
-using Content.Shared.Stacks;
 using Content.Shared.Storage;
-using Content.Shared.Tiles;
-using Robust.Server.Console;
 using Robust.Server.GameObjects;
-using Robust.Server.Player;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Network;
 using Robust.Shared.Physics;
+using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
 
@@ -63,8 +59,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly IEntityManager _entManager = default!;
-
-    private readonly HashSet<EntityUid> _turfCheck = [];
+    [Dependency] private readonly InteractionSystem _interaction = default!;
 
     public override void Initialize()
     {
@@ -79,7 +74,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         SubscribeLocalEvent<SpiderTileSpawnActionEvent>(OnTileSpawnAction);
         SubscribeLocalEvent<SpiderTileSpawnDoAfterEvent>(OnTileSpawnDoAfter);
     }
-    private static readonly Vector2 CheckRange = new(1f, 1f);
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -199,6 +194,13 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
             !CheckEnoughBloodPoints(performer, args.Cost))
             return;
 
+        var mapCoords = _transform.ToMapCoordinates(args.Target);
+        if (!_interaction.InRangeUnobstructed(performer, mapCoords))
+            return;
+
+        if (GetNearestGrid(mapCoords) == null)
+            return;
+
         var netCoordinates = GetNetCoordinates(args.Target);
         var doAfterArgs = new DoAfterArgs(
             EntityManager,
@@ -207,6 +209,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
             new SpiderTileSpawnDoAfterEvent()
             {
                 Prototype = args.Prototype,
+                InSpacePrototype = args.InSpacePrototype,
                 TargetCoordinates = netCoordinates,
                 Cost = args.Cost,
             },
@@ -226,155 +229,67 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
             args.Handled = true;
     }
 
-
     private void OnTileSpawnDoAfter(SpiderTileSpawnDoAfterEvent args)
     {
-        if (args.Cancelled ||
-            !CheckEnoughBloodPoints(args.User, args.Cost))
-        {
+        var user = args.User;
+        if (args.Cancelled
+            || args.Handled
+            || !CheckEnoughBloodPoints(user, args.Cost))
             return;
-        }
-        var coordinates = GetCoordinates(args.TargetCoordinates);
-        var gridUid = _transform.GetGrid(coordinates);
-        if (!TryComp<MapGridComponent>(gridUid, out var mapGrid))
-        {
-            OnGridNotFound(args);
-            return;
-        }
-        var position = _mapSystem.TileIndicesFor(gridUid.Value, mapGrid, coordinates);
 
-        _mapSystem.SetTile(gridUid.Value,
-            mapGrid,
-            position,
-            new Tile(_tileDefinitionManager[args.Prototype].TileId));
+        var targetCoords = GetCoordinates(args.TargetCoordinates);
+        var mapCoords = _transform.ToMapCoordinates(targetCoords);
+        if (!_interaction.InRangeUnobstructed(user, mapCoords))
+            return;
+
+        var grid = GetNearestGrid(mapCoords);
+        if (grid == null)
+            return;
+
+        var gridCoords = _transform.ToCoordinates(grid.Value.Owner, mapCoords);
+        var curTile = _mapSystem.GetTileRef(grid.Value, gridCoords);
+
+        var tileProto = args.InSpacePrototype is { } spaceProto && _turf.IsSpace(curTile)
+            ? spaceProto
+            : args.Prototype;
+
+        var placedTile = _tileDefinitionManager[tileProto];
+        var variant = _tile.PickVariant((ContentTileDefinition)placedTile);
+
+        _mapSystem.SetTile(grid.Value, curTile.GridIndices, new Tile(placedTile.TileId, variant: variant));
 
         if (TryComp<SpiderQueenComponent>(args.User, out var spiderQueen))
             ChangeBloodPointsAmount(args.User, spiderQueen, -args.Cost);
+
+        args.Handled = true;
     }
 
-    //basically ctrl+c,ctrl+v from FloorTileSystem.cs
-    private void OnGridNotFound(SpiderTileSpawnDoAfterEvent args)
+    private Entity<MapGridComponent>? GetNearestGrid(MapCoordinates mapCoords, float range = 1f)
     {
-        if (args.Handled)
-        {
-            return;
-        }
-        _entManager.TryGetEntity(args.TargetCoordinates.NetEntity, out var EntLocal);
-        if (EntLocal == null)
-        {
-            return;
-        }
-        var location = new EntityCoordinates((EntityUid)EntLocal, args.TargetCoordinates.Position).AlignWithClosestGridTile();
-        var locationMap = _transform.ToMapCoordinates(location);
-        if (locationMap.MapId == MapId.Nullspace)
-        {
-            return;
-        }
+        var circle = new PhysShapeCircle(range, mapCoords.Position);
+        var grids = new List<Entity<MapGridComponent>>();
+        _mapManager.FindGridsIntersecting(mapCoords.MapId, circle, Robust.Shared.Physics.Transform.Empty, ref grids, includeMap: false);
 
-        var physicQuery = GetEntityQuery<PhysicsComponent>();
-        var transformQuery = GetEntityQuery<TransformComponent>();
-
-        var map = _transform.ToMapCoordinates(location);
-        const bool inRange = true;
-        var state = (inRange, location.EntityId);
-        _mapManager.FindGridsIntersecting(map.MapId, new Box2(map.Position - CheckRange, map.Position + CheckRange), ref state,
-            static (EntityUid entityUid, MapGridComponent grid, ref (bool weh, EntityUid EntityId) tuple) =>
-            {
-                if (tuple.EntityId == entityUid)
-                    return true;
-
-                tuple.weh = false;
-
-                return false;
-            });
-
-        if (!state.inRange)
+        Entity<MapGridComponent>? result = null;
+        var distance = float.PositiveInfinity;
+        var circleBox = circle.CalcLocalBounds();
+        foreach (var grid in grids)
         {
-            return;
-        }
-        var userPos = _transform.ToMapCoordinates(transformQuery.GetComponent(args.User).Coordinates).Position;
-        var dir = userPos - map.Position;
-        var canAccessCenter = false;
-        if (dir.LengthSquared() > 0.01)
-        {
-            var ray = new CollisionRay(map.Position, dir.Normalized(), (int)CollisionGroup.Impassable);
-            var results = _physics.IntersectRay(locationMap.MapId, ray, dir.Length(), returnOnFirstHit: true);
-            canAccessCenter = !results.Any();
+            var gridXform = Transform(grid);
+            var worldMatrix = _transform.GetWorldMatrix(gridXform);
+            var gridIntersect = circleBox.Intersect(worldMatrix.TransformBox(grid.Comp.LocalAABB));
+            var gridDist = (gridIntersect.Center - mapCoords.Position).LengthSquared();
+
+            if (gridDist >= distance)
+                continue;
+
+            result = grid;
+            distance = gridDist;
         }
 
-        // if user can access tile center then they can place floor
-        // otherwise check it isn't blocked by a wall
-        if (!canAccessCenter && _turf.TryGetTileRef(location, out var tileRef))
-        {
-            _turfCheck.Clear();
-            _lookup.GetEntitiesInTile(tileRef.Value, _turfCheck);
-            foreach (var ent in _turfCheck)
-            {
-                if (physicQuery.TryGetComponent(ent, out var phys) &&
-                    phys.BodyType == BodyType.Static &&
-                    phys.Hard &&
-                    (phys.CollisionLayer & (int)CollisionGroup.Impassable) != 0)
-                {
-                    return;
-                }
-            }
-        }
-        TryComp<MapGridComponent>(location.EntityId, out var mapGrid);
-
-        var currentTileDefinition = (ContentTileDefinition)_tileDefinitionManager[args.Prototype];
-        //var currentTileDefinition = (ContentTileDefinition)_tileDefinitionManager[new ProtoId < ContentTileDefinition > ("Space")];
-        if (mapGrid != null)
-        {
-            var gridUid = location.EntityId;
-            var tile = _mapSystem.GetTileRef(gridUid, mapGrid, location);
-
-            if (!CanPlaceTile(gridUid, mapGrid, tile.GridIndices, out var reason))
-            {
-                _popup.PopupClient(reason, args.User, args.User);
-                return;
-            }
-            var coordinates = GetCoordinates(args.TargetCoordinates);
-            var baseTurf = (ContentTileDefinition)_tileDefinitionManager[tile.Tile.TypeId];
-
-            if (HasBaseTurf(currentTileDefinition, baseTurf.ID))
-            {
-                PlaceAt(args.User, gridUid, mapGrid, location, currentTileDefinition.TileId);
-                args.Handled = true;
-                return;
-            }
-        }
-        //Excuse moi,no grid creation for the spiders
+        return result;
     }
 
-    public bool HasBaseTurf(ContentTileDefinition tileDef, string baseTurf)
-    {
-        return tileDef.BaseTurf == baseTurf;
-    }
-
-    private void PlaceAt(EntityUid user, EntityUid gridUid, MapGridComponent mapGrid, EntityCoordinates location,
-        ushort tileId, float offset = 0)
-    {
-        _adminLogger.Add(LogType.Tile, LogImpact.Low, $"{ToPrettyString(user):actor} placed tile {_tileDefinitionManager[tileId].Name} at {ToPrettyString(gridUid)} {location}");
-
-        var random = new System.Random((int)_timing.CurTick.Value);
-        var variant = _tile.PickVariant((ContentTileDefinition)_tileDefinitionManager[tileId], random);
-        _mapSystem.SetTile(gridUid, mapGrid, location.Offset(new Vector2(offset, offset)), new Tile(tileId, 0, variant));
-    }
-
-    public bool CanPlaceTile(EntityUid gridUid, MapGridComponent component, Vector2i gridIndices, [NotNullWhen(false)] out string? reason)
-    {
-        var ev = new FloorTileAttemptEvent(gridIndices);
-        RaiseLocalEvent(gridUid, ref ev);
-
-        if (ev.Cancelled)
-        {
-            reason = Loc.GetString("invalid-floor-placement");
-            return false;
-        }
-
-        reason = null;
-        return true;
-    }
     /// <summary>
     /// Do a station announcement if all conditions are met
     /// </summary>
