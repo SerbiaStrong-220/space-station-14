@@ -20,13 +20,12 @@
                                StyleClasses="LabelSubText"/>
             </BoxContainer>
 
-            <BoxContainer Margin="0 0 180 0">
+            <BoxContainer HorizontalAlignment="Right">
                 <customControls:VSeparator HorizontalAlignment="Right"
                                            Margin="5"
                                            SetWidth="1"/>
 
                 <BoxContainer Orientation="Vertical"
-                              HorizontalAlignment="Right"
                               VerticalAlignment="Center"
                               MinWidth="170">
                     <Button Name="FollowButton"
