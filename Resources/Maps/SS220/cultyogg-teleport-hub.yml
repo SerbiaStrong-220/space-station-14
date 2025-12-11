@@ -21,7 +21,7 @@ entities:
   - uid: 1
     components:
     - type: MetaData
-      name: grid
+      name: The Void
     - type: Transform
       pos: -34.533085,29.964365
       parent: 4449
