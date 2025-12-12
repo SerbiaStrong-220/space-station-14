@@ -1,10 +1,15 @@
 ent-LockerCIAgentFilled = CI agent's locker
+    .desc = { ent-LockerSyndicatePersonal.desc }
     .suffix = Filled
 ent-LockerCIOfficerFilled = CI officer's locker
+    .desc = { ent-LockerSyndicatePersonal.desc }
     .suffix = Filled
 ent-LockerCentcommPilotFilled = centcomm pilot's locker
+    .desc = { ent-LockerSyndicatePersonal.desc }
     .suffix = Filled
-ent-LockerBlueshieldOperative = Blue Shield operative's locker
+ent-LockerBlueshieldOperativeFilled = Blue Shield operative's locker
+    .desc = { ent-LockerSyndicatePersonal.desc }
     .suffix = Filled
 ent-LockerCburnCommanderFilled = CBURN Commander's locker
+    .desc = { ent-LockerSyndicatePersonal.desc }
     .suffix = Filled
