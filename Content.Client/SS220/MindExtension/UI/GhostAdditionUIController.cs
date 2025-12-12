@@ -97,7 +97,6 @@ public sealed partial class GhostAdditionUIController : UIController, IOnSystemC
     private void RequestBodies()
     {
         _extensionSystem.RequestBodies();
-        Gui?.BodyMenuWindow.Populate();
         Gui?.BodyMenuWindow.OpenCentered();
     }
     private void OnFollowBodyAction(NetEntity entity)
@@ -122,7 +121,6 @@ public sealed partial class GhostAdditionUIController : UIController, IOnSystemC
     private void OnGhostBodyListResponse(GhostBodyListResponse ev)
     {
         Gui?.BodyMenuWindow.UpdateBodies(ev.Bodies);
-        Gui?.BodyMenuWindow.Populate();
     }
 
     private void OnDeleteTrailPointResponse(DeleteTrailPointResponse response)

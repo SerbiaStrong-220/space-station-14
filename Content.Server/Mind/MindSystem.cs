@@ -29,6 +29,7 @@ public sealed class MindSystem : SharedMindSystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
     [Dependency] private readonly SharedContainerSystemExtensions _containerSystemExtensions = default!; //SS220-Cryo-mobs-fix
+    [Dependency] private readonly MindExtensionSystem _mindExtension = default!; //SS220-mind-extension
 
     public override void Initialize()
     {
@@ -142,10 +143,7 @@ public sealed class MindSystem : SharedMindSystem
             return;
         }
 
-        //SS220-cryo-mobs-fix begin
-        var tempArgs = new MindTransferedEvent(entity, oldEntity, mind.UserId);
-        RaiseLocalEvent(ref tempArgs);
-        //SS220-cryo-mobs-fix end
+        _mindExtension.TransferExtension(oldEntity, entity, mind.UserId); //SS220-mind-extension
 
         mind.VisitingEntity = entity;
 
@@ -240,10 +238,7 @@ public sealed class MindSystem : SharedMindSystem
 
         var oldEntity = mind.OwnedEntity;
 
-        //SS220-cryo-mobs-fix begin
-        var tempArgs = new MindTransferedEvent(entity, oldEntity, mind.UserId);
-        RaiseLocalEvent(ref tempArgs);
-        //SS220-cryo-mobs-fix end
+        _mindExtension.TransferExtension(oldEntity, entity, mind.UserId); //SS220-mind-extension
 
         if (TryComp(oldEntity, out MindContainerComponent? oldContainer))
         {

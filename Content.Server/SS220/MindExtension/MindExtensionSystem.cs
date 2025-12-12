@@ -16,6 +16,11 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Server.SS220.MindExtension;
 
+/// <summary>
+/// The Entity System writes all player transfers from entity to entity.
+/// It allows the player to return to a recorded entity.
+/// System also manages the player's return to the lobby.
+/// </summary>
 public sealed partial class MindExtensionSystem : EntitySystem
 {
     [Dependency] private readonly EntityManager _entityManager = default!;
@@ -27,19 +32,16 @@ public sealed partial class MindExtensionSystem : EntitySystem
     [Dependency] private readonly BorgSystem _borg = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
 
-
-    private EntityQuery<GhostComponent> _ghostQuery;
     private EntityQuery<MindExtensionComponent> _mindExtQuery;
+
     public override void Initialize()
     {
         base.Initialize();
 
-        _ghostQuery = GetEntityQuery<GhostComponent>();
         _mindExtQuery = GetEntityQuery<MindExtensionComponent>();
 
         SubscribeRespawnSystemEvents();
         SubscribeTrailSystemEvents();
-        SubscribeTransferSystemEvents();
     }
 
     public Entity<MindExtensionComponent> GetMindExtension(NetUserId player)
@@ -61,7 +63,12 @@ public sealed partial class MindExtensionSystem : EntitySystem
         return entity is not null;
     }
 
-    public bool TryGetMindExtension(MindExtensionContainerComponent container, [NotNullWhen(true)] out Entity<MindExtensionComponent>? entity)
+    /// <summary>
+    /// Returns the player associated with entity of <see cref="MindExtensionComponent"/>.
+    /// If it doesn't exist, it will be created.
+    /// </summary>
+    public bool TryGetMindExtension(MindExtensionContainerComponent container,
+        [NotNullWhen(true)] out Entity<MindExtensionComponent>? entity)
     {
         entity = null;
 
@@ -73,6 +80,7 @@ public sealed partial class MindExtensionSystem : EntitySystem
         return entity is not null;
     }
 
+
     private (EntityUid Uid, MindExtensionComponent Component) CreateExtensionEntity(NetUserId playerSession)
     {
         var newEnt = _entityManager.CreateEntityUninitialized(null);
@@ -83,14 +91,21 @@ public sealed partial class MindExtensionSystem : EntitySystem
         return new(newEnt, mindExtComponent);
     }
 
-    #region Helpers
+    /// <summary>
+    /// It performs the main check of the system to determine
+    /// whether the entity will be permanently abandoned by the player.
+    /// </summary>
     private bool CheckEntityAbandoned(EntityUid entity)
     {
-        //Если ливаем не из тела, то норм.
+        //An entity is only considered abandoned if
+        //it had a MobStateComponent and a MobState of Alive or Critical
+        //at the time of transfer.
+
+        //Note: suicide is handled separately and ignores this rule.
+
         if (!TryComp<MobStateComponent>(entity, out var mobState))
             return false;
 
-        //Если ливаем из мертвого тела, то норм.
         switch (mobState.CurrentState)
         {
             case Shared.Mobs.MobState.Invalid:
@@ -99,18 +114,6 @@ public sealed partial class MindExtensionSystem : EntitySystem
                 return false;
         }
 
-        //Если ливаем из живого тела, то пока пиздося с гарантом, кроме случая суицида.
         return true;
     }
-
-    #endregion
 }
-
-[ByRefEvent]
-public record struct MindTransferedEvent(EntityUid? NewEntity, EntityUid? OldEntity, NetUserId? Player);
-
-[ByRefEvent]
-public record struct SuicidedEvent(EntityUid Invoker, NetUserId Player);
-
-[ByRefEvent]
-public record struct GhostedEvent(EntityUid OldEntity, bool CanReturn);

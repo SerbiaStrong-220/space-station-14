@@ -23,14 +23,10 @@ public partial class MindExtensionSystem : EntitySystem //MindRespawnSystem
     private void OnRespawnActionEvent(ExtensionRespawnActionEvent ev, EntitySessionEventArgs args)
     {
         if (!TryComp<MindExtensionContainerComponent>(args.SenderSession.AttachedEntity, out var mindContExt))
-        {
             return;
-        }
 
         if (!TryComp<MindExtensionComponent>(mindContExt.MindExtension, out var mindExt))
-        {
             return;
-        }
 
         if (!mindExt.RespawnAvailable && mindExt.RespawnTimer < _gameTiming.CurTime)
             RaiseLocalEvent(args.SenderSession.AttachedEntity.Value, new RespawnActionEvent());
@@ -46,6 +42,8 @@ public partial class MindExtensionSystem : EntitySystem //MindRespawnSystem
 
     private void SetRespawnTimer(MindExtensionComponent component, EntityUid newEntity, NetUserId playerId)
     {
+        //This is the main check to see if transferring to this entity resets the return timer to the lobby.
+        //Now the timer is only turned off when transferring to a living humanoid (Dna Component) or Borg.
         if (HasComp<DnaComponent>(newEntity) || HasComp<BorgChassisComponent>(newEntity))
         {
             if (TryComp<MobStateComponent>(newEntity, out var mobState) &&
@@ -62,14 +60,13 @@ public partial class MindExtensionSystem : EntitySystem //MindRespawnSystem
 
     private void ChangeRespawnAvaible(MindExtensionComponent component, NetUserId playerId, bool value)
     {
-        //Если возможность респавна появилась, запустить таймер.
         if (value && !component.RespawnAvailable)
         {
             component.RespawnTimer = _gameTiming.CurTime + component.RespawnTime;
             UpdateRespawnTimer(component.RespawnTimer, _playerManager.GetSessionById(playerId));
         }
 
-        //Если возможность респавна пропала, таймер остановить.
+        //When turned off, set the value to false, which means the timer is turned off.
         if (!value && component.RespawnAvailable)
         {
             component.RespawnTimer = null;

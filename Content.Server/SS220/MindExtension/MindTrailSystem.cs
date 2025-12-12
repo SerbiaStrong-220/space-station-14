@@ -1,6 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Server.Power.EntitySystems;
 using Content.Shared.Bed.Cryostorage;
 using Content.Shared.Ghost;
 using Content.Shared.Mind;
@@ -12,15 +11,12 @@ using Robust.Shared.Network;
 
 namespace Content.Server.SS220.MindExtension;
 
-
 public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
 {
     private void SubscribeTrailSystemEvents()
     {
         SubscribeNetworkEvent<ExtensionReturnActionEvent>(OnExtensionReturnActionEvent);
         SubscribeNetworkEvent<GhostBodyListRequest>(OnGhostBodyListRequestEvent);
-
-
         SubscribeNetworkEvent<DeleteTrailPointRequest>(OnDeleteTrailPointRequest);
     }
 
@@ -28,15 +24,12 @@ public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
 
     private void OnExtensionReturnActionEvent(ExtensionReturnActionEvent ev, EntitySessionEventArgs args)
     {
-        //Нужно найти MindExtension и сверить с Trail. Сверить с IsAvaible.
         if (!TryGetMindExtension(args.SenderSession.UserId, out var mindExtEnt))
             return;
 
-        //Нужно проверить целевую энтити на легальность интервенции.
         if (!TryGetEntity(ev.Target, out var target))
             return;
 
-        //Нужно найти mind, который нужно будет переместить.
         if (!_mind.TryGetMind(args.SenderSession.UserId, out var mind))
             return;
 
@@ -52,7 +45,6 @@ public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
 
     private void OnGhostBodyListRequestEvent(GhostBodyListRequest ev, EntitySessionEventArgs args)
     {
-        // Нужно проверить наличие компонента-контейнера и компонента MindExtension.
         if (!TryComp<MindExtensionContainerComponent>(args.SenderSession.AttachedEntity, out var mindContExt))
         {
             RaiseNetworkEvent(new GhostBodyListResponse([]), args.SenderSession.Channel);
@@ -118,6 +110,7 @@ public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
         if (HasComp<GhostComponent>(entity))
             return;
 
+        //If borg mind slot is not empty - write borg mind instead.
         if (TryComp<BorgChassisComponent>(entity, out var chassisComp))
         {
             if (chassisComp.BrainContainer.ContainedEntity is null)
@@ -144,6 +137,9 @@ public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
         });
     }
 
+    /// <summary>
+    /// Main check is whether one can return to the essence.
+    /// </summary>
     private BodyStateToEnter IsAvailableToEnterEntity(
         EntityUid target,
         MindExtensionComponent mindExtension,
@@ -156,8 +152,9 @@ public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
         if (TryComp<CryostorageContainedComponent>(target, out var cryo))
             return BodyStateToEnter.InCryo;
 
-        //При Visit MindConatainer может остаться, как и Mind. Нужно проверить, не является-ли этот Mind своим.
-        //Если Mind не свой, значит тело занято.
+        //When visiting, the MindConatainer may remain, as may the Mind.
+        //It's necessary to check whether this Mind is your own.
+        //If the Mind isn't your own, then the body is occupied.
         if (TryComp<MindContainerComponent>(target, out var mindContainer) && mindContainer.Mind is not null)
             if (TryComp<MindComponent>(mindContainer.Mind, out var mind) && mind.UserId != session)
                 return BodyStateToEnter.Engaged;

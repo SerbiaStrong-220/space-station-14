@@ -10,8 +10,7 @@ namespace Content.Client.SS220.MindExtension.UI;
 [GenerateTypedNameReferences]
 public sealed partial class GhostBodyMenuWindow : DefaultWindow
 {
-    private IEnumerable<TrailPoint>? _bodies;
-    private Dictionary<NetEntity, GhostBodyCard> BodyCards = new Dictionary<NetEntity, GhostBodyCard>();
+    private Dictionary<NetEntity, GhostBodyCard> _bodyCards = new Dictionary<NetEntity, GhostBodyCard>();
 
     public Action<NetEntity>? FollowBodyAction;
     public Action<NetEntity>? ToBodyAction;
@@ -24,32 +23,10 @@ public sealed partial class GhostBodyMenuWindow : DefaultWindow
 
     public void UpdateBodies(IEnumerable<TrailPoint> bodies)
     {
-        _bodies = bodies;
-    }
-
-    public void Populate()
-    {
+        _bodyCards.Clear();
         BodyList.DisposeAllChildren();
-        BodyCards.Clear();
-        AddButtons();
-    }
 
-    public void DeleteBodyCard(NetEntity entity)
-    {
-        if (!BodyCards.TryGetValue(entity, out var bodyCard))
-            return;
-
-        bodyCard.FollowBodyAction -= FollowBodyAction;
-        bodyCard.ToBodyAction -= ToBodyAction;
-        bodyCard.DeleteTrailPointAction -= DeleteTrailPointAction;
-
-        BodyList.RemoveChild(bodyCard);
-        BodyCards.Remove(entity);
-    }
-
-    private void AddButtons()
-    {
-        foreach (var body in _bodies ?? [])
+        foreach (var body in bodies)
         {
             var bodyCard = new GhostBodyCard();
             bodyCard.Init(body);
@@ -59,7 +36,20 @@ public sealed partial class GhostBodyMenuWindow : DefaultWindow
             bodyCard.DeleteTrailPointAction += DeleteTrailPointAction;
 
             BodyList.AddChild(bodyCard);
-            BodyCards.Add(body.Id, bodyCard);
+            _bodyCards.Add(body.Id, bodyCard);
         }
+    }
+
+    public void DeleteBodyCard(NetEntity entity)
+    {
+        if (!_bodyCards.TryGetValue(entity, out var bodyCard))
+            return;
+
+        bodyCard.FollowBodyAction -= FollowBodyAction;
+        bodyCard.ToBodyAction -= ToBodyAction;
+        bodyCard.DeleteTrailPointAction -= DeleteTrailPointAction;
+
+        BodyList.RemoveChild(bodyCard);
+        _bodyCards.Remove(entity);
     }
 }

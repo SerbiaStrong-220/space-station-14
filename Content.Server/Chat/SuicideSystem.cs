@@ -71,7 +71,7 @@ public sealed class SuicideSystem : EntitySystem
 
         //SS220-mind-extension begin
         if (session is not null)
-            _ghostExtension.Suicide(victim, session.UserId);
+            _ghostExtension.MarkAsNotAbandoned(victim, session.UserId);
         //SS220-mind-extension end
 
         // TODO: fix this
