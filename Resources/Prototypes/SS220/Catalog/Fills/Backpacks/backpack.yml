@@ -180,6 +180,7 @@
   parent: ClothingBackpackERTLeader
   id: ClothingBackpackCBURNLeaderFilled
   name: CBURN leader backpack
+  description: A spacious backpack with lots of pockets, worn by the Commander of an CBURN.
   suffix: Filled
   components:
   - type: StorageFill
@@ -200,6 +201,7 @@
   parent: ClothingBackpackERTSecurity
   id: ClothingBackpackCIAgentFilled
   name: CI Agent Backpack
+  description: A spacious backpack with lots of pockets, worn by the Counterintelligence Agent.
   suffix: Filled
   components:
    - type: StorageFill
@@ -216,6 +218,7 @@
   parent: ClothingBackpackNoirSatchel
   id: ClothingBackpackCIOfficerFilled
   name: CI Officer Satchel
+  description: A fashionable bag in noir style, custom-made for a counterintelligence officer.
   suffix: Filled
   components:
    - type: StorageFill
