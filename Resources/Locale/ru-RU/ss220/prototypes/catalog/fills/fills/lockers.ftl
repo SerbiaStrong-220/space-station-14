@@ -6,5 +6,5 @@ ent-LockerCentcommPilotFilled = шкаф пилота ЦК
     .suffix = Filled
 ent-LockerBlueshieldOperative = шкаф оперативника "Синий Щит"
     .suffix = Filled
-ent-LockerCburnCommander = шкаф командира отряда РХБЗ
+ent-LockerCburnCommanderFilled = шкаф командира отряда РХБЗ
     .suffix = Filled

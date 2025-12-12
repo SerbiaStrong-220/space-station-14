@@ -6,5 +6,5 @@ ent-LockerCentcommPilotFilled = centcomm pilot's locker
     .suffix = Filled
 ent-LockerBlueshieldOperative = Blue Shield operative's locker
     .suffix = Filled
-ent-LockerCburnCommander = CBURN Commander's locker
+ent-LockerCburnCommanderFilled = CBURN Commander's locker
     .suffix = Filled
