@@ -469,10 +469,7 @@
     onlyCollideWhenShot: true
     damage:
       types:
-      #SS220 mini syringe patch begin
-        Piercing: 0
-      #SS220 mini syringe patch end
-        #Piercing: 0
+        Piercing: 0 #SS220 mini syringe patch
   - type: Tag
     tags:
     - Syringe
