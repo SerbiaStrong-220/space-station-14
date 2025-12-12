@@ -6,5 +6,8 @@ ent-ClothingBackpackDeathSquadSpecialistFilled =  { ent-ClothingBackpackDeathSqu
     .suffix = Специалист, Эскадрон Смерти, dq
 
 ent-ClothingBackpackCBURNLeaderFilled =  рюкзак командира РХБЗ
+    .desc = Вместительный рюкзак с множеством карманов, который носит командир отряда РХБЗ.
 ent-ClothingBackpackCIAgentFilled =  рюкзак агента Контрразведки
+    .desc = Вместительный рюкзак с множеством карманов, который носят агенты Контрразведки.
 ent-ClothingBackpackCIOfficerFilled =  сумка офицера Контрразведки
+    .desc = Модная сумка в нуарном стиле, сшитая на заказ для офицера Контрразведки.

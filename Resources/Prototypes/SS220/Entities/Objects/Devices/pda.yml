@@ -489,8 +489,6 @@
        pda-cburn
   - type: PdaBorderColor
     borderColor: "#7a998d"
-#    accentHColor: "#447987"
-#    accentVColor: "#447987"
   - type: Sprite
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
