@@ -440,7 +440,7 @@
     removalTime: 0.25
     embedOnThrow: false
   - type: SolutionInjectWhileEmbedded
-    transferAmount: 1
+    transferAmount: 2 #SS220 mini syringe update
     solution: injector
     updateInterval: 2
   - type: SolutionInjectOnEmbed
@@ -469,7 +469,7 @@
     onlyCollideWhenShot: true
     damage:
       types:
-        Piercing: 5
+        Piercing: 0 #SS220 mini syringe patch
   - type: Tag
     tags:
     - Syringe
