@@ -108,7 +108,7 @@
 - type: entity
   id: LockerCburnCommander
   parent: LockerDoubleBase
-  name: шкаф командира отряда РХБЗ
+  name: CBURN Commander's locker
   components:
   - type: Appearance
   - type: EntityStorageVisuals
@@ -154,7 +154,7 @@
 - type: entity
   id: LockerBlueshieldOperative
   parent: LockerBaseSecure
-  name: шкаф оперативника "Синий Щит"
+  name: Blue Shield operative's locker
   components:
   - type: Sprite
     sprite: SS220/Structures/Storage/closet.rsi

@@ -131,10 +131,6 @@ ent-ERTSecurityPDA = КПК офицера безопасности ОБР
 # SS220 CBURN questions
 ent-CBURNPDA = КПК РХБЗ
     .desc = Пахнет гнилой плотью.
-# SS220 More_Centcomm_Prototypes start
-ent-CBURNLeaderPDA = КПК Лидера Отряда РХБЗ
-    .desc = Пахнет гнилой плотью.
-# SS220 More_Centcomm_Prototypes end
 ent-PsychologistPDA = КПК психолога
     .desc = Выглядит безупречно чистым.
 ent-ReporterPDA = КПК репортёра

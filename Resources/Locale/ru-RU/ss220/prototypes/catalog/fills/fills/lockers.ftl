@@ -1,0 +1,10 @@
+ent-LockerCIAgentFilled = шкаф агента Контрразведки
+    .suffix = Filled
+ent-LockerCIOfficerFilled = шкаф офицера Контрразведки
+    .suffix = Filled
+ent-LockerCentcommPilotFilled = шкаф пилота ЦК
+    .suffix = Filled
+ent-LockerBlueshieldOperative = шкаф оперативника "Синий Щит"
+    .suffix = Filled
+ent-LockerCburnCommander = шкаф командира отряда РХБЗ
+    .suffix = Filled

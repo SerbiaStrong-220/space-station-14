@@ -122,11 +122,6 @@ ent-PrisonerIDCard = ID-карта заключённого
 ent-CBURNIDcard = ID карта РХБЗ
     .desc = { ent-CentcomIDCard.desc }
     .suffix = РХБЗ
-# SS220 More_Centcomm_Prototypes start
-ent-CBURNIDLeadercard = ID карта лидера отряда РХБЗ
-    .desc = { ent-CentcomIDCard.desc }
-    .suffix = РХБЗ
-# SS220 More_Centcomm_Prototypes end
 ent-CluwneIDCard = ID-карта клувеня
     .suffix = Неснимаемый
     .desc = { ent-IDCardStandard.desc }

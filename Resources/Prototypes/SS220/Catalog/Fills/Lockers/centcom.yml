@@ -161,7 +161,7 @@
   - type: StorageFill
     contents:
     - id: ClothingUniformJumpsuitERTChaplain
-    - id: ClothingBackpackERTChaplain
+    - id: ClothingBackpackERTChaplainFilled
     - id: ClothingHeadHatFez
     - id: ClothingOuterHoodieChaplain
     - id: ClothingHeadsetAltCentComm
@@ -179,7 +179,7 @@
 #Pilots
 - type: entity
   id: LockerCentcommPilotFilled
-  name: шкаф пилота ЦК
+  name: centcomm pilot's locker
   suffix: Filled
   parent: LockerCentcomm
   components:
@@ -271,7 +271,7 @@
 #CI
 - type: entity
   id: LockerCIAgentFilled
-  name: шкаф агента Контрразведки
+  name: CI agent's locker
   suffix: Filled
   parent: LockerCentcomm
   components:
@@ -296,7 +296,7 @@
 
 - type: entity
   id: LockerCIOfficerFilled
-  name: шкаф офицера Контрразведки
+  name: CI officer's locker
   suffix: Filled
   parent: LockerCentcomm
   components:

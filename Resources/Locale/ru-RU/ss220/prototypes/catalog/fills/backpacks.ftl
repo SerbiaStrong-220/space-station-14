@@ -4,3 +4,7 @@ ent-ClothingBackpackDeathSquadOperativeFilled = { ent-ClothingBackpackDeathSquad
 ent-ClothingBackpackDeathSquadSpecialistFilled =  { ent-ClothingBackpackDeathSquadFilled }
     .desc = { ent-ClothingBackpackDeathSquadFilled.desc }
     .suffix = Специалист, Эскадрон Смерти, dq
+
+ent-ClothingBackpackCBURNLeaderFilled =  рюкзак командира РХБЗ
+ent-ClothingBackpackCIAgentFilled =  рюкзак агента Контрразведки
+ent-ClothingBackpackCIOfficerFilled =  сумка офицера Контрразведки

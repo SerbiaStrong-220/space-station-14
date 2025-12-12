@@ -458,8 +458,8 @@
 - type: entity
   parent: CentcomNewPDA
   id: CentcomCIAgentPDA
-  name: КПК Агента Контрразведки
-  description: КПК Агента Контрразведки
+  name: PDA CI Agent
+  description: CI Agent PDA
   components:
     - type: Pda
       id: CIAgentIDCard
@@ -467,8 +467,8 @@
 - type: entity
   parent: CentcomNewPDA
   id: CentcomCIOfficerPDA
-  name: КПК Офицера Контрразведки
-  description: КПК Офицера Контрразведки
+  name: PDA CI Officer
+  description: CI Officer PDA
   components:
     - type: Pda
       id: CIOfficerIDCard

@@ -199,7 +199,7 @@
 - type: entity
   parent: HighSecCentralCommandLocked
   id: HighSecCentcommLockedBSO
-  suffix: ЦК, Закрыто, Оперативник "Синий Щит"
+  suffix: CC, Locked, BSO
   components:
   - type: ContainerFill
     containers:
@@ -208,7 +208,7 @@
 - type: entity
   parent: HighSecCentralCommandLocked
   id: HighSecCentcommLockedERT
-  suffix: ЦК, Закрыто, ОБР
+  suffix: CC, Locked, ERT
   components:
   - type: ContainerFill
     containers:
@@ -217,7 +217,7 @@
 - type: entity
   parent: HighSecCentralCommandLocked
   id: HighSecCentcommLockedCBURN
-  suffix: ЦК, Закрыто, Отряд РХБЗ
+  suffix: CC, Locked, CBURN
   components:
   - type: ContainerFill
     containers:
@@ -226,7 +226,7 @@
 - type: entity
   parent: HighSecCentralCommandLocked
   id: HighSecCentcommLockedDeathSquad
-  suffix: ЦК, Закрыто, Эскадрон Смерти
+  suffix: CC, Locked, DeathSquad
   components:
   - type: ContainerFill
     containers:

@@ -1,0 +1,10 @@
+ent-LockerCIAgentFilled = CI agent's locker
+    .suffix = Filled
+ent-LockerCIOfficerFilled = CI officer's locker
+    .suffix = Filled
+ent-LockerCentcommPilotFilled = centcomm pilot's locker
+    .suffix = Filled
+ent-LockerBlueshieldOperative = Blue Shield operative's locker
+    .suffix = Filled
+ent-LockerCburnCommander = CBURN Commander's locker
+    .suffix = Filled
