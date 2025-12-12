@@ -15,8 +15,8 @@ using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.SS220.Containers; //SS220-cryo-mobs-fix
 using Content.Server.Polymorph.Systems; //SS220-cryo-mobs-fix
-using Content.Shared.Body.Systems;
-using Content.Server.SS220.MindExtension; //SS220
+using Content.Shared.Body.Systems; //SS220-cryo-mobs-fix
+using Content.Server.SS220.MindExtension;
 
 namespace Content.Server.Mind;
 
@@ -134,8 +134,7 @@ public sealed class MindSystem : SharedMindSystem
             return;
         }
 
-        //TODO: Я тут был, надо оформить
-        var oldEntity = mind.OwnedEntity;
+        var oldEntity = mind.OwnedEntity; //SS220-mind-extension
 
         if (HasComp<VisitingMindComponent>(entity))
         {
@@ -143,8 +142,10 @@ public sealed class MindSystem : SharedMindSystem
             return;
         }
 
+        //SS220-cryo-mobs-fix begin
         var tempArgs = new MindTransferedEvent(entity, oldEntity, mind.UserId);
         RaiseLocalEvent(ref tempArgs);
+        //SS220-cryo-mobs-fix end
 
         mind.VisitingEntity = entity;
 
@@ -239,9 +240,10 @@ public sealed class MindSystem : SharedMindSystem
 
         var oldEntity = mind.OwnedEntity;
 
-        //TODO: Я тут был, надо оформить
+        //SS220-cryo-mobs-fix begin
         var tempArgs = new MindTransferedEvent(entity, oldEntity, mind.UserId);
         RaiseLocalEvent(ref tempArgs);
+        //SS220-cryo-mobs-fix end
 
         if (TryComp(oldEntity, out MindContainerComponent? oldContainer))
         {
@@ -249,7 +251,7 @@ public sealed class MindSystem : SharedMindSystem
             mind.OwnedEntity = null;
             Entity<MindComponent> mindEnt = (mindId, mind);
             Entity<MindContainerComponent> containerEnt = (oldEntity.Value, oldContainer);
-            RaiseLocalEvent(oldEntity.Value, new MindRemovedMessage(mindEnt, containerEnt), true);
+            RaiseLocalEvent(oldEntity.Value, new MindRemovedMessage(mindEnt, containerEnt));
             RaiseLocalEvent(mindId, new MindGotRemovedEvent(mindEnt, containerEnt));
             Dirty(oldEntity.Value, oldContainer);
         }

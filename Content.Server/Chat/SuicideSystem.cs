@@ -29,7 +29,7 @@ public sealed class SuicideSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly GhostSystem _ghostSystem = default!;
     [Dependency] private readonly SharedSuicideSystem _suicide = default!;
-    [Dependency] private readonly MindExtensionSystem _ghostExtension = default!;
+    [Dependency] private readonly MindExtensionSystem _ghostExtension = default!; //SS220-mind-extension
 
     private static readonly ProtoId<TagPrototype> CannotSuicideTag = "CannotSuicide";
 
@@ -69,8 +69,10 @@ public sealed class SuicideSystem : EntitySystem
         if (!suicideGhostEvent.Handled || _tagSystem.HasTag(victim, CannotSuicideTag))
             return false;
 
+        //SS220-mind-extension begin
         if (session is not null)
             _ghostExtension.Suicide(victim, session.UserId);
+        //SS220-mind-extension end
 
         // TODO: fix this
         // This is a handled event, but the result is never used

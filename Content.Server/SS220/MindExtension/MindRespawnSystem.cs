@@ -1,3 +1,5 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.Forensics.Components;
 using Content.Shared.Ghost;
 using Content.Shared.Mobs;
@@ -30,7 +32,7 @@ public partial class MindExtensionSystem : EntitySystem //MindRespawnSystem
             return;
         }
 
-        if (!mindExt.RespawnAvaible && mindExt.RespawnTimer < _gameTiming.CurTime)
+        if (!mindExt.RespawnAvailable && mindExt.RespawnTimer < _gameTiming.CurTime)
             RaiseLocalEvent(args.SenderSession.AttachedEntity.Value, new RespawnActionEvent());
     }
 
@@ -41,7 +43,6 @@ public partial class MindExtensionSystem : EntitySystem //MindRespawnSystem
 
         UpdateRespawnTimer(mindExtEnt.Value.Comp.RespawnTimer, args.SenderSession);
     }
-
 
     private void SetRespawnTimer(MindExtensionComponent component, EntityUid newEntity, NetUserId playerId)
     {
@@ -62,20 +63,20 @@ public partial class MindExtensionSystem : EntitySystem //MindRespawnSystem
     private void ChangeRespawnAvaible(MindExtensionComponent component, NetUserId playerId, bool value)
     {
         //Если возможность респавна появилась, запустить таймер.
-        if (value && !component.RespawnAvaible)
+        if (value && !component.RespawnAvailable)
         {
             component.RespawnTimer = _gameTiming.CurTime + component.RespawnTime;
             UpdateRespawnTimer(component.RespawnTimer, _playerManager.GetSessionById(playerId));
         }
 
         //Если возможность респавна пропала, таймер остановить.
-        if (!value && component.RespawnAvaible)
+        if (!value && component.RespawnAvailable)
         {
             component.RespawnTimer = null;
             UpdateRespawnTimer(component.RespawnTimer, _playerManager.GetSessionById(playerId));
         }
 
-        component.RespawnAvaible = value;
+        component.RespawnAvailable = value;
     }
 
     private void UpdateRespawnTimer(TimeSpan? timer, ICommonSession session)

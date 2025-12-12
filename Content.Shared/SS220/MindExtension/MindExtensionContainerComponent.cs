@@ -1,3 +1,5 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Shared.SS220.MindExtension;

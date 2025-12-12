@@ -12,8 +12,17 @@
             <BoxContainer Orientation="Vertical"
                           Margin="0 0 190 0"
                           HorizontalExpand="True">
-                <Label Name="BodyNameLabel"
-                       StyleClasses="LabelKeyText"/>
+
+                <PanelContainer HorizontalExpand="True">
+                    <RichTextLabel Name="BodyNameLabel"
+                                   StyleClasses="LabelKeyText"
+                                   Margin="0 0 40 0"/>
+                    <TextureButton Name="DeleteButton"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   StyleClasses="windowCloseButton"/>
+                </PanelContainer>
+                
                 <Label Name="BodyStateLabel"
                        StyleClasses="LabelSubText"/>
                 <RichTextLabel Name="BodyDescriptionLabel"

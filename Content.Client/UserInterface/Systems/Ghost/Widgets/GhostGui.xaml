@@ -3,7 +3,7 @@
                   xmlns:addition="clr-namespace:Content.Client.SS220.MindExtension.UI"
                   HorizontalAlignment="Center">
     <BoxContainer Orientation="Horizontal">
-        <addition:GhostAdditionGui> </addition:GhostAdditionGui>
+        <addition:GhostAdditionGui/> <!--SS220 MindExtension-->
         <Button Name="ReturnToBodyButton" Text="{Loc ghost-gui-return-to-body-button}" />
         <Button Name="GhostWarpButton" Text="{Loc ghost-gui-ghost-warp-button}" />
         <Button Name="GhostRolesButton" />

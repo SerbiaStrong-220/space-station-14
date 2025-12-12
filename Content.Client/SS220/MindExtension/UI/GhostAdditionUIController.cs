@@ -1,3 +1,5 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Client.UserInterface.Systems.Gameplay;
 using Content.Shared.Ghost;
 using Content.Shared.SS220.MindExtension.Events;
@@ -53,6 +55,7 @@ public sealed partial class GhostAdditionUIController : UIController, IOnSystemC
         Gui.ReturnToBodyPressed += RequestReturnToBody;
         Gui.BodyMenuWindow.FollowBodyAction += OnFollowBodyAction;
         Gui.BodyMenuWindow.ToBodyAction += OnToBodyAction;
+        Gui.BodyMenuWindow.DeleteTrailPointAction += DeleteTrailPointAction;
     }
 
     public void UnloadGui()
@@ -105,6 +108,11 @@ public sealed partial class GhostAdditionUIController : UIController, IOnSystemC
     private void OnToBodyAction(NetEntity entity)
     {
         _extensionSystem?.MoveToBody(entity);
+    }
+
+    private void DeleteTrailPointAction(NetEntity entity)
+    {
+        _extensionSystem?.DeleteTrailPointRequest(entity);
     }
 
     #endregion

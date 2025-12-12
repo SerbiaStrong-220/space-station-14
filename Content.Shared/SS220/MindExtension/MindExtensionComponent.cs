@@ -1,3 +1,5 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Robust.Shared.Network;
 
 namespace Content.Shared.SS220.MindExtension;
@@ -17,5 +19,5 @@ public sealed partial class MindExtensionComponent : Component
     public TimeSpan RespawnTime = TimeSpan.FromMinutes(20);
 
 
-    public bool RespawnAvaible = false;
+    public bool RespawnAvailable = false;
 }

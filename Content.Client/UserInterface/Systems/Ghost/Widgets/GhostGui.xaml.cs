@@ -11,8 +11,6 @@ public sealed partial class GhostGui : UIWidget
 {
     public GhostTargetWindow TargetWindow { get; }
 
-    //public event Action? AdvancedReturnPressed;
-
     public event Action? RequestWarpsPressed;
     public event Action? ReturnToBodyPressed;
     public event Action? GhostRolesPressed;

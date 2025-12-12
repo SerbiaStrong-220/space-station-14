@@ -1,3 +1,5 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Server.Administration.Managers;
 using Content.Server.Mind;
 using Content.Server.Silicons.Borgs;
@@ -50,6 +52,7 @@ public sealed partial class MindExtensionSystem : EntitySystem
 
         return CreateExtensionEntity(player);
     }
+
     public bool TryGetMindExtension(NetUserId player, [NotNullWhen(true)] out Entity<MindExtensionComponent>? entity)
     {
         var mindExts = _entityManager.AllComponents<MindExtensionComponent>();

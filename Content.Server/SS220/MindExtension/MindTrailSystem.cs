@@ -1,3 +1,5 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Server.Power.EntitySystems;
 using Content.Shared.Bed.Cryostorage;
 using Content.Shared.Ghost;
@@ -39,9 +41,9 @@ public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
             return;
 
         if (!_admin.IsAdmin(args.SenderSession) &&
-            IsAvaibleToEnterEntity(target.Value,
+            IsAvailableToEnterEntity(target.Value,
             mindExtEnt.Value.Comp,
-            args.SenderSession.UserId) != BodyStateToEnter.Avaible)
+            args.SenderSession.UserId) != BodyStateToEnter.Available)
             return;
 
         _mind.TransferTo(mind.Value, target.Value);
@@ -68,7 +70,7 @@ public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
         {
             EntityUid target = pair.Key;
             TrailPointMetaData trailMetaData = pair.Value;
-            var state = IsAvaibleToEnterEntity(pair.Key, mindExt, args.SenderSession.UserId);
+            var state = IsAvailableToEnterEntity(pair.Key, mindExt, args.SenderSession.UserId);
 
             if (TryComp<BorgBrainComponent>(pair.Key, out var borgBrain))
             {
@@ -142,7 +144,7 @@ public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
         });
     }
 
-    private BodyStateToEnter IsAvaibleToEnterEntity(
+    private BodyStateToEnter IsAvailableToEnterEntity(
         EntityUid target,
         MindExtensionComponent mindExtension,
         NetUserId session)
@@ -166,6 +168,6 @@ public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
                 return BodyStateToEnter.Abandoned;
         }
 
-        return BodyStateToEnter.Avaible;
+        return BodyStateToEnter.Available;
     }
 }
