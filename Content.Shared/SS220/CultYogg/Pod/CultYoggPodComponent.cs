@@ -48,6 +48,9 @@ public sealed partial class CultYoggPodComponent : Component
     [DataField]
     public float ModifyStamina = -5;
 
+    [DataField]
+    public bool ShouldStopOnDamage = false;
+
     public ContainerSlot MobContainer = default!;
 
     [Serializable, NetSerializable]
