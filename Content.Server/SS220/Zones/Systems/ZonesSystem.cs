@@ -1,7 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Server.Administration.Managers;
 using Content.Shared.Prototypes;
-using Content.Shared.SS220.Maths;
 using Content.Shared.SS220.Zones;
 using Content.Shared.SS220.Zones.Components;
 using Content.Shared.SS220.Zones.Systems;
@@ -72,12 +71,8 @@ public sealed partial class ZonesSystem : SharedZonesSystem
             return;
 
         Entity<ZoneComponent> zone = (uid.Value, zoneComp);
-        if (msg.ProtoId is { } protoId)
-        {
-            var newZone = ChangeZoneProto(zone, protoId);
-            if (newZone != null)
-                zone = newZone.Value;
-        }
+        if (msg.ProtoId is { } newProtoId)
+            TryChangeZoneProto(ref zone, newProtoId);
 
         if (msg.Parent is { } parent)
             SetZoneParent(zone, GetEntity(parent), recalculate: false);
@@ -112,7 +107,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
     /// <summary>
     /// Creates new zone
     /// </summary>
-    public (Entity<ZoneComponent>? Zone, string? FailReason) CreateZone(
+    public Entity<ZoneComponent>? CreateZone(
         EntityUid parent,
         EntProtoId<ZoneComponent> protoId,
         List<Box2> area,
@@ -121,16 +116,16 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         bool attachToLattice = false)
     {
         if (area.Count <= 0)
-            return (null, "Can't create a zone with an empty region");
+            return null;
 
         if (!IsValidParent(parent))
-            return (null, "Can't create a zone with an invalid parent");
+            return null;
 
         if (!_prototype.TryIndex<EntityPrototype>(protoId, out var proto))
-            return (null, "Can't create a zone with an invalid prototype id");
+            return null;
 
         if (!proto.HasComponent<ZoneComponent>())
-            return (null, $"Can't create a zone with prototype that doesn't has a {nameof(ZoneComponent)}");
+            return null;
 
         if (string.IsNullOrEmpty(name))
             name = $"Zone {GetZonesCount() + 1}";
@@ -157,7 +152,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 
         UpdateZoneOverrides(zone);
 
-        return (zone, null);
+        return zone;
     }
 
     public void DeleteZone(Entity<ZoneComponent> ent)
@@ -175,25 +170,26 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         Dirty(ent);
     }
 
-    public Entity<ZoneComponent>? ChangeZoneProto(Entity<ZoneComponent> ent, EntProtoId<ZoneComponent> protoId)
+    public bool TryChangeZoneProto(ref Entity<ZoneComponent> ent, EntProtoId<ZoneComponent> newProtoId)
     {
-        var metaData = MetaData(ent);
-        if (protoId.Id != metaData.EntityPrototype?.ID)
-            return null;
+        var meta = MetaData(ent);
+        if (newProtoId.Id == meta.EntityPrototype?.ID)
+            return false;
 
-        var result = CreateZone(
+        var newZone = CreateZone(
                 Transform(ent).ParentUid,
-                protoId,
+                newProtoId,
                 ent.Comp.Area,
-                metaData.EntityName,
+                meta.EntityName,
                 ent.Comp.Color,
                 ent.Comp.AttachToLattice);
 
-        if (result.Zone is not { } newZone)
-            return null;
+        if (newZone == null)
+            return false;
 
         DeleteZone(ent);
-        return newZone;
+        ent = newZone.Value;
+        return true;
     }
 
     public bool SetZoneParent(Entity<ZoneComponent> ent, EntityUid parent, bool recalculate = true)

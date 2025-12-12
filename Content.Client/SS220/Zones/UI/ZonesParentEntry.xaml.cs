@@ -22,7 +22,7 @@ public sealed partial class ZonesParentEntry : BoxContainer
 
     private bool _collapsed;
 
-    public ZonesParentEntry(EntityUid parent, List<ZoneEntry> entries)
+    public ZonesParentEntry(EntityUid parent, List<ZoneEntry> entries, bool refresh = true)
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
@@ -36,7 +36,8 @@ public sealed partial class ZonesParentEntry : BoxContainer
         ParentBackgroundPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = Color.FromHex("#2F2F3B") };
 
         ZoneEntries = entries.ToDictionary(x => x.ZoneEntity.Owner, x => x);
-        Refresh();
+        if (refresh)
+            Refresh();
     }
 
     public void Refresh()
@@ -49,22 +50,13 @@ public sealed partial class ZonesParentEntry : BoxContainer
             name = meta.EntityName;
 
         ParentNameLabel.Text = name;
-        SortEntries(refresh: false);
 
         ZonesBox.RemoveAllChildren();
-        foreach (var entry in ZoneEntries.Values)
+        foreach (var (_, entry) in ZoneEntries.OrderBy(e => e.Key))
         {
             ZonesBox.AddChild(entry);
             entry.Refresh();
         }
-    }
-
-    public void SortEntries(bool refresh = true)
-    {
-        ZoneEntries = ZoneEntries.OrderBy(e => e.Key).ToDictionary();
-
-        if (refresh)
-            Refresh();
     }
 
     public void SetCollapsed(bool value)

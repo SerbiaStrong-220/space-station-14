@@ -57,7 +57,6 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         ControlWindow.Refresh();
     }
 
-
     private void OnAdminStatusUpdated()
     {
         ResetOverlay();

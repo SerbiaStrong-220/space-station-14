@@ -1,25 +1,14 @@
-zone-params-panel-name-label = Имя:
-zone-params-panel-name-tooltip = Наименование зоны, которое будет отображаться в ui управления
-zone-params-panel-prototype-id-label = ID прототипа:
-zone-params-panel-prototype-id-tooltip = ID энтити-прототипа, который будет создан для обработки взаимодействий (энтити-ивентов) с зоной
-zone-params-panel-container-net-id-label = uid контейнера:
-zone-params-panel-container-net-id-tooltip = Uid энтити-контейнера, к которому закреплена зона.
-    Расчет позиции регрионов зоны ведётся в локальных координатах относительно центра контейнера.
-    Контейнером могут быть либо энтити-маппа (MapComponent) либо энтити-грид (MapGridComponent)
+zone-editor-name-label = Имя:
+zone-editor-name-tooltip = Наименование зоны
+zone-editor-prototype-id-label = id прототипа:
+zone-editor-prototype-id-tooltip = Id энтити-прототипа зоны
+zone-editor-parent-net-id-label = netId родителя:
+zone-editor-parent-net-id-tooltip = NetId энтити к которому привязана зона.
 
-zone-params-panel-hex-color-label = Цвет:
-zone-params-panel-hex-color-tooltip = Цвет зоны, который будет использоваться в оверлее
-zone-params-panel-add-box-button = Добавить
-zone-params-panel-cut-box-button = Вырезать
-zone-params-panel-show-changes-button = Показать изменения
-zone-params-panel-attach-to-grid-check-box = Привязка к сетке
-zone-params-panel-attach-to-grid-tooltip = Если включено - то координаты углов регионов зоны будут привязаны к локальной сетке координат
-zone-params-panel-cut-space-option-label = Вырезать космос
-zone-params-panel-cut-space-option-tooltip = Параметр вырезания космоса.
-    Работает только с гридами, т.к. у мапп не может быть тайлов!
-
-    Нет - Размер зоны никак не изменяется от наличия тайлов под ней.
-
-    Динамически - Вырезает из активного региона зоны (ActiveRegion) все участки находящиеся в космосе, при этом не изменяя оригинальный регион (OriginalRegion). Обновляется при строительстве/удалении тайла(-ов) в пределах зоны.
-
-    Навсегда - Вырезает из оригинального региона зоны (OriginalRegion) все участки находящиеся в космосе. Обновляется при строительстве/удалении тайла(-ов) в пределах зоны, при этом не возвращая ранее вырезанные участки (даже если на их месте уже есть тайл).
+zone-editor-hex-color-label = Цвет:
+zone-editor-hex-color-tooltip = Цвет зоны, используемый в оверлее
+zone-editor-add-box-button = Добавить
+zone-editor-cut-box-button = Вырезать
+zone-editor-show-changes-button = Показать изменения
+zone-editor-attach-to-lattice-check-box = Привязка к сетке
+zone-editor-attach-to-lattice-tooltip = Если включено - то координаты углов регионов зоны будут привязаны к локальной сетке координат

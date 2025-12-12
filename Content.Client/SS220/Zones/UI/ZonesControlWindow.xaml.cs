@@ -17,8 +17,8 @@ public sealed partial class ZonesControlWindow : DefaultWindow
 
     private readonly ZonesSystem _zones;
 
-    private Dictionary<EntityUid, EntityUid> _zoneParents = [];
-    private Dictionary<EntityUid, ZonesParentEntry> _zoneParentEntries = [];
+    private readonly Dictionary<EntityUid, ZonesParentEntry> _zoneParentEntries = [];
+    private readonly Dictionary<EntityUid, ZoneEntry> _zoneEntries = [];
 
     public ZoneEntry? EditingZoneEntry { get; private set; }
 
@@ -73,42 +73,52 @@ public sealed partial class ZonesControlWindow : DefaultWindow
 
     private void RefreshEntries()
     {
-        var toRemove = _zoneParentEntries.SelectMany(x => x.Value.ZoneEntries).ToDictionary();
-        var toAdd = new Dictionary<EntityUid, ZoneEntry>();
+        foreach (var parentEntry in _zoneParentEntries.Values)
+        {
+            parentEntry.ZoneEntries.Clear();
+            parentEntry.Refresh(); // Clear childs
+        }
 
+        var zonesToRemove = _zoneEntries.ToDictionary();
         var query = _entityManager.AllEntityQueryEnumerator<ZoneComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
             if (_entityManager.Deleted(uid))
                 continue;
 
-            if (!toRemove.Remove(uid))
-                toAdd.Add(uid, GetZoneEntry((uid, comp)));
+            var meta = _entityManager.GetComponent<MetaDataComponent>(uid);
+            if (meta.EntityLifeStage >= EntityLifeStage.Terminating)
+                continue;
+
+            zonesToRemove.Remove(uid);
+
+            if (!_zoneEntries.TryGetValue(uid, out var entry))
+            {
+                entry = new ZoneEntry((uid, comp));
+                entry.OnToggled += _ => OnZoneEntryToggled(entry);
+                _zoneEntries.Add(uid, entry);
+            }
+
+            var parent = _entityManager.GetComponent<TransformComponent>(uid).ParentUid;
+            if (!_zoneParentEntries.TryGetValue(parent, out var parentEntry))
+            {
+                parentEntry = new ZonesParentEntry(parent, [], refresh: false);
+                _zoneParentEntries.Add(parent, parentEntry);
+            }
+
+            parentEntry.ZoneEntries.Add(uid, entry);
         }
 
-        foreach (var (key, value) in toRemove)
+        foreach (var (uid, entry) in zonesToRemove)
         {
-            if (EditingZoneEntry == value)
+            if (EditingZoneEntry == entry)
                 EndEditing();
 
-            var parent = _zones.GetZoneParent(key);
-            if (_zoneParentEntries.TryGetValue(parent, out var entry))
-                entry.ZoneEntries.Remove(key);
+            _zoneEntries.Remove(uid);
         }
-
-        foreach (var (key, value) in toAdd)
-        {
-            var parent = _zones.GetZoneParent(key);
-            if (_zoneParentEntries.TryGetValue(parent, out var entry))
-                entry.ZoneEntries.Add(key, value);
-            else
-                _zoneParentEntries[parent] = new ZonesParentEntry(parent, new() { value });
-        }
-
-        SortParentEntries(refresh: false);
 
         ZonesParentsContainer.RemoveAllChildren();
-        foreach (var (uid, entry) in _zoneParentEntries.ToDictionary())
+        foreach (var (uid, entry) in _zoneParentEntries.OrderBy(e => e.Key))
         {
             if (entry.ZoneEntries.Count <= 0)
             {
@@ -119,21 +129,6 @@ public sealed partial class ZonesControlWindow : DefaultWindow
             ZonesParentsContainer.AddChild(entry);
             entry.Refresh();
         }
-    }
-
-    public void SortParentEntries(bool refresh = true)
-    {
-        _zoneParentEntries = _zoneParentEntries.OrderBy(e => e.Key).ToDictionary();
-
-        if (refresh)
-            RefreshEntries();
-    }
-
-    private ZoneEntry GetZoneEntry(Entity<ZoneComponent> entity)
-    {
-        var entry = new ZoneEntry(entity);
-        entry.OnToggled += _ => OnZoneEntryToggled(entry);
-        return entry;
     }
 
     private void OnZoneEntryToggled(ZoneEntry entry)
@@ -161,6 +156,7 @@ public sealed partial class ZonesControlWindow : DefaultWindow
         ZoneEditorPanel.Visible = true;
 
         ZoneEditor.OnApply += OnCreateZoneApplied;
+        SetHeight = Size.Y + GetZoneEditorPanelHeight();
     }
 
     private void StartEditZone(ZoneEntry entry)
@@ -176,6 +172,7 @@ public sealed partial class ZonesControlWindow : DefaultWindow
         ZoneEditorPanel.Visible = true;
 
         ZoneEditor.OnApply += OnChangeZoneApplied;
+        SetHeight = Size.Y + GetZoneEditorPanelHeight();
     }
 
     private void EndEditing()
@@ -192,6 +189,14 @@ public sealed partial class ZonesControlWindow : DefaultWindow
 
         ZoneEditor.OnApply -= OnCreateZoneApplied;
         ZoneEditor.OnApply -= OnChangeZoneApplied;
+        SetHeight = Size.Y - GetZoneEditorPanelHeight();
+    }
+
+    private float GetZoneEditorPanelHeight()
+    {
+        var height = ZoneEditorPanel.Height != 0 ? ZoneEditorPanel.Height : ZoneEditor.DefaultMinSize.Y;
+        var yMargin = ZoneEditorPanel.Margin.Bottom + ZoneEditorPanel.Margin.Top;
+        return height + yMargin;
     }
 
     private void OnCreateZoneApplied(ZoneEditor.ZoneParams @params)

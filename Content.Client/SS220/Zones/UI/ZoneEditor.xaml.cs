@@ -14,6 +14,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Prototypes;
 using System.Linq;
+using System.Numerics;
 
 namespace Content.Client.SS220.Zones.UI;
 
@@ -25,6 +26,8 @@ public sealed partial class ZoneEditor : PanelContainer
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     private readonly ZonesSystem _zones = default!;
+
+    public static readonly Vector2 DefaultMinSize = new(500f, 270f);
 
     public event Action<ZoneParams>? OnApply;
     public event Action<ZoneParams>? OnCancel;
@@ -62,6 +65,8 @@ public sealed partial class ZoneEditor : PanelContainer
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
+
+        MinSize = DefaultMinSize;
 
         var overlay = BoxesOverlay.GetOverlay();
         if (overlay.TryGetProvider<ZoneEditorBoxesOverlayProvider>(out var provider))
@@ -158,11 +163,11 @@ public sealed partial class ZoneEditor : PanelContainer
 
     private void InitTooltips()
     {
-        NameLabel.ToolTip = Loc.GetString("zone-params-panel-name-tooltip");
-        PrototypeIDLabel.ToolTip = Loc.GetString("zone-params-panel-prototype-id-tooltip");
-        HexColorLabel.ToolTip = Loc.GetString("zone-params-panel-hex-color-tooltip");
-        ParentNetIDLabel.ToolTip = Loc.GetString("zone-params-panel-container-net-id-tooltip");
-        AttachToLatticeCheckbox.ToolTip = Loc.GetString("zone-params-panel-attach-to-grid-tooltip");
+        NameLabel.ToolTip = Loc.GetString("zone-editor-name-tooltip");
+        PrototypeIDLabel.ToolTip = Loc.GetString("zone-editor-prototype-id-tooltip");
+        HexColorLabel.ToolTip = Loc.GetString("zone-editor-hex-color-tooltip");
+        ParentNetIDLabel.ToolTip = Loc.GetString("zone-editor-parent-net-id-tooltip");
+        AttachToLatticeCheckbox.ToolTip = Loc.GetString("zone-editor-attach-to-lattice-tooltip");
     }
 
     protected override void ExitedTree()
