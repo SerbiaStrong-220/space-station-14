@@ -1,0 +1,9 @@
+uniform highp float Fillness;
+
+void fragment() {
+    highp vec4 color = zTexture(UV);
+
+    color.a *= step(UV.x, Fillness);
+
+    COLOR = color;
+}

@@ -853,7 +853,14 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             chance += malus.Malus;
         }
 
-        return Math.Clamp(chance, 0f, 1f);
+        // SS220-add-skill-to-disarm-begin
+        var disarmerEv = new GetDisarmChanceDisarmerMultiplierEvent(disarmer, disarmed, inTargetHand, 1f);
+        RaiseLocalEvent(disarmer, ref disarmerEv);
+        var disarmedEv = new GetDisarmChanceDisarmedMultiplierEvent(disarmer, disarmed, inTargetHand, 1f);
+        RaiseLocalEvent(disarmed, ref disarmedEv);
+        // SS220-add-skill-to-disarm-end
+
+        return Math.Clamp(disarmerEv.Multiplier * disarmedEv.Multiplier * chance, 0f, 1f);
     }
 
     private bool DoDisarm(EntityUid user, DisarmAttackEvent ev, EntityUid meleeUid, MeleeWeaponComponent component, ICommonSession? session)

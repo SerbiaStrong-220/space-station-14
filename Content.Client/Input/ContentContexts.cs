@@ -63,6 +63,7 @@ namespace Content.Client.Input
             human.AddFunction(KeyFunctions220.ItemOffer); // SS220 ItemOffer bind
             human.AddFunction(ContentKeyFunctions.UseItemInHand);
             human.AddFunction(ContentKeyFunctions.AltUseItemInHand);
+            human.AddFunction(KeyFunctions220.OpenExperienceViewerMenu); // SS220-experience-update
             human.AddFunction(ContentKeyFunctions.OpenCharacterMenu);
             human.AddFunction(ContentKeyFunctions.OpenEmotesMenu);
             human.AddFunction(ContentKeyFunctions.ActivateItemInWorld);

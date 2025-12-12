@@ -1,0 +1,17 @@
+- type: language
+  id: Bureaucracy
+  key: br
+  name: language-bureaucracy-name
+  description: language-bureaucracy-desc
+  scrambleMethod: !type:SyllablesScrambleMethod
+    specialCharacters:
+      - character: " "
+      - character: ". "
+        capitalize: true
+        weight: 0.3
+    syllables: [акт, бланк, форма, учет, реестр, приказ, норма,
+        штамп, печать, подпись, виза, гриф, копия,
+        согласно, ввиду, утвердить, отказ,
+        вх, исх, рег, ном, док, арх, зав, зам,
+        справка, отчет, выписка, ордер, опись, смета,
+        запрос, лимит, квота, тариф, штат, кадры]

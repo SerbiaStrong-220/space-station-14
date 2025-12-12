@@ -1,0 +1,55 @@
+- type: skill
+  id: MedicineInitial
+  levelInfo:
+    maximumSublevel: 5
+  levelDescription:
+    skillName: medicine-initial-name
+    skillDescription: medicine-initial-desc
+  components:
+  - type: MedicineMachineUseSkill
+    healthAnalyzerInfoShuffleChance: 0.6
+    defibrillatorSelfDamageChance: 0.6
+  - type: MedicineDoAfterSkill
+    durationScale: 1.4
+    failureChance: 0.1
+    failurePopup: healing-item-use-failure
+
+- type: skill
+  id: MedicineBase
+  levelInfo:
+    maximumSublevel: 5
+  levelDescription:
+    skillName: medicine-base-name
+    skillDescription: medicine-base-desc
+  components:
+  - type: MedicineMachineUseSkill
+    healthAnalyzerInfoShuffleChance: 0.2
+    defibrillatorSelfDamageChance: 0.2
+  - type: MedicineDoAfterSkill
+    durationScale: 1
+
+- type: skill
+  id: MedicineTrained
+  levelInfo:
+    maximumSublevel: 5
+  levelDescription:
+    skillName: medicine-trained-name
+    skillDescription: medicine-trained-desc
+  components:
+  - type: MedicineDoAfterSkill
+    durationScale: 0.8
+    failurePopup: healing-item-use-failure
+  - type: MedicineMachineUseSkill
+
+- type: skill
+  id: MedicineProfessional
+  levelInfo:
+    maximumSublevel: 1
+  levelDescription:
+    skillName: medicine-professional-name
+    skillDescription: medicine-professional-desc
+  components:
+  - type: MedicineDoAfterSkill
+    durationScale: 0.6
+    failurePopup: healing-item-use-failure
+  - type: MedicineMachineUseSkill
