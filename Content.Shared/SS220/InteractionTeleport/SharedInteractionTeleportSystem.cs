@@ -45,24 +45,24 @@ public sealed class SharedInteractionTeleportSystem : EntitySystem
         args.Verbs.Add(teleportVerb);
     }
 
-    private void OnCanDropTarget(Entity<InteractionTeleportComponent> ent, ref CanDropTargetEvent args) //why not working
+    private void OnCanDropTarget(Entity<InteractionTeleportComponent> ent, ref CanDropTargetEvent args)
     {
         if (args.Handled)
             return;
 
         args.Handled = true;
+        args.CanDrop = true;
+    }
 
+    private void OnDragDropTarget(Entity<InteractionTeleportComponent> ent, ref DragDropTargetEvent args)
+    {
         if (_whitelist.IsWhitelistFail(ent.Comp.UserWhitelist, args.Dragged))
         {
             if (ent.Comp.WhitelistRejectedLoc != null)
                 _popup.PopupPredicted(Loc.GetString(ent.Comp.WhitelistRejectedLoc), ent, args.User, PopupType.MediumCaution);
             return;
         }
-        args.CanDrop = true;
-    }
 
-    private void OnDragDropTarget(Entity<InteractionTeleportComponent> ent, ref DragDropTargetEvent args)
-    {
         TryStartTeleport(ent, args.Dragged, args.User);
     }
 

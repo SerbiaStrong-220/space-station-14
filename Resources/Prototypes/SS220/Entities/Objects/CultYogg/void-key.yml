@@ -32,6 +32,7 @@
 
 - type: entity
   id: VoidPortal
+  suffix: CultYogg
   components:
   - type: InteractionOutline
   - type: Clickable
@@ -48,7 +49,7 @@
   - type: SpawnOnDespawn
     prototype: VoidPortalClosed
   - type: InteractionTeleport
-    teleportDoAfterTime: 3
+    teleportDoAfterTime: 2
     userWhitelist:
       components:
       - HumanoidAppearance
@@ -61,6 +62,7 @@
 #Animation entities for a better immersions
 - type: entity
   id: VoidPortalSpawn
+  suffix: CultYogg
   components:
   - type: Sprite
     noRot: true
@@ -77,6 +79,7 @@
 
 - type: entity
   id: VoidPortalClosed
+  suffix: CultYogg
   components:
   - type: Sprite
     noRot: true

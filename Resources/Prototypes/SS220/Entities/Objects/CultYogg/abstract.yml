@@ -3,6 +3,7 @@
 - type: entity
   abstract: true
   id: CultYoggRestrictedItem
+  suffix: CultYogg
   name: abstract cult restricted
   components:
     - type: RestrictedItem
@@ -14,6 +15,7 @@
 - type: entity
   id: BaseSelfLinkedPortalCult
   parent: BaseStructure
+  suffix: CultYogg
   abstract: true
   name: self linked portal
   description: Transports you to a linked destination!
