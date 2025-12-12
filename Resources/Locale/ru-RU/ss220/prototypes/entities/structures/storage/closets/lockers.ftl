@@ -1,4 +1,4 @@
 ent-LockerBlueshieldOperative = шкаф оперативника "Синий Щит"
-    .desc = { ent-LockerSyndicatePersonal.desc }
+    .desc = Это персональное хранилище для оперативного снаряжения.
 ent-LockerCburnCommander = шкаф командира отряда РХБЗ
-    .desc = { ent-LockerSyndicatePersonal.desc }
+    .desc = { ent-LockerBlueshieldOperative.desc }

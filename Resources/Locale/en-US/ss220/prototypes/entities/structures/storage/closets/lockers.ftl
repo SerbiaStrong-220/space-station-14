@@ -1,4 +1,4 @@
 ent-LockerBlueshieldOperative = Blue Shield operative's locker
-    .desc = { ent-LockerSyndicatePersonal.desc }
+    .desc = It's a personal storage unit for operative gear.
 ent-LockerCburnCommander = CBURN Commander's locker
-    .desc = { ent-LockerSyndicatePersonal.desc }
+    .desc = { ent-LockerBlueshieldOperative.desc }
