@@ -1,0 +1,53 @@
+<local:GhostBodyCard xmlns="https://spacestation14.io"
+                     xmlns:local="clr-namespace:Content.Client.SS220.MindExtension.UI"
+                     xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
+                     HorizontalExpand="True"
+                     Margin="10 10 10 0">
+
+    <PanelContainer StyleClasses="AngleRect"
+                    HorizontalExpand="True">
+
+        <PanelContainer HorizontalExpand="True">
+
+            <BoxContainer Orientation="Vertical"
+                          Margin="0 0 190 0"
+                          HorizontalExpand="True">
+
+                <PanelContainer HorizontalExpand="True">
+                    <RichTextLabel Name="BodyNameLabel"
+                                   StyleClasses="LabelKeyText"
+                                   Margin="0 0 40 0"/>
+                    <TextureButton Name="DeleteButton"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   StyleClasses="windowCloseButton"/>
+                </PanelContainer>
+                
+                <Label Name="BodyStateLabel"
+                       StyleClasses="LabelSubText"/>
+                <RichTextLabel Name="BodyDescriptionLabel"
+                               StyleClasses="LabelSubText"/>
+            </BoxContainer>
+
+            <BoxContainer HorizontalAlignment="Right">
+                <customControls:VSeparator HorizontalAlignment="Right"
+                                           Margin="5"
+                                           SetWidth="1"/>
+
+                <BoxContainer Orientation="Vertical"
+                              VerticalAlignment="Center"
+                              MinWidth="170">
+                    <Button Name="FollowButton"
+                            Disabled="true"
+                            Text="{Loc 'mind-ext-follow-button'}"/>
+                    <Button Name="ToBodyButton"
+                            Disabled="true"
+                            Text="{Loc 'mind-ext-return-button'}"/>
+                </BoxContainer>
+            </BoxContainer>
+
+            
+        </PanelContainer>
+    </PanelContainer>
+
+</local:GhostBodyCard>

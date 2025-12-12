@@ -1,0 +1,8 @@
+<local:GhostAdditionGui xmlns="https://spacestation14.io"
+                          xmlns:local="clr-namespace:Content.Client.SS220.MindExtension.UI"
+                          HorizontalAlignment="Center">
+    <BoxContainer Orientation="Horizontal">
+        <Button Name="RespawnButton" Text="{Loc 'mind-ext-respawn-button'}"/>
+        <Button Name="BodyMenuButton" Text="{Loc 'mind-ext-body-menu-button'}"/>
+    </BoxContainer>
+</local:GhostAdditionGui>
