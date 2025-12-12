@@ -4,6 +4,7 @@ using Content.Shared.Damage;
 using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.Tools.Components;
 using Content.Shared.Tools.Systems;
+using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared.SS220.CultYogg.CorruptInteractions;
 
@@ -11,6 +12,7 @@ public sealed class CorruptInteractionsSystem : EntitySystem
 {
     [Dependency] private readonly WeldableSystem _weldable = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -43,5 +45,9 @@ public sealed class CorruptInteractionsSystem : EntitySystem
         _damageable.TryChangeDamage(ent, ent.Comp.Damage, true, interruptsDoAfters: false, damageableComp);
 
         args.Handled = true;
+
+        if (ent.Comp.DamageSound != null)
+            _audio.PlayPredicted(ent.Comp.DamageSound, ent, ent);
+
     }
 }
