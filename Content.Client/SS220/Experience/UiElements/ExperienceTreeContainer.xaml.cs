@@ -110,20 +110,20 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
         {
             var color = GetColorForLevel(i);
 
-            if (i < correctInfo.SkillLevel)
+            if (i < correctInfo.Level)
                 TreeLevelsContainer.AddChild(GetVisualRect(1f, 1f, 0f, color));
-            else if (i > correctInfo.SkillLevel)
+            else if (i > correctInfo.Level)
                 TreeLevelsContainer.AddChild(GetVisualRect(0f, 1f, 0f, color));
             else
-                TreeLevelsContainer.AddChild(GetVisualRect(correctInfo.SkillSublevel, maxSublevels, 0f, color, _levelFillingShaderInstance));
+                TreeLevelsContainer.AddChild(GetVisualRect(correctInfo.Sublevel, maxSublevels, 0f, color, _levelFillingShaderInstance));
         }
 
         SublevelsContainer.RemoveAllChildren();
         for (var i = 0; i < maxSublevels; i++)
         {
-            if (i < correctInfo.SkillSublevel)
+            if (i < correctInfo.Sublevel)
                 SublevelsContainer.AddChild(GetExperienceSublevelVisualRect(ExperienceSystem.EndLearningProgress));
-            else if (i > correctInfo.SkillSublevel)
+            else if (i > correctInfo.Sublevel)
                 SublevelsContainer.AddChild(GetExperienceSublevelVisualRect(ExperienceSystem.StartLearningProgress));
             else
                 SublevelsContainer.AddChild(GetExperienceSublevelVisualRect(_progress, shader: _subLevelFillingShaderInstance));
@@ -224,10 +224,10 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
         if (_overrideInfo is null)
             return null;
 
-        if (levelToDraw > _info.SkillLevel && levelToDraw < _overrideInfo.SkillLevel)
+        if (levelToDraw > _info.Level && levelToDraw < _overrideInfo.Level)
             return _gainedLevelColor;
 
-        if (levelToDraw < _info.SkillLevel && levelToDraw > _overrideInfo.SkillLevel)
+        if (levelToDraw < _info.Level && levelToDraw > _overrideInfo.Level)
             return _unavailableLevelColor;
 
         return null;
@@ -241,7 +241,7 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
         var newInfo = new SkillTreeExperienceInfo();
 
         var newLevel = _info.SkillTreeIndex;
-        var newSublevel = _info.SkillSublevel + SpendPoints;
+        var newSublevel = _info.Sublevel + SpendPoints;
 
         while (newLevel < _maxLevels.Count && newSublevel > _maxLevels[newLevel])
         {
@@ -251,8 +251,8 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
 
         newLevel = Math.Min(newLevel + 1, _skillsTree.Count);
 
-        newInfo.SkillLevel = newLevel;
-        newInfo.SkillSublevel = newSublevel;
+        newInfo.Level = newLevel;
+        newInfo.Sublevel = newSublevel;
 
         return newInfo;
     }

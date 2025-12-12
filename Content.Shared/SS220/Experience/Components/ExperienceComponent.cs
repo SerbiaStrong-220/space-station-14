@@ -87,49 +87,49 @@ public sealed partial class ExperienceComponent : Component
 public sealed partial class SkillTreeExperienceInfo
 {
     // This property kinda save coder sanity
-    public int SkillTreeIndex => _skillLevel - 1;
+    public int SkillTreeIndex => _level - 1;
 
     [DataField]
-    public int SkillLevel
+    public int Level
     {
-        get => _skillLevel;
+        get => _level;
         set
         {
-            DebugTools.Assert(_skillLevel >= ExperienceSystem.StartSkillLevel);
-            _skillLevel = value;
+            DebugTools.Assert(_level >= ExperienceSystem.StartSkillLevel);
+            _level = value;
         }
     }
 
-    private int _skillLevel = ExperienceSystem.StartSkillLevel;
+    private int _level = ExperienceSystem.StartSkillLevel;
 
     [DataField]
-    public int SkillSublevel
+    public int Sublevel
     {
-        get => _skillSublevel;
+        get => _sublevel;
         set
         {
-            DebugTools.Assert(_skillSublevel >= ExperienceSystem.StartSublevel);
-            _skillSublevel = value;
+            DebugTools.Assert(_sublevel >= ExperienceSystem.StartSublevel);
+            _sublevel = value;
         }
     }
 
-    private int _skillSublevel = ExperienceSystem.StartSublevel;
+    private int _sublevel = ExperienceSystem.StartSublevel;
 
     public override string ToString()
     {
-        return $"level: {SkillLevel}. Sublevel: {SkillSublevel}";
+        return $"level: {Level}. Sublevel: {Sublevel}";
     }
 
     public void Add(SkillTreeExperienceInfo other)
     {
-        SkillLevel += (other.SkillLevel - ExperienceSystem.StartSkillLevel);
-        SkillSublevel += (other.SkillSublevel - ExperienceSystem.StartSublevel);
+        Level += (other.Level - ExperienceSystem.StartSkillLevel);
+        Sublevel += (other.Sublevel - ExperienceSystem.StartSublevel);
     }
 
     public SkillTreeExperienceInfo(SkillTreeExperienceInfo other)
     {
-        SkillLevel = other.SkillLevel;
-        SkillSublevel = other.SkillSublevel;
+        Level = other.Level;
+        Sublevel = other.Sublevel;
     }
 }
 

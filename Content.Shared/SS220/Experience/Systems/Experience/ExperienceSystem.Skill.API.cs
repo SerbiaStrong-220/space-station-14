@@ -49,7 +49,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (treeInfo is null)
             return false;
 
-        return skillTree.SkillTree.Take(treeInfo.SkillLevel).Contains(skill);
+        return skillTree.SkillTree.Take(treeInfo.Level).Contains(skill);
     }
 
     public bool TryGetAcquiredSkills(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, ref HashSet<ProtoId<SkillPrototype>> resultSkills)
@@ -75,7 +75,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (treeInfo is null)
             return false;
 
-        resultSkills = [.. treeProto.SkillTree.Take(treeInfo.SkillLevel)];
+        resultSkills = [.. treeProto.SkillTree.Take(treeInfo.Level)];
         return true;
     }
 
@@ -127,8 +127,8 @@ public sealed partial class ExperienceSystem : EntitySystem
             return false;
         }
 
-        sublevel = info.SkillSublevel;
-        level = info.SkillLevel;
+        sublevel = info.Sublevel;
+        level = info.Level;
         return true;
     }
     #endregion

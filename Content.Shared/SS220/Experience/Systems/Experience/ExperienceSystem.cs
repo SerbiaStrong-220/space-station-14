@@ -100,8 +100,8 @@ public sealed partial class ExperienceSystem : EntitySystem
             SkillTree = skillTree,
             Info = new SkillTreeExperienceInfo
             {
-                SkillLevel = StartSkillLevel,
-                SkillSublevel = StartSublevel,
+                Level = StartSkillLevel,
+                Sublevel = StartSublevel,
             }
         };
         RaiseLocalEvent(entity, ref ev);
@@ -118,15 +118,15 @@ public sealed partial class ExperienceSystem : EntitySystem
     {
         var treeProto = _prototype.Index(tree);
 
-        if (treeProto.SkillTree.Count <= info.SkillLevel)
+        if (treeProto.SkillTree.Count <= info.Level)
         {
-            info.SkillLevel = treeProto.SkillTree.Count;
-            info.SkillSublevel = StartSublevel;
+            info.Level = treeProto.SkillTree.Count;
+            info.Sublevel = StartSublevel;
         }
 
         if (!CanProgressTree(info, treeProto))
         {
-            info.SkillSublevel = StartSublevel;
+            info.Sublevel = StartSublevel;
             return;
         }
 

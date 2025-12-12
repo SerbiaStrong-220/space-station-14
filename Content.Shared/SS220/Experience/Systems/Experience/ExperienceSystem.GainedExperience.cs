@@ -89,8 +89,8 @@ public sealed partial class ExperienceSystem : EntitySystem
 
         if (entity.Comp.Skills.TryGetValue(args.SkillTree, out var info))
         {
-            args.Info.SkillLevel = info.SkillLevel;
-            args.Info.SkillSublevel = info.SkillSublevel;
+            args.Info.Level = info.Level;
+            args.Info.Sublevel = info.Sublevel;
         }
 
         if (entity.Comp.SkillAddId is null || !_prototype.TryIndex(entity.Comp.SkillAddId, out var skillAddProto))

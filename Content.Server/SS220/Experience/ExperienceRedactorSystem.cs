@@ -68,7 +68,7 @@ public sealed class ExperienceRedactorSystem : EntitySystem
                 playerChangedComp.Skills.Add(skillId, info);
             }
 
-            info.SkillSublevel += sublevel;
+            info.Sublevel += sublevel;
         }
 
         playerChangedComp.AddSublevelPoints -= totalPointsSpend;

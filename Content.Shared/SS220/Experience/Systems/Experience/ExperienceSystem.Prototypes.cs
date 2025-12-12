@@ -18,13 +18,13 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     private bool TryGetPreviousSkillPrototype(SkillTreeExperienceInfo info, SkillTreePrototype treeProto, [NotNullWhen(true)] out SkillPrototype? skillPrototype)
     {
-        if (info.SkillLevel <= 0)
+        if (info.Level <= 0)
         {
             skillPrototype = null;
             return false;
         }
 
-        return ResolveSkillPrototypeInternal(info.SkillLevel - 1, treeProto, out skillPrototype);
+        return ResolveSkillPrototypeInternal(info.Level - 1, treeProto, out skillPrototype);
     }
 
     private bool TryGetCurrentSkillPrototype(SkillTreeExperienceInfo info, ProtoId<SkillTreePrototype> treeProto, [NotNullWhen(true)] out SkillPrototype? skillPrototype)
@@ -38,7 +38,7 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     private bool TryGetCurrentSkillPrototype(SkillTreeExperienceInfo info, SkillTreePrototype treeProto, [NotNullWhen(true)] out SkillPrototype? skillPrototype)
     {
-        return ResolveSkillPrototypeInternal(info.SkillLevel, treeProto, out skillPrototype);
+        return ResolveSkillPrototypeInternal(info.Level, treeProto, out skillPrototype);
     }
 
     private bool TryGetNextSkillPrototype(SkillTreeExperienceInfo info, ProtoId<SkillTreePrototype> treeProto, [NotNullWhen(true)] out SkillPrototype? skillPrototype)
@@ -52,13 +52,13 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     private bool TryGetNextSkillPrototype(SkillTreeExperienceInfo info, SkillTreePrototype treeProto, [NotNullWhen(true)] out SkillPrototype? skillPrototype)
     {
-        if (info.SkillLevel >= treeProto.SkillTree.Count)
+        if (info.Level >= treeProto.SkillTree.Count)
         {
             skillPrototype = null;
             return false;
         }
 
-        return ResolveSkillPrototypeInternal(info.SkillLevel + 1, treeProto, out skillPrototype);
+        return ResolveSkillPrototypeInternal(info.Level + 1, treeProto, out skillPrototype);
     }
 
     private bool ResolveSkillPrototypeInternal(int skillLevel, SkillTreePrototype treeProto, [NotNullWhen(true)] out SkillPrototype? skillPrototype)

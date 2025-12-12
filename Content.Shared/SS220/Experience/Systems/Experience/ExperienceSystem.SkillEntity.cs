@@ -219,12 +219,12 @@ public sealed partial class ExperienceSystem : EntitySystem
 
             var currentInfo = dictRef[key];
 
-            if (currentInfo.SkillLevel > ensureInfo.SkillLevel)
+            if (currentInfo.Level > ensureInfo.Level)
                 continue;
 
-            if (currentInfo.SkillLevel == ensureInfo.SkillLevel)
+            if (currentInfo.Level == ensureInfo.Level)
             {
-                currentInfo.SkillSublevel = currentInfo.SkillSublevel > ensureInfo.SkillSublevel ? currentInfo.SkillSublevel : ensureInfo.SkillSublevel;
+                currentInfo.Sublevel = currentInfo.Sublevel > ensureInfo.Sublevel ? currentInfo.Sublevel : ensureInfo.Sublevel;
                 continue;
             }
 

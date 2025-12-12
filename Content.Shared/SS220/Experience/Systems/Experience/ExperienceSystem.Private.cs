@@ -66,4 +66,35 @@ public sealed partial class ExperienceSystem : EntitySystem
         skillTree = _prototype.Index(skillTreeId);
         return true;
     }
+
+    private bool ResolveInfoAndTree(Entity<ExperienceComponent> entity, ProtoId<SkillTreePrototype> skillTree,
+                                [NotNullWhen(true)] out SkillTreeExperienceInfo? info,
+                                [NotNullWhen(true)] out SkillTreePrototype? prototype,
+                                bool logMissing = true)
+    {
+        prototype = null;
+        info = null;
+
+        if (!entity.Comp.Skills.TryGetValue(skillTree, out var skillInfo))
+        {
+            if (logMissing)
+                Log.Error($"Cant get skill info for progress sublevel in tree {skillTree} and entity {ToPrettyString(entity)}!");
+
+            return false;
+        }
+
+        if (!_prototype.TryIndex(skillTree, out prototype))
+        {
+            if (logMissing)
+                Log.Error($"Cant index skill tree prototype with id {skillTree}");
+
+            return false;
+        }
+
+        DebugTools.Assert(skillInfo.Level <= prototype.SkillTree.Count);
+        DebugTools.Assert(skillInfo.Sublevel <= _prototype.Index(prototype.SkillTree[skillInfo.SkillTreeIndex]).LevelInfo.MaximumSublevel);
+
+        info = skillInfo;
+        return true;
+    }
 }

@@ -52,8 +52,8 @@ public sealed partial class RedactableSkillTreeShower : BoxContainer
 
     private void UpdateLineEdits()
     {
-        SkillLevel.SetText($"{_skillTreeInfo.SkillLevel}/{_maxLevel}");
-        SkillSublevel.SetText($"{_skillTreeInfo.SkillSublevel}/{_maxSublevels[_skillTreeInfo.SkillTreeIndex]}");
+        SkillLevel.SetText($"{_skillTreeInfo.Level}/{_maxLevel}");
+        SkillSublevel.SetText($"{_skillTreeInfo.Sublevel}/{_maxSublevels[_skillTreeInfo.SkillTreeIndex]}");
     }
 
     private void OnSkillLevelChange(LineEdit.LineEditEventArgs args)
@@ -63,7 +63,7 @@ public sealed partial class RedactableSkillTreeShower : BoxContainer
         if (int.TryParse(actualInput, out var result))
         {
             result = Math.Clamp(result, 0, _maxLevel);
-            _skillTreeInfo.SkillLevel = result;
+            _skillTreeInfo.Level = result;
         }
 
         UpdateLineEdits();
@@ -76,7 +76,7 @@ public sealed partial class RedactableSkillTreeShower : BoxContainer
         if (int.TryParse(actualInput, out var result))
         {
             result = Math.Clamp(result, 0, _maxSublevels[_skillTreeInfo.SkillTreeIndex]);
-            _skillTreeInfo.SkillSublevel = result;
+            _skillTreeInfo.Sublevel = result;
         }
 
         UpdateLineEdits();
