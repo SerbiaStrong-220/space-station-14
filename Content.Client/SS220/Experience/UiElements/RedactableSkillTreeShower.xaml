@@ -11,7 +11,6 @@
         <BoxContainer Orientation="Horizontal" Margin="0 5">
             <RichTextLabel Name="SkillTreeName" Text="name-place-holder" Margin="5 0"
                 MouseFilter="Stop" TrackingTooltip="true" TooltipDelay="0.5"/>
-            <CheckBox Name="SkillStudiedCheckBox" LeftAlign="False" Margin="5 0" Text="{Loc 'redactable-skill-tree-studied-checkbox-text'}"/>
         </BoxContainer>
         <BoxContainer Orientation="Horizontal" Margin="0 5" HorizontalExpand="True" VerticalExpand="True" >
             <BoxContainer Orientation="Horizontal" Margin="5 0" HorizontalExpand="True" VerticalExpand="True" >

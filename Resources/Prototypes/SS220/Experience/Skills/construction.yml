@@ -43,7 +43,7 @@
 - type: skill
   id: ConstructionProfessional
   levelInfo:
-    maximumSublevel: 5
+    maximumSublevel: 1
   levelDescription:
     skillName: construction-professional-name
     skillDescription: construction-professional-desc

@@ -2,9 +2,9 @@
 
 namespace Content.Shared.SS220.Experience.Skill;
 
-public abstract class UiAnalyzerShuffleChance(float shuffleChance = 0f) : EntityEventArgs
+public abstract class ShuffleChanceGetterEvent : EntityEventArgs
 {
-    public float ShuffleChance = shuffleChance;
+    public float ShuffleChance = 0;
 }
 
-public sealed class GetHealthAnalyzerShuffleChance(float shuffleChance = 0f) : UiAnalyzerShuffleChance(shuffleChance);
+public sealed class GetHealthAnalyzerShuffleChance : ShuffleChanceGetterEvent;

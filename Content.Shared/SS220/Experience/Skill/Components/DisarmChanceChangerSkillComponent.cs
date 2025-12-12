@@ -8,10 +8,16 @@ namespace Content.Shared.SS220.Experience.Skill.Components;
 [NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class DisarmChanceChangerSkillComponent : Component
 {
+    /// <summary>
+    /// Applies when skill owner tries to disarm
+    /// </summary>
     [DataField(required: true)]
     [AutoNetworkedField]
     public float DisarmByMultiplier;
 
+    /// <summary>
+    /// Applies when skill owner is being disarmed
+    /// </summary>
     [DataField(required: true)]
     [AutoNetworkedField]
     public float DisarmedMultiplier;

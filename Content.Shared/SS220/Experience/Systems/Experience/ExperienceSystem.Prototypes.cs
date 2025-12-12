@@ -64,14 +64,15 @@ public sealed partial class ExperienceSystem : EntitySystem
     private bool ResolveSkillPrototypeInternal(int skillLevel, SkillTreePrototype treeProto, [NotNullWhen(true)] out SkillPrototype? skillPrototype)
     {
         skillPrototype = null;
+        var skillIndex = skillLevel - 1;
 
-        if (skillLevel >= treeProto.SkillTree.Count || skillLevel < 0)
+        if (skillIndex > treeProto.SkillTree.Count || skillIndex < 0)
         {
             Log.Error($"Got error with resolving skill in {treeProto.ID} skill tree with provided level {skillLevel}");
             return false;
         }
 
-        var skillDefinition = treeProto.SkillTree[skillLevel];
+        var skillDefinition = treeProto.SkillTree[skillIndex];
 
         if (!_prototype.TryIndex(skillDefinition, out skillPrototype))
         {

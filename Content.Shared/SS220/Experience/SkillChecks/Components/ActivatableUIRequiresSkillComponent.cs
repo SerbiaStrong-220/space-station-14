@@ -11,12 +11,8 @@ public sealed partial class ActivatableUIRequiresSkillComponent : Component
 {
     [DataField(required: true)]
     [AutoNetworkedField]
-    public ProtoId<SkillTreePrototype> TreeProtoId;
-
-    [DataField(required: true)]
-    [AutoNetworkedField]
     public ProtoId<SkillPrototype> SkillProtoId;
 
     [DataField]
-    public LocId? PopupMessage = "skill-check-bui-not-met";
+    public LocId? PopupMessage = "skill-check-ui-not-met";
 }

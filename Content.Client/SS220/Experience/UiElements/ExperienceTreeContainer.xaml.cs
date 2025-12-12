@@ -36,15 +36,14 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
     // general info
     public ProtoId<SkillTreePrototype> SkillTreeId { private set; get; }
 
-    private int _numberOfSublevels;
+    private SkillTreeExperienceInfo _info = new();
+    private SkillTreeExperienceInfo? _overrideInfo = new();
+
     private ResPath? _skillIconResPath = null;
     private string _skillTreeName = string.Empty;
+    private List<int> _maxLevels = [];
     private List<ProtoId<SkillPrototype>> _skillsTree = [];
-    // skill info
-    private int _currentLevel;
-    private int _currentSubLevel;
-    // override skill info
-    private int? _overrideLevel = null;
+
     // progress
     private FixedPoint4 _progress;
 
@@ -87,10 +86,10 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
     {
         SpendPoints = 0;
 
-        UnpackSkillTreeInfo(skillInfo);
-        UnpackTreeProto(protoId);
+        _info = skillInfo.Info;
+        _overrideInfo = skillInfo.OverrideInfo;
 
-        UnpackSkillProto(_skillsTree.ElementAt(_currentLevel));
+        UnpackTreeProto(protoId);
 
         SetProgressAndUpdate(progress);
     }
@@ -103,27 +102,28 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
         TreeName.SetMessage(_skillTreeName);
         InfoContainer.TooltipSupplier = MakeTooltip;
 
-        var resultLevel = _overrideLevel is null ? _currentLevel : _overrideLevel.Value;
+        var correctInfo = GetSkillTreeInfoWithSpendPoints();
+        var maxSublevels = _maxLevels[correctInfo.SkillTreeIndex];
 
         TreeLevelsContainer.RemoveAllChildren();
         for (var i = 0; i < _skillsTree.Count; i++)
         {
-            var color = GetColorForLevel(ref i);
+            var color = GetColorForLevel(i);
 
-            if (i < resultLevel)
+            if (i < correctInfo.SkillLevel)
                 TreeLevelsContainer.AddChild(GetVisualRect(1f, 1f, 0f, color));
-            else if (i > resultLevel)
+            else if (i > correctInfo.SkillLevel)
                 TreeLevelsContainer.AddChild(GetVisualRect(0f, 1f, 0f, color));
             else
-                TreeLevelsContainer.AddChild(GetVisualRect(_currentSubLevel, _numberOfSublevels, 0f, color, _levelFillingShaderInstance));
+                TreeLevelsContainer.AddChild(GetVisualRect(correctInfo.SkillSublevel, maxSublevels, 0f, color, _levelFillingShaderInstance));
         }
 
         SublevelsContainer.RemoveAllChildren();
-        for (var i = 0; i < _numberOfSublevels; i++)
+        for (var i = 0; i < maxSublevels; i++)
         {
-            if (i < _currentSubLevel)
+            if (i < correctInfo.SkillSublevel)
                 SublevelsContainer.AddChild(GetExperienceSublevelVisualRect(ExperienceSystem.EndLearningProgress));
-            else if (i > _currentSubLevel)
+            else if (i > correctInfo.SkillSublevel)
                 SublevelsContainer.AddChild(GetExperienceSublevelVisualRect(ExperienceSystem.StartLearningProgress));
             else
                 SublevelsContainer.AddChild(GetExperienceSublevelVisualRect(_progress, shader: _subLevelFillingShaderInstance));
@@ -142,22 +142,6 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
         Update();
     }
 
-    private void UnpackSkillTreeInfo(SkillTreeExperienceContainer skillContainer)
-    {
-        var skillInfo = skillContainer.Info;
-        _currentLevel = skillInfo.SkillStudied ? skillInfo.SkillLevel : Math.Max(skillInfo.SkillLevel - 1, 0);
-        _currentSubLevel = skillInfo.SkillSublevel;
-
-        _overrideLevel = null;
-
-        if (skillContainer.OverrideInfo is null)
-            return;
-
-        var overrideSkillInfo = skillContainer.OverrideInfo;
-
-        _overrideLevel = overrideSkillInfo.SkillStudied ? overrideSkillInfo.SkillLevel : Math.Max(overrideSkillInfo.SkillLevel - 1, 0);
-    }
-
     private void UnpackTreeProto(ProtoId<SkillTreePrototype> protoId)
     {
         if (_prototype is null)
@@ -168,28 +152,18 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
         SkillTreeId = protoId;
 
         _skillsTree = proto.SkillTree;
+        _maxLevels = proto.SkillTree.Select(x => _prototype.Index(x).LevelInfo.MaximumSublevel).ToList();
         _skillTreeName = Loc.GetString(proto.SkillTreeName);
-    }
-
-    private void UnpackSkillProto(ProtoId<SkillPrototype> protoId)
-    {
-        if (_prototype is null)
-            return;
-
-        var proto = _prototype.Index(protoId);
-
-        _numberOfSublevels = proto.LevelInfo.MaximumSublevel;
-        _skillIconResPath = proto.LevelDescription.SkillIconResPath;
     }
 
     private Control? MakeTooltip(Control hover)
     {
-        var resultLevel = _overrideLevel is null ? _currentLevel : _overrideLevel.Value;
+        var skillTreeIndex = _overrideInfo is null ? GetSkillTreeInfoWithSpendPoints().SkillTreeIndex : _overrideInfo.SkillTreeIndex;
 
         if (_prototype is null)
             return null;
 
-        var proto = _prototype.Index(_skillsTree.ElementAt(resultLevel));
+        var proto = _prototype.Index(_skillsTree[skillTreeIndex]);
 
         StringBuilder builder = new();
 
@@ -245,17 +219,41 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
         return control;
     }
 
-    private Color? GetColorForLevel(ref int levelToDraw)
+    private Color? GetColorForLevel(int levelToDraw)
     {
-        if (_overrideLevel is null)
+        if (_overrideInfo is null)
             return null;
 
-        if (levelToDraw > _currentLevel && levelToDraw < _overrideLevel)
+        if (levelToDraw > _info.SkillLevel && levelToDraw < _overrideInfo.SkillLevel)
             return _gainedLevelColor;
 
-        if (levelToDraw < _currentLevel && levelToDraw > _overrideLevel)
+        if (levelToDraw < _info.SkillLevel && levelToDraw > _overrideInfo.SkillLevel)
             return _unavailableLevelColor;
 
         return null;
+    }
+
+    private SkillTreeExperienceInfo GetSkillTreeInfoWithSpendPoints()
+    {
+        if (SpendPoints == 0)
+            return _info;
+
+        var newInfo = new SkillTreeExperienceInfo();
+
+        var newLevel = _info.SkillTreeIndex;
+        var newSublevel = _info.SkillSublevel + SpendPoints;
+
+        while (newLevel < _maxLevels.Count && newSublevel > _maxLevels[newLevel])
+        {
+            newSublevel -= _maxLevels[newLevel];
+            newLevel++;
+        }
+
+        newLevel = Math.Min(newLevel + 1, _skillsTree.Count);
+
+        newInfo.SkillLevel = newLevel;
+        newInfo.SkillSublevel = newSublevel;
+
+        return newInfo;
     }
 }

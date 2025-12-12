@@ -84,7 +84,7 @@ public sealed partial class ExperienceViewWindow : FancyWindow
             if (child is not ExperienceSkillTreeGroupContainer groupContainer)
                 continue;
 
-            foreach (var groupChild in groupContainer.Children)
+            foreach (var groupChild in groupContainer.SkillTreeContainer.Children)
             {
                 if (groupChild is not ExperienceTreeContainer treeContainer)
                     continue;

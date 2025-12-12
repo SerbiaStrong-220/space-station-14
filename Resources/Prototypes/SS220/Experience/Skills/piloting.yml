@@ -10,7 +10,6 @@
   id: PilotingCombat
   levelInfo:
     maximumSublevel: 1
-    canStartStudying: false
   levelDescription:
     skillName: piloting-combat-name
     skillDescription: piloting-combat-desc

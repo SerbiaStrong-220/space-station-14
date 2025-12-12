@@ -29,9 +29,9 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     #region Skill getters
 
-    public bool HaveSkill(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, ProtoId<SkillPrototype> skill)
+    public bool HaveSkill(Entity<ExperienceComponent?> entity, ProtoId<SkillPrototype> skill)
     {
-        if (!_prototype.Resolve(skillTree, out var treeProto))
+        if (!_prototype.Resolve(skill, out var _))
             return false;
 
         if (HasComp<BypassSkillCheckComponent>(entity))
@@ -40,15 +40,16 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
             return false;
 
+        if (!ResolveSkillTreeFromSkill(skill, out var skillTree))
+            return false;
+
         var treeInfo = entity.Comp.OverrideSkills.TryGetValue(skillTree, out var overrideSkills) ? overrideSkills :
                         entity.Comp.Skills.TryGetValue(skillTree, out var skills) ? skills : null;
 
         if (treeInfo is null)
             return false;
 
-        var amountToTake = treeInfo.SkillStudied ? treeInfo.SkillLevel : treeInfo.SkillLevel - 1;
-
-        return treeProto.SkillTree.Take(amountToTake).Contains(skill);
+        return skillTree.SkillTree.Take(treeInfo.SkillLevel).Contains(skill);
     }
 
     public bool TryGetAcquiredSkills(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, ref HashSet<ProtoId<SkillPrototype>> resultSkills)
@@ -74,9 +75,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (treeInfo is null)
             return false;
 
-        var amountToTake = treeInfo.SkillStudied ? treeInfo.SkillLevel : treeInfo.SkillLevel - 1;
-
-        resultSkills = [.. treeProto.SkillTree.Take(amountToTake)];
+        resultSkills = [.. treeProto.SkillTree.Take(treeInfo.SkillLevel)];
         return true;
     }
 

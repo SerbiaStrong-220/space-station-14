@@ -12,9 +12,6 @@ public sealed partial class ExperienceSystem : EntitySystem
 {
     #region Try methods
 
-    /// <summary>
-    ///  CARE this method are not making adminlog!
-    /// </summary>
     private bool TryProgressTree(SkillTreeExperienceInfo info, SkillTreePrototype treeProto, Entity<ExperienceComponent>? entity = null)
     {
         if (!CanProgressTree(info, treeProto))
@@ -128,7 +125,6 @@ public sealed partial class ExperienceSystem : EntitySystem
     {
         DebugTools.Assert(CanProgressTree(info, skillTree), $"Called {nameof(InternalProgressTree)} but tree progress is blocked, info {info} and tree id is {skillTree.ID}");
         info.SkillLevel++;
-        info.SkillStudied = false;
 
         if (effectedEntity is not null)
             _adminLogManager.Add(LogType.Experience, $"{ToPrettyString(effectedEntity):user} gained new skill");
@@ -150,11 +146,7 @@ public sealed partial class ExperienceSystem : EntitySystem
     {
         DebugTools.Assert(CanProgressLevel(info, skillTree));
 
-        if (info.SkillStudied)
-        {
-            TryProgressTree(info, skillTree, entity);
-            return;
-        }
+        TryProgressTree(info, skillTree, entity);
 
         if (!TryGetCurrentSkillPrototype(info, skillTree, out var skillPrototype))
         {
@@ -166,8 +158,7 @@ public sealed partial class ExperienceSystem : EntitySystem
             return;
 
         // we save meta level progress of sublevel
-        info.SkillSublevel = Math.Max(StartSubLevelIndex, info.SkillLevel - skillPrototype.LevelInfo.MaximumSublevel);
-        info.SkillStudied = true;
+        info.SkillSublevel = Math.Max(StartSublevel, info.SkillSublevel - skillPrototype.LevelInfo.MaximumSublevel);
 
         DirtyField(entity.AsNullable(), nameof(ExperienceComponent.Skills));
 
@@ -220,6 +211,9 @@ public sealed partial class ExperienceSystem : EntitySystem
 
             return false;
         }
+
+        DebugTools.Assert(skillInfo.SkillLevel <= prototype.SkillTree.Count);
+        DebugTools.Assert(skillInfo.SkillSublevel <= _prototype.Index(prototype.SkillTree[skillInfo.SkillTreeIndex]).LevelInfo.MaximumSublevel);
 
         info = skillInfo;
         return true;

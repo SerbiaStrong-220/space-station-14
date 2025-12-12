@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using System.Runtime.InteropServices;
 using Content.Shared.Administration.Logs;
 using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
@@ -16,8 +17,8 @@ public sealed partial class ExperienceSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
 
-    private const int StartSkillLevelIndex = 0;
-    private const int StartSubLevelIndex = 0;
+    public const int StartSkillLevel = 1;
+    public const int StartSublevel = 1;
     public static readonly FixedPoint4 StartLearningProgress = 0f;
     public static readonly FixedPoint4 EndLearningProgress = FixedPoint4.New(1f);
 
@@ -26,14 +27,13 @@ public sealed partial class ExperienceSystem : EntitySystem
         ExperienceComponent.OverrideContainerId
     ];
 
-    private readonly EntProtoId _baseSKillPrototype = "InitSkillEntity";
-
     public override void Initialize()
     {
         base.Initialize();
 
         InitializeGainedExperience();
         InitializeSkillEntityEvents();
+        InitializePrivate();
 
         SubscribeLocalEvent<ExperienceComponent, SkillCheckEvent>(OnSkillCheckEvent);
         SubscribeLocalEvent<ExperienceComponent, MapInitEvent>(OnMapInit);
@@ -41,7 +41,7 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     private void OnSkillCheckEvent(Entity<ExperienceComponent> entity, ref SkillCheckEvent args)
     {
-        args.HasSkill = HaveSkill(entity.AsNullable(), args.TreeProto, args.SkillProto);
+        args.HasSkill = HaveSkill(entity!, args.SkillProto);
     }
 
     private void OnMapInit(Entity<ExperienceComponent> entity, ref MapInitEvent args)
@@ -100,9 +100,8 @@ public sealed partial class ExperienceSystem : EntitySystem
             SkillTree = skillTree,
             Info = new SkillTreeExperienceInfo
             {
-                SkillLevel = StartSkillLevelIndex,
-                SkillSublevel = StartSubLevelIndex,
-                SkillStudied = true
+                SkillLevel = StartSkillLevel,
+                SkillSublevel = StartSublevel,
             }
         };
         RaiseLocalEvent(entity, ref ev);
@@ -122,14 +121,12 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (treeProto.SkillTree.Count <= info.SkillLevel)
         {
             info.SkillLevel = treeProto.SkillTree.Count;
-            info.SkillStudied = true;
-            info.SkillSublevel = 0;
+            info.SkillSublevel = StartSublevel;
         }
 
         if (!CanProgressTree(info, treeProto))
         {
-            info.SkillSublevel = 0;
-            info.SkillStudied = true;
+            info.SkillSublevel = StartSublevel;
             return;
         }
 

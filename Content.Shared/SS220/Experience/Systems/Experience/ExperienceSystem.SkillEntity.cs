@@ -12,11 +12,12 @@ namespace Content.Shared.SS220.Experience.Systems;
 public sealed partial class ExperienceSystem : EntitySystem
 {
     private readonly EntProtoId _baseSkillProto = "InitSkillEntity";
-    // private HashSet<EntityUid> _entityToEnsure = new();
 
     [Dependency] private readonly SharedContainerSystem _container = default!;
 
-    private HashSet<Type> _subscribedToExperienceComponentTypes = new();
+    private HashSet<Type> _subscribedToExperienceComponentTypes = [];
+
+    private readonly EntProtoId _baseSKillPrototype = "InitSkillEntity";
 
     private void InitializeSkillEntityEvents()
     {
@@ -24,27 +25,6 @@ public sealed partial class ExperienceSystem : EntitySystem
         SubscribeLocalEvent<ExperienceComponent, ComponentShutdown>(OnShutdown);
 
     }
-
-    // private void UpdateSkillEntity()
-    // {
-    //     HashSet<EntityUid> entityToClear = new();
-    //     foreach (var entity in _entityToEnsure)
-    //     {
-    //         if (MetaData(entity).EntityLifeStage > EntityLifeStage.MapInitialized)
-    //         {
-    //             entityToClear.Add(entity);
-    //             continue;
-    //         }
-
-    //         if (MetaData(entity).EntityLifeStage != EntityLifeStage.MapInitialized)
-    //             continue;
-
-    //         EnsureSkill(entity);
-    //         entityToClear.Add(entity);
-    //     }
-
-    //     _entityToEnsure = [.. _entityToEnsure.Except(entityToClear)];
-    // }
 
     private void OnComponentInit(Entity<ExperienceComponent> entity, ref ComponentInit _)
     {
@@ -101,7 +81,6 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (skillEntity is null)
         {
             Log.Error($"Got null skill entity for entity {entity} and container id {containerId}");
-            // TODO can I reinit skill entity here?
             return false;
         }
 
@@ -243,8 +222,7 @@ public sealed partial class ExperienceSystem : EntitySystem
             if (currentInfo.SkillLevel > ensureInfo.SkillLevel)
                 continue;
 
-            if (currentInfo.SkillLevel == ensureInfo.SkillLevel
-                && currentInfo.SkillStudied == ensureInfo.SkillStudied)
+            if (currentInfo.SkillLevel == ensureInfo.SkillLevel)
             {
                 currentInfo.SkillSublevel = currentInfo.SkillSublevel > ensureInfo.SkillSublevel ? currentInfo.SkillSublevel : ensureInfo.SkillSublevel;
                 continue;
@@ -263,11 +241,9 @@ public sealed partial class ExperienceSystem : EntitySystem
 
         foreach (var skillTree in dictView.Keys)
         {
-            var resultLevel = dictView[skillTree].SkillStudied ? dictView[skillTree].SkillLevel : Math.Max(dictView[skillTree].SkillLevel - 1, 0);
-
             var skillTreeProto = _prototype.Index(skillTree);
 
-            for (var i = 0; i <= resultLevel; i++)
+            for (var i = 0; i <= dictView[skillTree].SkillTreeIndex; i++)
             {
                 if (!TryAddSkillToSkillEntity(entity, containerId, skillTreeProto.SkillTree[i]))
                     Log.Error("Cant add skill to skill entity");

@@ -7,6 +7,15 @@
   - PilotingCombat
 
 - type: skillTree
+  id: Bureaucracy
+  skillGroupId: SkillGroupGeneral
+  skillTreeName: bureaucracy-skill-tree-name
+  skillTree:
+  - BureaucracyInitial
+  - BureaucracyTrained
+  - BureaucracyProfessional
+
+- type: skillTree
   id: CombatTraining
   skillGroupId: SkillGroupGeneral
   skillTreeName: combat-training-skill-tree-name

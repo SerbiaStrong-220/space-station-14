@@ -35,13 +35,12 @@ public sealed class ExperienceViewerUIController : UIController, IOnStateEntered
 
         _window = UIManager.CreateWindow<ExperienceViewWindow>();
 
-        _window.OnClose += DeactivateButton;
-        _window.OnOpen += ActivateButton;
-
         LayoutContainer.SetAnchorPreset(_window, LayoutContainer.LayoutPreset.CenterTop);
 
         _window.OnClose += DeactivateButton;
         _window.OnOpen += ActivateButton;
+
+        _window.OnSubmitChangeAction += _experienceInfo.SendChangeEntityExperiencePlayerRequest;
 
         CommandBinds.Builder
             .Bind(KeyFunctions220.OpenExperienceViewerMenu,

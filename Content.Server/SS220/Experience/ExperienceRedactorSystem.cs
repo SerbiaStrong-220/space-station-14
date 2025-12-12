@@ -49,12 +49,14 @@ public sealed class ExperienceRedactorSystem : EntitySystem
         if (!TryComp<ExperienceComponent>(playerEntity, out var experienceComponent))
             return;
 
-        // TODO validate additional point spend, maybe move to another event
         var validInput = ev.ChangeSkill.SkillSublevels.Where(x => x.Value >= 0).ToDictionary();
         var totalPointsSpend = validInput.Values.Sum();
 
         if (experienceComponent.FreeSublevelPoints < totalPointsSpend)
+        {
+            DirtyField(playerEntity, experienceComponent, nameof(ExperienceComponent.FreeSublevelPoints));
             return;
+        }
 
         var playerChangedComp = EnsureComp<SkillBackgroundAddComponent>(playerEntity);
 
@@ -68,6 +70,8 @@ public sealed class ExperienceRedactorSystem : EntitySystem
 
             info.SkillSublevel += sublevel;
         }
+
+        playerChangedComp.AddSublevelPoints -= totalPointsSpend;
 
         var afterInitEv = new AfterExperienceInitComponentGained(InitGainedExperienceType.BackgroundInit);
         RaiseLocalEvent(playerEntity, ref afterInitEv);

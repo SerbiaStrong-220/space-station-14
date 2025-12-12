@@ -22,7 +22,8 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     private void SubscribeInitComponent<T>(EntityEventRefHandler<T, SkillTreeAdded> handlerSkill,
                                             EntityEventRefHandler<T, KnowledgeInitialResolve> handlerKnowledge,
-                                            EntityEventRefHandler<T, SublevelAdditionPointInitialResolve> handlerAdditionPoint) where T : SkillBaseAddComponent
+                                            EntityEventRefHandler<T, SublevelAdditionPointInitialResolve> handlerAdditionPoint)
+                                            where T : SkillBaseAddComponent
     {
         SubscribeLocalEvent<T, SkillTreeAdded>(handlerSkill);
         SubscribeLocalEvent<T, KnowledgeInitialResolve>(handlerKnowledge);
@@ -90,7 +91,6 @@ public sealed partial class ExperienceSystem : EntitySystem
         {
             args.Info.SkillLevel = info.SkillLevel;
             args.Info.SkillSublevel = info.SkillSublevel;
-            args.Info.SkillStudied = info.SkillStudied;
         }
 
         if (entity.Comp.SkillAddId is null || !_prototype.TryIndex(entity.Comp.SkillAddId, out var skillAddProto))
@@ -98,9 +98,7 @@ public sealed partial class ExperienceSystem : EntitySystem
 
         if (skillAddProto.Skills.TryGetValue(args.SkillTree, out var infoProto))
         {
-            args.Info.SkillLevel += infoProto.SkillLevel;
-            args.Info.SkillSublevel += infoProto.SkillSublevel;
-            args.Info.SkillStudied &= infoProto.SkillStudied;
+            args.Info.Add(infoProto);
         }
     }
 
@@ -111,9 +109,7 @@ public sealed partial class ExperienceSystem : EntitySystem
 
         if (entity.Comp.Skills.TryGetValue(args.SkillTree, out var info))
         {
-            args.Info.SkillLevel += info.SkillLevel;
-            args.Info.SkillSublevel += info.SkillSublevel;
-            args.Info.SkillStudied &= info.SkillStudied;
+            args.Info.Add(info);
         }
 
         if (entity.Comp.SkillAddId is null || !_prototype.TryIndex(entity.Comp.SkillAddId, out var skillAddProto))
@@ -121,9 +117,7 @@ public sealed partial class ExperienceSystem : EntitySystem
 
         if (skillAddProto.Skills.TryGetValue(args.SkillTree, out var infoProto))
         {
-            args.Info.SkillLevel += infoProto.SkillLevel;
-            args.Info.SkillSublevel += infoProto.SkillSublevel;
-            args.Info.SkillStudied &= infoProto.SkillStudied;
+            args.Info.Add(infoProto);
         }
     }
 
@@ -146,9 +140,7 @@ public sealed partial class ExperienceSystem : EntitySystem
             return;
 
         args.DenyChanges = true;
-        args.FreeSublevelPoints = 0;
-
-        args.FreeSublevelPoints += entity.Comp.AddSublevelPoints;
+        args.FreeSublevelPoints = entity.Comp.AddSublevelPoints;
 
         if (entity.Comp.SkillAddId is null || !_prototype.TryIndex(entity.Comp.SkillAddId, out var skillAddProto))
             return;

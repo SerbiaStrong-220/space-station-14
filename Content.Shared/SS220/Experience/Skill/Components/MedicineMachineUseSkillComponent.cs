@@ -25,12 +25,6 @@ public sealed partial class MedicineMachineUseSkillComponent : Component
 }
 
 [ByRefEvent]
-public record struct GetHealthAnalyzerShuffleChance()
-{
-    public float ShuffleChance = 0f;
-}
-
-[ByRefEvent]
 public record struct GetDefibrillatorUseChances()
 {
     public float SelfDamageChance = 0f;

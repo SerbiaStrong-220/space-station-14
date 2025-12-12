@@ -7,7 +7,8 @@
     skillDescription: combat-training-initial-desc
   components:
   - type: DisarmChanceChangerSkill
-    multiplier
+    disarmByMultiplier: 0.25
+    disarmedMultiplier: 4
 
 - type: skill
   id: CombatTrainingBase
@@ -18,8 +19,8 @@
     skillDescription: combat-training-base-desc
   components:
   - type: DisarmChanceChangerSkill
-    disarmChance: 0.5
-    damageThreshold: 20.
+    disarmByMultiplier: 1
+    disarmedMultiplier: 1
 
 - type: skill
   id: CombatTrainingTrained
@@ -30,18 +31,18 @@
     skillDescription: combat-training-trained-desc
   components:
   - type: DisarmChanceChangerSkill
-    disarmChance: 0.3
-    damageThreshold: 30.
+    disarmByMultiplier: 2
+    disarmedMultiplier: 0.5
 
 - type: skill
   id: CombatTrainingProfessional
   levelInfo:
-    maximumSublevel: 5
+    maximumSublevel: 1
   levelDescription:
     skillName: combat-training-professional-name
     skillDescription: combat-training-professional-desc
   components:
   - type: DisarmChanceChangerSkill
-    disarmChance: 0.2
-    damageThreshold: 40.
+    disarmByMultiplier: 4
+    disarmedMultiplier: 0.25
   - type: DisarmBlockSkill

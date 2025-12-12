@@ -44,7 +44,7 @@
 - type: skill
   id: MedicineProfessional
   levelInfo:
-    maximumSublevel: 5
+    maximumSublevel: 1
   levelDescription:
     skillName: medicine-professional-name
     skillDescription: medicine-professional-desc

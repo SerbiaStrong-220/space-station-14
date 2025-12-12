@@ -1,6 +1,6 @@
 - type: skillTree
   id: Construction
-  skillGroupId: skillTreeEngineering
+  skillGroupId: SkillTreeEngineering
   skillTreeName: construction-skill-tree-name
   skillTree:
   - ConstructionInitial

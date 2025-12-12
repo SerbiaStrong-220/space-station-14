@@ -7,9 +7,9 @@
   groupName: skill-group-medicine
 
 - type: skillTreeGroup
-  id: skillTreeSecurity
+  id: SkillTreeSecurity
   groupName: skill-group-security
 
 - type: skillTreeGroup
-  id: skillTreeEngineering
+  id: SkillTreeEngineering
   groupName: skill-group-engineering

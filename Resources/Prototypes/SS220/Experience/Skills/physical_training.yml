@@ -37,7 +37,7 @@
 - type: skill
   id: PhysicalTrainingProfessional
   levelInfo:
-    maximumSublevel: 5
+    maximumSublevel: 1
   levelDescription:
     skillName: combat-training-professional-name
     skillDescription: combat-training-professional-desc

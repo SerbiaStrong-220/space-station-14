@@ -32,6 +32,13 @@ public sealed class ExperienceInfoSystem : EntitySystem
         RequestLocalPlayerExperienceData();
     }
 
+    public void SendChangeEntityExperiencePlayerRequest(PlayerChangeSkill changeSkill)
+    {
+        var ev = new ChangeEntityExperiencePlayerRequest(changeSkill);
+
+        RaiseNetworkEvent(ev);
+    }
+
     public void RequestLocalPlayerExperienceData()
     {
         OnExperienceUpdated?.Invoke(GetEntityExperienceData(_playerManager.LocalEntity), GetFreeSublevelPoints(_playerManager.LocalEntity));

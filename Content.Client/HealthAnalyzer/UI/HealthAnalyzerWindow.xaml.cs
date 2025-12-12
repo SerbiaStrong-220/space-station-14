@@ -29,31 +29,33 @@ using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-using Robust.Client.Player;
-using Robust.Shared.Random;
-using Content.Shared.SS220.Experience.Skill.Components;
+using Content.Client.SS220.Experience;
+using Content.Shared.SS220.Experience.Skill;
 
 namespace Content.Client.HealthAnalyzer.UI
 {
     [GenerateTypedNameReferences]
     public sealed partial class HealthAnalyzerWindow : FancyWindow
     {
-        [Dependency] private readonly IPlayerManager _playerManager = default!; // SS220-experience-update
-        [Dependency] private readonly IRobustRandom _random = default!; // SS220-experience-update
+        private readonly RandomShuffle<GetHealthAnalyzerShuffleChance> _randomShuffle = new();
+
         private readonly IEntityManager _entityManager;
         private readonly SpriteSystem _spriteSystem;
         private readonly IPrototypeManager _prototypes;
         private readonly IResourceCache _cache;
 
         // SS220-experience-update-begin
+        /// <summary> This value was chosen for better user experience </summary>
+        private const float ReshuffleChance = 0.15f;
+
         private const float TemperatureRandomScaleAmplitude = 0.3f;
         private const float BloodRandomScaleAmplitude = 0.3f;
         private const float DamageRandomScaleAmplitude = 0.3f;
 
         private const float MaxRandomFlatDamageAddition = 12f;
         private const float MinRandomFlatDamageAddition = 0f;
-
         // SS220-experience-update-end
+
         // ss220 add reagents to health analyzer start
         private readonly SharedSolutionContainerSystem _solSystem;
         // ss220 add reagents to health analyzer end
@@ -61,7 +63,7 @@ namespace Content.Client.HealthAnalyzer.UI
         public HealthAnalyzerWindow()
         {
             RobustXamlLoader.Load(this);
-            IoCManager.InjectDependencies(this); // SS220-experience-update
+            _randomShuffle.MakeNewRandomChange(ReshuffleChance); // SS220-experience-update
 
             var dependencies = IoCManager.Instance!;
             _entityManager = dependencies.Resolve<IEntityManager>();
@@ -120,23 +122,11 @@ namespace Content.Client.HealthAnalyzer.UI
             NoPatientDataText.Visible = false;
 
             // SS220-experience-update-begin
-            float shuffleChance = 0;
-            var localEntity = _playerManager.LocalEntity;
-            if (localEntity is not null)
-            {
-                var ev = new GetHealthAnalyzerShuffleChance();
-                _entityManager.EventBus.RaiseLocalEvent(localEntity.Value, ref ev);
+            if (msg.Bleeding is not null)
+                msg.Bleeding = _randomShuffle.GetRandomBool(nameof(msg.Bleeding), msg.Bleeding.Value);
 
-                shuffleChance = ev.ShuffleChance;
-            }
-
-            msg.Bleeding = !_random.Prob(shuffleChance) ? msg.Bleeding : _random.Prob(0.5f);
-
-            msg.Temperature = !_random.Prob(shuffleChance) ? msg.Temperature :
-                msg.Temperature * _random.NextFloat(1f - TemperatureRandomScaleAmplitude, 1f + TemperatureRandomScaleAmplitude);
-
-            msg.BloodLevel = !_random.Prob(shuffleChance) ? msg.BloodLevel :
-                msg.BloodLevel * _random.NextFloat(1f - BloodRandomScaleAmplitude, 1f + BloodRandomScaleAmplitude);
+            msg.Temperature = _randomShuffle.GetRandomFromScaleAmplitude(nameof(msg.Temperature), msg.Temperature, TemperatureRandomScaleAmplitude);
+            msg.BloodLevel = _randomShuffle.GetRandomFromScaleAmplitude(nameof(msg.BloodLevel), msg.BloodLevel, BloodRandomScaleAmplitude);
             // SS220-experience-update-end
 
             // Scan Mode
@@ -192,9 +182,7 @@ namespace Content.Client.HealthAnalyzer.UI
             // Total Damage
 
             // SS220-experience-update-begin
-            var totalDamage = !_random.Prob(shuffleChance) ? damageable.TotalDamage :
-                damageable.TotalDamage * _random.NextFloat(1f - DamageRandomScaleAmplitude, 1f + DamageRandomScaleAmplitude);
-
+            var totalDamage = _randomShuffle.GetRandomFromScaleAmplitude(nameof(damageable), damageable.TotalDamage, DamageRandomScaleAmplitude);
             DamageLabel.Text = totalDamage.ToString();
             // SS220-experience-update-end
             // DamageLabel.Text = damageable.TotalDamage.ToString();
@@ -233,7 +221,7 @@ namespace Content.Client.HealthAnalyzer.UI
 
             IReadOnlyDictionary<string, FixedPoint2> damagePerType = damageable.Damage.DamageDict;
 
-            DrawDiagnosticGroups(damageSortedGroups, damagePerType, shuffleChance); // SS220-experience-update
+            DrawDiagnosticGroups(damageSortedGroups, damagePerType);
         }
 
         private static string GetStatus(MobState mobState)
@@ -249,31 +237,24 @@ namespace Content.Client.HealthAnalyzer.UI
 
         private void DrawDiagnosticGroups(
             Dictionary<string, FixedPoint2> groups,
-            IReadOnlyDictionary<string, FixedPoint2> damageDict,
-            float shuffleChance) // SS220-experience-update
+            IReadOnlyDictionary<string, FixedPoint2> damageDict)
         {
             GroupsContainer.RemoveAllChildren();
 
-            // foreach (var (damageGroupId, damageAmount) in groups)
+            // foreach (var (damageGroupId, damageAmount) in groups) // SS220-experience-update
             foreach (var (damageGroupId, startDamageAmount) in groups) // SS220-experience-update
             {
-                // SS220-experience-update-begin
-                var damageAmount = !_random.Prob(shuffleChance) ? startDamageAmount :
-                    FixedPoint2.New(_random.NextFloat(MinRandomFlatDamageAddition, MaxRandomFlatDamageAddition));
-                // SS220-experience-update-end
+                var damageAmount = _randomShuffle.GetRandomBounded(damageGroupId, startDamageAmount, MinRandomFlatDamageAddition, MaxRandomFlatDamageAddition); // SS220-experience-update
 
                 if (damageAmount == 0)
                     continue;
 
-                // SS220-experience-update-begin
-                var randomNumber = !_random.Prob(shuffleChance) ? 1f :
-                    _random.NextFloat(1f - DamageRandomScaleAmplitude, 1f + DamageRandomScaleAmplitude);
-                // SS220-experience-update-end
+                damageAmount *= _randomShuffle.GetRandomFromScaleAmplitude(damageGroupId, 1f, DamageRandomScaleAmplitude); // SS220-experience-update
 
                 var groupTitleText = $"{Loc.GetString(
                     "health-analyzer-window-damage-group-text",
                     ("damageGroup", _prototypes.Index<DamageGroupPrototype>(damageGroupId).LocalizedName),
-                    ("amount", damageAmount * randomNumber)  // SS220-experience-update
+                    ("amount", damageAmount)
                 )}";
 
                 var groupContainer = new BoxContainer
@@ -291,8 +272,20 @@ namespace Content.Client.HealthAnalyzer.UI
 
                 foreach (var type in group.DamageTypes)
                 {
-                    if (!damageDict.TryGetValue(type, out var typeAmount) || typeAmount <= 0)
+                    // SS220-experience-update-begin
+                    // if (!damageDict.TryGetValue(type, out var typeAmount) || typeAmount <= 0) [wizden]
+                    //     continue; [wizden]
+
+                    if (!damageDict.TryGetValue(type, out var typeAmount))
                         continue;
+
+                    typeAmount = _randomShuffle.GetRandomBounded(damageGroupId, typeAmount, MinRandomFlatDamageAddition, MaxRandomFlatDamageAddition);
+
+                    if (typeAmount <= 0)
+                        continue;
+                    // SS220-experience-update-end
+
+                    typeAmount *= _randomShuffle.GetRandomFromScaleAmplitude(type, 1f, DamageRandomScaleAmplitude); // SS220-experience-update
 
                     var damageString = Loc.GetString(
                         "health-analyzer-window-damage-type-text",

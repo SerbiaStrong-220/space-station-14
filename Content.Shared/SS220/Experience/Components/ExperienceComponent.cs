@@ -6,6 +6,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.Experience;
 
@@ -23,11 +24,6 @@ namespace Content.Shared.SS220.Experience;
 // [xxxx][xx|o][ooo][oo]
 //  its describe SkillTreeExperienceInfo = (1, 2)
 //  tree have 4 skills in it with maxSublevels 4 3 3 and 2.
-//  | shows StudyingProgress
-// it is possible to have images:
-//  [xx|][oo] <= this means that 1 skill cant be studied  SkillTreeExperienceInfo is (0, 2, false)
-//  [xx]| <= this will happen if we ended tree SkillTreeExperienceInfo is (0, 0, true)
-//  [xx][|00] <= this !can! mean that we earned 1 skill but 2 banned from studying SkillTreeExperienceInfo is (1, 0, false)
 
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState(true, true)]
@@ -90,35 +86,50 @@ public sealed partial class ExperienceComponent : Component
 [Serializable, NetSerializable]
 public sealed partial class SkillTreeExperienceInfo
 {
-    /// <summary>
-    /// Defines current skill level
-    /// </summary>
-    [DataField]
-    public int SkillLevel;
+    // This property kinda save coder sanity
+    public int SkillTreeIndex => _skillLevel - 1;
 
-    /// <summary>
-    /// Defines sublevel level
-    /// </summary>
     [DataField]
-    public int SkillSublevel;
+    public int SkillLevel
+    {
+        get => _skillLevel;
+        set
+        {
+            DebugTools.Assert(_skillLevel >= ExperienceSystem.StartSkillLevel);
+            _skillLevel = value;
+        }
+    }
 
-    /// <summary>
-    /// Defines if current SkillLevel is studied
-    /// help differ 2 situation [xx]|[oo] <--> [xx][|oo]
-    /// </summary>
+    private int _skillLevel = ExperienceSystem.StartSkillLevel;
+
     [DataField]
-    public bool SkillStudied = false;
+    public int SkillSublevel
+    {
+        get => _skillSublevel;
+        set
+        {
+            DebugTools.Assert(_skillSublevel >= ExperienceSystem.StartSublevel);
+            _skillSublevel = value;
+        }
+    }
+
+    private int _skillSublevel = ExperienceSystem.StartSublevel;
 
     public override string ToString()
     {
-        return $"level: {SkillLevel}. Sublevel: {SkillSublevel}. Studied: {SkillStudied}";
+        return $"level: {SkillLevel}. Sublevel: {SkillSublevel}";
+    }
+
+    public void Add(SkillTreeExperienceInfo other)
+    {
+        SkillLevel += (other.SkillLevel - ExperienceSystem.StartSkillLevel);
+        SkillSublevel += (other.SkillSublevel - ExperienceSystem.StartSublevel);
     }
 
     public SkillTreeExperienceInfo(SkillTreeExperienceInfo other)
     {
         SkillLevel = other.SkillLevel;
         SkillSublevel = other.SkillSublevel;
-        SkillStudied = other.SkillStudied;
     }
 }
 

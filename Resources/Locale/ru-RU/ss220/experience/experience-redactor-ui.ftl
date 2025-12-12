@@ -6,7 +6,6 @@ experience-view-redactor-submit-button-text = Оправить изменени�
 
 experience-redactor-knowledge-name = Знания
 
-redactable-skill-tree-studied-checkbox-text = Навык изучен
 redactable-skill-tree-skill-level = Уровень:
 redactable-skill-tree-skill-sublevel = Подуровень:
 

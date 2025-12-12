@@ -8,5 +8,5 @@ namespace Content.Shared.SS220.Experience.SkillChecks;
 /// Called on component when component effect being overridden by other
 /// </summary>
 [ByRefEvent]
-public record struct SkillCheckEvent(ProtoId<SkillTreePrototype> TreeProto, ProtoId<SkillPrototype> SkillProto, bool HasSkill = false);
+public record struct SkillCheckEvent(ProtoId<SkillPrototype> SkillProto, bool HasSkill = false);
 
