@@ -248,9 +248,7 @@
   cost: 10000
   recipeUnlocks:
   - BluespaceBeaker
-# SS220 Add advanced mini syringe begin
-  - AdvancedMiniSyringe
-# SS220 Add advanced mini syringe end
+  - AdvancedMiniSyringe # SS220 Add advanced mini syringe
   - SyringeBluespace
 
 # SS220 Change LauncherSyringe tier begin
