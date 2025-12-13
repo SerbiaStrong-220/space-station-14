@@ -54,9 +54,9 @@ public sealed partial class FungusMachineMenu : FancyWindow
         _dummies.Clear();
     }
 
-    public void Populate(List<FungusMachineInventoryEntry> inventory, out List<int> filteredInventory,  string? filter = null)
+    public void Populate(List<FungusMachineInventoryEntry> inventory, out List<int> filteredInventory, string? filter = null)
     {
-        filteredInventory = new();
+        filteredInventory = [];
 
         while (inventory.Count != FungusContents.Count)
         {

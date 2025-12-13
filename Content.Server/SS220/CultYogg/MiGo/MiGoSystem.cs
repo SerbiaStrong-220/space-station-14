@@ -43,6 +43,10 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
     [Dependency] private readonly JobSystem _jobSystem = default!;
 
     private const string AscensionReagent = "TheBloodOfYogg";
+    private const string DoorBumpOpenerTag = "DoorBumpOpener";
+    private const string MiGoInAstralTag = "MiGoInAstral";
+    private const string CultYoggFaction = "CultYogg";
+    private const string SimpleNeutralFaction = "SimpleNeutral";
 
     public override void Initialize()
     {
@@ -79,8 +83,8 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
         if (isMaterial)
         {
             //no opening door during astral
-            _tag.AddTag(uid, "DoorBumpOpener");
-            _tag.RemoveTag(uid, "MiGoInAstral");
+            _tag.AddTag(uid, DoorBumpOpenerTag);
+            _tag.RemoveTag(uid, MiGoInAstralTag);
             comp.MaterializationTime = null;
             comp.AlertTime = 0;
 
@@ -100,14 +104,14 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
             if (HasComp<NpcFactionMemberComponent>(uid))
             {
                 _npcFaction.ClearFactions(uid);
-                _npcFaction.AddFaction(uid, "CultYogg");
+                _npcFaction.AddFaction(uid, CultYoggFaction);
             }
         }
         else
         {
             comp.AudioPlayed = false;
-            _tag.RemoveTag(uid, "DoorBumpOpener");
-            _tag.AddTag(uid, "MiGoInAstral");
+            _tag.RemoveTag(uid, DoorBumpOpenerTag);
+            _tag.AddTag(uid, MiGoInAstralTag);
             _alerts.ShowAlert(uid, comp.AstralAlert);
 
             //no phisyc during astral
@@ -116,7 +120,7 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
             if (HasComp<NpcFactionMemberComponent>(uid))
             {
                 _npcFaction.ClearFactions(uid);
-                _npcFaction.AddFaction(uid, "SimpleNeutral");
+                _npcFaction.AddFaction(uid, SimpleNeutralFaction);
             }
             _visibility.AddLayer((uid, vis), (int)VisibilityFlags.Ghost, false);
             _visibility.RemoveLayer((uid, vis), (int)VisibilityFlags.Normal, false);

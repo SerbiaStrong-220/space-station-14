@@ -61,11 +61,12 @@ public sealed partial class CultYoggRuleComponent : Component
     [DataField]
     public List<string> ListofObjectives = ["CultYoggSacraficeObjective"];
 
-    [ValidatePrototypeId<EntityPrototype>]
-    public string MindCultYoggAntagId = "MindRoleCultYogg";
+    public EntProtoId MindCultYoggAntagId = "MindRoleCultYogg";
 
     [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string GodPrototype = "MobNyarlathotep";
+    public EntProtoId GodPrototype = "MobNyarlathotep";
+
+    public SoundSpecifier GammaSound = new SoundPathSpecifier("/Audio/Misc/notice1.ogg");
 
     //telephaty channel
     [DataField]
