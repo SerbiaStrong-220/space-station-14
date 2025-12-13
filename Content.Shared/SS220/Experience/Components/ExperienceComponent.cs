@@ -53,6 +53,14 @@ public sealed partial class ExperienceComponent : Component
     public Dictionary<ProtoId<SkillTreePrototype>, SkillTreeExperienceInfo> Skills = new();
 
     /// <summary>
+    /// This field saves information about earned by progressing sublevels to proper handle other adding <br/>
+    /// Only one thing because it networked - prediction of other things
+    /// </summary>
+    [AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public Dictionary<ProtoId<SkillTreePrototype>, int> EarnedSkillSublevel = new();
+
+    /// <summary>
     /// This is used to override <see cref="ExperienceComponent.Skills"/> in checks
     /// </summary>
     [AutoNetworkedField]
@@ -108,7 +116,7 @@ public sealed partial class SkillTreeExperienceInfo
         get => _sublevel;
         set
         {
-            DebugTools.Assert(_sublevel >= ExperienceSystem.StartSublevel);
+            DebugTools.Assert(value >= ExperienceSystem.StartSublevel);
             _sublevel = value;
         }
     }

@@ -5,16 +5,16 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared.SS220.Experience;
 
 [Prototype]
-public sealed class SkillAddPrototype : IPrototype
+public sealed class ExperienceDefinitionPrototype : IPrototype
 {
     [ViewVariables]
     [IdDataField]
     public string ID { get; private set; } = default!;
 
-    [DataField(required: true)]
+    [DataField]
     public Dictionary<ProtoId<SkillTreePrototype>, SkillTreeExperienceInfo> Skills = new();
 
-    [DataField(required: true)]
+    [DataField]
     public HashSet<ProtoId<KnowledgePrototype>> Knowledges = new();
 
     [DataField]

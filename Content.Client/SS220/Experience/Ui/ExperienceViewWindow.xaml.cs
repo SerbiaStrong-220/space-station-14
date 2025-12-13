@@ -30,6 +30,7 @@ public sealed partial class ExperienceViewWindow : FancyWindow
     private HashSet<ProtoId<KnowledgePrototype>> _knowledges = new();
 
     private int _freeSublevelPoints;
+    private int _spendPoints;
 
     public ExperienceViewWindow()
     {
@@ -71,6 +72,7 @@ public sealed partial class ExperienceViewWindow : FancyWindow
 
     public void SetFreeSublevelPoints(int freeSublevelPoints)
     {
+        _spendPoints = 0;
         _freeSublevelPoints = freeSublevelPoints;
         UpdateSublevel();
     }
@@ -177,7 +179,7 @@ public sealed partial class ExperienceViewWindow : FancyWindow
 
     private void UpdateSublevel()
     {
-        var canChange = _freeSublevelPoints > 0;
+        var canChange = _freeSublevelPoints > _spendPoints;
 
         SubmitButton.Visible = canChange;
 
@@ -192,7 +194,14 @@ public sealed partial class ExperienceViewWindow : FancyWindow
                     continue;
 
                 treeContainer.HaveFreePoints = canChange;
+                treeContainer.OnAddSublevelPoint += OnAddSublevelPoint;
             }
         }
+    }
+
+    private void OnAddSublevelPoint()
+    {
+        _spendPoints++;
+        UpdateSublevel();
     }
 }

@@ -74,6 +74,9 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (!entity.Comp.Skills.TryGetValue(tree, out var info) || !_prototype.TryIndex(tree, out var treeProto))
             return false;
 
+        if (info.Level >= treeProto.SkillTree.Count)
+            return false;
+
         if (!TryGetCurrentSkillPrototype(info, treeProto, out var studyingSkillProto))
             return false;
 
@@ -110,18 +113,24 @@ public sealed partial class ExperienceSystem : EntitySystem
             return;
         }
 
+        // not logging cause all false in method logged
         if (!TryAddSkillToSkillEntity(entity, ExperienceComponent.ContainerId, skillPrototype))
             return;
 
+        InternalProgressLevel(entity, info, skillPrototype, skillTree.ID);
+    }
+
+    private void InternalProgressLevel(Entity<ExperienceComponent> entity, SkillTreeExperienceInfo info, SkillPrototype skillPrototype, ProtoId<SkillTreePrototype> skillTreeId)
+    {
         // we save meta level progress of sublevel
-        info.Sublevel = Math.Max(StartSublevel, info.Sublevel - skillPrototype.LevelInfo.MaximumSublevel);
+        info.Sublevel = Math.Max(StartSublevel, info.Sublevel - skillPrototype.LevelInfo.MaximumSublevel + StartSublevel);
         info.Level++;
 
         DirtyField(entity.AsNullable(), nameof(ExperienceComponent.Skills));
 
         _adminLogManager.Add(LogType.Experience, $"{ToPrettyString(entity):user} gained new skill");
 
-        var ev = new SkillLevelGainedEvent(skillTree.ID, skillPrototype);
+        var ev = new SkillLevelGainedEvent(skillTreeId, skillPrototype);
 
         RaiseLocalEvent(entity, ref ev);
     }
@@ -143,6 +152,7 @@ public sealed partial class ExperienceSystem : EntitySystem
 
         // Do not save overflow progress of it
         entity.Comp.StudyingProgress[skillTree] = StartLearningProgress;
+        entity.Comp.EarnedSkillSublevel[skillTree]++;
         info.Sublevel++;
 
         DirtyFields(entity.AsNullable(), null, [nameof(ExperienceComponent.Skills), nameof(ExperienceComponent.StudyingProgress)]);

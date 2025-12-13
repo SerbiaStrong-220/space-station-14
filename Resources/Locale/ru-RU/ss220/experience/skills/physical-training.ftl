@@ -1,11 +1,11 @@
-physical-training-initial-name = Физподготовка: Слабая
-physical-training-initial-desc = Ваше тело не привыкло к боли. Вы легко теряете предметы, когда чувствуете боль.
+physical-training-initial-name = Никакая физподготовка
+physical-training-initial-desc = Ваше тело совершенно не привыкло к насилию. Вы рефлекторно разжимаете руки и теряете предметы при малейшей боли.
 
-physical-training-base-name = Физподготовка: Средняя
-physical-training-base-desc = Вы бывали не в самых простых ситуациях, боль вам знакома, хоть и не является частой гостью.
+physical-training-base-name = Обычная физподготовка
+physical-training-base-desc = Вы бывали в передрягах и боль вам знакома. Вы держитесь достойнее среднего, но сильный удар все же выбьет вас из колеи.
 
-physical-training-trained-name = Физподготовка: Серьёзная
-physical-training-trained-desc = Потаскала ли Вас жизнь или это тренировки, но эффект одинаковый: Ваше тело привыкло к боли, Вы не так легко роняете оружие из рук.
+physical-training-trained-name = Серьёзная физподготовка
+physical-training-trained-desc = Тяжелый труд или суровые тренировки сделали своё дело. Ваше тело привыкло к боли, выронить оружие будет непросто.
 
-physical-training-professional-name = Физподготовка: Боевая
-physical-training-professional-desc = Стальные нервы и железная хватка. Даже самые серьёзные повреждения едва ли заставят Вас что-то выронить.
+physical-training-professional-name = Боевая физподготовка
+physical-training-professional-desc = Стальные нервы и железная хватка. Только критические повреждения заставят вас разжать пальцы.

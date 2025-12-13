@@ -184,7 +184,7 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
         // TODO remove null check before end merge
         if (prototype.SkillOnInit is not null)
         {
-            var skillRoleAddComp = EnsureComp<SkillRoleAddComponent>(entity);
+            var skillRoleAddComp = EnsureComp<RoleExperienceAddComponent>(entity);
             skillRoleAddComp.SkillAddId = prototype.SkillOnInit.Value;
         }
         // SS220-experience-update-end

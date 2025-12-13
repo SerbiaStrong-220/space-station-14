@@ -18,7 +18,7 @@ public sealed partial class ExperienceSystem : EntitySystem
     [Dependency] private readonly IGameTiming _gameTiming = default!;
 
     public const int StartSkillLevel = 1;
-    public const int StartSublevel = 1;
+    public const int StartSublevel = 0;
     public static readonly FixedPoint4 StartLearningProgress = 0f;
     public static readonly FixedPoint4 EndLearningProgress = FixedPoint4.New(1f);
 
@@ -47,6 +47,12 @@ public sealed partial class ExperienceSystem : EntitySystem
     private void OnMapInit(Entity<ExperienceComponent> entity, ref MapInitEvent args)
     {
         OnMapInitSkillEntity(entity, ref args);
+
+        foreach (var treeProto in _prototype.EnumeratePrototypes<SkillTreePrototype>())
+        {
+            entity.Comp.EarnedSkillSublevel.Add(treeProto, 0);
+        }
+        DirtyField(entity!, nameof(ExperienceComponent.EarnedSkillSublevel));
 
         InitializeExperienceComp(entity, InitGainedExperienceType.MapInit);
     }
@@ -106,6 +112,11 @@ public sealed partial class ExperienceSystem : EntitySystem
         };
         RaiseLocalEvent(entity, ref ev);
 
+        if (entity.Comp.EarnedSkillSublevel.TryGetValue(skillTree, out var earnedSublevel))
+            ev.Info.Sublevel += earnedSublevel;
+        else
+            Log.Error($"EarnedSkillSublevel of {ToPrettyString(entity)} doesn't contain {nameof(SkillTreePrototype)} with id {skillTree}!");
+
         ResolveInitLeveling(entity, ev.Info, ev.SkillTree);
 
         entity.Comp.Skills.Add(skillTree, ev.Info);
@@ -117,22 +128,17 @@ public sealed partial class ExperienceSystem : EntitySystem
     private void ResolveInitLeveling(Entity<ExperienceComponent> entity, SkillTreeExperienceInfo info, ProtoId<SkillTreePrototype> tree)
     {
         var treeProto = _prototype.Index(tree);
-
-        if (treeProto.SkillTree.Count <= info.Level)
+        while (info.Level < treeProto.SkillTree.Count)
         {
-            info.Level = treeProto.SkillTree.Count;
-            info.Sublevel = StartSublevel;
-        }
+            var skillId = treeProto.SkillTree[info.SkillTreeIndex];
+            if (!_prototype.Resolve(skillId, out var skillPrototype))
+                break;
 
-        const int maxCycles = 20;
-        int cycle;
-        var canProgress = true;
-        for (cycle = 0; cycle < maxCycles && canProgress; cycle++)
-        {
-            canProgress = TryProgressLevel(entity, info, treeProto);
-        }
+            var maximumSublevel = skillPrototype.LevelInfo.MaximumSublevel;
+            if (info.Sublevel < maximumSublevel)
+                break;
 
-        if (cycle == maxCycles - 1)
-            Log.Error($"Cant update progress for {maxCycles} while resolving {tree.Id}!");
+            InternalProgressLevel(entity, info, skillPrototype, treeProto.ID);
+        }
     }
 }

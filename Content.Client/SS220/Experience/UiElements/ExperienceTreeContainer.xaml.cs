@@ -21,6 +21,8 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
+    public Action? OnAddSublevelPoint;
+
     // common
     private ResPath _fullBarResPath = new ResPath("/Textures/SS220/Interface/ExperienceView/full-bar.png");
     private ResPath _emptyBarResPath = new ResPath("/Textures/SS220/Interface/ExperienceView/empty-bar.png");
@@ -252,12 +254,13 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
         var newLevel = _info.SkillTreeIndex;
         var newSublevel = _info.Sublevel + SpendPoints;
 
-        while (newLevel < _maxLevels.Count && newSublevel > _maxLevels[newLevel])
+        while (newLevel < _maxLevels.Count && newSublevel >= _maxLevels[newLevel])
         {
-            newSublevel -= _maxLevels[newLevel];
+            newSublevel -= _maxLevels[newLevel] - ExperienceSystem.StartSublevel;
             newLevel++;
         }
 
+        // return from index to Level
         newLevel = Math.Min(newLevel + 1, _skillsTree.Count);
 
         newInfo.Level = newLevel;

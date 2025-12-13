@@ -8,11 +8,10 @@ namespace Content.Shared.SS220.Experience;
 /// <summary>
 /// This is used as base component to inherit for components which adds skills
 /// </summary>
-[DataDefinition]
-public abstract partial class SkillBaseAddComponent : Component
+public abstract partial class BaseExperienceAddComponent : Component
 {
     [DataField]
-    public ProtoId<SkillAddPrototype>? SkillAddId;
+    public ProtoId<ExperienceDefinitionPrototype>? SkillAddId;
 
     [DataField]
     public Dictionary<ProtoId<SkillTreePrototype>, SkillTreeExperienceInfo> Skills = new();
@@ -25,10 +24,7 @@ public abstract partial class SkillBaseAddComponent : Component
 }
 
 [RegisterComponent, NetworkedComponent]
-public sealed partial class SkillRoleAddComponent : SkillBaseAddComponent { }
+public sealed partial class RoleExperienceAddComponent : BaseExperienceAddComponent { }
 
 [RegisterComponent, NetworkedComponent]
-public sealed partial class SkillBackgroundAddComponent : SkillBaseAddComponent { }
-
-[RegisterComponent, NetworkedComponent]
-public sealed partial class SkillAdminForcedAddComponent : SkillBaseAddComponent { }
+public sealed partial class AdminForcedExperienceAddComponent : BaseExperienceAddComponent { }

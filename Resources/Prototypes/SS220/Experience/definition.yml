@@ -1,4 +1,4 @@
-- type: skillAdd
+- type: experienceDefinition
   id: BaseSkillAddition
   skills:
     Piloting:

@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.SS220.Experience;
+using Content.Shared.SS220.Experience.Systems;
 using Robust.Server.Console;
 using System.Linq;
 
@@ -30,7 +31,7 @@ public sealed class ExperienceRedactorSystem : EntitySystem
             return;
         }
 
-        var forceAddComponent = EnsureComp<SkillAdminForcedAddComponent>(targetEntity);
+        var forceAddComponent = EnsureComp<AdminForcedExperienceAddComponent>(targetEntity);
 
         forceAddComponent.Knowledges = ev.Data.Knowledges;
         forceAddComponent.Skills = ev.Data.SkillDictionary.Values
@@ -58,20 +59,20 @@ public sealed class ExperienceRedactorSystem : EntitySystem
             return;
         }
 
-        var playerChangedComp = EnsureComp<SkillBackgroundAddComponent>(playerEntity);
+        var playerChangedComp = EnsureComp<BackgroundSublevelAddComponent>(playerEntity);
 
         foreach (var (skillId, sublevel) in validInput)
         {
-            if (!playerChangedComp.Skills.TryGetValue(skillId, out var info))
+            if (!playerChangedComp.Skills.TryGetValue(skillId, out var oldSublevel))
             {
-                info = new();
-                playerChangedComp.Skills.Add(skillId, info);
+                oldSublevel = ExperienceSystem.StartSublevel;
+                playerChangedComp.Skills.Add(skillId, sublevel);
             }
 
-            info.Sublevel += sublevel;
+            oldSublevel += sublevel - ExperienceSystem.StartSublevel;
         }
 
-        playerChangedComp.AddSublevelPoints -= totalPointsSpend;
+        playerChangedComp.SpentSublevelPoints += totalPointsSpend;
 
         var afterInitEv = new AfterExperienceInitComponentGained(InitGainedExperienceType.BackgroundInit);
         RaiseLocalEvent(playerEntity, ref afterInitEv);

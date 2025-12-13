@@ -1,12 +1,14 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
+using Serilog;
 
 namespace Content.Shared.SS220.Experience;
 
 [Prototype]
-public sealed class SkillPrototype : IPrototype
+public sealed class SkillPrototype : IPrototype, ISerializationHooks
 {
     [ViewVariables]
     [IdDataField]
@@ -27,13 +29,20 @@ public sealed class SkillPrototype : IPrototype
     /// </summary>
     [DataField]
     public bool ApplyIfAlreadyHave = true;
+
+    void ISerializationHooks.AfterDeserialization()
+    {
+        if (LevelInfo.MaximumSublevel < 2)
+            Logger.GetSawmill("skillPrototype").Error($"{nameof(LevelInfo.MaximumSublevel)} cant be less than 2! Error in {nameof(SkillPrototype)} with id {ID}");
+
+    }
 }
 
 [DataDefinition]
-public partial struct SkillLevelInfo
+public partial struct SkillLevelInfo : ISerializationHooks
 {
     /// <summary>
-    /// Sublevel starts from 0 and progress until reaching this value
+    /// Sublevel starts from 1 and progress until reaching this value
     /// </summary>
     [DataField]
     public int MaximumSublevel;
@@ -55,6 +64,13 @@ public partial struct SkillLevelInfo
     /// </summary>
     [DataField]
     public bool CanEndStudying = true;
+
+    void ISerializationHooks.AfterDeserialization()
+    {
+        if (MaximumSublevel < 2)
+            Logger.GetSawmill("skillLevelInfo").Error($"{nameof(MaximumSublevel)} cant be less than 2!");
+
+    }
 }
 
 [DataDefinition]
