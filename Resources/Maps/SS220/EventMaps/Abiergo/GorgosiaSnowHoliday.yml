@@ -14732,31 +14732,6 @@ entities:
         Симптомы:Очень хочется обнять всех вокруг и сделать их друзьями
 
         Противопоказания: Быть плохим
-- proto: DiskCase
-  entities:
-  - uid: 9804
-    components:
-    - type: MetaData
-      name: кейс для диска (Центральное командование)
-    - type: Transform
-      pos: -47.49646,17.598248
-      parent: 2
-    - type: Storage
-      storedItems:
-        invalid:
-          position: 0,0
-          _rotation: South
-    - type: ContainerContainer
-      containers:
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - invalid
-    - type: Label
-      currentLabel: Центральное командование
-    - type: NameModifier
-      baseName: кейс для диска
 - proto: DisposalBend
   entities:
   - uid: 2413
@@ -33257,51 +33232,6 @@ entities:
           - 2663
     - type: Fixtures
       fixtures: {}
-  - uid: 2040
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -3.5,-12.5
-      parent: 2
-    - type: Storage
-      storedItems:
-        2075:
-          position: 0,0
-          _rotation: South
-        1828:
-          position: 1,0
-          _rotation: South
-        2666:
-          position: 2,0
-          _rotation: South
-        2667:
-          position: 3,0
-          _rotation: South
-        2668:
-          position: 4,0
-          _rotation: South
-        2669:
-          position: 0,1
-          _rotation: South
-    - type: UserInterface
-      actors:
-        enum.StorageUiKey.Key:
-        - invalid
-    - type: ContainerContainer
-      containers:
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 2075
-          - 1828
-          - 2666
-          - 2667
-          - 2668
-          - 2669
-    - type: ActiveUserInterface
-    - type: Fixtures
-      fixtures: {}
   - uid: 2623
     components:
     - type: Transform
@@ -33873,26 +33803,18 @@ entities:
       canCollide: False
   - uid: 2666
     components:
-    - type: Transform
-      parent: 2040
     - type: Physics
       canCollide: False
   - uid: 2667
     components:
-    - type: Transform
-      parent: 2040
     - type: Physics
       canCollide: False
   - uid: 2668
     components:
-    - type: Transform
-      parent: 2040
     - type: Physics
       canCollide: False
   - uid: 2669
     components:
-    - type: Transform
-      parent: 2040
     - type: Physics
       canCollide: False
   - uid: 2672
@@ -34337,81 +34259,6 @@ entities:
       containers:
         solution@food: !type:ContainerSlot
           ent: 571
-  - uid: 1828
-    components:
-    - type: MetaData
-      name: Форма НТ-ЦК-КОМ-УВД
-    - type: Paper
-      stampState: paper_stamp-centcom
-      stampedBy:
-      - stampedColor: '#DCA019FF'
-        stampedName: stamp-component-stamped-name-centcom
-      content: >+
-        [bold]Форма НТ-ЦК-КОМ-УВД[/bold]
-
-        [head=2]Уведомление[/head]
-
-
-        Уважаемые посетители базы отдыха
-
-        От лица Центрального Командования уведомляем Вас о следующем: Включайте термостаты если вам стало холодно, они есть практически в каждой комнате. Закрывайте за собой двери при входе, если вы оставите их на продолжительное время открытыми, то уникальная структура ледяных стен и пещеры растаит. Будьте ответственней к сквознякам.
-
-
-        Управляющий Базой Отдыха ЦК: Ганри Макро
-
-
-        [italic]Место для печати[/italic]
-
-
-
-
-
-
-
-    - type: SolutionContainerManager
-      solutions: null
-      containers:
-      - food
-    - type: Physics
-      canCollide: False
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.25,-0.25
-            - 0.25,-0.25
-            - 0.25,0.25
-            - -0.25,0.25
-          mask:
-          - Impassable
-          - HighImpassable
-          layer: []
-          density: 20
-          hard: True
-          restitution: 0.3
-          friction: 0.2
-        flammable:
-          shape: !type:PhysShapeCircle
-            radius: 0.35
-            position: 0,0
-          mask:
-          - TableLayer
-          - HighImpassable
-          - LowImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          layer: []
-          density: 1
-          hard: False
-          restitution: 0
-          friction: 0.4
-    - type: ContainerContainer
-      containers:
-        solution@food: !type:ContainerSlot
-          ent: invalid
   - uid: 1964
     components:
     - type: MetaData
@@ -34641,8 +34488,6 @@ entities:
     components:
     - type: MetaData
       name: Форма НТ-ЦК-КОМ-УВД
-    - type: Transform
-      parent: 2040
     - type: Paper
       stampState: paper_stamp-centcom
       stampedBy:
@@ -36313,100 +36158,6 @@ entities:
     - type: Transform
       pos: 22.437344,28.004885
       parent: 2
-  - uid: 6714
-    components:
-    - type: Transform
-      pos: 23.062344,27.786135
-      parent: 2
-    - type: Physics
-      bodyStatus: InAir
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.25,-0.25
-            - 0.25,-0.25
-            - 0.25,0.25
-            - -0.25,0.25
-          mask:
-          - Impassable
-          - HighImpassable
-          layer: []
-          density: 20
-          hard: True
-          restitution: 0.3
-          friction: 0.2
-        throw-fixture:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.25,-0.25
-            - 0.25,-0.25
-            - 0.25,0.25
-            - -0.25,0.25
-          mask:
-          - Impassable
-          - HighImpassable
-          - BulletImpassable
-          layer: []
-          density: 1
-          hard: False
-          restitution: 0
-          friction: 0.4
-    - type: ThrownItem
-      playLandSound: True
-      landTime: 3170.9926727
-      thrownTime: 3170.9301624
-      thrower: invalid
-  - uid: 6716
-    components:
-    - type: Transform
-      pos: 21.656094,28.362694
-      parent: 2
-    - type: Physics
-      bodyStatus: InAir
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.25,-0.25
-            - 0.25,-0.25
-            - 0.25,0.25
-            - -0.25,0.25
-          mask:
-          - Impassable
-          - HighImpassable
-          layer: []
-          density: 20
-          hard: True
-          restitution: 0.3
-          friction: 0.2
-        throw-fixture:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.25,-0.25
-            - 0.25,-0.25
-            - 0.25,0.25
-            - -0.25,0.25
-          mask:
-          - Impassable
-          - HighImpassable
-          - BulletImpassable
-          layer: []
-          density: 1
-          hard: False
-          restitution: 0
-          friction: 0.4
-    - type: ThrownItem
-      playLandSound: True
-      landTime: 3168.9275339
-      thrownTime: 3168.8968311
-      thrower: invalid
 - proto: PartRodMetal
   entities:
   - uid: 6871
