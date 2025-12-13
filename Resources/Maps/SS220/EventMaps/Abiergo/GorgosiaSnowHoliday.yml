@@ -31919,29 +31919,6 @@ entities:
     missingComponents:
     - Damageable
     - Destructible
-- proto: Lamp
-  entities:
-  - uid: 4879
-    components:
-    - type: Transform
-      pos: -51.37156,30.767746
-      parent: 2
-    - type: HandheldLight
-      toggleActionEntity: 4880
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 4880
-    - type: Physics
-      canCollide: True
-    - type: ActionsContainer
 - proto: LandMineExplosive
   entities:
   - uid: 5457
