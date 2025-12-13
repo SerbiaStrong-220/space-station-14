@@ -40,23 +40,9 @@ public sealed partial class FungusMachineMenu : FancyWindow
         };
     }
 
-    protected override void Dispose(bool disposing)
+    public void Populate(List<FungusMachineInventoryEntry> inventory, out List<int> filteredInventory, string? filter = null)
     {
-        base.Dispose(disposing);
-
-        if (!disposing)
-            return;
-
-        foreach (var entity in _dummies.Values)
-        {
-            _entityManager.QueueDeleteEntity(entity);
-        }
-        _dummies.Clear();
-    }
-
-    public void Populate(List<FungusMachineInventoryEntry> inventory, out List<int> filteredInventory,  string? filter = null)
-    {
-        filteredInventory = new();
+        filteredInventory = [];
 
         while (inventory.Count != FungusContents.Count)
         {

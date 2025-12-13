@@ -9,8 +9,7 @@ namespace Content.Shared.SS220.CultYogg.MiGo;
 /// <summary>
 ///     Recipes for buildings that MiGo can replace with cult buildings
 /// </summary>
-[Prototype]
-[Serializable, NetSerializable]
+[Serializable, Prototype]
 public sealed partial class MiGoCapturePrototype : IPrototype
 {
     [IdDataField]

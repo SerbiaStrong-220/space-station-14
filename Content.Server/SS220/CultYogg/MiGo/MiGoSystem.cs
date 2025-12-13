@@ -20,7 +20,6 @@ using Content.Shared.NPC.Systems;
 using Content.Shared.SS220.CultYogg.MiGo;
 using Content.Shared.SS220.Temperature;
 using Content.Shared.StatusEffect;
-using Content.Shared.Tag;
 using Content.Shared.Projectiles;
 using Robust.Server.GameObjects;
 
@@ -31,7 +30,6 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
     [Dependency] private readonly StatusEffectsSystem _statusEffectsSystem = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _speedModifier = default!;
     [Dependency] private readonly VisibilitySystem _visibility = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
     [Dependency] private readonly AlertsSystem _alerts = default!;
@@ -43,6 +41,8 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
     [Dependency] private readonly JobSystem _jobSystem = default!;
 
     private const string AscensionReagent = "TheBloodOfYogg";
+    private const string CultYoggFaction = "CultYogg";
+    private const string SimpleNeutralFaction = "SimpleNeutral";
 
     public override void Initialize()
     {
@@ -78,9 +78,6 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
 
         if (isMaterial)
         {
-            //no opening door during astral
-            _tag.AddTag(uid, "DoorBumpOpener");
-            _tag.RemoveTag(uid, "MiGoInAstral");
             comp.MaterializationTime = null;
             comp.AlertTime = 0;
 
@@ -100,23 +97,22 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
             if (HasComp<NpcFactionMemberComponent>(uid))
             {
                 _npcFaction.ClearFactions(uid);
-                _npcFaction.AddFaction(uid, "CultYogg");
+                _npcFaction.AddFaction(uid, CultYoggFaction);
             }
         }
         else
         {
             comp.AudioPlayed = false;
-            _tag.RemoveTag(uid, "DoorBumpOpener");
-            _tag.AddTag(uid, "MiGoInAstral");
             _alerts.ShowAlert(uid, comp.AstralAlert);
 
             //no phisyc during astral
             EnsureComp<MovementIgnoreGravityComponent>(uid);
+            RemCompDeferred<SpeedModifiedByContactComponent>(uid);
 
             if (HasComp<NpcFactionMemberComponent>(uid))
             {
                 _npcFaction.ClearFactions(uid);
-                _npcFaction.AddFaction(uid, "SimpleNeutral");
+                _npcFaction.AddFaction(uid, SimpleNeutralFaction);
             }
             _visibility.AddLayer((uid, vis), (int)VisibilityFlags.Ghost, false);
             _visibility.RemoveLayer((uid, vis), (int)VisibilityFlags.Normal, false);

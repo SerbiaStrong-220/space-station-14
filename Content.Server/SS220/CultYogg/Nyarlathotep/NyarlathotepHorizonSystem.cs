@@ -30,6 +30,8 @@ public sealed class NyarlathotepHorizonSystem : SharedNyarlathotepHorizonSystem
     [Dependency] private readonly BodySystem _bodySystem = default!;
     #endregion Dependencies
 
+    private const string HighRiskItemTag = "HighRiskItem";
+
     public override void Initialize()
     {
         base.Initialize();
@@ -106,7 +108,7 @@ public sealed class NyarlathotepHorizonSystem : SharedNyarlathotepHorizonSystem
     {
         if (!EntityManager.IsQueuedForDeletion(entityToConsume)
             && (HasComp<MindContainerComponent>(entityToConsume)
-            || _tagSystem.HasTag(entityToConsume, "HighRiskItem")))
+            || _tagSystem.HasTag(entityToConsume, HighRiskItemTag)))
         {
             _adminLogger.Add(LogType.EntityDelete, LogImpact.Extreme, $"{ToPrettyString(entityToConsume)} entered the event horizon of {ToPrettyString(nyarlathotep)} and was deleted");
         }
