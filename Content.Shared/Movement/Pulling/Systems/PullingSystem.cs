@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Alert;
@@ -5,6 +6,7 @@ using Content.Shared.Buckle.Components;
 using Content.Shared.Cuffs;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Database;
+using Content.Shared.Effects;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -24,6 +26,9 @@ using Content.Shared.Pulling.Events;
 using Content.Shared.SS220.Cart.Components;
 using Content.Shared.Standing;
 using Content.Shared.Verbs;
+using Content.Shared.Weapons.Melee;
+using Robust.Shared.Audio;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Physics;
@@ -42,11 +47,16 @@ namespace Content.Shared.Movement.Pulling.Systems;
 public sealed class PullingSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!; // SS220 edit
+    [Dependency] private readonly RotateToFaceSystem _rotateTo = default!; // SS220 edit
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly ActionBlockerSystem _blocker = default!;
     [Dependency] private readonly AlertsSystem _alertsSystem = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!; // SS220 edit
+    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!; // SS220 edit
     [Dependency] private readonly MovementSpeedModifierSystem _modifierSystem = default!;
     [Dependency] private readonly SharedJointSystem _joints = default!;
+    [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!; // SS220 edit
     [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
@@ -54,6 +64,8 @@ public sealed class PullingSystem : EntitySystem
     [Dependency] private readonly HeldSpeedModifierSystem _clothingMoveSpeed = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedVirtualItemSystem _virtual = default!;
+
+    private readonly SoundSpecifier _pullSound = new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg");
 
     public override void Initialize()
     {
@@ -79,6 +91,7 @@ public sealed class PullingSystem : EntitySystem
         SubscribeLocalEvent<PullerComponent, ComponentStartup>(OnPullerStartup); // SS220-cart-system
         SubscribeLocalEvent<PullerComponent, DropHandItemsEvent>(OnDropHandItems);
         SubscribeLocalEvent<PullerComponent, StopPullingAlertEvent>(OnStopPullingAlert);
+        SubscribeLocalEvent<PullerComponent, PullStartedMessage>(OnPullableStartedMessage); // SS220 edit
 
         SubscribeLocalEvent<HandsComponent, PullStartedMessage>(HandlePullStarted);
         SubscribeLocalEvent<HandsComponent, PullStoppedMessage>(HandlePullStopped);
@@ -204,6 +217,28 @@ public sealed class PullingSystem : EntitySystem
             return;
         args.Handled = TryStopPull(ent.Comp.Pulling.Value, pullable, ent);
     }
+
+    // SS220 edit start
+    private void OnPullableStartedMessage(Entity<PullerComponent> ent, ref PullStartedMessage args)
+    {
+        if (ent.Owner != args.PullerUid)
+            return;
+
+        if (!TryComp(ent, out TransformComponent? xform))
+            return;
+
+        var pulled = args.PulledUid;
+        var pulledPos = _transform.GetWorldPosition(pulled);
+        var localPos = Vector2.Transform(pulledPos, _transform.GetInvWorldMatrix(xform));
+        localPos = xform.LocalRotation.RotateVec(localPos);
+        _melee.DoLunge(ent, ent, Angle.Zero, localPos, null);
+
+        var filter = Filter.Pvs(pulled, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == ent.Owner);
+        _colorFlash.RaiseEffect(Color.Yellow, new List<EntityUid> { pulled }, filter);
+
+        _audio.PlayPredicted(_pullSound, pulled, ent);
+    }
+    // SS220 edit end
 
     private void OnPullerContainerInsert(Entity<PullerComponent> ent, ref EntGotInsertedIntoContainerMessage args)
     {
@@ -623,4 +658,21 @@ public sealed class PullingSystem : EntitySystem
         StopPulling(pullableUid, pullable);
         return true;
     }
+
+    // SS220 edit start
+    public override void Update(float frameTime)
+    {
+        var query = EntityQueryEnumerator<PullerComponent>();
+        while (query.MoveNext(out var uid, out var pullerComponent))
+        {
+            if (GetPulling(uid, pullerComponent) is not { } pulled)
+                continue;
+
+            var pulledPos = _transform.GetMapCoordinates(pulled).Position;
+            var pullerPos = _transform.GetMapCoordinates(uid).Position;
+            var angle = (pulledPos - pullerPos).ToWorldAngle().GetCardinalDir().ToAngle();
+            _rotateTo.TryFaceAngle(uid, angle);
+        }
+    }
+    // SS220 edit end
 }
