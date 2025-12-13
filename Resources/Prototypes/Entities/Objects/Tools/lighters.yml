@@ -129,7 +129,7 @@
   description: "A rugged metal lighter, lasts quite a while."
   components:
   - type: Sprite
-    sprite: SS220/Objects/Tools/Lighters/lighters.rsi #SS220 resprite
+    sprite: SS220/Objects/Tools/Lighters/lighters.rsi #SS220 zippo resprite
     layers:
     - state: zippo_icon_base
       map: ["base"]
@@ -225,7 +225,7 @@
   description: "A rugged golden lighter, lasts quite a while. Engravings serve no tactical advantage whatsoever."
   components:
   - type: Sprite
-    sprite: SS220/Objects/Tools/Lighters/lighters.rsi #SS220 resprite
+    sprite: SS220/Objects/Tools/Lighters/lighters.rsi #SS220 zippo resprite
     layers:
     - state: zippo_engraved_icon_base
       map: ["base"]
@@ -399,9 +399,9 @@
   description: "A Sleek black and magenta flippo lighter, bearing the logo and iconography of CyberSun Industries."
   components:
   - type: Sprite
-    sprite: Objects/Tools/Lighters/cybersun.rsi
+    sprite: SS220/Objects/Tools/Lighters/cybersun.rsi #220 zippo resprite
   - type: Item
-    sprite: Objects/Tools/Lighters/cybersun.rsi
+    sprite: SS220/Objects/Tools/Lighters/cybersun.rsi #220 zippo resprite
   - type: Welder #
     fuelConsumption: 0.005
     fuelLitCost: 0.01

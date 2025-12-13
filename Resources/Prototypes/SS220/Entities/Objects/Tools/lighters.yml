@@ -50,7 +50,7 @@
 - type: entity
   parent: ExpensiveLighterNanotrasen
   id: ExpensiveLighterDetective
-  description: "The lighter reeks of whiskey. Oil fingerprints are clearly visible on the olive cover, and the wooden bottom and top of the lighter are badly worn."
+  description: "The lighter reeks of whiskey. Oil fingerprints are clearly visible on the leather cover, and the steel bottom and top of the lighter are badly worn."
   components:
   - type: Sprite
     sprite: SS220/Objects/Tools/Lighters/lighters.rsi
