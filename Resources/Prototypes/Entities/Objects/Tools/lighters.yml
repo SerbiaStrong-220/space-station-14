@@ -324,9 +324,9 @@
   description: "A 'Valid' choice in lighters. Contains no copper."
   components:
   - type: Sprite
-    sprite: Objects/Tools/Lighters/syndielighter.rsi
+    sprite: SS220/Objects/Tools/Lighters/syndielighter.rsi #SS220 zippo_resprite
   - type: Item
-    sprite: Objects/Tools/Lighters/syndielighter.rsi
+    sprite: SS220/Objects/Tools/Lighters/syndielighter.rsi #SS220 zippo_resprite
   - type: Welder
     fuelConsumption: 0.005
     fuelLitCost: 0.01
@@ -419,9 +419,9 @@
   description: "A deep blue flippo lighter, decorated with the logo of Interdyne Pharmaceuticals' 'Gene Clean' clinics. Become the master of your own cigarette."
   components:
   - type: Sprite
-    sprite: Objects/Tools/Lighters/interdyne.rsi
+    sprite: SS220/Objects/Tools/Lighters/interdyne.rsi #220 zippo resprite
   - type: Item
-    sprite: Objects/Tools/Lighters/interdyne.rsi
+    sprite: SS220/Objects/Tools/Lighters/interdyne.rsi #220 zippo resprite
   - type: Welder #
     fuelConsumption: 0.005
     fuelLitCost: 0.01
@@ -474,9 +474,9 @@
   suffix: DO NOT MAP
   components:
   - type: Sprite
-    sprite: Objects/Tools/Lighters/centcomm.rsi
+    sprite: SS220/Objects/Tools/Lighters/centcomm.rsi #SS220 zippo_resprite
   - type: Item
-    sprite: Objects/Tools/Lighters/centcomm.rsi
+    sprite: SS220/Objects/Tools/Lighters/centcomm.rsi #SS220 zippo_resprite
   - type: ItemToggleRequiresLock
     requireLocked: false
   - type: Welder #
