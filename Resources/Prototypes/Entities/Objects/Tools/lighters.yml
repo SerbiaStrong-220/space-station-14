@@ -278,11 +278,11 @@
     layers:
     - state: icon
       map: [ "base" ]
-    - state: top
-      map: [ "top" ]
-      visible: false
     - state: open
       map: [ "open" ]
+      visible: false
+    - state: top
+      map: [ "top" ]
       visible: false
     - state: flame
       map: [ "flame" ]
@@ -443,9 +443,9 @@
   description: "A navy blue luxury flippo, generally handed out to loyal heads of staff instead of a payraise. Fueled with liquid plasma"
   components:
   - type: Sprite
-    sprite: Objects/Tools/Lighters/nanotrasen.rsi
+    sprite: SS220/Objects/Tools/Lighters/nanotrasen.rsi #SS220 zippo_resprite
   - type: Item
-    sprite: Objects/Tools/Lighters/nanotrasen.rsi
+    sprite: SS220/Objects/Tools/Lighters/nanotrasen.rsi #SS220 zippo_resprite
   - type: Welder #
     fuelConsumption: 0.005
     fuelLitCost: 1
