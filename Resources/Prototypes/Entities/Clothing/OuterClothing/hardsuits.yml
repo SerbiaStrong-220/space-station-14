@@ -215,6 +215,10 @@
         Heat: 0.7 #Goliath hide gets grilled instead of you
         Radiation: 0.3
         Caustic: 0.8
+  # SS220 add stamina resistance for goliath hardsuit begin
+  - type: StaminaResistance
+    damageCoefficient: 0.55
+  # SS220 add stamina resistance for goliath hardsuit end
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.8
