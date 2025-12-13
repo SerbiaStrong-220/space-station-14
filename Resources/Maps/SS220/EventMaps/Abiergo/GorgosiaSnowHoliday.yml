@@ -6002,12 +6002,6 @@ entities:
     - type: ContainedSolution
       containerName: food
       container: 9839
-- proto: ActionToggleLight
-  entities:
-  - uid: 4880
-    components:
-    - type: Transform
-      parent: 4879
 - proto: AirCanister
   entities:
   - uid: 1341
