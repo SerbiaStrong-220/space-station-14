@@ -519,9 +519,9 @@
   description: "A high tech jet lighter, engineered to function even in deep space. Runs on a tiny microfusion cell."
   components:
   - type: Sprite
-    sprite: Objects/Tools/Lighters/spiderclan.rsi
+    sprite: SS220/Objects/Tools/Lighters/spiderclan.rsi #SS220 zippo_resprite
   - type: Item
-    sprite: Objects/Tools/Lighters/spiderclan.rsi
+    sprite: SS220/Objects/Tools/Lighters/spiderclan.rsi #SS220 zippo_resprite
   - type: Welder #
     fuelConsumption: 0
     fuelLitCost: 0
