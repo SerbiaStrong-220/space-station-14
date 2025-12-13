@@ -1,14 +1,17 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Client.SS220.Overlays;
+using Content.Shared.SS220.Input;
 using Content.Shared.SS220.Maths;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Shared.Console;
 using Robust.Shared.Input;
+using Robust.Shared.Input.Binding;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Utility;
+using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 
 namespace Content.Client.SS220.BoxLayout;
@@ -21,14 +24,14 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
     [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly IConsoleHost _console = default!;
 
-    public static Color DefaultColor = Color.Green;
+    public static readonly Color DefaultColor = Color.Green;
 
     public event Action? Started;
     public event Action<BoxArgs>? Ended;
     public event Action? Cancelled;
 
     public bool Active => _active;
-    private bool _active;
+    private bool _active = false;
 
     public bool AttachToLattice
     {
@@ -36,8 +39,6 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
         set => _attachToGrid = value;
     }
     private bool _attachToGrid;
-
-    public BoxArgs? CurParams => GetBoxParams();
 
     private BoxLayoutBoxesOverlayProvider _overlayProvider = default!;
 
@@ -56,98 +57,83 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
     public void Initialize()
     {
         IoCManager.InjectDependencies(this);
-        _input.UIKeyBindStateChanged += OnUIKeyBindStateChanged;
 
         var overlay = BoxesOverlay.GetOverlay();
-        if (overlay.TryGetProvider<BoxLayoutBoxesOverlayProvider>(out var provider))
-            _overlayProvider = provider;
-        else
-        {
-            _overlayProvider = new BoxLayoutBoxesOverlayProvider();
-            overlay.AddProvider(_overlayProvider);
-        }
+        _overlayProvider = overlay.EnsureProvider<BoxLayoutBoxesOverlayProvider>();
     }
 
-    private bool OnUIKeyBindStateChanged(BoundKeyEventArgs args)
+    private void RegisterInput()
     {
-        if (!Active || args.State != BoundKeyState.Down)
-            return false;
+        CommandBinds.Builder
+            .Bind(KeyFunctions220.BoxLayoutSetPoint, new PointerInputCmdHandler(
+                (session, coords, target) =>
+                {
+                    if (!Active)
+                        return false;
 
-        if (args.Function == EngineKeyFunctions.UIClick)
-        {
-            var handled = HandleUIClick();
-            if (handled)
-                args.Handle();
+                    if (_point1 == null)
+                    {
+                        // parent is determined by the first point
+                        _parent = coords.EntityId;
+                        _point1 = coords.Position;
+                        return true;
+                    }
+                    else if (_point2 == null && _parent != null)
+                    {
+                        var transform = _entity.System<TransformSystem>();
+                        var mapCoords = transform.ToMapCoordinates(coords);
 
-            return handled;
-        }
-        else if (args.Function == EngineKeyFunctions.UIRightClick)
-        {
-            Cancel();
-            args.Handle();
-            return true;
-        }
-        else
-            return false;
+                        var map = transform.GetMapId(_parent.Value);
+                        if (mapCoords.MapId != map)
+                        {
+                            var error = $"Expected coordinates from map {map}, but was {mapCoords.MapId}";
+                            DebugTools.Assert(error);
+                            _console.LocalShell.WriteError(error);
+
+                            return false;
+                        }
+
+                        var localCoords = transform.ToCoordinates(_parent.Value, mapCoords);
+                        _point2 = localCoords.Position;
+                    }
+
+                    BoxEndedCheck();
+                    return true;
+                }, ignoreUp: true))
+            .Bind(KeyFunctions220.BoxLayoutCancel, InputCmdHandler.FromDelegate(
+                session =>
+                {
+                    if (!Active)
+                        return;
+
+                    Cancel();
+                }))
+            .Register<BoxLayoutManager>();
     }
 
-    private bool HandleUIClick()
+    private void UnregisterInput()
     {
-        var mapCoords = GetMouseMapCoordinates();
-        if (mapCoords.MapId == MapId.Nullspace)
-            return false;
-
-        var transform = _entity.System<TransformSystem>();
-        if (_point1 == null)
-        {
-            EntityCoordinates coords;
-            if (_map.TryFindGridAt(mapCoords, out var grid, out _))
-                coords = transform.ToCoordinates(grid, mapCoords);
-            else
-                coords = transform.ToCoordinates(mapCoords);
-
-            _parent = coords.EntityId;
-            _point1 = coords.Position;
-        }
-        else if (_point2 == null && _parent != null)
-        {
-            var map = transform.GetMapId(_parent.Value);
-            if (mapCoords.MapId != map)
-            {
-                var error = $"The coordinate was obtained from map {mapCoords.MapId}, when it should be from map {map}";
-                DebugTools.Assert(error);
-
-                _console.LocalShell.WriteError(error);
-                return false;
-            }
-
-            var coords = transform.ToCoordinates(_parent.Value, mapCoords);
-            _point2 = coords.Position;
-        }
-        BoxEndedCheck();
-
-        return true;
+        CommandBinds.Unregister<BoxLayoutManager>();
     }
 
     private void BoxEndedCheck()
     {
-        var @params = GetBoxParams();
-        if (@params != null)
+        if (TryGetBoxArgs(out var args))
         {
-            Ended?.Invoke(@params.Value);
-            _active = false;
+            Ended?.Invoke(args.Value);
+            SetActive(false);
         }
     }
 
-    public BoxArgs? GetBoxParams()
+    public bool TryGetBoxArgs([NotNullWhen(true)] out BoxArgs? args)
     {
-        if (_point1 is not { } p1 || _point2 is not { } p2 || _parent is not { } parent)
-            return null;
+        args = null;
+        if (_parent is not { } parent
+            || _point1 is not { } p1
+            || _point2 is not { } p2)
+            return false;
 
         var box = Box2.FromTwoPoints(p1, p2);
-        if (box == Box2.Empty)
-            return null;
-
         if (AttachToLattice)
         {
             var gridSize = 1f;
@@ -157,11 +143,8 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
             MathHelperExtensions.AttachToLattice(ref box, gridSize);
         }
 
-        return new BoxArgs()
-        {
-            Parent = parent,
-            Box = box
-        };
+        args = new BoxArgs(parent, box);
+        return true;
     }
 
     public void StartNew()
@@ -171,15 +154,34 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
         else
             Clear();
 
-        _active = true;
+        SetActive(true);
         Started?.Invoke();
     }
 
     public void Cancel()
     {
         Clear();
-        _active = false;
+        SetActive(false);
         Cancelled?.Invoke();
+    }
+
+    private void SetActive(bool active)
+    {
+        if (_active == active)
+            return;
+
+        if (active)
+        {
+            _input.Contexts.SetActiveContext("editor");
+            RegisterInput();
+        }
+        else
+        {
+            _entity.System<InputSystem>().SetEntityContextActive();
+            UnregisterInput();
+        }
+
+        _active = active;
     }
 
     private void Clear()
@@ -207,10 +209,10 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
         return _eye.ScreenToMap(_input.MouseScreenPosition);
     }
 
-    public struct BoxArgs
+    public struct BoxArgs(EntityUid parent, Box2 box)
     {
-        public EntityUid Parent;
-        public Box2 Box;
+        public EntityUid Parent = parent;
+        public Box2 Box = box;
     }
 
     private sealed class BoxLayoutBoxesOverlayProvider() : BoxesOverlay.BoxesOverlayProvider()

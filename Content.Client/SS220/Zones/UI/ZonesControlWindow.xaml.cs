@@ -16,6 +16,7 @@ public sealed partial class ZonesControlWindow : DefaultWindow
     [Dependency] private readonly IEntityManager _entityManager = default!;
 
     private readonly ZonesSystem _zones;
+    private readonly ZonesControlUIController _controller;
 
     private readonly Dictionary<EntityUid, ZonesParentEntry> _zoneParentEntries = [];
     private readonly Dictionary<EntityUid, ZoneEntry> _zoneEntries = [];
@@ -28,9 +29,10 @@ public sealed partial class ZonesControlWindow : DefaultWindow
         RobustXamlLoader.Load(this);
 
         _zones = _entityManager.System<ZonesSystem>();
+        _controller = UserInterfaceManager.GetUIController<ZonesControlUIController>();
 
         RefreshButton.OnPressed += _ => Refresh();
-        OverlayButton.OnToggled += e => _zones.SetOverlay(e.Pressed);
+        OverlayButton.OnToggled += e => _controller.SetOverlay(e.Pressed);
         SearchLineEdit.OnTextChanged += ApplySearchFilter;
 
         CreateNewZoneButton.OnToggled += e =>
@@ -206,8 +208,7 @@ public sealed partial class ZonesControlWindow : DefaultWindow
             @params.ProtoId,
             @params.Area,
             @params.Name,
-            @params.Color,
-            @params.AttachToLattice);
+            @params.Color);
 
         EndEditing();
     }
@@ -222,8 +223,7 @@ public sealed partial class ZonesControlWindow : DefaultWindow
                 @params.ProtoId,
                 @params.Area,
                 @params.Name,
-                @params.Color,
-                @params.AttachToLattice);
+                @params.Color);
         }
 
         EndEditing();

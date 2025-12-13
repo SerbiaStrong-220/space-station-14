@@ -278,6 +278,8 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(EngineKeyFunctions.EditorRotateObject);
             AddButton(ContentKeyFunctions.EditorFlipObject);
             AddButton(ContentKeyFunctions.EditorCopyObject);
+            AddButton(KeyFunctions220.BoxLayoutSetPoint); // SS220 mapping zones
+            AddButton(KeyFunctions220.BoxLayoutCancel); // SS220 mapping zones
 
             AddHeader("ui-options-header-dev");
             AddButton(EngineKeyFunctions.ShowDebugConsole);

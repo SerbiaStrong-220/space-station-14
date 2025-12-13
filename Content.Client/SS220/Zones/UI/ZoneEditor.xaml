@@ -27,7 +27,6 @@
                     <Label Name="ParentNetIDLabel" Text="{Loc zone-editor-parent-net-id-label}" MouseFilter="Stop"/>
                     <LineEdit Name="ParentNetIDLineEdit" HorizontalExpand="True" Margin="10 0 0 0"/>
                 </BoxContainer>
-                <CheckBox Name="AttachToLatticeCheckbox" Text="{Loc zone-editor-attach-to-lattice-check-box}" LeftAlign="False" Margin ="5 2" />
             </BoxContainer>
             <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
                 <Button Name="ApplyButton" HorizontalExpand="True" Text="{Loc zones-control-apply-button}"/>
@@ -51,10 +50,10 @@
                         <BoxContainer Name="Box2ListContainer" Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True"/>
                     </ScrollContainer>
                     <BoxContainer Orientation="Horizontal" HorizontalExpand="True"  Margin="0 2 0 0">
-                        <Button Name="AddBoxButton" Text="{Loc zone-editor-add-box-button}" Access="Public" ToggleMode="True" HorizontalExpand="True"/>
-                        <Button Name="CutBoxButton" Text="{Loc zone-editor-cut-box-button}" Access="Public" ToggleMode="True" HorizontalExpand="True"/>
+                        <Button Name="AddBoxButton" Text="{Loc zone-editor-add-box-button}" ToggleMode="True" HorizontalExpand="True"/>
+                        <Button Name="CutBoxButton" Text="{Loc zone-editor-cut-box-button}" ToggleMode="True" HorizontalExpand="True"/>
                     </BoxContainer>
-                    <Button Name="ShowChangesButton" Text="{Loc zone-editor-show-changes-button}" Access="Public" ToggleMode="True" Margin="0 2 0 2" HorizontalExpand="True"/>
+                    <Button Name="AttachToGridButton" Text="{Loc zone-editor-attach-to-grid-button}" ToggleMode="True" Margin="0 2 0 2" HorizontalExpand="True"/>
                 </BoxContainer>
             </PanelContainer>
         </BoxContainer>

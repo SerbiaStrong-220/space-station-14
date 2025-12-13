@@ -11,8 +11,7 @@ public sealed class CreateZoneRequestMessage(
     EntProtoId<ZoneComponent> protoId,
     List<Box2> area,
     string? name = null,
-    Color? color = null,
-    bool attachToLattice = false) : EntityEventArgs
+    Color? color = null) : EntityEventArgs
 {
     public NetEntity Parent = parent;
 
@@ -23,8 +22,6 @@ public sealed class CreateZoneRequestMessage(
     public string? Name = name;
 
     public Color? Color = color;
-
-    public bool AttachToLattice = attachToLattice;
 }
 
 [Serializable, NetSerializable]
@@ -34,8 +31,7 @@ public sealed class ChangeZoneRequestMessage(
     EntProtoId<ZoneComponent>? protoId = null,
     List<Box2>? area = null,
     string? name = null,
-    Color? color = null,
-    bool? attachToLattice = null) : EntityEventArgs
+    Color? color = null) : EntityEventArgs
 {
     public NetEntity Zone = zone;
 
@@ -48,8 +44,6 @@ public sealed class ChangeZoneRequestMessage(
     public string? Name = name;
 
     public Color? Color = color;
-
-    public bool? AttachToLattice = attachToLattice;
 }
 
 [Serializable, NetSerializable]

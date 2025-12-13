@@ -69,16 +69,8 @@ public sealed partial class ZoneEditor : PanelContainer
         MinSize = DefaultMinSize;
 
         var overlay = BoxesOverlay.GetOverlay();
-        if (overlay.TryGetProvider<ZoneEditorBoxesOverlayProvider>(out var provider))
-            _overlayProvider = provider;
-        else
-        {
-            _overlayProvider = new()
-            {
-                Panel = this
-            };
-            overlay.AddProvider(_overlayProvider);
-        }
+        _overlayProvider = overlay.EnsureProvider<ZoneEditorBoxesOverlayProvider>();
+        _overlayProvider.Panel = this;
 
         _zones = _entityManager.System<ZonesSystem>();
 
@@ -119,10 +111,27 @@ public sealed partial class ZoneEditor : PanelContainer
             else
                 CancelLayout();
         };
-        ShowChangesButton.OnToggled += e => SetOverlay(e.Pressed);
 
-        ParentNetIDLineEdit.OnFocusExit += args => ChangeParent(args.Text);
-        ParentNetIDLineEdit.OnTextEntered += args => ChangeParent(args.Text);
+        AttachToGridButton.OnToggled += e =>
+        {
+            if (_boxLayoutManager.Active)
+                _boxLayoutManager.AttachToLattice = e.Pressed;
+        };
+
+        ParentNetIDLineEdit.OnFocusExit += args =>
+        {
+            if (NetEntity.TryParse(args.Text, out var netParent) && _entityManager.TryGetEntity(netParent, out var parent))
+                ChangeParent(parent.Value);
+            else
+                Refresh();
+        };
+        ParentNetIDLineEdit.OnTextEntered += args =>
+        {
+            if (NetEntity.TryParse(args.Text, out var netParent) && _entityManager.TryGetEntity(netParent, out var parent))
+                ChangeParent(parent.Value);
+            else
+                Refresh();
+        };
 
         NameLineEdit.OnFocusExit += args => ChangeName(args.Text);
         NameLineEdit.OnTextEntered += args => ChangeName(args.Text);
@@ -132,8 +141,6 @@ public sealed partial class ZoneEditor : PanelContainer
 
         HexColorLineEdit.OnFocusExit += args => ChangeColor(args.Text);
         HexColorLineEdit.OnTextEntered += args => ChangeColor(args.Text);
-
-        AttachToLatticeCheckbox.OnPressed += _ => ChangeAttachToLattice(AttachToLatticeCheckbox.Pressed);
 
         PrototypeSelectorButton.OnPressed += _ =>
         {
@@ -157,7 +164,7 @@ public sealed partial class ZoneEditor : PanelContainer
             _colorSelectorPopup.Open(box);
         };
 
-        _colorSelectorPopup.OnColorSelected += ChangeColor;
+        _colorSelectorPopup.OnColorSelected += color => ChangeColor(color);
         _colorSelectorPopup.OnVisibilityChanged += args => ColorSelectorButton.Pressed = args.Visible;
     }
 
@@ -167,7 +174,7 @@ public sealed partial class ZoneEditor : PanelContainer
         PrototypeIDLabel.ToolTip = Loc.GetString("zone-editor-prototype-id-tooltip");
         HexColorLabel.ToolTip = Loc.GetString("zone-editor-hex-color-tooltip");
         ParentNetIDLabel.ToolTip = Loc.GetString("zone-editor-parent-net-id-tooltip");
-        AttachToLatticeCheckbox.ToolTip = Loc.GetString("zone-editor-attach-to-lattice-tooltip");
+        AttachToGridButton.ToolTip = Loc.GetString("zone-editor-attach-to-grid-button-tooltip");
     }
 
     protected override void ExitedTree()
@@ -191,8 +198,7 @@ public sealed partial class ZoneEditor : PanelContainer
         NameLineEdit.Text = showedParams.Name;
         PrototypeIDLineEdit.Text = showedParams.ProtoId;
         HexColorLineEdit.Text = showedParams.Color.ToHex();
-        ParentNetIDLineEdit.Text = (showedParams.Parent is { } container && container.IsValid()) ? container.ToString() : string.Empty;
-        AttachToLatticeCheckbox.Pressed = showedParams.AttachToLattice;
+        ParentNetIDLineEdit.Text = _entityManager.GetNetEntity(showedParams.Parent).ToString();
 
         Box2ListContainer.RemoveAllChildren();
         for (var i = 0; i < showedParams.Area.Count; i++)
@@ -248,7 +254,6 @@ public sealed partial class ZoneEditor : PanelContainer
             Area = ent.Value.Comp.Area,
             Name = metaData?.EntityName ?? string.Empty,
             Color = ent.Value.Comp.Color,
-            AttachToLattice = ent.Value.Comp.AttachToLattice
         };
     }
 
@@ -263,12 +268,12 @@ public sealed partial class ZoneEditor : PanelContainer
         {
             case BoxLayoutMode.Adding:
                 _boxLayoutManager.StartNew();
-                _boxLayoutManager.AttachToLattice = CurrentParams.AttachToLattice;
+                _boxLayoutManager.AttachToLattice = AttachToGridButton.Pressed;
                 break;
 
             case BoxLayoutMode.Cutting:
                 _boxLayoutManager.StartNew();
-                _boxLayoutManager.AttachToLattice = CurrentParams.AttachToLattice;
+                _boxLayoutManager.AttachToLattice = AttachToGridButton.Pressed;
                 _boxLayoutManager.SetColor(Color.Red);
                 break;
         }
@@ -335,7 +340,7 @@ public sealed partial class ZoneEditor : PanelContainer
             return new Box2(left, bottom, right, top);
         })];
 
-        newArea = [.. _zones.RecalculateArea(newArea, newParams.Parent, newParams.AttachToLattice)];
+        newArea = [.. _zones.RecalculateArea(newArea, newParams.Parent)];
         newParams.Area = newArea;
         ChangeParams(_ => newParams);
     }
@@ -348,7 +353,6 @@ public sealed partial class ZoneEditor : PanelContainer
 
     public void SetOverlay(bool active)
     {
-        ShowChangesButton.Pressed = active;
         _overlayProvider.Active = active;
     }
 
@@ -369,9 +373,10 @@ public sealed partial class ZoneEditor : PanelContainer
         HexColorLineEdit.Editable = editable;
         ParentNetIDLineEdit.Editable = editable;
 
-        AttachToLatticeCheckbox.Disabled = !editable;
         ApplyButton.Disabled = !editable;
         CancelButton.Disabled = !editable;
+
+        AttachToGridButton.Disabled = !editable;
         AddBoxButton.Disabled = !editable;
         CutBoxButton.Disabled = !editable;
 
@@ -385,93 +390,78 @@ public sealed partial class ZoneEditor : PanelContainer
     }
 
     #region params changes
-    private void ChangeParent(string parent)
+    private bool ChangeParent(EntityUid parent, bool refresh = true)
     {
-        if (!EntityUid.TryParse(parent, out var uid))
-            return;
-
-        ChangeParent(uid);
-    }
-
-    private void ChangeParent(EntityUid parent)
-    {
-        ChangeParams(cur =>
+        return ChangeParams(cur =>
         {
             cur.Parent = parent;
             return cur;
-        });
+        }, refresh: refresh);
     }
 
-    private void ChangeArea(List<Box2> area)
+    private bool ChangeArea(List<Box2> area, bool refresh = true)
     {
-        ChangeParams(cur =>
+        return ChangeParams(cur =>
         {
             cur.Area = area;
             return cur;
-        }, recalculate: true);
+        }, refresh: refresh , recalculate: true);
     }
 
-    private void ChangeName(string name)
+    private bool ChangeName(string name, bool refresh = true)
     {
-        ChangeParams(cur =>
+        return ChangeParams(cur =>
         {
             cur.Name = name;
             return cur;
-        });
+        }, refresh: refresh);
     }
 
-    private void ChangeProtoID(EntProtoId<ZoneComponent> protoId)
+    private bool ChangeProtoID(EntProtoId<ZoneComponent> protoId, bool refresh = true)
     {
         if (!_prototype.TryIndex<EntityPrototype>(protoId, out var proto) ||
             !proto.HasComponent<ZoneComponent>())
-            return;
+            return false;
 
-        ChangeParams(cur =>
+        return ChangeParams(cur =>
         {
             cur.ProtoId = protoId;
             return cur;
-        });
+        }, refresh: refresh);
     }
 
-    private void ChangeColor(string hex)
+    private bool ChangeColor(string hex, bool refresh = true)
     {
         if (!Color.TryParse(hex, out var color))
-            return;
+            return false;
 
-        ChangeColor(color);
+        return ChangeColor(color, refresh);
     }
 
-    private void ChangeColor(Color value)
+    private bool ChangeColor(Color value, bool refresh = true)
     {
-        ChangeParams(cur =>
+        return ChangeParams(cur =>
         {
             cur.Color = value;
             return cur;
-        });
+        }, refresh: refresh);
     }
 
-    private void ChangeAttachToLattice(bool value)
-    {
-        ChangeParams(cur =>
-        {
-            cur.AttachToLattice = value;
-            return cur;
-        }, recalculate: value);
-    }
-
-    private void ChangeParams(Func<ZoneParams, ZoneParams> func, bool refresh = true, bool recalculate = false)
+    private bool ChangeParams(Func<ZoneParams, ZoneParams> func, bool refresh = true, bool recalculate = false)
     {
         if (EditorSetting is not ZoneEditorSetting.ReadWrite)
-            return;
+            return false;
 
         var result = func.Invoke(CurrentParams);
 
         if (recalculate)
-            result.Area = [.. _zones.RecalculateArea(result.Area, result.Parent, result.AttachToLattice)];
+            result.Area = [.. _zones.RecalculateArea(result.Area, result.Parent)];
 
         _changedParams = result;
         if (refresh)
             Refresh();
+
+        return true;
     }
     #endregion
 
@@ -559,7 +549,5 @@ public sealed partial class ZoneEditor : PanelContainer
         public string Name = string.Empty;
 
         public Color Color = Color.Gray;
-
-        public bool AttachToLattice = false;
     }
 }

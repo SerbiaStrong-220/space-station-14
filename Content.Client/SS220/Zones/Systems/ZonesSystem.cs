@@ -1,41 +1,24 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Client.Administration.Managers;
-using Content.Client.SS220.Overlays;
-using Content.Client.SS220.Zones.Overlays;
 using Content.Client.SS220.Zones.UI;
-using Content.Shared.Administration;
 using Content.Shared.SS220.Zones;
 using Content.Shared.SS220.Zones.Components;
 using Content.Shared.SS220.Zones.Systems;
+using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.Zones.Systems;
 
 public sealed partial class ZonesSystem : SharedZonesSystem
 {
-    [Dependency] private readonly IClientAdminManager _clientAdmin = default!;
+    [Dependency] private readonly IUserInterfaceManager _ui = default!;
 
-    public ZonesControlWindow ControlWindow = default!;
-
-    private ZonesBoxesOverlayProvider _overlayProvider = default!;
+    private ZonesControlUIController _controller = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        ControlWindow = new ZonesControlWindow();
-
-        var overlay = BoxesOverlay.GetOverlay();
-
-        if (overlay.TryGetProvider<ZonesBoxesOverlayProvider>(out var provider))
-            _overlayProvider = provider;
-        else
-        {
-            _overlayProvider = new ZonesBoxesOverlayProvider();
-            overlay.AddProvider(_overlayProvider);
-        }
-
-        _clientAdmin.AdminStatusUpdated += OnAdminStatusUpdated;
+        _controller = _ui.GetUIController<ZonesControlUIController>();
 
         SubscribeLocalEvent<ZoneComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<ZoneComponent, ComponentShutdown>(OnShutdown);
@@ -44,30 +27,17 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 
     private void OnInit(Entity<ZoneComponent> ent, ref ComponentInit args)
     {
-        ControlWindow.Refresh();
+        _controller.RefreshWindow();
     }
 
     private void OnShutdown(Entity<ZoneComponent> ent, ref ComponentShutdown args)
     {
-        ControlWindow.Refresh();
+        _controller.RefreshWindow();
     }
 
     private void OnAfterAutoHandleState(Entity<ZoneComponent> ent, ref AfterAutoHandleStateEvent args)
     {
-        ControlWindow.Refresh();
-    }
-
-    private void OnAdminStatusUpdated()
-    {
-        ResetOverlay();
-    }
-
-    public void SetOverlay(bool value)
-    {
-        if (!_clientAdmin.HasFlag(AdminFlags.Mapping))
-            value = false;
-
-        _overlayProvider.Active = value;
+        _controller.RefreshWindow();
     }
 
     public void CreateZoneRequest(
@@ -75,10 +45,9 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         EntProtoId<ZoneComponent> protoId,
         List<Box2> area,
         string? name = null,
-        Color? color = null,
-        bool attachToLattice = false)
+        Color? color = null)
     {
-        var msg = new CreateZoneRequestMessage(parent, protoId, area, name, color, attachToLattice);
+        var msg = new CreateZoneRequestMessage(parent, protoId, area, name, color);
         RaiseNetworkEvent(msg);
     }
 
@@ -88,10 +57,9 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         EntProtoId<ZoneComponent>? protoId = null,
         List<Box2>? area = null,
         string? name = null,
-        Color? color = null,
-        bool? attachToLattice = null)
+        Color? color = null)
     {
-        var msg = new ChangeZoneRequestMessage(zone, parent, protoId, area, name, color, attachToLattice);
+        var msg = new ChangeZoneRequestMessage(zone, parent, protoId, area, name, color);
         RaiseNetworkEvent(msg);
     }
 
@@ -99,10 +67,5 @@ public sealed partial class ZonesSystem : SharedZonesSystem
     {
         var msg = new DeleteZoneRequestMessage(zone);
         RaiseNetworkEvent(msg);
-    }
-
-    private void ResetOverlay()
-    {
-        SetOverlay(_overlayProvider.Active);
     }
 }

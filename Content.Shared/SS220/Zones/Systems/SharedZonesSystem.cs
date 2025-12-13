@@ -171,7 +171,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return MathHelperExtensions.AttachToLattice(area, latticeSize);
     }
 
-    public IEnumerable<Box2> RecalculateArea(IEnumerable<Box2> area, EntityUid parent, bool attachToLattice)
+    public IEnumerable<Box2> RecalculateArea(IEnumerable<Box2> area, EntityUid parent, bool attachToLattice = false)
     {
         if (attachToLattice)
             area = AttachToLattice(parent, area);

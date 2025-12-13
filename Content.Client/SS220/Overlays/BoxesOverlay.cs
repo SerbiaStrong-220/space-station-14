@@ -4,6 +4,7 @@ using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 
@@ -11,9 +12,13 @@ namespace Content.Client.SS220.Overlays;
 
 public sealed class BoxesOverlay : Overlay
 {
+
     [Dependency] private readonly IResourceCache _cache = default!;
     [Dependency] private readonly IEntityManager _entManager = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly IDynamicTypeFactory _dynamicTypeFactory = default!;
+
+    private static readonly ProtoId<ShaderPrototype> UnshadedShader = "unshaded";
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
 
@@ -25,7 +30,7 @@ public sealed class BoxesOverlay : Overlay
     private BoxesOverlay() : base()
     {
         IoCManager.InjectDependencies(this);
-        _shader = _proto.Index<ShaderPrototype>("unshaded").Instance();
+        _shader = _proto.Index(UnshadedShader).Instance();
         _defaultTexture = _cache.GetTexture("/Textures/Interface/Nano/square.png");
     }
 
@@ -81,6 +86,18 @@ public sealed class BoxesOverlay : Overlay
     public bool AddProvider<T>(T provider) where T : BoxesOverlayProvider
     {
         return _providers.TryAdd(typeof(T), provider);
+    }
+
+    public T EnsureProvider<T>() where T : BoxesOverlayProvider, new()
+    {
+        if (TryGetProvider<T>(out var provider))
+            return provider;
+
+        provider = _dynamicTypeFactory.CreateInstance<T>();
+        AddProvider(provider);
+
+        DebugTools.Assert(HasProvider<T>());
+        return provider;
     }
 
     public bool RemoveProvder<T>() where T : BoxesOverlayProvider

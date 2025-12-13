@@ -22,12 +22,6 @@ public sealed partial class ZoneComponent : Component
     public Color Color = Color.Gray;
 
     /// <summary>
-    /// Should the size of the zone be attached to the grid
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public bool AttachToLattice;
-
-    /// <summary>
     /// Original size of the zone
     /// </summary>
     [DataField, AutoNetworkedField]

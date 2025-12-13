@@ -1,7 +1,8 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Client.SS220.Zones.Systems;
+using Content.Client.SS220.Zones.UI;
 using Content.Shared.SS220.Zones.Systems;
 using JetBrains.Annotations;
+using Robust.Client.UserInterface;
 using Robust.Shared.Console;
 
 namespace Content.Client.SS220.Zones.Commands;
@@ -9,7 +10,7 @@ namespace Content.Client.SS220.Zones.Commands;
 [UsedImplicitly]
 public sealed partial class ZoneControlWindowCommand : LocalizedCommands
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private readonly IUserInterfaceManager _ui = default!;
 
     public override string Command => SharedZonesSystem.ZoneCommandsPrefix + "control_window";
 
@@ -18,10 +19,6 @@ public sealed partial class ZoneControlWindowCommand : LocalizedCommands
 
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {
-        var window = _entityManager.System<ZonesSystem>().ControlWindow;
-        if (window.IsOpen)
-            return;
-
-        window.OpenCentered();
+        _ui.GetUIController<ZonesControlUIController>().ToggleWindow();
     }
 }

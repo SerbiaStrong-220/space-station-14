@@ -56,7 +56,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         if (!_admin.HasAdminFlag(args.SenderSession, Shared.Administration.AdminFlags.Mapping))
             return;
 
-        CreateZone(GetEntity(msg.Parent), msg.ProtoId, msg.Area, msg.Name, msg.Color, msg.AttachToLattice);
+        CreateZone(GetEntity(msg.Parent), msg.ProtoId, msg.Area, msg.Name, msg.Color);
     }
 
     private void OnChangeZoneRequest(ChangeZoneRequestMessage msg, EntitySessionEventArgs args)
@@ -86,9 +86,6 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         if (msg.Color is { } color)
             SetZoneColor(zone, color);
 
-        if (msg.AttachToLattice is { } attachToLattice)
-            SetZoneAttachToLattice(zone, attachToLattice, recalculate: false);
-
         RecalculateZoneAreas(zone);
     }
 
@@ -112,8 +109,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         EntProtoId<ZoneComponent> protoId,
         List<Box2> area,
         string? name = null,
-        Color? color = null,
-        bool attachToLattice = false)
+        Color? color = null)
     {
         if (area.Count <= 0)
             return null;
@@ -144,7 +140,6 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         if (color != null)
             SetZoneColor(zone, color.Value);
 
-        SetZoneAttachToLattice(zone, attachToLattice, recalculate: false);
         _metaData.SetEntityName(uid, name);
 
         RecalculateZoneAreas(zone);
@@ -165,7 +160,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         var area = ent.Comp.Area.ToList().AsEnumerable();
 
         var parent = Transform(ent).ParentUid;
-        ent.Comp.Area = [.. RecalculateArea(area, parent, ent.Comp.AttachToLattice)];
+        ent.Comp.Area = [.. RecalculateArea(area, parent)];
 
         Dirty(ent);
     }
@@ -181,8 +176,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
                 newProtoId,
                 ent.Comp.Area,
                 meta.EntityName,
-                ent.Comp.Color,
-                ent.Comp.AttachToLattice);
+                ent.Comp.Color);
 
         if (newZone == null)
             return false;
@@ -225,16 +219,6 @@ public sealed partial class ZonesSystem : SharedZonesSystem
     public void SetZoneColor(Entity<ZoneComponent> ent, Color color)
     {
         ent.Comp.Color = color;
-        Dirty(ent);
-    }
-
-    public void SetZoneAttachToLattice(Entity<ZoneComponent> ent, bool value, bool recalculate = true)
-    {
-        ent.Comp.AttachToLattice = value;
-
-        if (recalculate)
-            RecalculateZoneAreas(ent);
-
         Dirty(ent);
     }
 

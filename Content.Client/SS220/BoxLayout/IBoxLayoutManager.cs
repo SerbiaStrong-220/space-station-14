@@ -17,10 +17,8 @@ public interface IBoxLayoutManager
     Color Color { get; }
     bool Active { get; }
     bool AttachToLattice { get; set; }
-    BoxArgs? CurParams { get; }
 
     void Initialize();
-    BoxArgs? GetBoxParams();
     void Cancel();
     void StartNew();
     void SetColor(Color? newColor);

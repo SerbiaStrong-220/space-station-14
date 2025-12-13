@@ -10,5 +10,5 @@ zone-editor-hex-color-tooltip = Цвет зоны, используемый в �
 zone-editor-add-box-button = Добавить
 zone-editor-cut-box-button = Вырезать
 zone-editor-show-changes-button = Показать изменения
-zone-editor-attach-to-lattice-check-box = Привязка к сетке
-zone-editor-attach-to-lattice-tooltip = Если включено - то координаты углов регионов зоны будут привязаны к локальной сетке координат
+zone-editor-attach-to-grid-button = Привязка к сетке
+zone-editor-attach-to-grid-button-tooltip = Включает привязку углов прямоугольников к локальной сетке координат
