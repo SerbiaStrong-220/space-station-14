@@ -18,6 +18,6 @@ public sealed partial class CultYoggCorruptedAnimalsPrototype : IPrototype
     [DataField("corruptedAnimal")]
     public string? Start { get; private set; }
 
-    [DataField("result")]
+    [DataField]
     public string? Result { get; private set; }
 }

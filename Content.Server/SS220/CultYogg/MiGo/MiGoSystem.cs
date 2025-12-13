@@ -20,7 +20,6 @@ using Content.Shared.NPC.Systems;
 using Content.Shared.SS220.CultYogg.MiGo;
 using Content.Shared.SS220.Temperature;
 using Content.Shared.StatusEffect;
-using Content.Shared.Tag;
 using Content.Shared.Projectiles;
 using Robust.Server.GameObjects;
 
@@ -31,7 +30,6 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
     [Dependency] private readonly StatusEffectsSystem _statusEffectsSystem = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _speedModifier = default!;
     [Dependency] private readonly VisibilitySystem _visibility = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
     [Dependency] private readonly AlertsSystem _alerts = default!;
@@ -43,8 +41,6 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
     [Dependency] private readonly JobSystem _jobSystem = default!;
 
     private const string AscensionReagent = "TheBloodOfYogg";
-    private const string DoorBumpOpenerTag = "DoorBumpOpener";
-    private const string MiGoInAstralTag = "MiGoInAstral";
     private const string CultYoggFaction = "CultYogg";
     private const string SimpleNeutralFaction = "SimpleNeutral";
 
@@ -82,9 +78,6 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
 
         if (isMaterial)
         {
-            //no opening door during astral
-            _tag.AddTag(uid, DoorBumpOpenerTag);
-            _tag.RemoveTag(uid, MiGoInAstralTag);
             comp.MaterializationTime = null;
             comp.AlertTime = 0;
 
@@ -110,12 +103,11 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
         else
         {
             comp.AudioPlayed = false;
-            _tag.RemoveTag(uid, DoorBumpOpenerTag);
-            _tag.AddTag(uid, MiGoInAstralTag);
             _alerts.ShowAlert(uid, comp.AstralAlert);
 
             //no phisyc during astral
             EnsureComp<MovementIgnoreGravityComponent>(uid);
+            RemCompDeferred<SpeedModifiedByContactComponent>(uid);
 
             if (HasComp<NpcFactionMemberComponent>(uid))
             {

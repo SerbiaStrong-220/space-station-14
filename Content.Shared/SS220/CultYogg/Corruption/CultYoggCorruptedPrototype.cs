@@ -26,13 +26,13 @@ public sealed partial class CultYoggCorruptedPrototype : IPrototype
     /// <summary>
     /// Entity prototype to spawn corrupted variant from
     /// </summary>
-    [DataField("result", required: true)]
+    [DataField(required: true)]
     public ProtoId<EntityPrototype>? Result { get; private set; }
 
     /// <summary>
     /// Visual effect to spawn when entity corrupted from this recipe gets reversed back
     /// </summary>
-    [DataField("corruptionReverseEffect")]
+    [DataField]
     public ProtoId<EntityPrototype>? CorruptionReverseEffect { get; private set; }
 
     /// <summary>
@@ -40,13 +40,13 @@ public sealed partial class CultYoggCorruptedPrototype : IPrototype
     /// Used to prevent wierd bugs like hardsuits helmet or ammo in guns.
     /// Set "true" if it has a pocket or smt that can make valuable items unreachable
     /// </summary>
-    [DataField("emptyStorage", required: false)]
+    [DataField(required: false)]
     public bool EmptyStorage { get; private set; }
 
     /// <summary>
     /// At what stage is this corruption result available
     /// </summary>
-    [DataField("avaliableOnStage", required: false)]
+    [DataField(required: false)]
     public CultYoggStage AvaliableOnStage = CultYoggStage.Initial;
 
 }
@@ -60,24 +60,24 @@ public partial struct CorruptionInitialEntityUnion
     /// <summary>
     /// Defines that source entity should be spawned from specified prototype id
     /// </summary>
-    [DataField("prototypeId")]
+    [DataField]
     public ProtoId<EntityPrototype>? PrototypeId { get; private set; }
 
     /// <summary>
     /// Defines that source entity should be a stack with specified stack type
     /// </summary>
-    [DataField("stackType")]
+    [DataField]
     public ProtoId<StackPrototype>? StackType { get; private set; }
 
     /// <summary>
     /// Defines that source entity should be spawned from prototype, inheriting the prototype with specified id
     /// </summary>
-    [DataField("parentPrototypeId")]
+    [DataField]
     public ProtoId<EntityPrototype>? ParentPrototypeId { get; private set; }
 
     /// <summary>
     /// Defines that source entity should be tagged with specified tag
     /// </summary>
-    [DataField("tag")]
+    [DataField]
     public ProtoId<TagPrototype>? Tag { get; private set; }
 }
