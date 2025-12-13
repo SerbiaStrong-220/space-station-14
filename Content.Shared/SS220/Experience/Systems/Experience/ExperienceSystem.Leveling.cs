@@ -42,16 +42,6 @@ public sealed partial class ExperienceSystem : EntitySystem
     #region Can methods
 
     /// <summary>
-    /// Checks if we can start studying next skill
-    /// image: [xxx]|[oo] -> [xxx][|oo]
-    /// </summary>
-    private bool CanProgressTree(SkillTreeExperienceInfo info, SkillTreePrototype treeProto)
-    {
-
-        return false;
-    }
-
-    /// <summary>
     /// Checks if we can end studying current skill
     /// image: [xx|][ooo] -> [xx][|ooo]
     /// </summary>
@@ -99,27 +89,6 @@ public sealed partial class ExperienceSystem : EntitySystem
     #region Internal methods
 
     /// <summary>
-    /// Handles starting studying next skill
-    /// image: [xxx]|[oo] -> [xxx][|oo]
-    /// </summary>
-    private void InternalProgressTree(Entity<ExperienceComponent> entity, ProtoId<SkillTreePrototype> skillTree)
-    {
-        if (!ResolveInfoAndTree(entity, skillTree, out var info, out var treeProto))
-            return;
-
-        InternalProgressTree(info, treeProto, entity);
-
-        DirtyField(entity.AsNullable(), nameof(ExperienceComponent.Skills));
-    }
-
-    private void InternalProgressTree(SkillTreeExperienceInfo info, SkillTreePrototype skillTree, Entity<ExperienceComponent>? affectedEntity)
-    {
-        DebugTools.Assert(CanProgressTree(info, skillTree), $"Called {nameof(InternalProgressTree)} but tree progress is blocked, info {info} and tree id is {skillTree.ID}");
-        info.Level++;
-
-    }
-
-    /// <summary>
     /// Handles ending studying skill
     /// image: [xx|][ooo] -> [xx][|ooo]
     /// </summary>
@@ -146,6 +115,7 @@ public sealed partial class ExperienceSystem : EntitySystem
 
         // we save meta level progress of sublevel
         info.Sublevel = Math.Max(StartSublevel, info.Sublevel - skillPrototype.LevelInfo.MaximumSublevel);
+        info.Level++;
 
         DirtyField(entity.AsNullable(), nameof(ExperienceComponent.Skills));
 

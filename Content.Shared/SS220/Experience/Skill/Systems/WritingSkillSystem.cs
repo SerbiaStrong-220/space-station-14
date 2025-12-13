@@ -32,7 +32,7 @@ public sealed class WritingSkillSystem : EntitySystem
 
     private void OnMapInit(Entity<WritingSkillComponent> entity, ref PaperSetContentAttemptEvent args)
     {
-        if (entity.Comp.ChangeCaseEach is not null && string.IsNullOrEmpty(args.TransformedContent))
+        if (entity.Comp.ChangeCaseEach is not null && !string.IsNullOrEmpty(args.TransformedContent))
         {
             args.TransformedContent = string.Create(args.TransformedContent.Length, args.TransformedContent, (span, original) =>
             {

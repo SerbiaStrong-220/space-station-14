@@ -3,6 +3,7 @@
   key: br
   name: language-bureaucracy-name
   description: language-bureaucracy-desc
+  color: "#b77924"
   scrambleMethod: !type:SyllablesScrambleMethod
     specialCharacters:
       - character: " "

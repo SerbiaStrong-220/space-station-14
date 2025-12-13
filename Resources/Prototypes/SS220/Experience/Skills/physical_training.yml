@@ -3,8 +3,8 @@
   levelInfo:
     maximumSublevel: 5
   levelDescription:
-    skillName: combat-training-initial-name
-    skillDescription: combat-training-initial-desc
+    skillName: physical-training-initial-name
+    skillDescription: physical-training-initial-desc
   components:
   - type: DisarmOnDamageSkill
     disarmChance: 0.5
@@ -15,8 +15,8 @@
   levelInfo:
     maximumSublevel: 5
   levelDescription:
-    skillName: combat-training-base-name
-    skillDescription: combat-training-base-desc
+    skillName: physical-training-base-name
+    skillDescription: physical-training-base-desc
   components:
   - type: DisarmOnDamageSkill
     disarmChance: 0.5
@@ -27,8 +27,8 @@
   levelInfo:
     maximumSublevel: 5
   levelDescription:
-    skillName: combat-training-trained-name
-    skillDescription: combat-training-trained-desc
+    skillName: physical-training-trained-name
+    skillDescription: physical-training-trained-desc
   components:
   - type: DisarmOnDamageSkill
     disarmChance: 0.3
@@ -39,8 +39,8 @@
   levelInfo:
     maximumSublevel: 1
   levelDescription:
-    skillName: combat-training-professional-name
-    skillDescription: combat-training-professional-desc
+    skillName: physical-training-professional-name
+    skillDescription: physical-training-professional-desc
   components:
   - type: DisarmOnDamageSkill
     disarmChance: 0.2

@@ -33,6 +33,6 @@ public sealed class GrantLanguageSystem : EntitySystem
             return;
         }
 
-        _language.AddLanguages((experienceEntity.Value, languageComponent), entity.Comp.Languages);
+        _language.AddLanguages((experienceEntity.Value, languageComponent), entity.Comp.Languages, canSpeak: entity.Comp.CanSpeak);
     }
 }

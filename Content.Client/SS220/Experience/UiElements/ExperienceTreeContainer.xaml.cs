@@ -212,8 +212,17 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
         };
 
         control.AddChild(background);
-        shader?.SetParameter("Fillness", (fillingRatio + firstValue) / (endValue - firstValue));
-        control.ShaderOverride = shader;
+
+        if (shader != null)
+        {
+            var uniqueShader = shader.Duplicate();
+
+            var fillness = (fillingRatio - firstValue) / (endValue - firstValue);
+            uniqueShader.SetParameter("Fillness", fillness);
+
+            control.ShaderOverride = uniqueShader;
+        }
+
         control.TexturePath = _fullBarResPath.CanonPath;
 
         return control;

@@ -12,4 +12,7 @@ public sealed partial class GrantLanguageComponent : Component
 {
     [DataField(required: true)]
     public HashSet<ProtoId<LanguagePrototype>> Languages = [];
+
+    [DataField]
+    public bool CanSpeak = true;
 }

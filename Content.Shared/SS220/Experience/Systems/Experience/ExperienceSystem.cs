@@ -124,18 +124,12 @@ public sealed partial class ExperienceSystem : EntitySystem
             info.Sublevel = StartSublevel;
         }
 
-        if (!CanProgressTree(info, treeProto))
-        {
-            info.Sublevel = StartSublevel;
-            return;
-        }
-
         const int maxCycles = 20;
         int cycle;
-        bool canProgress = true;
+        var canProgress = true;
         for (cycle = 0; cycle < maxCycles && canProgress; cycle++)
         {
-            canProgress = TryProgressLevel(entity, info, treeProto) && TryProgressTree(info, treeProto);
+            canProgress = TryProgressLevel(entity, info, treeProto);
         }
 
         if (cycle == maxCycles - 1)
