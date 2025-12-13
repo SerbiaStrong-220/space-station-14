@@ -9,6 +9,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Interaction.Components;
+using Content.Shared.Inventory.VirtualItem;
 using Robust.Shared.Input.Binding;
 using Content.Shared.SS220.Input;
 using Content.Shared.SS220.ItemOffer;
@@ -131,6 +132,15 @@ public sealed class ItemOfferSystem : SharedItemOfferSystem
             return;
 
         if (HasComp<UnremoveableComponent>(item))
+            return;
+
+        if (HasComp<VirtualItemComponent>(item))
+            return;
+
+        var ev = new CanOfferItemEvent(user, target);
+        RaiseLocalEvent(item.Value, ref ev, true);
+
+        if (ev.Cancelled)
             return;
 
         var itemReceiver = EnsureComp<ItemReceiverComponent>(target);
