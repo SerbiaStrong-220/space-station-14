@@ -1,0 +1,12 @@
+- type: entity
+  id: ZoneBase
+  abstract: true
+  components:
+  - type: Transform
+    gridTraversal: false
+  - type: Zone
+
+- type: entity
+  parent: ZoneBase
+  id: ZoneDefault
+  name: default zone
