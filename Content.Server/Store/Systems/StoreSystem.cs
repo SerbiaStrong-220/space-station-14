@@ -14,6 +14,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.SS220.Store;
 using Content.Server.StoreDiscount.Systems;
 using Robust.Shared.Utility;
+using Content.Server.Traitor.Uplink;
 
 namespace Content.Server.Store.Systems;
 
@@ -28,6 +29,7 @@ public sealed partial class StoreSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!; //SS220-insert-currency-doafter
     [Dependency] private readonly StoreDiscountSystem _discount = default!; //SS220-nukeops-discount
+    [Dependency] private readonly UplinkSystem _uplink = default!; // SS220-TraitorDynamics-uplink-fix
 
     public override void Initialize()
     {
@@ -154,14 +156,16 @@ public sealed partial class StoreSystem : EntitySystem
 
     private void OnImplantActivate(EntityUid uid, StoreComponent component, OpenUplinkImplantEvent args)
     {
-        //ss220 fix uplink implant start (#2766)
+        // SS220-TraitorDynamics-uplink-fix begin
         if (component.AccountOwner == null)
         {
-            _mind.TryGetMind(args.Performer, out var mind, out _);
-            component.AccountOwner = mind;
+            var dynamic = _dynamics.GetCurrentDynamic();
+            var useDynamic = dynamic != null;
+            var newBalance = component.Balance.Values.Sum();
+            _uplink.AddUplink(args.Performer, newBalance, uid, useDynamic, useDynamic);
+            // sooo if we have dynamics, then there should be discounts
         }
-        //ss220 fix uplink implant end (#2766)
-
+        // SS220-TraitorDynamics-uplink-fix end
         ToggleUi(args.Performer, uid, component);
     }
 

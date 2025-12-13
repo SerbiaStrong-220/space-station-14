@@ -125,6 +125,11 @@
     timeToCook: 120
     cookingResult: FoodMeatCooked
   #SS220-grill-update-2 end
+  #ss220 fix meatwheat construction start
+  - type: Construction
+    graph: ClumpToMeat
+    node: make meat
+  #ss220 fix meatwheat construction end
 
 - type: entity
   parent: FoodMeatRawBase
