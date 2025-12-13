@@ -139,7 +139,7 @@ namespace Content.Server.Atmos.EntitySystems
             // SS220 Fix mob damage inside Dark Reaper begin
             //flammable.FireStacks += component.FireStacks;
 
-            AdjustFireStacks(uid, component.FireStacks, flammable);
+            AdjustFireStacks(otherEnt, component.FireStacks, flammable);
             // SS220 Fix mob damage inside Dark Reaper end
             Ignite(otherEnt, uid, flammable);
             component.Count--;
