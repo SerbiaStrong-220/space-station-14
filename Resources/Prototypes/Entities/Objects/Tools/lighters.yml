@@ -129,15 +129,15 @@
   description: "A rugged metal lighter, lasts quite a while."
   components:
   - type: Sprite
-    sprite: Objects/Tools/Lighters/lighters.rsi
+    sprite: SS220/Objects/Tools/Lighters/lighters.rsi #SS220 resprite
     layers:
     - state: zippo_icon_base
       map: ["base"]
-    - state: zippo_top
-      map: ["top"]
-      visible: false
     - state: zippo_open
       map: ["open"]
+      visible: false
+    - state: zippo_top
+      map: ["top"]
       visible: false
     - state: lighter_flame
       map: ["flame"]
@@ -225,15 +225,15 @@
   description: "A rugged golden lighter, lasts quite a while. Engravings serve no tactical advantage whatsoever."
   components:
   - type: Sprite
-    sprite: Objects/Tools/Lighters/lighters.rsi
+    sprite: SS220/Objects/Tools/Lighters/lighters.rsi #SS220 resprite
     layers:
     - state: zippo_engraved_icon_base
       map: ["base"]
-    - state: zippo_top
-      map: ["top"]
-      visible: false
     - state: zippo_engraved_open
       map: ["open"]
+      visible: false
+    - state: zippo_top
+      map: ["top"]
       visible: false
     - state: lighter_flame
       map: ["flame"]
