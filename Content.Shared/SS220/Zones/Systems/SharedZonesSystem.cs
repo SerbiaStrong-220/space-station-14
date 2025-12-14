@@ -159,22 +159,22 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return result;
     }
 
-    public Box2 AttachToLattice(EntityUid parent, Box2 box)
+    public Box2 AttachToGrid(Box2 box, EntityUid parent)
     {
-        var latticeSize = TryComp<MapGridComponent>(parent, out var mapGrid) ? mapGrid.TileSize : 1f;
-        return MathHelperExtensions.AttachToLattice(box, latticeSize);
+        var gridSize = TryComp<MapGridComponent>(parent, out var mapGrid) ? mapGrid.TileSize : 1f;
+        return MathHelperExtensions.AttachToGrid(box, gridSize);
     }
 
-    public IEnumerable<Box2> AttachToLattice(EntityUid parent, IEnumerable<Box2> area)
+    public List<Box2> AttachToGrid(List<Box2> area, EntityUid parent)
     {
-        var latticeSize = TryComp<MapGridComponent>(parent, out var mapGrid) ? mapGrid.TileSize : 1f;
-        return MathHelperExtensions.AttachToLattice(area, latticeSize);
+        var gridSize = TryComp<MapGridComponent>(parent, out var mapGrid) ? mapGrid.TileSize : 1f;
+        return MathHelperExtensions.AttachToGrid(area, gridSize);
     }
 
-    public IEnumerable<Box2> RecalculateArea(IEnumerable<Box2> area, EntityUid parent, bool attachToLattice = false)
+    public List<Box2> RecalculateArea(List<Box2> area, EntityUid parent, bool attachToGrid = false)
     {
-        if (attachToLattice)
-            area = AttachToLattice(parent, area);
+        if (attachToGrid)
+            area = AttachToGrid(area, parent);
 
         area = MathHelperExtensions.GetNonOverlappingBoxes(area);
         area = MathHelperExtensions.UnionInEqualSizedBoxes(area);

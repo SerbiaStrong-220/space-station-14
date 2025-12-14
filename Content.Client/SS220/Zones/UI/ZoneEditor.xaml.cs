@@ -115,7 +115,7 @@ public sealed partial class ZoneEditor : PanelContainer
         AttachToGridButton.OnToggled += e =>
         {
             if (_boxLayoutManager.Active)
-                _boxLayoutManager.AttachToLattice = e.Pressed;
+                _boxLayoutManager.AttachToGrid = e.Pressed;
         };
 
         ParentNetIDLineEdit.OnFocusExit += args =>
@@ -268,13 +268,13 @@ public sealed partial class ZoneEditor : PanelContainer
         {
             case BoxLayoutMode.Adding:
                 _boxLayoutManager.StartNew();
-                _boxLayoutManager.AttachToLattice = AttachToGridButton.Pressed;
+                _boxLayoutManager.AttachToGrid = AttachToGridButton.Pressed;
                 break;
 
             case BoxLayoutMode.Cutting:
                 _boxLayoutManager.StartNew();
-                _boxLayoutManager.AttachToLattice = AttachToGridButton.Pressed;
-                _boxLayoutManager.SetColor(Color.Red);
+                _boxLayoutManager.AttachToGrid = AttachToGridButton.Pressed;
+                _boxLayoutManager.OverlayOverrideColor = Color.Red;
                 break;
         }
 
@@ -327,7 +327,7 @@ public sealed partial class ZoneEditor : PanelContainer
 
             case BoxLayoutMode.Cutting:
                 var cutter = args.Box;
-                newArea = [.. MathHelperExtensions.SubstructBox(newArea, cutter)];
+                newArea = MathHelperExtensions.SubstructBox(newArea, cutter);
                 break;
         }
 
@@ -531,7 +531,7 @@ public sealed partial class ZoneEditor : PanelContainer
             var changedParent = changed.Parent;
 
             var result = originalParent == changedParent
-                ? [.. MathHelperExtensions.SubstructBoxes(changed.Area, original.Area)]
+                ? MathHelperExtensions.SubstructBoxes(changed.Area, original.Area)
                 : changed.Area.ToList();
 
             return (changedParent, result);

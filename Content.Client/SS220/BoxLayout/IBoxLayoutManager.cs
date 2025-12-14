@@ -11,17 +11,19 @@ public interface IBoxLayoutManager
     event Action<BoxArgs>? Ended;
     event Action? Cancelled;
 
-    EntityUid? Parent { get; }
-    Vector2? Point1 { get; }
-    Vector2? Point2 { get; }
-    Color Color { get; }
     bool Active { get; }
-    bool AttachToLattice { get; set; }
+
+    EntityCoordinates? FirstPoint { get; }
+
+    Color? OverlayOverrideColor { get; set; }
+
+    bool AttachToGrid { get; set; }
 
     void Initialize();
-    void Cancel();
+
     void StartNew();
-    void SetColor(Color? newColor);
+
+    void Cancel();
+
     void SetOverlay(bool enabled);
-    MapCoordinates GetMouseMapCoordinates();
 }

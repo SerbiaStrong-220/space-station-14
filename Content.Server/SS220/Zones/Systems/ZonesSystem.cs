@@ -157,10 +157,10 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 
     public void RecalculateZoneAreas(Entity<ZoneComponent> ent)
     {
-        var area = ent.Comp.Area.ToList().AsEnumerable();
+        var area = ent.Comp.Area.ToList();
 
         var parent = Transform(ent).ParentUid;
-        ent.Comp.Area = [.. RecalculateArea(area, parent)];
+        ent.Comp.Area = RecalculateArea(area, parent);
 
         Dirty(ent);
     }
