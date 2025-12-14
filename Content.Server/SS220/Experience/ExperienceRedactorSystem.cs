@@ -38,7 +38,7 @@ public sealed class ExperienceRedactorSystem : EntitySystem
             .SelectMany(list => list)
             .ToDictionary(item => item.Item1, item => item.Item2.Info);
 
-        var afterGainedEv = new AfterExperienceInitComponentGained(InitGainedExperienceType.AdminForced);
+        var afterGainedEv = new RecalculateEntityExperience();
         RaiseLocalEvent(targetEntity, ref afterGainedEv);
     }
 
@@ -74,7 +74,7 @@ public sealed class ExperienceRedactorSystem : EntitySystem
 
         playerChangedComp.SpentSublevelPoints += totalPointsSpend;
 
-        var afterInitEv = new AfterExperienceInitComponentGained(InitGainedExperienceType.BackgroundInit);
+        var afterInitEv = new RecalculateEntityExperience();
         RaiseLocalEvent(playerEntity, ref afterInitEv);
 
         DirtyField(playerEntity, experienceComponent, nameof(ExperienceComponent.FreeSublevelPoints));

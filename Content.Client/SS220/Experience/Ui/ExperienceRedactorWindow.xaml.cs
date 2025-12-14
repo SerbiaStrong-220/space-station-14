@@ -151,8 +151,6 @@ public sealed partial class ExperienceRedactorWindow : FancyWindow
         BypassKnowledgeStatus.SetMessage(_entityManager.HasComponent<BypassKnowledgeCheckComponent>(entity)
                                             ? Loc.GetString("experience-view-redactor-bypass-knowledge")
                                             : Loc.GetString("experience-view-redactor-no-bypass-knowledge"));
-
-        InitMaskShower.SetMessage(Loc.GetString("experience-view-redactor-init-level", ("UpperMask", (InitGainedExperienceType)(1 << BitOperations.Log2(entity.Comp.InitMask)))));
     }
 
     private void UpdateKnowledge(ExperienceData data)

@@ -2,10 +2,10 @@
   id: BaseSkillAddition
   skills:
     Piloting:
-      skillLevel: 1
+      level: 1
     CombatTraining:
-      skillLevel: 2
-      skillSubLevel: 1
+      level: 3
+      subLevel: 0
   knowledges:
   - InformedPersonalKnowledge
   addSublevelPoints: 10

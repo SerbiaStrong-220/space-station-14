@@ -78,13 +78,6 @@ public sealed partial class ExperienceComponent : Component
     [ViewVariables(VVAccess.ReadOnly)]
     public HashSet<ProtoId<KnowledgePrototype>> ResolvedKnowledge = new();
 
-    /// <summary>
-    /// This mask used to handle reiniting of experience to correctly process inits
-    /// </summary>
-    [AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadOnly)]
-    public byte InitMask = (byte)InitGainedExperienceType.NotInitialized;
-
     [AutoNetworkedField]
     [ViewVariables(VVAccess.ReadWrite)]
     public int FreeSublevelPoints = 0;
@@ -103,7 +96,7 @@ public sealed partial class SkillTreeExperienceInfo
         get => _level;
         set
         {
-            DebugTools.Assert(_level >= ExperienceSystem.StartSkillLevel);
+            DebugTools.Assert(value >= ExperienceSystem.StartSkillLevel);
             _level = value;
         }
     }

@@ -1,9 +1,9 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.SS220.Experience.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
-using Serilog;
 
 namespace Content.Shared.SS220.Experience;
 
@@ -32,8 +32,8 @@ public sealed class SkillPrototype : IPrototype, ISerializationHooks
 
     void ISerializationHooks.AfterDeserialization()
     {
-        if (LevelInfo.MaximumSublevel < 2)
-            Logger.GetSawmill("skillPrototype").Error($"{nameof(LevelInfo.MaximumSublevel)} cant be less than 2! Error in {nameof(SkillPrototype)} with id {ID}");
+        if (LevelInfo.MaximumSublevel < ExperienceSystem.StartSublevel)
+            Logger.GetSawmill("skillPrototype").Error($"{nameof(LevelInfo.MaximumSublevel)} cant be less than {ExperienceSystem.StartSublevel}! Error in {nameof(SkillPrototype)} with id {ID}");
 
     }
 }
@@ -67,8 +67,8 @@ public partial struct SkillLevelInfo : ISerializationHooks
 
     void ISerializationHooks.AfterDeserialization()
     {
-        if (MaximumSublevel < 2)
-            Logger.GetSawmill("skillLevelInfo").Error($"{nameof(MaximumSublevel)} cant be less than 2!");
+        if (MaximumSublevel < ExperienceSystem.StartSublevel)
+            Logger.GetSawmill("skillLevelInfo").Error($"{nameof(MaximumSublevel)} cant be less than {ExperienceSystem.StartSublevel}!");
 
     }
 }

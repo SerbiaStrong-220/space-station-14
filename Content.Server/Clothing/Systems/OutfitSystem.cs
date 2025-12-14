@@ -123,8 +123,8 @@ public sealed class OutfitSystem : EntitySystem
         }
 
         // SS220-add-experience-init-event-post-spawn
-        var afterProcessEv = new AfterExperienceInitComponentGained();
-        RaiseLocalEvent(target, ref afterProcessEv);
+        var recalculateEv = new RecalculateEntityExperience();
+        RaiseLocalEvent(target, ref recalculateEv);
         // SS220-add-experience-init-event-post-spawn
 
         return true;

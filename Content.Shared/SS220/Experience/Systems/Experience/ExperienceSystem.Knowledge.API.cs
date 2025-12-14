@@ -43,12 +43,7 @@ public sealed partial class ExperienceSystem : EntitySystem
             return false;
 
         entity.Comp.ConstantKnowledge.Remove(knowledge);
-        entity.Comp.ResolvedKnowledge.Remove(knowledge);
-
-        foreach (var additionalKnowledgeToRemove in knowledgePrototype.AdditionalKnowledges)
-        {
-            entity.Comp.ResolvedKnowledge.Remove(additionalKnowledgeToRemove);
-        }
+        entity.Comp.ResolvedKnowledge.Clear();
 
         foreach (var constantKnowledge in entity.Comp.ConstantKnowledge)
         {

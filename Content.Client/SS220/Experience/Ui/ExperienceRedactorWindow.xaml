@@ -28,7 +28,6 @@
                 <BoxContainer Name="ExperienceVerification" Orientation="Horizontal">
                     <RichTextLabel Name="BypassSkillCheckStatus" Text="bypass skill check holder" Margin="5 0"/>
                     <RichTextLabel Name="BypassKnowledgeStatus" Text="bypass knowledge holder" Margin="5 0"/>
-                    <RichTextLabel Name="InitMaskShower" Text="init mask holder" Margin="5 0"/>
                 </BoxContainer>
                 <ScrollContainer HScrollEnabled="False" VerticalExpand="True" HorizontalExpand="True" Margin="0 5">
                     <BoxContainer Name="SkillRedactor" VerticalExpand="True" HorizontalExpand="True" Orientation="Vertical" Margin="0 5">

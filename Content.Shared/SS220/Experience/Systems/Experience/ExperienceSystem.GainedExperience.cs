@@ -1,18 +1,14 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Diagnostics;
-using Robust.Shared.Utility;
-
 namespace Content.Shared.SS220.Experience.Systems;
 
-/// <summary>
-/// Handles initing experience, exists only because of tons of ways to spawn in yourself
-/// </summary>
 public sealed partial class ExperienceSystem : EntitySystem
 {
     private void InitializeGainedExperience()
     {
-        SubscribeLocalEvent<ExperienceComponent, AfterExperienceInitComponentGained>(OnPlayerMobAfterSpawned);
+        SubscribeLocalEvent<ExperienceComponent, RecalculateEntityExperience>(OnRecalculateEntityExperience);
+
+        SubscribeLocalEvent<AntagFreeSublevelPointsAddComponent, SublevelAdditionPointInitialResolve>(AddFreeSublevelPointOnSublevelAdditionPointInitialResolve);
 
         SubscribeAddComponentToInit<AdminForcedExperienceAddComponent>(SkillForceSetOnSkillTreeAdded, KnowledgeForceSetOnKnowledgeInitialResolve, ForceSetAdditionOnSublevelAdditionPointInitialResolve);
         SubscribeAddComponentToInit<RoleExperienceAddComponent>(SkillAddOnSkillTreeAdded, KnowledgeAddOnKnowledgeInitialResolve, AdditionOnSublevelAdditionPointInitialResolve);
@@ -38,25 +34,18 @@ public sealed partial class ExperienceSystem : EntitySystem
         SubscribeLocalEvent<T, SublevelAdditionPointInitialResolve>(handlerAdditionPoint);
     }
 
-    private void OnPlayerMobAfterSpawned(Entity<ExperienceComponent> entity, ref AfterExperienceInitComponentGained args)
+    private void OnRecalculateEntityExperience(Entity<ExperienceComponent> entity, ref RecalculateEntityExperience args)
     {
-        InitializeExperienceComp(entity, args.Type);
+        InitializeExperienceComp(entity);
     }
 
-    private void InitializeExperienceComp(Entity<ExperienceComponent> entity, InitGainedExperienceType type)
+    private void AddFreeSublevelPointOnSublevelAdditionPointInitialResolve<T>(Entity<T> entity, ref SublevelAdditionPointInitialResolve args) where T : BaseFreeSublevelPointsAddComponent
     {
-        var byteType = (byte)type;
-        // This handles re initing experience if same init event type called again
-        var shiftedType = byteType << 1;
-        if (shiftedType < entity.Comp.InitMask)
-        {
-            // prevent release client from unexpected spam
-#if !FULL_RELEASE
-            Log.Debug($"Got init event for entity {ToPrettyString(entity)}, event was dropped. Current init mask is {entity.Comp.InitMask}, event init type was {type}");
-#endif
-            return;
-        }
+        args.FreeSublevelPoints += entity.Comp.AddFreeSublevelPoints;
+    }
 
+    private void InitializeExperienceComp(Entity<ExperienceComponent> entity)
+    {
         foreach (var treeProto in _prototype.EnumeratePrototypes<SkillTreePrototype>())
         {
             if (!treeProto.CanBeShownOnInit)
@@ -66,9 +55,7 @@ public sealed partial class ExperienceSystem : EntitySystem
             InitExperienceSkillTree(entity, treeProto, false);
         }
 
-        entity.Comp.InitMask |= byteType;
-
-        EnsureSkill(entity!);
+        EnsureSkillEffectApplied(entity!);
 
         var addSublevelEvent = new SublevelAdditionPointInitialResolve(0);
         RaiseLocalEvent(entity, ref addSublevelEvent);

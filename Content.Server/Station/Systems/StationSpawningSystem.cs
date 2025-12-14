@@ -166,11 +166,8 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
         DoJobSpecials(job, entity.Value);
         _identity.QueueIdentityUpdate(entity.Value);
         // SS220-add-experience-init-event-post-spawn
-        var afterProcessEv = new AfterExperienceInitComponentGained()
-        {
-            Type = job is null ? InitGainedExperienceType.MapInit : InitGainedExperienceType.JobInit
-        };
-        RaiseLocalEvent(entity.Value, ref afterProcessEv);
+        var recalculateEv = new RecalculateEntityExperience();
+        RaiseLocalEvent(entity.Value, ref recalculateEv);
         // SS220-add-experience-init-event-post-spawn
         return entity.Value;
     }

@@ -159,15 +159,10 @@ public sealed partial class ExperienceSystem : EntitySystem
     /// <summary>
     /// Easy-to-use-slow-to-compute-method for ensuring components on skill entity
     /// </summary>
-    public void EnsureSkill(Entity<ExperienceComponent?> entity)
+    public void EnsureSkillEffectApplied(Entity<ExperienceComponent?> entity)
     {
         if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
             return;
-
-        // if (MetaData(entity).EntityLifeStage < EntityLifeStage.MapInitialized)
-        // {
-        //     _entityToEnsure.Add(entity.Owner);
-        // }
 
         // TODO this seem can work without mapinit of entity so I need to add cache and resolve in update func;
         EnsureSkill(entity!, ExperienceComponent.ContainerId);

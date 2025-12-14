@@ -54,7 +54,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         }
         DirtyField(entity!, nameof(ExperienceComponent.EarnedSkillSublevel));
 
-        InitializeExperienceComp(entity, InitGainedExperienceType.MapInit);
+        InitializeExperienceComp(entity);
     }
 
     public bool TryChangeStudyingProgress(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, LearningInformation info)
@@ -122,7 +122,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         entity.Comp.Skills.Add(skillTree, ev.Info);
         entity.Comp.StudyingProgress.Add(skillTree, StartLearningProgress);
 
-        DirtyFields(entity.AsNullable(), null, [nameof(ExperienceComponent.Skills), nameof(ExperienceComponent.InitMask)]);
+        DirtyField(entity!, nameof(ExperienceComponent.Skills));
     }
 
     private void ResolveInitLeveling(Entity<ExperienceComponent> entity, SkillTreeExperienceInfo info, ProtoId<SkillTreePrototype> tree)
