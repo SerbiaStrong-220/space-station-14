@@ -2,6 +2,8 @@
   id: BureaucracyInitial
   levelInfo:
     maximumSublevel: 7
+    levelUpPopup : bureaucracy-initial-level-up-popup
+    sublevelUpPopup: bureaucracy-initial-sublevel-up-popup
   levelDescription:
     skillName: bureaucracy-initial-name
     skillDescription: bureaucracy-initial-desc
@@ -14,6 +16,8 @@
   id: BureaucracyTrained
   levelInfo:
     maximumSublevel: 7
+    levelUpPopup: bureaucracy-trained-level-up-popup
+    sublevelUpPopup: bureaucracy-trained-sublevel-up-popup
   levelDescription:
     skillName: bureaucracy-trained-name
     skillDescription: bureaucracy-trained-desc
@@ -24,6 +28,8 @@
   id: BureaucracyProfessional
   levelInfo:
     maximumSublevel: 1
+    levelUpPopup: bureaucracy-professional-level-up-popup
+    sublevelUpPopup: bureaucracy-professional-sublevel-up-popup
   levelDescription:
     skillName: bureaucracy-professional-name
     skillDescription: bureaucracy-professional-desc

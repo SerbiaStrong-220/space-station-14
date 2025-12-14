@@ -17,8 +17,7 @@ public sealed class ConstructionDoAfterSkillSystem : BaseDoAfterSkillSystem<Cons
         if (!TryComp<StackComponent>(args.Args.Used, out var stack))
             return;
 
-        if (entity.Comp.ComplexMaterials.Contains(stack.StackTypeId));
-
-        base.OnDoAfterEnd(entity, ref args);
+        if (entity.Comp.ComplexMaterials.Contains(stack.StackTypeId))
+            base.OnDoAfterEnd(entity, ref args);
     }
 }

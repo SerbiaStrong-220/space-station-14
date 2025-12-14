@@ -27,16 +27,16 @@ public sealed partial class ExperienceSystem : EntitySystem
         return ResolveSkillPrototypeInternal(info.Level - 1, treeProto, out skillPrototype);
     }
 
-    private bool TryGetCurrentSkillPrototype(SkillTreeExperienceInfo info, ProtoId<SkillTreePrototype> treeProto, [NotNullWhen(true)] out SkillPrototype? skillPrototype)
+    private bool ResolveCurrentSkillPrototype(SkillTreeExperienceInfo info, ProtoId<SkillTreePrototype> treeProto, [NotNullWhen(true)] out SkillPrototype? skillPrototype)
     {
         skillPrototype = null;
         if (!_prototype.Resolve(treeProto, out var resolvedProto))
             return false;
 
-        return TryGetCurrentSkillPrototype(info, resolvedProto, out skillPrototype);
+        return ResolveCurrentSkillPrototype(info, resolvedProto, out skillPrototype);
     }
 
-    private bool TryGetCurrentSkillPrototype(SkillTreeExperienceInfo info, SkillTreePrototype treeProto, [NotNullWhen(true)] out SkillPrototype? skillPrototype)
+    private bool ResolveCurrentSkillPrototype(SkillTreeExperienceInfo info, SkillTreePrototype treeProto, [NotNullWhen(true)] out SkillPrototype? skillPrototype)
     {
         return ResolveSkillPrototypeInternal(info.Level, treeProto, out skillPrototype);
     }

@@ -50,13 +50,24 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (info.Level >= treeProto.SkillTree.Count)
             return false;
 
-        if (!TryGetCurrentSkillPrototype(info, treeProto, out var skillProto))
+        if (!ResolveCurrentSkillPrototype(info, treeProto, out var skillProto))
+            return false;
+
+        if (!TryGetNextSkillPrototype(info, treeProto, out var nextSkillProto))
+            return false;
+
+        return CanProgressLevel(info, skillProto, nextSkillProto);
+    }
+
+    /// <summary>
+    /// <inheritdoc cref="CanProgressLevel(SkillTreeExperienceInfo, SkillTreePrototype)" />
+    /// </summary>
+    private bool CanProgressLevel(SkillTreeExperienceInfo info, SkillPrototype skillProto, SkillPrototype nextSkillProto)
+    {
+        if (!nextSkillProto.LevelInfo.CanStartStudying)
             return false;
 
         if (!skillProto.LevelInfo.CanEndStudying)
-            return false;
-
-        if (TryGetNextSkillPrototype(info, treeProto, out var nextSkillProto) && !nextSkillProto.LevelInfo.CanStartStudying)
             return false;
 
         return info.Sublevel >= skillProto.LevelInfo.MaximumSublevel;
@@ -77,7 +88,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (info.Level >= treeProto.SkillTree.Count)
             return false;
 
-        if (!TryGetCurrentSkillPrototype(info, treeProto, out var studyingSkillProto))
+        if (!ResolveCurrentSkillPrototype(info, treeProto, out var studyingSkillProto))
             return false;
 
         // We care of start only at start
@@ -107,11 +118,8 @@ public sealed partial class ExperienceSystem : EntitySystem
     {
         DebugTools.Assert(CanProgressLevel(info, skillTree));
 
-        if (!TryGetCurrentSkillPrototype(info, skillTree, out var skillPrototype))
-        {
-            Log.Error($"Cant get current skill proto for tree {skillTree.ID} and info is {info}");
+        if (!ResolveCurrentSkillPrototype(info, skillTree, out var skillPrototype))
             return;
-        }
 
         // not logging cause all false in method logged
         if (!TryAddSkillToSkillEntity(entity, ExperienceComponent.ContainerId, skillPrototype))
@@ -127,6 +135,8 @@ public sealed partial class ExperienceSystem : EntitySystem
         info.Level++;
 
         DirtyField(entity.AsNullable(), nameof(ExperienceComponent.Skills));
+
+        _popup.PopupClient(Loc.GetString(skillPrototype.LevelInfo.LevelUpPopup), entity, entity, Popups.PopupType.Medium);
 
         _adminLogManager.Add(LogType.Experience, $"{ToPrettyString(entity):user} gained new skill");
 
@@ -147,13 +157,19 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (!entity.Comp.StudyingProgress.TryGetValue(skillTree, out var _))
             return;
 
-        if (!ResolveInfoAndTree(entity, skillTree, out var info, out var _))
+        if (!ResolveInfoAndTree(entity, skillTree, out var info, out var skillTreePrototype))
+            return;
+
+        if (!ResolveCurrentSkillPrototype(info, skillTree, out var skillPrototype))
             return;
 
         // Do not save overflow progress of it
         entity.Comp.StudyingProgress[skillTree] = StartLearningProgress;
         entity.Comp.EarnedSkillSublevel[skillTree]++;
         info.Sublevel++;
+
+        if (!CanProgressLevel(info, skillTreePrototype))
+            _popup.PopupClient(Loc.GetString(skillPrototype.LevelInfo.SublevelUpPopup), entity, entity);
 
         DirtyFields(entity.AsNullable(), null, [nameof(ExperienceComponent.Skills), nameof(ExperienceComponent.StudyingProgress)]);
     }

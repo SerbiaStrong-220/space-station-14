@@ -2,6 +2,8 @@
   id: PilotingBase
   levelInfo:
     maximumSublevel: 1
+    levelUpPopup: piloting-base-level-up-popup
+    sublevelUpPopup: piloting-base-sublevel-up-popup
   levelDescription:
     skillName: piloting-base-name
     skillDescription: piloting-base-desc
@@ -10,6 +12,8 @@
   id: PilotingCombat
   levelInfo:
     maximumSublevel: 1
+    levelUpPopup: piloting-combat-level-up-popup
+    sublevelUpPopup: piloting-combat-sublevel-up-popup
   levelDescription:
     skillName: piloting-combat-name
     skillDescription: piloting-combat-desc

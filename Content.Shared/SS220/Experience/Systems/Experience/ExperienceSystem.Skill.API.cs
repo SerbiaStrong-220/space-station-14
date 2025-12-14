@@ -29,7 +29,7 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     #region Skill getters
 
-    public bool HaveSkill(Entity<ExperienceComponent?> entity, ProtoId<SkillPrototype> skill)
+    public bool HaveSkill(Entity<ExperienceComponent?> entity, [ForbidLiteral] ProtoId<SkillPrototype> skill)
     {
         if (!_prototype.Resolve(skill, out var _))
             return false;
@@ -52,7 +52,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         return skillTree.SkillTree.Take(treeInfo.Level).Contains(skill);
     }
 
-    public bool TryGetAcquiredSkills(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, ref HashSet<ProtoId<SkillPrototype>> resultSkills)
+    public bool TryGetAcquiredSkills(Entity<ExperienceComponent?> entity, [ForbidLiteral] ProtoId<SkillTreePrototype> skillTree, ref HashSet<ProtoId<SkillPrototype>> resultSkills)
     {
         if (!_prototype.Resolve(skillTree, out var treeProto))
             return false;

@@ -47,11 +47,11 @@ public partial struct SkillLevelInfo : ISerializationHooks
     [DataField]
     public int MaximumSublevel;
 
-    [DataField]
-    public LocId LevelUpPopup = "experience-skill-level-up-base-popup";
+    [DataField(required: true)]
+    public LocId LevelUpPopup;
 
-    [DataField]
-    public LocId? SublevelUpPopup = null;
+    [DataField(required: true)]
+    public LocId SublevelUpPopup;
 
     /// <summary>
     /// Defines if this skill can be started studying

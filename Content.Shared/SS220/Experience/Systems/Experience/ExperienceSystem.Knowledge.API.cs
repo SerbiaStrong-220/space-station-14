@@ -86,7 +86,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         return true;
     }
 
-    public bool HaveKnowledge(Entity<ExperienceComponent?> entity, ProtoId<KnowledgePrototype> knowledge)
+    public bool HaveKnowledge(Entity<ExperienceComponent?> entity, [ForbidLiteral] ProtoId<KnowledgePrototype> knowledge)
     {
         if (HasComp<BypassKnowledgeCheckComponent>(entity))
             return true;
