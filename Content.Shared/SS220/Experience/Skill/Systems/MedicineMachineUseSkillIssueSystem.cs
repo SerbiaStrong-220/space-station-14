@@ -5,7 +5,7 @@ using Content.Shared.SS220.Experience.Systems;
 
 namespace Content.Shared.SS220.Experience.Skill.Systems;
 
-public sealed class MedicineMachineUseSkillSystem : EntitySystem
+public sealed class MedicineMachineUseSkillIssueSystem : EntitySystem
 {
     [Dependency] private readonly ExperienceSystem _experience = default!;
 
@@ -13,20 +13,20 @@ public sealed class MedicineMachineUseSkillSystem : EntitySystem
     {
         base.Initialize();
 
-        _experience.RelayEventToSkillEntity<MedicineMachineUseSkillComponent, GetHealthAnalyzerShuffleChance>();
-        _experience.RelayEventToSkillEntity<MedicineMachineUseSkillComponent, GetDefibrillatorUseChances>();
+        _experience.RelayEventToSkillEntity<MedicineMachineUseSkillIssueComponent, GetHealthAnalyzerShuffleChance>();
+        _experience.RelayEventToSkillEntity<MedicineMachineUseSkillIssueComponent, GetDefibrillatorUseChances>();
 
-        SubscribeLocalEvent<MedicineMachineUseSkillComponent, GetHealthAnalyzerShuffleChance>(OnGetHealthAnalyzerShuffleChance);
-        SubscribeLocalEvent<MedicineMachineUseSkillComponent, GetDefibrillatorUseChances>(OnGetDefibrillatorUseChances);
+        SubscribeLocalEvent<MedicineMachineUseSkillIssueComponent, GetHealthAnalyzerShuffleChance>(OnGetHealthAnalyzerShuffleChance);
+        SubscribeLocalEvent<MedicineMachineUseSkillIssueComponent, GetDefibrillatorUseChances>(OnGetDefibrillatorUseChances);
     }
 
-    private void OnGetHealthAnalyzerShuffleChance(Entity<MedicineMachineUseSkillComponent> entity, ref GetHealthAnalyzerShuffleChance args)
+    private void OnGetHealthAnalyzerShuffleChance(Entity<MedicineMachineUseSkillIssueComponent> entity, ref GetHealthAnalyzerShuffleChance args)
     {
         var newChance = ComputeNewChance(entity.Comp.HealthAnalyzerInfoShuffleChance, args.ShuffleChance);
         args.ShuffleChance = MathF.Max(newChance, 0f);
     }
 
-    private void OnGetDefibrillatorUseChances(Entity<MedicineMachineUseSkillComponent> entity, ref GetDefibrillatorUseChances args)
+    private void OnGetDefibrillatorUseChances(Entity<MedicineMachineUseSkillIssueComponent> entity, ref GetDefibrillatorUseChances args)
     {
         var newFailureChance = ComputeNewChance(entity.Comp.DefibrillatorFailureChance, args.FailureChance);
         var newSelfDamageChance = ComputeNewChance(entity.Comp.DefibrillatorSelfDamageChance, args.SelfDamageChance);

@@ -8,7 +8,7 @@
     skillName: bureaucracy-initial-name
     skillDescription: bureaucracy-initial-desc
   components:
-  - type: WritingSkill
+  - type: WritingSkillIssue
     changeCaseEach: 2
     shuffleMarkupTags: true
 
@@ -21,8 +21,8 @@
   levelDescription:
     skillName: bureaucracy-trained-name
     skillDescription: bureaucracy-trained-desc
-  components:
-  - type: WritingSkill
+  removeComponents:
+  - type: WritingSkillIssue
 
 - type: skill
   id: BureaucracyProfessional
@@ -34,7 +34,8 @@
     skillName: bureaucracy-professional-name
     skillDescription: bureaucracy-professional-desc
   components:
-  - type: WritingSkill
   - type: GrantLanguage
     languages:
     - Bureaucracy
+  removeComponents:
+  - type: WritingSkillIssue

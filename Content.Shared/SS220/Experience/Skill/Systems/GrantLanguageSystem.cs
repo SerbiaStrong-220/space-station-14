@@ -21,7 +21,7 @@ public sealed class GrantLanguageSystem : EntitySystem
 
     private void OnMapInit(Entity<GrantLanguageComponent> entity, ref MapInitEvent _)
     {
-        if (!_experience.TryGetExperienceEntityFromSkillEntity(entity.Owner, out var experienceEntity))
+        if (!_experience.ResolveExperienceEntityFromSkillEntity(entity.Owner, out var experienceEntity))
         {
             Log.Error($"Cant get owner of skill entity {ToPrettyString(entity)}");
             return;

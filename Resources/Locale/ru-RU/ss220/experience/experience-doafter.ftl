@@ -1,2 +1,4 @@
 construction-fail-with-reinforced-material = Работа с таким материалом даётся Вам с трудом!
-healing-item-use-failure = Ваша рука соскользнула, придётся начинать сначала!
+
+healing-item-use-failure = Ваша рука соскользнула!
+injector-use-failure = Шприц выскользнул и повредил { $target }!

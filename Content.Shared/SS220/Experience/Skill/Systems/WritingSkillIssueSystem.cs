@@ -10,7 +10,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.Experience.Skill.Systems;
 
-public sealed class WritingSkillSystem : EntitySystem
+public sealed class WritingSkillIssueSystem : EntitySystem
 {
     [Dependency] private readonly ExperienceSystem _experience = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
@@ -27,10 +27,10 @@ public sealed class WritingSkillSystem : EntitySystem
 
         _experience.RelayEventToSkillEntity<DisarmChanceChangerSkillComponent, PaperSetContentAttemptEvent>();
 
-        SubscribeLocalEvent<WritingSkillComponent, PaperSetContentAttemptEvent>(OnMapInit);
+        SubscribeLocalEvent<WritingSkillIssueComponent, PaperSetContentAttemptEvent>(OnMapInit);
     }
 
-    private void OnMapInit(Entity<WritingSkillComponent> entity, ref PaperSetContentAttemptEvent args)
+    private void OnMapInit(Entity<WritingSkillIssueComponent> entity, ref PaperSetContentAttemptEvent args)
     {
         if (entity.Comp.ChangeCaseEach is not null && !string.IsNullOrEmpty(args.TransformedContent))
         {

@@ -45,7 +45,7 @@ public sealed class DisarmOnDamageSkillSystem : EntitySystem
         if (!rand.Prob(entity.Comp.DisarmChance))
             return;
 
-        if (!_experience.TryGetExperienceEntityFromSkillEntity(entity.Owner, out var experienceEntity))
+        if (!_experience.ResolveExperienceEntityFromSkillEntity(entity.Owner, out var experienceEntity))
             return;
 
         if (_hands.EnumerateHeld(experienceEntity.Value.Owner).Count() == 0)

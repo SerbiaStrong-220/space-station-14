@@ -81,9 +81,9 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     #endregion
 
-    #region TryGet methods
+    #region Resolve methods
 
-    public bool TryGetExperienceEntityFromSkillEntity(Entity<SkillComponent?> entity, [NotNullWhen(true)] out Entity<ExperienceComponent>? experienceEntity)
+    public bool ResolveExperienceEntityFromSkillEntity(Entity<SkillComponent?> entity, [NotNullWhen(true)] out Entity<ExperienceComponent>? experienceEntity)
     {
         experienceEntity = null;
 
@@ -107,6 +107,10 @@ public sealed partial class ExperienceSystem : EntitySystem
         experienceEntity = (parentUid, experienceComponent);
         return true;
     }
+
+    #endregion
+
+    #region Try get methods
 
     public bool TryGetSkillTreeLevel(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, [NotNullWhen(true)] out int? level)
     {

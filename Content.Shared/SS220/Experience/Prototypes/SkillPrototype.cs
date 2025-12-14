@@ -24,6 +24,10 @@ public sealed class SkillPrototype : IPrototype, ISerializationHooks
     [AlwaysPushInheritance]
     public ComponentRegistry Components { get; } = [];
 
+    [DataField]
+    [AlwaysPushInheritance]
+    public ComponentRegistry RemoveComponents { get; } = [];
+
     /// <summary>
     /// Deletes and then adds component if component with same type existed
     /// </summary>

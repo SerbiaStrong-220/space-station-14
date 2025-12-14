@@ -56,7 +56,7 @@
   - type: LearningOnDoAfterEndWith
     progress:
       Construction:
-        baseLearning: 0.10
+        baseLearning: 0.05
   # ss220-experience-end
   - type: Sprite
     state: steel_3
@@ -127,7 +127,7 @@
   - type: LearningOnDoAfterEndWith
     progress:
       Construction:
-        baseLearning: 0.15
+        baseLearning: 0.09
   # ss220-experience-end
   - type: Sprite
     state: brass_3
@@ -196,7 +196,7 @@
   - type: LearningOnDoAfterEndWith
     progress:
       Construction:
-        baseLearning: 0.15
+        baseLearning: 0.09
   # ss220-experience-end
   - type: Sprite
     state: plasteel_3

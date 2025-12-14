@@ -84,6 +84,7 @@ public sealed partial class ExperienceSystem : EntitySystem
             return false;
         }
 
+        EntityManager.RemoveComponents(skillEntity.Value, skill.RemoveComponents);
         EntityManager.AddComponents(skillEntity.Value, skill.Components, skill.ApplyIfAlreadyHave);
 
         return true;

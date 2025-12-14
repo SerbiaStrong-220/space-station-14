@@ -9,7 +9,7 @@ namespace Content.Shared.SS220.Experience.Skill.Components;
 /// </summary>
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class MedicineMachineUseSkillComponent : Component
+public sealed partial class MedicineMachineUseSkillIssueComponent : Component
 {
     [DataField]
     [AutoNetworkedField]

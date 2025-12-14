@@ -21,8 +21,8 @@ public abstract partial class BaseDoAfterSkillSystem<T1, T2> : EntitySystem wher
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
-    public readonly Color FasterDoAfterBarColor = Color.FromHex("#ffd726ff");
-    public readonly Color SlowerDoAfterBarColor = Color.FromHex("#8d83d2ff");
+    public readonly Color FasterDoAfterBarColor = Color.FromHex("#ffe054ff");
+    public readonly Color SlowerDoAfterBarColor = Color.FromHex("#5d4dc8ff");
 
     public override void Initialize()
     {
@@ -45,11 +45,8 @@ public abstract partial class BaseDoAfterSkillSystem<T1, T2> : EntitySystem wher
         if (args.ShouldCancel || args.Args.Used == null)
             return;
 
-        if (!Experience.TryGetExperienceEntityFromSkillEntity(entity.Owner, out var experienceEntity))
-        {
-            Log.Error($"Cant get owner of skill entity {ToPrettyString(entity)}");
+        if (!Experience.ResolveExperienceEntityFromSkillEntity(entity.Owner, out var experienceEntity))
             return;
-        }
 
         if (!TryGetLearningProgressInfo<LearningOnDoAfterStartWithComponent>(args.Args.Used.Value, entity.Comp.SkillTreeGroup, out var learningInformation))
             return;
@@ -67,11 +64,8 @@ public abstract partial class BaseDoAfterSkillSystem<T1, T2> : EntitySystem wher
         if (args.Cancel || args.Args.Used == null)
             return;
 
-        if (!Experience.TryGetExperienceEntityFromSkillEntity(entity.Owner, out var experienceEntity))
-        {
-            Log.Error($"Cant get owner of skill entity {ToPrettyString(entity)}");
+        if (!Experience.ResolveExperienceEntityFromSkillEntity(entity.Owner, out var experienceEntity))
             return;
-        }
 
         if (!TryGetLearningProgressInfo<LearningOnDoAfterEndWithComponent>(args.Args.Used.Value, entity.Comp.SkillTreeGroup, out var learningInformation))
             return;

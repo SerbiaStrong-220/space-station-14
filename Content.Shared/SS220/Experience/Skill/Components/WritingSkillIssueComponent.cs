@@ -6,7 +6,7 @@ namespace Content.Shared.SS220.Experience.Skill.Components;
 
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class WritingSkillComponent : Component
+public sealed partial class WritingSkillIssueComponent : Component
 {
     [DataField]
     [AutoNetworkedField]

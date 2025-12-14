@@ -7,7 +7,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared.SS220.Experience.DoAfterEffect.Components;
 
 /// <summary>
-/// Provides changes in <see cref="HealingDoAfterEvent"/>
+/// Provides changes in <see cref="ConstructionInteractDoAfterEvent"/>
 /// </summary>
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState]

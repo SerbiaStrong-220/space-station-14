@@ -8,13 +8,21 @@
     skillName: medicine-initial-name
     skillDescription: medicine-initial-desc
   components:
-  - type: MedicineMachineUseSkill
+  - type: MedicineMachineUseSkillIssue
     healthAnalyzerInfoShuffleChance: 0.6
     defibrillatorSelfDamageChance: 0.6
   - type: MedicineDoAfterSkill
     durationScale: 1.4
     failureChance: 0.1
     failurePopup: healing-item-use-failure
+  - type: InjectorUseOnDoAfterSkill
+    durationScale: 1.5
+    failureChance: 0.7
+    failurePopup: injector-use-failure
+    damageOnFailure:
+      types:
+        Slash: 3
+        Piercing: 6
 
 - type: skill
   id: MedicineBase
@@ -26,11 +34,19 @@
     skillName: medicine-base-name
     skillDescription: medicine-base-desc
   components:
-  - type: MedicineMachineUseSkill
+  - type: MedicineMachineUseSkillIssue
     healthAnalyzerInfoShuffleChance: 0.2
     defibrillatorSelfDamageChance: 0.2
   - type: MedicineDoAfterSkill
     durationScale: 1
+  - type: InjectorUseOnDoAfterSkill
+    durationScale: 1.2
+    failureChance: 0.2
+    failurePopup: injector-use-failure
+    damageOnFailure:
+      types:
+        Slash: 1
+        Piercing: 2
 
 - type: skill
   id: MedicineTrained
@@ -44,8 +60,10 @@
   components:
   - type: MedicineDoAfterSkill
     durationScale: 0.8
-    failurePopup: healing-item-use-failure
-  - type: MedicineMachineUseSkill
+  - type: InjectorUseOnDoAfterSkill
+    durationScale: 0.8
+  removeComponents:
+  - type: MedicineMachineUseSkillIssue
 
 - type: skill
   id: MedicineProfessional
@@ -60,4 +78,7 @@
   - type: MedicineDoAfterSkill
     durationScale: 0.6
     failurePopup: healing-item-use-failure
-  - type: MedicineMachineUseSkill
+  - type: InjectorUseOnDoAfterSkill
+    durationScale: 0.7
+  removeComponents:
+  - type: MedicineMachineUseSkillIssue
