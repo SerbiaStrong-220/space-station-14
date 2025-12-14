@@ -10,12 +10,15 @@ using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.SS220.CultYogg.MiGo;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
+using Content.Server.Administration.Logs;
+using Content.Shared.Database;
 
 namespace Content.Server.SS220.CultYogg.Altar;
 
 public sealed partial class CultYoggAltarSystem : SharedCultYoggAltarSystem
 {
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
+    [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly BodySystem _body = default!;
 
     public override void Initialize()
@@ -35,6 +38,7 @@ public sealed partial class CultYoggAltarSystem : SharedCultYoggAltarSystem
         if (!TryComp<AppearanceComponent>(ent, out var appearanceComp))
             return;
 
+        _adminLog.Add(LogType.RoundFlow, LogImpact.Medium, $"Cult Yogg sacrificed {ToPrettyString(args.Target.Value):target}");
         _body.GibBody(args.Target.Value, true);
         ent.Comp.Used = true;
 

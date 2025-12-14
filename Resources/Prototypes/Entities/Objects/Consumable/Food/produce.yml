@@ -480,6 +480,17 @@
     slots:
     - HEAD
     quickEquip: false
+  # SS220-grilling-update-2 begin
+  - type: Grillable
+    timeToCook: 120
+    cookingResult: TrashBakedBananaPeel
+  - type: Temperature
+    currentTemperature: 290
+  - type: InternalTemperature
+    conductivity: 100 # to compensate for density
+    thickness: 0.001
+    area: 0.0225 # ~15x15cm
+  # SS220-grilling-update-2 end
 
 - type: entity
   name: baked banana peel
