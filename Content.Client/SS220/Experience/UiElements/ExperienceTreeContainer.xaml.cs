@@ -79,6 +79,7 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
         // TODO visuals
         AddSublevelPoint.OnPressed += (args) =>
         {
+            OnAddSublevelPoint?.Invoke();
             SpendPoints++;
             Update();
         };

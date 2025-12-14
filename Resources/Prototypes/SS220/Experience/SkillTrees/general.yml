@@ -1,10 +1,10 @@
-- type: skillTree
-  id: Piloting
-  skillGroupId: SkillGroupGeneral
-  skillTreeName: piloting-skill-tree-name
-  skillTree:
-  - PilotingBase
-  - PilotingCombat
+# - type: skillTree
+#   id: Piloting
+#   skillGroupId: SkillGroupGeneral
+#   skillTreeName: piloting-skill-tree-name
+#   skillTree:
+#   - PilotingBase
+#   - PilotingCombat
 
 - type: skillTree
   id: Bureaucracy

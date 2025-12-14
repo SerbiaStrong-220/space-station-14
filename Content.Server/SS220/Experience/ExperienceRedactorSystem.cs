@@ -66,10 +66,10 @@ public sealed class ExperienceRedactorSystem : EntitySystem
             if (!playerChangedComp.Skills.TryGetValue(skillId, out var oldSublevel))
             {
                 oldSublevel = ExperienceSystem.StartSublevel;
-                playerChangedComp.Skills.Add(skillId, sublevel);
+                playerChangedComp.Skills.Add(skillId, oldSublevel);
             }
 
-            oldSublevel += sublevel - ExperienceSystem.StartSublevel;
+            playerChangedComp.Skills[skillId] += (sublevel - ExperienceSystem.StartSublevel);
         }
 
         playerChangedComp.SpentSublevelPoints += totalPointsSpend;

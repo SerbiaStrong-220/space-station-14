@@ -22,8 +22,8 @@ public sealed partial class HiddenDescriptionComponent : Component
     /// If this field is null, that mean we skip any renaming because entity do itself
     /// </summary>
     [AutoNetworkedField]
-    [DataField(required: true)]
-    public LocId? HiddenName;
+    [DataField]
+    public LocId? HiddenName = null;
 
     /// <summary>
     /// Uses to define name overrides and their order. Null goes for original name <br/>

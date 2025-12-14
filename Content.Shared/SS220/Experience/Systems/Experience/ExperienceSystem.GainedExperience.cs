@@ -9,6 +9,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         SubscribeLocalEvent<ExperienceComponent, RecalculateEntityExperience>(OnRecalculateEntityExperience);
 
         SubscribeLocalEvent<AntagFreeSublevelPointsAddComponent, SublevelAdditionPointInitialResolve>(AddFreeSublevelPointOnSublevelAdditionPointInitialResolve);
+        SubscribeLocalEvent<AntagFreeSublevelPointsAddComponent, MapInitEvent>(AddFreeSublevelPointOnMapInit);
 
         SubscribeAddComponentToInit<AdminForcedExperienceAddComponent>(SkillForceSetOnSkillTreeAdded, KnowledgeForceSetOnKnowledgeInitialResolve, ForceSetAdditionOnSublevelAdditionPointInitialResolve);
         SubscribeAddComponentToInit<RoleExperienceAddComponent>(SkillAddOnSkillTreeAdded, KnowledgeAddOnKnowledgeInitialResolve, AdditionOnSublevelAdditionPointInitialResolve);
@@ -37,6 +38,12 @@ public sealed partial class ExperienceSystem : EntitySystem
     private void OnRecalculateEntityExperience(Entity<ExperienceComponent> entity, ref RecalculateEntityExperience args)
     {
         InitializeExperienceComp(entity);
+    }
+
+    private void AddFreeSublevelPointOnMapInit<T>(Entity<T> entity, ref MapInitEvent _) where T : BaseFreeSublevelPointsAddComponent
+    {
+        var recalculateEv = new RecalculateEntityExperience();
+        RaiseLocalEvent(entity, ref recalculateEv);
     }
 
     private void AddFreeSublevelPointOnSublevelAdditionPointInitialResolve<T>(Entity<T> entity, ref SublevelAdditionPointInitialResolve args) where T : BaseFreeSublevelPointsAddComponent

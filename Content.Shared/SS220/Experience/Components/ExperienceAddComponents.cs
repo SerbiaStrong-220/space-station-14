@@ -11,20 +11,26 @@ namespace Content.Shared.SS220.Experience;
 public abstract partial class BaseExperienceAddComponent : Component
 {
     [DataField]
+    [AutoNetworkedField]
     public ProtoId<ExperienceDefinitionPrototype>? SkillAddId;
 
     [DataField]
+    [AutoNetworkedField]
     public Dictionary<ProtoId<SkillTreePrototype>, SkillTreeExperienceInfo> Skills = new();
 
     [DataField]
+    [AutoNetworkedField]
     public HashSet<ProtoId<KnowledgePrototype>> Knowledges = new();
 
     [DataField]
+    [AutoNetworkedField]
     public int AddSublevelPoints;
 }
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent]
+[NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class RoleExperienceAddComponent : BaseExperienceAddComponent { }
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent]
+[NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class AdminForcedExperienceAddComponent : BaseExperienceAddComponent { }

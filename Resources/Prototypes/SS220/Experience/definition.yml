@@ -1,8 +1,6 @@
 - type: experienceDefinition
   id: BaseSkillAddition
   skills:
-    Piloting:
-      level: 1
     CombatTraining:
       level: 3
       sublevel: 0

@@ -27,7 +27,7 @@
                 <BoxContainer Name="ExperienceTreeGroupsContainer" Orientation="Vertical" Margin="{x:Static styleDef:ExperienceUiStyleDefinitions.BaseTabLikeThickness}">
                     <!-- Added by code -->
                 </BoxContainer>
-                <Button Name="SubmitButton" Text="+SuBmIt+"/>
+                <Button Name="SubmitButton" Text="{Loc 'experience-view-tree-submit-button-text'}"/>
             </BoxContainer>
         </ScrollContainer>
     </Control>

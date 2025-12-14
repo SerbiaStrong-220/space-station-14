@@ -181,7 +181,7 @@ public sealed partial class ExperienceViewWindow : FancyWindow
     {
         var canChange = _freeSublevelPoints > _spendPoints;
 
-        SubmitButton.Visible = canChange;
+        SubmitButton.Visible = canChange || _spendPoints > 0;
 
         foreach (var child in ExperienceTreeGroupsContainer.Children)
         {
@@ -194,7 +194,10 @@ public sealed partial class ExperienceViewWindow : FancyWindow
                     continue;
 
                 treeContainer.HaveFreePoints = canChange;
-                treeContainer.OnAddSublevelPoint += OnAddSublevelPoint;
+
+                // god forgive me...
+                if (treeContainer.OnAddSublevelPoint is null)
+                    treeContainer.OnAddSublevelPoint += OnAddSublevelPoint;
             }
         }
     }

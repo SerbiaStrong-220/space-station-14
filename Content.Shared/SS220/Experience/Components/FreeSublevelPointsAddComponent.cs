@@ -9,8 +9,11 @@ namespace Content.Shared.SS220.Experience;
 /// </summary>
 public abstract partial class BaseFreeSublevelPointsAddComponent : Component
 {
+    [DataField]
+    [AutoNetworkedField]
     public int AddFreeSublevelPoints;
 }
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent]
+[NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class AntagFreeSublevelPointsAddComponent : BaseFreeSublevelPointsAddComponent;
