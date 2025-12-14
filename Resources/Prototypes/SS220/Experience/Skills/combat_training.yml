@@ -9,8 +9,8 @@
     skillDescription: combat-training-initial-desc
   components:
   - type: DisarmChanceChangerSkill
-    disarmByMultiplier: 0.25
-    disarmedMultiplier: 4
+    disarmByMultiplier: 0.5
+    disarmedMultiplier: 2
 
 - type: skill
   id: CombatTrainingBase

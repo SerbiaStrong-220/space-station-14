@@ -14,6 +14,7 @@ namespace Content.Shared.SS220.Experience.DoAfterEffect.Components;
 public sealed partial class ConstructionDoAfterSkillComponent : BaseDoAfterSkillComponent
 {
     [DataField]
+    [AutoNetworkedField]
     public HashSet<ProtoId<StackPrototype>> ComplexMaterials = new();
 
     public ConstructionDoAfterSkillComponent() : base()

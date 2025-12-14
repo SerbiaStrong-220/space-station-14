@@ -37,6 +37,6 @@ public sealed class InjectorUseOnDoAfterSkillSystem : BaseDoAfterSkillSystem<Inj
             return;
 
         if (entity.Comp.FailurePopup is not null)
-            _popup.PopupPredicted(Loc.GetString(entity.Comp.FailurePopup, ("target", Identity.Name(args.Args.Target.Value, EntityManager))), args.Args.User, args.Args.User, PopupType.SmallCaution);
+            _popup.PopupPredicted(Loc.GetString(entity.Comp.FailurePopup, ("target", Identity.Name(args.Args.Target.Value, EntityManager))), args.Args.Target.Value, args.Args.User, PopupType.MediumCaution);
     }
 }

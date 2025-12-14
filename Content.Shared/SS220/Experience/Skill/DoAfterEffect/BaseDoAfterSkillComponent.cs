@@ -27,8 +27,10 @@ public abstract partial class BaseDoAfterSkillComponent : Component
     public bool FullBlock = false;
 
     [DataField]
+    [AutoNetworkedField]
     public LocId? FailurePopup = null;
 
     [DataField]
+    [AutoNetworkedField]
     public LocId? FullBlockPopup = null;
 }

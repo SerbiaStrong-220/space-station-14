@@ -13,6 +13,7 @@ namespace Content.Shared.SS220.Experience.DoAfterEffect.Components;
 public sealed partial class InjectorUseOnDoAfterSkillComponent : BaseDoAfterSkillComponent
 {
     [DataField]
+    [AutoNetworkedField]
     public DamageSpecifier DamageOnFailure = new();
 
     public InjectorUseOnDoAfterSkillComponent() : base()
