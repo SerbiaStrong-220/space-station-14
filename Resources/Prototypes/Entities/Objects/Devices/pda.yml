@@ -2121,8 +2121,6 @@
   #SS220 PDA-Resprite-End
   - type: PdaBorderColor
     borderColor: "#7a998d" #SS220 PDA-Resprite
-#    accentHColor: "#447987" #SS220 PDA-Resprite
-#    accentVColor: "#447987" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
