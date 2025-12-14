@@ -9,6 +9,7 @@ namespace Content.Client.SS220.CultYogg.MiGo;
 /// </summary>
 public sealed class CultYoggHealVisualizerSystem : VisualizerSystem<CultYoggHealComponent>
 {
+    [Dependency] private readonly SpriteSystem _sprite = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -21,10 +22,12 @@ public sealed class CultYoggHealVisualizerSystem : VisualizerSystem<CultYoggHeal
     {
         // Need LayerMapTryGet because Init fails if there's no existing sprite / appearancecomp
         // which means in some setups (most frequently no AppearanceComp) the layer never exists.
-        if (TryComp<SpriteComponent>(uid, out var sprite) &&
-            sprite.LayerMapTryGet(HealVisualLayers.Particles, out var layer))
+        if (!TryComp<SpriteComponent>(uid, out var sprite))
+            return;
+
+        if (_sprite.LayerMapTryGet((uid, sprite), HealVisualLayers.Particles, out var layer, false))
         {
-            sprite.RemoveLayer(layer);
+            _sprite.RemoveLayer((uid, sprite), layer);
         }
     }
 
@@ -33,15 +36,15 @@ public sealed class CultYoggHealVisualizerSystem : VisualizerSystem<CultYoggHeal
         if (!TryComp<SpriteComponent>(uid, out var sprite) || !TryComp(uid, out AppearanceComponent? appearance))
             return;
 
-        sprite.LayerMapReserveBlank(HealVisualLayers.Particles);
-        sprite.LayerSetVisible(HealVisualLayers.Particles, true);
+        _sprite.LayerMapReserve((uid, sprite), HealVisualLayers.Particles);
+        _sprite.LayerSetVisible((uid, sprite), HealVisualLayers.Particles, true);
         sprite.LayerSetShader(HealVisualLayers.Particles, "unshaded");
 
         if (uid.Comp.Sprite == null)
             return;
 
-        sprite.LayerSetRSI(HealVisualLayers.Particles, uid.Comp.Sprite.RsiPath);
-        sprite.LayerSetState(HealVisualLayers.Particles, uid.Comp.Sprite.RsiState);
+        _sprite.LayerSetRsi((uid, sprite), HealVisualLayers.Particles, uid.Comp.Sprite.RsiPath);
+        _sprite.LayerSetRsiState((uid, sprite), HealVisualLayers.Particles, uid.Comp.Sprite.RsiState);
     }
 }
 
