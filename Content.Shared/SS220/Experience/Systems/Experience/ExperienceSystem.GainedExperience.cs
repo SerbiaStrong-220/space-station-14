@@ -58,6 +58,9 @@ public sealed partial class ExperienceSystem : EntitySystem
             if (!treeProto.CanBeShownOnInit)
                 continue;
 
+            if (!entity.Comp.EarnedSkillSublevel.ContainsKey(treeProto))
+                entity.Comp.EarnedSkillSublevel.Add(treeProto, 0);
+
             // Not logging reiniting cause it defined behavior for our case
             InitExperienceSkillTree(entity, treeProto, false);
         }

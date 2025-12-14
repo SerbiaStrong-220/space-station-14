@@ -47,13 +47,6 @@ public sealed partial class ExperienceSystem : EntitySystem
     private void OnMapInit(Entity<ExperienceComponent> entity, ref MapInitEvent args)
     {
         OnMapInitSkillEntity(entity, ref args);
-
-        foreach (var treeProto in _prototype.EnumeratePrototypes<SkillTreePrototype>())
-        {
-            entity.Comp.EarnedSkillSublevel.Add(treeProto, 0);
-        }
-        DirtyField(entity!, nameof(ExperienceComponent.EarnedSkillSublevel));
-
         InitializeExperienceComp(entity);
     }
 
