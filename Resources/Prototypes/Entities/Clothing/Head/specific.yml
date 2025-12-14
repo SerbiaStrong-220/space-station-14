@@ -14,7 +14,7 @@
     - type: ChameleonClothing
       slot: [HEAD]
       default: ClothingHeadHatBeret
-# Corvax-HiddenDesc-Start
+    # Corvax-HiddenDesc-Start
     - type: HiddenDescription
       entries:
         SyndicateAgentKnowledge: [ corvax-hidden-desc-Chameleon-syndicate ]
@@ -23,7 +23,7 @@
       - [SyndicateAgentKnowledge, null]
       - [ScienceKnowledge, null]
       hiddenName: null
-# Corvax-HiddenDesc-End
+    # Corvax-HiddenDesc-End
 
 - type: entity
   parent: ClothingHeadHatFedoraBrown

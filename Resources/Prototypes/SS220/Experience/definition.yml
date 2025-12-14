@@ -5,7 +5,7 @@
       level: 1
     CombatTraining:
       level: 3
-      subLevel: 0
+      sublevel: 0
   knowledges:
   - InformedPersonalKnowledge
   addSublevelPoints: 10

@@ -16,7 +16,6 @@
     nameEntries:
     - [SyndicateAgentKnowledge, null]
     - [ServiceActorKnowledge, null]
-    hiddenName: ent-BaseShellShotgunToy
 
 - type: entity
   id: ShellShotgunSlugCaps

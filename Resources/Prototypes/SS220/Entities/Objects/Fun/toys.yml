@@ -95,7 +95,6 @@
     nameEntries:
     - [SyndicateAgentKnowledge, null]
     - [ServiceActorKnowledge, null]
-    hiddenName: ent-BaseGunToy
 
 - type: entity
   parent: [ BaseGunToy, WeaponLauncherChinaLake ]

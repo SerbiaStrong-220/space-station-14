@@ -27,7 +27,6 @@
     nameEntries:
     - [SyndicateAgentKnowledge, null]
     - [ServiceActorKnowledge, null]
-    hiddenName: ent-BaseClothingOuterFake
 
 - type: entity
   parent: BaseClothingOuterFake

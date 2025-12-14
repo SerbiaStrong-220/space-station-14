@@ -223,6 +223,11 @@
       lateJoinAdditional: false
       mindRoles:
       - MindRoleTraitor
+      # SS220-experience-update-begin
+      components:
+      - type: AntagFreeSublevelPointsAdd
+        addFreeSublevelPoints: 10
+      # SS220-experience-update-end
 
 #- type: entity
 #  id: Sandbox
@@ -244,6 +249,11 @@
     - prefRoles: [ Traitor ]
       mindRoles:
       - MindRoleTraitorReinforcement
+      # SS220-experience-update-begin
+      components:
+      - type: AntagFreeSublevelPointsAdd
+        addFreeSublevelPoints: 10
+      # SS220-experience-update-end
   #ss220 reinforcement objective fix begin
   - type: AntagRandomObjectives
     enabled: false
@@ -267,6 +277,10 @@
         color: Red
         sound: /Audio/Ambience/Antag/changeling_start.ogg
       components:
+      # SS220-experience-update-begin
+      - type: AntagFreeSublevelPointsAdd
+        addFreeSublevelPoints: 10
+      # SS220-experience-update-end
       - type: ChangelingDevour
       - type: ChangelingIdentity
       - type: ChangelingTransform
@@ -298,6 +312,10 @@
         sound: "/Audio/Ambience/Antag/headrev_start.ogg"
       startingGear: HeadRevGear
       components:
+      # SS220-experience-update-begin
+      - type: AntagFreeSublevelPointsAdd
+        addFreeSublevelPoints: 10
+      # SS220-experience-update-end
       - type: Revolutionary
       - type: HeadRevolutionary
       mindRoles:

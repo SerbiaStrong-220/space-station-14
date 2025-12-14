@@ -67,7 +67,6 @@
     nameEntries:
     - [SyndicateAgentKnowledge, null]
     - [ServiceActorKnowledge, null]
-    hiddenName: ent-BaseGrenadeToy
 
 #funny kaboom. Totally harmless!
 - type: entity

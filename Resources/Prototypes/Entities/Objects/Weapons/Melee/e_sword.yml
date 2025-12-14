@@ -82,7 +82,7 @@
     - [NinjaKnowledge, null]
     - [SecurityKnowledge, null]
     - [CargoKnowledge, null]
-    hiddenName: ent-BaseMeleeWeaponEnergy
+    hiddenName: ent-EnergySword
 # Corvax-HiddenDesc-End
 
 - type: entity

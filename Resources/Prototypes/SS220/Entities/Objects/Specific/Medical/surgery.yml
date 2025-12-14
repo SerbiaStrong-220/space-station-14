@@ -37,4 +37,4 @@
     - [MedicalKnowledge, null]
     - [SyndicateAgentKnowledge, null]
     - [ScienceKnowledge, null]
-    hiddenName: MindslaveFixerCerebralImplant-ent
+    hiddenName: ent-MindslaveFixerCerebralImplant

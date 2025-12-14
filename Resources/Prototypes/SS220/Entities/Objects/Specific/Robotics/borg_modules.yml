@@ -53,7 +53,7 @@
       nameEntries:
       - [SyndicateAgentKnowledge, null]
       - [ScienceKnowledge, null]
-      hiddenName: BaseBorgModule-ent
+      hiddenName: ent-BaseBorgModule
 
 - type: entity
   id: BorgModuleMime
