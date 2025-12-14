@@ -33,7 +33,7 @@ public sealed class CultYoggHealVisualizerSystem : VisualizerSystem<CultYoggHeal
 
     private void OnComponentInit(Entity<CultYoggHealComponent> uid, ref ComponentInit args)
     {
-        if (!TryComp<SpriteComponent>(uid, out var sprite) || !TryComp(uid, out AppearanceComponent? appearance))
+        if (!TryComp<SpriteComponent>(uid, out var sprite) || !TryComp(uid, out AppearanceComponent? _))
             return;
 
         _sprite.LayerMapReserve((uid, sprite), HealVisualLayers.Particles);
