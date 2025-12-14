@@ -142,7 +142,7 @@ public abstract class SharedCultYoggSystem : EntitySystem
         var effectEv = new CorruptInteractionEvent();
         RaiseLocalEvent(target, ref effectEv);
 
-        if (effectEv.Handled == true)
+        if (effectEv.Handled)
             return true;
 
         return false;
