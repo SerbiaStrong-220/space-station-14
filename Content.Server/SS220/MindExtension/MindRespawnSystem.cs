@@ -28,7 +28,10 @@ public partial class MindExtensionSystem : EntitySystem //MindRespawnSystem
         if (!TryComp<MindExtensionComponent>(mindContExt.MindExtension, out var mindExt))
             return;
 
-        if (!mindExt.RespawnAvailable && mindExt.RespawnTimer < _gameTiming.CurTime)
+        if (!mindExt.RespawnAvailable)
+            return;
+
+        if (_gameTiming.CurTime > mindExt.RespawnTimer)
             RaiseLocalEvent(args.SenderSession.AttachedEntity.Value, new RespawnActionEvent());
     }
 

@@ -5,4 +5,11 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.SS220.MindExtension.Events;
 
 [Serializable, NetSerializable]
-public sealed class GhostBodyListRequest : EntityEventArgs { }
+public sealed class ExtensionReturnRequest : EntityEventArgs
+{
+    public NetEntity? Target { get; }
+    public ExtensionReturnRequest(NetEntity target)
+    {
+        Target = target;
+    }
+}

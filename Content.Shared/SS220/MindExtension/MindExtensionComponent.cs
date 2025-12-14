@@ -7,7 +7,7 @@ namespace Content.Shared.SS220.MindExtension;
 [RegisterComponent]
 public sealed partial class MindExtensionComponent : Component
 {
-    public NetUserId PlayerSession;
+    public NetUserId Player;
 
     [ViewVariables(VVAccess.ReadOnly)]
     public Dictionary<EntityUid, TrailPointMetaData> Trail = [];
@@ -18,6 +18,6 @@ public sealed partial class MindExtensionComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan RespawnTime = TimeSpan.FromMinutes(20);
 
-
+    [ViewVariables]
     public bool RespawnAvailable = false;
 }

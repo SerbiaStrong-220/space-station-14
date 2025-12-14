@@ -15,7 +15,7 @@ public sealed partial class GhostAdditionUIController : UIController, IOnSystemC
 
     [UISystemDependency] private readonly MindExtensionSystem _extensionSystem = default!;
 
-    private GhostAdditionGui? Gui => UIManager.GetActiveUIWidgetOrNull<GhostAdditionGui>();
+    private GhostAdditionGui? additionGui => UIManager.GetActiveUIWidgetOrNull<GhostAdditionGui>();
 
     public override void Initialize()
     {
@@ -31,10 +31,10 @@ public sealed partial class GhostAdditionUIController : UIController, IOnSystemC
         if (_extensionSystem?.RespawnTime is not null)
         {
             var respawnRemainTime = _extensionSystem.RespawnTime.Value - _gameTiming.CurTime;
-            Gui?.SetRespawnRemainTimer(respawnRemainTime);
+            additionGui?.SetRespawnRemainTimer(respawnRemainTime);
         }
         else
-            Gui?.LockRespawnTimer();
+            additionGui?.LockRespawnTimer();
     }
     private void OnScreenLoad()
     {
@@ -48,29 +48,30 @@ public sealed partial class GhostAdditionUIController : UIController, IOnSystemC
 
     public void LoadGui()
     {
-        if (Gui == null)
+        if (additionGui == null)
             return;
 
-        Gui.RespawnPressed += RequestRespawn;
-        Gui.ReturnToBodyPressed += RequestReturnToBody;
-        Gui.BodyMenuWindow.FollowBodyAction += OnFollowBodyAction;
-        Gui.BodyMenuWindow.ToBodyAction += OnToBodyAction;
-        Gui.BodyMenuWindow.DeleteTrailPointAction += DeleteTrailPointAction;
+        additionGui.RespawnPressed += RequestRespawn;
+        additionGui.ReturnToBodyPressed += RequestReturnToBody;
+        additionGui.BodyMenuWindow.OnFollowBodyAction += OnFollowBodyAction;
+        additionGui.BodyMenuWindow.OnToBodyAction += OnToBodyAction;
+        additionGui.BodyMenuWindow.OnDeleteTrailPointAction += DeleteTrailPointAction;
     }
 
     public void UnloadGui()
     {
-        if (Gui == null)
+        if (additionGui == null)
             return;
 
-        Gui.RespawnPressed -= RequestRespawn;
-        Gui.ReturnToBodyPressed -= RequestReturnToBody;
+        additionGui.RespawnPressed -= RequestRespawn;
+        additionGui.ReturnToBodyPressed -= RequestReturnToBody;
     }
 
     public void OnSystemLoaded(MindExtensionSystem system)
     {
         system.GhostBodyListResponse += OnGhostBodyListResponse;
         system.DeleteTrailPointResponse += OnDeleteTrailPointResponse;
+        system.ExtensionReturnResponse += OnExtensionReturnResponse;
 
         system.RequestRespawnTimer();
     }
@@ -79,6 +80,7 @@ public sealed partial class GhostAdditionUIController : UIController, IOnSystemC
     {
         system.GhostBodyListResponse -= OnGhostBodyListResponse;
         system.DeleteTrailPointResponse -= OnDeleteTrailPointResponse;
+        system.ExtensionReturnResponse -= OnExtensionReturnResponse;
 
         system.RequestRespawnTimer();
     }
@@ -97,7 +99,7 @@ public sealed partial class GhostAdditionUIController : UIController, IOnSystemC
     private void RequestBodies()
     {
         _extensionSystem.RequestBodies();
-        Gui?.BodyMenuWindow.OpenCentered();
+        additionGui?.BodyMenuWindow.OpenCentered();
     }
     private void OnFollowBodyAction(NetEntity entity)
     {
@@ -120,12 +122,17 @@ public sealed partial class GhostAdditionUIController : UIController, IOnSystemC
 
     private void OnGhostBodyListResponse(GhostBodyListResponse ev)
     {
-        Gui?.BodyMenuWindow.UpdateBodies(ev.Bodies);
+        additionGui?.BodyMenuWindow.UpdateBodies(ev.Bodies);
     }
 
     private void OnDeleteTrailPointResponse(DeleteTrailPointResponse response)
     {
-        Gui?.BodyMenuWindow.DeleteBodyCard(response.Entity);
+        additionGui?.BodyMenuWindow.DeleteBodyCard(response.Entity);
+    }
+
+    private void OnExtensionReturnResponse(ExtensionReturnResponse response)
+    {
+        additionGui?.BodyMenuWindow.Close();
     }
 
     #endregion

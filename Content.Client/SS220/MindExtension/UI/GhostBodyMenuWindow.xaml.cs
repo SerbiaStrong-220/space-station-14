@@ -12,9 +12,9 @@ public sealed partial class GhostBodyMenuWindow : DefaultWindow
 {
     private Dictionary<NetEntity, GhostBodyCard> _bodyCards = new Dictionary<NetEntity, GhostBodyCard>();
 
-    public Action<NetEntity>? FollowBodyAction;
-    public Action<NetEntity>? ToBodyAction;
-    public Action<NetEntity>? DeleteTrailPointAction;
+    public Action<NetEntity>? OnFollowBodyAction;
+    public Action<NetEntity>? OnToBodyAction;
+    public Action<NetEntity>? OnDeleteTrailPointAction;
 
     public GhostBodyMenuWindow()
     {
@@ -31,9 +31,9 @@ public sealed partial class GhostBodyMenuWindow : DefaultWindow
             var bodyCard = new GhostBodyCard();
             bodyCard.Init(body);
 
-            bodyCard.FollowBodyAction += FollowBodyAction;
-            bodyCard.ToBodyAction += ToBodyAction;
-            bodyCard.DeleteTrailPointAction += DeleteTrailPointAction;
+            bodyCard.OnFollowBodyAction += OnFollowBodyAction;
+            bodyCard.OnToBodyAction += OnToBodyAction;
+            bodyCard.OnDeleteTrailPointAction += OnDeleteTrailPointAction;
 
             BodyList.AddChild(bodyCard);
             _bodyCards.Add(body.Id, bodyCard);
@@ -45,9 +45,9 @@ public sealed partial class GhostBodyMenuWindow : DefaultWindow
         if (!_bodyCards.TryGetValue(entity, out var bodyCard))
             return;
 
-        bodyCard.FollowBodyAction -= FollowBodyAction;
-        bodyCard.ToBodyAction -= ToBodyAction;
-        bodyCard.DeleteTrailPointAction -= DeleteTrailPointAction;
+        bodyCard.OnFollowBodyAction -= OnFollowBodyAction;
+        bodyCard.OnToBodyAction -= OnToBodyAction;
+        bodyCard.OnDeleteTrailPointAction -= OnDeleteTrailPointAction;
 
         BodyList.RemoveChild(bodyCard);
         _bodyCards.Remove(entity);

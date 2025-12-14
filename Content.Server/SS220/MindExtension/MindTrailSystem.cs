@@ -15,14 +15,14 @@ public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
 {
     private void SubscribeTrailSystemEvents()
     {
-        SubscribeNetworkEvent<ExtensionReturnActionEvent>(OnExtensionReturnActionEvent);
+        SubscribeNetworkEvent<ExtensionReturnRequest>(OnExtensionReturnActionEvent);
         SubscribeNetworkEvent<GhostBodyListRequest>(OnGhostBodyListRequestEvent);
         SubscribeNetworkEvent<DeleteTrailPointRequest>(OnDeleteTrailPointRequest);
     }
 
     #region Handlers
 
-    private void OnExtensionReturnActionEvent(ExtensionReturnActionEvent ev, EntitySessionEventArgs args)
+    private void OnExtensionReturnActionEvent(ExtensionReturnRequest ev, EntitySessionEventArgs args)
     {
         if (!TryGetMindExtension(args.SenderSession.UserId, out var mindExtEnt))
             return;
@@ -41,6 +41,8 @@ public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
 
         _mind.TransferTo(mind.Value, target.Value);
         _mind.UnVisit(mind.Value);
+
+        RaiseNetworkEvent(new ExtensionReturnResponse(), args.SenderSession);
     }
 
     private void OnGhostBodyListRequestEvent(GhostBodyListRequest ev, EntitySessionEventArgs args)
@@ -60,7 +62,7 @@ public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
         var bodyList = new List<TrailPoint>();
         foreach (var pair in mindExt.Trail)
         {
-            EntityUid target = pair.Key;
+            var target = pair.Key;
             TrailPointMetaData trailMetaData = pair.Value;
             var state = IsAvailableToEnterEntity(pair.Key, mindExt, args.SenderSession.UserId);
 

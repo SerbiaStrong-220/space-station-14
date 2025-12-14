@@ -44,29 +44,34 @@ public sealed partial class MindExtensionSystem : EntitySystem
         SubscribeTrailSystemEvents();
     }
 
+    /// <summary>
+    /// Returns the player associated with entity of <see cref="MindExtensionComponent"/>.
+    /// If it doesn't exist, it will be created.
+    /// </summary>
     public Entity<MindExtensionComponent> GetMindExtension(NetUserId player)
     {
         var mindExts = _entityManager.AllComponents<MindExtensionComponent>();
-        var entity = mindExts.FirstOrNull(x => x.Component.PlayerSession == player);
+        var entity = mindExts.FirstOrNull(x => x.Component.Player == player);
 
         if (entity is not null)
-            return (Entity<MindExtensionComponent>)entity;
+            return entity.Value;
 
-        return CreateExtensionEntity(player);
+        var newEnt = _entityManager.CreateEntityUninitialized(null);
+        var mindExtComponent = new MindExtensionComponent() { Player = player };
+
+        _entityManager.AddComponent(newEnt, mindExtComponent);
+        _entityManager.InitializeEntity(newEnt);
+        return new(newEnt, mindExtComponent);
     }
 
     public bool TryGetMindExtension(NetUserId player, [NotNullWhen(true)] out Entity<MindExtensionComponent>? entity)
     {
         var mindExts = _entityManager.AllComponents<MindExtensionComponent>();
-        entity = mindExts.FirstOrNull(x => x.Component.PlayerSession == player);
+        entity = mindExts.FirstOrNull(x => x.Component.Player == player);
 
         return entity is not null;
     }
 
-    /// <summary>
-    /// Returns the player associated with entity of <see cref="MindExtensionComponent"/>.
-    /// If it doesn't exist, it will be created.
-    /// </summary>
     public bool TryGetMindExtension(MindExtensionContainerComponent container,
         [NotNullWhen(true)] out Entity<MindExtensionComponent>? entity)
     {
@@ -78,17 +83,6 @@ public sealed partial class MindExtensionSystem : EntitySystem
         entity = _mindExtQuery.Get(container.MindExtension.Value);
 
         return entity is not null;
-    }
-
-
-    private (EntityUid Uid, MindExtensionComponent Component) CreateExtensionEntity(NetUserId playerSession)
-    {
-        var newEnt = _entityManager.CreateEntityUninitialized(null);
-        var mindExtComponent = new MindExtensionComponent() { PlayerSession = playerSession };
-
-        _entityManager.AddComponent(newEnt, mindExtComponent);
-        _entityManager.InitializeEntity(newEnt);
-        return new(newEnt, mindExtComponent);
     }
 
     /// <summary>

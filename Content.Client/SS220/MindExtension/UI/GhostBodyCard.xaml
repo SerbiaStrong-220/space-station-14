@@ -1,6 +1,7 @@
 <local:GhostBodyCard xmlns="https://spacestation14.io"
                      xmlns:local="clr-namespace:Content.Client.SS220.MindExtension.UI"
                      xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
+                     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
                      HorizontalExpand="True"
                      Margin="10 10 10 0">
 
@@ -13,16 +14,8 @@
                           Margin="0 0 190 0"
                           HorizontalExpand="True">
 
-                <PanelContainer HorizontalExpand="True">
-                    <RichTextLabel Name="BodyNameLabel"
-                                   StyleClasses="LabelKeyText"
-                                   Margin="0 0 40 0"/>
-                    <TextureButton Name="DeleteButton"
-                                   HorizontalAlignment="Right"
-                                   VerticalAlignment="Center"
-                                   StyleClasses="windowCloseButton"/>
-                </PanelContainer>
-                
+                <RichTextLabel Name="BodyNameLabel"
+                               StyleClasses="LabelKeyText"/>
                 <Label Name="BodyStateLabel"
                        StyleClasses="LabelSubText"/>
                 <RichTextLabel Name="BodyDescriptionLabel"
@@ -43,7 +36,11 @@
                     <Button Name="ToBodyButton"
                             Disabled="true"
                             Text="{Loc 'mind-ext-return-button'}"/>
+                    <controls:ConfirmButton Name="DeleteButton"
+                                        Text="{ Loc 'mind-ext-delete-button-text'}"
+                                        ConfirmationText="{ Loc 'mind-ext-delete-button-confirmation-text'}"/>
                 </BoxContainer>
+                
             </BoxContainer>
 
             

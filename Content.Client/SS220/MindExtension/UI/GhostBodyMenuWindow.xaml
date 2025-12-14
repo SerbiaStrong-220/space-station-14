@@ -2,7 +2,7 @@
                            xmlns:local="clr-namespace:Content.Client.SS220.MindExtension.UI"
                            xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
                            Title="{Loc 'mind-ext-body-menu'}"
-                           SetSize="570 450"
+                           SetSize="600 450"
                            MinSize="500 450">
     <BoxContainer Orientation="Vertical"
                   VerticalExpand="True"
@@ -10,7 +10,7 @@
         <PanelContainer HorizontalExpand="True"
                         VerticalExpand="True">
             <PanelContainer.PanelOverride>
-                <gfx:StyleBoxFlat BackgroundColor="#1B1B1E" />
+                <gfx:StyleBoxFlat BackgroundColor="#1B1B1E"/>
             </PanelContainer.PanelOverride>
             <ScrollContainer Name="GhostScroll"
                              VerticalExpand="True"
