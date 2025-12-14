@@ -399,6 +399,12 @@
   components:
   - type: Injector
     currentTransferAmount: 15
+  # SS220-injector-skill-begin
+  - type: LearningOnDoAfterEndWith
+    progress:
+      Medicine:
+        baseLearning: 0.05
+  # SS220-injector-skill-end
   - type: Tag
     tags:
     - Syringe

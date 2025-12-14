@@ -62,7 +62,7 @@ public abstract class SharedRestrictedItemSystem : EntitySystem
         if (!_whitelistSystem.IsWhitelistFail(item.Comp.Whitelist, user))
             return true;
 
- 
+
         _popup.PopupPredicted(Loc.GetString(item.Comp.LocalizedPopup), item, user);
 
         if (!item.Comp.DamageOnFail.Empty)

@@ -1,0 +1,6 @@
+- type: shader
+  id: HorizontalSpriteFill
+  kind: source
+  path: "/Textures/SS220/Shaders/horizontal_sprite_fill.swsl"
+  params:
+    Fillness: 0.0

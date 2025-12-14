@@ -15,6 +15,7 @@ using Content.Shared.PDA;
 using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
+using Content.Shared.SS220.Experience;
 using Content.Shared.Station;
 using JetBrains.Annotations;
 using Robust.Shared.Configuration;
@@ -164,6 +165,10 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
 
         DoJobSpecials(job, entity.Value);
         _identity.QueueIdentityUpdate(entity.Value);
+        // SS220-add-experience-init-event-post-spawn
+        var recalculateEv = new RecalculateEntityExperience();
+        RaiseLocalEvent(entity.Value, ref recalculateEv);
+        // SS220-add-experience-init-event-post-spawn
         return entity.Value;
     }
 
@@ -171,6 +176,17 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
     {
         if (!_prototypeManager.Resolve(job, out JobPrototype? prototype))
             return;
+
+        // SS220-experience-update-begin
+        // TODO remove null check before end merge
+        if (prototype.SkillOnInit is not null)
+        {
+            var skillRoleAddComp = EnsureComp<RoleExperienceAddComponent>(entity);
+            skillRoleAddComp.SkillAddId = prototype.SkillOnInit.Value;
+        }
+        // SS220-experience-update-end
+        // As a mark - DoJobSpecials should be later to give ability to change this with adding SkillRoleAddComponent
+        // SS220-experience-update-end**2
 
         foreach (var jobSpecial in prototype.Special)
         {
