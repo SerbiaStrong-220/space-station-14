@@ -11,6 +11,15 @@
             "name": "base"
         },
         {
+            "name": "equipped-BACKPACK"
+        },
+        {
+            "name": "equipped-BELT"
+        },
+        {
+            "name": "equipped-SUITSTORAGE"
+        },
+        {
             "name": "mag-unshaded-4"
         },
         {

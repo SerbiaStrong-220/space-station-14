@@ -41,7 +41,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      5: Dead
+      15: Dead # SS220 Revert Wizden balance #38131
   - type: Destructible
     thresholds:
     - trigger:

@@ -54,6 +54,7 @@
   - type: Gun
     fireRate: 1
     selectedMode: SemiAuto
+    projectileSpeed: 25 # SS220 Bullet Speed
     availableModes:
       - SemiAuto
     soundGunshot:
@@ -91,6 +92,7 @@
   - type: AmmoCounter
   - type: Gun
     fireRate: 1
+    projectileSpeed: 25 # SS220 Bullet Speed
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -130,6 +132,7 @@
     sprite: Objects/Weapons/Guns/Launchers/rocket.rsi
   - type: Gun
     fireRate: 0.5
+    projectileSpeed: 25 # SS220 Bullet Speed
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/rpgfire.ogg
   - type: BallisticAmmoProvider
@@ -172,6 +175,7 @@
     sprite: Objects/Weapons/Guns/Launchers/rocket.rsi
   - type: Gun
     fireRate: 6
+    projectileSpeed: 25 # SS220 Bullet Speed
     selectedMode: FullAuto
     availableModes:
       - FullAuto

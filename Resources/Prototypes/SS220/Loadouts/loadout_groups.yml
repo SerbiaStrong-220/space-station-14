@@ -283,6 +283,7 @@
   - SecurityBeret
   - SecurityHat
   - PilotCapCap
+  - PilotBeret
   - HelmetTacSec
 
 - type: loadoutGroup
@@ -329,22 +330,6 @@
 #! Служба безопасности (Конец)
 
 #! Медицинский отдел (Начало)
-
-  # Главный врач (Начало)
-- type: loadoutGroup
-  id: ChefMedicalNeck
-  minLimit: 0
-  name: loadout-group-chef-medical-neck
-  loadouts:
-  - WhiteScarf
-  - CoderNeck
-  - MapperNeck
-  - SpriterNeck
-  - TrackerExpertNeck
-  - AdministratorNeck
-  - HeadDeveloperNeck
-  - WikiEditorsNeck
-  # Главный врач (Конец)
 
   # Ведущий врач (Начало)
 - type: loadoutGroup

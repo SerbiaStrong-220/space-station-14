@@ -18,6 +18,7 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Content.Server.SS220.Bed.Cryostorage; //SS220 Cryo-anomaly-fix
+using Content.Shared.Teleportation.Components;
 
 namespace Content.Server.Anomaly.Effects;
 
@@ -200,6 +201,7 @@ public sealed class InnerBodyAnomalySystem : SharedInnerBodyAnomalySystem
     private void OnAnomalyShutdown(Entity<InnerBodyAnomalyComponent> ent, ref AnomalyShutdownEvent args)
     {
         RemoveAnomalyFromBody(ent);
+        RemCompDeferred<PortalTimeoutComponent>(ent); // ss220 fix anomaly portal
         RemCompDeferred<InnerBodyAnomalyComponent>(ent);
     }
 

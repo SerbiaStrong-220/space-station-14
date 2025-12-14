@@ -75,6 +75,17 @@ public sealed class AddUplinkCommand : LocalizedEntityCommands
         // Finally add uplink
         if (!_uplinkSystem.AddUplink(user, 20, uplinkEntity: uplinkEntity, giveDiscounts: isDiscounted))
             shell.WriteLine(Loc.GetString("add-uplink-command-error-2"));
+            // SS220 DynamicTraitor
+            var useDynamics = false;
+            if (args.Length >= 4)
+            {
+                if (!bool.TryParse(args[3], out useDynamics))
+                {
+                    shell.WriteLine(Loc.GetString("shell-invalid-bool"));
+                    return;
+                }
+            }
+            // SS220 DynamicTraitor
 
         // ss220-add-code-and-open-uplink-begin
         // check pr #2988

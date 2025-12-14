@@ -107,3 +107,6 @@
 
 - type: playTimeTracker
   id: JobDeathSquadHealer
+
+- type: playTimeTracker
+  id: CultistOfYogg

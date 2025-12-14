@@ -103,6 +103,10 @@
       amount: 2
     - id: DrinkCreamCarton
       amount: 2
+      #SS220 Start
+    - id: FoodCataria
+      amount: 2
+      #SS220 End
 
 - type: entity
   id: CrateFoodSoftdrinks

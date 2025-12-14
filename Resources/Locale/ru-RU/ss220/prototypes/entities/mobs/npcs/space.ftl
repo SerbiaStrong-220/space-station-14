@@ -9,3 +9,7 @@ ent-MobBearSpaceGhostRole = космический медведь
 ent-MobCobraSpaceGhostRole = { ent-MobCobraSpace }
     .suffix = Роль призрака
     .desc = { ent-MobCobraSpace.desc }
+
+ent-MobSharkDragon = космическая акула
+    .desc = { ent-MobShark.desc }
+    .suffix = ВыводокДракона

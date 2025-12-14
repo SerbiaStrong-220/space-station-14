@@ -396,17 +396,19 @@
         effectProto: StatusEffectSeeingRainbow
         type: Add
         time: 500
+      # UPD. SS220 Temporary remove
       #SS220 Temporary waddle status effect begin
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentCondition
-          reagent: Frezon
-          min: 1
-        key: TemporaryWaddle
-        component: TemporaryWaddle
-        type: Add
-        time: 500
+      #- !type:GenericStatusEffect
+      #  conditions:
+      #  - !type:ReagentCondition
+      #    reagent: Frezon
+      #    min: 1
+      #  key: TemporaryWaddle
+      #  component: TemporaryWaddle
+      #  type: Add
+      #  time: 500
       #SS220 Temporary waddle status effect end
+      # UPD. SS220 Temporary remove
       - !type:Drunk
         boozePower: 500
         minScale: 2

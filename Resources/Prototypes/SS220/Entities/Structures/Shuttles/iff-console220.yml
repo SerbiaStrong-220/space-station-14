@@ -1,0 +1,37 @@
+- type: entity
+  parent: BaseComputerAiAccess
+  id: ComputerIFFEbent
+  name: Управление системой "Диссипатор STEL-5"
+  description: Переключает систему активного демпфирования отраженных волн радаров, благодаря чему судно становится невидимым для большинства современных систем слежения.
+  suffix: SpaceWar
+  components:
+  - type: IFFConsole
+    allowedFlags:
+    - Hide
+    - HideLabel
+    stealthCooldown: 120
+    stealthTime: 20
+  - type: Anchorable
+    flags:
+    - Anchorable
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      sprite: Structures/Shuttles/iff.rsi
+      state: helm
+    - map: ["computerLayerKeys"]
+      state: generic_keys
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: ActivatableUI
+    key: enum.IFFConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.IFFConsoleUiKey.Key:
+        type: IFFConsoleBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface

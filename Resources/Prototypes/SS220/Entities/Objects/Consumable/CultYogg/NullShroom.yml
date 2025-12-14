@@ -23,8 +23,6 @@
     seedId: NullificationShroomSpores
   - type: Extractable
     grindableSolutionName: food
-  - type: DesiredFood
-    desireLevel: 1
   - type: Tag
     tags:
     - Omnivorous

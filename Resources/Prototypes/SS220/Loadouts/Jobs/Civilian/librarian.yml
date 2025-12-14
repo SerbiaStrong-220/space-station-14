@@ -9,6 +9,11 @@
       !type:RoleTimeRequirement
       role: JobLibrarian
       time: 72000 # 20
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 
 # Eyes
 - type: loadout

@@ -122,3 +122,18 @@
   - type: Icon
     sprite: SS220/Objects/Consumable/Drinks/xlebnuldiesel.rsi
     state: icon
+
+- type: entity
+  parent: DrinkGlass
+  id: DrinkSkoomalGlass
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Skooma
+          Quantity: 30
+  - type: Icon
+    sprite: SS220/Objects/Consumable/Drinks/skooma.rsi
+    state: icon

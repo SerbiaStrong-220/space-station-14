@@ -1,0 +1,38 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+using Content.Server.SS220.CombustingMindShield;
+using Content.Server.SS220.StationEvents.Components;
+using Content.Server.StationEvents.Events;
+using Content.Shared.GameTicking.Components;
+using Content.Shared.Implants.Components;
+using Content.Shared.Mindshield.Components;
+using Robust.Shared.Random;
+
+namespace Content.Server.SS220.StationEvents.Events;
+
+public sealed class MindShieldCombustionRule : StationEventSystem<MindShieldCombustionRuleComponent>
+{
+    [Dependency] private readonly IRobustRandom _random = default!;
+
+    protected override void Started(EntityUid uid, MindShieldCombustionRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
+    {
+        base.Started(uid, component, gameRule, args);
+
+        if (!TryGetRandomStation(out var station))
+            return;
+
+        var queryImplants = EntityQueryEnumerator<MindShieldComponent>();
+        List<EntityUid> validTargets = [];
+        while (queryImplants.MoveNext(out var ent, out _))
+        {
+            validTargets.Add(ent);
+        }
+
+        if (validTargets.Count == 0)
+            return;
+
+        var combustionOwner = _random.Pick(validTargets);
+
+        EnsureComp<CombustingMindShieldComponent>(combustionOwner);
+    }
+}

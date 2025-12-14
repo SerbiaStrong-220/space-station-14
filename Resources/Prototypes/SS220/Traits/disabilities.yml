@@ -20,3 +20,13 @@
   - type: ChangeSpeedDoAfters
     coefficient: 0.7
     chanceToFail: 0.27
+
+- type: trait
+  id: ChronicCough
+  name: trait-chronic-cough-name
+  description: trait-chronic-cough-desc
+  category: Disabilities
+  components:
+  - type: AutoEmote
+    emotes:
+    - Cough

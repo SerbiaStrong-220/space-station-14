@@ -131,7 +131,7 @@
     - Flashed
     - RadiationProtection
     - Adrenaline
-    - TemporaryWaddle  #SS220 Temporary waddle status effect
+    #- TemporaryWaddle  #SS220 Temporary waddle status effect # UPD. SS220 Temporary remove
     - Rave #SS220 cult
     - MiGoHeal  #SS220 cult
     - ChemicalAdaptation #SS220 #3150

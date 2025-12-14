@@ -11,4 +11,15 @@ public sealed partial class IFFConsoleComponent : Component
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite), DataField("allowedFlags")]
     public IFFFlags AllowedFlags = IFFFlags.HideLabel;
+    // ss220 spacewar begin
+    [DataField]
+    public TimeSpan StealthTime = TimeSpan.Zero;
+
+    [DataField]
+    public TimeSpan StealthCooldown = TimeSpan.Zero;
+
+    public TimeSpan CooldownUntil = TimeSpan.Zero;
+
+    public TimeSpan StealthUntil = TimeSpan.Zero;
+    // ss220 spacewar end
 }

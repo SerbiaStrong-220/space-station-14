@@ -24,7 +24,7 @@
         - !type:ComponentCondition
             inverted: true
             components:
-              - CultYogg
+            - CultYogg
 
 - type: reagent
   id: ElixirOfLiberation
@@ -38,6 +38,11 @@
     Poison:
       effects:
       - !type:ChemElixirOfLiberationEffect
+      - !type:GenericStatusEffect
+        key: Muted
+        component: Muted
+        type: Remove
+        time: 60
 
 - type: reagent
   id: CultYoggVenomancerAcid
@@ -103,6 +108,10 @@
         - !type:ReagentCondition
           reagent: EssenceOfTheAbyss
           min: 8
+        - !type:ComponentCondition
+          inverted: true
+          components:
+          - BibleUser
         effectProto: StatusEffectForcedSleeping
         time: 3
         type: Add
@@ -115,3 +124,7 @@
         - !type:ReagentCondition
           reagent: EssenceOfTheAbyss
           min: 10
+        - !type:ComponentCondition
+          inverted: true
+          components:
+          - BibleUser

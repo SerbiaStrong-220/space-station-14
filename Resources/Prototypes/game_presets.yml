@@ -12,6 +12,7 @@
     # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
     - SpaceTrafficControlFriendlyEventScheduler
     - BasicRoundstartVariation
+    - EmergencyShuttleAutoVote # SS220-evac-vote
 
 - type: gamePreset
   id: KesslerSyndrome
@@ -28,6 +29,7 @@
     # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
     - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
     - BasicRoundstartVariation
+    - EmergencyShuttleAutoVote # SS220-evac-vote
 
 - type: gamePreset
   id: AllAtOnce
@@ -47,6 +49,7 @@
     # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
     - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
     - BasicRoundstartVariation
+    - EmergencyShuttleAutoVote # SS220-evac-vote
 
 - type: gamePreset
   id: AllerAtOnce
@@ -72,6 +75,7 @@
     # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
     - SpaceTrafficControlFriendlyEventScheduler
     - BasicRoundstartVariation
+    - EmergencyShuttleAutoVote # SS220-evac-vote
 
 - type: gamePreset
   id: Extended
@@ -88,6 +92,7 @@
   # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
   - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
   - BasicRoundstartVariation
+  - EmergencyShuttleAutoVote # SS220-evac-vote
 
 - type: gamePreset
   id: Greenshift
@@ -118,6 +123,7 @@
   # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
   - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
   - BasicRoundstartVariation
+  - EmergencyShuttleAutoVote # SS220-evac-vote
 
 - type: gamePreset
   id: Secret
@@ -160,6 +166,7 @@
   # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
   - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
   - BasicRoundstartVariation
+  - EmergencyShuttleAutoVote # SS220-evac-vote
 
 - type: gamePreset
   id: Deathmatch
@@ -227,6 +234,7 @@
   # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
   - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
   - BasicRoundstartVariation
+  - EmergencyShuttleAutoVote # SS220-evac-vote
 
 - type: gamePreset
   id: Zombie
@@ -246,6 +254,7 @@
   # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
   - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
   - BasicRoundstartVariation
+  - EmergencyShuttleAutoVote # SS220-evac-vote
 
 - type: gamePreset
   id: Zombieteors

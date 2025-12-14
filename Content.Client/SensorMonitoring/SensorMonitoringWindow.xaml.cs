@@ -1,6 +1,8 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Numerics;
 using Content.Client.Computer;
+using Content.Client.SS220.UserInterface.Controls;
+using Content.Client.SS220.UserInterface.System.PinUI;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.SensorMonitoring;
@@ -17,7 +19,7 @@ using IncrementalUIState = Content.Shared.SensorMonitoring.SensorMonitoringIncre
 namespace Content.Client.SensorMonitoring;
 
 [GenerateTypedNameReferences]
-public sealed partial class SensorMonitoringWindow : FancyWindow, IComputerWindow<ConsoleUIState>
+public sealed partial class SensorMonitoringWindow : FancyWindow, IComputerWindow<ConsoleUIState>, IPinnableWindow // ss220 add pin for ui
 {
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly ILocalizationManager _loc = default!;
@@ -52,6 +54,10 @@ public sealed partial class SensorMonitoringWindow : FancyWindow, IComputerWindo
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
+
+        // SS220 add pin button begin
+        PinUISystem.AddPinButtonBeforeTarget(this, CloseButton);
+        // SS220 add pin button end
     }
 
     public void UpdateState(ConsoleUIState state)

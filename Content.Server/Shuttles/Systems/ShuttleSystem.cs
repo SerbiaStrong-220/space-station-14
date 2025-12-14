@@ -96,6 +96,7 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
     {
         base.Update(frameTime);
         UpdateHyperspace();
+        UpdateIFF(); // ss220 spacewar
     }
 
     private void OnGridInit(GridInitializeEvent ev)

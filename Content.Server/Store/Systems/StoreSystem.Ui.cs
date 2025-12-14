@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Server.Actions;
 using Content.Server.Administration.Logs;
+using Content.Server.SS220.TraitorDynamics;
 using Content.Server.Stack;
 using Content.Server.Store.Components;
 using Content.Shared.Actions;
@@ -30,6 +31,7 @@ public sealed partial class StoreSystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly StackSystem _stack = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private readonly TraitorDynamicsSystem _dynamics = default!; //SS220 - show-in-uplink-type-dynamic
 
     private void InitializeUi()
     {
@@ -109,8 +111,12 @@ public sealed partial class StoreSystem
 
         // only tell operatives to lock their uplink if it can be locked
         var showFooter = HasComp<RingerUplinkComponent>(store);
+        //SS220 - show-in-uplink-type-dynamic-start
+        var dynamic = _dynamics.GetCurrentDynamic();
+        var dynamicName = _proto.TryIndex(dynamic, out var dynamicProto) ? dynamicProto.SelectedLoreName : null;
 
-        var state = new StoreUpdateState(component.LastAvailableListings, allCurrency, showFooter, component.RefundAllowed);
+        var state = new StoreUpdateState(component.LastAvailableListings, allCurrency, showFooter, component.RefundAllowed, dynamicName);
+        //SS220 - show-in-uplink-type-dynamic-end
         _ui.SetUiState(store, StoreUiKey.Key, state);
     }
 

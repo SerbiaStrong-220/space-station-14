@@ -7,3 +7,10 @@ chat-radio-traders = Торговцы
 chat-radio-honk = Хонк-сквад
 
 chat-radio-law = Юридический
+
+chat-radio-nanotrasen-operatives = Силы Нанотрейзен
+chat-radio-syndicate-operatives = Силы Синдиката
+
+base-frequency-channel-name = Частота-{NATURALFIXED($freq, 2)}
+nanotrasen-operatives-frequency-channel-name = NT-{NATURALFIXED($freq, 2)}
+syndicate-operatives-frequency-channel-name = SYND-{NATURALFIXED($freq, 2)}

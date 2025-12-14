@@ -9,6 +9,8 @@
     sprite: Clothing/Neck/mantles/capmantle.rsi
   - type: Clothing
     sprite: Clothing/Neck/mantles/capmantle.rsi
+  - type: StealTarget #SS220 Thief HeadCloak StealTarget Update
+    stealGroup: HeadCloak #SS220 Thief HeadCloak StealTarget Update
 
 - type: entity
   parent: [ClothingNeckBase]
@@ -21,6 +23,8 @@
     sprite: Clothing/Neck/mantles/cemantle.rsi
   - type: Clothing
     sprite: Clothing/Neck/mantles/cemantle.rsi
+  - type: StealTarget #SS220 Thief HeadCloak StealTarget Update
+    stealGroup: HeadCloak #SS220 Thief HeadCloak StealTarget Update
 
 - type: entity
   parent: [ClothingNeckBase]
@@ -33,6 +37,8 @@
     sprite: Clothing/Neck/mantles/cmomantle.rsi
   - type: Clothing
     sprite: Clothing/Neck/mantles/cmomantle.rsi
+  - type: StealTarget #SS220 Thief HeadCloak StealTarget Update
+    stealGroup: HeadCloak #SS220 Thief HeadCloak StealTarget Update
 
 - type: entity
   parent: [ClothingNeckBase]
@@ -45,6 +51,8 @@
     sprite: Clothing/Neck/mantles/hopmantle.rsi
   - type: Clothing
     sprite: Clothing/Neck/mantles/hopmantle.rsi
+  - type: StealTarget #SS220 Thief HeadCloak StealTarget Update
+    stealGroup: HeadCloak #SS220 Thief HeadCloak StealTarget Update
 
 - type: entity
   parent: [ClothingNeckBase]
@@ -57,6 +65,8 @@
     sprite: Clothing/Neck/mantles/hosmantle.rsi
   - type: Clothing
     sprite: Clothing/Neck/mantles/hosmantle.rsi
+  - type: StealTarget #SS220 Thief HeadCloak StealTarget Update
+    stealGroup: HeadCloak #SS220 Thief HeadCloak StealTarget Update
 
 - type: entity # Corvax-Resprite: Old mantle renamed and saved as that new entity
   parent: ClothingNeckBase
@@ -68,6 +78,8 @@
     sprite: Clothing/Neck/mantles/hosmantle_shoulder.rsi
   - type: Clothing
     sprite: Clothing/Neck/mantles/hosmantle_shoulder.rsi
+  - type: StealTarget #SS220 Thief HeadCloak StealTarget Update
+    stealGroup: HeadCloak #SS220 Thief HeadCloak StealTarget Update
 
 - type: entity
   parent: [ClothingNeckBase]
@@ -80,6 +92,8 @@
     sprite: Clothing/Neck/mantles/rdmantle.rsi
   - type: Clothing
     sprite: Clothing/Neck/mantles/rdmantle.rsi
+  - type: StealTarget #SS220 Thief HeadCloak StealTarget Update
+    stealGroup: HeadCloak #SS220 Thief HeadCloak StealTarget Update
 
 - type: entity
   parent: [ClothingNeckBase]
@@ -92,6 +106,8 @@
     sprite: Clothing/Neck/mantles/qmmantle.rsi
   - type: Clothing
     sprite: Clothing/Neck/mantles/qmmantle.rsi
+  - type: StealTarget #SS220 Thief HeadCloak StealTarget Update
+    stealGroup: HeadCloak #SS220 Thief HeadCloak StealTarget Update
 
 - type: entity
   parent: ClothingNeckBase

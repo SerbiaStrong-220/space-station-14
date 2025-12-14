@@ -6,3 +6,27 @@
   physicalDesc: reagent-physical-desc-thick
   flavor: beets
   color: "#300010"
+
+#CatariaJuice
+
+- type: reagent
+  id: CatariaJuice
+  name: reagent-name-catariajuice
+  parent: BaseDrink
+  desc: reagent-desc-catariajuice
+  physicalDesc: reagent-physical-desc-piquant
+  flavor: minty
+  color: "#c275ca"
+  recognizable: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 1
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectSeeingRainbow
+        type: Add
+        time: 2
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Tajaran ]

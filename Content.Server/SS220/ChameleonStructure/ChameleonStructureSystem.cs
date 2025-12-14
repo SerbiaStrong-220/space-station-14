@@ -24,11 +24,11 @@ public sealed class ChameleonStructureSystem : SharedChameleonStructureSystem
             ent.Comp.Prototype = MetaData(ent).EntityPrototype?.ID;//Not sure if this secure from null
         }
 
-        SetPrototype(ent, ent.Comp.Prototype, true);
+        TrySetPrototype(ent, ent.Comp.Prototype, true);
     }
 
     private void OnSelected(Entity<ChameleonStructureComponent> ent, ref ChameleonStructurePrototypeSelectedMessage args)
     {
-        SetPrototype(ent, args.SelectedId);
+        TrySetPrototype(ent, args.SelectedId);
     }
 }

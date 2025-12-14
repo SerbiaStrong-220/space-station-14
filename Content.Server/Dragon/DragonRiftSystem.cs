@@ -60,12 +60,20 @@ public sealed class DragonRiftSystem : EntitySystem
                 // TODO: When we get autocall you can buff if the rift finishes / 3 rifts are up
                 // for now they just keep 3 rifts up.
 
-                if (comp.Dragon != null)
-                    _dragon.RiftCharged(comp.Dragon.Value);
-
                 comp.Accumulator = comp.MaxAccumulator;
                 RemComp<DamageableComponent>(uid);
                 comp.State = DragonRiftState.Finished;
+
+                // ss220 add shark for dragon rift start
+                var ent = Spawn(comp.SpawnOnFinishedPrototype, xform.Coordinates);
+
+                if (comp.Dragon != null)
+                {
+                    _dragon.RiftCharged(comp.Dragon.Value);
+                    _npc.SetBlackboard(ent, NPCBlackboard.FollowTarget, new EntityCoordinates(comp.Dragon.Value, Vector2.Zero));
+                }
+                // ss220 add shark for dragon rift end
+
                 Dirty(uid, comp);
             }
             else if (comp.State != DragonRiftState.Finished)

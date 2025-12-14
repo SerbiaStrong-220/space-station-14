@@ -71,9 +71,6 @@ public sealed partial class CCVars220
     public static readonly CVarDef<float> AfkTimeKick =
         CVarDef.Create("afk.time_kick", 600f, CVar.SERVERONLY);
 
-    public static readonly CVarDef<float> AfkTeleportToCryo =
-        CVarDef.Create("afk.teleport_to_cryo", 1800f, CVar.SERVERONLY);
-
     public static readonly CVarDef<float> AfkActivityMessageInterval =
         CVarDef.Create("afk.activity_message_interval", 20f, CVar.CLIENTONLY | CVar.CHEAT);
 

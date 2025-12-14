@@ -363,7 +363,7 @@
     - id: WeaponMultiPhaseEnergyGun #SS220 MultiPhaze Energy Gun
     - id: BodySecurityCamera #SS220-Bodycam
     - id: CigPackSEC #SS220 Cigarettes
-    - id: WeaponTaser
+    # - id: WeaponTaser # SS220 No tasers
     - id: WantedListCartridge
     - id: DrinkHosFlask
 

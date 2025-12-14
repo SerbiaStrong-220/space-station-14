@@ -1,0 +1,158 @@
+- type: entity
+  id: DisposalFilterPipeYFlipped
+  parent: DisposalPipeBase
+  name: disposal filter y-junction
+  description: A y-junction for disposal filters.
+  components:
+  - type: Sprite
+    drawdepth: ThickPipe
+    sprite: SS220/Structures/Piping/Disposals/disposal.rsi
+    layers:
+    - map: [ "pipe" ]
+      state: con_y_pipe_filter_flipped
+    visible: true
+  - type: GenericVisualizer
+    visuals:
+      enum.DisposalTubeVisuals.VisualState:
+        pipe:
+          Free: { state: con_y_pipe_filter_flipped }
+          Anchored: { state: y_pipe_filter_flipped }
+  - type: DisposalTube
+    containerId: DisposalRouter
+  - type: DisposalFilter
+  - type: DisposalRouter
+    degrees:
+    - 0
+    - 90
+    - 180
+  - type: ContainerContainer
+    containers:
+      DisposalRouter: !type:Container
+  - type: Flippable
+    mirrorEntity: DisposalFilterPipeY
+  - type: ActivatableUI
+    key: enum.DisposalFilterUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.DisposalFilterUiKey.Key:
+        type: DisposalFilterBoundUserInterface
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.25,0.5"
+        mask:
+        - SubfloorMask
+  - type: Construction
+    graph: DisposalPipe
+    node: filterflipped
+    containers:
+    - DisposalRouter
+  - type: StaticPrice
+    price: 85
+
+- type: entity
+  id: DisposalFilterPipeY
+  parent: DisposalPipeBase
+  name: disposal filter y-junction
+  description: A y-junction for disposal filters.
+  components:
+  - type: Sprite
+    drawdepth: ThickPipe
+    sprite: SS220/Structures/Piping/Disposals/disposal.rsi
+    layers:
+    - map: [ "pipe" ]
+      state: con_y_pipe_filter
+    visible: true
+  - type: GenericVisualizer
+    visuals:
+      enum.DisposalTubeVisuals.VisualState:
+        pipe:
+          Free: { state: con_y_pipe_filter }
+          Anchored: { state: y_pipe_filter }
+  - type: DisposalTube
+    containerId: DisposalRouter
+  - type: DisposalFilter
+  - type: DisposalRouter
+    degrees:
+    - 0
+    - -90
+    - 180
+  - type: ContainerContainer
+    containers:
+      DisposalRouter: !type:Container
+  - type: Flippable
+    mirrorEntity: DisposalFilterPipeYFlipped
+  - type: ActivatableUI
+    key: enum.DisposalFilterUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.DisposalFilterUiKey.Key:
+        type: DisposalFilterBoundUserInterface
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.25,0.5"
+        mask:
+        - SubfloorMask
+  - type: Construction
+    graph: DisposalPipe
+    node: filter
+    containers:
+    - DisposalRouter
+  - type: StaticPrice
+    price: 85
+
+- type: entity
+  id: DisposalFilterPipeX
+  parent: DisposalPipeBase
+  name: disposal x-junction
+  description: A four-way junction. The arrow indicates where items exit.
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Piping/Disposals/disposal.rsi
+    layers:
+    - map: [ "pipe" ]
+      state: con_x_pipe_filter
+  - type: GenericVisualizer
+    visuals:
+      enum.DisposalTubeVisuals.VisualState:
+        pipe:
+          Free: { state: con_x_pipe_filter }
+          Anchored: { state: x_pipe_filter }
+  - type: DisposalTube
+    containerId: DisposalJunction
+  - type: DisposalFilter
+  - type: ActivatableUI
+    key: enum.DisposalFilterUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.DisposalFilterUiKey.Key:
+        type: DisposalFilterBoundUserInterface
+  - type: DisposalJunction
+    degrees:
+    - 0
+    - -90
+    - 180
+    - 90
+  - type: ContainerContainer
+    containers:
+      DisposalJunction: !type:Container
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - SubfloorMask
+  - type: Construction
+    graph: DisposalPipe
+    node: xfilter
+    containers:
+    - DisposalJunction
+  - type: StaticPrice
+    price: 85

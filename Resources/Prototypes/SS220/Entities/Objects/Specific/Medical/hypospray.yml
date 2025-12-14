@@ -50,7 +50,7 @@
       - state: base-colorB-inhand-right
         color: "#c62933"
   - type: Sprite
-    sprite: Objects/Specific/Medical/medipen.rsi
+    sprite: SS220/Objects/Specific/Medical/medipen.rsi #SS220 Repsrite Medipen
     layers:
     - state: stimpen
       map: ["enum.SolutionContainerLayers.Fill"]
@@ -95,7 +95,7 @@
       - state: base-colorB-inhand-right
         color: "#c62933"
   - type: Sprite
-    sprite: Objects/Specific/Medical/medipen.rsi
+    sprite: SS220/Objects/Specific/Medical/medipen.rsi #SS220 Repsrite Medipen
     layers:
     - state: stimpen
       map: ["enum.SolutionContainerLayers.Fill"]

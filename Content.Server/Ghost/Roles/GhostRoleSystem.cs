@@ -168,7 +168,10 @@ public sealed class GhostRoleSystem : EntitySystem
 
         _openUis.Remove(session, out var eui);
 
-        eui?.Close();
+        // ss220 fix ghost role eui start
+        if (session.Status != SessionStatus.Disconnected)
+            eui?.Close();
+        // ss220 fix ghost role eui end
     }
 
     public void CloseMakeGhostRoleEui(ICommonSession session)

@@ -51,5 +51,5 @@
   - type: Item
     size: Tiny
   - type: Sprite
-    sprite: Objects/Specific/Medical/medipen.rsi
+    sprite: SS220/Objects/Specific/Medical/medipen.rsi #SS220 Repsrite Medipen
     state: salpen

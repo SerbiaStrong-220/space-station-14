@@ -135,7 +135,26 @@ public sealed class AutoEmoteSystem : EntitySystem
         autoEmotePrototype ??= _prototypeManager.Index<AutoEmotePrototype>(autoEmotePrototypeId);
 
         var curTime = _gameTiming.CurTime;
-        var time = curTime + autoEmotePrototype.Interval;
+
+        // ss220 add chronic cough start
+        TimeSpan interval;
+
+        if (autoEmotePrototype.Interval is { } fixedInterval)
+        {
+            interval = fixedInterval;
+        }
+        else if (autoEmotePrototype is { MinInterval: { } min, MaxInterval: { } max })
+        {
+            interval = _random.Next(min, max);
+        }
+        else
+        {
+            return false;
+        }
+
+        var time = curTime + interval;
+        // ss220 add chronic cough end
+
         autoEmote.EmoteTimers[autoEmotePrototypeId] = time;
 
         if (autoEmote.NextEmoteTime > time || autoEmote.NextEmoteTime <= curTime)

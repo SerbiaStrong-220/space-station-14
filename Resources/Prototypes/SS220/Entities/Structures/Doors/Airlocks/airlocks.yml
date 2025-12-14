@@ -4,7 +4,7 @@
   suffix: Law
   components:
   - type: Sprite
-    sprite: SS220/Structures/Doors/Airlocks/Standart/law.rsi
+    sprite: SS220/Structures/Doors/Airlocks/Standard/law.rsi
   - type: Wires
     layoutId: AirlockSecurity
 
@@ -24,7 +24,7 @@
   suffix: Security/Lawyer
   components:
   - type: Sprite
-    sprite: SS220/Structures/Doors/Airlocks/Standart/law_sec.rsi
+    sprite: SS220/Structures/Doors/Airlocks/Standard/law_sec.rsi
   - type: Wires
     layoutId: AirlockSecurity
 

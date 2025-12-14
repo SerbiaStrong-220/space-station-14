@@ -63,5 +63,5 @@
 - type: startingGear
   id: JoeKangarooGear
   equipment:
-    gloves: ClothingHandsGlovesCombat
+    gloves: ClothingHandsGlovesBoxingRed
     head: ClothingHeadHelmetBasic

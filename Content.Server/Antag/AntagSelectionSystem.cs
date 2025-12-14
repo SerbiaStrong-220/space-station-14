@@ -237,6 +237,11 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         if (component.AssignmentComplete)
             return;
 
+        // SS220-dynamic-traitors-add
+        var ev = new BeforeAntagSelection();
+        RaiseLocalEvent(uid, ref ev);
+        // SS220-dynamic-traitors-end
+
         var players = _playerManager.Sessions
             .Where(x => GameTicker.PlayerGameStatuses.TryGetValue(x.UserId, out var status) &&
                         status == PlayerGameStatus.JoinedGame)
@@ -670,3 +675,8 @@ public record struct AntagSelectLocationEvent(ICommonSession? Session, Entity<An
 /// </summary>
 [ByRefEvent]
 public readonly record struct AfterAntagEntitySelectedEvent(ICommonSession? Session, EntityUid EntityUid, Entity<AntagSelectionComponent> GameRule, AntagSelectionDefinition Def);
+
+//SS220-dynamic-traitors-begin
+[ByRefEvent]
+public readonly record struct BeforeAntagSelection();
+//SS220-dynamic-traitors-end
