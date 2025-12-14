@@ -94,6 +94,19 @@
     Radiation: 0.5
 
 - type: damageModifierSet
+  id: SharkDragon
+  coefficients:
+    Blunt: 1
+    Slash: 1.2
+    Piercing: 0.6
+    Heat: 0.6
+    Shock: 1
+    Cold: 1
+    Poison: 1
+    Cellular: 1
+    Radiation: 0.5
+
+- type: damageModifierSet
   id: RatKing
   coefficients:
     Blunt: 1
@@ -150,3 +163,25 @@
     Heat: 0.9
     Piercing: 0.6
 #midround-fauna-damagesets-ended
+
+- type: damageModifierSet
+  id: Silicon
+  coefficients:
+    Blunt: 0.7
+    Slash: 0.8
+    Piercing: 0.8
+
+- type: damageModifierSet
+  id: SiliconMining
+  coefficients:
+    Blunt: 0.7
+    Slash: 0.65
+    Piercing: 0.8
+
+- type: damageModifierSet
+  id: SiliconSyndicate
+  coefficients:
+    Blunt: 0.5
+    Slash: 0.4
+    Piercing: 0.6
+    Heat: 0.4

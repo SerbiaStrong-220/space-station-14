@@ -34,8 +34,8 @@ public sealed class MovingPoint
     }
     public void DrawMovingDirection(DrawingHandleScreen handle)
     {
-        DrawArrow(handle, _pointPosition, _pointPosition + 10 * _moveDirection, 6f, MoveDirectionColor, true);
-        DrawArrow(handle, _pointPosition - 10 * _moveDirection, _pointPosition, 6f, MoveDirectionColor, false);
+        DrawArrow(handle, _pointPosition, _pointPosition + _moveDirection, 6f, MoveDirectionColor, true);
+        DrawArrow(handle, _pointPosition - _moveDirection, _pointPosition, 6f, MoveDirectionColor, false);
     }
 
     private void DrawArrow(DrawingHandleScreen handle, Vector2 from, Vector2 to, float arrowRange, Color color, bool ArrowFront)

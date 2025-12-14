@@ -166,9 +166,9 @@ public sealed class CluwneCommsConsoleSystem : EntitySystem
             msg,
             title,
             true,
-            ent.Comp.Sound,
+            announcementSound: ent.Comp.Sound,
             colorOverride: ent.Comp.Color,
-            voiceId);
+            voiceId: voiceId);
 
         _adminLogger.Add(LogType.Chat,
             LogImpact.Low,

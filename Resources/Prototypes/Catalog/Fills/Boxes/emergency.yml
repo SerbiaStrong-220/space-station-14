@@ -272,6 +272,7 @@
     - id: DrinkWaterBottleFull
   - type: Tag
     tags:
+    - BoxCardboard
     - BoxHug
 
 - type: entity
@@ -303,7 +304,7 @@
     - id: EmergencyMedipen
     - id: SpaceMedipen # SS220 Revert deleted Medipen
     - id: Flare
-    - id: FoodBreadBaguette
+    - id: FoodBreadNutriBatard
     - id: DrinkWaterBottleFull
 
 - type: entity
@@ -318,7 +319,7 @@
     - id: EmergencyMedipen
     - id: SpaceMedipen # SS220 Revert deleted Medipen
     - id: Flare
-    - id: FoodBreadBaguette
+    - id: FoodBreadNutriBatard
     - id: DrinkWaterBottleFull
   - type: Sprite
     layers:
@@ -338,7 +339,7 @@
     - id: EmergencyOxygenTankFilled
     - id: EmergencyMedipen
     - id: Flare
-    - id: FoodBreadBaguetteCotton
+    - id: FoodBreadCottonNutriBatard
     - id: DrinkWaterBottleFull
 
 - type: entity

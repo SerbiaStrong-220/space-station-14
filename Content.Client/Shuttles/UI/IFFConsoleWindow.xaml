@@ -14,6 +14,10 @@
             <BoxContainer Orientation="Horizontal" MinWidth="120">
                 <Button Name="ShowVesselOnButton" Text="{Loc 'iff-console-on'}" StyleClasses="OpenRight" />
                 <Button Name="ShowVesselOffButton" Text="{Loc 'iff-console-off'}" StyleClasses="OpenLeft" />
+                <Label Name="StealthDuration"/> <!-- ss220 spacewar -->
+            </BoxContainer>
+            <BoxContainer Orientation="Vertical">
+                <Label Name="StealthCooldown"/> <!-- ss220 spacewar -->
             </BoxContainer>
         </GridContainer>
     </BoxContainer>

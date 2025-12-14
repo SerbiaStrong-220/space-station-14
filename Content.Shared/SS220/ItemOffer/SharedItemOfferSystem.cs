@@ -2,6 +2,8 @@
 
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Interaction.Components;
+using Content.Shared.SS220.StuckOnEquip;
 using Content.Shared.Verbs;
 using Robust.Shared.Utility;
 
@@ -20,7 +22,18 @@ public abstract class SharedItemOfferSystem : EntitySystem
 
     private void AddOfferVerb(Entity<HandsComponent> ent, ref GetVerbsEvent<EquipmentVerb> args)
     {
-        if (!args.CanInteract || !args.CanAccess || _hands.GetActiveItem(args.User) == null)
+        if (!args.CanInteract || !args.CanAccess)
+            return;
+
+        var item = _hands.GetActiveItem(args.User);
+
+        if (item == null)
+            return;
+
+        if (HasComp<UnremoveableComponent>(item))
+            return;
+
+        if (TryComp<StuckOnEquipComponent>(item, out var equip) && equip.IsStuck)
             return;
 
         var user = args.User;

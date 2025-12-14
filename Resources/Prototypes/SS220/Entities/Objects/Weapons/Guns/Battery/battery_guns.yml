@@ -79,6 +79,7 @@
   - type: Gun
     minAngle: 17
     maxAngle: 29
+    projectileSpeed: 30
     angleIncrease: 3
     angleDecay: 16
     soundGunshot:

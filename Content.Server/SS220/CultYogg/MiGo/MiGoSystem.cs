@@ -1,26 +1,28 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Body.Systems;
+using Content.Server.Roles.Jobs;
+using Content.Server.Projectiles;
 using Content.Shared.Alert;
+using Content.Shared.Body.Components;
+using Content.Shared.Body.Systems;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Eye;
 using Content.Shared.FixedPoint;
+using Content.Shared.Mind.Components;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Movement.Pulling.Components;
+using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Systems;
 using Content.Shared.SS220.CultYogg.MiGo;
+using Content.Shared.SS220.Temperature;
 using Content.Shared.StatusEffect;
 using Content.Shared.Tag;
-using Robust.Server.GameObjects;
 using Content.Shared.Projectiles;
-using Content.Server.Projectiles;
-using Content.Shared.Movement.Pulling.Components;
-using Content.Shared.Movement.Pulling.Systems;
-using Content.Shared.SS220.Temperature;
-using Content.Shared.Body.Systems;
-using Content.Shared.Body.Components;
+using Robust.Server.GameObjects;
 
 namespace Content.Server.SS220.CultYogg.MiGo;
 
@@ -38,6 +40,7 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly ProjectileSystem _projectile = default!;
     [Dependency] private readonly PullingSystem _pullingSystem = default!;
+    [Dependency] private readonly JobSystem _jobSystem = default!;
 
     private const string AscensionReagent = "TheBloodOfYogg";
 
@@ -48,7 +51,13 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
         //actions
         SubscribeLocalEvent<MiGoComponent, MiGoEnslaveDoAfterEvent>(MiGoEnslaveOnDoAfter);
 
+        SubscribeLocalEvent<MiGoComponent, MindAddedMessage>(OnMindAdded);
         SubscribeLocalEvent<MiGoComponent, TemperatureChangeAttemptEvent>(OnTemperatureDamage);
+    }
+
+    private void OnMindAdded(Entity<MiGoComponent> ent, ref MindAddedMessage args)
+    {
+        _jobSystem.MindAddJob(args.Mind, ent.Comp.JobName);
     }
 
     private void OnTemperatureDamage(Entity<MiGoComponent> ent, ref TemperatureChangeAttemptEvent args)

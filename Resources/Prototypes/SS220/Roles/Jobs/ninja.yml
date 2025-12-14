@@ -1,0 +1,8 @@
+- type: job
+  id: Ninja
+  name: job-name-ninja
+  description: job-description-ninja
+  playTimeTracker: AntagNinja
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 20h

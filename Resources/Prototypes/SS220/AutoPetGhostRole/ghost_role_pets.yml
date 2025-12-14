@@ -215,8 +215,5 @@
     allowMovement: true
     name: ghost-role-information-pet-steven-name
     description: ghost-role-information-pet-steven-description
-    requirements:
-    - !type:DepartmentTimeRequirement
-      department: Security
-      time: 14400 # SS220 - 4 hours
+    job: SecurityPet
   - type: GhostTakeoverAvailable

@@ -37,7 +37,7 @@
   suffix: Magistrate, Locked
   components:
   - type: Sprite
-    sprite: SS220/Structures/Doors/Airlocks/Standart/magistrate.rsi
+    sprite: SS220/Structures/Doors/Airlocks/Standard/magistrate.rsi
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsMagistrate ]
@@ -109,7 +109,7 @@
   components:
   - type: ContainerFill
     containers:
-      board: [ DoorElectronicsCentralCommand ]
+      board: [ DoorElectronicsCentralCommandERT ]
 
 - type: entity
   parent: AirlockGlassCentcomm
@@ -118,7 +118,7 @@
   components:
   - type: ContainerFill
     containers:
-      board: [ DoorElectronicsCentralCommand ]
+      board: [ DoorElectronicsCentralCommandBSO ]
 
 - type: entity
   parent: AirlockGlassCentcomm
@@ -127,7 +127,7 @@
   components:
   - type: ContainerFill
     containers:
-      board: [ DoorElectronicsCentralCommand ]
+      board: [ DoorElectronicsCentralCommandDeathSquad ]
 
 - type: entity
   parent: AirlockGlassCentcomm
@@ -136,7 +136,7 @@
   components:
   - type: ContainerFill
     containers:
-      board: [ DoorElectronicsCentralCommand ]
+      board: [ DoorElectronicsCentralCommandCBURN ]
 
 - type: entity
   parent: Airlock
@@ -166,7 +166,7 @@
   components:
   - type: ContainerFill
     containers:
-      board: [ DoorElectronicsCentralCommand ]
+      board: [ DoorElectronicsCentralCommandBSO ]
 
 - type: entity
   parent: AirlockCentcomm
@@ -175,7 +175,7 @@
   components:
   - type: ContainerFill
     containers:
-      board: [ DoorElectronicsCentralCommand ]
+      board: [ DoorElectronicsCentralCommandERT ]
 
 - type: entity
   parent: AirlockCentcomm
@@ -184,7 +184,7 @@
   components:
   - type: ContainerFill
     containers:
-      board: [ DoorElectronicsCentralCommand ]
+      board: [ DoorElectronicsCentralCommandDeathSquad ]
 
 
 - type: entity
@@ -194,7 +194,43 @@
   components:
   - type: ContainerFill
     containers:
-      board: [ DoorElectronicsCentralCommand ]
+      board: [ DoorElectronicsCentralCommandCBURN ]
+
+- type: entity
+  parent: HighSecCentralCommandLocked
+  id: HighSecCentcommLockedBSO
+  suffix: CC, Locked, BSO
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsCentralCommandBSO ]
+
+- type: entity
+  parent: HighSecCentralCommandLocked
+  id: HighSecCentcommLockedERT
+  suffix: CC, Locked, ERT
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsCentralCommandERT ]
+
+- type: entity
+  parent: HighSecCentralCommandLocked
+  id: HighSecCentcommLockedCBURN
+  suffix: CC, Locked, CBURN
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsCentralCommandCBURN ]
+
+- type: entity
+  parent: HighSecCentralCommandLocked
+  id: HighSecCentcommLockedDeathSquad
+  suffix: CC, Locked, DeathSquad
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsCentralCommandDeathSquad ]
 
 #USSP
 - type: entity
@@ -272,7 +308,7 @@
   suffix: USSP
   components:
   - type: Sprite
-    sprite: SS220/Structures/Doors/Airlocks/Standart/ussp_basic.rsi
+    sprite: SS220/Structures/Doors/Airlocks/Standard/ussp_basic.rsi
 
 - type: entity
   parent: AirlockUssp
@@ -289,7 +325,7 @@
   suffix: USSP, Locked, Command
   components:
   - type: Sprite
-    sprite: SS220/Structures/Doors/Airlocks/Standart/ussp_command.rsi
+    sprite: SS220/Structures/Doors/Airlocks/Standard/ussp_command.rsi
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsUsspLockedCommand ]
@@ -300,7 +336,7 @@
   suffix: USSP, Locked, Medical
   components:
   - type: Sprite
-    sprite: SS220/Structures/Doors/Airlocks/Standart/ussp_med.rsi
+    sprite: SS220/Structures/Doors/Airlocks/Standard/ussp_med.rsi
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsUsspLockedMedical ]
@@ -311,7 +347,7 @@
   suffix: USSP, Locked, Engineering
   components:
   - type: Sprite
-    sprite: SS220/Structures/Doors/Airlocks/Standart/ussp_eng.rsi
+    sprite: SS220/Structures/Doors/Airlocks/Standard/ussp_eng.rsi
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsUsspLockedEngineering ]
@@ -324,7 +360,7 @@
   description: Necessary for connecting two space craft together.
   components:
   - type: Sprite
-    sprite: SS220/Structures/Doors/Airlocks/Standart/ussp_shuttle.rsi
+    sprite: SS220/Structures/Doors/Airlocks/Standard/ussp_shuttle.rsi
 
 - type: entity
   parent: AirlockShuttleUssp

@@ -1,0 +1,11 @@
+- type: job
+  id: SecurityPet
+  name: job-name-security-pet
+  description: job-description-security-pet
+  playTimeTracker: JobSecurityPet
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: Security
+    time: 10h
+  icon: "JobIconSecurityCadet"
+  canBeAntag: false
