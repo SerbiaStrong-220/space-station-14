@@ -8,6 +8,9 @@
     sprite: Decals/Flora/flora_bushes.rsi
     noRot: true
     offset: 0, 0.15
+    drawDepth: 1
+    renderLayer: Mobs
+    drawdepth: Overdoors
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -59,6 +62,7 @@
     sprite: Decals/Flora/flora_bushessnow.rsi
     noRot: true
     offset: 0,0.1
+    drawdepth: Overdoors
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -103,8 +107,8 @@
 - type: entity
   parent: BaseBush
   id: FloraBushG
-  name: Кустик
-  description: Красивый куст.
+  name: Bush
+  description: A beautiful bush.
   components:
   - type: Sprite
     layers:
@@ -121,8 +125,8 @@
 - type: entity
   parent: BaseBush
   id: FloraBushH
-  name: Молодой бамбук
-  description: Прорастёт через ваших врагов.
+  name: Young bamboo
+  description: Will sprout through your enemies.
   components:
   - type: Sprite
     layers:
@@ -138,8 +142,8 @@
 - type: entity
   parent: BaseBush
   id: FloraBushI
-  name: Трава и сорняки
-  description: Ничего необычного
+  name: Grass and weeds
+  description: Nothing unusual.
   components:
   - type: Sprite
     layers:
@@ -156,8 +160,8 @@
 - type: entity
   parent: BaseBush
   id: FloraBushJ
-  name: Папоротник
-  description: Обычно его готовят пока не распустились бутоны.
+  name: Fern.
+  description: It is usually cooked until the bud has opened.
   components:
   - type: Sprite
     layers:
@@ -173,8 +177,8 @@
 - type: entity
   parent: BaseBush
   id: FloraBushK
-  name: Бансай
-  description: Красивое дерево.
+  name: Bansai.
+  description: A beautiful tree.
   components:
   - type: Sprite
     layers:
@@ -190,8 +194,8 @@
 - type: entity
   parent: BaseBush
   id: FloraBushL
-  name: Вечнозеленый куст
-  description: Очень похож на недоросшую изгородь.
+  name: An evergreen shrub.
+  description: It looks very much like an undergrown hedge.
   components:
   - type: Sprite
     layers:
@@ -208,8 +212,8 @@
 - type: entity
   parent: BaseBush
   id: FloraBushM
-  name: Карликовая Ель
-  description: Иголки, иголки такие приятные на вкус, как смола.
+  name: Dwarf Spruce
+  description: Needles, the needles taste as good as resin.
   components:
   - type: Sprite
     layers:
@@ -226,8 +230,8 @@
 - type: entity
   parent: BaseBush
   id: FloraBushN
-  name: Акация
-  description: Часто украшает оранжереи и теплицы.
+  name: Acacia
+  description: Often decorates greenhouses
   components:
   - type: Sprite
     state: bushn1
@@ -235,8 +239,8 @@
 - type: entity
   parent: BaseBushSnow
   id: FloraBushSnowA
-  name: Калина 
-  description: Ягоды отлично помогают с давлением.
+  name: Viburnum
+  description: Berries are great for helping with blood pressure
   components:
   - type: Sprite
     layers:
@@ -252,8 +256,8 @@
 - type: entity
   parent: BaseBushSnow
   id: FloraBushSnowB
-  name: Калина пустая
-  description: Простой куст.
+  name: Empty Viburnum
+  description: A simple bush
   components:
   - type: Sprite
     layers:
@@ -269,8 +273,8 @@
 - type: entity
   parent: BaseBush
   id: FloraBushD
-  name: Куст
-  description: Самый обычный но красивый куст.
+  name: Bush
+  description: The most ordinary but beautiful bush
   components:
   - type: Sprite
     layers:
@@ -287,8 +291,8 @@
 - type: entity
   parent: BaseBush
   id: FloraBushE
-  name: Камыш
-  description: Обычно путают с рогозом.
+  name: Reed
+  description: It is usually confused with a cattail
   components:
   - type: Sprite
     layers:
