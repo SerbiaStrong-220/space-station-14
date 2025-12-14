@@ -3,6 +3,7 @@
 - type: entity
   abstract: true
   id: CultYoggRestrictedItem
+  suffix: CultYogg
   name: abstract cult restricted
   components:
     - type: RestrictedItem
@@ -11,3 +12,35 @@
         components:
         - CultYogg
 
+- type: entity
+  id: BaseSelfLinkedPortalCult
+  parent: BaseStructure
+  suffix: CultYogg
+  abstract: true
+  name: self linked portal
+  description: Transports you to a linked destination!
+  components:
+  - type: Transform
+    anchored: True
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      portalFixture:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.48,0.25,0.48"
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
+        hard: false
+  - type: InteractionTeleport
+    teleportDoAfterTime: 2
+    userWhitelist:
+      components:
+      - CultYogg
+    whitelistRejectedLoc: cult-yogg-teleport-user-whitelist-rejection
+  - type: SelfLinkedTeleport
