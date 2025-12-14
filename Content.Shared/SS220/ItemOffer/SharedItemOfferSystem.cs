@@ -2,15 +2,12 @@
 
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Interaction.Components;
-using Content.Shared.Inventory.VirtualItem;
-using Content.Shared.SS220.StuckOnEquip;
 using Content.Shared.Verbs;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.ItemOffer;
 
-public abstract class SharedItemOfferSystem : EntitySystem
+public abstract partial class SharedItemOfferSystem : EntitySystem
 {
     [Dependency] private readonly SharedHandsSystem _hands = default!;
 
@@ -18,6 +15,8 @@ public abstract class SharedItemOfferSystem : EntitySystem
 
     public override void Initialize()
     {
+        InitializeRestrictions();
+
         SubscribeLocalEvent<HandsComponent, GetVerbsEvent<EquipmentVerb>>(AddOfferVerb);
     }
 
@@ -31,19 +30,16 @@ public abstract class SharedItemOfferSystem : EntitySystem
         if (item == null)
             return;
 
-        if (HasComp<UnremoveableComponent>(item))
+        var evItem = new CanOfferItemEvent(args.User, args.Target);
+        RaiseLocalEvent(item.Value, ref evItem, true);
+
+        if (evItem.Cancelled)
             return;
 
-        if (HasComp<VirtualItemComponent>(item))
-            return;
+        var evUser = new CanOfferItemEvent(args.User, args.Target);
+        RaiseLocalEvent(args.User, ref evUser, true);
 
-        if (TryComp<StuckOnEquipComponent>(item, out var equip) && equip.IsStuck)
-            return;
-
-        var ev = new CanOfferItemEvent(args.User, args.Target);
-        RaiseLocalEvent(item.Value, ref ev, true);
-
-        if (ev.Cancelled)
+        if (evUser.Cancelled)
             return;
 
         var user = args.User;
@@ -65,7 +61,6 @@ public abstract class SharedItemOfferSystem : EntitySystem
 
 /// <summary>
 /// This event handle that this item can't be offered by users.
-/// This event raised on item.
 /// </summary>
 /// <param name="User">User, that trade offer item</param>
 /// <param name="TargetUser">User, that can take item</param>
