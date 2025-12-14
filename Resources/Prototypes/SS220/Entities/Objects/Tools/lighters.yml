@@ -70,7 +70,7 @@
     stealGroup: ExpensiveLighterDetective
 
 - type: entity
-  parent: ExpensiveLighterNanotrasen
+  parent: [ExpensiveLighterNanotrasen, BaseSyndicateContraband] #SS220 zippo-resprite
   id: ExpensiveLighterSyndicate
   description: "Used by hardened syndicate agents. Show your style and hatred of NanoTrasen with this lighter!"
   components:
