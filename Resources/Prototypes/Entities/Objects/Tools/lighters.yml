@@ -539,9 +539,9 @@
   description: "A robust mass produced lighter. The Waffle Co. logo turns the spark wheel when pushed up, minimising risk of lighter burns for even the most inept user."
   components:
   - type: Sprite
-    sprite: Objects/Tools/Lighters/waffleco.rsi
+    sprite: SS220/Objects/Tools/Lighters/waffleco.rsi #SS220 zippo_resprite
   - type: Item
-    sprite: Objects/Tools/Lighters/waffleco.rsi
+    sprite: SS220/Objects/Tools/Lighters/waffleco.rsi #SS220 zippo_resprite
   - type: Welder #
     fuelConsumption: 0.005
     fuelLitCost: 0.05
