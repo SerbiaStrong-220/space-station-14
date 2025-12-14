@@ -19,6 +19,9 @@ namespace Content.Shared.Construction
         [DataField("node", required: true)]
         public string Name { get; private set; } = default!;
 
+        [DataField("nodeName")]
+        public LocId? NameLocId { get; private set; } //SS220-grill-update-2
+
         [ViewVariables]
         public IReadOnlyList<ConstructionGraphEdge> Edges => _edges;
 

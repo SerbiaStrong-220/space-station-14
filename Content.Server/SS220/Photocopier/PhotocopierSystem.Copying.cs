@@ -69,6 +69,13 @@ public sealed partial class PhotocopierSystem
     /// <param name="dataToCopy"></param>
     public void RestoreEntityFromData(EntityUid uid, Dictionary<Type, IPhotocopiedComponentData> dataToCopy)
     {
+        foreach (var data in dataToCopy)
+        {
+            var comp = EntityManager.ComponentFactory.GetComponent(data.Key);
+            if (data.Value.NeedToEnsure && !HasComp(uid, data.Key))
+                AddComp(uid, comp);
+        }
+
         var components = _entityManager.GetComponents(uid);
         foreach (var iComponent in components)
         {

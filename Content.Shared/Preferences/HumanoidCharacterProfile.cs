@@ -7,6 +7,7 @@ using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
+using Content.Shared.SS220.Signature;
 using Content.Shared.Traits;
 using Robust.Shared.Collections;
 using Robust.Shared.Configuration;
@@ -111,6 +112,11 @@ namespace Content.Shared.Preferences
         public bool TeleportAfkToCryoStorage { get; private set; } = true;
         // SS220 Cryo end
 
+        // ss220 add signature start
+        [DataField]
+        public SignatureData? SignatureData { get; private set; }
+        // ss220 add signature end
+
         /// <summary>
         /// <see cref="_jobPriorities"/>
         /// </summary>
@@ -148,6 +154,7 @@ namespace Content.Shared.Preferences
             HashSet<ProtoId<AntagPrototype>> antagPreferences,
             HashSet<ProtoId<TraitPrototype>> traitPreferences,
             Dictionary<string, RoleLoadout> loadouts,
+            SignatureData? signatureData = null, // ss220 add signature
             bool teleportAfkToCryoStorage = true) //SS220 Cryo-Teleport
         {
             Name = name;
@@ -164,6 +171,7 @@ namespace Content.Shared.Preferences
             _antagPreferences = antagPreferences;
             _traitPreferences = traitPreferences;
             TeleportAfkToCryoStorage = teleportAfkToCryoStorage; // SS220 Cryo-Teleport
+            SignatureData = signatureData; // ss220 add signature
             _loadouts = loadouts;
 
             var hasHighPrority = false;
@@ -197,6 +205,7 @@ namespace Content.Shared.Preferences
                 new HashSet<ProtoId<AntagPrototype>>(other.AntagPreferences),
                 new HashSet<ProtoId<TraitPrototype>>(other.TraitPreferences),
                 new Dictionary<string, RoleLoadout>(other.Loadouts),
+                other.SignatureData?.Clone(), // ss220 add signature
                 other.TeleportAfkToCryoStorage)
         {
         }
@@ -482,6 +491,13 @@ namespace Content.Shared.Preferences
         public HumanoidCharacterProfile WithTeleportAfkToCryoStorage(bool teleportAfkToCryoStorage)
             => new(this) { TeleportAfkToCryoStorage = teleportAfkToCryoStorage };
 
+        // ss220 add signature start
+        public HumanoidCharacterProfile WithSignatureData(SignatureData signatureData)
+        {
+            return new HumanoidCharacterProfile(this) { SignatureData = signatureData };
+        }
+        // ss220 add signature end
+
         public string Summary =>
             Loc.GetString(
                 "humanoid-character-profile-summary",
@@ -500,6 +516,12 @@ namespace Content.Shared.Preferences
             if (Species != other.Species) return false;
             if (PreferenceUnavailable != other.PreferenceUnavailable) return false;
             if (TeleportAfkToCryoStorage != other.TeleportAfkToCryoStorage) return false; //ss220 cryo button save fix
+
+            // ss220 add signature start
+            if (SignatureData != null && !SignatureData.Equals(other.SignatureData)) return false;
+            if (other.SignatureData != null && !other.SignatureData.Equals(SignatureData)) return false;
+            // ss220 add signature end
+
             if (SpawnPriority != other.SpawnPriority) return false;
             if (!_jobPriorities.SequenceEqual(other._jobPriorities)) return false;
             if (!_antagPreferences.SequenceEqual(other._antagPreferences)) return false;
@@ -798,6 +820,7 @@ namespace Content.Shared.Preferences
             hashCode.Add(Appearance);
             hashCode.Add((int)SpawnPriority);
             hashCode.Add((int)PreferenceUnavailable);
+            hashCode.Add(SignatureData?.GetHashCode() ?? 0); // ss220 add signature
             return hashCode.ToHashCode();
         }
 

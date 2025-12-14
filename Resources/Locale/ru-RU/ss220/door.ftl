@@ -133,3 +133,19 @@ ent-AirlockMeidicalPsychologist = { ent-AirlockMedical }
 ent-AirlockMeidicalGlassPsychologist = { ent-AirlockMedicalGlass }
     .desc = { ent-AirlockMedicalGlass.desc }
     .suffix = Медицинский, Психолог
+
+ent-HighSecCentcommLockedBSO = { ent-HighSecDoor }
+    .desc = { ent-HighSecDoor.desc }
+    .suffix = ЦК, Закрыто, Оперативник "Синий Щит"
+
+ent-HighSecCentcommLockedERT = { ent-HighSecDoor }
+    .desc = { ent-HighSecDoor.desc }
+    .suffix = ЦК, Закрыто, ОБР
+
+ent-HighSecCentcommLockedCBURN = { ent-HighSecDoor }
+    .desc = { ent-HighSecDoor.desc }
+    .suffix = ЦК, Закрыто, РХБЗ
+
+ent-HighSecCentcommLockedDeathSquad = { ent-HighSecDoor }
+    .desc = { ent-HighSecDoor.desc }
+    .suffix = ЦК, Закрыто, Эскадрон Смерти

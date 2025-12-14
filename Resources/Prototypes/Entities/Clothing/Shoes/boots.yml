@@ -59,6 +59,10 @@
     sprite: Clothing/Shoes/Boots/combatboots.rsi
   - type: Clothing
     sprite: Clothing/Shoes/Boots/combatboots.rsi
+#SS220 Army boots for sec begin
+  - type: ClothingSlowOnDamageModifier
+    modifier: 0.5
+#SS220 Army boots for sec end
 
 - type: entity
   parent: ClothingShoesMilitaryBase

@@ -250,6 +250,7 @@
   - type: WorldTargetAction
     event: !type:SpiderTileSpawnActionEvent
       prototype: FloorWebTile
+      inSpacePrototype: FloorWebTileSpace
       doAfter: 6
 
 - type: entity
@@ -264,6 +265,7 @@
   - type: WorldTargetAction
     event: !type:SpiderTileSpawnActionEvent
       prototype: FloorWebTile
+      inSpacePrototype: FloorWebTileSpace
       cost: 10
       doAfter: 3
 

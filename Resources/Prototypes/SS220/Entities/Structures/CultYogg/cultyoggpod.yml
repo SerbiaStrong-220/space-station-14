@@ -35,7 +35,7 @@
     heal:
       types:
         Slash: -3
-        Blunt: -3
+        Blunt: -5
         Piercing: -3
         Heat: -3
         Cold: -3

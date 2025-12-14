@@ -248,6 +248,9 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
         if (dynamic != null && _prototypeManager.TryIndex(dynamic, out var dynamicProto))
         {
             sb.AppendLine(Loc.GetString("dynamic-supply-level", ("dynamic", Loc.GetString(dynamicProto.Name))));
+
+            if (dynamicProto.Briefing != null)
+                sb.AppendLine(Loc.GetString(dynamicProto.Briefing.Value));
         }
         // SS220 DynamicTraitor end
 

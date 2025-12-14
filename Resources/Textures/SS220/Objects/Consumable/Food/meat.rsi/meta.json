@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "Taken from TG Station at https://github.com/tgstation/tgstation/blob/HEAD/icons/obj/food/meat.dmi",
+    "copyright": "Taken from TG Station at https://github.com/tgstation/tgstation/blob/HEAD/icons/obj/food/meat.dmi, spider and snake grilled sprites are made by TonyBigShoes (github) for SS220",
     "size": {
       "x": 32,
       "y": 32
@@ -28,6 +28,28 @@
       {
         "name": "goliath-cooked-inhand-left",
         "directions": 4
+      },
+	    {
+        "name": "spider-grilled"
+      },
+	    {
+        "name": "spider-inhand-left-grilled",
+        "directions": 4
+	    },
+	    {
+        "name": "spider-inhand-right-grilled",
+        "directions": 4
+      },
+      {
+		"name": "snake-grilled"
+      },
+      {
+      "name": "snake-inhand-left-grilled" ,
+      "directions": 4
+      },
+      {
+      "name": "snake-inhand-right-grilled" ,
+      "directions": 4
       }
     ]
   }

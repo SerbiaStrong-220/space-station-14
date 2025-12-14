@@ -1353,6 +1353,7 @@
   - JackBoots
   - SecurityWinterBoots
   - BootsJackSec #ss220 sec loadout update
+  - CombatBoots #SS220 Army boots for sec 
 
 - type: loadoutGroup
   id: SecurityPDA

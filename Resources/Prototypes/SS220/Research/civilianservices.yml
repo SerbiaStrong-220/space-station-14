@@ -23,3 +23,15 @@
   - MedicalScannerMachineCircuitboard
   - CloningPodMachineCircuitboard
   - CloningConsoleComputerCircuitboard
+
+- type: technology
+  id: DefibrillatorCompactTech
+  name: research-technology-compact-defibrillator
+  icon:
+    sprite: Objects/Specific/Medical/defibsmall.rsi
+    state: icon
+  discipline: CivilianServices
+  tier: 3
+  cost: 12000
+  recipeUnlocks:
+  - DefibrillatorCompact

@@ -4,14 +4,16 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Mind;
 using Content.Shared.SS220.CultYogg.Corruption;
 using Robust.Shared.Prototypes;
+using Content.Shared.SS220.Language.Components;
+using Content.Server.SS220.Language;
 
 namespace Content.Server.SS220.CultYogg.AnimalCorruption;
-
 public sealed class CultYoggAnimalCorruptionSystem : EntitySystem
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly LanguageSystem _language = default!;
 
     public void AnimalCorruption(EntityUid uid)//Corrupt animal
     {
@@ -25,6 +27,12 @@ public sealed class CultYoggAnimalCorruptionSystem : EntitySystem
 
         // Get original body position and spawn MiGo here
         var corruptedAnimal = _entityManager.SpawnAtPosition(corruptionProto.Result, Transform(uid).Coordinates);
+
+        // Inherit the original entity languages
+        if (TryComp<LanguageComponent>(uid, out var originalLangComp))
+        {
+            _language.AddLanguagesFromSource((uid, originalLangComp), corruptedAnimal);
+        }
 
         // Move the mind if there is one and it's supposed to be transferred
         if (_mind.TryGetMind(uid, out var mindId, out var mind))

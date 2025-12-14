@@ -157,3 +157,21 @@
   name: Vivaldi - Winter
   path:
     path: /Audio/SS220/Jukebox/Vivaldi_Winter.ogg
+
+- type: jukebox
+  id: Wellerman
+  name: PGN - Wellerman
+  path:
+    path: /Audio/SS220/Jukebox/Wellerman.ogg
+
+- type: jukebox
+  id: Jhonny_i_knew_ya
+  name: PGN - Jhonny i knew ya
+  path:
+    path: /Audio/SS220/Jukebox/Jhonny_i_knew_ya.ogg
+
+- type: jukebox
+  id: The_Drunken_Sailor
+  name: The Drunken Sailor
+  path:
+    path: /Audio/SS220/Jukebox/The_Drunken_Sailor.ogg

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.SS220.Database;
+using Content.Server.SS220.Signature;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Database;
@@ -17,6 +18,7 @@ using Content.Shared.Humanoid.Markings;
 using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
+using Content.Shared.SS220.Signature;
 using Content.Shared.Traits;
 using Microsoft.EntityFrameworkCore;
 using Robust.Shared.Enums;
@@ -265,6 +267,8 @@ namespace Content.Server.Database
                 loadouts[role.RoleName] = loadout;
             }
 
+            var signatureData = SignatureSerializer.Deserialize(profile.SignatureData); // ss220 add signature
+
             return new HumanoidCharacterProfile(
                 profile.CharacterName,
                 profile.FlavorText,
@@ -288,7 +292,8 @@ namespace Content.Server.Database
                 (PreferenceUnavailableMode) profile.PreferenceUnavailable,
                 antags.ToHashSet(),
                 traits.ToHashSet(),
-                loadouts
+                loadouts,
+                signatureData // ss220 add signature
             );
         }
 
@@ -320,6 +325,13 @@ namespace Content.Server.Database
             profile.Markings = markings;
             profile.Slot = slot;
             profile.PreferenceUnavailable = (DbPreferenceUnavailableMode) humanoid.PreferenceUnavailable;
+
+            // ss220 add signature start
+            if (humanoid.SignatureData != null)
+            {
+                profile.SignatureData = SignatureSerializer.Serialize(humanoid.SignatureData);
+            }
+            // ss220 add signature end
 
             profile.Jobs.Clear();
             profile.Jobs.AddRange(
@@ -1160,6 +1172,16 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             await using var db = await GetDb();
             return await db.DbContext.AdminLog.CountAsync(log => log.RoundId == round);
         }
+
+        // ss220 add signature start
+        public async Task<JsonDocument?> GetJsonByLogId(int logId, DateTime time)
+        {
+            await using var db = await GetDb();
+            var log = await db.DbContext.AdminLog.Where(log => log.Date == time).FirstOrDefaultAsync(x => x.Id == logId);
+
+            return log?.Json;
+        }
+        // ss220 add signature end
 
         #endregion
 

@@ -858,7 +858,7 @@
     price: 500
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformFoldableBase] #SS220 folded-equipped-INNERCLOTHING resprite
   id: ClothingUniformJumpsuitTacticool
   name: tacticool jumpsuit
   description: Uniform for subpar operative LARPers performing tactical insulated glove theft in deep space.

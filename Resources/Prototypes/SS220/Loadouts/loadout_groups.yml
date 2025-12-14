@@ -237,6 +237,7 @@
   loadouts:
   - MaskTacSec
   - SecTacGasMask
+  - MaskSecBalaclava
 
 - type: loadoutGroup
   id: SecurityGlasses
