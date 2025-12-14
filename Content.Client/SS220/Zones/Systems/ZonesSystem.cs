@@ -21,7 +21,6 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         _controller = _ui.GetUIController<ZonesControlUIController>();
 
         SubscribeLocalEvent<ZoneComponent, ComponentInit>(OnInit);
-        SubscribeLocalEvent<ZoneComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<ZoneComponent, AfterAutoHandleStateEvent>(OnAfterAutoHandleState);
     }
 
@@ -30,13 +29,14 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         _controller.RefreshWindow();
     }
 
-    private void OnShutdown(Entity<ZoneComponent> ent, ref ComponentShutdown args)
+    private void OnAfterAutoHandleState(Entity<ZoneComponent> ent, ref AfterAutoHandleStateEvent args)
     {
         _controller.RefreshWindow();
     }
 
-    private void OnAfterAutoHandleState(Entity<ZoneComponent> ent, ref AfterAutoHandleStateEvent args)
+    protected override void OnZoneShutdown(Entity<ZoneComponent> entity, ref ComponentShutdown args)
     {
+        base.OnZoneShutdown(entity, ref args);
         _controller.RefreshWindow();
     }
 

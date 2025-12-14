@@ -133,7 +133,7 @@ public sealed class ZoneTests
 
         await server.WaitAssertion(() => Assert.Multiple(() =>
         {
-            Assert.That(zone.Comp.EnteredEntities, Has.Count.EqualTo(0), $"Zone {entMng.ToPrettyString(zone)} updates entities on uninitialized map");
+            Assert.That(zone.Comp.LocatedEntities, Has.Count.EqualTo(0), $"Zone {entMng.ToPrettyString(zone)} updates entities on uninitialized map");
             Assert.That(zoneParams.Equals(zone.Comp.ZoneParams), $"Zone params changed after {nameof(server.WaitRunTicks)} on uninitialized map");
         }));
 
@@ -142,8 +142,8 @@ public sealed class ZoneTests
 
         await server.WaitAssertion(() => Assert.Multiple(() =>
         {
-            Assert.That(zone.Comp.EnteredEntities, Is.Not.Empty, $"Zone {entMng.ToPrettyString(zone)} didn't update entities on initialized map");
-            Assert.That(zone.Comp.EnteredEntities, Has.Count.EqualTo(1));
+            Assert.That(zone.Comp.LocatedEntities, Is.Not.Empty, $"Zone {entMng.ToPrettyString(zone)} didn't update entities on initialized map");
+            Assert.That(zone.Comp.LocatedEntities, Has.Count.EqualTo(1));
             Assert.That(zoneParams.Equals(zone.Comp.ZoneParams), $"Zone params changed after {nameof(server.WaitRunTicks)} on initialized map");
         }));
 
@@ -268,7 +268,7 @@ public sealed class ZoneTests
             {
                 Assert.That(zoneSys.InZone(zone, item, ZoneParams.RegionType.Original));
                 Assert.That(zoneSys.GetInZoneEntities(zone, ZoneParams.RegionType.Original).ToList(), Has.Count.EqualTo(1));
-                Assert.That(zone.Comp.EnteredEntities, Has.Count.EqualTo(1));
+                Assert.That(zone.Comp.LocatedEntities, Has.Count.EqualTo(1));
             }));
         }
 
@@ -282,7 +282,7 @@ public sealed class ZoneTests
             {
                 Assert.That(zoneSys.InZone(zone, item, ZoneParams.RegionType.Original));
                 Assert.That(zoneSys.GetInZoneEntities(zone, ZoneParams.RegionType.Original).ToList(), Has.Count.EqualTo(1));
-                Assert.That(zone.Comp.EnteredEntities, Has.Count.EqualTo(1));
+                Assert.That(zone.Comp.LocatedEntities, Has.Count.EqualTo(1));
             }));
         }
 
@@ -296,7 +296,7 @@ public sealed class ZoneTests
             {
                 Assert.That(!zoneSys.InZone(zone, item, ZoneParams.RegionType.Original));
                 Assert.That(zoneSys.GetInZoneEntities(zone, ZoneParams.RegionType.Original).ToList(), Has.Count.EqualTo(0));
-                Assert.That(zone.Comp.EnteredEntities, Has.Count.EqualTo(0));
+                Assert.That(zone.Comp.LocatedEntities, Has.Count.EqualTo(0));
             }));
         }
 

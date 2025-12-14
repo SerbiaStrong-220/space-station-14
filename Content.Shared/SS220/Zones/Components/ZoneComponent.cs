@@ -30,6 +30,6 @@ public sealed partial class ZoneComponent : Component
     /// <summary>
     /// An array of entities currently located in the zone
     /// </summary>
-    [ViewVariables]
-    public HashSet<EntityUid> EnteredEntities = [];
+    [ViewVariables, AutoNetworkedField]
+    public HashSet<NetEntity> LocatedEntities = [];
 }

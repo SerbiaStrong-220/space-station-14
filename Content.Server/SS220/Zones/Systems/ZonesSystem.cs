@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Shared.Administration;
 using Content.Server.Administration.Managers;
 using Content.Shared.Prototypes;
 using Content.Shared.SS220.Zones;
@@ -7,12 +8,13 @@ using Content.Shared.SS220.Zones.Systems;
 using Robust.Server.GameObjects;
 using Robust.Server.GameStates;
 using Robust.Server.Player;
+using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
 using System.Linq;
 using System.Numerics;
+using Content.Shared.CCVar;
 
 namespace Content.Server.SS220.Zones.Systems;
 
@@ -22,16 +24,17 @@ public sealed partial class ZonesSystem : SharedZonesSystem
     [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IAdminManager _admin = default!;
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
 
-    private static TimeSpan _overrideUpdateRate = TimeSpan.FromSeconds(5);
-    private TimeSpan _nextOverrideUpdate = TimeSpan.Zero;
+    private float _pvsRange = float.PositiveInfinity;
 
     public override void Initialize()
     {
         base.Initialize();
+
+        _cfg.OnValueChanged(CCVars.NetMaxUpdateRange, value => _pvsRange = value, true);
 
         SubscribeNetworkEvent<CreateZoneRequestMessage>(OnCreateZoneRequest);
         SubscribeNetworkEvent<ChangeZoneRequestMessage>(OnChangeZoneRequest);
@@ -42,13 +45,11 @@ public sealed partial class ZonesSystem : SharedZonesSystem
     {
         base.Update(frameTime);
 
-        var curTime = _gameTiming.CurTime;
-        if (curTime >= _nextOverrideUpdate)
+        var query = AllEntityQuery<ZoneComponent>();
+        while (query.MoveNext(out var uid, out var zoneComp))
         {
-            UpdateZonesOverrides();
-            _nextOverrideUpdate = curTime += _overrideUpdateRate;
+            UpdatePvsOverride((uid, zoneComp));
         }
-
     }
 
     private void OnCreateZoneRequest(CreateZoneRequestMessage msg, EntitySessionEventArgs args)
@@ -86,7 +87,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         if (msg.Color is { } color)
             SetZoneColor(zone, color);
 
-        RecalculateZoneAreas(zone);
+        RecalculateZoneArea(zone);
     }
 
     private void OnDeleteZoneRequest(DeleteZoneRequestMessage msg, EntitySessionEventArgs args)
@@ -142,10 +143,10 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 
         _metaData.SetEntityName(uid, name);
 
-        RecalculateZoneAreas(zone);
+        RecalculateZoneArea(zone);
         Dirty(uid, zoneComp);
 
-        UpdateZoneOverrides(zone);
+        UpdatePvsOverride(zone);
 
         return zone;
     }
@@ -155,7 +156,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         Del(ent);
     }
 
-    public void RecalculateZoneAreas(Entity<ZoneComponent> ent)
+    public void RecalculateZoneArea(Entity<ZoneComponent> ent)
     {
         var area = ent.Comp.Area.ToList();
 
@@ -194,7 +195,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         _transform.SetCoordinates((ent, Transform(ent), MetaData(ent)), new EntityCoordinates(parent, Vector2.Zero), Angle.Zero);
 
         if (recalculate)
-            RecalculateZoneAreas(ent);
+            RecalculateZoneArea(ent);
 
         Dirty(ent);
         return true;
@@ -205,7 +206,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         ent.Comp.Area = area;
 
         if (recalculate)
-            RecalculateZoneAreas(ent);
+            RecalculateZoneArea(ent);
 
         Dirty(ent);
     }
@@ -222,16 +223,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         Dirty(ent);
     }
 
-    private void UpdateZonesOverrides()
-    {
-        var query = AllEntityQuery<ZoneComponent>();
-        while (query.MoveNext(out var uid, out var zoneComp))
-        {
-            UpdateZoneOverrides((uid, zoneComp));
-        }
-    }
-
-    private void UpdateZoneOverrides(Entity<ZoneComponent> ent)
+    private void UpdatePvsOverride(Entity<ZoneComponent> ent)
     {
         var xform = Transform(ent);
         foreach (var session in _player.Sessions)
@@ -244,13 +236,25 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 
         bool ShouldSessionOverride(ICommonSession session)
         {
+            if (_admin.HasAdminFlag(session, AdminFlags.Mapping))
+                return true;
+
             if (session.AttachedEntity is not { } player)
                 return false;
 
-            if (Transform(player).MapID != xform.MapID)
+            var playerMapCoords = _transform.GetMapCoordinates(player);
+            if (playerMapCoords.MapId != xform.MapID)
                 return false;
 
-            return true;
+            var pvsRangSqrt = Math.Sqrt(_pvsRange);
+            var localPos = _transform.ToCoordinates(ent.Owner, playerMapCoords).Position;
+            foreach (var box in ent.Comp.Area)
+            {
+                if (box.ClosestPoint(localPos).LengthSquared() <= pvsRangSqrt)
+                    return true;
+            }
+
+            return false;
         }
     }
 }

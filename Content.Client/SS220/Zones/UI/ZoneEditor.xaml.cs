@@ -340,7 +340,7 @@ public sealed partial class ZoneEditor : PanelContainer
             return new Box2(left, bottom, right, top);
         })];
 
-        newArea = [.. _zones.RecalculateArea(newArea, newParams.Parent)];
+        newArea = _zones.RecalculateArea(newArea, newParams.Parent);
         newParams.Area = newArea;
         ChangeParams(_ => newParams);
     }
@@ -455,7 +455,7 @@ public sealed partial class ZoneEditor : PanelContainer
         var result = func.Invoke(CurrentParams);
 
         if (recalculate)
-            result.Area = [.. _zones.RecalculateArea(result.Area, result.Parent)];
+            result.Area = _zones.RecalculateArea(result.Area, result.Parent);
 
         _changedParams = result;
         if (refresh)

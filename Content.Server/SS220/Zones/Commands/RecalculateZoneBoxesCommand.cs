@@ -32,7 +32,7 @@ public sealed partial class RecalculateZoneBoxesCommand : LocalizedCommands
             return;
 
         var zoneSys = _entityManager.System<ZonesSystem>();
-        zoneSys.RecalculateZoneAreas((zoneUid, zoneComp));
+        zoneSys.RecalculateZoneArea((zoneUid, zoneComp));
     }
 
     public override CompletionResult GetCompletion(IConsoleShell shell, string[] args)

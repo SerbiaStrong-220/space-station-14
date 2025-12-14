@@ -3,8 +3,8 @@ using Content.Shared.SS220.Maths;
 using Content.Shared.SS220.Zones.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Random;
 using System.Linq;
 
 namespace Content.Shared.SS220.Zones.Systems;
@@ -14,105 +14,115 @@ public abstract partial class SharedZonesSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
-    public static readonly ProtoId<EntityCategoryPrototype> ZonesCategoryId = "Zones";
     public const string ZoneCommandsPrefix = "zones:";
 
     public const string DefaultZoneProtoId = "ZoneDefault";
 
-    public override void Update(float frameTime)
-    {
-        base.Update(frameTime);
+    public static readonly ProtoId<EntityCategoryPrototype> ZonesCategoryId = "Zones";
 
-        var query = EntityQueryEnumerator<ZoneComponent>();
-        while (query.MoveNext(out var uid, out var zoneComp))
-            UpdateInZoneEntities((uid, zoneComp));
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        _transform.OnGlobalMoveEvent += OnEntityMoveEvent;
+
+        SubscribeLocalEvent<ZoneComponent, MapInitEvent>(OnZoneMapInit);
+        SubscribeLocalEvent<ZoneComponent, ComponentShutdown>(OnZoneShutdown);
+
+        SubscribeLocalEvent<InZoneComponent, MapInitEvent>(OnInZoneMapInit);
+        SubscribeLocalEvent<InZoneComponent, ComponentShutdown>(OnInZoneShutdown);
     }
 
-    /// <summary>
-    /// Performs checks on entities located in the <paramref name="zone"/>.
-    /// Raises the <see cref="LeavedZoneEvent"/> if entity was in the <paramref name="zone"/> before, but now it isn't.
-    /// Raises the <see cref="EnteredZoneEvent"/> if entity wasn't in the <paramref name="zone"/> before, but now it is.
-    /// </summary>
-    public void UpdateInZoneEntities(Entity<ZoneComponent> zone)
+    public override void Shutdown()
     {
-        // shouldn't work on an noninitialized map.
-        var map = _transform.GetMap(zone.Owner);
-        if (!_map.IsInitialized(map))
-            return;
+        base.Shutdown();
 
-        var entitiesToLeave = zone.Comp.EnteredEntities.ToHashSet();
-        var entitiesToEnter = new HashSet<EntityUid>();
-        var curEntities = GetInZoneEntities(zone);
-        foreach (var entity in curEntities)
+        _transform.OnGlobalMoveEvent -= OnEntityMoveEvent;
+    }
+
+    private void OnEntityMoveEvent(ref MoveEvent args)
+    {
+        if (TryComp<ZoneComponent>(args.Entity, out var zoneComp))
         {
-            if (entitiesToLeave.Remove(entity))
+            UpdateEntitiesInZone((args.Entity.Owner, zoneComp));
+            return;
+        }
+
+        UpdateInZone(args.Entity);
+    }
+
+    protected virtual void OnZoneMapInit(Entity<ZoneComponent> entity, ref MapInitEvent args)
+    {
+        UpdateEntitiesInZone(entity);
+    }
+
+    protected virtual void OnZoneShutdown(Entity<ZoneComponent> entity, ref ComponentShutdown args)
+    {
+        foreach (var netUid in entity.Comp.LocatedEntities)
+            TryHandleLeaveZone(entity, GetEntity(netUid));
+    }
+
+    protected virtual void OnInZoneMapInit(Entity<InZoneComponent> entity, ref MapInitEvent args)
+    {
+        UpdateInZone(entity);
+    }
+
+    protected virtual void OnInZoneShutdown(Entity<InZoneComponent> entity, ref ComponentShutdown args)
+    {
+        foreach (var netZone in entity.Comp.Zones)
+        {
+            var zoneUid = GetEntity(netZone);
+            if (!TryComp<ZoneComponent>(zoneUid, out var zoneComp))
                 continue;
 
-            entitiesToEnter.Add(entity);
-        }
-
-        foreach (var entity in entitiesToLeave)
-        {
-            zone.Comp.EnteredEntities.Remove(entity);
-            var ev = new LeavedZoneEvent(zone, entity);
-            RaiseLocalEvent(ev);
-        }
-
-        foreach (var entity in entitiesToEnter)
-        {
-            zone.Comp.EnteredEntities.Add(entity);
-            var ev = new EnteredZoneEvent(zone, entity);
-            RaiseLocalEvent(ev);
+            TryHandleLeaveZone((zoneUid, zoneComp), entity);
         }
     }
 
+    #region Public API
     /// <summary>
     /// Returns entities located in the <paramref name="zone"/>.
     /// The check is performed at the <see cref="TransformComponent.Coordinates"/> of the entities.
     /// </summary>
-    public IEnumerable<EntityUid> GetInZoneEntities(Entity<ZoneComponent> zone)
+    public IEnumerable<EntityUid> GetInZoneEntities(Entity<ZoneComponent> zone, bool useCache = true)
     {
-        HashSet<EntityUid> entities = [];
+        if (useCache)
+        {
+            foreach (var uid in zone.Comp.LocatedEntities)
+                yield return GetEntity(uid);
+
+            yield break;
+        }
 
         var xform = Transform(zone);
         if (!IsValidParent(xform.ParentUid))
-            return entities;
+            yield break;
 
         foreach (var bounds in GetWorldArea(zone))
         {
-            foreach (var uid in _entityLookup.GetEntitiesIntersecting(xform.MapID, bounds, LookupFlags.Dynamic | LookupFlags.Static))
+            foreach (var uid in _entityLookup.GetEntitiesIntersecting(xform.MapID, bounds, LookupFlags.All))
             {
                 if (InZone(zone, uid))
-                    entities.Add(uid);
+                    yield return uid;
             }
         }
-
-        return entities;
     }
 
     /// <summary>
-    /// Determines whether the <paramref name="point"/> is located inside the <paramref name="zone"/>.
+    /// Determines whether the <paramref name="entity"/> is located in the <paramref name="zone"/>.
     /// </summary>
-    public bool InZone(Entity<ZoneComponent> ent, EntityCoordinates point)
+    public bool InZone(Entity<ZoneComponent> zone, EntityUid entity, bool useCache = true)
     {
-        if (point.EntityId != ent.Owner)
-        {
-            return InZone(ent, _transform.ToMapCoordinates(point));
-        }
+        if (useCache)
+            return zone.Comp.LocatedEntities.Contains(GetNetEntity(entity));
 
-        foreach (var box in ent.Comp.Area)
-        {
-            if (box.Contains(point.Position))
-                return true;
-        }
-
-        return false;
+        return InZone(zone, _transform.GetMapCoordinates(entity));
     }
 
-
+    /// <<inheritdoc cref="InZone(Entity{ZoneComponent}, EntityCoordinates)"/>
     public bool InZone(Entity<ZoneComponent> zone, MapCoordinates point)
     {
         var xform = Transform(zone);
@@ -122,10 +132,44 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return InZone(zone, _transform.ToCoordinates((zone, xform), point));
     }
 
-    /// <inheritdoc cref="InZone(Entity{ZoneComponent}, MapCoordinates, RegionType)"/>
-    public bool InZone(Entity<ZoneComponent> zone, EntityUid entity)
+    /// <summary>
+    /// Determines whether the <paramref name="point"/> is located in the <paramref name="zone"/>.
+    /// </summary>
+    public bool InZone(Entity<ZoneComponent> zone, EntityCoordinates point)
     {
-        return InZone(zone, _transform.GetMapCoordinates(entity));
+        if (point.EntityId != zone.Owner)
+            return InZone(zone, _transform.ToMapCoordinates(point));
+
+        foreach (var box in zone.Comp.Area)
+        {
+            if (box.Contains(point.Position))
+                return true;
+        }
+
+        return false;
+    }
+
+    public IEnumerable<Entity<ZoneComponent>> GetZonesByEntity(EntityUid uid, bool useCache = true)
+    {
+        if (useCache)
+        {
+            if (!TryComp<InZoneComponent>(uid, out var inZone))
+                yield break;
+
+            foreach (var netZone in inZone.Zones)
+            {
+                var zoneUid = GetEntity(netZone);
+                if (!TryComp<ZoneComponent>(uid, out var zoneComp))
+                    continue;
+
+                yield return (zoneUid, zoneComp);
+            }
+
+            yield break;
+        }
+
+        foreach (var zone in GetZonesByPoint(_transform.GetMapCoordinates(uid)))
+            yield return zone;
     }
 
     /// <summary>
@@ -133,8 +177,6 @@ public abstract partial class SharedZonesSystem : EntitySystem
     /// </summary>
     public IEnumerable<Entity<ZoneComponent>> GetZonesByPoint(MapCoordinates point)
     {
-        HashSet<Entity<ZoneComponent>> result = [];
-
         var query = AllEntityQuery<ZoneComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
@@ -143,10 +185,8 @@ public abstract partial class SharedZonesSystem : EntitySystem
 
             var zone = (uid, comp);
             if (InZone(zone, point))
-                result.Add(zone);
+                yield return zone;
         }
-
-        return result;
     }
 
     public int GetZonesCount()
@@ -159,6 +199,20 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return result;
     }
 
+    public IEnumerable<EntityPrototype> EnumerateZonePrototypes()
+    {
+        return _prototype.Categories[ZonesCategoryId];
+    }
+
+    public bool IsValidParent(EntityUid parent)
+    {
+        return parent.IsValid()
+            && Exists(parent)
+            && (HasComp<MapGridComponent>(parent) || HasComp<MapComponent>(parent));
+    }
+    #endregion
+
+    #region Boxes API
     public Box2 AttachToGrid(Box2 box, EntityUid parent)
     {
         var gridSize = TryComp<MapGridComponent>(parent, out var mapGrid) ? mapGrid.TileSize : 1f;
@@ -182,19 +236,6 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return area;
     }
 
-    //public EntityCoordinates? GetRandomCoordinateInZone(Entity<ZoneComponent> zone, RegionType regionType)
-    //{
-    //    var region = zone.Comp.ZoneParams.GetRegion(regionType);
-    //    if (region.Count <= 0)
-    //        return null;
-
-    //    var box = _random.Pick(region);
-    //    var x = _random.NextFloat(box.Left, box.Right);
-    //    var y = _random.NextFloat(box.Bottom, box.Top);
-
-    //    return new EntityCoordinates(zone.Comp.ZoneParams.Container, x, y);
-    //}
-
     public List<Box2Rotated> GetWorldArea(Entity<ZoneComponent> ent)
     {
         var world = new List<Box2Rotated>();
@@ -214,29 +255,108 @@ public abstract partial class SharedZonesSystem : EntitySystem
 
         return world;
     }
+    #endregion
 
-    public IEnumerable<EntityPrototype> EnumerateZonePrototypes()
+    /// <summary>
+    /// Performs checks on entities located in the <paramref name="zone"/>.
+    /// Raises the <see cref="EntityLeavedZoneEvent"/> if entity was in the <paramref name="zone"/> before, but now it isn't.
+    /// Raises the <see cref="EntityEnteredZoneEvent"/> if entity wasn't in the <paramref name="zone"/> before, but now it is.
+    /// </summary>
+    private void UpdateEntitiesInZone(Entity<ZoneComponent> zone)
     {
-        return _prototype.Categories[ZonesCategoryId];
+        // shoulk work only at initialized map.
+        var map = _transform.GetMap(zone.Owner);
+        if (!_map.IsInitialized(map))
+            return;
+
+        var entitiesToLeave = zone.Comp.LocatedEntities.Select(GetEntity).ToHashSet();
+        foreach (var entity in GetInZoneEntities(zone, useCache: false))
+        {
+            if (entitiesToLeave.Remove(entity))
+                continue;
+
+            TryHandleEnterZone(zone, entity);
+        }
+
+        foreach (var entity in entitiesToLeave)
+            TryHandleLeaveZone(zone, entity);
     }
 
-    public bool IsValidParent(EntityUid parent)
+    private void UpdateInZone(EntityUid uid)
     {
-        return parent.IsValid()
-            && Exists(parent)
-            && (HasComp<MapGridComponent>(parent) || HasComp<MapComponent>(parent));
+        // shoulk work only at initialized map.
+        var map = _transform.GetMap(uid);
+        if (!_map.IsInitialized(map))
+            return;
+
+        var toLeave = new HashSet<NetEntity>();
+        if (TryComp<InZoneComponent>(uid, out var inZone))
+            toLeave = [.. inZone.Zones];
+
+        foreach (var zone in GetZonesByEntity(uid, useCache: false))
+        {
+            TryHandleEnterZone(zone, uid);
+            toLeave.Remove(GetNetEntity(zone));
+        }
+
+        foreach (var netZone in toLeave)
+        {
+            var zoneUid = GetEntity(netZone);
+            if (!TryComp<ZoneComponent>(zoneUid, out var zoneComp))
+                continue;
+
+            TryHandleLeaveZone((zoneUid, zoneComp), uid);
+        }
     }
 
-    public EntityUid GetZoneParent(EntityUid zone)
+    private bool TryHandleEnterZone(Entity<ZoneComponent> zone, EntityUid uid)
     {
-        return Transform(zone).ParentUid;
+        if (!zone.Comp.LocatedEntities.Add(GetNetEntity(uid)))
+            return false;
+
+        var inZone = EnsureComp<InZoneComponent>(uid);
+        inZone.Zones.Add(GetNetEntity(zone));
+
+        var ev = new EntityEnteredZoneEvent(zone, uid);
+        RaiseLocalEvent(zone, ev);
+        RaiseLocalEvent(uid, ev);
+
+        Dirty(zone);
+        Dirty(uid, inZone);
+        return true;
+    }
+
+    private bool TryHandleLeaveZone(Entity<ZoneComponent> zone, EntityUid uid)
+    {
+        if (!zone.Comp.LocatedEntities.Remove(GetNetEntity(uid)))
+            return false;
+
+        if (TryComp<InZoneComponent>(uid, out var inZone))
+        {
+            inZone.Zones.Remove(GetNetEntity(zone));
+
+            if (_net.IsServer)
+            {
+                if (inZone.Zones.Count <= 0)
+                    RemComp<InZoneComponent>(uid);
+                else
+                    Dirty(uid, inZone);
+            }
+        }
+
+        var ev = new EntityLeavedZoneEvent(zone, uid);
+        RaiseLocalEvent(zone, ev);
+        RaiseLocalEvent(uid, ev);
+
+        Dirty(zone);
+        return true;
     }
 }
 
 /// <summary>
 /// An event that rises when the entity appears in the zone
 /// </summary>
-public sealed partial class EnteredZoneEvent(Entity<ZoneComponent> zone, EntityUid entity) : EntityEventArgs
+public sealed partial class EntityEnteredZoneEvent(Entity<ZoneComponent> zone, EntityUid entity) : EntityEventArgs
 {
     public readonly Entity<ZoneComponent> Zone = zone;
     public readonly EntityUid Entity = entity;
@@ -245,7 +365,7 @@ public sealed partial class EnteredZoneEvent(Entity<ZoneComponent> zone, EntityU
 /// <summary>
 /// An event that rises when the entity disappears from the zone
 /// </summary>
-public sealed partial class LeavedZoneEvent(Entity<ZoneComponent> zone, EntityUid entity) : EntityEventArgs
+public sealed partial class EntityLeavedZoneEvent(Entity<ZoneComponent> zone, EntityUid entity) : EntityEventArgs
 {
     public readonly Entity<ZoneComponent> Zone = zone;
     public readonly EntityUid Entity = entity;
