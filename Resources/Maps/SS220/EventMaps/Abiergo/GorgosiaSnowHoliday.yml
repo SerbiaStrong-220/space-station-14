@@ -4,8 +4,8 @@ meta:
   engineVersion: 267.4.0
   forkId: ""
   forkVersion: ""
-  time: 12/13/2025 20:14:48
-  entityCount: 10364
+  time: 12/14/2025 08:49:13
+  entityCount: 10352
 maps:
 - 2184
 grids:
@@ -7674,59 +7674,6 @@ entities:
     - type: Transform
       pos: -73.49052,42.66781
       parent: 2
-- proto: BoxSyringe
-  entities:
-  - uid: 4849
-    components:
-    - type: Transform
-      parent: 4846
-    - type: Storage
-      storedItems:
-        4850:
-          position: 0,0
-          _rotation: South
-        4851:
-          position: 1,0
-          _rotation: South
-        4852:
-          position: 2,0
-          _rotation: South
-        4853:
-          position: 0,1
-          _rotation: South
-        4854:
-          position: 1,1
-          _rotation: South
-        4855:
-          position: 2,1
-          _rotation: South
-        4856:
-          position: 0,2
-          _rotation: South
-        4857:
-          position: 1,2
-          _rotation: South
-        4858:
-          position: 2,2
-          _rotation: South
-    - type: ContainerContainer
-      containers:
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 4850
-          - 4851
-          - 4852
-          - 4853
-          - 4854
-          - 4855
-          - 4856
-          - 4857
-          - 4858
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
 - proto: BoxTrashbag
   entities:
   - uid: 2537
@@ -32646,17 +32593,24 @@ entities:
     - type: Transform
       pos: -50.5,38.5
       parent: 2
+    - type: EntityStorage
+      air:
+        volume: 200
+        immutable: False
+        temperature: 238.14757
+        moles:
+          Oxygen: 1.7459903
+          Nitrogen: 6.568249
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
           showEnts: False
           occludes: True
           ents:
-          - 4861
-          - 4860
-          - 4849
-          - 4847
           - 4859
+          - 4847
+          - 4860
+          - 4861
     - type: Fixtures
       fixtures: {}
   - uid: 6733
@@ -32955,62 +32909,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -37.5,18.5
       parent: 2
-- proto: MiniSyringe
-  entities:
-  - uid: 4850
-    components:
-    - type: Transform
-      parent: 4849
-    - type: Physics
-      canCollide: False
-  - uid: 4851
-    components:
-    - type: Transform
-      parent: 4849
-    - type: Physics
-      canCollide: False
-  - uid: 4852
-    components:
-    - type: Transform
-      parent: 4849
-    - type: Physics
-      canCollide: False
-  - uid: 4853
-    components:
-    - type: Transform
-      parent: 4849
-    - type: Physics
-      canCollide: False
-  - uid: 4854
-    components:
-    - type: Transform
-      parent: 4849
-    - type: Physics
-      canCollide: False
-  - uid: 4855
-    components:
-    - type: Transform
-      parent: 4849
-    - type: Physics
-      canCollide: False
-  - uid: 4856
-    components:
-    - type: Transform
-      parent: 4849
-    - type: Physics
-      canCollide: False
-  - uid: 4857
-    components:
-    - type: Transform
-      parent: 4849
-    - type: Physics
-      canCollide: False
-  - uid: 4858
-    components:
-    - type: Transform
-      parent: 4849
-    - type: Physics
-      canCollide: False
 - proto: Mirror
   entities:
   - uid: 463
