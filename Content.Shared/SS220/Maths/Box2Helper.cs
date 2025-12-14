@@ -5,7 +5,7 @@ using System.Numerics;
 
 namespace Content.Shared.SS220.Maths;
 
-public static partial class MathHelperExtensions
+public static partial class Box2Helper
 {
     /// <summary>
     /// Substracts the <paramref name="cutters"/> from the <paramref name="boxes"/> returning the remaining sections
@@ -67,7 +67,7 @@ public static partial class MathHelperExtensions
     }
 
     /// <summary>
-    /// Returns a new array of boxes in which all intersections in <paramref name="boxes"/> has removed
+    /// Gets a new array of boxes in which all intersections in <paramref name="boxes"/> has removed
     /// </summary>
     public static List<Box2> GetNonOverlappingBoxes(IEnumerable<Box2> boxes)
     {

@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.SS220.Maths;
 using Content.Shared.SS220.Zones.Components;
+using Robust.Shared.Console;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
@@ -84,9 +85,9 @@ public abstract partial class SharedZonesSystem : EntitySystem
 
     #region Public API
     /// <summary>
-    /// Returns entities located in the <paramref name="zone"/>.
-    /// The check is performed at the <see cref="TransformComponent.Coordinates"/> of the entities.
+    /// Gets all entities located in the <paramref name="zone"/>.
     /// </summary>
+    /// <param name="useCache">Should the result be used from the cache, or should be calculated</param>
     public IEnumerable<EntityUid> GetInZoneEntities(Entity<ZoneComponent> zone, bool useCache = true)
     {
         if (useCache)
@@ -105,7 +106,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
         {
             foreach (var uid in _entityLookup.GetEntitiesIntersecting(xform.MapID, bounds, LookupFlags.All))
             {
-                if (InZone(zone, uid))
+                if (InZone(zone, uid, useCache: fa))
                     yield return uid;
             }
         }
@@ -114,6 +115,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
     /// <summary>
     /// Determines whether the <paramref name="entity"/> is located in the <paramref name="zone"/>.
     /// </summary>
+    /// <param name="useCache">Should the result be used from the cache, or should be calculated</param>
     public bool InZone(Entity<ZoneComponent> zone, EntityUid entity, bool useCache = true)
     {
         if (useCache)
@@ -149,6 +151,10 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return false;
     }
 
+    /// <summary>
+    /// Gets all zones containing the <paramref name="uid"/>
+    /// </summary>
+    /// <param name="useCache">Should the result be used from the cache, or should be calculated</param>
     public IEnumerable<Entity<ZoneComponent>> GetZonesByEntity(EntityUid uid, bool useCache = true)
     {
         if (useCache)
@@ -173,7 +179,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
     }
 
     /// <summary>
-    /// Returns zones containing a <paramref name="point"/>
+    /// Gets all zones containing the <paramref name="point"/>
     /// </summary>
     public IEnumerable<Entity<ZoneComponent>> GetZonesByPoint(MapCoordinates point)
     {
@@ -189,6 +195,9 @@ public abstract partial class SharedZonesSystem : EntitySystem
         }
     }
 
+    /// <summary>
+    /// Gets the count of all existing zones
+    /// </summary>
     public int GetZonesCount()
     {
         var result = 0;
@@ -199,16 +208,39 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return result;
     }
 
+    /// <summary>
+    /// Enumerates all <see cref="EntityPrototype"/> with the category <see cref="ZonesCategoryId"/>
+    /// </summary>
     public IEnumerable<EntityPrototype> EnumerateZonePrototypes()
     {
         return _prototype.Categories[ZonesCategoryId];
     }
 
+    /// <summary>
+    /// Is the <paramref name="parent"> valid for zone attachment
+    /// </summary>
     public bool IsValidParent(EntityUid parent)
     {
         return parent.IsValid()
             && Exists(parent)
             && (HasComp<MapGridComponent>(parent) || HasComp<MapComponent>(parent));
+    }
+
+    public List<CompletionOption> GetZonesListCompletionOption()
+    {
+        var result = new List<CompletionOption>();
+
+        var query = AllEntityQuery<ZoneComponent, MetaDataComponent>();
+        while (query.MoveNext(out var uid, out _, out var metaDataComp))
+        {
+            var option = new CompletionOption(GetNetEntity(uid).ToString())
+            {
+                Hint = metaDataComp.EntityName
+            };
+            result.Add(option);
+        }
+
+        return result;
     }
     #endregion
 
@@ -216,13 +248,13 @@ public abstract partial class SharedZonesSystem : EntitySystem
     public Box2 AttachToGrid(Box2 box, EntityUid parent)
     {
         var gridSize = TryComp<MapGridComponent>(parent, out var mapGrid) ? mapGrid.TileSize : 1f;
-        return MathHelperExtensions.AttachToGrid(box, gridSize);
+        return Box2Helper.AttachToGrid(box, gridSize);
     }
 
     public List<Box2> AttachToGrid(List<Box2> area, EntityUid parent)
     {
         var gridSize = TryComp<MapGridComponent>(parent, out var mapGrid) ? mapGrid.TileSize : 1f;
-        return MathHelperExtensions.AttachToGrid(area, gridSize);
+        return Box2Helper.AttachToGrid(area, gridSize);
     }
 
     public List<Box2> RecalculateArea(List<Box2> area, EntityUid parent, bool attachToGrid = false)
@@ -230,8 +262,8 @@ public abstract partial class SharedZonesSystem : EntitySystem
         if (attachToGrid)
             area = AttachToGrid(area, parent);
 
-        area = MathHelperExtensions.GetNonOverlappingBoxes(area);
-        area = MathHelperExtensions.UnionInEqualSizedBoxes(area);
+        area = Box2Helper.GetNonOverlappingBoxes(area);
+        area = Box2Helper.UnionInEqualSizedBoxes(area);
 
         return area;
     }
@@ -262,9 +294,9 @@ public abstract partial class SharedZonesSystem : EntitySystem
     /// Raises the <see cref="EntityLeavedZoneEvent"/> if entity was in the <paramref name="zone"/> before, but now it isn't.
     /// Raises the <see cref="EntityEnteredZoneEvent"/> if entity wasn't in the <paramref name="zone"/> before, but now it is.
     /// </summary>
-    private void UpdateEntitiesInZone(Entity<ZoneComponent> zone)
+    protected void UpdateEntitiesInZone(Entity<ZoneComponent> zone)
     {
-        // shoulk work only at initialized map.
+        // should work only at initialized map
         var map = _transform.GetMap(zone.Owner);
         if (!_map.IsInitialized(map))
             return;
@@ -282,9 +314,9 @@ public abstract partial class SharedZonesSystem : EntitySystem
             TryHandleLeaveZone(zone, entity);
     }
 
-    private void UpdateInZone(EntityUid uid)
+    protected void UpdateInZone(EntityUid uid)
     {
-        // shoulk work only at initialized map.
+        // should work only at initialized map.
         var map = _transform.GetMap(uid);
         if (!_map.IsInitialized(map))
             return;

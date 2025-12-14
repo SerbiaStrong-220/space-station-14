@@ -152,7 +152,7 @@ public sealed partial class ZonesControlWindow : DefaultWindow
         EndEditing();
 
         CreateNewZoneButton.Pressed = true;
-        ZoneEditor.SetOriginalParams(null);
+        ZoneEditor.SetOriginalArgs(null);
         ZoneEditor.SetOverlay(true);
         ZoneEditor.SetEditorSetting(ZoneEditor.ZoneEditorSetting.ReadWrite);
         ZoneEditorPanel.Visible = true;
@@ -168,7 +168,7 @@ public sealed partial class ZonesControlWindow : DefaultWindow
         EditingZoneEntry = entry;
         EditingZoneEntry.Pressed = true;
 
-        ZoneEditor.SetOriginalParams(entry.ZoneEntity);
+        ZoneEditor.SetOriginalArgs(entry.ZoneEntity);
         ZoneEditor.SetOverlay(true);
         ZoneEditor.SetEditorSetting(ZoneEditor.ZoneEditorSetting.ReadWrite);
         ZoneEditorPanel.Visible = true;
@@ -201,29 +201,29 @@ public sealed partial class ZonesControlWindow : DefaultWindow
         return height + yMargin;
     }
 
-    private void OnCreateZoneApplied(ZoneEditor.ZoneParams @params)
+    private void OnCreateZoneApplied(ZoneEditor.ZoneArgs args)
     {
         _zones.CreateZoneRequest(
-            _entityManager.GetNetEntity(@params.Parent),
-            @params.ProtoId,
-            @params.Area,
-            @params.Name,
-            @params.Color);
+            _entityManager.GetNetEntity(args.Parent),
+            args.ProtoId,
+            args.Area,
+            args.Name,
+            args.Color);
 
         EndEditing();
     }
 
-    private void OnChangeZoneApplied(ZoneEditor.ZoneParams @params)
+    private void OnChangeZoneApplied(ZoneEditor.ZoneArgs args)
     {
         if (EditingZoneEntry?.ZoneEntity is { } zone)
         {
             _zones.ChangeZoneRequest(
                 _entityManager.GetNetEntity(zone),
-                _entityManager.GetNetEntity(@params.Parent),
-                @params.ProtoId,
-                @params.Area,
-                @params.Name,
-                @params.Color);
+                _entityManager.GetNetEntity(args.Parent),
+                args.ProtoId,
+                args.Area,
+                args.Name,
+                args.Color);
         }
 
         EndEditing();

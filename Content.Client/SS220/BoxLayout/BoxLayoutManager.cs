@@ -22,7 +22,7 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
     private BoxLayoutBoxesOverlayProvider _overlayProvider = default!;
 
     public event Action? Started;
-    public event Action<BoxArgs>? Ended;
+    public event Action<IBoxLayoutManager.BoxArgs>? Ended;
     public event Action? Cancelled;
 
     public bool Active { get; private set; } = false;
@@ -124,10 +124,10 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
             if (_entity.TryGetComponent<MapGridComponent>(parent, out var mapGrid))
                 gridSize = mapGrid.TileSize;
 
-            box = MathHelperExtensions.AttachToGrid(box, gridSize);
+            box = Box2Helper.AttachToGrid(box, gridSize);
         }
 
-        Ended?.Invoke(new BoxArgs(parent, box));
+        Ended?.Invoke(new IBoxLayoutManager.BoxArgs(parent, box));
         SetActive(false);
         Clear();
 
@@ -160,12 +160,6 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
         FirstPoint = null;
         OverlayOverrideColor = null;
         AttachToGrid = false;
-    }
-
-    public struct BoxArgs(EntityUid parent, Box2 box)
-    {
-        public EntityUid Parent = parent;
-        public Box2 Box = box;
     }
 
     private sealed class BoxLayoutBoxesOverlayProvider() : BoxesOverlay.BoxesOverlayProvider()
@@ -201,7 +195,7 @@ public sealed class BoxLayoutManager : IBoxLayoutManager
                 if (_entityManager.TryGetComponent<MapGridComponent>(parent, out var mapGrid))
                     gridSize = mapGrid.TileSize;
 
-                box = MathHelperExtensions.AttachToGrid(box, gridSize);
+                box = Box2Helper.AttachToGrid(box, gridSize);
             }
 
             var color = _boxLayoutManager.OverlayOverrideColor ?? DefaultColor;

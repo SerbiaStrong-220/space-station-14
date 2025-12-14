@@ -19,11 +19,13 @@ public sealed partial class ZoneEntry : ContainerButton
 
     public Entity<ZoneComponent> ZoneEntity;
 
-    private readonly Dictionary<uint, ConfirmableButtonState> _confirmableButtonStates = new()
+    private static Dictionary<uint, ConfirmableButtonState> ConfirmableButtonStates => new()
     {
-        [0] = new ConfirmableButtonState(Loc.GetString("zone-container-entry-delete-container-button"), null),
+        [0] = new ConfirmableButtonState(Loc.GetString("zone-entry-delete-zone-button"), null),
         [1] = new ConfirmableButtonState(Loc.GetString("zones-control-are-you-sure"), StyleNano.ButtonColorCautionDefault)
     };
+
+    private static Color BackgroundColor => Color.FromHex("#2F2F3B");
 
     public ZoneEntry(Entity<ZoneComponent> entity)
     {
@@ -33,9 +35,9 @@ public sealed partial class ZoneEntry : ContainerButton
         _zones = _entityManager.System<ZonesSystem>();
         ZoneEntity = entity;
 
-        BackgroundPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = Color.FromHex("#2F2F3B") };
+        BackgroundPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = BackgroundColor };
         AddStyleClass(StyleClassButton);
-        DeleteZoneButton.SetClickState(_confirmableButtonStates);
+        DeleteZoneButton.SetClickState(ConfirmableButtonStates);
         DeleteZoneButton.OnConfirmed += () => _zones.DeleteZoneRequest(_entityManager.GetNetEntity(entity));
 
         Refresh();

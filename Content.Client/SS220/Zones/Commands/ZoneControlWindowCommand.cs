@@ -8,13 +8,13 @@ using Robust.Shared.Console;
 namespace Content.Client.SS220.Zones.Commands;
 
 [UsedImplicitly]
-public sealed partial class ZoneControlWindowCommand : LocalizedCommands
+public sealed partial class ZonesControlWindowCommand : LocalizedCommands
 {
     [Dependency] private readonly IUserInterfaceManager _ui = default!;
 
     public override string Command => SharedZonesSystem.ZoneCommandsPrefix + "control_window";
 
-    public override string Description => Loc.GetString("zone-command-control-window-desc");
+    public override string Description => Loc.GetString("cmd-zones-control-window-desc");
 
 
     public override void Execute(IConsoleShell shell, string argStr, string[] args)

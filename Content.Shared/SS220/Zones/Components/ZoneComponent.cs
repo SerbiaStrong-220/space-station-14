@@ -5,11 +5,6 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Zones.Components;
 
-/// <summary>
-/// The component used to determine the zones located on the <see cref="ZoneParams.Container"/>.
-/// A zone can be used to determine a certain area on the <see cref="ZoneParams.Container"/>
-/// in which various events can occur, as well as with entities entering, staying inside, and leaving the zone.
-/// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(raiseAfterAutoHandleState: true)]
 [Access(typeof(SharedZonesSystem), Other = AccessPermissions.ReadExecute)]
 [EntityCategory("Zones")]
@@ -28,7 +23,7 @@ public sealed partial class ZoneComponent : Component
     public List<Box2> Area = [];
 
     /// <summary>
-    /// An array of entities currently located in the zone
+    /// An array of entities located in the zone
     /// </summary>
     [ViewVariables, AutoNetworkedField]
     public HashSet<NetEntity> LocatedEntities = [];

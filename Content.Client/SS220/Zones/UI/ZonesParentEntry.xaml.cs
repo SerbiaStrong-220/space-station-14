@@ -22,6 +22,8 @@ public sealed partial class ZonesParentEntry : BoxContainer
 
     private bool _collapsed;
 
+    private static Color BackgroundColor => Color.FromHex("#2F2F3B");
+
     public ZonesParentEntry(EntityUid parent, List<ZoneEntry> entries, bool refresh = true)
     {
         IoCManager.InjectDependencies(this);
@@ -33,7 +35,7 @@ public sealed partial class ZonesParentEntry : BoxContainer
         ParentButton.AddStyleClass(ContainerButton.StyleClassButton);
         ParentButton.OnPressed += _ => _clientConsoleHost.ExecuteCommand($"vv {_entityManager.GetNetEntity(ZonesParent)}");
         CollapseButton.OnPressed += _ => SetCollapsed(!_collapsed);
-        ParentBackgroundPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = Color.FromHex("#2F2F3B") };
+        ParentBackgroundPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = BackgroundColor };
 
         ZoneEntries = entries.ToDictionary(x => x.ZoneEntity.Owner, x => x);
         if (refresh)

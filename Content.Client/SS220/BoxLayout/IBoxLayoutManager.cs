@@ -26,4 +26,10 @@ public interface IBoxLayoutManager
     void Cancel();
 
     void SetOverlay(bool enabled);
+
+    struct BoxArgs(EntityUid parent, Box2 box)
+    {
+        public EntityUid Parent = parent;
+        public Box2 Box = box;
+    }
 }

@@ -12,7 +12,6 @@ namespace Content.Client.SS220.Overlays;
 
 public sealed class BoxesOverlay : Overlay
 {
-
     [Dependency] private readonly IResourceCache _cache = default!;
     [Dependency] private readonly IEntityManager _entManager = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;

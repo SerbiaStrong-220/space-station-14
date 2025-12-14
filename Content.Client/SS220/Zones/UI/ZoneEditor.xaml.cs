@@ -27,41 +27,45 @@ public sealed partial class ZoneEditor : PanelContainer
 
     private readonly ZonesSystem _zones = default!;
 
-    public static readonly Vector2 DefaultMinSize = new(500f, 270f);
-
-    public event Action<ZoneParams>? OnApply;
-    public event Action<ZoneParams>? OnCancel;
-
-    public ZoneParams? ChangedParams
-    {
-        get => _changedParams;
-        set
-        {
-            _changedParams = value;
-            CancelLayout();
-            Refresh();
-        }
-    }
-    private ZoneParams? _changedParams = default!;
-
-    public ZoneParams OriginalParams { get; private set; } = default!;
-
-    public ZoneParams CurrentParams => ChangedParams ?? OriginalParams;
-
-    public ZoneEditorSetting EditorSetting { get; private set; } = ZoneEditorSetting.ReadWrite;
-
-    private BoxLayoutMode _layoutMode = BoxLayoutMode.Adding;
-
     private readonly ZoneEditorBoxesOverlayProvider _overlayProvider;
 
     private readonly ZonePrototypeSelectorPopup _prototypeSelectorPopup = new();
     private readonly ZoneColorSelectorPopup _colorSelectorPopup = new();
 
+    public static Vector2 DefaultMinSize => new(500f, 270f);
+
+    private static Color SizeOptionsBackgroundColor => new(32, 32, 32);
+    private static Color SizeOptionsBorderColor => new(128, 128, 128);
+    private static Thickness SizeOptionsBorderThickness => new(2);
+
+    public event Action<ZoneArgs>? OnApply;
+    public event Action<ZoneArgs>? OnCancel;
+
+    public ZoneArgs? ChangedArgs
+    {
+        get => _changedArgs;
+        set
+        {
+            _changedArgs = value;
+            CancelLayout();
+            Refresh();
+        }
+    }
+    private ZoneArgs? _changedArgs = default!;
+
+    public ZoneArgs OriginalArgs { get; private set; } = default!;
+
+    public ZoneArgs ShowedArgs => ChangedArgs ?? OriginalArgs;
+
+    public ZoneEditorSetting EditorSetting { get; private set; } = ZoneEditorSetting.ReadWrite;
+
+    private BoxLayoutMode _layoutMode = BoxLayoutMode.Adding;
+
     public ZoneEditor() : this(null) { }
 
-    public ZoneEditor(Entity<ZoneComponent> ent, ZoneEditorSetting setting = ZoneEditorSetting.ReadWrite) : this(GetZoneParams(ent), setting) { }
+    public ZoneEditor(Entity<ZoneComponent> ent, ZoneEditorSetting setting = ZoneEditorSetting.ReadWrite) : this(GetZoneArgs(ent), setting) { }
 
-    public ZoneEditor(ZoneParams? @params, ZoneEditorSetting setting = ZoneEditorSetting.ReadWrite)
+    public ZoneEditor(ZoneArgs? args, ZoneEditorSetting setting = ZoneEditorSetting.ReadWrite)
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
@@ -76,26 +80,99 @@ public sealed partial class ZoneEditor : PanelContainer
 
         SizeOptionsBackground.PanelOverride = new StyleBoxFlat()
         {
-            BackgroundColor = new Color(32, 32, 32),
-            BorderColor = new Color(128, 128, 128),
-            BorderThickness = new Thickness(2)
+            BackgroundColor = SizeOptionsBackgroundColor,
+            BorderColor = SizeOptionsBorderColor,
+            BorderThickness = SizeOptionsBorderThickness
         };
 
         PrototypeSelectorButton.AddStyleClass(StyleNano.StyleClassChatFilterOptionButton);
         ColorSelectorButton.AddStyleClass(StyleNano.StyleClassChatFilterOptionButton);
 
-        ApplyButton.OnPressed += _ => OnApply?.Invoke(CurrentParams);
-        CancelButton.OnPressed += _ => OnCancel?.Invoke(CurrentParams);
+        ApplyButton.OnPressed += _ => OnApply?.Invoke(ShowedArgs);
+        CancelButton.OnPressed += _ => OnCancel?.Invoke(ShowedArgs);
 
-        InitInteractions();
+        InitInput();
         InitTooltips();
 
         SetEditorSetting(setting, refresh: false);
-        SetOriginalParams(@params, refresh: false);
+        SetOriginalArgs(args, refresh: false);
         Refresh();
     }
 
-    private void InitInteractions()
+    protected override void ExitedTree()
+    {
+        base.ExitedTree();
+
+        _colorSelectorPopup.Close();
+        RemoveLayoutReact();
+        SetOverlay(false);
+    }
+
+    public void Refresh()
+    {
+        _prototypeSelectorPopup.Close();
+        _colorSelectorPopup.Close();
+
+        CancelLayout();
+
+        var showedArgs = ShowedArgs;
+
+        NameLineEdit.Text = showedArgs.Name;
+        PrototypeIDLineEdit.Text = showedArgs.ProtoId;
+        HexColorLineEdit.Text = showedArgs.Color.ToHex();
+        ParentNetIDLineEdit.Text = _entityManager.GetNetEntity(showedArgs.Parent).ToString();
+
+        Box2ListContainer.RemoveAllChildren();
+        for (var i = 0; i < showedArgs.Area.Count; i++)
+        {
+            var box = showedArgs.Area[i];
+            var entry = new ZoneBoxEntry(box);
+            var index = i;
+            entry.OnBoxChanged += newBox =>
+            {
+                var newArea = showedArgs.Area.ToList();
+                newArea[index] = newBox;
+                ChangeArea(newArea);
+            };
+            Box2ListContainer.AddChild(entry);
+        }
+
+        RefreshEditable();
+        _overlayProvider.Refresh();
+    }
+
+    public void ClearChanges()
+    {
+        ChangedArgs = null;
+    }
+
+    public void SetOriginalArgs(Entity<ZoneComponent> ent, bool refresh = true)
+    {
+        SetOriginalArgs(GetZoneArgs(ent, _entityManager), refresh);
+    }
+
+    public void SetOriginalArgs(ZoneArgs? args, bool refresh = true)
+    {
+        OriginalArgs = args ?? new ZoneArgs();
+
+        if (refresh)
+            Refresh();
+    }
+
+    public void SetOverlay(bool active)
+    {
+        _overlayProvider.Active = active;
+    }
+
+    public void SetEditorSetting(ZoneEditorSetting setting, bool refresh = true)
+    {
+        EditorSetting = setting;
+
+        if (refresh)
+            Refresh();
+    }
+
+    private void InitInput()
     {
         AddBoxButton.OnToggled += e =>
         {
@@ -156,7 +233,7 @@ public sealed partial class ZoneEditor : PanelContainer
 
         ColorSelectorButton.OnPressed += _ =>
         {
-            var color = CurrentParams.Color;
+            var color = ShowedArgs.Color;
             _colorSelectorPopup.SetColor(color);
 
             var globalPos = ColorSelectorButton.GlobalPosition;
@@ -177,77 +254,103 @@ public sealed partial class ZoneEditor : PanelContainer
         AttachToGridButton.ToolTip = Loc.GetString("zone-editor-attach-to-grid-button-tooltip");
     }
 
-    protected override void ExitedTree()
+    private void RefreshEditable()
     {
-        base.ExitedTree();
+        var editable = EditorSetting is ZoneEditorSetting.ReadWrite;
 
-        _colorSelectorPopup.Close();
-        RemoveLayoutReact();
-        SetOverlay(false);
+        NameLineEdit.Editable = editable;
+        PrototypeIDLineEdit.Editable = editable;
+        HexColorLineEdit.Editable = editable;
+        ParentNetIDLineEdit.Editable = editable;
+
+        ApplyButton.Disabled = !editable;
+        CancelButton.Disabled = !editable;
+
+        AttachToGridButton.Disabled = !editable;
+        AddBoxButton.Disabled = !editable;
+        CutBoxButton.Disabled = !editable;
+
+        foreach (var child in Box2ListContainer.Children)
+        {
+            if (child is not ZoneBoxEntry entry)
+                continue;
+
+            entry.Editable = editable;
+        }
     }
 
-    public void Refresh()
+    private void AddLayotReact()
     {
-        _prototypeSelectorPopup.Close();
-        _colorSelectorPopup.Close();
+        _boxLayoutManager.Ended += OnLayoutEnded;
+        _boxLayoutManager.Cancelled += OnLayoutCancelled;
+        _boxLayoutManager.SetOverlay(true);
+    }
 
-        CancelLayout();
+    private void RemoveLayoutReact()
+    {
+        _boxLayoutManager.Ended -= OnLayoutEnded;
+        _boxLayoutManager.Cancelled -= OnLayoutCancelled;
+        _boxLayoutManager.SetOverlay(false);
 
-        var showedParams = CurrentParams;
+        AddBoxButton.Pressed = false;
+        CutBoxButton.Pressed = false;
+    }
 
-        NameLineEdit.Text = showedParams.Name;
-        PrototypeIDLineEdit.Text = showedParams.ProtoId;
-        HexColorLineEdit.Text = showedParams.Color.ToHex();
-        ParentNetIDLineEdit.Text = _entityManager.GetNetEntity(showedParams.Parent).ToString();
-
-        Box2ListContainer.RemoveAllChildren();
-        for (var i = 0; i < showedParams.Area.Count; i++)
+    private void OnLayoutEnded(IBoxLayoutManager.BoxArgs boxArgs)
+    {
+        var newZoneArgs = ShowedArgs;
+        if (!newZoneArgs.Parent.IsValid())
+            newZoneArgs.Parent = boxArgs.Parent;
+        else if (boxArgs.Parent != newZoneArgs.Parent)
         {
-            var box = showedParams.Area[i];
-            var entry = new ZoneBoxEntry(box);
-            var index = i;
-            entry.OnBoxChanged += newBox =>
-            {
-                var newArea = showedParams.Area.ToList();
-                newArea[index] = newBox;
-                ChangeArea(newArea);
-            };
-            Box2ListContainer.AddChild(entry);
+            CancelLayout();
+            return;
         }
 
-        RefreshEditable();
-        _overlayProvider.Refresh();
+        var newArea = newZoneArgs.Area.ToList();
+        switch (_layoutMode)
+        {
+            case BoxLayoutMode.Adding:
+                newArea.Add(boxArgs.Box);
+                break;
+
+            case BoxLayoutMode.Cutting:
+                var cutter = boxArgs.Box;
+                newArea = Box2Helper.SubstructBox(newArea, cutter);
+                break;
+        }
+
+        newArea = [.. newArea.Select(b =>
+        {
+            var left = MathF.Round(b.Left, 2);
+            var bottom = MathF.Round(b.Bottom, 2);
+            var right = MathF.Round(b.Right, 2);
+            var top = MathF.Round(b.Top, 2);
+            return new Box2(left, bottom, right, top);
+        })];
+
+        newArea = _zones.RecalculateArea(newArea, newZoneArgs.Parent);
+        newZoneArgs.Area = newArea;
+        ChangeArgs((ref ZoneArgs args) => args = newZoneArgs);
     }
 
-    public void ClearChanges()
+    private void OnLayoutCancelled()
     {
-        ChangedParams = null;
+        RemoveLayoutReact();
+        _boxLayoutManager.SetOverlay(false);
     }
 
-    public void SetOriginalParams(Entity<ZoneComponent> ent, bool refresh = true)
-    {
-        SetOriginalParams(GetZoneParams(ent, _entityManager), refresh);
-    }
-
-    public void SetOriginalParams(ZoneParams? @params, bool refresh = true)
-    {
-        OriginalParams = @params ?? new ZoneParams();
-
-        if (refresh)
-            Refresh();
-    }
-
-    private static ZoneParams GetZoneParams(Entity<ZoneComponent>? ent, IEntityManager? entityManager = null)
+    private static ZoneArgs GetZoneArgs(Entity<ZoneComponent>? ent, IEntityManager? entityManager = null)
     {
         if (ent is null)
-            return new ZoneParams();
+            return new ZoneArgs();
 
         entityManager ??= IoCManager.Resolve<EntityManager>();
 
         entityManager.TryGetComponent<TransformComponent>(ent, out var xform);
         entityManager.TryGetComponent<MetaDataComponent>(ent, out var metaData);
 
-        return new ZoneParams()
+        return new ZoneArgs()
         {
             Parent = xform?.ParentUid ?? ent.Value,
             ProtoId = metaData?.EntityPrototype?.ID ?? SharedZonesSystem.DefaultZoneProtoId,
@@ -290,131 +393,20 @@ public sealed partial class ZoneEditor : PanelContainer
         _boxLayoutManager.Cancel();
     }
 
-    private void AddLayotReact()
-    {
-        _boxLayoutManager.Ended += OnLayoutEnded;
-        _boxLayoutManager.Cancelled += OnLayoutCancelled;
-        _boxLayoutManager.SetOverlay(true);
-    }
-
-    private void RemoveLayoutReact()
-    {
-        _boxLayoutManager.Ended -= OnLayoutEnded;
-        _boxLayoutManager.Cancelled -= OnLayoutCancelled;
-        _boxLayoutManager.SetOverlay(false);
-
-        AddBoxButton.Pressed = false;
-        CutBoxButton.Pressed = false;
-    }
-
-    private void OnLayoutEnded(BoxLayoutManager.BoxArgs args)
-    {
-        var newParams = CurrentParams;
-        if (!newParams.Parent.IsValid())
-            newParams.Parent = args.Parent;
-        else if (args.Parent != newParams.Parent)
-        {
-            CancelLayout();
-            return;
-        }
-
-        var newArea = newParams.Area.ToList();
-        switch (_layoutMode)
-        {
-            case BoxLayoutMode.Adding:
-                newArea.Add(args.Box);
-                break;
-
-            case BoxLayoutMode.Cutting:
-                var cutter = args.Box;
-                newArea = MathHelperExtensions.SubstructBox(newArea, cutter);
-                break;
-        }
-
-        newArea = [.. newArea.Select(b =>
-        {
-            var left = MathF.Round(b.Left, 2);
-            var bottom = MathF.Round(b.Bottom, 2);
-            var right = MathF.Round(b.Right, 2);
-            var top = MathF.Round(b.Top, 2);
-            return new Box2(left, bottom, right, top);
-        })];
-
-        newArea = _zones.RecalculateArea(newArea, newParams.Parent);
-        newParams.Area = newArea;
-        ChangeParams(_ => newParams);
-    }
-
-    private void OnLayoutCancelled()
-    {
-        RemoveLayoutReact();
-        _boxLayoutManager.SetOverlay(false);
-    }
-
-    public void SetOverlay(bool active)
-    {
-        _overlayProvider.Active = active;
-    }
-
-    public void SetEditorSetting(ZoneEditorSetting setting, bool refresh = true)
-    {
-        EditorSetting = setting;
-
-        if (refresh)
-            Refresh();
-    }
-
-    private void RefreshEditable()
-    {
-        var editable = EditorSetting is ZoneEditorSetting.ReadWrite;
-
-        NameLineEdit.Editable = editable;
-        PrototypeIDLineEdit.Editable = editable;
-        HexColorLineEdit.Editable = editable;
-        ParentNetIDLineEdit.Editable = editable;
-
-        ApplyButton.Disabled = !editable;
-        CancelButton.Disabled = !editable;
-
-        AttachToGridButton.Disabled = !editable;
-        AddBoxButton.Disabled = !editable;
-        CutBoxButton.Disabled = !editable;
-
-        foreach (var child in Box2ListContainer.Children)
-        {
-            if (child is not ZoneBoxEntry entry)
-                continue;
-
-            entry.Editable = editable;
-        }
-    }
-
-    #region params changes
+    #region Params changes
     private bool ChangeParent(EntityUid parent, bool refresh = true)
     {
-        return ChangeParams(cur =>
-        {
-            cur.Parent = parent;
-            return cur;
-        }, refresh: refresh);
+        return ChangeArgs((ref ZoneArgs args) => args.Parent = parent, refresh: refresh);
     }
 
     private bool ChangeArea(List<Box2> area, bool refresh = true)
     {
-        return ChangeParams(cur =>
-        {
-            cur.Area = area;
-            return cur;
-        }, refresh: refresh , recalculate: true);
+        return ChangeArgs((ref ZoneArgs args) => args.Area = area, refresh: refresh, recalculate: true);
     }
 
     private bool ChangeName(string name, bool refresh = true)
     {
-        return ChangeParams(cur =>
-        {
-            cur.Name = name;
-            return cur;
-        }, refresh: refresh);
+        return ChangeArgs((ref ZoneArgs args) => args.Name = name, refresh: refresh);
     }
 
     private bool ChangeProtoID(EntProtoId<ZoneComponent> protoId, bool refresh = true)
@@ -423,11 +415,7 @@ public sealed partial class ZoneEditor : PanelContainer
             !proto.HasComponent<ZoneComponent>())
             return false;
 
-        return ChangeParams(cur =>
-        {
-            cur.ProtoId = protoId;
-            return cur;
-        }, refresh: refresh);
+        return ChangeArgs((ref ZoneArgs args) => args.ProtoId = protoId, refresh: refresh);
     }
 
     private bool ChangeColor(string hex, bool refresh = true)
@@ -440,29 +428,28 @@ public sealed partial class ZoneEditor : PanelContainer
 
     private bool ChangeColor(Color value, bool refresh = true)
     {
-        return ChangeParams(cur =>
-        {
-            cur.Color = value;
-            return cur;
-        }, refresh: refresh);
+        return ChangeArgs((ref ZoneArgs args) => args.Color = value, refresh: refresh);
     }
 
-    private bool ChangeParams(Func<ZoneParams, ZoneParams> func, bool refresh = true, bool recalculate = false)
+    private bool ChangeArgs(ActionRefZoneArgs action, bool refresh = true, bool recalculate = false)
     {
         if (EditorSetting is not ZoneEditorSetting.ReadWrite)
             return false;
 
-        var result = func.Invoke(CurrentParams);
+        var args = ShowedArgs;
+        action.Invoke(ref args);
 
         if (recalculate)
-            result.Area = _zones.RecalculateArea(result.Area, result.Parent);
+            args.Area = _zones.RecalculateArea(args.Area, args.Parent);
 
-        _changedParams = result;
+        _changedArgs = args;
         if (refresh)
             Refresh();
 
         return true;
     }
+
+    private delegate void ActionRefZoneArgs(ref ZoneArgs box);
     #endregion
 
     private enum BoxLayoutMode
@@ -493,11 +480,11 @@ public sealed partial class ZoneEditor : PanelContainer
             if (Panel == null)
                 return;
 
-            var changed = Panel.ChangedParams;
+            var changed = Panel.ChangedArgs;
             if (changed == null)
                 return;
 
-            var original = Panel.OriginalParams;
+            var original = Panel.OriginalArgs;
             _addedBoxes = GetChanges(original, changed.Value);
             _deletedBoxes = GetChanges(changed.Value, original);
         }
@@ -525,20 +512,20 @@ public sealed partial class ZoneEditor : PanelContainer
             return result;
         }
 
-        private static (EntityUid Parent, List<Box2> Boxes) GetChanges(ZoneParams original, ZoneParams changed)
+        private static (EntityUid Parent, List<Box2> Boxes) GetChanges(ZoneArgs original, ZoneArgs changed)
         {
             var originalParent = original.Parent;
             var changedParent = changed.Parent;
 
             var result = originalParent == changedParent
-                ? MathHelperExtensions.SubstructBoxes(changed.Area, original.Area)
-                : changed.Area.ToList();
+                ? Box2Helper.SubstructBoxes(changed.Area, original.Area)
+                : [.. changed.Area];
 
             return (changedParent, result);
         }
     }
 
-    public struct ZoneParams()
+    public struct ZoneArgs()
     {
         public EntityUid Parent = EntityUid.Invalid;
 

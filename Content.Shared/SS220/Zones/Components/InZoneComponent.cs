@@ -6,6 +6,9 @@ namespace Content.Shared.SS220.Zones.Components;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class InZoneComponent : Component
 {
+    /// <summary>
+    /// An array of zones where our entity located
+    /// </summary>
     [ViewVariables, AutoNetworkedField]
     public HashSet<NetEntity> Zones = [];
 }
