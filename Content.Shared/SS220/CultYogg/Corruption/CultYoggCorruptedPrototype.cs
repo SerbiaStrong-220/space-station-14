@@ -10,7 +10,7 @@ namespace Content.Shared.SS220.CultYogg.Corruption;
 /// <summary>
 ///     Recipes for corruption
 /// </summary>
-[Serializable, Prototype("corrupted")]
+[Prototype("corrupted")]
 public sealed partial class CultYoggCorruptedPrototype : IPrototype
 {
     [ViewVariables]

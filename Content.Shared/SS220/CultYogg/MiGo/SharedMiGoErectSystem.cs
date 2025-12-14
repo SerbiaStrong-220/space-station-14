@@ -699,7 +699,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         if (_gameTiming.InPrediction) // this should never run in client
             return null;
 
-        if (!_prototypeManager.TryIndex(entity.Comp.BuildingPrototypeId, out var prototype, logError: true))
+        if (!_prototypeManager.Resolve(entity.Comp.BuildingPrototypeId, out var prototype))
             return null;
 
         var transform = Transform(entity);
@@ -732,5 +732,5 @@ public sealed partial class MiGoEraseDoAfterEvent : SimpleDoAfterEvent
 [Serializable, NetSerializable]
 public sealed partial class MiGoCaptureDoAfterEvent : SimpleDoAfterEvent
 {
-    public MiGoCapturePrototype? Recipe;
+    public ProtoId<MiGoCapturePrototype>? Recipe;
 }
