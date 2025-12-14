@@ -10,7 +10,7 @@ public sealed partial class MindExtensionComponent : Component
     public NetUserId Player;
 
     [ViewVariables(VVAccess.ReadOnly)]
-    public Dictionary<EntityUid, TrailPointMetaData> Trail = [];
+    public Dictionary<NetEntity, TrailPointMetaData> Trail = [];
 
     [ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan? RespawnTimer = default!;

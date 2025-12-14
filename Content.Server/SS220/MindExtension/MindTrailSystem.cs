@@ -63,17 +63,20 @@ public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
         foreach (var pair in mindExt.Trail)
         {
             var target = pair.Key;
-            TrailPointMetaData trailMetaData = pair.Value;
-            var state = IsAvailableToEnterEntity(pair.Key, mindExt, args.SenderSession.UserId);
+            var targetEnt = GetEntity(pair.Key);
 
-            if (TryComp<BorgBrainComponent>(pair.Key, out var borgBrain))
+            TrailPointMetaData trailMetaData = pair.Value;
+            var state = IsAvailableToEnterEntity(targetEnt, mindExt, args.SenderSession.UserId);
+
+            if (TryComp<BorgBrainComponent>(targetEnt, out var borgBrain))
             {
-                if (_container.TryGetContainingContainer(pair.Key, out var container) &&
+                if (_container.TryGetContainingContainer(targetEnt, out var container) &&
                     HasComp<BorgChassisComponent>(container.Owner))
                 {
-                    target = container.Owner;
+                    targetEnt = container.Owner;
+                    target = GetNetEntity(targetEnt);
 
-                    var metaData = Comp<MetaDataComponent>(target);
+                    var metaData = Comp<MetaDataComponent>(targetEnt);
 
                     trailMetaData.EntityName = metaData.EntityName;
                     trailMetaData.EntityDescription = $"({Loc.GetString("mind-ext-borg-contained",
@@ -82,7 +85,7 @@ public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
             }
 
             bodyList.Add(new TrailPoint(
-                GetNetEntity(pair.Key),
+                pair.Key,
                 trailMetaData,
                 state,
                 _admin.IsAdmin(args.SenderSession)));
@@ -95,10 +98,7 @@ public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
     {
         var mindExt = GetMindExtension(args.SenderSession.UserId);
 
-        if (!TryGetEntity(ev.Entity, out var ent))
-            return;
-
-        if (mindExt.Comp.Trail.Remove(ent.Value))
+        if (mindExt.Comp.Trail.Remove(ev.Entity))
         {
             var eventArgs = new DeleteTrailPointResponse(ev.Entity);
             RaiseNetworkEvent(eventArgs, args.SenderSession.Channel);
@@ -109,6 +109,8 @@ public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
 
     private void ChangeOrAddTrailPoint(MindExtensionComponent comp, EntityUid entity, bool isAbandoned)
     {
+        var netEntity = GetNetEntity(entity);
+
         if (HasComp<GhostComponent>(entity))
             return;
 
@@ -118,20 +120,20 @@ public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
             if (chassisComp.BrainContainer.ContainedEntity is null)
                 return;
 
-            entity = chassisComp.BrainContainer.ContainedEntity.Value;
+            netEntity = GetNetEntity(chassisComp.BrainContainer.ContainedEntity.Value);
         }
 
-        if (comp.Trail.ContainsKey(entity))
+        if (comp.Trail.ContainsKey(netEntity))
         {
-            var trailMetaData = comp.Trail[entity];
+            var trailMetaData = comp.Trail[netEntity];
             trailMetaData.IsAbandoned = isAbandoned;
-            comp.Trail[entity] = trailMetaData;
+            comp.Trail[netEntity] = trailMetaData;
             return;
         }
 
         TryComp(entity, out MetaDataComponent? metaData);
 
-        comp.Trail.Add(entity, new TrailPointMetaData()
+        comp.Trail.Add(netEntity, new TrailPointMetaData()
         {
             EntityName = metaData?.EntityName ?? "",
             EntityDescription = metaData?.EntityDescription ?? "",
@@ -161,7 +163,7 @@ public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
             if (TryComp<MindComponent>(mindContainer.Mind, out var mind) && mind.UserId != session)
                 return BodyStateToEnter.Engaged;
 
-        if (mindExtension.Trail.TryGetValue(target, out var metaData))
+        if (mindExtension.Trail.TryGetValue(GetNetEntity(target), out var metaData))
         {
             if (metaData.IsAbandoned)
                 return BodyStateToEnter.Abandoned;
