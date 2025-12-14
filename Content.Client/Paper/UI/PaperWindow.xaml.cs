@@ -12,7 +12,9 @@ using Robust.Client.UserInterface.RichText;
 using Content.Client.UserInterface.RichText;
 using Robust.Shared.Input;
 using Content.Client.SS220.Language;
+using Content.Client.SS220.Paper.UI;
 using Content.Client.SS220.UserInterface.Controls;
+using Content.Client.Stylesheets;
 using Content.Shared.SS220.Signature;
 using Robust.Client.Player;
 
@@ -25,6 +27,7 @@ namespace Content.Client.Paper.UI
         [Dependency] private readonly IResourceCache _resCache = default!;
         [Dependency] private readonly IPlayerManager _player = default!; // SS220 languages
         [Dependency] private readonly IEntityManager _entityManager = default!; // SS220 languages
+        [Dependency] private readonly IStylesheetManager _stylesheet = default!; // ss220 add signature
 
         private readonly LanguageSystem _languageSystem; // SS220 languages
 
@@ -87,6 +90,10 @@ namespace Content.Client.Paper.UI
 
             // We can't configure the RichTextLabel contents from xaml, so do it here:
             BlankPaperIndicator.SetMessage(Loc.GetString("paper-ui-blank-page-message"), null, DefaultTextColor);
+
+            // ss220 signature start
+            SignatureSettingsContainer.Stylesheet = new DocumentHelperWindowStyle().Create(_stylesheet.SheetNano, _resCache);
+            // ss220 signature end
 
             // Hook up the close button:
             CloseButton.OnPressed += _ => Close();
