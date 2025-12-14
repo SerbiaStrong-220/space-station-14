@@ -3,12 +3,14 @@
 using System.Linq;
 using Content.Shared.Damage;
 using Content.Shared.Database;
+using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
 using Content.Shared.SS220.Experience.Skill.Components;
 using Content.Shared.SS220.Experience.Systems;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -20,6 +22,9 @@ public sealed class DisarmOnDamageSkillSystem : EntitySystem
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+
+    private readonly ProtoId<SkillTreePrototype> _affectedSkillTree = "PhysicalTraining";
+    private readonly FixedPoint4 _damageToExperience = 150;
 
     public override void Initialize()
     {
@@ -38,14 +43,16 @@ public sealed class DisarmOnDamageSkillSystem : EntitySystem
         if (DamageSpecifier.GetPositive(args.DamageDelta).GetTotal() < entity.Comp.DamageThreshold)
             return;
 
+        if (!_experience.ResolveExperienceEntityFromSkillEntity(entity.Owner, out var experienceEntity))
+            return;
+
+        _experience.TryChangeStudyingProgress(experienceEntity.Value!, _affectedSkillTree, DamageSpecifier.GetPositive(args.DamageDelta).GetTotal() / _damageToExperience);
+
         // TODO: Once we have predicted randomness delete this for something sane...
         var seed = SharedRandomExtensions.HashCodeCombine(new() { (int)_gameTiming.CurTick.Value, GetNetEntity(entity).Id, args.DamageDelta.GetTotal().Int() });
         var rand = new System.Random(seed);
 
         if (!rand.Prob(entity.Comp.DisarmChance))
-            return;
-
-        if (!_experience.ResolveExperienceEntityFromSkillEntity(entity.Owner, out var experienceEntity))
             return;
 
         if (_hands.EnumerateHeld(experienceEntity.Value.Owner).Count() == 0)

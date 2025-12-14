@@ -11,8 +11,6 @@ namespace Content.Shared.SS220.Experience.Systems;
 
 public sealed partial class ExperienceSystem : EntitySystem
 {
-    private readonly EntProtoId _baseSkillProto = "InitSkillEntity";
-
     [Dependency] private readonly SharedContainerSystem _container = default!;
 
     private HashSet<Type> _subscribedToExperienceComponentTypes = [];
@@ -41,16 +39,17 @@ public sealed partial class ExperienceSystem : EntitySystem
             PredictedQueueDel(_container.EmptyContainer(entity.Comp.OverrideExperienceContainer).FirstOrNull());
         }
 
-        if (!PredictedTrySpawnInContainer(_baseSkillProto, entity, ExperienceComponent.ContainerId, out var skillEntity))
+        if (!PredictedTrySpawnInContainer(_baseSKillPrototype, entity, ExperienceComponent.ContainerId, out var skillEntity))
             Log.Fatal($"Cant spawn and insert skill entity into {nameof(entity.Comp.ExperienceContainer)} of {ToPrettyString(entity)}");
         else
             DirtyEntity(skillEntity.Value);
 
-        if (!PredictedTrySpawnInContainer(_baseSkillProto, entity, ExperienceComponent.OverrideContainerId, out var overrideSkillEntity))
+        if (!PredictedTrySpawnInContainer(_baseSKillPrototype, entity, ExperienceComponent.OverrideContainerId, out var overrideSkillEntity))
             Log.Fatal($"Cant spawn and insert skill entity into {nameof(entity.Comp.OverrideExperienceContainer)} of {ToPrettyString(entity)}");
         else
             DirtyEntity(overrideSkillEntity.Value);
 
+        DebugTools.Assert(skillEntity != overrideSkillEntity);
 
         Dirty(entity);
     }

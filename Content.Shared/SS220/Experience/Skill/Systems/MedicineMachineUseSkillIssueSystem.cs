@@ -1,13 +1,18 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.FixedPoint;
 using Content.Shared.SS220.Experience.Skill.Components;
 using Content.Shared.SS220.Experience.Systems;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Experience.Skill.Systems;
 
 public sealed class MedicineMachineUseSkillIssueSystem : EntitySystem
 {
     [Dependency] private readonly ExperienceSystem _experience = default!;
+
+    private readonly ProtoId<SkillTreePrototype> _affectedSkillTree = "Medicine";
+    private readonly FixedPoint4 _progressForDefibrillatorUse = 0.05;
 
     public override void Initialize()
     {
@@ -33,6 +38,11 @@ public sealed class MedicineMachineUseSkillIssueSystem : EntitySystem
 
         args.FailureChance = MathF.Max(newFailureChance, 0f);
         args.SelfDamageChance = MathF.Max(newSelfDamageChance, 0f);
+
+        if (!_experience.ResolveExperienceEntityFromSkillEntity(entity.Owner, out var experienceEntity))
+            return;
+
+        _experience.TryChangeStudyingProgress(experienceEntity.Value!, _affectedSkillTree, _progressForDefibrillatorUse);
     }
 
     private float ComputeNewChance(float left, float right)
