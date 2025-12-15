@@ -674,5 +674,5 @@ public sealed class PullingSystem : EntitySystem
             _rotateTo.TryFaceAngle(uid, angle);
         }
     }
-    // SS220 edit end
+    // SS220-MIT-pull-visualization-end
 }
