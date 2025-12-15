@@ -238,7 +238,7 @@ public sealed class PullingSystem : EntitySystem
 
         _audio.PlayPredicted(_pullSound, pulled, ent);
     }
-    // SS220 edit end
+    // SS220-MIT-pull-visualization-end
 
     private void OnPullerContainerInsert(Entity<PullerComponent> ent, ref EntGotInsertedIntoContainerMessage args)
     {
