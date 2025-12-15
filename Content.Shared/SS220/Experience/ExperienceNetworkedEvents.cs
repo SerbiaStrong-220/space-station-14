@@ -6,12 +6,18 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Experience;
 
+/// <summary>
+/// Network event, send from client to server, prevent unnecessary using of redactor ui
+/// </summary>
 [Serializable, NetSerializable]
 public sealed class OpenExperienceRedactorRequest(NetEntity? target = null) : EntityEventArgs
 {
     public NetEntity? Target = target;
 }
 
+/// <summary>
+/// Network event, send from client to server. After checking that sender is admin the changes to experience will be applied
+/// </summary>
 [Serializable, NetSerializable]
 public sealed class ChangeEntityExperienceAdminRequest(NetEntity target, ExperienceData data) : EntityEventArgs
 {
@@ -19,11 +25,15 @@ public sealed class ChangeEntityExperienceAdminRequest(NetEntity target, Experie
     public ExperienceData Data = data;
 }
 
+/// <summary>
+/// Network event, send from client to server. Represents how player spent free points. After validating free points and local entity. changes will be applied.
+/// </summary>
 [Serializable, NetSerializable]
 public sealed class ChangeEntityExperiencePlayerRequest(PlayerChangeSkill changeSkill) : EntityEventArgs
 {
     public PlayerChangeSkill ChangeSkill = changeSkill;
 }
+
 
 [Serializable, NetSerializable]
 public sealed class SkillTreeExperienceContainer(SkillTreeExperienceInfo info, SkillTreeExperienceInfo? overrideInfo = null)

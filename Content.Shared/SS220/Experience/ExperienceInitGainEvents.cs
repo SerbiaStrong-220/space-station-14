@@ -5,7 +5,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.SS220.Experience;
 
 /// <summary>
-/// Raised directed on an entity when all spawning and post spawn procedures are done
+/// Raised directed on an entity when any of Experience changing component added or removed or Experience needs recalculation
 /// </summary>
 [ByRefEvent]
 public readonly record struct RecalculateEntityExperience();
