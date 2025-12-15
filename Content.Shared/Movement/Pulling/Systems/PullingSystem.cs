@@ -6,7 +6,7 @@ using Content.Shared.Buckle.Components;
 using Content.Shared.Cuffs;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Database;
-using Content.Shared.Effects; // SS220 edit
+using Content.Shared.Effects;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
