@@ -91,7 +91,7 @@ public sealed class PullingSystem : EntitySystem
         SubscribeLocalEvent<PullerComponent, ComponentStartup>(OnPullerStartup); // SS220-cart-system
         SubscribeLocalEvent<PullerComponent, DropHandItemsEvent>(OnDropHandItems);
         SubscribeLocalEvent<PullerComponent, StopPullingAlertEvent>(OnStopPullingAlert);
-        SubscribeLocalEvent<PullerComponent, PullStartedMessage>(OnPullableStartedMessage); // SS220 edit
+        SubscribeLocalEvent<PullerComponent, PullStartedMessage>(OnPullableStartedMessage); // SS220-MIT-pull-visualization
 
         SubscribeLocalEvent<HandsComponent, PullStartedMessage>(HandlePullStarted);
         SubscribeLocalEvent<HandsComponent, PullStoppedMessage>(HandlePullStopped);
