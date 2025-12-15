@@ -227,6 +227,9 @@
       components:
       - type: AntagFreeSublevelPointsAdd
         addFreeSublevelPoints: 10
+      - type: AntagAddKnowledgeComponent
+        knowledgesToAdd:
+        - SyndicateAgentKnowledge
       # SS220-experience-update-end
 
 #- type: entity
@@ -253,6 +256,9 @@
       components:
       - type: AntagFreeSublevelPointsAdd
         addFreeSublevelPoints: 10
+      - type: AntagAddKnowledgeComponent
+        knowledgesToAdd:
+        - SyndicateAgentKnowledge
       # SS220-experience-update-end
   #ss220 reinforcement objective fix begin
   - type: AntagRandomObjectives

@@ -293,6 +293,9 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
 
             DeleteVisuals(ent);
 
+            var liberationEvent = new LiberationFromCultEvent();
+            RaiseLocalEvent(ent, ref liberationEvent);
+
             RemComp<CultYoggComponent>(ent);
             _cultRuleSystem.CheckSimplifiedEslavement();//Add token if it was last cultist
         }

@@ -8,8 +8,8 @@
     xmlns:styleDef="clr-namespace:Content.Client.SS220.Experience.Ui"
     Title="{Loc 'experience-view-panel-title'}"
     Resizable="True"
-    MinSize="400 420"
-    SetSize="400 420"
+    MinSize="320 420"
+    SetSize="320 420"
     RectClipContent="False">
     <Control>
         <PanelContainer>
@@ -27,7 +27,10 @@
                 <BoxContainer Name="ExperienceTreeGroupsContainer" Orientation="Vertical" Margin="{x:Static styleDef:ExperienceUiStyleDefinitions.BaseTabLikeThickness}">
                     <!-- Added by code -->
                 </BoxContainer>
-                <Button Name="SubmitButton" Text="{Loc 'experience-view-tree-submit-button-text'}"/>
+                <BoxContainer Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Button Name="SubmitButton" Text="{Loc 'experience-view-tree-submit-button-text'}"/>
+                    <Button Name="ClearSpentPointsButton" Text="{Loc 'experience-view-tree-clear-spent-points-button-text'}"/>
+                </BoxContainer>
             </BoxContainer>
         </ScrollContainer>
     </Control>

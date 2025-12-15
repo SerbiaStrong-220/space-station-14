@@ -26,3 +26,6 @@ public record struct CultYoggSacrificedTargetEvent(Entity<CultYoggAltarComponent
 
 [ByRefEvent]
 public record struct GotCultifiedEvent;
+
+[ByRefEvent]
+public record struct LiberationFromCultEvent();

@@ -10,7 +10,6 @@ namespace Content.Client.SS220.Experience;
 
 public sealed class ExperienceRedactorSystem : EntitySystem
 {
-    [Dependency] private readonly ExperienceInfoSystem _experienceInfo = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IUserInterfaceManager _userInterface = default!;
 

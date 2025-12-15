@@ -34,6 +34,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         InitializeGainedExperience();
         InitializeSkillEntityEvents();
         InitializePrivate();
+        InitializeEventHandlers();
 
         SubscribeLocalEvent<ExperienceComponent, SkillCheckEvent>(OnSkillCheckEvent);
         SubscribeLocalEvent<ExperienceComponent, MapInitEvent>(OnMapInit);

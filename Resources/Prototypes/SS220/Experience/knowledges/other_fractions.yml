@@ -1,4 +1,9 @@
 - type: knowledge
+  id: ThiefKnowledge
+  knowledgeName: syndicate-agent-knowledge-name
+  knowledgeDescription: syndicate-agent-knowledge-description
+
+- type: knowledge
   id: NinjaKnowledge
   knowledgeName: ninja-knowledge-name
   knowledgeDescription: ninja-knowledge-description

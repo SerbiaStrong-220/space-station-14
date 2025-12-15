@@ -16,6 +16,8 @@ public sealed class SkillEntityTests
             Connected = true,
             DummyTicker = false
         });
+
+        await pair.CleanReturnAsync();
     }
 
     [Test]
@@ -26,5 +28,7 @@ public sealed class SkillEntityTests
             Connected = true,
             DummyTicker = false
         });
+
+        await pair.CleanReturnAsync();
     }
 }

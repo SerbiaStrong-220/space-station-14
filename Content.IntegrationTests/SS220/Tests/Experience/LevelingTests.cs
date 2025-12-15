@@ -17,6 +17,7 @@ public sealed class LevelingTests
             DummyTicker = false
         });
 
+        await pair.CleanReturnAsync();
     }
 
     [Test]
@@ -28,5 +29,6 @@ public sealed class LevelingTests
             DummyTicker = false
         });
 
+        await pair.CleanReturnAsync();
     }
 }

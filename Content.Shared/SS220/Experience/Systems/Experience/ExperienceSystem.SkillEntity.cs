@@ -49,8 +49,6 @@ public sealed partial class ExperienceSystem : EntitySystem
         else
             DirtyEntity(overrideSkillEntity.Value);
 
-        DebugTools.Assert(skillEntity != overrideSkillEntity);
-
         Dirty(entity);
     }
 
@@ -126,7 +124,10 @@ public sealed partial class ExperienceSystem : EntitySystem
         var overrideSkillEntity = entity.Comp.OverrideExperienceContainer.ContainedEntity;
         var skillEntity = entity.Comp.ExperienceContainer.ContainedEntity;
 
-        DebugTools.Assert(overrideSkillEntity != skillEntity);
+        DebugTools.AssertNotNull(skillEntity, $"Got null skill entity for {ToPrettyString(entity)}!");
+        DebugTools.AssertNotNull(overrideSkillEntity, $"Got null override skill entity for {ToPrettyString(entity)}!");
+
+        DebugTools.AssertNotEqual(overrideSkillEntity, skillEntity);
 
         if (overrideSkillEntity is null && skillEntity is null)
         {
