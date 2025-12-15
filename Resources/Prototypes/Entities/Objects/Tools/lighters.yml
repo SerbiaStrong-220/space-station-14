@@ -162,7 +162,7 @@
   - type: ItemToggleHot
   - type: Item
     size: Tiny
-    sprite: Objects/Tools/Lighters/lighters.rsi
+    sprite: SS220/Objects/Tools/Lighters/lighters.rsi #SS220 zippo resprite
     heldPrefix: zippo
   - type: Appearance
   - type: GenericVisualizer

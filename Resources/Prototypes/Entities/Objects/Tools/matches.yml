@@ -140,11 +140,11 @@
   description: A military grade match stick, used for lighting fine smokables and noncombatants alike.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Tools/Matches/gorlexmatch.rsi  #SS220 zippo resprie
+    sprite: SS220/Objects/Tools/Matches/gorlex.rsi  #SS220 zippo resprie
     layers:
       - state: match_unlit
   - type: Item
-    sprite: SS220/Objects/Tools/Matches/gorlexmatch.rsi  #SS220 zippo resprie
+    sprite: SS220/Objects/Tools/Matches/gorlex.rsi  #SS220 zippo resprie
     heldPrefix: unlit
     size: Tiny
   - type: PointLight
