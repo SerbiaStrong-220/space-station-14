@@ -29,7 +29,7 @@
       # SS220-experience-update-begin
       - type: AntagFreeSublevelPointsAdd
         addFreeSublevelPoints: 10
-      - type: AntagAddKnowledgeComponent
+      - type: AntagAddKnowledge
         knowledgesToAdd:
         - ThiefKnowledge
       # SS220-experience-update-end
