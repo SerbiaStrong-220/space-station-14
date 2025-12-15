@@ -61,19 +61,7 @@ public abstract class SharedInjectorSystem : EntitySystem
         var cur = ent.Comp.CurrentTransferAmount;
 
         //ss220 BS_syringe_tweak start
-        // var toggleAmount = cur == max ? min : max;
-        FixedPoint2 toggleAmount;
-
-        if (!_toggleHistory.TryGetValue(ent.Owner, out var history))
-        {
-            history = (cur, cur);
-            _toggleHistory[ent.Owner] = history;
-        }
-
-        if (cur == history.First && history.First != history.Second)
-            toggleAmount = history.Second;
-        else
-            toggleAmount = history.First;
+        var toggleAmount = ent.Comp.TransferAmounts.FirstOrDefault(x => x > cur, min);
         //ss220 BS_syringe_tweak end
 
         var priority = 0;
@@ -83,12 +71,7 @@ public abstract class SharedInjectorSystem : EntitySystem
             Category = VerbCategory.SetTransferAmount,
             Act = () =>
             {
-                //ss220 BS_syringe_tweak start
-                var oldValue = ent.Comp.CurrentTransferAmount;
                 ent.Comp.CurrentTransferAmount = toggleAmount;
-
-                _toggleHistory[ent.Owner] = (toggleAmount, oldValue);
-                //ss220 BS_syringe_tweak end
                 _popup.PopupClient(Loc.GetString("comp-solution-transfer-set-amount", ("amount", toggleAmount)), user, user);
                 Dirty(ent);
             },
@@ -108,12 +91,7 @@ public abstract class SharedInjectorSystem : EntitySystem
                 Category = VerbCategory.SetTransferAmount,
                 Act = () =>
                 {
-                    //ss220 BS_syringe_tweak start
-                    var oldValue = ent.Comp.CurrentTransferAmount;
                     ent.Comp.CurrentTransferAmount = amount;
-
-                    _toggleHistory[ent.Owner] = (amount, oldValue);
-                    //ss220 BS_syringe_tweak end
                     _popup.PopupClient(Loc.GetString("comp-solution-transfer-set-amount", ("amount", amount)), user, user);
                     Dirty(ent);
                 },
