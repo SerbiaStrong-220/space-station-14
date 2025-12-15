@@ -3,6 +3,7 @@ using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Alert;
 using Content.Shared.Buckle.Components;
+using Content.Shared.CombatMode;
 using Content.Shared.Cuffs;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Database;
@@ -27,7 +28,6 @@ using Content.Shared.SS220.Cart.Components;
 using Content.Shared.Standing;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Melee;
-using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Input.Binding;
@@ -57,6 +57,7 @@ public sealed class PullingSystem : EntitySystem
     [Dependency] private readonly MovementSpeedModifierSystem _modifierSystem = default!;
     [Dependency] private readonly SharedJointSystem _joints = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!; // SS220 edit
+    [Dependency] private readonly SharedCombatModeSystem _combatMode = default!; // SS220 edit
     [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
@@ -65,7 +66,7 @@ public sealed class PullingSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedVirtualItemSystem _virtual = default!;
 
-    private readonly SoundSpecifier _pullSound = new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg"); // SS220 edit
+    static readonly Color СolorCaptureEffect = Color.Yellow;
 
     public override void Initialize()
     {
@@ -91,7 +92,6 @@ public sealed class PullingSystem : EntitySystem
         SubscribeLocalEvent<PullerComponent, ComponentStartup>(OnPullerStartup); // SS220-cart-system
         SubscribeLocalEvent<PullerComponent, DropHandItemsEvent>(OnDropHandItems);
         SubscribeLocalEvent<PullerComponent, StopPullingAlertEvent>(OnStopPullingAlert);
-        SubscribeLocalEvent<PullerComponent, PullStartedMessage>(OnPullableStartedMessage); // SS220-MIT-pull-visualization
 
         SubscribeLocalEvent<HandsComponent, PullStartedMessage>(HandlePullStarted);
         SubscribeLocalEvent<HandsComponent, PullStoppedMessage>(HandlePullStopped);
@@ -217,28 +217,6 @@ public sealed class PullingSystem : EntitySystem
             return;
         args.Handled = TryStopPull(ent.Comp.Pulling.Value, pullable, ent);
     }
-
-    // SS220-MIT-pull-visualization-begin
-    private void OnPullableStartedMessage(Entity<PullerComponent> ent, ref PullStartedMessage args)
-    {
-        if (ent.Owner != args.PullerUid)
-            return;
-
-        if (!TryComp(ent, out TransformComponent? xform))
-            return;
-
-        var pulled = args.PulledUid;
-        var pulledPos = _transform.GetWorldPosition(pulled);
-        var localPos = Vector2.Transform(pulledPos, _transform.GetInvWorldMatrix(xform));
-        localPos = xform.LocalRotation.RotateVec(localPos);
-        _melee.DoLunge(ent, ent, Angle.Zero, localPos, null);
-
-        var filter = Filter.Pvs(pulled, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == ent.Owner);
-        _colorFlash.RaiseEffect(Color.Yellow, new List<EntityUid> { pulled }, filter);
-
-        _audio.PlayPredicted(_pullSound, pulled, ent);
-    }
-    // SS220-MIT-pull-visualization-end
 
     private void OnPullerContainerInsert(Entity<PullerComponent> ent, ref EntGotInsertedIntoContainerMessage args)
     {
@@ -620,6 +598,21 @@ public sealed class PullingSystem : EntitySystem
 
             _physics.SetFixedRotation(pullableUid, pullableComp.FixedRotationOnPull, body: pullablePhysics);
         }
+        // SS220-MIT-pull-visualization-begin
+        var xform = Transform(pullerUid);
+
+        var pullerPos = _transform.GetWorldPosition(xform);
+        var pulledPos = _transform.GetWorldPosition(pullableUid);
+
+        var localPos = Vector2.Transform(pulledPos, _transform.GetInvWorldMatrix(xform));
+        localPos = xform.LocalRotation.RotateVec(localPos);
+
+        _melee.DoLunge(pullerUid, pullerUid, Angle.Zero, localPos, null);
+        _audio.PlayPredicted(pullerComp.PullSound, pullableUid, pullerUid);
+
+        var filter = Filter.Pvs(pullableUid, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == pullerUid);
+        _colorFlash.RaiseEffect(СolorCaptureEffect, new List<EntityUid> { pullableUid }, filter);
+        // SS220-MIT-pull-visualization-end
 
         // Messaging
         var message = new PullStartedMessage(pullerUid, pullableUid);
@@ -660,7 +653,7 @@ public sealed class PullingSystem : EntitySystem
     }
 
     // SS220-MIT-pull-visualization-begin
-    public override void Update(float frameTime)
+    public override void FrameUpdate(float frameTime)
     {
         var query = EntityQueryEnumerator<PullerComponent>();
         while (query.MoveNext(out var uid, out var pullerComponent))
@@ -668,9 +661,12 @@ public sealed class PullingSystem : EntitySystem
             if (GetPulling(uid, pullerComponent) is not { } pulled)
                 continue;
 
+            if (_combatMode.IsInCombatMode(uid))
+                continue;
+
             var pulledPos = _transform.GetMapCoordinates(pulled).Position;
             var pullerPos = _transform.GetMapCoordinates(uid).Position;
-            var angle = (pulledPos - pullerPos).ToWorldAngle().GetCardinalDir().ToAngle();
+            var angle = (pulledPos - pullerPos).ToWorldAngle();
             _rotateTo.TryFaceAngle(uid, angle);
         }
     }
