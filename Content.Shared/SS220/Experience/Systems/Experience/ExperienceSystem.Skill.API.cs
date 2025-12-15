@@ -11,7 +11,7 @@ public sealed partial class ExperienceSystem : EntitySystem
 {
     #region Progress skill tree
 
-    public bool TryAddSkillTreeProgress(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, FixedPoint4 addition)
+    public bool TryAddSkillTreeProgress(Entity<ExperienceComponent?> entity, [ForbidLiteral] ProtoId<SkillTreePrototype> skillTree, FixedPoint4 addition)
     {
         if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
             return false;

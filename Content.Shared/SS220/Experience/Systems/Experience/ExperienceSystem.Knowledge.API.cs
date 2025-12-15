@@ -7,7 +7,7 @@ namespace Content.Shared.SS220.Experience.Systems;
 
 public sealed partial class ExperienceSystem : EntitySystem
 {
-    public bool TryAddKnowledge(Entity<ExperienceComponent?> entity, ProtoId<KnowledgePrototype> knowledge)
+    public bool TryAddKnowledge(Entity<ExperienceComponent?> entity, [ForbidLiteral] ProtoId<KnowledgePrototype> knowledge)
     {
         if (!Resolve(entity.Owner, ref entity.Comp, false))
             return false;
