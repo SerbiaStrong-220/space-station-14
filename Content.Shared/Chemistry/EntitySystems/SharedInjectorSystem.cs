@@ -61,6 +61,7 @@ public abstract class SharedInjectorSystem : EntitySystem
         var cur = ent.Comp.CurrentTransferAmount;
 
         //ss220 BS_syringe_tweak start
+        // var toggleAmount = cur == max ? min : max;
         FixedPoint2 toggleAmount;
 
         if (!_toggleHistory.TryGetValue(ent.Owner, out var history))
@@ -73,7 +74,7 @@ public abstract class SharedInjectorSystem : EntitySystem
             toggleAmount = history.Second;
         else
             toggleAmount = history.First;
-        //ss220 BS_syringe_tweak start
+        //ss220 BS_syringe_tweak end
 
         var priority = 0;
         AlternativeVerb toggleVerb = new()
