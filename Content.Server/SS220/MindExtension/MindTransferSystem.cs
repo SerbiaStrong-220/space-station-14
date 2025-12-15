@@ -23,7 +23,7 @@ public partial class MindExtensionSystem : EntitySystem //MindTransferSystem
         {
             //Main check for abandonment
             ChangeOrAddTrailPoint(mindExt, oldEntity.Value, CheckEntityAbandoned(oldEntity.Value));
-            _entityManager.RemoveComponent<MindExtensionContainerComponent>(oldEntity.Value);
+            EntityManager.RemoveComponent<MindExtensionContainerComponent>(oldEntity.Value);
         }
 
         if (newEntity is null)
@@ -34,10 +34,10 @@ public partial class MindExtensionSystem : EntitySystem //MindTransferSystem
 
         var mindExtCont = new MindExtensionContainerComponent() { MindExtension = mindExtEnt.Owner };
 
-        if (TryComp<MindExtensionContainerComponent>(newEntity, out var newMindExt))
-            newMindExt.MindExtension = mindExtCont.MindExtension;
-        else
-            _entityManager.AddComponent(newEntity.Value, mindExtCont);
+        if (!TryComp<MindExtensionContainerComponent>(newEntity, out var newMindExt))
+            newMindExt = EnsureComp<MindExtensionContainerComponent>(newEntity.Value);
+
+        newMindExt.MindExtension = mindExtEnt.Owner;
     }
 
     /// <summary>

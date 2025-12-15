@@ -52,31 +52,28 @@ public partial class MindExtensionSystem : EntitySystem //MindRespawnSystem
             if (TryComp<MobStateComponent>(newEntity, out var mobState) &&
                 (mobState.CurrentState == MobState.Dead || mobState.CurrentState == MobState.Invalid))
             {
-                ChangeRespawnAvaible(component, playerId, true);
+                SetRespawnAvaible(component, playerId, true);
             }
 
-            ChangeRespawnAvaible(component, playerId, false);
+            SetRespawnAvaible(component, playerId, false);
         }
         else
-            ChangeRespawnAvaible(component, playerId, true);
+            SetRespawnAvaible(component, playerId, true);
     }
 
-    private void ChangeRespawnAvaible(MindExtensionComponent component, NetUserId playerId, bool value)
+    private void SetRespawnAvaible(MindExtensionComponent component, NetUserId playerId, bool newRespawnAvaliability)
     {
-        if (value && !component.RespawnAvailable)
-        {
+        if (component.RespawnAvailable == newRespawnAvaliability)
+            return;
+
+        if (newRespawnAvaliability)
             component.RespawnTimer = _gameTiming.CurTime + component.RespawnTime;
-            UpdateRespawnTimer(component.RespawnTimer, _playerManager.GetSessionById(playerId));
-        }
-
         //When turned off, set the value to false, which means the timer is turned off.
-        if (!value && component.RespawnAvailable)
-        {
+        else
             component.RespawnTimer = null;
-            UpdateRespawnTimer(component.RespawnTimer, _playerManager.GetSessionById(playerId));
-        }
 
-        component.RespawnAvailable = value;
+        component.RespawnAvailable = newRespawnAvaliability;
+        UpdateRespawnTimer(component.RespawnTimer, _playerManager.GetSessionById(playerId));
     }
 
     private void UpdateRespawnTimer(TimeSpan? timer, ICommonSession session)

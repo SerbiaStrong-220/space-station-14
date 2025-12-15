@@ -7,9 +7,9 @@ namespace Content.Shared.SS220.MindExtension.Events;
 [Serializable, NetSerializable]
 public sealed class GhostBodyListResponse : EntityEventArgs
 {
-    public List<TrailPoint> Bodies { get; }
-    public GhostBodyListResponse(List<TrailPoint> bodies)
+    public List<TrailPoint> TrailPoints { get; }
+    public GhostBodyListResponse(List<TrailPoint> trailPoints)
     {
-        Bodies = bodies;
+        TrailPoints = trailPoints;
     }
 }

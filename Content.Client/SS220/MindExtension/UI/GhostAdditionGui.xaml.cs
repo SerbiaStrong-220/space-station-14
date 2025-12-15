@@ -9,8 +9,8 @@ namespace Content.Client.SS220.MindExtension.UI;
 [GenerateTypedNameReferences]
 public sealed partial class GhostAdditionGui : UIWidget
 {
-    public event Action? RespawnPressed;
-    public event Action? ReturnToBodyPressed;
+    public event Action? OnRespawnPressed;
+    public event Action? OnReturnToBodyPressed;
 
     public GhostBodyMenuWindow BodyMenuWindow { get; }
 
@@ -20,8 +20,8 @@ public sealed partial class GhostAdditionGui : UIWidget
 
         BodyMenuWindow = new GhostBodyMenuWindow();
 
-        RespawnButton.OnPressed += _ => RespawnPressed?.Invoke();
-        BodyMenuButton.OnPressed += _ => ReturnToBodyPressed?.Invoke();
+        RespawnButton.OnPressed += _ => OnRespawnPressed?.Invoke();
+        BodyMenuButton.OnPressed += _ => OnReturnToBodyPressed?.Invoke();
     }
 
     public void SetRespawnRemainTimer(TimeSpan respawnRemainTime)

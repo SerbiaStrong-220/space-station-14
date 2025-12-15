@@ -60,12 +60,11 @@ public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
         }
 
         var bodyList = new List<TrailPoint>();
-        foreach (var pair in mindExt.Trail)
+        foreach (var (target, trailMetaData) in mindExt.Trail)
         {
-            var target = pair.Key;
-            var targetEnt = GetEntity(pair.Key);
+            TrailPointMetaData finalMetaData = trailMetaData;
+            var targetEnt = GetEntity(target);
 
-            TrailPointMetaData trailMetaData = pair.Value;
             var state = IsAvailableToEnterEntity(targetEnt, mindExt, args.SenderSession.UserId);
 
             if (TryComp<BorgBrainComponent>(targetEnt, out var borgBrain))
@@ -74,19 +73,18 @@ public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
                     HasComp<BorgChassisComponent>(container.Owner))
                 {
                     targetEnt = container.Owner;
-                    target = GetNetEntity(targetEnt);
 
                     var metaData = Comp<MetaDataComponent>(targetEnt);
 
-                    trailMetaData.EntityName = metaData.EntityName;
-                    trailMetaData.EntityDescription = $"({Loc.GetString("mind-ext-borg-contained",
-                        ("borgname", pair.Value.EntityName))}) {metaData.EntityDescription}";
+                    finalMetaData.EntityName = metaData.EntityName;
+                    finalMetaData.EntityDescription = $"({Loc.GetString("mind-ext-borg-contained",
+                        ("borgname", trailMetaData.EntityName))}) {metaData.EntityDescription}";
                 }
             }
 
             bodyList.Add(new TrailPoint(
-                pair.Key,
-                trailMetaData,
+                target,
+                finalMetaData,
                 state,
                 _admin.IsAdmin(args.SenderSession)));
         }
@@ -120,6 +118,7 @@ public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
             if (chassisComp.BrainContainer.ContainedEntity is null)
                 return;
 
+            entity = chassisComp.BrainContainer.ContainedEntity.Value;
             netEntity = GetNetEntity(chassisComp.BrainContainer.ContainedEntity.Value);
         }
 
@@ -150,7 +149,7 @@ public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
         NetUserId session)
     {
 
-        if (!_entityManager.EntityExists(target))
+        if (!EntityManager.EntityExists(target))
             return BodyStateToEnter.Destroyed;
 
         if (TryComp<CryostorageContainedComponent>(target, out var cryo))

@@ -51,8 +51,8 @@ public sealed partial class GhostAdditionUIController : UIController, IOnSystemC
         if (additionGui == null)
             return;
 
-        additionGui.RespawnPressed += RequestRespawn;
-        additionGui.ReturnToBodyPressed += RequestReturnToBody;
+        additionGui.OnRespawnPressed += RequestRespawn;
+        additionGui.OnReturnToBodyPressed += RequestReturnToBody;
         additionGui.BodyMenuWindow.OnFollowBodyAction += OnFollowBodyAction;
         additionGui.BodyMenuWindow.OnToBodyAction += OnToBodyAction;
         additionGui.BodyMenuWindow.OnDeleteTrailPointAction += DeleteTrailPointAction;
@@ -63,8 +63,8 @@ public sealed partial class GhostAdditionUIController : UIController, IOnSystemC
         if (additionGui == null)
             return;
 
-        additionGui.RespawnPressed -= RequestRespawn;
-        additionGui.ReturnToBodyPressed -= RequestReturnToBody;
+        additionGui.OnRespawnPressed -= RequestRespawn;
+        additionGui.OnReturnToBodyPressed -= RequestReturnToBody;
     }
 
     public void OnSystemLoaded(MindExtensionSystem system)
@@ -122,7 +122,7 @@ public sealed partial class GhostAdditionUIController : UIController, IOnSystemC
 
     private void OnGhostBodyListResponse(GhostBodyListResponse ev)
     {
-        additionGui?.BodyMenuWindow.UpdateBodies(ev.Bodies);
+        additionGui?.BodyMenuWindow.UpdateBodies(ev.TrailPoints);
     }
 
     private void OnDeleteTrailPointResponse(DeleteTrailPointResponse response)

@@ -23,7 +23,6 @@ namespace Content.Server.SS220.MindExtension;
 /// </summary>
 public sealed partial class MindExtensionSystem : EntitySystem
 {
-    [Dependency] private readonly EntityManager _entityManager = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly IAdminManager _admin = default!;
@@ -50,23 +49,23 @@ public sealed partial class MindExtensionSystem : EntitySystem
     /// </summary>
     public Entity<MindExtensionComponent> GetMindExtension(NetUserId player)
     {
-        var mindExts = _entityManager.AllComponents<MindExtensionComponent>();
+        var mindExts = EntityManager.AllComponents<MindExtensionComponent>();
         var entity = mindExts.FirstOrNull(x => x.Component.Player == player);
 
         if (entity is not null)
             return entity.Value;
 
-        var newEnt = _entityManager.CreateEntityUninitialized(null);
+        var newEnt = EntityManager.CreateEntityUninitialized(null);
         var mindExtComponent = new MindExtensionComponent() { Player = player };
 
-        _entityManager.AddComponent(newEnt, mindExtComponent);
-        _entityManager.InitializeEntity(newEnt);
+        EntityManager.AddComponent(newEnt, mindExtComponent);
+        EntityManager.InitializeEntity(newEnt);
         return new(newEnt, mindExtComponent);
     }
 
     public bool TryGetMindExtension(NetUserId player, [NotNullWhen(true)] out Entity<MindExtensionComponent>? entity)
     {
-        var mindExts = _entityManager.AllComponents<MindExtensionComponent>();
+        var mindExts = EntityManager.AllComponents<MindExtensionComponent>();
         entity = mindExts.FirstOrNull(x => x.Component.Player == player);
 
         return entity is not null;
