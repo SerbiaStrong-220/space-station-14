@@ -48,14 +48,21 @@ public sealed class PaperBoundUserInterface : BoundUserInterface
              _window.InitSignature(signature.Data);
         }
 
-        _window.LoadSavedSignatureData += OnLoadSavedSignatureData;
+        _window.LoadProfileSavedSignature += OnLoadProfileSavedSignature;
+        _window.SaveSignatureToProfile += OnSaveSignatureToProfile;
         // ss220 add signature end
     }
 
     // ss220 add signature start
-    private void OnLoadSavedSignatureData()
+    private void OnLoadProfileSavedSignature()
     {
-        var ev = new ApplySavedSignature();
+        var ev = new ApplySavedSignatureMessage();
+        SendPredictedMessage(ev);
+    }
+
+    private void OnSaveSignatureToProfile(SignatureData data)
+    {
+        var ev = new SaveSignatureToProfileMessage(data);
         SendPredictedMessage(ev);
     }
     // ss220 add signature end

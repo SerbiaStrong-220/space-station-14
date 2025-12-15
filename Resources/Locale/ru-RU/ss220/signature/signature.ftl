@@ -5,6 +5,7 @@ verb-categories-pen-erase-size = Размер стирания
 
 paper-ui-signature-label = Подпись:
 paper-ui-signature-load-from-profile-label = Из профиля
+paper-ui-signature-save-to-profile-label = Импорт в профиль
 
 admin-logs-signature-show-button-label = Показать подпись
 admin-logs-signature-popup-no-record-in-db = Записи в базе данных нет или она ещё добавляется!

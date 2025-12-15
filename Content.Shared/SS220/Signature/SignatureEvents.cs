@@ -11,7 +11,13 @@ public sealed class SignatureSubmitMessage(SignatureData data) : BoundUserInterf
 }
 
 [Serializable, NetSerializable]
-public sealed class ApplySavedSignature : BoundUserInterfaceMessage;
+public sealed class ApplySavedSignatureMessage : BoundUserInterfaceMessage;
+
+[Serializable, NetSerializable]
+public sealed class SaveSignatureToProfileMessage(SignatureData data) : BoundUserInterfaceMessage
+{
+    public SignatureData Data = data;
+}
 
 [Serializable, NetSerializable]
 public sealed class UpdateSignatureDataState(SignatureData data) : BoundUserInterfaceState
