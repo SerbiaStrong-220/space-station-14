@@ -14,3 +14,5 @@ humanoid-profile-signature-saved-label = Сохранённая подпись:
 humanoid-profile-signature-brush-write = Шрифт ручки
 humanoid-profile-signature-brush-erase = Ластик
 humanoid-profile-editor-other-tab = Разное
+humanoid-profile-signature-import = Импорт подписи
+humanoid-profile-signature-export = Экспорт подписи

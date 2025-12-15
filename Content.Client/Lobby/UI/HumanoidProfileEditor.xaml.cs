@@ -490,6 +490,15 @@ namespace Content.Client.Lobby.UI
                     Signature.BrushEraseSize = (int)args.ItemList[args.ItemIndex].Metadata!;
             };
 
+            ImportSignatureButton.OnPressed += _ =>
+            {
+                ImportSignature();
+            };
+
+            ExportSignatureButton.OnPressed += _ =>
+            {
+                ExportSignature();
+            };
             #endregion Other
             // ss220 add signature end
 
@@ -1617,6 +1626,75 @@ namespace Content.Client.Lobby.UI
             UpdateNameEdit();
         }
 
+        // ss220 add import/export signature start
+        private async void ImportSignature()
+        {
+            if (_exporting || CharacterSlot == null || Profile == null)
+                return;
+
+            StartExport();
+            await using var file = await _dialogManager.OpenFile(new FileDialogFilters(new FileDialogFilters.Group("yml")), FileAccess.Read);
+
+            if (file == null)
+            {
+                EndExport();
+                return;
+            }
+
+            try
+            {
+                var signature = _entManager.System<SharedSignatureSystem>().FromStream(file, _playerManager.LocalSession!);
+                var oldSignature = Profile.SignatureData;
+                SetSignatureData(signature);
+                SetProfile(Profile, CharacterSlot);
+
+                IsDirty = !signature.Equals(oldSignature);
+            }
+            catch (Exception exc)
+            {
+                _sawmill.Error($"Error when importing signature\n{exc.StackTrace}");
+            }
+            finally
+            {
+                EndExport();
+            }
+        }
+
+        private async void ExportSignature()
+        {
+            if (Profile == null || _exporting)
+                return;
+
+            StartExport();
+            var file = await _dialogManager.SaveFile(new FileDialogFilters(new FileDialogFilters.Group("yml")));
+
+            if (file == null || Profile.SignatureData == null)
+            {
+                EndExport();
+                return;
+            }
+
+            try
+            {
+                var dataNode = _entManager.System<SharedSignatureSystem>().ToDataNode(Profile.SignatureData);
+                if (dataNode == null)
+                    return;
+
+                await using var writer = new StreamWriter(file.Value.fileStream);
+                dataNode.Write(writer);
+            }
+            catch (Exception exc)
+            {
+                _sawmill.Error($"Error when exporting signature\n{exc.StackTrace}");
+            }
+            finally
+            {
+                EndExport();
+                await file.Value.fileStream.DisposeAsync();
+            }
+        }
+        // ss220 add import/export signature end
+
         private async void ExportImage()
         {
             if (_imaging)
@@ -1698,6 +1776,9 @@ namespace Content.Client.Lobby.UI
             _exporting = true;
             ImportButton.Disabled = true;
             ExportButton.Disabled = true;
+
+            ImportSignatureButton.Disabled = true;
+            ExportSignatureButton.Disabled = true;
         }
 
         private void EndExport()
@@ -1705,6 +1786,9 @@ namespace Content.Client.Lobby.UI
             _exporting = false;
             ImportButton.Disabled = false;
             ExportButton.Disabled = false;
+
+            ImportSignatureButton.Disabled = false;
+            ExportSignatureButton.Disabled = false;
         }
     }
 }
