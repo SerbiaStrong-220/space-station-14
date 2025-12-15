@@ -1,4 +1,23 @@
 <Document>
   # Навыки
 
+  Навыки представляют собой древовидную структуру развития. Чем чаще вы выполняете действие, связанное с навыком, тем выше становится ваш уровень.
+
+  ## Как это работает?
+  Каждое древо навыков состоит из Уровней и Подуровней.
+  - [bold]Прогресс:[/bold] Выполнение действий (например, лечение пациента или постройки) заполняет шкалу прогресса.
+  - [bold]Эффекты:[/bold] С каждым уровнем вы получаете пассивные бонусы.
+
+  ## Древа навыков
+
+  ### Общие
+  <SkillTreePrototypeShower SKillTreeId="Bureaucracy"/>
+  <SkillTreePrototypeShower SKillTreeId="CombatTraining"/>
+  <SkillTreePrototypeShower SKillTreeId="PhysicalTraining"/>
+
+  ### Медицина
+  <SkillTreePrototypeShower SKillTreeId="Medicine"/>
+
+  ### Инженерия
+  <SkillTreePrototypeShower SKillTreeId="Construction"/>
 </Document>
