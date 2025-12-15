@@ -59,7 +59,7 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     public bool TryAddSkillToSkillEntity(Entity<ExperienceComponent> entity, string containerId, ProtoId<SkillPrototype> skill)
     {
-        if (!_prototype.TryIndex(skill, out var skillPrototype))
+        if (!_prototype.Resolve(skill, out var skillPrototype))
             return false;
 
         return TryAddSkillToSkillEntity(entity, containerId, skillPrototype);
@@ -76,7 +76,7 @@ public sealed partial class ExperienceSystem : EntitySystem
 
         if (skillEntity is null)
         {
-            Log.Error($"Got null skill entity for entity {entity} and container id {containerId}");
+            Log.Error($"Got null skill entity for entity {ToPrettyString(entity)} and container id {containerId}");
             return false;
         }
 
@@ -248,7 +248,7 @@ public sealed partial class ExperienceSystem : EntitySystem
             for (var i = 0; i <= dictView[skillTree].SkillTreeIndex; i++)
             {
                 if (!TryAddSkillToSkillEntity(entity, containerId, skillTreeProto.SkillTree[i]))
-                    Log.Error("Cant add skill to skill entity");
+                    Log.Warning("Cant add skill to skill entity");
             }
         }
     }
