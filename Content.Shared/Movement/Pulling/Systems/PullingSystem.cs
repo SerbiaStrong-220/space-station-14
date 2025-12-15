@@ -218,7 +218,7 @@ public sealed class PullingSystem : EntitySystem
         args.Handled = TryStopPull(ent.Comp.Pulling.Value, pullable, ent);
     }
 
-    // SS220 edit start
+    // SS220-MIT-pull-visualization-begin
     private void OnPullableStartedMessage(Entity<PullerComponent> ent, ref PullStartedMessage args)
     {
         if (ent.Owner != args.PullerUid)
