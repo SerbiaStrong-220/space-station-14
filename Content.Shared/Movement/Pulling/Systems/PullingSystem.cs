@@ -659,7 +659,7 @@ public sealed class PullingSystem : EntitySystem
         return true;
     }
 
-    // SS220 edit start
+    // SS220-MIT-pull-visualization-begin
     public override void Update(float frameTime)
     {
         var query = EntityQueryEnumerator<PullerComponent>();
