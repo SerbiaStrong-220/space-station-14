@@ -97,7 +97,7 @@
   group: Narcotics
   desc: reagent-desc-essence-of-the-abyss
   physicalDesc: reagent-physical-desc-gloopy
-  color: "#0D0A10"
+  color: "#6e10da"
   boilingPoint: 444.0
   meltingPoint: 128.0
   metabolisms:
@@ -112,6 +112,7 @@
           inverted: true
           components:
           - BibleUser
+          - CultYogg
         effectProto: StatusEffectForcedSleeping
         time: 3
         type: Add
@@ -128,3 +129,4 @@
           inverted: true
           components:
           - BibleUser
+          - CultYogg
