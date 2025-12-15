@@ -373,6 +373,9 @@
   - type: Injector
     injectOnly: false
     transferAmounts:
+    #ss220 BS_syringe_tweak start
+    - 1
+    #ss220 BS_syringe_tweak end
     - 5
     - 10
     - 15
@@ -507,6 +510,14 @@
   - type: Injector
     delay: 2.5
     injectOnly: false
+    #ss220 BS_syringe_tweak start
+    transferAmounts:
+    - 1
+    - 5
+    - 10
+    - 15
+    - 50
+    #ss220 BS_syringe_tweak end
   - type: SolutionContainerVisuals
     maxFillLevels: 2
     fillBaseName: syringe
@@ -539,6 +550,9 @@
   - type: Injector
     injectOnly: false
     transferAmounts:
+    #ss220 BS_syringe_tweak start
+    - 1
+    #ss220 BS_syringe_tweak end
     - 5
     - 10
     currentTransferAmount: 10

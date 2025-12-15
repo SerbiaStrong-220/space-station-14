@@ -34,6 +34,10 @@ public abstract class SharedInjectorSystem : EntitySystem
     [Dependency] private readonly SharedForensicsSystem _forensics = default!;
     [Dependency] protected readonly SharedSolutionContainerSystem SolutionContainer = default!;
 
+    //ss220 BS_syringe_tweak start
+    private readonly Dictionary<EntityUid, (FixedPoint2 First, FixedPoint2 Second)> _toggleHistory = new();
+
+    //ss220 BS_syringe_tweak end
     public override void Initialize()
     {
         SubscribeLocalEvent<InjectorComponent, GetVerbsEvent<AlternativeVerb>>(AddSetTransferVerbs);
@@ -55,7 +59,21 @@ public abstract class SharedInjectorSystem : EntitySystem
         var min = ent.Comp.TransferAmounts.Min();
         var max = ent.Comp.TransferAmounts.Max();
         var cur = ent.Comp.CurrentTransferAmount;
-        var toggleAmount = cur == max ? min : max;
+
+        //ss220 BS_syringe_tweak start
+        FixedPoint2 toggleAmount;
+
+        if (!_toggleHistory.TryGetValue(ent.Owner, out var history))
+        {
+            history = (cur, cur);
+            _toggleHistory[ent.Owner] = history;
+        }
+
+        if (cur == history.First && history.First != history.Second)
+            toggleAmount = history.Second;
+        else
+            toggleAmount = history.First;
+        //ss220 BS_syringe_tweak start
 
         var priority = 0;
         AlternativeVerb toggleVerb = new()
@@ -64,7 +82,12 @@ public abstract class SharedInjectorSystem : EntitySystem
             Category = VerbCategory.SetTransferAmount,
             Act = () =>
             {
+                //ss220 BS_syringe_tweak start
+                var oldValue = ent.Comp.CurrentTransferAmount;
                 ent.Comp.CurrentTransferAmount = toggleAmount;
+
+                _toggleHistory[ent.Owner] = (toggleAmount, oldValue);
+                //ss220 BS_syringe_tweak end
                 _popup.PopupClient(Loc.GetString("comp-solution-transfer-set-amount", ("amount", toggleAmount)), user, user);
                 Dirty(ent);
             },
@@ -84,7 +107,12 @@ public abstract class SharedInjectorSystem : EntitySystem
                 Category = VerbCategory.SetTransferAmount,
                 Act = () =>
                 {
+                    //ss220 BS_syringe_tweak start
+                    var oldValue = ent.Comp.CurrentTransferAmount;
                     ent.Comp.CurrentTransferAmount = amount;
+
+                    _toggleHistory[ent.Owner] = (amount, oldValue);
+                    //ss220 BS_syringe_tweak end
                     _popup.PopupClient(Loc.GetString("comp-solution-transfer-set-amount", ("amount", amount)), user, user);
                     Dirty(ent);
                 },
