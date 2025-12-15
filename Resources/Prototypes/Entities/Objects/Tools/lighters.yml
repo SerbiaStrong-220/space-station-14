@@ -320,7 +320,7 @@
 - type: entity
   parent: [BaseBrandedLighter, BaseSyndicateContraband]
   id: SyndicateFlippo
-  name: Blood-red flippo
+  name: Syndicate Flippo
   description: "A 'Valid' choice in lighters. Contains no copper."
   components:
   - type: Sprite
