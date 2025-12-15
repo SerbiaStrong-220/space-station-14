@@ -62,8 +62,7 @@ namespace Content.Client.Paper.UI
 
         public event Action<string>? OnSaved;
 
-        public event Action? LoadProfileSavedSignature; // ss220 add signature
-        public event Action<SignatureData>? SaveSignatureToProfile;
+        public event Action? LoadSavedSignatureData; // ss220 add signature
 
         private int _MaxInputLength = -1;
         public int MaxInputLength
@@ -128,17 +127,9 @@ namespace Content.Client.Paper.UI
 
             PinButton.LinkedControl = this; // SS220 pin button
             // ss220 add signature start
-            SaveSignatureToProfileButton.OnPressed += _ =>
-            {
-                if (Signature.Data == null)
-                    return;
-
-                SaveSignatureToProfile?.Invoke(Signature.Data);
-            };
-
             LoadSignatureButton.OnPressed += _ =>
             {
-                LoadProfileSavedSignature?.Invoke();
+                LoadSavedSignatureData?.Invoke();
             };
             // ss220 add signature end
         }

@@ -52,8 +52,7 @@
                                                         VerticalAlignment="Bottom"
                                                         HorizontalAlignment="Right"/>
                             <BoxContainer Orientation="Vertical" Access="Public" Name="SignatureSettingsContainer">
-                                <Button Text="{Loc 'paper-ui-signature-save-to-profile-label'}" StyleClasses="OptionButton" HorizontalAlignment="Left" Name="SaveSignatureToProfileButton" SetSize="184 32"/>
-                                <Button Text="{Loc 'paper-ui-signature-load-from-profile-label'}" StyleClasses="OptionButton" HorizontalAlignment="Left" Name="LoadSignatureButton" SetSize="128 32"/>
+                                <Button Text="{Loc 'paper-ui-signature-load-from-profile-label'}" StyleClasses="OptionButton" Name="LoadSignatureButton" SetSize="128 32"/>
                             </BoxContainer>
                         </BoxContainer>
                         <!-- SS220 ADD SIGNATURE END -->
