@@ -7,6 +7,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
 using Content.Shared.SS220.ChangeSpeedDoAfters.Events;
+using Content.Shared.SS220.Experience.Skill;
 using Content.Shared.SS220.Experience.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -14,11 +15,9 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.Experience.DoAfterEffect;
 
-public abstract partial class BaseDoAfterSkillSystem<T1, T2> : EntitySystem where T1 : BaseDoAfterSkillComponent
+public abstract partial class BaseDoAfterSkillSystem<T1, T2> : SkillEntitySystem where T1 : BaseDoAfterSkillComponent
                                                                                     where T2 : DoAfterEvent
 {
-    [Dependency] protected readonly ExperienceSystem Experience = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public readonly Color FasterDoAfterBarColor = Color.FromHex("#ffe054ff");
@@ -28,11 +27,8 @@ public abstract partial class BaseDoAfterSkillSystem<T1, T2> : EntitySystem wher
     {
         base.Initialize();
 
-        SubscribeLocalEvent<T1, BeforeDoAfterStartEvent>(OnDoAfterStartInternal);
-        SubscribeLocalEvent<T1, DoAfterBeforeComplete>(OnDoAfterEndInternal);
-
-        Experience.RelayEventToSkillEntity<T1, BeforeDoAfterStartEvent>();
-        Experience.RelayEventToSkillEntity<T1, DoAfterBeforeComplete>();
+        SubscribeEventToSkillEntity<T1, BeforeDoAfterStartEvent>(OnDoAfterStartInternal);
+        SubscribeEventToSkillEntity<T1, DoAfterBeforeComplete>(OnDoAfterEndInternal);
     }
 
     private void OnDoAfterStartInternal(Entity<T1> entity, ref BeforeDoAfterStartEvent args)
@@ -45,13 +41,10 @@ public abstract partial class BaseDoAfterSkillSystem<T1, T2> : EntitySystem wher
         if (args.ShouldCancel || args.Args.Used == null)
             return;
 
-        if (!Experience.ResolveExperienceEntityFromSkillEntity(entity.Owner, out var experienceEntity))
-            return;
-
         if (!TryGetLearningProgressInfo<LearningOnDoAfterStartWithComponent>(args.Args.Used.Value, entity.Comp.SkillTreeGroup, out var learningInformation))
             return;
 
-        Experience.TryChangeStudyingProgress(experienceEntity.Value.Owner, entity.Comp.SkillTreeGroup, learningInformation.Value);
+        TryChangeStudyingProgress(entity, entity.Comp.SkillTreeGroup, learningInformation.Value);
     }
 
     private void OnDoAfterEndInternal(Entity<T1> entity, ref DoAfterBeforeComplete args)
@@ -64,13 +57,10 @@ public abstract partial class BaseDoAfterSkillSystem<T1, T2> : EntitySystem wher
         if (args.Cancel || args.Args.Used == null)
             return;
 
-        if (!Experience.ResolveExperienceEntityFromSkillEntity(entity.Owner, out var experienceEntity))
-            return;
-
         if (!TryGetLearningProgressInfo<LearningOnDoAfterEndWithComponent>(args.Args.Used.Value, entity.Comp.SkillTreeGroup, out var learningInformation))
             return;
 
-        Experience.TryChangeStudyingProgress(experienceEntity.Value.Owner, entity.Comp.SkillTreeGroup, learningInformation.Value);
+        TryChangeStudyingProgress(entity, entity.Comp.SkillTreeGroup, learningInformation.Value);
     }
 
     protected virtual void OnDoAfterStart(Entity<T1> entity, ref BeforeDoAfterStartEvent args)
@@ -96,11 +86,7 @@ public abstract partial class BaseDoAfterSkillSystem<T1, T2> : EntitySystem wher
 
     protected virtual void OnDoAfterEnd(Entity<T1> entity, ref DoAfterBeforeComplete args)
     {
-        // TODO: Once we have predicted randomness delete this for something sane...
-        var seed = SharedRandomExtensions.HashCodeCombine(new() { (int)_gameTiming.CurTick.Value, GetNetEntity(entity).Id, GetNetEntity(args.Args.User).Id });
-        var rand = new System.Random(seed);
-
-        if (!rand.Prob(entity.Comp.FailureChance))
+        if (!GetPredictedRandom(new() { GetNetEntity(entity).Id, GetNetEntity(args.Args.User).Id }).Prob(entity.Comp.FailureChance))
             return;
 
         args.Cancel = true;

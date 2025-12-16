@@ -24,16 +24,41 @@ public partial class SkillEntitySystem : EntitySystem
         SubscribeLocalEvent<TComp, TEvent>(handler, before, after);
     }
 
+    public bool ResolveExperienceEntityFromSkillEntity(Entity<SkillComponent?> entity, [NotNullWhen(true)] out Entity<ExperienceComponent>? experienceEntity)
+    {
+        experienceEntity = null;
+
+        if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
+            return false;
+
+        if (!_container.IsEntityInContainer(entity))
+        {
+            Log.Error($"Got entity {ToPrettyString(entity)} with {nameof(SkillComponent)} but not in container");
+            return false;
+        }
+
+        var parentUid = Transform(entity).ParentUid;
+
+        if (!TryComp<ExperienceComponent>(parentUid, out var experienceComponent))
+        {
+            Log.Error($"Got entity {ToPrettyString(entity)} in container which entity owner don't have {nameof(ExperienceComponent)}");
+            return false;
+        }
+
+        experienceEntity = (parentUid, experienceComponent);
+        return true;
+    }
+
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool ResolveExperienceEntityFromSkillEntity(EntityUid uid, [NotNullWhen(true)] out Entity<ExperienceComponent>? experienceEntity)
     {
-        return Experience.ResolveExperienceEntityFromSkillEntity(uid, out experienceEntity);
+        return ResolveExperienceEntityFromSkillEntity(uid, out experienceEntity);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool TryChangeStudyingProgress(EntityUid uid, ProtoId<SkillTreePrototype> skillTree, LearningInformation info)
     {
-        if (!Experience.ResolveExperienceEntityFromSkillEntity(uid, out var experienceEntity))
+        if (!ResolveExperienceEntityFromSkillEntity(uid, out var experienceEntity))
             return false;
 
         return Experience.TryChangeStudyingProgress(experienceEntity.Value!, skillTree, info);
@@ -42,7 +67,7 @@ public partial class SkillEntitySystem : EntitySystem
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool TryChangeStudyingProgress(EntityUid uid, ProtoId<SkillTreePrototype> skillTree, FixedPoint4 delta)
     {
-        if (!Experience.ResolveExperienceEntityFromSkillEntity(uid, out var experienceEntity))
+        if (!ResolveExperienceEntityFromSkillEntity(uid, out var experienceEntity))
             return false;
 
         return Experience.TryChangeStudyingProgress(experienceEntity.Value!, skillTree, delta);

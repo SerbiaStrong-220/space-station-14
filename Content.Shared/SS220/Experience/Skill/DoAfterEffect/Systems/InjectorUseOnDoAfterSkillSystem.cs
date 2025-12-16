@@ -15,7 +15,6 @@ namespace Content.Shared.SS220.Experience.DoAfterEffect.Systems;
 public sealed class InjectorUseOnDoAfterSkillSystem : BaseDoAfterSkillSystem<InjectorUseOnDoAfterSkillComponent, InjectorDoAfterEvent>
 {
     [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     protected override void OnDoAfterEnd(Entity<InjectorUseOnDoAfterSkillComponent> entity, ref DoAfterBeforeComplete args)
@@ -23,13 +22,10 @@ public sealed class InjectorUseOnDoAfterSkillSystem : BaseDoAfterSkillSystem<Inj
         if (args.Args.Target is null)
             return;
 
-        var seed = SharedRandomExtensions.HashCodeCombine(new() { (int)_gameTiming.CurTick.Value, GetNetEntity(entity).Id, GetNetEntity(args.Args.User).Id });
-        var rand = new System.Random(seed);
-
-        if (!rand.Prob(entity.Comp.FailureChance))
+        if (!GetPredictedRandom(new() { GetNetEntity(entity).Id, GetNetEntity(args.Args.User).Id }).Prob(entity.Comp.FailureChance))
             return;
 
-        if (!Experience.ResolveExperienceEntityFromSkillEntity(entity.Owner, out var experienceEntity))
+        if (ResolveExperienceEntityFromSkillEntity(entity.Owner, out var experienceEntity))
             return;
 
         // TOOD: imagine having good API

@@ -5,6 +5,7 @@
 #   skillTree:
 #   - PilotingBase
 #   - PilotingCombat
+#   studyingProgressPossible: false
 
 - type: skillTree
   id: Bureaucracy
@@ -14,6 +15,7 @@
   - BureaucracyInitial
   - BureaucracyTrained
   - BureaucracyProfessional
+  studyingProgressPossible: false
 
 - type: skillTree
   id: CombatTraining

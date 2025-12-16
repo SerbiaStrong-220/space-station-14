@@ -3,6 +3,7 @@
 
 using Content.Shared.Administration.Logs;
 using Content.Shared.SS220.Experience.Systems;
+using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.Experience.Skill;
@@ -13,4 +14,6 @@ public abstract partial class SkillEntitySystem : EntitySystem
     [Dependency] protected readonly IGameTiming GameTiming = default!;
 
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
+
 }

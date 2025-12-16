@@ -1,6 +1,12 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-namespace Content.IntegrationTests.SS220.Experience.SkillEntityTests;
+using Content.Shared.FixedPoint;
+using Content.Shared.SS220.Experience;
+using Content.Shared.SS220.Experience.Systems;
+using Robust.Shared.GameObjects;
+using Robust.Shared.Prototypes;
+
+namespace Content.IntegrationTests.SS220.Tests.Experience;
 
 /// <summary>
 /// This tests ensures that leveling works correct, essentially we simulate learning and ensures that some actions add learning progress
@@ -8,26 +14,104 @@ namespace Content.IntegrationTests.SS220.Experience.SkillEntityTests;
 [TestFixture]
 public sealed class LevelingTests
 {
+    [TestPrototypes]
+    private const string Prototypes = @"
+- type: entity
+  id: ExperienceDummyEntity
+  components:
+  - type: Experience
+";
+
     [Test]
-    public async Task EnsureLevelingInvariants()
+    public async Task EnsureLeveling()
     {
         await using var pair = await PoolManager.GetServerClient(new PoolSettings
         {
             Connected = true,
-            DummyTicker = false
+            DummyTicker = false,
+            InLobby = true,
+            Dirty = true
         });
 
-        await pair.CleanReturnAsync();
-    }
+        await pair.CreateTestMap();
 
-    [Test]
-    public async Task EnsureLevelingByActions()
-    {
-        await using var pair = await PoolManager.GetServerClient(new PoolSettings
+        var server = pair.Server;
+
+        var protoManager = server.ResolveDependency<IPrototypeManager>();
+        var experienceSystem = server.System<ExperienceSystem>();
+
+        const string entityId = "ExperienceDummyEntity";
+        var effectProto = protoManager.Index<EntityPrototype>(entityId);
+
+        var testEntity = EntityUid.Invalid;
+        server.Post(() =>
         {
-            Connected = true,
-            DummyTicker = false
+            testEntity = server.EntMan.Spawn(entityId);
         });
+
+        await pair.RunTicksSync(5);
+
+        var skillTrees = protoManager.EnumeratePrototypes<SkillTreePrototype>();
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(server.EntMan.TryGetComponent<ExperienceComponent>(testEntity, out var experienceComponent), Is.EqualTo(true));
+
+            foreach (var skillTree in skillTrees)
+            {
+                Assert.That(experienceSystem.TryGetSkillTreeLevels(testEntity, skillTree.ID, out var level, out var sublevel));
+                Assert.That(level, Is.EqualTo(ExperienceSystem.StartSkillLevel));
+                Assert.That(sublevel, Is.EqualTo(ExperienceSystem.StartSublevel));
+
+                Assert.That(experienceSystem.TryGetEarnedSublevel(testEntity, skillTree.ID, out var earnedSublevels));
+                Assert.That(earnedSublevels, Is.EqualTo(0));
+
+                Assert.That(experienceSystem.TryGetLearningProgress(testEntity, skillTree.ID, out var progress));
+                Assert.That(progress, Is.EqualTo(FixedPoint4.Zero));
+            }
+        });
+
+        await server.WaitAssertion(() =>
+        {
+            foreach (var skillTree in skillTrees)
+            {
+                if (!skillTree.StudyingProgressPossible)
+                    continue;
+
+                var skillProto = protoManager.Index(skillTree.SkillTree[0]);
+
+                if (!skillProto.LevelInfo.CanStartStudying)
+                    continue;
+
+                var maxSublevels = skillProto.LevelInfo.MaximumSublevel;
+
+                int? level;
+                int? sublevel;
+                for (var i = 1; i < maxSublevels; i++)
+                {
+                    Assert.Multiple(() =>
+                    {
+                        Assert.That(experienceSystem.TryChangeStudyingProgress(testEntity, skillTree.ID, ExperienceSystem.EndLearningProgress), Is.EqualTo(true));
+                        Assert.That(experienceSystem.TryGetSkillTreeLevels(testEntity, skillTree.ID, out level, out sublevel));
+                        Assert.That(level, Is.EqualTo(ExperienceSystem.StartSkillLevel));
+                        Assert.That(sublevel, Is.EqualTo(i + ExperienceSystem.StartSublevel));
+                    });
+                }
+
+                if (!skillProto.LevelInfo.CanEndStudying)
+                    continue;
+
+                Assert.Multiple(() =>
+                {
+                    Assert.That(experienceSystem.TryChangeStudyingProgress(testEntity, skillTree.ID, ExperienceSystem.EndLearningProgress), Is.EqualTo(true));
+                    Assert.That(experienceSystem.TryGetSkillTreeLevels(testEntity, skillTree.ID, out level, out sublevel));
+                    Assert.That(level, Is.EqualTo(1 + ExperienceSystem.StartSkillLevel));
+                    Assert.That(sublevel, Is.EqualTo(ExperienceSystem.StartSublevel));
+                });
+            }
+        });
+
+        Assert.DoesNotThrowAsync(async () => await pair.RunTicksSync(5));
 
         await pair.CleanReturnAsync();
     }

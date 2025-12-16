@@ -22,6 +22,9 @@ public sealed class SkillTreePrototype : IPrototype
 
     [DataField]
     public bool CanBeShownOnInit = true;
+
+    [DataField]
+    public bool StudyingProgressPossible = true;
 }
 
 /// <summary>

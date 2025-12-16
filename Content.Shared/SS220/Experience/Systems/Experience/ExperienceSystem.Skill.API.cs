@@ -81,35 +81,6 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     #endregion
 
-    #region Resolve methods
-
-    public bool ResolveExperienceEntityFromSkillEntity(Entity<SkillComponent?> entity, [NotNullWhen(true)] out Entity<ExperienceComponent>? experienceEntity)
-    {
-        experienceEntity = null;
-
-        if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
-            return false;
-
-        if (!_container.IsEntityInContainer(entity))
-        {
-            Log.Error($"Got entity {ToPrettyString(entity)} with {nameof(SkillComponent)} but not in container");
-            return false;
-        }
-
-        var parentUid = Transform(entity).ParentUid;
-
-        if (!TryComp<ExperienceComponent>(parentUid, out var experienceComponent))
-        {
-            Log.Error($"Got entity {ToPrettyString(entity)} in container which entity owner don't have {nameof(ExperienceComponent)}");
-            return false;
-        }
-
-        experienceEntity = (parentUid, experienceComponent);
-        return true;
-    }
-
-    #endregion
-
     #region Try get methods
 
     public bool TryGetSkillTreeLevel(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, [NotNullWhen(true)] out int? level)
@@ -133,6 +104,30 @@ public sealed partial class ExperienceSystem : EntitySystem
 
         sublevel = info.Sublevel;
         level = info.Level;
+        return true;
+    }
+
+    public bool TryGetEarnedSublevel(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, [NotNullWhen(true)] out int? earnedSublevels)
+    {
+        if (!Resolve(entity.Owner, ref entity.Comp) || !entity.Comp.EarnedSkillSublevel.TryGetValue(skillTree, out var earned))
+        {
+            earnedSublevels = null;
+            return false;
+        }
+
+        earnedSublevels = earned;
+        return true;
+    }
+
+    public bool TryGetLearningProgress(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, [NotNullWhen(true)] out FixedPoint4? progress)
+    {
+        if (!Resolve(entity.Owner, ref entity.Comp) || !entity.Comp.StudyingProgress.TryGetValue(skillTree, out var cachedProgress))
+        {
+            progress = null;
+            return false;
+        }
+
+        progress = cachedProgress;
         return true;
     }
     #endregion
