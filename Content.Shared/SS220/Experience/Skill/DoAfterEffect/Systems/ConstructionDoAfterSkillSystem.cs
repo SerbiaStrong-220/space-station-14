@@ -9,7 +9,7 @@ namespace Content.Shared.SS220.Experience.DoAfterEffect.Systems;
 
 public sealed class ConstructionDoAfterSkillSystem : BaseDoAfterSkillSystem<ConstructionDoAfterSkillComponent, ConstructionInteractDoAfterEvent>
 {
-    protected override void OnDoAfterEnd(Entity<ConstructionDoAfterSkillComponent> entity, ref DoAfterBeforeComplete args)
+    protected override void OnDoAfterEnd(Entity<ConstructionDoAfterSkillComponent> entity, ref BeforeDoAfterCompleteEvent args)
     {
         if (args.Args.Used is null)
             return;

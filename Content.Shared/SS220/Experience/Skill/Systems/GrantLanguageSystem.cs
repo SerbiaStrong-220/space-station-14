@@ -28,7 +28,7 @@ public sealed class GrantLanguageSystem : SkillEntitySystem
             return;
         }
 
-        _language.AddLanguages((experienceEntity.Value, languageComponent), entity.Comp.Languages, canSpeak: entity.Comp.CanSpeak);
+        _language.AddLanguages((experienceEntity.Value, languageComponent), entity.Comp.Languages);
         TryAddToAdminLogs(entity, $"granted languages to skill owner, languages: {string.Join('|', entity.Comp.Languages)}");
     }
 }

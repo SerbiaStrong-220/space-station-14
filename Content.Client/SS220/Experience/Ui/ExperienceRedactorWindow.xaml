@@ -14,7 +14,7 @@
     <Control>
         <PanelContainer>
             <PanelContainer.PanelOverride>
-                <gfx:StyleBoxFlat BackgroundColor="#1B1B1E"/>
+                <gfx:StyleBoxFlat BackgroundColor="{x:Static styleDef:ExperienceUiStyleDefinitions.BaseBackgroundColor}"/>
             </PanelContainer.PanelOverride>
         </PanelContainer>
         <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True" Margin="10 0">

@@ -6,6 +6,7 @@ using Content.Shared.Database;
 using Content.Shared.FixedPoint;
 using Content.Shared.Random.Helpers;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.Experience.Skill;
 
@@ -24,50 +25,38 @@ public partial class SkillEntitySystem : EntitySystem
         SubscribeLocalEvent<TComp, TEvent>(handler, before, after);
     }
 
-    public bool ResolveExperienceEntityFromSkillEntity(Entity<SkillComponent?> entity, [NotNullWhen(true)] out Entity<ExperienceComponent>? experienceEntity)
+    public bool ResolveExperienceEntityFromSkillEntity(EntityUid skillUid, [NotNullWhen(true)] out Entity<ExperienceComponent>? experienceEntity)
     {
         experienceEntity = null;
 
-        if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
-            return false;
+        DebugTools.AssertEqual(HasComp<SkillComponent>(skillUid), true);
+        DebugTools.AssertEqual(_container.IsEntityInContainer(skillUid), true, $"Got entity {ToPrettyString(skillUid)} with {nameof(SkillComponent)} but not in container");
 
-        if (!_container.IsEntityInContainer(entity))
+        var experienceUid = Transform(skillUid).ParentUid;
+
+        if (!TryComp<ExperienceComponent>(experienceUid, out var experienceComponent))
         {
-            Log.Error($"Got entity {ToPrettyString(entity)} with {nameof(SkillComponent)} but not in container");
+            Log.Error($"Got entity {ToPrettyString(experienceUid)} in container which entity owner don't have {nameof(ExperienceComponent)}");
             return false;
         }
 
-        var parentUid = Transform(entity).ParentUid;
-
-        if (!TryComp<ExperienceComponent>(parentUid, out var experienceComponent))
-        {
-            Log.Error($"Got entity {ToPrettyString(entity)} in container which entity owner don't have {nameof(ExperienceComponent)}");
-            return false;
-        }
-
-        experienceEntity = (parentUid, experienceComponent);
+        experienceEntity = (experienceUid, experienceComponent);
         return true;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public bool ResolveExperienceEntityFromSkillEntity(EntityUid uid, [NotNullWhen(true)] out Entity<ExperienceComponent>? experienceEntity)
+    public bool TryChangeStudyingProgress(EntityUid skillUid, ProtoId<SkillTreePrototype> skillTree, LearningInformation info)
     {
-        return ResolveExperienceEntityFromSkillEntity(uid, out experienceEntity);
-    }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public bool TryChangeStudyingProgress(EntityUid uid, ProtoId<SkillTreePrototype> skillTree, LearningInformation info)
-    {
-        if (!ResolveExperienceEntityFromSkillEntity(uid, out var experienceEntity))
+        if (!ResolveExperienceEntityFromSkillEntity(skillUid, out var experienceEntity))
             return false;
 
         return Experience.TryChangeStudyingProgress(experienceEntity.Value!, skillTree, info);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public bool TryChangeStudyingProgress(EntityUid uid, ProtoId<SkillTreePrototype> skillTree, FixedPoint4 delta)
+    public bool TryChangeStudyingProgress(EntityUid skillUid, ProtoId<SkillTreePrototype> skillTree, FixedPoint4 delta)
     {
-        if (!ResolveExperienceEntityFromSkillEntity(uid, out var experienceEntity))
+        if (!ResolveExperienceEntityFromSkillEntity(skillUid, out var experienceEntity))
             return false;
 
         return Experience.TryChangeStudyingProgress(experienceEntity.Value!, skillTree, delta);
@@ -79,7 +68,7 @@ public partial class SkillEntitySystem : EntitySystem
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool TryAddToAdminLogs<T>(Entity<T> entity, string message, LogImpact logImpact = LogImpact.Low) where T : IComponent
     {
-        if (!ResolveExperienceEntityFromSkillEntity(entity, out var experienceEntity))
+        if (!ResolveExperienceEntityFromSkillEntity(entity.Owner, out var experienceEntity))
             return false;
 
         _adminLog.Add(LogType.Experience, logImpact, $"Skill of {ToPrettyString(experienceEntity):user} caused {message}");

@@ -34,21 +34,14 @@ public sealed class ChangeEntityExperiencePlayerRequest(PlayerChangeSkill change
     public PlayerChangeSkill ChangeSkill = changeSkill;
 }
 
-
 [Serializable, NetSerializable]
-public sealed class SkillTreeExperienceContainer(SkillTreeExperienceInfo info, SkillTreeExperienceInfo? overrideInfo = null)
-{
-    public SkillTreeExperienceInfo Info = info;
-    public SkillTreeExperienceInfo? OverrideInfo = overrideInfo;
-}
+public readonly record struct SkillTreeView(ProtoId<SkillTreePrototype> SkillTreeId, SkillTreeExperienceInfo Info, SkillTreeExperienceInfo? OverrideInfo, FixedPoint4 Progress);
+
 
 [Serializable, NetSerializable]
 public sealed class ExperienceData
 {
-    public Dictionary<ProtoId<SkillTreeGroupPrototype>,
-                    List<(ProtoId<SkillTreePrototype>,
-                    SkillTreeExperienceContainer,
-                    FixedPoint4)>> SkillDictionary = new();
+    public Dictionary<ProtoId<SkillTreeGroupPrototype>, List<SkillTreeView>> SkillDictionary = new();
 
     public HashSet<ProtoId<KnowledgePrototype>> Knowledges = new();
 }

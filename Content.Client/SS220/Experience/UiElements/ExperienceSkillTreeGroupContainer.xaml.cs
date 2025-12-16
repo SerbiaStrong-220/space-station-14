@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using System.Runtime.InteropServices;
 using Content.Client.SS220.Experience.Ui;
 using Content.Shared.FixedPoint;
 using Content.Shared.SS220.Experience;
@@ -31,19 +32,19 @@ public sealed partial class ExperienceSkillTreeGroupContainer : BoxContainer
         Margin = ExperienceUiStyleDefinitions.BaseTabLikeThickness;
     }
 
-    public void UpdateWithList(IEnumerable<(ProtoId<SkillTreePrototype>, SkillTreeExperienceContainer, FixedPoint4)> skillTrees, ProtoId<SkillTreeGroupPrototype> groupProto)
+    public void UpdateWithList(Span<SkillTreeView> skillTreeViews, ProtoId<SkillTreeGroupPrototype> groupProto)
     {
         _groupProto = groupProto;
-        foreach (var (skillTree, skillInfo, progress) in skillTrees)
+        foreach (ref var treeView in skillTreeViews)
         {
-            if (!_cachedTreeContainers.TryGetValue(skillTree, out var cachedControl))
+            if (!_cachedTreeContainers.TryGetValue(treeView.SkillTreeId, out var cachedControl))
             {
                 cachedControl = new ExperienceTreeContainer();
                 SkillTreeContainer.AddChild(cachedControl);
-                _cachedTreeContainers.Add(skillTree, cachedControl);
+                _cachedTreeContainers.Add(treeView.SkillTreeId, cachedControl);
             }
 
-            cachedControl.SetInfo(skillTree, skillInfo, progress);
+            cachedControl.SetInfo(ref treeView);
         }
     }
 

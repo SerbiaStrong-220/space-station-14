@@ -5,7 +5,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared.SS220.Experience.Skill.Components;
 
 /// <summary>
-/// This is used to stop entity from being disarmed
+/// This skill changes client info shown in HealthAnalyzer ui
 /// </summary>
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState]

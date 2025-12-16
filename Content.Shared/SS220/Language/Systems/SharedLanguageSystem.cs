@@ -49,7 +49,7 @@ public abstract partial class SharedLanguageSystem : EntitySystem
     /// <summary>
     /// Adds a <see cref="LanguageDefinition"/> from list to <see cref="LanguageComponent.AvailableLanguages"/>
     /// </summary>
-    public void AddLanguages(Entity<LanguageComponent> ent, List<LanguageDefinition> definitions)
+    public void AddLanguages(Entity<LanguageComponent> ent, IEnumerable<LanguageDefinition> definitions)
     {
         foreach (var def in definitions)
             AddLanguage(ent, def);

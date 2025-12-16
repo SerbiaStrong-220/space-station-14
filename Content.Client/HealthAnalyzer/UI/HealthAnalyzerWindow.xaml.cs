@@ -37,7 +37,7 @@ namespace Content.Client.HealthAnalyzer.UI
     [GenerateTypedNameReferences]
     public sealed partial class HealthAnalyzerWindow : FancyWindow
     {
-        private readonly RandomShuffle<GetHealthAnalyzerShuffleChance> _randomShuffle = new();
+        private readonly RandomShuffle<GetHealthAnalyzerShuffleChance> _randomShuffle = new();  // SS220-experience-update
 
         private readonly IEntityManager _entityManager;
         private readonly SpriteSystem _spriteSystem;

@@ -239,10 +239,6 @@ public sealed partial class PhotocopierWindow : FancyWindow
                 form.Key
             );
 
-            // НТ-КАЛ
-            // НТ-КАЛ (2)
-            // НТ-КАЛ (3)
-            // НТ-КАЛ (4)
             var titleToShow = title;
             var count = 0;
             while (!childEntries.TryAdd(titleToShow, (form.Value, descriptor)) && count < 20)

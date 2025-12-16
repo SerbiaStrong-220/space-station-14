@@ -20,6 +20,8 @@ public static class ExperienceUiStyleDefinitions
     public static readonly float TooltipMaxWidth = 500f;
     public static readonly float TooltipMinWidth = 300f;
 
+    public static readonly Color BaseBackgroundColor = Color.FromHex("#1B1B1E");
+
     public static Control RichExperienceTooltip(Control hovered)
     {
         var tooltip = new Tooltip()

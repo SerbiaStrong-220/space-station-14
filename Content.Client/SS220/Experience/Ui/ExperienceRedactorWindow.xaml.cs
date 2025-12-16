@@ -25,8 +25,8 @@ public sealed partial class ExperienceRedactorWindow : FancyWindow
     private readonly ExperienceRedactorSystem _experienceRedactor = default!;
     private readonly ExperienceInfoSystem _experienceInfo = default!;
 
-    private readonly LocId _noJobName = "experience-redactor-no-job-name";
-    private readonly LocId _noAntagRoleName = "experience-redactor-no-antag-name";
+    private static readonly LocId NoJobName = "experience-redactor-no-job-name";
+    private static readonly LocId NoAntagRoleName = "experience-redactor-no-antag-name";
 
     public ExperienceRedactorWindow()
     {
@@ -117,7 +117,7 @@ public sealed partial class ExperienceRedactorWindow : FancyWindow
                 data.SkillDictionary.Add(skillTreePrototype.SkillGroupId, definitionList);
             }
 
-            definitionList.Add((skillId, skillInfo, 0));
+            definitionList.Add(new(skillId, skillInfo, null, 0));
         }
 
         return data;
@@ -135,8 +135,8 @@ public sealed partial class ExperienceRedactorWindow : FancyWindow
         var job = roles.Any(x => !x.Antagonist);
         var antag = roles.Any(x => x.Antagonist);
 
-        var jobName = job ? roles.First(x => !x.Antagonist).Name : Loc.GetString(_noJobName);
-        var antagName = antag ? roles.First(x => x.Antagonist).Name : Loc.GetString(_noAntagRoleName);
+        var jobName = job ? roles.First(x => !x.Antagonist).Name : Loc.GetString(NoJobName);
+        var antagName = antag ? roles.First(x => x.Antagonist).Name : Loc.GetString(NoAntagRoleName);
 
         OccupationName.SetMessage(jobName);
         AntagName.SetMessage(antagName);
@@ -183,12 +183,12 @@ public sealed partial class ExperienceRedactorWindow : FancyWindow
         SkillRedactor.RemoveAllChildren();
 
         HighDivider? divider = null;
-        foreach (var (_, skillTrees) in data.SkillDictionary.OrderBy(x => x.Key.Id))
+        foreach (var (_, skillTreeViews) in data.SkillDictionary.OrderBy(x => x.Key))
         {
-            foreach (var skillTree in skillTrees.OrderBy(x => x.Item1.Id))
+            foreach (var skillTreeView in skillTreeViews.OrderBy(x => x.SkillTreeId))
             {
                 var redactableSkillTreeShower = new RedactableSkillTreeShower();
-                redactableSkillTreeShower.SetSkillTreeInfo(skillTree.Item1, skillTree.Item2);
+                redactableSkillTreeShower.SetSkillTreeInfo(skillTreeView.SkillTreeId, skillTreeView.Info);
 
                 SkillRedactor.AddChild(redactableSkillTreeShower);
             }

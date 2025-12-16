@@ -36,6 +36,7 @@
   components:
   - type: GrantLanguage
     languages:
-    - Bureaucracy
+    - id: Bureaucracy
+      canSpeak: true
   removeComponents:
   - type: WritingSkillIssue

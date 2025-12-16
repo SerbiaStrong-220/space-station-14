@@ -67,8 +67,7 @@ public sealed class ExperienceInfoSystem : EntitySystem
         return data;
     }
 
-    public Dictionary<ProtoId<SkillTreeGroupPrototype>, List<(ProtoId<SkillTreePrototype>, SkillTreeExperienceContainer, FixedPoint4)>>
-        GetEntitySkillData(Entity<ExperienceComponent?> entity)
+    public Dictionary<ProtoId<SkillTreeGroupPrototype>, List<SkillTreeView>> GetEntitySkillData(Entity<ExperienceComponent?> entity)
     {
         if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
             return new();
@@ -78,10 +77,7 @@ public sealed class ExperienceInfoSystem : EntitySystem
 
         var overrideSkills = entity.Comp.OverrideSkills;
 
-        Dictionary<ProtoId<SkillTreeGroupPrototype>,
-                    List<(ProtoId<SkillTreePrototype>,
-                    SkillTreeExperienceContainer,
-                    FixedPoint4)>> result = new();
+        Dictionary<ProtoId<SkillTreeGroupPrototype>, List<SkillTreeView>> result = new();
 
         foreach (var (key, skillInfo) in skillDict)
         {
@@ -92,16 +88,12 @@ public sealed class ExperienceInfoSystem : EntitySystem
             }
 
             var progress = progressDict.TryGetValue(key, out var experienceProgress) ? experienceProgress : 0f;
-
-            var overrideSkillInfo = overrideSkills.TryGetValue(key, out var overrideSkillInfoTemp) ? overrideSkillInfoTemp : null;
-
-            var skillContainer = new SkillTreeExperienceContainer(skillInfo, overrideSkillInfo);
+            overrideSkills.TryGetValue(key, out var overrideSkillInfo);
 
             if (result.TryGetValue(keyProto.SkillGroupId, out var value))
-                value.Add((key, skillContainer, progress));
+                value.Add(new(key, skillInfo, overrideSkillInfo, progress));
             else
-                result.Add(keyProto.SkillGroupId,
-                    new List<(ProtoId<SkillTreePrototype>, SkillTreeExperienceContainer, FixedPoint4)>([(key, skillContainer, progress)]));
+                result.Add(keyProto.SkillGroupId, new() { new(key, skillInfo, overrideSkillInfo, progress) });
         }
 
         return result;

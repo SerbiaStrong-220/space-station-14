@@ -140,7 +140,7 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         }
 
         // SS220-add-skills-affect-do-after-begin
-        var ev = new DoAfterBeforeComplete(doAfter.Args);
+        var ev = new BeforeDoAfterCompleteEvent(doAfter.Args);
         RaiseLocalEvent(doAfter.Args.User, ref ev);
         if (ev.Cancel)
         {

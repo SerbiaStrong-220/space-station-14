@@ -95,16 +95,16 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
         };
     }
 
-    public void SetInfo(ProtoId<SkillTreePrototype> protoId, SkillTreeExperienceContainer skillInfo, FixedPoint4 progress)
+    public void SetInfo(ref SkillTreeView view)
     {
         SpendPoints = 0;
 
-        _info = skillInfo.Info;
-        _overrideInfo = skillInfo.OverrideInfo;
+        _info = view.Info;
+        _overrideInfo = view.OverrideInfo;
 
-        UnpackTreeProto(protoId);
+        UnpackTreeProto(view.SkillTreeId);
 
-        SetProgressAndUpdate(progress);
+        SetProgressAndUpdate(view.Progress);
     }
 
     public void Update()

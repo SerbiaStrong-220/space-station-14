@@ -17,7 +17,7 @@ public sealed class InjectorUseOnDoAfterSkillSystem : BaseDoAfterSkillSystem<Inj
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
-    protected override void OnDoAfterEnd(Entity<InjectorUseOnDoAfterSkillComponent> entity, ref DoAfterBeforeComplete args)
+    protected override void OnDoAfterEnd(Entity<InjectorUseOnDoAfterSkillComponent> entity, ref BeforeDoAfterCompleteEvent args)
     {
         if (args.Args.Target is null)
             return;

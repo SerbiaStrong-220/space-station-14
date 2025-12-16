@@ -29,7 +29,7 @@ public sealed partial class RedactableSkillTreeShower : BoxContainer
         SkillSublevel.OnTextEntered += OnSkillSublevelChange;
     }
 
-    public void SetSkillTreeInfo(ProtoId<SkillTreePrototype> skillTreeId, in SkillTreeExperienceContainer info)
+    public void SetSkillTreeInfo(ProtoId<SkillTreePrototype> skillTreeId, in SkillTreeExperienceInfo info)
     {
         if (!_prototype.Resolve(skillTreeId, out var skillTree))
             return;
@@ -40,14 +40,14 @@ public sealed partial class RedactableSkillTreeShower : BoxContainer
         _maxLevel = skillTree.SkillTree.Count;
         _maxSublevels = [.. skillTree.SkillTree.Select(x => _prototype.Index(x).LevelInfo.MaximumSublevel)];
 
-        _skillTreeInfo = new(info.Info);
+        _skillTreeInfo = new(info);
 
         UpdateLineEdits();
     }
 
-    public (ProtoId<SkillTreePrototype>, SkillTreeExperienceContainer) GetInfo()
+    public (ProtoId<SkillTreePrototype>, SkillTreeExperienceInfo) GetInfo()
     {
-        return (_skillTreeId, new(_skillTreeInfo, null));
+        return (_skillTreeId, _skillTreeInfo);
     }
 
     private void UpdateLineEdits()

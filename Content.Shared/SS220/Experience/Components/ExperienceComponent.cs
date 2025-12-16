@@ -18,20 +18,16 @@ namespace Content.Shared.SS220.Experience;
 // 3. Hitting StudyingProgress maximum and sublevel maximum (s_m) we progress one level in tree
 //                                                      which also calls Skill to be acquired (0, s_m, 1) -> (1, 0, 0)
 //      * yeah again we have field named CanEndStudying which can block that progress
+//      * and field CanStartStudying to prevent starting studying! (why do I even need them... NO FUN ALLOWED)
 // 4. Repeat to have fun!
-//
-// In addition to have some image in mind lets use:
-// [xxxx][xx|o][ooo][oo]
-//  its describe SkillTreeExperienceInfo = (1, 2)
-//  tree have 4 skills in it with maxSublevels 4 3 3 and 2.
 
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState(true, true)]
 [Access(typeof(ExperienceSystem))]
 public sealed partial class ExperienceComponent : Component
 {
-    public static readonly string ContainerId = "experience-entity-container";
-    public static readonly string OverrideContainerId = "override-experience-entity-container";
+    public const string ContainerId = "experience-entity-container";
+    public const string OverrideContainerId = "override-experience-entity-container";
 
     [ViewVariables(VVAccess.ReadOnly)]
     public bool SkillEntityInitialized = false;

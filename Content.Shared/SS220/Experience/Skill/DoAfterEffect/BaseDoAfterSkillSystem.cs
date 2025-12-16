@@ -1,22 +1,19 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-// THE only reason if DoAfter living in on folder and namespace is it abstract nature to match DoAfterEvents and base functions
+// THE only reason if DoAfter living in own folder and namespace is it abstract nature to match DoAfterEvents and base functions
 
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.DoAfter;
 using Content.Shared.Popups;
-using Content.Shared.Random.Helpers;
 using Content.Shared.SS220.ChangeSpeedDoAfters.Events;
 using Content.Shared.SS220.Experience.Skill;
-using Content.Shared.SS220.Experience.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.Experience.DoAfterEffect;
 
-public abstract partial class BaseDoAfterSkillSystem<T1, T2> : SkillEntitySystem where T1 : BaseDoAfterSkillComponent
-                                                                                    where T2 : DoAfterEvent
+public abstract partial class BaseDoAfterSkillSystem<TComp, TEvent> : SkillEntitySystem where TComp : BaseDoAfterSkillComponent
+                                                                                    where TEvent : DoAfterEvent
 {
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
@@ -27,13 +24,13 @@ public abstract partial class BaseDoAfterSkillSystem<T1, T2> : SkillEntitySystem
     {
         base.Initialize();
 
-        SubscribeEventToSkillEntity<T1, BeforeDoAfterStartEvent>(OnDoAfterStartInternal);
-        SubscribeEventToSkillEntity<T1, DoAfterBeforeComplete>(OnDoAfterEndInternal);
+        SubscribeEventToSkillEntity<TComp, BeforeDoAfterStartEvent>(OnDoAfterStartInternal);
+        SubscribeEventToSkillEntity<TComp, BeforeDoAfterCompleteEvent>(OnDoAfterEndInternal);
     }
 
-    private void OnDoAfterStartInternal(Entity<T1> entity, ref BeforeDoAfterStartEvent args)
+    private void OnDoAfterStartInternal(Entity<TComp> entity, ref BeforeDoAfterStartEvent args)
     {
-        if (!args.Args.Event.GetType().Equals(typeof(T2)))
+        if (!args.Args.Event.GetType().Equals(typeof(TEvent)))
             return;
 
         OnDoAfterStart(entity, ref args);
@@ -47,9 +44,9 @@ public abstract partial class BaseDoAfterSkillSystem<T1, T2> : SkillEntitySystem
         TryChangeStudyingProgress(entity, entity.Comp.SkillTreeGroup, learningInformation.Value);
     }
 
-    private void OnDoAfterEndInternal(Entity<T1> entity, ref DoAfterBeforeComplete args)
+    private void OnDoAfterEndInternal(Entity<TComp> entity, ref BeforeDoAfterCompleteEvent args)
     {
-        if (!args.Args.Event.GetType().Equals(typeof(T2)))
+        if (!args.Args.Event.GetType().Equals(typeof(TEvent)))
             return;
 
         OnDoAfterEnd(entity, ref args);
@@ -63,7 +60,7 @@ public abstract partial class BaseDoAfterSkillSystem<T1, T2> : SkillEntitySystem
         TryChangeStudyingProgress(entity, entity.Comp.SkillTreeGroup, learningInformation.Value);
     }
 
-    protected virtual void OnDoAfterStart(Entity<T1> entity, ref BeforeDoAfterStartEvent args)
+    protected virtual void OnDoAfterStart(Entity<TComp> entity, ref BeforeDoAfterStartEvent args)
     {
         if (!entity.Comp.FullBlock)
         {
@@ -84,7 +81,7 @@ public abstract partial class BaseDoAfterSkillSystem<T1, T2> : SkillEntitySystem
             _popup.PopupClient(Loc.GetString(entity.Comp.FullBlockPopup), args.Args.User);
     }
 
-    protected virtual void OnDoAfterEnd(Entity<T1> entity, ref DoAfterBeforeComplete args)
+    protected virtual void OnDoAfterEnd(Entity<TComp> entity, ref BeforeDoAfterCompleteEvent args)
     {
         if (!GetPredictedRandom(new() { GetNetEntity(entity).Id, GetNetEntity(args.Args.User).Id }).Prob(entity.Comp.FailureChance))
             return;

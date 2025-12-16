@@ -36,7 +36,7 @@ public sealed class ExperienceRedactorSystem : EntitySystem
         forceAddComponent.Knowledges = ev.Data.Knowledges;
         forceAddComponent.Skills = ev.Data.SkillDictionary.Values
             .SelectMany(list => list)
-            .ToDictionary(item => item.Item1, item => item.Item2.Info);
+            .ToDictionary(view => view.SkillTreeId, item => item.Info);
 
         var afterGainedEv = new RecalculateEntityExperience();
         RaiseLocalEvent(targetEntity, ref afterGainedEv);

@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared.SS220.Experience.Components;
 
 /// <summary>
-/// This is used to stop entity from being disarmed
+/// When owner speaks near entities it gives them buff for studying progress of skills
 /// </summary>
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState]

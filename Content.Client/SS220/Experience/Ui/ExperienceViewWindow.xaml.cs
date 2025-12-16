@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using System.Linq;
+using System.Runtime.InteropServices;
 using Content.Client.SS220.Experience.UiElements;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.FixedPoint;
@@ -23,10 +24,7 @@ public sealed partial class ExperienceViewWindow : FancyWindow
 
     private Dictionary<ProtoId<SkillTreeGroupPrototype>, ExperienceSkillTreeGroupContainer> _cachedControls = new();
 
-    private Dictionary<ProtoId<SkillTreeGroupPrototype>,
-            List<(ProtoId<SkillTreePrototype>,
-            SkillTreeExperienceContainer,
-            FixedPoint4)>> _data = new();
+    private Dictionary<ProtoId<SkillTreeGroupPrototype>, List<SkillTreeView>> _data = new();
 
     private HashSet<ProtoId<KnowledgePrototype>> _knowledges = new();
 
@@ -54,21 +52,18 @@ public sealed partial class ExperienceViewWindow : FancyWindow
         FinalizeUpdateKnowledge();
     }
 
-    public void SetSkillDictionary(Dictionary<ProtoId<SkillTreeGroupPrototype>,
-                        List<(ProtoId<SkillTreePrototype>,
-                        SkillTreeExperienceContainer,
-                        FixedPoint4)>>? data)
+    public void SetSkillDictionary(Dictionary<ProtoId<SkillTreeGroupPrototype>, List<SkillTreeView>>? data)
     {
         _data = data is null ? [] : data;
         Update();
     }
 
-    public void SetKeyValue(ProtoId<SkillTreeGroupPrototype> key, List<(ProtoId<SkillTreePrototype>, SkillTreeExperienceContainer, FixedPoint4)> value)
+    public void SetKeyValue(ProtoId<SkillTreeGroupPrototype> key, List<SkillTreeView> skillTreeViews)
     {
         _data.Remove(key);
-        _data.Add(key, value);
+        _data.Add(key, skillTreeViews);
 
-        UpdateGroupPartially(key, value);
+        UpdateGroupPartially(key, skillTreeViews);
 
         FinalizeUpdateSkillTree();
     }
@@ -154,7 +149,7 @@ public sealed partial class ExperienceViewWindow : FancyWindow
             knowledgesContainer.RemoveChild(divider);
     }
 
-    private void UpdateGroupPartially(ProtoId<SkillTreeGroupPrototype> key, IEnumerable<(ProtoId<SkillTreePrototype>, SkillTreeExperienceContainer, FixedPoint4)>? value)
+    private void UpdateGroupPartially(ProtoId<SkillTreeGroupPrototype> key, List<SkillTreeView>? skillTreeViews)
     {
         if (!_data.ContainsKey(key))
         {
@@ -172,10 +167,10 @@ public sealed partial class ExperienceViewWindow : FancyWindow
             _cachedControls.Add(key, cachedControl);
         }
 
-        value ??= _data[key];
+        skillTreeViews ??= _data[key];
 
         cachedControl.SetGroupName(FormattedMessage.FromMarkupPermissive(Loc.GetString(keyProto.GroupName)));
-        cachedControl.UpdateWithList(value, key);
+        cachedControl.UpdateWithList(CollectionsMarshal.AsSpan(skillTreeViews), key);
 
         UpdateSublevel();
     }
