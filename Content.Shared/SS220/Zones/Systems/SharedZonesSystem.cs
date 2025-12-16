@@ -106,7 +106,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
         {
             foreach (var uid in _entityLookup.GetEntitiesIntersecting(xform.MapID, bounds, LookupFlags.All))
             {
-                if (InZone(zone, uid, useCache: fa))
+                if (InZone(zone, uid, useCache: false))
                     yield return uid;
             }
         }
