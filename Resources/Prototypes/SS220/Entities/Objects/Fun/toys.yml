@@ -388,3 +388,33 @@
     damage:
       types:
         Slash: 0.01
+
+- type: entity
+  parent: BaseItem
+  id: BalloonMat
+  name: matte balloon
+  description: Just a matte balloon.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Fun/Balloons/balloon_mat.rsi
+    layers:
+    - state: icon
+      map: [ "skin" ]
+  - type: RandomSprite
+    available:
+      - skin:
+          icon: Rainbow
+  - type: Item
+    size: Small
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#FFFFFF"
+      right:
+      - state: inhand-right
+        color: "#FFFFFF"
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Tag
+    tags:
+    - Balloon
