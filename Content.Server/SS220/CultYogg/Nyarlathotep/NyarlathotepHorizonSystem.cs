@@ -30,7 +30,7 @@ public sealed class NyarlathotepHorizonSystem : SharedNyarlathotepHorizonSystem
     [Dependency] private readonly BodySystem _bodySystem = default!;
     #endregion Dependencies
 
-    private const string HighRiskItemTag = "HighRiskItem";
+    private const ProtoId<TagPrototype> HighRiskItemTag = "HighRiskItem";
 
     public override void Initialize()
     {
