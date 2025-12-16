@@ -15,9 +15,9 @@ public sealed partial class CultYoggCorruptedAnimalsPrototype : IPrototype
     [IdDataField]
     public string ID { get; private set; } = default!;
 
-    [DataField("corruptedAnimal")]
-    public string? Start { get; private set; }
+    [DataField("corruptedAnimal", required: true)]
+    public EntProtoId Start { get; private set; }
 
-    [DataField]
-    public string? Result { get; private set; }
+    [DataField(required: true)]
+    public EntProtoId Result { get; private set; }
 }
