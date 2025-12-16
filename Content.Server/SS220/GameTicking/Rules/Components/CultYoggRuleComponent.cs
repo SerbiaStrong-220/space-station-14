@@ -66,7 +66,7 @@ public sealed partial class CultYoggRuleComponent : Component
     [DataField]
     public EntProtoId GodPrototype = "MobNyarlathotep";
 
-    public SoundSpecifier GammaSound = new SoundPathSpecifier("/Audio/Misc/notice1.ogg");
+    public SoundSpecifier BroadcastSound = new SoundPathSpecifier("/Audio/Misc/notice1.ogg");
 
     //telephaty channel
     [DataField]
