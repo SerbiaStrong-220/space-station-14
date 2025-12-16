@@ -21,6 +21,7 @@ using Content.Shared.SS220.CultYogg.MiGo;
 using Content.Shared.SS220.Temperature;
 using Content.Shared.StatusEffect;
 using Content.Shared.Projectiles;
+using Robust.Shared.Prototypes;
 using Robust.Server.GameObjects;
 
 namespace Content.Server.SS220.CultYogg.MiGo;
@@ -40,9 +41,9 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
     [Dependency] private readonly PullingSystem _pullingSystem = default!;
     [Dependency] private readonly JobSystem _jobSystem = default!;
 
-    private const ProtoId<ReagentPrototype> AscensionReagent = "TheBloodOfYogg";
-    private const ProtoId<NpcFactionPrototype> CultYoggFaction = "CultYogg";
-    private const ProtoId<NpcFactionPrototype> SimpleNeutralFaction = "SimpleNeutral";
+    private const string AscensionReagent = "TheBloodOfYogg";
+    private const string CultYoggFaction = "CultYogg";
+    private const string SimpleNeutralFaction = "SimpleNeutral";
 
     public override void Initialize()
     {
