@@ -104,19 +104,12 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     private void RelayEventToSkillEntity<T>(Entity<ExperienceComponent> entity, ref T args) where T : notnull
     {
-        // Inverse order (if -> Assert) is result of skill entity being child of entity, so they are actually exists after main entity
-        // This actually happens on client and never on server so... who cares about clients, any way they are dirty ones!
-        if (entity.Comp.OverrideExperienceContainer is null || entity.Comp.ExperienceContainer is null)
-        {
-            DebugTools.AssertEqual(_net.IsServer, false);
-            DebugTools.AssertEqual(entity.Comp.SkillEntityInitialized, false);
+        if (!entity.Comp.SkillEntityInitialized)
             return;
-        }
 
         var overrideSkillEntity = entity.Comp.OverrideExperienceContainer.ContainedEntity;
         var skillEntity = entity.Comp.ExperienceContainer.ContainedEntity;
 
-        DebugTools.AssertEqual(entity.Comp.SkillEntityInitialized, true);
         DebugTools.AssertNotNull(skillEntity, $"Got null skill entity for {ToPrettyString(entity)}!");
         DebugTools.AssertNotNull(overrideSkillEntity, $"Got null override skill entity for {ToPrettyString(entity)}!");
         DebugTools.AssertNotEqual(overrideSkillEntity, skillEntity);
