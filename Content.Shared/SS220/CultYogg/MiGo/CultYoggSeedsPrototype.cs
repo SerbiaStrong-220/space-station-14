@@ -4,7 +4,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.CultYogg.MiGo;
 
-[Prototype("cultYoggSeeds")]
+[Prototype]
 public sealed partial class CultYoggSeedsPrototype : IPrototype
 {
     [IdDataField]
