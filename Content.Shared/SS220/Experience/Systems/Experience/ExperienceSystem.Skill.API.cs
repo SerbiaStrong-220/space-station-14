@@ -11,17 +11,39 @@ public sealed partial class ExperienceSystem : EntitySystem
 {
     #region Progress skill tree
 
-    public bool TryAddSkillTreeProgress(Entity<ExperienceComponent?> entity, [ForbidLiteral] ProtoId<SkillTreePrototype> skillTree, FixedPoint4 addition)
+    public bool TryChangeStudyingProgress(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, LearningInformation info)
     {
-        if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
+        if (!Resolve(entity.Owner, ref entity.Comp, false))
+            return false;
+
+        TryGetSkillTreeLevel(entity, skillTree, out var level);
+
+        var levelDeltaModifier = info.LearningDecreaseFactorPerLevel * (level - info.PeakLearningLevel) ?? 0;
+        var delta = info.BaseLearning + levelDeltaModifier;
+
+        return TryChangeStudyingProgress(entity, skillTree, FixedPoint4.Clamp(delta, info.MinProgress, info.MaxProgress));
+    }
+
+    public bool TryChangeStudyingProgress(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, FixedPoint4 delta)
+    {
+        // for unpredicted events
+        if (!_gameTiming.IsFirstTimePredicted)
+            return false;
+
+        if (!Resolve(entity.Owner, ref entity.Comp, false))
             return false;
 
         if (!entity.Comp.StudyingProgress.ContainsKey(skillTree))
-            return false;
+            entity.Comp.StudyingProgress.Add(skillTree, StartLearningProgress);
 
-        entity.Comp.StudyingProgress[skillTree] += addition;
+        delta = ApplyMentorEffect(entity, skillTree, delta);
+
+        entity.Comp.StudyingProgress[skillTree] += delta;
 
         TryProgressSublevel(entity!, skillTree);
+        TryProgressLevel(entity!, skillTree);
+
+        DirtyField(entity, nameof(ExperienceComponent.StudyingProgress));
         return true;
     }
 

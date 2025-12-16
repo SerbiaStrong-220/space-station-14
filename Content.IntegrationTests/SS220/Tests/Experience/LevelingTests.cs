@@ -115,4 +115,82 @@ public sealed class LevelingTests
 
         await pair.CleanReturnAsync();
     }
+
+
+    public const string TestMentorEffectSkillTree = "Medicine";
+    public readonly FixedPoint4 TestProgressAdd = 0.1f;
+    public readonly FixedPoint4 Multiplier = 2f;
+    public readonly FixedPoint4 Flat = 0.05f;
+
+    [Test]
+    public async Task EnsureMentorRoleEffect()
+    {
+        await using var pair = await PoolManager.GetServerClient(new PoolSettings
+        {
+            Connected = true,
+            DummyTicker = false,
+            Dirty = true
+        });
+
+        var server = pair.Server;
+
+        var protoManager = server.ResolveDependency<IPrototypeManager>();
+        var experienceSystem = server.System<ExperienceSystem>();
+
+        const string entityId = "ExperienceDummyEntity";
+        var effectProto = protoManager.Index<EntityPrototype>(entityId);
+
+        var testEntity = EntityUid.Invalid;
+        server.Post(() =>
+        {
+            testEntity = server.EntMan.Spawn(entityId);
+        });
+
+        await pair.RunTicksSync(5);
+
+        var skillTrees = protoManager.EnumeratePrototypes<SkillTreePrototype>();
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(server.EntMan.TryGetComponent<ExperienceComponent>(testEntity, out var experienceComponent), Is.EqualTo(true));
+            Assert.That(experienceSystem.TryGetSkillTreeLevels(testEntity, TestMentorEffectSkillTree, out _, out _), Is.EqualTo(true));
+            Assert.That(server.EntMan.HasComponent<AffectedByMentorComponent>(testEntity), Is.EqualTo(false));
+
+#pragma warning disable NUnit2007
+            // sanity-check-asserts
+            Assert.That(TestProgressAdd * (Multiplier + 1) + Flat, Is.LessThan(ExperienceSystem.EndLearningProgress));
+#pragma warning restore NUnit2007
+
+            Assert.That(experienceSystem.TryChangeStudyingProgress(testEntity, TestMentorEffectSkillTree, TestProgressAdd), Is.EqualTo(true));
+            Assert.That(experienceSystem.TryGetLearningProgress(testEntity, TestMentorEffectSkillTree, out var progress), Is.EqualTo(true));
+            Assert.That(progress.Value, Is.EqualTo(TestProgressAdd));
+        });
+
+        server.Post(() =>
+        {
+            var affectedByMentorComponent = server.EntMan.AddComponent<AffectedByMentorComponent>(testEntity);
+
+            affectedByMentorComponent.TeachInfo.Add(TestMentorEffectSkillTree, new()
+            {
+                Multiplier = Multiplier,
+                Flat = Flat,
+                MaxBuffSkillLevel = null
+            });
+        });
+
+        await pair.RunTicksSync(5);
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(server.EntMan.TryGetComponent<ExperienceComponent>(testEntity, out var experienceComponent), Is.EqualTo(true));
+            Assert.That(experienceSystem.TryGetSkillTreeLevels(testEntity, TestMentorEffectSkillTree, out _, out _), Is.EqualTo(true));
+            Assert.That(server.EntMan.HasComponent<AffectedByMentorComponent>(testEntity), Is.EqualTo(true));
+
+            Assert.That(experienceSystem.TryChangeStudyingProgress(testEntity, TestMentorEffectSkillTree, TestProgressAdd), Is.EqualTo(true));
+            Assert.That(experienceSystem.TryGetLearningProgress(testEntity, TestMentorEffectSkillTree, out var progress), Is.EqualTo(true));
+            Assert.That(progress.Value, Is.EqualTo(TestProgressAdd * (1 + Multiplier) + Flat));
+        });
+
+        await pair.CleanReturnAsync();
+    }
 }

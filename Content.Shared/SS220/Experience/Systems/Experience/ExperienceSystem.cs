@@ -1,6 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Runtime.InteropServices;
 using Content.Shared.Administration.Logs;
 using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
@@ -51,46 +50,13 @@ public sealed partial class ExperienceSystem : EntitySystem
         InitializeExperienceComp(entity);
     }
 
-    public bool TryChangeStudyingProgress(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, LearningInformation info)
-    {
-        if (!Resolve(entity.Owner, ref entity.Comp, false))
-            return false;
-
-        TryGetSkillTreeLevel(entity, skillTree, out var level);
-
-        var levelDeltaModifier = info.LearningDecreaseFactorPerLevel * (level - info.PeakLearningLevel) ?? 0;
-        var delta = info.BaseLearning + levelDeltaModifier;
-
-        return TryChangeStudyingProgress(entity, skillTree, FixedPoint4.Clamp(delta, info.MinProgress, info.MaxProgress));
-    }
-
-    public bool TryChangeStudyingProgress(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, FixedPoint4 delta)
-    {
-        // for unpredicted events
-        if (!_gameTiming.IsFirstTimePredicted)
-            return false;
-
-        if (!Resolve(entity.Owner, ref entity.Comp, false))
-            return false;
-
-        if (!entity.Comp.StudyingProgress.ContainsKey(skillTree))
-            entity.Comp.StudyingProgress.Add(skillTree, StartLearningProgress);
-
-        entity.Comp.StudyingProgress[skillTree] += delta;
-
-        TryProgressSublevel(entity!, skillTree);
-        TryProgressLevel(entity!, skillTree);
-
-        DirtyField(entity, nameof(ExperienceComponent.StudyingProgress));
-        return true;
-    }
-
-    public void InitExperienceSkillTree(Entity<ExperienceComponent> entity, ProtoId<SkillTreePrototype> skillTree, bool logReiniting = true)
+    private void InitExperienceSkillTree(Entity<ExperienceComponent> entity, ProtoId<SkillTreePrototype> skillTree, bool logReiniting = true)
     {
         if (entity.Comp.Skills.ContainsKey(skillTree) || entity.Comp.StudyingProgress.ContainsKey(skillTree))
         {
             if (logReiniting)
                 Log.Error("Tried to init skill that already existed or being studied");
+
             entity.Comp.Skills.Remove(skillTree);
             entity.Comp.StudyingProgress.Remove(skillTree);
         }

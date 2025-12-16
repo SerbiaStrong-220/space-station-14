@@ -20,7 +20,7 @@ public sealed partial class ExperienceSystem : EntitySystem
     private void InitializeSkillEntityEvents()
     {
         SubscribeLocalEvent<ExperienceComponent, ComponentInit>(OnComponentInit);
-        SubscribeLocalEvent<ExperienceComponent, ComponentShutdown>(OnShutdown);
+        SubscribeLocalEvent<ExperienceComponent, ComponentRemove>(OnRemove);
     }
 
     private void OnComponentInit(Entity<ExperienceComponent> entity, ref ComponentInit _)
@@ -52,7 +52,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         Dirty(entity);
     }
 
-    private void OnShutdown(Entity<ExperienceComponent> entity, ref ComponentShutdown _)
+    private void OnRemove(Entity<ExperienceComponent> entity, ref ComponentRemove _)
     {
         QueueDel(_container.EmptyContainer(entity.Comp.ExperienceContainer).FirstOrNull());
         QueueDel(_container.EmptyContainer(entity.Comp.OverrideExperienceContainer).FirstOrNull());
@@ -123,7 +123,9 @@ public sealed partial class ExperienceSystem : EntitySystem
 
         if (overrideSkillEntity is null && skillEntity is null)
         {
-            Log.Error($"Event {nameof(args)} was skipped because entity {ToPrettyString(entity)} don't have any skill entity");
+            if (!entity.Comp.Deleted)
+                Log.Error($"Event {args.GetType()} was skipped because entity {ToPrettyString(entity)} don't have any skill entity");
+
             return;
         }
 

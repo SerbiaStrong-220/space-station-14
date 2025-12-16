@@ -2,6 +2,7 @@
 
 using System.Collections.Frozen;
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -96,5 +97,23 @@ public sealed partial class ExperienceSystem : EntitySystem
 
         info = skillInfo;
         return true;
+    }
+
+    private FixedPoint4 ApplyMentorEffect(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> treeId, FixedPoint4 oldValue)
+    {
+        if (!TryComp<AffectedByMentorComponent>(entity, out var affectedByMentorComponent))
+            return oldValue;
+
+        if (!affectedByMentorComponent.TeachInfo.TryGetValue(treeId, out var mentorEffectData))
+            return oldValue;
+
+        if (!TryGetSkillTreeLevel(entity, treeId, out var level))
+            return oldValue;
+
+        // care this check use that null gives false!
+        if (level >= mentorEffectData.MaxBuffSkillLevel)
+            return oldValue;
+
+        return mentorEffectData.Flat + oldValue * mentorEffectData.Multiplier;
     }
 }

@@ -16,7 +16,7 @@ public sealed partial class AffectedByMentorComponent : Component
 {
     [DataField(required: true)]
     [AutoNetworkedField]
-    public Dictionary<ProtoId<SkillTreePrototype>, MentorEffectData> TeachInfo;
+    public Dictionary<ProtoId<SkillTreePrototype>, MentorEffectData> TeachInfo = new();
 }
 
 [DataDefinition]
