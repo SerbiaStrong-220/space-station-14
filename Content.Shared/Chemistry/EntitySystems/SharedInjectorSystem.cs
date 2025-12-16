@@ -33,11 +33,6 @@ public abstract class SharedInjectorSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedForensicsSystem _forensics = default!;
     [Dependency] protected readonly SharedSolutionContainerSystem SolutionContainer = default!;
-
-    //ss220 BS_syringe_tweak start
-    private readonly Dictionary<EntityUid, (FixedPoint2 First, FixedPoint2 Second)> _toggleHistory = new();
-
-    //ss220 BS_syringe_tweak end
     public override void Initialize()
     {
         SubscribeLocalEvent<InjectorComponent, GetVerbsEvent<AlternativeVerb>>(AddSetTransferVerbs);
@@ -45,7 +40,6 @@ public abstract class SharedInjectorSystem : EntitySystem
         SubscribeLocalEvent<InjectorComponent, AfterInteractEvent>(OnInjectorAfterInteract);
         SubscribeLocalEvent<InjectorComponent, InjectorDoAfterEvent>(OnInjectDoAfter);
     }
-
     private void AddSetTransferVerbs(Entity<InjectorComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
         if (!args.CanAccess || !args.CanInteract || args.Hands == null)
