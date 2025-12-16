@@ -20,7 +20,7 @@
     activatedSize: Small
   - type: ItemToggleHot
   - type: Sprite
-    sprite: SS220/Objects/Tools/Lighters/cheap_lighters.rsi #SS220 lighters_resprite
+    sprite: SS220/Objects/Tools/Lighters/lighters.rsi #SS220 lighters_resprite
     layers:
     - state: icon_map
     - state: cheap_icon_base
@@ -45,6 +45,9 @@
           basic_icon_base-9: ""
           basic_icon_base-10: ""
           basic_icon_base-11: ""
+          basic_icon_base-12: ""
+          basic_icon_base-13: ""
+          basic_icon_base-14: ""
   - type: GenericVisualizer
     visuals:
       enum.ToggleableVisuals.Enabled:
@@ -62,7 +65,7 @@
         shader: unshaded
   - type: Item
     size: Tiny
-    sprite: SS220/Objects/Tools/Lighters/cheap_lighters.rsi #SS220 lighters_resprite
+    sprite: SS220/Objects/Tools/Lighters/lighters.rsi #SS220 lighters_resprite
   - type: UseDelay
   - type: RefillableSolution
     solution: Welder
@@ -100,7 +103,7 @@
   description: "A dangerously inexpensive plastic lighter, don't burn your thumb!"
   components:
   - type: Sprite
-    sprite: SS220/Objects/Tools/Lighters/cheap_lighters.rsi #SS220 lighters_resprite
+    sprite: SS220/Objects/Tools/Lighters/lighters.rsi #SS220 lighters_resprite
     layers:
     - state: icon_map
     - state: cheap_icon_base
@@ -129,7 +132,7 @@
   description: "A rugged metal lighter, lasts quite a while."
   components:
   - type: Sprite
-    sprite: SS220/Objects/Tools/Lighters/lighters.rsi #SS220 lighters_resprite
+    sprite: SS220/Objects/Tools/Lighters/zippo_lighters.rsi #SS220 lighters_resprite
     layers:
     - state: zippo_icon_base
       map: ["base"]
@@ -162,7 +165,7 @@
   - type: ItemToggleHot
   - type: Item
     size: Tiny
-    sprite: SS220/Objects/Tools/Lighters/lighters.rsi #SS220 lighters_resprite
+    sprite: SS220/Objects/Tools/Lighters/zippo_lighters.rsi #SS220 lighters_resprite
     heldPrefix: zippo
   - type: Appearance
   - type: GenericVisualizer
@@ -225,7 +228,7 @@
   description: "A rugged golden lighter, lasts quite a while. Engravings serve no tactical advantage whatsoever."
   components:
   - type: Sprite
-    sprite: SS220/Objects/Tools/Lighters/lighters.rsi #SS220 lighters_resprite
+    sprite: SS220/Objects/Tools/Lighters/zippo_lighters.rsi #SS220 lighters_resprite
     layers:
     - state: zippo_engraved_icon_base
       map: ["base"]
@@ -344,7 +347,7 @@
   description: "The worst lighter ever produced, lighterburn is inevitable, do not refuel while lit."
   components:
   - type: Sprite
-    sprite: Objects/Tools/Lighters/lighters.rsi
+    sprite: SS220/Objects/Tools/Lighters/lighters.rsi #SS220 lighters_resprite
     layers:
     - state: icon_map
     - state: discount_icon_base
@@ -359,7 +362,7 @@
     fuelLitCost: 0.1
     tankSafe: false
   - type: Item
-    sprite: Objects/Tools/Lighters/lighters.rsi
+    sprite: SS220/Objects/Tools/Lighters/lighters.rsi #SS220 lighters_resprite
   - type: ToggleableVisuals
     spriteLayer: lighter_flame
     inhandVisuals:
