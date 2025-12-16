@@ -103,15 +103,11 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     private void RelayEventToSkillEntity<T>(Entity<ExperienceComponent> entity, ref T args) where T : notnull
     {
-        if (!entity.Comp.SkillEntityInitialized)
-            return;
-
         var overrideSkillEntity = entity.Comp.OverrideExperienceContainer.ContainedEntity;
         var skillEntity = entity.Comp.ExperienceContainer.ContainedEntity;
 
-        DebugTools.AssertNotNull(skillEntity, $"Got null skill entity for {ToPrettyString(entity)}!");
-        DebugTools.AssertNotNull(overrideSkillEntity, $"Got null override skill entity for {ToPrettyString(entity)}!");
-        DebugTools.AssertNotEqual(overrideSkillEntity, skillEntity);
+        if (skillEntity is null || overrideSkillEntity is null)
+            return;
 
         if (overrideSkillEntity is null && skillEntity is null)
         {
