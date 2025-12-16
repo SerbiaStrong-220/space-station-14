@@ -18,6 +18,7 @@
       - Felinid #SS220-jobbans end
   weight: 10
   startingGear: HoSGear
+  experienceDefinition: HeadOfSecurityRoleExperience # SS220-experience
   icon: "JobIconHeadOfSecurity"
   supervisors: job-supervisors-captain
   canBeAntag: false

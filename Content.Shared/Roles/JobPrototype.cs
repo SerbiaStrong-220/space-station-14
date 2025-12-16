@@ -116,9 +116,8 @@ namespace Content.Shared.Roles
         public ProtoId<StartingGearPrototype>? StartingGear { get; private set; }
 
         // SS220-Experience-update-begin
-        [DataField]
-        // TODO: uncomment [DataField(required: true)]
-        public ProtoId<ExperienceDefinitionPrototype>? SkillOnInit { get; private set; }
+        [DataField(required: true)]
+        public ProtoId<ExperienceDefinitionPrototype> ExperienceDefinition { get; private set; }
         // SS220-Experience-update-end
 
         /// <summary>

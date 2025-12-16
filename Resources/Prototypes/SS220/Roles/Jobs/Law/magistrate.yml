@@ -18,6 +18,7 @@
       - Felinid #SS220-jobbans end
   weight: 20
   startingGear: MagistrateGear
+  experienceDefinition: MagistrateRoleExperience
   icon: "JobIconMagistrate"
   requireAdminNotify: true
   joinNotifyCrew: true

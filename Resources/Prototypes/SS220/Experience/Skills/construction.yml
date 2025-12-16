@@ -9,7 +9,7 @@
     skillDescription: construction-initial-desc
   components:
   - type: ConstructionDoAfterSkill
-    durationScale: 1.3
+    durationScale: 1.6
     failureChance: 0.6
     failurePopup: construction-fail-with-reinforced-material
     complexMaterials:
@@ -29,7 +29,7 @@
     skillDescription: construction-base-desc
   components:
   - type: ConstructionDoAfterSkill
-    durationScale: 1
+    durationScale: 1.2
     failureChance: 0.4
     failurePopup: construction-fail-with-reinforced-material
     complexMaterials:

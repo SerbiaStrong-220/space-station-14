@@ -2,15 +2,13 @@
 
 using Content.Server.Chat.Systems;
 using Content.Shared.SS220.Experience;
-using Content.Shared.SS220.Experience.Skill.Components;
-using Content.Shared.SS220.Experience.Systems;
+using Content.Shared.SS220.Experience.Components;
 using Robust.Shared.Timing;
 
-namespace Content.Server.SS220.Experience.SkillSystems;
+namespace Content.Server.SS220.Experience;
 
-public sealed class MentorSkillSystem : EntitySystem
+public sealed class MentorRoleSystem : EntitySystem
 {
-    [Dependency] private readonly ExperienceSystem _experience = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
 
@@ -18,20 +16,17 @@ public sealed class MentorSkillSystem : EntitySystem
     {
         base.Initialize();
 
-        _experience.RelayEventToSkillEntity<MentorSkillComponent, EntitySpokeEvent>();
-
-        SubscribeLocalEvent<MentorSkillComponent, EntitySpokeEvent>(OnSpoke);
+        SubscribeLocalEvent<MentorRoleComponent, EntitySpokeEvent>(OnSpoke);
     }
 
-    private void OnSpoke(Entity<MentorSkillComponent> entity, ref EntitySpokeEvent args)
+    private void OnSpoke(Entity<MentorRoleComponent> entity, ref EntitySpokeEvent args)
     {
         if (_gameTiming.CurTime < entity.Comp.LastActivate + entity.Comp.ActivateTimeout)
             return;
 
         entity.Comp.LastActivate = _gameTiming.CurTime;
 
-        var ownerEntity = Transform(entity).ParentUid;
-        var experienceEntities = _entityLookup.GetEntitiesInRange<ExperienceComponent>(Transform(ownerEntity).Coordinates, entity.Comp.Range);
+        var experienceEntities = _entityLookup.GetEntitiesInRange<ExperienceComponent>(Transform(entity).Coordinates, entity.Comp.Range);
 
         foreach (var experienceEntity in experienceEntities)
         {

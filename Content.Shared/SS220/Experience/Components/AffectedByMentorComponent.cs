@@ -23,11 +23,11 @@ public sealed partial class AffectedByMentorComponent : Component
 [Serializable, NetSerializable]
 public partial struct MentorEffectData : IComparable<MentorEffectData>
 {
-    [DataField(required: true)]
-    public FixedPoint4 Multiplier;
+    [DataField]
+    public FixedPoint4 Multiplier = 1f;
 
-    [DataField(required: true)]
-    public FixedPoint4 Flat;
+    [DataField]
+    public FixedPoint4 Flat = 0;
 
     [DataField]
     public int? MaxBuffSkillLevel;

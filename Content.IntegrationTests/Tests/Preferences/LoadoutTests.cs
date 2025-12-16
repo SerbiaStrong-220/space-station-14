@@ -34,6 +34,7 @@ public sealed class LoadoutTests
 
 - type: job
   id: LoadoutTester
+  experienceDefinition: NoExperience
   playTimeTracker: PlayTimeLoadoutTester
 ";
 

@@ -1,0 +1,51 @@
+- type: experienceDefinition
+  id: CargoTechnicianRoleExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 1
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 1
+  knowledges:
+  - CargoKnowledge
+  addSublevelPoints: 15
+
+- type: experienceDefinition
+  id: SalvageSpecialistRoleExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    CombatTraining:
+      level: 2
+    Construction:
+      level: 1
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 2
+  knowledges:
+  - CargoKnowledge
+  addSublevelPoints: 10
+
+- type: experienceDefinition
+  id: QuartermasterRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 2
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 2
+  knowledges:
+  - CargoKnowledge
+  - InformedPersonalKnowledge
+  addSublevelPoints: 5

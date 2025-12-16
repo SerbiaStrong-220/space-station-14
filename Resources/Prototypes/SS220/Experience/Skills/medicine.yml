@@ -59,9 +59,9 @@
     skillDescription: medicine-trained-desc
   components:
   - type: MedicineDoAfterSkill
-    durationScale: 0.8
+    durationScale: 1
   - type: InjectorUseOnDoAfterSkill
-    durationScale: 0.8
+    durationScale: 1
   removeComponents:
   - type: MedicineMachineUseSkillIssue
 
@@ -76,7 +76,7 @@
     skillDescription: medicine-professional-desc
   components:
   - type: MedicineDoAfterSkill
-    durationScale: 0.6
+    durationScale: 0.7
     failurePopup: healing-item-use-failure
   - type: InjectorUseOnDoAfterSkill
     durationScale: 0.7

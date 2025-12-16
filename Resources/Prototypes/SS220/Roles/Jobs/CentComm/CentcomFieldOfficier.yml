@@ -38,6 +38,7 @@
   description: job-description-centcomoff
   setPreference: false
   startingGear: CentcomFieldOfficerGear
+  experienceDefinition: CentralCommandOfficialExperience
   playTimeTracker: JobCentcomFieldOfficer
   icon: "JobIconNanotrasen"
   supervisors: job-supervisors-centcom

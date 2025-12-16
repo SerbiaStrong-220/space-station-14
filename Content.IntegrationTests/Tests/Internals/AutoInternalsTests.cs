@@ -74,6 +74,7 @@ public sealed class AutoInternalsTests
   id: TestInternalsDummy
   playTimeTracker: PlayTimeInternalsDummy
   startingGear: InternalsDummyGear
+  experienceDefinition: NoExperience
 
 - type: entity
   id: TestInternalsDummyEntity

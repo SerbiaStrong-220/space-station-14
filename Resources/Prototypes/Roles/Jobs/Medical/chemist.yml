@@ -8,6 +8,7 @@
       department: Medical
       time: 10h # SS220-RoleTime 2
   startingGear: ChemistGear
+  experienceDefinition: ChemistRoleExperience # SS220-experience
   icon: "JobIconChemist"
   supervisors: job-supervisors-cmo
   access:

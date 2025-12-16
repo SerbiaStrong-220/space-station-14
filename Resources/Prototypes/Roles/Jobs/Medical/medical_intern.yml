@@ -7,6 +7,7 @@
     - !type:OverallPlaytimeRequirement
       time: 1h # SS220-RoleTime 2
   startingGear: MedicalInternGear
+  experienceDefinition: MedicalInternRoleExperience # SS220-experience
   icon: "JobIconMedicalIntern"
   supervisors: job-supervisors-medicine
   canBeAntag: true

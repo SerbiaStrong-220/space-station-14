@@ -8,6 +8,7 @@
       department: Medical
       time: 72000
   startingGear: BrigmedicGear
+  experienceDefinition: BrigmedicRoleExperience # SS220-experience
   icon: "JobIconBrigmedic"
   supervisors: job-supervisors-cmo
   access:

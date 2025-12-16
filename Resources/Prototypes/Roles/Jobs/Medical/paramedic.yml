@@ -8,6 +8,7 @@
       department: Medical
       time: 15h # SS220-RoleTime 2
   startingGear: ParamedicGear
+  experienceDefinition: ParamedicRoleExperience # SS220-experience
   icon: "JobIconParamedic"
   supervisors: job-supervisors-cmo
   access:

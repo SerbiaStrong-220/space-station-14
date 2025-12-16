@@ -93,12 +93,8 @@ public sealed class OutfitSystem : EntitySystem
             // SS220-experience-update-begin
 
             // SS220-experience-update-end
-            // TODO remove null check before end merge
-            if (job.SkillOnInit is not null)
-            {
-                var skillRoleAddComp = EnsureComp<RoleExperienceAddComponent>(target);
-                skillRoleAddComp.SkillAddId = job.SkillOnInit.Value;
-            }
+            var skillRoleAddComp = EnsureComp<RoleExperienceAddComponent>(target);
+            skillRoleAddComp.SkillAddId = job.ExperienceDefinition;
             // SS220-add-after-equip-to-outfit-set-begin
             foreach (var jobSpecial in job.Special)
                 jobSpecial.AfterEquip(target);

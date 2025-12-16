@@ -5,6 +5,7 @@
   playTimeTracker: JobCentralCommandOfficial
   setPreference: false
   startingGear: CentcomGear
+  experienceDefinition: CentralCommandOfficialExperience # SS220-experience
   icon: "JobIconNanotrasen"
   supervisors: job-supervisors-hos
   canBeAntag: false

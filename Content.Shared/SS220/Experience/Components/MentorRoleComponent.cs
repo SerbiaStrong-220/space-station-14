@@ -3,20 +3,20 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.SS220.Experience.Skill.Components;
+namespace Content.Shared.SS220.Experience.Components;
 
 /// <summary>
 /// This is used to stop entity from being disarmed
 /// </summary>
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class MentorSkillComponent : Component
+public sealed partial class MentorRoleComponent : Component
 {
     [DataField(required: true)]
     [AutoNetworkedField]
     public Dictionary<ProtoId<SkillTreePrototype>, MentorEffectData> TeachInfo;
 
-    [DataField(required: true)]
+    [DataField]
     public float Range = 4f;
 
     [DataField]

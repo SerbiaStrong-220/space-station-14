@@ -2,6 +2,7 @@
   id: AggressiveAnimals
   name: job-name-aggressive-animals
   description: job-description-aggressive-animals
+  experienceDefinition: NoExperience
   playTimeTracker: AntahAggressiveAnimals
   requirements:
   - !type:OverallPlaytimeRequirement
@@ -12,6 +13,7 @@
   name: job-name-space-dragon
   description: job-description-space-dragon
   playTimeTracker: AntagSpaceDragon
+  experienceDefinition: NoExperience
   requirements:
   - !type:OverallPlaytimeRequirement
     time: 20h

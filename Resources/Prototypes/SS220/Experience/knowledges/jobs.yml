@@ -19,11 +19,6 @@
   knowledgeDescription: service-actor-knowledge-description
 
 - type: knowledge
-  id: SupernaturalBookKnowledge
-  knowledgeName: super-natural-book-knowledge-name
-  knowledgeDescription: super-natural-book-knowledge-description
-
-- type: knowledge
   id: BotanyKnowledge
   knowledgeName: botany-knowledge-name
   knowledgeDescription: botany-knowledge-description
@@ -37,3 +32,21 @@
   id: SecurityKnowledge
   knowledgeName: security-knowledge-name
   knowledgeDescription: security-knowledge-description
+
+- type: knowledge
+  id: AllJobKnowledge
+  knowledgeName: all-job-knowledge-name
+  knowledgeDescription: all-job-knowledge-description
+  additionalKnowledges:
+  - ScienceKnowledge
+  - EngineerKnowledge
+  - MedicalKnowledge
+  - ServiceActorKnowledge
+  - BotanyKnowledge
+  - CargoKnowledge
+  - SecurityKnowledge
+
+- type: knowledge
+  id: SupernaturalBookKnowledge
+  knowledgeName: super-natural-book-knowledge-name
+  knowledgeDescription: super-natural-book-knowledge-description

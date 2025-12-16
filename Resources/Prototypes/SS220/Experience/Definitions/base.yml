@@ -1,0 +1,31 @@
+- type: experienceDefinition
+  id: NoSpecialRoleExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 1
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 1
+  addSublevelPoints: 15
+
+# Used to give it to job that dont have any effect from it
+# In Future it should be changed for them
+- type: experienceDefinition
+  id: NoExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 1
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 1
+  addSublevelPoints: 0

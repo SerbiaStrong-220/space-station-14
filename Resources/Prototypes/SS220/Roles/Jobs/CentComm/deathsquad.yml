@@ -5,6 +5,7 @@
   playTimeTracker: JobDeathSquadCommander
   setPreference: false
   startingGear: DeathSquadLeaderGear
+  experienceDefinition: DeathSquadRoleExperience
   icon: "JobIconDeathsquadCommander"
   supervisors: job-supervisors-centcom
   canBeAntag: false
@@ -23,6 +24,7 @@
   playTimeTracker: JobDeathSquadHealer
   setPreference: false
   startingGear: DeathSquadHealerGear
+  experienceDefinition: DeathSquadRoleExperience
   icon: "JobIconDeathsquadHealer"
   supervisors: job-supervisors-centcom
   canBeAntag: false

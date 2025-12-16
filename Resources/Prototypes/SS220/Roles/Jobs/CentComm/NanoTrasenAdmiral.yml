@@ -38,6 +38,7 @@
   description: job-description-centcomoff
   setPreference: false
   startingGear: CentComNanoTrasenAdmiralGear
+  experienceDefinition: CentralCommandOfficialExperience
   icon: "JobIconNanotrasen"
   playTimeTracker: JobCentcomAdmiral
   supervisors: job-supervisors-centcom

@@ -36,6 +36,7 @@
     #SS220 requirements end
   weight: 20
   startingGear: HoPGear
+  experienceDefinition: HeadOfPersonnelRoleExperience
   icon: "JobIconHeadOfPersonnel"
   supervisors: job-supervisors-captain
   radioBold: true

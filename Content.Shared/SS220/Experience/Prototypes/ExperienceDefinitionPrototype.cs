@@ -12,11 +12,14 @@ public sealed class ExperienceDefinitionPrototype : IPrototype
     public string ID { get; private set; } = default!;
 
     [DataField]
+    [AlwaysPushInheritance]
     public Dictionary<ProtoId<SkillTreePrototype>, SkillTreeExperienceInfo> Skills = new();
 
     [DataField]
+    [AlwaysPushInheritance]
     public HashSet<ProtoId<KnowledgePrototype>> Knowledges = new();
 
     [DataField]
+    [AlwaysPushInheritance]
     public int AddSublevelPoints;
 }

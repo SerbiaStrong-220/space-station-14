@@ -38,6 +38,7 @@
   description: job-description-centcomoff
   setPreference: false
   startingGear: CentcomOperativeBSOGear
+  experienceDefinition: BlueShieldRoleExperience
   playTimeTracker: JobCentcommOperativeBSO
   icon: "JobIconNanotrasen"
   supervisors: job-supervisors-centcom

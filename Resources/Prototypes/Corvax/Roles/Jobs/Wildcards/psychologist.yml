@@ -8,6 +8,7 @@
       department: Medical
       time: 18000 # SS220-RoleTime
   startingGear: PsychologistGear
+  experienceDefinition: PsychologistRoleExperience # SS220-experience
   icon: "JobIconPsychologist"
   supervisors: job-supervisors-cmo
   access:

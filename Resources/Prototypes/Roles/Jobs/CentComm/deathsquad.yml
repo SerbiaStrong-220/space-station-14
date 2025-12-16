@@ -5,6 +5,7 @@
   playTimeTracker: JobDeathSquad
   setPreference: false
   startingGear: DeathSquadOperativeGear #SS220-DeathSquad Update
+  experienceDefinition: DeathSquadRoleExperience # SS220-experience
   icon: "JobIconDeathsquadOperative" #SS220-DeathSquad Update
   supervisors: job-supervisors-centcom
   canBeAntag: false

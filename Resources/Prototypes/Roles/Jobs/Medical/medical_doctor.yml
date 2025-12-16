@@ -8,6 +8,7 @@
       department: Medical
       time: 5h # SS220-RoleTime
   startingGear: DoctorGear
+  experienceDefinition: MedicalDoctorRoleExperience # SS220-experience
   icon: "JobIconMedicalDoctor"
   supervisors: job-supervisors-cmo
   access:
