@@ -7,7 +7,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Experience.Skill.Systems;
 
-public sealed class MedicineMachineUseSkillIssueSystem : EntitySystem
+public sealed class MedicineMachineUseSkillIssueSystem : SkillEntitySystem
 {
     [Dependency] private readonly ExperienceSystem _experience = default!;
 
@@ -18,11 +18,8 @@ public sealed class MedicineMachineUseSkillIssueSystem : EntitySystem
     {
         base.Initialize();
 
-        _experience.RelayEventToSkillEntity<MedicineMachineUseSkillIssueComponent, GetHealthAnalyzerShuffleChance>();
-        _experience.RelayEventToSkillEntity<MedicineMachineUseSkillIssueComponent, GetDefibrillatorUseChances>();
-
-        SubscribeLocalEvent<MedicineMachineUseSkillIssueComponent, GetHealthAnalyzerShuffleChance>(OnGetHealthAnalyzerShuffleChance);
-        SubscribeLocalEvent<MedicineMachineUseSkillIssueComponent, GetDefibrillatorUseChances>(OnGetDefibrillatorUseChances);
+        SubscribeEventToSkillEntity<MedicineMachineUseSkillIssueComponent, GetHealthAnalyzerShuffleChance>(OnGetHealthAnalyzerShuffleChance);
+        SubscribeEventToSkillEntity<MedicineMachineUseSkillIssueComponent, GetDefibrillatorUseChances>(OnGetDefibrillatorUseChances);
     }
 
     private void OnGetHealthAnalyzerShuffleChance(Entity<MedicineMachineUseSkillIssueComponent> entity, ref GetHealthAnalyzerShuffleChance args)
@@ -39,10 +36,7 @@ public sealed class MedicineMachineUseSkillIssueSystem : EntitySystem
         args.FailureChance = MathF.Max(newFailureChance, 0f);
         args.SelfDamageChance = MathF.Max(newSelfDamageChance, 0f);
 
-        if (!_experience.ResolveExperienceEntityFromSkillEntity(entity.Owner, out var experienceEntity))
-            return;
-
-        _experience.TryChangeStudyingProgress(experienceEntity.Value!, _affectedSkillTree, _progressForDefibrillatorUse);
+        TryChangeStudyingProgress(entity, _affectedSkillTree, _progressForDefibrillatorUse);
     }
 
     private float ComputeNewChance(float left, float right)

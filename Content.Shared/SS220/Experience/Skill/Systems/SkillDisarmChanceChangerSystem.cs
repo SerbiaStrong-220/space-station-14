@@ -8,7 +8,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Experience.Skill.Systems;
 
-public sealed class DisarmChanceChangerSkillSystem : EntitySystem
+public sealed class DisarmChanceChangerSkillSystem : SkillEntitySystem
 {
     [Dependency] private readonly ExperienceSystem _experience = default!;
 
@@ -19,30 +19,21 @@ public sealed class DisarmChanceChangerSkillSystem : EntitySystem
     {
         base.Initialize();
 
-        _experience.RelayEventToSkillEntity<DisarmChanceChangerSkillComponent, GetDisarmChanceDisarmerMultiplierEvent>();
-        _experience.RelayEventToSkillEntity<DisarmChanceChangerSkillComponent, GetDisarmChanceDisarmedMultiplierEvent>();
-
-        SubscribeLocalEvent<DisarmChanceChangerSkillComponent, GetDisarmChanceDisarmerMultiplierEvent>(OnDisarmDisarmedAttempt);
-        SubscribeLocalEvent<DisarmChanceChangerSkillComponent, GetDisarmChanceDisarmedMultiplierEvent>(OnDisarmDisarmerAttempt);
+        SubscribeEventToSkillEntity<DisarmChanceChangerSkillComponent, GetDisarmChanceDisarmerMultiplierEvent>(OnDisarmDisarmedAttempt);
+        SubscribeEventToSkillEntity<DisarmChanceChangerSkillComponent, GetDisarmChanceDisarmedMultiplierEvent>(OnDisarmDisarmerAttempt);
     }
 
     private void OnDisarmDisarmedAttempt(Entity<DisarmChanceChangerSkillComponent> entity, ref GetDisarmChanceDisarmerMultiplierEvent args)
     {
         args.Multiplier /= entity.Comp.DisarmByMultiplier;
 
-        if (!_experience.ResolveExperienceEntityFromSkillEntity(entity.Owner, out var experienceEntity))
-            return;
-
-        _experience.TryChangeStudyingProgress(experienceEntity.Value!, _affectedSkillTree, _progressForDisarming);
+        TryChangeStudyingProgress(entity, _affectedSkillTree, _progressForDisarming);
     }
 
     private void OnDisarmDisarmerAttempt(Entity<DisarmChanceChangerSkillComponent> entity, ref GetDisarmChanceDisarmedMultiplierEvent args)
     {
         args.Multiplier /= entity.Comp.DisarmedMultiplier;
 
-        if (!_experience.ResolveExperienceEntityFromSkillEntity(entity.Owner, out var experienceEntity))
-            return;
-
-        _experience.TryChangeStudyingProgress(experienceEntity.Value!, _affectedSkillTree, _progressForDisarming);
+        TryChangeStudyingProgress(entity, _affectedSkillTree, _progressForDisarming);
     }
 }

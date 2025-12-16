@@ -48,6 +48,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         else
             DirtyEntity(overrideSkillEntity.Value);
 
+        entity.Comp.SkillEntityInitialized = true;
         Dirty(entity);
     }
 
@@ -96,23 +97,6 @@ public sealed partial class ExperienceSystem : EntitySystem
         SubscribeLocalEvent<TComp, SkillEntityOverrideCheckEvent<TEvent>>(OnOverrideSkillEntityCheck);
     }
 
-    public void AddToAdminLogs<T>(Entity<T> entity, string message, LogImpact logImpact = LogImpact.Low) where T : IComponent
-    {
-        if (!_container.TryGetOuterContainer(entity, Transform(entity), out var container))
-        {
-            Log.Error($"Couldn't resolve skill entity owner for entity {ToPrettyString(entity)}");
-            return;
-        }
-
-        if (!HasComp<ExperienceComponent>(container.Owner))
-        {
-            Log.Error($"Couldn't resolve {nameof(ExperienceComponent)} on entity {ToPrettyString(container.Owner)} which contains skill entity {ToPrettyString(entity)}");
-            return;
-        }
-
-        _adminLogManager.Add(LogType.Experience, logImpact, $"{ToPrettyString(container.Owner):user} {message} because of {nameof(T)}");
-    }
-
     private void OnOverrideSkillEntityCheck<TComp, TEvent>(Entity<TComp> entity, ref SkillEntityOverrideCheckEvent<TEvent> args) where TEvent : notnull where TComp : Component
     {
         args.Subscribed = true;
@@ -120,17 +104,19 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     private void RelayEventToSkillEntity<T>(Entity<ExperienceComponent> entity, ref T args) where T : notnull
     {
-        // This is result of skill entity being child of entity, so they are actually exists after main entity
+        // Inverse order (if -> Assert) is result of skill entity being child of entity, so they are actually exists after main entity
         // This actually happens on client and never on server so... who cares about clients, any way they are dirty ones!
         if (entity.Comp.OverrideExperienceContainer is null || entity.Comp.ExperienceContainer is null)
         {
             DebugTools.AssertEqual(_net.IsServer, false);
+            DebugTools.AssertEqual(entity.Comp.SkillEntityInitialized, false);
             return;
         }
 
         var overrideSkillEntity = entity.Comp.OverrideExperienceContainer.ContainedEntity;
         var skillEntity = entity.Comp.ExperienceContainer.ContainedEntity;
 
+        DebugTools.AssertEqual(entity.Comp.SkillEntityInitialized, true);
         DebugTools.AssertNotNull(skillEntity, $"Got null skill entity for {ToPrettyString(entity)}!");
         DebugTools.AssertNotNull(overrideSkillEntity, $"Got null override skill entity for {ToPrettyString(entity)}!");
         DebugTools.AssertNotEqual(overrideSkillEntity, skillEntity);

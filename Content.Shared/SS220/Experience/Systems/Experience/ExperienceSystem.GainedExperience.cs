@@ -37,9 +37,9 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     private void OnRecalculateEntityExperience(Entity<ExperienceComponent> entity, ref RecalculateEntityExperience args)
     {
-        if (!entity.Comp.Initialized)
+        if (!entity.Comp.SkillEntityInitialized)
         {
-            Log.Warning($"Called {nameof(RecalculateEntityExperience)} before {ToPrettyString(entity)} component was initialized!");
+            Log.Debug($"Called {nameof(RecalculateEntityExperience)} before {ToPrettyString(entity)} skill entities was initialized!");
             return;
         }
 

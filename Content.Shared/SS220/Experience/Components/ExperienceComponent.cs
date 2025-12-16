@@ -33,11 +33,15 @@ public sealed partial class ExperienceComponent : Component
     public static readonly string ContainerId = "experience-entity-container";
     public static readonly string OverrideContainerId = "override-experience-entity-container";
 
+    [ViewVariables(VVAccess.ReadOnly)]
+    public bool SkillEntityInitialized = false;
+
     /// <summary>
     /// Container which entity with skill components.
     /// </summary>
     [ViewVariables]
     public ContainerSlot ExperienceContainer = default!;
+
     /// <summary>
     /// Container which entity with skill components. This overrides base one.
     /// </summary>

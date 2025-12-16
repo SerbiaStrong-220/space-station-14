@@ -10,7 +10,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.Experience.Skill.Systems;
 
-public sealed class WritingSkillIssueSystem : EntitySystem
+public sealed class WritingSkillIssueSystem : SkillEntitySystem
 {
     [Dependency] private readonly ExperienceSystem _experience = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
@@ -25,12 +25,10 @@ public sealed class WritingSkillIssueSystem : EntitySystem
     {
         base.Initialize();
 
-        _experience.RelayEventToSkillEntity<DisarmChanceChangerSkillComponent, PaperSetContentAttemptEvent>();
-
-        SubscribeLocalEvent<WritingSkillIssueComponent, PaperSetContentAttemptEvent>(OnMapInit);
+        SubscribeEventToSkillEntity<WritingSkillIssueComponent, PaperSetContentAttemptEvent>(OnPaperSetContentAttemptEvent);
     }
 
-    private void OnMapInit(Entity<WritingSkillIssueComponent> entity, ref PaperSetContentAttemptEvent args)
+    private void OnPaperSetContentAttemptEvent(Entity<WritingSkillIssueComponent> entity, ref PaperSetContentAttemptEvent args)
     {
         if (entity.Comp.ChangeCaseEach is not null && !string.IsNullOrEmpty(args.TransformedContent))
         {
@@ -56,10 +54,7 @@ public sealed class WritingSkillIssueSystem : EntitySystem
 
         if (entity.Comp.ShuffleMarkupTags)
         {
-            var seed = SharedRandomExtensions.HashCodeCombine(new() { (int)_gameTiming.CurTick.Value, GetNetEntity(entity).Id, args.NewContent.Length});
-            var rand = new System.Random(seed);
-
-            args.TransformedContent = ShuffleTags(args.TransformedContent, rand);
+            args.TransformedContent = ShuffleTags(args.TransformedContent, GetPredictedRandom(new() { GetNetEntity(entity).Id, args.NewContent.Length }));
         }
     }
 

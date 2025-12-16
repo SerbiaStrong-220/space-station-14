@@ -6,7 +6,7 @@ using Content.Shared.SS220.Experience.Systems;
 
 namespace Content.Shared.SS220.Experience.Skill.Systems;
 
-public sealed class DisarmBlockSkillSystem : EntitySystem
+public sealed class DisarmBlockSkillSystem : SkillEntitySystem
 {
     [Dependency] private readonly ExperienceSystem _experience = default!;
 
@@ -14,9 +14,7 @@ public sealed class DisarmBlockSkillSystem : EntitySystem
     {
         base.Initialize();
 
-        _experience.RelayEventToSkillEntity<DisarmBlockSkillComponent, DisarmAttemptEvent>();
-
-        SubscribeLocalEvent<DisarmBlockSkillComponent, DisarmAttemptEvent>(OnDisarmAttempt);
+        SubscribeEventToSkillEntity<DisarmBlockSkillComponent, DisarmAttemptEvent>(OnDisarmAttempt);
     }
 
     private void OnDisarmAttempt(Entity<DisarmBlockSkillComponent> entity, ref DisarmAttemptEvent args)

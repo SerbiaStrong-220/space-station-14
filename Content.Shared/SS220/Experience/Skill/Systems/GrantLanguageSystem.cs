@@ -1,15 +1,13 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.SS220.Experience.Skill.Components;
-using Content.Shared.SS220.Experience.Systems;
 using Content.Shared.SS220.Language.Components;
 using Content.Shared.SS220.Language.Systems;
 
 namespace Content.Shared.SS220.Experience.Skill.Systems;
 
-public sealed class GrantLanguageSystem : EntitySystem
+public sealed class GrantLanguageSystem : SkillEntitySystem
 {
-    [Dependency] private readonly ExperienceSystem _experience = default!;
     [Dependency] private readonly SharedLanguageSystem _language = default!;
 
     public override void Initialize()
@@ -21,11 +19,8 @@ public sealed class GrantLanguageSystem : EntitySystem
 
     private void OnMapInit(Entity<GrantLanguageComponent> entity, ref MapInitEvent _)
     {
-        if (!_experience.ResolveExperienceEntityFromSkillEntity(entity.Owner, out var experienceEntity))
-        {
-            Log.Error($"Cant get owner of skill entity {ToPrettyString(entity)}");
+        if (!ResolveExperienceEntityFromSkillEntity(entity.Owner, out var experienceEntity))
             return;
-        }
 
         if (!TryComp<LanguageComponent>(experienceEntity, out var languageComponent))
         {
@@ -34,5 +29,6 @@ public sealed class GrantLanguageSystem : EntitySystem
         }
 
         _language.AddLanguages((experienceEntity.Value, languageComponent), entity.Comp.Languages, canSpeak: entity.Comp.CanSpeak);
+        TryAddToAdminLogs(entity, $"granted languages to skill owner, languages: {string.Join('|', entity.Comp.Languages)}");
     }
 }

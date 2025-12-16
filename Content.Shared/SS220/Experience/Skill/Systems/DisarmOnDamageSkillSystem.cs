@@ -16,7 +16,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.Experience.Skill.Systems;
 
-public sealed class DisarmOnDamageSkillSystem : EntitySystem
+public sealed class DisarmOnDamageSkillSystem : SkillEntitySystem
 {
     [Dependency] private readonly ExperienceSystem _experience = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
@@ -30,9 +30,7 @@ public sealed class DisarmOnDamageSkillSystem : EntitySystem
     {
         base.Initialize();
 
-        _experience.RelayEventToSkillEntity<DisarmOnDamageSkillComponent, DamageChangedEvent>();
-
-        SubscribeLocalEvent<DisarmOnDamageSkillComponent, DamageChangedEvent>(OnDamageChangedEvent);
+        SubscribeEventToSkillEntity<DisarmOnDamageSkillComponent, DamageChangedEvent>(OnDamageChangedEvent);
     }
 
     public void OnDamageChangedEvent(Entity<DisarmOnDamageSkillComponent> entity, ref DamageChangedEvent args)
@@ -43,16 +41,12 @@ public sealed class DisarmOnDamageSkillSystem : EntitySystem
         if (DamageSpecifier.GetPositive(args.DamageDelta).GetTotal() < entity.Comp.DamageThreshold)
             return;
 
-        if (!_experience.ResolveExperienceEntityFromSkillEntity(entity.Owner, out var experienceEntity))
+        if (!ResolveExperienceEntityFromSkillEntity(entity, out var experienceEntity))
             return;
 
-        _experience.TryChangeStudyingProgress(experienceEntity.Value!, _affectedSkillTree, DamageSpecifier.GetPositive(args.DamageDelta).GetTotal() / _damageToExperience);
+        TryChangeStudyingProgress(entity, _affectedSkillTree, DamageSpecifier.GetPositive(args.DamageDelta).GetTotal() / _damageToExperience);
 
-        // TODO: Once we have predicted randomness delete this for something sane...
-        var seed = SharedRandomExtensions.HashCodeCombine(new() { (int)_gameTiming.CurTick.Value, GetNetEntity(entity).Id, args.DamageDelta.GetTotal().Int() });
-        var rand = new System.Random(seed);
-
-        if (!rand.Prob(entity.Comp.DisarmChance))
+        if (!GetPredictedRandom(new() { GetNetEntity(entity).Id, args.DamageDelta.GetTotal().Int() }).Prob(entity.Comp.DisarmChance))
             return;
 
         if (_hands.EnumerateHeld(experienceEntity.Value.Owner).Count() == 0)
@@ -65,6 +59,6 @@ public sealed class DisarmOnDamageSkillSystem : EntitySystem
 
         _popupSystem.PopupEntity(Loc.GetString(entity.Comp.OnDropPopup, ("target", Identity.Entity(experienceEntity.Value.Owner, EntityManager))), experienceEntity.Value.Owner, PopupType.MediumCaution);
 
-        _experience.AddToAdminLogs(entity, "dropped all items in hands", LogImpact.High);
+        TryAddToAdminLogs(entity, $"dropping all items in hands due to {nameof(DisarmOnDamageSkillComponent)}", LogImpact.High);
     }
 }
