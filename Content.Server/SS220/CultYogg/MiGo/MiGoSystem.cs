@@ -40,9 +40,9 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
     [Dependency] private readonly PullingSystem _pullingSystem = default!;
     [Dependency] private readonly JobSystem _jobSystem = default!;
 
-    private const string AscensionReagent = "TheBloodOfYogg";
-    private const string CultYoggFaction = "CultYogg";
-    private const string SimpleNeutralFaction = "SimpleNeutral";
+    private const ProtoId<ReagentPrototype> AscensionReagent = "TheBloodOfYogg";
+    private const ProtoId<NpcFactionPrototype> CultYoggFaction = "CultYogg";
+    private const ProtoId<NpcFactionPrototype> SimpleNeutralFaction = "SimpleNeutral";
 
     public override void Initialize()
     {
