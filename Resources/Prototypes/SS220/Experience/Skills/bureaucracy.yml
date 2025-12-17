@@ -34,7 +34,7 @@
     skillName: bureaucracy-professional-name
     skillDescription: bureaucracy-professional-desc
   components:
-  - type: GrantLanguage
+  - type: GrantLanguageSkill
     languages:
     - id: Bureaucracy
       canSpeak: true

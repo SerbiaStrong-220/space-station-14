@@ -9,7 +9,7 @@ namespace Content.Shared.SS220.Experience.Skill.Components;
 
 [RegisterComponent]
 [NetworkedComponent]
-public sealed partial class GrantLanguageComponent : Component
+public sealed partial class GrantLanguageSkillComponent : Component
 {
     [DataField(required: true)]
     public HashSet<LanguageDefinition> Languages = [];

@@ -6,7 +6,7 @@ using Content.Shared.SS220.Language.Systems;
 
 namespace Content.Shared.SS220.Experience.Skill.Systems;
 
-public sealed class GrantLanguageSystem : SkillEntitySystem
+public sealed class GrantLanguageSkillSystem : SkillEntitySystem
 {
     [Dependency] private readonly SharedLanguageSystem _language = default!;
 
@@ -14,10 +14,10 @@ public sealed class GrantLanguageSystem : SkillEntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<GrantLanguageComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<GrantLanguageSkillComponent, MapInitEvent>(OnMapInit);
     }
 
-    private void OnMapInit(Entity<GrantLanguageComponent> entity, ref MapInitEvent _)
+    private void OnMapInit(Entity<GrantLanguageSkillComponent> entity, ref MapInitEvent _)
     {
         if (!ResolveExperienceEntityFromSkillEntity(entity.Owner, out var experienceEntity))
             return;
