@@ -12,6 +12,7 @@ public sealed class MindExtensionSystem : EntitySystem
     public event Action<GhostBodyListResponse>? GhostBodyListResponse;
     public event Action<DeleteTrailPointResponse>? DeleteTrailPointResponse;
     public event Action<ExtensionReturnResponse>? ExtensionReturnResponse;
+    public event Action<RespawnedResponse>? RespawnedResponse;
 
     public TimeSpan? RespawnTime { get; private set; }
 
@@ -23,6 +24,12 @@ public sealed class MindExtensionSystem : EntitySystem
         SubscribeNetworkEvent<RespawnTimeResponse>(OnRespawnTimeResponse);
         SubscribeNetworkEvent<DeleteTrailPointResponse>(OnDeleteTrailPointResponse);
         SubscribeNetworkEvent<ExtensionReturnResponse>(OnExtensionReturnResponse);
+        SubscribeNetworkEvent<RespawnedResponse>(OnRespawnedResponse);
+    }
+
+    private void OnRespawnedResponse(RespawnedResponse ev)
+    {
+        RespawnedResponse?.Invoke(ev);
     }
 
     private void OnExtensionReturnResponse(ExtensionReturnResponse ev)
@@ -53,7 +60,7 @@ public sealed class MindExtensionSystem : EntitySystem
         if (!TryGetNetEntity(_playerManager.LocalEntity.Value, out var netEntity))
             return;
 
-        RaiseNetworkEvent(new ExtensionRespawnActionEvent(netEntity.Value));
+        RaiseNetworkEvent(new RespawnRequest(netEntity.Value));
     }
 
     public void RequestRespawnTimer()

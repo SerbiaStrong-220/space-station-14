@@ -1,4 +1,7 @@
-mind-ext-respawn-button = Вернуться в лобби { $RespawnTimeRemain }
+mind-ext-respawn-button =  { $Timer ->
+        *[None] Вернуться в лобби
+        [WithTimer] Вернуться в лобби { $RespawnTimeRemain }
+    }
 
 mind-ext-body-menu = Список посещенных сущностей
 mind-ext-body-menu-footer = Можно вернуться к жизни одного из ваших персонажей, если вы не покинули тело до его смерти.

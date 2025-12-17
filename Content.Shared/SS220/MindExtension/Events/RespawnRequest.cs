@@ -5,10 +5,10 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.SS220.MindExtension.Events;
 
 [Serializable, NetSerializable]
-public sealed class ExtensionRespawnActionEvent : EntityEventArgs
+public sealed class RespawnRequest : EntityEventArgs
 {
     public NetEntity? Invoker { get; }
-    public ExtensionRespawnActionEvent(NetEntity invoker)
+    public RespawnRequest(NetEntity invoker)
     {
         Invoker = invoker;
     }

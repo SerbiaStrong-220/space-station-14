@@ -29,6 +29,7 @@ public sealed partial class GhostAdditionGui : UIWidget
         if (respawnRemainTime > TimeSpan.Zero)
         {
             RespawnButton.Text = Loc.GetString("mind-ext-respawn-button",
+                ("Timer", "WithTimer"),
                 ("RespawnTimeRemain", respawnRemainTime.ToString("mm\\:ss")));
             RespawnButton.Disabled = true;
         }

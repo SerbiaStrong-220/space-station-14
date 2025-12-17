@@ -16,11 +16,12 @@ public partial class MindExtensionSystem : EntitySystem //MindRespawnSystem
 {
     private void SubscribeRespawnSystemEvents()
     {
-        SubscribeNetworkEvent<ExtensionRespawnActionEvent>(OnRespawnActionEvent);
+        SubscribeNetworkEvent<RespawnRequest>(OnRespawnRequest
+            );
         SubscribeNetworkEvent<RespawnTimeRequest>(OnRespawnTimeRequest);
     }
 
-    private void OnRespawnActionEvent(ExtensionRespawnActionEvent ev, EntitySessionEventArgs args)
+    private void OnRespawnRequest(RespawnRequest ev, EntitySessionEventArgs args)
     {
         if (!TryComp<MindExtensionContainerComponent>(args.SenderSession.AttachedEntity, out var mindContExt))
             return;
@@ -32,7 +33,10 @@ public partial class MindExtensionSystem : EntitySystem //MindRespawnSystem
             return;
 
         if (_gameTiming.CurTime > mindExt.RespawnTimer)
+        {
             RaiseLocalEvent(args.SenderSession.AttachedEntity.Value, new RespawnActionEvent());
+            RaiseNetworkEvent(new RespawnedResponse(), args.SenderSession);
+        }
     }
 
     private void OnRespawnTimeRequest(RespawnTimeRequest ev, EntitySessionEventArgs args)

@@ -72,6 +72,7 @@ public sealed partial class GhostAdditionUIController : UIController, IOnSystemC
         system.GhostBodyListResponse += OnGhostBodyListResponse;
         system.DeleteTrailPointResponse += OnDeleteTrailPointResponse;
         system.ExtensionReturnResponse += OnExtensionReturnResponse;
+        system.RespawnedResponse += OnRespawnedResponse;
 
         system.RequestRespawnTimer();
     }
@@ -81,6 +82,7 @@ public sealed partial class GhostAdditionUIController : UIController, IOnSystemC
         system.GhostBodyListResponse -= OnGhostBodyListResponse;
         system.DeleteTrailPointResponse -= OnDeleteTrailPointResponse;
         system.ExtensionReturnResponse -= OnExtensionReturnResponse;
+        system.RespawnedResponse -= OnRespawnedResponse;
 
         system.RequestRespawnTimer();
     }
@@ -131,6 +133,10 @@ public sealed partial class GhostAdditionUIController : UIController, IOnSystemC
     }
 
     private void OnExtensionReturnResponse(ExtensionReturnResponse response)
+    {
+        additionGui?.BodyMenuWindow.Close();
+    }
+    private void OnRespawnedResponse(RespawnedResponse response)
     {
         additionGui?.BodyMenuWindow.Close();
     }
