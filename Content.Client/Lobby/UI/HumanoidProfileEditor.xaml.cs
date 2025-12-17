@@ -1777,8 +1777,10 @@ namespace Content.Client.Lobby.UI
             ImportButton.Disabled = true;
             ExportButton.Disabled = true;
 
+            //ss220 add import/export for signature start
             ImportSignatureButton.Disabled = true;
             ExportSignatureButton.Disabled = true;
+            //ss220 add import/export for signature end
         }
 
         private void EndExport()
@@ -1787,8 +1789,10 @@ namespace Content.Client.Lobby.UI
             ImportButton.Disabled = false;
             ExportButton.Disabled = false;
 
+            //ss220 add import/export for signature start
             ImportSignatureButton.Disabled = false;
             ExportSignatureButton.Disabled = false;
+            //ss220 add import/export for signature end
         }
     }
 }
