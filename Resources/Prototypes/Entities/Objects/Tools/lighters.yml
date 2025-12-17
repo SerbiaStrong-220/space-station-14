@@ -26,6 +26,8 @@
     - state: cheap_icon_base
       map: [ "skin" ]
     - state: basic_icon_top
+    - state: basic_piston
+      visible: true
     - state: lighter_flame
       visible: false
       shader: unshaded
@@ -48,6 +50,12 @@
           basic_icon_base-12: ""
           basic_icon_base-13: ""
           basic_icon_base-14: ""
+          basic_icon_base-15: ""
+          basic_icon_base-16: ""
+          basic_icon_base-17: ""
+          basic_icon_base-18: ""
+          basic_icon_base-19: ""
+          basic_icon_base-20: ""
   - type: GenericVisualizer
     visuals:
       enum.ToggleableVisuals.Enabled:
@@ -114,6 +122,8 @@
     - state: cheap_icon_base
       map: [ "skin" ]
     - state: cheap_icon_top
+    - state: cheap_piston
+      visible: true
     - state: lighter_flame
       visible: false
       shader: unshaded
@@ -363,6 +373,8 @@
     - state: discount_icon_base
       map: [ "skin" ]
     - state: basic_icon_top
+    - state: basic_piston
+      visible: true
     - state: lighter_flame
       visible: false
       shader: unshaded
