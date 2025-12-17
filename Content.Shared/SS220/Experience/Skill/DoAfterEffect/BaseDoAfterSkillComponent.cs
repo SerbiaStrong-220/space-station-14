@@ -12,7 +12,7 @@ public abstract partial class BaseDoAfterSkillComponent : Component
 {
     [DataField]
     [AutoNetworkedField]
-    public ProtoId<SkillTreePrototype> SkillTreeGroup;
+    public virtual ProtoId<SkillTreePrototype> SkillTreeGroup { get; set; }
 
     [DataField]
     [AutoNetworkedField]

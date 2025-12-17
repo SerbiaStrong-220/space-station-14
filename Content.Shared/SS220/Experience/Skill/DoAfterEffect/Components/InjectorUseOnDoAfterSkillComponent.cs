@@ -2,6 +2,7 @@
 
 using Content.Shared.Damage;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Experience.DoAfterEffect.Components;
 
@@ -12,14 +13,11 @@ namespace Content.Shared.SS220.Experience.DoAfterEffect.Components;
 [NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class InjectorUseOnDoAfterSkillComponent : BaseDoAfterSkillComponent
 {
+    public override ProtoId<SkillTreePrototype> SkillTreeGroup { get; set; } = "Medicine";
+
     [DataField]
     [AutoNetworkedField]
     public DamageSpecifier DamageOnFailure = new();
-
-    public InjectorUseOnDoAfterSkillComponent() : base()
-    {
-        SkillTreeGroup = "Medicine";
-    }
 }
 
 

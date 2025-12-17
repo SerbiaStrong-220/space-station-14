@@ -13,14 +13,11 @@ namespace Content.Shared.SS220.Experience.DoAfterEffect.Components;
 [NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ConstructionDoAfterSkillComponent : BaseDoAfterSkillComponent
 {
+    public override ProtoId<SkillTreePrototype> SkillTreeGroup { get; set; } = "Construction";
+
     [DataField]
     [AutoNetworkedField]
     public HashSet<ProtoId<StackPrototype>> ComplexMaterials = new();
-
-    public ConstructionDoAfterSkillComponent() : base()
-    {
-        SkillTreeGroup = "Construction";
-    }
 }
 
 
