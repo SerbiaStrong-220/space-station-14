@@ -28,8 +28,11 @@
         <!--Footer-->
         <BoxContainer Orientation="Vertical">
             <PanelContainer StyleClasses="LowDivider"/>
-            <BoxContainer Orientation="Horizontal" Margin="10 2 5 0" VerticalAlignment="Bottom">
-                <Label Text="{Loc 'mind-ext-body-menu-footer'}" StyleClasses="WindowFooterText"/>
+            <BoxContainer Orientation="Vertical"
+                          Margin="10 2 5 0"
+                          VerticalAlignment="Bottom">
+                <Label Text="{Loc 'mind-ext-body-menu-note-trail'}" StyleClasses="WindowFooterText"/>
+                <Label Text="{Loc 'mind-ext-body-menu-note-respawn'}" StyleClasses="WindowFooterText"/>
             </BoxContainer>
         </BoxContainer>
     </BoxContainer>

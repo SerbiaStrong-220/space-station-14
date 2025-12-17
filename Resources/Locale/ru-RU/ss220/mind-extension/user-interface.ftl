@@ -4,8 +4,9 @@ mind-ext-respawn-button =  { $Timer ->
     }
 
 mind-ext-body-menu = Список посещенных сущностей
-mind-ext-body-menu-footer = Можно вернуться к жизни одного из ваших персонажей, если вы не покинули тело до его смерти.
 mind-ext-body-menu-button = Вернуться к прошлой жизни
+mind-ext-body-menu-note-trail = Можно вернуться к жизни одного из ваших персонажей, если вы не покинули тело до его смерти.
+mind-ext-body-menu-note-respawn = Возврат в живое тело обнуляет таймер возврата в лобби.
 
 mind-ext-body-state-available = (Доступен)
 mind-ext-body-state-abandoned = (Покинут)
