@@ -57,7 +57,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         QueueDel(_container.EmptyContainer(entity.Comp.OverrideExperienceContainer).FirstOrNull());
     }
 
-    public bool TryAddSkillToSkillEntity(Entity<ExperienceComponent> entity, string containerId, ProtoId<SkillPrototype> skill)
+    public bool TryAddSkillToSkillEntity(Entity<ExperienceComponent> entity, [ForbidLiteral] string containerId, [ForbidLiteral] ProtoId<SkillPrototype> skill)
     {
         if (!_prototype.Resolve(skill, out var skillPrototype))
             return false;
@@ -65,7 +65,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         return TryAddSkillToSkillEntity(entity, containerId, skillPrototype);
     }
 
-    public bool TryAddSkillToSkillEntity(Entity<ExperienceComponent> entity, string containerId, SkillPrototype skill)
+    public bool TryAddSkillToSkillEntity(Entity<ExperienceComponent> entity, [ForbidLiteral] string containerId, SkillPrototype skill)
     {
         if (!ValidContainerId(containerId, entity))
             return false;
@@ -84,6 +84,49 @@ public sealed partial class ExperienceSystem : EntitySystem
         EntityManager.AddComponents(skillEntity.Value, skill.Components, skill.ApplyIfAlreadyHave);
 
         return true;
+    }
+
+    public void RemoveSkillFromSkillEntity(Entity<ExperienceComponent> entity, [ForbidLiteral] string containerId, ProtoId<SkillPrototype> skillId)
+    {
+        if (!_prototype.Resolve(skillId, out var skillPrototype))
+            return;
+
+        RemoveSkillFromSkillEntity(entity, containerId, skillPrototype);
+    }
+
+    public void RemoveSkillFromSkillEntity(Entity<ExperienceComponent> entity, [ForbidLiteral] string containerId, SkillPrototype skillProto)
+    {
+        if (!ValidContainerId(containerId, entity))
+            return;
+
+        var skillEntity = containerId == ExperienceComponent.OverrideContainerId
+                            ? entity.Comp.OverrideExperienceContainer.ContainedEntity
+                            : entity.Comp.ExperienceContainer.ContainedEntity;
+
+        if (skillEntity is null)
+        {
+            Log.Error($"Got null skill entity for entity {ToPrettyString(entity)} and container id {containerId}");
+            return;
+        }
+
+        EntityManager.RemoveComponents(skillEntity.Value, skillProto.Components);
+    }
+
+    private void ClearAllSkillComponents(Entity<ExperienceComponent> entity, [ForbidLiteral] string containerId)
+    {
+        if (!ValidContainerId(containerId, entity))
+            return;
+
+        var skillContainer = containerId == ExperienceComponent.OverrideContainerId
+                            ? entity.Comp.OverrideExperienceContainer
+                            : entity.Comp.ExperienceContainer;
+
+        QueueDel(_container.EmptyContainer(skillContainer).FirstOrNull());
+
+        if (!PredictedTrySpawnInContainer(_baseSKillPrototype, entity, ExperienceComponent.ContainerId, out var skillEntity))
+            Log.Fatal($"Cant spawn and insert skill entity into {nameof(entity.Comp.ExperienceContainer)} of {ToPrettyString(entity)}");
+        else
+            DirtyEntity(skillEntity.Value);
     }
 
     #region Event relays
@@ -171,7 +214,7 @@ public sealed partial class ExperienceSystem : EntitySystem
     /// 1. If <paramref name="proto"/> not null - ensure that we have more or equal skills that provided in proto <br/>
     /// 2. Ensures that skill entity have all needed skills components by implementing all skills ComponentRegistry by tree order
     /// </summary>
-    public void EnsureSkill(Entity<ExperienceComponent> entity, string containerId, ProtoId<ExperienceDefinitionPrototype>? proto = null)
+    public void EnsureSkill(Entity<ExperienceComponent> entity, [ForbidLiteral] string containerId, ProtoId<ExperienceDefinitionPrototype>? proto = null)
     {
         if (!ValidContainerId(containerId, entity))
             return;
@@ -185,7 +228,7 @@ public sealed partial class ExperienceSystem : EntitySystem
     /// <summary>
     /// Ensures that current entity have skills more or equal to that in provided proto
     /// </summary>
-    private void EnsureSkillTree(Entity<ExperienceComponent> entity, string containerId, ProtoId<ExperienceDefinitionPrototype> proto)
+    private void EnsureSkillTree(Entity<ExperienceComponent> entity, [ForbidLiteral] string containerId, [ForbidLiteral] ProtoId<ExperienceDefinitionPrototype> proto)
     {
         if (!_prototype.TryIndex(proto, out var addSkill))
             return;
@@ -215,13 +258,23 @@ public sealed partial class ExperienceSystem : EntitySystem
     /// <summary>
     /// Adds skills' components to entity. Actually ensures by the way of doing from beginning, can't blame this method it does what it does
     /// </summary>
-    private void EnsureSkillEntityComponents(Entity<ExperienceComponent> entity, string containerId)
+    private void EnsureSkillEntityComponents(Entity<ExperienceComponent> entity, [ForbidLiteral] string containerId)
     {
         var dictView = containerId == ExperienceComponent.ContainerId ? entity.Comp.Skills : entity.Comp.OverrideSkills;
+
+        if (dictView.Count == 0)
+        {
+            ClearAllSkillComponents(entity, containerId);
+        }
 
         foreach (var skillTree in dictView.Keys)
         {
             var skillTreeProto = _prototype.Index(skillTree);
+
+            foreach (var skillId in skillTreeProto.SkillTree)
+            {
+                RemoveSkillFromSkillEntity(entity, containerId, skillId);
+            }
 
             for (var i = 0; i <= dictView[skillTree].SkillTreeIndex; i++)
             {

@@ -38,8 +38,8 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
     // general info
     public ProtoId<SkillTreePrototype> SkillTreeId { private set; get; }
 
-    private SkillTreeExperienceInfo? _info;
-    private SkillTreeExperienceInfo? _overrideInfo = new();
+    private SkillTreeInfo? _info;
+    private SkillTreeInfo? _overrideInfo = new();
 
     private ResPath? _skillIconResPath = null;
     private string _skillTreeName = string.Empty;
@@ -173,7 +173,7 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
         _skillTreeName = Loc.GetString(proto.SkillTreeName);
     }
 
-    private Control? MakeTooltip(Control hover, SkillTreeExperienceInfo info)
+    private Control? MakeTooltip(Control hover, SkillTreeInfo info)
     {
         var skillTreeIndex = info.SkillTreeIndex;
 
@@ -245,7 +245,7 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
         return control;
     }
 
-    private Color? GetColorForLevel(int levelToDraw, SkillTreeExperienceInfo info)
+    private Color? GetColorForLevel(int levelToDraw, SkillTreeInfo info)
     {
         if (_overrideInfo is null)
             return null;
@@ -259,12 +259,12 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
         return null;
     }
 
-    private SkillTreeExperienceInfo GetSkillTreeInfoWithSpendPoints(SkillTreeExperienceInfo info)
+    private SkillTreeInfo GetSkillTreeInfoWithSpendPoints(SkillTreeInfo info)
     {
         if (SpendPoints == 0)
             return info;
 
-        var newInfo = new SkillTreeExperienceInfo();
+        var newInfo = new SkillTreeInfo();
 
         var newLevel = info.SkillTreeIndex;
         var newSublevel = info.Sublevel + SpendPoints;

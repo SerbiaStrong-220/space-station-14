@@ -64,13 +64,16 @@ public sealed partial class ExperienceSystem : EntitySystem
         var ev = new SkillTreeAdded
         {
             SkillTree = skillTree,
-            Info = new SkillTreeExperienceInfo
+            Info = new SkillTreeInfo
             {
                 Level = StartSkillLevel,
                 Sublevel = StartSublevel,
             }
         };
         RaiseLocalEvent(entity, ref ev);
+
+        if (ev.DenyChanges)
+            entity.Comp.EarnedSkillSublevel[skillTree] = 0;
 
         if (entity.Comp.EarnedSkillSublevel.TryGetValue(skillTree, out var earnedSublevel))
             ev.Info.Sublevel += earnedSublevel;
@@ -85,7 +88,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         DirtyField(entity!, nameof(ExperienceComponent.Skills));
     }
 
-    private void ResolveInitLeveling(Entity<ExperienceComponent> entity, SkillTreeExperienceInfo info, ProtoId<SkillTreePrototype> tree)
+    private void ResolveInitLeveling(Entity<ExperienceComponent> entity, SkillTreeInfo info, ProtoId<SkillTreePrototype> tree)
     {
         var treeProto = _prototype.Index(tree);
         while (info.Level < treeProto.SkillTree.Count)

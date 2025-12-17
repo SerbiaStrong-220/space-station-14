@@ -12,7 +12,7 @@ namespace Content.Shared.SS220.Experience;
 /// <param name="Info"> This struct contains additions to start level, all higher than max level will be correctly added </param>
 /// <param name="DenyChanges"> Setting it to true prevent next changes, think of order before using </param>
 [ByRefEvent]
-public record struct SkillTreeAdded(ProtoId<SkillTreePrototype> SkillTree, SkillTreeExperienceInfo Info, bool DenyChanges = false);
+public record struct SkillTreeAdded(ProtoId<SkillTreePrototype> SkillTree, SkillTreeInfo Info, bool DenyChanges = false);
 
 /// <summary>
 /// Event raised on entity when experience component being recalculated to collect knowledge

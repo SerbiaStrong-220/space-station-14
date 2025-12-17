@@ -7,7 +7,7 @@ namespace Content.Shared.SS220.Experience.Systems;
 
 public sealed partial class ExperienceSystem : EntitySystem
 {
-    private bool TryGetPreviousSkillPrototype(SkillTreeExperienceInfo info, ProtoId<SkillTreePrototype> treeProto, [NotNullWhen(true)] out SkillPrototype? skillPrototype)
+    private bool TryGetPreviousSkillPrototype(SkillTreeInfo info, ProtoId<SkillTreePrototype> treeProto, [NotNullWhen(true)] out SkillPrototype? skillPrototype)
     {
         skillPrototype = null;
         if (!_prototype.Resolve(treeProto, out var resolvedProto))
@@ -16,7 +16,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         return TryGetPreviousSkillPrototype(info, resolvedProto, out skillPrototype);
     }
 
-    private bool TryGetPreviousSkillPrototype(SkillTreeExperienceInfo info, SkillTreePrototype treeProto, [NotNullWhen(true)] out SkillPrototype? skillPrototype)
+    private bool TryGetPreviousSkillPrototype(SkillTreeInfo info, SkillTreePrototype treeProto, [NotNullWhen(true)] out SkillPrototype? skillPrototype)
     {
         if (info.Level <= 0)
         {
@@ -27,7 +27,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         return ResolveSkillPrototypeInternal(info.Level - 1, treeProto, out skillPrototype);
     }
 
-    private bool ResolveCurrentSkillPrototype(SkillTreeExperienceInfo info, ProtoId<SkillTreePrototype> treeProto, [NotNullWhen(true)] out SkillPrototype? skillPrototype)
+    private bool ResolveCurrentSkillPrototype(SkillTreeInfo info, ProtoId<SkillTreePrototype> treeProto, [NotNullWhen(true)] out SkillPrototype? skillPrototype)
     {
         skillPrototype = null;
         if (!_prototype.Resolve(treeProto, out var resolvedProto))
@@ -36,12 +36,12 @@ public sealed partial class ExperienceSystem : EntitySystem
         return ResolveCurrentSkillPrototype(info, resolvedProto, out skillPrototype);
     }
 
-    private bool ResolveCurrentSkillPrototype(SkillTreeExperienceInfo info, SkillTreePrototype treeProto, [NotNullWhen(true)] out SkillPrototype? skillPrototype)
+    private bool ResolveCurrentSkillPrototype(SkillTreeInfo info, SkillTreePrototype treeProto, [NotNullWhen(true)] out SkillPrototype? skillPrototype)
     {
         return ResolveSkillPrototypeInternal(info.Level, treeProto, out skillPrototype);
     }
 
-    private bool TryGetNextSkillPrototype(SkillTreeExperienceInfo info, ProtoId<SkillTreePrototype> treeProto, [NotNullWhen(true)] out SkillPrototype? skillPrototype)
+    private bool TryGetNextSkillPrototype(SkillTreeInfo info, ProtoId<SkillTreePrototype> treeProto, [NotNullWhen(true)] out SkillPrototype? skillPrototype)
     {
         skillPrototype = null;
         if (!_prototype.Resolve(treeProto, out var resolvedProto))
@@ -50,7 +50,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         return TryGetNextSkillPrototype(info, resolvedProto, out skillPrototype);
     }
 
-    private bool TryGetNextSkillPrototype(SkillTreeExperienceInfo info, SkillTreePrototype treeProto, [NotNullWhen(true)] out SkillPrototype? skillPrototype)
+    private bool TryGetNextSkillPrototype(SkillTreeInfo info, SkillTreePrototype treeProto, [NotNullWhen(true)] out SkillPrototype? skillPrototype)
     {
         if (info.Level >= treeProto.SkillTree.Count)
         {

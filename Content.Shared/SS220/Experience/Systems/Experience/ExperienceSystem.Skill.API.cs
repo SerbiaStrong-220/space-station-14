@@ -103,7 +103,43 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     #endregion
 
+    #region Set override skill
+
+    public bool TrySetOverrideSkill(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, SkillTreeInfo overrideInfo)
+    {
+        if (!Resolve(entity.Owner, ref entity.Comp, false))
+            return false;
+
+        entity.Comp.OverrideSkills[skillTree] = overrideInfo;
+
+        EnsureSkillEntityComponents(entity!, ExperienceComponent.OverrideContainerId);
+
+        return true;
+    }
+
+    public bool TryRemoveOverrideSkill(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree)
+    {
+        if (!Resolve(entity.Owner, ref entity.Comp, false))
+            return false;
+
+        entity.Comp.OverrideSkills.Remove(skillTree);
+
+        EnsureSkillEntityComponents(entity!, ExperienceComponent.OverrideContainerId);
+
+        return true;
+    }
+    #endregion
+
     #region Try get methods
+
+    public bool TryGetOverrideSkillInfo(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, [NotNullWhen(true)] out SkillTreeInfo? overrideInfo)
+    {
+        overrideInfo = null;
+        if (!Resolve(entity.Owner, ref entity.Comp, false))
+            return false;
+
+        return entity.Comp.OverrideSkills.TryGetValue(skillTree, out overrideInfo);
+    }
 
     public bool TryGetSkillTreeLevel(Entity<ExperienceComponent?> entity, ProtoId<SkillTreePrototype> skillTree, [NotNullWhen(true)] out int? level)
     {

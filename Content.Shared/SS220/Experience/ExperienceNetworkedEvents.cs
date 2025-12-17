@@ -35,7 +35,7 @@ public sealed class ChangeEntityExperiencePlayerRequest(PlayerChangeSkill change
 }
 
 [Serializable, NetSerializable]
-public readonly record struct SkillTreeView(ProtoId<SkillTreePrototype> SkillTreeId, SkillTreeExperienceInfo Info, SkillTreeExperienceInfo? OverrideInfo, FixedPoint4 Progress);
+public readonly record struct SkillTreeView(ProtoId<SkillTreePrototype> SkillTreeId, SkillTreeInfo Info, SkillTreeInfo? OverrideInfo, FixedPoint4 Progress);
 
 
 [Serializable, NetSerializable]

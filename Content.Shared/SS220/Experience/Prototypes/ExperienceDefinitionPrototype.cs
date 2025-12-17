@@ -13,7 +13,7 @@ public sealed class ExperienceDefinitionPrototype : IPrototype
 
     [DataField]
     [AlwaysPushInheritance]
-    public Dictionary<ProtoId<SkillTreePrototype>, SkillTreeExperienceInfo> Skills = new();
+    public Dictionary<ProtoId<SkillTreePrototype>, SkillTreeInfo> Skills = new();
 
     [DataField]
     [AlwaysPushInheritance]

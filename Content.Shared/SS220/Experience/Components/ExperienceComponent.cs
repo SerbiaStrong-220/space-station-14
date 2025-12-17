@@ -50,7 +50,7 @@ public sealed partial class ExperienceComponent : Component
 
     [AutoNetworkedField]
     [ViewVariables(VVAccess.ReadOnly)]
-    public Dictionary<ProtoId<SkillTreePrototype>, SkillTreeExperienceInfo> Skills = new();
+    public Dictionary<ProtoId<SkillTreePrototype>, SkillTreeInfo> Skills = new();
 
     /// <summary>
     /// This field saves information about earned by progressing sublevels to proper handle other adding <br/>
@@ -65,7 +65,7 @@ public sealed partial class ExperienceComponent : Component
     /// </summary>
     [AutoNetworkedField]
     [ViewVariables(VVAccess.ReadOnly)]
-    public Dictionary<ProtoId<SkillTreePrototype>, SkillTreeExperienceInfo> OverrideSkills = new();
+    public Dictionary<ProtoId<SkillTreePrototype>, SkillTreeInfo> OverrideSkills = new();
 
     [AutoNetworkedField]
     [ViewVariables(VVAccess.ReadOnly)]
@@ -85,7 +85,7 @@ public sealed partial class ExperienceComponent : Component
 
 [DataDefinition]
 [Serializable, NetSerializable]
-public sealed partial class SkillTreeExperienceInfo
+public sealed partial class SkillTreeInfo
 {
     // This property kinda save coder sanity
     public int SkillTreeIndex => _level - 1;
@@ -121,13 +121,13 @@ public sealed partial class SkillTreeExperienceInfo
         return $"level: {Level}. Sublevel: {Sublevel}";
     }
 
-    public void Add(SkillTreeExperienceInfo other)
+    public void Add(SkillTreeInfo other)
     {
         Level += (other.Level - ExperienceSystem.StartSkillLevel);
         Sublevel += (other.Sublevel - ExperienceSystem.StartSublevel);
     }
 
-    public SkillTreeExperienceInfo(SkillTreeExperienceInfo other)
+    public SkillTreeInfo(SkillTreeInfo other)
     {
         Level = other.Level;
         Sublevel = other.Sublevel;

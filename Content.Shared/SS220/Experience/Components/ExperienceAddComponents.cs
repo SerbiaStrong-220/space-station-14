@@ -16,7 +16,7 @@ public abstract partial class BaseExperienceAddComponent : Component
 
     [DataField]
     [AutoNetworkedField]
-    public Dictionary<ProtoId<SkillTreePrototype>, SkillTreeExperienceInfo> Skills = new();
+    public Dictionary<ProtoId<SkillTreePrototype>, SkillTreeInfo> Skills = new();
 
     [DataField]
     [AutoNetworkedField]

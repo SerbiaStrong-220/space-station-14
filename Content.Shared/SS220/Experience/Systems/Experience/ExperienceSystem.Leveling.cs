@@ -19,7 +19,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         return TryProgressLevel(entity, info, treeProto);
     }
 
-    private bool TryProgressLevel(Entity<ExperienceComponent> entity, SkillTreeExperienceInfo info, SkillTreePrototype treeProto)
+    private bool TryProgressLevel(Entity<ExperienceComponent> entity, SkillTreeInfo info, SkillTreePrototype treeProto)
     {
         if (!CanProgressLevel(info, treeProto))
             return false;
@@ -45,7 +45,7 @@ public sealed partial class ExperienceSystem : EntitySystem
     /// Checks if we can end studying current skill
     /// image: [xx|][ooo] -> [xx][|ooo]
     /// </summary>
-    private bool CanProgressLevel(SkillTreeExperienceInfo info, SkillTreePrototype treeProto)
+    private bool CanProgressLevel(SkillTreeInfo info, SkillTreePrototype treeProto)
     {
         if (info.Level >= treeProto.SkillTree.Count)
             return false;
@@ -60,9 +60,9 @@ public sealed partial class ExperienceSystem : EntitySystem
     }
 
     /// <summary>
-    /// <inheritdoc cref="CanProgressLevel(SkillTreeExperienceInfo, SkillTreePrototype)" />
+    /// <inheritdoc cref="CanProgressLevel(SkillTreeInfo, SkillTreePrototype)" />
     /// </summary>
-    private bool CanProgressLevel(SkillTreeExperienceInfo info, SkillPrototype skillProto, SkillPrototype nextSkillProto)
+    private bool CanProgressLevel(SkillTreeInfo info, SkillPrototype skillProto, SkillPrototype nextSkillProto)
     {
         if (!nextSkillProto.LevelInfo.CanStartStudying)
             return false;
@@ -114,7 +114,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         InternalProgressLevel(entity, info, treeProto);
     }
 
-    private void InternalProgressLevel(Entity<ExperienceComponent> entity, SkillTreeExperienceInfo info, SkillTreePrototype skillTree)
+    private void InternalProgressLevel(Entity<ExperienceComponent> entity, SkillTreeInfo info, SkillTreePrototype skillTree)
     {
         DebugTools.Assert(CanProgressLevel(info, skillTree));
 
@@ -128,7 +128,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         InternalProgressLevel(entity, info, skillPrototype, skillTree.ID);
     }
 
-    private void InternalProgressLevel(Entity<ExperienceComponent> entity, SkillTreeExperienceInfo info, SkillPrototype skillPrototype, ProtoId<SkillTreePrototype> skillTreeId)
+    private void InternalProgressLevel(Entity<ExperienceComponent> entity, SkillTreeInfo info, SkillPrototype skillPrototype, ProtoId<SkillTreePrototype> skillTreeId)
     {
         // we save meta level progress of sublevel
         info.Sublevel = Math.Max(StartSublevel, info.Sublevel - skillPrototype.LevelInfo.MaximumSublevel + StartSublevel);

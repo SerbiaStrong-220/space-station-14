@@ -69,7 +69,7 @@ public sealed partial class ExperienceSystem : EntitySystem
     }
 
     private bool ResolveInfoAndTree(Entity<ExperienceComponent> entity, ProtoId<SkillTreePrototype> skillTree,
-                                [NotNullWhen(true)] out SkillTreeExperienceInfo? info,
+                                [NotNullWhen(true)] out SkillTreeInfo? info,
                                 [NotNullWhen(true)] out SkillTreePrototype? prototype,
                                 bool logMissing = true)
     {
