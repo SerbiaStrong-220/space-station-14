@@ -2,7 +2,7 @@
 
 verb-categories-pen-write-size = Размер нанесения
 verb-categories-pen-erase-size = Размер стирания
-verb-categories-pen-copying = Редактирование печати
+verb-categories-pen-copying = Редактирование подписи
 
 verb-pen-signature-copy = Копировать
 verb-pen-signature-paste = Вставить
