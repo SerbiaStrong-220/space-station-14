@@ -78,6 +78,7 @@ public sealed class SecretRuleSystem : GameRuleSystem<SecretRuleComponent>
     {
         var options = _prototypeManager.Index(weights).Weights.ShallowClone();
         var players = GameTicker.PlayerGameStatuses.Count; // SS220-make-secret-depend-on-total-player-count
+
         // SS220 Cult Yogg begin
         var optionsToRemove = new HashSet<string>();
         foreach ((var presetId, _) in options)
