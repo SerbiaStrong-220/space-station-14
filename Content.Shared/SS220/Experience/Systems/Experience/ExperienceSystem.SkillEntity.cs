@@ -103,19 +103,21 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     private void RelayEventToSkillEntity<T>(Entity<ExperienceComponent> entity, ref T args) where T : notnull
     {
+        if (!entity.Comp.SkillEntityInitialized)
+            return;
+
+        // Client sometime need time to figure out pvs containers
+        if (entity.Comp.OverrideExperienceContainer is null || entity.Comp.ExperienceContainer is null)
+        {
+            DebugTools.AssertEqual(_net.IsServer, false);
+            return;
+        }
+
         var overrideSkillEntity = entity.Comp.OverrideExperienceContainer.ContainedEntity;
         var skillEntity = entity.Comp.ExperienceContainer.ContainedEntity;
 
         if (skillEntity is null || overrideSkillEntity is null)
             return;
-
-        if (overrideSkillEntity is null && skillEntity is null)
-        {
-            if (!entity.Comp.Deleted)
-                Log.Error($"Event {args.GetType()} was skipped because entity {ToPrettyString(entity)} don't have any skill entity");
-
-            return;
-        }
 
         // This check works as assert of not missrelaying
         if ((!TryComp<SkillComponent>(skillEntity, out var comp) && skillEntity is not null)
