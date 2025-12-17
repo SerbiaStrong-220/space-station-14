@@ -2,6 +2,10 @@
 
 verb-categories-pen-write-size = Размер нанесения
 verb-categories-pen-erase-size = Размер стирания
+verb-categories-pen-copying = Редактирование печати
+
+verb-pen-signature-copy = Копировать
+verb-pen-signature-paste = Вставить
 
 paper-ui-signature-label = Подпись:
 paper-ui-signature-load-from-profile-label = Из профиля
