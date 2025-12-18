@@ -47,8 +47,8 @@ namespace Content.Shared.Movement.Pulling.Systems;
 public sealed class PullingSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!; // SS220 edit
-    [Dependency] private readonly RotateToFaceSystem _rotateTo = default!; // SS220 edit
+    [Dependency] private readonly SharedTransformSystem _transform = default!; // SS220-MIT-pull-visualization
+    [Dependency] private readonly RotateToFaceSystem _rotateTo = default!; // SS220-MIT-pull-visualization
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly ActionBlockerSystem _blocker = default!;
     [Dependency] private readonly AlertsSystem _alertsSystem = default!;
