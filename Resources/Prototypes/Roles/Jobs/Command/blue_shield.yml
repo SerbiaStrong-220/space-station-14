@@ -47,9 +47,6 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
-  - !type:AddComponentSpecial
-    components:
-    - type: DefibrillatorSkill
 
 - type: startingGear
   id: BlueShieldGear

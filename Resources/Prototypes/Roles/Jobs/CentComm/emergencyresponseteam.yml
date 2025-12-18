@@ -20,11 +20,6 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, DeathRattleImplantCentcomm ]
-  #SS220 LimitationRevive - start
-  - !type:AddComponentSpecial
-    components:
-    - type: DefibrillatorSkill
-  #SS220 LimitationRevive - end
   #SS220 ghostrole-times-begin
   requirements:
     - !type:DepartmentTimeRequirement
@@ -138,7 +133,6 @@
   - !type:AddComponentSpecial
     components:
     - type: BibleUser #Lets them heal with bibles
-    - type: DefibrillatorSkill #SS220 LimitationRevive
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, DeathRattleImplantCentcomm ]
   departmentsToIgnoreInTitles: # SS220 Round End Titles
@@ -244,11 +238,6 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, DeathRattleImplantCentcomm ]
-  #SS220 LimitationRevive - start
-  - !type:AddComponentSpecial
-    components:
-    - type: DefibrillatorSkill
-  #SS220 LimitationRevive - end
   #SS220 ghostrole-times start
   requirements:
     - !type:DepartmentTimeRequirement
@@ -345,11 +334,6 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, DeathRattleImplantCentcomm ]
-  #SS220 LimitationRevive - start
-  - !type:AddComponentSpecial
-    components:
-    - type: DefibrillatorSkill
-  #SS220 LimitationRevive - end
   #SS220 ghostrole-times start
   requirements:
     - !type:DepartmentTimeRequirement
@@ -461,11 +445,6 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, DeathRattleImplantCentcomm ]
-  #SS220 LimitationRevive - start
-  - !type:AddComponentSpecial
-    components:
-    - type: DefibrillatorSkill
-  #SS220 LimitationRevive - end
   #SS220 ghostrole-times start
   requirements:
     - !type:DepartmentTimeRequirement
@@ -554,11 +533,6 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, DeathRattleImplantCentcomm ]
-  #SS220 LimitationRevive - start
-  - !type:AddComponentSpecial
-    components:
-    - type: DefibrillatorSkill
-  #SS220 LimitationRevive - end
   #SS220 ghostrole-times start
   requirements:
     - !type:DepartmentTimeRequirement

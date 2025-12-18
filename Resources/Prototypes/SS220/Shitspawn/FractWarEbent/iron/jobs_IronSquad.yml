@@ -91,8 +91,6 @@
     - type: NpcFactionMember
       factions:
       - EbentIronSquad
-    - type: DefibrillatorSkill
-      chanceWithMedSkill: 1
     - type: LimitationRevive
       reviveLimit: 3
       beforeDamageDelay: 180
@@ -200,8 +198,6 @@
     - type: NpcFactionMember
       factions:
       - EbentIronSquad
-    - type: DefibrillatorSkill
-      chanceWithMedSkill: 1
     - type: LimitationRevive
       reviveLimit: 3
       beforeDamageDelay: 180
@@ -313,8 +309,6 @@
     - type: NpcFactionMember
       factions:
       - EbentIronSquad
-    - type: DefibrillatorSkill
-      chanceWithMedSkill: 1
     - type: LimitationRevive
       reviveLimit: 3
       beforeDamageDelay: 180
@@ -430,8 +424,6 @@
     - type: NpcFactionMember
       factions:
       - EbentIronSquad
-    - type: DefibrillatorSkill
-      chanceWithMedSkill: 1
     - type: LimitationRevive
       reviveLimit: 3
       beforeDamageDelay: 180
@@ -537,8 +529,6 @@
     - type: NpcFactionMember
       factions:
       - EbentIronSquad
-    - type: DefibrillatorSkill
-      chanceWithMedSkill: 1
     - type: LimitationRevive
       reviveLimit: 3
       beforeDamageDelay: 180

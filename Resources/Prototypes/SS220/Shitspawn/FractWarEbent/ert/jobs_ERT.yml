@@ -170,8 +170,6 @@
     - type: NpcFactionMember
       factions:
       - EbentNanoTrasen
-    - type: DefibrillatorSkill
-      chanceWithMedSkill: 1
     - type: LimitationRevive
       reviveLimit: 3
       beforeDamageDelay: 180
@@ -234,8 +232,6 @@
     - type: NpcFactionMember
       factions:
       - EbentNanoTrasen
-    - type: DefibrillatorSkill
-      chanceWithMedSkill: 1
     - type: LimitationRevive
       reviveLimit: 3
       beforeDamageDelay: 180
@@ -303,8 +299,6 @@
     - type: NpcFactionMember
       factions:
       - EbentNanoTrasen
-    - type: DefibrillatorSkill
-      chanceWithMedSkill: 1
     - type: LimitationRevive
       reviveLimit: 3
       beforeDamageDelay: 180
@@ -369,8 +363,6 @@
     - type: NpcFactionMember
       factions:
       - EbentNanoTrasen
-    - type: DefibrillatorSkill
-      chanceWithMedSkill: 1
     - type: LimitationRevive
       reviveLimit: 3
       beforeDamageDelay: 180
@@ -437,8 +429,6 @@
     - type: NpcFactionMember
       factions:
       - EbentNanoTrasen
-    - type: DefibrillatorSkill
-      chanceWithMedSkill: 1
     - type: LimitationRevive
       reviveLimit: 3
       beforeDamageDelay: 180

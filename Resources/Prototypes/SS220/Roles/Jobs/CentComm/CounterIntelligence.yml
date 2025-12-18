@@ -23,10 +23,6 @@
   - CentralCommandERT
   - CentralCommandBSO
   - CentralCommandCBURN
-  special:
-  - !type:AddComponentSpecial
-    components:
-    - type: DefibrillatorSkill
 
 #CIAgent
 - type: playTimeTracker
@@ -51,7 +47,3 @@
   - CentralCommandERT
   - CentralCommandBSO
   - CentralCommandCBURN
-  special:
-  - !type:AddComponentSpecial
-    components:
-    - type: DefibrillatorSkill

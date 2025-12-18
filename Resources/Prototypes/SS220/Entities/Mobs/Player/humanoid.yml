@@ -208,7 +208,6 @@
   parent: EventHumanoidMindShielded
   randomizeName: false
   components:
-    - type: DefibrillatorSkill
     - type: GhostRole
       name: ghost-role-information-ert-leader-name
       description: ghost-role-information-ert-leader-description

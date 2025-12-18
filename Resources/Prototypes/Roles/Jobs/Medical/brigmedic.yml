@@ -21,10 +21,6 @@
   extendedAccess:
   - Chemistry
   # ss220 add extended access for brigmedic end
-  special:
-  - !type:AddComponentSpecial
-    components:
-    - type: DefibrillatorSkill
 
 
 - type: startingGear

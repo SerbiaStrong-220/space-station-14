@@ -67,8 +67,6 @@
     - type: NpcFactionMember
       factions:
       - EbentUssp
-    - type: DefibrillatorSkill
-      chanceWithMedSkill: 1
     - type: LimitationRevive
       reviveLimit: 3
       beforeDamageDelay: 180
@@ -161,8 +159,6 @@
     - type: NpcFactionMember
       factions:
       - EbentUssp
-    - type: DefibrillatorSkill
-      chanceWithMedSkill: 1
     - type: LimitationRevive
       reviveLimit: 3
       beforeDamageDelay: 180
@@ -255,8 +251,6 @@
     - type: NpcFactionMember
       factions:
       - EbentUssp
-    - type: DefibrillatorSkill
-      chanceWithMedSkill: 1
     - type: LimitationRevive
       reviveLimit: 3
       beforeDamageDelay: 180
@@ -348,8 +342,6 @@
     - type: NpcFactionMember
       factions:
       - EbentUssp
-    - type: DefibrillatorSkill
-      chanceWithMedSkill: 1
     - type: LimitationRevive
       reviveLimit: 3
       beforeDamageDelay: 180
@@ -435,8 +427,6 @@
     - type: NpcFactionMember
       factions:
       - EbentUssp
-    - type: DefibrillatorSkill
-      chanceWithMedSkill: 1
     - type: LimitationRevive
       reviveLimit: 3
       beforeDamageDelay: 180
