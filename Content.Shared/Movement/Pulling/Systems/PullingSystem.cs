@@ -56,8 +56,8 @@ public sealed class PullingSystem : EntitySystem
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!; // SS220-MIT-pull-visualization
     [Dependency] private readonly MovementSpeedModifierSystem _modifierSystem = default!;
     [Dependency] private readonly SharedJointSystem _joints = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!; // SS220 edit
-    [Dependency] private readonly SharedCombatModeSystem _combatMode = default!; // SS220 edit
+    [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!; // SS220-MIT-pull-visualization
+    [Dependency] private readonly SharedCombatModeSystem _combatMode = default!; // SS220-MIT-pull-visualization
     [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
