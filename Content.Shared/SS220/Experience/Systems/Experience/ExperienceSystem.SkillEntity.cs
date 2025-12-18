@@ -121,12 +121,11 @@ public sealed partial class ExperienceSystem : EntitySystem
                             ? entity.Comp.OverrideExperienceContainer
                             : entity.Comp.ExperienceContainer;
 
-        var oldEntity = _container.EmptyContainer(skillContainer).FirstOrNull();
+        var oldSkillEntity = skillContainer?.ContainedEntity;
 
-        if (oldEntity is null)
+        EntityManager.DeleteEntity(oldSkillEntity);
+        if (oldSkillEntity is null)
             return;
-
-        QueueDel(oldEntity);
 
         if (!PredictedTrySpawnInContainer(_baseSKillPrototype, entity, containerId, out var skillEntity))
             Log.Fatal($"Cant respawn and insert skill entity into {nameof(entity.Comp.ExperienceContainer)} of {ToPrettyString(entity)}");
