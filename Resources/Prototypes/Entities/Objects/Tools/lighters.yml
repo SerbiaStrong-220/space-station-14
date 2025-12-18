@@ -56,6 +56,15 @@
           basic_icon_base-18: ""
           basic_icon_base-19: ""
           basic_icon_base-20: ""
+          basic_icon_base-21: ""
+          basic_icon_base-22: ""
+          basic_icon_base-23: ""
+          basic_icon_base-24: ""
+          basic_icon_base-25: ""
+          basic_icon_base-26: ""
+          basic_icon_base-27: ""
+          basic_icon_base-28: ""
+          basic_icon_base-29: ""
   - type: GenericVisualizer
     visuals:
       enum.ToggleableVisuals.Enabled:
