@@ -1,4 +1,4 @@
-﻿using Content.Shared.SS220.GhostHearing;
+﻿using Content.Shared.SS220.TTS;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared.Ghost;

@@ -1,14 +1,11 @@
 - type: entity
-  parent: DrinkBase
+  parent: [ DrinkBaseMaterialStrongPlastic, DrinkBase, DrinkVisualsFill ]
   id: Bucket
   name: bucket
   description: It's a boring old bucket.
   components:
-  - type: Clickable
   - type: Edible
-    edible: Drink
-    solution: bucket
-    destroyOnEmpty: false
+    utensil: Spoon
   - type: Sprite
     sprite: SS220/Objects/Tools/bucket.rsi #SS220 Resprite Buckets
     layers:
@@ -25,50 +22,24 @@
     quickEquip: false
   - type: SolutionContainerManager
     solutions:
-      bucket:
+      drink:
         maxVol: 250
-  - type: MixableSolution
-    solution: bucket
   - type: SolutionTransfer
     transferAmount: 100
     maxTransferAmount: 100
     minTransferAmount: 10
-    canChangeTransferAmount: true
-  - type: UserInterface
-    interfaces:
-      enum.TransferAmountUiKey.Key:
-        type: TransferAmountBoundUserInterface
-  - type: MeleeWeapon
-    soundNoDamage:
-      path: "/Audio/Effects/Fluids/splat.ogg"
-    damage:
-      types:
-        Blunt: 0
-  - type: Spillable
-    solution: bucket
   - type: SpillWhenWorn
-    solution: bucket
-  - type: DrawableSolution
-    solution: bucket
-  - type: RefillableSolution
-    solution: bucket
-  - type: DrainableSolution
-    solution: bucket
-  - type: SolutionItemStatus
-    solution: bucket
-  - type: Appearance
+    solution: drink
   - type: SolutionContainerVisuals
+    inHandsMaxFillLevels: 0
     maxFillLevels: 4 #SS220 Resprite Buckets
     fillBaseName: fill-
-  - type: ExaminableSolution
-    solution: bucket
   - type: Tag
     tags:
       - Bucket
   - type: PhysicalComposition
     materialComposition:
       Plastic: 50
-  - type: DnaSubstanceTrace
   # SS220 Resprite Buckets Begin
   - type: Blindfold
   - type: HideLayerClothing
@@ -87,5 +58,5 @@
   components:
   - type: SolutionContainerManager
     solutions:
-      bucket:
+      drink:
         maxVol: 500

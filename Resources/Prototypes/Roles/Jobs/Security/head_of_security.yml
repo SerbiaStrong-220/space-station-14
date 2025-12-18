@@ -6,10 +6,10 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 180000 # SS220-RoleTime
+      time: 50h # SS220-RoleTime
     - !type:RoleTimeRequirement
       role: JobWarden
-      time: 43200 # SS220-RoleTime 2
+      time: 12h # SS220-RoleTime 2
     - !type:AgeRequirement
       requiredAge: 20
     - !type:SpeciesRequirement #SS220-jobbans begin

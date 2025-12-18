@@ -7,5 +7,5 @@
   components:
   - type: StorageFill
     contents:
-      - id: StimpackMini
+      - id: StimpackERT
         amount: 6

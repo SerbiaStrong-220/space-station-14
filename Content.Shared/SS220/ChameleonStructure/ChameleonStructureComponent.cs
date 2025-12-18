@@ -34,6 +34,12 @@ public sealed partial class ChameleonStructureComponent : Component
     [DataField]
     public List<EntProtoId>? ProtoList;
 
+    /// <summary>
+    ///     if we want the descendant prototypes to be usable in the chameleon, but not displayed in the UI
+    /// </summary>
+    [DataField]
+    public bool AllowChildProto = true;
+
     [DataField]
     public EntityWhitelist? UserWhitelist;
 

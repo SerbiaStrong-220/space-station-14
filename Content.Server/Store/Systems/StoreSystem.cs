@@ -1,20 +1,20 @@
+using System.Linq;
 using Content.Server.Store.Components;
-using Content.Shared.UserInterface;
 using Content.Shared.FixedPoint;
 using Content.Shared.Implants.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Content.Shared.Store.Components;
-using JetBrains.Annotations;
+using Content.Shared.Store.Events;
+using Content.Shared.UserInterface;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
-using System.Linq;
 using Robust.Shared.Timing;
-using Content.Shared.Mind;
 using Content.Shared.DoAfter;
 using Content.Shared.SS220.Store;
 using Content.Server.StoreDiscount.Systems;
+using Robust.Shared.Utility;
+using Content.Server.Traitor.Uplink;
 
 namespace Content.Server.Store.Systems;
 
@@ -29,6 +29,7 @@ public sealed partial class StoreSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!; //SS220-insert-currency-doafter
     [Dependency] private readonly StoreDiscountSystem _discount = default!; //SS220-nukeops-discount
+    [Dependency] private readonly UplinkSystem _uplink = default!; // SS220-TraitorDynamics-uplink-fix
 
     public override void Initialize()
     {
@@ -42,6 +43,8 @@ public sealed partial class StoreSystem : EntitySystem
         SubscribeLocalEvent<StoreComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<StoreComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<StoreComponent, OpenUplinkImplantEvent>(OnImplantActivate);
+        SubscribeLocalEvent<StoreComponent, IntrinsicStoreActionEvent>(OnIntrinsicStoreAction);
+
         SubscribeLocalEvent<StoreComponent, InsertCurrencyDoAfterEvent>(OnInsertCurrencyDoAfter); //SS220-insert-currency-doafter
 
         InitializeUi();
@@ -153,14 +156,16 @@ public sealed partial class StoreSystem : EntitySystem
 
     private void OnImplantActivate(EntityUid uid, StoreComponent component, OpenUplinkImplantEvent args)
     {
-        //ss220 fix uplink implant start (#2766)
+        // SS220-TraitorDynamics-uplink-fix begin
         if (component.AccountOwner == null)
         {
-            _mind.TryGetMind(args.Performer, out var mind, out _);
-            component.AccountOwner = mind;
+            var dynamic = _dynamics.GetCurrentDynamic();
+            var useDynamic = dynamic != null;
+            var newBalance = component.Balance.Values.Sum();
+            _uplink.AddUplink(args.Performer, newBalance, uid, useDynamic, useDynamic);
+            // sooo if we have dynamics, then there should be discounts
         }
-        //ss220 fix uplink implant end (#2766)
-
+        // SS220-TraitorDynamics-uplink-fix end
         ToggleUi(args.Performer, uid, component);
     }
 
@@ -240,6 +245,12 @@ public sealed partial class StoreSystem : EntitySystem
         UpdateUserInterface(null, uid, store);
         return true;
     }
+
+    private void OnIntrinsicStoreAction(Entity<StoreComponent> ent, ref IntrinsicStoreActionEvent args)
+    {
+        ToggleUi(args.Performer, ent.Owner, ent.Comp);
+    }
+
 }
 
 public sealed class CurrencyInsertAttemptEvent : CancellableEntityEventArgs

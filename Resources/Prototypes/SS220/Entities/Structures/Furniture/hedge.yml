@@ -1,0 +1,309 @@
+- type: entity
+  id: Hedge
+  parent: TableBase
+  name: hedge
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/Hedge/hedge.rsi
+    drawdepth: Overdoors
+  - type: Icon
+    sprite: SS220/Structures/Furniture/Hedge/hedge.rsi
+    state: full
+  - type: IconSmooth
+    key: hedge
+    base: state_
+  - type: PlacementReplacement
+    key: hedge
+  - type: SpeedModifierContacts
+    walkSpeedModifier: 0.5
+    sprintSpeedModifier: 0.5
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.28,-0.37,0.28,0.40"
+        density: 70
+        mask:
+        - FullTileMask
+        layer:
+        - TableLayer
+  - type: Physics
+    bodyType: Static
+  - type: Damageable
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WoodDestroy
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepGrass
+  - type: SecretStash
+    tryInsertItemSound: /Audio/Effects/plant_rustle.ogg
+    tryRemoveItemSound: /Audio/Effects/plant_rustle.ogg
+    hasVerbs: false
+  - type: SpriteFade
+  - type: InteractionOutline
+  - type: Transform
+    anchored: true
+  - type: ContainerContainer
+    containers:
+      stash: !type:ContainerSlot {}
+
+- type: entity
+  id: HedgeSeparate
+  parent: Hedge
+  suffix: separate
+  components:
+  - type: IconSmooth
+    key: state
+    base: state_
+
+#HedgeUnited
+
+- type: entity
+  id: HedgeAutumn
+  parent: Hedge
+  name: autumn hedge
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/Hedge/hedge_autumn.rsi
+    drawdepth: Overdoors
+  - type: Icon
+    sprite: SS220/Structures/Furniture/Hedge/hedge_autumn.rsi
+    state: full
+
+- type: entity
+  id: FlowerHedge
+  parent: Hedge
+  name: flower hedge
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/Hedge/ColorFlower/hedge_flower_pink.rsi
+    drawdepth: Overdoors
+  - type: Icon
+    sprite: SS220/Structures/Furniture/Hedge/ColorFlower/hedge_flower_pink.rsi
+    state: full
+  - type: IconSmooth
+    key: hedge
+    base: state_
+
+- type: entity
+  id: FlowerHedgeRed
+  parent: FlowerHedge
+  name: red flower hedge
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/Hedge/ColorFlower/hedge_flower_red.rsi
+    drawdepth: Overdoors
+  - type: Icon
+    sprite: SS220/Structures/Furniture/Hedge/ColorFlower/hedge_flower_red.rsi
+    state: full
+
+- type: entity
+  id: FlowerHedgeOrange
+  parent: FlowerHedge
+  name: orange flower hedge
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/Hedge/ColorFlower/hedge_flower_orange.rsi
+    drawdepth: Overdoors
+  - type: Icon
+    sprite: SS220/Structures/Furniture/Hedge/ColorFlower/hedge_flower_orange.rsi
+    state: full
+
+- type: entity
+  id: FlowerHedgeYellow
+  parent: FlowerHedge
+  name: yellow flower hedge
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/Hedge/ColorFlower/hedge_flower_yellow.rsi
+    drawdepth: Overdoors
+  - type: Icon
+    sprite: SS220/Structures/Furniture/Hedge/ColorFlower/hedge_flower_yellow.rsi
+    state: full
+
+- type: entity
+  id: FlowerHedgeBlue
+  parent: FlowerHedge
+  name: blue flower hedge
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/Hedge/ColorFlower/hedge_flower_blue.rsi
+    drawdepth: Overdoors
+  - type: Icon
+    sprite: SS220/Structures/Furniture/Hedge/ColorFlower/hedge_flower_blue.rsi
+    state: full
+
+- type: entity
+  id: FlowerHedgeWhite
+  parent: FlowerHedge
+  name: white flower hedge
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/Hedge/ColorFlower/hedge_flower_white.rsi
+    drawdepth: Overdoors
+  - type: Icon
+    sprite: SS220/Structures/Furniture/Hedge/ColorFlower/hedge_flower_white.rsi
+    state: full
+
+- type: entity
+  id: HedgeBioluminscent
+  parent: Hedge
+  name: bioluminscent hedge
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/Hedge/hedge_bioluminscent.rsi
+    drawdepth: Overdoors
+  - type: Icon
+    sprite: SS220/Structures/Furniture/Hedge/hedge_bioluminscent.rsi
+    state: full
+  - type: IconSmooth
+    key: hedge
+    base: state_
+  - type: PointLight
+    radius: 1.5
+    color: "#e6ba39"
+
+- type: entity
+  id: HedgeNettle
+  parent: Hedge
+  name: nettle hedge
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/Hedge/hedge_nettle.rsi
+    drawdepth: Overdoors
+  - type: Icon
+    sprite: SS220/Structures/Furniture/Hedge/hedge_nettle.rsi
+    state: full
+  - type: IconSmooth
+    key: hedge
+    base: state_
+  - type: SpeedModifierContacts
+    walkSpeedModifier: 0.25
+    sprintSpeedModifier: 0.25
+  - type: DamageContacts
+    damage:
+      types:
+        Heat: 2
+
+- type: entity
+  id: HedgeSnow
+  parent: Hedge
+  name: snow hedge
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/Hedge/hedge_snow.rsi
+    drawdepth: Overdoors
+  - type: Icon
+    sprite: SS220/Structures/Furniture/Hedge/hedge_snow.rsi
+    state: full
+  - type: IconSmooth
+    key: hedge
+    base: state_
+  - type: DamageContacts
+    damage:
+      types:
+        Cold: 0.15
+
+
+#HedgeSeparate
+
+- type: entity
+  id: HedgeAutumnSeparate
+  parent: HedgeAutumn
+  suffix: separate
+  components:
+  - type: IconSmooth
+    key: separate
+    base: state_
+
+- type: entity
+  id: FlowerHedgeSeparate
+  parent: FlowerHedge
+  suffix: separate
+  components:
+  - type: IconSmooth
+    key: separate
+    base: state_
+
+- type: entity
+  id: FlowerHedgeRedSeparate
+  parent: FlowerHedgeRed
+  suffix: separate
+  components:
+  - type: IconSmooth
+    key: separate
+    base: state_
+
+- type: entity
+  id: FlowerHedgeOrangeSeparate
+  parent: FlowerHedgeOrange
+  suffix: separate
+  components:
+  - type: IconSmooth
+    key: separate
+    base: state_
+
+- type: entity
+  id: FlowerHedgeYellowSeparate
+  parent: FlowerHedgeYellow
+  suffix: separate
+  components:
+  - type: IconSmooth
+    key: separate
+    base: state_
+
+- type: entity
+  id: FlowerHedgeBlueSeparate
+  parent: FlowerHedgeBlue
+  suffix: separate
+  components:
+  - type: IconSmooth
+    key: separate
+    base: state_
+
+- type: entity
+  id: FlowerHedgeWhiteSeparate
+  parent: FlowerHedgeWhite
+  suffix: separate
+  components:
+  - type: IconSmooth
+    key: separate
+    base: state_
+
+- type: entity
+  id: HedgeBioluminscentSeparate
+  parent: HedgeBioluminscent
+  suffix: separate
+  components:
+  - type: IconSmooth
+    key: separate
+    base: state_
+
+- type: entity
+  id: HedgeNettleSeparate
+  parent: HedgeNettle
+  suffix: separate
+  components:
+  - type: IconSmooth
+    key: separate
+    base: state_
+
+- type: entity
+  id: HedgeSnowSeparate
+  parent: HedgeSnow
+  suffix: separate
+  components:
+  - type: IconSmooth
+    key: separate
+    base: state_

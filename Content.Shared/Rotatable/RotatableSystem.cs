@@ -201,6 +201,11 @@ public sealed class RotatableSystem : EntitySystem
             return;
 
         _transform.SetLocalRotation(ent.Owner, ent.Comp.LocalRotation + angle);
+
+        // ss220 add rotate event start
+        var ev = new RotateEvent(angle);
+        RaiseLocalEvent(ent.Owner, ref ev);
+        // ss220 add rotate event end
     }
 
     private void ResetRotation(Entity<TransformComponent?> ent)
@@ -211,3 +216,8 @@ public sealed class RotatableSystem : EntitySystem
         _transform.SetLocalRotation(ent.Owner, Angle.Zero);
     }
 }
+
+// ss220 add rotate event start
+[ByRefEvent]
+public record struct RotateEvent(Angle Angle);
+// ss220 add rotate event end

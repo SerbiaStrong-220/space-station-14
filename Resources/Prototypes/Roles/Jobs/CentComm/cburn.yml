@@ -23,6 +23,12 @@
     components:
     - type: DefibrillatorSkill
   #SS220 LimitationRevive - end
+  # SS220-playtime-restrictions-begin
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 20h
+  # SS220-playtime-restrictions-begin
 
 - type: startingGear
   id: CBURNGear

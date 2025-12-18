@@ -6,12 +6,14 @@
     requirement:
       !type:DepartmentTimeRequirement
       department: Science
-      time: 216000 #60 hrs
+      time: 60h
+  # SS220-sponsor-tier-begin
   sponsorTierLoadoutEffects:
   - !type:GroupLoadoutEffect
     proto: SeniorDevTeamTier
   - !type:GroupLoadoutEffect
     proto: AdministratorSponsorTier
+  # SS220-sponsor-tier-end
 
 # Head
 - type: startingGear
