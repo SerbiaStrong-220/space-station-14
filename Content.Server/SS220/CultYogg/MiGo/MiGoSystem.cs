@@ -110,7 +110,8 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
 
             //no phisyc during astral
             EnsureComp<MovementIgnoreGravityComponent>(uid);
-			RemCompDeferred<SpeedModifiedByContactComponent>(uid);
+            EnsureComp<FTLSmashImmuneComponent>(uid);
+            RemCompDeferred<SpeedModifiedByContactComponent>(uid);
 
             if (HasComp<NpcFactionMemberComponent>(uid))
             {
