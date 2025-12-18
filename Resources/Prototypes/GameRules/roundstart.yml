@@ -220,7 +220,7 @@
       blacklist:
         components:
         - AntagImmune
-      lateJoinAdditional: false
+      lateJoinAdditional: true # ss220 traitor latejoin back
       mindRoles:
       - MindRoleTraitor
 
