@@ -52,8 +52,8 @@ public sealed class PullingSystem : EntitySystem
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly ActionBlockerSystem _blocker = default!;
     [Dependency] private readonly AlertsSystem _alertsSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!; // SS220 edit
-    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!; // SS220 edit
+    [Dependency] private readonly SharedAudioSystem _audio = default!; // SS220-MIT-pull-visualization
+    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!; // SS220-MIT-pull-visualization
     [Dependency] private readonly MovementSpeedModifierSystem _modifierSystem = default!;
     [Dependency] private readonly SharedJointSystem _joints = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!; // SS220 edit
