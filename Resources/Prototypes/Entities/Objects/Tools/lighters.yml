@@ -27,7 +27,8 @@
       map: [ "skin" ]
     - state: basic_icon_top
     - state: basic_piston
-      visible: true
+      visible: false
+      map: [ "piston" ]
     - state: lighter_flame
       visible: false
       shader: unshaded
@@ -71,6 +72,9 @@
         flame:
           True: { visible: true }
           False: { visible: false }
+        piston:
+          True: { visible: false }
+          False: { visible: true }
   - type: ToggleableVisuals
     spriteLayer: lighter_flame
     inhandVisuals:
@@ -132,7 +136,8 @@
       map: [ "skin" ]
     - state: cheap_icon_top
     - state: cheap_piston
-      visible: true
+      visible: false
+      map: [ "piston" ]
     - state: lighter_flame
       visible: false
       shader: unshaded
@@ -381,9 +386,10 @@
     - state: icon_map
     - state: discount_icon_base
       map: [ "skin" ]
-    - state: basic_icon_top
-    - state: basic_piston
+    - state: cheap_icon_top
+    - state: cheap_piston
       visible: true
+      map: [ "piston" ]
     - state: lighter_flame
       visible: false
       shader: unshaded
