@@ -66,7 +66,7 @@ public sealed class PullingSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedVirtualItemSystem _virtual = default!;
 
-    static readonly Color СolorCaptureEffect = Color.Yellow;
+    static readonly Color СolorCaptureEffect = Color.Yellow; // SS220-MIT-pull-visualization
 
     public override void Initialize()
     {
