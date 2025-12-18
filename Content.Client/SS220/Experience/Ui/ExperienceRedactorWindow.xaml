@@ -8,8 +8,8 @@
     xmlns:styleDef="clr-namespace:Content.Client.SS220.Experience.Ui"
     Title="{Loc 'experience-view-redactor-title'}"
     Resizable="True"
-    MinSize="320 240"
-    SetSize="800 480"
+    MinSize="240 240"
+    SetSize="720 480"
     RectClipContent="False">
     <Control>
         <PanelContainer>
@@ -34,7 +34,7 @@
                         <!-- Added by code -->
                     </BoxContainer>
                 </ScrollContainer>
-                <BoxContainer Name="KnowledgeInfoContainer"  VerticalExpand="True" HorizontalExpand="True" Orientation="Vertical" Margin="0 5">
+                <BoxContainer Name="KnowledgeInfoContainer" HorizontalAlignment="Left" VerticalExpand="True" HorizontalExpand="True" Orientation="Vertical" Margin="0 5">
                     <BoxContainer Orientation="Horizontal">
                         <Label Text="{Loc 'experience-redactor-knowledge-name'}"/>
                         <OptionButton Name="KnowledgeOption"/>

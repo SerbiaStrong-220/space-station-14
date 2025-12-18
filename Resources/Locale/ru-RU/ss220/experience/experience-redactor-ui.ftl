@@ -10,7 +10,7 @@ redactable-skill-tree-skill-level = Уровень:
 redactable-skill-tree-skill-sublevel = Подуровень:
 
 experience-redactor-no-job-name = Работа отсутствует
-experience-redactor-no-antag-name = Статус антага неизвестен
+experience-redactor-no-antag-name = Не антагонист
 
 experience-view-redactor-bypass-skill = [bold]Пропускает проверки навыков[/bold]
 experience-view-redactor-no-bypass-skill = Навыки проверяются
