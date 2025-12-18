@@ -61,7 +61,6 @@ public sealed class GhostRoleSystem : EntitySystem
     [Dependency] private readonly PopupSystem _popupSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly IBanManager _banManager = default!;
     [Dependency] private readonly MindExtensionSystem _ghostExtension = default!; //SS220-mind-extension
 
     private uint _nextRoleIdentifier;
