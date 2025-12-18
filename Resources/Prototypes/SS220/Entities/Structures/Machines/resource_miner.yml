@@ -1,0 +1,39 @@
+# © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
+
+- type: entity
+  id: BaseResourceMiner
+  abstract: true
+  parent: BaseStructure
+  name: resource miner
+  description: Machine that mines resource from deeps
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: Structures/Machines/Anomaly/anomaly_vessel.rsi # TODO
+  - type: Transform
+    noRot: false
+  - type: ResourceMiner
+  - type: ActivatableUI
+    key: enum.ResourceMinerSettings.Key
+  - type: UserInterface
+    interfaces:
+      enum.ResourceMinerSettings.Key:
+        type: ResourceMinerSettingsBUI
+  - type: AmbientSound
+    enabled: false
+    range: 8
+    volume: -5
+    sound:
+      path: /Audio/Ambience/anomaly_drone.ogg # TODO
+  - type: PointLight
+    radius: 3
+    energy: 2
+    color: "#e71616" # red goes as "error color"
+
+- type: entity
+  id: MetalMiner
+  parent: BaseResourceMiner
+  components:
+  - type: ResourceMiner
+    generationAmount:
+      Steel: 200
