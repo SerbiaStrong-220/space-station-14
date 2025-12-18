@@ -37,6 +37,7 @@ using Content.Shared.Verbs;
 using Robust.Shared.Collections;
 using Content.Shared.SS220.DarkReaper;
 using Content.Shared.Ghost.Roles.Components;
+using Content.Server.SS220.MindExtension;
 
 namespace Content.Server.Ghost.Roles;
 
@@ -57,6 +58,7 @@ public sealed class GhostRoleSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly IBanManager _banManager = default!;
+    [Dependency] private readonly MindExtensionSystem _ghostExtension = default!; //SS220-mind-extension
 
     private uint _nextRoleIdentifier;
     private bool _needsUpdateGhostRoleCount = true;
@@ -694,6 +696,11 @@ public sealed class GhostRoleSystem : EntitySystem
 
         ghostRole.Taken = false;
         RegisterGhostRole((uid, ghostRole));
+
+        //SS220-mind-extension begin
+        if (args.Mind.Comp.UserId is not null)
+            _ghostExtension.MarkAsNotAbandoned(uid, args.Mind.Comp.UserId.Value);
+        //SS220-mind-extension end
     }
 
     public void Reset(RoundRestartCleanupEvent ev)
