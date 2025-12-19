@@ -25,14 +25,14 @@ public sealed class DisarmChanceChangerSkillSystem : SkillEntitySystem
 
     private void OnDisarmDisarmedAttempt(Entity<DisarmChanceChangerSkillComponent> entity, ref GetDisarmChanceDisarmerMultiplierEvent args)
     {
-        args.Multiplier /= entity.Comp.DisarmByMultiplier;
+        args.Multiplier *= entity.Comp.DisarmByMultiplier;
 
         TryChangeStudyingProgress(entity, _affectedSkillTree, _progressForDisarming);
     }
 
     private void OnDisarmDisarmerAttempt(Entity<DisarmChanceChangerSkillComponent> entity, ref GetDisarmChanceDisarmedMultiplierEvent args)
     {
-        args.Multiplier /= entity.Comp.DisarmedMultiplier;
+        args.Multiplier *= entity.Comp.DisarmedMultiplier;
 
         TryChangeStudyingProgress(entity, _affectedSkillTree, _progressForDisarming);
     }

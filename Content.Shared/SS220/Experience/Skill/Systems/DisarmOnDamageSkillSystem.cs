@@ -6,6 +6,7 @@ using Content.Shared.Database;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
 using Content.Shared.SS220.Experience.Skill.Components;
@@ -20,6 +21,7 @@ public sealed class DisarmOnDamageSkillSystem : SkillEntitySystem
 {
     [Dependency] private readonly ExperienceSystem _experience = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
 
@@ -42,6 +44,9 @@ public sealed class DisarmOnDamageSkillSystem : SkillEntitySystem
             return;
 
         if (!ResolveExperienceEntityFromSkillEntity(entity, out var experienceEntity))
+            return;
+
+        if (!_mobState.IsAlive(experienceEntity.Value.Owner))
             return;
 
         TryChangeStudyingProgress(entity, _affectedSkillTree, DamageSpecifier.GetPositive(args.DamageDelta).GetTotal() / _damageToExperience);
