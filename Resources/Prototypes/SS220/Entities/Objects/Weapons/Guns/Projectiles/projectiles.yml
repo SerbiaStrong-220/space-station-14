@@ -536,7 +536,7 @@
     impactEffect: BulletImpactEffectBlaster
     damage:
       types:
-        Heat: 14
+        Heat: 12
         Piercing: 4
     soundHit:
       collection: WeakHit

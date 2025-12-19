@@ -17,8 +17,8 @@
     sprite: SS220/Objects/Weapons/Guns/Battery/laser_carabine.rsi
     state: icon
   discipline: Arsenal
-  tier: 2
-  cost: 9000
+  tier: 3
+  cost: 15000
   recipeUnlocks:
   - WeaponLaserSMG
   - LaserSMGPowerCell
