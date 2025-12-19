@@ -31,7 +31,6 @@
     #SS220 requirement end
   weight: 20
   startingGear: CaptainGear
-  skillOnInit: BaseSkillAddition # SS220-skills-update
   icon: "JobIconCaptain"
   joinNotifyCrew: true
   supervisors: job-supervisors-centcom

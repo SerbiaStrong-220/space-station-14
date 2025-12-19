@@ -56,11 +56,6 @@ public sealed partial class DoAfter
     [DataField("targetDistance")]
     public float TargetDistance;
 
-    // SS220-changeable-doafter-bar-color-begin
-    [DataField]
-    public Color? BarColorOverride;
-    // SS220-changeable-doafter-bar-color-end
-
     /// <summary>
     ///     If <see cref="DoAfterArgs.NeedHand"/> is true, this is the hand that was selected when the doafter started.
     /// </summary>
@@ -102,7 +97,6 @@ public sealed partial class DoAfter
         TargetDistance = other.TargetDistance;
         InitialHand = other.InitialHand;
         InitialItem = other.InitialItem;
-        BarColorOverride = other.BarColorOverride; // SS220-changeable-doafter-bar-color
 
         NetUserPosition = other.NetUserPosition;
         NetInitialItem = other.NetInitialItem;

@@ -1,9 +1,0 @@
-- type: experienceDefinition
-  id: BaseSkillAddition
-  skills:
-    CombatTraining:
-      level: 3
-      sublevel: 0
-  knowledges:
-  - InformedPersonalKnowledge
-  addSublevelPoints: 10

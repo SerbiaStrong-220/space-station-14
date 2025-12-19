@@ -143,12 +143,15 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-      NinjaKnowledge: [ corvax-hidden-desc-NoSlip-ninja ]
-      ScienceKnowledge: [ corvax-hidden-desc-NoSlip-research ]
-    nameEntries:
-    - [NinjaKnowledge, null]
-    - [ScienceKnowledge, null]
-    hiddenName: ent-ClothingShoesBaseButcherable
+    - label: corvax-hidden-desc-NoSlip-ninja
+      whitelistMindRoles:
+      - NinjaRole
+    - label: corvax-hidden-desc-NoSlip-research
+      jobRequired:
+        - ResearchAssistant
+        - ResearchDirector
+        - Scientist
+        - Borg
 # Corvax-HiddenDesc-End
   - type: FootstepModifier
     footstepSoundCollection: null
@@ -213,12 +216,16 @@
 # Corvax-HiddenDesc-Start
     - type: HiddenDescription
       entries:
-        SyndicateAgentKnowledge: [ corvax-hidden-desc-Chameleon-syndicate ]
-        ScienceKnowledge: [ corvax-hidden-desc-Chameleon-research ]
-      nameEntries:
-      - [SyndicateAgentKnowledge, null]
-      - [ScienceKnowledge, null]
-      hiddenName: null
+      - label: corvax-hidden-desc-Chameleon-syndicate
+        whitelistMindRoles:
+        - TraitorRole
+        - NukeOperative
+      - label: corvax-hidden-desc-Chameleon-research
+        jobRequired:
+          - ResearchAssistant
+          - ResearchDirector
+          - Scientist
+          - Borg
 # Corvax-HiddenDesc-End
 
 - type: entity
@@ -232,16 +239,26 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-      SyndicateAgentKnowledge:
-        - corvax-hidden-desc-Chameleon-syndicate
-        - corvax-hidden-desc-NoSlip-syndicate
-      ScienceKnowledge:
-        - corvax-hidden-desc-Chameleon-research
-        - corvax-hidden-desc-NoSlip-research
-    nameEntries:
-    - [SyndicateAgentKnowledge, null]
-    - [ScienceKnowledge, null]
-    hiddenName: null
+    - label: corvax-hidden-desc-Chameleon-syndicate
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
+    - label: corvax-hidden-desc-NoSlip-syndicate
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
+    - label: corvax-hidden-desc-Chameleon-research
+      jobRequired:
+        - ResearchAssistant
+        - ResearchDirector
+        - Scientist
+        - Borg
+    - label: corvax-hidden-desc-NoSlip-research
+      jobRequired:
+        - ResearchAssistant
+        - ResearchDirector
+        - Scientist
+        - Borg
 # Corvax-HiddenDesc-End
 
 - type: entity

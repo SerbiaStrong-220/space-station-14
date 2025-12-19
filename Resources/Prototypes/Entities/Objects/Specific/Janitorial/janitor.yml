@@ -209,12 +209,16 @@
 # Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-      SyndicateAgentKnowledge: [ corvax-hidden-desc-WetFloorSignMineExplosive-syndicate ]
-      ScienceKnowledge: [ corvax-hidden-desc-WetFloorSignMineExplosive-research ]
-    nameEntries:
-    - [SyndicateAgentKnowledge, null]
-    - [ScienceKnowledge, null]
-    hiddenName: ent-WetFloorSign
+    - label: corvax-hidden-desc-WetFloorSignMineExplosive-syndicate
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
+    - label: corvax-hidden-desc-WetFloorSignMineExplosive-research
+      jobRequired:
+        - ResearchAssistant
+        - ResearchDirector
+        - Scientist
+        - Borg
 # Corvax-HiddenDesc-End
 
 - type: entity

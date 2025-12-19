@@ -14,16 +14,20 @@
     - type: ChameleonClothing
       slot: [HEAD]
       default: ClothingHeadHatBeret
-    # Corvax-HiddenDesc-Start
+# Corvax-HiddenDesc-Start
     - type: HiddenDescription
       entries:
-        SyndicateAgentKnowledge: [ corvax-hidden-desc-Chameleon-syndicate ]
-        ScienceKnowledge: [ corvax-hidden-desc-Chameleon-research ]
-      nameEntries:
-      - [SyndicateAgentKnowledge, null]
-      - [ScienceKnowledge, null]
-      hiddenName: null
-    # Corvax-HiddenDesc-End
+      - label: corvax-hidden-desc-Chameleon-syndicate
+        whitelistMindRoles:
+        - TraitorRole
+        - NukeOperative
+      - label: corvax-hidden-desc-Chameleon-research
+        jobRequired:
+          - ResearchAssistant
+          - ResearchDirector
+          - Scientist
+          - Borg
+# Corvax-HiddenDesc-End
 
 - type: entity
   parent: ClothingHeadHatFedoraBrown

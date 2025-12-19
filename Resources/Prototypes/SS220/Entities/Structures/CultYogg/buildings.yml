@@ -98,10 +98,9 @@
         type: ChameleonStructureBoundUserInterface
   - type: HiddenDescription
     entries:
-      CultYoggKnowledge: [ hidden-desc-chameleon-structure-cultyogg ]
-    nameEntries:
-    - [CultYoggKnowledge, null]
-    hiddenName: ent-BaseWall
+    - label: hidden-desc-chameleon-structure-cultyogg
+      whitelistMindRoles: #WhitelistBody isnt working, so i using this one
+      - CultYoggRole
 
 - type: entity
   parent: BaseMaterialDoor
@@ -157,10 +156,9 @@
         type: ChameleonStructureBoundUserInterface
   - type: HiddenDescription
     entries:
-      CultYoggKnowledge: [ hidden-desc-chameleon-structure-cultyogg ]
-    nameEntries:
-    - [CultYoggKnowledge, null]
-    hiddenName: ent-CultYoggDoor
+    - label: hidden-desc-chameleon-structure-cultyogg
+      whitelistMindRoles: #WhitelistBody isnt working, so i using this one
+      - CultYoggRole
   - type: Tag
     tags:
       - Structure
@@ -358,7 +356,6 @@
     eraseTime: 3
   - type: HiddenDescription
     entries:
-      CultYoggKnowledge: [ hidden-desc-chameleon-structure-cultyogg ]
-    nameEntries:
-    - [CultYoggKnowledge, null]
-    hiddenName: ent-CultYoggAirlock
+    - label: hidden-desc-chameleon-structure-cultyogg
+      whitelistMindRoles: #WhitelistBody isnt working, so i using this one
+      - CultYoggRole
