@@ -1,5 +1,8 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Server.Administration.Logs;
+using Content.Shared.Database;
+using Content.Shared.GameTicking;
 using Content.Shared.SS220.Experience;
 using Content.Shared.SS220.Experience.Systems;
 using Robust.Server.Console;
@@ -9,6 +12,7 @@ namespace Content.Server.SS220.Experience;
 
 public sealed class ExperienceRedactorSystem : EntitySystem
 {
+    [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly IConGroupController _groupController = default!;
 
     public override void Initialize()
@@ -17,6 +21,7 @@ public sealed class ExperienceRedactorSystem : EntitySystem
 
         SubscribeNetworkEvent<ChangeEntityExperienceAdminRequest>(OnChangeAdminRequest);
         SubscribeNetworkEvent<ChangeEntityExperiencePlayerRequest>(OnChangePlayerRequest);
+        SubscribeLocalEvent<RoundEndedEvent>(OnRoundEnd);
     }
 
     private void OnChangeAdminRequest(ChangeEntityExperienceAdminRequest ev, EntitySessionEventArgs args)
@@ -78,5 +83,17 @@ public sealed class ExperienceRedactorSystem : EntitySystem
         RaiseLocalEvent(playerEntity, ref afterInitEv);
 
         DirtyField(playerEntity, experienceComponent, nameof(ExperienceComponent.FreeSublevelPoints));
+    }
+
+    private void OnRoundEnd(RoundEndedEvent _)
+    {
+        var backgroundEntityQuery = EntityQueryEnumerator<BackgroundSublevelAddComponent, RoleExperienceAddComponent>();
+
+        while (backgroundEntityQuery.MoveNext(out var uid, out var sublevelAddComponent, out var roleExperience))
+        {
+            var stringSublevelView = string.Join('|', sublevelAddComponent.Skills.Select(x => $"{x.Key}: {x.Value}"));
+
+            _adminLog.Add(LogType.Experience, LogImpact.Low, $"At round end entity with experience definition {roleExperience.DefinitionId}, used {sublevelAddComponent.SpentSublevelPoints} point to their leveling. Used to skills {stringSublevelView}");
+        }
     }
 }

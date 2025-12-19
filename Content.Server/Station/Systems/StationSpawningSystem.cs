@@ -179,7 +179,7 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
 
         // SS220-experience-update-begin
         var skillRoleAddComp = EnsureComp<RoleExperienceAddComponent>(entity);
-        skillRoleAddComp.SkillAddId = prototype.ExperienceDefinition;
+        skillRoleAddComp.DefinitionId = prototype.ExperienceDefinition;
         // SS220-experience-update-end
         // As a mark - DoJobSpecials should be later to give ability to change this with adding SkillRoleAddComponent
         // SS220-experience-update-end**2

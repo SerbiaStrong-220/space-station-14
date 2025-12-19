@@ -12,7 +12,7 @@ public abstract partial class BaseExperienceAddComponent : Component
 {
     [DataField]
     [AutoNetworkedField]
-    public ProtoId<ExperienceDefinitionPrototype>? SkillAddId;
+    public ProtoId<ExperienceDefinitionPrototype>? DefinitionId;
 
     [DataField]
     [AutoNetworkedField]

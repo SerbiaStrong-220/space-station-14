@@ -1,6 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Database;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -170,6 +169,11 @@ public sealed partial class ExperienceSystem : EntitySystem
 
         if (!CanProgressLevel(info, skillTreePrototype))
             _popup.PopupClient(Loc.GetString(skillPrototype.LevelInfo.SublevelUpPopup), entity, entity);
+
+        TryComp<RoleExperienceAddComponent>(entity, out var roleExperienceAdd);
+        var definitionId = roleExperienceAdd?.DefinitionId?.Id ?? "no-definition";
+
+        _adminLogManager.Add(LogType.Experience, LogImpact.Low, $"{ToPrettyString(entity):user} with experience definition {definitionId} advanced sublevel in skill tree {skillTree}");
 
         DirtyFields(entity.AsNullable(), null, [nameof(ExperienceComponent.Skills), nameof(ExperienceComponent.StudyingProgress)]);
     }

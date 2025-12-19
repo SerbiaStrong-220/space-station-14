@@ -94,7 +94,7 @@ public sealed class OutfitSystem : EntitySystem
 
             // SS220-experience-update-end
             var skillRoleAddComp = EnsureComp<RoleExperienceAddComponent>(target);
-            skillRoleAddComp.SkillAddId = job.ExperienceDefinition;
+            skillRoleAddComp.DefinitionId = job.ExperienceDefinition;
             // SS220-add-after-equip-to-outfit-set-begin
             foreach (var jobSpecial in job.Special)
                 jobSpecial.AfterEquip(target);

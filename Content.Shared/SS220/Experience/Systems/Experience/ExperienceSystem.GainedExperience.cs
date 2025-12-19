@@ -105,7 +105,7 @@ public sealed partial class ExperienceSystem : EntitySystem
             args.Info.Sublevel = info.Sublevel;
         }
 
-        if (entity.Comp.SkillAddId is null || !_prototype.TryIndex(entity.Comp.SkillAddId, out var skillAddProto))
+        if (entity.Comp.DefinitionId is null || !_prototype.TryIndex(entity.Comp.DefinitionId, out var skillAddProto))
             return;
 
         if (skillAddProto.Skills.TryGetValue(args.SkillTree, out var infoProto))
@@ -124,7 +124,7 @@ public sealed partial class ExperienceSystem : EntitySystem
             args.Info.Add(info);
         }
 
-        if (entity.Comp.SkillAddId is null || !_prototype.TryIndex(entity.Comp.SkillAddId, out var skillAddProto))
+        if (entity.Comp.DefinitionId is null || !_prototype.TryIndex(entity.Comp.DefinitionId, out var skillAddProto))
             return;
 
         if (skillAddProto.Skills.TryGetValue(args.SkillTree, out var infoProto))
@@ -152,7 +152,7 @@ public sealed partial class ExperienceSystem : EntitySystem
 
         args.FreeSublevelPoints += entity.Comp.AddSublevelPoints;
 
-        if (entity.Comp.SkillAddId is null || !_prototype.TryIndex(entity.Comp.SkillAddId, out var skillAddProto))
+        if (entity.Comp.DefinitionId is null || !_prototype.TryIndex(entity.Comp.DefinitionId, out var skillAddProto))
             return;
 
         args.FreeSublevelPoints += skillAddProto.AddSublevelPoints;
@@ -166,7 +166,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         args.DenyChanges = true;
         args.FreeSublevelPoints = entity.Comp.AddSublevelPoints;
 
-        if (entity.Comp.SkillAddId is null || !_prototype.TryIndex(entity.Comp.SkillAddId, out var skillAddProto))
+        if (entity.Comp.DefinitionId is null || !_prototype.TryIndex(entity.Comp.DefinitionId, out var skillAddProto))
             return;
 
         args.FreeSublevelPoints += skillAddProto.AddSublevelPoints;
@@ -197,7 +197,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (args.DenyChanges)
             return;
 
-        if (entity.Comp.SkillAddId is not null && _prototype.TryIndex(entity.Comp.SkillAddId, out var skillAddProto))
+        if (entity.Comp.DefinitionId is not null && _prototype.TryIndex(entity.Comp.DefinitionId, out var skillAddProto))
             args.Knowledges.UnionWith(skillAddProto.Knowledges);
 
         args.Knowledges.UnionWith(entity.Comp.Knowledges);
