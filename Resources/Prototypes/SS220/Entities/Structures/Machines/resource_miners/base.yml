@@ -8,11 +8,15 @@
   description: Machine that mines resource from deeps
   components:
   - type: Sprite
+    offset: 0, 1
+    drawdepth: Overdoors
     noRot: true
-    sprite: Structures/Machines/Anomaly/anomaly_vessel.rsi # TODO
+    sprite: SS220/Structures/Machines/resource_miner.rsi
+    state: base
   - type: Transform
     noRot: false
   - type: ResourceMiner
+    timeBetweenUpdate: 4
   - type: ActivatableUI
     key: enum.ResourceMinerSettings.Key
   - type: UserInterface
@@ -20,20 +24,14 @@
       enum.ResourceMinerSettings.Key:
         type: ResourceMinerSettingsBUI
   - type: AmbientSound
-    enabled: false
-    range: 8
-    volume: -5
+    enabled: true
+    range: 16
+    volume: -2
     sound:
-      path: /Audio/Ambience/anomaly_drone.ogg # TODO
+      path: /Audio/Ambience/Objects/periodic_beep.ogg
+      params:
+        variantion: 1.2
   - type: PointLight
-    radius: 3
-    energy: 2
+    radius: 5
+    energy: 3
     color: "#e71616" # red goes as "error color"
-
-- type: entity
-  id: MetalMiner
-  parent: BaseResourceMiner
-  components:
-  - type: ResourceMiner
-    generationAmount:
-      Steel: 200

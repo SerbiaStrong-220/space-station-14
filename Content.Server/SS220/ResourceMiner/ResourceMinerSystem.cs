@@ -1,8 +1,10 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 
 using System.Linq;
+using Content.Server.Audio;
 using Content.Server.Materials;
 using Content.Shared.Materials;
+using Content.Shared.Materials.OreSilo;
 using Content.Shared.SS220.ResourceMiner;
 using Robust.Server.GameObjects;
 using Robust.Shared.Timing;
@@ -11,9 +13,11 @@ namespace Content.Server.SS220.ResourceMiner;
 
 public sealed class ResourceMinerSystem : EntitySystem
 {
+    [Dependency] private readonly AmbientSoundSystem _ambientSound = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly MaterialStorageSystem _materialStorage = default!;
+    [Dependency] private readonly PointLightSystem _pointLight = default!;
     [Dependency] private readonly TransformSystem _transformSystem = default!;
     [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
 
@@ -75,11 +79,16 @@ public sealed class ResourceMinerSystem : EntitySystem
             return;
 
         entity.Comp.Silo = GetEntity(msg.Silo);
+
+        _pointLight.SetColor(entity, entity.Comp.WorkingColor);
+        _ambientSound.SetSound(entity, entity.Comp.WorkSound);
+
+        Dirty(entity);
     }
 
     private void SendAvailableSilos(Entity<ResourceMinerComponent> entity)
     {
-        var silos = new HashSet<Entity<MaterialStorageComponent>>();
+        var silos = new HashSet<Entity<MaterialStorageComponent, OreSiloComponent>>();
         _entityLookup.GetEntitiesOnMap(_transformSystem.GetMapId(entity.Owner), silos);
 
         _userInterface.SetUiState(entity.Owner, ResourceMinerSettings.Key, new AvailableSilosMiner([.. silos.Where(x => ValidateSilo(x.Owner, entity))
@@ -89,6 +98,9 @@ public sealed class ResourceMinerSystem : EntitySystem
     private bool ValidateSilo(EntityUid siloUid, Entity<ResourceMinerComponent> minerEntity)
     {
         if (!HasComp<MaterialStorageComponent>(siloUid))
+            return false;
+
+        if (!HasComp<OreSiloComponent>(siloUid))
             return false;
 
         return _transformSystem.GetMap(siloUid) == _transformSystem.GetMap(minerEntity.Owner);
