@@ -1,5 +1,6 @@
-﻿using Content.Shared.Alert;
+using Content.Shared.Alert;
 using Content.Shared.Movement.Pulling.Systems;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
@@ -44,6 +45,12 @@ public sealed partial class PullerComponent : Component
 
     [DataField]
     public ProtoId<AlertPrototype> PullingAlert = "Pulling";
+
+    /// <summary>
+    /// The sound played during a successful capture
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier PullSound = new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg");
 }
 
 public sealed partial class StopPullingAlertEvent : BaseAlertEvent;

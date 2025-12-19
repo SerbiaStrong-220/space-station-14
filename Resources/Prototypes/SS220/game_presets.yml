@@ -16,7 +16,7 @@
   id: CultYoggPresetMidPop
   alias:
     - cultyoggmidpop
-  name: roles-antag-cult-yogg-name
+  name: cult-yogg-title
   description: roles-antag-cult-yogg-objective
   showInVote: false
   minPlayers: 35 # WARNING: this should be always synced with other cult game rules and presets!
@@ -50,6 +50,11 @@
   - TraitorDynamic
   - BasicStationEventScheduler
   - EmergencyShuttleAutoVote
+  - DummyNonAntagChance
+  - SubGamemodesRule
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlFriendlyEventScheduler
+  - BasicRoundstartVariation
 
 # event schedulers
 

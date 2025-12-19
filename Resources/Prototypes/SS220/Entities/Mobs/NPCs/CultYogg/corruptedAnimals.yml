@@ -35,6 +35,7 @@
     - type: Stamina
       critThreshold: 100
     - type: Butcherable
+      willRenameEnt: false
       spawned:
         - id: FoodMiGomyceteCult
           amount: 2

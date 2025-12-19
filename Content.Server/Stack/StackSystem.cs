@@ -164,6 +164,7 @@ namespace Content.Server.Stack
             return amounts;
         }
 
+        // ss220 split fix start // wow, no comments ss220 here...
         protected override AlternativeVerb? MakeCustomVerb(EntityUid user, Entity<StackComponent> stackEntity, LocId title, LocId prompt)
         {
             var customAmount = new AlternativeVerb
@@ -178,9 +179,18 @@ namespace Content.Server.Stack
                     _quickDialog.OpenDialog(actorComp.PlayerSession,
                         Loc.GetString(title),
                         Loc.GetString(prompt),
-                        (int amount) =>
+                        (string amount) =>
                         {
-                            UserSplit(stackEntity.Owner, user, amount, stackEntity.Comp);
+                            if (string.IsNullOrEmpty(amount))
+                                return;
+
+                            if (!int.TryParse(amount, out var amountInt))
+                                return;
+
+                            if (amountInt <= 0)
+                                return;
+
+                            UserSplit(stackEntity.Owner, user, amountInt, stackEntity.Comp);
                         },
                         () =>
                         {
@@ -192,6 +202,7 @@ namespace Content.Server.Stack
 
             return customAmount;
         }
+        // ss220 split fix end
 
         protected override void UserSplit(EntityUid uid, EntityUid userUid, int amount,
             StackComponent? stack = null,
