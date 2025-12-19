@@ -267,6 +267,13 @@
     - id: Universal
   # SS220-Add-Languages end
   - type: DefibrillatorSkill #SS220 LimitationRevive
+  #SS220 Cult hotfix 17 #3641 start
+  - type: DamageCorruptInteraction
+    damageSound: /Audio/Items/welder.ogg #for now, cause no sound
+    damage:
+      types:
+        Heat: 50
+  #SS220 Cult hotfix 17 #3641 end
 
 - type: entity
   abstract: true

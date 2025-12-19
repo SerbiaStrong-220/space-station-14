@@ -5,8 +5,11 @@ job-name-cc-default = ЦК
 job-name-cc-agent = агент ЦК
 job-name-cc-oficier = офицер ЦК
 job-name-cc-operational-oficier = полевой офицер ЦК
+job-name-cc-ci-agent = агент Контрразведки
+job-name-cc-ci-officer = офицер Контрразведки
 
 job-name-cburn-agent = агент РХБЗ
+job-name-cburn-leader = лидер отряда РХБЗ
 job-name-cc-bs-operative = оперативник "Синий Щит"
 job-name-ert-commander = лидер отряда ОБР
 job-name-ert-chaplain = священник ОБР
@@ -18,3 +21,5 @@ job-name-ussp = СССП
 job-name-dq-operative = оперативник Эскадрона Смерти
 job-name-dq-commander = командир Эскадрона Смерти
 job-name-dq-specialist = специалист Эскадрона Смерти
+
+job-name-migo = Ми-Го

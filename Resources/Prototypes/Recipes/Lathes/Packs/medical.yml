@@ -100,6 +100,7 @@
   - SyringeBluespace
   - LauncherSyringe
   - MiniSyringe
+  - AdvancedMiniSyringe #ss220 advanced mini syringe reaearch
 
 - type: latheRecipePack
   id: MedicalBoards

@@ -359,7 +359,6 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         if (args.Recipe == null)
             return;
 
-
         if (args.Target is { } target)
         {
             var prototypeId = MetaData(target).EntityPrototype;
@@ -385,12 +384,15 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         var newEntity = SpawnAtPosition(replacement.ReplacementProto, xform.Coordinates);
         Transform(newEntity).LocalRotation = rot;
 
-        if (TryComp<ChameleonStructureComponent>(newEntity, out var structureChameleon))
-        {
-            _chameleonStructureSystem.SetPrototype((newEntity, structureChameleon), buildingProto.ID);//make it chameleon if possible
-        }
-
         Del(buildingUid);
+
+        var oldProto = buildingProto.ID;
+
+        if (!TryComp<ChameleonStructureComponent>(newEntity, out var structureChameleon))
+            return;
+
+
+        _chameleonStructureSystem.TrySetPrototype((newEntity, structureChameleon), oldProto);//make it chameleon if possible
     }
 
     /// <summary>

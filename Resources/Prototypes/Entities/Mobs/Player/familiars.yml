@@ -32,6 +32,12 @@
     - PetsNT
   - type: Alerts
   - type: Familiar
+  #SS220 Languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+  #SS220 Languages tweaks end
 
 - type: entity
   name: Cerberus
@@ -95,3 +101,9 @@
       Male: Cerberus
       Female: Cerberus
       Unsexed: Cerberus
+  #SS220 Languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+  #SS220 Languages tweaks end

@@ -3,3 +3,4 @@ research-technology-advanced-thermal-sensors = Термальные сенсор
 research-technology-med-tech = Продвинутые медицинские технологии
 research-technology-portable-reloading-equipment = Портативное заряжающее оборудование
 research-technology-plasma-converter-acceleration = Ускорение преобразователя плазмы
+research-technology-compact-defibrillator = Компактный дефибриллятор

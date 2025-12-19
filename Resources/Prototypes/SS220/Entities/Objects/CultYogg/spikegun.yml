@@ -20,7 +20,7 @@
       - FullAuto
     - type: BasicEntityAmmoProvider
       proto: Spike
-      capacity: 15
+      capacity: 20
     - type: Sprite
       sprite: SS220/Objects/Weapons/Guns/CultYogg/cult_yogg_spikegun.rsi
       layers:
@@ -30,7 +30,7 @@
       size: Ginormous
     - type: Appearance
     - type: RechargeBasicEntityAmmo
-      rechargeCooldown: 2.5
+      rechargeCooldown: 1.5
       rechargeSound: /Audio/Weapons/Guns/MagIn/shotgun_insert.ogg
     - type: GenericVisualizer
       visuals:
@@ -78,8 +78,9 @@
     impactEffect: BulletImpactEffect
     damage:
       types:
-        Piercing: 15
-        Blunt: 7
+        Piercing: 17
+        Blunt: 5
+        Poison: 2 
   - type: TimedDespawn
     lifetime: 0.6
   - type: GatheringProjectile
