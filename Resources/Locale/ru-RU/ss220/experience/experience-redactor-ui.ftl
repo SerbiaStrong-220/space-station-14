@@ -1,21 +1,21 @@
-experience-redactor-verb-text = Редактор опыта
+experience-editor-verb-text = Редактор опыта
 
-experience-view-redactor-title = Редактор опыта
+experience-view-editor-title = Редактор опыта
 
-experience-view-redactor-submit-button-text = Оправить изменения
+experience-view-editor-submit-button-text = Оправить изменения
 
-experience-redactor-knowledge-name = Знания
+experience-editor-knowledge-name = Знания
 
 redactable-skill-tree-skill-level = Уровень:
 redactable-skill-tree-skill-sublevel = Подуровень:
 
-experience-redactor-no-job-name = Работа отсутствует
-experience-redactor-no-antag-name = Не антагонист
+experience-editor-no-job-name = Работа отсутствует
+experience-editor-no-antag-name = Не антагонист
 
-experience-view-redactor-bypass-skill = [bold]Пропускает проверки навыков[/bold]
-experience-view-redactor-no-bypass-skill = Навыки проверяются
+experience-view-editor-bypass-skill = [bold]Пропускает проверки навыков[/bold]
+experience-view-editor-no-bypass-skill = Навыки проверяются
 
-experience-view-redactor-bypass-knowledge = [bold]Пропускает проверки знаний[/bold]
-experience-view-redactor-no-bypass-knowledge = Знания проверяются
+experience-view-editor-bypass-knowledge = [bold]Пропускает проверки знаний[/bold]
+experience-view-editor-no-bypass-knowledge = Знания проверяются
 
-experience-view-redactor-init-level = Навыки изменялись: { $UpperMask }
+experience-view-editor-init-level = Навыки изменялись: { $UpperMask }

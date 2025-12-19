@@ -140,7 +140,7 @@
     # ninja are masters of sneaking around relatively quickly, won't break cloak
     walkModifier: 1.3
     sprintModifier: 1.3
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
       NinjaKnowledge: [ corvax-hidden-desc-NoSlip-ninja ]
@@ -149,7 +149,7 @@
     - [NinjaKnowledge, null]
     - [ScienceKnowledge, null]
     hiddenName: ent-ClothingShoesBaseButcherable
-# Corvax-HiddenDesc-End
+# SS220-hidden-desc-end
   - type: FootstepModifier
     footstepSoundCollection: null
 
@@ -210,7 +210,7 @@
     - type: ChameleonClothing
       slot: [FEET]
       default: ClothingShoesColorBlack
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
     - type: HiddenDescription
       entries:
         SyndicateAgentKnowledge: [ corvax-hidden-desc-Chameleon-syndicate ]
@@ -219,7 +219,7 @@
       - [SyndicateAgentKnowledge, null]
       - [ScienceKnowledge, null]
       hiddenName: null
-# Corvax-HiddenDesc-End
+# SS220-hidden-desc-end
 
 - type: entity
   parent: ClothingShoesChameleon
@@ -229,7 +229,7 @@
   description: Stylish black shoes.
   components:
   - type: NoSlip
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
       SyndicateAgentKnowledge:
@@ -242,7 +242,7 @@
     - [SyndicateAgentKnowledge, null]
     - [ScienceKnowledge, null]
     hiddenName: null
-# Corvax-HiddenDesc-End
+# SS220-hidden-desc-end
 
 - type: entity
   parent: ClothingShoesClown

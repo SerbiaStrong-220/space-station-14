@@ -540,7 +540,7 @@
       seedId: gatfruit
     - type: Sprite
       sprite: Objects/Specific/Hydroponics/gatfruit.rsi
-    # Corvax-HiddenDesc-Start
+    # SS220-hidden-desc-begin
     - type: HiddenDescription
       entries:
         SyndicateAgentKnowledge: [ corvax-hidden-desc-Gatfruit-syndicate ]
@@ -549,7 +549,7 @@
       - [SyndicateAgentKnowledge, null]
       - [BotanyKnowledge, null]
       hiddenName: ent-SeedBase
-    # Corvax-HiddenDesc-End
+    # SS220-hidden-desc-end
 
 - type: entity
   parent: SeedBase

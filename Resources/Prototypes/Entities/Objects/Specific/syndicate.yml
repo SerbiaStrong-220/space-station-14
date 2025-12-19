@@ -22,7 +22,7 @@
   - type: Currency
     price:
       Telecrystal: 1
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
       SyndicateAgentKnowledge: [ corvax-hidden-desc-Telecrystal-syndicate ]
@@ -33,7 +33,7 @@
     - [ScienceKnowledge, null]
     - [CargoKnowledge, null]
     hiddenName: ent-Telecrystal
-# Corvax-HiddenDesc-End
+# SS220-hidden-desc-end
 
 - type: entity
   parent: Telecrystal

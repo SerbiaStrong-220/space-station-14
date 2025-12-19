@@ -1,7 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using System.Linq;
-using System.Numerics;
 using Content.Client.SS220.Experience.UiElements;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Mind;
@@ -17,23 +16,23 @@ using Robust.Shared.Utility;
 namespace Content.Client.SS220.Experience.Ui;
 
 [GenerateTypedNameReferences]
-public sealed partial class ExperienceRedactorWindow : FancyWindow
+public sealed partial class ExperienceEditorWindow : FancyWindow
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
 
-    private readonly ExperienceRedactorSystem _experienceRedactor = default!;
+    private readonly ExperienceEditorSystem _experienceEditor = default!;
     private readonly ExperienceInfoSystem _experienceInfo = default!;
 
-    private static readonly LocId NoJobName = "experience-redactor-no-job-name";
-    private static readonly LocId NoAntagRoleName = "experience-redactor-no-antag-name";
+    private static readonly LocId NoJobName = "experience-editor-no-job-name";
+    private static readonly LocId NoAntagRoleName = "experience-editor-no-antag-name";
 
-    public ExperienceRedactorWindow()
+    public ExperienceEditorWindow()
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
 
-        _experienceRedactor = _entityManager.System<ExperienceRedactorSystem>();
+        _experienceEditor = _entityManager.System<ExperienceEditorSystem>();
         _experienceInfo = _entityManager.System<ExperienceInfoSystem>();
 
         var metadataQuery = _entityManager.GetEntityQuery<MetaDataComponent>();
@@ -48,14 +47,14 @@ public sealed partial class ExperienceRedactorWindow : FancyWindow
             SelectEntity(args.Id);
         };
 
-        foreach (var (key, proto) in _experienceRedactor.CachedIndexedKnowledge)
+        foreach (var (key, proto) in _experienceEditor.CachedIndexedKnowledge)
         {
             KnowledgeOption.AddItem(FormattedMessage.RemoveMarkupPermissive(Loc.GetString(proto.KnowledgeName)), key);
         }
 
         SubmitButton.OnPressed += (_) =>
         {
-            _experienceRedactor.SendChange(new EntityUid(ExperienceEntityOption.SelectedId), GetChangedData());
+            _experienceEditor.SendChange(new EntityUid(ExperienceEntityOption.SelectedId), GetChangedData());
         };
 
         KnowledgeOption.OnItemSelected += OnKnowledgeOptionSelected;
@@ -93,7 +92,7 @@ public sealed partial class ExperienceRedactorWindow : FancyWindow
     {
         var data = new ExperienceData();
 
-        foreach (var control in KnowledgeRedactor.Children)
+        foreach (var control in KnowledgeEditor.Children)
         {
             if (control is not KnowledgeLabel knowledgeLabel)
                 continue;
@@ -101,7 +100,7 @@ public sealed partial class ExperienceRedactorWindow : FancyWindow
             data.Knowledges.Add(knowledgeLabel.KnowledgeProto);
         }
 
-        foreach (var control in SkillRedactor.Children)
+        foreach (var control in SkillEditor.Children)
         {
             if (control is not RedactableSkillTreeShower redactableSkill)
                 continue;
@@ -145,17 +144,17 @@ public sealed partial class ExperienceRedactorWindow : FancyWindow
     private void PopulateExperienceVerification(Entity<ExperienceComponent> entity)
     {
         BypassSkillCheckStatus.SetMessage(_entityManager.HasComponent<BypassSkillCheckComponent>(entity)
-                                            ? Loc.GetString("experience-view-redactor-bypass-skill")
-                                            : Loc.GetString("experience-view-redactor-no-bypass-skill"));
+                                            ? Loc.GetString("experience-view-editor-bypass-skill")
+                                            : Loc.GetString("experience-view-editor-no-bypass-skill"));
 
         BypassKnowledgeStatus.SetMessage(_entityManager.HasComponent<BypassKnowledgeCheckComponent>(entity)
-                                            ? Loc.GetString("experience-view-redactor-bypass-knowledge")
-                                            : Loc.GetString("experience-view-redactor-no-bypass-knowledge"));
+                                            ? Loc.GetString("experience-view-editor-bypass-knowledge")
+                                            : Loc.GetString("experience-view-editor-no-bypass-knowledge"));
     }
 
     private void UpdateKnowledge(ExperienceData data)
     {
-        KnowledgeRedactor.RemoveAllChildren();
+        KnowledgeEditor.RemoveAllChildren();
 
         HighDivider? divider = null;
         foreach (var knowledge in data.Knowledges.OrderBy((x) => x.Id))
@@ -167,20 +166,20 @@ public sealed partial class ExperienceRedactorWindow : FancyWindow
             knowledgeControl.CloseButton.Visible = true;
             knowledgeControl.CloseButton.OnPressed += (_) =>
             {
-                KnowledgeRedactor.RemoveChild(knowledgeControl);
+                KnowledgeEditor.RemoveChild(knowledgeControl);
             };
 
-            KnowledgeRedactor.AddChild(knowledgeControl);
-            KnowledgeRedactor.AddChild(divider);
+            KnowledgeEditor.AddChild(knowledgeControl);
+            KnowledgeEditor.AddChild(divider);
         }
 
         if (divider is not null)
-            KnowledgeRedactor.RemoveChild(divider);
+            KnowledgeEditor.RemoveChild(divider);
     }
 
     private void UpdateSkill(ExperienceData data)
     {
-        SkillRedactor.RemoveAllChildren();
+        SkillEditor.RemoveAllChildren();
 
         HighDivider? divider = null;
         foreach (var (_, skillTreeViews) in data.SkillDictionary.OrderBy(x => x.Key))
@@ -190,23 +189,23 @@ public sealed partial class ExperienceRedactorWindow : FancyWindow
                 var redactableSkillTreeShower = new RedactableSkillTreeShower();
                 redactableSkillTreeShower.SetSkillTreeInfo(skillTreeView.SkillTreeId, skillTreeView.Info);
 
-                SkillRedactor.AddChild(redactableSkillTreeShower);
+                SkillEditor.AddChild(redactableSkillTreeShower);
             }
 
             divider = new()
             {
                 Margin = ExperienceUiStyleDefinitions.DividerThickness,
             };
-            SkillRedactor.AddChild(divider);
+            SkillEditor.AddChild(divider);
         }
 
         if (divider is not null)
-            SkillRedactor.RemoveChild(divider);
+            SkillEditor.RemoveChild(divider);
     }
 
     private void OnKnowledgeOptionSelected(OptionButton.ItemSelectedEventArgs args)
     {
-        if (!_experienceRedactor.CachedIndexedKnowledge.TryGetValue(args.Id, out var knowledge))
+        if (!_experienceEditor.CachedIndexedKnowledge.TryGetValue(args.Id, out var knowledge))
             return;
 
         var divider = new HighDivider();
@@ -216,10 +215,10 @@ public sealed partial class ExperienceRedactorWindow : FancyWindow
         knowledgeControl.CloseButton.Visible = true;
         knowledgeControl.CloseButton.OnPressed += (_) =>
         {
-            KnowledgeRedactor.RemoveChild(knowledgeControl);
+            KnowledgeEditor.RemoveChild(knowledgeControl);
         };
 
-        KnowledgeRedactor.AddChild(divider);
-        KnowledgeRedactor.AddChild(knowledgeControl);
+        KnowledgeEditor.AddChild(divider);
+        KnowledgeEditor.AddChild(knowledgeControl);
     }
 }

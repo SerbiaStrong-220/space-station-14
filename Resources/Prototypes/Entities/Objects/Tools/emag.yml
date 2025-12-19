@@ -12,7 +12,7 @@
   - type: Item
     sprite: Objects/Tools/emag.rsi
     storedRotation: -90
-  # Corvax-HiddenDesc-Start
+  # SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
       SyndicateAgentKnowledge: [ corvax-hidden-desc-Emag-syndicate ]
@@ -23,7 +23,7 @@
     - [ScienceKnowledge, null]
     - [EngineerKnowledge, null]
     hiddenName: ent-IDCardStandard
-  # Corvax-HiddenDesc-End
+  # SS220-hidden-desc-end
 
 - type: entity
   parent: EmagUnlimited

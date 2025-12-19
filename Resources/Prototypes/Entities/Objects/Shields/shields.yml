@@ -533,7 +533,7 @@
                   max: 1
     - type: StaticPrice
       price: 350
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
     - type: HiddenDescription
       entries:
         SyndicateAgentKnowledge: [ corvax-hidden-desc-EnergyShield-syndicate ]
@@ -544,7 +544,7 @@
       - [SecurityKnowledge, null]
       - [CargoKnowledge, null]
       hiddenName: ent-EnergyShield
-# Corvax-HiddenDesc-End
+# SS220-hidden-desc-end
 
 - type: entity
   name: broken energy shield
@@ -559,7 +559,7 @@
       sprite: Objects/Weapons/Melee/e_shield.rsi
       size: Small
       heldPrefix: eshield
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
     - type: HiddenDescription
       entries:
         SyndicateAgentKnowledge: [ corvax-hidden-desc-EnergyShield-syndicate ]
@@ -570,7 +570,7 @@
       - [SecurityKnowledge, null]
       - [CargoKnowledge, null]
       hiddenName: ent-BrokenEnergyShield
-# Corvax-HiddenDesc-End
+# SS220-hidden-desc-end
 
 - type: entity
   name: telescopic shield

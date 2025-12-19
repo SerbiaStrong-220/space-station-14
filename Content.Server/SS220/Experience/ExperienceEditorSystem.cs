@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace Content.Server.SS220.Experience;
 
-public sealed class ExperienceRedactorSystem : EntitySystem
+public sealed class ExperienceEditorSystem : EntitySystem
 {
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly IConGroupController _groupController = default!;
@@ -26,7 +26,7 @@ public sealed class ExperienceRedactorSystem : EntitySystem
 
     private void OnChangeAdminRequest(ChangeEntityExperienceAdminRequest ev, EntitySessionEventArgs args)
     {
-        if (!_groupController.CanCommand(args.SenderSession, "experienceredactor"))
+        if (!_groupController.CanCommand(args.SenderSession, "expeditor"))
             return;
 
         var targetEntity = GetEntity(ev.Target);

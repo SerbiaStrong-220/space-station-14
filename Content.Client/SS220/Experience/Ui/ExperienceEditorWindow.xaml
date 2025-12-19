@@ -6,7 +6,7 @@
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
     xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     xmlns:styleDef="clr-namespace:Content.Client.SS220.Experience.Ui"
-    Title="{Loc 'experience-view-redactor-title'}"
+    Title="{Loc 'experience-view-editor-title'}"
     Resizable="True"
     MinSize="240 240"
     SetSize="720 480"
@@ -30,17 +30,17 @@
                     <RichTextLabel Name="BypassKnowledgeStatus" Text="bypass knowledge holder" Margin="5 0"/>
                 </BoxContainer>
                 <ScrollContainer HScrollEnabled="False" VerticalExpand="True" HorizontalExpand="True" Margin="0 5">
-                    <BoxContainer Name="SkillRedactor" VerticalExpand="True" HorizontalExpand="True" Orientation="Vertical" Margin="0 5">
+                    <BoxContainer Name="SkillEditor" VerticalExpand="True" HorizontalExpand="True" Orientation="Vertical" Margin="0 5">
                         <!-- Added by code -->
                     </BoxContainer>
                 </ScrollContainer>
                 <BoxContainer Name="KnowledgeInfoContainer" HorizontalAlignment="Left" VerticalExpand="True" HorizontalExpand="True" Orientation="Vertical" Margin="0 5">
                     <BoxContainer Orientation="Horizontal">
-                        <Label Text="{Loc 'experience-redactor-knowledge-name'}"/>
+                        <Label Text="{Loc 'experience-editor-knowledge-name'}"/>
                         <OptionButton Name="KnowledgeOption"/>
                     </BoxContainer>
                     <ScrollContainer HScrollEnabled="False" VerticalExpand="True" HorizontalExpand="True" Margin="10 5">
-                        <BoxContainer Name="KnowledgeRedactor" VerticalExpand="True" HorizontalExpand="True"
+                        <BoxContainer Name="KnowledgeEditor" VerticalExpand="True" HorizontalExpand="True"
                             HorizontalAlignment="Left" Orientation="Vertical" Margin="0 5">
                             <!-- Added by code -->
                         </BoxContainer>
@@ -48,7 +48,7 @@
                 </BoxContainer>
             </BoxContainer>
             <BoxContainer Name="SubmitButtonContainer" Orientation="Horizontal">
-                <Button Name="SubmitButton" Text="{Loc 'experience-view-redactor-submit-button-text'}"/>
+                <Button Name="SubmitButton" Text="{Loc 'experience-view-editor-submit-button-text'}"/>
             </BoxContainer>
         </BoxContainer>
     </Control>

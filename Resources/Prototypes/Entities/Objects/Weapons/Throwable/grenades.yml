@@ -473,7 +473,7 @@
   - type: TimerTriggerVisuals
     primingSound:
       path: /Audio/Effects/hallelujah.ogg
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
       SyndicateAgentKnowledge: [ corvax-hidden-desc-HolyHandGrenade-syndicate ]
@@ -482,7 +482,7 @@
     - [SyndicateAgentKnowledge, null]
     - [ScienceKnowledge, null]
     hiddenName: ent-HolyHandGrenade
-# Corvax-HiddenDesc-End
+# SS220-hidden-desc-end
   - type: StaticPrice
     price: 10000
 

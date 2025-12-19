@@ -7,11 +7,11 @@ using Content.Shared.SS220.Experience;
 namespace Content.Server.Administration.Commands;
 
 [AdminCommand(AdminFlags.Fun)]
-public sealed class ExperienceRedactorCommand : LocalizedCommands
+public sealed class ExperienceEditorCommand : LocalizedCommands
 {
     [Dependency] private readonly IEntityNetworkManager _entityNetwork = default!;
 
-    public override string Command => "experienceredactor";
+    public override string Command => "expeditor";
 
     public override async void Execute(IConsoleShell shell, string argStr, string[] args)
     {
@@ -24,7 +24,7 @@ public sealed class ExperienceRedactorCommand : LocalizedCommands
         switch (args.Length)
         {
             case 0:
-                _entityNetwork.SendSystemNetworkMessage(new OpenExperienceRedactorRequest(), player.Channel);
+                _entityNetwork.SendSystemNetworkMessage(new OpenExperienceEditorRequest(), player.Channel);
                 break;
 
             case 1:
@@ -36,12 +36,11 @@ public sealed class ExperienceRedactorCommand : LocalizedCommands
                 }
 
                 var nent = new NetEntity(entInt);
-                _entityNetwork.SendSystemNetworkMessage(new OpenExperienceRedactorRequest(nent), player.Channel);
+                _entityNetwork.SendSystemNetworkMessage(new OpenExperienceEditorRequest(nent), player.Channel);
                 break;
 
             default:
-                shell.WriteLine(Loc.GetString("cmd-experience-redactor-invalid-arguments"));
-                // TODO: "cmd-{Command}-help"
+                shell.WriteLine(Loc.GetString("cmd-expeditor-invalid-arguments"));
                 shell.WriteLine(Help);
                 return;
         }

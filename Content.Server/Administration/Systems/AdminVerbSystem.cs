@@ -570,14 +570,14 @@ namespace Content.Server.Administration.Systems
             // SS220-add-experience-begin
             if (HasComp<ExperienceComponent>(args.Target))
             {
-                if (_groupController.CanCommand(player, "experienceredactor"))
+                if (_groupController.CanCommand(player, "expeditor"))
                 {
                     Verb verb = new()
                     {
-                        Text = Loc.GetString("experience-redactor-verb-text"),
+                        Text = Loc.GetString("experience-editor-verb-text"),
                         Category = VerbCategory.Debug,
                         Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/students-cap.svg.192dpi.png")),
-                        Act = () => RaiseNetworkEvent(new OpenExperienceRedactorRequest(GetNetEntity(args.Target)), player),
+                        Act = () => RaiseNetworkEvent(new OpenExperienceEditorRequest(GetNetEntity(args.Target)), player),
                         Impact = LogImpact.Medium
                     };
                     args.Verbs.Add(verb);

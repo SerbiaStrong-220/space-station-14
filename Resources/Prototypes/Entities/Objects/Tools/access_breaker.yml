@@ -13,7 +13,7 @@
     state: icon
   - type: Item
     sprite: Objects/Tools/access_breaker.rsi
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
       SyndicateAgentKnowledge: [ corvax-hidden-desc-access-breaker-syndicate ]
@@ -24,7 +24,7 @@
     - [ScienceKnowledge, null]
     - [EngineerKnowledge, null]
     hiddenName: ent-AccessBreakerUnlimited
-# Corvax-HiddenDesc-End
+# SS220-hidden-desc-end
 
 - type: entity
   parent: AccessBreakerUnlimited

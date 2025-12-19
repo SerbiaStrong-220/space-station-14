@@ -17,7 +17,7 @@
     - type: Fiber
       fiberMaterial: fibers-chameleon
     - type: FingerprintMask
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
     - type: HiddenDescription
       entries:
         SyndicateAgentKnowledge: [ corvax-hidden-desc-Chameleon-syndicate ]
@@ -25,7 +25,7 @@
       nameEntries:
       - [SyndicateAgentKnowledge, null]
       hiddenName: null
-# Corvax-HiddenDesc-End
+# SS220-hidden-desc-end
 
 - type: entity
   parent: ClothingHandsChameleon
@@ -35,7 +35,7 @@
   - type: Thieving
     stripTimeReduction: 2
     stealthy: true
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
       SyndicateAgentKnowledge:
@@ -50,4 +50,4 @@
     - [ThiefKnowledge, null]
     - [ScienceKnowledge, null]
     hiddenName: null
-# Corvax-HiddenDesc-End
+# SS220-hidden-desc-end

@@ -128,7 +128,7 @@
     solution: melee
   - type: SolutionTransfer
     maxTransferAmount: 7
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
       SyndicateAgentKnowledge: [ corvax-hidden-desc-HypoDart-syndicate ]
@@ -137,7 +137,7 @@
     - [SyndicateAgentKnowledge, null]
     - [ScienceKnowledge, null]
     hiddenName: ent-Dart
-# Corvax-HiddenDesc-End
+# SS220-hidden-desc-end
 
 - type: entity
   name: dartboard

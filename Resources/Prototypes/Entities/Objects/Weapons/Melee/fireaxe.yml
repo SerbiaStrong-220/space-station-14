@@ -81,7 +81,7 @@
     quickEquip: false
     slots:
     - back
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
       SyndicateAgentKnowledge: [ corvax-hidden-desc-FireAxeFlaming-syndicate ]
@@ -90,4 +90,4 @@
     - [SyndicateAgentKnowledge, null]
     - [ScienceKnowledge, null]
     hiddenName: ent-FireAxe
-# Corvax-HiddenDesc-End
+# SS220-hidden-desc-end

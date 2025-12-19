@@ -1584,7 +1584,7 @@
         type: AgentIDCardBoundUserInterface
       enum.ChameleonUiKey.Key:
         type: ChameleonBoundUserInterface
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
       SyndicateAgentKnowledge: [ corvax-hidden-desc-AgentIDCard-syndicate ]
@@ -1593,7 +1593,7 @@
     - [SyndicateAgentKnowledge, null]
     - [ScienceKnowledge, null]
     hiddenName: null
-# Corvax-HiddenDesc-End
+# SS220-hidden-desc-end
 
 - type: entity
   name: passenger ID card

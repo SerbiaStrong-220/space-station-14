@@ -72,7 +72,7 @@
   - type: Reflect
   - type: IgnitionSource
     temperature: 700
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
       NinjaKnowledge: [ corvax-hidden-desc-EnergySword-syndicate ]
@@ -83,7 +83,7 @@
     - [SecurityKnowledge, null]
     - [CargoKnowledge, null]
     hiddenName: ent-EnergySword
-# Corvax-HiddenDesc-End
+# SS220-hidden-desc-end
 
 - type: entity
   name: energy sword
@@ -266,7 +266,7 @@
   - type: Tag
     tags:
     - Write
-  # Corvax-HiddenDesc-Start
+  # SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
       SyndicateAgentKnowledge: [ corvax-hidden-desc-EnergyDagger-syndicate ]
@@ -275,7 +275,7 @@
     - [SyndicateAgentKnowledge, null]
     - [ScienceKnowledge, null]
     hiddenName: ent-EnergyDagger
-  # Corvax-HiddenDesc-End
+  # SS220-hidden-desc-end
 
 - type: entity
   parent: [BaseItem]
@@ -320,7 +320,7 @@
         map: [ "blade" ]
   - type: Item
     sprite: Objects/Weapons/Melee/e_cutlass.rsi
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
       SecurityKnowledge: [ corvax-hidden-desc-EnergyCutlass-security ]
@@ -329,7 +329,7 @@
     - [SecurityKnowledge, null]
     - [CargoKnowledge, null]
     hiddenName: ent-EnergyCutlass
-# Corvax-HiddenDesc-End
+# SS220-hidden-desc-end
 
 - type: entity
   name: double-bladed energy sword

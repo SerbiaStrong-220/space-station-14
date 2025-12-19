@@ -91,7 +91,7 @@
     - type: StealthOnMove
       passiveVisibilityRate: -1
       movementVisibilityRate: 0
-    # Corvax-HiddenDesc-Start
+    # SS220-hidden-desc-begin
     - type: HiddenDescription
       entries:
         SyndicateAgentKnowledge: [ corvax-hidden-desc-StealthBox-syndicate ]
@@ -100,7 +100,7 @@
       - [SyndicateAgentKnowledge, null]
       - [ScienceKnowledge, null]
       hiddenName: ent-BaseBigBox
-    # Corvax-HiddenDesc-End
+    # SS220-hidden-desc-end
 
 - type: entity
   id: BigBox

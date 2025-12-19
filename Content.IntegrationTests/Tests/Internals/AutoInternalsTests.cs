@@ -74,7 +74,7 @@ public sealed class AutoInternalsTests
   id: TestInternalsDummy
   playTimeTracker: PlayTimeInternalsDummy
   startingGear: InternalsDummyGear
-  experienceDefinition: NoExperience
+  experienceDefinition: NoExperience # SS220-experience-update
 
 - type: entity
   id: TestInternalsDummyEntity

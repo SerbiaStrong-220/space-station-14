@@ -57,7 +57,7 @@
       blacklist:
         tags:
         - GhostOnlyWarp
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
     - type: HiddenDescription
       entries:
         SyndicateAgentKnowledge: [ corvax-hidden-desc-PowerSink-syndicate ]
@@ -68,6 +68,6 @@
       - [EngineerKnowledge, null]
       - [ScienceKnowledge, null]
       hiddenName: ent-PowerSink
-# Corvax-HiddenDesc-End
+# SS220-hidden-desc-end
     - type: StaticPrice
       price: 3000

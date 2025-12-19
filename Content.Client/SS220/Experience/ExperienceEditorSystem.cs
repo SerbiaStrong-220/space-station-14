@@ -8,21 +8,21 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.Experience;
 
-public sealed class ExperienceRedactorSystem : EntitySystem
+public sealed class ExperienceEditorSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IUserInterfaceManager _userInterface = default!;
 
     public Dictionary<int, KnowledgePrototype> CachedIndexedKnowledge { private set; get; } = new();
 
-    private ExperienceRedactorWindow? _window;
+    private ExperienceEditorWindow? _window;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypeReload);
-        SubscribeNetworkEvent<OpenExperienceRedactorRequest>(OnRedactorRequest);
+        SubscribeNetworkEvent<OpenExperienceEditorRequest>(OnEditorRequest);
 
         ReloadCachedIndexedKnowledge();
     }
@@ -35,10 +35,10 @@ public sealed class ExperienceRedactorSystem : EntitySystem
         ReloadCachedIndexedKnowledge();
     }
 
-    private void OnRedactorRequest(OpenExperienceRedactorRequest args)
+    private void OnEditorRequest(OpenExperienceEditorRequest args)
     {
         _window?.Close();
-        _window = _userInterface.CreateWindow<ExperienceRedactorWindow>();
+        _window = _userInterface.CreateWindow<ExperienceEditorWindow>();
         _window?.OpenCentered();
 
         if (args.Target is null)

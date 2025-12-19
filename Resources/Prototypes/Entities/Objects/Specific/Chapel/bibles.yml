@@ -106,7 +106,7 @@
     sprite: Objects/Specific/Chapel/necronomicon.rsi
   - type: Item
     sprite: Objects/Specific/Chapel/necronomicon.rsi
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
       SyndicateAgentKnowledge: [ corvax-hidden-desc-BibleNecronomicon-syndicate ]
@@ -115,7 +115,7 @@
     - [SyndicateAgentKnowledge, null]
     - [SupernaturalBookKnowledge, null]
     hiddenName: ent-Bible
-# Corvax-HiddenDesc-End
+# SS220-hidden-desc-end
 
 - type: entity
   parent: BaseAction

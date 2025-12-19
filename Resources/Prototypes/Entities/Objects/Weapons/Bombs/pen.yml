@@ -23,7 +23,7 @@
   - type: DeviceLinkSink # This should be changed into separate behavior where triggering via signal makes beep, while triggering manually is quiet.
     ports:
       - Trigger
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
       SyndicateAgentKnowledge: [ corvax-hidden-desc-PenExploding-syndicate ]
@@ -32,7 +32,7 @@
     - [SyndicateAgentKnowledge, null]
     - [ScienceKnowledge, null]
     hiddenName: ent-PenEmbeddable
-# Corvax-HiddenDesc-End
+# SS220-hidden-desc-end
   - type: EmitSoundOnUse
     handle: false # don't want the sound to stop the explosion from triggering
 

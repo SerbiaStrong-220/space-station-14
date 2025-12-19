@@ -46,7 +46,7 @@
         base:
           Primed: { state: primed }
           Unprimed: { state: icon }
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
       NinjaKnowledge: [ corvax-hidden-desc-SpiderCharge-ninja ]
@@ -55,4 +55,4 @@
     - [NinjaKnowledge, null]
     - [ScienceKnowledge, null]
     hiddenName: ent-SpiderCharge
-# Corvax-HiddenDesc-End
+# SS220-hidden-desc-end

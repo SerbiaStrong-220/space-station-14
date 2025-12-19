@@ -1949,7 +1949,7 @@
   - type: Tag
     tags:
     - Fruit # It's in the name
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
       SyndicateAgentKnowledge: [ corvax-hidden-desc-Gatfruit-syndicate ]
@@ -1958,7 +1958,7 @@
     - [SyndicateAgentKnowledge, null]
     - [BotanyKnowledge, null]
     hiddenName: ent-FoodGatfruit
-# Corvax-HiddenDesc-End
+# SS220-hidden-desc-end
   - type: FoodSequenceElement
     entries:
       Taco: Gatfruit

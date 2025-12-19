@@ -236,14 +236,14 @@
   - type: ToggleClothing
     action: ActionToggleNinjaGloves
     disableOnUnequip: true
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
       NinjaKnowledge: [ corvax-hidden-desc-ThievingGloves-thief ]
     nameEntries:
     - [NinjaKnowledge, null]
     hiddenName: ent-ClothingHandsBase
-# Corvax-HiddenDesc-End
+# SS220-hidden-desc-end
   - type: NinjaGloves
     abilities:
     - components:
@@ -390,7 +390,7 @@
   - type: Thieving
     stripTimeReduction: 1.5
     stealthy: true
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
       SyndicateAgentKnowledge: [ corvax-hidden-desc-ThievingGloves-syndicate ]
@@ -399,7 +399,7 @@
     - [SyndicateAgentKnowledge, null]
     - [ThiefKnowledge, null]
     hiddenName: ent-ClothingHandsGlovesColorBlack
-# Corvax-HiddenDesc-End
+# SS220-hidden-desc-end
 
 - type: entity
   parent: ClothingHandsGlovesColorWhite

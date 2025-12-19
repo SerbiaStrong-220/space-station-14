@@ -206,7 +206,7 @@
   - type: Tag
     tags: # ignore "WhitelistChameleon" tag
     - WetFloorSign
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
       SyndicateAgentKnowledge: [ corvax-hidden-desc-WetFloorSignMineExplosive-syndicate ]
@@ -215,7 +215,7 @@
     - [SyndicateAgentKnowledge, null]
     - [ScienceKnowledge, null]
     hiddenName: ent-WetFloorSign
-# Corvax-HiddenDesc-End
+# SS220-hidden-desc-end
 
 - type: entity
   name: plunger

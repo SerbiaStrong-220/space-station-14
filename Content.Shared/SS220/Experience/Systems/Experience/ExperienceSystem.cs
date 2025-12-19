@@ -78,7 +78,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (entity.Comp.EarnedSkillSublevel.TryGetValue(skillTree, out var earnedSublevel))
             ev.Info.Sublevel += earnedSublevel;
         else
-            Log.Error($"EarnedSkillSublevel of {ToPrettyString(entity)} doesn't contain {nameof(SkillTreePrototype)} with id {skillTree}!");
+            Log.Error($"{nameof(ExperienceComponent.EarnedSkillSublevel)} of {ToPrettyString(entity)} doesn't contain {nameof(SkillTreePrototype)} with id {skillTree}!");
 
         ResolveInitLeveling(entity, ev.Info, ev.SkillTree);
 

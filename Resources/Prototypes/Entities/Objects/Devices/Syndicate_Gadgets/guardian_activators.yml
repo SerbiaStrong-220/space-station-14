@@ -9,7 +9,7 @@
     state: combat_hypo
   - type: GuardianCreator
     guardianProto: MobHoloparasiteGuardian
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
       SyndicateAgentKnowledge: [ corvax-hidden-desc-HoloparasiteInjector-syndicate ]
@@ -20,7 +20,7 @@
     - [ScienceKnowledge, null]
     - [MedicalKnowledge, ent-HoloparasiteInjector]
     hiddenName: ent-HoloparasiteInjector
-# Corvax-HiddenDesc-End
+# SS220-hidden-desc-end
 
 - type: entity
   name: holoclown injector
@@ -30,7 +30,7 @@
   components:
   - type: GuardianCreator
     guardianProto: MobHoloClownGuardian
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
       SyndicateAgentKnowledge: [ corvax-hidden-desc-HoloClownInjector-syndicate ]
@@ -41,7 +41,7 @@
     - [ScienceKnowledge, null]
     - [MedicalKnowledge, ent-HoloClownInjector]
     hiddenName: ent-HoloClownInjector
-# Corvax-HiddenDesc-End
+# SS220-hidden-desc-end
 
 - type: entity
   name: magical lamp

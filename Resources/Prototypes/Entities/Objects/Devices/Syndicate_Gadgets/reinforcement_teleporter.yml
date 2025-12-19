@@ -34,7 +34,7 @@
   - type: GhostRoleMobSpawner
     prototype: MobHumanSyndicateAgentSpy
     selectablePrototypes: ["SyndicateAgentMedic", "SyndicateAgentSpy", "SyndicateAgentThief"]
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
       SyndicateAgentKnowledge: [ corvax-hidden-desc-ReinforcementRadioSyndicate-syndicate ]
@@ -45,7 +45,7 @@
     - [EngineerKnowledge, null]
     - [ScienceKnowledge, null]
     hiddenName: ent-ReinforcementRadio
-# Corvax-HiddenDesc-End
+# SS220-hidden-desc-end
 
 - type: entity
   parent: ReinforcementRadio
@@ -84,7 +84,7 @@
   - type: GhostRoleMobSpawner
     prototype: MobMonkeySyndicateAgent
     selectablePrototypes: ["SyndicateMonkey", "SyndicateKobold"]
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
       SyndicateAgentKnowledge: [ corvax-hidden-desc-ReinforcementRadioSyndicateMonkey-syndicate ]
@@ -95,7 +95,7 @@
     - [EngineerKnowledge, null]
     - [ScienceKnowledge, null]
     hiddenName: ent-ReinforcementRadio
-# Corvax-HiddenDesc-End
+# SS220-hidden-desc-end
 
 
 - type: entity
@@ -148,7 +148,7 @@
       job: SyndicateBorg
     - type: GhostRoleMobSpawner
       prototype: PlayerBorgSyndicateAssaultBattery
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
     - type: HiddenDescription
       entries:
         SyndicateAgentKnowledge: [ corvax-hidden-desc-ReinforcementRadioSyndicateCyborgAssault-syndicate ]
@@ -159,4 +159,4 @@
       - [EngineerKnowledge, null]
       - [ScienceKnowledge, null]
       hiddenName: ent-ReinforcementRadio
-# Corvax-HiddenDesc-End
+# SS220-hidden-desc-end

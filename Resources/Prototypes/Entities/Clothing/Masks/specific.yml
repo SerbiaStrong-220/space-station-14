@@ -19,7 +19,7 @@
     - type: HideLayerClothing
       slots:
       - Snout
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
     - type: HiddenDescription
       entries:
         SyndicateAgentKnowledge: [ corvax-hidden-desc-Chameleon-syndicate ]
@@ -28,7 +28,7 @@
       - [SyndicateAgentKnowledge, null]
       - [ScienceKnowledge, null]
       hiddenName: null
-# Corvax-HiddenDesc-End
+# SS220-hidden-desc-end
 
 - type: entity
   parent: ClothingMaskGasChameleon
@@ -45,7 +45,7 @@
     - type: HideLayerClothing
       slots:
       - Snout
-    # Corvax-HiddenDesc-Start
+    # SS220-hidden-desc-begin
     - type: HiddenDescription
       entries:
         SyndicateAgentKnowledge:
@@ -58,7 +58,7 @@
       - [SyndicateAgentKnowledge, null]
       - [ScienceKnowledge, null]
       hiddenName: null
-    # Corvax-HiddenDesc-End
+    # SS220-hidden-desc-end
     - type: UserInterface
       interfaces:
         enum.ChameleonUiKey.Key:

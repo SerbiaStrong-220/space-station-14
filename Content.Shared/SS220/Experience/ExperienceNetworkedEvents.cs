@@ -7,10 +7,10 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.SS220.Experience;
 
 /// <summary>
-/// Network event, send from client to server, prevent unnecessary using of redactor ui
+/// Network event, send from client to server, prevent unnecessary using of editor ui
 /// </summary>
 [Serializable, NetSerializable]
-public sealed class OpenExperienceRedactorRequest(NetEntity? target = null) : EntityEventArgs
+public sealed class OpenExperienceEditorRequest(NetEntity? target = null) : EntityEventArgs
 {
     public NetEntity? Target = target;
 }
