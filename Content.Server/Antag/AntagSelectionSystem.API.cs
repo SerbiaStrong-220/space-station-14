@@ -103,7 +103,7 @@ public sealed partial class AntagSelectionSystem
         // make sure we don't double-count the current selection
         countOffset -= Math.Clamp(poolSize / def.PlayerRatio, def.Min, def.Max) * def.PlayerRatio;
 
-        return Math.Clamp((poolSize - countOffset + (int)(def.PlayerRatio * def.PlayerPerAntagAdjustmentMultiplayer)) / def.PlayerRatio, def.Min, def.Max); // SS220-give-more-flex-to-antag-selection
+        return Math.Clamp((poolSize - countOffset + (int)(def.PlayerRatio * def.AddPlayerCountPerRatio)) / def.PlayerRatio, def.Min, def.Max); // SS220-give-more-flex-to-antag-selection
     }
 
     /// <summary>

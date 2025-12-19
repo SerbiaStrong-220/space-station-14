@@ -123,10 +123,11 @@ public partial struct AntagSelectionDefinition()
 
     // SS220-add-adjustment-for-antag-count-begin
     /// <summary>
-    /// This field adds that value multiplied by PlayerRation to give flat change in player count based on playerRatio
+    /// On antag number computing that value is being added to player count multiplied by PlayerRation <br/>
+    /// Can be used to fine tune antag count without changing player ratio
     /// </summary>
     [DataField]
-    public float PlayerPerAntagAdjustmentMultiplayer = 0f;
+    public float AddPlayerCountPerRatio = 0f;
     // SS220-add-adjustment-for-antag-count-begin
 
     /// <summary>
