@@ -8,6 +8,7 @@
       department: Medical
       time: 15h # SS220-RoleTime 2
   startingGear: ParamedicGear
+  experienceDefinition: ParamedicRoleExperience # SS220-experience
   icon: "JobIconParamedic"
   supervisors: job-supervisors-cmo
   access:
@@ -16,12 +17,6 @@
   - Paramedic
   extendedAccess:
   - Chemistry
-  #SS220 LimitationRevive - start
-  special:
-  - !type:AddComponentSpecial
-    components:
-    - type: DefibrillatorSkill
-  #SS220 LimitationRevive - end
 
 - type: startingGear
   id: ParamedicGear
