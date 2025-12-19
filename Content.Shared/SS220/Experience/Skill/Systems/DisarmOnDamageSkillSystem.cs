@@ -40,9 +40,6 @@ public sealed class DisarmOnDamageSkillSystem : SkillEntitySystem
         if (args.DamageDelta is null)
             return;
 
-        if (DamageSpecifier.GetPositive(args.DamageDelta).GetTotal() < entity.Comp.DamageThreshold)
-            return;
-
         if (!ResolveExperienceEntityFromSkillEntity(entity, out var experienceEntity))
             return;
 
@@ -50,6 +47,9 @@ public sealed class DisarmOnDamageSkillSystem : SkillEntitySystem
             return;
 
         TryChangeStudyingProgress(entity, _affectedSkillTree, DamageSpecifier.GetPositive(args.DamageDelta).GetTotal() / _damageToExperience);
+
+        if (DamageSpecifier.GetPositive(args.DamageDelta).GetTotal() < entity.Comp.DamageThreshold)
+            return;
 
         if (!GetPredictedRandom(new() { GetNetEntity(entity).Id, args.DamageDelta.GetTotal().Int() }).Prob(entity.Comp.DisarmChance))
             return;
