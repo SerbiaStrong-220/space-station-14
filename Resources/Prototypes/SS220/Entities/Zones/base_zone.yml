@@ -10,3 +10,7 @@
   parent: ZoneBase
   id: ZoneDefault
   name: default zone
+  components:
+  - type: Zone
+    relationUpdateComponents:
+      - type: MobState

@@ -52,6 +52,28 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         }
     }
 
+    protected override void OnZoneMapInit(Entity<ZoneComponent> entity, ref MapInitEvent args)
+    {
+        foreach (var reg in entity.Comp.RelationUpdateComponents.Values)
+        {
+            var compType = reg.Component.GetType();
+            RegisterRelationUpdate(compType, entity.Comp);
+        }
+
+        base.OnZoneMapInit(entity, ref args);
+    }
+
+    protected override void OnZoneShutdown(Entity<ZoneComponent> entity, ref ComponentShutdown args)
+    {
+        foreach (var reg in entity.Comp.RelationUpdateComponents.Values)
+        {
+            var compType = reg.Component.GetType();
+            UnregisterRelationUpdate(compType, entity.Comp);
+        }
+
+        base.OnZoneShutdown(entity, ref args);
+    }
+
     private void OnCreateZoneRequest(CreateZoneRequestMessage msg, EntitySessionEventArgs args)
     {
         if (!_admin.HasAdminFlag(args.SenderSession, AdminFlags.Mapping))
@@ -76,10 +98,10 @@ public sealed partial class ZonesSystem : SharedZonesSystem
             TryChangeZoneProto(ref zone, newProtoId);
 
         if (msg.Parent is { } parent)
-            SetZoneParent(zone, GetEntity(parent), recalculate: false, updateEntitiesInZone: false);
+            SetZoneParent(zone, GetEntity(parent), recalculate: false);
 
         if (msg.Area is { } area)
-            SetZoneArea(zone, area, recalculate: false, updateEntitiesInZone: false);
+            SetZoneArea(zone, area, recalculate: false);
 
         if (msg.Name is { } name)
             SetZoneName(zone, name);
@@ -134,8 +156,8 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         var xform = Transform(uid);
         xform.GridTraversal = false;
 
-        SetZoneParent(zone, parent, recalculate: false, updateEntitiesInZone: false);
-        SetZoneArea(zone, area, recalculate: false, updateEntitiesInZone: false);
+        SetZoneParent(zone, parent, recalculate: false);
+        SetZoneArea(zone, area, recalculate: false);
         SetZoneName(zone, name);
 
         if (color != null)
@@ -159,15 +181,12 @@ public sealed partial class ZonesSystem : SharedZonesSystem
     /// <summary>
     /// Recalculates the area boxes of the zone, removing their intersections and, if possible, merging them
     /// </summary>
-    public void RecalculateZoneArea(Entity<ZoneComponent> ent, bool updateEntitiesInZone = true)
+    public void RecalculateZoneArea(Entity<ZoneComponent> ent)
     {
         var area = ent.Comp.Area.ToList();
 
         var parent = Transform(ent).ParentUid;
         ent.Comp.Area = RecalculateArea(area, parent);
-
-        if (updateEntitiesInZone)
-            UpdateEntitiesInZone(ent);
 
         Dirty(ent);
     }
@@ -193,7 +212,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         return true;
     }
 
-    public bool SetZoneParent(Entity<ZoneComponent> ent, EntityUid parent, bool recalculate = true, bool updateEntitiesInZone = true)
+    public bool SetZoneParent(Entity<ZoneComponent> ent, EntityUid parent, bool recalculate = true)
     {
         if (!IsValidParent(parent))
             return false;
@@ -201,24 +220,18 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         _transform.SetCoordinates((ent, Transform(ent), MetaData(ent)), new EntityCoordinates(parent, Vector2.Zero), Angle.Zero);
 
         if (recalculate)
-            RecalculateZoneArea(ent, updateEntitiesInZone: false);
-
-        if (updateEntitiesInZone)
-            UpdateEntitiesInZone(ent);
+            RecalculateZoneArea(ent);
 
         Dirty(ent);
         return true;
     }
 
-    public void SetZoneArea(Entity<ZoneComponent> ent, List<Box2> area, bool recalculate = true, bool updateEntitiesInZone = true)
+    public void SetZoneArea(Entity<ZoneComponent> ent, List<Box2> area, bool recalculate = true)
     {
         ent.Comp.Area = area;
 
         if (recalculate)
-            RecalculateZoneArea(ent, updateEntitiesInZone: false);
-
-        if (updateEntitiesInZone)
-            UpdateEntitiesInZone(ent);
+            RecalculateZoneArea(ent);
 
         Dirty(ent);
     }
@@ -233,6 +246,36 @@ public sealed partial class ZonesSystem : SharedZonesSystem
     {
         ent.Comp.Color = color;
         Dirty(ent);
+    }
+
+    public override bool RegisterRelationUpdate(EntityUid uid, object registrator)
+    {
+        return RelationUpdateData.RegisterEntity(uid, registrator);
+    }
+
+    public override bool RegisterRelationUpdate(Type componentType, object registrator)
+    {
+        return RelationUpdateData.RegisterComponent(componentType, registrator);
+    }
+
+    public override bool UnregisterRelationUpdate(EntityUid uid, object registrator)
+    {
+        return RelationUpdateData.UnregisterEntity(uid, registrator);
+    }
+
+    public override bool UnregisterRelationUpdate(Type componentType, object registrator)
+    {
+        return RelationUpdateData.UnregisterComponent(componentType, registrator);
+    }
+
+    public override bool UnregisterRelationUpdateForced(EntityUid uid)
+    {
+        return RelationUpdateData.UnregisterEntityForced(uid);
+    }
+
+    public override bool UnregisterRelationUpdateForced(Type componentType)
+    {
+        return RelationUpdateData.UnregisterComponentForced(componentType);
     }
 
     private void UpdatePvsOverride(Entity<ZoneComponent> ent)

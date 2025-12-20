@@ -24,11 +24,11 @@ public abstract partial class SharedZonesSystem : EntitySystem
 
     public static readonly ProtoId<EntityCategoryPrototype> ZonesCategoryId = "Zones";
 
+    protected ZonesRelationUpdateData RelationUpdateData = new();
+
     public override void Initialize()
     {
         base.Initialize();
-
-        _transform.OnGlobalMoveEvent += OnEntityMoveEvent;
 
         SubscribeLocalEvent<ZoneComponent, MapInitEvent>(OnZoneMapInit);
         SubscribeLocalEvent<ZoneComponent, ComponentShutdown>(OnZoneShutdown);
@@ -37,27 +37,15 @@ public abstract partial class SharedZonesSystem : EntitySystem
         SubscribeLocalEvent<InZoneComponent, ComponentShutdown>(OnInZoneShutdown);
     }
 
-    public override void Shutdown()
+    public override void Update(float frameTime)
     {
-        base.Shutdown();
+        base.Update(frameTime);
 
-        _transform.OnGlobalMoveEvent -= OnEntityMoveEvent;
-    }
-
-    private void OnEntityMoveEvent(ref MoveEvent args)
-    {
-        if (TryComp<ZoneComponent>(args.Entity, out var zoneComp))
-        {
-            UpdateEntitiesInZone((args.Entity.Owner, zoneComp));
-            return;
-        }
-
-        UpdateInZone(args.Entity);
+        UpdateZonesRelations();
     }
 
     protected virtual void OnZoneMapInit(Entity<ZoneComponent> entity, ref MapInitEvent args)
     {
-        UpdateEntitiesInZone(entity);
     }
 
     protected virtual void OnZoneShutdown(Entity<ZoneComponent> entity, ref ComponentShutdown args)
@@ -289,6 +277,39 @@ public abstract partial class SharedZonesSystem : EntitySystem
     }
     #endregion
 
+    public abstract bool RegisterRelationUpdate(EntityUid uid, object registrator);
+
+    public abstract bool RegisterRelationUpdate(Type componentType, object registrator);
+
+    public virtual bool RegisterRelationUpdate<T>(object registrator) where T : IComponent
+    {
+        return RegisterRelationUpdate(typeof(T), registrator);
+    }
+
+    public abstract bool UnregisterRelationUpdate(EntityUid uid, object registrator);
+
+    public abstract bool UnregisterRelationUpdate(Type componentType, object registrator);
+
+    public virtual bool UnregisterRelationUpdate<T>(object registrator) where T : IComponent
+    {
+        return UnregisterRelationUpdate(typeof(T), registrator);
+    }
+
+    public abstract bool UnregisterRelationUpdateForced(EntityUid uid);
+
+    public abstract bool UnregisterRelationUpdateForced(Type componentType);
+
+    public virtual bool UnregisterRelationUpdateForced<T>()
+    {
+        return UnregisterRelationUpdateForced(typeof(T));
+    }
+
+    protected void UpdateZonesRelations()
+    {
+        foreach (var uid in RelationUpdateData.EnumerateAll(EntityManager))
+            UpdateInZone(uid);
+    }
+
     /// <summary>
     /// Performs checks on entities located in the <paramref name="zone"/>.
     /// Raises the <see cref="EntityLeavedZoneEvent"/> if entity was in the <paramref name="zone"/> before, but now it isn't.
@@ -316,19 +337,19 @@ public abstract partial class SharedZonesSystem : EntitySystem
 
     protected void UpdateInZone(EntityUid uid)
     {
-        // should work only at initialized map.
-        var map = _transform.GetMap(uid);
-        if (!_map.IsInitialized(map))
-            return;
-
         var toLeave = new HashSet<NetEntity>();
         if (TryComp<InZoneComponent>(uid, out var inZone))
             toLeave = [.. inZone.Zones];
 
-        foreach (var zone in GetZonesByEntity(uid, useCache: false))
+        // should work only at initialized map.
+        var map = _transform.GetMap(uid);
+        if (_map.IsInitialized(map))
         {
-            TryHandleEnterZone(zone, uid);
-            toLeave.Remove(GetNetEntity(zone));
+            foreach (var zone in GetZonesByEntity(uid, useCache: false))
+            {
+                TryHandleEnterZone(zone, uid);
+                toLeave.Remove(GetNetEntity(zone));
+            }
         }
 
         foreach (var netZone in toLeave)
@@ -382,6 +403,103 @@ public abstract partial class SharedZonesSystem : EntitySystem
 
         Dirty(zone);
         return true;
+    }
+
+    protected struct ZonesRelationUpdateData()
+    {
+        public Dictionary<EntityUid, HashSet<object>> Entities = [];
+
+        public Dictionary<Type, HashSet<object>> Components = [];
+
+        public readonly bool RegisterEntity(EntityUid uid, object registrator)
+        {
+            if (Entities.TryGetValue(uid, out var regs))
+                return regs.Add(registrator);
+
+            Entities.Add(uid, [registrator]);
+            return true;
+        }
+
+        public readonly bool RegisterComponent(Type componentType, object registrator)
+        {
+            if (!componentType.IsAssignableTo(typeof(IComponent)))
+                return false;
+
+            if (Components.TryGetValue(componentType, out var regs))
+                regs.Add(registrator);
+
+            Components.Add(componentType, [registrator]);
+            return true;
+        }
+
+        public readonly bool UnregisterEntity(EntityUid uid, object registrator)
+        {
+            if (!Entities.TryGetValue(uid, out var regs))
+                return false;
+
+            var result = regs.Remove(registrator);
+            if (regs.Count <= 0)
+                return Entities.Remove(uid);
+
+            return result;
+        }
+
+        public readonly bool UnregisterEntityForced(EntityUid uid)
+        {
+            return Entities.Remove(uid);
+        }
+
+        public readonly bool UnregisterComponent(Type componentType, object registrator)
+        {
+            if (!Components.TryGetValue(componentType, out var regs))
+                return false;
+
+            var result = regs.Remove(registrator);
+            if (regs.Count <= 0)
+                return Components.Remove(componentType);
+
+            return result;
+        }
+
+        public readonly bool UnregisterComponentForced(Type componentType)
+        {
+            return Components.Remove(componentType);
+        }
+
+        public readonly IEnumerable<EntityUid> EnumerateAll(IEntityManager entityManager)
+        {
+            foreach (var uid in EnumerateEntities())
+                yield return uid;
+
+            foreach (var uid in EnumerateComponents(entityManager))
+                yield return uid;
+        }
+
+        public readonly IEnumerable<EntityUid> EnumerateEntities()
+        {
+            foreach (var uid in Entities.Keys)
+                yield return uid;
+        }
+
+        public readonly IEnumerable<EntityUid> EnumerateComponents(IEntityManager entityManager)
+        {
+            foreach (var type in Components.Keys)
+            {
+                // AllQuery is used because non-generic overload for EntityQueryEnumerator isn't exist
+                var query = entityManager.AllEntityQueryEnumerator(type);
+                while (query.MoveNext(out var uid, out _))
+                {
+                    if (entityManager.Deleted(uid))
+                        continue;
+
+                    if (entityManager.IsPaused(uid))
+                        continue;
+
+                    yield return uid;
+                }
+            }
+
+        }
     }
 }
 

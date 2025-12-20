@@ -68,4 +68,34 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         var msg = new DeleteZoneRequestMessage(zone);
         RaiseNetworkEvent(msg);
     }
+
+    public override bool RegisterRelationUpdate(EntityUid uid, object registrator)
+    {
+        return false;
+    }
+
+    public override bool RegisterRelationUpdate(Type componentType, object registrator)
+    {
+        return false;
+    }
+
+    public override bool UnregisterRelationUpdate(EntityUid uid, object registrator)
+    {
+        return false;
+    }
+
+    public override bool UnregisterRelationUpdate(Type componentType, object registrator)
+    {
+        return false;
+    }
+
+    public override bool UnregisterRelationUpdateForced(EntityUid uid)
+    {
+        return false;
+    }
+
+    public override bool UnregisterRelationUpdateForced(Type componentType)
+    {
+        return false;
+    }
 }

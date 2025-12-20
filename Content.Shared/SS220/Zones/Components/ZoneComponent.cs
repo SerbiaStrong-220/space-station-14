@@ -27,4 +27,7 @@ public sealed partial class ZoneComponent : Component
     /// </summary>
     [ViewVariables, AutoNetworkedField]
     public HashSet<NetEntity> LocatedEntities = [];
+
+    [DataField(readOnly: true)]
+    public ComponentRegistry RelationUpdateComponents = [];
 }
