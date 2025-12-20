@@ -5,6 +5,9 @@
   minLimit: 0
   maxLimit: 3
   loadouts:
+  #SS220 Merry Christmas and Happy New Year! start
+  - NewYearsCap
+  #SS220 Merry Christmas and Happy New Year! start
   # ss220 add station map to loadout start
   - HandheldStationMap
   # ss220 add station map to loadout end
