@@ -104,6 +104,7 @@
     flavors:
       - olivier
   - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/bowl.rsi
     layers:
     - state: bowl
     - state: olivier
