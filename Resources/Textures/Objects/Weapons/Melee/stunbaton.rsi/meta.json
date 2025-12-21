@@ -98,6 +98,23 @@
           0.1
         ]
       ]
+    },
+    {
+      "name": "christmasbaton_off"
+    },
+    {
+      "name": "christmasbaton_on",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
     }
   ]
 }

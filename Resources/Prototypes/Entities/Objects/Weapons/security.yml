@@ -95,12 +95,23 @@
   - type: DisarmMalus
     malus: 0.225
   - type: Appearance
+  - type: HolidayVisuals
+    holidays:
+      festive:
+      - FestiveSeason
   - type: GenericVisualizer
     visuals:
      enum.ToggleableVisuals.Enabled:
         enum.ToggleableVisuals.Layer:
           True: {state: stunbaton_on}
           False: {state: stunbaton_off}
+    enum.HolidayVisuals.Holiday:
+      stunbaton_on:
+        festive:
+          state: christmasbaton_off
+      stunbaton_off:
+         festive:
+          state: christmasbaton_on
   - type: StaticPrice
     price: 80
   - type: Riggable
