@@ -19,7 +19,7 @@ public abstract partial class AddIgnoreLightVisionOverlayComponent : Component
     public bool AddAction = false;
 
     [DataField]
-    public bool IsIconsAlwaysSeen;
+    public bool ChangeIconOverlaySpace;
 
     public AddIgnoreLightVisionOverlayComponent(float radius, float closeRadius)
     {

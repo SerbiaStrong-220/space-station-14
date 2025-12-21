@@ -86,7 +86,7 @@
   - type: ThermalVision
     state: Half
     visionRadius: 14
-    isIconsAlwaysSeen: true
+    changeIconOverlaySpace: true
   #visual
   - type: PointLight
     netsync: false

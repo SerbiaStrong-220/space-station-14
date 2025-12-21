@@ -50,8 +50,9 @@ public abstract class AddIgnoreLightVisionOverlaySystem<T> : SharedAddIgnoreLigh
                 throw new ArgumentOutOfRangeException();
         }
 
-        UpdateStatusIconsSpace(ent.Comp.IsIconsAlwaysSeen);
+        UpdateStatusIconsSpace(ent.Comp.ChangeIconOverlaySpace);
     }
+
     protected override void VisionRemoved(Entity<T> ent)
     {
         if (ent != _player.LocalEntity)
