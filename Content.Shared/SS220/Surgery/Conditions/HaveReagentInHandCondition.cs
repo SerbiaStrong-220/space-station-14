@@ -4,6 +4,7 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.SS220.Surgery.Graph;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
@@ -26,13 +27,12 @@ public sealed partial class HaveReagentInHandCondition : ISurgeryGraphCondition
         if (!entityManager.TryGetComponent<HandsComponent>(userUid, out var handsComponent))
             return false;
 
-        foreach (var (_, hand) in handsComponent.Hands)
-        {
-            if (hand.HeldEntity is null)
-                continue;
+        var handSystem = entityManager.System<SharedHandsSystem>();
+        var solutionSystem = entityManager.System<SharedSolutionContainerSystem>();
 
-            // This can be a problem cause it gets all solution containers
-            if (entityManager.System<SharedSolutionContainerSystem>().GetTotalPrototypeQuantity(hand.HeldEntity.Value, ReagentId) >= ConsumedAmount)
+        foreach (var heldItem in handSystem.EnumerateHeld(userUid))
+        {
+            if (solutionSystem.GetTotalPrototypeQuantity(heldItem, ReagentId) >= ConsumedAmount)
                 return true;
         }
 

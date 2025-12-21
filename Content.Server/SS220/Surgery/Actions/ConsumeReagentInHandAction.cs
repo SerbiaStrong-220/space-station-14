@@ -6,6 +6,7 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.SS220.Surgery.Graph;
 using Robust.Shared.Prototypes;
 
@@ -25,25 +26,17 @@ public sealed partial class ConsumeReagentInHandAction : ISurgeryGraphAction
 
     public void PerformAction(EntityUid uid, EntityUid userUid, EntityUid? used, IEntityManager entityManager)
     {
-        var sharedSolutionContainerSystem = entityManager.System<SharedSolutionContainerSystem>();
+        var handSystem = entityManager.System<SharedHandsSystem>();
+        var solutionSystem = entityManager.System<SharedSolutionContainerSystem>();
 
-        if (!entityManager.TryGetComponent<HandsComponent>(userUid, out var handsComponent))
+        foreach (var heldItem in handSystem.EnumerateHeld(userUid))
         {
-            entityManager.System<SharedSurgerySystem>().Log.Error($"Trying to perform action {nameof(ConsumeReagentInHandAction)} but performer have no hand");
-            return;
-        }
-
-        foreach (var (_, hand) in handsComponent.Hands)
-        {
-            if (hand.HeldEntity is null)
-                continue;
-
             Entity<SolutionComponent>? solutionEntity = null;
-            if (!sharedSolutionContainerSystem.ResolveSolution(hand.HeldEntity.Value, SolutionName, ref solutionEntity, out _))
+            if (!solutionSystem.ResolveSolution(heldItem, SolutionName, ref solutionEntity, out _))
                 continue;
 
-            if (sharedSolutionContainerSystem.RemoveReagent(solutionEntity.Value, ReagentId, ConsumedAmount))
-                return;
+            // Reagent amount check in condition, so without it
+            solutionSystem.RemoveReagent(solutionEntity.Value, ReagentId, ConsumedAmount);
         }
 
         entityManager.System<SharedSurgerySystem>().Log.Error($"Trying to perform action {nameof(ConsumeReagentInHandAction)} but cant find any solution to drain reagent from");

@@ -97,10 +97,13 @@ public sealed class SurgeryPatientAnalyzer : EntitySystem
 
     public int GetBrainRotDegree(LimitationReviveComponent comp)
     {
+        if (comp.DamageCountingTime is null)
+            return 0;
+
         if (comp.IsDamageTaken)
             return MaxBrainRotPercentage;
 
-        var result = (MaxBrainRotPercentage * (_gameTiming.CurTime - comp.TimeToDamage).Seconds) / (int)comp.DelayBeforeDamage.TotalSeconds;
+        var result = (MaxBrainRotPercentage * (int)(_gameTiming.CurTime - comp.DamageCountingTime.Value).TotalSeconds) / (int)comp.BeforeDamageDelay.TotalSeconds;
 
         return result >= 0 ? result : 0;
     }
