@@ -9,8 +9,7 @@ namespace Content.Shared.SS220.ButtScan;
 public sealed partial class ButtScanComponent : Component, IPhotocopyableComponent
 {
     [AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("buttTexturePath")]
+    [DataField]
     public string ButtTexturePath = "/Textures/SS220/Interface/Butts/human.png";
 
     public IPhotocopiedComponentData GetPhotocopiedData()

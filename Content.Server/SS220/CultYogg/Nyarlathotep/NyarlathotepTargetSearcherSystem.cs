@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Content.Shared.Mobs.Systems;
@@ -44,6 +45,7 @@ public sealed class NyarlathotepTargetSearcherSystem : EntitySystem
                 AddComp(target.Owner, new NyarlathotepTargetComponent());
         }
     }
+
     private void OnSearchMapInit(Entity<NyarlathotepSearchTargetsComponent> component, ref MapInitEvent args)
     {
         component.Comp.NextSearchTime = _gameTiming.CurTime + TimeSpan.FromSeconds(component.Comp.SearchMaxInterval);

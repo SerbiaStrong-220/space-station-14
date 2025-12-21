@@ -6,6 +6,10 @@
   description: Apply crowbar.
   components:
     - type: FoVOverlay # SS220 perspective-wall-fov
+    - type: Anchorable
+      flags:
+      - Anchorable
+    - type: Rotatable
     - type: AtmosAlarmable
       syncWith:
         - FireAlarm
@@ -52,6 +56,24 @@
           visible: false
         - state: panel_open
           map: ["enum.WiresVisualLayers.MaintenancePanel"]
+        - state: pressure_unlit
+          visible: false
+          shader: unshaded
+          map: ["enum.FirelockVisualLayersPressure.Base"]
+        - state: temperature_unlit
+          visible: false
+          shader: unshaded
+          map: ["enum.FirelockVisualLayersTemperature.Base"]
+    - type: GenericVisualizer
+      visuals:
+        enum.FirelockVisuals.PressureWarning:
+          enum.FirelockVisualLayersPressure.Base:
+            True: { visible: true }
+            False: { visible: false }
+        enum.FirelockVisuals.TemperatureWarning:
+          enum.FirelockVisualLayersTemperature.Base:
+            True: { visible: true }
+            False: { visible: false }
     - type: AnimationPlayer
     - type: Fixtures
       fixtures:
@@ -111,6 +133,7 @@
     - type: DoorBolt # SS220 revert "remove fire remote controller"
     - type: AccessReader
       access: [ [ "Engineering" ] ]
+      examinationText: access-reader-examination-functionality-restricted
     - type: PryUnpowered
       pryModifier: 0.5
     - type: PointLight
@@ -125,6 +148,7 @@
       - FireAndGasControl
       - Fires
       - Spacing
+    - type: SyncSprite
 
 - type: entity
   id: Firelock

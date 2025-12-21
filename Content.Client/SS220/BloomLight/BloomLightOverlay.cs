@@ -10,10 +10,10 @@ namespace Content.Client.SS220.BloomLight;
 
 public sealed class BloomLightOverlay : Overlay
 {
-    private EntityManager _entity;
-    private SharedTransformSystem _transform;
-    private SpriteSystem _sprite;
-    private IPrototypeManager _prototype = default!;
+    private readonly EntityManager _entity;
+    private readonly SharedTransformSystem _transform;
+    private readonly SpriteSystem _sprite;
+    private readonly IPrototypeManager _prototype;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceEntities;
     public override bool RequestScreenTexture => true;
@@ -60,7 +60,7 @@ public sealed class BloomLightOverlay : Overlay
             if (!bounds.Contains(worldPos))
                 continue;
 
-            Color color = Color.White;
+            var color = Color.White;
             if (lightQuery.TryGetComponent(uid, out var lightComp))
             {
                 if (!lightComp.Enabled)
@@ -70,7 +70,7 @@ public sealed class BloomLightOverlay : Overlay
                     color = lightComp.Color;
             }
 
-            var (_, worldRot, worldMatrix) = xform.GetWorldPositionRotationMatrix(xformQuery);
+            var worldMatrix = _transform.GetWorldMatrix(xform);
             handle.SetTransform(worldMatrix);
 
             foreach (var mask in comp.LightMasks)

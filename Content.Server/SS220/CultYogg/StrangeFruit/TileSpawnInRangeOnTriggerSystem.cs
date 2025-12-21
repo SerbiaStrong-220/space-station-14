@@ -1,13 +1,12 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Server.Explosion.EntitySystems;
+
+using Content.Shared.Trigger;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.CultYogg.StrangeFruit;
 
 public sealed class TileSpawnInRangeOnTriggerSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
 
     public override void Initialize()
@@ -16,25 +15,25 @@ public sealed class TileSpawnInRangeOnTriggerSystem : EntitySystem
         SubscribeLocalEvent<TileSpawnInRangeOnTriggerComponent, TriggerEvent>(TileSpawnInRangeTrigger);
     }
 
-    private void TileSpawnInRangeTrigger(Entity<TileSpawnInRangeOnTriggerComponent> entity, ref TriggerEvent args)
+    private void TileSpawnInRangeTrigger(Entity<TileSpawnInRangeOnTriggerComponent> ent, ref TriggerEvent args)
     {
-        if (!(entity.Comp.Range > 0))
+        if (args.Key != null && !ent.Comp.KeysIn.Contains(args.Key))
+            return;
+
+        if (ent.Comp.Range < 0)
         {
             Log.Error("Range must be positive");
             return;
         }
 
-        if(!_prototypeManager.TryIndex(entity.Comp.KudzuProtoId, out var prototype, logError: true))
-            return;
-
-        var xform = Transform(entity);
-        var mapcord = _transformSystem.GetMapCoordinates(entity, xform);
-        for (var x = (int)mapcord.X - entity.Comp.Range ; x <= (int)mapcord.X + entity.Comp.Range; x++)
+        var xform = Transform(ent);
+        var mapcord = _transformSystem.GetMapCoordinates(ent, xform);
+        for (var x = (int)mapcord.X - ent.Comp.Range; x <= (int)mapcord.X + ent.Comp.Range; x++)
         {
-            for (var y = (int)mapcord.Y - entity.Comp.Range ; y <= (int)mapcord.Y + entity.Comp.Range; y++)
+            for (var y = (int)mapcord.Y - ent.Comp.Range; y <= (int)mapcord.Y + ent.Comp.Range; y++)
             {
                 var nmap = new MapCoordinates(x, y, mapcord.MapId);
-                Spawn(entity.Comp.KudzuProtoId, nmap);
+                Spawn(ent.Comp.Spawn, nmap);
             }
         }
         args.Handled = true;

@@ -1,4 +1,4 @@
-﻿- type: constructionGraph
+- type: constructionGraph
   id: Girder
   start: start
   graph:
@@ -171,7 +171,7 @@
       - to: electronics
         steps:
         - component: PowerCell
-          name: power cell
+          name: construction-graph-tag-power-cell
           store: battery-container
           icon:
             sprite: Objects/Power/power_cells.rsi
@@ -214,6 +214,18 @@
 
     - node: wall
       entity: WallSolid
+      edges:
+        - to: girder
+          completed:
+            - !type:GivePrototype
+              prototype: SheetSteel1
+              amount: 2
+          steps:
+            - tool: Welding
+              doAfter: 10
+
+    - node: wallChitin
+      entity: WallSolidChitin
       edges:
         - to: girder
           completed:
@@ -368,9 +380,6 @@
               doAfter: 1
 
         - to: diagonalshuttleWall
-          completed:
-            - !type:SnapToGrid
-              southRotation: false
           conditions:
             - !type:EntityAnchored { }
           steps:
@@ -415,7 +424,7 @@
       - to: reinforcedElectronics
         steps:
         - component: PowerCell
-          name: power cell
+          name: construction-graph-tag-power-cell
           store: battery-container
           icon:
             sprite: Objects/Power/power_cells.rsi
@@ -458,6 +467,58 @@
 
     - node: reinforcedWall
       entity: WallReinforced
+      edges:
+        - to: reinforcedGirder
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetPlasteel1
+              amount: 2
+          steps:
+            - tool: Cutting
+              doAfter: 1
+              completed:
+                - !type:VisualizerDataInt
+                  key: "enum.ReinforcedWallVisuals.DeconstructionStage"
+                  data: 5
+            - tool: Screwing
+              doAfter: 1
+            - tool: Welding
+              doAfter: 5
+              completed:
+                - !type:VisualizerDataInt
+                  key: "enum.ReinforcedWallVisuals.DeconstructionStage"
+                  data: 4
+            - tool: Prying
+              doAfter: 1
+            - tool: Anchoring
+              doAfter: 1
+              completed:
+                - !type:VisualizerDataInt
+                  key: "enum.ReinforcedWallVisuals.DeconstructionStage"
+                  data: 3
+            - tool: Welding
+              doAfter: 10
+              completed:
+                - !type:VisualizerDataInt
+                  key: "enum.ReinforcedWallVisuals.DeconstructionStage"
+                  data: 2
+            - tool: Prying
+              doAfter: 1
+              completed:
+                - !type:VisualizerDataInt
+                  key: "enum.ReinforcedWallVisuals.DeconstructionStage"
+                  data: 1
+            - tool: Screwing
+              doAfter: 1
+              completed:
+                - !type:VisualizerDataInt
+                  key: "enum.ReinforcedWallVisuals.DeconstructionStage"
+                  data: 0
+            - tool: Cutting
+              doAfter: 1
+
+    - node: reinforcedWallChitin
+      entity: WallReinforcedChitin
       edges:
         - to: reinforcedGirder
           completed:
@@ -606,6 +667,10 @@
           steps:
             - tool: Welding
               doAfter: 5
+        - to: wall
+          steps:
+            - tool: Brushing
+              doAfter: 12
 
     - node: reinforcedWallRust
       entity: WallReinforcedRust
@@ -614,3 +679,7 @@
           steps:
             - tool: Welding
               doAfter: 5
+        - to: reinforcedWall
+          steps:
+            - tool: Brushing
+              doAfter: 12

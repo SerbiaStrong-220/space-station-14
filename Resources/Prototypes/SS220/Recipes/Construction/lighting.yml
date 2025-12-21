@@ -1,10 +1,7 @@
 - type: construction
-  name: purple light tube
   id: PurpleLight
   graph: PurpleLight
   startNode: start
   targetNode: icon
   category: construction-category-utilities
-  description: A high powered light tube containing a purple crystal
-  icon: { sprite: Objects/Power/light_tube.rsi, state: normal }
   objectType: Item

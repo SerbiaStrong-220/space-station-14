@@ -113,6 +113,12 @@
       "name": "diagonal_checker_b"
     },
     {
+      "name": "diagonal_checker_c"
+    },
+    {
+      "name": "diagonal_checker_d"
+    },
+    {
       "name": "herringbone"
     },
     {
@@ -132,6 +138,12 @@
     },
     {
       "name": "minitile_diagonal_b"
+    },
+    {
+      "name": "minitile_diagonal_c"
+    },
+    {
+      "name": "minitile_diagonal_d"
     },
     {
       "name": "minitile_box"

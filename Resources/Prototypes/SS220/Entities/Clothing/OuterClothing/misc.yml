@@ -73,9 +73,24 @@
   id: ClothingOuterScarletTyphoon
   name: the scarlet typhoon
   description: You know, it's kind of awkward for me to introduce myself, but if you insist, then I'm a peaceful hunter chasing a mirage named love.
-  suffix: For emagg clothing vendomat
+  suffix: For emagg clothesmate
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Misc/scarlet_typhoon.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Misc/scarlet_typhoon.rsi
+
+- type: entity
+  parent: ClothingOuterBaseMedium
+  id: ClothingOuterArmorElectricity
+  suffix: Electrification armor
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Armor/security.rsi #SS220 BugFix
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Armor/security.rsi #SS220 BugFix
+  - type: StaminaConvertArmor
+    damageType: Shock
+    damageCoefficient: 0.3
+    ignoredEffects:
+    - Paralyze

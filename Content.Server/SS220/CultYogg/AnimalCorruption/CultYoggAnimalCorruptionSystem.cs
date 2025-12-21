@@ -1,21 +1,20 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Mind;
 using Content.Shared.SS220.CultYogg.Corruption;
 using Robust.Shared.Prototypes;
-using System.Diagnostics.CodeAnalysis;
+using Content.Shared.SS220.Language.Components;
+using Content.Server.SS220.Language;
 
-namespace Content.Server.SS220.CultYogg;
-
+namespace Content.Server.SS220.CultYogg.AnimalCorruption;
 public sealed class CultYoggAnimalCorruptionSystem : EntitySystem
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
-    public override void Initialize()
-    {
-        base.Initialize();
-    }
+    [Dependency] private readonly LanguageSystem _language = default!;
+
     public void AnimalCorruption(EntityUid uid)//Corrupt animal
     {
         //ToDo Add new animal as the gost role
@@ -29,6 +28,12 @@ public sealed class CultYoggAnimalCorruptionSystem : EntitySystem
         // Get original body position and spawn MiGo here
         var corruptedAnimal = _entityManager.SpawnAtPosition(corruptionProto.Result, Transform(uid).Coordinates);
 
+        // Inherit the original entity languages
+        if (TryComp<LanguageComponent>(uid, out var originalLangComp))
+        {
+            _language.AddLanguagesFromSource((uid, originalLangComp), corruptedAnimal);
+        }
+
         // Move the mind if there is one and it's supposed to be transferred
         if (_mind.TryGetMind(uid, out var mindId, out var mind))
             _mind.TransferTo(mindId, corruptedAnimal, mind: mind);
@@ -36,13 +41,14 @@ public sealed class CultYoggAnimalCorruptionSystem : EntitySystem
         //Delete previous entity
         _entityManager.DeleteEntity(uid);
     }
+
     private bool CheckForCorruption(EntityUid uid, [NotNullWhen(true)] out CultYoggCorruptedAnimalsPrototype? corruption)//if enity_id in list of corruptable
     {
-        var idOfEnity = MetaData(uid).EntityPrototype!.ID;
+        var idOfEntity = MetaData(uid).EntityPrototype!.ID;
 
         foreach (var entProto in _prototypeManager.EnumeratePrototypes<CultYoggCorruptedAnimalsPrototype>())//idk if it isn't shitcode
         {
-            if (idOfEnity == entProto.ID)
+            if (idOfEntity == entProto.ID)
             {
                 corruption = entProto;
                 return true;
@@ -55,15 +61,16 @@ public sealed class CultYoggAnimalCorruptionSystem : EntitySystem
             corruption = null;
             return false;
         }
+
         foreach (var parentId in parents)
         {
             foreach (var entProto in _prototypeManager.EnumeratePrototypes<CultYoggCorruptedAnimalsPrototype>())
             {
-                if (parentId == entProto.ID)
-                {
-                    corruption = entProto;
-                    return true;
-                }
+                if (parentId != entProto.ID)
+                    continue;
+
+                corruption = entProto;
+                return true;
             }
         }
 

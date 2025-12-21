@@ -5,11 +5,16 @@
   description: Creates a spark when activated by a signal.
   components:
   - type: Sprite
-    sprite: Objects/Devices/igniter.rsi
+    sprite: SS220/Objects/Devices/igniter.rsi # SS220 from cabinet to 3/4 Part 1
     state: icon
   - type: IgnitionSource
     temperature: 800
   - type: IgniteOnTrigger
+  - type: EmitSoundOnTrigger
+    sound:
+      collection: WelderOn
+  - type: UseDelayOnTrigger
+  - type: UseDelayTriggerCondition
   - type: TriggerOnSignal
   - type: DeviceNetwork
     deviceNetId: Wireless

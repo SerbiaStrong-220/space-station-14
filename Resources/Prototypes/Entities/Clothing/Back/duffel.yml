@@ -87,6 +87,12 @@
   - type: Storage
     storageOpenSound:
       collection: BikeHorn
+      params:
+        variation: 0.125
+    storageInsertSound:
+      collection: FootstepClown
+      params:
+        variation: 0.125
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-textile
@@ -171,10 +177,9 @@
   components:
   - type: Sprite
     sprite: Clothing/Back/Duffels/mime.rsi
-    storageOpenSound:
-      collection: null
-    storageInsertSound:
-      collection: null
+  - type: Storage
+    storageOpenSound: null
+    storageInsertSound: null
 #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-textile
@@ -257,8 +262,16 @@
 #SS220 Micro_fibers end
 
 - type: entity
-  parent: ClothingBackpackDuffelSyndicate
+  parent: [ ClothingBackpackDuffelSyndicate, BaseSyndicateContraband ]
   id: ClothingBackpackDuffelSyndicateBundle
+  abstract: true
+  components:
+  - type: Tag
+    tags: [] # ignore "WhitelistChameleon" tag
+
+- type: entity
+  parent: ClothingBackpackDuffel
+  id: ClothingBackpackDuffelBundle
   abstract: true
   components:
   - type: Tag
@@ -267,7 +280,6 @@
 - type: entity
   parent: ClothingBackpackDuffelSyndicate
   id: ClothingBackpackDuffelSyndicateAmmo
-  name: syndicate duffel bag
   components:
   - type: Sprite
     sprite: Clothing/Back/Duffels/syndicate.rsi
@@ -288,7 +300,6 @@
 - type: entity
   parent: ClothingBackpackDuffelSyndicate
   id: ClothingBackpackDuffelSyndicateMedical
-  name: syndicate duffel bag
   components:
   - type: Sprite
     sprite: Clothing/Back/Duffels/syndicate.rsi
@@ -354,7 +365,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: BoxSurvivalEngineering
+    - id: BoxSurvivalCentcom #SS220 More_Centcomm_Prototypes
     - id: WeaponShotgunDoubleBarreled
     - id: BoxShotgunIncendiary
       amount: 2

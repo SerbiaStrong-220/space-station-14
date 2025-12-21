@@ -4,7 +4,7 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Physics;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.SS220.PlacerItem.Components;
+namespace Content.Shared.SS220.PlacerItem;
 
 /// <summary>
 /// A component that allows the user to place a specific entity using a construction ghost

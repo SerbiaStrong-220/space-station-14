@@ -25,7 +25,7 @@
     anchored: true
     noRot: true
   - type: Sprite
-    sprite: Structures/Power/Generation/Singularity/collector.rsi
+    sprite: SS220/Structures/Power/Generation/Singularity/collector.rsi #SS220 collector sprite fix
     snapCardinals: true
     layers:
       - state: ca_off
@@ -57,7 +57,7 @@
     sprite: Structures/Power/Generation/Singularity/collector.rsi
     state: static
   - type: RadiationCollector
-    chargeModifier: 7500
+    chargeModifier: 15000
     radiationReactiveGases:
       - reactantPrototype: Plasma
         powerGenerationEfficiency: 1

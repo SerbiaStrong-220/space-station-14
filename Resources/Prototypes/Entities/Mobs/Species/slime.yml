@@ -21,7 +21,6 @@
   # they like eat it idk lol
   - type: Storage
     clickInsert: false
-    openOnActivate: false
     grid:
     - 0,0,1,2
     maxItemSize: Large
@@ -100,15 +99,15 @@
     - reagents: [ Water, SpaceCleaner ]
       methods: [ Touch ]
       effects:
-      - !type:WashCreamPieReaction
+      - !type:WashCreamPie
     - reagents: [ Water ]
       methods: [ Touch ]
       effects:
       - !type:HealthChange
-        scaleByQuantity: true
+        scaling: true
         damage:
           types:
-            Heat: 0.1
+            Heat: 0.05
       - !type:PopupMessage
         type: Local
         visualType: Large
@@ -143,6 +142,7 @@
     maxSaturation: 15
   # SS220-Add-Languages begin
   - type: Language
+    selectedLanguage: Galactic
     availableLanguages:
     - id: Galactic
     - id: Bubblish
@@ -160,10 +160,7 @@
   #ss220 emote 5 sec end
   #SS220 LimitationRevive - start
   - type: LimitationRevive
-    maxRevive: 100 #has no death limit
-    typeDamageOnDead:
-      types:
-        Сerebral: 400
+    reviveLimit: 100 #has no death limit
   #SS220 LimitationRevive - end
 
 - type: entity

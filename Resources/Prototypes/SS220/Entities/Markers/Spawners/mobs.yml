@@ -96,3 +96,32 @@
   - type: ConditionalSpawner
     prototypes:
       - MobCrocodileSpaceSalvage
+
+- type: entity
+  id: SpawnMobBearSpaceGhostRole
+  parent: MarkerBase
+  name: the spawner Bear Space
+  suffix: Ghost Role
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: bear
+      sprite: Mobs/Animals/bear.rsi
+  - type: ConditionalSpawner
+    prototypes:
+      - MobBearSpaceGhostRole
+
+- type: entity
+  id: SpawnMobBearSpaceGhostRoleGoal
+  parent: SpawnMobBearSpaceGhostRole
+  suffix: Ghost Role, With Goal
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: bear
+      sprite: Mobs/Animals/bear.rsi
+  - type: ConditionalSpawner
+    prototypes:
+      - MobBearSpaceGhostRoleGoal

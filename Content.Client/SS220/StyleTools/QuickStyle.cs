@@ -28,6 +28,8 @@ public abstract class QuickStyle
     protected Texture Tex(ResPath path) => Resources.GetTexture(path);
     protected SpriteSpecifier Sprite(string path, string state) => new SpriteSpecifier.Rsi(new(path), state);
     protected SpriteSpecifier Sprite(ResPath path, string state) => new SpriteSpecifier.Rsi(path, state);
+    protected SpriteSpecifier Sprite(string path) => new SpriteSpecifier.Texture(new(path));
+    protected SpriteSpecifier Sprite(ResPath path) => new SpriteSpecifier.Texture(path);
     protected Font VectorFont(string path, int size) => Resources.GetFont(path, size);
     protected Font VectorFont(ResPath path, int size) => Resources.GetFont(path, size);
     protected SpriteFont SpriteFont(ProtoId<SpriteFontPrototype> id) => Fonts.SpriteFont.Load(id, Resources);

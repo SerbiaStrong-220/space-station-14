@@ -15,6 +15,11 @@ public sealed partial class StationEventComponent : Component
     public const float WeightHigh = 15.0f;
     public const float WeightVeryHigh = 20.0f;
 
+    // SS220-more-robust-TTS-announcements-begin
+    [DataField]
+    public bool PlayTTS = true;
+    // SS220-more-robust-TTS-announcements-end
+
     [DataField]
     public float Weight = WeightNormal;
 

@@ -8,6 +8,9 @@ ent-ClothingHeadsetAltMagistrate = полноразмерная гарнитур
 ent-ClothingHeadsetMagistrate = гарнитура магистрата
     .desc = Её используют гиганты правосудия.
 
+ent-ClothingHeadsetAltIAA = полноразмерная гарнитура АВД
+    .desc = Гарнитура агента внутренних дел, чтобы услышать последние слова капитана.
+
 ent-ClothingHeadsetAltCaptain = полноразмерная гарнитура капитана
     .desc = Модифицированный модульный интерком, надеваемый на голову. Принимает ключи шифрования.
 ent-ClothingHeadsetCaptain = гарнитура капитана

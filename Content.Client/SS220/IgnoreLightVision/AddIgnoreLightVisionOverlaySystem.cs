@@ -26,9 +26,9 @@ public abstract class AddIgnoreLightVisionOverlaySystem<T> : SharedAddIgnoreLigh
 
     protected override void VisionChanged(Entity<T> ent)
     {
-
         if (ent != _player.LocalEntity)
             return;
+
         // Do you know what is the worst finite state automat realization?
         // After code below you will know
         switch (ent.Comp.State)
@@ -59,6 +59,7 @@ public abstract class AddIgnoreLightVisionOverlaySystem<T> : SharedAddIgnoreLigh
     {
         VisionChanged(ent);
     }
+
     private void OnDetached(Entity<T> ent, ref LocalPlayerDetachedEvent args)
     {
         Off();
@@ -69,11 +70,13 @@ public abstract class AddIgnoreLightVisionOverlaySystem<T> : SharedAddIgnoreLigh
         _overlay.RemoveOverlay(GetOverlayType());
         _light.DrawLighting = true;
     }
+
     private void Half(Overlay overlay)
     {
         _overlay.AddOverlay(overlay);
         _light.DrawLighting = true;
     }
+
     private void Full(Overlay overlay)
     {
         _overlay.AddOverlay(overlay);

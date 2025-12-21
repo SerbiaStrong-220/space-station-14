@@ -1,11 +1,11 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using System.Linq;
 using Content.Server.Popups;
 using Content.Shared.Gateway;
 using Content.Shared.Interaction;
 using Content.Shared.Teleportation.Components;
 using Content.Shared.Teleportation.Systems;
-using Robust.Server.GameObjects;
 using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
@@ -43,7 +43,7 @@ public sealed class GateDungeonSystem : EntitySystem
 
     private void OnCreateDungeon(Entity<GateDungeonComponent> ent, ref MapInitEvent args)
     {
-        if(ent.Comp.GateType != GateType.Start)
+        if (ent.Comp.GateType != GateType.Start)
             return;
 
         _appearance.SetData(ent.Owner, GatewayVisuals.Active, false); //should be turned off at the beginning
@@ -86,7 +86,7 @@ public sealed class GateDungeonSystem : EntitySystem
 
     private void OnInteract(Entity<GateDungeonComponent> ent, ref InteractHandEvent args)
     {
-        if(ent.Comp.GateType != GateType.Start)
+        if (ent.Comp.GateType != GateType.Start)
             return;
 
         _popup.PopupEntity(ent.Comp.IsCharging
@@ -112,13 +112,10 @@ public sealed class GateDungeonSystem : EntitySystem
 
     private void CreateMap(GateDungeonComponent comp)
     {
-
         if(comp.PathDungeon == null)
             return;
 
         var mapDungeon = _random.Pick(comp.PathDungeon);
-        if (mapDungeon == null)
-            return;
 
         var path = new ResPath(mapDungeon);
         _map.CreateMap(out var mapId);
@@ -138,7 +135,6 @@ public sealed class GateDungeonSystem : EntitySystem
         _gateList = Enum.GetValues(typeof(GateType))
             .Cast<GateType>()
             .ToDictionary(gateType => gateType, _ => new List<EntityUid>());
-
 
         foreach (var gate in entGates)
         {
@@ -175,5 +171,5 @@ public enum GateType : byte
     Start,
     Mid,
     End,
-    ToStation
+    ToStation,
 }

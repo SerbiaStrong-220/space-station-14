@@ -102,6 +102,7 @@ public sealed class AdminNotesManager : IAdminNotesManager, IPostInjectInit
                 break;
             case NoteType.ServerBan:
             case NoteType.RoleBan:
+            case NoteType.SpeciesBan: // SS220 Species bans
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, "Unknown note type");
         }
@@ -143,6 +144,7 @@ public sealed class AdminNotesManager : IAdminNotesManager, IPostInjectInit
                 break;
             case NoteType.ServerBan: // Add bans using the ban panel, not note edit
             case NoteType.RoleBan:
+            case NoteType.SpeciesBan: // SS220 Species bans
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, "Unknown note type");
         }
@@ -163,6 +165,7 @@ public sealed class AdminNotesManager : IAdminNotesManager, IPostInjectInit
             createdAt,
             expiryTime,
             null,
+            null, // SS220 Species bans
             null,
             null,
             null,
@@ -180,6 +183,7 @@ public sealed class AdminNotesManager : IAdminNotesManager, IPostInjectInit
             NoteType.Message => (await _db.GetAdminMessage(id))?.ToShared(),
             NoteType.ServerBan => (await _db.GetServerBanAsNoteAsync(id))?.ToShared(),
             NoteType.RoleBan => (await _db.GetServerRoleBanAsNoteAsync(id))?.ToShared(),
+            NoteType.SpeciesBan => (await _db.GetServerSpeciesBanAsNoteAsync(id))?.ToShared(), // SS220 Species bans
             _ => throw new ArgumentOutOfRangeException(nameof(type), type, "Unknown note type")
         };
     }
@@ -212,6 +216,11 @@ public sealed class AdminNotesManager : IAdminNotesManager, IPostInjectInit
             case NoteType.RoleBan:
                 await _db.HideServerRoleBanFromNotes(noteId, deletedBy.UserId, deletedAt);
                 break;
+            // SS220 Species bans begin
+            case NoteType.SpeciesBan:
+                await _db.HideServerSpeciesBanFromNotes(noteId, deletedBy.UserId, deletedAt);
+                break;
+            // SS220 Species bans end
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, "Unknown note type");
         }
@@ -296,6 +305,13 @@ public sealed class AdminNotesManager : IAdminNotesManager, IPostInjectInit
                     throw new ArgumentException("Severity cannot be null for a role ban", nameof(severity));
                 await _db.EditServerRoleBan(noteId, message, severity.Value, expiryTime, editedBy.UserId, editedAt);
                 break;
+            // SS220 Species bans begin
+            case NoteType.SpeciesBan:
+                if (severity is null)
+                    throw new ArgumentException("Severity cannot be null for a species ban", nameof(severity));
+                await _db.EditServerSpeciesBan(noteId, message, severity.Value, expiryTime, editedBy.UserId, editedAt);
+                break;
+            // SS220 Species bans end
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, "Unknown note type");
         }

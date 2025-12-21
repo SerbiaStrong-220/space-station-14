@@ -12,7 +12,7 @@
   - type: Tag
     tags:
       - Medal
-      - WhitelistChameleon #SS220-FIX CLOTHING TAGS 
+      - WhitelistChameleon
 
 - type: entity
   parent: ClothingNeckBase
@@ -29,7 +29,7 @@
   - type: Tag
     tags:
       - Medal
-      - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS 
+      - WhitelistChameleon
 
 - type: entity
   parent: ClothingNeckBase
@@ -44,7 +44,7 @@
   - type: Tag
     tags:
       - Medal
-      - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS 
+      - WhitelistChameleon
 
 - type: entity
   parent: ClothingNeckBase
@@ -59,7 +59,7 @@
   - type: Tag
     tags:
       - Medal
-      - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS 
+      - WhitelistChameleon
 
 - type: entity
   parent: ClothingNeckBase
@@ -74,7 +74,7 @@
   - type: Tag
     tags:
       - Medal
-      - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS 
+      - WhitelistChameleon
 
 - type: entity
   parent: ClothingNeckBase
@@ -89,7 +89,7 @@
   - type: Tag
     tags:
       - Medal
-      - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS 
+      - WhitelistChameleon
 
 - type: entity
   parent: ClothingNeckBase
@@ -104,7 +104,7 @@
   - type: Tag
     tags:
       - Medal
-      - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS 
+      - WhitelistChameleon
 
 - type: entity
   parent: ClothingNeckBase
@@ -121,4 +121,4 @@
   - type: Tag
     tags:
       - Medal
-      - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS 
+      - WhitelistChameleon

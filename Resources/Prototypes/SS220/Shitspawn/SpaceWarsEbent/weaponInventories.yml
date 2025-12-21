@@ -1,0 +1,77 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: vendingMachineInventory
+  id: WeaponSISailorInventory
+  startingInventory:
+    SurvivalKitSetBox: 4
+    LighterSetBox: 1
+    SaboteurSetBox: 1
+    ViperPistolSetBox: 4
+    KammererSetBox: 1
+    GuardianSetBox: 5
+    SoldierSetBox: 2
+    HooliganSetBox: 1
+    LawyerSetBox: 1
+
+- type: vendingMachineInventory
+  id: WeaponNTSailorInventory
+  startingInventory:
+    SurvivalKitSetBox: 4
+    LighterSetBox: 1
+    SaboteurSetBox: 1
+    MkPistolSetBox: 4
+    KammererSetBox: 1
+    GuardianSetBox: 3
+    CorporationFighterSetBox: 3
+    SoldierSetBox: 2
+    LawyerSetBox: 1
+
+- type: vendingMachineInventory
+  id: WeaponSIPilotInventory
+  startingInventory:
+    SurvivalKitSetBox: 1
+    LighterSetBox: 1
+    SaboteurSetBox: 1
+    BombistSetBox: 1
+    1984PistolSetBox: 1
+    MercenarySetBox: 1
+    OperativeSetBox: 1
+    OutpostSetBox: 1
+    BulldogSetBox: 1
+
+- type: vendingMachineInventory
+  id: WeaponNTPilotInventory
+  startingInventory:
+    SurvivalKitSetBox: 1
+    LighterSetBox: 1
+    SaboteurSetBox: 1
+    BombistSetBox: 1
+    1984PistolSetBox: 1
+    MercenarySetBox: 1
+    KRSSetBox: 1
+    OutpostSetBox: 1
+    BulldogSetBox: 1
+
+- type: vendingMachineInventory
+  id: WeaponSICaptainInventory
+  startingInventory:
+    SurvivalKitSetBox: 1
+    LighterSetBox: 1
+    SaboteurSetBox: 1
+    1984PistolSetBox: 1
+    PythonSetBox: 1
+    MercenarySetBox: 1
+    ExperimentetBox: 1
+    LawyerSetBox: 1
+
+- type: vendingMachineInventory
+  id: WeaponNTCaptainInventory
+  startingInventory:
+    SurvivalKitSetBox: 1
+    LighterSetBox: 1
+    SaboteurSetBox: 1
+    1984PistolSetBox: 1
+    GoodCaptainSetBox: 1
+    KRSSetBox: 1
+    ExperimentetBox: 1
+    LawyerSetBox: 1

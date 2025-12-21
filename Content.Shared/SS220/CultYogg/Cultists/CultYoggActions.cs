@@ -3,22 +3,17 @@ using Content.Shared.Actions;
 
 namespace Content.Shared.SS220.CultYogg.Cultists;
 
-public sealed partial class CultYoggPukeShroomEvent : InstantActionEvent
+public sealed partial class CultYoggPukeShroomActionEvent : InstantActionEvent
 {
 }
 
-public sealed partial class CultYoggDigestEvent : InstantActionEvent
+public sealed partial class CultYoggDigestActionEvent : InstantActionEvent
 {
 }
-public sealed partial class CultYoggCorruptItemEvent : EntityTargetActionEvent
-{
-}
-
-public sealed partial class CultYoggCorruptItemInHandEvent : InstantActionEvent
+public sealed partial class CultYoggCorruptItemActionEvent : EntityTargetActionEvent
 {
 }
 
-public sealed partial class CultYoggAscendingEvent : InstantActionEvent
+public sealed partial class CultYoggCorruptItemInHandActionEvent : InstantActionEvent
 {
 }
-

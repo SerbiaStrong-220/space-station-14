@@ -6,44 +6,52 @@
     requirement:
       !type:RoleTimeRequirement
       role: JobHeadOfSecurity
-      time: 72000 #20 hrs
+      time: 20h
+  # SS220-sponsor-tier-begin
   sponsorTierLoadoutEffects:
   - !type:GroupLoadoutEffect
     proto: SeniorDevTeamTier
   - !type:GroupLoadoutEffect
     proto: AdministratorSponsorTier
+  # SS220-sponsor-tier-end
 
 # Jumpsuit
 - type: loadout
   id: HeadofSecurityJumpsuit
   equipment:
     jumpsuit: ClothingUniformJumpsuitHoS
+  groupBy: "jumpsuit"
 
 - type: loadout
   id: HeadofSecurityJumpskirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtHoS
+  groupBy: "jumpskirt"
 
 - type: loadout
   id: HeadofSecurityTurtleneck
   equipment:
     jumpsuit: ClothingUniformJumpsuitHoSAlt
+  groupBy: "jumpsuit"
 
 - type: loadout
   id: HeadofSecurityTurtleneckSkirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtHoSAlt
+  groupBy: "jumpskirt"
 
 - type: loadout
   id: HeadofSecurityFormalSuit
   equipment:
     jumpsuit: ClothingUniformJumpsuitHosFormal
+  groupBy: "jumpsuit"
 
 # SS220-RemoveFormalSkirtLoadouts-Begin
-#- type: loadout
-#  id: HeadofSecurityFormalSkirt
-#  equipment:
-#    jumpsuit: ClothingUniformJumpskirtHosFormal
+# - type: loadout
+#   id: HeadofSecurityFormalSkirt
+#   equipment:
+#     jumpsuit: ClothingUniformJumpskirtHosFormal
+#   groupBy: "jumpskirt"
 # SS220-RemoveFormalSkirtLoadouts-End
 
 # Head

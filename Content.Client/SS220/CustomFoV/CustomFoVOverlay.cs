@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using System.Numerics;
 using Content.Shared.SS220.CustomFoV;
 using Robust.Client.GameObjects;
@@ -21,6 +22,7 @@ public sealed class CustomFoVOverlay : Overlay
 
     private readonly SpriteSpecifier _fovCorner;
     private readonly ShaderInstance _shader;
+    private readonly Dictionary<EntityUid, Dictionary<Vector2i, Entity<TransformComponent>>> _entMapDict = new();
 
     internal CustomFoVOverlay(EntityManager entMan, IPrototypeManager prototype)
     {
@@ -35,16 +37,13 @@ public sealed class CustomFoVOverlay : Overlay
         ZIndex = (int) Shared.DrawDepth.DrawDepth.WallFovOverlay;
     }
 
-    private Dictionary<EntityUid, Dictionary<Vector2i, Entity<TransformComponent>>> _entMapDict = new();
-
     protected override void Draw(in OverlayDrawArgs args)
     {
         _entMapDict.Clear();
 
-        if (args.Viewport.Eye is not { } eye || !eye.DrawFov)
+        if (args.Viewport.Eye is not { DrawFov: true } eye)
             return;
 
-        var eyeAngle = eye.Rotation;
         var texture = _sprite.Frame0(_fovCorner);
         var handle = args.WorldHandle;
 
@@ -81,9 +80,6 @@ public sealed class CustomFoVOverlay : Overlay
 
         void DrawFoVCorner(Vector2 worldPosition, Angle worldRot)
         {
-            if (handle is null || texture is null)
-                return;
-
             var rotatedMatrix = Matrix3Helpers.CreateTransform(worldPosition, worldRot);
             handle.SetTransform(rotatedMatrix);
             handle.DrawTexture(texture, new Vector2(-0.5f, -0.5f));

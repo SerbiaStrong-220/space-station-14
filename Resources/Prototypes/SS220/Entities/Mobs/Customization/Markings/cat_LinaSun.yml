@@ -1,7 +1,7 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: marking
-  id: FelinidEears [2]
+  id: FelinidEears[2]
   bodyPart: HeadTop
   markingCategory: HeadTop
   speciesRestriction: [Felinid]
@@ -21,10 +21,10 @@
   - sprite: SS220/Mobs/Customization/Felinid/felinid_parts.rsi
     state: ears_pirsing_outer
   - sprite: SS220/Mobs/Customization/Felinid/felinid_parts.rsi
-    state: ears_pirsing_inner  
-    
+    state: ears_pirsing_inner
+
 - type: marking
-  id: FelinidEears [3]
+  id: FelinidEears[3]
   bodyPart: HeadTop
   markingCategory: HeadTop
   speciesRestriction: [Felinid]
@@ -45,9 +45,9 @@
     state: ears_big_outer
   - sprite: SS220/Mobs/Customization/Felinid/felinid_parts.rsi
     state: ears_big_inner
-    
+
 - type: marking
-  id: FelinidEears [4]
+  id: FelinidEears[4]
   bodyPart: HeadTop
   markingCategory: HeadTop
   speciesRestriction: [Felinid]
@@ -67,10 +67,10 @@
   - sprite: SS220/Mobs/Customization/Felinid/felinid_parts.rsi
     state: ears_nyshka_outer
   - sprite: SS220/Mobs/Customization/Felinid/felinid_parts.rsi
-    state: ears_nyshka_inner  
-    
+    state: ears_nyshka_inner
+
 - type: marking
-  id: FelinidEears [5]
+  id: FelinidEears[5]
   bodyPart: HeadTop
   markingCategory: HeadTop
   speciesRestriction: [Felinid]
@@ -91,7 +91,7 @@
     state: ears_food_outer
   - sprite: SS220/Mobs/Customization/Felinid/felinid_parts.rsi
     state: ears_food_inner
-    
+
 - type: marking
   id: FelinidEars
   bodyPart: HeadTop
@@ -114,11 +114,11 @@
     state: ears_vini_outer
   - sprite: SS220/Mobs/Customization/Felinid/felinid_parts.rsi
     state: ears_vini_inner
-    
+
 # Felinid Tails
 
 - type: marking
-  id: FelinidTails [6]
+  id: FelinidTails[6]
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: [Felinid]
@@ -131,7 +131,7 @@
     state: felinid_tail_D
 
 - type: marking
-  id: FelinidTails [5]
+  id: FelinidTails[5]
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: [Felinid]
@@ -146,7 +146,7 @@
     state: felinid_tail_C
 
 - type: marking
-  id: FelinidTails [4]
+  id: FelinidTails[4]
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: [Felinid]
@@ -161,7 +161,7 @@
     state: felinid_tail_B
 
 - type: marking
-  id: FelinidTails [3]
+  id: FelinidTails[3]
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: [Felinid]
@@ -176,9 +176,9 @@
     state: felinid_tail_C
   - sprite: SS220/Mobs/Customization/Felinid/felinid_tails.rsi
     state: felinid_tail_B
-    
+
 - type: marking
-  id: FelinidTails [2]
+  id: FelinidTails[2]
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: [Felinid]

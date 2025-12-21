@@ -32,6 +32,7 @@
       - ChiefEngineer
       - ChiefMedicalOfficer
       - Command
+      - Clown #SS220 New_accesses_and_some_tweaks
       - Engineering
       - External
       - HeadOfPersonnel
@@ -40,16 +41,23 @@
       - Janitor
       - Kitchen
       - Lawyer
+      - Librarian #SS220 New_accesses_and_some_tweaks
       - Maintenance
       - Medical
+      - Psychologist #SS220 New_accesses_and_some_tweaks
       - Quartermaster
       - Research
       - ResearchDirector
+      - Reporter #SS220 New_accesses_and_some_tweaks
       - Salvage
       - Security
       - Service
       - Theatre
       - Magistrate #SS220-Magistrate Foundation
+      - Mime #SS220 New_accesses_and_some_tweaks
+      - Musician #SS220 New_accesses_and_some_tweaks
+      - GenpopEnter
+      - GenpopLeave
       privilegedIdSlot:
         name: id-card-console-privileged-id
         ejectSound: /Audio/Machines/id_swipe.ogg
@@ -71,6 +79,7 @@
       requiresComplex: true
       requireActiveHand: false
       singleUser: true
+      inHandsOnly: true
     - type: ItemSlots
     - type: ContainerContainer
       containers:
@@ -104,6 +113,7 @@
     - ChiefMedicalOfficer
     - Command
     - Cryogenics
+    - Clown #SS220 New_accesses_and_some_tweaks
     - EmergencyShuttleRepealAll
     - Engineering
     - External
@@ -113,23 +123,32 @@
     - Janitor
     - Kitchen
     - Lawyer
+    - Librarian #SS220 New_accesses_and_some_tweaks
     - Maintenance
     - Medical
+    - Psychologist #SS220 New_accesses_and_some_tweaks
     - Quartermaster
     - Research
     - ResearchDirector
+    - Reporter #SS220 New_accesses_and_some_tweaks
     - Salvage
     - Security
     - Service
     - StationAi
     - Theatre
     - Magistrate #SS220-Magistrate Foundation
+    - Mime #SS220 New_accesses_and_some_tweaks
+    - Musician #SS220 New_accesses_and_some_tweaks
     - CentralCommand
     - NuclearOperative
     - SyndicateAgent
     - Wizard
+    - Xenoborg
+    - GenpopEnter
+    - GenpopLeave
     privilegedIdSlot:
       name: id-card-console-privileged-id
+      startingItem: UniversalIDCard
       ejectSound: /Audio/Machines/id_swipe.ogg
       insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
       ejectOnBreak: true

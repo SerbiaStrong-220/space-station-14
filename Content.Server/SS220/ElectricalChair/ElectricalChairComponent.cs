@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.DeviceLinking;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
@@ -12,7 +13,7 @@ public sealed partial class ElectricalChairComponent : Component
     public TimeSpan NextDamageSecond = TimeSpan.Zero;
 
     [DataField]
-    public bool Enabled = false;
+    public bool Enabled;
 
     [DataField]
     public int DamagePerSecond = 40;

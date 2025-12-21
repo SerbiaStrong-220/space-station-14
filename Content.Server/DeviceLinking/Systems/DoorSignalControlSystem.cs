@@ -1,6 +1,7 @@
 using Content.Server.DeviceLinking.Components;
 using Content.Server.DeviceNetwork;
 using Content.Server.Doors.Systems;
+using Content.Shared.DeviceLinking;
 using Content.Shared.DeviceLinking.Events;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.Doors.Components;
@@ -93,19 +94,22 @@ namespace Content.Server.DeviceLinking.Systems
             if (TryComp<ApcPowerReceiverComponent>(uid, out var receiverComp) && !receiverComp.Powered)
                 return;
 
+            // ss220 add open/close ports to door start
             if (args.State == DoorState.Closed)
             {
                 // only ever say the door is closed when it is completely airtight
                 _signalSystem.SendSignal(uid, door.OutOpen, false);
+                _signalSystem.SendSignal(uid, door.ClosedPortOut, true);
             }
-            else if (args.State == DoorState.Open
-                     || args.State == DoorState.Opening
-                     || args.State == DoorState.Closing
-                     || args.State == DoorState.Emagging)
+            else if (args.State is DoorState.Open or DoorState.Opening or DoorState.Closing or DoorState.Emagging)
             {
                 // say the door is open whenever it would be letting air pass
                 _signalSystem.SendSignal(uid, door.OutOpen, true);
+
+                if (args.State is DoorState.Open)
+                    _signalSystem.SendSignal(uid, door.OpenedPortOut, true);
             }
+            // ss220 add open/close ports to door end
         }
     }
 }

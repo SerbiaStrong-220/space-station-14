@@ -26,15 +26,16 @@ public sealed class StationViewableMapBoundUserInterface : BoundUserInterface
 
         _window.OnClose += Close;
 
-        if (_entMan.TryGetComponent(Owner, out ViewableStationMapComponent? comp) && comp.MinimapData is StationMinimapData minimap)
-        {
-            if (!string.IsNullOrEmpty(minimap.MapTexture))
-            {
-                var path = SpriteSpecifierSerializer.TextureRoot / minimap.MapTexture;
-                _window.ViewedMap = path;
-                _window.Viewer.SetPictureCenterOffset(minimap.OriginOffset);
-            }
-        }
+        if (!_entMan.TryGetComponent(Owner, out ViewableStationMapComponent? comp) ||
+            comp.MinimapData is not { } minimap)
+            return;
+
+        if (string.IsNullOrEmpty(minimap.MapTexture))
+            return;
+
+        var path = SpriteSpecifierSerializer.TextureRoot / minimap.MapTexture;
+        _window.ViewedMap = path;
+        _window.Viewer.SetPictureCenterOffset(minimap.OriginOffset);
     }
 
     protected override void Dispose(bool disposing)

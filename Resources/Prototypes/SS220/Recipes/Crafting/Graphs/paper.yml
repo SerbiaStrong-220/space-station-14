@@ -10,7 +10,7 @@
               icon:
                 sprite: Objects/Misc/bureaucracy.rsi
                 state: paper
-              name: Лист бумаги
+              name: construction-graph-tag-paper
               doAfter: 2
     - node: envelope
       entity: Envelope

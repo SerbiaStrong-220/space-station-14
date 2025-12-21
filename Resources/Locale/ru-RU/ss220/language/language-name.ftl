@@ -18,3 +18,13 @@ language-canilunzt-name = Канилунц
 # Misc
 language-binary-name = Бинарный канал
 language-codespeak-name = Кодспик
+#Animals
+language-doggish-name = Собачий
+language-mousey-name = Мышиный
+language-feline-name = Кошачий
+language-monkey-name = Обезьяний
+language-reptilian-name = Рептильный
+language-spider-name = Паучий
+language-piggish-name = Свинячий
+language-dragon-name = Драконий
+language-carpish-name = Карпиш

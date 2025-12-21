@@ -19,7 +19,7 @@
 - type: entity
   name : Blaster bolt
   id: BulletBlaster
-  parent: BulletDisabler
+  parent: BaseBlasterBullet
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite

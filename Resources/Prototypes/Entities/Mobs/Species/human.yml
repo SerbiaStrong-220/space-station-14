@@ -22,6 +22,7 @@
     - Snout
   # SS220-Add-Languages begin
   - type: Language
+    selectedLanguage: Galactic
     availableLanguages:
     - id: Galactic
     - id: SolCommon
@@ -39,9 +40,6 @@
   #ss220 emote 5 sec end
   #SS220 LimitationRevive - start
   - type: LimitationRevive
-    typeDamageOnDead:
-      types:
-        Сerebral: 400
   #SS220 LimitationRevive - end
 
 - type: entity

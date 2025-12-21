@@ -68,7 +68,8 @@
   - type: UnpoweredFlashlight
   - type: PointLight
     enabled: false
-    radius: 1.5
+    radius: 1.7
+    falloff: 3
     softness: 5
     autoRot: true
   - type: Ringer
@@ -269,7 +270,7 @@
     state: pda-internmed
   - type: GuideHelp
     guides:
-    - Medical Doctor
+    - MedicalDoctor
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -720,6 +721,13 @@
     - WhitelistChameleon
     - WhitelistChameleonPDA
   #ss220 add pdaidpainter end
+  - type: CartridgeLoader
+    preinstalled:
+    - CrewManifestCartridge
+    - NotekeeperCartridge
+    - NanoTaskCartridge
+    - NewsReaderCartridge
+    - AstroNavCartridge
 
 - type: entity
   parent: BasePDA
@@ -908,7 +916,7 @@
     - DoorBumpOpener
 
 - type: entity
-  parent: BaseSecurityPDA
+  parent: BasePDA #SS220 SD-pda-some-fixes
   id: LawyerPDA
   name: lawyer PDA
   description: For lawyers to poach dubious clients.
@@ -1249,7 +1257,7 @@
     state: pda-medical
   - type: GuideHelp
     guides:
-    - Medical Doctor
+    - MedicalDoctor
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -1471,6 +1479,7 @@
     - NewsReaderCartridge
     - WantedListCartridge
     - LogProbeCartridge
+    - MessengerCartridgeClient #SS220 SD-pda-some-fixes
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -1570,6 +1579,7 @@
     id: CentcomIDCard
     penSlot:
       startingItem: CentCommNewPen #SS220-CentcomFashion
+      priority: -1
       whitelist:
         tags:
         - Write
@@ -1721,8 +1731,8 @@
   - type: Instrument
     allowPercussion: false
     handheld: true
-    bank: 1
     program: 2
+    bank: 100 # Defined in space-station-14.sf2
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -1831,7 +1841,7 @@
     - DoorBumpOpener
 
 - type: entity
-  parent: BasePDA
+  parent: [ BasePDA, BaseSyndicateContraband ]
   id: SyndiPDA
   name: syndicate PDA
   description: Ok, time to be a productive member of- oh cool I'm a bad guy time to kill people!
@@ -1867,6 +1877,63 @@
       - NotekeeperCartridge
       - MessengerCartridgeClient # SS220 Messenger
       - NanoTaskCartridge
+
+- type: entity
+  parent: [ SyndiPDA, BaseSyndicateContraband ]
+  id: SyndiOperativePDA
+  name: syndicate operative PDA
+  description: Death to NT!
+  components:
+  - type: Pda
+    id: SyndiOperativeIDCard
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-syndi #SS220 PDA-Resprite-TODO
+  - type: Icon
+    sprite: SS220/Objects/Devices/pda.rsi #SS220 PDA-Resprite-TODO
+    state: pda-syndi #SS220 PDA-Resprite-TODO
+
+- type: entity
+  parent: [ SyndiOperativePDA, BaseSyndicateContraband ]
+  id: SyndiCorpsmanPDA
+  name: syndicate corpsman PDA
+  description: Commander... I need to cook!
+  components:
+  - type: Pda
+    id: SyndiCorpsmanIDCard
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-syndi-agent #SS220 PDA-Resprite-TODO
+  - type: Icon
+    sprite: SS220/Objects/Devices/pda.rsi #SS220 PDA-Resprite-TODO
+    state: pda-syndi-agent #SS220 PDA-Resprite-TODO
+  - type: CartridgeLoader
+    uiKey: enum.PdaUiKey.Key
+    preinstalled:
+      - NotekeeperCartridge
+      - NanoTaskCartridge
+      - MedTekCartridge
+
+- type: entity
+  parent: [ SyndiOperativePDA, BaseSyndicateContraband ]
+  id: SyndiCommanderPDA
+  name: syndicate commander PDA
+  description: So what are we, some kind of Nukie squad?
+  components:
+  - type: Pda
+    id: SyndiCommanderIDCard
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-syndi #SS220 PDA-Resprite-TODO
+  - type: Icon
+    sprite: SS220/Objects/Devices/pda.rsi #SS220 PDA-Resprite-TODO
+    state: pda-syndi #SS220 PDA-Resprite-TODO
 
 - type: entity
   parent: BaseSecurityPDA
@@ -2054,8 +2121,6 @@
   #SS220 PDA-Resprite-End
   - type: PdaBorderColor
     borderColor: "#7a998d" #SS220 PDA-Resprite
-#    accentHColor: "#447987" #SS220 PDA-Resprite
-#    accentVColor: "#447987" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
@@ -2236,6 +2301,7 @@
     - NewsReaderCartridge
     - WantedListCartridge
     - LogProbeCartridge
+    - MessengerCartridgeClient #SS220 SD-pda-some-fixes
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -2285,6 +2351,7 @@
     - NewsReaderCartridge
     - WantedListCartridge
     - MedTekCartridge
+    - MessengerCartridgeClient #SS220 SD-pda-some-fixes
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -2504,7 +2571,27 @@
   #ss220 add pdaidpainter end
 
 - type: entity
-  parent: SyndiPDA
+  parent: BasePDA
+  id: SeniorCourierPDA
+  name: senior courier PDA
+  description: Smells like postage stamps and shuttle fuel.
+  components:
+  - type: Pda
+    id: CargoIDCard
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-seniorcourier #SS220 Resprite Senior Courier PDA
+  - type: PdaBorderColor
+    borderColor: "#e39751"
+    accentVColor: "#4b474f" #SS220 Resprite Senior Courier PDA
+  - type: Icon
+    sprite: SS220/Objects/Devices/pda.rsi #SS220 Resprite Senior Courier PDA
+    state: pda-seniorcourier #SS220 Resprite Senior Courier PDA
+
+- type: entity
+  parent: [ BaseMajorContraband, SyndiPDA ]
   id: PiratePDA
   name: pirate PDA
   description: Yargh!
@@ -2537,7 +2624,7 @@
     state: pda-pirate
 
 - type: entity
-  parent: BaseMedicalPDA
+  parent: [ BaseMedicalPDA, BaseSyndicateContraband ]
   id: SyndiAgentPDA
   name: syndicate corpsman PDA
   description: For those days when healing normal syndicates aren't enough, try healing nuclear operatives instead!
@@ -2577,7 +2664,7 @@
       - MessengerCartridgeClient # SS220 Messenger
 
 - type: entity
-  parent: BasePDA
+  parent: [BasePDA, SelectableLock]
   id: ChameleonPDA
   name: passenger PDA
   description: Why isn't it gray?
@@ -2627,7 +2714,34 @@
        !type:String
        pda-wizard
   - type: PdaBorderColor
-    borderColor: "#7F3300"
+    borderColor: "#cf7207" # SS220 Wizard getting used to
   - type: Icon
-    sprite: Objects/Devices/pda.rsi
+    sprite: SS220/Objects/Devices/pda.rsi # SS220 Wizard getting used to
     state: pda-wizard
+    # SS220 Wizard getting used to Begin
+  - type: Sprite
+    sprite: SS220/Objects/Devices/pda.rsi
+    layers:
+    - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda"
+    - state: "screen-library"
+      shader: "unshaded"
+    - state: "light_overlay"
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: "unshaded"
+      visible: false
+    - state: "id_overlay"
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      visible: false
+    # SS220 Wizard getting used to End
+
+- type: entity
+  parent: ClearPDA
+  id: ScurretPDA
+  description: A temporary PDA granted to scurret temps. Doesn't do much. Wawa!
+  components:
+  - type: Pda
+    id: VisitorIDCard
+  - type: Tag #  Ignore Chameleon tags
+    tags:
+    - DoorBumpOpener

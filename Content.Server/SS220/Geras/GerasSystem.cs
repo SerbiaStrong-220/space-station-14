@@ -22,29 +22,29 @@ public sealed class GerasSystem : SharedGerasSystem
         SubscribeLocalEvent<GerasComponent, EntityZombifiedEvent>(OnZombification);
     }
 
-    private void OnZombification(EntityUid uid, GerasComponent component, EntityZombifiedEvent args)
+    private void OnZombification(Entity<GerasComponent> ent, ref EntityZombifiedEvent args)
     {
-        _actionsSystem.RemoveAction(uid, component.GerasActionEntity);
+        _actionsSystem.RemoveAction(ent.Owner, ent.Comp.GerasActionEntity);
     }
 
-    private void OnMapInit(EntityUid uid, GerasComponent component, MapInitEvent args)
+    private void OnMapInit(Entity<GerasComponent> ent, ref MapInitEvent args)
     {
         // try to add geras action
-        _actionsSystem.AddAction(uid, ref component.GerasActionEntity, component.GerasAction);
+        _actionsSystem.AddAction(ent.Owner, ref ent.Comp.GerasActionEntity, ent.Comp.GerasAction);
     }
 
-    private void OnMorphIntoGeras(EntityUid uid, GerasComponent component, MorphIntoGeras args)
+    private void OnMorphIntoGeras(Entity<GerasComponent> ent, ref MorphIntoGeras args)
     {
-        if (HasComp<ZombieComponent>(uid))
+        if (HasComp<ZombieComponent>(ent.Owner))
             return; // i hate zomber.
 
-        var ent = _polymorphSystem.PolymorphEntity(uid, component.GerasPolymorphId);
+        var entity = _polymorphSystem.PolymorphEntity(ent.Owner, ent.Comp.GerasPolymorphId);
 
-        if (!ent.HasValue)
+        if (!entity.HasValue)
             return;
 
-        _popupSystem.PopupEntity(Loc.GetString("geras-popup-morph-message-others", ("entity", ent.Value)), ent.Value, Filter.PvsExcept(ent.Value), true);
-        _popupSystem.PopupEntity(Loc.GetString("geras-popup-morph-message-user"), ent.Value, ent.Value);
+        _popupSystem.PopupEntity(Loc.GetString("geras-popup-morph-message-others", ("entity", entity.Value)), entity.Value, Filter.PvsExcept(entity.Value), true);
+        _popupSystem.PopupEntity(Loc.GetString("geras-popup-morph-message-user"), entity.Value, entity.Value);
 
         args.Handled = true;
     }

@@ -1,4 +1,5 @@
 using Content.Shared.Damage;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Whitelist;
@@ -17,6 +18,7 @@ public abstract class SharedDamageMarkerSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!; //ss220 fix crusher healing if target is dead (#2645)
 
     public override void Initialize()
     {
@@ -29,6 +31,11 @@ public abstract class SharedDamageMarkerSystem : EntitySystem
     {
         if (component.Marker != args.Used)
             return;
+
+        //ss220 fix crusher healing if target is dead start (#2645)
+        if (_mobState.IsDead(uid))
+            return;
+        //ss220 fix crusher healing if target is dead end (#2645)
 
         args.BonusDamage += component.Damage;
         RemCompDeferred<DamageMarkerComponent>(uid);

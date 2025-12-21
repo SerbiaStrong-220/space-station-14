@@ -15,7 +15,7 @@ public sealed class JobIconChangerSystem : EntitySystem
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
 
-    private readonly Dictionary<EventRoleIconFilterGroup, string> roleGroupKeys = new()
+    private readonly Dictionary<EventRoleIconFilterGroup, string> _roleGroupKeys = new()
     {
         { EventRoleIconFilterGroup.IOT, "IronSquad" },
         { EventRoleIconFilterGroup.NT, "SpecOps" },
@@ -63,31 +63,33 @@ public sealed class JobIconChangerSystem : EntitySystem
         var jobIcon = entity.Comp.JobIcon.Value;
 
         if (entity.Comp.IconFilterGroup != EventRoleIconFilterGroup.None)
-            eventRoleComponent.RoleGroupKey = roleGroupKeys[entity.Comp.IconFilterGroup];
+            eventRoleComponent.RoleGroupKey = _roleGroupKeys[entity.Comp.IconFilterGroup];
         else
         {
             //Try getting rolegroup by JobIcon ID :starege:
             //We assume that there's only match (such a hack)
-            var roleGroups = roleGroupKeys.Keys.ToList();
-            var roleIconFilter = roleGroups.Where(key => jobIcon.Id.StartsWith(key.ToString())).First();
-            eventRoleComponent.RoleGroupKey = roleGroupKeys[roleIconFilter];
+            var roleIconFilter = _roleGroupKeys.Keys.FirstOrDefault(key => jobIcon.Id.StartsWith(key.ToString()));
+            if (roleIconFilter == default)
+                return;
+
+            eventRoleComponent.RoleGroupKey = _roleGroupKeys[roleIconFilter];
         }
 
         if (HasComp<NpcFactionMemberComponent>(args.Target.Value))
         {
             _npcFaction.ClearFactions(args.Target.Value);
 
-            if (entity.Comp.IconFilterGroup == EventRoleIconFilterGroup.IOT)
+            switch (entity.Comp.IconFilterGroup)
             {
-                _npcFaction.AddFaction(args.Target.Value, "EbentIronSquad");
-            }
-            if (entity.Comp.IconFilterGroup == EventRoleIconFilterGroup.USSP)
-            {
-                _npcFaction.AddFaction(args.Target.Value,"EbentUssp");
-            }
-            if (entity.Comp.IconFilterGroup == EventRoleIconFilterGroup.NT)
-            {
-                _npcFaction.AddFaction(args.Target.Value,"EbentNanoTrasen");
+                case EventRoleIconFilterGroup.IOT:
+                    _npcFaction.AddFaction(args.Target.Value, "EbentIronSquad");
+                    break;
+                case EventRoleIconFilterGroup.USSP:
+                    _npcFaction.AddFaction(args.Target.Value,"EbentUssp");
+                    break;
+                case EventRoleIconFilterGroup.NT:
+                    _npcFaction.AddFaction(args.Target.Value,"EbentNanoTrasen");
+                    break;
             }
         }
 

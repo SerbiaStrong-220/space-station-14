@@ -94,6 +94,17 @@
     heatingCoefficient: 1.1
     coolingCoefficient: 0.1
 
+- type: entity
+  parent: [ ClothingSponsor1984, ClothingOuterCoatHoSTrench ]
+  id: ClothingSponsor1984HoS
+  suffix: Floppa, HoS
+  components:
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
+      item_radio: !type:ContainerSlot
+
 # CyberPunk
 - type: entity
   parent: ClothingSponsorOuterStorageBase

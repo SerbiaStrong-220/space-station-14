@@ -9,6 +9,7 @@
   access:
   - Service
   - Maintenance
+  - Reporter #SS220 New_accesses_and_some_tweaks
 
 - type: startingGear
   id: ReporterGear
@@ -23,3 +24,14 @@
     - CassetteTape
     - CassetteTape
 # SS220 Tape Recorder #32234 early merge end
+
+- type: chameleonOutfit
+  id: ReporterChameleonOutfit
+  job: Reporter
+  equipment:
+    head: ClothingHeadHatFedoraGrey
+    eyes: ClothingEyesGlassesCheapSunglasses
+    mask: ClothingMaskBreath
+    outerClothing: ClothingOuterCoatTrench
+    neck: ClothingNeckTieRed
+    gloves: ClothingHandsGlovesFingerless

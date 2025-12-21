@@ -212,7 +212,7 @@ public sealed partial class GunComponent : Component
     /// The base value for how fast the projectile moves.
     /// </summary>
     [DataField]
-    public float ProjectileSpeed = 25f;
+    public float ProjectileSpeed = 40f;  //SS220 BulletSpeed
 
     /// <summary>
     /// How fast the projectile moves.
@@ -263,6 +263,13 @@ public sealed partial class GunComponent : Component
     /// </summary>
     [DataField]
     public Vector2 DefaultDirection = new Vector2(0, -1);
+
+    ///SS220-new-feature kus start
+    [DataField, AutoNetworkedField]
+    public bool CanSuicide = false;
+    ///SS220-new-feature kus end
+
+
 }
 
 [Flags]

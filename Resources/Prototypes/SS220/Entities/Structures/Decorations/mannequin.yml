@@ -1,0 +1,162 @@
+- type: entity
+  id: MannequinLimbs
+  parent: [BaseStructureDynamic, StripableInventoryBase]
+  name: mannequin
+  description: It can wear any clothing with style.
+  suffix:  With limbs
+  components:
+  - type: Appearance
+  - type: Sprite
+    sprite: SS220/Structures/Decorations/mannequin-limbs.rsi
+    state: mannequin
+    noRot: true
+    layers:
+    - map: [ "mannequin" ]
+      sprite: SS220/Structures/Decorations/mannequin-limbs.rsi
+      state: mannequin
+    - map: [ "jumpsuit" ]
+    - map: [ "gloves" ]
+    - map: [ "shoes" ]
+    - map: [ "ears" ]
+    - map: [ "eyes" ]
+    - map: [ "outerClothing" ]
+    - map: [ "belt" ]
+    - map: [ "id" ]
+    - map: [ "back" ]
+    - map: [ "neck" ]
+    - map: [ "mask" ]
+    - map: [ "head" ]
+    - map: [ "pocket1" ]
+    - map: [ "pocket2" ]
+    - map: [ "clownedon" ]
+      sprite: "Effects/creampie.rsi"
+      state: "creampie_human"
+      visible: false
+  - type: GenericVisualizer
+    visuals:
+      enum.CreamPiedVisuals.Creamed:
+        clownedon:
+          True: {visible: true}
+          False: {visible: false}
+  - type: Rotatable
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MidImpassable
+        - BulletImpassable
+  - type: InteractionOutline
+  - type: Construction
+    graph: MannequinLimbs
+    node: mannequinlimbs
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WoodDestroy
+      - !type:EmptyAllContainersBehaviour
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
+      shoes: !type:ContainerSlot
+        showEnts: False
+        occludes: False
+        ent: null
+      jumpsuit: !type:ContainerSlot
+        showEnts: False
+        occludes: False
+        ent: null
+      outerClothing: !type:ContainerSlot
+        showEnts: False
+        occludes: False
+        ent: null
+      gloves: !type:ContainerSlot
+        showEnts: False
+        occludes: False
+        ent: null
+      neck: !type:ContainerSlot
+        showEnts: False
+        occludes: False
+        ent: null
+      mask: !type:ContainerSlot
+        showEnts: False
+        occludes: False
+        ent: null
+      eyes: !type:ContainerSlot
+        showEnts: False
+        occludes: False
+        ent: null
+      ears: !type:ContainerSlot
+        showEnts: False
+        occludes: False
+        ent: null
+      head: !type:ContainerSlot
+        showEnts: False
+        occludes: False
+        ent: null
+      pocket1: !type:ContainerSlot
+        showEnts: False
+        occludes: False
+        ent: null
+      pocket2: !type:ContainerSlot
+        showEnts: False
+        occludes: False
+        ent: null
+      suitstorage: !type:ContainerSlot
+        showEnts: False
+        occludes: False
+        ent: null
+      id: !type:ContainerSlot
+        showEnts: False
+        occludes: False
+        ent: null
+      belt: !type:ContainerSlot
+        showEnts: False
+        occludes: False
+        ent: null
+      back: !type:ContainerSlot
+        showEnts: False
+        occludes: False
+        ent: null
+      body_root_part: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      hands_right: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      hands_left: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+  - type: Inventory
+    templateId: human
+  - type: Hands
+    hands:
+      hands_right:
+        location: Right
+      hands_left:
+        location: Left
+    sortedHands:
+    - hands_right
+    - hands_left
+  - type: Body
+    prototype: Mannequin
+

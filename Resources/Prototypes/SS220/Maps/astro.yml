@@ -4,7 +4,7 @@
   id: Astro
   mapName: 'JSS Astro'
   mapPath: /Maps/SS220/astro.yml
-  minPlayers: 30
+  minPlayers: 15 ## decreased for 2 times by normal limit
   stations:
     Astro:
       stationProto: AstroNanotrasenStation
@@ -86,7 +86,6 @@
           - Artifacts
           - Bank
           - Zoo
-          - MiningOutpost
           - Tesla
           #SS220
           - Saveplanet

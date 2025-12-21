@@ -1,0 +1,95 @@
+- type: entity
+  name: miko trap
+  parent: [BaseBearTrap, CultYoggRestrictedItem, FoodProduceBase]
+  id: FoodMikoTrapShroomCult
+  description: a hidden mushroom trap for infidels.
+  components:
+    - type: Food
+    - type: Sprite
+      sprite: SS220/Objects/CultYogg/miko_trap_shroom.rsi
+      layers:
+        - state: produce
+          map: ["base"]
+    - type: Item
+      sprite: SS220/Objects/CultYogg/miko_trap_shroom.rsi
+    - type: Appearance
+    - type: GenericVisualizer
+      visuals:
+        enum.TrapVisuals.Visual:
+          base:
+            Armed: { state: trap-armed }
+            Unarmed: { state: produce }
+    - type: CultYoggTrap
+      trapsLimit: 6
+      armedVisibility: 0.3
+      unArmedVisibility: 1
+    - type: Trap
+      blacklist:
+        components:
+        - CultYogg
+      durationStun: 1
+      setTrapSound: /Audio/SS220/Items/CultYogg/sound_trapCult_set.ogg
+      defuseTrapSound: /Audio/SS220/Items/CultYogg/sound_trapCult_defuse.ogg
+      hitTrapSound: /Audio/SS220/Items/CultYogg/sound_trapCult_hit.ogg
+    - type: Stealth
+      minVisibility: -0.2
+      maxVisibility: 2
+    - type: FlavorProfile
+      flavors:
+      - menacing
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          maxVol: 2.0
+          reagents:
+          - ReagentId: Nutriment
+            Quantity: 1
+          - ReagentId: Water
+            Quantity: 1
+    - type: InjectionOnTrigger
+      reagent: Toxin
+      quantity: 3
+    - type: Produce
+      seedId: MikoTrapShroomSpores
+    - type: Extractable
+      grindableSolutionName: food
+    - type: Tag
+      tags:
+      - Omnivorous
+      - Unstackable
+
+- type: entity
+  parent: SeedBase
+  name: packet of MikoTrap spores
+  description: We didn't understand how to use it, so we just wear it on our feet
+  id: MikoTrapShroomSeeds
+  components:
+    - type: Seed
+      seedId: MikoTrapShroomSpores
+    - type: Sprite
+      sprite: SS220/Objects/CultYogg/miko_trap_shroom.rsi
+
+- type: seed
+  id: MikoTrapShroomSpores
+  name: seeds-miko-trap-shroom-name
+  noun: seeds-noun-spores
+  displayName: seeds-miko-trap-shroom-display-name
+  plantRsi: SS220/Objects/CultYogg/miko_trap_shroom.rsi
+  packetPrototype: MikoTrapShroomSeeds
+  productPrototypes:
+    - FoodMikoTrapShroomCult
+  lifespan: 25
+  maturation: 12
+  production: 2
+  yield: 1
+  potency: 2
+  growthStages: 5
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 1
+      PotencyDivisor: 1
+    Water:
+      Min: 1
+      Max: 1
+      PotencyDivisor: 1

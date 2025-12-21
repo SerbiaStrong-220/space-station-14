@@ -20,3 +20,15 @@
       prototype: ComputerShuttleSalvage
     - type: StealTarget
       stealGroup: SalvageShuttleConsoleCircuitboard
+
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: CluwneCommsComputerCircuitboard
+  name: cluwne communications computer board
+  description: A computer printed circuit board for a joke communications console.
+  components:
+    - type: Sprite
+      sprite: SS220/Objects/Misc/module.rsi
+      state: cpu_clown
+    - type: ComputerBoard
+      prototype: ComputerCluwneComms

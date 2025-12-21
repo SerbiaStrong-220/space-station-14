@@ -84,7 +84,7 @@ public sealed partial class SpeciesPrototype : IPrototype
     /// Method of skin coloration used by the species.
     /// </summary>
     [DataField(required: true)]
-    public HumanoidSkinColor SkinColoration { get; private set; }
+    public ProtoId<SkinColorationPrototype> SkinColoration { get; private set; }
 
     [DataField]
     public ProtoId<LocalizedDatasetPrototype> MaleFirstNames { get; private set; } = "NamesFirstMale";
@@ -144,6 +144,14 @@ public sealed partial class SpeciesPrototype : IPrototype
     //SS220 Species-Job-Requirement
     [DataField(customTypeSerializer: typeof(DictionarySerializer<string, string[]>))]
     public Dictionary<string, string[]> BlockedJobsByAccessor { get; } = new();
+
+    //ss220 add species loadout start
+    [DataField]
+    public Dictionary<string, List<string>> StartingGear { get; set; } = new();
+
+    [DataField]
+    public List<string> BlacklistJobsForStartingGear = new();
+    //ss220 add species loadout end
 }
 
 public enum SpeciesNaming : byte

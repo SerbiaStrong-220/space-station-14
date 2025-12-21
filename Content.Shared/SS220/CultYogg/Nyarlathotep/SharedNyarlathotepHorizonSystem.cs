@@ -13,7 +13,6 @@ namespace Content.Shared.SS220.CultYogg.Nyarlathotep;
 /// </summary>
 public abstract class SharedNyarlathotepHorizonSystem : EntitySystem
 {
-
     [Dependency] private readonly FixtureSystem _fixtures = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] protected readonly IViewVariablesManager Vvm = default!;
@@ -36,6 +35,7 @@ public abstract class SharedNyarlathotepHorizonSystem : EntitySystem
 
         base.Shutdown();
     }
+
     #region Getters/Setters
     /// <summary>
     /// Setter for <see cref="NyarlathotepHorizonComponent.ColliderFixtureId"/>

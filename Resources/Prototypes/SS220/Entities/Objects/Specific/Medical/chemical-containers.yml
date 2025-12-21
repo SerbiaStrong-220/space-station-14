@@ -1,0 +1,279 @@
+- type: entity
+  parent: LargeBeaker
+  suffix: aluminium
+  id: LargeBeakerAluminium
+  components:
+  - type: Label
+    currentLabel: reagent-name-aluminium
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Aluminium
+          Quantity: 100
+
+- type: entity
+  parent: LargeBeaker
+  suffix: carbon
+  id: LargeBeakerCarbon
+  components:
+  - type: Label
+    currentLabel: reagent-name-carbon
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Carbon
+          Quantity: 100
+
+- type: entity
+  parent: LargeBeaker
+  suffix: chlorine
+  id: LargeBeakerChlorine
+  components:
+  - type: Label
+    currentLabel: reagent-name-chlorine
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Chlorine
+          Quantity: 100
+
+- type: entity
+  parent: LargeBeaker
+  suffix: copper
+  id: LargeBeakerCopper
+  components:
+  - type: Label
+    currentLabel: reagent-name-copper
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Copper
+          Quantity: 100
+
+- type: entity
+  parent: LargeBeaker
+  suffix: ethanol
+  id: LargeBeakerEthanol
+  components:
+  - type: Label
+    currentLabel: reagent-name-ethanol
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Ethanol
+          Quantity: 100
+
+- type: entity
+  parent: LargeBeaker
+  suffix: fluorine
+  id: LargeBeakerFluorine
+  components:
+  - type: Label
+    currentLabel: reagent-name-fluorine
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Fluorine
+          Quantity: 100
+
+- type: entity
+  parent: LargeBeaker
+  suffix: hydrogen
+  id: LargeBeakerHydrogen
+  components:
+  - type: Label
+    currentLabel: reagent-name-hydrogen
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Hydrogen
+          Quantity: 100
+
+- type: entity
+  parent: LargeBeaker
+  suffix: iodine
+  id: LargeBeakerIodine
+  components:
+  - type: Label
+    currentLabel: reagent-name-iodine
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Iodine
+          Quantity: 100
+
+- type: entity
+  parent: LargeBeaker
+  suffix: iron
+  id: LargeBeakerIron
+  components:
+  - type: Label
+    currentLabel: reagent-name-iron
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Iron
+          Quantity: 100
+
+- type: entity
+  parent: LargeBeaker
+  suffix: lithium
+  id: LargeBeakerLithium
+  components:
+  - type: Label
+    currentLabel: reagent-name-lithium
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Lithium
+          Quantity: 100
+
+- type: entity
+  parent: LargeBeaker
+  suffix: mercury
+  id: LargeBeakerMercury
+  components:
+  - type: Label
+    currentLabel: reagent-name-mercury
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Mercury
+          Quantity: 100
+
+- type: entity
+  parent: LargeBeaker
+  suffix: nitrogen
+  id: LargeBeakerNitrogen
+  components:
+  - type: Label
+    currentLabel: reagent-name-nitrogen
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Nitrogen
+          Quantity: 100
+
+- type: entity
+  parent: LargeBeaker
+  suffix: oxygen
+  id: LargeBeakerOxygen
+  components:
+  - type: Label
+    currentLabel: reagent-name-oxygen
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Oxygen
+          Quantity: 100
+
+- type: entity
+  parent: LargeBeaker
+  suffix: phosphorus
+  id: LargeBeakerPhosphorus
+  components:
+  - type: Label
+    currentLabel: reagent-name-phosphorus
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Phosphorus
+          Quantity: 100
+
+- type: entity
+  parent: LargeBeaker
+  suffix: potassium
+  id: LargeBeakerPotassium
+  components:
+  - type: Label
+    currentLabel: reagent-name-potassium
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Potassium
+          Quantity: 100
+
+- type: entity
+  parent: LargeBeaker
+  suffix: radium
+  id: LargeBeakerRadium
+  components:
+  - type: Label
+    currentLabel: reagent-name-radium
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Radium
+          Quantity: 100
+
+- type: entity
+  parent: LargeBeaker
+  suffix: silicon
+  id: LargeBeakerSilicon
+  components:
+  - type: Label
+    currentLabel: reagent-name-silicon
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Silicon
+          Quantity: 100
+
+- type: entity
+  parent: LargeBeaker
+  suffix: sodium
+  id: LargeBeakerSodium
+  components:
+  - type: Label
+    currentLabel: reagent-name-sodium
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Sodium
+          Quantity: 100
+
+- type: entity
+  parent: LargeBeaker
+  suffix: sugar
+  id: LargeBeakerSugar
+  components:
+  - type: Label
+    currentLabel: reagent-name-sugar
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Sugar
+          Quantity: 100
+
+- type: entity
+  parent: LargeBeaker
+  suffix: sulfur
+  id: LargeBeakerSulfur
+  components:
+  - type: Label
+    currentLabel: reagent-name-sulfur
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Sulfur
+          Quantity: 100

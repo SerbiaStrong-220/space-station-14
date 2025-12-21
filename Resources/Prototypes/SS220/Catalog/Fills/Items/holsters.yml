@@ -1,0 +1,25 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: ClothingBeltLegendaryMarksmanHolsterFilled
+  parent: ClothingBeltHolster
+  name: Legendary Marksman Holster
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+        - id: WeaponRevolverLegendaryMarksman
+        - id: SpeedLoaderMagnumRubber
+          amount: 2
+
+- type: entity
+  id: ClothingBeltBlackAngelHolsterFilled
+  parent: ClothingBeltHolster
+  name: Black Angel Holster
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+        - id: WeaponRevolverBlackAngel
+        - id: SpeedLoaderMagnumRubber
+          amount: 2

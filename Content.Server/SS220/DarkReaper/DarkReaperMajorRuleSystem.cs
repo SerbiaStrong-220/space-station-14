@@ -1,18 +1,16 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Server.Administration.Managers;
+
 using Content.Server.Antag;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
 using Content.Shared.GameTicking.Components;
 using Content.Server.GameTicking.Rules;
-using Content.Server.Mind;
 using Content.Server.Respawn;
-using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Shared.Mind;
 using Robust.Shared.Map;
-using Robust.Shared.Random;
 using Robust.Server.Player;
+using Content.Shared.Station.Components;
 
 namespace Content.Server.SS220.DarkReaper;
 
@@ -23,8 +21,6 @@ public sealed class DarkReaperMajorRuleSystem : GameRuleSystem<DarkReaperMajorRu
     [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
-
-    private readonly ISawmill _sawmill = Logger.GetSawmill("DarkReaperMajorRule");
 
     public override void Initialize()
     {
@@ -68,7 +64,7 @@ public sealed class DarkReaperMajorRuleSystem : GameRuleSystem<DarkReaperMajorRu
             if (!TryComp<StationDataComponent>(station, out var data))
                 continue;
 
-            grid = _station.GetLargestGrid(data);
+            grid = _station.GetLargestGrid((station, data));
             if (!grid.HasValue)
                 continue;
 

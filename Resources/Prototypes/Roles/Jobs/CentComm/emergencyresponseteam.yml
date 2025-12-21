@@ -24,6 +24,15 @@
     components:
     - type: DefibrillatorSkill
   #SS220 LimitationRevive - end
+  #SS220 ghostrole-times-begin
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 20h
+    - !type:DepartmentTimeRequirement
+      department: Command
+      time: 10h
+  #SS220 ghostrole-times-end
 
 - type: startingGear
   id: ERTLeaderGear
@@ -89,7 +98,7 @@
     pocket1: MagazineRifle
     pocket2: MagazineRifle
   inhand:
-  - WeaponRifleLecter
+  - WeaponRifleLecterXL8
   storage:
     back:
     - WeaponDisabler
@@ -98,6 +107,14 @@
     - BoxZiptie
     - CrowbarRed
     - MagazineMagnum
+
+- type: chameleonOutfit
+  id: ERTLeaderChameleonOutfit
+  job: ERTLeader
+  hasMindShield: true
+  equipment:
+    head: ClothingHeadHelmetHardsuitERTLeader
+    neck: ClothingNeckBronzeheart
 
 # Chaplain
 - type: job
@@ -124,6 +141,12 @@
     implants: [ MindShieldImplant, DeathRattleImplantCentcomm ]
   departmentsToIgnoreInTitles: # SS220 Round End Titles
   - Command                    # SS220 Round End Titles
+  #SS220 ghostrole-times-begin
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 20h
+  #SS220 ghostrole-times-end
 
 - type: startingGear
   id: ERTChaplainGear
@@ -187,6 +210,16 @@
     - FoodBakedBunHotX
     - Lighter
 
+- type: chameleonOutfit
+  id: ERTChaplainChameleonOutfit
+  job: ERTChaplain
+  hasMindShield: true
+  equipment:
+    head: ClothingHeadHelmetHardsuitERTChaplain
+    mask: ClothingMaskGasERT
+    outerClothing: ClothingOuterHardsuitERTChaplain
+    shoes: ClothingShoesBootsMagAdv
+
 # Engineer
 - type: job
   id: ERTEngineer
@@ -213,6 +246,15 @@
     components:
     - type: DefibrillatorSkill
   #SS220 LimitationRevive - end
+  #SS220 ghostrole-times start
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 20h
+    - !type:DepartmentTimeRequirement
+      department: Engineering
+      time: 10h
+  #SS220 ghostrole-times end
 
 - type: startingGear
   id: ERTEngineerGear
@@ -270,6 +312,14 @@
     - SheetSteel
     - SheetGlass
 
+- type: chameleonOutfit
+  id: ERTEngineerChameleonOutfit
+  job: ERTEngineer
+  hasMindShield: true
+  equipment:
+    head: ClothingHeadHelmetHardsuitERTEngineer
+    neck: ClothingNeckEngineermedal
+
 # Security
 - type: job
   id: ERTSecurity
@@ -277,7 +327,7 @@
   description: job-description-ertsecurity
   playTimeTracker: JobERTSecurity
   setPreference: false
-  startingGear: ERTEngineerGearEVA
+  startingGear: ERTSecurityGearEVA
   icon: "JobIconNanotrasen"
   supervisors: job-supervisors-centcom
   canBeAntag: false
@@ -296,6 +346,12 @@
     components:
     - type: DefibrillatorSkill
   #SS220 LimitationRevive - end
+  #SS220 ghostrole-times start
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 20h
+  #SS220 ghostrole-times end
 
 - type: startingGear
   id: ERTSecurityGear
@@ -371,6 +427,14 @@
     - CrowbarRed
     - MagazinePistol
 
+- type: chameleonOutfit
+  id: ERTSecurityChameleonOutfit
+  job: ERTSecurity
+  hasMindShield: true
+  equipment:
+    head: ClothingHeadHelmetHardsuitERTSecurity
+    neck: ClothingNeckSecuritymedal
+
 # Medical
 - type: job
   id: ERTMedical
@@ -397,6 +461,15 @@
     components:
     - type: DefibrillatorSkill
   #SS220 LimitationRevive - end
+  #SS220 ghostrole-times start
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 20h
+    - !type:DepartmentTimeRequirement
+      department: Medical
+      time: 10h
+  #SS220 ghostrole-times end
 
 - type: startingGear
   id: ERTMedicalGear
@@ -446,6 +519,14 @@
     - ChemistryBottleEpinephrine
     - ChemistryBottleEpinephrine
 
+- type: chameleonOutfit
+  id: ERTMedicalChameleonOutfit
+  job: ERTMedical
+  hasMindShield: true
+  equipment:
+    head: ClothingHeadHelmetHardsuitERTMedical
+    neck: ClothingNeckStethoscope
+
 # Janitor
 - type: job
   id: ERTJanitor
@@ -472,6 +553,12 @@
     components:
     - type: DefibrillatorSkill
   #SS220 LimitationRevive - end
+  #SS220 ghostrole-times start
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 20h
+  #SS220 ghostrole-times end
 
 - type: startingGear
   id: ERTJanitorGear
@@ -516,3 +603,12 @@
     - Soap
     - CrowbarRed
     - AdvMopItem
+
+- type: chameleonOutfit
+  id: ERTJanitorChameleonOutfit
+  job: ERTJanitor
+  hasMindShield: true
+  equipment:
+    head: ClothingHeadHelmetHardsuitERTJanitor
+    neck: ClothingNeckScarfStripedPurple
+    eyes: ClothingEyesGlassesSunglasses

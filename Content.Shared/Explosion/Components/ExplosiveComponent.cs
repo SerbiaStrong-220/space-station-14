@@ -11,7 +11,7 @@ namespace Content.Shared.Explosion.Components;
 ///      The total intensity may be overridden by whatever system actually calls TriggerExplosive(), but this
 ///      component still determines the explosion type and other properties.
 /// </remarks>
-[RegisterComponent, Access(typeof(SharedExplosionSystem))]
+[RegisterComponent] // SS220-make-explosive-changeable
 public sealed partial class ExplosiveComponent : Component
 {
     /// <summary>

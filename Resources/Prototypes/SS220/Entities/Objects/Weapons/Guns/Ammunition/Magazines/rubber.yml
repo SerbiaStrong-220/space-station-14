@@ -7,11 +7,23 @@
     proto: CartridgeRifleRubber
   - type: Sprite
     layers:
-    - state: rubber
-      sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/Rifle/rifle_mag.rsi
+    - state: base
+      sprite: Objects/Weapons/Guns/Ammunition/Magazine/Rifle/rifle_mag.rsi
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#1E90FF"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#1E90FF"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#1E90FF"
 
 - type: entity
   id: MagazinePistolRubber
@@ -22,11 +34,23 @@
     proto: CartridgePistolRubber
   - type: Sprite
     layers:
-    - state: rubber
-      sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_mag.rsi
+    - state: base
+      sprite: Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_mag.rsi
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#1E90FF"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#1E90FF"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#1E90FF"
 
 - type: entity
   id: MagazineMagnumRubber
@@ -37,11 +61,22 @@
     proto: CartridgeMagnumRubber
   - type: Sprite
     layers:
-    - state: rubber
-      sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_mag.rsi
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#1E90FF"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#245EE3"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#245EE3"
 
 - type: entity
   id: MagazineLightRifleRubber
@@ -52,11 +87,23 @@
     proto: CartridgeLightRifleRubber
   - type: Sprite
     layers:
-    - state: rubber
-      sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/LightRifle/light_rifle_mag.rsi
+    - state: base
+      sprite: Objects/Weapons/Guns/Ammunition/Magazine/LightRifle/light_rifle_mag.rsi
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#1E90FF"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#245EE3"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#245EE3"
 
 - type: entity
   id: MagazineCaselessRifleRubber
@@ -67,11 +114,23 @@
     proto: CartridgeCaselessRifleRubber
   - type: Sprite
     layers:
-    - state: rubber
-      sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/CaselessRifle/caseless_rifle_mag.rsi
+    - state: base
+      sprite: Objects/Weapons/Guns/Ammunition/Magazine/CaselessRifle/caseless_rifle_mag.rsi
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#1E90FF"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#245EE3"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#245EE3"
 
 - type: entity
   id: MagazinePistolCaselessRifleRubber
@@ -83,11 +142,23 @@
     capacity: 10
   - type: Sprite
     layers:
-    - state: rubber
-      sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/CaselessRifle/caseless_rifle_mag.rsi
+    - state: base
+      sprite: Objects/Weapons/Guns/Ammunition/Magazine/CaselessRifle/caseless_rifle_mag.rsi
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#1E90FF"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#245EE3"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#245EE3"
   - type: MagazineVisuals
     magState: mag
     steps: 6
@@ -103,11 +174,23 @@
     proto: CartridgeMagnumRubber
   - type: Sprite
     layers:
-    - state: rubber
-      sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/Magnum/magnum_smg_mag.rsi
+    - state: base
+      sprite: Objects/Weapons/Guns/Ammunition/Magazine/Magnum/magnum_smg_mag.rsi
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#1E90FF"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#245EE3"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#245EE3"
 
 - type: entity
   id: MagazinePistolSubMachineGunRubber
@@ -118,8 +201,20 @@
     proto: CartridgePistolRubber
   - type: Sprite
     layers:
-    - state: rubber
-      sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi
+    - state: base
+      sprite: Objects/Weapons/Guns/Ammunition/Magazine/Pistol/smg_mag.rsi
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#1E90FF"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#245EE3"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#245EE3"

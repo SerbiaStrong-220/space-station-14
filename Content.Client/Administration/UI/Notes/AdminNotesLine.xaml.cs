@@ -82,7 +82,11 @@ public sealed partial class AdminNotesLine : BoxContainer
 
         if (Note.UnbannedTime is not null)
         {
-            ExtraLabel.Text = Loc.GetString("admin-notes-unbanned", ("admin", Note.UnbannedByName ?? "[error]"), ("date", Note.UnbannedTime));
+            ExtraLabel.Text = Loc.GetString(
+                "admin-notes-unbanned",
+                ("admin", Note.UnbannedByName ?? "[error]"),
+                ("date", Note.UnbannedTime.Value.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss"))
+            );
             ExtraLabel.Visible = true;
         }
         else if (Note.ExpiryTime is not null)
@@ -116,6 +120,11 @@ public sealed partial class AdminNotesLine : BoxContainer
             case NoteType.RoleBan:
                 NoteLabel.SetMessage(FormatRoleBanMessage());
                 break;
+            // SS220 Species bans begin
+            case NoteType.SpeciesBan:
+                NoteLabel.SetMessage(FormatSpeciesBanMessage());
+                break;
+            // SS220 Species bans end
             case NoteType.Note:
             case NoteType.Watchlist:
             case NoteType.Message:
@@ -139,9 +148,17 @@ public sealed partial class AdminNotesLine : BoxContainer
 
     private string FormatRoleBanMessage()
     {
-        var banMessage = new StringBuilder($"{Loc.GetString("admin-notes-banned-from")} {string.Join(", ", Note.BannedRoles ?? new []{"unknown"})} ");
+        var banMessage = new StringBuilder($"{Loc.GetString("admin-notes-banned-from")} {string.Join(", ", Note.BannedRoles ?? new[] { "unknown" })} ");
         return FormatBanMessageCommon(banMessage);
     }
+
+    // SS220 Species bans begin
+    private string FormatSpeciesBanMessage()
+    {
+        var banMessage = new StringBuilder($"{Loc.GetString("admin-notes-banned-from")} {string.Join(", ", Note.BannedSpecies ?? ["unknown"])} ");
+        return FormatBanMessageCommon(banMessage);
+    }
+    // SS220 Species bans end
 
     private string FormatBanMessageCommon(StringBuilder sb)
     {

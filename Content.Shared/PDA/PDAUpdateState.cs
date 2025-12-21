@@ -47,6 +47,9 @@ namespace Content.Shared.PDA
         public string? ActualOwnerName;
         public string? IdOwner;
         public string? JobTitle;
+        //ss220 add color for job in pda start
+        public string? CardColor;
+        //ss220 add color for job in pda end
         public string? StationAlertLevel;
         public Color StationAlertColor;
     }

@@ -1,0 +1,14 @@
+- files: ["sound_trap_set.ogg"]
+  license: "Custom"
+  copyright: "Taken from zvukipro."
+  source: "https://zvukipro.com/predmet/1103-zvuki-kapkana.html"
+
+- files: ["sound_trap_hit.ogg"]
+  license: "Custom"
+  copyright: "Sounds from Zvukipro, modified bone breaking sound from Paradise SS13."
+  source: "https://zvukipro.com/predmet/1103-zvuki-kapkana.html"
+
+- files: ["sound_trap_defuse.ogg"]
+  license: "Custom"
+  copyright: "Taken from zvukipro."
+  source: "https://zvukipro.com/predmet/1103-zvuki-kapkana.html"

@@ -18,6 +18,7 @@
     unequipSound:
   - type: Spillable
     solution: absorbed
+    spillWhenThrown: false
   - type: Absorbent
     pickupAmount: 15
   - type: SolutionContainerManager

@@ -1,6 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.Corvax.CCCVars;
 using Robust.Shared.Configuration;
 using System.Net;
 using System.Net.Http;
@@ -119,7 +118,7 @@ public sealed class DiscordBanPostManager
 
         try
         {
-            var url = $"{_apiUrl}/userBan/roleBan";
+            var url = $"{_apiUrl}/api/userBan/roleBan";
 
             var response = await _httpClient.PostAsync(url,
                 new StringContent(
@@ -140,6 +139,14 @@ public sealed class DiscordBanPostManager
         catch (Exception exc)
         {
             _sawmill.Error($"Error while posting user role ban. {exc.Message}");
+        }
+        finally
+        {
+            if (_userJobBanPostTimers.TryGetValue(userName, out var timer))
+            {
+                timer.Dispose();
+                _userJobBanPostTimers.Remove(userName);
+            }
         }
     }
 

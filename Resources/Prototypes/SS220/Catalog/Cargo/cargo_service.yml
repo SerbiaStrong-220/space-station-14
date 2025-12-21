@@ -1,0 +1,61 @@
+# SS220-wood-and-plants-in-cargo-begin
+- type: cargoProduct
+  id: ServicePottedPlant
+  icon:
+    sprite: Structures/Furniture/potted_plants.rsi
+    state: plant-10
+  product: CratePottedPlant
+  cost: 900
+  category: cargoproduct-category-name-service
+  group: market
+
+- type: cargoProduct
+  id: ServicePottedPlants
+  icon:
+    sprite: Structures/Furniture/potted_plants.rsi
+    state: plant-10
+  product: CrateRandomPottedPlants
+  cost: 3500
+  category: cargoproduct-category-name-service
+  group: market
+  
+- type: cargoProduct
+  id: ServiceBioLumPottedPlant
+  icon:
+    sprite: Structures/Furniture/potted_plants.rsi
+    state: plant-09
+  product: CrateBioLumPottedPlant
+  cost: 1500
+  category: cargoproduct-category-name-service
+  group: market
+
+- type: cargoProduct
+  id: ServiceBioLumPottedPlants
+  icon:
+    sprite: Structures/Furniture/potted_plants.rsi
+    state: plant-09
+  product: CrateRandomBioLumPottedPlants
+  cost: 6000
+  category: cargoproduct-category-name-service
+  group: market
+
+- type: cargoProduct
+  id: ServicePlasticPottedPlant
+  icon:
+    sprite: Structures/Furniture/potted_plants.rsi
+    state: plant-29
+  product: CratePlasticPottedPlant
+  cost: 300
+  category: cargoproduct-category-name-service
+  group: market
+
+- type: cargoProduct
+  id: ServicePlasticPottedPlants
+  icon:
+    sprite: Structures/Furniture/potted_plants.rsi
+    state: plant-29
+  product: CrateRandomPlasticPottedPlants
+  cost: 1500
+  category: cargoproduct-category-name-service
+  group: market
+# SS220-wood-and-plants-in-cargo-end

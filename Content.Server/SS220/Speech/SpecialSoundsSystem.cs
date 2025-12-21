@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.SS220.Speech;
 using Content.Shared.Verbs;
 using Content.Server.Popups;
@@ -8,9 +9,9 @@ namespace Content.Server.SS220.Speech;
 
 public sealed class SpecialSoundsSystem : EntitySystem
 {
-
     [Dependency] private readonly PopupSystem _popupSystem = default!;
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -18,19 +19,19 @@ public sealed class SpecialSoundsSystem : EntitySystem
         SubscribeLocalEvent<SpecialSoundsComponent, GetVerbsEvent<Verb>>(OnVerb);
     }
 
-    private void OnVerb(EntityUid uid, SpecialSoundsComponent component, GetVerbsEvent<Verb> args)
+    private void OnVerb(Entity<SpecialSoundsComponent> ent, ref GetVerbsEvent<Verb> args)
     {
         // standard interaction checks
         if (!args.CanAccess || !args.CanInteract || args.Hands == null)
             return;
 
-        if (!_inventorySystem.TryGetContainingSlot(uid, out _))
+        if (!_inventorySystem.TryGetContainingSlot(ent.Owner, out _))
             return;
 
         args.Verbs.UnionWith(new[]
         {
-            CreateVerb(uid, component, args.User, SpecialSoundMode.SpecialSoundOff),
-            CreateVerb(uid, component, args.User, SpecialSoundMode.SpecialSoundOn),
+            CreateVerb(ent, ent.Comp, args.User, SpecialSoundMode.SpecialSoundOff),
+            CreateVerb(ent, ent.Comp, args.User, SpecialSoundMode.SpecialSoundOn),
         });
     }
 

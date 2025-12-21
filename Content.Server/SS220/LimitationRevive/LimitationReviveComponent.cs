@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.Damage;
 using Content.Shared.Random;
 using Content.Shared.SS220.LimitationRevive;
@@ -14,20 +15,44 @@ namespace Content.Server.SS220.LimitationRevive;
 [NetworkedComponent, AutoGenerateComponentState(true)]
 public sealed partial class LimitationReviveComponent : SharedLimitationReviveComponent
 {
+    /// <summary>
+    /// Resurrection limit
+    /// </summary>
     [DataField]
-    public int MaxRevive = 2;
+    public int ReviveLimit = 2;
 
+    /// <summary>
+    /// How many times has the creature already died
+    /// </summary>
     [ViewVariables]
-    public int CounterOfDead = 0;
+    public int DeathCounter = 0;
 
-    public bool IsAlreadyDead = false;
+    /// <summary>
+    /// How much and what type of damage will be dealt
+    /// </summary>
+    [DataField]
+    public DamageSpecifier Damage = new() //I hardcoded the base value because it can't be null
+    {
+        DamageDict = new()
+        {
+            { "Cerebral", 400 }
+        },
+    };
 
-    [ViewVariables(VVAccess.ReadWrite), DataField]
-    public DamageSpecifier TypeDamageOnDead;
-
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public ProtoId<WeightedRandomPrototype> WeightListProto = "TraitAfterDeathList";
 
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [ViewVariables]
+    public List<string> RecievedDebuffs = [];
+
+    /// <summary>
+    /// </summary>
+    [DataField]
     public float ChanceToAddTrait = 0.6f;
+
+    /// <summary>
+    /// Multiplier applied to <see cref="UpdateInterval"/> for adjusting based on metabolic rate multiplier.
+    /// </summary>
+    [ViewVariables(VVAccess.ReadOnly)]
+    public float UpdateIntervalMultiplier = 1f;
 }

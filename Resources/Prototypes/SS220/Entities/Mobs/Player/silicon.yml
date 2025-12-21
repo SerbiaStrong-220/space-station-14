@@ -3,12 +3,13 @@
   name: Crew Monitoring Interface
   description: View a Crew Monitoring Interface.
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
       state: crew_monitor
     keywords: [ "AI", "console", "interface" ]
     priority: -21
+  - type: InstantAction
     event: !type:ToggleIntrinsicUIEvent { key: enum.CrewMonitoringUIKey.Key }
 
 - type: entity
@@ -16,12 +17,13 @@
   name: Communications Interface
   description: View a Communications Interface.
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
       state: comms_console
     keywords: [ "AI", "console", "interface" ]
     priority: -20
+  - type: InstantAction
     event: !type:ToggleIntrinsicUIEvent { key: enum.CommunicationsConsoleUiKey.Key }
 
 - type: entity
@@ -29,12 +31,13 @@
   name: Criminal Records Interface
   description: View a Station Criminal Record
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
       state: criminal_records
     keywords: [ "AI", "console", "interface" ]
     priority: -19
+  - type: InstantAction
     event: !type:ToggleIntrinsicUIEvent { key: enum.CriminalRecordsUiKey.Key }
 
 - type: entity
@@ -42,12 +45,13 @@
   name: Robotics Console Interface
   description: View a Borg info
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
       state: robotics_console
     keywords: [ "AI", "console", "interface" ]
     priority: -18
+  - type: InstantAction
     event: !type:ToggleIntrinsicUIEvent { key: enum.RoboticsConsoleUiKey.Key }
 
 - type: entity
@@ -55,12 +59,13 @@
   name: Statione Map Interface
   description: View a Station Map
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
       state: station_map
     keywords: [ "AI", "console", "interface" ]
     priority: -17
+  - type: InstantAction
     event: !type:ToggleIntrinsicUIEvent { key: enum.StationMapUiKey.Key }
 
 - type: entity
@@ -68,12 +73,13 @@
   name: Power Monitoring Interface
   description: View a Power of Station
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
       state: power_console
     keywords: [ "AI", "console", "interface" ]
     priority: -16
+  - type: InstantAction
     event: !type:ToggleIntrinsicUIEvent { key: enum.PowerMonitoringConsoleUiKey.Key }
 
 - type: entity
@@ -81,12 +87,13 @@
   name: Alert Interface
   description: View a Alerts on Station
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
       state: alert_console
     keywords: [ "AI", "console", "interface" ]
     priority: -15
+  - type: InstantAction
     event: !type:ToggleIntrinsicUIEvent { key: enum.AtmosAlertsComputerUiKey.Key }
 
 - type: entity
@@ -94,12 +101,13 @@
   name: Mass Scanner Interface
   description: View a Mass Scanner Interface.
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
       state: mass_scanner
     keywords: [ "AI", "console", "interface" ]
     priority: -14
+  - type: InstantAction
     event: !type:ToggleIntrinsicUIEvent { key: enum.RadarConsoleUiKey.Key }
 
 - type: entity
@@ -107,12 +115,13 @@
   name: Cargo Ordering Interface
   description: View a Cargo Ordering Interface.
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
       state: cargo_console
     keywords: [ "AI", "console", "interface" ]
     priority: -13
+  - type: InstantAction
     event: !type:ToggleIntrinsicUIEvent { key: enum.CargoConsoleUiKey.Orders }
 
 - type: entity
@@ -120,12 +129,13 @@
   name: RaD Interface
   description: View a RaD interface
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
       state: rad_console
     keywords: [ "AI", "console", "interface" ]
     priority: -12
+  - type: InstantAction
     event: !type:ToggleIntrinsicUIEvent { key: enum.ResearchConsoleUiKey.Key }
 
 - type: entity
@@ -133,12 +143,13 @@
   name: Solar Control Interface
   description: View a Solar Control Interface.
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
       state: solar_console
     keywords: [ "AI", "console", "interface" ]
     priority: -11
+  - type: InstantAction
     event: !type:ToggleIntrinsicUIEvent { key: enum.SolarControlConsoleUiKey.Key }
 
 - type: entity
@@ -146,12 +157,13 @@
   name: Super Matter Observer Interface
   description: View a SM interface
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
       state: sm_console
     keywords: [ "AI", "console", "interface" ]
     priority: -10
+  - type: InstantAction
     event: !type:ToggleIntrinsicUIEvent { key: enum.SuperMatterObserverUiKey.Key }
 
 - type: entity

@@ -81,9 +81,9 @@ public enum LogType
     ChemicalReaction = 17,
 
     /// <summary>
-    /// Reagent effects related interactions.
+    /// EntityEffect related interactions.
     /// </summary>
-    ReagentEffect = 18,
+    EntityEffect = 18,
 
     /// <summary>
     /// Canister valve was opened or closed.
@@ -475,12 +475,27 @@ public enum LogType
     /// </summary>
     ArtifactNode = 105,
 
+    /// <summary>
+    /// Damaging grid collision has occurred.
+    /// </summary>
+    ShuttleImpact = 106,
+
+    /// <summary>
+    /// Events relating to midi playback.
+    /// </summary>
+    Instrument = 107,
+
     //SS220 log types start
 
     /// <summary>
     /// Admin command executed.
     /// </summary>
     AdminCommand = 10000,
+
+    /// <summary>
+    /// Logs related to roundflow like changing stages of cult or any antag progression
+    /// </summary>
+    RoundFlow = 10001,
 
     //SS220 log types end
 }

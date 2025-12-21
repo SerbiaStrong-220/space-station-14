@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.SS220.TextureFade;
 using Robust.Shared.Utility;
 
@@ -13,8 +14,10 @@ public sealed partial class TextureFadeOverlayComponent : SharedTextureFadeOverl
 {
     [DataField]
     public bool IsEnabled = false;
+
     [DataField]
     public bool DeleteAfterFadedOut;
+
     [DataField]
     public List<TextureFadeOverlayLayer> Layers = new();
 
@@ -50,23 +53,31 @@ public sealed partial class TextureFadeOverlayComponent : SharedTextureFadeOverl
 [DataDefinition]
 public partial struct TextureFadeOverlayLayer
 {
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public float FadeProgress = 1;
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+
+    [DataField]
     public SpriteSpecifier Sprite = SpriteSpecifier.Invalid;
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+
+    [DataField]
     public Color Modulate = Color.White;
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+
+    [DataField]
     public int ZIndex = 0;
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+
+    [DataField]
     public float MinProgress = 0;
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+
+    [DataField]
     public float MaxProgress = 1;
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+
+    [DataField]
     public float PulseMagnitude = 0;
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+
+    [DataField]
     public float PulseRate = 0;
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+
+    [DataField]
     public float ProgressSpeed = 0;
 
     [Access(typeof(TextureFadeOverlaySystem), Friend = AccessPermissions.ReadWriteExecute, Other = AccessPermissions.Read)]

@@ -10,17 +10,15 @@ public sealed partial class ShapeCollisionTrackerComponent : Component
 {
     public const string FixtureID = "collision-tracker-fixture";
 
-    [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("enabled")]
+    [DataField]
     public bool Enabled = true;
 
-    [ViewVariables(VVAccess.ReadWrite)]
     [DataField("requireAnchored")]
     public bool RequiresAnchored = true;
 
     public readonly HashSet<EntityUid> Colliding = new();
 
-    [DataField("shape", required: true)]
+    [DataField(required: true)]
     public IPhysShape Shape { get; set; } = new PhysShapeCircle(2f);
 }
 

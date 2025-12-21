@@ -10,7 +10,7 @@
               amount: 2
               doAfter: 1
             - tag: CrystalPurple
-              name: purple crystal shard
+              name: construction-graph-tag-crystal-purple
               icon:
                 sprite: Objects/Materials/Shards/crystal.rsi
                 state: shard #SS220-Crystal-resprite

@@ -1,15 +1,19 @@
-﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+using Content.Shared.Trigger.Components.Effects;
+using Robust.Shared.Prototypes;
+
 namespace Content.Server.SS220.CultYogg.StrangeFruit;
 
 [RegisterComponent]
-public sealed partial class TileSpawnInRangeOnTriggerComponent : Component
+public sealed partial class TileSpawnInRangeOnTriggerComponent : BaseXOnTriggerComponent
 {
-    [DataField("kudzuProtoId")]
-    public string KudzuProtoId;
+    [DataField(required: true)]
+    public EntProtoId Spawn;
 
-    [DataField("quantityInTile")]
+    [DataField]
     public int QuantityInTile = 1;
 
-    [DataField("range")]
+    [DataField]
     public int Range = 1;
 }

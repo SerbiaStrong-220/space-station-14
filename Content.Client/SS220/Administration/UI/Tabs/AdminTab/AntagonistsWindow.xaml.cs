@@ -16,8 +16,6 @@ namespace Content.Client.SS220.Administration.UI.Tabs.AdminTab
     {
         private PlayerInfo? _selectedAntagonist;
 
-        public event Action<PlayerInfo?>? OnSelectionChanged;
-
         protected override void EnteredTree()
         {
             AntagonistsList.OnSelectionChanged += OnListOnOnSelectionChanged;

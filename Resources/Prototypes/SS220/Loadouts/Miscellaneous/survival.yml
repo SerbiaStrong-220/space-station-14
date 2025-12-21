@@ -15,19 +15,3 @@
   storage:
     back:
     - BoxSurvivalBrigmedicNitrogen
-
-- type: loadout
-  id: EmergencyBeerDrinker
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: BeerDrinker
-  storage:
-    back:
-    - BoxSurvivalBeerDrinker
-
-- type: loadoutEffectGroup
-  id: BeerDrinker
-  effects:
-  - !type:SpeciesLoadoutEffect
-    species:
-    - Dwarf

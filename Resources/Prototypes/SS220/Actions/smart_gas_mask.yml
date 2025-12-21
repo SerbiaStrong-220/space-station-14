@@ -2,7 +2,8 @@
   id: ActionSmartGasMask
   name: Use smart gas mask
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: BigItem
-    event: !type:SmartGasMaskOpenEvent
     useDelay: 0.5
+  - type: InstantAction
+    event: !type:SmartGasMaskOpenEvent

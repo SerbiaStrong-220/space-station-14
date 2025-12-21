@@ -1,4 +1,5 @@
 using Content.Server.Database;
+using Content.Server.SS220.Database;
 using Content.Shared.Administration.Notes;
 using Content.Shared.Database;
 
@@ -12,6 +13,7 @@ public static class AdminNotesExtensions
         var secret = false;
         NoteType type;
         string[]? bannedRoles = null;
+        string[]? bannedSpecies = null; // SS220 Species bans
         string? unbannedByName = null;
         DateTime? unbannedTime = null;
         bool? seen = null;
@@ -46,6 +48,15 @@ public static class AdminNotesExtensions
                 unbannedTime = roleBan.UnbanTime;
                 unbannedByName = roleBan.UnbanningAdmin?.LastSeenUserName ?? Loc.GetString("system-user");
                 break;
+            // SS220 Species bans begin
+            case ServerSpeciesBanNoteRecord speciesBan:
+                type = NoteType.SpeciesBan;
+                severity = speciesBan.Severity;
+                bannedSpecies = speciesBan.Species;
+                unbannedTime = speciesBan.UnbanTime;
+                unbannedByName = speciesBan.UnbanningAdmin?.LastSeenUserName ?? Loc.GetString("system-user");
+                break;
+            // SS220 Species bans end
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), note.GetType(), "Unknown note type");
         }
@@ -70,6 +81,7 @@ public static class AdminNotesExtensions
             note.LastEditedAt?.UtcDateTime,
             note.ExpirationTime?.UtcDateTime,
             bannedRoles,
+            bannedSpecies, // SS220 Species bans
             unbannedTime,
             unbannedByName,
             statedRound,

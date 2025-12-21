@@ -4,6 +4,9 @@
   parent: BaseStorageItem
   description: A robust bag for salvage specialists and miners alike to carry large amounts of ore. Magnetises any nearby ores when attached to a belt.
   components:
+  #ss220 add transfer items in storage start
+  - type: TransferMaterialsInStorage
+  #ss220 add transfer items in storage end
   - type: MagnetPickup
   - type: Sprite
     sprite: Objects/Specific/Mining/ore_bag.rsi
@@ -26,3 +29,13 @@
         - ArtifactFragment
         - Ore
   - type: Dumpable
+
+- type: entity
+  parent: OreBag
+  id: BorgOreBag
+  name: integrated ore bag
+  description: A large ore bag built into the frame of a mining cyborg.
+  components:
+    - type: Storage
+      grid:
+      - 0,0,9,5

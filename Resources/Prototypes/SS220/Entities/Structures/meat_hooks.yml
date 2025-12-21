@@ -1,0 +1,54 @@
+#© SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: entity
+  id: WoodenMeatHook
+  parent: KitchenSpike
+  name: Wooden Meat Hook
+  description: Looks like it's about to break, but even in this state, it can still hold anyone unlucky enough to end up nearby.
+  suffix: trash, junk
+  components:
+    - type: Transform
+      noRot: false
+    - type: Sprite
+      sprite: SS220/Structures/hooks.rsi
+      state: wood
+      layers:
+        - state: wood
+          map: ["base"]
+    - type: GenericVisualizer
+      visuals:
+        enum.KitchenSpikeVisuals.Status:
+          base:
+            Empty: { state: wood }
+            Bloody: { state: woodbloody }
+    - type: Construction
+      graph: woodenhook
+      node: woodenhook
+
+- type: entity
+  id: MeatHookDnd
+  parent: KitchenSpike
+  name: Wooden Meat Hook
+  description: If you don't know what to hang on this hook-don't worry, someone is bound to show up soon!
+  suffix: trash, junk
+  components:
+    - type: Transform
+      noRot: false
+    - type: Sprite
+      sprite: SS220/Structures/hook_dnd.rsi
+      state: hook_dnd
+      layers:
+        - state: hook_dnd
+          map: ["base"]
+    - type: GenericVisualizer
+      visuals:
+        enum.KitchenSpikeVisuals.Status:
+          base:
+            Empty: { state: hook_dnd }
+            Bloody: { state: trash_stolb_monk }
+    - type: Construction
+      graph: dndhook
+      node: dndhook
+
+
+
+

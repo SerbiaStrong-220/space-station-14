@@ -1,14 +1,14 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.CultYogg.Corruption;
 
-[RegisterComponent, NetworkedComponent]
-
 /// <summary>
 /// Used to mark object us corrupted for exorcism
 /// </summary>
+[RegisterComponent, NetworkedComponent]
 public sealed partial class CultYoggCorruptedComponent : Component
 {
     /// <summary>

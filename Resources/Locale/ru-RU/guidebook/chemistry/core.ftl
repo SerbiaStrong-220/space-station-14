@@ -29,4 +29,4 @@ guidebook-reagent-recipes-mix-info =
                *[false] выше { $minTemp }K
             }
     }
-guidebook-reagent-physical-description = [italic]На вид вещество { $description }.[/italic].
+guidebook-reagent-physical-description = [italic]На вид вещество { $description }.[/italic]

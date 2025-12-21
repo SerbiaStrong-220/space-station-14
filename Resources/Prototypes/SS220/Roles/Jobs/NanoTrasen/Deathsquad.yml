@@ -1,0 +1,35 @@
+- type: job
+  id: DeathSquadLeader
+  name: job-name-death-squad-leader
+  description: job-description-death-squad-leader
+  playTimeTracker: DeathSquadLeader
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 20h
+    - !type:DepartmentTimeRequirement
+      department: Command
+      time: 10h
+
+- type: job
+  id: DeathSquadHealer
+  name: job-name-death-squad-healer
+  description: job-description-death-squad-healer
+  playTimeTracker: DeathSquadHealer
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 15h
+    - !type:DepartmentTimeRequirement
+      department: Medical
+      time: 10h
+
+- type: job
+  id: DeathSquadOperative
+  name: job-name-death-squad-operative
+  description: job-description-death-squad-operative
+  playTimeTracker: DeathSquadOperative
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 15h

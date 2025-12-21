@@ -1,6 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-
 using Content.Shared.SS220.SuperMatter.Observer;
 using Robust.Client.GameObjects;
 using Robust.Shared.Timing;
@@ -16,6 +15,7 @@ public sealed class SuperMatterObserverVisualReceiverSystem : EntitySystem
     {
         SubscribeLocalEvent<SuperMatterObserverVisualReceiverComponent, AppearanceChangeEvent>(OnAppearanceChange);
     }
+
     private void OnAppearanceChange(Entity<SuperMatterObserverVisualReceiverComponent> entity, ref AppearanceChangeEvent args)
     {
         if (args.Sprite == null)
@@ -23,15 +23,20 @@ public sealed class SuperMatterObserverVisualReceiverSystem : EntitySystem
 
         if (!_appearance.TryGetData<SuperMatterVisualState>(entity.Owner, SuperMatterVisuals.VisualState, out var state, args.Component))
             return;
+
         if (!args.Sprite.LayerMapTryGet(SuperMatterVisualLayers.Shaded, out var layer))
             return;
+
         if (!args.Sprite.LayerMapTryGet(SuperMatterVisualLayers.Unshaded, out var unshadedLayer))
             return;
+
         Dictionary<SuperMatterVisualLayers, int> layers = new()
                 {{ SuperMatterVisualLayers.Shaded, layer },
                     { SuperMatterVisualLayers.Unshaded, unshadedLayer }};
+
         if (_gameTiming.CurTime < entity.Comp.RandomEventTime)
             return;
+
         // For those who wanted to make it right. Make it, thanks
         switch (state)
         {
@@ -75,6 +80,7 @@ public sealed class SuperMatterObserverVisualReceiverSystem : EntitySystem
                 throw new ArgumentOutOfRangeException();
         }
     }
+
     private void SetVisualLayers(Dictionary<SuperMatterVisualLayers, string> state, Dictionary<SuperMatterVisualLayers, int> layers, SpriteComponent sprite)
     {
         foreach (SuperMatterVisualLayers visualLayerKey in Enum.GetValues(typeof(SuperMatterVisualLayers)))

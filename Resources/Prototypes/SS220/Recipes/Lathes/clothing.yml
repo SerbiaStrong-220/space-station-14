@@ -82,3 +82,13 @@
   materials:
     Cloth: 200
     Durathread: 150
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitWaiter
+  result: ClothingUniformJumpsuitWaiter
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpskirtWaitress
+  result: ClothingUniformJumpskirtWaitress

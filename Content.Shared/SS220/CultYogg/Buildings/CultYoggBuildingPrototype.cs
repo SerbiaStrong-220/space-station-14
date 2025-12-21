@@ -53,8 +53,8 @@ public partial struct CultYoggBuildingMaterial
 {
     [DataField("stack", required: true)]
     public ProtoId<StackPrototype> StackType;
-    [DataField("count", required: true)]
+    [DataField(required: true)]
     public int Count;
-    [DataField("icon", required: true)]
+    [DataField(required: true)]
     public SpriteSpecifier Icon;
 }

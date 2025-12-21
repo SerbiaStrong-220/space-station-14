@@ -1,14 +1,14 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using System.Text;
+
 using Content.Server.Popups;
+using Content.Server.SS220.SuperMatter.Crystal.Components;
 using Content.Server.SS220.SuperMatter.Emitter;
-using Content.Server.SS220.SuperMatterCrystal.Components;
 using Content.Shared.Administration;
 using Content.Shared.Singularity.Components;
 
-namespace Content.Server.SS220.SuperMatterCrystal;
+namespace Content.Server.SS220.SuperMatter.Crystal;
 
-public sealed partial class SuperMatterSystem : EntitySystem
+public sealed partial class SuperMatterSystem
 {
     [Dependency] private readonly PopupSystem _popupSystem = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
@@ -56,6 +56,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
             else
                 Log.Error($"Spawned Entity {spawnedUid} dont have MetaDataComponent");
         }
+
         EntityManager.QueueDeleteEntity(targetUid);
     }
 }

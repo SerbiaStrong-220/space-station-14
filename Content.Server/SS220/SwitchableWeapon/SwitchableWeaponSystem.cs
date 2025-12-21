@@ -1,7 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Damage.Components;
-using Content.Shared.Damage.Events;
 using Content.Shared.Examine;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
@@ -24,33 +23,27 @@ public sealed class SwitchableWeaponSystem : EntitySystem
 
         SubscribeLocalEvent<SwitchableWeaponComponent, UseInHandEvent>(Toggle);
         SubscribeLocalEvent<SwitchableWeaponComponent, ExaminedEvent>(OnExamined);
-        SubscribeLocalEvent<SwitchableWeaponComponent, StaminaDamageOnHitAttemptEvent>(OnStaminaHitAttempt);
         SubscribeLocalEvent<SwitchableWeaponComponent, GetMeleeDamageEvent>(OnGetMeleeDamage);
         SubscribeLocalEvent<SwitchableWeaponComponent, ComponentAdd>(OnComponentAdded);
     }
 
-    private void OnComponentAdded(EntityUid uid, SwitchableWeaponComponent component, ComponentAdd args)
+    private void OnComponentAdded(Entity<SwitchableWeaponComponent> ent, ref ComponentAdd args)
     {
-        UpdateState(uid, component);
+        UpdateState(ent, ent.Comp);
     }
 
     //Non-stamina damage
-    private void OnGetMeleeDamage(EntityUid uid, SwitchableWeaponComponent component, ref GetMeleeDamageEvent args)
+    private void OnGetMeleeDamage(Entity<SwitchableWeaponComponent> ent, ref GetMeleeDamageEvent args)
     {
-        args.Damage = component.IsOpen ? component.DamageOpen : component.DamageFolded;
+        args.Damage = ent.Comp.IsOpen ? ent.Comp.DamageOpen : ent.Comp.DamageFolded;
     }
 
-    private void OnStaminaHitAttempt(EntityUid uid, SwitchableWeaponComponent component, ref StaminaDamageOnHitAttemptEvent args)
+    private void OnExamined(Entity<SwitchableWeaponComponent> ent, ref ExaminedEvent args)
     {
-        if (!component.IsOpen)
-            return;
-    }
-
-    private void OnExamined(EntityUid uid, SwitchableWeaponComponent comp, ExaminedEvent args)
-    {
-        var msg = comp.IsOpen
+        var msg = ent.Comp.IsOpen
             ? Loc.GetString("comp-switchable-examined-on")
             : Loc.GetString("comp-switchable-examined-off");
+
         args.PushMarkup(msg);
     }
 
@@ -63,7 +56,7 @@ public sealed class SwitchableWeaponSystem : EntitySystem
         }
 
         if (TryComp<AppearanceComponent>(uid, out var appearance))
-            _appearance.SetData(uid, ToggleVisuals.Toggled, comp.IsOpen, appearance);
+            _appearance.SetData(uid, ToggleableVisuals.Enabled, comp.IsOpen, appearance);
 
         // Change stamina damage according to state
         if (TryComp<StaminaDamageOnHitComponent>(uid, out var stamComp))

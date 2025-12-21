@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/blob/HEAD/icons/obj/devices/new_assemblies.dmi, inhands sprite by Estkemran (Github) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "signaller"
+    },
+    {
+      "name": "active"
+    },
+    {
+      "name": "active-advanced"
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "advanced"
+    },
+    {
+      "name": "advanced-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "advanced-inhand-right",
+      "directions": 4
+    }
+  ]
+}

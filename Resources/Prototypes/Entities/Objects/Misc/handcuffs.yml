@@ -37,7 +37,7 @@
   parent: Handcuffs
   components:
   - type: Handcuff
-    breakoutTime: 3
+    breakoutTime: 6 # ss220 balance zipties & handcuffs
     cuffedRSI: Objects/Misc/cablecuffs.rsi
     bodyIconState: body-overlay
     color: forestgreen
@@ -79,7 +79,7 @@
     size: Tiny
     storedRotation: 0
   - type: Handcuff
-    breakoutTime: 3
+    breakoutTime: 9 # ss220 balance zipties & handcuffs
     cuffedRSI: Objects/Misc/cablecuffs.rsi  # cablecuffs will look fine
     bodyIconState: body-overlay
     breakOnRemove: true
@@ -150,11 +150,11 @@
   - type: Item
     size: Normal
   - type: Handcuff
-    cuffedRSI: Clothing/OuterClothing/Misc/straight_jacket.rsi
+    cuffedRSI: SS220/Clothing/OuterClothing/Misc/straight_jacket.rsi # SS220 straitjacket resprite
     breakoutTime: 100
     cuffTime: 10
     uncuffTime: 10
     stunBonus: 4
   - type: Sprite
-    sprite: Clothing/OuterClothing/Misc/straight_jacket.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/straight_jacket.rsi # SS220 straitjacket resprite
     state: icon

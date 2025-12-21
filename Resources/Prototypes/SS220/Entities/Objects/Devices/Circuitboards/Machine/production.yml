@@ -9,7 +9,7 @@
   - type: MachineBoard
     prototype: TegCenter
     stackRequirements:
-      Capacitor: 4
+      Manipulator: 4
       Steel: 5
 
 - type: entity
@@ -23,8 +23,7 @@
   - type: MachineBoard
     prototype: TegCirculator
     stackRequirements:
-      Capacitor: 4
-      Manipulator: 1
+      Manipulator: 5
       Steel: 5
       Gold: 1
 
@@ -36,7 +35,7 @@
   - type: MachineBoard
     prototype: ThrusterShunting
     stackRequirements:
-      Capacitor: 1
+      Manipulator: 1
       Steel: 2
   - type: Tag
     tags:
@@ -50,7 +49,7 @@
   - type: MachineBoard
     prototype: ThrusterBigLeft
     stackRequirements:
-      Capacitor: 2
+      Manipulator: 2
       Steel: 3
 
 - type: entity
@@ -61,7 +60,7 @@
   - type: MachineBoard
     prototype: ThrusterBigRight
     stackRequirements:
-      Capacitor: 2
+      Manipulator: 2
       Steel: 3
 
 - type: entity
@@ -72,7 +71,7 @@
   - type: MachineBoard
     prototype: ThrusterBigCenter
     stackRequirements:
-      Capacitor: 6
+      Manipulator: 6
       Steel: 10
 
 - type: entity
@@ -82,5 +81,4 @@
   - type: MachineBoard
     prototype: ComputerPdaIdPainter
     stackRequirements:
-      Capacitor: 4
-      Manipulator: 3
+      Manipulator: 7

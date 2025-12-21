@@ -66,9 +66,7 @@ entities:
     - type: Transform
     - type: Map
       mapPaused: True
-    - type: PhysicsMap
     - type: GridTree
-    - type: MovedGrids
     - type: Broadphase
     - type: OccluderTree
     - type: LoadedMap
@@ -83,6 +81,7 @@ entities:
       parent: 1
     - type: BecomesStation
       id: CookingEventMap
+    - type: SkipAutoVariantize  
     - type: MapGrid
       chunks:
         0,0:

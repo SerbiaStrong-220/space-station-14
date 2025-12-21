@@ -1,11 +1,8 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.SS220.Weapons.Melee.Components;
-using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Inventory;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.CombatMode;
-using Robust.Shared.Random;
 
 namespace Content.Shared.SS220.Weapons.Melee.Systems;
 
@@ -20,17 +17,12 @@ public sealed class SharedDisarmOnAttackSystem : EntitySystem
 
     private void OnAttackEvent(Entity<DisarmOnAttackComponent> ent, ref WeaponAttackEvent args)
     {
-        float chance = 0;
-        switch (args.Type)
+        var chance = args.Type switch
         {
-            case AttackType.HEAVY:
-                chance = ent.Comp.HeavyAttackChance;
-                break;
-
-            case AttackType.LIGHT:
-                chance = ent.Comp.Chance;
-                break;
-        }
+            AttackType.HEAVY => ent.Comp.HeavyAttackChance,
+            AttackType.LIGHT => ent.Comp.Chance,
+            _ => 0,
+        };
 
         if (chance <= 0)
             return;

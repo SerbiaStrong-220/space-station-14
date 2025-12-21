@@ -17,7 +17,7 @@
     - type: SolutionContainerManager
       solutions:
         beaker:
-          maxVol: 30
+          maxVol: 80
           canReact: false
     - type: RefillableSolution
       solution: beaker
@@ -48,12 +48,12 @@
     - type: SolutionContainerManager
       solutions:
         beaker:
-          maxVol: 30
+          maxVol: 80
           reagents:
           - ReagentId: Omnizine
-            Quantity: 25
+            Quantity: 67
           - ReagentId: TranexamicAcid
-            Quantity: 5
+            Quantity: 13
 
 - type: entity
   parent: EmptyChemicalImplant
@@ -69,14 +69,14 @@
     - type: SolutionContainerManager
       solutions:
         beaker:
-          maxVol: 30
+          maxVol: 80
           reagents:
           - ReagentId: Dylovene
-            Quantity: 10
+            Quantity: 26
           - ReagentId: Arithrazine
-            Quantity: 10
+            Quantity: 27
           - ReagentId: Bicaridine
-            Quantity: 10
+            Quantity: 27
 
 - type: entity
   parent: EmptyChemicalImplant

@@ -4,7 +4,9 @@
   description: Visualizer for shuttles arriving. You shouldn't see this!
   components:
   - type: Transform
-    noRot: true
+    #ss220 fix rotation start
+    #noRot: true
+    #ss220 fix rotation end
     gridTraversal: false
   - type: FtlVisualizer
     sprite:

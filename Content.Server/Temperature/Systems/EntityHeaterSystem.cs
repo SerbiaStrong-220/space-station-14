@@ -30,9 +30,10 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
     public override void Update(float deltaTime)
     {
         var query = EntityQueryEnumerator<EntityHeaterComponent, ItemPlacerComponent, ApcPowerReceiverComponent>();
-        while (query.MoveNext(out _, out _, out var placer, out var power))
+        while (query.MoveNext(out _, out var heater, out var placer, out var power)) //SS220-grill-update. To get to heater component
         {
-            if (!power.Powered)
+            if (!power.Powered ||
+                heater.Setting == EntityHeaterSetting.Off) //SS220-grill-update. Don't grill, if grill is off
                 continue;
 
             // don't divide by total entities since it's a big grill

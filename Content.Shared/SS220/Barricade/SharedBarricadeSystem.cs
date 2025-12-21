@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.Projectiles;
 using Content.Shared.SS220.Weapons.Ranged.Events;
 using Content.Shared.Throwing;
@@ -35,7 +36,6 @@ public abstract partial class SharedBarricadeSystem : EntitySystem
             ProjectileTryPassBarricade(entity, (args.OtherEntity, projectile)))
         {
             args.Cancelled = true;
-            return;
         }
     }
 

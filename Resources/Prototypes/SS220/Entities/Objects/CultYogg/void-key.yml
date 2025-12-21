@@ -1,0 +1,93 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: [BaseItem, CultYoggRestrictedItem]
+  id: VoidKey
+  name: void key
+  description: Opens portals to the VOID
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/CultYogg/voidkey.rsi
+    state: icon
+  - type: Item
+    sprite: SS220/Objects/CultYogg/voidkey.rsi
+    size: Tiny
+  - type: UseDelay
+    delay: 10
+  - type: TriggerOnUse
+  - type: SpawnOnTrigger
+    proto: VoidPortalSpawn
+    useMapCoords: true
+  - type: MeleeWeapon
+    attackRate: 1.5
+    damage:
+      types:
+        Slash: 15.5
+  - type: ThrowingAngle
+    angularVelocity: true # spins
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 10
+
+- type: entity
+  id: VoidPortal
+  suffix: CultYogg
+  components:
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Sprite
+    noRot: true
+    drawdepth: Ghosts
+    sprite: SS220/Objects/CultYogg/portal.rsi
+    layers:
+    - state: portal_loop
+      shader: unshaded
+  # spawn animation lasts 2 seconds, we loop
+  - type: TimedDespawn
+    lifetime: 12
+  - type: SpawnOnDespawn
+    prototype: VoidPortalClosed
+  - type: InteractionTeleport
+    teleportDoAfterTime: 2
+    userWhitelist:
+      components:
+      - HumanoidAppearance
+  - type: RandomTeleport
+    targetsComponent: "RandomTeleportTarget"
+    whitelist:
+      tags:
+      - VoidTeleporationTarget
+
+#Animation entities for a better immersions
+- type: entity
+  id: VoidPortalSpawn
+  suffix: CultYogg
+  components:
+  - type: Sprite
+    noRot: true
+    drawdepth: Ghosts
+    sprite: SS220/Objects/CultYogg/portal.rsi
+    layers:
+    - state: portal_open
+      shader: unshaded
+  # spawn animation lasts 1.6 seconds
+  - type: TimedDespawn
+    lifetime: 1.6
+  - type: SpawnOnDespawn
+    prototype: VoidPortal
+
+- type: entity
+  id: VoidPortalClosed
+  suffix: CultYogg
+  components:
+  - type: Sprite
+    noRot: true
+    drawdepth: Ghosts
+    sprite: SS220/Objects/CultYogg/portal.rsi
+    layers:
+    - state: portal_close
+      shader: unshaded
+  # spawn animation lasts 1.2 seconds, but somehow its get +0.1 wtf
+  - type: TimedDespawn
+    lifetime: 1.1

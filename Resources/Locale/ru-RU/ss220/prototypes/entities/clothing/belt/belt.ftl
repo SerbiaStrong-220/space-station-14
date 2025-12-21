@@ -9,3 +9,9 @@ ent-ClothingBeltCutlassSheath = ножны офицерского кортика
     .suffix = За время в игре
 ent-ClothingBeltSecurityMedical = пояс бригмедика
     .desc = { ent-ClothingBeltMedical.desc }
+
+ent-ClothingBeltLegendaryMarksmanHolsterFilled = плечевая кобура Легендарного стрелка
+    .desc = Кобура для ношения пистолета и боеприпасов. ВНИМАНИЕ: Только для крутых.
+
+ent-ClothingBeltBlackAngelHolsterFilled = плечевая кобура Чёрного ангела
+    .desc = Кобура для ношения пистолета и боеприпасов. ВНИМАНИЕ: Только для крутых.

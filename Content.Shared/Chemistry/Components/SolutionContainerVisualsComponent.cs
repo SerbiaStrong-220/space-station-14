@@ -62,5 +62,10 @@ namespace Content.Shared.Chemistry.Components
         /// </summary>
         [DataField]
         public int EquippedMaxFillLevels = 0;
+
+        // SS220-fix-middle-hand-sprites-begin
+        [DataField]
+        public List<string> IgnoreLocationSprite = new();
+        // SS220-fix-middle-hand-sprites-end
     }
 }

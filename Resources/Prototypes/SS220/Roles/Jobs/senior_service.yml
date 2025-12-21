@@ -40,3 +40,11 @@
     belt: BoxFolderClipboard
     ears: ClothingHeadsetService
     gloves: ClothingHandsGlovesColorWhite
+
+- type: chameleonOutfit
+  id: SeniorServiceChameleonOutfit
+  job: SeniorService
+  equipment:
+    eyes: ClothingEyesGlassesSunglasses
+    mask: ClothingMaskGas
+    outerClothing: ClothingOuterVest

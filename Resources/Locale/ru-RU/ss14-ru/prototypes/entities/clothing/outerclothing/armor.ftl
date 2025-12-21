@@ -33,3 +33,5 @@ ent-ClothingOuterArmorBone = костяной доспех
     .desc = Сидит на вас как вторая кожа.
 ent-ClothingOuterArmorPodWars = броня Броненосец II
     .desc = Переделанный бронескафандр Броненосец II, реликвия войн подов.
+ent-ClothingOuterArmorElectricity = { ent-ClothingOuterVestArmorSec }
+    .desc = { ent-ClothingOuterVestArmorSec.desc }

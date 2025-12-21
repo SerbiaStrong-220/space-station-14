@@ -69,6 +69,7 @@
       - PhysicalComposition
       - MobState
       - SpaceGarbage
+      - Delivery #ss220 made letters and packages recyclable
       tags:
       - Trash
       - Recyclable

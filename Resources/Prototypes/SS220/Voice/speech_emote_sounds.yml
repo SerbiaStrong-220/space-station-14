@@ -1,3 +1,4 @@
+# spo9k emote sounds start
 - type: emoteSounds
   id: MaleFelinid
   params:
@@ -73,93 +74,9 @@
       collection: Gasp
     CritGasp:
       collection: FemaleCritGasp
+# spo9k emote sounds end
 
-- type: emoteSounds
-  id: MaleVulpkanin
-  params:
-   variation: 0.125
-   pitch: 0.75
-  sounds:
-    Growl:
-      collection: GrowlVulpin
-    Howl:
-      collection: HowlVulpin
-    Bark:
-      collection: BarkVulpin
-    Scream:
-      collection: MaleScreams
-    Laugh:
-      collection: MaleLaugh
-    Giggle:
-      collection: MaleGiggle
-      params:
-        volume: 2
-    Sigh:
-      collection: MaleSigh
-    Crying:
-      collection: MaleCry
-    Whistle:
-      collection: Whistles
-    Sneeze:
-      collection: MaleSneezes
-    Cough:
-      collection: MaleCoughs
-    Fart:
-      collection: Fart
-      params:
-        volume: 2
-    DefaultDeathgasp:
-      collection: Deathgasp
-    Gasp:
-      collection: Gasp
-    CritGasp:
-      collection: MaleCritGasp
-    Weh:
-      collection: Weh
-
-- type: emoteSounds
-  id: FemaleVulpkanin
-  params:
-   variation: 0.125
-   pitch: 0.75
-  sounds:
-    Growl:
-      collection: GrowlVulpin
-    Howl:
-      collection: HowlVulpin
-    Bark:
-      collection: BarkVulpin
-    Scream:
-      collection: FemaleScreams
-    Laugh:
-      collection: FemaleLaugh
-    Giggle:
-      collection: FemaleGiggle
-      params:
-        volume: 2
-    Sigh:
-      collection: FemaleSigh
-    Crying:
-      collection: FemaleCry
-    Whistle:
-      collection: Whistles
-    Sneeze:
-      collection: FemaleSneezes
-    Cough:
-      collection: FemaleCoughs
-    Fart:
-      collection: Fart
-      params:
-        volume: 2
-    DefaultDeathgasp:
-      collection: Deathgasp
-    Gasp:
-      collection: Gasp
-    CritGasp:
-      collection: FemaleCritGasp
-    Weh:
-      collection: Weh
-
+# Cat emotes start
 - type: emoteSounds
   id: Cat
   params:
@@ -178,3 +95,84 @@
       collection: FelinidGrowls
     Purr:
       collection: FelinidPurrs
+# Cat emotes end
+
+- type: emoteSounds
+  id: MaleTajaran
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: FelinidScreams
+    Laugh:
+      collection: MaleLaugh
+    Giggle:
+      collection: MaleLaugh
+    Cough:
+      collection: MaleCoughs
+    Yawn:
+      collection: MaleYawn
+    Sigh:
+      collection: MaleSigh
+    Crying:
+      collection: MaleCry
+    Whistle:
+      collection: Whistles
+    Hiss:
+      collection: FelinidHisses
+    Meow:
+      collection: TajaranMeows
+    Mrow:
+      collection: TajaranAnnoyedMeows
+    Mew:
+      collection: FelinidMews
+    Growl:
+      collection: FelinidGrowls
+    Purr:
+      collection: FelinidPurrs
+    DefaultDeathgasp:
+      collection: Deathgasp
+    Gasp:
+      collection: Gasp
+    CritGasp:
+      collection: MaleCritGasp
+
+- type: emoteSounds
+  id: FemaleTajaran
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: FelinidScreams
+    Laugh:
+      collection: FemaleLaugh
+    Giggle:
+      collection: FemaleLaugh
+    Cough:
+      collection: FemaleCoughs
+    Yawn:
+      collection: FemaleYawn
+    Sigh:
+      collection: FemaleSigh
+    Crying:
+      collection: FemaleCry
+    Whistle:
+      collection: Whistles
+    Hiss:
+      collection: FelinidHisses
+    Meow:
+      collection: TajaranMeows
+    Mrow:
+      collection: TajaranAnnoyedMeows
+    Mew:
+      collection: FelinidMews
+    Growl:
+      collection: FelinidGrowls
+    Purr:
+      collection: FelinidPurrs
+    DefaultDeathgasp:
+      collection: Deathgasp
+    Gasp:
+      collection: Gasp
+    CritGasp:
+      collection: FemaleCritGasp

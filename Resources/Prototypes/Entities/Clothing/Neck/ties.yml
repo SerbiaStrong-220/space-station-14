@@ -13,6 +13,7 @@
     - HamsterWearable
     - WhitelistChameleon
     - ClothMade
+    - Recyclable
 
 - type: entity
   parent: ClothingNeckBase
@@ -38,6 +39,7 @@
   - type: Tag
     tags:
     - ClothMade
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
   #ss220 special_sounds start

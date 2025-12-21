@@ -1,0 +1,30 @@
+- type: entity
+  parent: MobStatusEffectDebuff
+  id: MobThresholdsModifierStatusEffect
+  abstract: true
+  components:
+  - type: StatusEffect
+    whitelist:
+      components:
+      - MobThresholds
+  - type: MobThresholdsModifierStatusEffect
+
+- type: entity
+  parent: MobThresholdsModifierStatusEffect
+  id: MobThresholdsModifierMorphine
+  name: mob thresholds modifier by morphine
+  components:
+  - type: MobThresholdsModifierStatusEffect
+    modifiers:
+      Critical:
+        flat: 20
+
+- type: entity
+  parent: MobThresholdsModifierStatusEffect
+  id: MobThresholdsModifierFrontier
+  name: mob thresholds modifier by frontier
+  components:
+  - type: MobThresholdsModifierStatusEffect
+    modifiers:
+      Critical:
+        flat: 50

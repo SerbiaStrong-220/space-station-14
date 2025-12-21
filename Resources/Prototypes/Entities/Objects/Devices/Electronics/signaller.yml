@@ -7,9 +7,16 @@
   description: A handheld device used for remotely sending signals to objects within a small radius of about 15 meters.
   components:
   - type: Sprite
-    sprite: Objects/Devices/signaller.rsi
-    state: signaller
+    sprite: SS220/Objects/Devices/signaller.rsi # SS220 from cabinet to 3/4 Part 1 Begin
+    layers:
+    - state: signaller
+    - state: active
+      shader: unshaded # SS220 from cabinet to 3/4 Part 1 End
   - type: Signaller
+  - type: SignalOnTrigger
+    port: Pressed
+  - type: UseDelayOnTrigger
+  - type: UseDelayTriggerCondition
   - type: UseDelay
   - type: StaticPrice
     price: 40
@@ -19,6 +26,7 @@
   - type: Tag
     tags:
     - Payload
+    - RemoteSignaller
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: BasicDevice
@@ -32,7 +40,10 @@
   description: A handheld device used for remotely sending signals to objects within a small radius of about 50 meters.
   components:
   - type: Sprite
-    state: advanced
+    layers: # SS220 from cabinet to 3/4 Part 1 Begin
+    - state: advanced
+    - state: active-advanced
+      shader: unshaded # SS220 from cabinet to 3/4 Part 1 End
   - type: Item
     inhandVisuals:
       left:

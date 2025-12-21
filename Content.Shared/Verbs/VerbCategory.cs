@@ -95,5 +95,13 @@ namespace Content.Shared.Verbs
         //SS220-SpecialSound-system  end
 
         public static readonly VerbCategory PowerLevel = new("verb-categories-power-level", null);
+
+        public static readonly VerbCategory Adjust =
+            new("verb-categories-adjust", "/Textures/Interface/VerbIcons/screwdriver.png");
+
+        // ss220 add signature start
+        public static readonly VerbCategory PenWriteSize = new("verb-categories-pen-write-size", null);
+        public static readonly VerbCategory PenEraseSize = new("verb-categories-pen-erase-size", null);
+        // ss220 add signature end
     }
 }

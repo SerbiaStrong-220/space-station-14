@@ -25,15 +25,3 @@
       state: icon
   - type: CultYoggSummonCondition
 
-#Objective for acsending, to clarify gameplay
-- type: entity
-  parent: BaseCultYoggObjective
-  id: CultYoggAcsendObjective
-  name: Вознесите 3 Ми-Го
-  description: Призыв это работа для высших существ. Необходимо выбрать кандидатов, защищать их, заменить в случае утери.
-  components:
-  - type: Objective
-    icon:
-      sprite: SS220/Mobs/CultYogg/MiGo.rsi
-      state: alive
-  - type: MiGoAliveCondition

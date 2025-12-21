@@ -2,9 +2,18 @@
   id: DisplacedStencilDraw
   kind: source
   path: "/Textures/Shaders/displacement.swsl"
-  stencil:
-    ref: 1
-    op: Keep
-    func: NotEqual
+  #ss220 fix naked women start
+  #stencil:
+    #ref: 1
+    #op: Keep
+    #func: NotEqual
+  #ss220 fix naked women end
+  params:
+    displacementSize: 127
+
+- type: shader
+  id: DisplacedDraw
+  kind: source
+  path: "/Textures/Shaders/displacement.swsl"
   params:
     displacementSize: 127

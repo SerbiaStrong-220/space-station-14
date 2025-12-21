@@ -34,7 +34,7 @@ public abstract partial class SharedFultonSystem : EntitySystem
     [Dependency] private readonly IEntityManager _entity = default!;//SS220 fulton_grid_restriction
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
 
-    [ValidatePrototypeId<EntityPrototype>] public const string EffectProto = "FultonEffect";
+    public static readonly EntProtoId EffectProto = "FultonEffect";
     protected static readonly Vector2 EffectOffset = Vector2.Zero;
 
     public override void Initialize()

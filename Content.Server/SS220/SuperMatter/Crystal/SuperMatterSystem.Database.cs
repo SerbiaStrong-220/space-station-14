@@ -1,18 +1,18 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using System.Linq;
-using Content.Server.SS220.SuperMatter;
-using Content.Server.SS220.SuperMatterCrystal.Components;
+using Content.Server.SS220.SuperMatter.Crystal.Components;
 using Content.Shared.Atmos;
-using Content.Shared.CartridgeLoader;
 using Content.Shared.SS220.CCVars;
 using Content.Shared.SS220.SuperMatter.Ui;
 using Robust.Shared.Configuration;
 
-namespace Content.Server.SS220.SuperMatterCrystal;
+namespace Content.Server.SS220.SuperMatter.Crystal;
+
 // TODO: cache here data about SM in dictionary of uid
 // TODO: handle client request for information like spamming of console etc etc
 // TODO: added: Fun!
-public sealed partial class SuperMatterSystem : EntitySystem
+public sealed partial class SuperMatterSystem
 {
     [Dependency] private readonly IConfigurationManager _config = default!;
 
@@ -21,8 +21,9 @@ public sealed partial class SuperMatterSystem : EntitySystem
     // TODO add shifts counter for not delaminate
     private void InitializeDatabase()
     {
-        Subs.CVar(_config, CCVars220.SuperMatterUpdateNetworkDelay, OnBroadcastDelayChanged, true);
+        Subs.CVar(_config, CCVars220.SuperMatterUpdateNetworkDelay, (x) => _broadcastDelay = x, true);
     }
+
     public void BroadcastData(Entity<SuperMatterComponent> crystal)
     {
         var (uid, comp) = crystal;
@@ -67,6 +68,7 @@ public sealed partial class SuperMatterSystem : EntitySystem
             smComp.AccumulatedGasesMoles[gas] += gasMixture.GetMoles((int)gas);
         }
     }
+
     private void InitGasMolesAccumulator(SuperMatterComponent smComp)
     {
         foreach (var gas in Enum.GetValues<Gas>())
@@ -74,15 +76,12 @@ public sealed partial class SuperMatterSystem : EntitySystem
             smComp.AccumulatedGasesMoles.Add(gas, 0f);
         }
     }
+
     private void ZeroGasMolesAccumulator(SuperMatterComponent smComp)
     {
         foreach (var gas in Enum.GetValues<Gas>())
         {
             smComp.AccumulatedGasesMoles[gas] = 0;
         }
-    }
-    private void OnBroadcastDelayChanged(float delay)
-    {
-        _broadcastDelay = delay;
     }
 }

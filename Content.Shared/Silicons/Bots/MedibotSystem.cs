@@ -11,6 +11,7 @@ using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Serialization;
 using System.Diagnostics.CodeAnalysis;
+using Robust.Shared.Prototypes; //ss220 fix medibot
 
 namespace Content.Shared.Silicons.Bots;
 
@@ -25,6 +26,7 @@ public sealed class MedibotSystem : EntitySystem
     [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!; //ss220 fix medibot
 
     public override void Initialize()
     {
@@ -108,13 +110,16 @@ public sealed class MedibotSystem : EntitySystem
         }
 
         var total = damageable.TotalDamage;
-        if (total == 0 && !HasComp<EmaggedComponent>(medibot))
+        //ss220 fix medibot start
+        var isEmagged = HasComp<EmaggedComponent>(medibot);
+        if (total == 0 && !isEmagged)
         {
             _popup.PopupClient(Loc.GetString("medibot-target-healthy"), medibot, medibot);
             return false;
         }
 
-        if (!TryGetTreatment(medibot.Comp, mobState.CurrentState, out var treatment) || !treatment.IsValid(total) && !manual) return false;
+        if (!TryGetTreatment(medibot.Comp, mobState.CurrentState, out var treatment) || !treatment.IsValid(damageable.Damage, isEmagged, _proto) && !manual) return false;
+        //ss220 fix medibot end
 
         return true;
     }

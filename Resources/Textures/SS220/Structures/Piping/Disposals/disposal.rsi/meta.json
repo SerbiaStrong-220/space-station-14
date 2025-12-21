@@ -1,0 +1,35 @@
+{
+    "version": 1,
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "license": "CC-BY-SA-3.0",
+    "copyright": "based on pipe-x pipe-xf, conpipe-x by K-Dynamic (github). Recolored by ReeZer2 (github) and tryhard1(discord)",
+    "states": [
+        {
+            "name": "y_pipe_filter",
+            "directions": 4
+        },
+        {
+            "name": "y_pipe_filter_flipped",
+            "directions": 4
+        },
+		{
+            "name": "x_pipe_filter",
+            "directions": 4
+        },
+        {
+            "name": "con_y_pipe_filter",
+            "directions": 4
+        },
+        {
+            "name": "con_y_pipe_filter_flipped",
+            "directions": 4
+        },
+		{
+            "name": "con_x_pipe_filter",
+            "directions": 4
+        }
+    ]
+}

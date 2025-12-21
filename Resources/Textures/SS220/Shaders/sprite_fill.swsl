@@ -1,0 +1,13 @@
+// license: This content is under ICLA. Copyright holder: orix0689 (discord) (Read more on: https://wiki.imperialspace.net/ru/icla)
+// copyright: "orix0689 (discord)"
+
+uniform highp float progress;
+
+void fragment() {
+    highp vec4 texture = zTexture(UV);
+
+    COLOR = vec4(vec3(zGrayscale_BT709(texture.rgb)), texture.a);
+
+    if (UV.y <= progress)
+        COLOR.rgb = texture.rgb;
+}

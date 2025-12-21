@@ -2,7 +2,6 @@
 
 using Content.Shared.SS220.CultYogg.Pod;
 
-
 namespace Content.Client.SS220.CultYogg.Pod;
 
 public sealed partial class CultYoggPodSystem : SharedCultYoggPodSystem

@@ -3,7 +3,6 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Body.Systems;
 using Content.Server.SS220.CultYogg.Nyarlathotep.Events;
-using Content.Server.Station.Components;
 using Content.Shared.Database;
 using Content.Shared.Ghost;
 using Content.Shared.Mind.Components;
@@ -11,10 +10,10 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Singularity.Components;
 using Content.Shared.SS220.CultYogg.MiGo;
 using Content.Shared.SS220.CultYogg.Nyarlathotep;
+using Content.Shared.Station.Components;
 using Content.Shared.Tag;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Events;
-
 
 namespace Content.Server.SS220.CultYogg.Nyarlathotep;
 
@@ -43,8 +42,6 @@ public sealed class NyarlathotepHorizonSystem : SharedNyarlathotepHorizonSystem
         SubscribeLocalEvent<GhostComponent, NyarlathotepHorizonAttemptConsumeEntityEvent>(PreventConsume);
         SubscribeLocalEvent<MindContainerComponent, NyarlathotepHorizonAttemptConsumeEntityEvent>(PreventConsumeMobs);
     }
-
-
 
     #region Event Handlers
     /// <summary>
@@ -77,7 +74,7 @@ public sealed class NyarlathotepHorizonSystem : SharedNyarlathotepHorizonSystem
     private void PreventConsumeMobs(Entity<MindContainerComponent> comp, ref NyarlathotepHorizonAttemptConsumeEntityEvent args)
     {
         PreventConsume(comp.Owner, comp.Comp, ref args);
-        if (_mob.IsAlive(args.entity) && !HasComp<MiGoComponent>(args.entity))
+        if (_mob.IsAlive(args.Entity) && !HasComp<MiGoComponent>(args.Entity))
             _bodySystem.GibBody(comp.Owner);
     }
 

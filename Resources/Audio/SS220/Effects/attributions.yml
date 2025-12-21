@@ -2,3 +2,11 @@
   license: "CC0-1.0"
   copyright: "Original is created by Juandamb"
   source: "https://freesound.org/people/Juandamb/sounds/430622/"
+- files: ["grilling.ogg"]
+  license: "CC0-1.0"
+  copyright: "Original is created by raremess"
+  source: "https://freesound.org/s/237692/"
+- files: ["butcher.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from https://github.com/ss220club/BandaStation"
+  source: "https://github.com/ss220club/BandaStation/blob/master/sound/effects/butcher.ogg"

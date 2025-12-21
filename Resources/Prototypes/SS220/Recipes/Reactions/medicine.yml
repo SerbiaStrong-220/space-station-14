@@ -63,4 +63,16 @@
     Sugar:
       amount: 1
   products:
-    Cerebrin: 2   
+    Cerebrin: 2
+
+- type: reaction
+  id: Nicergoline
+  reactants:
+    Desoxyephedrine:
+      amount: 1
+    Cerebrin:
+      amount: 1
+    Oxygen:
+      amount: 1
+  products:
+    Nicergoline: 3

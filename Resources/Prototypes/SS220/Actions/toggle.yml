@@ -1,0 +1,14 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: ActionToggleHand
+  name: Inner Hand Toggle
+  description: Allow you to hide item inside your hand
+  components:
+  - type: Action
+    itemIconStyle: BigItem
+    icon: { sprite: SS220/Interface/Actions/action_inner_toggle.rsi, state: in }
+    iconOn: { sprite: SS220/Interface/Actions/action_inner_toggle.rsi, state: out }
+    useDelay: 1 # equip noise spam.
+  - type: InstantAction
+    event: !type:ToggleInnerHandEvent

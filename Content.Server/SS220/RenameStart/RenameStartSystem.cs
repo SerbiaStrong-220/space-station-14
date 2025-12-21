@@ -3,8 +3,10 @@ using System.Text.RegularExpressions;
 using Content.Server.Administration;
 using Content.Server.Administration.Systems;
 using Content.Shared.Administration;
+using Content.Shared.CCVar;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
+using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 
 namespace Content.Server.SS220.RenameStart;
@@ -14,15 +16,20 @@ namespace Content.Server.SS220.RenameStart;
 /// </summary>
 public sealed class RenameStartSystem : EntitySystem
 {
+    [Dependency] private readonly IConfigurationManager _cfgManager = default!;
     [Dependency] private readonly QuickDialogSystem _quickDialog = default!;
     [Dependency] private readonly MetaDataSystem _meta = default!;
     [Dependency] private readonly AdminFrozenSystem _frozen = default!;
+
     private static readonly Regex Expressions = new("[^А-Яа-яёЁ0-9' \\-?!,.]");
-    /// <inheritdoc/>
+    private int _maxNameLength = 32;
+
     public override void Initialize()
     {
         SubscribeLocalEvent<RenameStartComponent, PlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<RenameStartComponent, ComponentShutdown>(OnRemoveComponent);
+
+        Subs.CVar(_cfgManager, CCVars.MaxNameLength, value => _maxNameLength = value, true);
     }
 
     private void OnPlayerAttached(Entity<RenameStartComponent> ent, ref PlayerAttachedEvent args)
@@ -53,7 +60,7 @@ public sealed class RenameStartSystem : EntitySystem
             (LongString newName) =>
             {
                 if (newName.String.Length < renameComp.MinChar ||
-                    newName.String.Length > renameComp.MaxChar ||
+                    newName.String.Length > _maxNameLength ||
                     Expressions.IsMatch(newName.String))
                 {
                     ChangeName(entOwner);

@@ -1,5 +1,5 @@
 ent-UraniumWindow = урановое окно
-    .desc = { ent-Window.desc }
+    .desc = { ent-BaseDeltaPressurePlasma.desc }
 ent-UraniumWindowDirectional = направленное урановое окно
     .desc = Смотри не заляпай.
 ent-UraniumWindowDiagonal = { ent-UraniumWindow }

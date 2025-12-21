@@ -1,0 +1,7 @@
+- type: latheRecipe
+  id: DiseaseSwabNarcotic
+  result: DiseaseSwabNarcotic
+  completetime: 1
+  materials:
+    Cloth: 20
+    Plastic: 20

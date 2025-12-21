@@ -13,6 +13,10 @@
     microFiberMaterial: micro-fibers-flax
     microFiberColor: micro-fibers-yellow
 #SS220 Micro_fibers end
+  - type: Tag
+    tags:
+    - Apron
+    - WhitelistChameleon
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -30,6 +34,10 @@
     microFiberMaterial: micro-fibers-flax
     microFiberColor: micro-fibers-black
 #SS220 Micro_fibers end
+  - type: Tag
+    tags:
+    - Apron
+    - WhitelistChameleon
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -47,6 +55,10 @@
     microFiberMaterial: micro-fibers-flax
     microFiberColor: micro-fibers-blue
 #SS220 Micro_fibers end
+  - type: Tag
+    tags:
+    - Apron
+    - WhitelistChameleon
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -64,6 +76,10 @@
     microFiberMaterial: micro-fibers-flax
     microFiberColor: micro-fibers-white
 #SS220 Micro_fibers end
+  - type: Tag
+    tags:
+    - Apron
+    - WhitelistChameleon
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -187,9 +203,9 @@
   description: Ho ho ho!
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Misc/santa.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/santa.rsi # SS220 santa suit resprite
   - type: Clothing
-    sprite: Clothing/OuterClothing/Misc/santa.rsi
+    sprite: SS220/Clothing/OuterClothing/Misc/santa.rsi # SS220 santa suit resprite
 
 - type: entity
   abstract: true
@@ -209,6 +225,10 @@
     sprite: Clothing/OuterClothing/Misc/violetwizard.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Misc/violetwizard.rsi
+  - type: Tag
+    tags:
+    - CorgiWearable
+    - WhitelistChameleon
 
 - type: entity
   parent: ClothingOuterWizardBase
@@ -220,6 +240,10 @@
     sprite: Clothing/OuterClothing/Misc/wizard.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Misc/wizard.rsi
+  - type: Tag
+    tags:
+    - CorgiWearable
+    - WhitelistChameleon
 
 - type: entity
   parent: ClothingOuterWizardBase
@@ -231,6 +255,10 @@
     sprite: Clothing/OuterClothing/Misc/redwizard.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Misc/redwizard.rsi
+  - type: Tag
+    tags:
+    - CorgiWearable
+    - WhitelistChameleon
 
 - type: entity
   parent: ClothingOuterBase

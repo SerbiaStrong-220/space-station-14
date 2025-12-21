@@ -8,16 +8,10 @@ namespace Content.Shared.SS220.CultYogg.Altar;
 public sealed partial class CultYoggAltarComponent : Component
 {
     [DataField]
-    public int RequiredAmountMiGo = 1;//ToDo after tests set it to 3
-
-    [DataField]
-    public float RitualStartRange = 6f;
-
-    [DataField]
     public TimeSpan RutualTime = TimeSpan.FromSeconds(25);
 
     [DataField]
-    public bool Used = false;
+    public bool Used;
 
     [Serializable, NetSerializable]
     public enum CultYoggAltarVisuals

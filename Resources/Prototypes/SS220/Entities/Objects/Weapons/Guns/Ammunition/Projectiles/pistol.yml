@@ -1,0 +1,10 @@
+- type: entity
+  id: BulletAmmoAcp
+  name: bullet (.45 ACP)
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 36 

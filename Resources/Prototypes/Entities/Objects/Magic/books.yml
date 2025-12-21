@@ -28,15 +28,18 @@
   parent: [ BaseItem, StorePresetSpellbook, BaseMagicalContraband ]
   components:
     - type: Sprite
-      sprite: Objects/Misc/books.rsi
-      layers:
-      - state: paper_blood
-      - state: cover_strong
-        color: "#645a5a"
-      - state: decor_wingette_flat
-        color: "#4d0303"
-      - state: icon_pentagramm
-        color: "#f7e19f"
+      # SS220 Wizard getting used to Begin
+      sprite: SS220/Objects/Misc/books_goon.rsi
+      state: spellbooks
+      # layers:
+      # - state: paper_blood
+      # - state: cover_strong
+      #   color: "#645a5a"
+      # - state: decor_wingette_flat
+      #   color: "#4d0303"
+      # - state: icon_pentagramm
+      #   color: "#f7e19f"
+      # SS220 Wizard getting used to End
     - type: UserInterface
       interfaces:
         enum.StoreUiKey.Key:
@@ -69,7 +72,7 @@
   components:
     - type: Spellbook
       spellActions:
-        ActionSpawnMagicarpSpell: -1
+        ActionSpawnMagicarpSpell: null
 
 - type: entity
   id: ForceWallSpellbook
@@ -92,7 +95,7 @@
         color: gold
     - type: Spellbook
       spellActions:
-        ActionForceWall: -1
+        ActionForceWall: null
 
 - type: entity
   id: BlinkBook
@@ -113,7 +116,7 @@
         color: gold
     - type: Spellbook
       spellActions:
-        ActionBlink: -1
+        ActionBlink: null
 
 - type: entity
   id: SmiteBook
@@ -136,7 +139,7 @@
       - state: overlay_blood
     - type: Spellbook
       spellActions:
-        ActionSmiteNoReq: -1
+        ActionSmiteNoReq: null
 
 - type: entity
   id: KnockSpellbook
@@ -158,7 +161,7 @@
         color: "#98c495"
     - type: Spellbook
       spellActions:
-        ActionKnock: -1
+        ActionKnock: null
 
 - type: entity
   id: FireballSpellbook
@@ -182,7 +185,7 @@
         shader: unshaded
     - type: Spellbook
       spellActions:
-        ActionFireball: -1
+        ActionFireball: null
 
 - type: entity
   id: ScrollRunes
@@ -192,12 +195,12 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: Objects/Magic/magicactions.rsi
+    sprite: SS220/Objects/Magic/scrolls.rsi #SS220 Resprite of Magic Scrolls
     layers:
-    - state: spell_default
+    - state: default #SS220 Resprite of Magic Scrolls
   - type: Spellbook
     spellActions:
-      ActionFlashRune: -1
-      ActionExplosionRune: -1
-      ActionIgniteRune: -1
-      ActionStunRune: -1
+      ActionFlashRune: null
+      ActionExplosionRune: null
+      ActionIgniteRune: null
+      ActionStunRune: null

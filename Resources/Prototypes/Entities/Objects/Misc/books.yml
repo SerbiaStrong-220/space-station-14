@@ -342,9 +342,11 @@
       color: "#87011c"
     - state: icon_law
       color: "#f7d61a"
-  - type: GuideHelp
-    guides:
-    - SpaceLaw
+  # SS220 Changes Space Law in the Guidebook BEGIN
+  # - type: GuideHelp
+  #   guides:
+  #   - SpaceLaw
+  # SS220 Changes Space Law in the Guidebook END
 
 - type: entity
   parent: BookBase

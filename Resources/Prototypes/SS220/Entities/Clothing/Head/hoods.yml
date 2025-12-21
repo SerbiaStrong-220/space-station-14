@@ -157,3 +157,20 @@
     sprite: SS220/Clothing/Head/Hoods/Coat/hoodsyndiearmored.rsi
 # SS220 wintercoats hoods end
 
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatHoodOwl
+  categories: [ HideSpawnMenu ]
+  name: the owl hero's hood
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hoods/owl.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hoods/owl.rsi
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Hair

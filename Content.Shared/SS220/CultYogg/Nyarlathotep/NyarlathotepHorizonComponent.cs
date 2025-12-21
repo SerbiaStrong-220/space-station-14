@@ -1,6 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Robust.Shared.GameStates;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.SS220.CultYogg.Nyarlathotep;
 
@@ -10,7 +10,7 @@ namespace Content.Shared.SS220.CultYogg.Nyarlathotep;
 /// Primarily managed by <see cref="SharedNyarlathotepHorizonSystem"/> and its server/client versions.
 /// </summary>
 [Access(friends: typeof(SharedNyarlathotepHorizonSystem))]
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentPause]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class NyarlathotepHorizonComponent : Component
 {
     /// <summary>
@@ -18,7 +18,6 @@ public sealed partial class NyarlathotepHorizonComponent : Component
     /// Can be set to null, in which case no such fixture is used.
     /// If you want to set this go through <see cref="SharedNyarlathotepHorizonSystem.SetColliderFixtureId"/>.
     /// </summary>
-    [DataField("colliderFixtureId")]
-    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public string? ColliderFixtureId;
 }

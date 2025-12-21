@@ -1,4 +1,4 @@
-using Content.Shared.Roles;
+using Content.Shared.Roles.Components;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared.SS220.Roles;

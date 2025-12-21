@@ -2,6 +2,7 @@
 
 using System.IO;
 using Content.Shared.Corvax.CCCVars;
+using Content.Shared.SS220.CCVars;
 using Content.Shared.SS220.TTS;
 using Content.Shared.SS220.TTS.Commands;
 using Robust.Client.Audio;
@@ -10,7 +11,6 @@ using Robust.Shared.Audio.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
-using Robust.Shared.Utility;
 
 namespace Content.Client.SS220.TTS;
 
@@ -18,7 +18,7 @@ namespace Content.Client.SS220.TTS;
 /// Plays TTS audio in world
 /// </summary>
 // ReSharper disable once InconsistentNaming
-public sealed partial class TTSSystem : EntitySystem
+public sealed partial class TTSSystem
 {
     [Dependency] private readonly IAudioManager _audioManager = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
@@ -35,17 +35,24 @@ public sealed partial class TTSSystem : EntitySystem
     private float _volume = 0.0f;
     private float _radioVolume = 0.0f;
 
-    private const int MaxQueuedPerEntity = 20;
-    private const int MaxEntitiesQueued = 30;
-    private readonly Dictionary<EntityUid, Queue<PlayRequest>> _playQueues = new();
-    private readonly Dictionary<EntityUid, EntityUid?> _playingStreams = new();
+    private int _maxQueuedPerEntity = 20;
+    private int _maxEntitiesQueued = 30;
 
-    private EntityUid _fakeRecipient = new();
+    private readonly Dictionary<TtsMetadata, Queue<PlayRequest>> _playQueues = new();
+    private readonly Dictionary<TtsMetadata, EntityUid?> _playingStreams = new();
+
+    private readonly EntityUid _fakeRecipient = new();
 
     public override void Initialize()
     {
         _sawmill = Logger.GetSawmill("tts");
 
+        // remove if Robust PR for clientCVar subs merged
+        _cfg.OnValueChanged(CCVars220.RecieveTTS, x => RaiseNetworkEvent(new SessionSendTTSMessage(x)), true);
+        //end
+
+        Subs.CVar(_cfg, CCVars220.MaxQueuedPerEntity, (x) => _maxQueuedPerEntity = x, true);
+        Subs.CVar(_cfg, CCVars220.MaxEntitiesQueued, (x) => _maxEntitiesQueued = x, true);
         _cfg.OnValueChanged(CCCVars.TTSVolume, OnTtsVolumeChanged, true);
         _cfg.OnValueChanged(CCCVars.TTSRadioVolume, OnTtsRadioVolumeChanged, true);
 
@@ -54,6 +61,7 @@ public sealed partial class TTSSystem : EntitySystem
         _ttsManager.PlayTtsReceived += OnPlayTts;
 
         InitializeAnnounces();
+        InitializeMetadata();
     }
 
     public override void Shutdown()
@@ -103,104 +111,103 @@ public sealed partial class TTSSystem : EntitySystem
     // Process sound queues on frame update
     public override void FrameUpdate(float frameTime)
     {
-        var streamsToRemove = new List<EntityUid>();
+        var streamsToRemove = new HashSet<TtsMetadata>();
 
-        foreach (var (uid, stream) in _playingStreams)
+        foreach (var (metadata, stream) in _playingStreams)
         {
             if (!TryComp(stream, out AudioComponent? _))
             {
-                streamsToRemove.Add(uid);
+                streamsToRemove.Add(metadata);
             }
         }
 
-        foreach (var uid in streamsToRemove)
+        foreach (var metadata in streamsToRemove)
         {
-            _playingStreams.Remove(uid);
+            _playingStreams.Remove(metadata);
         }
 
-        var queueUidsToRemove = new List<EntityUid>();
+        var queueUidsToRemove = new HashSet<TtsMetadata>();
 
-        foreach (var (uid, queue) in _playQueues)
+        foreach (var (metadata, queue) in _playQueues)
         {
-            if (_playingStreams.ContainsKey(uid))
+            if (_playingStreams.ContainsKey(metadata))
                 continue;
 
             if (!queue.TryDequeue(out var request))
                 continue;
 
             if (queue.Count == 0)
-                queueUidsToRemove.Add(uid);
+                queueUidsToRemove.Add(metadata);
 
-            SoundPathSpecifier? soundPath = null;
-            AudioStream? audioStream = null;
-            (EntityUid Entity, AudioComponent Component)? stream = null;
-
+            AudioStream? audioStream;
+            (EntityUid Entity, AudioComponent Component)? stream;
             switch (request)
             {
-                case PlayRequestByPath requestByPath:
-                    soundPath = new SoundPathSpecifier(requestByPath.Path, requestByPath.Params);
-
-                    if (request.PlayGlobal)
-                        stream = _audio.PlayGlobal(soundPath, Filter.Local(), false);
-                    else
-                        stream = _audio.PlayEntity(soundPath, _fakeRecipient, uid);
-                    break;
                 case PlayRequestByAudioStream playRequestByAudio:
                     audioStream = playRequestByAudio.AudioStream;
 
                     if (request.PlayGlobal)
                         stream = _audio.PlayGlobal(audioStream, null, request.Params);
                     else
-                        stream = _audio.PlayEntity(audioStream, uid, null, request.Params);
+                        stream = _audio.PlayEntity(audioStream, request.Source, null, request.Params);
                     break;
+
+                case PlayRequestBySoundSpecifier playRequestBySoundSpecifier:
+                    if (request.PlayGlobal)
+                        stream = _audio.PlayGlobal(playRequestBySoundSpecifier.Sound, Filter.Local(), false);
+                    else
+                        stream = _audio.PlayEntity(playRequestBySoundSpecifier.Sound, _fakeRecipient, request.Source);
+                    break;
+
                 default:
                     continue;
             }
 
             if (stream.HasValue && stream.Value.Component is not null)
             {
-                _playingStreams.Add(uid, stream.Value.Entity);
+                _playingStreams.Add(metadata, stream.Value.Entity);
             }
         }
 
-        foreach (var queueUid in queueUidsToRemove)
+        foreach (var queueMetadata in queueUidsToRemove)
         {
-            _playQueues.Remove(queueUid);
+            _playQueues.Remove(queueMetadata);
         }
     }
 
-    public void TryQueueRequest(EntityUid entity, PlayRequest request)
+    public void TryQueueRequest(TtsMetadata metadata, PlayRequest request)
     {
-        if (!_playQueues.TryGetValue(entity, out var queue))
+        ModifyMetadata(ref metadata, request.Source);
+
+        if (!_playQueues.TryGetValue(metadata, out var queue))
         {
-            if (_playQueues.Count >= MaxEntitiesQueued)
+            if (_playQueues.Count >= _maxEntitiesQueued)
                 return;
 
             queue = new();
-            _playQueues.Add(entity, queue);
+            _playQueues.Add(metadata, queue);
         }
 
-        if (queue.Count >= MaxQueuedPerEntity)
+        if (queue.Count >= _maxQueuedPerEntity)
             return;
 
         queue.Enqueue(request);
     }
 
-    public void TryQueuePlayByAudioStream(EntityUid entity, AudioStream audioStream, AudioParams audioParams, bool globally = false)
+    public void TryQueuePlayByAudioStream(EntityUid entity, AudioStream audioStream, TtsMetadata metadata, AudioParams audioParams, bool globally = false)
     {
-        var request = new PlayRequestByAudioStream(audioStream, audioParams, globally);
-        TryQueueRequest(entity, request);
+        var request = new PlayRequestByAudioStream(audioStream, entity, audioParams, globally);
+        TryQueueRequest(metadata, request);
     }
 
-    private void PlaySoundQueued(EntityUid entity, ResPath sound, AudioParams? audioParams = null, bool globally = false)
+    private void PlaySoundQueued(EntityUid entity, SoundSpecifier sound, TtsMetadata metadata, bool globally = false)
     {
-        var request = new PlayRequestByPath(sound, audioParams, globally);
-        TryQueueRequest(entity, request);
+        var request = new PlayRequestBySoundSpecifier(sound, entity, globally);
+        TryQueueRequest(metadata, request);
     }
 
-    private void PlayTtsBytes(TtsAudioData data, EntityUid? sourceUid = null, AudioParams? audioParams = null, bool globally = false)
+    private void QueuePlayTts(TtsAudioData data, TtsMetadata metadata, EntityUid? sourceUid = null, AudioParams? audioParams = null, bool globally = false)
     {
-        _sawmill.Debug($"Play TTS audio {data.Length} bytes from {sourceUid} entity");
         if (data.Length == 0)
             return;
 
@@ -216,16 +223,16 @@ public sealed partial class TTSSystem : EntitySystem
         else
         {
             if (sourceUid.HasValue && sourceUid.Value.IsValid())
-                TryQueuePlayByAudioStream(sourceUid.Value, audioStream, finalParams, globally);
+                TryQueuePlayByAudioStream(sourceUid.Value, audioStream, metadata, finalParams, globally);
         }
     }
 
     private void OnPlayTts(MsgPlayTts msg)
     {
-        var volume = AdjustVolume(msg.Kind);
+        var volume = AdjustVolume(msg.Metadata.Kind);
         var audioParams = AudioParams.Default.WithVolume(volume);
 
-        PlayTtsBytes(msg.Data, GetEntity(msg.SourceUid), audioParams);
+        QueuePlayTts(msg.Data, msg.Metadata, GetEntity(msg.SourceUid), audioParams, msg.Metadata.Kind == TtsKind.Telepathy);
     }
 
     private float AdjustVolume(TtsKind kind)
@@ -252,9 +259,11 @@ public sealed partial class TTSSystem : EntitySystem
     {
         public readonly AudioParams Params = AudioParams.Default;
         public readonly bool PlayGlobal = false;
+        public readonly EntityUid Source;
 
-        public PlayRequest(AudioParams? audioParams = null, bool playGlobal = false)
+        public PlayRequest(EntityUid? source = null, AudioParams? audioParams = null, bool playGlobal = false)
         {
+            Source = source ?? EntityUid.FirstUid;
             PlayGlobal = playGlobal;
             if (audioParams.HasValue)
                 Params = audioParams.Value;
@@ -265,19 +274,19 @@ public sealed partial class TTSSystem : EntitySystem
     {
         public readonly AudioStream AudioStream;
 
-        public PlayRequestByAudioStream(AudioStream audioStream, AudioParams? audioParams = null, bool playGlobal = false) : base (audioParams, playGlobal)
+        public PlayRequestByAudioStream(AudioStream audioStream, EntityUid? source = null, AudioParams? audioParams = null, bool playGlobal = false) : base(source, audioParams, playGlobal)
         {
             AudioStream = audioStream;
         }
     }
 
-    public sealed class PlayRequestByPath : PlayRequest
+    public sealed class PlayRequestBySoundSpecifier : PlayRequest
     {
-        public readonly ResPath Path;
+        public readonly SoundSpecifier Sound;
 
-        public PlayRequestByPath(ResPath path, AudioParams? audioParams = null, bool playGlobal = false) : base(audioParams, playGlobal)
+        public PlayRequestBySoundSpecifier(SoundSpecifier sound, EntityUid? source = null,  bool playGlobal = false) : base(source, sound.Params, playGlobal)
         {
-            Path = path;
+            Sound = sound;
         }
     }
 }

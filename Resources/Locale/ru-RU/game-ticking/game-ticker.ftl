@@ -8,13 +8,16 @@ game-ticker-delay-start = Начало раунда было отложено н
 game-ticker-pause-start = Начало раунда было приостановлено.
 game-ticker-pause-start-resumed = Отсчёт начала раунда возобновлён.
 game-ticker-player-join-game-message = Добро пожаловать на Космическую Станцию 14! Если вы играете впервые, обязательно нажмите ESC на клавиатуре и прочитайте правила игры, а также не бойтесь просить помощи в "Админ помощь".
+#ss220 add alert level in lobby start
 game-ticker-get-info-text =
     Привет и добро пожаловать в [color=white]Space Station 14![/color]
     Текущий раунд: [color=white]#{ $roundId }[/color]
     Текущее количество игроков: [color=white]{ $playerCount }[/color]
     Текущая карта: [color=white]{ $mapName }[/color]
+    Текущий уровень угрозы: [color={$color}]{ $level }[/color]
     Текущий режим игры: [color=white]{ $gmTitle }[/color]
     >[color=yellow]{ $desc }[/color]
+#ss220 add alert level in lobby end
 game-ticker-get-info-preround-text =
     Привет и добро пожаловать в [color=white]Space Station 14![/color]
     Текущий раунд: [color=white]#{ $roundId }[/color]

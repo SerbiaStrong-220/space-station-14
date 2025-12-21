@@ -5,5 +5,6 @@ namespace Content.Server.SS220.AddSleepAction;
 [RegisterComponent]
 public sealed partial class AddSleepActionComponent : Component
 {
-    [DataField("sleepAction")] public EntityUid? SleepAction;
+    [DataField]
+    public EntityUid? SleepAction;
 }

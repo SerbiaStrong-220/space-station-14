@@ -56,6 +56,8 @@
   - SecurityHead
   - SecurityGlasses #SS220-TwoOne-Floppa-Iteration
   - SecurityNeck  #holster loadout
+  - SecurityMask #SS220 Security Tactical Gas Mask
+  - SecurityGloves #Sec Tactical Gloves for Senior Officer
   - SeniorSecJumpsuit
   - SecurityBackpack
   - SecurityOuterClothing
@@ -72,12 +74,12 @@
   - SecurityPilotHead
   - SecurityGlasses #SS220-TwoOne-Floppa-Iteration
   - SecurityNeck #holster loadout
+  - SecurityMask #SS220 Security Tactical Gas Mask
   - SecurityJumpsuit
   - SecurityBackpack
   - SecurityPilotOuterClothing
   - SurvivalSecurity
   - SecurityShoes
-  - SecurityPDA
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
 #! Служба безопасности (Конец)
@@ -90,7 +92,7 @@
   groups:
   - HatSeniorMedical
   - MedicalNeck
-  - MedicalGlasses #SS220-TwoOne-Floppa-Iteration
+# - MedicalGlasses #SS220-TwoOne-Floppa-Iteration
   - SeniorMedicalJumpsuit
   - MedicalGloves
   - MedicalsBackpack
@@ -98,6 +100,7 @@
   - SeniorMedicalOuterClothing
   - SurvivalMedical
   - SeniorShoes
+  - MedicalEyewear
 #  - Glasses #SS220-TwoOne-Floppa-Iteration
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration

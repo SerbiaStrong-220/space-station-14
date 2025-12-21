@@ -6,3 +6,7 @@ ent-ClothingShoesCMOCorporate = корпоративные туфли главн
     .suffix = За время в игре
 ent-ClothingShoesColorDarkBrown = тёмно-коричневые туфли
     .desc = Стильные тёмно-коричневые туфли.
+
+ent-ClothingShoesWandererBoots = сапоги странника
+    .desc = Если, обернувшись назад, ты видишь свое будущее, значит ты все сделал правильно...
+    .suffix = За емаг одеждомата

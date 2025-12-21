@@ -1,6 +1,5 @@
 ﻿using System.Numerics;
 using Content.Client.Resources;
-using Content.Client.UserInterface.Systems.Chat;
 using Content.Client.UserInterface.Systems.Chat.Controls;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface.Controls;
@@ -25,6 +24,7 @@ public sealed class HighlightButton : ChatPopupButton<HighlightPopup>
             })
         );
     }
+
     protected override UIBox2 GetPopupPosition()
     {
         var globalPos = GlobalPosition;

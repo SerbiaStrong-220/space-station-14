@@ -1,7 +1,6 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Systems;
 using Content.Server.Power.Components;
-using Content.Server.Radio.Components;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Radio;
@@ -17,11 +16,12 @@ using Robust.Shared.Utility;
 using Content.Shared.Access.Components;
 using Content.Shared.Inventory;
 using Content.Shared.PDA;
-using System.Globalization;
 using Content.Server.Popups;
 using Content.Server.SS220.Language;
-using System.Diagnostics.CodeAnalysis;
-using Content.Shared.SS220.Language.Systems; // SS220-Add-Languages
+using Content.Shared.SS220.Language.Systems;  // SS220-Add-Languages
+using Content.Server.SS220.Events;
+using Content.Server.Radio.Components;
+using Content.Shared.FixedPoint;
 
 namespace Content.Server.Radio.EntitySystems;
 
@@ -95,7 +95,7 @@ public sealed class RadioSystem : EntitySystem
     /// </summary>
     /// <param name="messageSource">Entity that spoke the message</param>
     /// <param name="radioSource">Entity that picked up the message and will send it, e.g. headset</param>
-    public void SendRadioMessage(EntityUid messageSource, string message, RadioChannelPrototype channel, EntityUid radioSource, bool escapeMarkup = true, LanguageMessage? languageMessage = null)
+    public void SendRadioMessage(EntityUid messageSource, string message, RadioChannelPrototype channel, EntityUid radioSource, bool escapeMarkup = true, LanguageMessage? languageMessage = null, FixedPoint2? frequency = null  /* SS220-add-frequency-radio */)
     {
         // TODO if radios ever garble / modify messages, feedback-prevention needs to be handled better than this.
         if (!_messages.Add(message))
@@ -112,7 +112,7 @@ public sealed class RadioSystem : EntitySystem
         var formattedName = $"[color={GetIdCardColor(messageSource)}]{GetIdCardName(messageSource)}{name}[/color]";
 
         SpeechVerbPrototype speech;
-        if (evt.SpeechVerb != null && _prototype.TryIndex(evt.SpeechVerb, out var evntProto))
+        if (evt.SpeechVerb != null && _prototype.Resolve(evt.SpeechVerb, out var evntProto))
             speech = evntProto;
         else
             speech = _chat.GetSpeechVerb(messageSource, message);
@@ -143,9 +143,9 @@ public sealed class RadioSystem : EntitySystem
             NetEntity.Invalid,
             null);
         var chatMsg = new MsgChatMessage { Message = chat };
-        var ev = new RadioReceiveEvent(message, messageSource, channel, radioSource, chatMsg, new(), languageMessage);
+        var ev = new RadioReceiveEvent(message, messageSource, channel, radioSource, chatMsg, new(), languageMessage, frequency  /* SS220-add-frequency-radio */);
 
-        var sendAttemptEv = new RadioSendAttemptEvent(channel, radioSource);
+        var sendAttemptEv = new RadioSendAttemptEvent(channel, radioSource, Frequency: frequency  /* SS220-add-frequency-radio */);
         RaiseLocalEvent(ref sendAttemptEv);
         RaiseLocalEvent(radioSource, ref sendAttemptEv);
         var canSend = !sendAttemptEv.Cancelled;
@@ -160,7 +160,8 @@ public sealed class RadioSystem : EntitySystem
         {
             if (!radio.ReceiveAllChannels)
             {
-                if (!radio.Channels.Contains(channel.ID) || (TryComp<IntercomComponent>(receiver, out var intercom) &&
+                if (!(radio.Channels.Contains(channel.ID) || radio.FrequencyChannels.Contains(channel.ID)  /* SS220-add-frequency-radio */)
+                || (TryComp<IntercomComponent>(receiver, out var intercom) &&
                                                              !intercom.SupportedChannels.Contains(channel.ID)))
                     continue;
             }
@@ -174,7 +175,7 @@ public sealed class RadioSystem : EntitySystem
                 continue;
 
             // check if message can be sent to specific receiver
-            var attemptEv = new RadioReceiveAttemptEvent(channel, radioSource, receiver);
+            var attemptEv = new RadioReceiveAttemptEvent(channel, radioSource, receiver, Frequency: frequency  /* SS220-add-frequency-radio */);
             RaiseLocalEvent(ref attemptEv);
             RaiseLocalEvent(receiver, ref attemptEv);
             if (attemptEv.Cancelled)
@@ -210,12 +211,18 @@ public sealed class RadioSystem : EntitySystem
         // SS220 languages begin
         foreach (var languageEv in languageRadioReceiveEvents)
         {
-            RaiseLocalEvent(new RadioSpokeEvent(messageSource, languageEv.Key, languageEv.Value.Receivers.ToArray()));
+            var radioSpokeEventLanguage = new RadioSpokeEvent(messageSource, languageEv.Key, channel, languageEv.Value.Receivers.ToArray());
+            //ss220 add filter tts for ghost start
+            RaiseLocalEvent(ref radioSpokeEventLanguage);
+            //ss220 add filter tts for ghost end
         }
         // SS220 languages end
 
         // Dispatch TTS radio speech event for every receiver
-        RaiseLocalEvent(new RadioSpokeEvent(messageSource, message, ev.Receivers.ToArray()));
+        //ss220 add filter tts for ghost start
+        var radioSpokeEvent = new RadioSpokeEvent(messageSource, message, channel, ev.Receivers.ToArray(), frequency  /* SS220-add-frequency-radio */);
+        RaiseLocalEvent(ref radioSpokeEvent);
+        //ss220 add filter tts for ghost end
 
         if (name != Name(messageSource))
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Radio message from {ToPrettyString(messageSource):user} as {name} on {channel.LocalizedName}: {message}");
@@ -234,12 +241,16 @@ public sealed class RadioSystem : EntitySystem
                 message = $"[bold]{message}[/bold]";
             }
 
+            var channelName = channel.FrequencyRadio && frequency is not null
+                ? Loc.GetString(channel.FrequencyChanelName, ("freq", frequency.Value.Float()))
+                : channel.LocalizedName; // SS220-add-frequency-radio
+
             var wrappedScrambledMessage = Loc.GetString(speech.Bold ? "chat-radio-message-wrap-bold" : "chat-radio-message-wrap",
                 ("color", channel.Color),
                 ("fontType", speech.FontId),
                 ("fontSize", speech.FontSize),
                 ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
-                ("channel", $"\\[{channel.LocalizedName}\\]"),
+                ("channel", $"\\[{channelName}\\]"), /* SS220-add-frequency-radio */
                 ("name", formattedName),
                 ("message", message));
 
@@ -278,13 +289,18 @@ public sealed class RadioSystem : EntitySystem
     // SS220 radio-department-tag begin
     private string GetIdCardName(EntityUid senderUid)
     {
-        var idCardTitle = Loc.GetString("chat-radio-no-id");
-        idCardTitle = GetIdCard(senderUid)?.LocalizedJobTitle ?? idCardTitle;
+        // SS220 Borgs-Id-fix start
+        // поднимаем ивент для получения имени
+        var ev = new GetInsteadIdCardNameEvent(senderUid);
+        RaiseLocalEvent(senderUid, ev);
 
-        var textInfo = CultureInfo.CurrentCulture.TextInfo;
-        idCardTitle = textInfo.ToTitleCase(idCardTitle);
-
-        return $"\\[{idCardTitle}\\] ";
+        if (ev.Name != null)
+        {
+            return $"\\[{Loc.GetString(ev.Name)}\\] ";
+        }
+        else
+            return string.Empty;
+        // SS220 Borgs-Id-fix end
     }
     // S220 radio-department-tag end
 
@@ -328,7 +344,7 @@ public sealed class RadioSystem : EntitySystem
 
     private void OnEncryptionChannelsChangeReceiver(Entity<IntrinsicRadioReceiverComponent> entity, ref EncryptionChannelsChangedEvent args)
     {
-        HashSet<string> channels = new();
+        HashSet<ProtoId<RadioChannelPrototype>> channels = new();
         channels.UnionWith(args.Component.Channels);
         channels.UnionWith(entity.Comp.Channels);
 

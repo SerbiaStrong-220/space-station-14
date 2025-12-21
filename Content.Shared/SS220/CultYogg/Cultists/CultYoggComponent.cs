@@ -1,12 +1,10 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Nutrition.Components;
+using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Content.Shared.Stacks;
-using Content.Shared.Tag;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.CultYogg.Cultists;
 
@@ -18,35 +16,29 @@ namespace Content.Shared.SS220.CultYogg.Cultists;
 public sealed partial class CultYoggComponent : Component
 {
     #region abilities
-    [DataField]
+    [ViewVariables]
     public EntProtoId PukeShroomAction = "ActionCultYoggPukeShroom";
 
-    [DataField]
+    [ViewVariables]
     public EntProtoId DigestAction = "ActionCultYoggDigest";
 
-    [DataField]
-    public EntProtoId AscendingAction = "ActionCultYoggAscending";
-
-    [DataField]
+    [ViewVariables]
     public EntProtoId CorruptItemAction = "ActionCultYoggCorruptItem";
 
-    [DataField]
+    [ViewVariables]
     public EntProtoId CorruptItemInHandAction = "ActionCultYoggCorruptItemInHand";
 
-    [DataField, AutoNetworkedField]
+    [ViewVariables, AutoNetworkedField]
     public EntityUid? PukeShroomActionEntity;
 
-    [DataField, AutoNetworkedField]
+    [ViewVariables, AutoNetworkedField]
     public EntityUid? DigestActionEntity;
 
-    [DataField, AutoNetworkedField]
+    [ViewVariables, AutoNetworkedField]
     public EntityUid? CorruptItemActionEntity;
 
-    [DataField, AutoNetworkedField]
+    [ViewVariables, AutoNetworkedField]
     public EntityUid? CorruptItemInHandActionEntity;
-
-    [DataField, AutoNetworkedField]
-    public EntityUid? AscendingActionEntity;
     #endregion
 
     #region puke
@@ -54,29 +46,29 @@ public sealed partial class CultYoggComponent : Component
     /// This will subtract (not add, don't get this mixed up) from the current hunger of the mob doing micoz
     /// </summary>
 
-    [ViewVariables, DataField, AutoNetworkedField]
-    public float HungerCost = 50f;
+    [ViewVariables, AutoNetworkedField]
+    public float HungerCost = 10f;
 
-    [ViewVariables, DataField, AutoNetworkedField]
-    public float ThirstCost = 100f;
+    [ViewVariables, AutoNetworkedField]
+    public float ThirstCost = 10f;
 
-    [ViewVariables, DataField, AutoNetworkedField]
+    [ViewVariables, AutoNetworkedField]
     public string PukedEntity = "FoodMiGomyceteCult"; //what will be puked out
 
     /// <summary>
     /// The lowest hunger threshold that this mob can be in before it's allowed to digest another shroom.
     /// </summary>
-    [DataField("minHungerThreshold"), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    [ViewVariables, AutoNetworkedField]
     public HungerThreshold MinHungerThreshold = HungerThreshold.Starving;
 
     /// <summary>
     /// The lowest thirst threshold that this mob can be in before it's allowed to digest another shroom.
     /// </summary>
-    [DataField("minThirstThreshold"), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    [ViewVariables, AutoNetworkedField]
     public ThirstThreshold MinThirstThreshold = ThirstThreshold.Parched;
     #endregion
 
-    #region acsencion
+    #region ascension
     /// <summary>
     /// Entity the cultist will ascend into
     /// </summary>
@@ -85,25 +77,25 @@ public sealed partial class CultYoggComponent : Component
 
     [ViewVariables]
     public float AmountAscensionReagentAscend = 6f; // This is equal to 3 shrooms
+
     [ViewVariables, Access(Other = AccessPermissions.ReadWrite)]
     public float ConsumedAscensionReagent = 0; //buffer
     #endregion
 
     #region stages
-    [DataField]
+    [ViewVariables]
     public Color? PreviousEyeColor;
 
-    [DataField]
+    [ViewVariables]
     public Marking? PreviousTail;
 
-    [ViewVariables(VVAccess.ReadWrite)]
-    [DataField, AutoNetworkedField]
+    [ViewVariables, AutoNetworkedField]
     public CultYoggStage CurrentStage = CultYoggStage.Initial;
     #endregion
 
     /// <summary>
     /// Visual effect to spawn when entity corrupted
     /// </summary>
-    [DataField]
+    [ViewVariables]
     public EntProtoId CorruptionEffect = "CorruptingEffect";
 }

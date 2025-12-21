@@ -14,10 +14,10 @@ public sealed class KeenHearingOverlay : IgnoreLightVisionOverlay
     private readonly IGameTiming _gameTiming = default!;
     private readonly SpriteSystem _spriteSystem = default!;
 
-    private SpriteSpecifier _sprite;
+    private readonly SpriteSpecifier _sprite;
     private Texture _texture;
 
-    private List<string> _blacklistComponentNames = new List<string> {"DarkReaper"};
+    private readonly List<string> _blacklistComponentNames = new(){"DarkReaper"};
 
     public KeenHearingOverlay(float showRadius, float closeShowRadius) : base(showRadius, closeShowRadius)
     {

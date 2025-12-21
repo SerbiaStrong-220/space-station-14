@@ -102,9 +102,13 @@ corvax-hidden-desc-DeathRattleImplanter-syndicate = [color=#e31735]Внутри 
 corvax-hidden-desc-FakeMindShieldImplant-syndicate = [color=#e31735]Внутри имплант фальшивой защиты разума. Имплант отображается как настоящий, носитель может переключить отображение.[/color]
 corvax-hidden-desc-RadioImplant-syndicate = [color=#e31735]Внутри имплант радио со встроенным ключом шифрования синдиката, позволяет общаться с коллегами не подвергая опасности свой наушник.[/color]
 
-corvax-hidden-desc-Emag-syndicate = [color=#e31735]Универсальное хакерское устройство синдиката. Знаковый EMAG.[/color]
-corvax-hidden-desc-Emag-research = [color=#D381C9]Интересная модификация стандартной ID карты, работающая, как электронная отмычка.[/color]
-corvax-hidden-desc-Emag-engineering = [color=#EFB341]Эту ID карту взломали и модифицировали таким образом, что техника ломается, пытаясь считать доступы владельца.[/color]
+corvax-hidden-desc-access-breaker-syndicate = [color=#e31735]Взломанный конфигуратор доступа, специализированный для разблокировки и стирания доступа с электронных замков.[/color]
+corvax-hidden-desc-access-breaker-research = [color=#D381C9]Интересная модификация стандартной ID карты, работающая, как разрушительная отмычка для шлюзов.[/color]
+corvax-hidden-desc-access-breaker-engineering = [color=#EFB341]Эту ID карту взломали и модифицировали таким образом, что система аутентификации шлюзов перестаёт работать.[/color]
+
+corvax-hidden-desc-Emag-syndicate = [color=#e31735]Универсальное хакерское устройство синдиката изменяющее работу станционных предметов.[/color]
+corvax-hidden-desc-Emag-research = [color=#D381C9]Интересная модификация стандартной ID карты, она способна замыкать микросхемы, изменяя поведение машин на станции.[/color]
+corvax-hidden-desc-Emag-engineering = [color=#EFB341]Эту ID карту модифицировали, чтобы она создавала сигналы несогласованной формы приводящее к нарушению встроенных защитных реле.[/color]
 
 corvax-hidden-desc-PowerSink-syndicate = [color=#e31735]Это поглотитель энергии. Крайне неэффективен как прибор, но крайне эффективно пожирает тонны энергии из электросети.[/color]
 corvax-hidden-desc-PowerSink-engineering = [color=#EFB341]Это энергоустройство напоминает чёрную дыру, бесконечно поглощая огромное количество энергии из электросети. Для этого его в принципе и создали.[/color]

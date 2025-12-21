@@ -36,9 +36,9 @@
     damage:
       types:
         Blunt: 0.1
-        Heat: 0.1 
+        Heat: 0.1
   - type: Damageable
-    damageContainer: Biological        
+    damageContainer: Biological
   - type: Destructible
     thresholds:
     - trigger:
@@ -56,14 +56,15 @@
             min: 1
             max: 1
       - !type:DoActsBehavior
-        acts: [ "Destruction" ]     
+        acts: [ "Destruction" ]
   - type: SpiderEgg
   - type: StaticPrice
-    price: 500 
+    price: 500
+  - type: Examiner
 
 #Spiders
-- type: entity 
-  parent: BaseSpiderEgg
+- type: entity
+  parent: [ BaseSpiderEgg, MobSpiderDroneGhostRole ]
   id: SpiderEggDrone
   categories: [ HideSpawnMenu ]
   name: spider hive egg
@@ -76,40 +77,40 @@
         amount: 1
 
 - type: entity
-  parent: BaseSpiderEgg
-  id: SpiderEggHunter 
+  parent: [ BaseSpiderEgg, MobSpiderHunterGhostRole ]
+  id: SpiderEggHunter
   categories: [ HideSpawnMenu ]
   name: the-egg-of-the-spider-guard
   description: Is it a gemstone? Is it an egg? It looks expensive.
   components:
   - type: SpiderEgg
-    incubationTime: 80 
+    incubationTime: 80
     spawnProtos:
       - id: MobSpiderHunter
         amount: 1
 
-- type: entity 
-  parent: BaseSpiderEgg
+- type: entity
+  parent: [ BaseSpiderEgg, MobSpiderGhostGhostRole ]
   id: SpiderEggGhost
   categories: [ HideSpawnMenu ]
   name: spider hive egg
   description: Is this a gem? Is this an egg? It looks expensive.
   components:
   - type: SpiderEgg
-    incubationTime: 80 
+    incubationTime: 80
     spawnProtos:
-      - id: MobSpiderGhost  
-        amount: 1 
+      - id: MobSpiderGhost
+        amount: 1
 
-- type: entity 
-  parent: BaseSpiderEgg
+- type: entity
+  parent: [ BaseSpiderEgg, MobSpiderShooterGhostRole ]
   id: SpiderEggShooter
   categories: [ HideSpawnMenu ]
   name: spider hive egg
   description: Is this a gem? Is this an egg? It looks expensive.
   components:
   - type: SpiderEgg
-    incubationTime: 80 
+    incubationTime: 80
     spawnProtos:
       - id: MobSpiderShooter
         amount: 1

@@ -1,4 +1,3 @@
-using Content.Server.GameTicking;
 using Content.Shared.Doors.Components;
 using Content.Shared.SS220.CCVars;
 using Content.Shared.Tag;
@@ -15,7 +14,7 @@ public sealed class MapMigrationSystem_SS220 : EntitySystem
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
 
-    private bool _rotateDoors = false;
+    private bool _rotateDoors;
 
     public override void Initialize()
     {
@@ -43,9 +42,6 @@ public sealed class MapMigrationSystem_SS220 : EntitySystem
         var entitiesOnTile = _map.GetAnchoredEntitiesEnumerator(gridUid, grid, pos);
         while (entitiesOnTile.MoveNext(out var entity))
         {
-            if (!entity.HasValue)
-                continue;
-
             var proto = MetaData(entity.Value).EntityPrototype;
             if (proto != null)
             {
@@ -69,8 +65,7 @@ public sealed class MapMigrationSystem_SS220 : EntitySystem
     public void RotateDoor(EntityUid airlockUid, EntityUid? gridUid = null)
     {
         var transform = Transform(airlockUid);
-        if (!gridUid.HasValue)
-            gridUid = transform.GridUid;
+        gridUid ??= transform.GridUid;
 
         if (!gridUid.HasValue)
             return;
@@ -119,7 +114,6 @@ public sealed class MapMigrationSystem_SS220 : EntitySystem
             if (!CheckTileOccupied(pos + new Vector2i(0, -1), gridUid.Value, grid))
             {
                 _transform.SetLocalRotationNoLerp(airlockUid, Angle.FromDegrees(0), transform);
-                return;
             }
         }
     }

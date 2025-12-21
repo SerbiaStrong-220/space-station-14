@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.SS220.Language.Systems;
 using Robust.Client.Player;
 using Robust.Client.UserInterface;
@@ -9,7 +10,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Client.SS220.Language;
 
-public sealed class LanguageMessageTag : IMarkupTag
+public sealed class LanguageMessageTag : IMarkupTagHandler
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
@@ -18,26 +19,46 @@ public sealed class LanguageMessageTag : IMarkupTag
 
     private static Color DefaultTextColor = new(25, 25, 25);
 
-    public bool TryGetControl(MarkupNode node, [NotNullWhen(true)] out Control? control)
+    /// <inheritdoc/>
+    public void PushDrawContext(MarkupNode node, MarkupDrawingContext context)
     {
-        control = null;
         if (!node.Value.TryGetString(out var key))
-            return false;
+            return;
 
         var player = _player.LocalEntity;
         if (player == null)
-            return false;
+            return;
 
         var languageSystem = _entityManager.System<LanguageSystem>();
-        if (!languageSystem.TryGetPaperMessageFromKey(key, out var message, out var language))
-            return false;
-
-        var label = new Label
+        if (!languageSystem.TryGetPaperMessageFromKey(key, out _, out var language))
         {
-            Text = message,
-            FontColorOverride = language.Color ?? DefaultTextColor,
-        };
-        control = label;
-        return true;
+            context.Color.Push(DefaultTextColor);
+            return;
+        }
+
+        context.Color.Push(language.Color ?? DefaultTextColor);
+    }
+
+    /// <inheritdoc/>
+    public void PopDrawContext(MarkupNode node, MarkupDrawingContext context)
+    {
+        context.Color.Pop();
+    }
+
+    /// <inheritdoc/>
+    public string TextBefore(MarkupNode node)
+    {
+        if (!node.Value.TryGetString(out var key))
+            return string.Empty;
+
+        var player = _player.LocalEntity;
+        if (player == null)
+            return string.Empty;
+
+        var languageSystem = _entityManager.System<LanguageSystem>();
+        if (!languageSystem.TryGetPaperMessageFromKey(key, out var message, out _))
+            return string.Empty;
+
+        return message;
     }
 }

@@ -3,11 +3,13 @@
   defaultLevel: green
   levels:
     green:
+      playTTS: true # SS220-add-tts-to-alert-levels
       announcement: alert-level-green-announcement
       color: Green
       emergencyLightColor: LawnGreen
       shuttleTime: 600
     blue:
+      playTTS: true # SS220-add-tts-to-alert-levels
       announcement: alert-level-blue-announcement
       sound: /Audio/Misc/bluealert.ogg
       color: DodgerBlue
@@ -15,6 +17,7 @@
       emergencyLightColor: DodgerBlue
       shuttleTime: 600
     violet:
+      playTTS: true # SS220-add-tts-to-alert-levels
       announcement: alert-level-violet-announcement
       sound: /Audio/Misc/notice1.ogg
       color: Violet
@@ -22,6 +25,7 @@
       forceEnableEmergencyLights: true
       shuttleTime: 600
     yellow:
+      playTTS: true # SS220-add-tts-to-alert-levels
       announcement: alert-level-yellow-announcement
       sound: /Audio/Misc/notice1.ogg
       color: Yellow
@@ -29,6 +33,7 @@
       forceEnableEmergencyLights: true
       shuttleTime: 600
     red:
+      playTTS: true # SS220-add-tts-to-alert-levels
       announcement: alert-level-red-announcement
       sound: /Audio/Misc/redalert.ogg
       color: Red
@@ -36,6 +41,7 @@
       forceEnableEmergencyLights: true
       shuttleTime: 600 #No reduction in time as we don't have swiping for red alert like in /tg/. Shuttle times are intended to create friction, so having a way to brainlessly bypass that would be dumb.
     gamma:
+      playTTS: true # SS220-add-tts-to-alert-levels
       announcement: alert-level-gamma-announcement
       selectable: false
       sound:
@@ -47,17 +53,18 @@
       emergencyLightColor: PaleVioletRed
       forceEnableEmergencyLights: true
     delta:
+      playTTS: true # SS220-add-tts-to-alert-levels
       announcement: alert-level-delta-announcement
       selectable: false
       sound:
-        path: /Audio/Misc/delta.ogg
+        path: /Audio/Misc/delta_cut.ogg # SS220-enhance-tts-announcements
         params:
           volume: -6 # Corvax: Reduce sound volume
       disableSelection: true
       color: DarkRed
       emergencyLightColor: Orange
       forceEnableEmergencyLights: true
-      shuttleTime: 300 #ss220 
+      shuttleTime: 300 #ss220
     epsilon:
       announcement: alert-level-epsilon-announcement
       selectable: false

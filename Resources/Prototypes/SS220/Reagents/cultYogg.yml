@@ -11,21 +11,20 @@
   metabolisms:
     Poison:
       effects:
-      - !type:ChemMiGomicelium
+      - !type:ChemMiGomyceliumEffect
       - !type:GenericStatusEffect
         key: Rave
         component: Rave
         type: Add
         time: 150
-        refresh: false
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
             reagent: TheBloodOfYogg
             min: 2
-        - !type:HasComponentsCondition
+        - !type:ComponentCondition
             inverted: true
             components:
-              - CultYogg
+            - CultYogg
 
 - type: reagent
   id: ElixirOfLiberation
@@ -38,7 +37,12 @@
   metabolisms:
     Poison:
       effects:
-      - !type:ChemElixirOfLiberation
+      - !type:ChemElixirOfLiberationEffect
+      - !type:GenericStatusEffect
+        key: Muted
+        component: Muted
+        type: Remove
+        time: 60
 
 - type: reagent
   id: CultYoggVenomancerAcid
@@ -52,17 +56,16 @@
   meltingPoint: -19.4
   plantMetabolism:
   - !type:PlantAdjustToxins
-    amount: 20
+    amount: 10
   - !type:PlantAdjustWeeds
     amount: -4
   - !type:PlantAdjustHealth
-    amount: -8
+    amount: -5
   reactiveEffects:
     Acidic:
       methods: [ Touch ]
       effects:
       - !type:HealthChange
-        scaleByQuantity: true
         ignoreResistances: false
         damage:
           types:
@@ -72,12 +75,13 @@
         probability: 0.3
   metabolisms:
     Poison:
-      metabolismRate : 3.00 # High damage, high metabolism rate. You need a lot of units to crit. Simulates acid burning through you fast.
+      metabolismRate : 3.00
       effects:
       - !type:HealthChange
         damage:
           types:
             Caustic: 10.0
+            Heat: 10.0
       - !type:PopupMessage
         type: Local
         visualType: Large
@@ -86,3 +90,43 @@
       - !type:Emote
         emote: Scream
         probability: 0.3
+
+- type: reagent
+  id: EssenceOfTheAbyss
+  name: reagent-name-essence-of-the-abyss
+  group: Narcotics
+  desc: reagent-desc-essence-of-the-abyss
+  physicalDesc: reagent-physical-desc-gloopy
+  color: "#6e10da"
+  boilingPoint: 444.0
+  meltingPoint: 128.0
+  metabolisms:
+    Narcotic:
+      effects:
+      - !type:ModifyStatusEffect
+        conditions:
+        - !type:ReagentCondition
+          reagent: EssenceOfTheAbyss
+          min: 8
+        - !type:ComponentCondition
+          inverted: true
+          components:
+          - BibleUser
+          - CultYogg
+        effectProto: StatusEffectForcedSleeping
+        time: 3
+        type: Add
+      - !type:GenericStatusEffect
+        key: Muted
+        component: Muted
+        type: Add
+        time: 15
+        conditions:
+        - !type:ReagentCondition
+          reagent: EssenceOfTheAbyss
+          min: 10
+        - !type:ComponentCondition
+          inverted: true
+          components:
+          - BibleUser
+          - CultYogg

@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using System.Numerics;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Utility;
@@ -22,16 +23,19 @@ public sealed class SpriteButton : BaseButton
             RefreshTextureRect();
         }
     }
+
     public Vector2 SpriteScale
     {
         get => _textureRect.DisplayRect.TextureScale;
         set => _textureRect.DisplayRect.TextureScale = value;
     }
+
     public TextureRect.StretchMode SpriteStretch
     {
         get => _textureRect.DisplayRect.Stretch;
         set => _textureRect.DisplayRect.Stretch = value;
     }
+
     public SpriteSpecifier? SpriteFromStyle { get; private set; }
     public AnimatedTextureRect TextureRect => _textureRect;
 

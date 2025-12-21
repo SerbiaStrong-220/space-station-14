@@ -201,7 +201,9 @@
     radius: 1.5
     color: orange
     energy: 0.3
-
+  - type: Projectile
+    shuttleNavInfo:
+      enabled: true
 
 - type: entity
   id: CartridgeNURS
@@ -252,7 +254,9 @@
         Blunt: 35
         Piercing: 35
         Structural: 95
-
+    shuttleNavInfo:
+      enabled: true
+      radius: 0.4
 
 
 - type: entity
@@ -328,6 +332,9 @@
         Piercing: 20
         Structural: 30
     ignoreResistances: true
+    shuttleNavInfo:
+      enabled: true
+      radius: 0.4
 
 
 - type: Tag

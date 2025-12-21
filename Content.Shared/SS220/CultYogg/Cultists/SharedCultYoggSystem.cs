@@ -1,12 +1,15 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Actions;
+using Content.Shared.Clothing.Components;
 using Content.Shared.Examine;
 using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.SS220.CultYogg.Corruption;
+using Content.Shared.Whitelist;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Timing;
 
@@ -16,10 +19,12 @@ public abstract class SharedCultYoggSystem : EntitySystem
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedCultYoggCorruptedSystem _cultYoggCorruptedSystem = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {
@@ -29,8 +34,8 @@ public abstract class SharedCultYoggSystem : EntitySystem
 
         SubscribeLocalEvent<CultYoggComponent, ExaminedEvent>(OnExamined);
 
-        SubscribeLocalEvent<CultYoggComponent, CultYoggCorruptItemEvent>(CorruptItemAction);
-        SubscribeLocalEvent<CultYoggComponent, CultYoggCorruptItemInHandEvent>(CorruptItemInHandAction);
+        SubscribeLocalEvent<CultYoggComponent, CultYoggCorruptItemActionEvent>(CorruptItemAction);
+        SubscribeLocalEvent<CultYoggComponent, CultYoggCorruptItemInHandActionEvent>(CorruptItemInHandAction);
 
         SubscribeLocalEvent<CultYoggComponent, ComponentRemove>(OnRemove);
     }
@@ -48,40 +53,49 @@ public abstract class SharedCultYoggSystem : EntitySystem
     }
 
     #region Stage
-    private void OnExamined(EntityUid uid, CultYoggComponent component, ExaminedEvent args)
+    private void OnExamined(Entity<CultYoggComponent> ent, ref ExaminedEvent args)
     {
-        if (component.CurrentStage < CultYoggStage.Reveal)
+        if (ent.Comp.CurrentStage < CultYoggStage.Reveal)
             return;
 
-        if (TryComp<InventoryComponent>(uid, out var item)
-            && _inventory.TryGetSlotEntity(uid, "eyes", out _, item))
+        if (TryComp<InventoryComponent>(ent.Owner, out var item)
+            && _inventory.TryGetSlotEntity(ent.Owner, "eyes", out _, item))
             return;
 
-        if (_inventory.TryGetSlotEntity(uid, "head", out var itemHead, item))
+        if (_inventory.TryGetSlotEntity(ent.Owner, "head", out var itemHead, item))
         {
             if (TryComp(itemHead, out IdentityBlockerComponent? block)
-                && (block.Coverage == IdentityBlockerCoverage.EYES || block.Coverage == IdentityBlockerCoverage.FULL))
+                && block.Coverage is IdentityBlockerCoverage.EYES or IdentityBlockerCoverage.FULL)
                 return;
         }
 
-        if (_inventory.TryGetSlotEntity(uid, "mask", out var itemMask, item))
+        if (_inventory.TryGetSlotEntity(ent.Owner, "mask", out var itemMask, item))
         {
-            if (TryComp(itemMask, out IdentityBlockerComponent? block)
-                && (block.Coverage == IdentityBlockerCoverage.EYES || block.Coverage == IdentityBlockerCoverage.FULL))
+            if (TryComp<MaskComponent>(itemMask, out var mask) && mask.IsToggled)
+            {
+            }
+            else if (TryComp<IdentityBlockerComponent>(itemMask, out var block)
+                && block.Coverage is IdentityBlockerCoverage.EYES or IdentityBlockerCoverage.FULL)
             {
                 return;
             }
         }
 
-        args.PushMarkup($"[color=green]{Loc.GetString("cult-yogg-stage-eyes-markups", ("ent", uid))}[/color]");
+        args.PushMarkup(Loc.GetString("cult-yogg-stage-eyes-markups"));
     }
     #endregion
 
     #region Corruption
-    private void CorruptItemAction(Entity<CultYoggComponent> uid, ref CultYoggCorruptItemEvent args)
+    private void CorruptItemAction(Entity<CultYoggComponent> uid, ref CultYoggCorruptItemActionEvent args)
     {
         if (args.Handled)
             return;
+
+        if (TryCorruptInteractions(uid, args.Target))
+        {
+            args.Handled = true;
+            return;
+        }
 
         if (_cultYoggCorruptedSystem.IsCorrupted(args.Target))
         {
@@ -98,7 +112,7 @@ public abstract class SharedCultYoggSystem : EntitySystem
         Spawn(uid.Comp.CorruptionEffect, Transform(args.Target).Coordinates);
     }
 
-    private void CorruptItemInHandAction(Entity<CultYoggComponent> uid, ref CultYoggCorruptItemInHandEvent args)
+    private void CorruptItemInHandAction(Entity<CultYoggComponent> uid, ref CultYoggCorruptItemInHandActionEvent args)
     {
         if (args.Handled)
             return;
@@ -106,10 +120,7 @@ public abstract class SharedCultYoggSystem : EntitySystem
         if (!_entityManager.TryGetComponent<HandsComponent>(uid, out var hands))
             return;
 
-        if (hands.ActiveHand == null)
-            return;
-
-        var handItem = hands.ActiveHand.HeldEntity;
+        var handItem = _hands.GetActiveItem((uid, hands));
         if (handItem == null)
             return;
 
@@ -124,6 +135,17 @@ public abstract class SharedCultYoggSystem : EntitySystem
             return;
         }
         args.Handled = true;
+    }
+
+    private bool TryCorruptInteractions(Entity<CultYoggComponent> ent, EntityUid target)
+    {
+        var effectEv = new CorruptInteractionEvent();
+        RaiseLocalEvent(target, ref effectEv);
+
+        if (effectEv.Handled)
+            return true;
+
+        return false;
     }
     #endregion
 

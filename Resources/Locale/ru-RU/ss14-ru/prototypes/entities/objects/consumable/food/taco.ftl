@@ -14,5 +14,7 @@ ent-FoodTacoBeefSupreme = говяжье тако суприм
     .desc = Это как обычное тако с говядиной, только круче!
 ent-FoodTacoChickenSupreme = куриное тако суприм
     .desc = Это как обычное тако с курицей, только круче!
+ent-FoodTacoDragon = Драко
+    .desc = Драконье тако! Только не говорите, что оно из рыбы...
 ent-FoodMealSoftTaco = мягкая лепёшка тако
     .desc = Попробуйте кусочек!

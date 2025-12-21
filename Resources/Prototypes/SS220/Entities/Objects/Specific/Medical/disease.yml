@@ -1,0 +1,25 @@
+- type: entity
+  parent: BaseItem
+  id: DiseaseSwabNarcotic
+  name: sterile drug swab
+  description: A sterile cotton swab used for rapid narcotic testing. Turns green if clean, red if contaminated.
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Medical/mouth_swab.rsi
+    layers:
+    - state: icon
+      map: [ "isUsed" ]
+  - type: Tag
+    tags:
+    - Recyclable
+    - Trash
+  - type: NarcoticsTest
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.NarcoticsData.Key:
+        isUsed:
+          True: { state: red_swab }
+          False: { state: green_swab }

@@ -31,30 +31,38 @@
   - type: Extractable
     juiceSolution:
       reagents:
-        - ReagentId: Zinc
-          Quantity: 5
+      - ReagentId: Zinc
+        Quantity: 5
   - type: Tag
     tags:
       - KRSPowerCell
+      - WeaponRechargerWhitelist
   - type: Appearance
   - type: PowerCellVisuals
   - type: Riggable
-  - type: AmmoCounter
-  - type: ProjectileBatteryAmmoProvider
-    proto: BulletBlaster
-    fireCost: 32
 
+# Standard 800 charge battery
 - type: entity
   parent: KRSPowerCell
   id: BlasterPowerCellAlt
   name: blaster power cell
-  description: It contains a lot more pain than you ever dreamed of.
-  suffix:  Laser
-  components:
-  - type: ProjectileBatteryAmmoProvider
-    proto: BulletBlasterAlt
-    fireCost: 40
+  description: Standard energy cell for blaster weapons.
+  suffix: Standard
 
+# Powerful 1200 charge battery
+- type: entity
+  parent: KRSPowerCell
+  id: BlasterPowerCellPulse
+  name: blaster power cell
+  description: High-capacity energy cell for advanced blaster weapons.
+  suffix: High-Capacity
+  components:
+  - type: Battery
+    pricePerJoule: 0.15
+    maxCharge: 1200
+    startingCharge: 1200
+
+# Blank version for crafting/printing
 - type: entity
   id: BlasterPowerCellAltPrinted
   suffix: Empty
@@ -74,34 +82,45 @@
     startingCharge: 0
 
 - type: entity
-  parent: KRSPowerCell
-  id: BlasterPowerCellDisabler
-  name: blaster power cell
+  parent: BaseItem
+  id: LaserCarabinePowerCell
+  name: Carabine power cell
   description: It contains a lot more pain than you ever dreamed of.
-  suffix: Disabler
+  suffix:  Laser
   components:
-  - type: Sprite
-    sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/krs_magblaster_disabler.rsi
-    layers:
-    - map: [ "enum.PowerCellVisualLayers.Base" ]
-      state: base
-    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
-      state: o2
-      shader: unshaded
-  - type: ProjectileBatteryAmmoProvider
-    proto: BulletDisablerSmg
-    fireCost: 24
-
-- type: entity
-  parent: KRSPowerCell
-  id: BlasterPowerCellPulse
-  name: blaster power cell
-  description: It contains a lot more pain than you ever dreamed of.
-  components:
+  - type: Item
   - type: Battery
     pricePerJoule: 0.15
     maxCharge: 1200
     startingCharge: 1200
-  - type: ProjectileBatteryAmmoProvider
-    proto: BulletBlasterPulse
-    fireCost: 48
+  - type: PowerCellVisuals
+  - type: PowerCell
+    powerCellVisualsLevels: 4
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/laser_carabine.rsi
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: base
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o4
+      shader: unshaded
+  - type: SolutionContainerManager
+    solutions:
+      battery:
+        maxVol: 5
+  - type: InjectableSolution
+    solution: battery
+  - type: DrawableSolution
+    solution: battery
+  - type: Extractable
+    juiceSolution:
+      reagents:
+        - ReagentId: Zinc
+          Quantity: 5
+  - type: Tag
+    tags:
+      - LaserCarabinePowerCell
+  - type: Appearance
+  - type: Riggable
+  - type: AmmoCounter
+

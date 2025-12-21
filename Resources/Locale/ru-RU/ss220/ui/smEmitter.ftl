@@ -10,3 +10,5 @@ supermatter-emitter-extension-changes-unsaved = Конфигурация изм�
 supermatter-emitter-extension-submit = Применить
 supermatter-emitter-extension-activated-emitter = Включен
 supermatter-emitter-extension-deactivated-emitter = Выключен
+
+supermatter-emitter-extension-locked-emitter = Эмиттер заблокирован

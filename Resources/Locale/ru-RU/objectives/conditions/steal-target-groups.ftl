@@ -13,13 +13,16 @@ steal-target-groups-nuke-disk = диск ядерной аутентификац
 steal-target-groups-weapon-energy-shot-gun = энергетический дробовик
 # Thief Collection
 steal-target-groups-figurines = фигурки
-steal-target-groups-heads-cloaks = плащи глав
+#SS220 Thief HeadCloak StealTarget Update BEGIN
+steal-target-groups-heads-cloaks = плащи и мантии глав
+#SS220 Thief HeadCloak StealTarget Update END
 steal-target-groups-heads-bedsheets = одеяла глав
 steal-target-groups-stamps = печати
 steal-target-groups-door-remotes = пульты от шлюзов
 steal-target-groups-encryption-keys = ключи шифрования
 steal-target-groups-technology-disks = технологические диски
 steal-target-groups-id-cards = ID-карты
+steal-target-groups-officer-handguns = пистолет службы безопасности
 steal-target-groups-lamps = ЛАМПЫ
 # Thief single item
 steal-target-groups-forensic-scanner = криминалистический сканер
@@ -39,10 +42,14 @@ steal-target-groups-bible = библия
 steal-target-groups-clothing-neck-goldmedal = золотая медаль мастерства экипажа
 steal-target-groups-clothing-neck-clownmedal = медаль клоуна
 steal-target-groups-wanted-list-cartridge = картридж Список разыскиваемых
+steal-target-groups-belt-ce = пояс для инструментов старшего инженера
+steal-target-groups-captain-sword = сабля капитана
 # Thief structures
 steal-target-groups-teg = часть термоэлектрического генератора
 steal-target-groups-freezer-heater = нагреватель или охладитель
-steal-target-groups-altar-nanotrasen = алтарь Nanotrasen (любой)
+# ss220 Addition to the description of NanoTrasen altar theft target begin
+steal-target-groups-altar-nanotrasen = алтарь Nanotrasen (любой религиозный)
+# ss220 Addition to the description of NanoTrasen altar theft target end
 steal-target-groups-nuclear-bomb = ядерная боеголовка
 steal-target-groups-fax-machine-captain = факс дальнего действия капитана
 steal-target-groups-chem-dispenser = химический раздатчик

@@ -2,138 +2,93 @@
 
 # Баррикада
 - type: construction
-  name: баррикада из дерева
   id: BarricadeWooden
   graph: BarricadeWooden220
-  startNode: start 
+  startNode: start
   targetNode: barricadewood
-  category: construction-category-structures 
-  description: Баррикады из деревянных досок. Неплохое средство защиты.
-  icon:
-    sprite: SS220/Structures/barricades.rsi
-    state: barricade_wooden
+  category: construction-category-structures
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
-  
+
 - type: construction
-  name: баррикада из стали 
   id: BarricadeSteel
   graph: BarricadeSteel220
-  startNode: start 
+  startNode: start
   targetNode: barricadesteel
-  category: construction-category-structures 
-  description: Баррикады из листов стали. Хорошое средство защиты.
-  icon:
-    sprite: SS220/Structures/barricades.rsi
-    state: barricade_steel
+  category: construction-category-structures
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
-  
+
 - type: construction
-  name: баррикада из пластали
   id: BarricadePlasteel
   graph: BarricadePlasteel220
-  startNode: start 
+  startNode: start
   targetNode: barricadeplasteel
-  category: construction-category-structures 
-  description: Баррикады из листов пластали. Отличное средство защиты.
-  icon:
-    sprite: SS220/Structures/barricades.rsi
-    state: barricade_plasteel
+  category: construction-category-structures
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
-  
+
 # Баррикада направленная
 - type: construction
-  name: баррикада из дерева
   id: BarricadeWoodenDirectional
   graph: BarricadeWooden220
-  startNode: start 
+  startNode: start
   targetNode: barricadewooddirectional
-  category: construction-category-structures 
-  description: Баррикады из деревянных досок. Неплохое средство защиты.
-  icon:
-    sprite: SS220/Structures/barricades.rsi
-    state: barricade_wooden_directional
+  category: construction-category-structures
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
-  
+
 - type: construction
-  name: баррикада из стали 
   id: BarricadeSteelDirectional
   graph: BarricadeSteel220
-  startNode: start 
+  startNode: start
   targetNode: barricadesteeldirectional
-  category: construction-category-structures 
-  description: Баррикады из листов стали. Хорошое средство защиты.
-  icon:
-    sprite: SS220/Structures/barricades.rsi
-    state: barricade_steel_directional
+  category: construction-category-structures
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
-  
+
 - type: construction
-  name: баррикада из пластали
   id: BarricadePlasteelDirectional
   graph: BarricadePlasteel220
-  startNode: start 
-  targetNode: barricadeplasteeldirectional 
-  category: construction-category-structures 
-  description: Баррикады из листов пластали. Отличное средство защиты.
-  icon:
-    sprite: SS220/Structures/barricades.rsi
-    state: barricade_plasteel_directional
+  startNode: start
+  targetNode: barricadeplasteeldirectional
+  category: construction-category-structures
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
-  
+
 # Баррикада напольная
 - type: construction
-  name: баррикада из дерева
   id: BarricadeWoodenFloor
   graph: BarricadeWooden220
-  startNode: start 
-  targetNode: barricadewoodfloor 
-  category: construction-category-structures 
-  description: Баррикады из деревянных досок. Неплохое средство защиты.
-  icon:
-    sprite: SS220/Structures/barricades.rsi
-    state: barricade_wooden_floor
+  startNode: start
+  targetNode: barricadewoodfloor
+  category: construction-category-structures
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
-  
+
 - type: construction
-  name: баррикада из стали 
   id: BarricadeSteelFloor
   graph: BarricadeSteel220
-  startNode: start 
-  targetNode: barricadesteelfloor 
-  category: construction-category-structures 
-  description: Баррикады из листов стали. Хорошое средство защиты.
-  icon:
-    sprite: SS220/Structures/barricades.rsi
-    state: barricade_steel_floor
+  startNode: start
+  targetNode: barricadesteelfloor
+  category: construction-category-structures
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
-  
+
 - type: construction
-  name: баррикада из пластали
   id: BarricadePlasteelFloor
   graph: BarricadePlasteel220
-  startNode: start 
-  targetNode: barricadeplasteelfloor 
-  category: construction-category-structures 
-  description: Баррикады из листов пластали. Отличное средство защиты.
-  icon:
-    sprite: SS220/Structures/barricades.rsi
-    state: barricade_plasteel_floor
+  startNode: start
+  targetNode: barricadeplasteelfloor
+  category: construction-category-structures
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true

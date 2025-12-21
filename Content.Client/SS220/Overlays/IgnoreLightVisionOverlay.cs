@@ -81,8 +81,10 @@ public abstract class IgnoreLightVisionOverlay : Overlay
         }
         handle.SetTransform(Matrix3x2.Identity);
     }
+
     protected abstract void Render(Entity<SpriteComponent, TransformComponent> ent,
                         MapId? map, DrawingHandleWorld handle, Angle eyeRot);
+
     /// <summary>
     ///  function which defines what entities can be seen, f.e. pai or human, bread dog or reaper
     ///  Also contains list of components which defines it
@@ -101,6 +103,7 @@ public abstract class IgnoreLightVisionOverlay : Overlay
 
         return true;
     }
+
     private bool CantBeRendered(EntityUid target, [NotNullWhen(false)] out SpriteComponent? sprite,
                                                 [NotNullWhen(false)] out TransformComponent? xform)
     {
@@ -114,6 +117,7 @@ public abstract class IgnoreLightVisionOverlay : Overlay
 
         return false;
     }
+
     /// <summary>
     ///  function which defines what entities visible or not.
     ///  Also contains const values of invis perception
@@ -130,6 +134,7 @@ public abstract class IgnoreLightVisionOverlay : Overlay
 
         return false;
     }
+
     /// <summary> function for verifying if we can see smth in container </summary>
     /// <returns>True if entities could be seen by thermals. Without any other obstacles </returns>
     private bool CantBeVisibleInContainer(EntityUid target, bool isCloseToOwner)
@@ -152,6 +157,7 @@ public abstract class IgnoreLightVisionOverlay : Overlay
 
         return false;
     }
+
     /// <summary> Checks if entity has a components from list </summary>
     /// <returns> True if entity has any of the listed components </returns>
     /// <exception cref="Exception"> Throw exception if List contains false comp name</exception>

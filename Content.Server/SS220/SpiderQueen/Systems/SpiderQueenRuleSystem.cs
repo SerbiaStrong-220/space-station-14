@@ -7,8 +7,8 @@ using Content.Server.Roles;
 using Content.Server.SS220.Markers;
 using Content.Server.SS220.Roles;
 using Content.Server.SS220.SpiderQueen.Components;
-using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
+using Content.Shared.Station.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Map;
 
@@ -60,7 +60,7 @@ public sealed class SpiderQueenRuleSystem : GameRuleSystem<SpiderQueenRuleCompon
                 if (!TryComp<StationDataComponent>(station, out var data))
                     continue;
 
-                grid = _station.GetLargestGrid(data);
+                grid = _station.GetLargestGrid((station, data));
                 if (!grid.HasValue)
                     continue;
 

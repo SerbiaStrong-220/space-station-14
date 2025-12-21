@@ -90,7 +90,7 @@
       - id: ClothingOuterWinterHoS
       - id: ClothingHeadBigCapHoS # SS220-FreedomHoSCap
 #     - id: ClothingNeckCloakHos #SS220-cloak-dress-tweak
-      - id: ClothingOuterCoatHoSbomber # SS220-NewBomberForHos   
+      - id: ClothingOuterCoatHoSbomber # SS220-NewBomberForHos
 
 - type: entity
   id: DresserQuarterMasterFilled
@@ -137,3 +137,5 @@
       - id: ClothingOuterCoatWardenAlt
       - id: ClothingOuterWinterWarden
       - id: ClothingEyesGlassesSunglasses #SS220-MinorTweaks end
+      - id: ClothingUniformJumpskirtWarden
+      - id: ClothingUniformJumpsuitWarden

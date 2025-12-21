@@ -7,6 +7,7 @@ using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
+using Content.Shared.SS220.Signature;
 using Content.Shared.Traits;
 using Robust.Shared.Collections;
 using Robust.Shared.Configuration;
@@ -28,10 +29,6 @@ namespace Content.Shared.Preferences
     {
         private static readonly Regex RestrictedNameRegex = new(@"[^А-Яа-яёЁ0-9' -]"); // Corvax: Only cyrillic names
         private static readonly Regex ICNameCaseRegex = new(@"^(?<word>\w)|\b(?<word>\w)(?=\w*$)");
-
-        public const int MaxNameLength = 32;
-        public const int MaxLoadoutNameLength = 32;
-        public const int MaxDescLength = 512;
 
         /// <summary>
         /// Job preferences for initial spawn.
@@ -115,6 +112,11 @@ namespace Content.Shared.Preferences
         public bool TeleportAfkToCryoStorage { get; private set; } = true;
         // SS220 Cryo end
 
+        // ss220 add signature start
+        [DataField]
+        public SignatureData? SignatureData { get; private set; }
+        // ss220 add signature end
+
         /// <summary>
         /// <see cref="_jobPriorities"/>
         /// </summary>
@@ -152,6 +154,7 @@ namespace Content.Shared.Preferences
             HashSet<ProtoId<AntagPrototype>> antagPreferences,
             HashSet<ProtoId<TraitPrototype>> traitPreferences,
             Dictionary<string, RoleLoadout> loadouts,
+            SignatureData? signatureData = null, // ss220 add signature
             bool teleportAfkToCryoStorage = true) //SS220 Cryo-Teleport
         {
             Name = name;
@@ -168,6 +171,7 @@ namespace Content.Shared.Preferences
             _antagPreferences = antagPreferences;
             _traitPreferences = traitPreferences;
             TeleportAfkToCryoStorage = teleportAfkToCryoStorage; // SS220 Cryo-Teleport
+            SignatureData = signatureData; // ss220 add signature
             _loadouts = loadouts;
 
             var hasHighPrority = false;
@@ -201,6 +205,7 @@ namespace Content.Shared.Preferences
                 new HashSet<ProtoId<AntagPrototype>>(other.AntagPreferences),
                 new HashSet<ProtoId<TraitPrototype>>(other.TraitPreferences),
                 new Dictionary<string, RoleLoadout>(other.Loadouts),
+                other.SignatureData?.Clone(), // ss220 add signature
                 other.TeleportAfkToCryoStorage)
         {
         }
@@ -219,11 +224,14 @@ namespace Content.Shared.Preferences
         /// </summary>
         /// <param name="species">The species to use in this default profile. The default species is <see cref="SharedHumanoidAppearanceSystem.DefaultSpecies"/>.</param>
         /// <returns>Humanoid character profile with default settings.</returns>
-        public static HumanoidCharacterProfile DefaultWithSpecies(string species = SharedHumanoidAppearanceSystem.DefaultSpecies)
+        public static HumanoidCharacterProfile DefaultWithSpecies(string? species = null)
         {
+            species ??= SharedHumanoidAppearanceSystem.DefaultSpecies;
+
             return new()
             {
                 Species = species,
+                Appearance = HumanoidCharacterAppearance.DefaultWithSpecies(species),
             };
         }
 
@@ -242,8 +250,10 @@ namespace Content.Shared.Preferences
             return RandomWithSpecies(species);
         }
 
-        public static HumanoidCharacterProfile RandomWithSpecies(string species = SharedHumanoidAppearanceSystem.DefaultSpecies)
+        public static HumanoidCharacterProfile RandomWithSpecies(string? species = null)
         {
+            species ??= SharedHumanoidAppearanceSystem.DefaultSpecies;
+
             var prototypeManager = IoCManager.Resolve<IPrototypeManager>();
             var random = IoCManager.Resolve<IRobustRandom>();
 
@@ -430,7 +440,7 @@ namespace Content.Shared.Preferences
             // Category not found so dump it.
             TraitCategoryPrototype? traitCategory = null;
 
-            if (category != null && !protoManager.TryIndex(category, out traitCategory))
+            if (category != null && !protoManager.Resolve(category, out traitCategory))
                 return new(this);
 
             var list = new HashSet<ProtoId<TraitPrototype>>(_traitPreferences) { traitId };
@@ -481,6 +491,13 @@ namespace Content.Shared.Preferences
         public HumanoidCharacterProfile WithTeleportAfkToCryoStorage(bool teleportAfkToCryoStorage)
             => new(this) { TeleportAfkToCryoStorage = teleportAfkToCryoStorage };
 
+        // ss220 add signature start
+        public HumanoidCharacterProfile WithSignatureData(SignatureData signatureData)
+        {
+            return new HumanoidCharacterProfile(this) { SignatureData = signatureData };
+        }
+        // ss220 add signature end
+
         public string Summary =>
             Loc.GetString(
                 "humanoid-character-profile-summary",
@@ -499,6 +516,12 @@ namespace Content.Shared.Preferences
             if (Species != other.Species) return false;
             if (PreferenceUnavailable != other.PreferenceUnavailable) return false;
             if (TeleportAfkToCryoStorage != other.TeleportAfkToCryoStorage) return false; //ss220 cryo button save fix
+
+            // ss220 add signature start
+            if (SignatureData != null && !SignatureData.Equals(other.SignatureData)) return false;
+            if (other.SignatureData != null && !other.SignatureData.Equals(SignatureData)) return false;
+            // ss220 add signature end
+
             if (SpawnPriority != other.SpawnPriority) return false;
             if (!_jobPriorities.SequenceEqual(other._jobPriorities)) return false;
             if (!_antagPreferences.SequenceEqual(other._antagPreferences)) return false;
@@ -543,13 +566,14 @@ namespace Content.Shared.Preferences
             };
 
             string name;
+            var maxNameLength = configManager.GetCVar(CCVars.MaxNameLength);
             if (string.IsNullOrEmpty(Name))
             {
                 name = GetName(Species, gender);
             }
-            else if (Name.Length > MaxNameLength)
+            else if (Name.Length > maxNameLength)
             {
-                name = Name[..MaxNameLength];
+                name = Name[..maxNameLength];
             }
             else
             {
@@ -575,9 +599,10 @@ namespace Content.Shared.Preferences
             }
 
             string flavortext;
-            if (FlavorText.Length > MaxDescLength)
+            var maxFlavorTextLength = configManager.GetCVar(CCVars.MaxFlavorTextLength);
+            if (FlavorText.Length > maxFlavorTextLength)
             {
-                flavortext = FormattedMessage.RemoveMarkupOrThrow(FlavorText)[..MaxDescLength];
+                flavortext = FormattedMessage.RemoveMarkupOrThrow(FlavorText)[..maxFlavorTextLength];
             }
             else
             {
@@ -664,6 +689,9 @@ namespace Content.Shared.Preferences
                     continue;
                 }
 
+                // This happens after we verify the prototype exists
+                // These values are set equal in the database and we need to make sure they're equal here too!
+                loadouts.Role = roleName;
                 loadouts.EnsureValid(this, session, collection);
             }
 
@@ -695,21 +723,43 @@ namespace Content.Shared.Preferences
             // Track points count for each group.
             var groups = new Dictionary<string, int>();
             var result = new List<ProtoId<TraitPrototype>>();
+            var selectedTraits = new HashSet<ProtoId<TraitPrototype>>(); //ss220 add traits
 
             foreach (var trait in traits)
             {
                 if (!protoManager.TryIndex(trait, out var traitProto))
                     continue;
 
+                //ss220 add traits start
+                var isExcluded = false;
+                if (traitProto.MutuallyExclusiveWith != null)
+                {
+                    foreach (var excluded in traitProto.MutuallyExclusiveWith)
+                    {
+                        var proto = protoManager.Index<TraitPrototype>(excluded);
+
+                        if (!selectedTraits.Contains(proto))
+                            continue;
+
+                        isExcluded = true;
+                        break;
+                    }
+                }
+
+                if (isExcluded)
+                    continue;
+                //ss220 add traits end
+
                 // Always valid.
                 if (traitProto.Category == null)
                 {
                     result.Add(trait);
+                    selectedTraits.Add(trait); //ss220 add traits
                     continue;
                 }
 
                 // No category so dump it.
-                if (!protoManager.TryIndex(traitProto.Category, out var category))
+                if (!protoManager.Resolve(traitProto.Category, out var category))
                     continue;
 
                 var existing = groups.GetOrNew(category.ID);
@@ -721,6 +771,7 @@ namespace Content.Shared.Preferences
 
                 groups[category.ID] = existing;
                 result.Add(trait);
+                selectedTraits.Add(trait); //ss220 add traits
             }
 
             return result;
@@ -740,10 +791,17 @@ namespace Content.Shared.Preferences
             var namingSystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<NamingSystem>();
             return namingSystem.GetName(species, gender);
         }
+        public bool Equals(HumanoidCharacterProfile? other)
+        {
+            if (other is null)
+                return false;
+
+            return ReferenceEquals(this, other) || MemberwiseEquals(other);
+        }
 
         public override bool Equals(object? obj)
         {
-            return ReferenceEquals(this, obj) || obj is HumanoidCharacterProfile other && Equals(other);
+            return obj is HumanoidCharacterProfile other && Equals(other);
         }
 
         public override int GetHashCode()
@@ -762,6 +820,7 @@ namespace Content.Shared.Preferences
             hashCode.Add(Appearance);
             hashCode.Add((int)SpawnPriority);
             hashCode.Add((int)PreferenceUnavailable);
+            hashCode.Add(SignatureData?.GetHashCode() ?? 0); // ss220 add signature
             return hashCode.ToHashCode();
         }
 
