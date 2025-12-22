@@ -6,6 +6,7 @@ using Content.Shared.GameTicking;
 using Content.Shared.SS220.Experience;
 using Content.Shared.SS220.Experience.Systems;
 using Robust.Server.Console;
+using Robust.Shared.Prototypes;
 using System.Linq;
 
 namespace Content.Server.SS220.Experience;
@@ -77,6 +78,8 @@ public sealed class ExperienceEditorSystem : EntitySystem
             playerChangedComp.Skills[skillId] += (sublevel - ExperienceSystem.StartSublevel);
         }
 
+        _adminLog.Add(LogType.Experience, LogImpact.Low, $"{ToPrettyString(playerEntity):user} used free points for adding sublevels. Used to {GetSublevelStringView(validInput)}");
+
         playerChangedComp.SpentSublevelPoints += totalPointsSpend;
 
         var afterInitEv = new RecalculateEntityExperience();
@@ -91,9 +94,14 @@ public sealed class ExperienceEditorSystem : EntitySystem
 
         while (backgroundEntityQuery.MoveNext(out var uid, out var sublevelAddComponent, out var roleExperience))
         {
-            var stringSublevelView = string.Join('|', sublevelAddComponent.Skills.Select(x => $"{x.Key}: {x.Value}"));
+            var stringSublevelView = GetSublevelStringView(sublevelAddComponent.Skills);
 
             _adminLog.Add(LogType.Experience, LogImpact.Low, $"At round end entity with experience definition {roleExperience.DefinitionId}, used {sublevelAddComponent.SpentSublevelPoints} point to their leveling. Used to skills {stringSublevelView}");
         }
+    }
+
+    private string GetSublevelStringView(Dictionary<ProtoId<SkillTreePrototype>, int> toView)
+    {
+        return string.Join('|', toView.Select(x => $"{x.Key}: {x.Value}"));
     }
 }

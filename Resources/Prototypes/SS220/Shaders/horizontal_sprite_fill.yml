@@ -4,3 +4,5 @@
   path: "/Textures/SS220/Shaders/horizontal_sprite_fill.swsl"
   params:
     Fillness: 0.0
+    Start: 0.125 # 2/16 cause our sprites starts at 3 px
+    End: 0.875 # 14/16 cause it ends at 14 px
