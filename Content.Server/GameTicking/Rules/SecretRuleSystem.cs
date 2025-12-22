@@ -12,6 +12,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Configuration;
 using Robust.Shared.Utility;
+using Robust.Shared.Enums;
 
 namespace Content.Server.GameTicking.Rules;
 
@@ -76,7 +77,7 @@ public sealed class SecretRuleSystem : GameRuleSystem<SecretRuleComponent>
     private bool TryPickPreset(ProtoId<WeightedRandomPrototype> weights, [NotNullWhen(true)] out GamePresetPrototype? preset)
     {
         var options = _prototypeManager.Index(weights).Weights.ShallowClone();
-        var players = GameTicker.ReadyPlayerCount();
+        var players = GameTicker.PlayerGameStatuses.Count; // SS220-make-secret-depend-on-total-player-count
 
         // SS220 Cult Yogg begin
         var optionsToRemove = new HashSet<string>();
