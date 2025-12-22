@@ -4,40 +4,9 @@ using Content.Shared.SS220.Surgery.Components;
 using Content.Shared.SS220.Surgery.Graph;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server.SS220.Surgery.Systems;
-
+namespace Content.Shared.SS220.Surgery.Systems;
 public abstract partial class SharedSurgerySystem
 {
-    // TODO
-    /// <summary>
-    ///
-    /// </summary>
-    protected bool IsValidTarget(EntityUid uid, ProtoId<SurgeryGraphPrototype> id, out string? reasonLocPath)
-    {
-        reasonLocPath = null;
-
-        if (!_prototype.TryIndex(id, out var surgeryGraphProto))
-            return false;
-
-        var sharedCheck = SharedSurgeryAvaibilityChecks.IsSurgeryGraphAvailableTarget(uid, surgeryGraphProto, EntityManager, out reasonLocPath);
-
-        return sharedCheck;
-    }
-
-    // TODO
-    /// <summary>
-    /// Here we check for...
-    /// </summary>
-    protected bool IsValidPerformer(EntityUid uid, ProtoId<SurgeryGraphPrototype> id)
-    {
-        if (!_prototype.TryIndex(id, out var surgeryGraphProto))
-            return false;
-
-        var sharedCheck = SharedSurgeryAvaibilityChecks.IsSurgeryGraphAvailablePerformer(uid, surgeryGraphProto, EntityManager);
-
-        return sharedCheck;
-    }
-
     protected virtual void ProceedToNextStep(Entity<OnSurgeryComponent> entity, EntityUid user, EntityUid? used, SurgeryGraphEdge chosenEdge)
     {
         ChangeSurgeryNode(entity, chosenEdge.Target, user, used);
@@ -84,7 +53,6 @@ public abstract partial class SharedSurgerySystem
 
         return true;
     }
-
 
     protected bool OperationCanBeEnded(Entity<OnSurgeryComponent?> entity)
     {

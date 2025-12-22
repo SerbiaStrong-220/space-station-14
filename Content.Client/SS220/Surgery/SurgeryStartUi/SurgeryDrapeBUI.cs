@@ -24,7 +24,7 @@ public sealed class SurgeryDrapeBUI : BoundUserInterface
         base.Open();
         _menu = this.CreateWindow<SurgeryDrapeMenu>();
 
-        _menu.OnSurgeryConfirmCLicked += (id, target) =>
+        _menu.OnSurgeryConfirmCliсked += (id, target) =>
         {
             var user = EntMan.GetNetEntity(_playerManager.LocalEntity);
 

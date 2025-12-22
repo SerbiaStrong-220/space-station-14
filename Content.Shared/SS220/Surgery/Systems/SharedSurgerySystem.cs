@@ -14,7 +14,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server.SS220.Surgery.Systems;
+namespace Content.Shared.SS220.Surgery.Systems;
 
 public abstract partial class SharedSurgerySystem : EntitySystem
 {

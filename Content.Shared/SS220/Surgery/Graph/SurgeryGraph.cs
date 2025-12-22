@@ -6,7 +6,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Surgery.Graph;
 
-[Prototype("surgeryGraph")]
+[Prototype]
 public sealed partial class SurgeryGraphPrototype : IPrototype, ISerializationHooks
 {
     [ViewVariables]
@@ -17,19 +17,19 @@ public sealed partial class SurgeryGraphPrototype : IPrototype, ISerializationHo
     /// Unique name to show in UI. Serves for user comfort orientation.
     /// </summary>
     [DataField(required: true)]
-    public string NameLocPath = "";
+    public LocId Name;
 
     /// <summary>
     /// Detailed description of operation: what it does and etc. Could be lore-boxedish
     /// </summary>
     [DataField(required: true)]
-    public string DescriptionLocPath = "";
+    public LocId Description;
 
     /// <summary>
     /// More gameplay specific information. Like if it needs a special tool or operation exclude other one.
     /// </summary>
     [DataField]
-    public string? PostscriptLocPath;
+    public LocId? Postscript;
 
     [DataField(required: true)]
     public string Start { get; private set; } = default!;
@@ -38,13 +38,7 @@ public sealed partial class SurgeryGraphPrototype : IPrototype, ISerializationHo
     public string End { get; private set; } = default!;
 
     [DataField(required: true)]
-    public PuppetParts TargetPuppetPart;
-
-    [DataField]
-    public List<IAbstractSurgeryGraphAvailabilityCondition> PerformerAvailabilityCondition = new();
-
-    [DataField]
-    public List<IAbstractSurgeryGraphAvailabilityCondition> TargetAvailabilityCondition = new();
+    public BodyPart TargetPart;
 
     [DataField("graph", priority: 0)]
     private List<SurgeryGraphNode> _graph = new();

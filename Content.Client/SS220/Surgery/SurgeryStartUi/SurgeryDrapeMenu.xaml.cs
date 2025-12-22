@@ -18,13 +18,13 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
 
-    public event Action<ProtoId<SurgeryGraphPrototype>, EntityUid>? OnSurgeryConfirmCLicked;
+    public event Action<ProtoId<SurgeryGraphPrototype>, EntityUid>? OnSurgeryConfirmCliсked;
 
     public EntityUid Target;
 
-    private Dictionary<PuppetParts, HashSet<Control>> _operations = new();
+    private Dictionary<BodyPart, HashSet<Control>> _operations = new();
 
-    private const PuppetParts SelectedOnStartPart = PuppetParts.Torso;
+    private const BodyPart SelectedOnStartPart = BodyPart.Torso;
     private const int ControlsInitAllocateNumber = 8;
 
     public SurgeryDrapeMenu()
@@ -41,7 +41,7 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
         };
 
         _operations.Clear(); // never knows what coming after all
-        foreach (var part in Enum.GetValues<PuppetParts>())
+        foreach (var part in Enum.GetValues<BodyPart>())
         {
             _operations.Add(part, new(ControlsInitAllocateNumber));
         }
@@ -49,7 +49,7 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
         Puppet.SelectedPart = SelectedOnStartPart;
     }
 
-    public void UpdateOperations(PuppetParts? currentPart, PuppetParts? previousPart)
+    public void UpdateOperations(BodyPart? currentPart, BodyPart? previousPart)
     {
         if (previousPart != null)
         {
@@ -79,8 +79,8 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
             var button = MakeOperationButton(graph);
             OperationContainer.AddChild(button);
             SetFormattedText(button.RichTextLabel, graph.NameLocPath);
-            button.Visible = graph.TargetPuppetPart == Puppet.SelectedPart;
-            _operations[graph.TargetPuppetPart].Add(button);
+            button.Visible = graph.TargetPart == Puppet.SelectedPart;
+            _operations[graph.TargetPart].Add(button);
         }
     }
 
@@ -102,7 +102,7 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
             // So wee do something if button was pressed before pressing by player.
             // Thats why it !Pressed, but meant to be If pressed pressed than
             if (!button.Pressed)
-                OnSurgeryConfirmCLicked?.Invoke(button.GraphId, Target);
+                OnSurgeryConfirmCliсked?.Invoke(button.GraphId, Target);
             else
                 FooterLeft.Text = Loc.GetString("surgery-footer-confirm");
 
@@ -135,11 +135,11 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
         return button;
     }
 
-    private string LocPuppetPartPath(PuppetParts? part)
+    private string LocPuppetPartPath(BodyPart? part)
     {
         if (part == null)
             return "surgery-puppet-part-none";
-        return $"surgery-puppet-part-{Enum.GetName(typeof(PuppetParts), part)!}";
+        return $"surgery-puppet-part-{Enum.GetName(typeof(BodyPart), part)!}";
     }
 
     /// <summary>
