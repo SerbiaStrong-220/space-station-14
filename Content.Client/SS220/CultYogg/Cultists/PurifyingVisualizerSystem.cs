@@ -6,10 +6,13 @@ using Robust.Client.GameObjects;
 namespace Content.Client.SS220.CultYogg.Cultists;
 
 /// <summary>
+/// Сontrols the visual during the purifying of cultist.
 /// </summary>
 public sealed class PurifyingVisualizerSystem : VisualizerSystem<CultYoggPurifiedComponent>
 {
+
     [Dependency] private readonly SpriteSystem _sprite = default!;
+
     public override void Initialize()
     {
         base.Initialize();
