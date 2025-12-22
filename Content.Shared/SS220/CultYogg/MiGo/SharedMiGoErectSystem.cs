@@ -359,7 +359,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         if (args.Recipe == null)
             return;
 
-        if (!_prototypeManager.Resolve(args.Recipe.Value, out var replacewment))
+        if (!_prototypeManager.Resolve(args.Recipe.Value, out var replacement))
             return;
 
         if (args.Target is { } target)
@@ -369,11 +369,11 @@ public sealed class SharedMiGoErectSystem : EntitySystem
             if (prototypeId == null)
                 return;
 
-            StartReplacement(target, replacewment, prototypeId);
+            StartReplacement(target, replacement, prototypeId);
         }
 
         if (TryComp<MiGoComponent>(args.User, out var miGo))
-            AddCaptureCooldownByResult((args.User, miGo), replacewment);//its wierd, but idk how to not make it with this event
+            AddCaptureCooldownByResult((args.User, miGo), replacement);//its wierd, but idk how to not make it with this event
     }
 
     private void StartReplacement(EntityUid buildingUid, MiGoCapturePrototype replacement, EntityPrototype buildingProto)

@@ -17,6 +17,7 @@ using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Systems;
+using Content.Shared.NPC.Prototypes;
 using Content.Shared.Projectiles;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.SS220.CultYogg.MiGo;
@@ -24,6 +25,7 @@ using Content.Shared.SS220.Temperature;
 using Content.Shared.StatusEffect;
 using Robust.Shared.Prototypes;
 using Robust.Server.GameObjects;
+
 
 namespace Content.Server.SS220.CultYogg.MiGo;
 
@@ -42,9 +44,9 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
     [Dependency] private readonly PullingSystem _pullingSystem = default!;
     [Dependency] private readonly JobSystem _jobSystem = default!;
 
-    private const string AscensionReagent = "TheBloodOfYogg";
-    private const string CultYoggFaction = "CultYogg";
-    private const string SimpleNeutralFaction = "SimpleNeutral";
+    private readonly ProtoId<ReagentPrototype> _ascensionReagent = "TheBloodOfYogg";
+    private readonly ProtoId<NpcFactionPrototype> _cultYoggFaction = "CultYogg";
+    private readonly ProtoId<NpcFactionPrototype> _simpleNeutralFaction = "SimpleNeutral";
 
     public override void Initialize()
     {
@@ -100,7 +102,7 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
             if (HasComp<NpcFactionMemberComponent>(uid))
             {
                 _npcFaction.ClearFactions(uid);
-                _npcFaction.AddFaction(uid, CultYoggFaction);
+                _npcFaction.AddFaction(uid, _cultYoggFaction);
             }
         }
         else
@@ -116,7 +118,7 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
             if (HasComp<NpcFactionMemberComponent>(uid))
             {
                 _npcFaction.ClearFactions(uid);
-                _npcFaction.AddFaction(uid, SimpleNeutralFaction);
+                _npcFaction.AddFaction(uid, _simpleNeutralFaction);
             }
             _visibility.AddLayer((uid, vis), (int)VisibilityFlags.Ghost, false);
             _visibility.RemoveLayer((uid, vis), (int)VisibilityFlags.Normal, false);
@@ -172,7 +174,7 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
             if (stomach.Comp2.Body is not { } body)
                 continue;
 
-            var reagentRoRemove = new ReagentQuantity(AscensionReagent, FixedPoint2.MaxValue);
+            var reagentRoRemove = new ReagentQuantity(_ascensionReagent, FixedPoint2.MaxValue);
             _stomach.TryRemoveReagent(stomach, reagentRoRemove); // Removes from stomach
 
             if (!_solutionContainer.TryGetSolution(body, stomach.Comp1.BodySolutionName, out var bodySolutionEnt, out var bodySolution))
