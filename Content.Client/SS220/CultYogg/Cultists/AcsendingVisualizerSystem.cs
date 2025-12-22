@@ -6,10 +6,13 @@ using Robust.Client.GameObjects;
 namespace Content.Client.SS220.CultYogg.Cultists;
 
 /// <summary>
+/// Сontrols the visual during the acsending to the Mi-Go.
 /// </summary>
 public sealed class AcsendingVisualizerSystem : VisualizerSystem<AcsendingComponent>
 {
+
     [Dependency] private readonly SpriteSystem _sprite = default!;
+
     public override void Initialize()
     {
         base.Initialize();

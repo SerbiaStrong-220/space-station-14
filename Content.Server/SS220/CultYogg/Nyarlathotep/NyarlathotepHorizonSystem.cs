@@ -16,7 +16,6 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Prototypes;
 
-
 namespace Content.Server.SS220.CultYogg.Nyarlathotep;
 
 /// <summary>
