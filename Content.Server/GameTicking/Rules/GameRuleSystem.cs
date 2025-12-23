@@ -1,7 +1,10 @@
+using System.Linq;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Chat.Managers;
 using Content.Shared.GameTicking.Components;
 using Robust.Server.GameObjects;
+using Robust.Server.Player;
+using Robust.Shared.Enums;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -17,6 +20,7 @@ public abstract partial class GameRuleSystem<T> : EntitySystem where T : ICompon
     // Not protected, just to be used in utility methods
     [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
     [Dependency] private readonly MapSystem _map = default!;
+    [Dependency] private readonly IPlayerManager _player = default!; // SS220-make-roundstart-from-total-player
 
     public override void Initialize()
     {
@@ -34,11 +38,13 @@ public abstract partial class GameRuleSystem<T> : EntitySystem where T : ICompon
         if (args.Forced || args.Cancelled)
             return;
 
+        var allPlayerCount = _player.Sessions.Count(session => session.Status is not SessionStatus.Disconnected or SessionStatus.Zombie); // SS220-make-antag-selection-based-on-all-players
+
         var query = QueryAllRules();
         while (query.MoveNext(out var uid, out _, out var gameRule))
         {
             var minPlayers = gameRule.MinPlayers;
-            if (args.Players.Length >= minPlayers)
+            if (allPlayerCount >= minPlayers) // SS220-make-antag-selection-based-on-all-players [wizden] args.Players.Length -> allPlayerCount
                 continue;
 
             if (gameRule.CancelPresetOnTooFewPlayers)
