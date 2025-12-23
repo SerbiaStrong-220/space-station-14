@@ -6,7 +6,6 @@
   playTimeTracker: JobERTLeader
   setPreference: false
   startingGear: ERTLeaderGearEVA
-  experienceDefinition: ERTLeaderRoleExperience # SS220-experience
   icon: "JobIconNanotrasen"
   supervisors: job-supervisors-centcom
   canBeAntag: false
@@ -20,6 +19,11 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, DeathRattleImplantCentcomm ]
+  #SS220 LimitationRevive - start
+  - !type:AddComponentSpecial
+    components:
+    - type: DefibrillatorSkill
+  #SS220 LimitationRevive - end
   #SS220 ghostrole-times-begin
   requirements:
     - !type:DepartmentTimeRequirement
@@ -120,7 +124,6 @@
   playTimeTracker: JobERTChaplain
   setPreference: false
   startingGear: ERTChaplainGear
-  experienceDefinition: ERTChaplainRoleExperience # SS220-experience
   icon: "JobIconNanotrasen"
   supervisors: job-supervisors-centcom
   canBeAntag: false
@@ -133,6 +136,7 @@
   - !type:AddComponentSpecial
     components:
     - type: BibleUser #Lets them heal with bibles
+    - type: DefibrillatorSkill #SS220 LimitationRevive
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, DeathRattleImplantCentcomm ]
   departmentsToIgnoreInTitles: # SS220 Round End Titles
@@ -224,7 +228,6 @@
   playTimeTracker: JobERTEngineer
   setPreference: false
   startingGear: ERTEngineerGearEVA
-  experienceDefinition: ERTEngineerRoleExperience # SS220-experience
   icon: "JobIconNanotrasen"
   supervisors: job-supervisors-centcom
   canBeAntag: false
@@ -238,6 +241,11 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, DeathRattleImplantCentcomm ]
+  #SS220 LimitationRevive - start
+  - !type:AddComponentSpecial
+    components:
+    - type: DefibrillatorSkill
+  #SS220 LimitationRevive - end
   #SS220 ghostrole-times start
   requirements:
     - !type:DepartmentTimeRequirement
@@ -320,7 +328,6 @@
   playTimeTracker: JobERTSecurity
   setPreference: false
   startingGear: ERTSecurityGearEVA
-  experienceDefinition: ERTSecurityRoleExperience # SS220-experience
   icon: "JobIconNanotrasen"
   supervisors: job-supervisors-centcom
   canBeAntag: false
@@ -334,6 +341,11 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, DeathRattleImplantCentcomm ]
+  #SS220 LimitationRevive - start
+  - !type:AddComponentSpecial
+    components:
+    - type: DefibrillatorSkill
+  #SS220 LimitationRevive - end
   #SS220 ghostrole-times start
   requirements:
     - !type:DepartmentTimeRequirement
@@ -431,7 +443,6 @@
   playTimeTracker: JobERTMedical
   setPreference: false
   startingGear: ERTMedicalGearEVA
-  experienceDefinition: ERTMedicalRoleExperience # SS220-experience
   icon: "JobIconNanotrasen"
   supervisors: job-supervisors-centcom
   canBeAntag: false
@@ -445,6 +456,11 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, DeathRattleImplantCentcomm ]
+  #SS220 LimitationRevive - start
+  - !type:AddComponentSpecial
+    components:
+    - type: DefibrillatorSkill
+  #SS220 LimitationRevive - end
   #SS220 ghostrole-times start
   requirements:
     - !type:DepartmentTimeRequirement
@@ -519,7 +535,6 @@
   playTimeTracker: JobERTJanitor
   setPreference: false
   startingGear: ERTJanitorGearEVA
-  experienceDefinition: ERTJanitorRoleExperience # SS220-experience
   icon: "JobIconNanotrasen"
   supervisors: job-supervisors-centcom
   canBeAntag: false
@@ -533,6 +548,11 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, DeathRattleImplantCentcomm ]
+  #SS220 LimitationRevive - start
+  - !type:AddComponentSpecial
+    components:
+    - type: DefibrillatorSkill
+  #SS220 LimitationRevive - end
   #SS220 ghostrole-times start
   requirements:
     - !type:DepartmentTimeRequirement

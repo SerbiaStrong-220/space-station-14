@@ -67,6 +67,8 @@
     - type: NpcFactionMember
       factions:
       - EbentUssp
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
     - type: LimitationRevive
       reviveLimit: 3
       beforeDamageDelay: 180
@@ -76,7 +78,6 @@
   name: job-name-ussp-leader
   description: job-description-ussp-leader
   startingGear: EbentUSSPLeaderGear
-  experienceDefinition: USSPLeaderRoleExperience
   playTimeTracker: USSPLeader
   setPreference: false
   canBeAntag: false
@@ -159,6 +160,8 @@
     - type: NpcFactionMember
       factions:
       - EbentUssp
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
     - type: LimitationRevive
       reviveLimit: 3
       beforeDamageDelay: 180
@@ -168,7 +171,6 @@
   name: job-name-ussp-engineer
   description: job-description-ussp-engineer
   startingGear: EbentUSSPEngineerGear
-  experienceDefinition: USSPEngineerRoleExperience
   playTimeTracker: USSPEngineer
   setPreference: false
   canBeAntag: false
@@ -251,6 +253,8 @@
     - type: NpcFactionMember
       factions:
       - EbentUssp
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
     - type: LimitationRevive
       reviveLimit: 3
       beforeDamageDelay: 180
@@ -260,7 +264,6 @@
   name: job-name-ussp-corpsman
   description: job-description-ussp-corpsman
   startingGear: EbentUSSPCorpsmanGear
-  experienceDefinition: USSPCorpsmanRoleExperience
   playTimeTracker: USSPCorpsman
   setPreference: false
   canBeAntag: false
@@ -342,6 +345,8 @@
     - type: NpcFactionMember
       factions:
       - EbentUssp
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
     - type: LimitationRevive
       reviveLimit: 3
       beforeDamageDelay: 180
@@ -351,7 +356,6 @@
   name: job-name-ussp-cmo
   description: job-description-ussp-cmo
   startingGear: EbentUSSPCMOGear
-  experienceDefinition: USSPCMORoleExperience
   playTimeTracker: USSPCMO
   setPreference: false
   canBeAntag: false
@@ -427,6 +431,8 @@
     - type: NpcFactionMember
       factions:
       - EbentUssp
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
     - type: LimitationRevive
       reviveLimit: 3
       beforeDamageDelay: 180
@@ -436,7 +442,6 @@
   name: job-name-ussp-fighter
   description: job-description-ussp-fighter
   startingGear: EbentUSSPTrooperGear
-  experienceDefinition: USSPFighterRoleExperience
   playTimeTracker: USSPFighter
   setPreference: false
   canBeAntag: false

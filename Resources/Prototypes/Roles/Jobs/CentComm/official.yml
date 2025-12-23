@@ -5,7 +5,6 @@
   playTimeTracker: JobCentralCommandOfficial
   setPreference: false
   startingGear: CentcomGear
-  experienceDefinition: CentralCommandOfficialExperience # SS220-experience
   icon: "JobIconNanotrasen"
   supervisors: job-supervisors-hos
   canBeAntag: false
@@ -24,6 +23,11 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, DeathRattleImplantCentcomm ]
+  #SS220 LimitationRevive - start
+  - !type:AddComponentSpecial
+    components:
+    - type: DefibrillatorSkill
+  #SS220 LimitationRevive - end
 
 - type: startingGear
   id: CentcomGear

@@ -1,6 +1,5 @@
 - type: job
   id: DeathSquadLeader
-  experienceDefinition: DeathSquadRoleExperience
   name: job-name-death-squad-leader
   description: job-description-death-squad-leader
   playTimeTracker: DeathSquadLeader
@@ -14,7 +13,6 @@
 
 - type: job
   id: DeathSquadHealer
-  experienceDefinition: DeathSquadRoleExperience
   name: job-name-death-squad-healer
   description: job-description-death-squad-healer
   playTimeTracker: DeathSquadHealer
@@ -28,7 +26,6 @@
 
 - type: job
   id: DeathSquadOperative
-  experienceDefinition: DeathSquadRoleExperience
   name: job-name-death-squad-operative
   description: job-description-death-squad-operative
   playTimeTracker: DeathSquadOperative

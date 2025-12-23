@@ -33,7 +33,6 @@
     #SS220 requirements end
   weight: 10
   startingGear: QuartermasterGear
-  experienceDefinition: QuartermasterRoleExperience # SS220-experience
   icon: "JobIconQuarterMaster"
   supervisors: job-supervisors-captain
   access:
@@ -49,7 +48,7 @@
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff
-
+      - type: DefibrillatorSkill #SS220 LimitationRevive
 
 - type: startingGear
   id: QuartermasterGear

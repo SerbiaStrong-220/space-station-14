@@ -4,7 +4,6 @@
   description: job-description-librarian
   playTimeTracker: JobLibrarian
   startingGear: LibrarianGear
-  experienceDefinition: LibrarianRoleExperience # SS220-experience
   icon: "JobIconLibrarian"
   supervisors: job-supervisors-hop
   access:

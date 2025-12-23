@@ -22,18 +22,23 @@
   - type: Currency
     price:
       Telecrystal: 1
-# SS220-hidden-desc-begin
+# Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-      SyndicateAgentKnowledge: [ corvax-hidden-desc-Telecrystal-syndicate ]
-      ScienceKnowledge: [ corvax-hidden-desc-Telecrystal-research ]
-      CargoKnowledge: [ corvax-hidden-desc-Telecrystal-cargo ]
-    nameEntries:
-    - [SyndicateAgentKnowledge, null]
-    - [ScienceKnowledge, null]
-    - [CargoKnowledge, null]
-    hiddenName: ent-Telecrystal
-# SS220-hidden-desc-end
+    - label: corvax-hidden-desc-Telecrystal-syndicate
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
+    - label: corvax-hidden-desc-Telecrystal-cargo
+      jobRequired:
+        - SalvageSpecialist
+    - label: corvax-hidden-desc-Telecrystal-research
+      jobRequired:
+        - ResearchAssistant
+        - ResearchDirector
+        - Scientist
+        - Borg
+# Corvax-HiddenDesc-End
 
 - type: entity
   parent: Telecrystal

@@ -10,7 +10,6 @@ using Content.Shared.PDA;
 using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
-using Content.Shared.SS220.Experience;
 using Content.Shared.Station;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -90,16 +89,6 @@ public sealed class OutfitSystem : EntitySystem
             if (!_prototypeManager.TryIndex<RoleLoadoutPrototype>(jobProtoId, out var jobProto))
                 break;
 
-            // SS220-experience-update-begin
-
-            // SS220-experience-update-end
-            var skillRoleAddComp = EnsureComp<RoleExperienceAddComponent>(target);
-            skillRoleAddComp.DefinitionId = job.ExperienceDefinition;
-            // SS220-add-after-equip-to-outfit-set-begin
-            foreach (var jobSpecial in job.Special)
-                jobSpecial.AfterEquip(target);
-            // SS220-add-after-equip-to-outfit-set-end
-
             // Don't require a player, so this works on Urists
             profile ??= EntityManager.TryGetComponent<HumanoidAppearanceComponent>(target, out var comp)
                 ? HumanoidCharacterProfile.DefaultWithSpecies(comp.Species)
@@ -117,11 +106,6 @@ public sealed class OutfitSystem : EntitySystem
             // Equip the target with the job loadout
             _spawningSystem.EquipRoleLoadout(target, roleLoadout, jobProto);
         }
-
-        // SS220-add-experience-init-event-post-spawn
-        var recalculateEv = new RecalculateEntityExperience();
-        RaiseLocalEvent(target, ref recalculateEv);
-        // SS220-add-experience-init-event-post-spawn
 
         return true;
     }

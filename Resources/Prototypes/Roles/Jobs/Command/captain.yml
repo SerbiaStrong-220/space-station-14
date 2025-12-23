@@ -31,7 +31,6 @@
     #SS220 requirement end
   weight: 20
   startingGear: CaptainGear
-  experienceDefinition: CaptainRoleExperience # SS220-experience
   icon: "JobIconCaptain"
   joinNotifyCrew: true
   supervisors: job-supervisors-centcom
@@ -45,6 +44,7 @@
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff
+      - type: DefibrillatorSkill #SS220 LimitationRevive
 
 - type: startingGear
   id: CaptainGear

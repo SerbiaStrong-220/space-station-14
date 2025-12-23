@@ -38,7 +38,6 @@
   description: job-description-centcomoff
   setPreference: false
   startingGear: CentcomOperativeBSOGear
-  experienceDefinition: BlueShieldRoleExperience
   playTimeTracker: JobCentcommOperativeBSO
   icon: "JobIconNanotrasen"
   supervisors: job-supervisors-centcom
@@ -49,6 +48,10 @@
   access:
   - CentralCommandBSO
   - CentralCommand
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: DefibrillatorSkill
 
 - type: startingGear
   id: CentcomOperativeBSOGear

@@ -4,11 +4,8 @@ using Content.Shared.Construction.Prototypes;
 using Content.Shared.Construction.Steps;
 using Content.Shared.Examine;
 using Content.Shared.Popups;
-using Content.Shared.SS220.Experience;
-using Content.Shared.SS220.Experience.Systems;
 using Content.Shared.Verbs;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Server.Construction
@@ -16,9 +13,6 @@ namespace Content.Server.Construction
     public sealed partial class ConstructionSystem
     {
         [Dependency] private readonly SharedPopupSystem _popup = default!;
-        [Dependency] private readonly ExperienceSystem _experience = default!; // SS220-experience-skill
-
-        private readonly ProtoId<SkillPrototype> _skillToSeeInstruction = "ConstructionTrained"; // SS220-experience-skill
 
         private readonly Dictionary<ConstructionPrototype, ConstructionGuide> _guideCache = new();
 
@@ -85,10 +79,6 @@ namespace Content.Server.Construction
 
         private void HandleConstructionExamined(EntityUid uid, ConstructionComponent component, ExaminedEvent args)
         {
-            // SS220-construction-skill-add
-            if (!_experience.HaveSkill(uid, _skillToSeeInstruction))
-                return;
-            // SS220-construction-skill-end
             using (args.PushGroup(nameof(ConstructionComponent)))
             {
                 if (GetTargetNode(uid, component) is {} target)
