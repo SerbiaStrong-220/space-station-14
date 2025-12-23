@@ -16,11 +16,11 @@ public abstract partial class GameRuleSystem<T> : EntitySystem where T : ICompon
     [Dependency] protected readonly IChatManager ChatManager = default!;
     [Dependency] protected readonly GameTicker GameTicker = default!;
     [Dependency] protected readonly IGameTiming Timing = default!;
+    [Dependency] protected readonly IPlayerManager PlayerManager = default!; // SS220-make-roundstart-from-total-player
 
     // Not protected, just to be used in utility methods
     [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
     [Dependency] private readonly MapSystem _map = default!;
-    [Dependency] private readonly IPlayerManager _player = default!; // SS220-make-roundstart-from-total-player
 
     public override void Initialize()
     {
@@ -38,7 +38,7 @@ public abstract partial class GameRuleSystem<T> : EntitySystem where T : ICompon
         if (args.Forced || args.Cancelled)
             return;
 
-        var allPlayerCount = _player.Sessions.Count(session => session.Status is not SessionStatus.Disconnected or SessionStatus.Zombie); // SS220-make-antag-selection-based-on-all-players
+        var allPlayerCount = PlayerManager.Sessions.Count(session => session.Status is not SessionStatus.Disconnected or SessionStatus.Zombie); // SS220-make-antag-selection-based-on-all-players
 
         var query = QueryAllRules();
         while (query.MoveNext(out var uid, out _, out var gameRule))
