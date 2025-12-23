@@ -16,6 +16,7 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Shared.SS220.Containers; //SS220-cryo-mobs-fix
 using Content.Server.Polymorph.Systems; //SS220-cryo-mobs-fix
 using Content.Shared.Body.Systems; //SS220-cryo-mobs-fix
+using Content.Server.SS220.MindExtension;
 
 namespace Content.Server.Mind;
 
@@ -28,6 +29,7 @@ public sealed class MindSystem : SharedMindSystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
     [Dependency] private readonly SharedContainerSystemExtensions _containerSystemExtensions = default!; //SS220-Cryo-mobs-fix
+    [Dependency] private readonly MindExtensionSystem _mindExtension = default!; //SS220-mind-extension
 
     public override void Initialize()
     {
@@ -133,11 +135,15 @@ public sealed class MindSystem : SharedMindSystem
             return;
         }
 
+        var oldEntity = mind.OwnedEntity; //SS220-mind-extension
+
         if (HasComp<VisitingMindComponent>(entity))
         {
             Log.Error($"Attempted to visit an entity that already has a visiting mind. Entity: {ToPrettyString(entity)}");
             return;
         }
+
+        _mindExtension.TransferExtension(oldEntity, entity, mind.UserId); //SS220-mind-extension
 
         mind.VisitingEntity = entity;
 
@@ -231,6 +237,9 @@ public sealed class MindSystem : SharedMindSystem
         }
 
         var oldEntity = mind.OwnedEntity;
+
+        _mindExtension.TransferExtension(oldEntity, entity, mind.UserId); //SS220-mind-extension
+
         if (TryComp(oldEntity, out MindContainerComponent? oldContainer))
         {
             oldContainer.Mind = null;

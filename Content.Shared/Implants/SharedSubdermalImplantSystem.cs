@@ -6,7 +6,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Mobs;
-using Content.Shared.SS220.IgnoreLightVision;
+using Content.Shared.SS220.IgnoreLightVision.Components;
 using Content.Shared.SS220.MindSlave;
 using Content.Shared.Tag;
 using Robust.Shared.Containers;

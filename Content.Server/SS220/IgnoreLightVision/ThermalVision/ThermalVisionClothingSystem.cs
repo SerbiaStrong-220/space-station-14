@@ -2,7 +2,7 @@
 
 using Content.Server.SS220.Thermals;
 using Content.Shared.Inventory.Events;
-using Content.Shared.SS220.IgnoreLightVision;
+using Content.Shared.SS220.IgnoreLightVision.Components;
 
 namespace Content.Server.SS220.IgnoreLightVision.ThermalVision;
 

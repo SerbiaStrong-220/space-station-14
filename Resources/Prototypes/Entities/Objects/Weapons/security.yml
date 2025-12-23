@@ -14,6 +14,11 @@
     layers:
     - state: stunbaton_off
       map: [ "enum.ToggleableVisuals.Layer" ]
+    # SS220-add-christmas-baton-begin
+    - state: christmasbaton_off
+      map: [ "christmas" ]
+      visible: False      
+    # SS220-add-christmas-baton-end
   - type: Stunbaton
     energyPerUse: 50
   - type: ItemToggle
@@ -95,12 +100,26 @@
   - type: DisarmMalus
     malus: 0.225
   - type: Appearance
+  # SS220-add-christmas-baton-begin
+  - type: HolidayVisuals
+    holidays:
+      festive:
+      - FestiveSeason
+  # SS220-add-christmas-baton-end
   - type: GenericVisualizer
     visuals:
      enum.ToggleableVisuals.Enabled:
         enum.ToggleableVisuals.Layer:
           True: {state: stunbaton_on}
           False: {state: stunbaton_off}
+     # SS220-add-christmas-baton-begin
+        christmas:
+          True: {state: christmasbaton_on}
+          False: {state: christmasbaton_off}
+     enum.HolidayVisuals.Holiday:
+        christmas:
+          festive: { visible: true }
+     # SS220-add-christmas-baton-end
   - type: StaticPrice
     price: 80
   - type: Riggable

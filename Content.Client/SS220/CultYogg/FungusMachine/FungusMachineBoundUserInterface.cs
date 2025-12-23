@@ -7,20 +7,16 @@ using Robust.Client.UserInterface;
 
 namespace Content.Client.SS220.CultYogg.FungusMachine;
 
-public sealed class FungusMachineBoundUserInterface : BoundUserInterface
+public sealed class FungusMachineBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     [ViewVariables]
     private FungusMachineMenu? _menu;
 
     [ViewVariables]
-    private List<FungusMachineInventoryEntry> _cachedInventory = new();
+    private List<FungusMachineInventoryEntry> _cachedInventory = [];
 
     [ViewVariables]
-    private List<int> _cachedFilteredIndex = new();
-
-    public FungusMachineBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
-    {
-    }
+    private List<int> _cachedFilteredIndex = [];
 
     protected override void Open()
     {
