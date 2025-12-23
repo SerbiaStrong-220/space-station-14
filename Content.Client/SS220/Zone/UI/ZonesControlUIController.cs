@@ -2,12 +2,12 @@
 using Content.Client.Administration.Managers;
 using Content.Client.SS220.Overlays;
 using Content.Shared.Administration;
-using Content.Shared.SS220.Zones.Components;
+using Content.Shared.SS220.Zone.Components;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
 using Robust.Client.UserInterface.Controls;
 
-namespace Content.Client.SS220.Zones.UI;
+namespace Content.Client.SS220.Zone.UI;
 
 public sealed class ZonesControlUIController : UIController
 {

@@ -4,7 +4,7 @@ using Content.Client.Gameplay;
 using Content.Client.Markers;
 using Content.Client.Sandbox;
 using Content.Client.SS220.MapEditor;
-using Content.Client.SS220.Zones.UI;
+using Content.Client.SS220.Zone.UI;
 using Content.Client.SubFloor;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.DecalPlacer;

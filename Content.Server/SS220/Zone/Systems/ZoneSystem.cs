@@ -2,9 +2,7 @@
 using Content.Shared.Administration;
 using Content.Server.Administration.Managers;
 using Content.Shared.Prototypes;
-using Content.Shared.SS220.Zones;
-using Content.Shared.SS220.Zones.Components;
-using Content.Shared.SS220.Zones.Systems;
+using Content.Shared.SS220.Zone.Components;
 using Robust.Server.GameObjects;
 using Robust.Server.GameStates;
 using Robust.Server.Player;
@@ -14,11 +12,12 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using System.Linq;
 using System.Numerics;
-using Content.Shared.CCVar;
+using Content.Shared.SS220.Zone.Systems;
+using Content.Shared.SS220.Zone;
 
-namespace Content.Server.SS220.Zones.Systems;
+namespace Content.Server.SS220.Zone.Systems;
 
-public sealed partial class ZonesSystem : SharedZonesSystem
+public sealed partial class ZoneSystem : SharedZoneSystem
 {
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
@@ -34,7 +33,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
     {
         base.Initialize();
 
-        _cfg.OnValueChanged(CCVars.NetMaxUpdateRange, value => _pvsRange = value, true);
+        _cfg.OnValueChanged(Robust.Shared.CVars.NetMaxUpdateRange, value => _pvsRange = value, true);
 
         SubscribeNetworkEvent<CreateZoneRequestMessage>(OnCreateZoneRequest);
         SubscribeNetworkEvent<ChangeZoneRequestMessage>(OnChangeZoneRequest);
@@ -98,10 +97,10 @@ public sealed partial class ZonesSystem : SharedZonesSystem
             TryChangeZoneProto(ref zone, newProtoId);
 
         if (msg.Parent is { } parent)
-            SetZoneParent(zone, GetEntity(parent), recalculate: false);
+            SetZoneParent(zone, GetEntity(parent), updateCache: false);
 
         if (msg.Area is { } area)
-            SetZoneArea(zone, area, recalculate: false);
+            SetZoneArea(zone, area, optimize: false, updateCache: false);
 
         if (msg.Name is { } name)
             SetZoneName(zone, name);
@@ -109,7 +108,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         if (msg.Color is { } color)
             SetZoneColor(zone, color);
 
-        RecalculateZoneArea(zone);
+        OptimizeZoneArea(zone, updateCache: true);
     }
 
     private void OnDeleteZoneRequest(DeleteZoneRequestMessage msg, EntitySessionEventArgs args)
@@ -156,8 +155,8 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         var xform = Transform(uid);
         xform.GridTraversal = false;
 
-        SetZoneParent(zone, parent, recalculate: false);
-        SetZoneArea(zone, area, recalculate: false);
+        SetZoneParent(zone, parent, updateCache: false);
+        SetZoneArea(zone, area, optimize: false, updateCache: false);
         SetZoneName(zone, name);
 
         if (color != null)
@@ -165,7 +164,7 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 
         _metaData.SetEntityName(uid, name);
 
-        RecalculateZoneArea(zone);
+        OptimizeZoneArea(zone, updateCache: true);
         Dirty(uid, zoneComp);
 
         UpdatePvsOverride(zone);
@@ -179,14 +178,15 @@ public sealed partial class ZonesSystem : SharedZonesSystem
     }
 
     /// <summary>
-    /// Recalculates the area boxes of the zone, removing their intersections and, if possible, merging them
+    /// Optimizes the area boxes of the zone, removing their intersections and, if possible, merging them
     /// </summary>
-    public void RecalculateZoneArea(Entity<ZoneComponent> ent)
+    public void OptimizeZoneArea(Entity<ZoneComponent> ent, bool updateCache = true)
     {
         var area = ent.Comp.Area.ToList();
+        ent.Comp.Area = OptimizeArea(area);
 
-        var parent = Transform(ent).ParentUid;
-        ent.Comp.Area = RecalculateArea(area, parent);
+        if (updateCache)
+            UpdateZoneCache(ent);
 
         Dirty(ent);
     }
@@ -212,26 +212,29 @@ public sealed partial class ZonesSystem : SharedZonesSystem
         return true;
     }
 
-    public bool SetZoneParent(Entity<ZoneComponent> ent, EntityUid parent, bool recalculate = true)
+    public bool SetZoneParent(Entity<ZoneComponent> ent, EntityUid parent, bool updateCache = true)
     {
         if (!IsValidParent(parent))
             return false;
 
         _transform.SetCoordinates((ent, Transform(ent), MetaData(ent)), new EntityCoordinates(parent, Vector2.Zero), Angle.Zero);
 
-        if (recalculate)
-            RecalculateZoneArea(ent);
+        if (updateCache)
+            UpdateZoneCache(ent);
 
         Dirty(ent);
         return true;
     }
 
-    public void SetZoneArea(Entity<ZoneComponent> ent, List<Box2> area, bool recalculate = true)
+    public void SetZoneArea(Entity<ZoneComponent> ent, List<Box2> area, bool optimize = true, bool updateCache = true)
     {
         ent.Comp.Area = area;
 
-        if (recalculate)
-            RecalculateZoneArea(ent);
+        if (optimize)
+            OptimizeZoneArea(ent, updateCache: false);
+
+        if (updateCache)
+            UpdateZoneCache(ent);
 
         Dirty(ent);
     }

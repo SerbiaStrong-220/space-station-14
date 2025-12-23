@@ -1,19 +1,19 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Server.Administration;
-using Content.Server.SS220.Zones.Systems;
+using Content.Server.SS220.Zone.Systems;
 using Content.Shared.Administration;
-using Content.Shared.SS220.Zones.Components;
-using Content.Shared.SS220.Zones.Systems;
+using Content.Shared.SS220.Zone.Systems;
+using Content.Shared.SS220.Zone.Components;
 using Robust.Shared.Console;
 
-namespace Content.Server.SS220.Zones.Commands;
+namespace Content.Server.SS220.Zone.Commands;
 
 [AdminCommand(AdminFlags.Mapping)]
 public sealed class DeleteZoneCommand : LocalizedCommands
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
 
-    public override string Command => $"{SharedZonesSystem.ZoneCommandsPrefix}delete";
+    public override string Command => $"{SharedZoneSystem.ZoneCommandsPrefix}delete";
 
     public override string Description => Loc.GetString("cmd-delete-zone-desc");
 
@@ -45,7 +45,7 @@ public sealed class DeleteZoneCommand : LocalizedCommands
             return;
         }
 
-        var zoneSys = _entityManager.System<ZonesSystem>();
+        var zoneSys = _entityManager.System<ZoneSystem>();
         zoneSys.DeleteZone((zoneUid.Value, zoneComp));
         shell.WriteLine(Loc.GetString("cmd-delete-zone-success", ("zone", _entityManager.ToPrettyString(zoneUid))));
     }
@@ -55,7 +55,7 @@ public sealed class DeleteZoneCommand : LocalizedCommands
         var result = CompletionResult.Empty;
         if (args.Length == 1)
             result = CompletionResult.FromHintOptions(
-                _entityManager.System<ZonesSystem>().GetZonesListCompletionOption(),
+                _entityManager.System<ZoneSystem>().GetZonesListCompletionOption(),
                 Loc.GetString("cmd-delete-zone-hint-1"));
 
         return result;

@@ -1,5 +1,5 @@
 <DefaultWindow xmlns="https://spacestation14.io"
-               xmlns:zc="clr-namespace:Content.Client.SS220.Zones.UI"
+               xmlns:zc="clr-namespace:Content.Client.SS220.Zone.UI"
                Title="{Loc zones-control-window-name}"
                MinSize="600 350">
     <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True">

@@ -1,16 +1,17 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.SS220.Maths;
-using Content.Shared.SS220.Zones.Components;
+using Content.Shared.SS220.Zone.Components;
 using Robust.Shared.Console;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using System.Linq;
+using System.Numerics;
 
-namespace Content.Shared.SS220.Zones.Systems;
+namespace Content.Shared.SS220.Zone.Systems;
 
-public abstract partial class SharedZonesSystem : EntitySystem
+public abstract partial class SharedZoneSystem : EntitySystem
 {
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -18,13 +19,18 @@ public abstract partial class SharedZonesSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly INetManager _net = default!;
 
-    public const string ZoneCommandsPrefix = "zones:";
+    public const string ZoneCommandsPrefix = "zone:";
 
     public const string DefaultZoneProtoId = "ZoneDefault";
 
-    public static readonly ProtoId<EntityCategoryPrototype> ZonesCategoryId = "Zones";
+    public static readonly ProtoId<EntityCategoryPrototype> ZoneCategoryId = "Zone";
 
     protected ZonesRelationUpdateData RelationUpdateData = new();
+
+    // parent -> cache pos -> zone box
+    private readonly Dictionary<EntityUid, SortedList<ZoneCachePosition, List<ZoneCacheData.BoxData>>> _parentedZoneCache = [];
+
+    private readonly Dictionary<Entity<ZoneComponent>, ZoneCacheData> _zoneCache = [];
 
     public override void Initialize()
     {
@@ -46,12 +52,15 @@ public abstract partial class SharedZonesSystem : EntitySystem
 
     protected virtual void OnZoneMapInit(Entity<ZoneComponent> entity, ref MapInitEvent args)
     {
+        UpdateZoneCache(entity);
     }
 
     protected virtual void OnZoneShutdown(Entity<ZoneComponent> entity, ref ComponentShutdown args)
     {
         foreach (var netUid in entity.Comp.LocatedEntities)
             TryHandleLeaveZone(entity, GetEntity(netUid));
+
+        RemoveZoneCache(entity);
     }
 
     protected virtual void OnInZoneMapInit(Entity<InZoneComponent> entity, ref MapInitEvent args)
@@ -142,10 +151,10 @@ public abstract partial class SharedZonesSystem : EntitySystem
     /// <summary>
     /// Gets all zones containing the <paramref name="uid"/>
     /// </summary>
-    /// <param name="useCache">Should the result be used from the cache, or should be calculated</param>
-    public IEnumerable<Entity<ZoneComponent>> GetZonesByEntity(EntityUid uid, bool useCache = true)
+    /// <param name="useComponentCache">Should the result be used from the component cache, or should be calculated</param>
+    public IEnumerable<Entity<ZoneComponent>> GetZonesByEntity(EntityUid uid, bool useComponentCache = true)
     {
-        if (useCache)
+        if (useComponentCache)
         {
             if (!TryComp<InZoneComponent>(uid, out var inZone))
                 yield break;
@@ -162,7 +171,8 @@ public abstract partial class SharedZonesSystem : EntitySystem
             yield break;
         }
 
-        foreach (var zone in GetZonesByPoint(_transform.GetMapCoordinates(uid)))
+        var xform = Transform(uid);
+        foreach (var zone in GetZonesByPoint(xform.Coordinates))
             yield return zone;
     }
 
@@ -197,11 +207,11 @@ public abstract partial class SharedZonesSystem : EntitySystem
     }
 
     /// <summary>
-    /// Enumerates all <see cref="EntityPrototype"/> with the category <see cref="ZonesCategoryId"/>
+    /// Enumerates all <see cref="EntityPrototype"/> with the category <see cref="ZoneCategoryId"/>
     /// </summary>
     public IEnumerable<EntityPrototype> EnumerateZonePrototypes()
     {
-        return _prototype.Categories[ZonesCategoryId];
+        return _prototype.Categories[ZoneCategoryId];
     }
 
     /// <summary>
@@ -245,11 +255,8 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return Box2Helper.AttachToGrid(area, gridSize);
     }
 
-    public List<Box2> RecalculateArea(List<Box2> area, EntityUid parent, bool attachToGrid = false)
+    public static List<Box2> OptimizeArea(List<Box2> area)
     {
-        if (attachToGrid)
-            area = AttachToGrid(area, parent);
-
         area = Box2Helper.GetNonOverlappingBoxes(area);
         area = Box2Helper.UnionInEqualSizedBoxes(area);
 
@@ -345,7 +352,7 @@ public abstract partial class SharedZonesSystem : EntitySystem
         var map = _transform.GetMap(uid);
         if (_map.IsInitialized(map))
         {
-            foreach (var zone in GetZonesByEntity(uid, useCache: false))
+            foreach (var zone in GetZonesByEntity(uid, useComponentCache: false))
             {
                 TryHandleEnterZone(zone, uid);
                 toLeave.Remove(GetNetEntity(zone));
@@ -405,6 +412,19 @@ public abstract partial class SharedZonesSystem : EntitySystem
         return true;
     }
 
+    public IEnumerable<Entity<ZoneComponent>> GetZonesByPoint(EntityCoordinates point)
+    {
+        foreach (var cachedBox in GetCachedBoxesAtPosition(point.EntityId, GetCachePosition(point.Position)))
+        {
+            // Since the positions in the cache are abstract, not true, it is necessary to check whether the point is in the zone box
+            if (!cachedBox.Box.Contains(point.Position))
+                continue;
+
+            yield return cachedBox.Owner.Zone;
+        }
+    }
+
+    #region Relation update API
     protected struct ZonesRelationUpdateData()
     {
         public Dictionary<EntityUid, HashSet<object>> Entities = [];
@@ -498,9 +518,202 @@ public abstract partial class SharedZonesSystem : EntitySystem
                     yield return uid;
                 }
             }
-
         }
     }
+    #endregion
+
+    #region Cache API
+    public void UpdateZoneCache(Entity<ZoneComponent> zone)
+    {
+        RemoveZoneCache(zone);
+
+        if (Deleted(zone) || !Exists(zone))
+            return;
+
+        if (zone.Comp.Area.Count <= 0)
+            return;
+
+        var xform = Transform(zone);
+
+        var parent = xform.ParentUid;
+        if (!_parentedZoneCache.TryGetValue(parent, out var posBoxesPairs))
+        {
+            posBoxesPairs = [];
+            _parentedZoneCache.Add(parent, posBoxesPairs);
+        }
+
+        var data = new ZoneCacheData(zone, parent);
+        foreach (var box in zone.Comp.Area)
+        {
+            var boxData = new ZoneCacheData.BoxData(data, box);
+            foreach (var pos in GetCachePositions(box))
+            {
+                data.CachedArea.Add(pos, boxData);
+                if (!posBoxesPairs.TryGetValue(pos, out var cachedBoxes))
+                {
+                    cachedBoxes = [];
+                    posBoxesPairs.Add(pos, cachedBoxes);
+                }
+
+                cachedBoxes.Add(boxData);
+            }
+        }
+
+        _zoneCache[zone] = data;
+    }
+
+    public void RemoveZoneCache(Entity<ZoneComponent> zone)
+    {
+        if (!_zoneCache.TryGetValue(zone, out var cachedZone))
+            return;
+
+        var parent = cachedZone.Parent;
+        if (!_parentedZoneCache.TryGetValue(parent, out var posBoxesPairs))
+        {
+            _zoneCache.Remove(zone);
+            return;
+        }
+
+        foreach (var (pos, boxCache) in cachedZone.CachedArea)
+        {
+            if (!posBoxesPairs.TryGetValue(pos, out var cachedBoxes))
+                continue;
+
+            cachedBoxes.Remove(boxCache);
+            if (cachedBoxes.Count <= 0)
+                posBoxesPairs.Remove(pos);
+        }
+
+        if (posBoxesPairs.Count <= 0)
+            _parentedZoneCache.Remove(parent);
+
+        _zoneCache.Remove(zone);
+        cachedZone.Dispose();
+    }
+
+    private List<ZoneCacheData.BoxData> GetCachedBoxesAtPosition(EntityUid parent, ZoneCachePosition cachePos)
+    {
+        if (!_parentedZoneCache.TryGetValue(parent, out var posBoxesPairs))
+            return [];
+
+        if (!posBoxesPairs.TryGetValue(cachePos, out var cachedBoxes))
+            return [];
+
+        return cachedBoxes;
+    }
+
+    private static IEnumerable<ZoneCachePosition> GetCachePositions(Box2 box)
+    {
+        var start = GetCachePosition(box.BottomLeft);
+        var end = GetCachePosition(box.TopRight);
+
+        for (var y = start.Y; y < end.Y; y++)
+        {
+            for (var x = start.X; x < end.X; x++)
+            {
+                yield return new ZoneCachePosition(x, y);
+            }
+        }
+    }
+
+    private static ZoneCachePosition GetCachePosition(Vector2 point)
+    {
+        if (IsWhole(point.X))
+            point.X -= 1;
+
+        if (IsWhole(point.Y))
+            point.Y -= 1;
+
+        return new ZoneCachePosition((Vector2i)point);
+
+        static bool IsWhole(float value)
+        {
+            return Math.Abs(value - (int)value) < float.Epsilon;
+        }
+    }
+
+    private sealed class ZoneCacheData(Entity<ZoneComponent> zone, EntityUid parent) : IDisposable
+    {
+        public readonly Entity<ZoneComponent> Zone = zone;
+
+        public readonly EntityUid Parent = parent;
+
+        public Dictionary<ZoneCachePosition, BoxData> CachedArea = [];
+
+        public void Dispose()
+        {
+            CachedArea.Clear();
+        }
+
+        public sealed class BoxData(ZoneCacheData owner, Box2 box)
+        {
+            public readonly ZoneCacheData Owner = owner;
+
+            public readonly Box2 Box = box;
+        }
+    }
+
+    private struct ZoneCachePosition(int x, int y) : IComparable, IEquatable<ZoneCachePosition>
+    {
+        public int X = x;
+
+        public int Y = y;
+
+        public ZoneCachePosition(Vector2i vector) : this(vector.X, vector.Y) { }
+
+        public readonly int CompareTo(object? obj)
+        {
+            if (obj is not ZoneCachePosition other)
+                return 0;
+
+            var xCompare = X.CompareTo(other.X);
+            if (xCompare != 0)
+                return xCompare;
+
+            return Y.CompareTo(other.Y);
+        }
+
+        public readonly bool Equals(ZoneCachePosition other)
+        {
+            return other.X == X && other.Y == Y;
+        }
+
+        public override readonly bool Equals(object? obj)
+        {
+            if (obj is not ZoneCachePosition other)
+                return false;
+
+            return Equals(other);
+        }
+
+        public override readonly int GetHashCode()
+        {
+            return HashCode.Combine(X, Y);
+        }
+
+        public static bool Equals(ZoneCachePosition? left, ZoneCachePosition? right)
+        {
+            if (left == null)
+                return right == null;
+
+            return Equals(left, right);
+        }
+
+        public static bool operator ==(ZoneCachePosition? left, ZoneCachePosition? right)
+        {
+            return Equals(left, right);
+        }
+
+        public static bool operator !=(ZoneCachePosition? left, ZoneCachePosition? right)
+        {
+            return !Equals(left, right);
+        }
+
+        public static implicit operator ZoneCachePosition((int X, int Y) tulpe) => new(tulpe.X, tulpe.Y);
+
+        public static implicit operator ZoneCachePosition(Vector2i vector) => new(vector);
+    }
+    #endregion
 }
 
 /// <summary>

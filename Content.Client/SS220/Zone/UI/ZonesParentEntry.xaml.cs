@@ -6,7 +6,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using System.Linq;
 
-namespace Content.Client.SS220.Zones.UI;
+namespace Content.Client.SS220.Zone.UI;
 
 [GenerateTypedNameReferences]
 public sealed partial class ZonesParentEntry : BoxContainer

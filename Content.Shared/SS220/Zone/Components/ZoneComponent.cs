@@ -1,12 +1,12 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Shared.SS220.Zones.Systems;
+using Content.Shared.SS220.Zone.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.SS220.Zones.Components;
+namespace Content.Shared.SS220.Zone.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(raiseAfterAutoHandleState: true)]
-[Access(typeof(SharedZonesSystem), Other = AccessPermissions.ReadExecute)]
+[Access(typeof(SharedZoneSystem), Other = AccessPermissions.ReadExecute)]
 [EntityCategory("Zones")]
 public sealed partial class ZoneComponent : Component
 {

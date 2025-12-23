@@ -1,10 +1,10 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.IntegrationTests.Pair;
 using Content.Server.Database;
-using Content.Server.SS220.Zones.Systems;
-using Content.Shared.SS220.Zones;
-using Content.Shared.SS220.Zones.Components;
-using Content.Shared.SS220.Zones.Systems;
+using Content.Server.SS220.Zone.Systems;
+using Content.Shared.SS220.Zone.Systems;
+using Content.Shared.SS220.Zone;
+using Content.Shared.SS220.Zone.Components;
 using Robust.Server.GameObjects;
 using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.GameObjects;
@@ -19,7 +19,7 @@ using System.Numerics;
 namespace Content.IntegrationTests.SS220.Tests.Zones;
 
 [TestFixture]
-[TestOf(typeof(SharedZonesSystem))]
+[TestOf(typeof(SharedZoneSystem))]
 public sealed class ZoneTests
 {
     [TestPrototypes]
@@ -61,7 +61,7 @@ public sealed class ZoneTests
         var entMng = server.ResolveDependency<IEntityManager>();
         var mapMng = server.ResolveDependency<IMapManager>();
         var mapSys = entMng.System<SharedMapSystem>();
-        var zoneSys = entMng.System<ZonesSystem>();
+        var zoneSys = entMng.System<ZoneSystem>();
 
         Entity<MapGridComponent> grid = default;
         await server.WaitPost(() =>
@@ -105,7 +105,7 @@ public sealed class ZoneTests
             zoneParams.AttachToGrid = true;
             zoneParams.CutSpaceOption = ZoneParams.CutSpaceOptions.Dinamic;
 
-            var shouldRecreate = SharedZonesSystem.NeedRecreate(zone.Comp.ZoneParams, zoneParams);
+            var shouldRecreate = SharedZoneSystem.NeedRecreate(zone.Comp.ZoneParams, zoneParams);
             zoneSys.ChangeZone(zone, zoneParams);
 
             if (shouldRecreate)
@@ -176,7 +176,7 @@ public sealed class ZoneTests
         var mapMng = server.ResolveDependency<IMapManager>();
         var mapLoader = entMng.System<MapLoaderSystem>();
         var mapSys = entMng.System<SharedMapSystem>();
-        var zoneSys = entMng.System<ZonesSystem>();
+        var zoneSys = entMng.System<ZoneSystem>();
 
         ZoneParams zoneParams = default;
         await server.WaitPost(() =>
@@ -227,7 +227,7 @@ public sealed class ZoneTests
         var map = await pair.CreateTestMap();
 
         var entMng = server.ResolveDependency<IEntityManager>();
-        var zoneSys = entMng.System<ZonesSystem>();
+        var zoneSys = entMng.System<ZoneSystem>();
         var xForm = entMng.System<TransformSystem>();
 
         var container = map.MapUid;

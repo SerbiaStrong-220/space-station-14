@@ -1,14 +1,14 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Client.SS220.Zones.UI;
-using Content.Shared.SS220.Zones;
-using Content.Shared.SS220.Zones.Components;
-using Content.Shared.SS220.Zones.Systems;
+using Content.Client.SS220.Zone.UI;
+using Content.Shared.SS220.Zone.Systems;
+using Content.Shared.SS220.Zone;
+using Content.Shared.SS220.Zone.Components;
 using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
 
-namespace Content.Client.SS220.Zones.Systems;
+namespace Content.Client.SS220.Zone.Systems;
 
-public sealed partial class ZonesSystem : SharedZonesSystem
+public sealed partial class ZoneSystem : SharedZoneSystem
 {
     [Dependency] private readonly IUserInterfaceManager _ui = default!;
 
@@ -31,6 +31,8 @@ public sealed partial class ZonesSystem : SharedZonesSystem
 
     private void OnAfterAutoHandleState(Entity<ZoneComponent> ent, ref AfterAutoHandleStateEvent args)
     {
+        UpdateZoneCache(ent);
+
         _controller.RefreshWindow();
     }
 
