@@ -9,8 +9,6 @@ using Content.Shared.IdentityManagement.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.SS220.CultYogg.Corruption;
-using Content.Shared.Whitelist;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.CultYogg.Cultists;
@@ -24,7 +22,6 @@ public abstract class SharedCultYoggSystem : EntitySystem
     [Dependency] private readonly SharedCultYoggCorruptedSystem _cultYoggCorruptedSystem = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {
