@@ -49,15 +49,23 @@
       types:
         Blunt: 7
     bluntStaminaDamageFactor: 2.0
-    angle: 60
+    angle: 0 #SS220
     animation: WeaponArcThrust
   - type: StaminaDamageOnHit
-    damage: 55 #SS220-Stunbatom-rework
+    damage: 25 #SS220-Stunbatom-rework
+    lightAttackDamageMultiplier: 2 #SS220
     sound: /Audio/Weapons/egloves.ogg
   - type: StaminaDamageOnCollide
     damage: 55 #SS220-Stunbatom-rework
     sound: /Audio/Weapons/egloves.ogg
     # SS220-Stunbaton-rework throwing angles
+  - type: DelayedKnockdownOnHit
+    delay: 3
+    duration: 2
+    drop: true
+    refresh: true
+    autoStand: true
+    checkUseDelay: true
   - type: Ensnaring # SS220 stunbaton pacifism fix
   - type: ThrowingAngle
     angle: 225
@@ -84,6 +92,9 @@
     maxCharge: 1000
     startingCharge: 1000
   - type: UseDelay
+    delays:
+      stunbaton:
+        length: 3
   - type: Item
     heldPrefix: off
     size: Normal
