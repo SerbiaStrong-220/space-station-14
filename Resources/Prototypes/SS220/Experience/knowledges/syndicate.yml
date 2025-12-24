@@ -7,3 +7,5 @@
   id: NuclearOperativeKnowledge
   knowledgeName: nuclear-operative-knowledge-name
   knowledgeDescription: nuclear-operative-knowledge-description
+  additionalKnowledges:
+  - SyndicateAgentKnowledge

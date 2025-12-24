@@ -132,6 +132,10 @@
       roleLoadout:
       - RoleSurvivalNukie
       components:
+      # SS220-experience-update-begin
+      - type: RoleExperienceAdd
+        definitionId: SyndicateCommanderRoleExperience
+      # SS220-experience-update-end
       - type: NukeOperative
       - type: RandomMetadata
         nameSegments:
@@ -153,6 +157,10 @@
       roleLoadout:
       - RoleSurvivalNukie
       components:
+      # SS220-experience-update-begin
+      - type: RoleExperienceAdd
+        definitionId: SyndicateMedicRoleExperience
+      # SS220-experience-update-end
       - type: NukeOperative
       - type: RandomMetadata
         nameSegments:
@@ -173,6 +181,10 @@
       roleLoadout:
       - RoleSurvivalNukie
       components:
+      # SS220-experience-update-begin
+      - type: RoleExperienceAdd
+        definitionId: SyndicateOperativeRoleExperience
+      # SS220-experience-update-end
       - type: NukeOperative
       - type: RandomMetadata
         nameSegments:

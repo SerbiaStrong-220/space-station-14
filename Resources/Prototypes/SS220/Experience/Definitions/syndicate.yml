@@ -14,3 +14,54 @@
   knowledges:
   - SyndicateAgentKnowledge
   addSublevelPoints: 10
+
+- type: experienceDefinition
+  id: SyndicateCommanderRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    CombatTraining:
+      level: 4
+    Construction:
+      level: 3
+    Medicine:
+      level: 3
+    PhysicalTraining:
+      level: 3
+  knowledges:
+  - NuclearOperativeKnowledge
+  addSublevelPoints: 5
+
+- type: experienceDefinition
+  id: SyndicateMedicRoleExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    CombatTraining:
+      level: 2
+    Construction:
+      level: 2
+    Medicine:
+      level: 4
+    PhysicalTraining:
+      level: 3
+  knowledges:
+  - NuclearOperativeKnowledge
+  addSublevelPoints: 5
+
+- type: experienceDefinition
+  id: SyndicateOperativeRoleExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    CombatTraining:
+      level: 2
+    Construction:
+      level: 2
+    Medicine:
+      level: 2
+    PhysicalTraining:
+      level: 2
+  knowledges:
+  - NuclearOperativeKnowledge
+  addSublevelPoints: 15
