@@ -102,7 +102,7 @@
   components:
   - type: FlavorProfile
     flavors:
-      - olivier
+    - olivier
   - type: Sprite
     sprite: SS220/Objects/Consumable/Food/bowl.rsi
     layers:
