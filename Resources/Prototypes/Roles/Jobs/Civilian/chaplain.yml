@@ -4,7 +4,6 @@
   description: job-description-chaplain
   playTimeTracker: JobChaplain
   startingGear: ChaplainGear
-  experienceDefinition: ChaplainRoleExperience # SS220-experience
   icon: "JobIconChaplain"
   supervisors: job-supervisors-hop
   access:

@@ -2,7 +2,6 @@
   id: SpiderQueen
   name: job-name-spider-queen
   description: job-description-spider-queen
-  experienceDefinition: NoExperience
   playTimeTracker: AntagSpiderQueen
   requirements:
     - !type:DepartmentTimeRequirement
@@ -15,7 +14,6 @@
   id: SpiderQueenServant
   name: job-name-spider-queen-servant
   description: job-description-spider-queen-servant
-  experienceDefinition: NoExperience
   playTimeTracker: AntagSpiderQueenServant
   requirements:
     - !type:OverallPlaytimeRequirement

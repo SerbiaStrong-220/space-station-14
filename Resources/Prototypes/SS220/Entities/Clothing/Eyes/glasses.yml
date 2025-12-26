@@ -119,12 +119,16 @@
       default: ClothingEyesGlassesThermal
     - type: HiddenDescription
       entries:
-        SyndicateAgentKnowledge: [ hidden-desc-ThermalGoogles-syndicate ]
-        ScienceKnowledge: [ hidden-desc-ThermalGoogles-research ]
-      nameEntries:
-      - [SyndicateAgentKnowledge, null]
-      - [ScienceKnowledge, null]
-      hiddenName: ent-BaseBigBox
+      - label: hidden-desc-ThermalGoogles-syndicate
+        whitelistMindRoles:
+        - TraitorRole
+        - NukeOperative
+      - label: hidden-desc-ThermalGoogles-research
+        jobRequired:
+          - ResearchAssistant
+          - ResearchDirector
+          - Scientist
+          - Borg
 
 
 # Proto for future if we want to add this to RND

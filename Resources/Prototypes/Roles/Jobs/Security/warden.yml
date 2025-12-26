@@ -13,7 +13,6 @@
       - Felinid #SS220-jobbans end
   weight: 5
   startingGear: WardenGear
-  experienceDefinition: WardenRoleExperience # SS220-experience
   icon: "JobIconWarden"
   supervisors: job-supervisors-hos
   canBeAntag: false

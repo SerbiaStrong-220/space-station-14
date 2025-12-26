@@ -4,7 +4,6 @@
   description: job-description-boxer
   playTimeTracker: JobBoxer
   startingGear: BoxerGear
-  experienceDefinition: NoSpecialRoleExperience # SS220-experience
   icon: "JobIconBoxer"
   supervisors: job-supervisors-hop
   access:

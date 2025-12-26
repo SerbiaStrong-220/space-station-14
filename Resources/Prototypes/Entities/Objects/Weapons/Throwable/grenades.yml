@@ -473,16 +473,20 @@
   - type: TimerTriggerVisuals
     primingSound:
       path: /Audio/Effects/hallelujah.ogg
-# SS220-hidden-desc-begin
+# Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-      SyndicateAgentKnowledge: [ corvax-hidden-desc-HolyHandGrenade-syndicate ]
-      ScienceKnowledge: [ corvax-hidden-desc-HolyHandGrenade-research ]
-    nameEntries:
-    - [SyndicateAgentKnowledge, null]
-    - [ScienceKnowledge, null]
-    hiddenName: ent-HolyHandGrenade
-# SS220-hidden-desc-end
+    - label: corvax-hidden-desc-HolyHandGrenade-syndicate
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
+    - label: corvax-hidden-desc-HolyHandGrenade-research
+      jobRequired:
+        - ResearchAssistant
+        - ResearchDirector
+        - Scientist
+        - Borg
+# Corvax-HiddenDesc-End
   - type: StaticPrice
     price: 10000
 
@@ -645,12 +649,14 @@
     maxTileBreak: 0
   - type: HiddenDescription
     entries:
-      SyndicateAgentKnowledge: [ hidden-desc-toy-weapons-explosive-syndicate ]
-      ServiceActorKnowledge: [ hidden-desc-toy-weapons-explosive-clown ]
-    nameEntries:
-    - [SyndicateAgentKnowledge, null]
-    - [ServiceActorKnowledge, null]
-    hiddenName: ent-GrenadeDummy
+      - label: hidden-desc-toy-weapons-explosive-syndicate
+        whitelistMindRoles:
+        - TraitorRole
+        - NukeOperative
+      - label: hidden-desc-toy-weapons-explosive-clown
+        jobRequired:
+          - Clown
+          - Mime
   #ss220 toys end
 
 - type: entity

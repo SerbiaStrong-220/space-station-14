@@ -1584,16 +1584,20 @@
         type: AgentIDCardBoundUserInterface
       enum.ChameleonUiKey.Key:
         type: ChameleonBoundUserInterface
-# SS220-hidden-desc-begin
+# Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-      SyndicateAgentKnowledge: [ corvax-hidden-desc-AgentIDCard-syndicate ]
-      ScienceKnowledge: [ corvax-hidden-desc-AgentIDCard-research ]
-    nameEntries:
-    - [SyndicateAgentKnowledge, null]
-    - [ScienceKnowledge, null]
-    hiddenName: null
-# SS220-hidden-desc-end
+    - label: corvax-hidden-desc-AgentIDCard-syndicate
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
+    - label: corvax-hidden-desc-AgentIDCard-research
+      jobRequired:
+        - ResearchAssistant
+        - ResearchDirector
+        - Scientist
+        - Borg
+# Corvax-HiddenDesc-End
 
 - type: entity
   name: passenger ID card

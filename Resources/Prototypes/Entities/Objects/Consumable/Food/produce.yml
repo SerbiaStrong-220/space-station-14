@@ -1949,16 +1949,18 @@
   - type: Tag
     tags:
     - Fruit # It's in the name
-# SS220-hidden-desc-begin
+# Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-      SyndicateAgentKnowledge: [ corvax-hidden-desc-Gatfruit-syndicate ]
-      BotanyKnowledge: [ corvax-hidden-desc-Gatfruit-botanist ]
-    nameEntries:
-    - [SyndicateAgentKnowledge, null]
-    - [BotanyKnowledge, null]
-    hiddenName: ent-FoodGatfruit
-# SS220-hidden-desc-end
+    - label: corvax-hidden-desc-Gatfruit-syndicate
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
+    - label: corvax-hidden-desc-Gatfruit-botanist
+      jobRequired:
+        - Botanist
+        - Borg
+# Corvax-HiddenDesc-End
   - type: FoodSequenceElement
     entries:
       Taco: Gatfruit

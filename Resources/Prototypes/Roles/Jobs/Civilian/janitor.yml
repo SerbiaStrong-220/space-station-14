@@ -4,7 +4,6 @@
   description: job-description-janitor
   playTimeTracker: JobJanitor
   startingGear: JanitorGear
-  experienceDefinition: JanitorRoleExperience # SS220-experience
   icon: "JobIconJanitor"
   supervisors: job-supervisors-hop
   access:

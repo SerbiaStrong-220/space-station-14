@@ -5,13 +5,16 @@
   playTimeTracker: JobDeathSquadCommander
   setPreference: false
   startingGear: DeathSquadLeaderGear
-  experienceDefinition: DeathSquadRoleExperience
   icon: "JobIconDeathsquadCommander"
   supervisors: job-supervisors-centcom
   canBeAntag: false
   accessGroups:
   - AllAccess
   - CentralCommand
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: DefibrillatorSkill
 
 - type: job
   id: DeathsquadHealer
@@ -20,7 +23,6 @@
   playTimeTracker: JobDeathSquadHealer
   setPreference: false
   startingGear: DeathSquadHealerGear
-  experienceDefinition: DeathSquadRoleExperience
   icon: "JobIconDeathsquadHealer"
   supervisors: job-supervisors-centcom
   canBeAntag: false
@@ -28,3 +30,7 @@
   - AllAccess
 #  access: #SS220-DeathSquad Update
   - CentralCommand
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: DefibrillatorSkill

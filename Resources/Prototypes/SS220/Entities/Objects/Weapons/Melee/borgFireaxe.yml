@@ -55,16 +55,20 @@
   - type: Sprite
     sprite: Objects/Weapons/Melee/fireaxeflaming.rsi
     state: icon
-  # SS220-hidden-desc-begin
+# Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-      SyndicateAgentKnowledge: [ corvax-hidden-desc-FireAxeFlaming-syndicate ]
-      ScienceKnowledge: [ corvax-hidden-desc-FireAxeFlaming-research ]
-    nameEntries:
-    - [SyndicateAgentKnowledge, null]
-    - [ScienceKnowledge, null]
-    hiddenName: ent-BorgFireAxe
-  # SS220-hidden-desc-end
+    - label: corvax-hidden-desc-FireAxeFlaming-syndicate
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
+    - label: corvax-hidden-desc-FireAxeFlaming-research
+      jobRequired:
+        - ResearchAssistant
+        - ResearchDirector
+        - Scientist
+        - Borg
+# Corvax-HiddenDesc-End
   - type: DamageOtherOnHit
     damage:
       types:

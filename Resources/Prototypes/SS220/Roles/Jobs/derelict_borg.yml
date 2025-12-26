@@ -2,7 +2,6 @@
   id: DerelictBorg # just imagine here joke pls
   name: job-name-derelict-borg
   description: job-description-derelict-borg
-  experienceDefinition: DerelictBorgRoleExperience
   playTimeTracker: JobDerelictBorg
   requirements:
   - !type:OverallPlaytimeRequirement

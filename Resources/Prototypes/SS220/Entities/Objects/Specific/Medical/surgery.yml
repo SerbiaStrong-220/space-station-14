@@ -30,11 +30,19 @@
     toolType: Specific
   - type: HiddenDescription
     entries:
-      MedicalKnowledge: [ hidden-desc-implant-manipulator-medical ]
-      SyndicateAgentKnowledge: [ hidden-desc-implant-mindslave-fixer-manipulator-syndicate ]
-      ScienceKnowledge: [ hidden-desc-implant-manipulator-research ]
-    nameEntries:
-    - [MedicalKnowledge, null]
-    - [SyndicateAgentKnowledge, null]
-    - [ScienceKnowledge, null]
-    hiddenName: ent-MindslaveFixerCerebralImplant
+    - label: hidden-desc-implant-manipulator-medical
+      jobRequired:
+        - Paramedic
+        - MedicalDoctor
+        - ChiefMedicalOfficer
+        - Brigmedic
+    - label: hidden-desc-implant-manipulator-research
+      jobRequired:
+        - ResearchAssistant
+        - ResearchDirector
+        - Scientist
+        - Borg
+    - label: hidden-desc-implant-mindslave-fixer-manipulator-syndicate
+      whitelistMindRoles:
+        - TraitorRole
+        - NukeOperative
