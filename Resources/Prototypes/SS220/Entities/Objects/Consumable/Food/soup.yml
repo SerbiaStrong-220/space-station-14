@@ -68,13 +68,13 @@
         - ReagentId: Nutriment
           Quantity: 10
         - ReagentId: Vitamin
-          Quantity: 5          
+          Quantity: 5
 
 - type: entity
   name: винегрет
   parent: FoodBowlBase
   id: FoodSaladVinaigrette
-  description: Кладезь витаминов и микроэлементов. А почему тут нет вина? 
+  description: Кладезь витаминов и микроэлементов. А почему тут нет вина?
   components:
   - type: FlavorProfile
     flavors:
@@ -92,4 +92,28 @@
         - ReagentId: Nutriment
           Quantity: 10
         - ReagentId: Vitamin
-          Quantity: 5          
+          Quantity: 5
+
+- type: entity
+  name: оливье
+  parent: FoodBowlBase
+  id: FoodSaladOlivier
+  description: Настоящий социальный эксперимент в миске. Калейдоскоп воспоминаний, где каждая ложка — путешествие в прошлое, от царского ресторана до новогодней ночи
+  components:
+  - type: FlavorProfile
+    flavors:
+    - olivier
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/bowl.rsi
+    layers:
+    - state: bowl
+    - state: olivier
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+        - ReagentId: Vitamin
+          Quantity: 30

@@ -10,6 +10,10 @@
     - Wall
   components:
   - type: TeleportationChasm
+    blacklistToDelete:
+      components:
+      - Explosive
+      - ProjectileGrenade
   - type: StepTrigger
     requiredTriggeredSpeed: 0
     intersectRatio: 0.4

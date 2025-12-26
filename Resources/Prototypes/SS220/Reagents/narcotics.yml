@@ -44,10 +44,10 @@
         factor: -0.2
 
 - type: reagent
-  id: Morphine
-  name: reagent-name-morphine
+  id: Aglomorphine
+  name: reagent-name-aglomorphine
   group: Narcotics
-  desc: reagent-desc-morphine
+  desc: reagent-desc-aglomorphine
   color: "#FFFFFF"
   physicalDesc: reagent-physical-desc-bitter
   flavor: medicine
@@ -58,7 +58,7 @@
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
-          reagent: Morphine
+          reagent: Aglomorphine
           min: 10
         damage:
           types:
@@ -81,14 +81,14 @@
             Poison: 1.0
       - !type:Hallucination
         setting:
-          randomEntities: HallucinationReagentMorphine
+          randomEntities: HallucinationReagentAglomorphine
           betweenHallucinations: 4
           hallucinationMinTime: 2
           hallucinationMaxTime: 10
           totalDuration: 3
           checkPockets: false
       - !type:MobThresholdsModifier
-        statusEffectId: MobThresholdsModifierMorphine
+        statusEffectId: MobThresholdsModifierAglomorphine
         duration: 5
         refresh: false
     Medicine:

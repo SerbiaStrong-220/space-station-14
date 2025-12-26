@@ -40,7 +40,7 @@
   - type: ExaminableSolution
     solution: drink
   - type: Sprite
-    sprite: SS220/Structures/CultYogg/yoggpond.rsi
+    sprite: SS220/Structures/CultYogg/pond.rsi
     state: pond
     noRot: true
   - type: InteractionOutline

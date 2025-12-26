@@ -8,6 +8,7 @@ using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Explosion.Components;
 using Content.Shared.Eye;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mind.Components;
@@ -16,15 +17,15 @@ using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.NPC.Components;
-using Content.Shared.NPC.Systems;
 using Content.Shared.NPC.Prototypes;
+using Content.Shared.NPC.Systems;
 using Content.Shared.Projectiles;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.SS220.CultYogg.MiGo;
 using Content.Shared.SS220.Temperature;
 using Content.Shared.StatusEffect;
-using Robust.Shared.Prototypes;
 using Robust.Server.GameObjects;
+using Robust.Shared.Prototypes;
 
 
 namespace Content.Server.SS220.CultYogg.MiGo;
@@ -89,6 +90,7 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
 
             RemCompDeferred<MovementIgnoreGravityComponent>(uid);
             RemCompDeferred<FTLSmashImmuneComponent>(uid);
+            RemCompDeferred<ExplosionResistanceComponent>(uid);
 
             //some copypaste invisibility shit
             _visibility.AddLayer((uid, vis), (int)VisibilityFlags.Normal, false);
@@ -113,6 +115,7 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
             //no phisyc during astral
             EnsureComp<MovementIgnoreGravityComponent>(uid);
             EnsureComp<FTLSmashImmuneComponent>(uid);
+            EnsureComp<ExplosionResistanceComponent>(uid);
             RemCompDeferred<SpeedModifiedByContactComponent>(uid);
 
             if (HasComp<NpcFactionMemberComponent>(uid))

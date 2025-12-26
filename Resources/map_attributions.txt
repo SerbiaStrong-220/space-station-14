@@ -94,4 +94,4 @@
   authors: VictorBoum, AliceValestray, rtmfool, murraingif, NightmareStalker, Thorofare, PorteRianes, Vnoeg
 
 - files: ["cultyogg-teleport-hub.yml"]
-  authors: SkaldetSkaeg
+  authors: SkaldetSkaeg, MixNikita

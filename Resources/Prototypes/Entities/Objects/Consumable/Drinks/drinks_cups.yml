@@ -77,7 +77,7 @@
   - type: SolutionContainerManager
     solutions:
       drink:
-        maxVol: 5 # One sip at a time. No rushing at the water cooler
+        maxVol: 15 #SS220 increasing the capacity of paper water cup
   - type: Item
     size: Tiny
   - type: Sprite

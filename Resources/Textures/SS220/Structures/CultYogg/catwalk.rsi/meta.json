@@ -1,0 +1,26 @@
+{
+    "version": 1,
+	"license": "CC-BY-SA-3.0",
+    "copyright": "Taken from tau ceti at https://github.com/TauCetiStation/TauCetiClassic/blob/87e4ec91dcaecdde013674827b8b8df7b26e3d4e/icons/turf/catwalks.dmi and modified by Kit0vras (Github)",
+	"size": {
+        "x": 32,
+		"y": 32
+	},
+	"states": [
+        {
+			"name": "catwalk_0"
+		},
+		{
+			"name": "catwalk_1"
+		},
+		{
+			"name": "catwalk_2"
+		},
+		{
+			"name": "catwalk_3"
+		},
+		{
+			"name": "catwalk_4"
+		}
+	]
+}

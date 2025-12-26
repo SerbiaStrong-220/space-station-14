@@ -284,3 +284,18 @@
   solids:
     CluwneCommsComputerCircuitboard: 1
 #SS220 cluwnecomms end
+
+- type: microwaveMealRecipe
+  id: RecipeOlivier
+  name: Olivier recipe
+  result: FoodSaladOlivier
+  time: 5
+  reagents:
+    Mayo: 5
+  solids:
+    FoodPotato: 1
+    FoodCarrot: 1
+    FoodEgg: 1
+    FoodPeaPod: 1
+    FoodMeatPatty: 1
+    FoodBowlBig: 1

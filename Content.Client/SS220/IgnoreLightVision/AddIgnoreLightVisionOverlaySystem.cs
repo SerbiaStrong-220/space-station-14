@@ -69,6 +69,7 @@ public abstract class AddIgnoreLightVisionOverlaySystem<T> : SharedAddIgnoreLigh
 
     private void OnDetached(Entity<T> ent, ref LocalPlayerDetachedEvent args)
     {
+        UpdateStatusIconsSpace(false);
         Off();
     }
 

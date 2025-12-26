@@ -22,14 +22,14 @@
         Blunt: 0.5
         Slash: 0.5
         Piercing: 0.4
-        Heat: 0.6
+        Heat: 0.4
         Caustic: 0.5
         Radiation: 0.5
   - type: StaminaResistance
     damageCoefficient: 0.1
   - type: ClothingSpeedModifier
-    walkModifier: 0.90
-    sprintModifier: 0.90
+    walkModifier: 0.80
+    sprintModifier: 0.80
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitCultYogg
