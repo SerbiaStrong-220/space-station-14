@@ -45,6 +45,6 @@ public sealed class HiddenDescriptionSystem : SharedHiddenDescriptionSystem
             }
         }
 
-        _metaData.SetEntityName(entity, entity.Comp.HiddenName);
+        _metaData.SetEntityName(entity, Loc.GetString(entity.Comp.HiddenName));
     }
 }
