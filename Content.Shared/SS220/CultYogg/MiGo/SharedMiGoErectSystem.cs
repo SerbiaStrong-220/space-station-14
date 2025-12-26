@@ -359,6 +359,9 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         if (args.Recipe == null)
             return;
 
+        if (!_prototypeManager.Resolve(args.Recipe.Value, out var replacement))
+            return;
+
         if (args.Target is { } target)
         {
             var prototypeId = MetaData(target).EntityPrototype;
@@ -366,11 +369,11 @@ public sealed class SharedMiGoErectSystem : EntitySystem
             if (prototypeId == null)
                 return;
 
-            StartReplacement(target, args.Recipe, prototypeId);
+            StartReplacement(target, replacement, prototypeId);
         }
 
         if (TryComp<MiGoComponent>(args.User, out var miGo))
-            AddCaptureCooldownByResult((args.User, miGo), args.Recipe);//its wierd, but idk how to not make it with this event
+            AddCaptureCooldownByResult((args.User, miGo), replacement);//its wierd, but idk how to not make it with this event
     }
 
     private void StartReplacement(EntityUid buildingUid, MiGoCapturePrototype replacement, EntityPrototype buildingProto)
@@ -524,7 +527,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
 
     private void AddCaptureCooldownByResult(Entity<MiGoComponent> ent, MiGoCapturePrototype recipe)
     {
-        ent.Comp.CaptureCooldowns.TryAdd(recipe.ReplacementProto.Id, _gameTiming.CurTime + recipe.ReplacementCooldown);
+        ent.Comp.CaptureCooldowns.TryAdd(recipe.ReplacementProto, _gameTiming.CurTime + recipe.ReplacementCooldown);
     }
     #endregion
 
@@ -671,7 +674,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
     {
         materials = null;
 
-        if (!_prototypeManager.TryIndex(entity.Comp.BuildingPrototypeId, out var prototype))
+        if (!_prototypeManager.Resolve(entity.Comp.BuildingPrototypeId, out var prototype))
             return false;
 
         materials = prototype.Materials;
@@ -699,7 +702,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         if (_gameTiming.InPrediction) // this should never run in client
             return null;
 
-        if (!_prototypeManager.TryIndex(entity.Comp.BuildingPrototypeId, out var prototype, logError: true))
+        if (!_prototypeManager.Resolve(entity.Comp.BuildingPrototypeId, out var prototype))
             return null;
 
         var transform = Transform(entity);
@@ -732,5 +735,5 @@ public sealed partial class MiGoEraseDoAfterEvent : SimpleDoAfterEvent
 [Serializable, NetSerializable]
 public sealed partial class MiGoCaptureDoAfterEvent : SimpleDoAfterEvent
 {
-    public MiGoCapturePrototype? Recipe;
+    public ProtoId<MiGoCapturePrototype>? Recipe;
 }
