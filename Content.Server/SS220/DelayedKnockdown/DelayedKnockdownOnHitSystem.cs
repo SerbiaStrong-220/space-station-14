@@ -34,7 +34,7 @@ public sealed class DelayedKnockdownOnHitSystem : EntitySystem
 
             _stunSystem.TryKnockdown(
                 uid,
-                TimeSpan.FromSeconds(comp.KnockdownTime),
+                comp.KnockdownTime,
                 refresh: comp.Refresh,
                 autoStand: comp.AutoStand,
                 drop: comp.Drop,
@@ -50,19 +50,32 @@ public sealed class DelayedKnockdownOnHitSystem : EntitySystem
         if (args.HitEntities.Count == 0)
             return;
 
-        if (component.CheckUseDelay && 
-            TryComp<UseDelayComponent>(uid, out var useDelay))
+        if (!component.OnHeavyAttack && args.Direction != null)
+            return;
+
+        if (TryComp<UseDelayComponent>(uid, out var useDelay))
         {
-            if (!_useDelay.TryResetDelay((uid, useDelay)))
-                return;
+            _useDelay.TryResetDelay((uid, useDelay), id: component.UseDelay);
         }
 
         foreach (var hitEntity in args.HitEntities)
         {
             var activeComp = EnsureComp<ActiveDelayedKnockdownComponent>(hitEntity);
             
-            activeComp.Delay = _gameTiming.CurTime + component.Delay;
-            activeComp.KnockdownTime = component.Duration.Seconds;
+            var delayTime = component.Delay;
+            var knockdownTime = component.Duration;
+           
+            var staminaEvent = new BeforeStaminaDamageEvent(1f);
+            RaiseLocalEvent(hitEntity, ref staminaEvent);
+            
+            if (staminaEvent.Value <= component.ResistanceThreshold)
+            {
+                delayTime += component.ResistanceDelayBonus;
+                knockdownTime -= component.ResistanceKnockdownPenalty;
+            }
+
+            activeComp.Delay = _gameTiming.CurTime + delayTime;
+            activeComp.KnockdownTime = knockdownTime;
             activeComp.Refresh = component.Refresh;
             activeComp.AutoStand = component.AutoStand;
             activeComp.Drop = component.Drop;

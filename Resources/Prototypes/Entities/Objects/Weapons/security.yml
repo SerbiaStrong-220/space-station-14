@@ -33,39 +33,41 @@
   - type: ItemTogglePrefix
     prefixOn: on
     prefixOff: off
-#SS220-Stunbatom-rework begin
   - type: ItemToggleMeleeWeapon
-    activatedSoundOnHit:
-        path: /Audio/Weapons/egloves.ogg
-        params:
-          variation: 0.250
     activatedDamage:
       types:
         Blunt: 0
-#SS220-Stunbatom-rework end
   - type: MeleeWeapon
     wideAnimationRotation: -135
     damage:
       types:
         Blunt: 7
     bluntStaminaDamageFactor: 2.0
-    angle: 0 #SS220
+    angle: 0 #SS220 staminaweapons rework 
     animation: WeaponArcThrust
   - type: StaminaDamageOnHit
-    damage: 25 #SS220-Stunbatom-rework
-    lightAttackDamageMultiplier: 2 #SS220
+    damage: 25 #SS220 staminaweapons rework 
+    lightAttackDamageMultiplier: 2.5 #SS220 staminaweapons rework 
     sound: /Audio/Weapons/egloves.ogg
   - type: StaminaDamageOnCollide
-    damage: 55 #SS220-Stunbatom-rework
+    damage: 15 #SS220 staminaweapons rework 
     sound: /Audio/Weapons/egloves.ogg
     # SS220-Stunbaton-rework throwing angles
-  - type: DelayedKnockdownOnHit
-    delay: 3
-    duration: 2
-    drop: true
-    refresh: true
-    autoStand: true
-    checkUseDelay: true
+  #SS220 staminaweapons rework start
+  - type: ComponentToggler
+    components:
+    - type: DelayedKnockdownOnHit
+      onHeavyAttack: false
+      delay: 3
+      duration: 2
+      drop: true
+      refresh: true
+      autoStand: true
+      useDelay: stunbaton
+    - type: UseDelayBlockMeleeAttack
+      delays: 
+      - stunbaton
+  #SS220 staminaweapons rework end
   - type: Ensnaring # SS220 stunbaton pacifism fix
   - type: ThrowingAngle
     angle: 225

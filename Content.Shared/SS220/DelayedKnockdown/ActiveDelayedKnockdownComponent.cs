@@ -15,7 +15,7 @@ public sealed partial class ActiveDelayedKnockdownComponent : Component
     /// Applied knockdown duration
     /// </summary>
     [DataField]
-    public float KnockdownTime;
+    public TimeSpan KnockdownTime;
 
     /// <summary>
     /// Refresh current knockdown?
