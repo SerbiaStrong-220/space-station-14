@@ -10,7 +10,7 @@
     <BoxContainer Orientation="Horizontal">
         <RichTextLabel Name="KnowledgeName" Text="name-place-holder"
             MouseFilter="Stop" TrackingTooltip="true" TooltipDelay="0.5"/>
-        <TextureButton Access="Public" Name="CloseButton" StyleClasses="windowCloseButton"
+        <TextureButton Access="Public" Name="CloseButton" StyleClasses="windowCloseButton" MinSize="24 16"
                         Visible="False" VerticalAlignment="Center" Margin="4" HorizontalAlignment="Right"/>
     </BoxContainer>
 </ExperienceUiElements:KnowledgeLabel>
