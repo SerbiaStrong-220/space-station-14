@@ -1,19 +1,20 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Shared.Administration;
 using Content.Server.Administration.Managers;
+using Content.Shared.Administration;
 using Content.Shared.Prototypes;
+using Content.Shared.SS220.Zone;
 using Content.Shared.SS220.Zone.Components;
+using Content.Shared.SS220.Zone.Systems;
 using Robust.Server.GameObjects;
 using Robust.Server.GameStates;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
+using Robust.Shared.Enums;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using System.Linq;
 using System.Numerics;
-using Content.Shared.SS220.Zone.Systems;
-using Content.Shared.SS220.Zone;
 
 namespace Content.Server.SS220.Zone.Systems;
 
@@ -29,11 +30,17 @@ public sealed partial class ZoneSystem : SharedZoneSystem
 
     private float _pvsRange = float.PositiveInfinity;
 
+    protected override IRelationsUpdateData RelationUpdateData => _relationUpdateData;
+
+    private readonly ServerRelationsUpdateData _relationUpdateData = new();
+
     public override void Initialize()
     {
         base.Initialize();
 
         _cfg.OnValueChanged(Robust.Shared.CVars.NetMaxUpdateRange, value => _pvsRange = value, true);
+
+        _player.PlayerStatusChanged += OnPlayerStatusChanged;
 
         SubscribeNetworkEvent<CreateZoneRequestMessage>(OnCreateZoneRequest);
         SubscribeNetworkEvent<ChangeZoneRequestMessage>(OnChangeZoneRequest);
@@ -49,6 +56,12 @@ public sealed partial class ZoneSystem : SharedZoneSystem
         {
             UpdatePvsOverride((uid, zoneComp));
         }
+    }
+
+    private void OnPlayerStatusChanged(object? sender, SessionStatusEventArgs e)
+    {
+        if (e.NewStatus == SessionStatus.Connected)
+            UpdateClientRelationsUpdateData(e.Session);
     }
 
     protected override void OnZoneMapInit(Entity<ZoneComponent> entity, ref MapInitEvent args)
@@ -251,36 +264,6 @@ public sealed partial class ZoneSystem : SharedZoneSystem
         Dirty(ent);
     }
 
-    public override bool RegisterRelationUpdate(EntityUid uid, object registrator)
-    {
-        return RelationUpdateData.RegisterEntity(uid, registrator);
-    }
-
-    public override bool RegisterRelationUpdate(Type componentType, object registrator)
-    {
-        return RelationUpdateData.RegisterComponent(componentType, registrator);
-    }
-
-    public override bool UnregisterRelationUpdate(EntityUid uid, object registrator)
-    {
-        return RelationUpdateData.UnregisterEntity(uid, registrator);
-    }
-
-    public override bool UnregisterRelationUpdate(Type componentType, object registrator)
-    {
-        return RelationUpdateData.UnregisterComponent(componentType, registrator);
-    }
-
-    public override bool UnregisterRelationUpdateForced(EntityUid uid)
-    {
-        return RelationUpdateData.UnregisterEntityForced(uid);
-    }
-
-    public override bool UnregisterRelationUpdateForced(Type componentType)
-    {
-        return RelationUpdateData.UnregisterComponentForced(componentType);
-    }
-
     private void UpdatePvsOverride(Entity<ZoneComponent> ent)
     {
         var xform = Transform(ent);
@@ -294,8 +277,8 @@ public sealed partial class ZoneSystem : SharedZoneSystem
 
         bool ShouldSessionOverride(ICommonSession session)
         {
-            //if (_admin.HasAdminFlag(session, AdminFlags.Mapping))
-            //    return true;
+            if (_admin.HasAdminFlag(session, AdminFlags.Mapping))
+                return true;
 
             if (session.AttachedEntity is not { } player)
                 return false;
@@ -316,4 +299,162 @@ public sealed partial class ZoneSystem : SharedZoneSystem
             return false;
         }
     }
+
+    #region Relation update API
+    public override bool RegisterRelationUpdate(EntityUid uid, object registrator)
+    {
+        if (!_relationUpdateData.RegisterEntity(uid, registrator))
+            return false;
+
+
+        UpdateClientRelationsUpdateData();
+        return true;
+    }
+
+    public override bool RegisterRelationUpdate(Type componentType, object registrator)
+    {
+        if (!Factory.TryGetRegistration(componentType, out var reg))
+            return false;
+
+        if (!_relationUpdateData.RegisterComponent(reg, registrator))
+            return false;
+
+        UpdateClientRelationsUpdateData();
+        return true;
+    }
+
+    public override bool UnregisterRelationUpdate(EntityUid uid, object registrator)
+    {
+        if (!_relationUpdateData.UnregisterEntity(uid, registrator))
+            return false;
+
+        UpdateClientRelationsUpdateData();
+        return true;
+    }
+
+    public override bool UnregisterRelationUpdate(Type componentType, object registrator)
+    {
+        if (!Factory.TryGetRegistration(componentType, out var reg))
+            return false;
+
+        if (!_relationUpdateData.UnregisterComponent(reg, registrator))
+            return false;
+
+        UpdateClientRelationsUpdateData();
+        return _relationUpdateData.UnregisterComponent(reg, registrator);
+    }
+
+    public override bool UnregisterRelationUpdateForced(EntityUid uid)
+    {
+        if (!_relationUpdateData.UnregisterEntityForced(uid))
+            return false;
+
+        UpdateClientRelationsUpdateData();
+        return true;
+    }
+
+    public override bool UnregisterRelationUpdateForced(Type componentType)
+    {
+        if (!Factory.TryGetRegistration(componentType, out var reg))
+            return false;
+
+        if (!_relationUpdateData.UnregisterComponentForced(reg))
+            return false;
+
+        UpdateClientRelationsUpdateData();
+        return true;
+    }
+
+    private void UpdateClientRelationsUpdateData()
+    {
+        var ev = new HandleRelationUpdateDataStateMessage(GetRelationsUpdateDataState());
+        RaiseNetworkEvent(ev);
+    }
+
+    private void UpdateClientRelationsUpdateData(ICommonSession session)
+    {
+        var ev = new HandleRelationUpdateDataStateMessage(GetRelationsUpdateDataState());
+        RaiseNetworkEvent(ev, session);
+    }
+
+    private RelationsUpdateDataState GetRelationsUpdateDataState()
+    {
+        return new RelationsUpdateDataState()
+        {
+            Entities = [.. _relationUpdateData.Entities.Select(x => GetNetEntity(x))],
+            Components = [.. _relationUpdateData.Components.Select(x => x.Name)]
+        };
+    }
+
+    private sealed class ServerRelationsUpdateData() : IRelationsUpdateData
+    {
+        public HashSet<EntityUid> Entities => [.. _entities.Keys];
+
+        private readonly Dictionary<EntityUid, HashSet<object>> _entities = [];
+
+
+        public HashSet<ComponentRegistration> Components => [.. _components.Keys];
+
+        private readonly Dictionary<ComponentRegistration, HashSet<object>> _components = [];
+
+
+        public void Clear()
+        {
+            _entities.Clear();
+            _components.Clear();
+        }
+
+        public bool RegisterEntity(EntityUid uid, object registrator)
+        {
+            if (_entities.TryGetValue(uid, out var regs))
+                return regs.Add(registrator);
+
+            _entities.Add(uid, [registrator]);
+            return true;
+        }
+
+        public bool UnregisterEntity(EntityUid uid, object registrator)
+        {
+            if (!_entities.TryGetValue(uid, out var regs))
+                return false;
+
+            var result = regs.Remove(registrator);
+            if (regs.Count <= 0)
+                return Entities.Remove(uid);
+
+            return result;
+        }
+
+        public bool UnregisterEntityForced(EntityUid uid)
+        {
+            return Entities.Remove(uid);
+        }
+
+        public bool RegisterComponent(ComponentRegistration componentReg, object registrator)
+        {
+            if (_components.TryGetValue(componentReg, out var regs))
+                regs.Add(registrator);
+
+            _components.Add(componentReg, [registrator]);
+            return true;
+        }
+
+        public bool UnregisterComponent(ComponentRegistration componentReg, object registrator)
+        {
+            if (!_components.TryGetValue(componentReg, out var regs))
+                return false;
+
+            var result = regs.Remove(registrator);
+            if (regs.Count <= 0)
+                return Components.Remove(componentReg);
+
+            return result;
+        }
+
+        public bool UnregisterComponentForced(ComponentRegistration componentReg)
+        {
+            return _components.Remove(componentReg);
+        }
+    }
+    #endregion
 }

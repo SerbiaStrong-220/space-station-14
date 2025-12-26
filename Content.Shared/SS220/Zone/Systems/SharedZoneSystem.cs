@@ -6,6 +6,9 @@ using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
+using Robust.Shared.Threading;
+using Robust.Shared.Timing;
 using System.Linq;
 using System.Numerics;
 
@@ -18,6 +21,8 @@ public abstract partial class SharedZoneSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private readonly IParallelManager _parallel = default!;
 
     public const string ZoneCommandsPrefix = "zone:";
 
@@ -25,16 +30,20 @@ public abstract partial class SharedZoneSystem : EntitySystem
 
     public static readonly ProtoId<EntityCategoryPrototype> ZoneCategoryId = "Zone";
 
-    protected ZonesRelationUpdateData RelationUpdateData = new();
+    protected abstract IRelationsUpdateData RelationUpdateData { get; }
 
     // parent -> cache pos -> zone box
     private readonly Dictionary<EntityUid, SortedList<ZoneCachePosition, List<ZoneCacheData.BoxData>>> _parentedZoneCache = [];
 
     private readonly Dictionary<Entity<ZoneComponent>, ZoneCacheData> _zoneCache = [];
 
+    private RelationsUpdateJob _job = default!;
+
     public override void Initialize()
     {
         base.Initialize();
+
+        _job = new(this);
 
         SubscribeLocalEvent<ZoneComponent, MapInitEvent>(OnZoneMapInit);
         SubscribeLocalEvent<ZoneComponent, ComponentShutdown>(OnZoneShutdown);
@@ -43,11 +52,49 @@ public abstract partial class SharedZoneSystem : EntitySystem
         SubscribeLocalEvent<InZoneComponent, ComponentShutdown>(OnInZoneShutdown);
     }
 
+    public override void Shutdown()
+    {
+        RelationUpdateData.Clear();
+
+        _parentedZoneCache.Clear();
+        _zoneCache.Clear();
+
+        base.Shutdown();
+    }
+
+    private Stopwatch _timer = new();
+
+    private TimeSpan _nextLogTime = TimeSpan.Zero;
+
+    private TimeSpan _averageHandleTime = TimeSpan.Zero;
+
+    private bool _updateParallel = true;
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
-        UpdateZonesRelations();
+        _timer.Restart();
+
+        if (_updateParallel)
+            _parallel.ProcessNow(_job, 1);
+        else
+            UpdateZonesRelations();
+
+        _averageHandleTime += _timer.Elapsed;
+        _averageHandleTime /= 2;
+
+        if (_nextLogTime <= _gameTiming.CurTime)
+        {
+            var adition = _updateParallel ? "parallel " : string.Empty;
+            Log.Info($"Average {adition}update time {_averageHandleTime.TotalMilliseconds} мс");
+            _nextLogTime = _gameTiming.CurTime + TimeSpan.FromSeconds(1);
+
+            _averageHandleTime = _timer.Elapsed;
+
+            _updateParallel = !_updateParallel;
+        }
+
     }
 
     protected virtual void OnZoneMapInit(Entity<ZoneComponent> entity, ref MapInitEvent args)
@@ -284,39 +331,6 @@ public abstract partial class SharedZoneSystem : EntitySystem
     }
     #endregion
 
-    public abstract bool RegisterRelationUpdate(EntityUid uid, object registrator);
-
-    public abstract bool RegisterRelationUpdate(Type componentType, object registrator);
-
-    public virtual bool RegisterRelationUpdate<T>(object registrator) where T : IComponent
-    {
-        return RegisterRelationUpdate(typeof(T), registrator);
-    }
-
-    public abstract bool UnregisterRelationUpdate(EntityUid uid, object registrator);
-
-    public abstract bool UnregisterRelationUpdate(Type componentType, object registrator);
-
-    public virtual bool UnregisterRelationUpdate<T>(object registrator) where T : IComponent
-    {
-        return UnregisterRelationUpdate(typeof(T), registrator);
-    }
-
-    public abstract bool UnregisterRelationUpdateForced(EntityUid uid);
-
-    public abstract bool UnregisterRelationUpdateForced(Type componentType);
-
-    public virtual bool UnregisterRelationUpdateForced<T>()
-    {
-        return UnregisterRelationUpdateForced(typeof(T));
-    }
-
-    protected void UpdateZonesRelations()
-    {
-        foreach (var uid in RelationUpdateData.EnumerateAll(EntityManager))
-            UpdateInZone(uid);
-    }
-
     /// <summary>
     /// Performs checks on entities located in the <paramref name="zone"/>.
     /// Raises the <see cref="EntityLeavedZoneEvent"/> if entity was in the <paramref name="zone"/> before, but now it isn't.
@@ -425,99 +439,96 @@ public abstract partial class SharedZoneSystem : EntitySystem
     }
 
     #region Relation update API
-    protected struct ZonesRelationUpdateData()
+    public abstract bool RegisterRelationUpdate(EntityUid uid, object registrator);
+
+    public abstract bool RegisterRelationUpdate(Type componentType, object registrator);
+
+    public virtual bool RegisterRelationUpdate<T>(object registrator) where T : IComponent
     {
-        public Dictionary<EntityUid, HashSet<object>> Entities = [];
+        return RegisterRelationUpdate(typeof(T), registrator);
+    }
 
-        public Dictionary<Type, HashSet<object>> Components = [];
+    public abstract bool UnregisterRelationUpdate(EntityUid uid, object registrator);
 
-        public readonly bool RegisterEntity(EntityUid uid, object registrator)
+    public abstract bool UnregisterRelationUpdate(Type componentType, object registrator);
+
+    public virtual bool UnregisterRelationUpdate<T>(object registrator) where T : IComponent
+    {
+        return UnregisterRelationUpdate(typeof(T), registrator);
+    }
+
+    public abstract bool UnregisterRelationUpdateForced(EntityUid uid);
+
+    public abstract bool UnregisterRelationUpdateForced(Type componentType);
+
+    public virtual bool UnregisterRelationUpdateForced<T>()
+    {
+        return UnregisterRelationUpdateForced(typeof(T));
+    }
+
+    protected void UpdateZonesRelations()
+    {
+        foreach (var uid in EnumerateRelationUpdateEntities())
+            UpdateInZone(uid);
+    }
+
+    protected IEnumerable<EntityUid> EnumerateRelationUpdateEntities()
+    {
+        foreach (var uid in RelationUpdateData.Entities)
+            yield return uid;
+
+        foreach (var reg in RelationUpdateData.Components)
         {
-            if (Entities.TryGetValue(uid, out var regs))
-                return regs.Add(registrator);
-
-            Entities.Add(uid, [registrator]);
-            return true;
-        }
-
-        public readonly bool RegisterComponent(Type componentType, object registrator)
-        {
-            if (!componentType.IsAssignableTo(typeof(IComponent)))
-                return false;
-
-            if (Components.TryGetValue(componentType, out var regs))
-                regs.Add(registrator);
-
-            Components.Add(componentType, [registrator]);
-            return true;
-        }
-
-        public readonly bool UnregisterEntity(EntityUid uid, object registrator)
-        {
-            if (!Entities.TryGetValue(uid, out var regs))
-                return false;
-
-            var result = regs.Remove(registrator);
-            if (regs.Count <= 0)
-                return Entities.Remove(uid);
-
-            return result;
-        }
-
-        public readonly bool UnregisterEntityForced(EntityUid uid)
-        {
-            return Entities.Remove(uid);
-        }
-
-        public readonly bool UnregisterComponent(Type componentType, object registrator)
-        {
-            if (!Components.TryGetValue(componentType, out var regs))
-                return false;
-
-            var result = regs.Remove(registrator);
-            if (regs.Count <= 0)
-                return Components.Remove(componentType);
-
-            return result;
-        }
-
-        public readonly bool UnregisterComponentForced(Type componentType)
-        {
-            return Components.Remove(componentType);
-        }
-
-        public readonly IEnumerable<EntityUid> EnumerateAll(IEntityManager entityManager)
-        {
-            foreach (var uid in EnumerateEntities())
-                yield return uid;
-
-            foreach (var uid in EnumerateComponents(entityManager))
-                yield return uid;
-        }
-
-        public readonly IEnumerable<EntityUid> EnumerateEntities()
-        {
-            foreach (var uid in Entities.Keys)
-                yield return uid;
-        }
-
-        public readonly IEnumerable<EntityUid> EnumerateComponents(IEntityManager entityManager)
-        {
-            foreach (var type in Components.Keys)
+            // AllQuery is used because non - generic overload for EntityQueryEnumerator isn't exist
+            var query = EntityManager.AllEntityQueryEnumerator(reg.Type);
+            while (query.MoveNext(out var uid, out _))
             {
-                // AllQuery is used because non-generic overload for EntityQueryEnumerator isn't exist
-                var query = entityManager.AllEntityQueryEnumerator(type);
-                while (query.MoveNext(out var uid, out _))
-                {
-                    if (entityManager.Deleted(uid))
-                        continue;
+                if (!uid.Valid)
+                    continue;
 
-                    if (entityManager.IsPaused(uid))
-                        continue;
+                if (Deleted(uid))
+                    continue;
 
-                    yield return uid;
-                }
+                if (IsPaused(uid))
+                    continue;
+
+                yield return uid;
             }
+        }
+    }
+
+    protected interface IRelationsUpdateData
+    {
+        HashSet<EntityUid> Entities { get; }
+
+        HashSet<ComponentRegistration> Components { get; }
+
+        void Clear();
+    }
+
+    [Serializable, NetSerializable]
+    protected struct RelationsUpdateDataState()
+    {
+        public List<NetEntity> Entities = [];
+
+        public List<string> Components = [];
+    }
+
+    [Serializable, NetSerializable]
+    protected sealed class HandleRelationUpdateDataStateMessage(RelationsUpdateDataState state) : EntityEventArgs
+    {
+        public readonly RelationsUpdateDataState State = state;
+    }
+
+    private readonly struct RelationsUpdateJob(SharedZoneSystem system) : IParallelRobustJob
+    {
+        public int BatchSize => 16;
+
+        private readonly SharedZoneSystem _system = system;
+
+        public readonly void Execute(int index)
+        {
+            _system.UpdateZonesRelations();
         }
     }
     #endregion

@@ -14,6 +14,10 @@ public sealed partial class ZoneSystem : SharedZoneSystem
 
     private ZonesControlUIController _controller = default!;
 
+    protected override IRelationsUpdateData RelationUpdateData => _relationUpdateData;
+
+    private readonly ClientRelationUpdateData _relationUpdateData = new();
+
     public override void Initialize()
     {
         base.Initialize();
@@ -22,6 +26,8 @@ public sealed partial class ZoneSystem : SharedZoneSystem
 
         SubscribeLocalEvent<ZoneComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<ZoneComponent, AfterAutoHandleStateEvent>(OnAfterAutoHandleState);
+
+        SubscribeNetworkEvent<HandleRelationUpdateDataStateMessage>(HandleRelationUpdateDataState);
     }
 
     private void OnInit(Entity<ZoneComponent> ent, ref ComponentInit args)
@@ -40,6 +46,22 @@ public sealed partial class ZoneSystem : SharedZoneSystem
     {
         base.OnZoneShutdown(entity, ref args);
         _controller.RefreshWindow();
+    }
+
+    private void HandleRelationUpdateDataState(HandleRelationUpdateDataStateMessage args)
+    {
+        _relationUpdateData.Clear();
+
+        foreach (var netUid in args.State.Entities)
+            _relationUpdateData.Entities.Add(GetEntity(netUid));
+
+        foreach (var compName in args.State.Components)
+        {
+            if (!Factory.TryGetRegistration(compName, out var reg))
+                continue;
+
+            _relationUpdateData.Components.Add(reg);
+        }
     }
 
     public void CreateZoneRequest(
@@ -100,4 +122,19 @@ public sealed partial class ZoneSystem : SharedZoneSystem
     {
         return false;
     }
+
+    #region Relation update API
+    private sealed class ClientRelationUpdateData() : IRelationsUpdateData
+    {
+        public HashSet<EntityUid> Entities { get; set; } = [];
+
+        public HashSet<ComponentRegistration> Components { get; set; } = [];
+
+        public void Clear()
+        {
+            Entities.Clear();
+            Components.Clear();
+        }
+    }
+    #endregion
 }

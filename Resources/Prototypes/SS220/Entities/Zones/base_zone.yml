@@ -13,4 +13,4 @@
   components:
   - type: Zone
     relationUpdateComponents:
-      - type: MobState
+      - type: Damageable
