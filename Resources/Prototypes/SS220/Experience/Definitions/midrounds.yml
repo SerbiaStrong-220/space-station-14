@@ -1,0 +1,16 @@
+- type: experienceDefinition
+  id: NinjaRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    CombatTraining:
+      level: 3
+    Construction:
+      level: 2
+    Medicine:
+      level: 2
+    PhysicalTraining:
+      level: 3
+  knowledges:
+  - NinjaKnowledge
+  addSublevelPoints: 5

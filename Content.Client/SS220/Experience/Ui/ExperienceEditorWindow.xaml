@@ -1,0 +1,55 @@
+<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+
+<controls:FancyWindow
+    xmlns="https://spacestation14.io"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+    xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    xmlns:styleDef="clr-namespace:Content.Client.SS220.Experience.Ui"
+    Title="{Loc 'experience-view-editor-title'}"
+    Resizable="True"
+    MinSize="240 240"
+    SetSize="720 480"
+    RectClipContent="False">
+    <Control>
+        <PanelContainer>
+            <PanelContainer.PanelOverride>
+                <gfx:StyleBoxFlat BackgroundColor="{x:Static styleDef:ExperienceUiStyleDefinitions.BaseBackgroundColor}"/>
+            </PanelContainer.PanelOverride>
+        </PanelContainer>
+        <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True" Margin="10 0">
+            <BoxContainer Name="CharacterInfoContainer" Orientation="Horizontal">
+                <OptionButton Name="ExperienceEntityOption"/>
+                <RichTextLabel Name="CharacterName" Text="Name place holder" Margin="5 0"/>
+                <RichTextLabel Name="OccupationName" Text="occupation name holder" Margin="5 0"/>
+                <RichTextLabel Name="AntagName" Text="antag name holder" Margin="5 0"/>
+            </BoxContainer>
+            <BoxContainer Name="ExperienceInfoContainer" HorizontalExpand="True" VerticalExpand="True" Orientation="Vertical">
+                <BoxContainer Name="ExperienceVerification" Orientation="Horizontal">
+                    <RichTextLabel Name="BypassSkillCheckStatus" Text="bypass skill check holder" Margin="5 0"/>
+                    <RichTextLabel Name="BypassKnowledgeStatus" Text="bypass knowledge holder" Margin="5 0"/>
+                </BoxContainer>
+                <ScrollContainer HScrollEnabled="False" VerticalExpand="True" HorizontalExpand="True" Margin="0 5">
+                    <BoxContainer Name="SkillEditor" VerticalExpand="True" HorizontalExpand="True" Orientation="Vertical" Margin="0 5">
+                        <!-- Added by code -->
+                    </BoxContainer>
+                </ScrollContainer>
+                <BoxContainer Name="KnowledgeInfoContainer" HorizontalAlignment="Left" VerticalExpand="True" HorizontalExpand="True" Orientation="Vertical" Margin="0 5">
+                    <BoxContainer Orientation="Horizontal">
+                        <Label Text="{Loc 'experience-editor-knowledge-name'}"/>
+                        <OptionButton Name="KnowledgeOption"/>
+                    </BoxContainer>
+                    <ScrollContainer HScrollEnabled="False" VerticalExpand="True" HorizontalExpand="True" Margin="10 5">
+                        <BoxContainer Name="KnowledgeEditor" VerticalExpand="True" HorizontalExpand="True"
+                            HorizontalAlignment="Left" Orientation="Vertical" Margin="0 5">
+                            <!-- Added by code -->
+                        </BoxContainer>
+                    </ScrollContainer>
+                </BoxContainer>
+            </BoxContainer>
+            <BoxContainer Name="SubmitButtonContainer" Orientation="Horizontal">
+                <Button Name="SubmitButton" Text="{Loc 'experience-view-editor-submit-button-text'}"/>
+            </BoxContainer>
+        </BoxContainer>
+    </Control>
+</controls:FancyWindow>

@@ -1,0 +1,208 @@
+- type: experienceDefinition
+  id: PassengerRoleExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 1
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 1
+  addSublevelPoints: 15
+
+- type: experienceDefinition
+  id: BartenderRoleExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 1
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 1
+  addSublevelPoints: 15
+
+- type: experienceDefinition
+  id: BotanistRoleExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 1
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 1
+  knowledges:
+  - BotanyKnowledge
+  addSublevelPoints: 15
+
+- type: experienceDefinition
+  id: ChaplainRoleExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 1
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 1
+  knowledges:
+  - SupernaturalBookKnowledge
+  addSublevelPoints: 15
+
+- type: experienceDefinition
+  id: ChefRoleExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    CombatTraining:
+      level: 2
+    Construction:
+      level: 1
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 2
+  addSublevelPoints: 10
+
+- type: experienceDefinition
+  id: ClownRoleExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 1
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 1
+  knowledges:
+  - ServiceActorKnowledge
+  addSublevelPoints: 15
+
+- type: experienceDefinition
+  id: JanitorRoleExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 1
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 1
+  addSublevelPoints: 15
+
+- type: experienceDefinition
+  id: LibrarianRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 2
+    Medicine:
+      level: 2
+    PhysicalTraining:
+      level: 1
+  knowledges:
+  - SupernaturalBookKnowledge
+  addSublevelPoints: 5
+
+- type: experienceDefinition
+  id: MimeRoleExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 1
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 1
+  knowledges:
+  - ServiceActorKnowledge
+  addSublevelPoints: 15
+
+- type: experienceDefinition
+  id: MusicianRoleExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 1
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 1
+  knowledges:
+  - ServiceActorKnowledge
+  addSublevelPoints: 15
+
+- type: experienceDefinition
+  id: ServiceWorkerRoleExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 1
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 1
+  addSublevelPoints: 15
+
+- type: experienceDefinition
+  id: SeniorServiceRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 1
+    Medicine:
+      level: 2
+    PhysicalTraining:
+      level: 2
+  knowledges:
+  - BotanyKnowledge
+  addSublevelPoints: 10
+
+- type: experienceDefinition
+  id: VisitorRoleExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 1
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 1
+  addSublevelPoints: 15
