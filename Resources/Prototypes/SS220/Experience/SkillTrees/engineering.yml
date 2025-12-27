@@ -1,9 +1,0 @@
-- type: skillTree
-  id: Construction
-  skillGroupId: SkillTreeEngineering
-  skillTreeName: construction-skill-tree-name
-  skillTree:
-  - ConstructionInitial
-  - ConstructionBase
-  - ConstructionTrained
-  - ConstructionProfessional

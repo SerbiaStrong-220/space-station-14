@@ -661,28 +661,32 @@
         maxVol: 10
   - type: RefillableSolution
     solution: hypospray
-  # SS220-hidden-desc-begin
+  # Corvax-HiddenDesc-Start
   # - type: ExaminableSolution
   #   solution: hypospray
   #   heldOnly: true # Allow examination only when held in hand.
   #   exactVolume: true
-  # SS220-hidden-desc-end
+  # Corvax-HiddenDesc-End
   - type: Hypospray
     onlyAffectsMobs: false
   - type: UseDelay
     delay: 0.5
   - type: StaticPrice # A new shitcurity meta
     price: 75
-  # SS220-hidden-desc-begin
+# Corvax-HiddenDesc-Start
   - type: HiddenDescription
     entries:
-      SyndicateAgentKnowledge: [ corvax-hidden-desc-Hypopen-syndicate ]
-      ScienceKnowledge: [ corvax-hidden-desc-Hypopen-research ]
-    nameEntries:
-    - [SyndicateAgentKnowledge, null]
-    - [ScienceKnowledge, null]
-    hiddenName: ent-Pen
-  # SS220-hidden-desc-end
+    - label: corvax-hidden-desc-Hypopen-syndicate
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
+    - label: corvax-hidden-desc-Hypopen-research
+      jobRequired:
+        - ResearchAssistant
+        - ResearchDirector
+        - Scientist
+        - Borg
+# Corvax-HiddenDesc-End
   - type: EmitSoundOnUse
     handle: false # don't want the sound to stop the self-inject from triggering
 

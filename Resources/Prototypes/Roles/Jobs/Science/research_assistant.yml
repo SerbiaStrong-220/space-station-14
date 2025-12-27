@@ -7,7 +7,6 @@
     - !type:OverallPlaytimeRequirement
       time: 1h # SS220-RoleTime №2
   startingGear: ResearchAssistantGear
-  experienceDefinition: ResearchAssistantRoleExperience # SS220-experience
   icon: "JobIconResearchAssistant"
   supervisors: job-supervisors-science
   canBeAntag: true

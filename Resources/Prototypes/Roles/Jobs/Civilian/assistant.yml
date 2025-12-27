@@ -4,7 +4,6 @@
   description: job-description-passenger
   playTimeTracker: JobPassenger
   startingGear: PassengerGear
-  experienceDefinition: PassengerRoleExperience # SS220-experience
   icon: "JobIconPassenger"
   supervisors: job-supervisors-everyone
 #  access: # Corvax

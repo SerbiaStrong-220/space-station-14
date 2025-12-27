@@ -20,7 +20,6 @@
       department: Civilian
       time: 216000 # 60 ч
   startingGear: SeniorAssistantGear
-  experienceDefinition: SeniorServiceRoleExperience
   icon: "JobIconSeniorService"
   supervisors: job-supervisors-hop
   access:

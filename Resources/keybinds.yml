@@ -191,11 +191,6 @@ binds:
 - function: OpenCharacterMenu
   type: State
   key: U
-  # SS220-experience-update
-- function: OpenExperienceViewerMenu
-  type: State
-  key: O
-  # SS220-experience-update
 - function: OpenEmotesMenu
   type: State
   key: Y

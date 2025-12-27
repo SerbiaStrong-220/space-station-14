@@ -18,16 +18,20 @@
           type: StorageBoundUserInterface
         enum.ChameleonUiKey.Key:
           type: ChameleonBoundUserInterface
-    # SS220-hidden-desc-begin
+# Corvax-HiddenDesc-Start
     - type: HiddenDescription
       entries:
-        SyndicateAgentKnowledge: [ corvax-hidden-desc-Chameleon-syndicate ]
-        ScienceKnowledge: [ corvax-hidden-desc-Chameleon-research ]
-      nameEntries:
-      - [SyndicateAgentKnowledge, null]
-      - [ScienceKnowledge, null]
-      hiddenName: null
-    # SS220-hidden-desc-end
+      - label: corvax-hidden-desc-Chameleon-syndicate
+        whitelistMindRoles:
+        - TraitorRole
+        - NukeOperative
+      - label: corvax-hidden-desc-Chameleon-research
+        jobRequired:
+          - ResearchAssistant
+          - ResearchDirector
+          - Scientist
+          - Borg
+# Corvax-HiddenDesc-End
 #SS220 Micro_fibers start
     - type: MicroFiber
       microFiberMaterial: micro-fibers-chameleon

@@ -2,7 +2,6 @@
   id: PeacefulPet # just imagine here joke pls
   name: job-name-peaceful-pet
   description: job-description-peaceful-pet
-  experienceDefinition: NoExperience
   playTimeTracker: JobPeacefulPet
   requirements:
   - !type:OverallPlaytimeRequirement

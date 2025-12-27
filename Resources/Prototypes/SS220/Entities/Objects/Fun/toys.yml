@@ -90,11 +90,14 @@
     clumsyProof: true
   - type: HiddenDescription
     entries:
-      SyndicateAgentKnowledge: [ hidden-desc-toy-weapons-syndicate ]
-      ServiceActorKnowledge: [ hidden-desc-toy-weapons-clown ]
-    nameEntries:
-    - [SyndicateAgentKnowledge, null]
-    - [ServiceActorKnowledge, null]
+    - label: hidden-desc-toy-weapons-syndicate
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
+    - label: hidden-desc-toy-weapons-clown
+      jobRequired:
+        - Clown
+        - Mime
 
 - type: entity
   parent: [ BaseGunToy, WeaponLauncherChinaLake ]
@@ -344,10 +347,10 @@
     - type: Appearance
     - type: HiddenDescription
       entries:
-        SyndicateAgentKnowledge: [ hidden-desc-toy-weapons-syndicate ]
-      nameEntries:
-      - [SyndicateAgentKnowledge, null]
-      hiddenName: ent-EnergyShieldToy
+      - label: hidden-desc-toy-weapons-syndicate
+        whitelistMindRoles:
+        - TraitorRole
+        - NukeOperative
 
 #katana for some reason
 - type: entity

@@ -91,6 +91,8 @@
     - type: NpcFactionMember
       factions:
       - EbentIronSquad
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
     - type: LimitationRevive
       reviveLimit: 3
       beforeDamageDelay: 180
@@ -100,7 +102,6 @@
   name: job-name-iron-squad-leader
   description: job-description-iron-squad-leader
   startingGear: EbentIronSquadLeaderGear
-  experienceDefinition: IronSquadLeaderRoleExperience
   playTimeTracker: IronSquadLeader
   setPreference: false
   canBeAntag: false
@@ -198,6 +199,8 @@
     - type: NpcFactionMember
       factions:
       - EbentIronSquad
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
     - type: LimitationRevive
       reviveLimit: 3
       beforeDamageDelay: 180
@@ -207,7 +210,6 @@
   name: job-name-iron-squad-engineer
   description: job-description-iron-squad-engineer
   startingGear: EbentIronSquadEngineerGear
-  experienceDefinition: IronSquadEngineerRoleExperience
   playTimeTracker: IronSquadEngineer
   setPreference: false
   canBeAntag: false
@@ -309,6 +311,8 @@
     - type: NpcFactionMember
       factions:
       - EbentIronSquad
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
     - type: LimitationRevive
       reviveLimit: 3
       beforeDamageDelay: 180
@@ -318,7 +322,6 @@
   name: job-name-iron-squad-corpsman
   description: job-description-iron-squad-corpsman
   startingGear: EbentIronSquadCorpsmanGear
-  experienceDefinition: IronSquadCorpsmanRoleExperience
   playTimeTracker: IronSquadCorpsman
   setPreference: false
   canBeAntag: false
@@ -424,6 +427,8 @@
     - type: NpcFactionMember
       factions:
       - EbentIronSquad
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
     - type: LimitationRevive
       reviveLimit: 3
       beforeDamageDelay: 180
@@ -433,7 +438,6 @@
   name: job-name-iron-squad-cmo
   description: job-description-iron-squad-cmo
   startingGear: EbentIronSquadCMOGear
-  experienceDefinition: IronSquadCMORoleExperience
   playTimeTracker: IronSquadCMO
   setPreference: false
   canBeAntag: false
@@ -529,6 +533,8 @@
     - type: NpcFactionMember
       factions:
       - EbentIronSquad
+    - type: DefibrillatorSkill
+      chanceWithMedSkill: 1
     - type: LimitationRevive
       reviveLimit: 3
       beforeDamageDelay: 180
@@ -538,7 +544,6 @@
   name: job-name-iron-squad-fighter
   description: job-description-iron-squad-fighter
   startingGear: EbentIronSquadTrooperGear
-  experienceDefinition: IronSquadFighterRoleExperience
   playTimeTracker: IronSquadFighter
   setPreference: false
   canBeAntag: false
