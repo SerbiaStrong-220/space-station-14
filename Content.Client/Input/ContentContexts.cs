@@ -136,6 +136,12 @@ namespace Content.Client.Input
             common.AddFunction(ContentKeyFunctions.OpenDecalSpawnWindow);
             common.AddFunction(ContentKeyFunctions.OpenAdminMenu);
             common.AddFunction(ContentKeyFunctions.OpenGuidebook);
+
+            // SS220 mapping zones begin
+            var editor = contexts.GetContext("editor");
+            editor.AddFunction(KeyFunctions220.BoxLayoutSetPoint);
+            editor.AddFunction(KeyFunctions220.BoxLayoutCancel);
+            // SS220 mapping zones end
         }
     }
 }
