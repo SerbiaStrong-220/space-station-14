@@ -861,6 +861,7 @@
     - item: DefibrillatorOneHandedUnpowered
     - item: BorgFireExtinguisher
     - item: PinpointerCrew #SS220-PinpointerCrew
+    - item: BorgHandheldGPSBasic
     - item: HandLabeler
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: defib-module }
