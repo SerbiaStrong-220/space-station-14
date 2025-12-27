@@ -96,6 +96,7 @@
     interfaces:
       enum.ChameleonStructureUiKey.Key:
         type: ChameleonStructureBoundUserInterface
+  - type: CultYoggChamelenBlocker
   - type: HiddenDescription
     entries:
       CultYoggKnowledge: [ hidden-desc-chameleon-structure-cultyogg ]
@@ -170,6 +171,7 @@
     fuel: 5
     time: 3
   - type: WeldCorruptInteraction
+  - type: CultYoggChamelenBlocker
 
 - type: entity
   parent: Bed
@@ -360,6 +362,7 @@
   - type: CultYoggBuilding
     eraseTime: 3
   - type: WeldCorruptInteraction
+  - type: CultYoggChamelenBlocker
   - type: HiddenDescription
     entries:
       CultYoggKnowledge: [ hidden-desc-chameleon-structure-cultyogg ]
