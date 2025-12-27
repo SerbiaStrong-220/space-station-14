@@ -7,6 +7,7 @@
     - !type:OverallPlaytimeRequirement
       time: 1h # SS220-RoleTime 2
   startingGear: ServiceWorkerGear
+  experienceDefinition: ServiceWorkerRoleExperience # SS220-experience
   icon: "JobIconServiceWorker"
   supervisors: job-supervisors-service
   canBeAntag: true #SS220 https://github.com/SerbiaStrong-220/space-station-14/pull/564

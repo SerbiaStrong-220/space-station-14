@@ -1,0 +1,49 @@
+- type: experienceDefinition
+  id: CBURNRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    CombatTraining:
+      level: 3
+    Construction:
+      level: 2
+    Medicine:
+      level: 2
+    PhysicalTraining:
+      level: 3
+  knowledges:
+  - CentCommKnowledge
+  addSublevelPoints: 5
+
+- type: experienceDefinition
+  id: DeathSquadRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    CombatTraining:
+      level: 4
+    Construction:
+      level: 4
+    Medicine:
+      level: 4
+    PhysicalTraining:
+      level: 4
+  knowledges:
+  - CentCommKnowledge
+
+- type: experienceDefinition
+  id: CentralCommandOfficialExperience
+  skills:
+    Bureaucracy:
+      level: 3
+    CombatTraining:
+      level: 2
+    Construction:
+      level: 2
+    Medicine:
+      level: 2
+    PhysicalTraining:
+      level: 2
+  knowledges:
+  - CentCommKnowledge
+  addSublevelPoints: 15

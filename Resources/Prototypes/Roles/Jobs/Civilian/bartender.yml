@@ -8,6 +8,7 @@
       department: Civilian
       time: 5h # SS220-RoleTime
   startingGear: BartenderGear
+  experienceDefinition: BartenderRoleExperience # SS220-experience
   icon: "JobIconBartender"
   supervisors: job-supervisors-hop
   access:
