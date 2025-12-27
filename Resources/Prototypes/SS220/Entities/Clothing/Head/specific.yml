@@ -167,7 +167,7 @@
   - type: Clothing
     equipSound: /Audio/Mecha/mechmove03.ogg
     unequipSound: /Audio/Mecha/mechmove03.ogg
-    sprite: Clothing/Head/Helmets/spaceninja.rsi
+    sprite: SS220/Clothing/Head/Helmets/spaceninja.rsi #SS220 Ninja Resprite
   - type: IdentityBlocker
   - type: HideLayerClothing
     slots:
@@ -176,4 +176,4 @@
     - HeadTop
     - HeadSide
   - type: Sprite
-    sprite: Clothing/Head/Helmets/spaceninja.rsi
+    sprite: SS220/Clothing/Head/Helmets/spaceninja.rsi #SS220 Ninja Resprite
