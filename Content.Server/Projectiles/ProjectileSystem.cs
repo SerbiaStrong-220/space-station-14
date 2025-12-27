@@ -44,6 +44,17 @@ public sealed class ProjectileSystem : SharedProjectileSystem
             return;
         }
 
+        var blockattemptEv = new ProjectileBlockAttemptEvent(uid, component, false, component.Damage);
+        RaiseLocalEvent(target, blockattemptEv);
+        if (blockattemptEv.Cancelled)
+        {
+            SetShooter(uid, component, target);
+            QueueDel(uid);
+            _color.RaiseEffect(Color.Red, new List<EntityUid>() { target }, Filter.Pvs(target, entityManager: EntityManager));
+            _guns.PlayImpactSound(target, component.Damage, component.SoundHit, component.ForceSound);
+            return;
+        }
+
         var ev = new ProjectileHitEvent(component.Damage * _damageableSystem.UniversalProjectileDamageModifier, target, component.Shooter);
         RaiseLocalEvent(uid, ref ev);
 

@@ -268,6 +268,13 @@ public record struct ProjectileReflectAttemptEvent(EntityUid ProjUid, Projectile
     SlotFlags IInventoryRelayEvent.TargetSlots => SlotFlags.WITHOUT_POCKET;
 }
 
+[Serializable, NetSerializable]
+public sealed class ProjectileBlockAttemptEvent(EntityUid ProjUid, ProjectileComponent Component, bool Cancelled, DamageSpecifier damage) : EntityEventArgs
+{
+    public bool Cancelled = false;
+    public DamageSpecifier? Damage = damage;
+}
+
 /// <summary>
 /// Raised when a projectile hits an entity
 /// </summary>

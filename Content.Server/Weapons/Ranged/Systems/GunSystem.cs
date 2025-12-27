@@ -242,13 +242,31 @@ public sealed partial class GunSystem : SharedGunSystem
 
                         if (lastHit != null)
                         {
+                            var dmg = hitscan.Damage;
                             var hitEntity = lastHit.Value;
+                            var hitName = ToPrettyString(hitEntity);
+                            var blockEv = new HitScanBlockAttemptEvent(hitscan.Damage);
+                            RaiseLocalEvent(lastHit.Value, blockEv);
+                            if(blockEv.Cancelled)
+                            {
+                                _color.RaiseEffect(Color.Red, new List<EntityUid>() { lastHit.Value }, Filter.Pvs(lastHit.Value, entityManager: EntityManager));
+                                PlayImpactSound(lastHit.Value, hitscan.Damage, hitscan.Sound, hitscan.ForceSound);
+                                if (dmg == null) { return; }
+                                if (user != null)
+                                {
+                                    Logs.Add(LogType.HitScanHit,
+                                        $"{ToPrettyString(user.Value):user} hit {ToPrettyString(hitEntity):target} using hitscan and dealt {dmg.GetTotal():damage} damage");
+                                }
+                                else
+                                {
+                                    Logs.Add(LogType.HitScanHit,
+                                        $"{hitName:target} hit by hitscan dealing {dmg.GetTotal():damage} damage");
+                                }
+                                return;
+                            }
                             if (hitscan.StaminaDamage > 0f)
                                 _stamina.TakeStaminaDamage(hitEntity, hitscan.StaminaDamage, source: user);
 
-                            var dmg = hitscan.Damage;
-
-                            var hitName = ToPrettyString(hitEntity);
                             if (dmg != null)
                                 dmg = Damageable.TryChangeDamage(hitEntity, dmg * Damageable.UniversalHitscanDamageModifier, origin: user);
 

@@ -86,4 +86,24 @@ public sealed partial class BlockingComponent : Component
     [DataField]
     public Dictionary<SlotFlags, float> AvaliableSlots = new();
     // SS220 equip shield on back end
+
+    // SS220 shield rework begin
+    [DataField, AutoNetworkedField]
+    public int Layer = 0;
+
+    [DataField, AutoNetworkedField]
+    public bool Outer = true;//if the damage should not be passed forward to other armor layers
+
+    [DataField, AutoNetworkedField]
+    public float RangeBlockProb = 1f;
+
+    [DataField, AutoNetworkedField]
+    public float ActiveRangeBlockProb = 1f;
+
+    [DataField, AutoNetworkedField]
+    public float MeleeBlockProb = 1f;
+
+    [DataField, AutoNetworkedField]
+    public float ActiveMeleeBlockProb = 1f;
+    // SS220 shield rework end
 }

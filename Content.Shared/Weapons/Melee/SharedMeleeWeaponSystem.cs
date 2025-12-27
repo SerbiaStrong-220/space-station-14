@@ -1,10 +1,8 @@
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Numerics;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions.Events;
 using Content.Shared.Administration.Components;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Blocking;
 using Content.Shared.CombatMode;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Events;
@@ -23,6 +21,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
+using Content.Shared.SS220.Weapons.Melee.Events;
 using Content.Shared.Standing; // ss220 add block heavy attack while user is down
 using Content.Shared.StatusEffect;
 using Content.Shared.Weapons.Melee.Components;
@@ -40,6 +39,9 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Numerics;
 using ItemToggleMeleeWeaponComponent = Content.Shared.Item.ItemToggle.Components.ItemToggleMeleeWeaponComponent;
 
 namespace Content.Shared.Weapons.Melee;
@@ -523,6 +525,17 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             return;
         }
 
+        EntityUid targetEntity = target.Value;
+        if (TryComp<BlockingUserComponent>(target, out var blockcomp))
+        {
+            var meleeblockEvent = new MeleeHitBlockAttemptEvent();
+            RaiseLocalEvent((EntityUid)target, meleeblockEvent);
+            if (meleeblockEvent.Cancelled && TryGetEntity(meleeblockEvent.blocker, out EntityUid? shield))
+            {
+                targetEntity = (EntityUid)shield;
+            }
+        }
+
         // Sawmill.Debug($"Melee damage is {damage.Total} out of {component.Damage.Total}");
 
         // Raise event before doing damage so we can cancel damage if the event is handled
@@ -548,10 +561,10 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         // For stuff that cares about it being attacked.
         var attackedEvent = new AttackedEvent(meleeUid, user, targetXform.Coordinates);
-        RaiseLocalEvent(target.Value, attackedEvent);
+        RaiseLocalEvent(targetEntity, attackedEvent);
 
         //ss220 extended weapon logic start
-        var weaponAttackEvent = new WeaponAttackEvent(user, target.Value, AttackType.LIGHT);
+        var weaponAttackEvent = new WeaponAttackEvent(user, targetEntity, AttackType.LIGHT);
         RaiseLocalEvent(meleeUid, weaponAttackEvent);
         //ss220 extended weapon logic end
 
@@ -561,14 +574,14 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         // SS220 hook attack event end
 
         var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEvent.BonusDamage, hitEvent.ModifiersList);
-        var damageResult = Damageable.TryChangeDamage(target, modifiedDamage, origin:user, ignoreResistances:resistanceBypass);
+        var damageResult = Damageable.TryChangeDamage(targetEntity, modifiedDamage, origin:user, ignoreResistances:resistanceBypass);
 
         if (damageResult is {Empty: false})
         {
             // If the target has stamina and is taking blunt damage, they should also take stamina damage based on their blunt to stamina factor
             if (damageResult.DamageDict.TryGetValue("Blunt", out var bluntDamage))
             {
-                _stamina.TakeStaminaDamage(target.Value, (bluntDamage * component.BluntStaminaDamageFactor).Float(), visual: false, source: user, with: meleeUid == user ? null : meleeUid);
+                _stamina.TakeStaminaDamage(targetEntity, (bluntDamage * component.BluntStaminaDamageFactor).Float(), visual: false, source: user, with: meleeUid == user ? null : meleeUid);
             }
 
             if (meleeUid == user)
@@ -584,7 +597,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         }
 
-        _meleeSound.PlayHitSound(target.Value, user, GetHighestDamageSound(modifiedDamage, _protoManager), hitEvent.HitSoundOverride, component);
+        _meleeSound.PlayHitSound(targetEntity, user, GetHighestDamageSound(modifiedDamage, _protoManager), hitEvent.HitSoundOverride, component);
 
         if (damageResult?.GetTotal() > FixedPoint2.Zero)
         {
@@ -661,14 +674,33 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         var targets = new List<EntityUid>();
         var damageQuery = GetEntityQuery<DamageableComponent>();
+        //var targetseffectonly = new List<EntityUid>();
 
         foreach (var entity in entities)
         {
             if (entity == user ||
                 !damageQuery.HasComponent(entity))
                 continue;
-
-            targets.Add(entity);
+            if (TryComp<BlockingUserComponent>(entity, out var blockcomp))
+            {
+                var meleeblockEvent = new MeleeHitBlockAttemptEvent();
+                RaiseLocalEvent(entity, meleeblockEvent);
+                if (meleeblockEvent.Cancelled && TryGetEntity(meleeblockEvent.blocker, out EntityUid? shield))
+                {
+                    var shield1 = (EntityUid)shield;
+                    targets.Add(shield1);
+                    AdminLogger.Add(LogType.MeleeHit, LogImpact.High,
+                    $"{ToPrettyString(user):actor} melee attacked (heavy) {ToPrettyString((EntityUid)shield):actor}");
+                    //targetseffectonly.Add(entity);
+                }
+                else
+                {
+                    targets.Add(entity);
+                    AdminLogger.Add(LogType.MeleeHit, LogImpact.High,
+                    $"{ToPrettyString(user):actor} melee attacked (heavy) {ToPrettyString(entity):actor}");
+                }
+            }
+            else { targets.Add(entity); }
         }
 
         // Sawmill.Debug($"Melee damage is {damage.Total} out of {component.Damage.Total}");
@@ -758,6 +790,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         if (appliedDamage.GetTotal() > FixedPoint2.Zero)
         {
             DoDamageEffect(targets, user, Transform(targets[0]));
+            //DoDamageEffect(targetseffectonly, user, Transform(targets[0]));
         }
 
         return true;

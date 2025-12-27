@@ -1,4 +1,4 @@
-﻿using Robust.Shared.Physics;
+using Robust.Shared.Physics;
 
 namespace Content.Shared.Blocking;
 
@@ -9,10 +9,17 @@ namespace Content.Shared.Blocking;
 public sealed partial class BlockingUserComponent : Component
 {
     /// <summary>
+    /// The entities that's being used to block and are shields
+    /// </summary>
+    [DataField("blockingItemsShields")]
+    public List<EntityUid?> BlockingItemsShields = new();
+
+
+    /// <summary>
     /// The entity that's being used to block
     /// </summary>
-    [DataField("blockingItem")]
-    public EntityUid? BlockingItem;
+    //[DataField("blockingItem")]
+    //public EntityUid? BlockingItem;
 
     /// <summary>
     /// Stores the entities original bodytype
