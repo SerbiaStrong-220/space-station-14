@@ -101,6 +101,7 @@
     - label: hidden-desc-chameleon-structure-cultyogg
       whitelistMindRoles: #WhitelistBody isnt working, so i using this one
       - CultYoggRole
+  - type: CultYoggChamelenBlocker
 
 - type: entity
   parent: BaseMaterialDoor
@@ -168,6 +169,7 @@
     fuel: 5
     time: 3
   - type: WeldCorruptInteraction
+  - type: CultYoggChamelenBlocker
 
 - type: entity
   parent: Bed
@@ -363,3 +365,4 @@
       whitelistMindRoles: #WhitelistBody isnt working, so i using this one
       - CultYoggRole
   - type: WeldCorruptInteraction
+  - type: CultYoggChamelenBlocker
