@@ -4,7 +4,6 @@ using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
 using Robust.Shared.Audio;
-using Content.Shared.Destructible.Thresholds;
 
 namespace Content.Shared.SS220.CultYogg.Cultists;
 
@@ -12,22 +11,39 @@ namespace Content.Shared.SS220.CultYogg.Cultists;
 [AutoGenerateComponentState]
 public sealed partial class CultYoggPurifiedComponent : Component
 {
+    /// <summary>
+    /// Holy water buffer
+    /// </summary>
     [ViewVariables, AutoNetworkedField]
     public FixedPoint2 TotalAmountOfHolyWater = 0;
 
-    [DataField]
-    public FixedPoint2 AmountToPurify = 10;
-
     /// <summary>
-    /// The random time between incidents, (min, max).
-    /// </summary>
-    public MinMax TimeBetweenIncidents = new(0, 5); //ToDo maybe add some damage or screams? should discuss
-
-    /// <summary>
-    /// Buffer to markup when time has come
+    /// The amount of holy water in units required for deconversion
     /// </summary>
     [DataField]
+    public FixedPoint2 AmountToPurify = 30;
+
+    /// <summary>
+    /// Amount of time requierd to requied for purifying removal
+    /// </summary>
+    [DataField]
+    public TimeSpan BeforeDeclinesTime = TimeSpan.FromSeconds(120);
+
+    /// <summary>
+    /// Buffer to markup when time to decrease Holy water buffer has come
+    /// </summary>
     public TimeSpan? PurifyingDecayEventTime;
+
+    /// <summary>
+    /// The time it takes for the cultist to purify itself is needed to cancel it, if the cultist has the opportunity
+    /// </summary>
+    [DataField]
+    public TimeSpan BeforePurifyingTime = TimeSpan.FromSeconds(120);
+
+    /// <summary>
+    /// The exact time when the cultist will be purified
+    /// </summary>
+    public TimeSpan? PurifyingEventTime;
 
     /// <summary>
     /// Contains special sounds which be played when entity will be purified
@@ -37,10 +53,4 @@ public sealed partial class CultYoggPurifiedComponent : Component
 
     [DataField]
     public SpriteSpecifier.Rsi Sprite = new(new("SS220/Effects/cult_yogg_purifying.rsi"), "purifyingEffect");
-
-    /// <summary>
-    /// Amount of time requierd to requied for purifying removal
-    /// </summary>
-    [DataField]
-    public TimeSpan BeforeDeclinesTime = TimeSpan.FromSeconds(120);
 }
