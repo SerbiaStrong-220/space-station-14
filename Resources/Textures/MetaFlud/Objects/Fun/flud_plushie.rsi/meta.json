@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "license": "CC BY 4.0",
+    "copyright": "For MetaFlud by Neko_I",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+      {
+        "name": "shelly-plush"
+      }
+    ]
+}

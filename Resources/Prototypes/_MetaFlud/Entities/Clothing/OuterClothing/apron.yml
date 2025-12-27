@@ -1,0 +1,10 @@
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCuteApron
+  name: Фартук
+  description: Вычурный фартук. Явно фальшивка.
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/OuterClothing/apron.rsi
+  - type: Clothing
+    sprite: MetaFlud/Clothing/OuterClothing/apron.rsi
