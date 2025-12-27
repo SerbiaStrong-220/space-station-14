@@ -5,11 +5,17 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Signature;
 
+[DataDefinition]
 [Serializable, NetSerializable]
-public sealed class SignatureData
+public sealed partial class SignatureData
 {
+    [DataField]
     public int Width;
+
+    [DataField]
     public int Height;
+
+    [DataField]
     public byte[] Pixels;
 
     public SignatureData(int w, int h)
