@@ -207,7 +207,7 @@ public sealed class DefibrillatorSystem : EntitySystem
 
         RaiseLocalEvent(user, ref defibChancesEvent);
 
-        var successZap = _random.Prob(defibChancesEvent.FailureChance);
+        var successZap = !_random.Prob(defibChancesEvent.FailureChance);
         var selfDamage = _random.Prob(defibChancesEvent.SelfDamageChance);
 
         if (HasComp<GhostComponent>(user)) //for admins with aghost
