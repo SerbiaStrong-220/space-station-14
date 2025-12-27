@@ -1,0 +1,35 @@
+- type: entity
+  name: Кусанаги-но Цуруги
+  parent: CaptainSabre
+  id: KusanagiNoTsurugi
+  description: Мечь собирающий райские облака.. И убивающий богов.
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Objects/Weapons/Melee/kusanagi.rsi
+  - type: MeleeWeapon
+    wideAnimationRotation: -60
+    attackRate: 2.5
+    damage:
+      types:
+        Slash: 50
+  - type: Item
+    storedSprite:
+      state: storage
+      sprite: MetaFlud/Objects/Weapons/Melee/kusanagi_storage_64x.rsi #Done in 64x64 because it looks way too puny in 32x32
+    shape:
+    - 0,0,0,3
+  - type: Clothing
+    sprite: MetaFlud/Objects/Weapons/Melee/kusanagi.rsi
+    slots:
+    - Back
+    - Belt
+  - type: Reflect
+    slotFlags:
+    - BACK, BELT
+    reflectProb: 0.75
+    reflectProbProjectile: 0.75
+  - type: ThrowingAngle
+    angle: 300
+  - type: Tag
+    tags: 
+    - KusanagiNoTsurugi

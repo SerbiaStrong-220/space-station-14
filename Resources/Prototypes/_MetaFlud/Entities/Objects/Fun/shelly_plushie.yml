@@ -1,0 +1,14 @@
+- type: entity
+  parent: BasePlushie
+  id: PlushieShelly
+  name: shelly plushie
+  description: Everyone's favorite chief medical officer
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Objects/Fun/flud_plushie.rsi
+    state: shelly-plush
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/SS220/Sponsor/doctorlivesey1.ogg
+  - type: UseDelay
+    delay: 5.0
