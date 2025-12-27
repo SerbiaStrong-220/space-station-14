@@ -38,7 +38,7 @@ public sealed class EventHorizonSystem : SharedEventHorizonSystem
     [Dependency] private readonly TagSystem _tagSystem = default!;
     #endregion Dependencies
 
-    private static readonly ProtoId<TagPrototype> HighRiskItemTag = "HighRiskItem";
+    private readonly ProtoId<TagPrototype> HighRiskItemTag = "HighRiskItem";
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
 

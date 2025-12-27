@@ -88,6 +88,12 @@ public abstract class SharedCultYoggSystem : EntitySystem
         if (args.Handled)
             return;
 
+        if (TryCorruptInteractions(uid, args.Target))
+        {
+            args.Handled = true;
+            return;
+        }
+
         if (_cultYoggCorruptedSystem.IsCorrupted(args.Target))
         {
             _popup.PopupClient(Loc.GetString("cult-yogg-corrupt-already-corrupted"), args.Target, uid);
@@ -126,6 +132,17 @@ public abstract class SharedCultYoggSystem : EntitySystem
             return;
         }
         args.Handled = true;
+    }
+
+    private bool TryCorruptInteractions(Entity<CultYoggComponent> ent, EntityUid target)
+    {
+        var effectEv = new CorruptInteractionEvent();
+        RaiseLocalEvent(target, ref effectEv);
+
+        if (effectEv.Handled)
+            return true;
+
+        return false;
     }
     #endregion
 

@@ -3,7 +3,7 @@
 using Content.Shared.Actions;
 using Robust.Shared.GameStates;
 
-namespace Content.Shared.SS220.IgnoreLightVision;
+namespace Content.Shared.SS220.IgnoreLightVision.Components;
 
 [RegisterComponent, NetworkedComponent]
 public sealed partial class ThermalVisionComponent : AddIgnoreLightVisionOverlayComponent
@@ -11,4 +11,4 @@ public sealed partial class ThermalVisionComponent : AddIgnoreLightVisionOverlay
     public ThermalVisionComponent(float radius, float closeRadius) : base(radius, closeRadius) { }
 }
 
-public sealed partial class UseThermalVisionEvent : InstantActionEvent { }
+public sealed partial class UseThermalVisionEvent : InstantActionEvent;
