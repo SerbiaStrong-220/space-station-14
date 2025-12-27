@@ -6,12 +6,12 @@ using Content.Shared.SS220.Surgery.Graph;
 namespace Content.Server.SS220.Surgery.Action;
 
 [DataDefinition]
-public sealed partial class ApplyBleedingSurgeryAction : ISurgeryGraphAction
+public sealed partial class ApplyBleedingAction : ISurgeryGraphAction
 {
     [DataField]
     public float BleedAmount = 2f;
 
-    public void PerformAction(EntityUid uid, EntityUid? userUid, EntityUid? used, IEntityManager entityManager)
+    public void PerformAction(EntityUid uid, EntityUid userUid, EntityUid? used, IEntityManager entityManager)
     {
         entityManager.System<BloodstreamSystem>().TryModifyBleedAmount(uid, BleedAmount);
     }

@@ -1,0 +1,13 @@
+surgery-puppet-part-Head = голова
+surgery-puppet-part-Eyes = глаза
+surgery-puppet-part-Mouth = рот
+surgery-puppet-part-Torso = грудь
+surgery-puppet-part-LeftArm = левая рука
+surgery-puppet-part-RightArm = правая рука
+surgery-puppet-part-LeftLeg = левая нога
+surgery-puppet-part-RightHand = правая кисть
+surgery-puppet-part-LeftHand = левая кисть
+surgery-puppet-part-LowerTorso = пах
+surgery-puppet-part-RightLeg = правая нога
+surgery-puppet-part-LeftFoot = левая стопа
+surgery-puppet-part-RightFoot = правая стопа

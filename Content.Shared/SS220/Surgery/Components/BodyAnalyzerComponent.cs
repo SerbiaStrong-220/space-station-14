@@ -3,8 +3,8 @@
 namespace Content.Shared.SS220.Surgery.Components;
 
 /// <summary>
-/// This component used to define items which can start operations
+/// This component used to define items which can send target uid for <see cref="BodyAnalyzerBUI"/>
 /// </summary>
 [RegisterComponent]
-public sealed partial class SurgeryDrapeComponent : Component
+public sealed partial class BodyAnalyzerComponent : Component
 { }

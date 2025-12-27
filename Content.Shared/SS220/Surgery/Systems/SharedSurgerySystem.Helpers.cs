@@ -1,47 +1,41 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.Audio;
-using Content.Shared.SS220.MindSlave;
 using Content.Shared.SS220.Surgery.Components;
 using Content.Shared.SS220.Surgery.Graph;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.Surgery.Systems;
 
 public abstract partial class SharedSurgerySystem
 {
-    protected bool IsValidTarget(EntityUid uid, out string? reasonLocPath)
+    // TODO
+    /// <summary>
+    ///
+    /// </summary>
+    protected bool IsValidTarget(EntityUid uid, ProtoId<SurgeryGraphPrototype> id, out string? reasonLocPath)
     {
         reasonLocPath = null;
-        if (HasComp<OnSurgeryComponent>(uid)
-            || !HasComp<MindSlaveComponent>(uid) // for now only for slaves
-            || !HasComp<SurgableComponent>(uid))
+
+        if (!_prototype.TryIndex(id, out var surgeryGraphProto))
             return false;
 
-        if (!_buckleSystem.IsBuckled(uid))
-        {
-            reasonLocPath = "surgery-invalid-target-buckle";
-            return false;
-        }
+        var sharedCheck = SharedSurgeryAvaibilityChecks.IsSurgeryGraphAvailableTarget(uid, surgeryGraphProto, EntityManager, out reasonLocPath);
 
-        return true;
+        return sharedCheck;
     }
 
-    protected bool IsValidPerformer(EntityUid uid)
+    // TODO
+    /// <summary>
+    /// Here we check for...
+    /// </summary>
+    protected bool IsValidPerformer(EntityUid uid, ProtoId<SurgeryGraphPrototype> id)
     {
-        if (!HasComp<MindSlaveMasterComponent>(uid)) // for now only for masters
+        if (!_prototype.TryIndex(id, out var surgeryGraphProto))
             return false;
 
-        return true;
-    }
+        var sharedCheck = SharedSurgeryAvaibilityChecks.IsSurgeryGraphAvailablePerformer(uid, surgeryGraphProto, EntityManager);
 
-    protected bool OperationEnded(Entity<OnSurgeryComponent> entity)
-    {
-        var surgeryProto = _prototype.Index(entity.Comp.SurgeryGraphProtoId);
-
-        if (entity.Comp.CurrentNode != surgeryProto.GetEndNode().Name)
-            return false;
-
-        return true;
+        return sharedCheck;
     }
 
     protected virtual void ProceedToNextStep(Entity<OnSurgeryComponent> entity, EntityUid user, EntityUid? used, SurgeryGraphEdge chosenEdge)
@@ -49,10 +43,10 @@ public abstract partial class SharedSurgerySystem
         ChangeSurgeryNode(entity, chosenEdge.Target, user, used);
 
         _audio.PlayPredicted(SurgeryGraph.GetSoundSpecifier(chosenEdge), entity.Owner, user,
-                        AudioHelpers.WithVariation(0.125f, _random).WithVolume(1f));
+                        SurgeryGraph.GetSoundSpecifier(chosenEdge)?.Params.WithVolume(1f));
 
         if (OperationEnded(entity))
-            RemComp<OnSurgeryComponent>(entity.Owner);
+            EndOperation(entity);
     }
 
     protected void ChangeSurgeryNode(Entity<OnSurgeryComponent> entity, string targetNode, EntityUid performer, EntityUid? used)
@@ -79,6 +73,34 @@ public abstract partial class SharedSurgerySystem
         if (SurgeryGraph.Popup(foundNode) != null)
             _popup.PopupPredicted(Loc.GetString(SurgeryGraph.Popup(foundNode)!, ("target", entity.Owner),
                 ("user", performer), ("used", used == null ? Loc.GetString("surgery-null-used") : used)), entity.Owner, performer);
-        // hands/pawns uh...
+    }
+
+    protected bool OperationEnded(Entity<OnSurgeryComponent> entity)
+    {
+        var surgeryProto = _prototype.Index(entity.Comp.SurgeryGraphProtoId);
+
+        if (entity.Comp.CurrentNode != surgeryProto.GetEndNode().Name)
+            return false;
+
+        return true;
+    }
+
+
+    protected bool OperationCanBeEnded(Entity<OnSurgeryComponent?> entity)
+    {
+        var (uid, comp) = entity;
+        if (!Resolve(uid, ref comp))
+            return false;
+
+        var surgeryProto = _prototype.Index(comp.SurgeryGraphProtoId);
+
+        var isStartNode = comp.CurrentNode == surgeryProto.Start;
+
+        return isStartNode || OperationEnded((uid, comp));
+    }
+
+    protected void EndOperation(EntityUid entity)
+    {
+        RemComp<OnSurgeryComponent>(entity);
     }
 }

@@ -54,6 +54,8 @@ public sealed class LimitationReviveSystem : SharedLimitationReviveSystem
             else
                 ent.Comp.DamageCountingTime = null;
         }
+
+        Dirty(ent);
     }
 
     private void OnAddReviweDebuffs(Entity<LimitationReviveComponent> ent, ref AddReviveDebuffsEvent args)

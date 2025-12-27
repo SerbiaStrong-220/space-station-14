@@ -15,17 +15,17 @@ public sealed partial class SurgeryToolTypeCondition : ISurgeryGraphCondition
     [DataField(required: true)]
     public SurgeryToolType SurgeryTool = SurgeryToolType.Invalid;
 
-    public bool Condition(EntityUid uid, IEntityManager entityManager)
+    public bool Condition(EntityUid targetUid, EntityUid toolUid, EntityUid userUid, IEntityManager entityManager)
     {
-        if (!entityManager.TryGetComponent<SurgeryToolComponent>(uid, out var surgeryTool)
+        if (!entityManager.TryGetComponent<SurgeryToolComponent>(toolUid, out var surgeryTool)
             || surgeryTool.ToolType != SurgeryTool)
             return false;
 
         return true;
     }
 
-    public void DoScanExamine()
+    public string ConditionDescription()
     {
-
+        return Loc.GetString($"surgery-condition-tool-required-{SurgeryTool.ToString().ToLower()}");
     }
 }

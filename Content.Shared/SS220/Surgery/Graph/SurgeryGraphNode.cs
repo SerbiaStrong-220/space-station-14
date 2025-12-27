@@ -15,12 +15,14 @@ public sealed partial class SurgeryGraphNode
     public ProtoId<AbstractSurgeryNodePrototype>? BaseNode { get; private set; }
 
     [DataField]
+    [Access(typeof(SurgeryGraphSystem))]
     public NodeTextDescription NodeText = new();
 
     [DataField("edges")]
     private SurgeryGraphEdge[] _edges = Array.Empty<SurgeryGraphEdge>();
 
     [ViewVariables]
+    [Access(typeof(SurgeryGraphSystem))]
     public IReadOnlyList<SurgeryGraphEdge> Edges => _edges;
 
 }

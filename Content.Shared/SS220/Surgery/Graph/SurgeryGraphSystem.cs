@@ -29,6 +29,9 @@ public sealed class SurgeryGraphSystem : EntitySystem
         return Get(node, (x) => x.NodeText.ExamineDescription);
     }
 
+    /// <summary>
+    /// Loc path to description
+    /// </summary>
     public string? Description(SurgeryGraphNode node)
     {
         return Get(node, (x) => x.NodeText.Description);
