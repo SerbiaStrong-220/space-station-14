@@ -26,6 +26,9 @@ public enum SlotFlags
     LEGS = 1 << 13,
     FEET = 1 << 14,
     SUITSTORAGE = 1 << 15,
+	PANTS = 1 << 16, // MetaFlud start
+	BRA = 1 << 17,   // 
+	SOCKS = 1 << 18, // MetaFlud end
     All = ~NONE,
 
     WITHOUT_POCKET = All & ~POCKET
