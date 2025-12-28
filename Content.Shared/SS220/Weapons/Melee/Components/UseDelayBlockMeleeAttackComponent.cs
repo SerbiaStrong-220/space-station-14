@@ -6,5 +6,5 @@ namespace Content.Shared.SS220.Weapons.Melee.UseDelayBlockAtack;
 public sealed partial class UseDelayBlockMeleeAttackComponent : Component
 {
     [DataField]
-    public List<string> Delays = new(){"default"};
+    public List<string> Delays = new() { "default" };
 }

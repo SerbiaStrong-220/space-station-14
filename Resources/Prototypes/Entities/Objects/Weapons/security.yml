@@ -17,7 +17,7 @@
     # SS220-add-christmas-baton-begin
     - state: christmasbaton_off
       map: [ "christmas" ]
-      visible: False      
+      visible: False
     # SS220-add-christmas-baton-end
   - type: Stunbaton
     energyPerUse: 50
@@ -48,14 +48,14 @@
       types:
         Blunt: 7
     bluntStaminaDamageFactor: 2.0
-    angle: 0 #SS220 staminaweapons rework 
+    angle: 0 #SS220 staminaweapons rework
     animation: WeaponArcThrust
   - type: StaminaDamageOnHit
-    damage: 25 #SS220 staminaweapons rework 
-    lightAttackDamageMultiplier: 2.5 #SS220 staminaweapons rework 
+    damage: 25 #SS220 staminaweapons rework
+    lightAttackDamageMultiplier: 2.5 #SS220 staminaweapons rework
     sound: /Audio/Weapons/egloves.ogg
   - type: StaminaDamageOnCollide
-    damage: 15 #SS220 staminaweapons rework 
+    damage: 15 #SS220 staminaweapons rework
     sound: /Audio/Weapons/egloves.ogg
     # SS220-Stunbaton-rework throwing angles
   #SS220 staminaweapons rework start
@@ -63,15 +63,15 @@
     components:
     - type: DelayedKnockdownOnHit
       onHeavyAttack: false
-      delay: 3
-      duration: 2
+      knockdownDelay: 3
+      knockdownDuration: 2
       drop: true
       refresh: true
       autoStand: true
       useDelay: stunbaton
-    - type: UseDelayBlockMeleeAttack
-      delays: 
-      - stunbaton
+  - type: UseDelayBlockMeleeAttack
+    delays:
+    - stunbaton
   #SS220 staminaweapons rework end
   - type: Ensnaring # SS220 stunbaton pacifism fix
   - type: ThrowingAngle
@@ -100,6 +100,8 @@
     startingCharge: 1000
   - type: UseDelay
     delays:
+      default:
+        length: 1
       stunbaton:
         length: 3
   - type: Item

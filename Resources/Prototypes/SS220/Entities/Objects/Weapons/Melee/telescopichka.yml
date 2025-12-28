@@ -54,18 +54,18 @@
     components:
     - type: DisarmMalus
       malus: 0.6
-    - type: DelayedKnockdownOnHit #SS220 staminaweapons rework 
+    - type: DelayedKnockdownOnHit #SS220 staminaweapons rework
       onHeavyAttack: true
       delay: 0 #instant
       duration: 2
       drop: false
-      refresh: false
+      refresh: true
       autoStand: true
       useDelay: baton
-    - type: UseDelayBlockMeleeAttack
-      delays: 
-      - default
-      - baton
+  - type: UseDelayBlockMeleeAttack
+    delays:
+    - default
+    - baton
   - type: Item
     size: Small
     sprite: SS220/Objects/Weapons/Melee/Stunning/telescopichka.rsi

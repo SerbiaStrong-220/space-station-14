@@ -19,7 +19,13 @@ public sealed class UseDelayBlockMeleeAttackSystem : EntitySystem
         if (!TryComp(ent, out UseDelayComponent? useDelay))
             return;
 
-        if (ent.Comp.Delays.Any(delay => _useDelay.IsDelayed((ent, useDelay), delay)))
-            args.Cancelled = true;
+        foreach (var delay in ent.Comp.Delays)
+        {
+            if (_useDelay.IsDelayed((ent, useDelay), delay))
+            {
+                args.Cancelled = true;
+                break;
+            }
+        }
     }
 }
