@@ -3,8 +3,8 @@
   parent:
   - Incorporeal
   - BaseMob
-  name: Тёмный Жнец
-  description: Ужасающая тварь, выглядящая так, словно её сшили из случайных кусков человеческой плоти.
+  name: Dark Reaper
+  description: A terrifying creature that looks like it was stitched together from random pieces of human flesh.
   components:
   - type: DarkReaper
     healPerConsume:
@@ -32,6 +32,12 @@
     resistance: 5
   - type: ExplosionResistance
   - type: NoSlip
+  - type: GhostTakeoverAvailable
+  - type: GhostRole
+    name: ghost-role-information-dark-reaper-name
+    description: ghost-role-information-dark-reaper-description
+    rules: ghost-role-information-dark-reaper-rules
+    job: DarkReaper
 
   # Visuals and appearance
   - type: Sprite

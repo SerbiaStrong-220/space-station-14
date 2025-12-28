@@ -186,7 +186,7 @@
   #SS220-underused-uplinks-stuff end
   components:
   - type: LimitedCharges
-    maxCharges: 12 #SS220 changed
+    maxCharges: 2 #SS220 changed
   - type: Action
     checkCanInteract: false
     useDelay: 5

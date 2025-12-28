@@ -12,7 +12,10 @@ using Robust.Client.UserInterface.RichText;
 using Content.Client.UserInterface.RichText;
 using Robust.Shared.Input;
 using Content.Client.SS220.Language;
+using Content.Client.SS220.Paper.UI;
 using Content.Client.SS220.UserInterface.Controls;
+using Content.Client.Stylesheets;
+using Content.Shared.SS220.Signature;
 using Robust.Client.Player;
 
 namespace Content.Client.Paper.UI
@@ -24,6 +27,7 @@ namespace Content.Client.Paper.UI
         [Dependency] private readonly IResourceCache _resCache = default!;
         [Dependency] private readonly IPlayerManager _player = default!; // SS220 languages
         [Dependency] private readonly IEntityManager _entityManager = default!; // SS220 languages
+        [Dependency] private readonly IStylesheetManager _stylesheet = default!; // ss220 add signature
 
         private readonly LanguageSystem _languageSystem; // SS220 languages
 
@@ -58,6 +62,8 @@ namespace Content.Client.Paper.UI
 
         public event Action<string>? OnSaved;
 
+        public event Action? LoadSavedSignatureData; // ss220 add signature
+
         private int _MaxInputLength = -1;
         public int MaxInputLength
         {
@@ -84,6 +90,10 @@ namespace Content.Client.Paper.UI
 
             // We can't configure the RichTextLabel contents from xaml, so do it here:
             BlankPaperIndicator.SetMessage(Loc.GetString("paper-ui-blank-page-message"), null, DefaultTextColor);
+
+            // ss220 signature start
+            SignatureSettingsContainer.Stylesheet = new DocumentHelperWindowStyle().Create(_stylesheet.SheetNano, _resCache);
+            // ss220 signature end
 
             // Hook up the close button:
             CloseButton.OnPressed += _ => Close();
@@ -116,6 +126,12 @@ namespace Content.Client.Paper.UI
                 ("keybind", _inputManager.GetKeyFunctionButtonString(EngineKeyFunctions.MultilineTextSubmit)));
 
             PinButton.LinkedControl = this; // SS220 pin button
+            // ss220 add signature start
+            LoadSignatureButton.OnPressed += _ =>
+            {
+                LoadSavedSignatureData?.Invoke();
+            };
+            // ss220 add signature end
         }
 
         /// <summary>
@@ -227,6 +243,13 @@ namespace Content.Client.Paper.UI
             }
         }
 
+        // ss220 add signature start
+        public void InitSignature(SignatureData signatureData)
+        {
+            Signature.SetSignature(signatureData);
+        }
+        // ss220 add signature end
+
         /// <summary>
         ///     Control interface. We'll mostly rely on the children to do the drawing
         ///     but in order to get lines on paper to match up with the rich text labels,
@@ -274,6 +297,11 @@ namespace Content.Client.Paper.UI
             InputContainer.Visible = isEditing;
             EditButtons.Visible = isEditing;
             DocumentHelper.Visible = isEditing; // SS220 Document helper
+            // ss220 add signature start
+            Signature.Editable = isEditing;
+            SignatureContainer.Visible = Signature.Data != null || isEditing;
+            SignatureSettingsContainer.Visible = isEditing;
+            // ss220 add signature end
 
             var msg = new FormattedMessage();
             msg.AddMarkupPermissive(state.Text);
@@ -409,5 +437,13 @@ namespace Content.Client.Paper.UI
             WrittenTextLabel.SetMessage(msg, _allowedTags, DefaultTextColor);
         }
         // SS220 languages end
+
+        // ss220 add signature start
+        public void UpdateBrush(int brushWriteSize, int brushEraseSize)
+        {
+            Signature.BrushWriteSize = brushWriteSize;
+            Signature.BrushEraseSize = brushEraseSize;
+        }
+        // ss220 add signature end
     }
 }

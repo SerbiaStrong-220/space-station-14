@@ -5,14 +5,14 @@
   from:
     tag: Airlock
   replacementProto: CultYoggAirlock
-  replacementCooldown: 180
+  replacementCooldown: 300
 
 - type: miGoCapture
   id: GlassAirlock
   from:
     tag: GlassAirlock
   replacementProto: CultYoggAirlock
-  replacementCooldown: 180
+  replacementCooldown: 300
 
 - type: miGoCapture
   id: Wall
