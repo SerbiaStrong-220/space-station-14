@@ -1,0 +1,211 @@
+# Для тяночек
+- type: loadout
+  id: ThighWhiteSocks
+  storage:
+    back:
+    - ClothingThighWhite
+
+- type: loadout
+  id: FishnetTights
+  storage:
+    back: 
+    - ClothingFishnet
+
+- type: loadout
+  id: KneeWhiteSocks
+  storage:
+    back: 
+    - ClothingKneeWhite
+
+- type: loadout
+  id: KneeFishnetSocks
+  storage:
+    back:
+    - ClothingKneeFishnet
+
+- type: loadout
+  id: Pantyhose
+  storage:
+    back:
+    - ClothingPantyhose
+
+- type: loadout
+  id: ShortBlackSocks
+  storage:
+    back:
+    - ClothingShortBlack
+
+- type: loadout
+  id: StockingsBlue
+  storage:
+    back:
+    - ClothingStockingsBlue
+
+- type: loadout
+  id: StockingsCyan
+  storage:
+    back:
+    - ClothingStockingsCyan
+
+- type: loadout
+  id: StockingsDpink
+  storage:
+    back:
+    - ClothingStockingsDpink
+
+- type: loadout
+  id: StockingsGreen
+  storage:
+    back:
+    - ClothingStockingsGreen
+
+- type: loadout
+  id: Stockingslpink
+  storage:
+    back:
+    - ClothingStockingslpink
+
+- type: loadout
+  id: StockingsOrange
+  storage:
+    back:
+    - ClothingStockingsOrange
+
+- type: loadout
+  id: StockingsPurple
+  storage:
+    back:
+    - ClothingStockingsPurple
+
+- type: loadout
+  id: ThighAceSocks
+  storage:
+    back:
+    - ClothingThighAce
+
+- type: loadout
+  id: ThighAsblastusaSocks
+  storage:
+    back:
+    - ClothingThighAsblastusa
+
+- type: loadout
+  id: ThighBeeSocks
+  storage:
+    back:
+    - ClothingThighBee
+
+- type: loadout
+  id: ThighBlackSocks
+  storage:
+    back:
+    - ClothingThighBlack
+
+- type: loadout
+  id: ThighCommieSocks
+  storage:
+    back:
+    - ClothingThighCommie
+
+- type: loadout
+  id: ThighRainbowSocks
+  storage:
+    back:
+    - ClothingThighRainbow
+
+- type: loadout
+  id: ThighTransSocks
+  storage:
+    back:
+    - ClothingThighTrans
+
+- type: loadout
+  id: ThighUkSocks
+  storage:
+    back:
+    - ClothingThighUk
+
+- type: loadout
+  id: ThighChristmasSocks
+  storage:
+    back:
+    - ClothingThighChristmas
+
+# Для мужиков
+- type: loadout
+  id: ShortWhiteSocks
+  storage:
+    back: 
+    - ClothingShortWhite
+
+- type: loadout
+  id: KneeAceSocks
+  storage:
+    back:
+    - ClothingKneeAce
+
+- type: loadout
+  id: KneeAssblastusaSocks
+  storage:
+    back:
+    - ClothingKneeAsblastusa
+
+- type: loadout
+  id: KneeBeeSocks
+  storage:
+    back:
+    - ClothingKneeBee
+
+- type: loadout
+  id: KneeBlackSocks
+  storage:
+    back:
+    - ClothingKneeBlack
+
+- type: loadout
+  id: KneeCommieSocks
+  storage:
+    back:
+    - ClothingKneeCommie
+
+- type: loadout
+  id: KneeRainbowSocks
+  storage:
+    back:
+    - ClothingKneeRainbow
+
+- type: loadout
+  id: KneeStripedSocks
+  storage:
+    back:
+    - ClothingKneeStriped
+
+- type: loadout
+  id: KneeThinSocks
+  storage:
+    back:
+    - ClothingKneeThin
+
+- type: loadout
+  id: KneeTransSocks
+  storage:
+    back:
+    - ClothingKneeTrans
+
+- type: loadout
+  id: KneeUkSocks
+  storage:
+    back: 
+    - ClothingKneeUk
+
+- type: loadout
+  id: NormBlackSocks
+  storage:
+    back: 
+    - ClothingNormBlack
+
+- type: loadout
+  id: NormWhiteSocks
+  storage:
+    back: 
+    - ClothingNormWhite

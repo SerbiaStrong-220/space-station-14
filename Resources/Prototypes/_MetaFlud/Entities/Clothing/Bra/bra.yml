@@ -1,0 +1,181 @@
+- type: entity
+  parent: ClothingBraStorageBase
+  id: ClothingBraNekoWhite
+  name: женский бюстгальтер «Neko», белый
+  description: Белый бюстгальтер с ушками и хвостиком кота.
+  suffix: Бюстгальтер
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Bra/bra.rsi
+    state: female_neko_white_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Bra/bra.rsi
+    equippedState: female_neko_white
+
+- type: entity
+  parent: ClothingBraStorageBase
+  id: ClothingBraNekoBlack
+  name: женский бюстгальтер «Neko», чёрный
+  description: Чёрный бюстгальтер с ушками и хвостиком кота.
+  suffix: Бюстгальтер
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Bra/bra.rsi
+    state: female_neko_black_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Bra/bra.rsi
+    equippedState: female_neko_black
+
+- type: entity
+  parent: ClothingBraStorageBase
+  id: ClothingBraAssblastusa
+  name: женский бюстгальтер «Assblastusa»
+  description: Бюстгальтер с уникальным дизайном в космическом стиле.
+  suffix: Бюстгальтер
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Bra/bra.rsi
+    state: female_assblastusa_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Bra/bra.rsi
+    equippedState: female_assblastusa
+
+- type: entity
+  parent: ClothingBraStorageBase
+  id: ClothingBraBikini
+  name: женский бюстгальтер-бикини
+  description: Бюстгальтер в виде облегающего купальника.
+  suffix: Бюстгальтер
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Bra/bra.rsi
+    state: female_bikini_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Bra/bra.rsi
+    equippedState: female_bikini
+
+- type: entity
+  parent: ClothingBraStorageBase
+  id: ClothingBraBralette
+  name: женский бюстгальтер-топ
+  description: Удобный и стильный бюстгальтер-топ.
+  suffix: Бюстгальтер
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Bra/bra.rsi
+    state: female_bralette_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Bra/bra.rsi
+    equippedState: female_bralette
+
+- type: entity
+  parent: ClothingBraStorageBase
+  id: ClothingBraCommie
+  name: женский бюстгальтер «Commie»
+  description: Бюстгальтер с дизайном, вдохновлённым коммунистической тематикой.
+  suffix: Бюстгальтер
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Bra/bra.rsi
+    state: female_commie_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Bra/bra.rsi
+    equippedState: female_commie
+
+- type: entity
+  parent: ClothingBraStorageBase
+  id: ClothingBraKinky
+  name: женский сексуальный бюстгальтер
+  description: Сексуальный бюстгальтер для особых случаев.
+  suffix: Бюстгальтер
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Bra/bra.rsi
+    state: female_kinky_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Bra/bra.rsi
+    equippedState: female_kinky
+
+- type: entity
+  parent: ClothingBraStorageBase
+  id: ClothingBraLace
+  name: женский кружевной бюстгальтер
+  description: Кружевной бюстгальтер для женственного образа.
+  suffix: Бюстгальтер
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Bra/bra.rsi
+    state: female_lace_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Bra/bra.rsi
+    equippedState: female_lace
+
+- type: entity
+  parent: ClothingBraStorageBase
+  id: ClothingBraSport
+  name: женский спортивный бюстгальтер
+  description: Удобный и поддерживающий бюстгальтер для занятий спортом.
+  suffix: Бюстгальтер
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Bra/bra.rsi
+    state: female_sport_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Bra/bra.rsi
+    equippedState: female_sport
+
+- type: entity
+  parent: ClothingBraStorageBase
+  id: ClothingBraThong
+  name: женский тонкий бюстгальтер
+  description: Тонкий и лаконичный бюстгальтер.
+  suffix: Бюстгальтер
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Bra/bra.rsi
+    state: female_thong_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Bra/bra.rsi
+    equippedState: female_thong
+
+- type: entity
+  parent: ClothingBraStorageBase
+  id: ClothingBraUk
+  name: женский бюстгальтер «Великобритания»
+  description: Бюстгальтер с дизайном, символизирующим Великобританию.
+  suffix: Бюстгальтер
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Bra/bra.rsi
+    state: female_uk_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Bra/bra.rsi
+    equippedState: female_uk
+
+- type: entity
+  parent: ClothingBraStorageBase
+  id: ClothingBraStrapless
+  name: женский бюстгальтер без бретелей
+  description: Бюстгальтер без бретелей, незаметный под одеждой.
+  suffix: Бюстгальтер
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Bra/bra.rsi
+    state: female_strapless_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Bra/bra.rsi
+    equippedState: female_strapless
+
+- type: entity
+  parent: ClothingBraStorageBase
+  id: ClothingBraChristmas
+  name: женский рождественский бюстгальтер
+  description: Бюстгальтер с дизайном, символизирующим Рождество.
+  suffix: Бюстгальтер
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Bra/bra.rsi
+    state: female_christmas_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Bra/bra.rsi
+    equippedState: female_christmas

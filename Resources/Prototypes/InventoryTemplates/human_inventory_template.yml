@@ -1,6 +1,27 @@
 - type: inventoryTemplate
   id: human
   slots:
+    - name: bra # MetaFlud start
+      slotTexture: bra
+      slotFlags: BRA
+      stripTime: 3
+      uiWindowPos: 3,2
+      strippingWindowPos: 2,1
+      displayName: Bra
+    - name: pants
+      slotTexture: pants
+      slotFlags: PANTS
+      stripTime: 6
+      uiWindowPos: 3,1
+      strippingWindowPos: 2,2
+      displayName: Pants
+    - name: socks
+      slotTexture: socks
+      slotFlags: SOCKS
+      stripTime: 3
+      uiWindowPos: 3,0
+      strippingWindowPos: 2,3
+      displayName: Socks # MetaFlud end
     - name: shoes
       slotTexture: shoes
       slotFlags: FEET

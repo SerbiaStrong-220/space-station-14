@@ -1,0 +1,139 @@
+# Для тяночек
+- type: loadout
+  id: StraplessWomanPants
+  storage:
+    back: 
+    - ClothingPantsWomanStrapless
+
+- type: loadout
+  id: NekoWhiteWomanPants
+  storage:
+    back:
+    - ClothingPantsWomanNekoWhite
+
+- type: loadout
+  id: NekoBlackWomanPants
+  storage:
+    back: 
+    - ClothingPantsWomanNekoBlack
+
+- type: loadout
+  id: AssblastusaWomanPants
+  storage:
+    back: 
+    - ClothingPantsWomanAssblastusa
+
+- type: loadout
+  id: BikiniWomanPants
+  storage:
+    back: 
+    - ClothingPantsWomanBikini
+
+- type: loadout
+  id: BraletteWomanPants
+  storage:
+    back: 
+    - ClothingPantsWomanBralette
+
+- type: loadout
+  id: CommieWomanPants
+  storage:
+    back: 
+    - ClothingPantsWomanCommie
+
+- type: loadout
+  id: KinkyWomanPants
+  storage:
+    back: 
+    - ClothingPantsWomanKinky
+
+- type: loadout
+  id: LaceWomanPants
+  storage:
+    back: 
+    - ClothingPantsWomanLace
+
+- type: loadout
+  id: SportWomanPants
+  storage:
+    back: 
+    - ClothingPantsWomanSport
+
+- type: loadout
+  id: ThongWomanPants
+  storage:
+    back: 
+    - ClothingPantsWomanThong
+
+- type: loadout
+  id: UkWomanPants
+  storage:
+    back: 
+    - ClothingPantsWomanUk
+
+- type: loadout
+  id: ChristmasWomanPants
+  storage:
+    back: 
+    - ClothingPantsWomanChristmas
+
+# Для мужиков
+- type: loadout
+  id: BoxersManPants
+  storage:
+    back: 
+    - ClothingPantsManBoxers
+
+- type: loadout
+  id: AssblastusaManPants
+  storage:
+    back: 
+    - ClothingPantsManAssblastusa
+
+- type: loadout
+  id: BriefsManPants
+  storage:
+    back: 
+    - ClothingPantsManBriefs
+
+- type: loadout
+  id: CommieManPants
+  storage:
+    back: 
+    - ClothingPantsManCommie
+
+- type: loadout
+  id: HeartsManPants
+  storage:
+    back: 
+    - ClothingPantsManHearts
+
+- type: loadout
+  id: KinkyManPants
+  storage:
+    back: 
+    - ClothingPantsManKinky
+
+- type: loadout
+  id: LongjohnsManPants
+  storage:
+    back: 
+    - ClothingPantsManLongjohns
+
+- type: loadout
+  id: MankiniManPants
+  storage:
+    back: 
+    - ClothingPantsManMankini
+
+- type: loadout
+  id: StripeManPants
+  storage:
+    back: 
+    - ClothingPantsManStripe
+
+- type: loadout
+  id: UkManPants
+  storage:
+    back: 
+    - ClothingPantsManUk
