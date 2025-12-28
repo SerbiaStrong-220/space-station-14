@@ -4,7 +4,6 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.CultYogg.MiGo;
 
-[Serializable, NetSerializable]
 public sealed class MiGoPlantBuiState : BoundUserInterfaceState
 {
     public List<CultYoggSeedsPrototype> Seeds = [];
