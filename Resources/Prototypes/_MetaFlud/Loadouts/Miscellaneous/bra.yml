@@ -1,0 +1,77 @@
+- type: loadout
+  id: StraplessBra
+  storage:
+    back: 
+    - ClothingBraStrapless
+
+- type: loadout
+  id: WhiteNekoBra
+  storage:
+    back: 
+    - ClothingBraNekoWhite
+
+- type: loadout
+  id: BlackNekoBra
+  storage:
+    back:
+    - ClothingBraNekoBlack
+
+- type: loadout
+  id: AssblastusaBra
+  storage:
+    back: 
+    - ClothingBraAssblastusa
+
+- type: loadout
+  id: BikiniBra
+  storage:
+    back: 
+    - ClothingBraBikini
+
+- type: loadout
+  id: BraletteBra
+  storage:
+    back: 
+    - ClothingBraBralette
+
+- type: loadout
+  id: CommieBra
+  storage:
+    back: 
+    - ClothingBraCommie
+
+- type: loadout
+  id: KinkyBra
+  storage:
+    back: 
+    - ClothingBraKinky
+
+- type: loadout
+  id: LaceBra
+  storage:
+    back: 
+    - ClothingBraLace
+
+- type: loadout
+  id: SportBra
+  storage:
+    back: 
+    - ClothingBraSport
+
+- type: loadout
+  id: ThongBra
+  storage:
+    back: 
+    - ClothingBraThong
+
+- type: loadout
+  id: UkBra
+  storage:
+    back: 
+    - ClothingBraUk
+
+- type: loadout
+  id: ChristmasBra
+  storage:
+    back:
+    - ClothingBraChristmas

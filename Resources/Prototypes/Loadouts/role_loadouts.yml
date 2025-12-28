@@ -13,7 +13,10 @@
   - Trinkets
   - GroupSpeciesBreathTool
   - CAPSiutstorage #SS220-Cutlass-Update
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks
+  # - SponsorNeck #SS220-TwoOne-Floppa-Iteration # Metaflud end
 
 - type: roleLoadout
   id: JobHeadOfPersonnel
@@ -28,7 +31,10 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks
+  # - SponsorNeck #SS220-TwoOne-Floppa-Iteration # Metaflud end
 
 # Silicons
 - type: roleLoadout
@@ -61,6 +67,9 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks # MetaFlud end
 
 - type: roleLoadout
   id: JobBartender
@@ -75,6 +84,9 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks # MetaFlud end
 
 - type: roleLoadout
   id: JobServiceWorker
@@ -86,6 +98,9 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks # MetaFlud end
 
 - type: roleLoadout
   id: JobChef
@@ -101,6 +116,9 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks # MetaFlud end
 
 - type: roleLoadout
   id: JobLibrarian
@@ -112,7 +130,10 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks
+  # - SponsorNeck #SS220-TwoOne-Floppa-Iteration # Metaflud end
 
 - type: roleLoadout
   id: JobLawyer
@@ -129,6 +150,9 @@
   - Gloves #SS220-IAA-Loadouts
   - Trinkets
   - GroupSpeciesBreathTool
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks # MetaFlud end
 
 - type: roleLoadout
   id: JobChaplain
@@ -145,6 +169,9 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks # MetaFlud end
 
 - type: roleLoadout
   id: JobJanitor
@@ -162,6 +189,9 @@
   - Trinkets
   - JanitorPlunger
   - GroupSpeciesBreathTool
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks # MetaFlud end
 
 - type: roleLoadout
   id: JobBotanist
@@ -178,6 +208,9 @@
   - BotanistBelt #SS220 druid loadout
   - BotanistNeck #SS220 druid loadout
   - BotanistShoes #SS220 druid loadout
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks # MetaFlud end
 
 - type: roleLoadout
   id: JobClown
@@ -195,7 +228,10 @@
   - Glasses
   - SurvivalClown
   - Trinkets
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks
+  # - SponsorNeck #SS220-TwoOne-Floppa-Iteration # Metaflud end
 
 - type: roleLoadout
   id: JobMime
@@ -212,7 +248,10 @@
   - Glasses
   - SurvivalMime
   - Trinkets
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks
+  # - SponsorNeck #SS220-TwoOne-Floppa-Iteration # Metaflud end
 
 - type: roleLoadout
   id: JobMusician
@@ -229,7 +268,10 @@
   - Trinkets
   - Instruments
   - GroupSpeciesBreathTool
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks
+  # - SponsorNeck #SS220-TwoOne-Floppa-Iteration # Metaflud end
 
 # Cargo
 - type: roleLoadout
@@ -246,7 +288,10 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks
+  # - SponsorNeck #SS220-TwoOne-Floppa-Iteration # Metaflud end
 
 - type: roleLoadout
   id: JobCargoTechnician
@@ -262,6 +307,9 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks # MetaFlud end
 
 - type: roleLoadout
   id: JobSalvageSpecialist
@@ -276,7 +324,10 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks
+  # - SponsorNeck #SS220-TwoOne-Floppa-Iteration # Metaflud end
 
 # Engineering
 - type: roleLoadout
@@ -294,7 +345,10 @@
   - SurvivalExtended
   - Trinkets
   - GroupSpeciesBreathTool
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks
+  # - SponsorNeck #SS220-TwoOne-Floppa-Iteration # Metaflud end
 
 - type: roleLoadout
   id: JobTechnicalAssistant
@@ -305,6 +359,9 @@
   - SurvivalExtended
   - Trinkets
   - GroupSpeciesBreathTool
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks # MetaFlud end
 
 - type: roleLoadout
   id: JobStationEngineer
@@ -320,7 +377,10 @@
   - SurvivalExtended
   - Trinkets
   - GroupSpeciesBreathTool
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks
+  # - SponsorNeck #SS220-TwoOne-Floppa-Iteration # Metaflud end
 
 - type: roleLoadout
   id: JobAtmosphericTechnician
@@ -334,7 +394,10 @@
   - SurvivalExtended
   - Trinkets
   - GroupSpeciesBreathTool
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks
+  # - SponsorNeck #SS220-TwoOne-Floppa-Iteration # Metaflud end
 
 # Science
 - type: roleLoadout
@@ -354,7 +417,10 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks
+  # - SponsorNeck #SS220-TwoOne-Floppa-Iteration # Metaflud end
 
 - type: roleLoadout
   id: JobScientist
@@ -373,7 +439,10 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks
+  # - SponsorNeck #SS220-TwoOne-Floppa-Iteration # Metaflud end
 
 - type: roleLoadout
   id: JobResearchAssistant
@@ -385,6 +454,9 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks # MetaFlud end
 
 # Security
 - type: roleLoadout
@@ -404,7 +476,10 @@
   - SecurityStar
   - GroupSpeciesBreathToolSecurity
   - SecurityHoSSiutstorage #SS220-OfficerCutlass
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks
+  # - SponsorNeck #SS220-TwoOne-Floppa-Iteration # Metaflud end
 
 - type: roleLoadout
   id: JobWarden
@@ -422,7 +497,10 @@
   - Trinkets
   - SecurityStar
   - GroupSpeciesBreathToolSecurity
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks
+  # - SponsorNeck #SS220-TwoOne-Floppa-Iteration # Metaflud end
 
 - type: roleLoadout
   id: JobSecurityOfficer
@@ -442,7 +520,10 @@
   - Trinkets
   - SecurityStar
   - GroupSpeciesBreathToolSecurity
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks
+  # - SponsorNeck #SS220-TwoOne-Floppa-Iteration # Metaflud end
 
 - type: roleLoadout
   id: JobDetective
@@ -458,7 +539,10 @@
   - Trinkets
   - SecurityStar
   - GroupSpeciesBreathToolSecurity
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks
+  # - SponsorNeck #SS220-TwoOne-Floppa-Iteration # Metaflud end
 
 - type: roleLoadout
   id: JobSecurityCadet
@@ -468,6 +552,9 @@
   - SurvivalSecurity
   - Trinkets
   - GroupSpeciesBreathToolSecurity
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks # MetaFlud end
 
 # Medical
 - type: roleLoadout
@@ -488,7 +575,10 @@
   - SurvivalMedical
   - Trinkets
   - GroupSpeciesBreathToolMedical
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks
+  # - SponsorNeck #SS220-TwoOne-Floppa-Iteration # Metaflud end
 
 - type: roleLoadout
   id: JobMedicalDoctor
@@ -509,7 +599,10 @@
   - SurvivalMedical
   - Trinkets
   - GroupSpeciesBreathToolMedical
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks
+  # - SponsorNeck #SS220-TwoOne-Floppa-Iteration # Metaflud end
 
 - type: roleLoadout
   id: JobMedicalIntern
@@ -522,6 +615,9 @@
   - SurvivalMedical
   - Trinkets
   - GroupSpeciesBreathToolMedical
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks # MetaFlud end
 
 - type: roleLoadout
   id: JobChemist
@@ -538,7 +634,10 @@
   - SurvivalMedical
   - Trinkets
   - GroupSpeciesBreathToolMedical
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks
+  # - SponsorNeck #SS220-TwoOne-Floppa-Iteration # Metaflud end
 
 - type: roleLoadout
   id: JobParamedic
@@ -559,7 +658,10 @@
   - SurvivalMedical
   - Trinkets
   - GroupSpeciesBreathToolMedical
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks
+  # - SponsorNeck #SS220-TwoOne-Floppa-Iteration # Metaflud end
 
 #SS220-brigmedic-loadout-begin
 - type: roleLoadout
@@ -577,7 +679,10 @@
   - BrigmedicShoes
 #  - Glasses #SS220-TwoOne-Floppa-Iteration
   - Trinkets
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks
+  # - SponsorNeck #SS220-TwoOne-Floppa-Iteration # Metaflud end
 #SS220-brigmedic-loadout-end
 
 # Wildcards
@@ -590,6 +695,9 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks # MetaFlud end
 
 - type: roleLoadout
   id: JobReporter
@@ -601,6 +709,9 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks # MetaFlud end
 
 - type: roleLoadout
   id: JobPsychologist
@@ -613,7 +724,10 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks
+  # - SponsorNeck #SS220-TwoOne-Floppa-Iteration # Metaflud end
 
 - type: roleLoadout
   id: JobBoxer
@@ -626,12 +740,16 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks # MetaFlud end
 
 # These loadouts are used for non-crew spawns, like off-station antags and event mobs
 # They will be used without player configuration, thus they will only ever apply what is forced by MinLimit
 
 # gives vox a harness and breathing mask
 # nitrogen tank not included
+# А эти обойдуться без белья. XD
 - type: roleLoadout
   id: RoleSurvivalVoxSupport
   groups:

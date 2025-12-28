@@ -14,7 +14,10 @@
   - IAABackpacks
   - Trinkets
   - Survival
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks
+  # - SponsorNeck #SS220-TwoOne-Floppa-Iteration # Metaflud end
 
   # Агент внутренних дел
 - type: roleLoadout
@@ -30,7 +33,10 @@
   - Survival
   - Trinkets
   - Gloves
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks
+  # - SponsorNeck #SS220-TwoOne-Floppa-Iteration # Metaflud end
 
   # Офицер "Синий Щит"
 - type: roleLoadout
@@ -45,7 +51,10 @@
   - BlueShieldBackpack
   - Survival
   - Trinkets
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks
+  # - SponsorNeck #SS220-TwoOne-Floppa-Iteration # Metaflud end
 
 #! Служба безопасности (Начало)
 
@@ -65,7 +74,10 @@
   - SecurityShoes
   - SecurityBelt
   - Trinkets
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks
+  # - SponsorNeck #SS220-TwoOne-Floppa-Iteration # Metaflud end
 
   # Пилот
 - type: roleLoadout
@@ -81,7 +93,10 @@
   - SurvivalSecurity
   - SecurityShoes
   - Trinkets
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks
+  # - SponsorNeck #SS220-TwoOne-Floppa-Iteration # Metaflud end
 #! Служба безопасности (Конец)
 
 #! Медицинский отдел (Начало)
@@ -103,7 +118,10 @@
   - MedicalEyewear
 #  - Glasses #SS220-TwoOne-Floppa-Iteration
   - Trinkets
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks
+  # - SponsorNeck #SS220-TwoOne-Floppa-Iteration # Metaflud end
 #! Медицинский отдел (Конец)
 
 #! Инженерный отдел (Начало)
@@ -120,7 +138,10 @@
   - SurvivalExtended
   - StationEngineerShoes
   - Trinkets
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks
+  # - SponsorNeck #SS220-TwoOne-Floppa-Iteration # Metaflud end
 #! Инженерный отдел (Конец)
 
 #! Исследовательский отдел (Начало)
@@ -140,7 +161,10 @@
   - Survival
 #  - Glasses #SS220-TwoOne-Floppa-Iteration
   - Trinkets
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks
+  # - SponsorNeck #SS220-TwoOne-Floppa-Iteration # Metaflud end
 #! Исследовательский отдел (Конец)
 
 #! Сервис (Начало)
@@ -155,5 +179,8 @@
   - Survival
   - Glasses
   - Trinkets
-  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks
+  # - SponsorNeck #SS220-TwoOne-Floppa-Iteration # Metaflud end
 #! Сервис (Конец)
