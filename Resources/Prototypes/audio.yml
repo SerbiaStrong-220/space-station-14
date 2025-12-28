@@ -3,7 +3,7 @@
   sound:
     params:
       volume: -12
-    collection: AmbienceSpooky
+    collection: AmbienceSignalisSpooky # Metaflud
   rules: NearMorgue
   priority: 4
 
@@ -12,7 +12,7 @@
   sound:
     params:
       volume: -12
-    collection: AmbienceSpookyFog
+    collection: AmbienceSignalisSpooky # Metaflud 
   rules: NearSpookyFog
   priority: 5
 
@@ -68,7 +68,7 @@
   sound:
     params:
       volume: -10
-    collection: AmbienceSpace
+    collection: AmbienceSignalisSpace # MetaFlud
   fadeIn: true
   interruptable: true
   rules: InSpace
@@ -91,7 +91,7 @@
   sound:
     params:
       volume: -12
-    collection: AmbienceGeneral
+    collection: AmbienceSignalisGeneral #MetaFlud
   rules: AlwaysTrue
 
 # Sound collections

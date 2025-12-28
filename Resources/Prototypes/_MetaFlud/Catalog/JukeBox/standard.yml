@@ -1,0 +1,5 @@
+- type: jukebox
+  id: SchubertSerenade
+  name: Schubert - Serenade
+  path:
+    path: /Audio/_MetaFlud/D975JukeBox.ogg
