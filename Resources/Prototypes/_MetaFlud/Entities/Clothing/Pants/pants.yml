@@ -1,0 +1,339 @@
+# Мужчина
+
+- type: entity
+  parent: ClothingPantsStorageBase
+  id: ClothingPantsManAssblastusa
+  name: мужские трусы «Assblastusa»
+  description: Мужские трусы с уникальным дизайном «Assblastusa».
+  suffix: Трусы
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Pants/Man/pants.rsi
+    state: male_assblastusa_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Pants/Man/pants.rsi
+    equippedState: male_assblastusa
+
+- type: entity
+  parent: ClothingPantsStorageBase
+  id: ClothingPantsManBoxers
+  name: мужские боксёры
+  description: Удобные боксёры для мужчин.
+  suffix: Трусы
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Pants/Man/pants.rsi
+    state: male_boxers_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Pants/Man/pants.rsi
+    equippedState: male_boxers
+
+- type: entity
+  parent: ClothingPantsStorageBase
+  id: ClothingPantsManBriefs
+  name: мужские трусы
+  description: Обычное мужское нижнее бельё.
+  suffix: Трусы
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Pants/Man/pants.rsi
+    state: male_briefs_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Pants/Man/pants.rsi
+    equippedState: male_briefs
+
+- type: entity
+  parent: ClothingPantsStorageBase
+  id: ClothingPantsManCommie
+  name: мужские трусы «Commie»
+  description: Мужские трусы с дизайном в коммунистическом стиле.
+  suffix: Трусы
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Pants/Man/pants.rsi
+    state: male_commie_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Pants/Man/pants.rsi
+    equippedState: male_commie
+
+- type: entity
+  parent: ClothingPantsStorageBase
+  id: ClothingPantsManHearts
+  name: мужские трусы с сердечками
+  description: Мужские трусы с узором в виде сердечек.
+  suffix: Трусы
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Pants/Man/pants.rsi
+    state: male_hearts_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Pants/Man/pants.rsi
+    equippedState: male_hearts
+
+- type: entity
+  parent: ClothingPantsStorageBase
+  id: ClothingPantsManKinky
+  name: мужские трусы «Kinky»
+  description: Мужские трусы с провокационным дизайном.
+  suffix: Трусы
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Pants/Man/pants.rsi
+    state: male_kinky_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Pants/Man/pants.rsi
+    equippedState: male_kinky
+
+- type: entity
+  parent: ClothingPantsStorageBase
+  id: ClothingPantsManLongjohns
+  name: мужские кальсоны
+  description: Тёплые длинные трусы для мужчин.
+  suffix: Трусы
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Pants/Man/pants.rsi
+    state: male_longjohns_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Pants/Man/pants.rsi
+    equippedState: male_longjohns
+
+- type: entity
+  parent: ClothingPantsStorageBase
+  id: ClothingPantsManMankini
+  name: мужской манкини
+  description: Одежда для смелых мужчин.
+  suffix: Трусы
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Pants/Man/pants.rsi
+    state: male_mankini_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Pants/Man/pants.rsi
+    equippedState: male_mankini
+
+- type: entity
+  parent: ClothingPantsStorageBase
+  id: ClothingPantsManStripe
+  name: мужские полосатые трусы
+  description: Мужские трусы с полосатым дизайном.
+  suffix: Трусы
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Pants/Man/pants.rsi
+    state: male_stripe_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Pants/Man/pants.rsi
+    equippedState: male_stripe
+
+- type: entity
+  parent: ClothingPantsStorageBase
+  id: ClothingPantsManUk
+  name: мужские трусы с британским флагом
+  description: Мужские трусы с флагом Великобритании.
+  suffix: Трусы
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Pants/Man/pants.rsi
+    state: male_uk_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Pants/Man/pants.rsi
+    equippedState: male_uk
+
+- type: entity
+  parent: ClothingPantsStorageBase
+  id: ClothingPantsManChristmas
+  name: мужские рождественские трусы
+  description: Рождественские трусы для мужчин.
+  suffix: Трусы
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Pants/Man/pants.rsi
+    state: male_christmas_boxers_Icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Pants/Man/pants.rsi
+    equippedState: male_christmas_boxers
+
+# Женщина
+
+- type: entity
+  parent: ClothingPantsStorageBase
+  id: ClothingPantsWomanNekoWhite
+  name: женские белые трусы с котиком
+  description: Белые женские трусы с изображением котика.
+  suffix: Трусы
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Pants/Woman/pants.rsi
+    state: female_neko_white_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Pants/Woman/pants.rsi
+    equippedState: female_neko_white
+
+- type: entity
+  parent: ClothingPantsStorageBase
+  id: ClothingPantsWomanNekoBlack
+  name: женские чёрные трусы с котиком
+  description: Чёрные женские трусы с изображением котика.
+  suffix: Трусы
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Pants/Woman/pants.rsi
+    state: female_neko_black_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Pants/Woman/pants.rsi
+    equippedState: female_neko_black
+
+- type: entity
+  parent: ClothingPantsStorageBase
+  id: ClothingPantsWomanAssblastusa
+  name: женские трусы «Assblastusa»
+  description: Женские трусы с уникальным дизайном «Assblastusa».
+  suffix: Трусы
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Pants/Woman/pants.rsi
+    state: female_assblastusa_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Pants/Woman/pants.rsi
+    equippedState: female_assblastusa
+
+- type: entity
+  parent: ClothingPantsStorageBase
+  id: ClothingPantsWomanBikini
+  name: женские трусы-бикини
+  description: Трусы-бикини для женщин.
+  suffix: Трусы
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Pants/Woman/pants.rsi
+    state: female_bikini_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Pants/Woman/pants.rsi
+    equippedState: female_bikini
+
+- type: entity
+  parent: ClothingPantsStorageBase
+  id: ClothingPantsWomanBralette
+  name: женские трусы-бралетт
+  description: Трусы в стиле бралетт для женщин.
+  suffix: Трусы
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Pants/Woman/pants.rsi
+    state: female_bralette_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Pants/Woman/pants.rsi
+    equippedState: female_bralette
+
+- type: entity
+  parent: ClothingPantsStorageBase
+  id: ClothingPantsWomanCommie
+  name: женские трусы «Commie»
+  description: Женские трусы с дизайном в коммунистическом стиле.
+  suffix: Трусы
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Pants/Woman/pants.rsi
+    state: female_commie_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Pants/Woman/pants.rsi
+    equippedState: female_commie
+
+- type: entity
+  parent: ClothingPantsStorageBase
+  id: ClothingPantsWomanKinky
+  name: женские трусы «Kinky»
+  description: Женские трусы с провокационным дизайном.
+  suffix: Трусы
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Pants/Woman/pants.rsi
+    state: female_kinky_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Pants/Woman/pants.rsi
+    equippedState: female_kinky
+
+- type: entity
+  parent: ClothingPantsStorageBase
+  id: ClothingPantsWomanLace
+  name: женские кружевные трусы
+  description: Женские трусы с кружевным узором.
+  suffix: Трусы
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Pants/Woman/pants.rsi
+    state: female_lace_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Pants/Woman/pants.rsi
+    equippedState: female_lace
+
+- type: entity
+  parent: ClothingPantsStorageBase
+  id: ClothingPantsWomanSport
+  name: женские спортивные трусы
+  description: Удобные и практичные спортивные трусы для женщин.
+  suffix: Трусы
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Pants/Woman/pants.rsi
+    state: female_sport_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Pants/Woman/pants.rsi
+    equippedState: female_sport
+
+- type: entity
+  parent: ClothingPantsStorageBase
+  id: ClothingPantsWomanThong
+  name: женские трусы-стринги
+  description: Трусы-стринги для женщин.
+  suffix: Трусы
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Pants/Woman/pants.rsi
+    state: female_thong_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Pants/Woman/pants.rsi
+    equippedState: female_thong
+
+- type: entity
+  parent: ClothingPantsStorageBase
+  id: ClothingPantsWomanUk
+  name: женские трусы с британским флагом
+  description: Женские трусы с флагом Великобритании.
+  suffix: Трусы
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Pants/Woman/pants.rsi
+    state: female_uk_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Pants/Woman/pants.rsi
+    equippedState: female_uk
+
+- type: entity
+  parent: ClothingPantsStorageBase
+  id: ClothingPantsWomanChristmas
+  name: женские рождественские трусы
+  description: Рождественские трусы для женщин.
+  suffix: Трусы
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Pants/Woman/pants.rsi
+    state: female_christmas_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Pants/Woman/pants.rsi
+    equippedState: female_christmas
+
+- type: entity
+  parent: ClothingPantsStorageBase
+  id: ClothingPantsWomanStrapless
+  name: женские трусы без бретелей
+  description: Трусы без бретелей для женщин.
+  suffix: Трусы
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Pants/Woman/pants.rsi
+    state: female_strapless_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Pants/Woman/pants.rsi
+    equippedState: female_strapless

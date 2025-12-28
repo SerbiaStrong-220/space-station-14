@@ -1,0 +1,531 @@
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingFishnet
+  name: сетчатые колготки
+  description: Красивые сетчатые колготки.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/fishnet.rsi
+    state: icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/fishnet.rsi
+    equippedState: fishnet_full
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingKneeWhite
+  name: белые гольфы
+  description: Простые белые гольфы до колена.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/knee.rsi
+    state: white_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/knee.rsi
+    equippedState: white_knee
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingKneeAce
+  name: гольфы с визором
+  description: Гольфы до колена с добавленным визором сверху.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/knee.rsi
+    state: ace_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/knee.rsi
+    equippedState: ace_knee
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingKneeAsblastusa
+  name: гольфы с логотипом «Assblastusa»
+  description: Гольфы до колена с логотипом «Assblastusa».
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/knee.rsi
+    state: assblastusa_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/knee.rsi
+    equippedState: assblastusa_knee
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingKneeBee
+  name: гольфы с пчелой
+  description: Гольфы до колена с изображением пчелы.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/knee.rsi
+    state: bee_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/knee.rsi
+    equippedState: bee_knee
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingKneeBlack
+  name: чёрные гольфы
+  description: Простые чёрные гольфы до колена.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/knee.rsi
+    state: black_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/knee.rsi
+    equippedState: black_knee
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingKneeCommie
+  name: гольфы с коммунистической символикой
+  description: Гольфы до колена с коммунистическими символами.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/knee.rsi
+    state: commie_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/knee.rsi
+    equippedState: commie_knee
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingKneeFishnet
+  name: сетчатые гольфы
+  description: Гольфы до колена с сетчатым узором.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/knee.rsi
+    state: fishnet_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/knee.rsi
+    equippedState: fishnet_knee
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingKneeRainbow
+  name: радужные гольфы
+  description: Гольфы до колена с радужным узором.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/knee.rsi
+    state: rainbow_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/knee.rsi
+    equippedState: rainbow_knee
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingKneeStriped
+  name: полосатые гольфы
+  description: Гольфы до колена с полосатым узором.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/knee.rsi
+    state: striped_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/knee.rsi
+    equippedState: striped_knee
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingKneeThin
+  name: тонкие гольфы
+  description: Тонкие гольфы до колена.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/knee.rsi
+    state: thin_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/knee.rsi
+    equippedState: thin_knee
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingKneeTrans
+  name: гольфы с трансгендерным флагом
+  description: Гольфы до колена с флагом трансгендерного прайда.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/knee.rsi
+    state: trans_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/knee.rsi
+    equippedState: trans_knee
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingKneeUk
+  name: гольфы с британским флагом
+  description: Гольфы до колена с флагом Великобритании.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/knee.rsi
+    state: uk_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/knee.rsi
+    equippedState: uk_knee
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingNormBlack
+  name: чёрные носки
+  description: Чёрные носки.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/norm.rsi
+    state: black_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/norm.rsi
+    equippedState: black_norm
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingNormWhite
+  name: белые носки
+  description: Белые носки.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/norm.rsi
+    state: white_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/norm.rsi
+    equippedState: white_norm
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingPantyhose
+  name: колготки
+  description: Эластичные колготки для ног.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/pantyhose.rsi
+    state: icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/pantyhose.rsi
+    equippedState: pantyhose
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingShortBlack
+  name: чёрные короткие носки
+  description: Чёрные короткие носки.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/short.rsi
+    state: black_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/short.rsi
+    equippedState: black_short
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingShortWhite
+  name: белые короткие носки
+  description: Белые короткие носки.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/short.rsi
+    state: white_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/short.rsi
+    equippedState: white_short
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingStockingsBlue
+  name: синие чулки
+  description: Синие чулки — элегантные чулки для женщин и, возможно, даже мужчин.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/stockings.rsi
+    state: blue_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/stockings.rsi
+    equippedState: stockings_blue
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingStockingsCyan
+  name: сине-зелёные чулки
+  description: Сине-зелёные чулки — элегантные чулки для женщин и, возможно, даже мужчин.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/stockings.rsi
+    state: cyan_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/stockings.rsi
+    equippedState: stockings_cyan
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingStockingsDpink
+  name: тёмно-розовые чулки
+  description: Тёмно-розовые чулки — элегантные чулки для женщин и, возможно, даже мужчин.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/stockings.rsi
+    state: dpink_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/stockings.rsi
+    equippedState: stockings_dpink
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingStockingsGreen
+  name: зелёные чулки
+  description: Зелёные чулки — элегантные чулки для женщин и, возможно, даже мужчин.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/stockings.rsi
+    state: green_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/stockings.rsi
+    equippedState: stockings_green
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingStockingslpink
+  name: светло-розовые чулки
+  description: Светло-розовые чулки — элегантные чулки для женщин и, возможно, даже мужчин.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/stockings.rsi
+    state: lpink_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/stockings.rsi
+    equippedState: stockings_lpink
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingStockingsOrange
+  name: оранжевые чулки
+  description: Оранжевые чулки — элегантные чулки для женщин и, возможно, даже мужчин.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/stockings.rsi
+    state: orange_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/stockings.rsi
+    equippedState: stockings_orange
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingStockingsPurple
+  name: фиолетовые чулки
+  description: Фиолетовые чулки — элегантные чулки для женщин и, возможно, даже мужчин.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/stockings.rsi
+    state: purple_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/stockings.rsi
+    equippedState: stockings_purple
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingThighWhite
+  name: белые чулки выше колена
+  description: Белые чулки выше колена — элегантные чулки для женщин и, возможно, даже мужчин.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/thigh.rsi
+    state: white_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/thigh.rsi
+    equippedState: white_thigh
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingThighAce
+  name: чулки выше колена с визором
+  description: Чулки выше колена с визором — элегантные чулки с добавленным визором сверху.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/thigh.rsi
+    state: ace_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/thigh.rsi
+    equippedState: ace_thigh
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingThighAsblastusa
+  name: чулки выше колена с логотипом «Assblastusa»
+  description: Чулки выше колена с логотипом «Assblastusa».
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/thigh.rsi
+    state: assblastusa_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/thigh.rsi
+    equippedState: assblastusa_thigh
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingThighBee
+  name: чулки выше колена с пчелой
+  description: Чулки выше колена с изображением пчелы.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/thigh.rsi
+    state: bee_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/thigh.rsi
+    equippedState: bee_thigh
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingThighBlack
+  name: чёрные чулки выше колена
+  description: Чёрные чулки выше колена — элегантные чулки для женщин и, возможно, даже мужчин.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/thigh.rsi
+    state: black_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/thigh.rsi
+    equippedState: black_thigh
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingThighCommie
+  name: чулки выше колена с коммунистической символикой
+  description: Чулки выше колена с коммунистическими символами.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/thigh.rsi
+    state: commie_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/thigh.rsi
+    equippedState: commie_thigh
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingThighFishnet
+  name: чулки выше колена с сетчатым узором
+  description: Чулки выше колена с сетчатым узором.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/thigh.rsi
+    state: fishnet_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/thigh.rsi
+    equippedState: fishnet_thigh
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingThighRainbow
+  name: радужные чулки выше колена
+  description: Радужные чулки выше колена — элегантные чулки для женщин и, возможно, даже мужчин.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/thigh.rsi
+    state: rainbow_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/thigh.rsi
+    equippedState: rainbow_thigh
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingThighStriped
+  name: полосатые чулки выше колена
+  description: Полосатые чулки выше колена — элегантные чулки для женщин и, возможно, даже мужчин.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/thigh.rsi
+    state: striped_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/thigh.rsi
+    equippedState: striped_thigh
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingThighThin
+  name: тонкие чулки выше колена
+  description: Тонкие чулки выше колена — элегантные чулки для женщин и, возможно, даже мужчин.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/thigh.rsi
+    state: thin_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/thigh.rsi
+    equippedState: thin_thigh
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingThighTrans
+  name: чулки выше колена с трансгендерным флагом
+  description: Чулки выше колена с флагом трансгендерного прайда.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/thigh.rsi
+    state: trans_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/thigh.rsi
+    equippedState: trans_thigh
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingThighUk
+  name: чулки выше колена с британским флагом
+  description: Чулки выше колена с флагом Великобритании.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/thigh.rsi
+    state: uk_icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/thigh.rsi
+    equippedState: uk_thigh
+
+- type: entity
+  parent: ClothingSocksBaseButcherable
+  id: ClothingThighChristmas
+  name: рождественские чулки выше колена
+  description: Чулки выше колена, предназначенные для рождественского времени.
+  suffix: носки
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Socks/stockings_chrismas.rsi
+    state: icon
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Socks/stockings_chrismas.rsi
+    equippedState: christmas_stockings
