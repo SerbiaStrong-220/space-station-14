@@ -1,0 +1,31 @@
+- type: soundCollection
+  id: AmbienceSignalisGeneral
+  files:
+    - /Audio/_MetaFlud/Signalis/Dowsing.ogg
+    - /Audio/_MetaFlud/Signalis/Adler.ogg
+    - /Audio/_MetaFlud/Signalis/Ritual.ogg
+    - /Audio/_MetaFlud/Signalis/WarmLight.ogg
+    - /Audio/_MetaFlud/Signalis/TheRedGate.ogg
+    - /Audio/_MetaFlud/Signalis/TrainRide.ogg
+    - /Audio/_MetaFlud/Signalis/DoubleBack.ogg
+    - /Audio/_MetaFlud/Signalis/DoubleBackVHS.ogg
+    - /Audio/_MetaFlud/Signalis/EwigeWiederkunft.ogg
+    - /Audio/_MetaFlud/Signalis/SafeRoom.ogg
+    - /Audio/_MetaFlud/Signalis/DieToteninsel.ogg
+    
+- type: soundCollection
+  id: AmbienceSignalisSpace
+  files:
+    - /Audio/_MetaFlud/Signalis/3000Cycles.ogg
+    - /Audio/_MetaFlud/Signalis/Ariane.ogg
+    - /Audio/_MetaFlud/Signalis/EwigeWiederkunft.ogg
+    - /Audio/_MetaFlud/Signalis/Falke.ogg
+    - /Audio/_MetaFlud/Signalis/Home.ogg
+    - /Audio/_MetaFlud/Signalis/Orrery.ogg
+    
+- type: soundCollection
+  id: AmbienceSignalisSpooky
+  files:
+    - /Audio/_MetaFlud/Signalis/EternityInABox.ogg
+    - /Audio/_MetaFlud/Signalis/HaintTales.ogg
+    - /Audio/_MetaFlud/Signalis/Liminality.ogg
