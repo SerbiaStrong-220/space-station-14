@@ -674,7 +674,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         var targets = new List<EntityUid>();
         var damageQuery = GetEntityQuery<DamageableComponent>();
-        //var targetseffectonly = new List<EntityUid>();
+        var targetseffectonly = new List<EntityUid>();
 
         foreach (var entity in entities)
         {
@@ -690,14 +690,12 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
                     var shield1 = (EntityUid)shield;
                     targets.Add(shield1);
                     AdminLogger.Add(LogType.MeleeHit, LogImpact.High,
-                    $"{ToPrettyString(user):actor} melee attacked (heavy) {ToPrettyString((EntityUid)shield):actor}");
-                    //targetseffectonly.Add(entity);
+                    $"{ToPrettyString(user):actor} melee attacked (heavy) {ToPrettyString(entity):actor}");
+                    targetseffectonly.Add(entity);
                 }
                 else
                 {
                     targets.Add(entity);
-                    AdminLogger.Add(LogType.MeleeHit, LogImpact.High,
-                    $"{ToPrettyString(user):actor} melee attacked (heavy) {ToPrettyString(entity):actor}");
                 }
             }
             else { targets.Add(entity); }
@@ -790,7 +788,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         if (appliedDamage.GetTotal() > FixedPoint2.Zero)
         {
             DoDamageEffect(targets, user, Transform(targets[0]));
-            //DoDamageEffect(targetseffectonly, user, Transform(targets[0]));
+            DoDamageEffect(targetseffectonly, user, Transform(targets[0]));
         }
 
         return true;
