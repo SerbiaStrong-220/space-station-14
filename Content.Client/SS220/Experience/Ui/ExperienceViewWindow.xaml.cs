@@ -223,5 +223,8 @@ public sealed partial class ExperienceViewWindow : FancyWindow
                 treeContainer.SpendPoints = 0;
             }
         }
+
+        _spendPoints = 0;
+        UpdateSublevel();
     }
 }

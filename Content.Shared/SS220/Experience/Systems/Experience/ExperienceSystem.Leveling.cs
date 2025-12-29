@@ -168,7 +168,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         info.Sublevel++;
 
         if (!CanProgressLevel(info, skillTreePrototype))
-            _popup.PopupClient(Loc.GetString(skillPrototype.LevelInfo.SublevelUpPopup), entity, entity);
+            _popup.PopupEntity(Loc.GetString(skillPrototype.LevelInfo.SublevelUpPopup), entity, entity);
 
         TryComp<RoleExperienceAddComponent>(entity, out var roleExperienceAdd);
         var definitionId = roleExperienceAdd?.DefinitionId?.Id ?? "no-definition";
