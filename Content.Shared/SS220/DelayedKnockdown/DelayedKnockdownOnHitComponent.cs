@@ -46,24 +46,20 @@ public sealed partial class DelayedKnockdownOnHitComponent : Component
     /// </summary>
     [DataField]
     public bool OnHeavyAttack = true;
-    
+
     /// <summary>
-    /// Minimal StaminaResistance value, when delay will be altered
-    /// Value 0.5 means 50% StamRes
+    /// Dictionary mapping stamina resistance thresholds to (delay bonus, knockdown penalty) pairs.
+    /// Resistance thresholds (0.0–1.0) - stamina resistance in %
+    /// DelayBonus - seconds, added to a DelayedKnockdown
+    /// KnockdownPenalty - seconds, subtracted from knockdownDuration
+    /// Should be sorted in descending order of keys for correct application logic.
     /// </summary>
     [DataField]
-    public float ResistanceThreshold = 0.5f;
-    
-    /// <summary>
-    /// Added seconds to knockdown delay
-    /// </summary>
-    [DataField]
-    public TimeSpan ResistanceDelayBonus = TimeSpan.FromSeconds(2);
-    
-    /// <summary>
-    /// Knockdown duration penalty (seconds) when min resistance is reached 
-    /// </summary>
-    [DataField]
-    public TimeSpan ResistanceKnockdownPenalty = TimeSpan.FromSeconds(0.5);
- 
+    public Dictionary<float, (TimeSpan DelayBonus, TimeSpan KnockdownPenalty)> ResistanceModifiers = new()
+    {
+        { 0.3f, (TimeSpan.FromSeconds(3), TimeSpan.FromSeconds(1.5)) }, //70% res
+        { 0.5f, (TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(1.0)) }, //50% res
+        { 0.8f, (TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(0.5)) }, //20% res
+    };
+
 }

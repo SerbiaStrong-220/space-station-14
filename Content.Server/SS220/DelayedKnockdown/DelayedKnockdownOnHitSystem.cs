@@ -1,11 +1,13 @@
 using Content.Server.Stunnable;
 using Content.Shared.Damage.Events;
+using Content.Shared.Damage.Components;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Timing;
 using Robust.Shared.Timing;
 using Content.Shared.SS220.DelayedKnockdown;
+using System.Linq;
 
 namespace Content.Server.SS220.DelayedKnockdown;
 
@@ -61,18 +63,31 @@ public sealed class DelayedKnockdownOnHitSystem : EntitySystem
         foreach (var hitEntity in args.HitEntities)
         {
             var activeComp = EnsureComp<ActiveDelayedKnockdownComponent>(hitEntity);
-            
+
             var delayTime = component.Delay;
             var knockdownTime = component.Duration;
-           
+
             var staminaEvent = new BeforeStaminaDamageEvent(1f);
             RaiseLocalEvent(hitEntity, ref staminaEvent);
-            
-            if (staminaEvent.Value <= component.ResistanceThreshold)
+
+            float currentResistance = staminaEvent.Value;
+
+            // Apply modifiers based on resistance thresholds
+            var sortedModifiers = component.ResistanceModifiers
+                .OrderByDescending(kvp => kvp.Key)
+                .ToList();
+
+            foreach (var (threshold, (delayBonus, knockdownPenalty)) in sortedModifiers)
             {
-                delayTime += component.ResistanceDelayBonus;
-                knockdownTime -= component.ResistanceKnockdownPenalty;
+                if (currentResistance >= threshold)
+                {
+                    delayTime += delayBonus;
+                    knockdownTime -= knockdownPenalty;
+                    break;
+                }
             }
+
+            knockdownTime = TimeSpan.FromTicks(Math.Max(0, knockdownTime.Ticks));
 
             activeComp.Delay = _gameTiming.CurTime + delayTime;
             activeComp.KnockdownTime = knockdownTime;

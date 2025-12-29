@@ -31,7 +31,7 @@
       collection: BatonHit
     activatedDamage:
       types:
-        Blunt: 1
+        Blunt: 10 #ss13 parity :troll:
   - type: ItemToggleSize
     activatedSize: Normal
     activatedShape:
