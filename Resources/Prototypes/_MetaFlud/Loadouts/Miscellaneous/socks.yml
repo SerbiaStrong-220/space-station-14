@@ -1,211 +1,177 @@
 # Для тяночек
 - type: loadout
   id: ThighWhiteSocks
-  storage:
-    back:
-    - ClothingThighWhite
+  equipment:
+    socks: ClothingThighWhite
 
 - type: loadout
   id: FishnetTights
-  storage:
-    back: 
-    - ClothingFishnet
+  equipment:
+    socks: ClothingFishnet
 
 - type: loadout
   id: KneeWhiteSocks
-  storage:
-    back: 
-    - ClothingKneeWhite
+  equipment:
+    socks: ClothingKneeWhite
 
 - type: loadout
   id: KneeFishnetSocks
-  storage:
-    back:
-    - ClothingKneeFishnet
+  equipment:
+    socks: ClothingKneeFishnet
 
 - type: loadout
   id: Pantyhose
-  storage:
-    back:
-    - ClothingPantyhose
+  equipment:
+    socks: ClothingPantyhose
 
 - type: loadout
   id: ShortBlackSocks
-  storage:
-    back:
-    - ClothingShortBlack
+  equipment:
+    socks: ClothingShortBlack
 
 - type: loadout
   id: StockingsBlue
-  storage:
-    back:
-    - ClothingStockingsBlue
+  equipment:
+    socks: ClothingStockingsBlue
 
 - type: loadout
   id: StockingsCyan
-  storage:
-    back:
-    - ClothingStockingsCyan
+  equipment:
+    socks: ClothingStockingsCyan
 
 - type: loadout
   id: StockingsDpink
-  storage:
-    back:
-    - ClothingStockingsDpink
+  equipment:
+    socks: ClothingStockingsDpink
 
 - type: loadout
   id: StockingsGreen
-  storage:
-    back:
-    - ClothingStockingsGreen
+  equipment:
+    socks: ClothingStockingsGreen
 
 - type: loadout
   id: Stockingslpink
-  storage:
-    back:
-    - ClothingStockingslpink
+  equipment:
+    socks: ClothingStockingslpink
 
 - type: loadout
   id: StockingsOrange
-  storage:
-    back:
-    - ClothingStockingsOrange
+  equipment:
+    socks: ClothingStockingsOrange
 
 - type: loadout
   id: StockingsPurple
-  storage:
-    back:
-    - ClothingStockingsPurple
+  equipment:
+    socks: ClothingStockingsPurple
 
 - type: loadout
   id: ThighAceSocks
-  storage:
-    back:
-    - ClothingThighAce
+  equipment:
+    socks: ClothingThighAce
 
 - type: loadout
   id: ThighAsblastusaSocks
-  storage:
-    back:
-    - ClothingThighAsblastusa
+  equipment:
+    socks: ClothingThighAsblastusa
 
 - type: loadout
   id: ThighBeeSocks
-  storage:
-    back:
-    - ClothingThighBee
+  equipment:
+    socks: ClothingThighBee
 
 - type: loadout
   id: ThighBlackSocks
-  storage:
-    back:
-    - ClothingThighBlack
+  equipment:
+    socks: ClothingThighBlack
 
 - type: loadout
   id: ThighCommieSocks
-  storage:
-    back:
-    - ClothingThighCommie
+  equipment:
+    socks: ClothingThighCommie
 
 - type: loadout
   id: ThighRainbowSocks
-  storage:
-    back:
-    - ClothingThighRainbow
+  equipment:
+    socks: ClothingThighRainbow
 
 - type: loadout
   id: ThighTransSocks
-  storage:
-    back:
-    - ClothingThighTrans
+  equipment:
+    socks: ClothingThighTrans
 
 - type: loadout
   id: ThighUkSocks
-  storage:
-    back:
-    - ClothingThighUk
+  equipment:
+    socks: ClothingThighUk
 
 - type: loadout
   id: ThighChristmasSocks
-  storage:
-    back:
-    - ClothingThighChristmas
+  equipment:
+    socks: ClothingThighChristmas
+
 
 # Для мужиков
 - type: loadout
   id: ShortWhiteSocks
-  storage:
-    back: 
-    - ClothingShortWhite
+  equipment:
+    socks: ClothingShortWhite
 
 - type: loadout
   id: KneeAceSocks
-  storage:
-    back:
-    - ClothingKneeAce
+  equipment:
+    socks: ClothingKneeAce
 
 - type: loadout
   id: KneeAssblastusaSocks
-  storage:
-    back:
-    - ClothingKneeAsblastusa
+  equipment:
+    socks: ClothingKneeAsblastusa
 
 - type: loadout
   id: KneeBeeSocks
-  storage:
-    back:
-    - ClothingKneeBee
+  equipment:
+    socks: ClothingKneeBee
 
 - type: loadout
   id: KneeBlackSocks
-  storage:
-    back:
-    - ClothingKneeBlack
+  equipment:
+    socks: ClothingKneeBlack
 
 - type: loadout
   id: KneeCommieSocks
-  storage:
-    back:
-    - ClothingKneeCommie
+  equipment:
+    socks: ClothingKneeCommie
 
 - type: loadout
   id: KneeRainbowSocks
-  storage:
-    back:
-    - ClothingKneeRainbow
+  equipment:
+    socks: ClothingKneeRainbow
 
 - type: loadout
   id: KneeStripedSocks
-  storage:
-    back:
-    - ClothingKneeStriped
+  equipment:
+    socks: ClothingKneeStriped
 
 - type: loadout
   id: KneeThinSocks
-  storage:
-    back:
-    - ClothingKneeThin
+  equipment:
+    socks: ClothingKneeThin
 
 - type: loadout
   id: KneeTransSocks
-  storage:
-    back:
-    - ClothingKneeTrans
+  equipment:
+    socks: ClothingKneeTrans
 
 - type: loadout
   id: KneeUkSocks
-  storage:
-    back: 
-    - ClothingKneeUk
+  equipment:
+    socks: ClothingKneeUk
 
 - type: loadout
   id: NormBlackSocks
-  storage:
-    back: 
-    - ClothingNormBlack
+  equipment:
+    socks: ClothingNormBlack
 
 - type: loadout
   id: NormWhiteSocks
-  storage:
-    back: 
-    - ClothingNormWhite
+  equipment:
+    socks: ClothingNormWhite

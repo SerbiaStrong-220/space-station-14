@@ -1,77 +1,64 @@
 - type: loadout
   id: StraplessBra
-  storage:
-    back: 
-    - ClothingBraStrapless
+  equipment:
+    bra: ClothingBraStrapless
 
 - type: loadout
   id: WhiteNekoBra
-  storage:
-    back: 
-    - ClothingBraNekoWhite
+  equipment:
+    bra: ClothingBraNekoWhite
 
 - type: loadout
   id: BlackNekoBra
-  storage:
-    back:
-    - ClothingBraNekoBlack
+  equipment:
+    bra: ClothingBraNekoBlack
 
 - type: loadout
   id: AssblastusaBra
-  storage:
-    back: 
-    - ClothingBraAssblastusa
+  equipment:
+    bra: ClothingBraAssblastusa
 
 - type: loadout
   id: BikiniBra
-  storage:
-    back: 
-    - ClothingBraBikini
+  equipment:
+    bra: ClothingBraBikini
 
 - type: loadout
   id: BraletteBra
-  storage:
-    back: 
-    - ClothingBraBralette
+  equipment:
+    bra: ClothingBraBralette
 
 - type: loadout
   id: CommieBra
-  storage:
-    back: 
-    - ClothingBraCommie
+  equipment:
+    bra: ClothingBraCommie
 
 - type: loadout
   id: KinkyBra
-  storage:
-    back: 
-    - ClothingBraKinky
+  equipment:
+    bra: ClothingBraKinky
 
 - type: loadout
   id: LaceBra
-  storage:
-    back: 
-    - ClothingBraLace
+  equipment:
+    bra: ClothingBraLace
 
 - type: loadout
   id: SportBra
-  storage:
-    back: 
-    - ClothingBraSport
+  equipment:
+    bra: ClothingBraSport
 
 - type: loadout
   id: ThongBra
-  storage:
-    back: 
-    - ClothingBraThong
+  equipment:
+    bra: ClothingBraThong
 
 - type: loadout
   id: UkBra
-  storage:
-    back: 
-    - ClothingBraUk
+  equipment:
+    bra: ClothingBraUk
 
 - type: loadout
   id: ChristmasBra
-  storage:
-    back:
-    - ClothingBraChristmas
+  equipment:
+    bra: ClothingBraChristmas
