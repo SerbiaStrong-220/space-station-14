@@ -1,139 +1,117 @@
 # Для тяночек
 - type: loadout
   id: StraplessWomanPants
-  storage:
-    back: 
-    - ClothingPantsWomanStrapless
+  equipment:
+    pants: ClothingPantsWomanStrapless
 
 - type: loadout
   id: NekoWhiteWomanPants
-  storage:
-    back:
-    - ClothingPantsWomanNekoWhite
+  equipment:
+    pants: ClothingPantsWomanNekoWhite
 
 - type: loadout
   id: NekoBlackWomanPants
-  storage:
-    back: 
-    - ClothingPantsWomanNekoBlack
+  equipment:
+    pants: ClothingPantsWomanNekoBlack
 
 - type: loadout
   id: AssblastusaWomanPants
-  storage:
-    back: 
-    - ClothingPantsWomanAssblastusa
+  equipment:
+    pants: ClothingPantsWomanAssblastusa
 
 - type: loadout
   id: BikiniWomanPants
-  storage:
-    back: 
-    - ClothingPantsWomanBikini
+  equipment:
+    pants: ClothingPantsWomanBikini
 
 - type: loadout
   id: BraletteWomanPants
-  storage:
-    back: 
-    - ClothingPantsWomanBralette
+  equipment:
+    pants: ClothingPantsWomanBralette
 
 - type: loadout
   id: CommieWomanPants
-  storage:
-    back: 
-    - ClothingPantsWomanCommie
+  equipment:
+    pants: ClothingPantsWomanCommie
 
 - type: loadout
   id: KinkyWomanPants
-  storage:
-    back: 
-    - ClothingPantsWomanKinky
+  equipment:
+    pants: ClothingPantsWomanKinky
 
 - type: loadout
   id: LaceWomanPants
-  storage:
-    back: 
-    - ClothingPantsWomanLace
+  equipment:
+    pants: ClothingPantsWomanLace
 
 - type: loadout
   id: SportWomanPants
-  storage:
-    back: 
-    - ClothingPantsWomanSport
+  equipment:
+    pants: ClothingPantsWomanSport
 
 - type: loadout
   id: ThongWomanPants
-  storage:
-    back: 
-    - ClothingPantsWomanThong
+  equipment:
+    pants: ClothingPantsWomanThong
 
 - type: loadout
   id: UkWomanPants
-  storage:
-    back: 
-    - ClothingPantsWomanUk
+  equipment:
+    pants: ClothingPantsWomanUk
 
 - type: loadout
   id: ChristmasWomanPants
-  storage:
-    back: 
-    - ClothingPantsWomanChristmas
+  equipment:
+    pants: ClothingPantsWomanChristmas
+
 
 # Для мужиков
 - type: loadout
   id: BoxersManPants
-  storage:
-    back: 
-    - ClothingPantsManBoxers
+  equipment:
+    pants: ClothingPantsManBoxers
 
 - type: loadout
   id: AssblastusaManPants
-  storage:
-    back: 
-    - ClothingPantsManAssblastusa
+  equipment:
+    pants: ClothingPantsManAssblastusa
 
 - type: loadout
   id: BriefsManPants
-  storage:
-    back: 
-    - ClothingPantsManBriefs
+  equipment:
+    pants: ClothingPantsManBriefs
 
 - type: loadout
   id: CommieManPants
-  storage:
-    back: 
-    - ClothingPantsManCommie
+  equipment:
+    pants: ClothingPantsManCommie
 
 - type: loadout
   id: HeartsManPants
-  storage:
-    back: 
-    - ClothingPantsManHearts
+  equipment:
+    pants: ClothingPantsManHearts
 
 - type: loadout
   id: KinkyManPants
-  storage:
-    back: 
-    - ClothingPantsManKinky
+  equipment:
+    pants: ClothingPantsManKinky
 
 - type: loadout
   id: LongjohnsManPants
-  storage:
-    back: 
-    - ClothingPantsManLongjohns
+  equipment:
+    pants: ClothingPantsManLongjohns
 
 - type: loadout
   id: MankiniManPants
-  storage:
-    back: 
-    - ClothingPantsManMankini
+  equipment:
+    pants: ClothingPantsManMankini
 
 - type: loadout
   id: StripeManPants
-  storage:
-    back: 
-    - ClothingPantsManStripe
+  equipment:
+    pants: ClothingPantsManStripe
 
 - type: loadout
   id: UkManPants
-  storage:
-    back: 
-    - ClothingPantsManUk
+  equipment:
+    pants: ClothingPantsManUk

@@ -1,25 +1,27 @@
-- type: entity
-  parent: ClothingNeckBase
-  id: ClothingNeckShockCollar
-  name: шоковый ошейник
-  suffix: чокер
-  description: Электрический ошейник, подающий разряд по сигналу.
-  components:
-  - type: Sprite
-    sprite: MetaFlud/Clothing/Neck/NeckAccessories/shock_collar.rsi
-  - type: Clothing
-    sprite: MetaFlud/Clothing/Neck/NeckAccessories/shock_collar.rsi
-    stripDelay: 10
-    equipDelay: 5
-  - type: SelfUnremovableClothing
-  - type: ShockOnTrigger
-    damage: 1
-    duration: 3
-    cooldown: 4
-  - type: TriggerOnSignal
-  - type: DeviceLinkSink
-    ports:
-      - Trigger
+# Повырезал всё чересчур лишнее.
+
+#- type: entity
+#  parent: ClothingNeckBase
+#  id: ClothingNeckShockCollar
+#  name: шоковый ошейник
+#  suffix: чокер
+#  description: Электрический ошейник, подающий разряд по сигналу.
+#  components:
+#  - type: Sprite
+#    sprite: MetaFlud/Clothing/Neck/NeckAccessories/shock_collar.rsi
+#  - type: Clothing
+#    sprite: MetaFlud/Clothing/Neck/NeckAccessories/shock_collar.rsi
+#    stripDelay: 10
+#    equipDelay: 5
+#  - type: SelfUnremovableClothing
+#  - type: ShockOnTrigger
+#    damage: 1
+#    duration: 3
+#    cooldown: 4
+#  - type: TriggerOnSignal
+#  - type: DeviceLinkSink
+#    ports:
+#      - Trigger
 
 - type: entity
   parent: ClothingNeckBase
@@ -57,29 +59,29 @@
   - type: Clothing
     sprite: MetaFlud/Clothing/Neck/NeckAccessories/collar3.rsi
 
-- type: entity
-  parent: ClothingNeckBase
-  id: ClothingNeckCollar
-  name: чокер с сердцем
-  suffix: чокер
-  description: Чёрный чокер с розовым сердцем спереди.
-  components:
-  - type: Sprite
-    sprite: MetaFlud/Clothing/Neck/NeckAccessories/collar4.rsi
-  - type: Clothing
-    sprite: MetaFlud/Clothing/Neck/NeckAccessories/collar4.rsi
+#- type: entity
+#  parent: ClothingNeckBase
+#  id: ClothingNeckCollar
+#  name: чокер с сердцем
+#  suffix: чокер
+#  description: Чёрный чокер с розовым сердцем спереди.
+#  components:
+#  - type: Sprite
+#    sprite: MetaFlud/Clothing/Neck/NeckAccessories/collar4.rsi
+#  - type: Clothing
+#    sprite: MetaFlud/Clothing/Neck/NeckAccessories/collar4.rsi
 
-- type: entity
-  parent: ClothingNeckBase
-  id: ClothingNeckSpikeCollar
-  name: шипованный чокер
-  suffix: чокер
-  description: Чокер с шипами для дерзкого образа.
-  components:
-  - type: Sprite
-    sprite: MetaFlud/Clothing/Neck/NeckAccessories/spike_collar.rsi
-  - type: Clothing
-    sprite: MetaFlud/Clothing/Neck/NeckAccessories/spike_collar.rsi
+#- type: entity
+#  parent: ClothingNeckBase
+#  id: ClothingNeckSpikeCollar
+#  name: шипованный чокер
+#  suffix: чокер
+#  description: Чокер с шипами для дерзкого образа.
+#  components:
+#  - type: Sprite
+#    sprite: MetaFlud/Clothing/Neck/NeckAccessories/spike_collar.rsi
+#  - type: Clothing
+#    sprite: MetaFlud/Clothing/Neck/NeckAccessories/spike_collar.rsi
 
 - type: entity
   parent: ClothingNeckBase
@@ -108,15 +110,15 @@
       params:
         volume: -6
 
-- type: entity
-  parent: ClothingNeckBellCollarBase
-  id: ClothingNeckBellCollarPink
-  suffix: чокер
-  components:
-  - type: Sprite
-    sprite: MetaFlud/Clothing/Neck/NeckAccessories/collar5.rsi
-  - type: Clothing
-    sprite: MetaFlud/Clothing/Neck/NeckAccessories/collar5.rsi
+#- type: entity
+#  parent: ClothingNeckBellCollarBase
+#  id: ClothingNeckBellCollarPink
+#  suffix: чокер
+#  components:
+#  - type: Sprite
+#    sprite: MetaFlud/Clothing/Neck/NeckAccessories/collar5.rsi
+#  - type: Clothing
+#    sprite: MetaFlud/Clothing/Neck/NeckAccessories/collar5.rsi
 
 - type: entity
   parent: ClothingNeckBellCollarBase
@@ -128,36 +130,36 @@
   - type: Clothing
     sprite: MetaFlud/Clothing/Neck/NeckAccessories/collar6.rsi
 
-- type: entity
-  parent: ClothingNeckBellCollarBase
-  id: ClothingNeckBellCollarPlain
-  suffix: чокер
-  components:
-  - type: Sprite
-    sprite: MetaFlud/Clothing/Neck/NeckAccessories/collar7.rsi
-  - type: Clothing
-    sprite: MetaFlud/Clothing/Neck/NeckAccessories/collar7.rsi
+#- type: entity
+#  parent: ClothingNeckBellCollarBase
+#  id: ClothingNeckBellCollarPlain
+#  suffix: чокер
+#  components:
+#  - type: Sprite
+#    sprite: MetaFlud/Clothing/Neck/NeckAccessories/collar7.rsi
+#  - type: Clothing
+#    sprite: MetaFlud/Clothing/Neck/NeckAccessories/collar7.rsi
 
-- type: entity
-  parent: ClothingNeckBase
-  id: ClothingNeckCollarCross
-  name: чокер с крестом
-  suffix: чокер
-  description: Чокер с декоративным крестом.
-  components:
-  - type: Sprite
-    sprite: MetaFlud/Clothing/Neck/NeckAccessories/collar_cross.rsi
-  - type: Clothing
-    sprite: MetaFlud/Clothing/Neck/NeckAccessories/collar_cross.rsi
+#- type: entity
+#  parent: ClothingNeckBase
+#  id: ClothingNeckCollarCross
+#  name: чокер с крестом
+#  suffix: чокер
+#  description: Чокер с декоративным крестом.
+#  components:
+#  - type: Sprite
+#    sprite: MetaFlud/Clothing/Neck/NeckAccessories/collar_cross.rsi
+#  - type: Clothing
+#    sprite: MetaFlud/Clothing/Neck/NeckAccessories/collar_cross.rsi
 
-- type: entity
-  parent: ClothingNeckBase
-  id: ClothingNeckCollarStar
-  name: чокер со звездой
-  suffix: чокер
-  description: Чокер с декоративной звездой.
-  components:
-  - type: Sprite
-    sprite: MetaFlud/Clothing/Neck/NeckAccessories/collar_star.rsi
-  - type: Clothing
-    sprite: MetaFlud/Clothing/Neck/NeckAccessories/collar_star.rsi
+#- type: entity
+#  parent: ClothingNeckBase
+#  id: ClothingNeckCollarStar
+#  name: чокер со звездой
+#  suffix: чокер
+#  description: Чокер с декоративной звездой.
+#  components:
+#  - type: Sprite
+#    sprite: MetaFlud/Clothing/Neck/NeckAccessories/collar_star.rsi
+#  - type: Clothing
+#    sprite: MetaFlud/Clothing/Neck/NeckAccessories/collar_star.rsi
