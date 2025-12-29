@@ -13,23 +13,18 @@
       size: Ginormous
       heldPrefix: riot
     - type: Blocking
-      passiveBlockModifier:
-        coefficients:
-          Blunt: 0.9
-          Slash: 0.9
-          Piercing: 0.9
-          Heat: 0.9
-      activeBlockModifier:
-        coefficients:
-          Blunt: 0.8
-          Slash: 0.8
-          Piercing: 0.8
-          Heat: 0.8
-        flatReductions:
-          Blunt: 1
-          Slash: 1
-          Piercing: 1
-          Heat: 1
+    #SS220 shield rework begin
+    - type: ArmorBlock
+      tresholddict:
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+      durabilitytresholddict:
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+    #SS220 shield rework end
+      #Those damage types cannot be dealt to the shield and, logically, to the user
     - type: Damageable
       damageContainer: Shield
     - type: Destructible
@@ -66,62 +61,91 @@
   name: riot shield
   parent: [ BaseShield, BaseSecurityContraband ]
   id: RiotShield
-  description: A large tower shield. Good for controlling crowds.
+  description: A large tower shield made of strikeproof polymeres. It can be effectively used to block all types of attacks due to it's light weight but will not withstand anything more serious than melee attacks and primitive balistic projectiles.
   components:
     - type: StaticPrice
       price: 90
     - type: Blocking
-      passiveBlockModifier:
-        coefficients:
-          Blunt: 0.7
-          Slash: 0.7
-      activeBlockModifier:
-        coefficients:
-          Blunt: 0.5
-          Slash: 0.5
-        flatReductions:
-          Blunt: 1
-          Slash: 1
+    #SS220 shield rework begin
+      RangeBlockProb: 0.5
+      MeleeBlockProb: 0.65
+      ActiveRangeBlockProb: 0.60
+      ActiveMeleeBlockProb: 0.75
+    - type: ArmorBlock
+      tresholddict:
+          Piercing: 15
+          Blunt: 20
+          Heat: 10
+          Slash: 15
+      durabilitytresholddict:
+          Piercing: 12
+          Blunt: 15
+          Heat: 7
+          Slash: 10
+    #SS220 shield rework end
 
 - type: entity
   name: laser shield
   parent: [ BaseShield, BaseSecurityContraband ]
   id: RiotLaserShield
-  description: A shield built for withstanding lasers, but not much else.
+  description: Not even technically a shield but an advanced heat dissipation system. It is able to effectively reflect energy of high temperature energy bolts and lasers but is fairly useless against all mechanical attacks.
   components:
     - type: Sprite
       state: riot_laser-icon
     - type: Item
       heldPrefix: riot_laser
     - type: Blocking
-      passiveBlockModifier:
-        coefficients:
-          Heat: 0.7
-      activeBlockModifier:
-        coefficients:
-          Heat: 0.5
-        flatReductions:
-          Heat: 1
+    #SS220 shield rework begin
+      RangeBlockProb: 50
+      MeleeBlockProb: 65
+      ActiveRangeBlockProb: 60
+      ActiveMeleeBlockProb: 75
+    - type: ArmorBlock
+      tresholddict:
+          Piercing: 7
+          Blunt: 10
+          Heat: 60
+          Slash: 7
+      durabilitytresholddict:
+          Piercing: 4
+          Blunt: 5
+          Heat: 35
+          Slash: 4
+    #SS220 shield rework end
 
 - type: entity
   name: ballistic shield
   parent: [ BaseShield, BaseSecurityContraband ]
   id: RiotBulletShield
-  description: A shield built for protecting against ballistics, but not much else.
+  description: A heavy shield made of depelted uranium and plasteel. It is very heavy and unhandy against melee hits but can withstand all but most powerful attacks.
   components:
     - type: Sprite
       state: riot_bullet-icon
     - type: Item
       heldPrefix: riot_bullet
     - type: Blocking
-      passiveBlockModifier:
-        coefficients:
-          Piercing: 0.7
-      activeBlockModifier:
-        coefficients:
-          Piercing: 0.5
-        flatReductions:
-          Piercing: 1
+    #SS220 shield rework begin
+      RangeBlockProb: 55
+      MeleeBlockProb: 30
+      ActiveRangeBlockProb: 65
+      ActiveMeleeBlockProb: 45
+    - type: ArmorBlock
+      tresholddict:
+          Piercing: 37
+          Blunt: 35
+          Heat: 30
+          Slash: 35
+      durabilitytresholddict:
+          Piercing: 30
+          Blunt: 30
+          Heat: 25
+          Slash: 30
+    - type: ClothingSpeedModifier
+      sprintModifier: 0.9
+    - type: HeldSpeedModifier
+      sprintModifier: 0.9
+    #SS220 shield rework end
+
 
 #Craftable shields
 
@@ -136,22 +160,21 @@
     - type: Item
       heldPrefix: buckler
     - type: Blocking
-      passiveBlockModifier:
-        coefficients:
-          Blunt: 0.95
-          Slash: 0.95
-          Piercing: 0.95
-          Heat: 2
-      activeBlockModifier:
-        coefficients:
-          Blunt: 0.85
-          Slash: 0.85
-          Piercing: 0.85
-          Heat: 2
-        flatReductions:
-          Blunt: 1
-          Slash: 1
-          Piercing: 1
+    #SS220 shield rework begin
+      RangeBlockProb: 40
+      MeleeBlockProb: 60
+      ActiveRangeBlockProb: 50
+      ActiveMeleeBlockProb: 70
+    - type: ArmorBlock
+      tresholddict:
+          Piercing: 15
+          Blunt: 20
+          Heat: 10
+      durabilitytresholddict:
+          Piercing: 7
+          Blunt: 10
+          Heat: 5
+    #SS220 shield rework begin
     - type: Construction
       graph: WoodenBuckler
       node: woodenBuckler
@@ -184,27 +207,28 @@
   name: cardboard shield
   parent: BaseShield
   id: CardShield
-  description: A shield made of cardboard. Won't protect you from much.
+  description: A shield made of cardboard. It is a really bad idea to try using it to defend against anything.
   components:
     - type: Sprite
       state: cardshield-icon
     - type: Item
       heldPrefix: cardshield
     - type: Blocking
-      passiveBlockModifier:
-        coefficients:
+    #SS220 shield rework begin
+      RangeBlockProb: 50
+      MeleeBlockProb: 50
+      ActiveRangeBlockProb: 60
+      ActiveMeleeBlockProb: 65
+    - type: ArmorBlock
+      tresholddict:
+          Piercing: 1
           Blunt: 1
-          Slash: 2
-          Piercing: 0.6
-          Heat: 3
-      activeBlockModifier:
-        coefficients:
-          Blunt: 0.9
-          Slash: 1.8
-          Piercing: 0.5
-          Heat: 2.5
-        flatReductions:
-          Blunt: 0.5
+          Heat: 1
+      durabilitytresholddict:
+          Piercing: 0
+          Blunt: 0
+          Heat: 0
+    #SS220 shield rework end
     - type: Construction
       graph: CardShield
       node: cardShield
@@ -212,13 +236,13 @@
       thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 25
+          damage: 5
         behaviors:
         - !type:DoActsBehavior
           acts: [ "Destruction" ]
       - trigger:
           !type:DamageTrigger
-          damage: 10 #Very very weak shield
+          damage: 5 #Very very weak shield
         behaviors:
         - !type:DoActsBehavior
           acts: [ "Destruction" ]
@@ -236,30 +260,30 @@
   name: makeshift shield
   parent: BaseShield
   id: MakeshiftShield
-  description: A rundown looking shield, not good for much.
+  description: A rundown looking shield made of thin low quality steel plates
   components:
     - type: Sprite
       state: makeshift-icon
     - type: Item
       heldPrefix: metal
     - type: Blocking
-      passiveBlockModifier:
-        coefficients:
-          Blunt: 0.95
-          Slash: 0.95
-          Piercing: 0.95
-          Heat: 0.9
-      activeBlockModifier:
-        coefficients:
-          Blunt: 0.85
-          Slash: 0.85
-          Piercing: 0.85
-          Heat: 0.8
-        flatReductions:
-          Blunt: 0.5
-          Slash: 0.5
-          Piercing: 0.5
-          Heat: 1
+    #SS220 shield rework begin
+      RangeBlockProb: 50
+      MeleeBlockProb: 50
+      ActiveRangeBlockProb: 60
+      ActiveMeleeBlockProb: 65
+    - type: ArmorBlock
+      tresholddict:
+          Piercing: 15
+          Blunt: 20
+          Heat: 10
+          Slash: 15
+      durabilitytresholddict:
+          Piercing: 12
+          Blunt: 15
+          Heat: 7
+          Slash: 10
+    #SS220 shield rework end
     - type: Construction
       graph: MakeshiftShield
       node: makeshiftShield
@@ -267,13 +291,13 @@
       thresholds:
         - trigger:
             !type:DamageTrigger
-            damage: 40
+            damage: 50
           behaviors:
             - !type:DoActsBehavior
               acts: [ "Destruction" ]
         - trigger:
             !type:DamageTrigger
-            damage: 20 #Very weak shield
+            damage: 40 #Very weak shield
           behaviors:
             - !type:DoActsBehavior
               acts: [ "Destruction" ]
@@ -290,7 +314,7 @@
   name: web shield
   parent: BaseShield
   id: WebShield
-  description: A stringy shield. It's weak, and doesn't seem to do well against heat.
+  description: A stringy shield. It's more a decoration than an actual defence measure
   components:
     - type: Sprite
       sprite: Objects/Weapons/Melee/web-shield.rsi
@@ -299,20 +323,23 @@
       sprite: Objects/Weapons/Melee/web-shield.rsi
       heldPrefix: icon
     - type: Blocking
-      passiveBlockModifier:
-        coefficients:
-          Blunt: 0.95
-          Slash: 0.95
-          Piercing: 0.95
-      activeBlockModifier:
-        coefficients:
-          Blunt: 0.85
-          Slash: 0.85
-          Piercing: 0.85
-        flatReductions:
-          Blunt: 0.5
-          Slash: 0.5
-          Piercing: 0.5
+    #SS220 shield rework begin
+      RangeBlockProb: 50
+      MeleeBlockProb: 50
+      ActiveRangeBlockProb: 60
+      ActiveMeleeBlockProb: 65
+    - type: ArmorBlock
+      tresholddict:
+          Piercing: 7
+          Blunt: 7
+          Heat: 7
+          Slash: 7
+      durabilitytresholddict:
+          Piercing: 4
+          Blunt: 4
+          Heat: 4
+          Slash: 4
+    #SS220 shield rework end
     - type: Construction
       graph: WebObjects
       node: shield
@@ -320,13 +347,13 @@
       thresholds:
         - trigger:
             !type:DamageTrigger
-            damage: 40
+            damage: 20
           behaviors:
             - !type:DoActsBehavior
               acts: [ "Destruction" ]
         - trigger:
             !type:DamageTrigger
-            damage: 20
+            damage: 10
           behaviors:
             - !type:DoActsBehavior
               acts: [ "Destruction" ]
@@ -352,23 +379,24 @@
     - type: Item
       heldPrefix: ratvarian
     - type: Blocking
-      passiveBlockModifier:
-        coefficients:
-          Blunt: 0.8
-          Slash: 0.8
-          Piercing: 0.8
-          Heat: 1.5
-      activeBlockModifier:
-        coefficients:
-          Blunt: 0.7
-          Slash: 0.7
-          Piercing: 0.7
-          Heat: 1.5
-        flatReductions:
-          Blunt: 1
-          Slash: 1
-          Piercing: 1
-      #Have it break into brass when clock cult is in
+    #SS220 shield rework begin
+      RangeBlockProb: 35
+      MeleeBlockProb: 55
+      ActiveRangeBlockProb: 45
+      ActiveMeleeBlockProb: 70
+    - type: ArmorBlock
+      tresholddict:
+          Piercing: 17
+          Blunt: 25
+          Heat: 25
+          Slash: 25
+      durabilitytresholddict:
+          Piercing: 12
+          Blunt: 20
+          Heat: 20
+          Slash: 20
+      #Have it break into brass when clock cult is is
+    #SS220 shield rework end
 
 - type: entity
   name: mirror shield
@@ -384,23 +412,28 @@
       reflectProb: 0.95
       reflects:
         - Energy
-    - type: Blocking #Mirror shield reflects heat/laser, but is relatively weak to everything else.
-      passiveBlockModifier:
-        coefficients:
-          Blunt: 1.2
-          Slash: 1.2
-          Piercing: 1.2
-          Heat: .7
-      activeBlockModifier:
-        coefficients:
-          Blunt: 1.2
-          Slash: 1.2
-          Piercing: 1.2
-          Heat: .6
-        flatReductions:
-          Heat: 1
+    - type: Blocking
+    #SS220 shield rework begin
+      RangeBlockProb: 50
+      MeleeBlockProb: 35
+      ActiveRangeBlockProb: 65
+      ActiveMeleeBlockProb: 45 #Mirror shield reflects heat/laser, but is relatively weak to everything else.
+    #SS220 shield rework end
       blockSound: !type:SoundPathSpecifier
         path: /Audio/Effects/glass_step.ogg
+    #SS220 shield rework begin
+    - type: ArmorBlock
+      tresholddict:
+          Piercing: 7
+          Blunt: 10
+          Heat: 60
+          Slash: 7
+      durabilitytresholddict:
+          Piercing: 4
+          Blunt: 5
+          Heat: 35
+          Slash: 4
+    #SS220 shield rework end
     - type: Destructible
       thresholds:
         - trigger:
@@ -418,11 +451,12 @@
                   min: 5
                   max: 5
 
+
 - type: entity
   name: energy shield
   parent: [BaseItem]
   id: EnergyShield
-  description: Exotic energy shield, when folded, can even fit in your pocket.
+  description: A piece of advanced tech made based on the technology used in the field shields. It is lightweight and can very effectively block any types of attacks.
   components:
     - type: ItemToggle
       soundActivate:
@@ -469,51 +503,41 @@
       energy: 2
       color: blue
     - type: ItemTogglePointLight
-    - type: Reflect
-      reflectProb: 0.95
-      reflects:
-        - Energy
     - type: Blocking
-      passiveBlockModifier:
-        coefficients:
-          Blunt: 1.0
-          Slash: 0.9
-          Piercing: 0.85
-          Heat: 0.6
-      activeBlockModifier:
-        coefficients:
-          Blunt: 1.2
-          Slash: 0.85
-          Piercing: 0.5
-          Heat: 0.4
-        flatReductions:
-          Heat: 1
-          Piercing: 1
+    #SS220 shield rework begin
+      RangeBlockProb: 50
+      MeleeBlockProb: 65
+      ActiveRangeBlockProb: 60
+      ActiveMeleeBlockProb: 75
+    #SS220 shield rework end
     #ss220 shield blocking damage fix start
     - type: ItemToggleBlockingDamage
-      deactivatedActiveModifier:
-        coefficients:
-          Blunt: 0.0
-          Slash: 0.0
-          Piercing: 0.0
-          Heat: 0.0
-      deactivatedPassiveModifier:
-        coefficients:
-          Blunt: 0.0
-          Slash: 0.0
-          Piercing: 0.0
-          Heat: 0.0
-      deactivatedActiveFraction: 0
-      deactivatedPassiveFraction: 0
+      ToggledRangeBlockProb: 50
+      ToggledMeleeBlockProb: 65 #No more stunbatons
     #ss220 shield blocking damage fix end
     - type: Appearance
+    #SS220 shield rework begin
+    - type: ArmorBlock
+      tresholddict:
+          Piercing: 26
+          Blunt: 30
+          Heat: 26
+          Slash: 30
+      #Blocks effectively anything station normally uses
+      durabilitytresholddict:
+          Piercing: 40
+          Blunt: 40
+          Heat: 40
+          Slash: 40
+      #Practically impossible to destroy using only station's weapons
+    #SS220 shield rework end
     - type: Damageable
       damageContainer: Shield
     - type: Destructible
       thresholds:
         - trigger:
             !type:DamageTrigger
-            damage: 180
+            damage: 100
           behaviors:
             - !type:DoActsBehavior
               acts: [ "Destruction" ]
@@ -590,6 +614,25 @@
   id: TelescopicShield
   description: An advanced riot shield made of lightweight materials that collapses for easy storage.
   components:
+    - type: Blocking
+    #SS220 shield rework begin
+      RangeBlockProb: 50
+      MeleeBlockProb: 65
+      ActiveRangeBlockProb: 60
+      ActiveMeleeBlockProb: 75
+    - type: ArmorBlock
+      tresholddict:
+          Piercing: 15
+          Blunt: 20
+          Heat: 10
+          Slash: 15
+      durabilitytresholddict:
+          Piercing: 12
+          Blunt: 15
+          Heat: 7
+          Slash: 10
+    #Same riot shield,just foldable
+    #SS220 shield rework end
     - type: ItemToggle
       soundActivate:
         path: /Audio/Weapons/telescopicon.ogg
@@ -626,6 +669,7 @@
         right:
           - state: inhand-right-shield
     - type: Appearance
+    - type: ItemToggleBlockingDamage
     - type: Destructible
       thresholds:
         - trigger:

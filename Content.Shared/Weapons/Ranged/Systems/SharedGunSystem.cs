@@ -35,6 +35,7 @@ using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Blocking;
 using Content.Shared.Standing;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
@@ -253,6 +254,15 @@ public abstract partial class SharedGunSystem : EntitySystem
             return false;
         }
         // ss220 add block heavy attack and shooting while user is down end
+
+        if (TryComp<BlockingUserComponent>(user,out var blockComp))
+        {
+            if(blockComp.IsBlocking)
+            {
+                PopupSystem.PopupPredictedCursor(Loc.GetString("lying-down-block-shooting"), user);
+                return false;
+            }
+        }
 
         var toCoordinates = gun.ShootCoordinates;
 

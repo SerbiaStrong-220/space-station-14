@@ -1,3 +1,4 @@
+using Robust.Shared.GameStates;
 using Robust.Shared.Physics;
 
 namespace Content.Shared.Blocking;
@@ -5,7 +6,7 @@ namespace Content.Shared.Blocking;
 /// <summary>
 /// This component gets dynamically added to an Entity via the <see cref="BlockingSystem"/>
 /// </summary>
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class BlockingUserComponent : Component
 {
     /// <summary>
@@ -14,6 +15,9 @@ public sealed partial class BlockingUserComponent : Component
     [DataField("blockingItemsShields")]
     public List<EntityUid?> BlockingItemsShields = new();
 
+    //
+    [DataField, AutoNetworkedField]
+    public bool IsBlocking = false;
 
     /// <summary>
     /// The entity that's being used to block

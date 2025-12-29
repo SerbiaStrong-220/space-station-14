@@ -1,17 +1,18 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared.Camera;
+using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.Effects;
 using Content.Shared.Mobs.Components;
-using Content.Shared.Throwing;
 using Content.Shared.SS220.Damage;
+using Content.Shared.Throwing;
+using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
-using Content.Shared.CombatMode.Pacification;
 
 namespace Content.Server.Damage.Systems;
 
@@ -42,6 +43,14 @@ public sealed class DamageOtherOnHitSystem : SharedDamageOtherOnHitSystem
         if (hitEv.Handled)
             return;
         // SS220-add-miss-chance-?-end
+
+        var blockEv = new ThrowableProjectileBlockAttemptEvent(component.Damage);
+        RaiseLocalEvent(args.Target,blockEv);
+        if (blockEv.Cancelled)
+        {
+            _color.RaiseEffect(Color.Red, [args.Target], Filter.Pvs(args.Target, entityManager: EntityManager));
+            return;
+        }
 
         var dmg = _damageable.TryChangeDamage(args.Target, component.Damage * _damageable.UniversalThrownDamageModifier, component.IgnoreResistances, origin: args.Component.Thrower);
 

@@ -14,7 +14,7 @@ public sealed partial class BlockingSystem
     private void InitializeUser()
     {
         //SubscribeLocalEvent<BlockingUserComponent, DamageModifyEvent>(OnUserDamageModified);
-        SubscribeLocalEvent<BlockingComponent, DamageModifyEvent>(OnDamageModified);
+        //SubscribeLocalEvent<BlockingComponent, DamageModifyEvent>(OnDamageModified);
 
         SubscribeLocalEvent<BlockingUserComponent, EntParentChangedMessage>(OnParentChanged);
         SubscribeLocalEvent<BlockingUserComponent, ContainerGettingInsertedAttemptEvent>(OnInsertAttempt);
@@ -78,16 +78,16 @@ public sealed partial class BlockingSystem
      //   }
  //   }
 
-    private void OnDamageModified(EntityUid uid, BlockingComponent component, DamageModifyEvent args)
-    {
-        var modifier = component.IsBlocking ? component.ActiveBlockDamageModifier : component.PassiveBlockDamageModifer;
-        if (modifier == null)
-        {
-            return;
-        }
-
-        args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, modifier);
-    }
+    //private void OnDamageModified(EntityUid uid, BlockingComponent component, DamageModifyEvent args)
+    //{
+    //    var modifier = component.IsBlocking ? component.ActiveBlockDamageModifier : component.PassiveBlockDamageModifer;
+    //    if (modifier == null)
+    //    {
+    //        return;
+    //    }
+    //
+    //    args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, modifier);
+    //}
 
     private void OnEntityTerminating(EntityUid uid, BlockingUserComponent component, ref EntityTerminatingEvent args)
     {
@@ -112,7 +112,7 @@ public sealed partial class BlockingSystem
         foreach (var shield in component.BlockingItemsShields)
         {
             if (TryComp<BlockingComponent>(shield, out var blockComp) && blockComp.IsBlocking)
-                StopBlocking((EntityUid)shield, blockComp, uid);
+                StopBlocking((EntityUid)shield, blockComp, component, uid);
         }
     }
 }
