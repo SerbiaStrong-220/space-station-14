@@ -43,6 +43,11 @@ namespace Content.Server.Construction
             if (!args.CanAccess || !args.CanInteract || args.Hands == null)
                 return;
 
+            // SS220-construction-skill-add
+            if (!_experience.HaveSkill(args.User, _skillToSeeInstruction))
+                return;
+            // SS220-construction-skill-end
+
             if (component.TargetNode == component.DeconstructionNode ||
                 component.Node == component.DeconstructionNode)
                 return;
@@ -86,7 +91,7 @@ namespace Content.Server.Construction
         private void HandleConstructionExamined(EntityUid uid, ConstructionComponent component, ExaminedEvent args)
         {
             // SS220-construction-skill-add
-            if (!_experience.HaveSkill(uid, _skillToSeeInstruction))
+            if (!_experience.HaveSkill(args.Examiner, _skillToSeeInstruction))
                 return;
             // SS220-construction-skill-end
             using (args.PushGroup(nameof(ConstructionComponent)))
