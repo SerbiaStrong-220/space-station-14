@@ -2,7 +2,7 @@
   id: Morgue
   sound:
     params:
-      volume: -12
+      volume: -18
     collection: AmbienceSignalisSpooky # Metaflud
   rules: NearMorgue
   priority: 4
@@ -11,7 +11,7 @@
   id: SpookyFog
   sound:
     params:
-      volume: -12
+      volume: -18
     collection: AmbienceSignalisSpooky # Metaflud 
   rules: NearSpookyFog
   priority: 5
@@ -67,7 +67,7 @@
   id: Space
   sound:
     params:
-      volume: -10
+      volume: -16
     collection: AmbienceSignalisSpace # MetaFlud
   fadeIn: true
   interruptable: true
@@ -90,7 +90,7 @@
   id: General
   sound:
     params:
-      volume: -12
+      volume: -18
     collection: AmbienceSignalisGeneral #MetaFlud
   rules: AlwaysTrue
 
