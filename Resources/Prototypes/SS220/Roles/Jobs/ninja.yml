@@ -2,6 +2,7 @@
   id: Ninja
   name: job-name-ninja
   description: job-description-ninja
+  experienceDefinition: NinjaRoleExperience
   playTimeTracker: AntagNinja
   requirements:
   - !type:OverallPlaytimeRequirement
