@@ -8,10 +8,10 @@
   components:
   - type: Sprite
     noRot: true
-    sprite: SS220/Structures/CultYogg/yoggaltar.rsi
+    sprite: SS220/Structures/CultYogg/altar.rsi
     state: cultaltar
   - type: Icon
-    sprite: SS220/Structures/CultYogg/yoggaltar.rsi
+    sprite: SS220/Structures/CultYogg/altar.rsi
     state: cultaltar
   - type: Appearance
   - type: CultYoggAltar

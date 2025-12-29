@@ -59,7 +59,7 @@
       pen:
         maxVol: 24
         reagents:
-        - ReagentId: Morphine
+        - ReagentId: Aglomorphine
           Quantity: 4
         - ReagentId: Dylovene
           Quantity: 20
