@@ -638,11 +638,3 @@
   - !type:GroupLoadoutEffect
     proto: AdministratorSponsorTier  #SS220-senior-pomidor-end
   groupBy: "towels"
-
-#SS220 Merry Christmas and Happy New Year! start
-- type: loadout
-  id: NewYearsCap
-  storage:
-    back:
-    - ClothingHeadHatNewYearsCap
-#SS220 Merry Christmas and Happy New Year! end
