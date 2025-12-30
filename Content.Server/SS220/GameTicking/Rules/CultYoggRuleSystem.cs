@@ -650,7 +650,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
             foreach (var station in _station.GetStations())
             {
                 _chat.DispatchStationAnnouncement(station, Loc.GetString("cult-yogg-cultists-warning"), playDefaultSound: false, colorOverride: Color.Red);
-                _audio.PlayGlobal("/Audio/Misc/notice1.ogg", Filter.Broadcast(), true);
+                _audio.PlayGlobal(rule.Comp.BroadcastSound, Filter.Broadcast(), true);
                 _alertLevel.SetLevel(station, "gamma", true, true, true);
             }
         }
