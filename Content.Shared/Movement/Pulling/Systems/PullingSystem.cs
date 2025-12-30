@@ -492,6 +492,13 @@ public sealed class PullingSystem : EntitySystem
             return false;
         }
 
+        // SS220-PullingCooldown-Start
+        if (_timing.CurTime < pullerComp.LastPullAt + pullerComp.PullCooldown)
+        {
+            return false;
+        }
+        // SS220-PullingCooldown-End
+
         var getPulled = new BeingPulledAttemptEvent(puller, pullableUid);
         RaiseLocalEvent(pullableUid, getPulled, true);
         var startPull = new StartPullAttemptEvent(puller, pullableUid);
@@ -566,6 +573,8 @@ public sealed class PullingSystem : EntitySystem
             return false;
 
         // Pulling confirmed
+
+        pullerComp.LastPullAt = _timing.CurTime; // SS220-PullingCooldown
 
         _interaction.DoContactInteraction(pullableUid, pullerUid);
 
