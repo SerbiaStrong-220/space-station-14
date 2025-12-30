@@ -102,6 +102,7 @@ namespace Content.Shared.Verbs
         // ss220 add signature start
         public static readonly VerbCategory PenWriteSize = new("verb-categories-pen-write-size", null);
         public static readonly VerbCategory PenEraseSize = new("verb-categories-pen-erase-size", null);
+        public static readonly VerbCategory PenCopying = new("verb-categories-pen-copying", null);
         // ss220 add signature end
     }
 }
