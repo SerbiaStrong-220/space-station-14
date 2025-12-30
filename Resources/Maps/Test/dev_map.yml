@@ -15740,13 +15740,6 @@ entities:
     - type: Transform
       pos: 72.5,-17.5
       parent: 1
-- proto: SpawnMobCorgiMouse
-  entities:
-  - uid: 577
-    components:
-    - type: Transform
-      pos: 32.5,16.5
-      parent: 1
 - proto: SpawnMobHuman
   entities:
   - uid: 1104
@@ -15784,7 +15777,7 @@ entities:
     - type: Transform
       pos: 31.5,19.5
       parent: 1
-- proto: SpawnPointCaptain
+- proto: SpawnPointAnyJob
   entities:
   - uid: 24
     components:
