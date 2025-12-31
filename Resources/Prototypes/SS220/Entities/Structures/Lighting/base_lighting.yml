@@ -1,0 +1,69 @@
+- type: entity
+  name: гирлянда
+  description: "Праздничная гирлянда, наполняющая станцию тёплым светом и новогодней атмосферой..."
+  id: garland_yellow
+  suffix: Yellow
+  parent: AlwaysPoweredWallLight
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Wallmounts/garland.rsi
+    state: yellow_off
+    layers:
+    - map: ["enum.PoweredLightLayers.Base"]
+      state: yellow_off
+    - map: ["enum.PoweredLightLayers.Glow"]
+      state: yellow_on
+      shader: unshaded
+  - type: PointLight
+    enabled: true
+  - type: PoweredLight
+    bulb: Tube
+    hasLampOnSpawn: LightTube
+  - type: ContainerContainer
+    containers:
+      light_bulb: !type:ContainerSlot
+        locked: true
+  - type: ApcPowerReceiver
+  - type: ExtensionCableReceiver
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: SmartLight
+  - type: WirelessNetworkConnection
+    range: 200
+  - type: DeviceLinkSink
+    ports:
+      - On
+      - Off
+      - Toggle
+  - type: Appearance
+  - type: PoweredLightVisuals
+    blinkingSound:
+      path: "/Audio/Machines/light_tube_on.ogg"
+    spriteStateMap:
+      off: yellow_off
+      on: yellow_on
+      broken: yellon_off
+  - type: DamageOnInteract
+    damage:
+      types:
+        Heat: 2
+    popupText: powered-light-component-burn-hand
+
+- type: entity
+  name: гирлянда
+  description: "Праздничная гирлянда, наполняющая станцию тёплым светом и новогодней атмосферой..."
+  id: garland_rainbow
+  suffix: Rainbow
+  parent: garland_yellow
+  components:
+    - type: Sprite
+      sprite: SS220/Structures/Wallmounts/garland.rsi
+      state: rainbow_off
+      layers:
+      - map: ["enum.PoweredLightLayers.Base"]
+        state: rainbow_off
+      - map: ["enum.PoweredLightLayers.Glow"]
+        state: rainbow_on
+        shader: unshaded
+    - type: RgbLightController
+      cycleRate: 0.05
