@@ -3,3 +3,9 @@
   storage:
     back:
     - HandheldStationMap
+
+- type: loadout
+  id: NewYearsCap
+  storage:
+    back:
+    - ClothingHeadHatNewYearsCap
