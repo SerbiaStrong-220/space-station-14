@@ -29,6 +29,6 @@ public sealed partial class BlockingUserComponent : Component
     /// Stores the entities original bodytype
     /// Used so that it can be put back to what it was after anchoring
     /// </summary>
-    [DataField("originalBodyType")]
-    public BodyType OriginalBodyType;
+    //[DataField("originalBodyType")]
+    //public BodyType OriginalBodyType;
 }

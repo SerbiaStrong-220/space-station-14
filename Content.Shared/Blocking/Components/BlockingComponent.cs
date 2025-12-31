@@ -23,7 +23,7 @@ public sealed partial class BlockingComponent : Component
     /// <summary>
     /// Is it currently blocking?
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public bool IsBlocking;
 
     /// <summary>

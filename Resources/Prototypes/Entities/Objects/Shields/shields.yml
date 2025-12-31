@@ -96,10 +96,10 @@
       heldPrefix: riot_laser
     - type: Blocking
     #SS220 shield rework begin
-      RangeBlockProb: 50
-      MeleeBlockProb: 65
-      ActiveRangeBlockProb: 60
-      ActiveMeleeBlockProb: 75
+      RangeBlockProb: 0.50
+      MeleeBlockProb: 0.65
+      ActiveRangeBlockProb: 0.60
+      ActiveMeleeBlockProb: 0.75
     - type: ArmorBlock
       tresholddict:
           Piercing: 7
@@ -125,10 +125,10 @@
       heldPrefix: riot_bullet
     - type: Blocking
     #SS220 shield rework begin
-      RangeBlockProb: 55
-      MeleeBlockProb: 30
-      ActiveRangeBlockProb: 65
-      ActiveMeleeBlockProb: 45
+      RangeBlockProb: 0.55
+      MeleeBlockProb: 0.30
+      ActiveRangeBlockProb: 0.65
+      ActiveMeleeBlockProb: 0.45
     - type: ArmorBlock
       tresholddict:
           Piercing: 37
@@ -161,10 +161,10 @@
       heldPrefix: buckler
     - type: Blocking
     #SS220 shield rework begin
-      RangeBlockProb: 40
-      MeleeBlockProb: 60
-      ActiveRangeBlockProb: 50
-      ActiveMeleeBlockProb: 70
+      RangeBlockProb: 0.40
+      MeleeBlockProb: 0.60
+      ActiveRangeBlockProb: 0.50
+      ActiveMeleeBlockProb: 0.70
     - type: ArmorBlock
       tresholddict:
           Piercing: 15
@@ -215,10 +215,10 @@
       heldPrefix: cardshield
     - type: Blocking
     #SS220 shield rework begin
-      RangeBlockProb: 50
-      MeleeBlockProb: 50
-      ActiveRangeBlockProb: 60
-      ActiveMeleeBlockProb: 65
+      RangeBlockProb: 0.50
+      MeleeBlockProb: 0.50
+      ActiveRangeBlockProb: 0.60
+      ActiveMeleeBlockProb: 0.65
     - type: ArmorBlock
       tresholddict:
           Piercing: 1
@@ -268,10 +268,10 @@
       heldPrefix: metal
     - type: Blocking
     #SS220 shield rework begin
-      RangeBlockProb: 50
-      MeleeBlockProb: 50
-      ActiveRangeBlockProb: 60
-      ActiveMeleeBlockProb: 65
+      RangeBlockProb: 0.50
+      MeleeBlockProb: 0.50
+      ActiveRangeBlockProb: 0.60
+      ActiveMeleeBlockProb: 0.65
     - type: ArmorBlock
       tresholddict:
           Piercing: 15
@@ -324,10 +324,10 @@
       heldPrefix: icon
     - type: Blocking
     #SS220 shield rework begin
-      RangeBlockProb: 50
-      MeleeBlockProb: 50
-      ActiveRangeBlockProb: 60
-      ActiveMeleeBlockProb: 65
+      RangeBlockProb: 0.50
+      MeleeBlockProb: 0.50
+      ActiveRangeBlockProb: 0.60
+      ActiveMeleeBlockProb: 0.65
     - type: ArmorBlock
       tresholddict:
           Piercing: 7
@@ -380,10 +380,10 @@
       heldPrefix: ratvarian
     - type: Blocking
     #SS220 shield rework begin
-      RangeBlockProb: 35
-      MeleeBlockProb: 55
-      ActiveRangeBlockProb: 45
-      ActiveMeleeBlockProb: 70
+      RangeBlockProb: 0.35
+      MeleeBlockProb: 0.55
+      ActiveRangeBlockProb: 0.45
+      ActiveMeleeBlockProb: 0.70
     - type: ArmorBlock
       tresholddict:
           Piercing: 17
@@ -412,12 +412,12 @@
       reflectProb: 0.95
       reflects:
         - Energy
-    - type: Blocking
     #SS220 shield rework begin
-      RangeBlockProb: 50
-      MeleeBlockProb: 35
-      ActiveRangeBlockProb: 65
-      ActiveMeleeBlockProb: 45 #Mirror shield reflects heat/laser, but is relatively weak to everything else.
+    - type: Blocking
+      RangeBlockProb: 0.50
+      MeleeBlockProb: 0.35
+      ActiveRangeBlockProb: 0.65
+      ActiveMeleeBlockProb: 0.45 #Mirror shield reflects heat/laser, but is relatively weak to everything else.
     #SS220 shield rework end
       blockSound: !type:SoundPathSpecifier
         path: /Audio/Effects/glass_step.ogg
@@ -505,30 +505,30 @@
     - type: ItemTogglePointLight
     - type: Blocking
     #SS220 shield rework begin
-      RangeBlockProb: 50
-      MeleeBlockProb: 65
-      ActiveRangeBlockProb: 60
-      ActiveMeleeBlockProb: 75
+      RangeBlockProb: 0
+      MeleeBlockProb: 0
+      ActiveRangeBlockProb: 0.60
+      ActiveMeleeBlockProb: 0.75
     #SS220 shield rework end
     #ss220 shield blocking damage fix start
     - type: ItemToggleBlockingDamage
-      ToggledRangeBlockProb: 50
-      ToggledMeleeBlockProb: 65 #No more stunbatons
+      ToggledRangeBlockProb: 0.50
+      ToggledMeleeBlockProb: 0.65 #No more stunbatons
     #ss220 shield blocking damage fix end
     - type: Appearance
     #SS220 shield rework begin
     - type: ArmorBlock
       tresholddict:
-          Piercing: 26
-          Blunt: 30
-          Heat: 26
-          Slash: 30
+        Piercing: 26
+        Blunt: 30
+        Heat: 26
+        Slash: 30
       #Blocks effectively anything station normally uses
       durabilitytresholddict:
-          Piercing: 40
-          Blunt: 40
-          Heat: 40
-          Slash: 40
+        Piercing: 40
+        Blunt: 40
+        Heat: 40
+        Slash: 40
       #Practically impossible to destroy using only station's weapons
     #SS220 shield rework end
     - type: Damageable
@@ -616,10 +616,13 @@
   components:
     - type: Blocking
     #SS220 shield rework begin
-      RangeBlockProb: 50
-      MeleeBlockProb: 65
-      ActiveRangeBlockProb: 60
-      ActiveMeleeBlockProb: 75
+      RangeBlockProb: 0
+      MeleeBlockProb: 0
+      ActiveRangeBlockProb: 0.60
+      ActiveMeleeBlockProb: 0.75
+    - type: ItemToggleBlockingDamage
+      ToggledRangeBlockProb: 0.50
+      ToggledMeleeBlockProb: 0.65
     - type: ArmorBlock
       tresholddict:
           Piercing: 15
@@ -669,7 +672,6 @@
         right:
           - state: inhand-right-shield
     - type: Appearance
-    - type: ItemToggleBlockingDamage
     - type: Destructible
       thresholds:
         - trigger:

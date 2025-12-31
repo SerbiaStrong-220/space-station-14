@@ -241,6 +241,13 @@ public abstract partial class SharedGunSystem : EntitySystem
 
     private bool AttemptShoot(EntityUid user, EntityUid gunUid, GunComponent gun)
     {
+        if (TryComp<BlockingUserComponent>(user, out var comp))
+        {
+            if (comp.IsBlocking)
+            {
+                return false;
+            }
+        }
         if (gun.FireRateModified <= 0f ||
             !_actionBlockerSystem.CanAttack(user))
         {
@@ -259,7 +266,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         {
             if(blockComp.IsBlocking)
             {
-                PopupSystem.PopupPredictedCursor(Loc.GetString("lying-down-block-shooting"), user);
+                PopupSystem.PopupPredictedCursor(Loc.GetString("actively-blocking-attack"), user);
                 return false;
             }
         }
@@ -539,6 +546,13 @@ public abstract partial class SharedGunSystem : EntitySystem
 
     protected void MuzzleFlash(EntityUid gun, AmmoComponent component, Angle worldAngle, EntityUid? user = null)
     {
+        if(TryComp<BlockingUserComponent>(user,out var comp))
+        {
+            if(comp.IsBlocking)
+            {
+                return;
+            }
+        }
         var attemptEv = new GunMuzzleFlashAttemptEvent();
         RaiseLocalEvent(gun, ref attemptEv);
         if (attemptEv.Cancelled)

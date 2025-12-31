@@ -69,7 +69,6 @@
       right:
       - state: inhand-right-blade
         shader: unshaded
-  - type: Reflect
   - type: IgnitionSource
     temperature: 700
 # Corvax-HiddenDesc-Start
@@ -109,14 +108,6 @@
   - type: Item
     sprite: Objects/Weapons/Melee/e_sword-inhands.rsi
     #ss220lowTTKUpdate
-  - type: Reflect
-    reflectProb: 0.45 #ss220 ttkTweaks
-    reflects:
-      - NonEnergy
-      - Energy #SS220-FixReflects
-    spread: 80
-    reflectProbProjectile: 0.40 #ss220 ttkTweaks
-    spreadProjectile: 180
     #ss220lowTTKUpdate
   #SS220 craftable desword start
   - type: Tag
@@ -352,6 +343,26 @@
   id: EnergySwordDouble
   description: Syndicate Command Interns thought that having one blade on the energy sword was not enough. This can be stored in pockets.
   components:
+  #SS220 shield rework begin
+  - type: Blocking
+    RangeBlockProb: 0
+    MeleeBlockProb: 0
+    ActiveRangeBlockProb: 0.85
+    ActiveMeleeBlockProb: 0.85
+  - type: ItemToggleBlockingDamage
+    ToggledRangeBlockProb: 0.4
+    ToggledMeleeBlockProb: 0.35
+  - type: ArmorBlock
+    tresholddict:
+      Piercing: 26
+      Blunt: 30
+      Heat: 35
+      Slash: 30
+    durabilitytresholddict:
+      Piercing: 10000
+      Blunt: 10000
+      Heat: 10000
+      Slash: 10000
   - type: ItemToggle
     onUse: false # wielding events control it instead
     onActivate: false # prevents the weapon from being able to be turned on when it is on the ground
@@ -408,14 +419,6 @@
     size: Small
     sprite: Objects/Weapons/Melee/e_sword_double-inhands.rsi
 # ss220 FixESword
-  - type: Reflect
-    reflectProb: 0.80 #ss220 ttkTweaks
-    reflects:
-      - NonEnergy
-      - Energy #SS220-FixReflects
-    spread: 45
-    reflectProbProjectile: 0.70 #ss220lowTTKUpdate
-    spreadProjectile: 180
 # ss220 FixESword
   #SS220 craftable desword start
   - type: Construction
@@ -473,9 +476,6 @@
   - type: Item
     size: Small
     sprite: Objects/Weapons/Melee/hypereutactic_blade_inhands.rsi
-  - type: Reflect
-    reflectProb: 1.0
-    spread: 75
 
 # Borgs
 

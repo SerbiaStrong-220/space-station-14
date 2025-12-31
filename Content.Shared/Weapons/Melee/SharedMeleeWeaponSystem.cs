@@ -213,6 +213,15 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         if (args.SenderSession.AttachedEntity is not {} user)
             return;
 
+        if (TryComp<BlockingUserComponent>(user, out var comp))
+        {
+            if (comp.IsBlocking)
+            {
+                PopupSystem.PopupPredictedCursor(Loc.GetString("actively-blocking-attack"), user);
+                return;
+            }
+        }
+
         if (!TryGetWeapon(user, out var weaponUid, out var weapon) ||
             weaponUid != GetEntity(msg.Weapon))
         {
@@ -226,6 +235,15 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
     {
         if (args.SenderSession.AttachedEntity is not {} user)
             return;
+
+        if (TryComp<BlockingUserComponent>(user, out var comp))
+        {
+            if (comp.IsBlocking)
+            {
+                PopupSystem.PopupPredictedCursor(Loc.GetString("actively-blocking-attack"), user);
+                return;
+            }
+        }
 
         // ss220 add block heavy attack and shooting while user is down start
         if (_standing.IsDown(user))
