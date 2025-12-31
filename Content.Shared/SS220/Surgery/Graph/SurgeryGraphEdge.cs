@@ -26,24 +26,28 @@ public sealed partial class SurgeryGraphEdge : ISerializationHooks
     /// Time which this step takes in seconds
     /// </summary>
     [DataField]
+    [Access(typeof(SurgeryGraphSystem))]
     public float? Delay { get; private set; }
 
     /// <summary>
     /// This sound will be played when graph gets to target node
     /// </summary>
     [DataField("sound")]
+    [Access(typeof(SurgeryGraphSystem))]
     public SoundSpecifier? EndSound { get; private set; } = null;
 
     /// <summary>
     /// Don't know what u are doing? -> use <see cref="SurgeryGraphSystem"/>
     /// </summary>
     [ViewVariables]
+    [Access(typeof(SurgeryGraphSystem))]
     public IReadOnlyList<ISurgeryGraphCondition> Conditions => _conditions;
 
     /// <summary>
     /// Don't know what u are doing? -> use <see cref="SurgeryGraphSystem"/>
     /// </summary>
     [ViewVariables]
+    [Access(typeof(SurgeryGraphSystem))]
     public IReadOnlyList<ISurgeryGraphAction> Actions => _actions;
 
     void ISerializationHooks.AfterDeserialization()
