@@ -1,0 +1,89 @@
+- type: entity
+  name: low tier resource miners
+  id: LowTierResourceMinerSpawner
+  suffix: low tier
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: SS220/Structures/Machines/resource_miner.rsi
+      state: base
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: LowTierResourceMinerTable
+
+- type: entity
+  name: medium tier resource miners
+  id: MediumTierResourceMinerSpawner
+  suffix: medium tier
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: blue
+    - sprite: SS220/Structures/Machines/resource_miner.rsi
+      state: base
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: MediumTierResourceMinerTable
+
+- type: entity
+  name: high tier resource miners
+  id: HighTierResourceMinerSpawner
+  suffix: high tier
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: SS220/Structures/Machines/resource_miner.rsi
+      state: base
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: HighTierResourceMinerTable
+
+- type: entity
+  name: all random resource miners
+  id: AllTierResourceMinerSpawner
+  suffix: all tier
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: pink
+    - sprite: SS220/Structures/Machines/resource_miner.rsi
+      state: base
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - !type:NestedSelector
+        tableId: LowTierResourceMinerSpawner
+        weight: 6
+      - !type:NestedSelector
+        tableId: MediumTierResourceMinerSpawner
+        weight: 4
+      - !type:NestedSelector
+        tableId: HighTierResourceMinerSpawner
+        weight: 2
+
+- type: entity
+  name: equal random resource miners
+  id: EqualAllTierResourceMinerSpawner
+  suffix: resource miner
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - state: pink
+    - sprite: SS220/Structures/Machines/resource_miner.rsi
+      state: base
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - !type:NestedSelector
+        tableId: LowTierResourceMinerSpawner
+      - !type:NestedSelector
+        tableId: MediumTierResourceMinerSpawner
+      - !type:NestedSelector
+        tableId: HighTierResourceMinerSpawner

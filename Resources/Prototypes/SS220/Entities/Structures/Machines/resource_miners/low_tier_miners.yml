@@ -1,0 +1,73 @@
+- type: entity
+  id: EqualLowTierMiner
+  parent: BaseResourceMiner
+  suffix: equal low tier
+  components:
+  - type: ResourceMiner
+    generationAmount:
+      Steel: 20
+      Glass: 20
+
+- type: entity
+  id: MoreMetalLowTierMiner
+  parent: BaseResourceMiner
+  suffix: more metal low tier
+  components:
+  - type: ResourceMiner
+    generationAmount:
+      Steel: 25
+      Glass: 15
+
+- type: entity
+  id: MoreGlassLowTierMiner
+  parent: BaseResourceMiner
+  suffix: more glass low tier
+  components:
+  - type: ResourceMiner
+    generationAmount:
+      Steel: 15
+      Glass: 25
+
+- type: entity
+  id: PlasmaLowTierMiner
+  parent: BaseResourceMiner
+  suffix: plasma low tier
+  components:
+  - type: ResourceMiner
+    generationAmount:
+      Steel: 10
+      Glass: 10
+      Plasma: 5
+
+- type: entity
+  id: UraniumLowTierMiner
+  parent: BaseResourceMiner
+  suffix: uranium low tier
+  components:
+  - type: ResourceMiner
+    generationAmount:
+      Steel: 10
+      Glass: 10
+      Uranium: 5
+
+- type: entity
+  id: GoldLowTierMiner
+  parent: BaseResourceMiner
+  suffix: gold low tier
+  components:
+  - type: ResourceMiner
+    generationAmount:
+      Steel: 10
+      Glass: 10
+      Gold: 5
+
+- type: entity
+  id: SilverLowTierMiner
+  parent: BaseResourceMiner
+  suffix: silver low tier
+  components:
+  - type: ResourceMiner
+    generationAmount:
+      Steel: 10
+      Glass: 10
+      Silver: 5
