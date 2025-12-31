@@ -22,7 +22,6 @@
   - type: ContainerContainer
     containers:
       light_bulb: !type:ContainerSlot
-        locked: true
   - type: ApcPowerReceiver
   - type: ExtensionCableReceiver
   - type: DeviceNetwork
