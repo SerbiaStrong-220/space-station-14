@@ -28,7 +28,7 @@
       types:
         Poison: 5
         Blunt: 15
-        Structural: 10
+        Structural: 130
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: Tool

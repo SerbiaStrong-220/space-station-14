@@ -5,6 +5,8 @@ using Content.Shared.Clothing.Components;
 using Content.Shared.Examine;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Humanoid;
+using Content.Shared.Humanoid.Markings;
 using Content.Shared.IdentityManagement.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
@@ -146,6 +148,10 @@ public abstract class SharedCultYoggSystem : EntitySystem
     }
     #endregion
 
+    #region Visuals
+    public virtual void DeleteVisuals(Entity<CultYoggComponent> ent) { }
+    #endregion
+
     protected void OnRemove(Entity<CultYoggComponent> uid, ref ComponentRemove args)
     {
         RemComp<CultYoggPurifiedComponent>(uid);
@@ -155,6 +161,8 @@ public abstract class SharedCultYoggSystem : EntitySystem
         _actions.RemoveAction(uid.Comp.CorruptItemInHandActionEntity);
         _actions.RemoveAction(uid.Comp.DigestActionEntity);
         _actions.RemoveAction(uid.Comp.PukeShroomActionEntity);
+
+        DeleteVisuals(uid);
 
         //sending to a gamerule so it would be deleted and added in one place
         var ev = new CultYoggDeCultingEvent(uid);
