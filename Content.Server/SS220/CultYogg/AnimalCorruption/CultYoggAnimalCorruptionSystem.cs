@@ -15,10 +15,8 @@ public sealed class CultYoggAnimalCorruptionSystem : EntitySystem
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly LanguageSystem _language = default!;
 
-    public void AnimalCorruption(EntityUid uid)//Corrupt animal
+    public void AnimalCorruption(EntityUid uid)
     {
-        //ToDo Add new animal as the gost role
-
         if (TerminatingOrDeleted(uid))
             return;
 

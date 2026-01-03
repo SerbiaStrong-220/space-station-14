@@ -55,7 +55,12 @@ public abstract class SharedInjectorSystem : EntitySystem
         var min = ent.Comp.TransferAmounts.Min();
         var max = ent.Comp.TransferAmounts.Max();
         var cur = ent.Comp.CurrentTransferAmount;
-        var toggleAmount = cur == max ? min : max;
+
+        //ss220 BS_syringe_tweak start
+        // var toggleAmount = cur == max ? min : max;
+
+        var toggleAmount = ent.Comp.TransferAmounts.FirstOrDefault(x => x > cur, min);
+        //ss220 BS_syringe_tweak end
 
         var priority = 0;
         AlternativeVerb toggleVerb = new()

@@ -1,0 +1,55 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: VoidTree
+  suffix: CultYogg
+  name: Void tree
+  description: A mysterious tree or shroom glowing with strange energy.
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: PointLight
+    radius: 3.0
+    energy: 4.5
+    color: "#9dc8c8"
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.55,-0.4,0.55,0.4"
+        density: 1000
+        layer:
+        - WallLayer
+  - type: Sprite
+    sprite: SS220/Structures/CultYogg/void_tree.rsi
+    layers:
+    - state: base
+    - state: light
+      shader: unshaded
+    drawdepth: Overdoors
+    offset: "0.0,0.5"
+
+- type: entity
+  id: VoidSeedling
+  suffix: CultYogg
+  name: Void seedling
+  description: Fresh sapling of the tree of the abyss.
+  components:
+  - type: Clickable
+  - type: Sprite
+    sprite: SS220/Structures/CultYogg/void_seedling.rsi
+    state: base
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.3,0.1,0.4"
+        density: 4000
+        layer:
+        - WallLayer

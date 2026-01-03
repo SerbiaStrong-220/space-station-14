@@ -64,7 +64,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         SubscribeLocalEvent<CultYoggComponent, SuicideEvent>(OnSuicide);
     }
 
-    #region StageUpdating
+    #region Visuals
     private void OnUpdateStage(Entity<CultYoggComponent> ent, ref ChangeCultYoggStageEvent args)
     {
         if (ent.Comp.CurrentStage == args.Stage)
@@ -143,7 +143,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         }
     }
 
-    public void DeleteVisuals(Entity<CultYoggComponent> ent)
+    public override void DeleteVisuals(Entity<CultYoggComponent> ent)
     {
         if (!TryComp<HumanoidAppearanceComponent>(ent, out var huAp))
             return;
@@ -153,10 +153,10 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
 
         huAp.MarkingSet.Markings.Remove(MarkingCategories.Special);
 
-        if (huAp.MarkingSet.Markings.ContainsKey(MarkingCategories.Tail) &&
+        if (huAp.MarkingSet.Markings.TryGetValue(MarkingCategories.Tail, out var value) &&
             ent.Comp.PreviousTail != null)
         {
-            huAp.MarkingSet.Markings[MarkingCategories.Tail].Add(ent.Comp.PreviousTail);
+            value.Add(ent.Comp.PreviousTail);
         }
 
         Dirty(ent.Owner, huAp);
@@ -287,17 +287,9 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         purifyedComp.TotalAmountOfHolyWater += args.SaintWaterAmount;
 
         if (purifyedComp.TotalAmountOfHolyWater >= purifyedComp.AmountToPurify)
-        {
-            //After purifying effect
-            _audio.PlayPvs(purifyedComp.PurifyingCollection, ent);
+            purifyedComp.PurifyTime ??= _timing.CurTime + purifyedComp.BeforePurifyingTime;
 
-            DeleteVisuals(ent);
-
-            RemComp<CultYoggComponent>(ent);
-            _cultRuleSystem.CheckSimplifiedEslavement();//Add token if it was last cultist
-        }
-
-        purifyedComp.PurifyingDecayEventTime = _timing.CurTime + purifyedComp.BeforeDeclinesTime; //setting timer, when purifying will be removed
+        purifyedComp.DecayTime = _timing.CurTime + purifyedComp.BeforeDecayTime; //setting timer, when purifying will be removed
         Dirty(ent, ent.Comp);
     }
     #endregion

@@ -405,3 +405,52 @@
   result: VoidKey
   corruptionReverseEffect: ExorcismUncorruptEffect
 # Telepoter end
+
+- type: corrupted
+  id: BaseLightTubeCultYogg
+  from:
+    parentPrototypeId: BaseLightTube
+  result: CultYoggLightTube
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: BaseLightbulbCrystalCultYogg
+  from:
+    parentPrototypeId: BaseLightbulbCrystal
+  result: CultYoggLightBulb
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: LightBulbCultYogg
+  from:
+    prototypeId: LightBulb
+  result: CultYoggLightBulb
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: ServiceLightBulbCultYogg
+  from:
+    prototypeId: ServiceLightBulb
+  result: CultYoggLightBulb
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: LightBulbOldYogg
+  from:
+    prototypeId: LightBulbOld
+  result: CultYoggLightBulb
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: WarmLightBulbCultYogg
+  from:
+    prototypeId: WarmLightBulb
+  result: CultYoggLightBulb
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: DimLightBulbCultYogg
+  from:
+    prototypeId: DimLightBulb
+  result: CultYoggLightBulb
+  corruptionReverseEffect: ExorcismUncorruptEffect
