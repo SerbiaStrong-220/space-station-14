@@ -57,7 +57,7 @@
   id: MentorNeck
   effects:
   - !type:GroupLoadoutEffect
-    proto: MentorSponsorTier
+    proto: MentorOrAdministratorSponsorTier
   storage:
     back:
     - ClothingSponsorNeckMentor
