@@ -5,6 +5,7 @@
   minLimit: 0
   maxLimit: 3
   loadouts:
+  - NewYearsCap #SS220 Merry Christmas and Happy New Year!
   # ss220 add station map to loadout start
   - HandheldStationMap
   # ss220 add station map to loadout end
@@ -1353,6 +1354,7 @@
   - JackBoots
   - SecurityWinterBoots
   - BootsJackSec #ss220 sec loadout update
+  - CombatBoots #SS220 Army boots for sec 
 
 - type: loadoutGroup
   id: SecurityPDA

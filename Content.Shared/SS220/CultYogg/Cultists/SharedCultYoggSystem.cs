@@ -5,6 +5,8 @@ using Content.Shared.Clothing.Components;
 using Content.Shared.Examine;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Humanoid;
+using Content.Shared.Humanoid.Markings;
 using Content.Shared.IdentityManagement.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
@@ -88,6 +90,12 @@ public abstract class SharedCultYoggSystem : EntitySystem
         if (args.Handled)
             return;
 
+        if (TryCorruptInteractions(uid, args.Target))
+        {
+            args.Handled = true;
+            return;
+        }
+
         if (_cultYoggCorruptedSystem.IsCorrupted(args.Target))
         {
             _popup.PopupClient(Loc.GetString("cult-yogg-corrupt-already-corrupted"), args.Target, uid);
@@ -127,6 +135,21 @@ public abstract class SharedCultYoggSystem : EntitySystem
         }
         args.Handled = true;
     }
+
+    private bool TryCorruptInteractions(Entity<CultYoggComponent> ent, EntityUid target)
+    {
+        var effectEv = new CorruptInteractionEvent();
+        RaiseLocalEvent(target, ref effectEv);
+
+        if (effectEv.Handled)
+            return true;
+
+        return false;
+    }
+    #endregion
+
+    #region Visuals
+    public virtual void DeleteVisuals(Entity<CultYoggComponent> ent) { }
     #endregion
 
     protected void OnRemove(Entity<CultYoggComponent> uid, ref ComponentRemove args)
@@ -138,6 +161,8 @@ public abstract class SharedCultYoggSystem : EntitySystem
         _actions.RemoveAction(uid.Comp.CorruptItemInHandActionEntity);
         _actions.RemoveAction(uid.Comp.DigestActionEntity);
         _actions.RemoveAction(uid.Comp.PukeShroomActionEntity);
+
+        DeleteVisuals(uid);
 
         //sending to a gamerule so it would be deleted and added in one place
         var ev = new CultYoggDeCultingEvent(uid);

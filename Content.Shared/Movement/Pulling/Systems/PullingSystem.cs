@@ -1,10 +1,13 @@
+using System.Numerics;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Alert;
 using Content.Shared.Buckle.Components;
+using Content.Shared.CombatMode;
 using Content.Shared.Cuffs;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Database;
+using Content.Shared.Effects;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -24,6 +27,8 @@ using Content.Shared.Pulling.Events;
 using Content.Shared.SS220.Cart.Components;
 using Content.Shared.Standing;
 using Content.Shared.Verbs;
+using Content.Shared.Weapons.Melee;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Physics;
@@ -42,11 +47,17 @@ namespace Content.Shared.Movement.Pulling.Systems;
 public sealed class PullingSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!; // SS220-MIT-pull-visualization
+    [Dependency] private readonly RotateToFaceSystem _rotateTo = default!; // SS220-MIT-pull-visualization
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly ActionBlockerSystem _blocker = default!;
     [Dependency] private readonly AlertsSystem _alertsSystem = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!; // SS220-MIT-pull-visualization
+    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!; // SS220-MIT-pull-visualization
     [Dependency] private readonly MovementSpeedModifierSystem _modifierSystem = default!;
     [Dependency] private readonly SharedJointSystem _joints = default!;
+    [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!; // SS220-MIT-pull-visualization
+    [Dependency] private readonly SharedCombatModeSystem _combatMode = default!; // SS220-MIT-pull-visualization
     [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
@@ -54,6 +65,8 @@ public sealed class PullingSystem : EntitySystem
     [Dependency] private readonly HeldSpeedModifierSystem _clothingMoveSpeed = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedVirtualItemSystem _virtual = default!;
+
+    static readonly Color СolorCaptureEffect = Color.Yellow; // SS220-MIT-pull-visualization
 
     public override void Initialize()
     {
@@ -585,6 +598,21 @@ public sealed class PullingSystem : EntitySystem
 
             _physics.SetFixedRotation(pullableUid, pullableComp.FixedRotationOnPull, body: pullablePhysics);
         }
+        // SS220-MIT-pull-visualization-begin
+        var xform = Transform(pullerUid);
+
+        var pullerPos = _transform.GetWorldPosition(xform);
+        var pulledPos = _transform.GetWorldPosition(pullableUid);
+
+        var localPos = Vector2.Transform(pulledPos, _transform.GetInvWorldMatrix(xform));
+        localPos = xform.LocalRotation.RotateVec(localPos);
+
+        _melee.DoLunge(pullerUid, pullerUid, Angle.Zero, localPos, null);
+        _audio.PlayPredicted(pullerComp.PullSound, pullableUid, pullerUid);
+
+        var filter = Filter.Pvs(pullableUid, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == pullerUid);
+        _colorFlash.RaiseEffect(СolorCaptureEffect, new List<EntityUid> { pullableUid }, filter);
+        // SS220-MIT-pull-visualization-end
 
         // Messaging
         var message = new PullStartedMessage(pullerUid, pullableUid);
@@ -623,4 +651,24 @@ public sealed class PullingSystem : EntitySystem
         StopPulling(pullableUid, pullable);
         return true;
     }
+
+    // SS220-MIT-pull-visualization-begin
+    public override void FrameUpdate(float frameTime)
+    {
+        var query = EntityQueryEnumerator<PullerComponent>();
+        while (query.MoveNext(out var uid, out var pullerComponent))
+        {
+            if (GetPulling(uid, pullerComponent) is not { } pulled)
+                continue;
+
+            if (_combatMode.IsInCombatMode(uid))
+                continue;
+
+            var pulledPos = _transform.GetMapCoordinates(pulled).Position;
+            var pullerPos = _transform.GetMapCoordinates(uid).Position;
+            var angle = (pulledPos - pullerPos).ToWorldAngle();
+            _rotateTo.TryFaceAngle(uid, angle);
+        }
+    }
+    // SS220-MIT-pull-visualization-end
 }
