@@ -61,7 +61,7 @@ public sealed partial class GhostComponent : Component
 
     //SS-220 noDeath
     [DataField]
-    public EntProtoId RespawnAction = "ActionRespawn";
+    public EntProtoId RespawnAction;
 
     [DataField, AutoNetworkedField]
     public EntityUid? RespawnActionEntity;
