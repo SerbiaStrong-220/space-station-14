@@ -27,7 +27,9 @@
       NavSmash: !type:Bool
         true
     #SS220 xeno-buff-update begin
-  - type: Insulated
+  - type: ActionGrant
+    actions:
+    - ActionSleep
   - type: ThermalVision
     state: Half
   - type: NoSlip
@@ -71,7 +73,8 @@
     allowedStates:
     - Alive
     #SS220 xeno-buff-update begin
-    - Critical #SS220
+    - Critical 
+    - Sleep  
     #SS220 xeno-buff-update end
     - Dead
   - type: MobThresholds
@@ -109,6 +112,8 @@
         Base: crit
       Dead:
         Base: dead
+      Sleep:
+        Base: sleeping
   - type: Puller
   - type: Butcherable
     butcheringType: Spike
@@ -136,7 +141,6 @@
       - CannotSuicide
       - DoorBumpOpener
       - FootstepSound
-  - type: NoSlip
   - type: Perishable # SS220 xeno-buff-update
     molsPerSecondPerUnitMass: 0.0005
   - type: Speech
