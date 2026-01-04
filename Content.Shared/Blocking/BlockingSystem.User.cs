@@ -1,6 +1,8 @@
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Hands.Components;
 using Content.Shared.Inventory;
+using Content.Shared.Toggleable;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -18,6 +20,8 @@ public sealed partial class BlockingSystem
 
         SubscribeLocalEvent<BlockingUserComponent, EntParentChangedMessage>(OnParentChanged);
         SubscribeLocalEvent<BlockingUserComponent, ContainerGettingInsertedAttemptEvent>(OnInsertAttempt);
+        SubscribeLocalEvent<BlockingUserComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<BlockingUserComponent, ToggleActionEvent>(OnToggleAction);
         //SubscribeLocalEvent<BlockingUserComponent, AnchorStateChangedEvent>(OnAnchorChanged);
         //SubscribeLocalEvent<BlockingUserComponent, EntityTerminatingEvent>(OnEntityTerminating);
     }
@@ -32,51 +36,75 @@ public sealed partial class BlockingSystem
         UserStopBlocking(uid, component);
     }
 
-    private void OnAnchorChanged(EntityUid uid, BlockingUserComponent component, ref AnchorStateChangedEvent args)
+    //private void OnAnchorChanged(EntityUid uid, BlockingUserComponent component, ref AnchorStateChangedEvent args)
+    //{
+    //    if (args.Anchored)
+    //        return;
+    //
+    //    UserStopBlocking(uid, component);
+    //}
+
+    private void OnMapInit(EntityUid uid, BlockingUserComponent component, MapInitEvent args)
     {
-        if (args.Anchored)
+        _actionContainer.EnsureAction(uid, ref component.BlockingToggleActionEntity, component.BlockingToggleAction);
+        Dirty(uid, component);
+    }
+
+    private void OnToggleAction(EntityUid uid, BlockingUserComponent component, ToggleActionEvent args)
+    {
+        if (args.Handled)
             return;
 
-        UserStopBlocking(uid, component);
+        var handQuery = GetEntityQuery<HandsComponent>();
+
+        if (!handQuery.TryGetComponent(args.Performer, out var hands))
+            return;
+
+        if (component.IsBlocking)
+            StopBlocking(component, args.Performer);
+        else
+            StartBlocking(component, args.Performer);
+
+        args.Handled = true;
     }
 
     //private void OnUserDamageModified(EntityUid uid, BlockingUserComponent component, DamageModifyEvent args)
     //{
-        //if (TryComp<BlockingComponent>(component.BlockingItem, out var blocking))
-        //{
-        //    if (args.Damage.GetTotal() <= 0)
-         //       return;
-//
-        //    var blockFraction = blocking.IsBlocking ? blocking.ActiveBlockFraction : blocking.PassiveBlockFraction;
-//
-            // A shield should only block damage it can itself absorb. To determine that we need the Damageable component on it.
-     //       if (!TryComp<DamageableComponent>(component.BlockingItem, out var dmgComp))
-   //             return;
+    //if (TryComp<BlockingComponent>(component.BlockingItem, out var blocking))
+    //{
+    //    if (args.Damage.GetTotal() <= 0)
+    //       return;
+    //
+    //    var blockFraction = blocking.IsBlocking ? blocking.ActiveBlockFraction : blocking.PassiveBlockFraction;
+    //
+    // A shield should only block damage it can itself absorb. To determine that we need the Damageable component on it.
+    //       if (!TryComp<DamageableComponent>(component.BlockingItem, out var dmgComp))
+    //             return;
 
-            // SS220 equip shield on back begin
-   //         if (_inventory.TryGetContainingSlot(component.BlockingItem.Value, out var slotDefinition) && blocking.AvaliableSlots.TryGetValue(slotDefinition.SlotFlags, out var coef))
-   //         {
-   //             blockFraction *= coef;
-   //         }
+    // SS220 equip shield on back begin
+    //         if (_inventory.TryGetContainingSlot(component.BlockingItem.Value, out var slotDefinition) && blocking.AvaliableSlots.TryGetValue(slotDefinition.SlotFlags, out var coef))
+    //         {
+    //             blockFraction *= coef;
+    //         }
     //        // SS220 equip shield on back end
 
-     //       blockFraction = Math.Clamp(blockFraction, 0, 1);
-     //       _damageable.TryChangeDamage(component.BlockingItem, blockFraction * args.OriginalDamage);
-//
-     //       var modify = new DamageModifierSet();
-     //       foreach (var key in dmgComp.Damage.DamageDict.Keys)
+    //       blockFraction = Math.Clamp(blockFraction, 0, 1);
+    //       _damageable.TryChangeDamage(component.BlockingItem, blockFraction * args.OriginalDamage);
+    //
+    //       var modify = new DamageModifierSet();
+    //       foreach (var key in dmgComp.Damage.DamageDict.Keys)
     //        {
-      //          modify.Coefficients.TryAdd(key, 1 - blockFraction);
-      //      }
+    //          modify.Coefficients.TryAdd(key, 1 - blockFraction);
+    //      }
 
-     //       args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, modify);
-     //
-     //       if (blocking.IsBlocking && !args.Damage.Equals(args.OriginalDamage))
-     //       {
-     //           _audio.PlayPvs(blocking.BlockSound, uid);
+    //       args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, modify);
+    //
+    //       if (blocking.IsBlocking && !args.Damage.Equals(args.OriginalDamage))
+    //       {
+    //           _audio.PlayPvs(blocking.BlockSound, uid);
     //        }
-     //   }
- //   }
+    //   }
+    //   }
 
     //private void OnDamageModified(EntityUid uid, BlockingComponent component, DamageModifyEvent args)
     //{
@@ -112,7 +140,7 @@ public sealed partial class BlockingSystem
         foreach (var shield in component.BlockingItemsShields)
         {
             if (TryComp<BlockingComponent>(shield, out var blockComp) && blockComp.IsBlocking)
-                StopBlocking((EntityUid)shield, blockComp, component, uid);
+                StopBlocking(component, uid);
         }
     }
 }

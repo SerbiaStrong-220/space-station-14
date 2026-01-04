@@ -49,12 +49,6 @@ public sealed partial class BlockingComponent : Component
     //[DataField("activeBlockModifier", required: true)]
     //public DamageModifierSet ActiveBlockDamageModifier = default!;
 
-    [DataField]
-    public EntProtoId BlockingToggleAction = "ActionToggleBlock";
-
-    [DataField, AutoNetworkedField]
-    public EntityUid? BlockingToggleActionEntity;
-
     /// <summary>
     /// The sound to be played when you get hit while actively blocking
     /// </summary>

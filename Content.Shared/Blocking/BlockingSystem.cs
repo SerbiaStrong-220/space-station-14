@@ -87,15 +87,12 @@ public sealed partial class BlockingSystem : EntitySystem
         SubscribeLocalEvent<BlockingComponent, GotUnequippedEvent>(OnGotUnequipped);
         // SS220 equip shield on back end
 
-        SubscribeLocalEvent<BlockingComponent, GetItemActionsEvent>(OnGetActions);
-        SubscribeLocalEvent<BlockingComponent, ToggleActionEvent>(OnToggleAction);
+        //SubscribeLocalEvent<BlockingComponent, GetItemActionsEvent>(OnGetActions);
 
         SubscribeLocalEvent<BlockingComponent, ComponentShutdown>(OnShutdown);
 
-        SubscribeLocalEvent<BlockingComponent, GetVerbsEvent<ExamineVerb>>(OnVerbExamine);
-        SubscribeLocalEvent<BlockingComponent, MapInitEvent>(OnMapInit);
-
-        SubscribeLocalEvent<BlockingComponent, ItemToggledEvent>(OnToggleItem);
+        //SubscribeLocalEvent<BlockingComponent, GetVerbsEvent<ExamineVerb>>(OnVerbExamine);
+        //SubscribeLocalEvent<BlockingComponent, MapInitEvent>(OnMapInit);
 
         //ss220 fix drop shields start
         SubscribeLocalEvent<BlockingComponent, ThrowItemAttemptEvent>(OnThrowAttempt);
@@ -198,19 +195,6 @@ public sealed partial class BlockingSystem : EntitySystem
         }
         return false;
     }
-
-    public void OnUseInHand(Entity<BlockingComponent> ent,ref UseInHandEvent args)
-    {
-        if(TryComp<BlockingUserComponent>(ent.Comp.Owner,out var user))
-        {
-            if(user.IsBlocking)
-            {
-                StopBlocking(ent.Owner, ent.Comp, user, args.User);
-                return;
-            }
-            StartBlocking(ent.Owner, ent.Comp, user, args.User);
-        }
-    }
     //SS220 shield rework end
 
     //ss220 fix drop shields start
@@ -228,7 +212,11 @@ public sealed partial class BlockingSystem : EntitySystem
 
     private bool IsDropBlocked(Entity<BlockingComponent> ent)
     {
-        var action = ent.Comp.BlockingToggleActionEntity;
+        if(!TryComp<BlockingUserComponent>(ent.Comp.User, out var userComp))
+        {
+            return false;
+        }
+        var action = userComp.BlockingToggleActionEntity;
 
         if (action == null || !TryComp<ActionComponent>(action.Value, out var actionComponent))
             return false;
@@ -238,23 +226,7 @@ public sealed partial class BlockingSystem : EntitySystem
     //ss220 fix drop shields end
 
     //ss220 raise shield activated fix start
-    private void OnToggleItem(Entity<BlockingComponent> ent, ref ItemToggledEvent args)
-    {
-        if (ent.Comp.User == null)
-            return;
-
-        if (!args.Activated && TryComp<BlockingUserComponent>(ent.Comp.User,out var compUser))
-        {
-            StopBlocking(ent.Owner, ent.Comp, compUser, ent.Comp.User.Value);
-        }
-    }
     //ss220 raise shield activated fix end
-
-    private void OnMapInit(EntityUid uid, BlockingComponent component, MapInitEvent args)
-    {
-        _actionContainer.EnsureAction(uid, ref component.BlockingToggleActionEntity, component.BlockingToggleAction);
-        Dirty(uid, component);
-    }
 
     private void OnEquip(EntityUid uid, BlockingComponent component, GotEquippedHandEvent args)
     {
@@ -264,6 +236,8 @@ public sealed partial class BlockingSystem : EntitySystem
         //To make sure that this bodytype doesn't get set as anything but the original)
         var userComp = EnsureComp<BlockingUserComponent>(args.User);
         userComp.BlockingItemsShields.Add(uid);
+        //_actionContainer.EnsureAction(args.User, ref userComp.BlockingToggleActionEntity, userComp.BlockingToggleAction);
+        _actionsSystem.AddAction(args.User, ref userComp.BlockingToggleActionEntity, userComp.BlockingToggleAction, args.User);
     }
 
     // SS220 equip shield on back begin
@@ -275,13 +249,9 @@ public sealed partial class BlockingSystem : EntitySystem
 
         component.User = args.Equipee;
         Dirty(uid, component);
-
-        if (TryComp<PhysicsComponent>(args.Equipee, out var physicsComponent) && physicsComponent.BodyType != BodyType.Static)
-        {
-            var userComp = EnsureComp<BlockingUserComponent>(args.Equipee);
-            userComp.BlockingItemsShields.Add(uid);
-            //userComp.OriginalBodyType = physicsComponent.BodyType;
-        }
+        var userComp = EnsureComp<BlockingUserComponent>(args.Equipee);
+        _actionsSystem.AddAction(args.Equipee, ref userComp.BlockingToggleActionEntity, userComp.BlockingToggleAction, args.Equipee);
+        userComp.BlockingItemsShields.Add(uid);
     }
 
     private void OnGotUnequipped(EntityUid uid, BlockingComponent component, GotUnequippedEvent args)
@@ -293,53 +263,15 @@ public sealed partial class BlockingSystem : EntitySystem
     private void OnUnequip(EntityUid uid, BlockingComponent component, GotUnequippedHandEvent args)
     {
         StopBlockingHelper(uid, component, args.User);
+        var userComp = EnsureComp<BlockingUserComponent>(args.User);
+        //_actionsSystem.RemoveAction(userComp.BlockingToggleActionEntity);
     }
 
     private void OnDrop(EntityUid uid, BlockingComponent component, DroppedEvent args)
     {
         StopBlockingHelper(uid, component, args.User);
-    }
-
-    private void OnGetActions(EntityUid uid, BlockingComponent component, GetItemActionsEvent args)
-    {
-        args.AddAction(ref component.BlockingToggleActionEntity, component.BlockingToggleAction);
-    }
-
-    private void OnToggleAction(EntityUid uid, BlockingComponent component, ToggleActionEvent args)
-    {
-        if (args.Handled)
-            return;
-
-        var blockUserQuery = GetEntityQuery<BlockingUserComponent>();
-        var blockQuery = GetEntityQuery<BlockingComponent>();
-        var handQuery = GetEntityQuery<HandsComponent>();
-
-        if (!handQuery.TryGetComponent(args.Performer, out var hands))
-            return;
-
-        if (!blockUserQuery.TryGetComponent(args.Performer, out var blockUser))
-            return;
-
-        var shields = _handsSystem.EnumerateHeld((args.Performer, hands)).ToArray();
-
-        foreach (var shield in shields)
-        {
-            if (shield == uid)
-                continue;
-
-            if (blockQuery.TryGetComponent(shield, out var otherBlockComp) && otherBlockComp.IsBlocking)
-            {
-                CantBlockError(args.Performer);
-                return;
-            }
-        }
-
-        if (blockUser.IsBlocking)
-            StopBlocking(uid, component, blockUser, args.Performer);
-        else
-            StartBlocking(uid, component, blockUser, args.Performer);
-
-        args.Handled = true;
+        var userComp = EnsureComp<BlockingUserComponent>(args.User);
+        //_actionsSystem.RemoveAction(userComp.BlockingToggleActionEntity);
     }
 
     private void OnShutdown(EntityUid uid, BlockingComponent component, ComponentShutdown args)
@@ -347,7 +279,7 @@ public sealed partial class BlockingSystem : EntitySystem
         //In theory the user should not be null when this fires off
         if (component.User != null)
         {
-            _actionsSystem.RemoveProvidedActions(component.User.Value, uid);
+            //_actionsSystem.RemoveProvidedActions(component.User.Value, uid);
             StopBlockingHelper(uid, component, component.User.Value);
         }
     }
@@ -361,18 +293,16 @@ public sealed partial class BlockingSystem : EntitySystem
     /// <param name="component"> The <see cref="BlockingComponent"/></param>
     /// <param name="user"> The entity who's using the item to block</param>
     /// <returns></returns>
-    public bool StartBlocking(EntityUid item, BlockingComponent component, BlockingUserComponent compUser, EntityUid user)
+    public bool StartBlocking(BlockingUserComponent compUser, EntityUid user)
     {
         if (compUser.IsBlocking)
             return false;
 
         //var xform = Transform(user);
 
-        var shieldName = Name(item);
-
         var blockerName = Identity.Entity(user, EntityManager);
-        var msgUser = Loc.GetString("action-popup-blocking-user", ("shield", shieldName));
-        var msgOther = Loc.GetString("action-popup-blocking-other", ("blockerName", blockerName), ("shield", shieldName));
+        var msgUser = Loc.GetString("action-popup-blocking-user");
+        var msgOther = Loc.GetString("action-popup-blocking-other", ("blockerName", blockerName));
 
         //Don't allow someone to block if they're not parented to a grid
         //if (xform.GridUid != xform.ParentUid)
@@ -382,11 +312,6 @@ public sealed partial class BlockingSystem : EntitySystem
         //}
 
         // Don't allow someone to block if they're not holding the shield
-        if (!_handsSystem.IsHolding(user, item, out _))
-        {
-            CantBlockError(user);
-            return false;
-        }
 
         //Don't allow someone to block if someone else is on the same tile
         //var playerTileRef = _turf.GetTileRef(xform.Coordinates);
@@ -411,7 +336,7 @@ public sealed partial class BlockingSystem : EntitySystem
         //CantBlockError(user);
         //return false;
         //}
-        _actionsSystem.SetToggled(component.BlockingToggleActionEntity, true);
+        _actionsSystem.SetToggled(compUser.BlockingToggleActionEntity, true);
         _popupSystem.PopupPredicted(msgUser, msgOther, user, user);
 
         //if (TryComp<PhysicsComponent>(user, out var physicsComponent))
@@ -426,9 +351,12 @@ public sealed partial class BlockingSystem : EntitySystem
 
         compUser.IsBlocking = true;
         Dirty(user, compUser);
-
-        ActiveBlockingEvent ev = new ActiveBlockingEvent(true);
-        RaiseLocalEvent(item,ev);
+        foreach (var shield in compUser.BlockingItemsShields)
+        {
+            if (shield == null) { continue; }
+            ActiveBlockingEvent ev = new ActiveBlockingEvent(true);
+            RaiseLocalEvent((EntityUid)shield, ev);
+        }
 
         return true;
     }
@@ -452,17 +380,15 @@ public sealed partial class BlockingSystem : EntitySystem
     /// <param name="component"> The <see cref="BlockingComponent"/></param>
     /// <param name="user"> The entity who's using the item to block</param>
     /// <returns></returns>
-    public bool StopBlocking(EntityUid item, BlockingComponent component, BlockingUserComponent compUser, EntityUid user)
+    public bool StopBlocking(BlockingUserComponent compUser, EntityUid user)
     {
         if (!compUser.IsBlocking)
             return false;
         //var xform = Transform(user);
 
-        var shieldName = Name(item);
-
         var blockerName = Identity.Entity(user, EntityManager);
-        var msgUser = Loc.GetString("action-popup-blocking-disabling-user", ("shield", shieldName));
-        var msgOther = Loc.GetString("action-popup-blocking-disabling-other", ("blockerName", blockerName), ("shield", shieldName));
+        var msgUser = Loc.GetString("action-popup-blocking-disabling-user");
+        var msgOther = Loc.GetString("action-popup-blocking-disabling-other", ("blockerName", blockerName));
 
         //If the component blocking toggle isn't null, grab the users SharedBlockingUserComponent and PhysicsComponent
         //then toggle the action to false, unanchor the user, remove the hard fixture
@@ -479,9 +405,12 @@ public sealed partial class BlockingSystem : EntitySystem
         //}
         compUser.IsBlocking = false;
         Dirty(user, compUser);
-
-        ActiveBlockingEvent ev=new ActiveBlockingEvent(false);
-        RaiseLocalEvent(item,ev);
+        foreach (var shield in compUser.BlockingItemsShields)
+        {
+            if (shield == null) { continue; }
+            ActiveBlockingEvent ev = new ActiveBlockingEvent(false);
+            RaiseLocalEvent((EntityUid)shield, ev);
+        }
 
         return true;
     }
@@ -498,7 +427,7 @@ public sealed partial class BlockingSystem : EntitySystem
         var userQuery = GetEntityQuery<BlockingUserComponent>();
         if(!userQuery.TryGetComponent(user, out var component1)) { return; }
         if (component.IsBlocking)
-            StopBlocking(uid, component, component1, user);
+            StopBlocking(component1, user);
 
         var handQuery = GetEntityQuery<HandsComponent>();
 
@@ -525,29 +454,10 @@ public sealed partial class BlockingSystem : EntitySystem
             component1.BlockingItemsShields.Clear();
             if (_net.IsServer)
             {
+                _actionsSystem.RemoveAction(component1.BlockingToggleActionEntity);
                 RemComp<BlockingUserComponent>(user);
             }
         }
-    }
-
-    private void OnVerbExamine(EntityUid uid, BlockingComponent component, GetVerbsEvent<ExamineVerb> args)
-    {
-        //if (!args.CanInteract || !args.CanAccess)
-        //return;
-
-        //var fraction = component.IsBlocking ? component.ActiveBlockFraction : component.PassiveBlockFraction;
-        //var modifier = component.IsBlocking ? component.ActiveBlockDamageModifier : component.PassiveBlockDamageModifer;
-
-        // var msg = new FormattedMessage();
-        //msg.AddMarkupOrThrow(Loc.GetString("blocking-fraction", ("value", MathF.Round(fraction * 100, 1))));
-
-        //AppendCoefficients(modifier, msg);
-
-        //_examine.AddDetailedExamineVerb(args, component, msg,
-        //    Loc.GetString("blocking-examinable-verb-text"),
-        //    "/Textures/Interface/VerbIcons/dot.svg.192dpi.png",
-        //    Loc.GetString("blocking-examinable-verb-message")
-        //);
     }
 }
 

@@ -1,5 +1,6 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Physics;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Blocking;
 
@@ -19,6 +20,11 @@ public sealed partial class BlockingUserComponent : Component
     [DataField, AutoNetworkedField]
     public bool IsBlocking = false;
 
+    [DataField]
+    public EntProtoId BlockingToggleAction = "ActionToggleBlock";
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? BlockingToggleActionEntity;
     /// <summary>
     /// The entity that's being used to block
     /// </summary>

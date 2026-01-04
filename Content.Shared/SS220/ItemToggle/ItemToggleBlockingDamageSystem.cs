@@ -1,5 +1,6 @@
 using Content.Shared.Blocking;
 using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.SS220.ChangeAppearanceOnActiveBLocking;
 
 namespace Content.Shared.SS220.ItemToggle;
 
@@ -17,6 +18,11 @@ public sealed class ItemToggleBlockingDamageSystem : EntitySystem
         //     blockingComponent.PassiveBlockDamageModifer = ent.Comp.DeactivatedPassiveModifier;
         // if (ent.Comp.DeactivatedActiveModifier != null)
         //     blockingComponent.ActiveBlockDamageModifier = ent.Comp.DeactivatedActiveModifier;
+        if (TryComp<ChangeAppearanceOnActiveBlockingComponent>(ent.Owner, out var appearanceComp))
+        {
+            var ev = new ActiveBlockingEvent(false);
+            RaiseLocalEvent(ent.Owner, ev);
+        }
         ent.Comp.IsToggled = false;
 
         blockingComponent.RangeBlockProb = ent.Comp.BaseRangeBlockProb;
@@ -38,6 +44,9 @@ public sealed class ItemToggleBlockingDamageSystem : EntitySystem
     {
         if (!TryComp<BlockingComponent>(ent.Owner, out var blockingComponent))
             return;
+        if (!TryComp<BlockingUserComponent>(blockingComponent.User, out var userComp))
+            return;
+
 
         if (args.Activated)
         {
@@ -51,6 +60,11 @@ public sealed class ItemToggleBlockingDamageSystem : EntitySystem
             blockingComponent.MeleeBlockProb = ent.Comp.ToggledMeleeBlockProb;
 
             Dirty(ent);
+            if (TryComp<ChangeAppearanceOnActiveBlockingComponent>(ent.Owner, out var appearanceComp) && userComp.IsBlocking)
+            {
+                var ev = new ActiveBlockingEvent(true);
+                RaiseLocalEvent(ent.Owner, ev);
+            }
         }
         else
         {
