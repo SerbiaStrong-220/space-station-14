@@ -370,6 +370,8 @@
       Blunt: 10000
       Heat: 10000
       Slash: 10000
+  - type: InstastunResistOnActiveBlocking
+  #SS220 shield rework end
   - type: ItemToggle
     onUse: false # wielding events control it instead
     onActivate: false # prevents the weapon from being able to be turned on when it is on the ground

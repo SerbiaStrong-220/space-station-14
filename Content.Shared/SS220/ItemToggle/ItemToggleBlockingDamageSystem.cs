@@ -1,6 +1,6 @@
 using Content.Shared.Blocking;
 using Content.Shared.Item.ItemToggle.Components;
-using Content.Shared.SS220.ChangeAppearanceOnActiveBLocking;
+using Content.Shared.SS220.ChangeAppearanceOnActiveBlocking;
 
 namespace Content.Shared.SS220.ItemToggle;
 

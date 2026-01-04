@@ -73,7 +73,7 @@ public sealed partial class BlockingSystem : EntitySystem
         SubscribeLocalEvent<BlockingUserComponent, MeleeHitBlockAttemptEvent>(OnBlockUserMeleeHit);
         SubscribeLocalEvent<BlockingUserComponent, ThrowableProjectileBlockAttemptEvent>(OnBlockThrownProjectile);
 
-        SubscribeLocalEvent<BlockingUserComponent, BeforeThrowEvent>(OnBeforeThrow);
+        //SubscribeLocalEvent<BlockingUserComponent, BeforeThrowEvent>(OnBeforeThrow);
 
         //SubscribeLocalEvent<BlockingComponent, UseInHandEvent>(OnUseInHand);
         //SS220 shield rework end
@@ -101,10 +101,10 @@ public sealed partial class BlockingSystem : EntitySystem
     }
 
     //SS220 shield rework begin
-    private void OnBeforeThrow(Entity<BlockingUserComponent> ent, ref BeforeThrowEvent args)
-    {
-        if (ent.Comp.IsBlocking) { args.Cancelled=true; }
-    }
+    //private void OnBeforeThrow(Entity<BlockingUserComponent> ent, ref BeforeThrowEvent args)
+    //{
+    //    if (ent.Comp.IsBlocking) { args.Cancelled=true; }
+    //}
 
     private void OnBlockUserCollide(Entity<BlockingUserComponent> ent, ref ProjectileBlockAttemptEvent args)
     {

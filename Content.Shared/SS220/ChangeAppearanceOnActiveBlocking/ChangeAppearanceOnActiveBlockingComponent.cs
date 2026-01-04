@@ -2,7 +2,7 @@ using Content.Shared.Hands.Components;
 using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
 
-namespace Content.Shared.SS220.ChangeAppearanceOnActiveBLocking;
+namespace Content.Shared.SS220.ChangeAppearanceOnActiveBlocking;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
 public sealed partial class ChangeAppearanceOnActiveBlockingComponent : Component

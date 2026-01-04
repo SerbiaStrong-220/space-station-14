@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Content.Shared.SS220.ChangeAppearanceOnActiveBLocking;
+namespace Content.Shared.SS220.ChangeAppearanceOnActiveBlocking;
 public sealed partial class SharedChangeAppearanceOnActiveBlockingSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;

@@ -5,7 +5,7 @@ using Content.Client.Toggleable;
 using Content.Shared.Blocking;
 using Content.Shared.Hands;
 using Content.Shared.Item;
-using Content.Shared.SS220.ChangeAppearanceOnActiveBLocking;
+using Content.Shared.SS220.ChangeAppearanceOnActiveBlocking;
 using Content.Shared.SS220.ItemToggle;
 using Content.Shared.Toggleable;
 using Robust.Client.GameObjects;
