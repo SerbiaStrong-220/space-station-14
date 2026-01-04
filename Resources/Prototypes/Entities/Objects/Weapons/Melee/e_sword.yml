@@ -40,9 +40,7 @@
         variation: 0.125
     activatedDamage:
       types:
-        Slash: 15
-        Heat: 15
-        Structural: 20
+        Heat: 40
   - type: MeleeWeapon
     wideAnimationRotation: -135
     attackRate: 1
@@ -69,7 +67,6 @@
       right:
       - state: inhand-right-blade
         shader: unshaded
-  - type: Reflect
   - type: IgnitionSource
     temperature: 700
 # Corvax-HiddenDesc-Start
@@ -109,14 +106,6 @@
   - type: Item
     sprite: Objects/Weapons/Melee/e_sword-inhands.rsi
     #ss220lowTTKUpdate
-  - type: Reflect
-    reflectProb: 0.45 #ss220 ttkTweaks
-    reflects:
-      - NonEnergy
-      - Energy #SS220-FixReflects
-    spread: 80
-    reflectProbProjectile: 0.40 #ss220 ttkTweaks
-    spreadProjectile: 180
     #ss220lowTTKUpdate
   #SS220 craftable desword start
   - type: Tag
@@ -152,9 +141,8 @@
         volume: -3
         variation: 0.250
     activatedDamage:
-        types:
-            Slash: 10
-            Heat: 10
+      types:
+        Heat: 20
     deactivatedSecret: true
   - type: ItemToggleActiveSound
     activeSound:
@@ -222,9 +210,8 @@
         volume: -3
         variation: 0.250
     activatedDamage:
-      types:
-        Slash: 10
-        Heat: 10
+        types:
+          Heat: 20
   - type: ComponentToggler
     components:
     - type: Sharp
@@ -352,6 +339,37 @@
   id: EnergySwordDouble
   description: Syndicate Command Interns thought that having one blade on the energy sword was not enough. This can be stored in pockets.
   components:
+  #SS220 shield rework begin
+  - type: Blocking
+    rangeBlockProb: 0
+    meleeBlockProb: 0
+    activeRangeBlockProb: 0.85
+    activeMeleeBlockProb: 0.85
+  #- type: ChangeAppearanceOnActiveBlocking
+  #  activeSprite: SS220/Objects/Weapons/Melee/esword_shield.rsi
+  - type: ItemToggleBlockingDamage
+    toggledRangeBlockProb: 0.4
+    toggledMeleeBlockProb: 0.35
+  - type: ChangeAppearanceOnActiveBlocking
+    spriteLayer: shield
+    inhandVisuals:
+      left:
+      - state: inhand-left-shield
+        shader: unshaded
+      right:
+      - state: inhand-right-shield
+        shader: unshaded
+  - type: ArmorBlock
+    tresholddict:
+      Piercing: 26
+      Blunt: 30
+      Heat: 35
+      Slash: 30
+    durabilitytresholddict:
+      Piercing: 10000
+      Blunt: 10000
+      Heat: 10000
+      Slash: 10000
   - type: ItemToggle
     onUse: false # wielding events control it instead
     onActivate: false # prevents the weapon from being able to be turned on when it is on the ground
@@ -371,9 +389,7 @@
         variation: 0.250
     activatedDamage:
         types:
-            Slash: 12
-            Heat: 12
-            Structural: 15
+            Heat: 32
   - type: ItemToggleActiveSound
     activeSound:
       path: /Audio/Weapons/ebladehum.ogg
@@ -408,14 +424,6 @@
     size: Small
     sprite: Objects/Weapons/Melee/e_sword_double-inhands.rsi
 # ss220 FixESword
-  - type: Reflect
-    reflectProb: 0.80 #ss220 ttkTweaks
-    reflects:
-      - NonEnergy
-      - Energy #SS220-FixReflects
-    spread: 45
-    reflectProbProjectile: 0.70 #ss220lowTTKUpdate
-    spreadProjectile: 180
 # ss220 FixESword
   #SS220 craftable desword start
   - type: Construction
@@ -473,9 +481,6 @@
   - type: Item
     size: Small
     sprite: Objects/Weapons/Melee/hypereutactic_blade_inhands.rsi
-  - type: Reflect
-    reflectProb: 1.0
-    spread: 75
 
 # Borgs
 

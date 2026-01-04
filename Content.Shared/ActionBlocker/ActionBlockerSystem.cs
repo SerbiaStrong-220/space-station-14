@@ -12,6 +12,7 @@ using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee;
 using JetBrains.Annotations;
 using Robust.Shared.Containers;
+using Content.Shared.Blocking;
 
 namespace Content.Shared.ActionBlocker
 {
@@ -201,7 +202,14 @@ namespace Content.Shared.ActionBlocker
             // If target is in a container can we attack
             if (target != null && _container.IsEntityInContainer(target.Value))
             {
-                return false;
+                if(TryComp<BlockingComponent>(target,out var comp))
+                {
+                    if(comp.User==null)
+                    {
+                        return false;
+                    }
+                }
+                else { return false; }
             }
 
             _container.TryGetOuterContainer(uid, Transform(uid), out var outerContainer);

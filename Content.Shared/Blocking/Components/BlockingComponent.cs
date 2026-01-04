@@ -23,37 +23,31 @@ public sealed partial class BlockingComponent : Component
     /// <summary>
     /// Is it currently blocking?
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public bool IsBlocking;
 
     /// <summary>
     /// The ID for the fixture that's dynamically created when blocking
     /// </summary>
-    public const string BlockFixtureID = "blocking-active";
+    //public const string BlockFixtureID = "blocking-active";
 
     /// <summary>
     /// The shape of the blocking fixture that will be dynamically spawned
     /// </summary>
-    [DataField]
-    public IPhysShape Shape = new PhysShapeCircle(0.5f);
+    //[DataField]
+    //public IPhysShape Shape = new PhysShapeCircle(0.5f);
 
     /// <summary>
     /// The damage modifer to use while passively blocking
     /// </summary>
-    [DataField("passiveBlockModifier", required: true)]
-    public DamageModifierSet PassiveBlockDamageModifer = default!;
+    //[DataField("passiveBlockModifier", required: true)]
+    //public DamageModifierSet PassiveBlockDamageModifer = default!;
 
     /// <summary>
     /// The damage modifier to use while actively blocking.
     /// </summary>
-    [DataField("activeBlockModifier", required: true)]
-    public DamageModifierSet ActiveBlockDamageModifier = default!;
-
-    [DataField]
-    public EntProtoId BlockingToggleAction = "ActionToggleBlock";
-
-    [DataField, AutoNetworkedField]
-    public EntityUid? BlockingToggleActionEntity;
+    //[DataField("activeBlockModifier", required: true)]
+    //public DamageModifierSet ActiveBlockDamageModifier = default!;
 
     /// <summary>
     /// The sound to be played when you get hit while actively blocking
@@ -68,15 +62,15 @@ public sealed partial class BlockingComponent : Component
     /// Fraction of original damage shield will take instead of user
     /// when not blocking
     /// </summary>
-    [DataField]
-    public float PassiveBlockFraction = 0.5f;
+    //[DataField]
+    //public float PassiveBlockFraction = 0.5f;
 
     /// <summary>
     /// Fraction of original damage shield will take instead of user
     /// when blocking
     /// </summary>
-    [DataField]
-    public float ActiveBlockFraction = 1.0f;
+    //[DataField]
+    //public float ActiveBlockFraction = 1.0f;
 
     // SS220 equip shield on back begin
     /// <summary>
@@ -86,4 +80,24 @@ public sealed partial class BlockingComponent : Component
     [DataField]
     public Dictionary<SlotFlags, float> AvaliableSlots = new();
     // SS220 equip shield on back end
+
+    // SS220 shield rework begin
+    [DataField, AutoNetworkedField]
+    public int Layer = 0;
+
+    [DataField, AutoNetworkedField]
+    public bool Outer = true;//if the damage should not be passed forward to other armor layers
+
+    [DataField, AutoNetworkedField]
+    public float RangeBlockProb = 0.5f;
+
+    [DataField, AutoNetworkedField]
+    public float ActiveRangeBlockProb = 0.65f;
+
+    [DataField, AutoNetworkedField]
+    public float MeleeBlockProb = 0.5f;
+
+    [DataField, AutoNetworkedField]
+    public float ActiveMeleeBlockProb = 0.65f;
+    // SS220 shield rework end
 }

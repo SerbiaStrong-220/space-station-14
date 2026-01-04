@@ -10,35 +10,20 @@ namespace Content.Shared.SS220.ItemToggle;
 [NetworkedComponent, AutoGenerateComponentState(true)]
 public sealed partial class ItemToggleBlockingDamageComponent : Component
 {
-    [DataField]
-    [AutoNetworkedField]
-    public DamageModifierSet? OriginalActiveModifier;
+//SS220 shield rework begin
+    [DataField, AutoNetworkedField]
+    public bool IsToggled = false;
 
-    [DataField]
-    [AutoNetworkedField]
-    public DamageModifierSet? OriginalPassiveModifier;
+    [DataField, AutoNetworkedField]
+    public float ToggledRangeBlockProb = 0.5f;
 
-    [DataField]
-    [AutoNetworkedField]
-    public DamageModifierSet? DeactivatedActiveModifier;
+    [DataField, AutoNetworkedField]
+    public float BaseRangeBlockProb = 0f;
 
-    [DataField]
-    [AutoNetworkedField]
-    public DamageModifierSet? DeactivatedPassiveModifier;
+    [DataField, AutoNetworkedField]
+    public float ToggledMeleeBlockProb = 0.5f;
 
-    [DataField]
-    [AutoNetworkedField]
-    public float OriginalActivatedFraction;
-
-    [DataField]
-    [AutoNetworkedField]
-    public float OriginalDeactivatedFraction;
-
-    [DataField]
-    [AutoNetworkedField]
-    public float DeactivatedActiveFraction;
-
-    [DataField]
-    [AutoNetworkedField]
-    public float DeactivatedPassiveFraction;
+    [DataField, AutoNetworkedField]
+    public float BaseMeleeBlockProb = 0f;
+//SS220 shield rework end
 }

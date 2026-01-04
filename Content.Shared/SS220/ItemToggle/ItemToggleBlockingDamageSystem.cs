@@ -1,5 +1,6 @@
 using Content.Shared.Blocking;
 using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.SS220.ChangeAppearanceOnActiveBLocking;
 
 namespace Content.Shared.SS220.ItemToggle;
 
@@ -13,13 +14,19 @@ public sealed class ItemToggleBlockingDamageSystem : EntitySystem
 
     private void OnDecreaseBlock(Entity<ItemToggleBlockingDamageComponent> ent, BlockingComponent blockingComponent)
     {
-        if (ent.Comp.DeactivatedPassiveModifier != null)
-            blockingComponent.PassiveBlockDamageModifer = ent.Comp.DeactivatedPassiveModifier;
-        if (ent.Comp.DeactivatedActiveModifier != null)
-            blockingComponent.ActiveBlockDamageModifier = ent.Comp.DeactivatedActiveModifier;
+        // if (ent.Comp.DeactivatedPassiveModifier != null)
+        //     blockingComponent.PassiveBlockDamageModifer = ent.Comp.DeactivatedPassiveModifier;
+        // if (ent.Comp.DeactivatedActiveModifier != null)
+        //     blockingComponent.ActiveBlockDamageModifier = ent.Comp.DeactivatedActiveModifier;
+        if (TryComp<ChangeAppearanceOnActiveBlockingComponent>(ent.Owner, out var appearanceComp))
+        {
+            var ev = new ActiveBlockingEvent(false);
+            RaiseLocalEvent(ent.Owner, ev);
+        }
+        ent.Comp.IsToggled = false;
 
-        blockingComponent.ActiveBlockFraction = ent.Comp.DeactivatedActiveFraction;
-        blockingComponent.PassiveBlockFraction = ent.Comp.DeactivatedPassiveFraction;
+        blockingComponent.RangeBlockProb = ent.Comp.BaseRangeBlockProb;
+        blockingComponent.MeleeBlockProb = ent.Comp.BaseMeleeBlockProb;
 
         Dirty(ent);
     }
@@ -30,12 +37,6 @@ public sealed class ItemToggleBlockingDamageSystem : EntitySystem
         {
             return;
         }
-
-        ent.Comp.OriginalActiveModifier = blockingComponent.ActiveBlockDamageModifier;
-        ent.Comp.OriginalPassiveModifier = blockingComponent.PassiveBlockDamageModifer;
-        ent.Comp.OriginalActivatedFraction = blockingComponent.ActiveBlockFraction;
-        ent.Comp.OriginalDeactivatedFraction = blockingComponent.PassiveBlockFraction;
-
         OnDecreaseBlock(ent, blockingComponent);
     }
 
@@ -43,18 +44,27 @@ public sealed class ItemToggleBlockingDamageSystem : EntitySystem
     {
         if (!TryComp<BlockingComponent>(ent.Owner, out var blockingComponent))
             return;
+        if (!TryComp<BlockingUserComponent>(blockingComponent.User, out var userComp))
+            return;
+
 
         if (args.Activated)
         {
-            if (ent.Comp.OriginalPassiveModifier != null)
-                blockingComponent.PassiveBlockDamageModifer = ent.Comp.OriginalPassiveModifier;
-            if (ent.Comp.OriginalActiveModifier != null)
-                blockingComponent.ActiveBlockDamageModifier = ent.Comp.OriginalActiveModifier;
+            //if (ent.Comp.OriginalPassiveModifier != null)
+            //    blockingComponent.PassiveBlockDamageModifer = ent.Comp.OriginalPassiveModifier;
+            //if (ent.Comp.OriginalActiveModifier != null)
+            //    blockingComponent.ActiveBlockDamageModifier = ent.Comp.OriginalActiveModifier;
+            ent.Comp.IsToggled = true;
 
-            blockingComponent.ActiveBlockFraction = ent.Comp.OriginalActivatedFraction;
-            blockingComponent.PassiveBlockFraction = ent.Comp.OriginalDeactivatedFraction;
+            blockingComponent.RangeBlockProb = ent.Comp.ToggledRangeBlockProb;
+            blockingComponent.MeleeBlockProb = ent.Comp.ToggledMeleeBlockProb;
 
             Dirty(ent);
+            if (TryComp<ChangeAppearanceOnActiveBlockingComponent>(ent.Owner, out var appearanceComp) && userComp.IsBlocking)
+            {
+                var ev = new ActiveBlockingEvent(true);
+                RaiseLocalEvent(ent.Owner, ev);
+            }
         }
         else
         {
