@@ -23,7 +23,7 @@ internal sealed class StunOnCollideSystem : EntitySystem
 
     private void TryDoCollideStun(Entity<StunOnCollideComponent> ent, EntityUid target)
     {
-        if(TryComp<InstastunResistComponent>(target,out var resistComp) && resistComp.Active) { return; } //SS220 instastun resist
+        if(TryComp<InstastunResistComponent>(target,out var resistComp) && resistComp.Active && resistComp.ProjectileResist) { return; } //SS220 instastun resist
 
         _stunSystem.TryKnockdown(target, ent.Comp.KnockdownAmount, ent.Comp.Refresh, ent.Comp.AutoStand, ent.Comp.Drop, true);
 

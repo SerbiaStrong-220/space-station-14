@@ -14,6 +14,8 @@
       heldPrefix: riot
     - type: Blocking
     #SS220 shield rework begin
+    - type: InstastunResistOnActiveBlocking
+      creampieResist: true
     - type: ArmorBlock
       tresholddict:
           Radiation: 1000

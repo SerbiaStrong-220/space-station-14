@@ -371,6 +371,8 @@
       Heat: 10000
       Slash: 10000
   - type: InstastunResistOnActiveBlocking
+    creampieResist: true
+    projectileResist: true
   #SS220 shield rework end
   - type: ItemToggle
     onUse: false # wielding events control it instead
