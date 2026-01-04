@@ -301,8 +301,8 @@ public sealed partial class BlockingSystem : EntitySystem
         //var xform = Transform(user);
 
         var blockerName = Identity.Entity(user, EntityManager);
-        var msgUser = Loc.GetString("action-popup-blocking-user");
-        var msgOther = Loc.GetString("action-popup-blocking-other", ("blockerName", blockerName));
+        var msgUser = Loc.GetString("actively-blocking-attack");
+        var msgOther = Loc.GetString("actively-blocking-others", ("blockerName", blockerName));
 
         //Don't allow someone to block if they're not parented to a grid
         //if (xform.GridUid != xform.ParentUid)
@@ -387,8 +387,10 @@ public sealed partial class BlockingSystem : EntitySystem
         //var xform = Transform(user);
 
         var blockerName = Identity.Entity(user, EntityManager);
-        var msgUser = Loc.GetString("action-popup-blocking-disabling-user");
-        var msgOther = Loc.GetString("action-popup-blocking-disabling-other", ("blockerName", blockerName));
+        var msgUser = Loc.GetString("actively-blocking-stop");
+        var msgOther = Loc.GetString("actively-blocking-stop-others", ("blockerName", blockerName));
+        _popupSystem.PopupPredicted(msgUser, msgOther, user, user);
+        _actionsSystem.SetToggled(compUser.BlockingToggleActionEntity, false);
 
         //If the component blocking toggle isn't null, grab the users SharedBlockingUserComponent and PhysicsComponent
         //then toggle the action to false, unanchor the user, remove the hard fixture

@@ -106,11 +106,11 @@
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 14
-    MediumDynamic:
-      Telecrystal: 9
-    HardDynamic:
       Telecrystal: 7
+    MediumDynamic:
+      Telecrystal: 6
+    HardDynamic:
+      Telecrystal: 5
 #ss220 dynamic-price end
 
 - type: listing
@@ -290,6 +290,15 @@
     Telecrystal: 8
   categories:
   - UplinkWeaponry
+  #ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 10
+    MediumDynamic:
+      Telecrystal: 8
+    HardDynamic:
+      Telecrystal: 7
+  #ss220 dynamic-price end
   conditions:
   - !type:StoreWhitelistCondition
     whitelist:

@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation and modified by RiceMar1244",
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation and modified by RiceMar1244; Modified by JustSmartgun for SS220",
   "size": {
     "x": 64,
     "y": 64
