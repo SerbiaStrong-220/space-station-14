@@ -2,10 +2,8 @@
 
 using System.Text.RegularExpressions;
 using Content.Shared.Paper;
-using Content.Shared.Random.Helpers;
 using Content.Shared.SS220.Experience.Skill.Components;
 using Content.Shared.SS220.Experience.Systems;
-using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.Experience.Skill.Systems;
@@ -15,10 +13,10 @@ public sealed class WritingSkillIssueSystem : SkillEntitySystem
     [Dependency] private readonly ExperienceSystem _experience = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
 
-    private static readonly string[] TagsForShuffling = { "bold", "italic", "bolditalic" };
+    private static readonly string[] TagsForShuffling = { "bold", "italic", "bolditalic", "head=1", "head=2", "head=3" };
 
     private static readonly Regex TagsForShuffleRegex = new Regex(
-        @"\[(bold|italic|bolditalic)\](.*?)\[/\1\]",
+        @"\[(bold|italic|bolditalic|head)(?:=\d+)?\](.*?)\[/\1\]",
         RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
 
     public override void Initialize()
@@ -30,45 +28,46 @@ public sealed class WritingSkillIssueSystem : SkillEntitySystem
 
     private void OnPaperSetContentAttemptEvent(Entity<WritingSkillIssueComponent> entity, ref PaperSetContentAttemptEvent args)
     {
-        if (entity.Comp.ChangeCaseEach is not null && !string.IsNullOrEmpty(args.TransformedContent))
-        {
-            args.TransformedContent = string.Create(args.TransformedContent.Length, args.TransformedContent, (span, original) =>
-            {
-                var toUpper = true;
-                var counter = 0;
-                for (var i = 0; i < span.Length; i++)
-                {
-                    var oldChar = original[i];
-
-                    span[i] = toUpper ? char.ToUpper(oldChar) : char.ToLower(oldChar);
-
-                    counter++;
-                    if (counter >= entity.Comp.ChangeCaseEach)
-                    {
-                        toUpper = !toUpper;
-                        counter = 0;
-                    }
-                }
-            });
-        }
-
         if (entity.Comp.ShuffleMarkupTags)
         {
-            args.TransformedContent = ShuffleTags(args.TransformedContent, GetPredictedRandom(new() { GetNetEntity(entity).Id, args.NewContent.Length }));
+            args.TransformedContent = ShuffleTags(args.Paper.Comp.Content, args.TransformedContent, GetPredictedRandom(new() { GetNetEntity(entity).Id, args.NewContent.Length }));
         }
     }
 
-    private string ShuffleTags(string input, System.Random random)
+    private string ShuffleTags(string oldText, string newInput, System.Random random)
     {
-        if (string.IsNullOrEmpty(input)) return input;
+        if (string.IsNullOrEmpty(newInput))
+            return newInput;
 
-        // MatchEvaluator позволяет генерировать замену динамически для каждого совпадения
-        return TagsForShuffleRegex.Replace(input, match =>
+        var oldBlocksCounts = new Dictionary<string, int>();
+        if (!string.IsNullOrEmpty(oldText))
         {
-            var newTag = random.Pick(TagsForShuffling);
+            foreach (Match match in TagsForShuffleRegex.Matches(oldText))
+            {
+                if (!oldBlocksCounts.TryAdd(match.Value, 1))
+                {
+                    oldBlocksCounts[match.Value]++;
+                }
+            }
+        }
+
+        return TagsForShuffleRegex.Replace(newInput, match =>
+        {
+            var currentBlock = match.Value;
+
+            if (oldBlocksCounts.TryGetValue(currentBlock, out int count) && count > 0)
+            {
+                oldBlocksCounts[currentBlock] = count - 1;
+                return currentBlock;
+            }
+
+            var newTag = TagsForShuffling[random.Next(TagsForShuffling.Length)];
+            // to correctly close head tag
+            var closureTag = newTag.Split('=')[0];
+
             var content = match.Groups[2].Value;
 
-            return $"[{newTag}]{content}[/{newTag}]";
+            return $"[{newTag}]{content}[/{closureTag}]";
         });
     }
 }

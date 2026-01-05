@@ -20,7 +20,7 @@
                 </BoxContainer>
             </BoxContainer>
         </BoxContainer>
-        <BoxContainer Name="SubdataContainer" Orientation="Horizontal" Visible="False" Margin="20 2 0 2"
+        <BoxContainer Name="SubdataContainer" Access="Public" Orientation="Horizontal" Visible="False" Margin="20 2 0 2"
             HorizontalExpand="True" VerticalExpand="True">
             <TextureButton Name="AddSublevelPoint" TexturePath="/Textures/SS220/Interface/ExperienceView/add-button.png" MaxHeight="32"
                 VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 0 5 0"/>

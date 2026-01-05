@@ -10,8 +10,5 @@ public sealed partial class WritingSkillIssueComponent : Component
 {
     [DataField]
     [AutoNetworkedField]
-    public int? ChangeCaseEach;
-
-    [DataField]
-    public bool ShuffleMarkupTags = false;
+    public bool ShuffleMarkupTags = true;
 }
