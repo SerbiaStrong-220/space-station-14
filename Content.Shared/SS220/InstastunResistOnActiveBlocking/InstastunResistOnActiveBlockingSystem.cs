@@ -16,6 +16,9 @@ public sealed partial class InstastunResistOnActiveBlockingSystem : EntitySystem
         {
             var resistComp=EnsureComp<InstastunResistComponent>((EntityUid)BlockComp.User);
             resistComp.Active = true;
+            resistComp.ProjectileResist = component.ProjectileResist;
+            resistComp.CreampieResist = component.CreampieResist;
+            Dirty((EntityUid)BlockComp.User, resistComp);
             return;
         }
         RemComp<InstastunResistComponent>((EntityUid)BlockComp.User);
