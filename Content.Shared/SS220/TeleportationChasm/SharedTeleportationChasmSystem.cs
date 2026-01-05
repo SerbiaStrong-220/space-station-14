@@ -4,6 +4,7 @@ using Content.Shared.ActionBlocker;
 using Content.Shared.Movement.Events;
 using Content.Shared.StepTrigger.Systems;
 using Content.Shared.Weapons.Misc;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 
@@ -18,6 +19,7 @@ public abstract class SharedTeleportationChasmSystem : EntitySystem
     [Dependency] private readonly ActionBlockerSystem _blocker = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedGrapplingGunSystem _grapple = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
 
     public override void Initialize()
     {
@@ -40,11 +42,14 @@ public abstract class SharedTeleportationChasmSystem : EntitySystem
     {
         var falling = AddComp<TeleportationChasmFallingComponent>(target);
 
-        falling.NextDeletionTime = _timing.CurTime + falling.DeletionTime;
+        falling.NextTeleportationTime = _timing.CurTime + falling.TeleportationTime;
         _blocker.UpdateCanMove(target);
 
         if (playSound)
             _audio.PlayPredicted(ent.Comp.FallingSound, ent, target);
+
+        if (_whitelistSystem.IsBlacklistPass(ent.Comp.BlacklistToDelete, target))
+            falling.ShouldBeDeleted = true;
     }
 
     private void OnStepTriggerAttempt(Entity<TeleportationChasmComponent> ent, ref StepTriggerAttemptEvent args)
