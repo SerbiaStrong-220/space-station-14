@@ -27,9 +27,12 @@
                 <BoxContainer Name="ExperienceTreeGroupsContainer" Orientation="Vertical" Margin="{x:Static styleDef:ExperienceUiStyleDefinitions.BaseTabLikeThickness}">
                     <!-- Added by code -->
                 </BoxContainer>
-                <BoxContainer Orientation="Horizontal" HorizontalAlignment="Left">
-                    <Button Name="SubmitButton" Text="{Loc 'experience-view-tree-submit-button-text'}"/>
-                    <Button Name="ClearSpentPointsButton" Text="{Loc 'experience-view-tree-clear-spent-points-button-text'}"/>
+                <BoxContainer Name="FreePointsOptionContainer" Orientation="Vertical" HorizontalAlignment="Left">
+                    <RichTextLabel Name="FreePointsShower" Text="free points placeholder"/>
+                    <BoxContainer Orientation="Horizontal" HorizontalAlignment="Left">
+                        <Button Name="SubmitButton" Text="{Loc 'experience-view-tree-submit-button-text'}"/>
+                        <Button Name="ClearSpentPointsButton" Text="{Loc 'experience-view-tree-clear-spent-points-button-text'}"/>
+                    </BoxContainer>
                 </BoxContainer>
             </BoxContainer>
         </ScrollContainer>

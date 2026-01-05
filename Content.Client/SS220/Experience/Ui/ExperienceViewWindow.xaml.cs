@@ -179,9 +179,10 @@ public sealed partial class ExperienceViewWindow : FancyWindow
     {
         var canChange = _freeSublevelPoints > _spendPoints;
 
-        SubmitButton.Visible = canChange || _spendPoints > 0;
-        ClearSpentPointsButton.Visible = canChange || _spendPoints > 0;
+        FreePointsOptionContainer.Visible = canChange || _spendPoints > 0;
         ClearSpentPointsButton.Disabled = _spendPoints < 1;
+
+        FreePointsShower.SetMessage(Loc.GetString("experience-view-free-sublevel-points-text", ("FreeSublevel", _freeSublevelPoints - _spendPoints)));
 
         foreach (var child in ExperienceTreeGroupsContainer.Children)
         {
@@ -206,6 +207,7 @@ public sealed partial class ExperienceViewWindow : FancyWindow
     private void OnAddSublevelPoint()
     {
         _spendPoints++;
+
         UpdateSublevel();
     }
 
