@@ -1,47 +1,30 @@
+using System.Linq;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
-using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Damage;
-using Content.Shared.Database;
-using Content.Shared.Examine;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.Events;
-using Content.Shared.Item.ItemToggle.Components;
-using Content.Shared.Maps;
-using Content.Shared.Mobs.Components;
-using Content.Shared.PAI;
-using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
-using Content.Shared.SS220.Damage;
-using Content.Shared.SS220.FieldShield;
 using Content.Shared.SS220.ItemToggle;
-using Content.Shared.SS220.ItemToggle;
+//using Robust.Shared.Utility;
+//using Content.Shared.Weapons.Reflect;
+//using Content.Shared.Inventory.Events;
+//using Content.Shared.Throwing;
+//using Robust.Shared.Containers;
 using Content.Shared.SS220.Weapons.Melee.Events;
 using Content.Shared.Throwing;
-using Content.Shared.Toggleable;
-using Content.Shared.Verbs;
-using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
-using Content.Shared.Weapons.Reflect;
 using Robust.Shared.Containers;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Network;
-using Robust.Shared.Physics;
-using Robust.Shared.Physics.Components;
-using Robust.Shared.Physics.Systems;
-using Robust.Shared.Player;
-using Robust.Shared.Random;
-using Robust.Shared.Serialization;
+using Robust.Shared.Random;//SS220 shield rework
+using Robust.Shared.Serialization;//SS220 shield rework
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
-using System;
-using System.Linq;
-using System.Security.Cryptography;
+using Robust.Shared.Utility;//SS220 shield rework
 
 namespace Content.Shared.Blocking;
 
@@ -159,6 +142,7 @@ public sealed partial class BlockingSystem : EntitySystem
                     args.Cancelled = true;
                     args.blocker = netEnt;
                     ChangeSeed(ent);
+                    _audio.PlayPvs(shield.BlockSound, (EntityUid)item);
                     return;
                 }
             }
@@ -169,6 +153,7 @@ public sealed partial class BlockingSystem : EntitySystem
                     args.Cancelled = true;
                     args.blocker = netEnt;
                     ChangeSeed(ent);
+                    _audio.PlayPvs(shield.BlockSound, (EntityUid)item);
                     return;
                 }
             }
@@ -203,6 +188,7 @@ public sealed partial class BlockingSystem : EntitySystem
                 {
                     _damageable.TryChangeDamage(shield.Owner, damage);
                     ChangeSeed((comp.Owner, comp));
+                    _audio.PlayPvs(shield.BlockSound, (EntityUid)item);
                     return true;
                 }
             }
@@ -212,6 +198,7 @@ public sealed partial class BlockingSystem : EntitySystem
                 {
                     _damageable.TryChangeDamage(shield.Owner, damage);
                     ChangeSeed((comp.Owner, comp));
+                    _audio.PlayPvs(shield.BlockSound, (EntityUid)item);
                     return true;
                 }
             }

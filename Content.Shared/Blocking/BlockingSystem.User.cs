@@ -1,8 +1,8 @@
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
-using Content.Shared.Hands.Components;
+using Content.Shared.Hands.Components;//SS220 shield rework
 using Content.Shared.Inventory;
-using Content.Shared.Toggleable;
+using Content.Shared.Toggleable;//SS220 shield rework
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -11,6 +11,7 @@ namespace Content.Shared.Blocking;
 
 public sealed partial class BlockingSystem
 {
+    //[Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly InventorySystem _inventory = default!; // SS220 equip shield on back
     private void InitializeUser()
@@ -18,23 +19,23 @@ public sealed partial class BlockingSystem
         //SubscribeLocalEvent<BlockingUserComponent, DamageModifyEvent>(OnUserDamageModified);
         //SubscribeLocalEvent<BlockingComponent, DamageModifyEvent>(OnDamageModified);
 
-        SubscribeLocalEvent<BlockingUserComponent, EntParentChangedMessage>(OnParentChanged);
-        SubscribeLocalEvent<BlockingUserComponent, ContainerGettingInsertedAttemptEvent>(OnInsertAttempt);
-        SubscribeLocalEvent<BlockingUserComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<BlockingUserComponent, ToggleActionEvent>(OnToggleAction);
+        //SubscribeLocalEvent<BlockingUserComponent, EntParentChangedMessage>(OnParentChanged);
+        //SubscribeLocalEvent<BlockingUserComponent, ContainerGettingInsertedAttemptEvent>(OnInsertAttempt);
+        SubscribeLocalEvent<BlockingUserComponent, MapInitEvent>(OnMapInit);//SS220 shield rework
+        SubscribeLocalEvent<BlockingUserComponent, ToggleActionEvent>(OnToggleAction);//SS220 shield rework
         //SubscribeLocalEvent<BlockingUserComponent, AnchorStateChangedEvent>(OnAnchorChanged);
         //SubscribeLocalEvent<BlockingUserComponent, EntityTerminatingEvent>(OnEntityTerminating);
     }
 
-    private void OnParentChanged(EntityUid uid, BlockingUserComponent component, ref EntParentChangedMessage args)
-    {
-        UserStopBlocking(uid, component);
-    }
+    //private void OnParentChanged(EntityUid uid, BlockingUserComponent component, ref EntParentChangedMessage args)
+    //{
+    //    UserStopBlocking(uid, component);
+    //}
 
-    private void OnInsertAttempt(EntityUid uid, BlockingUserComponent component, ContainerGettingInsertedAttemptEvent args)
-    {
-        UserStopBlocking(uid, component);
-    }
+    //private void OnInsertAttempt(EntityUid uid, BlockingUserComponent component, ContainerGettingInsertedAttemptEvent args)
+    //{
+    //    UserStopBlocking(uid, component);
+    //}
 
     //private void OnAnchorChanged(EntityUid uid, BlockingUserComponent component, ref AnchorStateChangedEvent args)
     //{
@@ -44,6 +45,7 @@ public sealed partial class BlockingSystem
     //    UserStopBlocking(uid, component);
     //}
 
+    //SS220 shield rework begin
     private void OnMapInit(EntityUid uid, BlockingUserComponent component, MapInitEvent args)
     {
         _actionContainer.EnsureAction(uid, ref component.BlockingToggleActionEntity, component.BlockingToggleAction);
@@ -67,6 +69,7 @@ public sealed partial class BlockingSystem
         Dirty(uid, component);
         args.Handled = true;
     }
+    //SS220 shield rework end
 
     //private void OnUserDamageModified(EntityUid uid, BlockingUserComponent component, DamageModifyEvent args)
     //{
@@ -117,17 +120,17 @@ public sealed partial class BlockingSystem
     //    args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, modifier);
     //}
 
-    private void OnEntityTerminating(EntityUid uid, BlockingUserComponent component, ref EntityTerminatingEvent args)
-    {
-        foreach (var shield in component.BlockingItemsShields)
-        {
-            if (!TryComp<BlockingComponent>(shield, out var blockingComponent))
-                return;
-
-            StopBlockingHelper((EntityUid)shield, blockingComponent, uid);
-        }
-
-    }
+    //private void OnEntityTerminating(EntityUid uid, BlockingUserComponent component, ref EntityTerminatingEvent args)
+    //{
+    //    foreach (var shield in component.BlockingItemsShields)
+    //    {
+    //        if (!TryComp<BlockingComponent>(shield, out var blockingComponent))
+    //            return;
+    //
+    //        StopBlockingHelper((EntityUid)shield, blockingComponent, uid);
+    //    }
+    //
+    //}
 
     /// <summary>
     /// Check for the shield and has the user stop blocking
@@ -135,12 +138,12 @@ public sealed partial class BlockingSystem
     /// </summary>
     /// <param name="uid">The user blocking</param>
     /// <param name="component">The <see cref="BlockingUserComponent"/></param>
-    private void UserStopBlocking(EntityUid uid, BlockingUserComponent component)
-    {
-        foreach (var shield in component.BlockingItemsShields)
-        {
-            if (TryComp<BlockingComponent>(shield, out var blockComp) && blockComp.IsBlocking)
-                StopBlocking(component, uid);
-        }
-    }
+    //private void UserStopBlocking(EntityUid uid, BlockingUserComponent component)
+    //{
+    //    foreach (var shield in component.BlockingItemsShields)
+    //    {
+    //       if (TryComp<BlockingComponent>(shield, out var blockComp) && blockComp.IsBlocking)
+    //            StopBlocking(component, uid);
+    //    }
+    //}
 }

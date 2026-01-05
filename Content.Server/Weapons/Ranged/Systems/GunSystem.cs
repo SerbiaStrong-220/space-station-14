@@ -242,8 +242,9 @@ public sealed partial class GunSystem : SharedGunSystem
 
                         if (lastHit != null)
                         {
-                            var dmg = hitscan.Damage;
+                            var dmg = hitscan.Damage;//SS220 shield rework
                             var hitEntity = lastHit.Value;
+                            //SS220 shield rework begin
                             var hitName = ToPrettyString(hitEntity);
                             var blockEv = new HitScanBlockAttemptEvent(hitscan.Damage);
                             RaiseLocalEvent(lastHit.Value, blockEv);
@@ -264,8 +265,13 @@ public sealed partial class GunSystem : SharedGunSystem
                                 }
                                 return;
                             }
+                            //SS220 shield rework and
                             if (hitscan.StaminaDamage > 0f)
                                 _stamina.TakeStaminaDamage(hitEntity, hitscan.StaminaDamage, source: user);
+
+                            //var dmg = hitscan.Damage;
+
+                            //var hitName = ToPrettyString(hitEntity);
 
                             if (dmg != null)
                                 dmg = Damageable.TryChangeDamage(hitEntity, dmg * Damageable.UniversalHitscanDamageModifier, origin: user);
