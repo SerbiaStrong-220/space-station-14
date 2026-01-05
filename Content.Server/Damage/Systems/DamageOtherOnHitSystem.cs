@@ -1,18 +1,18 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared.Camera;
-using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.Effects;
 using Content.Shared.Mobs.Components;
-using Content.Shared.SS220.Damage;
 using Content.Shared.Throwing;
-using Content.Shared.Weapons.Ranged.Events;
+using Content.Shared.SS220.Damage;
+using Content.Shared.Weapons.Ranged.Events; //SS220 shield rework
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
+using Content.Shared.CombatMode.Pacification;
 
 namespace Content.Server.Damage.Systems;
 
@@ -44,6 +44,7 @@ public sealed class DamageOtherOnHitSystem : SharedDamageOtherOnHitSystem
             return;
         // SS220-add-miss-chance-?-end
 
+        //SS220 shield rework begin
         var blockEv = new ThrowableProjectileBlockAttemptEvent(component.Damage);
         RaiseLocalEvent(args.Target,blockEv);
         if (blockEv.Cancelled)
@@ -51,7 +52,7 @@ public sealed class DamageOtherOnHitSystem : SharedDamageOtherOnHitSystem
             _color.RaiseEffect(Color.Red, [args.Target], Filter.Pvs(args.Target, entityManager: EntityManager));
             return;
         }
-
+        //SS220 shield rework end
         var dmg = _damageable.TryChangeDamage(args.Target, component.Damage * _damageable.UniversalThrownDamageModifier, component.IgnoreResistances, origin: args.Component.Thrower);
 
         // Log damage only for mobs. Useful for when people throw spears at each other, but also avoids log-spam when explosions send glass shards flying.

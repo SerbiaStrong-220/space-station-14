@@ -64,7 +64,7 @@ public sealed partial class BlockingSystem
             StopBlocking(component, args.Performer);
         else
             StartBlocking(component, args.Performer);
-
+        Dirty(uid, component);
         args.Handled = true;
     }
 

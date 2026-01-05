@@ -100,7 +100,6 @@ public sealed partial class BlockingSystem : EntitySystem
         //ss220 fix drop shields end
     }
 
-    //SS220 shield rework begin
     //private void OnBeforeThrow(Entity<BlockingUserComponent> ent, ref BeforeThrowEvent args)
     //{
     //    if (ent.Comp.IsBlocking) { args.Cancelled=true; }
@@ -126,7 +125,10 @@ public sealed partial class BlockingSystem : EntitySystem
         foreach (var item in ent.Comp.BlockingItemsShields)
         {
             if (!TryComp<BlockingComponent>(item, out var shield)) { return; }
-            if(!TryGetNetEntity(item, out var netEnt)) { return; }
+            if(!TryGetNetEntity(item, out var netEnt))
+            {
+                return;
+            }
             if (TryComp<ItemToggleBlockingDamageComponent>(item, out var toggleComp))
             {
                 if (!toggleComp.IsToggled)
@@ -238,6 +240,7 @@ public sealed partial class BlockingSystem : EntitySystem
         userComp.BlockingItemsShields.Add(uid);
         //_actionContainer.EnsureAction(args.User, ref userComp.BlockingToggleActionEntity, userComp.BlockingToggleAction);
         _actionsSystem.AddAction(args.User, ref userComp.BlockingToggleActionEntity, userComp.BlockingToggleAction, args.User);
+        Dirty(args.User, userComp);
     }
 
     // SS220 equip shield on back begin
@@ -252,6 +255,7 @@ public sealed partial class BlockingSystem : EntitySystem
         var userComp = EnsureComp<BlockingUserComponent>(args.Equipee);
         _actionsSystem.AddAction(args.Equipee, ref userComp.BlockingToggleActionEntity, userComp.BlockingToggleAction, args.Equipee);
         userComp.BlockingItemsShields.Add(uid);
+        Dirty(args.Equipee, userComp);
     }
 
     private void OnGotUnequipped(EntityUid uid, BlockingComponent component, GotUnequippedEvent args)
@@ -428,7 +432,7 @@ public sealed partial class BlockingSystem : EntitySystem
     {
         var userQuery = GetEntityQuery<BlockingUserComponent>();
         if(!userQuery.TryGetComponent(user, out var component1)) { return; }
-        if (component.IsBlocking)
+        if (component1.IsBlocking)
             StopBlocking(component1, user);
 
         var handQuery = GetEntityQuery<HandsComponent>();

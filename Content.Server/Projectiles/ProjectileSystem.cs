@@ -44,6 +44,7 @@ public sealed class ProjectileSystem : SharedProjectileSystem
             return;
         }
 
+        //SS220 shield rework begin
         var blockattemptEv = new ProjectileBlockAttemptEvent(uid, component, false, component.Damage);
         RaiseLocalEvent(target, blockattemptEv);
         if (blockattemptEv.Cancelled)
@@ -54,6 +55,7 @@ public sealed class ProjectileSystem : SharedProjectileSystem
             _guns.PlayImpactSound(target, component.Damage, component.SoundHit, component.ForceSound);
             return;
         }
+        //SS220 shield rework end
 
         var ev = new ProjectileHitEvent(component.Damage * _damageableSystem.UniversalProjectileDamageModifier, target, component.Shooter);
         RaiseLocalEvent(uid, ref ev);

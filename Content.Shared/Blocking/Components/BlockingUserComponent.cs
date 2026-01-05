@@ -23,7 +23,7 @@ public sealed partial class BlockingUserComponent : Component
     [DataField]
     public EntProtoId BlockingToggleAction = "ActionToggleBlock";
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public EntityUid? BlockingToggleActionEntity;
     /// <summary>
     /// The entity that's being used to block

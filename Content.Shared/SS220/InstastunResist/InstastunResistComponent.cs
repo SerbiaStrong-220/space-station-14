@@ -4,7 +4,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared.SS220.InstastunResist;
 
 /// <summary>
-/// This is used for change damage for activating weapon
+/// This is used for giving entities instastun resist
 /// </summary>
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState(true)]
