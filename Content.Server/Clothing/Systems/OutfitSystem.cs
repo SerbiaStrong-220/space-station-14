@@ -90,6 +90,9 @@ public sealed class OutfitSystem : EntitySystem
             var skillRoleAddComp = EnsureComp<RoleExperienceAddComponent>(target);
             skillRoleAddComp.DefinitionId = job.ExperienceDefinition;
 
+            // This used to give admins better experience with clearing player choice, it can be removed or moved if needed
+            RemComp<JobBackgroundSublevelAddComponent>(target);
+
             foreach (var jobSpecial in job.Special)
                 jobSpecial.AfterEquip(target);
             // SS220-experience-update-end

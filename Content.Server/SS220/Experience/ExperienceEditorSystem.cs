@@ -65,7 +65,7 @@ public sealed class ExperienceEditorSystem : EntitySystem
             return;
         }
 
-        var playerChangedComp = EnsureComp<BackgroundSublevelAddComponent>(playerEntity);
+        var playerChangedComp = EnsureComp<JobBackgroundSublevelAddComponent>(playerEntity);
 
         foreach (var (skillId, sublevel) in validInput)
         {
@@ -90,7 +90,7 @@ public sealed class ExperienceEditorSystem : EntitySystem
 
     private void OnRoundEnd(RoundEndedEvent _)
     {
-        var backgroundEntityQuery = EntityQueryEnumerator<BackgroundSublevelAddComponent, RoleExperienceAddComponent>();
+        var backgroundEntityQuery = EntityQueryEnumerator<JobBackgroundSublevelAddComponent, RoleExperienceAddComponent>();
 
         while (backgroundEntityQuery.MoveNext(out var uid, out var sublevelAddComponent, out var roleExperience))
         {

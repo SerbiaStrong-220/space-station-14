@@ -40,6 +40,10 @@ public sealed class DisarmOnDamageSkillSystem : SkillEntitySystem
         if (args.DamageDelta is null)
             return;
 
+        if (DamageSpecifier.GetPositive(args.DamageDelta).GetTotal() < entity.Comp.DamageThreshold)
+            return;
+
+        // So only if damage more than treshold, then we progress
         if (!ResolveExperienceEntityFromSkillEntity(entity, out var experienceEntity))
             return;
 
@@ -48,9 +52,7 @@ public sealed class DisarmOnDamageSkillSystem : SkillEntitySystem
 
         TryChangeStudyingProgress(entity, _affectedSkillTree, DamageSpecifier.GetPositive(args.DamageDelta).GetTotal() / _damageToExperience);
 
-        if (DamageSpecifier.GetPositive(args.DamageDelta).GetTotal() < entity.Comp.DamageThreshold)
-            return;
-
+        // And after that we check if we lost our precious items
         if (!GetPredictedRandom(new() { GetNetEntity(entity).Id, args.DamageDelta.GetTotal().Int() }).Prob(entity.Comp.DisarmChance))
             return;
 

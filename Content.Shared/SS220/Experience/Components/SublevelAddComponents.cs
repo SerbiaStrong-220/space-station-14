@@ -19,4 +19,4 @@ public abstract partial class BaseSublevelAddComponent : Component
 }
 
 [RegisterComponent, NetworkedComponent]
-public sealed partial class BackgroundSublevelAddComponent : BaseSublevelAddComponent;
+public sealed partial class JobBackgroundSublevelAddComponent : BaseSublevelAddComponent;
