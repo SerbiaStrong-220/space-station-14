@@ -23,10 +23,11 @@
       trapsLimit: 6
       armedVisibility: 0.3
       unArmedVisibility: 1
-    - type: Trap
-      blacklist:
+    - type: WhitelistTriggerCondition
+      userBlacklist:
         components:
         - CultYogg
+    - type: Trap
       durationStun: 1
       setTrapSound: /Audio/SS220/Items/CultYogg/sound_trapCult_set.ogg
       defuseTrapSound: /Audio/SS220/Items/CultYogg/sound_trapCult_defuse.ogg
