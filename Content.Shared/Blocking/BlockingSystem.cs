@@ -20,6 +20,7 @@ using Content.Shared.Projectiles;
 using Content.Shared.SS220.Damage;
 using Content.Shared.SS220.FieldShield;
 using Content.Shared.SS220.ItemToggle;
+using Content.Shared.SS220.ItemToggle;
 using Content.Shared.SS220.Weapons.Melee.Events;
 using Content.Shared.Throwing;
 using Content.Shared.Toggleable;
@@ -28,6 +29,7 @@ using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Reflect;
 using Robust.Shared.Containers;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
@@ -40,7 +42,6 @@ using Robust.Shared.Utility;
 using System;
 using System.Linq;
 using System.Security.Cryptography;
-using Content.Shared.SS220.ItemToggle;
 
 namespace Content.Shared.Blocking;
 
@@ -76,6 +77,7 @@ public sealed partial class BlockingSystem : EntitySystem
         //SubscribeLocalEvent<BlockingUserComponent, BeforeThrowEvent>(OnBeforeThrow);
 
         //SubscribeLocalEvent<BlockingComponent, UseInHandEvent>(OnUseInHand);
+        SubscribeLocalEvent<BlockingUserComponent, ComponentInit>(OnCompInit);
         //SS220 shield rework end
 
         SubscribeLocalEvent<BlockingComponent, GotEquippedHandEvent>(OnEquip);
@@ -105,6 +107,19 @@ public sealed partial class BlockingSystem : EntitySystem
     //    if (ent.Comp.IsBlocking) { args.Cancelled=true; }
     //}
 
+    private void OnCompInit(Entity<BlockingUserComponent> ent, ref ComponentInit args)
+    {
+        ChangeSeed(ent);
+    }
+
+    private void ChangeSeed(Entity<BlockingUserComponent> ent)
+    {
+        if (_net.IsServer)
+        {
+            ent.Comp.randomSeed = _random.Next(1000000);
+        }
+        Dirty(ent.Owner, ent.Comp);//Yes,this is probably the most obvious and dumb way to to it.
+    }
     private void OnBlockUserCollide(Entity<BlockingUserComponent> ent, ref ProjectileBlockAttemptEvent args)
     {
         args.Cancelled = TryBlock(ent.Comp.BlockingItemsShields, args.Damage,ent.Comp);
@@ -136,12 +151,14 @@ public sealed partial class BlockingSystem : EntitySystem
                     continue;
                 }
             }
+            _random.SetSeed(ent.Comp.randomSeed);
             if (ent.Comp.IsBlocking)
             {
                 if (_random.Prob(shield.ActiveMeleeBlockProb))
                 {
                     args.Cancelled = true;
                     args.blocker = netEnt;
+                    ChangeSeed(ent);
                     return;
                 }
             }
@@ -151,9 +168,11 @@ public sealed partial class BlockingSystem : EntitySystem
                 {
                     args.Cancelled = true;
                     args.blocker = netEnt;
+                    ChangeSeed(ent);
                     return;
                 }
             }
+            ChangeSeed(ent);
             return;
         }
     }
@@ -183,6 +202,7 @@ public sealed partial class BlockingSystem : EntitySystem
                 if (_random.Prob(shield.ActiveRangeBlockProb))
                 {
                     _damageable.TryChangeDamage(shield.Owner, damage);
+                    ChangeSeed((comp.Owner, comp));
                     return true;
                 }
             }
@@ -191,10 +211,12 @@ public sealed partial class BlockingSystem : EntitySystem
                 if (_random.Prob(shield.RangeBlockProb))
                 {
                     _damageable.TryChangeDamage(shield.Owner, damage);
+                    ChangeSeed((comp.Owner, comp));
                     return true;
                 }
             }
         }
+        ChangeSeed((comp.Owner,comp));
         return false;
     }
     //SS220 shield rework end

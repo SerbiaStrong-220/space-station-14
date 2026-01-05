@@ -16,6 +16,8 @@ public sealed partial class BlockingUserComponent : Component
     [DataField("blockingItemsShields")]
     public List<EntityUid?> BlockingItemsShields = new();
 
+    [DataField, AutoNetworkedField]
+    public int randomSeed = 0;//This is NOT for prototyping
     //
     [DataField, AutoNetworkedField]
     public bool IsBlocking = false;
