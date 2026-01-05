@@ -40,7 +40,10 @@
         variation: 0.125
     activatedDamage:
       types:
-        Heat: 40
+        #Slash: 15
+        #Heat: 15
+        #Structural: 20
+        Heat: 40 #SS220 syndie melee weapons rework
   - type: MeleeWeapon
     wideAnimationRotation: -135
     attackRate: 1
@@ -67,6 +70,7 @@
       right:
       - state: inhand-right-blade
         shader: unshaded
+  #- type: Reflect
   - type: IgnitionSource
     temperature: 700
 # Corvax-HiddenDesc-Start
@@ -106,16 +110,15 @@
   - type: Item
     sprite: Objects/Weapons/Melee/e_sword-inhands.rsi
     #ss220lowTTKUpdate
+  #- type: Reflect
+  #  reflectProb: 0.45 #ss220 ttkTweaks
+  #  reflects:
+  #    - NonEnergy
+  #    - Energy #SS220-FixReflects
+  #  spread: 80
+  #  reflectProbProjectile: 0.40 #ss220 ttkTweaks
+  #  spreadProjectile: 180
     #ss220lowTTKUpdate
-  #SS220 craftable desword start
-  - type: Tag
-    tags:
-    - EnergySword
-  - type: Construction
-    deconstructionTarget: null
-    graph: EnergyDoubleSwordGraph
-    node: esword
-  #SS220 craftable desword end
   - type: StaticPrice
     price: 2500
 
@@ -142,7 +145,9 @@
         variation: 0.250
     activatedDamage:
       types:
-        Heat: 20
+        #Slash: 10
+        #Heat: 10
+        Heat: 20 #SS220 syndie melee weapons rework
     deactivatedSecret: true
   - type: ItemToggleActiveSound
     activeSound:
@@ -211,7 +216,9 @@
         variation: 0.250
     activatedDamage:
         types:
-          Heat: 20
+          #Slash: 10
+          #Heat: 10
+          Heat: 20 #SS220 syndie melee weapons rework
   - type: ComponentToggler
     components:
     - type: Sharp
@@ -301,9 +308,10 @@
   - type: ItemToggleMeleeWeapon
     activatedDamage:
         types:
-            Slash: 10
-            Heat: 12
-            Blunt: -1
+            #Slash: 10
+            #Heat: 12
+            Heat: 40 #SS220 energy melee weapons rework
+            #Blunt: -1
             Structural: 10
     deactivatedSecret: true
   - type: Sprite
@@ -393,7 +401,10 @@
         variation: 0.250
     activatedDamage:
         types:
-            Heat: 32
+          Heat: 32 #SS220 syndie melee weapons rework
+          #Slash: 12
+          #Heat: 12
+          #Structural: 15
   - type: ItemToggleActiveSound
     activeSound:
       path: /Audio/Weapons/ebladehum.ogg
@@ -428,6 +439,14 @@
     size: Small
     sprite: Objects/Weapons/Melee/e_sword_double-inhands.rsi
 # ss220 FixESword
+  #- type: Reflect
+  #  reflectProb: 0.80 #ss220 ttkTweaks
+  #  reflects:
+  #    - NonEnergy
+  #    - Energy #SS220-FixReflects
+  #  spread: 45
+  #  reflectProbProjectile: 0.70 #ss220lowTTKUpdate
+  #  spreadProjectile: 180
 # ss220 FixESword
   #SS220 craftable desword start
   - type: Construction
@@ -485,6 +504,9 @@
   - type: Item
     size: Small
     sprite: Objects/Weapons/Melee/hypereutactic_blade_inhands.rsi
+  - type: Reflect
+    reflectProb: 1.0
+    spread: 75
 
 # Borgs
 

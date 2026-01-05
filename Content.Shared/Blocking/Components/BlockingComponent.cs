@@ -23,7 +23,8 @@ public sealed partial class BlockingComponent : Component
     /// <summary>
     /// Is it currently blocking?
     /// </summary>
-    [DataField]
+    // [DataField, AutoNetworkedField]
+    [DataField]//SS220 shield rework
     public bool IsBlocking;
 
     /// <summary>
@@ -48,6 +49,12 @@ public sealed partial class BlockingComponent : Component
     /// </summary>
     //[DataField("activeBlockModifier", required: true)]
     //public DamageModifierSet ActiveBlockDamageModifier = default!;
+
+    //[DataField]
+    //public EntProtoId BlockingToggleAction = "ActionToggleBlock";
+
+    //[DataField, AutoNetworkedField]
+    //public EntityUid? BlockingToggleActionEntity;
 
     /// <summary>
     /// The sound to be played when you get hit while actively blocking
@@ -82,11 +89,11 @@ public sealed partial class BlockingComponent : Component
     // SS220 equip shield on back end
 
     // SS220 shield rework begin
-    [DataField, AutoNetworkedField]
-    public int Layer = 0;
+    //[DataField, AutoNetworkedField]
+    //public int Layer = 0;//Layer of the armor(for implementation of this component in bodyarmor)
 
-    [DataField, AutoNetworkedField]
-    public bool Outer = true;//if the damage should not be passed forward to other armor layers
+    //[DataField, AutoNetworkedField]
+    //public bool Outer = true;//if the damage should not be passed forward to other armor layers(for implementation of this component in bodyarmor)
 
     [DataField, AutoNetworkedField]
     public float RangeBlockProb = 0.5f;

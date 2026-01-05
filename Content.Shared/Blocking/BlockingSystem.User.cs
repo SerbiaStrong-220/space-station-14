@@ -27,15 +27,15 @@ public sealed partial class BlockingSystem
         //SubscribeLocalEvent<BlockingUserComponent, EntityTerminatingEvent>(OnEntityTerminating);
     }
 
-    //private void OnParentChanged(EntityUid uid, BlockingUserComponent component, ref EntParentChangedMessage args)
-    //{
-    //    UserStopBlocking(uid, component);
-    //}
+    private void OnParentChanged(EntityUid uid, BlockingUserComponent component, ref EntParentChangedMessage args)
+    {
+        UserStopBlocking(uid, component);
+    }
 
-    //private void OnInsertAttempt(EntityUid uid, BlockingUserComponent component, ContainerGettingInsertedAttemptEvent args)
-    //{
-    //    UserStopBlocking(uid, component);
-    //}
+    private void OnInsertAttempt(EntityUid uid, BlockingUserComponent component, ContainerGettingInsertedAttemptEvent args)
+    {
+        UserStopBlocking(uid, component);
+    }
 
     //private void OnAnchorChanged(EntityUid uid, BlockingUserComponent component, ref AnchorStateChangedEvent args)
     //{
@@ -138,12 +138,12 @@ public sealed partial class BlockingSystem
     /// </summary>
     /// <param name="uid">The user blocking</param>
     /// <param name="component">The <see cref="BlockingUserComponent"/></param>
-    //private void UserStopBlocking(EntityUid uid, BlockingUserComponent component)
-    //{
-    //    foreach (var shield in component.BlockingItemsShields)
-    //    {
-    //       if (TryComp<BlockingComponent>(shield, out var blockComp) && blockComp.IsBlocking)
-    //            StopBlocking(component, uid);
-    //    }
-    //}
+    private void UserStopBlocking(EntityUid uid, BlockingUserComponent component)
+    {
+        foreach (var shield in component.BlockingItemsShields)
+        {
+           if (TryComp<BlockingComponent>(shield, out var blockComp) && blockComp.IsBlocking)
+                StopBlocking(component, uid);
+        }
+    }
 }

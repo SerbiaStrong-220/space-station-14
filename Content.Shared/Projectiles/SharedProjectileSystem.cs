@@ -268,12 +268,14 @@ public record struct ProjectileReflectAttemptEvent(EntityUid ProjUid, Projectile
     SlotFlags IInventoryRelayEvent.TargetSlots => SlotFlags.WITHOUT_POCKET;
 }
 
+// SS220 shield rework begin
 [Serializable, NetSerializable]
 public sealed class ProjectileBlockAttemptEvent(EntityUid ProjUid, ProjectileComponent Component, bool Cancelled, DamageSpecifier damage) : EntityEventArgs
 {
     public bool Cancelled = false;
     public DamageSpecifier? Damage = damage;
 }
+// SS220 shield rework end
 
 /// <summary>
 /// Raised when a projectile hits an entity

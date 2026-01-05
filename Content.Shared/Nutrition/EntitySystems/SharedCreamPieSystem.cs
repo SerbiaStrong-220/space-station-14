@@ -1,5 +1,5 @@
 using Content.Shared.Nutrition.Components;
-using Content.Shared.SS220.InstastunResist;
+using Content.Shared.SS220.InstastunResist;// SS220 shield rework 
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using JetBrains.Annotations;

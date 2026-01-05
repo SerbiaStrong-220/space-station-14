@@ -1,5 +1,5 @@
+//﻿using Robust.Shared.Physics;
 using Robust.Shared.GameStates;
-using Robust.Shared.Physics;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Blocking;
@@ -7,9 +7,11 @@ namespace Content.Shared.Blocking;
 /// <summary>
 /// This component gets dynamically added to an Entity via the <see cref="BlockingSystem"/>
 /// </summary>
+//[RegisterComponent]
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class BlockingUserComponent : Component
 {
+    // SS220 shield rework begin
     /// <summary>
     /// The entities that's being used to block and are shields
     /// </summary>
@@ -27,6 +29,7 @@ public sealed partial class BlockingUserComponent : Component
 
     [DataField]
     public EntityUid? BlockingToggleActionEntity;
+    // SS220 shield rework end
     /// <summary>
     /// The entity that's being used to block
     /// </summary>
