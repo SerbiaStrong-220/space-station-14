@@ -806,8 +806,8 @@
       activeRangeBlockProb: 0.60
       activeMeleeBlockProb: 0.75
     - type: ItemToggleBlockingDamage
-      ToggledRangeBlockProb: 0.50
-      ToggledMeleeBlockProb: 0.65
+      toggledRangeBlockProb: 0.50
+      toggledMeleeBlockProb: 0.65
     - type: ArmorBlock
       tresholddict:
           Piercing: 15
