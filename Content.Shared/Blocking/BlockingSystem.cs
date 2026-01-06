@@ -158,7 +158,7 @@ public sealed partial class BlockingSystem : EntitySystem
                     args.Cancelled = true;
                     args.blocker = netEnt;
                     ChangeSeed(ent);
-                    _audio.PlayPvs(shield.BlockSound, (EntityUid)item);
+                    //_audio.PlayPvs(shield.BlockSound, (EntityUid)item);
                     return;
                 }
             }
@@ -169,7 +169,7 @@ public sealed partial class BlockingSystem : EntitySystem
                     args.Cancelled = true;
                     args.blocker = netEnt;
                     ChangeSeed(ent);
-                    _audio.PlayPvs(shield.BlockSound, (EntityUid)item);
+                    //_audio.PlayPvs(shield.BlockSound, (EntityUid)item);
                     return;
                 }
             }

@@ -409,7 +409,7 @@
         variation: 0.250
     activatedDamage:
         types:
-          Heat: 32 #SS220 syndie melee weapons rework
+          Heat: 46 #SS220 syndie melee weapons rework
           #Slash: 12
           #Heat: 12
           #Structural: 15
@@ -429,7 +429,7 @@
     wieldSound: null # esword light sound instead
   - type: MeleeWeapon
     wideAnimationRotation: -135
-    attackRate: 1.5
+    attackRate: 1
     angle: 100
     damage:
       types:
