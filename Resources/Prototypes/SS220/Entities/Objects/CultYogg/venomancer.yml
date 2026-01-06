@@ -14,12 +14,12 @@
       cameraRecoilScalar: 1
       fireRate: 1
       soundEmpty: null
-      projectileSpeed: 25
+      projectileSpeed: 15
     - type: BasicEntityAmmoProvider
       proto: VenomancerAcid
-      capacity: 4
+      capacity: 5
     - type: RechargeBasicEntityAmmo
-      rechargeCooldown: 3
+      rechargeCooldown: 2.5
       rechargeSound: /Audio/Weapons/Guns/MagIn/shotgun_insert.ogg
     - type: Sprite
       sprite: SS220/Objects/Weapons/Guns/CultYogg/venomancer.rsi
@@ -73,10 +73,13 @@
     impactEffect: BulletImpactEffect
     damage: 
       types:
-        Caustic: 10 
-        Structural: 15
+        Heat: 6
+        Caustic: 2
+        Structural: 10
   - type: ProjectileSpread
     proto: VenomancerAcid 
-    count: 6
-    spread: 30
+    count: 8
+    spread: 25
+  - type: TimedDespawn
+    lifetime: 0.45
 
