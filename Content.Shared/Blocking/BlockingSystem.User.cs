@@ -2,7 +2,7 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Hands.Components;//SS220 shield rework
 using Content.Shared.Inventory;
-using Content.Shared.Toggleable;//SS220 shield rework
+using Content.Shared.Toggleable;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
