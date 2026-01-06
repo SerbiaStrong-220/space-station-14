@@ -18,6 +18,7 @@ public sealed partial class ChangeAppearanceOnActiveBlockingSystem : EntitySyste
     [Dependency] private readonly AppearanceSystem _appearanceSystem = default!;
     [Dependency] private readonly SharedItemSystem _item = default!;
     [Dependency] private readonly SpriteSystem _spriteSystem = default!;
+    
     public override void Initialize()
     {
         base.Initialize();
