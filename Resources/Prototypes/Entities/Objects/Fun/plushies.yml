@@ -21,9 +21,7 @@
   - type: UseDelay
     delay: 3.0
   - type: MeleeWeapon
-  #ss220 plushie attack rate fix begin
-    attackRate: 1
-  #ss220 plushie attack rate fix end
+    attackRate: 1 #SS220 plushie attack rate fix begin
     wideAnimationRotation: 180
     soundHit: *BasePlushieSound
     damage:
