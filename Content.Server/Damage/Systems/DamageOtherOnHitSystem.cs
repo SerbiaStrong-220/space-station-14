@@ -9,7 +9,7 @@ using Content.Shared.Effects;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Throwing;
 using Content.Shared.SS220.Damage;
-using Content.Shared.Weapons.Ranged.Events; //SS220 shield rework
+using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
 using Content.Shared.CombatMode.Pacification;
