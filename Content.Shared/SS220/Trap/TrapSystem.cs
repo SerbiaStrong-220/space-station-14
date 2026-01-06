@@ -15,6 +15,7 @@ using Content.Shared.Database;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Hands.Components;
 using Content.Shared.Trigger;
+using Robust.Shared.Containers;
 
 namespace Content.Shared.SS220.Trap;
 
@@ -34,6 +35,7 @@ public sealed class TrapSystem : EntitySystem
     [Dependency] private readonly AnchorableSystem _anchorableSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -154,7 +156,7 @@ public sealed class TrapSystem : EntitySystem
 
         // TO PREVENT ACTIVATE TRAP IN THE HANDS
         var parent = _transformSystem.GetParentUid(ent);
-        if (parent.IsValid() && HasComp<HandsComponent>(parent))
+        if (parent.IsValid() && HasComp<HandsComponent>(parent) || _container.IsEntityInContainer(parent) || _container.IsEntityInContainer(ent))
             return false;
 
         var ev = new TrapArmAttemptEvent(user);
@@ -166,7 +168,7 @@ public sealed class TrapSystem : EntitySystem
     {
         // TO PREVENT DEACTIVATE TRAP IN THE HANDS, but... how..., just for sure
         var parent = _transformSystem.GetParentUid(ent);
-        if (parent.IsValid() && HasComp<HandsComponent>(parent))
+        if (parent.IsValid() && HasComp<HandsComponent>(parent) || _container.IsEntityInContainer(parent) || _container.IsEntityInContainer(ent))
             return false;
 
         var ev = new TrapDefuseAttemptEvent(user);
