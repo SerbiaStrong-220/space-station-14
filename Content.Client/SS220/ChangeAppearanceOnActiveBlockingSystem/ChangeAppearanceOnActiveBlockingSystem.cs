@@ -48,6 +48,7 @@ public sealed partial class ChangeAppearanceOnActiveBlockingSystem : EntitySyste
             if (modulateColor)
                 _spriteSystem.LayerSetColor((uid, SpriteComp), component.SpriteLayer, color);
         }
+        
         _item.VisualsChanged(uid);
     }
 
