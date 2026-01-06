@@ -11,7 +11,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Content.Shared.SS220.ArmorBlock;
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+
+[RegisterComponent]
+[NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ArmorBlockComponent : Component
 {
     /// <summary>
