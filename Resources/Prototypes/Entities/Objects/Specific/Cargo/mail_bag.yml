@@ -33,3 +33,15 @@
     tags:
     - ScurretWearable
     - CorgiWearable
+
+#SS220-BorgMailBag begin
+- type: entity
+  parent: MailBag
+  id: BorgMailBag
+  name: Встроенная сумка для писем
+  description: Большая сумка для писем, встроенный в каркас шахтерского киборга.
+  components:
+    - type: Storage
+      grid:
+      - 0,0,5,4
+#SS220-BorgMailBag end
