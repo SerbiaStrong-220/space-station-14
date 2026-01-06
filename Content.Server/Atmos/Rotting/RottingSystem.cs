@@ -43,9 +43,9 @@ public sealed class RottingSystem : SharedRottingSystem
 
     private void OnTempIsRotting(EntityUid uid, TemperatureComponent component, ref IsRottingEvent args)
     {
-       if (args.Handled)
-           return;
-       args.Handled = component.CurrentTemperature < Atmospherics.T0C + 0.85f;
+        if (args.Handled)
+            return;
+        args.Handled = component.CurrentTemperature < Atmospherics.T0C + 0.85f;
     }
 
     /// <summary>
