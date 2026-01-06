@@ -46,7 +46,7 @@ public sealed partial class BlockingSystem
     //}
 
     //SS220 shield rework begin
-    private void OnMapInit(EntityUid uid, BlockingUserComponent component, MapInitEvent args)
+    private void OnMapInit(Entity<BlockingUserComponent> entity, ref MapInitEvent args)
     {
         _actionContainer.EnsureAction(uid, ref component.BlockingToggleActionEntity, component.BlockingToggleAction);
         Dirty(uid, component);
