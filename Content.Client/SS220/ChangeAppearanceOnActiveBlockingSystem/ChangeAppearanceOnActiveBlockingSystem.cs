@@ -12,6 +12,7 @@ using Robust.Client.GameObjects;
 using System.Linq;
 
 namespace Content.Client.SS220.ChangeAppearanceOnActiveBLocking;
+
 public sealed partial class ChangeAppearanceOnActiveBlockingSystem : EntitySystem
 {
     [Dependency] private readonly AppearanceSystem _appearanceSystem = default!;
