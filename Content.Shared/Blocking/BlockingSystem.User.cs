@@ -24,7 +24,7 @@ public sealed partial class BlockingSystem
         SubscribeLocalEvent<BlockingUserComponent, MapInitEvent>(OnMapInit);//SS220 shield rework
         SubscribeLocalEvent<BlockingUserComponent, ToggleActionEvent>(OnToggleAction);//SS220 shield rework
         //SubscribeLocalEvent<BlockingUserComponent, AnchorStateChangedEvent>(OnAnchorChanged);
-        //SubscribeLocalEvent<BlockingUserComponent, EntityTerminatingEvent>(OnEntityTerminating);
+        SubscribeLocalEvent<BlockingUserComponent, EntityTerminatingEvent>(OnEntityTerminating);
     }
 
     private void OnParentChanged(EntityUid uid, BlockingUserComponent component, ref EntParentChangedMessage args)
@@ -120,17 +120,15 @@ public sealed partial class BlockingSystem
     //    args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, modifier);
     //}
 
-    //private void OnEntityTerminating(EntityUid uid, BlockingUserComponent component, ref EntityTerminatingEvent args)
-    //{
-    //    foreach (var shield in component.BlockingItemsShields)
-    //    {
-    //        if (!TryComp<BlockingComponent>(shield, out var blockingComponent))
-    //            return;
-    //
-    //        StopBlockingHelper((EntityUid)shield, blockingComponent, uid);
-    //    }
-    //
-    //}
+    private void OnEntityTerminating(EntityUid uid, BlockingUserComponent component, ref EntityTerminatingEvent args)
+    {
+        StopBlocking(component, uid);
+        if (_net.IsServer)
+        {
+            _actionsSystem.RemoveAction(component.BlockingToggleActionEntity);
+            RemComp<BlockingUserComponent>(uid);
+        }
+    }
 
     /// <summary>
     /// Check for the shield and has the user stop blocking

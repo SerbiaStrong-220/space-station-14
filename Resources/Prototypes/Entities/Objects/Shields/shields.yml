@@ -38,10 +38,12 @@
           Radiation: 1000
           Poison: 1000
           Airloss: 1000
+          Caustic: 1000
       durabilitytresholddict:
           Radiation: 1000
           Poison: 1000
           Airloss: 1000
+          Caustic: 1000
     #SS220 shield rework end
       #Those damage types cannot be dealt to the shield and, logically, to the user
     - type: Damageable
@@ -304,10 +306,12 @@
           Piercing: 1
           Blunt: 1
           Heat: 1
+          Caustic: 2
       durabilitytresholddict:
           Piercing: 0
           Blunt: 0
           Heat: 0
+          Caustic: 2
     #SS220 shield rework end
     - type: Construction
       graph: CardShield

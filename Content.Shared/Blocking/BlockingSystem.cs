@@ -316,7 +316,7 @@ public sealed partial class BlockingSystem : EntitySystem
     private void OnUnequip(EntityUid uid, BlockingComponent component, GotUnequippedHandEvent args)
     {
         StopBlockingHelper(uid, component, args.User);
-        var userComp = EnsureComp<BlockingUserComponent>(args.User);//SS220 shield rework
+        //var userComp = EnsureComp<BlockingUserComponent>(args.User);//SS220 shield rework
     }
 
     private void OnDrop(EntityUid uid, BlockingComponent component, DroppedEvent args)
@@ -454,6 +454,13 @@ public sealed partial class BlockingSystem : EntitySystem
         foreach (var shield in compUser.BlockingItemsShields)
         {
             if (shield == null) { continue; }
+            if (TryComp<ItemToggleBlockingDamageComponent>(shield, out var toggleComp))
+            {
+                if (!toggleComp.IsToggled)
+                {
+                    continue;
+                }
+            }
             ActiveBlockingEvent ev = new ActiveBlockingEvent(true);
             RaiseLocalEvent((EntityUid)shield, ev);
         }
