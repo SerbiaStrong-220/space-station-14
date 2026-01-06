@@ -7,6 +7,8 @@ using Content.Shared.Temperature.Components;
 using Robust.Server.Containers;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Timing;
+using Content.Server.Temperature.Components;
+using System;
 
 namespace Content.Server.Atmos.Rotting;
 
@@ -41,9 +43,9 @@ public sealed class RottingSystem : SharedRottingSystem
 
     private void OnTempIsRotting(EntityUid uid, TemperatureComponent component, ref IsRottingEvent args)
     {
-        if (args.Handled)
-            return;
-        args.Handled = component.CurrentTemperature < Atmospherics.T0C + 0.85f;
+       if (args.Handled)
+           return;
+       args.Handled = component.CurrentTemperature < Atmospherics.T0C + 0.85f;
     }
 
     /// <summary>
@@ -81,8 +83,31 @@ public sealed class RottingSystem : SharedRottingSystem
                 Dirty(uid, perishable);
             }
 
-            if (IsRotten(uid) || !IsRotProgressing(uid, perishable))
-                continue;
+            // if (IsRotten(uid) || !IsRotProgressing(uid, perishable))
+            //     continue;
+            //#ss220 rotting temperature check added begin
+            bool shouldRot = IsRotProgressing(uid, perishable);
+                if (!shouldRot)
+                {
+                    continue;
+                }
+
+                //Проверяется температура на поверхности и внутри мяса, если любая из них ниже 0.85С, то гниение не происходит
+                float tempToCheck = Atmospherics.T20C;
+                if (TryComp<TemperatureComponent>(uid, out var tempComp))
+                {
+                    tempToCheck = tempComp.CurrentTemperature;
+                    if (TryComp<InternalTemperatureComponent>(uid, out var internalTemp))
+                    {
+                        tempToCheck = MathF.Min(tempToCheck, internalTemp.Temperature);
+                    }
+                }
+
+                if (tempToCheck < Atmospherics.T0C + 0.85f)
+                {
+                    continue;
+                }
+            //#ss220 rotting temperature check added end    
 
             perishable.RotAccumulator += perishable.PerishUpdateRate * GetRotRate(uid);
             if (perishable.RotAccumulator >= perishable.RotAfter)
