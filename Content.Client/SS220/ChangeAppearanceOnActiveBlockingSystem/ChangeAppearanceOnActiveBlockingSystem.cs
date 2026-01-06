@@ -22,6 +22,7 @@ public sealed partial class ChangeAppearanceOnActiveBlockingSystem : EntitySyste
     public override void Initialize()
     {
         base.Initialize();
+        
         SubscribeLocalEvent<ChangeAppearanceOnActiveBlockingComponent, AppearanceChangeEvent>(OnAppearanceChange);
         SubscribeLocalEvent<ChangeAppearanceOnActiveBlockingComponent, GetInhandVisualsEvent>(OnGetHeldVisuals);
     }
