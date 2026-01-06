@@ -65,7 +65,7 @@ public sealed class SSDIndicatorSystem : EntitySystem
             return;
         //SS220 Completely prevent mapped mobs from falling asleep start
         //component.FallAsleepTime = _timing.CurTime + TimeSpan.FromSeconds(_icSsdSleepTime);
-        component.FallAsleepTime = TimeSpan.FromDays(1);
+        component.FallAsleepTime = TimeSpan.FromDays(365);
         //SS220 Completely prevent mapped mobs from falling asleep end
         component.NextUpdate = _timing.CurTime + component.UpdateInterval;
         Dirty(uid, component);
