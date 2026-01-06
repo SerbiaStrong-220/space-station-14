@@ -46,7 +46,7 @@ public sealed class DamageOtherOnHitSystem : SharedDamageOtherOnHitSystem
 
         //SS220 shield rework begin
         var blockEv = new ThrowableProjectileBlockAttemptEvent(component.Damage);
-        RaiseLocalEvent(args.Target,blockEv);
+        RaiseLocalEvent(args.Target, ref blockEv);
         if (blockEv.Cancelled)
         {
             _color.RaiseEffect(Color.Red, [args.Target], Filter.Pvs(args.Target, entityManager: EntityManager));
