@@ -30,13 +30,10 @@ public sealed partial class ChangeAppearanceOnActiveBlockingSystem : EntitySyste
     public void OnAppearanceChange(EntityUid uid, ChangeAppearanceOnActiveBlockingComponent component, ref AppearanceChangeEvent args)
     {
         if (!TryComp<AppearanceComponent>(uid, out var AppearanceComp))
-        {
             return;
-        }
+
         if (!TryComp<SpriteComponent>(uid, out var SpriteComp))
-        {
             return;
-        }
 
         if (!_appearanceSystem.TryGetData<bool>(uid, ActiveBlockingVisuals.Enabled, out var enabled, args.Component))
             return;
