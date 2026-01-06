@@ -198,6 +198,7 @@ public sealed partial class BlockingSystem : EntitySystem
             //    _damageable.TryChangeDamage(shield.Owner, damage);
             //    return true;
             //}
+            _random.SetSeed(comp.randomSeed);
             if (comp.IsBlocking)
             {
                 if (_random.Prob(shield.ActiveRangeBlockProb))
