@@ -54,7 +54,9 @@ public sealed partial class ChangeAppearanceOnActiveBlockingSystem : EntitySyste
     private void OnGetHeldVisuals(EntityUid uid, ChangeAppearanceOnActiveBlockingComponent component, GetInhandVisualsEvent args)
     {
         if (!TryComp(uid, out AppearanceComponent? appearance)
-            || !_appearanceSystem.TryGetData<bool>(uid, ActiveBlockingVisuals.Enabled, out var enabled, appearance)
+            return;
+            
+         if (!_appearanceSystem.TryGetData<bool>(uid, ActiveBlockingVisuals.Enabled, out var enabled, appearance)
             || !enabled)
             return;
 
