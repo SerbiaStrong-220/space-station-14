@@ -1,7 +1,7 @@
 using Content.Server.Stunnable.Components;
 using Content.Shared.Movement.Systems;
 using JetBrains.Annotations;
-using Content.Shared.SS220.InstastunResist; //SS220 shield rework
+using Content.Shared.SS220.InstastunResist;
 using Content.Shared.Throwing;
 using Robust.Shared.Physics.Events;
 
