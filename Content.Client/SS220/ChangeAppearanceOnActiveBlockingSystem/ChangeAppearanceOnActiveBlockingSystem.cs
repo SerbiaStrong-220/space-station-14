@@ -37,6 +37,7 @@ public sealed partial class ChangeAppearanceOnActiveBlockingSystem : EntitySyste
 
         if (!_appearanceSystem.TryGetData<bool>(uid, ActiveBlockingVisuals.Enabled, out var enabled, args.Component))
             return;
+            
         var modulateColor =
             _appearanceSystem.TryGetData<Color>(uid, ToggleableVisuals.Color, out var color, args.Component);
 
