@@ -236,10 +236,12 @@
     - type: ArmorBlock
       tresholddict:
           Piercing: 15
+          Slash: 15
           Blunt: 20
           Heat: 10
       durabilitytresholddict:
           Piercing: 7
+          Slash: 9
           Blunt: 10
           Heat: 5
     #SS220 shield rework begin
