@@ -896,7 +896,7 @@
 - type: entity
   name: base officials' shield
   parent: BaseItem
-  id: BaseShield
+  id: BaseOfficialsShield
   description: A shield!
   abstract: true
   components:
