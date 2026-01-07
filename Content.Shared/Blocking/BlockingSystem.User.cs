@@ -1,6 +1,12 @@
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
+<<<<<<< HEAD
 using Content.Shared.Inventory;
+=======
+using Content.Shared.Hands.Components;
+using Content.Shared.Inventory;
+using Content.Shared.Toggleable;
+>>>>>>> e16a8587772b7fe20c0b53f76b2840836102ffb7
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -33,7 +39,20 @@ public sealed partial class BlockingSystem
         UserStopBlocking(uid, component);
     }
 
+<<<<<<< HEAD
     private void OnAnchorChanged(EntityUid uid, BlockingUserComponent component, ref AnchorStateChangedEvent args)
+=======
+    //private void OnAnchorChanged(EntityUid uid, BlockingUserComponent component, ref AnchorStateChangedEvent args)
+    //{
+    //    if (args.Anchored)
+    //        return;
+    //
+    //    UserStopBlocking(uid, component);
+    //}
+
+    //SS220 shield rework begin
+    private void OnMapInit(Entity<BlockingUserComponent> entity, ref MapInitEvent args)
+>>>>>>> e16a8587772b7fe20c0b53f76b2840836102ffb7
     {
         if (args.Anchored)
             return;

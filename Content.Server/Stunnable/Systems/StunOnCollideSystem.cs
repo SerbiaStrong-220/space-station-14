@@ -1,7 +1,11 @@
 using Content.Server.Stunnable.Components;
 using Content.Shared.Movement.Systems;
 using JetBrains.Annotations;
+<<<<<<< HEAD
 using Content.Shared.SS220.InstastunResist; //SS220 instastun resist
+=======
+using Content.Shared.SS220.InstastunResist;
+>>>>>>> e16a8587772b7fe20c0b53f76b2840836102ffb7
 using Content.Shared.Throwing;
 using Robust.Shared.Physics.Events;
 

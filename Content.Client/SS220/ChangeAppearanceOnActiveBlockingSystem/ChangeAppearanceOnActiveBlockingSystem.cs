@@ -12,11 +12,19 @@ public sealed partial class ChangeAppearanceOnActiveBlockingSystem : EntitySyste
     [Dependency] private readonly AppearanceSystem _appearanceSystem = default!;
     [Dependency] private readonly SharedItemSystem _item = default!;
     [Dependency] private readonly SpriteSystem _spriteSystem = default!;
+<<<<<<< HEAD
 
     public override void Initialize()
     {
         base.Initialize();
 
+=======
+    
+    public override void Initialize()
+    {
+        base.Initialize();
+        
+>>>>>>> e16a8587772b7fe20c0b53f76b2840836102ffb7
         SubscribeLocalEvent<ChangeAppearanceOnActiveBlockingComponent, AppearanceChangeEvent>(OnAppearanceChange);
         SubscribeLocalEvent<ChangeAppearanceOnActiveBlockingComponent, GetInhandVisualsEvent>(OnGetHeldVisuals);
     }
@@ -31,7 +39,11 @@ public sealed partial class ChangeAppearanceOnActiveBlockingSystem : EntitySyste
 
         if (!_appearanceSystem.TryGetData<bool>(uid, ActiveBlockingVisuals.Enabled, out var enabled, args.Component))
             return;
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> e16a8587772b7fe20c0b53f76b2840836102ffb7
         var modulateColor =
             _appearanceSystem.TryGetData<Color>(uid, ToggleableVisuals.Color, out var color, args.Component);
 
@@ -43,16 +55,27 @@ public sealed partial class ChangeAppearanceOnActiveBlockingSystem : EntitySyste
             if (modulateColor)
                 _spriteSystem.LayerSetColor((uid, SpriteComp), component.SpriteLayer, color);
         }
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> e16a8587772b7fe20c0b53f76b2840836102ffb7
         _item.VisualsChanged(uid);
     }
 
     private void OnGetHeldVisuals(EntityUid uid, ChangeAppearanceOnActiveBlockingComponent component, GetInhandVisualsEvent args)
     {
+<<<<<<< HEAD
         if (!TryComp(uid, out AppearanceComponent? appearance))
             return;
 
         if(!_appearanceSystem.TryGetData<bool>(uid, ActiveBlockingVisuals.Enabled, out var enabled, appearance)
+=======
+        if (!TryComp(uid, out AppearanceComponent? appearance)
+            return;
+            
+         if (!_appearanceSystem.TryGetData<bool>(uid, ActiveBlockingVisuals.Enabled, out var enabled, appearance)
+>>>>>>> e16a8587772b7fe20c0b53f76b2840836102ffb7
             || !enabled)
             return;
 

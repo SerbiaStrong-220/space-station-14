@@ -369,7 +369,7 @@
         shader: unshaded
   - type: ArmorBlock
     tresholddict:
-      Piercing: 29
+      Piercing: 40
       Blunt: 30
       Heat: 35
       Slash: 30
