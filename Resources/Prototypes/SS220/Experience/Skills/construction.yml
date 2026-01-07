@@ -17,6 +17,9 @@
     - ReinforcedPlasmaGlass
     - ReinforcedUraniumGlass
     - Plasteel
+  - type: ConstructionToolDoAfterSkill
+    durationScale: 1.6
+    failureChance: 0.3
 
 - type: skill
   id: ConstructionBase
@@ -37,6 +40,9 @@
     - ReinforcedPlasmaGlass
     - ReinforcedUraniumGlass
     - Plasteel
+  - type: ConstructionToolDoAfterSkill
+    durationScale: 1
+    failureChance: 0.1
 
 - type: skill
   id: ConstructionTrained
@@ -50,6 +56,8 @@
   components:
   - type: ConstructionDoAfterSkill
     durationScale: 1
+  - type: ConstructionToolDoAfterSkill
+    durationScale: 1
 
 - type: skill
   id: ConstructionProfessional
@@ -62,4 +70,6 @@
     skillDescription: construction-professional-desc
   components:
   - type: ConstructionDoAfterSkill
+    durationScale: 0.7
+  - type: ConstructionToolDoAfterSkill
     durationScale: 0.7

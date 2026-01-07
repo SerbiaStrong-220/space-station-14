@@ -51,7 +51,10 @@ public abstract partial class BaseDoAfterSkillSystem<TComp, TEvent> : SkillEntit
 
         OnDoAfterEnd(entity, ref args);
 
-        if (args.Cancel || args.Args.Used == null)
+        if (args.Cancel || args.Args.Used is null)
+            return;
+
+        if (!LearnedAfterComplete(args))
             return;
 
         if (!TryGetLearningProgressInfo<LearningOnDoAfterEndWithComponent>(args.Args.Used.Value, entity.Comp.SkillTreeGroup, out var learningInformation))
@@ -79,6 +82,11 @@ public abstract partial class BaseDoAfterSkillSystem<TComp, TEvent> : SkillEntit
 
         if (entity.Comp.FullBlockPopup is not null)
             _popup.PopupClient(Loc.GetString(entity.Comp.FullBlockPopup), args.Args.User);
+    }
+
+    protected virtual bool LearnedAfterComplete(in BeforeDoAfterCompleteEvent args)
+    {
+        return true;
     }
 
     protected virtual void OnDoAfterEnd(Entity<TComp> entity, ref BeforeDoAfterCompleteEvent args)
