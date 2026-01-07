@@ -399,16 +399,6 @@
     - Chef
 #SS220 SpicyUPD end
 
-#- type: listing
-#  id: UplinkCQC
-#  name: ent-cqc-name
-#  description: ent-cqc-desc
-#  productEntity: cqc_lethal
-#  cost:
-#    Telecrystal: 4
-#  categories:
-#  - UplinkWeaponry
-
 - type: listing
   id: UplinkCQCManual
   name: uplink-cqc-manual-name
@@ -420,7 +410,6 @@
     Telecrystal: 6
   cost:
     Telecrystal: 10
-#ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
       Telecrystal: 8
@@ -428,15 +417,8 @@
       Telecrystal: 10
     HardDynamic:
       Telecrystal: 12
-#ss220 dynamic-price end
   categories:
   - UplinkWeaponry
-  conditions:
-  - !type:StoreWhitelistCondition
-      blacklist:
-        tags:
-        - NukeOpsUplink
-        - LoneOpsUplink
 
 - type: listing
   id: UplinkBoxFakeOps

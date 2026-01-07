@@ -76,9 +76,6 @@ public sealed partial class MartialArtsSystem : EntitySystem, IMartialArtEffectE
 
     public void PerformStep(EntityUid user, EntityUid target, CombatSequenceStep step, MartialArtistComponent? artist = null)
     {
-        if (!_timing.IsFirstTimePredicted)
-            return;
-
         if (!Resolve(user, ref artist))
             return;
 
