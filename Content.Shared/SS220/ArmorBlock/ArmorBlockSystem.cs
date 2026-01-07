@@ -1,15 +1,7 @@
-using Content.Shared.Blocking;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Components;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands;
 using Content.Shared.Interaction.Events;
-using Content.Shared.Inventory.Events;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Content.Shared.SS220.ArmorBlock;
 public sealed class ArmorBlockSystem : EntitySystem
