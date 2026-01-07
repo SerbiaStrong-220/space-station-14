@@ -79,6 +79,16 @@ public sealed class OutfitSystem : EntitySystem
             }
         }
 
+        // SS220-experience-update-begin
+        if (startingGear.ExperienceDefinition is { } definitionId)
+        {
+            RemComp<JobBackgroundSublevelAddComponent>(target);
+
+            var skillRoleAddComp = EnsureComp<RoleExperienceAddComponent>(target);
+            skillRoleAddComp.DefinitionId = definitionId;
+        }
+        // SS220-experience-update-end
+
         // See if this starting gear is associated with a job
         var jobs = _prototypeManager.EnumeratePrototypes<JobPrototype>();
         foreach (var job in jobs)
