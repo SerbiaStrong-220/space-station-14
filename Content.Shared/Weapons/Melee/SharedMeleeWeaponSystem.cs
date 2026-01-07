@@ -82,6 +82,8 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
     /// </summary>
     public const float GracePeriod = 0.05f;
 
+    private const float MaxDisarmPercentStaminaDamage = 0.3f; // SS220-add-disarm-stamina-damage-cap
+
     public override void Initialize()
     {
         base.Initialize();
@@ -939,6 +941,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         }
 
         var eventArgs = new DisarmedEvent(target.Value, user, 1 - chance);
+        eventArgs.MaxPercentStaminaDamage = MaxDisarmPercentStaminaDamage; // SS220-add-disarm-stamina-damage-cap
         RaiseLocalEvent(target.Value, ref eventArgs);
 
         // Nothing handled it so abort.

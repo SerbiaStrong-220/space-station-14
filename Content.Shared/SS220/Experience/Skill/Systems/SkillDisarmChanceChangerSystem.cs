@@ -13,7 +13,13 @@ public sealed class DisarmChanceChangerSkillSystem : SkillEntitySystem
     [Dependency] private readonly ExperienceSystem _experience = default!;
 
     private readonly ProtoId<SkillTreePrototype> _affectedSkillTree = "CombatTraining";
+
     private readonly FixedPoint4 _progressForDisarming = 0.03;
+
+    /// <summary>
+    /// This acts as "average" level, so every mob without experience component will have this level
+    /// </summary>
+    private readonly int _baseSkillLevel = 2;
 
     public override void Initialize()
     {
@@ -27,13 +33,24 @@ public sealed class DisarmChanceChangerSkillSystem : SkillEntitySystem
     {
         args.Multiplier *= entity.Comp.DisarmByMultiplier;
 
-        TryChangeStudyingProgress(entity, _affectedSkillTree, _progressForDisarming);
+        if (ValidTargetForProgressing(args.Disarmer, args.Disarmed))
+            TryChangeStudyingProgress(entity, _affectedSkillTree, _progressForDisarming);
     }
 
     private void OnDisarmDisarmerAttempt(Entity<DisarmChanceChangerSkillComponent> entity, ref GetDisarmChanceDisarmedMultiplierEvent args)
     {
         args.Multiplier *= entity.Comp.DisarmedMultiplier;
 
-        TryChangeStudyingProgress(entity, _affectedSkillTree, _progressForDisarming);
+        // swap parameters to match logic of progression
+        if (ValidTargetForProgressing(args.Disarmed, args.Disarmer))
+            TryChangeStudyingProgress(entity, _affectedSkillTree, _progressForDisarming);
+    }
+
+    private bool ValidTargetForProgressing(EntityUid performerUid, EntityUid targetUid)
+    {
+        Experience.TryGetSkillTreeLevel(performerUid, _affectedSkillTree, out var performerLevel);
+        Experience.TryGetSkillTreeLevel(targetUid, _affectedSkillTree, out var targetLevel);
+
+        return (performerLevel ?? _baseSkillLevel) < (targetLevel ?? _baseSkillLevel);
     }
 }

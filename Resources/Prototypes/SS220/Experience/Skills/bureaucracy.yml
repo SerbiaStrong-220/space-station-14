@@ -9,7 +9,6 @@
     skillDescription: bureaucracy-initial-desc
   components:
   - type: WritingSkillIssue
-    changeCaseEach: 2
     shuffleMarkupTags: true
 
 - type: skill
