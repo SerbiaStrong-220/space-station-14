@@ -117,6 +117,20 @@
     description: ghost-role-information-morty-description
   - type: GhostTakeoverAvailable
 
+#SS220 Mappers_Request_1 start
+- type: entity
+  parent: MobPossumPoppy
+  id: MobPossumPoppyGhostRole
+  suffix: Роль
+  components:
+  - type: GhostRole
+    makeSentient: true
+    allowSpeech: true
+    allowMovement: true
+    name: ghost-role-information-poppy-name
+    description: ghost-role-information-poppy-description
+  - type: GhostTakeoverAvailable
+##SS220 Mappers_Request_1 end
 - type: entity
   parent: MobRaccoonMorticia
   id: MobRaccoonMorticiaGhostRole
