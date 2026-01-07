@@ -5,11 +5,8 @@ using Content.Shared.ActionBlocker;
 using Content.Shared.Actions.Events;
 using Content.Shared.Administration.Components;
 using Content.Shared.Administration.Logs;
-<<<<<<< HEAD
 using Content.Shared.SS220.AltBlocking;//SS220 shield rework
-=======
 using Content.Shared.Blocking;
->>>>>>> e16a8587772b7fe20c0b53f76b2840836102ffb7
 using Content.Shared.CombatMode;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Events;

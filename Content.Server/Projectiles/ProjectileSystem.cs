@@ -47,15 +47,9 @@ public sealed class ProjectileSystem : SharedProjectileSystem
         }
 
         //SS220 shield rework begin
-<<<<<<< HEAD
         var blockattemptEv = new ProjectileBlockAttemptEvent(uid, component, false, component.Damage);
         RaiseLocalEvent(target, ref blockattemptEv);
         if (blockattemptEv.CancelledHit)
-=======
-        var blockAttemptEv = new ProjectileBlockAttemptEvent(uid, component, false, component.Damage);
-        RaiseLocalEvent(target, ref blockAttemptEv);
-        if (blockattemptEv.Cancelled)
->>>>>>> e16a8587772b7fe20c0b53f76b2840836102ffb7
         {
             SetShooter(uid, component, target);
             QueueDel(uid);
