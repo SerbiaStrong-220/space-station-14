@@ -213,6 +213,11 @@
   - type: MartialArtist
   - type: MartialArtsTarget
   # SS220-MartialArts-End
+  # SS220-Grabs-Start
+  - type: Grabber
+  - type: Grabbable
+  - type: GrabResistance
+  # SS220-Grabs-End
   - type: Tag
     tags:
     - CanPilot

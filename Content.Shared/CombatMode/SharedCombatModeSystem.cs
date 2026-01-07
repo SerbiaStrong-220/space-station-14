@@ -1,4 +1,5 @@
 using Content.Shared.Actions;
+using Content.Shared.Combat;
 using Content.Shared.Mind;
 using Content.Shared.MouseRotator;
 using Content.Shared.Movement.Components;
@@ -77,7 +78,7 @@ public abstract class SharedCombatModeSystem : EntitySystem
             _actionsSystem.SetToggled(component.CombatToggleActionEntity, component.IsInCombatMode);
 
         // Change mouse rotator comps if flag is set
-        if (!component.ToggleMouseRotator || IsNpc(entity) && !_mind.TryGetMind(entity, out _, out _))
+        if (!CheckMouseRotator(entity, component) || IsNpc(entity) && !_mind.TryGetMind(entity, out _, out _)) // SS220-Grabs | Ability to block mouse rotation externally
             return;
 
         SetMouseRotatorComponents(entity, value);
@@ -96,6 +97,19 @@ public abstract class SharedCombatModeSystem : EntitySystem
             RemComp<NoRotateOnMoveComponent>(uid);
         }
     }
+
+    // SS220-Grabs-Start | Ability to block mouse rotation externally
+    private bool CheckMouseRotator(EntityUid uid, CombatModeComponent component)
+    {
+        if (!component.ToggleMouseRotator)
+            return false;
+
+        var ev = new CheckCombatModeMouseRotatorEvent();
+        RaiseLocalEvent(uid, ev);
+
+        return !ev.Cancelled;
+    }
+    // SS220-Grabs-End
 
     // todo: When we stop making fucking garbage abstract shared components, remove this shit too.
     protected abstract bool IsNpc(EntityUid uid);

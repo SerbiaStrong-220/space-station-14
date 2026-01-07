@@ -1,14 +1,28 @@
 using System.Numerics;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared.SS220.Grab;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class GrabberComponent : Component
 {
-    [DataField]
+    [DataField, AutoNetworkedField]
     public Vector2 GrabOffset = new Vector2(0, -0.5f);
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntityUid? Grabbing;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan GrabDelay = TimeSpan.FromSeconds(5);
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier GrabSound = new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg");
+
+    [DataField, AutoNetworkedField]
+    public Dictionary<GrabStage, float> GrabStagesSpeedModifier = new()
+    {
+        { GrabStage.Passive, 0.70f },
+        // { GrabStage. }
+    };
 }

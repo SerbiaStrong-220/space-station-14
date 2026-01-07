@@ -8,4 +8,5 @@ public enum GrabStage
     Aggressive = 2,
     NeckGrab = 3,
     Chokehold = 4,
+    Last = 4, // if further stages will be added be sure to change the "Last" entry
 }
