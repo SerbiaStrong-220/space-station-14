@@ -83,8 +83,8 @@ public sealed class RottingSystem : SharedRottingSystem
                 Dirty(uid, perishable);
             }
 
-             if (IsRotten(uid) || !IsRotProgressing(uid, perishable))
-                 continue;
+            if (IsRotten(uid) || !IsRotProgressing(uid, perishable))
+                continue;
             //#ss220 rotting temperature check added begin
             //Проверяется температура на поверхности и внутри мяса, если любая из них ниже 0С+0.85f, то гниение не происходит
             float tempToCheck = Atmospherics.T20C;
