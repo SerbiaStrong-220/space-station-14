@@ -1,29 +1,30 @@
-using System.Linq;
-using System.Numerics;
 using Content.Server.Cargo.Systems;
+using Content.Server.SS220.Shuttles.UI;
 using Content.Server.Weapons.Ranged.Components;
 using Content.Shared.Cargo;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.Effects;
+using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.SS220.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Weapons.Reflect;
-using Content.Shared.Damage.Components;
 using Robust.Shared.Audio;
+using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Physics;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-using Robust.Shared.Containers;
-using Content.Shared.SS220.Weapons.Ranged.Events;
-using Content.Server.SS220.Shuttles.UI;
+using System.Linq;
+using System.Numerics;
 
 namespace Content.Server.Weapons.Ranged.Systems;
 
@@ -35,6 +36,7 @@ public sealed partial class GunSystem : SharedGunSystem
     [Dependency] private readonly SharedStaminaSystem _stamina = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!; //SS220 shield rework
     [Dependency] private readonly ShuttleNavInfoSystem _shuttleNavInfo = default!; // SS220 Add projectiles & hitscan on shuttle nav
 
     private const float DamagePitchVariation = 0.05f;
@@ -246,35 +248,29 @@ public sealed partial class GunSystem : SharedGunSystem
                             var hitEntity = lastHit.Value;
                             //SS220 shield rework begin
                             var hitName = ToPrettyString(hitEntity);
-                            var blockEv = new HitScanBlockAttemptEvent(hitscan.Damage);
-                            RaiseLocalEvent(lastHit.Value, blockEv);
-                            if(blockEv.Cancelled)
+                            var blockEv = new HitscanBlockAttemptEvent(hitscan.Damage);
+                            RaiseLocalEvent(lastHit.Value, ref blockEv);
+                            if(blockEv.CancelledHit)
                             {
-                                _color.RaiseEffect(Color.Red, new List<EntityUid>() { lastHit.Value }, Filter.Pvs(lastHit.Value, entityManager: EntityManager));
-                                PlayImpactSound(lastHit.Value, hitscan.Damage, hitscan.Sound, hitscan.ForceSound);
+                                if(blockEv.hitColor != null)
+                                    _color.RaiseEffect((Color)blockEv.hitColor, new List<EntityUid>() { lastHit.Value }, Filter.Pvs(lastHit.Value, entityManager: EntityManager));
+                                _popup.PopupEntity(Loc.GetString("block-shot"), hitEntity);
                                 if (dmg == null) { return; }
-                                if (user != null)
-                                {
-                                    Logs.Add(LogType.HitScanHit,
-                                        $"{ToPrettyString(user.Value):user} hit {ToPrettyString(hitEntity):target} using hitscan and dealt {dmg.GetTotal():damage} damage");
-                                }
-                                else
-                                {
-                                    Logs.Add(LogType.HitScanHit,
-                                        $"{hitName:target} hit by hitscan dealing {dmg.GetTotal():damage} damage");
-                                }
-                                return;
                             }
-                            //SS220 shield rework and
-                            if (hitscan.StaminaDamage > 0f)
-                                _stamina.TakeStaminaDamage(hitEntity, hitscan.StaminaDamage, source: user);
 
-                            //var dmg = hitscan.Damage;
+                            if(!blockEv.CancelledHit)
+                            {
+                                if (hitscan.StaminaDamage > 0f)
+                                    _stamina.TakeStaminaDamage(hitEntity, hitscan.StaminaDamage, source: user);
 
-                            //var hitName = ToPrettyString(hitEntity);
+                                //var dmg = hitscan.Damage; SS220 shield rework
 
-                            if (dmg != null)
-                                dmg = Damageable.TryChangeDamage(hitEntity, dmg * Damageable.UniversalHitscanDamageModifier, origin: user);
+                                //var hitName = ToPrettyString(hitEntity); SS220 shield rework
+
+                                if (dmg != null)
+                                    dmg = Damageable.TryChangeDamage(hitEntity, dmg * Damageable.UniversalHitscanDamageModifier, origin: user);
+                            }
+                            //SS220 shield rework end
 
                             // check null again, as TryChangeDamage returns modified damage values
                             if (dmg != null)

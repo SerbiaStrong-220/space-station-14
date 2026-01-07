@@ -1,13 +1,10 @@
-using Content.Shared.Damage;
-using Content.Shared.Projectiles;
-using Robust.Shared.Serialization;
-
 namespace Content.Shared.SS220.Weapons.Melee.Events;
 
 
-[Serializable, NetSerializable]
-public sealed class MeleeHitBlockAttemptEvent() : EntityEventArgs
+[ByRefEvent]
+public record struct MeleeHitBlockAttemptEvent()
 {
-    public bool Cancelled = false;
+    public bool CancelledHit = false;
     public NetEntity? blocker = null;
+    public Color? hitMarkColor = Color.Red;
 }

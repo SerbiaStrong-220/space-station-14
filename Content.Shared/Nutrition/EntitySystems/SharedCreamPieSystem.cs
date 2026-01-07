@@ -61,7 +61,12 @@ namespace Content.Shared.Nutrition.EntitySystems
         {
             if (!Exists(args.Thrown) || !TryComp(args.Thrown, out CreamPieComponent? creamPie)) return;
 
-            if (TryComp<InstastunResistComponent>(args.Target, out var resistComp) && resistComp.Active && resistComp.CreampieResist) { return; } //SS220 instastun resist
+            //SS220 instastun resist begin
+            var resistEv = new StunAttemptEvent("Creampie");
+            RaiseLocalEvent(uid, ref resistEv);
+            if (resistEv.cancelled)
+                return;
+            //SS220 instastun resist end
 
             SetCreamPied(uid, creamPied, true);
 

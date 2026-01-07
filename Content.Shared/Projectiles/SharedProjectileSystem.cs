@@ -1,18 +1,15 @@
 using System.Numerics;
-using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
-using Content.Shared.Mobs.Components;
 using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
-using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Serialization;
@@ -269,10 +266,13 @@ public record struct ProjectileReflectAttemptEvent(EntityUid ProjUid, Projectile
 }
 
 // SS220 shield rework begin
-[Serializable, NetSerializable]
-public sealed class ProjectileBlockAttemptEvent(EntityUid ProjUid, ProjectileComponent Component, bool Cancelled, DamageSpecifier damage) : EntityEventArgs
+[ByRefEvent]
+public record struct ProjectileBlockAttemptEvent(EntityUid ProjUid, ProjectileComponent Component, bool Cancelled, DamageSpecifier damage)
 {
-    public bool Cancelled = false;
+    public bool CancelledHit = false;
+
+    public Color? hitMarkColor = Color.Red;
+
     public DamageSpecifier? Damage = damage;
 }
 // SS220 shield rework end

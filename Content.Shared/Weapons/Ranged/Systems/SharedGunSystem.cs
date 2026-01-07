@@ -34,8 +34,7 @@ using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Shared.DoAfter;
-using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Blocking;//SS220 shield rework
+using Content.Shared.SS220.AltBlocking;//SS220 shield rework
 using Content.Shared.Standing;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
@@ -256,7 +255,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         // ss220 add block heavy attack and shooting while user is down end
 
         //SS220 shield rework begin
-        if (TryComp<BlockingUserComponent>(user,out var blockComp))
+        if (TryComp<AltBlockingUserComponent>(user,out var blockComp))
         {
             if(blockComp.IsBlocking)
             {
@@ -542,7 +541,7 @@ public abstract partial class SharedGunSystem : EntitySystem
     protected void MuzzleFlash(EntityUid gun, AmmoComponent component, Angle worldAngle, EntityUid? user = null)
     {
         //SS220 shield rework begin
-        if (TryComp<BlockingUserComponent>(user,out var comp))
+        if (TryComp<AltBlockingUserComponent>(user,out var comp))
         {
             if(comp.IsBlocking)
             {

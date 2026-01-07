@@ -5,7 +5,7 @@ using Content.Shared.ActionBlocker;
 using Content.Shared.Actions.Events;
 using Content.Shared.Administration.Components;
 using Content.Shared.Administration.Logs;
-using Content.Shared.Blocking;//SS220 shield rework
+using Content.Shared.SS220.AltBlocking;//SS220 shield rework
 using Content.Shared.CombatMode;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Events;
@@ -213,7 +213,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             return;
 
         //SS220 shield rework begin
-        if (TryComp<BlockingUserComponent>(user, out var comp))
+        if (TryComp<AltBlockingUserComponent>(user, out var comp))
         {
             if (comp.IsBlocking)
             {
@@ -238,7 +238,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             return;
 
         //SS220 shield rework begin
-        if (TryComp<BlockingUserComponent>(user, out var comp))
+        if (TryComp<AltBlockingUserComponent>(user, out var comp))
         {
             if (comp.IsBlocking)
             {
@@ -549,12 +549,14 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         //SS220 shield rework begin
         EntityUid targetEntity = target.Value;
-        if (TryComp<BlockingUserComponent>(target, out var blockcomp))
+        if (TryComp<AltBlockingUserComponent>(target, out var blockcomp))
         {
             var meleeblockEvent = new MeleeHitBlockAttemptEvent();
-            RaiseLocalEvent((EntityUid)target, meleeblockEvent);
-            if (meleeblockEvent.Cancelled && TryGetEntity(meleeblockEvent.blocker, out EntityUid? shield))
+            RaiseLocalEvent((EntityUid)target, ref meleeblockEvent);
+            if (meleeblockEvent.CancelledHit && TryGetEntity(meleeblockEvent.blocker, out EntityUid? shield))
             {
+
+                PopupSystem.PopupEntity(Loc.GetString("block-shot"), targetEntity);
                 targetEntity = (EntityUid)shield;
             }
         }
@@ -711,26 +713,26 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
                 !damageQuery.HasComponent(entity))
                 continue;
 
-            //targets.Add(entity);
+            //targets.Add(entity);//SS220 shield rework
             //SS220 shield rework begin
-            if (TryComp<BlockingUserComponent>(entity, out var blockcomp))
+            if (TryComp<AltBlockingUserComponent>(entity, out var blockcomp))
             {
                 var meleeblockEvent = new MeleeHitBlockAttemptEvent();
-                RaiseLocalEvent(entity, meleeblockEvent);
-                if (meleeblockEvent.Cancelled && TryGetEntity(meleeblockEvent.blocker, out EntityUid? shield))
+                RaiseLocalEvent(entity, ref meleeblockEvent);
+                if (meleeblockEvent.CancelledHit && TryGetEntity(meleeblockEvent.blocker, out EntityUid? shield))
                 {
                     var shield1 = (EntityUid)shield;
                     targets.Add(shield1);
                     AdminLogger.Add(LogType.MeleeHit, LogImpact.High,
                     $"{ToPrettyString(user):actor} melee attacked (heavy) {ToPrettyString(entity):actor}");
                     targetseffectonly.Add(entity);
+                    PopupSystem.PopupEntity(Loc.GetString("block-shot"), entity);
+                    continue;
                 }
-                else
-                {
-                    targets.Add(entity);
-                }
+                targets.Add(entity);
+                continue;
             }
-            else { targets.Add(entity); }
+            targets.Add(entity);
             //SS220 shield rework end
         }
 

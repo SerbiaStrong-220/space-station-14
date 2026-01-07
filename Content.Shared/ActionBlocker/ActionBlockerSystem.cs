@@ -12,7 +12,7 @@ using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee;
 using JetBrains.Annotations;
 using Robust.Shared.Containers;
-using Content.Shared.Blocking;//SS220 shield rework
+using Content.Shared.SS220.AltBlocking;//SS220 shield rework
 
 namespace Content.Shared.ActionBlocker
 {
@@ -202,16 +202,13 @@ namespace Content.Shared.ActionBlocker
             // If target is in a container can we attack
             if (target != null && _container.IsEntityInContainer(target.Value))
             {
-                //return false;
+                //return false; SS220 shield rework
                 //SS220 shield rework begin
-                if (TryComp<BlockingComponent>(target,out var comp))
+                if (TryComp<AltBlockingComponent>(target,out var comp) && comp.User != null)
                 {
-                    if(comp.User==null)
-                    {
-                        return false;
-                    }
+                    return true;
                 }
-                else { return false; }
+                return false;
                 //SS220 shield rework end
             }
 

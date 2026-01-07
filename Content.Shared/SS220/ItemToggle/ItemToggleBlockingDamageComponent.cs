@@ -4,13 +4,12 @@ using Robust.Shared.GameStates;
 namespace Content.Shared.SS220.ItemToggle;
 
 /// <summary>
-/// This is used for changing blocking damage while item not activated
+/// This is used for changing blocking probabilities when blocking item is activated(active block with not activated item is not possible)
 /// </summary>
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState(true)]
 public sealed partial class ItemToggleBlockingDamageComponent : Component
 {
-//SS220 shield rework begin
     [DataField, AutoNetworkedField]
     public bool IsToggled = false;
 
@@ -25,5 +24,4 @@ public sealed partial class ItemToggleBlockingDamageComponent : Component
 
     [DataField, AutoNetworkedField]
     public float BaseMeleeBlockProb = 0f;
-//SS220 shield rework end
 }

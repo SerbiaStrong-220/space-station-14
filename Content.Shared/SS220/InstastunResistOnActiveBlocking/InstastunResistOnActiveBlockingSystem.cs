@@ -1,4 +1,4 @@
-using Content.Shared.Blocking;
+using Content.Shared.SS220.AltBlocking;
 using Content.Shared.SS220.InstastunResist;
 
 namespace Content.Shared.SS220.InstastunResistOnActiveBlocking;
@@ -7,21 +7,26 @@ public sealed partial class InstastunResistOnActiveBlockingSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+
         SubscribeLocalEvent<InstastunResistOnActiveBlockingComponent, ActiveBlockingEvent>(OnActiveBlock);
     }
     public void OnActiveBlock(EntityUid uid, InstastunResistOnActiveBlockingComponent component, ActiveBlockingEvent args)
     {
-        if (!TryComp<BlockingComponent>(uid, out var BlockComp) || !TryComp<BlockingUserComponent>(BlockComp.User, out var userComp)) { return; }
+        if (!TryComp<AltBlockingComponent>(uid, out var BlockComp) || !TryComp<AltBlockingUserComponent>(BlockComp.User, out var userComp)) { return; }
+
         if (args.Active)
         {
-            var resistComp=EnsureComp<InstastunResistComponent>((EntityUid)BlockComp.User);
+            var resistComp = EnsureComp<InstastunResistComponent>((EntityUid)BlockComp.User);
+
             resistComp.Active = true;
-            resistComp.ProjectileResist = component.ProjectileResist;
-            resistComp.CreampieResist = component.CreampieResist;
+            resistComp.ResistedStunTypes = component.ResistedStunTypes;
+
             Dirty((EntityUid)BlockComp.User, resistComp);
             return;
         }
+
         RemComp<InstastunResistComponent>((EntityUid)BlockComp.User);
+
         return;
     }
 }

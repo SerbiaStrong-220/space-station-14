@@ -9,9 +9,9 @@
       path: /Audio/Weapons/ebladeon.ogg
     soundDeactivate:
       path: /Audio/Weapons/ebladeoff.ogg
-  - type: ItemToggleActiveSound
-    activeSound:
-      path: /Audio/Weapons/ebladehum.ogg
+  #- type: ItemToggleActiveSound
+  #  activeSound:
+  #    path: /Audio/Weapons/ebladehum.ogg
   - type: ComponentToggler
     components:
     - type: Sharp
@@ -348,7 +348,7 @@
   description: Syndicate Command Interns thought that having one blade on the energy sword was not enough. This can be stored in pockets.
   components:
   #SS220 shield rework begin
-  - type: Blocking
+  - type: AltBlocking
     rangeBlockProb: 0
     meleeBlockProb: 0
     activeRangeBlockProb: 0.85
@@ -369,7 +369,7 @@
         shader: unshaded
   - type: ArmorBlock
     tresholddict:
-      Piercing: 26
+      Piercing: 29
       Blunt: 30
       Heat: 35
       Slash: 30
@@ -387,8 +387,9 @@
       Airloss: 1000
       Caustic: 1000
   - type: InstastunResistOnActiveBlocking
-    creampieResist: true
-    projectileResist: true
+    resistedStunTypes:
+      Creampie: true
+      Projectile: true
   #SS220 shield rework end
   - type: ItemToggle
     onUse: false # wielding events control it instead

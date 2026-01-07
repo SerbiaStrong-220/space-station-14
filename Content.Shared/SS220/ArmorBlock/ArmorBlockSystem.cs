@@ -1,6 +1,7 @@
 using Content.Shared.Blocking;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
+using Content.Shared.FixedPoint;
 using Content.Shared.Hands;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.Events;
@@ -32,40 +33,15 @@ public sealed class ArmorBlockSystem : EntitySystem
         {
             if(ent.Comp.DurabilityTresholdDict.ContainsKey(type))
             {
-                if(args.OriginalDamage.DamageDict[type] > ent.Comp.DurabilityTresholdDict[type])
-                {
-                    if (resultArmorDamage.DamageDict.ContainsKey(type))
-                    {
-                        resultArmorDamage.DamageDict[type] += args.OriginalDamage.DamageDict[type] - ent.Comp.DurabilityTresholdDict[type];
-                    }
-                    else { resultArmorDamage.DamageDict.Add(type, args.OriginalDamage.DamageDict[type] - ent.Comp.DurabilityTresholdDict[type]); }
-                }
+                CountDifference(resultArmorDamage.DamageDict, args.OriginalDamage.DamageDict[type], ent.Comp.DurabilityTresholdDict[type], type);
             }
             else { resultArmorDamage.DamageDict.Add(type, args.OriginalDamage.DamageDict[type]); }
             if(ent.Comp.TresholdDict.ContainsKey(type))
             {
-                if (ent.Comp.TresholdDict[type] <= args.OriginalDamage.DamageDict[type])
-                {
-                    if (resultDamage.DamageDict.ContainsKey(type))
-                    {
-                        resultDamage.DamageDict[type] += args.OriginalDamage.DamageDict[type] - ent.Comp.TresholdDict[type];
-                    }
-                    else { resultDamage.DamageDict.Add(type, args.OriginalDamage.DamageDict[type] - ent.Comp.TresholdDict[type]); }
-                }
+                CountDifference(resultDamage.DamageDict, args.OriginalDamage.DamageDict[type], ent.Comp.TresholdDict[type], type);
                 if (ent.Comp.TransformSpecifierDict.ContainsKey(type))
                 {
-                    if (ent.Comp.TresholdDict.ContainsKey(ent.Comp.TransformSpecifierDict[type]) && args.OriginalDamage.DamageDict[type] > ent.Comp.TresholdDict[ent.Comp.TransformSpecifierDict[type]])
-                    {
-                        var convertedDamage = new DamageSpecifier();
-                        if (resultDamage.DamageDict.ContainsKey(ent.Comp.TransformSpecifierDict[type]))
-                        {
-                            resultDamage.DamageDict[ent.Comp.TransformSpecifierDict[type]] += (args.OriginalDamage.DamageDict[ent.Comp.TransformSpecifierDict[type]] - ent.Comp.TresholdDict[ent.Comp.TransformSpecifierDict[type]]);
-                        }
-                        else { resultDamage.DamageDict.Add(ent.Comp.TransformSpecifierDict[type], args.OriginalDamage.DamageDict[type] - ent.Comp.TresholdDict[ent.Comp.TransformSpecifierDict[type]]); }
-                    }
-                    var transformedDamage = new DamageSpecifier();
-                    transformedDamage.DamageDict.Add(ent.Comp.TransformSpecifierDict[type], args.OriginalDamage.DamageDict[type]);
-                    _damageable.TryChangeDamage(ent.Owner, transformedDamage);
+                    CountDifference(resultDamage.DamageDict, args.OriginalDamage.DamageDict[type], ent.Comp.TresholdDict[ent.Comp.TransformSpecifierDict[type]], ent.Comp.TransformSpecifierDict[type]);
                 }
                 args.OriginalDamage.DamageDict[type] = 0f;
             }
@@ -82,6 +58,20 @@ public sealed class ArmorBlockSystem : EntitySystem
         _damageable.TryChangeDamage(ent.Comp.Owner, resultDamage);
     }
 
+    public FixedPoint2 CountDifference(Dictionary<string,FixedPoint2> dict,FixedPoint2 damage, FixedPoint2 resist,string type)
+    {
+        if (damage > resist)
+        {
+            if (dict.ContainsKey(type))
+            {
+                dict[type] += damage - resist;
+                return damage - resist;
+            }
+            dict.Add(type, damage - resist);
+            return damage - resist;
+        }
+        return 0;
+    }
     public void OnEquip(Entity<ArmorBlockComponent> ent, ref GotEquippedHandEvent args)
     {
         ent.Comp.Owner = args.User;

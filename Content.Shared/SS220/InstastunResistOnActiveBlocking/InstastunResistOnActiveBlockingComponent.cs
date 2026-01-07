@@ -14,9 +14,5 @@ public sealed partial class InstastunResistOnActiveBlockingComponent: Component
 
     [DataField]
     [AutoNetworkedField]
-    public bool CreampieResist = false;
-
-    [DataField]
-    [AutoNetworkedField]
-    public bool ProjectileResist = false;
+    public Dictionary<string, bool> ResistedStunTypes = new Dictionary<string, bool>();
 }

@@ -32,12 +32,6 @@ public sealed partial class ArmorBlockComponent : Component
     public Dictionary<string, FixedPoint2> DurabilityTresholdDict = new Dictionary<string, FixedPoint2>();
 
     /// <summary>
-    /// Specifies how much damage of a specified type whould be done on conversion
-    /// </summary>
-    //[DataField("transformmodifierdict"), AutoNetworkedField]
-    //public Dictionary<string, FixedPoint2> TransformModifierDict = new Dictionary<string, FixedPoint2>();
-
-    /// <summary>
     /// Specifies what types of damage should be converted to others
     /// </summary>
     [DataField("conversiondict"), AutoNetworkedField]

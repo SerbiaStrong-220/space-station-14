@@ -279,7 +279,6 @@
     icon: { sprite: Objects/Weapons/Melee/shields.rsi, state: teleriot-icon }
     iconOn: { sprite: Objects/Weapons/Melee/shields.rsi, state: teleriot-on }
     useDelay: 2 #SS220 shield rework
-    #useDelay: 5
 
 - type: entity
   parent: BaseMentalAction

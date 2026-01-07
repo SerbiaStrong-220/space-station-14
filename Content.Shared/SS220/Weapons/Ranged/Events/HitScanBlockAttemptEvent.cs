@@ -4,9 +4,10 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.Weapons.Ranged.Events;
 
 
-[Serializable, NetSerializable]
-public sealed class HitScanBlockAttemptEvent(DamageSpecifier? damage) : EntityEventArgs
+[ByRefEvent]
+public record struct HitscanBlockAttemptEvent(DamageSpecifier? damage)
 {
-    public bool Cancelled = false;
+    public bool CancelledHit = false;
     public DamageSpecifier? Damage = damage;
+    public Color? hitColor = Color.Red;
 }

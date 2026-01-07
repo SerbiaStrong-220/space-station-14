@@ -9,7 +9,7 @@ using Content.Shared.Effects;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Throwing;
 using Content.Shared.SS220.Damage;
-using Content.Shared.Weapons.Ranged.Events; //SS220 shield rework
+using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
 using Content.Shared.CombatMode.Pacification;
@@ -46,7 +46,8 @@ public sealed class DamageOtherOnHitSystem : SharedDamageOtherOnHitSystem
 
         //SS220 shield rework begin
         var blockEv = new ThrowableProjectileBlockAttemptEvent(component.Damage);
-        RaiseLocalEvent(args.Target,blockEv);
+
+        RaiseLocalEvent(args.Target, ref blockEv);
         if (blockEv.Cancelled)
         {
             _color.RaiseEffect(Color.Red, [args.Target], Filter.Pvs(args.Target, entityManager: EntityManager));

@@ -1,6 +1,7 @@
 using Content.Shared.Blocking;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.SS220.ChangeAppearanceOnActiveBlocking;
+using Content.Shared.SS220.AltBlocking;
 
 namespace Content.Shared.SS220.ItemToggle;
 
@@ -12,63 +13,54 @@ public sealed class ItemToggleBlockingDamageSystem : EntitySystem
         SubscribeLocalEvent<ItemToggleBlockingDamageComponent, ItemToggledEvent>(OnToggleItem);
     }
 
-    private void OnDecreaseBlock(Entity<ItemToggleBlockingDamageComponent> ent, BlockingComponent blockingComponent)
+    private void OnDecreaseBlock(Entity<ItemToggleBlockingDamageComponent> ent, AltBlockingComponent AltBlockingComponent)
     {
-        // if (ent.Comp.DeactivatedPassiveModifier != null)
-        //     blockingComponent.PassiveBlockDamageModifer = ent.Comp.DeactivatedPassiveModifier;
-        // if (ent.Comp.DeactivatedActiveModifier != null)
-        //     blockingComponent.ActiveBlockDamageModifier = ent.Comp.DeactivatedActiveModifier;
         if (TryComp<ChangeAppearanceOnActiveBlockingComponent>(ent.Owner, out var appearanceComp))
         {
             var ev = new ActiveBlockingEvent(false);
-            RaiseLocalEvent(ent.Owner, ev);
+            RaiseLocalEvent(ent.Owner, ref ev);
         }
         ent.Comp.IsToggled = false;
 
-        blockingComponent.RangeBlockProb = ent.Comp.BaseRangeBlockProb;
-        blockingComponent.MeleeBlockProb = ent.Comp.BaseMeleeBlockProb;
+        AltBlockingComponent.RangeBlockProb = ent.Comp.BaseRangeBlockProb;
+        AltBlockingComponent.MeleeBlockProb = ent.Comp.BaseMeleeBlockProb;
 
         Dirty(ent);
     }
 
     private void OnMapInit(Entity<ItemToggleBlockingDamageComponent> ent, ref MapInitEvent args)
     {
-        if (!TryComp<BlockingComponent>(ent.Owner, out var blockingComponent))
+        if (!TryComp<AltBlockingComponent>(ent.Owner, out var AltBlockingComponent))
         {
             return;
         }
-        OnDecreaseBlock(ent, blockingComponent);
+        OnDecreaseBlock(ent, AltBlockingComponent);
     }
 
     private void OnToggleItem(Entity<ItemToggleBlockingDamageComponent> ent, ref ItemToggledEvent args)
     {
-        if (!TryComp<BlockingComponent>(ent.Owner, out var blockingComponent))
+        if (!TryComp<AltBlockingComponent>(ent.Owner, out var AltBlockingComponent))
             return;
-        if (!TryComp<BlockingUserComponent>(blockingComponent.User, out var userComp))
+
+        if (!TryComp<AltBlockingUserComponent>(AltBlockingComponent.User, out var userComp))
             return;
 
 
         if (args.Activated)
         {
-            //if (ent.Comp.OriginalPassiveModifier != null)
-            //    blockingComponent.PassiveBlockDamageModifer = ent.Comp.OriginalPassiveModifier;
-            //if (ent.Comp.OriginalActiveModifier != null)
-            //    blockingComponent.ActiveBlockDamageModifier = ent.Comp.OriginalActiveModifier;
             ent.Comp.IsToggled = true;
 
-            blockingComponent.RangeBlockProb = ent.Comp.ToggledRangeBlockProb;
-            blockingComponent.MeleeBlockProb = ent.Comp.ToggledMeleeBlockProb;
+            AltBlockingComponent.RangeBlockProb = ent.Comp.ToggledRangeBlockProb;
+            AltBlockingComponent.MeleeBlockProb = ent.Comp.ToggledMeleeBlockProb;
 
             Dirty(ent);
             if (TryComp<ChangeAppearanceOnActiveBlockingComponent>(ent.Owner, out var appearanceComp) && userComp.IsBlocking)
             {
                 var ev = new ActiveBlockingEvent(true);
-                RaiseLocalEvent(ent.Owner, ev);
+                RaiseLocalEvent(ent.Owner,ref ev);
             }
+            return;
         }
-        else
-        {
-            OnDecreaseBlock(ent, blockingComponent);
-        }
+        OnDecreaseBlock(ent, AltBlockingComponent);
     }
 }

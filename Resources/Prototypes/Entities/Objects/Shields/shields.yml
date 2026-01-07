@@ -12,7 +12,7 @@
       sprite: Objects/Weapons/Melee/shields.rsi
       size: Ginormous
       heldPrefix: riot
-    - type: Blocking
+    - type: AltBlocking
       #passiveBlockModifier:
       #  coefficients:
       #    Blunt: 0.9
@@ -32,7 +32,8 @@
       #    Heat: 1
     #SS220 shield rework begin
     - type: InstastunResistOnActiveBlocking
-      creampieResist: true
+      resistedStunTypes:
+        Creampie: true
     - type: ArmorBlock
       tresholddict:
           Radiation: 1000
@@ -87,7 +88,7 @@
   components:
     - type: StaticPrice
       price: 90
-    - type: Blocking
+    - type: AltBlocking
       #passiveBlockModifier:
       #  coefficients:
       #    Blunt: 0.7
@@ -128,7 +129,7 @@
       state: riot_laser-icon
     - type: Item
       heldPrefix: riot_laser
-    - type: Blocking
+    - type: AltBlocking
       #passiveBlockModifier:
       #  coefficients:
       #    Heat: 0.7
@@ -166,7 +167,7 @@
       state: riot_bullet-icon
     - type: Item
       heldPrefix: riot_bullet
-    - type: Blocking
+    - type: AltBlocking
       #passiveBlockModifier:
       #  coefficients:
       #    Piercing: 0.7
@@ -210,7 +211,7 @@
       state: buckler-icon
     - type: Item
       heldPrefix: buckler
-    - type: Blocking
+    - type: AltBlocking
       #passiveBlockModifier:
       #  coefficients:
       #    Blunt: 0.95
@@ -281,7 +282,7 @@
       state: cardshield-icon
     - type: Item
       heldPrefix: cardshield
-    - type: Blocking
+    - type: AltBlocking
       #passiveBlockModifier:
       #  coefficients:
       #    Blunt: 1
@@ -353,7 +354,7 @@
       state: makeshift-icon
     - type: Item
       heldPrefix: metal
-    - type: Blocking
+    - type: AltBlocking
       #passiveBlockModifier:
       #  coefficients:
       #    Blunt: 0.95
@@ -429,7 +430,7 @@
     - type: Item
       sprite: Objects/Weapons/Melee/web-shield.rsi
       heldPrefix: icon
-    - type: Blocking
+    - type: AltBlocking
       #passiveBlockModifier:
       #  coefficients:
       #    Blunt: 0.95
@@ -501,7 +502,7 @@
       state: ratvarian-icon
     - type: Item
       heldPrefix: ratvarian
-    - type: Blocking
+    - type: AltBlocking
       #passiveBlockModifier:
       #  coefficients:
       #    Blunt: 0.8
@@ -551,7 +552,7 @@
       reflectProb: 0.95
       reflects:
         - Energy
-    #- type: Blocking #Mirror shield reflects heat/laser, but is relatively weak to everything else.
+    #- type: AltBlocking #Mirror shield reflects heat/laser, but is relatively weak to everything else.
     #  passiveBlockModifier:
     #    coefficients:
     #      Blunt: 1.2
@@ -567,7 +568,7 @@
     #    flatReductions:
     #      Heat: 1
     #SS220 shield rework begin
-    - type: Blocking
+    - type: AltBlocking
       rangeBlockProb: 0.50
       meleeBlockProb: 0.35
       activeRangeBlockProb: 0.65
@@ -662,7 +663,7 @@
     #  reflectProb: 0.95
     #  reflects:
     #    - Energy
-    - type: Blocking
+    - type: AltBlocking
       #passiveBlockModifier:
       #  coefficients:
       #    Blunt: 1.0
@@ -684,7 +685,7 @@
       activeRangeBlockProb: 0.60
       activeMeleeBlockProb: 0.75
     #SS220 shield rework end
-    #ss220 shield blocking damage fix start
+    #ss220 shield AltBlocking damage fix start
     - type: ItemToggleBlockingDamage
       #deactivatedActiveModifier:
       #  coefficients:
@@ -702,12 +703,12 @@
       #deactivatedPassiveFraction: 0
       toggledRangeBlockProb: 0.50
       toggledMeleeBlockProb: 0.65 #No more stunbatons
-    #ss220 shield blocking damage fix end
+    #ss220 shield AltBlocking damage fix end
     - type: Appearance
     #SS220 shield rework begin
     - type: ArmorBlock
       tresholddict:
-        Piercing: 26
+        Piercing: 29
         Blunt: 30
         Heat: 26
         Slash: 30
@@ -803,7 +804,7 @@
   id: TelescopicShield
   description: An advanced riot shield made of lightweight materials that collapses for easy storage.
   components:
-    - type: Blocking
+    - type: AltBlocking
     #SS220 shield rework begin
       rangeBlockProb: 0
       meleeBlockProb: 0
