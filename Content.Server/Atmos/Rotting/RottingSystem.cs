@@ -45,7 +45,18 @@ public sealed class RottingSystem : SharedRottingSystem
     {
         if (args.Handled)
             return;
-        args.Handled = component.CurrentTemperature < Atmospherics.T0C + 0.85f;
+        //#ss220 Consider internal temperature for rotting begin
+        float tempToCheck = Atmospherics.T20C;
+        if (TryComp<TemperatureComponent>(uid, out var tempComp))
+        {
+            tempToCheck = tempComp.CurrentTemperature;
+            if (TryComp<InternalTemperatureComponent>(uid, out var internalTemp))
+            {
+                    tempToCheck = MathF.Min(tempToCheck, internalTemp.Temperature);
+            }
+        }
+        args.Handled = tempToCheck < Atmospherics.T0C + 0.85f;
+        //#ss220 Consider internal temperature for rotting end
     }
 
     /// <summary>
@@ -84,24 +95,7 @@ public sealed class RottingSystem : SharedRottingSystem
             }
 
             if (IsRotten(uid) || !IsRotProgressing(uid, perishable))
-                continue;
-            //#ss220 rotting temperature check added begin
-            //Проверяется температура на поверхности и внутри мяса, если любая из них ниже 0С+0.85f, то гниение не происходит
-            float tempToCheck = Atmospherics.T20C;
-            if (TryComp<TemperatureComponent>(uid, out var tempComp))
-            {
-                tempToCheck = tempComp.CurrentTemperature;
-                if (TryComp<InternalTemperatureComponent>(uid, out var internalTemp))
-                {
-                        tempToCheck = MathF.Min(tempToCheck, internalTemp.Temperature);
-                }
-            }
-
-            if (tempToCheck < Atmospherics.T0C + 0.85f)
-            {
-                continue;
-            }
-            //#ss220 rotting temperature check added end    
+                continue; 
 
             perishable.RotAccumulator += perishable.PerishUpdateRate * GetRotRate(uid);
             if (perishable.RotAccumulator >= perishable.RotAfter)
