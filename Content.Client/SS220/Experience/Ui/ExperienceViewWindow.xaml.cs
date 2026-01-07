@@ -194,7 +194,7 @@ public sealed partial class ExperienceViewWindow : FancyWindow
                     continue;
 
                 treeContainer.HaveFreePoints = canChange;
-                treeContainer.SubdataContainer.Visible = canChange;
+                treeContainer.SubdataContainer.Visible = treeContainer.OpenedByUser || canChange;
 
                 // god forgive me...
                 if (treeContainer.OnAddSublevelPoint is null)

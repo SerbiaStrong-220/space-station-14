@@ -70,8 +70,9 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
             Update();
         }
     }
-
     private int _spendPoints;
+
+    public bool OpenedByUser { get; private set; } = false;
 
     public ExperienceTreeContainer()
     {
@@ -84,7 +85,10 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
         Margin = ExperienceUiStyleDefinitions.BaseTabLikeThickness;
 
         ShowSubLevelsButton.OnPressed += (_) =>
+        {
+            OpenedByUser = !SubdataContainer.Visible;
             SubdataContainer.Visible = !SubdataContainer.Visible;
+        };
 
         // TODO visuals
         AddSublevelPoint.OnPressed += (args) =>
