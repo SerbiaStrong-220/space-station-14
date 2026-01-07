@@ -41,7 +41,7 @@
     durationScale: 1
   - type: InjectorUseOnDoAfterSkill
     durationScale: 1
-    failureChance: 0.2
+    failureChance: 0.3
     failurePopup: injector-use-failure
     damageOnFailure:
       types:
