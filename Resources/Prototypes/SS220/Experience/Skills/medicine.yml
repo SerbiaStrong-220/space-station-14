@@ -12,8 +12,8 @@
     healthAnalyzerInfoShuffleChance: 0.6
     defibrillatorSelfDamageChance: 0.6
   - type: MedicineDoAfterSkill
-    durationScale: 1.4
-    failureChance: 0.1
+    durationScale: 1.5
+    failureChance: 0.35
     failurePopup: healing-item-use-failure
   - type: InjectorUseOnDoAfterSkill
     durationScale: 1.5
@@ -35,12 +35,12 @@
     skillDescription: medicine-base-desc
   components:
   - type: MedicineMachineUseSkillIssue
-    healthAnalyzerInfoShuffleChance: 0.2
-    defibrillatorSelfDamageChance: 0.2
+    healthAnalyzerInfoShuffleChance: 0.1
+    defibrillatorSelfDamageChance: 0.1
   - type: MedicineDoAfterSkill
     durationScale: 1
   - type: InjectorUseOnDoAfterSkill
-    durationScale: 1.2
+    durationScale: 1
     failureChance: 0.2
     failurePopup: injector-use-failure
     damageOnFailure:
@@ -59,9 +59,9 @@
     skillDescription: medicine-trained-desc
   components:
   - type: MedicineDoAfterSkill
-    durationScale: 1
+    durationScale: 0.9
   - type: InjectorUseOnDoAfterSkill
-    durationScale: 1
+    durationScale: 0.9
   removeComponents:
   - type: MedicineMachineUseSkillIssue
 

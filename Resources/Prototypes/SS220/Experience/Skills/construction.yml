@@ -30,7 +30,7 @@
   components:
   - type: ConstructionDoAfterSkill
     durationScale: 1.2
-    failureChance: 0.4
+    failureChance: 0.3
     failurePopup: construction-fail-with-reinforced-material
     complexMaterials:
     - ReinforcedGlass

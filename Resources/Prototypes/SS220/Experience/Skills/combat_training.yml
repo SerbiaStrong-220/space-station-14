@@ -10,7 +10,7 @@
   components:
   - type: DisarmChanceChangerSkill
     disarmByMultiplier: 0.75
-    disarmedMultiplier: 1.5
+    disarmedMultiplier: 1.25
 
 - type: skill
   id: CombatTrainingBase
