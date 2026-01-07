@@ -95,7 +95,7 @@ public sealed class RottingSystem : SharedRottingSystem
             }
 
             if (IsRotten(uid) || !IsRotProgressing(uid, perishable))
-                continue; 
+                continue;
 
             perishable.RotAccumulator += perishable.PerishUpdateRate * GetRotRate(uid);
             if (perishable.RotAccumulator >= perishable.RotAfter)
