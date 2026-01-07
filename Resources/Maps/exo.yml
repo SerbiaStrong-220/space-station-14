@@ -97893,34 +97893,6 @@ entities:
       rot: -0.3490658503988659 rad
       pos: 91.61151,-82.48495
       parent: 2
-- proto: RiotShield
-  entities:
-  - uid: 13842
-    components:
-    - type: Transform
-      pos: 68.51489,-32.324493
-      parent: 2
-    - type: Blocking
-      blockingToggleActionEntity: 6618
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 6618
-  - uid: 13901
-    components:
-    - type: Transform
-      pos: 68.75447,-32.376614
-      parent: 2
-    - type: Blocking
-      blockingToggleActionEntity: 6619
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 6619
 - proto: RobocopCircuitBoard
   entities:
   - uid: 18624
