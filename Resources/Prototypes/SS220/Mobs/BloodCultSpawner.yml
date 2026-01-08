@@ -40,7 +40,5 @@
       rootTask:
         task: SimpleHumanoidHostileCompound
     - type: CannotBeConsumed #Dark Reaper consume fix
-    #SS220 Completely prevent mapped mobs from falling asleep start
     - type: SSDIndicator
       disableAutoSleep: true
-    #SS220 Completely prevent mapped mobs from falling asleep end
