@@ -63,7 +63,7 @@ public sealed class SSDIndicatorSystem : EntitySystem
     {
         if (!_icSsdSleep || !component.IsSSD)
             return;
-            
+
         component.FallAsleepTime = _timing.CurTime + TimeSpan.FromSeconds(_icSsdSleepTime);
         component.NextUpdate = _timing.CurTime + component.UpdateInterval;
         Dirty(uid, component);
