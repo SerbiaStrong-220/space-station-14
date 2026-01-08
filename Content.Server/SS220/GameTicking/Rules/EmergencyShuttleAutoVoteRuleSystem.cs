@@ -62,20 +62,25 @@ public sealed class EmergencyShuttleAutoVoteRuleSystem : GameRuleSystem<Emergenc
         MakeEmergencyShuttleVote(component);
     }
 
+    private float GetRequiredEvacVoteRatio(int voteCount)
+{
+    return voteCount switch
+    {
+        1 => 0.70f,
+        2 => 0.60f,
+        _ => 0.50f
+    };
+}
+
     private void MakeEmergencyShuttleVote(EmergencyShuttleAutoVoteRuleComponent component)
     {
         component.EvacVoteCount++;
         var voteIndex = component.EvacVoteCount;
-        
+    
         component.LastEvacVoteTime = RoundTime;
 
-        float requiredRatio = component.EvacVoteCount switch
-        {
-        1 => 0.70f,
-        2 => 0.60f,
-        _ => 0.50f
-        };
-
+        float requiredRatio = GetRequiredEvacVoteRatio(component.EvacVoteCount);
+        
         var voteOptions = new VoteOptions()
         {
             Title = Loc.GetString("ui-vote-auto-emergency-shuttle-title"),
