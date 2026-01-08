@@ -532,7 +532,6 @@
   - type: ItemBorgModule
     hands:
     - item: AppraisalTool
-    - item: BorgMailBag #SS220-BorgMailBag
     - item: Pen
     - item: HandLabeler
     - item: RubberStampApproved
