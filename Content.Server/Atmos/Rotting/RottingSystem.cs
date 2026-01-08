@@ -55,6 +55,7 @@ public sealed class RottingSystem : SharedRottingSystem
                     tempToCheck = MathF.Min(tempToCheck, internalTemp.Temperature);
             }
         }
+        
         args.Handled = tempToCheck < Atmospherics.T0C + 0.85f;
         //#ss220 Consider internal temperature for rotting end
     }
