@@ -3,7 +3,7 @@
 - type: gameMap
   id: RiftEventMap
   mapName: 'NSS Eclipse'
-  mapPath: /Maps/SS220/EventMaps/ebentE6ILLA.yml
+  mapPath: /Maps/SS220/EventMaps/RiftEventMap.yml
   minPlayers: 0 # decreased for 2 times by normal limit
   stations:
     Eclipse:
