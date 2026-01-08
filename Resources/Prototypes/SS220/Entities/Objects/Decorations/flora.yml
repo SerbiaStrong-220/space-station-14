@@ -8,7 +8,6 @@
     sprite: Decals/Flora/flora_bushes.rsi
     noRot: true
     offset: 0, 0.15
-    drawDepth: 1
     renderLayer: Mobs
     drawdepth: Overdoors
   - type: Physics
