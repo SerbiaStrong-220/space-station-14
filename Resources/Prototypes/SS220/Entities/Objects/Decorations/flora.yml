@@ -114,6 +114,17 @@
     noRot: true
     renderLayer: Mobs
     drawdepth: Overdoors
+  - type: Physics
+    bodyType: Dynamic
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.1
+        density: 190
+        mask:
+        - HighImpassable
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Wood
@@ -234,7 +245,7 @@
 - type: entity
   parent: BaseBush
   id: FloraBushL
-  name: An evergreen shrub
+  name: An evergreen shrub.
   description: It looks very much like an undergrown hedge.
   components:
   - type: Sprite
