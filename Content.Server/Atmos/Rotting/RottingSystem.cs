@@ -45,6 +45,7 @@ public sealed class RottingSystem : SharedRottingSystem
     {
         if (args.Handled)
             return;
+
         //#ss220 Consider internal temperature for rotting begin
         float tempToCheck = Atmospherics.T20C;
         if (TryComp<TemperatureComponent>(uid, out var tempComp))
