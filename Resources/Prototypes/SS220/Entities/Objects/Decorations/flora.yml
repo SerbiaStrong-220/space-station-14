@@ -18,7 +18,7 @@
         shape:
           !type:PhysShapeAabb
           bounds: "-0.01,-0.01,0.01,0.01"
-        density: 1000
+        density: 100
         layer:
         - WallLayer
   - type: Damageable
@@ -70,9 +70,52 @@
         shape:
           !type:PhysShapeAabb
           bounds: "-0.01,-0.01,0.01,0.01"
-        density: 500
+        density: 100
         layer:
         - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/chop.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: BaseBushV1
+  name: bush
+  description: A generic bush.
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    noRot: true
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Wood
@@ -139,7 +182,7 @@
         bushh3: ""
 
 - type: entity
-  parent: BaseBush
+  parent: BaseBushV1
   id: FloraBushI
   name: Grass and weeds
   description: Nothing unusual.
