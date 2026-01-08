@@ -202,7 +202,7 @@
 - type: entity
   parent: BaseBush
   id: FloraBushJ
-  name: Fern.
+  name: Fern
   description: It is usually cooked until the bud has opened.
   components:
   - type: Sprite
@@ -219,7 +219,7 @@
 - type: entity
   parent: BaseBush
   id: FloraBushK
-  name: Bansai.
+  name: Bansai
   description: A beautiful tree.
   components:
   - type: Sprite
@@ -236,7 +236,7 @@
 - type: entity
   parent: BaseBush
   id: FloraBushL
-  name: An evergreen shrub.
+  name: An evergreen shrub
   description: It looks very much like an undergrown hedge.
   components:
   - type: Sprite
