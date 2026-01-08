@@ -154,21 +154,25 @@ public sealed class TrapSystem : EntitySystem
             return false;
         }
 
-        // TO PREVENT ACTIVATE TRAP IN THE HANDS
-        var parent = _transformSystem.GetParentUid(ent);
-        if (parent.IsValid() && HasComp<HandsComponent>(parent) || _container.IsEntityInContainer(parent) || _container.IsEntityInContainer(ent))
+        // arming in container cause crashes
+        if (_container.IsEntityInContainer(ent))
+        {
+            if (user != null)
+                _popup.PopupClient(Loc.GetString("trap-component-in-container"), user.Value, user.Value);
+
             return false;
+        }
 
         var ev = new TrapArmAttemptEvent(user);
         RaiseLocalEvent(ent, ref ev);
+
         return !ev.Cancelled;
     }
 
     private bool CanDefuseTrap(Entity<TrapComponent> ent, EntityUid? user)
     {
-        // TO PREVENT DEACTIVATE TRAP IN THE HANDS, but... how..., just for sure
-        var parent = _transformSystem.GetParentUid(ent);
-        if (parent.IsValid() && HasComp<HandsComponent>(parent) || _container.IsEntityInContainer(parent) || _container.IsEntityInContainer(ent))
+        // disarming in container can cause crash
+        if (_container.IsEntityInContainer(ent))
             return false;
 
         var ev = new TrapDefuseAttemptEvent(user);
