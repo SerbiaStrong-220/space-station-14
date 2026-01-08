@@ -114,8 +114,6 @@
     noRot: true
     renderLayer: Mobs
     drawdepth: Overdoors
-  - type: Physics
-    bodyType: Static
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Wood
