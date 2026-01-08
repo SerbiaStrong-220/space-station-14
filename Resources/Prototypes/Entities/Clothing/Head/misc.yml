@@ -166,7 +166,7 @@
     - ShrineMaidenWig #SS220 tohoUpdate
   - type: HideLayerClothing
     slots:
-    - Hair
+   #- Hair #SS220 Fixed the wig overlapping with hair
     - HeadTop
     - HeadSide
 
