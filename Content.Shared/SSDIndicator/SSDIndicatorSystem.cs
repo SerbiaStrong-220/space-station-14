@@ -63,10 +63,7 @@ public sealed class SSDIndicatorSystem : EntitySystem
     {
         if (!_icSsdSleep || !component.IsSSD)
             return;
-        //SS220 Completely prevent mapped mobs from falling asleep start
-        //component.FallAsleepTime = _timing.CurTime + TimeSpan.FromSeconds(_icSsdSleepTime);
-        component.FallAsleepTime = TimeSpan.FromDays(365);
-        //SS220 Completely prevent mapped mobs from falling asleep end
+        component.FallAsleepTime = _timing.CurTime + TimeSpan.FromSeconds(_icSsdSleepTime);
         component.NextUpdate = _timing.CurTime + component.UpdateInterval;
         Dirty(uid, component);
     }
@@ -87,7 +84,10 @@ public sealed class SSDIndicatorSystem : EntitySystem
             if (!ssd.IsSSD
                 || ssd.NextUpdate > curTime
                 || ssd.FallAsleepTime > curTime
-                || TerminatingOrDeleted(uid))
+                || TerminatingOrDeleted(uid)
+                //SS220 Completely prevent mapped mobs from falling asleep start
+                || ssd.DisableAutoSleep)
+                //SS220 Completely prevent mapped mobs from falling asleep end
                 continue;
 
             _statusEffects.TryUpdateStatusEffectDuration(uid, StatusEffectSSDSleeping);
