@@ -63,14 +63,14 @@ public sealed class EmergencyShuttleAutoVoteRuleSystem : GameRuleSystem<Emergenc
     }
 
     private float GetRequiredEvacVoteRatio(int voteCount)
-{
-    return voteCount switch
     {
-        1 => 0.70f,
-        2 => 0.60f,
-        _ => 0.50f
-    };
-}
+        return voteCount switch
+        {
+            1 => 0.70f,
+            2 => 0.60f,
+            _ => 0.50f
+        };
+    }
 
     private void MakeEmergencyShuttleVote(EmergencyShuttleAutoVoteRuleComponent component)
     {
