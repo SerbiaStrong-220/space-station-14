@@ -28,6 +28,7 @@ public sealed class GrillableSystem : EntitySystem
     {
         if (args.Handled)
             return;
+            
         args.Handled = ent.Comp.IsCooking;
     }
 
