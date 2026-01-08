@@ -98,7 +98,7 @@ public sealed class EmergencyShuttleAutoVoteRuleSystem : GameRuleSystem<Emergenc
 
             var callEvac = total > 0 && (float)votesYes / total >= requiredRatio;
 
-            _adminLog.Add(LogType.Vote, LogImpact.Medium, $"Auto call emergency shuttle vote #{component.EvacVoteCount} finished, result is {callEvac}");
+            _adminLog.Add(LogType.Vote, LogImpact.Medium, $"Auto call emergency shuttle vote number {component.EvacVoteCount} finished, result is {callEvac}");
 
             VoteTimeResult.WithLabels(callEvac.ToString()).Observe(RoundTime.TotalHours);
 
