@@ -58,13 +58,13 @@
     table: !type:GroupSelector
       children:
       - !type:NestedSelector
-        tableId: LowTierResourceMinerSpawner
+        tableId: LowTierResourceMinerTable
         weight: 6
       - !type:NestedSelector
-        tableId: MediumTierResourceMinerSpawner
+        tableId: MediumTierResourceMinerTable
         weight: 4
       - !type:NestedSelector
-        tableId: HighTierResourceMinerSpawner
+        tableId: HighTierResourceMinerTable
         weight: 2
 
 - type: entity
@@ -82,8 +82,8 @@
     table: !type:GroupSelector
       children:
       - !type:NestedSelector
-        tableId: LowTierResourceMinerSpawner
+        tableId: LowTierResourceMinerTable
       - !type:NestedSelector
-        tableId: MediumTierResourceMinerSpawner
+        tableId: MediumTierResourceMinerTable
       - !type:NestedSelector
-        tableId: HighTierResourceMinerSpawner
+        tableId: HighTierResourceMinerTable
