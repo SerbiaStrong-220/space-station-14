@@ -57,6 +57,8 @@
     - type: GridSpawn
       groups:
         trade: !type:GridSpawnGroup
+          minimumDistance: 100 # SS220 make more space in space
+          maximumDistance: 150 # SS220 make more space in space
           addComponents:
             - type: ProtectedGrid
             - type: TradeStation
@@ -69,11 +71,11 @@
         ruins: !type:GridSpawnGroup
           hide: false #SS2200 IFF and Name Hide Reveal
           nameGrid: false #SS2200 IFF and Name Hide Reveal
-          minCount: 2
-          maxCount: 3 # SS2200 Counter Ruins Update
+          minCount: 4 # SS220-counter-ruin-rebalance
+          maxCount: 8 # SS220-counter-ruin-rebalance
           stationGrid: false
-          minimumDistance: 400 # SS220 Ruins distance
-          maximumDistance: 650 # SS220 Ruins distance
+          minimumDistance: 300 # SS220 Ruins distance
+          maximumDistance: 600 # SS220 Ruins distance
           paths:
           # - /Maps/Ruins/chunked_tcomms.yml # SS220 Removed with Ruins Update (balance Tweak)
           - /Maps/Ruins/abandoned_outpost.yml
@@ -98,6 +100,9 @@
           - /Maps/SS220/Ruins/Prison_SS220.yml
           - /Maps/SS220/Ruins/WarshuttleWreck_SS220.yml
           # SS220 Ruins Update Map End
+          addComponents:
+          - type: Shuttle
+            bodyModifier: 2
         wrecks: !type:DungeonSpawnGroup
           minimumDistance: 150
           maximumDistance: 300
