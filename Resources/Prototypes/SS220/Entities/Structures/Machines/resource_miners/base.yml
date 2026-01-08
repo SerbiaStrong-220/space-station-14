@@ -30,7 +30,7 @@
     sound:
       path: /Audio/Ambience/Objects/periodic_beep.ogg
       params:
-        variantion: 1.2
+        variation: 1.2
   - type: PointLight
     radius: 5
     energy: 3
