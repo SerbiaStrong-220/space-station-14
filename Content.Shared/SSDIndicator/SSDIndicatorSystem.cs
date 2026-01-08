@@ -85,9 +85,7 @@ public sealed class SSDIndicatorSystem : EntitySystem
                 || ssd.NextUpdate > curTime
                 || ssd.FallAsleepTime > curTime
                 || TerminatingOrDeleted(uid)
-                //SS220 Completely prevent mapped mobs from falling asleep start
-                || ssd.DisableAutoSleep)
-                //SS220 Completely prevent mapped mobs from falling asleep end
+                || ssd.DisableAutoSleep) //SS220 Completely prevent mapped mobs from falling asleep
                 continue;
 
             _statusEffects.TryUpdateStatusEffectDuration(uid, StatusEffectSSDSleeping);
