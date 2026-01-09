@@ -46,16 +46,6 @@
       path: /Audio/Effects/unwrap.ogg
 
 - type: entity
-  id: CultYoggCocoonHorn
-  parent: [CultYoggCocoonBase, BaseItem]
-  suffix: Horn
-  components:
-  - type: CultYoggCocoon
-    item: Spitballer
-    sound:
-      path: /Audio/Effects/unwrap.ogg
-
-- type: entity
   id: CultYoggCocoonClaw
   parent: [CultYoggCocoonBase, BaseItem]
   suffix: Claw

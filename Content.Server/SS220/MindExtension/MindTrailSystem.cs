@@ -158,8 +158,11 @@ public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
         //When visiting, the MindConatainer may remain, as may the Mind.
         //It's necessary to check whether this Mind is your own.
         //If the Mind isn't your own, then the body is occupied.
-        if (TryComp<MindContainerComponent>(target, out var mindContainer) && mindContainer.Mind is not null)
-            if (TryComp<MindComponent>(mindContainer.Mind, out var mind) && mind.UserId != session)
+        if (TryComp<MindContainerComponent>(target, out var mindContainer)
+            && mindContainer.Mind is not null)
+            if (TryComp<MindComponent>(mindContainer.Mind, out var mind)
+                && mind.UserId is not null
+                && mind.UserId != session)
                 return BodyStateToEnter.Engaged;
 
         if (mindExtension.Trail.TryGetValue(GetNetEntity(target), out var metaData))
