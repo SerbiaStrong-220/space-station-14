@@ -40,3 +40,5 @@
       rootTask:
         task: SimpleHumanoidHostileCompound
     - type: CannotBeConsumed #Dark Reaper consume fix
+    - type: SSDIndicator
+      disableAutoSleep: true
