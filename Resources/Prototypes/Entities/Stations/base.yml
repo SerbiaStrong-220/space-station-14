@@ -100,7 +100,6 @@
           - /Maps/SS220/Ruins/Prison_SS220.yml
           - /Maps/SS220/Ruins/WarshuttleWreck_SS220.yml
           - /Maps/SS220/Ruins/Warehouse_SS220.yml
-          - /Maps/SS220/Ruins/GasStation_SS220.yml
           - /Maps/SS220/Ruins/Market_SS220.yml
           - /Maps/SS220/Ruins/Scrapyard_SS220.yml
           - /Maps/SS220/Ruins/TradeCenter_SS220.yml
@@ -124,6 +123,7 @@
           - /Maps/SS220/Ruins/Prison_SS220.yml
           - /Maps/SS220/Ruins/BDDarkForest_SS220.yml
           - /Maps/SS220/Ruins/BDGrass_SS220.yml
+          - /Maps/SS220/Ruins/GasStation_SS220.yml
           addComponents:
           - type: Shuttle
             bodyModifier: 2
