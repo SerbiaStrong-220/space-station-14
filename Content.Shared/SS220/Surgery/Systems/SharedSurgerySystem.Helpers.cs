@@ -3,12 +3,15 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.SS220.Surgery.Components;
 using Content.Shared.SS220.Surgery.Graph;
+using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Surgery.Systems;
 
 public abstract partial class SharedSurgerySystem
 {
+    [Dependency] private readonly SharedContainerSystem _sharedContainer = default!;
+
     private readonly LocId _cantStartUndefinedSurgery = "cant-start-surgery-while-on-surgery";
     private readonly LocId _cantStartSurgeryWhileOneOngoing = "cant-start-surgery-while-on-surgery";
 
@@ -32,10 +35,19 @@ public abstract partial class SharedSurgerySystem
 
         foreach (var requirement in surgeryGraph.Requirements)
         {
-            if (requirement.SatisfiesRequirements(performer, target, used, EntityManager))
+            var requirementTarget = requirement.Subject switch
+            {
+                SurgeryGraphRequirementSubject.Target => target,
+                SurgeryGraphRequirementSubject.Performer => performer,
+                SurgeryGraphRequirementSubject.Used => used,
+                SurgeryGraphRequirementSubject.Container => target is null ? null : Transform(target.Value).ParentUid,
+                _ => target
+            };
+
+            if (requirement.SatisfiesRequirements(requirementTarget, EntityManager))
                 continue;
 
-            reason = requirement.RequirementFailureReason(performer, target, used, EntityManager);
+            reason = requirement.RequirementFailureReason(requirementTarget, EntityManager);
             return false;
         }
 

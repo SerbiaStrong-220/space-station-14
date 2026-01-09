@@ -15,7 +15,7 @@ public sealed partial class SurgeryPuppetBox : Control
     /// <summary>
     /// First argument is current part, second is previous
     /// </summary>
-    public event Action<BodyPart?, BodyPart?>? SelectedPartChanged;
+    public event Action<SurgeryPuppetPart?, SurgeryPuppetPart?>? SelectedPartChanged;
 
     public Vector2 Scale
     {
@@ -29,7 +29,7 @@ public sealed partial class SurgeryPuppetBox : Control
 
     private Vector2 _scale = new Vector2(1f);
 
-    public BodyPart? SelectedPart
+    public SurgeryPuppetPart? SelectedPart
     {
         get => _selectedPart;
         set
@@ -38,10 +38,10 @@ public sealed partial class SurgeryPuppetBox : Control
         }
     }
 
-    private BodyPart? _selectedPart;
+    private SurgeryPuppetPart? _selectedPart;
 
-    private SortedDictionary<BodyPart, TextureRect> _parts = new();
-    private SortedDictionary<BodyPart, TextureRect> _highlightedPart = new();
+    private SortedDictionary<SurgeryPuppetPart, TextureRect> _parts = new();
+    private SortedDictionary<SurgeryPuppetPart, TextureRect> _highlightedPart = new();
     private List<PuppetButton> _partButtons = new();
 
     private const string TexturePath = "/Textures/SS220/Interface/Surgery/puppet";
@@ -55,7 +55,7 @@ public sealed partial class SurgeryPuppetBox : Control
 
     public void Initialize()
     {
-        foreach (var part in Enum.GetValues<BodyPart>())
+        foreach (var part in Enum.GetValues<SurgeryPuppetPart>())
         {
             var textPart = MakePuppetPartButton(part, _parts, GetPuppetPartTexturePath);
 
@@ -79,7 +79,7 @@ public sealed partial class SurgeryPuppetBox : Control
         ResizeAll();
     }
 
-    private Control? MakePuppetPartButton(BodyPart part, SortedDictionary<BodyPart, TextureRect> bodyPartTexture, Func<BodyPart, string?> pathSpecifier)
+    private Control? MakePuppetPartButton(SurgeryPuppetPart part, SortedDictionary<SurgeryPuppetPart, TextureRect> bodyPartTexture, Func<SurgeryPuppetPart, string?> pathSpecifier)
     {
         var partTexturePath = pathSpecifier(part);
 
@@ -97,7 +97,7 @@ public sealed partial class SurgeryPuppetBox : Control
         return texture;
     }
 
-    private Control? MakePuppetPartButton(BodyPart part)
+    private Control? MakePuppetPartButton(SurgeryPuppetPart part)
     {
         var offset = GetPartOffset(part);
         var size = GetPartSize(part);
@@ -149,22 +149,22 @@ public sealed partial class SurgeryPuppetBox : Control
     /// <summary>
     /// I hope no one else will need to give a fck what happens here. God bless new med.
     /// </summary>
-    private BodyPart? HighlightPuppetPart(BodyPart? puppetPartClicked)
+    private SurgeryPuppetPart? HighlightPuppetPart(SurgeryPuppetPart? puppetPartClicked)
     {
         var newHighlightPart = puppetPartClicked;
         switch (puppetPartClicked)
         {
-            case BodyPart.Head:
+            case SurgeryPuppetPart.Head:
                 switch (_selectedPart)
                 {
-                    case BodyPart.Head:
-                        newHighlightPart = BodyPart.Eyes;
+                    case SurgeryPuppetPart.Head:
+                        newHighlightPart = SurgeryPuppetPart.Eyes;
                         break;
-                    case BodyPart.Eyes:
-                        newHighlightPart = BodyPart.Mouth;
+                    case SurgeryPuppetPart.Eyes:
+                        newHighlightPart = SurgeryPuppetPart.Mouth;
                         break;
-                    case BodyPart.Mouth:
-                        newHighlightPart = BodyPart.Head;
+                    case SurgeryPuppetPart.Mouth:
+                        newHighlightPart = SurgeryPuppetPart.Head;
                         break;
                     default:
                         break;
@@ -188,7 +188,7 @@ public sealed partial class SurgeryPuppetBox : Control
         return newHighlightPart;
     }
 
-    private void MakeHighlighted(BodyPart part)
+    private void MakeHighlighted(SurgeryPuppetPart part)
     {
         if (_highlightedPart.TryGetValue(part, out var newTextureControl))
             newTextureControl.Visible = true;
@@ -196,7 +196,7 @@ public sealed partial class SurgeryPuppetBox : Control
             oldTextureControl.Visible = false;
     }
 
-    private void RemoveHighlight(BodyPart part)
+    private void RemoveHighlight(SurgeryPuppetPart part)
     {
         if (_highlightedPart.TryGetValue(part, out var newTextureControl))
             newTextureControl.Visible = false;
@@ -206,21 +206,21 @@ public sealed partial class SurgeryPuppetBox : Control
 
 
     /// <summary> If you still think why we need new med to make surgery just look into this method. </summary>
-    private string? GetPuppetPartTexturePath(BodyPart puppetPart)
+    private string? GetPuppetPartTexturePath(SurgeryPuppetPart puppetPart)
     {
         var state = puppetPart switch
         {
-            BodyPart.Head => "head.png",
-            BodyPart.Torso => "torso.png",
-            BodyPart.LeftArm => "left_arm.png",
-            BodyPart.RightArm => "right_arm.png",
-            BodyPart.LeftHand => "left_hand.png",
-            BodyPart.RightHand => "right_hand.png",
-            BodyPart.LeftLeg => "left_leg.png",
-            BodyPart.RightLeg => "right_leg.png",
-            BodyPart.LeftFoot => "left_foot.png",
-            BodyPart.RightFoot => "right_foot.png",
-            BodyPart.LowerTorso => "butt.png",
+            SurgeryPuppetPart.Head => "head.png",
+            SurgeryPuppetPart.Torso => "torso.png",
+            SurgeryPuppetPart.LeftArm => "left_arm.png",
+            SurgeryPuppetPart.RightArm => "right_arm.png",
+            SurgeryPuppetPart.LeftHand => "left_hand.png",
+            SurgeryPuppetPart.RightHand => "right_hand.png",
+            SurgeryPuppetPart.LeftLeg => "left_leg.png",
+            SurgeryPuppetPart.RightLeg => "right_leg.png",
+            SurgeryPuppetPart.LeftFoot => "left_foot.png",
+            SurgeryPuppetPart.RightFoot => "right_foot.png",
+            SurgeryPuppetPart.LowerTorso => "butt.png",
             _ => null
         };
 
@@ -230,23 +230,23 @@ public sealed partial class SurgeryPuppetBox : Control
     }
 
     /// <summary> If you still think why we need newMed to make surgery just look into this method too. </summary>
-    private string? GetBodyPartelectedTexturePath(BodyPart highlightedPuppetPart)
+    private string? GetBodyPartelectedTexturePath(SurgeryPuppetPart highlightedPuppetPart)
     {
         var state = highlightedPuppetPart switch
         {
-            BodyPart.Head => "head_selected.png",
-            BodyPart.Eyes => "eyes_selected.png",
-            BodyPart.Mouth => "mouth_selected.png",
-            BodyPart.Torso => "torso_selected.png",
-            BodyPart.LeftArm => "left_arm_selected.png",
-            BodyPart.RightArm => "right_arm_selected.png",
-            BodyPart.LeftHand => "left_hand_selected.png",
-            BodyPart.RightHand => "right_hand_selected.png",
-            BodyPart.LeftLeg => "left_leg_selected.png",
-            BodyPart.RightLeg => "right_leg_selected.png",
-            BodyPart.LeftFoot => "left_foot_selected.png",
-            BodyPart.RightFoot => "right_foot_selected.png",
-            BodyPart.LowerTorso => "butt_selected.png",
+            SurgeryPuppetPart.Head => "head_selected.png",
+            SurgeryPuppetPart.Eyes => "eyes_selected.png",
+            SurgeryPuppetPart.Mouth => "mouth_selected.png",
+            SurgeryPuppetPart.Torso => "torso_selected.png",
+            SurgeryPuppetPart.LeftArm => "left_arm_selected.png",
+            SurgeryPuppetPart.RightArm => "right_arm_selected.png",
+            SurgeryPuppetPart.LeftHand => "left_hand_selected.png",
+            SurgeryPuppetPart.RightHand => "right_hand_selected.png",
+            SurgeryPuppetPart.LeftLeg => "left_leg_selected.png",
+            SurgeryPuppetPart.RightLeg => "right_leg_selected.png",
+            SurgeryPuppetPart.LeftFoot => "left_foot_selected.png",
+            SurgeryPuppetPart.RightFoot => "right_foot_selected.png",
+            SurgeryPuppetPart.LowerTorso => "butt_selected.png",
             _ => null
         };
 
@@ -255,40 +255,40 @@ public sealed partial class SurgeryPuppetBox : Control
         return $"{TexturePath}/{state}";
     }
 
-    private Vector2? GetPartSize(BodyPart part)
+    private Vector2? GetPartSize(SurgeryPuppetPart part)
     {
         return part switch
         {
-            BodyPart.Head => new Vector2(9, 7),
-            BodyPart.Torso => new Vector2(9f, 9f),
-            BodyPart.RightArm => new Vector2(4f, 6f),
-            BodyPart.RightHand => new Vector2(4f, 4f),
-            BodyPart.LeftArm => new Vector2(4f, 6f),
-            BodyPart.LeftHand => new Vector2(4f, 4f),
-            BodyPart.LeftLeg => new Vector2(4f, 7f),
-            BodyPart.LeftFoot => new Vector2(6f, 3f),
-            BodyPart.RightLeg => new Vector2(4f, 7f),
-            BodyPart.RightFoot => new Vector2(6f, 3f),
-            BodyPart.LowerTorso => new Vector2(9f, 4f),
+            SurgeryPuppetPart.Head => new Vector2(9, 7),
+            SurgeryPuppetPart.Torso => new Vector2(9f, 9f),
+            SurgeryPuppetPart.RightArm => new Vector2(4f, 6f),
+            SurgeryPuppetPart.RightHand => new Vector2(4f, 4f),
+            SurgeryPuppetPart.LeftArm => new Vector2(4f, 6f),
+            SurgeryPuppetPart.LeftHand => new Vector2(4f, 4f),
+            SurgeryPuppetPart.LeftLeg => new Vector2(4f, 7f),
+            SurgeryPuppetPart.LeftFoot => new Vector2(6f, 3f),
+            SurgeryPuppetPart.RightLeg => new Vector2(4f, 7f),
+            SurgeryPuppetPart.RightFoot => new Vector2(6f, 3f),
+            SurgeryPuppetPart.LowerTorso => new Vector2(9f, 4f),
             _ => null
         };
     }
 
-    private Vector2? GetPartOffset(BodyPart part)
+    private Vector2? GetPartOffset(SurgeryPuppetPart part)
     {
         return part switch
         {
-            BodyPart.Head => new Vector2(16f, 6f),
-            BodyPart.Torso => new Vector2(16f, 13f),
-            BodyPart.RightArm => new Vector2(12f, 15f),
-            BodyPart.RightHand => new Vector2(12f, 21f),
-            BodyPart.LeftArm => new Vector2(25f, 15f),
-            BodyPart.LeftHand => new Vector2(26f, 21f),
-            BodyPart.LeftLeg => new Vector2(21f, 26f),
-            BodyPart.LeftFoot => new Vector2(21f, 32f),
-            BodyPart.RightLeg => new Vector2(16f, 26f),
-            BodyPart.RightFoot => new Vector2(14f, 32f),
-            BodyPart.LowerTorso => new Vector2(16f, 22f),
+            SurgeryPuppetPart.Head => new Vector2(16f, 6f),
+            SurgeryPuppetPart.Torso => new Vector2(16f, 13f),
+            SurgeryPuppetPart.RightArm => new Vector2(12f, 15f),
+            SurgeryPuppetPart.RightHand => new Vector2(12f, 21f),
+            SurgeryPuppetPart.LeftArm => new Vector2(25f, 15f),
+            SurgeryPuppetPart.LeftHand => new Vector2(26f, 21f),
+            SurgeryPuppetPart.LeftLeg => new Vector2(21f, 26f),
+            SurgeryPuppetPart.LeftFoot => new Vector2(21f, 32f),
+            SurgeryPuppetPart.RightLeg => new Vector2(16f, 26f),
+            SurgeryPuppetPart.RightFoot => new Vector2(14f, 32f),
+            SurgeryPuppetPart.LowerTorso => new Vector2(16f, 22f),
             _ => null
         };
     }
@@ -307,7 +307,7 @@ public sealed partial class SurgeryPuppetBox : Control
 
 public sealed class PuppetButton : BaseButton
 {
-    public BodyPart Part;
+    public SurgeryPuppetPart Part;
 }
 
 

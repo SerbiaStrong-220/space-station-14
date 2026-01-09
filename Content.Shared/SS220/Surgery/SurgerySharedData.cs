@@ -2,7 +2,7 @@
 
 namespace Content.Shared.SS220.Surgery;
 
-public enum BodyPart
+public enum SurgeryPuppetPart
 {
     Head,
     Eyes,

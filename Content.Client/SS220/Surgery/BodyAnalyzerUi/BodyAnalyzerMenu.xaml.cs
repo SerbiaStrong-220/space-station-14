@@ -17,6 +17,8 @@ public sealed partial class BodyAnalyzerMenu : FancyWindow
     {
         RobustXamlLoader.Load(this);
 
+        _surgeryPatientAnalyzer = IoCManager.Resolve<IEntityManager>().System<SurgeryPatientAnalyzer>();
+
         OperationList.OnSurgeryClicked += (id, pressed) =>
         {
             OperationDescription.ShowDescription(id);
@@ -30,11 +32,6 @@ public sealed partial class BodyAnalyzerMenu : FancyWindow
             OperationDescription.ShowDescription(id);
             OperationDescription.Visible = true;
         };
-    }
-
-    public void InjectDependencies(IEntityManager entityManager)
-    {
-        _surgeryPatientAnalyzer = entityManager.System<SurgeryPatientAnalyzer>();
     }
 
     public void ChangeTarget(EntityUid target, ProtoId<SurgeryGraphPrototype>? id = null)

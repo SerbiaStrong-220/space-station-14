@@ -23,14 +23,14 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
 
     private readonly SharedSurgerySystem _surgery = default!;
 
-    public event Action<ProtoId<SurgeryGraphPrototype>, EntityUid>? OnSurgeryConfirmCliсked;
+    public event Action<ProtoId<SurgeryGraphPrototype>, EntityUid>? OnSurgeryConfirmClicked;
 
     public EntityUid Target;
     public EntityUid Used;
 
-    private Dictionary<BodyPart, HashSet<Control>> _operations = new();
+    private Dictionary<SurgeryPuppetPart, HashSet<Control>> _operations = new();
 
-    private const BodyPart SelectedOnStartPart = BodyPart.Torso;
+    private const SurgeryPuppetPart SelectedOnStartPart = SurgeryPuppetPart.Torso;
     private const int ControlsInitAllocateNumber = 8;
 
     public SurgeryDrapeMenu()
@@ -49,7 +49,7 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
         };
 
         _operations.Clear(); // never knows what coming after all
-        foreach (var part in Enum.GetValues<BodyPart>())
+        foreach (var part in Enum.GetValues<SurgeryPuppetPart>())
         {
             _operations.Add(part, new(ControlsInitAllocateNumber));
         }
@@ -57,7 +57,7 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
         Puppet.SelectedPart = SelectedOnStartPart;
     }
 
-    public void UpdateOperations(BodyPart? currentPart, BodyPart? previousPart)
+    public void UpdateOperations(SurgeryPuppetPart? currentPart, SurgeryPuppetPart? previousPart)
     {
         if (previousPart != null)
         {
@@ -116,7 +116,7 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
             // So wee do something if button was pressed before pressing by player.
             // Thats why it !Pressed, but meant to be If pressed pressed than
             if (!button.Pressed)
-                OnSurgeryConfirmCliсked?.Invoke(button.GraphId, Target);
+                OnSurgeryConfirmClicked?.Invoke(button.GraphId, Target);
             else
                 FooterLeft.Text = Loc.GetString("surgery-footer-confirm");
 
@@ -148,11 +148,11 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
         return button;
     }
 
-    private string LocPuppetPartPath(BodyPart? part)
+    private string LocPuppetPartPath(SurgeryPuppetPart? part)
     {
         if (part == null)
             return "surgery-puppet-part-none";
-        return $"surgery-puppet-part-{Enum.GetName(typeof(BodyPart), part)!}";
+        return $"surgery-puppet-part-{Enum.GetName(typeof(SurgeryPuppetPart), part)!}";
     }
 
     /// <summary>
