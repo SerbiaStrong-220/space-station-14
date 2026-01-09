@@ -1,12 +1,59 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared.SS220.Surgery.Components;
 using Content.Shared.SS220.Surgery.Graph;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Surgery.Systems;
+
 public abstract partial class SharedSurgerySystem
 {
+    private readonly LocId _cantStartUndefinedSurgery = "cant-start-surgery-while-on-surgery";
+    private readonly LocId _cantStartSurgeryWhileOneOngoing = "cant-start-surgery-while-on-surgery";
+
+    /// <summary>
+    /// This fat method handles allowing to start surgery and ability to start surgery on best possible target (when <paramref name="target"/> is null)
+    /// </summary>
+    /// <param name="performer"> who started surgery </param>
+    /// <param name="surgeryGraph"> what surgery we want to start </param>
+    /// <param name="target"> whom we starting surgery or best possible candidate if null </param>
+    /// <param name="used"> what we used to start surgery </param>
+    /// <param name="reason"> not null when we cant start surgery </param>
+    /// <returns> bool lol </returns>
+    public bool CanStartSurgery(EntityUid performer, SurgeryGraphPrototype surgeryGraph, EntityUid? target, EntityUid? used, [NotNullWhen(false)] out string? reason)
+    {
+        reason = null;
+        if (HasComp<OnSurgeryComponent>(target))
+        {
+            reason = Loc.GetString(_cantStartSurgeryWhileOneOngoing);
+            return reason is null;
+        }
+
+        foreach (var requirement in surgeryGraph.Requirements)
+        {
+            if (requirement.SatisfiesRequirements(performer, target, used, EntityManager))
+                continue;
+
+            reason = requirement.RequirementFailureReason(performer, target, used, EntityManager);
+            return false;
+        }
+
+        return true;
+    }
+
+    /// <inheritdoc cref="CanStartSurgery"/>
+    public bool CanStartSurgery(EntityUid performer, ProtoId<SurgeryGraphPrototype> surgeryId, EntityUid? target, EntityUid? used, [NotNullWhen(false)] out string? reason)
+    {
+        if (!_prototype.Resolve(surgeryId, out var surgeryGraph))
+        {
+            reason = Loc.GetString(_cantStartUndefinedSurgery);
+            return false;
+        }
+
+        return CanStartSurgery(performer, surgeryGraph, target, used, out reason);
+    }
+
     protected virtual void ProceedToNextStep(Entity<OnSurgeryComponent> entity, EntityUid user, EntityUid? used, SurgeryGraphEdge chosenEdge)
     {
         ChangeSurgeryNode(entity, chosenEdge.Target, user, used);
@@ -39,9 +86,11 @@ public abstract partial class SharedSurgerySystem
         }
 
         entity.Comp.CurrentNode = foundNode.Name;
-        if (SurgeryGraph.Popup(foundNode) != null)
-            _popup.PopupPredicted(Loc.GetString(SurgeryGraph.Popup(foundNode)!, ("target", entity.Owner),
-                ("user", performer), ("used", used == null ? Loc.GetString("surgery-null-used") : used)), entity.Owner, performer);
+        if (SurgeryGraph.Popup(foundNode) == null)
+            return;
+
+        _popup.PopupPredicted(Loc.GetString(SurgeryGraph.Popup(foundNode)!, ("target", entity.Owner),
+            ("user", performer), ("used", used == null ? Loc.GetString("surgery-null-used") : used)), entity.Owner, performer);
     }
 
     protected bool OperationEnded(Entity<OnSurgeryComponent> entity)

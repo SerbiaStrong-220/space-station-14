@@ -16,11 +16,14 @@ public sealed partial class SurgeryGraphEdge : ISerializationHooks
     [DataField]
     public ProtoId<AbstractSurgeryEdgePrototype>? BaseEdge { get; private set; }
 
-    [DataField("conditions")]
-    private ISurgeryGraphCondition[] _conditions = Array.Empty<ISurgeryGraphCondition>();
+    [DataField("requirements")]
+    private SurgeryGraphEdgeRequirement[] _requirements = Array.Empty<SurgeryGraphEdgeRequirement>();
 
     [DataField("actions", serverOnly: true)]
-    private ISurgeryGraphAction[] _actions = Array.Empty<ISurgeryGraphAction>();
+    private ISurgeryGraphEdgeAction[] _actions = Array.Empty<ISurgeryGraphEdgeAction>();
+
+    [DataField("actionDescription")]
+    private LocId[] _actionLocIds = Array.Empty<LocId>();
 
     /// <summary>
     /// Time which this step takes in seconds
@@ -36,19 +39,17 @@ public sealed partial class SurgeryGraphEdge : ISerializationHooks
     [Access(typeof(SurgeryGraphSystem))]
     public SoundSpecifier? EndSound { get; private set; } = null;
 
-    /// <summary>
-    /// Don't know what u are doing? -> use <see cref="SurgeryGraphSystem"/>
-    /// </summary>
     [ViewVariables]
     [Access(typeof(SurgeryGraphSystem))]
-    public IReadOnlyList<ISurgeryGraphCondition> Conditions => _conditions;
+    public IReadOnlyList<SurgeryGraphEdgeRequirement> Requirements => _requirements;
 
-    /// <summary>
-    /// Don't know what u are doing? -> use <see cref="SurgeryGraphSystem"/>
-    /// </summary>
     [ViewVariables]
     [Access(typeof(SurgeryGraphSystem))]
-    public IReadOnlyList<ISurgeryGraphAction> Actions => _actions;
+    public IReadOnlyList<ISurgeryGraphEdgeAction> Actions => _actions;
+
+    [ViewVariables]
+    [Access(typeof(SurgeryGraphSystem))]
+    public IReadOnlyList<LocId> ActionLocIds => _actionLocIds;
 
     void ISerializationHooks.AfterDeserialization()
     {

@@ -6,7 +6,7 @@ using Content.Shared.SS220.Surgery.Graph;
 namespace Content.Server.SS220.Surgery.Action;
 
 [DataDefinition]
-public sealed partial class ApplyBleedingAction : ISurgeryGraphAction
+public sealed partial class ApplyBleedingAction : ISurgeryGraphEdgeAction
 {
     [DataField]
     public float BleedAmount = 2f;

@@ -2,9 +2,9 @@
 
 - type: surgeryGraph
   id: HealDeadBody
-  nameLocPath: surgery-heal-dead-body-name
-  descriptionLocPath: surgery-heal-dead-body-description
-  postscriptLocPath: surgery-heal-dead-body-postscript
+  name: surgery-heal-dead-body-name
+  description: surgery-heal-dead-body-description
+  postscript: surgery-heal-dead-body-postscript
   targetPuppetPart: torso
   start: start
   end: seal wound

@@ -31,6 +31,9 @@ public sealed partial class SurgeryGraphPrototype : IPrototype, ISerializationHo
     [DataField]
     public LocId? Postscript;
 
+    [DataField]
+    public ISurgeryGraphRequirement[] Requirements = Array.Empty<ISurgeryGraphRequirement>();
+
     [DataField(required: true)]
     public string Start { get; private set; } = default!;
 
@@ -41,7 +44,7 @@ public sealed partial class SurgeryGraphPrototype : IPrototype, ISerializationHo
     public BodyPart TargetPart;
 
     [DataField("graph", priority: 0)]
-    private List<SurgeryGraphNode> _graph = new();
+    private SurgeryGraphNode[] _graph = Array.Empty<SurgeryGraphNode>();
 
     public IReadOnlyList<SurgeryGraphNode> Nodes => _graph;
 

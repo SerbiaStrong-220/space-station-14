@@ -13,6 +13,7 @@ using Content.Shared.Examine;
 using Robust.Shared.Network;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
+using Content.Shared.Database;
 
 namespace Content.Shared.SS220.Surgery.Systems;
 
@@ -185,18 +186,18 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         if (target == user)
             return;
 
-        if (!IsValidTarget(target, args.SurgeryGraphId, out var reasonLocPath) || !IsValidPerformer(user, args.SurgeryGraphId))
-        {
-            // TODO more user friendly
-            _popup.PopupClient(reasonLocPath != null ? Loc.GetString(reasonLocPath) : null, user, PopupType.LargeCaution);
-            args.Cancel();
+        // if (!IsValidTarget(target, args.SurgeryGraphId, out var reasonLocPath) || !IsValidPerformer(user, args.SurgeryGraphId))
+        // {
+        //     // TODO more user friendly
+        //     _popup.PopupClient(reasonLocPath != null ? Loc.GetString(reasonLocPath) : null, user, PopupType.LargeCaution);
+        //     args.Cancel();
+        //     return;
+        // }
+
+        if (!TryStartSurgery(target, args.SurgeryGraphId, user, entity))
             return;
-        }
 
-        var result = TryStartSurgery(target, args.SurgeryGraphId, user, entity) ? "success" : "unsuccess";
-
-        _adminLogManager.Add(Shared.Database.LogType.Action, Shared.Database.LogImpact.Medium,
-            $"{ToPrettyString(args.User):user} tried to start surgery(surgery_graph_id: {args.SurgeryGraphId}) on {ToPrettyString(args.Target):target} with result of {result}");
+        _adminLogManager.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(args.User):user} started surgery {args.SurgeryGraphId}) on {ToPrettyString(args.Target):target}!");
     }
 
     public bool TryStartSurgery(EntityUid target, ProtoId<SurgeryGraphPrototype> surgery, EntityUid performer, EntityUid used)
@@ -236,9 +237,9 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         {
             // id any edges exist make it true
             bool isAbleToPerform = true;
-            foreach (var condition in SurgeryGraph.GetConditions(edge))
+            foreach (var requirement in SurgeryGraph.GetRequirements(edge))
             {
-                if (!condition.Condition(entity.Owner, used, user, EntityManager))
+                if (!requirement.SatisfiesRequirements(entity.Owner, used, user, EntityManager))
                     isAbleToPerform = false;
             }
             // if passed all conditions than break

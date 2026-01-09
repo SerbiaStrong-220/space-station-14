@@ -14,14 +14,14 @@ public sealed class SurgeryGraphSystem : EntitySystem
         return Get(edge, (x) => x.EndSound);
     }
 
-    public IReadOnlyList<ISurgeryGraphAction> GetActions(SurgeryGraphEdge edge)
+    public IReadOnlyList<ISurgeryGraphEdgeAction> GetActions(SurgeryGraphEdge edge)
     {
         return GetList(edge, (x) => x.Actions);
     }
 
-    public IReadOnlyList<ISurgeryGraphCondition> GetConditions(SurgeryGraphEdge edge)
+    public IReadOnlyList<SurgeryGraphEdgeRequirement> GetRequirements(SurgeryGraphEdge edge)
     {
-        return GetList(edge, (x) => x.Conditions);
+        return GetList(edge, (x) => x.Requirements);
     }
 
     public string? ExamineDescription(SurgeryGraphNode node)

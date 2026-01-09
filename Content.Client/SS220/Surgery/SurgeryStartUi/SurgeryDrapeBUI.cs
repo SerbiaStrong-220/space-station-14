@@ -2,6 +2,7 @@
 
 using System.Linq;
 using Content.Shared.SS220.Surgery.Graph;
+using Content.Shared.SS220.Surgery.Systems;
 using Content.Shared.SS220.Surgery.Ui;
 using Robust.Client.Player;
 using Robust.Client.UserInterface;
@@ -13,6 +14,7 @@ public sealed class SurgeryDrapeBUI : BoundUserInterface
 {
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private readonly SharedSurgerySystem _surgery = default!;
 
     [ViewVariables]
     private SurgeryDrapeMenu? _menu;
@@ -23,6 +25,8 @@ public sealed class SurgeryDrapeBUI : BoundUserInterface
     {
         base.Open();
         _menu = this.CreateWindow<SurgeryDrapeMenu>();
+
+        _menu.Used = Owner;
 
         _menu.OnSurgeryConfirmCliсked += (id, target) =>
         {
@@ -59,10 +63,7 @@ public sealed class SurgeryDrapeBUI : BoundUserInterface
     {
         // Performer shouldnt see surgery if he is not allowed
         var result = _prototypeManager.EnumeratePrototypes<SurgeryGraphPrototype>()
-            .Where((graph) =>
-            {
-                return SharedSurgeryAvaibilityChecks.IsSurgeryGraphAvailablePerformer(user, graph, EntMan);
-            })
+            .Where((graph) => _surgery.CanStartSurgery(user, graph, target, Owner, out _))
             .ToList();
 
         return result;

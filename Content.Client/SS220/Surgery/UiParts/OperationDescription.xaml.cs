@@ -13,6 +13,8 @@ namespace Content.Client.SS220.Surgery.UiParts;
 public sealed partial class OperationDescription : Control
 {
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly IEntityManager _entityManager = default!;
+
     private SurgeryGraphSystem _surgeryGraph = default!;
 
     private bool _dataLocked = false;
@@ -33,11 +35,8 @@ public sealed partial class OperationDescription : Control
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
-    }
 
-    public void InjectDependencies(IEntityManager entityManager)
-    {
-        _surgeryGraph = entityManager.System<SurgeryGraphSystem>();
+        _surgeryGraph = _entityManager.System<SurgeryGraphSystem>();
     }
 
     public void ShowDescription(ProtoId<SurgeryGraphPrototype> id)
@@ -52,11 +51,11 @@ public sealed partial class OperationDescription : Control
             return;
         }
 
-        OperationName.Text = Loc.GetString(surgeryProto.NameLocPath);
+        OperationName.Text = Loc.GetString(surgeryProto.Name);
 
         StringBuilder builder = new();
 
-        builder.AppendLine(Loc.GetString(surgeryProto.DescriptionLocPath));
+        builder.AppendLine(Loc.GetString(surgeryProto.Description));
         AddOperationSteps(surgeryProto, builder);
 
         Description.Text = builder.ToString();
@@ -95,16 +94,16 @@ public sealed partial class OperationDescription : Control
 
     private void AddConditionInfo(SurgeryGraphEdge edge, StringBuilder builder)
     {
-        var surgeryConditions = _surgeryGraph.GetConditions(edge);
+        var surgeryRequirements = _surgeryGraph.GetRequirements(edge);
 
-        if (surgeryConditions.Count == 0)
+        if (surgeryRequirements.Count == 0)
             return;
 
         builder.AppendLine(Loc.GetString("operation-description-condition-section-name"));
 
-        foreach (var condition in surgeryConditions)
+        foreach (var requirement in surgeryRequirements)
         {
-            var info = condition.ConditionDescription();
+            var info = requirement.RequirementDescription(_prototypeManager, _entityManager);
             builder.Append(NodeDataTabulation);
             builder.AppendLine(info);
         }

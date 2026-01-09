@@ -2,9 +2,9 @@
 
 - type: surgeryGraph
   id: DefibSurgery
-  nameLocPath: surgery-defib-surgery-name
-  descriptionLocPath: surgery-defib-surgery-description
-  postscriptLocPath: surgery-defib-surgery-postscript
+  name: surgery-defib-surgery-name
+  description: surgery-defib-surgery-description
+  postscript: surgery-defib-surgery-postscript
   targetPuppetPart: head
   start: start
   end: seal wound

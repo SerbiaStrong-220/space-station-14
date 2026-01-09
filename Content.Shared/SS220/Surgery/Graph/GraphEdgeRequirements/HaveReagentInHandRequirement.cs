@@ -1,18 +1,17 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Server.SS220.Surgery.Systems;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.SS220.Surgery.Graph;
+using Content.Shared.SS220.Surgery.Systems;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.SS220.Surgery.Requirements;
+namespace Content.Shared.SS220.Surgery.Graph.GraphEdgeRequirements;
 
 [DataDefinition]
-public sealed partial class HaveReagentInHandRequirement : SurgeryGraphRequirement
+public sealed partial class HaveReagentInHandRequirement : SurgeryGraphEdgeRequirement
 {
     [DataField(required: true)]
     public ProtoId<ReagentPrototype> ReagentId;

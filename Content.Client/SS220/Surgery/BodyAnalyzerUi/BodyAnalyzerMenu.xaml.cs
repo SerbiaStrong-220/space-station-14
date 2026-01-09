@@ -35,8 +35,6 @@ public sealed partial class BodyAnalyzerMenu : FancyWindow
     public void InjectDependencies(IEntityManager entityManager)
     {
         _surgeryPatientAnalyzer = entityManager.System<SurgeryPatientAnalyzer>();
-
-        OperationDescription.InjectDependencies(entityManager);
     }
 
     public void ChangeTarget(EntityUid target, ProtoId<SurgeryGraphPrototype>? id = null)

@@ -1,28 +1,27 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.SS220.Surgery.Components;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using Content.Shared.SS220.Surgery.Graph;
 using Robust.Shared.Prototypes;
-using Content.Shared.FixedPoint;
-using Content.Shared.Damage;
 
-namespace Content.Shared.SS220.Surgery.Requirements;
+namespace Content.Shared.SS220.Surgery.Graph.GraphEdgeRequirements;
 
 [DataDefinition]
-public sealed partial class TotalDamageRequirement : SurgeryGraphRequirement
+public sealed partial class MobStateRequirement : SurgeryGraphEdgeRequirement
 {
     [DataField(required: true)]
-    public FixedPoint2 Damage;
+    public HashSet<MobState> States;
 
     [DataField]
     public bool Invert = false;
 
     public override bool SatisfiesRequirements(EntityUid targetUid, EntityUid toolUid, EntityUid userUid, IEntityManager entityManager)
     {
-        if (!entityManager.TryGetComponent<DamageableComponent>(targetUid, out var damageableComponent))
+        if (!entityManager.TryGetComponent<MobStateComponent>(targetUid, out var mobStateComponent))
             return false;
 
-        return !Invert && damageableComponent.TotalDamage > Damage;
+        return !Invert && States.Contains(mobStateComponent.CurrentState);
     }
 
     public override bool MeetRequirement(EntityUid targetUid, EntityUid toolUid, EntityUid userUid, IEntityManager entityManager)
@@ -35,6 +34,6 @@ public sealed partial class TotalDamageRequirement : SurgeryGraphRequirement
 
     public override string RequirementDescription(IPrototypeManager prototypeManager, IEntityManager entityManager)
     {
-        return Loc.GetString($"surgery-requirement-total-damage");
+        return Loc.GetString($"surgery-requirement-mob-state");
     }
 }

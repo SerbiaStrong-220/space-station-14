@@ -6,7 +6,7 @@ using Content.Shared.SS220.Surgery.Graph;
 namespace Content.Server.SS220.Surgery.Action;
 
 [DataDefinition]
-public sealed partial class CheckImplantAction : ISurgeryGraphAction
+public sealed partial class CheckImplantAction : ISurgeryGraphEdgeAction
 {
     public void PerformAction(EntityUid uid, EntityUid userUid, EntityUid? used, IEntityManager entityManager)
     {

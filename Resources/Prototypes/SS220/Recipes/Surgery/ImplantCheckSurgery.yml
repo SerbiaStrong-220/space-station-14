@@ -2,9 +2,9 @@
 
 - type: surgeryGraph
   id: ImplantCheck
-  nameLocPath: implant-check-surgery-name
-  descriptionLocPath: implant-check-surgery-description
-  postscriptLocPath: implant-check-surgery-postscript
+  name: implant-check-surgery-name
+  description: implant-check-surgery-description
+  postscript: implant-check-surgery-postscript
   targetPuppetPart: head
   start: start
   end: seal wound
