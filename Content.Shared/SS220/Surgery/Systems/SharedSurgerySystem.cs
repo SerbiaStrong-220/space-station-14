@@ -216,7 +216,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         return true;
     }
 
-    /// <returns>true if operation step performed successful</returns>
+    /// <returns> true if operation step performed successful </returns>
     public bool TryPerformOperationStep(Entity<OnSurgeryComponent> entity, Entity<SurgeryToolComponent> used, EntityUid user)
     {
         if (entity.Comp.CurrentNode == null)
@@ -235,13 +235,34 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         SurgeryGraphEdge? chosenEdge = null;
         foreach (var edge in currentNode.Edges)
         {
+            bool isVisible = true;
+            foreach (var requirement in SurgeryGraph.GetVisibilityRequirements(edge))
+            {
+                var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
+
+                if (requirement.SatisfiesRequirements(requirementTarget, EntityManager))
+                    continue;
+
+                isVisible = false;
+                break;
+            }
+
+            if (!isVisible)
+                continue;
+
             // id any edges exist make it true
             bool isAbleToPerform = true;
             foreach (var requirement in SurgeryGraph.GetRequirements(edge))
             {
-                if (!requirement.SatisfiesRequirements(entity.Owner, used, user, EntityManager))
-                    isAbleToPerform = false;
+                var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
+
+                if (requirement.SatisfiesRequirements(requirementTarget, EntityManager))
+                    continue;
+
+                isAbleToPerform = false;
+                break;
             }
+
             // if passed all conditions than break
             if (isAbleToPerform)
             {
@@ -249,7 +270,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
                 break;
             }
         }
-        // yep.. another check
+
         if (chosenEdge == null)
             return false;
 

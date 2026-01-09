@@ -14,12 +14,16 @@ public sealed class SurgeryDrapeBUI : BoundUserInterface
 {
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly SharedSurgerySystem _surgery = default!;
+
+    private readonly SharedSurgerySystem _surgery = default!;
 
     [ViewVariables]
     private SurgeryDrapeMenu? _menu;
 
-    public SurgeryDrapeBUI(EntityUid owner, Enum uiKey) : base(owner, uiKey) { }
+    public SurgeryDrapeBUI(EntityUid owner, Enum uiKey) : base(owner, uiKey)
+    {
+        _surgery = IoCManager.Resolve<IEntityManager>().System<SharedSurgerySystem>();
+    }
 
     protected override void Open()
     {

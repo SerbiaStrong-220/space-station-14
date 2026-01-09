@@ -17,7 +17,10 @@ public sealed partial class SurgeryGraphEdge : ISerializationHooks
     public ProtoId<AbstractSurgeryEdgePrototype>? BaseEdge { get; private set; }
 
     [DataField("requirements")]
-    private SurgeryGraphEdgeRequirement[] _requirements = Array.Empty<SurgeryGraphEdgeRequirement>();
+    private SurgeryGraphRequirement[] _requirements = Array.Empty<SurgeryGraphRequirement>();
+
+    [DataField("visibilityRequirements")]
+    private SurgeryGraphRequirement[] _visibilityRequirements = Array.Empty<SurgeryGraphRequirement>();
 
     [DataField("actions", serverOnly: true)]
     private ISurgeryGraphEdgeAction[] _actions = Array.Empty<ISurgeryGraphEdgeAction>();
@@ -41,7 +44,11 @@ public sealed partial class SurgeryGraphEdge : ISerializationHooks
 
     [ViewVariables]
     [Access(typeof(SurgeryGraphSystem))]
-    public IReadOnlyList<SurgeryGraphEdgeRequirement> Requirements => _requirements;
+    public IReadOnlyList<SurgeryGraphRequirement> Requirements => _requirements;
+
+    [ViewVariables]
+    [Access(typeof(SurgeryGraphSystem))]
+    public IReadOnlyList<SurgeryGraphRequirement> VisibilityRequirements => _visibilityRequirements;
 
     [ViewVariables]
     [Access(typeof(SurgeryGraphSystem))]

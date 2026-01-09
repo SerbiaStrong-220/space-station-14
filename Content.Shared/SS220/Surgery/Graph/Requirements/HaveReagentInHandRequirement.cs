@@ -8,10 +8,10 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.SS220.Surgery.Systems;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.SS220.Surgery.Graph.GraphEdgeRequirements;
+namespace Content.Shared.SS220.Surgery.Graph.Requirements;
 
 [DataDefinition]
-public sealed partial class HaveReagentInHandRequirement : SurgeryGraphEdgeRequirement
+public sealed partial class HaveReagentInHandRequirement : SurgeryGraphRequirement
 {
     [DataField(required: true)]
     public ProtoId<ReagentPrototype> ReagentId;
@@ -22,12 +22,15 @@ public sealed partial class HaveReagentInHandRequirement : SurgeryGraphEdgeRequi
     [DataField]
     public string SolutionName = "drink";
 
-    public override bool SatisfiesRequirements(EntityUid targetUid, EntityUid toolUid, EntityUid userUid, IEntityManager entityManager)
+    public override bool SatisfiesRequirements(EntityUid? uid, IEntityManager entityManager)
     {
+        if (uid is null)
+            return false;
+
         var handSystem = entityManager.System<SharedHandsSystem>();
         var solutionSystem = entityManager.System<SharedSolutionContainerSystem>();
 
-        foreach (var heldItem in handSystem.EnumerateHeld(userUid))
+        foreach (var heldItem in handSystem.EnumerateHeld(uid.Value))
         {
             if (solutionSystem.GetTotalPrototypeQuantity(heldItem, ReagentId) >= ConsumedAmount)
                 return true;
@@ -36,15 +39,19 @@ public sealed partial class HaveReagentInHandRequirement : SurgeryGraphEdgeRequi
         return false;
     }
 
-    public override bool MeetRequirement(EntityUid targetUid, EntityUid toolUid, EntityUid userUid, IEntityManager entityManager)
+    public override bool MeetRequirement(EntityUid? uid, IEntityManager entityManager)
     {
-        if (!base.MeetRequirement(targetUid, toolUid, userUid, entityManager))
+        if (!base.MeetRequirement(uid, entityManager))
+            return false;
+
+        // whatever makes compiler happy
+        if (uid is null)
             return false;
 
         var handSystem = entityManager.System<SharedHandsSystem>();
         var solutionSystem = entityManager.System<SharedSolutionContainerSystem>();
 
-        foreach (var heldItem in handSystem.EnumerateHeld(userUid))
+        foreach (var heldItem in handSystem.EnumerateHeld(uid.Value))
         {
             Entity<SolutionComponent>? solutionEntity = null;
             if (!solutionSystem.ResolveSolution(heldItem, SolutionName, ref solutionEntity, out _))
@@ -64,6 +71,14 @@ public sealed partial class HaveReagentInHandRequirement : SurgeryGraphEdgeRequi
 
     public override string RequirementDescription(IPrototypeManager prototypeManager, IEntityManager entityManager)
     {
-        return Loc.GetString($"surgery-requirement-reagent-in-hand");
+        if (!prototypeManager.Resolve(ReagentId, out var reagentPrototype))
+            return string.Empty;
+
+        return Loc.GetString(Description, ("reagent", reagentPrototype.LocalizedName), ("amount", ConsumedAmount));
+    }
+
+    public override string RequirementFailureReason(EntityUid? uid, IPrototypeManager prototypeManager, IEntityManager entityManager)
+    {
+        return RequirementDescription(prototypeManager, entityManager);
     }
 }

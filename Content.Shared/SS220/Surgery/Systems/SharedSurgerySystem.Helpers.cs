@@ -35,19 +35,12 @@ public abstract partial class SharedSurgerySystem
 
         foreach (var requirement in surgeryGraph.Requirements)
         {
-            var requirementTarget = requirement.Subject switch
-            {
-                SurgeryGraphRequirementSubject.Target => target,
-                SurgeryGraphRequirementSubject.Performer => performer,
-                SurgeryGraphRequirementSubject.Used => used,
-                SurgeryGraphRequirementSubject.Container => target is null ? null : Transform(target.Value).ParentUid,
-                _ => target
-            };
+            var requirementTarget = ResolveRequirementSubject(requirement, performer, target, used);
 
             if (requirement.SatisfiesRequirements(requirementTarget, EntityManager))
                 continue;
 
-            reason = requirement.RequirementFailureReason(requirementTarget, EntityManager);
+            reason = requirement.RequirementFailureReason(requirementTarget, _prototype, EntityManager);
             return false;
         }
 
@@ -64,6 +57,26 @@ public abstract partial class SharedSurgerySystem
         }
 
         return CanStartSurgery(performer, surgeryGraph, target, used, out reason);
+    }
+
+    public EntityUid? ResolveRequirementSubject(SurgeryGraphRequirement requirement, EntityUid performer, EntityUid? target, EntityUid? used)
+    {
+        var requirementTarget = requirement.Subject switch
+        {
+            SurgeryGraphRequirementSubject.Target => target,
+            SurgeryGraphRequirementSubject.Performer => performer,
+            SurgeryGraphRequirementSubject.Used => used,
+            SurgeryGraphRequirementSubject.Container => target is null || !_sharedContainer.IsEntityInContainer(target.Value) ? null : Transform(target.Value).ParentUid,
+            _ => EntityUid.Invalid
+        };
+
+        if (requirementTarget == EntityUid.Invalid)
+        {
+            Log.Error($"Got undefined entity uid to pick from {nameof(SurgeryGraphRequirementSubject)} with enum value {requirement.Subject}!");
+            return performer;
+        }
+
+        return requirementTarget;
     }
 
     protected virtual void ProceedToNextStep(Entity<OnSurgeryComponent> entity, EntityUid user, EntityUid? used, SurgeryGraphEdge chosenEdge)

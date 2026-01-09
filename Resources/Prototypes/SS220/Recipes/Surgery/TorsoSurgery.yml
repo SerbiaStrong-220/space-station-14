@@ -1,0 +1,84 @@
+- type: surgeryGraph
+  id: TorsoSurgery
+  name: surgery-torso-complex-name
+  description: surgery-torso-complex-description
+  targetPart: Torso
+  start: start
+  end: sealWound
+  graph:
+  - node: start
+    nodeText:
+      examineDescription: surgery-torso-examine-start
+      popup: surgery-torso-popup-start
+      description: surgery-torso-node-start
+    edges:
+    - to: incision
+      baseEdge: incision
+  - node: incision
+    baseNode: incision
+    edges:
+    - to: retractSkin
+      baseEdge: retractSkin
+  - node: retractSkin
+    baseNode: retractSkin
+    edges:
+    # heal wounds
+    - to: retractSkin
+      baseEdge: retractSkin # base visual
+      actions:
+      - !type:ApplyDamageAction
+        damage:
+          groups:
+            Brute: -10
+            Burn: -10
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: retractor
+        description: surgery-requirement-tool-required-retractor
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HaveReagentInHandRequirement
+        subject: performer
+        reagentId: Tricordrazine
+        consumedAmount: 5
+        description: surgery-requirement-reagent-in-hand
+        failureMessage: surgery-requirement-reagent-in-hand
+    # deeper
+    - to: sawBone
+      baseEdge: sawBone
+    # end surgery
+    - to: sealWound
+      baseEdge: sealWound
+  - node: sawBone
+    baseNode: sawBone
+    edges:
+    # deeper
+    - to: heartIncision
+      baseEdge: incision
+    # TOOD: better back
+    - to: retractSkin
+      baseEdge: sealWound
+  - node: heartIncision
+    baseNode: incision
+    edges:
+    # handheld defibrillator usage
+    - to: heartIncision
+      delay: 2
+      sound:
+        path: /Audio/SS220/Surgery/organ.ogg
+      actions:
+      - !type:TryCompactDefibZapAction
+      requirements:
+      - !type:WhitelistRequirement
+        subject: Used
+        description: surgery-requirement-defib-required
+        failureMessage: surgery-requirement-defib-required
+        whitelist:
+          components:
+          - DirectCompactDefibrillator
+    # return
+    - to: sawBone
+      baseEdge: sealWound
+  # end
+  - node: sealWound
+    baseNode: sealWound

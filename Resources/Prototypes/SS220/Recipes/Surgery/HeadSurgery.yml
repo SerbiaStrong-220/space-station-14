@@ -1,0 +1,97 @@
+- type: surgeryGraph
+  id: HeadSurgery
+  name: surgery-head-complex-name
+  description: surgery-head-complex-description
+  targetPart: Head
+  start: start
+  end: sealWound
+  graph:
+  - node: start
+    nodeText:
+      examineDescription: surgery-head-examine-start
+    edges:
+    - to: incision
+      baseEdge: incision
+  - node: incision
+    baseNode: incision
+    edges:
+    - to: retractSkin
+      baseEdge: retractSkin
+  - node: retractSkin
+    baseNode: retractSkin
+    edges:
+    # implant check
+    - to: retractSkin
+      delay: 5
+      actions:
+      - !type:CheckImplantAction
+      requirements:
+      - !type:WhitelistRequirement
+        subject: used
+        description: surgery-requirement-scanner-required
+        failureMessage: surgery-requirement-scanner-required
+        whitelist:
+          components:
+          - ImplantCheckInSurgery
+    # deeper
+    - to: sawBone
+      baseEdge: sawBone
+    # return
+    - to: sealWound
+      baseEdge: sealWound
+  - node: sawBone
+    baseNode: sawBone
+    edges:
+    # deeper
+    - to: brainExposed
+      baseEdge: retractSkin
+    # TODO: better return
+    - to: retractSkin
+      baseEdge: sealWound
+  - node: brainExposed
+    baseNode: retractSkin
+    edges:
+    # fix mind slave disfunction
+    - to: brainExposed
+      delay: 6
+      sound:
+        path: /Audio/SS220/Surgery/organ.ogg
+        params:
+          variation: 0.125
+      visibilityRequirements:
+      # TODO: better when time comes
+      - !type:WhitelistRequirement
+        subject: performer
+        description: surgery-requirement-whitelist-no-text
+        failureMessage: surgery-requirement-whitelist-no-text
+        whitelist:
+          components:
+          - MindContainer
+      requirements:
+      # to give player popup about incorrect tool
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: specific
+        description: surgery-requirement-tool-required-specific
+        failureMessage: surgery-requirement-tool-miss
+      - !type:WhitelistRequirement
+        subject: used
+        description: surgery-requirement-fixer-required
+        failureMessage: surgery-requirement-fixer-required
+        whitelist:
+          components:
+          - MindSlaveDisfunctionFixer
+      - !type:WhitelistRequirement
+        subject: target
+        description: surgery-requirement-slave-target
+        failureMessage: surgery-requirement-slave-target
+        whitelist:
+          components:
+          - MindSlave
+      actions:
+      - !type:FixMindSlaveDisfunctionAction
+    # return
+    - to: sawBone
+      baseEdge: sealWound
+  - node: sealWound
+    baseNode: sealWound

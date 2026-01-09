@@ -19,9 +19,14 @@ public sealed class SurgeryGraphSystem : EntitySystem
         return GetList(edge, (x) => x.Actions);
     }
 
-    public IReadOnlyList<SurgeryGraphEdgeRequirement> GetRequirements(SurgeryGraphEdge edge)
+    public IReadOnlyList<SurgeryGraphRequirement> GetRequirements(SurgeryGraphEdge edge)
     {
         return GetList(edge, (x) => x.Requirements);
+    }
+
+    public IReadOnlyList<SurgeryGraphRequirement> GetVisibilityRequirements(SurgeryGraphEdge edge)
+    {
+        return GetList(edge, (x) => x.VisibilityRequirements);
     }
 
     public string? ExamineDescription(SurgeryGraphNode node)
