@@ -1,6 +1,7 @@
 using Content.Server.Stunnable.Components;
 using Content.Shared.Movement.Systems;
 using JetBrains.Annotations;
+using Content.Shared.SS220.InstastunResist; //SS220 instastun resist
 using Content.Shared.Throwing;
 using Robust.Shared.Physics.Events;
 
@@ -22,6 +23,13 @@ internal sealed class StunOnCollideSystem : EntitySystem
 
     private void TryDoCollideStun(Entity<StunOnCollideComponent> ent, EntityUid target)
     {
+        //SS220 instastun resist begin
+        var resistEv = new StunAttemptEvent("Projectile");
+        RaiseLocalEvent(target, ref resistEv);
+        if (resistEv.cancelled)
+            return;
+        //SS220 instastun resist end
+
         _stunSystem.TryKnockdown(target, ent.Comp.KnockdownAmount, ent.Comp.Refresh, ent.Comp.AutoStand, ent.Comp.Drop, true);
 
         if (ent.Comp.Refresh)

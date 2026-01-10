@@ -9,9 +9,6 @@
       path: /Audio/Weapons/ebladeon.ogg
     soundDeactivate:
       path: /Audio/Weapons/ebladeoff.ogg
-  - type: ItemToggleActiveSound
-    activeSound:
-      path: /Audio/Weapons/ebladehum.ogg
   - type: ComponentToggler
     components:
     - type: Sharp
@@ -43,6 +40,7 @@
         Slash: 15
         Heat: 15
         Structural: 20
+        #Heat: 40 #SS220 syndie melee weapons rework
   - type: MeleeWeapon
     wideAnimationRotation: -135
     attackRate: 1
@@ -69,7 +67,6 @@
       right:
       - state: inhand-right-blade
         shader: unshaded
-  - type: Reflect
   - type: IgnitionSource
     temperature: 700
 # Corvax-HiddenDesc-Start
@@ -108,25 +105,6 @@
       map: [ "blade" ]
   - type: Item
     sprite: Objects/Weapons/Melee/e_sword-inhands.rsi
-    #ss220lowTTKUpdate
-  - type: Reflect
-    reflectProb: 0.45 #ss220 ttkTweaks
-    reflects:
-      - NonEnergy
-      - Energy #SS220-FixReflects
-    spread: 80
-    reflectProbProjectile: 0.40 #ss220 ttkTweaks
-    spreadProjectile: 180
-    #ss220lowTTKUpdate
-  #SS220 craftable desword start
-  - type: Tag
-    tags:
-    - EnergySword
-  - type: Construction
-    deconstructionTarget: null
-    graph: EnergyDoubleSwordGraph
-    node: esword
-  #SS220 craftable desword end
   - type: StaticPrice
     price: 2500
 
@@ -152,9 +130,10 @@
         volume: -3
         variation: 0.250
     activatedDamage:
-        types:
-            Slash: 10
-            Heat: 10
+      types:
+        Slash: 10
+        Heat: 10
+        #Heat: 20 #SS220 syndie melee weapons rework
     deactivatedSecret: true
   - type: ItemToggleActiveSound
     activeSound:
@@ -222,9 +201,10 @@
         volume: -3
         variation: 0.250
     activatedDamage:
-      types:
-        Slash: 10
-        Heat: 10
+        types:
+          Slash: 10
+          Heat: 10
+          #Heat: 20 #SS220 syndie melee weapons rework
   - type: ComponentToggler
     components:
     - type: Sharp
@@ -316,6 +296,7 @@
         types:
             Slash: 10
             Heat: 12
+            #Heat: 40 #SS220 energy melee weapons rework
             Blunt: -1
             Structural: 10
     deactivatedSecret: true
@@ -352,6 +333,48 @@
   id: EnergySwordDouble
   description: Syndicate Command Interns thought that having one blade on the energy sword was not enough. This can be stored in pockets.
   components:
+  #SS220 shield rework begin
+  - type: AltBlocking
+    rangeBlockProb: 0
+    meleeBlockProb: 0
+    activeRangeBlockProb: 0.85
+    activeMeleeBlockProb: 0.85
+  - type: ItemToggleBlockingDamage
+    toggledRangeBlockProb: 0.4
+    toggledMeleeBlockProb: 0.35
+  - type: ChangeAppearanceOnActiveBlocking
+    spriteLayer: shield
+    inhandVisuals:
+      left:
+      - state: inhand-left-shield
+        shader: unshaded
+      right:
+      - state: inhand-right-shield
+        shader: unshaded
+  - type: ArmorBlock
+    tresholddict:
+      Piercing: 40
+      Blunt: 30
+      Heat: 35
+      Slash: 30
+      Radiation: 1000
+      Poison: 1000
+      Airloss: 1000
+      Caustic: 1000
+    durabilitytresholddict:
+      Piercing: 10000
+      Blunt: 10000
+      Heat: 10000
+      Slash: 10000
+      Radiation: 1000
+      Poison: 1000
+      Airloss: 1000
+      Caustic: 1000
+  - type: InstastunResistOnActiveBlocking
+    resistedStunTypes:
+      Creampie: true
+      Projectile: true
+  #SS220 shield rework end
   - type: ItemToggle
     onUse: false # wielding events control it instead
     onActivate: false # prevents the weapon from being able to be turned on when it is on the ground
@@ -371,14 +394,10 @@
         variation: 0.250
     activatedDamage:
         types:
-            Slash: 12
-            Heat: 12
-            Structural: 15
-  - type: ItemToggleActiveSound
-    activeSound:
-      path: /Audio/Weapons/ebladehum.ogg
-      params:
-        volume: 3
+          #Heat: 46 #SS220 syndie melee weapons rework
+          Slash: 12
+          Heat: 12
+          Structural: 15
   - type: ComponentToggler
     components:
     - type: Sharp
@@ -390,7 +409,7 @@
     wieldSound: null # esword light sound instead
   - type: MeleeWeapon
     wideAnimationRotation: -135
-    attackRate: 1.5
+    attackRate: 1
     angle: 100
     damage:
       types:
@@ -407,22 +426,6 @@
   - type: Item
     size: Small
     sprite: Objects/Weapons/Melee/e_sword_double-inhands.rsi
-# ss220 FixESword
-  - type: Reflect
-    reflectProb: 0.80 #ss220 ttkTweaks
-    reflects:
-      - NonEnergy
-      - Energy #SS220-FixReflects
-    spread: 45
-    reflectProbProjectile: 0.70 #ss220lowTTKUpdate
-    spreadProjectile: 180
-# ss220 FixESword
-  #SS220 craftable desword start
-  - type: Construction
-    deconstructionTarget: null
-    graph: EnergyDoubleSwordGraph
-    node: desword
-  #SS220 craftable desword end
 
 # Item will look weird in handslot. Will need to adjust handstorage visuals in a future PR
 - type: entity

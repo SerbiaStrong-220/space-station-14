@@ -175,3 +175,20 @@
     Steel: 500
     Gold: 350
     Plasma: 500
+
+  id: RiotLaserShield
+  result: RiotLaserShield
+  completetime: 5
+  materials:
+    Steel: 900
+    Plastic: 300
+
+- type: latheRecipe
+  id: RiotBulletShield
+  result: RiotBulletShield
+  completetime: 5
+  materials:
+    Steel: 900
+    Plastic: 300
+    Uranium: 700
+

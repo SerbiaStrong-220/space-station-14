@@ -19,8 +19,8 @@
     Zipties: 12
     BodySecurityCamera: 5 #SS220-Bodycam
     RiotShield: 2
-    RiotLaserShield: 2
-    RiotBulletShield: 2
+    #RiotLaserShield: 2 SS220-ShieldRework
+    #RiotBulletShield: 2 SS220-ShieldRework
     RadioHandheldSecurity: 5
     CigPackSEC: 2 #SS220 Cigarettes
     Bola: 12 # SS220-yes-it-was-6-now-12-cause-techfab-dont-have-craft-recipe
