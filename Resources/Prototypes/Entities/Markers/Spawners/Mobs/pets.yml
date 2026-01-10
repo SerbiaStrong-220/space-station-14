@@ -247,6 +247,22 @@
     prototypes:
     - MobPossumMortyOld
 
+#SS220 Mappers_Request_1 start
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobPossumPoppy
+  name: Possum Poppy Spawner
+  suffix: Engineer Pet
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobPossumPoppy
+#SS220 Mappers_Request_1 end
+
 - type: entity
   parent: MarkerBase
   id: SpawnMobRaccoonMorticia

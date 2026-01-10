@@ -140,7 +140,8 @@
   - type: ConditionalSpawner
     prototypes:
     - MobPossumPoppyGhostRole
-##SS220 Mappers_Request_1 end
+#SS220 Mappers_Request_1 end
+
 - type: entity
   name: Morticia Spawner
   id: SpawnMobRaccoonMorticiaGhostRole
