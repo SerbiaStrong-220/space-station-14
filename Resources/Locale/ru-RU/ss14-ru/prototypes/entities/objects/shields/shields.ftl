@@ -18,13 +18,13 @@ ent-ClockworkShield = заводной щит
     .desc = Ratvar oyrffrf lbh jvgu uvf cebgrpgvba. Ратвар благословляет вас Своей защитой.
 ent-MirrorShield = зеркальный щит
     .desc = Жутко светится красным... Вы слышите, как геометр шепчет...
- Corvax-HiddenDesc-Start
+#Corvax-HiddenDesc-Start
 ent-EnergyShield = подозрительное устройство
     .suffix = энергощит
     .desc = Небольшое дискообразное устройство с удобной рукоятью и кнопкой активации.
 ent-BrokenEnergyShield = сломанное подозрительное устройство
     .suffix = сломанный энергощит
     .desc = Чтобы это ни было, оно больше не функционирует.
- Corvax-HiddenDesc-End
+#Corvax-HiddenDesc-End
 ent-TelescopicShield = телескопический щит
     .desc = Продвинутый щит на случай беспорядков, изготовлен из облегчённых материалов, способен складываться для удобства хранения.

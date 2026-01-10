@@ -588,7 +588,6 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         // For stuff that cares about it being attacked.
         var attackedEvent = new AttackedEvent(meleeUid, user, targetXform.Coordinates);
-        //RaiseLocalEvent(target.Value, attackedEvent);
         RaiseLocalEvent(targetEntity, attackedEvent);
 
         //ss220 extended weapon logic start
