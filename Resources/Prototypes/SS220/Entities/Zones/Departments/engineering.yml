@@ -1,0 +1,74 @@
+- type: entity
+  parent: ZoneBase
+  id: ZoneEngineering
+  name: engineering
+
+- type: entity
+  parent: ZoneEngineering
+  id: ZoneEngineeringMaterialStorage
+  name: engineering material storage
+
+- type: entity
+  parent: ZoneEngineering
+  id: ZoneEngineeringWardrobe
+  name: engineering wardrobe
+
+- type: entity
+  parent: ZoneEngineering
+  id: ZoneEngineeringAME
+  name: AME zone
+
+- type: entity
+  parent: ZoneEngineering
+  id: ZoneEngineeringSolarPanels
+  name: solar panels
+
+- type: entity
+  parent: ZoneEngineering
+  id: ZoneEngineeringReserveSMES
+  name: reserve SMES
+
+- type: entity
+  parent: ZoneEngineering
+  id: ZoneEngineeringSingularityCell
+  name: singularity cell
+
+- type: entity
+  parent: ZoneEngineering
+  id: ZoneEngineeringParticleAccelerator
+  name: particle accelerator zone
+
+- type: entity
+  parent: ZoneEngineering
+  id: ZoneEngineeringSingularitySparePartStorage
+  name: singularity spare part storage
+
+- type: entity
+  parent: ZoneEngineering
+  id: ZoneEngineeringAtmospheric
+  name: engineering atmospheric
+
+- type: entity
+  parent: ZoneEngineering
+  id: ZoneEngineeringOfficeSE
+  name: SE office
+
+- type: entity
+  parent: ZoneEngineering
+  id: ZoneEngineeringHardsuits
+  name: engineering hardsuits
+
+- type: entity
+  parent: ZoneEngineering
+  id: ZoneEngineeringStationHook
+  name: station hook
+
+- type: entity
+  parent: ZoneEngineering
+  id: ZoneEngineeringGravityGenerator
+  name: gravity generator
+
+- type: entity
+  parent: ZoneEngineering
+  id: ZoneEngineeringServerRoom
+  name: engineering server room
