@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.SS220.Signature;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared.SS220.Pen;
@@ -14,4 +15,10 @@ public sealed partial class PenComponent : Component
 
     [DataField, AutoNetworkedField]
     public int BrushEraseSize = 2;
+
+    [DataField("canCopy"), AutoNetworkedField]
+    public bool CanCopySignature;
+
+    [DataField, AutoNetworkedField]
+    public SignatureData? CopiedSignature;
 }

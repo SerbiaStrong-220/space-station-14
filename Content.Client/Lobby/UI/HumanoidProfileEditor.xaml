@@ -175,6 +175,11 @@
                                                         Margin="20 0 0 0"
                                                         VerticalAlignment="Center"
                                                         HorizontalAlignment="Right"/>
+
+                            <BoxContainer Orientation="Vertical">
+                                <Button Name="ImportSignatureButton" Text="{Loc 'humanoid-profile-signature-import'}" SetSize="144 32"/>
+                                <Button Name="ExportSignatureButton" Text="{Loc 'humanoid-profile-signature-export'}" SetSize="144 32"/>
+                            </BoxContainer>
                         </BoxContainer>
                     </BoxContainer>
                     <!-- SS220 ADD SIGNATURE END -->
