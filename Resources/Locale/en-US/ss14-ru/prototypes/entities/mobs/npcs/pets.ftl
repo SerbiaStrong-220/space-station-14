@@ -22,6 +22,10 @@ ent-MobWalter = Walter
     .desc = He likes chems and treats. Walter.
 ent-MobPossumMorty = Morty
     .desc = The station's resident Didelphis virginiana. A sensitive but resilient kind of guy.
+#SS220 Mappers_Request_1 start
+ent-MobPossumPoppy = Poppy
+    .desc = It's an opossum, a small scavenging marsupial. It's wearing appropriate personal protective equipment.
+#SS220 Mappers_Request_1 end
 ent-MobRaccoonMorticia = Morticia
     .desc = A powerful creature of the night. Her eyeshadow is always on point.
 ent-MobAlexander = Alexander
