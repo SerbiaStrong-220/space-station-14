@@ -176,6 +176,7 @@
     Gold: 350
     Plasma: 500
 
+- type: latheRecipe
   id: RiotLaserShield
   result: RiotLaserShield
   completetime: 5
