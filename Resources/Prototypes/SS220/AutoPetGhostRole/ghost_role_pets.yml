@@ -130,7 +130,8 @@
     name: ghost-role-information-poppy-name
     description: ghost-role-information-poppy-description
   - type: GhostTakeoverAvailable
-##SS220 Mappers_Request_1 end
+#SS220 Mappers_Request_1 end
+
 - type: entity
   parent: MobRaccoonMorticia
   id: MobRaccoonMorticiaGhostRole
