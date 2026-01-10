@@ -1,0 +1,41 @@
+- type: skill
+  id: BureaucracyInitial
+  levelInfo:
+    maximumSublevel: 5
+    levelUpPopup : bureaucracy-initial-level-up-popup
+    sublevelUpPopup: bureaucracy-initial-sublevel-up-popup
+  levelDescription:
+    skillName: bureaucracy-initial-name
+    skillDescription: bureaucracy-initial-desc
+  components:
+  - type: WritingSkillIssue
+    shuffleMarkupTags: true
+
+- type: skill
+  id: BureaucracyTrained
+  levelInfo:
+    maximumSublevel: 5
+    levelUpPopup: bureaucracy-trained-level-up-popup
+    sublevelUpPopup: bureaucracy-trained-sublevel-up-popup
+  levelDescription:
+    skillName: bureaucracy-trained-name
+    skillDescription: bureaucracy-trained-desc
+  removeComponents:
+  - type: WritingSkillIssue
+
+- type: skill
+  id: BureaucracyProfessional
+  levelInfo:
+    maximumSublevel: 1
+    levelUpPopup: bureaucracy-professional-level-up-popup
+    sublevelUpPopup: bureaucracy-professional-sublevel-up-popup
+  levelDescription:
+    skillName: bureaucracy-professional-name
+    skillDescription: bureaucracy-professional-desc
+  components:
+  - type: GrantLanguageSkill
+    languages:
+    - id: Bureaucracy
+      canSpeak: true
+  removeComponents:
+  - type: WritingSkillIssue

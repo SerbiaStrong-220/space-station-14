@@ -1,0 +1,75 @@
+- type: skill
+  id: ConstructionInitial
+  levelInfo:
+    maximumSublevel: 5
+    levelUpPopup: construction-initial-level-up-popup
+    sublevelUpPopup: construction-initial-sublevel-up-popup
+  levelDescription:
+    skillName: construction-initial-name
+    skillDescription: construction-initial-desc
+  components:
+  - type: ConstructionDoAfterSkill
+    durationScale: 1.6
+    failureChance: 0.6
+    failurePopup: construction-fail-with-reinforced-material
+    complexMaterials:
+    - ReinforcedGlass
+    - ReinforcedPlasmaGlass
+    - ReinforcedUraniumGlass
+    - Plasteel
+  - type: ConstructionToolDoAfterSkill
+    durationScale: 1.6
+    failureChance: 0.3
+
+- type: skill
+  id: ConstructionBase
+  levelInfo:
+    maximumSublevel: 5
+    levelUpPopup: construction-base-level-up-popup
+    sublevelUpPopup: construction-base-sublevel-up-popup
+  levelDescription:
+    skillName: construction-base-name
+    skillDescription: construction-base-desc
+  components:
+  - type: ConstructionDoAfterSkill
+    durationScale: 1.2
+    failureChance: 0.3
+    failurePopup: construction-fail-with-reinforced-material
+    complexMaterials:
+    - ReinforcedGlass
+    - ReinforcedPlasmaGlass
+    - ReinforcedUraniumGlass
+    - Plasteel
+  - type: ConstructionToolDoAfterSkill
+    durationScale: 1
+    failureChance: 0.1
+
+- type: skill
+  id: ConstructionTrained
+  levelInfo:
+    maximumSublevel: 5
+    levelUpPopup: construction-trained-level-up-popup
+    sublevelUpPopup: construction-trained-sublevel-up-popup
+  levelDescription:
+    skillName: construction-trained-name
+    skillDescription: construction-trained-desc
+  components:
+  - type: ConstructionDoAfterSkill
+    durationScale: 1
+  - type: ConstructionToolDoAfterSkill
+    durationScale: 1
+
+- type: skill
+  id: ConstructionProfessional
+  levelInfo:
+    maximumSublevel: 1
+    levelUpPopup: construction-professional-level-up-popup
+    sublevelUpPopup: construction-professional-sublevel-up-popup
+  levelDescription:
+    skillName: construction-professional-name
+    skillDescription: construction-professional-desc
+  components:
+  - type: ConstructionDoAfterSkill
+    durationScale: 0.7
+  - type: ConstructionToolDoAfterSkill
+    durationScale: 0.7

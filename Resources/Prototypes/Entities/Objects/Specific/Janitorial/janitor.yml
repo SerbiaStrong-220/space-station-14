@@ -206,20 +206,16 @@
   - type: Tag
     tags: # ignore "WhitelistChameleon" tag
     - WetFloorSign
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-WetFloorSignMineExplosive-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: corvax-hidden-desc-WetFloorSignMineExplosive-research
-      jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
-# Corvax-HiddenDesc-End
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-WetFloorSignMineExplosive-syndicate ]
+      ScienceKnowledge: [ corvax-hidden-desc-WetFloorSignMineExplosive-research ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ScienceKnowledge, null]
+    hiddenName: ent-WetFloorSign
+# SS220-hidden-desc-end
 
 - type: entity
   name: plunger
