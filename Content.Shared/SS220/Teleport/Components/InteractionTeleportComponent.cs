@@ -2,7 +2,7 @@
 
 using Content.Shared.Whitelist;
 
-namespace Content.Shared.SS220.InteractionTeleport;
+namespace Content.Shared.SS220.Teleport.Components;
 
 /// <summary>
 ///     Used when you need to teleport not through contact, but through DragDrop or Verb
@@ -29,4 +29,3 @@ public sealed partial class InteractionTeleportComponent : Component
     [DataField]
     public TimeSpan? TeleportDoAfterTime;
 }
-

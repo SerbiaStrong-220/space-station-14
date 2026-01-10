@@ -52,5 +52,5 @@ public sealed partial class CultYoggPurifiedComponent : Component
     public SoundSpecifier PurifiedSound = new SoundCollectionSpecifier("CultYoggPurifyingSounds");
 
     [DataField]
-    public SpriteSpecifier.Rsi Sprite = new(new("SS220/Effects/cult_yogg_purifying.rsi"), "purifyingEffect");
+    public SpriteSpecifier.Rsi Sprite = new(new("SS220/Effects/CultYogg/purifying.rsi"), "purifyingEffect");
 }

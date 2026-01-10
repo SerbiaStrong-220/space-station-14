@@ -26,7 +26,7 @@ public sealed partial class MiGoHealActionEvent : EntityTargetActionEvent
     public TimeSpan TimeBetweenIncidents = TimeSpan.FromSeconds(2.5); // most balanced value
 
     [DataField]
-    public SpriteSpecifier.Rsi EffectSprite = new(new("SS220/Effects/cult_yogg_healing.rsi"), "healingEffect");
+    public SpriteSpecifier.Rsi EffectSprite = new(new("SS220/Effects/CultYogg/healing.rsi"), "healingEffect");
 }
 
 public sealed partial class MiGoAstralActionEvent : InstantActionEvent

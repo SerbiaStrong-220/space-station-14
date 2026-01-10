@@ -3,12 +3,14 @@
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.Popups;
+using Content.Shared.SS220.Teleport;
+using Content.Shared.SS220.Teleport.Components;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 
-namespace Content.Shared.SS220.InteractionTeleport;
+namespace Content.Shared.SS220.Teleport.Systems;
 
-public sealed class SharedInteractionTeleportSystem : EntitySystem
+public sealed class InteractionTeleportSystem : EntitySystem
 {
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
@@ -113,6 +115,9 @@ public sealed class SharedInteractionTeleportSystem : EntitySystem
 
     private void SendTeleporting(Entity<InteractionTeleportComponent> ent, EntityUid target, EntityUid user)
     {
+        var beforeEv = new TeleportTargetEvent(target, user);
+        RaiseLocalEvent(ent, ref beforeEv);
+
         var ev = new TeleportTargetEvent(target, user);
         RaiseLocalEvent(ent, ref ev);
     }

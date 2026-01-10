@@ -29,6 +29,20 @@
     damage:
       types:
         Slash: 10
+  - type: AltVerbTeleport
+    userWhitelist:
+      components:
+      - CultYogg
+  - type: RandomTeleport
+    targetsComponent: "RandomTeleportTarget"
+    whitelist:
+      tags:
+      - VoidTeleporationTarget
+  - type: DeleteOnTeleported
+    deleteSound:
+      path: /Audio/Effects/glass_smash.ogg
+  - type: SpawnBeforeTeleport
+    spawnedEnt: VoidKey #ToDo_SS220 change it to effect
 
 - type: entity
   id: VoidPortal
