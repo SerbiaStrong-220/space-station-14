@@ -1,3 +1,4 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Damage;
@@ -57,6 +58,7 @@ public sealed partial class AltBlockingSystem : EntitySystem
         SubscribeLocalEvent<AltBlockingComponent, ThrowItemAttemptEvent>(OnThrowAttempt);
         SubscribeLocalEvent<AltBlockingComponent, ContainerGettingRemovedAttemptEvent>(OnDropAttempt);
     }
+
     private void OnCompInit(Entity<AltBlockingUserComponent> ent, ref ComponentInit args)
     {
         ChangeSeed(ent);
@@ -70,6 +72,7 @@ public sealed partial class AltBlockingSystem : EntitySystem
         }
         Dirty(ent.Owner, ent.Comp);//Yes,this is probably the most obvious and dumb way to to it.
     }
+
     private void OnBlockUserCollide(Entity<AltBlockingUserComponent> ent, ref ProjectileBlockAttemptEvent args)
     {
         args.CancelledHit = TryBlock(ent.Comp.BlockingItemsShields, args.Damage, ent.Comp);

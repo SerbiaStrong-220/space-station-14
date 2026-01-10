@@ -592,7 +592,6 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         RaiseLocalEvent(targetEntity, attackedEvent);
 
         //ss220 extended weapon logic start
-        //var weaponAttackEvent = new WeaponAttackEvent(user, target.Value, AttackType.LIGHT);
         var weaponAttackEvent = new WeaponAttackEvent(user, targetEntity, AttackType.LIGHT);
         RaiseLocalEvent(meleeUid, weaponAttackEvent);
         //ss220 extended weapon logic end
@@ -603,7 +602,6 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         // SS220 hook attack event end
 
         var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEvent.BonusDamage, hitEvent.ModifiersList);
-        //var damageResult = Damageable.TryChangeDamage(target, modifiedDamage, origin:user, ignoreResistances:resistanceBypass);
         var damageResult = Damageable.TryChangeDamage(targetEntity, modifiedDamage, origin:user, ignoreResistances:resistanceBypass);
 
         if (damageResult is {Empty: false})
@@ -611,7 +609,6 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             // If the target has stamina and is taking blunt damage, they should also take stamina damage based on their blunt to stamina factor
             if (damageResult.DamageDict.TryGetValue("Blunt", out var bluntDamage))
             {
-                //_stamina.TakeStaminaDamage(target.Value, (bluntDamage * component.BluntStaminaDamageFactor).Float(), visual: false, source: user, with: meleeUid == user ? null : meleeUid);
                 _stamina.TakeStaminaDamage(targetEntity, (bluntDamage * component.BluntStaminaDamageFactor).Float(), visual: false, source: user, with: meleeUid == user ? null : meleeUid);
             }
 
@@ -628,7 +625,6 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         }
 
-        //_meleeSound.PlayHitSound(target.Value, user, GetHighestDamageSound(modifiedDamage, _protoManager), hitEvent.HitSoundOverride, component);
         _meleeSound.PlayHitSound(targetEntity, user, GetHighestDamageSound(modifiedDamage, _protoManager), hitEvent.HitSoundOverride, component);
 
         if (damageResult?.GetTotal() > FixedPoint2.Zero)
@@ -714,7 +710,6 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
                 !damageQuery.HasComponent(entity))
                 continue;
 
-            //targets.Add(entity);//SS220 shield rework
             //SS220 shield rework begin
             if (TryComp<AltBlockingUserComponent>(entity, out var blockcomp))
             {

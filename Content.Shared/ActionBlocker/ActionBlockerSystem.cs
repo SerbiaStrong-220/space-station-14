@@ -202,7 +202,6 @@ namespace Content.Shared.ActionBlocker
             // If target is in a container can we attack
             if (target != null && _container.IsEntityInContainer(target.Value))
             {
-                //return false; SS220 shield rework
                 //SS220 shield rework begin
                 if (TryComp<AltBlockingComponent>(target,out var comp) && comp.User != null)
                 {

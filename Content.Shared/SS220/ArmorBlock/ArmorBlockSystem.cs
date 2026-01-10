@@ -5,9 +5,11 @@ using Content.Shared.Hands;
 using Content.Shared.Interaction.Events;
 
 namespace Content.Shared.SS220.ArmorBlock;
+
 public sealed class ArmorBlockSystem : EntitySystem
 {
     [Dependency] private readonly DamageableSystem _damageable = default!;
+
     public override void Initialize()
     {
         base.Initialize();

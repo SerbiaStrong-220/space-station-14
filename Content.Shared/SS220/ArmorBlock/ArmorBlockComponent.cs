@@ -1,19 +1,12 @@
-using Content.Shared.Armor;
-using Content.Shared.Damage;
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.FixedPoint;
-using Content.Shared.Inventory;
 using Robust.Shared.GameStates;
-using Robust.Shared.Utility;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Content.Shared.SS220.ArmorBlock;
 
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState]
+
 public sealed partial class ArmorBlockComponent : Component
 {
     /// <summary>

@@ -1,3 +1,4 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.Inventory;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -8,6 +9,7 @@ namespace Content.Shared.SS220.AltBlocking;
 /// This component goes on an item that you want to use to block
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+
 public sealed partial class AltBlockingComponent : Component
 {
     /// <summary>
@@ -19,8 +21,7 @@ public sealed partial class AltBlockingComponent : Component
     /// <summary>
     /// Is it currently blocking?
     /// </summary>
-    // [DataField, AutoNetworkedField]
-    [DataField]//SS220 shield rework
+    [DataField]
     public bool IsBlocking;
 
 

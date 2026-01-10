@@ -1,3 +1,4 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.Hands.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Toggleable;
@@ -9,7 +10,6 @@ namespace Content.Shared.SS220.AltBlocking;
 public sealed partial class AltBlockingSystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
     private void InitializeUser()
     {
         SubscribeLocalEvent<AltBlockingUserComponent, MapInitEvent>(OnMapInit);
