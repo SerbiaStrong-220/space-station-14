@@ -25,6 +25,7 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Pulling.Events;
 using Content.Shared.SS220.Cart.Components;
+using Content.Shared.SS220.Grab;
 using Content.Shared.Standing;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Melee;
@@ -65,6 +66,7 @@ public sealed class PullingSystem : EntitySystem
     [Dependency] private readonly HeldSpeedModifierSystem _clothingMoveSpeed = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedVirtualItemSystem _virtual = default!;
+    [Dependency] private readonly GrabSystem _grab = default!; // SS220-Grabs
 
     static readonly Color СolorCaptureEffect = Color.Yellow; // SS220-MIT-pull-visualization
 
@@ -492,6 +494,13 @@ public sealed class PullingSystem : EntitySystem
             return false;
         }
 
+        // SS220-PullingCooldown-Start
+        if (_timing.CurTime < pullerComp.LastPullAt + pullerComp.PullCooldown)
+        {
+            return false;
+        }
+        // SS220-PullingCooldown-End
+
         var getPulled = new BeingPulledAttemptEvent(puller, pullableUid);
         RaiseLocalEvent(pullableUid, getPulled, true);
         var startPull = new StartPullAttemptEvent(puller, pullableUid);
@@ -567,7 +576,17 @@ public sealed class PullingSystem : EntitySystem
 
         // Pulling confirmed
 
+        pullerComp.LastPullAt = _timing.CurTime; // SS220-PullingCooldown
+
         _interaction.DoContactInteraction(pullableUid, pullerUid);
+
+        // SS220-Grabs-Start
+        if (_combatMode.IsInCombatMode(pullerUid) && _grab.CanGrab(pullerUid, pullableUid, checkCanPull: false))
+        {
+            // Grab logic confirmed
+            return _grab.TryDoGrab(pullerUid, pullableUid);
+        }
+        // SS220-Grabs-End
 
         // Use net entity so it's consistent across client and server.
         pullableComp.PullJointId = $"pull-joint-{GetNetEntity(pullableUid)}";
