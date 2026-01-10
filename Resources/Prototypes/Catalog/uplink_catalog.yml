@@ -97,22 +97,20 @@
   icon: { sprite: /Textures/Objects/Weapons/Melee/e_sword.rsi, state: icon }
   discountCategory: veryRareDiscounts
   discountDownTo:
-    #Telecrystal: 8
-    Telecrystal: 4 #ss220-uplink-discounts
+    Telecrystal: 6 #ss220-uplink-discounts
   productEntity: EnergySword
   cost:
-    #Telecrystal: 10
-    Telecrystal: 6 #ss220-uplink-discounts
+    Telecrystal: 8 #ss220-uplink-discounts
   categories:
   - UplinkWeaponry
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 7
+      Telecrystal: 11
     MediumDynamic:
-      Telecrystal: 6
+      Telecrystal: 8
     HardDynamic:
-      Telecrystal: 5
+      Telecrystal: 6
 #ss220 dynamic-price end
 
 - type: listing
@@ -191,10 +189,10 @@
   icon: { sprite: /Textures/Objects/Weapons/Melee/e_sword_double.rsi, state: icon }
   productEntity: EnergySwordDouble
   cost:
-    Telecrystal: 16 #ss220-uplink-discounts
+    Telecrystal: 18 #ss220-uplink-discounts
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 10 #ss220-uplink-discounts
+    Telecrystal: 11 #ss220-uplink-discounts
   categories:
   - UplinkWeaponry
   conditions:
@@ -213,11 +211,11 @@
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 20
+      Telecrystal: 22
     MediumDynamic:
-      Telecrystal: 14
+      Telecrystal: 16
     HardDynamic:
-      Telecrystal: 12
+      Telecrystal: 14
 #ss220 dynamic-price end
 # SS220-double-e-sword-end
 
@@ -288,10 +286,8 @@
   productEntity: EnergyShield
   discountCategory: veryRareDiscounts
   discountDownTo:
-    #Telecrystal: 4
     Telecrystal: 6 #SS220 shield rework
   cost:
-    #Telecrystal: 8
     Telecrystal: 8 #SS220 shield rework
   categories:
   - UplinkWeaponry
@@ -304,15 +300,6 @@
     HardDynamic:
       Telecrystal: 7
   #ss220 dynamic-price end
-  #ss220 shield rework begin
-  #conditions:
-  #- !type:StoreWhitelistCondition
-  #  whitelist:
-  #    tags:
-  #    - NukeOpsUplink
-  #    - LoneOpsUplink #SS220-uplink-fix
-  #    - DebugUplink #SS220-debug-uplink-fix
-  #ss220 shield rework end
 
 - type: listing
   id: UplinkSniperBundle

@@ -21,6 +21,7 @@ public sealed partial class ArmorBlockComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntityUid? Owner = null;
+
     /// <summary>
     /// The damage tresholds(a.k.a. resists)
     /// </summary>

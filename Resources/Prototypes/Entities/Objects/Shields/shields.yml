@@ -613,7 +613,6 @@
   name: energy shield
   parent: [BaseItem]
   id: EnergyShield
-  #description: Exotic energy shield, when folded, can even fit in your pocket.
   description: A piece of advanced tech made based on the technology used in the field shields. It is lightweight and can very effectively block any types of attacks. #SS220 shield rework
   components:
     - type: ItemToggle
@@ -661,27 +660,7 @@
       energy: 2
       color: blue
     - type: ItemTogglePointLight
-    #- type: Reflect
-    #  reflectProb: 0.95
-    #  reflects:
-    #    - Energy
     - type: AltBlocking
-      #passiveBlockModifier:
-      #  coefficients:
-      #    Blunt: 1.0
-      #    Slash: 0.9
-      #    Piercing: 0.85
-      #    Heat: 0.6
-      #activeBlockModifier:
-      #  coefficients:
-      #    Blunt: 1.2
-      #    Slash: 0.85
-      #    Piercing: 0.5
-      #    Heat: 0.4
-      #  flatReductions:
-      #    Heat: 1
-      #    Piercing: 1
-    #SS220 shield rework begin
       rangeBlockProb: 0
       meleeBlockProb: 0
       activeRangeBlockProb: 0.60
@@ -689,20 +668,6 @@
     #SS220 shield rework end
     #ss220 shield AltBlocking damage fix start
     - type: ItemToggleBlockingDamage
-      #deactivatedActiveModifier:
-      #  coefficients:
-      #    Blunt: 0.0
-      #    Slash: 0.0
-      #    Piercing: 0.0
-      #    Heat: 0.0
-      #deactivatedPassiveModifier:
-      #  coefficients:
-      #    Blunt: 0.0
-      #    Slash: 0.0
-      #    Piercing: 0.0
-      #    Heat: 0.0
-      #deactivatedActiveFraction: 0
-      #deactivatedPassiveFraction: 0
       toggledRangeBlockProb: 0.50
       toggledMeleeBlockProb: 0.65 #No more stunbatons
     #ss220 shield AltBlocking damage fix end
@@ -728,7 +693,6 @@
       thresholds:
         - trigger:
             !type:DamageTrigger
-            #damage: 180
             damage: 100 #SS220 shields rework
           behaviors:
             - !type:DoActsBehavior

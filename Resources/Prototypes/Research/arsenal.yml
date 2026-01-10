@@ -100,7 +100,6 @@
     state: icon
   discipline: Arsenal
   tier: 2 # SS220 shield rework
-  #tier: 1
   cost: 8000
   recipeUnlocks:
   - Truncheon
