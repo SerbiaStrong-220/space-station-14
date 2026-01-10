@@ -8,21 +8,25 @@ public sealed partial class SharedChangeAppearanceOnActiveBlockingSystem : Entit
 {
     [Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
     [Dependency] private readonly SharedItemSystem _item = default!;
+
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<ChangeAppearanceOnActiveBlockingComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<ChangeAppearanceOnActiveBlockingComponent, ActiveBlockingEvent>(OnActiveBlock);
     }
+
     private void OnInit(Entity<ChangeAppearanceOnActiveBlockingComponent> ent, ref ComponentInit args)
     {
         UpdateVisuals(ent);
         Dirty(ent, ent.Comp);
     }
+
     public void UpdateVisuals(Entity<ChangeAppearanceOnActiveBlockingComponent> ent)
     {
         _appearanceSystem.SetData(ent, ActiveBlockingVisuals.Enabled, ent.Comp.Toggled);
     }
+
     public void OnActiveBlock(EntityUid uid, ChangeAppearanceOnActiveBlockingComponent component, ActiveBlockingEvent args)
     {
         component.Toggled = args.Active;
