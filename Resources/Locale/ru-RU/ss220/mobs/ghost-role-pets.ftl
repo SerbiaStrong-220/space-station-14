@@ -52,6 +52,14 @@ ent-SpawnMobPossumMortyGhostRole = Спавнер { ent-MobPossumMorty }
 ghost-role-information-morty-name = { ent-MobPossumMorty }
 ghost-role-information-morty-description = { ent-MobPossumMorty.desc }
 
+#SS220 Mappers_Request_1 start
+ent-MobPossumPoppyGhostRole = { ent-MobPossumPoppy }
+    .desc = { ent-MobPossumPoppy.desc }
+ent-SpawnMobPossumPoppyGhostRole = Спавнер { ent-MobPossumPoppy }
+ghost-role-information-poppy-name = { ent-MobPossumPoppy }
+ghost-role-information-poppy-description = { ent-MobPossumPoppy.desc }
+#SS220 Mappers_Request_1 end
+
 ent-MobRaccoonMorticiaGhostRole = { ent-MobRaccoonMorticia }
     .desc = { ent-MobRaccoonMorticia.desc }
 ent-SpawnMobRaccoonMorticiaGhostRole = Спавнер { ent-MobRaccoonMorticia }
