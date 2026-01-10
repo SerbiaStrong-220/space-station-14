@@ -6,7 +6,7 @@ using Content.Shared.Toggleable;
 using Robust.Client.GameObjects;
 using System.Linq;
 
-namespace Content.Client.SS220.ChangeAppearanceOnActiveBLocking;
+namespace Content.Client.SS220.ChangeAppearanceOnActiveBlocking;
 
 public sealed partial class ChangeAppearanceOnActiveBlockingSystem : EntitySystem
 {
