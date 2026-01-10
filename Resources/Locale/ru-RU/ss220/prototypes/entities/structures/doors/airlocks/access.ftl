@@ -2,8 +2,9 @@ ent-AirlockMagistrateGlassLocked = { ent-AirlockSecurityGlass }
     .suffix = Магистрат, Закрыт
     .desc = { ent-AirlockSecurityGlass.desc }
 
-ent-AirlockMagistrateLocked = { ent-AirlockServiceLocked }
+ent-AirlockMagistrateLocked = { ent-AirlockSecurity }
     .suffix = Магистрат, Закрыт
+    .desc = { ent-AirlockSecurity.desc }
 
 ent-AirlockLawSecurity = { ent-AirlockSecurity }
     .suffix = Безопасность/Юридический
