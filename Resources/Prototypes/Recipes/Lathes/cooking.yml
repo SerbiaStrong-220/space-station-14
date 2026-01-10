@@ -107,3 +107,12 @@
   completetime: 0.4
   materials:
     Steel: 100
+
+# SS220 Bottle craft begin
+- type: latheRecipe
+  id: DrinkBottle
+  result: DrinkBottle
+  completetime: 0.5
+  materials:
+    Plastic: 10
+# SS220 Bottle craft end
