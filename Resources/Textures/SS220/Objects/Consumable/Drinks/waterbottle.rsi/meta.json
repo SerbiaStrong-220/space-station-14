@@ -61,6 +61,14 @@
 	{
       "name": "inhand-right-fill-2",
       "directions": 4
+    },
+    {
+      "name": "inhand-middle-fill-1",
+      "directions": 4
+    },
+    {
+      "name": "inhand-middle-fill-2",
+      "directions": 4
     }
   ],
   "version": 1
