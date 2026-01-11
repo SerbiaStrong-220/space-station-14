@@ -1,3 +1,4 @@
+using Content.Shared.Bed.Components;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.SS220.Cryostasis.Components;
@@ -16,8 +17,8 @@ public sealed class ChangeDelayInjectorSystem : EntitySystem
 
     private void OnChangeDelay(Entity<CryostasisComponent> ent, ref ChangeInjectorDelayEvent ev)
     {
-        if (TryComp<BuckleComponent>(ev.Target, out var buckle) &&
-            buckle.Buckled && _powerReceiver.IsPowered(buckle.BuckledTo.Value))
+        if (TryComp<BuckleComponent>(ev.Target, out var buckle) && buckle.Buckled &&
+            HasComp<StasisBedComponent>(buckle.BuckledTo.Value) && _powerReceiver.IsPowered(buckle.BuckledTo.Value))
         {
             ev.Delay /= ent.Comp.FastInjectionMultiply;
         }
