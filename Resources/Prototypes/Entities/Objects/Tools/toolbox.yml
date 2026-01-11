@@ -36,6 +36,12 @@
           True: { state: icon-open }
           False: { state: icon }
   - type: Appearance
+  #ss220 add drag drop toolbox start
+  - type: Toolbox
+    whitelist:
+      tags:
+      - UtilityBelt
+  #ss220 add drag drop toolbox end
 
 - type: entity
   name: emergency toolbox
