@@ -1,19 +1,34 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared.Buckle.Components;
 using Content.Shared.SS220.Surgery.Components;
 using Content.Shared.SS220.Surgery.Graph;
-using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Surgery.Systems;
 
 public abstract partial class SharedSurgerySystem
 {
-    [Dependency] private readonly SharedContainerSystem _sharedContainer = default!;
-
     private readonly LocId _cantStartUndefinedSurgery = "cant-start-surgery-while-on-surgery";
     private readonly LocId _cantStartSurgeryWhileOneOngoing = "cant-start-surgery-while-on-surgery";
+
+    public bool OperationCanBeEnded(Entity<SurgeryPatientComponent?> entity, ProtoId<SurgeryGraphPrototype> surgeryGraph)
+    {
+        if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
+            return false;
+
+        if (!entity.Comp.OngoingSurgeries.TryGetValue(surgeryGraph, out var currentNode))
+            return false;
+
+        if (!_prototype.Resolve(surgeryGraph, out var surgeryProto))
+            return false;
+
+        if (currentNode == surgeryProto.Start)
+            return true;
+
+        return currentNode == surgeryProto.GetEndNode().Name;
+    }
 
     /// <summary>
     /// This fat method handles allowing to start surgery and ability to start surgery on best possible target (when <paramref name="target"/> is null)
@@ -27,7 +42,7 @@ public abstract partial class SharedSurgerySystem
     public bool CanStartSurgery(EntityUid performer, SurgeryGraphPrototype surgeryGraph, EntityUid? target, EntityUid? used, [NotNullWhen(false)] out string? reason)
     {
         reason = null;
-        if (HasComp<OnSurgeryComponent>(target))
+        if (HasComp<SurgeryPatientComponent>(target))
         {
             reason = Loc.GetString(_cantStartSurgeryWhileOneOngoing);
             return reason is null;
@@ -66,83 +81,78 @@ public abstract partial class SharedSurgerySystem
             SurgeryGraphRequirementSubject.Target => target,
             SurgeryGraphRequirementSubject.Performer => performer,
             SurgeryGraphRequirementSubject.Used => used,
-            SurgeryGraphRequirementSubject.Container => target is null || !_sharedContainer.IsEntityInContainer(target.Value) ? null : Transform(target.Value).ParentUid,
+            SurgeryGraphRequirementSubject.Strap => GetStrapSubject(target),
             _ => EntityUid.Invalid
         };
-
-        if (requirementTarget == EntityUid.Invalid)
-        {
-            Log.Error($"Got undefined entity uid to pick from {nameof(SurgeryGraphRequirementSubject)} with enum value {requirement.Subject}!");
-            return performer;
-        }
 
         return requirementTarget;
     }
 
-    protected virtual void ProceedToNextStep(Entity<OnSurgeryComponent> entity, EntityUid user, EntityUid? used, SurgeryGraphEdge chosenEdge)
+    private EntityUid? GetStrapSubject(EntityUid? target)
     {
-        ChangeSurgeryNode(entity, chosenEdge.Target, user, used);
+        if (target is null)
+            return null;
+
+        if (!TryComp<BuckleComponent>(target.Value, out var buckleComponent) || !buckleComponent.Buckled)
+            return EntityUid.Invalid;
+
+        return buckleComponent.BuckledTo;
+    }
+
+    protected virtual void ProceedToNextStep(Entity<SurgeryPatientComponent> entity, EntityUid user, EntityUid? used, ProtoId<SurgeryGraphPrototype> surgeryGraph, SurgeryGraphEdge chosenEdge)
+    {
+        ChangeSurgeryNode(entity, surgeryGraph, chosenEdge.Target, user, used);
 
         _audio.PlayPredicted(SurgeryGraph.GetSoundSpecifier(chosenEdge), entity.Owner, user,
                         SurgeryGraph.GetSoundSpecifier(chosenEdge)?.Params.WithVolume(1f));
 
-        if (OperationEnded(entity))
-            EndOperation(entity);
+        if (OperationCanBeEnded(entity!, surgeryGraph))
+            EndOperation(entity!, surgeryGraph);
     }
 
-    protected void ChangeSurgeryNode(Entity<OnSurgeryComponent> entity, string targetNode, EntityUid performer, EntityUid? used)
+    protected void ChangeSurgeryNode(Entity<SurgeryPatientComponent> entity, ProtoId<SurgeryGraphPrototype> surgeryGraph, string targetNode, EntityUid performer, EntityUid? used)
     {
-        var surgeryProto = _prototype.Index(entity.Comp.SurgeryGraphProtoId);
-        ChangeSurgeryNode(entity, performer, used, targetNode, surgeryProto);
+        var surgeryProto = _prototype.Index(surgeryGraph);
+        ChangeSurgeryNode(entity, performer, used, surgeryProto, targetNode);
     }
 
-    protected void StartSurgeryNode(Entity<OnSurgeryComponent> entity, EntityUid performer, EntityUid? used)
+    protected void StartSurgeryNode(Entity<SurgeryPatientComponent> entity, ProtoId<SurgeryGraphPrototype> surgeryGraph, EntityUid performer, EntityUid? used)
     {
-        var surgeryProto = _prototype.Index(entity.Comp.SurgeryGraphProtoId);
-        ChangeSurgeryNode(entity, performer, used, surgeryProto.Start, surgeryProto);
-    }
-
-    protected void ChangeSurgeryNode(Entity<OnSurgeryComponent> entity, EntityUid performer, EntityUid? used, string targetNode, SurgeryGraphPrototype surgeryGraph)
-    {
-        if (!surgeryGraph.TryGetNode(targetNode, out var foundNode))
+        // here hardcoded one operation at a time (TODO: maybe add radial menu for possible interactions?)
+        if (entity.Comp.OngoingSurgeries.Count > 0)
         {
-            Log.Error($"No start node on graph {entity.Comp.SurgeryGraphProtoId} with name {targetNode}");
+            Log.Fatal("Skill issue lol");
             return;
         }
 
-        entity.Comp.CurrentNode = foundNode.Name;
-        if (SurgeryGraph.Popup(foundNode) == null)
+        if (!_prototype.Resolve(surgeryGraph, out var surgeryProto))
+            return;
+
+        ChangeSurgeryNode(entity, performer, used, surgeryProto, surgeryProto.Start);
+    }
+
+    protected void ChangeSurgeryNode(Entity<SurgeryPatientComponent> entity, EntityUid performer, EntityUid? used, SurgeryGraphPrototype surgeryGraph, string targetNode)
+    {
+        if (!surgeryGraph.TryGetNode(targetNode, out var foundNode))
+        {
+            Log.Fatal($"No node on graph {surgeryGraph.ID} with name {targetNode}");
+            return;
+        }
+
+        entity.Comp.OngoingSurgeries[surgeryGraph.ID] = foundNode.Name;
+
+        if (SurgeryGraph.Popup(foundNode) is null)
             return;
 
         _popup.PopupPredicted(Loc.GetString(SurgeryGraph.Popup(foundNode)!, ("target", entity.Owner),
             ("user", performer), ("used", used == null ? Loc.GetString("surgery-null-used") : used)), entity.Owner, performer);
     }
 
-    protected bool OperationEnded(Entity<OnSurgeryComponent> entity)
+    protected void EndOperation(Entity<SurgeryPatientComponent?> entity, ProtoId<SurgeryGraphPrototype> surgeryGraph)
     {
-        var surgeryProto = _prototype.Index(entity.Comp.SurgeryGraphProtoId);
+        if (!Resolve(entity.Owner, ref entity.Comp))
+            return;
 
-        if (entity.Comp.CurrentNode != surgeryProto.GetEndNode().Name)
-            return false;
-
-        return true;
-    }
-
-    protected bool OperationCanBeEnded(Entity<OnSurgeryComponent?> entity)
-    {
-        var (uid, comp) = entity;
-        if (!Resolve(uid, ref comp))
-            return false;
-
-        var surgeryProto = _prototype.Index(comp.SurgeryGraphProtoId);
-
-        var isStartNode = comp.CurrentNode == surgeryProto.Start;
-
-        return isStartNode || OperationEnded((uid, comp));
-    }
-
-    protected void EndOperation(EntityUid entity)
-    {
-        RemComp<OnSurgeryComponent>(entity);
+        entity.Comp.OngoingSurgeries.Remove(surgeryGraph);
     }
 }

@@ -14,16 +14,18 @@ public sealed class SurgeryDrapeUpdate(NetEntity user, NetEntity target) : Bound
 }
 
 [Serializable, NetSerializable]
-public sealed class StartSurgeryMessage(ProtoId<SurgeryGraphPrototype> id, NetEntity target, NetEntity user) : BoundUserInterfaceMessage
+public sealed class StartSurgeryMessage(ProtoId<SurgeryGraphPrototype> id, NetEntity target, NetEntity user, NetEntity? used) : BoundUserInterfaceMessage
 {
     public ProtoId<SurgeryGraphPrototype> SurgeryGraphId { get; } = id;
     public NetEntity Target { get; } = target;
     public NetEntity User { get; } = user;
+    public NetEntity? Used { get; } = used;
 }
 
-public sealed class StartSurgeryEvent(ProtoId<SurgeryGraphPrototype> id, NetEntity target, NetEntity user) : CancellableEntityEventArgs
+public sealed class StartSurgeryEvent(ProtoId<SurgeryGraphPrototype> id, NetEntity target, NetEntity user, NetEntity? used) : CancellableEntityEventArgs
 {
     public ProtoId<SurgeryGraphPrototype> SurgeryGraphId { get; } = id;
     public NetEntity Target { get; } = target;
     public NetEntity User { get; } = user;
+    public NetEntity? Used { get; } = used;
 }

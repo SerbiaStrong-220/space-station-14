@@ -3,6 +3,20 @@
   name: surgery-head-complex-name
   description: surgery-head-complex-description
   targetPart: Head
+  requirements:
+  - !type:EmptyInventorySlotRequirement
+    subject: target
+    description: surgery-torso-complex-inventory-requirement-description
+    failureMessage: surgery-torso-complex-inventory-requirement-failure
+    slotNames:
+    - head
+  - !type:WhitelistRequirement
+    subject: strap
+    description: surgery-strap-bed-requirement-description
+    failureMessage: surgery-strap-bed-requirement-failure
+    whitelist:
+      tags:
+      - Bed
   start: start
   end: sealWound
   graph:

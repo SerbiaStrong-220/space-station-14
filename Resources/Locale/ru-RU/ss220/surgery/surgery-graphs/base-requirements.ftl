@@ -3,6 +3,9 @@ surgery-requirement-whitelist-no-text = {" "}
 
 surgery-requirement-tool-miss = Вы не знаете что хотите с этим делать!
 
+surgery-strap-bed-requirement-description = Пациент должен лежать на операционном столе или кровати для проведения операции
+surgery-strap-bed-requirement-failure = Вы не можете провести операцию пока пациент не на кровати
+
 surgery-requirement-tool-required-scalpel = Это действие требует инструмента для аккуратного разреза, например { ent-Scalpel }
 surgery-requirement-tool-required-retractor = Это действие требует инструмента для аккуратной манипуляции, например { ent-Retractor }
 surgery-requirement-tool-required-hemostat = Это действие требует инструмента для зажима сосудов, например { ent-Hemostat }

@@ -7,6 +7,7 @@ namespace Content.Shared.SS220.Surgery.Graph;
 /// <summary>
 /// All-wide class for requirement in surgery graph and edge
 /// </summary>
+[ImplicitDataDefinitionForInheritors]
 public abstract partial class SurgeryGraphRequirement
 {
     [DataField(tag: "subject", required: true)]
@@ -15,18 +16,38 @@ public abstract partial class SurgeryGraphRequirement
     // just paranoid about someone writing in it
     public SurgeryGraphRequirementSubject Subject => _subject;
 
+    [DataField]
+    public bool Invert = false;
+
     [DataField(required: true)]
     public LocId Description;
 
     [DataField(required: true)]
     public LocId FailureMessage;
 
-    public abstract bool SatisfiesRequirements(EntityUid? uid, IEntityManager entityManager);
+    /// <summary>
+    /// Called to check if requirement met
+    /// </summary>
+    protected abstract bool Requirement(EntityUid? uid, IEntityManager entityManager);
+
+    /// <summary>
+    /// Called when we want to met requirement and it satisfies to make something after like consuming reagents
+    /// </summary>
+    protected virtual void AfterRequirementMet(EntityUid? uid, IEntityManager entityManager) { }
+
+    public bool SatisfiesRequirements(EntityUid? uid, IEntityManager entityManager)
+    {
+        return Invert != Requirement(uid, entityManager);
+    }
 
     [MustCallBase(true)]
-    public virtual bool MeetRequirement(EntityUid? uid, IEntityManager entityManager)
+    public bool MeetRequirement(EntityUid? uid, IEntityManager entityManager)
     {
-        return SatisfiesRequirements(uid, entityManager);
+        if (!SatisfiesRequirements(uid, entityManager))
+            return false;
+
+        AfterRequirementMet(uid, entityManager);
+        return true;
     }
 
     public virtual string RequirementDescription(IPrototypeManager prototypeManager, IEntityManager entityManager)
@@ -45,5 +66,5 @@ public enum SurgeryGraphRequirementSubject : int
     Target,
     Performer,
     Used,
-    Container
+    Strap
 }

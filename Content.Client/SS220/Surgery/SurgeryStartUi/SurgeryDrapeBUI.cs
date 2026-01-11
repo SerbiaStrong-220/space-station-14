@@ -39,13 +39,13 @@ public sealed class SurgeryDrapeBUI : BoundUserInterface
             if (user == null)
                 return;
 
-            SendMessage(new StartSurgeryMessage(id, EntMan.GetNetEntity(target), user.Value));
+            SendMessage(new StartSurgeryMessage(id, EntMan.GetNetEntity(target), user.Value, EntMan.GetNetEntity(Owner)));
 
-            var ev = new StartSurgeryEvent(id, EntMan.GetNetEntity(target), user.Value);
+            var ev = new StartSurgeryEvent(id, EntMan.GetNetEntity(target), user.Value, EntMan.GetNetEntity(Owner));
             EntMan.EventBus.RaiseLocalEvent(Owner, ev);
 
             if (!ev.Cancelled)
-                this.Close();
+                Close();
         };
     }
 

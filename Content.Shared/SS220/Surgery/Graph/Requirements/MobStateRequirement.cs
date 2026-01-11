@@ -11,22 +11,11 @@ public sealed partial class MobStateRequirement : SurgeryGraphRequirement
     [DataField(required: true)]
     public HashSet<MobState> States;
 
-    [DataField]
-    public bool Invert = false;
-
-    public override bool SatisfiesRequirements(EntityUid? uid, IEntityManager entityManager)
+    protected override bool Requirement(EntityUid? uid, IEntityManager entityManager)
     {
         if (!entityManager.TryGetComponent<MobStateComponent>(uid, out var mobStateComponent))
             return false;
 
-        return !Invert && States.Contains(mobStateComponent.CurrentState);
-    }
-
-    public override bool MeetRequirement(EntityUid? uid, IEntityManager entityManager)
-    {
-        if (!base.MeetRequirement(uid, entityManager))
-            return false;
-
-        return true;
+        return States.Contains(mobStateComponent.CurrentState);
     }
 }

@@ -22,7 +22,7 @@
                 <surgeryUiParts:TreatmentSuggestion Name="TreatmentSuggestion" HorizontalExpand="False"  VerticalExpand="True"/>
             </BoxContainer>
             <BoxContainer Name="HandBook" Orientation="Vertical" SetSize="460 420">
-                <surgeryUiParts:OperationList Name="OperationList" VerticalExpand="True" HorizontalExpand="False"/>
+                <surgeryUiParts:OperationList Name="OperationList" VerticalExpand="True" MaxHeight="180" HorizontalExpand="False"/>
                 <surgeryUiParts:OperationDescription Name="OperationDescription" Visible ="False"
                     VerticalAlignment="Stretch" HorizontalExpand="False"  VerticalExpand="True"/>
             </BoxContainer>

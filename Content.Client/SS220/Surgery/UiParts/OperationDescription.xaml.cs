@@ -28,7 +28,9 @@ public sealed partial class OperationDescription : Control
         }
     }
 
-    public string NodeDataTabulation = "  ";
+    public string NodeDataTabulation = "\t";
+    public string EdgeDataTabulation = "\t\t";
+
     public string NodeSeparator = "----";
 
     public OperationDescription()
@@ -44,9 +46,9 @@ public sealed partial class OperationDescription : Control
         if (DataLocked)
             return;
 
-        if (!_prototypeManager.TryIndex(id, out var surgeryProto))
+        if (!_prototypeManager.Resolve(id, out var surgeryProto))
         {
-            OperationName.Text = "#err";
+            OperationName.Text = "#err-cant-index";
             Description.Text = null;
             return;
         }
@@ -70,6 +72,8 @@ public sealed partial class OperationDescription : Control
             AddNodeInfo(node, builder);
             builder.AppendLine(NodeSeparator);
         }
+
+        builder.Remove(builder.Length - NodeSeparator.Length, NodeSeparator.Length);
     }
 
     private void AddNodeInfo(SurgeryGraphNode node, StringBuilder builder)
@@ -77,6 +81,7 @@ public sealed partial class OperationDescription : Control
         if (node.Edges.Count == 0)
             return;
 
+        builder.Append(NodeDataTabulation);
         builder.AppendLine(Loc.GetString("operation-description-node-name", ("name", node.Name)));
 
         var surgeryNodeDescription = _surgeryGraph.Description(node) is null ?
@@ -87,6 +92,7 @@ public sealed partial class OperationDescription : Control
 
         foreach (var edge in node.Edges)
         {
+            builder.Append(NodeSeparator);
             builder.AppendLine(Loc.GetString("operation-description-edge-to", ("to", edge.Target)));
             AddConditionInfo(edge, builder);
         }
@@ -104,7 +110,7 @@ public sealed partial class OperationDescription : Control
         foreach (var requirement in surgeryRequirements)
         {
             var info = requirement.RequirementDescription(_prototypeManager, _entityManager);
-            builder.Append(NodeDataTabulation);
+            builder.Append(EdgeDataTabulation);
             builder.AppendLine(info);
         }
     }

@@ -3,6 +3,7 @@
 using Content.Shared.SS220.Surgery.Components;
 using Content.Shared.SS220.Surgery.Ui;
 using Robust.Client.UserInterface;
+using Robust.Shared.Utility;
 
 namespace Content.Client.SS220.Surgery.BodyAnalyzerUi;
 
@@ -25,7 +26,8 @@ public sealed class BodyAnalyzerBUI(EntityUid owner, Enum uiKey) : BoundUserInte
         {
             case BodyAnalyzerTargetUpdate msg:
                 var target = EntMan.GetEntity(msg.Target);
-                _menu?.ChangeTarget(target, EntMan.GetComponentOrNull<OnSurgeryComponent>(target)?.SurgeryGraphProtoId);
+                // its just guess for ongoing operation, so let it be
+                _menu?.ChangeTarget(target, EntMan.GetComponentOrNull<SurgeryPatientComponent>(target)?.OngoingSurgeries.FirstOrNull()?.Key);
                 _menu?.UpdatePerformer();
                 break;
         }

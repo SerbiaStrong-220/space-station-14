@@ -3,14 +3,18 @@
 using Content.Shared.SS220.Surgery.Graph;
 using Content.Shared.DoAfter;
 using Robust.Shared.Serialization;
+using Robust.Shared.Prototypes;
 
 [Serializable, NetSerializable]
 public sealed partial class SurgeryDoAfterEvent : SimpleDoAfterEvent
 {
+    public ProtoId<SurgeryGraphPrototype> SurgeryGraph;
+
     public string TargetEdge;
 
-    public SurgeryDoAfterEvent(string targetEdge) : base()
+    public SurgeryDoAfterEvent(ProtoId<SurgeryGraphPrototype> surgeryGraph, string targetEdge) : base()
     {
+        SurgeryGraph = surgeryGraph;
         TargetEdge = targetEdge;
     }
 }

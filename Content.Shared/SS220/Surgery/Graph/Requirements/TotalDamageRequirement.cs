@@ -12,10 +12,7 @@ public sealed partial class TotalDamageRequirement : SurgeryGraphRequirement
     [DataField(required: true)]
     public FixedPoint2 Damage;
 
-    [DataField]
-    public bool Invert = false;
-
-    public override bool SatisfiesRequirements(EntityUid? uid, IEntityManager entityManager)
+    protected override bool Requirement(EntityUid? uid, IEntityManager entityManager)
     {
         if (!entityManager.TryGetComponent<DamageableComponent>(uid, out var damageableComponent))
             return false;
@@ -23,11 +20,4 @@ public sealed partial class TotalDamageRequirement : SurgeryGraphRequirement
         return !Invert && damageableComponent.TotalDamage > Damage;
     }
 
-    public override bool MeetRequirement(EntityUid? uid, IEntityManager entityManager)
-    {
-        if (!base.MeetRequirement(uid, entityManager))
-            return false;
-
-        return true;
-    }
 }

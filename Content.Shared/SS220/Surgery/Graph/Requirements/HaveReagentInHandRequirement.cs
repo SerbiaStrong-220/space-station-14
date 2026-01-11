@@ -22,7 +22,7 @@ public sealed partial class HaveReagentInHandRequirement : SurgeryGraphRequireme
     [DataField]
     public string SolutionName = "drink";
 
-    public override bool SatisfiesRequirements(EntityUid? uid, IEntityManager entityManager)
+    protected override bool Requirement(EntityUid? uid, IEntityManager entityManager)
     {
         if (uid is null)
             return false;
@@ -39,14 +39,11 @@ public sealed partial class HaveReagentInHandRequirement : SurgeryGraphRequireme
         return false;
     }
 
-    public override bool MeetRequirement(EntityUid? uid, IEntityManager entityManager)
+    protected override void AfterRequirementMet(EntityUid? uid, IEntityManager entityManager)
     {
-        if (!base.MeetRequirement(uid, entityManager))
-            return false;
-
         // whatever makes compiler happy
         if (uid is null)
-            return false;
+            return;
 
         var handSystem = entityManager.System<SharedHandsSystem>();
         var solutionSystem = entityManager.System<SharedSolutionContainerSystem>();
@@ -61,12 +58,10 @@ public sealed partial class HaveReagentInHandRequirement : SurgeryGraphRequireme
                 continue;
 
             solutionSystem.RemoveReagent(solutionEntity.Value, ReagentId, ConsumedAmount);
-            return true;
+            return;
         }
 
         entityManager.System<SharedSurgerySystem>().Log.Error($"Trying to meet {nameof(HaveReagentInHandRequirement)} but cant find any solution to drain reagent from");
-
-        return false;
     }
 
     public override string RequirementDescription(IPrototypeManager prototypeManager, IEntityManager entityManager)
