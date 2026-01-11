@@ -251,6 +251,7 @@
       beaker:
         maxVol: 60
         canReact: false
+  - type: Cryostasis # ss220 add fast injection with cryo syringe
 
 - type: entity
   name: bluespace beaker
@@ -556,6 +557,7 @@
     - 5
     - 10
     currentTransferAmount: 10
+  - type: Cryostasis # ss220 add fast injection with cryo syringe
   - type: Tag
     tags:
     - Syringe

@@ -16,6 +16,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
+using Content.Shared.SS220.Cryostasis.Events;
 using Content.Shared.Stacks;
 using Content.Shared.Verbs;
 
@@ -241,7 +242,12 @@ public abstract class SharedInjectorSystem : EntitySystem
             }
         }
 
-        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, actualDelay, new InjectorDoAfterEvent(), injector.Owner, target: target, used: injector.Owner)
+        // ss220 add fast injection with cryo syringe start
+        var changeDelayEv = new ChangeInjectorDelayEvent(injector, target, user, actualDelay);
+        RaiseLocalEvent(injector, ref changeDelayEv);
+        // ss220 add fast injection with cryo syringe end
+
+        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, changeDelayEv.Delay, new InjectorDoAfterEvent(), injector.Owner, target: target, used: injector.Owner) // ss220 add fast injection with cryo syringe
         {
             BreakOnMove = true,
             BreakOnWeightlessMove = false,
