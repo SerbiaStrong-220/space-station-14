@@ -9,9 +9,6 @@
       path: /Audio/Weapons/ebladeon.ogg
     soundDeactivate:
       path: /Audio/Weapons/ebladeoff.ogg
-  #- type: ItemToggleActiveSound
-  #  activeSound:
-  #    path: /Audio/Weapons/ebladehum.ogg
   - type: ComponentToggler
     components:
     - type: Sharp
@@ -43,7 +40,6 @@
         Slash: 15
         Heat: 15
         Structural: 20
-        #Heat: 40 #SS220 syndie melee weapons rework
   - type: MeleeWeapon
     wideAnimationRotation: -135
     attackRate: 1
@@ -136,7 +132,6 @@
       types:
         Slash: 10
         Heat: 10
-        #Heat: 20 #SS220 syndie melee weapons rework
     deactivatedSecret: true
   - type: ItemToggleActiveSound
     activeSound:
@@ -207,7 +202,6 @@
         types:
           Slash: 10
           Heat: 10
-          #Heat: 20 #SS220 syndie melee weapons rework
   - type: ComponentToggler
     components:
     - type: Sharp
@@ -299,7 +293,6 @@
         types:
             Slash: 10
             Heat: 12
-            #Heat: 40 #SS220 energy melee weapons rework
             Blunt: -1
             Structural: 10
     deactivatedSecret: true
@@ -397,7 +390,6 @@
         variation: 0.250
     activatedDamage:
         types:
-          #Heat: 46 #SS220 syndie melee weapons rework
           Slash: 12
           Heat: 12
           Structural: 15

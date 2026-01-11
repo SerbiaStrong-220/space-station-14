@@ -97,11 +97,9 @@
   icon: { sprite: /Textures/Objects/Weapons/Melee/e_sword.rsi, state: icon }
   discountCategory: veryRareDiscounts
   discountDownTo:
-    #Telecrystal: 8
     Telecrystal: 6 #ss220-uplink-discounts
   productEntity: EnergySword
   cost:
-    #Telecrystal: 10
     Telecrystal: 8 #ss220-uplink-discounts
   categories:
   - UplinkWeaponry
@@ -288,10 +286,8 @@
   productEntity: EnergyShield
   discountCategory: veryRareDiscounts
   discountDownTo:
-    #Telecrystal: 4
     Telecrystal: 6 #SS220 shield rework
   cost:
-    #Telecrystal: 8
     Telecrystal: 8 #SS220 shield rework
   categories:
   - UplinkWeaponry
@@ -304,15 +300,6 @@
     HardDynamic:
       Telecrystal: 7
   #ss220 dynamic-price end
-  #ss220 shield rework begin
-  #conditions:
-  #- !type:StoreWhitelistCondition
-  #  whitelist:
-  #    tags:
-  #    - NukeOpsUplink
-  #    - LoneOpsUplink #SS220-uplink-fix
-  #    - DebugUplink #SS220-debug-uplink-fix
-  #ss220 shield rework end
 
 - type: listing
   id: UplinkSniperBundle
