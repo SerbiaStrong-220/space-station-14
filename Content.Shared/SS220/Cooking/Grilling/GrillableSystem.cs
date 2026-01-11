@@ -26,6 +26,9 @@ public sealed class GrillableSystem : EntitySystem
     // Stop rotting, if food is cooking
     private void OnGrillableRotting(Entity<GrillableComponent> ent, ref IsRottingEvent args)
     {
+        if (args.Handled)
+            return;
+            
         args.Handled = ent.Comp.IsCooking;
     }
 
