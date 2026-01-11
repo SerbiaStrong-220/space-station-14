@@ -1,4 +1,5 @@
 using Content.Shared.Nutrition.Components;
+using Content.Shared.SS220.InstastunResist;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using JetBrains.Annotations;
@@ -59,6 +60,13 @@ namespace Content.Shared.Nutrition.EntitySystems
         private void OnCreamPiedHitBy(EntityUid uid, CreamPiedComponent creamPied, ThrowHitByEvent args)
         {
             if (!Exists(args.Thrown) || !TryComp(args.Thrown, out CreamPieComponent? creamPie)) return;
+
+            //SS220 instastun resist begin
+            var resistEv = new StunAttemptEvent("Creampie");
+            RaiseLocalEvent(uid, ref resistEv);
+            if (resistEv.cancelled)
+                return;
+            //SS220 instastun resist end
 
             SetCreamPied(uid, creamPied, true);
 
