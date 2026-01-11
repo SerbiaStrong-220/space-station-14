@@ -2,7 +2,6 @@ using System.Linq;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
-using Content.Shared.Buckle.Components;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.CombatMode;
@@ -17,8 +16,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
-using Content.Shared.Power.EntitySystems;
-using Content.Shared.SS220.Cryostasis.Components;
+using Content.Shared.SS220.Cryostasis.Events;
 using Content.Shared.Stacks;
 using Content.Shared.Verbs;
 
@@ -36,7 +34,6 @@ public abstract class SharedInjectorSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedForensicsSystem _forensics = default!;
     [Dependency] protected readonly SharedSolutionContainerSystem SolutionContainer = default!;
-    [Dependency] private readonly SharedPowerReceiverSystem _powerReceiver = default!; // ss220 add fast injection with cryo syringe
 
     public override void Initialize()
     {
@@ -246,15 +243,11 @@ public abstract class SharedInjectorSystem : EntitySystem
         }
 
         // ss220 add fast injection with cryo syringe start
-        if (TryComp<BuckleComponent>(target, out var buckle) &&
-            TryComp<CryostasisComponent>(injector, out var cryostasis) &&
-            buckle.Buckled && _powerReceiver.IsPowered(buckle.BuckledTo.Value))
-        {
-            actualDelay /= cryostasis.FastInjectionMultiply;
-        }
+        var changeDelayEv = new ChangeInjectorDelayEvent(injector, target, user, actualDelay);
+        RaiseLocalEvent(injector, ref changeDelayEv);
         // ss220 add fast injection with cryo syringe end
 
-        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, actualDelay, new InjectorDoAfterEvent(), injector.Owner, target: target, used: injector.Owner)
+        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, changeDelayEv.Delay, new InjectorDoAfterEvent(), injector.Owner, target: target, used: injector.Owner) // ss220 add fast injection with cryo syringe
         {
             BreakOnMove = true,
             BreakOnWeightlessMove = false,
