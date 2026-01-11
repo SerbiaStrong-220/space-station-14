@@ -54,4 +54,5 @@
   - type: HeldSpeedModifier
     sprintModifier: 0.7
     mirrorClothingModifier: false
+  #- type: Blocking # not the best option, but blocking hardcoded to shields sadly
 

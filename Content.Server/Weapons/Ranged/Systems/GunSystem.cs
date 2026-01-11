@@ -263,6 +263,10 @@ public sealed partial class GunSystem : SharedGunSystem
                                 if (hitscan.StaminaDamage > 0f)
                                     _stamina.TakeStaminaDamage(hitEntity, hitscan.StaminaDamage, source: user);
 
+                                //var dmg = hitscan.Damage; SS220 shield rework
+
+                                //var hitName = ToPrettyString(hitEntity); SS220 shield rework
+
                                 if (dmg != null)
                                     dmg = Damageable.TryChangeDamage(hitEntity, dmg * Damageable.UniversalHitscanDamageModifier, origin: user);
                             }
