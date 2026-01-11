@@ -24,6 +24,7 @@ using Robust.Shared.Random;
 using Content.Server.Projectiles;
 using Content.Shared.Projectiles;
 using Content.Shared.Mindshield.Components;
+using Content.Shared.Weapons.Melee.Events;
 
 namespace Content.Server.Revenant.EntitySystems;
 
@@ -55,6 +56,9 @@ public sealed partial class RevenantSystem : EntitySystem
         SubscribeLocalEvent<RevenantComponent, ComponentStartup>(OnStartup);
 
         SubscribeLocalEvent<RevenantComponent, DamageChangedEvent>(OnDamage);
+
+        SubscribeLocalEvent<RevenantComponent, AttackedEvent>(OnMeleeDamage); // ss220 fix stun while range attack
+
         SubscribeLocalEvent<RevenantComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<RevenantComponent, StatusEffectAddedEvent>(OnStatusAdded);
         SubscribeLocalEvent<RevenantComponent, StatusEffectEndedEvent>(OnStatusEnded);
@@ -119,13 +123,17 @@ public sealed partial class RevenantSystem : EntitySystem
 
         var essenceDamage = args.DamageDelta.GetTotal().Float() * component.DamageToEssenceCoefficient * -1;
         ChangeEssenceAmount(uid, essenceDamage, component);
-        // SS220 revenant-stuns-damage-dealer-begin
-        if (component.StunTime is null || args.Origin is null || HasComp<MindShieldComponent>(args.Origin))
+    }
+
+    // ss220 fix stun while range attack start
+    private void OnMeleeDamage(Entity<RevenantComponent> ent, ref AttackedEvent args)
+    {
+        if (ent.Comp.StunTime is null || HasComp<MindShieldComponent>(args.User))
             return;
 
-        _stun.TryUpdateParalyzeDuration(args.Origin.Value, component.StunTime.Value);
-        // SS220 revenant-stuns-damage-dealer-end
+        _stun.TryUpdateParalyzeDuration(args.User, ent.Comp.StunTime.Value);
     }
+    // ss220 fix stun while range attack end
 
     public bool ChangeEssenceAmount(EntityUid uid, FixedPoint2 amount, RevenantComponent? component = null, bool allowDeath = true, bool regenCap = false)
     {
