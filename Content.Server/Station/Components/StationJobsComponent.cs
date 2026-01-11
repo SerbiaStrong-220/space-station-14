@@ -73,10 +73,15 @@ public sealed partial class StationJobsComponent : Component
     [DataField]
     public Dictionary<NetUserId, List<ProtoId<JobPrototype>>> PlayerJobs = new();
 
+    // ss220 add more jobs for dev map start
     /// <summary>
     /// Mapping of jobs to an int[2] array that specifies jobs available at round start, and midround.
     /// Negative values implies that there is no limit.
     /// </summary>
-    [DataField("availableJobs", required: true)]
-    public Dictionary<ProtoId<JobPrototype>, int[]> SetupAvailableJobs = default!;
+    [DataField("availableJobs")]
+    public Dictionary<ProtoId<JobPrototype>, int[]> SetupAvailableJobs = new();
+
+    [DataField]
+    public bool SpawnAllJobs;
+    // ss220 add more jobs for dev map end
 }
