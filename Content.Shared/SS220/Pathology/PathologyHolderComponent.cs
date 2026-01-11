@@ -21,4 +21,6 @@ public sealed partial class PathologyInstanceData(TimeSpan startTime)
     public TimeSpan StartTime = startTime;
 
     public int Level = 0;
+
+    public int StackCount = PathologySystem.OneStack;
 }

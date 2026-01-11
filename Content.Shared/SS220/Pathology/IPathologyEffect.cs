@@ -5,5 +5,5 @@ namespace Content.Shared.SS220.Pathology;
 [ImplicitDataDefinitionForInheritors]
 public partial interface IPathologyEffect
 {
-    abstract void ApplyEffect(EntityUid uid, IEntityManager entityManager);
+    abstract void ApplyEffect(EntityUid uid,PathologyInstanceData data, IEntityManager entityManager);
 }

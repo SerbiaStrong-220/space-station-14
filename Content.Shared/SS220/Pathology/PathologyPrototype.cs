@@ -28,6 +28,9 @@ public sealed partial class PathologyDefinition
     public LocId? ProgressPopup;
 
     [DataField]
+    public int MaxStackCount = PathologySystem.OneStack;
+
+    [DataField]
     public ComponentRegistry Components;
 
     [DataField]

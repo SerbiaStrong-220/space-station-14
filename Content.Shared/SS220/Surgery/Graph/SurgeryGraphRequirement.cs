@@ -37,10 +37,12 @@ public abstract partial class SurgeryGraphRequirement
 
     public bool SatisfiesRequirements(EntityUid? uid, IEntityManager entityManager)
     {
+        if (uid.HasValue && !uid.Value.IsValid())
+            return false;
+
         return Invert != Requirement(uid, entityManager);
     }
 
-    [MustCallBase(true)]
     public bool MeetRequirement(EntityUid? uid, IEntityManager entityManager)
     {
         if (!SatisfiesRequirements(uid, entityManager))

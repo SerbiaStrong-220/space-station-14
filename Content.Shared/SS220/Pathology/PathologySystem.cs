@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using System.Diagnostics.CodeAnalysis;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -9,6 +10,8 @@ public sealed class PathologySystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
+
+    public static int OneStack = 1;
 
     private readonly TimeSpan _updateInterval = TimeSpan.FromSeconds(1f);
 
@@ -42,7 +45,7 @@ public sealed class PathologySystem : EntitySystem
 
                 foreach (var effect in pathologyProto.Definition[data.Level].Effects)
                 {
-                    effect.ApplyEffect(uid, EntityManager);
+                    effect.ApplyEffect(uid, data, EntityManager);
                 }
             }
         }
@@ -109,6 +112,9 @@ public sealed class PathologySystem : EntitySystem
         if (!entity.Comp.ActivePathologies.TryGetValue(pathologyId, out var instanceData))
             return true;
 
+        if (instanceData.StackCount > OneStack)
+            return false;
+
         var ev = new PathologyRemoveAttempt(pathologyId, instanceData.Level);
         if (ev.Cancelled)
             return false;
@@ -133,5 +139,46 @@ public sealed class PathologySystem : EntitySystem
         entity.Comp.ActivePathologies.Remove(pathologyPrototype.ID);
 
         Dirty(entity);
+    }
+
+    public bool HavePathology(Entity<PathologyHolderComponent?> entity, ProtoId<PathologyPrototype> pathologyId)
+    {
+        if (!Resolve(entity.Owner, ref entity.Comp))
+            return false;
+
+        return entity.Comp.ActivePathologies.ContainsKey(pathologyId);
+    }
+
+    public bool TryGetPathologyStack(Entity<PathologyHolderComponent?> entity, ProtoId<PathologyPrototype> pathologyId, [NotNullWhen(true)] out int? stackCount)
+    {
+        stackCount = null;
+        if (!Resolve(entity.Owner, ref entity.Comp))
+            return false;
+
+        if (!entity.Comp.ActivePathologies.TryGetValue(pathologyId, out var instanceData))
+            return false;
+
+        stackCount = instanceData.StackCount;
+        return true;
+    }
+
+    public bool TryChangePathologyStack(Entity<PathologyHolderComponent?> entity, ProtoId<PathologyPrototype> pathologyId, int toAdd = 1)
+    {
+        if (!Resolve(entity.Owner, ref entity.Comp))
+            return false;
+
+        if (!_prototype.Resolve(pathologyId, out var pathologyPrototype))
+            return false;
+
+        if (!entity.Comp.ActivePathologies.TryGetValue(pathologyId, out var instanceData))
+            return false;
+
+        var newStackCount = Math.Clamp(instanceData.StackCount + toAdd, OneStack, pathologyPrototype.Definition[instanceData.Level].MaxStackCount);
+
+        if (newStackCount == instanceData.StackCount)
+            return false;
+
+        instanceData.StackCount = newStackCount;
+        return true;
     }
 }

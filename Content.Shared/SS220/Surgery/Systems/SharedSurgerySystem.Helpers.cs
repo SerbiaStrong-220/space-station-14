@@ -42,7 +42,9 @@ public abstract partial class SharedSurgerySystem
     public bool CanStartSurgery(EntityUid performer, SurgeryGraphPrototype surgeryGraph, EntityUid? target, EntityUid? used, [NotNullWhen(false)] out string? reason)
     {
         reason = null;
-        if (HasComp<SurgeryPatientComponent>(target))
+        if (target is not null
+            && TryComp<SurgeryPatientComponent>(target, out var surgeryPatient)
+            && surgeryPatient.OngoingSurgeries.ContainsKey(surgeryGraph.ID))
         {
             reason = Loc.GetString(_cantStartSurgeryWhileOneOngoing);
             return reason is null;
