@@ -6,17 +6,16 @@ using Content.Shared.Ensnaring;
 using Content.Shared.Ensnaring.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
-using Content.Shared.SS220.SS220SharedTriggers.Events;
-using Content.Shared.SS220.SS220SharedTriggers.System;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Verbs;
-using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
-using Robust.Shared.Physics.Events;
 using Content.Shared.Database;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Hands.Components;
+using Content.Shared.Trigger;
+using Robust.Shared.Containers;
 
 namespace Content.Shared.SS220.Trap;
 
@@ -25,7 +24,6 @@ namespace Content.Shared.SS220.Trap;
 /// </summary>
 public sealed class TrapSystem : EntitySystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly SharedStunSystem _stunSystem = default!;
     [Dependency] private readonly SharedEnsnareableSystem _ensnareableSystem = default!;
     [Dependency] private readonly OpenableSystem _openable = default!;
@@ -36,17 +34,15 @@ public sealed class TrapSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly AnchorableSystem _anchorableSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly TriggerSystem _trigger = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
     {
         SubscribeLocalEvent<TrapComponent, GetVerbsEvent<AlternativeVerb>>(OnAlternativeVerb);
         SubscribeLocalEvent<TrapComponent, TrapInteractionDoAfterEvent>(OnTrapInteractionDoAfter);
-        SubscribeLocalEvent<TrapComponent, StartCollideEvent>(OnStartCollide);
-        // TODO-SS220 move to wizden system
-        SubscribeLocalEvent<TrapComponent, SharedTriggerEvent>(OnTrigger);
+        SubscribeLocalEvent<TrapComponent, TriggerEvent>(OnTrigger);
     }
 
     private void OnAlternativeVerb(Entity<TrapComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
@@ -106,42 +102,47 @@ public sealed class TrapSystem : EntitySystem
             DefuseTrap(ent, args.User);
     }
 
-    public void ArmTrap(Entity<TrapComponent> ent, EntityUid? user, bool withSound = true)
+    private void ArmTrap(Entity<TrapComponent> ent, EntityUid? user, bool withSound = true)
     {
         if (!CanArmTrap(ent, user))
             return;
-        var xform = Transform(ent.Owner).Coordinates;
+
+        var coordinates = Transform(ent.Owner).Coordinates;
+
         if (user != null && withSound)
-            _audio.PlayPredicted(ent.Comp.SetTrapSound, xform, user);
+            _audio.PlayPredicted(ent.Comp.SetTrapSound, coordinates, user);
 
         ent.Comp.State = TrapArmedState.Armed;
         Dirty(ent);
+
         UpdateVisuals(ent.Owner, ent.Comp);
         _transformSystem.AnchorEntity(ent.Owner);
 
         var ev = new TrapArmedEvent();
-        RaiseLocalEvent(ent, ev);
+        RaiseLocalEvent(ent, ref ev);
     }
 
-    public void DefuseTrap(Entity<TrapComponent> ent, EntityUid? user, bool withSound = true)
+    private void DefuseTrap(Entity<TrapComponent> ent, EntityUid? user, bool withSound = true)
     {
         if (!CanDefuseTrap(ent, user))
             return;
 
-        var xform = Transform(ent.Owner).Coordinates;
+        var coordinates = Transform(ent.Owner).Coordinates;
+
         if (user != null && withSound)
-            _audio.PlayPredicted(ent.Comp.DefuseTrapSound, xform, user);
+            _audio.PlayPredicted(ent.Comp.DefuseTrapSound, coordinates, user);
 
         ent.Comp.State = TrapArmedState.Unarmed;
         Dirty(ent);
+
         UpdateVisuals(ent.Owner, ent.Comp);
         _transformSystem.Unanchor(ent.Owner);
 
         var ev = new TrapDefusedEvent();
-        RaiseLocalEvent(ent, ev);
+        RaiseLocalEvent(ent, ref ev);
     }
 
-    public bool CanArmTrap(Entity<TrapComponent> ent, EntityUid? user)
+    private bool CanArmTrap(Entity<TrapComponent> ent, EntityUid? user)
     {
         // Providing a stuck traps on one tile
         var coordinates = Transform(ent.Owner).Coordinates;
@@ -149,55 +150,62 @@ public sealed class TrapSystem : EntitySystem
         {
             if (user != null)
                 _popup.PopupClient(Loc.GetString("trap-component-no-room"), user.Value, user.Value);
+
+            return false;
+        }
+
+        // arming in container cause crashes
+        if (_container.IsEntityInContainer(ent))
+        {
+            if (user != null)
+                _popup.PopupClient(Loc.GetString("trap-component-in-container"), user.Value, user.Value);
+
             return false;
         }
 
         var ev = new TrapArmAttemptEvent(user);
-        RaiseLocalEvent(ent, ev);
+        RaiseLocalEvent(ent, ref ev);
 
         return !ev.Cancelled;
     }
 
-    public bool CanDefuseTrap(Entity<TrapComponent> ent, EntityUid? user)
+    private bool CanDefuseTrap(Entity<TrapComponent> ent, EntityUid? user)
     {
-        var ev = new TrapDefuseAttemptEvent(user);
-        RaiseLocalEvent(ent, ev);
+        // disarming in container can cause crash
+        if (_container.IsEntityInContainer(ent))
+            return false;
 
+        var ev = new TrapDefuseAttemptEvent(user);
+        RaiseLocalEvent(ent, ref ev);
         return !ev.Cancelled;
     }
 
-    private void OnStartCollide(Entity<TrapComponent> ent, ref StartCollideEvent args)
+    private void OnTrigger(Entity<TrapComponent> ent, ref TriggerEvent args)
     {
         if (ent.Comp.State == TrapArmedState.Unarmed)
             return;
 
-        if (_entityWhitelist.IsBlacklistPass(ent.Comp.Blacklist, args.OtherEntity))
-            return;
-
-        DefuseTrap(ent, args.OtherEntity, false);
-        _trigger.TriggerTarget(ent.Owner, args.OtherEntity);
-
-        if (_net.IsServer)
-            _audio.PlayPvs(ent.Comp.HitTrapSound, ent.Owner);
-    }
-
-    private void OnTrigger(Entity<TrapComponent> ent, ref SharedTriggerEvent args)
-    {
-        if (!args.Activator.HasValue)
+        if (args.User == null)
             return;
 
         if (!TryComp<EnsnaringComponent>(ent.Owner, out var ensnaring))
             return;
 
-        if (ent.Comp.DurationStun != TimeSpan.Zero && TryComp<StatusEffectsComponent>(args.Activator.Value, out var status))
+        DefuseTrap(ent, args.User.Value, false);
+
+        if (_net.IsServer)
+            _audio.PlayPvs(ent.Comp.HitTrapSound, ent.Owner);
+
+        if (ent.Comp.DurationStun != TimeSpan.Zero && TryComp<StatusEffectsComponent>(args.User.Value, out _))
         {
-            _stunSystem.TryUpdateStunDuration(args.Activator.Value, ent.Comp.DurationStun);
-            _stunSystem.TryKnockdown(args.Activator.Value, ent.Comp.DurationStun, true);
+            _stunSystem.TryUpdateStunDuration(args.User.Value, ent.Comp.DurationStun);
+            _stunSystem.TryKnockdown(args.User.Value, ent.Comp.DurationStun);
         }
 
-        _ensnareableSystem.TryEnsnare(args.Activator.Value, ent.Owner, ensnaring);
-        _adminLogger.Add(LogType.Action, LogImpact.Medium,
-                    $"{ToPrettyString(args.Activator.Value)} caused trap {ToPrettyString(ent.Owner):entity}");
+        _ensnareableSystem.TryEnsnare(args.User.Value, ent.Owner, ensnaring);
+        _adminLogger.Add(LogType.Action,
+            LogImpact.Medium,
+            $"{ToPrettyString(args.User.Value)} caused trap {ToPrettyString(ent.Owner):entity}");
     }
 
     private void UpdateVisuals(EntityUid uid, TrapComponent? trapComp = null, AppearanceComponent? appearance = null)
@@ -205,8 +213,10 @@ public sealed class TrapSystem : EntitySystem
         if (!Resolve(uid, ref trapComp, ref appearance, false))
             return;
 
-        _appearance.SetData(uid, TrapVisuals.Visual,
-            trapComp.State == TrapArmedState.Unarmed ? TrapVisuals.Unarmed : TrapVisuals.Armed, appearance);
+        _appearance.SetData(uid,
+            TrapVisuals.Visual,
+            trapComp.State == TrapArmedState.Unarmed ? TrapVisuals.Unarmed : TrapVisuals.Armed,
+            appearance);
     }
 }
 

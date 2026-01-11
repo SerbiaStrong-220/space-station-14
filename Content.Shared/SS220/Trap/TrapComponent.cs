@@ -20,9 +20,6 @@ public sealed partial class TrapComponent : Component
     [DataField]
     public TimeSpan DurationStun = TimeSpan.Zero;
 
-    [DataField]
-    public EntityWhitelist Blacklist = new();
-
     /// <summary>
     /// Delay time for setting trap
     /// </summary>
@@ -55,46 +52,33 @@ public sealed partial class TrapComponent : Component
 public enum TrapArmedState : byte
 {
     Unarmed,
-    Armed
+    Armed,
 }
 
 /// <summary>
 /// Event raised when a trap is successfully armed.
 /// </summary>
-[Serializable, NetSerializable]
-public sealed class TrapArmedEvent : EntityEventArgs
-{
-}
+[ByRefEvent]
+public record struct TrapArmedEvent;
 
 /// <summary>
 /// Event raised when a trap is successfully defused.
 /// </summary>
-[Serializable, NetSerializable]
-public sealed class TrapDefusedEvent : EntityEventArgs
-{
-}
+[ByRefEvent]
+public record struct TrapDefusedEvent;
+
 /// <summary>
 /// Event raised when attempting to defuse a trap to check if it can be defused.
 /// </summary>
-public sealed partial class TrapDefuseAttemptEvent : CancellableEntityEventArgs
-{
-    public EntityUid? User;
-    public TrapDefuseAttemptEvent(EntityUid? user)
-    {
-        User = user;
-    }
-}
+[ByRefEvent]
+public record struct TrapDefuseAttemptEvent(EntityUid? User, bool Cancelled = false);
+
 /// <summary>
 /// Event raised when attempting to arm a trap to check if it can be armed.
 /// </summary>
-public sealed partial class TrapArmAttemptEvent : CancellableEntityEventArgs
-{
-    public EntityUid? User;
-    public TrapArmAttemptEvent(EntityUid? user)
-    {
-        User = user;
-    }
-}
+[ByRefEvent]
+public record struct TrapArmAttemptEvent(EntityUid? User, bool Cancelled = false);
+
 /// <summary>
 /// Event DoAfter when interacting with traps.
 /// </summary>
@@ -102,13 +86,4 @@ public sealed partial class TrapArmAttemptEvent : CancellableEntityEventArgs
 public sealed partial class TrapInteractionDoAfterEvent : SimpleDoAfterEvent
 {
     public bool ArmAction { get; set; }
-}
-public sealed class TrapToggledEvent : EntityEventArgs
-{
-    public readonly bool IsArmed;
-
-    public TrapToggledEvent(bool isArmed)
-    {
-        IsArmed = isArmed;
-    }
 }

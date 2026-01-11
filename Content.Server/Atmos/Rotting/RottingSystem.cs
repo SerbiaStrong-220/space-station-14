@@ -7,6 +7,8 @@ using Content.Shared.Temperature.Components;
 using Robust.Server.Containers;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Timing;
+using Content.Server.Temperature.Components;
+using System;
 
 namespace Content.Server.Atmos.Rotting;
 
@@ -43,7 +45,20 @@ public sealed class RottingSystem : SharedRottingSystem
     {
         if (args.Handled)
             return;
-        args.Handled = component.CurrentTemperature < Atmospherics.T0C + 0.85f;
+
+        //#ss220 Consider internal temperature for rotting begin
+        float tempToCheck = Atmospherics.T20C;
+        if (TryComp<TemperatureComponent>(uid, out var tempComp))
+        {
+            tempToCheck = tempComp.CurrentTemperature;
+            if (TryComp<InternalTemperatureComponent>(uid, out var internalTemp))
+            {
+                    tempToCheck = MathF.Min(tempToCheck, internalTemp.Temperature);
+            }
+        }
+        
+        args.Handled = tempToCheck < Atmospherics.T0C + 0.85f;
+        //#ss220 Consider internal temperature for rotting end
     }
 
     /// <summary>

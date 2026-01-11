@@ -17,7 +17,7 @@ public sealed partial class MindExtensionComponent : Component
     public TimeSpan? RespawnTimer = default!;
 
     [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
-    public TimeSpan RespawnTime = TimeSpan.FromMinutes(20);
+    public TimeSpan RespawnTime = TimeSpan.FromMinutes(15);
 
     [ViewVariables(VVAccess.ReadOnly)]
     public bool RespawnAvailable = false;

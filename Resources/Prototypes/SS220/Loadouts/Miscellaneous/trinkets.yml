@@ -9,3 +9,9 @@
   storage:
     back:
     - ClothingHeadHatNewYearsCap
+
+- type: loadout
+  id: Eyepatch
+  storage:
+    back:
+    - ClothingEyesEyepatch

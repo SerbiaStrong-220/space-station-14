@@ -102,6 +102,10 @@
   - type: TemperatureProtection
     heatingCoefficient: 0.1
     coolingCoefficient: 0.1
+  #ss220 paramed hardsuit head virus resistance begin
+  - type: ZombificationResistance
+    zombificationResistanceCoefficient: 0.85 
+  #ss220 paramed hardsuit head virus resistance end
   - type: Armor
     modifiers:
       coefficients:

@@ -158,6 +158,10 @@
   - type: StaminaResistance
     damageCoefficient: 0.8
   # SS220 add stamina resistance end
+  #ss220 paramed hardsuit virus resistance begin
+  - type: ZombificationResistance
+    zombificationResistanceCoefficient: 0.5 
+  #ss220 paramed hardsuit virus resistance end
   - type: GroupExamine
   - type: StealTarget
     stealGroup: ClothingOuterHardsuitVoidParamed

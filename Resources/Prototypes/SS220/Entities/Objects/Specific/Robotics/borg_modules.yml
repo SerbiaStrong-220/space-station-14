@@ -11,6 +11,7 @@
     hands:
     - item: WeaponProtoKineticAccelerator
     - item: JetpackBorgModule
+    - item: HandHeldMassScannerBorg
     - item: HandheldGPSBasic
 
 - type: entity

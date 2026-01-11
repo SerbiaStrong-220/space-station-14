@@ -610,3 +610,12 @@
     - type: Paper
       contentSize: 10000
       content: station-goal-complexPVO
+
+- type: entity
+  parent: PaperNtFormCc
+  id: PaperStationGoalSports
+  suffix: Цель спорт комплекс
+  components:
+    - type: Paper
+      contentSize: 10000
+      content: station-goal-sports

@@ -131,7 +131,7 @@ public sealed partial class SuperMatterSystem
             && TryComp<TeslaEnergyBallComponent>(spawnedUid.Value, out var teslaComp))
             _teslaEnergyBall.AdjustEnergy(spawnedUid.Value, teslaComp, 1000f);
 
-        TryChangeStationAlertLevel(crystal, crystal.Comp.CrystalDestroyAlertLevel, out _);
+       // TryChangeStationAlertLevel(crystal, crystal.Comp.CrystalDestroyAlertLevel, out _);
         StationAnnounceIntegrity(crystal, AnnounceIntegrityTypeEnum.Explosion, smState);
     }
 }

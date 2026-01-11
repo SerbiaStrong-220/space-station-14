@@ -146,7 +146,8 @@ namespace Content.IntegrationTests.Tests
             "Snout",
             "VoidZone",
             "FractWar",
-            "CookingEventMap"
+            "CookingEventMap",
+            "RiftEventMap"
         };
 
         private static readonly ProtoId<EntityCategoryPrototype> DoNotMapCategory = "DoNotMap";
