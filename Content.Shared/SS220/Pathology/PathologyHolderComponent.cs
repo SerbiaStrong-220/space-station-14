@@ -1,0 +1,24 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
+
+namespace Content.Shared.SS220.Pathology;
+
+[RegisterComponent]
+[NetworkedComponent, AutoGenerateComponentState]
+public sealed partial class PathologyHolderComponent : Component
+{
+    [DataField]
+    [AutoNetworkedField]
+    public Dictionary<ProtoId<PathologyPrototype>, PathologyInstanceData> ActivePathologies = new();
+}
+
+[Serializable, NetSerializable]
+public sealed partial class PathologyInstanceData(TimeSpan startTime)
+{
+    public TimeSpan StartTime = startTime;
+
+    public int Level = 0;
+}

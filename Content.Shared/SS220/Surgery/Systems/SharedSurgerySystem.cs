@@ -3,7 +3,6 @@
 using Content.Shared.Administration.Logs;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
-using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.SS220.Surgery.Graph;
 using Content.Shared.SS220.Surgery.Components;
@@ -14,8 +13,6 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Content.Shared.Database;
 using Content.Shared.Weapons.Melee;
-using Content.Shared.Mobs;
-using System.Linq;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.Surgery.Systems;
