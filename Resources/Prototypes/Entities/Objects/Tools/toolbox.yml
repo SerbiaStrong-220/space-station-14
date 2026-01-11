@@ -38,9 +38,7 @@
   - type: Appearance
   #ss220 add drag drop toolbox start
   - type: Toolbox
-    whitelist:
-      tags:
-      - UtilityBelt
+  - type: DragDropContainer
   #ss220 add drag drop toolbox end
 
 - type: entity

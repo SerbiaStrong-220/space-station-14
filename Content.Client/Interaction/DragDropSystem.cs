@@ -52,9 +52,9 @@ public sealed class DragDropSystem : SharedDragDropSystem
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
 
-    // ss220 add drag drop toolbox start
+    // ss220 add drag drop container start
     [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
-    // ss220 add drag drop toolbox end
+    // ss220 add drag drop container end
 
     // how often to recheck possible targets (prevents calling expensive
     // check logic each update)
@@ -365,7 +365,7 @@ public sealed class DragDropSystem : SharedDragDropSystem
             return false;
         }
 
-        // ss220 add drag drop toolbox start
+        // ss220 add drag drop container start
         List<EntityUid> entities;
         var coords = args.Coordinates;
 
@@ -381,7 +381,7 @@ public sealed class DragDropSystem : SharedDragDropSystem
         {
             entities = [];
         }
-        // ss220 add drag drop toolbox end
+        // ss220 add drag drop container end
 
         var outOfRange = false;
         var user = localPlayer.Value;

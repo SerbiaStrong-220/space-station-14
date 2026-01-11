@@ -1,29 +1,28 @@
 using Content.Shared.DragDrop;
-using Content.Shared.SS220.Toolbox.Components;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Whitelist;
 
-namespace Content.Shared.SS220.Toolbox.Systems;
+namespace Content.Shared.SS220.DragDrop;
 
-public sealed partial class ToolboxDragDropSystem : EntitySystem
+public sealed partial class DragDropContainerSystem : EntitySystem
 {
     [Dependency] private readonly SharedStorageSystem _storage = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<ToolboxComponent, CanDragEvent>(OnCanDrag);
-        SubscribeLocalEvent<ToolboxComponent, CanDropDraggedEvent>(OnCanDropDrag);
-        SubscribeLocalEvent<ToolboxComponent, DragDropDraggedEvent>(OnDragDropDragged);
+        SubscribeLocalEvent<DragDropContainerComponent, CanDragEvent>(OnCanDrag);
+        SubscribeLocalEvent<DragDropContainerComponent, CanDropDraggedEvent>(OnCanDropDrag);
+        SubscribeLocalEvent<DragDropContainerComponent, DragDropDraggedEvent>(OnDragDropDragged);
     }
 
-    private void OnCanDrag(Entity<ToolboxComponent> ent, ref CanDragEvent args)
+    private void OnCanDrag(Entity<DragDropContainerComponent> ent, ref CanDragEvent args)
     {
         args.Handled = true;
     }
 
-    private void OnCanDropDrag(Entity<ToolboxComponent> ent, ref CanDropDraggedEvent args)
+    private void OnCanDropDrag(Entity<DragDropContainerComponent> ent, ref CanDropDraggedEvent args)
     {
         if (!TryComp<StorageComponent>(ent, out var storage) || storage.Container.Count == 0)
             return;
@@ -41,7 +40,7 @@ public sealed partial class ToolboxDragDropSystem : EntitySystem
         args.CanDrop = true;
     }
 
-    private void OnDragDropDragged(Entity<ToolboxComponent> ent, ref DragDropDraggedEvent args)
+    private void OnDragDropDragged(Entity<DragDropContainerComponent> ent, ref DragDropDraggedEvent args)
     {
         if (!TryComp<StorageComponent>(args.Target, out var targetStorage))
             return;
