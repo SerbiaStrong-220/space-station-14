@@ -1,0 +1,13 @@
+- type: entity
+  parent: BaseActionPolymorph
+  id: ActionPolymorphWizardSpiderGhost
+  name: Превращение в Паучьего Призрака
+  description: Превращает тебя в Паучьего Призрака.
+  components:
+  - type: Action
+    icon:
+      sprite: Mobs/Animals/spider.rsi
+      state: nurse
+  - type: InstantAction
+    event: !type:PolymorphActionEvent
+      protoId: WizardSpiderGhost
