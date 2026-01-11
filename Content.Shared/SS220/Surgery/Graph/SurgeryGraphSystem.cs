@@ -14,14 +14,19 @@ public sealed class SurgeryGraphSystem : EntitySystem
         return Get(edge, (x) => x.EndSound);
     }
 
-    public IReadOnlyList<ISurgeryGraphAction> GetActions(SurgeryGraphEdge edge)
+    public IReadOnlyList<ISurgeryGraphEdgeAction> GetActions(SurgeryGraphEdge edge)
     {
         return GetList(edge, (x) => x.Actions);
     }
 
-    public IReadOnlyList<ISurgeryGraphCondition> GetConditions(SurgeryGraphEdge edge)
+    public IReadOnlyList<SurgeryGraphRequirement> GetRequirements(SurgeryGraphEdge edge)
     {
-        return GetList(edge, (x) => x.Conditions);
+        return GetList(edge, (x) => x.Requirements);
+    }
+
+    public IReadOnlyList<SurgeryGraphRequirement> GetVisibilityRequirements(SurgeryGraphEdge edge)
+    {
+        return GetList(edge, (x) => x.VisibilityRequirements);
     }
 
     public string? ExamineDescription(SurgeryGraphNode node)
@@ -29,6 +34,9 @@ public sealed class SurgeryGraphSystem : EntitySystem
         return Get(node, (x) => x.NodeText.ExamineDescription);
     }
 
+    /// <summary>
+    /// Loc path to description
+    /// </summary>
     public string? Description(SurgeryGraphNode node)
     {
         return Get(node, (x) => x.NodeText.Description);

@@ -1,3 +1,5 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 # Nodes
 
 - type: abstractSurgeryNode
@@ -53,11 +55,14 @@
     to: abstract
     delay: 4
     sound: /Audio/SS220/Surgery/incision.ogg
-    conditions:
-    - !type:SurgeryToolTypeCondition
+    requirements:
+    - !type:SurgeryToolRequirement
+      subject: used
       surgeryTool: scalpel
+      description: surgery-requirement-tool-required-scalpel
+      failureMessage: surgery-requirement-tool-miss
     actions:
-    - !type:ApplyBleedingSurgeryAction
+    - !type:ApplyBleedingAction
       bleedAmount: 2
 
 - type: abstractSurgeryEdge
@@ -66,11 +71,14 @@
     to: abstract
     delay: 4
     sound: /Audio/SS220/Surgery/retract_skin.ogg
-    conditions:
-    - !type:SurgeryToolTypeCondition
+    requirements:
+    - !type:SurgeryToolRequirement
+      subject: used
       surgeryTool: retractor
+      description: surgery-requirement-tool-required-retractor
+      failureMessage: surgery-requirement-tool-miss
     actions:
-    - !type:ApplyBleedingSurgeryAction
+    - !type:ApplyBleedingAction
       bleedAmount: -2
 
 - type: abstractSurgeryEdge
@@ -78,12 +86,15 @@
   edge:
     to: abstract
     delay: 12
-    sound:
-    conditions:
-    - !type:SurgeryToolTypeCondition
+    sound: /Audio/SS220/Surgery/saw.ogg
+    requirements:
+    - !type:SurgeryToolRequirement
+      subject: used
       surgeryTool: saw
+      description: surgery-requirement-tool-required-saw
+      failureMessage: surgery-requirement-tool-miss
     actions:
-    - !type:ApplyBleedingSurgeryAction
+    - !type:ApplyBleedingAction
       bleedAmount: 2
 
 - type: abstractSurgeryEdge
@@ -92,11 +103,14 @@
     to: abstract
     delay: 4
     sound: /Audio/SS220/Surgery/organ.ogg
-    conditions:
-    - !type:SurgeryToolTypeCondition
+    requirements:
+    - !type:SurgeryToolRequirement
+      subject: used
       surgeryTool: hemostat
+      description: surgery-requirement-tool-required-hemostat
+      failureMessage: surgery-requirement-tool-miss
     actions:
-    - !type:ApplyBleedingSurgeryAction
+    - !type:ApplyBleedingAction
       bleedAmount: -2
 
 - type: abstractSurgeryEdge
@@ -105,9 +119,12 @@
     to: abstract
     delay: 4
     sound: /Audio/SS220/Surgery/seal_wound.ogg
-    conditions:
-    - !type:SurgeryToolTypeCondition
+    requirements:
+    - !type:SurgeryToolRequirement
+      subject: used
       surgeryTool: cautery
+      description: surgery-requirement-tool-required-cautery
+      failureMessage: surgery-requirement-tool-miss
     actions:
-    - !type:ApplyBleedingSurgeryAction
+    - !type:ApplyBleedingAction
       bleedAmount: -2

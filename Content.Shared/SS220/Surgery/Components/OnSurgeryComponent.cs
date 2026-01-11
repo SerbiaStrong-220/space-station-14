@@ -7,17 +7,13 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared.SS220.Surgery.Components;
 
 /// <summary>
-/// This component applies to entities on which operation is started.
+/// This component contains information about being a valid target for surgery and ongiong operations
 /// </summary>
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class OnSurgeryComponent : Component
+public sealed partial class SurgeryPatientComponent : Component
 {
     [ViewVariables(VVAccess.ReadOnly)]
     [AutoNetworkedField]
-    public ProtoId<SurgeryGraphPrototype> SurgeryGraphProtoId;
-
-    [ViewVariables]
-    [AutoNetworkedField]
-    public string? CurrentNode;
+    public Dictionary<ProtoId<SurgeryGraphPrototype>, string> OngoingSurgeries = new();
 }

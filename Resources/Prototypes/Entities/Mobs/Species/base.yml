@@ -284,7 +284,7 @@
         Asphyxiation: -1.0
   - type: FireVisuals
     alternateState: Standing
-  - type: Surgable #SS220 Surgery
+  - type: SurgeryPatient #SS220 Surgery
   - type: StunVisuals
 
 - type: entity
