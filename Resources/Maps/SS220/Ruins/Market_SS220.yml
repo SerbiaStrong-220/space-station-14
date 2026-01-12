@@ -591,20 +591,6 @@ entities:
     - type: GasTileOverlay
     - type: RadiationGridResistance
     - type: ImplicitRoof
-- proto: ActionToggleInternals
-  entities:
-  - uid: 7
-    components:
-    - type: Transform
-      parent: 6
-  - uid: 11
-    components:
-    - type: Transform
-      parent: 10
-  - uid: 15
-    components:
-    - type: Transform
-      parent: 14
 - proto: AirCanister
   entities:
   - uid: 18
@@ -2633,16 +2619,8 @@ entities:
     components:
     - type: Transform
       parent: 2
-    - type: GasTank
-      toggleActionEntity: 7
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 7
     - type: InsideEntityStorage
 - proto: FenceMetalEnd
   entities:
@@ -3856,31 +3834,15 @@ entities:
     components:
     - type: Transform
       parent: 2
-    - type: GasTank
-      toggleActionEntity: 11
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 11
     - type: InsideEntityStorage
   - uid: 14
     components:
     - type: Transform
       parent: 13
-    - type: GasTank
-      toggleActionEntity: 15
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 15
 - proto: Pallet
   entities:
   - uid: 524

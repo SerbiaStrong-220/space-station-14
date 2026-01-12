@@ -1034,90 +1034,6 @@ entities:
     - type: ImplicitRoof
     - type: IFF
       color: '#C4D188FF'
-- proto: ActionToggleInternals
-  entities:
-  - uid: 4
-    components:
-    - type: Transform
-      parent: 3
-  - uid: 9
-    components:
-    - type: Transform
-      parent: 8
-  - uid: 15
-    components:
-    - type: Transform
-      parent: 14
-  - uid: 17
-    components:
-    - type: Transform
-      parent: 16
-  - uid: 19
-    components:
-    - type: Transform
-      parent: 18
-  - uid: 21
-    components:
-    - type: Transform
-      parent: 20
-  - uid: 23
-    components:
-    - type: Transform
-      parent: 22
-  - uid: 25
-    components:
-    - type: Transform
-      parent: 24
-  - uid: 27
-    components:
-    - type: Transform
-      parent: 26
-  - uid: 29
-    components:
-    - type: Transform
-      parent: 28
-  - uid: 38
-    components:
-    - type: Transform
-      parent: 37
-  - uid: 40
-    components:
-    - type: Transform
-      parent: 39
-  - uid: 42
-    components:
-    - type: Transform
-      parent: 41
-  - uid: 44
-    components:
-    - type: Transform
-      parent: 43
-  - uid: 46
-    components:
-    - type: Transform
-      parent: 45
-  - uid: 48
-    components:
-    - type: Transform
-      parent: 47
-- proto: ActionToggleLight
-  entities:
-  - uid: 55
-    components:
-    - type: Transform
-      parent: 54
-  - uid: 57
-    components:
-    - type: Transform
-      parent: 56
-  - uid: 59
-    components:
-    - type: Transform
-      parent: 58
-  - uid: 61
-    components:
-    - type: Transform
-      parent: 60
 - proto: AirAlarm
   entities:
   - uid: 93
@@ -3871,102 +3787,46 @@ entities:
     components:
     - type: Transform
       parent: 36
-    - type: GasTank
-      toggleActionEntity: 42
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 42
   - uid: 43
     components:
     - type: Transform
       parent: 36
-    - type: GasTank
-      toggleActionEntity: 44
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 44
   - uid: 45
     components:
     - type: Transform
       parent: 36
-    - type: GasTank
-      toggleActionEntity: 46
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 46
   - uid: 47
     components:
     - type: Transform
       parent: 36
-    - type: GasTank
-      toggleActionEntity: 48
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 48
 - proto: EmergencyOxygenTankFilled
   entities:
   - uid: 22
     components:
     - type: Transform
       parent: 13
-    - type: GasTank
-      toggleActionEntity: 23
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 23
   - uid: 24
     components:
     - type: Transform
       parent: 13
-    - type: GasTank
-      toggleActionEntity: 25
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 25
   - uid: 26
     components:
     - type: Transform
       parent: 13
-    - type: GasTank
-      toggleActionEntity: 27
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 27
 - proto: ExtinguisherCabinetFilled
   entities:
   - uid: 564
@@ -4180,82 +4040,50 @@ entities:
     components:
     - type: Transform
       parent: 53
-    - type: HandheldLight
-      toggleActionEntity: 55
     - type: ContainerContainer
       containers:
         cell_slot: !type:ContainerSlot
           showEnts: False
           occludes: True
           ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 55
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
   - uid: 56
     components:
     - type: Transform
       parent: 53
-    - type: HandheldLight
-      toggleActionEntity: 57
     - type: ContainerContainer
       containers:
         cell_slot: !type:ContainerSlot
           showEnts: False
           occludes: True
           ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 57
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
   - uid: 58
     components:
     - type: Transform
       parent: 53
-    - type: HandheldLight
-      toggleActionEntity: 59
     - type: ContainerContainer
       containers:
         cell_slot: !type:ContainerSlot
           showEnts: False
           occludes: True
           ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 59
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
   - uid: 60
     components:
     - type: Transform
       parent: 53
-    - type: HandheldLight
-      toggleActionEntity: 61
     - type: ContainerContainer
       containers:
         cell_slot: !type:ContainerSlot
           showEnts: False
           occludes: True
           ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 61
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
 - proto: Floodlight
   entities:
   - uid: 589
@@ -6107,30 +5935,14 @@ entities:
     components:
     - type: Transform
       parent: 36
-    - type: GasTank
-      toggleActionEntity: 38
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 38
   - uid: 39
     components:
     - type: Transform
       parent: 36
-    - type: GasTank
-      toggleActionEntity: 40
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 40
 - proto: Ointment
   entities:
   - uid: 137
@@ -6158,100 +5970,44 @@ entities:
     components:
     - type: Transform
       parent: 2
-    - type: GasTank
-      toggleActionEntity: 4
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 4
   - uid: 8
     components:
     - type: Transform
       parent: 7
-    - type: GasTank
-      toggleActionEntity: 9
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 9
   - uid: 14
     components:
     - type: Transform
       parent: 13
-    - type: GasTank
-      toggleActionEntity: 15
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 15
   - uid: 16
     components:
     - type: Transform
       parent: 13
-    - type: GasTank
-      toggleActionEntity: 17
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 17
   - uid: 18
     components:
     - type: Transform
       parent: 13
-    - type: GasTank
-      toggleActionEntity: 19
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 19
   - uid: 20
     components:
     - type: Transform
       parent: 13
-    - type: GasTank
-      toggleActionEntity: 21
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 21
   - uid: 28
     components:
     - type: Transform
       parent: 13
-    - type: GasTank
-      toggleActionEntity: 29
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 29
 - proto: Pallet
   entities:
   - uid: 825
