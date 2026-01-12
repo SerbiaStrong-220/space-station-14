@@ -539,7 +539,6 @@
   obeysTo: laws-owner-crew
 
  # Xenoborgs laws
- # TODO: Transale laws
 - type: siliconLaw
   id: Xenoborg1
   order: 1
@@ -569,8 +568,7 @@
 - type: siliconLawset
   id: XenoborgLawset
   name: law-xenoborg-name
-  randomizable: true
-  weight: 1 # SS220 random lawset
+  andomizable: false # SS220 Randomize lawsets
   laws:
   - Xenoborg1
   - Xenoborg2
@@ -580,7 +578,6 @@
   obeysTo: laws-owner-xenoborgs
 
  # Mothership core laws
- # TODO: Translate laws
 - type: siliconLaw
   id: MothershipCore1
   order: 1
@@ -610,8 +607,7 @@
 - type: siliconLawset
   id: MothershipCoreLawset
   name: law-mothershipcore-name
-  randomizable: true
-  weight: 1 # SS220 random lawset
+  randomizable: false # SS220 Randomize lawsets
   laws:
   - MothershipCore1
   - MothershipCore2

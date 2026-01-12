@@ -35,8 +35,11 @@ public sealed partial class SiliconLawProviderComponent : Component
     [DataField]
     public bool Subverted = false;
 
-    // SS220 Random lawsets begin
+    // SS220 Random lawset begin
+    /// <summary>
+    /// Should we randomize lawset or no
+    /// </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public bool UseRandomLawset = false;
-    // SS220 Random lawsets end
+    // SS220 Random lawset end
 }

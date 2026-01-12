@@ -190,6 +190,7 @@
     - ActionViewLaws
   - type: SiliconLawProvider
     laws: MothershipCoreLawset # custom laws here
+    useRandomLawset: false # SS220 Random lawset
     subverted: true
   - type: Stripping
   - type: Access
