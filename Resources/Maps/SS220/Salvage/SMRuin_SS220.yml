@@ -638,8 +638,6 @@ entities:
       pos: 5.5,-13.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 2
 - proto: AirSensorAssembly
@@ -2078,8 +2076,6 @@ entities:
       pos: 3.5,-13.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 2
   - uid: 274
@@ -2088,9 +2084,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 3.5,-12.5
       parent: 1
-    - type: DeviceNetwork
-      configurators:
-      - invalid
   - uid: 275
     components:
     - type: Transform
