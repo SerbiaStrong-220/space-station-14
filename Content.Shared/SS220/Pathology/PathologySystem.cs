@@ -1,21 +1,31 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Diagnostics.CodeAnalysis;
+using Content.Shared.Popups;
+using Content.Shared.Rejuvenate;
+using Content.Shared.StatusEffectNew;
+using Content.Shared.Traits;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.Pathology;
 
-public sealed class PathologySystem : EntitySystem
+public sealed partial class PathologySystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
 
-    public static int OneStack = 1;
+    public static readonly int OneStack = 0;
 
-    private readonly TimeSpan _updateInterval = TimeSpan.FromSeconds(1f);
+    public static readonly TimeSpan UpdateInterval = TimeSpan.FromSeconds(1f);
 
     private TimeSpan _lastUpdate;
+
+    public override void Initialize()
+    {
+        SubscribeLocalEvent<PathologyHolderComponent, RejuvenateEvent>(OnRejuvenate);
+    }
 
     public override void Update(float frameTime)
     {
@@ -27,7 +37,7 @@ public sealed class PathologySystem : EntitySystem
         if (_gameTiming.CurTime > _lastUpdate)
             return;
 
-        _lastUpdate = _gameTiming.CurTime + _updateInterval;
+        _lastUpdate = _gameTiming.CurTime + UpdateInterval;
 
         var query = EntityQueryEnumerator<PathologyHolderComponent>();
         while (query.MoveNext(out var uid, out var holder))
@@ -51,6 +61,14 @@ public sealed class PathologySystem : EntitySystem
         }
     }
 
+    private void OnRejuvenate(Entity<PathologyHolderComponent> entity, ref RejuvenateEvent args)
+    {
+        foreach (var (pathologyId, _) in entity.Comp.ActivePathologies)
+        {
+            TryRemovePathology(entity!, pathologyId);
+        }
+    }
+
     private bool TryProgressPathology(Entity<PathologyHolderComponent> entity, PathologyPrototype pathologyPrototype, PathologyInstanceData instanceData)
     {
         foreach (var req in pathologyPrototype.Definition[instanceData.Level].ProgressConditions)
@@ -66,61 +84,39 @@ public sealed class PathologySystem : EntitySystem
 
         instanceData.Level++;
 
-        EntityManager.AddComponents(entity, pathologyPrototype.Definition[instanceData.Level].Components);
+        var pathologyDefinition = pathologyPrototype.Definition[instanceData.Level];
+
+        foreach (var effect in pathologyDefinition.StatusEffects)
+        {
+            _statusEffects.TrySetStatusEffectDuration(entity, effect, out _);
+        }
+
+        AddTrait(entity, pathologyDefinition.Trait);
+
+        if (pathologyDefinition.ProgressPopup is { } progressPopup)
+            _popup.PopupClient(Loc.GetString(progressPopup), entity, entity);
 
         var ev = new PathologySeverityChanged(pathologyPrototype.ID, instanceData.Level - 1, instanceData.Level);
         RaiseLocalEvent(entity, ref ev);
 
+        Dirty(entity);
         return true;
     }
 
-    public bool TryAddPathology(Entity<PathologyHolderComponent?> entity, ProtoId<PathologyPrototype> pathologyId)
+    private void AddPathology(Entity<PathologyHolderComponent> entity, PathologyPrototype pathologyPrototype)
     {
-        if (!Resolve(entity.Owner, ref entity.Comp, false))
-            return false;
-
-        if (entity.Comp.ActivePathologies.ContainsKey(pathologyId))
-            return false;
-
-        if (!_prototype.Resolve(pathologyId, out var proto))
-            return false;
-
-        var attemptEv = new PathologyAddedAttempt(pathologyId);
-        RaiseLocalEvent(entity, ref attemptEv);
-
-        if (attemptEv.Cancelled)
-            return false;
-
-        var ev = new PathologyAddedEvent(pathologyId);
+        var ev = new PathologyAddedEvent(pathologyPrototype.ID);
         RaiseLocalEvent(entity, ref ev);
 
-        entity.Comp.ActivePathologies.Add(pathologyId, new PathologyInstanceData(_gameTiming.CurTime));
+        foreach (var effect in pathologyPrototype.Definition[0].StatusEffects)
+        {
+            _statusEffects.TrySetStatusEffectDuration(entity, effect, out _);
+        }
+
+        AddTrait(entity, pathologyPrototype.Definition[0].Trait);
+
+        entity.Comp.ActivePathologies.Add(pathologyPrototype.ID, new PathologyInstanceData(_gameTiming.CurTime));
         Dirty(entity);
-
-        return true;
-    }
-
-    public bool TryRemovePathology(Entity<PathologyHolderComponent?> entity, ProtoId<PathologyPrototype> pathologyId)
-    {
-        if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
-            return false;
-
-        if (!_prototype.Resolve(pathologyId, out var pathologyPrototype))
-            return false;
-
-        // we actually removed so true, anyQ?
-        if (!entity.Comp.ActivePathologies.TryGetValue(pathologyId, out var instanceData))
-            return true;
-
-        if (instanceData.StackCount > OneStack)
-            return false;
-
-        var ev = new PathologyRemoveAttempt(pathologyId, instanceData.Level);
-        if (ev.Cancelled)
-            return false;
-
-        RemovePathology(entity!, pathologyPrototype);
-        return true;
     }
 
     private void RemovePathology(Entity<PathologyHolderComponent> entity, PathologyPrototype pathologyPrototype)
@@ -133,7 +129,12 @@ public sealed class PathologySystem : EntitySystem
                 break;
             }
 
-            EntityManager.RemoveComponents(entity, pathologyPrototype.Definition[i].Components);
+            foreach (var effect in pathologyPrototype.Definition[i].StatusEffects)
+            {
+                _statusEffects.TryRemoveStatusEffect(entity, effect);
+            }
+
+            RemoveTrait(entity, pathologyPrototype.Definition[i].Trait);
         }
 
         entity.Comp.ActivePathologies.Remove(pathologyPrototype.ID);
@@ -141,44 +142,27 @@ public sealed class PathologySystem : EntitySystem
         Dirty(entity);
     }
 
-    public bool HavePathology(Entity<PathologyHolderComponent?> entity, ProtoId<PathologyPrototype> pathologyId)
+    // Kill it with TraitPrototype pls
+    private void AddTrait(EntityUid uid, ProtoId<TraitPrototype>? traitId)
     {
-        if (!Resolve(entity.Owner, ref entity.Comp))
-            return false;
+        if (!_prototype.Resolve(traitId, out var traitPrototype))
+            return;
 
-        return entity.Comp.ActivePathologies.ContainsKey(pathologyId);
+        if (traitPrototype.Components is null)
+            return;
+
+        EntityManager.AddComponents(uid, traitPrototype.Components, false);
     }
 
-    public bool TryGetPathologyStack(Entity<PathologyHolderComponent?> entity, ProtoId<PathologyPrototype> pathologyId, [NotNullWhen(true)] out int? stackCount)
+    // and it
+    private void RemoveTrait(EntityUid uid, ProtoId<TraitPrototype>? traitId)
     {
-        stackCount = null;
-        if (!Resolve(entity.Owner, ref entity.Comp))
-            return false;
+        if (!_prototype.Resolve(traitId, out var traitPrototype))
+            return;
 
-        if (!entity.Comp.ActivePathologies.TryGetValue(pathologyId, out var instanceData))
-            return false;
+        if (traitPrototype.Components is null)
+            return;
 
-        stackCount = instanceData.StackCount;
-        return true;
-    }
-
-    public bool TryChangePathologyStack(Entity<PathologyHolderComponent?> entity, ProtoId<PathologyPrototype> pathologyId, int toAdd = 1)
-    {
-        if (!Resolve(entity.Owner, ref entity.Comp))
-            return false;
-
-        if (!_prototype.Resolve(pathologyId, out var pathologyPrototype))
-            return false;
-
-        if (!entity.Comp.ActivePathologies.TryGetValue(pathologyId, out var instanceData))
-            return false;
-
-        var newStackCount = Math.Clamp(instanceData.StackCount + toAdd, OneStack, pathologyPrototype.Definition[instanceData.Level].MaxStackCount);
-
-        if (newStackCount == instanceData.StackCount)
-            return false;
-
-        instanceData.StackCount = newStackCount;
-        return true;
+        EntityManager.RemoveComponents(uid, traitPrototype.Components);
     }
 }

@@ -40,7 +40,7 @@ public sealed partial class LimitationReviveComponent : SharedLimitationReviveCo
     };
 
     [DataField]
-    public ProtoId<WeightedRandomPrototype> WeightListProto = "TraitAfterDeathList";
+    public ProtoId<WeightedRandomPrototype> WeightListProto = "PathologyAfterDeathList";
 
     [ViewVariables]
     public List<string> RecievedDebuffs = [];

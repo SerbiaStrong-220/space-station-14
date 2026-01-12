@@ -1,0 +1,21 @@
+- type: Pathology
+  id: TorsoProjectileFragment
+  name: pathology-torso-projectile-name
+  definition:
+  - description: pathology-torso-projectile-description
+    maxStackCount: 20
+    effects:
+    - !type:InternalBloodLossEffect
+
+- type: Pathology
+  id: HeadProjectileFragment
+  name: pathology-torso-projectile-name
+  definition:
+  - description: pathology-torso-projectile-description
+    maxStackCount: 20
+    effects:
+    - !type:InternalBloodLossEffect
+    addStackEffects:
+    - !type:RandomPathologyAddEffect
+      weightedId: BrainTraumaPathology
+      chance: 0.15

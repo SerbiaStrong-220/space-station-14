@@ -1,0 +1,12 @@
+- type: weightedRandom
+  id: BrainTraumaPathology
+  weights:
+    Slowness: 10
+    PainNumbness: 10
+    PoorVision: 10
+    Muted: 5
+    Blindness: 5
+    Narcolepsy: 1
+    Blindness: 1
+
+

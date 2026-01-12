@@ -1,0 +1,81 @@
+- type: Pathology
+  id: Blindness
+  name: pathology-blindness-name
+  definition:
+  - description: pathology-start-blindness-description
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 02:20
+  - description: pathology-full-blindness-description
+    trait: Blindness
+
+- type: Pathology
+  id: Muted
+  name: pathology-muted-name
+  definition:
+  - description: pathology-start-muted-description
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 02:20
+  - description: pathology-muted-description
+    trait: Muted
+
+- type: Pathology
+  id: Narcolepsy
+  name: pathology-narcolepsy-name
+  definition:
+  - description: pathology-pre-narcolepsy
+    progressConditions:
+    - !type:PathologyTimeProgressCondition
+      delay: 03:00
+  - description: pathology-narcolepsy-description
+    trait: Narcolepsy
+
+- type: Pathology
+  id: Slowness
+  name: pathology-slowness-name
+  definition:
+  - description: pathology-slowness-description
+    trait: Slowness
+
+- type: Pathology
+  id: Nervousness
+  name: pathology-nervousness-name
+  definition:
+  - description: pathology-nervousness-description
+    trait: Nervousness
+
+- type: Pathology
+  id: PoorVision
+  name: pathology-poor-vision-name
+  definition:
+  - description: pathology-poor-vision-description
+    trait: PoorVision
+
+- type: Pathology
+  id: LightweightDrunk
+  name: pathology-lightweight-drunk-name
+  definition:
+  - description: pathology-lightweight-drunk-description
+    trait: LightweightDrunk
+
+- type: Pathology
+  id: Paracusia
+  name: pathology-paracusia-name
+  definition:
+  - description: pathology-paracusia-description
+    trait: Paracusia
+
+- type: Pathology
+  id: PainNumbness
+  name: pathology-pain-numbness-name
+  definition:
+  - description: pathology-pain-numbness-description
+    trait: PainNumbness
+
+- type: Pathology
+  id: FrontalLisp
+  name: pathology-frontal-lisp-name
+  definition:
+  - description: pathology-frontal-lisp-description
+    trait: Muted
