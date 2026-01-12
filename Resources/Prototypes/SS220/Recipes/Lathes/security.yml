@@ -178,7 +178,7 @@
 
 - type: latheRecipe
   id: RiotLaserShield
-  result: RiotLaserShield
+  result: RiotLaserShieldAlt
   completetime: 5
   materials:
     Steel: 900
@@ -186,7 +186,7 @@
 
 - type: latheRecipe
   id: RiotBulletShield
-  result: RiotBulletShield
+  result: RiotBulletShieldAlt
   completetime: 5
   materials:
     Steel: 900

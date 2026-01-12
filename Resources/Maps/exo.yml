@@ -97900,6 +97900,8 @@ entities:
     - type: Transform
       pos: 68.51489,-32.324493
       parent: 2
+    - type: Blocking
+      blockingToggleActionEntity: 6618
     - type: ActionsContainer
     - type: ContainerContainer
       containers:
@@ -97911,6 +97913,8 @@ entities:
     - type: Transform
       pos: 68.75447,-32.376614
       parent: 2
+    - type: Blocking
+      blockingToggleActionEntity: 6619
     - type: ActionsContainer
     - type: ContainerContainer
       containers:
