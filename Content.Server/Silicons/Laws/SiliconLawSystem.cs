@@ -22,6 +22,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Toolshed;
+using Robust.Shared.Random;
 
 namespace Content.Server.Silicons.Laws;
 
@@ -126,11 +127,23 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
         if (args.Handled)
             return;
 
+        // SS220 random lawset begin - выбираем случайный lawset при первом обращении
         if (component.Lawset == null)
-            component.Lawset = GetLawset(component.Laws);
+        {
+            var randomLawset = SelectRandomLawset();
+            if (randomLawset != null)
+            {
+                component.Laws = randomLawset.Value;
+                component.Lawset = GetLawset(randomLawset.Value);
+            }
+            else
+            {
+                component.Lawset = GetLawset(component.Laws);
+            }
+        }
+        // SS220 random lawset end
 
         args.Laws = component.Lawset;
-
         args.Handled = true;
     }
 
@@ -148,7 +161,7 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
             component.Subverted = true;
 
             // new laws may allow antagonist behaviour so make it clear for admins
-            if(_mind.TryGetMind(uid, out var mindId, out _))
+            if (_mind.TryGetMind(uid, out var mindId, out _))
                 EnsureSubvertedSiliconRole(mindId);
 
         }
@@ -156,8 +169,21 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
 
     private void OnEmagLawsAdded(EntityUid uid, SiliconLawProviderComponent component, ref SiliconEmaggedEvent args)
     {
+        // SS220 random lawset begin - выбираем случайный lawset при первом обращении
         if (component.Lawset == null)
-            component.Lawset = GetLawset(component.Laws);
+        {
+            var randomLawset = SelectRandomLawset();
+            if (randomLawset != null)
+            {
+                component.Laws = randomLawset.Value;
+                component.Lawset = GetLawset(randomLawset.Value);
+            }
+            else
+            {
+                component.Lawset = GetLawset(component.Laws);
+            }
+        }
+        // SS220 random lawset end
 
         // Show the silicon has been subverted.
         component.Subverted = true;
@@ -219,20 +245,34 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
             return new SiliconLawset();
 
         var ev = new GetSiliconLawsEvent(uid);
-        var possibleLawsets = new List<SiliconLawset>(); // SS220 Random lawset 
 
-        CollectLawset(uid, ev, possibleLawsets); // SS220 Random lawset 
+        RaiseLocalEvent(uid, ref ev);
+        if (ev.Handled)
+        {
+            component.LastLawProvider = uid;
+            return ev.Laws;
+        }
 
         var xform = Transform(uid);
 
         if (_station.GetOwningStation(uid, xform) is { } station)
         {
-            CollectLawset(station, ev, possibleLawsets); // SS220 Random lawset 
+            RaiseLocalEvent(station, ref ev);
+            if (ev.Handled)
+            {
+                component.LastLawProvider = station;
+                return ev.Laws;
+            }
         }
 
         if (xform.GridUid is { } grid)
         {
-            CollectLawset(grid, ev, possibleLawsets); // SS220 Random lawset 
+            RaiseLocalEvent(grid, ref ev);
+            if (ev.Handled)
+            {
+                component.LastLawProvider = grid;
+                return ev.Laws;
+            }
         }
 
         if (component.LastLawProvider == null ||
@@ -241,47 +281,17 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
         {
             component.LastLawProvider = null;
         }
-        // SS220 Random lawset begin
         else
         {
-            CollectLawset(component.LastLawProvider.Value, ev, possibleLawsets);
+            RaiseLocalEvent(component.LastLawProvider.Value, ref ev);
+            if (ev.Handled)
+            {
+                return ev.Laws;
+            }
         }
 
         RaiseLocalEvent(ref ev);
-        if (ev.Handled)
-        {
-            possibleLawsets.Add(ev.Laws);
-        }
-
-        if (possibleLawsets.Count > 0)
-        {
-            var randomIndex = _random.Next(possibleLawsets.Count);
-            var selected = possibleLawsets[randomIndex];
-
-            if (selected.Provider != null)
-            {
-                component.LastLawProvider = selected.Provider;
-            }
-
-            return selected;
-        }
-
-        return new SiliconLawset();
-    }
-
-    private void CollectLawset(EntityUid provider, GetSiliconLawsEvent ev, List<SiliconLawset> list)
-    {
-        ev.Handled = false;
-        ev.Laws = new SiliconLawset();
-        ev.Provider = provider;
-
-        RaiseLocalEvent(provider, ref ev);
-
-        if (ev.Handled)
-        {
-            list.Add(ev.Laws);
-        }
-        // SS220 Random lawset end
+        return ev.Laws;
     }
 
     public override void NotifyLawsChanged(EntityUid uid, SoundSpecifier? cue = null)
@@ -307,53 +317,72 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
         var proto = _prototype.Index(lawset);
         var laws = new SiliconLawset()
         {
-            Laws = new List<SiliconLaw>(proto.Laws.Count), // SS220 Random lawset
-            ObeysTo = proto.ObeysTo // SS220 Random lawset
+            Laws = new List<SiliconLaw>(proto.Laws.Count)
         };
-
         foreach (var law in proto.Laws)
         {
             laws.Laws.Add(_prototype.Index<SiliconLawPrototype>(law).ShallowClone());
         }
+        laws.ObeysTo = proto.ObeysTo;
 
         return laws;
     }
-    // SS220 Random lawset begin
+
+    // SS220 random lawset begin
     /// <summary>
-    /// Select a random set of laws according to their weightsApcPowerReceiver
+    /// Selects a random lawset with weights from all available lawsets.
     /// </summary>
-    public SiliconLawset GetWeightedRandomLawset()
+    public ProtoId<SiliconLawsetPrototype>? SelectRandomLawset()
     {
-        var weightedLawsets = new Dictionary<ProtoId<SiliconLawsetPrototype>, float>();
+        // Get all lawsets that are randomizable
+        var allLawsets = _prototype.EnumeratePrototypes<SiliconLawsetPrototype>()
+            .Where(proto => proto.Randomizable)
+            .ToList();
+
+        if (allLawsets.Count == 0)
+            return null;
+
+        // Debug output
+        Logger.Debug($"Available lawsets for random selection: {allLawsets.Count}");
+        foreach (var lawset in allLawsets)
+        {
+            Logger.Debug($"  - {lawset.ID}: weight = {lawset.Weight}");
+        }
+
         float totalWeight = 0f;
-
-        foreach (var lawsetProto in _prototype.EnumeratePrototypes<SiliconLawsetPrototype>())
+        foreach (var lawset in allLawsets)
         {
-            var weight = lawsetProto.Weight;
-
-            if (weight <= 0)
-                continue;
-
-            weightedLawsets[lawsetProto.ID] = weight;
-            totalWeight += weight;
+            totalWeight += lawset.Weight;
         }
 
-        if (weightedLawsets.Count == 0 || totalWeight <= 0)
-            return new SiliconLawset();
+        Logger.Debug($"Total weight: {totalWeight}");
 
-        var randomValue = _random.NextFloat(0, totalWeight);
-        var accumulated = 0f;
-
-        foreach (var kvp in weightedLawsets)
+        if (totalWeight <= 0)
         {
-            accumulated += kvp.Value;
-            if (randomValue <= accumulated)
-                return GetLawset(kvp.Key);
+            Logger.Warning($"Total weight <= 0, using first lawset: {allLawsets[0].ID}");
+            return allLawsets[0].ID;
         }
 
-        return GetLawset(weightedLawsets.Keys.First());
+        var randomValue = _random.NextFloat() * totalWeight;
+        Logger.Debug($"Random value: {randomValue} (out of {totalWeight})");
+
+        float cumulative = 0f;
+
+        foreach (var lawset in allLawsets)
+        {
+            cumulative += lawset.Weight;
+            Logger.Debug($"Checking {lawset.ID}: cumulative = {cumulative}, weight = {lawset.Weight}");
+            if (randomValue <= cumulative)
+            {
+                Logger.Debug($"Selected lawset: {lawset.ID}");
+                return lawset.ID;
+            }
+        }
+
+        Logger.Warning($"Failed to select lawset, using first: {allLawsets[0].ID}");
+        return allLawsets[0].ID;
     }
-    // SS220 Random lawset end
+    // SS220 random lawset end
 
     /// <summary>
     /// Set the laws of a silicon entity while notifying the player.
@@ -385,6 +414,28 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
             SetLaws(lawset.Laws, update, provider.LawUploadSound);
         }
     }
+
+    // SS220 random lawset begin
+    /// <summary>
+    /// Sets a random lawset for a silicon entity.
+    /// </summary>
+    public void SetRandomLawset(EntityUid uid, SiliconLawProviderComponent? component = null)
+    {
+        if (!Resolve(uid, ref component))
+            return;
+
+        var randomLawset = SelectRandomLawset();
+        if (randomLawset != null)
+        {
+            component.Laws = randomLawset.Value;
+            component.Lawset = null; // Reset cached lawset
+
+            // Force refresh laws
+            var laws = GetLaws(uid);
+            NotifyLawsChanged(uid);
+        }
+    }
+    // SS220 random lawset end
 }
 
 [ToolshedCommand, AdminCommand(AdminFlags.Admin)]
@@ -412,4 +463,13 @@ public sealed class LawsCommand : ToolshedCommand
             yield return $"law {law.LawIdentifierOverride ?? law.Order.ToString()}: {Loc.GetString(law.LawString)}";
         }
     }
+
+    // SS220 random lawset begin
+    [CommandImplementation("setrandom")]
+    public void SetRandom([PipedArgument] EntityUid entity)
+    {
+        _law ??= GetSys<SiliconLawSystem>();
+        _law.SetRandomLawset(entity);
+    }
+    // SS220 random lawset end
 }

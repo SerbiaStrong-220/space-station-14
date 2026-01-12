@@ -1,4 +1,4 @@
-﻿using Robust.Shared.Prototypes;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Audio;
 
 namespace Content.Shared.Silicons.Laws.Components;
@@ -35,4 +35,8 @@ public sealed partial class SiliconLawProviderComponent : Component
     [DataField]
     public bool Subverted = false;
 
+    // SS220 Random lawsets begin
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public bool UseRandomLawset = false;
+    // SS220 Random lawsets end
 }

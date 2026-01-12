@@ -90,5 +90,11 @@ public sealed partial class SiliconLawsetPrototype : IPrototype
     /// </summary>
     [DataField("weight", required: false)]
     public float Weight { get; private set; } = 1f;
+
+    /// <summary>
+    /// Include lawset in randomize pool
+    /// </summary>
+    [DataField("randomizable", required: false)]
+    public bool Randomizable { get; private set; } = true;
     // SS220 Random lawset end
 }
