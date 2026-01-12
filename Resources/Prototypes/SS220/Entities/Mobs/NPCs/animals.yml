@@ -414,7 +414,7 @@
   name: wizard spider ghost
   parent: MobSpiderGhost
   id: MobSpiderGhostWizard
-  description:  Этот Паучий призрак выглядит немного волшебным.
+  description:  This ghost spider looks a little magical
   suffix: Wizard
   components:
   - type: Accentless
