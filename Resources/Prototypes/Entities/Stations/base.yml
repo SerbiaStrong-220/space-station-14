@@ -77,7 +77,6 @@
           minimumDistance: 200 # SS220 Ruins distance
           maximumDistance: 450 # SS220 Ruins distance
           paths:
-          # - /Maps/Ruins/chunked_tcomms.yml # SS220 Removed with Ruins Update (balance Tweak)
           - /Maps/Ruins/abandoned_outpost.yml
           - /Maps/Ruins/atmos_interchange.yml
           # - /Maps/Ruins/chunked_tcomms.yml # SS220 Removed with Ruins Update (balance Tweak)
@@ -104,6 +103,11 @@
           - /Maps/SS220/Ruins/Scrapyard_SS220.yml
           - /Maps/SS220/Ruins/TradeCenter_SS220.yml
           - /Maps/SS220/Ruins/SyndiBase_SS220.yml
+          - /Maps/SS220/Ruins/Chapel_SS220_RuinVer.yml
+          - /Maps/SS220/Ruins/SmallJRBarge_SS220_RuinVer.yml
+          - /Maps/SS220/Ruins/EngineeringChunk_SS220_RuinVer.yml
+          - /Maps/SS220/Ruins/AsteroidBase_SS220_RuinVer.yml
+          - /Maps/SS220/Ruins/SmallCargoWreck_SS220_RuinVer.yml
           addComponents:
           - type: Shuttle
             bodyModifier: 2
