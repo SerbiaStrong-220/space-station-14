@@ -138,7 +138,7 @@
   - type: ToggleClothing
     action: ActionToggleSpeedBoots
   - type: ClothingSpeedModifier
-    walkModifier: 1.25
+    walkModifier: 1.25 # SS220 speedboots rebalance
     sprintModifier: 1.25 # SS220 speedboots rebalance
     standing: true
   - type: Appearance
