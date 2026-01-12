@@ -136,10 +136,20 @@ public sealed partial class ShuttleSystem
         var path = paths[^1];
         paths.RemoveAt(paths.Count - 1);
 
+        // SS220-MIT-use-group-params-begin
+        var targetSpot = Transform(targetGrid).Coordinates;
+        if (group.MinimumDistance > 0f)
+        {
+            // we divide it by 2 because Coordinates in grid center, so actual padding should be twice less
+            var distancePadding = TryComp<MapGridComponent>(targetGrid, out var mapGridComp) ? MathF.Max(mapGridComp.LocalAABB.Width, mapGridComp.LocalAABB.Height) / 2f : 0f;
+            targetSpot = targetSpot.Offset(_random.NextVector2(distancePadding + group.MinimumDistance, distancePadding + group.MaximumDistance));
+        }
+        // SS220-MIT-use-group-params-end
+
         if (_loader.TryLoadGrid(mapId, path, out var grid))
         {
             if (HasComp<ShuttleComponent>(grid))
-                TryFTLProximity(grid.Value, targetGrid);
+                TryFTLProximity(grid.Value.Owner, targetSpot); // SS220-MIT-use-group-params
 
             if (group.NameGrid)
             {
