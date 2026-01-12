@@ -4817,12 +4817,6 @@ entities:
     - type: GasTileOverlay
     - type: RadiationGridResistance
     - type: ImplicitRoof
-- proto: ActionToggleLight
-  entities:
-  - uid: 4
-    components:
-    - type: Transform
-      parent: 3
 - proto: AirAlarm
   entities:
   - uid: 7
@@ -7097,28 +7091,6 @@ entities:
     - type: Transform
       pos: 16.773355,15.683589
       parent: 1
-- proto: ClothingHeadHatHardhatYellow
-  entities:
-  - uid: 3
-    components:
-    - type: Transform
-      parent: 2
-    - type: HandheldLight
-      toggleActionEntity: 4
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 4
-    - type: Physics
-      canCollide: False
-    - type: ActionsContainer
 - proto: ClothingHeadHatHoodBioGeneral
   entities:
   - uid: 392
