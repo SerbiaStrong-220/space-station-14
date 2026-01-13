@@ -7,11 +7,11 @@
     Title="{Loc 'resource-miner-window-title'}"
     HorizontalExpand="True"
     VerticalExpand="True"
-    MinSize="520 180"
-    SetSize="520 180">
-    <BoxContainer VerticalExpand="True" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10 5 10 10">
-        <BoxContainer Orientation="Horizontal" VerticalExpand="True">
-            <BoxContainer Orientation="Vertical" HorizontalAlignment="Left">
+    MinSize="320 380"
+    SetSize="320 380">
+    <BoxContainer VerticalExpand="True" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10 5 10 10">
+        <BoxContainer Orientation="Vertical" VerticalExpand="True">
+            <BoxContainer Orientation="Vertical" HorizontalAlignment="Left" VerticalExpand="True">
                 <BoxContainer Orientation="Vertical" HorizontalAlignment="Center">
                     <Label Text="{Loc 'resource-miner-window-silo-text'}" HorizontalAlignment="Center" StyleClasses="LabelSubText" Margin="5 0"/>
                     <customControls:HSeparator Margin="0 5"/>

@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Numerics;
 using Content.Server.Shuttles.Components;
 using Content.Server.Station.Events;
@@ -151,7 +152,7 @@ public sealed partial class ShuttleSystem
             if (HasComp<ShuttleComponent>(grid))
                 TryFTLProximity(grid.Value.Owner, targetSpot); // SS220-MIT-use-group-params
 
-            if (group.NameGrid)
+            if (group.NameGrid && MetaData(grid.Value).EntityName == "grid") // SS220-MIT-use-group-params
             {
                 var name = path.FilenameWithoutExtension;
                 _metadata.SetEntityName(grid.Value, name);
@@ -178,7 +179,7 @@ public sealed partial class ShuttleSystem
         // Spawn on a dummy map and try to FTL if possible, otherwise dump it.
         _mapSystem.CreateMap(out var mapId);
 
-        foreach (var group in component.Groups.Values)
+        foreach (var group in component.Groups.Values.OrderByDescending(x => x.GetType() == typeof(DungeonSpawnGroup))) // SS220-MIT-make-dungeon-spawn-first
         {
             var count = _random.Next(group.MinCount, group.MaxCount + 1);
 

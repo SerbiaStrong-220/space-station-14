@@ -6,9 +6,10 @@
   components:
   - type: Sprite
     layers:
-    - state: green
     - sprite: SS220/Structures/Machines/resource_miner.rsi
+      offset: 0, 1
       state: base
+    - state: green
   - type: EntityTableSpawner
     table: !type:NestedSelector
       tableId: LowTierResourceMinerTable
@@ -21,9 +22,10 @@
   components:
   - type: Sprite
     layers:
-    - state: blue
     - sprite: SS220/Structures/Machines/resource_miner.rsi
+      offset: 0, 1
       state: base
+    - state: blue
   - type: EntityTableSpawner
     table: !type:NestedSelector
       tableId: MediumTierResourceMinerTable
@@ -36,9 +38,10 @@
   components:
   - type: Sprite
     layers:
-    - state: red
     - sprite: SS220/Structures/Machines/resource_miner.rsi
+      offset: 0, 1
       state: base
+    - state: red
   - type: EntityTableSpawner
     table: !type:NestedSelector
       tableId: HighTierResourceMinerTable
@@ -51,9 +54,10 @@
   components:
   - type: Sprite
     layers:
-    - state: pink
     - sprite: SS220/Structures/Machines/resource_miner.rsi
+      offset: 0, 1
       state: base
+    - state: pink
   - type: EntityTableSpawner
     table: !type:GroupSelector
       children:
@@ -70,14 +74,15 @@
 - type: entity
   name: equal random resource miners
   id: EqualAllTierResourceMinerSpawner
-  suffix: resource miner
+  suffix: all tier equal
   parent: MarkerBase
   components:
   - type: Sprite
     layers:
-    - state: pink
     - sprite: SS220/Structures/Machines/resource_miner.rsi
+      offset: 0, 1
       state: base
+    - state: pink
   - type: EntityTableSpawner
     table: !type:GroupSelector
       children:
