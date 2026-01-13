@@ -224,10 +224,10 @@
         weight: 0.3
       - character: "-"
         weight: 0.5
-    syllables: [år, i, går, sek, mo, ff, ok, gj, ø, gå, la, le, lit, ygg, van,
-                dår, næ, møt, idd, hvo, ja, på, han, så, ån, det, att, nå, gö, bra,
-                int, tyc, om, när, två, må, dag, sjä, vii, vuo, eil, tun, käyt, teh,
-                vä, hei, huo, suo, ää, ten, ja, heu, stu, uhr, kön, we, hön]
+    syllables: [ми, мя, мо, мю, мё, ни, ня, ню, не, ли, ля, лю, лё, ви, вя, ву, ве, йи, йо, йя,
+                ши, шо, шё, жи, жю, же, фу, фи, фя, пу, пи, пё, бу, би, мук, мип, мёк, нел, ням,
+                нёк, лив, люк, лёп, вии, вуо, вяй, шип, шёк, шуи, жюл, жик, жея, пюл, пёк, бив, бёк,
+                мьо, ньи, льу, вьи, шья, жьо, фью, пьо, бьи, мвя, нвю, львё, швя, жвю, ймё, йню]
 
 - type: language
   id: Eldwarf

@@ -14,6 +14,16 @@
   #SS220 Animalistic languages fix begin
     - id: Doggish
       canSpeak: true
+    - id: Feline
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
   #SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
@@ -75,6 +85,16 @@
   #SS220 Animalistic languages fix begin
     - id: Doggish
       canSpeak: true
+    - id: Feline
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
   #SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
@@ -111,6 +131,16 @@
   #SS220 Animalistic languages fix begin
     - id: Doggish
       canSpeak: true
+    - id: Feline
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
   #SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
@@ -186,6 +216,16 @@
   #SS220 Animalistic languages fix begin
     - id: Doggish
       canSpeak: true
+    - id: Feline
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
   #SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
@@ -234,6 +274,16 @@
   #SS220 Animalistic languages fix begin
     - id: Feline
       canSpeak: true
+    - id: Doggish
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
   #SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
@@ -269,6 +319,16 @@
   #SS220 Animalistic languages fix begin
     - id: Feline
       canSpeak: true
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
   #SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
@@ -307,6 +367,16 @@
   #SS220 Animalistic languages fix begin
     - id: Feline
       canSpeak: true
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
   #SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
@@ -335,6 +405,16 @@
   #SS220 Animalistic languages fix begin
     - id: Feline
       canSpeak: true
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
   #SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
@@ -370,6 +450,16 @@
   #SS220 Animalistic languages fix begin
     - id: Feline
       canSpeak: true
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
   #SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
@@ -456,6 +546,18 @@
   #SS220 Animalistic languages begin
     - id: Doggish
       canSpeak: true
+      #SS220 Animalistic languages fix begin
+    - id: Feline
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
   #SS220 Animalistic languages end
     - id: Galactic
       canSpeak: false
@@ -551,6 +653,20 @@
     - id: Galactic
       canSpeak: false
   #SS220 languages revive end
+  #SS220 Animalistic languages fix begin
+    - id: Feline
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
   - type: Butcherable
     spawned:
     - id: FoodMeat
@@ -584,6 +700,16 @@
   #SS220 Animalistic languages fix begin
     - id: Doggish
       canSpeak: true
+    - id: Feline
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
   #SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
@@ -665,6 +791,20 @@
     - id: Galactic
       canSpeak: false
   #SS220 languages revive end
+  #SS220 Animalistic languages fix begin
+    - id: Feline
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
   - type: Tag
     tags:
     - CannotSuicide
@@ -708,6 +848,20 @@
     - id: Galactic
       canSpeak: false
   #SS220 languages revive end
+  #SS220 Animalistic languages fix begin
+    - id: Feline
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Animals/possum.rsi
@@ -747,6 +901,20 @@
     - id: Tradeband #Cause cargo dep
       canSpeak: false
   #SS220 languages revive end
+  #SS220 Animalistic languages fix begin
+    - id: Feline
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
   - type: Tag
     tags:
     - CannotSuicide
@@ -776,6 +944,16 @@
   ##SS220 Animalistic languages fix begin
     - id: Piggish
       canSpeak: true
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Feline
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
   ##SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
@@ -814,8 +992,18 @@
       canSpeak: false
   #SS220 languages revive end
   #SS220 Animalistic languages fix begin
+    - id: Feline
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
     - id: Doggish
       canSpeak: true
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
   #SS220 Animalistic languages fix end
   - type: Grammar
     attributes:
@@ -854,6 +1042,16 @@
   #SS220 Animalistic languages fix begin
     - id: Mousey
       canSpeak: true
+    - id: Feline
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
   #SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
@@ -928,6 +1126,18 @@
   #SS220 Animalistic languages fix begin
     - id: SpiderTongue
       canSpeak: true
+    - id: Feline
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
   #SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
@@ -1009,6 +1219,16 @@
     availableLanguages:
     - id: Galactic
       canSpeak: false
+    - id: Feline
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
   #SS220 languages revive end
   - type: Tag
     tags:
@@ -1046,6 +1266,18 @@
       canSpeak: false
     - id: Bubblish
       canSpeak: true
+    - id: Feline
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
   #SS220 languages revive end
   - type: Inventory
     speciesId: slime
@@ -1135,6 +1367,16 @@
   #SS220 Animalistic languages fix begin
     - id: Monkey
       canSpeak: true
+    - id: Feline
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
   #SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
@@ -1186,6 +1428,18 @@
     availableLanguages:
     - id: Galactic
       canSpeak: false
+    - id: Feline
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
   #SS220 languages revive end
   - type: Grammar
     attributes:
@@ -1220,6 +1474,16 @@
   #SS220 Animalistic languages fix begin
     - id: Feline
       canSpeak: true
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
   #SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false

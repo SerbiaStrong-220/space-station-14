@@ -1348,6 +1348,12 @@
     availableLanguages:
     - id: Galactic
       canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Feline
+      canSpeak: false
 #SS220 languages tweaks end
   - type: Inventory
     templateId: monkeyinventory
@@ -1491,6 +1497,18 @@
       canSpeak: true
     - id: Galactic
       canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+  #SS220 Animalistic languages fix begin
+    - id: Feline
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Animalistic languages fix end
 #SS220 Animalistic languages end
   - type: Speech
     speechSounds: Monkey
@@ -1535,8 +1553,18 @@
     availableLanguages:
     - id: Monkey
       canSpeak: true
+    - id: Reptilian
+      canSpeak: false
   #SS220 Animalistic languages fix begin
     - id: Galactic
+      canSpeak: false
+    - id: Feline
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Piggish
       canSpeak: false
   #SS220 Animalistic languages fix end
 #SS220 Animalistic languages end
@@ -1600,6 +1628,14 @@
     - id: Reptilian
       canSpeak: true
     - id: Galactic
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Feline
+      canSpeak: false
+    - id: Piggish
       canSpeak: false
 #SS220 Animalistic Languages end
   - type: Speech
@@ -1740,6 +1776,16 @@
       canSpeak: true
     - id: Galactic
       canSpeak: false
+    - id: Feline
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
   #SS220 Animalistic languages fix end
   - type: NpcFactionMember
     factions:
@@ -1787,6 +1833,16 @@
     - id: Mousey
       canSpeak: true
     - id: Galactic
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Feline
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Piggish
       canSpeak: false
 #SS220 Animalistic Languages end
   - type: GhostRole
@@ -3029,6 +3085,15 @@
   - type: MobPrice
     price: 200
   - type: MessyDrinker
+    #SS220 Languages tweaks begin
+  - type: Language
+    selectedLanguage: Galactic
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+    - id: Doggish
+      canSpeak: true
+  #SS220 Languages tweaks end
 
 - type: entity
   parent: MobCorgiBase
@@ -3162,6 +3227,16 @@
     availableLanguages:
     - id: Feline
       canSpeak: true
+    - id: Doggish
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
     - id: Galactic
       canSpeak: false
 #SS220 Animalistic Languages end
@@ -3564,6 +3639,16 @@
     - id: Mousey
       canSpeak: true
     - id: Galactic
+      canSpeak: false
+    - id: Feline
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
       canSpeak: false
   #SS220 Animalistic languages fix end
   - type: GhostTakeoverAvailable

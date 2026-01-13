@@ -9,6 +9,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Utility;
+using System.Linq;
 
 namespace Content.Client.SS220.UserInterface.System.Chat.Controls.LanguageSettings;
 
@@ -41,12 +42,20 @@ public sealed partial class LanguageSettingsPopup : Popup
         }
 
         var availableLanguages = new List<LanguagePrototype>();
-        foreach (var def in comp.AvailableLanguages)
+        foreach (var def in comp.SpokenLanguages)
         {
             if (!_languageManager.TryGetLanguageById(def.Id, out var language))
                 continue;
 
             availableLanguages.Add(language);
+        }
+
+        if (_languageManager.TryGetLanguageById("Galactic", out var galactic))
+        {
+            if (!availableLanguages.Any(l => l.ID == "Galactic"))
+            {
+                availableLanguages.Add(galactic);
+            }
         }
         UpdateLanguageContainer(availableLanguages);
 
