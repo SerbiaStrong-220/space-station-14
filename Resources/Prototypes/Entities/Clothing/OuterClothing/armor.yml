@@ -281,14 +281,32 @@
         Piercing: 0.35
         Heat: 0.35
         Caustic: 0.5
-        Radiation: 0.85 #ss220 raid suit rework
+        Radiation: 0.55 #SS220 Raidsuit buff
+  #SS220 Raidsuit buff begin
+  - type: FieldShieldProvider
+    rechargeShieldData:
+      rechargeTime: 15
+    shieldData:
+      shieldMaxCharge: 3
+      shieldSprite:
+        sprite: SS220/Effects/field_shield.rsi
+        state: red
+    lightData:
+      color: "#D82000"
+      radius: 1
+      energy: 4
+  - type: Reflect
+    reflectProb: 0.30
+    reflects:
+      - Energy
+  #SS220 Raidsuit buff end
   - type: ExplosionResistance
     damageCoefficient: 0.35
   - type: StaminaResistance
     damageCoefficient: 0.3 #SS220 stamina resist fix
   - type: ClothingSpeedModifier
     walkModifier: 1 #ss220 raid suit rework
-    sprintModifier: 0.95 #ss220 raid suit rework
+    sprintModifier: 1 #SS220 Raidsuit buff
   #Shoulder mounted flashlight
   - type: ToggleableVisuals
     spriteLayer: light
