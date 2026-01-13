@@ -428,7 +428,7 @@
     canSend: false
     telepathyChannelPrototype: none	
   - type: ExplosionResistance
-    damageCoefficient: 0.1
+    damageCoefficient: 0.8
   - type: PassiveDamage
     damage:
       types:
