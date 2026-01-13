@@ -207,9 +207,9 @@ namespace Content.Server.PDA
             var recordStorage = CompOrNull<StationRecordKeyStorageComponent>(pda.ContainedId);
 
             GeneralStationRecord? record = null;
-            if (recordStorage is { Key: not null })
+            if (recordStorage is { Key: not null } && TryComp<StationRecordsComponent>(recordStorage.Key.Value.OriginStation, out var stationRecords))
             {
-                _records.TryGetRecord(recordStorage.Key.Value, out record);
+                _records.TryGetRecord(recordStorage.Key.Value, out record, stationRecords);
             }
             // ss220 add additional info for pda end
 
