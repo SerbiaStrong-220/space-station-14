@@ -46,6 +46,7 @@ using Robust.Shared.Map;
 using Content.Shared.SS220.Language.Systems;
 using Content.Shared.SS220.TTS;
 using Content.Shared.FixedPoint;
+using System.Text.RegularExpressions; //SS220 Remove language prefix
 
 namespace Content.Server.Chat.Systems;
 
@@ -555,6 +556,7 @@ public sealed partial class ChatSystem : SharedChatSystem
 
             var listener = session.AttachedEntity.Value;
             var scrambledMessage = languageMessage.GetMessage(listener, true);
+            scrambledMessage = RemoveLanguagePrefix(scrambledMessage); //SS220 Remove language prefix
         // SS220-Add-Languages end
 
             var wrappedMessage = Loc.GetString(speech.Bold ? "chat-manager-entity-say-bold-wrap-message" : "chat-manager-entity-say-wrap-message",
@@ -569,6 +571,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         }
         //SS220-Add-Languages begin
         message = languageMessage.GetMessage(source, false);
+        message = RemoveLanguagePrefix(message); //SS220 Remove language prefix
 
         //SendInVoiceRange(ChatChannel.Local, message, wrappedMessage, source, range);
         var ev = new EntitySpokeEvent(source, message, originalMessage, null, null, languageMessage);
@@ -1193,6 +1196,13 @@ public sealed partial class ChatSystem : SharedChatSystem
         return false;
     }
     //ss220 add identity concealment for chat and radio messages end
+
+    //SS220 Remove language prefix begin
+    private string RemoveLanguagePrefix(string text)
+    {
+        return Regex.Replace(text, @"^(?:%[a-zA-Z0-9]+\s*)+", "", RegexOptions.IgnoreCase).TrimStart();
+    }
+    //SS220 Remove language prefix end
 
     #endregion
 }

@@ -169,7 +169,7 @@ public abstract partial class SharedLanguageSystem : EntitySystem
     /// </summary>
     public bool TrySelectLanguage(Entity<LanguageComponent> ent, string languageId)
     {
-        if (!CanSpeak(ent, languageId))
+        if (!HasLanguageDef(ent, languageId))
             return false;
 
         ent.Comp.SelectedLanguage = languageId;

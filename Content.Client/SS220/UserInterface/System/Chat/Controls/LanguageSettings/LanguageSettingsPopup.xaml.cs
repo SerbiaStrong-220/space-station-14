@@ -41,7 +41,7 @@ public sealed partial class LanguageSettingsPopup : Popup
         }
 
         var availableLanguages = new List<LanguagePrototype>();
-        foreach (var def in comp.SpokenLanguages)
+        foreach (var def in comp.AvailableLanguages)
         {
             if (!_languageManager.TryGetLanguageById(def.Id, out var language))
                 continue;

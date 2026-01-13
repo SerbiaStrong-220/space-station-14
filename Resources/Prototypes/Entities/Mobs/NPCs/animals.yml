@@ -508,6 +508,15 @@
   - type: FaxableObject
     insertingState: inserting_mothroach
   - type: MothAccent
+  #SS220 languages tweaks begin
+  - type: Language
+    selectedLanguage: Galactic
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+    - id: Tkachi
+      canSpeak: true
+  #SS220 languages tweaks end
   - type: Sprite
     sprite: Mobs/Animals/mothroach/mothroach.rsi
     layers:
@@ -1335,14 +1344,9 @@
   - type: Blindable #SS220 Fix Ancestor Mob Blindable
 #SS220 languages tweaks begin
   - type: Language
+    selectedLanguage: Galactic
     availableLanguages:
     - id: Galactic
-      canSpeak: false
-    - id: Doggish
-      canSpeak: false
-    - id: Mousey
-      canSpeak: false
-    - id: Feline
       canSpeak: false
 #SS220 languages tweaks end
   - type: Inventory
@@ -1481,28 +1485,17 @@
     group: Monkey
 #SS220 Animalistic languages begin
   - type: Language
+    selectedLanguage: Galactic
     availableLanguages:
     - id: Monkey
       canSpeak: true
     - id: Galactic
       canSpeak: false
-    - id: Reptilian
-      canSpeak: false
-  #SS220 Animalistic languages fix begin
-    - id: Feline
-      canSpeak: false
-    - id: Mousey
-      canSpeak: false
-    - id: Doggish
-      canSpeak: false
-    - id: Piggish
-      canSpeak: false
-  #SS220 Animalistic languages fix end
 #SS220 Animalistic languages end
   - type: Speech
     speechSounds: Monkey
     speechVerb: Monkey
-  #- type: MonkeyAccent
+  - type: MonkeyAccent
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-primate
   - type: AlwaysRevolutionaryConvertible
@@ -1538,21 +1531,12 @@
     group: Monkey
 #SS220 Animalistic languages begin
   - type: Language
+    selectedLanguage: Galactic
     availableLanguages:
     - id: Monkey
       canSpeak: true
-    - id: Reptilian
-      canSpeak: false
   #SS220 Animalistic languages fix begin
     - id: Galactic
-      canSpeak: false
-    - id: Feline
-      canSpeak: false
-    - id: Mousey
-      canSpeak: false
-    - id: Doggish
-      canSpeak: false
-    - id: Piggish
       canSpeak: false
   #SS220 Animalistic languages fix end
 #SS220 Animalistic languages end
@@ -1561,7 +1545,7 @@
   - type: Speech
     speechSounds: Monkey
     speechVerb: Monkey
-  #- type: MonkeyAccent
+  - type: MonkeyAccent
   - type: NpcFactionMember
     factions:
     - Syndicate
@@ -1606,23 +1590,16 @@
   components:
   - type: NameIdentifier
     group: Kobold
-  # - type: LizardAccent
-  # - type: ReplacementAccent
-  #   accent: kobold
+  - type: LizardAccent
+  - type: ReplacementAccent
+    accent: kobold
 #SS220 Animalistic Languages begin
   - type: Language
+    selectedLanguage: Galactic
     availableLanguages:
     - id: Reptilian
       canSpeak: true
     - id: Galactic
-      canSpeak: false
-    - id: Doggish
-      canSpeak: false
-    - id: Mousey
-      canSpeak: false
-    - id: Feline
-      canSpeak: false
-    - id: Piggish
       canSpeak: false
 #SS220 Animalistic Languages end
   - type: Speech
@@ -1757,20 +1734,11 @@
       200: Dead
 #SS220 Animalistic languages fixes begin
   - type: Language
+    selectedLanguage: Galactic
     availableLanguages:
     - id: Reptilian
       canSpeak: true
     - id: Galactic
-      canSpeak: false
-    - id: Feline
-      canSpeak: false
-    - id: Monkey
-      canSpeak: false
-    - id: Mousey
-      canSpeak: false
-    - id: Doggish
-      canSpeak: false
-    - id: Piggish
       canSpeak: false
   #SS220 Animalistic languages fix end
   - type: NpcFactionMember
@@ -1814,20 +1782,11 @@
     prototype: Mouse
 #SS220 Animalistic Languages begin
   - type: Language
+    selectedLanguage: Galactic
     availableLanguages:
     - id: Mousey
       canSpeak: true
     - id: Galactic
-      canSpeak: false
-    - id: Doggish
-      canSpeak: false
-    - id: Feline
-      canSpeak: false
-    - id: Reptilian
-      canSpeak: false
-    - id: Monkey
-      canSpeak: false
-    - id: Piggish
       canSpeak: false
 #SS220 Animalistic Languages end
   - type: GhostRole
@@ -1944,8 +1903,8 @@
     spawned:
     - id: FoodMeatRat
       amount: 1
-    # - type: ReplacementAccent
-    # accent: mouse
+  - type: ReplacementAccent
+    accent: mouse
   - type: Tag
     tags:
     - Trash
@@ -3199,21 +3158,10 @@
       state: cat
 #SS220 Animalistic Languages begin
   - type: Language
+    selectedLanguage: Galactic
     availableLanguages:
     - id: Feline
       canSpeak: true
-    - id: Doggish
-      canSpeak: false
-    - id: Mousey
-      canSpeak: false
-    - id: Monkey
-      canSpeak: false
-    - id: Reptilian
-      canSpeak: false
-    - id: Piggish
-      canSpeak: false
-    - id: SolCommon
-      canSpeak: false
     - id: Galactic
       canSpeak: false
 #SS220 Animalistic Languages end
@@ -3256,8 +3204,8 @@
     spawned:
     - id: FoodMeat
       amount: 3
-  # - type: ReplacementAccent
-  #   accent: cat
+  - type: ReplacementAccent
+    accent: cat
   - type: InteractionPopup
     successChance: 0.7
     interactSuccessString: petting-success-cat
@@ -3324,7 +3272,10 @@
       state: syndicat
 #SS220 languages tweaks begin
   - type: Language
+    selectedLanguage: Galactic
     availableLanguages:
+    - id: Feline
+      canSpeak: true
     - id: Galactic
       canSpeak: false
 #SS220 languages tweaks end
@@ -3608,18 +3559,11 @@
     rules: ghost-role-information-nonantagonist-rules
     #SS220 Animalistic languages fix begin
   - type: Language
+    selectedLanguage: Galactic
     availableLanguages:
     - id: Mousey
       canSpeak: true
-    - id: Feline
-      canSpeak: false
-    - id: Monkey
-      canSpeak: false
-    - id: Doggish
-      canSpeak: false
-    - id: Reptilian
-      canSpeak: false
-    - id: Piggish
+    - id: Galactic
       canSpeak: false
   #SS220 Animalistic languages fix end
   - type: GhostTakeoverAvailable
@@ -3705,10 +3649,8 @@
     spawned:
     - id: FoodMeat
       amount: 1
-  #SS220 Animalistic languages fix begin
-  # - type: ReplacementAccent
-  #   accent: mouse
-  #SS220 Animalistic languages fix end
+  - type: ReplacementAccent
+    accent: mouse
   - type: Tag
     tags:
     - VimPilot
@@ -3823,16 +3765,15 @@
     interactSuccessSpawn: EffectHearts
     interactSuccessSound:
       path: /Audio/Animals/pig_oink.ogg
-  # - type: ReplacementAccent
-  #   accent: pig
+  - type: ReplacementAccent
+    accent: pig
   #SS220 Animalistic languages begin
   - type: Language
+    selectedLanguage: Galactic
     availableLanguages:
     - id: Piggish
       canSpeak: true
     - id: Galactic
-      canSpeak: false
-    - id: SolCommon
       canSpeak: false
    #SS220 Animalistic languages end
   - type: SentienceTarget
@@ -4099,7 +4040,10 @@
     - NanoTrasen
   #SS220 Languages tweaks begin
   - type: Language
+    selectedLanguage: Galactic
     availableLanguages:
     - id: Galactic
+      canSpeak: true
+    - id: Doggish
       canSpeak: true
   #SS220 Languages tweaks end
