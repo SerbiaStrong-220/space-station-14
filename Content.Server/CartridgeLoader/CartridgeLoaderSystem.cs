@@ -218,6 +218,8 @@ public sealed class CartridgeLoaderSystem : SharedCartridgeLoaderSystem
 
         RaiseLocalEvent(installedProgram, new CartridgeAddedEvent(loaderUid));
         UpdateUserInterfaceState(loaderUid, loader);
+
+        Dirty(installedProgram, cartridge); // ss220 add additional info for pda
         return true;
     }
 
@@ -341,8 +343,13 @@ public sealed class CartridgeLoaderSystem : SharedCartridgeLoaderSystem
         if (args.Container.ID != InstalledContainerId && args.Container.ID != loader.CartridgeSlot.ID)
             return;
 
+        // ss220 add additional info for pda start
         if (TryComp(args.Entity, out CartridgeComponent? cartridge))
+        {
             cartridge.LoaderUid = uid;
+            Dirty(args.Entity, cartridge);
+        }
+        // ss220 add additional info for pda end
 
         RaiseLocalEvent(args.Entity, new CartridgeAddedEvent(uid));
         base.OnItemInserted(uid, loader, args);

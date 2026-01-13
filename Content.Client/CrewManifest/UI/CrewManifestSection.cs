@@ -6,16 +6,19 @@ using Robust.Shared.Prototypes;
 using System.Numerics;
 using Content.Shared.Roles;
 using Content.Client.SS220.UserInterface;
+using Content.Shared.PDA;
 
 namespace Content.Client.CrewManifest.UI;
 
 public sealed class CrewManifestSection : BoxContainer
 {
     public CrewManifestSection(
+        IEntityManager entMan, // ss220 add additional info for pda
         IPrototypeManager prototypeManager,
         SpriteSystem spriteSystem,
         DepartmentPrototype section,
-        List<CrewManifestEntry> entries)
+        List<CrewManifestEntry> entries,
+        Entity<PdaComponent>? pda = null) // ss220 add additional info for pda
     {
         Orientation = LayoutOrientation.Vertical;
         HorizontalExpand = true;
@@ -29,7 +32,7 @@ public sealed class CrewManifestSection : BoxContainer
         var gridContainer = new GridContainer()
         {
             HorizontalExpand = true,
-            Columns = 2
+            //Columns = 2, // ss220 add additional info for pda start
         };
 
         AddChild(gridContainer);
@@ -69,8 +72,41 @@ public sealed class CrewManifestSection : BoxContainer
                 titleContainer.AddChild(title);
             }
 
-            gridContainer.AddChild(name);
-            gridContainer.AddChild(titleContainer);
+            // ss220 add additional info for pda start
+            if (pda is { Comp.ContainedId: not null })
+            {
+                var containerButton = new BoxContainer
+                {
+                    HorizontalExpand = true,
+                };
+
+                var linkButton = new Button
+                {
+                    Text = Loc.GetString("records-manifest-link-button-text"),
+                    SetSize = new Vector2(32, 32),
+                    ToolTip = Loc.GetString("records-manifest-link-button-tooltip"),
+                    VerticalAlignment = VAlignment.Center,
+                };
+
+                containerButton.AddChild(name);
+                containerButton.AddChild(titleContainer);
+                containerButton.AddChild(linkButton);
+
+                linkButton.OnPressed += _ =>
+                {
+                    var netPda = entMan.GetNetEntity(pda.Value);
+                    entMan.RaisePredictiveEvent(new RequestLinkIdToRecord(netPda, entry.Key));
+                };
+
+                gridContainer.AddChild(containerButton);
+            }
+            else
+            {
+                gridContainer.Columns = 2;
+                gridContainer.AddChild(name);
+                gridContainer.AddChild(titleContainer);
+            }
+            // ss220 add additional info for pda end
         }
     }
 }

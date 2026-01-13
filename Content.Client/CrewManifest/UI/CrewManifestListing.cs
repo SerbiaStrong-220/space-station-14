@@ -1,4 +1,5 @@
 ﻿using Content.Shared.CrewManifest;
+using Content.Shared.PDA;
 using Content.Shared.Roles;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface.Controls;
@@ -11,6 +12,10 @@ public sealed class CrewManifestListing : BoxContainer
 {
     [Dependency] private readonly IEntitySystemManager _entitySystem = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    // ss220 add additional info for pda start
+    [Dependency] private readonly IEntityManager _entMan = default!;
+    // ss220 add additional info for pda end
+
     private readonly SpriteSystem _spriteSystem;
 
     public CrewManifestListing()
@@ -19,7 +24,7 @@ public sealed class CrewManifestListing : BoxContainer
         _spriteSystem = _entitySystem.GetEntitySystem<SpriteSystem>();
     }
 
-    public void AddCrewManifestEntries(CrewManifestEntries entries)
+    public void AddCrewManifestEntries(CrewManifestEntries entries, Entity<PdaComponent>? pda = null) // ss220 add additional info for pda
     {
         var entryDict = new Dictionary<DepartmentPrototype, List<CrewManifestEntry>>();
         var cryoList = new List<CrewManifestEntry>(); // SS220 Cryo-Manifest
@@ -55,14 +60,16 @@ public sealed class CrewManifestListing : BoxContainer
 
         foreach (var item in entryList)
         {
-            AddChild(new CrewManifestSection(_prototypeManager, _spriteSystem, item.section, item.entries));
+            // ss220 add additional info for pda start
+            AddChild(new CrewManifestSection(_entMan, _prototypeManager, _spriteSystem, item.section, item.entries, pda));
+            // ss220 add additional info for pda end
         }
 
         // SS220 Cryo-Manifest
         if (cryoList.Count > 0)
         {
             if (_prototypeManager.TryIndex<DepartmentPrototype>("Cryo", out var cryoDepartment))
-                AddChild(new CrewManifestSection(_prototypeManager, _spriteSystem, cryoDepartment, cryoList));
+                AddChild(new CrewManifestSection(_entMan, _prototypeManager, _spriteSystem, cryoDepartment, cryoList)); // ss220 add additional info for pda
         }
     }
 }

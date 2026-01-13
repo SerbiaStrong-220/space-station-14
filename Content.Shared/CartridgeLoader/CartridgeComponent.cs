@@ -10,7 +10,7 @@ namespace Content.Shared.CartridgeLoader;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class CartridgeComponent : Component
 {
-    [DataField]
+    [DataField, AutoNetworkedField] // ss220 add additional info for pda
     public EntityUid? LoaderUid;
 
     [DataField(required: true)]

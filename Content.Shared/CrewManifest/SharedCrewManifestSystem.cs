@@ -56,13 +56,16 @@ public sealed class CrewManifestEntry
 
     public bool IsInCryo { get; }
 
-    public CrewManifestEntry(string name, string jobTitle, string jobIcon, string jobPrototype, bool isInCryo)
+    public uint Key { get; } // ss220 add additional info for pda
+
+    public CrewManifestEntry(string name, string jobTitle, string jobIcon, string jobPrototype, bool isInCryo, uint key) // ss220 add additional info for pda
     {
         Name = name;
         JobTitle = jobTitle;
         JobIcon = jobIcon;
         JobPrototype = jobPrototype;
         IsInCryo = isInCryo;
+        Key = key; // ss220 add additional info for pda
     }
 }
 
@@ -73,3 +76,12 @@ public sealed class CrewManifestEntry
 [Serializable, NetSerializable]
 public sealed class CrewManifestOpenUiMessage : BoundUserInterfaceMessage
 {}
+
+// ss220 add additional info for pda start
+[Serializable, NetSerializable]
+public sealed class RequestLinkIdToRecord(NetEntity pda, uint key) : EntityEventArgs
+{
+    public NetEntity Pda = pda;
+    public uint Key = key;
+}
+// ss220 add additional info for pda end

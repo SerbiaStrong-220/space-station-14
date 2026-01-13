@@ -1055,6 +1055,7 @@
     - DoorBumpOpener
     - WhitelistChameleon
     - WhitelistChameleonPDA
+    - LinkRecordsPda #ss220 add additional info for pda
   #ss220 add pdaidpainter end
 
 - type: entity
@@ -1101,6 +1102,7 @@
     - DoorBumpOpener
     - WhitelistChameleon
     - WhitelistChameleonPDA
+    - LinkRecordsPda #ss220 add additional info for pda
   #ss220 add pdaidpainter end
 
 - type: entity
@@ -1487,6 +1489,7 @@
     - DoorBumpOpener
     - WhitelistChameleon
     - WhitelistChameleonPDA
+    - LinkRecordsPda #ss220 add additional info for pda
   #ss220 add pdaidpainter end
 
 - type: entity
