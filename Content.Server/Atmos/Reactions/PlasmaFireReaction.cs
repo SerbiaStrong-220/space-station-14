@@ -55,7 +55,7 @@ namespace Content.Server.Atmos.Reactions
                     mixture.SetMoles(Gas.Oxygen, initialOxygenMoles - plasmaBurnRate * oxygenBurnRate);
 
                     // supersaturation adjusts the ratio of produced tritium to unwanted CO2
-                    mixture.AdjustMoles(Gas.Tritium, plasmaBurnRate * supersaturation * 2.0f);
+                    mixture.AdjustMoles(Gas.Tritium, plasmaBurnRate * supersaturation * 2.0f); //SS220 tritium production tweak
                     mixture.AdjustMoles(Gas.CarbonDioxide, plasmaBurnRate * (1.0f - supersaturation));
 
                     energyReleased += Atmospherics.FirePlasmaEnergyReleased * plasmaBurnRate;
