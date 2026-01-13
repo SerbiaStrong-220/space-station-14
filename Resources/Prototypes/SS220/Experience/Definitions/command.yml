@@ -1,0 +1,52 @@
+- type: experienceDefinition
+  id: BlueShieldRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    CombatTraining:
+      level: 2
+    Construction:
+      level: 1
+    Medicine:
+      level: 3
+    PhysicalTraining:
+      level: 2
+  knowledges:
+  - InformedPersonalKnowledge
+  - MedicalKnowledge
+  - SecurityKnowledge
+  addSublevelPoints: 5
+
+- type: experienceDefinition
+  id: CaptainRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    CombatTraining:
+      level: 2
+    Construction:
+      level: 3
+    Medicine:
+      level: 3
+    PhysicalTraining:
+      level: 2
+  knowledges:
+  - InformedPersonalKnowledge
+  addSublevelPoints: 5
+
+- type: experienceDefinition
+  id: HeadOfPersonnelRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 1
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 1
+  knowledges:
+  - InformedPersonalKnowledge
+  addSublevelPoints: 15

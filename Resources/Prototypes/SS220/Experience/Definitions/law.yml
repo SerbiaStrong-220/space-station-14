@@ -1,0 +1,45 @@
+- type: experienceDefinition
+  id: LawyerRoleExperience
+  skills:
+    # Lawyer that cant write can be fun
+    Bureaucracy:
+      level: 1
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 1
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 1
+  addSublevelPoints: 15
+
+- type: experienceDefinition
+  id: IAARoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 1
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 2
+  addSublevelPoints: 10
+
+- type: experienceDefinition
+  id: MagistrateRoleExperience
+  skills:
+    Bureaucracy:
+      level: 3
+    CombatTraining:
+      level: 2
+    Construction:
+      level: 1
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 2
+  addSublevelPoints: 5

@@ -2,6 +2,7 @@
   id: SecurityPet
   name: job-name-security-pet
   description: job-description-security-pet
+  experienceDefinition: SecurityPetRoleExperience
   playTimeTracker: JobSecurityPet
   requirements:
   - !type:DepartmentTimeRequirement

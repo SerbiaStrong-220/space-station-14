@@ -4,6 +4,7 @@
   description: job-description-musician
   playTimeTracker: JobMusician
   startingGear: MusicianGear
+  experienceDefinition: MusicianRoleExperience # SS220-experience
   icon: "JobIconMusician"
   supervisors: job-supervisors-hire
   access:
