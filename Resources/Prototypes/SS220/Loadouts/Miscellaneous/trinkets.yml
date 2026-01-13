@@ -3,3 +3,15 @@
   storage:
     back:
     - HandheldStationMap
+
+- type: loadout
+  id: NewYearsCap
+  storage:
+    back:
+    - ClothingHeadHatNewYearsCap
+
+- type: loadout
+  id: Eyepatch
+  storage:
+    back:
+    - ClothingEyesEyepatch

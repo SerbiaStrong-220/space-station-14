@@ -316,15 +316,6 @@ namespace Content.Server.Ghost
             _actions.AddAction(uid, ref component.ToggleHudOnOtherActionEntity, component.ToggleHudOnOtherAction);
             //ss220 add filter tts for ghost
             _actions.AddAction(uid, ref component.ToggleRadioChannelsUIEntity, component.ToggleRadioChannelsUI);
-            //SS-220 noDeath
-            if (_actions.AddAction(uid, ref component.RespawnActionEntity, out var actResp, component.RespawnAction)
-                && actResp.UseDelay != null)
-            {
-                var start = _gameTiming.CurTime;
-                var end = start + actResp.UseDelay.Value;
-                _actions.SetCooldown(component.RespawnActionEntity.Value, start, end);
-            }
-            //SS-220 end noDeath
         }
 
         private void OnGhostExamine(EntityUid uid, GhostComponent component, ExaminedEvent args)

@@ -86,6 +86,7 @@
   - type: ThermalVision
     state: Half
     visionRadius: 14
+    changeIconOverlaySpace: true
   #visual
   - type: PointLight
     netsync: false

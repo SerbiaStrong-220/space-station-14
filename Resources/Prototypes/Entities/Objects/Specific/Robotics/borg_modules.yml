@@ -860,6 +860,7 @@
     - item: HandheldHealthAnalyzerUnpowered
     - item: DefibrillatorOneHandedUnpowered
     - item: BorgFireExtinguisher
+    - item: PinpointerCrew #SS220-PinpointerCrew
     - item: BorgHandheldGPSBasic
     - item: HandLabeler
   - type: BorgModuleIcon

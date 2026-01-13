@@ -65,3 +65,15 @@
 - type: lobbyBackground
   id: BTB-Art
   background: /Textures/SS220/LobbyScreens/BTB-Art.png
+
+- type: lobbyBackground
+  id: multiverse
+  background: /Textures/SS220/LobbyScreens/multiverse.png
+
+- type: lobbyBackground
+  id: undergate
+  background: /Textures/SS220/LobbyScreens/undergate.png
+
+- type: lobbyBackground
+  id: MouseKiller
+  background: /Textures/SS220/LobbyScreens/MouseKiller.png
