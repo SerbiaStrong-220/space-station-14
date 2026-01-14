@@ -46,7 +46,7 @@ using Robust.Shared.Map;
 using Content.Shared.SS220.Language.Systems;
 using Content.Shared.SS220.TTS;
 using Content.Shared.FixedPoint;
-using System.Text.RegularExpressions; //SS220 Remove language prefix
+using System.Text.RegularExpressions;
 
 namespace Content.Server.Chat.Systems;
 
