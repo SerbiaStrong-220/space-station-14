@@ -1,11 +1,18 @@
 using Content.Shared.Combat;
 using Content.Shared.DoAfter;
+using Content.Shared.Hands;
+using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Interaction.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.VirtualItem;
+using Content.Shared.MouseRotator;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Systems;
+using Content.Shared.Popups;
 using Content.Shared.Standing;
+using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Physics.Events;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -24,6 +31,8 @@ public sealed partial class GrabSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -32,12 +41,18 @@ public sealed partial class GrabSystem : EntitySystem
         SubscribeLocalEvent<GrabberComponent, GrabDoAfterEvent>(OnGrabDoAfter);
         SubscribeLocalEvent<GrabbableComponent, MoveInputEvent>(OnMove);
         SubscribeLocalEvent<GrabbableComponent, DownedEvent>(OnDowned);
+        SubscribeLocalEvent<GrabbableComponent, ThrownEvent>(OnThrown);
 
-        SubscribeLocalEvent<GrabberComponent, CheckCombatModeMouseRotatorEvent>(OnCheckMouseRotator);
+        SubscribeLocalEvent<GrabberComponent, EnableMouseRotationAttemptEvent>(OnMouseRotatorAttempt);
         SubscribeLocalEvent<GrabbableComponent, UpdateCanMoveEvent>(OnCanMove);
         SubscribeLocalEvent<GrabbableComponent, InteractionAttemptEvent>(OnInteractionAttempt);
         SubscribeLocalEvent<GrabbableComponent, AttackAttemptEvent>(OnCanAttack);
+        SubscribeLocalEvent<GrabberComponent, PreventCollideEvent>(OnPreventCollide);
+
+        SubscribeLocalEvent<GrabberComponent, VirtualItemDeletedEvent>(OnVirtualItemDeleted);
     }
+
+
 
     #region Events Handling
 
@@ -66,7 +81,15 @@ public sealed partial class GrabSystem : EntitySystem
             TryBreakGrab((grabbable, grabbable.Comp));
     }
 
-    private void OnCheckMouseRotator(Entity<GrabberComponent> grabber, ref CheckCombatModeMouseRotatorEvent ev)
+    private void OnThrown(Entity<GrabbableComponent> ent, ref ThrownEvent args)
+    {
+        if (!ent.Comp.Grabbed)
+            return;
+
+        BreakGrab((ent, ent.Comp));
+    }
+
+    private void OnMouseRotatorAttempt(Entity<GrabberComponent> grabber, ref EnableMouseRotationAttemptEvent ev)
     {
         if (grabber.Comp.Grabbing != null)
             ev.Cancel();
@@ -90,12 +113,38 @@ public sealed partial class GrabSystem : EntitySystem
             ev.Cancel();
     }
 
+    // cuz of mob collisions
+    private void OnPreventCollide(Entity<GrabberComponent> ent, ref PreventCollideEvent ev)
+    {
+        if (!TryComp<GrabbableComponent>(ev.OtherEntity, out var grabbable))
+            return;
+
+        if (!grabbable.Grabbed)
+            return;
+
+        if (grabbable.GrabbedBy != ent)
+            return;
+
+        ev.Cancelled = true;
+    }
+
     private void OnDowned(Entity<GrabbableComponent> grabbable, ref DownedEvent ev)
     {
         if (grabbable.Comp.GrabStage != GrabStage.None)
         {
             BreakGrab((grabbable, grabbable.Comp));
         }
+    }
+
+    private void OnVirtualItemDeleted(Entity<GrabberComponent> grabber, ref VirtualItemDeletedEvent ev)
+    {
+        if (!TryComp<GrabbableComponent>(ev.BlockingEntity, out var grabbable))
+            return;
+
+        if (grabbable.GrabStage == GrabStage.None)
+            return;
+
+        BreakGrab((ev.BlockingEntity, grabbable));
     }
 
     #endregion
@@ -152,6 +201,38 @@ public sealed partial class GrabSystem : EntitySystem
     #region Private API
     private void DoInitialGrab(Entity<GrabberComponent> grabber, Entity<GrabbableComponent> grabbable, GrabStage grabStage)
     {
+        var freeHands = 0;
+
+        foreach (var hand in _hands.EnumerateHands(grabber.Owner))
+        {
+            if (!_hands.TryGetHeldItem(grabber.Owner, hand, out var held))
+            {
+                freeHands++;
+                continue;
+            }
+
+            if (HasComp<UnremoveableComponent>(held))
+                continue;
+
+            _hands.DoDrop(grabber.Owner, hand, true);
+            freeHands++;
+
+            if (freeHands == 2)
+                break;
+        }
+
+        if (freeHands < 2)
+        {
+            _popup.PopupClient(Loc.GetString("grabber-component-no-free-hands"), grabber);
+            return;
+        }
+
+        if (!_virtualItem.TrySpawnVirtualItemInHand(grabbable, grabber, out var virtualItem))
+            return;
+
+        if (!_virtualItem.TrySpawnVirtualItemInHand(grabbable, grabber, out var virtualItem2))
+            return;
+
         grabber.Comp.Grabbing = grabbable;
         grabbable.Comp.GrabbedBy = grabber;
 
@@ -167,7 +248,7 @@ public sealed partial class GrabSystem : EntitySystem
         ChangeGrabStage(grabber, grabbable, grabbable.Comp.GrabStage + 1);
     }
 
-    private void BreakGrab(Entity<GrabbableComponent?> grabbable)
+    public void BreakGrab(Entity<GrabbableComponent?> grabbable)
     {
         if (!Resolve(grabbable, ref grabbable.Comp))
             return;
@@ -182,6 +263,8 @@ public sealed partial class GrabSystem : EntitySystem
         grabberComp.Grabbing = null;
         grabbable.Comp.GrabbedBy = null;
         _transform.DropNextTo(grabbable.Owner, grabbable.Owner);
+
+        _virtualItem.DeleteInHandsMatching(grabber, grabbable);
     }
 
     #endregion

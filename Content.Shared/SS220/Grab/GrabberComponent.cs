@@ -8,7 +8,7 @@ namespace Content.Shared.SS220.Grab;
 public sealed partial class GrabberComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public Vector2 GrabOffset = new Vector2(0, -0.5f);
+    public Vector2 GrabOffset = new Vector2(0, -0.25f);
 
     [DataField, AutoNetworkedField]
     public EntityUid? Grabbing;

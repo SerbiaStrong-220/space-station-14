@@ -26,10 +26,13 @@ public sealed partial class ThrowTargetCombatEffect : CombatSequenceEffect
         if (!Entity.TryGetComponent<TransformComponent>(user, out var userXform))
             return;
 
-        var direction = transform.GetMapCoordinates(target, targetXform).Position - transform.GetMapCoordinates(user, userXform).Position;
-        var normalized = direction.Normalized();
-        var coordinates = targetXform.Coordinates.Offset(normalized * Distance);
+        var targetCoords = transform.GetMapCoordinates(target, targetXform);
+        var userCoords = transform.GetMapCoordinates(user, userXform);
 
-        throwing.TryThrow(target, coordinates, BaseThrowSpeed, user, PushbackRatio);
+        var direction = targetCoords.Position - userCoords.Position;
+        var normalized = direction.Normalized();
+        var coordinates = targetCoords.Offset(normalized * Distance);
+
+        throwing.TryThrow(target, transform.ToCoordinates(coordinates), BaseThrowSpeed, user, PushbackRatio);
     }
 }

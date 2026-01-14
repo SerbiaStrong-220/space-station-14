@@ -7,8 +7,12 @@ using Content.Shared.Alert;
 using Content.Shared.CombatMode;
 using Content.Shared.Effects;
 using Content.Shared.Inventory.Events;
+using Content.Shared.Inventory.VirtualItem;
+using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Events;
+using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
+using Content.Shared.SS220.Grab;
 using Content.Shared.SS220.MartialArts.Effects;
 using Content.Shared.Trigger;
 using Content.Shared.Weapons.Melee;
@@ -31,6 +35,8 @@ public sealed partial class MartialArtsSystem : EntitySystem, IMartialArtEffectE
     [Dependency] private readonly AlertsSystem _alerts = default!;
     [Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
+    [Dependency] private readonly PullingSystem _pulling = default!;
+    [Dependency] private readonly GrabSystem _grab = default!;
 
     private static readonly ProtoId<AlertPrototype> CooldownAlert = "MartialArtCooldown";
 
@@ -40,7 +46,7 @@ public sealed partial class MartialArtsSystem : EntitySystem, IMartialArtEffectE
 
         SubscribeLocalEvent<MartialArtistComponent, DisarmAttackPerformedEvent>(OnDisarm);
         SubscribeLocalEvent<MartialArtistComponent, LightAttackPerformedEvent>(OnHarm);
-        SubscribeLocalEvent<MartialArtistComponent, PullStartedMessage>(OnGrab);
+        SubscribeLocalEvent<MartialArtistComponent, GrabStageChangeEvent>(OnGrab);
 
         SubscribeLocalEvent<MartialArtistComponent, ComponentShutdown>(OnShutdown);
 
@@ -167,23 +173,24 @@ public sealed partial class MartialArtsSystem : EntitySystem, IMartialArtEffectE
         _color.RaiseEffect(Color.Red, new List<EntityUid> { target }, Filter.Pvs(user, entityManager: EntityManager));
     }
 
-    private void OnGrab(EntityUid user, MartialArtistComponent artist, ref PullStartedMessage ev)
+    private void OnGrab(EntityUid user, MartialArtistComponent artist, ref GrabStageChangeEvent ev)
     {
-        // cuz this event is raised on both at the time
-        if (user != ev.PullerUid)
-            return;
-
-        if (!_combatMode.IsInCombatMode(user))
-            return;
-
         if (artist.MartialArt == null)
             return;
 
-        if (!CanBeAttackedWithMartialArts(ev.PulledUid))
+        if (ev.NewStage == GrabStage.None)
+        {
+            if (artist.CurrentSteps.Count > 0)
+                ResetSequence(user, artist);
+
+            return;
+        }
+
+        if (!CanBeAttackedWithMartialArts(ev.Grabbable))
             return;
 
-        PerformStep(user, ev.PulledUid, CombatSequenceStep.Grab, artist);
-        _color.RaiseEffect(Color.Yellow, new List<EntityUid> { ev.PulledUid }, Filter.Pvs(user, entityManager: EntityManager));
+        PerformStep(user, ev.Grabbable, CombatSequenceStep.Grab, artist);
+        _color.RaiseEffect(Color.Yellow, new List<EntityUid> { ev.Grabbable }, Filter.Pvs(user, entityManager: EntityManager));
     }
 
     /// <returns>true for valid sequence and false for timed out</returns>
@@ -218,6 +225,12 @@ public sealed partial class MartialArtsSystem : EntitySystem, IMartialArtEffectE
     private void PerformSequence(EntityUid user, EntityUid target, MartialArtistComponent artist, CombatSequence sequence)
     {
         ResetSequence(user, artist);
+
+        if (TryComp<PullableComponent>(target, out var pullable))
+            _pulling.TryStopPull(target, pullable);
+
+        if (TryComp<GrabbableComponent>(target, out var grabbable))
+            _grab.BreakGrab((target, grabbable));
 
         PerformSequenceEntry(user, target, artist, sequence.Entry, sequence);
 
