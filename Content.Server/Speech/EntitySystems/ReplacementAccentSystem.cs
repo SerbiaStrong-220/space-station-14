@@ -6,7 +6,6 @@ using Content.Shared.Speech;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Content.Shared.SS220.Language.Components; //SS220 Language tweak
 
 namespace Content.Server.Speech.EntitySystems
 {
@@ -40,27 +39,10 @@ namespace Content.Server.Speech.EntitySystems
         private void OnAccent(EntityUid uid, ReplacementAccentComponent component, AccentGetEvent args)
         {
             //SS220 Language tweak begin
-            if (!TryComp<LanguageComponent>(uid, out var langComp))
-            {
-                args.Message = ApplyReplacements(args.Message, component.Accent);
-                return;
-            }
-
-            var currentLangId = langComp.SelectedLanguage;
-            if (currentLangId == null)
-            {
-                args.Message = ApplyReplacements(args.Message, component.Accent);
-                return;
-            }
-
-            var originalMessage = args.Message;
-
-            bool canSpeakThisLanguage = langComp.AvailableLanguages
-                .Any(def => def.Id == currentLangId && def.CanSpeak);
-
-            if (canSpeakThisLanguage)
-                return;
+            if (args.Cancelled)
+            return;
             //SS220 Language tweak end
+
             args.Message = ApplyReplacements(args.Message, component.Accent);
         }
 
