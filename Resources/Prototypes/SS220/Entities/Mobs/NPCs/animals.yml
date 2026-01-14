@@ -411,9 +411,9 @@
       200: Dead
 
 - type: entity
-  name: wizard spider ghost
-  parent: MobSpiderGhost
   id: MobSpiderGhostWizard
+  parent: MobSpiderGhost
+  name: wizard spider ghost
   description:  This ghost spider looks a little magical
   suffix: Wizard
   components:
