@@ -8,6 +8,7 @@ using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.MouseRotator;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Systems;
+using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Standing;
 using Content.Shared.Throwing;
@@ -33,6 +34,7 @@ public sealed partial class GrabSystem : EntitySystem
     [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
 
     public override void Initialize()
     {
@@ -42,6 +44,7 @@ public sealed partial class GrabSystem : EntitySystem
         SubscribeLocalEvent<GrabbableComponent, MoveInputEvent>(OnMove);
         SubscribeLocalEvent<GrabbableComponent, DownedEvent>(OnDowned);
         SubscribeLocalEvent<GrabbableComponent, ThrownEvent>(OnThrown);
+        SubscribeLocalEvent<GrabberComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovementSpeed);
 
         SubscribeLocalEvent<GrabberComponent, EnableMouseRotationAttemptEvent>(OnMouseRotatorAttempt);
         SubscribeLocalEvent<GrabbableComponent, UpdateCanMoveEvent>(OnCanMove);
@@ -51,8 +54,6 @@ public sealed partial class GrabSystem : EntitySystem
 
         SubscribeLocalEvent<GrabberComponent, VirtualItemDeletedEvent>(OnVirtualItemDeleted);
     }
-
-
 
     #region Events Handling
 
@@ -87,6 +88,20 @@ public sealed partial class GrabSystem : EntitySystem
             return;
 
         BreakGrab((ent, ent.Comp));
+    }
+
+    private void OnRefreshMovementSpeed(Entity<GrabberComponent> grabber, ref RefreshMovementSpeedModifiersEvent ev)
+    {
+        if (grabber.Comp.Grabbing is not { } grabbing)
+            return;
+
+        if (!TryComp<GrabbableComponent>(grabbing, out var grabbableComp))
+            return;
+
+        if (!grabber.Comp.GrabStagesSpeedModifier.TryGetValue(grabbableComp.GrabStage, out var modifier))
+            return;
+
+        ev.ModifySpeed(modifier);
     }
 
     private void OnMouseRotatorAttempt(Entity<GrabberComponent> grabber, ref EnableMouseRotationAttemptEvent ev)
@@ -167,7 +182,6 @@ public sealed partial class GrabSystem : EntitySystem
         {
             BlockDuplicate = true,
             BreakOnDamage = true,
-            NeedHand = true,
             BreakOnMove = true,
         };
 
@@ -181,8 +195,11 @@ public sealed partial class GrabSystem : EntitySystem
         if (!Resolve(grabbable, ref grabbable.Comp, false))
             return false;
 
+        if (grabbable.Comp.GrabbedBy != null && grabbable.Comp.GrabbedBy != grabber)
+            return false;
+
         if (checkCanPull)
-            return _pulling.CanPull(grabber, grabbable);
+            return _pulling.CanPull(grabber, grabbable, ignoreHands: true);
 
         return true;
     }
@@ -191,6 +208,7 @@ public sealed partial class GrabSystem : EntitySystem
     {
         grabbable.Comp.GrabStage = newStage;
         RefreshGrabResistance((grabbable, grabbable.Comp));
+        _movementSpeed.RefreshMovementSpeedModifiers(grabber);
 
         var ev = new GrabStageChangeEvent(grabber, grabbable, newStage);
         RaiseLocalEvent(grabber, ev);

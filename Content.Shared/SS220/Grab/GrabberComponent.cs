@@ -23,6 +23,8 @@ public sealed partial class GrabberComponent : Component
     public Dictionary<GrabStage, float> GrabStagesSpeedModifier = new()
     {
         { GrabStage.Passive, 0.70f },
-        // { GrabStage. }
+        { GrabStage.Aggressive, 0.50f },
+        { GrabStage.NeckGrab, 0.40f },
+        { GrabStage.Chokehold, 0.30f },
     };
 }

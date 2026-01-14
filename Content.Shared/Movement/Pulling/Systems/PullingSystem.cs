@@ -455,14 +455,14 @@ public sealed class PullingSystem : EntitySystem
         TryStopPull(pullerComp.Pulling.Value, pullableComp, user: player);
     }
 
-    public bool CanPull(EntityUid puller, EntityUid pullableUid, PullerComponent? pullerComp = null)
+    public bool CanPull(EntityUid puller, EntityUid pullableUid, PullerComponent? pullerComp = null, bool ignoreHands = false) // SS220-Grabs | Add ignoreHands arg
     {
         if (!Resolve(puller, ref pullerComp, false))
         {
             return false;
         }
 
-        if (pullerComp.NeedsHands
+        if (!ignoreHands && pullerComp.NeedsHands // SS220-Grabs | new ignoreHands arg
             && !_handsSystem.TryGetEmptyHand(puller, out _)
             && pullerComp.Pulling == null)
         {
@@ -541,7 +541,7 @@ public sealed class PullingSystem : EntitySystem
         if (pullerComp.Pulling == pullableUid)
             return true;
 
-        if (!CanPull(pullerUid, pullableUid))
+        if (!CanPull(pullerUid, pullableUid, ignoreHands: _combatMode.IsInCombatMode(pullerUid))) // SS220-Grabs
             return false;
 
         if (!TryComp(pullerUid, out PhysicsComponent? pullerPhysics) || !TryComp(pullableUid, out PhysicsComponent? pullablePhysics))
