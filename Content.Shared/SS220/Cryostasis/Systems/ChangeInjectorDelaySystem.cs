@@ -6,7 +6,7 @@ using Content.Shared.SS220.Cryostasis.Events;
 
 namespace Content.Shared.SS220.Cryostasis.Systems;
 
-public sealed class ChangeDelayInjectorSystem : EntitySystem
+public sealed class ChangeInjectorDelaySystem : EntitySystem
 {
     [Dependency] private readonly SharedPowerReceiverSystem _powerReceiver = default!;
 
@@ -17,10 +17,10 @@ public sealed class ChangeDelayInjectorSystem : EntitySystem
 
     private void OnChangeDelay(Entity<CryostasisComponent> ent, ref ChangeInjectorDelayEvent ev)
     {
-        if (TryComp<BuckleComponent>(ev.Target, out var buckle) && buckle.Buckled &&
-            HasComp<StasisBedComponent>(buckle.BuckledTo.Value) && _powerReceiver.IsPowered(buckle.BuckledTo.Value))
+        if (TryComp<BuckleComponent>(ev.Target, out var buckle) &&
+            HasComp<StasisBedComponent>(buckle.BuckledTo) && _powerReceiver.IsPowered(buckle.BuckledTo.Value))
         {
-            ev.Delay /= ent.Comp.FastInjectionMultiply;
+            ev.Delay /= ent.Comp.InjectionSpeedMultiply;
         }
     }
 }

@@ -245,9 +245,11 @@ public abstract class SharedInjectorSystem : EntitySystem
         // ss220 add fast injection with cryo syringe start
         var changeDelayEv = new ChangeInjectorDelayEvent(injector, target, user, actualDelay);
         RaiseLocalEvent(injector, ref changeDelayEv);
+
+        actualDelay = changeDelayEv.Delay;
         // ss220 add fast injection with cryo syringe end
 
-        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, changeDelayEv.Delay, new InjectorDoAfterEvent(), injector.Owner, target: target, used: injector.Owner) // ss220 add fast injection with cryo syringe
+        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, actualDelay, new InjectorDoAfterEvent(), injector.Owner, target: target, used: injector.Owner)
         {
             BreakOnMove = true,
             BreakOnWeightlessMove = false,

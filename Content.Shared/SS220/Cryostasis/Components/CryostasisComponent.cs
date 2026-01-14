@@ -8,5 +8,5 @@ namespace Content.Shared.SS220.Cryostasis.Components;
 public sealed partial class CryostasisComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public float FastInjectionMultiply = 5f;
+    public float InjectionSpeedMultiply = 5f;
 }
