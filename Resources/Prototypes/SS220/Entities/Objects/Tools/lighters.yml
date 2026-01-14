@@ -110,8 +110,6 @@
       map: ["flame"]
       visible: false
       shader: unshaded
-  - type: StealTarget
-    stealGroup: ExpensiveLighterUSSP
 
 - type: entity
   parent: ExpensiveLighterNanotrasen
