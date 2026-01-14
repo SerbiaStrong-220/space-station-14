@@ -1,14 +1,14 @@
-treatment-suggestion-header = АссистентВрача
+treatment-suggestion-header = [head=4] АссистентВрача [/head]
 
-treatment-recommendation-problem-section-name = Обнаруженные проблемы:
-treatment-recommendation-operation-section-name = Рекомендованные процедуры:
-treatment-recommendation-suggestion-section-name = Напоминание:
+treatment-recommendation-problem-section-name = [bold] Обнаруженные проблемы: [/bold]
+treatment-recommendation-operation-section-name = [bold] Рекомендованные процедуры: [/bold]
+treatment-recommendation-suggestion-section-name = [bold] Напоминание: [/bold]
 
-treatment-recommendation-more-200-damage = Тело пациента слишком повреждено!
-treatment-recommendation-more-200-damage-help = Рекомендуется восстановить тело. При помощи { ent-HandheldHealthAnalyzer } проверьте категории повреждений. Механические и ожоги можно восстановить при помощи операции TODO_НАМЕ или специализированных наборов.
+treatment-recommendation-more-200-damage = Тело пациента слишком повреждено для срочной реанимации!
+treatment-recommendation-more-200-damage-help = Рекомендуется восстановить тело. { CAPITALIZE(ent-HandheldHealthAnalyzer) } покажет категории повреждений тела пациента. Механические и ожоги можно восстановить при помощи операции на торсе или медицинских наборов.
 
 treatment-recommendation-mob-state-dead = Пациент мёртв!
-treatment-recommendation-mob-state-dead-help = При помощи операции TODO_НАМЕ либо { ent-Defibrillator } можно вернуть жизнь в организм.
+treatment-recommendation-mob-state-dead-help = При помощи проведения операции на сердце либо { ent-Defibrillator } можно вернуть жизнь в организм.
 
 treatment-recommendation-body-near-decay = Внимание! Тело пациента близко к гниению!
 treatment-recommendation-body-near-decay-help = Остановить гниение тела может { ent-StasisBed }, { ent-Morgue }, холодная температура.
@@ -21,5 +21,3 @@ treatment-recommendation-near-brain-rot-help = Чтобы замедлить г�
 
 treatment-recommendation-brain-rot = Мозг пациента повреждён!
 treatment-recommendation-brain-rot-help = Лечение с помощью { reagent-name-cerebrin } в { ent-CryoPod } восстановит мозговые повреждения.
-
-treatment-recommendation-disfunction-healing = Опросите пациента, НаноТрейзн внимательно следит за состоянием пациентов. В случае дисфункций возможно проведение операций по восстановлению работоспособности.

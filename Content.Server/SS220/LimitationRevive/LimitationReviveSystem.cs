@@ -97,6 +97,8 @@ public sealed class LimitationReviveSystem : SharedLimitationReviveSystem
 
             limitationRevive.DamageCountingTime += TimeSpan.FromSeconds(frameTime / limitationRevive.UpdateIntervalMultiplier);
 
+            Dirty(ent, limitationRevive);
+
             if (limitationRevive.DamageCountingTime < limitationRevive.BeforeDamageDelay)
                 continue;
 
@@ -122,5 +124,7 @@ public sealed class LimitationReviveSystem : SharedLimitationReviveSystem
 
         // TODO-SS220: please make it logic to adjust time passed and not the time start point
         limComp.DamageCountingTime -= addTime;
+
+        Dirty(ent, limComp);
     }
 }

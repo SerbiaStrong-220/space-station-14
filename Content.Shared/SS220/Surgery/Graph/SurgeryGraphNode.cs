@@ -9,7 +9,7 @@ namespace Content.Shared.SS220.Surgery.Graph;
 public sealed partial class SurgeryGraphNode
 {
     [DataField("node", required: true)]
-    public string Name { get; private set; } = default!;
+    public LocId Name { get; private set; } = default!;
 
     [DataField]
     public ProtoId<AbstractSurgeryNodePrototype>? BaseNode { get; private set; }

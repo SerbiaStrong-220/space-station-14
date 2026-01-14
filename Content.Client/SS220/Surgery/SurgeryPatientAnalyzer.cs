@@ -2,17 +2,19 @@
 
 using Content.Client.Atmos.Rotting;
 using Content.Client.SS220.LimitationRevive;
-using Content.Client.SS220.Surgery.UiParts;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Damage;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
+using Content.Shared.SS220.Pathology;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Client.SS220.Surgery;
 
 public sealed class SurgeryPatientAnalyzer : EntitySystem
 {
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly RottingSystem _rotting = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
 
@@ -37,6 +39,8 @@ public sealed class SurgeryPatientAnalyzer : EntitySystem
                 && mobStateComponent?.CurrentState == MobState.Dead) // kinda bad fix
             patientStatus.BrainRotDegree = GetBrainRotDegree(limitationReviveComponent);
 
+        CollectPathologyDescriptions(target, ref patientStatus);
+
         return patientStatus;
     }
 
@@ -52,7 +56,7 @@ public sealed class SurgeryPatientAnalyzer : EntitySystem
         // If it become useful you need to do
         // 1. Move to prototypes it.
         // 2. Make ConditionInterface for prototype.
-        // Good luck =) (c) Karamelnay Yasheritsa
+        // Good luck, hf =)
         var recommendation = new TreatmentRecommendation();
 
         if (status.OverallDamage > 200)
@@ -61,7 +65,7 @@ public sealed class SurgeryPatientAnalyzer : EntitySystem
             recommendation.Operations.Add("treatment-recommendation-more-200-damage-help");
         }
 
-        if (status.PatientState == Shared.Mobs.MobState.Dead)
+        if (status.PatientState == MobState.Dead)
         {
             recommendation.Problems.Add(Loc.GetString("treatment-recommendation-mob-state-dead"));
             recommendation.Operations.Add("treatment-recommendation-mob-state-dead-help");
@@ -90,21 +94,39 @@ public sealed class SurgeryPatientAnalyzer : EntitySystem
             recommendation.Suggestions.Add("treatment-recommendation-near-brain-rot-help");
         }
 
-        recommendation.Suggestions.Add("treatment-recommendation-disfunction-healing");
+        foreach (var descLocId in status.PathologiesDescription)
+        {
+            recommendation.Problems.Add(Loc.GetString(descLocId));
+        }
 
         return recommendation;
     }
 
+    // TODO: after redoing LimRev shared comp come here
     public int GetBrainRotDegree(LimitationReviveComponent comp)
     {
+        if (comp.DamageCountingTime is null && comp.IsDamageTaken)
+            return MaxBrainRotPercentage;
+
         if (comp.DamageCountingTime is null)
             return 0;
-
-        if (comp.IsDamageTaken)
-            return MaxBrainRotPercentage;
 
         var result = (MaxBrainRotPercentage * (int)(_gameTiming.CurTime - comp.DamageCountingTime.Value).TotalSeconds) / (int)comp.BeforeDamageDelay.TotalSeconds;
 
         return result >= 0 ? result : 0;
+    }
+
+    private void CollectPathologyDescriptions(EntityUid target, ref PatientStatusData statusData)
+    {
+        if (!TryComp<PathologyHolderComponent>(target, out var pathologyHolder))
+            return;
+
+        foreach (var (pathologyId, instanceData) in pathologyHolder.ActivePathologies)
+        {
+            if (!_prototype.Resolve(pathologyId, out var pathologyPrototype))
+                continue;
+
+            statusData.PathologiesDescription.Add(pathologyPrototype.Definition[instanceData.Level].Description);
+        }
     }
 }

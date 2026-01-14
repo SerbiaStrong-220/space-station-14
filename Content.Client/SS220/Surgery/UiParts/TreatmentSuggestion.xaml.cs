@@ -10,7 +10,7 @@ namespace Content.Client.SS220.Surgery.UiParts;
 [GenerateTypedNameReferences]
 public sealed partial class TreatmentSuggestion : Control
 {
-    public string InSectionTextTabulation = "  ";
+    public string InSectionTextPrefix = "  - ";
 
     public TreatmentSuggestion()
     {
@@ -33,11 +33,11 @@ public sealed partial class TreatmentSuggestion : Control
         if (dataLocPaths.Count == 0)
             return;
 
-        builder.Append(sectionName);
+        builder.AppendLine(sectionName);
 
         foreach (var locPath in dataLocPaths)
         {
-            builder.Append(InSectionTextTabulation);
+            builder.Append(InSectionTextPrefix);
             builder.AppendLine(Loc.GetString(locPath));
         }
     }

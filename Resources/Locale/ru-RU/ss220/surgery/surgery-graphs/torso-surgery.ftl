@@ -10,4 +10,4 @@ surgery-torso-node-start = Начало операции.
 
 compact-defibrillator-cant-zap = Это оборудование должно быть использовано непосредственно на сердце пациента
 
-surgery-requirement-defib-required = Требуется компактный дефибриллятор
+surgery-requirement-defib-required = Компактный дефибриллятор

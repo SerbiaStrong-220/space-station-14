@@ -2,12 +2,16 @@
 
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs;
+using Content.Shared.SS220.Pathology;
+using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.Surgery;
 
-public struct PatientStatusData
+public struct PatientStatusData()
 {
     public MobState PatientState = MobState.Invalid;
+
+    public HashSet<LocId> PathologiesDescription = new();
 
     public FixedPoint2 OverallDamage = -1;
     /// <summary>
@@ -19,10 +23,6 @@ public struct PatientStatusData
     /// From 0 to 2 according to <see cref="RottingSystem"/>
     /// </summary>
     public int BodyDecayDegree = -1;
-
-    public PatientStatusData()
-    {
-    }
 }
 
 public struct TreatmentRecommendation

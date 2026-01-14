@@ -17,14 +17,16 @@
             </PanelContainer.PanelOverride>
         </PanelContainer>
         <BoxContainer Name="ContentBoxContainer" Orientation="Horizontal" Margin="5">
-            <BoxContainer Name="PatientInfo" Orientation="Vertical" SetSize="460 420">
-                <surgeryUiParts:PatientStatus Name="PatientStatus" HorizontalExpand="False" VerticalExpand="True"/>
-                <surgeryUiParts:TreatmentSuggestion Name="TreatmentSuggestion" HorizontalExpand="False"  VerticalExpand="True"/>
-            </BoxContainer>
+            <ScrollContainer HScrollEnabled="False" VerticalExpand="True" Margin="0 0 10 0" HorizontalExpand="True" SetSize="460 420">
+                <BoxContainer Name="PatientInfo" Orientation="Vertical">
+                    <surgeryUiParts:PatientStatus Name="PatientStatus" HorizontalExpand="True" VerticalExpand="True"/>
+                    <surgeryUiParts:TreatmentSuggestion Name="TreatmentSuggestion" HorizontalExpand="True"  VerticalExpand="True"/>
+                </BoxContainer>
+            </ScrollContainer>
             <BoxContainer Name="HandBook" Orientation="Vertical" SetSize="460 420">
-                <surgeryUiParts:OperationList Name="OperationList" VerticalExpand="True" MaxHeight="180" HorizontalExpand="False"/>
-                <surgeryUiParts:OperationDescription Name="OperationDescription" Visible ="False"
-                    VerticalAlignment="Stretch" HorizontalExpand="False"  VerticalExpand="True"/>
+                <surgeryUiParts:OperationList Name="OperationList" VerticalExpand="True" MaxHeight="120" HorizontalExpand="False"/>
+                <surgeryUiParts:OperationDescription Name="OperationDescription" MinHeight="280" Visible ="False"
+                    HorizontalExpand="False" VerticalExpand="True"/>
             </BoxContainer>
         </BoxContainer>
     </Control>

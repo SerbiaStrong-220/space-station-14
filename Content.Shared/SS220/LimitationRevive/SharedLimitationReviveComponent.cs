@@ -2,6 +2,7 @@
 
 namespace Content.Shared.SS220.LimitationRevive;
 
+// TODO: redo this from actual master state
 public abstract partial class SharedLimitationReviveComponent : Component
 {
     /// <summary>

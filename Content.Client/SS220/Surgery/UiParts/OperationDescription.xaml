@@ -5,8 +5,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
-    xmlns:surgeryUiParts="clr-namespace:Content.Client.SS220.Surgery.UiParts">
-    <Control>
+    xmlns:surgeryUiParts="clr-namespace:Content.Client.SS220.Surgery.UiParts"
+    VerticalExpand="True">
+    <Control VerticalExpand="True">
         <PanelContainer>
             <PanelContainer.PanelOverride>
                 <gfx:StyleBoxFlat BackgroundColor="#1B1B1E"/>
@@ -14,7 +15,7 @@
         </PanelContainer>
         <!-- Kinda overall info to make player feel more confident.
         It should give the right step order and some description for operation -->
-        <BoxContainer Orientation="Vertical">
+        <BoxContainer Orientation="Vertical" VerticalExpand="True">
             <BoxContainer Orientation="Horizontal">
                 <TextureRect Name="LockIcon" Stretch="Keep" TexturePath="/Textures/Interface/VerbIcons/lock.svg.192dpi.png"
                     Visible="False" TextureScale="0.25 0.25"/>
@@ -24,12 +25,9 @@
                 <RichTextLabel Name="OperationName" Text="operation-name" HorizontalExpand="True" HorizontalAlignment="Left" Margin="20 5 5 0"/>
                 <ScrollContainer Name="ScrollOperationContainer" HScrollEnabled="False" Margin="10 5 5 0"
                     HorizontalExpand="False" VerticalExpand="True" MouseFilter="Pass">
-                    <BoxContainer
-                        Name="OperationContainer"
-                        Orientation="Vertical"
-                        SizeFlagsStretchRatio="1"
-                        HorizontalExpand="False"
-                        VerticalExpand="True">
+                    <BoxContainer Name="OperationContainer" Orientation="Vertical"
+                        SizeFlagsStretchRatio="1" HorizontalExpand="False" VerticalExpand="True">
+                        <!-- Added by code -->
                         <RichTextLabel Name="Description" HorizontalExpand="False" Text="operation-description" VerticalExpand="True"/>
                     </BoxContainer>
                 </ScrollContainer>
