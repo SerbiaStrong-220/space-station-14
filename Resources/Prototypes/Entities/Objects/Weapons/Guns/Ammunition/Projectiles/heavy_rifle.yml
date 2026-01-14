@@ -4,6 +4,10 @@
   parent: BaseBullet
   categories: [ HideSpawnMenu ]
   components:
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.8
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:
@@ -15,6 +19,10 @@
   parent: BulletHeavyRifle
   categories: [ HideSpawnMenu ]
   components:
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.4
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:

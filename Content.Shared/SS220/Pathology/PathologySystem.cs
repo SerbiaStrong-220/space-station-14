@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
 using Content.Shared.StatusEffectNew;
@@ -15,6 +16,7 @@ public sealed partial class PathologySystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
 
     public static readonly int OneStack = 0;
 
@@ -84,17 +86,7 @@ public sealed partial class PathologySystem : EntitySystem
 
         instanceData.Level++;
 
-        var pathologyDefinition = pathologyPrototype.Definition[instanceData.Level];
-
-        foreach (var effect in pathologyDefinition.StatusEffects)
-        {
-            _statusEffects.TrySetStatusEffectDuration(entity, effect, out _);
-        }
-
-        AddTrait(entity, pathologyDefinition.Trait);
-
-        if (pathologyDefinition.ProgressPopup is { } progressPopup)
-            _popup.PopupClient(Loc.GetString(progressPopup), entity, entity);
+        AddPathologyDefinitionEffects(entity,  pathologyPrototype.Definition[instanceData.Level]);
 
         var ev = new PathologySeverityChanged(pathologyPrototype.ID, instanceData.Level - 1, instanceData.Level);
         RaiseLocalEvent(entity, ref ev);
@@ -108,15 +100,27 @@ public sealed partial class PathologySystem : EntitySystem
         var ev = new PathologyAddedEvent(pathologyPrototype.ID);
         RaiseLocalEvent(entity, ref ev);
 
-        foreach (var effect in pathologyPrototype.Definition[0].StatusEffects)
+        AddPathologyDefinitionEffects(entity, pathologyPrototype.Definition[0]);
+
+        entity.Comp.ActivePathologies.Add(pathologyPrototype.ID, new PathologyInstanceData(_gameTiming.CurTime));
+        Dirty(entity);
+    }
+
+    private void AddPathologyDefinitionEffects(Entity<PathologyHolderComponent> entity, PathologyDefinition definition)
+    {
+        foreach (var effect in definition.StatusEffects)
         {
             _statusEffects.TrySetStatusEffectDuration(entity, effect, out _);
         }
 
-        AddTrait(entity, pathologyPrototype.Definition[0].Trait);
+        AddTrait(entity, definition.Trait);
 
-        entity.Comp.ActivePathologies.Add(pathologyPrototype.ID, new PathologyInstanceData(_gameTiming.CurTime));
-        Dirty(entity);
+        // we don't want to popup dead ones
+        if (_mobState.IsIncapacitated(entity))
+            return;
+
+        if (definition.ProgressPopup is { } progressPopup)
+            _popup.PopupEntity(Loc.GetString(progressPopup), entity, entity, PopupType.MediumCaution);
     }
 
     private void RemovePathology(Entity<PathologyHolderComponent> entity, PathologyPrototype pathologyPrototype)

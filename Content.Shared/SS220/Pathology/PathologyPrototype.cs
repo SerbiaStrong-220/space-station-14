@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Inventory;
 using Content.Shared.Traits;
 using Robust.Shared.Prototypes;
 
@@ -13,6 +14,10 @@ public sealed class PathologyPrototype : IPrototype
 
     [DataField(required: true)]
     public LocId Name;
+
+    // It kinda useless for some of them...
+    [DataField]
+    public SlotFlags? ArmorSlotFlags = null;
 
     [DataField]
     public PathologyDefinition[] Definition = Array.Empty<PathologyDefinition>();

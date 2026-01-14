@@ -2,6 +2,7 @@
 
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using System.Diagnostics.CodeAnalysis;
@@ -12,6 +13,8 @@ namespace Content.Shared.SS220.Pathology;
 public sealed partial class PathologySystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly INetManager _net = default!;
+
 
     public Dictionary<ProtoId<PathologyPrototype>, PathologyDefinition> GetActivePathologies(Entity<PathologyHolderComponent?> entity)
     {
@@ -32,16 +35,25 @@ public sealed partial class PathologySystem
 
     public bool TryAddRandom(Entity<PathologyHolderComponent?> entity, ProtoId<WeightedRandomPrototype> weightedPathology, float chance)
     {
-        if (!Resolve(entity.Owner, ref entity.Comp, false))
-            return false;
-
         if (!_prototype.Resolve(weightedPathology, out var weightedRandomPrototype))
             return false;
 
-        if (!_random.Prob(chance))
+        return TryAddRandom(entity, weightedRandomPrototype.Weights, chance);
+    }
+
+    public bool TryAddRandom(Entity<PathologyHolderComponent?> entity, Dictionary<string, float> weightsPathology, float chance)
+    {
+        // no shared random, so we drop
+        if (_net.IsClient)
             return false;
 
-        var correctInput = weightedRandomPrototype.Weights.Where((entry) => _prototype.HasIndex<PathologyPrototype>(entry.Key) && !HavePathology(entity, entry.Key)).ToDictionary();
+        if (!Resolve(entity.Owner, ref entity.Comp, false))
+            return false;
+
+        if (chance < 1f && !_random.Prob(chance))
+            return false;
+
+        var correctInput = weightsPathology.Where((entry) => _prototype.HasIndex<PathologyPrototype>(entry.Key) && !HavePathology(entity, entry.Key)).ToDictionary();
 
         if (correctInput.Count == 0)
             return false;

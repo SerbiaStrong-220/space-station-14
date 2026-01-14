@@ -1,81 +1,84 @@
-- type: Pathology
+- type: pathology
   id: Blindness
   name: pathology-blindness-name
   definition:
   - description: pathology-start-blindness-description
+    progressPopup: pathology-start-blindness-popup
     progressConditions:
     - !type:PathologyTimeProgressCondition
-      delay: 02:20
+      delay: 2.33m
   - description: pathology-full-blindness-description
     trait: Blindness
 
-- type: Pathology
+- type: pathology
   id: Muted
   name: pathology-muted-name
   definition:
   - description: pathology-start-muted-description
+    progressPopup: pathology-start-muted-popup
     progressConditions:
     - !type:PathologyTimeProgressCondition
-      delay: 02:20
+      delay: 2.33m
   - description: pathology-muted-description
     trait: Muted
 
-- type: Pathology
+- type: pathology
   id: Narcolepsy
   name: pathology-narcolepsy-name
   definition:
-  - description: pathology-pre-narcolepsy
+  - description: pathology-start-narcolepsy-description
+    progressPopup: pathology-start-narcolepsy-popup
     progressConditions:
     - !type:PathologyTimeProgressCondition
-      delay: 03:00
+      delay: 3m
   - description: pathology-narcolepsy-description
     trait: Narcolepsy
 
-- type: Pathology
+- type: pathology
   id: Slowness
   name: pathology-slowness-name
   definition:
   - description: pathology-slowness-description
     trait: Slowness
 
-- type: Pathology
+- type: pathology
   id: Nervousness
   name: pathology-nervousness-name
   definition:
   - description: pathology-nervousness-description
     trait: Nervousness
 
-- type: Pathology
+- type: pathology
   id: PoorVision
   name: pathology-poor-vision-name
   definition:
   - description: pathology-poor-vision-description
     trait: PoorVision
 
-- type: Pathology
+- type: pathology
   id: LightweightDrunk
   name: pathology-lightweight-drunk-name
   definition:
   - description: pathology-lightweight-drunk-description
     trait: LightweightDrunk
 
-- type: Pathology
+- type: pathology
   id: Paracusia
   name: pathology-paracusia-name
   definition:
   - description: pathology-paracusia-description
     trait: Paracusia
 
-- type: Pathology
+- type: pathology
   id: PainNumbness
   name: pathology-pain-numbness-name
   definition:
   - description: pathology-pain-numbness-description
     trait: PainNumbness
 
-- type: Pathology
+- type: pathology
   id: FrontalLisp
   name: pathology-frontal-lisp-name
   definition:
   - description: pathology-frontal-lisp-description
-    trait: Muted
+    trait: FrontalLisp

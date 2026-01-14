@@ -6,8 +6,8 @@
   requirements:
   - !type:EmptyInventorySlotRequirement
     subject: target
-    description: surgery-torso-complex-inventory-requirement-description
-    failureMessage: surgery-torso-complex-inventory-requirement-failure
+    description: surgery-head-complex-inventory-requirement-description
+    failureMessage: surgery-head-complex-inventory-requirement-failure
     slotNames:
     - head
   - !type:WhitelistRequirement

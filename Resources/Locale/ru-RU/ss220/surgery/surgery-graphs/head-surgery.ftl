@@ -2,8 +2,8 @@ surgery-head-complex-name = Нейрохирургия
 surgery-head-complex-description = Комплексная операция на голове. Позволяет сканировать и извлекать импланты, а также проводить глубокое вмешательство в мозг.
 surgery-head-examine-start = Пациент готов к операции на голове.
 
-surgery-torso-complex-inventory-requirement-description = У пациента должна быть открыта голова
-surgery-torso-complex-inventory-requirement-failure = Вы не можете добраться до головы { THE($target) }!
+surgery-head-complex-inventory-requirement-description = У пациента должна быть открыта голова
+surgery-head-complex-inventory-requirement-failure = Вы не можете добраться до головы { THE($target) }!
 
 surgery-mind-slave-fix-examine-description = На тело наложенные хирургические простыни.
 surgery-mind-slave-fix-popup = {THE($user)} подготовляет {THE($target)} к операции, используя {$used}

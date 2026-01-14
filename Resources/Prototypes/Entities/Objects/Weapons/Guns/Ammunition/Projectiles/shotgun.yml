@@ -7,6 +7,7 @@
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     state: slug
+  - type: PathologyOnProjectileHit # SS220-add-projectile-wounds
   - type: Projectile
     damage:
       types:
@@ -23,6 +24,10 @@
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     state: buckshot
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.3
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:
@@ -39,6 +44,10 @@
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     state: buckshot
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.2
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:
@@ -65,6 +74,10 @@
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     state: buckshot-flare
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.1
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:
@@ -116,6 +129,10 @@
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     state: shard
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.1
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:
@@ -215,6 +232,10 @@
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     state: depleted-uranium
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.1
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:
@@ -243,6 +264,10 @@
     layers:
     - state: grapeshot
       shader: unshaded
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.2
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:
@@ -273,6 +298,10 @@
       shader: unshaded
   - type: EmbeddableProjectile
     deleteOnRemove: true
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.2
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     deleteOnCollide: false
     damage:
