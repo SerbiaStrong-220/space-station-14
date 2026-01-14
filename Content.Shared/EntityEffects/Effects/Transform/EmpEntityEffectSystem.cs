@@ -49,7 +49,7 @@ public sealed partial class Emp : EntityEffectBase<Emp>
     [DataField]
     public TimeSpan Duration = TimeSpan.FromSeconds(15);
 
-    public override bool Scaling => true; //SS220 Early upstream chemical reactions fix
+    public override bool Scaling => true; //Early upstream chemical reactions fix
 
     public override string EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
         => Loc.GetString("entity-effect-guidebook-emp-reaction-effect", ("chance", Probability));

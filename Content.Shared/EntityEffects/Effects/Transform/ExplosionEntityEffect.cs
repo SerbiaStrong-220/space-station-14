@@ -49,7 +49,7 @@ public sealed partial class ExplosionEffect : EntityEffectBase<ExplosionEffect>
     [DataField]
     public float TileBreakScale = 1f;
 
-        public override bool Scaling => true; //SS220 Early upstream chemical reactions fix
+    public override bool Scaling => true; //Early upstream chemical reactions fix
 
     public override string EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
         => Loc.GetString("entity-effect-guidebook-explosion" /* SS220 fix loc id */, ("chance", Probability));

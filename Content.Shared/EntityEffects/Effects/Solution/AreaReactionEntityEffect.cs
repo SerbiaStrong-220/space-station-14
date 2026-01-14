@@ -28,7 +28,7 @@ public sealed partial class AreaReactionEffect : EntityEffectBase<AreaReactionEf
     /// </summary>
     [DataField(required: true)] public SoundSpecifier Sound = default!;
 
-        public override bool Scaling => true; //SS220 Early upstream chemical reactions fix
+    public override bool Scaling => true; //Early upstream chemical reactions fix
 
     public override string EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
         => Loc.GetString("entity-effect-guidebook-area-reaction",

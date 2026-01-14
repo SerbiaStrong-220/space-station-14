@@ -76,7 +76,7 @@ public sealed partial class Flash : EntityEffectBase<Flash>
     [DataField]
     public SoundSpecifier? Sound = new SoundPathSpecifier("/Audio/Weapons/flash.ogg");
 
-        public override bool Scaling => true; //SS220 Early upstream chemical reactions fix
+    public override bool Scaling => true; //Early upstream chemical reactions fix
     
     public override string EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
         => Loc.GetString("entity-effect-guidebook-flash-reaction-effect", ("chance", Probability));
