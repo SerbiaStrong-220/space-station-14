@@ -178,17 +178,14 @@ public sealed partial class GrabSystem : EntitySystem
         if (grabbable.Comp.GrabStage >= GrabStage.Last)
             return true;
 
-        if (_timing.IsFirstTimePredicted)
-        {
-            var grabberMeta = MetaData(grabber);
-            var grabbableMeta = MetaData(grabbable);
+        var grabberMeta = MetaData(grabber);
+        var grabbableMeta = MetaData(grabbable);
 
-            var msg = grabbable.Comp.GrabStage == GrabStage.None
-                ? Loc.GetString("grabber-component-new-grab-popup", ("grabber", grabberMeta.EntityName), ("grabbable", grabbableMeta.EntityName))
-                : Loc.GetString("grabber-component-grab-upgrade-popup", ("grabber", grabberMeta.EntityName), ("grabbable", grabbableMeta.EntityName));
+        var msg = grabbable.Comp.GrabStage == GrabStage.None
+            ? Loc.GetString("grabber-component-new-grab-popup", ("grabber", grabberMeta.EntityName), ("grabbable", grabbableMeta.EntityName))
+            : Loc.GetString("grabber-component-grab-upgrade-popup", ("grabber", grabberMeta.EntityName), ("grabbable", grabbableMeta.EntityName));
 
-            _popup.PopupPredicted(msg, grabber, grabber);
-        }
+        _popup.PopupPredicted(msg, grabber, grabber);
 
         var args = new DoAfterArgs(EntityManager, user: grabber, grabber.Comp.GrabDelay, new GrabDoAfterEvent(), eventTarget: grabber, target: grabbable)
         {
