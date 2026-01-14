@@ -46,7 +46,6 @@ using Robust.Shared.Map;
 using Content.Shared.SS220.Language.Systems;
 using Content.Shared.SS220.TTS;
 using Content.Shared.FixedPoint;
-using System.Text.RegularExpressions;
 
 namespace Content.Server.Chat.Systems;
 
@@ -1194,6 +1193,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         return false;
     }
     //ss220 add identity concealment for chat and radio messages end
+    
     #endregion
 }
 
