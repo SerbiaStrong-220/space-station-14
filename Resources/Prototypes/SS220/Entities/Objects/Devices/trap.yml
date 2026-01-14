@@ -32,6 +32,9 @@
     canThrowTrigger: false
     canMoveBreakout: true
     maxEnsnares: 10
+  - type: TriggerOnCollide
+    fixtureID: slips
+  - type: WhitelistTriggerCondition
   - type: Trap
     setTrapDelay: 5
     defuseTrapDelay: 5
