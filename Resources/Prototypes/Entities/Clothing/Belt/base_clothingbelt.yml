@@ -48,7 +48,7 @@
     microFiberMaterial: micro-fibers-leather
     microFiberColor: micro-fibers-brown
 #SS220 Micro_fibers end
-  - type: DragDropContainer #ss220 add drag drop container
+  - type: DragDropContainerTransfer #ss220 add drag drop container
 
 - type: entity
   abstract: true

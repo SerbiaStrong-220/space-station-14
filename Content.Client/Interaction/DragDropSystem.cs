@@ -365,23 +365,23 @@ public sealed class DragDropSystem : SharedDragDropSystem
             return false;
         }
 
-        // ss220 add drag drop container start
-        List<EntityUid> entities;
+        IEnumerable<EntityUid> entities;
         var coords = args.Coordinates;
 
         if (_stateManager.CurrentState is GameplayState screen)
         {
-            entities = screen.GetClickableEntities(coords).ToList();
+            entities = screen.GetClickableEntities(coords);
 
+            // ss220 add drag drop container start
             var controlByCoords = _uiManager.MouseGetControl(args.ScreenCoordinates);
             if (controlByCoords?.Parent is SlotButton { Entity: not null } slotButton)
-                entities.Add(slotButton.Entity.Value);
+                entities = entities.Append(slotButton.Entity.Value);
+            // ss220 add drag drop container end
         }
         else
         {
-            entities = [];
+            entities = Array.Empty<EntityUid>();
         }
-        // ss220 add drag drop container end
 
         var outOfRange = false;
         var user = localPlayer.Value;

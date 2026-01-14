@@ -38,7 +38,7 @@
   - type: Appearance
   #ss220 add drag drop toolbox start
   - type: Toolbox
-  - type: DragDropContainer
+  - type: DragDropContainerTransfer
   #ss220 add drag drop toolbox end
 
 - type: entity

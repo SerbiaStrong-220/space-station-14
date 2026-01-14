@@ -5,24 +5,24 @@ using Content.Shared.Whitelist;
 
 namespace Content.Shared.SS220.DragDrop;
 
-public sealed partial class DragDropContainerSystem : EntitySystem
+public sealed partial class DragDropContainerTransferSystem : EntitySystem
 {
     [Dependency] private readonly SharedStorageSystem _storage = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<DragDropContainerComponent, CanDragEvent>(OnCanDrag);
-        SubscribeLocalEvent<DragDropContainerComponent, CanDropDraggedEvent>(OnCanDropDrag);
-        SubscribeLocalEvent<DragDropContainerComponent, DragDropDraggedEvent>(OnDragDropDragged);
+        SubscribeLocalEvent<DragDropContainerTransferComponent, CanDragEvent>(OnCanDrag);
+        SubscribeLocalEvent<DragDropContainerTransferComponent, CanDropDraggedEvent>(OnCanDropDrag);
+        SubscribeLocalEvent<DragDropContainerTransferComponent, DragDropDraggedEvent>(OnDragDropDragged);
     }
 
-    private void OnCanDrag(Entity<DragDropContainerComponent> ent, ref CanDragEvent args)
+    private void OnCanDrag(Entity<DragDropContainerTransferComponent> ent, ref CanDragEvent args)
     {
         args.Handled = true;
     }
 
-    private void OnCanDropDrag(Entity<DragDropContainerComponent> ent, ref CanDropDraggedEvent args)
+    private void OnCanDropDrag(Entity<DragDropContainerTransferComponent> ent, ref CanDropDraggedEvent args)
     {
         if (!TryComp<StorageComponent>(ent, out var storage) || storage.Container.Count == 0)
             return;
@@ -40,14 +40,14 @@ public sealed partial class DragDropContainerSystem : EntitySystem
         args.CanDrop = true;
     }
 
-    private void OnDragDropDragged(Entity<DragDropContainerComponent> ent, ref DragDropDraggedEvent args)
+    private void OnDragDropDragged(Entity<DragDropContainerTransferComponent> ent, ref DragDropDraggedEvent args)
     {
         if (!TryComp<StorageComponent>(args.Target, out var targetStorage))
             return;
 
-        if (!TryComp<StorageComponent>(ent, out var toolboxStorage))
+        if (!TryComp<StorageComponent>(ent, out var entityStorage))
             return;
 
-        _storage.TransferEntities(ent, args.Target, args.User, sourceComp: toolboxStorage, targetComp: targetStorage);
+        _storage.TransferEntities(ent, args.Target, args.User, sourceComp: entityStorage, targetComp: targetStorage);
     }
 }

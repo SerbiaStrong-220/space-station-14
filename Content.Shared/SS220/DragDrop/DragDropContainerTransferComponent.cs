@@ -5,7 +5,7 @@ namespace Content.Shared.SS220.DragDrop;
 
 [RegisterComponent]
 [NetworkedComponent]
-public sealed partial class DragDropContainerComponent : Component
+public sealed partial class DragDropContainerTransferComponent : Component
 {
     [DataField]
     public EntityWhitelist? Whitelist;
