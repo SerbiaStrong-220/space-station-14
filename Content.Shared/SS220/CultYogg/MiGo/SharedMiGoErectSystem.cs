@@ -10,13 +10,12 @@ using Content.Shared.Maps;
 using Content.Shared.Popups;
 using Content.Shared.SS220.ChameleonStructure;
 using Content.Shared.SS220.CultYogg.Buildings;
-using Content.Shared.SS220.CultYogg.Corruption;
+using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.Stacks;
 using Content.Shared.Tag;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -255,6 +254,9 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         if (!args.CanAccess)
             return;
 
+        if (!HasComp<CultYoggComponent>(args.User) && !HasComp<MiGoComponent>(args.User))//should be user or migo
+            return;
+
         Verb destroyVerb = new()
         {
             Text = Loc.GetString("cult-yogg-building-frame-verb-destroy"),
@@ -357,6 +359,8 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         if (args.Recipe == null)
             return;
 
+        if (!_prototypeManager.Resolve(args.Recipe.Value, out var replacement))
+            return;
 
         if (args.Target is { } target)
         {
@@ -365,11 +369,11 @@ public sealed class SharedMiGoErectSystem : EntitySystem
             if (prototypeId == null)
                 return;
 
-            StartReplacement(target, args.Recipe, prototypeId);
+            StartReplacement(target, replacement, prototypeId);
         }
 
         if (TryComp<MiGoComponent>(args.User, out var miGo))
-            AddCaptureCooldownByResult((args.User, miGo), args.Recipe);//its wierd, but idk how to not make it with this event
+            AddCaptureCooldownByResult((args.User, miGo), replacement);//its wierd, but idk how to not make it with this event
     }
 
     private void StartReplacement(EntityUid buildingUid, MiGoCapturePrototype replacement, EntityPrototype buildingProto)
@@ -383,12 +387,15 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         var newEntity = SpawnAtPosition(replacement.ReplacementProto, xform.Coordinates);
         Transform(newEntity).LocalRotation = rot;
 
-        if (TryComp<ChameleonStructureComponent>(newEntity, out var structureChameleon))
-        {
-            _chameleonStructureSystem.SetPrototype((newEntity, structureChameleon), buildingProto.ID);//make it chameleon if possible
-        }
-
         Del(buildingUid);
+
+        var oldProto = buildingProto.ID;
+
+        if (!TryComp<ChameleonStructureComponent>(newEntity, out var structureChameleon))
+            return;
+
+
+        _chameleonStructureSystem.TrySetPrototype((newEntity, structureChameleon), oldProto);//make it chameleon if possible
     }
 
     /// <summary>
@@ -520,7 +527,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
 
     private void AddCaptureCooldownByResult(Entity<MiGoComponent> ent, MiGoCapturePrototype recipe)
     {
-        ent.Comp.CaptureCooldowns.TryAdd(recipe.ReplacementProto.Id, _gameTiming.CurTime + recipe.ReplacementCooldown);
+        ent.Comp.CaptureCooldowns.TryAdd(recipe.ReplacementProto, _gameTiming.CurTime + recipe.ReplacementCooldown);
     }
     #endregion
 
@@ -667,7 +674,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
     {
         materials = null;
 
-        if (!_prototypeManager.TryIndex(entity.Comp.BuildingPrototypeId, out var prototype))
+        if (!_prototypeManager.Resolve(entity.Comp.BuildingPrototypeId, out var prototype))
             return false;
 
         materials = prototype.Materials;
@@ -695,7 +702,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         if (_gameTiming.InPrediction) // this should never run in client
             return null;
 
-        if (!_prototypeManager.TryIndex(entity.Comp.BuildingPrototypeId, out var prototype, logError: true))
+        if (!_prototypeManager.Resolve(entity.Comp.BuildingPrototypeId, out var prototype))
             return null;
 
         var transform = Transform(entity);
@@ -728,5 +735,5 @@ public sealed partial class MiGoEraseDoAfterEvent : SimpleDoAfterEvent
 [Serializable, NetSerializable]
 public sealed partial class MiGoCaptureDoAfterEvent : SimpleDoAfterEvent
 {
-    public MiGoCapturePrototype? Recipe;
+    public ProtoId<MiGoCapturePrototype>? Recipe;
 }

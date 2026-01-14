@@ -41,7 +41,7 @@
       Glass: 100
 
 - type: entity
-  parent: [DrinkBottleVisualsAll, DrinkBankateBaseFull]
+  parent: [DrinkBankateBaseFull]
   id: DrinkBankateJarFull
   name: банка банкате
   description: Вы же не собираетесь это пить, да?

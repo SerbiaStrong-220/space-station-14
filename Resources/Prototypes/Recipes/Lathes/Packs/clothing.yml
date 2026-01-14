@@ -206,6 +206,7 @@
   - CarpetPurple
   - CarpetCyan
   - CarpetWhite
+  - CarpetSkyBlue
 
 - type: latheRecipePack
   id: ClothingCentComm

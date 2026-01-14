@@ -86,7 +86,7 @@
   - type: TransferIdentity
   - type: HiddenDescription
     entries:
-    - label: hidden-desc-DnaCopyImplant-medical
+    - label: corvax-hidden-desc-IllegalImplants-medical
       jobRequired:
       - Paramedic
       - MedicalDoctor
@@ -114,21 +114,21 @@
   - type: SolutionContainerManager
     solutions:
       beaker:
-        maxVol: 90
+        maxVol: 76.5
         canReact: false
         reagents:
         - ReagentId: Rororium
           Quantity: 1.5
-        - ReagentId: Ephedrine
-          Quantity: 15
+        - ReagentId: Stimulants
+          Quantity: 30
         - ReagentId: Ichor
           Quantity: 30
-        - ReagentId: Epinephrine
-          Quantity: 28.5
+        - ReagentId: Frontier
+          Quantity: 15
   - type: TriggerOnActivateImplant
   - type: HiddenDescription
     entries:
-    - label: hidden-desc-AdrenalImplant-medical
+    - label: corvax-hidden-desc-IllegalImplants-medical
       jobRequired:
       - Paramedic
       - MedicalDoctor

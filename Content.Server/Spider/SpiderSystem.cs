@@ -16,11 +16,6 @@ public sealed class SpiderSystem : SharedSpiderSystem
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
-    // TODO-SS220-remove-after-pr-in-robustToolbox-6171
-    // begin
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    // end
 
     /// <summary>
     ///     A recycled hashset used to check turfs for spiderwebs.
@@ -111,21 +106,7 @@ public sealed class SpiderSystem : SharedSpiderSystem
     private bool IsTileBlockedByWeb(EntityCoordinates coords)
     {
         _webs.Clear();
-        // TODO-SS220-remove-after-pr-in-robustToolbox-6171
-        // begin
-        var mapId = _transform.GetMapId(coords);
-
-        if (!_turf.TryGetTileRef(coords, out var tileRef))
-            return true;
-
-        var bounds = _lookup.GetWorldBounds(tileRef.Value);
-        bounds.Box = bounds.Box.Scale(0.5f); // handpicked for all 4 webs spawning in empty tiles (with larger values its spawn only under spider)
-
-        // LookupFlags.Static | LookupFlags.Sensors flags are found by hands, neither Static or Sensors will find it, only together
-        _lookup.GetEntitiesIntersecting(mapId, bounds.CalcBoundingBox(), _webs, LookupFlags.Static | LookupFlags.Sensors);
-
-        // _turf.GetEntitiesInTile(coords, _webs);
-        // end
+        _turf.GetEntitiesInTile(coords, _webs);
         foreach (var entity in _webs)
         {
             if (HasComp<SpiderWebObjectComponent>(entity))

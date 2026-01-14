@@ -16,6 +16,10 @@
   - Brig
   - Maintenance
   - External
+  # ss220 add extended access for brigmedic start
+  extendedAccess:
+  - Chemistry
+  # ss220 add extended access for brigmedic end
   special:
   - !type:AddComponentSpecial
     components:

@@ -7,10 +7,10 @@ using Content.Shared.Clothing.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Interaction;
 using Content.Shared.SS220.Detective.Camera;
+using Content.Shared.SurveillanceCamera.Components;
 using Content.Shared.Tag;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
-using System.Linq;
 
 namespace Content.Server.SS220.Detective.Camera;
 
@@ -67,12 +67,12 @@ public sealed class DetectiveCameraAttachSystem : SharedDetectiveCameraAttachSys
 
         _camera.SetActive(ent, true, cameraComponent);
 
-        AddCameraItemSlotsComponent(args.AttachTarget, args.User, ent.Comp.CellSlotId);
+        AddCameraItemSlotsComponent(args.AttachTarget, args.User, DetectiveCameraAttachComponent.CellSlotId);
 
         var attachedCameraComp = EnsureComp<AttachedCameraComponent>(args.AttachTarget);
         attachedCameraComp.AttachedCamera = ent;
         attachedCameraComp.UserOwner = args.User;
-        attachedCameraComp.CellSlotId = ent.Comp.CellSlotId;
+        attachedCameraComp.CellSlotId = DetectiveCameraAttachComponent.CellSlotId;
 
         ent.Comp.Attached = true;
         _popup.PopupEntity(Loc.GetString("detective-camera-attached"), ent, args.User);
@@ -124,34 +124,32 @@ public sealed class DetectiveCameraAttachSystem : SharedDetectiveCameraAttachSys
     {
         EnsureComp<ItemSlotsComponent>(uid);
 
-        var detectiveCameraSlot = new ItemSlot();
-
-        detectiveCameraSlot.Whitelist = new EntityWhitelist
+        var slot = new ItemSlot
         {
-            Tags = new List<ProtoId<TagPrototype>>()
+            Whitelist = new EntityWhitelist
             {
-                DetectiveCameraKey
+                Tags = [DetectiveCameraKey],
             },
         };
 
-        _itemSlots.AddItemSlot(uid, cellSlotId, detectiveCameraSlot);
-        _itemSlots.TryInsertFromHand(uid, detectiveCameraSlot, user);
+        _itemSlots.AddItemSlot(uid, cellSlotId, slot);
 
-        detectiveCameraSlot.Locked = true;
+        if (_itemSlots.TryInsertFromHand(uid, slot, user))
+            slot.Locked = true;
     }
 
     private void RemoveCameraItemSlotsComponent(EntityUid uid, EntityUid user)
     {
-        if (!TryComp<ItemSlotsComponent>(uid, out var component))
+        if (!HasComp<ItemSlotsComponent>(uid))
             return;
 
-        var detectiveCameraSlot = component.Slots.FirstOrDefault().Value;
+        if (!_itemSlots.TryGetSlot(uid, DetectiveCameraAttachComponent.CellSlotId, out var detectiveCameraSlot))
+            return;
 
         detectiveCameraSlot.Locked = false;
 
         _itemSlots.TryEjectToHands(uid, detectiveCameraSlot, user);
-
-        RemComp<ItemSlotsComponent>(uid);
+        _itemSlots.RemoveItemSlot(uid, detectiveCameraSlot);
     }
 
     private bool IsAttachable(EntityUid target, DetectiveCameraAttachComponent component)

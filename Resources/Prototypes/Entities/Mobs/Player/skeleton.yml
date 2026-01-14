@@ -18,9 +18,6 @@
     name: ghost-role-information-skeleton-pirate-name
     description: ghost-role-information-skeleton-pirate-description
     rules: ghost-role-information-freeagent-rules
-    requirements: #SS220 ghostrole-times (20h overall) start
-      - !type:OverallPlaytimeRequirement
-        time: 72000 #SS220 ghostrole-times (20h overall) end
     mindRoles:
     - MindRoleGhostRoleFreeAgent
     raffle:
@@ -40,9 +37,6 @@
     name: ghost-role-information-skeleton-biker-name
     description: ghost-role-information-skeleton-biker-description
     rules: ghost-role-information-freeagent-rules
-    requirements: #SS220 ghostrole-times (20h overall) start
-      - !type:OverallPlaytimeRequirement
-        time: 72000 #SS220 ghostrole-times (20h overall) end
     mindRoles:
     - MindRoleGhostRoleFreeAgent
     raffle:
@@ -61,9 +55,6 @@
     name: ghost-role-information-closet-skeleton-name
     description: ghost-role-information-closet-skeleton-description
     rules: ghost-role-information-freeagent-rules
-    requirements: #SS220 ghostrole-times (20h overall) start
-      - !type:OverallPlaytimeRequirement
-        time: 72000 #SS220 ghostrole-times (20h overall) end
     mindRoles:
     - MindRoleGhostRoleFreeAgent
     raffle:

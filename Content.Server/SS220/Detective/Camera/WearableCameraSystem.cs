@@ -3,6 +3,7 @@
 using Content.Server.SurveillanceCamera;
 using Content.Shared.Clothing;
 using Content.Shared.Clothing.Components;
+using Content.Shared.SurveillanceCamera.Components;
 
 namespace Content.Server.SS220.Detective.Camera;
 

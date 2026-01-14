@@ -3,10 +3,7 @@
 using System.Buffers;
 using System.Collections.Concurrent;
 using System.Collections.Specialized;
-using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -16,9 +13,6 @@ using System.Threading.Tasks;
 using System.Web;
 using Content.Shared.Corvax.CCCVars;
 using Content.Shared.SS220.TTS;
-using FFMpegCore;
-using FFMpegCore.Arguments;
-using FFMpegCore.Pipes;
 using Microsoft.IO;
 using Prometheus;
 using Robust.Shared.Configuration;
@@ -28,7 +22,7 @@ using Robust.Shared.Utility;
 namespace Content.Server.SS220.TTS;
 
 // ReSharper disable once InconsistentNaming
-public sealed class TTSManager
+public sealed partial class TTSManager
 {
     private static readonly Histogram RequestTimings = Metrics.CreateHistogram(
         "tts_req_timings",
@@ -75,6 +69,8 @@ public sealed class TTSManager
 
     public void Initialize()
     {
+        InitializeFFMpeg();
+
         _sawmill = Logger.GetSawmill("tts");
         _cfg.OnValueChanged(CCCVars.TTSMaxCache, val =>
         {
@@ -119,7 +115,7 @@ public sealed class TTSManager
                     { "text", text },
                     { "ext", AudioFileExtension }});
 
-                if (kind == TtsKind.Radio)
+                if (!_useFFMpegProcessing && kind == TtsKind.Radio)
                 {
                     requestUrl += "&effect=radio";
                 }
@@ -129,7 +125,7 @@ public sealed class TTSManager
                     requestUrl += "&effect=announce";
                 }
 
-                if (kind == TtsKind.Telepathy)
+                if (!_useFFMpegProcessing && kind == TtsKind.Telepathy)
                 {
                     requestUrl += "&effect=announce";
                 }
@@ -154,10 +150,14 @@ public sealed class TTSManager
                 memoryStream.SetLength(0);
 
                 await httpResponse.Content.CopyToAsync(memoryStream, cts.Token);
-                _responseManager.AllocBuffer(response, (int)memoryStream.Length);
 
                 memoryStream.Position = 0;
-                memoryStream.ReadExactly(response.Value.Buffer, 0, response.Value.Length);
+                using var effectStream = await AddFFMpegEffect(memoryStream, request.Kind);
+                var streamToRead = effectStream ?? memoryStream;
+
+                streamToRead.Position = 0;
+                _responseManager.AllocBuffer(response, (int)streamToRead.Length);
+                streamToRead.ReadExactly(response.Value.Buffer, 0, response.Value.Length);
 
                 _sawmill.Verbose($"Generated new sound for '{text}' speech by '{speaker}' speaker with kind '{kind}' ({response.Value.Length} bytes)");
                 RequestTimings.WithLabels("Success").Observe((DateTime.UtcNow - reqTime).TotalSeconds);
@@ -175,90 +175,6 @@ public sealed class TTSManager
                 _sawmill.Error(
                     $"Failed of request generation new sound for '{text}' speech by '{speaker}' speaker\n{e}");
                 return false;
-            }
-        });
-    }
-
-    public async Task<ReferenceCounter<TtsAudioData>.Handle?> ConvertTextToSpeechRadio(string speaker, string text)
-    {
-        WantedRadioCount.Inc();
-
-        return await StartTtsRequest(new($"radio-{speaker}", text, TtsKind.Radio),
-            async (request, response) =>
-        {
-            using var innerResponse = await ConvertTextToSpeech(speaker, text, TtsKind.Radio);
-
-            if (innerResponse is null
-                || innerResponse.Value.TryGetValue(out var innerBuffer))
-                return false;
-
-            using var memoryStream = _memoryStreamPool.GetStream("TtsStream", innerBuffer.Length);
-            memoryStream.Write(innerBuffer.AsMemory().Span);
-            memoryStream.Position = 0;
-
-            var reqTime = DateTime.UtcNow;
-            try
-            {
-                var outputFilename = $"{Path.GetTempPath()}{Guid.NewGuid()}.{AudioFileExtension}";
-                await FFMpegArguments
-                    .FromPipeInput(new StreamPipeSource(memoryStream))
-                    .OutputToFile(outputFilename, true, options =>
-                        options.WithAudioFilters(filterOptions =>
-                            {
-                                filterOptions
-                                    .HighPass(frequency: 1000D)
-                                    .LowPass();
-                                filterOptions.Arguments.Add(
-                                    new CrusherFilterArgument(levelIn: 1, levelOut: 1, bits: 50, mix: 0, mode: "log")
-                                );
-                            }
-                        )
-                    ).ProcessAsynchronously();
-
-                memoryStream.SetLength(0);
-                memoryStream.Position = 0;
-
-                try
-                {
-                    using var file = new FileStream(outputFilename, FileMode.Open);
-                    await file.CopyToAsync(memoryStream);
-                    _responseManager.AllocBuffer(response, (int)memoryStream.Length);
-                    memoryStream.ReadExact(response.Value.AsMemory().Span);
-                }
-                catch (Exception)
-                {
-                    // ignored
-                }
-
-                try
-                {
-                    File.Delete(outputFilename);
-                }
-                catch (Exception)
-                {
-                    // ignored
-                }
-
-                return true;
-            }
-            catch (TaskCanceledException)
-            {
-                RequestTimings.WithLabels("Timeout").Observe((DateTime.UtcNow - reqTime).TotalSeconds);
-                _sawmill.Error(
-                    $"Timeout of request generation new radio sound for '{text}' speech by '{speaker}' speaker");
-                throw new Exception("TTS request timeout");
-            }
-            catch (Win32Exception)
-            {
-                _sawmill.Error($"FFMpeg is not installed");
-                throw new Exception("ffmpeg is not installed!");
-            }
-            catch (Exception e)
-            {
-                RequestTimings.WithLabels("Error").Observe((DateTime.UtcNow - reqTime).TotalSeconds);
-                _sawmill.Error(
-                    $"Failed of request generation new radio sound for '{text}' speech by '{speaker}' speaker\n{e}");
-                throw new Exception("TTS request failed");
             }
         });
     }
@@ -323,29 +239,6 @@ public sealed class TTSManager
         {
             ResponsesInProgress.TryRemove(request.Key, out _);
         }
-    }
-
-    private sealed class CrusherFilterArgument : IAudioFilterArgument
-    {
-        private readonly Dictionary<string, string> _arguments = new Dictionary<string, string>();
-
-        public CrusherFilterArgument(
-            double levelIn = 1f,
-            double levelOut = 1f,
-            int bits = 1,
-            double mix = 1.0,
-            string mode = "log")
-        {
-            _arguments.Add("level_in", levelIn.ToString("0", CultureInfo.InvariantCulture));
-            _arguments.Add("level_out", levelOut.ToString("0", CultureInfo.InvariantCulture));
-            _arguments.Add("bits", bits.ToString("0", CultureInfo.InvariantCulture));
-            _arguments.Add("mix", mix.ToString("0", CultureInfo.InvariantCulture));
-            _arguments.Add("mode", mode);
-        }
-
-        public string Key => "acrusher";
-
-        public string Value => string.Join(":", _arguments.Select<KeyValuePair<string, string>, string>(pair => pair.Key + "=" + pair.Value));
     }
 
     private readonly struct TtsRequest

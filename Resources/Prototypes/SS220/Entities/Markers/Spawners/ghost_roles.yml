@@ -10,12 +10,7 @@
     name: spider-royQueen-name
     description: spider-royQueen-desc
     rules: spider-royQueen-desc
-    requirements:
-      - !type:DepartmentTimeRequirement
-        department: Security
-        time: 3600 #h
-      - !type:OverallPlaytimeRequirement
-        time: 18000 # 5h
+    job: SpiderQueen
     raffle:
       settings: default
   - type: Sprite

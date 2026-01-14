@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.SS220.Chameleon;
 using Content.Shared.Tag;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
@@ -23,6 +24,7 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
         SubscribeLocalEvent<ChameleonStructureComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<ChameleonStructureComponent, GetVerbsEvent<InteractionVerb>>(OnVerb);
         SubscribeLocalEvent<ChameleonStructureComponent, PrototypesReloadedEventArgs>(OnPrototypeReload);
+        SubscribeLocalEvent<ChameleonStructureComponent, ChameleonRevealEvent>(OnChameleonReveal);
     }
 
     private void OnInit(Entity<ChameleonStructureComponent> ent, ref ComponentInit args)
@@ -55,6 +57,13 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
             Act = () => UI.TryToggleUi(ent.Owner, ChameleonStructureUiKey.Key, user)
         });
     }
+
+    private void OnChameleonReveal(Entity<ChameleonStructureComponent> ent, ref ChameleonRevealEvent args)
+    {
+        var proto = MetaData(ent).EntityPrototype?.ID;
+        TrySetPrototype(ent, proto, true);
+    }
+
     protected virtual void UpdateSprite(EntityUid ent, EntityPrototype proto) { }
 
     protected void UpdateVisuals(Entity<ChameleonStructureComponent> ent)
@@ -75,15 +84,18 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
     /// <summary>
     ///     Check if this entity prototype is valid target for chameleon item.
     /// </summary>
-    public bool IsValidTarget(EntityPrototype proto, string? requiredTag = null)
+    public bool IsValidByTag(EntityPrototype proto, ProtoId<TagPrototype>? requiredTag = null)
     {
         if (proto.Abstract || proto.HideSpawnMenu)
             return false;
 
+        if (requiredTag == null)
+            return true;
+
         if (!proto.TryGetComponent(out TagComponent? tag, Factory))//IDK about WhitelistChameleon should it be or not
             return false;
 
-        if (requiredTag != null && !_tag.HasTag(tag, requiredTag))
+        if (requiredTag != null && !_tag.HasTag(tag, requiredTag.Value))
             return false;
 
         return true;
@@ -98,19 +110,28 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
     /// <summary>
     ///     Change chameleon structure name, description and sprite to mimic other entity prototype.
     /// </summary>
-    public void SetPrototype(Entity<ChameleonStructureComponent> ent, string? protoId, bool forceUpdate = false)
+    public bool TrySetPrototype(Entity<ChameleonStructureComponent> ent, EntProtoId? protoId, bool forceUpdate = false)
     {
+        if (protoId == null)
+            return false;
+
         // check that wasn't already selected
         // forceUpdate on component init ignores this check
         if (ent.Comp.Prototype == protoId && !forceUpdate)
-            return;
+            return false;
 
         // make sure that it is valid change
-        if (string.IsNullOrEmpty(protoId) || !_proto.TryIndex(protoId, out EntityPrototype? proto))
-            return;
+        if (!_proto.TryIndex(protoId, out EntityPrototype? proto))
+            return false;
 
-        if (!IsValidTarget(proto, ent.Comp.RequireTag) && !(ent.Comp.ProtoList is not null && ent.Comp.ProtoList.Contains(proto)))
-            return;
+        var ev = new ChameleonAttemptEvent(protoId.Value);
+        RaiseLocalEvent(ent, ref ev);
+
+        if (ev.Cancelled)
+            return false;
+
+        if (!IsValidProto(ent, proto))
+            return false;
 
         ent.Comp.Prototype = protoId;
         UpdateVisuals(ent);
@@ -118,10 +139,41 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
         UpdateUi(ent);
         Dirty(ent, ent.Comp);
 
-        if (!TryComp<AppearanceComponent>(ent, out var appearance))//it fixes wrong layer states
-            return;
+        if (TryComp<AppearanceComponent>(ent, out var appearance))
+            Dirty(ent, appearance);
 
-        Dirty(ent, appearance);
+        return true;
+    }
+
+    public bool IsValidProto(Entity<ChameleonStructureComponent> ent, EntityPrototype proto)
+    {
+        if (IsValidByTag(proto, ent.Comp.RequireTag))
+            return true;
+
+        if (ent.Comp.ProtoList is null)
+            return false;
+
+        if (ent.Comp.ProtoList.Contains(proto))
+            return true;
+
+        if (!ent.Comp.AllowChildProto)
+            return false;
+
+        var parents = proto.Parents;
+
+        if (parents == null)
+            return false;
+
+        foreach (var parentId in parents)
+        {
+            if (!_proto.TryIndex(parentId, out EntityPrototype? parentProto))
+                continue;
+
+            if (IsValidProto(ent, parentProto))
+                return true;
+        }
+
+        return false;
     }
 
     protected void UpdateData(Entity<ChameleonStructureComponent> ent)
@@ -133,7 +185,7 @@ public abstract class SharedChameleonStructureSystem : EntitySystem
         foreach (var proto in prototypes)
         {
             // check if this is valid clothing
-            if (!IsValidTarget(proto, ent.Comp.RequireTag))
+            if (!IsValidByTag(proto, ent.Comp.RequireTag))
                 continue;
 
             ent.Comp.ListData.Add(proto.ID);

@@ -1,0 +1,51 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+using Content.Shared.SS220.CultYogg.MiGo;
+using Robust.Client.UserInterface;
+using static Robust.Client.UserInterface.Controls.BaseButton;
+
+namespace Content.Client.SS220.CultYogg.MiGo.UI;
+
+public sealed class MiGoTeleportBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+{
+    [ViewVariables]
+    private MiGoTeleportMenu? _menu;
+
+    protected override void Open()
+    {
+        base.Open();
+
+        _menu = this.CreateWindowCenteredLeft<MiGoTeleportMenu>();
+        _menu.OnTeleportToTarget += TeleportToTarget;
+    }
+
+    protected override void UpdateState(BoundUserInterfaceState state)
+    {
+        base.UpdateState(state);
+
+        if (state is not MiGoTeleportBuiState cState)
+            return;
+
+        _menu?.Update(cState);
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+        if (!disposing)
+            return;
+
+        if (_menu == null)
+            return;
+
+        _menu.OnClose -= Close;
+    }
+
+    private void TeleportToTarget(ButtonEventArgs args)
+    {
+        if (args.Button.Parent?.Parent?.Parent?.Parent is not MiGoTeleportTarget target)
+            return;
+
+        SendMessage(new MiGoTeleportToTargetMessage(target.TargetNetEnt));
+    }
+}

@@ -37,6 +37,14 @@
   - Magistrate #SS220 Law Department
   - GenpopEnter
   - GenpopLeave
+  #SS220 New_accesses_and_some_tweaks start
+  - Clown
+  - Librarian
+  - Psychologist
+  - Reporter
+  - Mime
+  - Musician
+  #SS220 New_accesses_and_some_tweaks end
 
 - type: accessGroup
   id: General

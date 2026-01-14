@@ -13,6 +13,7 @@ using Content.Shared.Station.Components;
 using Content.Shared.StationRecords;
 using Robust.Shared.Configuration;
 using Robust.Shared.Console;
+using Robust.Shared.Enums;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
@@ -206,7 +207,11 @@ public sealed class CrewManifestSystem : EntitySystem
         if (eui.Owner == owner)
         {
             euis.Remove(session);
-            eui.Close();
+
+            // ss220 fix crew manifest eui start
+            if (eui.Player.Status != SessionStatus.Disconnected)
+                eui.Close();
+            // ss220 fix crew manifest eui end
         }
 
         if (euis.Count == 0)

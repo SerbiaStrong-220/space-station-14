@@ -89,9 +89,15 @@ namespace Content.Server.Construction
                     }
                     else
                     {
+                        //SS220-grill-update-2 begin
+                        var nodeName = string.IsNullOrEmpty(target.NameLocId)
+                            ? target.Name
+                            : Loc.GetString(target.NameLocId);
+                        //SS220-grill-update-2 end
+
                         args.PushMarkup(Loc.GetString(
                             "construction-component-to-create-header",
-                            ("targetName", target.Name)) + "\n");
+                            ("targetName", nodeName)) + "\n"); //SS220-grill-update-2. target.Name -> nodeName
                     }
                 }
 
@@ -145,7 +151,7 @@ namespace Content.Server.Construction
                 return guide;
 
             // If the graph doesn't actually exist, do nothing.
-            if (!PrototypeManager.TryIndex(construction.Graph, out ConstructionGraphPrototype? graph))
+            if (!PrototypeManager.Resolve(construction.Graph, out ConstructionGraphPrototype? graph))
                 return null;
 
             // If either the start node or the target node are missing, do nothing.
