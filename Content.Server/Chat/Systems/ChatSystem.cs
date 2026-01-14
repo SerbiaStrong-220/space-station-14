@@ -1193,7 +1193,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         return false;
     }
     //ss220 add identity concealment for chat and radio messages end
-    
+
     #endregion
 }
 
