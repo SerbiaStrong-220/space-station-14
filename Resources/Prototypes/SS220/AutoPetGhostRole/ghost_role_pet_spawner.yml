@@ -126,7 +126,6 @@
     prototypes:
     - MobPossumMortyGhostRole
 
-#SS220 Mappers_Request_1 start
 - type: entity
   name: Poppy Spawner
   id: SpawnMobPossumPoppyGhostRole
@@ -140,7 +139,6 @@
   - type: ConditionalSpawner
     prototypes:
     - MobPossumPoppyGhostRole
-#SS220 Mappers_Request_1 end
 
 - type: entity
   name: Morticia Spawner
