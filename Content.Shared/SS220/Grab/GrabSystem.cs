@@ -178,6 +178,18 @@ public sealed partial class GrabSystem : EntitySystem
         if (grabbable.Comp.GrabStage >= GrabStage.Last)
             return true;
 
+        if (_timing.IsFirstTimePredicted)
+        {
+            var grabberMeta = MetaData(grabber);
+            var grabbableMeta = MetaData(grabbable);
+
+            var msg = grabbable.Comp.GrabStage == GrabStage.None
+                ? Loc.GetString("grabber-component-new-grab-popup", ("grabber", grabberMeta.EntityName), ("grabbable", grabbableMeta.EntityName))
+                : Loc.GetString("grabber-component-grab-upgrade-popup", ("grabber", grabberMeta.EntityName), ("grabbable", grabbableMeta.EntityName));
+
+            _popup.PopupPredicted(msg, grabber, grabber);
+        }
+
         var args = new DoAfterArgs(EntityManager, user: grabber, grabber.Comp.GrabDelay, new GrabDoAfterEvent(), eventTarget: grabber, target: grabbable)
         {
             BlockDuplicate = true,
@@ -281,6 +293,7 @@ public sealed partial class GrabSystem : EntitySystem
         grabberComp.Grabbing = null;
         grabbable.Comp.GrabbedBy = null;
         _transform.DropNextTo(grabbable.Owner, grabbable.Owner);
+        _popup.PopupPredicted(Loc.GetString("grabbable-component-break-free", ("grabbable", MetaData(grabbable).EntityName)), grabbable, grabbable);
 
         _virtualItem.DeleteInHandsMatching(grabber, grabbable);
     }
