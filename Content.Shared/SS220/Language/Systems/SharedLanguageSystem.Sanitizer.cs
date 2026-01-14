@@ -368,7 +368,7 @@ public sealed partial class LanguageNode
         Message = message;
     }
 
-    public string GetMessage(bool scrambled, bool colored) 
+    public string GetMessage(bool scrambled, bool colored)
     {
         var message = Message;
         if (scrambled)
