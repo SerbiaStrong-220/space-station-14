@@ -15,7 +15,6 @@ public sealed partial class PathologySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly INetManager _net = default!;
 
-
     public Dictionary<ProtoId<PathologyPrototype>, PathologyDefinition> GetActivePathologies(Entity<PathologyHolderComponent?> entity)
     {
         if (!Resolve(entity.Owner, ref entity.Comp, false))
@@ -53,7 +52,7 @@ public sealed partial class PathologySystem
         if (chance < 1f && !_random.Prob(chance))
             return false;
 
-        var correctInput = weightsPathology.Where((entry) => _prototype.HasIndex<PathologyPrototype>(entry.Key) && !HavePathology(entity, entry.Key)).ToDictionary();
+        var correctInput = weightsPathology.Where((entry) => _prototype.HasIndex<PathologyPrototype>(entry.Key) && CanAddPathology(entity, entry.Key)).ToDictionary();
 
         if (correctInput.Count == 0)
             return false;
@@ -68,10 +67,12 @@ public sealed partial class PathologySystem
         if (!Resolve(entity.Owner, ref entity.Comp, false))
             return false;
 
-        if (entity.Comp.ActivePathologies.ContainsKey(pathologyId))
+        if (!_prototype.Resolve(pathologyId, out var pathologyPrototype))
             return false;
 
-        if (!_prototype.Resolve(pathologyId, out var pathologyPrototype))
+        entity.Comp.ActivePathologies.TryGetValue(pathologyId, out var instanceData);
+
+        if (instanceData is not null && instanceData.StackCount > pathologyPrototype.Definition[instanceData.Level].MaxStackCount)
             return false;
 
         var attemptEv = new PathologyAddedAttempt(pathologyId);
@@ -80,11 +81,15 @@ public sealed partial class PathologySystem
         if (attemptEv.Cancelled)
             return false;
 
-        AddPathology(entity!, pathologyPrototype);
+        if (instanceData is null)
+            StartPathology(entity!, pathologyPrototype);
+        else
+            TryChangePathologyStack(entity, pathologyPrototype);
+
         return true;
     }
 
-    public bool TryRemovePathology(Entity<PathologyHolderComponent?> entity, ProtoId<PathologyPrototype> pathologyId)
+    public bool TryRemovePathology(Entity<PathologyHolderComponent?> entity, ProtoId<PathologyPrototype> pathologyId, bool checkStacks = true)
     {
         if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
             return false;
@@ -96,7 +101,7 @@ public sealed partial class PathologySystem
         if (!entity.Comp.ActivePathologies.TryGetValue(pathologyId, out var instanceData))
             return true;
 
-        if (instanceData.StackCount > OneStack)
+        if (checkStacks && instanceData.StackCount > OneStack)
             return false;
 
         var ev = new PathologyRemoveAttempt(pathologyId, instanceData.Level);
@@ -113,6 +118,23 @@ public sealed partial class PathologySystem
             return false;
 
         return entity.Comp.ActivePathologies.ContainsKey(pathologyId);
+    }
+
+    /// <summary>
+    /// Checks if it possible to apply in general
+    /// </summary>
+    public bool CanAddPathology(Entity<PathologyHolderComponent?> entity, ProtoId<PathologyPrototype> pathologyId)
+    {
+        if (!Resolve(entity.Owner, ref entity.Comp))
+            return false;
+
+        if (!_prototype.Resolve(pathologyId, out var pathologyPrototype))
+            return false;
+
+        if (!entity.Comp.ActivePathologies.TryGetValue(pathologyId, out var instanceData))
+            return true;
+
+        return pathologyPrototype.Definition[instanceData.Level].MaxStackCount > OneStack;
     }
 
     public bool TryGetPathologyStack(Entity<PathologyHolderComponent?> entity, ProtoId<PathologyPrototype> pathologyId, [NotNullWhen(true)] out int? stackCount)

@@ -13,7 +13,7 @@ namespace Content.Shared.SS220.Surgery.Components;
 [NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class SurgeryPatientComponent : Component
 {
-    [ViewVariables(VVAccess.ReadOnly)]
     [AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadOnly)]
     public Dictionary<ProtoId<SurgeryGraphPrototype>, string> OngoingSurgeries = new();
 }

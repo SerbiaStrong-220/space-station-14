@@ -18,7 +18,7 @@ public sealed partial class PathologySystem : EntitySystem
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
 
-    public static readonly int OneStack = 0;
+    public static readonly int OneStack = 1;
 
     public static readonly TimeSpan UpdateInterval = TimeSpan.FromSeconds(1f);
 
@@ -36,7 +36,7 @@ public sealed partial class PathologySystem : EntitySystem
         if (_gameTiming.Paused)
             return;
 
-        if (_gameTiming.CurTime > _lastUpdate)
+        if (_gameTiming.CurTime < _lastUpdate)
             return;
 
         _lastUpdate = _gameTiming.CurTime + UpdateInterval;
@@ -52,8 +52,7 @@ public sealed partial class PathologySystem : EntitySystem
                 if (!_prototype.Resolve(protoId, out var pathologyProto))
                     continue;
 
-                if (!TryProgressPathology((uid, holder), pathologyProto, data))
-                    continue;
+                TryProgressPathology((uid, holder), pathologyProto, data);
 
                 foreach (var effect in pathologyProto.Definition[data.Level].Effects)
                 {
@@ -67,12 +66,15 @@ public sealed partial class PathologySystem : EntitySystem
     {
         foreach (var (pathologyId, _) in entity.Comp.ActivePathologies)
         {
-            TryRemovePathology(entity!, pathologyId);
+            TryRemovePathology(entity!, pathologyId, checkStacks: false);
         }
     }
 
     private bool TryProgressPathology(Entity<PathologyHolderComponent> entity, PathologyPrototype pathologyPrototype, PathologyInstanceData instanceData)
     {
+        if (pathologyPrototype.Definition[instanceData.Level].ProgressConditions.Length == 0)
+            return false;
+
         foreach (var req in pathologyPrototype.Definition[instanceData.Level].ProgressConditions)
         {
             if (req.CheckCondition(entity, instanceData, EntityManager))
@@ -86,7 +88,7 @@ public sealed partial class PathologySystem : EntitySystem
 
         instanceData.Level++;
 
-        AddPathologyDefinitionEffects(entity,  pathologyPrototype.Definition[instanceData.Level]);
+        AddPathologyDefinitionEffects(entity, pathologyPrototype.Definition[instanceData.Level]);
 
         var ev = new PathologySeverityChanged(pathologyPrototype.ID, instanceData.Level - 1, instanceData.Level);
         RaiseLocalEvent(entity, ref ev);
@@ -95,7 +97,7 @@ public sealed partial class PathologySystem : EntitySystem
         return true;
     }
 
-    private void AddPathology(Entity<PathologyHolderComponent> entity, PathologyPrototype pathologyPrototype)
+    private void StartPathology(Entity<PathologyHolderComponent> entity, PathologyPrototype pathologyPrototype)
     {
         var ev = new PathologyAddedEvent(pathologyPrototype.ID);
         RaiseLocalEvent(entity, ref ev);

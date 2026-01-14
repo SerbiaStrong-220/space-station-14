@@ -285,6 +285,7 @@
   - type: FireVisuals
     alternateState: Standing
   - type: SurgeryPatient #SS220 Surgery
+  - type: PathologyHolder #SS220 Pathology
   - type: StunVisuals
 
 - type: entity

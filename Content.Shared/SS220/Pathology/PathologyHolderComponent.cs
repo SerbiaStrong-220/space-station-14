@@ -18,9 +18,12 @@ public sealed partial class PathologyHolderComponent : Component
 [Serializable, NetSerializable]
 public sealed partial class PathologyInstanceData(TimeSpan startTime)
 {
+    [ViewVariables]
     public TimeSpan StartTime = startTime;
 
+    [ViewVariables]
     public int Level = 0;
 
+    [ViewVariables]
     public int StackCount = PathologySystem.OneStack;
 }
