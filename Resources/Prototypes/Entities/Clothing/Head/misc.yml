@@ -156,9 +156,9 @@
   description: The tag reads "All proceeds go to the Hakurei Shrine."
   components:
   - type: Sprite
-    sprite: Clothing/Head/Misc/shrine-maidens-wig.rsi
+    sprite: SS220/Clothing/Head/Misc/shrine-maidens-wig.rsi #SS220 resprited
   - type: Clothing
-    sprite: Clothing/Head/Misc/shrine-maidens-wig.rsi
+    sprite: SS220/Clothing/Head/Misc/shrine-maidens-wig.rsi #SS220 resprited
   - type: Tag
     tags:
     - HamsterWearable
@@ -166,7 +166,7 @@
     - ShrineMaidenWig #SS220 tohoUpdate
   - type: HideLayerClothing
     slots:
-   #- Hair #SS220 Fixed the wig overlapping with hair
+    - Hair
     - HeadTop
     - HeadSide
 
