@@ -6,6 +6,7 @@ using Content.Server.Atmos.EntitySystems;
 using Content.Server.CombatMode;
 using Content.Server.Weapons.Melee;
 using Content.Shared.Movement.Pulling.Systems;
+using Content.Shared.SS220.Grab;
 using Content.Shared.SS220.MartialArts;
 using Content.Shared.Weapons.Melee;
 using Robust.Server.GameObjects;
@@ -92,6 +93,9 @@ public sealed class MartialArtsTest
   - type: ComplexInteraction
   - type: CombatMode
     canDisarm: true
+  - type: Tag
+    tags:
+    - InstantDoAfters
   - type: MeleeWeapon
     soundHit:
       collection: Punch
@@ -171,7 +175,8 @@ public sealed class MartialArtsTest
         await pair.RunTicksSync(1);
 
         var meleeSys = server.EntMan.System<MeleeWeaponSystem>();
-        var pullingSys = server.EntMan.System<PullingSystem>();
+        // var pullingSys = server.EntMan.System<PullingSystem>();
+        var grabSys = server.EntMan.System<GrabSystem>();
         var artsSys = server.EntMan.System<MartialArtsSystem>();
 
         // Test sequence
@@ -188,12 +193,12 @@ public sealed class MartialArtsTest
         // Grab
         await server.WaitPost(() =>
         {
-            pullingSys.TryStartPull(artist, mob);
+            grabSys.TryDoGrab(artist.Owner, mob);
         });
 
         await pair.RunSeconds(2);
 
-        Assert.That(artist.Comp1.CurrentSteps, Is.EquivalentTo([CombatSequenceStep.Harm, CombatSequenceStep.Grab]), "Attempted to pull mob and expected \"GRAB\" step to appear");
+        Assert.That(artist.Comp1.CurrentSteps, Is.EquivalentTo([CombatSequenceStep.Harm, CombatSequenceStep.Grab]), "Attempted to grab mob and expected \"GRAB\" step to appear");
 
         // Push (disarm)
         await server.WaitPost(() =>
