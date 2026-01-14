@@ -26,6 +26,7 @@
     - state: cheap_icon_base
       map: [ "skin" ]
     - state: basic_icon_top
+    #SS220 lighters_resprite start
     - state: basic_piston
       visible: false
       map: [ "piston" ]
@@ -66,6 +67,7 @@
           basic_icon_base-27: ""
           basic_icon_base-28: ""
           basic_icon_base-29: ""
+          basic_icon_base-30: ""
   - type: GenericVisualizer
     visuals:
       enum.ToggleableVisuals.Enabled:
@@ -75,6 +77,7 @@
         piston:
           True: { visible: false }
           False: { visible: true }
+  #SS220 lighters_resprite end
   - type: ToggleableVisuals
     spriteLayer: lighter_flame
     inhandVisuals:

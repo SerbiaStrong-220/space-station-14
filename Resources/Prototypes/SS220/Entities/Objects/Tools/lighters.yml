@@ -112,3 +112,63 @@
       shader: unshaded
   - type: StealTarget
     stealGroup: ExpensiveLighterUSSP
+
+- type: entity
+  parent: ExpensiveLighterNanotrasen
+  id: ZippoLighterCopper
+  description: "A rugged copper lighter, lasts quite a while."
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tools/Lighters/zippo_lighters.rsi
+    layers:
+    - state: zippo_copper_icon_base
+      map: ["base"]
+    - state: zippo_copper_open
+      map: ["open"]
+      visible: false
+    - state: zippo_top
+      map: ["top"]
+    - state: lighter_flame
+      map: ["flame"]
+      visible: false
+      shader: unshaded
+
+- type: entity
+  parent: ExpensiveLighterNanotrasen
+  id: ZippoLighterBrass
+  description: "A rugged brass lighter, lasts quite a while."
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tools/Lighters/zippo_lighters.rsi
+    layers:
+    - state: zippo_brass_icon_base
+      map: ["base"]
+    - state: zippo_brass_open
+      map: ["open"]
+      visible: false
+    - state: zippo_top
+      map: ["top"]
+    - state: lighter_flame
+      map: ["flame"]
+      visible: false
+      shader: unshaded
+
+- type: entity
+  parent: ExpensiveLighterNanotrasen
+  id: ZippoLighterGold
+  description: "A rugged gold lighter, lasts quite a while."
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Tools/Lighters/zippo_lighters.rsi
+    layers:
+    - state: zippo_gold_icon_base
+      map: ["base"]
+    - state: zippo_gold_open
+      map: ["open"]
+      visible: false
+    - state: zippo_top
+      map: ["top"]
+    - state: lighter_flame
+      map: ["flame"]
+      visible: false
+      shader: unshaded
