@@ -4,10 +4,6 @@ ent-SpawnMobCorgi = HoP Corgi Spawner
     .desc = { ent-MarkerBase.desc }
 ent-SpawnMobPossumMorty = Possum Morty Spawner
     .desc = { ent-MarkerBase.desc }
-#SS220 Mappers_Request_1 start
-ent-SpawnMobPossumPoppy = Possum Morty Spawner
-    .desc = { ent-MarkerBase.desc }
-#SS220 Mappers_Request_1 end
 ent-SpawnMobRaccoonMorticia = Raccoon Morticia Spawner
     .desc = { ent-MarkerBase.desc }
 ent-SpawnMobDrone = Drone Spawner

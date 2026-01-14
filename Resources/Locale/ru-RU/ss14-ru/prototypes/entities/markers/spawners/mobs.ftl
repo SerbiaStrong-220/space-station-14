@@ -11,10 +11,6 @@ ent-SpawnMobCorgi = спавнер корги
     .desc = { ent-MarkerBase.desc }
 ent-SpawnMobPossumMorty = спавнер опоссум Морти
     .desc = { ent-MarkerBase.desc }
-#SS220 Mappers_Request_1 start
-ent-SpawnMobPossumPoppy = спавнер опоссум Поппи
-    .desc = { ent-MarkerBase.desc }
-#SS220 Mappers_Request_1 end
 ent-SpawnMobRaccoonMorticia = спавнер енот Мортиша
     .desc = { ent-MarkerBase.desc }
 ent-SpawnMobDrone = спавнер дрон
