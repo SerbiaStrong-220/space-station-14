@@ -51,11 +51,9 @@ public sealed partial class LanguageSettingsPopup : Popup
             availableLanguages.Add(language);
         }
 
-        var galacticLanguage = _entityManager.System<SharedLanguageSystem>().GalacticLanguage;
-
-        if (_languageManager.TryGetLanguageById(galacticLanguage, out var galactic))
+        if (_languageManager.TryGetLanguageById(SharedLanguageSystem.GalacticLanguage, out var galactic))
         {
-            if (!availableLanguages.Any(l => l.ID == galacticLanguage))
+            if (!availableLanguages.Any(l => l.ID == (SharedLanguageSystem.GalacticLanguage)))
             {
                 availableLanguages.Add(galactic);
             }
