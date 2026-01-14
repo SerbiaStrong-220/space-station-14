@@ -28,21 +28,26 @@ public sealed class TeleportationChasmSystem : SharedTeleportationChasmSystem
     {
         base.Update(frameTime);
 
-        List<EntityUid> toRemove = [];
+        List<EntityUid> toTeleport = [];
 
         var query = EntityQueryEnumerator<TeleportationChasmFallingComponent>();
-        while (query.MoveNext(out var uid, out var chasm))
+        while (query.MoveNext(out var uid, out var chasmFalling))
         {
-            if (_timing.CurTime < chasm.NextDeletionTime)
+            if (_timing.CurTime < chasmFalling.NextTeleportationTime)
                 continue;
 
-            TeleportToRandomLocation(uid);
+            if (chasmFalling.ShouldBeDeleted)
+            {
+                QueueDel(uid);
+                continue;
+            }
 
-            toRemove.Add(uid);
+            toTeleport.Add(uid);
         }
 
-        foreach (var uid in toRemove)
+        foreach (var uid in toTeleport)
         {
+            TeleportToRandomLocation(uid);
             RemComp<TeleportationChasmFallingComponent>(uid);
             _blocker.UpdateCanMove(uid);
         }

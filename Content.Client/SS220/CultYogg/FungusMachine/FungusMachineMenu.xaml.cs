@@ -40,23 +40,9 @@ public sealed partial class FungusMachineMenu : FancyWindow
         };
     }
 
-    protected override void Dispose(bool disposing)
+    public void Populate(List<FungusMachineInventoryEntry> inventory, out List<int> filteredInventory, string? filter = null)
     {
-        base.Dispose(disposing);
-
-        if (!disposing)
-            return;
-
-        foreach (var entity in _dummies.Values)
-        {
-            _entityManager.QueueDeleteEntity(entity);
-        }
-        _dummies.Clear();
-    }
-
-    public void Populate(List<FungusMachineInventoryEntry> inventory, out List<int> filteredInventory,  string? filter = null)
-    {
-        filteredInventory = new();
+        filteredInventory = [];
 
         while (inventory.Count != FungusContents.Count)
         {
@@ -91,7 +77,7 @@ public sealed partial class FungusMachineMenu : FancyWindow
             }
 
             if (!string.IsNullOrEmpty(filter) &&
-                !itemName.ToLowerInvariant().Contains(filter.Trim().ToLowerInvariant()))
+                !itemName.Contains(filter.Trim(), StringComparison.InvariantCultureIgnoreCase))
             {
                 FungusContents.Remove(fungusItem);
                 filterCount++;
@@ -114,5 +100,21 @@ public sealed partial class FungusMachineMenu : FancyWindow
         SetSize = new Vector2(
             x: Math.Clamp((longestEntryLength + 2) * 12, 250, 300),
             y: Math.Clamp(contentCount * 50, 150, 350));
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+
+        // Don't clean up dummies during disposal or we'll just have to spawn them again
+        if (!disposing)
+            return;
+
+        // Delete any dummy items we spawned
+        foreach (var entity in _dummies.Values)
+        {
+            _entityManager.QueueDeleteEntity(entity);
+        }
+        _dummies.Clear();
     }
 }
