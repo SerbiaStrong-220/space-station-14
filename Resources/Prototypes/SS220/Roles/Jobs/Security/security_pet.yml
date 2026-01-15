@@ -2,6 +2,7 @@
   id: SecurityPet
   name: job-name-security-pet
   description: job-description-security-pet
+  setPreference: false
   playTimeTracker: JobSecurityPet
   requirements:
   - !type:DepartmentTimeRequirement

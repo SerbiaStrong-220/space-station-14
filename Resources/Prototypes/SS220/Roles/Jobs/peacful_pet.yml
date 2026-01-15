@@ -2,6 +2,7 @@
   id: PeacefulPet # just imagine here joke pls
   name: job-name-peaceful-pet
   description: job-description-peaceful-pet
+  setPreference: false
   playTimeTracker: JobPeacefulPet
   requirements:
   - !type:OverallPlaytimeRequirement
