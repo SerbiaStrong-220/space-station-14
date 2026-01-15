@@ -187,7 +187,7 @@
     mode: AlignTileAny
 
 - type: entity
-  name: Random Derelict Salvage Cyborg Spawner 0.1
+  name: Random Derelict Syndicate Cyborg Spawner 0.1
   id: SpawnBorgSyndicateDerelict01
   suffix: 10% chance
   parent: MarkerBase

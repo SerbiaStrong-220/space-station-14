@@ -10,7 +10,7 @@
       beaker:
         maxVol: 50
         reagents:
-        - ReagentId: Cerebin
+        - ReagentId: Cerebrin
           Quantity: 50
 
 - type: entity
@@ -31,7 +31,7 @@
 - type: entity
   parent: Beaker
   id: BeakerSmallDermaline
-  suffix: Dermaline
+  suffix: dermaline
   components:
   - type: Label
     currentLabel: reagent-name-dermaline
