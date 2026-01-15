@@ -7,10 +7,10 @@
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:
-      - state: green
+    - state: green
   - type: RandomSpawner
     prototypes:
-      - BearTrapArmed
+    - BearTrapArmed
     chance: 0.75
   placement:
     mode: AlignTileAny
@@ -24,10 +24,10 @@
     - type: Sprite
       sprite: Markers/jobs.rsi
       layers:
-        - state: green
+      - state: green
     - type: RandomSpawner
       prototypes:
-        - BearTrapArmed
+      - BearTrapArmed
       chance: 0.5
   placement:
     mode: AlignTileAny
@@ -41,10 +41,10 @@
     - type: Sprite
       sprite: Markers/jobs.rsi
       layers:
-        - state: green
+      - state: green
     - type: RandomSpawner
       prototypes:
-        - BearTrapArmed
+      - BearTrapArmed
       chance: 0.25
   placement:
     mode: AlignTileAny

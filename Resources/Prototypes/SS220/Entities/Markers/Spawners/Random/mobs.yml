@@ -7,10 +7,10 @@
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:
-      - state: green
+    - state: green
   - type: RandomSpawner
     prototypes:
-      - MobMouseCancer
+    - MobMouseCancer
     chance: 0.5
   placement:
     mode: AlignTileAny

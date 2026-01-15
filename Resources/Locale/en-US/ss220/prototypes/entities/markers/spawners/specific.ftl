@@ -1,6 +1,6 @@
-ent-BearTrapArmed075 = { ent-BearTrapArmed075 }
+ent-BearTrapArmed075 = random spawner { ent-BearTrap }
     .desc = { ent-MarkerBase.desc }
-ent-BearTrapArmed05 = { ent-BearTrapArmed05 }
+ent-BearTrapArmed05 = random spawner { ent-BearTrap }
     .desc = { ent-MarkerBase.desc }
-ent-BearTrapArmed025 = { ent-BearTrapArmed025 }
+ent-BearTrapArmed025 = random spawner { ent-BearTrap }
     .desc = { ent-MarkerBase.desc }

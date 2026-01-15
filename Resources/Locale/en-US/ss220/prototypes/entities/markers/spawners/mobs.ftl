@@ -1,6 +1,6 @@
-ent-SpawnMobPossumPoppy = { ent-SpawnMobPossumMorty }
+ent-SpawnMobPossumPoppy = spawner { ent-MobPossumMorty }
     .desc = { ent-MarkerBase.desc }
-ent-SpawnMobMouseCancer = { ent-SpawnMobMouseCancer }
+ent-SpawnMobMouseCancer = spawner { ent-MobMouseCancer }
     .desc = { ent-MarkerBase.desc }
-ent-SpawnMobMouseCancer05 = { ent-SpawnMobMouseCancer05 }
+ent-SpawnMobMouseCancer05 = random spawner { ent-MobMouseCancer }
     .desc = { ent-MarkerBase.desc }

@@ -5,9 +5,11 @@
   components:
   - type: Sprite
     layers:
+    # SS220 Mappers_Requets_2 start
     - state: red
     - sprite: Structures/Furniture/potted_plants.rsi
       state: random
+    # SS220 Mappers_Requets_2 end
   - type: RandomSpawner
     offset: 0
     prototypes:
