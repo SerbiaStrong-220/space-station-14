@@ -4,14 +4,14 @@
   suffix: 50% chance
   parent: MarkerBase
   components:
-    - type: Sprite
-      sprite: Markers/jobs.rsi
-      layers:
-        - state: green
-    - type: RandomSpawner
-      prototypes:
-        - PlayerBorgDerelictGhostRole
-      chance: 0.5
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+      - state: green
+  - type: RandomSpawner
+    prototypes:
+      - PlayerBorgDerelictGhostRole
+    chance: 0.5
   placement:
     mode: AlignTileAny
 

@@ -4,14 +4,14 @@
   suffix: 75% chance
   parent: MarkerBase
   components:
-    - type: Sprite
-      sprite: Markers/jobs.rsi
-      layers:
-        - state: green
-    - type: RandomSpawner
-      prototypes:
-        - BearTrapArmed
-      chance: 0.75
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+      - state: green
+  - type: RandomSpawner
+    prototypes:
+      - BearTrapArmed
+    chance: 0.75
   placement:
     mode: AlignTileAny
 
