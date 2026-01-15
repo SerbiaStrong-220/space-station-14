@@ -88,7 +88,6 @@ ent-LargeBeakerAloxadone = { ent-LargeBeaker }
 ent-LargeBeakerOmnizine = { ent-LargeBeaker }
     .desc = { ent-LargeBeaker.desc }
     .suffix = омнизин
-
 ent-JugCryoxadone = { ent-Jug }
     .desc = { ent-Jug.desc }
     .suffix = криоксадон

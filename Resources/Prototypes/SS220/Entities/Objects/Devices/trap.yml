@@ -79,7 +79,6 @@
   suffix: armed
   parent: BearTrap
   id: BearTrapArmed
-  description: А useful item for hunting station rats or people
   components:
   - type: Sprite
     sprite: SS220/Objects/Devices/traps/bearTrap.rsi

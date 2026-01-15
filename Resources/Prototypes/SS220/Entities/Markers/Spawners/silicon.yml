@@ -1,8 +1,8 @@
 - type: entity
   parent: MarkerBase
-  id: SpawnBorgDerelictGhostRole
+  id: SpawnBorgDerelict
   name: the spawner derelict cyborg
-  suffix: Battery, Module
+  suffix: GhostRole
   components:
   - type: Sprite
     layers:
@@ -16,7 +16,7 @@
   parent: MarkerBase
   id: SpawnEngineeringBorgDerelict
   name: the spawner derelict engineer cyborg
-  suffix: Battery, Module
+  suffix: GhostRole
   components:
   - type: Sprite
     layers:
@@ -28,9 +28,9 @@
 
 - type: entity
   parent: MarkerBase
-  id: SpawnJanitorBorgDerelictGhostRole
+  id: SpawnJanitorBorgDerelict
   name: the spawner derelict janitor cyborg
-  suffix: Battery, Module
+  suffix: GhostRole
   components:
   - type: Sprite
     layers:
@@ -42,9 +42,9 @@
 
 - type: entity
   parent: MarkerBase
-  id: SpawnMedicalBorgDerelictGhostRole
+  id: SpawnMedicalBorgDerelict
   name: the spawner derelict medical cyborg
-  suffix: Battery, Module
+  suffix: GhostRole
   components:
   - type: Sprite
     layers:
@@ -56,9 +56,9 @@
 
 - type: entity
   parent: MarkerBase
-  id: SpawnMiningBorgDerelictGhostRole
+  id: SpawnMiningBorgDerelict
   name: the spawner derelict salvage cyborg
-  suffix: Battery, Module
+  suffix: GhostRole
   components:
   - type: Sprite
     layers:
@@ -70,9 +70,9 @@
 
 - type: entity
   parent: MarkerBase
-  id: SpawnBorgSyndicateDerelictGhostRole
+  id: SpawnBorgSyndicateDerelict
   name: the spawner derelict syndicate assault cyborg
-  suffix: Battery, Module
+  suffix: GhostRole
   components:
   - type: Sprite
     layers:
