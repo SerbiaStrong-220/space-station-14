@@ -191,7 +191,7 @@
     - state: zippo_shlepa_open
       map: ["open"]
       visible: false
-    - state: top #zippo_resprite
+    - state: top
       map: ["top"]
       visible: false
     - state: lighter_flame
@@ -202,10 +202,10 @@
     size: Tiny
     sprite: SS220/Objects/Sponsor/Cigs/floppa-zippo.rsi
     heldPrefix: zippo
-  - type: PointLight #zippo_resprite
+  - type: PointLight
     enabled: false
     netsync: false
-    radius: 2 #Excessively powerful
+    radius: 2
     color: Gold
 
 - type: entity

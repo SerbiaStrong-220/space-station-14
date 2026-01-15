@@ -75,6 +75,11 @@
     - state: matchbox
     - state: matchbox-open
       map: ["openLayer"]
+      #SS220 zippo resprie start
+    - state: matchbox0
+      map: ["matchbox0"]
+      visible: false
+      #SS220 zippo resprie end
     - state: matchbox1
       map: ["matchbox1"]
       visible: false
@@ -105,9 +110,12 @@
       tags: [Matchstick]
     composite: true
     layerStates:
-    - matchbox1
+    #SS220 zippo resprie start
+    - matchbox3 
     - matchbox2
-    - matchbox3
+    - matchbox1
+    - matchbox0
+    #SS220 zippo resprie end
   - type: Appearance
   - type: Tag
     tags:

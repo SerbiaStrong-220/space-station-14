@@ -30,6 +30,7 @@
     - state: basic_piston
       visible: false
       map: [ "piston" ]
+    #SS220 lighters_resprite end
     - state: lighter_flame
       visible: false
       shader: unshaded
@@ -49,6 +50,7 @@
           basic_icon_base-9: ""
           basic_icon_base-10: ""
           basic_icon_base-11: ""
+          #SS220 lighters_resprite start
           basic_icon_base-12: ""
           basic_icon_base-13: ""
           basic_icon_base-14: ""
@@ -68,12 +70,14 @@
           basic_icon_base-28: ""
           basic_icon_base-29: ""
           basic_icon_base-30: ""
+          #SS220 lighters_resprite end
   - type: GenericVisualizer
     visuals:
       enum.ToggleableVisuals.Enabled:
         flame:
           True: { visible: true }
           False: { visible: false }
+  #SS220 lighters_resprite start
         piston:
           True: { visible: false }
           False: { visible: true }
@@ -138,9 +142,11 @@
     - state: cheap_icon_base
       map: [ "skin" ]
     - state: cheap_icon_top
+    #SS220 lighters_resprite start
     - state: cheap_piston
       visible: false
       map: [ "piston" ]
+    #SS220 lighters_resprite end
     - state: lighter_flame
       visible: false
       shader: unshaded
@@ -173,12 +179,14 @@
     layers:
     - state: zippo_icon_base
       map: ["base"]
+      #SS220 lighters_resprite start
     - state: zippo_open
       map: ["open"]
       visible: false
     - state: zippo_top
       map: ["top"]
       visible: false
+      #SS220 lighters_resprite end
     - state: lighter_flame
       map: ["flame"]
       visible: false
@@ -269,12 +277,14 @@
     layers:
     - state: zippo_engraved_icon_base
       map: ["base"]
+      #SS220 lighters_resprite start
     - state: zippo_engraved_open
       map: ["open"]
       visible: false
     - state: zippo_top
       map: ["top"]
       visible: false
+      #SS220 lighters_resprite end
     - state: lighter_flame
       map: ["flame"]
       visible: false
@@ -318,12 +328,14 @@
     layers:
     - state: icon
       map: [ "base" ]
+      #SS220 lighters_resprite start
     - state: open
       map: [ "open" ]
       visible: false
     - state: top
       map: [ "top" ]
       visible: false
+      #SS220 lighters_resprite end
     - state: flame
       map: [ "flame" ]
       visible: false
@@ -360,7 +372,7 @@
 - type: entity
   parent: [BaseBrandedLighter, BaseSyndicateContraband]
   id: SyndicateFlippo
-  name: Syndicate Flippo
+  name: Blood-red flippo
   description: "A 'Valid' choice in lighters. Contains no copper."
   components:
   - type: Sprite
@@ -389,10 +401,12 @@
     - state: icon_map
     - state: discount_icon_base
       map: [ "skin" ]
+    #SS220 lighters_resprite start
     - state: cheap_icon_top
     - state: cheap_piston
       visible: true
       map: [ "piston" ]
+    #SS220 lighters_resprite end
     - state: lighter_flame
       visible: false
       shader: unshaded
