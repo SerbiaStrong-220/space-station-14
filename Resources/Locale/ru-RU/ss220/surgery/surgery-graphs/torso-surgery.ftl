@@ -8,6 +8,7 @@ surgery-torso-examine-start = Пациент готов к операции на
 surgery-torso-popup-start = Начинает операцию на торсе.
 surgery-torso-node-start = Начало операции.
 
-compact-defibrillator-cant-zap = Это оборудование должно быть использовано непосредственно на сердце пациента
+direct-compact-defibrillator-cant-zap = Это оборудование должно быть использовано непосредственно на сердце пациента
 
-surgery-requirement-defib-required = Компактный дефибриллятор
+surgery-requirement-direct-compact-defib-required = Контактный компактный дефибриллятор
+surgery-requirement-direct-compact-defib-failure = Вы не знаете что делать с этим

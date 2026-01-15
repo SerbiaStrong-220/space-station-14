@@ -52,8 +52,11 @@ public sealed class DefibrillatorSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
-    [Dependency] private readonly IRobustRandom _random = default!; //SS220 LimitationRevive
     [Dependency] private readonly InventorySystem _inventory = default!; // SS220 NewDefib
+
+    // SS220
+    private readonly LocId _directCompactDefibrillatorNonSurgeryUse = "direct-compact-defibrillator-cant-zap";
+    // SS220
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -70,7 +73,7 @@ public sealed class DefibrillatorSystem : EntitySystem
         //ss220-surgery-update-begin
         if (HasComp<DirectCompactDefibrillatorComponent>(uid))
         {
-            _popup.PopupClient(Loc.GetString("compact-defibrillator-cant-zap"), args.User);
+            _popup.PopupClient(Loc.GetString(_directCompactDefibrillatorNonSurgeryUse), args.User);
             return;
         }
         //ss220-surgery-update-end

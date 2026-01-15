@@ -16,14 +16,14 @@ public sealed partial class InternalBloodLossEffect : IPathologyEffect
     /// Blood loss per update interval and per stack
     /// </summary>
     [DataField]
-    public FixedPoint2 LossRate = 0.15f;
+    public FixedPoint2 LossRate = 0.25f;
 
     private readonly ProtoId<EmotePrototype> _bloodCoughEmote = "BloodCough";
 
     /// <summary>
     /// Somewhat good value to make minor IBs less noticeable and major one being annoyed in proper way (in response to default 300 volume)
     /// </summary>
-    private readonly float _baseCoughChancePerStack = 0.02f;
+    private readonly float _baseCoughChancePerStack = 0.01f;
 
     public void ApplyEffect(EntityUid uid, PathologyInstanceData data, IEntityManager entityManager)
     {

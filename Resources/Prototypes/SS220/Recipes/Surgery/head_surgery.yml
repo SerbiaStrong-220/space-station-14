@@ -17,26 +17,26 @@
     whitelist:
       tags:
       - Bed
-  start: start
-  end: sealWound
+  start: surgery-head-start
+  end: seal-wound
   graph:
-  - node: start
+  - node: surgery-head-start
     nodeText:
       examineDescription: surgery-head-examine-start
     edges:
-    - to: incision
+    - to: head-skin-incision
       baseEdge: incision
-  - node: incision
+  - node: head-skin-incision
     baseNode: incision
     edges:
-    - to: retractSkin
-      baseEdge: retractSkin
-  - node: retractSkin
-    baseNode: retractSkin
+    - to: retract-head-skin
+      baseEdge: retract-skin
+  - node: retract-skin
+    baseNode: retract-head-skin
     edges:
     # implant check
-    - to: retractSkin
-      delay: 5
+    - to: retract-head-skin
+      delay: 15
       actions:
       - !type:CheckImplantAction
       requirements:
@@ -48,25 +48,25 @@
           components:
           - ImplantCheckInSurgery
     # deeper
-    - to: sawBone
-      baseEdge: sawBone
+    - to: saw-skull-bone
+      baseEdge: saw-bone
     # return
-    - to: sealWound
-      baseEdge: sealWound
-  - node: sawBone
-    baseNode: sawBone
+    - to: seal-wound
+      baseEdge: seal-wound
+  - node: saw-skull-bone
+    baseNode: saw-bone
     edges:
     # deeper
-    - to: brainExposed
-      baseEdge: retractSkin
+    - to: brain-exposed
+      baseEdge: retract-skin
     # TODO: better return
-    - to: retractSkin
-      baseEdge: sealWound
-  - node: brainExposed
-    baseNode: retractSkin
+    - to: retract-skin
+      baseEdge: seal-wound
+  - node: brain-exposed
+    baseNode: retract-skin
     edges:
     # fix mind slave disfunction
-    - to: brainExposed
+    - to: brain-exposed
       delay: 6
       sound:
         path: /Audio/SS220/Surgery/organ.ogg
@@ -105,7 +105,7 @@
       actions:
       - !type:FixMindSlaveDisfunctionAction
     # return
-    - to: sawBone
-      baseEdge: sealWound
-  - node: sealWound
-    baseNode: sealWound
+    - to: saw-skull-bone
+      baseEdge: seal-wound
+  - node: seal-wound
+    baseNode: seal-wound

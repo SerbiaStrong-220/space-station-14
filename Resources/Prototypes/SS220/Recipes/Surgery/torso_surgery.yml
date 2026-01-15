@@ -18,8 +18,8 @@
     whitelist:
       tags:
       - Bed
-  start: start
-  end: sealWound
+  start: start-torso-surgery
+  end: seal-wound
   graph:
   - node: start
     nodeText:
@@ -27,19 +27,19 @@
       popup: surgery-torso-popup-start
       description: surgery-torso-node-start
     edges:
-    - to: incision
+    - to: torso-skin-incision
       baseEdge: incision
-  - node: incision
+  - node: torso-skin-incision
     baseNode: incision
     edges:
-    - to: retractSkin
-      baseEdge: retractSkin
-  - node: retractSkin
-    baseNode: retractSkin
+    - to: retract-torso-skin
+      baseEdge: retract-skin
+  - node: retract-torso-skin
+    baseNode: retract-skin
     edges:
     # heal wounds
-    - to: retractSkin
-      baseEdge: retractSkin # base visual
+    - to: retract-torso-skin
+      baseEdge: retract-torso-skin
       actions:
       - !type:ApplyDamageAction
         damage:
@@ -59,25 +59,25 @@
         description: surgery-requirement-reagent-in-hand
         failureMessage: surgery-requirement-reagent-in-hand
     # deeper
-    - to: sawBone
-      baseEdge: sawBone
+    - to: saw-rib-bone
+      baseEdge: saw-bone
     # end surgery
-    - to: sealWound
-      baseEdge: sealWound
-  - node: sawBone
-    baseNode: sawBone
+    - to: seal-wound
+      baseEdge: seal-wound
+  - node: saw-rib-bone
+    baseNode: saw-bone
     edges:
     # deeper
-    - to: heartIncision
+    - to: open-heart-incision
       baseEdge: incision
     # TOOD: better back
-    - to: retractSkin
-      baseEdge: sealWound
-  - node: heartIncision
+    - to: retract-skin
+      baseEdge: seal-wound
+  - node: open-heart-incision
     baseNode: incision
     edges:
     # handheld defibrillator usage
-    - to: heartIncision
+    - to: open-heart-incision
       delay: 2
       sound:
         path: /Audio/SS220/Surgery/organ.ogg
@@ -86,14 +86,15 @@
       requirements:
       - !type:WhitelistRequirement
         subject: Used
-        description: surgery-requirement-defib-required
-        failureMessage: surgery-requirement-defib-required
+        description: surgery-requirement-direct-compact-defib-required
+        failureMessage: surgery-requirement-direct-compact-defib-failure
         whitelist:
           components:
           - DirectCompactDefibrillator
     # return
-    - to: sawBone
-      baseEdge: sealWound
+    # TOOD: better back
+    - to: saw-rib-bone
+      baseEdge: seal-wound
   # end
-  - node: sealWound
-    baseNode: sealWound
+  - node: seal-wound
+    baseNode: seal-wound

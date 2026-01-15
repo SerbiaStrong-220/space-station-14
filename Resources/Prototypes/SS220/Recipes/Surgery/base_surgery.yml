@@ -12,7 +12,7 @@
       description: incision-description
 
 - type: abstractSurgeryNode
-  id: retractSkin
+  id: retract-skin
   node:
     node: abstract
     nodeText:
@@ -21,7 +21,7 @@
       description: retract-skin-description
 
 - type: abstractSurgeryNode
-  id: sawBone
+  id: saw-bone
   node:
     node: abstract
     nodeText:
@@ -30,7 +30,7 @@
       description: saw-bone-description
 
 - type: abstractSurgeryNode
-  id: clampBleeders
+  id: clamp-bleeders
   node:
     node: abstract
     nodeText:
@@ -39,7 +39,7 @@
       description: clamp-bleeders-description
 
 - type: abstractSurgeryNode
-  id: sealWound
+  id: seal-wound
   node:
     node: abstract
     nodeText:
@@ -66,7 +66,7 @@
       bleedAmount: 2
 
 - type: abstractSurgeryEdge
-  id: retractSkin
+  id: retract-skin
   edge:
     to: abstract
     delay: 4
@@ -82,7 +82,7 @@
       bleedAmount: -2
 
 - type: abstractSurgeryEdge
-  id: sawBone
+  id: saw-bone
   edge:
     to: abstract
     delay: 12
@@ -98,7 +98,7 @@
       bleedAmount: 2
 
 - type: abstractSurgeryEdge
-  id: clampBleeders
+  id: clamp-bleeders
   edge:
     to: abstract
     delay: 4
@@ -114,7 +114,7 @@
       bleedAmount: -2
 
 - type: abstractSurgeryEdge
-  id: sealWound
+  id: seal-wound
   edge:
     to: abstract
     delay: 4
