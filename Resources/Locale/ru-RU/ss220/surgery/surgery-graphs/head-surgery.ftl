@@ -2,6 +2,13 @@ surgery-head-complex-name = Нейрохирургия
 surgery-head-complex-description = Комплексная операция на голове. Позволяет сканировать и извлекать импланты, а также проводить глубокое вмешательство в мозг.
 surgery-head-examine-start = Пациент готов к операции на голове.
 
+surgery-head-start = Подготовка операции на голове
+head-skin-incision = Надрез на голове
+head-skin-clamp-bleeders = Остановить кровотечение
+retract-head-skin = Расширение разреза
+saw-skull-bone = Вскрытие черепа
+brain-exposed = Мозг открыт
+
 surgery-head-complex-inventory-requirement-description = У пациента должна быть открыта голова
 surgery-head-complex-inventory-requirement-failure = Вы не можете добраться до головы { THE($target) }!
 

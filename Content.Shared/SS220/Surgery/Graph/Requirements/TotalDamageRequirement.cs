@@ -17,7 +17,7 @@ public sealed partial class TotalDamageRequirement : SurgeryGraphRequirement
         if (!entityManager.TryGetComponent<DamageableComponent>(uid, out var damageableComponent))
             return false;
 
-        return !Invert && damageableComponent.TotalDamage > Damage;
+        return damageableComponent.TotalDamage > Damage;
     }
 
 }

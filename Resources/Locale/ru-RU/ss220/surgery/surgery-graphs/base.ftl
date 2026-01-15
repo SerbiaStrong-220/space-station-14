@@ -7,6 +7,9 @@ surgery-cant-be-cancelled = Вы не можете завершить опера
 
 surgery-start-ui-target = Начать операцию на {THE($target)}
 
+abstract = [абстракт]
+seal-wound = Зашивание надреза
+
 surgery-footer-right = Uup
 surgery-footer-idle = Ожидание выбора операции.
 surgery-footer-confirm = Нажмите ещё раз на операцию, чтобы подтвердить.

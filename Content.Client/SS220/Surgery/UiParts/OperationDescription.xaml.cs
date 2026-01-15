@@ -34,6 +34,7 @@ public sealed partial class OperationDescription : Control
     private const string EdgeTabulation = "  - ";
 
     private readonly LocId _nodeNameText = "operation-description-node-name-text";
+    private readonly LocId _edgeNameText = "operation-description-edge-to";
 
     public OperationDescription()
     {
@@ -91,7 +92,7 @@ public sealed partial class OperationDescription : Control
         foreach (var edge in node.Edges)
         {
             builder.Append(NodeTabulation);
-            builder.Append(Loc.GetString("operation-description-edge-to", ("to", edge.Target)));
+            builder.Append(Loc.GetString(_edgeNameText, ("to", Loc.GetString(edge.Target))));
             AddConditionInfo(edge, builder);
         }
 

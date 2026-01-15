@@ -29,10 +29,15 @@
   - node: head-skin-incision
     baseNode: incision
     edges:
+    - to: head-skin-clamp-bleeders
+      baseEdge: clamp-bleeders
+  - node: head-skin-clamp-bleeders
+    baseNode: clamp-bleeders
+    edges:
     - to: retract-head-skin
       baseEdge: retract-skin
-  - node: retract-skin
-    baseNode: retract-head-skin
+  - node: retract-head-skin
+    baseNode: retract-skin
     edges:
     # implant check
     - to: retract-head-skin

@@ -21,7 +21,7 @@
   start: start-torso-surgery
   end: seal-wound
   graph:
-  - node: start
+  - node: start-torso-surgery
     nodeText:
       examineDescription: surgery-torso-examine-start
       popup: surgery-torso-popup-start
@@ -32,6 +32,11 @@
   - node: torso-skin-incision
     baseNode: incision
     edges:
+    - to: torso-skin-clamp-bleeders
+      baseEdge: clamp-bleeders
+  - node: torso-skin-clamp-bleeders
+    baseNode: clamp-bleeders
+    edges:
     - to: retract-torso-skin
       baseEdge: retract-skin
   - node: retract-torso-skin
@@ -39,7 +44,7 @@
     edges:
     # heal wounds
     - to: retract-torso-skin
-      baseEdge: retract-torso-skin
+      baseEdge: retract-skin
       actions:
       - !type:ApplyDamageAction
         damage:
@@ -71,7 +76,7 @@
     - to: open-heart-incision
       baseEdge: incision
     # TOOD: better back
-    - to: retract-skin
+    - to: retract-torso-skin
       baseEdge: seal-wound
   - node: open-heart-incision
     baseNode: incision
