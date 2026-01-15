@@ -3,11 +3,13 @@
 using Content.Shared.SS220.ResourceMiner;
 using Robust.Client.GameObjects;
 
-namespace Content.Server.SS220.ResourceMiner;
+namespace Content.Client.SS220.ResourceMiner;
 
 public sealed class ResourceMinerSystem : EntitySystem
 {
     [Dependency] private readonly SpriteSystem _sprite = default!;
+
+    private const string BaseStatId = "base";
 
     public override void Initialize()
     {
@@ -18,9 +20,6 @@ public sealed class ResourceMinerSystem : EntitySystem
 
     private void OnAfterAutoHandleStateEvent(Entity<ResourceMinerComponent> entity, ref AfterAutoHandleStateEvent _)
     {
-        if (entity.Comp.Silo is null)
-            return;
-
-        _sprite.LayerSetRsiState(entity.Owner, 0, entity.Comp.TurnOnState);
+        _sprite.LayerSetRsiState(entity.Owner, 0, entity.Comp.Silo is null ? BaseStatId : entity.Comp.TurnOnState);
     }
 }

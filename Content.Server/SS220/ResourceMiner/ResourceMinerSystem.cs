@@ -78,7 +78,10 @@ public sealed class ResourceMinerSystem : EntitySystem
         if (!ValidateSilo(GetEntity(msg.Silo), entity))
             return;
 
-        entity.Comp.Silo = GetEntity(msg.Silo);
+        if (!TryGetEntity(msg.Silo, out var netSilo))
+            return;
+
+        entity.Comp.Silo = netSilo;
 
         _pointLight.SetColor(entity, entity.Comp.WorkingColor);
         _ambientSound.SetSound(entity, entity.Comp.WorkSound);

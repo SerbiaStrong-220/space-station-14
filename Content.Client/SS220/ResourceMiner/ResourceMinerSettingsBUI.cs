@@ -12,8 +12,6 @@ public sealed class ResourceMinerSettingsBUI(EntityUid owner, Enum uiKey) : Boun
     [ViewVariables]
     private ResourceMinerWindow? _window;
 
-    private Dictionary<ProtoId<MaterialPrototype>, int> _generationAmount = new();
-
     private NetEntity? _chosenSilo;
 
     protected override void Open()
