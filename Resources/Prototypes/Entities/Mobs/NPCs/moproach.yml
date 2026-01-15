@@ -14,12 +14,21 @@
     allowedEmotes: ['Chitter', 'Squeak']
   - type: MothAccent
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
-    - id: Galactic
-      canSpeak: false
     - id: Tkachi
       canSpeak: true
+    - id: Galactic
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Feline
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
   #SS220 languages tweaks end
   - type: Sprite
     sprite: Mobs/Animals/mothroach/moproach.rsi

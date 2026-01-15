@@ -5,7 +5,6 @@ using Content.Shared.EntityEffects;
 using Content.Shared.EntityEffects.Effects;
 using Content.Shared.Mind.Components;
 using Content.Shared.SS220.Language.Components;
-using Content.Shared.SS220.Language.Systems; //SS220 Language name constants
 
 namespace Content.Server.EntityEffects.Effects;
 
@@ -32,7 +31,7 @@ public sealed partial class MakeSentientEntityEffectSystem : EntityEffectSystem<
             // SS220-cognizine-language-fix-begin
             if (TryComp<LanguageComponent>(entity, out var languageComp))
             {
-                var definition = _language.EnsureLanguage((entity, languageComp), SharedLanguageSystem.GalacticLanguage);
+                var definition = _language.EnsureLanguage((entity, languageComp), _language.GalacticLanguage);
                 definition.CanSpeak = true;
                 Dirty(entity, languageComp);
             }

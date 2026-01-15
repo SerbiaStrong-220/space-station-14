@@ -13,7 +13,6 @@ using Content.Shared.SS220.Language.Components; // SS220-Add-Languages
 using Robust.Shared.Random;
 using System.Text;
 using Content.Server.SS220.Events;
-using Content.Shared.SS220.Language.Systems; //SS220 Language name constants
 
 namespace Content.Server.PAI;
 
@@ -135,7 +134,7 @@ public sealed class PAISystem : EntitySystem
         if (TryComp<LanguageComponent>(uid, out var languageComp))
         {
             _language.ClearLanguages((uid, languageComp));
-            _language.AddLanguages((uid, languageComp), [SharedLanguageSystem.UniversalLanguage, SharedLanguageSystem.GalacticLanguage], true);
+            _language.AddLanguages((uid, languageComp), [_language.UniversalLanguage, _language.GalacticLanguage], true);
         }
         // SS220-Add-Languages end
     }

@@ -510,12 +510,21 @@
   - type: MothAccent
   #SS220 languages tweaks begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
-    - id: Galactic
-      canSpeak: false
     - id: Tkachi
       canSpeak: true
+    - id: Galactic
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Feline
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
   #SS220 languages tweaks end
   - type: Sprite
     sprite: Mobs/Animals/mothroach/mothroach.rsi
@@ -1344,7 +1353,6 @@
   - type: Blindable #SS220 Fix Ancestor Mob Blindable
 #SS220 languages tweaks begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
     - id: Galactic
       canSpeak: false
@@ -1491,7 +1499,6 @@
     group: Monkey
 #SS220 Animalistic languages begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
     - id: Monkey
       canSpeak: true
@@ -1549,7 +1556,6 @@
     group: Monkey
 #SS220 Animalistic languages begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
     - id: Monkey
       canSpeak: true
@@ -1623,7 +1629,6 @@
     accent: kobold
 #SS220 Animalistic Languages begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
     - id: Reptilian
       canSpeak: true
@@ -1770,7 +1775,6 @@
       200: Dead
 #SS220 Animalistic languages fixes begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
     - id: Reptilian
       canSpeak: true
@@ -1828,7 +1832,6 @@
     prototype: Mouse
 #SS220 Animalistic Languages begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
     - id: Mousey
       canSpeak: true
@@ -3087,12 +3090,21 @@
   - type: MessyDrinker
     #SS220 Languages tweaks begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
     - id: Galactic
       canSpeak: false
     - id: Doggish
       canSpeak: true
+    - id: Mousey
+      canSpeak: false
+    - id: Feline
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
   #SS220 Languages tweaks end
 
 - type: entity
@@ -3223,7 +3235,6 @@
       state: cat
 #SS220 Animalistic Languages begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
     - id: Feline
       canSpeak: true
@@ -3347,11 +3358,20 @@
       state: syndicat
 #SS220 languages tweaks begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
     - id: Feline
       canSpeak: true
     - id: Galactic
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Feline
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Piggish
       canSpeak: false
 #SS220 languages tweaks end
   - type: DamageStateVisuals
@@ -3634,7 +3654,6 @@
     rules: ghost-role-information-nonantagonist-rules
     #SS220 Animalistic languages fix begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
     - id: Mousey
       canSpeak: true
@@ -3854,7 +3873,6 @@
     accent: pig
   #SS220 Animalistic languages begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
     - id: Piggish
       canSpeak: true

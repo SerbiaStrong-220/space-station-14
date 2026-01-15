@@ -45,7 +45,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
     /// </summary>
     private void OnMapInit(Entity<LanguageComponent> ent, ref MapInitEvent args)
     {
-        if (ent.Comp.SelectedLanguage == null)
+        if (ent.Comp.SelectedLanguage is not { } languageId || !CanSpeak(ent, languageId))
             TrySelectRandomLanguage(ent);
     }
 
