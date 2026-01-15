@@ -16,8 +16,12 @@
     Matchbox: 5
     PackPaperRollingFilters: 3
     CheapLighter: 4
-    Lighter: 2
-    FlippoLighter: 2
+    #SS220 zippo resprie start
+    Lighter: 3
+    FlippoLighter: 1 
+    ZippoLighterCopper: 1 
+    ZippoLighterBrass: 1 
+    #SS220 zippo resprie end
   contrabandInventory:
 #SS220 New_accesses_and_some_tweaks start
     CigPackWEH: 1
