@@ -56,18 +56,17 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
 
     private void OnAccentGet(EntityUid uid, LanguageComponent component, AccentGetEvent args)
     {
+        if (args.Cancelled)
+            return;
+
         var currentLangId = component.SelectedLanguage;
         if (currentLangId == null)
             return;
 
-        bool canSpeakThisLanguage = component.AvailableLanguages
-            .Any(def => def.Id == currentLangId && def.CanSpeak);
-
-        if (canSpeakThisLanguage)
+        if (CanSpeak(uid, currentLangId))
         {
             args.Cancel();
         }
-
     }
 
     #region Client

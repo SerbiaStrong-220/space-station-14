@@ -1520,7 +1520,7 @@
   - type: Speech
     speechSounds: Monkey
     speechVerb: Monkey
-  - type: MonkeyAccent
+  #- type: MonkeyAccent #SS220 Removed monkey accent as it overlaps with language system
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-primate
   - type: AlwaysRevolutionaryConvertible
@@ -1579,7 +1579,7 @@
   - type: Speech
     speechSounds: Monkey
     speechVerb: Monkey
-  - type: MonkeyAccent
+  #- type: MonkeyAccent #SS220 Removed monkey accent as it overlaps with language system
   - type: NpcFactionMember
     factions:
     - Syndicate

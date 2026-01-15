@@ -1241,10 +1241,10 @@
   #SS220 languages revive begin
   - type: Language
     availableLanguages:
-    - id: Galactic
-      canSpeak: false
     - id: Bubblish
       canSpeak: true
+    - id: Galactic
+      canSpeak: false
     - id: Feline
       canSpeak: false
     - id: Monkey

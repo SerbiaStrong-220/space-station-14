@@ -40,7 +40,7 @@ namespace Content.Server.Speech.EntitySystems
         {
             //SS220 Language tweak begin
             if (args.Cancelled)
-            return;
+                return;
             //SS220 Language tweak end
 
             args.Message = ApplyReplacements(args.Message, component.Accent);
