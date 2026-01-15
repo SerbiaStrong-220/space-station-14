@@ -391,12 +391,7 @@ public abstract partial class SharedMindSystem : EntitySystem
     /// <returns>Returns true if adding the objective succeeded.</returns>
     public bool TryAddObjective(EntityUid mindId, MindComponent mind, string proto, bool force = false)
     {
-        var objective = _objectives.TryCreateObjective(mindId, mind, proto, force);
-        if (objective == null)
-            return false;
-
-        AddObjective(mindId, mind, objective.Value);
-        return true;
+        return TryAddObjective(mindId, mind, proto, out _, force);
     }
 
     public bool TryAddObjective(EntityUid mindId, MindComponent mind, string proto, out EntityUid? objective, bool force = false)

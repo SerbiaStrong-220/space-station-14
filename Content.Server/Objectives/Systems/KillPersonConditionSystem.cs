@@ -36,13 +36,13 @@ public sealed class KillPersonConditionSystem : EntitySystem
     private float GetProgress(EntityUid target, bool requireDead, bool requireMaroon)
     {
         // ss220 add custom antag goals start
-        EntityUid? mind = null;
+        EntityUid? mindCharacter = null;
 
         // deleted or gibbed or something, counts as dead
         if (TryComp<MindComponent>(target, out var mindComp) && mindComp.OwnedEntity != null)
-            mind = mindComp.OwnedEntity.Value;
+            mindCharacter = mindComp.OwnedEntity.Value;
 
-        var targetEnt = mind ?? target;
+        var targetEnt = mindCharacter ?? target;
 
         var targetDead = _mind.IsCharacterDeadIc(targetEnt);
         var targetMarooned =

@@ -179,15 +179,6 @@ public sealed class StealConditionSystem : EntitySystem
 
     private void CheckEntity(EntityUid entity, StealConditionComponent condition, ref Stack<ContainerManagerComponent> containerStack, ref int counter)
     {
-        // ss220 add custom antag goals start
-        if (entity == condition.StealTarget)
-            counter++;
-
-        var proto = Prototype(entity);
-        if (proto != null && proto == condition.StealTargetProto)
-            counter++;
-        // ss220 add custom antag goals end
-
         // check if this is the item
         counter += CheckStealTarget(entity, condition);
 

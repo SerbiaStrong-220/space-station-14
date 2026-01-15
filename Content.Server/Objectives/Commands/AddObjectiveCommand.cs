@@ -36,6 +36,14 @@ public sealed class AddObjectiveCommand : LocalizedEntityCommands
         // }
         // ss220 add custom antag goals end
 
+        // ss220 add custom antag goals start
+        if (args.Length < 2)
+        {
+            shell.WriteError(Loc.GetString(Loc.GetString("cmd-addobjective-invalid-args")));
+            return;
+        }
+        // ss220 add custom antag goals end
+
         if (!_players.TryGetSessionByUsername(args[0], out var data))
         {
             shell.WriteError(Loc.GetString("cmd-addobjective-player-not-found"));
