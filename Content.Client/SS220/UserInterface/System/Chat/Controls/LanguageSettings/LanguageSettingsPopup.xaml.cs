@@ -48,7 +48,6 @@ public sealed partial class LanguageSettingsPopup : Popup
 
             availableLanguages.Add(language);
         }
-
         UpdateLanguageContainer(availableLanguages);
 
         if (comp.SelectedLanguage is { } selectedLanguageId)
