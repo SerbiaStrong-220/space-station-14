@@ -12,4 +12,10 @@ code_review:
     include_drafts: false
 ignore_patterns:
 - '**/*.png'
+- '**/*.jpg'
 - '**/*.ogg'
+- '**/*.mp3'
+- '**/*.wav'
+- 'RobustToolbox/**'
+- '**/Migrations/**'
+- 'Resources/Maps/**/*.yml'
