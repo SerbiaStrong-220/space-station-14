@@ -1,0 +1,83 @@
+- type: entity
+  parent: MarkerBase
+  id: SpawnBorgDerelictGhostRole
+  name: the spawner derelict cyborg
+  suffix: Battery, Module
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - PlayerBorgDerelictGhostRole
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnEngineeringBorgDerelict
+  name: the spawner derelict engineer cyborg
+  suffix: Battery, Module
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - PlayerEngineeringBorgDerelictGhostRole
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnJanitorBorgDerelictGhostRole
+  name: the spawner derelict janitor cyborg
+  suffix: Battery, Module
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - PlayerJanitorBorgDerelictGhostRole
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMedicalBorgDerelictGhostRole
+  name: the spawner derelict medical cyborg
+  suffix: Battery, Module
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - PlayerMedicalBorgDerelictGhostRole
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMiningBorgDerelictGhostRole
+  name: the spawner derelict salvage cyborg
+  suffix: Battery, Module
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - PlayerMiningBorgDerelictGhostRole
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnBorgSyndicateDerelictGhostRole
+  name: the spawner derelict syndicate assault cyborg
+  suffix: Battery, Module
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - PlayerBorgSyndicateDerelictGhostRole

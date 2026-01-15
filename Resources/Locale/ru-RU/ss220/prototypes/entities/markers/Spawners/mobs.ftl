@@ -14,5 +14,6 @@ ent-SpawnMobCrocodileSpaceSalvage = спавнер космического кр
     .suffix = Обломки
 ent-SpawnMobAlbinoCrocodile = спавнер Альбино
     .desc = { ent-MarkerBase.desc }
-ent-SpawnMobPossumPoppy = спавнер опоссум Поппи
+ent-SpawnMobPossumPoppy = спавнер Поппи
     .desc = { ent-MarkerBase.desc }
+    .suffix = AI
