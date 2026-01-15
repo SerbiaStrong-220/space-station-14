@@ -2769,6 +2769,14 @@
     damage:
       types:
         Piercing: 6
+  #SS220 Languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: SpiderTongue
+      canSpeak: true
+    - id: Arati
+      canSpeak: false
+  #SS220 Languages tweaks end
 
 - type: entity
   parent:
@@ -2823,6 +2831,12 @@
     - type: Bloodstream
       bloodMaxVolume: 150
       bloodReagent: Laughter
+  #SS220 Languages tweaks begin
+    - type: Language
+      availableLanguages:
+      - id: Clownish
+        canSpeak: true
+  #SS220 Languages tweaks end
 
 - type: entity
   name: wizard spider
