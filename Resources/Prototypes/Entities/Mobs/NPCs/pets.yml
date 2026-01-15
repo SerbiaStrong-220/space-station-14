@@ -9,7 +9,6 @@
   components:
   #SS220 languages revive begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
   #SS220 Animalistic languages fix begin
     - id: Doggish
@@ -80,7 +79,6 @@
   components:
   #SS220 languages revive begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
   #SS220 Animalistic languages fix begin
     - id: Doggish
@@ -126,7 +124,6 @@
   components:
   #SS220 languages revive begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
   #SS220 Animalistic languages fix begin
     - id: Doggish
@@ -211,7 +208,6 @@
       gender: male
   #SS220 languages revive begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
   #SS220 Animalistic languages fix begin
     - id: Doggish
@@ -269,7 +265,6 @@
       task: SimpleHostileCompound
   #SS220 languages revive begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
   #SS220 Animalistic languages fix begin
     - id: Feline
@@ -314,7 +309,6 @@
       gender: male
   #SS220 languages revive begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
   #SS220 Animalistic languages fix begin
     - id: Feline
@@ -362,7 +356,6 @@
       gender: male
   #SS220 languages revive begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
   #SS220 Animalistic languages fix begin
     - id: Feline
@@ -400,7 +393,6 @@
       gender: male
   #SS220 languages revive begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
   #SS220 Animalistic languages fix begin
     - id: Feline
@@ -445,7 +437,6 @@
     #SS220 Add lying down on entity end
   #SS220 languages revive begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
   #SS220 Animalistic languages fix begin
     - id: Feline
@@ -541,7 +532,6 @@
     - map: [ "eyes" ]
   #SS220 languages revive begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
   #SS220 Animalistic languages begin
     - id: Doggish
@@ -648,7 +638,6 @@
         Base: paperwork_dead
   #SS220 languages revive begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
     - id: Galactic
       canSpeak: false
@@ -695,7 +684,6 @@
       state: walter
   #SS220 languages revive begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
   #SS220 Animalistic languages fix begin
     - id: Doggish
@@ -786,7 +774,6 @@
       gender: male
   #SS220 languages revive begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
     - id: Galactic
       canSpeak: false
@@ -843,7 +830,6 @@
       gender: female
   #SS220 languages revive begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
     - id: Galactic
       canSpeak: false
@@ -894,7 +880,6 @@
       gender: female
   #SS220 languages revive begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
     - id: Galactic
       canSpeak: false
@@ -939,7 +924,6 @@
       gender: male
   #SS220 languages revive begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
   ##SS220 Animalistic languages fix begin
     - id: Piggish
@@ -984,7 +968,6 @@
       amount: 1
   #SS220 languages revive begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
     - id: Galactic
       canSpeak: false
@@ -1037,7 +1020,6 @@
         state: hamster-0
   #SS220 languages revive begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
   #SS220 Animalistic languages fix begin
     - id: Mousey
@@ -1121,7 +1103,6 @@
       path: /Audio/Animals/snake_hiss.ogg
   #SS220 languages revive begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
   #SS220 Animalistic languages fix begin
     - id: SpiderTongue
@@ -1215,7 +1196,6 @@
       gender: female
   #SS220 languages revive begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
     - id: Galactic
       canSpeak: false
@@ -1260,7 +1240,6 @@
     - map: [ "head" ]
   #SS220 languages revive begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
     - id: Galactic
       canSpeak: false
@@ -1362,7 +1341,6 @@
   - type: GhostTakeoverAvailable
   #SS220 languages revive begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
   #SS220 Animalistic languages fix begin
     - id: Monkey
@@ -1424,7 +1402,6 @@
     - CannotSuicide
   #SS220 languages revive begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
     - id: Galactic
       canSpeak: false
@@ -1469,7 +1446,6 @@
         - MobLayer
   #SS220 languages revive begin
   - type: Language
-    selectedLanguage: Galactic
     availableLanguages:
   #SS220 Animalistic languages fix begin
     - id: Feline
