@@ -22,11 +22,11 @@ public sealed partial class TeleportationChasmFallingComponent : Component
     ///     Time it should take in seconds for the entity to actually delete
     /// </summary>
     [DataField]
-    public TimeSpan DeletionTime = TimeSpan.FromSeconds(1.8f);
+    public TimeSpan TeleportationTime = TimeSpan.FromSeconds(1.8f);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     [AutoPausedField]
-    public TimeSpan NextDeletionTime = TimeSpan.Zero;
+    public TimeSpan NextTeleportationTime = TimeSpan.Zero;
 
     /// <summary>
     ///     Original scale of the object so it can be restored if the component is removed in the middle of the animation
@@ -37,4 +37,9 @@ public sealed partial class TeleportationChasmFallingComponent : Component
     ///     Scale that the animation should bring entities to.
     /// </summary>
     public Vector2 AnimationScale = new(0.01f, 0.01f);
+
+    /// <summary>
+    ///     Deletes the entity instead of teleporting it.
+    /// </summary>
+    public bool ShouldBeDeleted = false;
 }

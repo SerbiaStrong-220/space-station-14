@@ -331,6 +331,10 @@
         Piercing: 0.80
         Radiation: 0.7
         Caustic: 0.8  #SS220-MinorTweaks end
+  #ss220 brigmedic hardsuit virus resistance begin
+  - type: ZombificationResistance
+    zombificationResistanceCoefficient: 0.5
+  #ss220 brigmedic hardsuit virus resistance end
   # SS220 add stamina resistance begin
   - type: StaminaResistance
     damageCoefficient: 0.8
