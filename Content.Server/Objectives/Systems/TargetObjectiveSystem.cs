@@ -68,13 +68,21 @@ public sealed class TargetObjectiveSystem : EntitySystem
 
     private string GetTitle(EntityUid target, string title)
     {
-        var targetName = "Unknown";
+        string targetName; // ss220 add custom antag goals
         if (TryComp<MindComponent>(target, out var mind) && mind.CharacterName != null)
         {
             targetName = mind.CharacterName;
         }
+        // ss220 add custom antag goals start
+        else
+        {
+            targetName = Name(target);
+        }
 
-        var jobName = _job.MindTryGetJobName(target);
+        if (!HasComp<MindComponent>(target) || !_job.MindTryGetJobName(target, out var jobName))
+            jobName = Loc.GetString("job-name-unknown");
+        // ss220 add custom antag goals end
+
         return Loc.GetString(title, ("targetName", targetName), ("job", jobName));
     }
 
