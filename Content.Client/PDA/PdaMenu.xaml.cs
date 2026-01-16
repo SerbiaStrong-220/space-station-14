@@ -208,7 +208,6 @@ namespace Content.Client.PDA
                 {
                     AccessContainer.Visible = true;
 
-                    var listOfAccess = new List<AccessLevelPrototype>();
                     foreach (var tag in access.Tags)
                     {
                         var proto = _proto.Index<AccessLevelPrototype>(tag.Id);
@@ -216,7 +215,6 @@ namespace Content.Client.PDA
                         if (!proto.ShowInPda)
                             continue;
 
-                        listOfAccess.Add(proto);
                         var accessLabel = new Label
                         {
                             Text = proto.GetAccessLevelName(),
