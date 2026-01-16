@@ -5,14 +5,14 @@ using Content.Server.SS220.Objectives.Systems;
 namespace Content.Server.SS220.Objectives.Components;
 
 /// <summary>
-/// Handle progress of summoning
+/// Target for cultist recruitment
 /// </summary>
-[RegisterComponent, Access(typeof(CultYoggSummonConditionSystem))]
-public sealed partial class CultYoggSummonConditionComponent : Component
+[RegisterComponent, Access(typeof(CultYoggEnslaveConditionSystem))]
+public sealed partial class CultYoggEnslaveConditionComponent : Component
 {
     /// <summary>
-    /// Amount of sacrafices required to summon a god
+    /// The number of cultists and Mi-Gos required for progression
     /// </summary>
     [DataField]
-    public int ReqSacrAmount = 1;
+    public int ReqCultFactionAmount = 6;
 }
