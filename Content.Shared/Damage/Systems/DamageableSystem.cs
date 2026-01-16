@@ -14,7 +14,6 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-using Content.Shared.FixedPoint;//SS220 armor piercing added
 
 namespace Content.Shared.Damage
 {

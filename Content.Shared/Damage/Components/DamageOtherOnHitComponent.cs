@@ -1,5 +1,4 @@
 using Content.Shared.Damage.Systems;
-using Content.Shared.FixedPoint;
 using Content.Shared.SS220.ItemToggle;
 
 namespace Content.Shared.Damage.Components;

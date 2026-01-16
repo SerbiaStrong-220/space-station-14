@@ -2,7 +2,6 @@ using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
-using Content.Shared.SS220.ArmorBlock;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -152,13 +151,6 @@ public sealed partial class MeleeWeaponComponent : Component
     [DataField, AutoNetworkedField]
     public bool MustBeEquippedToUse = false;
 
-    //SS220 armour piercing field added begin
-    /// <summary>
-    ///     States how much of armor from <see cref="ArmorBlockComponent"> will be ignored 
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public FixedPoint2 ArmourPiercing = FixedPoint2.Zero;
-    //SS220 armour piercing field added end
 }
 
 /// <summary>
