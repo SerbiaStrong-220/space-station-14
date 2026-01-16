@@ -7,10 +7,10 @@
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:
-      - state: green
+    - state: green
   - type: RandomSpawner
     prototypes:
-      - PlayerBorgDerelictGhostRole
+    - PlayerBorgDerelictGhostRole
     chance: 0.5
   placement:
     mode: AlignTileAny
@@ -21,14 +21,14 @@
   suffix: 10% chance
   parent: MarkerBase
   components:
-    - type: Sprite
-      sprite: Markers/jobs.rsi
-      layers:
-        - state: green
-    - type: RandomSpawner
-      prototypes:
-        - PlayerBorgDerelictGhostRole
-      chance: 0.1
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: RandomSpawner
+    prototypes:
+    - PlayerBorgDerelictGhostRole
+    chance: 0.1
   placement:
     mode: AlignTileAny
 
@@ -38,14 +38,14 @@
   suffix: 50% chance
   parent: MarkerBase
   components:
-    - type: Sprite
-      sprite: Markers/jobs.rsi
-      layers:
-        - state: green
-    - type: RandomSpawner
-      prototypes:
-        - PlayerEngineeringBorgDerelictGhostRole
-      chance: 0.5
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: RandomSpawner
+    prototypes:
+    - PlayerEngineeringBorgDerelictGhostRole
+    chance: 0.5
   placement:
     mode: AlignTileAny
 
@@ -55,14 +55,14 @@
   suffix: 10% chance
   parent: MarkerBase
   components:
-    - type: Sprite
-      sprite: Markers/jobs.rsi
-      layers:
-        - state: green
-    - type: RandomSpawner
-      prototypes:
-        - PlayerEngineeringBorgDerelictGhostRole
-      chance: 0.1
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: RandomSpawner
+    prototypes:
+    - PlayerEngineeringBorgDerelictGhostRole
+    chance: 0.1
   placement:
     mode: AlignTileAny
 
@@ -72,14 +72,14 @@
   suffix: 50% chance
   parent: MarkerBase
   components:
-    - type: Sprite
-      sprite: Markers/jobs.rsi
-      layers:
-        - state: green
-    - type: RandomSpawner
-      prototypes:
-        - PlayerJanitorBorgDerelictGhostRole
-      chance: 0.5
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: RandomSpawner
+    prototypes:
+    - PlayerJanitorBorgDerelictGhostRole
+    chance: 0.5
   placement:
     mode: AlignTileAny
 
@@ -89,14 +89,14 @@
   suffix: 10% chance
   parent: MarkerBase
   components:
-    - type: Sprite
-      sprite: Markers/jobs.rsi
-      layers:
-        - state: green
-    - type: RandomSpawner
-      prototypes:
-        - PlayerJanitorBorgDerelictGhostRole
-      chance: 0.1
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: RandomSpawner
+    prototypes:
+    - PlayerJanitorBorgDerelictGhostRole
+    chance: 0.1
   placement:
     mode: AlignTileAny
 
@@ -106,14 +106,14 @@
   suffix: 50% chance
   parent: MarkerBase
   components:
-    - type: Sprite
-      sprite: Markers/jobs.rsi
-      layers:
-        - state: green
-    - type: RandomSpawner
-      prototypes:
-        - PlayerMedicalBorgDerelictGhostRole
-      chance: 0.5
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: RandomSpawner
+    prototypes:
+    - PlayerMedicalBorgDerelictGhostRole
+    chance: 0.5
   placement:
     mode: AlignTileAny
 
@@ -123,14 +123,14 @@
   suffix: 10% chance
   parent: MarkerBase
   components:
-    - type: Sprite
-      sprite: Markers/jobs.rsi
-      layers:
-        - state: green
-    - type: RandomSpawner
-      prototypes:
-        - PlayerMedicalBorgDerelictGhostRole
-      chance: 0.1
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+      - state: green
+  - type: RandomSpawner
+    prototypes:
+    - PlayerMedicalBorgDerelictGhostRole
+    chance: 0.1
   placement:
     mode: AlignTileAny
 
@@ -140,14 +140,14 @@
   suffix: 50% chance
   parent: MarkerBase
   components:
-    - type: Sprite
-      sprite: Markers/jobs.rsi
-      layers:
-        - state: green
-    - type: RandomSpawner
-      prototypes:
-        - PlayerMiningBorgDerelictGhostRole
-      chance: 0.5
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: RandomSpawner
+    prototypes:
+    - PlayerMiningBorgDerelictGhostRole
+    chance: 0.5
   placement:
     mode: AlignTileAny
 
@@ -157,14 +157,14 @@
   suffix: 10% chance
   parent: MarkerBase
   components:
-    - type: Sprite
-      sprite: Markers/jobs.rsi
-      layers:
-        - state: green
-    - type: RandomSpawner
-      prototypes:
-        - PlayerMiningBorgDerelictGhostRole
-      chance: 0.1
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: RandomSpawner
+    prototypes:
+    - PlayerMiningBorgDerelictGhostRole
+    chance: 0.1
   placement:
     mode: AlignTileAny
 
@@ -175,14 +175,14 @@
   suffix: 50% chance
   parent: MarkerBase
   components:
-    - type: Sprite
-      sprite: Markers/jobs.rsi
-      layers:
-        - state: green
-    - type: RandomSpawner
-      prototypes:
-        - PlayerBorgSyndicateDerelictGhostRole
-      chance: 0.5
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: RandomSpawner
+    prototypes:
+    - PlayerBorgSyndicateDerelictGhostRole
+    chance: 0.5
   placement:
     mode: AlignTileAny
 
@@ -192,13 +192,13 @@
   suffix: 10% chance
   parent: MarkerBase
   components:
-    - type: Sprite
-      sprite: Markers/jobs.rsi
-      layers:
-        - state: green
-    - type: RandomSpawner
-      prototypes:
-        - PlayerBorgSyndicateDerelictGhostRole
-      chance: 0.1
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: RandomSpawner
+    prototypes:
+    - PlayerBorgSyndicateDerelictGhostRole
+    chance: 0.1
   placement:
     mode: AlignTileAny
