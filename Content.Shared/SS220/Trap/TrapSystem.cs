@@ -218,17 +218,14 @@ public sealed class TrapSystem : EntitySystem
         UpdateVisuals(uid, trapComp);
 
         if (newState == TrapArmedState.Armed)
-            _transformSystem.AnchorEntity(uid);
-        else
-            _transformSystem.Unanchor(uid);
-
-        if (newState == TrapArmedState.Armed)
         {
+            _transformSystem.AnchorEntity(uid);
             var armedEvent = new TrapArmedEvent();
             RaiseLocalEvent(uid, ref armedEvent);
         }
         else
         {
+            _transformSystem.Unanchor(uid);
             var defusedEvent = new TrapDefusedEvent();
             RaiseLocalEvent(uid, ref defusedEvent);
         }
