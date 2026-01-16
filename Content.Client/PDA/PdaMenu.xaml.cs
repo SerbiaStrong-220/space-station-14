@@ -36,52 +36,6 @@ namespace Content.Client.PDA
         public const int SettingsView = 2;
         public const int ProgramContentView = 3;
 
-        // ss220 add additional info for pda start
-        // im really need this shit
-        private readonly List<ProtoId<AccessLevelPrototype>> _accessLevels = new()
-        {
-            "Armory",
-            "Atmospherics",
-            "Bar",
-            "Brig",
-            "Blueshield",
-            "Detective",
-            "Captain",
-            "Cargo",
-            "Chapel",
-            "Chemistry",
-            "ChiefEngineer",
-            "ChiefMedicalOfficer",
-            "Paramedic",
-            "Command",
-            "Cryogenics",
-            "Clown",
-            "Engineering",
-            "External",
-            "HeadOfPersonnel",
-            "HeadOfSecurity",
-            "Hydroponics",
-            "Janitor",
-            "Kitchen",
-            "Lawyer",
-            "Librarian",
-            "Maintenance",
-            "Medical",
-            "Psychologist",
-            "Quartermaster",
-            "Research",
-            "ResearchDirector",
-            "Reporter",
-            "Salvage",
-            "Security",
-            "Service",
-            "Theatre",
-            "Magistrate",
-            "Mime",
-            "Musician",
-        };
-        // ss220 add additional info for pda end
-
         private string _pdaOwner = Loc.GetString("comp-pda-ui-unknown");
         private string _owner = Loc.GetString("comp-pda-ui-unknown");
         private string _jobTitle = Loc.GetString("comp-pda-ui-unassigned");
@@ -254,13 +208,15 @@ namespace Content.Client.PDA
                 {
                     AccessContainer.Visible = true;
 
+                    var listOfAccess = new List<AccessLevelPrototype>();
                     foreach (var tag in access.Tags)
                     {
                         var proto = _proto.Index<AccessLevelPrototype>(tag.Id);
 
-                        if (!_accessLevels.Contains(proto))
+                        if (!proto.ShowInPda)
                             continue;
 
+                        listOfAccess.Add(proto);
                         var accessLabel = new Label
                         {
                             Text = proto.GetAccessLevelName(),
