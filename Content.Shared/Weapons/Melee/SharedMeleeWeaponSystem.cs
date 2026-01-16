@@ -721,7 +721,6 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
                     AdminLogger.Add(LogType.MeleeHit, LogImpact.High,
                     $"{ToPrettyString(user):actor} melee attacked (heavy) {ToPrettyString(entity):actor}");
                     targetseffectonly.Add(entity);
-                    PopupSystem.PopupEntity(Loc.GetString("block-shot"), entity);
                     continue;
                 }
                 targets.Add(entity);

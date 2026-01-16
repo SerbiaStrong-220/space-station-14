@@ -16,6 +16,7 @@ using Content.Shared.SS220.Weapons.Melee.Events;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Containers;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Network;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -110,6 +111,11 @@ public sealed partial class AltBlockingSystem : EntitySystem
             {
                 if (_random.Prob(shield.ActiveMeleeBlockProb))
                 {
+                    if(_net.IsServer)
+                    {
+                        _audio.PlayPvs(shield.BlockSound, (EntityUid)item);
+                        _popupSystem.PopupEntity(Loc.GetString("block-shot"), ent.Owner);
+                    }
                     args.CancelledHit = true;
                     args.blocker = netEnt;
                     ChangeSeed(ent);
@@ -120,6 +126,11 @@ public sealed partial class AltBlockingSystem : EntitySystem
             {
                 if (_random.Prob(shield.MeleeBlockProb))
                 {
+                    if (_net.IsServer)
+                    {
+                        _audio.PlayPvs(shield.BlockSound, (EntityUid)item);
+                        _popupSystem.PopupEntity(Loc.GetString("block-shot"), ent.Owner);
+                    }
                     args.CancelledHit = true;
                     args.blocker = netEnt;
                     ChangeSeed(ent);
