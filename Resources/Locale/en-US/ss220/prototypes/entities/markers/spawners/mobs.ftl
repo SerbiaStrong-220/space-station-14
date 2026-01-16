@@ -1,4 +1,4 @@
-ent-SpawnMobPossumPoppy = spawner { ent-MobPossumMorty }
+ent-SpawnMobPossumPoppy = spawner { ent-MobPossumPoppy }
     .desc = { ent-MarkerBase.desc }
 ent-SpawnMobMouseCancer = spawner { ent-MobMouseCancer }
     .desc = { ent-MarkerBase.desc }

@@ -126,7 +126,7 @@
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:
-      - state: green
+    - state: green
   - type: RandomSpawner
     prototypes:
     - PlayerMedicalBorgDerelictGhostRole
