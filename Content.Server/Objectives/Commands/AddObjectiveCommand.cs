@@ -1,8 +1,10 @@
 ﻿using System.Linq;
 using Content.Server.Administration;
+using Content.Server.Chat.Managers;
 using Content.Server.Objectives.Components;
 using Content.Server.Objectives.Systems;
 using Content.Shared.Administration;
+using Content.Shared.Chat;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Prototypes;
@@ -22,6 +24,7 @@ public sealed class AddObjectiveCommand : LocalizedEntityCommands
     // ss220 add custom antag goals start
     [Dependency] private readonly TargetObjectiveSystem _targetObjective = default!;
     [Dependency] private readonly StealConditionSystem _steal = default!;
+    [Dependency] private readonly IChatManager _chatManager = default!;
     // ss220 add custom antag goals end
 
     public override string Command => "addobjective";
@@ -101,8 +104,8 @@ public sealed class AddObjectiveCommand : LocalizedEntityCommands
             else
             {
                 _mind.TryRemoveObjective(mindId, mind, objective.Value);
+                return;
             }
-            return;
         }
 
         if (EntityManager.TryGetComponent<StealConditionComponent>(objective, out var stealCondition))
@@ -111,7 +114,13 @@ public sealed class AddObjectiveCommand : LocalizedEntityCommands
                 _steal.SetStealTarget(targetEnt.Value, (objective.Value, stealCondition));
             else if (targetEntProto != null)
                 _steal.SetStealTarget(targetEntProto, (objective.Value, stealCondition));
+            else
+                return;
         }
+
+        var msg = Loc.GetString("ui-add-objective-chat-manager-announce");
+        var wrappedMessage = Loc.GetString("chat-manager-server-wrap-message", ("message", msg));
+        _chatManager.ChatMessageToOne(ChatChannel.Server, msg, wrappedMessage, default, false, data.Channel, colorOverride: Color.Red);
         // ss220 add custom antag goals end
     }
 
