@@ -35,7 +35,7 @@ public sealed partial class TrapComponent : Component
     /// <summary>
     /// Is trap ready?
     /// </summary>
-    [AutoNetwordField]
+    [AutoNetworkedField]
     [DataField, ViewVariables(VVAccess.ReadOnly)]
     public TrapArmedState State = TrapArmedState.Unarmed;
 
