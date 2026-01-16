@@ -22,45 +22,45 @@ public sealed partial class ChangeAppearanceOnActiveBlockingSystem : EntitySyste
         SubscribeLocalEvent<ChangeAppearanceOnActiveBlockingComponent, GetInhandVisualsEvent>(OnGetHeldVisuals);
     }
 
-    public void OnAppearanceChange(Entity<ChangeAppearanceOnActiveBlockingComponent> ent, ref AppearanceChangeEvent args)
+    public void OnAppearanceChange(EntityUid uid, ChangeAppearanceOnActiveBlockingComponent component, ref AppearanceChangeEvent args)
     {
-        if (!TryComp<AppearanceComponent>(ent.Owner, out var AppearanceComp))
+        if (!TryComp<AppearanceComponent>(uid, out var AppearanceComp))
             return;
 
-        if (!TryComp<SpriteComponent>(ent.Owner, out var SpriteComp))
+        if (!TryComp<SpriteComponent>(uid, out var SpriteComp))
             return;
 
-        if (!_appearanceSystem.TryGetData<bool>(ent.Owner, ActiveBlockingVisuals.Enabled, out var enabled, args.Component))
+        if (!_appearanceSystem.TryGetData<bool>(uid, ActiveBlockingVisuals.Enabled, out var enabled, args.Component))
             return;
 
         var modulateColor =
-            _appearanceSystem.TryGetData<Color>(ent.Owner, ToggleableVisuals.Color, out var color, args.Component);
+            _appearanceSystem.TryGetData<Color>(uid, ToggleableVisuals.Color, out var color, args.Component);
 
-        if (args.Sprite != null && ent.Comp.SpriteLayer != null &&
-            _spriteSystem.LayerMapTryGet((ent.Owner, SpriteComp), ent.Comp.SpriteLayer, out var layer, false))
+        if (args.Sprite != null && component.SpriteLayer != null &&
+            _spriteSystem.LayerMapTryGet((uid, SpriteComp), component.SpriteLayer, out var layer, false))
         {
-            _spriteSystem.LayerSetVisible((ent.Owner, SpriteComp), layer, enabled);
+            _spriteSystem.LayerSetVisible((uid, SpriteComp), layer, enabled);
 
             if (modulateColor)
-                _spriteSystem.LayerSetColor((ent.Owner, SpriteComp), ent.Comp.SpriteLayer, color);
+                _spriteSystem.LayerSetColor((uid, SpriteComp), component.SpriteLayer, color);
         }
 
-        _item.VisualsChanged(ent.Owner);
+        _item.VisualsChanged(uid);
     }
 
-    private void OnGetHeldVisuals(Entity<ChangeAppearanceOnActiveBlockingComponent> ent, ref GetInhandVisualsEvent args)
+    private void OnGetHeldVisuals(EntityUid uid, ChangeAppearanceOnActiveBlockingComponent component, GetInhandVisualsEvent args)
     {
-        if (!TryComp(ent.Owner, out AppearanceComponent? appearance))
+        if (!TryComp(uid, out AppearanceComponent? appearance))
             return;
 
-        if(!_appearanceSystem.TryGetData<bool>(ent.Owner, ActiveBlockingVisuals.Enabled, out var enabled, appearance)
+        if(!_appearanceSystem.TryGetData<bool>(uid, ActiveBlockingVisuals.Enabled, out var enabled, appearance)
             || !enabled)
             return;
 
-        if (!ent.Comp.InhandVisuals.TryGetValue(args.Location, out var layers))
+        if (!component.InhandVisuals.TryGetValue(args.Location, out var layers))
             return;
 
-        var modulateColor = _appearanceSystem.TryGetData<Color>(ent.Owner, ToggleableVisuals.Color, out var color, appearance);
+        var modulateColor = _appearanceSystem.TryGetData<Color>(uid, ToggleableVisuals.Color, out var color, appearance);
 
         var i = 0;
         var defaultKey = $"inhand-{args.Location.ToString().ToLowerInvariant()}-toggle";
