@@ -44,6 +44,7 @@
     tags:
     - WhitelistChameleon
     - Backpack
+  - type: DragDropContainerTransfer #ss220 add drag drop container
 
 - type: entity
   parent: ClothingBackpack

@@ -46,7 +46,7 @@ public abstract partial class SharedCultYoggAltarSystem : EntitySystem
         if (!HasComp<CultYoggSacrificialComponent>(args.Buckle))
         {
             args.Cancelled = true;
-            _popup.PopupClient (Loc.GetString("cult-yogg-buckle-attempt", ("user", args.Buckle)),
+            _popup.PopupClient(Loc.GetString("cult-yogg-buckle-attempt", ("user", args.Buckle)),
                  args.Buckle, args.User.Value, PopupType.SmallCaution);
         }
 

@@ -68,7 +68,7 @@
         path: /Audio/Animals/ferret_happy.ogg
     - type: Speech
       speechSounds: Monkey
-    - type: MonkeyAccent
+    #- type: MonkeyAccent #SS220 Removed monkey accent as it overlaps with language system
     - type: Tag
       tags:
         - CannotSuicide

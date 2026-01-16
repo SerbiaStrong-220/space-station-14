@@ -12,6 +12,7 @@
     - Write
     - WriteIgnoreStamps
     - Pickaxe
+    - Pen
   - type: Sprite
     sprite: SS220/Objects/Misc/pen.rsi
     state: pen_centcom

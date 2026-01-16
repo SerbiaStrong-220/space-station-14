@@ -21,7 +21,16 @@
   components:
   - type: Objective
     icon:
-      sprite: Objects/Weapons/Guns/Pistols/viper.rsi #need to chose an icon for this
-      state: icon
+      sprite: SS220/Structures/CultYogg/altar.rsi
+      state: cultaltar
   - type: CultYoggSummonCondition
 
+- type: entity
+  parent: BaseCultYoggObjective
+  id: CultYoggEnslaveObjective
+  components:
+  - type: Objective
+    icon:
+      sprite: SS220/Objects/CultYogg/migomycete.rsi
+      state: produce
+  - type: CultYoggEnslaveCondition

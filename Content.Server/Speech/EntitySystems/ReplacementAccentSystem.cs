@@ -38,6 +38,11 @@ namespace Content.Server.Speech.EntitySystems
 
         private void OnAccent(EntityUid uid, ReplacementAccentComponent component, AccentGetEvent args)
         {
+            //SS220 Language tweak begin
+            if (args.Cancelled)
+                return;
+            //SS220 Language tweak end
+
             args.Message = ApplyReplacements(args.Message, component.Accent);
         }
 

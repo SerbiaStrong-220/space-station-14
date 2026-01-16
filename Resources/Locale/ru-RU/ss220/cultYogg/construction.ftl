@@ -8,6 +8,7 @@ cult-yogg-building-cant-capture-cult-building = Эта постройка уже
 cult-yogg-building-cant-capture-this-building = Вы не можете захватить данную постройку
 cult-yogg-building-caprure-cooldown = Замена будет доступна через {$time} секунд
 cult-yogg-building-cooldown-popup = Ми-Го ещё не готов возвести следующую постройку
+cult-yogg-build-only-on-station = Можно построить только на станции
 cult-yogg-migo-erect-menu-title = Возведение
 cult-yogg-migo-erect-menu-erase-button = Разобрать сооружение
 cult-yogg-migo-erect-menu-capture-button = Захватить сооружение

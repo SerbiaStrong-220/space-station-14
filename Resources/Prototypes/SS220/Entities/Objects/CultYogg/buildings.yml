@@ -54,6 +54,7 @@
   - stack: Tokl
     count: 10
     icon: { sprite: SS220/Interface/Materials/material_icons_16.rsi, state: tokl}
+  requireStation: true
 
 - type: cultYoggBuilding
   id: CultYoggPondBuilding

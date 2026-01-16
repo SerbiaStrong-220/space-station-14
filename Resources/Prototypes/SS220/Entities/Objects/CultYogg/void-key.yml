@@ -29,6 +29,20 @@
     damage:
       types:
         Slash: 10
+  - type: AltVerbTeleport
+    userWhitelist:
+      components:
+      - CultYogg
+  - type: RandomTeleport
+    targetsComponent: "RandomTeleportTarget"
+    whitelist:
+      tags:
+      - VoidTeleporationTarget
+  - type: DeleteOnTeleported
+    deleteSound:
+      path: /Audio/Effects/glass_smash.ogg
+  - type: SpawnBeforeTeleport
+    spawnedEnt: TeleportVanishEffect
 
 - type: entity
   id: VoidPortal
@@ -91,3 +105,24 @@
   # spawn animation lasts 1.2 seconds, but somehow its get +0.1 wtf
   - type: TimedDespawn
     lifetime: 1.1
+
+- type: entity
+  id: TeleportVanishEffect
+  suffix: CultYogg
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.85
+  - type: Sprite
+    drawdepth: Mobs # Above items
+    noRot: true
+    layers:
+    - shader: unshaded
+      map: ["enum.EffectLayers.Unshaded"]
+      sprite: SS220/Effects/CultYogg/fast_tp.rsi
+      state: fast_tp
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: AnimationPlayer

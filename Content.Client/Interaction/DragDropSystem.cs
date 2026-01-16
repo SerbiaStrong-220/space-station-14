@@ -1,7 +1,9 @@
+using System.Linq;
 using System.Numerics;
 using Content.Client.CombatMode;
 using Content.Client.Gameplay;
 using Content.Client.Outline;
+using Content.Client.UserInterface.Controls;
 using Content.Shared.ActionBlocker;
 using Content.Shared.CCVar;
 using Content.Shared.DragDrop;
@@ -13,6 +15,7 @@ using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.Player;
 using Robust.Client.State;
+using Robust.Client.UserInterface;
 using Robust.Shared.Configuration;
 using Robust.Shared.Input;
 using Robust.Shared.Input.Binding;
@@ -48,6 +51,10 @@ public sealed class DragDropSystem : SharedDragDropSystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
+
+    // ss220 add drag drop container start
+    [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
+    // ss220 add drag drop container end
 
     // how often to recheck possible targets (prevents calling expensive
     // check logic each update)
@@ -364,6 +371,12 @@ public sealed class DragDropSystem : SharedDragDropSystem
         if (_stateManager.CurrentState is GameplayState screen)
         {
             entities = screen.GetClickableEntities(coords);
+
+            // ss220 add drag drop container start
+            var controlByCoords = _uiManager.MouseGetControl(args.ScreenCoordinates);
+            if (controlByCoords?.Parent is SlotButton { Entity: not null } slotButton)
+                entities = entities.Append(slotButton.Entity.Value);
+            // ss220 add drag drop container end
         }
         else
         {

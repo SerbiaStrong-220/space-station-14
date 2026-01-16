@@ -317,3 +317,4 @@
       - id: ClothingEyesGlassesCommand
       - id: ClothingShoesBootsJack
       - id: ClothingUniformJumpsuitLawyerBlackSyndieLobbyingBundle
+      - id: DoorRemoteCustom

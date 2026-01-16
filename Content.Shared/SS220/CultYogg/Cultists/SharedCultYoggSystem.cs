@@ -43,12 +43,16 @@ public abstract class SharedCultYoggSystem : EntitySystem
     {
         _actions.AddAction(uid, ref uid.Comp.CorruptItemActionEntity, uid.Comp.CorruptItemAction);
         _actions.AddAction(uid, ref uid.Comp.CorruptItemInHandActionEntity, uid.Comp.CorruptItemInHandAction);
+
         if (_actions.AddAction(uid, ref uid.Comp.PukeShroomActionEntity, out var act, uid.Comp.PukeShroomAction) && act.UseDelay != null) //useDelay when added
         {
             var start = _timing.CurTime;
             var end = start + act.UseDelay.Value;
             _actions.SetCooldown(uid.Comp.PukeShroomActionEntity.Value, start, end);
         }
+
+        var ev = new ProgressCultEvent();
+        RaiseLocalEvent(uid, ref ev, true);
     }
 
     #region Stage
@@ -163,9 +167,5 @@ public abstract class SharedCultYoggSystem : EntitySystem
         _actions.RemoveAction(uid.Comp.PukeShroomActionEntity);
 
         DeleteVisuals(uid);
-
-        //sending to a gamerule so it would be deleted and added in one place
-        var ev = new CultYoggDeCultingEvent(uid);
-        RaiseLocalEvent(uid, ref ev, true);
     }
 }

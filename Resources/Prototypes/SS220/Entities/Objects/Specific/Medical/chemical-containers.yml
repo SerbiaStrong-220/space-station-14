@@ -277,3 +277,101 @@
         reagents:
         - ReagentId: Sulfur
           Quantity: 100
+
+- type: entity
+  parent: Jug
+  suffix: Cryoxadone
+  id: JugCryoxadone
+  components:
+  - type: Label
+    currentLabel: reagent-name-cryoxadone
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Cryoxadone
+          Quantity: 200
+
+- type: entity
+  parent: Jug
+  suffix: Cerebin
+  id: JugCerebrin
+  components:
+  - type: Label
+    currentLabel: reagent-name-cerebrin
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Cerebrin
+          Quantity: 200
+
+- type: entity
+  parent: Jug
+  suffix: Doxarubixadone
+  id: JugDoxarubixadone
+  components:
+  - type: Label
+    currentLabel: reagent-name-doxarubixadone
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Doxarubixadone
+          Quantity: 200
+
+- type: entity
+  parent: Jug
+  suffix: Opporozidone
+  id: JugOpporozidone
+  components:
+  - type: Label
+    currentLabel: reagent-name-opporozidone
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Opporozidone
+          Quantity: 200
+
+- type: entity
+  parent: Jug
+  suffix: Necrosol
+  id: JugNecrosol
+  components:
+  - type: Label
+    currentLabel: reagent-name-necrosol
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Necrosol
+          Quantity: 200
+
+- type: entity
+  parent: Jug
+  suffix: Aloxadone
+  id: JugAloxadone
+  components:
+  - type: Label
+    currentLabel: reagent-name-aloxadone
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Aloxadone
+          Quantity: 200
+
+- type: entity
+  parent: Jug
+  suffix: Omnizine
+  id: JugOmnizine
+  components:
+  - type: Label
+    currentLabel: reagent-name-omnizine
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Omnizine
+          Quantity: 200
