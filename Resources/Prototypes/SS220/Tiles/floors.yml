@@ -2352,3 +2352,18 @@
     collection: FootstepFloor
   itemDrop: FloorItemOldconcretePavementVertical
   heatCapacity: 10000
+
+- type: tile
+  id: FloorWebTileSpace
+  name: tiles-web
+  tags: [ tile-tag-other ]
+  sprite: /Textures/Tiles/Misc/Web/web_tile.png
+  baseTurf: Space
+  isSubfloor: true
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepCarpet
+  barestepSounds:
+    collection: BarestepCarpet
+  itemDrop: FloorTileItemWeb
+  heatCapacity: 10000

@@ -6,7 +6,7 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 72000 # SS220-RoleTime
+      time: 20h # SS220-RoleTime
     - !type:SpeciesRequirement #SS220-jobbans begin
       inverted: true
       species:
@@ -30,7 +30,6 @@
 - type: startingGear
   id: DetectiveGear
   equipment:
-    eyes: ClothingEyesGlassesSecurity
     id: DetectivePDA
     ears: ClothingHeadsetSecurity
     # neck: ClothingBeltHolsterFilled #SS220 Shoulder holster is now selectable in loadout

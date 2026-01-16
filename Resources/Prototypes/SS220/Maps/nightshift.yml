@@ -78,13 +78,13 @@
           - Artifacts
           - Bank
           - Zoo
-          - MiningOutpost
           - Tesla
           #SS220
           - Saveplanet
           - Expedition
           - Robotisation
           - Homekeepers
+          - SportComplex
 
 - type: entity
   id: NightshiftNanotrasenStation

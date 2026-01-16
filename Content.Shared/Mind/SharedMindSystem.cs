@@ -15,8 +15,8 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Objectives.Systems;
 using Content.Shared.Players;
 using Content.Shared.Speech;
-
 using Content.Shared.Whitelist;
+using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -36,6 +36,7 @@ public abstract partial class SharedMindSystem : EntitySystem
     [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
     [Dependency] private readonly MetaDataSystem _metadata = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
 
     [ViewVariables]
     protected readonly Dictionary<NetUserId, EntityUid> UserMinds = new();
@@ -64,6 +65,8 @@ public abstract partial class SharedMindSystem : EntitySystem
 
     private void OnMindStartup(EntityUid uid, MindComponent component, ComponentStartup args)
     {
+        component.MindRoleContainer = _container.EnsureContainer<Container>(uid, MindComponent.MindRoleContainerId);
+
         if (component.UserId == null)
             return;
 
@@ -262,6 +265,14 @@ public abstract partial class SharedMindSystem : EntitySystem
         return _mobState.IsDead(mind.OwnedEntity.Value, targetMobState);
     }
 
+    // ss220 add custom antag goals start
+    public bool IsCharacterDeadPhysically(EntityUid user)
+    {
+        return !TryComp<MobStateComponent>(user, out var targetMobState) ||
+               _mobState.IsDead(user, targetMobState);
+    }
+    // ss220 add custom antag goals end
+
     /// <summary>
     ///     True if the OwnedEntity of this mind is physically unrevivable.
     ///     This is mainly to check whether a mind is able to inherit their "original" character again without the need for creating a new one.
@@ -279,6 +290,13 @@ public abstract partial class SharedMindSystem : EntitySystem
         // Could use checks for the amount of damage they have, but with chemistry you can never tell what damage means someone is truly "unrevivable".
         return false;
     }
+
+    // ss220 add custom antag goals start
+    public bool IsCharacterUnrevivablePhysically(EntityUid target)
+    {
+        return !HasComp<MobStateComponent>(target);
+    }
+    // ss220 add custom antag goals end
 
     public virtual void Visit(EntityUid mindId, EntityUid entity, MindComponent? mind = null)
     {
@@ -366,19 +384,26 @@ public abstract partial class SharedMindSystem : EntitySystem
 
     public virtual void ControlMob(NetUserId user, EntityUid target) {}
 
+    // ss220 add custom antag goals start
     /// <summary>
     /// Tries to create and add an objective from its prototype id.
     /// </summary>
     /// <returns>Returns true if adding the objective succeeded.</returns>
-    public bool TryAddObjective(EntityUid mindId, MindComponent mind, string proto)
+    public bool TryAddObjective(EntityUid mindId, MindComponent mind, string proto, bool force = false)
     {
-        var objective = _objectives.TryCreateObjective(mindId, mind, proto);
+        return TryAddObjective(mindId, mind, proto, out _, force);
+    }
+
+    public bool TryAddObjective(EntityUid mindId, MindComponent mind, string proto, out EntityUid? objective, bool force = false)
+    {
+        objective = _objectives.TryCreateObjective(mindId, mind, proto, force);
         if (objective == null)
             return false;
 
         AddObjective(mindId, mind, objective.Value);
         return true;
     }
+    // ss220 add custom antag goals end
 
     /// <summary>
     /// Adds an objective that already exists, and is assumed to have had its requirements checked.
@@ -590,6 +615,17 @@ public abstract partial class SharedMindSystem : EntitySystem
         return IsCharacterDeadPhysically(mind);
     }
 
+    public bool IsCharacterDeadIc(EntityUid user)
+    {
+        var ev = new GetCharactedDeadIcEvent(null);
+        RaiseLocalEvent(user, ref ev);
+
+        if (ev.Dead != null)
+            return ev.Dead.Value;
+
+        return IsCharacterDeadPhysically(user);
+    }
+
     /// <summary>
     ///     True if this Mind is 'sufficiently unrevivable' IC (Objectives, EndText).
     ///     Note that this is *IC logic*, it's not necessarily tied to any specific truth.
@@ -611,16 +647,25 @@ public abstract partial class SharedMindSystem : EntitySystem
         return IsCharacterUnrevivablePhysically(mind);
     }
 
-    /// <summary>
-    ///     A string to represent the mind for logging
-    /// </summary>
-    public string MindOwnerLoggingString(MindComponent mind)
+    // ss220 add custom antag goals start
+    public bool IsCharacterUnrevivableIc(EntityUid target)
     {
-        if (mind.OwnedEntity != null)
-            return ToPrettyString(mind.OwnedEntity.Value);
-        if (mind.UserId != null)
-            return mind.UserId.Value.ToString();
-        return "(originally " + mind.OriginalOwnerUserId + ")";
+        var ev = new GetCharacterUnrevivableIcEvent(null);
+        RaiseLocalEvent(target, ref ev);
+
+        return ev.Unrevivable ?? IsCharacterUnrevivablePhysically(target);
+    }
+    // ss220 add custom antag goals end
+
+    /// <summary>
+    /// A string to represent the mind for logging.
+    /// </summary>
+    public MindStringRepresentation MindOwnerLoggingString(MindComponent mind)
+    {
+        return new MindStringRepresentation(
+            ToPrettyString(mind.OwnedEntity),
+            mind.UserId != null,
+            mind.UserId ?? mind.OriginalOwnerUserId);
     }
 
     public string? GetCharacterName(NetUserId userId)
@@ -737,3 +782,16 @@ public record struct GetCharactedDeadIcEvent(bool? Dead);
 /// <param name="Unrevivable"></param>
 [ByRefEvent]
 public record struct GetCharacterUnrevivableIcEvent(bool? Unrevivable);
+
+public sealed record MindStringRepresentation(EntityStringRepresentation? OwnedEntity, bool PlayerPresent, NetUserId? Player) : IAdminLogsPlayerValue
+{
+    public override string ToString()
+    {
+        var str = OwnedEntity?.ToString() ?? "mind without entity";
+        if (Player != null)
+            str += $" ({(PlayerPresent ? "" : "originally ")} {Player})";
+        return str;
+    }
+
+    IEnumerable<NetUserId> IAdminLogsPlayerValue.Players => Player == null ? [] : [Player.Value];
+}

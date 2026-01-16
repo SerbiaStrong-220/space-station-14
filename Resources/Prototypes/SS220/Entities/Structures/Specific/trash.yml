@@ -5,8 +5,9 @@
   description: Среди этой кучи мешков, полных мусора, теряются последние искры надежды на чистоту и порядок.
   suffix: Мусор, Хлам
   components:
-  - type: RatKingRummageable
-    rummageLoot: RatKingLootTrashPiles
+  - type: Rummageable
+    table: !type:NestedSelector
+      tableId: RatKingLootTrashPiles
   - type: RegalRatSpawnLocation
   - type: InteractionOutline
   - type: Sprite

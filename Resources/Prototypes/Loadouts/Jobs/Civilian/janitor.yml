@@ -5,12 +5,14 @@
     requirement:
       !type:RoleTimeRequirement
       role: JobJanitor
-      time: 187200 #52 hrs (1 hour per week for 1 year)
+      time: 52h
+  # SS220-sponsor-tier-begin
   sponsorTierLoadoutEffects:
   - !type:GroupLoadoutEffect
     proto: SeniorDevTeamTier
   - !type:GroupLoadoutEffect
     proto: AdministratorSponsorTier
+  # SS220-sponsor-tier-end
 
 # Head
 - type: loadout

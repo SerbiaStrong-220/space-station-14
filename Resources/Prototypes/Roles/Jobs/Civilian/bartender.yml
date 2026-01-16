@@ -6,7 +6,7 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Civilian
-      time: 18000 # SS220-RoleTime
+      time: 5h # SS220-RoleTime
   startingGear: BartenderGear
   icon: "JobIconBartender"
   supervisors: job-supervisors-hop

@@ -8,7 +8,7 @@ public sealed partial class MiGoEnslavementActionEvent : EntityTargetActionEvent
 {
 }
 
-public sealed partial class MiGoHealEvent : EntityTargetActionEvent
+public sealed partial class MiGoHealActionEvent : EntityTargetActionEvent
 {
     [DataField]
     public DamageSpecifier Heal = new();
@@ -26,18 +26,22 @@ public sealed partial class MiGoHealEvent : EntityTargetActionEvent
     public TimeSpan TimeBetweenIncidents = TimeSpan.FromSeconds(2.5); // most balanced value
 
     [DataField]
-    public SpriteSpecifier.Rsi EffectSprite = new(new("SS220/Effects/cult_yogg_healing.rsi"), "healingEffect");
+    public SpriteSpecifier.Rsi EffectSprite = new(new("SS220/Effects/CultYogg/healing.rsi"), "healingEffect");
 }
 
-public sealed partial class MiGoAstralEvent : InstantActionEvent
+public sealed partial class MiGoAstralActionEvent : InstantActionEvent
 {
 }
 
-public sealed partial class MiGoErectEvent : InstantActionEvent
+public sealed partial class MiGoErectActionEvent : InstantActionEvent
 {
 }
 
-public sealed partial class MiGoSacrificeEvent : InstantActionEvent
+public sealed partial class MiGoSacrificeActionEvent : InstantActionEvent
+{
+}
+
+public sealed partial class MiGoTeleportActionEvent : InstantActionEvent
 {
 }
 

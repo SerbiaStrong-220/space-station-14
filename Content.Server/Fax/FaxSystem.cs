@@ -80,6 +80,8 @@ public sealed class FaxSystem : EntitySystem
 
         // UI
         SubscribeLocalEvent<FaxMachineComponent, AfterActivatableUIOpenEvent>(OnToggleInterface);
+        SubscribeLocalEvent<FaxMachineComponent, FaxFileMessage>(OnFileButtonPressed);
+        SubscribeLocalEvent<FaxMachineComponent, FaxCopyMessage>(OnCopyButtonPressed);
         SubscribeLocalEvent<FaxMachineComponent, FaxSendMessage>(OnSendButtonPressed);
         SubscribeLocalEvent<FaxMachineComponent, FaxRefreshMessage>(OnRefreshButtonPressed);
         SubscribeLocalEvent<FaxMachineComponent, FaxDestinationMessage>(OnDestinationSelected);
@@ -324,6 +326,21 @@ public sealed class FaxSystem : EntitySystem
     private void OnToggleInterface(EntityUid uid, FaxMachineComponent component, AfterActivatableUIOpenEvent args)
     {
         UpdateUserInterface(uid, component);
+    }
+
+    private void OnFileButtonPressed(EntityUid uid, FaxMachineComponent component, FaxFileMessage args)
+    {
+        args.Label = args.Label?[..Math.Min(args.Label.Length, FaxFileMessageValidation.MaxLabelSize)];
+        args.Content = args.Content[..Math.Min(args.Content.Length, FaxFileMessageValidation.MaxContentSize)];
+        PrintFile(uid, component, args);
+    }
+
+    private void OnCopyButtonPressed(EntityUid uid, FaxMachineComponent component, FaxCopyMessage args)
+    {
+        if (HasComp<MobStateComponent>(component.PaperSlot.Item))
+            _faxecute.Faxecute(uid, component); // when button pressed it will hurt the mob.
+        else
+            Copy(uid, component, args);
     }
 
     private void OnSendButtonPressed(EntityUid uid, FaxMachineComponent component, FaxSendMessage args)

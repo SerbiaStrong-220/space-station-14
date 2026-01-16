@@ -262,20 +262,6 @@
     prototypeId: Fork
   result: CultYoggCocoonSedativeSting
   corruptionReverseEffect: ExorcismUncorruptEffect
-
-- type: corrupted
-  id: KnifePlasticSedativestingCultYogg
-  from:
-    prototypeId: KnifePlastic
-  result: CultYoggCocoonSedativeSting
-  corruptionReverseEffect: ExorcismUncorruptEffect
-
-- type: corrupted
-  id: KnifeSedativestingCultYogg
-  from:
-    parentPrototypeId: BaseKnife
-  result: CultYoggCocoonSedativeSting
-  corruptionReverseEffect: ExorcismUncorruptEffect
 #SedativeSting end
 
 # Hardsuit beginning
@@ -381,4 +367,90 @@
     prototypeId: HandheldGPSBasic
   result: CultPinpointer
   corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: PinpointerBase
+  from:
+    parentPrototypeId: PinpointerBase
+  result: CultPinpointer
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: AnomalyLocatorUnpowered
+  from:
+    prototypeId: AnomalyLocatorUnpowered
+  result: CultPinpointer
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: AnomalyLocatorUnpoweredParent
+  from:
+    parentPrototypeId: AnomalyLocatorUnpowered
+  result: CultPinpointer
+  corruptionReverseEffect: ExorcismUncorruptEffect
 # Pinpointer end
+
+# Telepoter beginning
+- type: corrupted
+  id: KnifeSedativestingCultYogg
+  from:
+    parentPrototypeId: BaseKnife
+  result: VoidKey
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: KnifePlasticSedativestingCultYogg
+  from:
+    prototypeId: KnifePlastic
+  result: VoidKey
+  corruptionReverseEffect: ExorcismUncorruptEffect
+# Telepoter end
+
+- type: corrupted
+  id: BaseLightTubeCultYogg
+  from:
+    parentPrototypeId: BaseLightTube
+  result: CultYoggLightTube
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: BaseLightbulbCrystalCultYogg
+  from:
+    parentPrototypeId: BaseLightbulbCrystal
+  result: CultYoggLightBulb
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: LightBulbCultYogg
+  from:
+    prototypeId: LightBulb
+  result: CultYoggLightBulb
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: ServiceLightBulbCultYogg
+  from:
+    prototypeId: ServiceLightBulb
+  result: CultYoggLightBulb
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: LightBulbOldYogg
+  from:
+    prototypeId: LightBulbOld
+  result: CultYoggLightBulb
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: WarmLightBulbCultYogg
+  from:
+    prototypeId: WarmLightBulb
+  result: CultYoggLightBulb
+  corruptionReverseEffect: ExorcismUncorruptEffect
+
+- type: corrupted
+  id: DimLightBulbCultYogg
+  from:
+    prototypeId: DimLightBulb
+  result: CultYoggLightBulb
+  corruptionReverseEffect: ExorcismUncorruptEffect

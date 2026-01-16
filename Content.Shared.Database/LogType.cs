@@ -81,9 +81,9 @@ public enum LogType
     ChemicalReaction = 17,
 
     /// <summary>
-    /// Reagent effects related interactions.
+    /// EntityEffect related interactions.
     /// </summary>
-    ReagentEffect = 18,
+    EntityEffect = 18,
 
     /// <summary>
     /// Canister valve was opened or closed.
@@ -491,6 +491,11 @@ public enum LogType
     /// Admin command executed.
     /// </summary>
     AdminCommand = 10000,
+
+    /// <summary>
+    /// Logs related to roundflow like changing stages of cult or any antag progression
+    /// </summary>
+    RoundFlow = 10001,
 
     //SS220 log types end
 }

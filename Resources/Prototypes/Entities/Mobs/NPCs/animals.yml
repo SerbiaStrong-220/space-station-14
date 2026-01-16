@@ -341,7 +341,7 @@
   - type: TimedDespawn #delete the egg after the chicken spawns
     lifetime: 21
 
-- type: entity # TODO: figure out how to make these guys gib when stepped on
+- type: entity
   name: cockroach
   parent: [ SimpleMobBase, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   id: MobCockroach
@@ -426,8 +426,13 @@
       - !type:GibBehavior
         recursive: false
   - type: NonSpreaderZombie
-  - type: SentienceTarget
-    flavorKind: station-event-random-sentience-flavor-organic
+  - type: StepTrigger
+    requiredTriggeredSpeed: 1
+  - type: TriggerOnStepTrigger
+  - type: RandomChanceTriggerCondition
+    successChance: 0.2
+  - type: GibOnTrigger
+  - type: ProtectedFromStepTriggers
   - type: MeleeWeapon
     soundHit:
       path: /Audio/Effects/bite.ogg
@@ -503,6 +508,24 @@
   - type: FaxableObject
     insertingState: inserting_mothroach
   - type: MothAccent
+  #SS220 languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Tkachi
+      canSpeak: true
+    - id: Galactic
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Feline
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 languages tweaks end
   - type: Sprite
     sprite: Mobs/Animals/mothroach/mothroach.rsi
     layers:
@@ -840,6 +863,7 @@
       behaviors:
       - !type:GibBehavior
         recursive: false
+  - type: ZombieImmune
 
 - type: entity
   name: cow
@@ -1209,6 +1233,8 @@
         true
       NavSmash: !type:Bool
         true
+  - type: Puller
+    needsHands: false
   - type: Prying
     pryPowered: true
     force: true
@@ -1220,8 +1246,6 @@
       0: Alive
       200: Critical
       250: Dead
-  - type: StaminaResistance
-    damageCoefficient: 0.40
 
 - type: entity
   name: kangaroo
@@ -1460,7 +1484,7 @@
     - reagents: [ Water, SpaceCleaner ]
       methods: [ Touch ]
       effects:
-      - !type:WashCreamPieReaction
+      - !type:WashCreamPie
   - type: Crawler
 
 
@@ -1496,7 +1520,7 @@
   - type: Speech
     speechSounds: Monkey
     speechVerb: Monkey
-  #- type: MonkeyAccent
+  #- type: MonkeyAccent #SS220 Removed monkey accent as it overlaps with language system
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-primate
   - type: AlwaysRevolutionaryConvertible
@@ -1555,7 +1579,7 @@
   - type: Speech
     speechSounds: Monkey
     speechVerb: Monkey
-  #- type: MonkeyAccent
+  #- type: MonkeyAccent #SS220 Removed monkey accent as it overlaps with language system
   - type: NpcFactionMember
     factions:
     - Syndicate
@@ -1565,9 +1589,7 @@
     name: ghost-role-information-monkey-name
     description: ghost-role-information-monkey-description
     rules: ghost-role-information-syndicate-reinforcement-rules
-    requirements: #SS220 ghostrole-times (20h overall) start
-        - !type:OverallPlaytimeRequirement
-          time: 72000 #SS220 ghostrole-times (20h overall) end
+    job: SyndicateReinforcement # SS220-add-playtime-restrictions
     mindRoles:
     # This is for syndicate monkeys that randomly gain sentience, thus have no summoner to team with
     - MindRoleGhostRoleSoloAntagonist
@@ -1602,9 +1624,9 @@
   components:
   - type: NameIdentifier
     group: Kobold
-  # - type: LizardAccent
-  # - type: ReplacementAccent
-  #   accent: kobold
+  - type: LizardAccent
+  - type: ReplacementAccent
+    accent: kobold
 #SS220 Animalistic Languages begin
   - type: Language
     availableLanguages:
@@ -1907,7 +1929,7 @@
         Base: dead-0
       Dead:
         Base: splat-0
-  - type: Food
+  - type: Edible #SS220-kebab-assembly-fix
   - type: FlavorProfile
     flavors:
     - meaty
@@ -1940,8 +1962,8 @@
     spawned:
     - id: FoodMeatRat
       amount: 1
-    # - type: ReplacementAccent
-    # accent: mouse
+  - type: ReplacementAccent
+    accent: mouse
   - type: Tag
     tags:
     - Trash
@@ -2097,6 +2119,12 @@
   parent: MobMouse
   id: MobMouseCancer
   components:
+  - type: GhostRole
+    name: ghost-role-information-cancer-mouse-name
+    description: ghost-role-information-cancer-mouse-description
+    rules: ghost-role-information-freeagent-rules
+    mindRoles:
+    - MindRoleGhostRoleFreeAgent
   - type: Sprite
     color: LightGreen
   - type: PointLight
@@ -2464,7 +2492,7 @@
   - type: MobMover
   - type: HTN
     rootTask:
-      task: SimpleHostileCompound
+      task: GrenadePenguinCompound
   - type: NpcFactionMember
     factions:
     - Syndicate
@@ -2512,9 +2540,9 @@
     beepInterval: 1
   - type: Explosive
     explosionType: Default
-    maxIntensity: 20
-    intensitySlope: 20
-    totalIntensity: 225
+    maxIntensity: 10
+    intensitySlope: 3
+    totalIntensity: 150
   - type: ExplodeOnTrigger
     keysIn:
     - timer
@@ -2633,6 +2661,8 @@
     interactSuccessSpawn: EffectHearts
     interactSuccessSound:
       path: /Audio/Animals/snake_hiss.ogg
+  - type: Puller
+    needsHands: false
   - type: NoSlip
   - type: Spider
   - type: IgnoreSpiderWeb
@@ -2672,8 +2702,6 @@
         Burn: -0.07
   #SS220-fuana-update-begin
   - type: Magboots
-  - type: Puller
-    needsHands: false
   - type: ThermalVision
     state: Half
     visionRadius: 14
@@ -2741,6 +2769,14 @@
     damage:
       types:
         Piercing: 6
+  #SS220 Languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: SpiderTongue
+      canSpeak: true
+    - id: Arati
+      canSpeak: false
+  #SS220 Languages tweaks end
 
 - type: entity
   parent:
@@ -2795,6 +2831,12 @@
     - type: Bloodstream
       bloodMaxVolume: 150
       bloodReagent: Laughter
+  #SS220 Languages tweaks begin
+    - type: Language
+      availableLanguages:
+      - id: Clownish
+        canSpeak: true
+  #SS220 Languages tweaks end
 
 - type: entity
   name: wizard spider
@@ -3060,6 +3102,24 @@
   - type: MobPrice
     price: 200
   - type: MessyDrinker
+    #SS220 Languages tweaks begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+    - id: Doggish
+      canSpeak: true
+    - id: Mousey
+      canSpeak: false
+    - id: Feline
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 Languages tweaks end
 
 - type: entity
   parent: MobCorgiBase
@@ -3079,8 +3139,6 @@
       amount: 2
   - type: ReplacementAccent
     accent: dog
-  - type: SentienceTarget
-    flavorKind: station-event-random-sentience-flavor-corgi
   - type: Tag
     tags:
     - VimPilot
@@ -3179,6 +3237,10 @@
   id: MobCat
   description: Feline pet, very funny.
   components:
+#SS220 cat organ begin 
+  - type: Body
+    prototype: AnimalCat
+#SS220 cat organ end 
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Pets/cat.rsi
@@ -3200,8 +3262,6 @@
       canSpeak: false
     - id: Piggish
       canSpeak: false
-    - id: SolCommon
-      canSpeak: false
     - id: Galactic
       canSpeak: false
 #SS220 Animalistic Languages end
@@ -3212,7 +3272,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.35
-        density: 15
+        density: 40 #SS220 Cat density increased for mousetrap protection
         mask:
         - MobMask
         layer:
@@ -3244,8 +3304,8 @@
     spawned:
     - id: FoodMeat
       amount: 3
-  # - type: ReplacementAccent
-  #   accent: cat
+  - type: ReplacementAccent
+    accent: cat
   - type: InteractionPopup
     successChance: 0.7
     interactSuccessString: petting-success-cat
@@ -3313,7 +3373,19 @@
 #SS220 languages tweaks begin
   - type: Language
     availableLanguages:
+    - id: Feline
+      canSpeak: true
     - id: Galactic
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Feline
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Piggish
       canSpeak: false
 #SS220 languages tweaks end
   - type: DamageStateVisuals
@@ -3330,9 +3402,7 @@
     allowMovement: true
     description: ghost-role-information-SyndiCat-description
     rules: ghost-role-information-SyndiCat-rules
-    requirements: #SS220 ghostrole-times (20h overall) start
-      - !type:OverallPlaytimeRequirement
-        time: 72000 #SS220 ghostrole-times (20h overall) end
+    job: SyndicateReinforcement # SS220-add-playtime-restrictions
     mindRoles:
     - MindRoleGhostRoleTeamAntagonist
     raffle:
@@ -3463,7 +3533,10 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      25: Dead
+      #SS220 Kittnen health buff begin
+      40: Critical
+      60: Dead
+      #SS220 Kittens health buff end
   # ss220 kitten in hands
   - type: MultiHandedItem
   - type: Item
@@ -3601,6 +3674,8 @@
     availableLanguages:
     - id: Mousey
       canSpeak: true
+    - id: Galactic
+      canSpeak: false
     - id: Feline
       canSpeak: false
     - id: Monkey
@@ -3695,10 +3770,8 @@
     spawned:
     - id: FoodMeat
       amount: 1
-  #SS220 Animalistic languages fix begin
-  # - type: ReplacementAccent
-  #   accent: mouse
-  #SS220 Animalistic languages fix end
+  - type: ReplacementAccent
+    accent: mouse
   - type: Tag
     tags:
     - VimPilot
@@ -3813,16 +3886,14 @@
     interactSuccessSpawn: EffectHearts
     interactSuccessSound:
       path: /Audio/Animals/pig_oink.ogg
-  # - type: ReplacementAccent
-  #   accent: pig
+  - type: ReplacementAccent
+    accent: pig
   #SS220 Animalistic languages begin
   - type: Language
     availableLanguages:
     - id: Piggish
       canSpeak: true
     - id: Galactic
-      canSpeak: false
-    - id: SolCommon
       canSpeak: false
    #SS220 Animalistic languages end
   - type: SentienceTarget
@@ -4087,3 +4158,12 @@
   - type: NpcFactionMember
     factions:
     - NanoTrasen
+  #SS220 Languages tweaks begin
+  - type: Language
+    selectedLanguage: Galactic
+    availableLanguages:
+    - id: Galactic
+      canSpeak: true
+    - id: Doggish
+      canSpeak: true
+  #SS220 Languages tweaks end

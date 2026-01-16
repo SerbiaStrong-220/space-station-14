@@ -1,6 +1,10 @@
 ﻿using System.Linq;
 using Content.Server.Administration;
+using Content.Server.Chat.Managers;
+using Content.Server.Objectives.Components;
+using Content.Server.Objectives.Systems;
 using Content.Shared.Administration;
+using Content.Shared.Chat;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Prototypes;
@@ -17,16 +21,31 @@ public sealed class AddObjectiveCommand : LocalizedEntityCommands
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly ObjectivesSystem _objectives = default!;
+    // ss220 add custom antag goals start
+    [Dependency] private readonly TargetObjectiveSystem _targetObjective = default!;
+    [Dependency] private readonly StealConditionSystem _steal = default!;
+    [Dependency] private readonly IChatManager _chatManager = default!;
+    // ss220 add custom antag goals end
 
     public override string Command => "addobjective";
 
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {
-        if (args.Length != 2)
+        // ss220 add custom antag goals start
+        // if (args.Length != 2)
+        // {
+        //     shell.WriteError(Loc.GetString(Loc.GetString("cmd-addobjective-invalid-args")));
+        //     return;
+        // }
+        // ss220 add custom antag goals end
+
+        // ss220 add custom antag goals start
+        if (args.Length < 2)
         {
             shell.WriteError(Loc.GetString(Loc.GetString("cmd-addobjective-invalid-args")));
             return;
         }
+        // ss220 add custom antag goals end
 
         if (!_players.TryGetSessionByUsername(args[0], out var data))
         {
@@ -47,11 +66,62 @@ public sealed class AddObjectiveCommand : LocalizedEntityCommands
             return;
         }
 
-        if (!_mind.TryAddObjective(mindId, mind, args[1]))
+        // ss220 add custom antag goals start
+        EntityUid? targetEnt = null;
+        EntityPrototype? targetEntProto = null;
+        var force = false;
+
+        if (args.Length >= 3)
+        {
+            if (EntityUid.TryParse(args[2], out var entUid))
+                targetEnt = entUid;
+
+            if (_prototypes.TryIndex(args[2], out var targetProto))
+                targetEntProto = targetProto;
+
+            bool.TryParse(args[2], out force);
+        }
+
+        if (args.Length == 4)
+        {
+            force = bool.Parse(args[3]);
+        }
+
+        if (!_mind.TryAddObjective(mindId, mind, args[1], out var objective, force))
         {
             // can fail for other reasons so dont pretend to be right
             shell.WriteError(Loc.GetString("cmd-addobjective-adding-failed"));
+            return;
         }
+
+        if (EntityManager.TryGetComponent<TargetObjectiveComponent>(objective, out var targetObj))
+        {
+            if (targetEnt != null)
+            {
+                _targetObjective.SetTarget(objective.Value, targetEnt.Value, targetObj);
+                _targetObjective.ResetEntityName(objective.Value, log: true);
+            }
+            else
+            {
+                _mind.TryRemoveObjective(mindId, mind, objective.Value);
+                return;
+            }
+        }
+
+        if (EntityManager.TryGetComponent<StealConditionComponent>(objective, out var stealCondition))
+        {
+            if (targetEnt != null)
+                _steal.SetStealTarget(targetEnt.Value, (objective.Value, stealCondition));
+            else if (targetEntProto != null)
+                _steal.SetStealTarget(targetEntProto, (objective.Value, stealCondition));
+            else
+                return;
+        }
+
+        var msg = Loc.GetString("ui-add-objective-chat-manager-announce");
+        var wrappedMessage = Loc.GetString("chat-manager-server-wrap-message", ("message", msg));
+        _chatManager.ChatMessageToOne(ChatChannel.Server, msg, wrappedMessage, default, false, data.Channel, colorOverride: Color.Red);
+        // ss220 add custom antag goals end
     }
 
     public override CompletionResult GetCompletion(IConsoleShell shell, string[] args)

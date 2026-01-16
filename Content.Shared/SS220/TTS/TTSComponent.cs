@@ -1,4 +1,5 @@
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared.SS220.TTS;
@@ -13,13 +14,12 @@ public sealed partial class TTSComponent : Component
     /// <summary>
     /// Prototype of used voice for TTS.
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("voice", customTypeSerializer: typeof(PrototypeIdSerializer<TTSVoicePrototype>))]
-    public string? VoicePrototypeId { get; set; }
+    [DataField("voice")]
+    public ProtoId<TTSVoicePrototype>? VoicePrototypeId { get; set; }
 
     /// <summary>
     /// Prototype that contains a list of voices for randomize
     /// </summary>
-    [DataField("randomVoicesList", customTypeSerializer: typeof(PrototypeIdSerializer<RandomVoicesListPrototype>))]
-    public string? RandomVoicesList { get; private set; }
+    [DataField("randomVoicesList")]
+    public ProtoId<RandomVoicesListPrototype>? RandomVoicesList { get; private set; }
 }

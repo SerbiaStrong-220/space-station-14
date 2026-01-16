@@ -15,7 +15,7 @@ public sealed partial class ChameleonStructureMenu : DefaultWindow
 {
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
-    public event Action<string>? OnIdSelected;
+    public event Action<EntProtoId>? OnIdSelected;
 
     private IEnumerable<EntProtoId> _possibleIds = [];
     private EntProtoId? _selectedId;
@@ -29,7 +29,7 @@ public sealed partial class ChameleonStructureMenu : DefaultWindow
         Search.OnTextChanged += OnSearchEntered;
     }
 
-    public void UpdateState(IEnumerable<EntProtoId> possibleIds, string? selectedId)
+    public void UpdateState(IEnumerable<EntProtoId> possibleIds, EntProtoId? selectedId)
     {
         _possibleIds = possibleIds;
         _selectedId = selectedId;

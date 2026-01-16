@@ -134,6 +134,8 @@
     - PartsStatic
     - AtmosStatic
     - CablesStatic
+    - PaperworkStatic
+    - TowelsStatic
     - CargoStatic
     - MaterialsStatic
     - BasicChemistryStatic
@@ -147,6 +149,7 @@
     - SecurityAmmoStatic
     - SecurityAmmoRubberStatic #SS220-fix Magazine Pistol Rubber Lathe (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1799)
     - SS220EmagSecurityAmmoStatic #ss220 more recipies
+    - SyndicateAmmoStatic
   - type: BlueprintReceiver
     whitelist:
       tags:
@@ -231,7 +234,6 @@
     - Janitor
     - Instruments
     - Equipment
-    - FauxTiles
   - type: EmagLatheRecipes
     emagDynamicPacks:
     - SecurityAmmo
@@ -279,7 +281,6 @@
     - CargoBoardsStatic
     - MedicalBoardsStatic
     - EngineeringBoardsStatic
-    - CircuitFloorsStatic
     dynamicPacks:
     - EngineeringBoards
     - CargoBoards
@@ -450,6 +451,9 @@
     - SecurityAmmo
     - SecurityWeapons
     - SecurityDisablers
+  - type: EmagLatheRecipes
+    emagStaticPacks:
+    - SyndicateAmmoStatic
   - type: MaterialStorage
     whitelist:
       tags:
@@ -497,6 +501,9 @@
       staticPacks:
       - SecurityAmmoStatic
       - SecurityAmmoRubberStatic #SS220-fix Magazine Pistol Rubber Lathe (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1799)
+    - type: EmagLatheRecipes
+      emagStaticPacks:
+      - SyndicateAmmoStatic
     - type: MaterialStorage
       whitelist:
         tags:
@@ -587,6 +594,7 @@
     idleState: icon
     runningState: building
     staticPacks:
+    - TowelsStatic
     - ClothingCivilian
     - ClothingCargo
     - ClothingCommand
@@ -660,6 +668,10 @@
     staticPacks:
     - BioGenIngredientsStatic
     - BioGenMaterialsStatic
+  - type: EmagLatheRecipes
+    emagStaticPacks:
+    - BioGenEmagStatic
+    - HostileCubesStatic
 
 - type: entity
   parent: BaseLathe
@@ -771,8 +783,17 @@
     idleState: icon
     runningState: building
     staticPacks:
-    - FloorTilesStatic
     - SS220FloorTilesStatic #SS220-Sheetifier-rework
+    - FloorDarkTilesStatic
+    - FloorSteelTilesStatic
+    - FloorWhiteTilesStatic
+    - FloorMaintsTilesStatic
+    - FloorWoodTilesStatic
+    - FloorConcreteTilesStatic
+    # - CircuitFloorsStatic SS220-remove-red-green-blue-circuits
+    - FloorMarbleTilesStatic
+    dynamicPacks:
+    - FauxTiles
   - type: MaterialStorage
     whitelist:
       tags:

@@ -52,7 +52,7 @@ public sealed class JukeboxSystem : SharedJukeboxSystem
             component.AudioStream = Audio.Stop(component.AudioStream);
 
             if (string.IsNullOrEmpty(component.SelectedSongId) ||
-                !_protoManager.TryIndex(component.SelectedSongId, out var jukeboxProto))
+                !_protoManager.Resolve(component.SelectedSongId, out var jukeboxProto))
             {
                 return;
             }
@@ -104,6 +104,11 @@ public sealed class JukeboxSystem : SharedJukeboxSystem
 
     private void Stop(Entity<JukeboxComponent> entity)
     {
+        // ss220 fix jukebox error start
+        if (!Exists(entity.Comp.AudioStream))
+            return;
+        // ss220 fix jukebox error end
+
         Audio.SetState(entity.Comp.AudioStream, AudioState.Stopped);
         Dirty(entity);
     }
