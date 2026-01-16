@@ -414,6 +414,7 @@
   - type: ContainerContainer
     containers:
       id_card_slot: !type:ContainerSlot { }
+      board: !type:Container { }
   - type: ItemSlots
     slots:
       id_card_slot:
