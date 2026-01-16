@@ -1,5 +1,7 @@
 using Content.Server.Objectives.Components;
+using Content.Shared.Administration.Logs;
 using Content.Shared.CartridgeLoader;
+using Content.Shared.Database;
 using Content.Shared.Interaction;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
@@ -26,6 +28,10 @@ public sealed class StealConditionSystem : EntitySystem
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedObjectivesSystem _objectives = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
+
+    // ss220 add custom antag goals start
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    // ss220 add custom antag goals end
 
     private EntityQuery<ContainerManagerComponent> _containerQuery;
 
@@ -260,7 +266,7 @@ public sealed class StealConditionSystem : EntitySystem
         _metaData.SetEntityDescription(condition.Owner, description, MetaData(condition.Owner));
         _objectives.SetIcon(condition.Owner, new SpriteSpecifier.EntityPrototype(proto.ID));
 
-        Log.Debug($"Changed objective {ToPrettyString(condition):objective}");
+        _adminLog.Add(LogType.Mind, LogImpact.Low, $"Changed objective {ToPrettyString(condition):objective}");
     }
     // ss220 add custom antag goals end
 }

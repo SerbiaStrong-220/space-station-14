@@ -88,12 +88,20 @@ public sealed class AddObjectiveCommand : LocalizedEntityCommands
         {
             // can fail for other reasons so dont pretend to be right
             shell.WriteError(Loc.GetString("cmd-addobjective-adding-failed"));
+            return;
         }
 
-        if (EntityManager.TryGetComponent<TargetObjectiveComponent>(objective, out var targetObj) && targetEnt != null)
+        if (EntityManager.TryGetComponent<TargetObjectiveComponent>(objective, out var targetObj))
         {
-            _targetObjective.SetTarget(objective.Value, targetEnt.Value, targetObj);
-            _targetObjective.ResetEntityName(objective.Value);
+            if (targetEnt != null)
+            {
+                _targetObjective.SetTarget(objective.Value, targetEnt.Value, targetObj);
+                _targetObjective.ResetEntityName(objective.Value, log: true);
+            }
+            else
+            {
+                _mind.TryRemoveObjective(mindId, mind, objective.Value);
+            }
             return;
         }
 
@@ -103,13 +111,6 @@ public sealed class AddObjectiveCommand : LocalizedEntityCommands
                 _steal.SetStealTarget(targetEnt.Value, (objective.Value, stealCondition));
             else if (targetEntProto != null)
                 _steal.SetStealTarget(targetEntProto, (objective.Value, stealCondition));
-
-            return;
-        }
-
-        if (objective != null && targetEnt == null)
-        {
-            _mind.TryRemoveObjective(mindId, mind, objective.Value);
         }
         // ss220 add custom antag goals end
     }
