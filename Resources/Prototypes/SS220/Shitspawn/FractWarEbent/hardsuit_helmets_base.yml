@@ -18,8 +18,6 @@
   - type: TemperatureProtection
     heatingCoefficient: 0.005
     coolingCoefficient: 0.005
-  - type: StaminaResistance
-    damageCoefficient: 1
   - type: Armor
     modifiers:
       coefficients:

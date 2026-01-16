@@ -74,6 +74,8 @@
         Piercing: 0.5 #Some nukie tier physical protection...
         Heat: 0.8
         Radiation: 0.8 #Hey, it's a bunch of solid steel.
+  - type: StaminaResistance #SS220 staminaweapons
+    damageCoefficient: 0.5
   - type: ExplosionResistance
     damageCoefficient: 0.80
   - type: ClothingSpeedModifier #But that protection comes at a price.

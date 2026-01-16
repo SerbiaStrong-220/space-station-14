@@ -94,3 +94,4 @@
     damageCoefficient: 0.3
     ignoredEffects:
     - Paralyze
+  - type: DelayedKnockdownImmunity
