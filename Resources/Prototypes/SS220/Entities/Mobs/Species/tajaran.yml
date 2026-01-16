@@ -50,7 +50,7 @@
   - type: Speech
     speechSounds: Alto
     speechVerb: Tajaran
-    allowedEmotes: ['Growl','Hiss',]
+    allowedEmotes: ['Growl','Hiss']
   - type: DamageOnHighSpeedImpact
     damage:
       types:
