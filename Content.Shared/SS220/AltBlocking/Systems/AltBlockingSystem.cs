@@ -2,6 +2,7 @@
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Damage;
+using Content.Shared.FixedPoint;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -170,6 +171,7 @@ public sealed partial class AltBlockingSystem : EntitySystem
         }
         return false;
     }
+
     private void OnDropAttempt(Entity<AltBlockingComponent> ent, ref ContainerGettingRemovedAttemptEvent args)
     {
         if (IsDropBlocked(ent))
@@ -196,50 +198,51 @@ public sealed partial class AltBlockingSystem : EntitySystem
         return _gameTiming.CurTime <= actionComponent.Cooldown?.End;
     }
 
-    private void OnEquip(EntityUid uid, AltBlockingComponent component, GotEquippedHandEvent args)
+    private void OnEquip(Entity<AltBlockingComponent> ent, ref GotEquippedHandEvent args)
     {
-        component.User = args.User;
-        Dirty(uid, component);
+        ent.Comp.User = args.User;
+        Dirty(ent.Owner, ent.Comp);
         var userComp = EnsureComp<AltBlockingUserComponent>(args.User);
-        userComp.BlockingItemsShields.Add(uid);
+        userComp.BlockingItemsShields.Add(ent.Owner);
         _actionsSystem.AddAction(args.User, ref userComp.BlockingToggleActionEntity, userComp.BlockingToggleAction, args.User);
         Dirty(args.User, userComp);
     }
-    private void OnGotEquip(EntityUid uid, AltBlockingComponent component, GotEquippedEvent args)
+
+    private void OnGotEquip(Entity<AltBlockingComponent> ent, ref GotEquippedEvent args)
     {
 
-        if (!component.AvaliableSlots.ContainsKey(args.SlotFlags))
+        if (!ent.Comp.AvaliableSlots.ContainsKey(args.SlotFlags))
             return;
 
-        component.User = args.Equipee;
-        Dirty(uid, component);
+        ent.Comp.User = args.Equipee;
+        Dirty(ent.Owner, ent.Comp);
         var userComp = EnsureComp<AltBlockingUserComponent>(args.Equipee);
         _actionsSystem.AddAction(args.Equipee, ref userComp.BlockingToggleActionEntity, userComp.BlockingToggleAction, args.Equipee);
-        userComp.BlockingItemsShields.Add(uid);
+        userComp.BlockingItemsShields.Add(ent.Owner);
         Dirty(args.Equipee, userComp);
     }
 
-    private void OnGotUnequipped(EntityUid uid, AltBlockingComponent component, GotUnequippedEvent args)
+    private void OnGotUnequipped(Entity<AltBlockingComponent> ent, ref GotUnequippedEvent args)
     {
-        StopBlockingHelper(uid, component, args.Equipee);
+        StopBlockingHelper(ent.Owner, ent.Comp, args.Equipee);
     }
 
-    private void OnUnequip(EntityUid uid, AltBlockingComponent component, GotUnequippedHandEvent args)
+    private void OnUnequip(Entity<AltBlockingComponent> ent, ref GotUnequippedHandEvent args)
     {
-        StopBlockingHelper(uid, component, args.User);
+        StopBlockingHelper(ent.Owner, ent.Comp, args.User);
     }
 
-    private void OnDrop(EntityUid uid, AltBlockingComponent component, DroppedEvent args)
+    private void OnDrop(Entity<AltBlockingComponent> ent, ref DroppedEvent args)
     {
-        StopBlockingHelper(uid, component, args.User);
+        StopBlockingHelper(ent.Owner, ent.Comp, args.User);
     }
 
-    private void OnShutdown(EntityUid uid, AltBlockingComponent component, ComponentShutdown args)
+    private void OnShutdown(Entity<AltBlockingComponent> ent, ref ComponentShutdown args)
     {
         //In theory the user should not be null when this fires off
-        if (component.User != null)
+        if (ent.Comp.User != null)
         {
-            StopBlockingHelper(uid, component, component.User.Value);
+            StopBlockingHelper(ent.Owner, ent.Comp, ent.Comp.User.Value);
         }
     }
 
@@ -353,6 +356,7 @@ public sealed partial class AltBlockingSystem : EntitySystem
     }
 
 }
+
 [ByRefEvent]
 public record struct ActiveBlockingEvent(bool active)
 {

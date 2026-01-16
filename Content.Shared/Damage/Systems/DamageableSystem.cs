@@ -190,7 +190,8 @@ namespace Content.Shared.Damage
             bool interruptsDoAfters = true,
             DamageableComponent? damageable = null,
             EntityUid? origin = null,
-            bool ignoreGlobalModifiers = false)
+            bool ignoreGlobalModifiers = false
+            )
         {
             if (!uid.HasValue || !_damageableQuery.Resolve(uid.Value, ref damageable, false))
             {
