@@ -168,7 +168,6 @@
   placement:
     mode: AlignTileAny
 
-
 - type: entity
   name: Random Derelict Syndicate Cyborg Spawner 0.5
   id: SpawnBorgSyndicateDerelict05
