@@ -49,17 +49,19 @@ public sealed partial class DelayedKnockdownOnHitComponent : Component
 
     /// <summary>
     /// Dictionary mapping stamina resistance thresholds to (delay bonus, knockdown penalty) pairs.
-    /// Resistance thresholds (0.0–1.0) - stamina resistance in %
-    /// DelayBonus - seconds, added to a DelayedKnockdown
+    /// Resistance thresholds (0.0–1.0) - stamina resistance as '100 - value' (%)
+    /// DelayBonus - seconds, added to a DelayedKnockdown duration
     /// KnockdownPenalty - seconds, subtracted from knockdownDuration
     /// Should be sorted in descending order of keys for correct application logic.
     /// </summary>
     [DataField]
     public Dictionary<float, (TimeSpan DelayBonus, TimeSpan KnockdownPenalty)> ResistanceModifiers = new()
     {
-        { 0.3f, (TimeSpan.FromSeconds(3), TimeSpan.FromSeconds(1.5)) }, //70% res
-        { 0.5f, (TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(1.0)) }, //50% res
-        { 0.8f, (TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(0.5)) }, //20% res
+        { 0.8f, (TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1.0)) }, //20% res   //1 sec delay bonus     //1.0 sec knockdown duration penalty
+        { 0.7f, (TimeSpan.FromSeconds(1.5), TimeSpan.FromSeconds(1.5)) }, //30% res //1.5 sec delay bonus   //1.5 sec knockdown duration penalty
+        { 0.6f, (TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(2.0)) }, //40% res   //2 sec delay bonus     //2.0 sec knockdown duration penalty
+        { 0.45f, (TimeSpan.FromSeconds(3), TimeSpan.FromSeconds(3.0)) }, //55% res  //3 sec delay bonus     //3.0 sec knockdown duration penalty
+        { 0.2f, (TimeSpan.FromSeconds(4), TimeSpan.FromSeconds(4.0)) }, //80% res   //4 sec delay bonus     //4.0 sec knockdown duration penalty
     };
 
 }

@@ -73,8 +73,11 @@ public sealed class DelayedKnockdownOnHitSystem : EntitySystem
 
         foreach (var hitEntity in args.HitEntities)
         {
+            if (HasComp<ActiveDelayedKnockdownComponent>(hitEntity)) //no stacking of multiple knockdowns
+                continue;
+
             var cancelEvent = new BeforeDelayedKnockdownEvent(Value: 0f);
-            RaiseLocalEvent(hitEntity, ref cancelEvent);
+            RaiseLocalEvent(hitEntity, ref cancelEvent); //knockdown immunity component check
 
             if (cancelEvent.Cancelled)
                 continue;
@@ -98,13 +101,14 @@ public sealed class DelayedKnockdownOnHitSystem : EntitySystem
             {
                 if (currentResistance >= threshold)
                 {
-                    delayTime += delayBonus;
+                    if (delayTime > TimeSpan.Zero) //if KnockdownDelay = 0, it means that knockdown should be instant, so no bonus for ya
+                        delayTime += delayBonus;
                     knockdownTime -= knockdownPenalty;
                     break;
                 }
             }
 
-            knockdownTime = TimeSpan.FromTicks(Math.Max(0, knockdownTime.Ticks));
+            knockdownTime = TimeSpan.FromTicks(Math.Max(TimeSpan.FromSeconds(0.5).Ticks, knockdownTime.Ticks)); //0,5 sec is min knockdown time
 
             activeComp.Delay = _gameTiming.CurTime + delayTime;
             activeComp.KnockdownTime = knockdownTime;
