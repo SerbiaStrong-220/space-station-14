@@ -69,7 +69,7 @@ public sealed class CrewManifestListing : BoxContainer
         if (cryoList.Count > 0)
         {
             if (_prototypeManager.TryIndex<DepartmentPrototype>("Cryo", out var cryoDepartment))
-                AddChild(new CrewManifestSection(_entMan, _prototypeManager, _spriteSystem, cryoDepartment, cryoList)); // ss220 add additional info for pda
+                AddChild(new CrewManifestSection(_entMan, _prototypeManager, _spriteSystem, cryoDepartment, cryoList, pda)); // ss220 add additional info for pda
         }
     }
 }
