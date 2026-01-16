@@ -4,6 +4,7 @@ using Content.Shared.Damage.Components;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Shared.Inventory;
 using Content.Shared.Timing;
 using Robust.Shared.Timing;
 using Content.Shared.SS220.DelayedKnockdown;
@@ -22,6 +23,8 @@ public sealed class DelayedKnockdownOnHitSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<DelayedKnockdownOnHitComponent, MeleeHitEvent>(OnMeleeHit);
+        SubscribeLocalEvent<DelayedKnockdownImmunityComponent, BeforeDelayedKnockdownEvent>(OnCancelDelayedKnockdownDirect);
+        SubscribeLocalEvent<DelayedKnockdownImmunityComponent, InventoryRelayedEvent<BeforeDelayedKnockdownEvent>>(OnCancelDelayedKnockdownRelayed);
     }
 
     public override void Update(float frameTime)
@@ -46,6 +49,16 @@ public sealed class DelayedKnockdownOnHitSystem : EntitySystem
             RemCompDeferred<ActiveDelayedKnockdownComponent>(uid);
         }
     }
+    private void OnCancelDelayedKnockdownDirect(Entity<DelayedKnockdownImmunityComponent> ent, ref BeforeDelayedKnockdownEvent args)
+    {
+        args.Cancelled = true;
+    }
+
+    private void OnCancelDelayedKnockdownRelayed(Entity<DelayedKnockdownImmunityComponent> ent, ref InventoryRelayedEvent<BeforeDelayedKnockdownEvent> args)
+    {
+        if (ent.Comp.Worn)
+            args.Args.Cancelled = true;
+    }
 
     private void OnMeleeHit(EntityUid uid, DelayedKnockdownOnHitComponent component, MeleeHitEvent args)
     {
@@ -56,12 +69,16 @@ public sealed class DelayedKnockdownOnHitSystem : EntitySystem
             return;
 
         if (TryComp<UseDelayComponent>(uid, out var useDelay))
-        {
             _useDelay.TryResetDelay((uid, useDelay), id: component.UseDelay);
-        }
 
         foreach (var hitEntity in args.HitEntities)
         {
+            var cancelEvent = new BeforeDelayedKnockdownEvent(Value: 0f);
+            RaiseLocalEvent(hitEntity, ref cancelEvent);
+
+            if (cancelEvent.Cancelled)
+                continue;
+
             var activeComp = EnsureComp<ActiveDelayedKnockdownComponent>(hitEntity);
 
             var delayTime = component.Delay;
