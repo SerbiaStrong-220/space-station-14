@@ -658,7 +658,7 @@ public sealed class PullingSystem : EntitySystem
         var query = EntityQueryEnumerator<PullerComponent>();
         while (query.MoveNext(out var uid, out var pullerComponent))
         {
-            if (!uid.IsValid())
+            if (!uid.IsValid() || Deleted(uid))
                 continue;
 
             if (_combatMode.IsInCombatMode(uid))
@@ -667,7 +667,7 @@ public sealed class PullingSystem : EntitySystem
             if (GetPulling(uid, pullerComponent) is not { } pulled)
                 continue;
 
-            if (!pulled.IsValid())
+            if (!pulled.IsValid()|| Deleted(uid))
                 continue;
 
             var pulledPos = _transform.GetMapCoordinates(pulled).Position;
