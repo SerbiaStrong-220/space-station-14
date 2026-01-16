@@ -94,10 +94,10 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         if (!_timing.IsFirstTimePredicted)
             return;
 
-        if (component.CurrentSelectedEquipment != null)
-        {
-            RaiseLocalEvent(component.CurrentSelectedEquipment.Value, args);
-        }
+        //if (component.CurrentSelectedEquipment != null)
+        //{
+        //    RaiseLocalEvent(component.CurrentSelectedEquipment.Value, args);
+        //}
     }
     //SS220-AddMechToClothing-start
     /// <summary>
@@ -105,7 +105,10 @@ public abstract partial class SharedAltMechSystem : EntitySystem
     /// </summary>
     private void OnStartup(EntityUid uid, AltMechComponent component, ComponentStartup args)
     {
-        component.EquipmentContainer = _container.EnsureContainer<Container>(uid, component.EquipmentContainerId);
+        foreach (var part in component.ContainerDict.Keys)
+        {
+            component.ContainerDict[part] = _container.EnsureContainer<ContainerSlot>(uid, part);
+        }
         component.BatterySlot = _container.EnsureContainer<ContainerSlot>(uid, component.BatterySlotId);
 
         //SS220-MechClothingInHandsFix
@@ -177,11 +180,14 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         if (!Resolve(uid, ref component))
             return;
 
+        if (!TryComp<MechPartComponent>(uid, out var partComp))
+            return;
+
         TryEject(uid, component);
-        var equipment = new List<EntityUid>(component.EquipmentContainer.ContainedEntities);
+        var equipment = new List<EntityUid>(partComp.EquipmentContainer.ContainedEntities);
         foreach (var ent in equipment)
         {
-            RemoveEquipment(uid, ent, component, forced: true);
+            RemoveEquipment(uid, ent, partComp, forced: true);
         }
 
         component.Broken = true;
@@ -235,13 +241,16 @@ public abstract partial class SharedAltMechSystem : EntitySystem
     /// <param name="toInsert"></param>
     /// <param name="component"></param>
     /// <param name="equipmentComponent"></param>
-    public void InsertEquipment(EntityUid uid, EntityUid toInsert, AltMechComponent? component = null,
+    public void InsertEquipment(EntityUid uid, EntityUid toInsert, MechPartComponent? component = null,
         MechEquipmentComponent? equipmentComponent = null)
     {
         if (!Resolve(uid, ref component))
             return;
 
         if (!Resolve(toInsert, ref equipmentComponent))
+            return;
+
+        if (!TryComp<AltMechComponent>(uid, out var mechComp))
             return;
 
         if (component.EquipmentContainer.ContainedEntities.Count >= component.MaxEquipmentAmount)
@@ -254,7 +263,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         _container.Insert(toInsert, component.EquipmentContainer);
         var ev = new MechEquipmentInsertedEvent(uid);
         RaiseLocalEvent(toInsert, ref ev);
-        UpdateUserInterface(uid, component);
+        UpdateUserInterface(uid, mechComp);
     }
 
     public void InsertPart(EntityUid uid, EntityUid toInsert, AltMechComponent? component = null,
@@ -267,9 +276,6 @@ public abstract partial class SharedAltMechSystem : EntitySystem
             return;
 
         if (!component.ContainerDict.ContainsKey(partComponent.slot) && component.ContainerDict[partComponent.slot].ContainedEntity != null)
-            return;
-
-        if (_whitelistSystem.IsWhitelistFail(component.EquipmentWhitelist, toInsert))
             return;
 
         partComponent.PartOwner = uid;
@@ -289,12 +295,14 @@ public abstract partial class SharedAltMechSystem : EntitySystem
     /// <param name="forced">
     ///     Whether or not the removal can be cancelled, and if non-mech equipment should be ejected.
     /// </param>
-    public void RemoveEquipment(EntityUid uid, EntityUid toRemove, AltMechComponent? component = null,
+    public void RemoveEquipment(EntityUid uid, EntityUid toRemove, MechPartComponent? component = null,
         MechEquipmentComponent? equipmentComponent = null, bool forced = false)
     {
         if (!Resolve(uid, ref component))
             return;
 
+        if (component.PartOwner == null || !TryComp<AltMechComponent>(component.PartOwner, out var mechComp))
+            return;
         // When forced, we also want to handle the possibility that the "equipment" isn't actually equipment.
         // This /shouldn't/ be possible thanks to OnEntityStorageDump, but there's been quite a few regressions
         // with entities being hardlock stuck inside mechs.
@@ -316,7 +324,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
             equipmentComponent.EquipmentOwner = null;
 
         _container.Remove(toRemove, component.EquipmentContainer);
-        UpdateUserInterface(uid, component);
+        UpdateUserInterface(uid, mechComp);
     }
 
     /// <summary>
@@ -344,7 +352,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         if (partComponent == null)
             return;
 
-        if (!component.ContainerDict.ContainsKey(partComponent.slot) && component.ContainerDict[partComponent.slot].ContainedEntity != null)
+        if (!component.ContainerDict.ContainsKey(partComponent.slot) || component.ContainerDict[partComponent.slot].ContainedEntity == null)
             return;
 
         if (!forced)
@@ -361,7 +369,9 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         if (forced && partComponent != null)
             partComponent.PartOwner = null;
 
-        _container.Remove(toRemove, component.EquipmentContainer);
+        if (partComponent != null)
+            _container.Remove(toRemove, component.ContainerDict[partComponent.slot]);
+
         UpdateUserInterface(uid, component);
     }
 

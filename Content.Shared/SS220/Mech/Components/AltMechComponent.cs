@@ -128,25 +128,6 @@ public sealed partial class AltMechComponent : Component
     //[ViewVariables]
     //public readonly string RightArmSlotSlotId = "mech-right-arm-slot";
 
-    /// <summary>
-    /// The current selected equipment of the mech.
-    /// If null, the mech is using just its fists.
-    /// </summary>
-    [ViewVariables, AutoNetworkedField]
-    public EntityUid? CurrentSelectedEquipment;
-
-    /// <summary>
-    /// The maximum amount of equipment items that can be installed in the mech
-    /// </summary>
-    [DataField("maxEquipmentAmount"), ViewVariables(VVAccess.ReadWrite)]
-    public int MaxEquipmentAmount = 3;
-
-    /// <summary>
-    /// A whitelist for inserting equipment items.
-    /// </summary>
-    [DataField]
-    public EntityWhitelist? EquipmentWhitelist;
-
     [DataField]
     public EntityWhitelist? HeadWhitelist;
 
@@ -164,16 +145,6 @@ public sealed partial class AltMechComponent : Component
 
     [DataField]
     public EntityWhitelist? PilotWhitelist;
-
-    /// <summary>
-    /// A container for storing the equipment entities.
-    /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
-    public Container EquipmentContainer = default!;
-
-
-    [ViewVariables]
-    public readonly string EquipmentContainerId = "mech-equipment-container";
 
     /// <summary>
     /// How long it takes to enter the mech.
@@ -203,13 +174,6 @@ public sealed partial class AltMechComponent : Component
     /// </remarks>
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public bool Airtight;
-
-    /// <summary>
-    /// The equipment that the mech initially has when it spawns.
-    /// Good for things like nukie mechs that start with guns.
-    /// </summary>
-    [DataField]
-    public List<EntProtoId> StartingEquipment = new();
 
     #region Action Prototypes
     [DataField]

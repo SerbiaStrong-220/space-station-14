@@ -1,4 +1,3 @@
-using System.Linq;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Systems;
 using Content.Server.Mech.Components;
@@ -14,6 +13,10 @@ using Content.Shared.Mech.EntitySystems;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
 using Content.Shared.Power.Components;
+using Content.Shared.SS220.Mech.Components;
+using Content.Shared.SS220.Mech.Equipment.Components;
+using Content.Shared.SS220.Mech.Systems;
+using Content.Shared.SS220.MechRobot; //SS220-AddMechToClothing
 using Content.Shared.Tools;
 using Content.Shared.Tools.Components;
 using Content.Shared.Tools.Systems;
@@ -24,10 +27,8 @@ using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
-using Content.Shared.SS220.MechRobot; //SS220-AddMechToClothing
-using Content.Shared.SS220.Mech.Systems;
-using Content.Shared.SS220.Mech.Components;
 using Robust.Shared.Prototypes;
+using System.Linq;
 
 namespace Content.Server.SS220.Mech.Systems;
 
@@ -57,13 +58,12 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         SubscribeLocalEvent<AltMechComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<AltMechComponent, GetVerbsEvent<AlternativeVerb>>(OnAlternativeVerb);
         SubscribeLocalEvent<AltMechComponent, MechOpenUiEvent>(OnOpenUi);
-        SubscribeLocalEvent<AltMechComponent, MechClothingOpenUiEvent>(OnOpenClothingUi); //SS220-AddMechToClothing
         SubscribeLocalEvent<AltMechComponent, RemoveBatteryEvent>(OnRemoveBattery);
         SubscribeLocalEvent<AltMechComponent, MechEntryEvent>(OnMechEntry);
         SubscribeLocalEvent<AltMechComponent, MechExitEvent>(OnMechExit);
 
         SubscribeLocalEvent<AltMechComponent, DamageChangedEvent>(OnDamageChanged);
-        SubscribeLocalEvent<AltMechComponent, MechEquipmentRemoveMessage>(OnRemoveEquipmentMessage);
+        SubscribeLocalEvent<MechPartComponent, MechEquipmentRemoveMessage>(OnRemoveEquipmentMessage);
 
         SubscribeLocalEvent<AltMechComponent, UpdateCanMoveEvent>(OnMechCanMoveEvent);
 
@@ -137,13 +137,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
     private void OnMapInit(EntityUid uid, AltMechComponent component, MapInitEvent args)
     {
         var xform = Transform(uid);
-        // TODO: this should use containerfill?
-        foreach (var equipment in component.StartingEquipment)
-        {
-            var ent = Spawn(equipment, xform.Coordinates);
-            InsertEquipment(uid, ent, component);
-        }
-
+        // TODO: this should use containerfill
         // TODO: this should just be damage and battery
         component.Integrity = component.MaxIntegrity;
         component.Energy = component.MaxEnergy;
@@ -152,7 +146,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         Dirty(uid, component);
     }
 
-    private void OnRemoveEquipmentMessage(EntityUid uid, AltMechComponent component, MechEquipmentRemoveMessage args)
+    private void OnRemoveEquipmentMessage(EntityUid uid, MechPartComponent component, MechEquipmentRemoveMessage args)
     {
         var equip = GetEntity(args.Equipment);
 
@@ -170,14 +164,6 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         args.Handled = true;
         ToggleMechUi(uid, component);
     }
-
-    //SS220-AddMechToClothing-start
-    private void OnOpenClothingUi(Entity<AltMechComponent> ent, ref MechClothingOpenUiEvent args)
-    {
-        args.Handled = true;
-        ToggleMechClothingUi(ent.Owner, args.Performer, ent.Comp);
-    }
-    //SS220-AddMechToClothing-end
 
     private void OnToolUseAttempt(EntityUid uid, MechPilotComponent component, ref ToolUserAttemptUseEvent args)
     {
@@ -298,6 +284,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
     private void ToggleMechUi(EntityUid uid, AltMechComponent? component = null, EntityUid? user = null)
     {
+
         if (!Resolve(uid, ref component))
             return;
         user ??= component.PilotSlot.ContainedEntity;
@@ -311,24 +298,14 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         UpdateUserInterface(uid, component);
     }
 
-    //SS220-AddMechToClothing-start
-    private void ToggleMechClothingUi(EntityUid entOwner, EntityUid argsPerformer, AltMechComponent? entComp = null)
-    {
-        if (!Resolve(entOwner, ref entComp))
-            return;
-
-        if (!TryComp<ActorComponent>(argsPerformer, out var actor))
-            return;
-
-        _ui.TryToggleUi(entOwner, MechUiKey.Key, actor.PlayerSession);
-        UpdateUserInterface(entOwner, entComp);
-    }
-    //SS220-AddMechToClothing-end
 
     private void ReceiveEquipmentUiMesssages<T>(EntityUid uid, AltMechComponent component, T args) where T : MechEquipmentUiMessage
     {
+        if (!TryComp<MechPartComponent>(uid, out var partComp))
+            return;
+
         var ev = new MechEquipmentUiMessageRelayEvent(args);
-        var allEquipment = new List<EntityUid>(component.EquipmentContainer.ContainedEntities);
+        var allEquipment = new List<EntityUid>(partComp.EquipmentContainer.ContainedEntities);
         var argEquip = GetEntity(args.Equipment);
 
         foreach (var equipment in allEquipment)
@@ -346,9 +323,14 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         base.UpdateUserInterface(uid, component);
 
         var ev = new MechEquipmentUiStateReadyEvent();
-        foreach (var ent in component.EquipmentContainer.ContainedEntities)
+        foreach (var ent in component.ContainerDict.Values)
         {
-            RaiseLocalEvent(ent, ev);
+            if (TryComp<MechPartComponent>(ent.ContainedEntity, out var partcomp) || partcomp == null)
+                return;
+            foreach (var equip in partcomp.EquipmentContainer.ContainedEntities)
+            {
+                RaiseLocalEvent(equip, ev);
+            }
         }
 
         var state = new MechBoundUiState
