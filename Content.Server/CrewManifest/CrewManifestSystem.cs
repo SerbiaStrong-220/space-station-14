@@ -234,10 +234,7 @@ public sealed class CrewManifestSystem : EntitySystem
         foreach (var recordObject in iter)
         {
             var record = recordObject.Item2;
-
-            // ss220 add additional info for pda start
-            var entry = new CrewManifestEntry(record.Name, record.JobTitle, record.JobIcon, record.JobPrototype, record.IsInCryo, recordObject.Item1);
-            // ss220 add additional info for pda end
+            var entry = new CrewManifestEntry(record.Name, record.JobTitle, record.JobIcon, record.JobPrototype, record.IsInCryo);
 
             _prototypeManager.TryIndex(record.JobPrototype, out JobPrototype? job);
             entriesSort.Add((job, entry));

@@ -367,6 +367,3 @@
 
 - type: Tag
   id: VoidTeleporationTarget
-
-- type: Tag
-  id: LinkRecordsPda
