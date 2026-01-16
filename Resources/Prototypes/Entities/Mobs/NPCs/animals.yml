@@ -1218,6 +1218,11 @@
   - type: Puller
     needsHands: false
   - type: Prying
+  #ss220-prying-action-start
+  - type: ActionGrant
+    actions:
+    - ActionPryingBase
+  #ss220-prying-action-ended
     pryPowered: true
     force: true
     speedModifier: 1.5
@@ -2751,6 +2756,11 @@
     damage:
       types:
         Piercing: 6
+  #ss220-prying-action-start
+  - type: ActionGrant
+    actions:
+    - ActionPryingTarantula
+  #ss220-prying-action-ended
 
 - type: entity
   parent:
@@ -2805,6 +2815,11 @@
     - type: Bloodstream
       bloodMaxVolume: 150
       bloodReagent: Laughter
+    #ss220-prying-action-start
+    - type: ActionGrant
+      actions:
+      - ActionPryingClown
+    #ss220-prying-action-ended
 
 - type: entity
   name: wizard spider
@@ -2817,6 +2832,11 @@
     removes:
     - type: ReplacementAccent
       accent: xeno  #let this wizard speak
+    #ss220-prying-action-start
+  - type: ActionGrant
+    actions:
+    - ActionPryingTarantula
+    #ss220-prying-action-ended
 
 - type: entity
   name: possum

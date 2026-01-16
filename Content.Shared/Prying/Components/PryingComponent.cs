@@ -1,5 +1,6 @@
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes; //ss220-prying-action
 
 namespace Content.Shared.Prying.Components;
 
@@ -36,6 +37,14 @@ public sealed partial class PryingComponent : Component
     /// </summary>
     [DataField]
     public bool Enabled = true;
+
+    //ss220-prying-action-start
+    [ViewVariables]
+    public EntityUid? ActionPryingEntity;
+
+    [DataField("actionPry")]
+    public EntProtoId ActionPrying = "ActionPrying";
+    //ss220-prying-action-end
 }
 
 /// <summary>
