@@ -1,4 +1,5 @@
 using Content.Shared.Damage;
+using Content.Shared.FixedPoint;
 using Content.Shared.Physics;
 using Content.Shared.SS220.Shuttles.UI;
 using Content.Shared.Weapons.Reflect;

@@ -45,7 +45,7 @@ public sealed class DamageOtherOnHitSystem : SharedDamageOtherOnHitSystem
         // SS220-add-miss-chance-?-end
 
         //SS220 shield rework begin
-        var blockEv = new ThrowableProjectileBlockAttemptEvent(component.Damage);
+        var blockEv = new ThrowableProjectileBlockAttemptEvent(component.Damage, component.ArmourPiercing);
 
         RaiseLocalEvent(args.Target, ref blockEv);
         if (blockEv.Cancelled)
