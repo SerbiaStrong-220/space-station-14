@@ -3,10 +3,19 @@
 using Content.Shared.DoAfter;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.SS220.InteractionTeleport;
+namespace Content.Shared.SS220.Teleport;
 
 [Serializable, NetSerializable]
 public sealed partial class InteractionTeleportDoAfterEvent : SimpleDoAfterEvent { }
+
+/// <summary>
+///     Sends information to the teleporter to handle events that must occur before teleportation.
+///     Raised on teleporter entity.
+/// </summary>
+/// <param name="Target">The entity that is currently teleporting</param>
+/// <param name="User">An entity that interacts with a teleporter</param>
+[ByRefEvent, Serializable]
+public record struct BeforeTeleportTargetEvent(EntityUid Target, EntityUid User);
 
 /// <summary>
 ///     Sends information about the completed interaction to other teleport components, which are supposed to perform the teleportation
