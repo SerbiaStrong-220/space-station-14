@@ -52,6 +52,7 @@
     whitelist:
       tags:
       - Document
+      - Pen #SS220-Added Pen to folder storage whitelist
   - type: ItemMapper
     mapLayers:
       folder-overlay-paper:
@@ -302,7 +303,10 @@
         whitelist:
           tags:
           - Write
-        insertOnInteract: false
+        #SS220 Allow pens to be inserted into clipboard pen slot start
+          - Pen
+        insertOnInteract: true 
+        #SS220 Allow pens to be inserted into clipboard pen slot end
   - type: Item
     sprite: Objects/Misc/clipboard.rsi
     size: Small
