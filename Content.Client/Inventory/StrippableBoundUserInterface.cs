@@ -50,8 +50,10 @@ namespace Content.Client.Inventory
         [ViewVariables]
         private StrippingMenu? _strippingMenu;
 
-        [ViewVariables]
-        private readonly EntityUid _virtualHiddenEntity;
+        // ss220 fix admin ghost pocket items start
+        // [ViewVariables]
+        // private readonly EntityUid _virtualHiddenEntity;
+        // ss220 fix admin ghost pocket items end
 
         /// <summary>
         /// The current amount of added hand buttons.
@@ -73,7 +75,9 @@ namespace Content.Client.Inventory
             _cuffable = EntMan.System<SharedCuffableSystem>();
             _strippable = EntMan.System<StrippableSystem>();
 
-            _virtualHiddenEntity = EntMan.SpawnEntity(HiddenPocketEntityId, MapCoordinates.Nullspace);
+            // ss220 fix admin ghost pocket items start
+            // _virtualHiddenEntity = EntMan.SpawnEntity(HiddenPocketEntityId, MapCoordinates.Nullspace);
+            // ss220 fix admin ghost pocket items end
         }
 
         protected override void Open()
@@ -93,7 +97,9 @@ namespace Content.Client.Inventory
             if (_strippingMenu != null)
                 _strippingMenu.OnDirty -= UpdateMenu;
 
-            EntMan.DeleteEntity(_virtualHiddenEntity);
+            // ss220 fix admin ghost pocket items start
+            // EntMan.DeleteEntity(_virtualHiddenEntity);
+            // ss220 fix admin ghost pocket items end
             base.Dispose(disposing);
         }
 
@@ -244,16 +250,14 @@ namespace Content.Client.Inventory
             // If this is a full pocket, obscure the real entity
             // this does not work for modified clients because they are still sent the real entity
             if (entity != null && _strippable.IsStripHidden(slotDef, _player.LocalEntity))
-                entity = _virtualHiddenEntity;
+                entity = null; // ss220 fix admin ghost pocket items
 
             var button = new SlotButton(new SlotData(slotDef, container));
             button.Pressed += SlotPressed;
 
             _strippingMenu!.InventoryContainer.AddChild(button);
 
-            //ss220 add fully hidden pockets start
-            UpdateEntityIcon(button, entity, slotDef.FullyHidden);
-            //ss220 add fully hidden pockets end
+            UpdateEntityIcon(button, entity);
 
             LayoutContainer.SetPosition(button, slotDef.StrippingWindowPos * (SlotControl.DefaultButtonSize + ButtonSeparation));
             if (slotDef.StrippingWindowPos.X > _inventoryDimensions.X)
@@ -262,7 +266,7 @@ namespace Content.Client.Inventory
                 _inventoryDimensions = new Vector2i(_inventoryDimensions.X, slotDef.StrippingWindowPos.Y);
         }
 
-        private void UpdateEntityIcon(SlotControl button, EntityUid? entity, bool isFullyHidden = false) //ss220 add fully hidden pockets
+        private void UpdateEntityIcon(SlotControl button, EntityUid? entity)
         {
             // Hovering, highlighting & storage are features of general hands & inv GUIs. This UI just re-uses these because I'm lazy.
             button.ClearHover();
@@ -281,11 +285,6 @@ namespace Content.Client.Inventory
                 viewEnt = entity;
             else
                 return;
-
-            //ss220 add fully hidden pockets start
-            if (isFullyHidden)
-                viewEnt = null;
-            //ss220 add fully hidden pockets end
 
             button.SetEntity(viewEnt);
         }

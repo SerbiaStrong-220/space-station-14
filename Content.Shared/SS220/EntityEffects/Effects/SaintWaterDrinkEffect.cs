@@ -5,9 +5,9 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.DarkForces.Saint.Reagent;
 
-public sealed partial class SaintWaterDrinkEffect : EventEntityEffect<SaintWaterDrinkEffect>
+public sealed partial class SaintWaterDrinkEffect : EntityEffectBase<SaintWaterDrinkEffect>
 {
-    protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
+    public override string EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
         return Loc.GetString("reagent-effect-guidebook-ss220-cult-cleanse");
     }

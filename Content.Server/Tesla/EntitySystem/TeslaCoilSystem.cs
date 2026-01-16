@@ -1,11 +1,9 @@
-using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Tesla.Components;
 using Content.Server.Lightning;
 using Content.Server.SS220.SuperMatter.Crystal.Components;
-// SS220-SM-fix-begin
 using Content.Shared.Damage;
-// SS220-SM-fix-end
+using Content.Shared.Power.Components;
 
 namespace Content.Server.Tesla.EntitySystems;
 

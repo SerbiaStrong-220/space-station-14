@@ -2,6 +2,24 @@
 
 - type: entity
   parent: IDCardStandard
+  id: SecurityPilotIDCard
+  name: ID карта (пилот СБ)
+  components:
+  - type: Sprite
+    layers:
+    - state: default
+    - state: idpilot
+  - type: PresetIdCard
+    job: SecurityPilot
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+
+- type: entity
+  parent: IDCardStandard
   id: UsspIDCard
   suffix: Shitspawn, Ebent, FractWar
   name: ID карта СССП
@@ -180,3 +198,39 @@
     jobTitle: job-name-dq-specialist
   - type: PresetIdCard
     job:  DeathsquadHealer
+
+# CBURNLeader
+- type: entity
+  parent: IDCardStandard
+  id: CBURNIDLeadercard
+  name: CBURN ID Leader card
+  suffix: CBURN
+  components:
+  - type: Sprite
+    layers:
+    - state: centcom
+  - type: Item
+    heldPrefix: blue
+  - type: PresetIdCard
+    job: CBURNLeader
+
+# CI
+- type: entity
+  parent: CentcomIDCard
+  id: CIAgentIDCard
+  name: CI Agent ID Card
+  components:
+    - type: IdCard
+      jobTitle: job-name-cc-ci-agent
+    - type: PresetIdCard
+      job: CIAgent
+
+- type: entity
+  parent: CentcomIDCard
+  id: CIOfficerIDCard
+  name: CI Officer ID Card
+  components:
+    - type: IdCard
+      jobTitle: job-name-cc-ci-officer
+    - type: PresetIdCard
+      job: CIOffcier

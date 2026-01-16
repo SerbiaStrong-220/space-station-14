@@ -29,11 +29,16 @@ public sealed class UncuffOnTriggerSystem : EntitySystem
         if (target == null)
             return;
 
-        if (!TryComp<CuffableComponent>(target.Value, out var cuffs) || cuffs.Container.ContainedEntities.Count < 1)
-            return;
+        // ss220 fix freedom from bola start
+        if (TryComp<CuffableComponent>(target.Value, out var cuffs) && cuffs.Container.ContainedEntities.Count >= 1)
+        {
+            _cuffable.Uncuff(target.Value, args.User, cuffs.LastAddedCuffs);
+            args.Handled = true;
+        }
+        // ss220 fix freedom from bola end
 
         //ss220 add freedom from bola start
-        if (TryComp<EnsnareableComponent>(args.User, out var ensnareableComponent))
+        if (TryComp<EnsnareableComponent>(target, out var ensnareableComponent))
         {
             var list = ensnareableComponent.Container.ContainedEntities.ToList();
 
@@ -43,11 +48,11 @@ public sealed class UncuffOnTriggerSystem : EntitySystem
                     continue;
 
                 _ensnareable.ForceFree(containedEntity, ensnaringComponent);
+                args.Handled = true;
             }
+
+            Dirty(target.Value, ensnareableComponent);
         }
         //ss220 add freedom from bola end
-
-        _cuffable.Uncuff(target.Value, args.User, cuffs.LastAddedCuffs);
-        args.Handled = true;
     }
 }

@@ -17,15 +17,11 @@ namespace Content.Server.Stack
     public sealed class StackSystem : SharedStackSystem
     {
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-        [Dependency] private readonly QuickDialogSystem _quickDialog = default!; //ss220 add custom amount
-
-        public static readonly int[] DefaultSplitAmounts = { 1, 5, 10, 20, 30, 50 };
+        [Dependency] private readonly QuickDialogSystem _quickDialog = default!;
 
         public override void Initialize()
         {
             base.Initialize();
-
-            SubscribeLocalEvent<StackComponent, GetVerbsEvent<AlternativeVerb>>(OnStackAlternativeInteract);
         }
 
         public override void SetCount(EntityUid uid, int amount, StackComponent? component = null)
@@ -168,27 +164,33 @@ namespace Content.Server.Stack
             return amounts;
         }
 
-        private void OnStackAlternativeInteract(EntityUid uid, StackComponent stack, GetVerbsEvent<AlternativeVerb> args)
+        // ss220 split fix start // wow, no comments ss220 here...
+        protected override AlternativeVerb? MakeCustomVerb(EntityUid user, Entity<StackComponent> stackEntity, LocId title, LocId prompt)
         {
-            if (!args.CanAccess || !args.CanInteract || args.Hands == null || stack.Count == 1)
-                return;
-
-            //ss220 add custom amount start
             var customAmount = new AlternativeVerb
             {
                 Text = Loc.GetString("custom-amount"),
                 Category = VerbCategory.Split,
                 Act = () =>
                 {
-                    if (!TryComp<ActorComponent>(args.User, out var actorComp))
+                    if (!TryComp<ActorComponent>(user, out var actorComp))
                         return;
 
                     _quickDialog.OpenDialog(actorComp.PlayerSession,
-                        Loc.GetString("custom-amount-title"),
-                        Loc.GetString("custom-amount-prompt"),
-                        (int amount) =>
+                        Loc.GetString(title),
+                        Loc.GetString(prompt),
+                        (string amount) =>
                         {
-                            UserSplit(uid, args.User, amount, stack);
+                            if (string.IsNullOrEmpty(amount))
+                                return;
+
+                            if (!int.TryParse(amount, out var amountInt))
+                                return;
+
+                            if (amountInt <= 0)
+                                return;
+
+                            UserSplit(stackEntity.Owner, user, amountInt, stackEntity.Comp);
                         },
                         () =>
                         {
@@ -198,40 +200,11 @@ namespace Content.Server.Stack
                 Priority = 1,
             };
 
-            args.Verbs.Add(customAmount);
-            //ss220 add custom amount end
-
-            AlternativeVerb halve = new()
-            {
-                Text = Loc.GetString("comp-stack-split-halve"),
-                Category = VerbCategory.Split,
-                Act = () => UserSplit(uid, args.User, stack.Count / 2, stack),
-                Priority = 1
-            };
-            args.Verbs.Add(halve);
-
-            var priority = 0;
-            foreach (var amount in DefaultSplitAmounts)
-            {
-                if (amount >= stack.Count)
-                    continue;
-
-                AlternativeVerb verb = new()
-                {
-                    Text = amount.ToString(),
-                    Category = VerbCategory.Split,
-                    Act = () => UserSplit(uid, args.User, amount, stack),
-                    // we want to sort by size, not alphabetically by the verb text.
-                    Priority = priority
-                };
-
-                priority--;
-
-                args.Verbs.Add(verb);
-            }
+            return customAmount;
         }
+        // ss220 split fix end
 
-        private void UserSplit(EntityUid uid, EntityUid userUid, int amount,
+        protected override void UserSplit(EntityUid uid, EntityUid userUid, int amount,
             StackComponent? stack = null,
             TransformComponent? userTransform = null)
         {
@@ -247,7 +220,7 @@ namespace Content.Server.Stack
                 return;
             }
 
-            if (Split(uid, amount, userTransform.Coordinates, stack) is not {} split)
+            if (Split(uid, amount, userTransform.Coordinates, stack) is not { } split)
                 return;
 
             Hands.PickupOrDrop(userUid, split);
