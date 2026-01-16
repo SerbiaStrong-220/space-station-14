@@ -3224,7 +3224,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.35
-        density: 15
+        density: 40 #SS220 Cat density increased for mousetrap protection
         mask:
         - MobMask
         layer:
@@ -3473,7 +3473,10 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      25: Dead
+      #SS220 Kittnen health buff begin
+      40: Critical
+      60: Dead
+      #SS220 Kittens health buff end
   # ss220 kitten in hands
   - type: MultiHandedItem
   - type: Item

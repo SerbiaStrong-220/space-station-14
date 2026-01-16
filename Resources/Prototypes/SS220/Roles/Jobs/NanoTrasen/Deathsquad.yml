@@ -2,6 +2,7 @@
   id: DeathSquadLeader
   name: job-name-death-squad-leader
   description: job-description-death-squad-leader
+  setPreference: false
   playTimeTracker: DeathSquadLeader
   requirements:
     - !type:DepartmentTimeRequirement
@@ -15,6 +16,7 @@
   id: DeathSquadHealer
   name: job-name-death-squad-healer
   description: job-description-death-squad-healer
+  setPreference: false
   playTimeTracker: DeathSquadHealer
   requirements:
     - !type:DepartmentTimeRequirement
@@ -28,6 +30,7 @@
   id: DeathSquadOperative
   name: job-name-death-squad-operative
   description: job-description-death-squad-operative
+  setPreference: false
   playTimeTracker: DeathSquadOperative
   requirements:
     - !type:DepartmentTimeRequirement
