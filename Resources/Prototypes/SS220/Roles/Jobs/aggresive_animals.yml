@@ -3,6 +3,7 @@
   name: job-name-aggressive-animals
   description: job-description-aggressive-animals
   playTimeTracker: AntahAggressiveAnimals
+  setPreference: false
   requirements:
   - !type:OverallPlaytimeRequirement
     time: 20h
@@ -12,6 +13,7 @@
   name: job-name-space-dragon
   description: job-description-space-dragon
   playTimeTracker: AntagSpaceDragon
+  setPreference: false
   requirements:
   - !type:OverallPlaytimeRequirement
     time: 20h
