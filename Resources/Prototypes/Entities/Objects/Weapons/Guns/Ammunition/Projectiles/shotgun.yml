@@ -7,7 +7,10 @@
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     state: slug
-  - type: PathologyOnProjectileHit # SS220-add-projectile-wounds
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    weighedRandomProviderEntity: LargeHeavyCaliberFragment
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:
@@ -27,6 +30,7 @@
   # SS220-add-projectile-wounds-begin
   - type: PathologyOnProjectileHit
     chanceToApply: 0.3
+    weighedRandomProviderEntity: LargeHeavyCaliberFragment
   # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
@@ -47,6 +51,7 @@
   # SS220-add-projectile-wounds-begin
   - type: PathologyOnProjectileHit
     chanceToApply: 0.2
+    weighedRandomProviderEntity: LargeHeavyCaliberFragment
   # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
@@ -132,6 +137,7 @@
   # SS220-add-projectile-wounds-begin
   - type: PathologyOnProjectileHit
     chanceToApply: 0.1
+    weighedRandomProviderEntity: PelletFragment
   # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
@@ -235,6 +241,7 @@
   # SS220-add-projectile-wounds-begin
   - type: PathologyOnProjectileHit
     chanceToApply: 0.1
+    weighedRandomProviderEntity: PelletFragment
   # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
@@ -267,6 +274,7 @@
   # SS220-add-projectile-wounds-begin
   - type: PathologyOnProjectileHit
     chanceToApply: 0.2
+    weighedRandomProviderEntity: PelletFragment
   # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
@@ -301,6 +309,7 @@
   # SS220-add-projectile-wounds-begin
   - type: PathologyOnProjectileHit
     chanceToApply: 0.2
+    weighedRandomProviderEntity: PelletFragment
   # SS220-add-projectile-wounds-end
   - type: Projectile
     deleteOnCollide: false

@@ -2,9 +2,8 @@
 
 using Robust.Shared.Serialization;
 using Robust.Shared.Prototypes;
-using Content.Shared.SS220.Pathology;
 
-namespace Content.Server.SS220.Pathology;
+namespace Content.Shared.SS220.Pathology;
 
 [Serializable, NetSerializable]
 public sealed partial class EntityProvidedPathologyContext : IPathologyContext

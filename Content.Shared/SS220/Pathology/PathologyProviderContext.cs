@@ -2,4 +2,5 @@
 
 namespace Content.Shared.SS220.Pathology;
 
-public interface IPathologyContext { }
+[ImplicitDataDefinitionForInheritors]
+public partial interface IPathologyContext { }

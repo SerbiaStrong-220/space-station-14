@@ -16,6 +16,6 @@ public sealed partial class HavePathologyRequirement : SurgeryGraphRequirement
         if (uid is null)
             return true;
 
-        return entityManager.System<PathologySystem>().HavePathology(uid.Value, Pathology);
+        return entityManager.System<SharedPathologySystem>().HavePathology(uid.Value, Pathology);
     }
 }

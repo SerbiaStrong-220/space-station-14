@@ -14,6 +14,6 @@ public sealed partial class RemovePathologyAction : ISurgeryGraphEdgeAction
 
     public void PerformAction(EntityUid uid, EntityUid userUid, EntityUid? used, IEntityManager entityManager)
     {
-        entityManager.System<PathologySystem>().TryRemovePathology(uid, Pathology);
+        entityManager.System<SharedPathologySystem>().TryRemovePathology(uid, Pathology);
     }
 }

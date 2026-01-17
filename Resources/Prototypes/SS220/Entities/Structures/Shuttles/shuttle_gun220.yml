@@ -326,10 +326,9 @@
   - type: StaminaDamageOnCollide
     damage: 50
     ignoreResistance: true
-  # SS220-add-projectile-wounds-begin
   - type: PathologyOnProjectileHit
     chanceToApply: 0.9
-  # SS220-add-projectile-wounds-end
+    weighedRandomProviderEntity: LargeHeavyCaliberFragment
   - type: Projectile
     damage:
       types:

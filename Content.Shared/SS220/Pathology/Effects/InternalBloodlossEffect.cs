@@ -29,7 +29,7 @@ public sealed partial class InternalBloodLossEffect : IPathologyEffect
     {
         var bloodSystem = entityManager.System<SharedBloodstreamSystem>();
 
-        var bloodLoss = LossRate * data.StackCount * PathologySystem.UpdateInterval.TotalSeconds;
+        var bloodLoss = LossRate * data.StackCount * SharedPathologySystem.UpdateInterval.TotalSeconds;
 
         bloodSystem.TryModifyBloodLevel(uid, -bloodLoss);
         var netEntity = entityManager.GetNetEntity(uid);

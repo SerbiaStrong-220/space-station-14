@@ -4,7 +4,10 @@
   parent: BaseBullet
   categories: [ HideSpawnMenu ]
   components:
-  - type: PathologyOnProjectileHit # SS220-add-projectile-wounds
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    weighedRandomProviderEntity: MediumCaliberFragment
+  # SS220-add-projectile-wounds-begin
   - type: Projectile
     damage:
       types:

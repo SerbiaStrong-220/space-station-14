@@ -1,0 +1,24 @@
+- type: entity
+  id: FragmentLightLarge
+  parent: BaseProjectileFragment
+  name: bullet (.20 deformed)
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+    state: bullet-casing
+
+- type: entity
+  id: FragmentLightMedium
+  parent: BaseProjectileFragment
+  name: large bullet fragment (.20)
+  components:
+  - type: Sprite
+    state: metal-1
+
+- type: entity
+  id: FragmentLightSmall
+  parent: BaseProjectileFragment
+  name: bullet fragments (.20)
+  components:
+  - type: Sprite
+    state: metal-0

@@ -131,7 +131,9 @@ public abstract partial class SharedPathologySystem : EntitySystem
 
     private void RemovePathology(Entity<PathologyHolderComponent> entity, PathologyPrototype pathologyPrototype)
     {
-        for (var i = 0; i < entity.Comp.ActivePathologies[pathologyPrototype.ID].Level; i++)
+        var data = entity.Comp.ActivePathologies[pathologyPrototype.ID];
+
+        for (var i = 0; i < data.Level; i++)
         {
             if (i >= pathologyPrototype.Definition.Length)
             {
@@ -145,6 +147,11 @@ public abstract partial class SharedPathologySystem : EntitySystem
             }
 
             RemoveTrait(entity, pathologyPrototype.Definition[i].Trait);
+        }
+
+        foreach (var context in data.PathologyContexts)
+        {
+            ApplyPathologyContext(entity, context);
         }
 
         entity.Comp.ActivePathologies.Remove(pathologyPrototype.ID);

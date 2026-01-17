@@ -4,7 +4,10 @@
   parent: BaseBullet
   categories: [ HideSpawnMenu ]
   components:
-  - type: PathologyOnProjectileHit # SS220-add-projectile-wounds
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    weighedRandomProviderEntity: LightCaliberFragment
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:
@@ -30,6 +33,7 @@
   # SS220-add-projectile-wounds-begin
   - type: PathologyOnProjectileHit
     chanceToApply: 0.3
+    weighedRandomProviderEntity: LightCaliberFragment
   # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
@@ -46,6 +50,7 @@
   # SS220-add-projectile-wounds-begin
   - type: PathologyOnProjectileHit
     chanceToApply: 0.3
+    weighedRandomProviderEntity: LightCaliberFragment
   # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
