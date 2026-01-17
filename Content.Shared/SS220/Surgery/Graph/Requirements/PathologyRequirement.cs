@@ -38,8 +38,8 @@ public sealed partial class PathologyRequirement : SurgeryGraphRequirement
             if (!CurePathologies.Contains(key))
                 continue;
 
-            if (!entityManager.System<PathologySystem>().TryRemovePathology(uid.Value, key))
-                entityManager.System<PathologySystem>().TryChangePathologyStack(uid.Value, key, StackChange);
+            if (!entityManager.System<SharedPathologySystem>().TryRemovePathology(uid.Value, key))
+                entityManager.System<SharedPathologySystem>().TryChangePathologyStack(uid.Value, key, StackChange);
 
             break;
         }

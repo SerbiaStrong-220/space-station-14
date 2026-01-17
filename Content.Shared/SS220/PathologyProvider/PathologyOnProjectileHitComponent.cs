@@ -4,7 +4,7 @@ using Content.Shared.Random;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.SS220.PathologyProvider;
+namespace Content.Server.SS220.PathologyProvider;
 
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState]

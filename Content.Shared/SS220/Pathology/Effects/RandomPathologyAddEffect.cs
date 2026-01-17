@@ -15,7 +15,7 @@ public sealed partial class RandomPathologyAddEffect : IPathologyEffect
 
     public void ApplyEffect(EntityUid uid, PathologyInstanceData data, IEntityManager entityManager)
     {
-        var pathologySystem = entityManager.System<PathologySystem>();
+        var pathologySystem = entityManager.System<SharedPathologySystem>();
 
         pathologySystem.TryAddRandom(uid, WeightedId, Chance);
     }

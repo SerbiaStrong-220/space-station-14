@@ -10,7 +10,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.Pathology;
 
-public sealed partial class PathologySystem : EntitySystem
+public abstract partial class SharedPathologySystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -108,7 +108,7 @@ public sealed partial class PathologySystem : EntitySystem
         Dirty(entity);
     }
 
-    private void AddPathologyDefinitionEffects(Entity<PathologyHolderComponent> entity, PathologyDefinition definition)
+    protected virtual void AddPathologyDefinitionEffects(Entity<PathologyHolderComponent> entity, PathologyDefinition definition)
     {
         foreach (var effect in definition.StatusEffects)
         {

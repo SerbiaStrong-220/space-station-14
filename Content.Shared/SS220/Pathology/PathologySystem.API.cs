@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace Content.Shared.SS220.Pathology;
 
-public sealed partial class PathologySystem
+public abstract partial class SharedPathologySystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly INetManager _net = default!;

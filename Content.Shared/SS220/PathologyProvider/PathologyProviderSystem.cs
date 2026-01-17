@@ -7,11 +7,11 @@ using Content.Shared.SS220.Pathology;
 using Robust.Shared.Prototypes;
 using System.Linq;
 
-namespace Content.Shared.SS220.PathologyProvider;
+namespace Content.Server.SS220.PathologyProvider;
 
 public sealed class PathologyProviderSystem : EntitySystem
 {
-    [Dependency] private readonly PathologySystem _pathology = default!;
+    [Dependency] private readonly SharedPathologySystem _pathology = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     private readonly HashSet<ProtoId<DamageTypePrototype>> _damageTypesToIgnore = new() { "Structural" };
