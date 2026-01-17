@@ -68,7 +68,7 @@
   job: BlueShield
   hasMindShield: true
   equipment:
-    eyes: ClothingEyesBlueShieldGlasses
+    eyes: ClothingEyesGlassesBlueShield
     head: ClothingHeadHatBeretSecurity
     mask: BlueShieldGasMask
     neck: ClothingBeltHolster

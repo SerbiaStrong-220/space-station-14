@@ -59,7 +59,7 @@
     jumpsuit: ClothingUniformJumpsuitBlueShieldOperative
     shoes: ClothingShoesBootsBlueShieldJackFilled
     head: ClothingHeadBeretBlueshield
-    eyes: ClothingEyesBlueShieldGlasses
+    eyes: ClothingEyesGlassesBlueShield
     gloves: ClothingHandsGlovesPowergloveDisabler
     outerClothing: ClothingOuterBSOCoat
     id: CentcomOperativeBSOPDA

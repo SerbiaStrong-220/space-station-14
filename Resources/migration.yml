@@ -858,3 +858,7 @@ ToyOwlman: ToyFigurineOwlman
 ToySkeleton: ToyFigurineSkeleton
 
 BoxFolderYellow: null
+
+# 2026-01-17 - SS220 Blueshield
+ClothingOuterHardsuitBlueshield: null
+BlueShieldSWAT: null

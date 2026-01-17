@@ -89,7 +89,7 @@
 - type: loadout
   id: BlueshieldGlasses
   equipment:
-    eyes: ClothingEyesBlueShieldGlasses
+    eyes: ClothingEyesGlassesBlueShield
 
 - type: loadout
   id: BlueshieldTacticGlasses
@@ -104,11 +104,6 @@
   id: BlueShieldCombez
   equipment:
     jumpsuit: ClothingUniformJumpsuitBlueShieldCombez
-
-- type: loadout
-  id: BlueShieldJumpsuit
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitBlueShield
 
 - type: loadout
   id: BlueShieldJumpsuitOperative
