@@ -257,8 +257,7 @@
     - id: ClothingShoesBootsBlueShieldJackFilled
     - id: ClothingHeadsetAltCentComm
     - id: ClothingBeltWebbingBlueShield
-    - id: ClothingOuterArmorBlueShieldScale
-    - id: ClothingOuterArmorBlueShieldAssault
+    - id: ClothingOuterArmorBlueShieldBulletproof
     - id: ClothingBeltHolster
     - id: PowerCellMicroreactor
       amount: 2

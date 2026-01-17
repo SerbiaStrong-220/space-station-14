@@ -163,22 +163,9 @@
 
 # Outer clothing
 - type: loadout
-  id: BlueShieldArmorAssault
+  id: BlueShieldArmorBulletproof
   equipment:
-    outerClothing: ClothingOuterArmorBlueShieldAssault
-
-- type: loadout
-  id: BlueShieldArmorScale
-  equipment:
-    outerClothing: ClothingOuterArmorBlueShieldScale
-
-- type: loadout
-  id: BlueShieldOperativeCoat
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: BlueShieldFive
-  equipment:
-    outerClothing: ClothingOuterBSOCoat
+    outerClothing: ClothingOuterArmorBlueShieldBulletproof
 
 # Belt
 - type: loadout

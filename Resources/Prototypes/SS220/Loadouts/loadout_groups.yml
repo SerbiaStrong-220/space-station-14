@@ -178,9 +178,6 @@
   name: loadout-group-blueshield-neck
   minLimit: 0
   loadouts:
-  - SecurityHolster
-  - Headphones
-  - ProtectGearBlue
   - BlueShieldNeckCloak
 
 - type: loadoutGroup
@@ -197,10 +194,9 @@
 - type: loadoutGroup
   id: BlueShieldOuterclothing
   name: loadout-group-blueshield-outerclothing
+  hidden: true
   loadouts:
-  - BlueShieldArmorAssault
-  - BlueShieldArmorScale
-  - BlueShieldOperativeCoat
+  - BlueShieldArmorBulletproof
 
 - type: loadoutGroup
   id: BlueShieldBelt
@@ -314,7 +310,7 @@
   id: DetectiveGlasses
   name: loadout-group-detective-glasses
   minLimit: 0
-  loadouts: 
+  loadouts:
   - GlassesSecurity
   - CyberGlassesSecurity
   - GlassesBallistic

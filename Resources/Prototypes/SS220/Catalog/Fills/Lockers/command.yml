@@ -10,6 +10,7 @@
     - id: WeaponDisabler
     - id: MedkitAdvancedFilled
     - id: ExpensiveLighterShield
+    - id: ClothingHeadHelmetTactical
     - id: BlueShieldGasMask
     - id: RubberStampBlueShield
     - id: JetpackMiniBlueFilled
