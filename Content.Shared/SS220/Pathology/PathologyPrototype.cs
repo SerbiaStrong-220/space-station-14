@@ -33,7 +33,7 @@ public sealed partial class PathologyDefinition
     public LocId? ProgressPopup;
 
     [DataField]
-    public int MaxStackCount = PathologySystem.OneStack;
+    public int MaxStackCount = SharedPathologySystem.OneStack;
 
     [DataField]
     public HashSet<EntProtoId> StatusEffects = new();

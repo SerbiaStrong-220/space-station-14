@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Server.SS220.Pathology;
 using Content.Shared.Armor;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Projectiles;
@@ -11,7 +12,7 @@ namespace Content.Server.SS220.PathologyProvider;
 
 public sealed class PathologyProviderSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPathologySystem _pathology = default!;
+    [Dependency] private readonly PathologySystem _pathology = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     private readonly HashSet<ProtoId<DamageTypePrototype>> _damageTypesToIgnore = new() { "Structural" };
@@ -33,14 +34,14 @@ public sealed class PathologyProviderSystem : EntitySystem
         if (!_prototype.HasIndex<DamageTypePrototype>(key))
             return;
 
-        if (!_prototype.Resolve(entity.Comp.WeightedRandom, out var weightedRandomPrototype))
+        if (!_prototype.Resolve(entity.Comp.WeightedRandomPathology, out var weightedRandomPrototype))
             return;
 
         var armorAffectedWeights = GetAffectedByArmoredChance(weightedRandomPrototype.Weights, key);
+        _pathology.TryMakeEntityContext(entity.Owner, entity.Comp.WeighedRandomProviderEntity, out var context);
 
-        _pathology.TryAddRandom(args.Target, armorAffectedWeights, entity.Comp.ChanceToApply);
+        _pathology.TryAddRandom(args.Target, armorAffectedWeights, entity.Comp.ChanceToApply, context);
     }
-
 
     private Dictionary<string, float> GetAffectedByArmoredChance(Dictionary<string, float> baseValues, ProtoId<DamageTypePrototype> maxDamageTypeId)
     {
@@ -62,5 +63,6 @@ public sealed class PathologyProviderSystem : EntitySystem
 
         return result;
     }
+
 
 }

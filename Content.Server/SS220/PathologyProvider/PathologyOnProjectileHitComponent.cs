@@ -16,5 +16,9 @@ public sealed partial class PathologyOnProjectileHitComponent : Component
 
     [DataField]
     [AutoNetworkedField]
-    public ProtoId<WeightedRandomPrototype> WeightedRandom = "BulletHitPathology";
+    public ProtoId<WeightedRandomPrototype> WeightedRandomPathology = "BulletHitPathology";
+
+    [DataField]
+    [AutoNetworkedField]
+    public ProtoId<WeightedRandomEntityPrototype>? WeighedRandomProviderEntity = null;
 }

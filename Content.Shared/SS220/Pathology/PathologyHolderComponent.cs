@@ -10,13 +10,12 @@ namespace Content.Shared.SS220.Pathology;
 [NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class PathologyHolderComponent : Component
 {
-    [DataField]
     [AutoNetworkedField]
     public Dictionary<ProtoId<PathologyPrototype>, PathologyInstanceData> ActivePathologies = new();
 }
 
 [Serializable, NetSerializable]
-public sealed partial class PathologyInstanceData(TimeSpan startTime)
+public sealed partial class PathologyInstanceData(TimeSpan startTime, IPathologyContext? context)
 {
     [ViewVariables]
     public TimeSpan StartTime = startTime;
@@ -26,4 +25,7 @@ public sealed partial class PathologyInstanceData(TimeSpan startTime)
 
     [ViewVariables]
     public int StackCount = SharedPathologySystem.OneStack;
+
+    [ViewVariables]
+    public List<IPathologyContext?> PathologyContexts = new() { context };
 }

@@ -52,7 +52,7 @@ public abstract partial class SharedPathologySystem : EntitySystem
                 if (!_prototype.Resolve(protoId, out var pathologyProto))
                     continue;
 
-                TryProgressPathology((uid, holder), pathologyProto, data);
+                TryProgressPathology((uid, holder), pathologyProto, data, null);
 
                 foreach (var effect in pathologyProto.Definition[data.Level].Effects)
                 {
@@ -70,7 +70,7 @@ public abstract partial class SharedPathologySystem : EntitySystem
         }
     }
 
-    private bool TryProgressPathology(Entity<PathologyHolderComponent> entity, PathologyPrototype pathologyPrototype, PathologyInstanceData instanceData)
+    private bool TryProgressPathology(Entity<PathologyHolderComponent> entity, PathologyPrototype pathologyPrototype, PathologyInstanceData instanceData, IPathologyContext? context)
     {
         if (pathologyPrototype.Definition[instanceData.Level].ProgressConditions.Length == 0)
             return false;
@@ -87,7 +87,11 @@ public abstract partial class SharedPathologySystem : EntitySystem
             return false;
 
         instanceData.Level++;
+        // we drop all previous
+        instanceData.StackCount = OneStack;
+        instanceData.PathologyContexts.Clear();
 
+        instanceData.PathologyContexts.Add(context);
         AddPathologyDefinitionEffects(entity, pathologyPrototype.Definition[instanceData.Level]);
 
         var ev = new PathologySeverityChanged(pathologyPrototype.ID, instanceData.Level - 1, instanceData.Level);
@@ -97,18 +101,18 @@ public abstract partial class SharedPathologySystem : EntitySystem
         return true;
     }
 
-    private void StartPathology(Entity<PathologyHolderComponent> entity, PathologyPrototype pathologyPrototype)
+    private void StartPathology(Entity<PathologyHolderComponent> entity, PathologyPrototype pathologyPrototype, IPathologyContext? context)
     {
         var ev = new PathologyAddedEvent(pathologyPrototype.ID);
         RaiseLocalEvent(entity, ref ev);
 
         AddPathologyDefinitionEffects(entity, pathologyPrototype.Definition[0]);
 
-        entity.Comp.ActivePathologies.Add(pathologyPrototype.ID, new PathologyInstanceData(_gameTiming.CurTime));
+        entity.Comp.ActivePathologies.Add(pathologyPrototype.ID, new PathologyInstanceData(_gameTiming.CurTime, context));
         Dirty(entity);
     }
 
-    protected virtual void AddPathologyDefinitionEffects(Entity<PathologyHolderComponent> entity, PathologyDefinition definition)
+    private void AddPathologyDefinitionEffects(Entity<PathologyHolderComponent> entity, PathologyDefinition definition)
     {
         foreach (var effect in definition.StatusEffects)
         {
@@ -147,6 +151,8 @@ public abstract partial class SharedPathologySystem : EntitySystem
 
         Dirty(entity);
     }
+
+    protected virtual void ApplyPathologyContext(Entity<PathologyHolderComponent> entity, IPathologyContext? context) { }
 
     // Kill it with TraitPrototype pls
     private void AddTrait(EntityUid uid, ProtoId<TraitPrototype>? traitId)

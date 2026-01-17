@@ -5,6 +5,7 @@ using Content.Shared.Random.Helpers;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
@@ -32,15 +33,15 @@ public abstract partial class SharedPathologySystem
         return result;
     }
 
-    public bool TryAddRandom(Entity<PathologyHolderComponent?> entity, ProtoId<WeightedRandomPrototype> weightedPathology, float chance)
+    public bool TryAddRandom(Entity<PathologyHolderComponent?> entity, ProtoId<WeightedRandomPrototype> weightedPathology, float chance, IPathologyContext? context = null)
     {
         if (!_prototype.Resolve(weightedPathology, out var weightedRandomPrototype))
             return false;
 
-        return TryAddRandom(entity, weightedRandomPrototype.Weights, chance);
+        return TryAddRandom(entity, weightedRandomPrototype.Weights, chance, context);
     }
 
-    public bool TryAddRandom(Entity<PathologyHolderComponent?> entity, Dictionary<string, float> weightsPathology, float chance)
+    public bool TryAddRandom(Entity<PathologyHolderComponent?> entity, Dictionary<string, float> weightsPathology, float chance, IPathologyContext? context = null)
     {
         // no shared random, so we drop
         if (_net.IsClient)
@@ -62,7 +63,7 @@ public abstract partial class SharedPathologySystem
         return TryAddPathology(entity, pickedPathology);
     }
 
-    public bool TryAddPathology(Entity<PathologyHolderComponent?> entity, ProtoId<PathologyPrototype> pathologyId)
+    public bool TryAddPathology(Entity<PathologyHolderComponent?> entity, ProtoId<PathologyPrototype> pathologyId, IPathologyContext? context = null)
     {
         if (!Resolve(entity.Owner, ref entity.Comp, false))
             return false;
@@ -82,9 +83,9 @@ public abstract partial class SharedPathologySystem
             return false;
 
         if (instanceData is null)
-            StartPathology(entity!, pathologyPrototype);
+            StartPathology(entity!, pathologyPrototype, context);
         else
-            TryChangePathologyStack(entity, pathologyPrototype);
+            TryChangePathologyStack(entity, pathologyPrototype, context: context);
 
         return true;
     }
@@ -150,7 +151,7 @@ public abstract partial class SharedPathologySystem
         return true;
     }
 
-    public bool TryChangePathologyStack(Entity<PathologyHolderComponent?> entity, ProtoId<PathologyPrototype> pathologyId, int toAdd = 1)
+    public bool TryChangePathologyStack(Entity<PathologyHolderComponent?> entity, ProtoId<PathologyPrototype> pathologyId, int toAdd = 1, IPathologyContext? context = null)
     {
         if (!Resolve(entity.Owner, ref entity.Comp))
             return false;
@@ -171,6 +172,13 @@ public abstract partial class SharedPathologySystem
             foreach (var stackAddEffect in pathologyPrototype.Definition[instanceData.Level].AddStackEffects)
             {
                 stackAddEffect.ApplyEffect(entity, instanceData, EntityManager);
+            }
+        }
+        else
+        {
+            for (var _ = 0; _ < instanceData.StackCount - newStackCount; _++)
+            {
+                ApplyPathologyContext(entity!, instanceData.PathologyContexts.Pop());
             }
         }
 
