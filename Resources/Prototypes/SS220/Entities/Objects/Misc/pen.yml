@@ -53,7 +53,7 @@
       deviceNetId: Wireless
       receiveFrequencyId: BasicDevice
     - type: WirelessNetworkConnection
-      range: 15
+      range: 60
     - type: Tag
       tags:
         - Write
