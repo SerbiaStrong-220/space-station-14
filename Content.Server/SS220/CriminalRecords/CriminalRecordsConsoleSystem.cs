@@ -196,23 +196,21 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
         if (!TryComp<ItemSlotsComponent>(ent, out var itemSlots) || itemSlots.Slots.Count == 0)
             return;
 
-        var idCard = itemSlots.Slots.First().Value.Item;
-        if (idCard == null)
+        if (itemSlots.Slots.First().Value.Item is not { } idCard)
             return;
 
-        var station = _stationSystem.GetOwningStation(idCard);
-        if (station == null)
+        if (_stationSystem.GetOwningStation(idCard) is not { } station)
             return;
 
-        (NetEntity, uint)? rec = (GetNetEntity(station.Value), args.Key);
+        (NetEntity, uint)? rec = (GetNetEntity(station), args.Key);
         var recordKey = _stationRecords.Convert(rec);
         if (recordKey == null)
             return;
 
-        EnsureComp<StationRecordKeyStorageComponent>(idCard.Value, out var storage);
+        EnsureComp<StationRecordKeyStorageComponent>(idCard, out var storage);
         storage.Key = recordKey.Value;
 
-        Dirty(idCard.Value, storage);
+        Dirty(idCard, storage);
     }
 
     private void UpdateUserInterface(EntityUid uid, CriminalRecordsConsole220Component? console = null)
