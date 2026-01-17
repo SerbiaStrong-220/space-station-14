@@ -9,7 +9,7 @@ saw-rib-bone = вскрытие Грудной клетки
 open-heart-incision = Сердце открыто
 
 surgery-torso-complex-inventory-requirement-description = У пациента должен быть открыт торс
-surgery-torso-complex-inventory-requirement-failure = Вы не можете добраться до торса { THE($target) }!
+surgery-torso-complex-inventory-requirement-failure = Вы не можете добраться до торса { CAPITALIZE($target) }!
 
 surgery-torso-examine-start = Пациент готов к операции на торсе.
 surgery-torso-popup-start = Начинает операцию на торсе.

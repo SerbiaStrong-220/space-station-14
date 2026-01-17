@@ -18,6 +18,10 @@ public sealed class SurgeryGraphSystem : EntitySystem
     {
         return GetList(edge, (x) => x.Actions);
     }
+    public IReadOnlyList<LocId> GetActionsLocIds(SurgeryGraphEdge edge)
+    {
+        return GetList(edge, (x) => x.ActionLocIds);
+    }
 
     public IReadOnlyList<SurgeryGraphRequirement> GetRequirements(SurgeryGraphEdge edge)
     {
@@ -52,7 +56,7 @@ public sealed class SurgeryGraphSystem : EntitySystem
         return Get(edge, (x) => x.Delay);
     }
 
-    public IReadOnlyList<T> GetList<T>(SurgeryGraphEdge edge, Func<SurgeryGraphEdge, IReadOnlyList<T>> listGetter) where T : class
+    public IReadOnlyList<T> GetList<T>(SurgeryGraphEdge edge, Func<SurgeryGraphEdge, IReadOnlyList<T>> listGetter) where T : notnull
     {
         if (edge.BaseEdge.HasValue
             && listGetter(edge).Count == 0

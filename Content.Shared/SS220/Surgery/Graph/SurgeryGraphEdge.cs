@@ -32,30 +32,30 @@ public sealed partial class SurgeryGraphEdge : ISerializationHooks
     /// Time which this step takes in seconds
     /// </summary>
     [DataField]
-    [Access(typeof(SurgeryGraphSystem))]
+    [Access(typeof(SurgeryGraphSystem), Other = AccessPermissions.None)]
     public float? Delay { get; private set; }
 
     /// <summary>
     /// This sound will be played when graph gets to target node
     /// </summary>
     [DataField("sound")]
-    [Access(typeof(SurgeryGraphSystem))]
+    [Access(typeof(SurgeryGraphSystem), Other = AccessPermissions.None)]
     public SoundSpecifier? EndSound { get; private set; } = null;
 
     [ViewVariables]
-    [Access(typeof(SurgeryGraphSystem))]
+    [Access(typeof(SurgeryGraphSystem), Other = AccessPermissions.None)]
     public IReadOnlyList<SurgeryGraphRequirement> Requirements => _requirements;
 
     [ViewVariables]
-    [Access(typeof(SurgeryGraphSystem))]
+    [Access(typeof(SurgeryGraphSystem), Other = AccessPermissions.None)]
     public IReadOnlyList<SurgeryGraphRequirement> VisibilityRequirements => _visibilityRequirements;
 
     [ViewVariables]
-    [Access(typeof(SurgeryGraphSystem))]
+    [Access(typeof(SurgeryGraphSystem), Other = AccessPermissions.None)]
     public IReadOnlyList<ISurgeryGraphEdgeAction> Actions => _actions;
 
     [ViewVariables]
-    [Access(typeof(SurgeryGraphSystem))]
+    [Access(typeof(SurgeryGraphSystem), Other = AccessPermissions.None)]
     public IReadOnlyList<LocId> ActionLocIds => _actionLocIds;
 
     void ISerializationHooks.AfterDeserialization()

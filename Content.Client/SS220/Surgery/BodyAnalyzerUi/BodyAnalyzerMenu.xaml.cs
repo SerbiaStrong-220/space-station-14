@@ -21,7 +21,8 @@ public sealed partial class BodyAnalyzerMenu : FancyWindow
 
         OperationList.OnSurgeryClicked += (id, pressed) =>
         {
-            OperationDescription.ShowDescription(id);
+            OperationDescription.ShowDescription(id, force: true);
+
             OperationDescription.DataLocked = pressed;
             OperationDescription.Visible = true;
         };

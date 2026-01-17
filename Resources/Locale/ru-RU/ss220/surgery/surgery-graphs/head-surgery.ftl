@@ -20,6 +20,6 @@ mind-slave-disfunction-fix-surgery-popup = {THE($user)} подключает п�
 mind-slave-disfunction-fix-surgery-description = SS220 REDACTED
 
 surgery-requirement-scanner-required = Сканер имплантов
-surgery-requirement-fixer-required = Калибратор разума
+surgery-requirement-fixer-required = [color=red]{ CAPITALIZE(ent-MindslaveFixerCerebralImplant) }[/color]
 
-surgery-requirement-slave-target = Цель не имеет нужных имплантов
+surgery-requirement-slave-target = В мозгу пациента должен быть имплант [color=red]"{ent-MindSlaveImplant}"[/color]

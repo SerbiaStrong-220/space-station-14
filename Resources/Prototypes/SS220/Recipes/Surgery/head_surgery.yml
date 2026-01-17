@@ -65,7 +65,7 @@
     - to: brain-exposed
       baseEdge: retract-skin
     # TODO: better return
-    - to: retract-skin
+    - to: retract-head-skin
       baseEdge: seal-wound
   - node: brain-exposed
     baseNode: retract-skin
@@ -85,7 +85,7 @@
         failureMessage: surgery-requirement-whitelist-no-text
         whitelist:
           components:
-          - MindContainer
+          - MindShield
       requirements:
       # to give player popup about incorrect tool
       - !type:SurgeryToolRequirement

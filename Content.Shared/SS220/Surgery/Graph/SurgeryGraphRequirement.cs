@@ -17,13 +17,13 @@ public abstract partial class SurgeryGraphRequirement
     public SurgeryGraphRequirementSubject Subject => _subject;
 
     [DataField]
-    public bool Invert = false;
+    protected bool Invert = false;
 
     [DataField(required: true)]
-    public LocId Description;
+    protected LocId Description;
 
     [DataField(required: true)]
-    public LocId FailureMessage;
+    protected LocId FailureMessage;
 
     /// <summary>
     /// Called to check if requirement met
