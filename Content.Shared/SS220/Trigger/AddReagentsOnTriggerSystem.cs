@@ -42,10 +42,11 @@ public sealed class AddReagentsOnTriggerSystem : EntitySystem
 
         var quantity = solutionTrigger.Value.Comp.Solution.MaxVolume;
         if (TryComp<LimitedChargesComponent>(ent, out var actionCharges))
+        {
             quantity /= actionCharges.MaxCharges;
-
-        if (TryComp<SubdermalImplantComponent>(ent, out var implant) &&
-            TryComp<LimitedChargesComponent>(implant.Action, out var limitedCharges))
+        }
+        else if (TryComp<SubdermalImplantComponent>(ent, out var implant) &&
+                 TryComp<LimitedChargesComponent>(implant.Action, out var limitedCharges))
         {
             quantity /= limitedCharges.MaxCharges;
         }
