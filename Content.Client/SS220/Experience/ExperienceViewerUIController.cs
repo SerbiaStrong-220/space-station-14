@@ -12,9 +12,6 @@ using Robust.Shared.Utility;
 using Robust.Client.UserInterface;
 using Robust.Client.Player;
 using Content.Shared.SS220.Experience;
-using Robust.Client.Animations;
-using Robust.Shared.Animations;
-using Robust.Shared.Timing;
 
 namespace Content.Client.SS220.Experience;
 
@@ -27,60 +24,13 @@ public sealed class ExperienceViewerUIController : UIController, IOnStateEntered
     private ExperienceViewWindow? _window;
     private MenuButton? ExperienceViewButton => UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>()?.ExperienceViewButton;
 
-    public static readonly string FreePointAvailableAnimationKey = "freePointAvailable";
-
-    private static readonly Color BaseColor = Color.White;
-    private static readonly Color AnimationColor = Color.White.WithAlpha(0.3f);
-
-    private static readonly float BlinkHalfTime = 0.15f;
-    private static readonly float FullAnimationTime = 20f;
-
-    private readonly Animation _freePointAvailableAnimation = new()
-    {
-        Length = TimeSpan.FromSeconds(FullAnimationTime),
-        AnimationTracks =
-        {
-            new AnimationTrackControlProperty
-            {
-                Property = nameof(Control.Modulate),
-                InterpolationMode = AnimationInterpolationMode.Cubic,
-                KeyFrames =
-                {
-                    new AnimationTrackProperty.KeyFrame(AnimationColor, BlinkHalfTime),
-                    new AnimationTrackProperty.KeyFrame(BaseColor, BlinkHalfTime),
-                    new AnimationTrackProperty.KeyFrame(AnimationColor, BlinkHalfTime),
-                    new AnimationTrackProperty.KeyFrame(BaseColor, BlinkHalfTime),
-                    new AnimationTrackProperty.KeyFrame(AnimationColor, BlinkHalfTime),
-                    new AnimationTrackProperty.KeyFrame(BaseColor, BlinkHalfTime),
-                    new AnimationTrackProperty.KeyFrame(AnimationColor, BlinkHalfTime),
-                    new AnimationTrackProperty.KeyFrame(BaseColor, 0f),
-                    new AnimationTrackProperty.KeyFrame(BaseColor, FullAnimationTime)
-                }
-            }
-        }
-    };
+    private static readonly Color FreePointsAvailableColor = Color.FromHex("#5c4d38");
 
     private int _freePoints;
 
     public override void Initialize()
     {
         base.Initialize();
-    }
-
-    public override void FrameUpdate(FrameEventArgs args)
-    {
-        base.FrameUpdate(args);
-
-        if (_freePoints < 1)
-            return;
-
-        var haveAnimation = ExperienceViewButton?.HasRunningAnimation(FreePointAvailableAnimationKey);
-
-        if (haveAnimation is null)
-            return;
-
-        if (!haveAnimation.Value)
-            ExperienceViewButton?.PlayAnimation(_freePointAvailableAnimation, FreePointAvailableAnimationKey);
     }
 
     public void OnStateEntered(GameplayState state)
@@ -138,14 +88,15 @@ public sealed class ExperienceViewerUIController : UIController, IOnStateEntered
             return;
 
         ExperienceViewButton.OnPressed += ExperienceViewButtonPressed;
+        ExperienceViewButton.ModulateSelfOverride = _freePoints < 1 ? null : FreePointsAvailableColor;
     }
 
     private void ExperienceUpdated(ExperienceData data, int freePoints)
     {
         _freePoints = freePoints;
 
-        if (_freePoints < 1)
-            ExperienceViewButton?.StopAnimation(FreePointAvailableAnimationKey);
+        if (ExperienceViewButton is not null)
+            ExperienceViewButton.ModulateSelfOverride = _freePoints < 1 ? null : FreePointsAvailableColor;
 
         if (_window == null)
             return;

@@ -34,20 +34,20 @@ public partial struct MentorEffectData : IComparable<MentorEffectData>
 
     public readonly int CompareTo(MentorEffectData other)
     {
-        var valueCompareResult = 0;
-        if (MaxBuffSkillLevel.HasValue)
+        if (MaxBuffSkillLevel.HasValue && other.MaxBuffSkillLevel.HasValue)
         {
-            if (other.MaxBuffSkillLevel.HasValue)
-                valueCompareResult = MaxBuffSkillLevel.Value.CompareTo(other.MaxBuffSkillLevel.Value);
-            else
-                return -1;
+            var valueCompareResult = MaxBuffSkillLevel.Value.CompareTo(other.MaxBuffSkillLevel.Value);
+            if (valueCompareResult != 0)
+                return valueCompareResult;
         }
-
-        if (other.MaxBuffSkillLevel.HasValue)
+        else if (MaxBuffSkillLevel.HasValue)
+        {
+            return -1;
+        }
+        else if (other.MaxBuffSkillLevel.HasValue)
+        {
             return 1;
-
-        if (valueCompareResult != 0)
-            return valueCompareResult;
+        }
 
         return Multiplier.CompareTo(other.Multiplier);
     }

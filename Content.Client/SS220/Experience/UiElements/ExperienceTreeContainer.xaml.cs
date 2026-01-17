@@ -41,9 +41,9 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
     private SkillTreeInfo? _info;
     private SkillTreeInfo? _overrideInfo = new();
 
-    private ResPath? _skillIconResPath = null;
     private string _skillTreeName = string.Empty;
     private List<int> _maxLevels = [];
+    private List<ResPath?> _skillIconResPaths = new();
     private List<ProtoId<SkillPrototype>> _skillsTree = [];
 
     // progress
@@ -116,15 +116,15 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
         if (_info is null)
             return;
 
-        if (_skillIconResPath is not null)
-            TreeIconRect.TexturePath = _skillIconResPath.Value.CanonPath;
-
         var correctInfo = _overrideInfo is null ? GetSkillTreeInfoWithSpendPoints(_info) : _overrideInfo;
 
         TreeName.SetMessage(_skillTreeName);
         InfoContainer.TooltipSupplier = (sender) => MakeTooltip(sender, correctInfo);
 
         var maxSublevels = _maxLevels[correctInfo.SkillTreeIndex];
+
+        if (_skillIconResPaths[correctInfo.SkillTreeIndex] is { } skillIcon)
+            TreeIconRect.TexturePath = skillIcon.CanonPath;
 
         TreeLevelsContainer.RemoveAllChildren();
         for (var i = 0; i < _skillsTree.Count; i++)
@@ -174,6 +174,7 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
 
         _skillsTree = proto.SkillTree;
         _maxLevels = proto.SkillTree.Select(x => _prototype.Index(x).LevelInfo.MaximumSublevel).ToList();
+        _skillIconResPaths = proto.SkillTree.Select(x => _prototype.Index(x).LevelDescription.SkillIconResPath).ToList();
         _skillTreeName = Loc.GetString(proto.SkillTreeName);
     }
 

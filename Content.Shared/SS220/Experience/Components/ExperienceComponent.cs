@@ -91,6 +91,7 @@ public sealed partial class SkillTreeInfo
     public int SkillTreeIndex => _level - 1;
 
     [DataField]
+    [ViewVariables(VVAccess.ReadOnly)]
     public int Level
     {
         get => _level;
@@ -104,6 +105,7 @@ public sealed partial class SkillTreeInfo
     private int _level = ExperienceSystem.StartSkillLevel;
 
     [DataField]
+    [ViewVariables(VVAccess.ReadOnly)]
     public int Sublevel
     {
         get => _sublevel;

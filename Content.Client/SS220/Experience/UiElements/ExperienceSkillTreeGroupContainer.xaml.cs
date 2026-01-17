@@ -13,7 +13,6 @@ namespace Content.Client.SS220.Experience.UiElements;
 [GenerateTypedNameReferences]
 public sealed partial class ExperienceSkillTreeGroupContainer : BoxContainer
 {
-    private ProtoId<SkillTreeGroupPrototype>? _groupProto = null;
     private Dictionary<ProtoId<SkillTreePrototype>, ExperienceTreeContainer> _cachedTreeContainers = new();
 
     private string _name = string.Empty;
@@ -32,7 +31,6 @@ public sealed partial class ExperienceSkillTreeGroupContainer : BoxContainer
 
     public void UpdateWithList(Span<SkillTreeView> skillTreeViews, ProtoId<SkillTreeGroupPrototype> groupProto)
     {
-        _groupProto = groupProto;
         foreach (ref var treeView in skillTreeViews)
         {
             if (!_cachedTreeContainers.TryGetValue(treeView.SkillTreeId, out var cachedControl))

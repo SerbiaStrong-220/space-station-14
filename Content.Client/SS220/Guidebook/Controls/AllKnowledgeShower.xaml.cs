@@ -29,7 +29,7 @@ public sealed partial class AllKnowledgeShower : BoxContainer, IDocumentTag
         {
             var knowledgeLabel = new KnowledgeLabel();
 
-            LnowledgesContainer.AddChild(knowledgeLabel);
+            KnowledgesContainer.AddChild(knowledgeLabel);
 
             knowledgeLabel.SetKnowledge(knowledge);
         }
