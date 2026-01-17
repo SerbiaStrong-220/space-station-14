@@ -79,6 +79,8 @@
   suffix: armed
   parent: BearTrap
   id: BearTrapArmed
+  placement:
+    mode: SnapgridCenter
   components:
   - type: Sprite
     sprite: SS220/Objects/Devices/traps/bearTrap.rsi
@@ -88,5 +90,3 @@
   - type: Appearance
   - type: Trap
     state: Armed
-  - type: Transform
-    anchored: true

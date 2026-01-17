@@ -43,7 +43,12 @@ public sealed class TrapSystem : EntitySystem
         SubscribeLocalEvent<TrapComponent, GetVerbsEvent<AlternativeVerb>>(OnAlternativeVerb);
         SubscribeLocalEvent<TrapComponent, TrapInteractionDoAfterEvent>(OnTrapInteractionDoAfter);
         SubscribeLocalEvent<TrapComponent, TriggerEvent>(OnTrigger);
-        SubscribeLocalEvent<TrapComponent, ComponentInit>(OnComponentInit);
+        SubscribeLocalEvent<TrapComponent, MapInitEvent>(OnMapInit);
+    }
+
+    private void OnMapInit(Entity<TrapComponent> ent, ref MapInitEvent args)
+    {
+        UpdateTrapState(ent.Owner, ent.Comp.State, null, false);
     }
 
     private void OnAlternativeVerb(Entity<TrapComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
@@ -177,11 +182,6 @@ public sealed class TrapSystem : EntitySystem
         _adminLogger.Add(LogType.Action,
             LogImpact.Medium,
             $"{ToPrettyString(args.User.Value)} caused trap {ToPrettyString(ent.Owner):entity}");
-    }
-
-    private void OnComponentInit(Entity<TrapComponent> ent, ref ComponentInit args)
-    {
-        UpdateTrapState(ent.Owner, ent.Comp.State, null, false);
     }
 
     private void UpdateTrapState(EntityUid uid, TrapArmedState newState, EntityUid? user = null, bool withSound = true, bool isUserAction = false)
