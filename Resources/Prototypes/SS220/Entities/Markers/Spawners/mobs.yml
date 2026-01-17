@@ -129,8 +129,8 @@
 - type: entity
   parent: MarkerBase
   id: SpawnMobPossumPoppy
-  name: Possum Poppy Spawner
-  suffix: Engineer Pet
+  name: the spawner Possum Poppy
+  suffix: AI
   components:
   - type: Sprite
     layers:

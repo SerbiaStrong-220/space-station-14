@@ -43,6 +43,12 @@ public sealed class TrapSystem : EntitySystem
         SubscribeLocalEvent<TrapComponent, GetVerbsEvent<AlternativeVerb>>(OnAlternativeVerb);
         SubscribeLocalEvent<TrapComponent, TrapInteractionDoAfterEvent>(OnTrapInteractionDoAfter);
         SubscribeLocalEvent<TrapComponent, TriggerEvent>(OnTrigger);
+        SubscribeLocalEvent<TrapComponent, MapInitEvent>(OnMapInit);
+    }
+
+    private void OnMapInit(Entity<TrapComponent> ent, ref MapInitEvent args)
+    {
+        UpdateTrapState(ent.Owner, ent.Comp.State, null, false);
     }
 
     private void OnAlternativeVerb(Entity<TrapComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
@@ -104,42 +110,12 @@ public sealed class TrapSystem : EntitySystem
 
     private void ArmTrap(Entity<TrapComponent> ent, EntityUid? user, bool withSound = true)
     {
-        if (!CanArmTrap(ent, user))
-            return;
-
-        var coordinates = Transform(ent.Owner).Coordinates;
-
-        if (user != null && withSound)
-            _audio.PlayPredicted(ent.Comp.SetTrapSound, coordinates, user);
-
-        ent.Comp.State = TrapArmedState.Armed;
-        Dirty(ent);
-
-        UpdateVisuals(ent.Owner, ent.Comp);
-        _transformSystem.AnchorEntity(ent.Owner);
-
-        var ev = new TrapArmedEvent();
-        RaiseLocalEvent(ent, ref ev);
+        UpdateTrapState(ent.Owner, TrapArmedState.Armed, user, withSound, true);
     }
 
     private void DefuseTrap(Entity<TrapComponent> ent, EntityUid? user, bool withSound = true)
     {
-        if (!CanDefuseTrap(ent, user))
-            return;
-
-        var coordinates = Transform(ent.Owner).Coordinates;
-
-        if (user != null && withSound)
-            _audio.PlayPredicted(ent.Comp.DefuseTrapSound, coordinates, user);
-
-        ent.Comp.State = TrapArmedState.Unarmed;
-        Dirty(ent);
-
-        UpdateVisuals(ent.Owner, ent.Comp);
-        _transformSystem.Unanchor(ent.Owner);
-
-        var ev = new TrapDefusedEvent();
-        RaiseLocalEvent(ent, ref ev);
+        UpdateTrapState(ent.Owner, TrapArmedState.Unarmed, user, withSound, true);
     }
 
     private bool CanArmTrap(Entity<TrapComponent> ent, EntityUid? user)
@@ -208,6 +184,53 @@ public sealed class TrapSystem : EntitySystem
             $"{ToPrettyString(args.User.Value)} caused trap {ToPrettyString(ent.Owner):entity}");
     }
 
+    private void UpdateTrapState(EntityUid uid, TrapArmedState newState, EntityUid? user = null, bool withSound = true, bool isUserAction = false)
+    {
+        if (!TryComp<TrapComponent>(uid, out var trapComp))
+            return;
+
+        if (trapComp.State == newState)
+            return;
+
+        if (isUserAction)
+        {
+            if (newState == TrapArmedState.Armed)
+            {
+                if (!CanArmTrap((uid, trapComp), user)) return;
+            }
+            else
+            {
+                if (!CanDefuseTrap((uid, trapComp), user)) return;
+            }
+        }
+
+        var coordinates = Transform(uid).Coordinates;
+
+        if (user != null && withSound && isUserAction)
+        {
+            var sound = newState == TrapArmedState.Armed ? trapComp.SetTrapSound : trapComp.DefuseTrapSound;
+            _audio.PlayPredicted(sound, coordinates, user.Value);
+        }
+
+        trapComp.State = newState;
+        Dirty(uid, trapComp);
+
+        UpdateVisuals(uid, trapComp);
+
+        if (newState == TrapArmedState.Armed)
+        {
+            _transformSystem.AnchorEntity(uid);
+            var armedEvent = new TrapArmedEvent();
+            RaiseLocalEvent(uid, ref armedEvent);
+        }
+        else
+        {
+            _transformSystem.Unanchor(uid);
+            var defusedEvent = new TrapDefusedEvent();
+            RaiseLocalEvent(uid, ref defusedEvent);
+        }
+    }
+
     private void UpdateVisuals(EntityUid uid, TrapComponent? trapComp = null, AppearanceComponent? appearance = null)
     {
         if (!Resolve(uid, ref trapComp, ref appearance, false))
@@ -219,4 +242,3 @@ public sealed class TrapSystem : EntitySystem
             appearance);
     }
 }
-

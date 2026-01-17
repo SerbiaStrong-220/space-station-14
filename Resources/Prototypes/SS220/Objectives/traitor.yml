@@ -2,6 +2,10 @@
 
 - type: entity
   parent: BaseTraitorStealObjective
+  id: TraitorStealObjective
+
+- type: entity
+  parent: BaseTraitorStealObjective
   id: EngravedKnuckledusterStealObjective
   components:
   - type: NotJobRequirement
