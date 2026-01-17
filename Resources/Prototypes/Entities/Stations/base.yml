@@ -74,8 +74,8 @@
           minCount: 8 # SS220-counter-ruin-rebalance
           maxCount: 12 # SS220-counter-ruin-rebalance
           stationGrid: false
-          minimumDistance: 200 # SS220 Ruins distance
-          maximumDistance: 450 # SS220 Ruins distance
+          minimumDistance: 250 # SS220 Ruins distance
+          maximumDistance: 350 # SS220 Ruins distance
           paths:
           - /Maps/Ruins/abandoned_outpost.yml
           - /Maps/Ruins/atmos_interchange.yml
@@ -135,7 +135,7 @@
         wrecks: !type:DungeonSpawnGroup
           hide: true #SS2200 IFF and Name Hide Reveal
           minimumDistance: 150
-          maximumDistance: 300
+          maximumDistance: 250
           stationGrid: false
           minCount: 12
           maxCount: 16
