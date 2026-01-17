@@ -10,25 +10,22 @@ firemode-name-destroy = режим для УНИЧТОЖЕНИЯ
 firemode-name-heal = режим для лечения
 
 
-ent-WeaponBlasterKRS = krs
-    .desc = Старая, но надежная бластерная винтовка. Оснащена только полуавтоматическим режимом стрельбы.
-    .suffix = Бластер
+ent-WeaponBlasterKRS = бластерная винтовка КРС
+    .desc = Старая, но надежная бластерная винтовка.
 
-ent-WeaponBlasterKRV = krv
+ent-WeaponBlasterKRV = бластерная винтовка КРВ
     .desc = Усовершенствованная бластерная винтовка. Используется особенными оперативниками.
-    .suffix = Бластер
 
-ent-BlasterPowerCellAlt = бластерная энергоячейка
-    .desc = Вмещает в себе гораздо больше боли, чем вы когда-либо мечтали.
-ent-BlasterPowerCellAltPrinted = бластерная энергоячейка
-    .desc = Вмещает в себе гораздо больше боли, чем вы когда-либо мечтали.
-    .suffix = Пустой
-
-ent-BlasterPowerCellDisabler = бластерная энергоячейка (disabler)
+ent-PowerCellBlaster = энергоячейка бластерной винтовки
     .desc = Вмещает в себе гораздо больше боли, чем вы когда-либо мечтали.
 
-ent-BlasterPowerCellPulse = усовершенствованная бластерная энергоячейка
-    .desc = Вмещает в себе гораздо больше боли, чем вы когда-либо мечтали.
+ent-PowerCellBlasterPrinted = { ent-PowerCellBlaster }
+    .desc = { ent-PowerCellBlaster.desc }
+    .suffix = Разряженный, Напечатанный
+
+ent-PowerCellBlasterHighCapacity = высокоёмкая энергоячейка бластерной винтовки
+    .desc = { ent-PowerCellBlaster.desc }
+
 
 firemode-name-laser-alt = Лазер
 firemode-name-disabler-alt = Оглушение
@@ -39,6 +36,7 @@ ent-WeaponSynergisticEnergyGun = синергетический пистолет
 
 firemode-name-enhanced = Сконцентрированный
 
+
 ent-LaserCarabinePowerCell = энергоячейка карабина
     .desc = Вмещает в себе гораздо больше боли, чем вы когда-либо мечтали.
 
@@ -48,7 +46,7 @@ ent-LaserSMGPowerCell = энергоячейка пистолета-пулемё
 ent-WeaponLaserSMG = лазерный пистолет-пулемёт ИК 40
     .suffix = Пистолет-пулемёт
     .desc = Слабый лазерный пистолет-пулемёт, прототип оружия ОБР, в большей степени полагающийся на аккумуляторные патроны, а не на встроенный элемент питания. Используется службой безопасности NanoTrasen.
-    
+
 ent-WeaponLaserCarabine = лазерный карабин ИК 60
     .suffix = Автомат
     .desc = Мощный лазерный карабин, похожий на винтовку, в большей степени полагающийся на аккумуляторные патроны, а не на встроенный элемент питания. Используется отрядами корпоративной безопасности NanoTrasen в боевых действиях.

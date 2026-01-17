@@ -424,7 +424,7 @@
       - MagazinePistol
       - MagazineMagnum
       - HolofanProjectorSecurity # SS220 Fix #2009
-      - KRSPowerCell # SS220-BlueShield MinorFix
+      - PowerCellBlaster         # SS220-BlueShield MinorFix
       - CombatKnife
       - Truncheon
       - HandGrenade

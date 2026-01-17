@@ -4,7 +4,7 @@
 - type: entity
   abstract: true
   parent: BaseItem
-  id: KRSPowerCell
+  id: BasePowerCellBlaster
   components:
   - type: Item
   - type: Battery
@@ -35,7 +35,7 @@
         Quantity: 5
   - type: Tag
     tags:
-      - KRSPowerCell
+      - PowerCellBlaster
       - WeaponRechargerWhitelist
   - type: Appearance
   - type: PowerCellVisuals
@@ -43,33 +43,31 @@
 
 # Standard 800 charge battery
 - type: entity
-  parent: KRSPowerCell
-  id: BlasterPowerCellAlt
+  parent: BasePowerCellBlaster
+  id: PowerCellBlaster
   name: blaster power cell
   description: Standard energy cell for blaster weapons.
   suffix: Standard
 
 # Powerful 1200 charge battery
 - type: entity
-  parent: KRSPowerCell
-  id: BlasterPowerCellPulse
+  parent: BasePowerCellBlaster
+  id: PowerCellBlasterHighCapacity
   name: blaster power cell
   description: High-capacity energy cell for advanced blaster weapons.
   suffix: High-Capacity
   components:
   - type: Battery
-    pricePerJoule: 0.15
     maxCharge: 1200
     startingCharge: 1200
 
 # Blank version for crafting/printing
 - type: entity
-  id: BlasterPowerCellAltPrinted
+  parent: PowerCellBlaster
+  id: PowerCellBlasterPrinted
   suffix: Empty
-  parent: BlasterPowerCellAlt
   components:
   - type: Sprite
-    sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/krs_magblaster.rsi
     layers:
     - map: [ "enum.PowerCellVisualLayers.Base" ]
       state: base

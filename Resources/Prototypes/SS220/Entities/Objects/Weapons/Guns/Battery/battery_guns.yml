@@ -48,8 +48,8 @@
 
 #Base KR
 - type: entity
-  id: BaseWeaponBlaster
   parent: BaseWeaponPowerCell
+  id: BaseWeaponBlaster
   abstract: true
   components:
   - type: Sprite
@@ -68,15 +68,18 @@
     slots:
       - Back
       - suitStorage
+  - type: Item
+    size: Large
   - type: MagazineVisuals
     magState: mag
     steps: 6
     zeroVisible: true
   - type: Wieldable
   - type: GunWieldBonus
-    minAngle: -2
-    maxAngle: -13
+    minAngle: -15
+    maxAngle: -22
   - type: Gun
+    fireRate: 6
     minAngle: 17
     maxAngle: 29
     projectileSpeed: 30
@@ -86,55 +89,48 @@
       path: /Audio/SS220/Weapons/Guns/Gunshots/blaster_nt.ogg
 
 - type: entity
-  id: WeaponBlasterKRS
   parent: BaseWeaponBlaster
-  name: krs
+  id: WeaponBlasterKRS
+  name: blaster KRS
   description: An old reliable blaster rifle. There is only a semi-automatic type of shooting.
-  suffix: Blaster
   components:
-  - type: Item
-    size: Large
   - type: Gun
-    fireRate: 6.5
-    selectedMode: SemiAuto
+    selectedMode: Burst
     availableModes:
-      - SemiAuto
+      - Burst
   - type: ProjectileBatteryAmmoProvider
     proto: BulletBlasterAlt
-    fireCost: 40
+    fireCost: 50
   - type: BatteryWeaponFireModes
     fireModes:
       - proto: BulletBlasterAlt
         name: firemode-name-blaster
-        fireCost: 40
+        fireCost: 50
       - proto: BulletDisablerSmg
         name: firemode-name-disabler
-        fireCost: 24
+        fireCost: 32
   - type: ItemSlots
     slots:
       cell_slot:
         name: Magazine
-        startingItem: BlasterPowerCellAlt
+        startingItem: PowerCellBlaster
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         whitelist:
           tags:
-            - KRSPowerCell
+            - PowerCellBlaster
 
 - type: entity
-  id: WeaponBlasterKRV
   parent: BaseWeaponBlaster
-  name: KRV
+  id: WeaponBlasterKRV
+  name: blaster KRV
   description: An advanced blaster rifle. Used by special operatives.
-  suffix: Blaster
   components:
-  - type: Item
-    size: Large
   - type: Gun
-    fireRate: 6.5
     selectedMode: FullAuto
     availableModes:
       - SemiAuto
+      - Burst
       - FullAuto
   - type: ProjectileBatteryAmmoProvider
     proto: BulletBlasterPulse
@@ -151,12 +147,12 @@
     slots:
       cell_slot:
         name: Magazine
-        startingItem: BlasterPowerCellPulse
+        startingItem: PowerCellBlasterHighCapacity
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         whitelist:
           tags:
-            - KRSPowerCell
+            - PowerCellBlaster
 
 - type: entity
   name: ik 40 laser carbine

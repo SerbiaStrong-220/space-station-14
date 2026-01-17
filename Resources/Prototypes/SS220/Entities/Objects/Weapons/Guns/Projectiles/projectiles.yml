@@ -475,11 +475,20 @@
     impactEffect: BulletImpactEffectBlaster
     damage:
       types:
-        Heat: 20
-        Piercing: 6
+        Heat: 15
+        Piercing: 4
     soundHit:
       collection: WeakHit
     forceSound: true
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.1,0.1,0.1"
+        hard: false
+        mask:
+        - Opaque
 
 - type: entity
   name : Blaster bolt
@@ -496,11 +505,20 @@
     impactEffect: BulletImpactEffectBlue
     damage:
       types:
-        Heat: 48
-        Piercing: 14
+        Heat: 28
+        Piercing: 8
     soundHit:
       collection: WeakHit
     forceSound: true
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.1,0.1,0.1"
+        hard: false
+        mask:
+        - Opaque
 
 - type: entity
   id: BulletImpactEffectBlue
