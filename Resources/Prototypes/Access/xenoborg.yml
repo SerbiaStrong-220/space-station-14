@@ -3,3 +3,4 @@
   name: id-card-access-level-basic-xenoborg
   canAddToIdCard: false
   canBeSwitchableInReader: false #SS220 DoorElectronicsConfiguratorFix
+  showInPda: false # ss220 add additional info for pda

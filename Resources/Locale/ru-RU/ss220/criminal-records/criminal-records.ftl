@@ -8,6 +8,18 @@ criminal-records-ui-no-status = Без статуса
 criminal-records-ui-cryo-group = Ушли в крио
 criminal-records-ui-delete-dialog = Удалить эту запись?
 criminal-records-ui-no-access = Отказано в доступе.
+criminal-records-ui-name = Имя Фамилия
+criminal-records-ui-link-id-to-record = Привязать ID-карту к этой записи
+criminal-records-ui-criminal-records-text = Криминальные записи:
+criminal-records-ui-change-status = Сменить статус
+criminal-records-ui-change-status-with-time = Сменить статус ({$time})
+criminal-records-ui-save-button = Сохранить
+criminal-records-ui-save-button-with-time = Сохранить ({$time})
+criminal-records-ui-discard-button = Отмена
+criminal-records-ui-choose-record-left = Выберите запись слева
+criminal-records-ui-chosen-id = ID: НТ-{$key}
+criminal-records-ui-no-chosen-record = Не выбрана запись
+
 
 criminal-status-wanted = В розыске
 criminal-status-search = Обыскать

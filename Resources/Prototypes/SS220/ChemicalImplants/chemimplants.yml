@@ -1,13 +1,16 @@
 # capsules
 - type: entity
+  parent: BaseSubdermalImplant
   id: EmptyChemicalImplant
   name: empty chemical implant
   description: empty-chemical-implant-desc
   components:
-    - type: ChemicalImplant
     - type: SubdermalImplant
       permanent: true
       implantAction: ActionUseChemicalImplant
+    - type: AddReagentsOnTrigger
+      targetUser: true
+    - type: TriggerOnActivateImplant
     - type: Sprite
       sprite: SS220/Objects/ChemicalImplants/implants.rsi
       state: implant

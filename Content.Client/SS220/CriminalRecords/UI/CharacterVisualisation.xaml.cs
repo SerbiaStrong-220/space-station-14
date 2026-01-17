@@ -12,6 +12,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Content.Shared.Clothing;
 using Content.Shared.Humanoid;
+using Content.Shared.Sprite;
 using Robust.Client.GameObjects;
 using Robust.Client.Player;
 
@@ -94,6 +95,13 @@ public sealed partial class CharacterVisualisation : BoxContainer
             _face?.SetEntity(_previewDummy);
             _side?.SetEntity(_previewDummy);
         }
+
+        // to prevent invisible control
+        _face?.InvalidateArrange();
+        _face?.InvalidateMeasure();
+
+        _side?.InvalidateArrange();
+        _side?.InvalidateMeasure();
     }
 
     public void SetupEntitySpriteView(EntityUid target, EntProtoId dollPrototype)
@@ -117,7 +125,13 @@ public sealed partial class CharacterVisualisation : BoxContainer
 
         _entMan.DeleteEntity(_previewDummy);
 
-        _previewDummy = _entMan.SpawnEntity(_prototype.Index(profile.Species).DollPrototype, MapCoordinates.Nullspace);
+        var dollProto = _prototype.Index(profile.Species).DollPrototype;
+        _previewDummy = _entMan.SpawnEntity(dollProto, MapCoordinates.Nullspace);
+
+        var dollEntProto = _prototype.Index(dollProto);
+        if (dollEntProto.TryGetComponent(out ScaleVisualsComponent? scaleVisuals, _entMan.ComponentFactory))
+            _sprite.SetScale(_previewDummy, scaleVisuals.Scale);
+
         appearanceSystem.LoadProfile(_previewDummy, profile);
         var realJobPrototype = _prototype.Index<JobPrototype>(jobPrototype);
         GiveDummyJobClothes(_previewDummy, profile, realJobPrototype);

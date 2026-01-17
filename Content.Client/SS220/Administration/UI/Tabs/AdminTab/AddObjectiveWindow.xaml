@@ -1,12 +1,13 @@
 <!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
 
 <DefaultWindow xmlns="https://spacestation14.io"
-               Title="{Loc 'ui-add-objective-title'}"
-               Resizable="False">
-    <BoxContainer Orientation="Vertical" SeparationOverride="4" MinSize="240 60">
-        <BoxContainer Orientation="Horizontal">
+               Title="{Loc 'ui-add-objective-title'}">
+    <BoxContainer Orientation="Vertical" SeparationOverride="4" MinSize="340 60">
+        <BoxContainer Orientation="Vertical">
             <LineEdit Name="ObjectiveLineEdit" Access="Public" HorizontalExpand="True" PlaceHolder="{Loc 'ui-add-objective-line-edit-placeholder'}"/>
+            <LineEdit Name="EntityIdLineEdit" Access="Public" HorizontalExpand="True" PlaceHolder="{Loc 'ui-add-objective-entity-id-line-edit-placeholder'}"/>
         </BoxContainer>
+        <Button Name="ForceAssignButton" Text="{Loc 'ui-add-objective-force-assign-text'}"/>
         <Button Name="ApplyButton" Access="Public" Text="{Loc 'ui-add-objective-apply'}"/>
     </BoxContainer>
 </DefaultWindow>
