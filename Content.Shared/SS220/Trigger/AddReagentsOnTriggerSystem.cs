@@ -28,19 +28,19 @@ public sealed class AddReagentsOnTriggerSystem : EntitySystem
         if (target == null)
             return;
 
-        if (!TryComp<SolutionContainerManagerComponent>(ent.Owner, out var solutionImplantComp))
+        if (!TryComp<SolutionContainerManagerComponent>(ent.Owner, out var solutionTriggerComp))
             return;
 
         if (!TryComp<SolutionContainerManagerComponent>(target, out var solutionUserComp))
             return;
 
-        if (!_solution.TryGetSolution((ent.Owner, solutionImplantComp), BeakerSolution, out var solutionImplant))
+        if (!_solution.TryGetSolution((ent.Owner, solutionTriggerComp), BeakerSolution, out var solutionTrigger))
             return;
 
         if (!_solution.TryGetSolution((target.Value, solutionUserComp), ChemicalSolution, out var solutionUser))
             return;
 
-        var quantity = solutionImplant.Value.Comp.Solution.MaxVolume;
+        var quantity = solutionTrigger.Value.Comp.Solution.MaxVolume;
         if (TryComp<LimitedChargesComponent>(ent, out var actionCharges))
             quantity /= actionCharges.MaxCharges;
 
@@ -51,7 +51,7 @@ public sealed class AddReagentsOnTriggerSystem : EntitySystem
         }
 
         _solution.TryTransferSolution(solutionUser.Value,
-            solutionImplant.Value.Comp.Solution,
+            solutionTrigger.Value.Comp.Solution,
             quantity);
     }
 }
