@@ -83,3 +83,36 @@
   - SportWomanPants
   - ThongWomanPants
   - UkWomanPants
+  
+#maid
+- type: loadoutGroup
+  id: MaidJumpsuit
+  name: loadout-group-service-worker-jumpsuit
+  loadouts:
+  - ServiceWorkerWaiter
+  - ServiceWorkerWaitress
+  - BlackMaidDress
+  - PinkMaidDress
+  
+- type: loadoutGroup
+  id: MaidHead
+  name: loadout-group-service-worker-head
+  loadouts:
+  - MaidBazel
+  
+- type: loadout
+  id: BlackMaidDress
+  equipment:
+    jumpsuit: ClothingMaidDress
+    
+- type: loadout
+  id: PinkMaidDress
+  equipment:
+    jumpsuit: ClothingMaidDressPink
+    
+- type: loadout
+  id: MaidBazel
+  equipment:
+    head: ClothingMaidBezel
+    
+#maid

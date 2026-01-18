@@ -2,8 +2,8 @@
   id: CentCommMaid
   name: Горничная ЦК
   description: Специально обученая горничная.
+  startingGear: CentcomFieldOfficerGears
   setPreference: true # MTFLUD
-  startingGear: CentCommOfficerGear
   playTimeTracker: JobCentcommMaid
   icon: "JobIconCentCommMaid"
   supervisors: job-supervisors-centcom

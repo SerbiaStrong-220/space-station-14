@@ -1,0 +1,83 @@
+- type: roleLoadout
+  id: JobCentCommBartender
+  groups:
+  - GroupTankHarness
+  - BartenderHead
+  - BartenderJumpsuit
+  - CommonBackpack
+  - BartenderOuterClothing
+  - BartenderGoldenShaker
+  - Glasses
+  - Survival
+  - Trinkets
+  - GroupSpeciesBreathTool
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks # MetaFlud end
+
+- type: roleLoadout
+  id: JobCentCommServiceWorker
+  groups:
+  - GroupTankHarness
+  - ServiceWorkerJumpsuit #SS220-Service Worker Loadout Fix
+  - CommonBackpack
+  - Glasses
+  - Survival
+  - Trinkets
+  - GroupSpeciesBreathTool
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks # MetaFlud end
+
+- type: roleLoadout
+  id: JobCentCommChef
+  groups:
+  - GroupTankHarness
+  - ChefHead
+  - ChefMask
+  - ChefJumpsuit
+  - CommonBackpack
+  - ChefOuterClothing
+  - ChefBeltApron #SS220 Chef Resprite
+  - Glasses
+  - Survival
+  - Trinkets
+  - GroupSpeciesBreathTool
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks # MetaFlud end
+  
+- type: roleLoadout
+  id: JobCentCommJanitor
+  groups:
+  - GroupTankHarness
+  - JanitorHead
+  - JanitorJumpsuit
+  - JanitorGloves
+  - CommonBackpack
+  - JanitorOuterClothing
+  - JanitorShoes #SS220-OrangeJanitor
+  - JanitorBelt #SS220-JunkRecyclesJanitor
+  - Glasses
+  - Survival
+  - Trinkets
+  - JanitorPlunger
+  - GroupSpeciesBreathTool
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks # MetaFlud end
+  
+- type: roleLoadout
+  id: JobCentcommMaid
+  groups:
+  - GroupTankHarness
+  - MaidJumpsuit #mtflud
+  - MaidHead #mtflud
+  - CommonBackpack
+  - Glasses
+  - Survival
+  - Trinkets
+  - GroupSpeciesBreathTool
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks # MetaFlud end
