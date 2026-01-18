@@ -64,7 +64,7 @@
     supplyRampTolerance: 500
     supplyRampRate: 500
   - type: SolarPanel
-    maxSupply: 1000
+    maxSupply: 2000 #SS220-SolarBuff
   - type: Sprite
     sprite: Structures/Power/Generation/solar_panel.rsi
     state: solar_panel_plasma
@@ -107,7 +107,7 @@
     supplyRampTolerance: 500
     supplyRampRate: 500
   - type: SolarPanel
-    maxSupply: 1500
+    maxSupply: 3000 #SS220-SolarBuff
   - type: Sprite
     sprite: Structures/Power/Generation/solar_panel.rsi
     state: solar_panel_uranium
@@ -150,6 +150,7 @@
     supplyRampTolerance: 500
     supplyRampRate: 500
   - type: SolarPanel
+    maxSupply: 1000 #SS220-SolarBuff
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Metallic
