@@ -24,6 +24,7 @@
   - type: UseDelay
   - type: Sprite
     sprite: Objects/Fun/dice.rsi
+    scale: 0.4, 0.4
     noRot: true # If their sprites rotate, the number becomes even more illegible than usual.
   - type: Tag
     tags:

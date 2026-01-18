@@ -1,0 +1,44 @@
+- type: entity
+
+  parent: GeneratorRTG
+  
+  id: GeneratorBlueSpace
+  
+  name: блюспейс генератор
+  
+  description: Генератор, основанный на принципе использования Блю-Спейс пространства. Кажется, он получает энергию откуда-то из вне.
+  
+  suffix: 500kW
+  
+  components:
+  
+  - type: PowerSupplier
+    supplyRate: 500000
+    
+  - type: Sprite
+    sprite: MetaFlud/Structures/Power/Generation/bluespace.rsi
+    state: gen
+      
+  - type: PowerMonitoringDevice
+    sprite: MetaFlud/Structures/Power/Generation/bluespace.rsi
+    state: gen
+    
+  - type: PointLight
+    enabled: true
+    energy: 6
+    radius: 2
+    color: "#00C1FF"
+    
+  - type: AmbientSound
+    range: 5
+    sound:
+        path: /Audio/Ambience/Objects/buzzing.ogg
+    
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 500
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
