@@ -25,8 +25,8 @@ public sealed partial class RedactableSkillTreeShower : BoxContainer
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
 
-        SkillLevel.OnTextEntered += OnSkillLevelChange;
-        SkillSublevel.OnTextEntered += OnSkillSublevelChange;
+        SkillLevel.OnFocusExit += OnSkillLevelChange;
+        SkillSublevel.OnFocusExit += OnSkillSublevelChange;
     }
 
     public void SetSkillTreeInfo(ProtoId<SkillTreePrototype> skillTreeId, in SkillTreeInfo info)
@@ -65,6 +65,9 @@ public sealed partial class RedactableSkillTreeShower : BoxContainer
             result = Math.Clamp(result, 0, _maxLevel);
             _skillTreeInfo.Level = result;
         }
+
+        var resultSublevel = Math.Clamp(_skillTreeInfo.Sublevel, 0, _maxSublevels[_skillTreeInfo.SkillTreeIndex]);
+        _skillTreeInfo.Sublevel = resultSublevel;
 
         UpdateLineEdits();
     }
