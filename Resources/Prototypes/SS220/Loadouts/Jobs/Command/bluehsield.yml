@@ -79,6 +79,11 @@
 
 - type: loadout
   id: BlueshieldBlueBeret
+  equipment:
+    head: ClothingHeadBeretBlue
+
+- type: loadout
+  id: BlueshieldNavyBlueBeret
   effects:
   - !type:GroupLoadoutEffect
     proto: BlueShieldFive

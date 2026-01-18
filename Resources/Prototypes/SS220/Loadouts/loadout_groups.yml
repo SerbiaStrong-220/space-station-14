@@ -164,6 +164,7 @@
   loadouts:
   - BlueshieldBeret
   - BlueshieldBlueBeret
+  - BlueshieldNavyBlueBeret
 
 - type: loadoutGroup
   id: BlueShieldGlasses
