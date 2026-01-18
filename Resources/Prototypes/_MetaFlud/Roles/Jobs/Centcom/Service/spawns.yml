@@ -133,3 +133,15 @@
     layers:
       - state: green
       - state: captain
+      
+- type: entity
+  id: SpawnPointCentcommCommunicationsOfficer
+  parent: SpawnPointJobBase
+  name: CentcommCommunicationsOfficer
+  components:
+  - type: SpawnPoint
+    job_id: CentcommCommunicationsOfficer
+  - type: Sprite
+    layers:
+      - state: green
+      - state: captain
