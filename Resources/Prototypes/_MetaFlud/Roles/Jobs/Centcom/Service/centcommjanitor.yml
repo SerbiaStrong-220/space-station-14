@@ -5,7 +5,7 @@
   playTimeTracker: JobCentCommJanitor
   startingGear: JanitorGear
   icon: "JobIconJanitor"
-  supervisors: job-supervisors-hop
+  supervisors: job-supervisors-centcom
   access:
   - CentralCommand
   - Service

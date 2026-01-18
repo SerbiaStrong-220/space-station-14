@@ -1,0 +1,83 @@
+- type: vendingMachineInventory
+  id: UnderWearMachineInventory
+  startingInventory:
+    # Бюстгальтеры
+    ClothingBraStrapless: 5
+    ClothingBraNekoWhite: 5
+    ClothingBraNekoBlack: 5
+    ClothingBraAssblastusa: 5
+    ClothingBraBikini: 5
+    ClothingBraBralette: 5
+    ClothingBraCommie: 5
+    ClothingBraKinky: 5
+    ClothingBraLace: 5
+    ClothingBraSport: 5
+    ClothingBraThong: 5
+    ClothingBraUk: 5
+    ClothingBraChristmas: 5
+    
+    # Женские штаны/трусы
+    ClothingPantsWomanStrapless: 5
+    ClothingPantsWomanNekoWhite: 5
+    ClothingPantsWomanNekoBlack: 5
+    ClothingPantsWomanAssblastusa: 5
+    ClothingPantsWomanBikini: 5
+    ClothingPantsWomanBralette: 5
+    ClothingPantsWomanCommie: 5
+    ClothingPantsWomanKinky: 5
+    ClothingPantsWomanLace: 5
+    ClothingPantsWomanSport: 5
+    ClothingPantsWomanThong: 5
+    ClothingPantsWomanUk: 5
+    ClothingPantsWomanChristmas: 5
+    
+    # Мужские штаны/трусы
+    ClothingPantsManBoxers: 5
+    ClothingPantsManAssblastusa: 5
+    ClothingPantsManBriefs: 5
+    ClothingPantsManCommie: 5
+    ClothingPantsManHearts: 5
+    ClothingPantsManKinky: 5
+    ClothingPantsManLongjohns: 5
+    ClothingPantsManMankini: 5
+    ClothingPantsManStripe: 5
+    ClothingPantsManUk: 5
+    
+    # Женские носки/колготки
+    ClothingThighWhite: 5
+    ClothingFishnet: 5
+    ClothingKneeWhite: 5
+    ClothingKneeFishnet: 5
+    ClothingPantyhose: 5
+    ClothingShortBlack: 5
+    ClothingStockingsBlue: 5
+    ClothingStockingsCyan: 5
+    ClothingStockingsDpink: 5
+    ClothingStockingsGreen: 5
+    ClothingStockingslpink: 5
+    ClothingStockingsOrange: 5
+    ClothingStockingsPurple: 5
+    ClothingThighAce: 5
+    ClothingThighAsblastusa: 5
+    ClothingThighBee: 5
+    ClothingThighBlack: 5
+    ClothingThighCommie: 5
+    ClothingThighRainbow: 5
+    ClothingThighTrans: 5
+    ClothingThighUk: 5
+    ClothingThighChristmas: 5
+    
+    # Мужские носки
+    ClothingShortWhite: 5
+    ClothingKneeAce: 5
+    ClothingKneeAsblastusa: 5
+    ClothingKneeBee: 5
+    ClothingKneeBlack: 5
+    ClothingKneeCommie: 5
+    ClothingKneeRainbow: 5
+    ClothingKneeStriped: 5
+    ClothingKneeThin: 5
+    ClothingKneeTrans: 5
+    ClothingKneeUk: 5
+    ClothingNormBlack: 5
+    ClothingNormWhite: 5

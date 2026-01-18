@@ -1,0 +1,34 @@
+- type: entity
+  parent: VendingMachine
+  id: VendingMachineUnderwearClothing
+  name: Бельемат
+  description: Вендинговая машина с бельём. Абсолютно чистое.
+  components:
+  - type: VendingMachine
+    pack: UnderWearMachineInventory
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+    denyState: deny-unshaded
+  - type: DatasetVocalizer
+    dataset: ClothesMateAds
+  - type: SpeakOnUIClosed
+    pack: GenericVendGoodbyes
+  - type: Sprite
+    sprite: Structures/Machines/VendingMachines/clothing.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: PointLight
+    radius: 1.8
+    energy: 1.6
+    color: "#ff8cf4"
+  #ss220 wires cut fix start
+  - type: AccessReader
+    access: []
+  #ss220 wires cut fix end

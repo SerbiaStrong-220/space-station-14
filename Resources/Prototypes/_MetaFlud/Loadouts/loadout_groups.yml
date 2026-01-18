@@ -87,32 +87,18 @@
 #maid
 - type: loadoutGroup
   id: MaidJumpsuit
-  name: loadout-group-service-worker-jumpsuit
+  name: Форма горничной
   loadouts:
-  - ServiceWorkerWaiter
-  - ServiceWorkerWaitress
-  - BlackMaidDress
-  - PinkMaidDress
-  
-- type: loadoutGroup
-  id: MaidHead
-  name: loadout-group-service-worker-head
-  loadouts:
-  - MaidBazel
-  
+    - MaidJumpsuitBlack
+    - MaidJumpsuitPink
+
 - type: loadout
-  id: BlackMaidDress
+  id: MaidJumpsuitBlack
   equipment:
     jumpsuit: ClothingMaidDress
-    
+
 - type: loadout
-  id: PinkMaidDress
+  id: MaidJumpsuitPink
   equipment:
     jumpsuit: ClothingMaidDressPink
-    
-- type: loadout
-  id: MaidBazel
-  equipment:
-    head: ClothingMaidBezel
-    
 #maid

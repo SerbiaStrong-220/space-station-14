@@ -68,12 +68,12 @@
   - Socks # MetaFlud end
   
 - type: roleLoadout
-  id: JobCentcommMaid
+  id: JobCentCommMaid
   groups:
   - GroupTankHarness
-  - MaidJumpsuit #mtflud
-  - MaidHead #mtflud
+  - MaidJumpsuit
   - CommonBackpack
+  - GroupSpeciesBreathTool
   - Glasses
   - Survival
   - Trinkets

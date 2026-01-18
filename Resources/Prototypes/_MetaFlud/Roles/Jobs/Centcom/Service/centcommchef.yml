@@ -9,7 +9,7 @@
       time: 5h # SS220-RoleTime
   startingGear: ChefGear
   icon: "JobIconChef"
-  supervisors: job-supervisors-hop
+  supervisors: job-supervisors-centcom
   access:
   - CentralCommand
   - Service

@@ -1,25 +1,22 @@
 - type: job
   id: CentCommMaid
   name: Горничная ЦК
-  description: Специально обученая горничная.
-  startingGear: CentcomFieldOfficerGears
-  setPreference: true # MTFLUD
-  playTimeTracker: JobCentcommMaid
+  description: Приведите эту полную бюрократией станцию в порядок!
+  startingGear: MaidGear # Поменять там КПК и Айди карту, а то хуйня выходит и у нас бармен, а не горничная
+  playTimeTracker: JobCentCommMaid
   icon: "JobIconCentCommMaid"
   supervisors: job-supervisors-centcom
-  canBeAntag: false
-  radioBold: true
-  accessGroups:
-  - AllAccess
   access:
   - CentralCommand
-  - CentralCommandERT
-  - CentralCommandBSO
-  - CentralCommandCBURN
-  special:
-  - !type:AddComponentSpecial
-    components:
-    - type: DefibrillatorSkill
+  - Service
+  - Maintenance
+  - Bar
+  extendedAccess:
+  - Kitchen
+  - Hydroponics
+  
+- type: playTimeTracker
+  id: JobCentCommMaid
 
 - type: jobIcon
   parent: JobIcon
@@ -27,6 +24,3 @@
   icon:
     sprite: /Textures/MetaFlud/Misc/job_icons.rsi
     state: CentCommMaid
-
-- type: playTimeTracker
-  id: JobCentcommMaid

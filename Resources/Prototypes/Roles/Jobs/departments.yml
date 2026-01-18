@@ -63,11 +63,12 @@
   name: department-CentralCommand
   description: department-CentralCommand-description
   color: "#e0ad5d" #ss220-chatcolor
+  sort: 1
   roles:
   - BlueShield
   - CentralCommandOfficial
   - CentcommOfficer
-  - CentcomFieldOfficer
+  - CentcommCommunicationsOfficer
   - CentCommNanoTrasenDiplomat
   - CentComNanoTrasenAdmiral
   - SpecOpsLeader

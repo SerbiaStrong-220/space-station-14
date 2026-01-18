@@ -8,8 +8,8 @@
       time: 1h # SS220-RoleTime 2
   startingGear: ServiceWorkerGear
   icon: "JobIconServiceWorker"
-  supervisors: job-supervisors-service
-  canBeAntag: true #SS220 https://github.com/SerbiaStrong-220/space-station-14/pull/564
+  supervisors: job-supervisors-centcom
+  canBeAntag: false #MetaFlud
   access:
   - CentralCommand
   - Service
