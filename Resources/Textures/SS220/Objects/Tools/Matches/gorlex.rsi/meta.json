@@ -1,0 +1,116 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Sprited by veniiaa (Discord) for SS220",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "matchbox"
+        },
+        {
+            "name": "matchbox-open"
+        },
+        {
+            "name": "matchbox-inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "matchbox-inhand-right",
+            "directions": 4
+        },
+        {
+            "name": "matchbox0"
+        },
+        {
+            "name": "matchbox1"
+        },
+        {
+            "name": "matchbox2"
+        },
+        {
+            "name": "matchbox3"
+        },
+
+
+        {
+            "name": "match_burnt"
+        },
+        {
+            "name": "match_lit",
+            "delays": [
+                [
+                    0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9,
+                    0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9,
+                    0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9,
+                    0.9, 0.9, 0.9, 0.9, 1.2, 1.2, 1.5, 1.5
+                ]
+            ]
+        },
+        {
+            "name": "match_unlit"
+        },
+        {
+            "name": "unlit-inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "unlit-inhand-right",
+            "directions": 4
+        },
+        {
+            "name": "lit-inhand-left",
+            "directions": 4,
+            "delays": [
+                [
+                    0.2,
+                    0.2,
+                    0.2
+                ],
+                [
+                    0.2,
+                    0.2,
+                    0.2
+                ],
+                [
+                    0.2,
+                    0.2,
+                    0.2
+                ],
+                [
+                    0.2,
+                    0.2,
+                    0.2
+                ]
+            ]
+        },
+        {
+            "name": "lit-inhand-right",
+            "directions": 4,
+            "delays": [
+                [
+                    0.2,
+                    0.2,
+                    0.2
+                ],
+                [
+                    0.2,
+                    0.2,
+                    0.2
+                ],
+                [
+                    0.2,
+                    0.2,
+                    0.2
+                ],
+                [
+                    0.2,
+                    0.2,
+                    0.2
+                ]
+            ]
+        }
+    ]
+}
