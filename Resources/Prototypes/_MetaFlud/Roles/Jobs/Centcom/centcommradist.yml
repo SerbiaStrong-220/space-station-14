@@ -1,0 +1,22 @@
+- type: job
+  id: CentcommCommunicationsOfficer
+  name: Офицер Связи ЦК
+  description: job-description-centcomoff
+  setPreference: true # edited MTFLUD
+  startingGear: CentCommOfficerGear
+  playTimeTracker: JobCentcommCommunicationsOfficer
+  icon: "JobIconNanotrasen"
+  supervisors: job-supervisors-centcom
+  canBeAntag: false
+  radioBold: true
+  accessGroups:
+  - AllAccess
+  access:
+  - CentralCommand
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: DefibrillatorSkill
+
+- type: playTimeTracker
+  id: JobCentcommCommunicationsOfficer

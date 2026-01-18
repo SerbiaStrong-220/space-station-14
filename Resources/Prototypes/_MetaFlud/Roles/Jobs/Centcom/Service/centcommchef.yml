@@ -1,0 +1,33 @@
+- type: job
+  id: CentCommChef
+  name: Шеф-Повар ЦК
+  description: job-description-chef
+  playTimeTracker: JobCentCommChef
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Civilian
+      time: 5h # SS220-RoleTime
+  startingGear: ChefGear
+  icon: "JobIconChef"
+  supervisors: job-supervisors-centcom
+  access:
+  - CentralCommand
+  - Service
+  - Maintenance
+  - Kitchen
+  extendedAccess:
+  - Hydroponics
+  - Bar
+#  special:
+#    - !type:AddComponentSpecial
+#      components:
+#      - type: CQCCombat
+#        availableSpells:
+#        - NonLethalBlowback
+#        - NonLethalPunch
+#        - NonLethalDisarm
+#        - NonLethalLongSleep
+#      - type: Missable
+
+- type: playTimeTracker
+  id: JobCentCommChef

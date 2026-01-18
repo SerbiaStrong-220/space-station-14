@@ -32,6 +32,7 @@
   components:
   - type: Sprite
     sprite: MetaFlud/Clothing/Neck/NeckAccessories/collar1.rsi
+    scale: 0.8, 0.8
   - type: Clothing
     sprite: MetaFlud/Clothing/Neck/NeckAccessories/collar1.rsi
 
@@ -44,6 +45,7 @@
   components:
   - type: Sprite
     sprite: MetaFlud/Clothing/Neck/NeckAccessories/collar2.rsi
+    scale: 0.8, 0.8
   - type: Clothing
     sprite: MetaFlud/Clothing/Neck/NeckAccessories/collar2.rsi
 
@@ -56,6 +58,7 @@
   components:
   - type: Sprite
     sprite: MetaFlud/Clothing/Neck/NeckAccessories/collar3.rsi
+    scale: 0.8, 0.8
   - type: Clothing
     sprite: MetaFlud/Clothing/Neck/NeckAccessories/collar3.rsi
 
@@ -92,6 +95,7 @@
   components:
   - type: Sprite
     sprite: MetaFlud/Clothing/Neck/NeckAccessories/ribbon.rsi
+    scale: 0.8, 0.8
   - type: Clothing
     sprite: MetaFlud/Clothing/Neck/NeckAccessories/ribbon.rsi
     quickEquip: true
@@ -127,6 +131,7 @@
   components:
   - type: Sprite
     sprite: MetaFlud/Clothing/Neck/NeckAccessories/collar6.rsi
+    scale: 0.8, 0.8
   - type: Clothing
     sprite: MetaFlud/Clothing/Neck/NeckAccessories/collar6.rsi
 

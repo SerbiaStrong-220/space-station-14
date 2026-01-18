@@ -1,0 +1,20 @@
+- type: job
+  id: CentCommJanitor
+  name: Уборщик ЦК
+  description: job-description-janitor
+  playTimeTracker: JobCentCommJanitor
+  startingGear: JanitorGear
+  icon: "JobIconJanitor"
+  supervisors: job-supervisors-centcom
+  access:
+  - CentralCommand
+  - Service
+  - Janitor
+  - Maintenance
+  special:
+  - !type:GiveItemOnHolidaySpecial
+    holiday: GarbageDay
+    prototype: WeaponRevolverInspector
+
+- type: playTimeTracker
+  id: JobCentCommJanitor

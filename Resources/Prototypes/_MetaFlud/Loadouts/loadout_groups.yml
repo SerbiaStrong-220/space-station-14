@@ -83,3 +83,22 @@
   - SportWomanPants
   - ThongWomanPants
   - UkWomanPants
+  
+#maid
+- type: loadoutGroup
+  id: MaidJumpsuit
+  name: Форма горничной
+  loadouts:
+    - MaidJumpsuitBlack
+    - MaidJumpsuitPink
+
+- type: loadout
+  id: MaidJumpsuitBlack
+  equipment:
+    jumpsuit: ClothingMaidDress
+
+- type: loadout
+  id: MaidJumpsuitPink
+  equipment:
+    jumpsuit: ClothingMaidDressPink
+#maid

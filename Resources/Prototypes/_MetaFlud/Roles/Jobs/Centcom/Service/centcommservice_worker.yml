@@ -1,0 +1,23 @@
+- type: job
+  id: CentCommServiceWorker
+  name: Сервисный Работник ЦК
+  description: job-description-serviceworker
+  playTimeTracker: JobCentCommServiceWorker
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 1h # SS220-RoleTime 2
+  startingGear: ServiceWorkerGear
+  icon: "JobIconServiceWorker"
+  supervisors: job-supervisors-centcom
+  canBeAntag: false #MetaFlud
+  access:
+  - CentralCommand
+  - Service
+  - Maintenance
+  - Bar
+  - Kitchen
+  extendedAccess:
+  - Hydroponics
+
+- type: playTimeTracker
+  id: JobCentCommServiceWorker

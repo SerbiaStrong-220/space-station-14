@@ -63,14 +63,21 @@
   name: department-CentralCommand
   description: department-CentralCommand-description
   color: "#e0ad5d" #ss220-chatcolor
+  sort: 1
   roles:
+  - BlueShield
   - CentralCommandOfficial
   - CentcommOfficer
-  - CentcomFieldOfficer
+  - CentcommCommunicationsOfficer
   - CentCommNanoTrasenDiplomat
   - CentComNanoTrasenAdmiral
   - SpecOpsLeader
-  editorHidden: true
+  - CentCommMaid # Service start
+  - CentCommServiceWorker
+  - CentCommJanitor
+  - CentCommChef
+  - CentCommBartender
+  editorHidden: false
   weight: 120
   lightColor: "#dca248" # SS220 Round End Titles
 

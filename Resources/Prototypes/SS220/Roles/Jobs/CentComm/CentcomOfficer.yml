@@ -36,7 +36,7 @@
   id: CentcommOfficer
   name: job-name-cc-oficier
   description: job-description-centcomoff
-  setPreference: false
+  setPreference: true # edited MTFLUD
   startingGear: CentCommOfficerGear
   playTimeTracker: JobCentcommOfficer
   icon: "JobIconNanotrasen"

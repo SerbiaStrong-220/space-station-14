@@ -1,0 +1,128 @@
+{
+    "version": 1,
+    "license": "CLA",
+    "copyright": "© SUNRISE, An EULA/CLA with a hosting restriction, full text: https://github.com/space-sunrise/space-station-14/blob/master/CLA.txt, some icons were redesigned by Gardsnake, commaid created by pacable",
+    "size": {
+        "x": 8,
+        "y": 8
+    },
+    "states": [
+	{
+            "name": "Arrows"
+        },
+        {
+            "name": "EngineerBorg"
+        },
+        {
+            "name": "JanitorBorg"
+        },
+        {
+            "name": "MedicalBorg"
+        },
+        {
+            "name": "MiningBorg"
+        },
+        {
+            "name": "ServiceBorg"
+        },
+        {
+            "name": "SecurityBorg"
+        },
+        {
+            "name": "PeaceBorg"
+        },
+        {
+            "name": "ClownBorg"
+        },
+        {
+            "name": "SecurityPilot"
+        },
+        {
+            "name": "BlueShield"
+        },
+        {
+            "name": "SecurityCombatBorg"
+        },
+        {
+            "name": "PrisonPilot"
+        },
+        {
+            "name": "PrisonGuard"
+        },
+        {
+            "name": "HeadOfPrison"
+        },
+        {
+            "name": "PrisonDoctor"
+        },
+        {
+            "name": "PrisonWorker"
+        },
+        {
+            "name": "PrisonChef"
+        },
+        {
+            "name": "PrisonEngineer"
+        },
+        {
+            "name": "PrisonScientist"
+        },
+        {
+            "name": "PrisonInspector"
+        },
+        {
+            "name": "Barber"
+        },
+        {
+            "name": "NanotrasenGuard"
+        },
+        {
+            "name": "NanotrasenLeader"
+        },
+        {
+            "name": "Nanotrasen"
+        },
+        {
+            "name": "Pathologist"
+        },
+        {
+            "name": "CaptainUSSP"
+        },
+        {
+            "name": "CrewUSSP"
+        },
+        {
+            "name": "OfficerUSSP"
+        },
+        {
+            "name": "OfficerAltUSSP"
+        },
+        {
+            "name": "SoldierUSSP"
+        },
+        {
+            "name": "MailCarrier"
+        },
+        {
+            "name": "Musician"
+        },
+        {
+            "name": "Borg"
+        },
+        {
+            "name": "CentCommMaid"
+        },
+        {
+            "name": "Brigmedic"
+        },
+        {
+            "name": "Adjutant"
+        },
+        {
+            "name": "Pirate"
+        },
+        {
+            "name": "Miner"
+        }
+    ]
+}

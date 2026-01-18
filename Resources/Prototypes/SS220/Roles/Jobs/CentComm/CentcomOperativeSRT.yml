@@ -36,7 +36,7 @@
   id: CentcomOperativeBSO
   name: job-name-cc-bs-operative
   description: job-description-centcomoff
-  setPreference: false
+  setPreference: true # MTFLUD edit
   startingGear: CentcomOperativeBSOGear
   playTimeTracker: JobCentcommOperativeBSO
   icon: "JobIconNanotrasen"

@@ -1,0 +1,26 @@
+- type: job
+  id: CentCommMaid
+  name: Горничная ЦК
+  description: Приведите эту полную бюрократией станцию в порядок!
+  startingGear: MaidGear # Поменять там КПК и Айди карту, а то хуйня выходит и у нас бармен, а не горничная
+  playTimeTracker: JobCentCommMaid
+  icon: "JobIconCentCommMaid"
+  supervisors: job-supervisors-centcom
+  access:
+  - CentralCommand
+  - Service
+  - Maintenance
+  - Bar
+  extendedAccess:
+  - Kitchen
+  - Hydroponics
+  
+- type: playTimeTracker
+  id: JobCentCommMaid
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconCentCommMaid
+  icon:
+    sprite: /Textures/MetaFlud/Misc/job_icons.rsi
+    state: CentCommMaid
