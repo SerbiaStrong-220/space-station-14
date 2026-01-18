@@ -1,0 +1,33 @@
+- type: gameMap
+  id: MTF_CentComm
+  mapName: 'Центральное Командование'
+  mapPath: /Maps/_MetaFlud/centcomm.yml
+  minPlayers: 10
+  stations:
+    centcomm:
+      stationProto: CentCommStation
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: '{0} Центральное Командование {1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: 'SS220'
+        - type: StationJobs
+          availableJobs:
+            CentralCommandOfficial: [ -1, -1 ]
+            CentcommOfficer: [ -1, -1 ]
+            CentcomFieldOfficer: [ -1, -1 ]
+            CentCommNanoTrasenDiplomat: [ -1, -1 ]
+            CentComNanoTrasenAdmiral: [ -1, -1 ]
+            SpecOpsLeader: [ -1, -1 ]
+            BlueShield: [ -1, -1 ]
+            CentCommMaid: [ -1, -1 ]
+            CentCommServiceWorker: [ -1, -1 ]
+            CentCommJanitor: [ -1, -1 ]
+            CentCommChef: [ -1, -1 ]
+            CentCommBartender: [ -1, -1 ]
+
+- type: entity
+  id: CentCommStation
+  parent: StandardNanotrasenStation
+  categories: [ HideSpawnMenu ]

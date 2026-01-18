@@ -1,0 +1,24 @@
+- type: job
+  id: CentCommBartender
+  name: Бармен ЦК
+  description: job-description-bartender
+  playTimeTracker: JobCentCommBartender
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Civilian
+      time: 5h # SS220-RoleTime
+  startingGear: BartenderGear
+  icon: "JobIconBartender"
+  supervisors: job-supervisors-hop
+  access:
+  - CentralCommand
+  - Service
+  - Maintenance
+  - Bar
+  extendedAccess:
+  - Kitchen
+  - Hydroponics
+  
+- type: playTimeTracker
+  id: JobCentCommBartender
+

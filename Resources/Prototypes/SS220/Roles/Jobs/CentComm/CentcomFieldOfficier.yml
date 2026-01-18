@@ -36,7 +36,7 @@
   id: CentcomFieldOfficer
   name: job-name-cc-operational-oficier
   description: job-description-centcomoff
-  setPreference: false
+  setPreference: true # MTFLUD edit
   startingGear: CentcomFieldOfficerGear
   playTimeTracker: JobCentcomFieldOfficer
   icon: "JobIconNanotrasen"

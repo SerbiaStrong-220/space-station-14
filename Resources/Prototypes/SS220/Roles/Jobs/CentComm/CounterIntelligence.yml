@@ -8,7 +8,7 @@
   id: CIOffcier
   name: job-name-cc-ci-officer
   description: job-description-centcomoff
-  setPreference: false
+  setPreference: true # MTFLUD edit
   startingGear: CentCommOfficerGear
   playTimeTracker: JobCIOfficer
   icon: "JobIconNanotrasen"
@@ -35,7 +35,7 @@
   id: CIAgent
   name: job-name-cc-ci-agent
   description: job-description-centcomoff
-  setPreference: false
+  setPreference: true # MTFLUD edit
   startingGear: CentCommOfficerGear
   playTimeTracker: JobCIAgent
   icon: "JobIconNanotrasen"

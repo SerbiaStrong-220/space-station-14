@@ -1,7 +1,7 @@
 - type: species
   id: Vulpkanin
   name: species-name-vulpkanin
-  roundStart: false #SS220-port-vulpkanins
+  roundStart: true # MTFLUD
   prototype: MobVulpkanin
   sprites: MobVulpkaninSprites
   defaultSkinTone: "#5a3f2d"

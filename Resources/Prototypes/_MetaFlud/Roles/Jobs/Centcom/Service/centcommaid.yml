@@ -1,0 +1,32 @@
+- type: job
+  id: CentCommMaid
+  name: Горничная ЦК
+  description: Специально обученая горничная.
+  setPreference: true # MTFLUD
+  startingGear: CentCommOfficerGear
+  playTimeTracker: JobCentcommMaid
+  icon: "JobIconCentCommMaid"
+  supervisors: job-supervisors-centcom
+  canBeAntag: false
+  radioBold: true
+  accessGroups:
+  - AllAccess
+  access:
+  - CentralCommand
+  - CentralCommandERT
+  - CentralCommandBSO
+  - CentralCommandCBURN
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: DefibrillatorSkill
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconCentCommMaid
+  icon:
+    sprite: /Textures/MetaFlud/Misc/job_icons.rsi
+    state: CentCommMaid
+
+- type: playTimeTracker
+  id: JobCentcommMaid

@@ -36,7 +36,7 @@
   id: CentComNanoTrasenAdmiral
   name: job-name-nt-admiral
   description: job-description-centcomoff
-  setPreference: false
+  setPreference: true # MTFLUD edit
   startingGear: CentComNanoTrasenAdmiralGear
   icon: "JobIconNanotrasen"
   playTimeTracker: JobCentcomAdmiral

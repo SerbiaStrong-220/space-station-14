@@ -36,7 +36,7 @@
   id: CentCommNanoTrasenDiplomat
   name: job-name-nt-politician
   description: job-description-centcomoff
-  setPreference: false
+  setPreference: true #MTFLUD edit
   startingGear: CentCommNanoTrasenDiplomatGear
   icon: "JobIconNanotrasen"
   playTimeTracker: JobCentcommDiplomat
