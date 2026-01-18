@@ -175,6 +175,13 @@
   - BlueshieldTacticGlasses
 
 - type: loadoutGroup
+  id: BlueShieldMask
+  name: loadout-group-blueshield-mask
+  minLimit: 0
+  loadouts:
+  - BlueshieldMaslBalaclava
+
+- type: loadoutGroup
   id: BlueShieldNeck
   name: loadout-group-blueshield-neck
   minLimit: 0

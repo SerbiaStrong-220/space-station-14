@@ -38,6 +38,7 @@
   groups:
   - BlueShieldHead
   - BlueShieldGlasses
+  - BlueShieldMask
   - BlueShieldNeck
   - BlueShieldJumpsuit
   - BlueShieldOuterclothing

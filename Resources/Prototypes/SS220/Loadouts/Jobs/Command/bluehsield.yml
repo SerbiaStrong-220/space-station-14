@@ -104,6 +104,12 @@
   equipment:
     eyes: ClothingEyesBlueShieldTacticGlasses
 
+# Mask
+- type: loadout
+  id: BlueshieldMaslBalaclava
+  equipment:
+    mask: ClothingMaskBalaclava2
+
 # Jumpsuit
 - type: loadout
   id: BlueShieldCombez
