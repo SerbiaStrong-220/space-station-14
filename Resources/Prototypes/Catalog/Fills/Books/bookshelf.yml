@@ -62,6 +62,9 @@
     - id: BookTruth
     - id: BookWatched
     - id: BookWorld
+    # SS220 new book begin
+    - id: BookSystemPrice
+    # SS220 new book end
 
 - type: entityTable
   id: RandomGuidebookTable
