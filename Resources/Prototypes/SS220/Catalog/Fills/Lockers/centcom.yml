@@ -13,6 +13,7 @@
     - id: ClothingShoesBootsMagDQ
     - id: ClothingHeadsetAltCentComm
     - id: ClothingBackpackDeathSquadOperativeFilled
+    - id: ClothingOuterHardsuitDeathsquad
 
 - type: entity
   id: LockerDeathsquadCommanderFilled

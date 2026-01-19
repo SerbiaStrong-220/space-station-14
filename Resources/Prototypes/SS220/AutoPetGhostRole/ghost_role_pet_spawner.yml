@@ -239,3 +239,17 @@
   - type: ConditionalSpawner
     prototypes:
       - MobEN
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobMouseCancer
+  name: the spawner cancer mouse
+  suffix: AI
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobMouseCancer
