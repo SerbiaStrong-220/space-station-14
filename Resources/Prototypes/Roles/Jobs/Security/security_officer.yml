@@ -30,7 +30,7 @@
   id: SecurityOfficerGear
   equipment:
 #    eyes: ClothingEyesGlassesSecurity #SS220-Two Floppa Iteration
-    ears: ClothingHeadsetSecurity
+    ears: ClothingHeadsetAltSecurityNonCom #SS220 staminaweapons
     pocket1: WeaponPistolMk58Nonlethal # SS220 Bring-Rubber-Back
   storage:
     back:

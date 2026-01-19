@@ -9,6 +9,8 @@
     state: icon_alt
   - type: Clothing
     equippedPrefix: alt
+  - type: NoiseSuppression #SS220 staminaweapons - this supresses flashbangs
+    suppressionRange: 2
 
 - type: entity
   parent: ClothingHeadsetAlt

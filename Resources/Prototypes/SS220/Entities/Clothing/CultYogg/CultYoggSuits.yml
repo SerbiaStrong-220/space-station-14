@@ -66,3 +66,6 @@
         Radiation: 0.5
   - type: FireProtection
     reduction: 0.2
+  - type: NoiseSuppression #SS220 staminaweapons
+    suppressionRange: 3 #a bit worse than headset, so fair enough
+
