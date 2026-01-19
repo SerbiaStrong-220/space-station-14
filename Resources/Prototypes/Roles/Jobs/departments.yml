@@ -64,19 +64,17 @@
   description: department-CentralCommand-description
   color: "#e0ad5d" #ss220-chatcolor
   sort: 1
-  roles:
-  - BlueShield
-  - CentralCommandOfficial
-  - CentcommOfficer
-  - CentcommCommunicationsOfficer
-  - CentCommNanoTrasenDiplomat
-  - CentComNanoTrasenAdmiral
-  - SpecOpsLeader
-  - CentCommMaid # Service start
-  - CentCommServiceWorker
-  - CentCommJanitor
-  - CentCommChef
-  - CentCommBartender
+  roles:                           # ----10-----
+  - CentComNanoTrasenAdmiral       # Адмирал НТ
+  - CentCommNanoTrasenDiplomat     # Дипломат НТ
+  - CentcommOfficer                # Офицер ЦК
+  - CentcommCommunicationsOfficer  # Связист ЦК
+  - CentCommBlueShield             # Оперативник СЩ
+  - CentCommBartender              # Бармен ЦК
+  - CentCommChef                   # Повар ЦК
+  - CentCommJanitor                # Уборщик ЦК
+  - CentCommServiceWorker          # Сервисный Работник ЦК
+  - CentCommMaid                   # Горничная ЦК
   editorHidden: false
   weight: 120
   lightColor: "#dca248" # SS220 Round End Titles
