@@ -28,11 +28,23 @@
       params:
         variation: 0.250
   - type: ItemToggleMeleeWeapon
-    activatedSoundOnHit: #ss220 stunprod stamina damage fix
-      path: /Audio/Weapons/egloves.ogg #ss220 stunprod stamina damage fix
     activatedDamage:
       types:
         Blunt: 0 #ss220 stunprod fix
+  - type: ComponentToggler #SS220 staminaweapons rework
+    components:
+    - type: DelayedKnockdownOnHit #SS220 staminaweapons rework
+      onHeavyAttack: true
+      delay: 4
+      duration: 3
+      drop: true
+      refresh: true
+      autoStand: true
+      useDelay: baton
+  - type: UseDelayBlockMeleeAttack #SS220 staminaweapons rework
+    delays:
+    - default
+    - baton
   - type: Stunbaton
     energyPerUse: 120
   - type: MeleeWeapon
@@ -58,7 +70,12 @@
   - type: Battery
     maxCharge: 360
     startingCharge: 360
-  - type: UseDelay
+  - type: UseDelay #SS220 staminaweapons rework
+    delays:
+      default:
+        length: 1
+      baton:
+        length: 2.5
   - type: Item
     heldPrefix: off
     size: Normal

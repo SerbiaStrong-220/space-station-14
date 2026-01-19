@@ -27,7 +27,6 @@
         volume: -2
   - type: ItemToggleMeleeWeapon
     activatedSoundOnHit:
-      soundHit: !type:SoundCollectionSpecifier
       collection: BatonHit
     activatedDamage:
       types:

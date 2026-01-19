@@ -63,8 +63,8 @@
     components:
     - type: DelayedKnockdownOnHit
       onHeavyAttack: false
-      knockdownDelay: 3.5
-      knockdownDuration: 4
+      delay: 3.5
+      duration: 4
       drop: true
       refresh: true
       autoStand: true
