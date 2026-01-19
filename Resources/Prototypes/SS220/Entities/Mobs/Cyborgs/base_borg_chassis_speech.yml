@@ -84,6 +84,7 @@
     stunTime: 5
   - type: SiliconLawProvider
     laws: Crewsimov
+    useRandomLawset: true # SS220 Random lawset
   - type: IonStormTarget
   - type: Inventory
     templateId: borg

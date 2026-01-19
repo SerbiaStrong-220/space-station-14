@@ -17,6 +17,8 @@
 - type: siliconLawset
   id: Crewsimov
   name: law-crewsimov-name
+  randomizable: true
+  weight: 25 # SS220 random lawset
   laws:
   - Crewsimov1
   - Crewsimov2
@@ -47,6 +49,8 @@
 - type: siliconLawset
   id: Corporate
   name: law-corporate-name
+  randomizable: true
+  weight: 25 # SS220 random lawset
   laws:
   - Corporate1
   - Corporate2
@@ -78,6 +82,8 @@
 - type: siliconLawset
   id: NTDefault
   name: law-ntdefault-name
+  randomizable: true
+  weight: 25 # SS220 random lawset
   laws:
   - NTDefault1
   - NTDefault2
@@ -104,6 +110,8 @@
 - type: siliconLawset
   id: Drone
   name: law-drone-name
+  randomizable: true
+  weight: 1 # SS220 random lawset
   laws:
   - Drone1
   - Drone2
@@ -131,6 +139,7 @@
 - type: siliconLawset
   id: SyndicateStatic
   name: law-syndicate-name
+  randomizable: false # SS220 random lawset
   laws:
   - Syndicate1
   - Syndicate2
@@ -161,6 +170,7 @@
 - type: siliconLawset
   id: Ninja
   name: law-ninja-name
+  randomizable: false # SS220 random lawset
   laws:
   - Ninja1
   - Ninja2
@@ -223,6 +233,8 @@
 - type: siliconLawset
   id: CommandmentsLawset
   name: law-commandments-name
+  randomizable: true
+  weight: 1 # SS220 random lawset
   laws:
   - Commandment1
   - Commandment2
@@ -261,6 +273,8 @@
 - type: siliconLawset
   id: PaladinLawset
   name: law-paladin-name
+  randomizable: true
+  weight: 1 # SS220 random lawset
   laws:
   - Paladin1
   - Paladin2
@@ -283,6 +297,8 @@
 - type: siliconLawset
   id: LiveLetLiveLaws
   name: law-lall-name
+  randomizable: true
+  weight: 1 # SS220 random lawset
   laws:
   - Lall1
   - Lall2
@@ -308,6 +324,8 @@
 - type: siliconLawset
   id: EfficiencyLawset
   name: law-efficiency-name
+  randomizable: true
+  weight: 1 # SS220 random lawset
   laws:
   - Efficiency1
   - Efficiency2
@@ -334,6 +352,8 @@
 - type: siliconLawset
   id: RobocopLawset
   name: law-robocop-name
+  randomizable: true
+  weight: 1 # SS220 random lawset
   laws:
   - Robocop1
   - Robocop2
@@ -364,6 +384,7 @@
 - type: siliconLawset
   id: OverlordLawset
   name: law-overlord-name
+  randomizable: false # SS220 random lawset
   laws:
   - Overlord1
   - Overlord2
@@ -372,6 +393,7 @@
   obeysTo: laws-owner-crew
 
  # Game Master laws
+ # TODO: Translate laws
 - type: siliconLaw
   id: Game1
   order: 1
@@ -405,6 +427,8 @@
 - type: siliconLawset
   id: GameMasterLawset
   name: law-game-name
+  randomizable: true
+  weight: 1 # SS220 random lawset
   laws:
   - Game1
   - Game2
@@ -438,6 +462,8 @@
 - type: siliconLawset
   id: PainterLawset
   name: law-painter-name
+  randomizable: true
+  weight: 1 # SS220 random lawset
   laws:
   - Painter1
   - Painter2
@@ -465,6 +491,7 @@
 - type: siliconLawset
   id: AntimovLawset
   name: law-antimov-name
+  randomizable: false # SS220 random lawset
   laws:
   - Antimov1
   - Antimov2
@@ -501,6 +528,8 @@
 - type: siliconLawset
   id: NutimovLawset
   name: law-nutimov-name
+  randomizable: true
+  weight: 1 # SS220 random lawset
   laws:
   - Nutimov1
   - Nutimov2
@@ -539,6 +568,7 @@
 - type: siliconLawset
   id: XenoborgLawset
   name: law-xenoborg-name
+  andomizable: false # SS220 Randomize lawsets
   laws:
   - Xenoborg1
   - Xenoborg2
@@ -577,6 +607,7 @@
 - type: siliconLawset
   id: MothershipCoreLawset
   name: law-mothershipcore-name
+  randomizable: false # SS220 Randomize lawsets
   laws:
   - MothershipCore1
   - MothershipCore2

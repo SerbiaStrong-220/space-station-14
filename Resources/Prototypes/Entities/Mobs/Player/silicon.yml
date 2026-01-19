@@ -500,6 +500,7 @@
 #SS220 languages revive end
   - type: SiliconLawProvider
     laws: Crewsimov
+    useRandomLawset: true # SS220 Random lawset
   - type: SiliconLawBound
   - type: ActionGrant
     actions:
