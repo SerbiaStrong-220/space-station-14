@@ -11,7 +11,7 @@
   id: SpaceNinjaGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitNinja
-    back: ClothingBackpackSatchel
+    back: ClothingBackpackSpaceNinja #SS220 Ninja Resprite
     mask: ClothingMaskNinja
     head: ClothingHeadHelmetSpaceNinja
     eyes: ClothingEyesVisorNinja
@@ -20,7 +20,7 @@
     shoes: ClothingShoesSpaceNinja
     id: AgentIDCard
     ears: ClothingHeadsetGrey
-    # pocket1: SpiderCharge # SS220 Ninja-target-update
+    pocket1: DoubleEmergencyOxygenTankFilled #SS220 Ninja Resprite
     pocket2: PinpointerStation
     belt: EnergyKatana
   inhand:
@@ -33,6 +33,7 @@
     - Wirecutter
     - Welder
     - Multitool
+    - BoxSurvivalEngineering #SS220 Ninja Resprite
 
 - type: chameleonOutfit
   id: NinjaChameleonOutfit
