@@ -90,5 +90,3 @@
   - type: Appearance
   - type: Trap
     state: Armed
-  - type: Transform
-    anchored: true
