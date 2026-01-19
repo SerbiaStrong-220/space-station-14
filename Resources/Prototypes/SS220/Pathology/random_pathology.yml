@@ -1,0 +1,17 @@
+- type: weightedRandom
+  id: BulletHitPathology
+  weights:
+    TorsoProjectileFragment: 10
+    HeadProjectileFragment: 2
+
+- type: weightedRandom
+  id: BrainTraumaPathology
+  weights:
+    Slowness: 10
+    PainNumbness: 5
+    PoorVision: 5
+    Muted: 5
+    Narcolepsy: 1
+    Blindness: 1
+
+

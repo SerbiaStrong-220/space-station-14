@@ -1,0 +1,105 @@
+- type: surgeryGraph
+  id: TorsoSurgery
+  name: surgery-torso-complex-name
+  description: surgery-torso-complex-description
+  targetPart: Torso
+  requirements:
+  - !type:EmptyInventorySlotRequirement
+    subject: target
+    description: surgery-torso-complex-inventory-requirement-description
+    failureMessage: surgery-torso-complex-inventory-requirement-failure
+    slotNames:
+    - jumpsuit
+    - outerClothing
+  - !type:WhitelistRequirement
+    subject: strap
+    description: surgery-strap-bed-requirement-description
+    failureMessage: surgery-strap-bed-requirement-failure
+    whitelist:
+      tags:
+      - Bed
+  start: start-torso-surgery
+  end: seal-wound
+  graph:
+  - node: start-torso-surgery
+    nodeText:
+      examineDescription: surgery-torso-examine-start
+      popup: surgery-torso-popup-start
+      description: surgery-torso-node-start
+    edges:
+    - to: torso-skin-incision
+      baseEdge: incision
+  - node: torso-skin-incision
+    baseNode: incision
+    edges:
+    - to: torso-skin-clamp-bleeders
+      baseEdge: clamp-bleeders
+  - node: torso-skin-clamp-bleeders
+    baseNode: clamp-bleeders
+    edges:
+    - to: retract-torso-skin
+      baseEdge: retract-skin
+  - node: retract-torso-skin
+    baseNode: retract-skin
+    edges:
+    # heal wounds
+    - to: retract-torso-skin
+      baseEdge: retract-skin
+      actions:
+      - !type:ApplyDamageAction
+        damage:
+          groups:
+            Brute: -10
+            Burn: -10
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: retractor
+        description: surgery-requirement-tool-required-retractor
+        failureMessage: surgery-requirement-tool-miss
+      - !type:HaveReagentInHandRequirement
+        subject: performer
+        reagentId: Tricordrazine
+        consumedAmount: 5
+        description: surgery-requirement-reagent-in-hand
+        failureMessage: surgery-requirement-reagent-in-hand
+    # deeper
+    - to: saw-rib-bone
+      baseEdge: saw-bone
+    # end surgery
+    - to: seal-wound
+      baseEdge: seal-wound
+  - node: saw-rib-bone
+    baseNode: saw-bone
+    edges:
+    # deeper
+    - to: open-heart-incision
+      baseEdge: incision
+    # TOOD: better back
+    - to: retract-torso-skin
+      baseEdge: seal-wound
+  - node: open-heart-incision
+    baseNode: incision
+    edges:
+    # handheld defibrillator usage
+    - to: open-heart-incision
+      delay: 2
+      sound:
+        path: /Audio/SS220/Surgery/organ.ogg
+      actions:
+      - !type:TryCompactDefibZapAction
+      requirements:
+      - !type:WhitelistRequirement
+        subject: Used
+        description: surgery-requirement-direct-compact-defib-required
+        failureMessage: surgery-requirement-direct-compact-defib-failure
+        whitelist:
+          components:
+          - DirectCompactDefibrillator
+    # return
+    # TOOD: better back
+    - to: saw-rib-bone
+      baseEdge: seal-wound
+  # end
+  - node: seal-wound
+    baseNode: seal-wound

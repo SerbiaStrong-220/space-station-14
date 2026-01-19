@@ -43,6 +43,8 @@
       params:
         volume: 2
     #SS220 emote sounds begin
+    BloodCough:
+      collection: MaleCoughs
     DefaultDeathgasp:
       collection: Deathgasp
     Gasp:
@@ -103,6 +105,8 @@
       params:
         volume: 2
     #SS220 emote sounds
+    BloodCough:
+      collection: FemaleCoughs
     DefaultDeathgasp:
       collection: Deathgasp
     Gasp:
@@ -139,6 +143,11 @@
       params:
         volume: 2
     #SS220 emote sounds
+    # TODO-SS220: maybe own lizard cough sound
+    Cough:
+      collection: MaleCoughs
+    BloodCough:
+      collection: MaleCoughs
     DefaultDeathgasp:
       collection: Deathgasp
     Gasp:
@@ -182,7 +191,12 @@
       collection: Fart
       params:
         volume: 2
-    #SS220 emote sounds
+    #SS220 emote sounds begin
+    # TODO-SS220: maybe own lizard cough sound
+    Cough:
+      collection: FemaleCoughs
+    BloodCough:
+      collection: FemaleCoughs
     # DefaultDeathgasp:
     #   collection: Deathgasp
     # Gasp:
@@ -245,6 +259,8 @@
       params:
         volume: 2
     #SS220 emote sounds
+    BloodCough:
+      collection: MaleCoughs
     DefaultDeathgasp:
       collection: Deathgasp
     Gasp:
@@ -302,7 +318,9 @@
       collection: Fart
       params:
         volume: 2
-    #SS220 emote sounds
+    #SS220 emote sounds begin
+    BloodCough:
+      collection: FemaleCoughs
     DefaultDeathgasp:
       collection: Deathgasp
     Gasp:
@@ -326,7 +344,9 @@
 - type: emoteSounds
   id: UnisexVox
   sounds:
-    #SS220 emote sounds
+    #SS220 emote sounds begin
+    BloodCough:
+      path: /Audio/Voice/Vox/vox_cough.ogg
     # DefaultDeathgasp:
     #   collection: Deathgasp
     # Gasp:
@@ -393,7 +413,12 @@
       path: /Audio/Voice/Arachnid/arachnid_chitter.ogg
     Click:
       path: /Audio/Voice/Arachnid/arachnid_click.ogg
-    #SS220 emote sounds
+    #SS220 emote sounds begin
+    # TODO-SS220: maybe own spider cough sound
+    Cough:
+      collection: MaleCoughs
+    BloodCough:
+      collection: MaleCoughs
     DefaultDeathgasp:
       collection: Deathgasp
     Gasp:
@@ -450,6 +475,8 @@
       params:
         volume: 2
     #SS220 emote sounds begin
+    BloodCough:
+      collection: MaleCoughs
     DefaultDeathgasp:
       collection: Deathgasp
     Gasp:
@@ -502,6 +529,9 @@
       collection: Whistles
     CritGasp:
       collection: FemaleCritGasp
+    #SS220 emote sounds begin
+    BloodCough:
+      collection: FemaleCoughs
     #SS220 emote sounds end
     Weh:
       collection: Weh
@@ -531,6 +561,11 @@
     Squeak:
       path: /Audio/Voice/Moth/moth_squeak.ogg
     #SS220 emote sounds
+    # TODO-SS220: maybe own moth cough sound
+    Cough:
+      collection: FemaleCoughs
+    BloodCough:
+      collection: FemaleCoughs
     DefaultDeathgasp:
       collection: Deathgasp
     Gasp:
@@ -625,6 +660,10 @@
       collection: MaleSneezes
     Cough:
       collection: MaleCoughs
+    # SS220-emotes-begin
+    BloodCough:
+      collection: MaleCoughs
+    # SS220-emotes-end
     Whistle:
       collection: Whistles
     Sigh:
@@ -660,6 +699,8 @@
   # SS220-port-vulpkanins-begin
     Crying:
       collection: FemaleCry
+    BloodCough:
+      collection: FemaleCoughs
   # SS220-port-vulpkanins-end
     Laugh:
       collection: FemaleLaugh
@@ -843,6 +884,10 @@
       collection: WawaLaugh
     Sneeze:
       collection: WawaSneeze
+    # SS220-add-emotes-begin
+    BloodCough:
+      collection: MaleCoughs
+    # SS220-add-emotes-end
     Cough:
       collection: MaleCoughs
     Whistle:

@@ -35,7 +35,10 @@
   # SS220 Surgery begin
   - type: SurgeryTool
     toolType: Cautery
-    sound: /Audio/SS220/Surgery/cautery.ogg
+    sound:
+      path: /Audio/SS220/Surgery/cautery.ogg
+      params:
+        variation: 0.125
   # SS220 Surgery end
 
 # Drill
@@ -104,7 +107,10 @@
   # SS220 Surgery begin
   - type: SurgeryTool
     toolType: Scalpel
-    sound: /Audio/SS220/Surgery/scalpel.ogg
+    sound:
+      path: /Audio/SS220/Surgery/scalpel.ogg
+      params:
+        variation: 0.125
   # SS220 Surgery end
 
 # SS220 Scalpel item begin
@@ -204,7 +210,10 @@
   # SS220 Surgery begin
   - type: SurgeryTool
     toolType: Retractor
-    sound: /Audio/SS220/Surgery/retractor.ogg
+    sound:
+      path: /Audio/SS220/Surgery/retractor.ogg
+      params:
+        variation: 0.125
   # SS220 Surgery end
 
 - type: entity
@@ -221,7 +230,10 @@
   # SS220 Surgery begin
   - type: SurgeryTool
     toolType: Hemostat
-    sound: /Audio/SS220/Surgery/hemostat.ogg
+    sound:
+      path: /Audio/SS220/Surgery/hemostat.ogg
+      params:
+        variation: 0.125
   # SS220 Surgery end
 
   # - type: entity
@@ -295,7 +307,10 @@
   # SS220 Surgery begin
   - type: SurgeryTool
     toolType: Saw
-    sound: /Audio/SS220/Surgery/saw.ogg
+    sound:
+      path: /Audio/SS220/Surgery/saw.ogg
+      params:
+        variation: 0.125
   # SS220 Surgery end
 
 - type: entity

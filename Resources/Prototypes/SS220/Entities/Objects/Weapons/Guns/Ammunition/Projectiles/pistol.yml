@@ -4,7 +4,9 @@
   parent: BaseBullet
   categories: [ HideSpawnMenu ]
   components:
+  - type: PathologyOnProjectileHit
+    weighedRandomProviderEntity: 45ACPCaliberFragment
   - type: Projectile
     damage:
       types:
-        Piercing: 36 
+        Piercing: 36

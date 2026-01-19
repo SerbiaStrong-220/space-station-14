@@ -9,18 +9,20 @@ namespace Content.Shared.SS220.Surgery.Graph;
 public sealed partial class SurgeryGraphNode
 {
     [DataField("node", required: true)]
-    public string Name { get; private set; } = default!;
+    public LocId Name { get; private set; } = default!;
 
     [DataField]
     public ProtoId<AbstractSurgeryNodePrototype>? BaseNode { get; private set; }
 
     [DataField]
+    [Access(typeof(SurgeryGraphSystem))]
     public NodeTextDescription NodeText = new();
 
     [DataField("edges")]
     private SurgeryGraphEdge[] _edges = Array.Empty<SurgeryGraphEdge>();
 
     [ViewVariables]
+    [Access(typeof(SurgeryGraphSystem))]
     public IReadOnlyList<SurgeryGraphEdge> Edges => _edges;
 
 }
