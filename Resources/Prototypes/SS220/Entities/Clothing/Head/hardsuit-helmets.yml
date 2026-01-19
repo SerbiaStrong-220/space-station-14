@@ -99,6 +99,9 @@
         Heat: 0.80
         Radiation: 0.80
         Caustic: 0.95
+  - type: NoiseSuppression #SS220 staminaweapons
+    suppressionRange: 0
+
 
 # Death Squad Alpha Hardsuit
 - type: entity
@@ -126,6 +129,8 @@
         Heat: 0.80
         Radiation: 0.80
         Caustic: 0.95
+  - type: NoiseSuppression #SS220 staminaweapons
+    suppressionRange: 0
 
 #SuperMatter operator's Hardsuit
 - type: entity
@@ -160,6 +165,7 @@
   - type: PressureProtection
     highPressureMultiplier: 0.3
     lowPressureMultiplier: 1000
+  - type: NoiseSuppression #SS220 staminaweapons
 
 #Quartermaster Hardsuit
 - type: entity

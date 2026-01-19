@@ -378,7 +378,7 @@
     head: ClothingHeadHatFedoraBrown
     outerClothing: ClothingOuterVestDetective
     id: DetectivePDA
-    ears: ClothingHeadsetSecurity
+    ears: ClothingHeadsetAltSecurityNonCom #SS220 staminaweapons
     # belt: ClothingBeltHolsterFilled  #Temporarily in comment, because the holster moves to the neck slot
 
 - type: startingGear
@@ -404,7 +404,7 @@
     shoes: ClothingShoesBootsCombatFilled
     outerClothing: ClothingOuterArmorBasic
     id: SecurityCadetPDA
-    ears: ClothingHeadsetSecurity
+    ears: ClothingHeadsetAltSecurityNonCom #SS220 staminaweapons
     belt: ClothingBeltSecurityFilled
     pocket1: WeaponPistolMk58
     pocket2: BookSecurity
@@ -419,7 +419,7 @@
     head: ClothingHeadHelmetBasic
     outerClothing: ClothingOuterArmorBasic
     id: SecurityPDA
-    ears: ClothingHeadsetSecurity
+    ears: ClothingHeadsetAltSecurityNonCom #SS220 staminaweapons
     belt: ClothingBeltSecurityFilled
     pocket1: WeaponPistolMk58
 
@@ -433,7 +433,7 @@
     eyes: ClothingEyesGlassesSecurity
     outerClothing: ClothingOuterCoatWarden
     id: WardenPDA
-    ears: ClothingHeadsetSecurity
+    ears: ClothingHeadsetAltSecurityNonCom #SS220 staminaweapons
     belt: ClothingBeltSecurityFilled
     pocket1: WeaponPistolMk58
 
@@ -445,7 +445,7 @@
     back: ClothingBackpackSecurity
     shoes: ClothingShoesBootsCombatFilled
     eyes: ClothingEyesGlassesSecurity
-    ears: ClothingHeadsetSecurity
+    ears: ClothingHeadsetAltSecurityNonCom #SS220 staminaweapons
     belt: ClothingBeltSecurityFilled
     gloves: ClothingHandsGlovesCombat #SS220 PilotsGloves
     pocket1: WeaponPistolMk58Nonlethal
