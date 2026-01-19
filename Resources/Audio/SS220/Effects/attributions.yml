@@ -10,3 +10,7 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from https://github.com/ss220club/BandaStation"
   source: "https://github.com/ss220club/BandaStation/blob/master/sound/effects/butcher.ogg"
+- files: ["genhit1.ogg","genhit2.ogg","genhit3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from https://github.com/tgstation/tgstation"
+  source: "https://github.com/tgstation/tgstation/tree/master/sound/items/weapons"

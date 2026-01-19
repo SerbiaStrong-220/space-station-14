@@ -1,0 +1,201 @@
+- type: entity
+  name: rubber baton
+  parent: [BaseItem, BaseSecurityContraband]
+  id: Rubberbaton
+  description: A baton for dealing with pesky rioters. If they're still breathing, they haven't learned their lesson!
+  components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/baseball_bat.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Melee/baton.rsi
+    layers:
+    - state: baton-off
+      map: [ "enum.ToggleableVisuals.Layer" ]
+  - type: MeleeWeapon
+    animationRotation: -180
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Blunt: 12
+    angle: 70
+  - type: StaminaDamageOnHit
+    damage: 15
+  - type: MeleeThrowOnHit
+    speed: 4
+    distance: 1
+  - type: UseDelay
+    delays:
+      default:
+        length: 1
+      baton:
+        length: 4
+  - type: UseDelayBlockMeleeAttack
+    delays:
+    - baton
+    - default
+  - type: ItemToggle
+    soundActivate:
+      path: /Audio/Effects/thudswoosh.ogg
+    soundDeactivate:
+      path: /Audio/Effects/thudswoosh.ogg
+  - type: ItemTogglePrefix
+    prefixOn: on
+    prefixOff: off
+  - type: ItemToggleMeleeWeapon
+    activatedDamage:
+      types:
+        Blunt: 18
+        Structural: 20
+  - type: ComponentToggler
+    components:
+    - type: DelayedKnockdownOnHit
+      onHeavyAttack: true
+      delay: 0
+      duration: 3
+      drop: false
+      refresh: true
+      autoStand: false
+      useDelay: baton
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+     enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
+          True: {state: baton-on}
+          False: {state: baton-off}
+  - type: ThrowingAngle
+    angle: 225
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape: !type:PolygonShape
+          vertices:
+            - -0.40,-0.30
+            - -0.30,-0.40
+            - 0.40,0.30
+            - 0.30,0.40
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+  - type: Item
+    heldPrefix: off
+    size: Normal
+    sprite: SS220/Objects/Weapons/Melee/baton.rsi
+  - type: Clothing
+    sprite: SS220/Objects/Weapons/Melee/baton.rsi
+    quickEquip: false
+    slots:
+    - Belt
+  - type: DisarmMalus
+    malus: 0.225
+  - type: StaticPrice
+    price: 80
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 200
+  - type: GuideHelp
+    guides:
+    - Security
+    - Antagonists
+
+#an detective one
+- type: entity
+  name: classic baton
+  parent: [BaseItem, BaseSecurityContraband]
+  id: Classicbaton
+  description: A trusty baton, best detective's friend.
+  components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/baseball_bat.ogg ##new sound_drop effect, add MIXnikita
+      params:
+        volume: 2
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Melee/classicbaton.rsi
+    layers:
+    - state: baton-off
+      map: [ "enum.ToggleableVisuals.Layer" ]
+  - type: MeleeWeapon
+    attackRate: 1.5
+    animationRotation: -180
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Blunt: 9
+    angle: 70
+  - type: StaminaDamageOnHit
+    damage: 10
+  - type: MeleeThrowOnHit
+    speed: 4
+    distance: 0.5
+  - type: UseDelay
+    delay: 1
+  - type: UseDelayBlockMeleeAttack
+    delays:
+    - default
+  - type: ItemToggle
+    soundActivate:
+      path: /Audio/Effects/thudswoosh.ogg
+    soundDeactivate:
+      path: /Audio/Effects/thudswoosh.ogg
+  - type: ItemTogglePrefix
+    prefixOn: on
+    prefixOff: off
+  - type: ComponentToggler
+    components:
+    - type: WeaponRandom
+      damageBonus:
+        types:
+          Blunt: 13
+      staminaDamage: 65
+      randomDamageChance: 0.25
+      damageSound: /Audio/SS220/Effects/genhit1.ogg
+    - type: UseDelayOnMeleeHit
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+     enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
+          True: {state: baton-on}
+          False: {state: baton-off}
+  - type: ThrowingAngle
+    angle: 225
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape: !type:PolygonShape
+          vertices:
+            - -0.40,-0.30
+            - -0.30,-0.40
+            - 0.40,0.30
+            - 0.30,0.40
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+  - type: Item
+    heldPrefix: off
+    size: Normal
+    sprite: SS220/Objects/Weapons/Melee/classicbaton.rsi
+  - type: Clothing
+    sprite: SS220/Objects/Weapons/Melee/classicbaton.rsi
+    quickEquip: false
+    slots:
+    - Belt
+  - type: DisarmMalus
+    malus: 0.225
+  - type: StaticPrice
+    price: 80
+  - type: PhysicalComposition
+    materialComposition:
+      Wood: 200
+  - type: GuideHelp
+    guides:
+    - Security
+    - Antagonists

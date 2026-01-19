@@ -51,7 +51,7 @@
     angle: 0 #SS220 staminaweapons rework
     animation: WeaponArcThrust
   - type: StaminaDamageOnHit
-    damage: 30 #SS220 staminaweapons rework
+    damage: 25 #SS220 staminaweapons rework
     lightAttackDamageMultiplier: 2.5 #SS220 staminaweapons rework
     sound: /Audio/Weapons/egloves.ogg
   - type: StaminaDamageOnCollide
@@ -63,7 +63,7 @@
     components:
     - type: DelayedKnockdownOnHit
       onHeavyAttack: false
-      delay: 3.5
+      delay: 3
       duration: 4
       drop: true
       refresh: true
