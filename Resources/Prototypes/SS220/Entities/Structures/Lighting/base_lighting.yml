@@ -1,6 +1,6 @@
 - type: entity
-  name: Оранжевая гирлянда
-  description: Праздничная гирлянда, наполняющая тёплым светом и новогодней атмосферой.
+  name: yellow garland
+  description: A festive garland that fills the room with warm light and a New Year's atmosphere.
   id: GarlandYellow
   parent: AlwaysPoweredWallLight
   components:
@@ -32,8 +32,8 @@
     popupText: powered-light-component-burn-hand
 
 - type: entity
-  name: Разноцветная гирлянда
-  description: Праздничная гирлянда, наполняющая тёплым светом и новогодней атмосферой.
+  name: rainbow garland
+  description: A festive garland that fills the room with warm light and a New Year's atmosphere.
   id: GarlandRainbow
   parent: GarlandYellow
   components:
