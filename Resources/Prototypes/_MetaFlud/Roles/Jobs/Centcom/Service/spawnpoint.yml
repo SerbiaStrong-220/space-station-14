@@ -10,7 +10,7 @@
   - type: Sprite
     layers:
       - state: green
-      - state: captain
+      - state: ccbartender
 
 - type: entity
   id: SpawnPointCCChef
@@ -22,7 +22,7 @@
   - type: Sprite
     layers:
       - state: green
-      - state: captain
+      - state: ccchef
 
 - type: entity
   id: SpawnPointCCJanitor
@@ -34,7 +34,7 @@
   - type: Sprite
     layers:
       - state: green
-      - state: captain
+      - state: ccjanitor
       
 - type: entity
   id: SpawnPointCCServiceWorker
@@ -46,7 +46,7 @@
   - type: Sprite
     layers:
       - state: green
-      - state: captain
+      - state: ccservice
 
 - type: entity
   id: SpawnPointCCMaid
@@ -58,21 +58,21 @@
   - type: Sprite
     layers:
       - state: green
-      - state: captain
+      - state: ccmaid
 
 #Service end
 
-- type: entity
-  id: SpawnPointSpecOpsLeader
-  parent: SpawnPointJobBase
-  name: SpecOps Leader
-  components:
-  - type: SpawnPoint
-    job_id: SpecOpsLeader
-  - type: Sprite
-    layers:
-      - state: green
-      - state: captain
+#- type: entity
+#  id: SpawnPointSpecOpsLeader
+#  parent: SpawnPointJobBase
+#  name: SpecOps Leader
+#  components:
+#  - type: SpawnPoint
+#    job_id: SpecOpsLeader
+#  - type: Sprite
+#    layers:
+#      - state: green
+#      - state: captain
       
 - type: entity
   id: SpawnPointCentComNanoTrasenAdmiral
@@ -84,7 +84,7 @@
   - type: Sprite
     layers:
       - state: green
-      - state: captain
+      - state: general
       
 - type: entity
   id: SpawnPointCentCommNanoTrasenDiplomat
@@ -96,19 +96,19 @@
   - type: Sprite
     layers:
       - state: green
-      - state: captain
+      - state: diplomat
       
-- type: entity
-  id: SpawnPointCentcomFieldOfficer
-  parent: SpawnPointJobBase
-  name: Centcom Field Officer
-  components:
-  - type: SpawnPoint
-    job_id: CentcomFieldOfficer
-  - type: Sprite
-    layers:
-      - state: green
-      - state: captain
+#- type: entity
+#  id: SpawnPointCentcomFieldOfficer
+#  parent: SpawnPointJobBase
+#  name: Centcom Field Officer
+#  components:
+#  - type: SpawnPoint
+#    job_id: CentcomFieldOfficer
+#  - type: Sprite
+#    layers:
+#      - state: green
+#      - state: captain
       
 - type: entity
   id: SpawnPointCentcommOfficer
@@ -120,19 +120,19 @@
   - type: Sprite
     layers:
       - state: green
-      - state: captain
+      - state: ccofficer
       
-- type: entity
-  id: SpawnPointCentralCommandOfficial
-  parent: SpawnPointJobBase
-  name: Centcomm Officer
-  components:
-  - type: SpawnPoint
-    job_id: CentralCommandOfficial
-  - type: Sprite
-    layers:
-      - state: green
-      - state: captain
+#- type: entity
+#  id: SpawnPointCentralCommandOfficial
+#  parent: SpawnPointJobBase
+#  name: Centcomm Officer
+#  components:
+#  - type: SpawnPoint
+#    job_id: CentralCommandOfficial
+#  - type: Sprite
+#    layers:
+#      - state: green
+#      - state: captain
       
 - type: entity
   id: SpawnPointCentcommCommunicationsOfficer
@@ -144,4 +144,8 @@
   - type: Sprite
     layers:
       - state: green
-      - state: captain
+      - state: comofficer
+      
+# TODO:
+# Добавить спавнер для оперативника ГСН или как его там
+# стейт: gsn

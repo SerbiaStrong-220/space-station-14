@@ -81,3 +81,19 @@
   - Bra   # MetaFlud start
   - Pants
   - Socks # MetaFlud end
+  
+- type: roleLoadout
+  id: JobCentCommBlueShield
+  groups:
+  - BlueShieldHead
+  - BlueShieldGlasses
+  - BlueShieldNeck
+  - BlueShieldJumpsuit
+  - BlueShieldOuterclothing
+  - BlueShieldBelt
+  - BlueShieldBackpack
+  - Survival
+  - Trinkets
+  - Bra   # MetaFlud start
+  - Pants
+  - Socks

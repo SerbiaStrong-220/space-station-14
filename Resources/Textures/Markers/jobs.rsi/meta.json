@@ -201,6 +201,36 @@
     },
     {
       "name": "zookeeper"
+    },
+	{
+      "name": "ccbartender"
+    },
+	{
+      "name": "ccjanitor"
+    },
+	{
+      "name": "ccofficer"
+    },
+	{
+      "name": "comofficer"
+    },
+	{
+      "name": "general"
+    },
+	{
+      "name": "ccchef"
+    },
+	{
+      "name": "ccmaid"
+    },
+	{
+      "name": "ccservice"
+    },
+	{
+      "name": "diplomat"
+    },
+	{
+      "name": "gsn"
     }
   ]
 }

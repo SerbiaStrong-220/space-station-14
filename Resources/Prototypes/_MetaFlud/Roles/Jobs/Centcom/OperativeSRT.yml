@@ -1,0 +1,23 @@
+- type: job
+  id: CentCommBlueShield
+  name: Оперативник "Синий Щит"
+  description: job-description-centcomoff
+  setPreference: true # MTFLUD edit
+  startingGear: CentcomOperativeBSOGear
+  playTimeTracker: JobCentCommBlueShield
+  icon: "JobIconNanotrasen"
+  supervisors: job-supervisors-centcom
+  canBeAntag: false
+  radioBold: true
+  accessGroups:
+  - AllAccess
+  access:
+  - CentralCommandBSO
+  - CentralCommand
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: DefibrillatorSkill
+    
+- type: playTimeTracker
+  id: JobCentCommBlueShield
