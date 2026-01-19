@@ -30,5 +30,3 @@ ent-WeaponSniperMosinToy = Кардашёв-Мосин
     .suffix = Винтовка, Игрушечный
 ent-PlushieMigo = плюшевый Ми-Го
     .desc = И это дитя Тёмного Бога?
-ent-BalloonMat = матовый шарик
-    .desc = Просто матовый шарик.
