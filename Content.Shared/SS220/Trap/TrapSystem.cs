@@ -189,9 +189,6 @@ public sealed class TrapSystem : EntitySystem
         if (!TryComp<TrapComponent>(uid, out var trapComp))
             return;
 
-        if (trapComp.State == newState)
-            return;
-
         if (isUserAction)
         {
             if (newState == TrapArmedState.Armed)
