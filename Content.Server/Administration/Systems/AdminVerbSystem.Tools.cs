@@ -474,7 +474,8 @@ public sealed partial class AdminVerbSystem
         };
         args.Verbs.Add(redescribe);
 
-        Verb renameAndRedescribe = new()
+        // ss220 tweak rename verb start
+        /*Verb renameAndRedescribe = new()
         {
             Text = Loc.GetString("admin-verbs-rename-and-redescribe"),
             Category = VerbCategory.Tricks,
@@ -493,7 +494,8 @@ public sealed partial class AdminVerbSystem
             Message = Loc.GetString("admin-trick-rename-and-redescribe-description"),
             Priority = (int) TricksVerbPriorities.RenameAndRedescribe,
         };
-        args.Verbs.Add(renameAndRedescribe);
+        args.Verbs.Add(renameAndRedescribe);*/
+        // ss220 tweak rename verb end
 
         if (TryComp<StationDataComponent>(args.Target, out var stationData))
         {
