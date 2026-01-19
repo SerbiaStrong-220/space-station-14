@@ -8,6 +8,16 @@
 #   studyingProgressPossible: false
 
 - type: skillTree
+  id: ExtravehicularActivity
+  skillGroupId: SkillGroupGeneral
+  skillTreeName: extravehicular-activity-tree-name
+  skillTree:
+  - ExtravehicularActivityInitial
+  - ExtravehicularActivityBase
+  - ExtravehicularActivityTrained
+  - ExtravehicularActivityProfessional
+
+- type: skillTree
   id: Bureaucracy
   skillGroupId: SkillGroupGeneral
   skillTreeName: bureaucracy-skill-tree-name

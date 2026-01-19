@@ -17,9 +17,6 @@ public abstract partial class BaseDoAfterSkillSystem<TComp, TEvent> : SkillEntit
 {
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
-    public readonly Color FasterDoAfterBarColor = Color.FromHex("#ffe054ff");
-    public readonly Color SlowerDoAfterBarColor = Color.FromHex("#5d4dc8ff");
-
     public override void Initialize()
     {
         base.Initialize();
@@ -31,6 +28,9 @@ public abstract partial class BaseDoAfterSkillSystem<TComp, TEvent> : SkillEntit
     private void OnDoAfterStartInternal(Entity<TComp> entity, ref BeforeDoAfterStartEvent args)
     {
         if (!args.Args.Event.GetType().Equals(typeof(TEvent)))
+            return;
+
+        if (!SkillEffect(entity, args.Args))
             return;
 
         OnDoAfterStart(entity, ref args);
@@ -49,13 +49,18 @@ public abstract partial class BaseDoAfterSkillSystem<TComp, TEvent> : SkillEntit
         if (!args.Args.Event.GetType().Equals(typeof(TEvent)))
             return;
 
+        if (!SkillEffect(entity, args.Args))
+            return;
+
         OnDoAfterEnd(entity, ref args);
 
         if (args.Cancel || args.Args.Used is null)
             return;
 
-        if (!LearnedAfterComplete(args))
+        if (!LearnedAfterComplete(in args))
             return;
+
+        AfterDoAfterComplete(entity, in args);
 
         if (!TryGetLearningProgressInfo<LearningOnDoAfterEndWithComponent>(args.Args.Used.Value, entity.Comp.SkillTreeGroup, out var learningInformation))
             return;
@@ -68,13 +73,6 @@ public abstract partial class BaseDoAfterSkillSystem<TComp, TEvent> : SkillEntit
         if (!entity.Comp.FullBlock)
         {
             args.Args.Delay *= entity.Comp.DurationScale;
-            args.Args.BarColorOverride = entity.Comp.DurationScale switch
-            {
-                < 1f => FasterDoAfterBarColor,
-                > 1f => SlowerDoAfterBarColor,
-                _ => null
-            };
-
             return;
         }
 
@@ -84,10 +82,17 @@ public abstract partial class BaseDoAfterSkillSystem<TComp, TEvent> : SkillEntit
             _popup.PopupClient(Loc.GetString(entity.Comp.FullBlockPopup), args.Args.User);
     }
 
+    protected virtual bool SkillEffect(Entity<TComp> entity, in DoAfterArgs args)
+    {
+        return true;
+    }
+
     protected virtual bool LearnedAfterComplete(in BeforeDoAfterCompleteEvent args)
     {
         return true;
     }
+
+    protected virtual void AfterDoAfterComplete(Entity<TComp> entity, in BeforeDoAfterCompleteEvent args) { }
 
     protected virtual void OnDoAfterEnd(Entity<TComp> entity, ref BeforeDoAfterCompleteEvent args)
     {

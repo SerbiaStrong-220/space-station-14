@@ -10,6 +10,9 @@ namespace Content.Shared.SS220.Experience.DoAfterEffect;
 /// </summary>
 public abstract partial class BaseDoAfterSkillComponent : Component
 {
+    /// <summary>
+    /// This skillTree id will be used to find in used entity if do after with it should progress skill tree
+    /// </summary>
     [DataField]
     [AutoNetworkedField]
     public virtual ProtoId<SkillTreePrototype> SkillTreeGroup { get; set; }
