@@ -19,6 +19,17 @@
         - type: StationJobs
           availableJobs:
             Passenger: [ -1, -1 ]
+            #Central Comand
+            #CentComNanoTrasenAdmiral: [ 1, 1 ]      # Адмирал НТ
+            #CentCommNanoTrasenDiplomat: [ 2, 2 ]    # Дипломат НТ
+            #CentcommOfficer: [ 2, 2 ]               # Офицер ЦК
+            #CentcommCommunicationsOfficer: [ 3, 3 ] # Связист ЦК
+            #CentCommBlueShield: [ 4, 4 ]            # Оперативник СЩ
+            #CentCommBartender: [ 1, 1 ]             # Бармен ЦК
+            #CentCommChef: [ 2, 2 ]                  # Повар ЦК
+            #CentCommJanitor: [ 2, 2 ]               # Уборщик ЦК
+            #CentCommServiceWorker: [ 2, 2 ]         # Сервисный Работник ЦК
+            #CentCommMaid: [ 1, 1 ]                  # Горничная ЦК
             #Command
             Captain: [ 1, 1 ]
             IAA: [ 2, 2 ]

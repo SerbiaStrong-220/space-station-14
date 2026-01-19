@@ -24,3 +24,70 @@
   icon:
     sprite: /Textures/MetaFlud/Misc/job_icons.rsi
     state: CentCommMaid
+    
+- type: startingGear
+  id: MaidGear
+  equipment:
+    shoes: ClothingShoesBootsLaceup
+    id: CentCommMaidPDA
+    ears: ClothingHeadsetService
+    
+
+##
+##  PDA
+##
+
+- type: entity
+  parent: BasePDA
+  id: CentCommMaidPDA
+  name: КПК Горничной ЦК
+  description: Пахнет мылом...
+  components:
+  - type: Pda
+    id: BartenderIDCard
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-bartender
+  - type: PdaBorderColor
+    borderColor: "#4b474f" #SS220 PDA-Resprite
+  - type: Sprite #SS220 PDA-Resprite-Start
+    layers:
+    - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
+    - state: "screen-white"
+      shader: "unshaded"
+    - state: "light_overlay"
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: "unshaded"
+      visible: false
+    - state: "id_overlay"
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      visible: false #SS220 PDA-Resprite-End
+  - type: Icon
+    state: pda-bartender
+    
+##
+## ID-CARD
+##
+
+- type: entity
+  parent: IDCardStandard
+  id: CentCommMaidIDCard
+  name: ID-Карта горничной ЦК
+  components:
+  - type: Sprite
+    layers:
+    - state: default
+    - state: idbartender
+  - type: PresetIdCard
+    job: CentCommMaid
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+  #ss220 add pdaidpainter end
