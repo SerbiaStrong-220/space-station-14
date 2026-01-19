@@ -85,12 +85,19 @@
   - UkWomanPants
   
 #maid
+    
+#uniform start
+
 - type: loadoutGroup
   id: MaidJumpsuit
-  name: Форма горничной
+  name: Униформа
   loadouts:
     - MaidJumpsuitBlack
     - MaidJumpsuitPink
+    - MaidJumpsuitSS220
+    - MaidJumpsuitMini
+    - MaidJumpsuitJanimaid
+    - MaidJumpsuitTactic
 
 - type: loadout
   id: MaidJumpsuitBlack
@@ -101,4 +108,54 @@
   id: MaidJumpsuitPink
   equipment:
     jumpsuit: ClothingMaidDressPink
+    
+- type: loadout
+  id: MaidJumpsuitSS220
+  equipment:
+    jumpsuit: ClothingSponsorMaidSuit
+    
+- type: loadout
+  id: MaidJumpsuitMini
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtJanimaidmini
+    
+- type: loadout
+  id: MaidJumpsuitJanimaid
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtJanimaid
+    
+- type: loadout
+  id: MaidJumpsuitTactic
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtTacticalMaid
+
+#uniform end
+
+#head start
+
+- type: loadoutGroup
+  id: MaidHead
+  name: Гребешки
+  loadouts:
+    - MaidHeadBazel220
+    - MaidHeadBazelMTF
+    - MaidHeadThing
+
+- type: loadout
+  id: MaidHeadBazel220
+  equipment:
+    head: ClothingSponsorMaidHat
+    
+- type: loadout
+  id: MaidHeadBazelMTF
+  equipment:
+    head: ClothingMaidBezel
+    
+- type: loadout
+  id: MaidHeadThing
+  equipment:
+    head: ClothingHeadHatTacticalMaidHeadband
+
+#head end
+
 #maid

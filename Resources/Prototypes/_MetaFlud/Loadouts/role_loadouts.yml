@@ -71,6 +71,7 @@
   id: JobCentCommMaid
   groups:
   - GroupTankHarness
+  - MaidHead
   - MaidJumpsuit
   - CommonBackpack
   - GroupSpeciesBreathTool

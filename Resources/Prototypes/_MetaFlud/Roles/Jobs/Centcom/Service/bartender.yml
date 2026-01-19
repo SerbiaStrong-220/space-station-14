@@ -21,11 +21,4 @@
   
 - type: playTimeTracker
   id: JobCentCommBartender
-  
-- type: startingGear
-  id: MaidGear
-  equipment:
-    shoes: ClothingShoesColorBlack
-    id: BartenderPDA
-    ears: ClothingHeadsetService
 
