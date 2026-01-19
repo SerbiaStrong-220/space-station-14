@@ -91,7 +91,6 @@
     keysIn:
     - timer
     range: 7
-    stun: true # 220 flash grenade stun
   - type: EmitSoundOnTrigger
     keysIn:
     - timer
