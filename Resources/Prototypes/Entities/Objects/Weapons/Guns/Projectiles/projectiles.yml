@@ -906,6 +906,10 @@
   - type: SpawnOnTrigger
     proto: GrenadeFlashEffect
   - type: DeleteOnTrigger
+  - type: DeafeningOnTrigger #SS220 staminaweapons
+    range: 7
+    knockdownTime: 8
+    stunTime: 3
   # SS220 Add projectiles on shuttle nav begin
   - type: Projectile
     shuttleNavInfo:

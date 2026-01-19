@@ -95,3 +95,7 @@
       sound:
         path: "/Audio/Effects/flash_bang.ogg"
       positional: true
+    - type: DeafeningOnTrigger #SS220 staminaweapons
+      range: 6
+      knockdownTime: 7
+      stunTime: 2
