@@ -15,7 +15,6 @@
     - state: baton-off
       map: [ "enum.ToggleableVisuals.Layer" ]
   - type: MeleeWeapon
-    animationRotation: -180
     wideAnimationRotation: -135
     damage:
       types:
@@ -122,7 +121,6 @@
       map: [ "enum.ToggleableVisuals.Layer" ]
   - type: MeleeWeapon
     attackRate: 1.5
-    animationRotation: -180
     wideAnimationRotation: -135
     damage:
       types:
