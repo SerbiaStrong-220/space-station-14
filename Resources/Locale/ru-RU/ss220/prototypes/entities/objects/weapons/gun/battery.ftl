@@ -1,3 +1,11 @@
+firemode-name-kill = режия для убийства
+firemode-name-destroy = режим для УНИЧТОЖЕНИЯ
+firemode-name-heal = режим для лечения
+firemode-name-laser-alt = Лазер
+firemode-name-disabler-alt = Оглушение
+firemode-name-blaster = Бластер
+firemode-name-enhanced = Сконцентрированный
+
 ent-WeaponPulseRifle2 = пульсовая винтовка
     .suffix = Винтовка, Эскадрон Смерти, dq
     .desc = Энергетическая винтовка тяжелого типа, способна аннигилировать любые структуры.
@@ -5,36 +13,28 @@ ent-WeaponPulseShotgun = пульсовый дробовик
     .suffix = Дробовик, Эскадрон Смерти, dq
     .desc = Энергетическая дробовик с новейшей технологией лечения.
 
-firemode-name-kill = режия для убийства
-firemode-name-destroy = режим для УНИЧТОЖЕНИЯ
-firemode-name-heal = режим для лечения
-
 
 ent-WeaponBlasterKRS = бластерная винтовка КРС
     .desc = Старая, но надежная бластерная винтовка.
-
 ent-WeaponBlasterKRV = бластерная винтовка КРВ
     .desc = Усовершенствованная бластерная винтовка. Используется особенными оперативниками.
 
 ent-PowerCellBlaster = энергоячейка бластерной винтовки
     .desc = Вмещает в себе гораздо больше боли, чем вы когда-либо мечтали.
-
 ent-PowerCellBlasterPrinted = { ent-PowerCellBlaster }
     .desc = { ent-PowerCellBlaster.desc }
     .suffix = Разряженный, Напечатанный
-
 ent-PowerCellBlasterHighCapacity = высокоёмкая энергоячейка бластерной винтовки
     .desc = { ent-PowerCellBlaster.desc }
 
 
-firemode-name-laser-alt = Лазер
-firemode-name-disabler-alt = Оглушение
-firemode-name-blaster = Бластер
-
 ent-WeaponSynergisticEnergyGun = синергетический пистолет
     .desc = Инновационное оружие, объединяющее в себе передовые технологии и уникальный дизайн. Обладает двумя режимами стрельбы: стандартным и сконцентрированный.
 
-firemode-name-enhanced = Сконцентрированный
+ent-WeaponEnergyGunRevolver = энергетический револьвер
+    .desc = Стандартный энергетический револьвер производства НТ. Редко используется из-за сильно ограниченного боезапаса и поставляется, как правило, в какие-то глуши.
+ent-WeaponEnergyGunRevolverSelfRecharger = { ent-WeaponEnergyGunRevolver }
+    .desc = Стандартный энергетический револьвер производства НТ. Модифицирован модулем самозарядки.
 
 
 ent-LaserCarabinePowerCell = энергоячейка карабина

@@ -32,6 +32,21 @@
     sprite: SS220/Objects/Weapons/Guns/Projectiles/projectiles_cev.rsi
     state: impact_u_laser
 
+- type: hitscan
+  id: LaserEnhanced
+  damage:
+    types:
+      Heat: 45
+  muzzleFlash:
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+    state: muzzle_beam_heavy
+  travelFlash:
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+    state: beam_heavy
+  impactFlash:
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+    state: impact_beam_heavy
+
 # Death Squad
 - type: hitscan
   id: Pulsekill

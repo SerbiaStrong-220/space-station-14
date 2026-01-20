@@ -46,6 +46,59 @@
   - type: StaticPrice
     price: 750
 
+- type: entity
+  parent: BaseWeaponBatterySmall
+  id: WeaponEnergyGunRevolver
+  name: energy revolver
+  description: A standard energy revolver manufactured by NT. It is rarely used due to its severely limited ammunition supply and is usually delivered to some remote areas.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Battery/laser_revolver.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: laser-mag-unshaded-5
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: Clothing
+    sprite: SS220/Objects/Weapons/Guns/Battery/laser_revolver.rsi
+  - type: Gun
+    fireRate: 1.2
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+  - type: HitscanBatteryAmmoProvider
+    proto: LaserEnhanced
+    fireCost: 150
+  - type: BatteryWeaponFireModes
+    fireModes:
+    - proto: LaserEnhanced
+      name: firemode-name-laser
+      fireCost: 150
+      magState: laser-mag
+    - proto: BulletDisabler
+      fireCost: 62.5
+      magState: disabler-mag
+      gunModifiers:
+        fireRate: 2
+  - type: MagazineVisuals
+    magState: laser-mag
+    steps: 6
+    zeroVisible: true
+  - type: Appearance
+  - type: StaticPrice
+    price: 750
+
+- type: entity
+  parent: WeaponEnergyGunRevolver
+  id: WeaponEnergyGunRevolverSelfRecharger
+  suffix: SelfRecharger
+  components:
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 48
+    autoRechargePause: true
+    autoRechargePauseTime: 10
+
 #Base KR
 - type: entity
   parent: BaseWeaponPowerCell

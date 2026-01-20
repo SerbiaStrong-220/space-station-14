@@ -64,7 +64,7 @@
     outerClothing: ClothingOuterBSOCoat
     id: CentcomOperativeBSOPDA
     ears: ClothingHeadsetAltCentComm
-    pocket1: WeaponSynergisticEnergyGun
+    pocket1: WeaponEnergyGunRevolverSelfRecharger
     pocket2: TelescopicShield
     belt: ClothingBeltBlueShieldFilled
     back: ClothingBackpackBlueShieldHightFilled

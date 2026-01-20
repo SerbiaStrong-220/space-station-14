@@ -56,12 +56,14 @@
     shoes: ClothingShoesBootsBlueShieldJackFilled
     id: BlueShieldPDA
     ears: ClothingHeadsetBlueShield
-    pocket1: WeaponSynergisticEnergyGun
+    pocket1: WeaponPistolMk58Nonlethal
     gloves: ClothingHandsGlovesCombat
   storage:
     back:
     - Stunbaton
     - Flash
+    - MagazinePistolRubber
+    - MagazinePistol
 
 - type: chameleonOutfit
   id: BlueShieldChameleonOutfit
