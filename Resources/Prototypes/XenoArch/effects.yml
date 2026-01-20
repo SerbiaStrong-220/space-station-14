@@ -917,6 +917,7 @@
         - id: MobPossum
         - id: MobRaccoon
         - id: MobFerret
+        - id: MobMoproach
         - id: MobHamster
           amount: !type:RangeNumberSelector
             range: 1, 2
