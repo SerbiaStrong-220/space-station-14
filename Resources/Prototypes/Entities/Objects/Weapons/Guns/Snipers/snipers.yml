@@ -25,6 +25,7 @@
   - type: AmmoCounter
   - type: Gun
     fireRate: 0.75
+    crawlingPenalty: 0 #SS220 crawling combat
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto

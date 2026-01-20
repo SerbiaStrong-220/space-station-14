@@ -269,7 +269,14 @@ public sealed partial class GunComponent : Component
     public bool CanSuicide = false;
     ///SS220-new-feature kus end
 
-
+    /// SS220 crawling combat begin
+    /// <summary>
+    /// Modifier for gun firerate when user is crawling. Higher penalty - lower firerate.
+    /// </summary>
+    [DataField]
+    [AutoNetworkedField]
+    public float CrawlingPenalty = 0.3f;
+    /// SS220 crawling combat end
 }
 
 [Flags]

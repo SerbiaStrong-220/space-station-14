@@ -246,14 +246,6 @@ public abstract partial class SharedGunSystem : EntitySystem
             return false;
         }
 
-        // ss220 add block heavy attack and shooting while user is down start
-        if (_standing.IsDown(user))
-        {
-            PopupSystem.PopupPredictedCursor(Loc.GetString("lying-down-block-shooting"), user);
-            return false;
-        }
-        // ss220 add block heavy attack and shooting while user is down end
-
         var toCoordinates = gun.ShootCoordinates;
 
         if (toCoordinates == null)
@@ -284,6 +276,12 @@ public abstract partial class SharedGunSystem : EntitySystem
 
         if (gun.SelectedMode == SelectiveFire.Burst || gun.BurstActivated)
             fireRate = TimeSpan.FromSeconds(1f / gun.BurstFireRate);
+
+        // SS220 crawling combat begin
+        if (_standing.IsDown(user))
+            if (gun.CrawlingPenalty != 0)
+                fireRate /= gun.CrawlingPenalty;
+        // SS220 crawling combat end
 
         // First shot
         // Previously we checked shotcounter but in some cases all the bullets got dumped at once
