@@ -869,13 +869,7 @@ public sealed class GhostRoleSystem : EntitySystem
         if (ghostRole.MakeSentient)
         //SS220 Sentience event language fix begin
         {
-            _mindSystem.MakeSentient(mob, ghostRole.AllowMovement, ghostRole.AllowSpeech);
-
-            if (ghostRole.AllowSpeech)
-            {
-                var languageComp = EnsureComp<LanguageComponent>(mob);
-                _language.AddLanguage((mob, languageComp), _language.GalacticLanguage, true);
-            }
+            MakeSentientWithLanguage(mob, ghostRole.AllowMovement, ghostRole.AllowSpeech);
         }
         //SS220 Sentience event language fix end
 
@@ -944,13 +938,7 @@ public sealed class GhostRoleSystem : EntitySystem
         if (ghostRole.MakeSentient)
         //SS220 Sentience event language fix begin
         {
-            _mindSystem.MakeSentient(uid, ghostRole.AllowMovement, ghostRole.AllowSpeech);
-
-            if (ghostRole.AllowSpeech)
-            {
-                var languageComp = EnsureComp<LanguageComponent>(uid);
-                _language.AddLanguage((uid, languageComp), _language.GalacticLanguage, true);
-            }
+            MakeSentientWithLanguage(uid, ghostRole.AllowMovement, ghostRole.AllowSpeech);
         }
         //SS220 Sentience event language fix end
 
@@ -1036,6 +1024,18 @@ public sealed class GhostRoleSystem : EntitySystem
 
         SetMode(entity.Owner, ghostRoleProto, ghostRoleProto.Name, entity.Comp);
     }
+    //SS220 Sentience event language fix begin
+    private void MakeSentientWithLanguage(EntityUid entity, bool allowMovement, bool allowSpeech)
+    {
+        _mindSystem.MakeSentient(entity, allowMovement, allowSpeech);
+
+        if (allowSpeech)
+        {
+            var languageComp = EnsureComp<LanguageComponent>(entity);
+            _language.AddLanguage((entity, languageComp), _language.GalacticLanguage, true);
+        }
+    }
+    //SS220 Sentience event language fix end
 }
 
 [AnyCommand]
