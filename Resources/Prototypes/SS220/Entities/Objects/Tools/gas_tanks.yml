@@ -11,6 +11,9 @@
     sprite: Objects/Tanks/plasma.rsi
   - type: Item
     sprite: Objects/Tanks/plasma.rsi
+    size: Large
+    shape:
+    - 0,0,2,2
   - type: GasTank
     air:
       volume: 10
