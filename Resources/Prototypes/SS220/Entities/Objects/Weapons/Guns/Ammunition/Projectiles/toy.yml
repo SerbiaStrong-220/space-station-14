@@ -18,7 +18,7 @@
   - type: ProjectileSpread
     proto: PelletShotgunCaps
     count: 6
-    spread: 22 #ss220lowTTKUpdate
+    spread: 22
 
 #foam
 - type: entity
@@ -29,4 +29,4 @@
   - type: ProjectileSpread
     proto: BulletFoam
     count: 6
-    spread: 22 #ss220lowTTKUpdate
+    spread: 22

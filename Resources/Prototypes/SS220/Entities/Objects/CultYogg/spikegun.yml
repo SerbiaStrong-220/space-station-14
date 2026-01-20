@@ -78,8 +78,8 @@
     impactEffect: BulletImpactEffect
     damage:
       types:
-        Piercing: 17
-        Blunt: 5
+        Piercing: 14
+        Blunt: 2
         Poison: 2
   - type: TimedDespawn
     lifetime: 0.6
