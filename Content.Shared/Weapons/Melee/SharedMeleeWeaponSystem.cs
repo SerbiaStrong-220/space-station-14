@@ -23,7 +23,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
-using Content.Shared.Standing; // ss220 add block heavy attack while user is down
+using Content.Shared.Standing; // ss220 crawling combat
 using Content.Shared.StatusEffect;
 using Content.Shared.Weapons.Melee.Components;
 using Content.Shared.Weapons.Melee.Events;
@@ -65,9 +65,9 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
     [Dependency] protected readonly SharedPopupSystem PopupSystem = default!;
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
     [Dependency] private   readonly SharedStaminaSystem _stamina = default!;
-    // ss220 add block heavy attack while user is down start
+    // ss220 crawling combat start
     [Dependency] private   readonly StandingStateSystem _standing = default!;
-    // ss220 add block heavy attack while user is down end
+    // ss220 crawling combat end
     [Dependency] private   readonly DamageExamineSystem _damageExamine = default!;
 
     private const int AttackMask = (int) (CollisionGroup.MobMask | CollisionGroup.Opaque);
@@ -223,14 +223,6 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
     {
         if (args.SenderSession.AttachedEntity is not {} user)
             return;
-
-        // ss220 add block heavy attack and shooting while user is down start
-        if (_standing.IsDown(user))
-        {
-            PopupSystem.PopupPredictedCursor(Loc.GetString("lying-down-block-attack"), user);
-            return;
-        }
-        // ss220 add block heavy attack and shooting while user is down end
 
         if (!TryGetWeapon(user, out var weaponUid, out var weapon) ||
             weaponUid != GetEntity(msg.Weapon))
@@ -421,6 +413,12 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         // Windup time checked elsewhere.
         var fireRate = TimeSpan.FromSeconds(1f / GetAttackRate(weaponUid, user, weapon));
+        // SS220 crawling combat begin
+        if (_standing.IsDown(user))
+            if (weapon.CrawlingAttackRateMultiplier != 0)
+                fireRate /= weapon.CrawlingAttackRateMultiplier;
+        // SS220 crawling combat end
+
         var swings = 0;
 
         // TODO: If we get autoattacks then probably need a shotcounter like guns so we can do timing properly.

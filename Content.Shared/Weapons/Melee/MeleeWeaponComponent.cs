@@ -52,6 +52,15 @@ public sealed partial class MeleeWeaponComponent : Component
     [DataField, AutoNetworkedField]
     public float AttackRate = 1f;
 
+    // SS220 crawling combat begin
+    /// <summary>
+    /// Modifier for weapon attackrate when user is crawling. Lower penalty - lower rate.
+    /// </summary>
+    [DataField]
+    [AutoNetworkedField]
+    public float CrawlingAttackRateMultiplier = 0.7f;
+    // SS220 crawling combat end
+
     /// <summary>
     /// Are we currently holding down the mouse for an attack.
     /// Used so we can't just hold the mouse button and attack constantly.
