@@ -98,8 +98,8 @@
   coefficients:
     Blunt: 1
     Slash: 1.2
-    Piercing: 0.6
-    Heat: 0.6
+    Piercing: 0.75
+    Heat: 0.75
     Shock: 1
     Cold: 1
     Poison: 1
@@ -144,7 +144,7 @@
   coefficients:
     Blunt: 0.5
     Slash: 0.9
-    Piercing: 0.6
+    Piercing: 0.8
     Heat: 1
 
 - type: damageModifierSet
@@ -161,7 +161,7 @@
     Blunt: 1
     Slash: 0.5
     Heat: 0.9
-    Piercing: 0.6
+    Piercing: 0.8
 #midround-fauna-damagesets-ended
 
 - type: damageModifierSet
