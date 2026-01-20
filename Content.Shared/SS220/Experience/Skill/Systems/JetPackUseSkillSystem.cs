@@ -16,6 +16,10 @@ public sealed class JetPackUseSkillSystem : SkillEntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
+    private EntityQuery<JetpackComponent> _jetpackQuery;
+    private EntityQuery<JetpackUserComponent> _jetpackUserQuery;
+    private EntityQuery<ActiveJetpackComponent> _activeJetpackQuery;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -23,6 +27,10 @@ public sealed class JetPackUseSkillSystem : SkillEntitySystem
         SubscribeEventToSkillEntity<JetPackUseSkillComponent, RefreshWeightlessModifiersEvent>(OnRefreshWeightlessModifiers);
         SubscribeEventToSkillEntity<JetPackUseSkillComponent, JetPackActivatedEvent>(OnJetPackActivated);
         SubscribeEventToSkillEntity<JetPackUseSkillComponent, MoveInputEvent>(OnMoveInput);
+
+        _jetpackQuery = GetEntityQuery<JetpackComponent>();
+        _jetpackUserQuery = GetEntityQuery<JetpackUserComponent>();
+        _activeJetpackQuery = GetEntityQuery<ActiveJetpackComponent>();
     }
 
     private void OnRefreshWeightlessModifiers(Entity<JetPackUseSkillComponent> entity, ref RefreshWeightlessModifiersEvent args)
@@ -33,10 +41,10 @@ public sealed class JetPackUseSkillSystem : SkillEntitySystem
         if (!_jetpack.IsUserFlying(experienceEntity.Value.Owner))
             return;
 
-        args.WeightlessAcceleration = entity.Comp.WeightlessAcceleration;
-        args.WeightlessModifier = entity.Comp.WeightlessModifier;
-        args.WeightlessFriction = entity.Comp.WeightlessFriction;
-        args.WeightlessFrictionNoInput = entity.Comp.WeightlessFrictionNoInput;
+        args.WeightlessAcceleration *= entity.Comp.WeightlessAcceleration;
+        args.WeightlessModifier *= entity.Comp.WeightlessModifier;
+        args.WeightlessFriction *= entity.Comp.WeightlessFriction;
+        args.WeightlessFrictionNoInput *= entity.Comp.WeightlessFrictionNoInput;
     }
 
     private void OnJetPackActivated(Entity<JetPackUseSkillComponent> entity, ref JetPackActivatedEvent args)
@@ -53,13 +61,11 @@ public sealed class JetPackUseSkillSystem : SkillEntitySystem
 
     private void OnMoveInput(Entity<JetPackUseSkillComponent> entity, ref MoveInputEvent args)
     {
-        if (!ResolveExperienceEntityFromSkillEntity(entity, out var experienceEntity)) return;
+        if (!_jetpackUserQuery.TryGetComponent(args.Entity, out var userComponent)) return;
 
-        if (!TryComp<JetpackUserComponent>(experienceEntity, out var userComponent)) return;
+        if (!_jetpackQuery.TryGetComponent(userComponent.Jetpack, out var jetpackComponent)) return;
 
-        if (!TryComp<JetpackComponent>(userComponent.Jetpack, out var jetpackComponent)) return;
-
-        if (!HasComp<ActiveJetpackComponent>(userComponent.Jetpack)) return;
+        if (!_jetpackQuery.HasComp(userComponent.Jetpack)) return;
 
         if (jetpackComponent.ToggleActionEntity is not { } actionUid) return;
 
@@ -67,13 +73,18 @@ public sealed class JetPackUseSkillSystem : SkillEntitySystem
 
         if (!args.HasDirectionalMovement) return;
 
-        var predictedRandom = GetPredictedRandom(new() { GetNetEntity(entity).Id });
+        var predictedRandom = GetPredictedRandomDebug(new() { GetNetEntity(entity).Id }, out var seed);
 
         if (!predictedRandom.Prob(entity.Comp.FailChance))
+        {
+            Log.Debug($"I dropped on tick {GameTiming.CurTick} with seed {seed}!");
             return;
+        }
 
-        _actions.SetCooldown(actionEntity!, entity.Comp.JetPackFailureTime);
-        _actions.PerformAction(experienceEntity.Value.Owner, actionEntity);
-        _popup.PopupCursor(Loc.GetString(entity.Comp.JetPackFailurePopup), experienceEntity.Value.Owner, PopupType.MediumCaution);
+        Log.Debug($"I run on tick {GameTiming.CurTick} with seed {seed} and chance {entity.Comp.FailChance}!");
+
+        _actions.PerformAction(args.Entity.Owner, actionEntity);
+        _actions.SetCooldown(actionEntity!, entity.Comp.JetPackFailureCooldown);
+        _popup.PopupCursor(Loc.GetString(entity.Comp.JetPackFailurePopup), args.Entity.Owner, PopupType.LargeCaution);
     }
 }

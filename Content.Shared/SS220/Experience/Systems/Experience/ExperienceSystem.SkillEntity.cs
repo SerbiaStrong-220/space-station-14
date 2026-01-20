@@ -24,26 +24,26 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     private void OnComponentInit(Entity<ExperienceComponent> entity, ref ComponentInit _)
     {
-        entity.Comp.ExperienceContainer = _container.EnsureContainer<ContainerSlot>(entity.Owner, ExperienceComponent.ContainerId);
-        entity.Comp.OverrideExperienceContainer = _container.EnsureContainer<ContainerSlot>(entity.Owner, ExperienceComponent.OverrideContainerId);
+        entity.Comp.SkillEntityContainer = _container.EnsureContainer<ContainerSlot>(entity.Owner, ExperienceComponent.ContainerId);
+        entity.Comp.OverrideSkillEntityContainer = _container.EnsureContainer<ContainerSlot>(entity.Owner, ExperienceComponent.OverrideContainerId);
     }
 
     private void OnMapInitSkillEntity(Entity<ExperienceComponent> entity, ref MapInitEvent _)
     {
-        if (entity.Comp.ExperienceContainer.Count != 0 || entity.Comp.OverrideExperienceContainer.Count != 0)
+        if (entity.Comp.SkillEntityContainer.Count != 0 || entity.Comp.OverrideSkillEntityContainer.Count != 0)
         {
             Log.Warning($"Something was in {ToPrettyString(entity)} experience containers, cleared it");
-            PredictedQueueDel(_container.EmptyContainer(entity.Comp.ExperienceContainer).FirstOrNull());
-            PredictedQueueDel(_container.EmptyContainer(entity.Comp.OverrideExperienceContainer).FirstOrNull());
+            PredictedQueueDel(_container.EmptyContainer(entity.Comp.SkillEntityContainer).FirstOrNull());
+            PredictedQueueDel(_container.EmptyContainer(entity.Comp.OverrideSkillEntityContainer).FirstOrNull());
         }
 
         if (!PredictedTrySpawnInContainer(_baseSKillPrototype, entity, ExperienceComponent.ContainerId, out var skillEntity))
-            Log.Fatal($"Cant spawn and insert skill entity into {nameof(entity.Comp.ExperienceContainer)} of {ToPrettyString(entity)}");
+            Log.Fatal($"Cant spawn and insert skill entity into {nameof(entity.Comp.SkillEntityContainer)} of {ToPrettyString(entity)}");
         else
             DirtyEntity(skillEntity.Value);
 
         if (!PredictedTrySpawnInContainer(_baseSKillPrototype, entity, ExperienceComponent.OverrideContainerId, out var overrideSkillEntity))
-            Log.Fatal($"Cant spawn and insert skill entity into {nameof(entity.Comp.OverrideExperienceContainer)} of {ToPrettyString(entity)}");
+            Log.Fatal($"Cant spawn and insert skill entity into {nameof(entity.Comp.OverrideSkillEntityContainer)} of {ToPrettyString(entity)}");
         else
             DirtyEntity(overrideSkillEntity.Value);
 
@@ -53,8 +53,8 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     private void OnRemove(Entity<ExperienceComponent> entity, ref ComponentRemove _)
     {
-        QueueDel(_container.EmptyContainer(entity.Comp.ExperienceContainer).FirstOrNull());
-        QueueDel(_container.EmptyContainer(entity.Comp.OverrideExperienceContainer).FirstOrNull());
+        QueueDel(_container.EmptyContainer(entity.Comp.SkillEntityContainer).FirstOrNull());
+        QueueDel(_container.EmptyContainer(entity.Comp.OverrideSkillEntityContainer).FirstOrNull());
     }
 
     public bool TryAddSkillToSkillEntity(Entity<ExperienceComponent> entity, [ForbidLiteral] string containerId, [ForbidLiteral] ProtoId<SkillPrototype> skill)
@@ -71,8 +71,8 @@ public sealed partial class ExperienceSystem : EntitySystem
             return false;
 
         var skillEntity = containerId == ExperienceComponent.OverrideContainerId
-                            ? entity.Comp.OverrideExperienceContainer.ContainedEntity
-                            : entity.Comp.ExperienceContainer.ContainedEntity;
+                            ? entity.Comp.OverrideSkillEntityContainer.ContainedEntity
+                            : entity.Comp.SkillEntityContainer.ContainedEntity;
 
         if (skillEntity is null)
         {
@@ -100,8 +100,8 @@ public sealed partial class ExperienceSystem : EntitySystem
             return;
 
         var skillEntity = containerId == ExperienceComponent.OverrideContainerId
-                            ? entity.Comp.OverrideExperienceContainer.ContainedEntity
-                            : entity.Comp.ExperienceContainer.ContainedEntity;
+                            ? entity.Comp.OverrideSkillEntityContainer.ContainedEntity
+                            : entity.Comp.SkillEntityContainer.ContainedEntity;
 
         if (skillEntity is null)
         {
@@ -118,8 +118,8 @@ public sealed partial class ExperienceSystem : EntitySystem
             return;
 
         var skillContainer = containerId == ExperienceComponent.OverrideContainerId
-                            ? entity.Comp.OverrideExperienceContainer
-                            : entity.Comp.ExperienceContainer;
+                            ? entity.Comp.OverrideSkillEntityContainer
+                            : entity.Comp.SkillEntityContainer;
 
         var oldSkillEntity = skillContainer?.ContainedEntity;
 
@@ -128,7 +128,7 @@ public sealed partial class ExperienceSystem : EntitySystem
             return;
 
         if (!PredictedTrySpawnInContainer(_baseSKillPrototype, entity, containerId, out var skillEntity))
-            Log.Fatal($"Cant respawn and insert skill entity into {nameof(entity.Comp.ExperienceContainer)} of {ToPrettyString(entity)}");
+            Log.Fatal($"Cant respawn and insert skill entity into {nameof(entity.Comp.SkillEntityContainer)} of {ToPrettyString(entity)}");
         else
             DirtyEntity(skillEntity.Value);
     }
@@ -140,6 +140,11 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (_subscribedToExperienceComponentTypes.Add(typeof(TEvent)))
             SubscribeLocalEvent<ExperienceComponent, TEvent>(RelayEventToSkillEntity);
 
+        // TODO-thinking: override check event bad if we want to handle do after overrides and actually bad in most cases
+        // for current realization this is dead end code, so no one use this checks for real
+        // Also we might want not to subscribe some event but made collection which cares of events
+        // in core of this hides one more problem - two different component subscribing to one event
+        // 1. we can ban this 2. ???
         SubscribeLocalEvent<TComp, SkillEntityOverrideCheckEvent<TEvent>>(OnOverrideSkillEntityCheck);
     }
 
@@ -154,14 +159,14 @@ public sealed partial class ExperienceSystem : EntitySystem
             return;
 
         // Client sometime need time to figure out pvs containers
-        if (entity.Comp.OverrideExperienceContainer is null || entity.Comp.ExperienceContainer is null)
+        if (entity.Comp.OverrideSkillEntityContainer is null || entity.Comp.SkillEntityContainer is null)
         {
             DebugTools.AssertEqual(_net.IsServer, false);
             return;
         }
 
-        var overrideSkillEntity = entity.Comp.OverrideExperienceContainer.ContainedEntity;
-        var skillEntity = entity.Comp.ExperienceContainer.ContainedEntity;
+        var overrideSkillEntity = entity.Comp.OverrideSkillEntityContainer.ContainedEntity;
+        var skillEntity = entity.Comp.SkillEntityContainer.ContainedEntity;
 
         if (skillEntity is null || overrideSkillEntity is null)
             return;

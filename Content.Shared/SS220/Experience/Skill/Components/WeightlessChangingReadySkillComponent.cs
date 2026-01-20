@@ -13,6 +13,9 @@ public sealed partial class WeightlessChangingReadySkillComponent : Component
     [ViewVariables(VVAccess.ReadOnly)]
     public HashSet<ProtoId<TagPrototype>> HardsuitTags = new() { "Hardsuit" };
 
+    [ViewVariables(VVAccess.ReadOnly)]
+    public bool MagbootsActive;
+
     [DataField]
     [AutoNetworkedField]
     public float HardsuitFallChance = 0.1f;
@@ -26,11 +29,11 @@ public sealed partial class WeightlessChangingReadySkillComponent : Component
     public TimeSpan KnockdownDuration = TimeSpan.FromSeconds(2f);
 
     [DataField, AutoNetworkedField]
-    public float WeightlessAcceleration;
+    public float WeightlessAcceleration = 1f;
 
     [DataField, AutoNetworkedField]
-    public float WeightlessFriction;
+    public float WeightlessFriction = 1f;
 
     [DataField, AutoNetworkedField]
-    public float WeightlessModifier;
+    public float WeightlessModifier = 1f;
 }

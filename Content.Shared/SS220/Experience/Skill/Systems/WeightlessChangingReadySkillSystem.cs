@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Clothing;
 using Content.Shared.Gravity;
 using Content.Shared.Inventory;
 using Content.Shared.Movement.Systems;
@@ -24,18 +25,22 @@ public sealed class WeightlessChangingReadySkillSystem : SkillEntitySystem
         base.Initialize();
 
         SubscribeEventToSkillEntity<WeightlessChangingReadySkillComponent, WeightlessnessChangedEvent>(OnWeightlessChanged);
-        SubscribeEventToSkillEntity<WeightlessChangingReadySkillComponent, RefreshWeightlessModifiersEvent>(OnRefreshWeightlessModifiers);
+        SubscribeEventToSkillEntity<WeightlessChangingReadySkillComponent, MagbootsUpdateStateEvent>(OnMagbootsUpdateState);
+
+        SubscribeEventToSkillEntity<WeightlessChangingReadySkillComponent, RefreshWeightlessModifiersEvent>(OnRefreshWeightlessModifiers, after: [typeof(SharedJetpackSystem)]);
     }
 
     private void OnWeightlessChanged(Entity<WeightlessChangingReadySkillComponent> entity, ref WeightlessnessChangedEvent args)
     {
-        if (!entity.Comp.Initialized)
-            return;
-
-        if (args.Weightless)
+        // Okay this is how I deal with prediction resetting
+        // If you skip this check you will add a KnockedDownComponent during resetting procedure
+        if (GameTiming.ApplyingState)
             return;
 
         if (!ResolveExperienceEntityFromSkillEntity(entity, out var experienceEntity))
+            return;
+
+        if (args.Weightless || entity.Comp.MagbootsActive)
             return;
 
         var chance = _inventory.TryGetSlotEntity(experienceEntity.Value.Owner, HardSuitInventorySlot, out var outerClothingEntity)
@@ -51,6 +56,11 @@ public sealed class WeightlessChangingReadySkillSystem : SkillEntitySystem
         _stun.TryAddParalyzeDuration(experienceEntity.Value.Owner, entity.Comp.KnockdownDuration);
     }
 
+    private void OnMagbootsUpdateState(Entity<WeightlessChangingReadySkillComponent> entity, ref MagbootsUpdateStateEvent args)
+    {
+        entity.Comp.MagbootsActive = args.State;
+    }
+
     private void OnRefreshWeightlessModifiers(Entity<WeightlessChangingReadySkillComponent> entity, ref RefreshWeightlessModifiersEvent args)
     {
         if (!ResolveExperienceEntityFromSkillEntity(entity, out var experienceEntity))
@@ -59,8 +69,8 @@ public sealed class WeightlessChangingReadySkillSystem : SkillEntitySystem
         if (_jetpack.IsUserFlying(experienceEntity.Value.Owner))
             return;
 
-        args.WeightlessAcceleration = entity.Comp.WeightlessAcceleration;
-        args.WeightlessModifier = entity.Comp.WeightlessModifier;
-        args.WeightlessFriction = entity.Comp.WeightlessFriction;
+        args.WeightlessAcceleration *= entity.Comp.WeightlessAcceleration;
+        args.WeightlessModifier *= entity.Comp.WeightlessModifier;
+        args.WeightlessFriction *= entity.Comp.WeightlessFriction;
     }
 }

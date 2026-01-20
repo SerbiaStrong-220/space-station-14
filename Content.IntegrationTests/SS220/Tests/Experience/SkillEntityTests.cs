@@ -145,8 +145,8 @@ public sealed class SkillEntityTests
 
         Assert.That(server.EntMan.TryGetComponent<ExperienceComponent>(testEntity, out var experienceComponent), Is.EqualTo(true));
 
-        var nullableSkillEntity = experienceComponent.ExperienceContainer.ContainedEntity;
-        var nullableOverrideSkillEntity = experienceComponent.OverrideExperienceContainer.ContainedEntity;
+        var nullableSkillEntity = experienceComponent.SkillEntityContainer.ContainedEntity;
+        var nullableOverrideSkillEntity = experienceComponent.OverrideSkillEntityContainer.ContainedEntity;
 
         // we check if no one else spawned out of nowhere
         Assert.Multiple(() =>
