@@ -8,6 +8,7 @@ using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Prototypes;
 using Content.Client.Materials;
 using Content.Client.Message;
+using Robust.Shared.Utility;
 
 namespace Content.Client.SS220.ResourceMiner;
 
@@ -67,11 +68,14 @@ public sealed partial class ResourceMinerWindow : FancyWindow
             if (!_prototype.Resolve(materialId, out var materialPrototype))
                 continue;
 
-            var materialName = $"[color={materialPrototype.Color.ToHex()}]{Loc.GetString(materialPrototype.Name)}[/color]";
+            var nameNode = FormattedMessage.Empty;
+            nameNode.PushColor(materialPrototype.Color);
+            nameNode.AddText(Loc.GetString(materialPrototype.Name));
+            nameNode.Pop();
 
             var volume = (float)generationVolume / _materialStorage.GetSheetVolume(materialPrototype);
 
-            var locText = Loc.GetString("resource-miner-generation-label", ("Name", materialName), ("Volume", volume));
+            var locText = Loc.GetString("resource-miner-generation-label", ("Name", nameNode.ToMarkup()), ("Volume", volume));
             var label = new RichTextLabel();
             label.SetMarkup(locText);
 

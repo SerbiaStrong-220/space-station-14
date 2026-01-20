@@ -135,7 +135,7 @@
         wrecks: !type:DungeonSpawnGroup
           hide: true #SS2200 IFF and Name Hide Reveal
           minimumDistance: 150
-          maximumDistance: 250
+          maximumDistance: 250 # SS220-move-dungeon-closer
           stationGrid: false
           minCount: 12
           maxCount: 16
