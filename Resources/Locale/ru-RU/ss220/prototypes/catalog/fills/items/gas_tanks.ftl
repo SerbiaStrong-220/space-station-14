@@ -1,3 +1,3 @@
 ent-ExtendedPlasmaTankFilled = { ent-ExtendedPlasmaTank }
-    .suffix = Filled
+    .suffix = Заполненный
     .desc = { ent-ExtendedPlasmaTank.desc }
