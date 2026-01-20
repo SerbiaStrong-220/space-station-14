@@ -63,12 +63,8 @@
       weight: 1.0 # amount is laughable
     - id: XenoArtifactAngryCarpSpawn
       weight: 4.0
-    #SS220 XEA Fauna spawn split into friendly and aggressive begin
-    - id: XenoArtifactFriendlyFaunaSpawn
+    - id: XenoArtifactFaunaSpawn
       weight: 10.0
-    - id: XenoArtifactHostileFaunaSpawn
-      weight: 10.0
-    #SS220 XEA Fauna spawn split into friendly and aggressive end
     - id: XenoArtifactCashSpawn
       weight: 10.0
     - id: XenoArtifactShatterWindows
@@ -669,7 +665,11 @@
         - id: MobMonkey
           weight: 95.0
         - id: MobGorilla
-          weight: 5.0
+        #SS220 Moved syndi monkey to primate from fauna begin
+          weight: 4.5
+        - id: MobMonkeySyndicateAgent
+          weight: 0.5
+        #SS220 Moved syndi monkey to primate from fauna end
 
 - type: entity
   id: XenoArtifactRadioactive
@@ -888,75 +888,11 @@
         - id: MobCarpHolo
           weight: 1.0
 
-#SS220 XEA Fauna spawn split into friendly and aggressive begin
+#SS220 XEA Fauna spawn extension begin
 - type: entity
-  id: XenoArtifactFriendlyFaunaSpawn
+  id: XenoArtifactFaunaSpawn
   parent: BaseXenoArtifactEffect
-  description: Create friendly fauna
-  components:
-  - type: XenoArtifactNode
-    maxDurability: 4
-    maxDurabilityCanDecreaseBy:
-      min: 0
-      max: 3
-  - type: XAEApplyComponents
-    applyIfAlreadyHave: true
-    refreshOnReactivate: true
-    components:
-    - type: EntityTableSpawner
-      deleteSpawnerAfterSpawn: false
-      table: !type:GroupSelector
-        children:
-        - id: MobPig
-        - id: MobParrot
-        - id: MobKangaroo
-        - id: MobFox
-        - id: MobPenguin
-        - id: MobCrab
-        - id: MobFrog
-        - id: MobPossum
-        - id: MobRaccoon
-        - id: MobFerret
-        - id: MobMoproach
-        - id: MobHamster
-          amount: !type:RangeNumberSelector
-            range: 1, 2
-        - id: MobMothroach
-          amount: !type:RangeNumberSelector
-            range: 1, 2
-        - id: MobCorgiPuppy
-          amount: !type:RangeNumberSelector
-            range: 1, 2
-        - id: MobCatKitten
-          amount: !type:RangeNumberSelector
-            range: 1, 2
-        - id: MobCat
-          amount: !type:RangeNumberSelector
-            range: 1, 2
-        - id: MobBee
-          amount: !type:RangeNumberSelector
-            range: 2, 5
-        - id: MobMouse
-          amount: !type:RangeNumberSelector
-            range: 2, 5
-        - id: MobChicken
-          amount: !type:RangeNumberSelector
-            range: 2, 5
-        - id: MobDuckMallard
-          amount: !type:RangeNumberSelector
-            range: 2, 5
-        - id: MobGoat
-          amount: !type:RangeNumberSelector
-            range: 1, 3
-        - id: MobMonkeySyndicateAgent #so lucky
-          prob: 0.03
-        - id: MobGoose
-          prob: 0.1
-
-- type: entity
-  id: XenoArtifactHostileFaunaSpawn
-  parent: BaseXenoArtifactEffect
-  description: Create hostile fauna
+  description: Create fauna
   components:
   - type: XenoArtifactNode
     maxDurability: 4
@@ -973,20 +909,76 @@
         children:
         - id: MobAdultSlimesYellowAngry
         - id: MobAngryBee
+          amount: !type:RangeNumberSelector
+            range: 2, 5
         - id: MobBearSpace
         - id: MobXenoRavager
+          prob: 0.1 #Chance lowered 3.2% → 0.32%
         - id: MobTick
+          amount: !type:RangeNumberSelector
+            range: 1, 2
         - id: MobSpiderSpace
         - id: MobPurpleSnake
         - id: MobKangarooSpace
+        - id: MobPig
+        - id: MobParrot
+          amount: !type:RangeNumberSelector
+            range: 1, 2
+        - id: MobKangaroo
+        - id: MobFox
+        - id: MobPenguin
+        - id: MobCrab
+          amount: !type:RangeNumberSelector
+            range: 1, 2
+        - id: MobFrog
+          amount: !type:RangeNumberSelector
+            range: 1, 3
+        - id: MobPossum
+        - id: MobRaccoon
+        - id: MobFerret
+        - id: MobMoproach
+          amount: !type:RangeNumberSelector
+            range: 1, 2
+        - id: MobHamster
+          amount: !type:RangeNumberSelector
+            range: 1, 2
+        - id: MobMothroach
+          amount: !type:RangeNumberSelector
+            range: 1, 2
+        - id: MobCorgiPuppy
+          amount: !type:RangeNumberSelector
+            range: 1, 2
+        - id: MobCatKitten
+          amount: !type:RangeNumberSelector
+            range: 1, 2
+        - id: MobCat
+          amount: !type:RangeNumberSelector
+            range: 1, 2
+        - id: MobCatShadow
+          prob: 0.1
+        - id: MobBee
+          amount: !type:RangeNumberSelector
+            range: 2, 5
+        - id: MobMouse
+          amount: !type:RangeNumberSelector
+            range: 2, 5
+        - id: MobChicken
+          amount: !type:RangeNumberSelector
+            range: 2, 5
+        - id: MobDuckMallard
+          amount: !type:RangeNumberSelector
+            range: 2, 5
+        - id: MobGoat
+          amount: !type:RangeNumberSelector
+            range: 1, 3
+        - id: MobGoose
           amount: !type:RangeNumberSelector
             range: 1, 2
         - id: MobClownSpider
         - id: MobGiantSpider
-          amount: 1
-        - id: MobMonkeySyndicateAgent #so lucky
-          prob: 0.03
-#SS220 XEA Fauna spawn split into friendly and aggressive end
+        - id: MobDragon
+          prob: 0.03 #Chance is 0.096%
+#SS220 XEA Fauna spawn extension end
 
 - type: entity
   id: XenoArtifactCashSpawn
