@@ -136,7 +136,7 @@ ent-AirlockMeidicalGlassPsychologist = { ent-AirlockMedicalGlass }
 
 ent-HighSecCentcommLockedBSO = { ent-HighSecDoor }
     .desc = { ent-HighSecDoor.desc }
-    .suffix = ЦК, Закрыто, Оперативник "Синий Щит"
+    .suffix = ЦК, Закрыто, Оперативник ГСН
 
 ent-HighSecCentcommLockedERT = { ent-HighSecDoor }
     .desc = { ent-HighSecDoor.desc }

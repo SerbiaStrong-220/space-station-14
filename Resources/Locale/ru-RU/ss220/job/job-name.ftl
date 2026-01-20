@@ -10,7 +10,7 @@ job-name-cc-ci-officer = офицер Контрразведки
 
 job-name-cburn-agent = агент РХБЗ
 job-name-cburn-leader = лидер отряда РХБЗ
-job-name-cc-bs-operative = оперативник "Синий Щит"
+job-name-cc-bs-operative = оперативник ГСН
 job-name-ert-commander = лидер отряда ОБР
 job-name-ert-chaplain = священник ОБР
 

@@ -120,11 +120,11 @@
 #SS220 More_Centcomm_Prototypes
 - type: entity
   parent: DoorElectronics
-  id: DoorElectronicsCentralCommandBSO
-  suffix: BSO, Locked
+  id: DoorElectronicsCentralCommandSRT
+  suffix: SRT, Locked
   components:
   - type: AccessReader
-    access: [["CentralCommandBSO"]]
+    access: [["CentralCommandSRT"]]
 
 - type: entity
   parent: DoorElectronics

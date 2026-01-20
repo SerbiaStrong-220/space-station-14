@@ -1,17 +1,17 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
-  name: Оперативник "Синий Щит"
-  id: CentCommOperativeBSO
+  name: Оперативник ГСН
+  id: CentCommOperativeSRT
   components:
     - type: Sprite
       sprite: SS220/Markers/jobs.rsi
       state: centcommoperativebs
     - type: RandomHumanoidSpawner
-      settings: CentCommOperativeBSO
+      settings: CentCommOperativeSRT
 
 - type: randomHumanoidSettings
-  id: CentCommOperativeBSO
+  id: CentCommOperativeSRT
   speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran]
   components:
     - type: RandomHumanoidAppearance
@@ -19,26 +19,26 @@
       hair: HairBald
     - type: RandomMetadata
       nameSegments:
-        - NamesFirstBSOMember
-        - NamesLastBSOMember
+        - NamesFirstSRTMember
+        - NamesLastSRTMember
     - type: MindShield
     - type: GhostRole
-      name: ghost-role-information-centcom-BSO-name
-      description: ghost-role-information-centcom-BSO-description
+      name: ghost-role-information-centcom-SRT-name
+      description: ghost-role-information-centcom-SRT-description
     - type: GhostTakeoverAvailable
     - type: Loadout
-      prototypes: [ CentcomOperativeBSOGear ]
+      prototypes: [ CentcomOperativeSRTGear ]
 
 - type: playTimeTracker
-  id: JobCentcommOperativeBSO
+  id: JobCentcommOperativeSRT
 
 - type: job
-  id: CentcomOperativeBSO
+  id: CentcomOperativeSRT
   name: job-name-cc-bs-operative
   description: job-description-centcomoff
   setPreference: false
-  startingGear: CentcomOperativeBSOGear
-  playTimeTracker: JobCentcommOperativeBSO
+  startingGear: CentcomOperativeSRTGear
+  playTimeTracker: JobCentcommOperativeSRT
   icon: "JobIconNanotrasen"
   supervisors: job-supervisors-centcom
   canBeAntag: false
@@ -46,7 +46,7 @@
   accessGroups:
   - AllAccess
   access:
-  - CentralCommandBSO
+  - CentralCommandSRT
   - CentralCommand
   special:
   - !type:AddComponentSpecial
@@ -54,15 +54,15 @@
     - type: DefibrillatorSkill
 
 - type: startingGear
-  id: CentcomOperativeBSOGear
+  id: CentcomOperativeSRTGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitBlueShieldOperative
     shoes: ClothingShoesBootsBlueShieldJackFilled
     head: ClothingHeadBeretBlueshield
     eyes: ClothingEyesGlassesBlueShield
     gloves: ClothingHandsGlovesPowergloveDisabler
-    outerClothing: ClothingOuterBSOCoat
-    id: CentcomOperativeBSOPDA
+    outerClothing: ClothingOuterSRTCoat
+    id: CentcomOperativeSRTPDA
     ears: ClothingHeadsetAltCentComm
     pocket1: WeaponEnergyGunRevolverSelfRecharger
     pocket2: TelescopicShield

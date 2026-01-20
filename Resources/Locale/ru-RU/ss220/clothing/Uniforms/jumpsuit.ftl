@@ -22,21 +22,21 @@ ent-ClothingUniformJumpsuitWaiter = униформа официанта
     .desc = Униформа мальчика на побегушках.
 
 
-ent-ClothingUniformJumpsuitBlueShieldCombez = комбинезон "Синий Щит"
+ent-ClothingUniformJumpsuitBlueShieldCombez = комбинезон синего щита
     .desc = Стандартный комбинезон для синего щита.
-ent-ClothingUniformJumpsuitBlueShieldOperative = комбинезон оперативника "Синий Щит"
+ent-ClothingUniformJumpsuitBlueShieldOperative = комбинезон оперативника синего щита
     .desc = Модная форма оперативника Синего Щита - как же она хороша!
     .suffix = За время в игре
-ent-ClothingUniformJumpsuitBlueShieldShirt = рубашка "Синий Щит"
+ent-ClothingUniformJumpsuitBlueShieldShirt = рубашка синего щита
     .desc = Рубашка, которую высокопоставленные представители «синего щита» надевают на официальные встречи.
     .suffix = За время в игре
-ent-ClothingUniformJumpsuitBlueShieldShirtTie = рубашка "Синий Щит"
+ent-ClothingUniformJumpsuitBlueShieldShirtTie = рубашка синего щита
     .desc = { ent-ClothingUniformJumpsuitBlueShieldShirt.desc }
     .suffix = Завязанный, За время в игре
-ent-ClothingUniformJumpsuitBlueShieldTShirt = футболка "Синий Щит"
+ent-ClothingUniformJumpsuitBlueShieldTShirt = футболка синего щита
     .desc = Черная футболка с короткими рукавами, в паре с черными брюками из прочного материала. Прекрасно подходит для отдыха в безопасном секторе NanoTrasen.
     .suffix = За время в игре
-ent-ClothingUniformJumpsuitBlueShieldCombat = боевой комбинезон "Синий Щит"
+ent-ClothingUniformJumpsuitBlueShieldCombat = боевой комбинезон синего щита
     .desc = Специальная одежда, предназначенная для боевых действий. Изготовлена из высокотехнологичных материалов с учётом требований к защите от внешних воздействий.
     .suffix = За время в игре
 
