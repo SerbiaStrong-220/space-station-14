@@ -62,9 +62,22 @@ public sealed class EmergencyShuttleAutoVoteRuleSystem : GameRuleSystem<Emergenc
         MakeEmergencyShuttleVote(component);
     }
 
+    private float GetRequiredEvacVoteRatio(int voteCount)
+    {
+        return voteCount switch
+        {
+            1 => 0.70f,
+            2 => 0.60f,
+            _ => 0.50f
+        };
+    }
+
     private void MakeEmergencyShuttleVote(EmergencyShuttleAutoVoteRuleComponent component)
     {
+        component.EvacVoteCount++;
         component.LastEvacVoteTime = RoundTime;
+
+        float requiredRatio = GetRequiredEvacVoteRatio(component.EvacVoteCount);
 
         var voteOptions = new VoteOptions()
         {
@@ -82,11 +95,13 @@ public sealed class EmergencyShuttleAutoVoteRuleSystem : GameRuleSystem<Emergenc
 
         vote.OnFinished += (_, args) =>
         {
-            var callEvac = false;
-            if (args.Winner is bool winner)
-                callEvac = winner;
+            var votesYes = vote.VotesPerOption.GetValueOrDefault(true, 0);
+            var votesNo = vote.VotesPerOption.GetValueOrDefault(false, 0);
+            var total = votesYes + votesNo;
 
-            _adminLog.Add(LogType.Vote, LogImpact.Medium, $"Auto call emergency shuttle vote finished, result is {callEvac}");
+            var callEvac = total > 0 && (float)votesYes / total >= requiredRatio;
+
+            _adminLog.Add(LogType.Vote, LogImpact.Medium, $"Auto call emergency shuttle vote number {component.EvacVoteCount} finished, result is {callEvac}");
 
             VoteTimeResult.WithLabels(callEvac.ToString()).Observe(RoundTime.TotalHours);
 

@@ -15740,13 +15740,15 @@ entities:
     - type: Transform
       pos: 72.5,-17.5
       parent: 1
-- proto: SpawnMobCorgiMouse
-  entities:
-  - uid: 577
-    components:
-    - type: Transform
-      pos: 32.5,16.5
-      parent: 1
+# ss220 add more jobs for dev start
+# - proto: SpawnMobCorgiMouse
+#   entities:
+#   - uid: 577
+#     components:
+#     - type: Transform
+#       pos: 32.5,16.5
+#       parent: 1
+# ss220 add more jobs for dev end
 - proto: SpawnMobHuman
   entities:
   - uid: 1104
@@ -15784,7 +15786,7 @@ entities:
     - type: Transform
       pos: 31.5,19.5
       parent: 1
-- proto: SpawnPointCaptain
+- proto: SpawnPointAnyJob # ss220 add more jobs for dev (ORIGINAL: "-proto: SpawnPointCaptain")
   entities:
   - uid: 24
     components:

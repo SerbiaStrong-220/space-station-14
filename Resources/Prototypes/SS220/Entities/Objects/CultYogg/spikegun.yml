@@ -22,7 +22,7 @@
       proto: Spike
       capacity: 20
     - type: Sprite
-      sprite: SS220/Objects/Weapons/Guns/CultYogg/cult_yogg_spikegun.rsi
+      sprite: SS220/Objects/Weapons/Guns/CultYogg/spikegun.rsi
       layers:
         - state: icon_noammo
           map: ["sprite"]
@@ -66,7 +66,7 @@
       - NonEnergy
   - type: Sprite
     noRot: false
-    sprite: SS220/Objects/Weapons/Guns/CultYogg/cult_yogg_spikegun.rsi
+    sprite: SS220/Objects/Weapons/Guns/CultYogg/spikegun.rsi
     layers:
     - state: spike_projectile
       shader: unshaded
@@ -80,7 +80,7 @@
       types:
         Piercing: 17
         Blunt: 5
-        Poison: 2 
+        Poison: 2
   - type: TimedDespawn
     lifetime: 0.6
   - type: GatheringProjectile

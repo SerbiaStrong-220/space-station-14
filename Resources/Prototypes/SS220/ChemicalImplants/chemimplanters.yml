@@ -47,6 +47,7 @@
       implant: EmptyChemicalImplant
 
 - type: entity
+  parent: BaseImplantAction
   id: ActionUseChemicalImplant
   name: chemical implant action
   description: chemical implant action desc
@@ -61,5 +62,3 @@
     icon:
       sprite: SS220/Objects/ChemicalImplants/implanters.rsi
       state: icon_empty
-  - type: InstantAction
-    event: !type:UseChemicalImplantEvent

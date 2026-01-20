@@ -20,7 +20,7 @@
     - id: ClothingOuterMechLoaderFull # SS220 AddMechToClothing
     - id: DeviceCalculator # SS220 Calculator
     # - id: ClothingHandsKnuckleDustersQM # SS220-QM-own-knuckle-duster
-    - id: MailTeleporterMachineCircuitboard
+    # - id: MailTeleporterMachineCircuitboard # SS220 cargo Circuitboard issue
     #SS220 Quartermaster_hardsuit_add begin
     - id: ClothingOuterHardsuitQuartermaster
     - id: OxygenTankFilled
