@@ -275,7 +275,7 @@ public sealed partial class GunComponent : Component
     /// </summary>
     [DataField]
     [AutoNetworkedField]
-    public float CrawlingPenalty = 0.7f;
+    public float CrawlingFireRateMultiplier = 0.7f;
     /// SS220 crawling combat end
 }
 

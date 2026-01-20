@@ -279,8 +279,8 @@ public abstract partial class SharedGunSystem : EntitySystem
 
         // SS220 crawling combat begin
         if (_standing.IsDown(user))
-            if (gun.CrawlingPenalty != 0)
-                fireRate /= gun.CrawlingPenalty;
+            if (gun.CrawlingFireRateMultiplier != 0)
+                fireRate /= gun.CrawlingFireRateMultiplier;
         // SS220 crawling combat end
 
         // First shot
