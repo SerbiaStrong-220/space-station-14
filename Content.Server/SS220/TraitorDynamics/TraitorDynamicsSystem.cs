@@ -72,7 +72,7 @@ public sealed class TraitorDynamicsSystem : EntitySystem
         SubscribeLocalEvent<RoundEndedEvent>(OnRoundEnd);
     }
 
-    private void OnRoundEnd(RoundEndedEvent ev)
+    private void OnRoundEnd(RoundEndedEvent _)
     {
         if (_currentDynamic.HasValue)
             RemoveDynamic();
