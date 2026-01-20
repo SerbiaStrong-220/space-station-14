@@ -867,11 +867,7 @@ public sealed class GhostRoleSystem : EntitySystem
         RaiseLocalEvent(mob, spawnedEvent);
 
         if (ghostRole.MakeSentient)
-        //SS220 Sentience event language fix begin
-        {
-            MakeSentientWithLanguage(mob, ghostRole.AllowMovement, ghostRole.AllowSpeech);
-        }
-        //SS220 Sentience event language fix end
+            MakeSentientWithLanguage(mob, ghostRole.AllowMovement, ghostRole.AllowSpeech); //SS220 Sentience event language fix
 
         EnsureComp<MindContainerComponent>(mob);
 
@@ -936,11 +932,7 @@ public sealed class GhostRoleSystem : EntitySystem
         }
 
         if (ghostRole.MakeSentient)
-        //SS220 Sentience event language fix begin
-        {
-            MakeSentientWithLanguage(uid, ghostRole.AllowMovement, ghostRole.AllowSpeech);
-        }
-        //SS220 Sentience event language fix end
+            MakeSentientWithLanguage(uid, ghostRole.AllowMovement, ghostRole.AllowSpeech); //SS220 Sentience event language fix
 
         GhostRoleInternalCreateMindAndTransfer(args.Player, uid, uid, ghostRole);
         UnregisterGhostRole((uid, ghostRole));
