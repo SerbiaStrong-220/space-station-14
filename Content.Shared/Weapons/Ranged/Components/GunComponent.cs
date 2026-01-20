@@ -271,11 +271,11 @@ public sealed partial class GunComponent : Component
 
     /// SS220 crawling combat begin
     /// <summary>
-    /// Modifier for gun firerate when user is crawling. Higher penalty - lower firerate.
+    /// Modifier for gun firerate when user is crawling. Lower penalty - lower firerate.
     /// </summary>
     [DataField]
     [AutoNetworkedField]
-    public float CrawlingPenalty = 0.3f;
+    public float CrawlingPenalty = 0.7f;
     /// SS220 crawling combat end
 }
 
