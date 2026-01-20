@@ -5,12 +5,14 @@
   minLimit: 0
   maxLimit: 3
   loadouts:
+  #SS220 end of the new year - NewYearsCap #SS220 Merry Christmas and Happy New Year!
   # ss220 add station map to loadout start
   - HandheldStationMap
   # ss220 add station map to loadout end
   - FlowerWreath
   - Hairflower
   - Headphones
+  - Eyepatch #SS220 add eye patch to lodout
   - PlushieLizard
   - PlushieSpaceLizard
   - ThreeCandles

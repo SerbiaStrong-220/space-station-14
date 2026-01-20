@@ -1,5 +1,7 @@
 ﻿using Content.Server.Administration;
+using Content.Server.Chat.Managers;
 using Content.Shared.Administration;
+using Content.Shared.Chat;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Systems;
 using Robust.Server.Player;
@@ -13,6 +15,10 @@ namespace Content.Server.Objectives.Commands
         [Dependency] private readonly IPlayerManager _players = default!;
         [Dependency] private readonly SharedMindSystem _mind = default!;
         [Dependency] private readonly SharedObjectivesSystem _objectives = default!;
+
+        // ss220 add custom antag goals start
+        [Dependency] private readonly IChatManager _chatManager = default!;
+        // ss220 add custom antag goals end
 
         public override string Command => "rmobjective";
         public override void Execute(IConsoleShell shell, string argStr, string[] args)
@@ -37,9 +43,20 @@ namespace Content.Server.Objectives.Commands
 
             if (int.TryParse(args[1], out var i))
             {
-                shell.WriteLine(Loc.GetString(_mind.TryRemoveObjective(mindId, mind, i)
+                // ss220 add custom antag goals start
+                var objectiveRemoved = _mind.TryRemoveObjective(mindId, mind, i);
+
+                if (objectiveRemoved)
+                {
+                    var msg = Loc.GetString("ui-add-objective-chat-manager-announce");
+                    var wrappedMessage = Loc.GetString("chat-manager-server-wrap-message", ("message", msg));
+                    _chatManager.ChatMessageToOne(ChatChannel.Server, msg, wrappedMessage, default, false, session.Channel, colorOverride: Color.Red);
+                }
+
+                shell.WriteLine(Loc.GetString(objectiveRemoved
                     ? "cmd-rmobjective-success"
                     : "cmd-rmobjective-failed"));
+                // ss220 add custom antag goals end
             }
             else
             {

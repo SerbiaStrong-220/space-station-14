@@ -36,7 +36,7 @@ public sealed partial class CultYoggHealComponent : Component
     public TimeSpan? NextIncidentTime;
 
     [DataField, AutoNetworkedField]
-    public SpriteSpecifier.Rsi Sprite = new(new("SS220/Effects/cult_yogg_healing.rsi"), "healingEffect");
+    public SpriteSpecifier.Rsi Sprite = new(new("SS220/Effects/CultYogg/healing.rsi"), "healingEffect");
 
     /// <summary>
     /// At what damage will the heal be cancelled?

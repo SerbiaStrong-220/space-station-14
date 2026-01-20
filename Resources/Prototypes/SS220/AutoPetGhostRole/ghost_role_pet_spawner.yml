@@ -127,6 +127,20 @@
     - MobPossumMortyGhostRole
 
 - type: entity
+  name: Poppy Spawner
+  id: SpawnMobPossumPoppyGhostRole
+  parent: MarkerBase
+  suffix: Роль
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobPossumPoppyGhostRole
+
+- type: entity
   name: Morticia Spawner
   id: SpawnMobRaccoonMorticiaGhostRole
   parent: MarkerBase
@@ -225,3 +239,17 @@
   - type: ConditionalSpawner
     prototypes:
       - MobEN
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobMouseCancer
+  name: the spawner cancer mouse
+  suffix: AI
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobMouseCancer
