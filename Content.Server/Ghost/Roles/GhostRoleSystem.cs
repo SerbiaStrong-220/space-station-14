@@ -40,6 +40,8 @@ using Content.Shared.SS220.DarkReaper;
 using Content.Shared.Ghost.Roles.Components;
 using Content.Server.SS220.MindExtension;
 using Content.Shared.Roles.Components;
+using Content.Server.SS220.Language;
+using Content.Shared.SS220.Language.Components;
 
 namespace Content.Server.Ghost.Roles;
 
@@ -62,6 +64,7 @@ public sealed class GhostRoleSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly MindExtensionSystem _ghostExtension = default!; //SS220-mind-extension
+    [Dependency] private readonly LanguageSystem _language = default!; //SS220 Sentience event language fix
 
     private uint _nextRoleIdentifier;
     private bool _needsUpdateGhostRoleCount = true;
@@ -864,7 +867,17 @@ public sealed class GhostRoleSystem : EntitySystem
         RaiseLocalEvent(mob, spawnedEvent);
 
         if (ghostRole.MakeSentient)
+        //SS220 Sentience event language fix begin
+        {
             _mindSystem.MakeSentient(mob, ghostRole.AllowMovement, ghostRole.AllowSpeech);
+
+            if (ghostRole.AllowSpeech)
+            {
+                var languageComp = EnsureComp<LanguageComponent>(mob);
+                _language.AddLanguage((mob, languageComp), _language.GalacticLanguage, true);
+            }
+        }
+        //SS220 Sentience event language fix end
 
         EnsureComp<MindContainerComponent>(mob);
 
@@ -929,7 +942,17 @@ public sealed class GhostRoleSystem : EntitySystem
         }
 
         if (ghostRole.MakeSentient)
+        //SS220 Sentience event language fix begin
+        {
             _mindSystem.MakeSentient(uid, ghostRole.AllowMovement, ghostRole.AllowSpeech);
+
+            if (ghostRole.AllowSpeech)
+            {
+                var languageComp = EnsureComp<LanguageComponent>(uid);
+                _language.AddLanguage((uid, languageComp), _language.GalacticLanguage, true);
+            }
+        }
+        //SS220 Sentience event language fix end
 
         GhostRoleInternalCreateMindAndTransfer(args.Player, uid, uid, ghostRole);
         UnregisterGhostRole((uid, ghostRole));
