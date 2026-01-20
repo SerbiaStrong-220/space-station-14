@@ -1,0 +1,22 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  # it's a square so no rolling dough
+  parent: GasTankBase
+  id: ExtendedPlasmaTank
+  name: extended plasma tank
+  description: Contains even more dangerous plasma. Do not inhale. Extremely flammable. It can hold 10 L of gas.
+  components:
+  - type: Sprite
+    sprite: Objects/Tanks/plasma.rsi
+  - type: Item
+    sprite: Objects/Tanks/plasma.rsi
+  - type: GasTank
+    air:
+      volume: 10
+    outputPressure: 101.3
+  - type: Clothing
+    # TODO: remove?
+    sprite: Objects/Tanks/plasma.rsi
+    slots:
+      - None

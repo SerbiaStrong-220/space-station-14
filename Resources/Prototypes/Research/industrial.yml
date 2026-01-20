@@ -158,6 +158,7 @@
   - HellfireFreezerMachineCircuitBoard
   - PortableScrubberMachineCircuitBoard
   - HolofanProjector
+  - ExtendedPlasmaTank #SS220-extended-plasma-tank
   technologyPrerequisites:
   - AtmosphericTech
 
