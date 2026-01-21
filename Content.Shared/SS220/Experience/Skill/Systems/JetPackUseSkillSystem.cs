@@ -1,11 +1,13 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Actions;
+using Content.Shared.FixedPoint;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.SS220.Experience.Skill.Components;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Shared.SS220.Experience.Skill.Systems;
@@ -19,6 +21,10 @@ public sealed class JetPackUseSkillSystem : SkillEntitySystem
     private EntityQuery<JetpackComponent> _jetpackQuery;
     private EntityQuery<JetpackUserComponent> _jetpackUserQuery;
     private EntityQuery<ActiveJetpackComponent> _activeJetpackQuery;
+
+    private readonly ProtoId<SkillTreePrototype> _affectedSkillTree = "ExtravehicularActivity";
+    private readonly FixedPoint4 _learningPerFailure = 0.15f;
+    private readonly int LevelNotGainingExperience = 2;
 
     public override void Initialize()
     {
@@ -65,7 +71,7 @@ public sealed class JetPackUseSkillSystem : SkillEntitySystem
 
         if (!_jetpackQuery.TryGetComponent(userComponent.Jetpack, out var jetpackComponent)) return;
 
-        if (!_jetpackQuery.HasComp(userComponent.Jetpack)) return;
+        if (!_activeJetpackQuery.HasComp(userComponent.Jetpack)) return;
 
         if (jetpackComponent.ToggleActionEntity is not { } actionUid) return;
 
@@ -73,18 +79,22 @@ public sealed class JetPackUseSkillSystem : SkillEntitySystem
 
         if (!args.HasDirectionalMovement) return;
 
-        var predictedRandom = GetPredictedRandomDebug(new() { GetNetEntity(entity).Id }, out var seed);
-
+        var predictedRandom = GetPredictedRandomDebug(new() { GetNetEntity(entity).Id, GetNetEntity(actionUid).Id }, out var seed);
         if (!predictedRandom.Prob(entity.Comp.FailChance))
         {
-            Log.Debug($"I dropped on tick {GameTiming.CurTick} with seed {seed}!");
+            Log.Debug($"I dropped on tick {GameTiming.CurTick} in time {GameTiming.CurTime} with seed {seed} and chance {entity.Comp.FailChance}!");
             return;
         }
 
-        Log.Debug($"I run on tick {GameTiming.CurTick} with seed {seed} and chance {entity.Comp.FailChance}!");
+        Log.Debug($"I run on tick {GameTiming.CurTick} in time {GameTiming.CurTime}  with seed {seed} and chance {entity.Comp.FailChance}!");
 
         _actions.PerformAction(args.Entity.Owner, actionEntity);
         _actions.SetCooldown(actionEntity!, entity.Comp.JetPackFailureCooldown);
         _popup.PopupCursor(Loc.GetString(entity.Comp.JetPackFailurePopup), args.Entity.Owner, PopupType.LargeCaution);
+
+        Experience.TryGetSkillTreeLevel(args.Entity.Owner, _affectedSkillTree, out var targetLevel);
+
+        if (targetLevel < LevelNotGainingExperience)
+            TryChangeStudyingProgress(entity, _affectedSkillTree, _learningPerFailure);
     }
 }
