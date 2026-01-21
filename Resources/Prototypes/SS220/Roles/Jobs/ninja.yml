@@ -4,6 +4,7 @@
   description: job-description-ninja
   startingGear: SpaceNinjaGear
   experienceDefinition: NinjaRoleExperience
+  setPreference: false
   playTimeTracker: AntagNinja
   requirements:
   - !type:OverallPlaytimeRequirement

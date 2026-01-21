@@ -3,6 +3,7 @@
   name: job-name-dark-reaper
   description: job-description-dark-reaper
   experienceDefinition: NoExperience
+  setPreference: false
   playTimeTracker: AntagDarkReaper
   requirements:
   - !type:OverallPlaytimeRequirement
@@ -13,6 +14,7 @@
   name: job-name-revenant
   description: job-description-revenant
   experienceDefinition: NoExperience
+  setPreference: false
   playTimeTracker: AntagRevenant
   requirements:
   - !type:OverallPlaytimeRequirement

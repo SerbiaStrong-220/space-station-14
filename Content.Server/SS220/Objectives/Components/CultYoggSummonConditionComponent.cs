@@ -14,5 +14,5 @@ public sealed partial class CultYoggSummonConditionComponent : Component
     /// Amount of sacrafices required to summon a god
     /// </summary>
     [DataField]
-    public int ReqSacrAmount = 3;
+    public int ReqSacrAmount = 1;
 }

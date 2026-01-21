@@ -35,3 +35,6 @@ public record struct CorruptInteractionEvent()
 {
     public bool Handled = false;
 }
+
+[ByRefEvent]
+public record struct ProgressCultEvent;

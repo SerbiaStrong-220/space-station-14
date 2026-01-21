@@ -3,6 +3,7 @@
   name: job-name-spider-queen
   description: job-description-spider-queen
   experienceDefinition: NoExperience
+  setPreference: false
   playTimeTracker: AntagSpiderQueen
   requirements:
     - !type:DepartmentTimeRequirement
@@ -16,6 +17,7 @@
   name: job-name-spider-queen-servant
   description: job-description-spider-queen-servant
   experienceDefinition: NoExperience
+  setPreference: false
   playTimeTracker: AntagSpiderQueenServant
   requirements:
     - !type:OverallPlaytimeRequirement

@@ -5,6 +5,7 @@
   name: job-name-migo
   description: job-description-migo
   experienceDefinition: MiGoRoleExperience
+  setPreference: false
   playTimeTracker: CultistOfYogg
   requirements:
   - !type:OverallPlaytimeRequirement

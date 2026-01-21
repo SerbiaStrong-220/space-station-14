@@ -125,3 +125,17 @@
   - type: ConditionalSpawner
     prototypes:
       - MobBearSpaceGhostRoleGoal
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobPossumPoppy
+  name: the spawner Possum Poppy
+  suffix: AI
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobPossumPoppy

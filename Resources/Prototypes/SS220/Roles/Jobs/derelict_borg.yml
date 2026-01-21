@@ -3,6 +3,7 @@
   name: job-name-derelict-borg
   description: job-description-derelict-borg
   experienceDefinition: DerelictBorgRoleExperience
+  setPreference: false
   playTimeTracker: JobDerelictBorg
   requirements:
   - !type:OverallPlaytimeRequirement

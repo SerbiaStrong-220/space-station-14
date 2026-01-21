@@ -4,6 +4,7 @@
   description: job-description-aggressive-animals
   experienceDefinition: NoExperience
   playTimeTracker: AntahAggressiveAnimals
+  setPreference: false
   requirements:
   - !type:OverallPlaytimeRequirement
     time: 20h
@@ -14,6 +15,7 @@
   description: job-description-space-dragon
   playTimeTracker: AntagSpaceDragon
   experienceDefinition: NoExperience
+  setPreference: false
   requirements:
   - !type:OverallPlaytimeRequirement
     time: 20h

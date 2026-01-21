@@ -17,6 +17,7 @@
   name: job-name-syndicate-borg
   description: job-description-syndicate-borg
   experienceDefinition: SyndicateAssaultBorgRoleExperience
+  setPreference: false
   playTimeTracker: AntagSyndicateBorg # Your syndie/NT views also influence your work :pepeAngry:
   requirements:
     - !type:OverallPlaytimeRequirement
@@ -34,7 +35,11 @@
   id: SyndicateReinforcement
   name: job-name-syndicate-reinforcement
   description: job-description-syndicate-reinforcement
+<<<<<<< HEAD
   experienceDefinition: SyndicateReinforcementRoleExperience
+=======
+  setPreference: false
+>>>>>>> upstream/master
   playTimeTracker: AntagSyndicateReinforcement
   requirements:
     - !type:OverallPlaytimeRequirement

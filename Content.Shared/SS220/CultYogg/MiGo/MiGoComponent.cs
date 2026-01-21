@@ -3,6 +3,7 @@
 using Content.Shared.Alert;
 using Content.Shared.FixedPoint;
 using Content.Shared.Roles;
+using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -88,7 +89,7 @@ public sealed partial class MiGoComponent : Component
     /// How far from altar MiGo can start action
     /// </summary>
     [ViewVariables]
-    public float SaraficeStartRange = 1f;
+    public float SacrificeStartRange = 2f;
 
     #region Building
     /// <summary>
@@ -170,6 +171,12 @@ public sealed partial class MiGoComponent : Component
     /// </summary>
     [ViewVariables]
     public ProtoId<JobPrototype> JobName = "MiGoJob";
+
+    /// <summary>
+    /// Progression stage
+    /// </summary>
+    [ViewVariables, AutoNetworkedField]
+    public CultYoggStage CurrentStage = CultYoggStage.Initial;
 }
 
 [NetSerializable, Serializable]
