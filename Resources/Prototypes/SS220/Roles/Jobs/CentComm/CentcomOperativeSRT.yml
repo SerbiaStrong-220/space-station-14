@@ -23,8 +23,8 @@
         - NamesLastSRTMember
     - type: MindShield
     - type: GhostRole
-      name: ghost-role-information-centcom-SRT-name
-      description: ghost-role-information-centcom-SRT-description
+      name: ghost-role-information-centcom-srt-name
+      description: ghost-role-information-centcom-srt-description
     - type: GhostTakeoverAvailable
     - type: Loadout
       prototypes: [ CentcomOperativeSRTGear ]
@@ -34,7 +34,7 @@
 
 - type: job
   id: CentcomOperativeSRT
-  name: job-name-cc-bs-operative
+  name: job-name-cc-srt-operative
   description: job-description-centcomoff
   setPreference: false
   startingGear: CentcomOperativeSRTGear
@@ -56,7 +56,7 @@
 - type: startingGear
   id: CentcomOperativeSRTGear
   equipment:
-    jumpsuit: ClothingUniformJumpsuitBlueShieldOperative
+    jumpsuit: ClothingUniformJumpsuitSRTOperative
     shoes: ClothingShoesBootsBlueShieldJackFilled
     head: ClothingHeadBeretBlueshield
     eyes: ClothingEyesGlassesBlueShield

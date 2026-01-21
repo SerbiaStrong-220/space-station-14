@@ -126,7 +126,7 @@
   - !type:GroupLoadoutEffect
     proto: BlueShieldFive
   equipment:
-    jumpsuit: ClothingUniformJumpsuitBlueShieldOperative
+    jumpsuit: ClothingUniformJumpsuitSRTOperative
 
 - type: loadout
   id: BlueShieldJumpsuitShirt

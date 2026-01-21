@@ -58,9 +58,9 @@
 
 - type: entity
   parent: ClothingUniformJumpsuitBlueShieldCombez
-  id: ClothingUniformJumpsuitBlueShieldOperative
+  id: ClothingUniformJumpsuitSRTOperative
   name: the operative "Blue Shield" jumpsuit
-  description: The fashionable uniform of the Blue Shield operative - how good it is!
+  description: The fashionable uniform of the SRT operative - how good it is!
   suffix: For playtime
   components:
   - type: Sprite

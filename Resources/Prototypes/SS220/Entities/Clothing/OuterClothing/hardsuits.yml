@@ -38,7 +38,7 @@
   parent: ClothingOuterHardsuitBase
   id: ClothingOuterHardsuitHightBlueshield
   name: hight hardsuit "Blue Shield"
-  description: A special spacesuit designed for Blue Shield operatives. It will even protect you from a nuclear explosion!
+  description: A special spacesuit designed for SRT operatives. It will even protect you from a nuclear explosion!
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Hardsuits/blueshield_hight.rsi

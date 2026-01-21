@@ -38,11 +38,19 @@
   - Salvage
   - Security
   - Brig
+  - Lawyer
   - Cargo
   - Atmospherics
   - Cargo
   - Medical
   - Blueshield
+  - Paramedic
+  - Clown
+  - Librarian
+  - Psychologist
+  - Reporter
+  - Mime
+  - Musician
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]

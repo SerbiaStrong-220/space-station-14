@@ -88,7 +88,7 @@
   description: Карта, необходимая для доступа в различные части станций и кораблей.
   components:
     - type: IdCard
-      jobTitle: job-name-cc-bs-operative #SS220 (upstream 65 localization)
+      jobTitle: job-name-cc-srt-operative #SS220 (upstream 65 localization)
     - type: PresetIdCard
       job: CentcomOperativeSRT
 

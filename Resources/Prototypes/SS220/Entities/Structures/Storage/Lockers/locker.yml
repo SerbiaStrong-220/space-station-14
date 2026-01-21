@@ -152,9 +152,9 @@
     stateDoorClosed: deathsquadspecialist_door
 
 - type: entity
-  id: LockerBlueshieldOperative
+  id: LockerSRTOperative
   parent: LockerBaseSecure
-  name: Blue Shield operative's locker
+  name: SRT operative's locker
   components:
   - type: Sprite
     sprite: SS220/Structures/Storage/closet.rsi
@@ -164,7 +164,7 @@
     stateDoorOpen: steeldarklocker_open
     stateDoorClosed: blueshield_door
   - type: AccessReader
-    access: [ [ "CentralCommandBSO" ] ]
+    access: [ [ "CentralCommandSRT" ] ]
 
 #Командование
 - type: entity

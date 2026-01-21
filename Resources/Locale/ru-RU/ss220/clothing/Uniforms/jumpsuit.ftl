@@ -24,7 +24,7 @@ ent-ClothingUniformJumpsuitWaiter = униформа официанта
 
 ent-ClothingUniformJumpsuitBlueShieldCombez = комбинезон синего щита
     .desc = Стандартный комбинезон для синего щита.
-ent-ClothingUniformJumpsuitBlueShieldOperative = комбинезон оперативника синего щита
+ent-ClothingUniformJumpsuitSRTOperative = комбинезон оперативника ГСН
     .desc = Модная форма оперативника Синего Щита - как же она хороша!
     .suffix = За время в игре
 ent-ClothingUniformJumpsuitBlueShieldShirt = рубашка синего щита

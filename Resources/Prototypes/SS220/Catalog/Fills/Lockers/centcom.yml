@@ -246,9 +246,9 @@
 
 #BSO
 - type: entity
-  id: LockerBlueshieldOperativeFilled
+  id: LockerSRTOperativeFilled
   suffix: Filled
-  parent: LockerBlueshieldOperative
+  parent: LockerSRTOperative
   components:
   - type: StorageFill
     contents:
