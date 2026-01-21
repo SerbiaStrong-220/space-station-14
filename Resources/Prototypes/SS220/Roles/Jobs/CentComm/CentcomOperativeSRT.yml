@@ -59,9 +59,11 @@
     jumpsuit: ClothingUniformJumpsuitSRTOperative
     shoes: ClothingShoesBootsBlueShieldJackFilled
     head: ClothingHeadBeretBlueshield
-    eyes: ClothingEyesGlassesBlueShield
+    eyes: ClothingEyesGlassesBallisticBlueShield
+    mask: ClothingMaskNeckGaiter
+    neck: ClothingNeckCloakCape
     gloves: ClothingHandsGlovesPowergloveDisabler
-    outerClothing: ClothingOuterSRTCoat
+    outerClothing: ClothingOuterArmorBlueShieldBulletproof
     id: CentcomOperativeSRTPDA
     ears: ClothingHeadsetAltCentComm
     pocket1: WeaponEnergyGunRevolverSelfRecharger

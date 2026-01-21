@@ -148,7 +148,7 @@
   - type: MeleeWeapon
     damage:
       types:
-        Blunt: 7
+        Blunt: 12
     bluntStaminaDamageFactor: 2.0
     mustBeEquippedToUse: true
   - type: StaminaDamageOnHit
@@ -196,7 +196,9 @@
           False: {state: icon}
   - type: ToggleClothing
     action: ActionTogglePowergloveDisabler
-
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 50
 
 - type: entity
   id: ActionTogglePowergloveDisabler
