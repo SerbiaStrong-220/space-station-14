@@ -9,8 +9,8 @@
   - type: Item
   - type: Battery
     pricePerJoule: 0.15
-    maxCharge: 800
-    startingCharge: 800
+    maxCharge: 1000
+    startingCharge: 1000
   - type: PowerCell
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/krs_magblaster.rsi
@@ -41,7 +41,7 @@
   - type: PowerCellVisuals
   - type: Riggable
 
-# Standard 800 charge battery
+# Standard 1000 charge battery
 - type: entity
   parent: BasePowerCellBlaster
   id: PowerCellBlaster
@@ -49,7 +49,7 @@
   description: Standard energy cell for blaster weapons.
   suffix: Standard
 
-# Powerful 1200 charge battery
+# Powerful 1400 charge battery
 - type: entity
   parent: BasePowerCellBlaster
   id: PowerCellBlasterHighCapacity
@@ -58,8 +58,8 @@
   suffix: High-Capacity
   components:
   - type: Battery
-    maxCharge: 1200
-    startingCharge: 1200
+    maxCharge: 1400
+    startingCharge: 1400
 
 # Blank version for crafting/printing
 - type: entity

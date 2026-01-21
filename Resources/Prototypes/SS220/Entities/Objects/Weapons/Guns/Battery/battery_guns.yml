@@ -99,7 +99,7 @@
     autoRechargePause: true
     autoRechargePauseTime: 10
 
-#Base KR
+# Base KR
 - type: entity
   parent: BaseWeaponPowerCell
   id: BaseWeaponBlaster
@@ -135,7 +135,6 @@
     fireRate: 6
     minAngle: 17
     maxAngle: 29
-    projectileSpeed: 30
     angleIncrease: 3
     angleDecay: 16
     soundGunshot:
@@ -152,16 +151,19 @@
     availableModes:
       - Burst
   - type: ProjectileBatteryAmmoProvider
-    proto: BulletBlasterAlt
+    proto: BulletBlasterBolt
     fireCost: 50
   - type: BatteryWeaponFireModes
     fireModes:
-      - proto: BulletBlasterAlt
+      - proto: BulletBlasterBolt
         name: firemode-name-blaster
-        fireCost: 50
+        fireCost: 62.5
+      - proto: BulletBlasterBoltPiercingWindow
+        name: firemode-name-blaster-piercing-window
+        fireCost: 62.5
       - proto: BulletDisablerSmg
         name: firemode-name-disabler
-        fireCost: 32
+        fireCost: 40
   - type: ItemSlots
     slots:
       cell_slot:
@@ -187,15 +189,15 @@
       - FullAuto
   - type: ProjectileBatteryAmmoProvider
     proto: BulletBlasterPulse
-    fireCost: 48
+    fireCost: 87.5
   - type: BatteryWeaponFireModes
     fireModes:
       - proto: BulletBlasterPulse
         name: firemode-name-blaster
-        fireCost: 48
+        fireCost: 87.5
       - proto: BulletDisablerSmg
         name: firemode-name-disabler
-        fireCost: 24
+        fireCost: 40
   - type: ItemSlots
     slots:
       cell_slot:
@@ -240,6 +242,9 @@
     magState: mag
     steps: 5
     zeroVisible: false
+  - type: GunWieldBonus
+    minAngle: -2
+    maxAngle: -13
   - type: ProjectileBatteryAmmoProvider
     proto: BulletLaserSMG
     fireCost: 48

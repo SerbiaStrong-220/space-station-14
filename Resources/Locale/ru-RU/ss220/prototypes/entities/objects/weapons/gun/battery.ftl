@@ -4,6 +4,7 @@ firemode-name-heal = режим для лечения
 firemode-name-laser-alt = Лазер
 firemode-name-disabler-alt = Оглушение
 firemode-name-blaster = Бластер
+firemode-name-blaster-piercing-window = Пролетающий окна бластер
 firemode-name-enhanced = Сконцентрированный
 
 ent-WeaponPulseRifle2 = пульсовая винтовка
