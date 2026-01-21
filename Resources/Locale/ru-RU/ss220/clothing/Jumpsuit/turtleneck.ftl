@@ -9,7 +9,6 @@ ent-ClothingUniformJumpsuitChemistTurtleneck = водолазка химика
     .suffix = За время в игре
 ent-ClothingUniformJumpsuitBlueShieldTurtle = водолазка синего щита
     .desc = Стильная водолазка, которая поможет офицеру "Синий Щит" быть готовым к любой экстремальной ситуации. Высококачественные материалы и слой брони делают ее незаменимой на передовой.
-    .suffix = За время в игре
 ent-ClothingUniformJumpsuitWardenTurtleneck = водолазка смотрителя
     .desc = Специальная водолазка для борьбы с беспорядками.
     .suffix = За время в игре

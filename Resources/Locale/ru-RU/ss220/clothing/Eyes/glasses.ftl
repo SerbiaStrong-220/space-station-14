@@ -16,6 +16,9 @@ ent-ClothingEyesGlassesBlueShield = очки синего щита
 ent-ClothingEyesBlueShieldTacticGlasses = тактические очки синего щита
     .desc = Тактические очки для боевых ситуаций.
 
+ent-ClothingEyesGlassesBallisticBlueShield = { ent-ClothingEyesGlassesBallistic }
+    .desc = Эти очки не защитят ваши глаза от осколков, но дополнят ваш тактический образ. Имеют функции стандартных очков синего щита.
+
 ent-ClothingEyesGlassesBallistic = баллистические очки
     .desc = Эти очки не защитят ваши глаза от осколков, но дополнят ваш тактический образ. Имеют функции стандартных очков СБ.
 

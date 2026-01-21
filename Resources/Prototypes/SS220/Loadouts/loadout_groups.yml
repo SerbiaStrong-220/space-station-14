@@ -173,13 +173,15 @@
   loadouts:
   - BlueshieldGlasses
   - BlueshieldTacticGlasses
+  - BlueshieldBallisticGlasses
 
 - type: loadoutGroup
   id: BlueShieldMask
   name: loadout-group-blueshield-mask
   minLimit: 0
   loadouts:
-  - BlueshieldMaslBalaclava
+  - MaskBlueshieldGaiter
+  - MaskBlueshieldBalaclava
 
 - type: loadoutGroup
   id: BlueShieldNeck
@@ -219,6 +221,14 @@
   hidden: true
   loadouts:
   - BlueShieldBackpack
+
+- type: loadoutGroup
+  id: BlueShieldShoes
+  name: loadout-group-blueshield-shoes
+  loadouts:
+  - JackBoots
+  - BlueShieldJackBoots
+  - CombatBoots
   # Офицер "Синий Щит" (Конец)
 #! Юридический (Конец)
 

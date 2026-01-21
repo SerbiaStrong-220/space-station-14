@@ -99,6 +99,17 @@
     sprite: SS220/Clothing/Eyes/Glasses/blueshield_tactic.rsi
 
 - type: entity
+  parent: ClothingEyesGlassesBlueShield
+  id: ClothingEyesGlassesBallisticBlueShield
+  name: ballistic glasses
+  description: These glasses won't protect your eyes from splinters, but they will complement your tactical look. They have the functions of standard blue shield glasses.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Eyes/Glasses/blueshield_ballistic.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Eyes/Glasses/blueshield_ballistic.rsi
+
+- type: entity
   parent: [ClothingEyesBase, ShowMedicalIcons]
   id: ClothingEyesCMOCorporate
   name: corporate glasses of chief medical officer

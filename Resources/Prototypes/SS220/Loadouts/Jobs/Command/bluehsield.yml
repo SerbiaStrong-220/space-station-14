@@ -2,20 +2,6 @@
 
 # Job Time
 - type: loadoutEffectGroup
-  id: BlueShieldTurtleneck
-  effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:RoleTimeRequirement
-      role: JobBlueShield
-      time: 108000 # 30 hrs
-  sponsorTierLoadoutEffects:
-  - !type:GroupLoadoutEffect
-    proto: SeniorDevTeamTier
-  - !type:GroupLoadoutEffect
-    proto: AdministratorSponsorTier
-
-- type: loadoutEffectGroup
   id: BlueShieldFive
   effects:
   - !type:JobRequirementLoadoutEffect
@@ -104,9 +90,22 @@
   equipment:
     eyes: ClothingEyesBlueShieldTacticGlasses
 
+- type: loadout
+  id: BlueshieldBallisticGlasses
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BlueShieldFive
+  equipment:
+    eyes: ClothingEyesGlassesBallisticBlueShield
+
 # Mask
 - type: loadout
-  id: BlueshieldMaslBalaclava
+  id: MaskBlueshieldGaiter
+  equipment:
+    mask: ClothingMaskNeckGaiter
+
+- type: loadout
+  id: MaskBlueshieldBalaclava
   equipment:
     mask: ClothingMaskBalaclava2
 
@@ -115,6 +114,11 @@
   id: BlueShieldCombez
   equipment:
     jumpsuit: ClothingUniformJumpsuitBlueShieldCombez
+
+- type: loadout
+  id: BlueShieldJumpsuitTurtle
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitBlueShieldTurtle
 
 - type: loadout
   id: BlueShieldJumpsuitOperative
@@ -147,14 +151,6 @@
     proto: BlueShieldHundred
   equipment:
     jumpsuit: ClothingUniformJumpsuitBlueShieldCombat
-
-- type: loadout
-  id: BlueShieldJumpsuitTurtle
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: BlueShieldTurtleneck
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitBlueShieldTurtle
 
 # neck
 - type: loadout
@@ -189,3 +185,9 @@
   id: BlueShieldBackpack
   equipment:
     back: ClothingBackpackBlueShield
+
+# Shoes
+- type: loadout
+  id: BlueShieldJackBoots
+  equipment:
+    shoes: ClothingShoesBootsBlueShieldJackFilled

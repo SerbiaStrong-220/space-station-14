@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
-  "copyright": "Sprited by okroshka59 & kit0vras (Discord) for SS220, repalette by Estkemran (Github) for SS220",
+  "copyright": "Drawn by vimenant2(discord) for SS220, repalette by Estkemran (Github) for SS220",
   "size": {
     "x": 32,
     "y": 32
@@ -11,11 +11,15 @@
       "name": "icon"
     },
     {
-      "name": "equipped-MASK",
+      "name": "equipped-EYES",
+      "directions": 4
+    },
+	{
+      "name": "equipped-EYES-secdog",
       "directions": 4
     },
     {
-      "name": "equipped-MASK-hamster",
+      "name": "equipped-EYES-hamster",
       "directions": 4
     },
     {
@@ -24,14 +28,6 @@
     },
     {
       "name": "inhand-right",
-      "directions": 4
-    },
-    {
-      "name": "equipped-MASK-reptilian",
-      "directions": 4
-    },
-    {
-      "name": "equipped-MASK-vox",
       "directions": 4
     }
   ]

@@ -53,7 +53,6 @@
 - type: startingGear
   id: BlueShieldGear
   equipment:
-    shoes: ClothingShoesBootsBlueShieldJackFilled
     id: BlueShieldPDA
     ears: ClothingHeadsetBlueShield
     pocket1: WeaponPistolMk58Nonlethal

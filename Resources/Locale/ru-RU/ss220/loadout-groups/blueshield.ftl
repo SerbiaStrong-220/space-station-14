@@ -6,3 +6,4 @@ loadout-group-blueshield-outerclothing = Офицер "Синий Щит", ве�
 loadout-group-blueshield-belt = Офицер "Синий Щит", пояс
 loadout-group-blueshield-head = Офицер "Синий Щит", голова
 loadout-group-blueshield-backpack = Офицер "Синий Щит", спина
+loadout-group-blueshield-shoes = Офицер "Синий Щит", обувь

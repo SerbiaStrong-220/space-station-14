@@ -28,7 +28,7 @@
 
   # Главный врач
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformFoldableBase] 
+  parent: [ClothingUniformBase, ClothingUniformFoldableBase]
   id: ClothingUniformJumpsuitCMOCorporate
   name: corporate CMO Jumpsuit
   description: «A beautiful, stylish suit of a real chief medical officer. It emphasises the person's nature and the beauty of his charisma...» Nothing further on the unopened label.
@@ -40,7 +40,6 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/cmo_corp.rsi
 
   # Синий щит
-
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitBlueShieldCombez
@@ -58,7 +57,7 @@
         Piercing: 0.9
 
 - type: entity
-  parent: ClothingUniformJumpsuitBlueShieldCombez #Чтобы наследовать резисты
+  parent: ClothingUniformJumpsuitBlueShieldCombez
   id: ClothingUniformJumpsuitBlueShieldOperative
   name: the operative "Blue Shield" jumpsuit
   description: The fashionable uniform of the Blue Shield operative - how good it is!
@@ -79,10 +78,6 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield_combat.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield_combat.rsi
-  - type: Armor
-    modifiers:
-      coefficients:
-        Piercing: 0.85
 
 - type: entity
   parent: ClothingUniformBaseFoldable
@@ -106,7 +101,7 @@
   id: ClothingUniformJumpsuitBlueShieldShirtTie
 
 - type: entity
-  parent: ClothingUniformJumpsuitBlueShieldCombez #Чтобы наследовать резисты
+  parent: ClothingUniformJumpsuitBlueShieldCombez
   id: ClothingUniformJumpsuitBlueShieldTShirt
   name: the "Blue Shield" t-shirt
   description: A black T-shirt with short sleeves, paired with black trousers made of durable material. Perfect for relaxing in the safe sector of NanoTrasen.
@@ -116,7 +111,6 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield_t-shirt.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield_t-shirt.rsi
-
 
 # Юридический
 - type: entity
