@@ -154,14 +154,14 @@
 
 # neck
 - type: loadout
-  id: BlueShieldNeckCloak
+  id: CloakCape
   equipment:
-    neck: ClothingCloakBlueShield
+    neck: ClothingNeckCloakCape
 
 - type: loadout
-  id: ProtectGearBlue
+  id: CloakCapeBlue
   equipment:
-    neck: ClothingNeckProtectBundleBlue
+    neck: ClothingNeckCloakCapeBlue
 
 # Outer clothing
 - type: loadout

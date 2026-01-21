@@ -188,7 +188,8 @@
   name: loadout-group-blueshield-neck
   minLimit: 0
   loadouts:
-  - BlueShieldNeckCloak
+  - CloakCape
+  - CloakCapeBlue
 
 - type: loadoutGroup
   id: BlueShieldJumpsuit

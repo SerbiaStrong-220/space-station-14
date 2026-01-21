@@ -21,7 +21,6 @@ ent-ClothingUniformRedsoldier = рубашка армии Республики
 ent-ClothingUniformJumpsuitWaiter = униформа официанта
     .desc = Униформа мальчика на побегушках.
 
-
 ent-ClothingUniformJumpsuitBlueShieldCombez = комбинезон синего щита
     .desc = Стандартный комбинезон для синего щита.
 ent-ClothingUniformJumpsuitSRTOperative = комбинезон оперативника ГСН
