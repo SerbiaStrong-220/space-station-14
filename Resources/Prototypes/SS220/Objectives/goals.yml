@@ -25,3 +25,7 @@
 - type: stationGoal
   id: ComplexPVO
   text: station-goal-complexPVO
+
+- type: stationGoal
+  id: SportComplex
+  text: station-goal-sports
