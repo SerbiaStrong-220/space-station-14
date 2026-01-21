@@ -155,7 +155,7 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     private void RelayEventToSkillEntity<T>(Entity<ExperienceComponent> entity, ref T args) where T : notnull
     {
-        if (!entity.Comp.SkillEntityInitialized)
+        if (!entity.Comp.SkillEntityInitialized || MetaData(entity).EntityLifeStage >= EntityLifeStage.Terminating)
             return;
 
         // Client sometime need time to figure out pvs containers
