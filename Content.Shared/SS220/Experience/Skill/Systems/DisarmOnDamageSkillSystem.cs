@@ -52,7 +52,7 @@ public sealed class DisarmOnDamageSkillSystem : SkillEntitySystem
         TryChangeStudyingProgress(entity, _affectedSkillTree, DamageSpecifier.GetPositive(args.DamageDelta).GetTotal() / _damageToExperience);
 
         // And after that we check if we lost our precious items
-        if (!GetPredictedRandom(new() { GetNetEntity(entity).Id, args.DamageDelta.GetTotal().Int() }).Prob(entity.Comp.DisarmChance))
+        if (!GetPredictedRandomOnCurTick(new() { GetNetEntity(entity).Id, args.DamageDelta.GetTotal().Int() }).Prob(entity.Comp.DisarmChance))
             return;
 
         if (_hands.EnumerateHeld(experienceEntity.Value.Owner).Count() == 0)

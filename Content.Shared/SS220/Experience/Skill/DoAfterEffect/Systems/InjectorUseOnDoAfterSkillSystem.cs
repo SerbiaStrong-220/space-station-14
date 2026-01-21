@@ -22,7 +22,7 @@ public sealed class InjectorUseOnDoAfterSkillSystem : BaseDoAfterSkillSystem<Inj
         if (args.Args.Target is null)
             return;
 
-        if (!GetPredictedRandom(new() { GetNetEntity(entity).Id, GetNetEntity(args.Args.User).Id }).Prob(entity.Comp.FailureChance))
+        if (!GetPredictedRandomOnCurTick(new() { GetNetEntity(entity).Id, GetNetEntity(args.Args.User).Id }).Prob(entity.Comp.FailureChance))
             return;
 
         if (ResolveExperienceEntityFromSkillEntity(entity.Owner, out var experienceEntity))

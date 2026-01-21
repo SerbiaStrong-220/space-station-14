@@ -2,6 +2,7 @@
 
 using Content.Shared.Actions;
 using Content.Shared.FixedPoint;
+using Content.Shared.Mobs;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
@@ -67,6 +68,10 @@ public sealed class JetPackUseSkillSystem : SkillEntitySystem
 
     private void OnMoveInput(Entity<JetPackUseSkillComponent> entity, ref MoveInputEvent args)
     {
+        if ((entity.Comp.LastInputTick == args.Entity.Comp.LastInputTick.Value || args.Entity.Comp.LastInputTick.Value == 0)
+            && !GameTiming.InPrediction)
+            return;
+
         if (!_jetpackUserQuery.TryGetComponent(args.Entity, out var userComponent)) return;
 
         if (!_jetpackQuery.TryGetComponent(userComponent.Jetpack, out var jetpackComponent)) return;
@@ -79,18 +84,16 @@ public sealed class JetPackUseSkillSystem : SkillEntitySystem
 
         if (!args.HasDirectionalMovement) return;
 
-        var predictedRandom = GetPredictedRandomDebug(new() { GetNetEntity(entity).Id, GetNetEntity(actionUid).Id }, out var seed);
-        if (!predictedRandom.Prob(entity.Comp.FailChance))
-        {
-            Log.Debug($"I dropped on tick {GameTiming.CurTick} in time {GameTiming.CurTime} with seed {seed} and chance {entity.Comp.FailChance}!");
-            return;
-        }
+        Log.Debug($"Got MoveInput args tick {args.Entity.Comp.LastInputTick} current game tick {GameTiming.CurTick}!");
 
-        Log.Debug($"I run on tick {GameTiming.CurTick} in time {GameTiming.CurTime}  with seed {seed} and chance {entity.Comp.FailChance}!");
+        entity.Comp.LastInputTick = args.Entity.Comp.LastInputTick.Value;
+
+        var predictedRandom = GetPredictedRandom(new() { GetNetEntity(entity).Id, (int)entity.Comp.LastInputTick, GetNetEntity(actionUid).Id });
+        if (!predictedRandom.Prob(entity.Comp.FailChance)) return;
 
         _actions.PerformAction(args.Entity.Owner, actionEntity);
         _actions.SetCooldown(actionEntity!, entity.Comp.JetPackFailureCooldown);
-        _popup.PopupCursor(Loc.GetString(entity.Comp.JetPackFailurePopup), args.Entity.Owner, PopupType.LargeCaution);
+        _popup.PopupPredictedCursor(Loc.GetString(entity.Comp.JetPackFailurePopup), args.Entity.Owner, PopupType.LargeCaution);
 
         Experience.TryGetSkillTreeLevel(args.Entity.Owner, _affectedSkillTree, out var targetLevel);
 

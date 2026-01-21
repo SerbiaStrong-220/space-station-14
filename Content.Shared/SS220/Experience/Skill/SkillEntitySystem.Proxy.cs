@@ -81,10 +81,7 @@ public partial class SkillEntitySystem : EntitySystem
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public System.Random GetPredictedRandom(in List<int> valuesForSeed)
     {
-        var toCombine = new List<int>(valuesForSeed);
-        toCombine.Add((int)GameTiming.CurTick.Value);
-
-        var seed = SharedRandomExtensions.HashCodeCombine(toCombine);
+        var seed = SharedRandomExtensions.HashCodeCombine(valuesForSeed);
         return new System.Random(seed);
     }
 
@@ -92,12 +89,12 @@ public partial class SkillEntitySystem : EntitySystem
     /// Random that gives same result on client and on server
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public System.Random GetPredictedRandomDebug(in List<int> valuesForSeed, out int seed)
+    public System.Random GetPredictedRandomOnCurTick(in List<int> valuesForSeed)
     {
         var toCombine = new List<int>(valuesForSeed);
         toCombine.Add((int)GameTiming.CurTick.Value);
 
-        seed = SharedRandomExtensions.HashCodeCombine(toCombine);
+        var seed = SharedRandomExtensions.HashCodeCombine(toCombine);
         return new System.Random(seed);
     }
 }

@@ -20,6 +20,8 @@ public sealed class WeightlessChangingReadySkillSystem : SkillEntitySystem
 
     private const string HardSuitInventorySlot = "outerClothing";
 
+    private const uint SpawnTickBorder = 20;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -32,6 +34,9 @@ public sealed class WeightlessChangingReadySkillSystem : SkillEntitySystem
 
     private void OnWeightlessChanged(Entity<WeightlessChangingReadySkillComponent> entity, ref WeightlessnessChangedEvent args)
     {
+        // it used to prevent annoying falling when gravity engine fails to enable at time
+        if (GameTiming.CurTick.Value < entity.Comp.CreationTick.Value + SpawnTickBorder) return;
+
         // Okay this is how I deal with prediction resetting
         // If you skip this check you will add a KnockedDownComponent during resetting procedure
         if (GameTiming.ApplyingState)
@@ -48,7 +53,7 @@ public sealed class WeightlessChangingReadySkillSystem : SkillEntitySystem
                         ? entity.Comp.HardsuitFallChance
                         : entity.Comp.WithoutHardsuitFallChance;
 
-        var predictedRandom = GetPredictedRandom(new() { GetNetEntity(entity).Id });
+        var predictedRandom = GetPredictedRandomOnCurTick(new() { GetNetEntity(entity).Id });
 
         if (!predictedRandom.Prob(chance))
             return;

@@ -10,6 +10,8 @@ namespace Content.Shared.SS220.Experience.Skill.Components;
 // TODO
 public sealed partial class JetPackUseSkillComponent : Component
 {
+    public uint LastInputTick;
+
     [DataField]
     [AutoNetworkedField]
     public float FailChance = 0.1f;
