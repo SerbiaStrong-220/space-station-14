@@ -1,0 +1,73 @@
+- type: entity
+  id: EqualMediumTierMiner
+  parent: BaseResourceMiner
+  suffix: equal medium tier
+  components:
+  - type: ResourceMiner
+    generationAmount:
+      Gold: 20
+      Silver: 20
+
+- type: entity
+  id: GoldMediumTierMiner
+  parent: BaseResourceMiner
+  suffix: more gold medium tier
+  components:
+  - type: ResourceMiner
+    generationAmount:
+      Gold: 25
+      Silver: 15
+
+- type: entity
+  id: SilverMediumTierMiner
+  parent: BaseResourceMiner
+  suffix: more silver medium tier
+  components:
+  - type: ResourceMiner
+    generationAmount:
+      Gold: 15
+      Silver: 25
+
+- type: entity
+  id: SteelMediumTierMiner
+  parent: BaseResourceMiner
+  suffix: steel medium tier
+  components:
+  - type: ResourceMiner
+    generationAmount:
+      Gold: 10
+      Silver: 10
+      Steel: 20
+
+- type: entity
+  id: GlassMediumTierMiner
+  parent: BaseResourceMiner
+  suffix: glass medium tier
+  components:
+  - type: ResourceMiner
+    generationAmount:
+      Gold: 10
+      Silver: 10
+      Glass: 20
+
+- type: entity
+  id: PlasmaMediumTierMiner
+  parent: BaseResourceMiner
+  suffix: plasma medium tier
+  components:
+  - type: ResourceMiner
+    generationAmount:
+      Gold: 10
+      Silver: 10
+      Plasma: 10
+
+- type: entity
+  id: UraniumMediumTierMiner
+  parent: BaseResourceMiner
+  suffix: uranium medium tier
+  components:
+  - type: ResourceMiner
+    generationAmount:
+      Gold: 10
+      Silver: 10
+      Uranium: 10

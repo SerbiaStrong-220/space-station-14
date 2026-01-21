@@ -1,0 +1,94 @@
+- type: entity
+  name: low tier resource miners
+  id: LowTierResourceMinerSpawner
+  suffix: low tier
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - sprite: SS220/Structures/Machines/resource_miner.rsi
+      offset: 0, 1
+      state: base
+    - state: green
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: LowTierResourceMinerTable
+
+- type: entity
+  name: medium tier resource miners
+  id: MediumTierResourceMinerSpawner
+  suffix: medium tier
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - sprite: SS220/Structures/Machines/resource_miner.rsi
+      offset: 0, 1
+      state: base
+    - state: blue
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: MediumTierResourceMinerTable
+
+- type: entity
+  name: high tier resource miners
+  id: HighTierResourceMinerSpawner
+  suffix: high tier
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - sprite: SS220/Structures/Machines/resource_miner.rsi
+      offset: 0, 1
+      state: base
+    - state: red
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: HighTierResourceMinerTable
+
+- type: entity
+  name: all random resource miners
+  id: AllTierResourceMinerSpawner
+  suffix: all tier
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - sprite: SS220/Structures/Machines/resource_miner.rsi
+      offset: 0, 1
+      state: base
+    - state: pink
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - !type:NestedSelector
+        tableId: LowTierResourceMinerTable
+        weight: 6
+      - !type:NestedSelector
+        tableId: MediumTierResourceMinerTable
+        weight: 4
+      - !type:NestedSelector
+        tableId: HighTierResourceMinerTable
+        weight: 2
+
+- type: entity
+  name: equal random resource miners
+  id: EqualAllTierResourceMinerSpawner
+  suffix: all tier equal
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - sprite: SS220/Structures/Machines/resource_miner.rsi
+      offset: 0, 1
+      state: base
+    - state: pink
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - !type:NestedSelector
+        tableId: LowTierResourceMinerTable
+      - !type:NestedSelector
+        tableId: MediumTierResourceMinerTable
+      - !type:NestedSelector
+        tableId: HighTierResourceMinerTable
