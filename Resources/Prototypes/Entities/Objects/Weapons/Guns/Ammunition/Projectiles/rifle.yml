@@ -7,7 +7,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 29 #ss220lowTTKUpdate
+        Piercing: 22 #ss220lowTTKUpdate
 
 - type: entity
   id: BulletRiflePractice
