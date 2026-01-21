@@ -9,8 +9,6 @@ namespace Content.Shared.SS220.Experience.Skill.Systems;
 
 public sealed class MedicineMachineUseSkillIssueSystem : SkillEntitySystem
 {
-    [Dependency] private readonly ExperienceSystem _experience = default!;
-
     private readonly ProtoId<SkillTreePrototype> _affectedSkillTree = "Medicine";
     private readonly FixedPoint4 _progressForDefibrillatorUse = 0.05;
 

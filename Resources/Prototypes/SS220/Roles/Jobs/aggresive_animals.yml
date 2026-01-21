@@ -19,6 +19,3 @@
   requirements:
   - !type:OverallPlaytimeRequirement
     time: 20h
-
-
-

@@ -10,8 +10,6 @@ namespace Content.Shared.SS220.Experience.Skill.Systems;
 
 public sealed class DisarmChanceChangerSkillSystem : SkillEntitySystem
 {
-    [Dependency] private readonly ExperienceSystem _experience = default!;
-
     private readonly ProtoId<SkillTreePrototype> _affectedSkillTree = "CombatTraining";
 
     private readonly FixedPoint4 _progressForDisarming = 0.03;

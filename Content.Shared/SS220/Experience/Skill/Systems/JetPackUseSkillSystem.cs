@@ -2,7 +2,6 @@
 
 using Content.Shared.Actions;
 using Content.Shared.FixedPoint;
-using Content.Shared.Mobs;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
@@ -25,7 +24,7 @@ public sealed class JetPackUseSkillSystem : SkillEntitySystem
 
     private readonly ProtoId<SkillTreePrototype> _affectedSkillTree = "ExtravehicularActivity";
     private readonly FixedPoint4 _learningPerFailure = 0.15f;
-    private readonly int LevelNotGainingExperience = 2;
+    private readonly int _levelNotGainingExperience = 2;
 
     public override void Initialize()
     {
@@ -97,7 +96,7 @@ public sealed class JetPackUseSkillSystem : SkillEntitySystem
 
         Experience.TryGetSkillTreeLevel(args.Entity.Owner, _affectedSkillTree, out var targetLevel);
 
-        if (targetLevel < LevelNotGainingExperience)
+        if (targetLevel < _levelNotGainingExperience)
             TryChangeStudyingProgress(entity, _affectedSkillTree, _learningPerFailure);
     }
 }
