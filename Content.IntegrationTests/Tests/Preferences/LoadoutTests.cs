@@ -34,7 +34,7 @@ public sealed class LoadoutTests
 
 - type: job
   id: LoadoutTester
-  experienceDefinition: NoExperience # S220-experience-update
+  experienceDefinition: NoExperience # SS220-experience-update
   playTimeTracker: PlayTimeLoadoutTester
 ";
 

@@ -39,7 +39,7 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
     public ProtoId<SkillTreePrototype> SkillTreeId { private set; get; }
 
     private SkillTreeInfo? _info;
-    private SkillTreeInfo? _overrideInfo = new();
+    private SkillTreeInfo? _overrideInfo;
 
     private string _skillTreeName = string.Empty;
     private List<int> _maxLevels = [];
@@ -165,9 +165,6 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
 
     private void UnpackTreeProto(ProtoId<SkillTreePrototype> protoId)
     {
-        if (_prototype is null)
-            return;
-
         var proto = _prototype.Index(protoId);
 
         SkillTreeId = protoId;
@@ -180,12 +177,7 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
 
     private Control? MakeTooltip(Control hover, SkillTreeInfo info)
     {
-        var skillTreeIndex = info.SkillTreeIndex;
-
-        if (_prototype is null)
-            return null;
-
-        var proto = _prototype.Index(_skillsTree[skillTreeIndex]);
+        var proto = _prototype.Index(_skillsTree[info.SkillTreeIndex]);
 
         StringBuilder builder = new();
 

@@ -56,30 +56,30 @@ public sealed class StationJobsTest
 - type: job
   id: TAssistant
   playTimeTracker: PlayTimeDummyAssistant
-  experienceDefinition: NoExperience # S220-experience-update
+  experienceDefinition: NoExperience # SS220-experience-update
 
 - type: job
   id: TMime
   weight: 20
   playTimeTracker: PlayTimeDummyMime
-  experienceDefinition: NoExperience # S220-experience-update
+  experienceDefinition: NoExperience # SS220-experience-update
 
 - type: job
   id: TClown
   weight: -10
   playTimeTracker: PlayTimeDummyClown
-  experienceDefinition: NoExperience # S220-experience-update
+  experienceDefinition: NoExperience # SS220-experience-update
 
 - type: job
   id: TCaptain
   weight: 10
   playTimeTracker: PlayTimeDummyCaptain
-  experienceDefinition: NoExperience # S220-experience-update
+  experienceDefinition: NoExperience # SS220-experience-update
 
 - type: job
   id: TChaplain
   playTimeTracker: PlayTimeDummyChaplain
-  experienceDefinition: NoExperience # S220-experience-update
+  experienceDefinition: NoExperience # SS220-experience-update
 ";
 
     private const int StationCount = 100;
