@@ -13,6 +13,7 @@
     - id: ClothingShoesBootsMagDQ
     - id: ClothingHeadsetAltCentComm
     - id: ClothingBackpackDeathSquadOperativeFilled
+    - id: ClothingOuterHardsuitDeathsquad
 
 - type: entity
   id: LockerDeathsquadCommanderFilled
@@ -316,3 +317,4 @@
       - id: ClothingEyesGlassesCommand
       - id: ClothingShoesBootsJack
       - id: ClothingUniformJumpsuitLawyerBlackSyndieLobbyingBundle
+      - id: DoorRemoteCustom

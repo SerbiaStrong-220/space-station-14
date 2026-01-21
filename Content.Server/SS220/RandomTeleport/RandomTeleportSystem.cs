@@ -4,7 +4,7 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
-using Content.Shared.SS220.InteractionTeleport;
+using Content.Shared.SS220.Teleport;
 using Content.Shared.Whitelist;
 using Robust.Shared.Map;
 using Robust.Shared.Random;
@@ -29,6 +29,9 @@ public sealed class RandomTeleportSystem : EntitySystem
 
     private void OnTeleportTarget(Entity<RandomTeleportComponent> ent, ref TeleportTargetEvent args)
     {
+        var beforeEv = new BeforeTeleportTargetEvent(args.User, args.Target);
+        RaiseLocalEvent(ent, ref beforeEv);
+
         Warp(ent, args.Target, args.User);
 
         var ev = new TargetTeleportedEvent(args.Target);
