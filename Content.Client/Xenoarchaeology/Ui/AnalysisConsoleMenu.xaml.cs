@@ -202,9 +202,12 @@ public sealed partial class AnalysisConsoleMenu : FancyWindow
 
         var hasInfo = _xenoArtifact.HasUnlockedPredecessor(artifact.Value, node.Value);
 
+        //SS220 Artifact effects localization begin
+        var effect = _ent.GetComponentOrNull<MetaDataComponent>(node.Value)?.EntityDescription ?? string.Empty;
         EffectValueLabel.SetMarkup(Loc.GetString("analysis-console-info-effect-value",
             ("state", hasInfo),
-            ("info", _ent.GetComponentOrNull<MetaDataComponent>(node.Value)?.EntityDescription ?? string.Empty)));
+            ("info", Loc.GetString(effect))));
+        //SS220 Artifact effects localization end
 
         var predecessorNodes = _xenoArtifact.GetPredecessorNodes(artifact.Value.Owner, node.Value);
         if (!hasInfo)
@@ -230,4 +233,3 @@ public sealed partial class AnalysisConsoleMenu : FancyWindow
             ("class", Loc.GetString($"artifact-node-class-{Math.Min(6, predecessorNodes.Count + 1)}"))));
     }
 }
-
