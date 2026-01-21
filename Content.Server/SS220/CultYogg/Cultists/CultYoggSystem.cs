@@ -1,7 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Humanoid;
-using Content.Server.SS220.Bed.Cryostorage;
 using Content.Server.SS220.GameTicking.Rules;
 using Content.Shared.Actions;
 using Content.Shared.Body.Components;
@@ -9,7 +8,6 @@ using Content.Shared.Body.Systems;
 using Content.Shared.Cloning.Events;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
-using Content.Shared.Interaction.Events;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -19,7 +17,6 @@ using Content.Shared.Popups;
 using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.SS220.StuckOnEquip;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using System.Linq;
@@ -58,13 +55,9 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         SubscribeLocalEvent<CultYoggComponent, OnSaintWaterDrinkEvent>(OnSaintWaterDrinked);
         SubscribeLocalEvent<CultYoggComponent, ChangeCultYoggStageEvent>(OnUpdateStage);
         SubscribeLocalEvent<CultYoggComponent, CloningEvent>(OnCloning);
-
-        SubscribeLocalEvent<CultYoggComponent, PlayerDetachedEvent>(OnPlayerDetached);
-        SubscribeLocalEvent<CultYoggComponent, BeingCryoDeletedEvent>(OnCryoDeleted);
-        SubscribeLocalEvent<CultYoggComponent, SuicideEvent>(OnSuicide);
     }
 
-    #region StageUpdating
+    #region Visuals
     private void OnUpdateStage(Entity<CultYoggComponent> ent, ref ChangeCultYoggStageEvent args)
     {
         if (ent.Comp.CurrentStage == args.Stage)
@@ -143,7 +136,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         }
     }
 
-    public void DeleteVisuals(Entity<CultYoggComponent> ent)
+    public override void DeleteVisuals(Entity<CultYoggComponent> ent)
     {
         if (!TryComp<HumanoidAppearanceComponent>(ent, out var huAp))
             return;
@@ -153,10 +146,10 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
 
         huAp.MarkingSet.Markings.Remove(MarkingCategories.Special);
 
-        if (huAp.MarkingSet.Markings.ContainsKey(MarkingCategories.Tail) &&
+        if (huAp.MarkingSet.Markings.TryGetValue(MarkingCategories.Tail, out var value) &&
             ent.Comp.PreviousTail != null)
         {
-            huAp.MarkingSet.Markings[MarkingCategories.Tail].Add(ent.Comp.PreviousTail);
+            value.Add(ent.Comp.PreviousTail);
         }
 
         Dirty(ent.Owner, huAp);
@@ -287,35 +280,10 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         purifyedComp.TotalAmountOfHolyWater += args.SaintWaterAmount;
 
         if (purifyedComp.TotalAmountOfHolyWater >= purifyedComp.AmountToPurify)
-        {
-            //After purifying effect
-            _audio.PlayPvs(purifyedComp.PurifyingCollection, ent);
+            purifyedComp.PurifyTime ??= _timing.CurTime + purifyedComp.BeforePurifyingTime;
 
-            DeleteVisuals(ent);
-
-            RemComp<CultYoggComponent>(ent);
-            _cultRuleSystem.CheckSimplifiedEslavement();//Add token if it was last cultist
-        }
-
-        purifyedComp.PurifyingDecayEventTime = _timing.CurTime + purifyedComp.BeforeDeclinesTime; //setting timer, when purifying will be removed
+        purifyedComp.DecayTime = _timing.CurTime + purifyedComp.BeforeDecayTime; //setting timer, when purifying will be removed
         Dirty(ent, ent.Comp);
-    }
-    #endregion
-
-    #region CheckSimplifiedEslavement
-    private void OnPlayerDetached(Entity<CultYoggComponent> ent, ref PlayerDetachedEvent args)
-    {
-        _cultRuleSystem.CheckSimplifiedEslavement();
-    }
-
-    private void OnCryoDeleted(Entity<CultYoggComponent> ent, ref BeingCryoDeletedEvent args)
-    {
-        _cultRuleSystem.CheckSimplifiedEslavement();
-    }
-
-    private void OnSuicide(Entity<CultYoggComponent> ent, ref SuicideEvent args)
-    {
-        _cultRuleSystem.CheckSimplifiedEslavement();
     }
     #endregion
 

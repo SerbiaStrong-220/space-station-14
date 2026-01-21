@@ -84,6 +84,7 @@
           - Expedition
           - Robotisation
           - Homekeepers
+          - SportComplex
 
 - type: entity
   id: NightshiftNanotrasenStation

@@ -144,7 +144,7 @@ public sealed class MindSlaveSystem : EntitySystem
     private void OnMindSlaveImplanted(Entity<MindSlaveImplantComponent> entity, ref ImplantImplantedEvent args)
     {
         if (!TryComp<SubdermalImplantComponent>(entity, out var implantComponent) ||
-            implantComponent.user is not { } user)
+            implantComponent.User is not { } user)
             return;
 
         if (!TryMakeSlave(args.Implanted, user))

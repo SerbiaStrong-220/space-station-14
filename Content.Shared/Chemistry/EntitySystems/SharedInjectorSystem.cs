@@ -16,6 +16,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
+using Content.Shared.SS220.Cryostasis.Events;
 using Content.Shared.Stacks;
 using Content.Shared.Verbs;
 
@@ -55,7 +56,12 @@ public abstract class SharedInjectorSystem : EntitySystem
         var min = ent.Comp.TransferAmounts.Min();
         var max = ent.Comp.TransferAmounts.Max();
         var cur = ent.Comp.CurrentTransferAmount;
-        var toggleAmount = cur == max ? min : max;
+
+        //ss220 BS_syringe_tweak start
+        // var toggleAmount = cur == max ? min : max;
+
+        var toggleAmount = ent.Comp.TransferAmounts.FirstOrDefault(x => x > cur, min);
+        //ss220 BS_syringe_tweak end
 
         var priority = 0;
         AlternativeVerb toggleVerb = new()
@@ -235,6 +241,13 @@ public abstract class SharedInjectorSystem : EntitySystem
                     $"{ToPrettyString(user):user} is attempting to draw {injector.Comp.CurrentTransferAmount.ToString()} units from themselves.");
             }
         }
+
+        // ss220 add fast injection with cryo syringe start
+        var changeDelayEv = new ChangeInjectorDelayEvent(injector, target, user, actualDelay);
+        RaiseLocalEvent(injector, ref changeDelayEv);
+
+        actualDelay = changeDelayEv.Delay;
+        // ss220 add fast injection with cryo syringe end
 
         _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, actualDelay, new InjectorDoAfterEvent(), injector.Owner, target: target, used: injector.Owner)
         {

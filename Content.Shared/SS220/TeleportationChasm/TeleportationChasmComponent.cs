@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 
 namespace Content.Shared.SS220.TeleportationChasm;
@@ -16,4 +17,10 @@ public sealed partial class TeleportationChasmComponent : Component
     /// </summary>
     [DataField]
     public SoundSpecifier FallingSound = new SoundPathSpecifier("/Audio/Effects/falling.ogg");
+
+    /// <summary>
+    ///     Filter entities that we remove instead of teleporting
+    /// </summary>
+    [DataField]
+    public EntityWhitelist? BlacklistToDelete;
 }

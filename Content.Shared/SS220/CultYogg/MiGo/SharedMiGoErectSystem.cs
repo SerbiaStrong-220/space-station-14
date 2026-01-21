@@ -12,6 +12,7 @@ using Content.Shared.SS220.ChameleonStructure;
 using Content.Shared.SS220.CultYogg.Buildings;
 using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.Stacks;
+using Content.Shared.Station;
 using Content.Shared.Tag;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
@@ -45,6 +46,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedChameleonStructureSystem _chameleonStructureSystem = default!;
+    [Dependency] private readonly SharedStationSystem _station = default!;
 
     //private readonly List<EntityUid> _dropEntitiesBuffer = [];
 
@@ -75,51 +77,63 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         SubscribeLocalEvent<MiGoCaptureDoAfterEvent>(OnCaptureDoAfter);
     }
 
-    public void OpenUI(Entity<MiGoComponent> entity, ActorComponent actor)
+    public void OpenUI(Entity<MiGoComponent> ent, ActorComponent actor)
     {
-        _userInterfaceSystem.TryToggleUi(entity.Owner, MiGoUiKey.Erect, actor.PlayerSession);
+        _userInterfaceSystem.TryToggleUi(ent.Owner, MiGoUiKey.Erect, actor.PlayerSession);
     }
 
     #region Building
-    private void OnBuildMessage(Entity<MiGoComponent> entity, ref MiGoErectBuildMessage args)
+    private void OnBuildMessage(Entity<MiGoComponent> ent, ref MiGoErectBuildMessage args)
     {
-        if (entity.Owner != args.Actor)
+        if (ent.Owner != args.Actor)
             return;
 
-        if (!_prototypeManager.TryIndex(args.BuildingId, out _))
+        if (!_prototypeManager.TryIndex(args.BuildingId, out var buildingProto))
             return;
 
-        var erectAction = entity.Comp.MiGoErectActionEntity;
+        var erectAction = ent.Comp.MiGoErectActionEntity;
 
         if (erectAction == null || !TryComp<ActionComponent>(erectAction, out var actionComponent))
             return;
 
         if (actionComponent.Cooldown.HasValue && actionComponent.Cooldown.Value.End > _gameTiming.CurTime)
         {
-            _popupSystem.PopupClient(Loc.GetString("cult-yogg-building-cooldown-popup"), entity, entity);
+            _popupSystem.PopupClient(Loc.GetString("cult-yogg-building-cooldown-popup"), ent, ent);
             return;
         }
         var location = GetCoordinates(args.Location);
         var tileRef = _turfSystem.GetTileRef(location);
 
+        if (buildingProto.RequireStation)
+        {
+            if (_station.GetStations().FirstOrNull() is not { } station) // only "proper" way to find THE station
+                return;
+
+            if (station != _station.GetOwningStation(ent))//well only way i found, not optimal
+            {
+                _popupSystem.PopupClient(Loc.GetString("cult-yogg-build-only-on-station"), ent, ent);
+                return;
+            }
+        }
+
         if (tileRef == null || _turfSystem.IsTileBlocked(tileRef.Value,
             Physics.CollisionGroup.MachineMask | Physics.CollisionGroup.Impassable | Physics.CollisionGroup.Opaque,
             minIntersectionArea: 0.15f))
         {
-            _popupSystem.PopupClient(Loc.GetString("cult-yogg-building-tile-blocked-popup"), entity, entity);
+            _popupSystem.PopupClient(Loc.GetString("cult-yogg-building-tile-blocked-popup"), ent, ent);
             return;
         }
 
         if (!_interaction.InRangeUnobstructed(args.Actor, location, range: 2f, popup: true))
             return;
 
-        _doAfterSystem.TryStartDoAfter(new DoAfterArgs(EntityManager, entity, entity.Comp.ErectDoAfterSeconds,
+        _doAfterSystem.TryStartDoAfter(new DoAfterArgs(EntityManager, ent, ent.Comp.ErectDoAfterSeconds,
             new MiGoErectDoAfterEvent()
             {
                 BuildingId = args.BuildingId,
                 Location = args.Location,
                 Direction = args.Direction,
-            }, entity, null, null)
+            }, ent, null, null)
         {
             Broadcast = false,
             BreakOnDamage = true,
@@ -359,6 +373,9 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         if (args.Recipe == null)
             return;
 
+        if (!_prototypeManager.Resolve(args.Recipe.Value, out var replacement))
+            return;
+
         if (args.Target is { } target)
         {
             var prototypeId = MetaData(target).EntityPrototype;
@@ -366,11 +383,11 @@ public sealed class SharedMiGoErectSystem : EntitySystem
             if (prototypeId == null)
                 return;
 
-            StartReplacement(target, args.Recipe, prototypeId);
+            StartReplacement(target, replacement, prototypeId);
         }
 
         if (TryComp<MiGoComponent>(args.User, out var miGo))
-            AddCaptureCooldownByResult((args.User, miGo), args.Recipe);//its wierd, but idk how to not make it with this event
+            AddCaptureCooldownByResult((args.User, miGo), replacement);//its wierd, but idk how to not make it with this event
     }
 
     private void StartReplacement(EntityUid buildingUid, MiGoCapturePrototype replacement, EntityPrototype buildingProto)
@@ -524,7 +541,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
 
     private void AddCaptureCooldownByResult(Entity<MiGoComponent> ent, MiGoCapturePrototype recipe)
     {
-        ent.Comp.CaptureCooldowns.TryAdd(recipe.ReplacementProto.Id, _gameTiming.CurTime + recipe.ReplacementCooldown);
+        ent.Comp.CaptureCooldowns.TryAdd(recipe.ReplacementProto, _gameTiming.CurTime + recipe.ReplacementCooldown);
     }
     #endregion
 
@@ -671,7 +688,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
     {
         materials = null;
 
-        if (!_prototypeManager.TryIndex(entity.Comp.BuildingPrototypeId, out var prototype))
+        if (!_prototypeManager.Resolve(entity.Comp.BuildingPrototypeId, out var prototype))
             return false;
 
         materials = prototype.Materials;
@@ -699,7 +716,7 @@ public sealed class SharedMiGoErectSystem : EntitySystem
         if (_gameTiming.InPrediction) // this should never run in client
             return null;
 
-        if (!_prototypeManager.TryIndex(entity.Comp.BuildingPrototypeId, out var prototype, logError: true))
+        if (!_prototypeManager.Resolve(entity.Comp.BuildingPrototypeId, out var prototype))
             return null;
 
         var transform = Transform(entity);
@@ -732,5 +749,5 @@ public sealed partial class MiGoEraseDoAfterEvent : SimpleDoAfterEvent
 [Serializable, NetSerializable]
 public sealed partial class MiGoCaptureDoAfterEvent : SimpleDoAfterEvent
 {
-    public MiGoCapturePrototype? Recipe;
+    public ProtoId<MiGoCapturePrototype>? Recipe;
 }
