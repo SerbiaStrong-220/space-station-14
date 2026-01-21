@@ -31,7 +31,7 @@ public sealed class JetPackUseSkillSystem : SkillEntitySystem
     {
         base.Initialize();
 
-        SubscribeEventToSkillEntity<JetPackUseSkillComponent, RefreshWeightlessModifiersEvent>(OnRefreshWeightlessModifiers);
+        SubscribeEventToSkillEntity<JetPackUseSkillComponent, RefreshWeightlessModifiersEvent>(OnRefreshWeightlessModifiers, after: [typeof(SharedJetpackSystem)]);
         SubscribeEventToSkillEntity<JetPackUseSkillComponent, JetPackActivatedEvent>(OnJetPackActivated);
         SubscribeEventToSkillEntity<JetPackUseSkillComponent, MoveInputEvent>(OnMoveInput);
 

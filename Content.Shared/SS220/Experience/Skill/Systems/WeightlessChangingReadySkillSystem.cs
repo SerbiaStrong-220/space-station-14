@@ -2,8 +2,10 @@
 
 using Content.Shared.Clothing;
 using Content.Shared.Gravity;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Popups;
 using Content.Shared.SS220.Experience.Skill.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
@@ -13,14 +15,17 @@ namespace Content.Shared.SS220.Experience.Skill.Systems;
 
 public sealed class WeightlessChangingReadySkillSystem : SkillEntitySystem
 {
-    [Dependency] private readonly SharedJetpackSystem _jetpack = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private readonly SharedJetpackSystem _jetpack = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly TagSystem _tag = default!;
 
     private const string HardSuitInventorySlot = "outerClothing";
 
     private const uint SpawnTickBorder = 20;
+
+    private readonly LocId _evadedFallPopup = "weightless-changing-ready-skill-evaded-fall-popup";
 
     public override void Initialize()
     {
@@ -29,13 +34,14 @@ public sealed class WeightlessChangingReadySkillSystem : SkillEntitySystem
         SubscribeEventToSkillEntity<WeightlessChangingReadySkillComponent, WeightlessnessChangedEvent>(OnWeightlessChanged);
         SubscribeEventToSkillEntity<WeightlessChangingReadySkillComponent, MagbootsUpdateStateEvent>(OnMagbootsUpdateState);
 
-        SubscribeEventToSkillEntity<WeightlessChangingReadySkillComponent, RefreshWeightlessModifiersEvent>(OnRefreshWeightlessModifiers, after: [typeof(SharedJetpackSystem)]);
+        SubscribeEventToSkillEntity<WeightlessChangingReadySkillComponent, RefreshWeightlessModifiersEvent>(OnRefreshWeightlessModifiers, before: [typeof(SharedJetpackSystem)]);
     }
 
     private void OnWeightlessChanged(Entity<WeightlessChangingReadySkillComponent> entity, ref WeightlessnessChangedEvent args)
     {
         // it used to prevent annoying falling when gravity engine fails to enable at time
-        if (GameTiming.CurTick.Value < entity.Comp.CreationTick.Value + SpawnTickBorder) return;
+        if (GameTiming.CurTick.Value < entity.Comp.CreationTick.Value + SpawnTickBorder)
+            return;
 
         // Okay this is how I deal with prediction resetting
         // If you skip this check you will add a KnockedDownComponent during resetting procedure
@@ -56,9 +62,14 @@ public sealed class WeightlessChangingReadySkillSystem : SkillEntitySystem
         var predictedRandom = GetPredictedRandomOnCurTick(new() { GetNetEntity(entity).Id });
 
         if (!predictedRandom.Prob(chance))
+        {
+            _popup.PopupPredicted(Loc.GetString(_evadedFallPopup, ("entity", Identity.Name(experienceEntity.Value, EntityManager))), experienceEntity.Value.Owner, experienceEntity);
             return;
+        }
 
-        _stun.TryAddParalyzeDuration(experienceEntity.Value.Owner, entity.Comp.KnockdownDuration);
+        // TODO: if you make drop: true this will lead to engine error:
+        // ex: `Grid traversal attempted to handle movement of джетпак (5289/n5289, JetpackBlueFilled) while moving name-name (5172/n5172, MobReptilian, ckey)`
+        _stun.TryKnockdown(experienceEntity.Value.Owner, entity.Comp.KnockdownDuration, drop: false);
     }
 
     private void OnMagbootsUpdateState(Entity<WeightlessChangingReadySkillComponent> entity, ref MagbootsUpdateStateEvent args)

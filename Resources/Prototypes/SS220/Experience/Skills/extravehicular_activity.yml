@@ -9,7 +9,7 @@
     skillDescription: extravehicular-activity-initial-desc
   components:
   - type: JetPackUseSkill
-    failChance: 0.7
+    failChance: 0.6
   - type: WeightlessChangingReadySkill
     hardsuitFallChance:  0.7
     withoutHardsuitFallChance: 1
