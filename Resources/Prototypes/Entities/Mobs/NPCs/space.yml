@@ -176,10 +176,10 @@
     spawned:
     - id: FoodMeat
       amount: 1
-    - type: MobThresholds
-      thresholds:
-        0: Alive
-        60: Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      60: Dead
 
 - type: entity
   id: MobKangarooSpaceSalvage
