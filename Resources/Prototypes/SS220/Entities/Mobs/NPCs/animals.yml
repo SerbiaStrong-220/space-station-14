@@ -428,16 +428,16 @@
     canSend: false
     telepathyChannelPrototype: none	
   - type: ExplosionResistance
-    damageCoefficient: 0.8
+    damageCoefficient: 0.5
   - type: PassiveDamage
     damage:
       types:
-        Blunt: -0.6
-        Slash: -0.6
-        Piercing: -0.4
-        Heat: -0.25
-        Radiation: -0.25
-        Caustic: -0.75
+        Blunt: -0.4
+        Slash: -0.4
+        Piercing: -0.6
+        Heat: -0.75
+        Radiation: -0.75
+        Caustic: -0.25
   - type: MeleeWeapon
     damage:
       types:
