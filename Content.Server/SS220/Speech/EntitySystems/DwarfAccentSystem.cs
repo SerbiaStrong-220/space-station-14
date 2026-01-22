@@ -1,5 +1,7 @@
-using Content.Server.Speech.Components;
+// EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Server.Speech.EntitySystems;
+using Content.Server.SS220.Speech.Components;
 using Content.Shared.Speech;
 
 namespace Content.Server.SS220.Speech.EntitySystems;
@@ -14,11 +16,9 @@ public sealed class DwarfAccentSystem : EntitySystem
         SubscribeLocalEvent<DwarfAccentComponent, AccentGetEvent>(OnAccent);
     }
 
-    public string Accentuate(string message)
+    private string Accentuate(string message)
     {
-        var msg = message;
-        msg = _replacement.ApplyReplacements(msg, "dwarf");
-        return msg;
+        return _replacement.ApplyReplacements(message, "dwarf");
     }
 
     private void OnAccent(Entity<DwarfAccentComponent> ent, ref AccentGetEvent args)
