@@ -169,11 +169,6 @@
     - id: Carpish
     - id: Galactic
       canSpeak: false #SS220 Dragon & Carp Language End
-    # ss220 lowTTKUpdate
-  - type: Damageable
-    damageContainer: Biological
-    damageModifierSet: Dragon
-    ## ss220 lowTTKUpdate
   - type: Puller
     needsHands: false
   # SS220 Telepathy begin
