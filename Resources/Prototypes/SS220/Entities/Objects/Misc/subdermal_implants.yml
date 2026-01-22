@@ -84,6 +84,8 @@
     implantAction: ActionActivateDnaCopy
   - type: TriggerOnActivateImplant
   - type: TransferIdentity
+  - type: DnaCopyOnTrigger
+    targetUser: true
   - type: HiddenDescription
     entries:
     - label: corvax-hidden-desc-IllegalImplants-medical
@@ -114,17 +116,19 @@
   - type: SolutionContainerManager
     solutions:
       beaker:
-        maxVol: 90
+        maxVol: 76.5
         canReact: false
         reagents:
         - ReagentId: Rororium
           Quantity: 1.5
-        - ReagentId: Ephedrine
-          Quantity: 15
+        - ReagentId: Stimulants
+          Quantity: 30
         - ReagentId: Ichor
           Quantity: 30
-        - ReagentId: Epinephrine
-          Quantity: 28.5
+        - ReagentId: Frontier
+          Quantity: 15
+  - type: AddReagentsOnTrigger
+    targetUser: true
   - type: TriggerOnActivateImplant
   - type: HiddenDescription
     entries:

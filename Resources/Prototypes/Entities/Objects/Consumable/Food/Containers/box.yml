@@ -12,7 +12,7 @@
   description: Mmm, Donuts.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Food/Baked/donut.rsi
+    sprite: SS220/Objects/Consumable/Food/Baked/donut.rsi #SS220 From cabinet to 3/4, Part 2
     state: box
     layers:
     - state: box
@@ -45,7 +45,7 @@
       tags:
       - Donut
   - type: Item
-    sprite: Objects/Consumable/Food/Baked/donut.rsi
+    sprite: SS220/Objects/Consumable/Food/Baked/donut.rsi #SS220 From cabinet to 3/4, Part 2
     size: Normal
     shape:
     - 0,0,2,1

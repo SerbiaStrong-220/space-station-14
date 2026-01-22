@@ -19,12 +19,6 @@ public sealed partial class CultYoggSacrificialComponent : Component
     public ProtoId<FactionIconPrototype> StatusIcon { get; set; } = "CultYoggSacraficialTargetIcon";
 
     /// <summary>
-    /// Tier number required for replacement if it needed
-    /// </summary>
-    [ViewVariables]
-    public int Tier = 0;//initilize as max possible tier
-
-    /// <summary>
     /// Time required for announcement
     /// </summary>
     [ViewVariables]

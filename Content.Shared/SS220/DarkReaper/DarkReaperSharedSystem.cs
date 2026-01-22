@@ -19,6 +19,7 @@ using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
+using Content.Shared.Shuttles.Components;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
@@ -415,6 +416,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
 
         if (isMaterial)
         {
+            RemCompDeferred<FTLSmashImmuneComponent>(uid);
             EnsureComp<PullerComponent>(uid).NeedsHands = false;
             _tag.AddTag(uid, _doorBumpOpenerTag);
 
@@ -448,6 +450,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
 
             RemComp<PullerComponent>(uid);
             RemComp<ActivePullerComponent>(uid);
+            EnsureComp<FTLSmashImmuneComponent>(uid);
         }
 
         _actions.SetEnabled(comp.StunActionEntity, isMaterial);
@@ -560,7 +563,10 @@ public abstract class SharedDarkReaperSystem : EntitySystem
 
         // Get everthing that was consumed out before deleting
         if (_container.TryGetContainer(ent, DarkReaperComponent.ConsumedContainerId, out var container))
-            _container.EmptyContainer(container);
+        {
+            foreach (var removed in _container.EmptyContainer(container))
+                SetPaused(removed, false);
+        }
 
         // Make it blow up on pieces after deth
         var gibPoolAsArray = ent.Comp.SpawnOnDeathPool.ToArray();

@@ -160,3 +160,25 @@
   - type: PressureProtection
     highPressureMultiplier: 0.3
     lowPressureMultiplier: 1000
+
+#Quartermaster Hardsuit
+- type: entity
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
+  id: ClothingHeadHelmetHardsuitQuartermaster
+  name: quartermaster hardsuit helmet
+  description: A prototype of a special helmet for the Quartermaster to perform his duties in hazardous and low-pressure environments.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hardsuits/quartermaster.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hardsuits/quartermaster.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.525
+    lowPressureMultiplier: 1000
+  - type: PointLight
+    radius: 7
+    energy: 3
+  - type: Tag
+    tags:
+    - CorgiWearable
+    - WhitelistChameleon

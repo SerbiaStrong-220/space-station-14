@@ -24,7 +24,7 @@
         - !type:ComponentCondition
             inverted: true
             components:
-              - CultYogg
+            - CultYogg
 
 - type: reagent
   id: ElixirOfLiberation
@@ -38,6 +38,11 @@
     Poison:
       effects:
       - !type:ChemElixirOfLiberationEffect
+      - !type:GenericStatusEffect
+        key: Muted
+        component: Muted
+        type: Remove
+        time: 60
 
 - type: reagent
   id: CultYoggVenomancerAcid
@@ -92,7 +97,7 @@
   group: Narcotics
   desc: reagent-desc-essence-of-the-abyss
   physicalDesc: reagent-physical-desc-gloopy
-  color: "#0D0A10"
+  color: "#6e10da"
   boilingPoint: 444.0
   meltingPoint: 128.0
   metabolisms:
@@ -103,6 +108,11 @@
         - !type:ReagentCondition
           reagent: EssenceOfTheAbyss
           min: 8
+        - !type:ComponentCondition
+          inverted: true
+          components:
+          - BibleUser
+          - CultYogg
         effectProto: StatusEffectForcedSleeping
         time: 3
         type: Add
@@ -115,3 +125,8 @@
         - !type:ReagentCondition
           reagent: EssenceOfTheAbyss
           min: 10
+        - !type:ComponentCondition
+          inverted: true
+          components:
+          - BibleUser
+          - CultYogg

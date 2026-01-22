@@ -103,7 +103,7 @@ public sealed partial class AntagSelectionSystem
         // make sure we don't double-count the current selection
         countOffset -= Math.Clamp(poolSize / def.PlayerRatio, def.Min, def.Max) * def.PlayerRatio;
 
-        return Math.Clamp((poolSize - countOffset) / def.PlayerRatio, def.Min, def.Max);
+        return Math.Clamp((poolSize - countOffset + (int)(def.PlayerRatio * def.AddPlayerCountPerRatio)) / def.PlayerRatio, def.Min, def.Max); // SS220-give-more-flex-to-antag-selection
     }
 
     /// <summary>
@@ -206,7 +206,7 @@ public sealed partial class AntagSelectionSystem
         var minds = GetAntagMinds(ent);
         foreach (var mind in minds)
         {
-            if (_mind.IsCharacterDeadIc(mind))
+            if (_mind.IsCharacterDeadIc(mind.Comp)) // ss220 add custom antag goals
                 continue;
 
             if (mind.Comp.OriginalOwnedEntity != null)
@@ -226,7 +226,7 @@ public sealed partial class AntagSelectionSystem
         var minds = GetAntagMinds(ent);
         foreach (var mind in minds)
         {
-            if (_mind.IsCharacterDeadIc(mind))
+            if (_mind.IsCharacterDeadIc(mind.Comp)) // ss220 add custom antag goals
                 continue;
 
             numbah++;
@@ -421,4 +421,35 @@ public sealed partial class AntagSelectionSystem
 
         return result;
     }
+
+    // SS220 DynamicTraitor begin
+
+    public void SetAntagLimit(AntagSelectionComponent comp, string roleId, int? newMin = null, int? newMax = null)
+    {
+        for (var i = 0; i < comp.Definitions.Count; i++)
+        {
+            var def = comp.Definitions[i];
+
+            if (!def.PrefRoles.Contains(roleId))
+                continue;
+
+            if (newMin.HasValue)
+                def.Min = newMin.Value;
+
+            if (newMax.HasValue)
+                def.Max = newMax.Value;
+
+            comp.Definitions[i] = def;
+            return;
+        }
+    }
+
+    public void SetAntagLimit(Entity<AntagSelectionComponent?> ent, string roleId, int? newMin = null, int? newMax = null)
+    {
+         if (!Resolve(ent, ref ent.Comp))
+                    return;
+
+         SetAntagLimit(ent.Comp, roleId, newMin, newMax);
+    }
+    // SS220 DynamicTraitor end
 }

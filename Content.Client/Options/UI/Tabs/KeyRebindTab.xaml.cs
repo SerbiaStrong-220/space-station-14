@@ -217,6 +217,7 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(ContentKeyFunctions.RotateObjectCounterclockwise);
             AddButton(ContentKeyFunctions.FlipObject);
             AddButton(KeyFunctions220.ResistFire); // SS220 resist fire bind
+            AddButton(KeyFunctions220.PinUI); // ss220 add pin for ui
 
             AddHeader("ui-options-header-ui");
             AddButton(ContentKeyFunctions.FocusChat);

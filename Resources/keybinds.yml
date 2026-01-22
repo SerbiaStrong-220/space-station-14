@@ -713,3 +713,9 @@ binds:
   type: State
   key: B
 # SS220 resist fire bind end
+# SS220 add pinnable ui func start
+- function: PinUI
+  type: State
+  key: P
+  mod1: Alt
+# SS220 add pinnable ui func end

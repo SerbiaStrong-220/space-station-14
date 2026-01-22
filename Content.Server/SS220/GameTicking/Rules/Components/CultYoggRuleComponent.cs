@@ -2,37 +2,74 @@
 
 using Content.Shared.FixedPoint;
 using Content.Shared.NPC.Prototypes;
+using Content.Shared.Roles;
 using Content.Shared.SS220.CultYogg.Altar;
 using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Server.SS220.GameTicking.Rules.Components;
 
 [RegisterComponent, Access(typeof(CultYoggRuleSystem))]
 public sealed partial class CultYoggRuleComponent : Component
 {
-    [DataField]
-    public Dictionary<CultYoggStage, CultYoggStageDefinition> Stages { get; private set; } = new();
+    #region GameRuleSelection
+    /// <summary>
+    /// Current state of the rule
+    /// </summary>
+    public SelectionState SelectionStatus = SelectionState.WaitingForSpawn;
 
+    public enum SelectionState
+    {
+        WaitingForSpawn = 0,
+        ReadyToStart = 1,
+        Started = 2,
+    }
+    #endregion
+
+    #region Stage
+    [DataField]
+    public Dictionary<CultYoggStage, CultYoggStageDefinition> Stages { get; private set; } = [];
+
+    /// <summary>
+    /// Current cult gameplay stage
+    /// </summary>
+    public CultYoggStage Stage = CultYoggStage.Initial;
+
+    /// <summary>
+    /// Time for the cultists before the whole station finds out about them
+    /// </summary>
+    [DataField]
+    public TimeSpan BeforeAlertTime = TimeSpan.FromSeconds(60);
+
+    /// <summary>
+    /// The time when the announcement will be made
+    /// </summary>
+    public TimeSpan? AlertTime;
+
+    /// <summary>
+    /// Station notification sound when Alert stage start message is announced
+    /// </summary>
+    public SoundSpecifier BroadcastSound = new SoundPathSpecifier("/Audio/Misc/notice1.ogg");
+    #endregion
+
+    #region Sacraficial
     /// <summary>
     /// General requirements
     /// </summary>
-
-    public readonly List<string> FirstTierJobs = ["Captain"];
-    public readonly string SecondTierDepartament = "Command";
-    public readonly List<string> BannedDepartaents = ["GhostRoles"];
-
-    public bool SacraficialsWerePicked = false;//buffer to prevent multiple generations
+    public readonly ProtoId<DepartmentPrototype> SacraficialDepartament = "Command";
 
     /// <summary>
-    /// Where previous sacrificial were performed
+    /// Check for an endgame screen title
     /// </summary>
-    public Entity<CultYoggAltarComponent>? LastSacrificialAltar = null;
+    [DataField]
+    public int AmountOfSacrifices = 0;
+    #endregion
 
+    /// <summary>
+    /// Internal variable for storing the estimated number of station crew
+    /// </summary>
     public int InitialCrewCount;
     public int TotalCultistsConverted;
 
@@ -41,10 +78,12 @@ public sealed partial class CultYoggRuleComponent : Component
     /// </summary>
     public readonly List<EntityUid> InitialCultistMinds = []; //Who was cultist on the gamestart.
 
+    #region CultistMaking
     /// <summary>
-    /// Storage for a sacraficials
+    ///     Path to cultist alert sound.
     /// </summary>
-    public readonly int[] TierOfSacraficials = [1, 2, 3];//trying to save tier in target, so they might be replaced with the same lvl target
+    [DataField]
+    public SoundSpecifier GreetSoundNotification = new SoundPathSpecifier("/Audio/SS220/Ambience/Antag/cult_yogg_start.ogg");
 
     /// <summary>
     /// Groups and factions
@@ -59,13 +98,9 @@ public sealed partial class CultYoggRuleComponent : Component
     /// Variables required to make new cultists
     /// </summary>
     [DataField]
-    public List<string> ListofObjectives = ["CultYoggSacraficeObjective"];
+    public List<EntProtoId> ListOfObjectives = ["CultYoggEnslaveObjective", "CultYoggSacraficeObjective"];
 
-    [ValidatePrototypeId<EntityPrototype>]
-    public string MindCultYoggAntagId = "MindRoleCultYogg";
-
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string GodPrototype = "MobNyarlathotep";
+    public EntProtoId MindCultYoggAntagId = "MindRoleCultYogg";
 
     //telephaty channel
     [DataField]
@@ -77,45 +112,27 @@ public sealed partial class CultYoggRuleComponent : Component
         Tags = ["CultYoggInnerHandToggleable"]
     };
 
+
+    #endregion
+
+    #region GodSummoning
     /// <summary>
-    /// Check for an endgame screen title
+    /// That which will be called upon at the final sacrifice
     /// </summary>
     [DataField]
-    public int AmountOfSacrifices = 0;
-
-    [DataField]
-    public bool Summoned;
-
-    [DataField]
-    public SoundSpecifier SummonMusic = new SoundCollectionSpecifier("CultYoggMusic");//ToDo make own
-    public enum SelectionState
-    {
-        WaitingForSpawn = 0,
-        ReadyToStart = 1,
-        Started = 2,
-    }
+    public EntProtoId GodPrototype = "MobNyarlathotep";
 
     /// <summary>
-    /// Current state of the rule
+    /// Where previous sacrificial were performed
     /// </summary>
-    public SelectionState SelectionStatus = SelectionState.WaitingForSpawn;
+    public Entity<CultYoggAltarComponent>? LastSacrificialAltar = null;
 
     /// <summary>
-    /// Current cult gameplay stage
-    /// </summary>
-    public CultYoggStage Stage = CultYoggStage.Initial;
-
-    /// <summary>
-    /// When should cultists be selected and the announcement made
-    /// </summary>
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
-    public TimeSpan? AnnounceAt;
-
-    /// <summary>
-    ///     Path to cultist alert sound.
+    /// The music that will play when you summon a god
     /// </summary>
     [DataField]
-    public SoundSpecifier GreetSoundNotification = new SoundPathSpecifier("/Audio/SS220/Ambience/Antag/cult_yogg_start.ogg");
+    public SoundSpecifier SummonMusic = new SoundCollectionSpecifier("CultYoggMusic");
+    #endregion
 }
 
 [DataDefinition]
@@ -128,9 +145,14 @@ public sealed partial class CultYoggStageDefinition
     public int? SacrificesRequired;
 
     /// <summary>
-    /// Fraction of total crew converted to cultists that will progress cult to this stage.
+    /// The percentage of the entire crew converted to the cult that will advance the cult to this stage.
     /// </summary>
     [DataField]
-    public FixedPoint2? CultistsFractionRequired;
+    public FixedPoint2? CultistsToCrewFraction;
+
+    /// <summary>
+    /// Direct calculation of required cultist stages for progression to avoid round-start progression.
+    /// </summary>
+    public int? CultistsAmountRequired;
 }
 

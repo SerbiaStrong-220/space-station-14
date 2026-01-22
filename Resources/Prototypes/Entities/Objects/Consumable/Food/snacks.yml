@@ -475,7 +475,7 @@
     tags:
       - FoodSnack
   - type: Sprite
-    sprite: Objects/Consumable/Food/snacks.rsi
+    sprite: SS220/Objects/Consumable/Food/snacks.rsi #SS220 From cabinet to 3/4, Part 2
     state: nutribrick
   - type: SpawnItemsOnUse
     items:
@@ -527,6 +527,7 @@
     tags:
       - ReptilianFood
   - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/snacks.rsi #SS220 From cabinet to 3/4, Part 2
     state: nutribrick-open
   - type: SolutionContainerManager
     solutions:
@@ -543,7 +544,7 @@
   description: A precisely mixed brownie, made to withstand blunt trauma and harsh conditions. Tastes like shit.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Food/snacks.rsi
+    sprite: SS220/Objects/Consumable/Food/snacks.rsi #SS220 From cabinet to 3/4, Part 2
     state: mre-brownie
   - type: Item
     heldPrefix: mre-brownie
@@ -596,6 +597,7 @@
     flavors:
       - mrebrownie
   - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/snacks.rsi #SS220 From cabinet to 3/4, Part 2
     state: mre-brownie-open
   - type: Item
     heldPrefix: mre-brownie-open

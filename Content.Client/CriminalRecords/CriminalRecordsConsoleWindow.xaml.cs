@@ -15,14 +15,16 @@ using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using System.Linq;
 using System.Numerics;
+using Content.Client.SS220.UserInterface.Controls;
 using Content.Shared.StatusIcon;
 using Robust.Client.GameObjects;
+using Content.Client.SS220.UserInterface.System.PinUI;
 
 namespace Content.Client.CriminalRecords;
 
 // TODO: dedupe shitcode from general records theres a lot
 [GenerateTypedNameReferences]
-public sealed partial class CriminalRecordsConsoleWindow : FancyWindow
+public sealed partial class CriminalRecordsConsoleWindow : FancyWindow, IPinnableWindow // ss220 add pin for ui
 {
     private readonly IPlayerManager _player;
     private readonly IPrototypeManager _proto;
@@ -145,6 +147,10 @@ public sealed partial class CriminalRecordsConsoleWindow : FancyWindow
             if (_selectedRecord is { } record)
                 OnHistoryUpdated?.Invoke(record, _access, true);
         };
+
+        // SS220 add pin button begin
+        PinUISystem.AddPinButtonBeforeTarget(this, CloseButton);
+        // SS220 add pin button end
     }
 
     public void StatusFilterPressed(SecurityStatus statusSelected)
