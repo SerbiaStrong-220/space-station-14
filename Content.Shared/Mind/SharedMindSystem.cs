@@ -265,6 +265,14 @@ public abstract partial class SharedMindSystem : EntitySystem
         return _mobState.IsDead(mind.OwnedEntity.Value, targetMobState);
     }
 
+    // ss220 add custom antag goals start
+    public bool IsCharacterDeadPhysically(EntityUid user)
+    {
+        return !TryComp<MobStateComponent>(user, out var targetMobState) ||
+               _mobState.IsDead(user, targetMobState);
+    }
+    // ss220 add custom antag goals end
+
     /// <summary>
     ///     True if the OwnedEntity of this mind is physically unrevivable.
     ///     This is mainly to check whether a mind is able to inherit their "original" character again without the need for creating a new one.
@@ -282,6 +290,13 @@ public abstract partial class SharedMindSystem : EntitySystem
         // Could use checks for the amount of damage they have, but with chemistry you can never tell what damage means someone is truly "unrevivable".
         return false;
     }
+
+    // ss220 add custom antag goals start
+    public bool IsCharacterUnrevivablePhysically(EntityUid target)
+    {
+        return !HasComp<MobStateComponent>(target);
+    }
+    // ss220 add custom antag goals end
 
     public virtual void Visit(EntityUid mindId, EntityUid entity, MindComponent? mind = null)
     {
@@ -369,19 +384,26 @@ public abstract partial class SharedMindSystem : EntitySystem
 
     public virtual void ControlMob(NetUserId user, EntityUid target) {}
 
+    // ss220 add custom antag goals start
     /// <summary>
     /// Tries to create and add an objective from its prototype id.
     /// </summary>
     /// <returns>Returns true if adding the objective succeeded.</returns>
-    public bool TryAddObjective(EntityUid mindId, MindComponent mind, string proto)
+    public bool TryAddObjective(EntityUid mindId, MindComponent mind, string proto, bool force = false)
     {
-        var objective = _objectives.TryCreateObjective(mindId, mind, proto);
+        return TryAddObjective(mindId, mind, proto, out _, force);
+    }
+
+    public bool TryAddObjective(EntityUid mindId, MindComponent mind, string proto, out EntityUid? objective, bool force = false)
+    {
+        objective = _objectives.TryCreateObjective(mindId, mind, proto, force);
         if (objective == null)
             return false;
 
         AddObjective(mindId, mind, objective.Value);
         return true;
     }
+    // ss220 add custom antag goals end
 
     /// <summary>
     /// Adds an objective that already exists, and is assumed to have had its requirements checked.
@@ -593,6 +615,17 @@ public abstract partial class SharedMindSystem : EntitySystem
         return IsCharacterDeadPhysically(mind);
     }
 
+    public bool IsCharacterDeadIc(EntityUid user)
+    {
+        var ev = new GetCharactedDeadIcEvent(null);
+        RaiseLocalEvent(user, ref ev);
+
+        if (ev.Dead != null)
+            return ev.Dead.Value;
+
+        return IsCharacterDeadPhysically(user);
+    }
+
     /// <summary>
     ///     True if this Mind is 'sufficiently unrevivable' IC (Objectives, EndText).
     ///     Note that this is *IC logic*, it's not necessarily tied to any specific truth.
@@ -613,6 +646,16 @@ public abstract partial class SharedMindSystem : EntitySystem
 
         return IsCharacterUnrevivablePhysically(mind);
     }
+
+    // ss220 add custom antag goals start
+    public bool IsCharacterUnrevivableIc(EntityUid target)
+    {
+        var ev = new GetCharacterUnrevivableIcEvent(null);
+        RaiseLocalEvent(target, ref ev);
+
+        return ev.Unrevivable ?? IsCharacterUnrevivablePhysically(target);
+    }
+    // ss220 add custom antag goals end
 
     /// <summary>
     /// A string to represent the mind for logging.
