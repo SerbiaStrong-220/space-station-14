@@ -426,7 +426,7 @@
     - id: Galactic
   - type: Telepathy
     canSend: false
-    telepathyChannelPrototype: none	
+    telepathyChannelPrototype: TelepathyChannelHive	
   - type: ExplosionResistance
     damageCoefficient: 0.5
   - type: PassiveDamage
