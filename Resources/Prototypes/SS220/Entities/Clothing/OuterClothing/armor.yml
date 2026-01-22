@@ -16,7 +16,7 @@
 - type: entity
   parent: ClothingOuterArmorBulletproof
   id: ClothingOuterArmorBlueShieldBulletproof
-  name: assault vest "Blue Shield"
+  name: blue shield bulletproof vest
   description: Designed for those who value their life and health above all else.
   components:
   - type: Sprite

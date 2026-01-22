@@ -69,22 +69,22 @@
   suffix: For playtime
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Coats/blueshield_coat.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/blueshield.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Coats/blueshield_coat.rsi
+    sprite: SS220/Clothing/OuterClothing/Coats/blueshield.rsi
   - type: TemperatureProtection
-    heatingCoefficient: 0.1
+    heatingCoefficient: 1.1
     coolingCoefficient: 0.1
   - type: ExplosionResistance
     damageCoefficient: 0.9
   - type: Armor
     modifiers:
       coefficients:
-        Heat: 0.65
-        Blunt: 0.6
-        Slash: 0.6
-        Piercing: 0.55
-        Caustic: 0.75
+        Blunt: 0.8
+        Slash: 0.9
+        Piercing: 0.6
+        Heat: 0.7
+        Caustic: 0.7
 
 # Command
 - type: entity
