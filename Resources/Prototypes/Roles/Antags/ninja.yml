@@ -20,7 +20,7 @@
     shoes: ClothingShoesSpaceNinja
     id: AgentIDCard
     ears: ClothingHeadsetGrey
-    pocket1: DoubleEmergencyOxygenTankFilled
+    pocket1: DoubleEmergencyOxygenTankFilled # SS220 Ninja Resprite
     pocket2: PinpointerStation
     belt: EnergyKatana
   inhand:
@@ -33,7 +33,7 @@
     - Wirecutter
     - Welder
     - Multitool
-    - BoxSurvivalEngineering
+    - BoxSurvivalEngineering # SS220 Ninja Resprite
 
 - type: chameleonOutfit
   id: NinjaChameleonOutfit

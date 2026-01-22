@@ -46,7 +46,7 @@
   parent: ClothingBackpack
   id: ClothingBackpackSpaceNinja
   name: space ninja backpack
-  description: A backpack space ninja.
+  description: A space ninja's backpack.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Back/Backpacks/spaceninja.rsi
