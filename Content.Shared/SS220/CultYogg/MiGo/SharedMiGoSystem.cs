@@ -11,6 +11,7 @@ using Content.Shared.Humanoid;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mind;
 using Content.Shared.Mindshield.Components;
+using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Events;
@@ -34,6 +35,7 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 using System.Linq;
 
 namespace Content.Shared.SS220.CultYogg.MiGo;
@@ -59,11 +61,6 @@ public abstract class SharedMiGoSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-
-    /// <summary>
-    /// Allows you to resolve dead-end situations where there are no cultists left, allowing you to recruit without feeding the mushroom
-    /// </summary>
-    protected static bool IsEslavementSimplified = false;
 
     public override void Initialize()
     {
@@ -93,6 +90,8 @@ public abstract class SharedMiGoSystem : EntitySystem
         SubscribeLocalEvent<MiGoComponent, MiGoTeleportToTargetMessage>(OnMiGoTeleportToTarget);
 
         SubscribeLocalEvent<MiGoComponent, InteractionAttemptEvent>(OnInteractionAttempt);
+
+        SubscribeLocalEvent<MiGoComponent, ChangeCultYoggStageEvent>(OnUpdateStage);
     }
 
     protected virtual void OnCompInit(Entity<MiGoComponent> uid, ref ComponentStartup args)
@@ -104,7 +103,11 @@ public abstract class SharedMiGoSystem : EntitySystem
         _actions.AddAction(uid, ref uid.Comp.MiGoSacrificeActionEntity, uid.Comp.MiGoSacrificeAction);
         _actions.AddAction(uid, ref uid.Comp.MiGoToggleLightActionEntity, uid.Comp.MiGoToggleLightAction);
         _actions.AddAction(uid, ref uid.Comp.MiGoTeleportActionEntity, uid.Comp.MiGoTeleportAction);
+
+        SyncStage(uid);
     }
+
+    protected virtual void SyncStage(Entity<MiGoComponent> uid) { }
 
     private void OnBoundUIOpened(Entity<MiGoComponent> entity, ref BoundUIOpenedEvent args)
     {
@@ -241,7 +244,13 @@ public abstract class SharedMiGoSystem : EntitySystem
             return;
         }
 
-        var altarsClose = _entityLookup.GetEntitiesInRange<CultYoggAltarComponent>(Transform(uid).Coordinates, uid.Comp.SaraficeStartRange);
+        if (uid.Comp.CurrentStage < CultYoggStage.Alarm)
+        {
+            _popup.PopupClient(Loc.GetString("cult-yogg-sacrifice-only-stage-alarm"), uid);
+            return;
+        }
+
+        var altarsClose = _entityLookup.GetEntitiesInRange<CultYoggAltarComponent>(Transform(uid).Coordinates, uid.Comp.SacrificeStartRange);
 
         if (altarsClose.Count == 0)
         {
@@ -269,15 +278,20 @@ public abstract class SharedMiGoSystem : EntitySystem
         if (!TryComp<StrapComponent>(ent, out var strapComp))
             return false;
 
-        var targetUid = strapComp.BuckledEntities.FirstOrDefault();
+        var targetUid = strapComp.BuckledEntities.FirstOrNull();
 
-        var sacrificeDoAfter = new DoAfterArgs(EntityManager, user, ent.Comp.RutualTime, new MiGoSacrificeDoAfterEvent(), ent, target: targetUid)
+        if (targetUid == null)
+            return false;
+
+        var sacrificeDoAfter = new DoAfterArgs(EntityManager, user, ent.Comp.RitualTime, new MiGoSacrificeDoAfterEvent(), ent, ent)
         {
-            BreakOnDamage = true,
-            BreakOnMove = true,
+            BreakOnDamage = false,
+            BreakOnMove = false,
             BlockDuplicate = true,
             CancelDuplicate = true,
-            DuplicateCondition = DuplicateConditions.SameEvent
+            DuplicateCondition = DuplicateConditions.SameEvent,
+            DistanceThreshold = 2.5f,
+            MovementThreshold = 2.5f
         };
 
         var started = _doAfter.TryStartDoAfter(sacrificeDoAfter);
@@ -286,6 +300,8 @@ public abstract class SharedMiGoSystem : EntitySystem
         {
             _popup.PopupPredicted(Loc.GetString("cult-yogg-sacrifice-started", ("user", user), ("target", targetUid)),
                 ent, null, PopupType.MediumCaution);
+
+            ent.Comp.AnnounceTime = _timing.CurTime + ent.Comp.AnnounceDelay;
         }
 
         return started;
@@ -508,7 +524,7 @@ public abstract class SharedMiGoSystem : EntitySystem
             return false;
         }
 
-        if (!HasComp<RaveComponent>(target) && !IsEslavementSimplified)
+        if (!HasComp<RaveComponent>(target) && AnyCultistsAlive())//If the mushroom was eaten or no cultists alive
         {
             reason = Loc.GetString("cult-yogg-enslave-should-eat-shroom");
             return false;
@@ -539,9 +555,21 @@ public abstract class SharedMiGoSystem : EntitySystem
         return true;
     }
 
-    public void SetSimplifiedEslavement(bool newVaule)
+    protected bool AnyCultistsAlive()
     {
-        IsEslavementSimplified = newVaule;
+        var queryCultists = EntityQueryEnumerator<CultYoggComponent>();
+        while (queryCultists.MoveNext(out var ent, out _))
+        {
+            if (!_mobState.IsAlive(ent))
+                continue;
+
+            if (!_mind.TryGetMind(ent, out _, out _))
+                continue;
+
+            return true;
+        }
+
+        return false;
     }
     #endregion
 
@@ -614,4 +642,13 @@ public abstract class SharedMiGoSystem : EntitySystem
         });
     }
     #endregion
+
+    private void OnUpdateStage(Entity<MiGoComponent> ent, ref ChangeCultYoggStageEvent args)
+    {
+        if (ent.Comp.CurrentStage == args.Stage)
+            return;
+
+        ent.Comp.CurrentStage = args.Stage;
+        Dirty(ent);
+    }
 }
