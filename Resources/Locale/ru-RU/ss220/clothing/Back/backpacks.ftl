@@ -13,7 +13,7 @@ ent-ClothingBackpackBlueShieldHightFilled = { ent-ClothingBackpackBlueShield }
     .desc = { ent-ClothingBackpackBlueShield.desc }
 
 ent-ClothingBackpackSpaceNinja = рюкзак космического ниндзя
-    .desc = Рюкзак космического ниндзя.
+    .desc = Рюкзак для снаряжения космического ниндзя.
 
 ent-ClothingBackpackERTLeaderGammaFilled = { ent-ClothingBackpackERTLeader }
     .suffix = Гамма ОБР, заполненный
