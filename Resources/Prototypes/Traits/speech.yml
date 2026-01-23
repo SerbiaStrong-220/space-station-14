@@ -14,12 +14,15 @@
     - type: LizardAccent
     - type: MothAccent
     - type: OwOAccent #SS220
-    - type: ReplacementAccent
-      accent: dwarf
+  # SS220 Fix Dwarf Accentless
+  #  - type: ReplacementAccent
+  #    accent: dwarf
+  # SS220 Fix Dwarf Accentless
   #SS220-Vox accent Begin
     - type: TajaranAccent
     - type: VoxAccent
   #SS220-Vox accent End
+    - type: DwarfAccent # SS220 Fix Dwarf Accentless
 
 # 1 Cost
 
