@@ -1,0 +1,164 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Sprited by veniiaa (Discord) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon_map"
+    },
+    {
+      "name": "cheap_icon_base"
+    },
+    {
+      "name": "lighter_flame",
+      "delays": [
+        [
+          0.2,
+          0.1,
+          0.2,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "icon-1"
+    },
+    {
+      "name": "icon-2"
+    },
+    {
+      "name": "icon-3"
+    },
+    {
+      "name": "icon-4"
+    },
+    {
+      "name": "icon-5"
+    },
+    {
+      "name": "basic_icon_base-1"
+    },
+    {
+      "name": "basic_icon_base-2"
+    },
+    {
+      "name": "basic_icon_base-3"
+    },
+    {
+      "name": "basic_icon_base-4"
+    },
+    {
+      "name": "basic_icon_base-5"
+    },
+    {
+      "name": "basic_icon_base-6"
+    },
+    {
+      "name": "basic_icon_base-7"
+    },
+    {
+      "name": "basic_icon_base-8"
+    },
+    {
+      "name": "basic_icon_base-9"
+    },
+    {
+      "name": "basic_icon_base-10"
+    },
+    {
+      "name": "basic_icon_base-11"
+    },
+    {
+      "name": "basic_icon_base-12"
+    },
+    {
+      "name": "basic_icon_base-13"
+    },
+    {
+      "name": "basic_icon_base-14"
+    },
+    {
+      "name": "basic_icon_base-15"
+    },
+    {
+      "name": "basic_icon_base-16"
+    },
+    {
+      "name": "basic_icon_base-17"
+    },
+    {
+      "name": "basic_icon_base-18"
+    },
+    {
+      "name": "basic_icon_base-19"
+    },
+    {
+      "name": "basic_icon_base-20"
+    },
+    {
+      "name": "basic_icon_base-21"
+    },
+    {
+      "name": "basic_icon_base-22"
+    },
+    {
+      "name": "basic_icon_base-23"
+    },
+    {
+      "name": "basic_icon_base-24"
+    },
+    {
+      "name": "basic_icon_base-25"
+    },
+    {
+      "name": "basic_icon_base-26"
+    },
+    {
+      "name": "basic_icon_base-27"
+    },
+    {
+      "name": "basic_icon_base-28"
+    },
+    {
+      "name": "basic_icon_base-29"
+    },
+    {
+      "name": "basic_icon_base-30"
+    },
+    {
+      "name": "basic_piston"
+    },
+    {
+      "name": "cheap_piston"
+    },
+    {
+      "name": "discount_icon_base"
+    },
+    {
+      "name": "basic_icon_top"
+    },
+    {
+      "name": "cheap_icon_top"
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left-flame",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right-flame",
+      "directions": 4
+    }
+  ]
+}
