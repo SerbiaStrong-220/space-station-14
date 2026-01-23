@@ -503,11 +503,11 @@
   description: Handed out to the bravest souls who survived the "atomic twister" ride at Syndieland.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Fun/Balloons/syndicate.rsi #SS220 balloons-resprite
+    sprite: SS220/Objects/Fun/Balloons/syndicate.rsi # SS220 balloons-resprite
     state: icon
   - type: Item
     size: Small
-    sprite: SS220/Objects/Fun/Balloons/syndicate.rsi #SS220 balloons-resprite
+    sprite: SS220/Objects/Fun/Balloons/syndicate.rsi # SS220 balloons-resprite
   - type: Damageable
     damageContainer: Inorganic
   - type: Tag
@@ -523,11 +523,11 @@
   description: Specially designed to inflict maximum psychological damage to Syndicate operatives.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Fun/Balloons/nanotrasen.rsi #SS220 balloons-resprite
+    sprite: SS220/Objects/Fun/Balloons/nanotrasen.rsi # SS220 balloons-resprite
     state: icon
   - type: Item
     size: Small
-    sprite: SS220/Objects/Fun/Balloons/nanotrasen.rsi #SS220 balloons-resprite
+    sprite: SS220/Objects/Fun/Balloons/nanotrasen.rsi # SS220 balloons-resprite
   - type: Damageable
     damageContainer: Inorganic
   - type: Tag
