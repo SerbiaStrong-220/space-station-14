@@ -1,0 +1,55 @@
+- type: skill
+  id: PhysicalTrainingInitial
+  levelInfo:
+    maximumSublevel: 5
+    levelUpPopup: physical-training-initial-level-up-popup
+    sublevelUpPopup: physical-training-initial-sublevel-up-popup
+  levelDescription:
+    skillName: physical-training-initial-name
+    skillDescription: physical-training-initial-desc
+  components:
+  - type: DisarmOnDamageSkill
+    disarmChance: 0.5
+    damageThreshold: 15.
+
+- type: skill
+  id: PhysicalTrainingBase
+  levelInfo:
+    maximumSublevel: 5
+    levelUpPopup: physical-training-base-level-up-popup
+    sublevelUpPopup: physical-training-base-sublevel-up-popup
+  levelDescription:
+    skillName: physical-training-base-name
+    skillDescription: physical-training-base-desc
+  components:
+  - type: DisarmOnDamageSkill
+    disarmChance: 0.5
+    damageThreshold: 20.
+
+- type: skill
+  id: PhysicalTrainingTrained
+  levelInfo:
+    maximumSublevel: 5
+    levelUpPopup: physical-training-trained-level-up-popup
+    sublevelUpPopup: physical-training-trained-sublevel-up-popup
+  levelDescription:
+    skillName: physical-training-trained-name
+    skillDescription: physical-training-trained-desc
+  components:
+  - type: DisarmOnDamageSkill
+    disarmChance: 0.3
+    damageThreshold: 30.
+
+- type: skill
+  id: PhysicalTrainingProfessional
+  levelInfo:
+    maximumSublevel: 1
+    levelUpPopup: physical-training-professional-level-up-popup
+    sublevelUpPopup: physical-training-professional-sublevel-up-popup
+  levelDescription:
+    skillName: physical-training-professional-name
+    skillDescription: physical-training-professional-desc
+  components:
+  - type: DisarmOnDamageSkill
+    disarmChance: 0.2
+    damageThreshold: 40.

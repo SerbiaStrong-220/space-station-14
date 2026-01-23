@@ -8,6 +8,7 @@
       department: Medical
       time: 72000
   startingGear: BrigmedicGear
+  experienceDefinition: BrigmedicRoleExperience # SS220-experience
   icon: "JobIconBrigmedic"
   supervisors: job-supervisors-cmo
   access:
@@ -20,10 +21,6 @@
   extendedAccess:
   - Chemistry
   # ss220 add extended access for brigmedic end
-  special:
-  - !type:AddComponentSpecial
-    components:
-    - type: DefibrillatorSkill
 
 
 - type: startingGear

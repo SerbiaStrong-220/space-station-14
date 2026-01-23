@@ -1,0 +1,48 @@
+# - type: skillTree
+#   id: Piloting
+#   skillGroupId: SkillGroupGeneral
+#   skillTreeName: piloting-skill-tree-name
+#   skillTree:
+#   - PilotingBase
+#   - PilotingCombat
+#   studyingProgressPossible: false
+
+- type: skillTree
+  id: ExtravehicularActivity
+  skillGroupId: SkillGroupGeneral
+  skillTreeName: extravehicular-activity-tree-name
+  skillTree:
+  - ExtravehicularActivityInitial
+  - ExtravehicularActivityBase
+  - ExtravehicularActivityTrained
+  - ExtravehicularActivityProfessional
+
+- type: skillTree
+  id: Bureaucracy
+  skillGroupId: SkillGroupGeneral
+  skillTreeName: bureaucracy-skill-tree-name
+  skillTree:
+  - BureaucracyInitial
+  - BureaucracyTrained
+  - BureaucracyProfessional
+  studyingProgressPossible: false
+
+- type: skillTree
+  id: CombatTraining
+  skillGroupId: SkillGroupGeneral
+  skillTreeName: combat-training-skill-tree-name
+  skillTree:
+  - CombatTrainingInitial
+  - CombatTrainingBase
+  - CombatTrainingTrained
+  - CombatTrainingProfessional
+
+- type: skillTree
+  id: PhysicalTraining
+  skillGroupId: SkillGroupGeneral
+  skillTreeName: physical-training-skill-tree-name
+  skillTree:
+  - PhysicalTrainingInitial
+  - PhysicalTrainingBase
+  - PhysicalTrainingTrained
+  - PhysicalTrainingProfessional

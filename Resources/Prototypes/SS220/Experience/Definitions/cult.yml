@@ -1,0 +1,18 @@
+- type: experienceDefinition
+  id: MiGoRoleExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    ExtravehicularActivity:
+      level: 1
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 1
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 3
+  knowledges:
+  - CultYoggKnowledge
+  addSublevelPoints: 0

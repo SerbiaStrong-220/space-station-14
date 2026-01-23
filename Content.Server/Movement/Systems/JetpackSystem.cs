@@ -34,7 +34,7 @@ public sealed class JetpackSystem : SharedJetpackSystem
 
             var gasTank = (uid, gasTankComp);
             active.TargetTime = _timing.CurTime + TimeSpan.FromSeconds(active.EffectCooldown);
-            var usedAir = _gasTank.RemoveAir(gasTank, comp.MoleUsage);
+            var usedAir = _gasTank.RemoveAir(gasTank, comp.MoleUsage * active.GasUsageModifier); // SS220-add-gas-usage-modifier
 
             if (usedAir == null)
                 continue;
