@@ -482,7 +482,7 @@
     quickEquip: false
   # SS220-grilling-update-2 begin
   - type: Grillable
-    timeToCook: 120
+    timeToCook: 30
     cookingResult: TrashBakedBananaPeel
   - type: Temperature
     currentTemperature: 290
