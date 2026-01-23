@@ -245,7 +245,7 @@
     - id: ChemistryBottleAmbuzolPlus
     - id: FlashlightSeclite
 
-#BSO
+# SRT Operative
 - type: entity
   id: LockerSRTOperativeFilled
   suffix: Filled
