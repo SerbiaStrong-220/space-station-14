@@ -206,7 +206,7 @@ public sealed partial class AnalysisConsoleMenu : FancyWindow
         var effect = _ent.GetComponentOrNull<MetaDataComponent>(node.Value)?.EntityDescription ?? string.Empty;
         EffectValueLabel.SetMarkup(Loc.GetString("analysis-console-info-effect-value",
             ("state", hasInfo),
-            ("info", Loc.GetString(effect))));
+            ("info", effect)));
         //SS220 Artifact effects localization end
 
         var predecessorNodes = _xenoArtifact.GetPredecessorNodes(artifact.Value.Owner, node.Value);
