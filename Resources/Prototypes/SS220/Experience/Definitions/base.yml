@@ -3,6 +3,8 @@
   skills:
     Bureaucracy:
       level: 1
+    ExtravehicularActivity:
+      level: 1
     CombatTraining:
       level: 1
     Construction:
@@ -19,6 +21,8 @@
   id: NoExperience
   skills:
     Bureaucracy:
+      level: 1
+    ExtravehicularActivity:
       level: 1
     CombatTraining:
       level: 1

@@ -30,6 +30,9 @@
         Construction:
           multiplier: 1.5
           maxBuffSkillLevel: 3
+        ExtravehicularActivity:
+          multiplier: 1.5
+          maxBuffSkillLevel: 3
 
 - type: startingGear
   id: SeniorEngineerGear

@@ -3,6 +3,8 @@
   skills:
     Bureaucracy:
       level: 1
+    ExtravehicularActivity:
+      level: 1
     CombatTraining:
       level: 1
     Construction:
@@ -19,6 +21,8 @@
   id: ResearchDirectorRoleExperience
   skills:
     Bureaucracy:
+      level: 2
+    ExtravehicularActivity:
       level: 2
     CombatTraining:
       level: 1
@@ -38,6 +42,8 @@
   skills:
     Bureaucracy:
       level: 1
+    ExtravehicularActivity:
+      level: 1
     CombatTraining:
       level: 1
     Construction:
@@ -54,6 +60,8 @@
   id: ScientistRoleExperience
   skills:
     Bureaucracy:
+      level: 1
+    ExtravehicularActivity:
       level: 1
     CombatTraining:
       level: 1

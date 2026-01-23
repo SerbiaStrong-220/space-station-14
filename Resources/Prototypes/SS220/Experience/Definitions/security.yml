@@ -3,6 +3,8 @@
   skills:
     Bureaucracy:
       level: 2
+    ExtravehicularActivity:
+      level: 1
     CombatTraining:
       level: 2
     Construction:
@@ -20,6 +22,8 @@
   skills:
     Bureaucracy:
       level: 2
+    ExtravehicularActivity:
+      level: 3
     CombatTraining:
       level: 3
     Construction:
@@ -38,6 +42,8 @@
   skills:
     Bureaucracy:
       level: 2
+    ExtravehicularActivity:
+      level: 2
     CombatTraining:
       level: 3
     Construction:
@@ -54,6 +60,8 @@
   id: SecurityCadetRoleExperience
   skills:
     Bureaucracy:
+      level: 1
+    ExtravehicularActivity:
       level: 1
     CombatTraining:
       level: 1
@@ -72,6 +80,8 @@
   skills:
     Bureaucracy:
       level: 2
+    ExtravehicularActivity:
+      level: 2
     CombatTraining:
       level: 2
     Construction:
@@ -89,6 +99,8 @@
   skills:
     Bureaucracy:
       level: 2
+    ExtravehicularActivity:
+      level: 3
     CombatTraining:
       level: 2
     Construction:
@@ -106,6 +118,8 @@
   skills:
     Bureaucracy:
       level: 2
+    ExtravehicularActivity:
+      level: 3
     CombatTraining:
       level: 3
     Construction:
@@ -122,6 +136,8 @@
   id: SecurityPetRoleExperience
   skills:
     Bureaucracy:
+      level: 1
+    ExtravehicularActivity:
       level: 1
     CombatTraining:
       level: 2

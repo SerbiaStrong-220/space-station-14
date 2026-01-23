@@ -3,6 +3,8 @@
   skills:
     Bureaucracy:
       level: 1
+    ExtravehicularActivity:
+      level: 1
     CombatTraining:
       level: 1
     Construction:
@@ -19,6 +21,8 @@
   id: ChemistRoleExperience
   skills:
     Bureaucracy:
+      level: 1
+    ExtravehicularActivity:
       level: 1
     CombatTraining:
       level: 1
@@ -37,6 +41,8 @@
   skills:
     Bureaucracy:
       level: 2
+    ExtravehicularActivity:
+      level: 1
     CombatTraining:
       level: 1
     Construction:
@@ -53,6 +59,8 @@
   id: SeniorPhysicianRoleExperience
   skills:
     Bureaucracy:
+      level: 1
+    ExtravehicularActivity:
       level: 1
     CombatTraining:
       level: 1

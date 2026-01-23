@@ -3,6 +3,8 @@
   skills:
     Bureaucracy:
       level: 1
+    ExtravehicularActivity:
+      level: 2
     CombatTraining:
       level: 2
     Construction:
@@ -20,6 +22,8 @@
   skills:
     Bureaucracy:
       level: 2
+    ExtravehicularActivity:
+      level: 4
     CombatTraining:
       level: 4
     Construction:
@@ -37,6 +41,8 @@
   skills:
     Bureaucracy:
       level: 1
+    ExtravehicularActivity:
+      level: 3
     CombatTraining:
       level: 2
     Construction:
@@ -54,6 +60,8 @@
   skills:
     Bureaucracy:
       level: 1
+    ExtravehicularActivity:
+      level: 2
     CombatTraining:
       level: 2
     Construction:

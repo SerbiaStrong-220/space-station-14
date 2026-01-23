@@ -4,6 +4,8 @@
     # Lawyer that cant write can be fun
     Bureaucracy:
       level: 1
+    ExtravehicularActivity:
+      level: 1
     CombatTraining:
       level: 1
     Construction:
@@ -19,6 +21,8 @@
   skills:
     Bureaucracy:
       level: 2
+    ExtravehicularActivity:
+      level: 1
     CombatTraining:
       level: 1
     Construction:
@@ -34,6 +38,8 @@
   skills:
     Bureaucracy:
       level: 3
+    ExtravehicularActivity:
+      level: 1
     CombatTraining:
       level: 2
     Construction:

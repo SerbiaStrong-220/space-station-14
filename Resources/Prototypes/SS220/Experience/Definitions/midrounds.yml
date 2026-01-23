@@ -3,6 +3,8 @@
   skills:
     Bureaucracy:
       level: 2
+    ExtravehicularActivity:
+      level: 3
     CombatTraining:
       level: 3
     Construction:
