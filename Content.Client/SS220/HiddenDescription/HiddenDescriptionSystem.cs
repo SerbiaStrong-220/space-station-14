@@ -54,20 +54,19 @@ public sealed class HiddenDescriptionSystem : SharedHiddenDescriptionSystem
 
     private void ChangeDescription(Entity<HiddenDescriptionComponent> entity)
     {
-        if (entity.Comp.HiddenName is null)
+        if (entity.Comp.HiddenName is null || entity.Comp.NameEntries.Count == 0)
             return;
 
-        var localEntity = _playerManager.LocalEntity;
+        if (_playerManager.LocalEntity is not { Valid: true } localEntity)
+            return;
+
         if (!TryComp<ExperienceComponent>(localEntity, out var experienceComponent) || HasComp<BypassKnowledgeCheckComponent>(localEntity))
-            return;
-
-        if (entity.Comp.NameEntries.Count == 0)
             return;
 
         // we return because entries in list goes in order of showing
         foreach (var (knowledgeId, locId) in entity.Comp.NameEntries)
         {
-            if (_experience.HaveKnowledge((localEntity.Value, experienceComponent), knowledgeId))
+            if (_experience.HaveKnowledge((localEntity, experienceComponent), knowledgeId))
             {
                 if (locId is not null)
                     _metaData.SetEntityName(entity, Loc.GetString(locId));
