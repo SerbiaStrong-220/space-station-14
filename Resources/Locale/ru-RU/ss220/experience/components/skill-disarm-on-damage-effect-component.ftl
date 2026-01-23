@@ -1,1 +1,1 @@
-disarm-on-damage-popup = {CAPITALIZE(THE($target))} роняет предметы из рук от боли!
+disarm-on-damage-popup = {CAPITALIZE($target)} роняет предметы из рук от боли!

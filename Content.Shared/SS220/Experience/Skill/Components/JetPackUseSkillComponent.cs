@@ -7,7 +7,6 @@ namespace Content.Shared.SS220.Experience.Skill.Components;
 
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState]
-// TODO
 public sealed partial class JetPackUseSkillComponent : Component
 {
     public uint LastInputTick;

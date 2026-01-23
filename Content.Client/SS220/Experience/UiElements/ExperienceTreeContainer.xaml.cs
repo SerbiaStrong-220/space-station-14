@@ -90,7 +90,6 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
             SubdataContainer.Visible = !SubdataContainer.Visible;
         };
 
-        // TODO visuals
         AddSublevelPoint.OnPressed += (args) =>
         {
             OnAddSublevelPoint?.Invoke();

@@ -12,7 +12,7 @@ namespace Content.Shared.SS220.Experience.DoAfterEffect.Systems;
 public sealed class WeightlessDoAfterSkillSystem : BaseDoAfterSkillSystem<WeightlessDoAfterSkillComponent, DoAfterEvent>
 {
     private readonly ProtoId<SkillTreePrototype> _affectedSkillTree = "ExtravehicularActivity";
-    private readonly FixedPoint4 _learningReward = 0.07f;
+    private readonly FixedPoint4 _learningRewardPreSecond = 0.015f;
 
     public override void Initialize()
     {
@@ -30,7 +30,7 @@ public sealed class WeightlessDoAfterSkillSystem : BaseDoAfterSkillSystem<Weight
     {
         base.AfterDoAfterComplete(entity, args);
 
-        TryChangeStudyingProgress(entity, _affectedSkillTree, _learningReward);
+        TryChangeStudyingProgress(entity, _affectedSkillTree, _learningRewardPreSecond * args.Args.Delay.TotalSeconds);
     }
 
     private void OnWeightlessChange(Entity<WeightlessDoAfterSkillComponent> entity, ref WeightlessnessChangedEvent args)

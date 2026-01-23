@@ -69,11 +69,9 @@ public sealed partial class ExperienceEditorWindow : FancyWindow
 
     public void SelectEntity(EntityUid uid)
     {
-        // TODO: this kinda should be somehow managed and not just return
         if (!_entityManager.TryGetComponent<ExperienceComponent>(uid, out var experience))
             return;
 
-        // TODO: handling like ask to reload or smth
         if (!ExperienceEntityOption.TrySelectId(uid.Id))
             return;
 

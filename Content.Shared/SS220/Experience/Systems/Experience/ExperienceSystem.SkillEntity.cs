@@ -201,7 +201,6 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
             return;
 
-        // TODO this seem can work without mapinit of entity so I need to add cache and resolve in update func;
         EnsureSkill(entity!, ExperienceComponent.ContainerId);
         EnsureSkill(entity!, ExperienceComponent.OverrideContainerId);
     }
