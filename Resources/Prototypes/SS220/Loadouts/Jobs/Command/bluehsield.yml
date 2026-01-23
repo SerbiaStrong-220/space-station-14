@@ -169,6 +169,14 @@
   equipment:
     outerClothing: ClothingOuterArmorBlueShieldBulletproof
 
+- type: loadout
+  id: BlueShieldSRTCoat
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BlueShieldFive
+  equipment:
+    outerClothing: ClothingOuterSRTCoat
+
 # Belt
 - type: loadout
   id: BlueshieldBelt

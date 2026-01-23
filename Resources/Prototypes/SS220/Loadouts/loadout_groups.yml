@@ -169,7 +169,6 @@
 - type: loadoutGroup
   id: BlueShieldGlasses
   name: loadout-group-blueshield-glasses
-  minLimit: 1
   loadouts:
   - BlueshieldGlasses
   - BlueshieldTacticGlasses
@@ -205,9 +204,9 @@
 - type: loadoutGroup
   id: BlueShieldOuterclothing
   name: loadout-group-blueshield-outerclothing
-  hidden: true
   loadouts:
   - BlueShieldArmorBulletproof
+  - BlueShieldSRTCoat
 
 - type: loadoutGroup
   id: BlueShieldBelt
