@@ -21,7 +21,7 @@ public sealed partial class AltMechMenu : FancyWindow
     public AltMechMenu()
     {
         RobustXamlLoader.Load(this);
-        //IoCManager.InjectDependencies(this);
+        IoCManager.InjectDependencies(this);
     }
 
     public void SetEntity(EntityUid uid)

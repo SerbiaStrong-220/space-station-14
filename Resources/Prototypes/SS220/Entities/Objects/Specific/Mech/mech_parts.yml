@@ -1,5 +1,16 @@
 - type: entity
+  id: BaseMechPart
+  save: false
+  abstract: true
+  components:
+  - type: MechPart
+  #- type: ContainerContainer
+  #  containers:
+  #    mech-equipment-container: !type:Container
+
+- type: entity
   id: BaseMechChassis
+  parent: BaseMechPart
   save: false
   abstract: true
   components:

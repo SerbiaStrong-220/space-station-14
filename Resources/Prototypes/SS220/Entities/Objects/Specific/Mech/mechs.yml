@@ -1,5 +1,6 @@
 - type: entity
   id: BaseAltMech
+  #parent: BaseMechPart
   save: false
   abstract: true
   components:

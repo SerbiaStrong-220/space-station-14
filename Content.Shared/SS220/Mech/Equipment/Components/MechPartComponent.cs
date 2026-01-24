@@ -35,10 +35,11 @@ public sealed partial class MechPartComponent : Component
     /// A container for storing the equipment entities.
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    public Container EquipmentContainer = default!;
+    //public Container EquipmentContainer = default!;
+    public Container EquipmentContainer = new();
 
     [ViewVariables]
-    public readonly string EquipmentContainerId = "mech-equipment-container";
+    public readonly string EquipmentContainerId = "part-mech-equipment-container";
 
     /// <summary>
     /// The maximum amount of equipment items that can be installed in the mech
