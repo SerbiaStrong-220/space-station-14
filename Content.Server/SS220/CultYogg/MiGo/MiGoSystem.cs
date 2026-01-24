@@ -3,6 +3,7 @@
 using Content.Server.Body.Systems;
 using Content.Server.Projectiles;
 using Content.Server.Roles.Jobs;
+using Content.Server.SS220.GameTicking.Rules;
 using Content.Shared.Alert;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
@@ -27,7 +28,6 @@ using Content.Shared.StatusEffect;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 
-
 namespace Content.Server.SS220.CultYogg.MiGo;
 
 public sealed partial class MiGoSystem : SharedMiGoSystem
@@ -44,6 +44,7 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
     [Dependency] private readonly ProjectileSystem _projectile = default!;
     [Dependency] private readonly PullingSystem _pullingSystem = default!;
     [Dependency] private readonly JobSystem _jobSystem = default!;
+    [Dependency] private readonly CultYoggRuleSystem _cultRuleSystem = default!;
 
     private readonly ProtoId<ReagentPrototype> _ascensionReagent = "TheBloodOfYogg";
     private readonly ProtoId<NpcFactionPrototype> _cultYoggFaction = "CultYogg";
@@ -58,6 +59,15 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
 
         SubscribeLocalEvent<MiGoComponent, MindAddedMessage>(OnMindAdded);
         SubscribeLocalEvent<MiGoComponent, TemperatureChangeAttemptEvent>(OnTemperatureDamage);
+    }
+
+    protected override void SyncStage(Entity<MiGoComponent> ent)
+    {
+        if (!_cultRuleSystem.TryGetCultGameRule(out var rule))
+            return;
+
+        ent.Comp.CurrentStage = rule.Value.Comp.Stage;
+        Dirty(ent);
     }
 
     private void OnMindAdded(Entity<MiGoComponent> ent, ref MindAddedMessage args)
@@ -140,7 +150,7 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
 
         UpdateMovementSpeed(uid, comp);
 
-        Dirty(uid, comp);
+        DirtyEntity(uid);// We "are making dirty" the entire entity, since ChangeForm affects many components and visual state.
     }
 
     //moving in astral faster
@@ -186,11 +196,6 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
             bodySolution.RemoveReagent(reagentRoRemove); // Removes from body
             _solutionContainer.UpdateChemicals(bodySolutionEnt.Value);
         }
-
-        if (IsEslavementSimplified)//Remove token if is was
-            return;
-
-        SetSimplifiedEslavement(false);
     }
     #endregion
 }

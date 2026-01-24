@@ -35,7 +35,8 @@ using Content.Server.SS220.Bed.Cryostorage; // SS220 cryo department record
 using Content.Shared.Forensics.Components; //SS220 Cult_hotfix_4
 using Content.Shared.SS220.Containers; //SS220 cryo mobs fix
 using Content.Shared.Body.Systems;
-using Content.Server.Guardian; //SS220 cryo mobs fix
+using Content.Server.Guardian;
+using Content.Shared.Clothing.Components; //SS220 cryo mobs fix
 
 
 namespace Content.Server.Bed.Cryostorage;
@@ -343,6 +344,11 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
         var enumerator = _inventory.GetSlotEnumerator(uid);
         while (enumerator.NextItem(out var item, out var slotDef))
         {
+            // ss220 fix attached item in cryo storage start
+            if (HasComp<AttachedClothingComponent>(item))
+                continue;
+            // ss220 fix attached item in cryo storage end
+
             data.ItemSlots.Add(slotDef.Name, Name(item));
         }
 

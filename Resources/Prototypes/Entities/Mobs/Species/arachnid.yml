@@ -85,6 +85,8 @@
     availableLanguages:
     - id: Galactic
     - id: Arati
+    - id: SpiderTongue
+      canSpeak: false
   # SS220-Add-Languages end
   - type: Vocal
     sounds:
