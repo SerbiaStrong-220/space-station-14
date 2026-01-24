@@ -153,6 +153,7 @@
         - CartridgeAmmo
       tags:             # SS220 blueshield-whitelist-storage-fix
         - KRSPowerCell  # SS220 blueshield-whitelist-storage-fix
+        - LaserSMGPowerCell # SS220 IK-40 PowerCell-Storage-Fix
 
 - type: entity
   parent: [ClothingBeltStorageBase]
