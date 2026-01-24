@@ -19,7 +19,6 @@ public sealed partial class ImplantCheckInSurgeryComponent : Component
     public EntProtoId OutputPaper = "ImplantCheckReportPaper";
 
     [DataField]
-    [AutoNetworkedField]
     public SoundSpecifier PrintSound = new SoundPathSpecifier("/Audio/Machines/short_print_and_rip.ogg",
             AudioParams.Default
                 .WithVariation(0.25f)
