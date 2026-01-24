@@ -44,6 +44,15 @@ public sealed class ResourceMinerSystem : EntitySystem
             if (resourceMinerComponent.Silo is null)
                 continue;
 
+            if (TerminatingOrDeleted(resourceMinerComponent.Silo))
+            {
+                resourceMinerComponent.Silo = null;
+
+                SetAppearanceSettings((uid, resourceMinerComponent));
+                Dirty(uid, resourceMinerComponent);
+                continue;
+            }
+
             if (_gameTiming.CurTime < resourceMinerComponent.NextUpdate)
                 continue;
 
@@ -83,10 +92,17 @@ public sealed class ResourceMinerSystem : EntitySystem
 
         entity.Comp.Silo = netSilo;
 
-        _pointLight.SetColor(entity, entity.Comp.WorkingColor);
         _ambientSound.SetSound(entity, entity.Comp.WorkSound);
-
+        SetAppearanceSettings(entity);
         Dirty(entity);
+    }
+
+    private void SetAppearanceSettings(Entity<ResourceMinerComponent> ent)
+    {
+        var isSiloLinked = ent.Comp.Silo != null;
+
+        _pointLight.SetColor(ent, isSiloLinked ? ent.Comp.WorkingColor : ent.Comp.ErrorColor);
+        _ambientSound.SetAmbience(ent, isSiloLinked);
     }
 
     private void SendAvailableSilos(Entity<ResourceMinerComponent> entity)
@@ -94,8 +110,13 @@ public sealed class ResourceMinerSystem : EntitySystem
         var silos = new HashSet<Entity<MaterialStorageComponent, OreSiloComponent>>();
         _entityLookup.GetEntitiesOnMap(_transformSystem.GetMapId(entity.Owner), silos);
 
-        _userInterface.SetUiState(entity.Owner, ResourceMinerSettings.Key, new AvailableSilosMiner([.. silos.Where(x => ValidateSilo(x.Owner, entity))
-                                                                                                            .Select(x => GetNetEntity(x.Owner))]));
+        _userInterface.SetUiState(entity.Owner,
+            ResourceMinerSettings.Key,
+            new AvailableSilosMiner(
+            [
+                .. silos.Where(x => ValidateSilo(x.Owner, entity))
+                        .Select(x => GetNetEntity(x.Owner)),
+            ]));
     }
 
     private bool ValidateSilo(EntityUid siloUid, Entity<ResourceMinerComponent> minerEntity)
