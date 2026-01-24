@@ -2,7 +2,7 @@
   parent: [ SimpleSpaceMobBase, FlyingMobBase, MobPassiveCollision ]
   id: MobElderDragon
   suffix: Shitspawn, Lanc
-  name: elrich space dragon
+  name: eldrich space dragon
   description: Really old really angry flying leviathan, loosely related to space carps.
   components:
   - type: Bloodstream
@@ -64,7 +64,7 @@
       fix1:
         shape:
           !type:PhysShapeCircle
-          radius: 0.50 #actually good. he can get stuck in 1x1 tunnels. 
+          radius: 0.50 
         density: 100
         mask:
         - FlyingMobMask
