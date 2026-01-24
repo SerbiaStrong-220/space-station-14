@@ -3,6 +3,7 @@
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.Surgery.Graph;
 
@@ -27,6 +28,13 @@ public sealed partial class SurgeryGraphEdge : ISerializationHooks
 
     [DataField("actionDescription")]
     private LocId[] _actionLocIds = Array.Empty<LocId>();
+
+    [DataField(required: true)]
+    public LocId EdgeTooltip { get; private set; }
+
+    [DataField]
+    [Access(typeof(SurgeryGraphSystem), Other = AccessPermissions.None)]
+    public SpriteSpecifier? EdgeIcon { get; private set; }
 
     /// <summary>
     /// Time which this step takes in seconds

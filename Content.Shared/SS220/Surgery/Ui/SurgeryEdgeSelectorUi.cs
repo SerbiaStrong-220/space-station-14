@@ -2,7 +2,10 @@
 
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.SS220.Pathology;
+namespace Content.Shared.SS220.Surgery.Ui;
 
-[ImplicitDataDefinitionForInheritors]
-public partial interface IPathologyContext { }
+[Serializable, NetSerializable]
+public enum SurgeryEdgeSelectorUi : byte
+{
+    Key
+}

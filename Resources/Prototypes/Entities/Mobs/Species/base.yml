@@ -191,6 +191,10 @@
         type: HumanoidMarkingModifierBoundUserInterface
       enum.StrippingUiKey.Key:
         type: StrippableBoundUserInterface
+      # SS220-surgery-update-begin
+      enum.SurgeryEdgeSelectorUi.Key:
+        type: EdgeSelectorBUI
+      # SS220-surgery-update-end
   - type: Puller
   - type: Speech
     speechSounds: Alto

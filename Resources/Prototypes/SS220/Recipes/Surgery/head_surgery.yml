@@ -25,6 +25,7 @@
       examineDescription: surgery-head-examine-start
     edges:
     - to: head-skin-incision
+      edgeTooltip:
       baseEdge: incision
   - node: head-skin-incision
     baseNode: incision

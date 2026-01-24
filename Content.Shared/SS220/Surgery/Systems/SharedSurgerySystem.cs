@@ -26,12 +26,17 @@ public abstract partial class SharedSurgerySystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly INetManager _netManager = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _userInterface = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     private const float ErrorGettingDelayDelay = 8f;
     private const float DoAfterMovementThreshold = 0.15f;
     private const int SurgeryExaminePushPriority = -1;
+
+    private const SurgeryEdgeSelectorUi EdgeSelectorBUIKey = SurgeryEdgeSelectorUi.Key;
+
+    private readonly LocId _surgeryCancelledOnStart = "surgery-cancelled-on-start";
+    private readonly LocId _surgeryCantCancelOnStart = "surgery-cant-be-cancelled-on-start";
 
     public override void Initialize()
     {
@@ -56,13 +61,37 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         if (args.Handled)
             return;
 
-        // here hardcoded one operation at a time (TODO: maybe add radial menu for possible interactions?)
-        var surgeryGraphId = entity.Comp.OngoingSurgeries.FirstOrNull()?.Key;
+        var edgeSelectorState = MakeSelectorState(entity, args.Used, args.User);
+        switch (edgeSelectorState.Infos.Count)
+        {
+            case 0:
+                foreach (var (surgeryId, _) in entity.Comp.OngoingSurgeries)
+                {
+                    PopupSurgeryGraphFailures(entity, surgeryId, args.Used, args.User);
+                }
+                break;
 
-        if (surgeryGraphId is null)
-            return;
+            case 1:
+                var info = edgeSelectorState.Infos[0];
 
-        args.Handled = TryPerformOperationStep(entity, surgeryGraphId.Value, args.Used, args.User);
+                if (GetEdgeTargeting(entity, info.SurgeryProtoId, info.TargetNode) is not { } targetingEdge)
+                    return;
+
+                args.Handled = TryPerformOperationStep(entity, info.SurgeryProtoId, targetingEdge, args.Used, args.User);
+                break;
+
+            default:
+
+                var buiOwner = entity.Owner;
+
+                // We send full state so no reason for ui being at any entity.
+                if (!_userInterface.TryOpenUi(buiOwner, EdgeSelectorBUIKey, entity, predicted: true))
+                    return;
+
+                _userInterface.SetUiState(buiOwner, EdgeSelectorBUIKey, edgeSelectorState);
+                args.Handled = true;
+                break;
+        }
     }
 
     private void OnExamined(Entity<SurgeryPatientComponent> entity, ref ExaminedEvent args)
@@ -144,45 +173,15 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
         if (!_userInterface.HasUi(entity, SurgeryDrapeUiKey.Key))
         {
-            Log.Debug($"Entity {ToPrettyString(entity)} has {nameof(SurgeryStarterComponent)} but don't have its UI!");
+            Log.Warning($"Entity {ToPrettyString(entity)} has {nameof(SurgeryStarterComponent)} but don't have its UI!");
             return;
         }
 
-        // no operation case
-        if (surgeryPatient.OngoingSurgeries.Count == 0)
-        {
-            if (!_userInterface.IsUiOpen(entity.Owner, SurgeryDrapeUiKey.Key))
-                _userInterface.OpenUi(entity.Owner, SurgeryDrapeUiKey.Key, predicted: true);
+        if (!_userInterface.IsUiOpen(entity.Owner, SurgeryDrapeUiKey.Key))
+            _userInterface.OpenUi(entity.Owner, SurgeryDrapeUiKey.Key, predicted: true);
 
-            UpdateUserInterface(entity, args.User, args.Target.Value);
-            return;
-        }
-
-        // TODO:
-        // So idea is:
-        // - we make 2 layer radial menu
-        //   - first choose surgery
-        //   - second choose edge
-        // Other code is kinda okayish
-
-        // here hardcoded one operation at a time (TODO: maybe add radial menu for possible interactions?)
-        var nullableSurgeryGraphId = surgeryPatient.OngoingSurgeries.FirstOrNull()?.Key;
-
-        if (nullableSurgeryGraphId is not { } surgeryGraphId)
-            return;
-
-        if (OperationCanBeEnded(args.Target.Value, surgeryGraphId))
-        {
-            _adminLogManager.Add(LogType.Action, LogImpact.Medium,
-                $"{ToPrettyString(args.User):user}  stopped surgery {surgeryGraphId} on {ToPrettyString(args.Target):target}");
-
-            _popup.PopupPredicted(Loc.GetString("surgery-cancelled", ("target", args.Target), ("user", args.User)), args.Target.Value, args.User);
-            EndOperation(args.Target.Value, surgeryGraphId);
-        }
-        else
-        {
-            _popup.PopupCursor(Loc.GetString("surgery-cant-be-cancelled"));
-        }
+        UpdateUserInterface(entity, args.User, args.Target.Value);
+        args.Handled = true;
     }
 
     private void OnBodyAnalyzerAfterInteract(Entity<BodyAnalyzerComponent> entity, ref AfterInteractEvent args)
@@ -215,12 +214,39 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
     private void OnStartSurgeryMessage(Entity<SurgeryStarterComponent> entity, ref StartSurgeryEvent args)
     {
-        var target = GetEntity(args.Target);
-        var user = GetEntity(args.User);
-        var used = GetEntity(args.Used);
+        var (target, user, used) = (GetEntity(args.Target), GetEntity(args.User), GetEntity(args.Used));
 
         if (target == user)
             return;
+
+        // We have 2 options:
+        //   - player wants to stop started surgery
+        //   - player wants to start surgery
+        // so:
+        // 1. get surgery patient comp
+        // 2. if surgery is ongoing - trying to end it and return
+        // 3. if surgery is not ongoing - try to start it and return
+
+        if (!TryComp<SurgeryPatientComponent>(target, out var surgeryPatientComp))
+        {
+            args.Cancel();
+            return;
+        }
+
+        if (surgeryPatientComp.OngoingSurgeries.ContainsKey(args.SurgeryGraphId))
+        {
+            if (OperationCanBeEnded(target, args.SurgeryGraphId))
+            {
+                _popup.PopupPredicted(Loc.GetString(_surgeryCancelledOnStart, ("target", args.Target), ("user", args.User)), target, user);
+                EndOperation(target, args.SurgeryGraphId, user);
+            }
+            else
+            {
+                _popup.PopupCursor(Loc.GetString(_surgeryCantCancelOnStart));
+            }
+
+            return;
+        }
 
         if (!CanStartSurgery(target, args.SurgeryGraphId, target, used, out var reason))
         {
@@ -252,83 +278,28 @@ public abstract partial class SharedSurgerySystem : EntitySystem
     }
 
     /// <returns> true if operation step performed successful </returns>
-    public bool TryPerformOperationStep(Entity<SurgeryPatientComponent> entity, ProtoId<SurgeryGraphPrototype> surgeryGraph, EntityUid? used, EntityUid user)
+    public bool TryPerformOperationStep(Entity<SurgeryPatientComponent> entity, ProtoId<SurgeryGraphPrototype> surgeryGraph, SurgeryGraphEdge chosenEdge, EntityUid? used, EntityUid user)
     {
-        if (!_prototype.Resolve(surgeryGraph, out var graphProto))
-            return false;
-
-        if (!entity.Comp.OngoingSurgeries.TryGetValue(surgeryGraph, out var currentNodeName))
+        if (!CanPerformAnyEdgeInSurgery(entity, surgeryGraph, used, user))
         {
-            Log.Error($"Tried to perform operation step for surgery [{surgeryGraph}] but {ToPrettyString(entity)} don't have that surgery!");
+            PopupSurgeryGraphFailures(entity, surgeryGraph, used, user);
             return false;
         }
 
-        foreach (var requirement in graphProto.Requirements)
+        var performEdgeInfo = GetPerformSurgeryEdgeInfo(entity, chosenEdge, used, user);
+        if (!performEdgeInfo.Visible)
+            return false;
+
+        if (performEdgeInfo.FailureReason is not null)
         {
-            var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
-
-            if (requirement.SatisfiesRequirements(requirementTarget, EntityManager))
-                continue;
-
-            var reason = requirement.RequirementFailureReason(requirementTarget, _prototype, EntityManager);
-
-            _popup.PopupClient(reason, user, user);
-        }
-
-        if (!graphProto.TryGetNode(currentNodeName, out var currentNode))
-        {
-            Log.Fatal($"Current node of {ToPrettyString(entity)} has incorrect value {currentNodeName} for graph proto {surgeryGraph}");
+            _popup.PopupPredictedCursor(performEdgeInfo.FailureReason, user);
             return false;
         }
 
-        SurgeryGraphEdge? chosenEdge = null;
-        foreach (var edge in currentNode.Edges)
+        if (SurgeryGraph.Delay(chosenEdge) is not { } secondsDelay)
         {
-            bool visible = true;
-            foreach (var requirement in SurgeryGraph.GetVisibilityRequirements(edge))
-            {
-                var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
-
-                if (requirement.SatisfiesRequirements(requirementTarget, EntityManager))
-                    continue;
-
-                visible = false;
-                break;
-            }
-
-            if (!visible)
-                continue;
-
-            // id any edges exist make it true
-            bool isAbleToPerform = true;
-            foreach (var requirement in SurgeryGraph.GetRequirements(edge))
-            {
-                var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
-
-                if (requirement.SatisfiesRequirements(requirementTarget, EntityManager))
-                    continue;
-
-                isAbleToPerform = false;
-                break;
-            }
-
-            // if passed all conditions than break
-            if (isAbleToPerform)
-            {
-                chosenEdge = edge;
-                break;
-            }
-        }
-
-        if (chosenEdge == null)
-            return false;
-
-        // lets be honest, I don't believe that everyone will check their's surgeryGraphPrototype mapping
-        var delay = SurgeryGraph.Delay(chosenEdge);
-        if (delay == null)
-        {
-            Log.Fatal($"Found edge [{chosenEdge}] with zero delay, graph id [{surgeryGraph}]");
-            delay = ErrorGettingDelayDelay;
+            Log.Fatal($"Found edge {chosenEdge} with zero delay, graph id {surgeryGraph}");
+            secondsDelay = ErrorGettingDelayDelay;
         }
 
         var ev = new GetSurgeryDelayModifiersEvent();
@@ -338,12 +309,12 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         if (used is not null)
             RaiseLocalEvent(used.Value, ref ev);
 
-        delay *= ev.Multiplier;
-        delay += ev.FlatModifier;
+        secondsDelay *= ev.Multiplier;
+        secondsDelay += ev.FlatModifier;
 
         var performerDoAfterEventArgs =
-            new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(delay.Value),
-                            new SurgeryDoAfterEvent(surgeryGraph, chosenEdge.Target), entity.Owner, target: entity.Owner, used: used)
+            new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(secondsDelay),
+                new SurgeryDoAfterEvent(surgeryGraph, chosenEdge.Target), entity.Owner, target: entity.Owner, used: used)
             {
                 NeedHand = true,
                 BreakOnMove = true,
@@ -351,7 +322,10 @@ public abstract partial class SharedSurgerySystem : EntitySystem
                 AttemptFrequency = AttemptFrequency.EveryTick
             };
 
-        if (_doAfter.TryStartDoAfter(performerDoAfterEventArgs) && TryComp<SurgeryToolComponent>(used, out var surgeryTool))
+        if (!_doAfter.TryStartDoAfter(performerDoAfterEventArgs))
+            return false;
+
+        if (TryComp<SurgeryToolComponent>(used, out var surgeryTool))
             _audio.PlayPredicted(surgeryTool.UsingSound, entity.Owner, user);
 
         return true;

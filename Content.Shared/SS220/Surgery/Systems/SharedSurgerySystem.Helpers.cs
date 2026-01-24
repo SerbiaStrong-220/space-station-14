@@ -2,6 +2,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Buckle.Components;
+using Content.Shared.Database;
 using Content.Shared.SS220.Surgery.Components;
 using Content.Shared.SS220.Surgery.Graph;
 using Robust.Shared.Prototypes;
@@ -105,11 +106,10 @@ public abstract partial class SharedSurgerySystem
     {
         ChangeSurgeryNode(entity, surgeryGraph, chosenEdge.Target, user, used);
 
-        _audio.PlayPredicted(SurgeryGraph.GetSoundSpecifier(chosenEdge), entity.Owner, user,
-                        SurgeryGraph.GetSoundSpecifier(chosenEdge)?.Params.WithVolume(1f));
+        _audio.PlayPredicted(SurgeryGraph.GetSoundSpecifier(chosenEdge), entity.Owner, user);
 
         if (OperationCanBeEnded(entity!, surgeryGraph))
-            EndOperation(entity!, surgeryGraph);
+            EndOperation(entity!, surgeryGraph, user);
     }
 
     protected void ChangeSurgeryNode(Entity<SurgeryPatientComponent> entity, ProtoId<SurgeryGraphPrototype> surgeryGraph, string targetNode, EntityUid performer, EntityUid? used)
@@ -150,11 +150,13 @@ public abstract partial class SharedSurgerySystem
             ("user", performer), ("used", used == null ? Loc.GetString("surgery-null-used") : used)), entity.Owner, performer);
     }
 
-    protected void EndOperation(Entity<SurgeryPatientComponent?> entity, ProtoId<SurgeryGraphPrototype> surgeryGraph)
+    protected void EndOperation(Entity<SurgeryPatientComponent?> entity, ProtoId<SurgeryGraphPrototype> surgeryGraphId, EntityUid user)
     {
         if (!Resolve(entity.Owner, ref entity.Comp))
             return;
 
-        entity.Comp.OngoingSurgeries.Remove(surgeryGraph);
+        _adminLogManager.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(user):user} ended surgery {surgeryGraphId} on {ToPrettyString(entity):target}");
+
+        entity.Comp.OngoingSurgeries.Remove(surgeryGraphId);
     }
 }

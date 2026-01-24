@@ -2,6 +2,7 @@
 
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.Surgery.Graph;
 
@@ -54,6 +55,11 @@ public sealed class SurgeryGraphSystem : EntitySystem
     public float? Delay(SurgeryGraphEdge edge)
     {
         return Get(edge, (x) => x.Delay);
+    }
+
+    public SpriteSpecifier? EdgeIcon(SurgeryGraphEdge edge)
+    {
+        return Get(edge, (x) => x.EdgeIcon);
     }
 
     public IReadOnlyList<T> GetList<T>(SurgeryGraphEdge edge, Func<SurgeryGraphEdge, IReadOnlyList<T>> listGetter) where T : notnull

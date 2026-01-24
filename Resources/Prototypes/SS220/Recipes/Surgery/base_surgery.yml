@@ -55,6 +55,10 @@
     to: abstract
     delay: 4
     sound: /Audio/SS220/Surgery/incision.ogg
+    edgeIcon:
+      sprite: Objects/Specific/Medical/Surgery/scalpel.rsi
+      state: scalpel
+    edgeTooltip: abstract
     requirements:
     - !type:SurgeryToolRequirement
       subject: used
@@ -71,6 +75,9 @@
     to: abstract
     delay: 4
     sound: /Audio/SS220/Surgery/retract_skin.ogg
+    edgeIcon:
+      sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+      state: retractor
     requirements:
     - !type:SurgeryToolRequirement
       subject: used
@@ -87,6 +94,9 @@
     to: abstract
     delay: 12
     sound: /Audio/SS220/Surgery/saw.ogg
+    edgeIcon:
+      sprite: Objects/Specific/Medical/Surgery/saw.rsi
+      state: saw
     requirements:
     - !type:SurgeryToolRequirement
       subject: used
@@ -103,6 +113,9 @@
     to: abstract
     delay: 4
     sound: /Audio/SS220/Surgery/organ.ogg
+    edgeIcon:
+      sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+      state: hemostat
     requirements:
     - !type:SurgeryToolRequirement
       subject: used
@@ -119,6 +132,9 @@
     to: abstract
     delay: 4
     sound: /Audio/SS220/Surgery/seal_wound.ogg
+    edgeIcon:
+      sprite: Objects/Specific/Medical/Surgery/cautery.rsi
+      state: cautery
     requirements:
     - !type:SurgeryToolRequirement
       subject: used
