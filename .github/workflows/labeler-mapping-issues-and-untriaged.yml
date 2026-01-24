@@ -20,6 +20,7 @@ jobs:
               'Eclipse': {label: 'MI: Eclipse', assignee: 'AliceValestray'},
               'Astro': {label: 'MI: Astro', assignee: 'VictorBoum'},
               'Nightshift': {label: 'MI: Nightshift', assignee: 'Heidem1'},
+              'Tox': {label: 'MI: Tox', assignee: 'VictorBoum'},
               'Другое': {label: 'MI: Other', assignee: 'VictorBoum'}
             };
             let selectedOption = null;

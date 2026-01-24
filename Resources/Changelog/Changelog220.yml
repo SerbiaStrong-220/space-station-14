@@ -1,19 +1,6 @@
 ﻿Entries:
 - author: NightmareStalker
   changes:
-  - message: "\u0410\u0432\u0430\u043D\u043F\u043E\u0441\u0442\u0430 \u042F\u041E\
-      : \u0412\u043E\u0437\u0432\u0440\u0430\u0449\u0435\u043D\u0438\u0435 \u043B\u0435\
-      \u0442\u043D\u0435\u0433\u043E \u0441\u0435\u0437\u043E\u043D\u044F"
-    type: Tweak
-  - message: "\u0410\u0432\u0430\u043D\u043F\u043E\u0441\u0442\u0430 \u042F\u041E\
-      : \u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0430 \u0442\u0440\u0430\u0432\u0430\
-      \ \u0432\u043E \u0434\u0432\u043E\u0440\u0435-\u0442\u0438\u0440\u0435"
-    type: Tweak
-  id: 865
-  time: '2025-03-07T08:21:40.0000000+00:00'
-  url: https://github.com/SerbiaStrong-220/space-station-14/pull/2655
-- author: NightmareStalker
-  changes:
   - message: "Axioma: \u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B \u043D\
       \u0430\u0437\u0432\u0430\u043D\u0438\u044F \u043A\u0430\u043C\u0435\u0440\u0430\
       \u043C \u0434\u043B\u044F \u0443\u0434\u043E\u0431\u0441\u0442\u0432\u0430 \u0438\
@@ -8190,3 +8177,12 @@
   id: 1364
   time: '2026-01-23T11:04:26.0000000+00:00'
   url: https://github.com/SerbiaStrong-220/space-station-14/pull/3836
+- author: VictorBoum
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0430 \u043D\u043E\u0432\
+      \u0430\u044F \u0438\u0433\u0440\u043E\u0432\u0430\u044F \u043A\u0430\u0440\u0442\
+      \u0430 Tox!"
+    type: Add
+  id: 1365
+  time: '2026-01-23T20:55:49.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/3845
