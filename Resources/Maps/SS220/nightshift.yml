@@ -120327,11 +120327,7 @@ entities:
           showEnts: False
           occludes: False
           ent: 8772
-    #SS220 Accent system begin
-    #- type: ReplacementAccent
-    #  accent: cowboy
     - type: CowboyAccent
-    #SS220 Accent system end
   - uid: 8790
     components:
     - type: MetaData
@@ -120413,11 +120409,7 @@ entities:
           showEnts: False
           occludes: False
           ent: 8831
-    #SS220 Accent system begin
-    #- type: ReplacementAccent
-    #  accent: cowboy
     - type: CowboyAccent
-    #SS220 Accent system end
   - uid: 8834
     components:
     - type: Transform
