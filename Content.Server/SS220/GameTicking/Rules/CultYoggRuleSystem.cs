@@ -559,6 +559,9 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         if (nextStageDefinition is null)
             return;
 
+        if (nextStageDefinition.CultistsAmountRequired == null)
+            return;
+
         if (nextStageDefinition.CultistsAmountRequired > amountOfCultists)
             return;
 

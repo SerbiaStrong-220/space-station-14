@@ -122,7 +122,7 @@
       - state: plain-inhand-right
   #SS220-grill-update-2 begin
   - type: Grillable
-    timeToCook: 120
+    timeToCook: 30
     cookingResult: FoodMeatCooked
   #SS220-grill-update-2 end
   #ss220 fix meatwheat construction start
@@ -622,6 +622,7 @@
   - type: InternalTemperature
     conductivity: 0.42
   - type: Grillable
+    timeToCook: 30
     cookingResult: FoodMeatSpiderSteak
   #SS220-grill-update-2 end
 
@@ -751,6 +752,7 @@
       - state: snake-inhand-right
   #SS220-grill-update-2 begin
   - type: Grillable
+    timeToCook: 30
     cookingResult: FoodMeatSnakeSteak
   - type: InternalTemperature
     conductivity: 0.42
