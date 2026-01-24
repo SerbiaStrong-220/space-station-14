@@ -68,13 +68,13 @@
   - CentCommNanoTrasenDiplomat     # Дипломат НТ
   - CentcommOfficer                # Офицер ЦК
   - CentcommCommunicationsOfficer  # Связист ЦК
-  - CentCommBlueShield             # Оперативник СЩ
+  - CentcomOperativeBSO #редакт    # Оперативник СЩ
   - CentCommBartender              # Бармен ЦК
   - CentCommChef                   # Повар ЦК
   - CentCommJanitor                # Уборщик ЦК
   - CentCommServiceWorker          # Сервисный Работник ЦК
   - CentCommMaid                   # Горничная ЦК
-  editorHidden: true # Ну, хуле, никто не играет в эту полную хуйню, я вообще не понимаю, зачем я всё это добавлял. Я просто озабоченный. Откат.
+  editorHidden: false 
   weight: 120
   lightColor: "#dca248" # SS220 Round End Titles
 ##SS220 Centcomm_color_fix end

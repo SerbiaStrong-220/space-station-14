@@ -1,16 +1,16 @@
-#  Всё подверглось цензуре. А это я просто закомментировал. :P
-#
-#- type: entity
-#  parent: PosterBase
-#  id: PosterLegitBeautiful
-#  name: Пляжный эпизод
-#  description: Красивый гладкий плакат с изображением не менее красивых Катерины и Шелли. На плакат можно смотреть долго.
-#  suffix: Плакат
-#  components:
-#  - type: Sprite
-#    sprite: MetaFlud/Structures/Wallmount/posters.rsi
-#    state: poster1_legal
-#    scale: 0.85,0.85
+
+
+- type: entity
+  parent: PosterBase
+  id: PosterLegitBeautiful
+  name: Пляжный эпизод
+  description: На это плакат можно смотреть долго... # Красивый гладкий плакат с изображением не менее красивых Катерины и Шелли. На плакат можно смотреть долго.
+  suffix: Плакат
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Structures/Wallmount/posters.rsi
+    state: poster1_legal
+    scale: 0.85,0.85
 
 - type: entity
   parent: PosterBase
@@ -70,4 +70,28 @@
   - type: Sprite
     sprite: MetaFlud/Structures/Wallmount/posters.rsi
     state: poster7_legal
+    scale: 0.85,0.85
+
+- type: entity
+  parent: PosterBase
+  id: PosterLegitPencil
+  name: Картина карандашём
+  description: Этот тоже пара # На этом плакате изображены Игорь и Катерина, милая пара. Этот плакат излучает нежность
+  suffix: Плакат
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Structures/Wallmount/posters.rsi
+    state: poster8_legal
+    scale: 0.85,0.85
+
+- type: entity
+  parent: PosterBase
+  id: PosterLegitBunny
+  name: Зайчик
+  description: Этот плакат заставляет вас краснеть # На этом плакате изображена Наоми. Этот плакат заставляет вас краснеть
+  suffix: Плакат
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Structures/Wallmount/posters.rsi
+    state: poster9_legal
     scale: 0.85,0.85

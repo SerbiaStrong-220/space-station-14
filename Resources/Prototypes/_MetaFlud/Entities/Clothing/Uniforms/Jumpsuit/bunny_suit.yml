@@ -1,14 +1,116 @@
 # Костюм зайчика без колготок
+
+##
+## Suits
+##
+
 - type: entity
   parent: [ClothingUniformSkirtBase]
-  id: ClothingUniformBunnySuit
-  name: Костюм кролика
+  id: ClothingUniformBunnySuitWhite
+  name: Белый костюм кролика
   description: Для настоящих кроликов.
   components:
   - type: Sprite
     sprite: MetaFlud/Clothing/Uniforms/Jumpsuit/bunny_suit/suit.rsi
+    layers:
+    - state: icon
+      color: "#ffffff" 
   - type: Clothing
     sprite: MetaFlud/Clothing/Uniforms/Jumpsuit/bunny_suit/suit.rsi
+    clothingVisuals:
+      jumpsuit:
+        - state: equipped-INNERCLOTHING
+          color: "#ffffff" 
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#ffffff"  
+      right:
+      - state: inhand-right
+        color: "#ffffff" 
+
+- type: entity
+  parent: [ClothingUniformSkirtBase]
+  id: ClothingUniformBunnySuitBlack
+  name: Чёрный костюм кролика
+  description: Для настоящих кроликов.
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Uniforms/Jumpsuit/bunny_suit/suit.rsi
+    layers:
+    - state: icon
+      color: "#252a2c" 
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Uniforms/Jumpsuit/bunny_suit/suit.rsi
+    clothingVisuals:
+      jumpsuit:
+        - state: equipped-INNERCLOTHING
+          color: "#252a2c" 
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#252a2c"  
+      right:
+      - state: inhand-right
+        color: "#252a2c"
+
+- type: entity
+  parent: [ClothingUniformSkirtBase]
+  id: ClothingUniformBunnySuitRed
+  name: Красный костюм кролика
+  description: Для настоящих кроликов.
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Uniforms/Jumpsuit/bunny_suit/suit.rsi
+    layers:
+    - state: icon
+      color: "#b80000" 
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Uniforms/Jumpsuit/bunny_suit/suit.rsi
+    clothingVisuals:
+      jumpsuit:
+        - state: equipped-INNERCLOTHING
+          color: "#b80000" 
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#b80000"  
+      right:
+      - state: inhand-right
+        color: "#b80000"
+
+- type: entity
+  parent: [ClothingUniformSkirtBase]
+  id: ClothingUniformBunnySuitBlue
+  name: Красный костюм кролика
+  description: Для настоящих кроликов.
+  components:
+  - type: Sprite
+    sprite: MetaFlud/Clothing/Uniforms/Jumpsuit/bunny_suit/suit.rsi
+    layers:
+    - state: icon
+      color: "#3b35b2" 
+  - type: Clothing
+    sprite: MetaFlud/Clothing/Uniforms/Jumpsuit/bunny_suit/suit.rsi
+    clothingVisuals:
+      jumpsuit:
+        - state: equipped-INNERCLOTHING
+          color: "#3b35b2" 
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#3b35b2"  
+      right:
+      - state: inhand-right
+        color: "#3b35b2"
+
+##
+## Suits
+##
 
 # Ушки и хвост
 - type: entity
@@ -36,18 +138,6 @@
     sprite: MetaFlud/Clothing/Uniforms/Jumpsuit/bunny_suit/hands.rsi
   - type: Clothing
     sprite: MetaFlud/Clothing/Uniforms/Jumpsuit/bunny_suit/hands.rsi
-
-# Костыль, часть колготок на ногах не видно из-за отрисовки
-- type: entity
-  parent: [ ClothingShoesMilitaryBase ]
-  id: ClothingBootsBunnySuitStockings
-  name: Кроличьи колготки
-  description: Колготки
-  components:
-  - type: Sprite
-    sprite: MetaFlud/Clothing/Uniforms/Jumpsuit/bunny_suit/stockings.rsi
-  - type: Clothing
-    sprite: MetaFlud/Clothing/Uniforms/Jumpsuit/bunny_suit/stockings.rsi
 
 - type: entity
   parent: ClothingScarfBase
