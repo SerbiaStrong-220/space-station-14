@@ -8,7 +8,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Mech;
-using Content.Shared.Mech.Components;
+using Content.Shared.SS220.ArmorBlock;
 using Content.Shared.Mech.EntitySystems;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
@@ -68,12 +68,10 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         SubscribeLocalEvent<AltMechComponent, UpdateCanMoveEvent>(OnMechCanMoveEvent);
 
 
-        SubscribeLocalEvent<MechPilotComponent, ToolUserAttemptUseEvent>(OnToolUseAttempt);
-        SubscribeLocalEvent<MechPilotComponent, InhaleLocationEvent>(OnInhale);
-        SubscribeLocalEvent<MechPilotComponent, ExhaleLocationEvent>(OnExhale);
-        SubscribeLocalEvent<MechPilotComponent, AtmosExposedGetAirEvent>(OnExpose);
-
-        SubscribeLocalEvent<MechAirComponent, GetFilterAirEvent>(OnGetFilterAir);
+        SubscribeLocalEvent<AltMechPilotComponent, ToolUserAttemptUseEvent>(OnToolUseAttempt);
+        SubscribeLocalEvent<AltMechPilotComponent, InhaleLocationEvent>(OnInhale);
+        SubscribeLocalEvent<AltMechPilotComponent, ExhaleLocationEvent>(OnExhale);
+        SubscribeLocalEvent<AltMechPilotComponent, AtmosExposedGetAirEvent>(OnExpose);
 
         #region Equipment UI message relays
         SubscribeLocalEvent<AltMechComponent, MechGrabberEjectMessage>(ReceiveEquipmentUiMesssages);
@@ -87,22 +85,25 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
             args.Cancel();
     }
 
-    private void OnInteractUsing(EntityUid uid, AltMechComponent component, InteractUsingEvent args)
+    private void OnInteractUsing(Entity<AltMechComponent> ent, ref InteractUsingEvent args)
     {
-        if (TryComp<WiresPanelComponent>(uid, out var panel) && !panel.Open)
+        if (!ent.Comp.MaintenanceMode)
             return;
 
-        if (component.BatterySlot.ContainedEntity == null && TryComp<BatteryComponent>(args.Used, out var battery))
+        if (TryComp<WiresPanelComponent>(ent.Owner, out var panel) && !panel.Open)
+            return;
+
+        if (ent.Comp.BatterySlot.ContainedEntity == null && TryComp<BatteryComponent>(args.Used, out var battery))
         {
-            InsertBattery(uid, args.Used, component, battery);
-            _actionBlocker.UpdateCanMove(uid);
+            InsertBattery(ent.Owner, args.Used, ent.Comp, battery);
+            _actionBlocker.UpdateCanMove(ent.Owner);
             return;
         }
 
-        if (_toolSystem.HasQuality(args.Used, PryingQuality) && component.BatterySlot.ContainedEntity != null)
+        if (_toolSystem.HasQuality(args.Used, PryingQuality) && ent.Comp.BatterySlot.ContainedEntity != null)
         {
-            var doAfterEventArgs = new DoAfterArgs(EntityManager, args.User, component.BatteryRemovalDelay,
-                new RemoveBatteryEvent(), uid, target: uid, used: args.Target)
+            var doAfterEventArgs = new DoAfterArgs(EntityManager, args.User, ent.Comp.BatteryRemovalDelay,
+                new RemoveBatteryEvent(), ent.Owner, target: ent.Owner, used: args.Target)
             {
                 BreakOnMove = true
             };
@@ -165,7 +166,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         ToggleMechUi(uid, component);
     }
 
-    private void OnToolUseAttempt(EntityUid uid, MechPilotComponent component, ref ToolUserAttemptUseEvent args)
+    private void OnToolUseAttempt(EntityUid uid, AltMechPilotComponent component, ref ToolUserAttemptUseEvent args)
     {
         if (args.Target == component.Mech)
             args.Cancelled = true;
@@ -253,6 +254,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         }
 
         TryInsert(uid, args.Args.User, component);
+
         _actionBlocker.UpdateCanMove(uid);
 
         args.Handled = true;
@@ -272,19 +274,10 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
     {
         var integrity = component.MaxIntegrity - args.Damageable.TotalDamage;
         SetIntegrity(uid, integrity, component);
-
-        if (args.DamageIncreased &&
-            args.DamageDelta != null &&
-            component.PilotSlot.ContainedEntity != null)
-        {
-            var damage = args.DamageDelta * component.MechToPilotDamageMultiplier;
-            _damageable.TryChangeDamage(component.PilotSlot.ContainedEntity, damage);
-        }
     }
 
     private void ToggleMechUi(EntityUid uid, AltMechComponent? component = null, EntityUid? user = null)
     {
-
         if (!Resolve(uid, ref component))
             return;
         user ??= component.PilotSlot.ContainedEntity;
@@ -297,7 +290,6 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         _ui.TryToggleUi(uid, MechUiKey.Key, actor.PlayerSession);
         UpdateUserInterface(uid, component);
     }
-
 
     private void ReceiveEquipmentUiMesssages<T>(EntityUid uid, AltMechComponent component, T args) where T : MechEquipmentUiMessage
     {
@@ -408,7 +400,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
     }
 
     #region Atmos Handling
-    private void OnInhale(EntityUid uid, MechPilotComponent component, InhaleLocationEvent args)
+    private void OnInhale(EntityUid uid, AltMechPilotComponent component, InhaleLocationEvent args)
     {
         if (!TryComp<AltMechComponent>(component.Mech, out var mech) ||
             !TryComp<MechAirComponent>(component.Mech, out var mechAir))
@@ -420,7 +412,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
             args.Gas = mechAir.Air;
     }
 
-    private void OnExhale(EntityUid uid, MechPilotComponent component, ExhaleLocationEvent args)
+    private void OnExhale(EntityUid uid, AltMechPilotComponent component, ExhaleLocationEvent args)
     {
         if (!TryComp<AltMechComponent>(component.Mech, out var mech) ||
             !TryComp<MechAirComponent>(component.Mech, out var mechAir))
@@ -432,7 +424,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
             args.Gas = mechAir.Air;
     }
 
-    private void OnExpose(EntityUid uid, MechPilotComponent component, ref AtmosExposedGetAirEvent args)
+    private void OnExpose(EntityUid uid, AltMechPilotComponent component, ref AtmosExposedGetAirEvent args)
     {
         if (args.Handled)
             return;

@@ -1,0 +1,143 @@
+- type: entity
+  id: BaseAltMech
+  save: false
+  abstract: true
+  components:
+  - type: MechPart
+  - type: MobMover
+  - type: AltMech
+  - type: MechRobot #SS220-AddMechToClothing
+  - type: MechAir
+  - type: AirFilter
+    # everything except oxygen and nitrogen
+    gases:
+    - CarbonDioxide
+    - Plasma
+    - Tritium
+    - WaterVapor
+    - Ammonia
+    - NitrousOxide
+    - Frezon
+    #- Helium3 TODO: fusion
+    # remove everything except oxygen to maintain oxygen ratio
+    overflowGases:
+    - Nitrogen
+    - CarbonDioxide
+    - Plasma
+    - Tritium
+    - WaterVapor
+    - Ammonia
+    - NitrousOxide
+    - Frezon
+    #- Helium3 TODO: fusion
+  - type: AirIntake
+  # for intake and filter to work
+  - type: AtmosDevice
+    requireAnchored: false
+    joinSystem: true
+  - type: DoAfter
+  - type: Repairable
+    fuelCost: 25
+    doAfterDelay: 10
+  - type: UserInterface
+    interfaces:
+      enum.MechUiKey.Key:
+        type: AltMechBoundUserInterface
+  - type: Puller
+    needsHands: false
+  - type: InputMover
+  - type: InteractionOutline
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1
+    baseSprintSpeed: 2
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - FootstepSound
+  - type: Pullable
+  - type: Physics
+    bodyType: KinematicController
+  - type: GravityAffected
+  - type: Clickable
+  - type: WiresPanel
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.45
+        density: 1000
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Appearance
+  - type: ContainerContainer
+    containers:
+      mech-pilot-slot: !type:ContainerSlot
+      mech-battery-slot: !type:ContainerSlot
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: FootstepModifier
+    footstepSoundCollection:
+      path: /Audio/Mecha/mechmove03.ogg
+  - type: GuideHelp
+    guides:
+    - Robotics
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: MechAltRipley
+  parent: BaseAltMech
+  name: Ripley APLU
+  description: Versatile and lightly armored, the Ripley is useful for almost any heavy work scenario. The "APLU" stands for Autonomous Power Loading Unit.
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    noRot: true
+    sprite: Objects/Specific/Mech/mecha.rsi
+    layers:
+    - map: [ "enum.MechVisualLayers.Base" ]
+      state: ripleymkii
+  - type: FootstepModifier
+    footstepSoundCollection:
+      path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
+  - type: AltMech
+    baseState: ripleymkii
+    openState: ripley-open
+    brokenState: ripley-broken
+    pilotWhitelist:
+      components:
+        - HumanoidAppearance
+  - type: MeleeWeapon
+    hidden: true
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 14 #intentionally shit so people realize that going into combat with the ripley is usually a bad idea.
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.25
+    baseSprintSpeed: 3.6
+
+- type: entity
+  id: MechRipleyBattery
+  parent: MechRipley
+  suffix: Battery
+  components:
+  - type: ContainerFill
+    containers:
+      mech-battery-slot:
+      - PowerCellHigh

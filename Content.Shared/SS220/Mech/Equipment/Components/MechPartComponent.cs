@@ -1,15 +1,17 @@
 using Content.Shared.DoAfter;
+using Content.Shared.FixedPoint;
 using Content.Shared.Mech.Components;
 using Content.Shared.Whitelist;
-using Robust.Shared.Serialization;
 using Robust.Shared.Containers;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Mech.Equipment.Components;
 
 /// <summary>
 /// A piece of equipment that can be installed into <see cref="MechComponent"/>
 /// </summary>
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class MechPartComponent : Component
 {
     /// <summary>
@@ -20,12 +22,14 @@ public sealed partial class MechPartComponent : Component
     /// <summary>
     /// The mech that the equipment is inside of.
     /// </summary>
-    [ViewVariables] public EntityUid? PartOwner;
+    [ViewVariables, AutoNetworkedField]
+    public EntityUid? PartOwner;
 
     /// <summary>
     /// The slot this part can be attached to
     /// </summary>
-    [DataField("slot")] public string slot = "default";
+    [DataField("slot")]
+    public string slot = "default";
 
     /// <summary>
     /// A container for storing the equipment entities.
@@ -47,6 +51,30 @@ public sealed partial class MechPartComponent : Component
     /// </summary>
     [DataField]
     public EntityWhitelist? EquipmentWhitelist;
+
+    /// <summary>
+    /// How much "health" the mech has left.
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    public FixedPoint2 Integrity;
+
+    /// <summary>
+    /// The maximum amount of damage the mech can take.
+    /// </summary>
+    [DataField, AutoNetworkedField, ViewVariables(VVAccess.ReadWrite)]
+    public FixedPoint2 MaxIntegrity = 250;
+
+    /// <summary>
+    /// How much does core part weight
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    public FixedPoint2 OwnMass = 0;
+
+    /// <summary>
+    /// Whether the mech has been destroyed and is no longer pilotable.
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    public bool Broken = false;
 }
 
 /// <summary>

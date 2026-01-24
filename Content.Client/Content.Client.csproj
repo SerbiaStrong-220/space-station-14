@@ -25,4 +25,19 @@
   </ItemGroup>
   <Import Project="..\RobustToolbox\MSBuild\Robust.Properties.targets" />
   <Import Project="..\RobustToolbox\MSBuild\XamlIL.targets" />
+  <ItemGroup>
+    <EmbeddedResource Remove="SS220\Mech\Ui\AltMechEquipmentControl.xaml" />
+    <EmbeddedResource Remove="SS220\Mech\Ui\AltMechMenu.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Update="SS220\Mech\Ui\AltMechEquipmentControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AdditionalFiles>
+    <AdditionalFiles Update="SS220\Mech\Ui\AltMechMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AdditionalFiles>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SS220\Mech\Ui\Equipment\" />
+  </ItemGroup>
 </Project>

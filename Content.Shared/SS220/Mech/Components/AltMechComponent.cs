@@ -36,7 +36,7 @@ public sealed partial class AltMechComponent : Component
     /// <summary>
     /// How much does core part weight
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    [DataField, ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public FixedPoint2 OwnMass = 0;
 
     /// <summary>
@@ -48,7 +48,7 @@ public sealed partial class AltMechComponent : Component
     /// <summary>
     /// How much the mech can carry
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    [DataField, ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public FixedPoint2 MaximalMass = 0;
 
     /// <summary>
@@ -68,13 +68,6 @@ public sealed partial class AltMechComponent : Component
     public readonly string BatterySlotId = "mech-battery-slot";
 
     /// <summary>
-    /// A multiplier used to calculate how much of the damage done to a mech
-    /// is transfered to the pilot
-    /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public float MechToPilotDamageMultiplier;
-
-    /// <summary>
     /// Whether the mech has been destroyed and is no longer pilotable.
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
@@ -90,10 +83,13 @@ public sealed partial class AltMechComponent : Component
     public readonly string PilotSlotId = "mech-pilot-slot";
 
     [AutoNetworkedField]
-    public MovementSpeedModifier? OverallBaseMovementSpeed;
+    public float? OverallBaseMovementSpeed = 1f;
 
     [AutoNetworkedField]
-    public MovementSpeedModifier? OverallMovementSpeedModifier;
+    public float? OverallMovementSpeedModifier = 1f;
+
+    [AutoNetworkedField]
+    public bool MaintenanceMode = true; //if the mech is not in the maintenance mode we cannot interact with its parts or equipment
 
     [ViewVariables(VVAccess.ReadWrite)]
     public Dictionary<string, ContainerSlot> ContainerDict = new();

@@ -1,0 +1,23 @@
+- type: entity
+  id: BaseMechChassis
+  save: false
+  abstract: true
+  components:
+  - type: MechChassis
+    maximalMass: 550
+    BaseMovementSpeed: 3.6
+  - type: MechPart
+    slot: chassis
+    ownMass: 200
+
+- type: entity
+  id: PowerloaderChassis
+  parent: BaseMechChassis
+  name: Powerloader hydraulic chassis
+  description: Low-tier hydraulic chassis,heavy and slow but also very powerfull and reliable
+  components:
+  - type: MechChassis
+    maximalMass: 550
+    BaseMovementSpeed: 3.6
+  - type: MechPart
+    slot: chassis

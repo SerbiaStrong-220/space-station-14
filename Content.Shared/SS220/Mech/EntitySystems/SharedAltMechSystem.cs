@@ -16,6 +16,7 @@ using Content.Shared.Mech.Equipment.Components;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
+using Content.Shared.SS220.ArmorBlock;
 using Content.Shared.SS220.Mech.Components;
 using Content.Shared.SS220.Mech.Equipment.Components;
 using Content.Shared.SS220.MechClothing; 
@@ -61,9 +62,9 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         SubscribeLocalEvent<AltMechComponent, DragDropTargetEvent>(OnDragDrop);
         SubscribeLocalEvent<AltMechComponent, CanDropTargetEvent>(OnCanDragDrop);
 
-        SubscribeLocalEvent<MechPilotComponent, GetMeleeWeaponEvent>(OnGetMeleeWeapon);
-        SubscribeLocalEvent<MechPilotComponent, CanAttackFromContainerEvent>(OnCanAttackFromContainer);
-        SubscribeLocalEvent<MechPilotComponent, AttackAttemptEvent>(OnAttackAttempt);
+        SubscribeLocalEvent<AltMechPilotComponent, GetMeleeWeaponEvent>(OnGetMeleeWeapon);
+        SubscribeLocalEvent<AltMechPilotComponent, CanAttackFromContainerEvent>(OnCanAttackFromContainer);
+        SubscribeLocalEvent<AltMechPilotComponent, AttackAttemptEvent>(OnAttackAttempt);
 
         InitializeRelay();
     }
@@ -272,17 +273,32 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         if (!Resolve(uid, ref component))
             return;
 
+        if (!component.MaintenanceMode)
+            return;
+
         if (!Resolve(toInsert, ref partComponent))
             return;
 
-        if (!component.ContainerDict.ContainsKey(partComponent.slot) && component.ContainerDict[partComponent.slot].ContainedEntity != null)
+        if (!component.ContainerDict.ContainsKey(partComponent.slot) || component.ContainerDict[partComponent.slot].ContainedEntity != null)
             return;
 
         partComponent.PartOwner = uid;
         _container.Insert(toInsert, component.ContainerDict[partComponent.slot]);
+        AddMass(component, partComponent.OwnMass);
         var ev = new MechPartInsertedEvent(uid);
         RaiseLocalEvent(toInsert, ref ev);
         UpdateUserInterface(uid, component);
+        Dirty(uid, component);
+    }
+
+    public void AddMass(AltMechComponent mechComp, FixedPoint2 Value)
+    {
+        mechComp.OverallMass += Value;
+    }
+
+    public void RemoveMass(AltMechComponent mechComp, FixedPoint2 Value)
+    {
+        mechComp.OverallMass -= Value;
     }
 
     /// <summary>
@@ -485,6 +501,8 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         SetupUser(uid, toInsert.Value);
         _container.Insert(toInsert.Value, component.PilotSlot);
+        if (TryComp<ArmorBlockComponent>(uid, out var blockComp))
+            blockComp.Owner = toInsert;
         UpdateAppearance(uid, component);
         return true;
     }
@@ -507,10 +525,12 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         RemoveUser(uid, pilot);
         _container.RemoveEntity(uid, pilot);
+        if (TryComp<ArmorBlockComponent>(uid, out var blockComp))
+            blockComp.Owner = null;
         return true;
     }
 
-    private void OnGetMeleeWeapon(EntityUid uid, MechPilotComponent component, GetMeleeWeaponEvent args)
+    private void OnGetMeleeWeapon(EntityUid uid, AltMechPilotComponent component, GetMeleeWeaponEvent args)
     {
         if (args.Handled)
             return;
@@ -523,12 +543,12 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         args.Handled = true;
     }
 
-    private void OnCanAttackFromContainer(EntityUid uid, MechPilotComponent component, CanAttackFromContainerEvent args)
+    private void OnCanAttackFromContainer(EntityUid uid, AltMechPilotComponent component, CanAttackFromContainerEvent args)
     {
         args.CanAttack = true;
     }
 
-    private void OnAttackAttempt(EntityUid uid, MechPilotComponent component, AttackAttemptEvent args)
+    private void OnAttackAttempt(EntityUid uid, AltMechPilotComponent component, AttackAttemptEvent args)
     {
         if (args.Target == component.Mech)
             args.Cancel();
@@ -577,6 +597,12 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 public readonly record struct MechPartInsertedEvent(EntityUid Mech)
 {
     public readonly EntityUid Mech = Mech;
+}
+
+[Serializable, NetSerializable]
+public sealed partial class MechPartInsertedDoAfterEvent : SimpleDoAfterEvent
+{
+
 }
 
 [ByRefEvent]

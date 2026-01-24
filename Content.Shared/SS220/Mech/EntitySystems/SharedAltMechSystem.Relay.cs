@@ -1,6 +1,7 @@
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mech.Components;
 using Content.Shared.Mech.EntitySystems;
+using Content.Shared.SS220.Mech.Components;
 
 namespace Content.Shared.SS220.Mech.Systems;
 
@@ -8,10 +9,10 @@ public abstract partial class SharedAltMechSystem
 {
     private void InitializeRelay()
     {
-        SubscribeLocalEvent<MechComponent, GettingAttackedAttemptEvent>(RelayRefToPilot);
+        SubscribeLocalEvent<AltMechComponent, GettingAttackedAttemptEvent>(RelayRefToPilot);
     }
 
-    private void RelayToPilot<T>(Entity<MechComponent> uid, T args) where T : class
+    private void RelayToPilot<T>(Entity<AltMechComponent> uid, T args) where T : class
     {
         if (uid.Comp.PilotSlot.ContainedEntity is not { } pilot)
             return;
@@ -21,7 +22,7 @@ public abstract partial class SharedAltMechSystem
         RaiseLocalEvent(pilot, ref ev);
     }
 
-    private void RelayRefToPilot<T>(Entity<MechComponent> uid, ref T args) where T :struct
+    private void RelayRefToPilot<T>(Entity<AltMechComponent> uid, ref T args) where T :struct
     {
         if (uid.Comp.PilotSlot.ContainedEntity is not { } pilot)
             return;
