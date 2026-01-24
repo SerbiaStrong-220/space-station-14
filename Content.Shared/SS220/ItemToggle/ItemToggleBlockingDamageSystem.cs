@@ -11,6 +11,7 @@ public sealed class ItemToggleBlockingDamageSystem : EntitySystem
     {
         SubscribeLocalEvent<ItemToggleBlockingDamageComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<ItemToggleBlockingDamageComponent, ItemToggledEvent>(OnToggleItem);
+        SubscribeLocalEvent<ItemToggleBlockingDamageComponent, EntityTerminatingEvent>(OnEntityTerminating);
     }
 
     private void OnDecreaseBlock(Entity<ItemToggleBlockingDamageComponent> ent, AltBlockingComponent AltBlockingComponent)
@@ -59,6 +60,15 @@ public sealed class ItemToggleBlockingDamageSystem : EntitySystem
                 var ev = new ActiveBlockingEvent(true);
                 RaiseLocalEvent(ent.Owner,ref ev);
             }
+            return;
+        }
+        OnDecreaseBlock(ent, AltBlockingComponent);
+    }
+
+    private void OnEntityTerminating(Entity<ItemToggleBlockingDamageComponent> ent, ref EntityTerminatingEvent args)
+    {
+        if (!TryComp<AltBlockingComponent>(ent.Owner, out var AltBlockingComponent))
+        {
             return;
         }
         OnDecreaseBlock(ent, AltBlockingComponent);

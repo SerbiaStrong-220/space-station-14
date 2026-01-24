@@ -484,13 +484,31 @@
   description: A very loud & dangerous sword with a beam made of pure, concentrated plasma. Specially designed for syndicate cyborgs.
 
 - type: entity
-  parent: EnergySwordDouble
+  parent: CyborgEnergySword
   id: CyborgEnergySwordDouble # why is this invalid if ID is BorgEnergySwordDouble
   suffix: One-Handed, For Borgs
   description: Syndicate Command Interns thought that having one blade on the energy sword was not enough. Specially designed for syndicate cyborgs.
   components: # could add energy-draining like the L6C
-  - type: Wieldable
-    freeHandsRequired: 0 # because borg has no off-hand to wield with.  Without this, it will be unable to activate the esword
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/e_sword_double.rsi
+    layers:
+      - state: e_sword_double
+      - state: e_sword_double_blade
+        color: "#FFFFFF"
+        visible: false
+        shader: unshaded
+        map: [ "blade" ]
+  - type: ItemToggleMeleeWeapon
+    activatedSoundOnSwing:
+      path: /Audio/Weapons/eblademiss.ogg
+      params:
+        volume: 3
+        variation: 0.250
+    activatedDamage:
+        types:
+          Slash: 12
+          Heat: 12
+          Structural: 15
 
 - type: entity
   parent: [ EnergyDaggerLoud, BaseXenoborgContraband ]

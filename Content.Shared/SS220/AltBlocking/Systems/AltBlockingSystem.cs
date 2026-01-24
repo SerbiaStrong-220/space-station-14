@@ -59,6 +59,8 @@ public sealed partial class AltBlockingSystem : EntitySystem
 
         SubscribeLocalEvent<AltBlockingComponent, ThrowItemAttemptEvent>(OnThrowAttempt);
         SubscribeLocalEvent<AltBlockingComponent, ContainerGettingRemovedAttemptEvent>(OnDropAttempt);
+
+        SubscribeLocalEvent<AltBlockingComponent, EntGotInsertedIntoContainerMessage>(OnItemGotInserted);
     }
 
     private void OnCompInit(Entity<AltBlockingUserComponent> ent, ref ComponentInit args)
@@ -333,8 +335,6 @@ public sealed partial class AltBlockingSystem : EntitySystem
     {
         var userQuery = GetEntityQuery<AltBlockingUserComponent>();
         if (!userQuery.TryGetComponent(user, out var component1)) { return; }
-        if (component1.IsBlocking)
-            StopBlocking(component1, user);
         var handQuery = GetEntityQuery<HandsComponent>();
 
         if (!handQuery.TryGetComponent(user, out var hands))
@@ -360,10 +360,19 @@ public sealed partial class AltBlockingSystem : EntitySystem
             component1.BlockingItemsShields.Clear();
             if (_net.IsServer)
             {
+                if (component1.IsBlocking)
+                    StopBlocking(component1, user);
+
                 _actionsSystem.RemoveAction(component1.BlockingToggleActionEntity);
                 RemComp<AltBlockingUserComponent>(user);
             }
         }
+    }
+
+    private void OnItemGotInserted(Entity<AltBlockingComponent> ent, ref EntGotInsertedIntoContainerMessage args)
+    {
+        if(ent.Comp.User != null)
+            StopBlockingHelper(ent.Owner, ent.Comp, (EntityUid)ent.Comp.User);
     }
 
 }

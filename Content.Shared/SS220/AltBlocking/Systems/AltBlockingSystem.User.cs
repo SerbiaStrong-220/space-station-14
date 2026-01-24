@@ -41,13 +41,13 @@ public sealed partial class AltBlockingSystem
         args.Handled = true;
     }
 
-    private void OnEntityTerminating(EntityUid uid, AltBlockingUserComponent component, ref EntityTerminatingEvent args)
+    private void OnEntityTerminating(Entity<AltBlockingUserComponent> ent, ref EntityTerminatingEvent args)
     {
-        StopBlocking(component, uid);
+        StopBlocking(ent.Comp, ent.Owner);
         if (_net.IsServer)
         {
-            _actionsSystem.RemoveAction(component.BlockingToggleActionEntity);
-            RemComp<AltBlockingUserComponent>(uid);
+            _actionsSystem.RemoveAction(ent.Comp.BlockingToggleActionEntity);
+            RemComp<AltBlockingUserComponent>(ent.Owner);
         }
     }
 }
