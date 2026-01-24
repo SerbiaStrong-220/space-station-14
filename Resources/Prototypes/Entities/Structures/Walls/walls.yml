@@ -10,7 +10,7 @@
     - Wall
   components:
   - type: Anchorable
-    flags: 
+    flags:
     - Anchorable
   - type: Rotatable
   - type: RangedDamageSound
@@ -1137,9 +1137,9 @@
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: Sprite
-    sprite: Structures/Walls/xeno.rsi
+    sprite: SS220/Structures/Walls/xeno.rsi # SS220 walls-sprite-update-v6
   - type: Icon
-    sprite: Structures/Walls/xeno.rsi
+    sprite: SS220/Structures/Walls/xeno.rsi # SS220 walls-sprite-update-v6
   - type: IconSmooth
     key: chitin
     base: solid
@@ -1157,9 +1157,9 @@
   name: reinforced chitin
   components:
   - type: Sprite
-    sprite: Structures/Walls/xeno.rsi
+    sprite: SS220/Structures/Walls/xeno.rsi # SS220 walls-sprite-update-v6
   - type: Icon
-    sprite: Structures/Walls/xeno.rsi
+    sprite: SS220/Structures/Walls/xeno.rsi # SS220 walls-sprite-update-v6
     state: rgeneric
   - type: Damageable
     damageContainer: StructuralInorganic
@@ -1695,9 +1695,9 @@
     - Wall
   - type: Sprite
     drawdepth: SmallObjects #so bullets pass 'through'
-    sprite: Structures/Walls/card.rsi
+    sprite: SS220/Structures/Walls/card.rsi # SS220 walls-sprite-update-v6
   - type: Icon
-    sprite: Structures/Walls/card.rsi
+    sprite: SS220/Structures/Walls/card.rsi # SS220 walls-sprite-update-v6
     state: full
   - type: Construction
     graph: Cardwall
