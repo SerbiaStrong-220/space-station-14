@@ -236,6 +236,9 @@
     {
       "name": "pda-ussp-medical"
     },
+	{
+	  "name": "pda-maid" 
+	},
     {
       "name": "screen-white",
       "delays": [

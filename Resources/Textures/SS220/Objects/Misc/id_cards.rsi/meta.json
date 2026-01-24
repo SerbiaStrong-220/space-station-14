@@ -244,6 +244,9 @@
     {
       "name": "idpilot"
     },
+	{
+      "name": "idmaid"
+    },
     {
       "name": "gold-inhand-left",
       "directions": 4

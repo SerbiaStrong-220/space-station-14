@@ -145,6 +145,18 @@
     layers:
       - state: green
       - state: comofficer
+
+- type: entity
+  id: SpawnPointCentcomOperativeBSO
+  parent: SpawnPointJobBase
+  name: CentcomOperativeBSO
+  components:
+  - type: SpawnPoint
+    job_id: CentcomOperativeBSO
+  - type: Sprite
+    layers:
+      - state: green
+      - state: gsn
       
 # TODO:
 # Добавить спавнер для оперативника ГСН или как его там

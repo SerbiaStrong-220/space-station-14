@@ -15,7 +15,7 @@
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Sprite
-    sprite: Structures/Machines/VendingMachines/clothing.rsi
+    sprite: MetaFlud/Structures/Machines/VendingMachines/clothing.rsi
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]

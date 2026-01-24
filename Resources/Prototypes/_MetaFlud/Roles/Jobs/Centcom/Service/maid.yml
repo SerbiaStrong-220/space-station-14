@@ -1,6 +1,6 @@
 - type: job
   id: CentCommMaid
-  name: Горничная ЦК
+  name: горничная ЦК
   description: Приведите эту полную бюрократией станцию в порядок!
   startingGear: MaidGear # Поменять там КПК и Айди карту, а то хуйня выходит и у нас бармен, а не горничная
   playTimeTracker: JobCentCommMaid
@@ -30,6 +30,7 @@
   equipment:
     shoes: ClothingShoesBootsLaceup
     id: CentCommMaidPDA
+    neck: ClothingNeckCentcommCollar
     ears: ClothingHeadsetService
     
 
@@ -44,14 +45,14 @@
   description: Пахнет мылом...
   components:
   - type: Pda
-    id: BartenderIDCard
+    id: CentCommMaidIDCard
   - type: Appearance
     appearanceDataInit:
      enum.PdaVisuals.PdaType:
        !type:String
-       pda-bartender
+       pda-maid
   - type: PdaBorderColor
-    borderColor: "#4b474f" #SS220 PDA-Resprite
+    borderColor: "#F95CB5" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
@@ -66,7 +67,7 @@
       map: [ "enum.PdaVisualLayers.IdLight" ]
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
-    state: pda-bartender
+    state: pda-maid
     
 ##
 ## ID-CARD
@@ -80,7 +81,7 @@
   - type: Sprite
     layers:
     - state: default
-    - state: idbartender
+    - state: idmaid
   - type: PresetIdCard
     job: CentCommMaid
   #ss220 add pdaidpainter start

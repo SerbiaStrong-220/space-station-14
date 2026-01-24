@@ -1,0 +1,36 @@
+- type: gameMap
+  id: mtf_centcomm
+  isGrid: false
+  mapName: 'Станция Центрального Командования'
+  mapPath: /Maps/_MetaFlud/MTF_centcomm.yml
+  minPlayers: 0
+  stations:
+    mtf_centcomm:
+      stationProto: MTFCentralCommandNanotrasenStation
+      components:
+        - type: StationEmergencyShuttle
+          emergencyShuttlePath: /Maps/SS220/Shuttles/emergency/emergency_axioma.yml
+        - type: StationNameSetup
+          mapNameTemplate: '{0} Центральное Командование {1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: 'SS220'
+        - type: StationJobs
+          availableJobs:
+            Passenger: [ -1, -1 ]
+            #Central Comand
+            CentComNanoTrasenAdmiral: [ 1, 1 ]      # Адмирал НТ
+            CentCommNanoTrasenDiplomat: [ 2, 2 ]    # Дипломат НТ
+            CentcommOfficer: [ 2, 2 ]               # Офицер ЦК
+            CentcommCommunicationsOfficer: [ 3, 3 ] # Связист ЦК
+            CentcomOperativeBSO: [ 4, 4 ]           # Оперативник СЩ
+            CentCommBartender: [ 1, 1 ]             # Бармен ЦК
+            CentCommChef: [ 2, 2 ]                  # Повар ЦК
+            CentCommJanitor: [ 2, 2 ]               # Уборщик ЦК
+            CentCommServiceWorker: [ 2, 2 ]         # Сервисный Работник ЦК
+            CentCommMaid: [ 1, 1 ]                 # Горничная ЦК
+
+- type: entity
+  id: MTFCentralCommandNanotrasenStation
+  parent: StandardNanotrasenStation
+  categories: [ HideSpawnMenu ]
