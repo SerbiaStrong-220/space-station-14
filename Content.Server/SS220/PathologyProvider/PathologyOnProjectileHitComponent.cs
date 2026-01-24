@@ -7,7 +7,6 @@ using Robust.Shared.Prototypes;
 namespace Content.Server.SS220.PathologyProvider;
 
 [RegisterComponent]
-[NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class PathologyOnProjectileHitComponent : Component
 {
     [DataField]
