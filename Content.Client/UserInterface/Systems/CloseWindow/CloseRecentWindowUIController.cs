@@ -1,5 +1,6 @@
 using Content.Client.Gameplay;
 using Content.Client.Info;
+using Content.Client.SS220.UserInterface.System.PinUI;
 using Robust.Client.Input;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
@@ -13,6 +14,7 @@ public sealed class CloseRecentWindowUIController : UIController
 {
     [Dependency] private readonly IInputManager _inputManager = default!;
     [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
+    [Dependency] private readonly IEntityManager _entityManager = default!; //ss220 add pin for ui
 
     /// <summary>
     /// A list of windows that have been interacted with recently.  Windows should only
@@ -44,6 +46,11 @@ public sealed class CloseRecentWindowUIController : UIController
             recentlyInteractedWindows.RemoveAt(i); // Should always be removed as either the reference is stale or we're closing it
             if (window.IsOpen)
             {
+                //ss220 add pin for ui start
+                if (_entityManager.System<PinUISystem>().IsPinned(window))
+                    return;
+                //ss220 add pin for ui end
+
                 window.Close();
                 return;
             }
@@ -100,6 +107,23 @@ public sealed class CloseRecentWindowUIController : UIController
         // Now that the list has been checked for duplicates, okay to add new window at end of tracking
         recentlyInteractedWindows.Add(window);
     }
+
+    // ss220 add pin for ui start
+    public BaseWindow? GetMostRecentlyInteractedWindow()
+    {
+        for (var i = recentlyInteractedWindows.Count - 1; i >= 0; i--)
+        {
+            var window = recentlyInteractedWindows[i];
+
+            if (!window.IsOpen)
+                continue;
+
+            return window;
+        }
+
+        return null;
+    }
+    // ss220 add pin for ui end
 
     private BaseWindow? GetWindowForControl(Control? control)
     {

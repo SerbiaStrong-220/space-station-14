@@ -26,6 +26,9 @@
   id: LaserCarabinePowerCell
 
 - type: Tag
+  id: LaserSMGPowerCell
+
+- type: Tag
   id: WeaponRechargerWhitelist
 
 # ss220 shlepi
@@ -326,11 +329,6 @@
   id: HolofanProjectorSecurity
 # SS220 Fix #2009 end
 
-# ss220 migo damage in astral fix start
-- type: Tag
-  id: MiGoInAstral
-# ss220 migo damage in astral fix end
-
 # ss220 Cult_update2 start
 - type: Tag
   id: CultYoggInnerHandToggleable
@@ -357,3 +355,15 @@
 
 - type: Tag
   id: MiGoHandsWhitelist
+
+- type: Tag
+  id: DefibrillatorCompact
+
+- type: Tag
+  id: CultYoggTeleportEnter
+
+- type: Tag
+  id: CultYoggTeleportExit
+
+- type: Tag
+  id: VoidTeleporationTarget

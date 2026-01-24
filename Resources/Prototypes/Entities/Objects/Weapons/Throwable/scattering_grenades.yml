@@ -51,7 +51,7 @@
   - type: ClusterGrenadeVisuals
     state: base
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/clusterbang.rsi
+    sprite: SS220/Objects/Weapons/Grenades/clusterbang.rsi #SS220 From cabinet to 3/4, Part 2
     state: base-0
 
 - type: entity
@@ -62,7 +62,7 @@
   suffix: Full
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/clusterbang.rsi
+    sprite: SS220/Objects/Weapons/Grenades/clusterbang.rsi #SS220 From cabinet to 3/4, Part 2
     layers:
     - state: icon
       map: ["enum.TriggerVisualLayers.Base"]
@@ -96,7 +96,7 @@
   description: Why use one grenade when you can use three at once!
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/clusterbomb.rsi
+    sprite: SS220/Objects/Weapons/Grenades/clusterbomb.rsi #SS220 From cabinet to 3/4, Part 2
     layers:
     - state: icon
       map: ["enum.TriggerVisualLayers.Base"]

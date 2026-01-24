@@ -7,14 +7,16 @@
   components:
   - type: GameRule
     delay:
-      min: 120
-      max: 180
+      min: 60
+      max: 120
+  - type: LoadMapRule
+    mapPath: /Maps/SS220/cultyogg-teleport-hub.yml
   - type: CultYoggRule
   - type: AntagSelection
     definitions:
     - prefRoles: [ CultistOfYoggSothoth ]
-      max: 4
-      playerRatio: 10
+      max: 5
+      playerRatio: 9
       blacklist:
         components:
         - BibleUser
@@ -36,13 +38,11 @@
     stages:
       Initial: {}
       Reveal:
-        sacrificesRequired: 1
-        cultistsFractionRequired: 0.2
+        cultistsToCrewFraction: 0.2
       Alarm:
-        sacrificesRequired: 2
-        cultistsFractionRequired: 0.3
+        cultistsToCrewFraction: 0.3
       God:
-        sacrificesRequired: 3
+        sacrificesRequired: 1
 
 - type: entity
   id: CultYoggRuleHighPop
@@ -54,13 +54,11 @@
     stages:
       Initial: {}
       Reveal:
-        sacrificesRequired: 1
-        cultistsFractionRequired: 0.1
+        cultistsToCrewFraction: 0.1
       Alarm:
-        sacrificesRequired: 2
-        cultistsFractionRequired: 0.2
+        cultistsToCrewFraction: 0.2
       God:
-        sacrificesRequired: 3
+        sacrificesRequired: 1
 
 - type: entity
   parent: BaseGameRule
@@ -84,3 +82,16 @@
   categories: [ GameRules ]
   components:
   - type: EmergencyShuttleAutoCallRule
+
+- type: entity
+  id: EmergencyShuttleAutoVote
+  parent: BaseGameRule
+  categories: [ GameRules ]
+  components:
+  - type: EmergencyShuttleAutoVoteRule
+
+- type: entity
+  id: TraitorDynamic
+  parent: Traitor
+  components:
+  - type: TraitorDynamics

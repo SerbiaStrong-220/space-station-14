@@ -1,26 +1,32 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Body.Systems;
+using Content.Server.Projectiles;
+using Content.Server.Roles.Jobs;
+using Content.Server.SS220.GameTicking.Rules;
 using Content.Shared.Alert;
+using Content.Shared.Body.Components;
+using Content.Shared.Body.Systems;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Explosion.Components;
 using Content.Shared.Eye;
 using Content.Shared.FixedPoint;
+using Content.Shared.Mind.Components;
 using Content.Shared.Movement.Components;
-using Content.Shared.Movement.Systems;
-using Content.Shared.NPC.Components;
-using Content.Shared.NPC.Systems;
-using Content.Shared.SS220.CultYogg.MiGo;
-using Content.Shared.StatusEffect;
-using Content.Shared.Tag;
-using Robust.Server.GameObjects;
-using Content.Shared.Projectiles;
-using Content.Server.Projectiles;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
+using Content.Shared.Movement.Systems;
+using Content.Shared.NPC.Components;
+using Content.Shared.NPC.Prototypes;
+using Content.Shared.NPC.Systems;
+using Content.Shared.Projectiles;
+using Content.Shared.Shuttles.Components;
+using Content.Shared.SS220.CultYogg.MiGo;
 using Content.Shared.SS220.Temperature;
-using Content.Shared.Body.Systems;
-using Content.Shared.Body.Components;
+using Content.Shared.StatusEffect;
+using Robust.Server.GameObjects;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.CultYogg.MiGo;
 
@@ -29,7 +35,6 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
     [Dependency] private readonly StatusEffectsSystem _statusEffectsSystem = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _speedModifier = default!;
     [Dependency] private readonly VisibilitySystem _visibility = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
     [Dependency] private readonly AlertsSystem _alerts = default!;
@@ -38,8 +43,12 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly ProjectileSystem _projectile = default!;
     [Dependency] private readonly PullingSystem _pullingSystem = default!;
+    [Dependency] private readonly JobSystem _jobSystem = default!;
+    [Dependency] private readonly CultYoggRuleSystem _cultRuleSystem = default!;
 
-    private const string AscensionReagent = "TheBloodOfYogg";
+    private readonly ProtoId<ReagentPrototype> _ascensionReagent = "TheBloodOfYogg";
+    private readonly ProtoId<NpcFactionPrototype> _cultYoggFaction = "CultYogg";
+    private readonly ProtoId<NpcFactionPrototype> _simpleNeutralFaction = "SimpleNeutral";
 
     public override void Initialize()
     {
@@ -48,7 +57,22 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
         //actions
         SubscribeLocalEvent<MiGoComponent, MiGoEnslaveDoAfterEvent>(MiGoEnslaveOnDoAfter);
 
+        SubscribeLocalEvent<MiGoComponent, MindAddedMessage>(OnMindAdded);
         SubscribeLocalEvent<MiGoComponent, TemperatureChangeAttemptEvent>(OnTemperatureDamage);
+    }
+
+    protected override void SyncStage(Entity<MiGoComponent> ent)
+    {
+        if (!_cultRuleSystem.TryGetCultGameRule(out var rule))
+            return;
+
+        ent.Comp.CurrentStage = rule.Value.Comp.Stage;
+        Dirty(ent);
+    }
+
+    private void OnMindAdded(Entity<MiGoComponent> ent, ref MindAddedMessage args)
+    {
+        _jobSystem.MindAddJob(args.Mind, ent.Comp.JobName);
     }
 
     private void OnTemperatureDamage(Entity<MiGoComponent> ent, ref TemperatureChangeAttemptEvent args)
@@ -69,15 +93,14 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
 
         if (isMaterial)
         {
-            //no opening door during astral
-            _tag.AddTag(uid, "DoorBumpOpener");
-            _tag.RemoveTag(uid, "MiGoInAstral");
             comp.MaterializationTime = null;
             comp.AlertTime = 0;
 
             _alerts.ClearAlert(uid, comp.AstralAlert);
 
-            RemComp<MovementIgnoreGravityComponent>(uid);
+            RemCompDeferred<MovementIgnoreGravityComponent>(uid);
+            RemCompDeferred<FTLSmashImmuneComponent>(uid);
+            RemCompDeferred<ExplosionResistanceComponent>(uid);
 
             //some copypaste invisibility shit
             _visibility.AddLayer((uid, vis), (int)VisibilityFlags.Normal, false);
@@ -91,23 +114,24 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
             if (HasComp<NpcFactionMemberComponent>(uid))
             {
                 _npcFaction.ClearFactions(uid);
-                _npcFaction.AddFaction(uid, "CultYogg");
+                _npcFaction.AddFaction(uid, _cultYoggFaction);
             }
         }
         else
         {
             comp.AudioPlayed = false;
-            _tag.RemoveTag(uid, "DoorBumpOpener");
-            _tag.AddTag(uid, "MiGoInAstral");
             _alerts.ShowAlert(uid, comp.AstralAlert);
 
             //no phisyc during astral
             EnsureComp<MovementIgnoreGravityComponent>(uid);
+            EnsureComp<FTLSmashImmuneComponent>(uid);
+            EnsureComp<ExplosionResistanceComponent>(uid);
+            RemCompDeferred<SpeedModifiedByContactComponent>(uid);
 
             if (HasComp<NpcFactionMemberComponent>(uid))
             {
                 _npcFaction.ClearFactions(uid);
-                _npcFaction.AddFaction(uid, "SimpleNeutral");
+                _npcFaction.AddFaction(uid, _simpleNeutralFaction);
             }
             _visibility.AddLayer((uid, vis), (int)VisibilityFlags.Ghost, false);
             _visibility.RemoveLayer((uid, vis), (int)VisibilityFlags.Normal, false);
@@ -126,7 +150,7 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
 
         UpdateMovementSpeed(uid, comp);
 
-        Dirty(uid, comp);
+        DirtyEntity(uid);// We "are making dirty" the entire entity, since ChangeForm affects many components and visual state.
     }
 
     //moving in astral faster
@@ -163,7 +187,7 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
             if (stomach.Comp2.Body is not { } body)
                 continue;
 
-            var reagentRoRemove = new ReagentQuantity(AscensionReagent, FixedPoint2.MaxValue);
+            var reagentRoRemove = new ReagentQuantity(_ascensionReagent, FixedPoint2.MaxValue);
             _stomach.TryRemoveReagent(stomach, reagentRoRemove); // Removes from stomach
 
             if (!_solutionContainer.TryGetSolution(body, stomach.Comp1.BodySolutionName, out var bodySolutionEnt, out var bodySolution))
@@ -172,11 +196,6 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
             bodySolution.RemoveReagent(reagentRoRemove); // Removes from body
             _solutionContainer.UpdateChemicals(bodySolutionEnt.Value);
         }
-
-        if (IsEslavementSimplified)//Remove token if is was
-            return;
-
-        SetSimplifiedEslavement(false);
     }
     #endregion
 }

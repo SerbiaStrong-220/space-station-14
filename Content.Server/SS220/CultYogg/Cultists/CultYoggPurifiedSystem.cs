@@ -1,15 +1,19 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.SS220.CultYogg.Cultists;
+using Content.Server.SS220.GameTicking.Rules;
 using Content.Shared.Popups;
+using Content.Shared.SS220.CultYogg.Cultists;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.CultYogg.Cultists;
 
 public sealed class CultYoggPurifiedSystem : EntitySystem
 {
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly CultYoggRuleSystem _cultRuleSystem = default!;
 
     public override void Initialize()
     {
@@ -27,12 +31,19 @@ public sealed class CultYoggPurifiedSystem : EntitySystem
         base.Update(frameTime);
 
         var query = EntityQueryEnumerator<CultYoggPurifiedComponent>();
-        while (query.MoveNext(out var uid, out var cleansedComp))
+        while (query.MoveNext(out var ent, out var purifyedComp))
         {
-            if (_timing.CurTime < cleansedComp.PurifyingDecayEventTime)
-                continue;
+            if (_timing.CurTime >= purifyedComp.DecayTime)
+                RemCompDeferred<CultYoggPurifiedComponent>(ent);
 
-            RemComp<CultYoggPurifiedComponent>(uid);
+            if (_timing.CurTime >= purifyedComp.PurifyTime)
+            {
+                //After purifying effect
+                _audio.PlayPvs(purifyedComp.PurifiedSound, ent);
+
+                var ev = new CultYoggDeCultingEvent(ent);
+                RaiseLocalEvent(ent, ref ev, true);
+            }
         }
     }
 }

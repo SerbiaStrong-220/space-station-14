@@ -147,3 +147,40 @@
   metamorphicMaxFillLevels: 6
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
+
+#Skooma
+
+- type: reagent
+  id: Skooma
+  name: reagent-name-skooma
+  parent: BaseAlcohol
+  desc: reagent-desc-skooma
+  physicalDesc: reagent-physical-desc-exotic-smelling
+  flavor: Skooma
+  color: "#dcdedc"
+  metamorphicSprite:
+    sprite: SS220/Objects/Consumable/Drinks/skooma.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 2
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 1
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.4
+      - !type:Jitter
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Tajaran ]
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectSeeingRainbow
+        type: Add
+        time: 10
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Tajaran ]
+  fizziness: 0.2

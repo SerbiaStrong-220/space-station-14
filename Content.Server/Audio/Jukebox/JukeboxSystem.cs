@@ -104,6 +104,11 @@ public sealed class JukeboxSystem : SharedJukeboxSystem
 
     private void Stop(Entity<JukeboxComponent> entity)
     {
+        // ss220 fix jukebox error start
+        if (!Exists(entity.Comp.AudioStream))
+            return;
+        // ss220 fix jukebox error end
+
         Audio.SetState(entity.Comp.AudioStream, AudioState.Stopped);
         Dirty(entity);
     }

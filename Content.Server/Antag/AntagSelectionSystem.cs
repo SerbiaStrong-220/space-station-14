@@ -196,7 +196,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
             DebugTools.AssertNotEqual(antag.SelectionTime, AntagSelectionTime.PrePlayerSpawn);
 
             // do not count players in the lobby for the antag ratio
-            var players = _playerManager.NetworkedSessions.Count(x => x.AttachedEntity != null);
+            var players = PlayerManager.Sessions.Count(session => session.Status is not SessionStatus.Disconnected or SessionStatus.Zombie); // SS220-make-antag-selection-based-on-all-players
 
             if (!TryGetNextAvailableDefinition((uid, antag), out var def, players))
                 continue;
@@ -237,6 +237,11 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         if (component.AssignmentComplete)
             return;
 
+        // SS220-dynamic-traitors-add
+        var ev = new BeforeAntagSelection();
+        RaiseLocalEvent(uid, ref ev);
+        // SS220-dynamic-traitors-end
+
         var players = _playerManager.Sessions
             .Where(x => GameTicker.PlayerGameStatuses.TryGetValue(x.UserId, out var status) &&
                         status == PlayerGameStatus.JoinedGame)
@@ -276,7 +281,8 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
     {
         var playerPool = GetPlayerPool(ent, pool, def);
         var existingAntagCount = ent.Comp.PreSelectedSessions.TryGetValue(def, out var existingAntags) ?  existingAntags.Count : 0;
-        var count = GetTargetAntagCount(ent, GetTotalPlayerCount(pool), def) - existingAntagCount;
+        var allPlayerCount = PlayerManager.Sessions.Count(session => session.Status is not SessionStatus.Disconnected or SessionStatus.Zombie); // SS220-make-antag-selection-based-on-all-players
+        var count = GetTargetAntagCount(ent, allPlayerCount, def) - existingAntagCount; // SS220 GetTotalPlayerCount(pool) -> allPlayerCount
 
         // if there is both a spawner and players getting picked, let it fall back to a spawner.
         var noSpawner = def.SpawnerPrototype == null;
@@ -670,3 +676,8 @@ public record struct AntagSelectLocationEvent(ICommonSession? Session, Entity<An
 /// </summary>
 [ByRefEvent]
 public readonly record struct AfterAntagEntitySelectedEvent(ICommonSession? Session, EntityUid EntityUid, Entity<AntagSelectionComponent> GameRule, AntagSelectionDefinition Def);
+
+//SS220-dynamic-traitors-begin
+[ByRefEvent]
+public readonly record struct BeforeAntagSelection();
+//SS220-dynamic-traitors-end

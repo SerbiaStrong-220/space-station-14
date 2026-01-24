@@ -13,24 +13,25 @@ using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using System.Linq;
 using System.Threading;
+using Content.Client.SS220.UserInterface.Controls;
+using Content.Client.SS220.UserInterface.System.PinUI;
 using Timer = Robust.Shared.Timing.Timer;
 
 namespace Content.Client.SS220.CriminalRecords.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class CriminalRecordsWindow : FancyWindow
+public sealed partial class CriminalRecordsWindow : FancyWindow, IPinnableWindow
 {
-    private readonly IEntitySystemManager _sysMan;
     private readonly IPrototypeManager _prototype;
     private readonly IGameTiming _gameTiming;
     private readonly SpriteSystem _sprite;
 
+    private uint? _chosenKey;
     private bool _isPopulating = false;
     private bool _creationMode = false;
     private TimeSpan? _lastTimeEdited;
 
     private bool _securityMode = true;
-    public int MaxEntryMessageLength = 200;
     public int EditCooldown = 5;
 
     private readonly Color _defaultLineColor = Color.FromHex("#808080");
@@ -39,6 +40,7 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
     public Action<(string, ProtoId<CriminalStatusPrototype>?)>? OnCriminalStatusChange;
     public Action<int>? OnCriminalStatusDelete;
     public Action<uint?>? OnKeySelected;
+    public Action<uint>? OnLinkRecordToId;
     private readonly CancellationTokenSource _timerCancelTokenSource = new();
 
     public CriminalRecordsWindow()
@@ -47,8 +49,8 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
 
         _gameTiming = IoCManager.Resolve<IGameTiming>();
         _prototype = IoCManager.Resolve<IPrototypeManager>();
-        _sysMan = IoCManager.Resolve<IEntitySystemManager>();
-        _sprite = _sysMan.GetEntitySystem<SpriteSystem>();
+        var sysMan = IoCManager.Resolve<IEntitySystemManager>();
+        _sprite = sysMan.GetEntitySystem<SpriteSystem>();
 
         RecordListing.OnItemSelected += args =>
         {
@@ -56,12 +58,15 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
                 return;
 
             OnKeySelected?.Invoke(args.Metadata.Key);
+            _chosenKey = args.Metadata.Key;
         };
 
         RecordListing.OnItemDeselected += _ =>
         {
             if (!_isPopulating)
                 OnKeySelected?.Invoke(null);
+
+            _chosenKey = null;
         };
 
         ExpandButton.OnPressed += ToggleExpand;
@@ -82,6 +87,14 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
             ToggleCreation();
         };
 
+        LinkRecordToIdCardButton.OnPressed += _ =>
+        {
+            if (_chosenKey == null)
+                return;
+
+            OnLinkRecordToId?.Invoke(_chosenKey.Value);
+        };
+
         StatusTypeSelector.OnItemSelected += args =>
         {
             StatusTypeSelector.Select(args.Id);
@@ -97,6 +110,8 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
         };
 
         StatusColorIndicator.PanelOverride = _indicatorOverride;
+
+        PinUISystem.AddPinButtonBeforeTarget(this, CloseButton);
 
         MessageInput.Placeholder = new Rope.Leaf(Loc.GetString("criminal-records-ui-message-placeholder"));
         //MessageInput.OnKeyBindDown += _ => MessageInputChanged(); // Doesn't work 24.09.2023 textedit is broken
@@ -177,7 +192,7 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
             PopulateRecordListing(state.RecordListing, state.SelectedKey);
 
         if (state.SelectedKey is { } key)
-            RecordIdLabel.Text = $"ID: НТ-{key}";
+            RecordIdLabel.Text = Loc.GetString("criminal-records-ui-chosen-id", ("key", key));
 
         if (state.SelectedRecord != null)
         {
@@ -189,7 +204,7 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
         }
         else
         {
-            CharacterName.Text = "Не выбрана запись";
+            CharacterName.Text = Loc.GetString("criminal-records-ui-no-chosen-record");
             PanelRightPlaceholder.Visible = true;
             PanelRight.Visible = false;
         }
@@ -212,13 +227,13 @@ public sealed partial class CriminalRecordsWindow : FancyWindow
         if (onCooldown)
         {
             var time = (int) MathF.Ceiling((float) cooldownRemaining!.Value.TotalSeconds);
-            ChangeStatusButton.Text = $"Сменить статус ({time})";
-            SaveRecordCreationButton.Text = $"Сохранить ({time})";
+            ChangeStatusButton.Text = Loc.GetString("criminal-records-ui-change-status-with-time", ("time", time));
+            SaveRecordCreationButton.Text = Loc.GetString("criminal-records-ui-save-button-with-time", ("time", time));
         }
         else
         {
-            ChangeStatusButton.Text = "Сменить статус";
-            SaveRecordCreationButton.Text = "Сохранить";
+            ChangeStatusButton.Text = Loc.GetString("criminal-records-ui-change-status");
+            SaveRecordCreationButton.Text = Loc.GetString("criminal-records-ui-save-button");
         }
     }
 
