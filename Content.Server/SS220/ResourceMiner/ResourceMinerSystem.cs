@@ -97,12 +97,12 @@ public sealed class ResourceMinerSystem : EntitySystem
         Dirty(entity);
     }
 
-    private void SetAppearanceSettings(Entity<ResourceMinerComponent> ent)
+    private void SetAppearanceSettings(Entity<ResourceMinerComponent> entity)
     {
-        var isSiloLinked = ent.Comp.Silo != null;
+        var isSiloLinked = entity.Comp.Silo != null;
 
-        _pointLight.SetColor(ent, isSiloLinked ? ent.Comp.WorkingColor : ent.Comp.ErrorColor);
-        _ambientSound.SetAmbience(ent, isSiloLinked);
+        _pointLight.SetColor(entity, isSiloLinked ? entity.Comp.WorkingColor : entity.Comp.ErrorColor);
+        _ambientSound.SetAmbience(entity, isSiloLinked);
     }
 
     private void SendAvailableSilos(Entity<ResourceMinerComponent> entity)
@@ -112,8 +112,7 @@ public sealed class ResourceMinerSystem : EntitySystem
 
         _userInterface.SetUiState(entity.Owner,
             ResourceMinerSettings.Key,
-            new AvailableSilosMiner(
-            [
+            new AvailableSilosMiner([
                 .. silos.Where(x => ValidateSilo(x.Owner, entity))
                         .Select(x => GetNetEntity(x.Owner)),
             ]));
