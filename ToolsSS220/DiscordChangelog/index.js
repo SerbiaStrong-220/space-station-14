@@ -220,14 +220,15 @@ function getChangelogData(text, default_author = `Unknown`){
     }
 
     core.info(`Found ${infoArray.length} info strings`)
-    let infos = '';
     for (let i = 0; i < infoArray.length; i++){
         let curInfo = infoArray[i];
 
         if (typeof curInfo !== 'string' ||
             curInfo === null ||
-            curInfo === '')
+            curInfo === ''){
+            infoArray[i] = '';
             continue;
+        }
 
         const dash_regex = /\s*-\s*(?=\w+:)/g;
 
@@ -236,13 +237,11 @@ function getChangelogData(text, default_author = `Unknown`){
             curInfo = curInfo.replaceAll(key, value);
         }
 
-        if (i != infoArray.length - 1){
-            infos += curInfo + "\n";
-        }
-        else{
-            infos += curInfo;
-        }
+        infoArray[i] = curInfo;
     }
+
+    infoArray = infoArray.filter(x => x !== '');
+    let infos = infoArray.join('\n');
 
     if (infos === ''){
         core.error(`Failed to generate the final info string`);
@@ -315,7 +314,7 @@ function getChangelogData(text, default_author = `Unknown`){
         if (authorString === "") return null;
 
         let authorsArray = authorString.split(',');
-        authorsArray.filter(a => a !== "");
+        authorsArray = authorsArray.map(a => a.trim()).filter(a => a !== "");
         return authorsArray;
     }
 }
@@ -338,9 +337,7 @@ async function getMedia(text){
         if (media === null) continue;
 
         if (mediaMap.has(media.type)){
-            let array = mediaMap.get(media.type);
-            array[array.length] = media;
-            mediaMap.set(media.type, array);
+            mediaMap.get(media.type).push(media);
         }
         else{
             mediaMap.set(media.type, [media]);
@@ -356,7 +353,7 @@ async function getMedia(text){
      * @returns {Promise<MediaData | null>}
      */
     async function downloadMedia(mediaUrl){
-        const write_file_async = util.promisify(fs.writeFile);
+        const write_file_async = fs.promises.writeFile;
         if (!fs.existsSync(ATTACHMENT_SAVE_PATH)){
             fs.mkdirSync(ATTACHMENT_SAVE_PATH);
         }
@@ -372,7 +369,7 @@ async function getMedia(text){
             }
 
             let fileName = generateFileName(extension);
-            let savePath = path.join(ATTACHMENT_SAVE_PATH, generateFileName(extension));
+            let savePath = path.join(ATTACHMENT_SAVE_PATH, fileName);
             await write_file_async(savePath, buffer);
 
             core.info(`Download successful`);
@@ -419,16 +416,16 @@ async function getMedia(text){
                     mediaType = MEDIA_TYPES.VIDEO;
                 }
                 else if (contentType.startsWith('image/')){
-                    extension = 'png';
+                    extension = contentType.split('/')[1].split(';')[0];
                     mediaType = MEDIA_TYPES.IMAGE;
                 }
                 else if (contentType.startsWith('video/')){
-                    extension = 'mp4';
+                    extension = contentType.split('/')[1].split(';')[0];
                     mediaType = MEDIA_TYPES.VIDEO;
                 }
 
                 if (extension === undefined || extension === null){
-                    return reject(`Content-Type "${contentType}" doesn't supported!`);
+                    return reject(`Content-Type "${contentType}" is not supported!`);
                 }
 
                 let data = [];
