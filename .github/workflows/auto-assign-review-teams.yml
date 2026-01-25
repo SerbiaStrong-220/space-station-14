@@ -1,0 +1,65 @@
+name: "Auto Review Teams"
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
+
+jobs:
+  assign_review_teams:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      # затычка, как будет время и желание - переписать скрипт на самостоятельную проверку изменённых файлов, а не на опору в виде Labels: PR
+      - name: Wait for labels to be added
+        run: sleep 5
+
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            const prNumber = context.payload.pull_request.number;
+
+            const { data: pullRequest } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: prNumber
+            });
+
+            const prLabels = pullRequest.labels.map(label => label.name);
+
+            const labelTeamMap = {
+              'Changes: C#': 'Review-Code',
+              'Changes: Localization': 'Review-Code',
+              'Changes: Prototypes': 'Review-Code',
+              'Changes: Shaders': 'Review-Code',
+              'Changes: UI': 'Review-Code',
+              'Changes: Sprites': 'Review-Sprite',
+              'Changes: Map': 'Review-Map'
+            };
+
+            const teamsToAdd = new Set();
+            for (const label of prLabels) {
+              if (labelTeamMap[label]) {
+                teamsToAdd.add(labelTeamMap[label]);
+              }
+            }
+
+            if (teamsToAdd.size > 0) {
+              try {
+                await github.rest.pulls.requestReviewers({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: prNumber,
+                  team_reviewers: Array.from(teamsToAdd)
+                });
+                console.log(`Team add: ${Array.from(teamsToAdd).join(', ')}`);
+              } catch (error) {
+                console.log(`${error.message}`);
+              }
+            } else {
+              console.log('Labels not found');
+            }
