@@ -892,7 +892,7 @@
 - type: entity
   id: XenoArtifactFaunaSpawn
   parent: BaseXenoArtifactEffect
-  description: Create fauna
+  description: Create friendly fauna
   components:
   - type: XenoArtifactNode
     maxDurability: 4
