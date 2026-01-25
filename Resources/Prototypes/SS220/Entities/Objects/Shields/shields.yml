@@ -191,11 +191,19 @@
           Slash: 15
           Blunt: 20
           Heat: 10
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
       durabilitytresholddict:
           Piercing: 7
           Slash: 9
           Blunt: 10
           Heat: 5
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
     - type: Construction
       graph: WoodenBuckler
       node: woodenBuckler
@@ -530,12 +538,20 @@
         Blunt: 30
         Heat: 26
         Slash: 30
+        Radiation: 1000
+        Poison: 1000
+        Airloss: 1000
+        Caustic: 1000
       #Blocks effectively anything station normally uses
       durabilitytresholddict:
         Piercing: 40
         Blunt: 40
         Heat: 40
         Slash: 40
+        Radiation: 1000
+        Poison: 1000
+        Airloss: 1000
+        Caustic: 1000
       #Practically impossible to destroy using only station's weapons
     - type: Damageable
       damageContainer: Shield
