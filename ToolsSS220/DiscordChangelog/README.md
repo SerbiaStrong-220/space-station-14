@@ -10,7 +10,7 @@ Node.js 22.13.+
 Для установки зависимостей впишите в консоль, открытой в текущей папке папке: `npm install`
 
 Скрипт содержит несколько инпутов:
-- `WEBHOOK_TOKEN` (обязательный) - токен дискорд-вебхука (берётся из его url: `https://discord.com/api/webhooks/{token}`);
+- `WEBHOOK_TOKEN` (обязательный) - токен дискорд-вебхука в формате `{id}/{token}` (берётся из его url: `https://discord.com/api/webhooks/{id}/{token}`);
 - `GITHUB_TOKEN` (обязательный) - токен доступа к репозиторию. При скрипта выполнении через github workflow - генерируется автоматически (secrets.GITHUB_TOKEN), при самостоятельном выполнении через консоль - необходимо сгенерировать у себя в профиле `PERSONAL_ACCESS_TOKEN`и использовать его;
 - `PULL_URL` (обязательный) - API-url целевого ПРа (пример: `https://api.github.com/repos/SerbiaStrong-220/space-station-14/pulls/3845`);
 - `WEBHOOK_USERNAME` (необязательный) - имя вебхука, отображаемое в дискорде;
