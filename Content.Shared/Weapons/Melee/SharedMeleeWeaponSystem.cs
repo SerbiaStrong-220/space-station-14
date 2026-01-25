@@ -566,7 +566,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         // Sawmill.Debug($"Melee damage is {damage.Total} out of {component.Damage.Total}");
 
         // Raise event before doing damage so we can cancel damage if the event is handled
-        var hitEvent = new MeleeHitEvent(new List<EntityUid> { target.Value }, user, meleeUid, damage, null);
+        var hitEvent = new MeleeHitEvent(new List<EntityUid> { targetEntity }, user, meleeUid, damage, null);
         RaiseLocalEvent(meleeUid, hitEvent);
 
         if (hitEvent.Handled)
