@@ -11,6 +11,7 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.Random.Helpers;
 using Content.Shared.SS220.ItemToggle;
 using Content.Shared.SS220.Weapons.Melee.Events;
 using Content.Shared.Throwing;
@@ -46,7 +47,7 @@ public sealed partial class AltBlockingSystem : EntitySystem
         SubscribeLocalEvent<AltBlockingUserComponent, MeleeHitBlockAttemptEvent>(OnBlockUserMeleeHit);
         SubscribeLocalEvent<AltBlockingUserComponent, ThrowableProjectileBlockAttemptEvent>(OnBlockThrownProjectile);
 
-        SubscribeLocalEvent<AltBlockingUserComponent, ComponentInit>(OnCompInit);
+        //SubscribeLocalEvent<AltBlockingUserComponent, ComponentInit>(OnCompInit);
 
         SubscribeLocalEvent<AltBlockingComponent, GotEquippedHandEvent>(OnEquip);
         SubscribeLocalEvent<AltBlockingComponent, GotUnequippedHandEvent>(OnUnequip);
@@ -63,15 +64,6 @@ public sealed partial class AltBlockingSystem : EntitySystem
 
     private void OnCompInit(Entity<AltBlockingUserComponent> ent, ref ComponentInit args)
     {
-        ChangeSeed(ent);
-    }
-
-    private void ChangeSeed(Entity<AltBlockingUserComponent> ent)
-    {
-        if (_net.IsServer)
-            ent.Comp.randomSeed = _random.Next(1000000);
-
-        Dirty(ent.Owner, ent.Comp);//Yes,this is probably the most obvious and dumb way to to it.
     }
 
     private void OnBlockUserCollide(Entity<AltBlockingUserComponent> ent, ref ProjectileBlockAttemptEvent args)
@@ -105,11 +97,18 @@ public sealed partial class AltBlockingSystem : EntitySystem
                     continue;
             }
 
-            _random.SetSeed(ent.Comp.randomSeed);
+            if (!TryGetNetEntity(blockComp.User, out var NetUser))
+                continue;
+
+            if (!TryGetNetEntity(item, out var NetItem))
+                continue;
+
+            var seed = SharedRandomExtensions.HashCodeCombine(new() { (int)_gameTiming.CurTick.Value, ((NetEntity)NetUser).Id, ((NetEntity)NetItem).Id });
+            var rand = new System.Random(seed);
 
             if (ent.Comp.IsBlocking)
             {
-                if (_random.Prob(blockComp.ActiveMeleeBlockProb))
+                if (rand.Prob(blockComp.ActiveMeleeBlockProb))
                 {
                     if(_net.IsServer)
                     {
@@ -118,14 +117,13 @@ public sealed partial class AltBlockingSystem : EntitySystem
                     }
                     args.CancelledHit = true;
                     args.blocker = netEnt;
-                    ChangeSeed(ent);
                     return;
                 }
             }
 
             else
             {
-                if (_random.Prob(blockComp.MeleeBlockProb))
+                if (rand.Prob(blockComp.MeleeBlockProb))
                 {
                     if (_net.IsServer)
                     {
@@ -134,12 +132,9 @@ public sealed partial class AltBlockingSystem : EntitySystem
                     }
                     args.CancelledHit = true;
                     args.blocker = netEnt;
-                    ChangeSeed(ent);
                     return;
                 }
             }
-
-            ChangeSeed(ent);
         }
         return;
     }
@@ -148,7 +143,7 @@ public sealed partial class AltBlockingSystem : EntitySystem
     {
         foreach (var item in items)
         {
-            if ((!TryComp<AltBlockingComponent>(item, out var shield)) || damage == null)
+            if ((!TryComp<AltBlockingComponent>(item, out var blockComp)) || damage == null)
                 continue;
 
             if (TryComp<ItemToggleBlockingDamageComponent>(item, out var toggleComp))
@@ -157,31 +152,34 @@ public sealed partial class AltBlockingSystem : EntitySystem
                     continue;
             }
 
-            _random.SetSeed(comp.randomSeed);
+            if (!TryGetNetEntity(blockComp.User, out var NetUser))
+                continue;
+
+            if (!TryGetNetEntity(item, out var NetItem))
+                continue;
+
+            var seed = SharedRandomExtensions.HashCodeCombine(new() { (int)_gameTiming.CurTick.Value, ((NetEntity)NetUser).Id, ((NetEntity)NetItem).Id });
+            var rand = new System.Random(seed);
 
             if (comp.IsBlocking)
             {
-                if (_random.Prob(shield.ActiveRangeBlockProb))
+                if (rand.Prob(blockComp.ActiveRangeBlockProb))
                 {
-                    _damageable.TryChangeDamage(shield.Owner, damage);
-                    ChangeSeed((comp.Owner, comp));
-                    _audio.PlayPvs(shield.BlockSound, (EntityUid)item);
+                    _damageable.TryChangeDamage(item, damage);
+                    _audio.PlayPvs(blockComp.BlockSound, (EntityUid)item);
                     return true;
                 }
             }
 
             else
             {
-                if (_random.Prob(shield.RangeBlockProb))
+                if (rand.Prob(blockComp.RangeBlockProb))
                 {
-                    _damageable.TryChangeDamage(shield.Owner, damage);
-                    ChangeSeed((comp.Owner, comp));
-                    _audio.PlayPvs(shield.BlockSound, (EntityUid)item);
+                    _damageable.TryChangeDamage(item, damage);
+                    _audio.PlayPvs(blockComp.BlockSound, (EntityUid)item);
                     return true;
                 }
             }
-
-            ChangeSeed((comp.Owner, comp));
         }
         return false;
     }

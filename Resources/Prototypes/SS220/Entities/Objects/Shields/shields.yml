@@ -15,7 +15,7 @@
     - type: AltBlocking
     - type: InstastunResistOnActiveBlocking
       resistedStunTypes:
-        Creampie: true
+        - Creampie
     - type: ArmorBlock
       tresholddict:
           Radiation: 1000

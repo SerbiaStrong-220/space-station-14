@@ -368,8 +368,8 @@
       Caustic: 1000
   - type: InstastunResistOnActiveBlocking
     resistedStunTypes:
-      Creampie: true
-      Projectile: true
+      - Creampie
+      - Projectile
   #SS220 shield rework end
   - type: ItemToggle
     onUse: false # wielding events control it instead
@@ -543,10 +543,9 @@
       Poison: 1000
       Airloss: 1000
       Caustic: 1000
-  - type: InstastunResistOnActiveBlocking
-    resistedStunTypes:
-      Creampie: true
-      Projectile: true
+  #- type: InstastunResistOnActiveBlocking
+  #  resistedStunTypes:
+  #    StunSource.Projectile
   #SS220 shield rework end
 
 
