@@ -484,11 +484,19 @@
   description: A very loud & dangerous sword with a beam made of pure, concentrated plasma. Specially designed for syndicate cyborgs.
 
 - type: entity
-  parent: CyborgEnergySword
+  parent: EnergySword #SS220 shield rework begin
   id: CyborgEnergySwordDouble # why is this invalid if ID is BorgEnergySwordDouble
   suffix: One-Handed, For Borgs
   description: Syndicate Command Interns thought that having one blade on the energy sword was not enough. Specially designed for syndicate cyborgs.
   components: # could add energy-draining like the L6C
+  #SS220 shield rework begin
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    attackRate: 1.5
+    angle: 100
+    damage:
+      types:
+        Blunt: 4.5
   - type: Sprite
     sprite: Objects/Weapons/Melee/e_sword_double.rsi
     layers:
@@ -498,17 +506,49 @@
         visible: false
         shader: unshaded
         map: [ "blade" ]
-  - type: ItemToggleMeleeWeapon
-    activatedSoundOnSwing:
-      path: /Audio/Weapons/eblademiss.ogg
-      params:
-        volume: 3
-        variation: 0.250
-    activatedDamage:
-        types:
-          Slash: 12
-          Heat: 12
-          Structural: 15
+  #SS220 shield rework begin
+  - type: AltBlocking
+    rangeBlockProb: 0
+    meleeBlockProb: 0
+    activeRangeBlockProb: 0.85
+    activeMeleeBlockProb: 0.85
+  - type: ItemToggleBlockingDamage
+    toggledRangeBlockProb: 0.4
+    toggledMeleeBlockProb: 0.35
+  - type: ChangeAppearanceOnActiveBlocking
+    spriteLayer: shield
+    inhandVisuals:
+      left:
+      - state: inhand-left-shield
+        shader: unshaded
+      right:
+      - state: inhand-right-shield
+        shader: unshaded
+  - type: ArmorBlock
+    tresholddict:
+      Piercing: 40
+      Blunt: 30
+      Heat: 35
+      Slash: 30
+      Radiation: 1000
+      Poison: 1000
+      Airloss: 1000
+      Caustic: 1000
+    durabilitytresholddict:
+      Piercing: 10000
+      Blunt: 10000
+      Heat: 10000
+      Slash: 10000
+      Radiation: 1000
+      Poison: 1000
+      Airloss: 1000
+      Caustic: 1000
+  - type: InstastunResistOnActiveBlocking
+    resistedStunTypes:
+      Creampie: true
+      Projectile: true
+  #SS220 shield rework end
+
 
 - type: entity
   parent: [ EnergyDaggerLoud, BaseXenoborgContraband ]

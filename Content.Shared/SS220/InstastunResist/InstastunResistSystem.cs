@@ -5,10 +5,10 @@ public sealed partial class InstastunResistSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<InstastunResistComponent, StunAttemptEvent>(OnActiveBlock);
+        SubscribeLocalEvent<InstastunResistComponent, StunAttemptEvent>(OnStunAttempt);
     }
 
-    public void OnActiveBlock(Entity<InstastunResistComponent> ent, ref StunAttemptEvent args)
+    public void OnStunAttempt(Entity<InstastunResistComponent> ent, ref StunAttemptEvent args)
     {
         if (ent.Comp.ResistedStunTypes.TryGetValue(args.origin, out var resisted) && resisted)
             args.cancelled = true;

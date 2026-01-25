@@ -354,6 +354,7 @@ public sealed partial class AltBlockingSystem : EntitySystem
                 return;
             }
         }
+
         component.User = null;
         if (component1 != null)
         {

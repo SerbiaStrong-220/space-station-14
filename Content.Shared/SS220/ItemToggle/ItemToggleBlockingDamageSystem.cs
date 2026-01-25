@@ -1,7 +1,8 @@
 using Content.Shared.Blocking;
 using Content.Shared.Item.ItemToggle.Components;
-using Content.Shared.SS220.ChangeAppearanceOnActiveBlocking;
 using Content.Shared.SS220.AltBlocking;
+using Content.Shared.SS220.ChangeAppearanceOnActiveBlocking;
+using Robust.Shared.Containers;
 
 namespace Content.Shared.SS220.ItemToggle;
 
@@ -12,6 +13,7 @@ public sealed class ItemToggleBlockingDamageSystem : EntitySystem
         SubscribeLocalEvent<ItemToggleBlockingDamageComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<ItemToggleBlockingDamageComponent, ItemToggledEvent>(OnToggleItem);
         SubscribeLocalEvent<ItemToggleBlockingDamageComponent, EntityTerminatingEvent>(OnEntityTerminating);
+        SubscribeLocalEvent<ItemToggleBlockingDamageComponent, EntGotInsertedIntoContainerMessage>(OnItemGotInserted);
     }
 
     private void OnDecreaseBlock(Entity<ItemToggleBlockingDamageComponent> ent, AltBlockingComponent AltBlockingComponent)
@@ -66,6 +68,15 @@ public sealed class ItemToggleBlockingDamageSystem : EntitySystem
     }
 
     private void OnEntityTerminating(Entity<ItemToggleBlockingDamageComponent> ent, ref EntityTerminatingEvent args)
+    {
+        if (!TryComp<AltBlockingComponent>(ent.Owner, out var AltBlockingComponent))
+        {
+            return;
+        }
+        OnDecreaseBlock(ent, AltBlockingComponent);
+    }
+
+    private void OnItemGotInserted(Entity<ItemToggleBlockingDamageComponent> ent, ref EntGotInsertedIntoContainerMessage args)
     {
         if (!TryComp<AltBlockingComponent>(ent.Owner, out var AltBlockingComponent))
         {
