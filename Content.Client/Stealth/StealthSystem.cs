@@ -92,6 +92,7 @@ public sealed class StealthSystem : SharedStealthSystem
         // actual visual visibility effect is limited to +/- 1.
         visibility = Math.Clamp(visibility, -1f, 1f);
 
+        _shader.SetParameter("disableDistortion", component.DisableDistortion); // ss220 add full visibility for stealth
         _shader.SetParameter("reference", reference);
         _shader.SetParameter("visibility", visibility);
 
