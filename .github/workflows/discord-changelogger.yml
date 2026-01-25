@@ -4,11 +4,11 @@ on:
   pull_request_target:
     branches:
       - master
-    types: [edited]
+    types: [merged]
 
 jobs:
   send_changelog:
-    # if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     name: Sends a changelog to the Discord server
     steps:
