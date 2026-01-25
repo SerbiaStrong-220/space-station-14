@@ -12,9 +12,6 @@ using JetBrains.Annotations;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
-using System.Runtime.Intrinsics.Arm;
-using Content.Shared.Mining;
-using System.Linq;
 using Content.Shared.Access.Systems;
 using Content.Shared.Access.Components;
 
@@ -33,6 +30,8 @@ public sealed class MaterialStorageSystem : SharedMaterialStorageSystem
     [Dependency] private readonly StackSystem _stackSystem = default!;
     [Dependency] private readonly AccessReaderSystem _accessReader = default!; // SS220 Add access check for material eject
 
+    private const string OreBase = "OreBase"; // ss220 material storage tweak
+
     public override void Initialize()
     {
         base.Initialize();
@@ -46,16 +45,14 @@ public sealed class MaterialStorageSystem : SharedMaterialStorageSystem
         if (!component.DropOnDeconstruct)
             return;
 
-
         foreach (var (material, amount) in component.Storage)
         {
-            if (component.DropMatsToOre) { // Руда обратно в руду
-                // спавн руды эквивалентом к материалам
-                //EntityManager.SpawnEntity("PlasmaOre", Transform(uid).Coordinates);
+            // ss220 material storage tweak start
+            if (component.DropMatsToOre)
                 SpawnMultipleFromOre(amount, material, Transform(uid).Coordinates);
-            }
-            else // Руда в пластины
+            else
                 SpawnMultipleFromMaterial(amount, material, Transform(uid).Coordinates);
+            // ss220 material storage tweak end
         }
     }
 
@@ -154,23 +151,25 @@ public sealed class MaterialStorageSystem : SharedMaterialStorageSystem
     }
 
     /// <summary>
-    // Тоже что и SpawnMultipleFromMaterial, только для спавна непереплавленной руды в печке (OreProcessor)
+    /// The same as SpawnMultipleFromMaterial, but for spawn ore
     /// </summary>
     public List<EntityUid> SpawnMultipleFromOre(int amount, string material, EntityCoordinates coordinates)
     {
-        foreach (var proto in _prototypeManager.EnumeratePrototypes<EntityPrototype>())
-        {
-            if (proto.ID.Contains(material) && proto.Parents != null && proto.Parents.Contains<string>("OreBase"))
-            {
-                if (!proto.TryGetComponent<PhysicalCompositionComponent>(out var composition))
-                    return new List<EntityUid>();
+        var prototypes = _prototypeManager.EnumeratePrototypes<EntityPrototype>();
 
-                var materialPerStack = composition.MaterialComposition[material];
-                return _stackSystem.SpawnMultiple(proto.ID, amount / materialPerStack, coordinates);
-            }
+        foreach (var proto in prototypes)
+        {
+            if (!proto.ID.Contains(material) || proto.Parents == null || !proto.Parents.Contains(OreBase))
+                continue;
+
+            if (!proto.TryGetComponent<PhysicalCompositionComponent>(out var composition, EntityManager.ComponentFactory))
+                return [];
+
+            var materialPerStack = composition.MaterialComposition[material];
+            return _stackSystem.SpawnMultiple(proto.ID, amount / materialPerStack, coordinates);
         }
 
-        return new List<EntityUid>();
+        return [];
     }
 
     /// <summary>

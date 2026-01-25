@@ -37,11 +37,16 @@ public sealed partial class MaterialStorageComponent : Component
     [DataField]
     public bool DropOnDeconstruct = true;
 
+    // ss220 material storage tweak start
     /// <summary>
-    /// Переводим материалы в эквивалент руды и дропаем ее
+    /// Transfer materials to equivalent ore and drop it
     /// </summary>
-    [DataField("dropMatsToOre")]
-    public bool DropMatsToOre = false;
+    [DataField]
+    public bool DropMatsToOre;
+
+    [DataField]
+    public bool DropOnTerminating = true;
+    // ss220 material storage tweak end
 
     /// <summary>
     /// Whitelist generated on runtime for what specific materials can be inserted into this entity.
