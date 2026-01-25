@@ -245,11 +245,11 @@
     - id: ChemistryBottleAmbuzolPlus
     - id: FlashlightSeclite
 
-#BSO
+# SRT Operative
 - type: entity
-  id: LockerBlueshieldOperativeFilled
+  id: LockerSRTOperativeFilled
   suffix: Filled
-  parent: LockerBlueshieldOperative
+  parent: LockerSRTOperative
   components:
   - type: StorageFill
     contents:
@@ -258,8 +258,7 @@
     - id: ClothingShoesBootsBlueShieldJackFilled
     - id: ClothingHeadsetAltCentComm
     - id: ClothingBeltWebbingBlueShield
-    - id: ClothingOuterArmorBlueShieldScale
-    - id: ClothingOuterArmorBlueShieldAssault
+    - id: ClothingOuterArmorBlueShieldBulletproof
     - id: ClothingBeltHolster
     - id: PowerCellMicroreactor
       amount: 2
@@ -289,7 +288,7 @@
       - id: ClothingNeckScarfStripedBlack
       - id: ClothingShoesBootsMagAdv
       - id: ClothingUniformTacticalSecurity
-      - id: BlueShieldSWAT
+      - id: ClothingMaskGasSwat
       - id: ClothingHeadHelmetSwat
       - id: ClothingOuterArmorHeavy
       - id: ClothingEyesThermalGlassesSecurity

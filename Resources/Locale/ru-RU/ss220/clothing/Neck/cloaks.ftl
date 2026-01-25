@@ -1,4 +1,4 @@
-fold-other-shoulder-verb = перевесить на другое плечо
+fold-other-shoulder-verb = Перевесить на другое плечо
 
 ent-ClothingNeckCloakNanotrasenAdmiral = плащ адмирала
     .desc = Плащ с золотым шитьём, который носят адмиралы флота Nanotrasen.
@@ -10,3 +10,10 @@ ent-ClothingNeckCMOParadeCloak = парадный плащ главного вр
 
 ent-ClothingNeckCloakOwl = плащ героя-совы
     .desc = Будь готов к ночным патрулям и странным вопросам про мышей.
+
+ent-ClothingNeckCloakCapeWhite = белая плащ-накидка
+    .desc = Удобная накидка, ниспадающая на спину и застёгивающаяся на шее брошью.
+ent-ClothingNeckCloakCape = плащ-накидка
+    .desc = { ent-ClothingNeckCloakCapeWhite.desc }
+ent-ClothingNeckCloakCapeBlue = синяя плащ-накидка
+    .desc = { ent-ClothingNeckCloakCapeWhite.desc }

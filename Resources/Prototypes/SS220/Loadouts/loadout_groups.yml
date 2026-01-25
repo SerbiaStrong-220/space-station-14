@@ -164,24 +164,31 @@
   loadouts:
   - BlueshieldBeret
   - BlueshieldBlueBeret
+  - BlueshieldNavyBlueBeret
 
 - type: loadoutGroup
   id: BlueShieldGlasses
   name: loadout-group-blueshield-glasses
-  minLimit: 1
   loadouts:
   - BlueshieldGlasses
   - BlueshieldTacticGlasses
+  - BlueshieldBallisticGlasses
+
+- type: loadoutGroup
+  id: BlueShieldMask
+  name: loadout-group-blueshield-mask
+  minLimit: 0
+  loadouts:
+  - MaskBlueshieldGaiter
+  - MaskBlueshieldBalaclava
 
 - type: loadoutGroup
   id: BlueShieldNeck
   name: loadout-group-blueshield-neck
   minLimit: 0
   loadouts:
-  - SecurityHolster
-  - Headphones
-  - ProtectGearBlue
-  - BlueShieldNeckCloak
+  - CloakCape
+  - CloakCapeBlue
 
 - type: loadoutGroup
   id: BlueShieldJumpsuit
@@ -198,9 +205,8 @@
   id: BlueShieldOuterclothing
   name: loadout-group-blueshield-outerclothing
   loadouts:
-  - BlueShieldArmorAssault
-  - BlueShieldArmorScale
-  - BlueShieldOperativeCoat
+  - BlueShieldArmorBulletproof
+  - BlueShieldSRTCoat
 
 - type: loadoutGroup
   id: BlueShieldBelt
@@ -215,6 +221,14 @@
   hidden: true
   loadouts:
   - BlueShieldBackpack
+
+- type: loadoutGroup
+  id: BlueShieldShoes
+  name: loadout-group-blueshield-shoes
+  loadouts:
+  - JackBoots
+  - BlueShieldJackBoots
+  - CombatBoots
   # Офицер "Синий Щит" (Конец)
 #! Юридический (Конец)
 
@@ -314,7 +328,7 @@
   id: DetectiveGlasses
   name: loadout-group-detective-glasses
   minLimit: 0
-  loadouts: 
+  loadouts:
   - GlassesSecurity
   - CyberGlassesSecurity
   - GlassesBallistic

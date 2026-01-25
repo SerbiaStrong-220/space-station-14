@@ -461,10 +461,10 @@
     maxTransferAmount: 20
 
 - type: entity
-  name : Blaster bolt
-  id: BulletBlasterAlt
-  parent: BaseBlasterBullet
   categories: [ HideSpawnMenu ]
+  parent: BaseBlasterBullet
+  id: BulletBlasterBolt
+  name : Blaster bolt
   components:
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/Projectiles/redprojectile.rsi
@@ -475,14 +475,34 @@
     impactEffect: BulletImpactEffectBlaster
     damage:
       types:
-        Heat: 20
-        Piercing: 6
+        Heat: 14
+        Piercing: 5
     soundHit:
       collection: WeakHit
     forceSound: true
 
 - type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BulletBlasterBolt
+  id: BulletBlasterBoltPiercingWindow
   name : Blaster bolt
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Heat: 14
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.1,0.1,0.1"
+        hard: false
+        mask:
+        - Opaque
+
+- type: entity
+  name: blaster bolt
   id: BulletBlasterPulse
   parent: BaseBlasterBullet
   categories: [ HideSpawnMenu ]
@@ -496,11 +516,19 @@
     impactEffect: BulletImpactEffectBlue
     damage:
       types:
-        Heat: 48
-        Piercing: 14
+        Heat: 32
     soundHit:
       collection: WeakHit
     forceSound: true
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.1,0.1,0.1"
+        hard: false
+        mask:
+        - Opaque
 
 - type: entity
   id: BulletImpactEffectBlue

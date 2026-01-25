@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from TGstation https://github.com/MatrixOne500/tgstation/blob/505e10448e6216237aae8a34bb68ed2e143cc1fe; other-shoulder state made by Estkemran (Github)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "icon_other-shoulder"
+    },
+	  {
+      "name": "equipped-NECK",
+      "directions": 4
+    },
+	  {
+      "name": "other-shoulder-equipped-NECK",
+      "directions": 4
+    }
+  ]
+}
