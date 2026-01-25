@@ -26,6 +26,7 @@ internal sealed class StunOnCollideSystem : EntitySystem
         //SS220 instastun resist begin
         var resistEv = new StunAttemptEvent("Projectile");
         RaiseLocalEvent(target, ref resistEv);
+        
         if (resistEv.cancelled)
             return;
         //SS220 instastun resist end
