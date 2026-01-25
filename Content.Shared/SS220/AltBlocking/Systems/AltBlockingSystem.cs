@@ -59,8 +59,6 @@ public sealed partial class AltBlockingSystem : EntitySystem
 
         SubscribeLocalEvent<AltBlockingComponent, ThrowItemAttemptEvent>(OnThrowAttempt);
         SubscribeLocalEvent<AltBlockingComponent, ContainerGettingRemovedAttemptEvent>(OnDropAttempt);
-
-        SubscribeLocalEvent<AltBlockingComponent, EntGotInsertedIntoContainerMessage>(OnItemGotInserted);
     }
 
     private void OnCompInit(Entity<AltBlockingUserComponent> ent, ref ComponentInit args)
@@ -369,13 +367,6 @@ public sealed partial class AltBlockingSystem : EntitySystem
             }
         }
     }
-
-    private void OnItemGotInserted(Entity<AltBlockingComponent> ent, ref EntGotInsertedIntoContainerMessage args)
-    {
-        if(ent.Comp.User != null)
-            StopBlockingHelper(ent.Owner, ent.Comp, (EntityUid)ent.Comp.User);
-    }
-
 }
 
 [ByRefEvent]
