@@ -27,7 +27,7 @@ jobs:
 
       - name: Run script
         env:
-          WEBHOOK_TOKEN: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
+          WEBHOOK_TOKEN: ${{ secrets.DISCORD_WEBHOOK_ID }}/${{ secrets.DISCORD_WEBHOOK_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PULL_URL: ${{ github.event.pull_request.url }}
           WEBHOOK_USERNAME: 'SS220 Changelogger'
