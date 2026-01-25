@@ -4,7 +4,7 @@ on:
   pull_request_target:
     branches:
       - master
-    types: [merged]
+    types: [closed]
 
 jobs:
   send_changelog:
