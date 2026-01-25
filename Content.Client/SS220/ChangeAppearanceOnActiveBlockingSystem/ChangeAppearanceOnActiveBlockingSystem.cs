@@ -50,7 +50,7 @@ public sealed partial class ChangeAppearanceOnActiveBlockingSystem : EntitySyste
 
     private void OnGetHeldVisuals(Entity<ChangeAppearanceOnActiveBlockingComponent> ent, ref GetInhandVisualsEvent args)
     {
-        if (!TryComp(ent.Owner, out AppearanceComponent? appearance))
+        if(!TryComp<AppearanceComponent>(ent.Owner, out var appearance))
             return;
 
         if(!_appearanceSystem.TryGetData<bool>(ent.Owner, ActiveBlockingVisuals.Enabled, out var enabled, appearance)
@@ -68,11 +68,7 @@ public sealed partial class ChangeAppearanceOnActiveBlockingSystem : EntitySyste
         foreach (var layer in layers)
         {
             var key = layer.MapKeys?.FirstOrDefault();
-            if (key == null)
-            {
-                key = i == 0 ? defaultKey : $"{defaultKey}-{i}";
-                i++;
-            }
+            key ??= i == 0 ? defaultKey : $"{defaultKey}-{i++}";
 
             if (modulateColor)
                 layer.Color = color;

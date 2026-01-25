@@ -17,5 +17,5 @@ public sealed partial class InstastunResistComponent : Component
 
     [DataField]
     [AutoNetworkedField]
-    public Dictionary<string,bool> ResistedStunTypes = new Dictionary<string,bool>();
+    public Dictionary<StunSource, bool> ResistedStunTypes = new Dictionary<StunSource, bool>();
 }

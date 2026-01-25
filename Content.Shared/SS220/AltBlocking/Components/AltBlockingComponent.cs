@@ -8,7 +8,8 @@ namespace Content.Shared.SS220.AltBlocking;
 /// <summary>
 /// This component goes on an item that you want to use to block
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent]
+[NetworkedComponent, AutoGenerateComponentState]
 
 public sealed partial class AltBlockingComponent : Component
 {

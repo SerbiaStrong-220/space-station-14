@@ -69,9 +69,8 @@ public sealed partial class AltBlockingSystem : EntitySystem
     private void ChangeSeed(Entity<AltBlockingUserComponent> ent)
     {
         if (_net.IsServer)
-        {
             ent.Comp.randomSeed = _random.Next(1000000);
-        }
+
         Dirty(ent.Owner, ent.Comp);//Yes,this is probably the most obvious and dumb way to to it.
     }
 
@@ -82,7 +81,7 @@ public sealed partial class AltBlockingSystem : EntitySystem
 
     private void OnBlockThrownProjectile(Entity<AltBlockingUserComponent> ent, ref ThrowableProjectileBlockAttemptEvent args)
     {
-        args.Cancelled = TryBlock(ent.Comp.BlockingItemsShields, args.Damage, ent.Comp);
+        args.CancelledHit = TryBlock(ent.Comp.BlockingItemsShields, args.Damage, ent.Comp);
     }
 
     private void OnBlockUserHitscan(Entity<AltBlockingUserComponent> ent, ref HitscanBlockAttemptEvent args)
@@ -94,26 +93,27 @@ public sealed partial class AltBlockingSystem : EntitySystem
     {
         foreach (var item in ent.Comp.BlockingItemsShields)
         {
-            if (!TryComp<AltBlockingComponent>(item, out var shield)) { return; }
+            if (!TryComp<AltBlockingComponent>(item, out var blockComp))
+                return; 
+
             if (!TryGetNetEntity(item, out var netEnt))
-            {
                 return;
-            }
+
             if (TryComp<ItemToggleBlockingDamageComponent>(item, out var toggleComp))
             {
                 if (!toggleComp.IsToggled)
-                {
                     continue;
-                }
             }
+
             _random.SetSeed(ent.Comp.randomSeed);
+
             if (ent.Comp.IsBlocking)
             {
-                if (_random.Prob(shield.ActiveMeleeBlockProb))
+                if (_random.Prob(blockComp.ActiveMeleeBlockProb))
                 {
                     if(_net.IsServer)
                     {
-                        _audio.PlayPvs(shield.BlockSound, (EntityUid)item);
+                        _audio.PlayPvs(blockComp.BlockSound, (EntityUid)item);
                         _popupSystem.PopupEntity(Loc.GetString("block-shot"), ent.Owner);
                     }
                     args.CancelledHit = true;
@@ -122,13 +122,14 @@ public sealed partial class AltBlockingSystem : EntitySystem
                     return;
                 }
             }
+
             else
             {
-                if (_random.Prob(shield.MeleeBlockProb))
+                if (_random.Prob(blockComp.MeleeBlockProb))
                 {
                     if (_net.IsServer)
                     {
-                        _audio.PlayPvs(shield.BlockSound, (EntityUid)item);
+                        _audio.PlayPvs(blockComp.BlockSound, (EntityUid)item);
                         _popupSystem.PopupEntity(Loc.GetString("block-shot"), ent.Owner);
                     }
                     args.CancelledHit = true;
@@ -137,6 +138,7 @@ public sealed partial class AltBlockingSystem : EntitySystem
                     return;
                 }
             }
+
             ChangeSeed(ent);
         }
         return;
@@ -147,17 +149,16 @@ public sealed partial class AltBlockingSystem : EntitySystem
         foreach (var item in items)
         {
             if ((!TryComp<AltBlockingComponent>(item, out var shield)) || damage == null)
-            {
                 continue;
-            }
+
             if (TryComp<ItemToggleBlockingDamageComponent>(item, out var toggleComp))
             {
                 if (!toggleComp.IsToggled)
-                {
                     continue;
-                }
             }
+
             _random.SetSeed(comp.randomSeed);
+
             if (comp.IsBlocking)
             {
                 if (_random.Prob(shield.ActiveRangeBlockProb))
@@ -168,6 +169,7 @@ public sealed partial class AltBlockingSystem : EntitySystem
                     return true;
                 }
             }
+
             else
             {
                 if (_random.Prob(shield.RangeBlockProb))
@@ -178,6 +180,7 @@ public sealed partial class AltBlockingSystem : EntitySystem
                     return true;
                 }
             }
+
             ChangeSeed((comp.Owner, comp));
         }
         return false;
@@ -198,9 +201,8 @@ public sealed partial class AltBlockingSystem : EntitySystem
     private bool IsDropBlocked(Entity<AltBlockingComponent> ent)
     {
         if (!TryComp<AltBlockingUserComponent>(ent.Comp.User, out var userComp))
-        {
             return false;
-        }
+
         var action = userComp.BlockingToggleActionEntity;
 
         if (action == null || !TryComp<ActionComponent>(action.Value, out var actionComponent))
@@ -279,13 +281,12 @@ public sealed partial class AltBlockingSystem : EntitySystem
         Dirty(user, compUser);
         foreach (var shield in compUser.BlockingItemsShields)
         {
-            if (shield == null) { continue; }
+            if (shield == null)
+                continue; 
             if (TryComp<ItemToggleBlockingDamageComponent>(shield, out var toggleComp))
             {
                 if (!toggleComp.IsToggled)
-                {
                     continue;
-                }
             }
             ActiveBlockingEvent ev = new ActiveBlockingEvent(true);
             RaiseLocalEvent((EntityUid)shield, ref ev);
@@ -314,7 +315,8 @@ public sealed partial class AltBlockingSystem : EntitySystem
         Dirty(user, compUser);
         foreach (var shield in compUser.BlockingItemsShields)
         {
-            if (shield == null) { continue; }
+            if (shield == null)
+                continue; 
             ActiveBlockingEvent ev = new ActiveBlockingEvent(false);
             RaiseLocalEvent((EntityUid)shield, ref ev);
         }
@@ -332,7 +334,10 @@ public sealed partial class AltBlockingSystem : EntitySystem
     private void StopBlockingHelper(EntityUid uid, AltBlockingComponent component, EntityUid user)
     {
         var userQuery = GetEntityQuery<AltBlockingUserComponent>();
-        if (!userQuery.TryGetComponent(user, out var component1)) { return; }
+
+        if (!userQuery.TryGetComponent(user, out var component1))
+            return;
+
         var handQuery = GetEntityQuery<HandsComponent>();
 
         if (!handQuery.TryGetComponent(user, out var hands))
@@ -341,16 +346,12 @@ public sealed partial class AltBlockingSystem : EntitySystem
         var shields = _handsSystem.EnumerateHeld((user, hands)).ToArray();
 
         if (component1 != null && component1.BlockingItemsShields.Contains(uid))
-        {
             component1.BlockingItemsShields.Remove(uid);
-        }
 
         foreach (var shield in shields)
         {
             if (HasComp<AltBlockingComponent>(shield) && userQuery.TryGetComponent(user, out var AltBlockingUserComponent))
-            {
                 return;
-            }
         }
 
         component.User = null;

@@ -11,11 +11,17 @@ public sealed partial class InstastunResistSystem : EntitySystem
     public void OnStunAttempt(Entity<InstastunResistComponent> ent, ref StunAttemptEvent args)
     {
         if (ent.Comp.ResistedStunTypes.TryGetValue(args.origin, out var resisted) && resisted)
-            args.cancelled = true;
+            args.stunCancelled = true;
     }
 }
 
 [ByRefEvent]
-public record struct StunAttemptEvent(string origin, bool cancelled = false);
+public record struct StunAttemptEvent(StunSource origin, bool stunCancelled = false);
+
+public enum StunSource : byte
+{
+    Creampie = 0,
+    Projectile = 1 //Works for StunOnCollide projectiles
+}
 
 
