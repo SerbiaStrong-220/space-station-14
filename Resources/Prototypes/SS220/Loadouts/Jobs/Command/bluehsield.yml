@@ -99,6 +99,20 @@
   equipment:
     eyes: ClothingEyesBlueShieldTacticGlasses
 
+# Mask
+- type: loadout
+  id: BlueShieldMaskNew
+  equipment:
+    mask: BlueShieldGasMask
+
+- type: loadout
+  id: BlueShieldMaskOld
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BlueShieldFive
+  equipment:
+    mask: BlueShieldSWAT
+
 # Jumpsuit
 - type: loadout
   id: BlueShieldCombez
