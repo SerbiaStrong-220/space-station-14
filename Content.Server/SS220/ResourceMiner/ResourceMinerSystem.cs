@@ -44,6 +44,10 @@ public sealed class ResourceMinerSystem : EntitySystem
             if (resourceMinerComponent.Silo is null)
                 continue;
 
+
+            if (_gameTiming.CurTime < resourceMinerComponent.NextUpdate)
+                continue;
+                
             if (TerminatingOrDeleted(resourceMinerComponent.Silo))
             {
                 resourceMinerComponent.Silo = null;
@@ -52,9 +56,6 @@ public sealed class ResourceMinerSystem : EntitySystem
                 Dirty(uid, resourceMinerComponent);
                 continue;
             }
-
-            if (_gameTiming.CurTime < resourceMinerComponent.NextUpdate)
-                continue;
 
             resourceMinerComponent.NextUpdate = _gameTiming.CurTime + resourceMinerComponent.TimeBetweenUpdate;
             AddResourcesToStorage((uid, resourceMinerComponent));
