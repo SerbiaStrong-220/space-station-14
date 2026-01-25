@@ -574,7 +574,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         var targets = new List<EntityUid>(1)
         {
-            target.Value
+            targetEntity
         };
 
         var weapon = GetEntity(ev.Weapon);
