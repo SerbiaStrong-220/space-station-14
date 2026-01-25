@@ -484,11 +484,12 @@
   description: A very loud & dangerous sword with a beam made of pure, concentrated plasma. Specially designed for syndicate cyborgs.
 
 - type: entity
-  parent: EnergySword #SS220 shield rework begin
+  parent: EnergySword #SS220 shield rework
   id: CyborgEnergySwordDouble # why is this invalid if ID is BorgEnergySwordDouble
   suffix: One-Handed, For Borgs
   description: Syndicate Command Interns thought that having one blade on the energy sword was not enough. Specially designed for syndicate cyborgs.
   components: # could add energy-draining like the L6C
+  #Inheriting from usual double esword somehow and somewhy throwed the exeption(No, this is not related to shield rework in any way)
   #SS220 shield rework begin
   - type: MeleeWeapon
     wideAnimationRotation: -135
@@ -509,11 +510,11 @@
   - type: AltBlocking
     rangeBlockProb: 0
     meleeBlockProb: 0
-    activeRangeBlockProb: 0.85
-    activeMeleeBlockProb: 0.85
+    activeRangeBlockProb: 0.60 #As we have no indication of the double esword being turned on or off chance frameworks were shrinked
+    activeMeleeBlockProb: 0.65
   - type: ItemToggleBlockingDamage
-    toggledRangeBlockProb: 0.4
-    toggledMeleeBlockProb: 0.35
+    toggledRangeBlockProb: 0.60
+    toggledMeleeBlockProb: 0.45
   - type: ChangeAppearanceOnActiveBlocking
     spriteLayer: shield
     inhandVisuals:
