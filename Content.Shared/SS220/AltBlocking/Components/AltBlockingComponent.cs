@@ -24,7 +24,6 @@ public sealed partial class AltBlockingComponent : Component
     [DataField]
     public bool IsBlocking;
 
-
     /// <summary>
     /// The sound to be played when you get hit while actively blocking
     /// </summary>
