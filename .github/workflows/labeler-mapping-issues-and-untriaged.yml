@@ -12,7 +12,14 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
+            const issueTitle = context.payload.issue.title;
             const issueBody = context.payload.issue.body;
+
+            if (!issueTitle.includes('[MI]')) {
+              console.log('Not mapping issue. Skip action.');
+              return;
+            }
+
             const options = {
               'Frankenstein': {label: 'MI: Frankenstein', assignee: 'UrPrice' },
               'Axioma': {label: 'MI: Axioma', assignee: 'NightmareStalker'},
