@@ -69,7 +69,7 @@
     - type: StaticPrice
       price: 90
     - type: AltBlocking
-      rangeBlockProb: 0.5
+      rangeBlockProb: 0.50
       meleeBlockProb: 0.65
       activeRangeBlockProb: 0.60
       activeMeleeBlockProb: 0.75
@@ -79,11 +79,19 @@
           Blunt: 20
           Heat: 10
           Slash: 15
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
       durabilitytresholddict:
           Piercing: 7
           Blunt: 15
           Heat: 7
           Slash: 10
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
 
 - type: entity
   name: laser shield
@@ -96,17 +104,25 @@
     - type: Item
       heldPrefix: riot_laser
     - type: AltBlocking
-      rangeBlockProb: 0.50
+      rangeBlockProb: 0.45
       meleeBlockProb: 0.65
       activeRangeBlockProb: 0.60
       activeMeleeBlockProb: 0.75
     - type: ArmorBlock
       tresholddict:
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
           Piercing: 7
           Blunt: 10
           Heat: 60
           Slash: 7
       durabilitytresholddict:
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
           Piercing: 4
           Blunt: 5
           Heat: 35
@@ -123,17 +139,25 @@
     - type: Item
       heldPrefix: riot_bullet
     - type: AltBlocking
-      rangeBlockProb: 0.55
+      rangeBlockProb: 0.40
       meleeBlockProb: 0.30
       activeRangeBlockProb: 0.65
       activeMeleeBlockProb: 0.45
     - type: ArmorBlock
       tresholddict:
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
           Piercing: 37
           Blunt: 35
           Heat: 30
           Slash: 35
       durabilitytresholddict:
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
           Piercing: 30
           Blunt: 30
           Heat: 25
@@ -373,7 +397,7 @@
     - type: Item
       heldPrefix: ratvarian
     - type: AltBlocking
-      rangeBlockProb: 0.35
+      rangeBlockProb: 0.30
       meleeBlockProb: 0.55
       activeRangeBlockProb: 0.45
       activeMeleeBlockProb: 0.70
@@ -494,10 +518,10 @@
     - type: AltBlocking
       rangeBlockProb: 0
       meleeBlockProb: 0
-      activeRangeBlockProb: 0.60
+      activeRangeBlockProb: 0.50
       activeMeleeBlockProb: 0.75
     - type: ItemToggleBlockingDamage
-      toggledRangeBlockProb: 0.50
+      toggledRangeBlockProb: 0.40
       toggledMeleeBlockProb: 0.65 #No more stunbatons
     - type: Appearance
     - type: ArmorBlock
