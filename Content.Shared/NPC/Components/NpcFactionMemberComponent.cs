@@ -37,4 +37,9 @@ public sealed partial class NpcFactionMemberComponent : Component
     /// </summary>
     [DataField, ViewVariables]
     public HashSet<ProtoId<NpcFactionPrototype>>? AddHostileFactions;
+
+    //ss220 add tarot card start
+    [Access(Other = AccessPermissions.ReadWriteExecute)]
+    public HashSet<EntityUid>? FriendlyEntities;
+    //ss220 add tarot card end
 }
