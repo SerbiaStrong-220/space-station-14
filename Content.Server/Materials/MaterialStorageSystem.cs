@@ -30,8 +30,6 @@ public sealed class MaterialStorageSystem : SharedMaterialStorageSystem
     [Dependency] private readonly StackSystem _stackSystem = default!;
     [Dependency] private readonly AccessReaderSystem _accessReader = default!; // SS220 Add access check for material eject
 
-    private const string OreBase = "OreBase"; // ss220 material storage tweak
-
     public override void Initialize()
     {
         base.Initialize();
@@ -47,12 +45,7 @@ public sealed class MaterialStorageSystem : SharedMaterialStorageSystem
 
         foreach (var (material, amount) in component.Storage)
         {
-            // ss220 material storage tweak start
-            if (component.DropMatsToOre)
-                SpawnMultipleFromOre(amount, material, Transform(uid).Coordinates);
-            else
-                SpawnMultipleFromMaterial(amount, material, Transform(uid).Coordinates);
-            // ss220 material storage tweak end
+            SpawnMultipleFromMaterial(amount, material, Transform(uid).Coordinates);
         }
     }
 
@@ -149,32 +142,6 @@ public sealed class MaterialStorageSystem : SharedMaterialStorageSystem
             $"{ToPrettyString(user):player} inserted {count} {ToPrettyString(toInsert):inserted} into {ToPrettyString(receiver):receiver}");
         return true;
     }
-
-    // ss220 material storage tweak start
-    /// <summary>
-    /// The same as SpawnMultipleFromMaterial, but for spawn ore
-    /// </summary>
-    public List<EntityUid> SpawnMultipleFromOre(int amount, string material, EntityCoordinates coordinates)
-    {
-        var prototypes = _prototypeManager.EnumeratePrototypes<EntityPrototype>();
-
-        foreach (var proto in prototypes)
-        {
-            if (!proto.ID.Contains(material) || proto.Parents == null || !proto.Parents.Contains(OreBase))
-                continue;
-
-            if (!proto.TryGetComponent<PhysicalCompositionComponent>(out var composition, EntityManager.ComponentFactory))
-                continue;
-
-            if (!composition.MaterialComposition.TryGetValue(material, out var materialPerStack))
-                continue;
-
-            return _stackSystem.SpawnMultiple(proto.ID, amount / materialPerStack, coordinates);
-        }
-
-        return [];
-    }
-    // ss220 material storage tweak end
 
     /// <summary>
     ///     Spawn an amount of a material in stack entities.

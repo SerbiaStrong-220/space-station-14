@@ -38,12 +38,6 @@ public sealed partial class MaterialStorageComponent : Component
     public bool DropOnDeconstruct = true;
 
     // ss220 material storage tweak start
-    /// <summary>
-    /// Transfer materials to equivalent ore and drop it
-    /// </summary>
-    [DataField]
-    public bool DropMatsToOre;
-
     [DataField]
     public bool DropOnTerminating = true;
     // ss220 material storage tweak end
