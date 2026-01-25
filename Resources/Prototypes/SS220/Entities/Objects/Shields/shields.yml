@@ -75,7 +75,7 @@
       activeMeleeBlockProb: 0.75
     - type: ArmorBlock
       tresholddict:
-          Piercing: 10
+          Piercing: 6
           Blunt: 20
           Heat: 10
           Slash: 15
@@ -142,7 +142,7 @@
       rangeBlockProb: 0.40
       meleeBlockProb: 0.30
       activeRangeBlockProb: 0.65
-      activeMeleeBlockProb: 0.45
+      activeMeleeBlockProb: 0.35
     - type: ArmorBlock
       tresholddict:
           Radiation: 1000
