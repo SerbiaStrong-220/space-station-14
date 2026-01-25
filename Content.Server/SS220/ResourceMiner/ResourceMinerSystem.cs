@@ -44,7 +44,6 @@ public sealed class ResourceMinerSystem : EntitySystem
             if (resourceMinerComponent.Silo is null)
                 continue;
 
-
             if (_gameTiming.CurTime < resourceMinerComponent.NextUpdate)
                 continue;
                 
