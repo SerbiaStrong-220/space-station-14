@@ -17,11 +17,11 @@ ent-EnergyDaggerBox = футляр энергокинжала
 ent-EnergyCutlass = отломанная рукоять игрушечной абордажной сабли
     .suffix = абордажная энергосабля
     .desc = Тот кто сделал это, должно быть совсем не любит игрушки.
-ent-CyborgEnergySwordDouble = { ent-EnergySwordDouble }
 #SS220-cyborgdesword-locale-desc-tweak-begin
+ent-CyborgEnergySwordDouble = { ent-EnergySwordDouble }
     .desc = Версия двухклинкового меча с энергощитом аналогичным одноручному щиту со значительно лучшими показателями устойчивости ко всем типам атак.
-#SS220-cyborgdesword-locale-desc-tweak-end
     .suffix = Одноручное, Для боргов
+#SS220-cyborgdesword-locale-desc-tweak-end
 ent-EnergySwordDouble = игрушечный двухклинковый меч
     .suffix = двухклинковый энергетический меч
     .desc = Новый двойной пластиковый меч от Sandy-Cat! В два раза больше эпика и громких звуков!
