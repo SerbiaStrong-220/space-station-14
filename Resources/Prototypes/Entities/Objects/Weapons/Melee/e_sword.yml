@@ -506,7 +506,6 @@
         visible: false
         shader: unshaded
         map: [ "blade" ]
-  #SS220 shield rework begin
   - type: AltBlocking
     rangeBlockProb: 0
     meleeBlockProb: 0
