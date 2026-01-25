@@ -164,9 +164,11 @@ public sealed class MaterialStorageSystem : SharedMaterialStorageSystem
                 continue;
 
             if (!proto.TryGetComponent<PhysicalCompositionComponent>(out var composition, EntityManager.ComponentFactory))
-                return [];
+                continue;
 
-            var materialPerStack = composition.MaterialComposition[material];
+            if (!composition.MaterialComposition.TryGetValue(material, out var materialPerStack))
+                continue;
+
             return _stackSystem.SpawnMultiple(proto.ID, amount / materialPerStack, coordinates);
         }
 
