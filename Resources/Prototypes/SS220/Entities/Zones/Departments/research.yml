@@ -1,0 +1,34 @@
+- type: entity
+  parent: ZoneBase
+  id: ZoneResearch
+  name: research
+
+- type: entity
+  parent: ZoneResearch
+  id: ZoneResearchStand
+  name: research stand
+
+- type: entity
+  parent: ZoneResearch
+  id: ZoneResearchRobotics
+  name: robotics
+
+- type: entity
+  parent: ZoneResearch
+  id: ZoneResearchOfficeRD
+  name: RD office
+
+- type: entity
+  parent: ZoneResearch
+  id: ZoneResearchAnomalistics
+  name: anomalistics
+
+- type: entity
+  parent: ZoneResearch
+  id: ZoneResearchXenoarchaeology
+  name: xenoarchaeology
+
+- type: entity
+  parent: ZoneResearch
+  id: ZoneResearchServerRoom
+  name: research server room
