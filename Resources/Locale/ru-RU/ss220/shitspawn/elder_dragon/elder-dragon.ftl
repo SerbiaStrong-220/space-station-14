@@ -8,10 +8,10 @@ ghost-role-information-elder-space-dragon-name = Древний космичес
 ghost-role-information-elder-space-dragon-description = После длительных скитаний в глубоком космосе пришло время насытиться!
 
 ent-EldrichCarpRift = драконий разлом
-    .desc = По ту сторону простираются тёмные глубины космическй бездны
+    .desc = По ту сторону простираются тёмные глубины космической бездны
 
 ent-ActionSpawnEldrichRift = Призвать разлом
-    .desc = Разлом, переодически призывающий верных космических акул
+    .desc = Разлом, периодически призывающий верных космических акул
 
 ent-MobSharkEldrichDragon = разумная космическая акула
     .desc = Зубастая!
