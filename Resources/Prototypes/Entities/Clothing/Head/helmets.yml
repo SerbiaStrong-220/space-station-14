@@ -215,6 +215,7 @@
     layers:
       Hair: HEAD
       Snout: HEAD
+  - type: NoiseSuppression #SS220 staminaweapons
 
 #Knight Helmet
 - type: entity
@@ -459,6 +460,7 @@
   - type: HideLayerClothing
     layers:
       Hair: HEAD
+  - type: NoiseSuppression #SS220 staminaweapons
 
 #Bone Helmet
 #No need to hide the hair on this one

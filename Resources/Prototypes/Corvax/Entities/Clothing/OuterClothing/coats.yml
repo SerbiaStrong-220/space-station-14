@@ -15,6 +15,8 @@
           Slash: 0.7
           Piercing: 0.4
           Heat: 0.7
+    - type: StaminaResistance #SS220 staminaweapons
+      damageCoefficient: 0.7
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -36,6 +38,8 @@
           Slash: 0.8
           Piercing: 0.6
           Heat: 0.9
+    - type: StaminaResistance #SS220 staminaweapons
+      damageCoefficient: 0.7
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -54,6 +58,8 @@
           Slash: 0.8
           Piercing: 0.4
           Heat: 0.8
+    - type: StaminaResistance #SS220 staminaweapons
+      damageCoefficient: 0.7
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -72,6 +78,8 @@
           Slash: 0.8
           Piercing: 0.6
           Heat: 0.9
+    - type: StaminaResistance #SS220 staminaweapons
+      damageCoefficient: 0.7
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -105,6 +113,8 @@
         Slash: 0.5
         Piercing: 0.6
         Heat: 0.5
+  - type: StaminaResistance #SS220 staminaweapons
+    damageCoefficient: 0.7
 
 - type: entity
   parent: ClothingOuterStorageBase

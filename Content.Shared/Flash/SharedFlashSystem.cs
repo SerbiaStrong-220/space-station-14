@@ -196,8 +196,7 @@ public abstract class SharedFlashSystem : EntitySystem
     /// <param name="displayPopup">Whether or not to show a popup to the target player.</param>
     /// <param name="probability">Chance to be flashed. Rolled separately for each target in range.</param>
     /// <param name="sound">Additional sound to play at the source.</param>
-    public void FlashArea(EntityUid source, EntityUid? user, float range, TimeSpan flashDuration, float slowTo = 0.8f, bool displayPopup = false, float probability = 1f, SoundSpecifier? sound = null,
-     bool stun = false, float stunDuration = 1f) // 220 flash grenade stun)
+    public void FlashArea(EntityUid source, EntityUid? user, float range, TimeSpan flashDuration, float slowTo = 0.8f, bool displayPopup = false, float probability = 1f, SoundSpecifier? sound = null)
     {
         var transform = Transform(source);
         var mapPosition = _transform.GetMapCoordinates(transform);
@@ -221,8 +220,7 @@ public abstract class SharedFlashSystem : EntitySystem
             if (!_examine.InRangeUnOccluded(entity, mapPosition, range, predicate: (e) => _damagedByFlashingQuery.HasComponent(e)))
                 continue;
 
-            Flash(entity, user, source, flashDuration, slowTo, displayPopup,
-                        melee: stun, stunDuration: TimeSpan.FromSeconds(stunDuration)); // 220 flash grenade stun
+            Flash(entity, user, source, flashDuration, slowTo, displayPopup);
         }
 
         _audio.PlayPredicted(sound, source, user, AudioParams.Default.WithVolume(1f).WithMaxDistance(3f));

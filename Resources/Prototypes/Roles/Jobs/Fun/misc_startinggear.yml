@@ -82,7 +82,7 @@
     head: ClothingHeadHelmetSwat
     mask: ClothingMaskGasSwat
     outerClothing: ClothingOuterArmorBasicSlim
-    ears: ClothingHeadsetSecurity
+    ears: ClothingHeadsetAltSecurityNonCom #SS220 staminaweapons
     gloves: ClothingHandsGlovesCombat
   storage:
     back:

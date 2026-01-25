@@ -171,7 +171,7 @@
     - id: DetectiveHiddenCamera # SS220 add-detective-camera
       amount: 3
     - id: BoxTapeRecorder # SS220 Tape Recorder #32234 early merge
-    - id: Telescopichka # SS220 Ya-lybly-translit
+    - id: Classicbaton # SS220 staminaweapons
     - id: ClothingEyesHudSecurity # Dec is sec
     - id: BodySecurityCamera #SS220-Bodycam
     # SS220-our-stuff-end
