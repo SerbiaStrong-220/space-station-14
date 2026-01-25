@@ -150,6 +150,7 @@ public sealed class MaterialStorageSystem : SharedMaterialStorageSystem
         return true;
     }
 
+    // ss220 material storage tweak start
     /// <summary>
     /// The same as SpawnMultipleFromMaterial, but for spawn ore
     /// </summary>
@@ -171,6 +172,7 @@ public sealed class MaterialStorageSystem : SharedMaterialStorageSystem
 
         return [];
     }
+    // ss220 material storage tweak end
 
     /// <summary>
     ///     Spawn an amount of a material in stack entities.
