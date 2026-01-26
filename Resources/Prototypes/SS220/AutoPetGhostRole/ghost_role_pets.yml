@@ -118,6 +118,19 @@
   - type: GhostTakeoverAvailable
 
 - type: entity
+  parent: MobPossumPoppy
+  id: MobPossumPoppyGhostRole
+  suffix: Роль
+  components:
+  - type: GhostRole
+    makeSentient: true
+    allowSpeech: true
+    allowMovement: true
+    name: ghost-role-information-poppy-name
+    description: ghost-role-information-poppy-description
+  - type: GhostTakeoverAvailable
+
+- type: entity
   parent: MobRaccoonMorticia
   id: MobRaccoonMorticiaGhostRole
   suffix: Роль

@@ -84,6 +84,8 @@
     implantAction: ActionActivateDnaCopy
   - type: TriggerOnActivateImplant
   - type: TransferIdentity
+  - type: DnaCopyOnTrigger
+    targetUser: true
   - type: HiddenDescription
     entries:
     - label: corvax-hidden-desc-IllegalImplants-medical
@@ -125,6 +127,8 @@
           Quantity: 30
         - ReagentId: Frontier
           Quantity: 15
+  - type: AddReagentsOnTrigger
+    targetUser: true
   - type: TriggerOnActivateImplant
   - type: HiddenDescription
     entries:
