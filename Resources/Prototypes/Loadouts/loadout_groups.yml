@@ -410,7 +410,6 @@
   id: LawyerJumpsuit
   name: loadout-group-lawyer-jumpsuit
   loadouts:
-  - JumpsuitJujutsuShlepa #SS220-Two Floppa Iteration
   # SS220 Law Department Minor Fashion BGN
   - ShirtPantsWhite
   - ShirtPantsBlue
@@ -427,6 +426,7 @@
   - ShirtSkirtPink
   - ShirtSkirtCrimson
   # SS220 Law Department Minor Fashion END
+  - JumpsuitJujutsuShlepa #SS220-Two Floppa Iteration
 
 - type: loadoutGroup
   id: LawyerNeck

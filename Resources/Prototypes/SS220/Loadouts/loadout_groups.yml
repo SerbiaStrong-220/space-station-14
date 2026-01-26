@@ -173,7 +173,6 @@
   name: loadout-group-lawyer-outerclothing
   minLimit: 0
   loadouts:
-  - OuterClothingJujutsuShlepa
   - OuterClothingJacketsDark
   - OuterClothingJacketsBlue
   - OuterClothingJacketsBlueindigo
@@ -181,6 +180,7 @@
   - OuterClothingJacketsGood
   - OuterClothingJacketsPink
   - OuterClothingJacketsCrimson
+  - OuterClothingJujutsuShlepa
 
 - type: loadoutGroup
   id: LawyerHeadset
@@ -349,7 +349,7 @@
   id: DetectiveGlasses
   name: loadout-group-detective-glasses
   minLimit: 0
-  loadouts: 
+  loadouts:
   - GlassesSecurity
   - CyberGlassesSecurity
   - GlassesBallistic
