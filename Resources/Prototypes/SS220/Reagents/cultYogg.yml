@@ -82,6 +82,11 @@
           types:
             Caustic: 10.0
             Heat: 10.0
+      - !type:MovementSpeedModifier
+        walkSpeedModifier: 0.6
+        sprintSpeedModifier: 0.6
+        type: Add
+        time: 10
       - !type:PopupMessage
         type: Local
         visualType: Large
