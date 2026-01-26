@@ -87,7 +87,7 @@
         walkSpeedModifier: 0.6
         sprintSpeedModifier: 0.6
         type: Add
-        time: 3
+        time: 10
       - !type:PopupMessage
         type: Local
         visualType: Large
