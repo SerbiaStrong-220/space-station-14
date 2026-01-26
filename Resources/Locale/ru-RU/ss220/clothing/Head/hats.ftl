@@ -71,3 +71,6 @@ ent-ClothingHeadHatStreetJudge = шлем уличного судьи
 ent-ClothingHeadHatCapCMO = парадная фуражка главного врача
     .desc = Знак того, что вам точно можно доверить чью-то жизнь.
     .suffix = За время в игре
+ent-ClothingHeadHatCapNTR = фуражка представителя NanoTrasen
+    .desc = Фуражка представителя NanoTrasen, напоминающая всем, кто тут лицо компании.
+    .suffix = За время в игре

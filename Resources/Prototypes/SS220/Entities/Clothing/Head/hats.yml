@@ -127,6 +127,18 @@
     - HamsterWearable
     - WhitelistChameleon
 
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatCapNTR
+  name: nanotrasen representative cap
+  description: "A NanoTrasen representative's cap, reminding everyone who is the face of the company here."
+  suffix: For playtime
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Head/Hats/hos_bigcap.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Head/Hats/hos_bigcap.rsi
+
 # CentCom
 
   # Берет

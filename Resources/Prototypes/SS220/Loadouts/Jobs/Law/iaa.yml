@@ -1,0 +1,360 @@
+# NTR time
+- type: loadoutEffectGroup
+  id: NanoTrasenRepresentativeTime
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobIAA
+      time: 720000 # 200 hrs Ахуеть, да?
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+
+# TrustedLawyer time
+- type: loadoutEffectGroup
+  id: TrustedLawyerTime
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobIAA
+      time: 180000 # 50 hours
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+
+- type: loadoutEffectGroup
+  id: IAATenTime
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobIAA
+      time: 36000 # 10 hours
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+
+- type: loadoutEffectGroup
+  id: IAATwentyTime
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobIAA
+      time: 72000 # 20 hours
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+
+- type: loadoutEffectGroup
+  id: IAAThirtyTime
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobIAA
+      time: 108000 # 30 hours
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+
+# Head
+- type: loadout
+  id: BeretIAA
+  equipment:
+    head: ClothingHeadHatBeretIAA
+
+- type: loadout
+  id: HatCapNTR
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: NanoTrasenRepresentativeTime
+  equipment:
+    head: ClothingHeadHatCapNTR
+
+- type: loadout
+  id: DevilHorns
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    head: ClothingHeadHatDevilHornsAlt
+
+# Jumpsuit
+- type: loadout
+  id: ShirtPantsWhite
+  equipment:
+    jumpsuit: ClothingUniformShirtPantsWhite
+  groupBy: "shirtpants"
+
+- type: loadout
+  id: ShirtPantsBlue
+  equipment:
+    jumpsuit: ClothingUniformShirtPantsBlue
+  groupBy: "shirtpants"
+
+- type: loadout
+  id: ShirtPantsGray
+  equipment:
+    jumpsuit: ClothingUniformShirtPantsGray
+  groupBy: "shirtpants"
+
+- type: loadout
+  id: ShirtPantsPurple
+  equipment:
+    jumpsuit: ClothingUniformShirtPantsPurple
+  groupBy: "shirtpants"
+
+- type: loadout
+  id: ShirtPantsGood
+  equipment:
+    jumpsuit: ClothingUniformShirtPantsGood
+  groupBy: "shirtpants"
+
+- type: loadout
+  id: ShirtPantsPink
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: IAATwentyTime
+  equipment:
+    jumpsuit: ClothingUniformShirtPantsPink
+  groupBy: "shirtpants"
+
+- type: loadout
+  id: ShirtPantsCrimson
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: IAAThirtyTime
+  equipment:
+    jumpsuit: ClothingUniformShirtPantsCrimson
+  groupBy: "shirtpants"
+
+- type: loadout
+  id: ShirtPantsVictorian
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: IAAThirtyTime
+  equipment:
+    jumpsuit: ClothingUniformShirtPantsVictorian
+  groupBy: "shirtpants"
+
+- type: loadout
+  id: ShirtPantsTrustedLawyer
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: TrustedLawyerTime
+  equipment:
+    jumpsuit: ClothingUniformShirtPantsTrustedLawyer
+  groupBy: "shirtpants"
+
+- type: loadout
+  id: ShirtPantsNTR
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: NanoTrasenRepresentativeTime
+  equipment:
+    jumpsuit: ClothingUniformShirtPantsNTR
+  groupBy: "shirtpants"
+
+- type: loadout
+  id: JumpsuitJujutsuShlepa
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitJujutsuShlepa
+  groupBy: "shirtpants"
+
+- type: loadout
+  id: ShirtSkirtWhite
+  equipment:
+    jumpsuit: ClothingUniformShirtSkirtWhite
+  groupBy: "shirtskirt"
+
+- type: loadout
+  id: ShirtSkirtBlue
+  equipment:
+    jumpsuit: ClothingUniformShirtSkirtBlue
+  groupBy: "shirtskirt"
+
+- type: loadout
+  id: ShirtSkirtGray
+  equipment:
+    jumpsuit: ClothingUniformShirtSkirtGray
+  groupBy: "shirtskirt"
+
+- type: loadout
+  id: ShirtSkirtPurple
+  equipment:
+    jumpsuit: ClothingUniformShirtSkirtPurple
+  groupBy: "shirtskirt"
+
+- type: loadout
+  id: ShirtSkirtGood
+  equipment:
+    jumpsuit: ClothingUniformShirtSkirtGood
+  groupBy: "shirtskirt"
+
+- type: loadout
+  id: ShirtSkirtPink
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: IAATwentyTime
+  equipment:
+    jumpsuit: ClothingUniformShirtSkirtPink
+  groupBy: "shirtskirt"
+
+- type: loadout
+  id: ShirtSkirtCrimson
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: IAAThirtyTime
+  equipment:
+    jumpsuit: ClothingUniformShirtSkirtCrimson
+  groupBy: "shirtskirt"
+
+- type: loadout
+  id: ShirtSkirtNTR
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: NanoTrasenRepresentativeTime
+  equipment:
+    jumpsuit: ClothingUniformShirtSkirtNTR
+  groupBy: "shirtskirt"
+
+# Outer clothing
+- type: loadout
+  id: OuterClothingJacketsDark
+  equipment:
+    outerClothing: ClothingOuterJacketsDark
+  groupBy: jackets
+
+- type: loadout
+  id: OuterClothingJacketsBlue
+  equipment:
+    outerClothing: ClothingOuterJacketsBlue
+  groupBy: jackets
+
+- type: loadout
+  id: OuterClothingJacketsBlueindigo
+  equipment:
+    outerClothing: ClothingOuterJacketsBlueindigo
+  groupBy: jackets
+
+- type: loadout
+  id: OuterClothingJacketsGray
+  equipment:
+    outerClothing: ClothingOuterJacketsGray
+  groupBy: jackets
+
+- type: loadout
+  id: OuterClothingJacketsGood
+  equipment:
+    outerClothing: ClothingOuterJacketsGood
+  groupBy: jackets
+
+- type: loadout
+  id: OuterClothingJacketsPink
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: IAATwentyTime
+  equipment:
+    outerClothing: ClothingOuterJacketsPink
+  groupBy: jackets
+
+- type: loadout
+  id: OuterClothingJacketsCrimson
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: IAAThirtyTime
+  equipment:
+    outerClothing: ClothingOuterJacketsCrimson
+  groupBy: jackets
+
+- type: loadout
+  id: OuterClothingJacketsTrustedLawyer
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: TrustedLawyerTime
+  equipment:
+    outerClothing: ClothingOuterJacketsTrustedLawyer
+  groupBy: jackets
+
+- type: loadout
+  id: OuterClothingJacketsNTR
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: NanoTrasenRepresentativeTime
+  equipment:
+    outerClothing: ClothingOuterJacketsNTR
+  groupBy: jackets
+
+- type: loadout
+  id: OuterClothingJujutsuShlepa
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    outerClothing: ClothingSponsorCoatJujutsuShlepa
+  groupBy: jackets
+
+- type: loadout
+  id: Outer1984
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: HugeShlopaSponsorTier
+  equipment:
+    outerClothing: ClothingSponsor1984
+
+# Glasses
+- type: loadout
+  id: Sunglasses
+  equipment:
+    eyes: ClothingEyesGlassesSunglasses
+
+- type: loadout
+  id: GlassesujutsuShlepa
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BigShlopaSponsorTier
+  equipment:
+    eyes: ClothingSponsorGlassesJujutsuShlepaSunglasses
+
+# Back
+- type: loadout
+  id: IAABackpackLeather
+  equipment:
+    back: ClothingBackpackSatchelLeather
+
+# Headset
+- type: loadout
+  id: LawHeadset
+  equipment:
+    ears: ClothingHeadsetLaw
+
+- type: loadout
+  id: LawHeadsetAlt
+  equipment:
+    ears: ClothingHeadsetAltLaw
+
+- type: loadout
+  id: IAAHeadset
+  equipment:
+    ears: ClothingHeadsetIAA
+
+- type: loadout
+  id: IAAHeadsetAlt
+  equipment:
+    ears: ClothingHeadsetAltIAA
