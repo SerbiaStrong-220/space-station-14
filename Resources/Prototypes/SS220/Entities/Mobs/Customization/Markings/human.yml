@@ -47,3 +47,11 @@
   sprites:
     - sprite: SS220/Mobs/Customization/human_hair.rsi
       state: uraraka
+
+- type: marking
+  id: HumanHairMullet
+  bodyPart: Hair
+  markingCategory: Hair
+  sprites:
+    - sprite: SS220/Mobs/Customization/human_hair.rsi
+      state: mullet

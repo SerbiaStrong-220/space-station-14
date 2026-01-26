@@ -4,3 +4,4 @@ marking-HumanHairLong5 = Длинная 5
 marking-HumanHairLongWavy = Вьющиеся (Длинная)
 marking-HumanHairShortWavy = Вьющиеся (Короткая)
 marking-HumanHairUraraka = Урарака
+marking-HumanHairMullet = Маллет
