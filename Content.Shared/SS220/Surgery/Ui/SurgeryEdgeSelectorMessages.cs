@@ -11,4 +11,5 @@ public sealed partial class SurgeryEdgeSelectorEdgeSelectedMessage : BoundUserIn
 {
     public ProtoId<SurgeryGraphPrototype> SurgeryId { init; get; } = default;
     public string TargetNode { init; get; } = string.Empty;
+    public NetEntity? Used;
 }

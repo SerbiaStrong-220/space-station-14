@@ -9,6 +9,17 @@ retract-head-skin = Расширение разреза
 saw-skull-bone = Вскрытие черепа
 brain-exposed = Мозг открыт
 
+to-head-skin-incision = Сделать надрез на голове
+to-head-skin-clamp-bleeders = Зажать сосуды на голове
+to-retract-head-skin = Оттянуть кожу головы
+to-head-check-implant = Проверить наличие имплантов
+to-saw-skull-bone = Распилить череп
+to-seal-head-incision = Зашить надрез
+to-open-brain = Вскрыть черепную коробку
+to-fix-skull-bone = Восстановить кость черепа
+to-fix-mindslave-dysfunction = Исправить работу импланта подчинения
+to-close-brain-exposure = Закрыть твердую оболочку
+
 surgery-head-complex-inventory-requirement-description = У пациента должна быть открыта голова
 surgery-head-complex-inventory-requirement-failure = Вы не можете добраться до головы { THE($target) }!
 

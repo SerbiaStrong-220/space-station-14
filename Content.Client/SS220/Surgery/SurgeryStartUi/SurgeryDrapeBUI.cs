@@ -63,12 +63,13 @@ public sealed class SurgeryDrapeBUI : BoundUserInterface
         }
     }
 
-    private List<SurgeryGraphPrototype> GetAvailableOperations(EntityUid user, EntityUid target)
+    private List<SurgeryStartInfo> GetAvailableOperations(EntityUid user, EntityUid target)
     {
-        // Performer shouldnt see surgery if he is not allowed
-        var result = _prototypeManager.EnumeratePrototypes<SurgeryGraphPrototype>()
-            .Where((graph) => _surgery.CanStartSurgery(user, graph, target, Owner, out _))
-            .ToList();
+        List<SurgeryStartInfo> result = new();
+        foreach (var surgeryGraph in _prototypeManager.EnumeratePrototypes<SurgeryGraphPrototype>())
+        {
+            result.Add(new SurgeryStartInfo(surgeryGraph, _surgery.CanStartSurgery(user, surgeryGraph, target, Owner, out var reason), reason));
+        }
 
         return result;
     }

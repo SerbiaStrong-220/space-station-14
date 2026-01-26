@@ -8,6 +8,17 @@ retract-torso-skin = Расширение разреза
 saw-rib-bone = вскрытие Грудной клетки
 open-heart-incision = Сердце открыто
 
+to-torso-skin-incision = Сделать надрез на туловище
+to-torso-skin-clamp-bleeders = Зажать сосуды
+to-retract-torso-skin = Оттянуть кожу
+to-torso-internal-healing = Обработать внутренние раны
+to-saw-rib-bone = Распилить ребра
+to-seal-torso-incision = Зашить разрез
+to-open-heart-incision = Сделать надрез на сердце
+to-fix-rib-bone = Восстановить грудную клетку
+to-direct-heart-defib = Прямая дефибрилляция сердца
+to-close-heart-incision = Зашить сердце
+
 surgery-torso-complex-inventory-requirement-description = У пациента должен быть открыт торс
 surgery-torso-complex-inventory-requirement-failure = Вы не можете добраться до торса { CAPITALIZE($target) }!
 

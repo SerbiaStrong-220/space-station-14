@@ -16,6 +16,12 @@ public abstract partial class SurgeryGraphRequirement
     // just paranoid about someone writing in it
     public SurgeryGraphRequirementSubject Subject => _subject;
 
+    /// <summary>
+    /// Used to determine which requirement failure we will show to player
+    /// </summary>
+    [DataField]
+    public int RequirementPriority { protected set; get; } = 0;
+
     [DataField]
     protected bool Invert = false;
 

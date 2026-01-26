@@ -1,18 +1,20 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.SS220.Surgery.Components;
 using Content.Shared.SS220.Surgery.Graph;
 using Content.Shared.SS220.Surgery.Ui;
-using Content.Shared.Timing;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Toolshed.Commands.Values;
 
 namespace Content.Shared.SS220.Surgery.Systems;
 
 public abstract partial class SharedSurgerySystem : EntitySystem
 {
+    /// <summary>
+    /// Used to drop obvious message like "use scalpel to make incision" while player sees scalpel on UI and edge's named incision
+    /// </summary>
+    private const int RequirementPriorityFailureMessageEdgeSelectorDrop = -1;
+
     public SurgeryEdgeSelectorEdgesState MakeSelectorState(Entity<SurgeryPatientComponent> entity, EntityUid? used, EntityUid user)
     {
         var edgesInfoList = new List<EdgeSelectInfo>();
@@ -22,9 +24,11 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             if (!CanPerformAnyEdgeInSurgery(entity, surgeryId, used, user))
                 continue;
 
-            var meetRequirement = true;
             foreach (var edge in GetEdges(surgeryId, node))
             {
+                var requirementPriority = RequirementPriorityFailureMessageEdgeSelectorDrop;
+                string? failureReason = null;
+                var meetRequirement = true;
                 foreach (var requirement in SurgeryGraph.GetRequirements(edge))
                 {
                     var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
@@ -33,14 +37,21 @@ public abstract partial class SharedSurgerySystem : EntitySystem
                         continue;
 
                     meetRequirement = false;
+
+                    if (requirement.RequirementPriority > requirementPriority)
+                    {
+                        failureReason = requirement.RequirementFailureReason(requirementTarget, _prototype, EntityManager);
+                        requirementPriority = requirement.RequirementPriority;
+                    }
+
                     break;
                 }
 
-                edgesInfoList.Add(new(edge.Target, surgeryId, edge.EdgeTooltip, meetRequirement, SurgeryGraph.EdgeIcon(edge)));
+                edgesInfoList.Add(new(edge.Target, surgeryId, edge.EdgeTooltip, meetRequirement, SurgeryGraph.EdgeIcon(edge), failureReason));
             }
         }
 
-        return new SurgeryEdgeSelectorEdgesState { Infos = edgesInfoList };
+        return new SurgeryEdgeSelectorEdgesState { Infos = edgesInfoList, Used = GetNetEntity(used) };
     }
 
     private IEnumerable<SurgeryGraphEdge> GetEdges(ProtoId<SurgeryGraphPrototype> surgeryGraphId, string node)

@@ -14,8 +14,10 @@ public sealed class EdgeSelectorBUI(EntityUid owner, Enum uiKey) : BoundUserInte
     [ViewVariables]
     private SimpleRadialMenu? _menu;
 
-    private readonly Color _backGroundUnavailableEdge = Color.DarkGray;
-    private readonly Color _hoverBackGroundUnavailableEdge = Color.Gray;
+    private readonly Color _backGroundUnavailableEdge = Color.DarkGray.WithAlpha(0.2f);
+    private readonly Color _hoverBackGroundUnavailableEdge = Color.DarkGray.WithAlpha(0.2f);
+
+    private NetEntity? _used;
 
     protected override void Open()
     {
@@ -29,6 +31,8 @@ public sealed class EdgeSelectorBUI(EntityUid owner, Enum uiKey) : BoundUserInte
         switch (state)
         {
             case SurgeryEdgeSelectorEdgesState msg:
+
+                _used = msg.Used;
 
                 var buttons = ConvertInfosToButtons(msg.Infos);
                 _menu?.SetButtons(buttons);
@@ -47,7 +51,7 @@ public sealed class EdgeSelectorBUI(EntityUid owner, Enum uiKey) : BoundUserInte
             var action = new RadialMenuDoubleArgumentActionOption<ProtoId<SurgeryGraphPrototype>, string>(SendSelectedEdge, info.SurgeryProtoId, info.TargetNode)
             {
                 IconSpecifier = RadialMenuIconSpecifier.With(info.Icon),
-                ToolTip = Loc.GetString(info.Tooltip),
+                ToolTip = info.FailureReason ?? Loc.GetString(info.Tooltip),
                 BackgroundColor = info.MetEdgeRequirement ? null : _backGroundUnavailableEdge,
                 HoverBackgroundColor = info.MetEdgeRequirement ? null : _hoverBackGroundUnavailableEdge,
             };
@@ -63,7 +67,8 @@ public sealed class EdgeSelectorBUI(EntityUid owner, Enum uiKey) : BoundUserInte
         var msg = new SurgeryEdgeSelectorEdgeSelectedMessage()
         {
             SurgeryId = surgeryId,
-            TargetNode = targetNode
+            TargetNode = targetNode,
+            Used = _used
         };
 
         SendMessage(msg);

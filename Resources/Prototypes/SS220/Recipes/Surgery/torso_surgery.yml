@@ -29,22 +29,29 @@
     edges:
     - to: torso-skin-incision
       baseEdge: incision
+      edgeTooltip: to-torso-skin-incision
+
   - node: torso-skin-incision
     baseNode: incision
     edges:
     - to: torso-skin-clamp-bleeders
       baseEdge: clamp-bleeders
+      edgeTooltip: to-torso-skin-clamp-bleeders
+
   - node: torso-skin-clamp-bleeders
     baseNode: clamp-bleeders
     edges:
     - to: retract-torso-skin
       baseEdge: retract-skin
+      edgeTooltip: to-retract-torso-skin
+
   - node: retract-torso-skin
     baseNode: retract-skin
     edges:
     # heal wounds
     - to: retract-torso-skin
       baseEdge: retract-skin
+      edgeTooltip: to-torso-internal-healing
       actions:
       - !type:ApplyDamageAction
         damage:
@@ -55,6 +62,7 @@
       - !type:SurgeryToolRequirement
         subject: used
         surgeryTool: retractor
+        requirementPriority: -1
         description: surgery-requirement-tool-required-retractor
         failureMessage: surgery-requirement-tool-miss
       - !type:HaveReagentInHandRequirement
@@ -66,24 +74,31 @@
     # deeper
     - to: saw-rib-bone
       baseEdge: saw-bone
+      edgeTooltip: to-saw-rib-bone
     # end surgery
     - to: seal-wound
       baseEdge: seal-wound
+      edgeTooltip: to-seal-torso-incision
+
   - node: saw-rib-bone
     baseNode: saw-bone
     edges:
     # deeper
     - to: open-heart-incision
       baseEdge: incision
+      edgeTooltip: to-open-heart-incision
     # TOOD: better back
     - to: retract-torso-skin
       baseEdge: seal-wound
+      edgeTooltip: to-fix-rib-bone
+
   - node: open-heart-incision
     baseNode: incision
     edges:
     # handheld defibrillator usage
     - to: open-heart-incision
       delay: 2
+      edgeTooltip: to-direct-heart-defib
       sound:
         path: /Audio/SS220/Surgery/organ.ogg
       actions:
@@ -100,6 +115,8 @@
     # TOOD: better back
     - to: saw-rib-bone
       baseEdge: seal-wound
+      edgeTooltip: to-close-heart-incision
+
   # end
   - node: seal-wound
     baseNode: seal-wound

@@ -75,26 +75,25 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
         }
     }
 
-    public void AddOperations(List<SurgeryGraphPrototype> graphPrototypes)
+    public void AddOperations(List<SurgeryStartInfo> graphInfos)
     {
+        OperationContainer.RemoveAllChildren();
+
         foreach (var val in _operations.Values)
         {
             val.Clear();
         }
 
-        if (_player.LocalEntity is not {} performer)
-            return;
-
-        foreach (var graph in graphPrototypes)
+        foreach (var info in graphInfos)
         {
-            var button = MakeOperationButton(graph, performer);
+            var button = MakeOperationButton(info.Surgery, info.CanStart, info.UnavailabilityReason);
 
             OperationContainer.AddChild(button);
-            SetFormattedText(button.RichTextLabel, graph.Name);
+            SetFormattedText(button.RichTextLabel, info.Surgery.Name);
 
-            button.Visible = graph.TargetPart == Puppet.SelectedPart;
+            button.Visible = info.Surgery.TargetPart == Puppet.SelectedPart;
 
-            _operations[graph.TargetPart].Add(button);
+            _operations[info.Surgery.TargetPart].Add(button);
         }
     }
 
@@ -104,11 +103,12 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
         Title = Loc.GetString("surgery-start-ui-target", ("target", target));
     }
 
-    private SurgeryPerformButton MakeOperationButton(SurgeryGraphPrototype surgeryGraph, EntityUid performer)
+    private SurgeryPerformButton MakeOperationButton(SurgeryGraphPrototype surgeryGraph, bool canStart, string? reason)
     {
         var button = new SurgeryPerformButton(surgeryGraph.ID)
         {
             StyleClasses = { "OpenBoth" },
+            Disabled = !canStart
         };
 
         button.OnPressed += (_) =>
@@ -134,7 +134,7 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
             }
         };
 
-        if (!_surgery.CanStartSurgery(performer, surgeryGraph, Target, Used, out var reason))
+        if (reason is not null)
         {
             var tooltip = new Tooltip();
             SetFormattedText(tooltip, reason);
@@ -176,4 +176,7 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
     {
         SetFormattedText(tooltip.SetMessage, (x) => tooltip.Text = x, locPath);
     }
+
 }
+
+public readonly record struct SurgeryStartInfo(SurgeryGraphPrototype Surgery, bool CanStart, string? UnavailabilityReason);

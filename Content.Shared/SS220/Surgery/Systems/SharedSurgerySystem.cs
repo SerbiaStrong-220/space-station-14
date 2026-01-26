@@ -42,18 +42,39 @@ public abstract partial class SharedSurgerySystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<SurgeryPatientComponent, InteractUsingEvent>(OnSurgeryPatientInteractUsing);
         SubscribeLocalEvent<SurgeryPatientComponent, ExaminedEvent>(OnExamined);
+        SubscribeLocalEvent<SurgeryPatientComponent, InteractUsingEvent>(OnSurgeryPatientInteractUsing);
+        Subs.BuiEvents<SurgeryPatientComponent>(EdgeSelectorBUIKey, subs =>
+        {
+            subs.Event<SurgeryEdgeSelectorEdgeSelectedMessage>(OnSurgeryEdgeSelectorEdgeSelectedMessage);
+        });
+
+        SubscribeLocalEvent<SurgeryPatientComponent, SurgeryDoAfterEvent>(OnSurgeryDoAfter);
+
         SubscribeLocalEvent<SurgeryPatientComponent, DoAfterAttemptEvent<SurgeryDoAfterEvent>>((uid, comp, ev) =>
         {
             OnDoAfterAttempt((uid, comp), ev.Event, ev);
         });
-        SubscribeLocalEvent<SurgeryPatientComponent, SurgeryDoAfterEvent>(OnSurgeryDoAfter);
 
         SubscribeLocalEvent<SurgeryStarterComponent, AfterInteractEvent>(OnSurgeryStarterAfterInteract);
         SubscribeLocalEvent<SurgeryStarterComponent, StartSurgeryEvent>(OnStartSurgeryMessage);
 
         SubscribeLocalEvent<BodyAnalyzerComponent, AfterInteractEvent>(OnBodyAnalyzerAfterInteract);
+    }
+
+    private void OnExamined(Entity<SurgeryPatientComponent> entity, ref ExaminedEvent args)
+    {
+        foreach (var (surgeryGraphId, node) in entity.Comp.OngoingSurgeries)
+        {
+            if (!_prototype.Resolve(surgeryGraphId, out var graphProto))
+                continue;
+
+            if (!graphProto.TryGetNode(node, out var currentNode))
+                continue;
+
+            if (node != null && SurgeryGraph.ExamineDescription(currentNode) != null)
+                args.PushMarkup(Loc.GetString(SurgeryGraph.ExamineDescription(currentNode)!), SurgeryExaminePushPriority);
+        }
     }
 
     private void OnSurgeryPatientInteractUsing(Entity<SurgeryPatientComponent> entity, ref InteractUsingEvent args)
@@ -81,11 +102,10 @@ public abstract partial class SharedSurgerySystem : EntitySystem
                 break;
 
             default:
-
                 var buiOwner = entity.Owner;
 
                 // We send full state so no reason for ui being at any entity.
-                if (!_userInterface.TryOpenUi(buiOwner, EdgeSelectorBUIKey, entity, predicted: true))
+                if (!_userInterface.TryOpenUi(buiOwner, EdgeSelectorBUIKey, args.User))
                     return;
 
                 _userInterface.SetUiState(buiOwner, EdgeSelectorBUIKey, edgeSelectorState);
@@ -94,20 +114,14 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         }
     }
 
-    private void OnExamined(Entity<SurgeryPatientComponent> entity, ref ExaminedEvent args)
+    private void OnSurgeryEdgeSelectorEdgeSelectedMessage(Entity<SurgeryPatientComponent> entity, ref SurgeryEdgeSelectorEdgeSelectedMessage args)
     {
-        foreach (var (surgeryGraphId, node) in entity.Comp.OngoingSurgeries)
-        {
-            if (!_prototype.Resolve(surgeryGraphId, out var graphProto))
-                continue;
+        if (GetEdgeTargeting(entity, args.SurgeryId, args.TargetNode) is not { } chosenEdge)
+            return;
 
-            if (!graphProto.TryGetNode(node, out var currentNode))
-                continue;
-
-            if (node != null && SurgeryGraph.ExamineDescription(currentNode) != null)
-                args.PushMarkup(Loc.GetString(SurgeryGraph.ExamineDescription(currentNode)!), SurgeryExaminePushPriority);
-        }
+        TryPerformOperationStep(entity, args.SurgeryId, chosenEdge, GetEntity(args.Used), args.Actor);
     }
+
 
     private void OnDoAfterAttempt(Entity<SurgeryPatientComponent> _, SurgeryDoAfterEvent args, CancellableEntityEventArgs ev)
     {
@@ -128,6 +142,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
             _popup.PopupClient(reason, args.User, args.User);
 
+            // TODO: it needs changing
             if (TryComp<MeleeWeaponComponent>(args.Used, out var meleeWeapon))
                 _meleeWeapon.AttemptLightAttack(args.User, args.Used.Value, meleeWeapon, args.Target.Value, checkCombatMode: false);
 
@@ -157,9 +172,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
         if (targetEdge == null)
         {
-            if (_netManager.IsServer)
-                Log.Error($"Got wrong target edge [{args.TargetEdge}] in surgery do after for graph [{args.SurgeryGraph}]!");
-
+            Log.Error($"Got wrong target edge [{args.TargetEdge}] in surgery do after for graph [{args.SurgeryGraph}]!");
             return;
         }
 
@@ -286,6 +299,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             return false;
         }
 
+        // TODO: move to met requirement
         var performEdgeInfo = GetPerformSurgeryEdgeInfo(entity, chosenEdge, used, user);
         if (!performEdgeInfo.Visible)
             return false;
@@ -302,7 +316,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             secondsDelay = ErrorGettingDelayDelay;
         }
 
-        var ev = new GetSurgeryDelayModifiersEvent();
+        var ev = new GetSurgeryDelayModifiersEvent(0f, 1f);
         RaiseLocalEvent(entity, ref ev);
         RaiseLocalEvent(user, ref ev);
 

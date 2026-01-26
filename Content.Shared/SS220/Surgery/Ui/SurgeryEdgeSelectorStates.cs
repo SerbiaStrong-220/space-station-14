@@ -11,14 +11,19 @@ namespace Content.Shared.SS220.Surgery.Ui;
 public sealed partial class SurgeryEdgeSelectorEdgesState : BoundUserInterfaceState
 {
     public List<EdgeSelectInfo> Infos { init; get; } = new();
+
+    public NetEntity? Used;
 }
 
 [Serializable, NetSerializable]
-public sealed partial class EdgeSelectInfo(string targetNode, ProtoId<SurgeryGraphPrototype> surgeryProtoId, LocId tooltip, bool metEdgeRequirement, SpriteSpecifier? icon)
+public sealed partial class EdgeSelectInfo(string targetNode, ProtoId<SurgeryGraphPrototype> surgeryProtoId, LocId tooltip, bool metEdgeRequirement, SpriteSpecifier? icon, string? failureReason)
 {
     public string TargetNode = targetNode;
     public ProtoId<SurgeryGraphPrototype> SurgeryProtoId = surgeryProtoId;
-    public LocId Tooltip = tooltip;
-    public bool MetEdgeRequirement = metEdgeRequirement;
+
     public SpriteSpecifier? Icon = icon;
+    public LocId Tooltip = tooltip;
+
+    public bool MetEdgeRequirement = metEdgeRequirement;
+    public string? FailureReason = failureReason;
 };

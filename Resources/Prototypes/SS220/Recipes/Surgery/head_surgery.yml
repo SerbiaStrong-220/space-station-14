@@ -25,24 +25,30 @@
       examineDescription: surgery-head-examine-start
     edges:
     - to: head-skin-incision
-      edgeTooltip:
       baseEdge: incision
+      edgeTooltip: to-head-skin-incision
+
   - node: head-skin-incision
     baseNode: incision
     edges:
     - to: head-skin-clamp-bleeders
       baseEdge: clamp-bleeders
+      edgeTooltip: to-head-skin-clamp-bleeders
+
   - node: head-skin-clamp-bleeders
     baseNode: clamp-bleeders
     edges:
     - to: retract-head-skin
       baseEdge: retract-skin
+      edgeTooltip: to-retract-head-skin
+
   - node: retract-head-skin
     baseNode: retract-skin
     edges:
     # implant check
     - to: retract-head-skin
       delay: 15
+      edgeTooltip: to-head-check-implant # Добавил тултип для сканирования
       actions:
       - !type:CheckImplantAction
       requirements:
@@ -56,24 +62,31 @@
     # deeper
     - to: saw-skull-bone
       baseEdge: saw-bone
+      edgeTooltip: to-saw-skull-bone
     # return
     - to: seal-wound
       baseEdge: seal-wound
+      edgeTooltip: to-seal-head-incision
+
   - node: saw-skull-bone
     baseNode: saw-bone
     edges:
     # deeper
     - to: brain-exposed
       baseEdge: retract-skin
+      edgeTooltip: to-open-brain
     # TODO: better return
     - to: retract-head-skin
       baseEdge: seal-wound
+      edgeTooltip: to-fix-skull-bone
+
   - node: brain-exposed
     baseNode: retract-skin
     edges:
     # fix mind slave disfunction
     - to: brain-exposed
       delay: 6
+      edgeTooltip: to-fix-mindslave-dysfunction
       sound:
         path: /Audio/SS220/Surgery/organ.ogg
         params:
@@ -88,7 +101,7 @@
           components:
           - MindShield
       requirements:
-      # to give player popup about incorrect tool
+      # to give player popup about incorrect tool <- do I need it?
       - !type:SurgeryToolRequirement
         subject: used
         surgeryTool: specific
@@ -113,5 +126,7 @@
     # return
     - to: saw-skull-bone
       baseEdge: seal-wound
+      edgeTooltip: to-close-brain-exposure
+
   - node: seal-wound
     baseNode: seal-wound

@@ -54,15 +54,16 @@
   edge:
     to: abstract
     delay: 4
+    edgeTooltip: abstract
     sound: /Audio/SS220/Surgery/incision.ogg
     edgeIcon:
       sprite: Objects/Specific/Medical/Surgery/scalpel.rsi
       state: scalpel
-    edgeTooltip: abstract
     requirements:
     - !type:SurgeryToolRequirement
       subject: used
       surgeryTool: scalpel
+      requirementPriority: -1
       description: surgery-requirement-tool-required-scalpel
       failureMessage: surgery-requirement-tool-miss
     actions:
@@ -74,6 +75,7 @@
   edge:
     to: abstract
     delay: 4
+    edgeTooltip: abstract
     sound: /Audio/SS220/Surgery/retract_skin.ogg
     edgeIcon:
       sprite: Objects/Specific/Medical/Surgery/scissors.rsi
@@ -82,6 +84,7 @@
     - !type:SurgeryToolRequirement
       subject: used
       surgeryTool: retractor
+      requirementPriority: -1
       description: surgery-requirement-tool-required-retractor
       failureMessage: surgery-requirement-tool-miss
     actions:
@@ -93,6 +96,7 @@
   edge:
     to: abstract
     delay: 12
+    edgeTooltip: abstract
     sound: /Audio/SS220/Surgery/saw.ogg
     edgeIcon:
       sprite: Objects/Specific/Medical/Surgery/saw.rsi
@@ -101,6 +105,7 @@
     - !type:SurgeryToolRequirement
       subject: used
       surgeryTool: saw
+      requirementPriority: -1
       description: surgery-requirement-tool-required-saw
       failureMessage: surgery-requirement-tool-miss
     actions:
@@ -112,6 +117,7 @@
   edge:
     to: abstract
     delay: 4
+    edgeTooltip: abstract
     sound: /Audio/SS220/Surgery/organ.ogg
     edgeIcon:
       sprite: Objects/Specific/Medical/Surgery/scissors.rsi
@@ -120,6 +126,7 @@
     - !type:SurgeryToolRequirement
       subject: used
       surgeryTool: hemostat
+      requirementPriority: -1
       description: surgery-requirement-tool-required-hemostat
       failureMessage: surgery-requirement-tool-miss
     actions:
@@ -131,6 +138,7 @@
   edge:
     to: abstract
     delay: 4
+    edgeTooltip: abstract
     sound: /Audio/SS220/Surgery/seal_wound.ogg
     edgeIcon:
       sprite: Objects/Specific/Medical/Surgery/cautery.rsi
@@ -139,6 +147,7 @@
     - !type:SurgeryToolRequirement
       subject: used
       surgeryTool: cautery
+      requirementPriority: -1
       description: surgery-requirement-tool-required-cautery
       failureMessage: surgery-requirement-tool-miss
     actions:
