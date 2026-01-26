@@ -83,7 +83,6 @@
             Caustic: 10.0
             Heat: 10.0
       - !type:MovementSpeedModifier
-        conditions:
         walkSpeedModifier: 0.6
         sprintSpeedModifier: 0.6
         type: Add

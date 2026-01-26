@@ -50,17 +50,12 @@
     - CultYoggStealthProvidable
 
 
-
-
 - type: entity
   id: VenomancerThorne
   name: venomancer thorne
   categories: [ HideSpawnMenu ]
   parent: [BaseItem, CultYoggRestrictedItem]
   components:
-  - type: Reflective
-    reflective:
-      - NonEnergy
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/Ammunition/CultYogg/venomancer_thorne.rsi
     layers:
