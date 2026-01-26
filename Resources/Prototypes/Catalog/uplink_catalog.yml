@@ -3289,7 +3289,7 @@
   id: UplinkContrabandLighter
   name: uplink-contraband-lighter-name
   description: uplink-contraband-lighter-desc
-  icon: { sprite:  Objects/Tools/Lighters/syndielighter.rsi, state: icon}
+  icon: { sprite: /Textures/SS220/Objects/Tools/Lighters/syndielighter.rsi, state: icon } #SS220 zippo resprie
   productEntity: UplinkLighterBox
   cost:
     Telecrystal: 1
