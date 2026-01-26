@@ -59,6 +59,18 @@
     reflects:
       - Energy
 
+# Security
+- type: entity
+  parent: [ ClothingOuterArmorHoS, ClothingOuterArmorBase ]
+  id: ClothingOuterArmorStreetJudge
+  name: armor street judge
+  description: It cannot be washed, only polished after each shift. The smell of gunpowder and unbending power is included in the price.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Armor/streetjudge.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Armor/streetjudge.rsi
+
 # Centcom
 - type: entity
   parent: [ClothingOuterBaseLarge, AllowSuitStorageClothing]

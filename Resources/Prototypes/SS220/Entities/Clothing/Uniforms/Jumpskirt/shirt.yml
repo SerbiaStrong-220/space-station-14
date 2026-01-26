@@ -1,0 +1,100 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# White
+- type: entity
+  parent: ClothingShirtBase
+  id: ClothingUniformShirtSkirtWhite
+  name: white shirt with trousers
+  description: A classic white shirt and straight-cut trousers.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/Shirt/white.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/Shirt/white.rsi
+
+# Blue
+- type: entity
+  parent: ClothingShirtBase
+  id: ClothingUniformShirtSkirtBlue
+  name: blue shirt with trousers
+  description: A blue shirt paired with classic trousers.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/Shirt/blue.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/Shirt/blue.rsi
+
+# Gray
+- type: entity
+  parent: ClothingShirtBase
+  id: ClothingUniformShirtSkirtGray
+  name: gray shirt with trousers
+  description: A neutral gray shirt and versatile trousers.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/Shirt/gray.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/Shirt/gray.rsi
+
+# Purple
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformShirtSkirtPurple
+  name: purple shirt with skirt
+  description: A stylish purple piece worn by lawyers and show people.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/Shirt/purple.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/Shirt/purple.rsi
+
+# Good
+- type: entity
+  parent: ClothingShirtBase
+  id: ClothingUniformShirtSkirtGood
+  name: good lawyer's shirt with skirt
+  description: A tacky suit perfect for a CRIMINAL lawyer!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/Shirt/good.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/Shirt/good.rsi
+
+# Pink
+- type: entity
+  parent: ClothingShirtBase
+  id: ClothingUniformShirtSkirtPink
+  name: pink shirt with trousers
+  description: A bright pink shirt and trousers for a festive look.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/Shirt/pink.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/Shirt/pink.rsi
+
+# Crimson
+- type: entity
+  parent: ClothingShirtBase
+  id: ClothingUniformShirtSkirtCrimson
+  name: crimson shirt with trousers
+  description: A stylish crimson shirt with trousers for special occasions.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/Shirt/crimson.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/Shirt/crimson.rsi
+
+# NTR
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformShirtSkirtNTR
+  name: nanotrasen representative shirt with skirt
+  description: The shirt with skirt of the NanoTrasen representative. Carry the truth of the corporation with your own hands.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/Shirt/ntr.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/Shirt/ntr.rsi

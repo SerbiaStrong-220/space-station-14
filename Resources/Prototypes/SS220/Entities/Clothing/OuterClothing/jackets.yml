@@ -1,0 +1,104 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: ClothingOuterBase
+  id: ClothingOuterJacketsDark
+  name: dark jackets
+  description: A dark jacket for formal occasions.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/dark.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/dark.rsi
+
+- type: entity
+  parent: ClothingOuterBase
+  id: ClothingOuterJacketsBlue
+  name: blue jackets
+  description: A crisp blue jacket, reminiscent of clear skies.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/blue.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/blue.rsi
+
+- type: entity
+  parent: ClothingOuterBase
+  id: ClothingOuterJacketsBlueindigo
+  name: indigo jackets
+  description: A deep indigo jacket with a hint of twilight mystery.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/indigo.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/indigo.rsi
+
+- type: entity
+  parent: ClothingOuterBase
+  id: ClothingOuterJacketsGray
+  name: gray jackets
+  description: A neutral gray jacket - practicality over flair.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/gray.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/gray.rsi
+
+- type: entity
+  parent: ClothingOuterBase
+  id: ClothingOuterJacketsGood
+  name: good lawyer's jackets
+  description: A tacky suit perfect for a CRIMINAL lawyer!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/good.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/good.rsi
+
+- type: entity
+  parent: ClothingOuterBase
+  id: ClothingOuterJacketsPink
+  name: pink jackets
+  description: A playful pink jacket for those who dare to stand out.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/pink.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/pink.rsi
+
+- type: entity
+  parent: ClothingOuterBase
+  id: ClothingOuterJacketsCrimson
+  name: crimson jackets
+  description: Crimson like a warning. This jacket marks those who lead with fire, not words.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/crimson.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/crimson.rsi
+
+- type: entity
+  parent: ClothingOuterBase
+  id: ClothingOuterJacketsTrustedLawyer
+  name: "trusted lawyer's jackets"
+  description: "A chic jackets for those who follow the impeccable execution of the company's laws. They say that you are able to impose your demands even on God himself."
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/trusted.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/trusted.rsi
+
+- type: entity
+  parent: ClothingOuterBase
+  id: ClothingOuterJacketsNTR
+  name: nanotrasen representative jackets
+  description: The jackets of the NanoTrasen representative. Carry the truth of the corporation with your own hands.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Jackets/ntr.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Jackets/ntr.rsi

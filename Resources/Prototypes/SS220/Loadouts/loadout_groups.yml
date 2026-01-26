@@ -35,7 +35,6 @@
   name: loadout-group-magistrate-head
   loadouts:
   - MagistratePwig
-  - MagistrateStreetJudge
 
 - type: loadoutGroup
   id: MagistrateEyes
@@ -49,19 +48,30 @@
   id: MagistrateJumpsuit
   name: loadout-group-magistrate-jumpsuit
   loadouts:
-  - LawyerJumpsuit
-  - LawyerJumpskirt
-  - LawyerJumpsuitBlue
-  - LawyerJumpskirtBlue
-  - LawyerJumpsuitGood
-  - LawyerJumpskirtGood
+  - ShirtPantsWhite
+  - ShirtPantsBlue
+  - ShirtPantsGray
+  - ShirtPantsPurple
+  - ShirtPantsGood
+  - ShirtPantsCrimson
+  - ShirtSkirtWhite
+  - ShirtSkirtBlue
+  - ShirtSkirtGray
+  - ShirtSkirtPurple
+  - ShirtSkirtGood
+  - ShirtSkirtCrimson
 
 - type: loadoutGroup
   id: MagistrateOuterClothing
   name: loadout-group-magistrate-outerclothing
-  hidden: true
   loadouts:
   - MagistrateRobesJudge
+  - OuterClothingJacketsDark
+  - OuterClothingJacketsBlue
+  - OuterClothingJacketsBlueindigo
+  - OuterClothingJacketsGray
+  - OuterClothingJacketsGood
+  - OuterClothingJacketsCrimson
 
 - type: loadoutGroup
   id: MagistrateHeadset
@@ -70,6 +80,7 @@
   loadouts:
   - MagistrateHeadset
   - MagistrateHeadsetAlt
+
   # Агент Внутренних Дел (Начало)
 - type: loadoutGroup
   id: IAAHead
@@ -77,7 +88,20 @@
   minLimit: 0
   loadouts:
   - BeretIAA
+  - HatCapNTR
   - DevilHorns
+
+- type: loadoutGroup
+  id: IAAGlasses
+  minLimit: 0
+  name: loadout-group-iaa-glasses
+  loadouts:
+  - Glasses
+  - GlassesJamjar
+  - GlassesJensen
+  - Sunglasses
+  - EyesHudCommand
+  - GlassesujutsuShlepa
 
 - type: loadoutGroup
   id: IAANeck
@@ -90,39 +114,42 @@
   id: IAAJumpsuit
   name: loadout-group-iaa-jumpsuit
   loadouts:
-  - LawyerJumpsuit
-  - LawyerJumpskirt
-  - LawyerJumpsuitBlue
-  - LawyerJumpskirtBlue
-  - LawyerJumpsuitPurple
-  - LawyerJumpskirtPurple
-  - LawyerJumpsuitRed
-  - LawyerJumpskirtRed
-  - LawyerJumpsuitGood
-  - LawyerJumpskirtGood
-  - JumpsuitNTR
-  - JumpsuitTrustedLawyer
+  - ShirtPantsWhite
+  - ShirtPantsBlue
+  - ShirtPantsGray
+  - ShirtPantsPurple
+  - ShirtPantsGood
+  - ShirtPantsPink
+  - ShirtPantsCrimson
+  - ShirtPantsVictorian
+  - ShirtPantsTrustedLawyer
+  - ShirtPantsNTR
   - JumpsuitJujutsuShlepa
+  - ShirtSkirtWhite
+  - ShirtSkirtBlue
+  - ShirtSkirtGray
+  - ShirtSkirtPurple
+  - ShirtSkirtGood
+  - ShirtSkirtPink
+  - ShirtSkirtCrimson
+  - ShirtSkirtNTR
 
 - type: loadoutGroup
   id: IAAOuterclothing
   name: loadout-group-iaa-outerclothing
   minLimit: 0
   loadouts:
+  - OuterClothingJacketsDark
+  - OuterClothingJacketsBlue
+  - OuterClothingJacketsBlueindigo
+  - OuterClothingJacketsGray
+  - OuterClothingJacketsGood
+  - OuterClothingJacketsPink
+  - OuterClothingJacketsCrimson
+  - OuterClothingJacketsTrustedLawyer
+  - OuterClothingJacketsNTR
   - OuterClothingJujutsuShlepa
   - Outer1984
-
-- type: loadoutGroup
-  id: IAAGlasses
-  minLimit: 0
-  name: loadout-group-iaa-glasses
-  loadouts:
-  - Glasses
-  - GlassesJamjar
-  - GlassesJensen
-  - Sunglasses
-  - GlassesujutsuShlepa
-  - EyesHudCommand
 
 - type: loadoutGroup
   id: IAABackpacks
@@ -145,6 +172,13 @@
   name: loadout-group-lawyer-outerclothing
   minLimit: 0
   loadouts:
+  - OuterClothingJacketsDark
+  - OuterClothingJacketsBlue
+  - OuterClothingJacketsBlueindigo
+  - OuterClothingJacketsGray
+  - OuterClothingJacketsGood
+  - OuterClothingJacketsPink
+  - OuterClothingJacketsCrimson
   - OuterClothingJujutsuShlepa
 
 - type: loadoutGroup
@@ -314,7 +348,7 @@
   id: DetectiveGlasses
   name: loadout-group-detective-glasses
   minLimit: 0
-  loadouts: 
+  loadouts:
   - GlassesSecurity
   - CyberGlassesSecurity
   - GlassesBallistic
