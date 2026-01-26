@@ -35,7 +35,6 @@
   name: loadout-group-magistrate-head
   loadouts:
   - MagistratePwig
-  - MagistrateStreetJudge
 
 - type: loadoutGroup
   id: MagistrateEyes

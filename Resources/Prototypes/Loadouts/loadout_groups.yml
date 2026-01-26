@@ -1222,6 +1222,7 @@
   - HeadofSecurityBeret
   - HeadofSecurityBigCap #SS220-FreedomHoSCap
   - HatCapHoS #ss220 sec loadout update
+  - HeadofSecurityHatStreetJudge # SS220
 
 - type: loadoutGroup
   id: HeadofSecurityJumpsuit
@@ -1255,9 +1256,10 @@
   - HeadofSecurityCoat
   - HeadofSecurityWinterCoat
   - WinterHoSUnarmored #ss220 sec loadout update
+  - HeadofSecurityBomber #SS220 HoSNEWBomber
+  - HeadofSecurityArmorStreetJudge # SS220
   - Outer1984HoS #SS220-Two Floppa Iteration
   - CyberVestSecurity #SS220-Two Floppa Iteration
-  - HeadofSecurityBomber #SS220 HoSNEWBomber
 
 - type: loadoutGroup
   id: WardenHead
