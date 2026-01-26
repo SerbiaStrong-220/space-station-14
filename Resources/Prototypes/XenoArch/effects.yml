@@ -665,7 +665,11 @@
         - id: MobMonkey
           weight: 95.0
         - id: MobGorilla
-          weight: 5.0
+        #SS220 Moved syndi monkey to primate from fauna begin
+          weight: 4.5
+        - id: MobMonkeySyndicateAgent
+          weight: 0.5
+        #SS220 Moved syndi monkey to primate from fauna end
 
 - type: entity
   id: XenoArtifactRadioactive
@@ -884,6 +888,7 @@
         - id: MobCarpHolo
           weight: 1.0
 
+#SS220 XEA Fauna spawn extension begin
 - type: entity
   id: XenoArtifactFaunaSpawn
   parent: BaseXenoArtifactEffect
@@ -904,18 +909,37 @@
         children:
         - id: MobAdultSlimesYellowAngry
         - id: MobAngryBee
+          amount: !type:RangeNumberSelector
+            range: 2, 5
         - id: MobBearSpace
         - id: MobXenoRavager
+          prob: 0.1 #Chance lowered 3.2% → 0.32%
         - id: MobTick
+          amount: !type:RangeNumberSelector
+            range: 1, 2
         - id: MobSpiderSpace
         - id: MobPurpleSnake
-        - id: MobMouse
         - id: MobKangarooSpace
         - id: MobPig
         - id: MobParrot
+          amount: !type:RangeNumberSelector
+            range: 1, 2
         - id: MobKangaroo
         - id: MobFox
         - id: MobPenguin
+        - id: MobCrab
+          amount: !type:RangeNumberSelector
+            range: 1, 2
+        - id: MobFrog
+          amount: !type:RangeNumberSelector
+            range: 1, 3
+        - id: MobPossum
+        - id: MobRaccoon
+        - id: MobFerret
+        - id: MobMoproach
+          amount: !type:RangeNumberSelector
+            range: 1, 2
+        - id: MobHamster
           amount: !type:RangeNumberSelector
             range: 1, 2
         - id: MobMothroach
@@ -930,14 +954,31 @@
         - id: MobCat
           amount: !type:RangeNumberSelector
             range: 1, 2
+        - id: MobCatShadow
+          prob: 0.1
         - id: MobBee
+          amount: !type:RangeNumberSelector
+            range: 2, 5
+        - id: MobMouse
+          amount: !type:RangeNumberSelector
+            range: 2, 5
+        - id: MobChicken
+          amount: !type:RangeNumberSelector
+            range: 2, 5
+        - id: MobDuckMallard
           amount: !type:RangeNumberSelector
             range: 2, 5
         - id: MobGoat
           amount: !type:RangeNumberSelector
             range: 1, 3
-        - id: MobMonkeySyndicateAgent #so lucky
-          prob: 0.03
+        - id: MobGoose
+          amount: !type:RangeNumberSelector
+            range: 1, 2
+        - id: MobClownSpider
+        - id: MobGiantSpider
+        - id: MobDragon
+          prob: 0.03 #Chance is 0.096%
+#SS220 XEA Fauna spawn extension end
 
 - type: entity
   id: XenoArtifactCashSpawn
