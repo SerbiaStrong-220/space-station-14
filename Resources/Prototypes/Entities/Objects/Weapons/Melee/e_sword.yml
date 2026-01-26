@@ -108,16 +108,6 @@
       map: [ "blade" ]
   - type: Item
     sprite: Objects/Weapons/Melee/e_sword-inhands.rsi
-    #ss220lowTTKUpdate
-  - type: Reflect
-    reflectProb: 0.45 #ss220 ttkTweaks
-    reflects:
-      - NonEnergy
-      - Energy #SS220-FixReflects
-    spread: 80
-    reflectProbProjectile: 0.40 #ss220 ttkTweaks
-    spreadProjectile: 180
-    #ss220lowTTKUpdate
   #SS220 craftable desword start
   - type: Tag
     tags:
@@ -407,16 +397,9 @@
   - type: Item
     size: Small
     sprite: Objects/Weapons/Melee/e_sword_double-inhands.rsi
-# ss220 FixESword
   - type: Reflect
-    reflectProb: 0.80 #ss220 ttkTweaks
-    reflects:
-      - NonEnergy
-      - Energy #SS220-FixReflects
-    spread: 45
-    reflectProbProjectile: 0.70 #ss220lowTTKUpdate
-    spreadProjectile: 180
-# ss220 FixESword
+    reflectProb: .75
+    spread: 75
   #SS220 craftable desword start
   - type: Construction
     deconstructionTarget: null

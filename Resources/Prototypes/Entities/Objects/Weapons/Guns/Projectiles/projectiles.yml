@@ -63,14 +63,14 @@
       shader: unshaded
   - type: Physics
     bodyType: Dynamic
-    linearDamping: 0
-    angularDamping: 0
+  - type: TileFrictionModifier
+    modifier: 0
   - type: Fixtures
     fixtures:
       projectile:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.1,-0.10,0.1,0.30" #SS220 BulletSpeed
+          bounds: "-0.1,-0.10,0.1,0.30"
         hard: false
         mask:
         - Impassable
@@ -178,6 +178,11 @@
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     layers:
     - state: uranium
+      shader: unshaded
+ # - type: PointLight // Too resource intensive for what little effect it has, one day...
+ #   enabled: true
+ #   color: "#059919"
+ #   radius: 2.0
   - type: Projectile
     damage:
       types:
@@ -216,10 +221,6 @@
         - BulletImpassable
       fly-by: *flybyfixture
   - type: Ammo
-  # SS220 Stamina damage begin
-  - type: StaminaDamageOnCollide
-    damage: 55
-  # SS220 Stamina damage end
   - type: Projectile
     damage:
       types:
@@ -300,7 +301,7 @@
       fly-by: *flybyfixture
   - type: Ammo
   - type: StaminaDamageOnCollide
-    damage: 30 # SS220 Stamina damage
+    damage: 33
   - type: Projectile
     impactEffect: BulletImpactEffectDisabler
     damage:
@@ -550,7 +551,7 @@
     impactEffect: BulletImpactEffectKinetic
     damage:
       types:
-        Blunt: 25 # SS220 Revert Wizden balance #38131
+        Blunt: 15
         Structural: 30
   # Short lifespan
   - type: TimedDespawn
@@ -1047,8 +1048,8 @@
   - type: Clickable
   - type: Physics
     bodyType: Dynamic
-    linearDamping: 0
-    angularDamping: 0
+  - type: TileFrictionModifier
+    modifier: 0
   - type: TimedDespawn
     lifetime: 10
   - type: Projectile
@@ -1131,8 +1132,8 @@
         - state: hook
     - type: Physics
       bodyType: Dynamic
-      linearDamping: 0
-      angularDamping: 0
+    - type: TileFrictionModifier
+      modifier: 0
     - type: Projectile
       deleteOnCollide: false
       damage:
@@ -1184,7 +1185,7 @@
       fly-by: *flybyfixture
   - type: Ammo
   - type: StaminaDamageOnCollide
-    damage: 20 # SS220-BUFF
+    damage: 15
   - type: Projectile
     impactEffect: BulletImpactEffectDisabler
     damage:
@@ -1339,7 +1340,7 @@
     impactEffect: BulletImpactEffectOrangeDisabler
     damage:
       types:
-        Heat: 19  #ss220lowTTKUpdate
+        Heat: 13
 
 - type: entity
   name: wide laser barrage

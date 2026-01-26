@@ -88,12 +88,6 @@
     steps: 4
     zeroVisible: true
   - type: Appearance
-    #ss220lowTTKUpdate btw lmg too OP ^^^^
-  - type: HeldSpeedModifier
-    walkModifier: 0.7
-    sprintModifier: 0.7
-    mirrorClothingModifier: false
-    #ss220lowTTKUpdate
   - type: StaticPrice
     price: 10000
 

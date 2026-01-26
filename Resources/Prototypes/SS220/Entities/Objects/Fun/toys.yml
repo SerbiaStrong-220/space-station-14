@@ -183,7 +183,7 @@
           tags:
             - CartridgeCap
             - BulletFoam
-  #ss220lowTTKUpdate revert. Toys not heavy bruh
+  #ss220 Toys not heavy bruh
   - type: HeldSpeedModifier
     walkModifier: 1
     sprintModifier: 1
