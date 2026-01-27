@@ -26,6 +26,9 @@ spellbook-slip-desc = Познайте древние методы уборщи�
 spellbook-item-recall-name = Призыв Предмета
 spellbook-item-recall-description = Помечайте предмет в руке и вызывайте его в любой момент щелчком пальцев!
 
+spellbook-polymorph-wizardspiderghost-name = Полиморф-Паучьего Призрака
+spellbook-polymorph-wizardspiderghost-desc = Превращает вас в Паучьего призрака!
+
 # Equipment
 
 spellbook-hammer-mjollnir-name = Мьёльнир
