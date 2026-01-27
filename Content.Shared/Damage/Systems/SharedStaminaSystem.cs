@@ -137,7 +137,8 @@ public abstract partial class SharedStaminaSystem : EntitySystem
         if (component.Critical)
             return;
 
-        var damage = args.PushProbability * component.CritThreshold;
+        // var damage = args.PushProbability * component.CritThreshold; [wizden-code] SS220-make-stamina-damage-cap
+        var damage = MathF.Min(args.PushProbability, args.MaxPercentStaminaDamage) * component.CritThreshold; // SS220-make-stamina-damage-cap
         TakeStaminaDamage(uid, damage, component, source: args.Source);
 
         args.PopupPrefix = "disarm-action-shove-";

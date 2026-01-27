@@ -38,6 +38,7 @@
   description: job-description-centcomoff
   setPreference: false
   startingGear: CentCommOfficerGear
+  experienceDefinition: CentralCommandOfficialExperience
   playTimeTracker: JobCentcommOfficer
   icon: "JobIconNanotrasen"
   supervisors: job-supervisors-centcom
@@ -50,10 +51,6 @@
   - CentralCommandERT
   - CentralCommandBSO
   - CentralCommandCBURN
-  special:
-  - !type:AddComponentSpecial
-    components:
-    - type: DefibrillatorSkill
 
 - type: startingGear
   id: CentCommOfficerGear

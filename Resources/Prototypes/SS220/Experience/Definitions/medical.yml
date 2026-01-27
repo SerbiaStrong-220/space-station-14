@@ -1,0 +1,144 @@
+- type: experienceDefinition
+  id: BrigmedicRoleExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    ExtravehicularActivity:
+      level: 1
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 1
+    Medicine:
+      level: 2
+    PhysicalTraining:
+      level: 2
+  knowledges:
+  - MedicalKnowledge
+  addSublevelPoints: 10
+
+- type: experienceDefinition
+  id: ChemistRoleExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    ExtravehicularActivity:
+      level: 1
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 1
+    Medicine:
+      level: 2
+    PhysicalTraining:
+      level: 1
+  knowledges:
+  - MedicalKnowledge
+  addSublevelPoints: 10
+
+- type: experienceDefinition
+  id: ChiefMedicalOfficerRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    ExtravehicularActivity:
+      level: 1
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 1
+    Medicine:
+      level: 3
+    PhysicalTraining:
+      level: 2
+  knowledges:
+  - MedicalKnowledge
+  addSublevelPoints: 5
+
+- type: experienceDefinition
+  id: SeniorPhysicianRoleExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    ExtravehicularActivity:
+      level: 1
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 1
+    Medicine:
+      level: 2
+    PhysicalTraining:
+      level: 2
+  knowledges:
+  - MedicalKnowledge
+  addSublevelPoints: 10
+
+
+- type: experienceDefinition
+  id: MedicalDoctorRoleExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 1
+    Medicine:
+      level: 2
+    PhysicalTraining:
+      level: 2
+  knowledges:
+  - MedicalKnowledge
+  addSublevelPoints: 10
+
+- type: experienceDefinition
+  id: MedicalInternRoleExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 1
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 1
+  knowledges:
+  - MedicalKnowledge
+  addSublevelPoints: 15
+
+- type: experienceDefinition
+  id: ParamedicRoleExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 1
+    Medicine:
+      level: 2
+    PhysicalTraining:
+      level: 2
+  knowledges:
+  - MedicalKnowledge
+  addSublevelPoints: 10
+
+- type: experienceDefinition
+  id: PsychologistRoleExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 1
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 1
+  knowledges:
+  - MedicalKnowledge
+  addSublevelPoints: 15
