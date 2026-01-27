@@ -18,7 +18,4 @@ public abstract partial class SharedLimitationReviveComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     [AutoNetworkedField]
     public TimeSpan? DamageCountingTime;
-
-    [AutoNetworkedField]
-    public bool IsDamageTaken = false;
 }

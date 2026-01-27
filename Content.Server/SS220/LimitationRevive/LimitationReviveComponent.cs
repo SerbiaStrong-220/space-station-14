@@ -48,7 +48,7 @@ public sealed partial class LimitationReviveComponent : SharedLimitationReviveCo
     /// <summary>
     /// </summary>
     [DataField]
-    public float ChanceToAddTrait = 0.6f;
+    public float ChanceToAddPathology = 0.6f;
 
     /// <summary>
     /// Multiplier applied to <see cref="UpdateInterval"/> for adjusting based on metabolic rate multiplier.

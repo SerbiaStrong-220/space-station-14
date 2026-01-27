@@ -8,12 +8,12 @@ using Content.Shared.SS220.Surgery.Graph;
 using Content.Shared.SS220.Surgery.Components;
 using Content.Shared.SS220.Surgery.Ui;
 using Content.Shared.Examine;
-using Robust.Shared.Network;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Content.Shared.Database;
 using Content.Shared.Weapons.Melee;
 using Robust.Shared.Utility;
+using System.Linq;
 
 namespace Content.Shared.SS220.Surgery.Systems;
 
@@ -24,7 +24,6 @@ public abstract partial class SharedSurgerySystem : EntitySystem
     [Dependency] private readonly ISharedAdminLogManager _adminLogManager = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _meleeWeapon = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly INetManager _netManager = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _userInterface = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
@@ -102,14 +101,30 @@ public abstract partial class SharedSurgerySystem : EntitySystem
                 break;
 
             default:
-                var buiOwner = entity.Owner;
+                var metedEdges = edgeSelectorState.Infos.Where(x => x.MetEdgeRequirement).ToArray();
+                if (metedEdges.Length == 1)
+                {
+                    var metedInfo = metedEdges[0];
 
-                // We send full state so no reason for ui being at any entity.
-                if (!_userInterface.TryOpenUi(buiOwner, EdgeSelectorBUIKey, args.User))
-                    return;
+                    if (GetEdgeTargeting(entity, metedInfo.SurgeryProtoId, metedInfo.TargetNode) is not { } metedEdge)
+                        return;
 
-                _userInterface.SetUiState(buiOwner, EdgeSelectorBUIKey, edgeSelectorState);
-                args.Handled = true;
+                    args.Handled = TryPerformOperationStep(entity, metedInfo.SurgeryProtoId, metedEdge, args.Used, args.User);
+                }
+                else
+                {
+                    // skip showing ui for other interactions
+                    if (!HasComp<SurgeryToolComponent>(args.Used))
+                        return;
+
+                    var buiOwner = entity.Owner;
+
+                    // We send full state so no reason for ui being at any entity.
+                    if (!_userInterface.TryOpenUi(buiOwner, EdgeSelectorBUIKey, args.User))
+                        return;
+
+                    _userInterface.SetUiState(buiOwner, EdgeSelectorBUIKey, edgeSelectorState);
+                }
                 break;
         }
     }
@@ -123,32 +138,28 @@ public abstract partial class SharedSurgerySystem : EntitySystem
     }
 
 
-    private void OnDoAfterAttempt(Entity<SurgeryPatientComponent> _, SurgeryDoAfterEvent args, CancellableEntityEventArgs ev)
+    private void OnDoAfterAttempt(Entity<SurgeryPatientComponent> entity, SurgeryDoAfterEvent args, CancellableEntityEventArgs ev)
     {
         if (args.Target is null)
             return;
 
-        if (!_prototype.Resolve(args.SurgeryGraph, out var surgeryGraph))
-            return;
-
-        foreach (var requirement in surgeryGraph.Requirements)
+        if (!_prototype.Resolve(args.SurgeryGraph, out var surgeryGraphProto))
         {
-            var requirementTarget = ResolveRequirementSubject(requirement, args.User, args.Target, args.Used);
-
-            if (requirement.SatisfiesRequirements(requirementTarget, EntityManager))
-                continue;
-
-            var reason = requirement.RequirementFailureReason(requirementTarget, _prototype, EntityManager);
-
-            _popup.PopupClient(reason, args.User, args.User);
-
-            // TODO: it needs changing
-            if (TryComp<MeleeWeaponComponent>(args.Used, out var meleeWeapon))
-                _meleeWeapon.AttemptLightAttack(args.User, args.Used.Value, meleeWeapon, args.Target.Value, checkCombatMode: false);
-
             ev.Cancel();
             return;
         }
+
+        if (CanPerformAnyEdgeInSurgery(entity, surgeryGraphProto, args.Used, args.User))
+            return;
+
+        PopupSurgeryGraphFailures(entity, surgeryGraphProto, args.Used, args.User);
+
+        // TODO: it needs changing in future to not use only weapons
+        if (TryComp<MeleeWeaponComponent>(args.Used, out var meleeWeapon))
+            _meleeWeapon.AttemptLightAttack(args.User, args.Used.Value, meleeWeapon, args.Target.Value, checkCombatMode: false);
+
+        ev.Cancel();
+        return;
     }
 
     private void OnSurgeryDoAfter(Entity<SurgeryPatientComponent> entity, ref SurgeryDoAfterEvent args)
@@ -156,27 +167,16 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         if (args.Cancelled || !entity.Comp.OngoingSurgeries.TryGetValue(args.SurgeryGraph, out var currentNode))
             return;
 
-        var operationProto = _prototype.Index(args.SurgeryGraph);
-        if (!operationProto.TryGetNode(currentNode, out var node))
+        if (!_prototype.Resolve(args.SurgeryGraph, out var surgeryPrototype))
             return;
 
-        SurgeryGraphEdge? targetEdge = null;
-        foreach (var edge in node.Edges)
-        {
-            if (edge.Target != args.TargetEdge)
-                continue;
-
-            targetEdge = edge;
-            break;
-        }
-
-        if (targetEdge == null)
-        {
-            Log.Error($"Got wrong target edge [{args.TargetEdge}] in surgery do after for graph [{args.SurgeryGraph}]!");
+        if (GetEdgeTargeting(entity, surgeryPrototype, args.TargetEdge) is not { } chosenEdge)
             return;
-        }
 
-        ProceedToNextStep(entity, args.User, args.Used, args.SurgeryGraph, targetEdge);
+        if (!TryMeetRequirement(entity, chosenEdge, args.Used, args.User))
+            return;
+
+        ProceedToNextStep(entity, args.User, args.Used, args.SurgeryGraph, chosenEdge);
     }
 
     private void OnSurgeryStarterAfterInteract(Entity<SurgeryStarterComponent> entity, ref AfterInteractEvent args)
@@ -299,7 +299,6 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             return false;
         }
 
-        // TODO: move to met requirement
         var performEdgeInfo = GetPerformSurgeryEdgeInfo(entity, chosenEdge, used, user);
         if (!performEdgeInfo.Visible)
             return false;

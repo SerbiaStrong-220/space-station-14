@@ -37,7 +37,7 @@ public sealed class SurgeryPatientAnalyzer : EntitySystem
 
         if (TryComp<LimitationReviveComponent>(target, out var limitationReviveComponent)
                 && mobStateComponent?.CurrentState == MobState.Dead) // kinda bad fix
-            patientStatus.BrainRotDegree = GetBrainRotDegree(limitationReviveComponent);
+            patientStatus.BrainRotDegree = GetBrainRotDegree(limitationReviveComponent, mobStateComponent);
 
         CollectPathologyDescriptions(target, ref patientStatus);
 
@@ -103,17 +103,19 @@ public sealed class SurgeryPatientAnalyzer : EntitySystem
     }
 
     // TODO: after redoing LimRev shared comp come here
-    public int GetBrainRotDegree(LimitationReviveComponent comp)
+    public int GetBrainRotDegree(LimitationReviveComponent limitationRevive, MobStateComponent mobState)
     {
-        if (comp.DamageCountingTime is null && comp.IsDamageTaken)
+        if (limitationRevive.DamageCountingTime is not null)
+        {
+            var result = (MaxBrainRotPercentage * (int)(_gameTiming.CurTime - limitationRevive.DamageCountingTime.Value).TotalSeconds) / (int)limitationRevive.BeforeDamageDelay.TotalSeconds;
+            return result >= 0 ? result : 0;
+        }
+
+        if (mobState.CurrentState == MobState.Dead)
             return MaxBrainRotPercentage;
 
-        if (comp.DamageCountingTime is null)
-            return 0;
 
-        var result = (MaxBrainRotPercentage * (int)(_gameTiming.CurTime - comp.DamageCountingTime.Value).TotalSeconds) / (int)comp.BeforeDamageDelay.TotalSeconds;
-
-        return result >= 0 ? result : 0;
+        return 0;
     }
 
     private void CollectPathologyDescriptions(EntityUid target, ref PatientStatusData statusData)

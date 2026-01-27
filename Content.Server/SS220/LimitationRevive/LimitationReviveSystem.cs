@@ -33,6 +33,31 @@ public sealed class LimitationReviveSystem : SharedLimitationReviveSystem
         SubscribeLocalEvent<LimitationReviveComponent, ApplyMetabolicMultiplierEvent>(OnApplyMetabolicMultiplier);
     }
 
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var query = EntityQueryEnumerator<LimitationReviveComponent>();
+
+        while (query.MoveNext(out var ent, out var limitationRevive))
+        {
+            if (limitationRevive.DamageCountingTime is null)
+                continue;
+
+            limitationRevive.DamageCountingTime += TimeSpan.FromSeconds(frameTime / limitationRevive.UpdateIntervalMultiplier);
+
+            Dirty(ent, limitationRevive);
+
+            if (limitationRevive.DamageCountingTime < limitationRevive.BeforeDamageDelay)
+                continue;
+
+            _damageableSystem.TryChangeDamage(ent, limitationRevive.Damage, true);
+
+            _pathology.TryAddRandom(ent, limitationRevive.WeightListProto, limitationRevive.ChanceToAddPathology);
+            limitationRevive.DamageCountingTime = null;
+        }
+    }
+
     private void OnMobStateChanged(Entity<LimitationReviveComponent> ent, ref MobStateChangedEvent args)
     {
         if (args.NewMobState == MobState.Dead)
@@ -54,7 +79,7 @@ public sealed class LimitationReviveSystem : SharedLimitationReviveSystem
 
     private void OnAddReviveDebuffs(Entity<LimitationReviveComponent> ent, ref AddReviveDebuffsEvent args)
     {
-        _pathology.TryAddRandom(ent.Owner, ent.Comp.WeightListProto, ent.Comp.ChanceToAddTrait);
+        _pathology.TryAddRandom(ent.Owner, ent.Comp.WeightListProto, ent.Comp.ChanceToAddPathology);
     }
 
     private void OnCloning(Entity<LimitationReviveComponent> ent, ref CloningEvent args)
@@ -84,31 +109,6 @@ public sealed class LimitationReviveSystem : SharedLimitationReviveSystem
         ent.Comp.RecievedDebuffs = [];
     }
 
-    public override void Update(float frameTime)
-    {
-        base.Update(frameTime);
-
-        var query = EntityQueryEnumerator<LimitationReviveComponent>();
-
-        while (query.MoveNext(out var ent, out var limitationRevive))
-        {
-            if (limitationRevive.DamageCountingTime is null)
-                continue;
-
-            limitationRevive.DamageCountingTime += TimeSpan.FromSeconds(frameTime / limitationRevive.UpdateIntervalMultiplier);
-
-            Dirty(ent, limitationRevive);
-
-            if (limitationRevive.DamageCountingTime < limitationRevive.BeforeDamageDelay)
-                continue;
-
-            _damageableSystem.TryChangeDamage(ent, limitationRevive.Damage, true);
-
-            _pathology.TryAddRandom(ent, limitationRevive.WeightListProto, limitationRevive.ChanceToAddTrait);
-            limitationRevive.DamageCountingTime = null;
-        }
-    }
-
     private void OnApplyMetabolicMultiplier(Entity<LimitationReviveComponent> ent, ref ApplyMetabolicMultiplierEvent args)
     {
         ent.Comp.UpdateIntervalMultiplier = args.Multiplier;
@@ -122,7 +122,6 @@ public sealed class LimitationReviveSystem : SharedLimitationReviveSystem
         if (limComp.DamageCountingTime == null)
             return;
 
-        // TODO-SS220: please make it logic to adjust time passed and not the time start point
         limComp.DamageCountingTime -= addTime;
 
         Dirty(ent, limComp);

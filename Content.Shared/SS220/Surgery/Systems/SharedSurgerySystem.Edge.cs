@@ -132,6 +132,34 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         return true;
     }
 
+    public bool TryMeetRequirement(Entity<SurgeryPatientComponent> entity, SurgeryGraphEdge edge, EntityUid? used, EntityUid user)
+    {
+        foreach (var requirement in SurgeryGraph.GetVisibilityRequirements(edge))
+        {
+            var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
+
+            if (requirement.MeetRequirement(requirementTarget, EntityManager))
+                continue;
+
+            return false;
+        }
+
+        foreach (var requirement in SurgeryGraph.GetRequirements(edge))
+        {
+            var requirementTarget = ResolveRequirementSubject(requirement, user, entity.Owner, used);
+
+            if (requirement.MeetRequirement(requirementTarget, EntityManager))
+                continue;
+
+            var reason = requirement.RequirementFailureReason(requirementTarget, _prototype, EntityManager);
+            _popup.PopupClient(reason, user);
+
+            return false;
+        }
+
+        return true;
+    }
+
     public PerformSurgeryEdgeInfo GetPerformSurgeryEdgeInfo(Entity<SurgeryPatientComponent> entity, SurgeryGraphEdge edge, EntityUid? used, EntityUid user)
     {
         foreach (var requirement in SurgeryGraph.GetVisibilityRequirements(edge))

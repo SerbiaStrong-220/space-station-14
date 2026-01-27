@@ -15,12 +15,16 @@ namespace Content.Server.SS220.Surgery.Systems;
 
 public sealed class ImplantCheckInSurgerySystem : EntitySystem
 {
-    [Dependency] AudioSystem _audio = default!;
-    [Dependency] ContainerSystem _container = default!;
-    [Dependency] MetaDataSystem _metaData = default!;
-    [Dependency] PaperSystem _paper = default!;
-    [Dependency] PopupSystem _popup = default!;
-    [Dependency] HandsSystem _handsSystem = default!;
+    [Dependency] private readonly AudioSystem _audio = default!;
+    [Dependency] private readonly ContainerSystem _container = default!;
+    [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private readonly PaperSystem _paper = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly HandsSystem _handsSystem = default!;
+
+    private readonly LocId _implantCheckReportTitle = "implant-check-report-title";
+    private readonly LocId _implantCheckHeader = "implant-check-report-header";
+    private readonly LocId _implantCheckReportImplantEntry = "implant-check-report-implant-entry";
 
     public bool MakeImplantCheckPaper(EntityUid user, Entity<ImplantCheckInSurgeryComponent?> used, EntityUid target)
     {
@@ -54,11 +58,11 @@ public sealed class ImplantCheckInSurgerySystem : EntitySystem
             targetDNA = dnaComponent.DNA;
         }
 
-        _metaData.SetEntityName(printed, Loc.GetString("implant-check-report-title", ("dna", targetDNA)));
+        _metaData.SetEntityName(printed, Loc.GetString(_implantCheckReportTitle, ("dna", targetDNA)));
 
         var text = new StringBuilder();
 
-        text.AppendLine(Loc.GetString("implant-check-report-header", ("dna", targetDNA)));
+        text.AppendLine(Loc.GetString(_implantCheckHeader, ("dna", targetDNA)));
 
         foreach (var implant in implants)
         {
@@ -75,7 +79,7 @@ public sealed class ImplantCheckInSurgerySystem : EntitySystem
                 implantName = MetaData(implant).EntityName;
             }
 
-            text.AppendLine(Loc.GetString("implant-check-report-implant-entry", ("implantName", implantName)));
+            text.AppendLine(Loc.GetString(_implantCheckReportImplantEntry, ("implantName", implantName)));
         }
 
         _paper.SetContent((printed, paperComp), text.ToString());

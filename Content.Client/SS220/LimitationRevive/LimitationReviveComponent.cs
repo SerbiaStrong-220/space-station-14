@@ -7,4 +7,4 @@ namespace Content.Client.SS220.LimitationRevive;
 
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState(true)]
-public sealed partial class LimitationReviveComponent : SharedLimitationReviveComponent { }
+public sealed partial class LimitationReviveComponent : SharedLimitationReviveComponent;

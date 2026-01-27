@@ -56,8 +56,7 @@
       - !type:ApplyDamageAction
         damage:
           groups:
-            Brute: -10
-            Burn: -10
+            Brute: -45
       requirements:
       - !type:SurgeryToolRequirement
         subject: used
