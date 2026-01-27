@@ -1,0 +1,22 @@
+{
+  "name": "discordchangelog",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@actions/core": "^2.0.2",
+    "@actions/github": "^7.0.0",
+    "discord.js": "^14.25.1",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
+    "url": "^0.11.4",
+    "util": "^0.12.5"
+  },
+  "engines": {
+    "node": ">=22.1.0"
+  }
+}
