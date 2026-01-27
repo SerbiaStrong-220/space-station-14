@@ -67,7 +67,7 @@ public sealed class WeightlessChangingReadySkillSystem : SkillEntitySystem
             return;
         }
 
-        // TODO: if you make drop: true this will lead to engine error:
+        // if you make drop: true this will lead to engine error:
         // ex: `Grid traversal attempted to handle movement of джетпак (5289/n5289, JetpackBlueFilled) while moving name-name (5172/n5172, MobReptilian, ckey)`
         _stun.TryKnockdown(experienceEntity.Value.Owner, entity.Comp.KnockdownDuration, drop: false);
     }

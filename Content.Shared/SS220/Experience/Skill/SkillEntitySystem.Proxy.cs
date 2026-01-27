@@ -25,6 +25,7 @@ public partial class SkillEntitySystem : EntitySystem
         SubscribeLocalEvent<TComp, TEvent>(handler, before, after);
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool ResolveExperienceEntityFromSkillEntity(EntityUid skillUid, [NotNullWhen(true)] out Entity<ExperienceComponent>? experienceEntity)
     {
         experienceEntity = null;
