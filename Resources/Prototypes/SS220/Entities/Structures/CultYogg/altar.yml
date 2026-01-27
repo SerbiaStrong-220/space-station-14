@@ -40,8 +40,8 @@
         mask:
         - TableMask
         layer:
+        - TableLayer
         - MidImpassable
-        - LowImpassable
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Metallic
