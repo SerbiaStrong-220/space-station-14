@@ -22,39 +22,46 @@ public sealed class ArmorBlockSystem : EntitySystem
     public void OnDamageChange(Entity<ArmorBlockComponent> ent,ref DamageModifyEvent args)
     {
         if (args.OriginalDamage == null || ent.Comp.Owner == null) { return; }
+
         var resultDamage = new DamageSpecifier();
         var resultArmorDamage = new DamageSpecifier();
+
         foreach (var type in args.OriginalDamage.DamageDict.Keys)
         {
             if(ent.Comp.DurabilityTresholdDict.ContainsKey(type))
-            {
-                CountDifference(resultArmorDamage.DamageDict, args.OriginalDamage.DamageDict[type], ent.Comp.DurabilityTresholdDict[type], type);
-            }
-            else { resultArmorDamage.DamageDict.Add(type, args.OriginalDamage.DamageDict[type]); }
+                CountDifference(resultArmorDamage.DamageDict, args.OriginalDamage.DamageDict[type], ent.Comp.DurabilityTresholdDict[type], type, piercing: args.OriginalDamage.armourPiercing);
+
+            else
+                resultArmorDamage.DamageDict.Add(type, args.OriginalDamage.DamageDict[type]); 
+
             if(ent.Comp.TresholdDict.ContainsKey(type))
             {
-                CountDifference(resultDamage.DamageDict, args.OriginalDamage.DamageDict[type], ent.Comp.TresholdDict[type], type);
+                CountDifference(resultDamage.DamageDict, args.OriginalDamage.DamageDict[type], ent.Comp.TresholdDict[type], type, args.OriginalDamage.armourPiercing);
+
                 if (ent.Comp.TransformSpecifierDict.ContainsKey(type))
-                {
-                    CountDifference(resultDamage.DamageDict, args.OriginalDamage.DamageDict[type], ent.Comp.TresholdDict[ent.Comp.TransformSpecifierDict[type]], ent.Comp.TransformSpecifierDict[type]);
-                }
-                args.OriginalDamage.DamageDict[type] = 0f;
+                    CountDifference(resultDamage.DamageDict, args.OriginalDamage.DamageDict[type], ent.Comp.TresholdDict[ent.Comp.TransformSpecifierDict[type]], ent.Comp.TransformSpecifierDict[type], FixedPoint2.Zero); //Piercing is not applied here
+
             }
             else
             {
                 if (resultDamage.DamageDict.ContainsKey(type))
-                {
                     resultDamage.DamageDict[type] += args.OriginalDamage.DamageDict[type];
-                }
-                else { resultDamage.DamageDict.Add(type, args.OriginalDamage.DamageDict[type]); }
+
+                else
+                    resultDamage.DamageDict.Add(type, args.OriginalDamage.DamageDict[type]); 
             }
         }
         args.Damage = resultArmorDamage;
         _damageable.TryChangeDamage(ent.Comp.Owner, resultDamage);
     }
 
-    public FixedPoint2 CountDifference(Dictionary<string,FixedPoint2> dict,FixedPoint2 damage, FixedPoint2 resist,string type)
+    public FixedPoint2 CountDifference(Dictionary<string,FixedPoint2> dict,FixedPoint2 damage, FixedPoint2 resist,string type, FixedPoint2 piercing)
     {
+        resist = resist - piercing;
+
+        if (resist < 0)
+            resist = 0;
+
         if (damage > resist)
         {
             if (dict.ContainsKey(type))
@@ -62,6 +69,7 @@ public sealed class ArmorBlockSystem : EntitySystem
                 dict[type] += damage - resist;
                 return damage - resist;
             }
+
             dict.Add(type, damage - resist);
             return damage - resist;
         }
