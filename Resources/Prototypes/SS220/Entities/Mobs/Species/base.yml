@@ -25,6 +25,8 @@
         Brute: -0.07
   - type: Fingerprint
   - type: Blindable
+  - type: SurgeryPatient
+  - type: PathologyHolder
   # Other
   - type: Temperature
     heatDamageThreshold: 325

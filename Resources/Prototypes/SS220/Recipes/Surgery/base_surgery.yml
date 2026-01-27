@@ -1,0 +1,155 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# Nodes
+
+- type: abstractSurgeryNode
+  id: incision
+  node:
+    node: abstract
+    nodeText:
+      examineDescription: incision-examine-description
+      popup: incision-popup
+      description: incision-description
+
+- type: abstractSurgeryNode
+  id: retract-skin
+  node:
+    node: abstract
+    nodeText:
+      examineDescription: retract-skin-examine-description
+      popup: retract-skin-popup
+      description: retract-skin-description
+
+- type: abstractSurgeryNode
+  id: saw-bone
+  node:
+    node: abstract
+    nodeText:
+      examineDescription: saw-bone-examine-description
+      popup: saw-bone-popup
+      description: saw-bone-description
+
+- type: abstractSurgeryNode
+  id: clamp-bleeders
+  node:
+    node: abstract
+    nodeText:
+      examineDescription: clamp-bleeders-examine-description
+      popup: clamp-bleeders-popup
+      description: clamp-bleeders-description
+
+- type: abstractSurgeryNode
+  id: seal-wound
+  node:
+    node: abstract
+    nodeText:
+      examineDescription: seal-wound-examine-description
+      popup: seal-wound-popup
+      description: seal-wound-description
+
+#Edges
+
+- type: abstractSurgeryEdge
+  id: incision
+  edge:
+    to: abstract
+    delay: 4
+    edgeTooltip: abstract
+    sound: /Audio/SS220/Surgery/incision.ogg
+    edgeIcon:
+      sprite: Objects/Specific/Medical/Surgery/scalpel.rsi
+      state: scalpel
+    requirements:
+    - !type:SurgeryToolRequirement
+      subject: used
+      surgeryTool: scalpel
+      requirementPriority: -1
+      description: surgery-requirement-tool-required-scalpel
+      failureMessage: surgery-requirement-tool-miss
+    actions:
+    - !type:ApplyBleedingAction
+      bleedAmount: 2
+
+- type: abstractSurgeryEdge
+  id: retract-skin
+  edge:
+    to: abstract
+    delay: 4
+    edgeTooltip: abstract
+    sound: /Audio/SS220/Surgery/retract_skin.ogg
+    edgeIcon:
+      sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+      state: retractor
+    requirements:
+    - !type:SurgeryToolRequirement
+      subject: used
+      surgeryTool: retractor
+      requirementPriority: -1
+      description: surgery-requirement-tool-required-retractor
+      failureMessage: surgery-requirement-tool-miss
+    actions:
+    - !type:ApplyBleedingAction
+      bleedAmount: -2
+
+- type: abstractSurgeryEdge
+  id: saw-bone
+  edge:
+    to: abstract
+    delay: 12
+    edgeTooltip: abstract
+    sound: /Audio/SS220/Surgery/saw.ogg
+    edgeIcon:
+      sprite: Objects/Specific/Medical/Surgery/saw.rsi
+      state: saw
+    requirements:
+    - !type:SurgeryToolRequirement
+      subject: used
+      surgeryTool: saw
+      requirementPriority: -1
+      description: surgery-requirement-tool-required-saw
+      failureMessage: surgery-requirement-tool-miss
+    actions:
+    - !type:ApplyBleedingAction
+      bleedAmount: 2
+
+- type: abstractSurgeryEdge
+  id: clamp-bleeders
+  edge:
+    to: abstract
+    delay: 4
+    edgeTooltip: abstract
+    sound: /Audio/SS220/Surgery/organ.ogg
+    edgeIcon:
+      sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+      state: hemostat
+    requirements:
+    - !type:SurgeryToolRequirement
+      subject: used
+      surgeryTool: hemostat
+      requirementPriority: -1
+      description: surgery-requirement-tool-required-hemostat
+      failureMessage: surgery-requirement-tool-miss
+    actions:
+    - !type:ApplyBleedingAction
+      bleedAmount: -2
+
+- type: abstractSurgeryEdge
+  id: seal-wound
+  edge:
+    to: abstract
+    delay: 4
+    edgeTooltip: abstract
+    sound: /Audio/SS220/Surgery/seal_wound.ogg
+    edgeIcon:
+      sprite: Objects/Specific/Medical/Surgery/cautery.rsi
+      state: cautery
+    requirements:
+    - !type:SurgeryToolRequirement
+      subject: used
+      surgeryTool: cautery
+      requirementPriority: -1
+      description: surgery-requirement-tool-required-cautery
+      failureMessage: surgery-requirement-tool-miss
+    actions:
+    - !type:ApplyBleedingAction
+      bleedAmount: -2

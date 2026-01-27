@@ -74,6 +74,7 @@
     bodyType: Dynamic
     linearDamping: 0.3
     angularDamping: 0
+  - type: PathologyOnProjectileHit # SS220-add-projectile-wounds
   - type: Projectile
     impactEffect: BulletImpactEffect
     damage:

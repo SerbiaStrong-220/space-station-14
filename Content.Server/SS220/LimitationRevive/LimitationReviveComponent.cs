@@ -2,6 +2,7 @@
 
 using Content.Shared.Damage;
 using Content.Shared.Random;
+using Content.Shared.SS220.LimitationRevive;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -11,7 +12,8 @@ namespace Content.Server.SS220.LimitationRevive;
 /// This is used for limiting the number of defibrillator resurrections
 /// </summary>
 [RegisterComponent]
-public sealed partial class LimitationReviveComponent : Component
+[NetworkedComponent, AutoGenerateComponentState(true)]
+public sealed partial class LimitationReviveComponent : SharedLimitationReviveComponent
 {
     /// <summary>
     /// Resurrection limit
@@ -26,18 +28,6 @@ public sealed partial class LimitationReviveComponent : Component
     public int DeathCounter = 0;
 
     /// <summary>
-    /// Delay before target takes brain damage
-    /// </summary>
-    [DataField]
-    public TimeSpan BeforeDamageDelay = TimeSpan.FromSeconds(180);
-
-    /// <summary>
-    /// The exact time when the target will take damage
-    /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
-    public TimeSpan? DamageCountingTime;
-
-    /// <summary>
     /// How much and what type of damage will be dealt
     /// </summary>
     [DataField]
@@ -50,21 +40,19 @@ public sealed partial class LimitationReviveComponent : Component
     };
 
     [DataField]
-    public ProtoId<WeightedRandomPrototype> WeightListProto = "TraitAfterDeathList";
+    public ProtoId<WeightedRandomPrototype> WeightListProto = "PathologyAfterDeathList";
 
     [ViewVariables]
     public List<string> RecievedDebuffs = [];
 
     /// <summary>
-    /// The probability from 0 to 1 that a negative feature will be added in case of unsuccessful use of the defibrillator.
     /// </summary>
     [DataField]
-    public float ChanceToAddTrait = 0.6f;
+    public float ChanceToAddPathology = 0.6f;
 
     /// <summary>
     /// Multiplier applied to <see cref="UpdateInterval"/> for adjusting based on metabolic rate multiplier.
     /// </summary>
     [ViewVariables(VVAccess.ReadOnly)]
     public float UpdateIntervalMultiplier = 1f;
-
 }
