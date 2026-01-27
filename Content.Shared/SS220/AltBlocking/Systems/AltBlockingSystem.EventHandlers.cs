@@ -106,8 +106,10 @@ public sealed partial class AltBlockingSystem
     {
         ent.Comp.User = args.User;
         Dirty(ent.Owner, ent.Comp);
+
         var userComp = EnsureComp<AltBlockingUserComponent>(args.User);
         userComp.BlockingItemsShields.Add(ent.Owner);
+
         _actionsSystem.AddAction(args.User, ref userComp.BlockingToggleActionEntity, userComp.BlockingToggleAction, args.User);
         Dirty(args.User, userComp);
     }
@@ -120,8 +122,10 @@ public sealed partial class AltBlockingSystem
 
         ent.Comp.User = args.Equipee;
         Dirty(ent.Owner, ent.Comp);
+
         var userComp = EnsureComp<AltBlockingUserComponent>(args.Equipee);
         _actionsSystem.AddAction(args.Equipee, ref userComp.BlockingToggleActionEntity, userComp.BlockingToggleAction, args.Equipee);
+
         userComp.BlockingItemsShields.Add(ent.Owner);
         Dirty(args.Equipee, userComp);
     }

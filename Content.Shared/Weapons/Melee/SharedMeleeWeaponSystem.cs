@@ -6,7 +6,6 @@ using Content.Shared.Actions.Events;
 using Content.Shared.Administration.Components;
 using Content.Shared.Administration.Logs;
 using Content.Shared.SS220.AltBlocking;//SS220 shield rework
-using Content.Shared.Blocking;
 using Content.Shared.CombatMode;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Events;
@@ -214,13 +213,10 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             return;
 
         //SS220 shield rework begin
-        if (TryComp<AltBlockingUserComponent>(user, out var comp))
+        if (TryComp<AltBlockingUserComponent>(user, out var comp) && comp.IsBlocking)
         {
-            if (comp.IsBlocking)
-            {
-                PopupSystem.PopupPredictedCursor(Loc.GetString("actively-blocking-attack"), user);
-                return;
-            }
+            PopupSystem.PopupPredictedCursor(Loc.GetString("actively-blocking-attack"), user);
+            return;
         }
         //SS220 shield rework end
 
@@ -239,13 +235,10 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             return;
 
         //SS220 shield rework begin
-        if (TryComp<AltBlockingUserComponent>(user, out var comp))
+        if (TryComp<AltBlockingUserComponent>(user, out var comp) && comp.IsBlocking)
         {
-            if (comp.IsBlocking)
-            {
-                PopupSystem.PopupPredictedCursor(Loc.GetString("actively-blocking-attack"), user);
-                return;
-            }
+            PopupSystem.PopupPredictedCursor(Loc.GetString("actively-blocking-attack"), user);
+            return;
         }
         //SS220 shield rework end
 
@@ -556,7 +549,6 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             RaiseLocalEvent((EntityUid)target, ref meleeblockEvent);
             if (meleeblockEvent.CancelledHit && TryGetEntity(meleeblockEvent.blocker, out EntityUid? shield))
             {
-
                 PopupSystem.PopupEntity(Loc.GetString("block-shot"), targetEntity);
                 targetEntity = (EntityUid)shield;
             }
