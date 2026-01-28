@@ -41,15 +41,11 @@ public sealed class ArmorBlockSystem : EntitySystem
                 if (ent.Comp.TransformSpecifierDict.ContainsKey(type))
                     CountDifference(resultDamage.DamageDict, args.OriginalDamage.DamageDict[type], ent.Comp.TresholdDict[ent.Comp.TransformSpecifierDict[type]], ent.Comp.TransformSpecifierDict[type], FixedPoint2.Zero); //Piercing is not applied here
 
-            }
-            else
-            {
-                if (resultDamage.DamageDict.ContainsKey(type))
-                    resultDamage.DamageDict[type] += args.OriginalDamage.DamageDict[type];
+                continue;
 
-                else
-                    resultDamage.DamageDict.Add(type, args.OriginalDamage.DamageDict[type]); 
             }
+
+            CountDifference(resultDamage.DamageDict, args.OriginalDamage.DamageDict[type], FixedPoint2.Zero, type, FixedPoint2.Zero);
         }
         args.Damage = resultArmorDamage;
         _damageable.TryChangeDamage(ent.Comp.Owner, resultDamage);
