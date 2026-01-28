@@ -99,11 +99,12 @@
     sprite: Objects/Weapons/Melee/truncheon.rsi
     state: icon
   discipline: Arsenal
-  tier: 1
+  tier: 2 # SS220 shield rework
   cost: 8000
   recipeUnlocks:
   - Truncheon
   - TelescopicShield
+  - RiotBulletShield # SS220 shield rework
   - HoloprojectorSecurity
   - WeaponDisablerSMG
 
@@ -152,6 +153,7 @@
   cost: 10000
   recipeUnlocks:
   - WeaponLaserCannon
+  - RiotLaserShield #SS220 shield rework
 
 - type: technology
   id: WaveParticleHarnessing
@@ -241,7 +243,7 @@
   recipeUnlocks:
   - WeaponAdvancedLaser
   - WeaponEnergyCrossbow #SS220 Energy crossbow
-  # - PortableRecharger SS220 PortableRecharger 
+  # - PortableRecharger SS220 PortableRecharger
 
 - type: technology
   id: ThermalWeaponry
