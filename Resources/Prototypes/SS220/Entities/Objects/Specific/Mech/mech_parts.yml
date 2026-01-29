@@ -1,8 +1,10 @@
 - type: entity
   id: BaseMechPart
-  save: false
+  parent: BaseItem
   abstract: true
   components:
+  - type: Item
+    size: Ginormous
   - type: MechPart
   #- type: ContainerContainer
   #  containers:
@@ -11,24 +13,32 @@
 - type: entity
   id: BaseMechChassis
   parent: BaseMechPart
-  save: false
   abstract: true
   components:
-  - type: MechChassis
-    maximalMass: 550
-    BaseMovementSpeed: 3.6
   - type: MechPart
     slot: chassis
     ownMass: 200
+  - type: MechChassis
+    maximalMass: 550
+    baseMovementSpeed: 3.6
 
 - type: entity
-  id: PowerloaderChassis
+  id: PowerloaderPart
   parent: BaseMechChassis
   name: Powerloader hydraulic chassis
   description: Low-tier hydraulic chassis,heavy and slow but also very powerfull and reliable
   components:
-  - type: MechChassis
-    maximalMass: 550
-    BaseMovementSpeed: 3.6
-  - type: MechPart
-    slot: chassis
+  - type: Sprite
+    sprite: Objects/Specific/Mech/mecha_equipment.rsi
+    state: mecha_clamp
+  #- type: MechChassis
+  #  maximalMass: 550
+  #  BaseMovementSpeed: 3.6
+  #- type: MechPart
+  #  slot: chassis
+  #- type: Item
+  #  inhandVisuals:
+  #    left:
+  #    - state: inhand-left-big
+  #    right:
+  #    - state: inhand-right-big

@@ -1,9 +1,10 @@
+using Content.Shared.EntityEffects.Effects.StatusEffects;
 using Content.Shared.FixedPoint;
+using Content.Shared.SS220.Mech.Systems;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Content.Shared.EntityEffects.Effects.StatusEffects;
 
 namespace Content.Shared.SS220.Mech.Components;
 
@@ -92,7 +93,15 @@ public sealed partial class AltMechComponent : Component
     public bool MaintenanceMode = true; //if the mech is not in the maintenance mode we cannot interact with its parts or equipment
 
     [ViewVariables(VVAccess.ReadWrite)]
-    public Dictionary<string, ContainerSlot> ContainerDict = new();
+    public Dictionary<PartSlot, ContainerSlot> ContainerDict = new Dictionary<PartSlot, ContainerSlot>()
+    {
+        [PartSlot.Head] = new ContainerSlot(),
+        [PartSlot.RightArm] = new ContainerSlot(),
+        [PartSlot.LeftArm] = new ContainerSlot(),
+        [PartSlot.Chassis] = new ContainerSlot(),
+        [PartSlot.Power] = new ContainerSlot()
+    };
+
 
     //[ViewVariables(VVAccess.ReadWrite)]
     //public ContainerSlot HeadSlot = default!;

@@ -1,6 +1,7 @@
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mech.Components;
+using Content.Shared.SS220.Mech.Systems;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
@@ -29,7 +30,7 @@ public sealed partial class MechPartComponent : Component
     /// The slot this part can be attached to
     /// </summary>
     [DataField("slot")]
-    public string slot = "default";
+    public PartSlot slot = PartSlot.Default;
 
     /// <summary>
     /// A container for storing the equipment entities.

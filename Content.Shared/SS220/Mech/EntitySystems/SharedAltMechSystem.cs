@@ -610,3 +610,13 @@ public readonly record struct MechPartRemovedEvent(EntityUid Mech)
 {
     public readonly EntityUid Mech = Mech;
 }
+
+public enum PartSlot : byte
+{
+    Default = 0,
+    Head = 1,
+    RightArm = 2,
+    LeftArm = 3,
+    Chassis = 4,
+    Power = 5
+}
