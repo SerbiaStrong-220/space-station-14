@@ -187,7 +187,7 @@
       activeMeleeBlockProb: 0.70
     - type: ArmorBlock
       tresholddict:
-          Piercing: 10
+          Piercing: 6
           Slash: 15
           Blunt: 20
           Heat: 10
@@ -196,7 +196,7 @@
           Airloss: 1000
           Caustic: 1000
       durabilitytresholddict:
-          Piercing: 7
+          Piercing: 5
           Slash: 9
           Blunt: 10
           Heat: 5
@@ -253,11 +253,17 @@
           Blunt: 1
           Heat: 1
           Caustic: 2
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
       durabilitytresholddict:
           Piercing: 0
           Blunt: 0
           Heat: 0
           Caustic: 2
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
     - type: Construction
       graph: CardShield
       node: cardShield
@@ -302,15 +308,23 @@
       activeMeleeBlockProb: 0.65
     - type: ArmorBlock
       tresholddict:
-          Piercing: 10
+          Piercing: 6
           Blunt: 20
           Heat: 10
           Slash: 15
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
       durabilitytresholddict:
-          Piercing: 7
+          Piercing: 5
           Blunt: 15
           Heat: 7
           Slash: 10
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
     #SS220 shield rework end
     - type: Construction
       graph: MakeshiftShield
@@ -357,15 +371,23 @@
       activeMeleeBlockProb: 0.65
     - type: ArmorBlock
       tresholddict:
-          Piercing: 7
+          Piercing: 4
           Blunt: 7
           Heat: 7
           Slash: 7
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
       durabilitytresholddict:
           Piercing: 4
           Blunt: 4
           Heat: 4
           Slash: 4
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
     - type: Construction
       graph: WebObjects
       node: shield
@@ -407,7 +429,7 @@
     - type: AltBlocking
       rangeBlockProb: 0.30
       meleeBlockProb: 0.55
-      activeRangeBlockProb: 0.45
+      activeRangeBlockProb: 0.40
       activeMeleeBlockProb: 0.70
     - type: ArmorBlock
       tresholddict:
@@ -415,11 +437,19 @@
           Blunt: 25
           Heat: 25
           Slash: 25
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
       durabilitytresholddict:
           Piercing: 12
           Blunt: 20
           Heat: 20
           Slash: 20
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
       #Have it break into brass when clock cult is is
 
 - type: entity
@@ -449,11 +479,19 @@
           Blunt: 10
           Heat: 60
           Slash: 7
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
       durabilitytresholddict:
           Piercing: 4
           Blunt: 5
           Heat: 35
           Slash: 4
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
     - type: Destructible
       thresholds:
         - trigger:
@@ -650,11 +688,19 @@
           Blunt: 20
           Heat: 10
           Slash: 15
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
       durabilitytresholddict:
           Piercing: 12
           Blunt: 15
           Heat: 7
           Slash: 10
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
     - type: ItemToggle
       soundActivate:
         path: /Audio/Weapons/telescopicon.ogg
