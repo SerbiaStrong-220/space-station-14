@@ -31,6 +31,51 @@
     Cloth: 300
     Durathread: 100
 
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitWeddingBlackOpened
+  result: ClothingUniformJumpsuitWeddingBlackOpened
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitWeddingBlackAndWhiteOpened
+  result: ClothingUniformJumpsuitWeddingBlackAndWhiteOpened
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitWeddingGreenOpened
+  result: ClothingUniformJumpsuitWeddingGreenOpened
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitWeddingWhiteOpened
+  result: ClothingUniformJumpsuitWeddingWhiteOpened
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformWeddingDress1
+  result: ClothingUniformWeddingDress1
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformWeddingDress2
+  result: ClothingUniformWeddingDress2
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformWeddingDress3
+  result: ClothingUniformWeddingDress3
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformWeddingDress4
+  result: ClothingUniformWeddingDress4
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitWitness
+  result: ClothingUniformJumpsuitWitness
+
 #  Winter coats
 - type: latheRecipe
   id: ClothingOuterWinterCentcomm
@@ -73,6 +118,16 @@
   materials:
     Cloth: 100
     Durathread: 50
+
+- type: latheRecipe
+  parent: BaseHatRecipe
+  id: ClothingHeadHatVeilClip
+  result: ClothingHeadHatVeilClip
+
+- type: latheRecipe
+  parent: BaseHatRecipe
+  id: ClothingHeadHatVeilTiara
+  result: ClothingHeadHatVeilTiara
 
 # Scarfs
 - type: latheRecipe
