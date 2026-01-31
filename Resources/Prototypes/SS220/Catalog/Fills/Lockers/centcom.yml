@@ -253,20 +253,20 @@
   components:
   - type: StorageFill
     contents:
-    - id: ClothingHeadBeretBlueshield
-    - id: ClothingUniformJumpsuitBlueShieldTurtle
-    - id: ClothingShoesBootsBlueShieldJackFilled
-    - id: ClothingHeadsetAltCentComm
+    - id: ClothingHeadBeretBlue
+    - id: ClothingHeadHatBeretNavyBlue
+    - id: ClothingUniformJumpsuitSRTOperative
+    - id: ClothingOuterSRTCoat
     - id: ClothingBeltWebbingBlueShield
-    - id: ClothingOuterArmorBlueShieldBulletproof
+    - id: ClothingMaskBalaclava
+    - id: ClothingMaskBalaclava2
     - id: ClothingBeltHolster
     - id: PowerCellMicroreactor
       amount: 2
-    - id: WeaponSubMachineGunAtreides
-    - id: MedkitCombatFilled
     - id: DefibrillatorCompact
-    - id: BoxMagazinePistolSubMachineGun
     - id: BoxHandcuff
+    - id: EmergencyRollerBed
+    - id: ClothingNeckCloakCapeBlue
 
 #CI
 - type: entity
