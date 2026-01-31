@@ -199,3 +199,8 @@
   id: BlueShieldJackBoots
   equipment:
     shoes: ClothingShoesBootsBlueShieldJackFilled
+
+- type: loadout
+  id: BlueShieldWinterBoots
+  equipment:
+    shoes: ClothingShoesBootsWinterBSFilled
