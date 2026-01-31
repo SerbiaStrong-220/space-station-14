@@ -265,7 +265,7 @@
       amount: 2
     - id: DefibrillatorCompact
     - id: BoxHandcuff
-    - id: EmergencyRollerBed
+    - id: EmergencyRollerBedSpawnFolded
     - id: ClothingNeckCloakCapeBlue
 
 #CI
