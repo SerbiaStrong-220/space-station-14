@@ -204,9 +204,9 @@
 - type: loadoutGroup
   id: BlueShieldOuterclothing
   name: loadout-group-blueshield-outerclothing
+  hidden: true
   loadouts:
   - BlueShieldArmorBulletproof
-  - BlueShieldSRTCoat
 
 - type: loadoutGroup
   id: BlueShieldBelt
@@ -228,7 +228,7 @@
   loadouts:
   - JackBoots
   - BlueShieldJackBoots
-  - BlueShieldWinterBoots 
+  - BlueShieldWinterBoots
   - CombatBoots
   # Офицер "Синий Щит" (Конец)
 #! Юридический (Конец)
