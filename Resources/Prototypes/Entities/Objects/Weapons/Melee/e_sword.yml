@@ -115,7 +115,6 @@
       - NonEnergy
       - Energy #SS220-FixReflects
     spread: 80
-    reflectProbProjectile: 0.40 #ss220 ttkTweaks
     spreadProjectile: 180
     #ss220lowTTKUpdate
   #SS220 craftable desword start
@@ -410,11 +409,11 @@
 # ss220 FixESword
   - type: Reflect
     reflectProb: 0.80 #ss220 ttkTweaks
+    reflectProbBehind: 0.3 #ss220 add reflect in back
     reflects:
       - NonEnergy
       - Energy #SS220-FixReflects
     spread: 45
-    reflectProbProjectile: 0.70 #ss220lowTTKUpdate
     spreadProjectile: 180
 # ss220 FixESword
   #SS220 craftable desword start

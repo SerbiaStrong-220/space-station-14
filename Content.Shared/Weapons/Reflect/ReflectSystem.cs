@@ -106,11 +106,16 @@ public sealed class ReflectSystem : EntitySystem
         if (!TryComp<ReflectiveComponent>(projectile, out var reflective) ||
             (reflector.Comp.Reflects & reflective.Reflective) == 0x0 ||
             !_toggle.IsActivated(reflector.Owner) ||
-            !_random.Prob(reflector.Comp.ReflectProbProjectile) ||
             !TryComp<PhysicsComponent>(projectile, out var physics))
         {
             return false;
         }
+
+        // ss220 reflect in back add start
+        var probability = GetReflectProbability(reflector, projectile);
+        if (!_random.Prob(probability))
+            return false;
+        // ss220 reflect in back add end
 
         var rotation = _random.NextAngle(-reflector.Comp.SpreadProjectile / 2, reflector.Comp.SpreadProjectile / 2).Opposite();
         var existingVelocity = _physics.GetMapLinearVelocity(projectile, component: physics);
@@ -154,12 +159,20 @@ public sealed class ReflectSystem : EntitySystem
         [NotNullWhen(true)] out Vector2? newDirection)
     {
         if ((reflector.Comp.Reflects & hitscanReflectType) == 0x0 ||
-            !_toggle.IsActivated(reflector.Owner) ||
-            !_random.Prob(reflector.Comp.ReflectProb))
+            !_toggle.IsActivated(reflector.Owner))
         {
             newDirection = null;
             return false;
         }
+
+        // ss220 reflect in back add start
+        var probability = GetReflectProbability(reflector, shotSource);
+        if (!_random.Prob(probability))
+        {
+            newDirection = null;
+            return false;
+        }
+        // ss220 reflect in back add end
 
         PlayAudioAndPopup(reflector.Comp, user);
 
@@ -173,6 +186,21 @@ public sealed class ReflectSystem : EntitySystem
 
         return true;
     }
+
+    // ss220 add reflect in back start
+    private float GetReflectProbability(Entity<ReflectComponent> reflector, EntityUid source)
+    {
+        if (reflector.Comp.ReflectProbBehind == null)
+            return reflector.Comp.ReflectProb;
+
+        var normalUser = Transform(reflector).ParentUid;
+        var reflectorPos = _transform.GetWorldRotation(normalUser).GetDir();
+        var sourcePos = _transform.GetWorldRotation(source).GetDir();
+
+        var isBehind = sourcePos == reflectorPos;
+        return isBehind ? reflector.Comp.ReflectProbBehind.Value : reflector.Comp.ReflectProb;
+    }
+    // ss220 add reflect in back end
 
     private void PlayAudioAndPopup(ReflectComponent reflect, EntityUid user)
     {
