@@ -5,9 +5,9 @@
   description: A comfortable cape, draped down your back and held around your neck with a brooch.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Neck/Cloaks/cloak-cape.rsi
+    sprite: SS220/Clothing/Neck/Cloaks/cloak-cape_white.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Neck/Cloaks/cloak-cape.rsi
+    sprite: SS220/Clothing/Neck/Cloaks/cloak-cape_white.rsi
 
 - type: entity
   parent: ClothingNeckCloakCapeWhite
@@ -16,33 +16,9 @@
   description: A comfortable cape, draped down your back and held around your neck with a brooch.
   components:
   - type: Sprite
-    layers:
-    - state: icon
-      map: [ "unfoldedLayer" ]
-      color: "#39393f"
-    - state: icon_other-shoulder
-      map: ["foldedLayer"]
-      color: "#39393f"
-      visible: false
+    sprite: SS220/Clothing/Neck/Cloaks/cloak-cape_black.rsi
   - type: Clothing
-    clothingVisuals:
-      neck:
-      - state: equipped-NECK
-        map: [ "unfoldedLayer" ]
-        color: "#39393f"
-      - state: other-shoulder-equipped-NECK
-        map: ["foldedLayer"]
-        color: "#39393f"
-        visible: false
-#    clothingVisuals:
-#      layer:
-#      - state: equipped-NECK
-#        map: [ "unfoldedLayer" ]
-#        color: "#39393f"
-#      - state: other-shoulder-equipped-NECK
-#        map: ["foldedLayer"]
-#        color: "#39393f"
-#        visible: false
+    sprite: SS220/Clothing/Neck/Cloaks/cloak-cape_black.rsi
 
 - type: entity
   parent: ClothingNeckCloakCapeWhite
@@ -51,21 +27,6 @@
   description: A comfortable cape, draped down your back and held around your neck with a brooch.
   components:
   - type: Sprite
-    layers:
-    - state: icon
-      map: [ "unfoldedLayer" ]
-      color: "#2854a2"
-    - state: icon_other-shoulder
-      map: ["foldedLayer"]
-      color: "#2854a2"
-      visible: false
+    sprite: SS220/Clothing/Neck/Cloaks/cloak-cape_blueshield.rsi
   - type: Clothing
-    clothingVisuals:
-      neck:
-      - state: equipped-NECK
-        map: [ "unfoldedLayer" ]
-        color: "#2854a2"
-      - state: other-shoulder-equipped-NECK
-        map: ["foldedLayer"]
-        color: "#2854a2"
-        visible: false
+    sprite: SS220/Clothing/Neck/Cloaks/cloak-cape_blueshield.rsi
