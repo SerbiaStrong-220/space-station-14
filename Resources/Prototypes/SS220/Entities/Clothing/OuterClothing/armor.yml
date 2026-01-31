@@ -42,9 +42,9 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Armor/blueshield_bulletproof.rsi
+    sprite: SS220/Clothing/OuterClothing/Armor/blueshield_assault.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Armor/blueshield_bulletproof.rsi
+    sprite: SS220/Clothing/OuterClothing/Armor/blueshield_assault.rsi
   - type: Armor
     modifiers:
       coefficients: # A peculiar mixture of bulletproof vests and riot armor
@@ -64,9 +64,9 @@
   - type: Item
     size: Normal
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Armor/blueshield_reflec.rsi
+    sprite: SS220/Clothing/OuterClothing/Armor/blueshield_reflect.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Armor/blueshield_reflec.rsi
+    sprite: SS220/Clothing/OuterClothing/Armor/blueshield_reflect.rsi
   - type: Armor
     modifiers:
       coefficients:
