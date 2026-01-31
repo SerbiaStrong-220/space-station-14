@@ -190,11 +190,15 @@ public sealed class ReflectSystem : EntitySystem
     // ss220 add reflect in back start
     private float GetReflectProbability(Entity<ReflectComponent> reflector, EntityUid source)
     {
-        if (reflector.Comp.ReflectProbBehind == null)
-            return reflector.Comp.ReflectProb;
+        var baseProb = HasComp<ProjectileComponent>(source)
+            ? reflector.Comp.ReflectProbProjectile
+            : reflector.Comp.ReflectProb;
 
-        var normalUser = Transform(reflector).ParentUid;
-        var reflectorPos = _transform.GetWorldRotation(normalUser).GetDir();
+        if (reflector.Comp.ReflectProbBehind == null)
+            return baseProb;
+
+        var user = Transform(reflector).ParentUid;
+        var reflectorPos = _transform.GetWorldRotation(user).GetDir();
         var sourcePos = _transform.GetWorldRotation(source).GetDir();
 
         var isBehind = sourcePos == reflectorPos;

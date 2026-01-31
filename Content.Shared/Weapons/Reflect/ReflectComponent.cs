@@ -44,12 +44,15 @@ public sealed partial class ReflectComponent : Component
     public float ReflectProb = 0.25f;
 
     // ss220 FixESword
+    [DataField, AutoNetworkedField]
+    public float ReflectProbProjectile = 0.25f;
+
     // ss220 ss220 add reflect in back start
     [DataField, AutoNetworkedField]
     public float? ReflectProbBehind = 0.1f;
-    // ss220 ss220 add reflect in back end
+    // ss220 ss220 add reflect in back start
 
-    [DataField("spreadProjectile"), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public Angle SpreadProjectile = Angle.FromDegrees(45);
     // ss220 FixESword end
 

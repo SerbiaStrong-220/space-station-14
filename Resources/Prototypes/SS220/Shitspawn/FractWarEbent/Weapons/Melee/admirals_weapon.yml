@@ -26,6 +26,7 @@
       - NonEnergy
       - Energy #SS220-FixReflects
     spread: 45
+    reflectProbProjectile: 0.70 #ss220lowTTKUpdate
     spreadProjectile: 180
 
 # Iron squad
