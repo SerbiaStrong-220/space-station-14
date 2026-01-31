@@ -5,6 +5,7 @@ using Content.Shared.Clothing;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
+using Content.Shared.EntityEffects.Effects.StatusEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
@@ -48,6 +49,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifier = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -104,18 +106,20 @@ public abstract partial class SharedAltMechSystem : EntitySystem
     /// <summary>
     /// Separates mech-robot and mech-clothing
     /// </summary>
-    private void OnStartup(EntityUid uid, AltMechComponent component, ComponentStartup args)
+    private void OnStartup(Entity<AltMechComponent> ent, ref ComponentStartup args)
     {
-        foreach (var part in component.ContainerDict.Keys)
-        {
-            component.ContainerDict[part] = _container.EnsureContainer<ContainerSlot>(uid, part);
-        }
-        component.BatterySlot = _container.EnsureContainer<ContainerSlot>(uid, component.BatterySlotId);
+        foreach (var part in ent.Comp.ContainerDict.Keys)
+            ent.Comp.ContainerDict[part] = _container.EnsureContainer<ContainerSlot>(ent.Owner, part);
+
+        ent.Comp.BatterySlot = _container.EnsureContainer<ContainerSlot>(ent.Owner, ent.Comp.BatterySlotId);
 
         //SS220-MechClothingInHandsFix
-        component.PilotSlot = _container.EnsureContainer<ContainerSlot>(uid, component.PilotSlotId);
+        ent.Comp.PilotSlot = _container.EnsureContainer<ContainerSlot>(ent.Owner, ent.Comp.PilotSlotId);
 
-        UpdateAppearance(uid, component);
+        if(TryComp<MovementSpeedModifierComponent>(ent.Owner, out var movementComp))
+            _movementSpeedModifier.ChangeBaseSpeed(ent.Owner, ent.Comp.OverallBaseMovementSpeed * 0.5f, ent.Comp.OverallBaseMovementSpeed, ent.Comp.OverallBaseAcceleration, movementComp);
+
+        UpdateAppearance(ent.Owner, ent.Comp);
     }
     //SS220-AddMechToClothing-end
     private void OnDestruction(EntityUid uid, AltMechComponent component, DestructionEventArgs args)
@@ -289,6 +293,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         RaiseLocalEvent(toInsert, ref ev);
         UpdateUserInterface(uid, component);
         Dirty(uid, component);
+        Dirty(toInsert, partComponent);
     }
 
     public void AddMass(AltMechComponent mechComp, FixedPoint2 Value)
@@ -611,9 +616,15 @@ public readonly record struct MechPartRemovedEvent(EntityUid Mech)
     public readonly EntityUid Mech = Mech;
 }
 
+[ByRefEvent]
+public readonly record struct MechSpeedModifiedEvent(EntityUid Mech)
+{
+    public readonly EntityUid Mech = Mech;
+}
+
 public enum PartSlot : byte
 {
-    Default = 0,
+    Core = 0,
     Head = 1,
     RightArm = 2,
     LeftArm = 3,

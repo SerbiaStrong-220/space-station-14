@@ -1,6 +1,9 @@
 using Content.Server.Popups;
 using Content.Shared.DoAfter;
+using Content.Shared.EntityEffects.Effects.StatusEffects;
 using Content.Shared.Interaction;
+using Content.Shared.Movement.Components;
+using Content.Shared.Movement.Systems;
 using Content.Shared.SS220.Mech.Components;
 using Content.Shared.SS220.Mech.Equipment.Components;
 using Content.Shared.SS220.Mech.Systems;
@@ -13,6 +16,7 @@ namespace Content.Server.SS220.Mech.Systems;
 /// </summary>
 public sealed class MechPartSystem : EntitySystem
 {
+    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifier = default!;
     [Dependency] private readonly AltMechSystem _mech = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
@@ -23,7 +27,6 @@ public sealed class MechPartSystem : EntitySystem
     {
         SubscribeLocalEvent<MechPartComponent, AfterInteractEvent>(OnUsed);
         SubscribeLocalEvent<MechPartComponent, InsertPartEvent>(OnInsertPart);
-        SubscribeLocalEvent<MechPartComponent, MechPartInsertedEvent>(OnPartInserted);
         SubscribeLocalEvent<MechChassisComponent, MechPartInsertedEvent>(OnChassisInserted);
         //SubscribeLocalEvent<MechPartComponent, InsertPartEvent>(OnOpticsInserted);
         //SubscribeLocalEvent<MechPartComponent, InsertPartEvent>(OnArmInserted);
@@ -66,11 +69,12 @@ public sealed class MechPartSystem : EntitySystem
             return;
 
         mechComp.OverallBaseMovementSpeed = ent.Comp.BaseMovementSpeed;
-    }
+        mechComp.OverallBaseAcceleration = ent.Comp.Acceleration;
 
-    private void OnPartInserted(Entity<MechPartComponent> ent, ref MechPartInsertedEvent args)
-    {
+        if (TryComp<MovementSpeedModifierComponent>(args.Mech, out var movementComp))
+            _movementSpeedModifier.ChangeBaseSpeed(args.Mech, mechComp.OverallBaseMovementSpeed * 0.5f, mechComp.OverallBaseMovementSpeed, mechComp.OverallBaseAcceleration);
 
+        Dirty(ent.Owner, ent.Comp);
     }
 
     private void OnInsertPart(EntityUid uid, MechPartComponent component, InsertPartEvent args)

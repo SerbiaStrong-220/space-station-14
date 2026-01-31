@@ -24,4 +24,10 @@ public sealed partial class MechChassisComponent : Component
     /// </summary>
     [DataField(required: true), AutoNetworkedField]
     public float BaseMovementSpeed = 1f;
+
+    /// <summary>
+    /// Acceleration this chassis provides
+    /// </summary>
+    [DataField(required: true), AutoNetworkedField]
+    public float Acceleration = 1f;
 }

@@ -107,19 +107,15 @@
   description: Versatile and lightly armored, the Ripley is useful for almost any heavy work scenario. The "APLU" stands for Autonomous Power Loading Unit.
   components:
   - type: Sprite
-    drawdepth: Mobs
-    noRot: true
-    sprite: Objects/Specific/Mech/mecha.rsi
-    layers:
-    - map: [ "enum.MechVisualLayers.Base" ]
-      state: ripleymkii
+    sprite: SS220/Objects/Specific/Robotics/Mechs/cores.rsi
+    state: basicloader
   - type: FootstepModifier
     footstepSoundCollection:
       path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
   - type: AltMech
-    baseState: ripleymkii
-    openState: ripley-open
-    brokenState: ripley-broken
+    baseState: basicloader
+    openState: basicloader
+    brokenState: basicloader
     pilotWhitelist:
       components:
         - HumanoidAppearance
@@ -130,15 +126,5 @@
       types:
         Blunt: 14 #intentionally shit so people realize that going into combat with the ripley is usually a bad idea.
   - type: MovementSpeedModifier
-    baseWalkSpeed: 2.25
-    baseSprintSpeed: 3.6
-
-- type: entity
-  id: MechRipleyBattery
-  parent: MechRipley
-  suffix: Battery
-  components:
-  - type: ContainerFill
-    containers:
-      mech-battery-slot:
-      - PowerCellHigh
+    baseWalkSpeed: 0
+    baseSprintSpeed: 0

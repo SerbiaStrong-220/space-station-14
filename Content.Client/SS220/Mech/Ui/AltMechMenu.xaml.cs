@@ -32,73 +32,73 @@ public sealed partial class AltMechMenu : FancyWindow
 
     public void UpdateMechStats()
     {
-        if (!_ent.TryGetComponent<AltMechComponent>(_mech, out var mechComp))
-            return;
+        //if (!_ent.TryGetComponent<AltMechComponent>(_mech, out var mechComp))
+        //    return;
 
-        var integrityPercent = mechComp.Integrity / mechComp.MaxIntegrity;
-        IntegrityDisplayBar.Value = integrityPercent.Float();
-        IntegrityDisplay.Text = Loc.GetString("mech-integrity-display", ("amount", (integrityPercent*100).Int()));
-
-        if (mechComp.MaxEnergy != 0f)
-        {
-            var energyPercent = mechComp.Energy / mechComp.MaxEnergy;
-            EnergyDisplayBar.Value = energyPercent.Float();
-            EnergyDisplay.Text = Loc.GetString("mech-energy-display", ("amount", (energyPercent*100).Int()));
-        }
-        else
-        {
-            EnergyDisplayBar.Value = 0f;
-            EnergyDisplay.Text = Loc.GetString("mech-energy-missing");
-        }
-        if (_ent.TryGetComponent<MechPartComponent>(_mech, out var partComp))
-        {
-            SlotDisplay.Text = Loc.GetString("mech-slot-display",
-                ("amount", partComp.MaxEquipmentAmount - partComp.EquipmentContainer.ContainedEntities.Count));
-        }
+        //var integrityPercent = mechComp.Integrity / mechComp.MaxIntegrity;
+        //IntegrityDisplayBar.Value = integrityPercent.Float();
+        //IntegrityDisplay.Text = Loc.GetString("mech-integrity-display", ("amount", (integrityPercent*100).Int()));
+        //
+        //if (mechComp.MaxEnergy != 0f)
+        //{
+        //    var energyPercent = mechComp.Energy / mechComp.MaxEnergy;
+        //    EnergyDisplayBar.Value = energyPercent.Float();
+        //    EnergyDisplay.Text = Loc.GetString("mech-energy-display", ("amount", (energyPercent*100).Int()));
+        //}
+        //else
+        //{
+        //    EnergyDisplayBar.Value = 0f;
+        //    EnergyDisplay.Text = Loc.GetString("mech-energy-missing");
+        //}
+        //if (_ent.TryGetComponent<MechPartComponent>(_mech, out var partComp))
+        //{
+        //    SlotDisplay.Text = Loc.GetString("mech-slot-display",
+        //        ("amount", partComp.MaxEquipmentAmount - partComp.EquipmentContainer.ContainedEntities.Count));
+        //}
 
     }
 
     public void UpdateEquipmentView()
     {
-        if (!_ent.TryGetComponent<AltMechComponent>(_mech, out var mechComp))
-            return;
+        //if (!_ent.TryGetComponent<AltMechComponent>(_mech, out var mechComp))
+        //    return;
 
-        EquipmentControlContainer.Children.Clear();
-        if (!_ent.TryGetComponent<MechPartComponent>(_mech, out var partCore))
-            return;
-        foreach (var ent in partCore.EquipmentContainer.ContainedEntities)
-        {
-            if (!_ent.TryGetComponent<MetaDataComponent>(ent, out var metaData))
-                continue;
+        //EquipmentControlContainer.Children.Clear();
+        //if (!_ent.TryGetComponent<MechPartComponent>(_mech, out var partCore))
+        //    return;
+        //foreach (var ent in partCore.EquipmentContainer.ContainedEntities)
+        //{
+        //    if (!_ent.TryGetComponent<MetaDataComponent>(ent, out var metaData))
+        //        continue;
 
-            var uicomp = _ent.GetComponentOrNull<UIFragmentComponent>(ent);
-            var ui = uicomp?.Ui?.GetUIFragmentRoot();
+        //    var uicomp = _ent.GetComponentOrNull<UIFragmentComponent>(ent);
+        //    var ui = uicomp?.Ui?.GetUIFragmentRoot();
 
-            var control = new AltMechEquipmentControl(ent, metaData.EntityName, ui);
+        //    var control = new AltMechEquipmentControl(ent, metaData.EntityName, ui);
 
-            control.OnRemoveButtonPressed += () => OnRemoveButtonPressed?.Invoke(ent);
+        //    control.OnRemoveButtonPressed += () => OnRemoveButtonPressed?.Invoke(ent);
 
-            EquipmentControlContainer.AddChild(control);
-        }
-        foreach (var ent in mechComp.ContainerDict.Values)
-        {
-            if (!_ent.TryGetComponent<MechPartComponent>(ent.ContainedEntity, out var part))
-                continue;
-            foreach (var equipment in part.EquipmentContainer.ContainedEntities)
-            {
-                if (!_ent.TryGetComponent<MetaDataComponent>(equipment, out var metaData))
-                    continue;
+        //    EquipmentControlContainer.AddChild(control);
+        //}
+        //foreach (var ent in mechComp.ContainerDict.Values)
+        //{
+        //    if (!_ent.TryGetComponent<MechPartComponent>(ent.ContainedEntity, out var part))
+        //        continue;
+        //    foreach (var equipment in part.EquipmentContainer.ContainedEntities)
+        //    {
+        //        if (!_ent.TryGetComponent<MetaDataComponent>(equipment, out var metaData))
+        //            continue;
 
-                var uicomp = _ent.GetComponentOrNull<UIFragmentComponent>(equipment);
-                var ui = uicomp?.Ui?.GetUIFragmentRoot();
+        //        var uicomp = _ent.GetComponentOrNull<UIFragmentComponent>(equipment);
+        //        var ui = uicomp?.Ui?.GetUIFragmentRoot();
 
-                var control = new AltMechEquipmentControl(equipment, metaData.EntityName, ui);
+        //        var control = new AltMechEquipmentControl(equipment, metaData.EntityName, ui);
 
-                control.OnRemoveButtonPressed += () => OnRemoveButtonPressed?.Invoke(equipment);
+        //        control.OnRemoveButtonPressed += () => OnRemoveButtonPressed?.Invoke(equipment);
 
-                EquipmentControlContainer.AddChild(control);
-            }
-        }
+        //        EquipmentControlContainer.AddChild(control);
+        //    }
+        //}
     }
 }
 

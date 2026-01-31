@@ -6,13 +6,14 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
+using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.Mech.Equipment.Components;
 
 /// <summary>
 /// A piece of equipment that can be installed into <see cref="MechComponent"/>
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true, true)]
 public sealed partial class MechPartComponent : Component
 {
     /// <summary>
@@ -30,7 +31,7 @@ public sealed partial class MechPartComponent : Component
     /// The slot this part can be attached to
     /// </summary>
     [DataField("slot")]
-    public PartSlot slot = PartSlot.Default;
+    public string slot = "core";
 
     /// <summary>
     /// A container for storing the equipment entities.
@@ -67,9 +68,9 @@ public sealed partial class MechPartComponent : Component
     public FixedPoint2 MaxIntegrity = 250;
 
     /// <summary>
-    /// How much does core part weight
+    /// How much does this part weight
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadWrite), DataField, AutoNetworkedField]
     public FixedPoint2 OwnMass = 0;
 
     /// <summary>
@@ -77,6 +78,10 @@ public sealed partial class MechPartComponent : Component
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public bool Broken = false;
+
+    [DataField]
+    [AutoNetworkedField]
+    public SpriteSpecifier? AttachedSprite;
 }
 
 /// <summary>

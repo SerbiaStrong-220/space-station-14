@@ -83,23 +83,30 @@ public sealed partial class AltMechComponent : Component
     [ViewVariables]
     public readonly string PilotSlotId = "mech-pilot-slot";
 
-    [AutoNetworkedField]
-    public float? OverallBaseMovementSpeed = 1f;
+    [DataField, AutoNetworkedField]
+    public float OverallBaseMovementSpeed = 0f;
 
-    [AutoNetworkedField]
-    public float? OverallMovementSpeedModifier = 1f;
+    [DataField, AutoNetworkedField]
+    public float OverallMovementSpeedModified = 0f;
+
+    [DataField, AutoNetworkedField]
+    public float OverallBaseAcceleration = 1f;
+
+    [DataField, AutoNetworkedField]
+    public float OverallModifiedAcceleration = 1f;
 
     [AutoNetworkedField]
     public bool MaintenanceMode = true; //if the mech is not in the maintenance mode we cannot interact with its parts or equipment
 
     [ViewVariables(VVAccess.ReadWrite)]
-    public Dictionary<PartSlot, ContainerSlot> ContainerDict = new Dictionary<PartSlot, ContainerSlot>()
+    public Dictionary<string, ContainerSlot> ContainerDict = new Dictionary<string, ContainerSlot>()
     {
-        [PartSlot.Head] = new ContainerSlot(),
-        [PartSlot.RightArm] = new ContainerSlot(),
-        [PartSlot.LeftArm] = new ContainerSlot(),
-        [PartSlot.Chassis] = new ContainerSlot(),
-        [PartSlot.Power] = new ContainerSlot()
+        ["core"] = new ContainerSlot(),
+        ["head"] = new ContainerSlot(),
+        ["right-arm"] = new ContainerSlot(),
+        ["left-arm"] = new ContainerSlot(),
+        ["chassis"] = new ContainerSlot(),
+        ["power"] = new ContainerSlot()
     };
 
 
