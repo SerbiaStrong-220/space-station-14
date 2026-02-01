@@ -40,7 +40,7 @@ public sealed class JetpackSystem : SharedJetpackSystem
                 continue;
 
             var usedEnoughAir =
-                MathHelper.CloseTo(usedAir.TotalMoles, comp.MoleUsage, comp.MoleUsage/100);
+                MathHelper.CloseTo(usedAir.TotalMoles, comp.MoleUsage * active.GasUsageModifier, comp.MoleUsage/100);  // SS220-add-gas-usage-modifier
 
             if (!usedEnoughAir)
             {

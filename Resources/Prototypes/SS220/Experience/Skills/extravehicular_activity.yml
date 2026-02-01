@@ -52,6 +52,7 @@
     weightlessModifier: 1.1
   removeComponents:
   - type: WeightlessDoAfterSkill
+  - type: JetPackUseSkill
 
 - type: skill
   id: ExtravehicularActivityProfessional

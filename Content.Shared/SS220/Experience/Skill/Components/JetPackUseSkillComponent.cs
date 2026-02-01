@@ -38,7 +38,4 @@ public sealed partial class JetPackUseSkillComponent : Component
 
     [DataField, AutoNetworkedField]
     public float WeightlessModifier = 1f;
-
-    [ViewVariables(VVAccess.ReadWrite)]
-    public bool JetPackActive;
 }

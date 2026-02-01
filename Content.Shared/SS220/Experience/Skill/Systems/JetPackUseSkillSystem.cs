@@ -56,12 +56,8 @@ public sealed class JetPackUseSkillSystem : SkillEntitySystem
     private void OnJetPackActivated(Entity<JetPackUseSkillComponent> entity, ref JetPackActivatedEvent args)
     {
         if (args.JetPack.Comp is null)
-        {
-            entity.Comp.JetPackActive = false;
             return;
-        }
 
-        entity.Comp.JetPackActive = true;
         args.JetPack.Comp.GasUsageModifier = entity.Comp.GasUsageModifier;
     }
 
@@ -82,8 +78,6 @@ public sealed class JetPackUseSkillSystem : SkillEntitySystem
         if (_actions.GetAction(actionUid) is not { } actionEntity) return;
 
         if (!args.HasDirectionalMovement) return;
-
-        Log.Debug($"Got MoveInput args tick {args.Entity.Comp.LastInputTick} current game tick {GameTiming.CurTick}!");
 
         entity.Comp.LastInputTick = args.Entity.Comp.LastInputTick.Value;
 
