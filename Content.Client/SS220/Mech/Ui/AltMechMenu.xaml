@@ -5,7 +5,7 @@
     <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
         <BoxContainer Margin="10 10 10 10" Orientation="Horizontal" HorizontalExpand="True">
             <BoxContainer Orientation="Vertical" HorizontalExpand="True">
-                <SpriteView Name="MechView"
+                <SpriteView Name="MechViewHead"
                     Margin="10 0 0 0"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
@@ -14,12 +14,12 @@
                     MaxSize="64 64"
                     Scale="2 2">
                 </SpriteView>
-                <ProgressBar Name="IntegrityDisplayBar"
+                <ProgressBar Name="IntegrityDisplayBarHead"
                              HorizontalExpand="True"
                              SetHeight="25"
                              MaxValue="1"
                              Value="0">
-                    <Label Name="IntegrityDisplay"
+                    <Label Name="IntegrityDisplayHead"
                            HorizontalAlignment="Left"
                            Margin="5 0 0 0"
                            VerticalAlignment="Center" />
@@ -28,8 +28,8 @@
         </BoxContainer>
         <BoxContainer Margin="10 10 10 10" Orientation="Horizontal" HorizontalExpand="True">
             <BoxContainer Orientation="Vertical" HorizontalExpand="True">
-                <SpriteView Name="MechView11"
-                    Margin="10 0 0 0"
+                <SpriteView Name="MechViewLeftArm"
+                    Margin="10 5 5 5"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     OverrideDirection="South"
@@ -37,20 +37,21 @@
                     MaxSize="64 64"
                     Scale="2 2">
                 </SpriteView>
-                <ProgressBar Name="IntegrityDisplayBar11"
+                <ProgressBar Name="IntegrityDisplayBarLeftArm"
                              HorizontalExpand="True"
                              SetHeight="25"
+                             Margin="10 4 4 4"
                              MaxValue="1"
                              Value="0">
-                    <Label Name="IntegrityDisplay11"
+                    <Label Name="IntegrityDisplayLeftArm"
                            HorizontalAlignment="Left"
                            Margin="5 0 0 0"
                            VerticalAlignment="Center" />
                 </ProgressBar>
             </BoxContainer>
             <BoxContainer Orientation="Vertical" HorizontalExpand="True">
-                <SpriteView Name="MechView12"
-                    Margin="10 0 0 0"
+                <SpriteView Name="MechViewCore"
+                    Margin="10 5 5 5"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     OverrideDirection="South"
@@ -58,20 +59,21 @@
                     MaxSize="64 64"
                     Scale="2 2">
                 </SpriteView>
-                <ProgressBar Name="IntegrityDisplayBar12"
+                <ProgressBar Name="IntegrityDisplayBarCore"
                              HorizontalExpand="True"
                              SetHeight="25"
+                             Margin="10 4 4 4"
                              MaxValue="1"
                              Value="0">
-                    <Label Name="IntegrityDisplay12"
+                    <Label Name="IntegrityDisplayCore"
                            HorizontalAlignment="Left"
                            Margin="5 0 0 0"
                            VerticalAlignment="Center" />
                 </ProgressBar>
             </BoxContainer>
             <BoxContainer Orientation="Vertical" HorizontalExpand="True">
-                <SpriteView Name="MechView13"
-                    Margin="10 0 0 0"
+                <SpriteView Name="MechViewRightArm"
+                    Margin="10 5 5 5"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     OverrideDirection="South"
@@ -79,12 +81,13 @@
                     MaxSize="64 64"
                     Scale="2 2">
                 </SpriteView>
-                <ProgressBar Name="IntegrityDisplayBar13"
+                <ProgressBar Name="IntegrityDisplayBarRightArm"
                              HorizontalExpand="True"
                              SetHeight="25"
+                             Margin="10 4 4 4"
                              MaxValue="1"
                              Value="0">
-                    <Label Name="IntegrityDisplay13"
+                    <Label Name="IntegrityDisplayRightArm"
                            HorizontalAlignment="Left"
                            Margin="5 0 0 0"
                            VerticalAlignment="Center" />
@@ -93,7 +96,7 @@
         </BoxContainer>
         <BoxContainer Margin="10 10 10 10" Orientation="Horizontal" HorizontalExpand="True">
             <BoxContainer Orientation="Vertical" HorizontalExpand="True">
-                <SpriteView Name="MechView2"
+                <SpriteView Name="MechViewChassis"
                     Margin="10 0 0 0"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
@@ -102,14 +105,47 @@
                     MaxSize="64 64"
                     Scale="2 2">
                 </SpriteView>
-                <ProgressBar Name="IntegrityDisplayBar2"
+                <ProgressBar Name="IntegrityDisplayBarChassis"
                              HorizontalExpand="True"
                              SetHeight="25"
                              MaxValue="1"
                              Value="0">
-                    <Label Name="IntegrityDisplay2"
+                    <Label Name="IntegrityDisplayChassis"
                            HorizontalAlignment="Left"
                            Margin="5 0 0 0"
+                           VerticalAlignment="Center" />
+                </ProgressBar>
+            </BoxContainer>
+            <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                <SpriteView Name="MechViewPower"
+                    Margin="10 0 0 0"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    OverrideDirection="South"
+                    SetSize="64 64"
+                    MaxSize="64 64"
+                    Scale="2 2">
+                </SpriteView>
+                <ProgressBar Name="IntegrityDisplayBarPower"
+                             HorizontalExpand="True"
+                             SetHeight="25"
+                             Margin="10 0 0 0"
+                             MaxValue="1"
+                             Value="0">
+                    <Label Name="IntegrityDisplayPower"
+                           HorizontalAlignment="Left"
+                           Margin="10 0 0 0"
+                           VerticalAlignment="Center" />
+                </ProgressBar>
+                <ProgressBar Name="PowerSupplyRemainingPower"
+                             HorizontalExpand="True"
+                             SetHeight="25"
+                             Margin="10 0 0 0"
+                             MaxValue="1"
+                             Value="0">
+                    <Label Name="PowerSupplyRemainingPowerLabel"
+                           HorizontalAlignment="Left"
+                           Margin="10 0 0 0"
                            VerticalAlignment="Center" />
                 </ProgressBar>
             </BoxContainer>

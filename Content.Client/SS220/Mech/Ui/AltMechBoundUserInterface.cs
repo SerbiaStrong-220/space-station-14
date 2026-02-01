@@ -1,9 +1,10 @@
+using Content.Client.Mech;
 using Content.Client.UserInterface.Fragments;
 using Content.Shared.Mech;
 using Content.Shared.SS220.Mech.Components;
+using Content.Shared.SS220.Mech.Equipment.Components;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
-using Content.Shared.SS220.Mech.Equipment.Components;
 using Robust.Client.UserInterface;
 
 namespace Content.Client.SS220.Mech.Ui;
@@ -11,8 +12,20 @@ namespace Content.Client.SS220.Mech.Ui;
 [UsedImplicitly]
 public sealed class AltMechBoundUserInterface : BoundUserInterface
 {
+    [Dependency] private readonly IEntityManager _ent = default!;
+
     [ViewVariables]
     private AltMechMenu? _menu;
+
+    public readonly Dictionary<string, MechPartVisualLayers> partsVisuals = new Dictionary<string, MechPartVisualLayers>()
+    {
+        ["core"] = MechPartVisualLayers.Core,
+        ["head"] = MechPartVisualLayers.Head,
+        ["right-arm"] = MechPartVisualLayers.RightArm,
+        ["left-arm"] = MechPartVisualLayers.LeftArm,
+        ["chassis"] = MechPartVisualLayers.Chassis,
+        ["power"] = MechPartVisualLayers.Power
+    };
 
     public AltMechBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
@@ -23,12 +36,25 @@ public sealed class AltMechBoundUserInterface : BoundUserInterface
         base.Open();
 
         _menu = this.CreateWindowCenteredLeft<AltMechMenu>();
-        _menu.SetEntity(Owner);
+
+        if (!_ent.TryGetComponent<AltMechComponent>(Owner, out var mechComp))
+            return;
+
+        _menu.SetEntity(Owner, MechPartVisualLayers.Core);
+
+        foreach (var part in mechComp.ContainerDict.Values)
+        {
+            if (part.ContainedEntity == null || !_ent.TryGetComponent<MechPartComponent>(part.ContainedEntity, out var partComp))
+                continue;
+
+            _menu.SetEntity((EntityUid)part.ContainedEntity, partsVisuals[partComp.slot]);
+        }
 
         _menu.OnRemoveButtonPressed += uid =>
         {
             SendMessage(new MechEquipmentRemoveMessage(EntMan.GetNetEntity(uid)));
         };
+        _menu?.UpdateMechStats();
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
@@ -37,6 +63,7 @@ public sealed class AltMechBoundUserInterface : BoundUserInterface
 
         if (state is not MechBoundUiState msg)
             return;
+
         UpdateEquipmentControls(msg);
         _menu?.UpdateMechStats();
         _menu?.UpdateEquipmentView();
