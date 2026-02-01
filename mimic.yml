@@ -1,0 +1,101 @@
+- type: entity
+  name: mimic
+  id: MobMimic
+  parent: [ SimpleMobBase, MobCombat ]
+  suffix: GhostRole
+  description: Surprise. # When this gets a proper write this should use the object's actual description >:)
+  components:
+  - type: Tag
+    tags:
+    - FootstepSound
+  - type: InputMover
+  - type: MobMover
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: Structures/Machines/VendingMachines/cola.rsi
+    state: normal
+  - type: Icon
+    sprite: Structures/Machines/VendingMachines/cola.rsi
+    state: normal
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+           !type:PhysShapeAabb
+          bounds: "-0.35,-0.35,0.35,0.35"
+        density: 1000
+        mask:
+        - MobMask
+        layer:
+        - MachineLayer
+  - type: AnimationPlayer
+  - type: MeleeWeapon
+    angle: 0
+    animation: WeaponArcFist
+    damage:
+      types:
+        Blunt: 20
+
+  - type: MobThresholds
+    thresholds:
+     0: Alive
+     180: Critical
+     270: Dead      
+
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 3
+    baseSprintSpeed : 5.5
+
+  - type: Butcherable
+    spawned:
+
+    - id: DrinkChangelingStingCan
+      amount: 2
+
+    - id: PresentRandom
+      minAmount: 1
+      maxAmount: 4
+      prob: 0.2
+
+    - id: ClothingEyesHudFriedOnion
+      amount: 1
+
+    - id: PresentRandomInsane
+      minAmount: 1
+      maxAmount: 4
+      prob: 0.0999
+
+    - id: ClothingUniformJumpskirtYellowOldDress
+      amount: 1
+      prob: 0.3
+
+
+  - type: HTN
+
+  - type: GhostRole
+    allowMovement: true
+    makeSentient: true
+    name: ghost-role-mimic-name
+    description: ghost-role-information-mimic-description
+    rules: ghost-role-information-freeagent-rules
+    job: AggressiveAnimals
+    mindRoles:
+    -  MindRoleGhostRoleFreeAgent
+    raffle:
+     settings: default
+
+  - type: GhostTakeoverAvailable
+
+  - type: Language
+
+    availableLanguages:
+    - id: Galactic
+      canSpeak: true
+  
+ 
+  
+
+
