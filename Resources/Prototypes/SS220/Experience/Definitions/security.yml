@@ -1,0 +1,152 @@
+- type: experienceDefinition
+  id: DetectiveRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    ExtravehicularActivity:
+      level: 1
+    CombatTraining:
+      level: 2
+    Construction:
+      level: 1
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 2
+  knowledges:
+  - SecurityKnowledge
+  addSublevelPoints: 10
+
+- type: experienceDefinition
+  id: HeadOfSecurityRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    ExtravehicularActivity:
+      level: 3
+    CombatTraining:
+      level: 3
+    Construction:
+      level: 1
+    Medicine:
+      level: 2
+    PhysicalTraining:
+      level: 3
+  knowledges:
+  - InformedPersonalKnowledge
+  - SecurityKnowledge
+  addSublevelPoints: 5
+
+- type: experienceDefinition
+  id: SecuritySeniorRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    ExtravehicularActivity:
+      level: 2
+    CombatTraining:
+      level: 3
+    Construction:
+      level: 1
+    Medicine:
+      level: 2
+    PhysicalTraining:
+      level: 2
+  knowledges:
+  - SecurityKnowledge
+  addSublevelPoints: 5
+
+- type: experienceDefinition
+  id: SecurityCadetRoleExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    ExtravehicularActivity:
+      level: 1
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 1
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 1
+  knowledges:
+  - SecurityKnowledge
+  addSublevelPoints: 15
+
+- type: experienceDefinition
+  id: SecurityOfficerRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    ExtravehicularActivity:
+      level: 2
+    CombatTraining:
+      level: 2
+    Construction:
+      level: 1
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 2
+  knowledges:
+  - SecurityKnowledge
+  addSublevelPoints: 10
+
+- type: experienceDefinition
+  id: SecurityPilotRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    ExtravehicularActivity:
+      level: 3
+    CombatTraining:
+      level: 2
+    Construction:
+      level: 1
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 2
+  knowledges:
+  - SecurityKnowledge
+  addSublevelPoints: 10
+
+- type: experienceDefinition
+  id: WardenRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    ExtravehicularActivity:
+      level: 3
+    CombatTraining:
+      level: 3
+    Construction:
+      level: 1
+    Medicine:
+      level: 2
+    PhysicalTraining:
+      level: 2
+  knowledges:
+  - SecurityKnowledge
+  addSublevelPoints: 5
+
+- type: experienceDefinition
+  id: SecurityPetRoleExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    ExtravehicularActivity:
+      level: 1
+    CombatTraining:
+      level: 2
+    Construction:
+      level: 1
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 2
+  knowledges:
+  - SecurityKnowledge
+  addSublevelPoints: 0

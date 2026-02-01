@@ -72,24 +72,18 @@
   - type: Reflect
   - type: IgnitionSource
     temperature: 700
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-EnergySword-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: corvax-hidden-desc-EnergySword-security
-      jobRequired:
-        - HeadOfSecurity
-        - Detective
-        - SecurityCadet
-        - SecurityOfficer
-        - Warden
-    - label: corvax-hidden-desc-EnergySword-cargo
-      jobRequired:
-        - SalvageSpecialist
-# Corvax-HiddenDesc-End
+      NinjaKnowledge: [ corvax-hidden-desc-EnergySword-syndicate ]
+      SecurityKnowledge: [ corvax-hidden-desc-EnergySword-security ]
+      CargoKnowledge: [ corvax-hidden-desc-EnergySword-cargo ]
+    nameEntries:
+    - [NinjaKnowledge, null]
+    - [SecurityKnowledge, null]
+    - [CargoKnowledge, null]
+    hiddenName: ent-EnergySword
+# SS220-hidden-desc-end
 
 - type: entity
   name: energy sword
@@ -272,20 +266,16 @@
   - type: Tag
     tags:
     - Write
-# Corvax-HiddenDesc-Start
+  # SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-EnergyDagger-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: corvax-hidden-desc-EnergyDagger-research
-      jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
-# Corvax-HiddenDesc-End
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-EnergyDagger-syndicate ]
+      ScienceKnowledge: [ corvax-hidden-desc-EnergyDagger-research ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ScienceKnowledge, null]
+    hiddenName: ent-EnergyDagger
+  # SS220-hidden-desc-end
 
 - type: entity
   parent: [BaseItem]
@@ -330,21 +320,16 @@
         map: [ "blade" ]
   - type: Item
     sprite: Objects/Weapons/Melee/e_cutlass.rsi
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
-    #- label: corvax-hidden-desc-EnergyCutlass-pirate #У нас нету в игре PirateRole, грусть
-    - label: corvax-hidden-desc-EnergyCutlass-security
-      jobRequired:
-        - HeadOfSecurity
-        - Detective
-        - SecurityCadet
-        - SecurityOfficer
-        - Warden
-    - label: corvax-hidden-desc-EnergyCutlass-cargo
-      jobRequired:
-        - SalvageSpecialist
-# Corvax-HiddenDesc-End
+      SecurityKnowledge: [ corvax-hidden-desc-EnergyCutlass-security ]
+      CargoKnowledge: [ corvax-hidden-desc-EnergyCutlass-cargo ]
+    nameEntries:
+    - [SecurityKnowledge, null]
+    - [CargoKnowledge, null]
+    hiddenName: ent-EnergyCutlass
+# SS220-hidden-desc-end
 
 - type: entity
   name: double-bladed energy sword

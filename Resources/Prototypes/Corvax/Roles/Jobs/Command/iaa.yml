@@ -14,6 +14,7 @@
       species:
       - Felinid #SS220-jobbans end
   startingGear: IAAGear
+  experienceDefinition: IAARoleExperience # SS220-experience
   icon: "JobIconIAA"
   supervisors: job-supervisors-magistrate #SS220-Law Department
   canBeAntag: false

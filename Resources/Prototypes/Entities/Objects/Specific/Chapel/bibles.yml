@@ -106,18 +106,16 @@
     sprite: Objects/Specific/Chapel/necronomicon.rsi
   - type: Item
     sprite: Objects/Specific/Chapel/necronomicon.rsi
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-BibleNecronomicon-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: corvax-hidden-desc-BibleNecronomicon-service
-      jobRequired:
-        - Chaplain
-        - Librarian
-# Corvax-HiddenDesc-End
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-BibleNecronomicon-syndicate ]
+      SupernaturalBookKnowledge: [ corvax-hidden-desc-BibleNecronomicon-service ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [SupernaturalBookKnowledge, null]
+    hiddenName: ent-Bible
+# SS220-hidden-desc-end
 
 - type: entity
   parent: BaseAction

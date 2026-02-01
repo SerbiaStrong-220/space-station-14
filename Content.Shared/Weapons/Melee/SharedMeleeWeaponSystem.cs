@@ -82,6 +82,8 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
     /// </summary>
     public const float GracePeriod = 0.05f;
 
+    private const float MaxDisarmPercentStaminaDamage = 0.3f; // SS220-add-disarm-stamina-damage-cap
+
     public override void Initialize()
     {
         base.Initialize();
@@ -853,7 +855,14 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             chance += malus.Malus;
         }
 
-        return Math.Clamp(chance, 0f, 1f);
+        // SS220-add-skill-to-disarm-begin
+        var disarmerEv = new GetDisarmChanceDisarmerMultiplierEvent(disarmer, disarmed, inTargetHand, 1f);
+        RaiseLocalEvent(disarmer, ref disarmerEv);
+        var disarmedEv = new GetDisarmChanceDisarmedMultiplierEvent(disarmer, disarmed, inTargetHand, 1f);
+        RaiseLocalEvent(disarmed, ref disarmedEv);
+        // SS220-add-skill-to-disarm-end
+
+        return Math.Clamp(1f - (disarmerEv.Multiplier * disarmedEv.Multiplier * (1f - chance)), 0f, 1f); // SS220-add-skill-to-disarm
     }
 
     private bool DoDisarm(EntityUid user, DisarmAttackEvent ev, EntityUid meleeUid, MeleeWeaponComponent component, ICommonSession? session)
@@ -932,6 +941,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         }
 
         var eventArgs = new DisarmedEvent(target.Value, user, 1 - chance);
+        eventArgs.MaxPercentStaminaDamage = MaxDisarmPercentStaminaDamage; // SS220-add-disarm-stamina-damage-cap
         RaiseLocalEvent(target.Value, ref eventArgs);
 
         // Nothing handled it so abort.

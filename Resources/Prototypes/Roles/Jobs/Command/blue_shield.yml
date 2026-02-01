@@ -17,6 +17,7 @@
       species:
       - Felinid
   startingGear: BlueShieldGear
+  experienceDefinition: BlueShieldRoleExperience # SS220-experience
   icon: "JobIconBlueShield"
   supervisors: job-supervisors-centcom
   canBeAntag: false
@@ -46,9 +47,6 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
-  - !type:AddComponentSpecial
-    components:
-    - type: DefibrillatorSkill
 
 - type: startingGear
   id: BlueShieldGear

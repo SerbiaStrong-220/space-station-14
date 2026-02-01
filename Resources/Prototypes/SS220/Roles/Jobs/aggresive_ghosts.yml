@@ -2,6 +2,7 @@
   id: DarkReaper # yes even it HAS WORK BUT NOT YOU
   name: job-name-dark-reaper
   description: job-description-dark-reaper
+  experienceDefinition: NoExperience
   setPreference: false
   playTimeTracker: AntagDarkReaper
   requirements:
@@ -12,11 +13,9 @@
   id: Revenant
   name: job-name-revenant
   description: job-description-revenant
+  experienceDefinition: NoExperience
   setPreference: false
   playTimeTracker: AntagRevenant
   requirements:
   - !type:OverallPlaytimeRequirement
     time: 20h
-
-
-

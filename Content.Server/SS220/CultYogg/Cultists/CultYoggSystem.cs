@@ -282,6 +282,9 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         if (purifyedComp.TotalAmountOfHolyWater >= purifyedComp.AmountToPurify)
             purifyedComp.PurifyTime ??= _timing.CurTime + purifyedComp.BeforePurifyingTime;
 
+        var liberationEvent = new LiberationFromCultEvent();
+        RaiseLocalEvent(ent, ref liberationEvent);
+
         purifyedComp.DecayTime = _timing.CurTime + purifyedComp.BeforeDecayTime; //setting timer, when purifying will be removed
         Dirty(ent, ent.Comp);
     }

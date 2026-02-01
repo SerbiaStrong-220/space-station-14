@@ -1,0 +1,95 @@
+- type: experienceDefinition
+  id: AtmosphericTechnicianRoleExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    ExtravehicularActivity:
+      level: 3
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 2
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 2
+  knowledges:
+  - EngineerKnowledge
+  addSublevelPoints: 10
+
+- type: experienceDefinition
+  id: ChiefEngineerRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    ExtravehicularActivity:
+      level: 3
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 3
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 2
+  knowledges:
+  - InformedPersonalKnowledge
+  - EngineerKnowledge
+  addSublevelPoints: 5
+
+- type: experienceDefinition
+  id: SeniorEngineerRoleExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    ExtravehicularActivity:
+      level: 3
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 2
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 2
+  knowledges:
+  - EngineerKnowledge
+  addSublevelPoints: 10
+
+- type: experienceDefinition
+  id: StationEngineerRoleExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    ExtravehicularActivity:
+      level: 2
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 2
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 2
+  knowledges:
+  - EngineerKnowledge
+  addSublevelPoints: 10
+
+- type: experienceDefinition
+  id: TechnicalAssistantRoleExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    ExtravehicularActivity:
+      level: 1
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 1
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 1
+  knowledges:
+  - EngineerKnowledge
+  addSublevelPoints: 15

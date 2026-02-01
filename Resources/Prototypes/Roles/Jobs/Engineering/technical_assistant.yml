@@ -7,6 +7,7 @@
     - !type:OverallPlaytimeRequirement
       time: 1h # SS220-RoleTime 2
   startingGear: TechnicalAssistantGear
+  experienceDefinition: TechnicalAssistantRoleExperience # SS220-experience
   icon: "JobIconTechnicalAssistant"
   supervisors: job-supervisors-engineering
   canBeAntag: true

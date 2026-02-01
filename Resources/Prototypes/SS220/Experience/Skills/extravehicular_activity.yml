@@ -1,0 +1,79 @@
+- type: skill
+  id: ExtravehicularActivityInitial
+  levelInfo:
+    maximumSublevel: 5
+    levelUpPopup: extravehicular-activity-initial-level-up-popup
+    sublevelUpPopup: extravehicular-activity-initial-sublevel-up-popup
+  levelDescription:
+    skillName: extravehicular-activity-initial-name
+    skillDescription: extravehicular-activity-initial-desc
+  components:
+  - type: JetPackUseSkill
+    failChance: 0.6
+  - type: WeightlessChangingReadySkill
+    hardsuitFallChance:  0.7
+    withoutHardsuitFallChance: 1
+  - type: WeightlessDoAfterSkill
+    durationScale: 1.5
+
+- type: skill
+  id: ExtravehicularActivityBase
+  levelInfo:
+    maximumSublevel: 5
+    levelUpPopup: extravehicular-activity-base-level-up-popup
+    sublevelUpPopup: extravehicular-activity-base-sublevel-up-popup
+  levelDescription:
+    skillName: extravehicular-activity-base-name
+    skillDescription: extravehicular-activity-base-desc
+  components:
+  - type: JetPackUseSkill
+    failChance: 0.3
+  - type: WeightlessChangingReadySkill
+    hardsuitFallChance:  0.3
+    withoutHardsuitFallChance: 0.5
+  - type: WeightlessDoAfterSkill
+    durationScale: 1.25
+
+- type: skill
+  id: ExtravehicularActivityTrained
+  levelInfo:
+    maximumSublevel: 5
+    levelUpPopup: extravehicular-activity-trained-level-up-popup
+    sublevelUpPopup: extravehicular-activity-trained-sublevel-up-popup
+  levelDescription:
+    skillName: extravehicular-activity-trained-name
+    skillDescription: extravehicular-activity-trained-desc
+  components:
+  - type: WeightlessChangingReadySkill
+    hardsuitFallChance:  0.1
+    withoutHardsuitFallChance: 0.2
+    weightlessAcceleration: 1.2
+    weightlessFriction: 1.1
+    weightlessModifier: 1.1
+  removeComponents:
+  - type: WeightlessDoAfterSkill
+  - type: JetPackUseSkill
+
+- type: skill
+  id: ExtravehicularActivityProfessional
+  levelInfo:
+    maximumSublevel: 1
+    levelUpPopup: extravehicular-activity-professional-level-up-popup
+    sublevelUpPopup: extravehicular-activity-professional-sublevel-up-popup
+  levelDescription:
+    skillName: extravehicular-activity-professional-name
+    skillDescription: extravehicular-activity-professional-desc
+  components:
+  - type: JetPackUseSkill
+    failChance: 0
+    gasUsageModifier: 0.75
+  - type: WeightlessChangingReadySkill
+    hardsuitFallChance:  0
+    withoutHardsuitFallChance: 0.1
+    weightlessAcceleration: 1.4
+    weightlessFriction: 1.2
+    weightlessModifier: 1.2
+  - type: WeightlessDoAfterSkill
+    durationScale: 0.9
+  - type: EvaHelmetDoAfterSkill
+    durationScale: 0

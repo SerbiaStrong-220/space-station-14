@@ -10,6 +10,7 @@
     - !type:OverallPlaytimeRequirement
        time: 72000 # SS220-RoleTime 2
   startingGear: ClownGear
+  experienceDefinition: ClownRoleExperience # SS220-experience
   icon: "JobIconClown"
   supervisors: job-supervisors-hop
   access:
