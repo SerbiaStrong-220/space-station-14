@@ -64,7 +64,8 @@
         sound:
           collection: MetalGlassBreak
       - !type:DoActsBehavior
-        acts: ["Destruction"]
+        acts: 
+        - Destruction
   - type: CultYoggBuilding
     eraseTime: 5
     spawnOnErase:
