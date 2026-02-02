@@ -10,6 +10,7 @@ using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
+using Content.Shared.SS220.Mech.Components;
 
 namespace Content.Server.Projectiles;
 
@@ -37,6 +38,13 @@ public sealed class ProjectileSystem : SharedProjectileSystem
             return;
 
         var target = args.OtherEntity;
+
+        if(TryComp<AltMechComponent>(target,out var targetMechComp))
+        {
+            if (targetMechComp.PilotSlot.ContainedEntity == (EntityUid)component.Shooter!.Value)
+                return;
+        }
+
         // it's here so this check is only done once before possible hit
         var attemptEv = new ProjectileReflectAttemptEvent(uid, component, false);
         RaiseLocalEvent(target, ref attemptEv);

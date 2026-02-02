@@ -1,5 +1,6 @@
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Systems;
+using Content.Server.Hands.Systems;
 using Content.Server.Mech.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Shared.ActionBlocker;
@@ -24,6 +25,7 @@ using Content.Shared.Tools.Systems;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Content.Shared.Wires;
+using NetCord.Gateway;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
@@ -46,6 +48,8 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly SharedToolSystem _toolSystem = default!;
+    [Dependency] private readonly HandsSystem _hands = default!;
+    [Dependency] private readonly MechPartSystem _parts = default!;
 
     private static readonly ProtoId<ToolQualityPrototype> PryingQuality = "Prying";
 
@@ -61,7 +65,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         SubscribeLocalEvent<AltMechComponent, MechOpenUiEvent>(OnOpenUi);
         SubscribeLocalEvent<AltMechComponent, RemoveBatteryEvent>(OnRemoveBattery);
         SubscribeLocalEvent<AltMechComponent, MechEntryEvent>(OnMechEntry);
-        SubscribeLocalEvent<AltMechComponent, MechExitEvent>(OnMechExit);
+        SubscribeLocalEvent<AltMechComponent, OnMechExitEvent>(OnMechExit);
 
         SubscribeLocalEvent<AltMechComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<MechPartComponent, MechEquipmentRemoveMessage>(OnRemoveEquipmentMessage);
@@ -267,19 +271,39 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
         TryInsert(uid, args.Args.User, component);
 
+        var LeftArmEquipment = component.ContainerDict["left-arm"].ContainedEntity;
+        if (LeftArmEquipment != null)
+        {
+            _parts.ProvideItems(uid, (EntityUid)LeftArmEquipment);
+        }
+
+        var RightArmEquipment = component.ContainerDict["right-arm"].ContainedEntity;
+        if (RightArmEquipment != null)
+        {
+            _parts.ProvideItems(uid, (EntityUid)RightArmEquipment);
+        }
+
         _actionBlocker.UpdateCanMove(uid);
 
         args.Handled = true;
     }
 
-    private void OnMechExit(EntityUid uid, AltMechComponent component, MechExitEvent args)
+    private void OnMechExit(Entity<AltMechComponent> ent, ref OnMechExitEvent args)
     {
-        if (args.Cancelled || args.Handled)
-            return;
 
-        TryEject(uid, component);
+        var LeftArmEquipment = ent.Comp.ContainerDict["left-arm"].ContainedEntity;
+        if (LeftArmEquipment != null)
+        {
+            _parts.RemoveProvidedItems(ent.Owner, (EntityUid)LeftArmEquipment);
+        }
 
-        args.Handled = true;
+        var RightArmEquipment = ent.Comp.ContainerDict["right-arm"].ContainedEntity;
+        if (RightArmEquipment != null)
+        {
+            _parts.RemoveProvidedItems(ent.Owner, (EntityUid)RightArmEquipment);
+        }
+
+        TryEject(ent.Owner, ent.Comp);
     }
 
     private void OnDamageChanged(EntityUid uid, AltMechComponent component, DamageChangedEvent args)

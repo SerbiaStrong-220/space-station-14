@@ -5,6 +5,7 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Content.Shared.Hands.Components;
 
 namespace Content.Shared.SS220.Mech.Components;
 
@@ -109,6 +110,9 @@ public sealed partial class AltMechComponent : Component
         ["power"] = new ContainerSlot()
     };
 
+    //List of the user's hands that must be given back when leaving the mech 
+    [DataField]
+    public Dictionary<string, Hand> Hands = new();
 
     //[ViewVariables(VVAccess.ReadWrite)]
     //public ContainerSlot HeadSlot = default!;

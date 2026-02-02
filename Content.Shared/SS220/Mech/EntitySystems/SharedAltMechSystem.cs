@@ -7,6 +7,8 @@ using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.EntityEffects.Effects.StatusEffects;
 using Content.Shared.FixedPoint;
+using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Interaction.Events;
@@ -22,6 +24,7 @@ using Content.Shared.SS220.Mech.Components;
 using Content.Shared.SS220.Mech.Equipment.Components;
 using Content.Shared.SS220.MechClothing; 
 using Content.Shared.SS220.MechRobot;
+using Content.Shared.Standing;
 using Content.Shared.Storage.Components;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Whitelist;
@@ -30,6 +33,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using System.Linq;
+using System.Reflection.Metadata;
 
 namespace Content.Shared.SS220.Mech.Systems;
 
@@ -50,6 +54,8 @@ public abstract partial class SharedAltMechSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifier = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
+
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -83,7 +89,12 @@ public abstract partial class SharedAltMechSystem : EntitySystem
     {
         if (args.Handled)
             return;
+
         args.Handled = true;
+
+        var ev = new OnMechExitEvent();
+        RaiseLocalEvent(uid, ref ev);
+
         TryEject(uid, component);
     }
 
@@ -157,8 +168,34 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         rider.Mech = mech;
         Dirty(pilot, rider);
 
+        //var ev = new DropHandItemsEvent();
+        //RaiseLocalEvent(pilot, ref ev);
+
         if (_net.IsClient)
             return;
+
+        var ev = new DropHandItemsEvent();
+        RaiseLocalEvent(pilot, ref ev);
+
+        if (!TryComp<HandsComponent>(pilot, out var handsComp))
+            return;
+
+        foreach (var hand in handsComp.Hands)
+        {
+            if (hand.Value.Location == HandLocation.Right)
+            {
+                _hands.TrySetActiveHand((pilot, handsComp), hand.Key);
+                break;
+            }
+        }
+
+        foreach (var hand in handsComp.Hands)
+            component.Hands.Add(hand.Key,hand.Value);
+
+        foreach (var hand in handsComp.Hands )
+        {
+            _hands.RemoveHands((pilot, handsComp));
+        }
 
         _actions.AddAction(pilot, ref component.MechCycleActionEntity, component.MechCycleAction, mech);
         _actions.AddAction(pilot, ref component.MechUiActionEntity, component.MechUiAction, mech);
@@ -173,6 +210,22 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         RemComp<InteractionRelayComponent>(pilot);
 
         _actions.RemoveProvidedActions(pilot, mech);
+
+        if (_net.IsClient)
+            return;
+
+        if (!TryComp<AltMechComponent>(mech, out var mechComp))
+            return;
+
+        if (!TryComp<HandsComponent>(pilot, out var handsComp))
+            return;
+
+        foreach (var hand in mechComp.Hands)
+        {
+            _hands.AddHand((pilot,handsComp),hand.Key,hand.Value);
+        }
+
+        mechComp.Hands.Clear();
     }
 
     /// <summary>
@@ -522,8 +575,10 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         SetupUser(uid, toInsert.Value);
         _container.Insert(toInsert.Value, component.PilotSlot);
+
         if (TryComp<ArmorBlockComponent>(uid, out var blockComp))
             blockComp.Owner = toInsert;
+
         UpdateAppearance(uid, component);
         return true;
     }
@@ -637,6 +692,9 @@ public readonly record struct MechSpeedModifiedEvent(EntityUid Mech)
 {
     public readonly EntityUid Mech = Mech;
 }
+
+[ByRefEvent]
+public readonly record struct OnMechExitEvent();
 
 public enum PartSlot : byte
 {

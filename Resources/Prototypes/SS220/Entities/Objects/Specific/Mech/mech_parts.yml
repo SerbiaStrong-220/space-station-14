@@ -23,6 +23,40 @@
     baseMovementSpeed: 3.6
 
 - type: entity
+  id: BaseMechRightArm
+  parent: MechPartBase
+  abstract: true
+  components:
+  - type: MechPart
+    slot: right-arm
+    ownMass: 200
+  - type: MechArm
+
+- type: entity
+  id: TestRightArm
+  parent: BaseMechRightArm
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Mech/mecha_equipment.rsi
+    state: mecha_clamp
+  - type: MechArm
+    hands:
+    - item: WeaponProtoKineticAccelerator
+    - item: JetpackBorgModule
+    - item: HandHeldMassScannerBorg
+    - item: HandheldGPSBasic
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-big
+      right:
+      - state: inhand-right-big
+  - type: MechPart
+    attachedSprite:
+      sprite: SS220/Objects/Specific/Robotics/Mechs/righthand.rsi
+      state: test
+
+- type: entity
   id: PowerloaderPart
   parent: BaseMechChassis
   name: Powerloader hydraulic chassis
