@@ -20,7 +20,8 @@
         - MachineMask
         layer:
         - BulletImpassable
-        - InteractImpassable
+        - MidImpassable
+        - LowImpassable
   - type: Appearance
   - type: SolutionContainerManager
     solutions:
@@ -48,6 +49,23 @@
   - type: CultPond
     solutionName: drink
     refillCooldown: 15
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+      - !type:DoActsBehavior
+        acts: 
+        - Destruction
   - type: CultYoggBuilding
     eraseTime: 5
     spawnOnErase:
