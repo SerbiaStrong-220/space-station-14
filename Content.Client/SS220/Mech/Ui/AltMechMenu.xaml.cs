@@ -15,6 +15,8 @@ namespace Content.Client.SS220.Mech.Ui;
 [GenerateTypedNameReferences]
 public sealed partial class AltMechMenu : FancyWindow
 {
+    public event Action<string>? OnRemovePartButtonPressed;
+
     [Dependency] private readonly IEntityManager _ent = default!;
 
     private EntityUid _mech;
@@ -46,6 +48,18 @@ public sealed partial class AltMechMenu : FancyWindow
         spriteTextDict[IntegrityDisplayLeftArm] = "left-arm";
         spriteTextDict[IntegrityDisplayChassis] = "chassis";
         spriteTextDict[IntegrityDisplayPower] = "power";
+
+        buttonDict[RemoveButtonHead] = "head";
+        buttonDict[RemoveButtonRightArm] = "right-arm";
+        buttonDict[RemoveButtonLeftArm] = "left-arm";
+        buttonDict[RemoveButtonChassis] = "chassis";
+        buttonDict[RemoveButtonPower] = "power";
+
+        foreach (var key in buttonDict.Keys)
+        {
+            key.TexturePath = "/Textures/Interface/Nano/cross.svg.png";
+            key.OnPressed += _ => OnRemovePartButtonPressed?.Invoke(buttonDict[key]);
+        }
     }
 
     public readonly Dictionary<MechPartVisualLayers, SpriteView?> spriteViewDict = new Dictionary<MechPartVisualLayers, SpriteView?>()
@@ -61,6 +75,8 @@ public sealed partial class AltMechMenu : FancyWindow
     public readonly Dictionary<ProgressBar, string> integrityBarDict = new Dictionary<ProgressBar, string>();
 
     public readonly Dictionary<Label, string> spriteTextDict = new Dictionary<Label, string>();
+
+    public Dictionary<TextureButton, string> buttonDict = new Dictionary<TextureButton, string>();
 
     public readonly Dictionary<string, MechPartVisualLayers> partsVisuals = new Dictionary<string, MechPartVisualLayers>()
     {

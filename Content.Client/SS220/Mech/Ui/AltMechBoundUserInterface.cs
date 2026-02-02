@@ -1,11 +1,14 @@
 using Content.Client.Mech;
 using Content.Client.UserInterface.Fragments;
 using Content.Shared.Mech;
+using Content.Shared.SS220.AltMech;
 using Content.Shared.SS220.Mech.Components;
 using Content.Shared.SS220.Mech.Equipment.Components;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
+using Robust.Client.UserInterface.Controls;
+using static Robust.Client.UserInterface.Controls.MenuBar;
 
 namespace Content.Client.SS220.Mech.Ui;
 
@@ -50,11 +53,14 @@ public sealed class AltMechBoundUserInterface : BoundUserInterface
             _menu.SetEntity((EntityUid)part.ContainedEntity, partsVisuals[partComp.slot]);
         }
 
-        _menu.OnRemoveButtonPressed += uid =>
-        {
-            SendMessage(new MechEquipmentRemoveMessage(EntMan.GetNetEntity(uid)));
-        };
+        _menu.OnRemovePartButtonPressed += id => SendMessage(new MechPartRemoveMessage(id));
+        _menu.OnRemovePartButtonPressed += id => UpdateStateAfterButtonPressed(id);
+    }
+
+    protected void UpdateStateAfterButtonPressed(string _)
+    {
         _menu?.UpdateMechStats();
+        _menu?.UpdateEquipmentView();
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)

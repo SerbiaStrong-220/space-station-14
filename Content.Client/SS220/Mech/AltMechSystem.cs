@@ -1,5 +1,6 @@
 using Content.Client.SS220.FieldShield;
 using Content.Shared.Mech;
+using Content.Shared.Popups;
 using Content.Shared.SS220.FieldShield;
 using Content.Shared.SS220.Mech.Components;
 using Content.Shared.SS220.Mech.Equipment.Components;
@@ -17,15 +18,16 @@ public sealed class AltMechSystem : SharedAltMechSystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<MechPartComponent, AfterAutoHandleStateEvent>(OnPartInserted);
         SubscribeLocalEvent<AltMechComponent, AppearanceChangeEvent>(OnAppearanceChanged);
         SubscribeLocalEvent<AltMechComponent, ComponentInit>(OnComponentInit);
+        SubscribeNetworkEvent<MechPartStatusChanged>(OnPartMoved);
 
     }
 
@@ -78,20 +80,34 @@ public sealed class AltMechSystem : SharedAltMechSystem
         }
     }
 
-    private void OnPartInserted(Entity<MechPartComponent> ent, ref AfterAutoHandleStateEvent args)
+    private void OnPartMoved(MechPartStatusChanged args)
     {
-        if (!TryComp<AltMechComponent>(ent.Comp.PartOwner, out var mechComp) || !TryComp(ent.Comp.PartOwner, out AppearanceComponent? appearance))
+        if (!TryGetEntity(args.Mech, out var localMech) || !TryGetEntity(args.Part, out var localPart))
             return;
 
-        if (!TryComp<SpriteComponent>(ent.Comp.PartOwner, out var spriteComp))
+        if (!TryComp<AltMechComponent>(localMech, out var mechComp) || !TryComp(localMech, out AppearanceComponent? appearance))
             return;
 
-        if (_sprite.LayerMapTryGet( ((EntityUid)ent.Comp.PartOwner, spriteComp), partsVisuals[ent.Comp.slot], out var layer, true)
-                && ent.Comp.AttachedSprite != null)
+        if (!TryComp<SpriteComponent>(localMech, out var spriteComp) || spriteComp == null)
+            return;
+
+        if (!TryComp<MechPartComponent>(localPart, out var partComp))
+            return;
+
+        if (_sprite.LayerMapTryGet(((EntityUid)localMech, spriteComp), partsVisuals[partComp.slot], out var layer, true))
         {
-            _sprite.LayerSetSprite( ((EntityUid)ent.Comp.PartOwner, spriteComp), layer, ent.Comp.AttachedSprite);
-            _sprite.LayerSetVisible( ((EntityUid)ent.Comp.PartOwner, spriteComp), layer, true);
+            if(args.Attached == false)
+            {
+                _sprite.LayerSetVisible(((EntityUid)localMech, spriteComp), layer, false);
+                return;
+            }
+            if(partComp.AttachedSprite != null)
+            {
+                _sprite.LayerSetSprite(((EntityUid)localMech, spriteComp), layer, partComp.AttachedSprite);
+                _sprite.LayerSetVisible(((EntityUid)localMech, spriteComp), layer, true);
+            }
         }
+            //_sprite.LayerSetVisible(((EntityUid)localMech, spriteComp), layer, false);
     }
 }
 

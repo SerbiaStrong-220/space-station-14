@@ -13,7 +13,7 @@ namespace Content.Shared.SS220.Mech.Equipment.Components;
 /// <summary>
 /// A piece of equipment that can be installed into <see cref="MechComponent"/>
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true, true)]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class MechPartComponent : Component
 {
     /// <summary>
@@ -26,6 +26,12 @@ public sealed partial class MechPartComponent : Component
     /// </summary>
     [ViewVariables, AutoNetworkedField]
     public EntityUid? PartOwner;
+
+    /// <summary>
+    /// The mech that the equipment is inside of.
+    /// </summary>
+    [ViewVariables, AutoNetworkedField]
+    public bool ToBeRemoved = false;
 
     /// <summary>
     /// The slot this part can be attached to

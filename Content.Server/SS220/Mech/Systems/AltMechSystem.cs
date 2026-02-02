@@ -8,11 +8,12 @@ using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Mech;
-using Content.Shared.SS220.ArmorBlock;
 using Content.Shared.Mech.EntitySystems;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
 using Content.Shared.Power.Components;
+using Content.Shared.SS220.AltMech;
+using Content.Shared.SS220.ArmorBlock;
 using Content.Shared.SS220.Mech.Components;
 using Content.Shared.SS220.Mech.Equipment.Components;
 using Content.Shared.SS220.Mech.Systems;
@@ -64,6 +65,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
         SubscribeLocalEvent<AltMechComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<MechPartComponent, MechEquipmentRemoveMessage>(OnRemoveEquipmentMessage);
+        SubscribeLocalEvent<AltMechComponent, MechPartRemoveMessage>(OnRemovePartMessage);
 
         SubscribeLocalEvent<AltMechComponent, UpdateCanMoveEvent>(OnMechCanMoveEvent);
 
@@ -158,6 +160,16 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
             return;
 
         RemoveEquipment(uid, equip, component);
+    }
+
+    private void OnRemovePartMessage(Entity<AltMechComponent> ent, ref MechPartRemoveMessage args)
+    {
+        var equip = (ent.Comp.ContainerDict[args.Part].ContainedEntity);
+
+        if (!Exists(equip) || Deleted(equip))
+            return;
+
+        RemovePart((EntityUid)ent.Owner, (EntityUid)equip, ent.Comp);
     }
 
     private void OnOpenUi(EntityUid uid, AltMechComponent component, MechOpenUiEvent args)
@@ -318,7 +330,8 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         foreach (var ent in component.ContainerDict.Values)
         {
             if (TryComp<MechPartComponent>(ent.ContainedEntity, out var partcomp) || partcomp == null)
-                return;
+                continue;
+
             foreach (var equip in partcomp.EquipmentContainer.ContainedEntities)
             {
                 RaiseLocalEvent(equip, ev);

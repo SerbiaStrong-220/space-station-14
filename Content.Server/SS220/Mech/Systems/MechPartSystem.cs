@@ -28,6 +28,7 @@ public sealed class MechPartSystem : EntitySystem
         SubscribeLocalEvent<MechPartComponent, AfterInteractEvent>(OnUsed);
         SubscribeLocalEvent<MechPartComponent, InsertPartEvent>(OnInsertPart);
         SubscribeLocalEvent<MechChassisComponent, MechPartInsertedEvent>(OnChassisInserted);
+        SubscribeLocalEvent<MechChassisComponent, MechPartRemovedEvent>(OnChassisRemoved);
         //SubscribeLocalEvent<MechPartComponent, InsertPartEvent>(OnOpticsInserted);
         //SubscribeLocalEvent<MechPartComponent, InsertPartEvent>(OnArmInserted);
     }
@@ -73,6 +74,20 @@ public sealed class MechPartSystem : EntitySystem
 
         if (TryComp<MovementSpeedModifierComponent>(args.Mech, out var movementComp))
             _movementSpeedModifier.ChangeBaseSpeed(args.Mech, mechComp.OverallBaseMovementSpeed * 0.5f, mechComp.OverallBaseMovementSpeed, mechComp.OverallBaseAcceleration);
+
+        Dirty(ent.Owner, ent.Comp);
+    }
+
+    private void OnChassisRemoved(Entity<MechChassisComponent> ent, ref MechPartRemovedEvent args)
+    {
+        if (!TryComp<AltMechComponent>(args.Mech, out var mechComp))
+            return;
+
+        mechComp.OverallBaseMovementSpeed = 0;
+        mechComp.OverallBaseAcceleration = 0;
+
+        if (TryComp<MovementSpeedModifierComponent>(args.Mech, out var movementComp))
+            _movementSpeedModifier.ChangeBaseSpeed(args.Mech, 0, 0, 0);
 
         Dirty(ent.Owner, ent.Comp);
     }

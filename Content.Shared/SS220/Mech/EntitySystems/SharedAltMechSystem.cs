@@ -289,11 +289,17 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         partComponent.PartOwner = uid;
         _container.Insert(toInsert, component.ContainerDict[partComponent.slot]);
         AddMass(component, partComponent.OwnMass);
+
         var ev = new MechPartInsertedEvent(uid);
         RaiseLocalEvent(toInsert, ref ev);
-        UpdateUserInterface(uid, component);
+
         Dirty(uid, component);
         Dirty(toInsert, partComponent);
+
+        if (TryGetNetEntity(uid, out var netMech) && TryGetNetEntity(toInsert, out var netPart))
+            RaiseNetworkEvent(new MechPartStatusChanged((NetEntity)netMech, (NetEntity)netPart, true));
+
+        UpdateUserInterface(uid, component);
     }
 
     public void AddMass(AltMechComponent mechComp, FixedPoint2 Value)
@@ -359,7 +365,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
     ///     Whether or not the removal can be cancelled, and if non-mech equipment should be ejected.
     /// </param>
     public void RemovePart(EntityUid uid, EntityUid toRemove, AltMechComponent? component = null,
-        MechPartComponent? partComponent = null, bool forced = false)
+        MechPartComponent? partComponent = null, bool forced = true)
     {
         if (!Resolve(uid, ref component))
             return;
@@ -384,14 +390,24 @@ public abstract partial class SharedAltMechSystem : EntitySystem
                 return;
         }
 
-        var ev = new MechPartRemovedEvent(uid);
-        RaiseLocalEvent(toRemove, ref ev);
+        //if (forced && partComponent != null)
+        //    partComponent.PartOwner = null;
 
-        if (forced && partComponent != null)
+        if(partComponent != null)
+        {
             partComponent.PartOwner = null;
+            RemoveMass(component, partComponent.OwnMass);
 
-        if (partComponent != null)
             _container.Remove(toRemove, component.ContainerDict[partComponent.slot]);
+
+            var ev = new MechPartRemovedEvent(uid);
+            RaiseLocalEvent(toRemove, ref ev);
+        }
+
+        Dirty(uid, component);
+
+        if(TryGetNetEntity(uid, out var netMech) && TryGetNetEntity(toRemove, out var netPart))
+            RaiseNetworkEvent( new MechPartStatusChanged((NetEntity)netMech, (NetEntity)netPart, false));
 
         UpdateUserInterface(uid, component);
     }
@@ -631,3 +647,19 @@ public enum PartSlot : byte
     Chassis = 4,
     Power = 5
 }
+
+[Serializable, NetSerializable]
+public sealed class MechPartStatusChanged : EntityEventArgs
+{
+    public NetEntity Mech;
+    public NetEntity Part;
+    public bool Attached;
+
+    public MechPartStatusChanged(NetEntity mech, NetEntity part, bool attached)
+    {
+        Mech = mech;
+        Part = part;
+        Attached = attached;
+    }
+}
+
