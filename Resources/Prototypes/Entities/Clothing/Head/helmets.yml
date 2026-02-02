@@ -238,7 +238,7 @@
     netsync: false
   - type: Appearance
   - type: HandheldLight
-    addPrefix: true
+    addPrefix: false
     blinkingBehaviourId: blinking
     radiatingBehaviourId: radiating
   - type: LightBehaviour
