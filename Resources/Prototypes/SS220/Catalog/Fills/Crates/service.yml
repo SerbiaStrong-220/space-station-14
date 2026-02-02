@@ -159,16 +159,16 @@
   name: set of wedding outfits
   description: Contains a pre-selected set of wedding outfits
   components:
-    - type: StorageFill
-      contents:
-      - id: ClothingUniformJumpsuitWeddingBlackOpened
-      - id: ClothingUniformJumpsuitWeddingBlackAndWhiteOpened
-      - id: ClothingUniformJumpsuitWeddingGreenOpened
-      - id: ClothingUniformJumpsuitWeddingWhiteOpened
-      - id: ClothingUniformWeddingDress1
-      - id: ClothingUniformWeddingDress2
-      - id: ClothingUniformWeddingDress3
-      - id: ClothingUniformWeddingDress4
-      - id: ClothingHeadHatVeilClip
-      - id: ClothingHeadHatVeilTiara
-      - id: ClothingUniformJumpsuitWitness
+  - type: StorageFill
+    contents:
+    - id: ClothingUniformJumpsuitWeddingBlackOpened
+    - id: ClothingUniformJumpsuitWeddingBlackAndWhiteOpened
+    - id: ClothingUniformJumpsuitWeddingGreenOpened
+    - id: ClothingUniformJumpsuitWeddingWhiteOpened
+    - id: ClothingUniformWeddingDress1
+    - id: ClothingUniformWeddingDress2
+    - id: ClothingUniformWeddingDress3
+    - id: ClothingUniformWeddingDress4
+    - id: ClothingHeadHatVeilClip
+    - id: ClothingHeadHatVeilTiara
+    - id: ClothingUniformJumpsuitWitness

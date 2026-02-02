@@ -89,4 +89,4 @@ ent-ClothingUniformJumpsuitWeddingWhite = белый свадебный кост
 ent-ClothingUniformJumpsuitWeddingWhiteOpened = { ent-ClothingUniformJumpsuitWeddingWhite }
     .desc = { ent-ClothingUniformJumpsuitWeddingWhite.desc }
 ent-ClothingUniformJumpsuitWitness = костюм свидетеля
-    .desc = Побывал свидетелем во многих событий.
+    .desc = Побывал свидетелем во многих событиях.

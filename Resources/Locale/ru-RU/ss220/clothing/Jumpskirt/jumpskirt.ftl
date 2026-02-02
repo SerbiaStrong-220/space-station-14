@@ -47,4 +47,4 @@ ent-ClothingUniformWeddingDress2 = свадебное платье
 ent-ClothingUniformWeddingDress3 = свадебное платье
     .desc = ВСЁ! Теперь ты можешь жрать, жиреть и ничего не делать!
 ent-ClothingUniformWeddingDress4 = свадебное платье
-    .desc =  Клянётся ли он отдать Вам свою хату после развода?
+    .desc = Клянётся ли он отдать Вам свою хату после развода?
