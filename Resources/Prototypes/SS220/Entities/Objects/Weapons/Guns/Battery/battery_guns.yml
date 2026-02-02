@@ -152,7 +152,7 @@
       - Burst
   - type: ProjectileBatteryAmmoProvider
     proto: BulletBlasterBolt
-    fireCost: 50
+    fireCost: 62.5
   - type: BatteryWeaponFireModes
     fireModes:
       - proto: BulletBlasterBolt
