@@ -1,4 +1,4 @@
-firemode-name-kill = режия для убийства
+firemode-name-kill = режим для убийства
 firemode-name-destroy = режим для УНИЧТОЖЕНИЯ
 firemode-name-heal = режим для лечения
 firemode-name-laser-alt = Лазер
