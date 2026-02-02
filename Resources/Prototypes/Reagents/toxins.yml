@@ -506,7 +506,7 @@
       - !type:PopupMessage
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Animal, Vox ]
+          type: [ Animal, Vox, Tajaran ]
           inverted: true
         type: Local
         visualType: MediumCaution
@@ -516,12 +516,12 @@
         probability: 0.1
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Animal, Vox ]
+          type: [ Animal, Vox, Tajaran ]
           inverted: true
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Animal, Vox ]
+          type: [ Animal, Vox, Tajaran ]
           inverted: true
         damage:
           types:
@@ -529,7 +529,7 @@
       - !type:AdjustReagent
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Animal ]
+          type: [ Animal, Tajaran ]
         reagent: Protein
         amount: 0.5
       - !type:AdjustReagent
