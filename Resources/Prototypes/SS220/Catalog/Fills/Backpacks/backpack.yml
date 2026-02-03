@@ -173,7 +173,7 @@
         amount: 3
       - id: FlashlightSeclite
       - id: MedkitCombatFilled
-      - id: BlueShieldGasMask
+      - id: ClothingMaskGasBlueShield
 
 # CBURNleader
 - type: entity

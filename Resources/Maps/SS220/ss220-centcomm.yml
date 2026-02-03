@@ -88528,7 +88528,7 @@ entities:
 
         [bold]Рост[/bold]: [italic]177 см[/italic]
 
-        [bold]Принадлежность[/bold]: 
+        [bold]Принадлежность[/bold]:
 
         [bold]Должность[/bold]: [italic]Адъютант Начальника Сектора[/italic]
 
@@ -117048,7 +117048,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: -47.5,10.5
       parent: 1
-- proto: WarderobePrisonSecureFilled
+- proto: WardrobePrisonSecureFilled
   entities:
   - uid: 14727
     components:

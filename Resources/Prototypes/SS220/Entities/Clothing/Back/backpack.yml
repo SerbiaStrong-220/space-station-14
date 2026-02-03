@@ -3,14 +3,14 @@
 - type: entity
   parent: ClothingBackpack
   id: ClothingBackpackWhiteCaptain
-  name: белый рюкзак капитана
-  description: Дорогая белая сумка, выданная за выслугу лет капитану.
+  name: white captain's backpack
+  description: A costly white bag awarded to a captain for years of loyal service.
   suffix: За время в игре
   components:
   - type: Sprite
     sprite: SS220/Clothing/Back/Backpacks/captain_white.rsi
 
-  # Офицер "Синий Щит"
+# Офицер "Синий Щит"
 - type: entity
   parent: ClothingBackpackSatchel
   id: ClothingBackpackBlueShield
@@ -63,7 +63,7 @@
         - id: C4
         - id: PinpointerNuclear
         - id: WeaponPulsePistol
-        - id: StimpackERT 
+        - id: StimpackERT
         - id: LaserCarabinePowerCell
         - id: LaserCarabinePowerCell
         - id: LaserCarabinePowerCell
@@ -88,7 +88,7 @@
         - id: C4
         - id: PinpointerNuclear
         - id: WeaponPulsePistol
-        - id: StimpackERT 
+        - id: StimpackERT
         - id: LaserCarabinePowerCell
         - id: LaserCarabinePowerCell
         - id: LaserCarabinePowerCell

@@ -154,8 +154,8 @@
 
 - type: listing
   id: UplinkBoxFolderSyndicate
-  name: папка синдиката
-  description: Папка, с долей вероятности содержащая информацию о вражеской корпорации. Проверим?
+  name: uplink-syndicate-folder-name
+  description: uplink-syndicate-folder-desc
   icon: { sprite: /Textures/SS220/Objects/Misc/bureaucracy.rsi, state: folder-syndicate }
   productEntity: BoxFolderSyndicate
   cost:
@@ -165,8 +165,8 @@
 
 - type: listing
   id: UplinkClothingniformJumpsuitSyndicateDiplomatistSyndicate
-  name: костюм дипломата
-  description: Костюм дипломата преступного синдиката, ничего необычного.
+  name: uplink-diplomat-suit-name
+  description: uplink-diplomat-suit-desc
   icon: { sprite: /Textures/SS220/Clothing/Uniforms/Jumpsuit/syndicate_diplomatist.rsi, state: icon }
   productEntity: ClothingUniformJumpsuitSyndicateDiplomatist
   cost:
@@ -503,3 +503,72 @@
     stock: 2
   categories:
   - UplinkDisruption
+
+- type: listing
+  id: UplinkChemicalImplanter
+  name: ent-ChemicalImplanter
+  description: uplink-chemical-implanter-desc
+  icon: { sprite: SS220/Objects/ChemicalImplants/implanters.rsi, state: implanter }
+  productEntity: ChemicalImplanter
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 2 #ss220-uplink-discounts
+  cost:
+    Telecrystal: 4 #ss220-uplink-discounts
+  categories:
+  - UplinkChemicalImplants
+
+# Implants
+- type: listing
+  id: UplinkEmptyChemicalImplant
+  name: ent-EmptyChemicalImplant
+  description: uplink-empty-chemical-implant-desc
+  icon: { sprite: SS220/Objects/ChemicalImplants/implants.rsi, state: implant }
+  productEntity: EmptyChemicalImplant
+  cost:
+    Telecrystal: 1
+  categories:
+  - UplinkChemicalImplants
+
+- type: listing
+  id: UplinkCombatChemicalImplant
+  name: ent-CombatChemicalImplant
+  description: uplink-combat-chemical-implant-desc
+  icon: { sprite: SS220/Objects/ChemicalImplants/implants.rsi, state: combat }
+  productEntity: CombatChemicalImplant
+  cost:
+    Telecrystal: 4
+  categories:
+  - UplinkChemicalImplants
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+
+- type: listing
+  id: UplinkDABChemicalImplant
+  name: ent-DABChemicalImplant
+  description: uplink-dab-chemical-implant-desc
+  icon: { sprite: SS220/Objects/ChemicalImplants/implants.rsi, state: dab }
+  productEntity: DABChemicalImplant
+  cost:
+    Telecrystal: 1 #ss220-uplink-discounts
+  categories:
+  - UplinkChemicalImplants
+
+- type: listing
+  id: UplinkSuicideChemicalImplant
+  name: ent-SuicideChemicalImplant
+  description: uplink-suicide-chemical-implant-desc
+  icon: { sprite: SS220/Objects/ChemicalImplants/implants.rsi, state: dead }
+  productEntity: SuicideChemicalImplant
+  cost:
+    Telecrystal: 1 #ss220-uplink-discounts
+  categories:
+  - UplinkChemicalImplants
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
