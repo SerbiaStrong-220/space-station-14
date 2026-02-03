@@ -52,6 +52,7 @@
       right:
       - state: inhand-right-big
   - type: MechPart
+    integrity: 200
     attachedSprite:
       sprite: SS220/Objects/Specific/Robotics/Mechs/righthand.rsi
       state: test

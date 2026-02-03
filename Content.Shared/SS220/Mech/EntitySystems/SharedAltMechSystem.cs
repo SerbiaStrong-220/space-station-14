@@ -127,6 +127,8 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         //SS220-MechClothingInHandsFix
         ent.Comp.PilotSlot = _container.EnsureContainer<ContainerSlot>(ent.Owner, ent.Comp.PilotSlotId);
 
+        ent.Comp.OverallMass += ent.Comp.OwnMass;
+
         if(TryComp<MovementSpeedModifierComponent>(ent.Owner, out var movementComp))
             _movementSpeedModifier.ChangeBaseSpeed(ent.Owner, ent.Comp.OverallBaseMovementSpeed * 0.5f, ent.Comp.OverallBaseMovementSpeed, ent.Comp.OverallBaseAcceleration, movementComp);
 
@@ -341,13 +343,17 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         partComponent.PartOwner = uid;
         _container.Insert(toInsert, component.ContainerDict[partComponent.slot]);
-        AddMass(component, partComponent.OwnMass);
 
         var ev = new MechPartInsertedEvent(uid);
         RaiseLocalEvent(toInsert, ref ev);
 
+        AddMass(component, partComponent.OwnMass);
+
         Dirty(uid, component);
         Dirty(toInsert, partComponent);
+
+        var massEv = new MassChangedEvent();
+        RaiseLocalEvent(uid, ref massEv);
 
         if (TryGetNetEntity(uid, out var netMech) && TryGetNetEntity(toInsert, out var netPart))
             RaiseNetworkEvent(new MechPartStatusChanged((NetEntity)netMech, (NetEntity)netPart, true));
@@ -455,6 +461,9 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
             var ev = new MechPartRemovedEvent(uid);
             RaiseLocalEvent(toRemove, ref ev);
+
+            var massEv = new MassChangedEvent();
+            RaiseLocalEvent(uid, ref massEv);
         }
 
         Dirty(uid, component);
@@ -695,6 +704,9 @@ public readonly record struct MechSpeedModifiedEvent(EntityUid Mech)
 
 [ByRefEvent]
 public readonly record struct OnMechExitEvent();
+
+[ByRefEvent]
+public readonly record struct MassChangedEvent();
 
 public enum PartSlot : byte
 {

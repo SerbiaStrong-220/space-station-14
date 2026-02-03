@@ -88,13 +88,10 @@ public sealed partial class AltMechComponent : Component
     public float OverallBaseMovementSpeed = 0f;
 
     [DataField, AutoNetworkedField]
-    public float OverallMovementSpeedModified = 0f;
+    public float MovementSpeedModifier = 0f;
 
     [DataField, AutoNetworkedField]
     public float OverallBaseAcceleration = 1f;
-
-    [DataField, AutoNetworkedField]
-    public float OverallModifiedAcceleration = 1f;
 
     [AutoNetworkedField]
     public bool MaintenanceMode = true; //if the mech is not in the maintenance mode we cannot interact with its parts or equipment

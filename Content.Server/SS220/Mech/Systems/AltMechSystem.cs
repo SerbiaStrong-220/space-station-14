@@ -6,11 +6,14 @@ using Content.Server.Power.EntitySystems;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
+using Content.Shared.EntityEffects.Effects.StatusEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Mech;
 using Content.Shared.Mech.EntitySystems;
+using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Events;
+using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Power.Components;
 using Content.Shared.SS220.AltMech;
@@ -50,6 +53,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
     [Dependency] private readonly SharedToolSystem _toolSystem = default!;
     [Dependency] private readonly HandsSystem _hands = default!;
     [Dependency] private readonly MechPartSystem _parts = default!;
+    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifier = default!;
 
     private static readonly ProtoId<ToolQualityPrototype> PryingQuality = "Prying";
 
@@ -73,6 +77,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
         SubscribeLocalEvent<AltMechComponent, UpdateCanMoveEvent>(OnMechCanMoveEvent);
 
+        SubscribeLocalEvent<AltMechComponent, MassChangedEvent>(OnMassChanged);
 
         SubscribeLocalEvent<AltMechPilotComponent, ToolUserAttemptUseEvent>(OnToolUseAttempt);
         SubscribeLocalEvent<AltMechPilotComponent, InhaleLocationEvent>(OnInhale);
@@ -306,10 +311,30 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         TryEject(ent.Owner, ent.Comp);
     }
 
-    private void OnDamageChanged(EntityUid uid, AltMechComponent component, DamageChangedEvent args)
+    private void OnDamageChanged(Entity<AltMechComponent> ent, ref DamageChangedEvent args)
     {
-        var integrity = component.MaxIntegrity - args.Damageable.TotalDamage;
-        SetIntegrity(uid, integrity, component);
+        var integrity = ent.Comp.MaxIntegrity - args.Damageable.TotalDamage;
+        SetIntegrity(ent.Owner, integrity, ent.Comp);
+    }
+
+    private void OnMassChanged(Entity<AltMechComponent> ent, ref MassChangedEvent args)
+    {
+        FixedPoint2 maxMass = 1;
+
+        if (TryComp<MechChassisComponent>(ent.Comp.ContainerDict["chassis"].ContainedEntity, out var chassisComp))
+            maxMass = chassisComp.MaximalMass;
+
+        var massDiff = ent.Comp.OverallMass - maxMass;
+
+        if (massDiff < 0)
+            massDiff = 0;
+
+        FixedPoint2 massRel = 1 - (massDiff / maxMass);
+
+        ent.Comp.MovementSpeedModifier = massRel.Float();
+
+        if (TryComp<MovementSpeedModifierComponent>(ent.Owner, out var movementComp))
+            _movementSpeedModifier.ChangeBaseSpeed(ent.Owner, ent.Comp.OverallBaseMovementSpeed * ent.Comp.MovementSpeedModifier * 0.5f, ent.Comp.OverallBaseMovementSpeed * ent.Comp.MovementSpeedModifier, ent.Comp.OverallBaseAcceleration * ent.Comp.MovementSpeedModifier);
     }
 
     private void ToggleMechUi(EntityUid uid, AltMechComponent? component = null, EntityUid? user = null)

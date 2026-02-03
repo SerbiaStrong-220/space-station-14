@@ -64,7 +64,7 @@ public sealed partial class MechPartComponent : Component
     /// <summary>
     /// How much "health" the mech has left.
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    [DataField, ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public FixedPoint2 Integrity;
 
     /// <summary>

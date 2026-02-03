@@ -215,9 +215,6 @@ public sealed class MechPartSystem : EntitySystem
         mechComp.OverallBaseMovementSpeed = ent.Comp.BaseMovementSpeed;
         mechComp.OverallBaseAcceleration = ent.Comp.Acceleration;
 
-        if (TryComp<MovementSpeedModifierComponent>(args.Mech, out var movementComp))
-            _movementSpeedModifier.ChangeBaseSpeed(args.Mech, mechComp.OverallBaseMovementSpeed * 0.5f, mechComp.OverallBaseMovementSpeed, mechComp.OverallBaseAcceleration);
-
         Dirty(ent.Owner, ent.Comp);
     }
 
@@ -228,9 +225,6 @@ public sealed class MechPartSystem : EntitySystem
 
         mechComp.OverallBaseMovementSpeed = 0;
         mechComp.OverallBaseAcceleration = 0;
-
-        if (TryComp<MovementSpeedModifierComponent>(args.Mech, out var movementComp))
-            _movementSpeedModifier.ChangeBaseSpeed(args.Mech, 0, 0, 0);
 
         Dirty(ent.Owner, ent.Comp);
     }
