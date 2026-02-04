@@ -9,5 +9,5 @@ ent-MobRicardoHamlet = рикардо гамлет
 ghost-role-information-gigagamlet-name = Гигагамлет
 ghost-role-information-gigagamlet-description = Вы огромный, мускулистый, уверенный в себе, с блестящей шерстью, человекоподобный хомяк.
 
-ghost-role-information-gigahamlet-name = Рикардо Гамлет
-ghost-role-information-gigahamlet-description = Покажите этому миру, как нужно танцевать!
+ghost-role-information-gigahamlet-ricardo-name = Рикардо Гамлет
+ghost-role-information-gigahamlet-ricardo-description = Покажите этому миру, как нужно танцевать!
