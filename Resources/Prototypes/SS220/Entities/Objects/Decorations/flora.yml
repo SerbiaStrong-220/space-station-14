@@ -1,0 +1,358 @@
+- type: entity
+  id: BaseBush
+  name: bush
+  description: A generic bush.
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    noRot: true
+    offset: 0, 0.15
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.01,0.01"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/chop.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: BaseBushSnow
+  name: bush
+  description: A generic bush.
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushessnow.rsi
+    noRot: true
+    offset: 0,0.1
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.01,-0.01,0.01,0.01"
+        density: 100
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/chop.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: BaseBushV1
+  name: bush
+  description: A generic bush.
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    noRot: true
+    renderLayer: Mobs
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Dynamic
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.1
+        density: 190
+        mask:
+        - HighImpassable
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/chop.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: BaseBush
+  id: FloraBushG
+  name: Bush
+  description: A beautiful bush.
+  components:
+  - type: Sprite
+    layers:
+    - state: bushg1
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        bushg1: ""
+        bushg2: ""
+        bushg3: ""
+        bushg4: ""
+
+- type: entity
+  parent: BaseBush
+  id: FloraBushH
+  name: Young bamboo
+  description: Will sprout through your enemies.
+  components:
+  - type: Sprite
+    layers:
+    - state: bushh1
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        bushh1: ""
+        bushh2: ""
+        bushh3: ""
+
+- type: entity
+  parent: BaseBushV1
+  id: FloraBushI
+  name: Grass and weeds
+  description: Nothing unusual.
+  components:
+  - type: Sprite
+    layers:
+    - state: bushi1
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        bushi1: ""
+        bushi2: ""
+        bushi3: ""
+        bushi4: ""
+
+- type: entity
+  parent: BaseBush
+  id: FloraBushJ
+  name: Fern
+  description: It is usually cooked until the bud has opened.
+  components:
+  - type: Sprite
+    layers:
+    - state: bushj1
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        bushj1: ""
+        bushj2: ""
+        bushj3: ""
+
+- type: entity
+  parent: BaseBush
+  id: FloraBushK
+  name: Bansai
+  description: A beautiful tree.
+  components:
+  - type: Sprite
+    layers:
+    - state: bushk1
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        bushk1: ""
+        bushk2: ""
+        bushk3: ""
+
+- type: entity
+  parent: BaseBush
+  id: FloraBushL
+  name: An evergreen shrub.
+  description: It looks very much like an undergrown hedge.
+  components:
+  - type: Sprite
+    layers:
+    - state: bushl1
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        bushl1: ""
+        bushl2: ""
+        bushl3: ""
+        bushl4: ""
+
+- type: entity
+  parent: BaseBush
+  id: FloraBushM
+  name: Dwarf Spruce
+  description: Needles, the needles taste as good as resin.
+  components:
+  - type: Sprite
+    layers:
+    - state: bushm1
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        bushm1: ""
+        bushm2: ""
+        bushm3: ""
+        bushm4: ""
+
+- type: entity
+  parent: BaseBush
+  id: FloraBushN
+  name: Acacia
+  description: Often decorates greenhouses
+  components:
+  - type: Sprite
+    state: bushn1
+
+- type: entity
+  parent: BaseBushSnow
+  id: FloraBushSnowA
+  name: Viburnum
+  description: Berries are great for helping with blood pressure
+  components:
+  - type: Sprite
+    layers:
+    - state: bushsnowa1
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        bushsnowa1: ""
+        bushsnowa2: ""
+        bushsnowa3: ""
+
+- type: entity
+  parent: BaseBushSnow
+  id: FloraBushSnowB
+  name: Empty Viburnum
+  description: A simple bush
+  components:
+  - type: Sprite
+    layers:
+    - state: bushsnowb1
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        bushsnowb1: ""
+        bushsnowb2: ""
+        bushsnowb3: ""
+
+- type: entity
+  parent: BaseBush
+  id: FloraBushD
+  name: Bush
+  description: The most ordinary but beautiful bush
+  components:
+  - type: Sprite
+    layers:
+    - state: bushd1
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        bushd1: ""
+        bushd2: ""
+        bushd3: ""
+        bushd4: ""
+
+- type: entity
+  parent: BaseBush
+  id: FloraBushE
+  name: Reed
+  description: It is usually confused with a cattail
+  components:
+  - type: Sprite
+    layers:
+    - state: bushe1
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        bushe1: ""
+        bushe2: ""
+        bushe3: ""
+        bushe4: ""
