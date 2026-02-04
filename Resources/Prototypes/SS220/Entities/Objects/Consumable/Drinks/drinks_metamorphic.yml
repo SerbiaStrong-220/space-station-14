@@ -1,0 +1,299 @@
+- type: entity
+  parent: DrinkGlass
+  id: DrinkGlintwineGlass
+  name: glass of mulled wine
+  description: A hot alcoholic beverage based on wine, originating from Nuremberg.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Glintwine
+          Quantity: 30
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Drinks/glintveinglass.rsi
+    layers:
+    - state: icon
+      map: [ "enum.SolutionContainerLayers.Base" ]
+  - type: SolutionContainerVisuals
+    maxFillLevels: 0
+    inHandsMaxFillLevels: 0
+
+- type: entity
+  name: glass vase
+  description: Strangely shaped glass vase, what is it for?
+  parent: DrinkGlass
+  id: GlassVase
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Flowers/vase_overlay.rsi
+    layers:
+    - state: icon
+      map: [ "enum.SolutionContainerLayers.Base" ]
+    - state: fill1
+      map: [ "enum.SolutionContainerLayers.Fill" ]
+      visible: false
+    - state: Icon-front
+      map: [ "enum.SolutionContainerLayers.Overlay" ]
+  - type: Appearance
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+  - type: SolutionContainerVisuals
+    maxFillLevels: 9
+    fillBaseName: fill
+    inHandsMaxFillLevels: 0
+    metamorphicDefaultSprite:
+      sprite: SS220/Objects/Consumable/Flowers/vase_overlay.rsi
+      state: icon
+  - type: Construction
+    graph: craftvase
+    node: CraftVase
+  - type: Matchbox
+  - type: ContainerContainer
+    containers:
+      item: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      item:
+        name: vase-flower
+        whitelist:
+          tags:
+          - wtulip
+          - ptulip
+          - ytulip
+          - rclove
+          - wclove
+          - schamomile
+          - wschamomile
+          - sflower
+          - lflower
+          - rrose
+          - wrose
+  - type: ItemMapper
+    mapLayers:
+      white_tulip:
+        whitelist:
+          tags:
+          - wtulip
+      pink_tulip:
+        whitelist:
+          tags:
+          - ptulip
+      yellow_tulip:
+        whitelist:
+          tags:
+          - ytulip
+      red_clove:
+        whitelist:
+          tags:
+          - rclove
+      white_clove:
+        whitelist:
+          tags:
+          - wclove
+      s_chamomile:
+        whitelist:
+          tags:
+          - schamomile
+      ws_chamomile:
+        whitelist:
+          tags:
+          - wschamomile
+      s_flower:
+        whitelist:
+          tags:
+          - sflower
+      l_flower:
+        whitelist:
+          tags:
+          - lflower
+      r_rose:
+        whitelist:
+          tags:
+          - rrose
+      w_rose:
+        whitelist:
+          tags:
+          - wrose
+    sprite: SS220/Objects/Consumable/Flowers/vase_overlay.rsi
+
+- type: entity
+  parent: DrinkGlass
+  id: DrinkVodkaKazakiGlass
+  name: glass of "Kazaki" vodka
+  description: Looks and smells like expired vodka. Cloudy...
+  components:
+  - type: SolutionContainerVisuals
+    maxFillLevels: 4
+    fillBaseName: fill-
+    inHandsMaxFillLevels: 3
+    inHandsFillBaseName: null
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: VodkaKazaki
+          Quantity: 30
+  - type: Sprite
+    sprite: Objects/Consumable/Drinks/ginvodkaglass.rsi
+    state: icon
+
+- type: entity
+  parent: DrinkGlass
+  id: DrinkAppleCompote
+  name: apple compote
+  description: Its sweet aroma reminds you of tales of a former life on Earth.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: AppleCompote
+          Quantity: 30
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Drinks/glass_apple.rsi
+    layers:
+    - state: icon
+      map: [ "enum.SolutionContainerLayers.Base" ]
+  - type: SolutionContainerVisuals
+    maxFillLevels: 0
+    inHandsMaxFillLevels: 0
+
+- type: entity
+  parent: DrinkGlass
+  id: DrinkBerryCompote
+  name: berry compote
+  description: The aroma of berries reminds you of the Little Red Riding Hood fairy tale.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: BerryCompote
+          Quantity: 30
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Drinks/glass_berry.rsi
+    layers:
+    - state: icon
+      map: [ "enum.SolutionContainerLayers.Base" ]
+  - type: SolutionContainerVisuals
+    maxFillLevels: 0
+    inHandsMaxFillLevels: 0
+
+- type: entity
+  parent: DrinkGlass
+  id: DrinkHotArachneGlass
+  suffix: HotArachne
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: HotArachne
+          Quantity: 30
+  - type: Icon
+    sprite: SS220/Objects/Consumable/Drinks/glass_hot_arachne.rsi
+    state: icon
+
+- type: entity
+  parent: DrinkGlass
+  id: DrinkFrench75Glass
+  suffix: French75
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: French75
+          Quantity: 30
+  - type: Icon
+    sprite: SS220/Objects/Consumable/Drinks/french75.rsi
+    state: icon
+
+- type: entity
+  parent: DrinkGlass
+  id: DrinkEggnogGlass
+  suffix: Eggnog
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Eggnog
+          Quantity: 30
+  - type: Icon
+    sprite: SS220/Objects/Consumable/Drinks/eggnog.rsi
+    state: icon
+
+- type: entity
+  parent: DrinkGlass
+  id: DrinkBacchusGlass
+  suffix: Bacchus
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Bacchus
+          Quantity: 30
+  - type: Icon
+    sprite: SS220/Objects/Consumable/Drinks/bacchus_blessing.rsi
+    state: icon
+
+- type: entity
+  parent: DrinkGlass
+  id: DrinkXlebnuldieselGlass
+  suffix: Xlebnuldiesel
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Xlebnuldiesel
+          Quantity: 30
+  - type: Icon
+    sprite: SS220/Objects/Consumable/Drinks/xlebnuldiesel.rsi
+    state: icon
+
+- type: entity
+  parent: DrinkGlass
+  id: DrinkSkoomalGlass
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Skooma
+          Quantity: 30
+  - type: Icon
+    sprite: SS220/Objects/Consumable/Drinks/skooma.rsi
+    state: icon
+
+- type: entity
+  parent: DrinkGlass
+  id: DrinkBankateGlass
+  name: glass of bankate
+  description: Looks like something you shouldn't drink...
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: BankateDrink
+          Quantity: 30
+  - type: Icon
+    sprite: SS220/Objects/Consumable/Drinks/glass_bankate.rsi
+    state: icon

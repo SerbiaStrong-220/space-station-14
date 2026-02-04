@@ -4,8 +4,8 @@
 - type: entity
   parent: ClothingSponsorUniformBase
   id: ClothingSponsorTylerUnder
-  name: мозаичный комбинезон
-  description: Выглядит сложно.
+  name: mosaic jumpsuit
+  description: It looks complicated.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Uniform/Jumpsuit/tyler.rsi
@@ -16,8 +16,8 @@
 - type: entity
   parent: ClothingSponsorUniformBase
   id: ClothingSponsorWaltuhInnerShirt
-  name: бледная рубашка
-  description: Вы - самый обычный семьянин.
+  name: pale shirt
+  description: You are just an ordinary family man.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Uniform/Jumpsuit/waltuh.rsi
@@ -28,8 +28,8 @@
 - type: entity
   parent: ClothingSponsorUniformBase
   id: ClothingSponsorGoldClownSuit
-  name: золотой костюм клоуна
-  description: Ууу, блестяшка!
+  name: golden clown suit
+  description: Ooo, shiny!
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Uniform/Jumpsuit/goldclownsuit.rsi
@@ -40,8 +40,8 @@
 - type: entity
   parent: ClothingSponsorUniformBase
   id: ClothingSponsorMafiaSuit
-  name: костюм прекрасного человека
-  description: Розово и стильно.
+  name: wonderful person's suit
+  description: Pink and stylish.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Uniform/Jumpsuit/mafiasuit.rsi
@@ -51,8 +51,8 @@
 - type: entity
   parent: ClothingSponsorUniformBase
   id: ClothingSponsorMafiaBlackSuit
-  name: тёмный костюм прекрасного человека
-  description: Темно и стильно.
+  name: dark wonderful person's suit
+  description: Dark and stylish.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Uniform/Jumpsuit/mafiasuit_black.rsi
@@ -63,8 +63,8 @@
 - type: entity
   parent: ClothingSponsorUniformBase
   id: ClothingSponsorPivozavr
-  name: футболка "Пивовазавр"
-  description: Пиво начинает свой путь с эпохи динозавров, вы не знали?
+  name: '"Pivozavr" t-shirt'
+  description: Beer begins its journey from the era of dinosaurs, didn't you know?
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Uniform/Jumpsuit/pivozavr.rsi
@@ -75,8 +75,8 @@
 - type: entity
   parent: ClothingSponsorUniformBase
   id: ClothingUniformJumpsuitMuzhik
-  name: униформа мужика
-  description: Пахнет самогоном.
+  name: muzhik's uniform
+  description: Smells like moonshine.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Uniform/Jumpsuit/muzhik.rsi
@@ -86,8 +86,8 @@
 - type: entity
   parent: ClothingSponsorUniformBase
   id: ClothingUniformJumpsuitMoryak
-  name: костюм морячка
-  description: Мимская матроска для покорения необъятного океана (самогона).
+  name: sailor's suit
+  description: Mime sailor shirt for conquering the vast ocean (of moonshine).
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Uniform/Jumpsuit/moryachok.rsi
@@ -98,8 +98,8 @@
 - type: entity
   parent: ClothingSponsorUniformBase
   id: ClothingUniformJumpsuitJujutsuShlepa
-  name: рубашка офисного работника
-  description: Рубашка, пропитанная запахом Малазии. От неё веет усталостью, может возьмёте отдых?
+  name: office worker's shirt
+  description: A shirt soaked in the scent of Malaysia. It wafts of fatigue, maybe you should take a break?
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Uniform/Jumpsuit/nanamijumpsuit.rsi

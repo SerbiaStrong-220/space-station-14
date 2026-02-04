@@ -14,14 +14,14 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpskirt/captain_white.rsi
 
-# Сервис
+  # Сервис
 
   # Ведущий сервис
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtSeniorService
-  name: юбка-комбинезон сервисного администратора #SS220 rename
-  description: Знак мастерства и мастерства сервисной службы.
+  name: service administrator's jumpskirt #SS220 rename
+  description: A sign of excellence and skill in the service department.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpskirt/senior_service.rsi
@@ -32,8 +32,8 @@
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtClowns
-  name: юбка-комбинезон клоуна
-  description: ХОНК!
+  name: clown jumpskirt
+  description: HONK!
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpskirt/clown.rsi
@@ -89,8 +89,8 @@
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtBartenderNanotrasen
-  name: униформа заслуженного бармена NanoTrasen
-  description: Дорогая униформа, сделанная на заказ для лучшей из лучших.
+  name: NanoTrasen distinguished bartender's uniform
+  description: An expensive, custom-made uniform for the best of the best.
   suffix: За время в игре
   components:
   - type: Sprite
@@ -114,8 +114,8 @@
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtChefWhite
-  name: белая униформа шеф-повара
-  description: Без этого нельзя готовить.
+  name: white chef uniform
+  description: You can't cook without this.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpskirt/chef_white.rsi
@@ -125,8 +125,8 @@
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtChefGreen
-  name: зелёная униформа шеф-повара
-  description: Без этого нельзя готовить.
+  name: green chef uniform
+  description: You can't cook without this.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpskirt/chef_green.rsi
@@ -136,8 +136,8 @@
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtChefBlack
-  name: чёрная униформа шеф-повара
-  description: Без этого нельзя готовить.
+  name: black chef uniform
+  description: You can't cook without this.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpskirt/chef_black.rsi
@@ -147,8 +147,8 @@
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtChefNanotrasen
-  name: униформа заслуженного шеф-повара NanoTrasen
-  description: Дорогая униформа, сделанная на заказ для лучшей из лучших.
+  name: NanoTrasen distinguished chef uniform
+  description: An expensive, custom-made uniform for the best of the best.
   suffix: За время в игре, Сеньор
   components:
   - type: Sprite
@@ -157,7 +157,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpskirt/chef_nt.rsi
 
 
-# Medical
+  # Medical
 
   # Интерн
 
@@ -172,7 +172,7 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpskirt/intern.rsi
 
- # Главный врач
+  # Главный врач
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtCMOCorporate
@@ -211,10 +211,9 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpskirt/brigmedic_military_feldsher.rsi
 
-# Инженерия
+  # Инженерия
 
   # Старший инженер
-
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformJumpskirtChiefEngineerDark
@@ -265,7 +264,7 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpskirt/syndicate_diplomatist.rsi
 
-# Карго
+  # Карго
 
   #Квартирмейстер
 - type: entity
@@ -280,7 +279,7 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpskirt/qm_warehouseman_skirt.rsi
 
-# RND / РНД
+  # RND / РНД
 
   # Ассистент
 - type: entity
@@ -349,8 +348,8 @@
 - type: entity
   parent: ClothingUniformSkirtBase
   id: ClothingUniformMagicianDress
-  name: платье волшебницы
-  description: Наполняет вас магией и скоростью! Или не совсем...
+  name: sorceress dress
+  description: Fills you with magic and speed! Or not quite...
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpskirt/specific_magiciansdress.rsi
@@ -358,6 +357,6 @@
     sprite: SS220/Clothing/Uniforms/Jumpskirt/specific_magiciansdress.rsi
   - type: Tag
     tags:
-     - MagicianDress
-     - ClothMade #SS220-pr: FIX CLOTHING TAGS
-     - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS
+    - MagicianDress
+    - ClothMade #SS220-pr: FIX CLOTHING TAGS
+    - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS

@@ -6,9 +6,9 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformWhiteJumpsuitCaptain
-  name: белая униформа офицера
-  description: Это белый костюм с золотыми украшениями, на погонах одна золотая звезда - "Майор".
-  suffix: За время в игре
+  name: white officer uniform
+  description: It's a white suit with gold decorations, with a single gold star on the epaulettes - "Major".
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/captain_white.rsi
@@ -28,7 +28,7 @@
 
   # Главный врач
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformFoldableBase] 
+  parent: [ClothingUniformBase, ClothingUniformFoldableBase]
   id: ClothingUniformJumpsuitCMOCorporate
   name: corporate CMO Jumpsuit
   description: «A beautiful, stylish suit of a real chief medical officer. It emphasises the person's nature and the beauty of his charisma...» Nothing further on the unopened label.
@@ -150,8 +150,8 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitSeniorService
-  name: комбинезон сервисного администратора #SS220 rename
-  description: Знак мастерства и мастерства сервисной службы.
+  name: service administrator's jumpsuit #SS220 rename
+  description: A sign of excellence and skill in the service department.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/senior_service.rsi
@@ -163,8 +163,8 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitClowns
-  name: комбинезон клоуна
-  description: ХОНК!
+  name: clown jumpsuit
+  description: HONK!
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/clown.rsi
@@ -301,9 +301,9 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitBartenderNanotrasen
-  name: униформа заслуженного бармена NanoTrasen
-  description: Дорогая униформа, сделанная на заказ для лучшего из лучших.
-  suffix: За время в игре
+  name: NanoTrasen distinguished bartender's uniform
+  description: An expensive, custom-made uniform for the best of the best.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/bartender_nt.rsi
@@ -326,9 +326,9 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitOrangeJanitor
-  name: фиолетовая униформа
-  description: Фиолетовая униформа, но с оранжевыми штанами на подтяжках.
-  suffix: За время в игре
+  name: purple uniform
+  description: A purple uniform, but with orange overalls.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/janitor_orange.rsi
@@ -352,8 +352,8 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitChefWhite
-  name: белая униформа шеф-повара
-  description: Без этого нельзя готовить.
+  name: white chef uniform
+  description: You can't cook without this.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/chef_white.rsi
@@ -363,8 +363,8 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitChefGreen
-  name: зелёная униформа шеф-повара
-  description: Без этого нельзя готовить.
+  name: green chef uniform
+  description: You can't cook without this.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/chef_green.rsi
@@ -374,8 +374,8 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitChefBlack
-  name: чёрная униформа шеф-повара
-  description: Без этого нельзя готовить.
+  name: black chef uniform
+  description: You can't cook without this.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/chef_black.rsi
@@ -385,9 +385,9 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitChefNanotrasen
-  name: униформа заслуженного шеф-повара NanoTrasen
-  description: Дорогая униформа, сделанная на заказ для лучшего из лучших.
-  suffix: За время в игре, Сеньор
+  name: NanoTrasen distinguished chef uniform
+  description: An expensive, custom-made uniform for the best of the best.
+  suffix: For playtime, Senior
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/chef_nt.rsi
@@ -673,9 +673,9 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformTacticalSecurity
-  name: тактическая униформа СБ
-  description: Боевая рубаха для самых элитных офицеров СБ. Индивидуальный пошив!
-  suffix: За время в игре
+  name: tactical security uniform
+  description: Combat shirt for the most elite security officers. Custom tailored!
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/security_tacuniform.rsi
@@ -687,8 +687,8 @@
 - type: entity
   parent: UnsensoredClothingUniformBase
   id: ClothingUniformCentCommOfficer
-  name: униформа Офицера NanoTrasen
-  description: На этой униформе изображено звание «лейтенант-коммандер». Её носят исключительно офицеры NanoTrasen. Защитные свойства форме придают экзотические материалы.
+  name: NanoTrasen officer uniform
+  description: This uniform displays the rank of "Lieutenant Commander". It is worn exclusively by NanoTrasen officers. Exotic materials provide protective properties to the uniform.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/nanotrasen_officer.rsi
@@ -703,8 +703,8 @@
 - type: entity
   parent: UnsensoredClothingUniformBase
   id: ClothingUniformNanotrasenDiplomat
-  name: дипломатическая форма NanoTrasen
-  description: Очень яркая и официальная униформа дипломатического корпуса NanoTrasen.
+  name: NanoTrasen diplomatic uniform
+  description: A very bright and formal uniform of the NanoTrasen diplomatic corps.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/nanotrasen_diplomat.rsi

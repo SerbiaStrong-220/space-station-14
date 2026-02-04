@@ -4,8 +4,8 @@
 - type: entity
   parent: ClothingSponsorMaskBase
   id: ClothingSponsorWaltuhBeard
-  name: накладная бородка
-  description: ...
+  name: fake goatee
+  description: The purest product. 99.1%.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Mask/beard.rsi
@@ -18,8 +18,8 @@
 - type: entity
   parent: ClothingSponsorMaskBase
   id: ClothingSponsorGoldClownMask
-  name: золотая маска клоуна
-  description: Выглядит очень тяжёлой.
+  name: golden clown mask
+  description: It looks very heavy.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Mask/goldclownmask.rsi
@@ -46,8 +46,8 @@
 - type: entity
   parent: ClothingSponsorMaskBase
   id: ClothingSponsorMaskMuzhik
-  name: маска мужика
-  description: Нет лучше времяпрепровождения, чем распивать самогон с товарищами.
+  name: muzhik's mask
+  description: There is no better pastime than drinking moonshine with your comrades.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Mask/muzhik.rsi
@@ -59,8 +59,8 @@
 - type: entity
   parent: ClothingSponsorMaskBase
   id: ClothingMaskMoryak
-  name: маска морячка
-  description: Есть легенда, что при виде самогона маска улыбается.
+  name: sailor's mask
+  description: Legend has it that the mask smiles at the sight of moonshine.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Mask/moryachok.rsi

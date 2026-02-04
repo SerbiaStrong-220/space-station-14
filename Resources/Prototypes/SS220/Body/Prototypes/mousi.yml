@@ -1,0 +1,29 @@
+# EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: body
+  id: Mousi
+  name: "Mousi"
+  root: torso
+  slots:
+    torso:
+      part: TorsoAnimal
+      connections:
+      - l-hand
+      - r-hand
+      - legs
+      organs:
+        lungs: OrganAnimalLungs
+        stomach: OrganAnimalStomach
+        liver: OrganAnimalLiver
+        heart: OrganAnimalHeart
+        kidneys: OrganAnimalKidneys
+    l-hand:
+      part: LeftHandMousi
+    r-hand:
+      part: RightHandMousi
+    legs:
+      part: LegsAnimal
+      connections:
+      - feet
+    feet:
+      part: FeetAnimal

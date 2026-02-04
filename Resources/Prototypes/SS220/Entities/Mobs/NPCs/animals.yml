@@ -1,8 +1,8 @@
 - type: entity
-  name: охранная собака
+  name: security dog
   parent: SimpleMobBase
   id: MobSecDog
-  description: Как ни странно, эта свинья на самом деле собака.
+  description: Strangely enough, this pig is actually a dog.
   components:
   - type: GhostRole
     makeSentient: true
@@ -17,7 +17,7 @@
     baseSprintSpeed : 5.0
   - type: NpcFactionMember
     factions:
-      - PetsNT
+    - PetsNT
   - type: Sprite
     drawdepth: Mobs
     sprite: SS220/Mobs/Animals/Roxi.rsi
@@ -37,13 +37,13 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.35
-        density: 120 # BIG DOG :3
+        density: 120
         mask:
         - MobMask
         layer:
         - MobLayer
   - type: MobThresholds
-    thresholds: # BIG DOG. STRONG DOG
+    thresholds:
       0: Alive
       100: Critical
       300: Dead
@@ -51,7 +51,7 @@
     hidden: true
     altDisarm: false
     soundHit:
-        path: /Audio/Effects/bite.ogg
+      path: /Audio/Effects/bite.ogg
     angle: 0
     attackRate: 1
     damage:
@@ -102,7 +102,7 @@
     attributes:
       gender: epicene
   - type: Bloodstream
-    bloodMaxVolume: 200 # :3
+    bloodMaxVolume: 200
   - type: Puller
     needsHands: false
   - type: MobPrice
@@ -123,9 +123,9 @@
   - type: ContainerFill
     containers:
       borg_brain:
-        - PositronicBrain
+      - PositronicBrain
       borg_module:
-        - BorgModuleTool
+      - BorgModuleTool
   - type: ItemSlots
     slots:
       cell_slot:
@@ -152,8 +152,8 @@
     critThreshold: 120
   - type: MobState
     allowedStates:
-      - Alive
-      - Dead
+    - Alive
+    - Dead
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -196,11 +196,11 @@
     - Science
   - type: HealthExaminable
     examinableTypes:
-      - Blunt
-      - Slash
-      - Piercing
-      - Heat
-      - Shock
+    - Blunt
+    - Slash
+    - Piercing
+    - Heat
+    - Shock
     locPrefix: silicon
   - type: MovedByPressure
   - type: StatusEffects
@@ -283,10 +283,10 @@
       canSpeak: true
 
 - type: entity
-  name: крокодил
+  name: crocodile
   parent: SimpleMobBase
   id: MobCrocodile
-  description: Он не кусается, наверное.
+  description: He doesn't bite, probably.
   components:
   - type: Sprite
     drawdepth: Mobs
@@ -339,7 +339,7 @@
     hidden: true
     altDisarm: false
     soundHit:
-        path: /Audio/Effects/bite.ogg
+      path: /Audio/Effects/bite.ogg
     angle: 0
     attackRate: 0.5
     damage:
@@ -350,7 +350,7 @@
     baseSprintSpeed : 3.0
   - type: NpcFactionMember
     factions:
-      - Passive
+    - Passive
   - type: NPCRetaliation
     attackMemoryLength: 10
   - type: Butcherable
@@ -382,11 +382,11 @@
     - DoorBumpOpener
 
 - type: entity
-  name: крокодил
-  suffix: злой
+  name: crocodile
+  suffix: angry
   parent: MobCrocodile
   id: MobCrocodileAngry
-  description: Он кусается, наверное.
+  description: He bites, probably.
   components:
   - type: HTN
     rootTask:
@@ -398,8 +398,8 @@
 - type: entity
   parent: MobCrocodile
   id: MobAlbinoCrocodile
-  name: альбино
-  description: Добрейшей души крокодил.
+  name: albino
+  description: A crocodile with the kindest soul.
   components:
   - type: Sprite
     drawdepth: Mobs
@@ -420,13 +420,13 @@
   - type: Accentless
     removes:
     - type: ReplacementAccent
-      accent: xeno  #let this wizard speak
+      accent: xeno
   - type: Language
     availableLanguages:
     - id: Galactic
   - type: Telepathy
     canSend: false
-    telepathyChannelPrototype: TelepathyChannelHive	
+    telepathyChannelPrototype: TelepathyChannelHive
   - type: ExplosionResistance
     damageCoefficient: 0.5
   - type: PassiveDamage
@@ -450,3 +450,269 @@
     count: 2
   - type: Gun
     fireRate: 4
+
+- type: entity
+  name: Mousi
+  id: MobMousi
+  parent: SimpleMobBase
+  description: Peep?...
+  components:
+  - type: NameIdentifier
+  - type: Stripping
+  - type: Strippable
+  - type: CombatMode
+  - type: Inventory
+    templateId: mousi
+    speciesId: mousi
+  - type: InventorySlots
+  - type: NpcFactionMember
+    factions:
+    - Mouse
+  - type: Deathgasp
+  - type: MobStateActions
+    actions:
+      Critical:
+      - ActionCritSuccumb
+      - ActionCritFakeDeath
+      - ActionCritLastWords
+  - type: Respirator
+    damage:
+      types:
+        Asphyxiation: 0.25
+    damageRecovery:
+      types:
+        Asphyxiation: -0.25
+  - type: Hunger
+    baseDecayRate: 0.1
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 80
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: UserInterface
+    interfaces:
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
+  - type: InteractionPopup
+    successChance: 0.8
+    interactSuccessString: hugging-success-generic-mousi
+    interactFailureString: hugging-failure-generic-mousi
+    messagePerceivedByOthers: hugging-success-generic-mousi-others
+    interactSuccessSpawn: EffectHearts
+    interactSuccessSound: /Audio/Animals/fox_squeak.ogg
+    interactFailureSound: /Audio/Effects/thudswoosh.ogg
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: SS220/Mobs/Animals/mousi.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: running
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: running-unshaded
+      shader: unshaded
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: running
+      Critical:
+        Base: crit
+      Dead:
+        Base: dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      100: Critical
+      200: Dead
+  - type: Stamina
+    critThreshold: 100
+  - type: Bloodstream
+    bloodMaxVolume: 250
+  - type: Hands
+  - type: Speech
+    speechSounds: Squeak
+    speechVerb: SmallMob
+  - type: Body
+    prototype: Mousi
+    requiredLegs: 1
+  - type: Butcherable
+    butcheringType: Spike
+    spawned:
+    - id: FoodMeat
+      amount: 5
+  - type: Puller
+  - type: Vocal
+    sounds:
+      Male: Mouse
+      Female: Mouse
+      Unsexed: Mouse
+  - type: TTS
+    voice: mana
+  - type: GhostRole
+    allowMovement: true
+    allowSpeech: true
+    name: Мауси
+    description: Вы большая, человекоподобная мышь.
+  - type: GhostTakeoverAvailable
+
+- type: entity
+  parent: [ SimpleMobBase, MobCombat ]
+  id: MobGigaHamlet
+  name: gigahamlet
+  description: A huge muscular hamster is an amazing phenomenon of nature. His massive body is decorated with thick, shiny fur that accentuates every contour of his impressive muscles. The strong paws of this hamster resemble powerful columns capable of supporting its impressive weight. His eyes sparkle with confidence and strength, and his smile expresses friendliness and unwavering strength. This hamster is undoubtedly admired and respected by all who are lucky enough to meet him.
+  suffix: Shitspawn
+  components:
+  - type: CombatMode
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 3
+    baseSprintSpeed : 5
+  - type: MobState
+  - type: Deathgasp
+  - type: MobStateActions
+    actions:
+      Critical:
+      - ActionCritSuccumb
+      - ActionCritFakeDeath
+      - ActionCritLastWords
+  - type: Inventory
+    speciesId: hamster
+    templateId: hamster
+  - type: NoSlip
+  - type: Hunger
+    baseDecayRate: 0.3
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 80
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: SS220/Mobs/Animals/gigahamlet.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: gigahamlet
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: gigahamlet
+      Critical:
+        Base: crit
+      Dead:
+        Base: dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      400: Critical
+      500: Dead
+  - type: Stamina
+    critThreshold: 300
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      250: 0.7
+      350: 0.5
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Weapons/Xeno/alien_claw_flesh2.ogg
+    angle: 0
+    attackRate: 0.75
+    animation: WeaponArcFist
+    damage:
+      types:
+        Blunt: 80
+  - type: Bloodstream
+    bloodMaxVolume: 750
+  - type: Speech
+    speechSounds: Squeak
+    speechVerb: SmallMob
+    allowedEmotes: ['Squeak']
+  - type: Body
+    prototype: Rat
+    requiredLegs: 1
+  - type: Vocal
+    sounds:
+      Male: Mouse
+      Female: Mouse
+      Unsexed: Mouse
+  - type: TTS
+    voice: horner
+  - type: Butcherable
+    spawned:
+    - id: FoodMeat
+      amount: 4
+  - type: Grammar
+    attributes:
+      proper: true
+      gender: male
+  - type: MobPrice
+    price: 4000
+  - type: NonSpreaderZombie
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - FootstepSound
+    - Hamster
+    #Для открытия дверей
+  - type: Tool
+    speedModifier: 1.5
+    qualities:
+    - Prying
+    useSound:
+      path: /Audio/Items/crowbar.ogg
+  - type: Prying
+    pryPowered: !type:Bool
+      true
+    force: !type:Bool
+      true
+    useSound:
+      path: /Audio/Items/crowbar.ogg
+    #Для открытия дверей
+  - type: PassiveDamage
+    allowedStates:
+    - Alive
+    damageCap: 599
+    damage:
+      groups:
+        Brute: -0.1
+        Burn: -0.1
+  - type: GhostRole
+    allowMovement: true
+    allowSpeech: true
+    name: ghost-role-information-gigagamlet-name
+    description: ghost-role-information-gigagamlet-description
+  - type: GhostTakeoverAvailable
+
+- type: entity
+  parent: MobGigaHamlet
+  id: MobRicardoHamlet
+  name: ricardo hamles
+  description: If hamsters could be superheroes, then Ricardo Gomez would be their best representative. Ah.. How he dances.. God..
+  suffix: Shitspawn
+  components:
+  - type: Sprite
+    sprite: SS220/Mobs/Animals/ricardohamlet.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: ricardohamlet
+  - type: GhostRole
+    allowMovement: true
+    allowSpeech: true
+    name: ghost-role-information-gigohamles-name
+    description: ghost-role-information-gigohamles-description
+  - type: GhostTakeoverAvailable
+  # Всё же, думаю не стоит...
+  # - type: Butcherable
+  #   spawned:
+  #   - id: ClothingUniformRicardoHamletJunior
+  #     amount: 1

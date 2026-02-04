@@ -4,8 +4,8 @@
 - type: entity
   parent: ClothingHandsGlovesSyntheticBase
   id: ClothingHandsGlovesMuzhik
-  name: перчатки мужика
-  description: Ни один стакан самогона не выскользнет из ваших рук.
+  name: muzhik's gloves # ai suggest this translate, cause (Оставил "Muzhik" в названии транслитерацией, так как это культурный архетип, который сложно адекватно заменить на просто "man" или "guy")
+  description: Not a single glass of moonshine will ever slip from your hands.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Hand/muzhik.rsi
