@@ -105,7 +105,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         if (TryComp<WiresPanelComponent>(ent.Owner, out var panel) && !panel.Open)
             return;
 
-        if (ent.Comp.ContainerDict["power"].ContainedEntity == null && TryComp<BatteryComponent>(args.Used, out var battery))
+        if (ent.Comp.ContainerDict["power"].ContainedEntity == null && TryComp<BatteryComponent>(args.Used, out var battery) && TryComp<MechPartComponent>(args.Used, out var _))
         {
             InsertBattery(ent.Owner, args.Used, ent.Comp, battery);
             _actionBlocker.UpdateCanMove(ent.Owner);
