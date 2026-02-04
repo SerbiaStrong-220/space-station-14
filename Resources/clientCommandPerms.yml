@@ -85,6 +85,7 @@
     - toggleautosave
     - toggledecals
     - showaccessreaders
+    - zones:control_window # SS220 Zones
 
 - Flags: QUERY
   Commands:
