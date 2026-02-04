@@ -1,8 +1,8 @@
 - type: entity
   id: CrateDrinkBeerCan
   parent: CratePlastic
-  name: ящик пива
-  description: Ящик пива - это источник настоящего удовольствия и отличного настроения. В нем спрятаны лучшие сорта пива, которые обещают золотистый цвет, искрящийся вкус и неповторимый аромат. Будьте уверены, что открыв этот ящик, вы откроете дверь в мир качественного и насыщенного вкуса. Содержит 18 банок пива.
+  name: beer crate
+  description: A crate of beer is a source of true pleasure and great vibes. Inside are the finest brews, promising a golden hue, sparkling taste, and a unique aroma. Rest assured, opening this crate is your gateway to a world of high-quality, rich flavor. Contains 18 cans of beer.
   components:
   - type: StorageFill
     contents:

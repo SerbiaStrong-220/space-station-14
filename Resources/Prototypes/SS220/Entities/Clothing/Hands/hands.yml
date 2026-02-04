@@ -3,8 +3,8 @@
 - type: entity
   parent: ClothingHandsGlovesCaptain
   id: ClothingHandsWhiteGlovesCaptain
-  name: белые перчатки капитана
-  description: Дорогие перчатки ветерана флотской службы NT.
+  name: white captain's gloves
+  description: Costly gloves belonging to a veteran of the NT naval service.
   suffix: За время в игре
   components:
   - type: Sprite
@@ -47,8 +47,8 @@
 - type: entity
   parent: ClothingHandsGlovesJanitor
   id: ClothingHandsGlovesOrangeJanitor
-  name: оранжевые резиновые перчатки
-  description: Высококачественные резиновые перчатки, скрипящие от желания сделать уборку!
+  name: orange rubber gloves
+  description: High-quality rubber gloves, squeaking with a desire to start cleaning!
   suffix: За время в игре
   components:
   - type: Sprite
@@ -196,7 +196,6 @@
           False: {state: icon}
   - type: ToggleClothing
     action: ActionTogglePowergloveDisabler
-
 
 - type: entity
   id: ActionTogglePowergloveDisabler

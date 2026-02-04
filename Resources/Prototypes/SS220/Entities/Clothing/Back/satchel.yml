@@ -3,8 +3,8 @@
 - type: entity
   parent: ClothingBackpackSatchel
   id: ClothingBackpackWhiteSatchelCaptain
-  name: белая сумка капитана
-  description: Дорогая белая сумка, выданная за выслугу лет капитану.
+  name: white captain's satchel
+  description: A costly white bag awarded to a captain for years of loyal service.
   suffix: За время в игре
   components:
   - type: Sprite
@@ -13,8 +13,8 @@
 - type: entity
   parent: ClothingBackpackSatchel
   id: ClothingBackpackNoirSatchel
-  name: нуарная кожаная сумка
-  description: Модная сумка в нуарном стиле, ушедшая из нашей эпохи.
+  name: noir leather satchel
+  description: A fashionable noir-style bag from a bygone era.
   components:
     - type: Sprite
       sprite: SS220/Clothing/Back/Satchels/leather-noir.rsi
@@ -22,8 +22,8 @@
 - type: entity
   parent: ClothingBackpackSatchelLeather
   id: ClothingBackpackCentCommFilled
-  name: кожаная сумка
-  description: Слегка обветшалая сумка, которую не меняли на ЦК уже много лет - бюджета, говорят, не выделили.
+  name: leather satchel
+  description: A slightly worn-out bag that hasn't been replaced at CentComm for years — they say the budget wasn't allocated.
   components:
     - type: StorageFill
       contents:

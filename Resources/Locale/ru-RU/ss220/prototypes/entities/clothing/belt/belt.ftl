@@ -15,3 +15,16 @@ ent-ClothingBeltLegendaryMarksmanHolsterFilled = плечевая кобура �
 
 ent-ClothingBeltBlackAngelHolsterFilled = плечевая кобура Чёрного ангела
     .desc = Кобура для ношения пистолета и боеприпасов. ВНИМАНИЕ: Только для крутых.
+
+ent-ClothingBeltChefApronBase = фартук
+    .desc = Фартук, который используют первоклассные повара, с карманами для хранения кухонных ножей и быстрого доступа к приправам.
+ent-ClothingBeltChefApronWhite = белый фартук
+    .desc = { ent-ClothingBeltChefApronBase.desc }
+ent-ClothingBeltChefApronGreen = зелёный фартук
+    .desc = { ent-ClothingBeltChefApronBase.desc }
+ent-ClothingBeltChefApronBlack = чёрный фартук
+    .desc = { ent-ClothingBeltChefApronBase.desc }
+ent-ClothingBeltChefApronRed = красный фартук
+    .desc = { ent-ClothingBeltChefApronBase.desc }
+ent-ClothingBeltChefApronNanotrasen = синий фартук
+    .desc = Фартук высокого качества с карманами, сделанный на заказ. Нужен для хранения кухонных ножей и быстрого доступа к приправам.

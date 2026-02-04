@@ -3,8 +3,8 @@
 - type: entity
   parent: ClothingNeckBase
   id: ClothingNeckProtectBundle
-  name: защитный комплект СБ
-  description: Защитный комплект состоящий из пары наколенников и налокотников идеально впишутся в ваш рабочий процесс по устранению беспорядков!
+  name: security protection bundle
+  description: A protection bundle consisting of a pair of knee and elbow pads. Fits perfectly into your riot control workflow!
   components:
     - type: Sprite
       sprite: SS220/Clothing/Neck/Misc/tactical.rsi
@@ -19,8 +19,8 @@
 - type: entity
   parent: ClothingNeckProtectBundle
   id: ClothingNeckProtectBundleBlue
-  name: защитный комплект
-  description: Защитный комплект состоящий из пары наколенников и налокотников идеально впишутся в ваш рабочий процесс по устранению беспорядков!
+  name: protection bundle
+  description: A protection bundle consisting of a pair of knee and elbow pads. Fits perfectly into your riot control workflow!
   components:
     - type: Sprite
       sprite: SS220/Clothing/Neck/Misc/tactical_blue.rsi

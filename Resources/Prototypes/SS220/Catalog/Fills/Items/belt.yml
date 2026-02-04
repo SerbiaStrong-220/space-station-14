@@ -19,8 +19,8 @@
       - MinamotoNoYorimitsu
 
 - type: entity
-  id:  ClothingBeltRapierSheathFilled
-  parent:  ClothingBeltRapierSheath
+  id: ClothingBeltRapierSheathFilled
+  parent: ClothingBeltRapierSheath
   suffix: Filled, 27 piercing
   components:
   - type: ContainerFill
@@ -29,7 +29,7 @@
       - Rapier
 
 - type: entity
-  id:  ClothingBeltRapierSheathAltFilled
+  id: ClothingBeltRapierSheathAltFilled
   parent: ClothingBeltRapierSheathFilled
   suffix: Filled, 15 piercing
 

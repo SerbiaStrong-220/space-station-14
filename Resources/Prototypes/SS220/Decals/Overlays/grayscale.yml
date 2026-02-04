@@ -29,3 +29,35 @@
   sprite:
     sprite: SS220/Decals/Overlays/greyscale.rsi
     state: brick_inner_sw
+
+- type: decal
+  id: DiagonalCheckerCOverlay
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/Overlays/greyscale.rsi
+    state: diagonal_checker_c
+
+- type: decal
+  id: DiagonalCheckerDOverlay
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/Overlays/greyscale.rsi
+    state: diagonal_checker_d
+
+- type: decal
+  id: MiniTileDiagonalCheckerCOverlay
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/Overlays/greyscale.rsi
+    state: minitile_diagonal_c
+
+- type: decal
+  id: MiniTileDiagonalCheckerDOverlay
+  tags: ["station", "overlay"]
+  defaultCustomColor: true
+  sprite:
+    sprite: SS220/Decals/Overlays/greyscale.rsi
+    state: minitile_diagonal_d

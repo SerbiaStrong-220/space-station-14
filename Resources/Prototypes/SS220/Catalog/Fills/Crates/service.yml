@@ -71,10 +71,18 @@
         rolls: !type:ConstantNumberSelector
           value: 5
 
+- type: entity
+  id: CratePhotocopier
+  parent: CrateGenericSteel
+  components:
+  - type: StorageFill
+    contents:
+    - id: PhotocopierBase
+
 - type: entityTable
   id: RandomPottedPlantsTable
   table: !type:GroupSelector
-    children: 
+    children:
       - id: PottedPlantAlt0
       - id: PottedPlantAlt1
       - id: PottedPlantAlt2
@@ -109,7 +117,7 @@
 - type: entityTable
   id: RandomPottedBioLumPlantsTable
   table: !type:GroupSelector
-    children: 
+    children:
     - id: PottedPlantBioluminscentSS220_1
     - id: PottedPlantBioluminscentSS220_2
     - id: PottedPlantBioluminscentSS220_3
@@ -146,7 +154,7 @@
 - type: entityTable
   id: RandomPottedPlasticPlantsTable
   table: !type:GroupSelector
-    children: 
+    children:
     - id: PottedPlant27
     - id: PottedPlant28
     - id: PottedPlant29

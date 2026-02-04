@@ -3,9 +3,26 @@
 - type: entity
   parent: ClothingBackpackDuffel
   id: ClothingBackpackWhiteDuffelCaptain
-  name: белый вещмешок капитана
-  description: Дорогая белая сумка, выданная за выслугу лет капитану.
+  name: white captain's duffel bag
+  description: A costly white bag awarded to a captain for years of loyal service.
   suffix: За время в игре
   components:
   - type: Sprite
     sprite: SS220/Clothing/Back/Duffels/captain_white.rsi
+
+- type: entity
+  id: ClothingBackpackDuffelCBURNFilled
+  parent: ClothingBackpackDuffelCBURN
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: BoxSurvivalCentcom #SS220 More_Centcomm_Prototypes
+    - id: WeaponShotgunDoubleBarreled
+    - id: BoxShotgunIncendiary
+      amount: 2
+    - id: GrenadeFlashBang
+      amount: 2
+    - id: PillAmbuzolPlus
+    - id: PillAmbuzol
+      amount: 4

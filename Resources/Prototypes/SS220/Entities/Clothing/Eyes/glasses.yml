@@ -14,8 +14,8 @@
 - type: entity
   parent: ClothingEyesGlassesCheapSunglasses
   id: ClothingEyesQuartermasterGlasses
-  name: очки квартирмейстера
-  description: Эксклюзивные очки квартирмейстера, совмещающие в себе защиту ваших, зрящих в корень, глаз от ярких лучей в совокупности со встроенным интерфейсом оценивания груза. Выдержанный стиль отдела снабжения для своего лучшего сотрудника.
+  name: quartermaster's glasses
+  description: Exclusive glasses that combine cargo-evaluation interface with protection for your keen eyes against bright rays. The Supply Department's signature style for its finest employee.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Eyes/Glasses/qm.rsi
@@ -130,7 +130,6 @@
           - Scientist
           - Borg
 
-
 # Proto for future if we want to add this to RND
 - type: entity
   parent: ClothingEyesBase
@@ -146,7 +145,6 @@
       sprite: Clothing/Eyes/Glasses/thermal.rsi
     - type: Clothing
       sprite: Clothing/Eyes/Glasses/thermal.rsi
-
 
 - type: entity
   parent: [ClothingEyesBase, ShowSecurityIcons]
@@ -175,3 +173,23 @@
     - Security
   - type: IdentityBlocker
     coverage: EYES
+
+- type: entity
+  parent: ClothingEyesBase
+  id: ClothingEyesGlassesBlueShield
+  name: blue shield sunglasses
+  description: Strangely ancient technology used to help provide rudimentary eye cover. Enhanced shielding blocks many flashes.
+  components:
+  - type: Sprite
+    sprite: Clothing/Eyes/Glasses/bsglasses.rsi
+  - type: Clothing
+    sprite: Clothing/Eyes/Glasses/bsglasses.rsi
+  - type: FlashImmunity
+  - type: EyeProtection
+    protectionTime: 5
+  - type: ShowHealthBars
+    damageContainers:
+    - Biological
+  - type: ShowHealthIcons
+    damageContainers:
+    - Biological #ss220-blueshield-fix-end

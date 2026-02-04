@@ -1,28 +1,5 @@
-- type: entity
-  id: CrateCargoLottery5
-  parent: CratePrivateSecure
-  name: ящик лотерейных билетов
-  description: Больше билетов - больше выигрыш! Стань миллионером уже сегодня!
-  suffix: 5 штук
-  components:
-  - type: StorageFill
-    contents:
-    - id: LotteryCash
-      amount: 5
-
-- type: entity
-  id: CrateCargoLottery10
-  parent: CrateCargoLottery5
-  name: большой ящик лотерейных билетов
-  suffix: 10 штук
-  components:
-  - type: StorageFill
-    contents:
-    - id: LotteryCash
-      amount: 10
-
 - type: cargoProduct
-  id: BoxOfLegalPosters
+  id: BoxLegalPosters
   icon:
     sprite: SS220/Objects/Misc/Legalposter.rsi
     state: legalposter
@@ -38,5 +15,35 @@
     state: drum
   product: BigDrumsInstrument
   cost: 1500
+  category: cargoproduct-category-name-fun
+  group: market
+
+- type: cargoProduct
+  id: LotteryCash
+  icon:
+    sprite: SS220/Objects/Fun/lottery.rsi
+    state: icon
+  product: LotteryCash
+  cost: 5000
+  category: cargoproduct-category-name-fun
+  group: market
+
+- type: cargoProduct
+  id: CrateCargoLottery5
+  icon:
+    sprite: Structures/Storage/Crates/privatecrate_secure.rsi
+    state: icon
+  product: CrateCargoLottery5
+  cost: 23500
+  category: cargoproduct-category-name-fun
+  group: market
+
+- type: cargoProduct
+  id: CrateCargoLottery10
+  icon:
+    sprite: Structures/Storage/Crates/privatecrate_secure.rsi
+    state: icon
+  product: CrateCargoLottery10
+  cost: 45000
   category: cargoproduct-category-name-fun
   group: market
