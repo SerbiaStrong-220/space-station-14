@@ -1,0 +1,70 @@
+- type: entity
+  name: spider steak
+  parent: FoodMeatBase
+  id: FoodMeatSpiderSteak
+  description: A cooked spider. Smells primal.
+  components:
+  - type: Tag
+    tags:
+    - Cooked
+    - Meat
+    - Steak
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/meat.rsi
+    state: spider-grilled
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Protein
+          Quantity: 5
+  - type: SliceableFood
+    count: 3
+    slice: FoodMeatSpiderCutletCooked
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: spider-inhand-left-grilled
+      right:
+      - state: spider-inhand-right-grilled
+
+- type: entity
+  name: snake steak
+  parent: FoodMeatBase
+  id: FoodMeatSnakeSteak
+  components:
+  - type: Tag
+    tags:
+    - Cooked
+    - Meat
+    - Steak
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/meat.rsi
+    state: snake-grilled
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 4
+        - ReagentId: Protein
+          Quantity: 8
+        - ReagentId: Toxin
+          Quantity: 1
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: snake-inhand-left-grilled
+      right:
+      - state: snake-inhand-right-grilled
+
+- type: entity
+  parent: FoodMeatBase
+  id: FoodCutletBase
+  abstract: true
+  components:
+  - type: InternalTemperature
+    thickness: 0.06
+

@@ -626,40 +626,6 @@
     cookingResult: FoodMeatSpiderSteak
   #SS220-grill-update-2 end
 
-#SS220-grill-update-2 begin
-- type: entity
-  name: spider steak
-  parent: FoodMeatBase
-  id: FoodMeatSpiderSteak
-  description: A cooked spider. Smells primal.
-  components:
-  - type: Tag
-    tags:
-    - Cooked
-    - Meat
-    - Steak
-  - type: Sprite
-    sprite: SS220/Objects/Consumable/Food/meat.rsi
-    state: spider-grilled
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 10
-        - ReagentId: Protein
-          Quantity: 5
-  - type: SliceableFood
-    count: 3
-    slice: FoodMeatSpiderCutletCooked
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: spider-inhand-left-grilled
-      right:
-      - state: spider-inhand-right-grilled
-#SS220-grill-update-2 end
-
 - type: entity
   parent: FoodMeatBase
   id: FoodMeatSpiderLeg
@@ -758,38 +724,6 @@
     conductivity: 0.42
   #SS220-grill-update-2 end
 
-#SS220-grill-update-2 begin
-- type: entity
-  name: snake steak
-  parent: FoodMeatBase
-  id: FoodMeatSnakeSteak
-  components:
-  - type: Tag
-    tags:
-    - Cooked
-    - Meat
-    - Steak
-  - type: Sprite
-    sprite: SS220/Objects/Consumable/Food/meat.rsi
-    state: snake-grilled
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 4
-        - ReagentId: Protein
-          Quantity: 8
-        - ReagentId: Toxin
-          Quantity: 1
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: snake-inhand-left-grilled
-      right:
-      - state: snake-inhand-right-grilled
-#SS220-grill-update-2 end
-
 - type: entity
   # not raw since acid kills bacteria or something, same as xeno
   parent: FoodMeatBase
@@ -882,7 +816,6 @@
       right:
       - state: tomato-inhand-right
 
-# SS220-Salami-update begin
 - type: entity
   parent: FoodMeatBase
   id: FoodMeatSalami
@@ -893,11 +826,12 @@
     storedOffset: 0,1
   - type: Tag
     tags:
-    - Cooked
+    - Cooked #ss220 salami normal update
     - Meat
   - type: Sprite
     sprite: Objects/Consumable/Food/salami.rsi
     state: salami
+  #ss220 salami normal update start
   - type: SolutionContainerManager
     solutions:
       food:
@@ -909,14 +843,15 @@
           Quantity: 4
         - ReagentId: Protein
           Quantity: 16
+  #ss220 salami normal update end
   - type: SliceableFood
-    count: 25
+    count: 25 #ss220 salami normal update
     slice: FoodMeatSalamiSlice
   - type: MeleeWeapon
     wideAnimationRotation: 100
     damage:
       types:
-        Blunt: 12
+        Blunt: 12 #ss220 salami normal update
   - type: Wieldable
   - type: IncreaseDamageOnWield
     damage:
@@ -1809,16 +1744,6 @@
 # Cutlets
 
 # Raw
-
-#SS220-grill-update-2 begin
-- type: entity
-  parent: FoodMeatBase
-  id: FoodCutletBase
-  abstract: true
-  components:
-  - type: InternalTemperature
-    thickness: 0.06
-#SS220-grill-update-2 end
 
 - type: entity
   parent: FoodCutletBase #SS220-grill-update-2

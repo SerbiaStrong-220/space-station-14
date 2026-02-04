@@ -1,6 +1,6 @@
 - type: entity
   save: false
-  name: Урист МакФелинид
+  name: Urist McFelinid
   parent: MobFelinidBase
   id: MobFelinid
   components:

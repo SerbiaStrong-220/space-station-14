@@ -1,12 +1,12 @@
 - type: entity
-  name: свёкла
+  name: beet
   parent: FoodProduceBase
   id: Foodbeet
-  description: Сочная и полезная - отличный выбор для салатов и гарниров.
+  description: Juicy and healthy - an excellent choice for salads and side dishes.
   components:
   - type: FlavorProfile
     flavors:
-      - beets
+    - beets
   - type: SolutionContainerManager
     solutions:
       food:
@@ -25,10 +25,10 @@
       reagents:
       - ReagentId: JuiceBeet
         Quantity: 10
-        
+
 - type: entity
-  name: сноп мясопшеницы
-  description: Эх... мясопшеница... стоп, что?
+  name: meatwheat bushel
+  description: Eh... meatwheat... wait, what?
   id: MeatwheatBushel
   parent: ProduceBase
   components:
@@ -46,9 +46,193 @@
     seedId: meatwheat
   - type: SpawnItemsOnUse
     items:
-      - id: FoodMeatWheat
+    - id: FoodMeatWheat
     sound:
       path: /Audio/Effects/Footsteps/slime1.ogg
   - type: Tag
     tags:
     - Meatwheat
+
+- type: entity
+  parent: FoodInjectableBase
+  id: FoodCheburekBase
+  abstract: true
+  components:
+  - type: FlavorProfile
+    flavors:
+    - meaty
+  - type: Food
+    transferAmount: 3
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/cheburek.rsi
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 6
+        - ReagentId: Vitamin
+          Quantity: 4
+  - type: Item
+    sprite: SS220/Objects/Consumable/Food/cheburek.rsi
+  - type: Tag
+    tags:
+    - Meat
+
+- type: entity
+  name: cheburek
+  parent: FoodCheburekBase
+  id: FoodCheburek
+  description: Crispy and juicy meat in thin dough - a true oriental taste.
+  components:
+  - type: Food
+  - type: Sprite
+    state: cheburek
+
+- type: entity
+  parent: FoodInjectableBase
+  id: FoodKulichBase
+  abstract: true
+  components:
+  - type: FlavorProfile
+    flavors:
+    - sweet
+  - type: Food
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/kulich.rsi
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 35
+        - ReagentId: Vitamin
+          Quantity: 10
+  - type: Item
+    sprite: SS220/Objects/Consumable/Food/kulich.rsi
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
+  - type: Tag
+    tags:
+    - Cake
+
+- type: entity
+  name: kulich
+  parent: FoodKulichBase
+  id: FoodKulich
+  description: Atheist? Why is your mouth covered in kulich?
+  components:
+  - type: Food
+  - type: Sprite
+    state: icon
+
+- type: entity
+  parent: FoodInjectableBase
+  id: FoodShawarmaBase
+  abstract: true
+  components:
+  - type: FlavorProfile
+    flavors:
+    - shawarma
+  - type: Edible
+    transferAmount: 3
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/shawarma.rsi
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 6
+        - ReagentId: Vitamin
+          Quantity: 4
+  - type: Item
+    sprite: SS220/Objects/Consumable/Food/shawarma.rsi
+  - type: Tag
+    tags:
+    - Meat
+  - type: Fixtures
+    fixtures:
+      fix1:
+        density: 1
+        mask:
+        - ItemMask
+        restitution: 0
+        friction: 0.2
+
+- type: entity
+  parent: FoodShawarmaBase
+  id: FoodShawarma
+  name: shawarma
+  description: A succulent wrap of meat and vegetables.
+  components:
+  - type: Sprite
+    state: shawarma
+  - type: Temperature
+    currentTemperature: 290
+  - type: InternalTemperature
+    conductivity: 0.4
+    thickness: 0.008
+    area: 0.0175
+  - type: Grillable
+    timeToCook: 20
+    cookingResult: FoodShawarmaOnGrill
+
+- type: entity
+  parent: FoodShawarmaBase
+  id: FoodShawarmaOnGrill
+  name: grilled shawarma
+  description: A succulent wrap of meat and vegetables, now perfectly grilled.
+  components:
+  - type: Sprite
+    state: shawarmaGrill
+
+- type: entity
+  name: banana flapjack
+  parent: FoodInjectableBase
+  id: FoodFlapjackBananaCreamSS220
+  description: A hastily put-together something barely able to satisfy, but abundantly messy.
+  components:
+  - type: Item
+    storedRotation: -90
+  - type: FlavorProfile
+    flavors:
+    - sweet
+    - banana
+    - creamy
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/special_pie.rsi
+    layers:
+    - state: pie
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 1
+        - ReagentId: Vitamin
+          Quantity: 1
+  - type: CreamPie
+  - type: ItemSlots
+    slots:
+      payloadSlot:
+        whitelist:
+          components:
+          - TimerTrigger
+        insertSound:
+          path: /Audio/Weapons/Guns/Empty/empty.ogg
+        ejectSound:
+          path: /Audio/Weapons/Guns/Empty/empty.ogg
+        swap: false
+        disableEject: true
+  - type: ContainerContainer
+    containers:
+      payloadSlot: !type:ContainerSlot
+  - type: Food

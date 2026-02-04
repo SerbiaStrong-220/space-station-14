@@ -1,48 +1,48 @@
 - type: entity
-  name: спавнер Рокси
-  id: SpawnMobSecDogRoxi
   parent: MarkerBase
+  name: Roxie spawner
+  id: SpawnMobSecDogRoxi
   components:
   - type: Sprite
     layers:
-      - state: green
-      - state: ai
+    - state: green
+    - state: ai
   - type: ConditionalSpawner
     prototypes:
-      - MobSecDogRoxi
+    - MobSecDogRoxi
 
 - type: entity
+  parent: MarkerBase
   name: the spawner Steven
   id: SpawnMobStevenCrocodile
-  parent: MarkerBase
   components:
   - type: Sprite
     layers:
-      - state: green
-      - state: croc
-        sprite: SS220/Mobs/Pets/albino_crocodile.rsi
+    - state: green
+    - state: croc
+      sprite: SS220/Mobs/Pets/albino_crocodile.rsi
   - type: ConditionalSpawner
     prototypes:
-      - MobStevenCrocodileGhostRole
+    - MobStevenCrocodileGhostRole
 
 - type: entity
+  parent: MarkerBase
   name: the spawner Albino
   id: SpawnMobAlbinoCrocodile
-  parent: MarkerBase
   components:
   - type: Sprite
     layers:
-      - state: green
-      - state: croc
-        sprite: SS220/Mobs/Pets/albino_crocodile.rsi
+    - state: green
+    - state: croc
+      sprite: SS220/Mobs/Pets/albino_crocodile.rsi
   - type: ConditionalSpawner
     prototypes:
-      - MobAlbinoCrocodile
+    - MobAlbinoCrocodile
 
 - type: entity
+  parent: MarkerBase
   name: the spawner Crocodile
   id: SpawnMobCrocodile
-  parent: MarkerBase
   components:
   - type: Sprite
     layers:
@@ -51,12 +51,12 @@
       sprite: SS220/Mobs/Animals/crocodile.rsi
   - type: ConditionalSpawner
     prototypes:
-      - MobCrocodile
+    - MobCrocodile
 
 - type: entity
+  parent: MarkerBase
   name: the spawner Crocodile
   id: SpawnMobCrocodileAngry
-  parent: MarkerBase
   suffix: Hostile
   components:
   - type: Sprite
@@ -66,12 +66,12 @@
       sprite: SS220/Mobs/Animals/crocodile.rsi
   - type: ConditionalSpawner
     prototypes:
-      - MobCrocodileAngry
+    - MobCrocodileAngry
 
 - type: entity
+  parent: MarkerBase
   name: the spawner Crocodile Space
   id: SpawnMobCrocodileSpace
-  parent: MarkerBase
   components:
   - type: Sprite
     layers:
@@ -80,12 +80,12 @@
       sprite: SS220/Mobs/Animals/cosmocrocodile.rsi
   - type: ConditionalSpawner
     prototypes:
-      - MobCrocodileSpace
+    - MobCrocodileSpace
 
 - type: entity
+  parent: MarkerBase
   name: the spawner Crocodile Space
   id: SpawnMobCrocodileSpaceSalvage
-  parent: MarkerBase
   suffix: Salvage
   components:
   - type: Sprite
@@ -95,36 +95,7 @@
       sprite: SS220/Mobs/Animals/cosmocrocodile.rsi
   - type: ConditionalSpawner
     prototypes:
-      - MobCrocodileSpaceSalvage
-
-- type: entity
-  id: SpawnMobBearSpaceGhostRole
-  parent: MarkerBase
-  name: the spawner Bear Space
-  suffix: Ghost Role
-  components:
-  - type: Sprite
-    layers:
-    - state: green
-    - state: bear
-      sprite: Mobs/Animals/bear.rsi
-  - type: ConditionalSpawner
-    prototypes:
-      - MobBearSpaceGhostRole
-
-- type: entity
-  id: SpawnMobBearSpaceGhostRoleGoal
-  parent: SpawnMobBearSpaceGhostRole
-  suffix: Ghost Role, With Goal
-  components:
-  - type: Sprite
-    layers:
-    - state: green
-    - state: bear
-      sprite: Mobs/Animals/bear.rsi
-  - type: ConditionalSpawner
-    prototypes:
-      - MobBearSpaceGhostRoleGoal
+    - MobCrocodileSpaceSalvage
 
 - type: entity
   parent: MarkerBase

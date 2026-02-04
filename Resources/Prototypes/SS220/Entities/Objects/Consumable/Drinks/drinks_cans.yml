@@ -1,9 +1,9 @@
 - type: entity
   id: DrinkCanPackBeer
   parent: BaseStorageItem
-  name: держатель для напитков
-  suffix: Пиво
-  description: Служит для удобного хранения сразу нескольких банок пива.
+  name: beverage carrier
+  suffix: Beer
+  description: Used for conveniently storing several beer cans at once.
   components:
   - type: Sprite
     sprite: SS220/Objects/Misc/6pack.rsi

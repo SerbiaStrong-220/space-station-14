@@ -1,8 +1,8 @@
 - type: entity
-  name: Рокси
+  name: Roxie
   parent: MobSecDog
   id: MobSecDogRoxi
-  description: Не стоит шутить с ней - в списке её наград есть медаль за отвагу.
+  description: You shouldn't joke with her - her list of awards includes a medal for bravery.
   components:
   - type: Language
     availableLanguages:
@@ -45,3 +45,44 @@
     - CannotSuicide
     - VimPilot
     - DoorBumpOpener
+
+- type: entity
+  name: Rocket
+  parent: MobCatSpace
+  id: MobSpaceCatPet
+  description: Feline pet, prepared for the worst.
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 40
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Language
+    availableLanguages:
+    - id: Feline
+      canSpeak: true
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+    - id: Galactic
+      canSpeak: false
+  - type: Grammar
+    attributes:
+      gender: male
+  - type: Tag
+    tags:
+    - CannotSuicide
+    - VimPilot

@@ -1,8 +1,8 @@
 - type: entity
-  name: разбитая банка
-  parent: BaseItem
   id: BrokenJar
-  description: В этой банке было что-то отвратительное.
+  parent: BaseItem
+  name: broken jar
+  description: There was something disgusting in this jar.
   components:
   - type: Sharp
   - type: MeleeWeapon
