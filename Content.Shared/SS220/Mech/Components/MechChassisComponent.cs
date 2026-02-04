@@ -1,6 +1,7 @@
 using Content.Shared.EntityEffects.Effects.StatusEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Whitelist;
+using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -36,4 +37,7 @@ public sealed partial class MechChassisComponent : Component
     /// </summary>
     [DataField(required: true), AutoNetworkedField]
     public float Acceleration = 1f;
+
+    [DataField(required: true), AutoNetworkedField]
+    public SoundSpecifier? FootstepSound;
 }

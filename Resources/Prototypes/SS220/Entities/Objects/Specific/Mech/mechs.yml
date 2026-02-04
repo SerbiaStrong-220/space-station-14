@@ -118,9 +118,6 @@
     sprite: SS220/Objects/Specific/Robotics/Mechs/cores.rsi
     state: basicloader
     noRot: true
-  - type: FootstepModifier
-    footstepSoundCollection:
-      path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
   - type: AltMech
     baseState: basicloader
     openState: basicloader

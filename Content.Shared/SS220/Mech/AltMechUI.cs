@@ -15,3 +15,11 @@ public sealed class MechPartRemoveMessage : BoundUserInterfaceMessage
         Part = part;
     }
 }
+
+[Serializable, NetSerializable]
+public sealed class AltMechBoundUiState : BoundUserInterfaceState
+{
+    public Dictionary<NetEntity, BoundUserInterfaceState> EquipmentStates = new();
+
+    //public Dictionary<string, NetEntity?> Parts = new();
+}

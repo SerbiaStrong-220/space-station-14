@@ -118,7 +118,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
     /// </summary>
     private void OnStartup(Entity<AltMechComponent> ent, ref ComponentStartup args)
     {
-        foreach (var part in ent.Comp.ContainerDict.Keys)
+        foreach (var part in ent.Comp.ContainersToCreate)
             ent.Comp.ContainerDict[part] = _container.EnsureContainer<ContainerSlot>(ent.Owner, part);
 
         //ent.Comp.ContainerDict["power"] = _container.EnsureContainer<ContainerSlot>(ent.Owner, ent.Comp.ContainerDict["power"]);
@@ -282,7 +282,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         _container.Insert(toInsert, component.EquipmentContainer);
         var ev = new MechEquipmentInsertedEvent(uid);
         RaiseLocalEvent(toInsert, ref ev);
-        UpdateUserInterface(uid, mechComp);
+        //UpdateUserInterface(uid, mechComp);
     }
 
     public void InsertPart(EntityUid uid, EntityUid toInsert)
@@ -302,13 +302,13 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         partComponent.PartOwner = uid;
         _container.Insert(toInsert, component.ContainerDict[partComponent.slot]);
 
-        var ev = new MechPartInsertedEvent(uid);
-        RaiseLocalEvent(toInsert, ref ev);
-
         AddMass(component, partComponent.OwnMass);
 
         Dirty(uid, component);
         Dirty(toInsert, partComponent);
+
+        var ev = new MechPartInsertedEvent(uid);
+        RaiseLocalEvent(toInsert, ref ev);
 
         var massEv = new MassChangedEvent();
         RaiseLocalEvent(uid, ref massEv);
@@ -316,7 +316,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         if (TryGetNetEntity(uid, out var netMech) && TryGetNetEntity(toInsert, out var netPart))
             RaiseNetworkEvent(new MechPartStatusChanged((NetEntity)netMech, (NetEntity)netPart, true));
 
-        UpdateUserInterface(uid, component);
+        //UpdateUserInterface(uid, component);
     }
 
     public void AddMass(AltMechComponent mechComp, FixedPoint2 Value)
@@ -368,7 +368,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
             equipmentComponent.EquipmentOwner = null;
 
         _container.Remove(toRemove, component.EquipmentContainer);
-        UpdateUserInterface(uid, mechComp);
+        //UpdateUserInterface(uid, mechComp);
     }
 
     /// <summary>
@@ -421,6 +421,8 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
             var massEv = new MassChangedEvent();
             RaiseLocalEvent(uid, ref massEv);
+
+            Dirty(toRemove, partComponent);
         }
 
         Dirty(uid, component);
@@ -428,7 +430,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         if(TryGetNetEntity(uid, out var netMech) && TryGetNetEntity(toRemove, out var netPart))
             RaiseNetworkEvent( new MechPartStatusChanged((NetEntity)netMech, (NetEntity)netPart, false));
 
-        UpdateUserInterface(uid, component);
+       // UpdateUserInterface(uid, component);
     }
 
     /// <summary>
@@ -448,7 +450,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         component.Energy = FixedPoint2.Clamp(component.Energy + delta, 0, component.MaxEnergy);
         Dirty(uid, component);
-        UpdateUserInterface(uid, component);
+        //UpdateUserInterface(uid, component);
         return true;
     }
 
@@ -476,7 +478,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         }
 
         Dirty(uid, component);
-        UpdateUserInterface(uid, component);
+        //UpdateUserInterface(uid, component);
     }
 
     /// <summary>
@@ -517,9 +519,9 @@ public abstract partial class SharedAltMechSystem : EntitySystem
     /// <remarks>
     /// This is defined here so that UI updates can be accessed from shared.
     /// </remarks>
-    public virtual void UpdateUserInterface(EntityUid uid, AltMechComponent? component = null)
-    {
-    }
+    //public virtual void UpdateUserInterface(EntityUid uid, AltMechComponent? component = null)
+    //{
+    //}
 
     /// <summary>
     /// Attempts to insert a pilot into the mech.

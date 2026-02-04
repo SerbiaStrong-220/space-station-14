@@ -15,6 +15,7 @@ using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Power;
 using Content.Shared.Power.Components;
 using Content.Shared.SS220.AltMech;
 using Content.Shared.SS220.ArmorBlock;
@@ -33,6 +34,7 @@ using NetCord.Gateway;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using System.Linq;
@@ -64,13 +66,15 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         base.Initialize();
 
         SubscribeLocalEvent<AltMechComponent, InteractUsingEvent>(OnInteractUsing);
-        SubscribeLocalEvent<AltMechComponent, EntInsertedIntoContainerMessage>(OnInsertBattery);
+        //SubscribeLocalEvent<AltMechComponent, EntInsertedIntoContainerMessage>(OnInsertBattery);
         SubscribeLocalEvent<AltMechComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<AltMechComponent, GetVerbsEvent<AlternativeVerb>>(OnAlternativeVerb);
         SubscribeLocalEvent<AltMechComponent, MechOpenUiEvent>(OnOpenUi);
         SubscribeLocalEvent<AltMechComponent, RemoveBatteryEvent>(OnRemoveBattery);
         SubscribeLocalEvent<AltMechComponent, MechEntryEvent>(OnMechEntry);
         SubscribeLocalEvent<AltMechComponent, OnMechExitEvent>(OnMechExit);
+
+        SubscribeLocalEvent<MechPartComponent, ChargeChangedEvent>(OnChargeChanged);
 
         SubscribeLocalEvent<AltMechComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<MechPartComponent, MechEquipmentRemoveMessage>(OnRemoveEquipmentMessage);
@@ -93,7 +97,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
     private void OnMechCanMoveEvent(EntityUid uid, AltMechComponent component, UpdateCanMoveEvent args)
     {
-        if (component.Broken || component.Integrity <= 0 || component.Energy <= 0)
+        if (component.Broken || component.Integrity <= 0 || !component.Online)
             args.Cancel();
     }
 
@@ -180,6 +184,8 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
             return;
 
         RemovePart((EntityUid)ent.Owner, (EntityUid)equip);
+
+        //UpdateUserInterface(ent.Owner);
     }
 
     private void OnOpenUi(EntityUid uid, AltMechComponent component, MechOpenUiEvent args)
@@ -277,17 +283,15 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
         TryInsert(uid, args.Args.User, component);
 
-        var LeftArmEquipment = component.ContainerDict["left-arm"].ContainedEntity;
-        if (LeftArmEquipment != null)
+        if(!component.Online)
         {
-            _parts.ProvideItems(uid, (EntityUid)LeftArmEquipment);
+            _actionBlocker.UpdateCanMove(uid);
+
+            args.Handled = true;
+            return;
         }
 
-        var RightArmEquipment = component.ContainerDict["right-arm"].ContainedEntity;
-        if (RightArmEquipment != null)
-        {
-            _parts.ProvideItems(uid, (EntityUid)RightArmEquipment);
-        }
+        AddItemsToUser(uid);
 
         _actionBlocker.UpdateCanMove(uid);
 
@@ -297,19 +301,45 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
     private void OnMechExit(Entity<AltMechComponent> ent, ref OnMechExitEvent args)
     {
 
-        var LeftArmEquipment = ent.Comp.ContainerDict["left-arm"].ContainedEntity;
-        if (LeftArmEquipment != null)
-        {
-            _parts.RemoveProvidedItems(ent.Owner, (EntityUid)LeftArmEquipment);
-        }
-
-        var RightArmEquipment = ent.Comp.ContainerDict["right-arm"].ContainedEntity;
-        if (RightArmEquipment != null)
-        {
-            _parts.RemoveProvidedItems(ent.Owner, (EntityUid)RightArmEquipment);
-        }
+        RemoveItemsFromUser(ent.Owner);
 
         TryEject(ent.Owner, ent.Comp);
+    }
+
+    public void AddItemsToUser(EntityUid mech)
+    {
+        if (!TryComp<AltMechComponent>(mech, out var mechComp))
+            return;
+
+        var LeftArmEquipment = mechComp.ContainerDict["left-arm"].ContainedEntity;
+        if (LeftArmEquipment != null)
+        {
+            _parts.ProvideItems(mech, (EntityUid)LeftArmEquipment);
+        }
+
+        var RightArmEquipment = mechComp.ContainerDict["right-arm"].ContainedEntity;
+        if (RightArmEquipment != null)
+        {
+            _parts.ProvideItems(mech, (EntityUid)RightArmEquipment);
+        }
+    }
+
+    public void RemoveItemsFromUser(EntityUid mech)
+    {
+        if (!TryComp<AltMechComponent>(mech, out var mechComp))
+            return;
+
+        var LeftArmEquipment = mechComp.ContainerDict["left-arm"].ContainedEntity;
+        if (LeftArmEquipment != null)
+        {
+            _parts.RemoveProvidedItems(mech, (EntityUid)LeftArmEquipment);
+        }
+
+        var RightArmEquipment = mechComp.ContainerDict["right-arm"].ContainedEntity;
+        if (RightArmEquipment != null)
+        {
+            _parts.RemoveProvidedItems(mech, (EntityUid)RightArmEquipment);
+        }
     }
 
     private void OnDamageChanged(Entity<AltMechComponent> ent, ref DamageChangedEvent args)
@@ -334,7 +364,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
         ent.Comp.MovementSpeedModifier = massRel.Float();
 
-        if (TryComp<MovementSpeedModifierComponent>(ent.Owner, out var movementComp))
+        if (TryComp<MovementSpeedModifierComponent>(ent.Owner, out var movementComp) && ent.Comp.Online)
             _movementSpeedModifier.ChangeBaseSpeed(ent.Owner, ent.Comp.OverallBaseMovementSpeed * ent.Comp.MovementSpeedModifier * 0.5f, ent.Comp.OverallBaseMovementSpeed * ent.Comp.MovementSpeedModifier, ent.Comp.OverallBaseAcceleration * ent.Comp.MovementSpeedModifier);
     }
 
@@ -350,7 +380,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
             return;
 
         _ui.TryToggleUi(uid, MechUiKey.Key, actor.PlayerSession);
-        UpdateUserInterface(uid, component);
+        //UpdateUserInterface(uid, component);
     }
 
     private void ReceiveEquipmentUiMesssages<T>(EntityUid uid, AltMechComponent component, T args) where T : MechEquipmentUiMessage
@@ -369,12 +399,12 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         }
     }
 
-    public override void UpdateUserInterface(EntityUid uid, AltMechComponent? component = null)
+    public void UpdateUserInterface(EntityUid uid, AltMechComponent? component = null)
     {
         if (!Resolve(uid, ref component))
             return;
 
-        base.UpdateUserInterface(uid, component);
+        //base.UpdateUserInterface(uid, component);
 
         var ev = new MechEquipmentUiStateReadyEvent();
         foreach (var ent in component.ContainerDict.Values)
@@ -388,10 +418,11 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
             }
         }
 
-        var state = new MechBoundUiState
+        var state = new AltMechBoundUiState
         {
             EquipmentStates = ev.States
         };
+
         _ui.SetUiState(uid, MechUiKey.Key, state);
     }
 
@@ -444,7 +475,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         _actionBlocker.UpdateCanMove(uid);
 
         Dirty(uid, component);
-        UpdateUserInterface(uid, component);
+        //UpdateUserInterface(uid, component);
     }
 
     public void RemoveBattery(EntityUid uid, AltMechComponent? component = null)
@@ -459,7 +490,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         _actionBlocker.UpdateCanMove(uid);
 
         Dirty(uid, component);
-        UpdateUserInterface(uid, component);
+        //UpdateUserInterface(uid, component);
     }
 
     #region Atmos Handling

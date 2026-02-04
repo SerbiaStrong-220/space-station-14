@@ -21,6 +21,7 @@
   - type: MechChassis
     maximalMass: 550
     baseMovementSpeed: 3.6
+    footstepSound: /Audio/Mecha/sound_mecha_powerloader_step.ogg
 
 - type: entity
   id: BaseMechRightArm
@@ -63,7 +64,7 @@
     state: mecha_clamp
   - type: MechArm
     hands:
-    - item: WeaponProtoKineticAccelerator
+    - item: EnergySword
     - item: JetpackBorgModule
     - item: HandHeldMassScannerBorg
     - item: HandheldGPSBasic
@@ -94,6 +95,7 @@
     acceleration: 1.0
     efficiency: 0.01
   - type: MechPart
+    integrity: 250
     attachedSprite:
       sprite: SS220/Objects/Specific/Robotics/Mechs/chassis.rsi
       state: basichydraulic
@@ -145,8 +147,8 @@
     ownMass: 200
     integrity: 200
     attachedSprite:
-      sprite: SS220/Objects/Specific/Robotics/Mechs/righthand.rsi
-      state: test
+      sprite: SS220/Objects/Specific/Robotics/Mechs/batteries.rsi
+      state: small
   - type: Battery
     maxCharge: 15000
     startingCharge: 15000

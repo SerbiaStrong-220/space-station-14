@@ -1,5 +1,6 @@
 using Content.Server.Hands.Systems;
 using Content.Server.Popups;
+using Content.Server.Power.EntitySystems;
 using Content.Shared.DoAfter;
 using Content.Shared.EntityEffects.Effects.StatusEffects;
 using Content.Shared.Hands.Components;
@@ -14,6 +15,7 @@ using Content.Shared.SS220.Mech.Equipment.Components;
 using Content.Shared.SS220.Mech.Systems;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
+using static Content.Server.Power.Pow3r.PowerState;
 
 namespace Content.Server.SS220.Mech.Systems;
 
@@ -29,6 +31,7 @@ public sealed class MechPartSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] protected readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly HandsSystem _hands = default!;
+    [Dependency] private readonly BatterySystem _battery = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -40,6 +43,7 @@ public sealed class MechPartSystem : EntitySystem
         SubscribeLocalEvent<MechChassisComponent, MechPartRemovedEvent>(OnChassisRemoved);
 
         SubscribeLocalEvent<BatteryComponent, MechPartInsertedEvent>(OnPowerInserted);
+        SubscribeLocalEvent<BatteryComponent, MechPartRemovedEvent>(OnPowerRemoved);
 
         SubscribeLocalEvent<MechArmComponent, MechPartInsertedEvent>(OnArmInserted);
         SubscribeLocalEvent<MechArmComponent, MechPartRemovedEvent>(OnArmRemoved);
@@ -217,8 +221,15 @@ public sealed class MechPartSystem : EntitySystem
 
         mechComp.OverallBaseMovementSpeed = ent.Comp.BaseMovementSpeed;
         mechComp.OverallBaseAcceleration = ent.Comp.Acceleration;
+        mechComp.MaximalMass = ent.Comp.MaximalMass;
+
+        if (!TryComp<FootstepModifierComponent>(args.Mech, out var footstepModifierComp))
+            return;
+
+        footstepModifierComp.FootstepSoundCollection = ent.Comp.FootstepSound;
 
         Dirty(ent.Owner, ent.Comp);
+        Dirty(args.Mech, footstepModifierComp);
     }
 
     private void OnChassisRemoved(Entity<MechChassisComponent> ent, ref MechPartRemovedEvent args)
@@ -236,6 +247,11 @@ public sealed class MechPartSystem : EntitySystem
     {
         if (!TryComp<AltMechComponent>(args.Mech, out var mechComp))
             return;
+
+        mechComp.Energy = ent.Comp.CurrentCharge;
+        mechComp.MaxEnergy = ent.Comp.MaxCharge;
+
+        _mech.UpdateMechOnlineStatus(args.Mech, ent.Owner);
     }
 
     private void OnInsertPart(EntityUid uid, MechPartComponent component, InsertPartEvent args)
@@ -246,6 +262,20 @@ public sealed class MechPartSystem : EntitySystem
         _popup.PopupEntity(Loc.GetString("mech-equipment-finish-install", ("item", uid)), args.Args.Target.Value);
         _mech.InsertPart(args.Args.Target.Value, uid);
 
+        if (component.PartOwner != null)
+            _mech.UpdateUserInterface((EntityUid)component.PartOwner);
+
         args.Handled = true;
+    }
+
+    private void OnPowerRemoved(Entity<BatteryComponent> ent, ref MechPartRemovedEvent args)
+    {
+        if (!TryComp<AltMechComponent>(args.Mech, out var mechComp))
+            return;
+
+        mechComp.Energy = 0;
+        mechComp.MaxEnergy = 1;
+
+        _mech.UpdateMechOnlineStatus(args.Mech, ent.Owner);
     }
 }

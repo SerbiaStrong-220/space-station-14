@@ -1,6 +1,10 @@
 using Content.Client.SS220.FieldShield;
+using Content.Client.SS220.Mech.Ui;
+using Content.Shared.Damage;
 using Content.Shared.Mech;
 using Content.Shared.Popups;
+using Content.Shared.Silicons.Borgs.Components;
+using Content.Shared.SS220.AltMech;
 using Content.Shared.SS220.FieldShield;
 using Content.Shared.SS220.Mech.Components;
 using Content.Shared.SS220.Mech.Equipment.Components;
@@ -26,8 +30,14 @@ public sealed class AltMechSystem : SharedAltMechSystem
         base.Initialize();
 
         SubscribeLocalEvent<AltMechComponent, AppearanceChangeEvent>(OnAppearanceChanged);
+
         SubscribeLocalEvent<AltMechComponent, ComponentInit>(OnComponentInit);
         SubscribeNetworkEvent<MechPartStatusChanged>(OnPartMoved);
+
+        SubscribeLocalEvent<AltMechComponent, EntInsertedIntoContainerMessage>(OnInserted);
+        SubscribeLocalEvent<AltMechComponent, EntRemovedFromContainerMessage>(OnRemoved);
+
+        SubscribeLocalEvent<AltMechComponent, DamageChangedEvent>(OnDamageChanged);
 
     }
 
@@ -78,6 +88,57 @@ public sealed class AltMechSystem : SharedAltMechSystem
 
             spriteComp.LayerSetShader(layer, "unshaded");
         }
+    }
+
+    private void OnInserted(Entity<AltMechComponent> ent, ref EntInsertedIntoContainerMessage args)
+    {
+        if (!TryComp<UserInterfaceComponent>(ent, out var uiComp))
+            return;
+
+        if (uiComp.ClientOpenInterfaces.ContainsKey(MechUiKey.Key) && uiComp.ClientOpenInterfaces[MechUiKey.Key] is AltMechBoundUserInterface)
+        {
+            var bui = (AltMechBoundUserInterface)uiComp.ClientOpenInterfaces[MechUiKey.Key];
+
+            if (bui == null)
+                return;
+
+            bui.UpdateUI();
+        }
+
+    }
+
+    private void OnRemoved(Entity<AltMechComponent> ent, ref EntRemovedFromContainerMessage args)
+    {
+        if (!TryComp<UserInterfaceComponent>(ent, out var uiComp))
+            return;
+
+        if (uiComp.ClientOpenInterfaces.ContainsKey(MechUiKey.Key) && uiComp.ClientOpenInterfaces[MechUiKey.Key] is AltMechBoundUserInterface)
+        {
+            var bui = (AltMechBoundUserInterface)uiComp.ClientOpenInterfaces[MechUiKey.Key];
+
+            if (bui == null)
+                return;
+
+            bui.UpdateUI();
+        }
+
+    }
+
+    private void OnDamageChanged(Entity<AltMechComponent> ent, ref DamageChangedEvent args)
+    {
+        if (!TryComp<UserInterfaceComponent>(ent, out var uiComp))
+            return;
+
+        if (uiComp.ClientOpenInterfaces.ContainsKey(MechUiKey.Key) && uiComp.ClientOpenInterfaces[MechUiKey.Key] is AltMechBoundUserInterface)
+        {
+            var bui = (AltMechBoundUserInterface)uiComp.ClientOpenInterfaces[MechUiKey.Key];
+
+            if (bui == null)
+                return;
+
+            bui.UpdateUI();
+        }
+
     }
 
     private void OnPartMoved(MechPartStatusChanged args)

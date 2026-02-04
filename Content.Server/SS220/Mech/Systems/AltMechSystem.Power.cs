@@ -1,6 +1,10 @@
+using Content.Shared.Interaction;
 using Content.Shared.Movement.Components;
+using Content.Shared.Power;
 using Content.Shared.Power.Components;
 using Content.Shared.SS220.Mech.Components;
+using Content.Shared.SS220.Mech.Equipment.Components;
+using JetBrains.FormatRipper.Elf;
 using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.Mech.Systems;
@@ -52,11 +56,51 @@ public sealed partial class AltMechSystem
 
             _battery.ChangeCharge((EntityUid)batteryEnt, -(drainedEnergy).Float(),batteryComp);
 
+            comp.Energy = batteryComp.CurrentCharge;
+
             Dirty(uid, comp);
 
             UpdateUserInterface(uid);
         }
     }
 
+    private void OnChargeChanged(Entity<MechPartComponent> ent, ref ChargeChangedEvent args)
+    {
+        if(ent.Comp.PartOwner != null)
+            UpdateMechOnlineStatus((EntityUid)ent.Comp.PartOwner, ent.Owner);
+    }
+
+    public void UpdateMechOnlineStatus(EntityUid mech, EntityUid battery)
+    {
+        if (!TryComp<AltMechComponent>(mech, out var mechComp))
+            return;
+
+        if (mechComp.Energy <= 0 && mechComp.Online)
+        {
+            mechComp.Online = false;
+
+            if (mechComp.PilotSlot.ContainedEntity != null)
+                RemoveItemsFromUser(mech);
+
+            if (mechComp.ContainerDict["chassis"].ContainedEntity != null)
+            {
+                if (TryComp<MovementSpeedModifierComponent>(battery, out var movementComp))
+                    _movementSpeedModifier.ChangeBaseSpeed(battery, 0, 0, 0);
+            }
+        }
+        if (mechComp.Energy > 0 && !mechComp.Online)
+        {
+            mechComp.Online = true;
+
+            if (mechComp.PilotSlot.ContainedEntity != null)
+                AddItemsToUser(mech);
+
+            if (mechComp.ContainerDict["chassis"].ContainedEntity != null)
+            {
+                if (TryComp<MovementSpeedModifierComponent>(battery, out var movementComp))
+                    _movementSpeedModifier.ChangeBaseSpeed(battery, mechComp.OverallBaseMovementSpeed * mechComp.MovementSpeedModifier * 0.5f, mechComp.OverallBaseMovementSpeed * mechComp.MovementSpeedModifier, mechComp.OverallBaseAcceleration * mechComp.MovementSpeedModifier);
+            }
+        }
+    }
 
 }

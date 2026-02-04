@@ -64,7 +64,7 @@ public sealed class AltMechBoundUserInterface : BoundUserInterface
     {
         base.UpdateState(state);
 
-        if (state is not MechBoundUiState msg)
+        if (state is not AltMechBoundUiState msg)
             return;
 
         UpdateEquipmentControls(msg);
@@ -72,7 +72,13 @@ public sealed class AltMechBoundUserInterface : BoundUserInterface
         _menu?.UpdateEquipmentView();
     }
 
-    public void UpdateEquipmentControls(MechBoundUiState state)
+    public void UpdateUI()
+    {
+        _menu?.UpdateMechStats();
+        _menu?.UpdateEquipmentView();
+    }
+
+    public void UpdateEquipmentControls(AltMechBoundUiState state)
     {
         if (!EntMan.TryGetComponent<AltMechComponent>(Owner, out var mechComp))
             return;

@@ -77,6 +77,12 @@ public sealed partial class AltMechComponent : Component
     public bool Broken = false;
 
     /// <summary>
+    /// If the mech is turned on
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    public bool Online = false;
+
+    /// <summary>
     /// The slot the pilot is stored in.
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
@@ -98,15 +104,18 @@ public sealed partial class AltMechComponent : Component
     public bool MaintenanceMode = true; //if the mech is not in the maintenance mode we cannot interact with its parts or equipment
 
     [ViewVariables(VVAccess.ReadWrite)]
-    public Dictionary<string, ContainerSlot> ContainerDict = new Dictionary<string, ContainerSlot>()
-    {
-        ["core"] = new ContainerSlot(),
-        ["head"] = new ContainerSlot(),
-        ["right-arm"] = new ContainerSlot(),
-        ["left-arm"] = new ContainerSlot(),
-        ["chassis"] = new ContainerSlot(),
-        ["power"] = new ContainerSlot()
-    };
+    public Dictionary<string, ContainerSlot> ContainerDict = new Dictionary<string, ContainerSlot>();
+    //{
+    //    //["core"] = new ContainerSlot(),
+    //    ["head"] = new ContainerSlot(),
+    //    ["right-arm"] = new ContainerSlot(),
+    //    ["left-arm"] = new ContainerSlot(),
+    //    ["chassis"] = new ContainerSlot(),
+    //    ["power"] = new ContainerSlot()
+    //};
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public List<string> ContainersToCreate = new List<string>{ "head", "right-arm", "left-arm", "chassis", "power" };
 
     //List of the user's hands that must be given back when leaving the mech 
     [DataField]
