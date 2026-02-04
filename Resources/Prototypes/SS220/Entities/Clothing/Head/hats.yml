@@ -95,20 +95,6 @@
 # Юридический департамент
 
   # Магистрат
-- type: entity
-  parent: ClothingHeadBase
-  id: ClothingHeadHatStreetJudge
-  name: helmet street judge
-  description: Your head should inspire fear and pronounce judgments on the asphalt.
-  suffix: For playtime
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Head/Hats/streetjudge.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Head/Hats/streetjudge.rsi
-  #- type: Tag Расскоментировать, когда добавять версию шлема для гамлета
-    #tags:
-    #- HamsterWearable
 
   # АВД
 - type: entity
@@ -126,6 +112,18 @@
     - ClothMade
     - HamsterWearable
     - WhitelistChameleon
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatCapNTR
+  name: nanotrasen representative cap
+  description: "A NanoTrasen representative's cap, reminding everyone who is the face of the company here."
+  suffix: For playtime
+  components:
+    - type: Sprite
+      sprite: SS220/Clothing/Head/Hats/hos_bigcap.rsi
+    - type: Clothing
+      sprite: SS220/Clothing/Head/Hats/hos_bigcap.rsi
 
 # CentCom
 
@@ -442,7 +440,6 @@
 # Служба безопасности
 
   # ГСБ
-
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadBigCapHoS
@@ -454,6 +451,20 @@
     - type: Clothing
       sprite: SS220/Clothing/Head/Hats/hos_bigcap.rsi
 
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatStreetJudge
+  name: helmet street judge
+  description: Your head should inspire fear and pronounce judgments on the asphalt.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/streetjudge.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/streetjudge.rsi
+  #- type: Tag Расскоментировать, когда добавять версию шлема для гамлета
+    #tags:
+    #- HamsterWearable
 
   # Пилот
 - type: entity
@@ -566,7 +577,7 @@
 
 # Медицинский
 
-  #Главный врач 
+  #Главный врач
 
 - type: entity
   parent: ClothingHeadBase
@@ -592,7 +603,7 @@
       Female: FemaleDoctor
       Unsexed: MaleDoctor
   #ss220 special_sounds end
- 
+
 
 # OTHER
 

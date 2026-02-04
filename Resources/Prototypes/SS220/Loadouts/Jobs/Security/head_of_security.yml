@@ -13,6 +13,20 @@
   - !type:GroupLoadoutEffect
     proto: AdministratorSponsorTier
 
+- type: loadoutEffectGroup
+  id: StreetJudge
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobHeadOfSecurity
+      time: 360000 # 100 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+
 # Jumpsuit
 - type: loadout
   id: JumpsuitHoSParadeMale
@@ -45,6 +59,14 @@
   equipment:
     head: ClothingHeadHatCapHoS
 
+- type: loadout
+  id: HeadofSecurityHatStreetJudge
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: StreetJudge
+  equipment:
+    head: ClothingHeadHatStreetJudge
+
 # Neck
 - type: loadout
   id: MantleHOSShoulder
@@ -56,6 +78,14 @@
   id: WinterHoSUnarmored
   equipment:
     outerClothing: ClothingOuterWinterHoSUnarmored
+
+- type: loadout
+  id: HeadofSecurityArmorStreetJudge
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: StreetJudge
+  equipment:
+    outerClothing: ClothingOuterArmorStreetJudge
 
 - type: loadout
   id: Outer1984HoS
