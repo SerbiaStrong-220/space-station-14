@@ -107,9 +107,9 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
         if (ent.Comp.ContainerDict["power"].ContainedEntity == null && TryComp<BatteryComponent>(args.Used, out var battery) && TryComp<MechPartComponent>(args.Used, out var _))
         {
-            InsertBattery(ent.Owner, args.Used, ent.Comp, battery);
-            _actionBlocker.UpdateCanMove(ent.Owner);
-            return;
+            //InsertBattery(ent.Owner, args.Used, ent.Comp, battery);
+            //_actionBlocker.UpdateCanMove(ent.Owner);
+            //return;
         }
 
         //if (_toolSystem.HasQuality(args.Used, PryingQuality) && ent.Comp.BatterySlot.ContainedEntity != null)
@@ -179,7 +179,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         if (!Exists(equip) || Deleted(equip))
             return;
 
-        RemovePart((EntityUid)ent.Owner, (EntityUid)equip, ent.Comp);
+        RemovePart((EntityUid)ent.Owner, (EntityUid)equip);
     }
 
     private void OnOpenUi(EntityUid uid, AltMechComponent component, MechOpenUiEvent args)

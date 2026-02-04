@@ -285,16 +285,15 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         UpdateUserInterface(uid, mechComp);
     }
 
-    public void InsertPart(EntityUid uid, EntityUid toInsert, AltMechComponent? component = null,
-        MechPartComponent? partComponent = null)
+    public void InsertPart(EntityUid uid, EntityUid toInsert)
     {
-        if (!Resolve(uid, ref component))
+        if (!TryComp<AltMechComponent>(uid,out var component))
             return;
 
         if (!component.MaintenanceMode)
             return;
 
-        if (!Resolve(toInsert, ref partComponent))
+        if (!TryComp<MechPartComponent>(toInsert, out var partComponent))
             return;
 
         if (!component.ContainerDict.ContainsKey(partComponent.slot) || component.ContainerDict[partComponent.slot].ContainedEntity != null)
@@ -382,16 +381,15 @@ public abstract partial class SharedAltMechSystem : EntitySystem
     /// <param name="forced">
     ///     Whether or not the removal can be cancelled, and if non-mech equipment should be ejected.
     /// </param>
-    public void RemovePart(EntityUid uid, EntityUid toRemove, AltMechComponent? component = null,
-        MechPartComponent? partComponent = null, bool forced = true)
+    public void RemovePart(EntityUid uid, EntityUid toRemove, bool forced = true)
     {
-        if (!Resolve(uid, ref component))
+        if (!TryComp<AltMechComponent>(uid, out var component))
             return;
 
         // When forced, we also want to handle the possibility that the "equipment" isn't actually equipment.
         // This /shouldn't/ be possible thanks to OnEntityStorageDump, but there's been quite a few regressions
         // with entities being hardlock stuck inside mechs.
-        if (!Resolve(toRemove, ref partComponent) && !forced)
+        if (!TryComp<MechPartComponent>(toRemove, out var partComponent))
             return;
 
         if (partComponent == null)
