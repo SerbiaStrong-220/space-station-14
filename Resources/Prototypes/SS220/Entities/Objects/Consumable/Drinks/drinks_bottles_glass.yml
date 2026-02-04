@@ -1,7 +1,7 @@
 - type: entity
   parent: DrinkBottleGlassBaseFull
   id: DrinkVodkaKazakiBottleFull
-  name: '"Kazaki" vodka bottle"'
+  name: '"Kazaki" vodka bottle'
   description: An incredibly cloudy bottle of an unknown brand. How long has it been lying here?
   components:
   - type: SolutionContainerVisuals
