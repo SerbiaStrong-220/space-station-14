@@ -1,19 +1,19 @@
 - type: entity
-  id: BulletMagnum
-  name: bullet (.45 magnum)
   parent: BaseBullet
+  id: BulletMagnum
   categories: [ HideSpawnMenu ]
+  name: bullet (.45 magnum)
   components:
   - type: Projectile
     damage:
       types:
-        Piercing: 40 #ss220lowTTKUpdate
+        Piercing: 35
 
 - type: entity
-  id: BulletMagnumPractice
-  name: bullet (.45 magnum practice)
   parent: BaseBulletPractice
+  id: BulletMagnumPractice
   categories: [ HideSpawnMenu ]
+  name: bullet (.45 magnum practice)
   components:
   - type: Projectile
     damage:
@@ -21,37 +21,37 @@
         Blunt: 1
 
 - type: entity
-  id: BulletMagnumIncendiary
   parent: BaseBulletIncendiary
-  name: bullet (.45 magnum incendiary)
+  id: BulletMagnumIncendiary
   categories: [ HideSpawnMenu ]
+  name: bullet (.45 magnum incendiary)
   components:
   - type: Projectile
     damage:
       types:
-        Piercing: 38 #ss220weaponBalance #Incendary rebalance
-        Heat: 3 #ss220weaponBalance
+        Piercing: 30 #SS220 Incendary rebalance
+        Heat: 5
 
 - type: entity
-  id: BulletMagnumAP
-  name: bullet (.45 magnum armor-piercing)
   parent: BaseBulletAP
+  id: BulletMagnumAP
   categories: [ HideSpawnMenu ]
+  name: bullet (.45 magnum armor-piercing)
   components:
   - type: Projectile
     damage:
       types:
-        Piercing: 32 # 20% decrease #ss220lowTTKUpdate
+        Piercing: 26 # 20% decrease
     ignoreResistances: true
 
 - type: entity
-  id: BulletMagnumUranium
-  name: bullet (.45 magnum uranium)
   parent: BaseBulletUranium
+  id: BulletMagnumUranium
   categories: [ HideSpawnMenu ]
+  name: bullet (.45 magnum uranium)
   components:
   - type: Projectile
     damage:
       types:
         Radiation: 15
-        Piercing: 26 #ss220lowTTKUpdate
+        Piercing: 20

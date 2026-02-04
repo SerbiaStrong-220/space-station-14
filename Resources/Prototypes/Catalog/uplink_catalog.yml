@@ -308,17 +308,17 @@
   discountDownTo:
     Telecrystal: 6
   cost:
-    Telecrystal: 14 #ss220TTKUpdate
+    Telecrystal: 10
   categories:
   - UplinkWeaponry
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 16
-    MediumDynamic:
       Telecrystal: 12
-    HardDynamic:
+    MediumDynamic:
       Telecrystal: 8
+    HardDynamic:
+      Telecrystal: 6
 #ss220 dynamic-price end
 
 - type: listing
@@ -426,9 +426,9 @@
   productEntity: ClothingBackpackDuffelSyndicateFilledLMG
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 30 #ss220TTKUpdate
+    Telecrystal: 24
   cost:
-    Telecrystal: 40 #ss220TTKUpdate
+    Telecrystal: 30
   categories:
   - UplinkWeaponry
   conditions:
@@ -888,7 +888,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/SpeedLoaders/Magnum/magnum_speed_loader.rsi, state: icon }
   productEntity: SpeedLoaderMagnumAP
   cost:
-    Telecrystal: 4 #ss220TTKUpdate
+    Telecrystal: 3
   categories:
   - UplinkAmmo
 #ss220 dynamic-price bgn
@@ -896,7 +896,7 @@
     LightDynamic:
       Telecrystal: 4
     MediumDynamic:
-      Telecrystal: 4
+      Telecrystal: 3
     HardDynamic:
       Telecrystal: 2
 #ss220 dynamic-price end
@@ -930,7 +930,7 @@
   description: uplink-sniper-ammo-desc
   productEntity: MagazineBoxAntiMateriel
   cost:
-    Telecrystal: 4 #ss220TTKUpdate
+    Telecrystal: 2
   categories:
   - UplinkAmmo
 

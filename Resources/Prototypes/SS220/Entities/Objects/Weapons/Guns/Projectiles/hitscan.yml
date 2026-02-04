@@ -2,7 +2,7 @@
   id: RedShuttleLightLaser
   damage:
     types:
-      Heat: 13 #lowTTKUpdate
+      Heat: 13 #this is fair i guess
   muzzleFlash:
     sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
     state: muzzle_laser
