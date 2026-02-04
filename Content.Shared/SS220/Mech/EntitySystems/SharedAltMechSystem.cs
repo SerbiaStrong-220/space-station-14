@@ -82,7 +82,6 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         if (args.Handled)
             return;
         args.Handled = true;
-        CycleEquipment(uid, pilotCloth: args.Performer); //SS220-AddMechToClothing
     }
 
     private void OnEjectPilotEvent(EntityUid uid, AltMechComponent component, MechEjectPilotEvent args)
@@ -199,7 +198,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
             _hands.RemoveHands((pilot, handsComp));
         }
 
-        _actions.AddAction(pilot, ref component.MechCycleActionEntity, component.MechCycleAction, mech);
+        //_actions.AddAction(pilot, ref component.MechCycleActionEntity, component.MechCycleAction, mech);
         _actions.AddAction(pilot, ref component.MechUiActionEntity, component.MechUiAction, mech);
         _actions.AddAction(pilot, ref component.MechEjectActionEntity, component.MechEjectAction, mech);
     }
@@ -252,46 +251,6 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         component.Broken = true;
         UpdateAppearance(uid, component);
-    }
-
-    /// <summary>
-    /// Cycles through the currently selected equipment.
-    /// </summary>
-    /// <param name="uid"></param>
-    /// <param name="component"></param>
-    /// <param name="pilotCloth">If you are using mech clothing, then the required parameter is the uid of the person wearing this mech.</param>
-    public void CycleEquipment(EntityUid uid, MechComponent? component = null, EntityUid? pilotCloth = null) //SS220-AddMechToClothing
-    {
-        if (!Resolve(uid, ref component))
-            return;
-
-        var allEquipment = component.EquipmentContainer.ContainedEntities.ToList();
-
-        var equipmentIndex = -1;
-        if (component.CurrentSelectedEquipment != null)
-        {
-            bool StartIndex(EntityUid u) => u == component.CurrentSelectedEquipment;
-            equipmentIndex = allEquipment.FindIndex(StartIndex);
-        }
-
-        equipmentIndex++;
-        component.CurrentSelectedEquipment = equipmentIndex >= allEquipment.Count
-            ? null
-            : allEquipment[equipmentIndex];
-
-        var popupString = component.CurrentSelectedEquipment != null
-            ? Loc.GetString("mech-equipment-select-popup", ("item", component.CurrentSelectedEquipment))
-            : Loc.GetString("mech-equipment-select-none-popup");
-
-        if (_net.IsServer)
-            _popup.PopupEntity(popupString, uid);
-
-        //SS220-AddMechToClothing-start
-        if (pilotCloth.HasValue && TryComp<MechClothingComponent>(pilotCloth.Value, out var mechPilotComp))
-            mechPilotComp.CurrentEquipmentUid = component.CurrentSelectedEquipment;
-        //SS220-AddMechToClothing-end
-
-        Dirty(uid, component);
     }
 
     /// <summary>
