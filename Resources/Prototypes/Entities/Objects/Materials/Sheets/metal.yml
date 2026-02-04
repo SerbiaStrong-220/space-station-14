@@ -60,6 +60,9 @@
   - type: Item
     heldPrefix: steel
   - type: Appearance
+  - type: FloorTile
+    outputs:
+    - Plating
   - type: Extractable
     grindableSolutionName: steel
   - type: SolutionContainerManager
@@ -205,7 +208,7 @@
           Quantity: 0.2
         #SS220 tweak produce lead end
         canReact: false
-      
+
 
 - type: entity
   parent: SheetPlasteel
