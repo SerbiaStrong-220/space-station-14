@@ -181,7 +181,7 @@
       - Back
       - suitStorage
   - type: Gun
-    fireRate: 5.0
+    fireRate: 6
     selectedMode: FullAuto
     availableModes:
     - FullAuto
