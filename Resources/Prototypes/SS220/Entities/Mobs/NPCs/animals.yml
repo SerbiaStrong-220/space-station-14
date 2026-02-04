@@ -696,7 +696,7 @@
 - type: entity
   parent: MobGigaHamlet
   id: MobRicardoHamlet
-  name: ricardo hamles
+  name: ricardo hamlet
   description: If hamsters could be superheroes, then Ricardo Gomez would be their best representative. Ah.. How he dances.. God..
   suffix: Shitspawn
   components:
@@ -708,8 +708,8 @@
   - type: GhostRole
     allowMovement: true
     allowSpeech: true
-    name: ghost-role-information-gigohamles-name
-    description: ghost-role-information-gigohamles-description
+    name: ghost-role-information-gigohamlet-name
+    description: ghost-role-information-gigahamlet-description
   - type: GhostTakeoverAvailable
   # Всё же, думаю не стоит...
   # - type: Butcherable
