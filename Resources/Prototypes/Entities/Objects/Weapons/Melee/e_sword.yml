@@ -410,6 +410,7 @@
 # ss220 FixESword
   - type: Reflect
     reflectProb: 0.80 #ss220 ttkTweaks
+    reflectProbBehind: 0.3 #ss220 add reflect in back
     reflects:
       - NonEnergy
       - Energy #SS220-FixReflects
