@@ -20,6 +20,12 @@ public sealed partial class MechChassisComponent : Component
     public FixedPoint2 MaximalMass = 0;
 
     /// <summary>
+    /// How much energy the mech will consume per kilogram of mass it carries
+    /// </summary>
+    [DataField(required: true), AutoNetworkedField]
+    public float Efficiency = 1;
+
+    /// <summary>
     /// Movement speed this chassis provides
     /// </summary>
     [DataField(required: true), AutoNetworkedField]

@@ -33,6 +33,28 @@
   - type: MechArm
 
 - type: entity
+  id: BaseMechLeftArm
+  parent: MechPartBase
+  abstract: true
+  components:
+  - type: MechPart
+    slot: left-arm
+    ownMass: 200
+  - type: MechArm
+
+- type: entity
+  parent: MechBatterySmall
+  id: PowerCellSmallNuclear
+  name: small-capacity nuclear power cell
+  description: A self rechargeable power cell, designed for fast recharge rate at the expense of capacity.
+  components:
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 250 # 10 seconds to recharge
+    autoRechargePause: false
+    autoRechargePauseTime: 30
+
+- type: entity
   id: TestRightArm
   parent: BaseMechRightArm
   components:
@@ -70,6 +92,7 @@
     maximalMass: 550
     baseMovementSpeed: 3.6
     acceleration: 1.0
+    efficiency: 0.01
   - type: MechPart
     attachedSprite:
       sprite: SS220/Objects/Specific/Robotics/Mechs/chassis.rsi
@@ -80,3 +103,66 @@
       - state: inhand-left-big
       right:
       - state: inhand-right-big
+
+- type: entity
+  id: BaseMechPowerGrid
+  parent: MechPartBase
+  abstract: true
+  components:
+  - type: MechPart
+    slot: power
+    ownMass: 200
+  - type: Battery
+    maxCharge: 10800
+    startingCharge: 10800
+    pricePerJoule: 0.15
+  - type: PowerCell
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 200
+    intensitySlope: 1.5
+  - type: SolutionContainerManager
+    solutions:
+      battery:
+        maxVol: 5
+  - type: Tag
+    tags:
+      - PowerCell
+  - type: Appearance
+  - type: PowerCellVisuals
+  - type: Riggable
+
+- type: entity
+  id: MechBatterySmall
+  parent: BaseMechPowerGrid
+  name: small-capacity mech battery
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Mech/mecha_equipment.rsi
+    state: mecha_clamp
+  - type: MechPart
+    slot: power
+    ownMass: 200
+    integrity: 200
+    attachedSprite:
+      sprite: SS220/Objects/Specific/Robotics/Mechs/righthand.rsi
+      state: test
+  - type: Battery
+    maxCharge: 15000
+    startingCharge: 15000
+    pricePerJoule: 0.15
+  - type: PowerCell
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 200
+    intensitySlope: 1.5
+  - type: SolutionContainerManager
+    solutions:
+      battery:
+        maxVol: 5
+  - type: Tag
+    tags:
+      - PowerCell
+  - type: Appearance
+  - type: PowerCellVisuals
+  - type: Riggable

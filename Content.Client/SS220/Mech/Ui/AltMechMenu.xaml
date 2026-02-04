@@ -142,13 +142,13 @@
                            Margin="10 0 0 0"
                            VerticalAlignment="Center" />
                 </ProgressBar>
-                <ProgressBar Name="PowerSupplyRemainingPower"
+                <ProgressBar Name="EnergyDisplayBar"
                              HorizontalExpand="True"
                              SetHeight="25"
                              Margin="10 0 0 0"
                              MaxValue="1"
                              Value="0">
-                    <Label Name="PowerSupplyRemainingPowerLabel"
+                    <Label Name="EnergyDisplay"
                            HorizontalAlignment="Left"
                            Margin="10 0 0 0"
                            VerticalAlignment="Center" />

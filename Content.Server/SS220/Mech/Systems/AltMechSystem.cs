@@ -28,6 +28,7 @@ using Content.Shared.Tools.Systems;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Content.Shared.Wires;
+using JetBrains.FormatRipper.Elf;
 using NetCord.Gateway;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
@@ -104,35 +105,35 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         if (TryComp<WiresPanelComponent>(ent.Owner, out var panel) && !panel.Open)
             return;
 
-        if (ent.Comp.BatterySlot.ContainedEntity == null && TryComp<BatteryComponent>(args.Used, out var battery))
+        if (ent.Comp.ContainerDict["power"].ContainedEntity == null && TryComp<BatteryComponent>(args.Used, out var battery))
         {
             InsertBattery(ent.Owner, args.Used, ent.Comp, battery);
             _actionBlocker.UpdateCanMove(ent.Owner);
             return;
         }
 
-        if (_toolSystem.HasQuality(args.Used, PryingQuality) && ent.Comp.BatterySlot.ContainedEntity != null)
-        {
-            var doAfterEventArgs = new DoAfterArgs(EntityManager, args.User, ent.Comp.BatteryRemovalDelay,
-                new RemoveBatteryEvent(), ent.Owner, target: ent.Owner, used: args.Target)
-            {
-                BreakOnMove = true
-            };
+        //if (_toolSystem.HasQuality(args.Used, PryingQuality) && ent.Comp.BatterySlot.ContainedEntity != null)
+        //{
+        //    var doAfterEventArgs = new DoAfterArgs(EntityManager, args.User, ent.Comp.BatteryRemovalDelay,
+        //        new RemoveBatteryEvent(), ent.Owner, target: ent.Owner, used: args.Target)
+        //    {
+        //        BreakOnMove = true
+        //    };
 
-            _doAfter.TryStartDoAfter(doAfterEventArgs);
-        }
+        //    _doAfter.TryStartDoAfter(doAfterEventArgs);
+        //}
     }
 
-    private void OnInsertBattery(EntityUid uid, AltMechComponent component, EntInsertedIntoContainerMessage args)
+    private void OnInsertBattery(Entity<AltMechComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
-        if (args.Container != component.BatterySlot || !TryComp<BatteryComponent>(args.Entity, out var battery))
+        if (args.Container != ent.Comp.ContainerDict["power"] || !TryComp<BatteryComponent>(args.Entity, out var battery))
             return;
 
-        component.Energy = battery.CurrentCharge;
-        component.MaxEnergy = battery.MaxCharge;
+        ent.Comp.Energy = battery.CurrentCharge;
+        ent.Comp.MaxEnergy = battery.MaxCharge;
 
-        Dirty(uid, component);
-        _actionBlocker.UpdateCanMove(uid);
+        Dirty(ent.Owner, ent.Comp);
+        _actionBlocker.UpdateCanMove(ent.Owner);
     }
 
     private void OnRemoveBattery(EntityUid uid, AltMechComponent component, RemoveBatteryEvent args)
@@ -410,7 +411,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         if (!base.TryChangeEnergy(uid, delta, component))
             return false;
 
-        var battery = component.BatterySlot.ContainedEntity;
+        var battery = component.ContainerDict["power"].ContainedEntity;
         if (battery == null)
             return false;
 
@@ -436,7 +437,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         if (!Resolve(toInsert, ref battery, false))
             return;
 
-        _container.Insert(toInsert, component.BatterySlot);
+        _container.Insert(toInsert, component.ContainerDict["power"]);
         component.Energy = battery.CurrentCharge;
         component.MaxEnergy = battery.MaxCharge;
 
@@ -451,7 +452,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         if (!Resolve(uid, ref component))
             return;
 
-        _container.EmptyContainer(component.BatterySlot);
+        _container.EmptyContainer(component.ContainerDict["power"]);
         component.Energy = 0;
         component.MaxEnergy = 0;
 

@@ -45,12 +45,9 @@ public sealed class AltMechBoundUserInterface : BoundUserInterface
 
         _menu.SetEntity(Owner, MechPartVisualLayers.Core);
 
-        foreach (var part in mechComp.ContainerDict.Values)
+        foreach (var part in mechComp.ContainerDict)
         {
-            if (part.ContainedEntity == null || !_ent.TryGetComponent<MechPartComponent>(part.ContainedEntity, out var partComp))
-                continue;
-
-            _menu.SetEntity((EntityUid)part.ContainedEntity, partsVisuals[partComp.slot]);
+            _menu.SetEntity(part.Value.ContainedEntity, partsVisuals[part.Key]);
         }
 
         _menu.OnRemovePartButtonPressed += id => SendMessage(new MechPartRemoveMessage(id));
@@ -59,8 +56,8 @@ public sealed class AltMechBoundUserInterface : BoundUserInterface
 
     protected void UpdateStateAfterButtonPressed(string _)
     {
-        _menu?.UpdateMechStats();
-        _menu?.UpdateEquipmentView();
+        //_menu?.UpdateMechStats();
+        //_menu?.UpdateEquipmentView();
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)

@@ -9,6 +9,7 @@
   - type: AltMech
   - type: MechRobot #SS220-AddMechToClothing
   - type: MechAir
+  - type: PowerCellDraw
   - type: AirFilter
     # everything except oxygen and nitrogen
     gases:
@@ -36,10 +37,17 @@
   - type: AtmosDevice
     requireAnchored: false
     joinSystem: true
+  - type: MobCollision
+    colliding: false
+    bufferAccumulator: 0
+    speedModifier: 0
+    minimumSpeedModifier: 0
+    strength: 0
+    fixtureId: ""
   - type: DoAfter
-  - type: Repairable
-    fuelCost: 25
-    doAfterDelay: 10
+  #- type: Repairable # Removed because mech repair system will be remade
+  #  fuelCost: 25
+  #  doAfterDelay: 10
   - type: UserInterface
     interfaces:
       enum.MechUiKey.Key:
@@ -120,12 +128,12 @@
     pilotWhitelist:
       components:
         - HumanoidAppearance
-  - type: MeleeWeapon
-    hidden: true
-    attackRate: 1
-    damage:
-      types:
-        Blunt: 14 #intentionally shit so people realize that going into combat with the ripley is usually a bad idea.
+  #- type: MeleeWeapon #Removed as mech shouldn't be able to attack without arms
+  #  hidden: true
+  #  attackRate: 1
+  #  damage:
+  #    types:
+  #      Blunt: 14 #intentionally shit so people realize that going into combat with the ripley is usually a bad idea.
   - type: MovementSpeedModifier
     baseWalkSpeed: 0
     baseSprintSpeed: 0

@@ -1,11 +1,12 @@
 using Content.Shared.EntityEffects.Effects.StatusEffects;
 using Content.Shared.FixedPoint;
+using Content.Shared.Hands.Components;
 using Content.Shared.SS220.Mech.Systems;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Content.Shared.Hands.Components;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.SS220.Mech.Components;
 
@@ -63,11 +64,11 @@ public sealed partial class AltMechComponent : Component
     /// <summary>
     /// The slot the battery is stored in.
     /// </summary>
-    [ViewVariables]
-    public ContainerSlot BatterySlot = default!;
+    //[ViewVariables]
+    //public ContainerSlot BatterySlot = default!;
 
-    [ViewVariables]
-    public readonly string BatterySlotId = "mech-battery-slot";
+    //[ViewVariables]
+    //public readonly string BatterySlotId = "mech-battery-slot";
 
     /// <summary>
     /// Whether the mech has been destroyed and is no longer pilotable.
@@ -110,6 +111,10 @@ public sealed partial class AltMechComponent : Component
     //List of the user's hands that must be given back when leaving the mech 
     [DataField]
     public Dictionary<string, Hand> Hands = new();
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [AutoNetworkedField]
+    public TimeSpan NextPowerDrain = TimeSpan.Zero;
 
     //[ViewVariables(VVAccess.ReadWrite)]
     //public ContainerSlot HeadSlot = default!;

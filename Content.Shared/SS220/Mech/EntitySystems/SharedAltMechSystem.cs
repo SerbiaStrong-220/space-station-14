@@ -122,7 +122,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         foreach (var part in ent.Comp.ContainerDict.Keys)
             ent.Comp.ContainerDict[part] = _container.EnsureContainer<ContainerSlot>(ent.Owner, part);
 
-        ent.Comp.BatterySlot = _container.EnsureContainer<ContainerSlot>(ent.Owner, ent.Comp.BatterySlotId);
+        //ent.Comp.ContainerDict["power"] = _container.EnsureContainer<ContainerSlot>(ent.Owner, ent.Comp.ContainerDict["power"]);
 
         //SS220-MechClothingInHandsFix
         ent.Comp.PilotSlot = _container.EnsureContainer<ContainerSlot>(ent.Owner, ent.Comp.PilotSlotId);

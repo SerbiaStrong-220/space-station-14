@@ -9,6 +9,7 @@ using Robust.Client.GameObjects;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using static Robust.Client.UserInterface.Controls.MenuBar;
+using Content.Shared.FixedPoint;
 
 namespace Content.Client.SS220.Mech.Ui;
 
@@ -88,7 +89,7 @@ public sealed partial class AltMechMenu : FancyWindow
         ["power"] = MechPartVisualLayers.Power
     };
 
-    public void SetEntity(EntityUid uid, MechPartVisualLayers part)
+    public void SetEntity(EntityUid? uid, MechPartVisualLayers part)
     {
         if (!spriteViewDict.ContainsKey(part))
             return;
@@ -96,10 +97,17 @@ public sealed partial class AltMechMenu : FancyWindow
         var view = spriteViewDict[part];
 
         if (view != null)
+        {
             view.SetEntity(uid);
+            if (uid == null)
+                view.Visible = false;
+        }
+
+        if (uid == null)
+            return;
 
         if(_ent.TryGetComponent<AltMechComponent>(uid, out var mechComp))
-            _mech = uid;
+            _mech = (EntityUid)uid;
     }
 
     public void UpdateMechStats()
@@ -116,10 +124,15 @@ public sealed partial class AltMechMenu : FancyWindow
             if (integrityBarDict[bar] == "core")
                 continue;
 
+            FixedPoint2 partintegrityPercent;
             if (mechComp.ContainerDict[integrityBarDict[bar]].ContainedEntity == null || !_ent.TryGetComponent<MechPartComponent>(mechComp.ContainerDict[integrityBarDict[bar]].ContainedEntity, out var partComp))
+            {
+                partintegrityPercent = 0;
+                bar.Value = partintegrityPercent.Float();
                 continue;
+            }
 
-            var partintegrityPercent = partComp.Integrity / partComp.MaxIntegrity;
+            partintegrityPercent = partComp.Integrity / partComp.MaxIntegrity;
             bar.Value = partintegrityPercent.Float();
         }
 
@@ -129,30 +142,38 @@ public sealed partial class AltMechMenu : FancyWindow
                 continue;
 
             if (mechComp.ContainerDict[spriteTextDict[text]].ContainedEntity == null || !_ent.TryGetComponent<MechPartComponent>(mechComp.ContainerDict[spriteTextDict[text]].ContainedEntity, out var partComp))
+            {
+                text.Text = Loc.GetString("mech-integrity-display", ("amount", 0));
                 continue;
+            }
 
             var partintegrityPercent = partComp.Integrity / partComp.MaxIntegrity;
             text.Text = Loc.GetString("mech-integrity-display", ("amount", (partintegrityPercent * 100).Int()));
         }
-            //
-            //if (mechComp.MaxEnergy != 0f)
-            //{
-            //    var energyPercent = mechComp.Energy / mechComp.MaxEnergy;
-            //    EnergyDisplayBar.Value = energyPercent.Float();
-            //    EnergyDisplay.Text = Loc.GetString("mech-energy-display", ("amount", (energyPercent*100).Int()));
-            //}
-            //else
-            //{
-            //    EnergyDisplayBar.Value = 0f;
-            //    EnergyDisplay.Text = Loc.GetString("mech-energy-missing");
-            //}
-            //if (_ent.TryGetComponent<MechPartComponent>(_mech, out var partComp))
-            //{
-            //    SlotDisplay.Text = Loc.GetString("mech-slot-display",
-            //        ("amount", partComp.MaxEquipmentAmount - partComp.EquipmentContainer.ContainedEntities.Count));
-            //}
-
+            
+        if (mechComp.MaxEnergy != 0f)
+        {
+            var energyPercent = mechComp.Energy / mechComp.MaxEnergy;
+            EnergyDisplayBar.Value = energyPercent.Float();
+            EnergyDisplay.Text = Loc.GetString("mech-energy-display", ("amount", (energyPercent*100).Int()));
         }
+        else
+        {
+            EnergyDisplayBar.Value = 0f;
+            EnergyDisplay.Text = Loc.GetString("mech-energy-missing");
+        }
+
+        foreach (var part in mechComp.ContainerDict)
+        {
+            SetEntity(part.Value.ContainedEntity, partsVisuals[part.Key]);
+        }
+        //if (_ent.TryGetComponent<MechPartComponent>(_mech, out var partComp))
+        //{
+        //    SlotDisplay.Text = Loc.GetString("mech-slot-display",
+        //        ("amount", partComp.MaxEquipmentAmount - partComp.EquipmentContainer.ContainedEntities.Count));
+        //}
+
+    }
 
     public void UpdateEquipmentView()
     {

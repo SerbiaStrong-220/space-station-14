@@ -1,3 +1,4 @@
+using Content.Server.Hands.Systems;
 using Content.Server.Popups;
 using Content.Shared.DoAfter;
 using Content.Shared.EntityEffects.Effects.StatusEffects;
@@ -6,13 +7,13 @@ using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Power.Components;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.SS220.Mech.Components;
 using Content.Shared.SS220.Mech.Equipment.Components;
 using Content.Shared.SS220.Mech.Systems;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
-using Content.Server.Hands.Systems;
 
 namespace Content.Server.SS220.Mech.Systems;
 
@@ -37,6 +38,8 @@ public sealed class MechPartSystem : EntitySystem
 
         SubscribeLocalEvent<MechChassisComponent, MechPartInsertedEvent>(OnChassisInserted);
         SubscribeLocalEvent<MechChassisComponent, MechPartRemovedEvent>(OnChassisRemoved);
+
+        SubscribeLocalEvent<BatteryComponent, MechPartInsertedEvent>(OnPowerInserted);
 
         SubscribeLocalEvent<MechArmComponent, MechPartInsertedEvent>(OnArmInserted);
         SubscribeLocalEvent<MechArmComponent, MechPartRemovedEvent>(OnArmRemoved);
@@ -227,6 +230,12 @@ public sealed class MechPartSystem : EntitySystem
         mechComp.OverallBaseAcceleration = 0;
 
         Dirty(ent.Owner, ent.Comp);
+    }
+
+    private void OnPowerInserted(Entity<BatteryComponent> ent, ref MechPartInsertedEvent args)
+    {
+        if (!TryComp<AltMechComponent>(args.Mech, out var mechComp))
+            return;
     }
 
     private void OnInsertPart(EntityUid uid, MechPartComponent component, InsertPartEvent args)
