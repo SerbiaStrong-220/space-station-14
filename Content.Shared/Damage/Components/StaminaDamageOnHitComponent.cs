@@ -15,4 +15,9 @@ public sealed partial class StaminaDamageOnHitComponent : Component
     [DataField]
     public bool IgnoreResistance;
     // SS220 Add ingnore resistance end
+
+    // SS220 edit
+    [DataField]
+    public float LightAttackDamageMultiplier = 1f;
+
 }

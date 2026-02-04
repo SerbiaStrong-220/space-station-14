@@ -28,7 +28,7 @@
 - type: startingGear
   id: SecurityPilotGear
   equipment:
-    ears: ClothingHeadsetSecurity
+    ears: ClothingHeadsetAltSecurityNonCom #SS220 staminaweapons
     id: SecurityPilotPDA #SS220 SD-pda-some-fixes
     belt: ClothingBeltSecurityFilled
     gloves: ClothingHandsGlovesCombat

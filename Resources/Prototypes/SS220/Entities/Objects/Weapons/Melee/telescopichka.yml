@@ -4,7 +4,7 @@
   name: telescopichka
   parent: BaseItem
   id: Telescopichka
-  description: Very loud and very dangerous energy sword that can reflect shots. Can be stored in pockets when turned off.
+  description: Compact self-defence weapon. Can be folded to reduce it's size. Fits in pocket when folded.
   components:
   - type: EmitSoundOnLand ##new sound_drop effect, add MIXnikita
     sound:
@@ -16,34 +16,58 @@
     layers:
     - state: telescope_off
       map: [ "enum.ToggleableVisuals.Layer" ]
-  - type: SwitchableWeapon
-    openSound: "/Audio/SS220/Weapons/telescopichka/batonextend.ogg"
-    closeSound: "/Audio/SS220/Weapons/telescopichka/batonextend.ogg"
-    damageOpen:
+  - type: ItemToggle
+    soundActivate:
+      path: /Audio/SS220/Weapons/telescopichka/batonextend.ogg
+      params:
+        volume: -2
+    soundDeactivate:
+      path: /Audio/SS220/Weapons/telescopichka/batonextend.ogg
+      params:
+        volume: -2
+  - type: ItemToggleMeleeWeapon
+    activatedSoundOnHit:
+      collection: BatonHit
+    activatedDamage:
       types:
-        Blunt: 1
-    damageFolded:
-      types:
-        Blunt: 0
-    staminaDamageFolded: 0
-    staminaDamageOpen: 28
-    sizeOpened: Large
-    sizeClosed: Small
-  - type: StaminaDamageOnHit
-    damage: 0
+        Blunt: 10 #ss13 parity :troll:
+  - type: ItemToggleSize
+    activatedSize: Normal
+    activatedShape:
+    - 0,0,0,3
+  - type: UseDelay
+    delays:
+      default:
+        length: 1
+      baton:
+        length: 4
   - type: MeleeWeapon
     wideAnimationRotation: -135
-    angle: 60
+    angle: 0
     soundHit: !type:SoundCollectionSpecifier
       collection: BatonHit
     damage:
       types:
         Blunt: 0
+  - type: ComponentToggler
+    components:
+    - type: DisarmMalus
+      malus: 0.6
+    - type: DelayedKnockdownOnHit #SS220 staminaweapons rework
+      onHeavyAttack: true
+      delay: 0 #instant
+      duration: 2
+      drop: false
+      refresh: true
+      autoStand: true
+      useDelay: baton
+  - type: UseDelayBlockMeleeAttack
+    delays:
+    - default
+    - baton
   - type: Item
     size: Small
     sprite: SS220/Objects/Weapons/Melee/Stunning/telescopichka.rsi
-  - type: UseDelay
-    delay: 1.0
   - type: DisarmMalus
     malus: 0
   - type: Appearance

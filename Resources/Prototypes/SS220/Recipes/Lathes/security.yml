@@ -175,3 +175,20 @@
     Steel: 500
     Gold: 350
     Plasma: 500
+
+- type: latheRecipe
+  parent: BaseWeaponRecipeMelee
+  id: Rubberbaton
+  result: Rubberbaton
+  materials:
+    Plastic: 500
+    Steel: 100
+
+- type: latheRecipe
+  parent: BaseWeaponRecipe
+  id: GrenadeFlashBang
+  result: GrenadeFlashBang
+  materials:
+    Steel: 150
+    Plastic: 250
+    Glass: 150

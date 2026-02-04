@@ -1,5 +1,6 @@
 using Content.Shared.Damage.Components;
 using Robust.Shared.Collections;
+using System.Numerics;
 
 namespace Content.Shared.Damage.Events;
 
@@ -28,4 +29,11 @@ public sealed class StaminaMeleeHitEvent : HandledEntityEventArgs
     {
         HitList = hitList;
     }
+}
+
+public sealed class StaminaDamageMeleeHitEvent(List<(EntityUid Entity, StaminaComponent Component)> hitEntities, Vector2? direction) : EntityEventArgs
+{
+    public List<(EntityUid Entity, StaminaComponent Component)> HitEntities = hitEntities;
+
+    public Vector2? Direction = direction;
 }

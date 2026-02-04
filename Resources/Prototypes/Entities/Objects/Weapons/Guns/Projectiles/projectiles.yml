@@ -216,10 +216,6 @@
         - BulletImpassable
       fly-by: *flybyfixture
   - type: Ammo
-  # SS220 Stamina damage begin
-  - type: StaminaDamageOnCollide
-    damage: 55
-  # SS220 Stamina damage end
   - type: Projectile
     damage:
       types:
@@ -295,8 +291,8 @@
         hard: false
         mask:
         - Opaque
-        - Impassable
-        - BulletImpassable
+        #- Impassable #ss220 staminaweapons - so you can shoot disablers through windows
+        #- BulletImpassable #ss220 staminaweapons
       fly-by: *flybyfixture
   - type: Ammo
   - type: StaminaDamageOnCollide
@@ -336,8 +332,8 @@
         hard: false
         mask:
         - Opaque
-        - Impassable
-        - BulletImpassable
+        #- Impassable #ss220 staminaweapons
+        #- BulletImpassable #ss220 staminaweapons
       fly-by: *flybyfixture
   - type: Ammo
   - type: StaminaDamageOnCollide
@@ -910,6 +906,10 @@
   - type: SpawnOnTrigger
     proto: GrenadeFlashEffect
   - type: DeleteOnTrigger
+  - type: DeafeningOnTrigger #SS220 staminaweapons
+    range: 7
+    knockdownTime: 8
+    stunTime: 3
   # SS220 Add projectiles on shuttle nav begin
   - type: Projectile
     shuttleNavInfo:
@@ -1179,12 +1179,12 @@
         hard: false
         mask:
         - Opaque
-        - Impassable
-        - BulletImpassable
+        #- Impassable #ss220 staminaweapons
+        #- BulletImpassable #ss220 staminaweapons
       fly-by: *flybyfixture
   - type: Ammo
   - type: StaminaDamageOnCollide
-    damage: 20 # SS220-BUFF
+    damage: 15 #ss220 staminaweapons - was 20 before. Bullshit - 5 hits with RoF 4.5
   - type: Projectile
     impactEffect: BulletImpactEffectDisabler
     damage:

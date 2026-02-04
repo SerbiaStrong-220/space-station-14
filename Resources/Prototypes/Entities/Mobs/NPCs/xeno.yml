@@ -382,7 +382,7 @@
     damageContainer: Biological
     damageModifierSet: MobBasicSnake
   - type: StaminaResistance
-    damageCoefficient: 0.2
+    damageCoefficient: 0.5
     #SS220-fauna-damagesets-ended
   - type: Butcherable
     spawned:
