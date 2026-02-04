@@ -1,0 +1,19 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: construction
+  id: RandomPosterContraband
+  graph: RandomPosterContraband
+  startNode: start
+  targetNode: contrposter
+  category: construction-category-misc
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+
+- type: construction
+  id: RandomPosterLegal
+  graph: RandomPosterLegal
+  startNode: start
+  targetNode: legalposter
+  category: construction-category-misc
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true

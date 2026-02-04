@@ -77,3 +77,863 @@
     - !type:NoWindowsInTile
   objectType: Structure
   placementMode: SnapgridCenter
+
+- type: construction
+  id: BarbedWire
+  graph: BarbedWire
+  startNode: start
+  targetNode: BarbedWire
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+
+- type: construction
+  id: BarbedWireCorner
+  graph: BarbedWire
+  startNode: start
+  targetNode: BarbedWireCorner
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+
+- type: construction
+  id: BarricadeWooden
+  graph: BarricadeWooden220
+  startNode: start
+  targetNode: barricadewood
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+
+- type: construction
+  id: BarricadeSteel
+  graph: BarricadeSteel220
+  startNode: start
+  targetNode: barricadesteel
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+
+- type: construction
+  id: BarricadePlasteel
+  graph: BarricadePlasteel220
+  startNode: start
+  targetNode: barricadeplasteel
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+
+# Баррикада направленная
+- type: construction
+  id: BarricadeWoodenDirectional
+  graph: BarricadeWooden220
+  startNode: start
+  targetNode: barricadewooddirectional
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+
+- type: construction
+  id: BarricadeSteelDirectional
+  graph: BarricadeSteel220
+  startNode: start
+  targetNode: barricadesteeldirectional
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+
+- type: construction
+  id: BarricadePlasteelDirectional
+  graph: BarricadePlasteel220
+  startNode: start
+  targetNode: barricadeplasteeldirectional
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+
+# Баррикада напольная
+- type: construction
+  id: BarricadeWoodenFloor
+  graph: BarricadeWooden220
+  startNode: start
+  targetNode: barricadewoodfloor
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+
+- type: construction
+  id: BarricadeSteelFloor
+  graph: BarricadeSteel220
+  startNode: start
+  targetNode: barricadesteelfloor
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+
+- type: construction
+  id: BarricadePlasteelFloor
+  graph: BarricadePlasteel220
+  startNode: start
+  targetNode: barricadeplasteelfloor
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+
+- type: construction
+  id: SteelCatwalk
+  graph: SteelCatwalk
+  startNode: start
+  targetNode: SteelCatwalk
+  category: construction-category-structures
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  - !type:TileType
+    targets:
+    - Lattice
+    - Plating
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  id: WhiteCatwalk
+  graph: SteelCatwalk
+  startNode: start
+  targetNode: WhiteCatwalk
+  category: construction-category-structures
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  - !type:TileType
+    targets:
+    - Lattice
+    - Plating
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  id: DarkCatwalk
+  graph: SteelCatwalk
+  startNode: start
+  targetNode: DarkCatwalk
+  category: construction-category-structures
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  - !type:TileType
+    targets:
+    - Lattice
+    - Plating
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  id: CatwalkRed
+  graph: SteelCatwalk
+  startNode: start
+  targetNode: CatwalkRed
+  category: construction-category-structures
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  - !type:TileType
+    targets:
+    - Lattice
+    - Plating
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  id: CatwalkPurple
+  graph: SteelCatwalk
+  startNode: start
+  targetNode: CatwalkPurple
+  category: construction-category-structures
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  - !type:TileType
+    targets:
+    - Lattice
+    - Plating
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  id: CatwalkCyan
+  graph: SteelCatwalk
+  startNode: start
+  targetNode: CatwalkCyan
+  category: construction-category-structures
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  - !type:TileType
+    targets:
+    - Lattice
+    - Plating
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  id: CatwalkBrown
+  graph: SteelCatwalk
+  startNode: start
+  targetNode: CatwalkBrown
+  category: construction-category-structures
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  - !type:TileType
+    targets:
+    - Lattice
+    - Plating
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  id: CatwalkOrange
+  graph: SteelCatwalk
+  startNode: start
+  targetNode: CatwalkOrange
+  category: construction-category-structures
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  - !type:TileType
+    targets:
+    - Lattice
+    - Plating
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  id: CatwalkGreen
+  graph: SteelCatwalk
+  startNode: start
+  targetNode: CatwalkGreen
+  category: construction-category-structures
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  - !type:TileType
+    targets:
+    - Lattice
+    - Plating
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  id: CatwalkBlue
+  graph: SteelCatwalk
+  startNode: start
+  targetNode: CatwalkBlue
+  category: construction-category-structures
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  - !type:TileType
+    targets:
+    - Lattice
+    - Plating
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+#angular directional window
+- type: construction
+  id: WindowDirectionalAng
+  graph: WindowDirectionalAng
+  startNode: start
+  targetNode: windowDirectionalAng
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+  - !type:EmptyOrWindowValidInTile
+  - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  id: WindowReinforcedDirectionalAng
+  graph: WindowDirectionalAng
+  startNode: start
+  targetNode: windowReinforcedDirectionalAng
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+  - !type:EmptyOrWindowValidInTile
+  - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  id: WindowClockworkDirectionalAng
+  graph: WindowDirectionalAng
+  startNode: start
+  targetNode: windowClockworkDirectionalAng
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+  - !type:EmptyOrWindowValidInTile
+  - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  id: PlasmaWindowDirectionalAng
+  graph: WindowDirectionalAng
+  startNode: start
+  targetNode: plasmaWindowDirectionalAng
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+  - !type:EmptyOrWindowValidInTile
+  - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  id: PlasmaReinforcedWindowDirectionalAng
+  graph: WindowDirectionalAng
+  startNode: start
+  targetNode: plasmaReinforcedWindowDirectionalAng
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+  - !type:EmptyOrWindowValidInTile
+  - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  id: UraniumWindowDirectionalAng
+  graph: WindowDirectionalAng
+  startNode: start
+  targetNode: uraniumWindowDirectionalAng
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+  - !type:EmptyOrWindowValidInTile
+  - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  id: UraniumReinforcedWindowDirectionalAng
+  graph: WindowDirectionalAng
+  startNode: start
+  targetNode: uraniumReinforcedWindowDirectionalAng
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+  - !type:EmptyOrWindowValidInTile
+  - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+#U-shaped directional window
+- type: construction
+  id: WindowDirectionalU
+  graph: WindowDirectionalU
+  startNode: start
+  targetNode: windowDirectionalU
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+  - !type:EmptyOrWindowValidInTile
+  - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  id: WindowReinforcedDirectionalU
+  graph: WindowDirectionalU
+  startNode: start
+  targetNode: windowReinforcedDirectionalU
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+  - !type:EmptyOrWindowValidInTile
+  - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  id: WindowClockworkDirectionalU
+  graph: WindowDirectionalU
+  startNode: start
+  targetNode: windowClockworkDirectionalU
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+  - !type:EmptyOrWindowValidInTile
+  - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  id: PlasmaWindowDirectionalU
+  graph: WindowDirectionalU
+  startNode: start
+  targetNode: plasmaWindowDirectionalU
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+  - !type:EmptyOrWindowValidInTile
+  - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  id: PlasmaReinforcedWindowDirectionalU
+  graph: WindowDirectionalU
+  startNode: start
+  targetNode: plasmaReinforcedWindowDirectionalU
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+  - !type:EmptyOrWindowValidInTile
+  - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  id: UraniumWindowDirectionalU
+  graph: WindowDirectionalU
+  startNode: start
+  targetNode: uraniumWindowDirectionalU
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+  - !type:EmptyOrWindowValidInTile
+  - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  id: UraniumReinforcedWindowDirectionalU
+  graph: WindowDirectionalU
+  startNode: start
+  targetNode: uraniumReinforcedWindowDirectionalU
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+  - !type:EmptyOrWindowValidInTile
+  - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+#double directional window
+- type: construction
+  id: WindowDirectionalDoub
+  graph: WindowDirectionalDoub
+  startNode: start
+  targetNode: windowDirectionalDoub
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+  - !type:EmptyOrWindowValidInTile
+  - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  id: WindowReinforcedDirectionalDoub
+  graph: WindowDirectionalDoub
+  startNode: start
+  targetNode: windowReinforcedDirectionalDoub
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+  - !type:EmptyOrWindowValidInTile
+  - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  id: WindowClockworkDirectionalDoub
+  graph: WindowDirectionalDoub
+  startNode: start
+  targetNode: windowClockworkDirectionalDoub
+  canBuildInImpassable: true
+  conditions:
+  - !type:EmptyOrWindowValidInTile
+  - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  id: PlasmaWindowDirectionalDoub
+  graph: WindowDirectionalDoub
+  startNode: start
+  targetNode: plasmaWindowDirectionalDoub
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+  - !type:EmptyOrWindowValidInTile
+  - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  id: PlasmaReinforcedWindowDirectionalDoub
+  graph: WindowDirectionalDoub
+  startNode: start
+  targetNode: plasmaReinforcedWindowDirectionalDoub
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+  - !type:EmptyOrWindowValidInTile
+  - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  id: UraniumWindowDirectionalDoub
+  graph: WindowDirectionalDoub
+  startNode: start
+  targetNode: uraniumWindowDirectionalDoub
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+  - !type:EmptyOrWindowValidInTile
+  - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  id: UraniumReinforcedWindowDirectionalDoub
+  graph: WindowDirectionalDoub
+  startNode: start
+  targetNode: uraniumReinforcedWindowDirectionalDoub
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+  - !type:EmptyOrWindowValidInTile
+  - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+#O-shaped window
+- type: construction
+  id: WindowDirectionalO
+  graph: WindowDirectionalO
+  startNode: start
+  targetNode: windowDirectionalO
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+  - !type:EmptyOrWindowValidInTile
+  - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  id: WindowReinforcedDirectionalO
+  graph: WindowDirectionalO
+  startNode: start
+  targetNode: windowReinforcedDirectionalO
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+  - !type:EmptyOrWindowValidInTile
+  - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  id: WindowClockworkDirectionalO
+  graph: WindowDirectionalO
+  startNode: start
+  targetNode: windowClockworkDirectionalO
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+  - !type:EmptyOrWindowValidInTile
+  - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  id: PlasmaWindowDirectionalO
+  graph: WindowDirectionalO
+  startNode: start
+  targetNode: plasmaWindowDirectionalO
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+  - !type:EmptyOrWindowValidInTile
+  - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  id: PlasmaReinforcedWindowDirectionalO
+  graph: WindowDirectionalO
+  startNode: start
+  targetNode: plasmaReinforcedWindowDirectionalO
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+  - !type:EmptyOrWindowValidInTile
+  - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  id: UraniumWindowDirectionalO
+  graph: WindowDirectionalO
+  startNode: start
+  targetNode: uraniumWindowDirectionalO
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+  - !type:EmptyOrWindowValidInTile
+  - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  id: UraniumReinforcedWindowDirectionalO
+  graph: WindowDirectionalO
+  startNode: start
+  targetNode: uraniumReinforcedWindowDirectionalO
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+  - !type:EmptyOrWindowValidInTile
+  - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+#Стальные ступеньки
+- type: construction
+  id: SteelStairsSolo
+  graph: SteelStairs
+  startNode: start
+  targetNode: SteelStairsSolo
+  category: construction-category-structures
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  - !type:TileType
+    targets:
+    - Lattice
+    - Plating
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  id: SteelStairsLeft
+  graph: SteelStairs
+  startNode: start
+  targetNode: SteelStairsLeft
+  category: construction-category-structures
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  - !type:TileType
+    targets:
+    - Lattice
+    - Plating
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  id: SteelStairsMiddle
+  graph: SteelStairs
+  startNode: start
+  targetNode: SteelStairsMiddle
+  category: construction-category-structures
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  - !type:TileType
+    targets:
+    - Lattice
+    - Plating
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  id: SteelStairsRight
+  graph: SteelStairs
+  startNode: start
+  targetNode: SteelStairsRight
+  category: construction-category-structures
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  - !type:TileType
+    targets:
+    - Lattice
+    - Plating
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+#Деревянные ступеньки
+- type: construction
+  id: WoodStairsSolo
+  graph: WoodStairs
+  startNode: start
+  targetNode: WoodStairsSolo
+  category: construction-category-structures
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  - !type:TileType
+    targets:
+    - Lattice
+    - Plating
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  id: WoodStairsLeft
+  graph: WoodStairs
+  startNode: start
+  targetNode: WoodStairsLeft
+  category: construction-category-structures
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  - !type:TileType
+    targets:
+    - Lattice
+    - Plating
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  id: WoodStairsMiddle
+  graph: WoodStairs
+  startNode: start
+  targetNode: WoodStairsMiddle
+  category: construction-category-structures
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  - !type:TileType
+    targets:
+    - Lattice
+    - Plating
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  id: WoodStairsRight
+  graph: WoodStairs
+  startNode: start
+  targetNode: WoodStairsRight
+  category: construction-category-structures
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  - !type:TileType
+    targets:
+    - Lattice
+    - Plating
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+#Тёмные стальные ступеньки
+- type: construction
+  id: DarkSteelStairsSolo
+  graph: DarkSteelStairs
+  startNode: start
+  targetNode: DarkSteelStairsSolo
+  category: construction-category-structures
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  - !type:TileType
+    targets:
+    - Lattice
+    - Plating
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  id: DarkSteelStairsLeft
+  graph: DarkSteelStairs
+  startNode: start
+  targetNode: DarkSteelStairsLeft
+  category: construction-category-structures
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  - !type:TileType
+    targets:
+    - Lattice
+    - Plating
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  id: DarkSteelStairsMiddle
+  graph: DarkSteelStairs
+  startNode: start
+  targetNode: DarkSteelStairsMiddle
+  category: construction-category-structures
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  - !type:TileType
+    targets:
+    - Lattice
+    - Plating
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  id: DarkSteelStairsRight
+  graph: DarkSteelStairs
+  startNode: start
+  targetNode: DarkSteelStairsRight
+  category: construction-category-structures
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  - !type:TileType
+    targets:
+    - Lattice
+    - Plating
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
