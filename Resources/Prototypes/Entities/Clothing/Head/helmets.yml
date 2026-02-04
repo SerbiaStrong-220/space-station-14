@@ -203,9 +203,17 @@
   description: What may appear to be a simple black garment is in fact a highly sophisticated nano-weave helmet. Standard issue ninja gear.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Helmets/spaceninja.rsi
+    sprite: SS220/Clothing/Head/Helmets/spaceninja.rsi # SS220 Ninja Resprite
+    # SS220 Ninja Resprite Begin
+    layers:
+    - state: icon
+    - state: icon-flash
+      visible: false
+      map: [ "light" ]
+    # SS220 Ninja Resprite End
   - type: Clothing
-    sprite: Clothing/Head/Helmets/spaceninja.rsi
+    sprite: SS220/Clothing/Head/Helmets/spaceninja.rsi # SS220 Ninja Resprite
+    equippedPrefix: off # SS220 Ninja Resprite
   - type: Tag
     tags:
     - WhitelistChameleon
@@ -215,6 +223,49 @@
     layers:
       Hair: HEAD
       Snout: HEAD
+    # SS220 Ninja Resprite Begin
+  - type: LocateAi
+  - type: ToggleableVisuals
+    spriteLayer: light
+  - type: ItemTogglePointLight
+  - type: PointLight
+    enabled: false
+    color: "#21a52e"
+    radius: 4.5
+    energy: 3
+    mask: /Textures/Effects/LightMasks/cone.png
+    autoRot: true
+    netsync: false
+  - type: Appearance
+  - type: HandheldLight
+    addPrefix: false
+    blinkingBehaviourId: blinking
+    radiatingBehaviourId: radiating
+  - type: LightBehaviour
+    behaviours:
+    - !type:FadeBehaviour
+      id: radiating
+      interpolate: Linear
+      maxDuration: 2.0
+      startValue: 3.0
+      endValue: 2.0
+      isLooped: true
+      reverseWhenFinished: true
+    - !type:PulseBehaviour
+      id: blinking
+      interpolate: Nearest
+      maxDuration: 1.0
+      startValue: 0.1
+      endValue: 2.0
+      isLooped: true
+  - type: Battery
+    maxCharge: 600
+    startingCharge: 600
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 2
+  - type: NeedleProtection
+    # SS220 Ninja Resprite End
 
 #Knight Helmet
 - type: entity
