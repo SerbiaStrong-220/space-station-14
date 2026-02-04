@@ -26,6 +26,11 @@
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     state: buckshot
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.4
+    weighedRandomProviderEntity: PelletFragment
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     deleteOnCollide: false
     damage:
@@ -64,6 +69,11 @@
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     state: buckshot
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.2
+    weighedRandomProviderEntity: PelletFragment
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     deleteOnCollide: false
     damage:

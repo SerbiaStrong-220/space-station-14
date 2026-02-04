@@ -1,0 +1,24 @@
+- type: entity
+  id: FragmentLargeHeavyLarge
+  parent: BaseProjectileFragment
+  name: bullet (.50, deformed)
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    state: slug
+
+- type: entity
+  id: FragmentLargeHeavyMedium
+  parent: BaseProjectileFragment
+  name: large bullet fragment (.50)
+  components:
+  - type: Sprite
+    state: metal-1
+
+- type: entity
+  id: FragmentLargeHeavySmall
+  parent: BaseProjectileFragment
+  name: bullet fragments (.50)
+  components:
+  - type: Sprite
+    state: metal-0

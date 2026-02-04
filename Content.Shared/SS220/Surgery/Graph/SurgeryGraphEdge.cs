@@ -3,6 +3,7 @@
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.Surgery.Graph;
 
@@ -16,35 +17,54 @@ public sealed partial class SurgeryGraphEdge : ISerializationHooks
     [DataField]
     public ProtoId<AbstractSurgeryEdgePrototype>? BaseEdge { get; private set; }
 
-    [DataField("conditions")]
-    private ISurgeryGraphCondition[] _conditions = Array.Empty<ISurgeryGraphCondition>();
+    [DataField("requirements")]
+    private SurgeryGraphRequirement[] _requirements = Array.Empty<SurgeryGraphRequirement>();
+
+    [DataField("visibilityRequirements")]
+    private SurgeryGraphRequirement[] _visibilityRequirements = Array.Empty<SurgeryGraphRequirement>();
 
     [DataField("actions", serverOnly: true)]
-    private ISurgeryGraphAction[] _actions = Array.Empty<ISurgeryGraphAction>();
+    private ISurgeryGraphEdgeAction[] _actions = Array.Empty<ISurgeryGraphEdgeAction>();
+
+    [DataField("actionDescription")]
+    private LocId[] _actionLocIds = Array.Empty<LocId>();
+
+    [DataField(required: true)]
+    public LocId EdgeTooltip { get; private set; }
+
+    [DataField]
+    [Access(typeof(SurgeryGraphSystem), Other = AccessPermissions.None)]
+    public SpriteSpecifier? EdgeIcon { get; private set; }
 
     /// <summary>
     /// Time which this step takes in seconds
     /// </summary>
     [DataField]
+    [Access(typeof(SurgeryGraphSystem), Other = AccessPermissions.None)]
     public float? Delay { get; private set; }
 
     /// <summary>
     /// This sound will be played when graph gets to target node
     /// </summary>
     [DataField("sound")]
+    [Access(typeof(SurgeryGraphSystem), Other = AccessPermissions.None)]
     public SoundSpecifier? EndSound { get; private set; } = null;
 
-    /// <summary>
-    /// Don't know what u are doing? -> use <see cref="SurgeryGraphSystem"/>
-    /// </summary>
     [ViewVariables]
-    public IReadOnlyList<ISurgeryGraphCondition> Conditions => _conditions;
+    [Access(typeof(SurgeryGraphSystem), Other = AccessPermissions.None)]
+    public IReadOnlyList<SurgeryGraphRequirement> Requirements => _requirements;
 
-    /// <summary>
-    /// Don't know what u are doing? -> use <see cref="SurgeryGraphSystem"/>
-    /// </summary>
     [ViewVariables]
-    public IReadOnlyList<ISurgeryGraphAction> Actions => _actions;
+    [Access(typeof(SurgeryGraphSystem), Other = AccessPermissions.None)]
+    public IReadOnlyList<SurgeryGraphRequirement> VisibilityRequirements => _visibilityRequirements;
+
+    [ViewVariables]
+    [Access(typeof(SurgeryGraphSystem), Other = AccessPermissions.None)]
+    public IReadOnlyList<ISurgeryGraphEdgeAction> Actions => _actions;
+
+    [ViewVariables]
+    [Access(typeof(SurgeryGraphSystem), Other = AccessPermissions.None)]
+    public IReadOnlyList<LocId> ActionLocIds => _actionLocIds;
 
     void ISerializationHooks.AfterDeserialization()
     {
