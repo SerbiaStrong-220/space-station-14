@@ -9,6 +9,12 @@
     size: Small
     sprite: Objects/Specific/Medical/medical.rsi
     heldPrefix: ointment
+  # SS220-healing-skill-begin
+  - type: LearningOnDoAfterEndWith
+    progress:
+      Medicine:
+        baseLearning: 0.03
+  # SS220-healing-skill-end
   # Inherited
   - type: StaticPrice
     price: 0

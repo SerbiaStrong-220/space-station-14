@@ -17,6 +17,9 @@ using Content.Client.SS220.UserInterface.Controls;
 using Content.Client.Stylesheets;
 using Content.Shared.SS220.Signature;
 using Robust.Client.Player;
+using Robust.Shared.Prototypes;
+using Content.Shared.SS220.Experience;
+using Content.Shared.SS220.Experience.Systems;
 
 namespace Content.Client.Paper.UI
 {
@@ -30,8 +33,11 @@ namespace Content.Client.Paper.UI
         [Dependency] private readonly IStylesheetManager _stylesheet = default!; // ss220 add signature
 
         private readonly LanguageSystem _languageSystem; // SS220 languages
+        private readonly ExperienceSystem _experience = default!; // SS220-bureaucracy-skill
 
         private static Color DefaultTextColor = new(25, 25, 25);
+
+        private readonly ProtoId<SkillPrototype> _markupShowingSkill = "BureaucracyTrained";
 
         // <summary>
         // Size of resize handles around the paper
@@ -83,6 +89,7 @@ namespace Content.Client.Paper.UI
             IoCManager.InjectDependencies(this);
             RobustXamlLoader.Load(this);
 
+            _experience = _entityManager.System<ExperienceSystem>(); // SS220-bureaucracy-skill
             // SS220 languages begin
             _languageSystem = _entityManager.System<LanguageSystem>();
             _languageSystem.OnNodeInfoUpdated += _ => UpdateWrittenTextMarkups();
@@ -337,6 +344,12 @@ namespace Content.Client.Paper.UI
 
             _languageSystem.FindAndRequestNodeInfoForMarkups(msg.ToMarkup()); // SS220 languages
             WrittenTextLabel.RemoveAllChildren(); // SS220 Markups control on paper fix
+            // SS220-bureaucracy-skill-begin
+            if (_player.LocalEntity is not null && !_experience.HaveSkill(_player.LocalEntity.Value, _markupShowingSkill))
+            {
+                msg = FormattedMessage.FromMarkupPermissive(FormattedMessage.RemoveMarkupPermissive(msg.ToMarkup()));
+            }
+            // SS220-bureaucracy-skill-end
             WrittenTextLabel.SetMessage(msg, _allowedTags, DefaultTextColor);
 
             WrittenTextLabel.Visible = !isEditing && state.Text.Length > 0;

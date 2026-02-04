@@ -7,6 +7,12 @@
   - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/crowbar_drop.ogg
+  # SS220-construction-skill-begin
+  - type: LearningOnDoAfterEndWith
+    progress:
+      Construction:
+        baseLearning: 0.02
+  # SS220-construction-skill-end
   - type: Tag
     tags:
     - Crowbar
