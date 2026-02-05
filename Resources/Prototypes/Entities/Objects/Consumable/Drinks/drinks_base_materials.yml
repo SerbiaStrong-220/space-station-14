@@ -49,6 +49,7 @@
   - type: PhysicalComposition
     materialComposition:
       Glass: 25
+  - type: ClinkGlasses # 220 funny component
 
 # Porcelain (like glass but no shard)
 - type: entity
