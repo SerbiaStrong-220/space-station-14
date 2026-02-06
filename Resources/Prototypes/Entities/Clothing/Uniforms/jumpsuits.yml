@@ -85,7 +85,7 @@
   - type: Sprite
     sprite: Clothing/Uniforms/Jumpsuit/salvage.rsi
 
-- type: entity
+  type: entity
   parent: [ClothingUniformBase, ClothingUniformBaseFoldable] #SS220 folded-equipped-INNERCLOTHING resprite V2
   id: ClothingUniformJumpsuitChiefEngineer
   name: chief engineer's jumpsuit
@@ -681,7 +681,6 @@
 
 - type: entity
   parent: [ClothingUniformBase, ClothingUniformBaseFoldable] #SS220 folded-equipped-INNERCLOTHING resprite V2
-
   id: ClothingUniformJumpsuitLibrarian
   name: sensible suit # Corvax-Resprite
   description: It's very... sensible. # Corvax-Resprite

@@ -277,7 +277,7 @@
 
   # Бармен
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformBaseFoldable] #SS220 folded-equipped-INNERCLOTHING resprite V2
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable] 
   id: ClothingUniformJumpsuitBartenderRed
   name: red bartender's uniform
   description: A special red outfit to serve drinks.
