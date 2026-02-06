@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
-    "copyright": "by MIXnikita (Github) for SS220",
+    "copyright": "Sprited by MIXnikita (Github) for SS220",
     "size": {
         "x": 32,
         "y": 32
@@ -68,20 +68,31 @@
             "directions": 4
         },
         {
+            "name": "pipeUnaryConnectors",
+            "directions": 4
+        },
+        {
+            "name": "pipeBinaryConnectors",
+            "directions": 4
+        },
+        {
             "name": "pipeTrinaryConnectors",
             "directions": 4
         },
         {
-            "name": "storageStraight",
-            "directions": 4
+            "name": "storageStraight"
         },
         {
-            "name": "storageBend",
-            "directions": 4
+            "name": "storageHalf"
         },
         {
-            "name": "storageTJunction",
-            "directions": 4
+            "name": "storageBend"
+        },
+        {
+            "name": "storageTJunction"
+        },
+        {
+            "name": "storageFourway"
         }
     ]
 }
