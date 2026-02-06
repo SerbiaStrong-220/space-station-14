@@ -8,6 +8,8 @@ using Content.Shared.SS220.ClinkGlasses;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using System.Numerics;
+using Content.Shared.Weapons.Melee;
 
 namespace Content.Server.SS220.ClinkGlasses;
 
@@ -18,6 +20,8 @@ public sealed class ClinkGlassesSystem : SharedClinkGlassesSystem
     [Dependency] private readonly AlertsSystem _alerts = default!;
     [Dependency] private readonly HandsSystem _hands = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
 
     private readonly ProtoId<AlertPrototype> _clinkGlassesAlert = "ClinkGlasses";
 
@@ -47,6 +51,14 @@ public sealed class ClinkGlassesSystem : SharedClinkGlassesSystem
         _alerts.ClearAlert(receiver.Owner, _clinkGlassesAlert);
 
         _entManager.RemoveComponent<ClinkGlassesReceiverComponent>(receiver);
+
+        var xform = Transform(receiver.Owner);
+
+        var initiatorPos = _transformSystem.GetWorldPosition(receiver.Comp.Initiator);
+
+        var localPos = Vector2.Transform(initiatorPos, _transformSystem.GetInvWorldMatrix(xform));
+        localPos = xform.LocalRotation.RotateVec(localPos);
+        _melee.DoLunge(receiver.Owner, receiver.Owner, Angle.Zero, localPos, null, false);
     }
 
     public override void Update(float frameTime)
