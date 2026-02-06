@@ -17,6 +17,17 @@ public sealed class MechPartRemoveMessage : BoundUserInterfaceMessage
 }
 
 [Serializable, NetSerializable]
+public sealed class MechMaintenanceToggleMessage : BoundUserInterfaceMessage
+{
+    public bool Toggled;
+
+    public MechMaintenanceToggleMessage(bool toggled)
+    {
+        Toggled = toggled;
+    }
+}
+
+[Serializable, NetSerializable]
 public sealed class AltMechBoundUiState : BoundUserInterfaceState
 {
     public Dictionary<NetEntity, BoundUserInterfaceState> EquipmentStates = new();

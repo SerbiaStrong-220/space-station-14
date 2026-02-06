@@ -82,6 +82,7 @@ public sealed class MechPartSystem : EntitySystem
         };
 
         _doAfter.TryStartDoAfter(doAfterEventArgs);
+        args.Handled = true;
     }
 
     private void OnProvideItemStartup(EntityUid uid, MechArmComponent component, ComponentStartup args)
@@ -108,13 +109,10 @@ public sealed class MechPartSystem : EntitySystem
         if (!_container.TryGetContainer(uid, armComp.HoldingContainer, out var container))
             return;
 
-        if (mechComp.PilotSlot.ContainedEntity == null)
+        if (!TryComp<HandsComponent>((EntityUid)mechUid, out var hands))
             return;
 
-        if (!TryComp<HandsComponent>((EntityUid)mechComp.PilotSlot.ContainedEntity, out var hands))
-            return;
-
-        EntityUid pilot = (EntityUid)mechComp.PilotSlot.ContainedEntity;
+        //EntityUid pilot = (EntityUid)mechComp.PilotSlot.ContainedEntity;
 
         var xform = Transform(mechUid);
 
@@ -123,7 +121,7 @@ public sealed class MechPartSystem : EntitySystem
             var hand = armComp.Hands[i];
             var handId = $"{uid}-hand-{i}";
 
-            _hands.AddHand(((EntityUid)mechComp.PilotSlot.ContainedEntity, hands), handId, hand.Hand);
+            _hands.AddHand(((EntityUid)mechUid, hands), handId, hand.Hand);
             EntityUid? item = null;
 
             if (armComp.StoredItems is not null)
@@ -141,10 +139,10 @@ public sealed class MechPartSystem : EntitySystem
 
             if (item is { } pickUp)
             {
-                _hands.DoPickup((EntityUid)mechComp.PilotSlot.ContainedEntity, handId, pickUp, hands);
+                _hands.DoPickup((EntityUid)mechUid, handId, pickUp, hands);
                 if (!hand.ForceRemovable && hand.Hand.Whitelist == null && hand.Hand.Blacklist == null)
                 {
-                    EnsureComp<UnremoveableComponent>(pickUp);
+                    //EnsureComp<UnremoveableComponent>(pickUp);
                 }
             }
         }
@@ -163,10 +161,7 @@ public sealed class MechPartSystem : EntitySystem
         if (TerminatingOrDeleted(uid))
             return;
 
-        if (mechComp.PilotSlot.ContainedEntity == null)
-            return;
-
-        if (!TryComp<HandsComponent>((EntityUid)mechComp.PilotSlot.ContainedEntity, out var hands))
+        if (!TryComp<HandsComponent>((EntityUid)mechUid, out var hands))
             return;
 
         component.StoredItems ??= new();
@@ -175,7 +170,7 @@ public sealed class MechPartSystem : EntitySystem
         {
             var handId = $"{uid}-hand-{i}";
 
-            if (_hands.TryGetHeldItem((EntityUid)mechComp.PilotSlot.ContainedEntity, handId, out var held))
+            if (_hands.TryGetHeldItem(mechUid, handId, out var held))
             {
                 RemComp<UnremoveableComponent>(held.Value);
                 _container.Insert(held.Value, container);
@@ -186,7 +181,7 @@ public sealed class MechPartSystem : EntitySystem
                 component.StoredItems.Remove(handId);
             }
 
-            _hands.RemoveHand((EntityUid)mechComp.PilotSlot.ContainedEntity, handId);
+            _hands.RemoveHand(mechUid, handId);
         }
 
         Dirty(uid, component);

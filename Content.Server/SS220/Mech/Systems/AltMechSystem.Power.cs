@@ -79,26 +79,22 @@ public sealed partial class AltMechSystem
         {
             mechComp.Online = false;
 
-            if (mechComp.PilotSlot.ContainedEntity != null)
-                RemoveItemsFromUser(mech);
+            TransferMindIntoPilot((mech,mechComp));
 
             if (mechComp.ContainerDict["chassis"].ContainedEntity != null)
             {
-                if (TryComp<MovementSpeedModifierComponent>(battery, out var movementComp))
-                    _movementSpeedModifier.ChangeBaseSpeed(battery, 0, 0, 0);
+                _actionBlocker.UpdateCanMove(mech);
             }
         }
         if (mechComp.Energy > 0 && !mechComp.Online)
         {
             mechComp.Online = true;
 
-            if (mechComp.PilotSlot.ContainedEntity != null)
-                AddItemsToUser(mech);
+            TransferMindIntoMech((mech, mechComp));
 
             if (mechComp.ContainerDict["chassis"].ContainedEntity != null)
             {
-                if (TryComp<MovementSpeedModifierComponent>(battery, out var movementComp))
-                    _movementSpeedModifier.ChangeBaseSpeed(battery, mechComp.OverallBaseMovementSpeed * mechComp.MovementSpeedModifier * 0.5f, mechComp.OverallBaseMovementSpeed * mechComp.MovementSpeedModifier, mechComp.OverallBaseAcceleration * mechComp.MovementSpeedModifier);
+                _actionBlocker.UpdateCanMove(mech);
             }
         }
     }

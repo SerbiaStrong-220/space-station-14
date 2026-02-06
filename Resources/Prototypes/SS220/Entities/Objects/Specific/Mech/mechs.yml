@@ -1,10 +1,14 @@
 - type: entity
+  parent: [BaseMob, StripableInventoryBase]
   id: BaseAltMech
   #parent: BaseMechPart
   save: false
   abstract: true
   components:
+  - type: CombatMode
+  - type: NoSlip
   - type: MechPart
+  - type: ComplexInteraction
   - type: MobMover
   - type: AltMech
   - type: MechRobot #SS220-AddMechToClothing
@@ -52,10 +56,14 @@
     interfaces:
       enum.MechUiKey.Key:
         type: AltMechBoundUserInterface
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
   - type: Puller
     needsHands: false
   - type: InputMover
   - type: InteractionOutline
+  - type: Inventory
+    templateId: mech
   - type: MovementSpeedModifier
     baseWalkSpeed: 1
     baseSprintSpeed: 2
@@ -69,6 +77,18 @@
   - type: GravityAffected
   - type: Clickable
   - type: WiresPanel
+  - type: HealthExaminable
+    examinableTypes:
+      - Blunt
+      - Slash
+      - Piercing
+      - Heat
+      - Shock
+    locPrefix: silicon
+  - type: Hands
+    showInHands: false
+    disableExplosionRecursion: true
+    canBeStripped: true
   - type: Fixtures
     fixtures:
       fix1:
@@ -134,3 +154,7 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 0
     baseSprintSpeed: 0
+
+- type: inventoryTemplate
+  id: mech
+  slots:

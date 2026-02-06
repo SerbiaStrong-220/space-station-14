@@ -36,12 +36,12 @@ public sealed class AltMechBoundUserInterface : BoundUserInterface
 
     protected override void Open()
     {
+        if (!_ent.TryGetComponent<AltMechComponent>(Owner, out var mechComp))
+            return;
         base.Open();
 
         _menu = this.CreateWindowCenteredLeft<AltMechMenu>();
 
-        if (!_ent.TryGetComponent<AltMechComponent>(Owner, out var mechComp))
-            return;
 
         _menu.SetEntity(Owner, MechPartVisualLayers.Core);
 
@@ -50,8 +50,15 @@ public sealed class AltMechBoundUserInterface : BoundUserInterface
             _menu.SetEntity(part.Value.ContainedEntity, partsVisuals[part.Key]);
         }
 
-        _menu.OnRemovePartButtonPressed += id => SendMessage(new MechPartRemoveMessage(id));
-        _menu.OnRemovePartButtonPressed += id => UpdateStateAfterButtonPressed(id);
+        _menu.OnRemovePartButtonPressed += part => SendMessage(new MechPartRemoveMessage(part));
+        _menu.OnRemovePartButtonPressed += part => UpdateStateAfterButtonPressed(part);
+
+        _menu.OnMaintenancePressed += toggled => SendMessage(new MechMaintenanceToggleMessage(toggled));
+
+        _menu?.UpdateMechStats();
+        _menu?.UpdateEquipmentView();
+
+        _menu?.SetMaintenance(mechComp.MaintenanceMode);
     }
 
     protected void UpdateStateAfterButtonPressed(string _)

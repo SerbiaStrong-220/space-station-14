@@ -37,7 +37,7 @@ public sealed partial class MechArmComponent : Component
 public partial record struct MechHand
 {
     [DataField]
-    public EntProtoId? Item;
+    public EntProtoId? Item = null;
 
     [DataField]
     public Hand Hand = new();
@@ -45,7 +45,7 @@ public partial record struct MechHand
     [DataField]
     public bool ForceRemovable = false;
 
-    public MechHand(EntProtoId? item, Hand hand, bool forceRemovable = false)
+    public MechHand( Hand hand, bool forceRemovable = false,EntProtoId ? item = null)
     {
         Item = item;
         Hand = hand;

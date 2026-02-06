@@ -1,0 +1,7 @@
+# Made for mechs' gear
+- type: itemSize
+  id: Gigantic
+  weight: 64
+  name: item-component-size-Ginormous
+  defaultShape:
+  - 0,0,7,7

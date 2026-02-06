@@ -39,6 +39,8 @@ public sealed class AltMechSystem : SharedAltMechSystem
 
         SubscribeLocalEvent<AltMechComponent, DamageChangedEvent>(OnDamageChanged);
 
+        SubscribeLocalEvent<AltMechComponent, OnMechExitEvent>(OnPilotEjected);
+
     }
 
     public readonly Dictionary<string, MechPartVisualLayers> partsVisuals = new Dictionary<string, MechPartVisualLayers>()
@@ -86,7 +88,7 @@ public sealed class AltMechSystem : SharedAltMechSystem
             _sprite.LayerMapReserve((ent.Owner, spriteComp), layer);
             _sprite.LayerSetVisible((ent.Owner, spriteComp), layer, false);
 
-            spriteComp.LayerSetShader(layer, "unshaded");
+            //spriteComp.LayerSetShader(layer, "unshaded");
         }
     }
 
@@ -169,6 +171,22 @@ public sealed class AltMechSystem : SharedAltMechSystem
             }
         }
             //_sprite.LayerSetVisible(((EntityUid)localMech, spriteComp), layer, false);
+    }
+
+    private void OnPilotEjected(Entity<AltMechComponent> ent, ref OnMechExitEvent args)
+    {
+        if (!TryComp<UserInterfaceComponent>(ent, out var uiComp))
+            return;
+
+        if (uiComp.ClientOpenInterfaces.ContainsKey(MechUiKey.Key) && uiComp.ClientOpenInterfaces[MechUiKey.Key] is AltMechBoundUserInterface)
+        {
+            var bui = (AltMechBoundUserInterface)uiComp.ClientOpenInterfaces[MechUiKey.Key];
+
+            if (bui == null)
+                return;
+
+            bui.Close();
+        }
     }
 }
 

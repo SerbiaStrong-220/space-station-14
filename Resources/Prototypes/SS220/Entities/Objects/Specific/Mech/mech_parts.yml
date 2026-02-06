@@ -45,7 +45,7 @@
 
 - type: entity
   parent: MechBatterySmall
-  id: PowerCellSmallNuclear
+  id: MechBatterySmallNuclear
   name: small-capacity nuclear power cell
   description: A self rechargeable power cell, designed for fast recharge rate at the expense of capacity.
   components:
@@ -64,10 +64,8 @@
     state: mecha_clamp
   - type: MechArm
     hands:
-    - item: EnergySword
-    - item: JetpackBorgModule
-    - item: HandHeldMassScannerBorg
-    - item: HandheldGPSBasic
+    - hand:
+        Location: Right
   - type: Item
     inhandVisuals:
       left:

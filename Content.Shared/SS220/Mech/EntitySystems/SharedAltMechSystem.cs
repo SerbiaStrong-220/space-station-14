@@ -64,7 +64,6 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         SubscribeLocalEvent<AltMechComponent, MechEjectPilotEvent>(OnEjectPilotEvent);
         SubscribeLocalEvent<AltMechComponent, UserActivateInWorldEvent>(RelayInteractionEvent);
         SubscribeLocalEvent<AltMechComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<AltMechComponent, DestructionEventArgs>(OnDestruction);
         SubscribeLocalEvent<AltMechComponent, EntityStorageIntoContainerAttemptEvent>(OnEntityStorageDump);
         SubscribeLocalEvent<AltMechComponent, GetAdditionalAccessEvent>(OnGetAdditionalAccess);
         SubscribeLocalEvent<AltMechComponent, DragDropTargetEvent>(OnDragDrop);
@@ -133,11 +132,12 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         UpdateAppearance(ent.Owner, ent.Comp);
     }
-    //SS220-AddMechToClothing-end
-    private void OnDestruction(EntityUid uid, AltMechComponent component, DestructionEventArgs args)
+
+    public virtual void OnStartupServer(Entity<AltMechComponent> ent)
     {
-        BreakMech(uid, component);
+
     }
+    //SS220-AddMechToClothing-end
 
     private void OnEntityStorageDump(Entity<AltMechComponent> entity, ref EntityStorageIntoContainerAttemptEvent args)
     {
@@ -159,15 +159,15 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         if (!Resolve(mech, ref component))
             return;
 
-        var rider = EnsureComp<MechPilotComponent>(pilot);
+        var rider = EnsureComp<AltMechPilotComponent>(pilot);
 
         // Warning: this bypasses most normal interaction blocking components on the user, like drone laws and the like.
-        var irelay = EnsureComp<InteractionRelayComponent>(pilot);
+        //var irelay = EnsureComp<InteractionRelayComponent>(pilot);
 
-        _mover.SetRelay(pilot, mech);
-        _interaction.SetRelay(pilot, mech, irelay);
+        //_mover.SetRelay(pilot, mech);
+        //_interaction.SetRelay(pilot, mech, irelay);
         rider.Mech = mech;
-        Dirty(pilot, rider);
+        //Dirty(pilot, rider);
 
         //var ev = new DropHandItemsEvent();
         //RaiseLocalEvent(pilot, ref ev);
@@ -178,37 +178,37 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         var ev = new DropHandItemsEvent();
         RaiseLocalEvent(pilot, ref ev);
 
-        if (!TryComp<HandsComponent>(pilot, out var handsComp))
-            return;
+        //if (!TryComp<HandsComponent>(pilot, out var handsComp))
+        //    return;
 
-        foreach (var hand in handsComp.Hands)
-        {
-            if (hand.Value.Location == HandLocation.Right)
-            {
-                _hands.TrySetActiveHand((pilot, handsComp), hand.Key);
-                break;
-            }
-        }
+        //foreach (var hand in handsComp.Hands)
+        //{
+        //    if (hand.Value.Location == HandLocation.Right)
+        //    {
+        //        _hands.TrySetActiveHand((pilot, handsComp), hand.Key);
+        //        break;
+        //    }
+        //}
 
-        foreach (var hand in handsComp.Hands)
-            component.Hands.Add(hand.Key,hand.Value);
+        //foreach (var hand in handsComp.Hands)
+        //    component.Hands.Add(hand.Key,hand.Value);
 
-        foreach (var hand in handsComp.Hands )
-        {
-            _hands.RemoveHands((pilot, handsComp));
-        }
+        //foreach (var hand in handsComp.Hands )
+        //{
+        //    _hands.RemoveHands((pilot, handsComp));
+        //}
 
         //_actions.AddAction(pilot, ref component.MechCycleActionEntity, component.MechCycleAction, mech);
-        _actions.AddAction(pilot, ref component.MechUiActionEntity, component.MechUiAction, mech);
+        //_actions.AddAction(pilot, ref component.MechUiActionEntity, component.MechUiAction, mech);
         _actions.AddAction(pilot, ref component.MechEjectActionEntity, component.MechEjectAction, mech);
     }
 
     private void RemoveUser(EntityUid mech, EntityUid pilot)
     {
-        if (!RemComp<MechPilotComponent>(pilot))
+        if (!RemComp<AltMechPilotComponent>(pilot))
             return;
-        RemComp<RelayInputMoverComponent>(pilot);
-        RemComp<InteractionRelayComponent>(pilot);
+        //RemComp<RelayInputMoverComponent>(pilot);
+        //RemComp<InteractionRelayComponent>(pilot);
 
         _actions.RemoveProvidedActions(pilot, mech);
 

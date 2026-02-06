@@ -24,7 +24,11 @@ public sealed partial class AltMechMenu : FancyWindow
 
     private EntityUid _mech;
 
-    public event Action<EntityUid>? OnRemoveButtonPressed;
+    //private bool MaintenanceMode = true;
+
+    //public event Action<EntityUid>? OnRemoveButtonPressed;
+
+    public event Action<bool>? OnMaintenancePressed;  
 
     public AltMechMenu()
     {
@@ -63,6 +67,10 @@ public sealed partial class AltMechMenu : FancyWindow
             key.TexturePath = "/Textures/Interface/Nano/cross.svg.png";
             key.OnPressed += _ => OnRemovePartButtonPressed?.Invoke(buttonDict[key]);
         }
+
+        Maintenance.OnToggled += OnMaintenanceButtonPressed;
+        Maintenance.OnToggled += (_) => OnMaintenancePressed?.Invoke(Maintenance.Pressed);
+        //Maintenance.Pressed = maintenance;
     }
 
     public readonly Dictionary<MechPartVisualLayers, SpriteView?> spriteViewDict = new Dictionary<MechPartVisualLayers, SpriteView?>()
@@ -90,6 +98,24 @@ public sealed partial class AltMechMenu : FancyWindow
         ["chassis"] = MechPartVisualLayers.Chassis,
         ["power"] = MechPartVisualLayers.Power
     };
+
+    public void OnMaintenanceButtonPressed(BaseButton.ButtonEventArgs args)
+    {
+        foreach (var key in buttonDict.Keys)
+        {
+            key.Visible = args.Button.Pressed;
+        }
+    }
+
+    public void SetMaintenance(bool Toggled)
+    {
+        Maintenance.Pressed = Toggled;
+
+        foreach (var key in buttonDict.Keys)
+        {
+            key.Visible = Maintenance.Pressed;
+        }
+    }
 
     public void SetEntity(EntityUid? uid, MechPartVisualLayers part)
     {
