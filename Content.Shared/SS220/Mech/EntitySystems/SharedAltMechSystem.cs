@@ -1,16 +1,13 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.Access.Components;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
-using Content.Shared.Clothing; 
-using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
-using Content.Shared.EntityEffects.Effects.StatusEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
-using Content.Shared.Interaction.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mech;
 using Content.Shared.Mech.Components;
@@ -22,7 +19,6 @@ using Content.Shared.Popups;
 using Content.Shared.SS220.ArmorBlock;
 using Content.Shared.SS220.Mech.Components;
 using Content.Shared.SS220.Mech.Equipment.Components;
-using Content.Shared.SS220.MechClothing; 
 using Content.Shared.SS220.MechRobot;
 using Content.Shared.Standing;
 using Content.Shared.Storage.Components;
@@ -32,8 +28,6 @@ using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
-using System.Linq;
-using System.Reflection.Metadata;
 
 namespace Content.Shared.SS220.Mech.Systems;
 
@@ -239,14 +233,11 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         if (!Resolve(uid, ref component))
             return;
 
-        if (!TryComp<MechPartComponent>(uid, out var partComp))
-            return;
-
         TryEject(uid, component);
-        var equipment = new List<EntityUid>(partComp.EquipmentContainer.ContainedEntities);
+        var equipment = new List<EntityUid>(component.EquipmentContainer.ContainedEntities);
         foreach (var ent in equipment)
         {
-            RemoveEquipment(uid, ent, partComp, forced: true);
+           // RemoveEquipment(uid, ent, partComp, forced: true);
         }
 
         component.Broken = true;
@@ -260,7 +251,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
     /// <param name="toInsert"></param>
     /// <param name="component"></param>
     /// <param name="equipmentComponent"></param>
-    public void InsertEquipment(EntityUid uid, EntityUid toInsert, MechPartComponent? component = null,
+    public void InsertEquipment(EntityUid uid, EntityUid toInsert, AltMechComponent? component = null,
         MechEquipmentComponent? equipmentComponent = null)
     {
         if (!Resolve(uid, ref component))
@@ -269,17 +260,14 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         if (!Resolve(toInsert, ref equipmentComponent))
             return;
 
-        if (!TryComp<AltMechComponent>(uid, out var mechComp))
-            return;
-
-        if (component.EquipmentContainer.ContainedEntities.Count >= component.MaxEquipmentAmount)
-            return;
+        //if (component.EquipmentContainer.ContainedEntities.Count >= component.MaxEquipmentAmount)
+        //    return;
 
         if (_whitelistSystem.IsWhitelistFail(component.EquipmentWhitelist, toInsert))
             return;
 
         equipmentComponent.EquipmentOwner = uid;
-        _container.Insert(toInsert, component.EquipmentContainer);
+        //_container.Insert(toInsert, component.EquipmentContainer);
         var ev = new MechEquipmentInsertedEvent(uid);
         RaiseLocalEvent(toInsert, ref ev);
         //UpdateUserInterface(uid, mechComp);
@@ -367,7 +355,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         if (forced && equipmentComponent != null)
             equipmentComponent.EquipmentOwner = null;
 
-        _container.Remove(toRemove, component.EquipmentContainer);
+        //_container.Remove(toRemove, component.EquipmentContainer);
         //UpdateUserInterface(uid, mechComp);
     }
 

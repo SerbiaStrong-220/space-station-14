@@ -6,9 +6,6 @@
   - type: Item
     size: Ginormous
   - type: MechPart
-  #- type: ContainerContainer
-  #  containers:
-  #    mech-equipment-container: !type:Container
 
 - type: entity
   id: BaseMechChassis
@@ -30,7 +27,7 @@
   components:
   - type: MechPart
     slot: right-arm
-    ownMass: 200
+    ownMass: 100
   - type: MechArm
 
 - type: entity
@@ -40,7 +37,7 @@
   components:
   - type: MechPart
     slot: left-arm
-    ownMass: 200
+    ownMass: 100
   - type: MechArm
 
 - type: entity
@@ -65,7 +62,12 @@
   - type: MechArm
     hands:
     - hand:
-        Location: Right
+        location: Right
+        whitelist:
+          sizes:
+          - Large
+          - Huge
+          - Ginormous
   - type: Item
     inhandVisuals:
       left:
@@ -76,7 +78,35 @@
     integrity: 200
     attachedSprite:
       sprite: SS220/Objects/Specific/Robotics/Mechs/righthand.rsi
-      state: test
+      state: basichydraulic
+
+- type: entity
+  id: TestLeftArm
+  parent: BaseMechLeftArm
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Mech/mecha_equipment.rsi
+    state: mecha_clamp
+  - type: MechArm
+    hands:
+    - hand:
+        location: Left
+        whitelist:
+          sizes:
+          - Large
+          - Huge
+          - Ginormous
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-big
+      right:
+      - state: inhand-right-big
+  - type: MechPart
+    integrity: 200
+    attachedSprite:
+      sprite: SS220/Objects/Specific/Robotics/Mechs/lefthand.rsi
+      state: basichydraulic
 
 - type: entity
   id: PowerloaderPart

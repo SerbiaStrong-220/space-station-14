@@ -1,7 +1,6 @@
-using Content.Shared.EntityEffects.Effects.StatusEffects;
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.Components;
-using Content.Shared.SS220.Mech.Systems;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
@@ -60,6 +59,28 @@ public sealed partial class AltMechComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField, ViewVariables(VVAccess.ReadWrite)]
     public FixedPoint2 MaxEnergy = 0;
+
+    /// <summary>
+    /// A container for storing the equipment entities.
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    //public Container EquipmentContainer = default!;
+    public Container EquipmentContainer = new();
+
+    [ViewVariables]
+    public readonly string EquipmentContainerId = "part-mech-equipment-container";
+
+    /// <summary>
+    /// The maximum amount of equipment items that can be installed in the mech
+    /// </summary>
+    [DataField("maxEquipmentAmount"), ViewVariables(VVAccess.ReadWrite)]
+    public int MaxEquipmentAmount = 3;
+
+    /// <summary>
+    /// A whitelist for inserting equipment items.
+    /// </summary>
+    [DataField]
+    public EntityWhitelist? EquipmentWhitelist;
 
     /// <summary>
     /// The slot the battery is stored in.

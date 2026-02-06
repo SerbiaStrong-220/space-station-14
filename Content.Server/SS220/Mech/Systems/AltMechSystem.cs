@@ -1,3 +1,4 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Systems;
 using Content.Server.Hands.Systems;
@@ -9,7 +10,6 @@ using Content.Shared.Alert;
 using Content.Shared.Damage;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
-using Content.Shared.EntityEffects.Effects.StatusEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Mech;
@@ -24,8 +24,6 @@ using Content.Shared.Popups;
 using Content.Shared.Power;
 using Content.Shared.Power.Components;
 using Content.Shared.SS220.AltMech;
-using Content.Shared.SS220.ArmorBlock;
-using Content.Shared.SS220.DarkReaper;
 using Content.Shared.SS220.Mech.Components;
 using Content.Shared.SS220.Mech.Equipment.Components;
 using Content.Shared.SS220.Mech.Systems;
@@ -36,16 +34,11 @@ using Content.Shared.Tools.Systems;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Content.Shared.Wires;
-using JetBrains.FormatRipper.Elf;
-using NetCord.Gateway;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using System;
-using System.Linq;
 
 namespace Content.Server.SS220.Mech.Systems;
 
@@ -192,8 +185,8 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         if (!Exists(equip) || Deleted(equip))
             return;
 
-        if (!component.EquipmentContainer.ContainedEntities.Contains(equip))
-            return;
+        //if (!component.EquipmentContainer.ContainedEntities.Contains(equip))
+            //return;
 
         RemoveEquipment(uid, equip, component);
     }
@@ -358,6 +351,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         if (!HasComp<MindContainerComponent>(ent.Comp.PilotSlot.ContainedEntity.Value) || !_mind.TryGetMind(ent.Owner, out var mindId, out var mind))
             return;
         _mind.TransferTo(mindId, ent.Comp.PilotSlot.ContainedEntity.Value, mind: mind);
+        _actions.AddAction(ent.Comp.PilotSlot.ContainedEntity.Value, ref ent.Comp.MechEjectActionEntity, ent.Comp.MechEjectAction, ent.Owner);
     }
 
     private void OnMechExit(Entity<AltMechComponent> ent, ref OnMechExitEvent args)
@@ -499,7 +493,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
             return;
 
         var ev = new MechEquipmentUiMessageRelayEvent(args);
-        var allEquipment = new List<EntityUid>(partComp.EquipmentContainer.ContainedEntities);
+        var allEquipment = new List<EntityUid>(component.EquipmentContainer.ContainedEntities);
         var argEquip = GetEntity(args.Equipment);
 
         foreach (var equipment in allEquipment)
@@ -522,7 +516,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
             if (TryComp<MechPartComponent>(ent.ContainedEntity, out var partcomp) || partcomp == null)
                 continue;
 
-            foreach (var equip in partcomp.EquipmentContainer.ContainedEntities)
+            foreach (var equip in component.EquipmentContainer.ContainedEntities)
             {
                 RaiseLocalEvent(equip, ev);
             }

@@ -1,14 +1,11 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Client.Mech;
 using Content.Client.UserInterface.Fragments;
-using Content.Shared.Mech;
 using Content.Shared.SS220.AltMech;
 using Content.Shared.SS220.Mech.Components;
 using Content.Shared.SS220.Mech.Equipment.Components;
 using JetBrains.Annotations;
-using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
-using Robust.Client.UserInterface.Controls;
-using static Robust.Client.UserInterface.Controls.MenuBar;
 
 namespace Content.Client.SS220.Mech.Ui;
 
@@ -97,7 +94,7 @@ public sealed class AltMechBoundUserInterface : BoundUserInterface
             if (!EntMan.TryGetComponent<MechPartComponent>(part.ContainedEntity, out var partComp))
                 continue;
 
-            foreach (var ent in partComp.EquipmentContainer.ContainedEntities)
+            foreach (var ent in mechComp.EquipmentContainer.ContainedEntities)
             {
                 var ui = GetEquipmentUi(ent);
                 if (ui == null)

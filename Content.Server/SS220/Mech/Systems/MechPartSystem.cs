@@ -68,11 +68,11 @@ public sealed class MechPartSystem : EntitySystem
         if (args.User == mechComp.PilotSlot.ContainedEntity)
             return;
 
-        if (ent.Comp.EquipmentContainer.ContainedEntities.Count >= ent.Comp.MaxEquipmentAmount)
-            return;
+        //if (mechComp.EquipmentContainer.ContainedEntities.Count >= mechComp.MaxEquipmentAmount)
+        //    return;
 
-        if (_whitelistSystem.IsWhitelistFail(ent.Comp.EquipmentWhitelist, args.Used))
-            return;
+        //if (_whitelistSystem.IsWhitelistFail(mechComp.EquipmentWhitelist, args.Used))
+        //    return;
 
         _popup.PopupEntity(Loc.GetString("mech-equipment-begin-install", ("item", ent.Owner)), mech);
 
@@ -142,7 +142,7 @@ public sealed class MechPartSystem : EntitySystem
                 _hands.DoPickup((EntityUid)mechUid, handId, pickUp, hands);
                 if (!hand.ForceRemovable && hand.Hand.Whitelist == null && hand.Hand.Blacklist == null)
                 {
-                    //EnsureComp<UnremoveableComponent>(pickUp);
+                    EnsureComp<UnremoveableComponent>(pickUp);
                 }
             }
         }
