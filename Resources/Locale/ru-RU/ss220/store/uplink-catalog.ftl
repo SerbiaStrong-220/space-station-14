@@ -69,4 +69,4 @@ uplink-outer-electrification-name = Броня электрификации
 uplink-outer-electrification-desc = Броня, позволяющая конвертировать урон по выносливости в шоковый.
 
 uplink-suit-electrification-name = Костюм электрификации
-uplink-suit-electrification-desc = Костюм, позволяющая конвертировать урон по выносливости в шоковый.
+uplink-suit-electrification-desc = Костюм, позволяющий конвертировать урон по выносливости в шоковый. Имеет встроенную функцию хамелеона.
