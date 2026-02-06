@@ -245,4 +245,5 @@
   - type: HideLayerClothing
     slots:
     - Hair
+  - type: IdentityBlocker
  
