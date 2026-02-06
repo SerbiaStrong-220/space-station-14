@@ -168,7 +168,7 @@
       spawnerPrototype: SpawnPointNukeopsOperative
       min: 0 #SS220 Nops ratio fix
       max: 3
-      playerRatio: 22.5 #SS220 Nops ratio fix
+      playerRatio: 23 #SS220 Nops ratio fix
       addPlayerCountPerRatio: 1 # SS220-nuke-spawn-in-segment
       startingGear: SyndicateOperativeGearFull
       roleLoadout:
