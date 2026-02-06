@@ -22,7 +22,7 @@
     sprite: Clothing/Uniforms/Jumpsuit/ancient.rsi
 
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformFoldableBase]
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]  #SS220 folded-equipped-INNERCLOTHING resprite V2
   id: ClothingUniformJumpsuitBartender
   name: bartender's uniform
   description: A nice and tidy uniform. Shame about the bar though.
@@ -68,7 +68,7 @@
     sprite: Clothing/Uniforms/Jumpsuit/captain.rsi
 
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformFoldableBase]
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable] #SS220 folded-equipped-INNERCLOTHING resprite V2
   id: ClothingUniformJumpsuitCargo
   name: cargo tech jumpsuit
   description: A sturdy jumpsuit, issued to members of the Cargo department.
@@ -77,7 +77,7 @@
     sprite: Clothing/Uniforms/Jumpsuit/cargotech.rsi
 
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformFoldableBase]
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable] #SS220 folded-equipped-INNERCLOTHING resprite V2
   id: ClothingUniformJumpsuitSalvageSpecialist
   name: salvage specialist's jumpsuit
   description: It's a snappy jumpsuit with a sturdy set of overalls. It's very dirty.
@@ -86,7 +86,7 @@
     sprite: Clothing/Uniforms/Jumpsuit/salvage.rsi
 
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformFoldableBase]
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable] #SS220 folded-equipped-INNERCLOTHING resprite V2
   id: ClothingUniformJumpsuitChiefEngineer
   name: chief engineer's jumpsuit
   description: It's a high visibility jumpsuit given to those engineers insane enough to achieve the rank of Chief Engineer.
@@ -164,7 +164,7 @@
     sprite: Clothing/Uniforms/Jumpsuit/chef.rsi
 
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformFoldableBase]
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable] #SS220 folded-equipped-INNERCLOTHING resprite V2
   id: ClothingUniformJumpsuitChemistry
   name: chemistry jumpsuit
   description: There's some odd stains on this jumpsuit. Hm.
@@ -248,7 +248,7 @@
     sprite: Clothing/Uniforms/Jumpsuit/jester2.rsi
 
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformFoldableBase]
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable] #SS220 folded-equipped-INNERCLOTHING resprite V2
   id: ClothingUniformJumpsuitCMO
   name: chief medical officer's jumpsuit
   description: It's a jumpsuit worn by those with the experience to be Chief Medical Officer. It provides minor biological protection.
@@ -268,7 +268,7 @@
     sprite: Clothing/Uniforms/Jumpsuit/cmo_turtle.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable] #SS220 folded-equipped-INNERCLOTHING resprite V2
   id: ClothingUniformJumpsuitDetective
   name: hard-worn suit
   description: Someone who wears this means business.
@@ -279,7 +279,7 @@
       sprite: SS220/Clothing/Uniforms/Jumpsuit/detective.rsi #ss220 resprite
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable] #SS220 folded-equipped-INNERCLOTHING resprite V2
   id: ClothingUniformJumpsuitDetectiveGrey
   name: noir suit
   description: A hard-boiled private investigator's grey suit, complete with tie clip.
@@ -290,7 +290,7 @@
       sprite: SS220/Clothing/Uniforms/Jumpsuit/detective_grey.rsi #ss220 resprite
 
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformFoldableBase]
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable] #SS220 folded-equipped-INNERCLOTHING resprite V2
   id: ClothingUniformJumpsuitEngineering
   name: engineering jumpsuit
   description: If this suit was non-conductive, maybe engineers would actually do their damn job.
@@ -299,7 +299,7 @@
     sprite: Clothing/Uniforms/Jumpsuit/engineering.rsi
 
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformFoldableBase]
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable] #SS220 folded-equipped-INNERCLOTHING resprite V2
   id: ClothingUniformJumpsuitEngineeringHazard
   name: hazard jumpsuit
   description: Woven in a grungy, warm orange. Lets others around you know that you really mean business when it comes to work.
@@ -308,7 +308,7 @@
     sprite: Clothing/Uniforms/Jumpsuit/engineering_hazard.rsi
 
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformFoldableBase]
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable] #SS220 folded-equipped-INNERCLOTHING resprite V2
   id: ClothingUniformJumpsuitHoP
   name: head of personnel's jumpsuit
   description: Rather bland and inoffensive. Perfect for vanishing off the face of the universe.
@@ -396,7 +396,7 @@
     sprite: Clothing/Uniforms/Jumpsuit/commandgeneric.rsi
 
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformFoldableBase]
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable] #SS220 folded-equipped-INNERCLOTHING resprite V2
   id: ClothingUniformJumpsuitHydroponics
   name: hydroponics jumpsuit
   description: Has a strong earthy smell to it. Hopefully it's merely dirty as opposed to soiled.
@@ -405,7 +405,7 @@
     sprite: Clothing/Uniforms/Jumpsuit/hydro.rsi
 
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformFoldableBase]
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable] #SS220 folded-equipped-INNERCLOTHING resprite V2
   id: ClothingUniformJumpsuitJanitor
   name: janitor jumpsuit
   description: The jumpsuit for the poor sop with a mop.
@@ -425,7 +425,7 @@
     sprite: Clothing/Uniforms/Jumpsuit/kimono.rsi
 
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformFoldableBase]
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable] #SS220 folded-equipped-INNERCLOTHING resprite V2
   id: ClothingUniformJumpsuitMedicalDoctor
   name: medical doctor jumpsuit
   description: It's made of a special fiber that provides minor protection against biohazards. It has a cross on the chest denoting that the wearer is trained medical personnel.
@@ -551,7 +551,7 @@
     sprite: Clothing/Uniforms/Jumpsuit/rnd.rsi
 
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformFoldableBase]
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable] #SS220 folded-equipped-INNERCLOTHING resprite V2
   id: ClothingUniformJumpsuitScientist
   name: scientist jumpsuit
   description: It's made of a special fiber that increases perceived intelligence and decreases personal ethics. It has markings that denote the wearer as a scientist.
@@ -578,7 +578,7 @@
   #ss220 special_sounds end
 
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformFoldableBase]
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable] #SS220 folded-equipped-INNERCLOTHING resprite V2
   id: ClothingUniformJumpsuitRoboticist
   name: roboticist jumpsuit
   description: It's a slimming black with reinforced seams; great for industrial work.
@@ -587,7 +587,7 @@
     sprite: Clothing/Uniforms/Jumpsuit/roboticist.rsi
 
 - type: entity
-  parent: [ClothingUniformBase, BaseSecurityContraband, ClothingUniformFoldableBase]
+  parent: [ClothingUniformBase, BaseSecurityContraband, ClothingUniformBaseFoldable] #SS220 folded-equipped-INNERCLOTHING resprite V2
   id: ClothingUniformJumpsuitSec
   name: security jumpsuit
   description: A jumpsuit made of strong material, providing robust protection.
@@ -634,7 +634,7 @@
     sprite: Clothing/Uniforms/Jumpsuit/security_grey.rsi
 
 - type: entity
-  parent: [ClothingUniformBase, BaseSecurityContraband]
+  parent: [ClothingUniformBase, BaseSecurityContraband, ClothingUniformBaseFoldable] #SS220 folded-equipped-INNERCLOTHING resprite V2
   id: ClothingUniformSecurityTrooper
   name: trooper uniform
   description: A formal uniform issued to the Nanotrasen Troopers, usually it comes with a car.
@@ -680,7 +680,8 @@
     sprite: Clothing/Uniforms/Jumpsuit/overalls.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable] #SS220 folded-equipped-INNERCLOTHING resprite V2
+
   id: ClothingUniformJumpsuitLibrarian
   name: sensible suit # Corvax-Resprite
   description: It's very... sensible. # Corvax-Resprite
@@ -858,7 +859,7 @@
     price: 500
 
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformFoldableBase] #SS220 folded-equipped-INNERCLOTHING resprite
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable] #SS220 folded-equipped-INNERCLOTHING resprite V2
   id: ClothingUniformJumpsuitTacticool
   name: tacticool jumpsuit
   description: Uniform for subpar operative LARPers performing tactical insulated glove theft in deep space.
@@ -895,7 +896,7 @@
     sprite: Clothing/Uniforms/Jumpsuit/ninja.rsi
 
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformFoldableBase]
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable] #SS220 folded-equipped-INNERCLOTHING resprite V2
   id: ClothingUniformJumpsuitAtmos
   name: atmospheric technician jumpsuit
   description: I am at work. I can't leave work. Work is breathing. I am testing air quality.
@@ -904,7 +905,7 @@
     sprite: Clothing/Uniforms/Jumpsuit/atmos.rsi
 
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformFoldableBase]
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable] #SS220 folded-equipped-INNERCLOTHING resprite V2
   id: ClothingUniformJumpsuitAtmosCasual
   name: atmospheric technician's casual jumpsuit
   description: Might as well relax with a job as easy as yours.
@@ -915,7 +916,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/atmospheric_technician_casual.rsi #SS220-AtmosCasualResprite
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable] #SS220 folded-equipped-INNERCLOTHING resprite V2
   id: ClothingUniformJumpsuitPsychologist
   name: psychologist suit
   description: I don't lose things. I place things in locations which later elude me.

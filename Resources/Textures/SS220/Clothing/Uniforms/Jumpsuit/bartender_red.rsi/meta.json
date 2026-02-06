@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/4f6190e2895e09116663ef282d3ce1d8b35c032e, resprited by vimenant2 (discord)",
+  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/4f6190e2895e09116663ef282d3ce1d8b35c032e, resprited by vimenant2 (discord)", tie-equipped-INNERCLOTHING and icon_tie by dinazewwr for SS220,
   "size": {
     "x": 32,
     "y": 32
@@ -11,7 +11,14 @@
       "name": "icon"
     },
     {
+      "name": "icon_tie"
+    },
+    {
       "name": "equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "tie-equipped-INNERCLOTHING",
       "directions": 4
     },
     {
@@ -28,3 +35,4 @@
     }
   ]
 }
+

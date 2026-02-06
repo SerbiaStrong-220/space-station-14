@@ -4,7 +4,7 @@
 
   # Капитан
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformWhiteJumpsuitCaptain
   name: белая униформа офицера
   description: Это белый костюм с золотыми украшениями, на погонах одна золотая звезда - "Майор".
@@ -28,7 +28,7 @@
 
   # Главный врач
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformFoldableBase] 
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable] 
   id: ClothingUniformJumpsuitCMOCorporate
   name: corporate CMO Jumpsuit
   description: «A beautiful, stylish suit of a real chief medical officer. It emphasises the person's nature and the beauty of his charisma...» Nothing further on the unopened label.
@@ -58,7 +58,7 @@
         Piercing: 0.9
 
 - type: entity
-  parent: ClothingUniformJumpsuitBlueShieldCombez #Чтобы наследовать резисты
+  parent: [ClothingUniformBaseFoldable, ClothingUniformJumpsuitBlueShieldCombez]  #Чтобы наследовать резисты
   id: ClothingUniformJumpsuitBlueShieldOperative
   name: the operative "Blue Shield" jumpsuit
   description: The fashionable uniform of the Blue Shield operative - how good it is!
@@ -132,7 +132,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/ntr.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitTrustedLawyer
   name: uniform trusted lawyer NanoTrasen
   description: A chic suit for those who follow the impeccable execution of the company's laws. They say that you are able to impose your demands even on God himself.
@@ -148,7 +148,7 @@
   # Ведущий сервис
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitSeniorService
   name: комбинезон сервисного администратора #SS220 rename
   description: Знак мастерства и мастерства сервисной службы.
@@ -161,7 +161,7 @@
 
   # Клоун
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitClowns
   name: комбинезон клоуна
   description: ХОНК!
@@ -197,7 +197,7 @@
 
   # Ботаник
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitHydroponicsBlue
   name: blue hydroponics jumpsuit
   description: Has a strong earthy smell to it. Hopefully it's merely dirty as opposed to soiled.
@@ -208,7 +208,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/hydro_blue.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitHydroponicsWhite
   name: white hydroponics jumpsuit
   description: Has a strong earthy smell to it. Hopefully it's merely dirty as opposed to soiled.
@@ -219,7 +219,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/hydro_white.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformOverallsBlue
   name: blue overalls
   description: Great for working outdoors.
@@ -230,7 +230,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/hydro-overalls-blue.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformOverallsGreen
   name: green overalls
   description: Great for working outdoors.
@@ -241,7 +241,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/hydro-overalls-green.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformOverallsWhite
   name: white overalls
   description: Great for working outdoors.
@@ -252,7 +252,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/hydro-overalls-white.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitDruid #SS220 druid loadout
   name: druid jupmsuit
   description: Convenient and functional, it helps researchers unlock the mysteries of nature.
@@ -265,7 +265,7 @@
 
   # Репортёр
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitJournalistRed
   name: red journalist suit
   description: If journalism is good, it is controversial, by nature.
@@ -277,7 +277,7 @@
 
   # Бармен
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable] #SS220 folded-equipped-INNERCLOTHING resprite V2
   id: ClothingUniformJumpsuitBartenderRed
   name: red bartender's uniform
   description: A special red outfit to serve drinks.
@@ -288,7 +288,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/bartender_red.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable] #SS220 folded-equipped-INNERCLOTHING resprite V2 
   id: ClothingUniformJumpsuitBartenderGreen
   name: green bartender's uniform
   description: A special green outfit to serve drinks.
@@ -299,7 +299,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/bartender_green.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable] #SS220 folded-equipped-INNERCLOTHING resprite V2
   id: ClothingUniformJumpsuitBartenderNanotrasen
   name: униформа заслуженного бармена NanoTrasen
   description: Дорогая униформа, сделанная на заказ для лучшего из лучших.
@@ -312,7 +312,7 @@
 
   # Уборщик
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitJanitorBlue
   name: blue janitor's suit
   description: The costume of the mysterious cleaner.
@@ -324,7 +324,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/janitor_control.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitOrangeJanitor
   name: фиолетовая униформа
   description: Фиолетовая униформа, но с оранжевыми штанами на подтяжках.
@@ -336,7 +336,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/janitor_orange.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitJanitorJR
   name: junk recyclers cleaner's jumpsuit
   description: The clothes of a real disorder liquidator. It smells clean. Always.
@@ -350,7 +350,7 @@
   # Шеф-повар
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitChefWhite
   name: белая униформа шеф-повара
   description: Без этого нельзя готовить.
@@ -361,7 +361,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/chef_white.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitChefGreen
   name: зелёная униформа шеф-повара
   description: Без этого нельзя готовить.
@@ -372,7 +372,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/chef_green.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitChefBlack
   name: чёрная униформа шеф-повара
   description: Без этого нельзя готовить.
@@ -383,7 +383,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/chef_black.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitChefNanotrasen
   name: униформа заслуженного шеф-повара NanoTrasen
   description: Дорогая униформа, сделанная на заказ для лучшего из лучших.
@@ -396,7 +396,7 @@
 
   # Бармен
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitWaiter
   name: waiter's uniform
   description: The uniform of an errand boy.
@@ -408,7 +408,7 @@
 
   # Музыкант
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitBard #SS220 bard loadout
   name: bard jumpsuit
   description: Comfortable clothes for long concerts.
@@ -424,7 +424,7 @@
   # Интерн
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitIntern
   name: intern's jumpsuit
   description: Suit for medical interns.
@@ -436,7 +436,7 @@
 
   # Врач
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitResponsibility
   name: responsible doctor's jumpsuit
   description: Give the captain painkillers.
@@ -448,7 +448,7 @@
 
   # Парамед
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitFeldsher
   name: uniform feldsher
   description: Just don't be offended, are you a feldsher or a real doctor?
@@ -460,7 +460,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/paramedic_feldsher.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitInterdyne
   name: interdyne Paramedic's Uniform
   description: A standardized form of special-purpose immediate medical assistance units, provided by Interdyne Pharmaceuticals.
@@ -473,7 +473,7 @@
 
   # Бригмедик
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitMilitaryFeldsher
   name: uniform military feldsher
   description: This is not a red color at all..
@@ -489,7 +489,7 @@
 
   # Квартирмейстер
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitCargonovich
   name: cargonovich
   description: You should also bring a burst gas barrel...
@@ -501,7 +501,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/qm_cargonovich.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitWarehouseman
   name: the overalls of the warehouse manager
   description: Practical, comfortable, movement-free and, most importantly, stylish jumpsuit. You have bad memories of your former boss with him.
@@ -514,7 +514,7 @@
 
   # Утилизатор
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitFlannelSalvage
   name: void salvage clothes
   description: A country-style shirt worn by an experienced supply department worker. It is actually a violation of the uniform rules, but the corporation turns a blind eye to it because of the benefit it brings to the wearer.
@@ -526,7 +526,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/salvage_specialist_flannel.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitExpeditor
   name: expeditor uniform
   description: Comfortable, practical and loose expeditor's uniform. Feel the space breeze, or rather the lack thereof, with every tip of your left and right hand.
@@ -542,7 +542,7 @@
   #Ассистент
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitTechAssistant
   name: technical assistant's jumpsuit
   description: Suit for technical assistants.
@@ -555,7 +555,7 @@
   # Старший инженер
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitChiefEngineerDark
   name: dark uniform chief engineer
   description: Dark uniform for years of service as head of the engineering department.
@@ -567,7 +567,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/ce_dark.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitChiefEngineerTurtleDark
   name: dark chief engineer's turtleneck
   description: Dark turtleneck designed specifically for work in conditions of the engineering department.
@@ -582,7 +582,7 @@
 
   # Ассистент
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitBachelor
   name: bachelor's graduation uniform
   description: In vain students wait for a friend in the pub, Science is not without sacrifice.
@@ -594,7 +594,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/research_assistant_bachelor.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitResearchAssistant
   name: research assistant's jumpsuit
   description: Suit for research assistants.
@@ -606,7 +606,7 @@
 
   # Ученый
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitPhdCandidate
   name: phd candidate uniform
   description: Students, prepare for a lecture.
@@ -619,7 +619,7 @@
 
   # Ведущий учёный
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitAssociateProfessor
   name: assistant professor's uniform
   description:
@@ -632,7 +632,7 @@
 
   # Научрук
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitProfessor
   name: professor's uniform
   description:
@@ -644,7 +644,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/rd_professor.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitRDAlt
   name: shirt of a desperate scientist
   description: neat blue shirt with suspenders. It gives you faith in peace through nuclear deterrence.
@@ -659,7 +659,7 @@
 
   # Офицер СБ
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformJumpsuitVaas
   name: vaas suit
   description: A red T-shirt with the badge of an security officer. Do you know the definition of Insanity?
@@ -671,7 +671,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/security_vaas.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformTacticalSecurity
   name: тактическая униформа СБ
   description: Боевая рубаха для самых элитных офицеров СБ. Индивидуальный пошив!
@@ -762,7 +762,7 @@
 # Пассажирский жёлтый комбез
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
   id: ClothingUniformBlueYellow14
   name: yellow jumpsuit
   description: A yellow jumpsuit!
