@@ -10,6 +10,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using System.Numerics;
 using Content.Shared.Weapons.Melee;
+using Content.Shared.IdentityManagement;
 
 namespace Content.Server.SS220.ClinkGlasses;
 
@@ -40,9 +41,9 @@ public sealed class ClinkGlassesSystem : SharedClinkGlassesSystem
     private void OnClinkGlassesAlertClicked(Entity<ClinkGlassesReceiverComponent> receiver, ref ClinkGlassesAlertEvent args)
     {
         var loc = Loc.GetString("loc-clink-glasses-success",
-            ("receiver", receiver.Owner),
+            ("receiver", Identity.Name(receiver.Owner, EntityManager)),
             ("item", receiver.Comp.Item),
-            ("initiator", receiver.Comp.Initiator));
+            ("initiator", Identity.Name(receiver.Comp.Initiator, EntityManager)));
 
         _popupSystem.PopupEntity(loc, receiver.Owner, PopupType.Medium);
 
@@ -68,14 +69,10 @@ public sealed class ClinkGlassesSystem : SharedClinkGlassesSystem
         var enumerator = EntityQueryEnumerator<ClinkGlassesReceiverComponent, TransformComponent>();
         while (enumerator.MoveNext(out var uid, out var comp, out _))
         {
-            var receiverPos = Transform(comp.Initiator).Coordinates;
-            var giverPos = Transform(uid).Coordinates;
-            receiverPos.TryDistance(EntityManager, giverPos, out var distance);
+            var initiatorCoords = Transform(comp.Initiator).Coordinates;
+            var receiverCoords = Transform(uid).Coordinates;
 
-            if (distance < comp.ReceiveRange)
-                continue;
-
-            if (distance > comp.ReceiveRange)
+            if (!initiatorCoords.TryDistance(EntityManager, receiverCoords, out var distance) || distance > comp.ReceiveRange)
             {
                 _alerts.ClearAlert(uid, _clinkGlassesAlert);
                 _entManager.RemoveComponent<ClinkGlassesReceiverComponent>(uid);
@@ -85,7 +82,7 @@ public sealed class ClinkGlassesSystem : SharedClinkGlassesSystem
 
     protected override void DoClinkGlassesOffer(EntityUid user, EntityUid target)
     {
-        if (!_hands.TryGetActiveItem(user, out var item) && !HasComp<ClinkGlassesComponent>(item))
+        if (!_hands.TryGetActiveItem(user, out var item) || !HasComp<ClinkGlassesComponent>(item))
             return;
 
         var itemReceiver = EnsureComp<ClinkGlassesReceiverComponent>(target);
@@ -94,7 +91,7 @@ public sealed class ClinkGlassesSystem : SharedClinkGlassesSystem
         _alerts.ShowAlert(target, _clinkGlassesAlert);
 
         var loc = Loc.GetString("loc-clink-glasses-attempt",
-            ("initiator", user),
+            ("initiator", Identity.Name(user, EntityManager)),
             ("item", item));
 
         _popupSystem.PopupEntity(loc, user, PopupType.Medium);
