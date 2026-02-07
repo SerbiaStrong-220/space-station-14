@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
@@ -9,6 +10,12 @@ namespace Content.Shared.SS220.CultYogg.MiGo;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class CultYoggHealComponent : Component
 {
+    /// <summary>
+    /// Time limitation of component
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public TimeSpan? HealingTime;
+
     /// <summary>
     /// Damage that heals in a single incident
     /// </summary>

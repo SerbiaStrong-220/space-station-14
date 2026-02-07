@@ -10,7 +10,7 @@ cult-yogg-enslave-mindshield = Разум кандидата защищен им
 cult-yogg-enslave-another-fraction = Разум кандидата порабощен противником культа
 cult-yogg-enslave-should-eat-shroom = Кандидат не имеет спор внутри
 cult-yogg-enslave-cant-be-a-chaplain = Кандидат слишком свят
-cult-yogg-enslave-is-sacraficial = Существо ценно, как жертва
+cult-yogg-enslave-is-sacrificial = Существо ценно, как жертва
 
 cult-yogg-teleport-must-be-in-astral = Для телепортации необходимо находится в астрале
 cult-yogg-teleport-must-be-cultist = Цель телепорта должна принадлежать культу
@@ -23,7 +23,7 @@ cult-yogg-heal-already-have-effect = Высшие силы уже исцеляю
 cult-yogg-digest-no-nutritions = Недостаточно питательных веществ
 cult-yogg-digest-no-water = Недостаточно воды в организме
 
-cult-yogg-cant-sacrafice-in-astral = Невозможно выполнять призыв находясь в астрале
+cult-yogg-cant-sacrifice-in-astral = Невозможно выполнять призыв находясь в астрале
 cult-yogg-sacrifice-no-altars = Нет достаточно близких алтарей для старта жертвоприношения
 cult-yogg-sacrifice-started = {$user} начинает жертвоприношение, тело {$target} медленно поднимается в воздух
 cult-yogg-buckle-attempt = {$user} не является целью жертвоприношения

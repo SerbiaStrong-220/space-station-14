@@ -24,9 +24,6 @@
       lateJoinAdditional: false
       mindRoles:
         - MindRoleCultYogg
-  - type: AntagObjectives
-    objectives:
-    - CultYoggSacraficeObjective
 
 - type: entity
   id: CultYoggRuleMidPop
@@ -36,11 +33,15 @@
     minPlayers: 35 # WARNING: this should be always synced with other cult game rules and presets!
   - type: CultYoggRule
     stages:
-      Initial: {}
+      Initial:
+        stageObjectives:
+        - CultYoggEnslaveObjective
       Reveal:
-        cultistsToCrewFraction: 0.2
+        cultistsToCrewFraction: 0.25
       Alarm:
         cultistsToCrewFraction: 0.3
+        stageObjectives:
+        - CultYoggSacrificeObjective
       God:
         sacrificesRequired: 1
 
@@ -52,11 +53,15 @@
     minPlayers: 60 # WARNING: this should be always synced with other cult game rules and presets!
   - type: CultYoggRule
     stages:
-      Initial: {}
+      Initial:
+        stageObjectives:
+        - CultYoggEnslaveObjective
       Reveal:
-        cultistsToCrewFraction: 0.1
+        cultistsToCrewFraction: 0.15
       Alarm:
-        cultistsToCrewFraction: 0.2
+        cultistsToCrewFraction: 0.25
+        stageObjectives:
+        - CultYoggSacrificeObjective
       God:
         sacrificesRequired: 1
 

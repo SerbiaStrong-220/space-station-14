@@ -17,7 +17,7 @@
 #Objective to win the game by summoning
 - type: entity
   parent: BaseCultYoggObjective
-  id: CultYoggSacraficeObjective
+  id: CultYoggSacrificeObjective
   components:
   - type: Objective
     icon:
