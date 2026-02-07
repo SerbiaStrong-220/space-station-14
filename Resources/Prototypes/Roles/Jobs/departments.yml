@@ -43,7 +43,7 @@
   description: department-CentralCommand-description
   color: "#18689a" #ss220-chatcolor
   roles:
-  - CentcomOperativeBSO
+  - CentcomOperativeSRT
   - CBURN
   - ERTLeader
   - ERTChaplain

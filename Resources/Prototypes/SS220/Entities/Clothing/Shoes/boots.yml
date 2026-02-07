@@ -46,7 +46,6 @@
   id: ClothingShoesBootsBlueShieldJack
   name: blueshield jackboots
   description: Nanotrasen-issue Security combat boots for combat scenarios or combat situations. All combat, all the time.
-  suffix: Blue Shield
   components:
   - type: Sprite
     sprite: SS220/Clothing/Shoes/Boots/blueshield_jackboots.rsi
@@ -54,13 +53,14 @@
     sprite: SS220/Clothing/Shoes/Boots/blueshield_jackboots.rsi
 
 - type: entity
-  parent: ClothingShoesBootsBlueShieldJack
-  id: ClothingShoesBootsBlueShieldJackFilled
+  parent: [ ClothingShoesBaseWinterBoots, ClothingShoesMilitaryBase ]
+  id: ClothingShoesBootsWinterBS
+  name: blueshield winter boots
   components:
-  - type: ContainerFill
-    containers:
-     item:
-      - CombatKnife
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Boots/winterbootsbs.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Boots/winterbootsbs.rsi
 
 - type: entity
   parent: ClothingShoesBaseButcherable

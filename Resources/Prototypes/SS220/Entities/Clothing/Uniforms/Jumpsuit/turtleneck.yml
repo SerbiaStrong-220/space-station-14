@@ -58,21 +58,15 @@
         Caustic: 0.95
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: ClothingUniformJumpsuitBlueShieldCombez
   id: ClothingUniformJumpsuitBlueShieldTurtle
   name: blueshield turtleneck
   description: A stylish turtleneck that will help the Blue Shield officer be ready for any extreme situation. High quality materials and a layer of armor make it indispensable for the front line.
-  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield_turtle.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/blueshield_turtle.rsi
-  - type: Armor
-    modifiers:
-      coefficients:
-        Slash: 0.9
-        Piercing: 0.9
 
 - type: entity
   parent: ClothingUniformBase
