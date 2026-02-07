@@ -6,7 +6,7 @@ namespace Content.Shared.Atmos.Components;
 public sealed partial class PipeAppearanceComponent : Component
 {
     [DataField]
-    public SpriteSpecifier.Rsi[] Sprite = [new(new("SS220/Structures/Piping/Atmospherics/pipe.rsi"), "pipeConnector"), //SS220-resprite
-        new(new("Structures/Piping/Atmospherics/pipe_alt1.rsi"), "pipeConnector"),
-        new(new("Structures/Piping/Atmospherics/pipe_alt2.rsi"), "pipeConnector")];
+    public SpriteSpecifier.Rsi[] Sprite = [new(new("SS220/Structures/Piping/Atmospherics/pipe.rsi"), "pipeConnector"), // SS220-resprite
+        new(new("SS220/Structures/Piping/Atmospherics/pipe_alt1.rsi"), "pipeConnector"), // SS220 atmospherics-sprite-update
+        new(new("SS220/Structures/Piping/Atmospherics/pipe_alt2.rsi"), "pipeConnector")]; // SS220 atmospherics-sprite-update
 }
