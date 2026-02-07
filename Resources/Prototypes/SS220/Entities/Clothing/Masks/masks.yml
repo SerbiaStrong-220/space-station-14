@@ -233,7 +233,7 @@
     - Hair
 
 - type: entity
-  parent: ClothingMaskBase
+  parent: ClothingMaskBalaclava
   id: ClothingMaskBalaclava2
   name: balaclava
   description: For privacy lovers. Before the first glance at the ID.
@@ -242,9 +242,6 @@
     sprite: SS220/Clothing/Mask/balaclava_2.rsi
   - type: Clothing
     sprite: SS220/Clothing/Mask/balaclava_2.rsi
-  - type: HideLayerClothing
-    slots:
-    - Hair
   - type: TemperatureProtection
     heatingCoefficient: 1.1
     coolingCoefficient: 0.9
