@@ -46,6 +46,8 @@ using Robust.Shared.Map;
 using Content.Shared.SS220.Language.Systems;
 using Content.Shared.SS220.TTS;
 using Content.Shared.FixedPoint;
+using Content.Server.SS220.Mech.Systems;//SS220 mech rework
+using Content.Shared.SS220.Mech.Components;//SS220 mech rework
 
 namespace Content.Server.Chat.Systems;
 
@@ -205,11 +207,30 @@ public sealed partial class ChatSystem : SharedChatSystem
             return;
         }
 
+        //SS220 mech rework begin
+        if (TryComp<AltMechComponent>(source, out var mechComp) && mechComp.PilotSlot.ContainedEntity != null)
+        {
+            TrySendInGameICMessage(
+                mechComp.PilotSlot.ContainedEntity.Value,
+                message,
+                desiredType,
+                range,
+                hideLog,
+                shell,
+                player,
+                nameOverride,
+                checkRadioPrefix,
+                ignoreActionBlocker);
+
+            return;
+        }
+        //SS220 mech rework end
+
         if (player != null && _chatManager.HandleRateLimit(player) != RateLimitStatus.Allowed)
             return;
 
         // Sus
-        if (player?.AttachedEntity is { Valid: true } entity && source != entity)
+        if (player?.AttachedEntity is { Valid: true } entity && source != entity && (!TryComp<AltMechPilotComponent>(source, out var pilotComp) || entity != pilotComp.Mech))
         {
             return;
         }

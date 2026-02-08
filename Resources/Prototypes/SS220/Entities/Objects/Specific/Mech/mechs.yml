@@ -1,0 +1,157 @@
+- type: entity
+  parent: [BaseMob, StripableInventoryBase]
+  id: BaseAltMech
+  #parent: BaseMechPart
+  save: false
+  abstract: true
+  components:
+  - type: CombatMode
+  - type: NoSlip
+  - type: MechPart
+  - type: ComplexInteraction
+  - type: MobMover
+  - type: AltMech
+  - type: MechRobot #SS220-AddMechToClothing
+  - type: PowerCellDraw
+  - type: Language
+  - type: PressureProtection #After some research i have decided to get rid of MechAir as there will be basically no difference in game but larger amounts of work and space for bugs
+    highPressureMultiplier: 0.05
+    lowPressureMultiplier: 1000
+  - type: MobCollision
+    colliding: false
+    bufferAccumulator: 0
+    speedModifier: 0
+    minimumSpeedModifier: 0
+    strength: 0
+    fixtureId: ""
+  - type: DoAfter
+  #- type: Repairable # Removed because mech repair system will be remade
+  #  fuelCost: 25
+  #  doAfterDelay: 10
+  - type: UserInterface
+    interfaces:
+      enum.MechUiKey.Key:
+        type: AltMechBoundUserInterface
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
+  - type: Puller
+    needsHands: false
+  - type: InputMover
+  - type: InteractionOutline
+  - type: Inventory
+    templateId: mech
+  - type: TemperatureProtection
+    heatingCoefficient: 0.005
+    coolingCoefficient: 0.005
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1
+    baseSprintSpeed: 2
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - FootstepSound
+  - type: Pullable
+  - type: Physics
+    bodyType: KinematicController
+  - type: GravityAffected
+  - type: Clickable
+  - type: WiresPanel
+  - type: HealthExaminable
+    examinableTypes:
+      - Blunt
+      - Slash
+      - Piercing
+      - Heat
+      - Shock
+    locPrefix: silicon
+  - type: Hands
+    showInHands: false
+    disableExplosionRecursion: true
+    canBeStripped: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.45
+        density: 1000
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Appearance
+  - type: IntrinsicRadioReceiver
+  - type: ActiveRadio
+    channels:
+    - Binary
+    - Common
+    - Science
+  - type: ZombieImmune
+  - type: ContainerContainer
+    containers:
+      mech-pilot-slot: !type:ContainerSlot
+      mech-battery-slot: !type:ContainerSlot
+      mech-tank-slot: !type:ContainerSlot
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: FootstepModifier
+    footstepSoundCollection:
+      path: /Audio/Mecha/mechmove03.ogg
+  - type: GuideHelp
+    guides:
+    - Robotics
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: MechAltRipley
+  parent: BaseAltMech
+  name: Ripley APLU
+  description: Versatile and lightly armored, the Ripley is useful for almost any heavy work scenario. The "APLU" stands for Autonomous Power Loading Unit.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Robotics/Mechs/cores.rsi
+    state: basicloader
+    noRot: true
+  - type: AltMech
+    baseState: basicloader
+    openState: basicloader
+    brokenState: basicloader
+    pilotWhitelist:
+      components:
+        - HumanoidAppearance
+  #- type: MeleeWeapon #Removed as mech shouldn't be able to attack without arms
+  #  hidden: true
+  #  attackRate: 1
+  #  damage:
+  #    types:
+  #      Blunt: 14 #intentionally shit so people realize that going into combat with the ripley is usually a bad idea.
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 0
+    baseSprintSpeed: 0
+
+- type: inventoryTemplate
+  id: mech
+  slots:
+  - name: beltMech
+    slotTexture: belt
+    fullTextureName: template_small
+    slotFlags: BELT
+    slotGroup: SecondHotbar
+    stripTime: 15
+    uiWindowPos: 1,0
+    strippingWindowPos: 0,0
+    offset: 0.0, 2.0
+    displayName: Belt

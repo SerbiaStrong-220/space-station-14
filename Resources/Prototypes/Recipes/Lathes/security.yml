@@ -100,7 +100,7 @@
 - type: latheRecipe
   parent: BaseShieldRecipe
   id: RiotShield
-  result: RiotShield
+  result: RiotShieldAlt
   materials:
     Steel: 400
     Glass: 400
@@ -108,7 +108,7 @@
 - type: latheRecipe
   parent: BaseShieldRecipe
   id: TelescopicShield
-  result: TelescopicShield
+  result: TelescopicShieldAlt
   materials:
     Steel: 300
     Glass: 800
