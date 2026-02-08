@@ -9,7 +9,7 @@ public abstract partial class SharedAltMechSystem
 {
     private void InitializeRelay()
     {
-        SubscribeLocalEvent<AltMechComponent, GettingAttackedAttemptEvent>(RelayRefToPilot);
+        //SubscribeLocalEvent<AltMechComponent, GettingAttackedAttemptEvent>(RelayRefToPilot);
     }
 
     private void RelayToPilot<T>(Entity<AltMechComponent> uid, T args) where T : class

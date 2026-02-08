@@ -18,7 +18,7 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.SS220.ArmorBlock;
 using Content.Shared.SS220.Mech.Components;
-using Content.Shared.SS220.Mech.Equipment.Components;
+using Content.Shared.SS220.Mech.Parts.Components;
 using Content.Shared.SS220.MechRobot;
 using Content.Shared.Standing;
 using Content.Shared.Storage.Components;
@@ -28,7 +28,6 @@ using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
-using Content.Shared.Inventory;
 using Content.Shared.Inventory;
 
 namespace Content.Shared.SS220.Mech.Systems;

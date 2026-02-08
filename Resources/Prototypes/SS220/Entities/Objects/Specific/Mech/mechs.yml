@@ -132,12 +132,6 @@
     pilotWhitelist:
       components:
         - HumanoidAppearance
-  #- type: MeleeWeapon #Removed as mech shouldn't be able to attack without arms
-  #  hidden: true
-  #  attackRate: 1
-  #  damage:
-  #    types:
-  #      Blunt: 14 #intentionally shit so people realize that going into combat with the ripley is usually a bad idea.
   - type: MovementSpeedModifier
     baseWalkSpeed: 0
     baseSprintSpeed: 0

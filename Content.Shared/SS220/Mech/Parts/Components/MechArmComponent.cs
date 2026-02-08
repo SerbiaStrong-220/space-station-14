@@ -1,12 +1,10 @@
-using Content.Shared.FixedPoint;
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.Hands.Components;
-using Content.Shared.Whitelist;
-using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.SS220.Mech.Components;
+namespace Content.Shared.SS220.Mech.Parts.Components;
 
 /// <summary>
 /// Arm of the mech

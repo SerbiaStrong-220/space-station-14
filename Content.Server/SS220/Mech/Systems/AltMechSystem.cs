@@ -7,6 +7,7 @@ using Content.Server.Hands.Systems;
 using Content.Server.Mech.Components;
 using Content.Server.Mind;
 using Content.Server.Power.EntitySystems;
+using Content.Server.Temperature.Components;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Alert;
@@ -16,6 +17,8 @@ using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Events;
+using Content.Shared.Inventory;
 using Content.Shared.Mech;
 using Content.Shared.Mech.EntitySystems;
 using Content.Shared.Mind;
@@ -35,6 +38,7 @@ using Content.Shared.SS220.Mech.Components;
 using Content.Shared.SS220.Mech.Equipment.Components;
 using Content.Shared.SS220.Mech.Systems;
 using Content.Shared.SS220.MechRobot;
+using Content.Shared.Temperature;
 using Content.Shared.Tools;
 using Content.Shared.Tools.Components;
 using Content.Shared.Tools.Systems;
@@ -45,6 +49,7 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using static Content.Shared.Inventory.InventorySystem;
 
 namespace Content.Server.SS220.Mech.Systems;
 
@@ -52,6 +57,7 @@ namespace Content.Server.SS220.Mech.Systems;
 public sealed partial class AltMechSystem : SharedAltMechSystem
 {
     [Dependency] private readonly AlertsSystem _alerts = default!;
+    [Dependency] private readonly GasTankSystem _gasTank = default!;
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
     [Dependency] private readonly BatterySystem _battery = default!;
@@ -113,10 +119,10 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
         SubscribeLocalEvent<AltMechPilotComponent, ToolUserAttemptUseEvent>(OnToolUseAttempt);
         SubscribeLocalEvent<AltMechPilotComponent, InhaleLocationEvent>(OnInhale);
-        SubscribeLocalEvent<AltMechPilotComponent, ExhaleLocationEvent>(OnExhale);
-        SubscribeLocalEvent<AltMechPilotComponent, AtmosExposedGetAirEvent>(OnExpose);
+        //SubscribeLocalEvent<AltMechPilotComponent, ExhaleLocationEvent>(OnExhale);
+        //SubscribeLocalEvent<AltMechPilotComponent, AtmosExposedGetAirEvent>(OnExpose);
 
-        SubscribeLocalEvent<AltMechComponent, LanguageChangedEvent>(OnAfterHandledState);
+        SubscribeLocalEvent<AltMechPilotComponent, ModifyChangedTemperatureEvent>(OnTemperatureChange);
 
         #region Equipment UI message relays
         SubscribeLocalEvent<AltMechComponent, MechGrabberEjectMessage>(ReceiveEquipmentUiMesssages);
@@ -749,60 +755,35 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         //UpdateUserInterface(uid, component);
     }
 
+    private void OnTemperatureChange(Entity<AltMechPilotComponent> ent, ref ModifyChangedTemperatureEvent args)
+    {
+        if (!TryComp<TemperatureProtectionComponent>(ent.Comp.Mech, out var mechComp))
+            return;
+
+        var coefficient = args.TemperatureDelta < 0
+            ? mechComp.CoolingCoefficient
+            : mechComp.HeatingCoefficient;
+
+        args.TemperatureDelta *= coefficient;
+    }
+
     #region Atmos Handling
-    private void OnInhale(EntityUid uid, AltMechPilotComponent component, InhaleLocationEvent args)
+    private void OnInhale(Entity<AltMechPilotComponent> ent, ref InhaleLocationEvent args)
     {
-        if (!TryComp<AltMechComponent>(component.Mech, out var mech) ||
-            !TryComp<MechAirComponent>(component.Mech, out var mechAir))
+        if (!TryComp<AltMechComponent>(ent.Comp.Mech, out var mech) || mech.TankSlot == null || mech.TankSlot.ContainedEntity == null)
         {
             return;
         }
+
+        if (!TryComp<GasTankComponent>(mech.TankSlot.ContainedEntity, out var tankComp))
+            return;
 
         if (mech.Airtight)
-            args.Gas = mechAir.Air;
-    }
-
-    private void OnExhale(EntityUid uid, AltMechPilotComponent component, ExhaleLocationEvent args)
-    {
-        if (!TryComp<AltMechComponent>(component.Mech, out var mech) ||
-            !TryComp<MechAirComponent>(component.Mech, out var mechAir))
         {
-            return;
+            args.Gas = _gasTank.RemoveAirVolume((mech.TankSlot.ContainedEntity.Value, tankComp), args.Respirator.BreathVolume);
+            // TODO: Should listen to gas tank updates instead I guess?
+            //_alerts.ShowAlert(ent.Owner, "Internals", GetSeverity(ent));
         }
-
-        if (mech.Airtight)
-            args.Gas = mechAir.Air;
-    }
-
-    private void OnExpose(EntityUid uid, AltMechPilotComponent component, ref AtmosExposedGetAirEvent args)
-    {
-        if (args.Handled)
-            return;
-
-        if (!TryComp(component.Mech, out AltMechComponent? mech))
-            return;
-
-        if (mech.Airtight && TryComp(component.Mech, out MechAirComponent? air))
-        {
-            args.Handled = true;
-            args.Gas = air.Air;
-            return;
-        }
-
-        args.Gas =  _atmosphere.GetContainingMixture(component.Mech, excite: args.Excite);
-        args.Handled = true;
-    }
-
-    private void OnGetFilterAir(EntityUid uid, MechAirComponent comp, ref GetFilterAirEvent args)
-    {
-        if (args.Air != null)
-            return;
-
-        // only airtight mechs get internal air
-        if (!TryComp<AltMechComponent>(uid, out var mech) || !mech.Airtight)
-            return;
-
-        args.Air = comp.Air;
     }
     #endregion
 }

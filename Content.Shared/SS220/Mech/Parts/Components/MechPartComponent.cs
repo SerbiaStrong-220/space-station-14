@@ -2,12 +2,11 @@
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mech.Components;
-using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
-namespace Content.Shared.SS220.Mech.Equipment.Components;
+namespace Content.Shared.SS220.Mech.Parts.Components;
 
 /// <summary>
 /// A piece of equipment that can be installed into <see cref="MechComponent"/>
