@@ -558,7 +558,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         // Sawmill.Debug($"Melee damage is {damage.Total} out of {component.Damage.Total}");
 
         // Raise event before doing damage so we can cancel damage if the event is handled
-        var hitEvent = new MeleeHitEvent(new List<EntityUid> { targetEntity }, user, meleeUid, damage, null);
+        var hitEvent = new MeleeHitEvent(new List<EntityUid> { targetEntity }, user, meleeUid, damage, null);//SS220 shield rework  
         RaiseLocalEvent(meleeUid, hitEvent);
 
         if (hitEvent.Handled)
@@ -566,7 +566,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         var targets = new List<EntityUid>(1)
         {
-            targetEntity
+            targetEntity//SS220 shield rework
         };
 
         var weapon = GetEntity(ev.Weapon);
@@ -579,11 +579,11 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         Interaction.DoContactInteraction(user, target);
 
         // For stuff that cares about it being attacked.
-        var attackedEvent = new AttackedEvent(meleeUid, user, targetXform.Coordinates);
+        var attackedEvent = new AttackedEvent(meleeUid, user, targetXform.Coordinates);//SS220 shield rework
         RaiseLocalEvent(targetEntity, attackedEvent);
 
         //ss220 extended weapon logic start
-        var weaponAttackEvent = new WeaponAttackEvent(user, targetEntity, AttackType.LIGHT);
+        var weaponAttackEvent = new WeaponAttackEvent(user, targetEntity, AttackType.LIGHT);//SS220 shield rework
         RaiseLocalEvent(meleeUid, weaponAttackEvent);
         //ss220 extended weapon logic end
 
@@ -593,14 +593,14 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         // SS220 hook attack event end
 
         var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEvent.BonusDamage, hitEvent.ModifiersList);
-        var damageResult = Damageable.TryChangeDamage(targetEntity, modifiedDamage, origin:user, ignoreResistances:resistanceBypass);
+        var damageResult = Damageable.TryChangeDamage(targetEntity, modifiedDamage, origin:user, ignoreResistances:resistanceBypass);//SS220 shield rework
 
         if (damageResult is {Empty: false})
         {
             // If the target has stamina and is taking blunt damage, they should also take stamina damage based on their blunt to stamina factor
             if (damageResult.DamageDict.TryGetValue("Blunt", out var bluntDamage))
             {
-                _stamina.TakeStaminaDamage(targetEntity, (bluntDamage * component.BluntStaminaDamageFactor).Float(), visual: false, source: user, with: meleeUid == user ? null : meleeUid);
+                _stamina.TakeStaminaDamage(targetEntity, (bluntDamage * component.BluntStaminaDamageFactor).Float(), visual: false, source: user, with: meleeUid == user ? null : meleeUid);//SS220 shield rework
             }
 
             if (meleeUid == user)
@@ -616,7 +616,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         }
 
-        _meleeSound.PlayHitSound(targetEntity, user, GetHighestDamageSound(modifiedDamage, _protoManager), hitEvent.HitSoundOverride, component);
+        _meleeSound.PlayHitSound(targetEntity, user, GetHighestDamageSound(modifiedDamage, _protoManager), hitEvent.HitSoundOverride, component);//SS220 shield rework
 
         if (damageResult?.GetTotal() > FixedPoint2.Zero)
         {

@@ -140,9 +140,9 @@
       heldPrefix: riot_bullet
     - type: AltBlocking
       rangeBlockProb: 0.40
-      meleeBlockProb: 0.30
+      meleeBlockProb: 0.33
       activeRangeBlockProb: 0.65
-      activeMeleeBlockProb: 0.35
+      activeMeleeBlockProb: 0.37
     - type: ArmorBlock
       tresholddict:
           Radiation: 1000
