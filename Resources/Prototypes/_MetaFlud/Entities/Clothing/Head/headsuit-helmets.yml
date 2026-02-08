@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase]
   id: ClothingHeadHelmetHardsuitRedWingSec
   name: Шлем скафандра офицера безопастности Красного Крыла
   description: Шлем от скафандра офицера безопастности Красного Крыла
@@ -9,6 +9,21 @@
     sprite: MetaFlud/Clothing/Head/Hardsuits/redwing_sec.rsi
   - type: Clothing
     sprite: MetaFlud/Clothing/Head/Hardsuits/redwing_sec.rsi
+    clothingVisuals:
+      head:
+      - state: off-equipped-HELMET
+      - state: off-equipped-HELMET-unshaded
+        shader: unshaded
+      - state: light-overlay
+        visible: false
+        map: [ "light" ]
+  - type: ToggleableVisuals
+    spriteLayer: light
+    clothingVisuals:
+      head:
+      - state: on-equipped-HELMET
+      - state: on-equipped-HELMET-unshaded
+        shader: unshaded
   - type: PointLight
     color: cyan
     radius: 4.5
@@ -37,6 +52,21 @@
     sprite: MetaFlud/Clothing/Head/Hardsuits/redwing_medic.rsi
   - type: Clothing
     sprite: MetaFlud/Clothing/Head/Hardsuits/redwing_medic.rsi
+    clothingVisuals:
+      head:
+      - state: off-equipped-HELMET
+      - state: off-equipped-HELMET-unshaded
+        shader: unshaded
+      - state: light-overlay
+        visible: false
+        map: [ "light" ]
+  - type: ToggleableVisuals
+    spriteLayer: light
+    clothingVisuals:
+      head:
+      - state: on-equipped-HELMET
+      - state: on-equipped-HELMET-unshaded
+        shader: unshaded
   - type: PointLight
     color: cyan
     radius: 4.5
@@ -65,6 +95,21 @@
     sprite: MetaFlud/Clothing/Head/Hardsuits/redwing_pilot.rsi
   - type: Clothing
     sprite: MetaFlud/Clothing/Head/Hardsuits/redwing_pilot.rsi
+    clothingVisuals:
+      head:
+      - state: off-equipped-HELMET
+      - state: off-equipped-HELMET-unshaded
+        shader: unshaded
+      - state: light-overlay
+        visible: false
+        map: [ "light" ]
+  - type: ToggleableVisuals
+    spriteLayer: light
+    clothingVisuals:
+      head:
+      - state: on-equipped-HELMET
+      - state: on-equipped-HELMET-unshaded
+        shader: unshaded
   - type: PointLight
     color: cyan
     radius: 4.5
