@@ -15,7 +15,7 @@ jobs:
     if: github.event.pull_request.draft == false
     steps:
       - name: Wait for labels to be added
-        run: sleep 5
+        run: sleep 5 # затычка до нормального бобработчика
 
       - name: Generate token
         id: generate_token
