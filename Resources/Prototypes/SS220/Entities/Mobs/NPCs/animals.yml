@@ -410,3 +410,43 @@
       150: Critical
       200: Dead
 
+- type: entity
+  id: MobSpiderGhostWizard
+  parent: MobSpiderGhost
+  name: wizard spider ghost
+  description:  This ghost spider looks a little magical
+  suffix: Wizard
+  components:
+  - type: Accentless
+    removes:
+    - type: ReplacementAccent
+      accent: xeno  #let this wizard speak
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+  - type: Telepathy
+    canSend: false
+    telepathyChannelPrototype: TelepathyChannelHive	
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  - type: PassiveDamage
+    damage:
+      types:
+        Blunt: -0.4
+        Slash: -0.4
+        Piercing: -0.6
+        Heat: -0.75
+        Radiation: -0.75
+        Caustic: -0.25
+  - type: MeleeWeapon
+    damage:
+      types:
+        Piercing: 10
+        Poison: 15
+        Structural: 35
+  - type: BasicEntityAmmoProvider
+    proto: PoisonousAcid
+    capacity: 2
+    count: 2
+  - type: Gun
+    fireRate: 4

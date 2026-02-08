@@ -17,6 +17,14 @@
       state: frieren
 
 - type: marking
+  id: HumanHairFrieren2
+  bodyPart: Hair
+  markingCategory: Hair
+  sprites:
+    - sprite: SS220/Mobs/Customization/human_hair.rsi
+      state: frieren2
+
+- type: marking
   id: HumanHairLong5
   bodyPart: Hair
   markingCategory: Hair
@@ -47,3 +55,19 @@
   sprites:
     - sprite: SS220/Mobs/Customization/human_hair.rsi
       state: uraraka
+
+- type: marking
+  id: HumanHairPonytail8
+  bodyPart: Hair
+  markingCategory: Hair
+  sprites:
+    - sprite: SS220/Mobs/Customization/human_hair.rsi
+      state: ponytail8
+
+- type: marking
+  id: HumanHairPonytail9
+  bodyPart: Hair
+  markingCategory: Hair
+  sprites:
+    - sprite: SS220/Mobs/Customization/human_hair.rsi
+      state: ponytail9

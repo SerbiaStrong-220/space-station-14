@@ -430,8 +430,11 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-cook
-  - type: ReplacementAccent # for random sentience event
-    accent: italian
+  #SS220 Accents begin
+  #- type: ReplacementAccent # for random sentience event
+  #  accent: italian
+  - type: ItalianAccent
+  #SS220 Accents end
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
