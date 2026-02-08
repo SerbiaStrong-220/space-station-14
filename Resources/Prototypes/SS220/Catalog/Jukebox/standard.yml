@@ -175,3 +175,33 @@
   name: The Drunken Sailor
   path:
     path: /Audio/SS220/Jukebox/The_Drunken_Sailor.ogg
+
+- type: jukebox
+  id: Rest_In_Peace
+  name: Quantum (Feat Z.W.E.I) - Rest In Peace
+  path:
+    path: /Audio/SS220/Jukebox/Rest_In_Peace.ogg
+
+- type: jukebox
+  id: the_rave
+  name: Quantum_ - The Rave
+  path:
+    path: /Audio/SS220/Lobby/the_rave.ogg
+
+- type: jukebox
+  id: the_settler
+  name: Chris Remo - The Settler
+  path:
+    path: /Audio/SS220/Lobby/the_settler.ogg
+
+- type: jukebox
+  id: our_classtrial
+  name: Danganronpa V3 - Our Classtrial
+  path:
+    path: /Audio/SS220/Jukebox/ourclasstrial.ogg
+
+- type: jukebox
+  id: broken
+  name: Wall GG - Broken
+  path:
+    path: /Audio/SS220/Jukebox/broken.ogg
