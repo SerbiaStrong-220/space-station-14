@@ -32,8 +32,10 @@ public sealed partial class AltBlockingSystem
 
         if (ent.Comp.IsBlocking)
             StopBlocking(ent.Comp, args.Performer);
+
         else
             StartBlocking(ent.Comp, args.Performer);
+
         Dirty(ent.Owner, ent.Comp);
         args.Handled = true;
     }

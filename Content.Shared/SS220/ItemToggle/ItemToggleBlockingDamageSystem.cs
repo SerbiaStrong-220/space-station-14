@@ -32,9 +32,8 @@ public sealed class ItemToggleBlockingDamageSystem : EntitySystem
     private void OnMapInit(Entity<ItemToggleBlockingDamageComponent> ent, ref MapInitEvent args)
     {
         if (!TryComp<AltBlockingComponent>(ent.Owner, out var AltBlockingComponent))
-        {
             return;
-        }
+
         OnDecreaseBlock(ent, AltBlockingComponent);
     }
 
@@ -55,6 +54,7 @@ public sealed class ItemToggleBlockingDamageSystem : EntitySystem
             AltBlockingComponent.MeleeBlockProb = ent.Comp.ToggledMeleeBlockProb;
 
             Dirty(ent);
+
             if (TryComp<ChangeAppearanceOnActiveBlockingComponent>(ent.Owner, out var appearanceComp) && userComp.IsBlocking)
             {
                 var ev = new ActiveBlockingEvent(true);

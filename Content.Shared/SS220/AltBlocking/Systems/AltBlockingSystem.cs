@@ -10,14 +10,12 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
-using Content.Shared.Random.Helpers;
 using Content.Shared.SS220.ItemToggle;
 using Content.Shared.SS220.Weapons.Melee.Events;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
-using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using System.Linq;
@@ -90,15 +88,18 @@ public sealed partial class AltBlockingSystem : EntitySystem
 
         compUser.IsBlocking = true;
         Dirty(user, compUser);
+
         foreach (var shield in compUser.BlockingItemsShields)
         {
             if (shield == null)
-                continue; 
+                continue;
+
             if (TryComp<ItemToggleBlockingDamageComponent>(shield, out var toggleComp))
             {
                 if (!toggleComp.IsToggled)
                     continue;
             }
+
             ActiveBlockingEvent ev = new ActiveBlockingEvent(true);
             RaiseLocalEvent((EntityUid)shield, ref ev);
         }
@@ -117,17 +118,21 @@ public sealed partial class AltBlockingSystem : EntitySystem
             return false;
 
         var blockerName = Identity.Entity(user, EntityManager);
+
         var msgUser = Loc.GetString("actively-blocking-stop");
         var msgOther = Loc.GetString("actively-blocking-stop-others", ("blockerName", blockerName));
+
         _popupSystem.PopupPredicted(msgUser, msgOther, user, user);
         _actionsSystem.SetToggled(compUser.BlockingToggleActionEntity, false);
 
         compUser.IsBlocking = false;
         Dirty(user, compUser);
+
         foreach (var shield in compUser.BlockingItemsShields)
         {
             if (shield == null)
-                continue; 
+                continue;
+
             ActiveBlockingEvent ev = new ActiveBlockingEvent(false);
             RaiseLocalEvent((EntityUid)shield, ref ev);
         }

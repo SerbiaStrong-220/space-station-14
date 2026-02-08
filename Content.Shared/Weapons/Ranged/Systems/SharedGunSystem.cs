@@ -539,10 +539,9 @@ public abstract partial class SharedGunSystem : EntitySystem
     {
         //SS220 shield rework begin
         if (TryComp<AltBlockingUserComponent>(user,out var comp) && comp.IsBlocking)
-        {
             return;
-        }
         //SS220 shield rework end
+
         var attemptEv = new GunMuzzleFlashAttemptEvent();
         RaiseLocalEvent(gun, ref attemptEv);
         if (attemptEv.Cancelled)

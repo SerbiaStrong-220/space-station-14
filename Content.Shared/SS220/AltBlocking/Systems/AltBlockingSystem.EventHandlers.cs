@@ -66,6 +66,7 @@ public sealed partial class AltBlockingSystem
                         _audio.PlayPvs(blockComp.BlockSound, (EntityUid)item);
                         _popupSystem.PopupEntity(Loc.GetString("block-shot"), ent.Owner);
                     }
+
                     args.CancelledHit = true;
                     args.blocker = netEnt;
                     return;
@@ -149,10 +150,9 @@ public sealed partial class AltBlockingSystem
     {
         //In theory the user should not be null when this fires off
         if (ent.Comp.User != null)
-        {
             StopBlockingHelper(ent.Owner, ent.Comp, ent.Comp.User.Value);
-        }
     }
+
     private bool TryBlock(List<EntityUid?> items, DamageSpecifier? damage, AltBlockingUserComponent comp)
     {
         foreach (var item in items)
