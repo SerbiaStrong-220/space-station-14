@@ -15,11 +15,11 @@
   id: SpiderServantShooterCompound
   branches:
     - tasks:
-        - !type:HTNCompoundTask
-          task: InnateRangedCombatCompound
+      - !type:HTNCompoundTask
+        task: InnateRangedCombatCompound
     - tasks:
-        - !type:HTNCompoundTask
-          task: MeleeAgressiveCombatCompound
+      - !type:HTNCompoundTask
+        task: MeleeAgressiveCombatCompound
     - tasks:
         - !type:HTNCompoundTask
           task: FollowCompound
