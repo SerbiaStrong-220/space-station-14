@@ -4,6 +4,7 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
+using Robust.Shared.Graphics;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -13,7 +14,8 @@ namespace Content.Shared.SS220.Mech.Components;
 /// A large, pilotable machine that has equipment that is
 /// powered via an internal battery.
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent]
+[NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class AltMechComponent : Component
 {
     /// <summary>
@@ -112,6 +114,15 @@ public sealed partial class AltMechComponent : Component
     [ViewVariables]
     public readonly string PilotSlotId = "mech-pilot-slot";
 
+    /// <summary>
+    /// The slot the pilot is stored in.
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    public ContainerSlot TankSlot = default!;
+
+    [ViewVariables]
+    public readonly string TankSlotId = "mech-tank-slot";// for tanks with breathing mix
+
     [DataField, AutoNetworkedField]
     public float OverallBaseMovementSpeed = 0f;
 
@@ -137,6 +148,10 @@ public sealed partial class AltMechComponent : Component
 
     [ViewVariables(VVAccess.ReadWrite)]
     public List<string> ContainersToCreate = new List<string>{ "head", "right-arm", "left-arm", "chassis", "power" };
+
+    [DataField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public List<string> SlotsToDrop = new List<string> { "shoes", "outerClothing", "gloves", "neck", "mask", "eyes", "head", "pocket1", "pocket2", "suitstorage", "belt", "back" };// items from those slots will be dropped on mech enter. Intended to be everything except for PDA, inner clothing and headset
 
     //List of the user's hands that must be given back when leaving the mech 
     [DataField]

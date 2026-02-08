@@ -23,7 +23,13 @@ public sealed partial class AltMechMenu : FancyWindow
 
     //public event Action<EntityUid>? OnRemoveButtonPressed;
 
-    public event Action<bool>? OnMaintenancePressed;  
+    public event Action<bool>? OnMaintenancePressed;
+
+    public event Action<bool>? OnMixButtonPressed;
+
+    public event Action<bool>? OnSealButtonPressed;
+
+    public event Action<bool>? OnDetachTankButtonPressed;
 
     public AltMechMenu()
     {
@@ -65,6 +71,9 @@ public sealed partial class AltMechMenu : FancyWindow
 
         Maintenance.OnToggled += OnMaintenanceButtonPressed;
         Maintenance.OnToggled += (_) => OnMaintenancePressed?.Invoke(Maintenance.Pressed);
+        Seal.OnToggled += (_) => OnSealButtonPressed?.Invoke(Seal.Pressed);
+        DetachTank.OnPressed += (_) => OnDetachTankButtonPressed?.Invoke(true);
+        Mix.OnPressed += (_) => OnMixButtonPressed?.Invoke(true);
         //Maintenance.Pressed = maintenance;
     }
 

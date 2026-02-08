@@ -8,6 +8,7 @@ using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.SS220.MindExtension;
 using Content.Shared.SS220.MindExtension.Events;
 using Robust.Shared.Network;
+using Content.Shared.SS220.Mech.Components;
 
 namespace Content.Server.SS220.MindExtension;
 
@@ -39,8 +40,8 @@ public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
             args.SenderSession.UserId) != BodyStateToEnter.Available)
             return;
 
-        _mind.TransferTo(mind.Value, target.Value);
         _mind.UnVisit(mind.Value);
+        _mind.TransferTo(mind.Value, target.Value);
 
         RaiseNetworkEvent(new ExtensionReturnResponse(), args.SenderSession);
     }
@@ -64,6 +65,9 @@ public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
         {
             TrailPointMetaData finalMetaData = trailMetaData;
             var targetEnt = GetEntity(target);
+
+            if (HasComp<AltMechComponent>(targetEnt))
+                continue;
 
             var state = IsAvailableToEnterEntity(targetEnt, mindExt, args.SenderSession.UserId);
 

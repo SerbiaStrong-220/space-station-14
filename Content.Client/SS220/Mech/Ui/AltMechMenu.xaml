@@ -11,6 +11,22 @@
                     ToggleMode="True"
                     VerticalAlignment="Top"
                     VerticalExpand="False"/>
+                <Button Name="Seal"
+                    Text="{Loc 'mech-maintenance-mode-button'}"
+                    TextAlign="Center"
+                    ToggleMode="True"
+                    VerticalAlignment="Top"
+                    VerticalExpand="False"/>
+                <Button Name="Mix"
+                    Text="{Loc 'mech-maintenance-mode-button'}"
+                    TextAlign="Center"
+                    VerticalAlignment="Top"
+                    VerticalExpand="False"/>
+                <Button Name="DetachTank"
+                    Text="{Loc 'mech-maintenance-mode-button'}"
+                    TextAlign="Center"
+                    VerticalAlignment="Top"
+                    VerticalExpand="False"/>
             </BoxContainer>
             <BoxContainer Orientation="Vertical" HorizontalExpand="True">
                 <SpriteView Name="MechViewHead"

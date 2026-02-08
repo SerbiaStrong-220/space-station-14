@@ -52,6 +52,12 @@ public sealed class AltMechBoundUserInterface : BoundUserInterface
 
         _menu.OnMaintenancePressed += toggled => SendMessage(new MechMaintenanceToggleMessage(toggled));
 
+        _menu.OnMixButtonPressed += _ => SendMessage(new MechAirMixMessage(_));
+
+        _menu.OnSealButtonPressed += _ => SendMessage(new MechSealMessage(_));
+
+        _menu.OnDetachTankButtonPressed += _ => SendMessage(new MechDetachTankMessage(_));
+
         _menu?.UpdateMechStats();
         _menu?.UpdateEquipmentView();
 

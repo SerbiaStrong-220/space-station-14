@@ -28,6 +28,39 @@ public sealed class MechMaintenanceToggleMessage : BoundUserInterfaceMessage
 }
 
 [Serializable, NetSerializable]
+public sealed class MechSealMessage : BoundUserInterfaceMessage
+{
+    public bool Toggled;
+
+    public MechSealMessage(bool toggled)
+    {
+        Toggled = toggled;
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed class MechAirMixMessage : BoundUserInterfaceMessage
+{
+    public bool Toggled;
+
+    public MechAirMixMessage(bool toggled)
+    {
+        Toggled = toggled;
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed class MechDetachTankMessage : BoundUserInterfaceMessage
+{
+    public bool Toggled;
+
+    public MechDetachTankMessage(bool toggled)
+    {
+        Toggled = toggled;
+    }
+}
+
+[Serializable, NetSerializable]
 public sealed class AltMechBoundUiState : BoundUserInterfaceState
 {
     public Dictionary<NetEntity, BoundUserInterfaceState> EquipmentStates = new();

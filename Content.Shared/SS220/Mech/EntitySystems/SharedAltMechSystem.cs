@@ -28,6 +28,8 @@ using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
+using Content.Shared.Inventory;
+using Content.Shared.Inventory;
 
 namespace Content.Shared.SS220.Mech.Systems;
 
@@ -49,6 +51,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifier = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
 
 
     /// <inheritdoc/>
@@ -118,6 +121,8 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         //SS220-MechClothingInHandsFix
         ent.Comp.PilotSlot = _container.EnsureContainer<ContainerSlot>(ent.Owner, ent.Comp.PilotSlotId);
+
+        ent.Comp.TankSlot = _container.EnsureContainer<ContainerSlot>(ent.Owner, ent.Comp.TankSlotId);
 
         ent.Comp.OverallMass += ent.Comp.OwnMass;
 
@@ -193,7 +198,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         //}
 
         //_actions.AddAction(pilot, ref component.MechCycleActionEntity, component.MechCycleAction, mech);
-        //_actions.AddAction(pilot, ref component.MechUiActionEntity, component.MechUiAction, mech);
+        _actions.AddAction(pilot, ref component.MechUiActionEntity, component.MechUiAction, mech);
         _actions.AddAction(pilot, ref component.MechEjectActionEntity, component.MechEjectAction, mech);
     }
 
@@ -525,6 +530,14 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         if (toInsert == null || component.PilotSlot.ContainedEntity == toInsert)
             return false;
+
+        if (TryComp<InventoryComponent>(toInsert, out var inventoryComp))
+        {
+            foreach (var slot in component.SlotsToDrop)
+            {
+                _inventory.TryUnequip((EntityUid)toInsert, slot);
+            }    
+        }
 
         if (!CanInsert(uid, toInsert.Value, component))
             return false;

@@ -65,8 +65,6 @@
         location: Right
         whitelist:
           sizes:
-          - Large
-          - Huge
           - Ginormous
   - type: Item
     inhandVisuals:
@@ -93,8 +91,6 @@
         location: Left
         whitelist:
           sizes:
-          - Large
-          - Huge
           - Ginormous
   - type: Item
     inhandVisuals:

@@ -14,6 +14,7 @@
   - type: MechRobot #SS220-AddMechToClothing
   - type: MechAir
   - type: PowerCellDraw
+  - type: Language
   - type: AirFilter
     # everything except oxygen and nitrogen
     gases:
@@ -101,10 +102,18 @@
         layer:
         - MobLayer
   - type: Appearance
+  - type: IntrinsicRadioReceiver
+  - type: ActiveRadio
+    channels:
+    - Binary
+    - Common
+    - Science
+  - type: ZombieImmune
   - type: ContainerContainer
     containers:
       mech-pilot-slot: !type:ContainerSlot
       mech-battery-slot: !type:ContainerSlot
+      mech-tank-slot: !type:ContainerSlot
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Metallic
@@ -158,3 +167,13 @@
 - type: inventoryTemplate
   id: mech
   slots:
+  - name: belt
+    slotTexture: belt
+    fullTextureName: template_small
+    slotFlags: BELT
+    slotGroup: SecondHotbar
+    stripTime: 15
+    uiWindowPos: 1,0
+    strippingWindowPos: 0,0
+    offset: 0.0, 2.0
+    displayName: Belt

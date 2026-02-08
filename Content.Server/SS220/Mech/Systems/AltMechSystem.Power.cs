@@ -90,7 +90,8 @@ public sealed partial class AltMechSystem
         {
             mechComp.Online = true;
 
-            TransferMindIntoMech((mech, mechComp));
+            if(mechComp.PilotSlot.ContainedEntity != null)
+                TransferMindIntoMech((mech, mechComp));
 
             if (mechComp.ContainerDict["chassis"].ContainedEntity != null)
             {
