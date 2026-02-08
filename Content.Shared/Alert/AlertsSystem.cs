@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Content.Shared.SS220.Mech.Components;
 
 namespace Content.Shared.Alert;
 
@@ -160,6 +161,9 @@ public abstract class AlertsSystem : EntitySystem
             return;
         }
 
+        if(TryComp<AltMechPilotComponent> (entity.Owner,out var pilotComp))//SS220 mech rework
+            ShowAlert(pilotComp.Mech, state);//SS220 mech rework
+
         // Check whether the alert category we want to show is already being displayed, with the same type,
         // severity, and cooldown.
         if (entity.Comp.Alerts.TryGetValue(alert.AlertKey, out var alertStateCallback))
@@ -242,6 +246,9 @@ public abstract class AlertsSystem : EntitySystem
             return;
         }
 
+        if (TryComp<AltMechPilotComponent>(entity.Owner, out var pilotComp))//SS220 mech rework
+            ClearAlertCategory(pilotComp.Mech, category);//SS220 mech rework
+
         AfterClearAlert((entity, entity.Comp));
 
         Dirty(entity);
@@ -264,6 +271,9 @@ public abstract class AlertsSystem : EntitySystem
             {
                 return;
             }
+
+            if (TryComp<AltMechPilotComponent>(entity.Owner, out var pilotComp))//SS220 mech rework
+                ClearAlert(pilotComp.Mech, alertType);//SS220 mech rework
 
             AfterClearAlert((entity, entity.Comp));
 

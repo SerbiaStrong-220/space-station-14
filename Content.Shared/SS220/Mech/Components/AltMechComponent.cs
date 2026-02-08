@@ -235,7 +235,7 @@ public sealed partial class AltMechComponent : Component
     /// This needs to be redone
     /// when mech internals are added
     /// </remarks>
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [AutoNetworkedField]
     public bool Airtight;
 
     #region Action Prototypes

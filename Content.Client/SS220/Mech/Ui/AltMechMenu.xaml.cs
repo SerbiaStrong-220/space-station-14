@@ -121,6 +121,11 @@ public sealed partial class AltMechMenu : FancyWindow
         }
     }
 
+    public void SetSeal(bool Toggled)
+    {
+        Seal.Pressed = Toggled;
+    }
+
     public void SetEntity(EntityUid? uid, MechPartVisualLayers part)
     {
         if (!spriteViewDict.ContainsKey(part))

@@ -8,3 +8,5 @@ mech-no-equipment-selected = нет выбранного снаряжения
 mech-not-enough-energy = недостаточно энергии
 
 mech-maintenance-mode-button = Техобслуживание
+
+mech-seal-button = Герметизация

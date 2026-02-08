@@ -62,6 +62,7 @@ public sealed class AltMechBoundUserInterface : BoundUserInterface
         _menu?.UpdateEquipmentView();
 
         _menu?.SetMaintenance(mechComp.MaintenanceMode);
+        _menu?.SetSeal(mechComp.Airtight);
     }
 
     protected void UpdateStateAfterButtonPressed(string _)

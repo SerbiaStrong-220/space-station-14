@@ -12,7 +12,7 @@
                     VerticalAlignment="Top"
                     VerticalExpand="False"/>
                 <Button Name="Seal"
-                    Text="{Loc 'mech-maintenance-mode-button'}"
+                    Text="{Loc 'mech-seal-button'}"
                     TextAlign="Center"
                     ToggleMode="True"
                     VerticalAlignment="Top"

@@ -12,36 +12,11 @@
   - type: MobMover
   - type: AltMech
   - type: MechRobot #SS220-AddMechToClothing
-  - type: MechAir
   - type: PowerCellDraw
   - type: Language
-  - type: AirFilter
-    # everything except oxygen and nitrogen
-    gases:
-    - CarbonDioxide
-    - Plasma
-    - Tritium
-    - WaterVapor
-    - Ammonia
-    - NitrousOxide
-    - Frezon
-    #- Helium3 TODO: fusion
-    # remove everything except oxygen to maintain oxygen ratio
-    overflowGases:
-    - Nitrogen
-    - CarbonDioxide
-    - Plasma
-    - Tritium
-    - WaterVapor
-    - Ammonia
-    - NitrousOxide
-    - Frezon
-    #- Helium3 TODO: fusion
-  - type: AirIntake
-  # for intake and filter to work
-  - type: AtmosDevice
-    requireAnchored: false
-    joinSystem: true
+  - type: PressureProtection #After some research i have decided to get rid of MechAir as there will be basically no difference in game but larger amounts of work and space for bugs
+    highPressureMultiplier: 0.05
+    lowPressureMultiplier: 1000
   - type: MobCollision
     colliding: false
     bufferAccumulator: 0
@@ -65,6 +40,9 @@
   - type: InteractionOutline
   - type: Inventory
     templateId: mech
+  - type: TemperatureProtection
+    heatingCoefficient: 0.005
+    coolingCoefficient: 0.005
   - type: MovementSpeedModifier
     baseWalkSpeed: 1
     baseSprintSpeed: 2
@@ -167,7 +145,7 @@
 - type: inventoryTemplate
   id: mech
   slots:
-  - name: belt
+  - name: beltMech
     slotTexture: belt
     fullTextureName: template_small
     slotFlags: BELT

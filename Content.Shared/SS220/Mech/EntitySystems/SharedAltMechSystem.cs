@@ -570,8 +570,10 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         RemoveUser(uid, pilot);
         _container.RemoveEntity(uid, pilot);
+
         if (TryComp<ArmorBlockComponent>(uid, out var blockComp))
             blockComp.Owner = null;
+
         return true;
     }
 
