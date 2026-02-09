@@ -45,7 +45,7 @@ public sealed class MartialArtsTest
         damage: 50
         ignoreResist: true
       - !type:ApplyStatusEffectCombatEffect
-        effect: SlowedDown
+        effect: StatusEffectMartialArtSlowdown
         time: 5
         timeLimit: 30
         refresh: false
@@ -54,6 +54,8 @@ public sealed class MartialArtsTest
   id: MobMartialArtsDummy
   components:
   - type: Sprite
+  - type: DoAfter
+  - type: StatusEffectContainer
   - type: MartialArtist
   - type: MartialArtsTarget
   - type: Physics
@@ -61,9 +63,6 @@ public sealed class MartialArtsTest
   - type: MovementSpeedModifier
   - type: Damageable
     damageContainer: Biological
-  - type: StatusEffects
-    allowed:
-    - SlowedDown
   - type: MobState
   - type: MobThresholds
     thresholds:
