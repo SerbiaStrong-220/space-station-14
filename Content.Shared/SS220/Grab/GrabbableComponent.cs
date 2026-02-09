@@ -12,4 +12,7 @@ public sealed partial class GrabbableComponent : Component
 
     [DataField, AutoNetworkedField]
     public GrabStage GrabStage = GrabStage.None;
+
+    [DataField, AutoNetworkedField]
+    public string? GrabJointId;
 }

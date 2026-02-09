@@ -17,6 +17,9 @@ public sealed partial class GrabberComponent : Component
     public TimeSpan GrabDelay = TimeSpan.FromSeconds(5);
 
     [DataField, AutoNetworkedField]
+    public float Range = 1f;
+
+    [DataField, AutoNetworkedField]
     public SoundSpecifier GrabSound = new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg");
 
     [DataField, AutoNetworkedField]
