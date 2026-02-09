@@ -30,26 +30,22 @@ public sealed partial class ApplyStatusEffectCombatEffect : CombatSequenceEffect
             return;
         }
 
-        var targetTime = Time;
+        var toAdd = Time;
 
         if (status.TryGetTime(target, StatusEffect, out var effect))
         {
-            var (_, endTime, startTime) = effect;
+            var (_, endTime, _) = effect;
 
-            if (endTime == null)
-                return;
-
-            if (startTime == null)
-                return;
-
-            if (TimeLimit != null && !Refresh)
+            if (endTime != null && TimeLimit != null)
             {
-                var curTime = endTime.Value - startTime.Value;
+                var remaining = Timing.CurTime < endTime.Value ? endTime.Value - Timing.CurTime : TimeSpan.Zero;
 
-                targetTime = curTime + Time < TimeLimit.Value ? curTime + Time : TimeLimit.Value;
+                toAdd = TimeLimit.Value - remaining;
+                if (toAdd > Time) toAdd = Time;
             }
         }
 
-        status.TryAddStatusEffectDuration(target, StatusEffect, targetTime);
+        if (toAdd > TimeSpan.Zero)
+            status.TryAddStatusEffectDuration(target, StatusEffect, toAdd);
     }
 }

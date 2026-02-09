@@ -31,7 +31,7 @@ public sealed partial class WeaponRestrictionMartialArtEffectSystem : BaseMartia
         if ((effect.Whitelist == null || _whitelist.IsWhitelistPass(effect.Whitelist, ev.Weapon)) && (effect.Blacklist == null || _whitelist.IsWhitelistFail(effect.Blacklist, ev.Weapon)))
             return;
 
-        _popup.PopupClient(Loc.GetString("martial-art-effects-weapon-restriction-popup"), uid, uid);
+        _popup.PopupClient(Loc.GetString(effect.PopupMessage), uid, uid);
 
         ev.Cancelled = true;
     }
@@ -41,14 +41,14 @@ public sealed partial class WeaponRestrictionMartialArtEffectSystem : BaseMartia
         if (ev.Cancelled)
             return;
 
-        if (!TryEffect(uid, out var effect))
+        if (!TryEffect(uid, out var effect) || !effect.NoThrow)
             return;
 
         if ((effect.Whitelist == null || _whitelist.IsWhitelistPass(effect.Whitelist, ev.ItemUid)) && (effect.Blacklist == null || _whitelist.IsWhitelistFail(effect.Blacklist, ev.ItemUid)))
             return;
 
         // the throw attempt being raised only on server, when it will be changed by officials (i'm sure about that) you probably should change method to PopupClient - Lokilife 05.12.2025
-        _popup.PopupEntity(Loc.GetString("martial-art-effects-weapon-restriction-popup"), uid, uid);
+        _popup.PopupEntity(Loc.GetString(effect.ThrowPopupMessage), uid, uid);
 
         ev.Cancel();
     }
@@ -61,6 +61,12 @@ public sealed partial class WeaponRestrictionMartialArtEffect : MartialArtEffect
 
     [DataField]
     public EntityWhitelist? Blacklist;
+
+    [DataField]
+    public LocId PopupMessage = "martial-art-effects-weapon-restriction-popup";
+
+    [DataField]
+    public LocId ThrowPopupMessage = "martial-art-effects-weapon-restriction-popup";
 
     /// <summary>
     /// When true the items that fails whitelist or blacklist cannot be thrown

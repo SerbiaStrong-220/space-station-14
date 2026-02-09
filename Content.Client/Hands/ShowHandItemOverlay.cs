@@ -29,14 +29,21 @@ namespace Content.Client.Hands
         private readonly MartialArtsSystem _martial = default!; // SS220-MartialArts
 
         // SS220-MartialArts-Start
-        private static readonly Color MartialArtsIconsModulate = Color.White.WithAlpha(0.75f);
-        private static readonly ResPath MartialArtsActionsRsi =
+        private readonly Color _martialArtsIconsModulate = Color.White.WithAlpha(0.75f);
+        private readonly ResPath _martialArtsActionsRsi =
             new ResPath("/Textures/SS220/Interface/Misc/martial_arts_actions.rsi");
 
         private const float PerformedStepsVerticalMultiplier = 2f;
         private const float PerformedStepsIndexOffset = 1f;
         private const float PerformedStepsYDivisor = 1.8f;
         private const float PerformedStepsHalfDivisor = 2f;
+
+        private static readonly Dictionary<CombatSequenceStep, string> StepToString = new()
+        {
+            { CombatSequenceStep.Harm, "harm" },
+            { CombatSequenceStep.Push, "push" },
+            { CombatSequenceStep.Grab, "grab" }
+        };
         // SS220-MartialArts-End
 
         private HandsSystem? _hands;
@@ -123,9 +130,9 @@ namespace Content.Client.Hands
 
                 if (combo is { Count: > 0 })
                 {
-                    if (!_resourceCache.TryGetResource<RSIResource>(MartialArtsActionsRsi, out var rsiResource))
+                    if (!_resourceCache.TryGetResource<RSIResource>(_martialArtsActionsRsi, out var rsiResource))
                     {
-                        DebugTools.Assert($"Couldn't get resource for martial arts actions, expected path: {MartialArtsActionsRsi.CanonPath}");
+                        DebugTools.Assert($"Couldn't get resource for martial arts actions, expected path: {_martialArtsActionsRsi.CanonPath}");
                         return;
                     }
 
@@ -133,9 +140,16 @@ namespace Content.Client.Hands
 
                     for (var i = 0; i < combo.Count; i++)
                     {
-                        if (!rsiActual.TryGetState(combo[i].ToString().ToLower(), out var state))
+                        var step = combo[i];
+                        if (!StepToString.TryGetValue(step, out var stateName))
                         {
-                            DebugTools.Assert($"No RSI state could be found for state \"{combo[i].ToString().ToLower()}\" in {rsiActual.Path}");
+                            DebugTools.Assert($"No string representation found for martial arts step \"{step}\"");
+                            continue;
+                        }
+
+                        if (!rsiActual.TryGetState(stateName, out var state))
+                        {
+                            DebugTools.Assert($"No RSI state could be found for state \"{stateName}\" in {rsiActual.Path}");
                             continue;
                         }
 
@@ -148,7 +162,7 @@ namespace Content.Client.Hands
 
                         screen.DrawTextureRect(texture,
                             UIBox2.FromDimensions(mousePos.Position + offsetVec2 - size / PerformedStepsHalfDivisor, size),
-                            MartialArtsIconsModulate);
+                            _martialArtsIconsModulate);
                     }
                 }
             }

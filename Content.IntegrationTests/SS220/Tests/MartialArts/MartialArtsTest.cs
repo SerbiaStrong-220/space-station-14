@@ -96,6 +96,9 @@ public sealed class MartialArtsTest
   - type: Tag
     tags:
     - InstantDoAfters
+  - type: Grabber
+    grabDelay: 0
+  - type: Grabbable
   - type: MeleeWeapon
     soundHit:
       collection: Punch
@@ -175,7 +178,6 @@ public sealed class MartialArtsTest
         await pair.RunTicksSync(1);
 
         var meleeSys = server.EntMan.System<MeleeWeaponSystem>();
-        // var pullingSys = server.EntMan.System<PullingSystem>();
         var grabSys = server.EntMan.System<GrabSystem>();
         var artsSys = server.EntMan.System<MartialArtsSystem>();
 

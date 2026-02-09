@@ -27,14 +27,26 @@ public sealed partial class ApplyOldStatusEffectCombatEffect : CombatSequenceEff
     {
         var status = Entity.System<StatusEffectsSystem>();
 
-        var targetTime = Time;
-
-        if (TimeLimit != null && status.TryGetTime(target, StatusEffect, out var time))
+        if (Refresh)
         {
-            var curTime = time.Value.Item2 - time.Value.Item1;
-            targetTime = curTime + Time < TimeLimit.Value ? curTime + Time : TimeLimit.Value;
+            status.TryAddStatusEffect(target, StatusEffect, Time, true, Component);
+            return;
         }
 
-        status.TryAddStatusEffect(target, StatusEffect, targetTime, Refresh, Component);
+        var toAdd = Time;
+        if (TimeLimit != null)
+        {
+            var remaining = TimeSpan.Zero;
+            if (status.TryGetTime(target, StatusEffect, out var time))
+            {
+                remaining = Timing.CurTime < time.Value.Item2 ? time.Value.Item2 - Timing.CurTime : TimeSpan.Zero;
+            }
+
+            toAdd = TimeLimit.Value - remaining;
+            if (toAdd > Time) toAdd = Time;
+        }
+
+        if (toAdd > TimeSpan.Zero)
+            status.TryAddStatusEffect(target, StatusEffect, toAdd, false, Component);
     }
 }
