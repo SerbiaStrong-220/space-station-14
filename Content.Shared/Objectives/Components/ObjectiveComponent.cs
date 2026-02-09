@@ -16,17 +16,31 @@ public sealed partial class ObjectiveComponent : Component
     /// <summary>
     /// Difficulty rating used to avoid assigning too many difficult objectives.
     /// </summary>
-    [DataField(required: true)]
+    [DataField] // [DataField(required: true)] // ss220 add custom goals x2
     public float Difficulty;
 
     /// <summary>
     /// Organisation that issued this objective, used for grouping and as a header above common objectives.
     /// </summary>
-    [DataField("issuer", required: true)]
+    [DataField("issuer")] // [DataField("issuer", required: true)] // ss220 add custom goals x2
     private LocId Issuer { get; set; }
 
-    [ViewVariables(VVAccess.ReadOnly)]
-    public string LocIssuer => Loc.GetString(Issuer);
+    // ss220 add custom goals x2 start
+    [ViewVariables]
+    public string LocIssuer
+    {
+        get
+        {
+            var locManager = IoCManager.Resolve<ILocalizationManager>();
+            if (locManager.TryGetString(Issuer, out var value))
+                return value;
+
+            return Issuer;
+        }
+
+        set => Issuer = value;
+    }
+    // ss220 add custom goals x2 end
 
     /// <summary>
     /// Unique objectives can only have 1 per prototype id.
@@ -41,6 +55,11 @@ public sealed partial class ObjectiveComponent : Component
     /// </summary>
     [DataField]
     public SpriteSpecifier? Icon;
+
+    // ss220 add custom goals x2 start
+    [DataField]
+    public bool? Completed;
+    // ss220 add custom goals x2 end
 }
 
 /// <summary>

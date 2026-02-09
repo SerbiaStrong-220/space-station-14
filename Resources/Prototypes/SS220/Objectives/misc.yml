@@ -1,0 +1,3 @@
+- type: entity
+  parent: BaseObjective
+  id: FreeObjective

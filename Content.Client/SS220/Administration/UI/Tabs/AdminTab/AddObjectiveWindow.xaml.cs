@@ -17,6 +17,13 @@ public sealed partial class AddObjectiveWindow : DefaultWindow
     private string _input = string.Empty;
     private string _entityId = string.Empty;
 
+    private string _customName = string.Empty;
+    private string _customDesc = string.Empty;
+    private string _customIcon = string.Empty;
+    private string _customIssuer = string.Empty;
+
+    private bool _customObjective;
+
     public AddObjectiveWindow()
     {
         RobustXamlLoader.Load(this);
@@ -26,8 +33,53 @@ public sealed partial class AddObjectiveWindow : DefaultWindow
     {
         ApplyButton.OnPressed += _ => OnApplyButtonPressed(false);
         ForceAssignButton.OnPressed += _ => OnApplyButtonPressed(true);
-        ObjectiveLineEdit.OnTextChanged += args => _input = args.Text;
-        EntityIdLineEdit.OnTextChanged += args => _entityId = args.Text;
+        ObjectiveLineEdit.OnTextChanged += args =>
+        {
+            _input = args.Text;
+            UpdateInputStates();
+        };
+
+        EntityIdLineEdit.OnTextChanged += args =>
+        {
+            _entityId = args.Text;
+            UpdateInputStates();
+        };
+
+        CustomObjectiveNameLineEdit.OnTextChanged += args =>
+        {
+            _customName = args.Text;
+            UpdateInputStates();
+        };
+
+        CustomObjectiveDescLineEdit.OnTextChanged += args =>
+        {
+            _customDesc = args.Text;
+            UpdateInputStates();
+        };
+
+        CustomObjectiveIconLineEdit.OnTextChanged += args =>
+        {
+            _customIcon = args.Text;
+            UpdateInputStates();
+        };
+
+        CustomObjectiveIssuerLineEdit.OnTextChanged += args =>
+        {
+            _customIssuer = args.Text;
+            UpdateInputStates();
+        };
+    }
+
+    private void UpdateInputStates()
+    {
+        var hasUsualText = !string.IsNullOrWhiteSpace(_input) || !string.IsNullOrWhiteSpace(_entityId);
+        var hasCustomText = !string.IsNullOrWhiteSpace(_customName) || !string.IsNullOrWhiteSpace(_customDesc) ||
+                            !string.IsNullOrWhiteSpace(_customIcon) || !string.IsNullOrWhiteSpace(_customIssuer);
+
+        UsualObjectiveContainer.Visible = !hasCustomText;
+        CustomObjectiveContainer.Visible = !hasUsualText;
+
+        _customObjective = hasCustomText;
     }
 
     public void SetAntagonist(ICommonSession antagonistPlayerName)
@@ -37,9 +89,21 @@ public sealed partial class AddObjectiveWindow : DefaultWindow
 
     private void OnApplyButtonPressed(bool force)
     {
-        if (_input.Length == 0)
-            return;
+        var clientHost = IoCManager.Resolve<IClientConsoleHost>();
 
-        IoCManager.Resolve<IClientConsoleHost>().ExecuteCommand($"addobjective {_selectedAntagonist} {_input} {_entityId} {force}");
+        if (_customObjective)
+        {
+            if (string.IsNullOrWhiteSpace(_customName))
+                return;
+
+            clientHost.ExecuteCommand($"addcustomobjective {_selectedAntagonist} \"{_customName}\" \"{_customDesc}\" \"{_customIcon}\" \"{_customIssuer}\"");
+        }
+        else
+        {
+            if (string.IsNullOrWhiteSpace(_input))
+                return;
+
+            clientHost.ExecuteCommand($"addobjective {_selectedAntagonist} {_input} {_entityId} {force}");
+        }
     }
 }

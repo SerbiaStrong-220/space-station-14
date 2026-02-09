@@ -3,9 +3,19 @@
 <DefaultWindow xmlns="https://spacestation14.io"
                Title="{Loc 'ui-add-objective-title'}">
     <BoxContainer Orientation="Vertical" SeparationOverride="4" MinSize="340 60">
-        <BoxContainer Orientation="Vertical">
+        <BoxContainer Orientation="Vertical" Name="CustomObjectiveContainer">
+            <RichTextLabel Text="{Loc 'ui-add-custom-objective-text'}"/>
+            <LineEdit Name="CustomObjectiveNameLineEdit" Access="Public" HorizontalExpand="True" PlaceHolder="{Loc 'ui-add-custom-objective-name-placeholder'}"/>
+            <LineEdit Name="CustomObjectiveDescLineEdit" Access="Public" HorizontalExpand="True" PlaceHolder="{Loc 'ui-add-custom-objective-desc-placeholder'}"/>
+            <LineEdit Name="CustomObjectiveIconLineEdit" Access="Public" HorizontalExpand="True" PlaceHolder="{Loc 'ui-add-custom-objective-icon-placeholder'}"/>
+            <LineEdit Name="CustomObjectiveIssuerLineEdit" Access="Public" HorizontalExpand="True" PlaceHolder="{Loc 'ui-add-custom-objective-issuer-placeholder'}"/>
+            <PanelContainer StyleClasses="LowDivider" Margin="0 10 0 10"/>
+        </BoxContainer>
+        <BoxContainer Orientation="Vertical" Name="UsualObjectiveContainer">
+            <RichTextLabel Text="{Loc 'ui-add-usual-objective-text'}"/>
             <LineEdit Name="ObjectiveLineEdit" Access="Public" HorizontalExpand="True" PlaceHolder="{Loc 'ui-add-objective-line-edit-placeholder'}"/>
             <LineEdit Name="EntityIdLineEdit" Access="Public" HorizontalExpand="True" PlaceHolder="{Loc 'ui-add-objective-entity-id-line-edit-placeholder'}"/>
+            <PanelContainer StyleClasses="LowDivider" Margin="0 10 0 10"/>
         </BoxContainer>
         <Button Name="ForceAssignButton" Text="{Loc 'ui-add-objective-force-assign-text'}"/>
         <Button Name="ApplyButton" Access="Public" Text="{Loc 'ui-add-objective-apply'}"/>
