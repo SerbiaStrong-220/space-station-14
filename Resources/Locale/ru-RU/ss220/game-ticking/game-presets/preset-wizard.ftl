@@ -38,7 +38,7 @@ wizard-title = Волшебник
 wizard-description = На станции Волшебник! Никогда не знаешь, что они могут выкинуть.
 
 roles-antag-wizard-name = Волшебник
-roles-antag-wizard-objective = Преподте им урок, который они не забудут.
+roles-antag-wizard-objective = Преподайте им урок, который они не забудут.
 
 wizard-role-greeting =
     ТЫ — ВОЛШЕБНИК!
