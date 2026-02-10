@@ -5,12 +5,12 @@ using Content.Server.Popups;
 using Content.Shared.Alert;
 using Content.Shared.Popups;
 using Content.Shared.SS220.ClinkGlasses;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Audio;
-using Robust.Shared.Audio.Systems;
-using System.Numerics;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.IdentityManagement;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Timing;
+using System.Numerics;
 
 namespace Content.Server.SS220.ClinkGlasses;
 
@@ -23,13 +23,9 @@ public sealed class ClinkGlassesSystem : SharedClinkGlassesSystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
 
     private readonly ProtoId<AlertPrototype> _clinkGlassesAlert = "ClinkGlasses";
-
-    private readonly SoundSpecifier _soundOnComplete = new SoundPathSpecifier("/Audio/SS220/Effects/clink_glasses.ogg")
-    {
-        Params = AudioParams.Default.WithVariation(0.5f)
-    };
 
     public override void Initialize()
     {
@@ -38,62 +34,133 @@ public sealed class ClinkGlassesSystem : SharedClinkGlassesSystem
         SubscribeLocalEvent<ClinkGlassesReceiverComponent, ClinkGlassesAlertEvent>(OnClinkGlassesAlertClicked);
     }
 
-    private void OnClinkGlassesAlertClicked(Entity<ClinkGlassesReceiverComponent> receiver, ref ClinkGlassesAlertEvent args)
-    {
-        var loc = Loc.GetString("loc-clink-glasses-success",
-            ("receiver", Identity.Name(receiver.Owner, EntityManager)),
-            ("item", receiver.Comp.Item),
-            ("initiator", Identity.Name(receiver.Comp.Initiator, EntityManager)));
-
-        _popupSystem.PopupEntity(loc, receiver.Owner, PopupType.Medium);
-
-        _audio.PlayPvs(_soundOnComplete, receiver.Owner);
-
-        _alerts.ClearAlert(receiver.Owner, _clinkGlassesAlert);
-
-        _entManager.RemoveComponent<ClinkGlassesReceiverComponent>(receiver);
-
-        var xform = Transform(receiver.Owner);
-
-        var initiatorPos = _transformSystem.GetWorldPosition(receiver.Comp.Initiator);
-
-        var localPos = Vector2.Transform(initiatorPos, _transformSystem.GetInvWorldMatrix(xform));
-        localPos = xform.LocalRotation.RotateVec(localPos);
-        _melee.DoLunge(receiver.Owner, receiver.Owner, Angle.Zero, localPos, null, false);
-    }
-
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
-        var enumerator = EntityQueryEnumerator<ClinkGlassesReceiverComponent, TransformComponent>();
-        while (enumerator.MoveNext(out var uid, out var comp, out _))
+        var enumerator = EntityQueryEnumerator<ClinkGlassesReceiverComponent>();
+        while (enumerator.MoveNext(out var uid, out var clinkGlassesComp))
         {
-            var initiatorCoords = Transform(comp.Initiator).Coordinates;
-            var receiverCoords = Transform(uid).Coordinates;
-
-            if (!initiatorCoords.TryDistance(EntityManager, receiverCoords, out var distance) || distance > comp.ReceiveRange)
+            // Check passed time
+            clinkGlassesComp.LifeTime -= frameTime;
+            if (float.IsNegative(clinkGlassesComp.LifeTime))
             {
-                _alerts.ClearAlert(uid, _clinkGlassesAlert);
-                _entManager.RemoveComponent<ClinkGlassesReceiverComponent>(uid);
+                EndAction(uid);
+                continue;
             }
+
+            // Check validity
+            if (!HasComp<ClinkGlassesInitiatorComponent>(uid) || !HasComp<ClinkGlassesInitiatorComponent>(clinkGlassesComp.Initiator))
+            {
+                EndAction(uid);
+                continue;
+            }
+
+            // Check distance
+            var initiatorCoords = Transform(clinkGlassesComp.Initiator).Coordinates;
+            var receiverCoords = Transform(uid).Coordinates;
+            if (!initiatorCoords.TryDistance(EntityManager, receiverCoords, out var distance) || distance > clinkGlassesComp.ReceiveRange)
+                EndAction(uid);
         }
     }
 
-    protected override void DoClinkGlassesOffer(EntityUid user, EntityUid target)
+    private void OnClinkGlassesAlertClicked(Entity<ClinkGlassesReceiverComponent> receiver, ref ClinkGlassesAlertEvent args)
     {
-        if (!_hands.TryGetActiveItem(user, out var item) || !HasComp<ClinkGlassesComponent>(item))
+        if (!_hands.TryGetActiveItem(receiver.Owner, out var itemInHand) || !HasComp<ClinkGlassesComponent>(itemInHand))
             return;
 
-        var itemReceiver = EnsureComp<ClinkGlassesReceiverComponent>(target);
-        itemReceiver.Initiator = user;
-        itemReceiver.Item = (EntityUid)item;
-        _alerts.ShowAlert(target, _clinkGlassesAlert);
+        var item = (EntityUid)itemInHand;
 
-        var loc = Loc.GetString("loc-clink-glasses-attempt",
-            ("initiator", Identity.Name(user, EntityManager)),
+        if (receiver.Comp.Initiator != receiver.Owner)
+            DoClinkGlass(receiver.Owner, receiver.Comp, item);
+
+        EndAction(receiver.Owner);
+    }
+
+
+    protected override void DoClinkGlassesOffer(EntityUid initiator, EntityUid receiver, EntityUid item)
+    {
+        if (!TryComp<ClinkGlassesInitiatorComponent>(initiator, out var initiatorComp))
+            return;
+
+        initiatorComp.NextClinkTime = _gameTiming.CurTime + initiatorComp.Cooldown;
+
+        if (TryComp<ClinkGlassesReceiverComponent>(initiator, out var receiverCompOnInitiator) && receiverCompOnInitiator.Initiator == receiver)
+        {
+            // Initiator already have offer from receiver. Clink glasses and remove comps from both
+            DoClinkGlass(initiator, receiverCompOnInitiator, item);
+            EndAction(initiator);
+            EndAction(receiver);
+            return;
+        }
+
+        if (TryComp<ClinkGlassesReceiverComponent>(receiver, out var receiverCompOnReceiver) && receiverCompOnReceiver.Initiator == receiver)
+        {
+            // Receiver raised glass for everyone. Just clink glasses
+            var tempComp = new ClinkGlassesReceiverComponent
+            {
+                Initiator = receiver
+            };
+            DoClinkGlass(initiator, tempComp, item);
+            return;
+        }
+
+        MarkEntityForAction(initiator, receiver);
+
+        var loc = Loc.GetString("clink-glasses-attempt",
+            ("initiator", Identity.Name(initiator, EntityManager)),
             ("item", item));
 
-        _popupSystem.PopupEntity(loc, user, PopupType.Medium);
+        _popupSystem.PopupEntity(loc, initiator);
+    }
+
+    protected override void DoRaiseGlass(EntityUid initiator, EntityUid item)
+    {
+        MarkEntityForAction(initiator, initiator);
+
+        var loc = Loc.GetString("clink-glasses-raised",
+            ("initiator", Identity.Name(initiator, EntityManager)),
+            ("item", item));
+
+        _popupSystem.PopupEntity(loc, initiator, PopupType.Medium);
+    }
+
+    private void DoClinkGlass(EntityUid receiver, ClinkGlassesReceiverComponent component, EntityUid item)
+    {
+        var loc = Loc.GetString("clink-glasses-success",
+            ("receiver", Identity.Name(receiver, EntityManager)),
+            ("item", item),
+            ("initiator", Identity.Name(component.Initiator, EntityManager)));
+
+        _popupSystem.PopupEntity(loc, receiver);
+
+        if (TryComp<ClinkGlassesComponent>(item, out var comp))
+            _audio.PlayPvs(comp.SoundOnComplete, receiver);
+
+        // Animation
+        var xform = Transform(receiver);
+        var initiatorPos = _transformSystem.GetWorldPosition(component.Initiator);
+        var localPos = Vector2.Transform(initiatorPos, _transformSystem.GetInvWorldMatrix(xform));
+        localPos = xform.LocalRotation.RotateVec(localPos);
+        _melee.DoLunge(receiver, receiver, Angle.Zero, localPos, null, false);
+    }
+
+    private void MarkEntityForAction(EntityUid initiator, EntityUid receiver)
+    {
+        if (!TryComp<ClinkGlassesInitiatorComponent>(initiator, out var initiatorComp))
+            return;
+
+        initiatorComp.NextClinkTime = _gameTiming.CurTime + initiatorComp.Cooldown;
+
+        var receiverComp = EnsureComp<ClinkGlassesReceiverComponent>(receiver);
+        receiverComp.Initiator = initiator;
+        receiverComp.LifeTime = new ClinkGlassesReceiverComponent().LifeTime;
+        _alerts.ShowAlert(receiver, _clinkGlassesAlert);
+    }
+
+    private void EndAction(EntityUid uid)
+    {
+        _alerts.ClearAlert(uid, _clinkGlassesAlert);
+        _entManager.RemoveComponent<ClinkGlassesReceiverComponent>(uid);
     }
 }

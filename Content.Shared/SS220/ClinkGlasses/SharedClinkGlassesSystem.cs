@@ -1,8 +1,9 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.Hands.Components;
+using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Verbs;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.ClinkGlasses;
@@ -10,40 +11,37 @@ namespace Content.Shared.SS220.ClinkGlasses;
 public abstract partial class SharedClinkGlassesSystem : EntitySystem
 {
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
 
     private static readonly SpriteSpecifier VerbIcon = new SpriteSpecifier.Texture(new("/Textures/SS220/Interface/VerbIcons/glass-celebration.png"));
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<HandsComponent, GetVerbsEvent<Verb>>(AddClinkGlassesVerb);
+        SubscribeLocalEvent<ClinkGlassesComponent, GetVerbsEvent<Verb>>(AddRaiseGlassVerb);
+        SubscribeLocalEvent<ClinkGlassesComponent, GotEquippedHandEvent>(OnGotEquippedHand);
+        SubscribeLocalEvent<ClinkGlassesComponent, GotUnequippedHandEvent>(OnGotUnequippedHand);
+        SubscribeLocalEvent<ClinkGlassesInitiatorComponent, GetVerbsEvent<AlternativeVerb>>(AddOfferClinkGlassesVerb);
     }
 
-    private void AddClinkGlassesVerb(Entity<HandsComponent> ent, ref GetVerbsEvent<Verb> args)
+
+    private void AddRaiseGlassVerb(Entity<ClinkGlassesComponent> ent, ref GetVerbsEvent<Verb> args)
     {
         if (!args.CanInteract || !args.CanAccess)
             return;
 
-        var itemInitiator = _hands.GetActiveItem(args.User);
-
-        if (itemInitiator == null || !HasComp<ClinkGlassesComponent>(itemInitiator))
+        if (!TryComp<ClinkGlassesInitiatorComponent>(args.User, out var comp))
             return;
 
-        var itemReceiver = _hands.GetActiveItem(args.Target);
-
-        if (itemReceiver == null || !HasComp<ClinkGlassesComponent>(itemReceiver))
-            return;
-
-        if (args.User == args.Target)
+        if (_gameTiming.CurTime < comp.NextClinkTime)
             return;
 
         var user = args.User;
-        var target = args.Target;
         var verb = new Verb
         {
-            Text = Loc.GetString("clink-glasses-verb-text"),
+            Text = Loc.GetString("raise-glass-verb-text"),
             Act = () =>
             {
-                DoClinkGlassesOffer(user, target);
+                DoRaiseGlass(user, ent.Owner);
             },
             Icon = VerbIcon,
         };
@@ -51,5 +49,62 @@ public abstract partial class SharedClinkGlassesSystem : EntitySystem
         args.Verbs.Add(verb);
     }
 
-    protected abstract void DoClinkGlassesOffer(EntityUid user, EntityUid target);
+    private void OnGotEquippedHand(Entity<ClinkGlassesComponent> ent, ref GotEquippedHandEvent args)
+    {
+        if (!_gameTiming.IsFirstTimePredicted)
+            return;
+
+        EnsureComp<ClinkGlassesInitiatorComponent>(args.User, out var comp);
+        comp.Items.Add(ent);
+    }
+
+    private void OnGotUnequippedHand(Entity<ClinkGlassesComponent> ent, ref GotUnequippedHandEvent args)
+    {
+        if (!_gameTiming.IsFirstTimePredicted)
+            return;
+
+        if (!TryComp<ClinkGlassesInitiatorComponent>(args.User, out var comp))
+            return;
+
+        comp.Items.Remove(ent);
+
+        if (comp.Items.Count == 0)
+            RemComp<ClinkGlassesInitiatorComponent>(args.User);
+    }
+
+    private void AddOfferClinkGlassesVerb(Entity<ClinkGlassesInitiatorComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!args.CanInteract || !args.CanAccess)
+            return;
+
+        if (!TryComp<ClinkGlassesInitiatorComponent>(args.User, out var comp))
+            return;
+
+        if (_gameTiming.CurTime < comp.NextClinkTime)
+            return;
+
+        if (args.User == args.Target)
+            return;
+
+        if (!_hands.TryGetActiveItem(args.User, out var itemInHand) || !HasComp<ClinkGlassesComponent>(itemInHand))
+            return;
+
+        var item = (EntityUid)itemInHand;
+        var initiator = args.User;
+        var receiver = args.Target;
+        var verb = new AlternativeVerb
+        {
+            Text = Loc.GetString("clink-glasses-verb-text"),
+            Act = () =>
+            {
+                DoClinkGlassesOffer(initiator, receiver, item);
+            },
+            Icon = VerbIcon,
+        };
+
+        args.Verbs.Add(verb);
+    }
+
+    protected abstract void DoRaiseGlass(EntityUid initiator, EntityUid item);
+    protected abstract void DoClinkGlassesOffer(EntityUid initiator, EntityUid receiver, EntityUid item);
 }

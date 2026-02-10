@@ -12,5 +12,9 @@ namespace Content.Shared.SS220.ClinkGlasses;
 [NetworkedComponent]
 public sealed partial class ClinkGlassesComponent : Component
 {
-
+    [DataField]
+    public SoundSpecifier SoundOnComplete = new SoundPathSpecifier("/Audio/SS220/Effects/clink_glasses.ogg")
+    {
+        Params = AudioParams.Default.WithVariation(0.15f)
+    };
 }
