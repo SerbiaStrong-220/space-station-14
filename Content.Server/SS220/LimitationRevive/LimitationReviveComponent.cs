@@ -45,7 +45,7 @@ public sealed partial class LimitationReviveComponent : Component
     {
         DamageDict = new()
         {
-            { "Cerebral", 400 }
+            { "Cerebral", 20 }
         },
     };
 
