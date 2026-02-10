@@ -244,18 +244,23 @@ public sealed partial class GunSystem : SharedGunSystem
 
                         if (lastHit != null)
                         {
-                            var dmg = hitscan.Damage;//SS220 shield rework
+                            var dmg = hitscan.Damage; //SS220 shield rework
                             var hitEntity = lastHit.Value;
+
                             //SS220 shield rework begin
-                            var hitName = ToPrettyString(hitEntity);
+
                             var blockEv = new HitscanBlockAttemptEvent(hitscan.Damage);
                             RaiseLocalEvent(lastHit.Value, ref blockEv);
+
                             if(blockEv.CancelledHit)
                             {
                                 if(blockEv.hitColor != null)
                                     _color.RaiseEffect((Color)blockEv.hitColor, new List<EntityUid>() { lastHit.Value }, Filter.Pvs(lastHit.Value, entityManager: EntityManager));
+
                                 _popup.PopupEntity(Loc.GetString("block-shot"), hitEntity);
-                                if (dmg == null) { return; }
+
+                                if (dmg == null)
+                                    continue; 
                             }
 
                             if(!blockEv.CancelledHit)
@@ -263,14 +268,12 @@ public sealed partial class GunSystem : SharedGunSystem
                                 if (hitscan.StaminaDamage > 0f)
                                     _stamina.TakeStaminaDamage(hitEntity, hitscan.StaminaDamage, source: user);
 
-                                //var dmg = hitscan.Damage; SS220 shield rework
-
-                                //var hitName = ToPrettyString(hitEntity); SS220 shield rework
-
                                 if (dmg != null)
                                     dmg = Damageable.TryChangeDamage(hitEntity, dmg * Damageable.UniversalHitscanDamageModifier, origin: user);
                             }
                             //SS220 shield rework end
+
+                            var hitName = ToPrettyString(hitEntity);
 
                             // check null again, as TryChangeDamage returns modified damage values
                             if (dmg != null)
@@ -278,9 +281,7 @@ public sealed partial class GunSystem : SharedGunSystem
                                 if (!Deleted(hitEntity))
                                 {
                                     if (dmg.AnyPositive())
-                                    {
                                         _color.RaiseEffect(Color.Red, new List<EntityUid>() { hitEntity }, Filter.Pvs(hitEntity, entityManager: EntityManager));
-                                    }
 
                                     // TODO get fallback position for playing hit sound.
                                     PlayImpactSound(hitEntity, dmg, hitscan.Sound, hitscan.ForceSound);
@@ -291,6 +292,7 @@ public sealed partial class GunSystem : SharedGunSystem
                                     Logs.Add(LogType.HitScanHit,
                                         $"{ToPrettyString(user.Value):user} hit {hitName:target} using hitscan and dealt {dmg.GetTotal():damage} damage");
                                 }
+
                                 else
                                 {
                                     Logs.Add(LogType.HitScanHit,

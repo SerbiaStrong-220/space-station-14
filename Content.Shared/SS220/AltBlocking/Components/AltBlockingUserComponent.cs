@@ -4,7 +4,8 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.AltBlocking;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent]
+[NetworkedComponent, AutoGenerateComponentState]
 
 public sealed partial class AltBlockingUserComponent : Component
 {
@@ -13,9 +14,6 @@ public sealed partial class AltBlockingUserComponent : Component
     /// </summary>
     [DataField("blockingItemsShields")]
     public List<EntityUid?> BlockingItemsShields = new();
-
-    [AutoNetworkedField]
-    public int randomSeed = 0;//This is NOT for prototyping
 
     [DataField, AutoNetworkedField]
     public bool IsBlocking = false;

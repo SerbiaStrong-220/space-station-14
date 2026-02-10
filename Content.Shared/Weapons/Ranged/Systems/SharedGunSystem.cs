@@ -255,13 +255,10 @@ public abstract partial class SharedGunSystem : EntitySystem
         // ss220 add block heavy attack and shooting while user is down end
 
         //SS220 shield rework begin
-        if (TryComp<AltBlockingUserComponent>(user,out var blockComp))
+        if (TryComp<AltBlockingUserComponent>(user,out var blockComp) && blockComp.IsBlocking)
         {
-            if(blockComp.IsBlocking)
-            {
-                PopupSystem.PopupPredictedCursor(Loc.GetString("actively-blocking-attack"), user);
-                return false;
-            }
+            PopupSystem.PopupPredictedCursor(Loc.GetString("actively-blocking-attack"), user);
+            return false;
         }
         //SS220 shield rework begin
 
@@ -541,14 +538,10 @@ public abstract partial class SharedGunSystem : EntitySystem
     protected void MuzzleFlash(EntityUid gun, AmmoComponent component, Angle worldAngle, EntityUid? user = null)
     {
         //SS220 shield rework begin
-        if (TryComp<AltBlockingUserComponent>(user,out var comp))
-        {
-            if(comp.IsBlocking)
-            {
-                return;
-            }
-        }
+        if (TryComp<AltBlockingUserComponent>(user,out var comp) && comp.IsBlocking)
+            return;
         //SS220 shield rework end
+
         var attemptEv = new GunMuzzleFlashAttemptEvent();
         RaiseLocalEvent(gun, ref attemptEv);
         if (attemptEv.Cancelled)

@@ -13,7 +13,8 @@ public sealed partial class InstastunResistOnActiveBlockingSystem : EntitySystem
     }
     public void OnActiveBlock(EntityUid uid, InstastunResistOnActiveBlockingComponent component, ActiveBlockingEvent args)
     {
-        if (!TryComp<AltBlockingComponent>(uid, out var BlockComp) || !TryComp<AltBlockingUserComponent>(BlockComp.User, out var userComp)) { return; }
+        if (!TryComp<AltBlockingComponent>(uid, out var BlockComp) || !TryComp<AltBlockingUserComponent>(BlockComp.User, out var userComp))
+            return; 
 
         if (args.Active)
         {

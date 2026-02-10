@@ -204,11 +204,9 @@ namespace Content.Shared.ActionBlocker
             {
                 //SS220 shield rework begin
                 if (TryComp<AltBlockingComponent>(target,out var comp) && comp.User != null)
-                {
                     return true;
-                }
-                return false;
                 //SS220 shield rework end
+                return false;
             }
 
             _container.TryGetOuterContainer(uid, Transform(uid), out var outerContainer);

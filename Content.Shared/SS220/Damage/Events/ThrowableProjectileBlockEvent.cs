@@ -7,6 +7,7 @@ namespace Content.Shared.Weapons.Ranged.Events;
 [ByRefEvent]
 public record struct ThrowableProjectileBlockAttemptEvent(DamageSpecifier? damage)
 {
-    public bool Cancelled = false;
+    public bool CancelledHit = false;
+
     public DamageSpecifier? Damage = damage;
 }
