@@ -13,8 +13,13 @@ public sealed partial class ClinkGlassesReceiverComponent : Component
     public float ReceiveRange = 2f;
 
     /// <summary>
-    ///     LifeTime in seconds. When its less than zero, this component should be removed.
+    ///     Default value in seconds for <see cref="LifeTime"/>.
+    /// </summary>
+    public const float BaseLifeTime = 15.0f;
+
+    /// <summary>
+    ///     LifeTime in seconds. When it's less than zero, this component should be removed.
     /// </summary>
     [ViewVariables(VVAccess.ReadOnly)]
-    public float LifeTime = 15.0f;
+    public float LifeTime = BaseLifeTime;
 }

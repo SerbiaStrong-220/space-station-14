@@ -69,10 +69,8 @@ public sealed class ClinkGlassesSystem : SharedClinkGlassesSystem
         if (!_hands.TryGetActiveItem(receiver.Owner, out var itemInHand) || !HasComp<ClinkGlassesComponent>(itemInHand))
             return;
 
-        var item = (EntityUid)itemInHand;
-
         if (receiver.Comp.Initiator != receiver.Owner)
-            DoClinkGlass(receiver.Owner, receiver.Comp, item);
+            DoClinkGlass(receiver.Owner, receiver.Comp.Initiator, itemInHand.Value);
 
         EndAction(receiver.Owner);
     }
@@ -88,7 +86,7 @@ public sealed class ClinkGlassesSystem : SharedClinkGlassesSystem
         if (TryComp<ClinkGlassesReceiverComponent>(initiator, out var receiverCompOnInitiator) && receiverCompOnInitiator.Initiator == receiver)
         {
             // Initiator already have offer from receiver. Clink glasses and remove comps from both
-            DoClinkGlass(initiator, receiverCompOnInitiator, item);
+            DoClinkGlass(initiator, receiverCompOnInitiator.Initiator, item);
             EndAction(initiator);
             EndAction(receiver);
             return;
@@ -97,11 +95,7 @@ public sealed class ClinkGlassesSystem : SharedClinkGlassesSystem
         if (TryComp<ClinkGlassesReceiverComponent>(receiver, out var receiverCompOnReceiver) && receiverCompOnReceiver.Initiator == receiver)
         {
             // Receiver raised glass for everyone. Just clink glasses
-            var tempComp = new ClinkGlassesReceiverComponent
-            {
-                Initiator = receiver
-            };
-            DoClinkGlass(initiator, tempComp, item);
+            DoClinkGlass(initiator, receiver, item);
             return;
         }
 
@@ -125,12 +119,12 @@ public sealed class ClinkGlassesSystem : SharedClinkGlassesSystem
         _popupSystem.PopupEntity(loc, initiator, PopupType.Medium);
     }
 
-    private void DoClinkGlass(EntityUid receiver, ClinkGlassesReceiverComponent component, EntityUid item)
+    private void DoClinkGlass(EntityUid receiver, EntityUid initiator, EntityUid item)
     {
         var loc = Loc.GetString("clink-glasses-success",
             ("receiver", Identity.Name(receiver, EntityManager)),
             ("item", item),
-            ("initiator", Identity.Name(component.Initiator, EntityManager)));
+            ("initiator", Identity.Name(initiator, EntityManager)));
 
         _popupSystem.PopupEntity(loc, receiver);
 
@@ -139,7 +133,7 @@ public sealed class ClinkGlassesSystem : SharedClinkGlassesSystem
 
         // Animation
         var xform = Transform(receiver);
-        var initiatorPos = _transformSystem.GetWorldPosition(component.Initiator);
+        var initiatorPos = _transformSystem.GetWorldPosition(initiator);
         var localPos = Vector2.Transform(initiatorPos, _transformSystem.GetInvWorldMatrix(xform));
         localPos = xform.LocalRotation.RotateVec(localPos);
         _melee.DoLunge(receiver, receiver, Angle.Zero, localPos, null, false);
@@ -154,7 +148,7 @@ public sealed class ClinkGlassesSystem : SharedClinkGlassesSystem
 
         var receiverComp = EnsureComp<ClinkGlassesReceiverComponent>(receiver);
         receiverComp.Initiator = initiator;
-        receiverComp.LifeTime = new ClinkGlassesReceiverComponent().LifeTime;
+        receiverComp.LifeTime = ClinkGlassesReceiverComponent.BaseLifeTime;
         _alerts.ShowAlert(receiver, _clinkGlassesAlert);
     }
 

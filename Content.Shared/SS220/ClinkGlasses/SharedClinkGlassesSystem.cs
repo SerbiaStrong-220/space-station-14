@@ -89,7 +89,6 @@ public abstract partial class SharedClinkGlassesSystem : EntitySystem
         if (!_hands.TryGetActiveItem(args.User, out var itemInHand) || !HasComp<ClinkGlassesComponent>(itemInHand))
             return;
 
-        var item = (EntityUid)itemInHand;
         var initiator = args.User;
         var receiver = args.Target;
         var verb = new AlternativeVerb
@@ -97,7 +96,7 @@ public abstract partial class SharedClinkGlassesSystem : EntitySystem
             Text = Loc.GetString("clink-glasses-verb-text"),
             Act = () =>
             {
-                DoClinkGlassesOffer(initiator, receiver, item);
+                DoClinkGlassesOffer(initiator, receiver, itemInHand.Value);
             },
             Icon = VerbIcon,
         };
