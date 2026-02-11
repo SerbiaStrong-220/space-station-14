@@ -20,6 +20,8 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Shared.SS220.Language.Components; //SS220 Polymorph language fix
+using Content.Server.SS220.Language; //SS220 Polymorph language fix
 
 namespace Content.Server.Polymorph.Systems;
 
@@ -42,6 +44,7 @@ public sealed partial class PolymorphSystem : EntitySystem
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly SharedMindSystem _mindSystem = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private readonly LanguageSystem _language = default!; //SS220 Polymorph language fix
 
     public const string EffectDesynchronizer = "EffectDesynchronizer"; //SS220-cryo-mobs-fix
 
@@ -217,6 +220,8 @@ public sealed partial class PolymorphSystem : EntitySystem
                 child);
 
         _mindSystem.MakeSentient(child);
+        TransferOrAddGalacticLanguage(uid, child);
+
 
         var polymorphedComp = Factory.GetComponent<PolymorphedEntityComponent>();
         polymorphedComp.Parent = uid;
@@ -426,4 +431,20 @@ public sealed partial class PolymorphSystem : EntitySystem
         if (actions.TryGetValue(id, out var action))
             _actions.RemoveAction(target.Owner, action);
     }
+    // SS220 Polymorph language fix begin
+    private void TransferOrAddGalacticLanguage(EntityUid from, EntityUid to)
+    {
+        if (TryComp<LanguageComponent>(from, out var oldLang) && oldLang.AvailableLanguages.Count > 0)
+        {
+            var newLang = EnsureComp<LanguageComponent>(to);
+            foreach (var def in oldLang.AvailableLanguages)
+            {
+                _language.AddLanguage((to, newLang), def.Id, def.CanSpeak);
+            }
+            return;
+        }
+        var langComp = EnsureComp<LanguageComponent>(to);
+        _language.AddLanguage((to, langComp), _language.GalacticLanguage, canSpeak: true);
+    }
+    // SS220 Polymorph language fix end
 }
