@@ -8,12 +8,7 @@
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     layers:
     - state: rubber
-  - type: StaminaDamageOnCollide
-    damage: 22
   - type: Projectile
-    damage:
-      types:
-        Blunt: 3
     soundHit:
       path: /Audio/Weapons/Guns/Hits/snap.ogg
 
@@ -36,12 +31,19 @@
   parent: BaseBulletRubber
   categories: [ HideSpawnMenu ]
   components:
-  - type: StaminaDamageOnCollide
-    damage: 22
   - type: Projectile
     damage:
       types:
-        Blunt: 3
+        Blunt: 10
+  - type: ArmorPenetration
+    rules:
+    - damageType: Blunt
+      armorthreshold: 0.7 # 30% res # <= 0.7 (0.0-0.7)
+      multiplier: 0.3
+    - damageType: Blunt
+      armorthreshold: 0.7
+      multiplier: 1.5
+      reversed: true # > 0.7 (0.7-1.0)
 
 - type: entity
   id: BulletRifleRubber
