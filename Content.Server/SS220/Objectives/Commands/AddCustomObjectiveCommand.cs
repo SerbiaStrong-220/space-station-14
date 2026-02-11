@@ -20,8 +20,8 @@ public sealed class AddCustomObjectiveCommand : LocalizedEntityCommands
     public override string Help => Loc.GetString("add-custom-objective-command-help");
     public override string Description => Loc.GetString("add-custom-objective-command-description");
 
-    private string BaseLocIssuer => LocalizationManager.GetString("free-objectives-name");
-    private static readonly SpriteSpecifier BaseIcon = new SpriteSpecifier.Texture(new ResPath("/Textures/Decals/stencil.rsi/stencil_Plus.png"));
+    private string DefaultLocIssuer => LocalizationManager.GetString("free-objectives-name");
+    private static readonly SpriteSpecifier DefaultIcon = new SpriteSpecifier.Texture(new ResPath("/Textures/Decals/stencil.rsi/stencil_Plus.png"));
 
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {
@@ -37,7 +37,7 @@ public sealed class AddCustomObjectiveCommand : LocalizedEntityCommands
         var name = args[1];
         var desc = args[2];
 
-        var icon = BaseIcon;
+        var icon = DefaultIcon;
 
         if (args.Length >= 4 && !string.IsNullOrEmpty(args[3]))
         {
@@ -45,7 +45,7 @@ public sealed class AddCustomObjectiveCommand : LocalizedEntityCommands
                 icon = new SpriteSpecifier.Texture(new ResPath(args[3]));
         }
 
-        var issuer = BaseLocIssuer;
+        var issuer = DefaultLocIssuer;
 
         if (args.Length >= 5 && !string.IsNullOrEmpty(args[4]))
             issuer = args[4];

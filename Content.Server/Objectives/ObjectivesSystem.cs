@@ -96,14 +96,11 @@ public sealed class ObjectivesSystem : SharedObjectivesSystem
         // ss220 add custom goals x2 start
         var processedMinds = new HashSet<EntityUid>();
 
-        foreach (var agentDict in summaries.Values)
+        foreach (var mindsList in summaries.Values.SelectMany(agentDict => agentDict.Values))
         {
-            foreach (var mindsList in agentDict.Values)
+            foreach (var (mindIdInList, _) in mindsList)
             {
-                foreach (var (mindIdInList, _) in mindsList)
-                {
-                    processedMinds.Add(mindIdInList);
-                }
+                processedMinds.Add(mindIdInList);
             }
         }
 
