@@ -152,7 +152,7 @@ namespace Content.Server.Mapping
             }
 
             // don't interrupt mapping with events or auto-shuttle
-            shell.ExecuteCommand("changecvar events.enabled false");
+            //shell.ExecuteCommand("changecvar events.enabled false"); // ss220 tweak
             shell.ExecuteCommand("changecvar shuttle.auto_call_time 0");
 
             if (grid != null)
