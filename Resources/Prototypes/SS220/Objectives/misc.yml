@@ -3,4 +3,4 @@
   id: SS220FreeObjective
   components:
   - type: Objective
-    issuer: ""
+    issuer: empty
