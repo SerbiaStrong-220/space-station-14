@@ -1,6 +1,9 @@
 marking-HumanHairBob6 = Каре 6
 marking-HumanHairFrieren = Фрирен
+marking-HumanHairFrieren2 = Фрирен 2
 marking-HumanHairLong5 = Длинная 5
 marking-HumanHairLongWavy = Вьющиеся (Длинная)
 marking-HumanHairShortWavy = Вьющиеся (Короткая)
 marking-HumanHairUraraka = Урарака
+marking-HumanHairPonytail8 = Хвостик 8
+marking-HumanHairPonytail9 = Хвостик 9
