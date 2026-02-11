@@ -220,8 +220,7 @@ public sealed partial class PolymorphSystem : EntitySystem
                 child);
 
         _mindSystem.MakeSentient(child);
-        TransferOrAddGalacticLanguage(uid, child);
-
+        TransferOrAddGalacticLanguage(uid, child); //SS220 Polymorph language fix
 
         var polymorphedComp = Factory.GetComponent<PolymorphedEntityComponent>();
         polymorphedComp.Parent = uid;
