@@ -135,6 +135,12 @@ public sealed partial class AltMechComponent : Component
     [AutoNetworkedField]
     public bool MaintenanceMode = true; //if the mech is not in the maintenance mode we cannot interact with its parts or equipment
 
+    [AutoNetworkedField]
+    public bool Bolted = false; //if the mech is bolted you won't be able to pull the pilot out
+
+    [AutoNetworkedField]
+    public bool BoltsSawed = false; //if the mech's bolts are sawed off bolts don't work
+
     [ViewVariables(VVAccess.ReadWrite)]
     public Dictionary<string, ContainerSlot> ContainerDict = new Dictionary<string, ContainerSlot>();
     //{

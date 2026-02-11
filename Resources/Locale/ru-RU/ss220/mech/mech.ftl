@@ -10,3 +10,7 @@ mech-not-enough-energy = недостаточно энергии
 mech-maintenance-mode-button = Техобслуживание
 
 mech-seal-button = Герметизация
+
+mech-detach-tank-button = Отсоединение баллона
+
+mech-bolt-button = Болтирование кабины

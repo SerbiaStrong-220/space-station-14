@@ -17,13 +17,14 @@
                     ToggleMode="True"
                     VerticalAlignment="Top"
                     VerticalExpand="False"/>
-                <Button Name="Mix"
-                    Text="{Loc 'mech-maintenance-mode-button'}"
+                <Button Name="Bolt"
+                    Text="{Loc 'mech-bolt-button'}"
                     TextAlign="Center"
+                    ToggleMode="True"
                     VerticalAlignment="Top"
                     VerticalExpand="False"/>
                 <Button Name="DetachTank"
-                    Text="{Loc 'mech-maintenance-mode-button'}"
+                    Text="{Loc 'mech-detach-tank-button'}"
                     TextAlign="Center"
                     VerticalAlignment="Top"
                     VerticalExpand="False"/>

@@ -38,6 +38,9 @@
     needsHands: false
   - type: InputMover
   - type: InteractionOutline
+  - type: ComplexRepairable
+    material: SheetSteel
+    materialRepairTreshold: 10.0
   - type: Inventory
     templateId: mech
   - type: TemperatureProtection
@@ -82,10 +85,6 @@
   - type: Appearance
   - type: IntrinsicRadioReceiver
   - type: ActiveRadio
-    channels:
-    - Binary
-    - Common
-    - Science
   - type: ZombieImmune
   - type: ContainerContainer
     containers:
@@ -139,13 +138,13 @@
 - type: inventoryTemplate
   id: mech
   slots:
-  - name: beltMech
+  - name: belt
     slotTexture: belt
     fullTextureName: template_small
-    slotFlags: BELT
+    slotFlags: MECHOUTER
     slotGroup: SecondHotbar
     stripTime: 15
     uiWindowPos: 1,0
     strippingWindowPos: 0,0
-    offset: 0.0, 2.0
+    offset: 0.0, 0.0
     displayName: Belt

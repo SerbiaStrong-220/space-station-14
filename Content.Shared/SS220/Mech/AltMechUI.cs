@@ -39,11 +39,11 @@ public sealed class MechSealMessage : BoundUserInterfaceMessage
 }
 
 [Serializable, NetSerializable]
-public sealed class MechAirMixMessage : BoundUserInterfaceMessage
+public sealed class MechBoltMessage : BoundUserInterfaceMessage
 {
     public bool Toggled;
 
-    public MechAirMixMessage(bool toggled)
+    public MechBoltMessage(bool toggled)
     {
         Toggled = toggled;
     }

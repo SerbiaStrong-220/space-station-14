@@ -1,18 +1,13 @@
-using Content.Client.SS220.FieldShield;
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Client.SS220.Mech.Ui;
 using Content.Shared.Damage;
 using Content.Shared.Mech;
 using Content.Shared.Popups;
-using Content.Shared.Silicons.Borgs.Components;
-using Content.Shared.SS220.AltMech;
-using Content.Shared.SS220.FieldShield;
 using Content.Shared.SS220.Mech.Components;
-using Content.Shared.SS220.Mech.Equipment.Components;
+using Content.Shared.SS220.Mech.Parts.Components;
 using Content.Shared.SS220.Mech.Systems;
-using Microsoft.CodeAnalysis.Elfie.Serialization;
 using Robust.Client.GameObjects;
 using Robust.Shared.Containers;
-using Robust.Shared.GameObjects;
 using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
 
 namespace Content.Client.Mech;

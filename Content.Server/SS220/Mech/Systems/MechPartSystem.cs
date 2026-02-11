@@ -1,21 +1,19 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Server.Hands.Systems;
 using Content.Server.Popups;
 using Content.Server.Power.EntitySystems;
 using Content.Shared.DoAfter;
-using Content.Shared.EntityEffects.Effects.StatusEffects;
 using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Power.Components;
-using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.SS220.Mech.Components;
-using Content.Shared.SS220.Mech.Equipment.Components;
+using Content.Shared.SS220.Mech.Parts.Components;
 using Content.Shared.SS220.Mech.Systems;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
-using static Content.Server.Power.Pow3r.PowerState;
 
 namespace Content.Server.SS220.Mech.Systems;
 

@@ -6,6 +6,22 @@
   - type: Item
     size: Ginormous
   - type: MechPart
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
 
 - type: entity
   id: BaseMechChassis
@@ -73,7 +89,7 @@
       right:
       - state: inhand-right-big
   - type: MechPart
-    integrity: 200
+    integrity: 150
     attachedSprite:
       sprite: SS220/Objects/Specific/Robotics/Mechs/righthand.rsi
       state: basichydraulic
@@ -99,7 +115,7 @@
       right:
       - state: inhand-right-big
   - type: MechPart
-    integrity: 200
+    integrity: 150
     attachedSprite:
       sprite: SS220/Objects/Specific/Robotics/Mechs/lefthand.rsi
       state: basichydraulic
@@ -120,9 +136,23 @@
     efficiency: 0.01
   - type: MechPart
     integrity: 250
+    maxIntegrity: 250
     attachedSprite:
       sprite: SS220/Objects/Specific/Robotics/Mechs/chassis.rsi
       state: basichydraulic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 250
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
   - type: Item
     inhandVisuals:
       left:

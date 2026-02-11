@@ -1,10 +1,9 @@
-using Content.Shared.Interaction;
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.Movement.Components;
 using Content.Shared.Power;
 using Content.Shared.Power.Components;
 using Content.Shared.SS220.Mech.Components;
-using Content.Shared.SS220.Mech.Equipment.Components;
-using JetBrains.FormatRipper.Elf;
+using Content.Shared.SS220.Mech.Parts.Components;
 using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.Mech.Systems;

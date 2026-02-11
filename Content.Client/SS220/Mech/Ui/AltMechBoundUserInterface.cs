@@ -3,7 +3,7 @@ using Content.Client.Mech;
 using Content.Client.UserInterface.Fragments;
 using Content.Shared.SS220.AltMech;
 using Content.Shared.SS220.Mech.Components;
-using Content.Shared.SS220.Mech.Equipment.Components;
+using Content.Shared.SS220.Mech.Parts.Components;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 
@@ -35,6 +35,10 @@ public sealed class AltMechBoundUserInterface : BoundUserInterface
     {
         if (!_ent.TryGetComponent<AltMechComponent>(Owner, out var mechComp))
             return;
+
+        if (mechComp.Broken)
+            return;
+
         base.Open();
 
         _menu = this.CreateWindowCenteredLeft<AltMechMenu>();
@@ -52,7 +56,7 @@ public sealed class AltMechBoundUserInterface : BoundUserInterface
 
         _menu.OnMaintenancePressed += toggled => SendMessage(new MechMaintenanceToggleMessage(toggled));
 
-        _menu.OnMixButtonPressed += _ => SendMessage(new MechAirMixMessage(_));
+        _menu.OnBoltButtonPressed += _ => SendMessage(new MechBoltMessage(_));
 
         _menu.OnSealButtonPressed += _ => SendMessage(new MechSealMessage(_));
 
@@ -63,6 +67,7 @@ public sealed class AltMechBoundUserInterface : BoundUserInterface
 
         _menu?.SetMaintenance(mechComp.MaintenanceMode);
         _menu?.SetSeal(mechComp.Airtight);
+        _menu?.SetBolt(mechComp.Bolted);
     }
 
     protected void UpdateStateAfterButtonPressed(string _)
