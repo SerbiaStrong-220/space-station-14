@@ -14,14 +14,6 @@ namespace Content.Client.SS220.Administration.UI.Tabs.AdminTab;
 public sealed partial class AddObjectiveWindow : DefaultWindow
 {
     private ICommonSession? _selectedAntagonist;
-    private string _input = string.Empty;
-    private string _entityId = string.Empty;
-
-    private string _customName = string.Empty;
-    private string _customDesc = string.Empty;
-    private string _customIcon = string.Empty;
-    private string _customIssuer = string.Empty;
-
     private bool _customObjective;
 
     public AddObjectiveWindow()
@@ -33,48 +25,23 @@ public sealed partial class AddObjectiveWindow : DefaultWindow
     {
         ApplyButton.OnPressed += _ => OnApplyButtonPressed(false);
         ForceAssignButton.OnPressed += _ => OnApplyButtonPressed(true);
-        ObjectiveLineEdit.OnTextChanged += args =>
-        {
-            _input = args.Text;
-            UpdateInputStates();
-        };
-
-        EntityIdLineEdit.OnTextChanged += args =>
-        {
-            _entityId = args.Text;
-            UpdateInputStates();
-        };
-
-        CustomObjectiveNameLineEdit.OnTextChanged += args =>
-        {
-            _customName = args.Text;
-            UpdateInputStates();
-        };
-
-        CustomObjectiveDescLineEdit.OnTextChanged += args =>
-        {
-            _customDesc = args.Text;
-            UpdateInputStates();
-        };
-
-        CustomObjectiveIconLineEdit.OnTextChanged += args =>
-        {
-            _customIcon = args.Text;
-            UpdateInputStates();
-        };
-
-        CustomObjectiveIssuerLineEdit.OnTextChanged += args =>
-        {
-            _customIssuer = args.Text;
-            UpdateInputStates();
-        };
+        ObjectiveLineEdit.OnTextChanged += _ => UpdateInputStates();
+        EntityIdLineEdit.OnTextChanged += _ => UpdateInputStates();
+        CustomObjectiveNameLineEdit.OnTextChanged += _ => UpdateInputStates();
+        CustomObjectiveDescLineEdit.OnTextChanged += _ => UpdateInputStates();
+        CustomObjectiveIconLineEdit.OnTextChanged += _ => UpdateInputStates();
+        CustomObjectiveIssuerLineEdit.OnTextChanged += _ => UpdateInputStates();
     }
 
     private void UpdateInputStates()
     {
-        var hasUsualText = !string.IsNullOrWhiteSpace(_input) || !string.IsNullOrWhiteSpace(_entityId);
-        var hasCustomText = !string.IsNullOrWhiteSpace(_customName) || !string.IsNullOrWhiteSpace(_customDesc) ||
-                            !string.IsNullOrWhiteSpace(_customIcon) || !string.IsNullOrWhiteSpace(_customIssuer);
+        var hasUsualText = !string.IsNullOrWhiteSpace(ObjectiveLineEdit.Text) ||
+                           !string.IsNullOrWhiteSpace(EntityIdLineEdit.Text);
+
+        var hasCustomText = !string.IsNullOrWhiteSpace(CustomObjectiveNameLineEdit.Text) ||
+                            !string.IsNullOrWhiteSpace(CustomObjectiveDescLineEdit.Text) ||
+                            !string.IsNullOrWhiteSpace(CustomObjectiveIconLineEdit.Text) ||
+                            !string.IsNullOrWhiteSpace(CustomObjectiveIssuerLineEdit.Text);
 
         UsualObjectiveContainer.Visible = !hasCustomText;
         CustomObjectiveContainer.Visible = !hasUsualText;
@@ -89,21 +56,31 @@ public sealed partial class AddObjectiveWindow : DefaultWindow
 
     private void OnApplyButtonPressed(bool force)
     {
+        if (_selectedAntagonist == null)
+            return;
+
         var clientHost = IoCManager.Resolve<IClientConsoleHost>();
 
         if (_customObjective)
         {
-            if (string.IsNullOrWhiteSpace(_customName))
+            var name = CustomObjectiveNameLineEdit.Text;
+            if (string.IsNullOrWhiteSpace(name))
                 return;
 
-            clientHost.ExecuteCommand($"addcustomobjective {_selectedAntagonist} \"{_customName}\" \"{_customDesc}\" \"{_customIcon}\" \"{_customIssuer}\"");
+            var desc = CustomObjectiveDescLineEdit.Text;
+            var icon = CustomObjectiveIconLineEdit.Text;
+            var issuer = CustomObjectiveIssuerLineEdit.Text;
+
+            clientHost.ExecuteCommand($"addcustomobjective {_selectedAntagonist.Name} \"{name}\" \"{desc}\" \"{icon}\" \"{issuer}\"");
         }
         else
         {
-            if (string.IsNullOrWhiteSpace(_input))
+            var objectiveId = ObjectiveLineEdit.Text;
+            if (string.IsNullOrWhiteSpace(objectiveId))
                 return;
 
-            clientHost.ExecuteCommand($"addobjective {_selectedAntagonist} {_input} {_entityId} {force}");
+            var entityId = EntityIdLineEdit.Text;
+            clientHost.ExecuteCommand($"addobjective {_selectedAntagonist.Name} \"{objectiveId}\" \"{entityId}\" {force}");
         }
     }
 }
