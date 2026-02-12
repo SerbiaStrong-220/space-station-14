@@ -1854,8 +1854,8 @@
   id: sisters_missionary_dow
 
 - type: ttsVoice
-  name: Космодесантники
-  description: Голос юнита Космодесантники из игры Warhammer 40,000: Dawn of War
+  name: Космодесантники 2
+  description: Голос юнита Космодесантники 2 из игры Warhammer 40,000: Dawn of War
   sex: Male
   speaker: space_marines_2_dow
   id: space_marines_2_dow
