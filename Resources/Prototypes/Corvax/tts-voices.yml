@@ -97,13 +97,6 @@
   id: playboyztv
 
 - type: ttsVoice
-  name: Eва Эльфи
-  description: Голос Eвы Эльфи
-  sex: Female
-  speaker: eva_elfie
-  id: eva_elfie
-
-- type: ttsVoice
   name: Уоллес Брин
   description: Голос персонажа Уоллес Брин из игры Half-Life 2
   sex: Male
