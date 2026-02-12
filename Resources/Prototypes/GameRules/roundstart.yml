@@ -166,7 +166,7 @@
     - prefRoles: [ Nukeops ]
       fallbackRoles: [ NukeopsCommander, NukeopsMedic ]
       spawnerPrototype: SpawnPointNukeopsOperative
-      min: 0 #SS220 Nops ratio fix
+      min: 0 # SS220 Nukeops ratio fix
       max: 3
       playerRatio: 23 #SS220 Nops ratio fix
       addPlayerCountPerRatio: 1 # SS220-nuke-spawn-in-segment
