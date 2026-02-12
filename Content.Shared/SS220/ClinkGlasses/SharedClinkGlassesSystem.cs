@@ -17,14 +17,14 @@ public abstract partial class SharedClinkGlassesSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<ClinkGlassesComponent, GetVerbsEvent<Verb>>(AddRaiseGlassVerb);
+        SubscribeLocalEvent<ClinkGlassesComponent, GetVerbsEvent<Verb>>(OnVerb);
         SubscribeLocalEvent<ClinkGlassesComponent, GotEquippedHandEvent>(OnGotEquippedHand);
         SubscribeLocalEvent<ClinkGlassesComponent, GotUnequippedHandEvent>(OnGotUnequippedHand);
-        SubscribeLocalEvent<ClinkGlassesInitiatorComponent, GetVerbsEvent<AlternativeVerb>>(AddOfferClinkGlassesVerb);
+        SubscribeLocalEvent<ClinkGlassesInitiatorComponent, GetVerbsEvent<AlternativeVerb>>(OnInitiatorAlternativeVerb);
     }
 
 
-    private void AddRaiseGlassVerb(Entity<ClinkGlassesComponent> ent, ref GetVerbsEvent<Verb> args)
+    private void OnVerb(Entity<ClinkGlassesComponent> ent, ref GetVerbsEvent<Verb> args)
     {
         if (!args.CanInteract || !args.CanAccess)
             return;
@@ -72,7 +72,7 @@ public abstract partial class SharedClinkGlassesSystem : EntitySystem
             RemComp<ClinkGlassesInitiatorComponent>(args.User);
     }
 
-    private void AddOfferClinkGlassesVerb(Entity<ClinkGlassesInitiatorComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
+    private void OnInitiatorAlternativeVerb(Entity<ClinkGlassesInitiatorComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
         if (!args.CanInteract || !args.CanAccess)
             return;
