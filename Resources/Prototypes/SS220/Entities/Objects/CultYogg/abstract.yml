@@ -13,6 +13,19 @@
         - CultYogg
 
 - type: entity
+  abstract: true
+  id: CultYoggWideRestrictedItem
+  suffix: CultYogg
+  name: abstract cult restricted
+  components:
+    - type: RestrictedItem
+      localizedPopup: "cult-yogg-role-item-popup"
+      whitelist:
+        components:
+        - CultYogg
+        - MiGo
+
+- type: entity
   id: BaseSelfLinkedPortalCult
   parent: BaseStructure
   suffix: CultYogg
