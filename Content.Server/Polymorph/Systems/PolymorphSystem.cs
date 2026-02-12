@@ -220,7 +220,12 @@ public sealed partial class PolymorphSystem : EntitySystem
                 child);
 
         _mindSystem.MakeSentient(child);
-        TransferOrAddGalacticLanguage(uid, child); //SS220 Polymorph language fix
+        //SS220 Polymorph language fix begin
+        if (TryComp<LanguageComponent>(uid, out var sourceLangComp))
+        {
+            _language.AddLanguagesFromSource((uid, sourceLangComp), child);
+        }
+        //SS220 Polymorph language fix end
 
         var polymorphedComp = Factory.GetComponent<PolymorphedEntityComponent>();
         polymorphedComp.Parent = uid;
@@ -430,20 +435,4 @@ public sealed partial class PolymorphSystem : EntitySystem
         if (actions.TryGetValue(id, out var action))
             _actions.RemoveAction(target.Owner, action);
     }
-    // SS220 Polymorph language fix begin
-    private void TransferOrAddGalacticLanguage(EntityUid from, EntityUid to)
-    {
-        if (TryComp<LanguageComponent>(from, out var oldLang) && oldLang.AvailableLanguages.Count > 0)
-        {
-            var newLang = EnsureComp<LanguageComponent>(to);
-            foreach (var def in oldLang.AvailableLanguages)
-            {
-                _language.AddLanguage((to, newLang), def.Id, def.CanSpeak);
-            }
-            return;
-        }
-        var langComp = EnsureComp<LanguageComponent>(to);
-        _language.AddLanguage((to, langComp), _language.GalacticLanguage, canSpeak: true);
-    }
-    // SS220 Polymorph language fix end
 }
