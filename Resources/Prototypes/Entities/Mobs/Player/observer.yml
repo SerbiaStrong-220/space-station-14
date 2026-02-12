@@ -97,6 +97,17 @@
       enum.GhostHearingKey.Key:
         type: GhostHearingBoundUserInterface
   #ss220 add filter tts for ghost end
+  #ss220 add ghost's radar start
+      enum.RadarConsoleUiKey.Key:
+        type: RadarConsoleBoundUserInterface
+  - type: RadarConsole
+    followEntity: true
+    maxRange: 4096
+  - type: IntrinsicUI
+    uis:
+      enum.RadarConsoleUiKey.Key:
+        toggleAction: ActionGhostShowRadar
+  #ss220 add ghost's radar end
 
 # proto for player ghosts specifically
 - type: entity
@@ -181,3 +192,18 @@
     checkCanInteract: false
   - type: InstantAction
     event: !type:ToggleGhostRadioChannels
+#ss220 add ghost's radar action start
+- type: entity
+  parent: BaseMentalAction
+  id: ActionGhostShowRadar
+  name: Mass Scanner Interface
+  description: View a Mass Scanner Interface.
+  components:
+  - type: Action
+    icon: { sprite: Interface/Actions/actions_ai.rsi, state: mass_scanner }
+    iconOn: { sprite: Interface/Actions/actions_ai.rsi, state: comms_console }
+    keywords: [ "AI", "console", "interface" ]
+    priority: -6
+  - type: InstantAction
+    event: !type:ToggleIntrinsicUIEvent { key: enum.RadarConsoleUiKey.Key }
+  #ss220 add ghost's radar action end
