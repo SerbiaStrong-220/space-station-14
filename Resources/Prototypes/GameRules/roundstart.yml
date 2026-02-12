@@ -115,7 +115,7 @@
   id: Nukeops
   components:
   - type: GameRule
-    minPlayers: 35 #SS220 Nops ratio fix
+    minPlayers: 35 # SS220 Nukeops ratio fix
   - type: LoadMapRule
     mapPath: /Maps/SS220/ss220-nukeoutpost.yml
   - type: AntagSelection
