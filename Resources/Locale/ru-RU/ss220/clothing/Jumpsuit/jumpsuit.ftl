@@ -90,3 +90,6 @@ ent-ClothingUniformJumpsuitWeddingWhiteOpened = { ent-ClothingUniformJumpsuitWed
     .desc = { ent-ClothingUniformJumpsuitWeddingWhite.desc }
 ent-ClothingUniformJumpsuitWitness = костюм свидетеля
     .desc = Побывал свидетелем во многих событиях.
+ent-ClothingUniformJumpsuitElectricity = чёрный комбинезон
+    .desc = Обычный чёрный комбинезон без знаков различия
+    .suffix = Костюм электрофикации

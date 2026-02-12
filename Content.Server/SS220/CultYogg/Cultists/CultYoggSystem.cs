@@ -16,7 +16,6 @@ using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.SS220.StuckOnEquip;
-using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using System.Linq;
@@ -27,7 +26,6 @@ namespace Content.Server.SS220.CultYogg.Cultists;
 
 public sealed class CultYoggSystem : SharedCultYoggSystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedBodySystem _body = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
