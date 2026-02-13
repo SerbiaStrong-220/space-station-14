@@ -412,16 +412,22 @@
   id: LawyerJumpsuit
   name: loadout-group-lawyer-jumpsuit
   loadouts:
-  - LawyerJumpsuit
-  - LawyerJumpskirt
-  - LawyerJumpsuitBlue
-  - LawyerJumpskirtBlue
-  - LawyerJumpsuitPurple
-  - LawyerJumpskirtPurple
-  - LawyerJumpsuitRed
-  - LawyerJumpskirtRed
-  - LawyerJumpsuitGood
-  - LawyerJumpskirtGood
+  # SS220 Law Department Minor Fashion BGN
+  - ShirtPantsWhite
+  - ShirtPantsBlue
+  - ShirtPantsGray
+  - ShirtPantsPurple
+  - ShirtPantsGood
+  - ShirtPantsPink
+  - ShirtPantsCrimson
+  - ShirtSkirtWhite
+  - ShirtSkirtBlue
+  - ShirtSkirtGray
+  - ShirtSkirtPurple
+  - ShirtSkirtGood
+  - ShirtSkirtPink
+  - ShirtSkirtCrimson
+  # SS220 Law Department Minor Fashion END
   - JumpsuitJujutsuShlepa #SS220-Two Floppa Iteration
 
 - type: loadoutGroup
@@ -1218,6 +1224,7 @@
   - HeadofSecurityBeret
   - HeadofSecurityBigCap #SS220-FreedomHoSCap
   - HatCapHoS #ss220 sec loadout update
+  - HeadofSecurityHatStreetJudge # SS220
 
 - type: loadoutGroup
   id: HeadofSecurityJumpsuit
@@ -1251,9 +1258,10 @@
   - HeadofSecurityCoat
   - HeadofSecurityWinterCoat
   - WinterHoSUnarmored #ss220 sec loadout update
+  - HeadofSecurityBomber #SS220 HoSNEWBomber
+  - HeadofSecurityArmorStreetJudge # SS220
   - Outer1984HoS #SS220-Two Floppa Iteration
   - CyberVestSecurity #SS220-Two Floppa Iteration
-  - HeadofSecurityBomber #SS220 HoSNEWBomber
 
 - type: loadoutGroup
   id: WardenHead

@@ -41,3 +41,42 @@
     - state: icon_tie
       map: ["foldedLayer"]
       visible: true
+
+# Shirt Pants Vest
+- type: entity
+  parent: ClothingUniformBaseFoldable
+  id: ClothingShirtBase
+  abstract: true
+  components:
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: fold-notvest-verb
+    foldVerbText: fold-vest-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: vest
+    foldedHeldPrefix: vest
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+    - state: icon_vest
+      map: ["foldedLayer"]
+      visible: false
+
+- type: entity
+  parent: ClothingShirtBase
+  id: ClothingShirtBaseVest
+  abstract: true
+  components:
+  - type: Clothing
+    equippedPrefix: vest
+  - type: Item
+    heldPrefix: vest
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+      visible: false
+    - state: icon_vest
+      map: ["foldedLayer"]
+      visible: true

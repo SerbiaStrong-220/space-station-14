@@ -1,0 +1,126 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+# White
+- type: entity
+  parent: ClothingShirtBase
+  id: ClothingUniformShirtPantsWhite
+  name: white shirt with trousers
+  description: A classic white shirt and straight-cut trousers.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/Shirt/white.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/Shirt/white.rsi
+
+# Blue
+- type: entity
+  parent: ClothingShirtBase
+  id: ClothingUniformShirtPantsBlue
+  name: blue shirt with trousers
+  description: A blue shirt paired with classic trousers.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/Shirt/blue.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/Shirt/blue.rsi
+
+# Gray
+- type: entity
+  parent: ClothingShirtBase
+  id: ClothingUniformShirtPantsGray
+  name: gray shirt with trousers
+  description: A neutral gray shirt and versatile trousers.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/Shirt/gray.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/Shirt/gray.rsi
+
+# Purple
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformShirtPantsPurple
+  name: purple shirt with trousers
+  description: A stylish purple piece worn by lawyers and show people.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/Shirt/purple.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/Shirt/purple.rsi
+
+# Good
+- type: entity
+  parent: ClothingShirtBase
+  id: ClothingUniformShirtPantsGood
+  name: good lawyer's shirt with trousers
+  description: A tacky suit perfect for a CRIMINAL lawyer!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/Shirt/good.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/Shirt/good.rsi
+
+# Pink
+- type: entity
+  parent: ClothingShirtBase
+  id: ClothingUniformShirtPantsPink
+  name: pink shirt with trousers
+  description: A bright pink shirt and trousers for a festive look.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/Shirt/pink.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/Shirt/pink.rsi
+
+# Crimson
+- type: entity
+  parent: ClothingShirtBase
+  id: ClothingUniformShirtPantsCrimson
+  name: crimson shirt with trousers
+  description: A stylish crimson shirt with trousers for special occasions.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/Shirt/crimson.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/Shirt/crimson.rsi
+
+# Victorian
+- type: entity
+  parent: ClothingShirtBase
+  id: ClothingUniformShirtPantsVictorian
+  name: victorian shirt with trousers
+  description: An elegant shirt in the Victorian style, complemented by classic trousers.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/Shirt/victorian.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/Shirt/victorian.rsi
+
+# Trusted Lawyer
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformShirtPantsTrustedLawyer
+  name: trusted lawyer's shirt with trousers
+  description: A chic shirt with trousers for those who follow the impeccable execution of the company's laws. They say that you are able to impose your demands even on God himself.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/Shirt/trusted.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/Shirt/trusted.rsi
+
+# NTR
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformShirtPantsNTR
+  name: nanotrasen representative shirt with trousers
+  description: The shirt with trousers of the NanoTrasen representative. Carry the truth of the corporation with your own hands.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/Shirt/ntr.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/Shirt/ntr.rsi
