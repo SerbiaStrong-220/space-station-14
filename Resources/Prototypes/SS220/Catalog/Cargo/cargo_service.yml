@@ -66,6 +66,6 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/wedding_black.rsi
     state: icon
   product: CrateServiceWedding
-  cost: 2500
+  cost: 500
   category: cargoproduct-category-name-service
   group: market

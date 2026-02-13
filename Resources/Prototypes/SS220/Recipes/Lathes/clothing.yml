@@ -32,47 +32,47 @@
     Durathread: 100
 
 - type: latheRecipe
-  parent: BaseJumpsuitRecipe
+  parent: BaseCommandJumpsuitRecipe
   id: ClothingUniformJumpsuitWeddingBlackOpened
   result: ClothingUniformJumpsuitWeddingBlackOpened
 
 - type: latheRecipe
-  parent: BaseJumpsuitRecipe
+  parent: BaseCommandJumpsuitRecipe
   id: ClothingUniformJumpsuitWeddingBlackAndWhiteOpened
   result: ClothingUniformJumpsuitWeddingBlackAndWhiteOpened
 
 - type: latheRecipe
-  parent: BaseJumpsuitRecipe
+  parent: BaseCommandJumpsuitRecipe
   id: ClothingUniformJumpsuitWeddingGreenOpened
   result: ClothingUniformJumpsuitWeddingGreenOpened
 
 - type: latheRecipe
-  parent: BaseJumpsuitRecipe
+  parent: BaseCommandJumpsuitRecipe
   id: ClothingUniformJumpsuitWeddingWhiteOpened
   result: ClothingUniformJumpsuitWeddingWhiteOpened
 
 - type: latheRecipe
-  parent: BaseJumpsuitRecipe
+  parent: BaseCommandJumpsuitRecipe
   id: ClothingUniformWeddingDress1
   result: ClothingUniformWeddingDress1
 
 - type: latheRecipe
-  parent: BaseJumpsuitRecipe
+  parent: BaseCommandJumpsuitRecipe
   id: ClothingUniformWeddingDress2
   result: ClothingUniformWeddingDress2
 
 - type: latheRecipe
-  parent: BaseJumpsuitRecipe
+  parent: BaseCommandJumpsuitRecipe
   id: ClothingUniformWeddingDress3
   result: ClothingUniformWeddingDress3
 
 - type: latheRecipe
-  parent: BaseJumpsuitRecipe
+  parent: BaseCommandJumpsuitRecipe
   id: ClothingUniformWeddingDress4
   result: ClothingUniformWeddingDress4
 
 - type: latheRecipe
-  parent: BaseJumpsuitRecipe
+  parent: BaseCommandJumpsuitRecipe
   id: ClothingUniformJumpsuitWitness
   result: ClothingUniformJumpsuitWitness
 
@@ -120,12 +120,12 @@
     Durathread: 50
 
 - type: latheRecipe
-  parent: BaseHatRecipe
+  parent: BaseCommandHatRecipe
   id: ClothingHeadHatVeilClip
   result: ClothingHeadHatVeilClip
 
 - type: latheRecipe
-  parent: BaseHatRecipe
+  parent: BaseCommandHatRecipe
   id: ClothingHeadHatVeilTiara
   result: ClothingHeadHatVeilTiara
 
