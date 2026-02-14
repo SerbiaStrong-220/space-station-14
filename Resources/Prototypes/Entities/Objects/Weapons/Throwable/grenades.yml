@@ -55,8 +55,10 @@
         - ItemMask
         restitution: 0.3
         friction: 0.2
+  # SS-220 grenades timer start
   - type: UseDelay
     delay: 3
+  # SS-220 grenades timer ended
 
 - type: entity
   name: explosive grenade
@@ -180,8 +182,10 @@
         volume: 12
   - type: StaticPrice
     price: 2000
+  # SS-220 grenades timer start
   - type: UseDelay
     delay: 5
+  # SS-220 grenades timer ended
 
 - type: entity
   name: self destruct
@@ -209,8 +213,10 @@
         volume: 30
     initialBeepDelay: 0
     beepInterval: 16
+  # SS-220 grenades timer start
   - type: UseDelay
     delay: 4.5
+  # SS-220 grenades timer ended
 
 
 - type: entity
@@ -376,8 +382,10 @@
   - type: TimerTriggerVisuals
     primingSound:
       path: /Audio/Effects/countdown.ogg
+  # SS-220 grenades timer start
   - type: UseDelay
     delay: 5
+  # SS-220 grenades timer ended
 
 - type: entity
   name: modular grenade
@@ -579,8 +587,10 @@
     smokePrototype: AluminiumMetalFoam
   - type: StaticPrice
     price: 350
+  # SS-220 grenades timer start
   - type: UseDelay
     delay: 5
+  # SS-220 grenades timer ended
 
 - type: entity
   parent: [ BaseEngineeringContraband, GrenadeBase ] # Prevent inheriting DeleteOnTrigger from SmokeGrenade
@@ -668,8 +678,10 @@
           - Clown
           - Mime
   #ss220 toys end
+  # SS-220 grenades timer start
   - type: UseDelay
     delay: 3.5
+  # SS-220 grenades timer ended
 
 - type: entity
   name: syndicate trickybomb
@@ -702,5 +714,7 @@
   #ss220 toys end
   - type: StaticPrice
     price: 1000
+  # SS-220 grenades timer start
   - type: UseDelay
     delay: 5
+  # SS-220 grenades timer ended

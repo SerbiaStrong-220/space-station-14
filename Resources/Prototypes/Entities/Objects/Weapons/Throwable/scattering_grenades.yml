@@ -35,6 +35,8 @@
         - ItemMask
         restitution: 0.3
         friction: 0.2
+  - type: UseDelay
+    delay: 3
 
 - type: entity
   parent: [ScatteringGrenadeBase, BaseSecurityContraband]

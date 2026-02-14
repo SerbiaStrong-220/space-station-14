@@ -75,6 +75,8 @@
   - type: TimerTriggerVisuals
     primingSound:
       path: /Audio/Effects/countdown.ogg
+  - type: UseDelay
+    delay: 3.5
 
 - type: entity
   parent: [ProjectileGrenadeBase] # SS220 Remove BaseSyndicateContraband
@@ -107,6 +109,8 @@
     positional: true
   - type: StaticPrice
     price: 1500
+  - type: UseDelay
+    delay: 3.5
 
 - type: entity
   parent: [ProjectileGrenadeBase] # SS220 Remove BaseSyndicateContraband
@@ -139,3 +143,5 @@
     positional: true
   - type: StaticPrice
     price: 1500
+  - type: UseDelay
+    delay: 3.5
