@@ -8,8 +8,12 @@
   },
   "states": [
     {
-      "name": "basicloader",
-      "directions": 4
+        "name": "basicloader",
+        "directions": 4
+    },
+    {
+        "name": "basiclight",
+        "directions": 4
     }
-    ]
+  ]
 }

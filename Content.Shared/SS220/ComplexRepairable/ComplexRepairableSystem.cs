@@ -90,6 +90,8 @@ public sealed partial class ComplexRepairableSystem : EntitySystem
                 QueueDel(args.Used);
                 --ent.Comp.LeftToInsert;
                 Dirty(ent);
+                var str = Loc.GetString("complex-repairable-material-repair", ("target", ent.Owner), ("material", args.Used!));
+                _popup.PopupClient(str, ent.Owner, args.User);
                 return;
             }
 
@@ -98,6 +100,8 @@ public sealed partial class ComplexRepairableSystem : EntitySystem
                 _stack.SetCount(args.Used, stackComp.Count - ent.Comp.LeftToInsert);
                 ent.Comp.LeftToInsert = 0;
                 Dirty(ent);
+                var str = Loc.GetString("complex-repairable-material-repair", ("target", ent.Owner), ("material", args.Used!));
+                _popup.PopupClient(str, ent.Owner, args.User);
                 return;
             }
             ent.Comp.LeftToInsert = ent.Comp.LeftToInsert - stackComp.Count;

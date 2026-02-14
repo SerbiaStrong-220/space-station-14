@@ -72,11 +72,14 @@ public sealed partial class AltMechComponent : Component
     [ViewVariables]
     public readonly string EquipmentContainerId = "part-mech-equipment-container";
 
+    [AutoNetworkedField]
+    public int CurrentEquipmentAmount = 0;
+
     /// <summary>
     /// The maximum amount of equipment items that can be installed in the mech
     /// </summary>
     [DataField("maxEquipmentAmount"), ViewVariables(VVAccess.ReadWrite)]
-    public int MaxEquipmentAmount = 3;
+    public int MaxEquipmentAmount = 100;
 
     /// <summary>
     /// A whitelist for inserting equipment items.

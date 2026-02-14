@@ -5,7 +5,10 @@ using Content.Shared.Actions;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
+using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.FixedPoint;
+using Content.Shared.Flash;
+using Content.Shared.Flash.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
@@ -23,6 +26,7 @@ using Content.Shared.Random.Helpers;
 using Content.Shared.SS220.AltBlocking;
 using Content.Shared.SS220.ArmorBlock;
 using Content.Shared.SS220.Mech.Components;
+using Content.Shared.SS220.Mech.Equipment.Components;
 using Content.Shared.SS220.Mech.Parts.Components;
 using Content.Shared.SS220.MechRobot;
 using Content.Shared.SS220.Weapons.Melee.Events;
@@ -36,6 +40,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
+using Content.Shared.Eye.Blinding.Systems;
 
 namespace Content.Shared.SS220.Mech.Systems;
 
@@ -59,6 +64,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly BlindableSystem _blindable = default!;
 
 
     /// <inheritdoc/>
@@ -73,8 +79,12 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         SubscribeLocalEvent<AltMechComponent, DragDropTargetEvent>(OnDragDrop);
         SubscribeLocalEvent<AltMechComponent, CanDropTargetEvent>(OnCanDragDrop);
 
+        SubscribeLocalEvent<AltMechComponent, MechPilotRelayedEvent<FlashAttemptEvent>>(OnPilotFlashed);
+        SubscribeLocalEvent<AltMechComponent, FlashAttemptEvent>(OnMechFlashed);
+        SubscribeLocalEvent<AltMechComponent, GetEyeProtectionEvent>(OnMechGetEyeProtection);
+
         SubscribeLocalEvent<AltMechPilotComponent, GetMeleeWeaponEvent>(OnGetMeleeWeapon);
-        SubscribeLocalEvent<AltMechPilotComponent, CanAttackFromContainerEvent>(OnCanAttackFromContainer);
+        //SubscribeLocalEvent<AltMechPilotComponent, CanAttackFromContainerEvent>(OnCanAttackFromContainer);
         SubscribeLocalEvent<AltMechPilotComponent, AttackAttemptEvent>(OnAttackAttempt);
 
         SubscribeLocalEvent<AltMechComponent, ProjectileBlockAttemptEvent>(OnProjectileHit, after: [typeof(AltBlockingSystem)]);
@@ -104,6 +114,33 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         var ev = new OnMechExitEvent();
         RaiseLocalEvent(uid, ref ev);
+    }
+
+    private void OnPilotFlashed(Entity<AltMechComponent> ent, ref MechPilotRelayedEvent<FlashAttemptEvent> args)
+    {
+        if (ent.Comp.ContainerDict["head"].ContainedEntity == null)
+            return;
+
+        if (TryComp<FlashImmunityComponent>(ent.Comp.ContainerDict["head"].ContainedEntity, out var immunityComp))
+            args.Args.Cancelled = true;
+    }
+
+    private void OnMechFlashed(Entity<AltMechComponent> ent, ref FlashAttemptEvent args)
+    {
+        if (ent.Comp.ContainerDict["head"].ContainedEntity == null)
+            return;
+
+        if (TryComp<FlashImmunityComponent>(ent.Comp.ContainerDict["head"].ContainedEntity, out var immunityComp))
+            args.Cancelled = true;
+    }
+
+    private void OnMechGetEyeProtection(Entity<AltMechComponent> ent, ref GetEyeProtectionEvent args)
+    {
+        if (ent.Comp.ContainerDict["head"].ContainedEntity == null)
+            return;
+
+        if (TryComp<EyeProtectionComponent>(ent.Comp.ContainerDict["head"].ContainedEntity, out var immunityComp))
+            args.Protection += immunityComp.ProtectionTime;
     }
 
     private void RelayInteractionEvent(EntityUid uid, AltMechComponent component, UserActivateInWorldEvent args)
@@ -141,6 +178,12 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         if(TryComp<MovementSpeedModifierComponent>(ent.Owner, out var movementComp))
             _movementSpeedModifier.ChangeBaseSpeed(ent.Owner, ent.Comp.OverallBaseMovementSpeed * 0.5f, ent.Comp.OverallBaseMovementSpeed, ent.Comp.OverallBaseAcceleration, movementComp);
+
+        if(ent.Comp.ContainerDict["head"].ContainedEntity == null)
+        {
+            TryComp<BlindableComponent>(ent.Owner, out var blindableComp);
+            _blindable.AdjustEyeDamage((ent.Owner, blindableComp), 9); //Mech cannot see anything if it has no eyes
+        }
 
         UpdateAppearance(ent.Owner, ent.Comp);
     }
@@ -314,7 +357,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
     /// <param name="component"></param>
     /// <param name="equipmentComponent"></param>
     public void InsertEquipment(EntityUid uid, EntityUid toInsert, AltMechComponent? component = null,
-        MechEquipmentComponent? equipmentComponent = null)
+        AltMechEquipmentComponent? equipmentComponent = null)
     {
         if (!Resolve(uid, ref component))
             return;
@@ -322,13 +365,18 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         if (!Resolve(toInsert, ref equipmentComponent))
             return;
 
-        //if (component.EquipmentContainer.ContainedEntities.Count >= component.MaxEquipmentAmount)
-        //    return;
+        if (component.MaxEquipmentAmount < component.CurrentEquipmentAmount + equipmentComponent.EqipmentSize)
+            return;
 
         if (_whitelistSystem.IsWhitelistFail(component.EquipmentWhitelist, toInsert))
             return;
 
+        component.CurrentEquipmentAmount += equipmentComponent.EqipmentSize;
+        _container.Insert(toInsert, component.EquipmentContainer);
+
         equipmentComponent.EquipmentOwner = uid;
+
+        _actions.AddAction(uid, ref equipmentComponent.EquipmentAbilityAction, equipmentComponent.EquipmentAbilityActionName, uid);
         //_container.Insert(toInsert, component.EquipmentContainer);
         var ev = new MechEquipmentInsertedEvent(uid);
         RaiseLocalEvent(toInsert, ref ev);
@@ -364,7 +412,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         RaiseLocalEvent(uid, ref massEv);
 
         if (TryGetNetEntity(uid, out var netMech) && TryGetNetEntity(toInsert, out var netPart))
-            RaiseNetworkEvent(new MechPartStatusChanged((NetEntity)netMech, (NetEntity)netPart, true));
+            RaiseNetworkEvent(new MechPartStatusChanged((NetEntity)netMech, (NetEntity)netPart, true, partComponent.slot));
 
         //UpdateUserInterface(uid, component);
     }
@@ -458,9 +506,11 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         //if (forced && partComponent != null)
         //    partComponent.PartOwner = null;
+        string? slot = null;
 
         if(partComponent != null)
         {
+            slot = partComponent.slot;
             partComponent.PartOwner = null;
             RemoveMass(component, partComponent.OwnMass);
 
@@ -478,7 +528,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         Dirty(uid, component);
 
         if(TryGetNetEntity(uid, out var netMech) && TryGetNetEntity(toRemove, out var netPart))
-            RaiseNetworkEvent( new MechPartStatusChanged((NetEntity)netMech, (NetEntity)netPart, false));
+            RaiseNetworkEvent( new MechPartStatusChanged((NetEntity)netMech, (NetEntity)netPart, false, slot));
 
        // UpdateUserInterface(uid, component);
     }
@@ -748,17 +798,31 @@ public enum PartSlot : byte
 }
 
 [Serializable, NetSerializable]
-public sealed class MechPartStatusChanged : EntityEventArgs
+
+public sealed class MechPartStatusChanged : EntityEventArgs // not a by ref event because it is made for networking
 {
     public NetEntity Mech;
     public NetEntity Part;
     public bool Attached;
+    public string? Slot;
 
-    public MechPartStatusChanged(NetEntity mech, NetEntity part, bool attached)
+    public MechPartStatusChanged(NetEntity mech, NetEntity part, bool attached, string? slot)
     {
         Mech = mech;
         Part = part;
         Attached = attached;
+        Slot = slot;
     }
 }
+
+[Serializable, NetSerializable]
+public sealed partial class InsertPartEvent : SimpleDoAfterEvent
+{
+}
+
+[Serializable, NetSerializable]
+public sealed partial class InsertEquipmentEvent : SimpleDoAfterEvent
+{
+}
+
 

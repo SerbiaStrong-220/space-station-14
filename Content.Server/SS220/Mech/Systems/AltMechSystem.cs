@@ -12,8 +12,13 @@ using Content.Shared.Atmos.Components;
 using Content.Shared.Damage;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
+using Content.Shared.Eye.Blinding.Components;
+using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.FixedPoint;
+using Content.Shared.Flash;
+using Content.Shared.Flash.Components;
 using Content.Shared.Interaction;
+using Content.Shared.Inventory;
 using Content.Shared.Mech;
 using Content.Shared.Mech.EntitySystems;
 using Content.Shared.Mind.Components;
@@ -40,6 +45,7 @@ using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using static Content.Shared.Inventory.InventorySystem;
 
 namespace Content.Server.SS220.Mech.Systems;
 
@@ -60,6 +66,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedLanguageSystem _languages = default!;
+    [Dependency] private readonly BlindableSystem _blindable = default!;
 
     private readonly ProtoId<AlertPrototype> _mechIntegrityAlert = "MechHealth";
 
@@ -338,6 +345,20 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
                 _languages.AddLanguage((ent.Owner, languageCompMech), language);
             }
             Dirty(ent.Owner,languageCompMech);
+        }
+
+        if (ent.Comp.ContainerDict["head"].ContainedEntity != null)
+        {
+            if (!TryComp<BlindableComponent>(ent.Owner, out var blindableCompMech))
+                return;
+
+            if (TryComp<BlindableComponent>(pilot, out var blindableComp))
+            {
+                _blindable.AdjustEyeDamage((ent.Owner, blindableCompMech), (-blindableCompMech.EyeDamage + blindableComp.EyeDamage)); //Mech cannot see anything if it has no eyes
+                return;
+            }
+
+            _blindable.AdjustEyeDamage((ent.Owner, blindableCompMech), -blindableCompMech.EyeDamage);
         }
 
     }

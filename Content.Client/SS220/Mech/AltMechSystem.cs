@@ -1,13 +1,25 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Client.SS220.Mech.Ui;
+using Content.Client.UserInterface.Systems.DamageOverlays.Overlays;
 using Content.Shared.Damage;
+using Content.Shared.Destructible;
+using Content.Shared.Eye.Blinding.Components;
+using Content.Shared.FixedPoint;
 using Content.Shared.Mech;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.SS220.Mech.Components;
 using Content.Shared.SS220.Mech.Parts.Components;
 using Content.Shared.SS220.Mech.Systems;
+using Content.Shared.Traits.Assorted;
 using Robust.Client.GameObjects;
+using Robust.Client.Graphics;
+using Robust.Client.Player;
+using Robust.Client.UserInterface;
 using Robust.Shared.Containers;
+using Robust.Shared.Player;
 using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
 
 namespace Content.Client.Mech;
@@ -18,6 +30,11 @@ public sealed class AltMechSystem : SharedAltMechSystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IOverlayManager _overlay = default!;
+    [Dependency] private readonly IPlayerManager _playerManager = default!;
+
+    [Dependency] private readonly MobThresholdSystem _mobThresholdSystem = default!;
+    private DamageOverlay _damageOverlay = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -35,6 +52,12 @@ public sealed class AltMechSystem : SharedAltMechSystem
         SubscribeLocalEvent<AltMechComponent, DamageChangedEvent>(OnDamageChanged);
 
         SubscribeLocalEvent<AltMechComponent, OnMechExitEvent>(OnPilotEjected);
+
+        _damageOverlay = new DamageOverlay();
+        SubscribeLocalEvent<AltMechComponent, LocalPlayerAttachedEvent>(OnPlayerAttach);
+        SubscribeLocalEvent<AltMechComponent, LocalPlayerDetachedEvent>(OnPlayerDetached);
+        SubscribeLocalEvent<MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<AltMechPilotComponent, MobThresholdChecked>(OnThresholdCheck);
 
     }
 
@@ -140,13 +163,21 @@ public sealed class AltMechSystem : SharedAltMechSystem
 
     private void OnPartMoved(MechPartStatusChanged args)
     {
-        if (!TryGetEntity(args.Mech, out var localMech) || !TryGetEntity(args.Part, out var localPart))
-            return;
-
-        if (!TryComp<AltMechComponent>(localMech, out var mechComp) || !TryComp(localMech, out AppearanceComponent? appearance))
+        if (!TryGetEntity(args.Mech, out var localMech))
             return;
 
         if (!TryComp<SpriteComponent>(localMech, out var spriteComp) || spriteComp == null)
+            return;
+
+        if (!TryGetEntity(args.Part, out var localPart) && args.Slot != null)
+        {
+            if (_sprite.LayerMapTryGet(((EntityUid)localMech, spriteComp), partsVisuals[args.Slot], out var layerOfMissingPart, true))
+                _sprite.LayerSetVisible(((EntityUid)localMech, spriteComp), layerOfMissingPart, false);
+            return;
+
+        }
+
+        if (!TryComp<AltMechComponent>(localMech, out var mechComp) || !TryComp(localMech, out AppearanceComponent? appearance))
             return;
 
         if (!TryComp<MechPartComponent>(localPart, out var partComp))
@@ -181,6 +212,155 @@ public sealed class AltMechSystem : SharedAltMechSystem
                 return;
 
             bui.Close();
+        }
+    }
+
+    //There are going to be LOTS OF GARBAGE here. Every overlay that is applied on the pilot but not on the mech must me manually rewritten here. This is an awful solution but or this or manually editing every officials' file
+    private void OnPlayerAttach(Entity<AltMechComponent> ent, ref LocalPlayerAttachedEvent args)
+    {
+        DamageOverlayInit(args);
+        //BlurOverlayInit(args);
+    }
+
+    private void DamageOverlayInit(LocalPlayerAttachedEvent args)
+    {
+        ClearOverlay();
+
+        if (!EntityManager.TryGetComponent<AltMechComponent>(args.Entity, out var mechComp) || mechComp.PilotSlot.ContainedEntity == null)
+            return;
+
+        if (!EntityManager.TryGetComponent<MobStateComponent>(mechComp.PilotSlot.ContainedEntity, out var mobState))
+            return;
+
+        if (mobState.CurrentState != MobState.Dead)
+            UpdateOverlays(args.Entity, mobState);
+        _overlay.AddOverlay(_damageOverlay);
+    }
+
+    private void BlurOverlayInit(LocalPlayerAttachedEvent args)
+    {
+        if (!EntityManager.TryGetComponent<AltMechComponent>(args.Entity, out var mechComp) || mechComp.PilotSlot.ContainedEntity == null)
+            return;
+
+        if (!EntityManager.TryGetComponent<BlurryVisionComponent>(mechComp.PilotSlot.ContainedEntity, out var blurry))
+            return;
+
+        EnsureComp<BlurryVisionComponent>(args.Entity, out var mechBlurry);
+
+    }
+
+    private void OnPlayerDetached(Entity<AltMechComponent> ent, ref LocalPlayerDetachedEvent args)
+    {
+        _overlay.RemoveOverlay(_damageOverlay);
+        ClearOverlay();
+        RemComp<BlurryVisionComponent>(args.Entity);
+    }
+
+    private void OnMobStateChanged(MobStateChangedEvent args)
+    {
+        if (args.Target != _playerManager.LocalEntity)
+            return;
+
+        UpdateOverlays(args.Target, args.Component);
+    }
+
+    private void OnThresholdCheck(Entity<AltMechPilotComponent> ent, ref MobThresholdChecked args)
+    {
+
+        if (!(EntityManager.TryGetComponent(args.Target, out AltMechPilotComponent? pilot)))
+            return;
+
+        if (pilot.Mech != _playerManager.LocalEntity)
+            return;
+
+        //if (pilot != null)
+        //{
+        //    UpdateOverlays(pilot.Mech, args.MobState, args.Damageable, args.Threshold);
+        //    return;
+        //}
+        UpdateOverlays(pilot.Mech, args.MobState, args.Damageable, args.Threshold);
+    }
+
+    private void ClearOverlay()
+    {
+        _damageOverlay.DeadLevel = 0f;
+        _damageOverlay.CritLevel = 0f;
+        _damageOverlay.PainLevel = 0f;
+        _damageOverlay.OxygenLevel = 0f;
+    }
+
+    private void UpdateOverlays(EntityUid entity, MobStateComponent? mobState, DamageableComponent? damageable = null, MobThresholdsComponent? thresholds = null)
+    {
+        if (!EntityManager.TryGetComponent<AltMechComponent>(entity, out var mechComp) || mechComp.PilotSlot.ContainedEntity == null)
+            return;
+
+        var pilot = mechComp.PilotSlot.ContainedEntity;
+
+        if (mobState == null && !EntityManager.TryGetComponent(pilot, out mobState) ||
+            thresholds == null && !EntityManager.TryGetComponent(pilot, out thresholds) ||
+            damageable == null && !EntityManager.TryGetComponent(pilot, out damageable))
+            return;
+
+        if (!thresholds.ShowOverlays)
+        {
+            ClearOverlay();
+            return; //this entity intentionally has no overlays
+        }
+
+        if (!_mobThresholdSystem.TryGetIncapThreshold((EntityUid)pilot, out var foundThreshold, thresholds))
+            return; //this entity cannot die or crit!!
+
+        var critThreshold = foundThreshold.Value;//SS220 mech rework
+        _damageOverlay.State = mobState.CurrentState;
+
+        switch (mobState.CurrentState)
+        {
+            case MobState.Alive:
+                {
+                    FixedPoint2 painLevel = 0;
+                    _damageOverlay.PainLevel = 0;
+
+                    if (!EntityManager.HasComponent<PainNumbnessComponent>(pilot))
+                    {
+                        foreach (var painDamageType in damageable.PainDamageGroups)
+                        {
+                            damageable.DamagePerGroup.TryGetValue(painDamageType, out var painDamage);
+                            painLevel += painDamage;
+                        }
+                        _damageOverlay.PainLevel = FixedPoint2.Min(1f, painLevel / critThreshold).Float();
+
+                        if (_damageOverlay.PainLevel < 0.05f) // Don't show damage overlay if they're near enough to max.
+                        {
+                            _damageOverlay.PainLevel = 0;
+                        }
+                    }
+
+                    if (damageable.DamagePerGroup.TryGetValue("Airloss", out var oxyDamage))
+                    {
+                        _damageOverlay.OxygenLevel = FixedPoint2.Min(1f, oxyDamage / critThreshold).Float();
+                    }
+
+                    _damageOverlay.CritLevel = 0;
+                    _damageOverlay.DeadLevel = 0;
+                    break;
+                }
+            case MobState.Critical:
+                {
+                    if (!_mobThresholdSystem.TryGetDeadPercentage((EntityUid)pilot,
+                            FixedPoint2.Max(0.0, damageable.TotalDamage), out var critLevel))
+                        return;
+                    _damageOverlay.CritLevel = critLevel.Value.Float();
+
+                    _damageOverlay.PainLevel = 0;
+                    _damageOverlay.DeadLevel = 0;
+                    break;
+                }
+            case MobState.Dead:
+                {
+                    _damageOverlay.PainLevel = 0;
+                    _damageOverlay.CritLevel = 0;
+                    break;
+                }
         }
     }
 }

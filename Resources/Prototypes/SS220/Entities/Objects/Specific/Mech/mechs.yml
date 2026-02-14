@@ -14,6 +14,10 @@
   - type: MechRobot #SS220-AddMechToClothing
   - type: PowerCellDraw
   - type: Language
+  - type: Blindable #For optics to work
+  - type: StatusEffects
+    allowed:
+    - Flashed
   - type: PressureProtection #After some research i have decided to get rid of MechAir as there will be basically no difference in game but larger amounts of work and space for bugs
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
@@ -41,6 +45,7 @@
   - type: ComplexRepairable
     material: SheetSteel
     materialRepairTreshold: 10.0
+    doAfterModifier: 3
   - type: Inventory
     templateId: mech
   - type: TemperatureProtection
@@ -115,10 +120,10 @@
         acts: ["Destruction"]
 
 - type: entity
-  id: MechAltRipley
+  id: MechLoader
   parent: BaseAltMech
-  name: Ripley APLU
-  description: Versatile and lightly armored, the Ripley is useful for almost any heavy work scenario. The "APLU" stands for Autonomous Power Loading Unit.
+  name: Powerloader
+  description: Name is self-speaking - this is a powerloader frame which has limited equipment space, high mass and provides little to no protection to the user but is still better than nothing
   components:
   - type: Sprite
     sprite: SS220/Objects/Specific/Robotics/Mechs/cores.rsi
@@ -128,12 +133,50 @@
     baseState: basicloader
     openState: basicloader
     brokenState: basicloader
+    maxIntegrity: 250
+    ownMass: 250
     pilotWhitelist:
       components:
         - HumanoidAppearance
   - type: MovementSpeedModifier
     baseWalkSpeed: 0
     baseSprintSpeed: 0
+
+- type: entity
+  id: MechLight
+  parent: BaseAltMech
+  name: LEF-021
+  description: Versatile, light and still pretty cheap mech frame, LEF-021 is one of the most widely used mech frames in the TSF space
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Robotics/Mechs/cores.rsi
+    state: basiclight
+    noRot: true
+  - type: AltMech
+    baseState: basiclight
+    openState: basiclight
+    brokenState: basiclight
+    maxIntegrity: 200
+    ownMass: 150
+    pilotWhitelist:
+      components:
+        - HumanoidAppearance
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 0
+    baseSprintSpeed: 0
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
 
 - type: inventoryTemplate
   id: mech

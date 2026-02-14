@@ -2,7 +2,11 @@
 using Content.Server.Hands.Systems;
 using Content.Server.Popups;
 using Content.Server.Power.EntitySystems;
+using Content.Shared.Damage;
+using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
+using Content.Shared.Eye.Blinding.Components;
+using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
@@ -30,6 +34,7 @@ public sealed class MechPartSystem : EntitySystem
     [Dependency] protected readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly HandsSystem _hands = default!;
     [Dependency] private readonly BatterySystem _battery = default!;
+    [Dependency] private readonly BlindableSystem _blindable = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -47,8 +52,24 @@ public sealed class MechPartSystem : EntitySystem
         SubscribeLocalEvent<MechArmComponent, MechPartRemovedEvent>(OnArmRemoved);
 
         SubscribeLocalEvent<MechArmComponent, ComponentStartup>(OnProvideItemStartup);
-        //SubscribeLocalEvent<MechPartComponent, InsertPartEvent>(OnOpticsInserted);
+        SubscribeLocalEvent<MechOpticsComponent, MechPartInsertedEvent>(OnOpticsInserted);
+        SubscribeLocalEvent<MechOpticsComponent, MechPartRemovedEvent>(OnOpticsRemoved);
+
+        SubscribeLocalEvent<MechPartComponent, DestructionEventArgs>(OnPartDestroyed);
         //SubscribeLocalEvent<MechPartComponent, InsertPartEvent>(OnArmInserted);
+    }
+
+    private void OnPartDestroyed(Entity<MechPartComponent> ent, ref DestructionEventArgs args)
+    {
+        if (!TryComp<AltMechComponent>(ent.Comp.PartOwner, out var mechComp))
+            return;
+
+        var equip = (mechComp.ContainerDict[ent.Comp.slot].ContainedEntity);
+
+        if (!Exists(equip) || Deleted(equip))
+            return;
+
+        _mech.RemovePart((EntityUid)ent.Comp.PartOwner, ent.Owner);
     }
 
     private void OnUsed(Entity<MechPartComponent> ent, ref AfterInteractEvent args)
@@ -66,12 +87,6 @@ public sealed class MechPartSystem : EntitySystem
         if (args.User == mechComp.PilotSlot.ContainedEntity)
             return;
 
-        //if (mechComp.EquipmentContainer.ContainedEntities.Count >= mechComp.MaxEquipmentAmount)
-        //    return;
-
-        //if (_whitelistSystem.IsWhitelistFail(mechComp.EquipmentWhitelist, args.Used))
-        //    return;
-
         _popup.PopupEntity(Loc.GetString("mech-equipment-begin-install", ("item", ent.Owner)), mech);
 
         var doAfterEventArgs = new DoAfterArgs(EntityManager, args.User, ent.Comp.InstallDuration, new InsertPartEvent(), ent.Owner, target: mech, used: ent.Owner)
@@ -83,21 +98,41 @@ public sealed class MechPartSystem : EntitySystem
         args.Handled = true;
     }
 
+    private void OnOpticsInserted(Entity<MechOpticsComponent> ent, ref MechPartInsertedEvent args)
+    {
+        if (!TryComp<AltMechComponent>(args.Mech, out var mechComp))
+            return;
+
+        if (mechComp.PilotSlot.ContainedEntity == null)
+            return;
+
+        if (!TryComp<BlindableComponent>(ent.Owner, out var blindableCompMech))
+            return;
+
+        if (TryComp<BlindableComponent>(mechComp.PilotSlot.ContainedEntity, out var blindableComp))
+        {
+            _blindable.AdjustEyeDamage((args.Mech, blindableCompMech), (-blindableCompMech.EyeDamage + blindableComp.EyeDamage));
+            return;
+        }
+
+        _blindable.AdjustEyeDamage((args.Mech, blindableCompMech), -blindableCompMech.EyeDamage);
+    }
+
+    private void OnOpticsRemoved(Entity<MechOpticsComponent> ent, ref MechPartRemovedEvent args)
+    {
+        if (!TryComp<AltMechComponent>(args.Mech, out var mechComp))
+            return;
+
+        if (!TryComp<BlindableComponent>(args.Mech, out var blindableCompMech))
+            return;
+
+        _blindable.AdjustEyeDamage((args.Mech, blindableCompMech), (9 - blindableCompMech.EyeDamage)); //Mech cannot see anything if it has no eyes
+    }
+
     private void OnProvideItemStartup(EntityUid uid, MechArmComponent component, ComponentStartup args)
     {
         _container.EnsureContainer<Container>(uid, component.HoldingContainer);
     }
-
-    //private void OnArmInserted(EntityUid uid, MechArmComponent component, ref MechPartInsertedEvent args)
-    //{
-    //    if(!TryComp<MechPartComponent>(uid, out var partComp))
-    //        return;
-
-    //    if (partComp.PartOwner == null || !TryComp<AltMechComponent>(uid, out var mechComp))
-    //        return;
-
-    //    ProvideItems((EntityUid)partComp.PartOwner, uid, mechComp, component);
-    //}
 
     public void ProvideItems(EntityUid mechUid, EntityUid uid, AltMechComponent? mechComp = null, MechArmComponent? armComp = null)
     {
@@ -107,10 +142,8 @@ public sealed class MechPartSystem : EntitySystem
         if (!_container.TryGetContainer(uid, armComp.HoldingContainer, out var container))
             return;
 
-        if (!TryComp<HandsComponent>((EntityUid)mechUid, out var hands))
+        if (!TryComp<HandsComponent>(mechUid, out var hands))
             return;
-
-        //EntityUid pilot = (EntityUid)mechComp.PilotSlot.ContainedEntity;
 
         var xform = Transform(mechUid);
 
@@ -119,7 +152,7 @@ public sealed class MechPartSystem : EntitySystem
             var hand = armComp.Hands[i];
             var handId = $"{uid}-hand-{i}";
 
-            _hands.AddHand(((EntityUid)mechUid, hands), handId, hand.Hand);
+            _hands.AddHand((mechUid, hands), handId, hand.Hand);
             EntityUid? item = null;
 
             if (armComp.StoredItems is not null)
@@ -137,7 +170,7 @@ public sealed class MechPartSystem : EntitySystem
 
             if (item is { } pickUp)
             {
-                _hands.DoPickup((EntityUid)mechUid, handId, pickUp, hands);
+                _hands.DoPickup(mechUid, handId, pickUp, hands);
                 if (!hand.ForceRemovable && hand.Hand.Whitelist == null && hand.Hand.Blacklist == null)
                 {
                     EnsureComp<UnremoveableComponent>(pickUp);
@@ -159,7 +192,7 @@ public sealed class MechPartSystem : EntitySystem
         if (TerminatingOrDeleted(uid))
             return;
 
-        if (!TryComp<HandsComponent>((EntityUid)mechUid, out var hands))
+        if (!TryComp<HandsComponent>(mechUid, out var hands))
             return;
 
         component.StoredItems ??= new();
@@ -247,16 +280,16 @@ public sealed class MechPartSystem : EntitySystem
         _mech.UpdateMechOnlineStatus(args.Mech, ent.Owner);
     }
 
-    private void OnInsertPart(EntityUid uid, MechPartComponent component, InsertPartEvent args)
+    private void OnInsertPart(Entity<MechPartComponent> ent, ref InsertPartEvent args)
     {
         if (args.Handled || args.Cancelled || args.Args.Target == null)
             return;
 
-        _popup.PopupEntity(Loc.GetString("mech-equipment-finish-install", ("item", uid)), args.Args.Target.Value);
-        _mech.InsertPart(args.Args.Target.Value, uid);
+        _popup.PopupEntity(Loc.GetString("mech-equipment-finish-install", ("item", ent.Owner)), args.Args.Target.Value);
+        _mech.InsertPart(args.Args.Target.Value, ent.Owner);
 
-        if (component.PartOwner != null)
-            _mech.UpdateUserInterface((EntityUid)component.PartOwner);
+        if (ent.Comp.PartOwner != null)
+            _mech.UpdateUserInterface((EntityUid)ent.Comp.PartOwner);
 
         args.Handled = true;
     }

@@ -15,7 +15,7 @@ namespace Content.Shared.SS220.Mech.Parts.Components;
 public sealed partial class MechPartComponent : Component
 {
     /// <summary>
-    /// How long does it take to install this piece of equipment
+    /// How long does it take to install this part
     /// </summary>
     [DataField("installDuration")] public float InstallDuration = 5;
 
@@ -24,12 +24,6 @@ public sealed partial class MechPartComponent : Component
     /// </summary>
     [ViewVariables, AutoNetworkedField]
     public EntityUid? PartOwner;
-
-    /// <summary>
-    /// The mech that the equipment is inside of.
-    /// </summary>
-    [ViewVariables, AutoNetworkedField]
-    public bool ToBeRemoved = false;
 
     /// <summary>
     /// The slot this part can be attached to
@@ -52,7 +46,9 @@ public sealed partial class MechPartComponent : Component
     /// <summary>
     /// How much does this part weight
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite), DataField, AutoNetworkedField]
+    [DataField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    [AutoNetworkedField]
     public FixedPoint2 OwnMass = 0;
 
     /// <summary>
@@ -65,34 +61,3 @@ public sealed partial class MechPartComponent : Component
     [AutoNetworkedField]
     public SpriteSpecifier? AttachedSprite;
 }
-
-/// <summary>
-/// Raised on the equipment when the installation is finished successfully
-/// </summary>
-public sealed class MechPartInstallFinished : EntityEventArgs
-{
-    public EntityUid Mech;
-
-    public MechPartInstallFinished(EntityUid mech)
-    {
-        Mech = mech;
-    }
-}
-
-/// <summary>
-/// Raised on the equipment when the installation fails.
-/// </summary>
-public sealed class MechPartInstallCancelled : EntityEventArgs
-{
-}
-
-[Serializable, NetSerializable]
-public sealed partial class GrabberDoAfterEvent : SimpleDoAfterEvent
-{
-}
-
-[Serializable, NetSerializable]
-public sealed partial class InsertPartEvent : SimpleDoAfterEvent
-{
-}
-

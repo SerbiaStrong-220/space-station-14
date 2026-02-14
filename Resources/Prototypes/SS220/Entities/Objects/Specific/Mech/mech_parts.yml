@@ -31,10 +31,25 @@
   - type: MechPart
     slot: chassis
     ownMass: 200
+    integrity: 200
+    maxIntegrity: 200
   - type: MechChassis
     maximalMass: 550
     baseMovementSpeed: 3.6
     footstepSound: /Audio/Mecha/sound_mecha_powerloader_step.ogg
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
 
 - type: entity
   id: BaseMechRightArm
@@ -44,7 +59,47 @@
   - type: MechPart
     slot: right-arm
     ownMass: 100
+    integrity: 150
+    maxIntegrity: 150
   - type: MechArm
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: BaseMechHead
+  parent: MechPartBase
+  abstract: true
+  components:
+  - type: MechOptics
+  - type: MechPart
+    slot: head
+    ownMass: 25
+    integrity: 100
+    maxIntegrity: 100
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
 
 - type: entity
   id: BaseMechLeftArm
@@ -54,7 +109,39 @@
   - type: MechPart
     slot: left-arm
     ownMass: 100
+    integrity: 150
+    maxIntegrity: 150
   - type: MechArm
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+
+- type: entity
+  id: MechHeadTest
+  parent: BaseMechHead
+  name: Mech visor
+  components:
+  - type: FlashImmunity
+  - type: EyeProtection
+  - type: Sprite
+    sprite: Objects/Specific/Mech/mecha_equipment.rsi
+    state: mecha_clamp
+  - type: MechPart
+    integrity: 100
+    attachedSprite:
+      sprite: SS220/Objects/Specific/Robotics/Mechs/heads.rsi
+      state: welding
 
 - type: entity
   parent: MechBatterySmall
@@ -95,6 +182,30 @@
       state: basichydraulic
 
 - type: entity
+  id: TestRightArmNoWhitelist
+  parent: BaseMechRightArm
+  name: TestArm
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Mech/mecha_equipment.rsi
+    state: mecha_clamp
+  - type: MechArm
+    hands:
+    - hand:
+        location: Right
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-big
+      right:
+      - state: inhand-right-big
+  - type: MechPart
+    integrity: 150
+    attachedSprite:
+      sprite: SS220/Objects/Specific/Robotics/Mechs/righthand.rsi
+      state: basichydraulic
+
+- type: entity
   id: TestLeftArm
   parent: BaseMechLeftArm
   components:
@@ -121,7 +232,7 @@
       state: basichydraulic
 
 - type: entity
-  id: PowerloaderPart
+  id: PowerloaderChassis
   parent: BaseMechChassis
   name: Powerloader hydraulic chassis
   description: Low-tier hydraulic chassis,heavy and slow but also very powerfull and reliable
@@ -130,7 +241,7 @@
     sprite: Objects/Specific/Mech/mecha_equipment.rsi
     state: mecha_clamp
   - type: MechChassis
-    maximalMass: 550
+    maximalMass: 850
     baseMovementSpeed: 3.6
     acceleration: 1.0
     efficiency: 0.01
@@ -198,7 +309,7 @@
     state: mecha_clamp
   - type: MechPart
     slot: power
-    ownMass: 200
+    ownMass: 75
     integrity: 200
     attachedSprite:
       sprite: SS220/Objects/Specific/Robotics/Mechs/batteries.rsi
