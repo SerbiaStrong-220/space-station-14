@@ -22,7 +22,7 @@ public sealed class AmmoGunModifierSystem : EntitySystem
         var modifier = args.CurrentAmmoModifier;
 
         if (modifier.SoundGunshotAlt != null)
-            args.SoundGunshot += modifier.SoundGunshotAlt.Value;
+            args.SoundGunshot = modifier.SoundGunshotAlt;
         if (modifier.MinAngleDelta != null)
             args.MinAngle += modifier.MinAngleDelta.Value;
         if (modifier.MaxAngleDelta != null)
