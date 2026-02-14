@@ -25,7 +25,6 @@
     - Flashed
     - RadiationProtection
     - Adrenaline
-    - MiGoHeal #SS220 CultYogg
   - type: Buckle
   - type: StandingState
   - type: Tag
@@ -100,7 +99,6 @@
     - Flashed
     - RadiationProtection
     - Adrenaline
-    - MiGoHeal #SS220 CultYogg
   - type: Bloodstream
     bloodMaxVolume: 150
   - type: MobPrice
