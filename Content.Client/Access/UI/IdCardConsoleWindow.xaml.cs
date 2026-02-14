@@ -1,4 +1,6 @@
 using System.Linq;
+using Content.Client.SS220.UserInterface.Controls;
+using Content.Client.SS220.UserInterface.System.PinUI;
 using Content.Shared.Access;
 using Content.Shared.Access.Systems;
 using Content.Shared.CCVar;
@@ -14,7 +16,7 @@ using static Content.Shared.Access.Components.IdCardConsoleComponent;
 namespace Content.Client.Access.UI
 {
     [GenerateTypedNameReferences]
-    public sealed partial class IdCardConsoleWindow : DefaultWindow
+    public sealed partial class IdCardConsoleWindow : DefaultWindow, IPinnableWindow // ss220 add pin for ui
     {
         [Dependency] private readonly IConfigurationManager _cfgManager = default!;
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
@@ -106,6 +108,10 @@ namespace Content.Client.Access.UI
             {
                 button.OnPressed += _ => SubmitData();
             }
+
+            // SS220 add pin button begin
+            PinUISystem.AddPinButtonBeforeTarget(this, CloseButton);
+            // SS220 add pin button end
         }
 
         /// <param name="enabled">If true, every individual access button will be pressed. If false, each will be depressed.</param>

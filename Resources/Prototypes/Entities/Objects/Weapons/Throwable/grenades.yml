@@ -86,7 +86,7 @@
   id: GrenadeFlashBang
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/flashbang.rsi
+    sprite: SS220/Objects/Weapons/Grenades/flashbang.rsi #SS220 From cabinet to 3/4, Part 2
   - type: FlashOnTrigger
     keysIn:
     - timer
@@ -142,7 +142,7 @@
   id: SyndieMiniBomb
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/syndgrenade.rsi
+    sprite: SS220/Objects/Weapons/Grenades/syndgrenade.rsi #SS220 From cabinet to 3/4, Part 2
   - type: ExplosionResistance
     damageCoefficient: 0.1
   - type: Destructible
@@ -214,7 +214,7 @@
   description: Grenade that simulates the power of a singularity, pulling things in a heap.
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/singularitygrenade.rsi
+    sprite: SS220/Objects/Weapons/Grenades/singularitygrenade.rsi #SS220 From cabinet to 3/4, Part 2
   - type: TimerTrigger
     delay: 3
     beepInterval: 0.46
@@ -285,7 +285,7 @@
   id: WhiteholeGrenade
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/whiteholegrenade.rsi
+    sprite: SS220/Objects/Weapons/Grenades/whiteholegrenade.rsi #SS220 From cabinet to 3/4, Part 2
   - type: TimerTrigger
     delay: 3
     beepInterval: 0.69
@@ -345,7 +345,7 @@
   id: NuclearGrenade
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/nukenade.rsi
+    sprite: SS220/Objects/Weapons/Grenades/nukenade.rsi #SS220 From cabinet to 3/4, Part 2
   - type: TimerTrigger
     delay: 5
   - type: ExplodeOnTrigger
@@ -383,7 +383,7 @@
       params:
         volume: 2
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/modular.rsi
+    sprite: SS220/Objects/Weapons/Grenades/modular.rsi #SS220 From cabinet to 3/4, Part 2
     layers:
     - state: empty
       map: [ "enum.ConstructionVisuals.Layer" ]
@@ -431,7 +431,7 @@
   id: EmpGrenade
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/empgrenade.rsi
+    sprite: SS220/Objects/Weapons/Grenades/empgrenade.rsi #SS220 From cabinet to 3/4, Part 2
   - type: EmpOnTrigger
     keysIn:
     - timer
@@ -454,7 +454,7 @@
   id: HolyHandGrenade
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/holyhandgrenade.rsi
+    sprite: SS220/Objects/Weapons/Grenades/holyhandgrenade.rsi #SS220 From cabinet to 3/4, Part 2
   - type: ExplodeOnTrigger
     keysIn:
     - timer
@@ -497,7 +497,7 @@
   description: A tactical grenade that releases a large, long-lasting cloud of smoke when used.
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/smoke.rsi
+    sprite: SS220/Objects/Weapons/Grenades/smoke.rsi #SS220 From cabinet to 3/4, Part 2
   - type: SmokeOnTrigger
     keysIn:
     - timer
@@ -541,7 +541,7 @@
   description: A riot control tear gas grenade. Causes irritation, pain and makes you cry your eyes out.
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/tear_gas.rsi
+    sprite: SS220/Objects/Weapons/Grenades/tear_gas.rsi #SS220 From cabinet to 3/4, Part 2
   - type: SmokeOnTrigger
     keysIn:
     - timer
@@ -560,7 +560,7 @@
   description: An emergency tool used for patching hull breaches with special quick-set metal foam. Almost as good as real floors!
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/metalfoam.rsi
+    sprite: SS220/Objects/Weapons/Grenades/metalfoam.rsi #SS220 From cabinet to 3/4, Part 2
   - type: TimerTrigger
     delay: 5
   - type: SmokeOnTrigger
@@ -666,7 +666,7 @@
   id: SyndieTrickyBomb
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/syndgrenade.rsi
+    sprite: SS220/Objects/Weapons/Grenades/syndgrenade.rsi #SS220 From cabinet to 3/4, Part 2
   - type: TimerTrigger
     delay: 5
   - type: EmitSoundOnTrigger

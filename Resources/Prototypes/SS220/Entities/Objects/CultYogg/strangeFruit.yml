@@ -37,13 +37,20 @@
       - Wall
   components:
     - type: Sprite
-      sprite: SS220/Objects/CultYogg/strangefruit.rsi
+      sprite: SS220/Objects/CultYogg/strange_kudzu.rsi
       state: kudzu_11
       drawdepth: HighFloorObjects
     - type: Clickable
     - type: Kudzu
       growthTickChance: 0.2
-      spreadChance: 0.2
+      spreadChance: 0.1
+      damageRecovery:
+        types:
+          Slash: -0.5
+          Heat: -1.0
+          Cold: -1.0
+          Blunt: -0.5
+    - type: KudzuVisuals
     - type: Fixtures
       fixtures:
         fix1:
@@ -63,7 +70,6 @@
         - CultYogg
         - MiGo
     - type: Damageable
-      damageModifierSet: Wood
     - type: Destructible
       thresholds:
       - trigger:
@@ -90,6 +96,18 @@
           damage:
             types:
               Heat: 0.5
+    - type: Temperature
+      heatDamage:
+        types:
+          Heat: 10
+      coldDamage:
+        types:
+          Cold: 5
+    - type: AtmosExposed
+    - type: Barotrauma
+      damage:
+        types:
+          Blunt: 0.5
 
 - type: entity
   parent: SeedBase

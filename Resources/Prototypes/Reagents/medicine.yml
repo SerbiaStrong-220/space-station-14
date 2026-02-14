@@ -1164,6 +1164,11 @@
         factor: 3
       #SS220 Cult start
       - !type:SaintWaterDrinkEffect
+      - !type:GenericStatusEffect
+        key: Rave
+        component: Rave
+        type: Remove
+        time: 150
       #SS220 Cult end
     Medicine:
       effects:

@@ -2,13 +2,13 @@ using Content.Server.Administration.Logs;
 using Content.Server.Mind;
 using Content.Server.Popups;
 using Content.Server.Roles;
+using Content.Server.SS220.CombustingMindShield;
 using Content.Server.SS220.MindSlave;
 using Content.Shared.Database;
 using Content.Shared.Implants;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Revolutionary.Components;
 using Content.Shared.Roles.Components;
-using Content.Shared.SS220.CombustingMindShield;
 using Content.Shared.SS220.CultYogg.Cultists;
 using Robust.Shared.Containers;
 
@@ -32,6 +32,8 @@ public sealed class MindShieldSystem : EntitySystem
 
         SubscribeLocalEvent<MindShieldImplantComponent, ImplantImplantedEvent>(OnImplantImplanted);
         SubscribeLocalEvent<MindShieldImplantComponent, ImplantRemovedEvent>(OnImplantRemoved);
+		SubscribeLocalEvent<MindShieldComponent, ComponentRemove>(OnRemove);//SS220 CombustedMindShieldEvent #3500
+		SubscribeLocalEvent<MindShieldComponent, GotCultifiedEvent>(OnGotCultified);//Cult hotfix 16 #3599
     }
 
     private void OnImplantImplanted(Entity<MindShieldImplantComponent> ent, ref ImplantImplantedEvent ev)
@@ -66,12 +68,25 @@ public sealed class MindShieldSystem : EntitySystem
             var comp = EnsureComp<CombustingMindShieldComponent>(implanted);
             comp.Implant = implant;
         }
-        //SS220 Cult hotfix 14 #3477 end 
+        //SS220 Cult hotfix 14 #3477 end
     }
 
     private void OnImplantRemoved(Entity<MindShieldImplantComponent> ent, ref ImplantRemovedEvent args)
     {
         RemComp<MindShieldComponent>(args.Implanted);
     }
+
+    //SS220 CombustedMindShieldEvent #3500 start
+    private void OnRemove(Entity<MindShieldComponent> ent, ref ComponentRemove args)
+    {
+        RemComp<CombustingMindShieldComponent>(ent);
+    }
+    //SS220 CombustedMindShieldEvent #3500 end
+    //Cult hotfix 16 #3599 start
+    private void OnGotCultified(Entity<MindShieldComponent> ent, ref GotCultifiedEvent _)
+    {
+        EnsureComp<CombustingMindShieldComponent>(ent);
+    }
+    //Cult hotfix 16 #3599 end
 }
 

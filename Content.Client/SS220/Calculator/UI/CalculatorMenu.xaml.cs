@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using System.Numerics;
 using System.Text;
+using Content.Client.SS220.UserInterface.Controls;
 using Content.Client.Stylesheets;
 using Content.Client.SS220.UserInterface.Utility;
 using Content.Shared.SS220.Calculator;
@@ -23,7 +24,7 @@ using static Robust.Shared.Input.Binding.PointerInputCmdHandler;
 namespace Content.Client.SS220.Calculator.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class CalculatorMenu : BaseWindow
+public sealed partial class CalculatorMenu : BaseWindow, IPinnableWindow
 {
     [Dependency] private readonly IResourceCache _resourceCache = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -107,7 +108,7 @@ public sealed partial class CalculatorMenu : BaseWindow
         BindButtonToKey(builder, KeyFunctions220.CalculatorTypeDot, ButtonDot);
         BindButtonToKey(builder, KeyFunctions220.CalculatorEnter, ButtonEquals);
         BindButtonToKey(builder, KeyFunctions220.CalculatorClear, ButtonClear);
-        BindButtonToKey(builder, EngineKeyFunctions.CloseModals, ButtonClose);
+        BindButtonToKey(builder, EngineKeyFunctions.WindowCloseRecent, ButtonClose);
         builder.Register<CalculatorMenu>();
 
         PlayAnimation(_style.OpenAnimation, ANIMATION_OPEN);
@@ -125,7 +126,7 @@ public sealed partial class CalculatorMenu : BaseWindow
             return;
         }
         // Press UI button even if closed via Esc or other means,
-        // return cos pressing close button will lead us back here again. 
+        // return cos pressing close button will lead us back here again.
         if (!_isClosedWithButton)
         {
             _buttons.PressButton(ButtonClose, _buttonPressedDuration);

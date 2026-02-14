@@ -115,3 +115,19 @@
       amount: 1
   products:
     Xlebnuldiesel: 3
+
+- type: reaction 
+  id: Skooma
+  requiredMixerCategories:
+  - Shake
+  reactants: 
+   Sugar:
+    amount: 1
+   Aloe:
+    amount: 1
+   BlackRussian:
+    amount: 1
+   CatariaJuice: 
+    amount: 1 
+  products: 
+    Skooma: 4

@@ -86,7 +86,6 @@
           - Artifacts
           - Bank
           - Zoo
-          - MiningOutpost
           - Tesla
           #SS220
           - Saveplanet
@@ -96,6 +95,7 @@
           - Robotisation
           - Homekeepers
           - ComplexPVO
+          - SportComplex
 
 - type: entity
   id: AstroNanotrasenStation

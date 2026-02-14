@@ -1,0 +1,13 @@
+- type: entity
+  parent: BaseActionPolymorph
+  id: ActionPolymorphWizardSpiderGhost
+  name: Spider Ghost Polymorph
+  description: Polymorphs you into a Spider Ghost.
+  components:
+  - type: Action
+    icon:
+      sprite: Mobs/Animals/spider.rsi
+      state: nurse
+  - type: InstantAction
+    event: !type:PolymorphActionEvent
+      protoId: WizardSpiderGhost

@@ -28,7 +28,7 @@
 
   # Главный врач
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformFoldableBase] 
   id: ClothingUniformJumpsuitCMOCorporate
   name: corporate CMO Jumpsuit
   description: «A beautiful, stylish suit of a real chief medical officer. It emphasises the person's nature and the beauty of his charisma...» Nothing further on the unopened label.
@@ -784,3 +784,18 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/wasteland_suit.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/wasteland_suit.rsi
+
+- type: entity
+  parent: [ClothingUniformJumpsuitChameleon]
+  id: ClothingUniformJumpsuitElectricity
+  suffix: Electrification jumpsuit
+  name: black jumpsuit
+  description: A generic black jumpsuit with no rank markings.
+  components:
+  - type: StaminaResistance
+    damageCoefficient: 0.1
+  - type: StaminaConvertArmor
+    damageType: Shock
+    damageCoefficient: 0.2
+    ignoredEffects:
+    - Paralyze

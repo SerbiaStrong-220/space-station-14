@@ -416,6 +416,7 @@
   - type: Storage
     whitelist:
       tags:
+      - LaserSMGPowerCell # SS220 IK-40 PowerCell-Storage-Fix
       - CigPack
       - Taser
       - SecBeltEquip

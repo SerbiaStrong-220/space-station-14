@@ -67,9 +67,6 @@
   - type: NpcFactionMember
     factions:
     - CultYogg
-  - type: AntagObjectives
-    objectives:
-    - CultYoggSacraficeObjective
   #situational for logic
   - type: Puller
     needsHands: false
@@ -86,6 +83,7 @@
   - type: ThermalVision
     state: Half
     visionRadius: 14
+    changeIconOverlaySpace: true
   #visual
   - type: PointLight
     netsync: false
@@ -128,8 +126,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      200: Critical
-      250: Dead
+      140: Critical
+      150: Dead
   - type: Destructible
     thresholds:
     - trigger:
@@ -151,7 +149,7 @@
       types:
         Blunt: 4
         Slash: 7
-        Structural: 12 #anti-useless in base
+        Structural: 40 #anti-useless in base
   - type: Temperature
     heatDamageThreshold: 360
     coldDamageThreshold: -150
