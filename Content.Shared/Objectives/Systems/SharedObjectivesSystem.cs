@@ -113,7 +113,7 @@ public abstract class SharedObjectivesSystem : EntitySystem
         if (!TryComp<ObjectiveComponent>(objective, out var comp))
         {
             Del(objective);
-            Log.Error($"Invalid objective proto (custom objective), missing ObjectiveComponent");
+            Log.Error("Invalid objective proto (custom objective), missing ObjectiveComponent");
             return null;
         }
 
@@ -122,7 +122,8 @@ public abstract class SharedObjectivesSystem : EntitySystem
 
         comp.Completed = false;
         comp.Icon = icon;
-        comp.LocIssuer = locIssuer;
+        comp.Issuer = locIssuer;
+
         return objective;
     }
     // ss220 add custom goals x2 end
