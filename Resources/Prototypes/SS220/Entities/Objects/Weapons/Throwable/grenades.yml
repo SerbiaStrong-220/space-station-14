@@ -23,7 +23,5 @@
       path: /Audio/Effects/minibombcountdown.ogg
       params:
         volume: 12
-  # SS-220 grenades timer start
-    - type: UseDelay
-        delay: 5
-  # SS-220 grenades timer ended
+  - type: UseDelay
+    delay: 5
