@@ -421,13 +421,13 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
                     continue;
 
                 var dynamicValue = dynamicsPrice.FirstOrDefault(x => x.Key == currency).Value;
-                var nominator = originalAmount + discountAmount;
-                var denominator = originalAmount + dynamicValue;
-                if (denominator <= FixedPoint2.Zero)
+                var finalPrice = originalAmount + discountAmount;
+                var baseDynamicPrice = originalAmount + dynamicValue;
+                if (baseDynamicPrice <= FixedPoint2.Zero)
                     continue;
 
-                var discountPercent = -(float)( nominator / denominator);
-                relativeModifiedPercent.Add(currency, discountPercent);
+                var discountPercent = (finalPrice - baseDynamicPrice) / baseDynamicPrice;
+                relativeModifiedPercent.Add(currency, (float)discountPercent);
             }
         }
         return relativeModifiedPercent;
@@ -460,6 +460,14 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
             ApplyModifier(dictionary, modifier);
         }
 
+        foreach (var currency in dictionary.Keys.ToList())
+        {
+            if (dictionary[currency] < FixedPoint2.Zero)
+            {
+                dictionary[currency] = FixedPoint2.Zero;
+            }
+        }
+
         return dictionary;
     }
 
@@ -473,11 +481,13 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
             if (applyTo.TryGetValue(currency, out var currentAmount))
             {
                 var modifiedAmount = currentAmount + modifyBy;
-                if (modifiedAmount < 0)
-                {
-                    modifiedAmount = 0;
+                //SS220 TraitorDynamics - start it shouldn't be checked here
+                // if (modifiedAmount < 0)
+                // {
+                //     modifiedAmount = 0;
                     // no negative cost allowed
-                }
+                // }
+                //SS220 TraitorDynamics - end
                 applyTo[currency] = modifiedAmount;
             }
         }

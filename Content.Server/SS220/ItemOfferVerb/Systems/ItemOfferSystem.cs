@@ -7,8 +7,6 @@ using Content.Shared.Alert;
 using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
-using Content.Shared.Silicons.Borgs.Components;
-using Content.Shared.Interaction.Components;
 using Robust.Shared.Input.Binding;
 using Content.Shared.SS220.Input;
 using Content.Shared.SS220.ItemOffer;
@@ -65,28 +63,30 @@ public sealed class ItemOfferSystem : SharedItemOfferSystem
         base.Update(frameTime);
 
         var enumerator = EntityQueryEnumerator<ItemReceiverComponent, TransformComponent>();
-        while (enumerator.MoveNext(out var uid, out var comp, out var transform))
+        while (enumerator.MoveNext(out var uid, out var comp, out _))
         {
             var receiverPos = Transform(comp.Giver).Coordinates;
             var giverPos = Transform(uid).Coordinates;
             receiverPos.TryDistance(EntityManager, giverPos, out var distance);
             var giverHands = Comp<HandsComponent>(comp.Giver);
+
+            if (distance < comp.ReceiveRange)
+                continue;
+
             if (distance > comp.ReceiveRange)
             {
-                if (distance > comp.ReceiveRange)
-                {
-                    _alerts.ClearAlert(uid, _itemOfferAlert);
-                    _entMan.RemoveComponent<ItemReceiverComponent>(uid);
-                }
-                //FunTust: added a new variable responsible for whether the object is still in the hand during transmission
+                _alerts.ClearAlert(uid, _itemOfferAlert);
+                _entMan.RemoveComponent<ItemReceiverComponent>(uid);
+            }
 
-                var foundInHand = _hands.IsHolding((comp.Giver, giverHands), comp.Item!.Value);
+            //FunTust: added a new variable responsible for whether the object is still in the hand during transmission
 
-                if (!foundInHand)
-                {
-                    _alerts.ClearAlert(uid, _itemOfferAlert);
-                    _entMan.RemoveComponent<ItemReceiverComponent>(uid);
-                }
+            var foundInHand = _hands.IsHolding((comp.Giver, giverHands), comp.Item!.Value);
+
+            if (!foundInHand)
+            {
+                _alerts.ClearAlert(uid, _itemOfferAlert);
+                _entMan.RemoveComponent<ItemReceiverComponent>(uid);
             }
         }
     }
@@ -98,24 +98,16 @@ public sealed class ItemOfferSystem : SharedItemOfferSystem
 
         _hands.PickupOrDrop(itemReceiver.Giver, itemReceiver.Item!.Value);
 
-        if (_hands.TryPickupAnyHand(receiver, itemReceiver.Item!.Value))
-        {
-            if (itemReceiver == null)
-                return;
+        if (!_hands.TryPickupAnyHand(receiver, itemReceiver.Item!.Value))
+            return;
 
-            _hands.PickupOrDrop(itemReceiver.Giver, itemReceiver.Item!.Value);
-            if (_hands.TryPickupAnyHand(receiver, itemReceiver.Item!.Value))
-            {
-                var loc = Loc.GetString("loc-item-offer-transfer",
-                    ("user", itemReceiver.Giver),
-                    ("item", itemReceiver.Item),
-                    ("target", receiver));
-                _popupSystem.PopupEntity(loc, itemReceiver.Giver, PopupType.Medium);
-                _alerts.ClearAlert(receiver, _itemOfferAlert);
-                _entMan.RemoveComponent<ItemReceiverComponent>(receiver);
-            }
-            ;
-        }
+        var loc = Loc.GetString("loc-item-offer-transfer",
+            ("user", itemReceiver.Giver),
+            ("item", itemReceiver.Item),
+            ("target", receiver));
+        _popupSystem.PopupEntity(loc, itemReceiver.Giver, PopupType.Medium);
+        _alerts.ClearAlert(receiver, _itemOfferAlert);
+        _entMan.RemoveComponent<ItemReceiverComponent>(receiver);
     }
 
     protected override void DoItemOffer(EntityUid user, EntityUid target)
@@ -124,7 +116,7 @@ public sealed class ItemOfferSystem : SharedItemOfferSystem
             return;
 
         // (fix https://github.com/SerbiaStrong-220/space-station-14/issues/2054)
-        if (HasComp<BorgChassisComponent>(user) || target == user)
+        if (target == user)
             return;
 
         if (_hands.CountFreeHands((target, handsComponent)) == 0)
@@ -136,7 +128,16 @@ public sealed class ItemOfferSystem : SharedItemOfferSystem
         if (!_hands.TryGetActiveItem(user, out var item))
             return;
 
-        if (HasComp<UnremoveableComponent>(item))
+        var evItem = new CanOfferItemEvent(user, target);
+        RaiseLocalEvent(item.Value, ref evItem, true);
+
+        if (evItem.Cancelled)
+            return;
+
+        var evUser = new CanOfferItemEvent(user, target);
+        RaiseLocalEvent(user, ref evUser, true);
+
+        if (evUser.Cancelled)
             return;
 
         var itemReceiver = EnsureComp<ItemReceiverComponent>(target);

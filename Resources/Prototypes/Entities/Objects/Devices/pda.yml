@@ -430,8 +430,11 @@
       visible: false #SS220 PDA-Resprite-End
   - type: Icon
     state: pda-cook
-  - type: ReplacementAccent # for random sentience event
-    accent: italian
+  #SS220 Accents begin
+  #- type: ReplacementAccent # for random sentience event
+  #  accent: italian
+  - type: ItalianAccent
+  #SS220 Accents end
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -2121,8 +2124,6 @@
   #SS220 PDA-Resprite-End
   - type: PdaBorderColor
     borderColor: "#7a998d" #SS220 PDA-Resprite
-#    accentHColor: "#447987" #SS220 PDA-Resprite
-#    accentVColor: "#447987" #SS220 PDA-Resprite
   - type: Sprite #SS220 PDA-Resprite-Start
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]

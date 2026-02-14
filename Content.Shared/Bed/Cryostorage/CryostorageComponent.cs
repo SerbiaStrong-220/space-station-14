@@ -48,14 +48,14 @@ public sealed partial class CryostorageComponent : Component
     /// <summary>
     /// ProtoId of teleport portal, that will spawn on TryTeleportToCryo
     /// </summary>
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public EntProtoId TeleportPortralID = "CryoStoragePortal";
+    [DataField]
+    public EntProtoId TeleportPortalId = "CryoStoragePortal";
 
     /// <summary>
     /// ProtoId of ghost action
     /// </summary>
     [DataField]
-    public EntProtoId LeaveActionID = "ActionCryoGhost";
+    public EntProtoId LeaveActionId = "ActionCryoGhost";
 
     [DataField]
     public EntityUid? LeaveActionUid;
