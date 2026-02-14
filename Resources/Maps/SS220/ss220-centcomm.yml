@@ -117048,7 +117048,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: -47.5,10.5
       parent: 1
-- proto: WardrobePrisonSecureFilled
+- proto: WarderobePrisonSecureFilled
   entities:
   - uid: 14727
     components:
