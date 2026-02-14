@@ -11,7 +11,7 @@ namespace Content.Server.SS220.Objectives.Components;
 public sealed partial class CultYoggSummonConditionComponent : Component
 {
     /// <summary>
-    /// Amount of sacrafices required to summon a god
+    /// Amount of sacrifices required to summon a god
     /// </summary>
     [DataField]
     public int ReqSacrAmount = 1;
