@@ -6,7 +6,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server.SS220.StartAnnouncement;
 
-public sealed class StartAnnouncement : EntitySystem
+public sealed class StartAnnouncementSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
