@@ -17,7 +17,7 @@ public abstract class SharedObjectivesSystem : EntitySystem
 
     private EntityQuery<MetaDataComponent> _metaQuery;
 
-    private static readonly EntProtoId FreeObjectiveProto = "FreeObjective"; // ss220 add custom goals x2
+    private static readonly EntProtoId FreeObjectiveProto = "SS220FreeObjective"; // ss220 add custom goals x2
 
     public override void Initialize()
     {
