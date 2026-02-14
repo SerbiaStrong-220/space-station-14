@@ -1,6 +1,6 @@
-using System.Linq;
 using Content.Server.Chat.Systems;
 using Content.Shared.GameTicking;
+using Content.Shared.SS220.StartAnnouncement;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
@@ -24,7 +24,8 @@ public sealed class StartAnnouncement : EntitySystem
 
     private void OnRoundStarted(RoundStartedEvent ev)
     {
-        var protoLore = _proto.Index<AnnouncementLorePrototype>(_protoLore);
+        if (!_proto.TryIndex(_protoLore, out var protoLore))
+            return;
 
         if (ev.RoundId - _previousAnnouncement <= protoLore.IdleRound)
             return;
@@ -35,7 +36,7 @@ public sealed class StartAnnouncement : EntitySystem
         if (protoLore.LoreDatasetId == null || protoLore.LoreDatasetId.Count == 0)
             return;
 
-        var department = _random.Pick(protoLore.LoreDatasetId.Keys.ToList());
+        var department = _random.Pick(protoLore.LoreDatasetId.Keys);
 
         if (!protoLore.LoreDatasetId.TryGetValue(department, out var datasetId))
             return;

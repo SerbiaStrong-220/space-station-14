@@ -1,7 +1,7 @@
 using Content.Shared.Dataset;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server.SS220.StartAnnouncement;
+namespace Content.Shared.SS220.StartAnnouncement;
 
 [Prototype]
 public sealed partial class AnnouncementLorePrototype : IPrototype
