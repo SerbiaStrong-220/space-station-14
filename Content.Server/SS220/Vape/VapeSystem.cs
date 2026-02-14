@@ -3,7 +3,6 @@ using Content.Shared.Atmos;
 using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Clothing;
-using Content.Shared.Damage;
 using Content.Shared.SS220.Vape;
 
 namespace Content.Server.SS220.Vape;
@@ -28,26 +27,23 @@ public sealed class VapeSystem : SharedVapeSystem
 
         while (query.MoveNext(out var vape, out var comp))
         {
-            if (comp.User == null)
+            if (!comp.Puffing || comp.User == null)
                 continue;
 
             if (comp.AtomizerEntity == null || comp.CartridgeEntity == null)
                 continue;
 
-            if (!comp.Puffing)
+            if (!Solution.TryGetRefillableSolution(comp.AtomizerEntity.Value, out _, out var sol) ||
+                !Solution.TryGetSolution(comp.User.Value, BloodstreamComponent.DefaultChemicalsSolutionName, out var userSol))
+            {
                 continue;
+            }
 
-            if (!Solution.TryGetRefillableSolution(comp.AtomizerEntity.Value, out _, out var sol))
+            if (!TryComp<VapePartComponent>(comp.CartridgeEntity, out var cartPart) ||
+                cartPart.PartData is not CartridgePartData cartridge)
+            {
                 continue;
-
-            if (!Solution.TryGetSolution(comp.User.Value, BloodstreamComponent.DefaultChemicalsSolutionName, out var userSol))
-                continue;
-
-            if (!TryComp<VapePartComponent>(comp.CartridgeEntity, out var cartPart))
-                continue;
-
-            if (cartPart.PartData is not CartridgePartData cartridge)
-                continue;
+            }
 
             var inhaleAmount = cartridge.ConsumptionRate * frameTime;
 
@@ -63,9 +59,7 @@ public sealed class VapeSystem : SharedVapeSystem
             }
 
             if (Solution.TryTransferSolution(userSol.Value, sol, inhaleAmount))
-            {
                 comp.AccumulatedVapedVolume += inhaleAmount;
-            }
 
             cartridge.CurrentDurability -= cartridge.DurabilityConsumption * frameTime;
 
@@ -80,21 +74,13 @@ public sealed class VapeSystem : SharedVapeSystem
                 continue;
             }
 
-            Dirty(comp.CartridgeEntity.Value, cartPart);
-
             if (comp is { IsEmagged: false, StartPuffingTime: not null } &&
                 GameTiming.CurTime > comp.StartPuffingTime + comp.MaxPuffTime)
             {
-                var newDamage = new DamageSpecifier();
-
-                foreach (var damage in comp.Damage.DamageDict)
-                {
-                    newDamage.DamageDict.Add(damage.Key, damage.Value.Float() * frameTime);
-                }
-
-                Damage.TryChangeDamage(comp.User.Value, newDamage, true);
+                Damage.TryChangeDamage(comp.User.Value, comp.Damage * frameTime, true);
             }
 
+            Dirty(comp.CartridgeEntity.Value, cartPart);
             Dirty(vape, comp);
         }
     }
