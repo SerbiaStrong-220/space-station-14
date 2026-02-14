@@ -107,5 +107,4 @@ public sealed partial class OpenPortalContractorEvent : SimpleDoAfterEvent;
 [Serializable, NetSerializable]
 public sealed partial class TeleportTargetToStationEvent : SimpleDoAfterEvent;
 
-[Serializable, NetSerializable]
 public sealed partial class BuyContractorKitEvent : ListingPurchasedEvent;

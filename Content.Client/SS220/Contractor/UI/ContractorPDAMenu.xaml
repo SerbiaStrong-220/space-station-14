@@ -18,7 +18,7 @@
                 <BoxContainer Name="HubPanel" Margin="0 0 0 50" Visible="False" Orientation="Vertical" Access="Public" SeparationOverride="5" HorizontalExpand="True" VerticalExpand="True"/>
             </ScrollContainer>
         </PanelContainer>
-        <Button Name="ContractsButton" Access="Public" Pressed="True" Margin="102 184 332 494" SetSize="100 20" VerticalAlignment="Top" StyleClasses="ContractorButtonStyle" ToggleMode="True">
+        <Button Name="ContractsButton" Access="Public" Pressed="True" Margin="102 185 332 494" SetSize="100 20" VerticalAlignment="Top" StyleClasses="ContractorButtonStyle" ToggleMode="True">
             <PanelContainer SetSize="14 10" Margin="0 3 65 0" VerticalAlignment="Center" StyleClasses="ContractorContractsImage"/>
             <Label Text="Контракты" Margin="25 0 0 0" VerticalAlignment="Center" StyleClasses="ContractorLabelStyle"/>
         </Button>

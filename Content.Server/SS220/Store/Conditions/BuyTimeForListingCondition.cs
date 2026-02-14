@@ -22,9 +22,7 @@ public sealed partial class BuyTimeForListingCondition : ListingCondition
         _mindSystem = args.EntityManager.System<MindSystem>();
         _role = args.EntityManager.System<SharedRoleSystem>();
 
-        _mindSystem.TryGetMind(args.Buyer, out var mind, out _);
-
-        if (!_role.MindHasRole<TraitorRoleComponent>(mind, out var traitorRoleComponent))
+        if (!_role.MindHasRole<TraitorRoleComponent>(args.Buyer, out var traitorRoleComponent))
             return false;
 
         var currentTime = _gameTiming.CurTime;
