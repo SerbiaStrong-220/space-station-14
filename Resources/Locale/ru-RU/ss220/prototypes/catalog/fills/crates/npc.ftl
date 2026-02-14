@@ -68,4 +68,4 @@ ent-CrateNPCCrocodile = ящик с крокодилом
     .desc = Ящик с домашним крокодилом.
 ent-CrateNPCCrocodileLocked = { ent-CrateNPCCrocodile }
     .desc = { ent-CrateNPCCrocodile.desc }
-    .suffix = Крокодил, закрыт
+    .suffix = Крокодил, Закрыт
