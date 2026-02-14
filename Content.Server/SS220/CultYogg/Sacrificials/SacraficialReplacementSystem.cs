@@ -3,20 +3,20 @@
 using Content.Server.SS220.GameTicking.Rules;
 using Content.Server.SS220.Objectives.Components;
 using Content.Server.SS220.Objectives.Systems;
-using Content.Shared.SS220.CultYogg.Sacraficials;
+using Content.Shared.SS220.CultYogg.Sacrificials;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using Content.Server.SS220.Bed.Cryostorage;
 using Content.Shared.Interaction.Events;
 
-namespace Content.Server.SS220.CultYogg.Sacraficials;
+namespace Content.Server.SS220.CultYogg.Sacrificials;
 
-public sealed partial class SacraficialReplacementSystem : EntitySystem
+public sealed partial class SacrificialReplacementSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly CultYoggRuleSystem _cultRule = default!;
 
-    //dictionary of sacraficials uids and time when they left body by gibbing/ghosting/leaving anything
+    //dictionary of sacrificials uids and time when they left body by gibbing/ghosting/leaving anything
     private readonly Dictionary<EntityUid, TimeSpan> _replaceSacrSchedule = [];
     private readonly Dictionary<EntityUid, TimeSpan> _announceSchedule = [];
 
@@ -41,7 +41,7 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
             RaiseLocalEvent(uid, ref ev);
         }
 
-        _cultRule.SendCultAnounce(Loc.GetString("cult-yogg-sacraficial-was-picked", ("name", MetaData(ent).EntityName)));
+        _cultRule.SendCultAnounce(Loc.GetString("cult-yogg-sacrificial-was-picked", ("name", MetaData(ent).EntityName)));
     }
 
     private void OnRemove(Entity<CultYoggSacrificialComponent> ent, ref ComponentRemove args)
@@ -61,7 +61,7 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
         if (_announceSchedule.Remove(ent))//if the announcement was not sent
             return;
 
-        _cultRule.SendCultAnounce(Loc.GetString("cult-yogg-sacraficial-cant-be-replaced", ("name", MetaData(ent).EntityName)));
+        _cultRule.SendCultAnounce(Loc.GetString("cult-yogg-sacrificial-cant-be-replaced", ("name", MetaData(ent).EntityName)));
     }
 
     private void OnPlayerDetached(Entity<CultYoggSacrificialComponent> ent, ref PlayerDetachedEvent args)
@@ -72,7 +72,7 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
 
     private void OnCryoDeleted(Entity<CultYoggSacrificialComponent> ent, ref BeingCryoDeletedEvent args)
     {
-        var ev = new SacraficialReplacementEvent(ent);
+        var ev = new SacrificialReplacementEvent(ent);
         RaiseLocalEvent(ent, ref ev, true);
     }
 
@@ -82,7 +82,7 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
             return;
 
         var time = (comp.ReplacementCooldown.TotalSeconds - comp.AnnounceReplacementCooldown.TotalSeconds).ToString();
-        _cultRule.SendCultAnounce(Loc.GetString("cult-yogg-sacraficial-will-be-replaced", ("name", MetaData(uid).EntityName), ("time", time)));
+        _cultRule.SendCultAnounce(Loc.GetString("cult-yogg-sacrificial-will-be-replaced", ("name", MetaData(uid).EntityName), ("time", time)));
     }
 
     public override void Update(float frameTime)
@@ -93,7 +93,7 @@ public sealed partial class SacraficialReplacementSystem : EntitySystem
             if (_timing.CurTime < pair.Value)
                 continue;
 
-            var ev = new SacraficialReplacementEvent(pair.Key);
+            var ev = new SacrificialReplacementEvent(pair.Key);
             RaiseLocalEvent(pair.Key, ref ev, true);
 
             _replaceSacrSchedule.Remove(pair.Key);

@@ -7,7 +7,4 @@
   id: Rave
 
 - type: statusEffect
-  id: MiGoHeal
-
-- type: statusEffect
   id: ChemicalAdaptationEffect
