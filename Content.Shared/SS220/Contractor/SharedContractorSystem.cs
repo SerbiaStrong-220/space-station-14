@@ -1,5 +1,6 @@
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.SS220.Store.Listing;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
@@ -105,3 +106,6 @@ public sealed partial class OpenPortalContractorEvent : SimpleDoAfterEvent;
 /// </summary>
 [Serializable, NetSerializable]
 public sealed partial class TeleportTargetToStationEvent : SimpleDoAfterEvent;
+
+[Serializable, NetSerializable]
+public sealed partial class BuyContractorKitEvent : ListingPurchasedEvent;

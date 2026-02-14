@@ -6,6 +6,7 @@ using Content.Server.Preferences.Managers;
 using Content.Server.Roles;
 using Content.Server.Roles.Jobs;
 using Content.Server.Stack;
+using Content.Server.Traitor.Uplink;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
@@ -58,7 +59,7 @@ public sealed class ContractorServerSystem : SharedContractorSystem
         SubscribeLocalEvent<ContractorPdaComponent, ContractorExecutionButtonPressedMessage>(OnExecuteContract);
         SubscribeLocalEvent<ContractorPdaComponent, ContractorAbortContractMessage>(AbortContract);
 
-        SubscribeLocalEvent<StoreBuyListingMessage>(OnBuyContractorKit);
+        SubscribeLocalEvent<BuyContractorKitEvent>(OnBuyContractorKit);
     }
 
     public override void Update(float frameTime)
@@ -123,11 +124,11 @@ public sealed class ContractorServerSystem : SharedContractorSystem
             warpPoints.Add(portalOnTajpan);
         }
 
-        if (warpPoints.Count > 0)
-        {
-            var randomIndex = _random.Next(warpPoints.Count);
-            targetComponent.PortalOnTajpanEntity = warpPoints[randomIndex];
-        }
+        if (warpPoints.Count == 0)
+            return;
+
+        var randomIndex = _random.Next(warpPoints.Count);
+        targetComponent.PortalOnTajpanEntity = warpPoints[randomIndex];
 
         ent.Comp.BlockUntil = BlockTimeBetweenPortal;
 
@@ -144,14 +145,15 @@ public sealed class ContractorServerSystem : SharedContractorSystem
         if (!TryComp<ContractorComponent>(ev.Actor, out var contractorComponent))
             return;
 
+        var contractEntity = GetEntity(ev.ContractEntity);
+
         if (!contractorComponent.Contracts.ContainsKey(ev.ContractEntity))
         {
-            _adminLogger.Add(LogType.Action, LogImpact.Extreme, $"Contractor {ev.Actor} accepted unknown contract {ev.ContractEntity}");
+            _adminLogger.Add(LogType.Action, LogImpact.Extreme, $"Contractor {ev.Actor} accepted unknown contract {ToPrettyString(contractEntity)}");
             return;
         }
 
-        EnsureComp<ContractorTargetComponent>(GetEntity(ev.ContractEntity), out var target);
-
+        EnsureComp<ContractorTargetComponent>(contractEntity, out var target);
         target.CanBeAssigned = false;
 
         if (target.AmountTc > MaxAllowedTcPerContract || ev.TcReward > MaxAllowedTcPerContract)
@@ -159,7 +161,7 @@ public sealed class ContractorServerSystem : SharedContractorSystem
             _adminLogger.Add(
                 LogType.Action,
                 LogImpact.Extreme,
-                $"Contractor {ev.Actor} accepted unknown contract {ev.ContractEntity} with very big amount");
+                $"Contractor {ev.Actor} accepted unknown contract {contractEntity} with very big amount");
 
             return;
         }
@@ -173,7 +175,9 @@ public sealed class ContractorServerSystem : SharedContractorSystem
 
         Dirty(ev.Actor, contractorComponent);
 
-        if (TryComp<ContractorPdaComponent>(GetEntity(ev.Entity), out var contractorPdaComponent))
+        var pdaEntity = GetEntity(ev.Entity);
+
+        if (TryComp<ContractorPdaComponent>(pdaEntity, out var contractorPdaComponent))
         {
             contractorPdaComponent.CurrentContractEntity = ev.ContractEntity;
             contractorPdaComponent.CurrentContractData = ev.ContractData;
@@ -207,6 +211,7 @@ public sealed class ContractorServerSystem : SharedContractorSystem
         {
             BreakOnMove = true,
             BreakOnDamage = true,
+            MovementThreshold = 1f,
         });
     }
 
@@ -223,7 +228,7 @@ public sealed class ContractorServerSystem : SharedContractorSystem
 
         var coordinates = Transform(ev.Actor).Coordinates;
 
-        var telCrystal = _stack.SpawnMultiple("Telecrystal", (int)ev.Amount, coordinates);
+        var telCrystal = _stack.SpawnMultiple(UplinkSystem.TelecrystalCurrencyPrototype, (int)ev.Amount, coordinates);
 
         if (telCrystal.FirstOrDefault() is var tUid)
             _hands.PickupOrDrop(ev.Actor, tUid);
@@ -234,12 +239,9 @@ public sealed class ContractorServerSystem : SharedContractorSystem
         Dirty(ev.Actor, contractorComponent);
     }
 
-    private void OnBuyContractorKit(StoreBuyListingMessage ev)
+    private void OnBuyContractorKit(BuyContractorKitEvent ev)
     {
-        if (ev.Listing.Id != "UplinkContractor")
-            return;
-
-        EnsureComp<ContractorComponent>(ev.Actor);
+        EnsureComp<ContractorComponent>(ev.Purchaser);
     }
 
     /// <summary>

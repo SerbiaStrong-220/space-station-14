@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Numerics;
 using Content.Client.SS220.CriminalRecords.UI;
+using Content.Client.Stylesheets;
 using Content.Shared.SS220.Contractor;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
@@ -28,6 +29,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
     public ContractorBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         IoCManager.InjectDependencies(this);
+
         _contractorPdaComponent = EntMan.GetComponent<ContractorPdaComponent>(owner);
         EntMan.TryGetComponent<ContractorComponent>(
             EntMan.GetEntity(_contractorPdaComponent.PdaOwner),
@@ -163,10 +165,9 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
 
         var contractContainer = new PanelContainer
         {
-            Margin = new Thickness(0),
             HorizontalExpand = true,
             VerticalAlignment = Control.VAlignment.Top,
-            StyleClasses = { "ContractsPanelFilled" },
+            StyleClasses = { ContractorStyle.ContractsPanelFilled },
         };
 
         var topContainer = new BoxContainer
@@ -180,7 +181,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
         var descriptionLabel = new RichTextLabel
         {
             Text = "Замечен в контакте с вульпой, что вызывает подозрения в утечке информации.",
-            StyleClasses = { "ContractorRichLabelStyle" },
+            StyleClasses = { ContractorStyle.ContractorRichLabelStyle },
             HorizontalAlignment = Control.HAlignment.Left,
             Margin = new Thickness(2, 45, 170, 0),
             SetSize = new Vector2(137, 93),
@@ -198,7 +199,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
             MaxWidth = 350,
             Margin = new Thickness(5, 0, 0, 0),
             VerticalAlignment = Control.VAlignment.Center,
-            StyleClasses = { "ContractorLabelStyle" }
+            StyleClasses = { ContractorStyle.ContractorLabelStyle },
         };
 
         var targetButton = new Button
@@ -208,13 +209,13 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
             MinSize = new Vector2(32, 22),
             Margin = new Thickness(0, 0, 0, 0),
             VerticalAlignment = Control.VAlignment.Center,
-            StyleClasses = { "ContractorExecutionButton" },
+            StyleClasses = { ContractorStyle.ContractorExecutionButton },
         };
 
         var iconTarget = new PanelContainer
         {
             MaxSize = new Vector2(16, 14),
-            StyleClasses = { "ContractorPhotoImage" },
+            StyleClasses = { ContractorStyle.ContractorPhotoImage },
         };
 
         targetButton.AddChild(iconTarget);
@@ -269,7 +270,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
             VerticalAlignment = Control.VAlignment.Top,
             SetSize = new Vector2(80, 30),
             Margin = new Thickness(0, 18, 2, 0),
-            StyleClasses= { "ContractorExecutionButton" },
+            StyleClasses= { ContractorStyle.ContractorExecutionButton },
             Modulate = Color.DarkRed,
         };
 
@@ -278,7 +279,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
             Text = Loc.GetString("contractor-uplink-abort"),
             HorizontalAlignment = Control.HAlignment.Center,
             VerticalAlignment = Control.VAlignment.Center,
-            StyleClasses = { "ContractorLabelStyle" },
+            StyleClasses = { ContractorStyle.ContractorLabelStyle },
         };
 
         abortButton.AddChild(abortLabel);
@@ -296,7 +297,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
             if (_contractorPdaComponent.CurrentContractEntity == target)
             {
                 abortButton.Visible = true;
-                contractContainer.AddStyleClass("ContractAcceptedBorder");
+                contractContainer.AddStyleClass(ContractorStyle.ContractAcceptedBorder);
                 ClearPositionButtons(positionsContainer);
             }
 
@@ -305,7 +306,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
                 HorizontalExpand = false,
                 VerticalExpand = false,
                 HorizontalAlignment = Control.HAlignment.Right,
-                StyleClasses = { "ContractorExecutionButton" },
+                StyleClasses = { ContractorStyle.ContractorExecutionButton },
                 SetSize = new Vector2(200, 30),
                 Margin = new Thickness(0, 5, 0, 0),
             };
@@ -315,7 +316,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
                 Text = $"{amountPosition.Location} ({amountPosition.TcReward} ТК)",
                 HorizontalAlignment = Control.HAlignment.Center,
                 VerticalAlignment = Control.VAlignment.Center,
-                StyleClasses = { "ContractorLabelStyle" },
+                StyleClasses = { ContractorStyle.ContractorLabelStyle },
             };
 
             positionButton.AddChild(positionLabel);
@@ -329,7 +330,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
 
                 abortButton.Visible = true;
 
-                contractContainer.AddStyleClass("ContractAcceptedBorder");
+                contractContainer.AddStyleClass(ContractorStyle.ContractAcceptedBorder);
 
                 ClearPositionButtons(positionsContainer);
 
@@ -477,7 +478,7 @@ public sealed class ContractorBoundUserInterface : BoundUserInterface
             Text = Loc.GetString("contractor-uplink-withdraw-tc"),
             HorizontalExpand = true,
             MinSize = new Vector2(200, 40),
-            StyleClasses = { "OpenBoth" },
+            StyleClasses = { StyleBase.ButtonOpenBoth },
         };
 
         withdrawButton.OnPressed += _ =>
