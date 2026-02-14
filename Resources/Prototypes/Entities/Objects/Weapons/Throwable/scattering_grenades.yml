@@ -35,8 +35,10 @@
         - ItemMask
         restitution: 0.3
         friction: 0.2
+  # SS-220 grenades timer start
   - type: UseDelay
     delay: 3
+  # SS-220 grenades timer ended
 
 - type: entity
   parent: [ScatteringGrenadeBase, BaseSecurityContraband]

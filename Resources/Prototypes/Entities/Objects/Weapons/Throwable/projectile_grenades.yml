@@ -75,8 +75,10 @@
   - type: TimerTriggerVisuals
     primingSound:
       path: /Audio/Effects/countdown.ogg
+  # SS-220 grenades timer start
   - type: UseDelay
     delay: 3.5
+  # SS-220 grenades timer ended
 
 - type: entity
   parent: [ProjectileGrenadeBase] # SS220 Remove BaseSyndicateContraband
@@ -109,8 +111,10 @@
     positional: true
   - type: StaticPrice
     price: 1500
+  # SS-220 grenades timer start
   - type: UseDelay
     delay: 3.5
+  # SS-220 grenades timer ended
 
 - type: entity
   parent: [ProjectileGrenadeBase] # SS220 Remove BaseSyndicateContraband
@@ -143,5 +147,7 @@
     positional: true
   - type: StaticPrice
     price: 1500
+  # SS-220 grenades timer start
   - type: UseDelay
     delay: 3.5
+  # SS-220 grenades timer ended
