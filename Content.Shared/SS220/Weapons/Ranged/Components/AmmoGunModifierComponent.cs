@@ -1,4 +1,5 @@
 using Robust.Shared.GameStates;
+using Robust.Shared.Audio;
 
 namespace Content.Shared.SS220.Weapons.Ranged.Components;
 
@@ -28,7 +29,7 @@ public sealed partial class AmmoGunModifierComponent : Component
     public Angle? MaxAngleDelta;
 
     /// <summary>
-    /// Alters the value for how much the spread increases once the gun fired.
+    /// Alters how much the spread increases once the gun fired.
     /// </summary>
     [DataField]
     public Angle? AngleIncreaseDelta;

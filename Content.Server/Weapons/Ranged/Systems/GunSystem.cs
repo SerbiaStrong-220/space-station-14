@@ -37,7 +37,6 @@ public sealed partial class GunSystem : SharedGunSystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly ShuttleNavInfoSystem _shuttleNavInfo = default!; // SS220 Add projectiles & hitscan on shuttle nav
-    [Dependency] private readonly SharedGunSystem _gun = default!; // SS220 Gun variety
 
     private const float DamagePitchVariation = 0.05f;
 
@@ -110,7 +109,7 @@ public sealed partial class GunSystem : SharedGunSystem
         // DebugTools.Assert(direction != Vector2.Zero);
         var shotProjectiles = new List<EntityUid>(ammo.Count);
 
-        _gun.RefreshModifiers((gunUid, gun), currentModifier); // SS220 Gun variety
+        RefreshModifiers((gunUid, gun), currentModifier); // SS220 Gun variety
         foreach (var (ent, shootable) in ammo)
         {
             // pneumatic cannon doesn't shoot bullets it just throws them, ignore ammo handling
