@@ -357,6 +357,12 @@
   id: MiGoHandsWhitelist
 
 - type: Tag
+  id: VapePartAtomizer
+
+- type: Tag
+  id: VapePartCartridge
+
+- type: Tag
   id: DefibrillatorCompact
 
 - type: Tag
