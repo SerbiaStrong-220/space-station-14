@@ -4,6 +4,8 @@ using Content.Shared.Examine;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
+using Content.Shared.SS220.Damage.Components;
+using Content.Shared.SS220.Damage.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
@@ -13,6 +15,8 @@ namespace Content.Shared.Weapons.Ranged.Systems;
 
 public abstract partial class SharedGunSystem
 {
+    [Dependency] private readonly ArmorPenetrationSystem _apSystem = default!; //SS220 - Gun variety
+
     protected virtual void InitializeBattery()
     {
         // Trying to dump comp references hence the below
@@ -48,7 +52,7 @@ public abstract partial class SharedGunSystem
         else if (component is HitscanBatteryAmmoProviderComponent hitscanComp)
             hitscanComp.Prototype = state.Prototype;
         //SS220 Add Multifaze gun end
-        
+
         UpdateAmmoCount(uid, prediction: false);
     }
 
@@ -92,6 +96,26 @@ public abstract partial class SharedGunSystem
         };
 
         _damageExamine.AddDamageExamine(args.Message, Damageable.ApplyUniversalAllModifiers(damageSpec), damageType);
+
+        //SS220 - Gun variety - custom AP begin
+        string? prototype = entity.Comp switch
+        {
+            ProjectileBatteryAmmoProviderComponent proj => proj.Prototype,
+            HitscanBatteryAmmoProviderComponent hitscan => hitscan.Prototype,
+            _ => null
+        };
+
+        if (prototype != null)
+        {
+            var apComp = _apSystem.GetArmorPenetration(prototype);
+            if (apComp != null && apComp.Rules.Count > 0)
+            {
+                var apInfoString = _apSystem.BuildArmorPenetrationDescription(apComp.Rules);
+                if (!string.IsNullOrEmpty(apInfoString))
+                    args.Message.AddMarkupPermissive("\n" + apInfoString);
+            }
+        }
+        //SS220 - Gun variety - custom AP end
     }
 
     private DamageSpecifier? GetDamage(BatteryAmmoProviderComponent component)
