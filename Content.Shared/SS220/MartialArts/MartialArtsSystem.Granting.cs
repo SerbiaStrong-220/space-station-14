@@ -22,7 +22,7 @@ public sealed partial class MartialArtsSystem
             return;
 
         if (!TryGrantMartialArt(user, comp.MartialArt, false, true, artist))
-            _popup.PopupClient(Loc.GetString("martial-arts-cant-grant"), user, user);
+            _popup.PopupClient(Loc.GetString(artist.CantGrantArtPopup), user, user);
 
         ev.Handled = true;
     }
@@ -96,7 +96,7 @@ public sealed partial class MartialArtsSystem
         StartupEffects(user, proto);
 
         if (popups)
-            _popup.PopupClient(Loc.GetString("martial-arts-granted-art", ("art", Loc.GetString(proto.Name))), user, user);
+            _popup.PopupClient(Loc.GetString(artist.GrantedArtPopup, ("art", Loc.GetString(proto.Name))), user, user);
 
         _adminLog.Add(LogType.Experience, LogImpact.Medium, $"{ToPrettyString(user):player} was granted with \"{proto.ID:martial art}\"");
 
@@ -119,7 +119,7 @@ public sealed partial class MartialArtsSystem
             ShutdownEffects(user, proto);
 
         if (popups)
-            _popup.PopupClient(Loc.GetString("martial-arts-revoked-art", ("art", Loc.GetString(proto?.Name ?? "martial-arts-unknown"))), user, user);
+            _popup.PopupClient(Loc.GetString(artist.RevokedArtPopup, ("art", Loc.GetString(proto?.Name ?? UnknownArt))), user, user);
 
         _adminLog.Add(LogType.Experience, LogImpact.Medium, $"\"{proto?.ID:martial art}\" has been revoked for {ToPrettyString(user):player}");
     }

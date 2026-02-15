@@ -32,6 +32,18 @@ public sealed partial class MartialArtistComponent : Component
     [DataField]
     [AutoNetworkedField]
     public TimeSpan LastSequenceCooldown = TimeSpan.Zero;
+
+    [DataField]
+    public LocId PerformedSequencePopup = "martial-arts-performed-sequence";
+
+    [DataField]
+    public LocId CantGrantArtPopup = "martial-arts-cant-grant";
+
+    [DataField]
+    public LocId GrantedArtPopup = "martial-arts-granted-art";
+
+    [DataField]
+    public LocId RevokedArtPopup = "martial-arts-revoked-art";
 }
 
 [Serializable, NetSerializable]

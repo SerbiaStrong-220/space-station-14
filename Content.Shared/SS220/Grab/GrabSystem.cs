@@ -338,7 +338,7 @@ public sealed partial class GrabSystem : EntitySystem
 
         if (freeHands < 2)
         {
-            _popup.PopupClient(Loc.GetString("grabber-component-no-free-hands"), grabber);
+            _popup.PopupClient(Loc.GetString(grabber.Comp.NoFreeHandsPopup), grabber);
             return;
         }
 

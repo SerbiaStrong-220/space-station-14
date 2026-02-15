@@ -39,6 +39,7 @@ public sealed partial class MartialArtsSystem : EntitySystem, IMartialArtEffectE
     [Dependency] private readonly GrabSystem _grab = default!;
 
     private static readonly ProtoId<AlertPrototype> CooldownAlert = "MartialArtCooldown";
+    private static readonly LocId UnknownArt = "martial-arts-unknown";
 
     public override void Initialize()
     {
@@ -244,7 +245,7 @@ public sealed partial class MartialArtsSystem : EntitySystem, IMartialArtEffectE
 
         PerformSequenceEntry(user, target, artist, sequence.Entry, sequence);
 
-        _popup.PopupClient(Loc.GetString("martial-arts-performed-sequence", ("sequence", Loc.GetString(sequence.Name))), user);
+        _popup.PopupClient(Loc.GetString(artist.PerformedSequencePopup, ("sequence", Loc.GetString(sequence.Name))), user);
 
         artist.LastSequencePerformedAt = _timing.CurTime;
         artist.LastSequenceCooldown = sequence.Cooldown;

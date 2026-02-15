@@ -53,4 +53,7 @@ public sealed partial class GrabberComponent : Component
 
     [DataField]
     public LocId GrabUpgradePopup = "grabber-component-grab-upgrade-popup";
+
+    [DataField]
+    public LocId NoFreeHandsPopup = "grabber-component-no-free-hands";
 }
