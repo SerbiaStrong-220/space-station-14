@@ -4,7 +4,7 @@ using Content.Shared.StatusIcon;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.SS220.CultYogg.Sacraficials;
+namespace Content.Shared.SS220.CultYogg.Sacrificials;
 
 /// <summary>
 /// Used to markup cult's sacrifice targets
@@ -16,7 +16,7 @@ public sealed partial class CultYoggSacrificialComponent : Component
     public bool IconVisibleToGhost = true;
 
     [ViewVariables]
-    public ProtoId<FactionIconPrototype> StatusIcon { get; set; } = "CultYoggSacraficialTargetIcon";
+    public ProtoId<FactionIconPrototype> StatusIcon { get; set; } = "CultYoggSacrificialTargetIcon";
 
     /// <summary>
     /// Time required for announcement
@@ -37,5 +37,5 @@ public sealed partial class CultYoggSacrificialComponent : Component
     public TimeSpan SuicidePenaltyTime = TimeSpan.FromSeconds(300);
 
     [ViewVariables]
-    public bool WasSacraficed = false;
+    public bool WasSacrificed = false;
 }
