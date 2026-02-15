@@ -27,6 +27,7 @@ public sealed class SharedClinkGlassesSystem : EntitySystem
 
     private static readonly SpriteSpecifier VerbIcon = new SpriteSpecifier.Texture(new("/Textures/SS220/Interface/VerbIcons/glass-celebration.png"));
     private static readonly ProtoId<AlertPrototype> ClinkGlassesAlert = "ClinkGlasses";
+
     public override void Initialize()
     {
         SubscribeLocalEvent<ClinkGlassesComponent, GetVerbsEvent<Verb>>(OnVerb);
@@ -70,7 +71,7 @@ public sealed class SharedClinkGlassesSystem : EntitySystem
         if (!args.CanInteract || !args.CanAccess)
             return;
 
-        if (!TryComp<ClinkGlassesInitiatorComponent>(args.User, out var comp))
+        if (!HasComp<ClinkGlassesInitiatorComponent>(args.User))
             return;
 
         var user = args.User;
@@ -94,6 +95,7 @@ public sealed class SharedClinkGlassesSystem : EntitySystem
 
         EnsureComp<ClinkGlassesInitiatorComponent>(args.User, out var comp);
         comp.Items.Add(ent);
+        Dirty(args.User, comp);
     }
 
     private void OnGotUnequippedHand(Entity<ClinkGlassesComponent> ent, ref GotUnequippedHandEvent args)
@@ -108,6 +110,8 @@ public sealed class SharedClinkGlassesSystem : EntitySystem
 
         if (comp.Items.Count == 0)
             RemComp<ClinkGlassesInitiatorComponent>(args.User);
+
+        DirtyEntity(ent);
     }
 
     private void OnInitiatorAlternativeVerb(Entity<ClinkGlassesInitiatorComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
@@ -115,7 +119,7 @@ public sealed class SharedClinkGlassesSystem : EntitySystem
         if (!args.CanInteract || !args.CanAccess)
             return;
 
-        if (!TryComp<ClinkGlassesInitiatorComponent>(args.User, out var comp))
+        if (!HasComp<ClinkGlassesInitiatorComponent>(args.User))
             return;
 
         if (!CheckDistance(args.User, args.Target))
@@ -147,8 +151,9 @@ public sealed class SharedClinkGlassesSystem : EntitySystem
         if (_hands.TryGetActiveItem(receiver.Owner, out var itemInHand)
             && HasComp<ClinkGlassesComponent>(itemInHand)
             && receiver.Comp.Initiator != receiver.Owner)
-
+        {
             DoClinkGlass(receiver.Owner, receiver.Comp.Initiator, itemInHand.Value);
+        }
 
         EndClinkGlassesReceiver(receiver.Owner);
     }
@@ -271,6 +276,7 @@ public sealed class SharedClinkGlassesSystem : EntitySystem
             return false;
 
         initiatorComp.NextClinkTime = _gameTiming.CurTime + TimeSpan.FromSeconds(initiatorComp.Cooldown);
+        Dirty(initiator, initiatorComp);
 
         return true;
     }
