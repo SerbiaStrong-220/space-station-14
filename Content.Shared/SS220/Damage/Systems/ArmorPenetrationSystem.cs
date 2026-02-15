@@ -6,6 +6,7 @@ using Content.Shared.Inventory;
 using Content.Shared.SS220.Damage.Components;
 using Content.Shared.SS220.Damage.Events;
 using Robust.Shared.Prototypes;
+using System.Text;
 
 namespace Content.Shared.SS220.Damage.Systems;
 
@@ -17,7 +18,7 @@ public sealed class ArmorPenetrationSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        
+
         SubscribeLocalEvent<APDamageModifyEvent>(OnAPDamageModify);
     }
 
@@ -25,14 +26,14 @@ public sealed class ArmorPenetrationSystem : EntitySystem
     {
         if (args.Source == null)
             return;
-        
+
         if (!TryComp<ArmorPenetrationComponent>(args.Source.Value, out var apComp))
             return;
 
         var target = args.Target;
-                
+
         var targetCoefficients = GetDamageCoefficients(target);
-                
+
         var damage = args.Damage;
         var newDamageDict = new Dictionary<string, FixedPoint2>(damage.DamageDict);
 
@@ -64,9 +65,9 @@ public sealed class ArmorPenetrationSystem : EntitySystem
     private Dictionary<string, float> GetDamageCoefficients(EntityUid target)
     {
         var coefficients = new Dictionary<string, float>();
-        
+
         // Entity itself
-        if (TryComp<DamageableComponent>(target, out var damageable) 
+        if (TryComp<DamageableComponent>(target, out var damageable)
             && damageable.DamageModifierSetId != null
             && _prototypeManager.TryIndex<DamageModifierSetPrototype>(damageable.DamageModifierSetId, out var modifierSet))
         {
@@ -75,7 +76,7 @@ public sealed class ArmorPenetrationSystem : EntitySystem
                 coefficients[dmgType] = coeffValue;
             }
         }
-        
+
         // Armor
         if (!_inventory.TryGetSlots(target, out var slots))
             return coefficients;
@@ -99,7 +100,61 @@ public sealed class ArmorPenetrationSystem : EntitySystem
                     coefficients[dmgType] = coeffValue;
             }
         }
-        
+
         return coefficients;
     }
+
+    /// <summary>
+    /// Used to get entity's armor penetration values, if present
+    /// </summary>
+    /// <returns>ArmorPenetrationComponent</returns>
+    public ArmorPenetrationComponent? GetArmorPenetration(EntProtoId proto)
+    {
+        if (!_prototypeManager.TryIndex<EntityPrototype>(proto, out var entityProto))
+            return null;
+
+        if (entityProto.TryGetComponent<ArmorPenetrationComponent>(out var apComp, Factory))
+            return apComp;
+
+        return null;
+    }
+
+    public string BuildArmorPenetrationDescription(List<ArmorPenetrationRule> rules)
+    {
+        if (rules.Count == 0)
+            return "";
+
+        var description = new StringBuilder();
+        description.AppendLine(Loc.GetString("ammo-ap-rules-header"));
+
+        foreach (var rule in rules)
+        {
+            string damageTypeName;
+            if (_prototypeManager.TryIndex<DamageTypePrototype>(rule.DamageType, out var damageTypeProto))
+                damageTypeName = damageTypeProto.LocalizedName;
+
+            else
+                damageTypeName = rule.DamageType; // Use ID as fallback
+
+            var multiplierPercentage = (rule.Multiplier * 100.0f).ToString("F0");
+
+            var armorConditionStr = rule.Reversed ? "less" : "more" ;
+            var thresholdPercentage = (100.0f - rule.ArmorThreshold * 100.0f).ToString("F0");
+
+            var ruleDescription = Loc.GetString("ammo-ap-rule-description",
+                                               ("type", damageTypeName),
+                                               ("multiplier", multiplierPercentage),
+                                               ("armor", armorConditionStr),
+                                               ("threshold", thresholdPercentage));
+            description.AppendLine(ruleDescription);
+        }
+
+        // Remove the trailing newline added by the last AppendLine
+        var finalString = description.ToString();
+        if (finalString.EndsWith("\n"))
+            finalString = finalString[..^1];
+
+        return finalString;
+    }
+
 }

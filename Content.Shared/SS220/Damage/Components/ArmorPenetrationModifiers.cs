@@ -11,7 +11,7 @@ namespace Content.Shared.SS220.Damage.Components
     /// Component for damage attempts that changes damage values based on armor coefficients.
     /// </summary>
     [RegisterComponent]
-    [Access(typeof(DamageableSystem))]
+    [Access(typeof(DamageableSystem), typeof(ArmorPenetrationSystem))]
     public sealed partial class ArmorPenetrationComponent : Component
     {
         [DataField("rules")]
@@ -28,7 +28,7 @@ namespace Content.Shared.SS220.Damage.Components
         /// The damage type this rule applies to (e.g., Blunt, Piercing).
         /// </summary>
         [DataField("damageType", required: true)]
-        public string DamageType { get; set; } = default!;
+        public ProtoId<DamageTypePrototype> DamageType { get; set; } = default!;
 
         /// <summary>
         /// The threshold value for the armor coefficient.
