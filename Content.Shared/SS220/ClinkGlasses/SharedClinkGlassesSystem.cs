@@ -50,10 +50,6 @@ public sealed class SharedClinkGlassesSystem : EntitySystem
                 continue;
             }
 
-            // Prediction shenanigans
-            if (clinkGlassesComp.Initiator == EntityUid.Invalid)
-                continue;
-
             // Check validity
             if (!HasComp<ClinkGlassesInitiatorComponent>(uid) || !HasComp<ClinkGlassesInitiatorComponent>(clinkGlassesComp.Initiator))
             {
@@ -62,9 +58,7 @@ public sealed class SharedClinkGlassesSystem : EntitySystem
             }
 
             // Check distance
-            var initiatorCoords = Transform(clinkGlassesComp.Initiator).Coordinates;
-            var receiverCoords = Transform(uid).Coordinates;
-            if (!initiatorCoords.TryDistance(EntityManager, receiverCoords, out var distance) || distance > clinkGlassesComp.ReceiveRange)
+            if (!CheckDistance(uid, clinkGlassesComp.Initiator))
                 EndClinkGlassesReceiver(uid);
         }
     }
@@ -124,6 +118,9 @@ public sealed class SharedClinkGlassesSystem : EntitySystem
         if (!TryComp<ClinkGlassesInitiatorComponent>(args.User, out var comp))
             return;
 
+        if (!CheckDistance(args.User, args.Target))
+            return;
+
         if (args.User == args.Target)
             return;
 
@@ -149,8 +146,7 @@ public sealed class SharedClinkGlassesSystem : EntitySystem
     {
         if (_hands.TryGetActiveItem(receiver.Owner, out var itemInHand)
             && HasComp<ClinkGlassesComponent>(itemInHand)
-            && receiver.Comp.Initiator != receiver.Owner
-            && receiver.Comp.Initiator != EntityUid.Invalid)
+            && receiver.Comp.Initiator != receiver.Owner)
 
             DoClinkGlass(receiver.Owner, receiver.Comp.Initiator, itemInHand.Value);
 
@@ -180,18 +176,17 @@ public sealed class SharedClinkGlassesSystem : EntitySystem
 
     private void DoClinkGlassesOffer(EntityUid initiator, EntityUid receiver, EntityUid item)
     {
+        // If initiator already have offer from receiver - clink glasses
         if (TryComp<ClinkGlassesReceiverComponent>(initiator, out var receiverCompOnInitiator) && receiverCompOnInitiator.Initiator == receiver)
         {
-            // Initiator already have offer from receiver. Clink glasses and remove comps from both
             DoClinkGlass(initiator, receiverCompOnInitiator.Initiator, item);
             EndClinkGlassesReceiver(initiator);
-            EndClinkGlassesReceiver(receiver);
             return;
         }
 
+        // If receiver raised glass for everyone - just clink glasses
         if (TryComp<ClinkGlassesReceiverComponent>(receiver, out var receiverCompOnReceiver) && receiverCompOnReceiver.Initiator == receiver)
         {
-            // Receiver raised glass for everyone. Just clink glasses
             if (!UseCooldown(initiator)) // Prevents clinking spam
                 return;
 
@@ -244,12 +239,29 @@ public sealed class SharedClinkGlassesSystem : EntitySystem
         receiverComp.Initiator = initiator;
         receiverComp.LifeTime = _gameTiming.CurTime + TimeSpan.FromSeconds(receiverComp.BaseLifeTime);
         _alerts.ShowAlert(receiver, ClinkGlassesAlert);
+        Dirty(receiver, receiverComp);
     }
 
     #endregion
 
     #region Helper functions
 
+    /// <summary>
+    ///     Returns if distance between two entities valid.
+    /// </summary>
+    private bool CheckDistance(EntityUid initiator, EntityUid receiver)
+    {
+        var initiatorCoords = Transform(initiator).Coordinates;
+        var receiverCoords = Transform(receiver).Coordinates;
+        if (initiatorCoords.TryDistance(EntityManager, receiverCoords, out var distance) && distance < ClinkGlassesReceiverComponent.ReceiveRange)
+            return true;
+
+        return false;
+    }
+
+    /// <summary>
+    ///     Returns if cooldown elapsed. If true - applies it.
+    /// </summary>
     private bool UseCooldown(EntityUid initiator)
     {
         if (!TryComp<ClinkGlassesInitiatorComponent>(initiator, out var initiatorComp))
@@ -263,6 +275,9 @@ public sealed class SharedClinkGlassesSystem : EntitySystem
         return true;
     }
 
+    /// <summary>
+    ///     Removes ClinkGlassesReceiverComponent from EntityUid and clears alert.
+    /// </summary>
     private void EndClinkGlassesReceiver(EntityUid uid)
     {
         RemComp<ClinkGlassesReceiverComponent>(uid);

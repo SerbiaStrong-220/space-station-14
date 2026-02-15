@@ -13,15 +13,14 @@ public sealed partial class ClinkGlassesReceiverComponent : Component
     [AutoNetworkedField]
     public EntityUid Initiator;
 
-    [ViewVariables(VVAccess.ReadOnly)]
-    public float ReceiveRange = 2f;
+    public const float ReceiveRange = 2.0f;
 
     /// <summary>
     ///     Default value in seconds for <see cref="LifeTime"/>.
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
     [AutoNetworkedField]
-    public float BaseLifeTime = 1500.0f;
+    public float BaseLifeTime = 15.0f;
 
     /// <summary>
     ///     LifeTime in seconds. When it's less than zero, this component should be removed.
