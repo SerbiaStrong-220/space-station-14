@@ -33,7 +33,7 @@ public sealed partial class GrabSystem
     /// <returns>(TimeStart, TimeEnd)</returns>
     private (TimeSpan, TimeSpan) GetResistanceCooldown(Entity<GrabResistanceComponent?> grabbable)
     {
-        if (!Resolve(grabbable, ref grabbable.Comp))
+        if (!Resolve(grabbable, ref grabbable.Comp, false))
             return (TimeSpan.Zero, TimeSpan.Zero);
 
         var resistance = grabbable.Comp;
