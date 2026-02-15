@@ -4,6 +4,46 @@ namespace Content.Shared.SS220.Grab;
 
 public sealed partial class GrabSystem
 {
+    private void InitializeResistance()
+    {
+        SubscribeLocalEvent<GrabResistanceComponent, GrabBreakoutAttemptAlertEvent>(OnBreakoutAttemptAlert);
+    }
+
+    private void OnBreakoutAttemptAlert(Entity<GrabResistanceComponent> ent, ref GrabBreakoutAttemptAlertEvent args)
+    {
+        if (!TryComp<GrabbableComponent>(ent, out var grabbable))
+            return;
+
+        if (grabbable.GrabStage == GrabStage.None)
+            return;
+
+        // alerts system doesn't handles cooldowns
+        var (_, cooldownEnd) = GetResistanceCooldown((ent.Owner, ent.Comp));
+        if (cooldownEnd > _timing.CurTime)
+            return;
+
+        args.Handled = true;
+
+        TryBreakGrab((ent.Owner, grabbable));
+    }
+
+    /// <summary>
+    /// Gets cooldown resistance for grabbable
+    /// </summary>
+    /// <returns>(TimeStart, TimeEnd)</returns>
+    private (TimeSpan, TimeSpan) GetResistanceCooldown(Entity<GrabResistanceComponent?> grabbable)
+    {
+        if (!Resolve(grabbable, ref grabbable.Comp))
+            return (TimeSpan.Zero, TimeSpan.Zero);
+
+        var resistance = grabbable.Comp;
+
+        var start = resistance.LastBreakoutAttemptAt;
+        var end = start + resistance.BreakoutAttemptCooldown;
+
+        return (start, end);
+    }
+
     public void TryBreakGrab(Entity<GrabbableComponent?> grabbable)
     {
         if (!Resolve(grabbable, ref grabbable.Comp))
@@ -12,7 +52,8 @@ public sealed partial class GrabSystem
         if (!TryComp<GrabResistanceComponent>(grabbable, out var resistance)) // you don't have ability to resist lol
             return;
 
-        if (resistance.LastBreakoutAttemptAt + resistance.BreakoutAttemptCooldown >= _timing.CurTime)
+        var (_, cooldownEnd) = GetResistanceCooldown((grabbable.Owner, resistance));
+        if (cooldownEnd > _timing.CurTime)
             return;
 
         var chance = resistance.CurrentStageBreakoutChance[grabbable.Comp.GrabStage];
@@ -26,7 +67,9 @@ public sealed partial class GrabSystem
         }
         else
         {
+            _popup.PopupPredicted(Loc.GetString("grab-resistance-component-resisting", ("grabbable", MetaData(grabbable).EntityName)), grabbable, grabbable);
             resistance.LastBreakoutAttemptAt = _timing.CurTime;
+            UpdateAlertsGrabbable((grabbable, grabbable.Comp), grabbable.Comp.GrabStage);
         }
     }
 

@@ -19,4 +19,7 @@ public sealed partial class MartialArtPrototype : IPrototype
 
     [DataField]
     public HashSet<MartialArtEffect> Effects = [];
+
+    [DataField]
+    public float GrabDelayCoefficient = 1f;
 }

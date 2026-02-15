@@ -1,0 +1,32 @@
+- type: alert
+  id: Grabbed
+  icons:
+  - sprite: /Textures/SS220/Interface/Alerts/grab.rsi
+    state: passive
+  - sprite: /Textures/SS220/Interface/Alerts/grab.rsi
+    state: agressive
+  - sprite: /Textures/SS220/Interface/Alerts/grab.rsi
+    state: neckgrab
+  - sprite: /Textures/SS220/Interface/Alerts/grab.rsi # for chokehold
+    state: neckgrab
+  name: alerts-grabbed-name
+  description: alerts-grabbed-desc
+  minSeverity: 0
+  maxSeverity: 3
+  clickEvent: !type:GrabBreakoutAttemptAlertEvent
+
+- type: alert
+  id: Grabbing
+  icons:
+  - sprite: /Textures/SS220/Interface/Alerts/grab.rsi
+    state: passive
+  - sprite: /Textures/SS220/Interface/Alerts/grab.rsi
+    state: agressive
+  - sprite: /Textures/SS220/Interface/Alerts/grab.rsi
+    state: neckgrab
+  - sprite: /Textures/SS220/Interface/Alerts/grab.rsi # for chokehold
+    state: neckgrab
+  name: alerts-grabbing-name
+  description: alerts-grabbing-desc
+  minSeverity: 0
+  maxSeverity: 3

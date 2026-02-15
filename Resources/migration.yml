@@ -858,3 +858,7 @@ ToyOwlman: ToyFigurineOwlman
 ToySkeleton: ToyFigurineSkeleton
 
 BoxFolderYellow: null
+
+# 2026-02-15 - SS220 new cqc
+cqc_nonlethal: CQCManual
+cqc_lethal: CQCManual

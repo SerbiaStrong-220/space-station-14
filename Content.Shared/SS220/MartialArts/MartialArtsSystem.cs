@@ -54,6 +54,8 @@ public sealed partial class MartialArtsSystem : EntitySystem, IMartialArtEffectE
         SubscribeLocalEvent<MartialArtOnEquipComponent, GotEquippedEvent>(OnEquipped);
         SubscribeLocalEvent<MartialArtOnEquipComponent, GotUnequippedEvent>(OnUnequipped);
         SubscribeLocalEvent<MartialArtOnEquipComponent, ComponentShutdown>(OnEquipShutdown);
+
+        SubscribeLocalEvent<MartialArtistComponent, GrabDelayModifiersEvent>(OnGrabDelayModifiers);
     }
 
     #region Public API
@@ -191,6 +193,14 @@ public sealed partial class MartialArtsSystem : EntitySystem, IMartialArtEffectE
 
         PerformStep(user, ev.Grabbable, CombatSequenceStep.Grab, artist);
         _color.RaiseEffect(Color.Yellow, new List<EntityUid> { ev.Grabbable }, Filter.Pvs(user, entityManager: EntityManager));
+    }
+
+    private void OnGrabDelayModifiers(EntityUid user, MartialArtistComponent artist, ref GrabDelayModifiersEvent ev)
+    {
+        if (!_prototype.TryIndex(artist.MartialArt, out var martialArt))
+            return;
+
+        ev.Multiply(martialArt.GrabDelayCoefficient);
     }
 
     /// <returns>true for valid sequence and false for timed out</returns>

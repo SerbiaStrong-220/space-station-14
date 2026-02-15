@@ -1,6 +1,8 @@
 using System.Numerics;
+using Content.Shared.Alert;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Grab;
 
@@ -14,13 +16,22 @@ public sealed partial class GrabberComponent : Component
     public EntityUid? Grabbing;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan GrabDelay = TimeSpan.FromSeconds(5);
-
-    [DataField, AutoNetworkedField]
     public float Range = 1f;
 
+    /// <summary>
+    /// Delay used when failed to get grab delay from GrabDelays dictionary
+    /// </summary>
     [DataField, AutoNetworkedField]
-    public SoundSpecifier GrabSound = new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg");
+    public TimeSpan FallbackGrabDelay = TimeSpan.FromSeconds(2);
+
+    [DataField, AutoNetworkedField]
+    public Dictionary<GrabStage, TimeSpan> GrabDelays = new()
+    {
+        { GrabStage.Passive, TimeSpan.FromSeconds(0.5f) },
+        { GrabStage.Aggressive, TimeSpan.FromSeconds(1f) },
+        { GrabStage.NeckGrab, TimeSpan.FromSeconds(2) },
+        { GrabStage.Chokehold, TimeSpan.FromSeconds(2) },
+    };
 
     [DataField, AutoNetworkedField]
     public Dictionary<GrabStage, float> GrabStagesSpeedModifier = new()
@@ -30,4 +41,10 @@ public sealed partial class GrabberComponent : Component
         { GrabStage.NeckGrab, 0.40f },
         { GrabStage.Chokehold, 0.30f },
     };
+
+    [DataField, AutoNetworkedField]
+    public ProtoId<AlertPrototype> Alert = "Grabbing";
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier GrabSound = new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg");
 }

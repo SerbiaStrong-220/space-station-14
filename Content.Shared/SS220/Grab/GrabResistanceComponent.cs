@@ -1,3 +1,4 @@
+using Content.Shared.Alert;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared.SS220.Grab;
@@ -23,3 +24,5 @@ public sealed partial class GrabResistanceComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan LastBreakoutAttemptAt = TimeSpan.Zero;
 }
+
+public sealed partial class GrabBreakoutAttemptAlertEvent : BaseAlertEvent;
