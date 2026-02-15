@@ -4,7 +4,6 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
-using Robust.Shared.Graphics;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -240,12 +239,20 @@ public sealed partial class AltMechComponent : Component
     /// <summary>
     /// Whether or not the mech is airtight.
     /// </summary>
-    /// <remarks>
-    /// This needs to be redone
-    /// when mech internals are added
-    /// </remarks>
     [AutoNetworkedField]
     public bool Airtight;
+
+    /// <summary>
+    /// Can this mech be sealed
+    /// </summary>
+    [DataField]
+    public bool Sealable = true;
+
+    /// <summary>
+    /// Can the user see without mech optics
+    /// </summary>
+    [DataField]
+    public bool Transparent = false;
 
     #region Action Prototypes
     [DataField]

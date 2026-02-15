@@ -179,7 +179,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         if(TryComp<MovementSpeedModifierComponent>(ent.Owner, out var movementComp))
             _movementSpeedModifier.ChangeBaseSpeed(ent.Owner, ent.Comp.OverallBaseMovementSpeed * 0.5f, ent.Comp.OverallBaseMovementSpeed, ent.Comp.OverallBaseAcceleration, movementComp);
 
-        if(ent.Comp.ContainerDict["head"].ContainedEntity == null)
+        if(ent.Comp.ContainerDict["head"].ContainedEntity == null && !ent.Comp.Transparent)
         {
             TryComp<BlindableComponent>(ent.Owner, out var blindableComp);
             _blindable.AdjustEyeDamage((ent.Owner, blindableComp), 9); //Mech cannot see anything if it has no eyes
@@ -200,9 +200,9 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         args.Cancelled = true;
     }
 
-    private void OnGetAdditionalAccess(EntityUid uid, AltMechComponent component, ref GetAdditionalAccessEvent args)
+    private void OnGetAdditionalAccess(Entity<AltMechComponent> ent, ref GetAdditionalAccessEvent args)
     {
-        var pilot = component.PilotSlot.ContainedEntity;
+        var pilot = ent.Comp.PilotSlot.ContainedEntity;
         if (pilot == null)
             return;
 
@@ -376,7 +376,6 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         equipmentComponent.EquipmentOwner = uid;
 
-        _actions.AddAction(uid, ref equipmentComponent.EquipmentAbilityAction, equipmentComponent.EquipmentAbilityActionName, uid);
         //_container.Insert(toInsert, component.EquipmentContainer);
         var ev = new MechEquipmentInsertedEvent(uid);
         RaiseLocalEvent(toInsert, ref ev);
@@ -823,6 +822,18 @@ public sealed partial class InsertPartEvent : SimpleDoAfterEvent
 [Serializable, NetSerializable]
 public sealed partial class InsertEquipmentEvent : SimpleDoAfterEvent
 {
+}
+
+[ByRefEvent]
+public readonly record struct MechEquipmentInsertedEvent(EntityUid Mech)
+{
+    public readonly EntityUid Mech = Mech;
+}
+
+[ByRefEvent]
+public readonly record struct MechEquipmentRemovedEvent(EntityUid Mech)
+{
+    public readonly EntityUid Mech = Mech;
 }
 
 

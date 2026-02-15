@@ -9,7 +9,7 @@ using Robust.Shared.Timing;
 namespace Content.Server.SS220.Mech.Systems;
 
 /// <summary>
-/// Handles the insertion of mech equipment into mechs.
+/// Handles the power of the mech
 /// </summary>
 public sealed partial class AltMechSystem
 {

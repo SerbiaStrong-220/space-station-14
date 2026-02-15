@@ -10,6 +10,10 @@
     {
       "name": "basichydraulic",
       "directions": 4
+    },
+    {
+        "name": "servo",
+        "directions": 4
     }
-    ]
+  ]
 }

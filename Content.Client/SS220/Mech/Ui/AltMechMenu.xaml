@@ -55,7 +55,7 @@
             </BoxContainer>
             <BoxContainer Margin="10 10 10 10" Orientation="Horizontal" HorizontalExpand="True">
                 <BoxContainer Orientation="Vertical" HorizontalExpand="True">
-                    <SpriteView Name="MechViewLeftArm"
+                    <SpriteView Name="MechViewRightArm"
                         Margin="10 5 5 5"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
@@ -64,14 +64,14 @@
                         MaxSize="64 64"
                         Scale="2 2">
                     </SpriteView>
-                    <TextureButton Name="RemoveButtonLeftArm" Scale="0.5 0.5" SetSize="20 20"></TextureButton>
-                    <ProgressBar Name="IntegrityDisplayBarLeftArm"
+                    <TextureButton Name="RemoveButtonRightArm" Scale="0.5 0.5" SetSize="20 20"></TextureButton>
+                    <ProgressBar Name="IntegrityDisplayBarRightArm"
                                  HorizontalExpand="True"
                                  SetHeight="25"
                                  Margin="10 4 4 4"
                                  MaxValue="1"
                                  Value="0">
-                        <Label Name="IntegrityDisplayLeftArm"
+                        <Label Name="IntegrityDisplayRightArm"
                                HorizontalAlignment="Left"
                                Margin="5 0 0 0"
                                VerticalAlignment="Center" />
@@ -100,7 +100,7 @@
                     </ProgressBar>
                 </BoxContainer>
                 <BoxContainer Orientation="Vertical" HorizontalExpand="True">
-                    <SpriteView Name="MechViewRightArm"
+                    <SpriteView Name="MechViewLeftArm"
                         Margin="10 5 5 5"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
@@ -109,14 +109,14 @@
                         MaxSize="64 64"
                         Scale="2 2">
                     </SpriteView>
-                    <TextureButton Name="RemoveButtonRightArm" Scale="0.5 0.5" SetSize="20 20"></TextureButton>
-                    <ProgressBar Name="IntegrityDisplayBarRightArm"
+                    <TextureButton Name="RemoveButtonLeftArm" Scale="0.5 0.5" SetSize="20 20"></TextureButton>
+                    <ProgressBar Name="IntegrityDisplayBarLeftArm"
                                  HorizontalExpand="True"
                                  SetHeight="25"
                                  Margin="10 4 4 4"
                                  MaxValue="1"
                                  Value="0">
-                        <Label Name="IntegrityDisplayRightArm"
+                        <Label Name="IntegrityDisplayLeftArm"
                                HorizontalAlignment="Left"
                                Margin="5 0 0 0"
                                VerticalAlignment="Center" />

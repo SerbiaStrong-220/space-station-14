@@ -8,8 +8,20 @@
   },
   "states": [
     {
-      "name": "basichydraulic",
-      "directions": 4
+        "name": "basichydraulic",
+        "directions": 4
+    },
+    {
+        "name": "hydraulicdrill",
+        "directions": 4
+    },
+    {
+        "name": "servo",
+        "directions": 4
+    },
+    {
+        "name": "medicalmultitool",
+        "directions": 4
     }
-    ]
+  ]
 }

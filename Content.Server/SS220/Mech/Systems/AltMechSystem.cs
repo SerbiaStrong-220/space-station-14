@@ -15,10 +15,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.FixedPoint;
-using Content.Shared.Flash;
-using Content.Shared.Flash.Components;
 using Content.Shared.Interaction;
-using Content.Shared.Inventory;
 using Content.Shared.Mech;
 using Content.Shared.Mech.EntitySystems;
 using Content.Shared.Mind.Components;
@@ -45,7 +42,6 @@ using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using static Content.Shared.Inventory.InventorySystem;
 
 namespace Content.Server.SS220.Mech.Systems;
 
@@ -79,7 +75,6 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         SubscribeLocalEvent<AltMechComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<AltMechComponent, GetVerbsEvent<AlternativeVerb>>(OnAlternativeVerb);
         SubscribeLocalEvent<AltMechComponent, MechOpenUiEvent>(OnOpenUi);
-        //SubscribeLocalEvent<AltMechComponent, RemoveBatteryEvent>(OnRemoveBattery);
         SubscribeLocalEvent<AltMechComponent, MechEntryEvent>(OnMechEntry);
         SubscribeLocalEvent<AltMechComponent, OnMechExitEvent>(OnMechExited);
         SubscribeLocalEvent<AltMechComponent, MechExitEvent>(OnMechExit);
@@ -89,7 +84,6 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
         SubscribeLocalEvent<AltMechComponent, DestructionEventArgs>(OnMechDestroyed);
 
-        SubscribeLocalEvent<AltMechPilotComponent, DamageChangedEvent>(OnPilotDamageChanged);
         SubscribeLocalEvent<AltMechPilotComponent, MobStateChangedEvent>(OnPilotStateChanged);
         SubscribeLocalEvent<AltMechPilotComponent, MindAddedMessage>(OnMindAdded);
 
@@ -347,7 +341,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
             Dirty(ent.Owner,languageCompMech);
         }
 
-        if (ent.Comp.ContainerDict["head"].ContainedEntity != null)
+        if (ent.Comp.ContainerDict["head"].ContainedEntity != null || ent.Comp.Transparent)
         {
             if (!TryComp<BlindableComponent>(ent.Owner, out var blindableCompMech))
                 return;
@@ -359,6 +353,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
             }
 
             _blindable.AdjustEyeDamage((ent.Owner, blindableCompMech), -blindableCompMech.EyeDamage);
+            return;
         }
 
     }
@@ -425,7 +420,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
             return;
 
         if (TryComp<BarotraumaComponent>(ent.Comp.PilotSlot.ContainedEntity, out var barotraumaComp))
-            barotraumaComp.HasImmunity = ent.Comp.Airtight;
+            barotraumaComp.HasImmunity = ent.Comp.Airtight && ent.Comp.Sealable;
 
         Dirty(ent);
     }
@@ -516,23 +511,6 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         _alerts.ShowAlert(ent.Owner, _mechIntegrityAlert, (short)severity);
 
         SetIntegrity(ent.Owner, integrity, ent.Comp);
-    }
-
-    private void OnPilotDamageChanged(Entity<AltMechPilotComponent> ent, ref DamageChangedEvent args)
-    {
-        if (!TryComp<AltMechComponent>(ent.Comp.Mech, out var mechComp))
-            return;
-
-        if (ent.Owner != mechComp.PilotSlot.ContainedEntity)
-            return;
-
-        var health = 100 - args.Damageable.TotalDamage;
-        var severity = (4 - (health / 25));
-        if (severity > 4)
-            severity = 4;
-
-        //_alerts.ClearAlert(ent.Comp.Mech, _userHealthAlert);
-        //_alerts.ShowAlert(ent.Comp.Mech, _userHealthAlert, (short)severity);
     }
 
     private void OnPilotStateChanged(Entity<AltMechPilotComponent> ent, ref MobStateChangedEvent args)

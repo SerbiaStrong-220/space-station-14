@@ -71,29 +71,29 @@ public sealed class AltMechSystem : SharedAltMechSystem
         ["power"] = MechPartVisualLayers.Power
     };
 
-    private void OnAppearanceChanged(EntityUid uid, AltMechComponent component, ref AppearanceChangeEvent args)
+    private void OnAppearanceChanged(Entity<AltMechComponent> ent, ref AppearanceChangeEvent args)
     {
         if (args.Sprite == null)
             return;
 
-        if (!_sprite.LayerExists((uid, args.Sprite), MechVisualLayers.Base))
+        if (!_sprite.LayerExists((ent.Owner, args.Sprite), MechVisualLayers.Base))
             return;
 
-        var state = component.BaseState;
+        var state = ent.Comp.BaseState;
         var drawDepth = DrawDepth.Mobs;
-        if (component.BrokenState != null && _appearance.TryGetData<bool>(uid, MechVisuals.Broken, out var broken, args.Component) && broken)
+        if (ent.Comp.BrokenState != null && _appearance.TryGetData<bool>(ent.Owner, MechVisuals.Broken, out var broken, args.Component) && broken)
         {
-            state = component.BrokenState;
+            state = ent.Comp.BrokenState;
             drawDepth = DrawDepth.SmallMobs;
         }
-        else if (component.OpenState != null && _appearance.TryGetData<bool>(uid, MechVisuals.Open, out var open, args.Component) && open)
+        else if (ent.Comp.OpenState != null && _appearance.TryGetData<bool>(ent.Owner, MechVisuals.Open, out var open, args.Component) && open)
         {
-            state = component.OpenState;
+            state = ent.Comp.OpenState;
             drawDepth = DrawDepth.SmallMobs;
         }
 
-        _sprite.LayerSetRsiState((uid, args.Sprite), MechVisualLayers.Base, state);
-        _sprite.SetDrawDepth((uid, args.Sprite), (int)drawDepth);
+        _sprite.LayerSetRsiState((ent.Owner, args.Sprite), MechVisualLayers.Base, state);
+        _sprite.SetDrawDepth((ent.Owner, args.Sprite), (int)drawDepth);
     }
 
     private void OnComponentInit(Entity<AltMechComponent> ent, ref ComponentInit args)
@@ -369,8 +369,8 @@ public enum MechPartVisualLayers : byte
 {
     Core = 0,
     Head = 1,
-    RightArm = 2,
-    LeftArm = 3,
-    Chassis = 4,
+    Chassis = 2,
+    RightArm = 3,
+    LeftArm = 4,
     Power = 5
 }

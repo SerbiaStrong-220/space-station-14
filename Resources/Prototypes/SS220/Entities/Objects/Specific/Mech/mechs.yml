@@ -1,7 +1,6 @@
 - type: entity
   parent: [BaseMob, StripableInventoryBase]
   id: BaseAltMech
-  #parent: BaseMechPart
   save: false
   abstract: true
   components:
@@ -11,14 +10,14 @@
   - type: ComplexInteraction
   - type: MobMover
   - type: AltMech
-  - type: MechRobot #SS220-AddMechToClothing
+  - type: MechRobot
   - type: PowerCellDraw
   - type: Language
   - type: Blindable #For optics to work
   - type: StatusEffects
     allowed:
     - Flashed
-  - type: PressureProtection #After some research i have decided to get rid of MechAir as there will be basically no difference in game but larger amounts of work and space for bugs
+  - type: PressureProtection #After some research i decided to get rid of MechAir as there will be basically no difference in game but larger amounts of work and space for bugs
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
   - type: MobCollision
@@ -29,9 +28,6 @@
     strength: 0
     fixtureId: ""
   - type: DoAfter
-  #- type: Repairable # Removed because mech repair system will be remade
-  #  fuelCost: 25
-  #  doAfterDelay: 10
   - type: UserInterface
     interfaces:
       enum.MechUiKey.Key:
@@ -52,8 +48,8 @@
     heatingCoefficient: 0.005
     coolingCoefficient: 0.005
   - type: MovementSpeedModifier
-    baseWalkSpeed: 1
-    baseSprintSpeed: 2
+    baseWalkSpeed: 0
+    baseSprintSpeed: 0
   - type: Tag
     tags:
     - DoorBumpOpener
@@ -123,7 +119,7 @@
   id: MechLoader
   parent: BaseAltMech
   name: Powerloader
-  description: Name is self-speaking - this is a powerloader frame which has limited equipment space, high mass and provides little to no protection to the user but is still better than nothing
+  description: Name is self-speaking - this is a powerloader frame which has limited equipment space, high mass, cannot be sealed and provides little to no protection to the user but is still better than nothing
   components:
   - type: Sprite
     sprite: SS220/Objects/Specific/Robotics/Mechs/cores.rsi
@@ -133,14 +129,13 @@
     baseState: basicloader
     openState: basicloader
     brokenState: basicloader
+    sealable: false
+    transparent: true
     maxIntegrity: 250
     ownMass: 250
     pilotWhitelist:
       components:
         - HumanoidAppearance
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 0
-    baseSprintSpeed: 0
 
 - type: entity
   id: MechLight
@@ -161,9 +156,6 @@
     pilotWhitelist:
       components:
         - HumanoidAppearance
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 0
-    baseSprintSpeed: 0
   - type: Destructible
     thresholds:
     - trigger:

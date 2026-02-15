@@ -26,14 +26,11 @@ namespace Content.Server.SS220.Mech.Systems;
 /// </summary>
 public sealed class MechPartSystem : EntitySystem
 {
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifier = default!;
     [Dependency] private readonly AltMechSystem _mech = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
-    [Dependency] protected readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly BatterySystem _battery = default!;
     [Dependency] private readonly BlindableSystem _blindable = default!;
 
     /// <inheritdoc/>
@@ -84,6 +81,18 @@ public sealed class MechPartSystem : EntitySystem
         if (mechComp.Broken)
             return;
 
+        if (!mechComp.MaintenanceMode)
+        {
+            _popup.PopupEntity(Loc.GetString("mech-maintenance-offline"), mech);
+            return;
+        }
+
+        if (!mechComp.ContainerDict.ContainsKey(ent.Comp.slot) || mechComp.ContainerDict[ent.Comp.slot].ContainedEntity != null)
+        {
+            _popup.PopupEntity(Loc.GetString("mech-part-slot-occupied"), mech);
+            return;
+        }
+
         if (args.User == mechComp.PilotSlot.ContainedEntity)
             return;
 
@@ -121,6 +130,9 @@ public sealed class MechPartSystem : EntitySystem
     private void OnOpticsRemoved(Entity<MechOpticsComponent> ent, ref MechPartRemovedEvent args)
     {
         if (!TryComp<AltMechComponent>(args.Mech, out var mechComp))
+            return;
+
+        if (mechComp.Transparent)
             return;
 
         if (!TryComp<BlindableComponent>(args.Mech, out var blindableCompMech))
@@ -171,10 +183,7 @@ public sealed class MechPartSystem : EntitySystem
             if (item is { } pickUp)
             {
                 _hands.DoPickup(mechUid, handId, pickUp, hands);
-                if (!hand.ForceRemovable && hand.Hand.Whitelist == null && hand.Hand.Blacklist == null)
-                {
-                    EnsureComp<UnremoveableComponent>(pickUp);
-                }
+                EnsureComp<UnremoveableComponent>(pickUp);
             }
         }
 

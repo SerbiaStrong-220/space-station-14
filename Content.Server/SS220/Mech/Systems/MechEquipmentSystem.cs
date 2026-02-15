@@ -1,10 +1,10 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Server.Popups;
+using Content.Shared.Actions;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.SS220.Mech.Components;
 using Content.Shared.SS220.Mech.Equipment.Components;
-using Content.Shared.SS220.Mech.Parts.Components;
 using Content.Shared.SS220.Mech.Systems;
 using Robust.Shared.Containers;
 
@@ -19,13 +19,14 @@ public sealed class MechEquipmentSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] protected readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
 
-    /// <inheritdoc/>
     public override void Initialize()
     {
         SubscribeLocalEvent<AltMechEquipmentComponent, AfterInteractEvent>(OnUsed);
         SubscribeLocalEvent<AltMechEquipmentComponent, InsertEquipmentEvent>(OnInsertEquipment);
-        //SubscribeLocalEvent<AltMechEquipmentComponent, MechPartInsertedEvent>(OnEquipmentInserted);
+        SubscribeLocalEvent<AltMechEquipmentComponent, MechEquipmentInsertedEvent>(OnEquipmentInserted);
+        SubscribeLocalEvent<AltMechEquipmentComponent, MechEquipmentRemovedEvent>(OnEquipmentRemoved);
     }
 
     private void OnUsed(Entity<AltMechEquipmentComponent> ent, ref AfterInteractEvent args)
@@ -66,11 +67,27 @@ public sealed class MechEquipmentSystem : EntitySystem
             return;
 
         _popup.PopupEntity(Loc.GetString("mech-equipment-finish-install", ("item", ent.Owner)), args.Args.Target.Value);
-        _mech.InsertPart(args.Args.Target.Value, ent.Owner);
+        _mech.InsertEquipment(args.Args.Target.Value, ent.Owner);
 
         if (ent.Comp.EquipmentOwner != null)
             _mech.UpdateUserInterface((EntityUid)ent.Comp.EquipmentOwner);
 
         args.Handled = true;
+    }
+
+    private void OnEquipmentInserted(Entity<AltMechEquipmentComponent> ent, ref MechEquipmentInsertedEvent args)
+    {
+        if (!TryComp<AltMechComponent>(args.Mech, out var mechComp))
+            return;
+
+        _actions.AddAction(args.Mech, ref ent.Comp.EquipmentAbilityAction, ent.Comp.EquipmentAbilityActionName, args.Mech);
+    }
+
+    private void OnEquipmentRemoved(Entity<AltMechEquipmentComponent> ent, ref MechEquipmentRemovedEvent args)
+    {
+        if (!TryComp<AltMechComponent>(args.Mech, out var mechComp))
+            return;
+
+        _actions.RemoveAction(ent.Comp.EquipmentAbilityAction);
     }
 }

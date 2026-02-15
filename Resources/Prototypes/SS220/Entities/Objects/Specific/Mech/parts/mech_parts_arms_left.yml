@@ -1,0 +1,187 @@
+- type: entity
+  id: DrillLeftArm
+  parent: BaseMechLeftArm
+  name: integrated industrial drill manipulator (left)
+  description: A manipulator with an industrial drill mounted to it. This one is designed to be installed in mech's left arm slot
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Mech/mecha_equipment.rsi
+    state: mecha_drill
+  - type: MechArm
+    hands:
+    - hand:
+        location: Left
+        whitelist:
+          sizes:
+          - Ginormous
+      item: MechMiningDrill
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-big
+      right:
+      - state: inhand-right-big
+  - type: MechPart
+    integrity: 150
+    maxIntegrity: 150
+    ownMass: 175
+    attachedSprite:
+      sprite: SS220/Objects/Specific/Robotics/Mechs/lefthand.rsi
+      state: hydraulicdrill
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: HydraulicLeftArm
+  parent: BaseMechLeftArm
+  name: hydraulic arm (left)
+  description: A simple, reliable, cheap and very, very strong hydraulic manipulator.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Mech/mecha_equipment.rsi
+    state: mecha_clamp
+  - type: MechArm
+    hands:
+    - hand:
+        location: Left
+        whitelist:
+          sizes:
+          - Ginormous
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-big
+      right:
+      - state: inhand-right-big
+  - type: MechPart
+    integrity: 150
+    maxIntegrity: 150
+    ownMass: 120
+    attachedSprite:
+      sprite: SS220/Objects/Specific/Robotics/Mechs/lefthand.rsi
+      state: basichydraulic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: LeftServoArm
+  parent: BaseMechLeftArm
+  name: servo arm (left)
+  description: A servo-based manipulator made to fit into a standard mech right arm slot. It is way more presize than its hydraulic sibling but also much weaker
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Mech/mecha_equipment.rsi
+    state: mecha_clamp
+  - type: MechArm
+    hands:
+    - hand:
+        location: Left
+        whitelist:
+          sizes:
+          - Ginormous
+          - Huge
+          - Large
+          - Normal
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-big
+      right:
+      - state: inhand-right-big
+  - type: MechPart
+    integrity: 100
+    maxIntegrity: 100
+    ownMass: 80
+    attachedSprite:
+      sprite: SS220/Objects/Specific/Robotics/Mechs/lefthand.rsi
+      state: servo
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: LeftMedicalMultitoolArm
+  parent: BaseMechLeftArm
+  name: medical multitool (left)
+  description: A module that consists of three flexible manipulators two of which have small, precise and relatively weak cybernetic hands and the other one has a non-detachable hypospray on it. This one fits into a standard mech's left hand slot
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Mech/mecha_equipment.rsi
+    state: mecha_clamp
+  - type: MechArm
+    hands:
+    - hand:
+        location: Left
+        whitelist:
+          sizes:
+          - Tiny
+          - Small
+          - Normal
+    - hand:
+        location: Left
+        whitelist:
+          sizes:
+          - Tiny
+          - Small
+          - Normal
+    - hand:
+        location: Left
+      item: BorgHypo
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-big
+      right:
+      - state: inhand-right-big
+  - type: MechPart
+    integrity: 65
+    maxIntegrity: 65
+    ownMass: 40
+    attachedSprite:
+      sprite: SS220/Objects/Specific/Robotics/Mechs/lefthand.rsi
+      state: medicalmultitool
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 65
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
