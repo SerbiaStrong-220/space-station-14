@@ -47,4 +47,10 @@ public sealed partial class GrabberComponent : Component
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier GrabSound = new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg");
+
+    [DataField]
+    public LocId NewGrabPopup = "grabber-component-new-grab-popup";
+
+    [DataField]
+    public LocId GrabUpgradePopup = "grabber-component-grab-upgrade-popup";
 }

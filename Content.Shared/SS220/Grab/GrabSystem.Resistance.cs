@@ -67,7 +67,7 @@ public sealed partial class GrabSystem
         }
         else
         {
-            _popup.PopupPredicted(Loc.GetString("grab-resistance-component-resisting", ("grabbable", MetaData(grabbable).EntityName)), grabbable, grabbable);
+            _popup.PopupPredicted(Loc.GetString(resistance.ResistingPopup, ("grabbable", MetaData(grabbable).EntityName)), grabbable, grabbable);
             resistance.LastBreakoutAttemptAt = _timing.CurTime;
             UpdateAlertsGrabbable((grabbable, grabbable.Comp), grabbable.Comp.GrabStage);
         }

@@ -23,6 +23,9 @@ public sealed partial class GrabResistanceComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan LastBreakoutAttemptAt = TimeSpan.Zero;
+
+    [DataField]
+    public LocId ResistingPopup = "grab-resistance-component-resisting";
 }
 
 public sealed partial class GrabBreakoutAttemptAlertEvent : BaseAlertEvent;

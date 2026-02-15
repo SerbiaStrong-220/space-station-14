@@ -229,8 +229,8 @@ public sealed partial class GrabSystem : EntitySystem
         var grabbableMeta = MetaData(grabbable);
 
         var msg = grabbable.Comp.GrabStage == GrabStage.None
-            ? Loc.GetString("grabber-component-new-grab-popup", ("grabber", grabberMeta.EntityName), ("grabbable", grabbableMeta.EntityName))
-            : Loc.GetString("grabber-component-grab-upgrade-popup", ("grabber", grabberMeta.EntityName), ("grabbable", grabbableMeta.EntityName));
+            ? Loc.GetString(grabber.Comp.NewGrabPopup, ("grabber", grabberMeta.EntityName), ("grabbable", grabbableMeta.EntityName))
+            : Loc.GetString(grabber.Comp.GrabUpgradePopup, ("grabber", grabberMeta.EntityName), ("grabbable", grabbableMeta.EntityName));
 
         _popup.PopupPredicted(msg, grabber, grabber);
 
@@ -305,7 +305,7 @@ public sealed partial class GrabSystem : EntitySystem
             grabbable.Comp.GrabJointId = null;
         }
 
-        _popup.PopupPredicted(Loc.GetString("grabbable-component-break-free", ("grabbable", MetaData(grabbable).EntityName)), grabbable, grabbable);
+        _popup.PopupPredicted(Loc.GetString(grabbable.Comp.BreakFreePopup, ("grabbable", MetaData(grabbable).EntityName)), grabbable, grabbable);
 
         _virtualItem.DeleteInHandsMatching(grabber, grabbable);
         _virtualItem.DeleteInHandsMatching(grabbable, grabber);

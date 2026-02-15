@@ -20,4 +20,7 @@ public sealed partial class GrabbableComponent : Component
 
     [DataField, AutoNetworkedField]
     public ProtoId<AlertPrototype> Alert = "Grabbed";
+
+    [DataField]
+    public LocId BreakFreePopup = "grabbable-component-break-free";
 }
