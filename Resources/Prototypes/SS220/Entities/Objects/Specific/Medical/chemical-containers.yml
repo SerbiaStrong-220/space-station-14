@@ -1,4 +1,49 @@
 - type: entity
+  parent: Beaker
+  id: BeakerSmallCerebrin
+  suffix: cerebrin
+  components:
+  - type: Label
+    currentLabel: reagent-name-cerebrin
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 50
+        reagents:
+        - ReagentId: Cerebrin
+          Quantity: 50
+
+- type: entity
+  parent: Beaker
+  id: BeakerSmallBicaridine
+  suffix: bicaridine
+  components:
+  - type: Label
+    currentLabel: reagent-name-bicaridine
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 50
+        reagents:
+        - ReagentId: Bicaridine
+          Quantity: 50
+
+- type: entity
+  parent: Beaker
+  id: BeakerSmallDermaline
+  suffix: dermaline
+  components:
+  - type: Label
+    currentLabel: reagent-name-dermaline
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 50
+        reagents:
+        - ReagentId: Dermaline
+          Quantity: 50
+
+- type: entity
   parent: LargeBeaker
   suffix: aluminium
   id: LargeBeakerAluminium
@@ -277,3 +322,199 @@
         reagents:
         - ReagentId: Sulfur
           Quantity: 100
+
+- type: entity
+  parent: LargeBeaker
+  suffix: Cryoxadone
+  id: LargeBeakerCryoxadone
+  components:
+  - type: Label
+    currentLabel: reagent-name-cryoxadone
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Cryoxadone
+          Quantity: 100
+
+- type: entity
+  parent: LargeBeaker
+  suffix: Cerebrin
+  id: LargeBeakerCerebrin
+  components:
+  - type: Label
+    currentLabel: reagent-name-cerebrin
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Cerebrin
+          Quantity: 100
+
+- type: entity
+  parent: LargeBeaker
+  suffix: Doxarubixadone
+  id: LargeBeakerDoxarubixadone
+  components:
+  - type: Label
+    currentLabel: reagent-name-doxarubixadone
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Doxarubixadone
+          Quantity: 100
+
+- type: entity
+  parent: LargeBeaker
+  suffix: Opporozidone
+  id: LargeBeakerOpporozidone
+  components:
+  - type: Label
+    currentLabel: reagent-name-opporozidone
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Opporozidone
+          Quantity: 100
+
+- type: entity
+  parent: LargeBeaker
+  suffix: Necrosol
+  id: LargeBeakerNecrosol
+  components:
+  - type: Label
+    currentLabel: reagent-name-necrosol
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Necrosol
+          Quantity: 100
+
+- type: entity
+  parent: LargeBeaker
+  suffix: Aloxadone
+  id: LargeBeakerAloxadone
+  components:
+  - type: Label
+    currentLabel: reagent-name-aloxadone
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Aloxadone
+          Quantity: 100
+
+- type: entity
+  parent: LargeBeaker
+  suffix: Omnizine
+  id: LargeBeakerOmnizine
+  components:
+  - type: Label
+    currentLabel: reagent-name-omnizine
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Omnizine
+          Quantity: 100
+
+- type: entity
+  parent: Jug
+  suffix: Cryoxadone
+  id: JugCryoxadone
+  components:
+  - type: Label
+    currentLabel: reagent-name-cryoxadone
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Cryoxadone
+          Quantity: 200
+
+- type: entity
+  parent: Jug
+  suffix: Cerebin
+  id: JugCerebrin
+  components:
+  - type: Label
+    currentLabel: reagent-name-cerebrin
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Cerebrin
+          Quantity: 200
+
+- type: entity
+  parent: Jug
+  suffix: Doxarubixadone
+  id: JugDoxarubixadone
+  components:
+  - type: Label
+    currentLabel: reagent-name-doxarubixadone
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Doxarubixadone
+          Quantity: 200
+
+- type: entity
+  parent: Jug
+  suffix: Opporozidone
+  id: JugOpporozidone
+  components:
+  - type: Label
+    currentLabel: reagent-name-opporozidone
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Opporozidone
+          Quantity: 200
+
+- type: entity
+  parent: Jug
+  suffix: Necrosol
+  id: JugNecrosol
+  components:
+  - type: Label
+    currentLabel: reagent-name-necrosol
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Necrosol
+          Quantity: 200
+
+- type: entity
+  parent: Jug
+  suffix: Aloxadone
+  id: JugAloxadone
+  components:
+  - type: Label
+    currentLabel: reagent-name-aloxadone
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Aloxadone
+          Quantity: 200
+
+- type: entity
+  parent: Jug
+  suffix: Omnizine
+  id: JugOmnizine
+  components:
+  - type: Label
+    currentLabel: reagent-name-omnizine
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        reagents:
+        - ReagentId: Omnizine
+          Quantity: 200

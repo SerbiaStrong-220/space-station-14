@@ -1,7 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Humanoid;
-using Content.Server.SS220.Bed.Cryostorage;
 using Content.Server.SS220.GameTicking.Rules;
 using Content.Shared.Actions;
 using Content.Shared.Body.Components;
@@ -9,7 +8,6 @@ using Content.Shared.Body.Systems;
 using Content.Shared.Cloning.Events;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
-using Content.Shared.Interaction.Events;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -18,8 +16,6 @@ using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.SS220.StuckOnEquip;
-using Robust.Shared.Audio.Systems;
-using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using System.Linq;
@@ -30,7 +26,6 @@ namespace Content.Server.SS220.CultYogg.Cultists;
 
 public sealed class CultYoggSystem : SharedCultYoggSystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedBodySystem _body = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -58,10 +53,6 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         SubscribeLocalEvent<CultYoggComponent, OnSaintWaterDrinkEvent>(OnSaintWaterDrinked);
         SubscribeLocalEvent<CultYoggComponent, ChangeCultYoggStageEvent>(OnUpdateStage);
         SubscribeLocalEvent<CultYoggComponent, CloningEvent>(OnCloning);
-
-        SubscribeLocalEvent<CultYoggComponent, PlayerDetachedEvent>(OnPlayerDetached);
-        SubscribeLocalEvent<CultYoggComponent, BeingCryoDeletedEvent>(OnCryoDeleted);
-        SubscribeLocalEvent<CultYoggComponent, SuicideEvent>(OnSuicide);
     }
 
     #region Visuals
@@ -291,23 +282,6 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
 
         purifyedComp.DecayTime = _timing.CurTime + purifyedComp.BeforeDecayTime; //setting timer, when purifying will be removed
         Dirty(ent, ent.Comp);
-    }
-    #endregion
-
-    #region CheckSimplifiedEslavement
-    private void OnPlayerDetached(Entity<CultYoggComponent> ent, ref PlayerDetachedEvent args)
-    {
-        _cultRuleSystem.CheckSimplifiedEslavement();
-    }
-
-    private void OnCryoDeleted(Entity<CultYoggComponent> ent, ref BeingCryoDeletedEvent args)
-    {
-        _cultRuleSystem.CheckSimplifiedEslavement();
-    }
-
-    private void OnSuicide(Entity<CultYoggComponent> ent, ref SuicideEvent args)
-    {
-        _cultRuleSystem.CheckSimplifiedEslavement();
     }
     #endregion
 

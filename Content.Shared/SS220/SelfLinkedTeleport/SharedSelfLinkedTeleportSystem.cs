@@ -2,7 +2,7 @@
 
 using Content.Shared.Examine;
 using Content.Shared.Popups;
-using Content.Shared.SS220.InteractionTeleport;
+using Content.Shared.SS220.Teleport;
 
 namespace Content.Shared.SS220.SelfLinkedTeleport;
 
@@ -22,6 +22,9 @@ public abstract class SharedSelfLinkedTeleportSystem : EntitySystem
 
     private void OnTeleportTarget(Entity<SelfLinkedTeleportComponent> ent, ref TeleportTargetEvent args)
     {
+        var beforeEv = new BeforeTeleportTargetEvent(args.User, args.Target);
+        RaiseLocalEvent(ent, ref beforeEv);
+
         Warp(ent, args.Target, args.User);
 
         var ev = new TargetTeleportedEvent(args.Target);

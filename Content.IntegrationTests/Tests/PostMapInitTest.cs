@@ -141,6 +141,7 @@ namespace Content.IntegrationTests.Tests
             "Nightshift",
             "SS220_syndicate",
             "SS220_CentComm",
+            "Tox",
 
             // SS220 Event Maps
             "Snout",
@@ -531,6 +532,11 @@ namespace Content.IntegrationTests.Tests
                         .Select(x => x.Job.Value);
 
                     jobs.ExceptWith(spawnPoints);
+
+                    // ss220 add more jobs for dev map start
+                    if (comp.SpawnAllJobs)
+                        jobs.Clear();
+                    // ss220 add more jobs for dev map end
 
                     Assert.That(jobs, Is.Empty, $"There is no spawnpoints for {string.Join(", ", jobs)} on {mapProto}.");
                 }

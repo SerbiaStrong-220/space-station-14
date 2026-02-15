@@ -26,8 +26,6 @@
   #SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
-    - id: SolCommon
-      canSpeak: false
   #SS220 languages revive end
   - type: Sprite
     drawdepth: Mobs
@@ -97,7 +95,6 @@
       canSpeak: false
   #SS220 Animalistic languages fix end
     - id: Galactic
-    - id: SolCommon
       canSpeak: false
   #SS220 languages revive end
   - type: Sprite
@@ -143,8 +140,6 @@
       canSpeak: false
   #SS220 Animalistic languages fix end
     - id: Galactic
-      canSpeak: false
-    - id: SolCommon
       canSpeak: false
   #SS220 languages revive end
   - type: Sprite
@@ -230,8 +225,6 @@
   #SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
-    - id: SolCommon
-      canSpeak: false
   #SS220 languages revive end
   - type: Butcherable # A puppy? You monster...
     spawned:
@@ -286,8 +279,6 @@
       canSpeak: false
     - id: Piggish
       canSpeak: false
-    - id: SolCommon
-      canSpeak: false
   #SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
@@ -334,8 +325,6 @@
       canSpeak: false
   #SS220 Animalistic languages fix end
     - id: Galactic
-      canSpeak: false
-    - id: SolCommon
       canSpeak: false
   #SS220 languages revive end
   - type: Tag
@@ -384,8 +373,6 @@
   #SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
-    - id: SolCommon
-      canSpeak: false
   #SS220 languages revive end
   - type: Tag
     tags:
@@ -422,8 +409,6 @@
       canSpeak: false
   #SS220 Animalistic languages fix end
     - id: Galactic
-      canSpeak: false
-    - id: SolCommon
       canSpeak: false
   #SS220 languages revive end
   - type: Tag
@@ -468,8 +453,6 @@
       canSpeak: false
   #SS220 Animalistic languages fix end
     - id: Galactic
-      canSpeak: false
-    - id: SolCommon
       canSpeak: false
   #SS220 languages revive end
   - type: Physics
@@ -527,8 +510,8 @@
     - CannotSuicide
     - VimPilot
   #SS220 Animalistic languages fix begin
-  # - type: ReplacementAccent
-  #   accent: cat
+  - type: ReplacementAccent
+    accent: cat
   #SS220 Animalistic languages fix end
   - type: StealTarget
     stealGroup: AnimalNamedCat
@@ -553,7 +536,7 @@
   #SS220 Animalistic languages begin
     - id: Doggish
       canSpeak: true
-    #SS220 Animalistic languages fix begin
+      #SS220 Animalistic languages fix begin
     - id: Feline
       canSpeak: false
     - id: Monkey
@@ -566,8 +549,6 @@
       canSpeak: false
   #SS220 Animalistic languages fix end
   #SS220 Animalistic languages end
-    - id: SolCommon
-      canSpeak: false
     - id: Galactic
       canSpeak: false
   #SS220 languages revive end
@@ -610,8 +591,8 @@
     - id: FoodMeat
       amount: 2
   #SS220 Animalistic languages fix begin
-  # - type: ReplacementAccent
-  #   accent: dog
+  - type: ReplacementAccent
+    accent: dog
   #SS220 Animalistic languages fix end
   - type: InteractionPopup
     successChance: 0.5
@@ -659,8 +640,6 @@
   - type: Language
     availableLanguages:
     - id: Galactic
-      canSpeak: false
-    - id: SolCommon
       canSpeak: false
   #SS220 languages revive end
   #SS220 Animalistic languages fix begin
@@ -722,8 +701,6 @@
   #SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
-    - id: SolCommon
-      canSpeak: false
   #SS220 languages revive end
   - type: Physics
   - type: Fixtures
@@ -753,8 +730,8 @@
     - id: FoodMeat
       amount: 3
   #SS220 Animalistic languages fix begin
-  # - type: ReplacementAccent
-  #   accent: dog
+  - type: ReplacementAccent
+    accent: dog
   #SS220 Animalistic languages fix end
   - type: InteractionPopup
     successChance: 0.7
@@ -799,8 +776,6 @@
   - type: Language
     availableLanguages:
     - id: Galactic
-      canSpeak: false
-    - id: SolCommon
       canSpeak: false
   #SS220 languages revive end
   #SS220 Animalistic languages fix begin
@@ -857,8 +832,6 @@
   - type: Language
     availableLanguages:
     - id: Galactic
-      canSpeak: false
-    - id: SolCommon
       canSpeak: false
   #SS220 languages revive end
   #SS220 Animalistic languages fix begin
@@ -968,8 +941,6 @@
   ##SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
-    - id: SolCommon
-      canSpeak: false
   #SS220 languages revive end
   - type: Tag
     tags:
@@ -1011,7 +982,7 @@
     - id: Mousey
       canSpeak: false
     - id: Doggish
-      canSpeak: false
+      canSpeak: true
     - id: Reptilian
       canSpeak: false
     - id: Piggish
@@ -1065,8 +1036,6 @@
       canSpeak: false
   #SS220 Animalistic languages fix end
     - id: Galactic
-      canSpeak: false
-    - id: SolCommon
       canSpeak: false
   #SS220 languages revive end
   - type: GhostRole
@@ -1153,7 +1122,7 @@
   #SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
-    - id: SolCommon
+    - id: Arati
       canSpeak: false
   #SS220 languages revive end
   - type: NpcFactionMember
@@ -1232,7 +1201,15 @@
     availableLanguages:
     - id: Galactic
       canSpeak: false
-    - id: SolCommon
+    - id: Feline
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
       canSpeak: false
   #SS220 languages revive end
   - type: Tag
@@ -1266,9 +1243,21 @@
   #SS220 languages revive begin
   - type: Language
     availableLanguages:
+    - id: Bubblish
+      canSpeak: true
     - id: Galactic
       canSpeak: false
-    - id: Bubblish
+    - id: Feline
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
       canSpeak: false
   #SS220 languages revive end
   - type: Inventory
@@ -1371,8 +1360,6 @@
   #SS220 Animalistic languages fix end
     - id: Galactic
       canSpeak: false
-    - id: SolCommon
-      canSpeak: false
   #SS220 languages revive end
   - type: Butcherable
     butcheringType: Spike
@@ -1420,7 +1407,17 @@
     availableLanguages:
     - id: Galactic
       canSpeak: false
-    - id: SolCommon
+    - id: Feline
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Mousey
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
       canSpeak: false
   #SS220 languages revive end
   - type: Grammar
@@ -1467,8 +1464,6 @@
       canSpeak: false
   #SS220 Animalistic languages fix end
     - id: Galactic
-      canSpeak: false
-    - id: SolCommon
       canSpeak: false
   #SS220 languages revive end
   - type: Grammar
