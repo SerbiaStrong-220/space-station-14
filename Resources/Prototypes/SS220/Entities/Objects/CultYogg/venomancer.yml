@@ -24,8 +24,8 @@
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/CultYogg/venomancer.rsi
     layers:
-      - state: icon
-        map: ["sprite"]
+    - state: icon
+      map: ["sprite"]
   - type: Item
     size: Ginormous
   - type: Appearance
@@ -59,7 +59,7 @@
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/Ammunition/CultYogg/venomancer_thorne.rsi
     layers:
-      - state: spire_fly
+    - state: spire_fly
   - type: SolutionContainerManager
     solutions:
       injector:
