@@ -47,6 +47,8 @@ const ATTACHMENT_SIZE_LIMIT = 10 * 1024 * 1024; // docs: https://discord.com/dev
 const DIRECTORY_NAME = path.dirname(url.fileURLToPath(import.meta.url));
 const ATTACHMENT_SAVE_PATH = path.join(DIRECTORY_NAME, 'temp');
 
+const LOG_SEPARATOR = '========================================';
+
 class MediaData{
     /**
      * @param {string} name
@@ -85,13 +87,27 @@ async function run(){
         return;
     }
 
-    core.info(`Original message:\n"""\n${text.trim()}\n"""\n`);
+    core.info('');
+    core.info('Input message:');
+    core.info(LOG_SEPARATOR);
+    core.info(text.trim());
+    core.info(LOG_SEPARATOR);
+    core.info('');
+
     text = removeCLIgnore(text);
     text = removeGitComments(text);
 
     let outputCLData = getChangelogData(text, pull_request.data.user.login);
     if (outputCLData === null) return;
 
+    core.info('');
+    core.info('Output message:');
+    core.info(LOG_SEPARATOR);
+    core.info(outputCLData.authors);
+    core.info(outputCLData.infos);
+    core.info(LOG_SEPARATOR);
+    core.info('');
+    
     let title = `#${pull_request.data.number}: ${pull_request.data.title}`;
     let mainEmbed = new discord.EmbedBuilder()
         .setColor(0x3CB371)
@@ -251,13 +267,13 @@ function getChangelogData(text, default_author = `Unknown`){
     let authors = "";
     let authorsArray = extractAuthors(clText);
     if (authorsArray === null || authorsArray.length <= 0){
-        core.info(`Doesn't found authors in the changelog text, the user's login will be used instead.`)
+        core.info(`Doesn't found authors in the input text, the user's login will be used instead`)
         authors = `Автор: ${default_author}`;
     } else if (authorsArray.length === 1){
-        core.info(`Found 1 author in the changelog text`)
+        core.info(`Found 1 author in the input text`)
         authors = `Автор: ${authorsArray[0]}`;
     } else{
-        core.info(`Found ${authorsArray.length} authors in the changelog text`)
+        core.info(`Found ${authorsArray.length} authors in the input text`)
         authors = `Авторы:`
         for (let i = 0; i < authorsArray.length; i++){
             if (i !== authorsArray.length - 1){
@@ -268,7 +284,6 @@ function getChangelogData(text, default_author = `Unknown`){
         }
     }
 
-    console.info(`\nOutput changelog message:\n${authors}\n${infos}\n`);
     return {authors, infos}
 
     /**
