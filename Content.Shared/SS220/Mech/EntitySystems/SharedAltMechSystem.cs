@@ -372,14 +372,16 @@ public abstract partial class SharedAltMechSystem : EntitySystem
             return;
 
         component.CurrentEquipmentAmount += equipmentComponent.EqipmentSize;
+
+        AddMass(component, equipmentComponent.OwnMass);
+
         _container.Insert(toInsert, component.EquipmentContainer);
 
         equipmentComponent.EquipmentOwner = uid;
 
-        //_container.Insert(toInsert, component.EquipmentContainer);
+        _container.Insert(toInsert, component.EquipmentContainer);
         var ev = new MechEquipmentInsertedEvent(uid);
         RaiseLocalEvent(toInsert, ref ev);
-        //UpdateUserInterface(uid, mechComp);
     }
 
     public void InsertPart(EntityUid uid, EntityUid toInsert)
@@ -395,6 +397,12 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         if (!component.ContainerDict.ContainsKey(partComponent.slot) || component.ContainerDict[partComponent.slot].ContainedEntity != null)
             return;
+
+        if ((partComponent.slot == "left-arm" || partComponent.slot == "right-arm") && partComponent.OwnMass > component.MaximalArmMass)
+        {
+            _popup.PopupEntity(Loc.GetString("mech-arm-too-heavy"), uid);
+            return;
+        }
 
         partComponent.PartOwner = uid;
         _container.Insert(toInsert, component.ContainerDict[partComponent.slot]);
@@ -412,8 +420,6 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         if (TryGetNetEntity(uid, out var netMech) && TryGetNetEntity(toInsert, out var netPart))
             RaiseNetworkEvent(new MechPartStatusChanged((NetEntity)netMech, (NetEntity)netPart, true, partComponent.slot));
-
-        //UpdateUserInterface(uid, component);
     }
 
     public void AddMass(AltMechComponent mechComp, FixedPoint2 Value)

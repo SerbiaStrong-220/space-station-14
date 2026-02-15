@@ -55,6 +55,12 @@ public sealed partial class AltMechComponent : Component
     public FixedPoint2 MaximalMass = 0;
 
     /// <summary>
+    /// Maximal mass of an arm that can be installed into this mech frame
+    /// </summary>
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public FixedPoint2 MaximalArmMass = 0;
+
+    /// <summary>
     /// The maximum amount of energy the mech can have.
     /// Derived from the currently inserted battery.
     /// </summary>
