@@ -15,7 +15,7 @@
   - preconditions:
     - !type:BuckledPrecondition
       isBuckled: true
-      tasks:
+    tasks:
     - !type:HTNPrimitiveTask
       operator: !type:UnbuckleOperator
       shutdownState: TaskFinished
@@ -23,7 +23,7 @@
   - preconditions:
     - !type:PulledPrecondition
       isPulled: true
-      tasks:
+    tasks:
     - !type:HTNPrimitiveTask
       operator: !type:UnPullOperator
       shutdownState: TaskFinished
@@ -31,7 +31,7 @@
   - preconditions:
     - !type:InContainerPrecondition
       isInContainer: true
-      tasks:
+    tasks:
     - !type:HTNCompoundTask
       task: EscapeCompound
 
@@ -44,7 +44,7 @@
           types:
             Blunt: 0
       invert: true
-      tasks:
+    tasks:
     - !type:HTNCompoundTask
       task: PickupMeleeCompound
 
@@ -100,7 +100,7 @@
       - !type:TargetInRangePrecondition
          targetKey: Target
          rangeKey: MeleeRange
-         services:
+      services:
       - !type:UtilityService
         id: MeleeService
         proto: NearbyMeleeTargets
