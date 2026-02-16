@@ -59,3 +59,13 @@
   category: cargoproduct-category-name-service
   group: market
 # SS220-wood-and-plants-in-cargo-end
+
+- type: cargoProduct
+  id: WeddingOutfits
+  icon:
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/wedding_black.rsi
+    state: icon
+  product: CrateServiceWedding
+  cost: 500
+  category: cargoproduct-category-name-service
+  group: market
