@@ -77,5 +77,5 @@
   bodyPart: Hair
   markingCategory: Hair
   sprites:
-    - sprite: SS220/Mobs/Customization/human_hair.rsi
-      state: mullet
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: mullet
