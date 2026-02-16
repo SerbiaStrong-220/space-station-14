@@ -205,6 +205,7 @@ public abstract partial class SharedGunSystem
 
         var shots = GetBallisticShots(component);
         Cycle(uid, component, coordinates);
+        component.Cycled = true; // SS220 gun variety
 
         var text = Loc.GetString(shots == 0 ? "gun-ballistic-cycled-empty" : "gun-ballistic-cycled");
 
@@ -242,6 +243,14 @@ public abstract partial class SharedGunSystem
 
     private void OnBallisticTakeAmmo(EntityUid uid, BallisticAmmoProviderComponent component, TakeAmmoEvent args)
     {
+        // SS220 gun variety begin
+        if (!component.IsCycled)
+        {
+            args.Reason = Loc.GetString("gun-ballistic-require-cycle");
+            return;
+        }
+        // SS220 gun variety end
+
         for (var i = 0; i < args.Shots; i++)
         {
             EntityUid entity;
@@ -251,6 +260,8 @@ public abstract partial class SharedGunSystem
                 entity = component.Entities[^1];
 
                 args.Ammo.Add((entity, EnsureShootable(entity)));
+                if (!component.AutoCycle) // SS220 gun variety // if entity in container it can't be ejected, so shell will remain in gun and block next shoot
+                    break;
                 component.Entities.RemoveAt(component.Entities.Count - 1);
                 DirtyField(uid, component, nameof(BallisticAmmoProviderComponent.Entities));
                 Containers.Remove(entity, component.Container);
@@ -261,8 +272,22 @@ public abstract partial class SharedGunSystem
                 DirtyField(uid, component, nameof(BallisticAmmoProviderComponent.UnspawnedCount));
                 entity = Spawn(component.Proto, args.Coordinates);
                 args.Ammo.Add((entity, EnsureShootable(entity)));
+
+                // SS220 gun variety begin // block next fire round
+                if (!component.AutoCycle)
+                {
+                    component.Entities.Add(entity);
+                    Containers.Insert(entity, component.Container); //put spent ammo back
+                    DirtyField(uid, component, nameof(BallisticAmmoProviderComponent.Entities));
+                }
+
             }
         }
+
+        //un-cycle the firearm
+        if (!component.AutoCycle)
+            component.Cycled = false;
+        // SS220 gun variety end
 
         UpdateBallisticAppearance(uid, component);
     }
