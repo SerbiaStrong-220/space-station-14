@@ -2,14 +2,14 @@
   id: SpiderServantCompound
   branches:
     - tasks:
-        - !type:HTNCompoundTask
-          task: MeleeAgressiveCombatCompound
+      - !type:HTNCompoundTask
+        task: MeleeAgressiveCombatCompound
     - tasks:
-        - !type:HTNCompoundTask
-          task: FollowCompound
+      - !type:HTNCompoundTask
+        task: FollowCompound
     - tasks:
-        - !type:HTNCompoundTask
-          task: IdleCompound
+      - !type:HTNCompoundTask
+        task: IdleCompound
 
 - type: htnCompound
   id: SpiderServantShooterCompound
@@ -21,8 +21,8 @@
       - !type:HTNCompoundTask
         task: MeleeAgressiveCombatCompound
     - tasks:
-        - !type:HTNCompoundTask
-          task: FollowCompound
+      - !type:HTNCompoundTask
+        task: FollowCompound
     - tasks:
-        - !type:HTNCompoundTask
-          task: IdleCompound
+      - !type:HTNCompoundTask
+        task: IdleCompound
