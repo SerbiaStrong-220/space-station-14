@@ -26,4 +26,4 @@
       path: "/Audio/Weapons/bladeslice.ogg"
   - type: PhysicalComposition
     materialComposition:
-      Steel: 200
+      Steel: 100 #ss220 add scissors to lathe
