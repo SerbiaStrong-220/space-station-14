@@ -204,7 +204,7 @@ entities:
     - type: Transform
       pos: -0.520833,-0.4375
       parent: 1
-    - type: SkipAutoVariantize      
+    - type: SkipAutoVariantize
     - type: MapGrid
       chunks:
         0,0:
@@ -120327,8 +120327,7 @@ entities:
           showEnts: False
           occludes: False
           ent: 8772
-    - type: ReplacementAccent
-      accent: cowboy
+    - type: CowboyAccent
   - uid: 8790
     components:
     - type: MetaData
@@ -120410,8 +120409,7 @@ entities:
           showEnts: False
           occludes: False
           ent: 8831
-    - type: ReplacementAccent
-      accent: cowboy
+    - type: CowboyAccent
   - uid: 8834
     components:
     - type: Transform

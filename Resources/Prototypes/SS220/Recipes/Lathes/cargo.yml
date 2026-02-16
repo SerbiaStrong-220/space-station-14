@@ -1,0 +1,17 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: latheRecipe
+  id: ClothingEyesHudSupply
+  result: ClothingEyesHudSupply
+  completetime: 4
+  materials:
+    Steel: 300
+    Glass: 200
+
+- type: latheRecipe
+  id: BarberScissors
+  result: BarberScissors
+  completetime: 2
+  materials:
+    Steel: 200
+    Plastic: 100
