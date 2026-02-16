@@ -6,6 +6,19 @@
   - ClothingUniformJumpsuitColorGrey
   - ClothingUniformJumpskirtColorGrey
   - ClothingUniformJumpsuitLoungewear
+  # SS220 add wedding outfits to printer start
+  - ClothingUniformJumpsuitWeddingBlackOpened
+  - ClothingUniformJumpsuitWeddingBlackAndWhiteOpened
+  - ClothingUniformJumpsuitWeddingGreenOpened
+  - ClothingUniformJumpsuitWeddingWhiteOpened
+  - ClothingUniformWeddingDress1
+  - ClothingUniformWeddingDress2
+  - ClothingUniformWeddingDress3
+  - ClothingUniformWeddingDress4
+  - ClothingHeadHatVeilClip
+  - ClothingHeadHatVeilTiara
+  - ClothingUniformJumpsuitWitness
+  # SS220 add wedding outfits to printer end
 
 - type: latheRecipePack
   id: ClothingCargo
