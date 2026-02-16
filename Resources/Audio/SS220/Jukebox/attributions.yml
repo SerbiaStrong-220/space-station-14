@@ -77,3 +77,14 @@
   license: "CC-BY-4.0"
   copyright: "PGN Music by Tyler"
   source: "https://pgnmusic.bandcamp.com/album/sea-shanties"
+
+- files: [MIT_Concert-Choir_O_Fortuna.ogg]
+  license: "CC-BY-NC-3.0"
+  copyright: "Free Music Archive"
+  source: "https://freemusicarchive.org/music/MIT_Concert_Choir/Carmina_Burana_Carl_Orff/01_1355"
+
+- files: [Illinois_Brass_Band_Bach_Toccata_and_Fugue_in_D_Minor]
+  license: "CC-BY-3.0"
+  copyright: "Free Music Archive"
+  source: "https://freemusicarchive.org/music/Illinois_Brass_Band/Music_to_Summon_the_Spirits/Bach_Toccata_and_Fugue_in_D_Minor/"
+
