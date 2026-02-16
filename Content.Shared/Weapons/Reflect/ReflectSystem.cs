@@ -198,10 +198,10 @@ public sealed class ReflectSystem : EntitySystem
             return baseProb;
 
         var user = Transform(reflector).ParentUid;
-        var reflectorPos = _transform.GetWorldRotation(user).GetDir();
-        var sourcePos = _transform.GetWorldRotation(source).GetDir();
+        var reflectorDirection = _transform.GetWorldRotation(user).GetDir();
+        var sourceDirection = _transform.GetWorldRotation(source).GetDir();
 
-        var isBehind = sourcePos == reflectorPos;
+        var isBehind = sourceDirection == reflectorDirection;
         return isBehind ? reflector.Comp.ReflectProbBehind.Value : reflector.Comp.ReflectProb;
     }
     // ss220 add reflect in back end
