@@ -1,6 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Server.SS220.GameTicking.Rules;
 using Content.Shared.Popups;
 using Content.Shared.SS220.CultYogg.Cultists;
 using Robust.Shared.Audio.Systems;
@@ -13,7 +12,6 @@ public sealed class CultYoggPurifiedSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly CultYoggRuleSystem _cultRuleSystem = default!;
 
     public override void Initialize()
     {

@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
@@ -9,6 +10,13 @@ namespace Content.Shared.SS220.CultYogg.MiGo;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class CultYoggHealComponent : Component
 {
+    /// <summary>
+    /// Time restriction of the healing component
+    /// Null if it should be removed by another event
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public TimeSpan? HealingEffectTime;
+
     /// <summary>
     /// Damage that heals in a single incident
     /// </summary>
@@ -31,9 +39,9 @@ public sealed partial class CultYoggHealComponent : Component
     /// Time between each healing incident
     /// </summary>
     [DataField, AutoNetworkedField]
-    public TimeSpan TimeBetweenIncidents = TimeSpan.FromSeconds(2.5); // most balanced value
+    public TimeSpan TimeBetweenHealingTicks = TimeSpan.FromSeconds(2.5); // most balanced value
 
-    public TimeSpan? NextIncidentTime;
+    public TimeSpan? NextHealingTickTime;
 
     [DataField, AutoNetworkedField]
     public SpriteSpecifier.Rsi Sprite = new(new("SS220/Effects/CultYogg/healing.rsi"), "healingEffect");
