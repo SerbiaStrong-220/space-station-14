@@ -1,9 +1,12 @@
 using Content.Shared.Damage;
 using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Systems;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.Examine;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.SS220.Damage.Systems;
+using Content.Shared.SS220.Damage.Components;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
@@ -34,6 +37,16 @@ public abstract partial class SharedGunSystem
             return;
 
         _damageExamine.AddDamageExamine(args.Message, Damageable.ApplyUniversalAllModifiers(damageSpec), Loc.GetString("damage-projectile"));
+
+        //ss220 - Gun variety - custom AP begin
+        var apComp = _apSystem.GetArmorPenetration(component.Prototype);
+        if (apComp != null && apComp.Rules.Count > 0)
+        {
+            var ap = _apSystem.BuildArmorPenetrationDescription(apComp.Rules);
+            if (!string.IsNullOrEmpty(ap))
+                 args.Message.AddMarkupPermissive("\n" + ap);
+        }
+        //ss220 - Gun variety - custom AP end
     }
 
     private DamageSpecifier? GetProjectileDamage(EntProtoId proto)

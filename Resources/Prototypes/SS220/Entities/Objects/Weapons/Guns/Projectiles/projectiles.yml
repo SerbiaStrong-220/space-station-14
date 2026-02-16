@@ -40,10 +40,6 @@
   - type: Ammo
   - type: Projectile
     impactEffect: BulletImpactEffectBlaster
-    damage:
-      types:
-        Heat: 20
-        Piercing: 6
     soundHit:
       collection: WeakHit
     forceSound: true
@@ -475,8 +471,8 @@
     impactEffect: BulletImpactEffectBlaster
     damage:
       types:
-        Heat: 20
-        Piercing: 6
+        Heat: 12
+        Piercing: 2
     soundHit:
       collection: WeakHit
     forceSound: true
@@ -496,8 +492,8 @@
     impactEffect: BulletImpactEffectBlue
     damage:
       types:
-        Heat: 48
-        Piercing: 14
+        Heat: 28
+        Piercing: 8
     soundHit:
       collection: WeakHit
     forceSound: true
@@ -536,8 +532,8 @@
     impactEffect: BulletImpactEffectBlaster
     damage:
       types:
-        Heat: 12
-        Piercing: 4
+        Heat: 14
+        Piercing: 2
     soundHit:
       collection: WeakHit
     forceSound: true
@@ -557,8 +553,8 @@
     impactEffect: BulletImpactEffectBlaster
     damage:
       types:
-        Heat: 29
-        Piercing: 10
+        Heat: 17
+        Piercing: 6
     soundHit:
       collection: WeakHit
     forceSound: true

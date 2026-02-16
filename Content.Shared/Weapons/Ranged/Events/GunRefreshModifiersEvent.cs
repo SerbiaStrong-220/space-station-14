@@ -1,5 +1,6 @@
 ﻿using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Shared.SS220.Weapons.Ranged.Components;
 using Robust.Shared.Audio;
 
 namespace Content.Shared.Weapons.Ranged.Events;
@@ -19,5 +20,6 @@ public record struct GunRefreshModifiersEvent(
     Angle MinAngle,
     int ShotsPerBurst,
     float FireRate,
-    float ProjectileSpeed
+    float ProjectileSpeed,
+    AmmoGunModifierComponent? CurrentAmmoModifier // SS220 Gun variety
 );

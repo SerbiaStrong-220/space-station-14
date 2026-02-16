@@ -13,6 +13,7 @@ using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Shared.SS220.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Reflect;
 using Content.Shared.Damage.Components;
 using Robust.Shared.Audio;
@@ -76,6 +77,17 @@ public sealed partial class GunSystem : SharedGunSystem
                 return;
             }
         }
+        // SS220 Gun variety begin
+        AmmoGunModifierComponent? currentModifier = null;
+        foreach (var (ent, _) in ammo)
+        {
+            if (ent != null && TryComp<AmmoGunModifierComponent>(ent, out var modifierComp))
+            {
+                currentModifier = modifierComp;
+                break;
+            }
+        }
+        // SS220 Gun variety end
 
         var fromMap = TransformSystem.ToMapCoordinates(fromCoordinates);
         var toMap = TransformSystem.ToMapCoordinates(toCoordinates).Position;
@@ -97,6 +109,7 @@ public sealed partial class GunSystem : SharedGunSystem
         // DebugTools.Assert(direction != Vector2.Zero);
         var shotProjectiles = new List<EntityUid>(ammo.Count);
 
+        RefreshModifiers((gunUid, gun), currentModifier); // SS220 Gun variety
         foreach (var (ent, shootable) in ammo)
         {
             // pneumatic cannon doesn't shoot bullets it just throws them, ignore ammo handling
