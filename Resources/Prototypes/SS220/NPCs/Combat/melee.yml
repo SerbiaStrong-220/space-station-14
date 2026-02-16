@@ -18,7 +18,7 @@
     tasks:
     - !type:HTNPrimitiveTask
       operator: !type:UnbuckleOperator
-      shutdownState: TaskFinished
+        shutdownState: TaskFinished
 
   - preconditions:
     - !type:PulledPrecondition
@@ -26,7 +26,7 @@
     tasks:
     - !type:HTNPrimitiveTask
       operator: !type:UnPullOperator
-      shutdownState: TaskFinished
+        shutdownState: TaskFinished
 
   - preconditions:
     - !type:InContainerPrecondition
@@ -64,7 +64,7 @@
           types:
           Blunt: 0
       invert: true
-      tasks:
+    - tasks:
       - !type:HTNCompoundTask
         task: PickupMeleeCompound
 
