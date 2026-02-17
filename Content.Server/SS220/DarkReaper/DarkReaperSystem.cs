@@ -20,6 +20,8 @@ using Robust.Shared.Utility;
 using Content.Shared.Projectiles;
 using Content.Server.Projectiles;
 using Content.Shared.Light.Components;
+using Content.Shared.Popups;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.DarkReaper;
@@ -43,6 +45,7 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly BuckleSystem _buckle = default!;
     [Dependency] private readonly ProjectileSystem _projectile = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     private readonly ProtoId<AlertPrototype> _deadscoreStage1Alert = "DeadscoreStage1";
 
@@ -53,6 +56,44 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
     public override void Initialize()
     {
         base.Initialize();
+
+        SubscribeLocalEvent<DarkReaperComponent, PlayerAttachedEvent>(OnPlayerAttached);
+    }
+
+    public override void Update(float delta)
+    {
+        base.Update(delta);
+
+        var reaperQuery = EntityQueryEnumerator<DarkReaperComponent>();
+
+        while (reaperQuery.MoveNext(out var reaper, out var reaperComp))
+        {
+            if (reaperComp.SpawnedTime == null)
+                continue;
+
+            reaperComp.DamageAccumulator += delta;
+
+            if (reaperComp.DamageAccumulator < reaperComp.DamageInterval)
+                continue;
+
+            reaperComp.DamageAccumulator -= reaperComp.DamageInterval;
+            if (reaperComp.CurrentStage < 0 || reaperComp.CurrentStage >= reaperComp.NonActiveDamagePerInterval.Count)
+                continue;
+
+            var damagePerInterval = reaperComp.NonActiveDamagePerInterval[reaperComp.CurrentStage - 1];
+
+            var damageType = reaperComp.NonActiveDamagePerIntervalProto[reaperComp.CurrentStage - 1];
+            var damageSpec = new DamageSpecifier();
+            damageSpec.DamageDict.Add(damageType, damagePerInterval);
+
+            _damageable.TryChangeDamage(reaper, damageSpec, ignoreResistances: true);
+        }
+    }
+
+    private void OnPlayerAttached(Entity<DarkReaperComponent> ent, ref PlayerAttachedEvent args)
+    {
+        var message = Loc.GetString("dark-reaper-damage-per-interval");
+        _popup.PopupEntity(message, ent, ent);
     }
 
     public override void ChangeForm(Entity<DarkReaperComponent> entity, bool isMaterial)
@@ -210,9 +251,9 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
         _alerts.ShowAlert(entity.Owner, alert, (short)severity);
     }
 
-    protected override void OnCompInit(Entity<DarkReaperComponent> ent, ref ComponentStartup args)
+    protected override void OnCompStartup(Entity<DarkReaperComponent> ent, ref ComponentStartup args)
     {
-        base.OnCompInit(ent, ref args);
+        base.OnCompStartup(ent, ref args);
 
         _container.EnsureContainer<Container>(ent, DarkReaperComponent.ConsumedContainerId);
 

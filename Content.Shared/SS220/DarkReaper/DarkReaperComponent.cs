@@ -1,8 +1,8 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
-using Content.Shared.StatusEffect;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -29,7 +29,7 @@ public sealed partial class DarkReaperComponent : Component
     /// Max progression stage
     /// </summary>
     [ViewVariables(VVAccess.ReadOnly), DataField, AutoNetworkedField]
-    public int MaxStage = 3;
+    public int MaxStage = 3; // if you change max stage, you MUST change damage for every stage below
 
     /// <summary>
     /// Stage at which station receives alert
@@ -347,8 +347,37 @@ public sealed partial class DarkReaperComponent : Component
 
     [ViewVariables]
     public TimeSpan? MaterializedStart;
+
     [ViewVariables, AutoNetworkedField]
     public TimeSpan? BloodMistStart;
+
+    [DataField]
+    public TimeSpan? SpawnedTime;
+
+    // YOU ALWAYS MUST SYNC THIS WITH STAGES
+    [DataField]
+    public List<float> NonActiveDamagePerInterval = new()
+    {
+        0.4f,
+        0.5f,
+        0.7f,
+    };
+
+    // YOU ALWAYS MUST SYNC THIS WITH STAGES
+    // mb other types of damage for the future
+    [DataField]
+    public List<ProtoId<DamageTypePrototype>> NonActiveDamagePerIntervalProto = new()
+    {
+        new ProtoId<DamageTypePrototype>("Blunt"),
+        new ProtoId<DamageTypePrototype>("Blunt"),
+        new ProtoId<DamageTypePrototype>("Blunt"),
+    };
+
+    [DataField]
+    public float DamageAccumulator;
+
+    [DataField]
+    public float DamageInterval = 1.0f;
 }
 
 [Serializable, NetSerializable]
