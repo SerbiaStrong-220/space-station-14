@@ -10,7 +10,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.DarkReaper;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 [Access(typeof(SharedDarkReaperSystem), Friend = AccessPermissions.ReadWriteExecute, Other = AccessPermissions.Read)]
 public sealed partial class DarkReaperComponent : Component
 {
@@ -356,28 +356,27 @@ public sealed partial class DarkReaperComponent : Component
 
     // YOU ALWAYS MUST SYNC THIS WITH STAGES
     [DataField]
-    public List<float> NonActiveDamagePerInterval = new()
+    public List<DamageSpecifier> NonActiveDamagePerInterval = new()
     {
-        0.4f,
-        0.5f,
-        0.7f,
+        new DamageSpecifier
+        {
+            DamageDict = { ["Blunt"] = FixedPoint2.New(0.4f) },
+        },
+        new DamageSpecifier
+        {
+            DamageDict = { ["Blunt"] = FixedPoint2.New(0.5f) },
+        },
+        new DamageSpecifier
+        {
+            DamageDict = { ["Blunt"] = FixedPoint2.New(0.7f) },
+        },
     };
 
-    // YOU ALWAYS MUST SYNC THIS WITH STAGES
-    // mb other types of damage for the future
-    [DataField]
-    public List<ProtoId<DamageTypePrototype>> NonActiveDamagePerIntervalProto = new()
-    {
-        new ProtoId<DamageTypePrototype>("Blunt"),
-        new ProtoId<DamageTypePrototype>("Blunt"),
-        new ProtoId<DamageTypePrototype>("Blunt"),
-    };
+    [DataField, AutoPausedField]
+    public TimeSpan NextDamageTime;
 
     [DataField]
-    public float DamageAccumulator;
-
-    [DataField]
-    public float DamageInterval = 1.0f;
+    public TimeSpan DamageInterval = TimeSpan.FromSeconds(1f);
 }
 
 [Serializable, NetSerializable]

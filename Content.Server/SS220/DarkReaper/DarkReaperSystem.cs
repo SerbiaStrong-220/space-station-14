@@ -71,21 +71,18 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
             if (reaperComp.SpawnedTime == null)
                 continue;
 
-            reaperComp.DamageAccumulator += delta;
+            reaperComp.NextDamageTime += TimeSpan.FromSeconds(delta);
 
-            if (reaperComp.DamageAccumulator < reaperComp.DamageInterval)
+            if (reaperComp.NextDamageTime < reaperComp.DamageInterval)
                 continue;
 
-            reaperComp.DamageAccumulator -= reaperComp.DamageInterval;
-            if (reaperComp.CurrentStage < 0 || reaperComp.CurrentStage >= reaperComp.NonActiveDamagePerInterval.Count)
+            reaperComp.NextDamageTime -= reaperComp.DamageInterval;
+
+            var stageIndex = reaperComp.CurrentStage - 1;
+            if (stageIndex < 0 || stageIndex >= reaperComp.NonActiveDamagePerInterval.Count)
                 continue;
 
-            var damagePerInterval = reaperComp.NonActiveDamagePerInterval[reaperComp.CurrentStage - 1];
-
-            var damageType = reaperComp.NonActiveDamagePerIntervalProto[reaperComp.CurrentStage - 1];
-            var damageSpec = new DamageSpecifier();
-            damageSpec.DamageDict.Add(damageType, damagePerInterval);
-
+            var damageSpec = reaperComp.NonActiveDamagePerInterval[stageIndex];
             _damageable.TryChangeDamage(reaper, damageSpec, ignoreResistances: true);
         }
     }
