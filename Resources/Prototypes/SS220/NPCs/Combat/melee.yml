@@ -35,7 +35,6 @@
     - !type:HTNCompoundTask
       task: EscapeCompound
 
-    # Pickup weapon if we don't have one.
   - preconditions:
     - !type:ActiveHandComponentPrecondition
       components:
@@ -48,7 +47,6 @@
     - !type:HTNCompoundTask
       task: PickupMeleeCompound
 
-    # Melee combat (unarmed or otherwise)
   - tasks:
     - !type:HTNCompoundTask
       task: MeleeAgressiveAttackTargetCompound
@@ -62,18 +60,18 @@
       - type: MeleeWeapon
         damage:
           types:
-          Blunt: 0
+            Blunt: 0
       invert: true
-    - tasks:
-      - !type:HTNCompoundTask
-        task: PickupMeleeCompound
+    tasks:
+    - !type:HTNCompoundTask
+      task: PickupMeleeCompound
 
   - tasks:
     - !type:HTNPrimitiveTask
       operator: !type:UtilityOperator
         proto: OrderedTargets
     - !type:HTNCompoundTask
-        task: MeleeAgressiveAttackOrderedTargetCompound
+      task: MeleeAgressiveAttackOrderedTargetCompound
 
 # Tries to melee attack our target.
 - type: htnCompound
@@ -123,15 +121,15 @@
         rangeKey: MeleeRange
     - !type:HTNPrimitiveTask
       operator: !type:MeleeOperator
-       targetKey: Target
+        targetKey: Target
       preconditions:
-        - !type:KeyExistsPrecondition
-          key: Target
-        - !type:TargetInRangePrecondition
-          targetKey: Target
-          rangeKey: MeleeRange
+      - !type:KeyExistsPrecondition
+        key: Target
+      - !type:TargetInRangePrecondition
+        targetKey: Target
+        rangeKey: MeleeRange
       services:
-        - !type:UtilityService
-          id: MeleeService
-          proto: OrderedTargets
-          key: Target
+      - !type:UtilityService
+        id: MeleeService
+        proto: OrderedTargets
+        key: Target
