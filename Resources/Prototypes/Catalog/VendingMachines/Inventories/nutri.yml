@@ -15,6 +15,7 @@
     ChemistryBottleRobustHarvest: 3
     ChemistryBottleEZNutrient: 3
     Bucket: 3
+    LargeBeaker: 1 # SS220 beaker-for-botanists
     BoxMouthSwab: 1
     BoxAgrichem: 1
     #TO DO:
