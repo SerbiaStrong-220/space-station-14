@@ -192,5 +192,4 @@
     checkCanInteract: false
   - type: InstantAction
     event: !type:ToggleGhostRadioChannels
-
-  
+    
