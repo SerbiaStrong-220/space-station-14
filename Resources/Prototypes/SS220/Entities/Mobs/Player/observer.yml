@@ -11,3 +11,4 @@
     priority: 1
   - type: InstantAction
     event: !type:ToggleIntrinsicUIEvent { key: enum.RadarConsoleUiKey.Key }
+    
