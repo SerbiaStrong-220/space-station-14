@@ -193,17 +193,4 @@
   - type: InstantAction
     event: !type:ToggleGhostRadioChannels
 
-# ss220 add ghost's radar action start
-- type: entity
-  parent: BaseMentalAction
-  id: ActionGhostShowRadar
-  name: Mass Scanner Interface
-  description: View a Mass Scanner Interface.
-  components:
-  - type: Action
-    icon: { sprite: Interface/Actions/actions_ai.rsi, state: mass_scanner }
-    priority: 1
-  - type: InstantAction
-    event: !type:ToggleIntrinsicUIEvent { key: enum.RadarConsoleUiKey.Key }
-  # ss220 add ghost's radar action end
   
