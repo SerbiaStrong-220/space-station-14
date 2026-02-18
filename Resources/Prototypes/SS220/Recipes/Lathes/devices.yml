@@ -1,3 +1,5 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 - type: latheRecipe
   id: ThermalVisorRND
   result: ThermalVisorRND
@@ -54,3 +56,13 @@
     Steel: 600
     Plastic: 300
     Gold: 200
+
+- type: latheRecipe
+  id: WeaponEnergyCrossbow
+  result: WeaponEnergyCrossbow
+  completetime: 5
+  materials:
+    Steel: 2000
+    Silver: 750
+    Plasma: 1500
+    Uranium: 600

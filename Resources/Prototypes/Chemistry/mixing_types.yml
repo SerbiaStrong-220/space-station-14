@@ -26,7 +26,7 @@
   id: DummyCondense
   verbText: mixing-verb-default-condense
   icon:
-    sprite: Structures/Piping/Atmospherics/condenser.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/condenser.rsi # SS220 atmospherics-sprite-update
     state: display
 
 # Alternative Mixing Methods

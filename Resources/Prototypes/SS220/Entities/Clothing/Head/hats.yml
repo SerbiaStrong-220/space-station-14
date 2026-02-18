@@ -678,3 +678,25 @@
     sprite: SS220/Clothing/Head/Hats/newyears_cap.rsi
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/newyears_cap.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatVeilClip
+  name: veil clip
+  description: “Am I getting ahead of myself?” thought the girl as she arrived at her first date wearing a veil.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/veil_clip.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/veil_clip.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatVeilTiara
+  name: tiara with veil
+  description: I am ready for anything in life, and optimism is my trait. I always have a swimsuit, vodka, a bag of chips, and a veil with me.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/veil_tiara.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/veil_tiara.rsi

@@ -369,11 +369,11 @@
 #ss220 dynamic-price end
 
 - type: listing
-  id: UplinkOuterElectrification
-  name: uplink-outer-electrification-name
-  description: uplink-outer-electrification-desc
-  icon: {sprite: SS220/Clothing/OuterClothing/Armor/security.rsi, state: icon}  #SS220 BugFix
-  productEntity: ClothingOuterArmorElectricity
+  id: ClothingUniformJumpsuitElectricity
+  name: uplink-suit-electrification-name
+  description: uplink-suit-electrification-desc
+  icon: {sprite: SS220/Clothing/Uniforms/Jumpsuit/recruit_syndie.rsi, state: icon}
+  productEntity: ClothingUniformJumpsuitElectricity
   cost:
     Telecrystal: 5
   categories:
