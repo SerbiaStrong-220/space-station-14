@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Skyrat at commit https://github.com/Skyrat-SS13/Skyrat-tg/commit/9467edd6a7431c7653b1270214bfa9cacb5b296d",
+  "size": {
+    "x": 48,
+    "y": 32
+  },
+  "states": [
+    {
+        "name": "icon"
+    },
+    {
+        "name": "mag-0"
+    }
+  ]
+}

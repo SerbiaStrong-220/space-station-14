@@ -1,0 +1,78 @@
+{
+    "version": 1,
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from CEV-Eris at commit 5d8b4cf30ac37f0b8e7d78c349344086b95ab4ae",
+    "states": [
+        {
+            "name": "incendiary"
+        },
+        {
+            "name": "incendiary-spent"
+        },
+        {
+            "name": "lethal"
+        },
+        {
+            "name": "lethal-spent"
+        },
+        {
+            "name": "practice"
+        },
+        {
+            "name": "practice-spent"
+        },
+        {
+            "name": "rubber"
+        },
+        {
+            "name": "rubber-spent"
+        },
+        {
+            "name": "rubber_slug"
+        },
+        {
+            "name": "rubber_slug-spent"
+        },
+        {
+            "name": "slug"
+        },
+        {
+            "name": "slug-spent"
+        },
+        {
+            "name": "steel_slug"
+        },
+        {
+            "name": "steel_slug-spent"
+        },
+        {
+            "name": "flechette"
+        },
+        {
+            "name": "flechette-spent"
+        },
+        {
+            "name": "blank"
+        },
+        {
+            "name": "blank-spent"
+        },
+        {
+            "name": "flare"
+        },
+        {
+            "name": "flare-spent"
+        },
+        {
+            "name": "highvelocity"
+        },
+        {
+            "name": "highvelocity-spent"
+        }
+    ]
+}
+

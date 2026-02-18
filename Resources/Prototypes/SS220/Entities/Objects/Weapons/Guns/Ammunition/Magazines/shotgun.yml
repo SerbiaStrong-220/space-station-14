@@ -1,0 +1,99 @@
+- type: entity
+  id: BaseMagazineShotgunHeavy
+  name: ammo drum (.55 shells)
+  parent: [ BaseItem, BaseSecurityContraband ]
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+    - MagazineShotgunHeavy
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+        - ShellShotgunHeavy
+    capacity: 10
+    soundRack:
+      path: /Audio/Corvax/Weapons/Guns/Cock/shotgun_cock.ogg # Corvax-Guns
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/Shotgun/infiltrator.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  id: MagazineShotgunHeavyEmpty
+  name: ammo drum (.55 shells any)
+  suffix: empty
+  parent: BaseMagazineShotgunHeavy
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+
+- type: entity
+  id: MagazineShotgunHeavy
+  name: ammo drum (.55 pellet)
+  parent: BaseMagazineShotgunHeavy
+  components:
+  - type: BallisticAmmoProvider
+    proto: ShellShotgunHeavy
+  - type: Sprite
+    layers:
+    - state: lethal
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: MagazineShotgunHeavyRubber
+  name: ammo drum (.55 rubber)
+  parent: BaseMagazineShotgunHeavy
+  components:
+  - type: BallisticAmmoProvider
+    proto: ShellShotgunHeavyRubber
+  - type: Sprite
+    layers:
+    - state: rubber
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: MagazineShotgunHeavySlug
+  name: ammo drum (.55 slug)
+  parent: BaseMagazineShotgunHeavy
+  components:
+  - type: BallisticAmmoProvider
+    proto: ShellShotgunHeavySlug
+  - type: Sprite
+    layers:
+    - state: ap
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: MagazineShotgunHeavyIncendiary
+  name: ammo drum (.55 incendiary)
+  parent: BaseMagazineShotgunHeavy
+  components:
+  - type: BallisticAmmoProvider
+    proto: ShellShotgunHeavyIncendiary
+  - type: Sprite
+    layers:
+    - state: incendiary
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]

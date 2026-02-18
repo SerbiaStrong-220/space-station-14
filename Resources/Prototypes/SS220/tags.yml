@@ -367,3 +367,10 @@
 
 - type: Tag
   id: VoidTeleporationTarget
+
+# gun variety
+- type: Tag
+  id: ShellShotgunHeavy
+
+- type: Tag
+  id: MagazineShotgunHeavy

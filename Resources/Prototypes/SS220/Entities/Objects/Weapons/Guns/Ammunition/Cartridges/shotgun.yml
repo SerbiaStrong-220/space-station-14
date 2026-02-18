@@ -1,0 +1,170 @@
+- type: entity
+  id: BaseShellShotgunHeavy
+  name: shell (.55)
+  parent: BaseCartridge
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+    - ShellShotgunHeavy
+  - type: CartridgeAmmo
+    soundEject:
+      collection: ShellEject
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Ammunition/Casings/shotgun_shell_big.rsi
+    layers:
+      - state: lethal
+        map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+    state: "lethal"
+
+- type: entity
+  id: ShellShotgunHeavy
+  name: shell (.55 pellet)
+  parent: [ BaseShellShotgunHeavy, BaseSecurityContraband ]
+  components:
+  - type: Sprite
+    layers:
+      - state: lethal
+        map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: CartridgeAmmo
+    proto: PelletShotgunHeavySpread
+
+- type: entity
+  id: ShellShotgunHeavyRubber
+  name: shell (.55 Rubber)
+  parent: [ BaseShellShotgunHeavy, BaseSecurityBartenderContraband ]
+  components:
+  - type: Tag
+    tags:
+    - ShellShotgunHeavy
+  - type: Sprite
+    layers:
+      - state: rubber
+        map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: CartridgeAmmo
+    proto: PelletShotgunHeavyRubberSpread
+  - type: SpentAmmoVisuals
+    state: "rubber"
+
+- type: entity
+  id: ShellShotgunHeavySlug #treat it as a breaching ammo
+  name: shell (.55 slug)
+  parent: [ BaseShellShotgunHeavy, BaseSecurityContraband]
+  components:
+  - type: Sprite
+    layers:
+      - state: slug
+        map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: CartridgeAmmo
+    proto: PelletShotgunHeavySlug
+  - type: SpentAmmoVisuals
+    state: "slug"
+  - type: AmmoGunModifier
+    shotsPerBurstDelta: -1
+    soundGunshotAlt: /Audio/SS220/Weapons/Guns/Gunshots/gunshot_mateba.ogg
+    projectileSpeedDelta: -15
+
+- type: entity
+  id: ShellShotgunHeavyFlare
+  name: shell (.55 flare)
+  parent: BaseShellShotgunHeavy
+  components:
+  - type: Tag
+    tags:
+    - ShellShotgunHeavy
+  - type: Sprite
+    layers:
+      - state: flare
+        map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: CartridgeAmmo
+    proto: PelletShotgunFlare
+  - type: SpentAmmoVisuals
+    state: "flare"
+
+- type: entity
+  id: ShellShotgunHeavyIncendiary
+  name: shell (.55 incendiary)
+  parent: [ BaseShellShotgunHeavy, BaseSecurityContraband ]
+  components:
+  - type: Sprite
+    layers:
+      - state: incendiary
+        map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: CartridgeAmmo
+    proto: PelletShotgunHeavyIncendiarySpread
+  - type: SpentAmmoVisuals
+    state: "incendiary"
+
+- type: entity
+  id: ShellShotgunHeavyPractice
+  name: shell (.55 practice)
+  parent: [ BaseShellShotgunHeavy, BaseSecurityContraband ]
+  components:
+  - type: Sprite
+    layers:
+      - state: practice
+        map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: CartridgeAmmo
+    proto: PelletShotgunPracticeSpread
+  - type: SpentAmmoVisuals
+    state: "practice"
+
+- type: entity
+  id: ShellShotgunHeavyTranquilizer
+  name: shell (.55 tranquilizer)
+  parent: [ BaseShellShotgunHeavy, BaseSecurityContraband ]
+  components:
+  - type: Tag
+    tags:
+    - ShellShotgunHeavy
+  - type: Sprite
+    layers:
+      - state: flechette
+        map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: CartridgeAmmo
+    proto: PelletShotgunTranquilizer
+  - type: ChemicalAmmo
+  - type: SolutionContainerManager
+    solutions:
+      ammo:
+        reagents:
+        - ReagentId: ChloralHydrate
+          Quantity: 4 #ss220-rebalance
+  - type: SolutionTransfer
+    maxTransferAmount: 4 #ss220-rebalance
+  - type: SpentAmmoVisuals
+    state: "flechette"
+
+- type: entity
+  id: ShellShotgunHeavyImprovised
+  name: improvised shotgun shell
+  description: A homemade shotgun shell that shoots painful glass shrapnel. The spread is so wide that it couldn't hit the broad side of a barn.
+  parent: [ BaseShellShotgunHeavy, BaseSecurityContraband ]
+  components:
+  - type: Tag
+    tags:
+    - ShellShotgunHeavy
+  - type: Sprite
+    layers:
+      - state: steel_slug
+        map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: CartridgeAmmo
+    proto: PelletShotgunImprovisedSpread
+  - type: SpentAmmoVisuals
+    state: "steel_slug"
+
+- type: entity
+  id: ShellShotgunHeavyUranium
+  name: uranium shotgun shell
+  parent: [ BaseShellShotgunHeavy, BaseSecurityContraband ]
+  components:
+    - type: Sprite
+      layers:
+        - state: highvelocity
+          map: [ "enum.AmmoVisualLayers.Base" ]
+    - type: CartridgeAmmo
+      proto: PelletShotgunUraniumSpread
+    - type: SpentAmmoVisuals
+      state: "highvelocity"

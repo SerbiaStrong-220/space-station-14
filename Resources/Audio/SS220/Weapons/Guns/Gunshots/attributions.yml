@@ -2,3 +2,8 @@
   license: "Custom"
   copyright: "Made by MIXnikita for SS220. Licensed under EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt"
   source: "https://github.com/SerbiaStrong-220/space-station-14"
+
+- files: ["slammer.ogg", "bolter.ogg", "cannon.ogg", "gunshot1.ogg", "gunshot2.ogg", "gunshot3.ogg", "gunshot_dmr.ogg", "gunshot_light.ogg", "gunshot_mateba.ogg", "gunshot_pistol.ogg", "gunshot_revolver.ogg", "gunshot_rifle.ogg", "gunshot_saw.ogg", "gunshot_shotgun.ogg", "gunshot_shotgun2.ogg", "gunshot_smg.ogg", "gunshot_strong.ogg", "gunshot_suppressed.ogg", "gunshot_svd.ogg", "gunshot_tommygun.ogg", "k2557-shot.ogg"]
+  license: "CC-BY-SA 3.0"
+  copyright: "Taken from AuroraStation"
+  source: "https://github.com/Aurorastation/Aurora.3"

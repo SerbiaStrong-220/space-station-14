@@ -1,0 +1,35 @@
+{
+    "version": 1,
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from Skyrat at commit https://github.com/Skyrat-SS13/Skyrat-tg/commit/9467edd6a7431c7653b1270214bfa9cacb5b296d",
+    "states": [
+        {
+            "name": "base"
+        },
+        {
+            "name": "rubber"
+        },
+        {
+            "name": "lethal"
+        },
+        {
+            "name": "ap"
+        },
+        {
+            "name": "incendiary"
+        },
+        {
+            "name": "hollowpoint"
+        },
+        {
+            "name": "ihdf"
+        },
+        {
+            "name": "mag-1"
+        }
+    ]
+}

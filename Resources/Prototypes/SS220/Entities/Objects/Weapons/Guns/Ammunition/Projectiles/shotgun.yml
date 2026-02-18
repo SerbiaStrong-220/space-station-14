@@ -1,0 +1,101 @@
+- type: entity
+  parent: BaseBullet
+  id: PelletShotgunHeavySlug
+  categories: [ HideSpawnMenu ]
+  name: pellet (.55 slug)
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    state: slug
+  - type: Projectile #treat it as a breaching ammo
+    damage:
+      types:
+        Blunt: 20
+        Structural: 125
+    penetrationThreshold: 750
+  - type: ArmorPenetration #it kills both basic and reinf walls in 3 hits :p
+    rules:
+    - damageType: Structural
+      armorthreshold: 0.45 #metallic is 0.5
+      multiplier: 6
+  - type: StunOnCollide
+    stunAmount: 0
+    knockdownAmount: 0.5 # Hits like a truck
+    drop: false
+  - type: ProjectileThrowOnHit
+    speed: 10
+    distance: 3
+
+- type: entity
+  parent: BaseBullet
+  id: PelletShotgunHeavyRubber
+  categories: [ HideSpawnMenu ]
+  name: rubber (.55)
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+    - state: rubber
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 2
+  - type: StaminaDamageOnCollide
+    damage: 5
+
+- type: entity
+  parent: PelletShotgunHeavyRubber
+  id: PelletShotgunHeavyRubberSpread
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ProjectileSpread
+    proto: PelletShotgunHeavyRubber
+    count: 10
+    spread: 25
+
+- type: entity
+  parent: BaseBullet
+  id: PelletShotgunHeavy
+  categories: [ HideSpawnMenu ]
+  name: pellet (.55)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 10
+        Structural: 15
+
+- type: entity
+  parent: PelletShotgunHeavy
+  id: PelletShotgunHeavySpread
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ProjectileSpread
+    proto: PelletShotgunHeavy
+    count: 8
+    spread: 15
+
+- type: entity
+  parent: BaseBulletIncendiary
+  id: PelletShotgunHeavyIncendiary
+  categories: [ HideSpawnMenu ]
+  name: pellet (.55 incendiary)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Heat: 2
+  - type: IgnitionSource
+    ignited: true
+  - type: IgniteOnCollide
+    fireStacks: 2
+
+- type: entity
+  parent: PelletShotgunHeavyIncendiary
+  id: PelletShotgunHeavyIncendiarySpread
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ProjectileSpread
+    proto: PelletShotgunHeavyIncendiary
+    count: 4
+    spread: 15

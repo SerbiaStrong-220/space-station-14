@@ -1,0 +1,91 @@
+- type: entity
+  name: Breacher
+  parent: [BaseWeaponShotgun, BaseGunWieldable, BaseSecurityContraband]
+  id: WeaponShotgunHeavyBreacher
+  description: Problem? Use a gun. And if that don't work - use more gun. Uses .55 shotgun shells.
+  components:
+  - type: Item
+    sprite: SS220/Objects/Weapons/Guns/Shotguns/breacher.rsi
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Shotguns/breacher.rsi
+  - type: Clothing
+    sprite: SS220/Objects/Weapons/Guns/Shotguns/breacher.rsi
+  - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
+  - type: Gun
+    fireRate: 2.2
+    soundGunshot:
+      path: /Audio/SS220/Weapons/Guns/Gunshots/gunshot_shotgun2.ogg
+  - type: GunSpreadModifier
+    spread: 1.1
+  - type: BallisticAmmoProvider
+    proto: ShellShotgunHeavy
+    whitelist:
+      tags:
+      - ShellShotgunHeavy
+    capacity: 4
+    autoCycle: false
+
+- type: entity
+  name: Infiltrator
+  parent: [BaseItem]
+  id: WeaponShotgunHeavyInfiltrator
+  description: An automatic magazine-fed shotgun for close-quarters combat. Kicks like a mule on steroids. Uses .55 shotgun shells.
+  components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/rifles.ogg
+      params:
+        volume: 2
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Shotguns/infiltrator.rsi
+    layers:
+    - state: icon
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    size: Large
+    sprite: SS220/Objects/Weapons/Guns/Shotguns/infiltrator_item.rsi
+  - type: Clothing
+    sprite: SS220/Objects/Weapons/Guns/Shotguns/infiltrator_item.rsi
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage
+  - type: MultiHandedItem #big ass shotgun
+  - type: AmmoCounter
+  - type: Gun
+    burstFireRate: 6
+    shotsPerBurst: 2
+    burstCooldown: 1.2
+    selectedMode: Burst
+    availableModes:
+    - Burst
+    soundGunshot:
+      path: /Audio/SS220/Weapons/Guns/Gunshots/gunshot_shotgun2.ogg
+    soundEmpty:
+      path: /Audio/Weapons/Guns/Empty/empty.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineShotgunHeavy
+        priority: 2
+        whitelist:
+          tags:
+          - MagazineShotgunHeavy
+        whitelistFailPopup: gun-magazine-whitelist-fail
+        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: MagazineAmmoProvider
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+  - type: StaticPrice
+    price: 5000
