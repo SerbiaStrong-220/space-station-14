@@ -132,7 +132,7 @@
     sealable: false
     transparent: true
     maxIntegrity: 250
-    maxArmMass: 250
+    maximalArmMass: 250
     ownMass: 250
     pilotWhitelist:
       components:
@@ -154,7 +154,7 @@
     brokenState: basiclight
     maxIntegrity: 200
     ownMass: 150
-    maxArmMass: 145
+    maximalArmMass: 145
     pilotWhitelist:
       components:
         - HumanoidAppearance
