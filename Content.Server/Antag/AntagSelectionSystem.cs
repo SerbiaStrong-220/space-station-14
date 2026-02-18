@@ -16,7 +16,7 @@ using Content.Server.Roles.Jobs;
 using Content.Server.Shuttles.Components;
 using Content.Server.SS220.DefibrillatorSkill; //SS220 LimitationRevive
 using Content.Server.SS220.MindSlave;
-using Content.Shared.SS220.Mech.Components;//SS220 MechRework
+using Content.Shared.FCB.Mech.Components;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Antag;
 using Content.Shared.Clothing;
@@ -39,7 +39,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using System.Linq;
-using Content.Server.SS220.Mech.Systems;//SS220 mech rework
+using Content.Server.FCB.Mech.Systems;//FCB mech rework
 
 namespace Content.Server.Antag;
 
@@ -60,7 +60,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly MindSlaveSystem _mindSlave = default!; // SS220 MindSlave
-    [Dependency] private readonly AltMechSystem _altmech = default!;
+    [Dependency] private readonly AltMechSystem _altmech = default!;//FCB mech rework
 
     // arbitrary random number to give late joining some mild interest.
     public const float LateJoinRandomChance = 0.5f;
@@ -399,7 +399,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
 
             // we shouldn't be blocking the entity if they're just a ghost or smth.
             if (!HasComp<GhostComponent>(session.AttachedEntity))
-            //SS220 mech rework begin
+            //FCB mech rework begin
             {
                 if (TryComp<AltMechComponent>(session.AttachedEntity, out var mechComp))
                 {
@@ -409,7 +409,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
                 else
                     antagEnt = session.AttachedEntity;
             }
-            //SS220 mech rework end
+            //FCB mech rework end
         }
         else if (!ignoreSpawner && def.SpawnerPrototype != null) // don't add spawners if we have a player, dummy.
         {
@@ -508,10 +508,10 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         var afterEv = new AfterAntagEntitySelectedEvent(session, player, ent, def);
         RaiseLocalEvent(ent, ref afterEv, true);
 
-        //SS220 mech rework begin
+        //FCB mech rework begin
         if (TryComp<AltMechPilotComponent>(player, out var pilotComp) && TryComp<AltMechComponent>(pilotComp.Mech, out var playerMechComp))
             _altmech.TransferMindIntoMech((pilotComp.Mech,playerMechComp));
-        //SS220 mech rework end
+        //FCB mech rework end
     }
 
     /// <summary>
