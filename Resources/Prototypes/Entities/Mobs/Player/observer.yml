@@ -191,4 +191,4 @@
     icon: { sprite: SS220/Clothing/Neck/Misc/headphones.rsi, state: icon }
     checkCanInteract: false
   - type: InstantAction
-event: !type:ToggleGhostRadioChannels
+    event: !type:ToggleGhostRadioChannels
