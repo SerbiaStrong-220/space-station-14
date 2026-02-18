@@ -6,6 +6,7 @@
   - AppraisalTool
   - Pickaxe
   - UtilityKnife
+  - BarberScissors #ss220 add barber scissors to autolathe
 
 - type: latheRecipePack
   id: CargoBoardsStatic

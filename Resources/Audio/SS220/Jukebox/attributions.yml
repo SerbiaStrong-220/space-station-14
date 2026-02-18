@@ -77,3 +77,18 @@
   license: "CC-BY-4.0"
   copyright: "PGN Music by Tyler"
   source: "https://pgnmusic.bandcamp.com/album/sea-shanties"
+
+- files: ["broken.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Created by Wall GG"
+  source: "https://www.youtube.com/watch?v=ACKdVL1Z6Ho"
+
+- files: ["ourclasstrial.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Created for Danganronpa V3"
+  source: "https://www.youtube.com/watch?v=Yb2oKpPJ_qk"
+
+- files: ["Rest_In_Peace.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Created by Quantum_ (Feat Z.W.E.I.) for SS220"
+  source: "https://github.com/SerbiaStrong-220"
