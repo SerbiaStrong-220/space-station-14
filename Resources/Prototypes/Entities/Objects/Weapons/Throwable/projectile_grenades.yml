@@ -71,7 +71,7 @@
   - type: TimerTrigger
     initialBeepDelay: 0
     beepInterval: 2
-    delay: 3.5 # SS220 Should be equal to the TimerTrigger delay
+    delay: 3.5 # SS220 If changes, then UseDelay should also be changed
   - type: TimerTriggerVisuals
     primingSound:
       path: /Audio/Effects/countdown.ogg
@@ -102,7 +102,7 @@
         volume: 5
     initialBeepDelay: 0
     beepInterval: 2
-    delay: 3.5 # SS220 Should be equal to the TimerTrigger delay
+    delay: 3.5 # SS220 If changes, then UseDelay should also be changed
   - type: EmitSoundOnTrigger
     keysIn:
     - timer
@@ -138,7 +138,7 @@
         volume: 5
     initialBeepDelay: 0
     beepInterval: 2
-    delay: 3.5 # SS220 Should be equal to the TimerTrigger delay
+    delay: 3.5 # SS220 If changes, then UseDelay should also be changed
   - type: EmitSoundOnTrigger
     keysIn:
     - timer
