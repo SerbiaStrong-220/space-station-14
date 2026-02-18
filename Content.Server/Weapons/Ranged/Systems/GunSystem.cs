@@ -87,6 +87,8 @@ public sealed partial class GunSystem : SharedGunSystem
                 break;
             }
         }
+        RefreshModifiers((gunUid, gun), currentModifier);
+
         // SS220 Gun variety end
 
         var fromMap = TransformSystem.ToMapCoordinates(fromCoordinates);
@@ -109,7 +111,6 @@ public sealed partial class GunSystem : SharedGunSystem
         // DebugTools.Assert(direction != Vector2.Zero);
         var shotProjectiles = new List<EntityUid>(ammo.Count);
 
-        RefreshModifiers((gunUid, gun), currentModifier); // SS220 Gun variety
         foreach (var (ent, shootable) in ammo)
         {
             // pneumatic cannon doesn't shoot bullets it just throws them, ignore ammo handling
