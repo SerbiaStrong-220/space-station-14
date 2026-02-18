@@ -71,13 +71,13 @@
   - type: TimerTrigger
     initialBeepDelay: 0
     beepInterval: 2
-    delay: 3.5
+    delay: 3.5 # SS220 Should be equal to the TimerTrigger delay
   - type: TimerTriggerVisuals
     primingSound:
       path: /Audio/Effects/countdown.ogg
   # SS-220 grenades timer start
   - type: UseDelay
-    delay: 3.5
+    delay: 3.5 # SS220 Should be equal to the TimerTrigger delay
   # SS-220 grenades timer ended
 
 - type: entity
@@ -102,7 +102,7 @@
         volume: 5
     initialBeepDelay: 0
     beepInterval: 2
-    delay: 3.5
+    delay: 3.5 # SS220 Should be equal to the TimerTrigger delay
   - type: EmitSoundOnTrigger
     keysIn:
     - timer
@@ -113,7 +113,7 @@
     price: 1500
   # SS-220 grenades timer start
   - type: UseDelay
-    delay: 3.5
+    delay: 3.5 # SS220 Should be equal to the TimerTrigger delay
   # SS-220 grenades timer ended
 
 - type: entity
@@ -138,7 +138,7 @@
         volume: 5
     initialBeepDelay: 0
     beepInterval: 2
-    delay: 3.5
+    delay: 3.5 # SS220 Should be equal to the TimerTrigger delay
   - type: EmitSoundOnTrigger
     keysIn:
     - timer
@@ -149,5 +149,5 @@
     price: 1500
   # SS-220 grenades timer start
   - type: UseDelay
-    delay: 3.5
+    delay: 3.5 # SS220 Should be equal to the TimerTrigger delay
   # SS-220 grenades timer ended

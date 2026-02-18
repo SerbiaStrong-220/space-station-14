@@ -21,7 +21,7 @@
     - Belt
   - type: TriggerOnUse
   - type: TimerTrigger
-    delay: 3
+    delay: 3 # SS220 Should be equal to the TimerTrigger delay
   - type: Damageable
     damageContainer: Inorganic
   - type: Destructible
@@ -57,7 +57,7 @@
         friction: 0.2
   # SS-220 grenades timer start
   - type: UseDelay
-    delay: 3
+    delay: 3 # SS220 Should be equal to the TimerTrigger delay
   # SS-220 grenades timer ended
 
 - type: entity
@@ -165,7 +165,7 @@
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: TimerTrigger
-    delay: 5
+    delay: 5 # SS220 Should be equal to the TimerTrigger delay
   - type: ExplodeOnTrigger
     keysIn:
     - timer
@@ -184,7 +184,7 @@
     price: 2000
   # SS-220 grenades timer start
   - type: UseDelay
-    delay: 5
+    delay: 5 # SS220 Should be equal to the TimerTrigger delay
   # SS-220 grenades timer ended
 
 - type: entity
@@ -206,7 +206,7 @@
     repeatable: true
     canCreateVacuum: true
   - type: TimerTrigger
-    delay: 4.5
+    delay: 4.5 # SS220 Should be equal to the TimerTrigger delay
     beepSound:
       path: /Audio/Effects/Grenades/SelfDestruct/SDS_Charge2.ogg
       params:
@@ -215,7 +215,7 @@
     beepInterval: 16
   # SS-220 grenades timer start
   - type: UseDelay
-    delay: 4.5
+    delay: 4.5 # SS220 Should be equal to the TimerTrigger delay
   # SS-220 grenades timer ended
 
 
@@ -228,7 +228,7 @@
   - type: Sprite
     sprite: SS220/Objects/Weapons/Grenades/singularitygrenade.rsi #SS220 From cabinet to 3/4, Part 2
   - type: TimerTrigger
-    delay: 3
+    delay: 3 # SS220 Should be equal to the TimerTrigger delay
     beepInterval: 0.46
     beepSound:
       path: /Audio/Effects/Grenades/Supermatter/smbeep.ogg
@@ -299,7 +299,7 @@
   - type: Sprite
     sprite: SS220/Objects/Weapons/Grenades/whiteholegrenade.rsi #SS220 From cabinet to 3/4, Part 2
   - type: TimerTrigger
-    delay: 3
+    delay: 3 # SS220 Should be equal to the TimerTrigger delay
     beepInterval: 0.69
   - type: EmitSoundOnTrigger
     keysIn:
@@ -359,7 +359,7 @@
   - type: Sprite
     sprite: SS220/Objects/Weapons/Grenades/nukenade.rsi #SS220 From cabinet to 3/4, Part 2
   - type: TimerTrigger
-    delay: 5
+    delay: 5 # SS220 Should be equal to the TimerTrigger delay
   - type: ExplodeOnTrigger
     keysIn:
     - timer
@@ -384,7 +384,7 @@
       path: /Audio/Effects/countdown.ogg
   # SS-220 grenades timer start
   - type: UseDelay
-    delay: 5
+    delay: 5 # SS220 Should be equal to the TimerTrigger delay
   # SS-220 grenades timer ended
 
 - type: entity
@@ -481,7 +481,7 @@
     maxIntensity: 70
     canCreateVacuum: true
   - type: TimerTrigger
-    delay: 3 # by canon
+    delay: 3 # SS220 Should be equal to the TimerTrigger delay
   - type: PointLight
     radius: 7
     energy: 3
@@ -578,7 +578,7 @@
   - type: Sprite
     sprite: SS220/Objects/Weapons/Grenades/metalfoam.rsi #SS220 From cabinet to 3/4, Part 2
   - type: TimerTrigger
-    delay: 5
+    delay: 5 # SS220 Should be equal to the TimerTrigger delay
   - type: SmokeOnTrigger
     keysIn:
     - timer
@@ -589,7 +589,7 @@
     price: 350
   # SS-220 grenades timer start
   - type: UseDelay
-    delay: 5
+    delay: 5 # SS220 Should be equal to the TimerTrigger delay
   # SS-220 grenades timer ended
 
 - type: entity
@@ -608,7 +608,7 @@
     primingSound:
       path: /Audio/Items/smoke_grenade_prime.ogg
   - type: TimerTrigger
-    delay: 3
+    delay: 3 # SS220 Should be equal to the TimerTrigger delay
   - type: ReleaseGasOnTrigger
     keysIn:
     - timer
@@ -658,7 +658,7 @@
       path: /Audio/Effects/countdown.ogg
   #ss220 toys begin #it will explode like a real one, but zero damage :jokerge:
   - type: TimerTrigger
-    delay: 3.5
+    delay: 3.5 # SS220 Should be equal to the TimerTrigger delay
   - type: ExplodeOnTrigger
   - type: Explosive
     explosionType: Default
@@ -680,7 +680,7 @@
   #ss220 toys end
   # SS-220 grenades timer start
   - type: UseDelay
-    delay: 3.5
+    delay: 3.5 # SS220 Should be equal to the TimerTrigger delay
   # SS-220 grenades timer ended
 
 - type: entity
@@ -692,7 +692,7 @@
   - type: Sprite
     sprite: SS220/Objects/Weapons/Grenades/syndgrenade.rsi #SS220 From cabinet to 3/4, Part 2
   - type: TimerTrigger
-    delay: 5
+    delay: 5 # SS220 Should be equal to the TimerTrigger delay
   - type: EmitSoundOnTrigger
     keysIn:
     - timer
@@ -716,5 +716,5 @@
     price: 1000
   # SS-220 grenades timer start
   - type: UseDelay
-    delay: 5
+    delay: 5 # SS220 Should be equal to the TimerTrigger delay
   # SS-220 grenades timer ended
