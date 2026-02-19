@@ -12,7 +12,7 @@ using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee;
 using JetBrains.Annotations;
 using Robust.Shared.Containers;
-using Content.Shared.SS220.AltBlocking;//SS220 shield rework
+using Content.Shared.FCB.AltBlocking;//FCB shield rework
 
 namespace Content.Shared.ActionBlocker
 {

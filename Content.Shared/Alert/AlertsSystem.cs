@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
-using Content.Shared.SS220.Mech.Components;
+using Content.Shared.FCB.Mech.Components;
 
 namespace Content.Shared.Alert;
 
