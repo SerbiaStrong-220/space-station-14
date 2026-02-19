@@ -8,7 +8,7 @@ using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.SS220.MindExtension;
 using Content.Shared.SS220.MindExtension.Events;
 using Robust.Shared.Network;
-using Content.Shared.SS220.Mech.Components;
+using Content.Shared.FCB.Mech.Components;
 
 namespace Content.Server.SS220.MindExtension;
 

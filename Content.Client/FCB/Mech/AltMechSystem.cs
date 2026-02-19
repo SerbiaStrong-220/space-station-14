@@ -2,7 +2,7 @@
 using Content.Client.FCB.Mech.Ui;
 using Content.Client.UserInterface.Systems.DamageOverlays.Overlays;
 using Content.Shared.Damage.Components;
-using Content.Shared.Damage.Systems;
+using Content.Shared.Damage;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.FCB.Mech.Components;
 using Content.Shared.FCB.Mech.Parts.Components;
@@ -321,7 +321,8 @@ public sealed class AltMechSystem : SharedAltMechSystem
                     FixedPoint2 painLevel = 0;
                     _damageOverlay.PainLevel = 0;
 
-                    if (!_statusEffects.TryEffectsWithComp<PainNumbnessStatusEffectComponent>(pilot, out _))
+                    //if (!_statusEffects.TryEffectsWithComp<PainNumbnessStatusEffectComponent>(pilot, out _)) uncomment on upstream
+                    if(TryComp<PainNumbnessComponent>(pilot, out var numbnessComp))
                     {
                         foreach (var painDamageType in damageable.PainDamageGroups)
                         {

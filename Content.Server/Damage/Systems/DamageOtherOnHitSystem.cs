@@ -9,7 +9,7 @@ using Content.Shared.Effects;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Throwing;
 using Content.Shared.SS220.Damage;
-using Content.Shared.Weapons.Ranged.Events;
+using Content.Shared.FCB.Weapons.Ranged.Events;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
 using Content.Shared.CombatMode.Pacification;
@@ -44,7 +44,7 @@ public sealed class DamageOtherOnHitSystem : SharedDamageOtherOnHitSystem
             return;
         // SS220-add-miss-chance-?-end
 
-        //SS220 shield rework begin
+        //FCB shield rework begin
         var blockEv = new ThrowableProjectileBlockAttemptEvent(component.Damage);
 
         RaiseLocalEvent(args.Target, ref blockEv);
@@ -53,7 +53,7 @@ public sealed class DamageOtherOnHitSystem : SharedDamageOtherOnHitSystem
             _color.RaiseEffect(Color.Red, [args.Target], Filter.Pvs(args.Target, entityManager: EntityManager));
             return;
         }
-        //SS220 shield rework end
+        //FCB shield rework end
         var dmg = _damageable.TryChangeDamage(args.Target, component.Damage * _damageable.UniversalThrownDamageModifier, component.IgnoreResistances, origin: args.Component.Thrower);
 
         // Log damage only for mobs. Useful for when people throw spears at each other, but also avoids log-spam when explosions send glass shards flying.

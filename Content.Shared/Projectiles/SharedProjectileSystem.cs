@@ -265,18 +265,6 @@ public record struct ProjectileReflectAttemptEvent(EntityUid ProjUid, Projectile
     SlotFlags IInventoryRelayEvent.TargetSlots => SlotFlags.WITHOUT_POCKET;
 }
 
-// SS220 shield rework begin
-[ByRefEvent]
-public record struct ProjectileBlockAttemptEvent(EntityUid ProjUid, ProjectileComponent Component, bool Cancelled, DamageSpecifier damage)
-{
-    public bool CancelledHit = false;
-
-    public Color? hitMarkColor = Color.Red;
-
-    public DamageSpecifier? Damage = damage;
-}
-// SS220 shield rework end
-
 /// <summary>
 /// Raised when a projectile hits an entity
 /// </summary>

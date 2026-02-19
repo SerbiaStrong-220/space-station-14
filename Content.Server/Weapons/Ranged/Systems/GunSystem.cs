@@ -10,6 +10,7 @@ using Content.Shared.Effects;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.SS220.Weapons.Ranged.Events;
+using Content.Shared.FCB.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
@@ -244,10 +245,10 @@ public sealed partial class GunSystem : SharedGunSystem
 
                         if (lastHit != null)
                         {
-                            var dmg = hitscan.Damage; //SS220 shield rework
+                            var dmg = hitscan.Damage; //FCB shield rework
                             var hitEntity = lastHit.Value;
 
-                            //SS220 shield rework begin
+                            //FCB shield rework begin
 
                             var blockEv = new HitscanBlockAttemptEvent(hitscan.Damage);
                             RaiseLocalEvent(lastHit.Value, ref blockEv);
@@ -271,7 +272,7 @@ public sealed partial class GunSystem : SharedGunSystem
                                 if (dmg != null)
                                     dmg = Damageable.TryChangeDamage(hitEntity, dmg * Damageable.UniversalHitscanDamageModifier, origin: user);
                             }
-                            //SS220 shield rework end
+                            //FCB shield rework end
 
                             var hitName = ToPrettyString(hitEntity);
 

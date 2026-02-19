@@ -46,8 +46,8 @@ using Robust.Shared.Map;
 using Content.Shared.SS220.Language.Systems;
 using Content.Shared.SS220.TTS;
 using Content.Shared.FixedPoint;
-using Content.Server.SS220.Mech.Systems;//SS220 mech rework
-using Content.Shared.SS220.Mech.Components;//SS220 mech rework
+using Content.Server.FCB.Mech.Systems;//FCB mech rework
+using Content.Shared.FCB.Mech.Components;//FCB mech rework
 
 namespace Content.Server.Chat.Systems;
 
@@ -207,7 +207,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             return;
         }
 
-        //SS220 mech rework begin
+        //FCB mech rework begin
         if (TryComp<AltMechComponent>(source, out var mechComp) && mechComp.PilotSlot.ContainedEntity != null)
         {
             TrySendInGameICMessage(
@@ -224,13 +224,13 @@ public sealed partial class ChatSystem : SharedChatSystem
 
             return;
         }
-        //SS220 mech rework end
+        //FCB mech rework end
 
         if (player != null && _chatManager.HandleRateLimit(player) != RateLimitStatus.Allowed)
             return;
 
         // Sus
-        if (player?.AttachedEntity is { Valid: true } entity && source != entity && (!TryComp<AltMechPilotComponent>(source, out var pilotComp) || entity != pilotComp.Mech))
+        if (player?.AttachedEntity is { Valid: true } entity && source != entity && (!TryComp<AltMechPilotComponent>(source, out var pilotComp) || entity != pilotComp.Mech))//FCB mech rework
         {
             return;
         }

@@ -583,7 +583,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         RaiseLocalEvent(targetEntity, attackedEvent);//FCB shield rework
 
         //ss220 extended weapon logic start
-        var weaponAttackEvent = new WeaponAttackEvent(user, targetEntity, AttackType.LIGHT);//FCB shield rework
+        var weaponAttackEvent = new WeaponAttackEvent(user, targetEntity, AttackType.LIGHT);
         RaiseLocalEvent(meleeUid, weaponAttackEvent);
         //ss220 extended weapon logic end
 

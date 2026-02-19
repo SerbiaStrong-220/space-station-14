@@ -26,8 +26,8 @@ public enum SlotFlags
     LEGS = 1 << 13,
     FEET = 1 << 14,
     SUITSTORAGE = 1 << 15,
-    MECHOUTER = 1 << 16,//SS220 mech rework
-    All = ~NONE & ~MECHOUTER,//SS220 mech rework
+    MECHOUTER = 1 << 16,//FCB mech rework
+    All = ~NONE & ~MECHOUTER,//FCB mech rework
 
     WITHOUT_POCKET = All & ~POCKET
 }
