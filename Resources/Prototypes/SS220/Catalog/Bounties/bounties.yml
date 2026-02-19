@@ -1,0 +1,32 @@
+- type: cargoBounty
+  id: BountyNattle
+  reward: 9500
+  description: bounty-description-Nattle
+  entries:
+  - name: bounty-Nattle
+    amount: 12
+    whitelist:
+      tags:
+      - DeathNettle    
+
+- type: cargoBounty
+  id: BountyDeus
+  reward: 9500
+  description: bounty-description-Deus 
+  entries:
+  - name: bounty-Deus 
+    amount: 12
+    whitelist:
+      tags:
+      - DeusAmbrosia     
+
+- type: cargoBounty
+  id: BountyMeatSlime
+  reward: 7500
+  description: bounty-description-MeatSlime
+  entries: 
+  - name: bounty-MeatSlime 
+    amount: 3
+    whitelist:
+      tags:
+      - MeatSlime    

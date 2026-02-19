@@ -14,8 +14,8 @@
 - type: entity
   parent: ClothingNeckBase
   id: ClothingNeckScarfBSO
-  name: шарф оперативника "Синий Щит"
-  description: Черные тона позволяют заглянуть в самые дальние уголки души обладателя данного шарфа. Не стоит засматриваться, лучше уйти.
+  name: Blue Shield operative's scarf
+  description: Black tones allow a glimpse into the farthest corners of the wearer's soul. Don't stare too long, it's better to walk away.
   components:
     - type: Sprite
       sprite: SS220/Clothing/Neck/Scarfs/blackcentscarf.rsi
@@ -25,8 +25,8 @@
 - type: entity
   parent: ClothingNeckBase
   id: ClothingNeckScarfCentcomm
-  name: шарф Центрального Командования
-  description: Не каждый сможет носить эту безвкусицу, правда? Кому-то нравится, а кто-то будет расстрелян.
+  name: CentComm scarf
+  description: Not everyone can pull off this tackiness, right? Some like it, and some will be executed.
   components:
     - type: Sprite
       sprite: SS220/Clothing/Neck/Scarfs/yellowcentscarf.rsi
