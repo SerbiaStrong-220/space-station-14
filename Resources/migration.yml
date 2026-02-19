@@ -859,15 +859,13 @@ ToySkeleton: ToyFigurineSkeleton
 
 BoxFolderYellow: null
 
-<<<<<<< martial-arts
-# 2026-02-15 - SS220 new cqc
-cqc_nonlethal: CQCManual
-cqc_lethal: CQCManual
-=======
 # ss220 tweak proto part 1 start
 # 2026-02-14
 WarderobePrisonSecureFilled: WardrobePrisonSecureFilled
 BlueShieldGasMask: ClothingMaskGasBlueShield
 BlueShieldSWAT: ClothingMaskGasBlueShieldSWAT
 # ss220 tweak proto part 1 end
->>>>>>> master
+
+# 2026-02-15 - SS220 new cqc
+cqc_nonlethal: CQCManual
+cqc_lethal: CQCManual
