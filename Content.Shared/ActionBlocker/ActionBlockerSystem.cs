@@ -203,7 +203,7 @@ namespace Content.Shared.ActionBlocker
             if (target != null && _container.IsEntityInContainer(target.Value))
             {
                 //FCB shield rework begin
-                if (TryComp<AltBlockingComponent>(target,out var comp) && comp.User != null)
+                if (TryComp<AltBlockingComponent>(target, out var comp) && comp.User != null)
                     return true;
                 //FCB shield rework end
                 return false;

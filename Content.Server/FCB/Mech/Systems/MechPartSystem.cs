@@ -283,7 +283,7 @@ public sealed class MechPartSystem : EntitySystem
         if (!TryComp<AltMechComponent>(args.Mech, out var mechComp))
             return;
 
-        mechComp.Energy = ent.Comp.LastCharge;
+        mechComp.Energy = ent.Comp.CurrentCharge;
         mechComp.MaxEnergy = ent.Comp.MaxCharge;
 
         _mech.UpdateMechOnlineStatus(args.Mech, ent.Owner);

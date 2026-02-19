@@ -35,8 +35,10 @@ using Content.Shared.Standing;
 using Content.Shared.Storage.Components;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Whitelist;
+using Lidgren.Network;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
+using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 
@@ -167,7 +169,9 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         ent.Comp.OverallMass += ent.Comp.OwnMass;
 
-        if(TryComp<MovementSpeedModifierComponent>(ent.Owner, out var movementComp))
+        ent.Comp.Integrity = ent.Comp.MaxIntegrity;
+
+        if (TryComp<MovementSpeedModifierComponent>(ent.Owner, out var movementComp))
             _movementSpeedModifier.ChangeBaseSpeed(ent.Owner, ent.Comp.OverallBaseMovementSpeed * 0.5f, ent.Comp.OverallBaseMovementSpeed, ent.Comp.OverallBaseAcceleration, movementComp);
 
         if(ent.Comp.ContainerDict["head"].ContainedEntity == null && !ent.Comp.Transparent)
@@ -209,8 +213,8 @@ public abstract partial class SharedAltMechSystem : EntitySystem
     {
         MeleeAttackHandle(ent, ref args.CancelledHit, out var part);
 
-        if(TryGetNetEntity(part, out var NetPart))
-            args.blocker = NetPart;
+        if(TryGetNetEntity(part, out var netPart))
+            args.blocker = netPart;
     }
 
     private void OnHitscan(Entity<AltMechComponent> ent, ref HitscanBlockAttemptEvent args)
@@ -238,7 +242,11 @@ public abstract partial class SharedAltMechSystem : EntitySystem
             if (!TryGetNetEntity(part.Value.ContainedEntity, out var NetItem))
                 continue;
 
-            if (SharedRandomExtensions.PredictedProb(_timing, 0.16f, (NetEntity)NetMech, (NetEntity)NetItem))//this chance is hardcoded because using mech parts as shields is not planned, it's just a patch to make it work untill part damage UI is made 
+            //if (SharedRandomExtensions.PredictedProb(_timing, 0.16f, (NetEntity)NetMech, (NetEntity)NetItem))//this chance is hardcoded because using mech parts as shields is not planned, it's just a patch to make it work untill part damage UI is made 
+            var seed = SharedRandomExtensions.HashCodeCombine(new() { (int)_timing.CurTick.Value, ((NetEntity)NetItem).Id, ((NetEntity)NetItem).Id });
+            var rand = new System.Random(seed);
+
+            if(rand.Prob(0.16f))
             {
                 _damageable.TryChangeDamage((EntityUid)part.Value.ContainedEntity, damage);
                 CancelledHit = true;
@@ -263,7 +271,11 @@ public abstract partial class SharedAltMechSystem : EntitySystem
             if (!TryGetNetEntity(part.Value.ContainedEntity, out var NetItem))
                 continue;
 
-            if (SharedRandomExtensions.PredictedProb(_timing, 0.16f, (NetEntity)NetMech, (NetEntity)NetItem))//this chance is hardcoded because using mech parts as shields is not planned, it's just a patch to make it work untill part damage UI is made
+            //if (SharedRandomExtensions.PredictedProb(_timing, 0.16f, (NetEntity)NetMech, (NetEntity)NetItem))//this chance is hardcoded because using mech parts as shields is not planned, it's just a patch to make it work untill part damage UI is made
+            var seed = SharedRandomExtensions.HashCodeCombine(new() { (int)_timing.CurTick.Value, ((NetEntity)NetItem).Id, ((NetEntity)NetItem).Id });
+            var rand = new System.Random(seed);
+
+            if (rand.Prob(0.16f))
             {
                 CancelledHit = true;
                 targetedPart = part.Value.ContainedEntity;

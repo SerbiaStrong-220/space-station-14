@@ -171,7 +171,7 @@ public sealed partial class AltBlockingSystem : EntitySystem
 
         foreach (var shield in shields)
         {
-            if (HasComp<AltBlockingComponent>(shield) && userQuery.TryGetComponent(user, out var AltBlockingUserComponent))
+            if (HasComp<AltBlockingComponent>(shield) && userQuery.TryGetComponent(user, out var _))
                 return;
         }
 

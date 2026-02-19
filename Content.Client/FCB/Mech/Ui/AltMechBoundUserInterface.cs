@@ -51,7 +51,7 @@ public sealed class AltMechBoundUserInterface : BoundUserInterface
         }
 
         _menu.OnRemovePartButtonPressed += part => SendMessage(new MechPartRemoveMessage(part));
-        _menu.OnRemovePartButtonPressed += part => UpdateStateAfterButtonPressed(part);
+        //_menu.OnRemovePartButtonPressed += part => UpdateStateAfterButtonPressed(part);
 
         _menu.OnMaintenancePressed += toggled => SendMessage(new MechMaintenanceToggleMessage(toggled));
 
@@ -67,12 +67,6 @@ public sealed class AltMechBoundUserInterface : BoundUserInterface
         _menu?.SetMaintenance(mechComp.MaintenanceMode);
         _menu?.SetSeal(mechComp.Airtight);
         _menu?.SetBolt(mechComp.Bolted);
-    }
-
-    protected void UpdateStateAfterButtonPressed(string _)
-    {
-        //_menu?.UpdateMechStats();
-        //_menu?.UpdateEquipmentView();
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)

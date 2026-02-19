@@ -631,11 +631,15 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         if (!TryComp<BatteryComponent>(battery, out var batteryComp))
             return false;
 
-        _battery.SetCharge(((EntityUid)battery,batteryComp), batteryComp.LastCharge + delta.Float());
-        if (batteryComp.LastCharge != component.Energy) //if there's a discrepency, we have to resync them
+        //_battery.SetCharge(((EntityUid)battery,batteryComp), batteryComp.LastCharge + delta.Float());
+        //if (batteryComp.LastCharge != component.Energy) //if there's a discrepency, we have to resync them
+        _battery.SetCharge((EntityUid)battery, batteryComp.CurrentCharge + delta.Float(), batteryComp);
+        if (batteryComp.CurrentCharge != component.Energy) //if there's a discrepency, we have to resync them
         {
-            Log.Debug($"Battery charge was not equal to mech charge. Battery {batteryComp.LastCharge}. Mech {component.Energy}");
-            component.Energy = batteryComp.LastCharge;
+            //Log.Debug($"Battery charge was not equal to mech charge. Battery {batteryComp.LastCharge}. Mech {component.Energy}");
+            //component.Energy = batteryComp.LastCharge;
+            Log.Debug($"Battery charge was not equal to mech charge. Battery {batteryComp.CurrentCharge}. Mech {component.Energy}");
+            component.Energy = batteryComp.CurrentCharge;
             Dirty(uid, component);
         }
         _actionBlocker.UpdateCanMove(uid);
@@ -656,7 +660,8 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
             return;
 
         _container.Insert(toInsert, component.ContainerDict["power"]);
-        component.Energy = battery.LastCharge;
+        //component.Energy = battery.LastCharge; uncomment when upstream goes out
+        component.Energy = battery.CurrentCharge;
         component.MaxEnergy = battery.MaxCharge;
 
         _actionBlocker.UpdateCanMove(uid);

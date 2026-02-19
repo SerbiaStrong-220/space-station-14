@@ -99,6 +99,7 @@
   - type: GuideHelp
     guides:
     - Robotics
+  - type: VoiceInheritor #SS220 voice inheritor added
   - type: Destructible
     thresholds:
     - trigger:
@@ -129,6 +130,7 @@
     brokenState: basicloader
     sealable: false
     transparent: true
+    integrity: 250
     maxIntegrity: 250
     maximalArmMass: 250
     ownMass: 250
@@ -150,6 +152,7 @@
     baseState: basiclight
     openState: basiclight
     brokenState: basiclight
+    integrity: 200
     maxIntegrity: 200
     ownMass: 150
     maximalArmMass: 145

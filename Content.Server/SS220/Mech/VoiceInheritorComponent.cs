@@ -9,6 +9,6 @@ using System.Threading.Tasks;
 namespace Content.Server.SS220.Mech;
 
 [RegisterComponent]
-public sealed partial class VoiceInheritorComponent
+public sealed partial class VoiceInheritorComponent : Component
 {
 }

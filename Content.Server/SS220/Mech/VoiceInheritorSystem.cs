@@ -22,16 +22,19 @@ public sealed class VoiceInheritorSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<AltMechComponent, OnMechEntryEvent>(OnMechEntry);
-        SubscribeLocalEvent<AltMechComponent, OnMechExitEvent>(OnMechExited);
+        SubscribeLocalEvent<VoiceInheritorComponent, OnMechEntryEvent>(OnMechEntry);
+        SubscribeLocalEvent<VoiceInheritorComponent, OnMechExitEvent>(OnMechExited);
     }
 
-    private void OnMechEntry(Entity<AltMechComponent> ent, ref OnMechEntryEvent args)
+    private void OnMechEntry(Entity<VoiceInheritorComponent> ent, ref OnMechEntryEvent args)
     {
-        if (ent.Comp.PilotSlot.ContainedEntity == null)
+        if (!TryComp<AltMechComponent>(ent.Owner, out var mechComp))
             return;
 
-        EntityUid pilot = (EntityUid)ent.Comp.PilotSlot.ContainedEntity;
+        if (mechComp.PilotSlot.ContainedEntity == null)
+            return;
+
+        EntityUid pilot = (EntityUid)mechComp.PilotSlot.ContainedEntity;
 
         var rider = EnsureComp<AltMechPilotComponent>(pilot);
 
@@ -56,7 +59,7 @@ public sealed class VoiceInheritorSystem : EntitySystem
         }
     }
 
-    private void OnMechExited(Entity<AltMechComponent> ent, ref OnMechExitEvent args)
+    private void OnMechExited(Entity<VoiceInheritorComponent> ent, ref OnMechExitEvent args)
     {
         if (TryComp<ActiveRadioComponent>(ent.Owner, out var mechRadio))
             mechRadio.FrequencyChannels.Clear();

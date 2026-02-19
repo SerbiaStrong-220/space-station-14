@@ -53,9 +53,9 @@ public sealed partial class AltMechSystem
             if (comp.OverallMass >= comp.MaximalMass * 2)
                 drainedEnergy = comp.MaximalMass * 2 * chassisComp.Efficiency;
 
-            _battery.ChangeCharge(((EntityUid)batteryEnt, batteryComp), -(drainedEnergy).Float());
+            _battery.ChangeCharge((EntityUid)batteryEnt, -(drainedEnergy).Float(), batteryComp);
 
-            comp.Energy = batteryComp.LastCharge;
+            comp.Energy = batteryComp.CurrentCharge;
 
             Dirty(uid, comp);
 

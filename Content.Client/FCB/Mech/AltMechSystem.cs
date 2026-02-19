@@ -274,11 +274,6 @@ public sealed class AltMechSystem : SharedAltMechSystem
         if (pilot.Mech != _playerManager.LocalEntity)
             return;
 
-        //if (pilot != null)
-        //{
-        //    UpdateOverlays(pilot.Mech, args.MobState, args.Damageable, args.Threshold);
-        //    return;
-        //}
         UpdateOverlays(pilot.Mech, args.MobState, (DamageableComponent?) args.Damageable, args.Threshold);
     }
 

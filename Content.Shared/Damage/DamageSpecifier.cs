@@ -45,7 +45,7 @@ namespace Content.Shared.Damage
         public Dictionary<string, FixedPoint2> DamageDict { get; set; } = new();
 
         [DataField]//FCB armour piercing added
-        public FixedPoint2 armourPiercing = 0;//FCB armour piercing added
+        public FixedPoint2 ArmourPiercing = 0;//FCB armour piercing added
 
         /// <summary>
         ///     Returns a sum of the damage values.

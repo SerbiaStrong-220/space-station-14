@@ -39,7 +39,7 @@ public sealed class ArmorBlockSystem : EntitySystem
                     args.OriginalDamage.DamageDict[type],
                     ent.Comp.DurabilityTresholdDict[type],
                     type,
-                    piercing: args.OriginalDamage.armourPiercing);//armor damage
+                    piercing: args.OriginalDamage.ArmourPiercing);//armor damage
 
             else
                 resultArmorDamage.DamageDict.Add(type, args.OriginalDamage.DamageDict[type]);
@@ -51,7 +51,7 @@ public sealed class ArmorBlockSystem : EntitySystem
                     args.OriginalDamage.DamageDict[type],
                     ent.Comp.TresholdDict[type],
                     type,
-                    args.OriginalDamage.armourPiercing);//user damage
+                    args.OriginalDamage.ArmourPiercing);//user damage
 
                 if (damageDiff > maximalDamage)
                 {
@@ -76,13 +76,13 @@ public sealed class ArmorBlockSystem : EntitySystem
 
         if(maximalDamageType != null)
         {
-            if (args.OriginalDamage.armourPiercing > ent.Comp.TresholdDict[maximalDamageType])
+            if (args.OriginalDamage.ArmourPiercing > ent.Comp.TresholdDict[maximalDamageType])
             {
-                resultDamage.armourPiercing = args.OriginalDamage.armourPiercing - ent.Comp.TresholdDict[maximalDamageType];
+                resultDamage.ArmourPiercing = args.OriginalDamage.ArmourPiercing - ent.Comp.TresholdDict[maximalDamageType];
                 _damageable.TryChangeDamage((EntityUid)ent.Comp.Owner, resultDamage);
                 return;
             }
-            resultDamage.armourPiercing = 0;
+            resultDamage.ArmourPiercing = 0;
         }
 
         _damageable.TryChangeDamage((EntityUid)ent.Comp.Owner, resultDamage);

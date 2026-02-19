@@ -11,6 +11,7 @@ using Content.Shared.Projectiles;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
 using Content.Shared.FCB.Mech.Components;
+using Content.Shared.FCB.Weapons.Ranged.Events;
 
 namespace Content.Server.Projectiles;
 
