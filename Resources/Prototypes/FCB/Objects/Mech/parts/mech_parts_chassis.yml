@@ -17,7 +17,7 @@
     maxIntegrity: 250
     ownMass: 300
     attachedSprite:
-      sprite: SS220/Objects/Specific/Robotics/Mechs/chassis.rsi
+      sprite: FCB/Objects/Mechs/chassis.rsi
       state: basichydraulic
   - type: Destructible
     thresholds:
@@ -58,7 +58,7 @@
     maxIntegrity: 175
     ownMass: 100
     attachedSprite:
-      sprite: SS220/Objects/Specific/Robotics/Mechs/chassis.rsi
+      sprite: FCB/Objects/Mechs/chassis.rsi
       state: servo
   - type: Destructible
     thresholds:

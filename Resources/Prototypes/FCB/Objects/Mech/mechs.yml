@@ -10,9 +10,7 @@
   - type: ComplexInteraction
   - type: MobMover
   - type: AltMech
-  - type: MechRobot
   - type: PowerCellDraw
-  - type: Language
   - type: Blindable #For optics to work
   - type: StatusEffects
     allowed:
@@ -122,7 +120,7 @@
   description: Name is self-speaking - this is a powerloader frame which has limited equipment space, high mass, cannot be sealed and provides little to no protection to the user but is still better than nothing
   components:
   - type: Sprite
-    sprite: SS220/Objects/Specific/Robotics/Mechs/cores.rsi
+    sprite: FCB/Objects/Mechs/cores.rsi
     state: basicloader
     noRot: true
   - type: AltMech
@@ -145,7 +143,7 @@
   description: Versatile, light and still pretty cheap mech frame, LEF-021 is one of the most widely used mech frames in the TSF space
   components:
   - type: Sprite
-    sprite: SS220/Objects/Specific/Robotics/Mechs/cores.rsi
+    sprite: FCB/Objects/Mechs/cores.rsi
     state: basiclight
     noRot: true
   - type: AltMech

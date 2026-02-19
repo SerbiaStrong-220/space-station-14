@@ -24,7 +24,7 @@
     integrity: 75
     maxIntegrity: 75
     attachedSprite:
-      sprite: SS220/Objects/Specific/Robotics/Mechs/batteries.rsi
+      sprite: FCB/Objects/Mechs/batteries.rsi
       state: small
   - type: Battery
     maxCharge: 15000

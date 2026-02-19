@@ -621,6 +621,9 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         SetupUser(uid, toInsert.Value);
         _container.Insert(toInsert.Value, component.PilotSlot);
 
+        var ev = new OnMechEntryEvent();
+        RaiseLocalEvent(uid, ref ev);
+
         if (TryComp<ArmorBlockComponent>(uid, out var blockComp))
             blockComp.Owner = toInsert;
 
@@ -741,6 +744,9 @@ public readonly record struct MechSpeedModifiedEvent(EntityUid Mech)
 
 [ByRefEvent]
 public readonly record struct OnMechExitEvent();
+
+[ByRefEvent]
+public readonly record struct OnMechEntryEvent();
 
 [ByRefEvent]
 public readonly record struct MassChangedEvent();

@@ -566,7 +566,7 @@
       meleeBlockProb: 0
       activeRangeBlockProb: 0.50
       activeMeleeBlockProb: 0.75
-    - type: ItemToggleBlockingDamage
+    - type: ToggleBlockingChance
       toggledRangeBlockProb: 0.40
       toggledMeleeBlockProb: 0.65 #No more stunbatons
     - type: Appearance
@@ -617,24 +617,6 @@
                   max: 1
     - type: StaticPrice
       price: 350
-# Corvax-HiddenDesc-Start
-    - type: HiddenDescription
-      entries:
-      - label: corvax-hidden-desc-EnergyShield-syndicate
-        whitelistMindRoles:
-        - TraitorRole
-        - NukeOperative
-      - label: corvax-hidden-desc-EnergyShield-security
-        jobRequired:
-          - HeadOfSecurity
-          - Detective
-          - SecurityCadet
-          - SecurityOfficer
-          - Warden
-      - label: corvax-hidden-desc-EnergyShield-cargo
-        jobRequired:
-          - SalvageSpecialist
-# Corvax-HiddenDesc-End
 
 - type: entity
   name: broken energy shield
@@ -649,24 +631,6 @@
       sprite: Objects/Weapons/Melee/e_shield.rsi
       size: Small
       heldPrefix: eshield
-# Corvax-HiddenDesc-Start
-    - type: HiddenDescription
-      entries:
-      - label: corvax-hidden-desc-EnergyShield-syndicate
-        whitelistMindRoles:
-        - TraitorRole
-        - NukeOperative
-      - label: corvax-hidden-desc-EnergyShield-security
-        jobRequired:
-          - HeadOfSecurity
-          - Detective
-          - SecurityCadet
-          - SecurityOfficer
-          - Warden
-      - label: corvax-hidden-desc-EnergyShield-cargo
-        jobRequired:
-          - SalvageSpecialist
-# Corvax-HiddenDesc-End
 
 - type: entity
   name: telescopic shield
@@ -679,7 +643,7 @@
       meleeBlockProb: 0
       activeRangeBlockProb: 0.60
       activeMeleeBlockProb: 0.75
-    - type: ItemToggleBlockingDamage
+    - type: ToggleBlockingChance
       toggledRangeBlockProb: 0.50
       toggledMeleeBlockProb: 0.65
     - type: ArmorBlock

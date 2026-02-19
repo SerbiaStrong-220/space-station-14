@@ -38,7 +38,7 @@
     maxIntegrity: 150
     ownMass: 120
     attachedSprite:
-      sprite: SS220/Objects/Specific/Robotics/Mechs/righthand.rsi
+      sprite: FCB/Objects/Mechs/Mechs/righthand.rsi
       state: basichydraulic
 
 - type: entity
@@ -71,7 +71,7 @@
     maxIntegrity: 100
     ownMass: 80
     attachedSprite:
-      sprite: SS220/Objects/Specific/Robotics/Mechs/righthand.rsi
+      sprite: FCB/Objects/Mechs/righthand.rsi
       state: servo
   - type: Destructible
     thresholds:
@@ -126,7 +126,7 @@
     maxIntegrity: 65
     ownMass: 40
     attachedSprite:
-      sprite: SS220/Objects/Specific/Robotics/Mechs/righthand.rsi
+      sprite: FCB/Objects/Mechs/righthand.rsi
       state: medicalmultitool
   - type: Destructible
     thresholds:
@@ -170,7 +170,7 @@
     maxIntegrity: 150
     ownMass: 175
     attachedSprite:
-      sprite: SS220/Objects/Specific/Robotics/Mechs/righthand.rsi
+      sprite: FCB/Objects/Mechs/righthand.rsi
       state: hydraulicdrill
   - type: Destructible
     thresholds:
@@ -208,7 +208,7 @@
     integrity: 150
     maxIntegrity: 150
     attachedSprite:
-      sprite: SS220/Objects/Specific/Robotics/Mechs/righthand.rsi
+      sprite: FCB/Objects/Mechs/righthand.rsi
       state: basichydraulic
   - type: Destructible
     thresholds:

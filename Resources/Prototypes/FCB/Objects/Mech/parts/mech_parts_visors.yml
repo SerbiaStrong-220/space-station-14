@@ -13,7 +13,7 @@
     integrity: 100
     maxIntegrity: 100
     attachedSprite:
-      sprite: SS220/Objects/Specific/Robotics/Mechs/heads.rsi
+      sprite: FCB/Objects/Mechs/heads.rsi
       state: welding
   - type: Destructible
     thresholds:

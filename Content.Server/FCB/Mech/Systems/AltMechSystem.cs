@@ -9,6 +9,7 @@ using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Alert;
 using Content.Shared.Atmos.Components;
+using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Damage.Components;
 using Content.Shared.Destructible;
