@@ -10,3 +10,6 @@ ent-ClothingHeadsetBlueShield = полноразмерная гарнитура 
     .desc = Безупречная гарнитура для синего щита.
 ent-ClothingHeadsetAltWizard = полноразмерная гарнитура волшебника
     .desc = { ent-ClothingHeadsetAlt.desc }
+
+ent-ClothingHeadsetAltCentComm = полноразмерная гарнитура Центрального Командования
+    .desc = Количеству радиосообщений, проходящих через динамики этих наушников, позавидовал бы каждый состоятельный космопорт.

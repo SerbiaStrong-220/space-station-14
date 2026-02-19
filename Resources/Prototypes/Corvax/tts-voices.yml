@@ -1649,3 +1649,269 @@
   sex: Female
   speaker: mitashorthairs
   id: mitashorthairs
+
+- type: ttsVoice
+  name: Культисты Хаоса
+  description: "Голос юнита Культисты Хаоса из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: chaos_marines_cultists_dow
+  id: chaos_marines_cultists_dow
+
+- type: ttsVoice
+  name: Космодесантники Хаоса
+  description: "Голос юнита Космодесантники Хаоса из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: chaos_marines_dow
+  id: chaos_marines_dow
+
+- type: ttsVoice
+  name: Лорд Хаоса
+  description: "Голос юнита Лорд Хаоса из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: chaos_marines_lord_dow
+  id: chaos_marines_lord_dow
+
+- type: ttsVoice
+  name: Колдун Хаоса
+  description: "Голос юнита Колдун Хаоса из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: chaos_marines_sorceror_dow
+  id: chaos_marines_sorceror_dow
+
+- type: ttsVoice
+  name: Архон Тёмных Эльдар
+  description: "Голос юнита Архон Тёмных Эльдар из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: dark_eldar_archon_dow
+  id: dark_eldar_archon_dow
+
+- type: ttsVoice
+  name: Мандрагор Тёмных Эльдар
+  description: "Голос юнита Мандрагор Тёмных Эльдар из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: dark_eldar_mandrake_dow
+  id: dark_eldar_mandrake_dow
+
+- type: ttsVoice
+  name: Воин Тёмных Эльдар
+  description: "Голос юнита Воин Тёмных Эльдар из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: dark_eldar_warrior_dow
+  id: dark_eldar_warrior_dow
+
+- type: ttsVoice
+  name: Ведьма Тёмных Эльдар
+  description: "Голос юнита Ведьма Тёмных Эльдар из игры Warhammer 40,000 Dawn of War"
+  sex: Female
+  speaker: dark_eldar_wych_dow
+  id: dark_eldar_wych_dow
+
+- type: ttsVoice
+  name: Стражи Эльдар
+  description: "Голос юнита Стражи Эльдар из игры Warhammer 40,000 Dawn of War"
+  sex: Female
+  speaker: eldar_dow
+  id: eldar_dow
+
+- type: ttsVoice
+  name: Провидец Эльдар
+  description: "Голос юнита Провидец Эльдар из игры Warhammer 40,000 Dawn of War"
+  sex: Female
+  speaker: eldar_farseer_dow
+  id: eldar_farseer_dow
+
+- type: ttsVoice
+  name: Огненный Дракон Эльдар
+  description: "Голос юнита Огненный Дракон Эльдар из игры Warhammer 40,000 Dawn of War"
+  sex: Female
+  speaker: eldar_fire_dragon_dow
+  id: eldar_fire_dragon_dow
+
+- type: ttsVoice
+  name: Колдун Эльдар
+  description: "Голос юнита Колдун Эльдар из игры Warhammer 40,000 Dawn of War"
+  sex: Female
+  speaker: eldar_warlock_dow
+  id: eldar_warlock_dow
+
+- type: ttsVoice
+  name: Ассасин Имперской Гвардии
+  description: "Голос юнита Ассасин Имперской Гвардии из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: guard_assassin_dow
+  id: guard_assassin_dow
+
+- type: ttsVoice
+  name: Капитан Имперской Гвардии
+  description: "Голос юнита Капитан Имперской Гвардии из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: guard_captain_dow
+  id: guard_captain_dow
+
+- type: ttsVoice
+  name: Комиссар Имперской Гвардии
+  description: "Голос юнита Комиссар Имперской Гвардии из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: guard_commissar_dow
+  id: guard_commissar_dow
+
+- type: ttsVoice
+  name: Техножрец Имперской Гвардии
+  description: "Голос юнита Техножрец Имперской Гвардии из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: guard_enginseer_dow
+  id: guard_enginseer_dow
+
+- type: ttsVoice
+  name: Сержант Имперской Гвардии
+  description: "Голос юнита Сержант Имперской Гвардии из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: guard_guardsman_sergeant_dow
+  id: guard_guardsman_sergeant_dow
+
+- type: ttsVoice
+  name: Команда тяжёлого оружия Имперской Гвардии
+  description: "Голос юнита Команда тяжёлого оружия Имперской Гвардии из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: guard_heavy_weapons_platoon_dow
+  id: guard_heavy_weapons_platoon_dow
+
+- type: ttsVoice
+  name: Касркин Имперской Гвардии
+  description: "Голос юнита Касркин Имперской Гвардии из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: guard_karskin_dow
+  id: guard_karskin_dow
+
+- type: ttsVoice
+  name: Огрин Имперской Гвардии
+  description: "Голос юнита Огрин Имперской Гвардии из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: guard_ogryn_dow
+  id: guard_ogryn_dow
+
+- type: ttsVoice
+  name: Священник Имперской Гвардии
+  description: "Голос юнита Священник Имперской Гвардии из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: guard_priest_dow
+  id: guard_priest_dow
+
+- type: ttsVoice
+  name: Псайкер Имперской Гвардии
+  description: "Голос юнита Псайкер Имперской Гвардии из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: guard_psyker_dow
+  id: guard_psyker_dow
+
+- type: ttsVoice
+  name: Бойзы Орков
+  description: "Голос юнита Бойзы Орков из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: orks_dow
+  id: orks_dow
+
+- type: ttsVoice
+  name: Флэш Гитз и Нобы Орков
+  description: "Голос юнитов Флэш Гитз и Нобы Орков из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: orks_flashgitznobs_dow
+  id: orks_flashgitznobs_dow
+
+- type: ttsVoice
+  name: Гретчины Орков
+  description: "Голос юнита Гретчины Орков из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: orks_grots_dow
+  id: orks_grots_dow
+
+- type: ttsVoice
+  name: Варбосс Орков
+  description: "Голос юнита Варбосс Орков из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: orks_warboss_dow
+  id: orks_warboss_dow
+
+- type: ttsVoice
+  name: Сестры Битвы
+  description: "Голос юнита Сестры Битвы из игры Warhammer 40,000 Dawn of War"
+  sex: Female
+  speaker: sisters_battle_sister_dow
+  id: sisters_battle_sister_dow
+
+- type: ttsVoice
+  name: Миссионер Сестёр Битвы
+  description: "Голос юнита Миссионер Сестёр Битвы из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: sisters_missionary_dow
+  id: sisters_missionary_dow
+
+- type: ttsVoice
+  name: Космодесантники 2
+  description: "Голос юнита Космодесантники 2 из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: space_marines_2_dow
+  id: space_marines_2_dow
+
+- type: ttsVoice
+  name: Капеллан Космодесантников
+  description: "Голос юнита Капеллан Космодесантников из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: space_marines_chaplain_dow
+  id: space_marines_chaplain_dow
+
+- type: ttsVoice
+  name: Космодесантники
+  description: "Голос юнита Космодесантники из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: space_marines_dow
+  id: space_marines_dow
+
+- type: ttsVoice
+  name: Командир Сил Космодесантников
+  description: "Голос юнита Командир Сил Космодесантников из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: space_marines_force_commander_dow
+  id: space_marines_force_commander_dow
+
+- type: ttsVoice
+  name: Библиарий Космодесантников
+  description: "Голос юнита Библиарий Космодесантников из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: space_marines_librarian_dow
+  id: space_marines_librarian_dow
+
+- type: ttsVoice
+  name: Эфирный Тау
+  description: "Голос юнита Эфирный Тау из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: tau_ethereal_dow
+  id: tau_ethereal_dow
+
+- type: ttsVoice
+  name: Крууты Тау
+  description: "Голос юнита Крууты Тау из игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: tau_kroot_dow
+  id: tau_kroot_dow
+
+- type: ttsVoice
+  name: Инструкторша DOW
+  description: "Женский голос инструктора из туториала игры Warhammer 40,000 Dawn of War"
+  sex: Female
+  speaker: tutorial_f_dow
+  id: tutorial_f_dow
+
+- type: ttsVoice
+  name: Инструктор DOW
+  description: "Мужской голос из туториала игры Warhammer 40,000 Dawn of War"
+  sex: Male
+  speaker: tutorial_m_dow
+  id: tutorial_m_dow
+
+- type: ttsVoice
+  name: Кингпин
+  description: "Голос Кингпина из игры Kingpin Life of Crime"
+  sex: Male
+  speaker: kingpin
+  id: kingpin
