@@ -329,7 +329,7 @@
   id: EnergySwordDouble
   description: Syndicate Command Interns thought that having one blade on the energy sword was not enough. This can be stored in pockets.
   components:
-  #SS220 shield rework begin
+  #FCB shield rework begin
   - type: AltBlocking
     rangeBlockProb: 0
     meleeBlockProb: 0
@@ -370,7 +370,7 @@
     resistedStunTypes:
       - Creampie
       - Projectile
-  #SS220 shield rework end
+  #FCB shield rework end
   - type: ItemToggle
     onUse: false # wielding events control it instead
     onActivate: false # prevents the weapon from being able to be turned on when it is on the ground
@@ -484,13 +484,13 @@
   description: A very loud & dangerous sword with a beam made of pure, concentrated plasma. Specially designed for syndicate cyborgs.
 
 - type: entity
-  parent: EnergySword #SS220 shield rework
+  parent: EnergySword #FCB shield rework
   id: CyborgEnergySwordDouble # why is this invalid if ID is BorgEnergySwordDouble
   suffix: One-Handed, For Borgs
   description: Syndicate Command Interns thought that having one blade on the energy sword was not enough. Specially designed for syndicate cyborgs.
   components: # could add energy-draining like the L6C
   #Inheriting from usual double esword somehow and somewhy throwed the exeption(No, this is not related to shield rework in any way)
-  #SS220 shield rework begin
+  #FCB shield rework begin
   - type: MeleeWeapon
     wideAnimationRotation: -135
     attackRate: 1.5
@@ -543,10 +543,7 @@
       Poison: 1000
       Airloss: 1000
       Caustic: 1000
-  #- type: InstastunResistOnActiveBlocking
-  #  resistedStunTypes:
-  #    StunSource.Projectile
-  #SS220 shield rework end
+  #FCB shield rework end
 
 
 - type: entity
