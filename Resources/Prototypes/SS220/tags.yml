@@ -369,4 +369,4 @@
   id: VoidTeleporationTarget
 
 - type: Tag
-  id: SpesoWhitelist
+  id: EnvelopeWhitelist
