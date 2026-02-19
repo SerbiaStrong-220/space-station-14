@@ -42,6 +42,8 @@
     proto: ShellShotgun
     soundInsert:
       path: /Audio/Weapons/Guns/MagIn/shotgun_insert.ogg
+    soundRack:
+      path: /Audio/Corvax/Weapons/Guns/Cock/shotgun_cock.ogg # SS220 gun variety
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
@@ -79,7 +81,7 @@
   - type: AmmoCounter
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
   - type: Gun
-    fireRate: 2
+    fireRate: 3 # SS220 gun variety
     selectedMode: FullAuto
     availableModes:
     - FullAuto
@@ -188,9 +190,11 @@
     sprite: SS220/Objects/Weapons/Guns/Shotguns/pump.rsi #SS220 kammerer resprite
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
   - type: Gun
-    fireRate: 1
+    fireRate: 1.8 # SS220 gun variety
     soundGunshot: # Corvax-Guns
       path: /Audio/Corvax/Weapons/Guns/Gunshots/shotgun_alt.ogg
+  - type: BallisticAmmoProvider
+    autoCycle: false # SS220 gun variety
   - type: GunSpreadModifier
     spread: 0.6
   - type: Tag
@@ -285,7 +289,7 @@
     sprite: Objects/Weapons/Guns/Shotguns/blunderbuss.rsi
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
   - type: Gun
-    fireRate: 2
+    fireRate: 4 # SS220 gun variety - #No reason to stifle the firerate since you have to manually reload every time anyways.
   - type: BallisticAmmoProvider
     capacity: 1
   - type: StaticPrice

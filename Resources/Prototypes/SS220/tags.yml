@@ -374,3 +374,6 @@
 
 - type: Tag
   id: MagazineShotgunHeavy
+
+- type: Tag
+  id: MagazineSniper

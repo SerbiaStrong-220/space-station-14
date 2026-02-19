@@ -57,6 +57,14 @@
       map: [ "enum.SolutionContainerLayers.Fill" ]
       visible: false
   - type: Appearance
+  # SS220 gun variety begin
+  - type: BallisticAmmoProvider
+    autoCycle: false
+    soundRack:
+      path: /Audio/Weapons/Guns/Cock/sf_rifle_cock.ogg
+  - type: Gun
+    fireRate: 1.8
+  # SS220 gun variety end
   - type: SolutionContainerVisuals
     maxFillLevels: 1
     fillBaseName: base

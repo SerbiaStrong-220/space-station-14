@@ -41,7 +41,15 @@
       types:
         Blunt: 2
   - type: StaminaDamageOnCollide
-    damage: 5
+    damage: 4
+  - type: StunOnCollide
+    stunAmount: 0
+    knockdownAmount: 0.1
+    drop: false
+    refresh: false
+  - type: ProjectileThrowOnHit
+    speed: 4
+    distance: 0.15
 
 - type: entity
   parent: PelletShotgunHeavyRubber
@@ -50,8 +58,8 @@
   components:
   - type: ProjectileSpread
     proto: PelletShotgunHeavyRubber
-    count: 10
-    spread: 25
+    count: 5
+    spread: 10
 
 - type: entity
   parent: BaseBullet

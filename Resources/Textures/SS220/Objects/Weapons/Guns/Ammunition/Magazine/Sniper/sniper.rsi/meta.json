@@ -1,0 +1,17 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from ShipTest at https://github.com/shiptest-ss13/Shiptest/commit/7e6d3dd753bd18755d6c17cee499fd0419c8fa9c",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "base"
+        },
+        {
+            "name": "mag-1"
+        }
+    ]
+}

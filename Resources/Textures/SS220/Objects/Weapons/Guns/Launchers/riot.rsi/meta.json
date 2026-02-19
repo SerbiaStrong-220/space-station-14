@@ -1,0 +1,20 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from https://github.com/discordia-space/CEV-Eris",
+    "size": {
+        "x": 40,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "base"
+        },
+        {
+            "name": "bolt-open"
+        },
+        {
+            "name": "mag-0"
+        }
+    ]
+}

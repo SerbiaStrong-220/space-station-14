@@ -1,0 +1,20 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from https://github.com/Mojave-Sun/mojave-sun at commit https://github.com/Mojave-Sun/mojave-sun/commit/a47098802b348704228ab2b26859b390e7966af8",
+    "size": {
+        "x": 40,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "base"
+        },
+        {
+            "name": "bolt-open"
+        },
+        {
+            "name": "mag-0"
+        }
+    ]
+}

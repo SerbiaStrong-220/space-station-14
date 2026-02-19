@@ -62,3 +62,82 @@
       coefficients:
         Blunt: 1.0
 
+#Gun variety
+- type: entity
+  name: Nullaby
+  parent: [BaseItem, BaseGunWieldable]
+  id: WeaponSniperNullaby
+  description: Sings a lullaby. Then nulls all of dream demons.
+  components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/lsmg.ogg
+      params:
+        volume: 2
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Snipers/sniper.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Item
+    sprite: SS220/Objects/Weapons/Guns/Snipers/sniper64x64.rsi
+    size: Huge
+    shape:
+    - 0,0,5,1
+  - type: Clothing
+    sprite: SS220/Objects/Weapons/Guns/Snipers/sniper64x64.rsi
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage
+
+  - type: Gun
+    fireRate: 1
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/sniper.ogg
+  - type: ChamberMagazineAmmoProvider
+    autoCycle: false
+    soundRack:
+      path: /Audio/Weapons/Guns/Cock/sf_rifle_cock.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineSniper
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazineSniper
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgeAntiMateriel
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeAntiMateriel
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: AmmoCounter
+
+  - type: CursorOffsetRequiresWield
+  - type: EyeCursorOffset
+    maxOffset: 3
+    pvsIncrease: 0.3
+  - type: Appearance
+  - type: StaticPrice
+    price: 3500
+

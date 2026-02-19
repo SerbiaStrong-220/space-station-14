@@ -9,6 +9,7 @@
       - SpeedLoaderRifle
   - type: SpeedLoader
   - type: BallisticAmmoProvider
+    fillDelay: 0.1 # SS220 gun variety
     mayTransfer: true
     whitelist:
       tags:

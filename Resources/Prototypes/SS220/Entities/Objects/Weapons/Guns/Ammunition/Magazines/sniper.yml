@@ -1,0 +1,41 @@
+# Empty mags
+- type: entity
+  id: BaseMagazineSniper
+  name: "magazine (.60 antimaterial)"
+  parent: [ BaseItem, BaseMajorContraband ]
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+      - MagazineSniper
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+        - CartridgeAntiMateriel
+    proto: CartridgeAntiMateriel
+    capacity: 5
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/Sniper/sniper.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+  - type: Appearance
+
+# Magazines
+- type: entity
+  id: MagazineSniper
+  name: magazine (.60 antimaterial)
+  parent: BaseMagazineSniper
+  description: Standart-issue magazine for high caliber ammo.
