@@ -55,7 +55,7 @@
   # SS220-spesos_in_envelope start
   - type: Tag
     tags:
-    - SpesoWhitelist
+    - EnvelopeWhitelist
   # SS220-spesos_in_envelope ended
 
 - type: material
