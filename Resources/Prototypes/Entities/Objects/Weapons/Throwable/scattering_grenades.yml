@@ -21,7 +21,7 @@
   - type: ScatteringGrenade
   - type: TriggerOnUse
   - type: TimerTrigger
-    delay: 3
+    delay: 3 # SS220 If changes, then UseDelay should also be changed
   - type: Tag
     tags:
     - HandGrenade
@@ -35,6 +35,10 @@
         - ItemMask
         restitution: 0.3
         friction: 0.2
+  # SS-220 grenades timer start
+  - type: UseDelay
+    delay: 3 # SS220 Should be equal to the TimerTrigger delay
+  # SS-220 grenades timer ended
 
 - type: entity
   parent: [ScatteringGrenadeBase, BaseSecurityContraband]

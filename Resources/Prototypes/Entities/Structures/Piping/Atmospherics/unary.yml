@@ -43,7 +43,7 @@
       drawdepth: FloorObjects
       sprite: SS220/Structures/Piping/Atmospherics/vent.rsi #ss220 engineering-update-atmos
       layers:
-        - sprite: Structures/Piping/Atmospherics/pipe.rsi
+        - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi # SS220 atmospherics-sprite-update
           state: pipeUnaryConnectors
           map: [ "enum.PipeVisualLayers.Pipe" ]
         - state: vent_off
@@ -93,7 +93,7 @@
       drawdepth: FloorObjects
       sprite: SS220/Structures/Piping/Atmospherics/vent.rsi #ss220 engineering-update-atmos
       layers:
-        - sprite: Structures/Piping/Atmospherics/pipe.rsi
+        - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi # SS220 atmospherics-sprite-update
           state: pipeUnaryConnectors
           map: [ "enum.PipeVisualLayers.Pipe" ]
         - state: vent_passive
@@ -133,7 +133,7 @@
       drawdepth: FloorObjects
       sprite: SS220/Structures/Piping/Atmospherics/scrubber.rsi #ss220 engineering-update-atmos
       layers:
-        - sprite: Structures/Piping/Atmospherics/pipe.rsi
+        - sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi # SS220 atmospherics-sprite-update
           state: pipeUnaryConnectors
           map: [ "enum.PipeVisualLayers.Pipe" ]
         - state: scrub_off
@@ -181,7 +181,7 @@
       sprite: SS220/Structures/Piping/Atmospherics/outletinjector.rsi #ss220 engineering-update-atmos
       layers:
         - state: pipeUnaryConnectors
-          sprite: Structures/Piping/Atmospherics/pipe.rsi
+          sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi # SS220 atmospherics-sprite-update
           map: [ "enum.PipeVisualLayers.Pipe" ]
         - state: injector
           map: [ "enum.SubfloorLayers.FirstLayer" ]
@@ -231,9 +231,9 @@
     - type: AtmosPipeLayers
       spriteLayersRsiPaths:
         enum.PipeVisualLayers.Pipe:
-          Primary: Structures/Piping/Atmospherics/thermomachine.rsi
-          Secondary: Structures/Piping/Atmospherics/thermomachine_alt1.rsi
-          Tertiary: Structures/Piping/Atmospherics/thermomachine_alt2.rsi
+          Primary: SS220/Structures/Piping/Atmospherics/thermomachine.rsi # SS220 atmospherics-sprite-update
+          Secondary: SS220/Structures/Piping/Atmospherics/thermomachine_alt1.rsi # SS220 atmospherics-sprite-update
+          Tertiary: SS220/Structures/Piping/Atmospherics/thermomachine_alt2.rsi # SS220 atmospherics-sprite-update
     - type: AtmosDevice
     - type: UserInterface
       interfaces:
@@ -410,7 +410,7 @@
     mode: SnapgridCenter
   components:
   - type: Sprite
-    sprite: Structures/Piping/Atmospherics/condenser.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/condenser.rsi # SS220 atmospherics-sprite-update
     snapCardinals: true
     granularLayersRendering: true
     layers:
@@ -442,9 +442,9 @@
   - type: AtmosPipeLayers
     spriteLayersRsiPaths:
       enum.PipeVisualLayers.Pipe:
-        Primary: Structures/Piping/Atmospherics/condenser.rsi
-        Secondary: Structures/Piping/Atmospherics/condenser_alt1.rsi
-        Tertiary: Structures/Piping/Atmospherics/condenser_alt2.rsi
+        Primary: SS220/Structures/Piping/Atmospherics/condenser.rsi # SS220 atmospherics-sprite-update
+        Secondary: SS220/Structures/Piping/Atmospherics/condenser_alt1.rsi # SS220 atmospherics-sprite-update
+        Tertiary: SS220/Structures/Piping/Atmospherics/condenser_alt2.rsi # SS220 atmospherics-sprite-update
   - type: AtmosDevice
   - type: PipeRestrictOverlap
   - type: ApcPowerReceiver

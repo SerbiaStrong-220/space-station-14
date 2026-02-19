@@ -333,20 +333,6 @@
       - id: PinpointerSyndicateNuclear
       - id: DeathAcidifierImplanter
 
-#SS220 Lone Ops
-- type: entity
-  parent: ClothingBackpackDuffelSyndicateBundle
-  id: ClothingBackpackDuffelSyndicateOperativeLone
-  name: operative duffelbag
-  components:
-  - type: StorageFill
-    contents:
-      - id: BoxSurvivalSyndicate
-      - id: WeaponPistolViper
-      - id: PinpointerNuclear
-      - id: MicroBombImplanter
-      - id: NukeLoneOpsDeclarationOfWar #SS220-lone-ops-comms
-
 - type: entity
   parent: ClothingBackpackDuffelSyndicateMedicalBundle
   id: ClothingBackpackDuffelSyndicateOperativeMedic

@@ -5,6 +5,9 @@ ent-ClothingBackpackBlueShield = рюкзак "Синий Щит"
     .desc = Рюкзак, специально разработанный для "Синий Щит", с уникальной технологией карманного скафандра.
     .suffix = Лёгкий скафандр
 
+ent-ClothingBackpackWhiteCaptain = белый рюкзак капитана
+    .desc = Дорогая белая сумка, выданная за выслугу лет капитану.
+
 ent-ClothingBackpackBlueShieldHight = { ent-ClothingBackpackBlueShield }
     .desc = { ent-ClothingBackpackBlueShield.desc }
     .suffix = Тяжелый скафандр

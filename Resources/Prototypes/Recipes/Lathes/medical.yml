@@ -215,17 +215,6 @@
   id: EmergencyRollerBedSpawnFolded
   result: EmergencyRollerBedSpawnFolded
 
-#SS220-autoinjectors-update begin
-- type: latheRecipe
-  id: MedAutoinjector
-  result: MedAutoinjector
-  completetime: 2
-  materials:
-    Glass: 400
-    Plastic: 600
-    Steel: 60
-#SS220-autoinjectors-update end
-
 - type: latheRecipe
   id: WhiteCane
   result: WhiteCane
@@ -268,25 +257,3 @@
     Steel: 200
     Glass: 100
     Plastic: 100
-
-# SS220 Adding AdvancedLauncherSyringe begin
-- type: latheRecipe
-  id: AdvancedMiniSyringe
-  result: AdvancedMiniSyringe
-  completetime: 2
-  materials:
-    Steel: 200
-    Glass: 200
-    Plastic: 200
-    Plasma: 50
-# SS220 Adding AdvancedLauncherSyringe end
-
-#SS220 add-glasses-to-medfab begin
-- type: latheRecipe
-  id: ClothingEyesGlasses
-  result: ClothingEyesGlasses
-  completetime: 2
-  materials:
-    Steel: 50
-    Glass: 50
-#SS220 add-glasses-to-medfab end

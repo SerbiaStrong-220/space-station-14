@@ -264,9 +264,11 @@
       components:
       - type: CommsHacker
         threats: NinjaThreats
-    - objective: MassArrestObjective
-      components:
-      - type: CriminalRecordsHacker
+    #ss220 remove unused objective for ninja start
+    # - objective: MassArrestObjective
+    #   components:
+    #   - type: CriminalRecordsHacker
+    #ss220 remove unused objective for ninja end
 
 - type: entity
   parent: [ ClothingHandsGlovesColorBlack]

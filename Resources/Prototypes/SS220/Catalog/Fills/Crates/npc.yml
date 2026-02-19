@@ -1,15 +1,4 @@
 - type: entity
-  id: CrateNPCCrocodile
-  parent: CrateLivestock
-  name: ящик с крокодилом
-  description: Ящик с домашним крокодилом.
-  components:
-  - type: StorageFill
-    contents:
-      - id: MobCrocodile
-        amount: 1
-
-- type: entity
   id: BaseCrateNPCLocked
   parent: CrateLivestock
   abstract: True
@@ -18,13 +7,6 @@
 # - type: LockVisuals - Если будете добавлять визуал для закрытых ящиков, вынести из коммента
   - type: AccessReader
     access: [["Cargo"]]
-
-- type: entity
-  id: CrateNPCCrocodileLocked
-  parent: [ CrateNPCCrocodile , BaseCrateNPCLocked ]
-  suffix: Locked
-  name: ящик с крокодилом
-  description: Ящик с домашним крокодилом.
 
 - type: entity
   id: CrateNPCBeeLocked
@@ -174,4 +156,20 @@
   parent: [ CrateNPCMothroach , BaseCrateNPCLocked ]
   name: crate of mothroaches
   description: A crate containing four mothroaches.
+  suffix: Locked
+
+- type: entity
+  id: CrateNPCCrocodile
+  parent: CrateLivestock
+  name: crocodile crate
+  description: A crate containing a pet crocodile.
+  components:
+  - type: StorageFill
+    contents:
+    - id: MobCrocodile
+      amount: 1
+
+- type: entity
+  id: CrateNPCCrocodileLocked
+  parent: [ CrateNPCCrocodile , BaseCrateNPCLocked ]
   suffix: Locked
