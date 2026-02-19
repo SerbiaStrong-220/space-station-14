@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Humanoid;
+using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Humanoid;
 using Robust.Shared.Prototypes;
@@ -30,7 +31,7 @@ public sealed class SlimePersonColorApplierSystem : EntitySystem
 
     private void OnSolutionChanged(Entity<SlimePersonColorApplierComponent> entity, ref SolutionContainerChangedEvent args)
     {
-        if (!args.SolutionId.Equals("chemicals"))
+        if (!args.SolutionId.Equals(BloodstreamComponent.DefaultChemicalsSolutionName))
             return;
 
         if (!HasComp<HumanoidAppearanceComponent>(entity))
