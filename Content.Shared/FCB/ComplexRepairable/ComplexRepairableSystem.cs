@@ -1,7 +1,7 @@
 // © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
 using Content.Shared.Administration.Logs;
 using Content.Shared.Damage.Components;
-using Content.Shared.Damage.Systems;
+using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
@@ -55,7 +55,7 @@ public sealed partial class ComplexRepairableSystem : EntitySystem
         else
         {
             // Repair all damage
-            _damageableSystem.SetAllDamage((ent.Owner, damageable), 0);
+            _damageableSystem.SetAllDamage(ent.Owner, damageable, 0);
             _adminLogger.Add(LogType.Healed, $"{ToPrettyString(args.User):user} repaired {ToPrettyString(ent.Owner):target} back to full health");
         }
 

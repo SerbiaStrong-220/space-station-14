@@ -2,6 +2,7 @@
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Damage.Systems;
+using Content.Shared.Damage;
 using Content.Shared.FCB.ToggleBlocking;
 using Content.Shared.FCB.Weapons.Melee.Events;
 using Content.Shared.FCB.Weapons.Ranged;
@@ -14,8 +15,8 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Popups;
 using Content.Shared.Throwing;
-using Content.Shared.Weapons.Hitscan.Components;
-using Content.Shared.Weapons.Hitscan.Events;
+//using Content.Shared.Weapons.Hitscan.Components; It is made for the upstream,just decomment it then
+//using Content.Shared.Weapons.Hitscan.Events; 
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
@@ -41,7 +42,8 @@ public sealed partial class AltBlockingSystem : EntitySystem
         InitializeUser();
 
         SubscribeLocalEvent<AltBlockingUserComponent, ProjectileBlockAttemptEvent>(OnBlockUserCollide);
-        SubscribeLocalEvent<HitscanBasicDamageComponent, AttemptHitscanRaycastFiredEvent>(OnBlockUserHitscan);
+        //SubscribeLocalEvent<HitscanBasicDamageComponent, AttemptHitscanRaycastFiredEvent>(OnBlockUserHitscan);
+        SubscribeLocalEvent<AltBlockingUserComponent, HitscanBlockAttemptEvent>(OnBlockUserHitscan);
         SubscribeLocalEvent<AltBlockingUserComponent, MeleeHitBlockAttemptEvent>(OnBlockUserMeleeHit);
         SubscribeLocalEvent<AltBlockingUserComponent, ThrowableProjectileBlockAttemptEvent>(OnBlockThrownProjectile);
 

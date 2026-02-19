@@ -9,8 +9,8 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Throwing;
-using Content.Shared.Weapons.Hitscan.Components;
-using Content.Shared.Weapons.Hitscan.Events;
+//using Content.Shared.Weapons.Hitscan.Components;
+//using Content.Shared.Weapons.Hitscan.Events;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Containers;
 using Robust.Shared.Random;
@@ -30,11 +30,16 @@ public sealed partial class AltBlockingSystem
         args.CancelledHit = TryBlock(ent.Comp.BlockingItemsShields, args.Damage, ent.Comp);
     }
 
-    private void OnBlockUserHitscan(Entity<HitscanBasicDamageComponent> ent, ref AttemptHitscanRaycastFiredEvent args)
+    private void OnBlockUserHitscan(Entity<AltBlockingUserComponent> ent, ref HitscanBlockAttemptEvent args)
     {
-        if(TryComp<AltBlockingUserComponent>(args.Data.HitEntity, out var blockUserComp) && TryBlock(blockUserComp.BlockingItemsShields, ent.Comp.Damage, blockUserComp))
-            return;
+        args.CancelledHit = TryBlock(ent.Comp.BlockingItemsShields, args.Damage, ent.Comp);
     }
+
+    //private void OnBlockUserHitscan(Entity<HitscanBasicDamageComponent> ent, ref AttemptHitscanRaycastFiredEvent args)
+    //{
+    //    if(TryComp<AltBlockingUserComponent>(args.Data.HitEntity, out var blockUserComp) && TryBlock(blockUserComp.BlockingItemsShields, ent.Comp.Damage, blockUserComp))
+    //        return;
+    //}
 
     private void OnBlockUserMeleeHit(Entity<AltBlockingUserComponent> ent, ref MeleeHitBlockAttemptEvent args)
     {
@@ -58,7 +63,7 @@ public sealed partial class AltBlockingSystem
             if (!TryGetNetEntity(item, out var NetItem))
                 continue;
 
-            var seed = SharedRandomExtensions.HashCodeCombine(new int[] { (int)_gameTiming.CurTick.Value, ((NetEntity)NetUser).Id, ((NetEntity)NetItem).Id });
+            var seed = SharedRandomExtensions.HashCodeCombine(new() { (int)_gameTiming.CurTick.Value, ((NetEntity)NetUser).Id, ((NetEntity)NetItem).Id });
             var rand = new System.Random(seed);
 
             if (ent.Comp.IsBlocking)
@@ -176,7 +181,7 @@ public sealed partial class AltBlockingSystem
             if (!TryGetNetEntity(item, out var NetItem))
                 continue;
 
-            var seed = SharedRandomExtensions.HashCodeCombine(new int[] { (int)_gameTiming.CurTick.Value, ((NetEntity)NetUser).Id, ((NetEntity)NetItem).Id });
+            var seed = SharedRandomExtensions.HashCodeCombine(new() { (int)_gameTiming.CurTick.Value, ((NetEntity)NetUser).Id, ((NetEntity)NetItem).Id });
             var rand = new System.Random(seed);
 
             if (comp.IsBlocking)

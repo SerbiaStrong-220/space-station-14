@@ -1,7 +1,7 @@
 using Content.Shared.FCB.AltBlocking;
 using Content.Shared.FCB.Weapons.Ranged.Events;
-using Content.Shared.Weapons.Hitscan.Components;
-using Content.Shared.Weapons.Hitscan.Events;
+//using Content.Shared.Weapons.Hitscan.Components;
+//using Content.Shared.Weapons.Hitscan.Events;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
