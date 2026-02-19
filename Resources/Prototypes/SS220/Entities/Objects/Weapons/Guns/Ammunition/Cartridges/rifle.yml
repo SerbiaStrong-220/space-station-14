@@ -1,0 +1,36 @@
+- type: entity
+  name: cartridge (.20 rifle semi AP)
+  parent: BaseCartridgeRifle
+  id: CartridgeRifleSemiAP
+  description: Cartridge with plasteel core. Shreds armor plates, causing even more damage.
+  components:
+  - type: CartridgeAmmo
+    proto: BulletRifleSemiAP
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#4d5851"
+  - type: AmmoGunModifier
+    angleIncreaseDelta: 2
+    minAngleDelta: 4
+    maxAngleDelta: 6
+    fireRateDelta: -0.4
+
+- type: entity
+  name: cartridge (.20 rifle rubber)
+  parent: BaseCartridgeRifle
+  id: CartridgeRifleRubber
+  components:
+  - type: CartridgeAmmo
+    proto: BulletRifleRubber
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#43c4f7"
+

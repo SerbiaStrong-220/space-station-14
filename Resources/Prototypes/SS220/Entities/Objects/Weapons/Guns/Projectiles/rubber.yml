@@ -44,19 +44,6 @@
         Blunt: 3
 
 - type: entity
-  id: BulletRifleRubber
-  name: bullet (0.20 rifle rubber)
-  parent: BaseBulletRubber
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: StaminaDamageOnCollide
-    damage: 25
-  - type: Projectile
-    damage:
-      types:
-        Blunt: 3
-
-- type: entity
   id: BulletCaselessRifleRubber
   name: bullet (.25 caseless rubber)
   parent: BaseBulletRubber

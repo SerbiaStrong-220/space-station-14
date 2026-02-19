@@ -1,29 +1,3 @@
-- type: entity
-  id: MagazineRifleRubber
-  name: "magazine (.20 rifle rubber)"
-  parent: BaseMagazineRifle
-  components:
-  - type: BallisticAmmoProvider
-    proto: CartridgeRifleRubber
-  - type: Sprite
-    layers:
-    - state: base
-      sprite: Objects/Weapons/Guns/Ammunition/Magazine/Rifle/rifle_mag.rsi
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#1E90FF"
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left-mag
-      - state: inhand-left-stripe
-        color: "#1E90FF"
-      right:
-      - state: inhand-right-mag
-      - state: inhand-right-stripe
-        color: "#1E90FF"
 
 - type: entity
   id: MagazinePistolRubber

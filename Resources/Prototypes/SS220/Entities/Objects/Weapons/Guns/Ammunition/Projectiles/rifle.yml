@@ -1,0 +1,38 @@
+- type: entity
+  name: bullet (.20 rifle semi ap )
+  parent: BaseBullet
+  id: BulletRifleSemiAP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 12
+  - type: ArmorPenetration
+    rules:
+    - damageType: Piercing
+      armorthreshold: 0.7 # >30% res
+      multiplier: 1.65 # ~20 dmg. Basic is 17
+
+- type: entity
+  name: bullet (.20 rifle rubber)
+  parent: BaseBulletRubber
+  id: BulletRifleRubber
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: StaminaDamageOnCollide
+    damage: 5
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 14
+  - type: ArmorPenetration
+    rules:
+    - damageType: Blunt
+      armorthreshold: 0.7 # <=30% res
+      multiplier: 1.5 # ~21 dmg. Basic is 17
+      reversed: true
+    - damageType: Blunt
+      armorthreshold: 0.7 # >30% res
+      multiplier: 0.3 # ~4 dmg. Basic is 17
+
