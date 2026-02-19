@@ -1,0 +1,216 @@
+## Dummies to shoot at
+
+# Base
+
+- type: randomHumanoidSettings
+  id: DebugHumanoid
+  parent: EventHumanoid
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran]
+  components:
+    - type: RandomHumanoidAppearance
+      randomizeName: false
+      hair: HairBald
+    - type: RandomMetadata
+      nameSegments:
+        - NamesFirstCentcomAgent
+        - NamesLastCentcomAgent
+
+# Command
+
+- type: randomHumanoidSettings
+  id: DebugCaptain
+  parent: DebugHumanoid
+  components:
+    - type: Loadout
+      prototypes: [ DebugCaptain ]
+
+- type: randomHumanoidSettings
+  id: DebugCaptainHardsuit
+  parent: DebugHumanoid
+  components:
+    - type: Loadout
+      prototypes: [ DebugCaptainHardsuit ]
+
+# Security
+
+- type: randomHumanoidSettings
+  id: DebugHOS
+  parent: DebugHumanoid
+  components:
+    - type: Loadout
+      prototypes: [ DebugHOS ]
+
+- type: randomHumanoidSettings
+  id: DebugHOSHardsuit
+  parent: DebugHumanoid
+  components:
+    - type: Loadout
+      prototypes: [ DebugHOSHardsuit ]
+
+# base
+- type: randomHumanoidSettings
+  id: DebugSecurityOfficer
+  parent: DebugHumanoid
+  components:
+    - type: Loadout
+      prototypes: [ DebugSecurityOfficer ]
+
+# riot
+- type: randomHumanoidSettings
+  id: DebugSecurityOfficerRiot
+  parent: DebugHumanoid
+  components:
+    - type: Loadout
+      prototypes: [ DebugSecurityOfficerRiot ]
+
+# bulletproof
+- type: randomHumanoidSettings
+  id: DebugSecurityOfficerBulletproof
+  parent: DebugHumanoid
+  components:
+    - type: Loadout
+      prototypes: [ DebugSecurityOfficerBulletproof ]
+
+# reflective
+- type: randomHumanoidSettings
+  id: DebugSecurityOfficerReflective
+  parent: DebugHumanoid
+  components:
+    - type: Loadout
+      prototypes: [ DebugSecurityOfficerReflective ]
+
+# hardsuit
+- type: randomHumanoidSettings
+  id: DebugSecurityOfficerHardsuit
+  parent: DebugHumanoid
+  components:
+    - type: Loadout
+      prototypes: [ DebugSecurityOfficerHardsuit ]
+
+# ward
+- type: randomHumanoidSettings
+  id: DebugWarden
+  parent: DebugHumanoid
+  components:
+    - type: Loadout
+      prototypes: [ DebugWarden ]
+
+# ward
+- type: randomHumanoidSettings
+  id: DebugWardenHardsuit
+  parent: DebugHumanoid
+  components:
+    - type: Loadout
+      prototypes: [ DebugWardenHardsuit ]
+
+### Syndicate & Hostiles
+# Pirates
+
+- type: randomHumanoidSettings
+  id: DebugPirateScooner
+  parent: DebugHumanoid
+  components:
+    - type: NpcFactionMember
+      factions:
+      - Syndicate
+    - type: Loadout
+      prototypes: [ DebugPirateScooner ]
+
+- type: randomHumanoidSettings
+  id: DebugPirateCaptain
+  parent: DebugHumanoid
+  components:
+    - type: NpcFactionMember
+      factions:
+      - Syndicate
+    - type: Loadout
+      prototypes: [ DebugPirateCaptain ]
+
+# syndicate / nukeops
+- type: randomHumanoidSettings
+  id: DebugSyndicate
+  parent: DebugHumanoid
+  components:
+    - type: NpcFactionMember
+      factions:
+      - Syndicate
+    - type: Loadout
+      prototypes: [ DebugSyndicate ]
+
+# webvest
+- type: randomHumanoidSettings
+  id: DebugSyndicateWebvest
+  parent: DebugHumanoid
+  components:
+    - type: NpcFactionMember
+      factions:
+      - Syndicate
+    - type: Loadout
+      prototypes: [ DebugSyndicateWebvest ]
+
+# elite vest
+- type: randomHumanoidSettings
+  id: DebugSyndicateElitevest
+  parent: DebugHumanoid
+  components:
+    - type: NpcFactionMember
+      factions:
+      - Syndicate
+    - type: Loadout
+      prototypes: [ DebugSyndicateElitevest ]
+
+# hardsuit
+- type: randomHumanoidSettings
+  id: DebugSyndicateHardsuit
+  parent: DebugHumanoid
+  components:
+    - type: NpcFactionMember
+      factions:
+      - Syndicate
+    - type: Loadout
+      prototypes: [ DebugSyndicateHardsuit ]
+
+# elite
+- type: randomHumanoidSettings
+  id: DebugSyndicateHardsuitElite
+  parent: DebugHumanoid
+  components:
+    - type: NpcFactionMember
+      factions:
+      - Syndicate
+    - type: Loadout
+      prototypes: [ DebugSyndicateHardsuitElite ]
+
+# commander
+- type: randomHumanoidSettings
+  id: DebugSyndicateHardsuitCommander
+  parent: DebugHumanoid
+  components:
+    - type: NpcFactionMember
+      factions:
+      - Syndicate
+    - type: Loadout
+      prototypes: [ DebugSyndicateHardsuitCommander ]
+
+# jugg
+- type: randomHumanoidSettings
+  id: DebugSyndicateJugg
+  parent: DebugHumanoid
+  components:
+    - type: NpcFactionMember
+      factions:
+      - Syndicate
+    - type: Loadout
+      prototypes: [ DebugSyndicateJugg ]
+
+# raid
+- type: randomHumanoidSettings
+  id: DebugSyndicateRaid
+  parent: DebugHumanoid
+  components:
+    - type: NpcFactionMember
+      factions:
+      - Syndicate
+    - type: Loadout
+      prototypes: [ DebugSyndicateRaid ]
+

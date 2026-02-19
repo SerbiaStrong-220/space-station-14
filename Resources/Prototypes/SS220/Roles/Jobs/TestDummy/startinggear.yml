@@ -1,0 +1,211 @@
+### Debugs
+
+# Command
+
+# captain
+- type: startingGear
+  id: DebugCaptain
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitCaptain
+    shoes: ClothingShoesBootsLaceup
+    eyes: ClothingEyesGlassesCommand
+    gloves: ClothingHandsGlovesCaptain
+    head: ClothingHeadHatCaptain
+    mask: ClothingMaskGasSecurity
+    id: CaptainPDA
+    back: ClothingBackpackCaptain
+    ears: ClothingHeadsetAltCommand
+    outerClothing: ClothingOuterArmorCaptainCarapace
+
+# cap hardsuit
+- type: startingGear
+  parent: DebugCaptain
+  id: DebugCaptainHardsuit
+  equipment:
+    outerClothing: ClothingOuterHardsuitCap
+    head: ClothingHeadHelmetHardsuitCap
+
+# Security
+# HOS
+- type: startingGear
+  id: DebugHOS
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitHoSParadeMale
+    shoes: ClothingShoesBootsCowboyBlackFilled
+    gloves: ClothingHandsGlovesCombat
+    head: ClothingHeadHatHoshat
+    mask: ClothingMaskGasSecurity
+    id: HoSPDA
+    belt: ClothingBeltSecurityFilled
+    back: ClothingBackpackSatchelSecurity
+    ears: ClothingHeadsetAltSecurity
+    eyes: ClothingEyesGlassesSecurity
+    outerClothing: ClothingOuterCoatHoSTrench
+
+# hos hardsuit
+- type: startingGear
+  parent: DebugHOS
+  id: DebugHOSHardsuit
+  equipment:
+    outerClothing: ClothingOuterHardsuitSecurityRed
+    head: ClothingHeadHelmetHardsuitSecurityRed
+
+# helmet + base armor
+- type: startingGear
+  id: DebugSecurityOfficer
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSec
+    shoes: ClothingShoesBootsCombatFilled
+    head: ClothingHeadHelmetBasic
+    mask: ClothingMaskGasSecurity
+    id: SecurityPDA
+    belt: ClothingBeltSecurityWebbingFilled
+    back: ClothingBackpackSecurity
+    ears: ClothingHeadsetSecurity
+    eyes: ClothingEyesGlassesSecurity
+    outerClothing: ClothingOuterArmorBasic
+
+# riot
+- type: startingGear
+  parent: DebugSecurityOfficer
+  id: DebugSecurityOfficerRiot
+  equipment:
+    outerClothing: ClothingOuterArmorRiot
+    head: ClothingHeadHelmetRiot
+
+# bulletproof + helmet
+- type: startingGear
+  parent: DebugSecurityOfficer
+  id: DebugSecurityOfficerBulletproof
+  equipment:
+    outerClothing: ClothingOuterArmorBulletproof
+    head: ClothingHeadHelmetBasic
+
+# reflective
+- type: startingGear
+  parent: DebugSecurityOfficer
+  id: DebugSecurityOfficerReflective
+  equipment:
+    outerClothing: ClothingOuterArmorReflective
+
+# hardsuit
+- type: startingGear
+  parent: DebugSecurityOfficer
+  id: DebugSecurityOfficerHardsuit
+  equipment:
+    outerClothing: ClothingOuterHardsuitSecurity
+    head: ClothingHeadHelmetHardsuitSecurity
+
+# warden
+- type: startingGear
+  id: DebugWarden
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitWarden
+    shoes: ClothingShoesBootsCombatFilled
+    gloves: ClothingHandsGlovesCombat
+    head: ClothingHeadHatWarden
+    mask: ClothingMaskGasSecurity
+    id: WardenPDA
+    belt: ClothingBeltSecurityFilled
+    back: ClothingBackpackSatchelSecurity
+    ears: ClothingHeadsetSecurity
+    eyes: ClothingEyesGlassesSecurity
+    outerClothing: ClothingOuterWinterWarden
+
+#warden  hardsuit
+- type: startingGear
+  parent: DebugWarden
+  id: DebugWardenHardsuit
+  equipment:
+    outerClothing: ClothingOuterHardsuitWarden
+    head: ClothingHeadHelmetHardsuitWarden
+
+### Syndicate & Hostiles
+
+# Pirates
+- type: startingGear
+  id: DebugPirateScooner
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitPirate
+    shoes: ClothingShoesBootsLaceup
+    id: PiratePDA
+    back: ClothingBackpackSatchelLeather
+    ears: ClothingHeadsetFreelance
+    outerClothing: ClothingOuterHardsuitPirateEVA
+    head: ClothingHeadHelmetHardsuitPirateEVA
+
+- type: startingGear
+  parent: DebugPirateScooner
+  id: DebugPirateCaptain
+  equipment:
+    head: ClothingHeadHelmetHardsuitPirateCap
+    outerClothing: ClothingOuterHardsuitPirateCap
+
+# Nukeops
+
+# Basic armor helm + mask
+- type: startingGear
+  id: DebugSyndicate
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitOperative
+    head: ClothingHeadHelmetSwatSyndicate
+    mask: ClothingMaskGasSyndicate
+    eyes: ClothingEyesHudSyndicate
+    outerClothing: ClothingOuterArmorBasic
+    gloves: ClothingHandsGlovesCombat
+    back: ClothingBackpack
+    shoes: ClothingShoesBootsCombatFilled
+
+# Web vest + swat helm
+- type: startingGear
+  parent: DebugSyndicate
+  id: DebugSyndicateWebvest
+  equipment:
+    outerClothing: ClothingOuterVestWeb
+
+# Elite west + swat
+- type: startingGear
+  parent: DebugSyndicate
+  id: DebugSyndicateElitevest
+  equipment:
+    outerClothing: ClothingOuterVestWebElite
+
+# Hardsuit
+- type: startingGear
+  parent: DebugSyndicate
+  id: DebugSyndicateHardsuit
+  equipment:
+    head: ClothingHeadHelmetHardsuitSyndie
+    outerClothing: ClothingOuterHardsuitSyndie
+
+# Elite hardsuit
+- type: startingGear
+  parent: DebugSyndicate
+  id: DebugSyndicateHardsuitElite
+  equipment:
+    head: ClothingHeadHelmetHardsuitSyndieElite
+    outerClothing: ClothingOuterHardsuitSyndieElite
+
+# Commander hardsuit
+- type: startingGear
+  parent: DebugSyndicate
+  id: DebugSyndicateHardsuitCommander
+  equipment:
+    head: ClothingHeadHelmetHardsuitSyndieCommander
+    outerClothing: ClothingOuterHardsuitSyndieCommander
+
+# Jugg
+- type: startingGear
+  parent: DebugSyndicate
+  id: DebugSyndicateJugg
+  equipment:
+    head: ClothingHeadHelmetHardsuitCybersun
+    outerClothing: ClothingOuterHardsuitJuggernaut
+
+# Raid suit
+- type: startingGear
+  parent: DebugSyndicate
+  id: DebugSyndicateRaid
+  equipment:
+    head: ClothingHeadHelmetRaid
+    outerClothing: ClothingOuterArmorRaid

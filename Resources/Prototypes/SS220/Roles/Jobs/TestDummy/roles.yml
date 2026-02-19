@@ -1,0 +1,237 @@
+## Made for testing purposes
+
+# Command
+
+- type: entity
+  id: RandomHumanoidDebugCaptain
+  name: debug Captain
+  components:
+    - type: Sprite
+      sprite: Markers/jobs.rsi
+      state: captain
+    - type: RandomHumanoidSpawner
+      settings: DebugCaptain
+
+- type: entity
+  id: RandomHumanoidDebugCaptainHardsuit
+  name: debug Captain HARDSUIT
+  components:
+    - type: Sprite
+      sprite: Markers/jobs.rsi
+      state: captain
+    - type: RandomHumanoidSpawner
+      settings: DebugCaptainHardsuit
+
+# Security
+
+- type: entity
+  id: RandomHumanoidDebugHOS
+  name: debug HOS
+  components:
+    - type: Sprite
+      sprite: Markers/jobs.rsi
+      state: hos
+    - type: RandomHumanoidSpawner
+      settings: DebugHOS
+
+- type: entity
+  id: RandomHumanoidDebugHOSHardsuit
+  name: debug HOS HARDSUIT
+  components:
+    - type: Sprite
+      sprite: Markers/jobs.rsi
+      state: hos
+    - type: RandomHumanoidSpawner
+      settings: DebugHOSHardsuit
+
+# armor + helm
+- type: entity
+  id: RandomHumanoidDebugSecurityOfficer
+  name: debug secofficer BASE
+  components:
+    - type: Sprite
+      sprite: Markers/jobs.rsi
+      state: security_officer
+    - type: RandomHumanoidSpawner
+      settings: DebugSecurityOfficer
+
+# riot
+- type: entity
+  id: RandomHumanoidDebugSecurityOfficerRiot
+  name: debug secofficer RIOT
+  components:
+    - type: Sprite
+      sprite: Markers/jobs.rsi
+      state: security_officer
+    - type: RandomHumanoidSpawner
+      settings: DebugSecurityOfficerRiot
+
+# bulletproof + helm
+- type: entity
+  id: RandomHumanoidDebugSecurityOfficerBulletproof
+  name: debug secofficer BULLETPROOF
+  components:
+    - type: Sprite
+      sprite: Markers/jobs.rsi
+      state: security_officer
+    - type: RandomHumanoidSpawner
+      settings: DebugSecurityOfficerBulletproof
+
+# reflective
+- type: entity
+  id: RandomHumanoidDebugSecurityOfficerReflective
+  name: debug secofficer REFLECTIVE
+  components:
+    - type: Sprite
+      sprite: Markers/jobs.rsi
+      state: security_officer
+    - type: RandomHumanoidSpawner
+      settings: DebugSecurityOfficerReflective
+
+# hardsuit
+- type: entity
+  id: RandomHumanoidDebugSecurityOfficerHardsuit
+  name: debug secofficer HARDSUIT
+  components:
+    - type: Sprite
+      sprite: Markers/jobs.rsi
+      state: security_officer
+    - type: RandomHumanoidSpawner
+      settings: DebugSecurityOfficerHardsuit
+
+# warden
+- type: entity
+  id: RandomHumanoidDebugWarden
+  name: debug warden
+  components:
+    - type: Sprite
+      sprite: Markers/jobs.rsi
+      state: warden
+    - type: RandomHumanoidSpawner
+      settings: DebugWarden
+
+# warden
+- type: entity
+  id: RandomHumanoidDebugWardenHardsuit
+  name: debug warden HARDSUIT
+  components:
+    - type: Sprite
+      sprite: Markers/jobs.rsi
+      state: warden
+    - type: RandomHumanoidSpawner
+      settings: DebugWardenHardsuit
+
+### Syndicate & Hostiles
+
+# Pirates
+- type: entity
+  id: RandomHumanoidDebugPirateScooner
+  name: debug pirate
+  components:
+    - type: Sprite
+      sprite: Structures/Decoration/banner.rsi
+      state: banner-red
+    - type: RandomHumanoidSpawner
+      settings: DebugPirateScooner
+
+# Pirate captain
+- type: entity
+  id: RandomHumanoidPirateCaptain
+  name: debug pirate captain
+  components:
+    - type: Sprite
+      sprite: Structures/Decoration/banner.rsi
+      state: banner-red
+    - type: RandomHumanoidSpawner
+      settings: DebugPirateCaptain
+
+### Syndicate
+
+# armor + swat helm
+- type: entity
+  id: RandomHumanoidDebugSyndicate
+  name: debug syndicate agent
+  components:
+    - type: Sprite
+      sprite: Structures/Decoration/banner.rsi
+      state: banner-red
+    - type: RandomHumanoidSpawner
+      settings: DebugSyndicate
+
+# web vest + swat
+- type: entity
+  id: RandomHumanoidDebugSyndicateWebvest
+  name: debug syndicate agent WEBVEST
+  components:
+    - type: Sprite
+      sprite: Structures/Decoration/banner.rsi
+      state: banner-red
+    - type: RandomHumanoidSpawner
+      settings: DebugSyndicateWebvest
+
+# elite + swat
+- type: entity
+  id: RandomHumanoidClothingOuterVestWebElite
+  name: debug syndicate agent VESTWEBELITE
+  components:
+    - type: Sprite
+      sprite: Structures/Decoration/banner.rsi
+      state: banner-red
+    - type: RandomHumanoidSpawner
+      settings: ClothingOuterVestWebElite
+
+# bloodred
+- type: entity
+  id: RandomHumanoidDebugSyndicateHardsuit
+  name: debug syndicate agent HARDSUIT
+  components:
+    - type: Sprite
+      sprite: Structures/Decoration/banner.rsi
+      state: banner-red
+    - type: RandomHumanoidSpawner
+      settings: DebugSyndicateHardsuit
+
+# elite
+- type: entity
+  id: RandomHumanoidDebugSyndicateHardsuitElite
+  name: debug syndicate agent ELITE HARDSUIT
+  components:
+    - type: Sprite
+      sprite: Structures/Decoration/banner.rsi
+      state: banner-red
+    - type: RandomHumanoidSpawner
+      settings: DebugSyndicateHardsuitElite
+
+# Commander
+- type: entity
+  id: RandomHumanoidDebugSyndicateHardsuitCommander
+  name: debug syndicate agent COMMANDER HARDSUIT
+  components:
+    - type: Sprite
+      sprite: Structures/Decoration/banner.rsi
+      state: banner-red
+    - type: RandomHumanoidSpawner
+      settings: DebugSyndicateHardsuitCommander
+
+# JUGG
+- type: entity
+  id: RandomHumanoidDebugSyndicateJugg
+  name: debug syndicate agent JUGGERNAUT HARDSUIT
+  components:
+    - type: Sprite
+      sprite: Structures/Decoration/banner.rsi
+      state: banner-red
+    - type: RandomHumanoidSpawner
+      settings: DebugSyndicateJugg
+
+# elite
+- type: entity
+  id: RandomHumanoidDebugSyndicateRaid
+  name: debug syndicate agent RAID SUIT
+  components:
+    - type: Sprite
+      sprite: Structures/Decoration/banner.rsi
+      state: banner-red
+    - type: RandomHumanoidSpawner
+      settings: DebugSyndicateRaid
+
