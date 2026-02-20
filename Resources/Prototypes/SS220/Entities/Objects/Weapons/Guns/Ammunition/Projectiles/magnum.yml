@@ -1,0 +1,15 @@
+- type: entity
+  id: CartridgeMagnumSemiAP
+  name: cartridge (.45 magnum semi ap)
+  parent: BaseCartridgeMagnum
+  description: Heavy magnum cartridge mostly used by revolvers. Chalk ammunition is generally non-harmful, used for practice.
+  components:
+  - type: CartridgeAmmo
+    proto: BulletMagnumPractice
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#7c7c7c"

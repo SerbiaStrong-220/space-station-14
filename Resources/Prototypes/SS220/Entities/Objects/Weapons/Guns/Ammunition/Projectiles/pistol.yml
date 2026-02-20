@@ -7,4 +7,21 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 36 
+        Piercing: 36
+
+# gun variety
+- type: entity
+  id: CartridgePistolSemiAP
+  name: cartridge (.35 auto semi ap)
+  description: Arguably the most popular caliber on the market, used by all manner of pistols and submachine guns. Chalk ammunition is generally non-harmful, used for practice.
+  parent: BaseCartridgePistol
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPistolPractice
+  -  type: Sprite
+     layers:
+       - state: base
+         map: [ "enum.AmmoVisualLayers.Base" ]
+       - state: tip
+         map: [ "enum.AmmoVisualLayers.Tip" ]
+         color: "#9c9c9c"

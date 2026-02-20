@@ -1,0 +1,8 @@
+- type: entity
+  id: CartridgeMG
+  name: cartridge (.10 rifle)
+  parent: BaseCartridgeHeavyRifle
+  components:
+  - type: CartridgeAmmo
+    proto: BulletMinigun
+    deleteOnSpawn: true

@@ -15,9 +15,8 @@
         color: "#4d5851"
   - type: AmmoGunModifier
     angleIncreaseDelta: 2
-    minAngleDelta: 4
+    minAngleDelta: 1
     maxAngleDelta: 6
-    fireRateDelta: -0.4
 
 - type: entity
   name: cartridge (.20 rifle rubber)

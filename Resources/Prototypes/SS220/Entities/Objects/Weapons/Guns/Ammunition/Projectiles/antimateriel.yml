@@ -1,0 +1,7 @@
+- type: entity
+  parent: CartridgeAntiMateriel
+  id: CartridgeAntiMaterielSemiAP
+  name: cartridge (.60 anti-materiel)
+  #components:
+  #- type: CartridgeAmmo
+  #  proto: BulletAntiMateriel

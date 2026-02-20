@@ -7,12 +7,12 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 12
+        Piercing: 13
   - type: ArmorPenetration
     rules:
     - damageType: Piercing
       armorthreshold: 0.7 # >30% res
-      multiplier: 1.65 # ~20 dmg. Basic is 17
+      multiplier: 1.65 # ~21,5 dmg. Basic is 17
 
 - type: entity
   name: bullet (.20 rifle rubber)

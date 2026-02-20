@@ -1,3 +1,25 @@
+### gun variety
+# shotgun (.50)
+
+- type: entity
+  id: ShellShotgunRubber
+  name: shell (.50 rubber)
+  parent: [ BaseShellShotgun, BaseSecurityBartenderContraband ]
+  components:
+  - type: Tag
+    tags:
+    - ShellShotgun
+    - ShellShotgunLight
+  - type: Sprite
+    layers:
+      - state: beanbag #todo
+        map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: CartridgeAmmo
+    proto: PelletShotgunBeanbag #todo
+  - type: SpentAmmoVisuals
+    state: "beanbag" #todo
+
+# heavy shotgun (.55)
 - type: entity
   parent: BaseBullet
   id: PelletShotgunHeavySlug
