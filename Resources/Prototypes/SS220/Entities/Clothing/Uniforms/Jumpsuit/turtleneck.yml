@@ -3,7 +3,7 @@
 # ЦК
 
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220]
   id: ClothingUniformJumpsuitCentcomOfficerTurtleneck
   name: centcom turtleneck suit
   description: A casual, yet refined green turtleneck, used by CentCom Officials. It has a fragrance of blueberry.
@@ -14,7 +14,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/centcom_officer.rsi
 
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220]
   id: ClothingUniformJumpsuitParamedicTurtleneck
   name: paramedic turtleneck
   description: A reliable and comfortable choice for rescuers, it provides protection from cold and moisture during rescue operations.
@@ -26,7 +26,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/paramedic_turtle.rsi
 
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformBaseFoldable] 
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] 
   id: ClothingUniformJumpsuitAtmosphericTechnicianTurtleneck
   name: atmospheric technician turtle
   description: Built to withstand high humidity and temperature extremes, ideal for professionals in the atmospheric research industry.
@@ -42,7 +42,7 @@
         Heat: 0.95
 
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220]
   id: ClothingUniformJumpsuitChemistTurtleneck
   name: chemist turtle
   description: Specially designed for safe handling of chemicals, provides reliable protection from harmful substances and keeps the user safe.
@@ -58,7 +58,7 @@
         Caustic: 0.95
 
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220]
   id: ClothingUniformJumpsuitBlueShieldTurtle
   name: blueshield turtleneck
   description: A stylish turtleneck that will help the Blue Shield officer be ready for any extreme situation. High quality materials and a layer of armor make it indispensable for the front line.
@@ -75,7 +75,7 @@
         Piercing: 0.9
 
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220]
   id: ClothingUniformJumpsuitWardenTurtleneck
   name: warden turtleneck
   description: A special turtleneck for riot control.
@@ -87,7 +87,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/warden_turtle.rsi
 
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220]
   id: ClothingUniformJumpsuitSalvageSpecialistTurtleneck
   name: salvage specialist turtleneck
   description: Show that you are better than the damn dwarves!
@@ -99,7 +99,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/salvage_specialist_turtle.rsi
 
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220]
   id: ClothingUniformJumpsuitBrigmedicTurtleneck
   name: brigmedic turtleneck
   description: A brigmedic turtleneck.
@@ -111,7 +111,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/brigmedic_turtle.rsi
 
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformBaseFoldable]
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220]
   id: ClothingUniformJumpsuitHoPTurtleneck
   name: head of personal turtleneck
   description: A turtleneck that absorbs the scent of coffee and responsibility. Mandatory wear during any paperwork storm.

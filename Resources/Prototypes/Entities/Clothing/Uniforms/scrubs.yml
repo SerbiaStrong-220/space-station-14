@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformBaseFoldable] #SS220 folded-equipped-INNERCLOTHING resprite V2
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V2
   id: UniformScrubsColorPurple
   name: purple scrubs
   description: A combination of comfort and utility intended to make removing every last organ someone has and selling them to a space robot much more official looking.
@@ -12,7 +12,7 @@
     #SS220-surgery-resprite end
 
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformBaseFoldable] #SS220 folded-equipped-INNERCLOTHING resprite V2
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V2
   id: UniformScrubsColorGreen
   name: green scrubs
   description: A combination of comfort and utility intended to make removing every last organ someone has and selling them to a space robot much more official looking.
@@ -25,7 +25,7 @@
     #SS220-surgery-resprite end
 
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformBaseFoldable] #SS220 folded-equipped-INNERCLOTHING resprite V2
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V2
   id: UniformScrubsColorBlue
   name: blue scrubs
   description: A combination of comfort and utility intended to make removing every last organ someone has and selling them to a space robot much more official looking.
