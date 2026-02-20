@@ -4,7 +4,6 @@
     prefix: figurines-admiral-
     count: 3
 
-
 - type: localizedDataset
   id: FigurinesBlueshield
   values:

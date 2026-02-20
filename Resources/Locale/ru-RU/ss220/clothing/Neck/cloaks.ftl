@@ -10,3 +10,11 @@ ent-ClothingNeckCMOParadeCloak = парадный плащ главного вр
 
 ent-ClothingNeckCloakOwl = плащ героя-совы
     .desc = Будь готов к ночным патрулям и странным вопросам про мышей.
+ent-ClothingNeckCloakFieldOfficerCentComm = плащ полевого офицера Центрального Командования
+    .desc = От этого плаща так и веет властью и вашим увольнением.
+ent-ClothingNeckCloakWhiteCapFormal = белый формальный плащ капитана
+    .desc = Роскошный плащ почётного ветерана за выслугу лет.
+ent-ClothingCloakBlueShield = плащ Синего Щита
+    .desc = Используется офицером «Синий Щит», который верно защищает своих глав.
+ent-ClothingCloak1984 = плащ 1984
+    .desc = Литерали 1984.
