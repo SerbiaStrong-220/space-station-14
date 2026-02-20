@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Sprited by abubben (Discord) for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "chest_feathers",
+            "directions": 4
+    },
+    {
+      "name": "l_foot_feathers",
+            "directions": 4
+    },
+    {
+      "name": "r_foot_feathers",
+            "directions": 4
+    },
+    {
+      "name": "l_hand_feathers",
+            "directions": 4
+    },
+    {
+      "name": "r_hand_feathers",
+            "directions": 4
+    }
+  ]
+}
