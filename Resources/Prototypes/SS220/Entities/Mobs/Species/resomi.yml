@@ -225,7 +225,7 @@
           sprite: SS220/Mobs/Species/Resomi/displacement.rsi
           state: hand_r
   - type: Inventory
-    speciesId: esomi
+    speciesId: Resomi
     displacements:
       jumpsuit:
         sizeMaps:
