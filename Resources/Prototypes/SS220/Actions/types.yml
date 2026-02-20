@@ -82,3 +82,16 @@
       useDelay: 1 # emote spam
     - type: InstantAction
       event: !type:ToggleActionEvent
+
+- type: entity
+  id: ActionSpeedUp
+  name: action-name-speedup
+  description: action-description-speedup
+  components:
+    - type: Action
+      icon: { sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi, state: tajaran_tail_icon }
+      iconOn: { sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi, state: tajaran_tail_icon }
+      itemIconStyle: NoItem
+      useDelay: 420
+    - type: InstantAction
+      event: !type:SpeedUpActionEvent
