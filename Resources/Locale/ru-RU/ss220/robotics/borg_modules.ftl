@@ -1,6 +1,6 @@
 borg-slot-cables-empty = кабели
 borg-slot-construction-empty = строительные материалы
-borg-slot-circuitboards-empty = машинная платы
+borg-slot-circuitboards-empty = машинные платы
 borg-slot-flatpacks-empty = универсально-сборные упаковки
 borg-slot-tiles-empty = плитки
 borg-slot-topicals-empty = медикаменты
