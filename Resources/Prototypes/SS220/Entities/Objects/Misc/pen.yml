@@ -28,6 +28,8 @@
       - Screwing
     useSound:
       collection: Screwdriver
+  - type: Pen
+    canCopy: true
   - type: Item
     sprite: SS220/Objects/Misc/pen.rsi
     size: Tiny

@@ -2,6 +2,10 @@
 
 verb-categories-pen-write-size = Размер нанесения
 verb-categories-pen-erase-size = Размер стирания
+verb-categories-pen-copying = Редактирование подписи
+
+verb-pen-signature-copy = Копировать
+verb-pen-signature-paste = Вставить
 
 paper-ui-signature-label = Подпись:
 paper-ui-signature-load-from-profile-label = Из профиля
@@ -14,3 +18,5 @@ humanoid-profile-signature-saved-label = Сохранённая подпись:
 humanoid-profile-signature-brush-write = Шрифт ручки
 humanoid-profile-signature-brush-erase = Ластик
 humanoid-profile-editor-other-tab = Разное
+humanoid-profile-signature-import = Импорт подписи
+humanoid-profile-signature-export = Экспорт подписи

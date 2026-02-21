@@ -103,6 +103,10 @@
   components:
   - type: Sprite
     state: overpriced_pen
+  #ss220 add copyable pen start
+  - type: Pen
+    canCopy: true
+  #ss220 add copyable pen end
   - type: Item
     heldPrefix: overpriced_pen
   - type: StaticPrice
@@ -117,6 +121,10 @@
   components:
   - type: Sprite
     state: pen_centcom
+  #ss220 add copyable pen start
+  - type: Pen
+    canCopy: true
+  #ss220 add copyable pen end
   - type: Item
     heldPrefix: pen_centcom
 
