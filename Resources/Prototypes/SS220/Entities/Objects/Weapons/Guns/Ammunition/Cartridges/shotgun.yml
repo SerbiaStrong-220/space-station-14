@@ -1,8 +1,9 @@
+#BASE .55
 - type: entity
-  id: BaseShellShotgunHeavy
-  name: shell (.55)
   parent: BaseCartridge
+  id: BaseShellShotgunHeavy
   abstract: true
+  name: shell (.55)
   components:
   - type: Tag
     tags:
@@ -19,10 +20,27 @@
   - type: SpentAmmoVisuals
     state: "lethal"
 
+### SHOTGUN .50
+
 - type: entity
+  parent: [ BaseShellShotgun, BaseSecurityBartenderContraband ]
+  id: ShellShotgunRubber
+  name: shell (.50 rubber)
+  components:
+  - type: Sprite
+    layers:
+      - state: beanbag #todo
+        map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: CartridgeAmmo
+    proto: PelletShotgunBeanbag #todo
+  - type: SpentAmmoVisuals
+    state: "beanbag" #todo
+
+### SHOTGUN .55
+- type: entity
+  parent: [ BaseShellShotgunHeavy, BaseSecurityContraband ]
   id: ShellShotgunHeavy
   name: shell (.55 pellet)
-  parent: [ BaseShellShotgunHeavy, BaseSecurityContraband ]
   components:
   - type: Sprite
     layers:
@@ -32,9 +50,9 @@
     proto: PelletShotgunHeavySpread
 
 - type: entity
+  parent: [ BaseShellShotgunHeavy, BaseSecurityBartenderContraband ]
   id: ShellShotgunHeavyRubber
   name: shell (.55 Rubber)
-  parent: [ BaseShellShotgunHeavy, BaseSecurityBartenderContraband ]
   components:
   - type: Tag
     tags:
@@ -49,9 +67,9 @@
     state: "rubber"
 
 - type: entity
+  parent: [ BaseShellShotgunHeavy, BaseSecurityContraband]
   id: ShellShotgunHeavySlug #treat it as a breaching ammo
   name: shell (.55 slug)
-  parent: [ BaseShellShotgunHeavy, BaseSecurityContraband]
   components:
   - type: Sprite
     layers:
@@ -67,9 +85,9 @@
     projectileSpeedDelta: -15
 
 - type: entity
+  parent: BaseShellShotgunHeavy
   id: ShellShotgunHeavyFlare
   name: shell (.55 flare)
-  parent: BaseShellShotgunHeavy
   components:
   - type: Tag
     tags:
@@ -84,9 +102,9 @@
     state: "flare"
 
 - type: entity
+  parent: [ BaseShellShotgunHeavy, BaseSecurityContraband ]
   id: ShellShotgunHeavyIncendiary
   name: shell (.55 incendiary)
-  parent: [ BaseShellShotgunHeavy, BaseSecurityContraband ]
   components:
   - type: Sprite
     layers:
@@ -98,9 +116,9 @@
     state: "incendiary"
 
 - type: entity
+  parent: [ BaseShellShotgunHeavy, BaseSecurityContraband ]
   id: ShellShotgunHeavyPractice
   name: shell (.55 practice)
-  parent: [ BaseShellShotgunHeavy, BaseSecurityContraband ]
   components:
   - type: Sprite
     layers:
@@ -112,9 +130,9 @@
     state: "practice"
 
 - type: entity
+  parent: [ BaseShellShotgunHeavy, BaseSecurityContraband ]
   id: ShellShotgunHeavyTranquilizer
   name: shell (.55 tranquilizer)
-  parent: [ BaseShellShotgunHeavy, BaseSecurityContraband ]
   components:
   - type: Tag
     tags:
@@ -138,10 +156,10 @@
     state: "flechette"
 
 - type: entity
+  parent: [ BaseShellShotgunHeavy, BaseSecurityContraband ]
   id: ShellShotgunHeavyImprovised
   name: improvised shotgun shell
   description: A homemade shotgun shell that shoots painful glass shrapnel. The spread is so wide that it couldn't hit the broad side of a barn.
-  parent: [ BaseShellShotgunHeavy, BaseSecurityContraband ]
   components:
   - type: Tag
     tags:
@@ -156,9 +174,9 @@
     state: "steel_slug"
 
 - type: entity
+  parent: [ BaseShellShotgunHeavy, BaseSecurityContraband ]
   id: ShellShotgunHeavyUranium
   name: uranium shotgun shell
-  parent: [ BaseShellShotgunHeavy, BaseSecurityContraband ]
   components:
     - type: Sprite
       layers:

@@ -1,8 +1,21 @@
 - type: entity
-  id: CartridgeMG
-  name: cartridge (.10 rifle)
-  parent: BaseCartridgeHeavyRifle
+  parent: BaseBullet
+  id: BulletHeavyRifle
+  categories: [ HideSpawnMenu ]
+  name: bullet (.10 rifle)
   components:
-  - type: CartridgeAmmo
-    proto: BulletMinigun
-    deleteOnSpawn: true
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 19
+
+- type: entity
+  parent: BulletHeavyRifle
+  id: BulletMinigun
+  categories: [ HideSpawnMenu ]
+  name: minigun bullet (.10 rifle)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 5

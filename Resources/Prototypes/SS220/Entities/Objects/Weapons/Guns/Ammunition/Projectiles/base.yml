@@ -1,0 +1,19 @@
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseBullet
+  abstract: true
+  id: BaseBulletRubber
+  name: base bullet rubber
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+    - state: rubber
+  - type: StaminaDamageOnCollide
+    damage: 10
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 3
+    soundHit:
+      path: /Audio/Weapons/Guns/Hits/snap.ogg

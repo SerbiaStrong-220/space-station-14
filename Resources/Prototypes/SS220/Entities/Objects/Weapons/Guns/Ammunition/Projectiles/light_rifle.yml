@@ -1,15 +1,20 @@
 - type: entity
-  id: CartridgeLightRifleSemiAP
-  name: cartridge (.30 rifle semi ap)
-  parent: BaseCartridgeLightRifle
-  description: A classic intermediate cartridge used by many combat rifles and LMGs. Chalk ammunition is generally non-harmful, used for practice.
+  categories: [ HideSpawnMenu ]
+  parent: BaseBullet
+  id: BulletLightRifleSemiAP
+  name: bullet (.30 rifle semi AP)
   components:
-  - type: CartridgeAmmo
-    proto: BulletLightRiflePractice
-  - type: Sprite
-    layers:
-      - state: base
-        map: [ "enum.AmmoVisualLayers.Base" ]
-      - state: tip
-        map: [ "enum.AmmoVisualLayers.Tip" ]
-        color: "#7c7c7c"
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 19
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseBulletRubber
+  id: BulletLightRifleRubber
+  name: bullet (.30 rifle rubber)
+  components:
+  - type: StaminaDamageOnCollide
+    damage: 20
+

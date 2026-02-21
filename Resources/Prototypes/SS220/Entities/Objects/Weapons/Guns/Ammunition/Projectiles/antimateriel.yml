@@ -1,7 +1,14 @@
 - type: entity
-  parent: CartridgeAntiMateriel
-  id: CartridgeAntiMaterielSemiAP
-  name: cartridge (.60 anti-materiel)
-  #components:
-  #- type: CartridgeAmmo
-  #  proto: BulletAntiMateriel
+  categories: [ HideSpawnMenu ]
+  parent: BaseBullet
+  id: BulletAntiMaterielSemiAP
+  name: bullet (.60 anti-materiel semi AP)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 75
+        Structural: 226
+    penetrationThreshold: 360
+    penetrationDamageTypeRequirement:
+    - Structural

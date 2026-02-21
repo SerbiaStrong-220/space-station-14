@@ -16,3 +16,32 @@
   - type: Appearance
   - type: SpentAmmoVisuals
 
+- type: entity
+  parent: BaseCartridgePistol
+  id: CartridgePistolSemiAP
+  name: cartridge (.35 auto semi AP)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPistolRubber
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#7c7c7c"
+
+- type: entity
+  parent: BaseCartridgePistol
+  id: CartridgePistolRubber
+  name: cartridge (.35 auto rubber)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPistolRubber
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#43c4f7"

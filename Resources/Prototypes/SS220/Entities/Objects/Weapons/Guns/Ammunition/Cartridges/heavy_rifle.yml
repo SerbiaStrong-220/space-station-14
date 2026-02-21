@@ -1,0 +1,7 @@
+- type: entity
+  parent: BaseCartridgeHeavyRifle
+  id: CartridgeMachineGun
+  name: cartridge (.10 rifle)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletMinigun

@@ -1,11 +1,11 @@
 - type: entity
-  parent: BaseCartridgeRifle
-  id: CartridgeRifleSemiAP
-  name: cartridge (.20 rifle semi AP)
-  description: Cartridge with plasteel core. Shreds armor plates, causing even more damage.
+  parent: BaseCartridgeLightRifle
+  id: CartridgeLightRifleSemiAP
+  name: cartridge (.30 rifle semi ap)
+  description: A classic intermediate cartridge used by many combat rifles and LMGs. Chalk ammunition is generally non-harmful, used for practice.
   components:
   - type: CartridgeAmmo
-    proto: BulletRifleSemiAP
+    proto: BulletLightRiflePractice
   - type: Sprite
     layers:
       - state: base
@@ -13,18 +13,14 @@
       - state: tip
         map: [ "enum.AmmoVisualLayers.Tip" ]
         color: "#7c7c7c"
-  - type: AmmoGunModifier
-    angleIncreaseDelta: 2
-    minAngleDelta: 1
-    maxAngleDelta: 6
 
 - type: entity
-  parent: BaseCartridgeRifle
-  id: CartridgeRifleRubber
-  name: cartridge (.20 rifle rubber)
+  parent: BaseCartridgeLightRifle
+  id: CartridgeLightRifleRubber
+  name: cartridge (.30 rifle rubber)
   components:
   - type: CartridgeAmmo
-    proto: BulletRifleRubber
+    proto: BulletLightRifleRubber
   - type: Sprite
     layers:
       - state: base
@@ -32,4 +28,3 @@
       - state: tip
         map: [ "enum.AmmoVisualLayers.Tip" ]
         color: "#43c4f7"
-

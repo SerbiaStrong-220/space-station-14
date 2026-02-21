@@ -1,11 +1,11 @@
 - type: entity
-  parent: BaseCartridgeRifle
-  id: CartridgeRifleSemiAP
-  name: cartridge (.20 rifle semi AP)
-  description: Cartridge with plasteel core. Shreds armor plates, causing even more damage.
+  description: Heavy magnum cartridge mostly used by revolvers. Chalk ammunition is generally non-harmful, used for practice.
+  id: CartridgeMagnumSemiAP
+  name: cartridge (.45 magnum semi ap)
+  parent: BaseCartridgeMagnum
   components:
   - type: CartridgeAmmo
-    proto: BulletRifleSemiAP
+    proto: BulletMagnumPractice
   - type: Sprite
     layers:
       - state: base
@@ -13,18 +13,14 @@
       - state: tip
         map: [ "enum.AmmoVisualLayers.Tip" ]
         color: "#7c7c7c"
-  - type: AmmoGunModifier
-    angleIncreaseDelta: 2
-    minAngleDelta: 1
-    maxAngleDelta: 6
 
 - type: entity
-  parent: BaseCartridgeRifle
-  id: CartridgeRifleRubber
-  name: cartridge (.20 rifle rubber)
+  parent: BaseCartridgeMagnum
+  id: CartridgeMagnumRubber
+  name: cartridge (.45 magnum rubber)
   components:
   - type: CartridgeAmmo
-    proto: BulletRifleRubber
+    proto: BulletMagnumRubber
   - type: Sprite
     layers:
       - state: base
@@ -32,4 +28,3 @@
       - state: tip
         map: [ "enum.AmmoVisualLayers.Tip" ]
         color: "#43c4f7"
-
