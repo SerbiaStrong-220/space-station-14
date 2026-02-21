@@ -9,6 +9,8 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Radiation.Events;
 using Content.Shared.Rejuvenate;
+using Content.Shared.SS220.Damage.Components;
+using Content.Shared.SS220.Damage.Events;
 using Robust.Shared.Configuration;
 using Robust.Shared.GameStates;
 using Robust.Shared.Network;
@@ -190,7 +192,8 @@ namespace Content.Shared.Damage
             bool interruptsDoAfters = true,
             DamageableComponent? damageable = null,
             EntityUid? origin = null,
-            bool ignoreGlobalModifiers = false)
+            bool ignoreGlobalModifiers = false,
+            EntityUid? source = null) // SS220 gun variety 
         {
             if (!uid.HasValue || !_damageableQuery.Resolve(uid.Value, ref damageable, false))
             {
@@ -213,6 +216,15 @@ namespace Content.Shared.Damage
             // Apply resistances
             if (!ignoreResistances)
             {
+                // SS220 gun variety begin
+                if (source.HasValue && TryComp<ArmorPenetrationComponent>(source.Value, out var apComp))
+                {
+                    var apEv = new APDamageModifyEvent(uid.Value, damage, source, origin);
+                    RaiseLocalEvent(ref apEv);
+                    damage = apEv.Damage;
+                }
+                // SS220 gun variety end
+
                 if (damageable.DamageModifierSetId != null &&
                     _prototypeManager.Resolve(damageable.DamageModifierSetId, out var modifierSet))
                 {
