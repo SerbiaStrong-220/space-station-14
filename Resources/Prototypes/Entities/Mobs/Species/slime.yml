@@ -162,6 +162,7 @@
   - type: LimitationRevive
     reviveLimit: 100 #has no death limit
   #SS220 LimitationRevive - end
+  - type: SlimePersonColorApplier # SS220-slime-person-chemical-colorization
 
 - type: entity
   parent: MobHumanDummy
