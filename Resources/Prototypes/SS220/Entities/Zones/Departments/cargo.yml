@@ -1,0 +1,39 @@
+- type: entity
+  parent: ZoneBase
+  id: ZoneCargo
+  name: cargo
+
+- type: entity
+  parent: ZoneCargo
+  id: ZoneCargoReception
+  name: cargo reception
+
+- type: entity
+  parent: ZoneCargo
+  id: ZoneCargoStorage
+  name: cargo storage
+
+- type: entity
+  parent: ZoneCargo
+  id: ZoneCargoCargotechWardrobe
+  name: cargotesh wardrobe
+
+- type: entity
+  parent: ZoneCargo
+  id: ZoneCargoShuttleDock
+  name: cargo shuttle dock
+
+- type: entity
+  parent: ZoneCargo
+  id: ZoneCargoOfficeQuartermaster
+  name: quartermaster office
+
+- type: entity
+  parent: ZoneCargo
+  id: ZoneCargoSalvagespecRoom
+  name: salvagespec room
+
+- type: entity
+  parent: ZoneCargo
+  id: ZoneCargoSalvageShuttleDock
+  name: salvage shuttle dock

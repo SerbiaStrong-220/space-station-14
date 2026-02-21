@@ -32,6 +32,7 @@ using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Players.RateLimiting;
 using Content.Client.SS220.TTS;
 using Content.Client.SS220.Species;
+using Content.Client.SS220.BoxLayout;
 
 namespace Content.Client.IoC
 {
@@ -74,6 +75,7 @@ namespace Content.Client.IoC
             collection.Register<TitleWindowManager>();
             collection.Register<ClientsidePlaytimeTrackingManager>();
             collection.Register<TTSManager>(); // SS220 TTS
+            collection.Register<IBoxLayoutManager, BoxLayoutManager>(); // SS220 box layout
         }
     }
 }
