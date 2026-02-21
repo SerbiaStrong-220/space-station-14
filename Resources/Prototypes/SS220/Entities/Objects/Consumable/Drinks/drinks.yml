@@ -137,3 +137,29 @@
   - type: Icon
     sprite: SS220/Objects/Consumable/Drinks/skooma.rsi
     state: icon
+
+# Empty drinkable containers
+
+- type: entity
+  parent: [DrinkVisualsAllFilled, DrinkBaseMaterialPlastic, DrinkBase, DrinkBaseOpenable]
+  id: DrinkBottle
+  name: Бутылка
+  description: Простая бутылка которой можно будет наполнить что угодно.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+  - type: Sprite
+  #SS220-WaterBottle Resprite-begin
+    sprite: SS220/Objects/Consumable/Drinks/waterbottle.rsi
+  - type: SolutionContainerVisuals
+    maxFillLevels: 7
+    inHandsMaxFillLevels: 2
+    inHandsFillBaseName: -fill-
+    #SS220-WaterBottle Resprite-end
+  #ss220 chiefs belt start
+  - type: Tag
+    tags:
+      - WaterBottle
+  #ss220 chiefs belt end
