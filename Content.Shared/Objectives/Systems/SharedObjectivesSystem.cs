@@ -13,8 +13,11 @@ public abstract class SharedObjectivesSystem : EntitySystem
 {
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly IPrototypeManager _protoMan = default!;
+    [Dependency] private readonly MetaDataSystem _meta = default!; // ss220 add custom goals x2
 
     private EntityQuery<MetaDataComponent> _metaQuery;
+
+    private static readonly EntProtoId FreeObjectiveProto = "SS220FreeObjective"; // ss220 add custom goals x2
 
     public override void Initialize()
     {
@@ -102,6 +105,29 @@ public abstract class SharedObjectivesSystem : EntitySystem
         return objective != null;
     }
 
+    // ss220 add custom goals x2 start
+    public EntityUid? TryCreateObjective(Entity<MindComponent> mind, string name, string desc, SpriteSpecifier icon, string locIssuer)
+    {
+        var objective = Spawn(FreeObjectiveProto);
+
+        if (!TryComp<ObjectiveComponent>(objective, out var comp))
+        {
+            Del(objective);
+            Log.Error("Invalid objective proto (custom objective), missing ObjectiveComponent");
+            return null;
+        }
+
+        _meta.SetEntityName(objective, name);
+        _meta.SetEntityDescription(objective, desc);
+
+        comp.Completed = false;
+        comp.Icon = icon;
+        comp.Issuer = locIssuer;
+
+        return objective;
+    }
+    // ss220 add custom goals x2 end
+
     /// <summary>
     /// Get the title, description, icon and progress of an objective using <see cref="ObjectiveGetInfoEvent"/>.
     /// If any of them are null it is logged and null is returned.
@@ -136,6 +162,11 @@ public abstract class SharedObjectivesSystem : EntitySystem
     /// </summary>
     public float? GetProgress(EntityUid uid, Entity<MindComponent> mind)
     {
+        // ss220 add custom goals x2 start
+        if (TryComp<ObjectiveComponent>(uid, out var comp) && comp.Completed is not null)
+            return comp.Completed.Value ? 1f : 0f;
+        // ss220 add custom goals x2 end
+
         var ev = new ObjectiveGetProgressEvent(mind, mind.Comp);
         RaiseLocalEvent(uid, ref ev);
         if (ev.Progress != null)
@@ -164,4 +195,22 @@ public abstract class SharedObjectivesSystem : EntitySystem
 
         comp.Icon = icon;
     }
+
+    // ss220 add custom goals x2 start
+    public static void SetCompleted(Entity<ObjectiveComponent> objective, bool completed)
+    {
+        objective.Comp.Completed = completed;
+    }
+
+    public static void ToggleCompleted(Entity<ObjectiveComponent> objective)
+    {
+        if (objective.Comp.Completed == null)
+        {
+            objective.Comp.Completed = true;
+            return;
+        }
+
+        objective.Comp.Completed = !objective.Comp.Completed;
+    }
+    // ss220 add custom goals x2 end
 }

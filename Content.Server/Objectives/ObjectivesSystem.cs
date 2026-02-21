@@ -93,6 +93,39 @@ public sealed class ObjectivesSystem : SharedObjectivesSystem
             }
         }
 
+        // ss220 add custom goals x2 start
+        var processedMinds = new HashSet<EntityUid>();
+
+        foreach (var mindsList in summaries.Values.SelectMany(agentDict => agentDict.Values))
+        {
+            foreach (var (mindIdInList, _) in mindsList)
+            {
+                processedMinds.Add(mindIdInList);
+            }
+        }
+
+        var mindQuery = EntityQueryEnumerator<MindComponent>();
+
+        while (mindQuery.MoveNext(out var mindId, out var mindComp))
+        {
+            if (processedMinds.Contains(mindId) || mindComp.Objectives.Count == 0)
+                continue;
+
+            var agent = Loc.GetString("free-objective-round-end-agent-name");
+            var name = mindComp.CharacterName ?? Loc.GetString("objective-issuer-unknown");
+
+            if (!summaries.ContainsKey(agent))
+                summaries[agent] = new Dictionary<string, List<(EntityUid, string)>>();
+
+            var summary = summaries[agent];
+
+            if (!summary.ContainsKey(string.Empty))
+                summary[string.Empty] = [];
+
+            summary[string.Empty].Add((mindId, name));
+        }
+        // ss220 add custom goals x2 end
+
         // convert the data into summary text
         foreach (var (agent, summary) in summaries)
         {

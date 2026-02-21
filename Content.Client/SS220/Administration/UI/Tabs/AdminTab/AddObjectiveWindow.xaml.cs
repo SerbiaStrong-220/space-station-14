@@ -14,8 +14,7 @@ namespace Content.Client.SS220.Administration.UI.Tabs.AdminTab;
 public sealed partial class AddObjectiveWindow : DefaultWindow
 {
     private ICommonSession? _selectedAntagonist;
-    private string _input = string.Empty;
-    private string _entityId = string.Empty;
+    private bool _customObjective;
 
     public AddObjectiveWindow()
     {
@@ -26,8 +25,28 @@ public sealed partial class AddObjectiveWindow : DefaultWindow
     {
         ApplyButton.OnPressed += _ => OnApplyButtonPressed(false);
         ForceAssignButton.OnPressed += _ => OnApplyButtonPressed(true);
-        ObjectiveLineEdit.OnTextChanged += args => _input = args.Text;
-        EntityIdLineEdit.OnTextChanged += args => _entityId = args.Text;
+        ObjectiveLineEdit.OnTextChanged += _ => UpdateInputStates();
+        EntityIdLineEdit.OnTextChanged += _ => UpdateInputStates();
+        CustomObjectiveNameLineEdit.OnTextChanged += _ => UpdateInputStates();
+        CustomObjectiveDescLineEdit.OnTextChanged += _ => UpdateInputStates();
+        CustomObjectiveIconLineEdit.OnTextChanged += _ => UpdateInputStates();
+        CustomObjectiveIssuerLineEdit.OnTextChanged += _ => UpdateInputStates();
+    }
+
+    private void UpdateInputStates()
+    {
+        var hasUsualText = !string.IsNullOrWhiteSpace(ObjectiveLineEdit.Text) ||
+                           !string.IsNullOrWhiteSpace(EntityIdLineEdit.Text);
+
+        var hasCustomText = !string.IsNullOrWhiteSpace(CustomObjectiveNameLineEdit.Text) ||
+                            !string.IsNullOrWhiteSpace(CustomObjectiveDescLineEdit.Text) ||
+                            !string.IsNullOrWhiteSpace(CustomObjectiveIconLineEdit.Text) ||
+                            !string.IsNullOrWhiteSpace(CustomObjectiveIssuerLineEdit.Text);
+
+        UsualObjectiveContainer.Visible = !hasCustomText;
+        CustomObjectiveContainer.Visible = !hasUsualText;
+
+        _customObjective = hasCustomText;
     }
 
     public void SetAntagonist(ICommonSession antagonistPlayerName)
@@ -37,9 +56,31 @@ public sealed partial class AddObjectiveWindow : DefaultWindow
 
     private void OnApplyButtonPressed(bool force)
     {
-        if (_input.Length == 0)
+        if (_selectedAntagonist == null)
             return;
 
-        IoCManager.Resolve<IClientConsoleHost>().ExecuteCommand($"addobjective {_selectedAntagonist} {_input} {_entityId} {force}");
+        var clientHost = IoCManager.Resolve<IClientConsoleHost>();
+
+        if (_customObjective)
+        {
+            var name = CustomObjectiveNameLineEdit.Text;
+            if (string.IsNullOrWhiteSpace(name))
+                return;
+
+            var desc = CustomObjectiveDescLineEdit.Text;
+            var icon = CustomObjectiveIconLineEdit.Text;
+            var issuer = CustomObjectiveIssuerLineEdit.Text;
+
+            clientHost.ExecuteCommand($"addcustomobjective {_selectedAntagonist.Name} \"{name}\" \"{desc}\" \"{icon}\" \"{issuer}\"");
+        }
+        else
+        {
+            var objectiveId = ObjectiveLineEdit.Text;
+            if (string.IsNullOrWhiteSpace(objectiveId))
+                return;
+
+            var entityId = EntityIdLineEdit.Text;
+            clientHost.ExecuteCommand($"addobjective {_selectedAntagonist.Name} \"{objectiveId}\" \"{entityId}\" {force}");
+        }
     }
 }
