@@ -1,0 +1,30 @@
+- type: entity
+  id: MechVisorBasic
+  parent: BaseMechHead
+  name: Mech visor
+  description: Oldschool high-res camera module. Has integrated auto-shading lenses so you can weld while using it.
+  components:
+  - type: FlashImmunity
+  - type: EyeProtection
+  - type: Sprite
+    sprite: Objects/Specific/Mech/mecha_equipment.rsi
+    state: mecha_clamp
+  - type: MechPart
+    integrity: 100
+    maxIntegrity: 100
+    attachedSprite:
+      sprite: FCB/Objects/Mechs/heads.rsi
+      state: welding
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: ["Destruction"]

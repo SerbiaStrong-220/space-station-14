@@ -1,28 +1,30 @@
-ent-BaseShield = базовый щит
+#SS220-marking-obsolete-officials'-shields-begin
+ent-BaseShield = базовый щит(ОФЫ, УСТАРЕЛО)
     .desc = Щит!
-ent-RiotShield = противоударный щит
+ent-RiotShield = противоударный щит(ОФЫ, УСТАРЕЛО)
     .desc = Большой башенный щит на случай беспорядков. Хорошо подходит для контроля толпы.
-ent-RiotLaserShield = противолазерный щит
+ent-RiotLaserShield = противолазерный щит(ОФЫ, УСТАРЕЛО)
     .desc = Щит на случай беспорядков, созданный противостоять лазерам, но не более того.
-ent-RiotBulletShield = противопульный щит
+ent-RiotBulletShield = противопульный щит(ОФЫ, УСТАРЕЛО)
     .desc = Щит на случай беспорядков, созданный противостоять пулям, но не более того.
-ent-WoodenBuckler = деревянный баклер
+ent-WoodenBuckler = деревянный баклер(ОФЫ, УСТАРЕЛО)
     .desc = Небольшой круглый деревянный самодельный щит.
-ent-MakeshiftShield = импровизированный щит
+ent-MakeshiftShield = импровизированный щит(ОФЫ, УСТАРЕЛО)
     .desc = Ветхий на вид щит, мало на что пригодный.
-ent-WebShield = паутинный щит
+ent-WebShield = паутинный щит(ОФЫ, УСТАРЕЛО)
     .desc = Нитяной щит. Он слаб и плохо противостоит нагреванию.
-ent-ClockworkShield = заводной щит
+ent-ClockworkShield = заводной щит(ОФЫ, УСТАРЕЛО)
     .desc = Ratvar oyrffrf lbh jvgu uvf cebgrpgvba. Ратвар благословляет вас Своей защитой.
-ent-MirrorShield = зеркальный щит
+ent-MirrorShield = зеркальный щит(ОФЫ, УСТАРЕЛО)
     .desc = Жутко светится красным... Вы слышите, как геометр шепчет...
 # Corvax-HiddenDesc-Start
-ent-EnergyShield = подозрительное устройство
+ent-EnergyShield = подозрительное устройство(ОФЫ, УСТАРЕЛО)
     .suffix = энергощит
     .desc = Небольшое дискообразное устройство с удобной рукоятью и кнопкой активации.
-ent-BrokenEnergyShield = сломанное подозрительное устройство
+ent-BrokenEnergyShield = сломанное подозрительное устройство(ОФЫ, УСТАРЕЛО)
     .suffix = сломанный энергощит
     .desc = Чтобы это ни было, оно больше не функционирует.
 # Corvax-HiddenDesc-End
-ent-TelescopicShield = телескопический щит
+ent-TelescopicShield = телескопический щит(ОФЫ, УСТАРЕЛО)
     .desc = Продвинутый щит на случай беспорядков, изготовлен из облегчённых материалов, способен складываться для удобства хранения.
+#SS220-marking-obsolete-officials'-shields-end

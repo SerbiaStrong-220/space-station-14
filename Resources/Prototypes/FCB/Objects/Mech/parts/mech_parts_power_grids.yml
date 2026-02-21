@@ -1,0 +1,60 @@
+- type: entity
+  parent: MechBatterySmall
+  id: MechBatterySmallNuclear
+  name: small-capacity nuclear power cell
+  description: A self rechargeable power cell, designed for fast recharge rate at the expense of capacity.
+  components:
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 250 # 10 seconds to recharge
+    autoRechargePause: false
+    autoRechargePauseTime: 30
+
+- type: entity
+  id: MechBatterySmall
+  parent: BaseMechPowerGrid
+  name: small-capacity mech battery
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Mech/mecha_equipment.rsi
+    state: mecha_clamp
+  - type: MechPart
+    slot: power
+    ownMass: 75
+    integrity: 75
+    maxIntegrity: 75
+    attachedSprite:
+      sprite: FCB/Objects/Mechs/batteries.rsi
+      state: small
+  - type: Battery
+    maxCharge: 15000
+    startingCharge: 15000
+    pricePerJoule: 0.15
+  - type: PowerCell
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 200
+    intensitySlope: 1.5
+  - type: SolutionContainerManager
+    solutions:
+      battery:
+        maxVol: 5
+  - type: Tag
+    tags:
+      - PowerCell
+  - type: Appearance
+  - type: PowerCellVisuals
+  - type: Riggable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 75
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: ["Destruction"]

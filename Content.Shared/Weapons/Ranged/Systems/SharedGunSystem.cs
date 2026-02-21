@@ -34,7 +34,7 @@ using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Shared.DoAfter;
-using Content.Shared.Hands.EntitySystems;
+using Content.Shared.FCB.AltBlocking;
 using Content.Shared.Standing;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
@@ -253,6 +253,14 @@ public abstract partial class SharedGunSystem : EntitySystem
             return false;
         }
         // ss220 add block heavy attack and shooting while user is down end
+
+        //FCB shield rework begin
+        if (TryComp<AltBlockingUserComponent>(user,out var blockComp) && blockComp.IsBlocking)
+        {
+            PopupSystem.PopupPredictedCursor(Loc.GetString("actively-blocking-attack"), user);
+            return false;
+        }
+        //FCB shield rework begin
 
         var toCoordinates = gun.ShootCoordinates;
 
@@ -529,6 +537,11 @@ public abstract partial class SharedGunSystem : EntitySystem
 
     protected void MuzzleFlash(EntityUid gun, AmmoComponent component, Angle worldAngle, EntityUid? user = null)
     {
+        //FCB shield rework begin
+        if (TryComp<AltBlockingUserComponent>(user,out var comp) && comp.IsBlocking)
+            return;
+        //FCB shield rework end
+
         var attemptEv = new GunMuzzleFlashAttemptEvent();
         RaiseLocalEvent(gun, ref attemptEv);
         if (attemptEv.Cancelled)

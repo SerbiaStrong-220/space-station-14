@@ -1,4 +1,5 @@
 using Content.Shared.Nutrition.Components;
+using Content.Shared.FCB.InstastunResist;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using JetBrains.Annotations;
@@ -59,6 +60,14 @@ namespace Content.Shared.Nutrition.EntitySystems
         private void OnCreamPiedHitBy(EntityUid uid, CreamPiedComponent creamPied, ThrowHitByEvent args)
         {
             if (!Exists(args.Thrown) || !TryComp(args.Thrown, out CreamPieComponent? creamPie)) return;
+
+            //FCB instastun resist begin
+            var resistEv = new StunAttemptEvent(StunSource.Creampie);
+            RaiseLocalEvent(uid, ref resistEv);
+
+            if (resistEv.stunCancelled)
+                return;
+            //FCB instastun resist end
 
             SetCreamPied(uid, creamPied, true);
 

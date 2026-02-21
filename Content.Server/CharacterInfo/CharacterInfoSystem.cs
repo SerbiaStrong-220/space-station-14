@@ -6,6 +6,7 @@ using Content.Shared.Mind;
 using Content.Shared.Objectives;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Objectives.Systems;
+using Content.Shared.FCB.Mech.Components;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Server.CharacterInfo;
@@ -48,6 +49,14 @@ public sealed class CharacterInfoSystem : EntitySystem
             // Get briefing
             briefing = _roles.MindGetBriefing(mindId);
         }
+
+        //FCB mech rework begin
+        if (TryComp<AltMechComponent>(entity, out var mechComp))
+        {
+            if (mechComp.PilotSlot.ContainedEntity != null)
+                entity = (EntityUid)mechComp.PilotSlot.ContainedEntity;
+        }
+        //FCB mech rework end
 
         RaiseNetworkEvent(new CharacterInfoEvent(GetNetEntity(entity), jobTitle, objectives, briefing), args.SenderSession);
     }

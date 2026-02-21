@@ -1,0 +1,730 @@
+- type: entity
+  name: base shield
+  parent: BaseItem
+  id: BaseShieldAlt
+  description: A shield!
+  abstract: true
+  components:
+    - type: Sprite
+      sprite: Objects/Weapons/Melee/shields.rsi
+      state: riot-icon
+    - type: Item
+      sprite: Objects/Weapons/Melee/shields.rsi
+      size: Ginormous
+      heldPrefix: riot
+    - type: AltBlocking
+    - type: InstastunResistOnActiveBlocking
+      resistedStunTypes:
+        - Creampie
+    - type: ArmorBlock
+      tresholddict:
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
+      durabilitytresholddict:
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
+      #Those damage types cannot be dealt to the shield and, logically, to the user
+    - type: Damageable
+      damageContainer: Shield
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 140
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+        - trigger:
+            !type:DamageTrigger
+            damage: 100 #This is probably enough damage before it breaks
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+            - !type:PlaySoundBehavior
+              sound:
+                collection: MetalBreak
+            - !type:SpawnEntitiesBehavior
+              spawn:
+                SheetSteel:
+                  min: 2
+                  max: 2
+                SheetGlass:
+                  min: 2
+                  max: 2
+    - type: StaticPrice
+      price: 100
+
+#Security Shields
+
+- type: entity
+  name: riot shield
+  parent: [ BaseShieldAlt, BaseSecurityContraband ]
+  id: RiotShieldAlt
+  description: A large tower shield made of strikeproof polymeres. It can be effectively used to block all types of attacks due to it's light weight but will not withstand anything more serious than melee attacks and primitive balistic projectiles. #SS220 shield rework
+  components:
+    - type: StaticPrice
+      price: 90
+    - type: AltBlocking
+      rangeBlockProb: 0.50
+      meleeBlockProb: 0.65
+      activeRangeBlockProb: 0.60
+      activeMeleeBlockProb: 0.75
+    - type: ArmorBlock
+      tresholddict:
+          Piercing: 6
+          Blunt: 20
+          Heat: 10
+          Slash: 15
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
+      durabilitytresholddict:
+          Piercing: 7
+          Blunt: 15
+          Heat: 7
+          Slash: 10
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
+
+- type: entity
+  name: laser shield
+  parent: [ BaseShieldAlt, BaseSecurityContraband ]
+  id: RiotLaserShieldAlt
+  description: Not even technically a shield but an advanced heat dissipation system. It is able to effectively reflect energy of high temperature energy bolts and lasers but is fairly useless against all mechanical attacks. #SS220 shield rework
+  components:
+    - type: Sprite
+      state: riot_laser-icon
+    - type: Item
+      heldPrefix: riot_laser
+    - type: AltBlocking
+      rangeBlockProb: 0.45
+      meleeBlockProb: 0.65
+      activeRangeBlockProb: 0.60
+      activeMeleeBlockProb: 0.75
+    - type: ArmorBlock
+      tresholddict:
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
+          Piercing: 7
+          Blunt: 10
+          Heat: 60
+          Slash: 7
+      durabilitytresholddict:
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
+          Piercing: 4
+          Blunt: 5
+          Heat: 35
+          Slash: 4
+
+- type: entity
+  name: ballistic shield
+  parent: [ BaseShieldAlt, BaseSecurityContraband ]
+  id: RiotBulletShieldAlt
+  description: A heavy shield made of depelted uranium and plasteel. It is very heavy and unhandy against melee hits but can withstand all but most powerful attacks. #SS220 shield rework
+  components:
+    - type: Sprite
+      state: riot_bullet-icon
+    - type: Item
+      heldPrefix: riot_bullet
+    - type: AltBlocking
+      rangeBlockProb: 0.40
+      meleeBlockProb: 0.33
+      activeRangeBlockProb: 0.65
+      activeMeleeBlockProb: 0.37
+    - type: ArmorBlock
+      tresholddict:
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
+          Piercing: 37
+          Blunt: 35
+          Heat: 30
+          Slash: 35
+      durabilitytresholddict:
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
+          Piercing: 30
+          Blunt: 30
+          Heat: 25
+          Slash: 30
+    - type: ClothingSpeedModifier
+      sprintModifier: 0.9
+    - type: HeldSpeedModifier
+      sprintModifier: 0.9
+
+
+#Craftable shields
+
+- type: entity
+  name: wooden buckler
+  parent: BaseShieldAlt
+  id: WoodenBucklerAlt
+  description: A small round wooden makeshift shield.
+  components:
+    - type: Sprite
+      state: buckler-icon
+    - type: Item
+      heldPrefix: buckler
+    - type: AltBlocking
+      rangeBlockProb: 0.40
+      meleeBlockProb: 0.60
+      activeRangeBlockProb: 0.50
+      activeMeleeBlockProb: 0.70
+    - type: ArmorBlock
+      tresholddict:
+          Piercing: 6
+          Slash: 15
+          Blunt: 20
+          Heat: 10
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
+      durabilitytresholddict:
+          Piercing: 5
+          Slash: 9
+          Blunt: 10
+          Heat: 5
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
+    - type: Construction
+      graph: WoodenBuckler
+      node: woodenBuckler
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 60
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+        - trigger:
+            !type:DamageTrigger
+            damage: 30 #Weaker shield
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+            - !type:PlaySoundBehavior
+              sound:
+                collection: WoodDestroy
+            - !type:SpawnEntitiesBehavior
+              spawn:
+                MaterialWoodPlank:
+                  min: 5
+                  max: 5
+    - type: StaticPrice
+      price: 150
+
+- type: entity
+  name: cardboard shield
+  parent: BaseShieldAlt
+  id: CardShieldAlt
+  description: A shield made of cardboard. It is a really bad idea to try using it to defend against anything.
+  components:
+    - type: Sprite
+      state: cardshield-icon
+    - type: Item
+      heldPrefix: cardshield
+    - type: AltBlocking
+      rangeBlockProb: 0.50
+      meleeBlockProb: 0.50
+      activeRangeBlockProb: 0.60
+      activeMeleeBlockProb: 0.65
+    - type: ArmorBlock
+      tresholddict:
+          Piercing: 1
+          Blunt: 1
+          Heat: 1
+          Caustic: 2
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+      durabilitytresholddict:
+          Piercing: 0
+          Blunt: 0
+          Heat: 0
+          Caustic: 2
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+    - type: Construction
+      graph: CardShield
+      node: cardShield
+    - type: Destructible
+      thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 5
+        behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+      - trigger:
+          !type:DamageTrigger
+          damage: 5 #Very very weak shield
+        behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+        - !type:PlaySoundBehavior
+          sound: /Audio/Items/Toys/ToyFall2.ogg
+        - !type:SpawnEntitiesBehavior
+          spawn:
+            MaterialCardboard:
+              min: 2
+              max: 4
+    - type: StaticPrice
+      price: 20
+
+- type: entity
+  name: makeshift shield
+  parent: BaseShieldAlt
+  id: MakeshiftShieldAlt
+  description: A rundown looking shield made of thin low quality steel plates.
+  components:
+    - type: Sprite
+      state: makeshift-icon
+    - type: Item
+      heldPrefix: metal
+    - type: AltBlocking
+      rangeBlockProb: 0.50
+      meleeBlockProb: 0.50
+      activeRangeBlockProb: 0.60
+      activeMeleeBlockProb: 0.65
+    - type: ArmorBlock
+      tresholddict:
+          Piercing: 6
+          Blunt: 20
+          Heat: 10
+          Slash: 15
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
+      durabilitytresholddict:
+          Piercing: 5
+          Blunt: 15
+          Heat: 7
+          Slash: 10
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
+    #SS220 shield rework end
+    - type: Construction
+      graph: MakeshiftShield
+      node: makeshiftShield
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 50
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+        - trigger:
+            !type:DamageTrigger
+            damage: 40 #Very weak shield
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+            - !type:PlaySoundBehavior
+              sound:
+                collection: MetalBreak
+            - !type:SpawnEntitiesBehavior
+              spawn:
+                SheetSteel:
+                  min: 1
+                  max: 2
+
+- type: entity
+  name: web shield
+  parent: BaseShieldAlt
+  id: WebShieldAlt
+  description: A stringy shield. It's more a decoration than an actual defence measure. #SS220 shield rework
+  components:
+    - type: Sprite
+      sprite: Objects/Weapons/Melee/web-shield.rsi
+      state: icon
+    - type: Item
+      sprite: Objects/Weapons/Melee/web-shield.rsi
+      heldPrefix: icon
+    - type: AltBlocking
+      rangeBlockProb: 0.50
+      meleeBlockProb: 0.50
+      activeRangeBlockProb: 0.60
+      activeMeleeBlockProb: 0.65
+    - type: ArmorBlock
+      tresholddict:
+          Piercing: 4
+          Blunt: 7
+          Heat: 7
+          Slash: 7
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
+      durabilitytresholddict:
+          Piercing: 4
+          Blunt: 4
+          Heat: 4
+          Slash: 4
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
+    - type: Construction
+      graph: WebObjects
+      node: shield
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 20
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+        - trigger:
+            !type:DamageTrigger
+            damage: 10
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+            - !type:SpawnEntitiesBehavior
+              spawn:
+                MaterialWebSilk:
+                  min: 1
+                  max: 1
+            - !type:PlaySoundBehavior
+              sound:
+                collection: WoodDestroy
+
+#Magic/Cult Shields (give these to wizard for now)
+
+- type: entity
+  name: clockwork shield
+  parent: BaseShieldAlt
+  id: ClockworkShieldAlt
+  description: Ratvar oyrffrf lbh jvgu uvf cebgrpgvba.
+  components:
+    - type: Sprite
+      state: ratvarian-icon
+    - type: Item
+      heldPrefix: ratvarian
+    - type: AltBlocking
+      rangeBlockProb: 0.30
+      meleeBlockProb: 0.55
+      activeRangeBlockProb: 0.40
+      activeMeleeBlockProb: 0.70
+    - type: ArmorBlock
+      tresholddict:
+          Piercing: 17
+          Blunt: 25
+          Heat: 25
+          Slash: 25
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
+      durabilitytresholddict:
+          Piercing: 12
+          Blunt: 20
+          Heat: 20
+          Slash: 20
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
+      #Have it break into brass when clock cult is is
+
+- type: entity
+  name: mirror shield
+  parent: [ BaseShieldAlt, BaseMagicalContraband ]
+  id: MirrorShieldAlt
+  description: Eerily glows red... you hear the geometer whispering
+  components:
+    - type: Sprite
+      state: mirror-icon
+    - type: Item
+      heldPrefix: mirror
+    - type: Reflect
+      reflectProb: 0.95
+      reflects:
+        - Energy
+    - type: AltBlocking
+      rangeBlockProb: 0.50
+      meleeBlockProb: 0.35
+      activeRangeBlockProb: 0.65
+      activeMeleeBlockProb: 0.45 #Mirror shield reflects heat/laser, but is relatively weak to everything else.
+      blockSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/glass_step.ogg
+    - type: ArmorBlock
+      tresholddict:
+          Piercing: 7
+          Blunt: 10
+          Heat: 60
+          Slash: 7
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
+      durabilitytresholddict:
+          Piercing: 4
+          Blunt: 5
+          Heat: 35
+          Slash: 4
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 40
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+            - !type:PlaySoundBehavior
+              sound:
+                collection: GlassBreak
+            - !type:SpawnEntitiesBehavior
+              spawn:
+                SheetGlass:
+                  min: 5
+                  max: 5
+
+
+- type: entity
+  name: energy shield
+  parent: [BaseItem]
+  id: EnergyShieldAlt
+  description: A piece of advanced tech made based on the technology used in the field shields. It is lightweight and can very effectively block any types of attacks. #SS220 shield rework
+  components:
+    - type: ItemToggle
+      soundActivate:
+        path: /Audio/Weapons/ebladeon.ogg
+      soundDeactivate:
+        path: /Audio/Weapons/ebladeoff.ogg
+    - type: ItemToggleActiveSound
+      activeSound:
+        path: /Audio/Weapons/ebladehum.ogg
+    - type: ItemToggleSize
+      activatedSize: Huge
+    - type: ComponentToggler
+      components:
+      - type: DisarmMalus
+        malus: 0.6
+    - type: Sprite
+      sprite: Objects/Weapons/Melee/e_shield.rsi
+      layers:
+        - state: eshield-icon
+        - state: eshield-on
+          color: "#FFFFFF"
+          visible: false
+          shader: unshaded
+          map: [ "shield" ]
+    - type: Item
+      size: Small
+      sprite: Objects/Weapons/Melee/e_shield.rsi
+      heldPrefix: eshield
+    - type: UseDelay
+      delay: 0.5
+    - type: ToggleableVisuals
+      spriteLayer: shield
+      inhandVisuals:
+        left:
+          - state: inhand-left-shield
+            shader: unshaded
+        right:
+          - state: inhand-right-shield
+            shader: unshaded
+    - type: PointLight
+      netsync: false
+      enabled: false
+      radius: 1.5
+      energy: 2
+      color: blue
+    - type: ItemTogglePointLight
+    - type: AltBlocking
+      rangeBlockProb: 0
+      meleeBlockProb: 0
+      activeRangeBlockProb: 0.50
+      activeMeleeBlockProb: 0.75
+    - type: ToggleBlockingChance
+      toggledRangeBlockProb: 0.40
+      toggledMeleeBlockProb: 0.65 #No more stunbatons
+    - type: Appearance
+    - type: ArmorBlock
+      tresholddict:
+        Piercing: 35
+        Blunt: 30
+        Heat: 26
+        Slash: 30
+        Radiation: 1000
+        Poison: 1000
+        Airloss: 1000
+        Caustic: 1000
+      #Blocks effectively anything station normally uses
+      durabilitytresholddict:
+        Piercing: 40
+        Blunt: 40
+        Heat: 40
+        Slash: 40
+        Radiation: 1000
+        Poison: 1000
+        Airloss: 1000
+        Caustic: 1000
+      #Practically impossible to destroy using only station's weapons
+    - type: Damageable
+      damageContainer: Shield
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 100
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+        - trigger:
+            !type:DamageTrigger
+            damage: 100
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+            - !type:PlaySoundBehavior
+              sound:
+                collection: GlassBreak
+            - !type:SpawnEntitiesBehavior
+              spawn:
+                BrokenEnergyShield:
+                  min: 1
+                  max: 1
+    - type: StaticPrice
+      price: 350
+
+- type: entity
+  name: broken energy shield
+  parent: BaseItem
+  id: BrokenEnergyShieldAlt
+  description: Something inside is burned out, it is no longer functional.
+  components:
+    - type: Sprite
+      sprite: Objects/Weapons/Melee/e_shield.rsi
+      state: eshield-icon
+    - type: Item
+      sprite: Objects/Weapons/Melee/e_shield.rsi
+      size: Small
+      heldPrefix: eshield
+
+- type: entity
+  name: telescopic shield
+  parent: BaseShieldAlt
+  id: TelescopicShieldAlt
+  description: An advanced riot shield made of lightweight materials that collapses for easy storage.
+  components:
+    - type: AltBlocking
+      rangeBlockProb: 0
+      meleeBlockProb: 0
+      activeRangeBlockProb: 0.60
+      activeMeleeBlockProb: 0.75
+    - type: ToggleBlockingChance
+      toggledRangeBlockProb: 0.50
+      toggledMeleeBlockProb: 0.65
+    - type: ArmorBlock
+      tresholddict:
+          Piercing: 15
+          Blunt: 20
+          Heat: 10
+          Slash: 15
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
+      durabilitytresholddict:
+          Piercing: 12
+          Blunt: 15
+          Heat: 7
+          Slash: 10
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
+    - type: ItemToggle
+      soundActivate:
+        path: /Audio/Weapons/telescopicon.ogg
+        params:
+          volume: -5
+      soundDeactivate:
+        path: /Audio/Weapons/telescopicoff.ogg
+        params:
+          volume: -5
+    - type: ComponentToggler
+      components:
+      - type: DisarmMalus
+        malus: 0.6
+    - type: ItemToggleSize
+      activatedSize: Huge
+    - type: Sprite
+      sprite: Objects/Weapons/Melee/teleriot_shield.rsi
+      layers:
+        - state: teleriot-icon
+        - state: teleriot-on
+          visible: false
+          map: [ "shield" ]
+    - type: Item
+      size: Small
+      sprite: Objects/Weapons/Melee/teleriot_shield.rsi
+      heldPrefix: teleriot
+    - type: UseDelay
+      delay: 0.5
+    - type: ToggleableVisuals
+      spriteLayer: shield
+      inhandVisuals:
+        left:
+          - state: inhand-left-shield
+        right:
+          - state: inhand-right-shield
+    - type: Appearance
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 100
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+        - trigger:
+            !type:DamageTrigger
+            damage: 70
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+            - !type:PlaySoundBehavior
+              sound:
+                collection: MetalGlassBreak
+            - !type:SpawnEntitiesBehavior
+              spawn:
+                SheetSteel:
+                  min: 1
+                  max: 1
+                SheetGlass:
+                  min: 2
+                  max: 2
+    - type: StaticPrice
+      price: 150

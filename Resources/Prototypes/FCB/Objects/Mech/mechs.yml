@@ -1,0 +1,188 @@
+- type: entity
+  parent: [BaseMob, StripableInventoryBase]
+  id: BaseAltMech
+  save: false
+  abstract: true
+  components:
+  - type: CombatMode
+  - type: NoSlip
+  - type: MechPart
+  - type: ComplexInteraction
+  - type: MobMover
+  - type: AltMech
+  - type: PowerCellDraw
+  - type: Blindable #For optics to work
+  - type: StatusEffects
+    allowed:
+    - Flashed
+  - type: PressureProtection #After some research i decided to get rid of MechAir as there will be basically no difference in game but larger amounts of work and space for bugs
+    highPressureMultiplier: 0.05
+    lowPressureMultiplier: 1000
+  - type: MobCollision
+    colliding: false
+    bufferAccumulator: 0
+    speedModifier: 0
+    minimumSpeedModifier: 0
+    strength: 0
+    fixtureId: ""
+  - type: DoAfter
+  - type: UserInterface
+    interfaces:
+      enum.MechUiKey.Key:
+        type: AltMechBoundUserInterface
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
+  - type: Puller
+    needsHands: false
+  - type: InputMover
+  - type: InteractionOutline
+  - type: ComplexRepairable
+    material: SheetSteel
+    materialRepairTreshold: 10.0
+    doAfterModifier: 3
+  - type: Inventory
+    templateId: mech
+  - type: TemperatureProtection
+    heatingCoefficient: 0.005
+    coolingCoefficient: 0.005
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 0
+    baseSprintSpeed: 0
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - FootstepSound
+  - type: Pullable
+  - type: Physics
+    bodyType: KinematicController
+  - type: GravityAffected
+  - type: Clickable
+  - type: WiresPanel
+  - type: HealthExaminable
+    examinableTypes:
+      - Blunt
+      - Slash
+      - Piercing
+      - Heat
+      - Shock
+    locPrefix: silicon
+  - type: Hands
+    showInHands: false
+    disableExplosionRecursion: true
+    canBeStripped: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.45
+        density: 1000
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Appearance
+  - type: IntrinsicRadioReceiver
+  - type: ActiveRadio
+  - type: ZombieImmune
+  - type: ContainerContainer
+    containers:
+      mech-pilot-slot: !type:ContainerSlot
+      mech-battery-slot: !type:ContainerSlot
+      mech-tank-slot: !type:ContainerSlot
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: FootstepModifier
+    footstepSoundCollection:
+      path: /Audio/Mecha/mechmove03.ogg
+  - type: GuideHelp
+    guides:
+    - Robotics
+  - type: VoiceInheritor #SS220 voice inheritor added
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: MechLoader
+  parent: BaseAltMech
+  name: Powerloader
+  description: Name is self-speaking - this is a powerloader frame which has limited equipment space, high mass, cannot be sealed and provides little to no protection to the user but is still better than nothing
+  components:
+  - type: Sprite
+    sprite: FCB/Objects/Mechs/cores.rsi
+    state: basicloader
+    noRot: true
+  - type: AltMech
+    baseState: basicloader
+    openState: basicloader
+    brokenState: basicloader
+    sealable: false
+    transparent: true
+    integrity: 250
+    maxIntegrity: 250
+    maximalArmMass: 250
+    ownMass: 250
+    pilotWhitelist:
+      components:
+        - HumanoidAppearance
+
+- type: entity
+  id: MechLight
+  parent: BaseAltMech
+  name: LEF-021
+  description: Versatile, light and still pretty cheap mech frame, LEF-021 is one of the most widely used mech frames in the TSF space
+  components:
+  - type: Sprite
+    sprite: FCB/Objects/Mechs/cores.rsi
+    state: basiclight
+    noRot: true
+  - type: AltMech
+    baseState: basiclight
+    openState: basiclight
+    brokenState: basiclight
+    integrity: 200
+    maxIntegrity: 200
+    ownMass: 150
+    maximalArmMass: 145
+    pilotWhitelist:
+      components:
+        - HumanoidAppearance
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: inventoryTemplate
+  id: mech
+  slots:
+  - name: belt
+    slotTexture: belt
+    fullTextureName: template_small
+    slotFlags: MECHOUTER
+    slotGroup: SecondHotbar
+    stripTime: 15
+    uiWindowPos: 1,0
+    strippingWindowPos: 0,0
+    offset: 0.0, 0.0
+    displayName: Belt

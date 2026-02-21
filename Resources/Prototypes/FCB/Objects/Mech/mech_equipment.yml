@@ -1,0 +1,8 @@
+- type: entity
+  id: MechEquipmentBase
+  parent: BaseItem
+  abstract: true
+  components:
+  - type: Item
+    size: Ginormous
+  - type: AltMechEquipment
