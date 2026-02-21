@@ -196,6 +196,7 @@
   id: ClothingShoesBootsLaceupSeniorService
   name: green laceup shoes
   description: For those who are truly ready for everything at once.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Shoes/Boots/senior_service_laceups.rsi

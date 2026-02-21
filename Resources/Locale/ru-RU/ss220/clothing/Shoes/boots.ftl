@@ -12,3 +12,4 @@ ent-ClothingShoesWandererBoots = сапоги странника
     .suffix = За емаг одеждомата
 ent-ClothingShoesBootsLaceupSeniorService = зелёные шнурованные туфли
     .desc = Для тех, кто действительно готов ко всему и сразу.
+    .suffix = За время в игре

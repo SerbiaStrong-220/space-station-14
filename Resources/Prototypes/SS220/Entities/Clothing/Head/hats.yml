@@ -241,6 +241,7 @@
   id: ClothingHeadHatBeretSeniorService
   name: service administrator beret
   description: By wearing it, owner confirms his dedication to profession, attention to detail and striving for excellence in service work.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Head/Hats/senior_service_beret.rsi

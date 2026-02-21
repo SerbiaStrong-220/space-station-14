@@ -163,6 +163,7 @@
   id: ClothingUniformJumpsuitSeniorServiceDelux
   name: senior service uniform
   description: Stylish and practical uniform, made for a master of his craft.
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/senior_service_delux.rsi
