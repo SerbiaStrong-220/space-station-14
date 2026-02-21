@@ -12,4 +12,4 @@ borg-slot-instruments-empty = инструменты
 borg-slot-beakers-empty = мензурки
 borg-slot-inflatable-door-empty = надувная дверь
 borg-slot-inflatable-wall-empty = надувная стена
-borg-slot-spray-painet-ammo-empty = cжатая краска
+borg-slot-spray-painter-ammo-empty = сжатая краска
