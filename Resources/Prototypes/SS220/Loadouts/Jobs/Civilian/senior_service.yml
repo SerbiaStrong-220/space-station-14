@@ -1,6 +1,6 @@
 # Job Time
 - type: loadoutEffectGroup
-  id: SeniorServiceTimeRequirement
+  id: SeniorServiceDelux
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
@@ -18,7 +18,7 @@
   id: HatBeretSeniorService
   effects:
   - !type:GroupLoadoutEffect
-    proto: SeniorServiceTimeRequirement
+    proto: SeniorServiceDelux
   equipment:
     head: ClothingHeadHatBeretSeniorService
 
@@ -37,7 +37,7 @@
   id: SeniorServiceJumpsuitDelux
   effects:
   - !type:GroupLoadoutEffect
-    proto: SeniorServiceTimeRequirement
+    proto: SeniorServiceDelux
   equipment:
     jumpsuit: ClothingUniformJumpsuitSeniorServiceDelux
 
@@ -51,6 +51,6 @@
   id: SeniorServiceBootsLaceup
   effects:
   - !type:GroupLoadoutEffect
-    proto: SeniorServiceTimeRequirement
+    proto: SeniorServiceDelux
   equipment:
     shoes: ClothingShoesBootsLaceupSeniorService
