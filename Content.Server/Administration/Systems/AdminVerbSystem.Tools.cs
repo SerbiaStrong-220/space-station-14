@@ -477,7 +477,7 @@ public sealed partial class AdminVerbSystem
         Verb renameAndRedescribe = new()
         {
             Text = Loc.GetString("admin-verbs-rename-and-redescribe"),
-            Category = VerbCategory.Tricks,
+            //Category = VerbCategory.Tricks, // ss220 move rename verb to global admin verbs
             Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/AdminActions/rename_and_redescribe.png")),
             Act = () =>
             {
