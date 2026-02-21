@@ -41,6 +41,19 @@
   - type: ToggleableClothing
     clothingPrototype: ClothingOuterHardsuitHightBlueshield
 
+# Ninja
+- type: entity
+  parent: ClothingBackpack
+  id: ClothingBackpackSpaceNinja
+  name: space ninja backpack
+  description: A space ninja's backpack.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Back/Backpacks/spaceninja.rsi
+  - type: Storage
+    grid:
+    - 0,0,6,4
+
  # Гамма ОБР
 
 - type: entity
