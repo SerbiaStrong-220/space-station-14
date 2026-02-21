@@ -32,7 +32,7 @@
       coefficients:
         Blunt: 0.70
         Slash: 0.70
-        Piercing: 0.70
+        Piercing: 0.80 #SS220 detective outer rebalance
         Heat: 0.80
   - type: ExplosionResistance
     damageCoefficient: 1 #its a coat. it doesnt do shit
