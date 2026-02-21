@@ -3,16 +3,11 @@
 using System.Text.RegularExpressions;
 using Content.Shared.Paper;
 using Content.Shared.SS220.Experience.Skill.Components;
-using Content.Shared.SS220.Experience.Systems;
-using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.Experience.Skill.Systems;
 
 public sealed class WritingSkillIssueSystem : SkillEntitySystem
 {
-    [Dependency] private readonly ExperienceSystem _experience = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-
     private static readonly string[] TagsForShuffling = { "bold", "italic", "bolditalic", "head=1", "head=2", "head=3" };
 
     private static readonly Regex TagsForShuffleRegex = new Regex(

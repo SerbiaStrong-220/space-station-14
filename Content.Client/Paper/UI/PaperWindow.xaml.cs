@@ -37,7 +37,7 @@ namespace Content.Client.Paper.UI
 
         private static Color DefaultTextColor = new(25, 25, 25);
 
-        private readonly ProtoId<SkillPrototype> _markupShowingSkill = "BureaucracyTrained";
+        private readonly ProtoId<SkillPrototype> _allMarkupShowingSkill = "BureaucracyTrained";
 
         // <summary>
         // Size of resize handles around the paper
@@ -54,6 +54,11 @@ namespace Content.Client.Paper.UI
         // If paper limits the size in one or both axes, it'll affect whether
         // we're able to resize this UI or not. Default to everything enabled:
         private DragMode _allowedResizeModes = ~DragMode.None;
+
+        private readonly Type[] _baseAllowedTags = new Type[] {
+            typeof(ColorTag),
+            typeof(LanguageMessageTag) // SS220 language
+        };
 
         private readonly Type[] _allowedTags = new Type[] {
             typeof(BoldItalicTag),
@@ -345,12 +350,11 @@ namespace Content.Client.Paper.UI
             _languageSystem.FindAndRequestNodeInfoForMarkups(msg.ToMarkup()); // SS220 languages
             WrittenTextLabel.RemoveAllChildren(); // SS220 Markups control on paper fix
             // SS220-bureaucracy-skill-begin
-            if (_player.LocalEntity is not null && !_experience.HaveSkill(_player.LocalEntity.Value, _markupShowingSkill))
-            {
-                msg = FormattedMessage.FromMarkupPermissive(FormattedMessage.RemoveMarkupPermissive(msg.ToMarkup()));
-            }
+            if (_player.LocalEntity is not null && !_experience.HaveSkill(_player.LocalEntity.Value, _allMarkupShowingSkill))
+                WrittenTextLabel.SetMessage(msg, _baseAllowedTags, DefaultTextColor);
+            else
+                WrittenTextLabel.SetMessage(msg, _allowedTags, DefaultTextColor);
             // SS220-bureaucracy-skill-end
-            WrittenTextLabel.SetMessage(msg, _allowedTags, DefaultTextColor);
 
             WrittenTextLabel.Visible = !isEditing && state.Text.Length > 0;
             BlankPaperIndicator.Visible = !isEditing && state.Text.Length == 0;
