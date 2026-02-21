@@ -161,8 +161,8 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitSeniorServiceDelux
-  name: униформа сервисного администратора
-  description: Надевая его, обладатель подтверждает свою преданность профессии, внимание к деталям и стремление к совершенству в работе сервиса.
+  name: senior service uniform
+  description: Stylish and practical uniform, made for a master of his craft.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpsuit/senior_service_delux.rsi
