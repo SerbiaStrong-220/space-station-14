@@ -17,6 +17,13 @@ namespace Content.Shared.Cargo.Components;
 [Access(typeof(SharedCargoSystem))]
 public sealed partial class CargoOrderConsoleComponent : Component
 {
+    //SS220-request-console-emagging begin
+    /// <summary>
+    /// Indicates whether entity has been emagged.
+    /// </summary>
+    public bool IsEmagged { get; set; } = false;
+    //SS220-request-console-emagging end
+
     /// <summary>
     /// The account that this console pulls from for ordering.
     /// </summary>
@@ -54,7 +61,9 @@ public sealed partial class CargoOrderConsoleComponent : Component
     public TimeSpan NextAccountActionTime;
 
     [ViewVariables]
-    public TimeSpan AccountActionDelay => TransferUnbounded ? UnboundedAccountActionDelay : BaseAccountActionDelay;
+    //SS220-request-console-emagging begin
+    public TimeSpan AccountActionDelay => (TransferUnbounded || IsEmagged) ? UnboundedAccountActionDelay : BaseAccountActionDelay;
+    //SS220-request-console-emagging end
 
     /// <summary>
     /// The minimum time between account actions when <see cref="TransferUnbounded"/> is false
