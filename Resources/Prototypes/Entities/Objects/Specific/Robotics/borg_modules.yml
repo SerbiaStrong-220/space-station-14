@@ -713,6 +713,15 @@
     - item: GasAnalyzer
     - item: HolofanProjectorBorg
     - item: GeigerCounter
+# SS220 Spray painter for borgs - START
+    - item: SprayPainter
+    - hand:
+        emptyRepresentative: SprayPainterAmmo
+        emptyLabel: borg-slot-spray-painet-ammo-empty
+        whitelist:
+          components:
+            - SprayPainterAmmo
+# SS220 Spray painter for borgs - END
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: rcd-module }
 
