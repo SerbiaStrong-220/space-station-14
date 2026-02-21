@@ -80,7 +80,7 @@ cargo-funding-alloc-console-label-save-fail = [bold]Разделение выр�
 cargo-acquisition-slip-body = [head=3]Детали актива[/head]
     { "[bold]Товар:[/bold]" } { $product }
     { "[bold]Описание:[/bold]" } { $description }
-    { "[bold]Цена за единицу:[/bold" }] ${ $unit }
+    { "[bold]Цена за единицу:[/bold]" } ${ $unit }
     { "[bold]Количество:[/bold]" } { $amount }
     { "[bold]Сумма:[/bold]" } ${ $cost }
     
