@@ -59,7 +59,7 @@
       - CentralCommand
       - CentralCommandCBURN
       - CentralCommandERT
-      - CentralCommandBSO
+      - CentralCommandSRT
       - CentralCommandDeathSquad
       #New centcomm accesses end
       #Ussp accesses begin

@@ -1,0 +1,11 @@
+- type: entity
+  id: ClothingShoesBootsBlueShieldJackFilled
+  parent:
+  - ClothingShoesBootsBlueShieldJack
+  - ClothingShoesBootsSecFilled
+
+- type: entity
+  id: ClothingShoesBootsWinterBSFilled
+  parent:
+  - ClothingShoesBootsWinterBS
+  - ClothingShoesBootsSecFilled

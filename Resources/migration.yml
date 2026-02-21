@@ -865,3 +865,16 @@ WarderobePrisonSecureFilled: WardrobePrisonSecureFilled
 BlueShieldGasMask: ClothingMaskGasBlueShield
 BlueShieldSWAT: ClothingMaskGasBlueShieldSWAT
 # ss220 tweak proto part 1 end
+
+# 2026-02-21 - SS220 Blueshield
+ClothingOuterHardsuitBlueshield: null
+BlueShieldSWAT: null
+
+CentcomOperativeBSOPDA: CentcomOperativeSRTPDA
+ClothingOuterBSOCoat: ClothingOuterSRTCoat
+AirlockCentcommLockedBSO: AirlockCentcommLockedSRT
+ClothingNeckScarfBSO: ClothingNeckScarfSRT
+HighSecCentcommLockedBSO: HighSecCentcommLockedSRT
+LockerBlueshieldOperativeFilled: LockerSRTOperativeFilled
+AirlockGlassCentcommLockedBlueShieldOperative: AirlockGlassCentcommLockedSRTOperative
+BlasterPowerCellPulse: PowerCellBlasterHighCapacity

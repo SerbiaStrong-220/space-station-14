@@ -11,8 +11,8 @@
   showInPda: false
 
 - type: accessLevel
-  id: CentralCommandBSO
-  name: id-card-access-level-central-command-bs-operative
+  id: CentralCommandSRT
+  name: id-card-access-level-central-command-srt-operative
   canBeSwitchableInReader: false #DoorElectronicsConfiguratorFix
   showInPda: false
 
@@ -28,6 +28,6 @@
   tags:
   - CentralCommand
   - CentralCommandDeathSquad
-  - CentralCommandBSO
+  - CentralCommandSRT
   - CentralCommandCBURN
   - CentralCommandERT

@@ -30,19 +30,6 @@
 
 - type: entity
   parent: ClothingMaskGasExplorer
-  id: ClothingMaskGasBlueShieldSWAT
-  name: blue SWAT mask
-  description: A neon-blue mask used to demoralize Greytide in the wild.
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Mask/blueshield_alt.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/Mask/blueshield_alt.rsi
-  - type: FlashImmunity
-  - type: EyeProtection
-
-- type: entity
-  parent: ClothingMaskGasExplorer
   id: ClothingMaskGasBlueShield
   name: blue shield gas mask
   description: An impeccable gas mask for Blue Shield officers. In addition to fire resistance, it also provides eye protection.
@@ -123,3 +110,18 @@
   - type: HideLayerClothing
     slots:
     - Hair
+
+- type: entity
+  parent: ClothingMaskBalaclava
+  id: ClothingMaskBalaclava2
+  name: balaclava
+  description: For privacy lovers. Before the first glance at the ID.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Mask/balaclava_2.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Mask/balaclava_2.rsi
+  - type: TemperatureProtection
+    heatingCoefficient: 1.1
+    coolingCoefficient: 0.9
+
