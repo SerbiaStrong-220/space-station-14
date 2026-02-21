@@ -13,6 +13,7 @@ using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Shared.SS220.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Reflect;
 using Content.Shared.Damage.Components;
 using Robust.Shared.Audio;
@@ -76,6 +77,19 @@ public sealed partial class GunSystem : SharedGunSystem
                 return;
             }
         }
+        // SS220 Gun variety begin
+        AmmoGunModifierComponent? currentModifier = null;
+        foreach (var (ent, _) in ammo)
+        {
+            if (ent != null && TryComp<AmmoGunModifierComponent>(ent, out var modifierComp))
+            {
+                currentModifier = modifierComp;
+                break;
+            }
+        }
+        RefreshModifiers((gunUid, gun), currentModifier);
+
+        // SS220 Gun variety end
 
         var fromMap = TransformSystem.ToMapCoordinates(fromCoordinates);
         var toMap = TransformSystem.ToMapCoordinates(toCoordinates).Position;

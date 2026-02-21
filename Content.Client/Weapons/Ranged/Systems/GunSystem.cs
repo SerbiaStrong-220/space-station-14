@@ -9,6 +9,7 @@ using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Shared.SS220.Weapons.Ranged.Components;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -221,6 +222,19 @@ public sealed partial class GunSystem : SharedGunSystem
         // This also means any ammo specific stuff can be grabbed as necessary.
         var direction = TransformSystem.ToMapCoordinates(fromCoordinates).Position - TransformSystem.ToMapCoordinates(toCoordinates).Position;
         var worldAngle = direction.ToAngle().Opposite();
+
+        // SS220 Gun variety begin
+        AmmoGunModifierComponent? currentModifier = null;
+        foreach (var (ent, _) in ammo)
+        {
+            if (ent != null && TryComp<AmmoGunModifierComponent>(ent, out var modifierComp))
+            {
+                currentModifier = modifierComp;
+                break;
+            }
+        }
+        RefreshModifiers((gunUid, gun), currentModifier);
+        // SS220 Gun variety end
 
         foreach (var (ent, shootable) in ammo)
         {
