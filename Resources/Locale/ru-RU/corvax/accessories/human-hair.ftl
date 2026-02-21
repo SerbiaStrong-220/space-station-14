@@ -86,6 +86,6 @@ marking-TajaranHairVictory = Победоносная причёска
 marking-TajaranHairShaggy = Лохматая причёска
 marking-TajaranHairMohawk = Ирокез
 marking-TajaranHairBangs = Чёлка
-marking-TajaranHairMessy = Растрепанная причёска
+marking-TajaranHairMessy = Растрёпанная причёска
 marking-TajaranHairStraight = Прямые волосы
 marking-TajaranHairLong = Длинные волосы
