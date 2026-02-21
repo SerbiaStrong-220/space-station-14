@@ -11,6 +11,7 @@
   ## Древа навыков
 
   ### Общие
+  <SkillTreePrototypeShower SKillTreeId="ExtravehicularActivity"/>
   <SkillTreePrototypeShower SKillTreeId="Bureaucracy"/>
   <SkillTreePrototypeShower SKillTreeId="CombatTraining"/>
   <SkillTreePrototypeShower SKillTreeId="PhysicalTraining"/>
