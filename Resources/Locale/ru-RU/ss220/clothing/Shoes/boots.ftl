@@ -10,3 +10,6 @@ ent-ClothingShoesColorDarkBrown = тёмно-коричневые туфли
 ent-ClothingShoesWandererBoots = сапоги странника
     .desc = Если, обернувшись назад, ты видишь свое будущее, значит ты все сделал правильно...
     .suffix = За емаг одеждомата
+ent-ClothingShoesBootsLaceupSeniorService = зелёные шнурованные туфли
+    .desc = Для тех, кто действительно готов ко всему и сразу.
+    .suffix = За время в игре

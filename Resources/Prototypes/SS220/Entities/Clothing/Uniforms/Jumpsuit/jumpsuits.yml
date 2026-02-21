@@ -28,7 +28,7 @@
 
   # Главный врач
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformFoldableBase] 
+  parent: [ClothingUniformBase, ClothingUniformFoldableBase]
   id: ClothingUniformJumpsuitCMOCorporate
   name: corporate CMO Jumpsuit
   description: «A beautiful, stylish suit of a real chief medical officer. It emphasises the person's nature and the beauty of his charisma...» Nothing further on the unopened label.
@@ -158,6 +158,17 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/senior_service.rsi
 
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitSeniorServiceDelux
+  name: senior service uniform
+  description: Stylish and practical uniform, made for a master of his craft.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/senior_service_delux.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/senior_service_delux.rsi
 
   # Клоун
 - type: entity

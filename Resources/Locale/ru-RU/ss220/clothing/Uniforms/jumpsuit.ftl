@@ -57,3 +57,7 @@ ent-ClothingUniformWastelandSuit = комбинезон пустоши
 
 ent-ClothingUniformJumpsuitCMOTurtle = водолазка главного врача
     .desc = Это комбинезон, носимый теми, у кого есть опыт работы на должности главного врача. Он обеспечивает слабую биологическую защиту.
+
+ent-ClothingUniformJumpsuitSeniorServiceDelux = униформа сервисного администратора
+    .desc = Стильная и практичная униформа, сделанная на заказ для мастера своего дела.
+    .suffix = За время в игре
