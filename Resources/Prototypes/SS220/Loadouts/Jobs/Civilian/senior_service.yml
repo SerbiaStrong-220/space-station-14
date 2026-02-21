@@ -6,7 +6,7 @@
     requirement:
       !type:RoleTimeRequirement
       role: JobSeniorService
-      time: 3600000 # 100 hrs
+      time: 360000 # 100 hrs
 
 # Head
 - type: loadout
