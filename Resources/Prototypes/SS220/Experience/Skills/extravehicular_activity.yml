@@ -13,6 +13,7 @@
   - type: WeightlessChangingReadySkill
     hardsuitFallChance:  0.7
     withoutHardsuitFallChance: 1
+    vomitChance: 1
   - type: WeightlessDoAfterSkill
     durationScale: 1.5
 
@@ -31,6 +32,7 @@
   - type: WeightlessChangingReadySkill
     hardsuitFallChance:  0.3
     withoutHardsuitFallChance: 0.5
+    vomitChance: 0.5
   - type: WeightlessDoAfterSkill
     durationScale: 1.25
 
@@ -47,6 +49,7 @@
   - type: WeightlessChangingReadySkill
     hardsuitFallChance:  0.1
     withoutHardsuitFallChance: 0.2
+    vomitChance: 0.2
     weightlessAcceleration: 1.2
     weightlessFriction: 1.1
     weightlessModifier: 1.1
@@ -70,6 +73,7 @@
   - type: WeightlessChangingReadySkill
     hardsuitFallChance:  0
     withoutHardsuitFallChance: 0.1
+    vomitChance: 0
     weightlessAcceleration: 1.4
     weightlessFriction: 1.2
     weightlessModifier: 1.2

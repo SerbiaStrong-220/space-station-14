@@ -17,6 +17,7 @@
     - id: MimicVendorRule
     - id: MouseMigration
     - id: PowerGridCheck
+    - id: GravityGeneratorAnomaly # SS220-add-gravity-anomaly
     - id: RandomSentience
     - id: SlimesSpawn
     - id: SolarFlare

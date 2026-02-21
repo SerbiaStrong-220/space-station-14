@@ -4,6 +4,7 @@ using Content.Shared.Clothing;
 using Content.Shared.Gravity;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
+using Content.Shared.Medical;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.SS220.Experience.Skill.Components;
@@ -20,6 +21,7 @@ public sealed class WeightlessChangingReadySkillSystem : SkillEntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private readonly VomitSystem _vomit = default!;
 
     private const string HardSuitInventorySlot = "outerClothing";
 
@@ -51,14 +53,27 @@ public sealed class WeightlessChangingReadySkillSystem : SkillEntitySystem
         if (!ResolveExperienceEntityFromSkillEntity(entity, out var experienceEntity))
             return;
 
-        if (args.Weightless || entity.Comp.MagbootsActive)
+        var hardsuitEquipped = _inventory.TryGetSlotEntity(experienceEntity.Value.Owner, HardSuitInventorySlot, out var outerClothingEntity)
+                               && _tag.HasAnyTag(outerClothingEntity.Value, entity.Comp.HardsuitTags);
+
+        if (args.Weightless)
+        {
+            if (hardsuitEquipped)
+                return;
+
+            var predictedRandomForVomit = GetPredictedRandomOnCurTick(new() { GetNetEntity(entity).Id });
+
+            if (predictedRandomForVomit.Prob(entity.Comp.VomitChance))
+                _vomit.Vomit(experienceEntity.Value);
+
             return;
+        }
+        else if (entity.Comp.MagbootsActive)
+        {
+            return;
+        }
 
-        var chance = _inventory.TryGetSlotEntity(experienceEntity.Value.Owner, HardSuitInventorySlot, out var outerClothingEntity)
-                        && _tag.HasAnyTag(outerClothingEntity.Value, entity.Comp.HardsuitTags)
-                        ? entity.Comp.HardsuitFallChance
-                        : entity.Comp.WithoutHardsuitFallChance;
-
+        var chance = hardsuitEquipped ? entity.Comp.HardsuitFallChance : entity.Comp.WithoutHardsuitFallChance;
         var predictedRandom = GetPredictedRandomOnCurTick(new() { GetNetEntity(entity).Id });
 
         if (!predictedRandom.Prob(chance))
