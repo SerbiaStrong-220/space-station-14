@@ -57,4 +57,25 @@ public sealed partial class BallisticAmmoProviderComponent : Component
     /// </summary>
     [DataField]
     public TimeSpan FillDelay = TimeSpan.FromSeconds(0.4); // 0.5->0.4 220 ammoFillFix
+
+    // SS220 gun variety begin
+
+    /// <summary>
+    /// Is the firearm currently cycled?
+    /// It cannot fire if is it not cycled.
+    /// Must be manually cycled if it is not cycled.
+    /// </summary>
+    [DataField]
+    [AutoNetworkedField]
+    public bool? Cycled = true;
+    public bool IsCycled => Cycled != false;
+
+    /// <summary>
+    /// Automatically cycles the firearm after firing a round
+    /// Basically, is ammo ejected after each shot, or not.
+    /// </summary>
+    [DataField]
+    [AutoNetworkedField]
+    public bool AutoCycle = true;
+    // SS220 gun variety end
 }
