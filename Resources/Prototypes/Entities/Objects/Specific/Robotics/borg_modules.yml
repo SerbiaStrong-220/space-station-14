@@ -717,7 +717,7 @@
     - item: SprayPainter
     - hand:
         emptyRepresentative: SprayPainterAmmo
-        emptyLabel: borg-slot-spray-painet-ammo-empty
+        emptyLabel: borg-slot-spray-painter-ammo-empty
         whitelist:
           components:
             - SprayPainterAmmo
