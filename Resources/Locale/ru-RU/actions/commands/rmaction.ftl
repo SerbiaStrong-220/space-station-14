@@ -1,5 +1,5 @@
 # rmaction
-cmd-rmaction-desc = Удалить действие у сущности.
+cmd-rmaction-desc = Удаляет действие у сущности.
 cmd-rmaction-help = rmaction <EntityUid> <ActionUid>
 cmd-rmaction-invalid-args = Ожидается ровно 2 аргумента.
 cmd-rmaction-actions-not-found = Целевая сущность не может использовать действия.

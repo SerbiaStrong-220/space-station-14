@@ -1,4 +1,4 @@
-roles-antag-generic-solo-antagonist-name = Соло-антагонист
+﻿roles-antag-generic-solo-antagonist-name = Соло-антагонист
 roles-antag-generic-free-agent-name = Свободный агент
 roles-antag-generic-team-antagonist-name = Командный антагонист
 roles-antag-generic-silicon-antagonist-name = Синтетик антагонист
@@ -26,3 +26,7 @@ roles-antag-thief-name = Вор
 roles-antag-thief-objective = Пополните свою личную коллекцию имуществом Nanotrasen, не прибегая к насилию.
 roles-antag-dragon-name = Космический дракон
 roles-antag-dragon-objective = Создайте армию карпов для захвата квадранта.
+roles-antag-mothership-core-name = Ядро ксеноборгов
+roles-antag-mothership-core-objective = Используйте своих ксеноборгов, чтобы создать ещё больше ксеноборгов.
+roles-antag-xenoborg-name = Ксеноборг
+roles-antag-xenoborg-objective = Помогите материнскому кораблю создать больше ксеноборгов.

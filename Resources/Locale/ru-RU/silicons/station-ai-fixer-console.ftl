@@ -1,4 +1,4 @@
-# System
+﻿# System
 station-ai-fixer-console-is-locked = Консоль заблокирована.
 station-ai-fixer-console-station-ai-holder-required = В консоль можно вставить только контейнеры хранения ИИ.
 station-ai-fixer-console-examination-station-ai-holder-present = В консоль вставлен [color=cyan]{ $holder }[/color].

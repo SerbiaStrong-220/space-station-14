@@ -1,34 +1,32 @@
 trait-blindness-name = Слепота
 trait-blindness-desc = Вы совершенно слепы и не можете видеть дальше нескольких метров перед собой.
-trait-narcolepsy-name = Нарколепсия
 trait-poor-vision-name = Близорукость
 trait-poor-vision-desc = Ваши глаза уже не те, что раньше, и вы с трудом видите предметы вдали без корректирующих очков.
-trait-narcolepsy-desc = Вас одолевают приступы сонливости
+trait-narcolepsy-name = Нарколепсия
+trait-narcolepsy-desc = Вас одолевают приступы сонливости.
 trait-pacifist-name = Пацифист
 trait-pacifist-desc = Вы не можете нападать и причинять вред живым существам.
-permanent-blindness-trait-examined = [color=lightblue]{ CAPITALIZE(POSS-PRONOUN($target)) } глаза остекленелые и расфокусированные. Не похоже, что { SUBJECT($target) } может хорошо вас видеть, если может вообще.[/color]
+permanent-blindness-trait-examined = [color=lightblue]{ CAPITALIZE(POSS-ADJ($target)) } глаза остекленелые и расфокусированные. Не похоже, что { SUBJECT($target) } может хорошо вас видеть, если может вообще.[/color]
 trait-lightweight-name = Быстрое опьянение
-trait-lightweight-desc = Алкоголь оказывает на вас более сильное воздействие
+trait-lightweight-desc = Алкоголь сильнее воздействует на вас.
+trait-monochromacy-name = Монохромазия
+trait-monochromacy-desc = Вы полный дальтоник, всё, что вы видите, сводится к оттенкам от чёрного до белого.
 trait-muted-name = Немота
-trait-muted-desc = Вы не можете говорить
+trait-muted-desc = Вы не можете говорить.
 trait-paracusia-name = Паракузия
+trait-paracusia-desc = Вы слышите звуки, которых на самом деле нет.
 trait-unrevivable-name = Невозрождаемость
 trait-unrevivable-desc = Вас невозможно оживить при помощи дефибриллятора.
-trait-paracusia-desc = Вы слышите звуки, которых на самом деле нет
-trait-uncloneable-name = Неклонируемость
-trait-uncloneable-desc = Вас невозможно клонировать
 trait-pirate-accent-name = Пиратский акцент
 trait-pirate-accent-desc = Вы не можете перестать говорить как пират!
-trait-archaic-accent-name = Архаичный акцент
-trait-archaic-accent-desc = Вы выражаетесь с акцентом, который многим кажется архаичным.
 trait-accentless-name = Отсутствие акцента
 trait-accentless-desc = У вас нет того акцента, который характерен для представителей вашего вида.
-trait-wheelchair-bound-name = Привязанность к креслу-коляске
-trait-wheelchair-bound-desc = Вы не можете передвигаться без своего кресла-коляски. Кресло-коляска прилагается.
 trait-frontal-lisp-name = Сигматизм
 trait-frontal-lisp-desc = У ваф имеютшя проблемы ш произношением.
+# SS220-slavic-accent-start
 trait-slavic-accent-name = Старославянский акцент
 trait-slavic-accent-desc = Доколе можно новые словечки выдумывать?
+# SS220-slavic-accent-end
 trait-socialanxiety-name = Заикание
 trait-socialanxiety-desc = Вы заикаетесь.
 trait-southern-name = Диалект юга США
@@ -49,5 +47,7 @@ trait-spanish-name = Испанский акцент
 trait-spanish-desc = Hola señor, как пройти в la biblioteca.
 trait-painnumbness-name = Невосприимчивость к боли
 trait-painnumbness-desc = Вы не чувствуете боли и не осознаёте, насколько вы ранены.
-trait-monochromacy-name = Монохромазия
-trait-monochromacy-desc = Вы полный дальтоник, всё, что вы видите, сводится к оттенкам от чёрного до белого.
+trait-hemophilia-name = Гемофилия
+trait-hemophilia-desc = Ваш организм не справляется со свёртыванием крови.
+trait-impaired-mobility-name = Нарушение подвижности
+trait-impaired-mobility-desc = Вам тяжело передвигаться без посторонней помощи.

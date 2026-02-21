@@ -1,4 +1,4 @@
-## General stuff
+﻿## General stuff
 
 ui-options-title = Игровые настройки
 ui-options-tab-accessibility = Доступность
@@ -47,7 +47,7 @@ ui-options-interface-label = Интерфейс
 
 ui-options-auto-fill-highlights = Автозаполнение подсветки информацией персонажа
 ui-options-highlights-color = Цвет подсветки:
-ui-options-highlights-color-example = Это подсвеченный текст!
+ui-options-highlights-color-example = Это подсвеченный текст.
 ui-options-show-held-item = Показать удерживаемый элемент рядом с курсором
 ui-options-show-combat-mode-indicators = Показать индикатор боевого режима рядом с курсором
 ui-options-opaque-storage-window = Непрозрачность окна хранилища
@@ -215,6 +215,11 @@ ui-options-function-editor-copy-object = Копировать
 ui-options-function-show-debug-console = Открыть консоль
 ui-options-function-show-debug-monitors = Показать дебаг информацию
 ui-options-function-inspect-entity = Изучить сущность
+ui-options-function-inspect-entity-tooltip = Открыть меню ViewVariables сущности, над которой находится курсор.
+ui-options-function-inspect-server-component = Изучить серверный компонент
+ui-options-function-inspect-server-component-tooltip = Открыть меню ViewVariables для сущности под курсором, используя серверный компонент, заданный командой "quickinspect".
+ui-options-function-inspect-client-component = Изучить клиентский компонент
+ui-options-function-inspect-client-component-tooltip = Открыть меню ViewVariables для сущности под курсором, используя клиентский компонент, заданный командой "quickinspect".
 ui-options-function-hide-ui = Спрятать интерфейс
 ui-options-function-hotbar1 = Слот хотбара 1
 ui-options-function-hotbar2 = Слот хотбара 2
