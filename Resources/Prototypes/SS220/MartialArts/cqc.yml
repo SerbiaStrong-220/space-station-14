@@ -1,0 +1,79 @@
+- type: martialArt
+  id: CloseQuartersCombat
+  name: martial-art-cqc
+  grabDelayCoefficient: 0.5
+  effects:
+  - !type:DisarmChanceMartialArtEffect
+    chance: 0.5
+    toHand: true
+  - !type:LegSweepMartialArtEffect
+    bonusDamageTargetUp: 10
+    knockdownTime: 1
+  - !type:BonusDamageMartialArtEffect
+    bonusDamageTargetUp: 7
+    bonusDamageTargetDown: 5
+  sequences:
+  - name: martial-art-cqc-slam
+    steps: [ Grab, Harm ]
+    entry:
+      conditions:
+      - !type:IsDownCombatCondition
+        invert: true
+      effects:
+      - !type:ApplyDamageCombatEffect
+        damage:
+          types:
+            Blunt: 10
+      - !type:KnockdownCombatEffect
+        time: 12
+  - name: martial-art-cqc-kick
+    steps: [ Harm, Harm ]
+    entry:
+      effects:
+      - !type:ThrowTargetCombatEffect
+        distance: 1
+      entries:
+      - conditions:
+        - !type:IsStaminaCriticalCombatCondition
+        effects:
+        - !type:KnockdownCombatEffect
+          time: 10
+          refresh: false
+      - conditions:
+        - !type:IsDownCombatCondition
+        effects:
+        - !type:ApplyDamageCombatEffect
+          damage:
+            types:
+              Blunt: 10
+        - !type:ApplyStaminaCombatEffect
+          damage: 45
+          ignoreResist: true
+  - name: martial-art-cqc-restrain
+    steps: [ Grab, Grab ]
+    entry:
+      effects:
+      - !type:StunTargetCombatEffect
+        time: 10
+      - !type:ApplyStaminaCombatEffect
+        damage: 20
+        ignoreResist: true
+  - name: martial-art-cqc-pressure
+    steps: [ Push, Grab ]
+    entry:
+      effects:
+      - !type:ApplyStaminaCombatEffect
+        damage: 60
+        ignoreResist: true
+  - name: martial-art-cqc-consequtive-cqc
+    steps: [ Push, Push, Harm ]
+    entry:
+      effects:
+      - !type:ApplyStaminaCombatEffect
+        damage: 50
+        ignoreResist: true
+      - !type:ApplyDamageCombatEffect
+        damage:
+          types:
+            Blunt: 25
+      - !type:StealHeldItemCombatEffect

@@ -436,6 +436,22 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         DirtyField(weaponUid, weapon, nameof(MeleeWeaponComponent.NextAttack));
 
         // Do this AFTER attack so it doesn't spam every tick
+
+        // SS220-Extend Weapon Logic-Start
+        var userEv = new AttemptMeleeUserEvent(weaponUid);
+        RaiseLocalEvent(user, ref userEv);
+
+        if (userEv.Cancelled)
+        {
+            if (userEv.Message != null)
+            {
+                PopupSystem.PopupClient(userEv.Message, weaponUid, user);
+            }
+
+            return false;
+        }
+        // SS220-Extend Weapon Logic-End
+
         var ev = new AttemptMeleeEvent();
         RaiseLocalEvent(weaponUid, ref ev);
 
@@ -520,6 +536,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             var missEvent = new MeleeHitEvent(new List<EntityUid>(), user, meleeUid, damage, null);
             RaiseLocalEvent(meleeUid, missEvent);
             _meleeSound.PlaySwingSound(user, meleeUid, component);
+            RaiseLocalEvent(user, new LightAttackPerformedEvent(null, meleeUid, GetCoordinates(ev.Coordinates))); // SS220-MartialArts
             return;
         }
 
@@ -590,6 +607,8 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         {
             DoDamageEffect(targets, user, targetXform);
         }
+
+        RaiseLocalEvent(user, new LightAttackPerformedEvent(target.Value, meleeUid, targetXform.Coordinates)); // SS220-MartialArts
     }
 
     protected abstract void DoDamageEffect(List<EntityUid> targets, EntityUid? user,  TransformComponent targetXform);
@@ -853,6 +872,12 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             chance += malus.Malus;
         }
 
+        // SS220-Extended Weapon Logic-Start
+        var ev = new DisarmChanceModifierEvent(chance);
+        RaiseLocalEvent(disarmer, ev);
+        chance = ev.BaseChance + ev.Bonus;
+        // SS220-Extended Weapon Logic-End
+
         return Math.Clamp(chance, 0f, 1f);
     }
 
@@ -915,6 +940,11 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         if (attemptEvent.Cancelled)
             return false;
+
+        // SS220-MartialArts-Begin
+        // i'm struggling where to put this block, i hope it will fit here
+        RaiseLocalEvent(user, new DisarmAttackPerformedEvent(target.Value, Transform(target.Value).Coordinates));
+        // SS220-MartialArts-End
 
         var chance = CalculateDisarmChance(user, target.Value, inTargetHand, combatMode);
 

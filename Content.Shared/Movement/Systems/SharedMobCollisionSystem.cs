@@ -249,7 +249,7 @@ public abstract class SharedMobCollisionSystem : EntitySystem
                 continue;
             }
 
-            var targetEv = new AttemptMobTargetCollideEvent();
+            var targetEv = new AttemptMobTargetCollideEvent { User = entity.Owner }; // SS220-ExtendCollideLogic
             RaiseLocalEvent(other, ref targetEv);
 
             if (targetEv.Cancelled)
@@ -335,5 +335,6 @@ public record struct AttemptMobCollideEvent
 [ByRefEvent]
 public record struct AttemptMobTargetCollideEvent
 {
+    public EntityUid User; // SS220-ExtendCollideLogic
     public bool Cancelled;
 }

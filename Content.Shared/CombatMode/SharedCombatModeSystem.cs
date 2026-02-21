@@ -14,6 +14,7 @@ public abstract class SharedCombatModeSystem : EntitySystem
     [Dependency] private   readonly SharedActionsSystem _actionsSystem = default!;
     [Dependency] private   readonly SharedPopupSystem _popup = default!;
     [Dependency] private   readonly SharedMindSystem  _mind = default!;
+    [Dependency] private   readonly SharedMouseRotatorSystem _mouseRotator = default!; // SS220-Grabs
 
     public override void Initialize()
     {
@@ -34,7 +35,7 @@ public abstract class SharedCombatModeSystem : EntitySystem
     {
         _actionsSystem.RemoveAction(uid, component.CombatToggleActionEntity);
 
-        SetMouseRotatorComponents(uid, false);
+        _mouseRotator.SetEnabled(uid, false); // SS220-Grabs
     }
 
     private void OnActionPerform(EntityUid uid, CombatModeComponent component, ToggleCombatActionEvent args)
@@ -80,21 +81,7 @@ public abstract class SharedCombatModeSystem : EntitySystem
         if (!component.ToggleMouseRotator || IsNpc(entity) && !_mind.TryGetMind(entity, out _, out _))
             return;
 
-        SetMouseRotatorComponents(entity, value);
-    }
-
-    private void SetMouseRotatorComponents(EntityUid uid, bool value)
-    {
-        if (value)
-        {
-            EnsureComp<MouseRotatorComponent>(uid);
-            EnsureComp<NoRotateOnMoveComponent>(uid);
-        }
-        else
-        {
-            RemComp<MouseRotatorComponent>(uid);
-            RemComp<NoRotateOnMoveComponent>(uid);
-        }
+        _mouseRotator.SetEnabled(entity, value); // SS220-Grabs
     }
 
     // todo: When we stop making fucking garbage abstract shared components, remove this shit too.

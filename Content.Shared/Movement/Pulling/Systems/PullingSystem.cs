@@ -25,6 +25,7 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Pulling.Events;
 using Content.Shared.SS220.Cart.Components;
+using Content.Shared.SS220.Grab;
 using Content.Shared.Standing;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Melee;
@@ -65,6 +66,7 @@ public sealed class PullingSystem : EntitySystem
     [Dependency] private readonly HeldSpeedModifierSystem _clothingMoveSpeed = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedVirtualItemSystem _virtual = default!;
+    [Dependency] private readonly GrabSystem _grab = default!; // SS220-Grabs
 
     static readonly Color СolorCaptureEffect = Color.Yellow; // SS220-MIT-pull-visualization
 
@@ -453,14 +455,14 @@ public sealed class PullingSystem : EntitySystem
         TryStopPull(pullerComp.Pulling.Value, pullableComp, user: player);
     }
 
-    public bool CanPull(EntityUid puller, EntityUid pullableUid, PullerComponent? pullerComp = null)
+    public bool CanPull(EntityUid puller, EntityUid pullableUid, PullerComponent? pullerComp = null, bool ignoreHands = false) // SS220-Grabs | Add ignoreHands arg
     {
         if (!Resolve(puller, ref pullerComp, false))
         {
             return false;
         }
 
-        if (pullerComp.NeedsHands
+        if (!ignoreHands && pullerComp.NeedsHands // SS220-Grabs | new ignoreHands arg
             && !_handsSystem.TryGetEmptyHand(puller, out _)
             && pullerComp.Pulling == null)
         {
@@ -491,6 +493,13 @@ public sealed class PullingSystem : EntitySystem
         {
             return false;
         }
+
+        // SS220-PullingCooldown-Start
+        if (_timing.CurTime < pullerComp.LastPullAt + pullerComp.PullCooldown)
+        {
+            return false;
+        }
+        // SS220-PullingCooldown-End
 
         var getPulled = new BeingPulledAttemptEvent(puller, pullableUid);
         RaiseLocalEvent(pullableUid, getPulled, true);
@@ -532,7 +541,7 @@ public sealed class PullingSystem : EntitySystem
         if (pullerComp.Pulling == pullableUid)
             return true;
 
-        if (!CanPull(pullerUid, pullableUid))
+        if (!CanPull(pullerUid, pullableUid, ignoreHands: _combatMode.IsInCombatMode(pullerUid))) // SS220-Grabs
             return false;
 
         if (!TryComp(pullerUid, out PhysicsComponent? pullerPhysics) || !TryComp(pullableUid, out PhysicsComponent? pullablePhysics))
@@ -567,7 +576,17 @@ public sealed class PullingSystem : EntitySystem
 
         // Pulling confirmed
 
+        pullerComp.LastPullAt = _timing.CurTime; // SS220-PullingCooldown
+
         _interaction.DoContactInteraction(pullableUid, pullerUid);
+
+        // SS220-Grabs-Start
+        if (_combatMode.IsInCombatMode(pullerUid) && _grab.CanGrab(pullerUid, pullableUid, checkCanPull: false))
+        {
+            // Grab logic confirmed
+            return _grab.TryDoGrab(pullerUid, pullableUid);
+        }
+        // SS220-Grabs-End
 
         // Use net entity so it's consistent across client and server.
         pullableComp.PullJointId = $"pull-joint-{GetNetEntity(pullableUid)}";

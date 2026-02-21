@@ -865,3 +865,7 @@ WarderobePrisonSecureFilled: WardrobePrisonSecureFilled
 BlueShieldGasMask: ClothingMaskGasBlueShield
 BlueShieldSWAT: ClothingMaskGasBlueShieldSWAT
 # ss220 tweak proto part 1 end
+
+# 2026-02-15 - SS220 new cqc
+cqc_nonlethal: CQCManual
+cqc_lethal: CQCManual
