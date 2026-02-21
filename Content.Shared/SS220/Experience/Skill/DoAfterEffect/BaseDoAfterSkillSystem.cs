@@ -79,7 +79,7 @@ public abstract partial class BaseDoAfterSkillSystem<TComp, TEvent> : SkillEntit
         args.ShouldCancel = true;
 
         if (entity.Comp.FullBlockPopup is not null)
-            _popup.PopupClient(Loc.GetString(entity.Comp.FullBlockPopup), args.Args.User);
+            _popup.PopupEntity(Loc.GetString(entity.Comp.FullBlockPopup), args.Args.Target ?? args.Args.User, args.Args.User, PopupType.SmallCaution);
     }
 
     protected virtual bool SkillEffect(Entity<TComp> entity, in DoAfterArgs args)
@@ -102,7 +102,7 @@ public abstract partial class BaseDoAfterSkillSystem<TComp, TEvent> : SkillEntit
         args.Cancel = true;
 
         if (entity.Comp.FailurePopup is not null)
-            _popup.PopupEntity(Loc.GetString(entity.Comp.FailurePopup), args.Args.User, args.Args.User, PopupType.SmallCaution);
+            _popup.PopupEntity(Loc.GetString(entity.Comp.FailurePopup), args.Args.Target ?? args.Args.User, args.Args.User, PopupType.SmallCaution);
     }
 
     private bool TryGetLearningProgressInfo<T>(Entity<T?> entity, ProtoId<SkillTreePrototype>? treeId, [NotNullWhen(true)] out LearningInformation? learningInformation) where T : BaseLearningOnDoAfterWithComponent

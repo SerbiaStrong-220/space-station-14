@@ -9,6 +9,7 @@
 #Ninja Gear
 - type: startingGear
   id: SpaceNinjaGear
+  experienceDefinition: NinjaRoleExperience
   equipment:
     jumpsuit: ClothingUniformJumpsuitNinja
     back: ClothingBackpackSatchel
