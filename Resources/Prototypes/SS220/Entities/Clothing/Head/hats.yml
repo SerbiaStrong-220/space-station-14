@@ -231,7 +231,27 @@
     tags:
     - ClothMade
     - Ian # SS220 Shapochki
+    - PetWearable
+    - CorgiWearable
     - HamsterWearable
+    - WhitelistChameleon
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatBeretSeniorService
+  name: service administrator beret
+  description: By wearing it, owner confirms his dedication to profession, attention to detail and striving for excellence in service work.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/senior_service_beret.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/senior_service_beret.rsi
+  - type: Tag
+    tags:
+    - ClothMade
+    - Ian # SS220 Shapochki
+    - PetWearable
+    - CorgiWearable
     - WhitelistChameleon
 
   # Повар
@@ -583,6 +603,8 @@
     tags:
     - ClothMade
     - Ian # SS220 Shapochki
+    - PetWearable
+    - CorgiWearable
     - HamsterWearable
   #ss220 special_sounds start
   - type: SpecialSounds

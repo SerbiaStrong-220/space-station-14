@@ -35,7 +35,6 @@
 - type: startingGear
   id: SeniorAssistantGear
   equipment:
-    shoes: ClothingShoesColorBrown
     id: SeniorServicePDA
     belt: BoxFolderClipboard
     ears: ClothingHeadsetService
