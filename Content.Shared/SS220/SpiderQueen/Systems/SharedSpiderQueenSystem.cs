@@ -10,6 +10,9 @@ using Content.Shared.Rounding;
 using Content.Shared.SS220.SpiderQueen.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
+using Content.Server.SS220.SpiderQueen.Systems.SpiderQueenInterfaceSystem;
+using Content.Shared.SS220.GhostHearing;
+using Robust.Shared.Player;
 
 namespace Content.Shared.SS220.SpiderQueen.Systems;
 
@@ -22,6 +25,7 @@ public abstract class SharedSpiderQueenSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly AlertsSystem _alerts = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {
@@ -31,6 +35,8 @@ public abstract class SharedSpiderQueenSystem : EntitySystem
         SubscribeLocalEvent<SpiderQueenComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<SpiderQueenComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<SpiderQueenComponent, SpiderCocooningActionEvent>(OnCocooningAction);
+
+        SubscribeLocalEvent<SpiderQueenComponent, SpiderOpenSpawnMenuAction>(OnSpawnMenuOpen);
     }
 
     private void OnStartup(Entity<SpiderQueenComponent> entity, ref ComponentStartup args)
@@ -54,6 +60,20 @@ public abstract class SharedSpiderQueenSystem : EntitySystem
             args.PushMarkup(Loc.GetString("spider-queen-blood-points-amount",
                 ("current", entity.Comp.CurrentBloodPoints.Int()), ("max", entity.Comp.MaxBloodPoints.Int())));
         }
+    }
+
+    private void OnSpawnMenuOpen(Entity<SpiderQueenComponent> entity, ref SpiderOpenSpawnMenuAction args)
+    {
+        if (!TryComp<ActorComponent>(entity.Owner, out var actorComponent))
+            return;
+
+        if (!_ui.IsUiOpen(entity.Owner, SpiderQueenSpawnKey.Key))
+        {
+            _ui.OpenUi(entity.Owner, SpiderQueenSpawnKey.Key, actorComponent.PlayerSession);
+            return;
+        }
+
+        _ui.CloseUi(entity.Owner, SpiderQueenSpawnKey.Key);
     }
 
     private void OnCocooningAction(Entity<SpiderQueenComponent> entity, ref SpiderCocooningActionEvent args)
