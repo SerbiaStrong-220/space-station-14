@@ -34,7 +34,7 @@
   equipment:
 #    eyes: ClothingEyesGlassesSecurity #SS220-TwoOne-Floppa-Iteration
     id: WardenPDA
-    ears: ClothingHeadsetSecurity
+    ears: ClothingHeadsetAltSecurityNonCom #SS220 staminaweapons
 #    belt: ClothingBeltSecurityFilled #SS220-FreedomHoSCap
     pocket1: WeaponPistolMk58Nonlethal #SS220-DeleteSecurityLetal
   storage:

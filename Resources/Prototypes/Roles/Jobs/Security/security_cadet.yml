@@ -31,7 +31,7 @@
     shoes: ClothingShoesBootsJackFilled
     outerClothing: ClothingOuterArmorBasic
     id: SecurityCadetPDA
-    ears: ClothingHeadsetSecurity
+    ears: ClothingHeadsetAltSecurityNonCom #SS220 staminaweapons
     head: ClothingHeadHelmetBasic
     belt: ClothingBeltSecurityFilled
     pocket1: WeaponPistolMk58Nonlethal # SS220 Bring-Rubber-Back

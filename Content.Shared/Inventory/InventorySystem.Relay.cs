@@ -24,6 +24,7 @@ using Content.Shared.Projectiles;
 using Content.Shared.Radio;
 using Content.Shared.Slippery;
 using Content.Shared.SS220.StaminaConvertArmor;
+using Content.Shared.SS220.DelayedKnockdown;
 using Content.Shared.Standing;
 using Content.Shared.Strip.Components;
 using Content.Shared.Temperature;
@@ -64,6 +65,7 @@ public partial class InventorySystem
         // by-ref events
         SubscribeLocalEvent<InventoryComponent, RefreshFrictionModifiersEvent>(RefRelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, BeforeStaminaDamageEvent>(RefRelayInventoryEvent);
+        SubscribeLocalEvent<InventoryComponent, BeforeDelayedKnockdownEvent>(RefRelayInventoryEvent); //ss220 edit
         //ss220 add electricity armor start
         SubscribeLocalEvent<InventoryComponent, BeforeStatusEffectAddedRelayEvent>(RefRelayInventoryEvent);
         //ss220 add electricity armor end

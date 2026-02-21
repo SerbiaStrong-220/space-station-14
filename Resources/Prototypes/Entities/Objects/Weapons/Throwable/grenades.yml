@@ -95,7 +95,6 @@
     keysIn:
     - timer
     range: 7
-    stun: true # 220 flash grenade stun
   - type: EmitSoundOnTrigger
     keysIn:
     - timer
@@ -122,6 +121,12 @@
     tags:
     - HandGrenade
     - GrenadeFlashBang
+  - type: DeafeningOnTrigger #SS220 staminaweapons
+    keysIn:
+    - timer
+    range: 7
+    knockdownTime: 7
+    stunTime: 2
 
 - type: entity
   id: GrenadeFlashEffect

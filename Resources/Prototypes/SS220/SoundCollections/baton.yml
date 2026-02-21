@@ -5,3 +5,10 @@
   files:
   - /Audio/SS220/Weapons/telescopichka/bonk-sound-effect.ogg
   - /Audio/SS220/Weapons/telescopichka/woodhit.ogg
+
+- type: soundCollection
+  id: ClassicBatonCriticalHit
+  files:
+  - /Audio/SS220/Effects/genhit1.ogg
+  - /Audio/SS220/Effects/genhit2.ogg
+  - /Audio/SS220/Effects/genhit3.ogg

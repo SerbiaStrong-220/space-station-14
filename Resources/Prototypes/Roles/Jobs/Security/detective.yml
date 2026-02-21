@@ -31,8 +31,9 @@
   id: DetectiveGear
   equipment:
     id: DetectivePDA
-    ears: ClothingHeadsetSecurity
+    ears: ClothingHeadsetAltSecurityNonCom #SS220 staminaweapons
     # neck: ClothingBeltHolsterFilled #SS220 Shoulder holster is now selectable in loadout
+    belt: Classicbaton #SS220 staminaweapons
   storage:
     back:
     - Flash

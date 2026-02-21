@@ -120,3 +120,18 @@
     sprite: SS220/Clothing/Ears/Headsets/blueshield.rsi
   - type: Clothing
     sprite: SS220/Clothing/Ears/Headsets/blueshield.rsi
+
+- type: entity
+  parent: ClothingHeadsetAlt
+  id: ClothingHeadsetAltSecurityNonCom #for officers and cadets due to "Staminaweapons but balanced"
+  name: security's over-ear headset
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeySecurity
+      - EncryptionKeyCommon
+  - type: Sprite
+    sprite: Clothing/Ears/Headsets/security.rsi
+  - type: Clothing
+    sprite: Clothing/Ears/Headsets/security.rsi
