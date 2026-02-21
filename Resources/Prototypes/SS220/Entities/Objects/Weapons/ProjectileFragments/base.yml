@@ -1,0 +1,15 @@
+- type: entity
+  id: BaseProjectileFragment
+  name: fragment
+  parent: BaseItem
+  abstract: true
+  components:
+  - type: Sprite
+    # TODO
+    sprite: Objects/Materials/shards.rsi
+    state: metal-1
+  - type: Item
+    size: Tiny
+  - type: Tag
+    tags:
+    - Trash

@@ -4,6 +4,10 @@
   parent: BaseBullet
   categories: [ HideSpawnMenu ]
   components:
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    weighedRandomProviderEntity: PistolCaliberFragment
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:
@@ -26,6 +30,11 @@
   name: bullet (.35 auto incendiary)
   categories: [ HideSpawnMenu ]
   components:
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.3
+    weighedRandomProviderEntity: PistolCaliberFragment
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:
@@ -38,6 +47,11 @@
   name: bullet (.35 auto uranium)
   categories: [ HideSpawnMenu ]
   components:
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.3
+    weighedRandomProviderEntity: PistolCaliberFragment
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:

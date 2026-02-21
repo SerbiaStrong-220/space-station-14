@@ -4,6 +4,10 @@
   parent: BaseBullet
   categories: [ HideSpawnMenu ]
   components:
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    weighedRandomProviderEntity: HeavyCaliberFragment
+  # SS220-add-projectile-wounds-begin
   - type: Projectile
     damage:
       types:
@@ -26,6 +30,11 @@
   name: bullet (.30 rifle incendiary)
   categories: [ HideSpawnMenu ]
   components:
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    weighedRandomProviderEntity: HeavyCaliberFragment
+    chanceToApply: 0.3
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:
@@ -38,6 +47,11 @@
   name: bullet (.30 rifle uranium)
   categories: [ HideSpawnMenu ]
   components:
+  # SS220-add-projectile-wounds-begin
+  - type: PathologyOnProjectileHit
+    weighedRandomProviderEntity: HeavyCaliberFragment
+    chanceToApply: 0.3
+  # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
       types:

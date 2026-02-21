@@ -1,0 +1,55 @@
+- type: weightedRandomEntity
+  id: LightCaliberFragment
+  weights:
+    FragmentLightLarge: 10
+    FragmentLightMedium: 4
+    FragmentLightSmall: 1
+
+- type: weightedRandomEntity
+  id: MediumCaliberFragment
+  weights:
+    FragmentLightLarge: 8
+    FragmentLightMedium: 6
+    FragmentLightSmall: 2
+
+- type: weightedRandomEntity
+  id: HeavyCaliberFragment
+  weights:
+    FragmentHeavyLarge: 6
+    FragmentHeavyMedium: 6
+    FragmentHeavySmall: 3
+
+- type: weightedRandomEntity
+  id: PistolCaliberFragment
+  weights:
+    FragmentPistolLarge: 8
+    FragmentPistolMedium: 6
+    FragmentPistolSmall: 2
+
+- type: weightedRandomEntity
+  id: 45ACPCaliberFragment
+  weights:
+    Fragment45ACPLarge: 6
+    Fragment45ACPMedium: 6
+    Fragment45ACPSmall: 3
+
+- type: weightedRandomEntity
+  id: LargeHeavyCaliberFragment
+  weights:
+    FragmentLargeHeavyLarge: 10
+    FragmentLargeHeavyMedium: 6
+    FragmentLargeHeavySmall: 2
+
+- type: weightedRandomEntity
+  id: LargeAntiMaterialCaliberFragment
+  weights:
+    FragmentAntiMaterielLarge: 10
+    FragmentAntiMaterielMedium: 4
+    FragmentAntiMaterielSmall: 1
+
+# non bullet
+
+- type: weightedRandomEntity
+  id: PelletFragment
+  weights:
+    FragmentPellet: 1

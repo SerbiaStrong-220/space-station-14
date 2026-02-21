@@ -1,0 +1,16 @@
+- type: emote
+  id: BloodCough
+  name: chat-emote-name-blood-cough
+  icon: Interface/Emotes/cough.png
+  category: Vocal
+  whitelist:
+    components:
+    - Vocal
+    - BloodStream
+  blacklist:
+    components:
+    - BorgChassis
+    - PAI # SS220 borg emotes to PAI
+    tags:
+    - SiliconEmotes
+  chatMessages: ["chat-emote-msg-blood-cough"]

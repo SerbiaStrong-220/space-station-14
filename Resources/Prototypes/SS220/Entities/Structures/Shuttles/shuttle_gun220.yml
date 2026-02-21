@@ -326,6 +326,9 @@
   - type: StaminaDamageOnCollide
     damage: 50
     ignoreResistance: true
+  - type: PathologyOnProjectileHit
+    chanceToApply: 0.9
+    weighedRandomProviderEntity: LargeHeavyCaliberFragment
   - type: Projectile
     damage:
       types:
