@@ -11,7 +11,14 @@
       "name": "icon"
     },
     {
+      "name": "icon_tie"
+    },
+    {
       "name": "equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "tie-equipped-INNERCLOTHING",
       "directions": 4
     },
     {
@@ -28,3 +35,7 @@
     }
   ]
 }
+
+
+
+
