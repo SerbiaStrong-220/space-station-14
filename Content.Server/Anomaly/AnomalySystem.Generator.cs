@@ -1,15 +1,22 @@
+using System.Linq;
+using System.Numerics;
 using Content.Server.Anomaly.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Shared.Anomaly;
 using Content.Shared.CCVar;
+using Content.Shared.Destructible.Thresholds;
+using Content.Shared.Emag.Systems;
 using Content.Shared.Materials;
 using Content.Shared.Radio;
 using Robust.Shared.Audio;
 using Content.Shared.Physics;
+using Content.Shared.Pinpointer;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Content.Shared.Power;
+using Content.Shared.SS220.Anomaly;
+using Robust.Shared.Map;
 
 namespace Content.Server.Anomaly;
 
@@ -23,6 +30,8 @@ public sealed partial class AnomalySystem
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
+    [Dependency] private readonly EmagSystem _emag = default!;
+
     private void InitializeGenerator()
     {
         SubscribeLocalEvent<AnomalyGeneratorComponent, BoundUIOpenedEvent>(OnGeneratorBUIOpened);
@@ -30,6 +39,11 @@ public sealed partial class AnomalySystem
         SubscribeLocalEvent<AnomalyGeneratorComponent, AnomalyGeneratorGenerateButtonPressedEvent>(OnGenerateButtonPressed);
         SubscribeLocalEvent<AnomalyGeneratorComponent, PowerChangedEvent>(OnGeneratorPowerChanged);
         SubscribeLocalEvent<GeneratingAnomalyGeneratorComponent, ComponentStartup>(OnGeneratingStartup);
+
+        //ss220 add anomaly place start
+        SubscribeLocalEvent<AnomalyGeneratorComponent, GotEmaggedEvent>(OnGotEmagged);
+        SubscribeLocalEvent<AnomalyGeneratorComponent, AnomalyGeneratorChooseAnomalyPlaceMessage>(OnChoosePlaceMessage);
+        //ss220 add anomaly place end
     }
 
     private void OnGeneratorPowerChanged(EntityUid uid, AnomalyGeneratorComponent component, ref PowerChangedEvent args)
@@ -39,7 +53,8 @@ public sealed partial class AnomalySystem
 
     private void OnGeneratorBUIOpened(EntityUid uid, AnomalyGeneratorComponent component, BoundUIOpenedEvent args)
     {
-        UpdateGeneratorUi(uid, component);
+
+        UpdateGeneratorUi(uid, component, args.Actor);  //ss220 add anomaly place
     }
 
     private void OnGeneratorMaterialAmountChanged(EntityUid uid, AnomalyGeneratorComponent component, ref MaterialAmountChangedEvent args)
@@ -52,12 +67,40 @@ public sealed partial class AnomalySystem
         TryGeneratorCreateAnomaly(uid, component);
     }
 
-    public void UpdateGeneratorUi(EntityUid uid, AnomalyGeneratorComponent component)
+    public void UpdateGeneratorUi(EntityUid uid, AnomalyGeneratorComponent component, EntityUid? user = null)  //ss220 add anomaly place start
     {
         var materialAmount = _material.GetMaterialAmount(uid, component.RequiredMaterial);
 
         var state = new AnomalyGeneratorUserInterfaceState(component.CooldownEndTime, materialAmount, component.MaterialPerAnomaly);
         _ui.SetUiState(uid, AnomalyGeneratorUiKey.Key, state);
+
+        //ss220 add anomaly place start
+        if (component.EmaggedUser != null && user != null && component.EmaggedUser.Value == user.Value)
+        {
+            List<AnomalyGeneratorEmagStruct> beacons = [];
+
+            var beaconsQuery = EntityQueryEnumerator<NavMapBeaconComponent>();
+
+            while (beaconsQuery.MoveNext(out var beacon, out var comp))
+            {
+                if (_station.GetOwningStation(beacon) != _station.GetOwningStation(uid))
+                    continue;
+
+                var name = comp.DefaultText is null ? MetaData(beacon).EntityName : Loc.GetString(comp.DefaultText);
+
+                var beaconStruct = new AnomalyGeneratorEmagStruct
+                {
+                    Beacon = GetNetEntity(beacon),
+                    Name = name,
+                };
+
+                beacons.Add(beaconStruct);
+            }
+
+            var emaggedMessage = new AnomalyGeneratorEmaggedEventMessage(beacons);
+            _ui.ServerSendUiMessage(uid, AnomalyGeneratorUiKey.Key, emaggedMessage, user.Value);
+        }
+        //ss220 add anomaly place end
     }
 
     public void TryGeneratorCreateAnomaly(EntityUid uid, AnomalyGeneratorComponent? component = null)
@@ -93,70 +136,122 @@ public sealed partial class AnomalySystem
 
         for (var i = 0; i < 25; i++)
         {
-            var randomX = Random.Next((int) gridBounds.Left, (int) gridBounds.Right);
-            var randomY = Random.Next((int) gridBounds.Bottom, (int)gridBounds.Top);
+            //ss220 add anomaly place start
+            var randomX = Random.Next((int)gridBounds.Left, (int)gridBounds.Right);
+            var randomY = Random.Next((int)gridBounds.Bottom, (int)gridBounds.Top);
 
             var tile = new Vector2i(randomX, randomY);
 
-            // no air-blocked areas.
-            if (_atmosphere.IsTileSpace(grid, xform.MapUid, tile) ||
-                _atmosphere.IsTileAirBlocked(grid, tile, mapGridComp: gridComp))
+            if (TryFindValidSpawn(grid, gridComp, tile, out var coords))
             {
-                continue;
+                Spawn(toSpawn, coords);
+                return;
             }
-
-            // don't spawn inside of solid objects
-            var physQuery = GetEntityQuery<PhysicsComponent>();
-            var valid = true;
-
-            // TODO: This should be using static lookup.
-            foreach (var ent in _mapSystem.GetAnchoredEntities(grid, gridComp, tile))
-            {
-                if (!physQuery.TryGetComponent(ent, out var body))
-                    continue;
-                if (body.BodyType != BodyType.Static ||
-                    !body.Hard ||
-                    (body.CollisionLayer & (int) CollisionGroup.Impassable) == 0)
-                    continue;
-
-                valid = false;
-                break;
-            }
-            if (!valid)
-                continue;
-
-            var pos = _mapSystem.GridTileToLocal(grid, gridComp, tile);
-            var mapPos = _transform.ToMapCoordinates(pos);
-            // don't spawn in AntiAnomalyZones
-            var antiAnomalyZonesQueue = AllEntityQuery<AntiAnomalyZoneComponent, TransformComponent>();
-            while (antiAnomalyZonesQueue.MoveNext(out _, out var zone, out var antiXform))
-            {
-                if (antiXform.MapID != mapPos.MapId)
-                    continue;
-
-                var antiCoordinates = _transform.GetWorldPosition(antiXform);
-
-                var delta = antiCoordinates - mapPos.Position;
-                if (delta.LengthSquared() < zone.ZoneRadius * zone.ZoneRadius)
-                {
-                    valid = false;
-                    break;
-                }
-            }
-            if (!valid)
-                continue;
-
-            targetCoords = pos;
-            break;
+            //ss220 add anomaly place end
         }
 
         Spawn(toSpawn, targetCoords);
     }
 
+    //ss220 add anomaly place start
+    public void SpawnNearBeacon(EntityUid beaconUid, string toSpawn, MinMax dist)
+    {
+        var beaconXform = Transform(beaconUid);
+        var pos = beaconXform.Coordinates;
+
+        var gridUid = beaconXform.GridUid;
+        if (gridUid is null || !TryComp<MapGridComponent>(gridUid.Value, out var grid))
+            return;
+
+        for (var i = 0; i < 25; i++)
+        {
+            var point = (pos.Position + Random.NextAngle().ToVec() * dist.Next(Random)).Floored();
+            var tile = new Vector2i(point.X, point.Y);
+
+            if (TryFindValidSpawn(gridUid.Value, grid, tile, out var coords))
+            {
+                Spawn(toSpawn, coords);
+                return;
+            }
+        }
+
+        SpawnOnRandomGridLocation(gridUid.Value, toSpawn);
+    }
+
+    private bool TryFindValidSpawn(EntityUid grid, MapGridComponent gridComp, Vector2i tile, out EntityCoordinates target)
+    {
+        target = default;
+
+        var xform = Transform(grid);
+
+        // no air-blocked areas.
+        if (_atmosphere.IsTileSpace(grid, gridComp.Owner, tile) ||
+            _atmosphere.IsTileAirBlocked(grid, tile, mapGridComp: gridComp))
+        {
+            return false;
+        }
+
+        // don't spawn inside of solid objects
+        var physQuery = GetEntityQuery<PhysicsComponent>();
+        foreach (var ent in _mapSystem.GetAnchoredEntities(grid, gridComp, tile))
+        {
+            if (!physQuery.TryGetComponent(ent, out var body))
+                continue;
+
+            if (body.BodyType == BodyType.Static &&
+                body.Hard &&
+                (body.CollisionLayer & (int)CollisionGroup.Impassable) != 0)
+            {
+                return false;
+            }
+        }
+
+        var localPos = _mapSystem.GridTileToLocal(grid, gridComp, tile);
+        var mapPos = _transform.ToMapCoordinates(localPos);
+
+        // AntiAnomaly zones
+        var query = AllEntityQuery<AntiAnomalyZoneComponent, TransformComponent>();
+        while (query.MoveNext(out _, out var zone, out var antiXform))
+        {
+            if (antiXform.MapID != mapPos.MapId)
+                continue;
+
+            var zonePos = _transform.GetWorldPosition(antiXform);
+            if ((zonePos - mapPos.Position).LengthSquared() < zone.ZoneRadius * zone.ZoneRadius)
+                return false;
+        }
+
+        target = localPos;
+        return true;
+    }
+    //ss220 add anomaly place end
+
     private void OnGeneratingStartup(EntityUid uid, GeneratingAnomalyGeneratorComponent component, ComponentStartup args)
     {
         Appearance.SetData(uid, AnomalyGeneratorVisuals.Generating, true);
     }
+
+    //ss220 add anomaly place start
+    private void OnGotEmagged(Entity<AnomalyGeneratorComponent> ent, ref GotEmaggedEvent args)
+    {
+        if (args.Type != EmagType.Interaction)
+            return;
+
+        ent.Comp.EmaggedUser = args.UserUid;
+        args.Handled = true;
+    }
+
+    private void OnChoosePlaceMessage(Entity<AnomalyGeneratorComponent> ent, ref AnomalyGeneratorChooseAnomalyPlaceMessage args)
+    {
+        var beacon = GetEntity(args.Beacon);
+
+        if (TerminatingOrDeleted(beacon))
+            return;
+
+        ent.Comp.ChosenBeacon = beacon;
+        TryGeneratorCreateAnomaly(ent.Owner, ent.Comp);
+    }
+    //ss220 add anomaly place end
 
     private void OnGeneratingFinished(EntityUid uid, AnomalyGeneratorComponent component)
     {
@@ -170,7 +265,14 @@ public sealed partial class AnomalySystem
             grid = xform.GridUid.Value;
         }
 
-        SpawnOnRandomGridLocation(grid, component.SpawnerPrototype);
+        //ss220 add anomaly place start
+        if (component is { EmaggedUser: not null, ChosenBeacon: not null })
+            SpawnNearBeacon(component.ChosenBeacon.Value, component.SpawnerPrototype, component.EmaggedDistance);
+        else
+            SpawnOnRandomGridLocation(grid, component.SpawnerPrototype);
+
+        component.EmaggedUser = null;
+        //ss220 add anomaly place end
         RemComp<GeneratingAnomalyGeneratorComponent>(uid);
         Appearance.SetData(uid, AnomalyGeneratorVisuals.Generating, false);
         Audio.PlayPvs(component.GeneratingFinishedSound, uid);
