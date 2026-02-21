@@ -11,7 +11,10 @@
     - id: MedkitAdvancedFilled
     - id: ExpensiveLighterShield
     - id: ClothingHeadHelmetTactical
-    - id: BlueShieldGasMask
+    - id: RubberStampBlueShield
+    - id: JetpackMiniBlueFilled
+    - id: ExpensiveLighterShield
+    - id: ClothingMaskGasBlueShield
     - id: RubberStampBlueShield
     - id: JetpackMiniBlueFilled
     - id: PinpointerCrew

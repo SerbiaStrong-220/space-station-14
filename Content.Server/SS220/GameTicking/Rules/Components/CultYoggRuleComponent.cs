@@ -54,14 +54,14 @@ public sealed partial class CultYoggRuleComponent : Component
     public SoundSpecifier BroadcastSound = new SoundPathSpecifier("/Audio/Misc/notice1.ogg");
     #endregion
 
-    #region Sacraficial
+    #region Sacrificial
     /// <summary>
     /// General requirements
     /// </summary>
-    public readonly ProtoId<DepartmentPrototype> SacraficialDepartament = "Command";
+    public readonly ProtoId<DepartmentPrototype> SacrificialDepartament = "Command";
 
     /// <summary>
-    /// Check for an endgame screen title
+    /// Shows how many sacrifices were made
     /// </summary>
     [DataField]
     public int AmountOfSacrifices = 0;
@@ -94,12 +94,6 @@ public sealed partial class CultYoggRuleComponent : Component
     [DataField]
     public ProtoId<NpcFactionPrototype> CultYoggFaction = "CultYogg";
 
-    /// <summary>
-    /// Variables required to make new cultists
-    /// </summary>
-    [DataField]
-    public List<EntProtoId> ListOfObjectives = ["CultYoggEnslaveObjective", "CultYoggSacraficeObjective"];
-
     public EntProtoId MindCultYoggAntagId = "MindRoleCultYogg";
 
     //telephaty channel
@@ -111,8 +105,6 @@ public sealed partial class CultYoggRuleComponent : Component
     {
         Tags = ["CultYoggInnerHandToggleable"]
     };
-
-
     #endregion
 
     #region GodSummoning
@@ -154,5 +146,11 @@ public sealed partial class CultYoggStageDefinition
     /// Direct calculation of required cultist stages for progression to avoid round-start progression.
     /// </summary>
     public int? CultistsAmountRequired;
+
+    /// <summary>
+    /// Objectives given upon reaching the stage.
+    /// </summary>
+    [DataField]
+    public List<EntProtoId>? StageObjectives;
 }
 

@@ -32,7 +32,6 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using System.Linq;
@@ -69,7 +68,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<DarkReaperComponent, ComponentStartup>(OnCompInit);
+        SubscribeLocalEvent<DarkReaperComponent, ComponentStartup>(OnCompStartup);
         SubscribeLocalEvent<DarkReaperComponent, ComponentShutdown>(OnCompShutdown);
 
         // actions
@@ -378,8 +377,10 @@ public abstract class SharedDarkReaperSystem : EntitySystem
     }
 
     // Crap
-    protected virtual void OnCompInit(Entity<DarkReaperComponent> ent, ref ComponentStartup args)
+    protected virtual void OnCompStartup(Entity<DarkReaperComponent> ent, ref ComponentStartup args)
     {
+        ent.Comp.SpawnedTime = _timing.CurTime;
+
         UpdateStageAppearance(ent, ent.Comp);
         ChangeForm(ent, ent.Comp.PhysicalForm);
 

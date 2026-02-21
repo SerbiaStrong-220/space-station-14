@@ -642,18 +642,33 @@
         whitelist:
           tags:
           - ConstructionMaterial
+          #SS220 powercell to borg whitelist start
+          - PotatoBattery
+          - PowerCell
+          - PowerCellSmall
+          #SS220 powercell to borg whitelist end
     - hand:
         emptyRepresentative: BorgModuleConstructionMaterialPlaceholder
         emptyLabel: borg-slot-construction-empty
         whitelist:
           tags:
           - ConstructionMaterial
+          #SS220 powercell to borg whitelist start
+          - PotatoBattery
+          - PowerCell
+          - PowerCellSmall
+          #SS220 powercell to borg whitelist end
     - hand:
         emptyRepresentative: BorgModuleConstructionMaterialPlaceholder
         emptyLabel: borg-slot-construction-empty
         whitelist:
           tags:
           - ConstructionMaterial
+          #SS220 powercell to borg whitelist start
+          - PotatoBattery
+          - PowerCell
+          - PowerCellSmall
+          #SS220 powercell to borg whitelist end
     - hand:
         emptyRepresentative: DoorElectronics
         emptyLabel: borg-slot-circuitboards-empty
@@ -669,6 +684,11 @@
         whitelist:
           tags:
           - ConstructionMaterial
+          #SS220 powercell to borg whitelist start
+          - PotatoBattery
+          - PowerCell
+          - PowerCellSmall
+          #SS220 powercell to borg whitelist end
     - hand:
         emptyRepresentative: SpaceHeaterFlatpack
         emptyLabel: borg-slot-flatpacks-empty

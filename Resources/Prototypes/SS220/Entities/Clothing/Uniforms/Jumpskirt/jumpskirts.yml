@@ -361,3 +361,47 @@
      - MagicianDress
      - ClothMade #SS220-pr: FIX CLOTHING TAGS
      - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformWeddingDress1
+  name: wedding dress
+  description: Finally, eat as much as you want and do not wear makeup!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/wedding_dress_1.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/wedding_dress_1.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformWeddingDress2
+  name: wedding dress
+  description: You are at your wedding, after your family said that no one would marry you with a personality like yours.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/wedding_dress_2.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/wedding_dress_2.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformWeddingDress3
+  name: wedding dress
+  description: That is it! Now you can eat, get fat, and do nothing!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/wedding_dress_3.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/wedding_dress_3.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformWeddingDress4
+  name: wedding dress
+  description: Does he swear to give you his house after the divorce?
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/wedding_dress_4.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/wedding_dress_4.rsi
