@@ -1,0 +1,26 @@
+ <!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+
+<ExperienceUiElements:RedactableSkillTreeShower
+    xmlns="https://spacestation14.io"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+    xmlns:ExperienceUiElements="clr-namespace:Content.Client.SS220.Experience.UiElements"
+    xmlns:styleDef="clr-namespace:Content.Client.SS220.Experience.Ui">
+    <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" >
+        <BoxContainer Orientation="Horizontal" Margin="0 5">
+            <RichTextLabel Name="SkillTreeName" Text="name-place-holder" Margin="5 0"
+                MouseFilter="Stop" TrackingTooltip="true" TooltipDelay="0.5"/>
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal" Margin="5" HorizontalExpand="False" VerticalExpand="True" >
+            <BoxContainer Orientation="Horizontal" HorizontalExpand="True" VerticalExpand="True" >
+                <Label Text="{Loc 'redactable-skill-tree-skill-level'}"/>
+                <LineEdit Name="SkillLevel" PlaceHolder="0" Margin="5 0" HorizontalExpand="True" VerticalExpand="True" />
+            </BoxContainer>
+            <BoxContainer Orientation="Horizontal" HorizontalExpand="True" VerticalExpand="True" >
+                <Label Text="{Loc 'redactable-skill-tree-skill-sublevel'}"/>
+                <LineEdit Name="SkillSublevel" PlaceHolder="0" Margin="5 0" HorizontalExpand="True" VerticalExpand="True" />
+            </BoxContainer>
+        </BoxContainer>
+    </BoxContainer>
+</ExperienceUiElements:RedactableSkillTreeShower>

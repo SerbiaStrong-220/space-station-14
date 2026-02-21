@@ -284,6 +284,7 @@
   - type: FireVisuals
     alternateState: Standing
   - type: Surgable #SS220 Surgery
+  - type: Experience # SS220 Experience update
   - type: StunVisuals
 
 - type: entity

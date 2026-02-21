@@ -1,3 +1,4 @@
+using Content.Shared.SS220.Experience;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
 
@@ -18,6 +19,11 @@ public sealed partial class StartingGearPrototype : IPrototype, IInheritingProto
     /// <inheritdoc/>
     [AbstractDataField]
     public bool Abstract { get; private set; }
+
+    // SS220-experience-update-begin
+    [DataField]
+    public ProtoId<ExperienceDefinitionPrototype>? ExperienceDefinition = null;
+    // SS220-experience-update-end
 
     // SS220 fix inheritance begin
     /// <inheritdoc />

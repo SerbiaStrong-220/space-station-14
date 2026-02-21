@@ -1,0 +1,73 @@
+- type: experienceDefinition
+  id: StationAiRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    ExtravehicularActivity:
+      level: 2
+    CombatTraining:
+      level: 2
+    Construction:
+      level: 2
+    Medicine:
+      level: 2
+    PhysicalTraining:
+      level: 2
+  knowledges:
+  - AllJobKnowledge
+  addSublevelPoints: 0
+
+- type: experienceDefinition
+  id: StationBorgsRoleExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    ExtravehicularActivity:
+      level: 2
+    CombatTraining:
+      level: 2
+    Construction:
+      level: 2
+    Medicine:
+      level: 2
+    PhysicalTraining:
+      level: 1
+  knowledges:
+  - AllJobKnowledge
+  addSublevelPoints: 0
+
+- type: experienceDefinition
+  id: DerelictBorgRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    ExtravehicularActivity:
+      level: 2
+    CombatTraining:
+      level: 2
+    Construction:
+      level: 2
+    Medicine:
+      level: 2
+    PhysicalTraining:
+      level: 2
+  addSublevelPoints: 0
+
+- type: experienceDefinition
+  id: SyndicateAssaultBorgRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    ExtravehicularActivity:
+      level: 2
+    CombatTraining:
+      level: 2
+    Construction:
+      level: 2
+    Medicine:
+      level: 2
+    PhysicalTraining:
+      level: 2
+  knowledges:
+  - NuclearOperativeKnowledge
+  addSublevelPoints: 0

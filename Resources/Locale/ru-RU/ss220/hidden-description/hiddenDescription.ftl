@@ -21,6 +21,7 @@ hidden-desc-AdrenalImplant-medical = [color=#52B4E9]Этот имплант со
 hidden-desc-AdrenalImplant-research = [color=#D381C9]Имплант с запасом лечебных растворов, предназначенных для поддержки жизненных функций.[/color]
 hidden-desc-AdrenalImplant-syndicate = [color=#E31735]Имплант с инъекционным механизмом, содержащий жидкости для ускоренного восстановления организма.[/color]
 
+corvax-hidden-desc-MindShieldImplanter-security = Вы узнаете имплант внутри, это имплант защиты разума.
 # Regular decriptions below
 
 ent-ThermalVisorImplanter = { ent-Implanter }

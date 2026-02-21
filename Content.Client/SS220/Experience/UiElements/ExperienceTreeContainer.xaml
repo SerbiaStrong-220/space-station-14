@@ -1,0 +1,33 @@
+ <!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+
+<ExperienceUiElements:ExperienceTreeContainer
+    xmlns="https://spacestation14.io"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+    xmlns:styleDef="clr-namespace:Content.Client.SS220.Experience.Ui"
+    xmlns:ExperienceUiElements="clr-namespace:Content.Client.SS220.Experience.UiElements" VerticalExpand="False">
+    <BoxContainer Name="ContentContainer" Orientation="Vertical" Margin="0 2" HorizontalExpand="True">
+        <BoxContainer Orientation="Vertical" Margin="{x:Static styleDef:ExperienceUiStyleDefinitions.BaseTabLikeThickness}">
+            <BoxContainer Name ="InfoContainer" Orientation="Horizontal" MouseFilter="Stop" TrackingTooltip="true" TooltipDelay="0.5">
+                <TextureRect Name="TreeIconRect"/>
+                <RichTextLabel Name="TreeName" Text="place-holder"/>
+            </BoxContainer>
+            <BoxContainer Orientation="Horizontal">
+                <TextureButton Name="ShowSubLevelsButton" TexturePath="/Textures/SS220/Interface/ExperienceView/unroll-button.png"  Margin="0 0 5 0"/>
+                <BoxContainer Name ="TreeLevelsContainer" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <!-- Added here by code -->
+                </BoxContainer>
+            </BoxContainer>
+        </BoxContainer>
+        <BoxContainer Name="SubdataContainer" Access="Public" Orientation="Horizontal" Visible="False" Margin="20 2 0 2"
+            HorizontalExpand="True" VerticalExpand="True">
+            <TextureButton Name="AddSublevelPoint" TexturePath="/Textures/SS220/Interface/ExperienceView/add-button.png" MaxHeight="32"
+                VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 0 5 0"/>
+            <BoxContainer Name="SublevelsContainer" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <!-- Sublevels visual added by code -->
+            </BoxContainer>
+            <RichTextLabel Name="SpendPointsShower" Text="123456" HorizontalExpand="True" VerticalAlignment="Center" Margin="4 0"/>
+        </BoxContainer>
+    </BoxContainer>
+</ExperienceUiElements:ExperienceTreeContainer>

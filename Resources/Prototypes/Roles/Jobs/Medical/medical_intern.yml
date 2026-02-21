@@ -7,18 +7,13 @@
     - !type:OverallPlaytimeRequirement
       time: 1h # SS220-RoleTime 2
   startingGear: MedicalInternGear
+  experienceDefinition: MedicalInternRoleExperience # SS220-experience
   icon: "JobIconMedicalIntern"
   supervisors: job-supervisors-medicine
   canBeAntag: true
   access:
   - Medical
   - Maintenance
-  #SS220 LimitationRevive - start
-  special:
-  - !type:AddComponentSpecial
-    components:
-    - type: DefibrillatorSkill
-  #SS220 LimitationRevive - end
 
 - type: startingGear
   id: MedicalInternGear

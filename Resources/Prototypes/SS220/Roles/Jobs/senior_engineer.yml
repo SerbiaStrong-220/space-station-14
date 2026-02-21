@@ -14,6 +14,7 @@
       department: Engineering
       time: 216000 # 60 hrs
   startingGear: SeniorEngineerGear
+  experienceDefinition: SeniorEngineerRoleExperience
   icon: "JobIconSeniorEngineer"
   supervisors: job-supervisors-ce
   access:
@@ -21,6 +22,17 @@
   - Engineering
   - External
   - Atmospherics
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: MentorRole
+      teachInfo:
+        Construction:
+          multiplier: 1.5
+          maxBuffSkillLevel: 3
+        ExtravehicularActivity:
+          multiplier: 1.5
+          maxBuffSkillLevel: 3
 
 - type: startingGear
   id: SeniorEngineerGear

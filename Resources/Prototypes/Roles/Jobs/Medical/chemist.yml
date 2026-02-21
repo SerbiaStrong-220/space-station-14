@@ -8,18 +8,13 @@
       department: Medical
       time: 10h # SS220-RoleTime 2
   startingGear: ChemistGear
+  experienceDefinition: ChemistRoleExperience # SS220-experience
   icon: "JobIconChemist"
   supervisors: job-supervisors-cmo
   access:
   - Medical
   - Chemistry
   - Maintenance
-  #SS220 LimitationRevive - start
-  special:
-  - !type:AddComponentSpecial
-    components:
-    - type: DefibrillatorSkill
-  #SS220 LimitationRevive - end
 
 - type: startingGear
   id: ChemistGear

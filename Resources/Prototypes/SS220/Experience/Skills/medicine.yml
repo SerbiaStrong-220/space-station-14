@@ -1,0 +1,84 @@
+- type: skill
+  id: MedicineInitial
+  levelInfo:
+    maximumSublevel: 5
+    levelUpPopup: medicine-initial-level-up-popup
+    sublevelUpPopup: medicine-initial-sublevel-up-popup
+  levelDescription:
+    skillName: medicine-initial-name
+    skillDescription: medicine-initial-desc
+  components:
+  - type: MedicineMachineUseSkillIssue
+    healthAnalyzerInfoShuffleChance: 0.6
+    defibrillatorSelfDamageChance: 0.6
+  - type: MedicineDoAfterSkill
+    durationScale: 1.5
+    failureChance: 0.35
+    failurePopup: healing-item-use-failure
+  - type: InjectorUseOnDoAfterSkill
+    durationScale: 1.5
+    failureChance: 0.7
+    failurePopup: injector-use-failure
+    damageOnFailure:
+      types:
+        Slash: 3
+        Piercing: 6
+
+- type: skill
+  id: MedicineBase
+  levelInfo:
+    maximumSublevel: 5
+    levelUpPopup: medicine-base-level-up-popup
+    sublevelUpPopup: medicine-base-sublevel-up-popup
+  levelDescription:
+    skillName: medicine-base-name
+    skillDescription: medicine-base-desc
+  components:
+  - type: MedicineMachineUseSkillIssue
+    healthAnalyzerInfoShuffleChance: 0.1
+    defibrillatorSelfDamageChance: 0.1
+  - type: MedicineDoAfterSkill
+    durationScale: 1
+  - type: InjectorUseOnDoAfterSkill
+    durationScale: 1
+    failureChance: 0.3
+    failurePopup: injector-use-failure
+    damageOnFailure:
+      types:
+        Slash: 1
+        Piercing: 2
+
+- type: skill
+  id: MedicineTrained
+  levelInfo:
+    maximumSublevel: 5
+    levelUpPopup: medicine-trained-level-up-popup
+    sublevelUpPopup: medicine-trained-sublevel-up-popup
+  levelDescription:
+    skillName: medicine-trained-name
+    skillDescription: medicine-trained-desc
+  components:
+  - type: MedicineDoAfterSkill
+    durationScale: 0.9
+  - type: InjectorUseOnDoAfterSkill
+    durationScale: 0.9
+  removeComponents:
+  - type: MedicineMachineUseSkillIssue
+
+- type: skill
+  id: MedicineProfessional
+  levelInfo:
+    maximumSublevel: 1
+    levelUpPopup: medicine-professional-level-up-popup
+    sublevelUpPopup: medicine-professional-sublevel-up-popup
+  levelDescription:
+    skillName: medicine-professional-name
+    skillDescription: medicine-professional-desc
+  components:
+  - type: MedicineDoAfterSkill
+    durationScale: 0.7
+    failurePopup: healing-item-use-failure
+  - type: InjectorUseOnDoAfterSkill
+    durationScale: 0.7
+  removeComponents:
+  - type: MedicineMachineUseSkillIssue

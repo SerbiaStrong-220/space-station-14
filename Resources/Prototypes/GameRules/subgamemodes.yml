@@ -26,6 +26,13 @@
       multiAntagSetting: NotExclusive
       startingGear: ThiefGear
       components:
+      # SS220-experience-update-begin
+      - type: AntagFreeSublevelPointsAdd
+        addFreeSublevelPoints: 10
+      - type: AntagAddKnowledge
+        knowledgesToAdd:
+        - ThiefKnowledge
+      # SS220-experience-update-end
       - type: Pacified
       - type: Thieving
         stripTimeReduction: 2
