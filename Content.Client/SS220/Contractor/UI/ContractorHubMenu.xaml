@@ -1,0 +1,26 @@
+<controls:ContractorHubMenu
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client.SS220.Contractor.UI"
+    Orientation="Vertical"
+    SeparationOverride="5"
+    HorizontalExpand="True"
+    VerticalExpand="True"
+    VerticalAlignment="Top"
+    Margin="5 5 5 5"
+    Access="Public">
+
+    <BoxContainer Orientation="Horizontal" Access="Public" SeparationOverride="10" HorizontalExpand="True" VerticalAlignment="Center">
+        <EntityPrototypeView Access="Public" Name="ItemIcon" Scale="1.1 1.1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <RichTextLabel Access="Public" Name="ItemName" StyleClasses="ContractorRichLabelStyle" HorizontalExpand="True" VerticalAlignment="Center"/>
+        <Button Access="Public" Margin="0 0 5 0" Name="BuyButton" HorizontalExpand="False" VerticalExpand="False" StyleClasses="ContractorExecutionButton" MaxSize="120 30">
+            <RichTextLabel Access="Public" Name="BuyButtonLabel" StyleClasses="ContractorRichLabelStyle"/>
+        </Button>
+    </BoxContainer>
+
+    <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+        <RichTextLabel Access="Public" Name="ItemDescription" HorizontalExpand="True" VerticalExpand="True"/>
+    </BoxContainer>
+
+    <PanelContainer StyleClasses="HighDivider"/>
+
+</controls:ContractorHubMenu>

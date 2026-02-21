@@ -399,6 +399,33 @@
     - Chef
 #SS220 SpicyUPD end
 
+#ss220 contractor add start
+- type: listing
+  id: UplinkContractor
+  name: "набор контрактора" #TODO Name
+  description: "набор контрактора" #TODO Desc
+  icon: { sprite: /Textures/Objects/Consumable/Food/Baked/pizza.rsi, state: spicy } #TODO Sprite
+  productEntity: BoxContractor
+  cost:
+    Telecrystal: 20
+  categories:
+    - ContractorKit
+  conditions:
+    - !type:ListingLimitedStockCondition
+      stock: 1
+    - !type:BuyBeforeCondition #block buy listing, if any other listing was bought
+      blacklistAll: true
+    - !type:StoreWhitelistCondition
+      blacklist:
+        tags:
+          - NukeOpsUplink
+    - !type:ListingStockLimitByTraitorsCondition #amount kit for traitor count / 4
+      contractorPercentage: 0.25
+    - !type:BuyTimeForListingCondition #time for buy contractor kit
+      timeAmount: 10
+  productEvent: !type:BuyContractorKitEvent
+#ss220 contractor add end
+
 #- type: listing
 #  id: UplinkCQC
 #  name: ent-cqc-name
