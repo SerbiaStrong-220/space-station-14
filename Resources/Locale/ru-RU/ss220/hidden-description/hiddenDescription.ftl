@@ -96,3 +96,30 @@ hidden-desc-toy-shield-clown = [color=#cc0099]Устройте баталию н
 
 hidden-desc-toy-armour-syndicate = [color=#e31735]Это тканевая реплика настоящей брони, не предоставляющая никакой защиты.[/color]
 hidden-desc-toy-armour-clown = [color=#cc0099]Выглядит 1 в 1 как настоящий! Но на самом деле - просто тряпка![/color]
+
+# Tarot Cards
+
+tarot-card-is-reverse = Карта [color=red]ПЕРЕВЁРНУТА.[/color]
+tarot-card-is-not-reverse = Карта [color=green]НЕ[/color] перевёрнута.
+tarot-card-the-fool-syndicate = 1
+tarot-card-the-magician-syndicate = 2
+tarot-card-the-high-priestess-syndicate = 3
+tarot-card-the-empress-syndicate = 4
+tarot-card-the-hierophant-syndicate = 5
+tarot-card-the-lovers-syndicate = 6
+tarot-card-the-justice-syndicate = 7
+tarot-card-the-hermit-syndicate = 8
+tarot-card-the-wheel-of-fortune-syndicate = 9
+tarot-card-the-strength-syndicate = 10
+tarot-card-the-hanged-man-syndicate = 11
+tarot-card-the-death-syndicate = 12
+tarot-card-the-temperance-syndicate = 13
+tarot-card-the-devil-syndicate = 14
+tarot-card-the-tower-syndicate = 15
+tarot-card-the-stars-syndicate = 16
+tarot-card-the-moon-syndicate = 17
+tarot-card-the-sun-syndicate = 18
+tarot-card-the-judgement-syndicate = 19
+tarot-card-the-world-syndicate = 20
+tarot-card-the-chariot-syndicate = 21
+tarot-card-the-emperor-syndicate = 22
