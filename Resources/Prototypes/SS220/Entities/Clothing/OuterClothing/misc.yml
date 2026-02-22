@@ -26,8 +26,8 @@
 - type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterJacketChefWhite
-  name: белый жакет шеф-повара
-  description: Фартук-жакет, используемый первоклассным шеф-поваром.
+  name: white chef's jacket
+  description: A jacket-apron worn by high-class chefs.
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Misc/chef_white.rsi
@@ -37,8 +37,8 @@
 - type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterJacketChefGreen
-  name: зелёный жакет шеф-повара
-  description: Фартук-жакет, используемый первоклассным шеф-поваром.
+  name: green chef's jacket
+  description: A jacket-apron worn by high-class chefs.
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Misc/chef_green.rsi
@@ -48,8 +48,8 @@
 - type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterJacketChefBlack
-  name: чёрный жакет шеф-повара
-  description: Фартук-жакет, используемый первоклассным шеф-поваром.
+  name: black chef's jacket
+  description: A jacket-apron worn by high-class chefs.
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Misc/chef_black.rsi
@@ -59,8 +59,8 @@
 - type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterJacketChefNanotrasen
-  name: жакет заслуженного шеф-повара NanoTrasen
-  description: Фартук-жакет, используемый шеф-поваром высочайшего класса - его мастерство неоспоримо.
+  name: NanoTrasen distinguished chef's jacket
+  description: A jacket-apron used by top-tier chefs — their mastery is beyond question.
   suffix: За время в игре, Сеньор
   components:
   - type: Sprite

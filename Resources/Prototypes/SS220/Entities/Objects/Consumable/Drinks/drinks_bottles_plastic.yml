@@ -41,10 +41,10 @@
       Glass: 100
 
 - type: entity
-  parent: [DrinkBankateBaseFull]
+  parent: DrinkBankateBaseFull
   id: DrinkBankateJarFull
-  name: банка банкате
-  description: Вы же не собираетесь это пить, да?
+  name: bankate jar
+  description: You're not actually going to drink this, are you?
   components:
   # TODO-SS220-Sprites-begin
   - type: SolutionContainerVisuals
@@ -63,19 +63,3 @@
     sprite: SS220/Objects/Consumable/Drinks/bankatejar.rsi
   - type: Sealable
 
-- type: entity
-  parent: DrinkGlass
-  id: DrinkBankateGlass
-  name: стакан банкате
-  description: Выглядит как то, что не стоит пить...
-  components:
-    - type: SolutionContainerManager
-      solutions:
-        drink:
-          maxVol: 30
-          reagents:
-          - ReagentId: BankateDrink
-            Quantity: 30
-    - type: Icon
-      sprite: SS220/Objects/Consumable/Drinks/glass_bankate.rsi
-      state: icon

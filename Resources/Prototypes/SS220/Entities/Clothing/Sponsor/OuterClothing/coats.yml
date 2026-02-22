@@ -4,8 +4,8 @@
 - type: entity
   parent: ClothingSponsorOuterStorageBase
   id: ClothingSponsorWhiteCoat
-  name: фирменная белая куртка
-  description: Молотки больше не используются на станциях NanoTrasen.
+  name: signature white jacket
+  description: Hammers are no longer used on NanoTrasen stations.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/OuterClothing/whitecoat.rsi
@@ -16,8 +16,8 @@
 - type: entity
   parent: ClothingSponsorOuterStorageBase
   id: ClothingSponsorBlackCoat
-  name: чёрное пальто
-  description: Тепло.
+  name: black coat
+  description: Warm.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/OuterClothing/blackcoat.rsi
@@ -31,8 +31,8 @@
 - type: entity
   parent: ClothingSponsorOuterStorageBase
   id: ClothingSponsorTylerRedCoat
-  name: плотная красная куртка
-  description: Отдаёт химией.
+  name: thick red jacket
+  description: Smells like chemistry.
   components:
   - type: StorageFill
     contents:
@@ -47,8 +47,8 @@
 - type: entity
   parent: ClothingSponsorOuterStorageBase
   id: ClothingSponsorWaltuhOuterShirt
-  name: плотная чёрная рубашка
-  description: Отдаёт химией.
+  name: thick black shirt
+  description: Smells like chemistry.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/OuterClothing/waltuh.rsi
@@ -59,8 +59,8 @@
 - type: entity
   parent: ClothingSponsorOuterStorageBase
   id: ClothingSponsorDante
-  name: вишнёвый плащ
-  description: Але?
+  name: cherry cloak
+  description: Hello?
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/OuterClothing/dante.rsi
@@ -71,8 +71,8 @@
 - type: entity
   parent: ClothingSponsorOuterStorageBase
   id: ClothingSponsorCoatJujutsuShlepa
-  name: пиджак офисного работника.
-  description: Вы не чувствуете себя по-настоящему ценным? Бюрократия поможет вам решить эту проблема!
+  name: office worker's jacket
+  description: Don't feel truly valued? Bureaucracy will help you solve this problem!
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/OuterClothing/nanamijacket.rsi
@@ -83,8 +83,8 @@
 - type: entity
   parent: ClothingSponsorOuterStorageBase
   id: ClothingSponsor1984
-  name: куртка "1984"
-  description: Большой брат следит за тобой.
+  name: 1984 jacket
+  description: Big Brother is watching you.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/OuterClothing/1984.rsi
@@ -109,8 +109,8 @@
 - type: entity
   parent: ClothingSponsorOuterStorageBase
   id: ClothingSponsorSamuraiJacket
-  name: самурайская куртка
-  description: Дешёвый эпатаж, консюмеризм и бунт против серости.
+  name: samurai jacket
+  description: Cheap shocking value, consumerism, and a rebellion against the grayness.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/OuterClothing/Cyberpunk/vbomberjacket.rsi
@@ -132,8 +132,8 @@
 - type: entity
   parent: [ ClothingOuterArmorBasic ]
   id: ClothingSponsorCyberVestSecurity
-  name: кибербронежилет охраны
-  description: Светящиеся элементы не дают вам никакого тактического преимущества... но зато какой стиль!
+  name: cyber security vest
+  description: Glowing elements don't give you any tactical advantage... but oh, the style!
   suffix: Шлёпа
   components:
   - type: Sprite
@@ -153,8 +153,8 @@
 - type: entity
   parent: ClothingSponsorSamuraiJacket
   id: ClothingSponsorCyberJacketMed
-  name: пиджак врача с кардиоутройством
-  description: Синий пиджак с исключительно косметическим устройством. Сразите стилем своих пациентов наповал!
+  name: doctor's jacket with cardio device
+  description: A blue jacket with an exclusively cosmetic device. Strike your patients down with style!
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/OuterClothing/Cyberpunk/cybermedsuit.rsi
@@ -164,8 +164,8 @@
 - type: entity
   parent: ClothingSponsorSamuraiJacket
   id: ClothingSponsorCyberJacketRnD
-  name: киберхуди учёного
-  description: В нём уютно и тепло, главное не заснуть перед аномалией. Полное удобство для сыча.
+  name: scientist's cyber-hoodie
+  description: It's cozy and warm, just don't fall asleep in front of an anomaly. Total comfort for a shut-in.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/OuterClothing/Cyberpunk/cyberrndsweater.rsi
@@ -175,8 +175,8 @@
 - type: entity
   parent: ClothingSponsorSamuraiJacket
   id: ClothingSponsorCyberJacketEng
-  name: киберкуртка инженера
-  description: Гладкий и прочный материал, светящиеся элементы в темноте, что ещё нужно для счастья инженеру?
+  name: engineer's cyber-jacket
+  description: Smooth and durable material, glowing elements in the dark, what else does an engineer need for happiness?
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/OuterClothing/Cyberpunk/cyberengijacket.rsi

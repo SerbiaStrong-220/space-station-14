@@ -1,8 +1,8 @@
 - type: entity
-  name: космический крокодил
-  id: MobCrocodileSpace
   parent: MobSpaceBasic
-  description: Абсолютно обычный крокодил на самой обычной станции.
+  id: MobCrocodileSpace
+  name: space crocodile
+  description: An absolutely ordinary crocodile on a very ordinary station.
   components:
   - type: Sprite
     drawdepth: Mobs

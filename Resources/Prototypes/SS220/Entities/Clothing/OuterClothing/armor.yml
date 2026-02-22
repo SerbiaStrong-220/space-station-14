@@ -4,8 +4,8 @@
 - type: entity
   parent: ClothingOuterArmorCaptainCarapace
   id: ClothingOuterWhiteArmorCaptainCarapace
-  name: белый панцирь капитана
-  description: Белый панцирь, обеспечивающий хорошую защиту носителя и подчёркивающий его статус ветерана.
+  name: white captain's carapace
+  description: A white carapace that provides excellent protection and emphasizes the wearer's veteran status.
   suffix: За время в игре
   components:
   - type: Sprite
@@ -85,7 +85,7 @@
 - type: entity
   parent: ClothingOuterArmorBasic
   id: ClothingOuterArmorMPArmor
-  name: Military Police armor
+  name: military police armor
   description: the inscription "Military Police" on the badge of the vest.
   components:
   - type: Sprite

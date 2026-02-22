@@ -1,0 +1,10 @@
+ent-ClothingSponsorWaltuhBeard = накладная бородка
+    .desc = Чистейший продукт. 99.1%.
+ent-ClothingSponsorGoldClownMask = золотая маска клоуна
+    .desc = Выглядит очень тяжёлой.
+ent-ClothingHeadMaskDemocratic = демократическая маска
+    .desc = Вошли и вышли, дело пяти минут.
+ent-ClothingSponsorMaskMuzhik = маска мужика
+    .desc = Нет лучше времяпрепровождения, чем распивать самогон с товарищами.
+ent-ClothingMaskMoryak = маска морячка
+    .desc = Есть легенда, что при виде самогона маска улыбается.
