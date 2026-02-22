@@ -20,7 +20,6 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using Content.Shared.SS220.Language.Components; //SS220 Polymorph language fix
 using Content.Server.SS220.Language; //SS220 Polymorph language fix
 
 namespace Content.Server.Polymorph.Systems;
@@ -44,7 +43,6 @@ public sealed partial class PolymorphSystem : EntitySystem
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly SharedMindSystem _mindSystem = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly LanguageSystem _language = default!; //SS220 Polymorph language fix
 
     public const string EffectDesynchronizer = "EffectDesynchronizer"; //SS220-cryo-mobs-fix
 
@@ -220,12 +218,6 @@ public sealed partial class PolymorphSystem : EntitySystem
                 child);
 
         _mindSystem.MakeSentient(child);
-        //SS220 Polymorph language fix begin
-        if (TryComp<LanguageComponent>(uid, out var sourceLangComp))
-        {
-            _language.AddLanguagesFromSource((uid, sourceLangComp), child);
-        }
-        //SS220 Polymorph language fix end
 
         var polymorphedComp = Factory.GetComponent<PolymorphedEntityComponent>();
         polymorphedComp.Parent = uid;
@@ -291,6 +283,7 @@ public sealed partial class PolymorphSystem : EntitySystem
         // Raise an event to inform anything that wants to know about the entity swap
         var ev = new PolymorphedEvent(uid, child, false);
         RaiseLocalEvent(uid, ref ev);
+        RaiseLocalEvent(child, ref ev); //SS220 Polymorph language fix
 
         // visual effect spawn
         if (configuration.EffectProto != null)
