@@ -708,8 +708,8 @@
   - type: GhostRole
     allowMovement: true
     allowSpeech: true
-    name: ghost-role-information-gigahamlet-ricardo-name
-    description: ghost-role-information-gigahamlet-ricardo-description
+    name: ghost-role-information-gigohamles-name
+    description: ghost-role-information-gigohamles-description
   - type: GhostTakeoverAvailable
   # Всё же, думаю не стоит...
   # - type: Butcherable
