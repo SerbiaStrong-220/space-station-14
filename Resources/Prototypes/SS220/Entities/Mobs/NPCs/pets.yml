@@ -45,3 +45,169 @@
     - CannotSuicide
     - VimPilot
     - DoorBumpOpener
+
+- type: entity
+  parent: [ SimpleMobBase, MobCombat, StripableInventoryBase, MobPassiveCollision ]
+  id: MobBnuuy
+  name: Bnuuy
+  description: A frisky kid who can't sit still, always rushes into battle, loves carrots, and also likes to arrange a brig race with Roxy.
+  components:
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3.5
+    baseSprintSpeed: 8 # In the future, with the introduction of "sprint" mechanics, the speed will be reduced with the addition of a fast sprint.
+  - type: Language
+    availableLanguages:
+    - id: Mousey
+      canSpeak: true
+    - id: Doggish
+      canSpeak: false
+    - id: Galactic
+      canSpeak: false
+    - id: Feline
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  - type: GhostRole
+    makeSentient: true
+    allowSpeech: true
+    allowMovement: true
+    name: ghost-role-information-pet-bnuuy-name
+    description: ghost-role-information-pet-bnuuy-description
+  - type: GhostTakeoverAvailable
+  - type: Speech
+    speechVerb: SmallMob
+    speechSounds: SqueakBnuuy
+    allowedEmotes: ['SqueakBnuuy']
+  - type: Sprite
+    drawdepth: SmallMobs
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      sprite: SS220/Mobs/Pets/bnuuy.rsi
+      state: bnuuy
+  - type: Item
+    size: Tiny
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.1
+        density: 120
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: MobState
+  - type: Deathgasp
+  - type: MobStateActions
+    actions:
+      Critical:
+      - ActionCritSuccumb
+      - ActionCritFakeDeath
+      - ActionCritLastWords
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      40: Critical
+      60: Dead
+  - type: Inventory
+    speciesId: bnuuy
+    templateId: bnuuyinventory
+    displacements:
+      eyes:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Pets/displacements.rsi
+            state: bnuuy_eyes_displacement
+      head:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Pets/displacements.rsi
+            state: bnuuy_head_displacement
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: bnuuy
+      Critical:
+        Base: bnuuy_critical
+      Dead:
+        Base: bnuuy_dead
+  - type: Food
+  - type: FlavorProfile
+    flavors:
+    - meaty
+  - type: Hunger
+    baseDecayRate: 0.3
+  - type: Extractable
+    grindableSolutionName: food
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Blood
+          Quantity: 55
+        - ReagentId: Fat
+          Quantity: 5
+  - type: Butcherable
+    spawned:
+    - id: FoodMeat
+      amount: 1
+  - type: Tag
+    tags:
+    - VimPilot
+    - ChefPilot
+    - Trash
+    - Meat
+  - type: Respirator
+    damage:
+      types:
+        Asphyxiation: 0.25
+    damageRecovery:
+      types:
+        Asphyxiation: -0.25
+  - type: Barotrauma
+    damage:
+      types:
+        Blunt: 0.1
+  - type: CombatMode
+  - type: MeleeWeapon
+    soundHit:
+        path: /Audio/Effects/bite.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      types:
+        Piercing: 3
+  - type: Bloodstream
+    bloodMaxVolume: 60
+  - type: CanEscapeInventory
+    baseResistTime: 3
+  - type: MobPrice
+    price: 60
+  - type: NonSpreaderZombie
+  - type: FireVisuals
+    sprite: Mobs/Effects/onfire.rsi
+    normalState: Mouse_burning
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 120
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+  - type: InteractionPopup
+    successChance: 0.5
+    interactSuccessString: petting-success-rabbit
+    interactFailureString: petting-failure-rabbit
+    interactSuccessSpawn: EffectHearts
+    interactSuccessSound:
+      path: /Audio/Animals/fox_squeak.ogg
