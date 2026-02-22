@@ -20,6 +20,7 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Server.SS220.Language; //SS220 Polymorph language fix
 
 namespace Content.Server.Polymorph.Systems;
 
@@ -282,6 +283,7 @@ public sealed partial class PolymorphSystem : EntitySystem
         // Raise an event to inform anything that wants to know about the entity swap
         var ev = new PolymorphedEvent(uid, child, false);
         RaiseLocalEvent(uid, ref ev);
+        RaiseLocalEvent(child, ref ev); //SS220 Polymorph language fix
 
         // visual effect spawn
         if (configuration.EffectProto != null)
