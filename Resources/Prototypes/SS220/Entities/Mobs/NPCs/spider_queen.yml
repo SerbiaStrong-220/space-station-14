@@ -482,6 +482,9 @@
   name: spider shooter
   description: spider dance
   components:
+  - type: HTN
+    rootTask:
+      task: SpiderServantShooterCompound
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Animals/spider.rsi

@@ -4,7 +4,7 @@
   branches:
     - tasks:
         - !type:HTNCompoundTask
-          task: MeleeCombatCompound
+          task: MeleeAgressiveCombatCompound #SS220 Agressive Combat
     - tasks:
         - !type:HTNCompoundTask
           task: IdleCompound
@@ -14,7 +14,7 @@
   branches:
     - tasks:
         - !type:HTNCompoundTask
-          task: RatServantCombatCompound
+          task: RatServantAgressiveCombatCompound #SS220 Agressive Combat
     - tasks:
         - !type:HTNCompoundTask
           task: FollowCompound
@@ -86,7 +86,7 @@
   branches:
     - tasks:
         - !type:HTNCompoundTask
-          task: MeleeCombatCompound
+          task: MeleeAgressiveCombatCompound #SS220 Agressive Combat
     - tasks:
         - !type:HTNCompoundTask
           task: FollowCompound
@@ -99,7 +99,7 @@
   branches:
     - tasks:
         - !type:HTNCompoundTask
-          task: MeleeCombatCompound
+          task: MeleeAgressiveCombatCompound #SS220 Agressive Combat
     - tasks:
         - !type:HTNCompoundTask
           task: FollowCompound

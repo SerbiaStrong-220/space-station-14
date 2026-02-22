@@ -37,7 +37,7 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-2 #SS220-FixAmmoSprite
+    - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
@@ -52,7 +52,7 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-2 #SS220-FixAmmoSprite
+    - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
     - state: practice
 
@@ -68,7 +68,7 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-2 #SS220-FixAmmoSprite
+    - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
     - state: incendiary
 
@@ -84,6 +84,6 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-2 #SS220-FixAmmoSprite
+    - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
     - state: uranium

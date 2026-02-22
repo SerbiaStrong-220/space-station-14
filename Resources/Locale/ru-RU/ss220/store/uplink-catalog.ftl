@@ -44,6 +44,12 @@ uplink-fake-ops-desc = Набор высококачественных репл�
 uplink-expensive-lighter-name = { ent-ExpensiveLighterSyndicate }
 uplink-expensive-lighter-desc = { ent-ExpensiveLighterSyndicate.desc }
 
+uplink-syndicate-folder-name = Папка синдиката
+uplink-syndicate-folder-desc = Папка, с долей вероятности содержащая информацию о вражеской корпорации. Проверим?
+
+uplink-diplomat-suit-name = Костюм дипломата
+uplink-diplomat-suit-desc = Костюм дипломата преступного синдиката, ничего необычного.
+
 # Masks-Boxes
 uplink-special-delivery-name = Особая посылка
 uplink-special-delivery-desc = Содержит случайную маску животного, что некогда носили майамские психи.

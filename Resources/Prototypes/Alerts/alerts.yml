@@ -29,6 +29,7 @@
     - alertType: Pacified
     - alertType: Stealthy
     - alertType: CountDown #SS220 CultYogg
+    - alertType: ClinkGlasses #SS220-clink-glasses
 
 - type: entity
   id: AlertSpriteView

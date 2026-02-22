@@ -156,7 +156,7 @@
       layers:
         - state: pellets
           map: ["enum.GunVisualLayers.Base"]
-        - state: mag-2 #SS220-FixAmmoSprite
+        - state: mag-1
           map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
@@ -170,7 +170,7 @@
     layers:
     - state: slug
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-2 #SS220-FixAmmoSprite
+    - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
 
 
@@ -241,7 +241,7 @@
       layers:
         - state: pellets
           map: ["enum.GunVisualLayers.Base"]
-        - state: mag-2 #SS220-FixAmmoSprite
+        - state: mag-1
           map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
@@ -255,7 +255,7 @@
     layers:
     - state: slug
       map: ["enum.GunVisualLayers.Base"]
-    - state: mag-2 #SS220-FixAmmoSprite
+    - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
 
 #revolver
