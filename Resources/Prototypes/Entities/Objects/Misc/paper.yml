@@ -427,6 +427,7 @@
         whitelist:
           tags:
             - Paper
+            - EnvelopeWhitelist # SS220-spesos_in_envelope
   - type: ActivatableUI
     key: enum.PaperUiKey.Key
     requiresComplex: false

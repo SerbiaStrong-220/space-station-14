@@ -67,10 +67,6 @@
   - type: NpcFactionMember
     factions:
     - CultYogg
-  - type: AntagObjectives
-    objectives:
-    - CultYoggEnslaveObjective
-    - CultYoggSacraficeObjective
   #situational for logic
   - type: Puller
     needsHands: false

@@ -213,12 +213,12 @@
   description: These black nano-enhanced gloves insulate from electricity and provide fire resistance.
   components:
   - type: Sprite
-    sprite: Clothing/Hands/Gloves/spaceninja.rsi
+    sprite: SS220/Clothing/Hands/Gloves/spaceninja.rsi # SS220 Ninja Resprite
     layers:
     - state: icon
       map: [ "enum.ToggleableVisuals.Layer" ]
   - type: Clothing
-    sprite: Clothing/Hands/Gloves/spaceninja.rsi
+    sprite: SS220/Clothing/Hands/Gloves/spaceninja.rsi # SS220 Ninja Resprite
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -264,9 +264,11 @@
       components:
       - type: CommsHacker
         threats: NinjaThreats
-    - objective: MassArrestObjective
-      components:
-      - type: CriminalRecordsHacker
+    #ss220 remove unused objective for ninja start
+    # - objective: MassArrestObjective
+    #   components:
+    #   - type: CriminalRecordsHacker
+    #ss220 remove unused objective for ninja end
 
 - type: entity
   parent: [ ClothingHandsGlovesColorBlack]

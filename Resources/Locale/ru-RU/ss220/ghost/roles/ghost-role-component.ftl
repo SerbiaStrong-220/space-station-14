@@ -37,3 +37,7 @@ ghost-role-information-snake-overall-rules = Охотьтесь вместе с�
 
 ghost-role-information-sentient-shark-name = Разумная акула
 ghost-role-information-sentient-shark-description = Помогите дракону навести хаос на станции!
+
+ghost-role-information-wizard-name = Волшебник
+ghost-role-information-wizard-desc = ТЫ — ВОЛШЕБНИК! Покажи станции, на что способна твоя магия.
+
