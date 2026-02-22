@@ -12,6 +12,7 @@
       types:
         Piercing: 40
         Structural: 15
+      armourPiercing: 7 #FCB armour piercing added
 
 
 - type: entity
@@ -27,6 +28,7 @@
     damage:
       types:
         Blunt: 16 #ss220lowTTKUpdate
+      armourPiercing: -10 #FCB armour piercing added
   - type: StaminaDamageOnCollide
     damage: 60 # 2 hits to stun #ss220lowTTKUpdate
 
@@ -54,7 +56,7 @@
   - type: ProjectileSpread
     proto: PelletShotgun
     count: 6
-    spread: 22 #ss220lowTTKUpdate
+    spread: 6 #ss220lowTTKUpdate
 
 - type: entity
   id: PelletShotgunIncendiary
@@ -81,7 +83,7 @@
   - type: ProjectileSpread
     proto: PelletShotgunIncendiary
     count: 6
-    spread: 15
+    spread: 6
 
 - type: entity
   id: PelletShotgunPractice
@@ -105,7 +107,7 @@
   - type: ProjectileSpread
     proto: PelletShotgunPractice
     count: 6
-    spread: 15
+    spread: 6
 
 - type: entity
   id: PelletShotgunImprovised
@@ -130,7 +132,7 @@
   - type: ProjectileSpread
     proto: PelletShotgunImprovised
     count: 10
-    spread: 45
+    spread: 20
 
 - type: entity
   id: PelletShotgunTranquilizer

@@ -92,10 +92,10 @@
   - type: Appearance
 
 - type: entity
-  name: C-20r submachine gun
-  parent: [BaseWeaponSubMachineGun]
+  name: C-20r assault rifle
+  parent: [BaseWeaponRifle]
   id: WeaponSubMachineGunC20r
-  description: A classic and widespread submachine gun, infamous for its use by the Gorlex Marauders. One of the first homegrown Waffle Corp. designs, it remains in service today. Feeds from .35 SMG magazines.
+  description: A classic and widespread bullpup-configured assault rifle, infamous for its use by the Gorlex Marauders. One of the first homegrown Waffle Corp. designs, it remains in service today. Feeds from .35 SMG magazines.
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/SMGs/c20r.rsi
@@ -106,16 +106,39 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
     sprite: Objects/Weapons/Guns/SMGs/c20r.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineRifle
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazineRifle
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgeRifle
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeRifle
   - type: Wieldable
     unwieldOnUse: false
   - type: GunWieldBonus
-    #220 SG Angle Updates begin
-    minAngle: -2
-    maxAngle: -13
-    #220 SG Angle Updates end
+    #FCB realistic guns begin
+    minAngle: -10
+    maxAngle: -25
+    #FCB realistic guns end
   - type: Gun
+    #FCB realistic guns begin
+    angleIncrease: 0.75
+    angleDecay: 6
+    #FCB realistic guns end
     #220 SG Angle Updates begin
-    minAngle: 17
+    minAngle: 11
     maxAngle: 29
     shotsPerBurst: 6
     #220 SG Angle Updates end
@@ -194,17 +217,17 @@
     - type: Wieldable
       unwieldOnUse: false
     - type: GunWieldBonus
-      #220 SG Angle Updates begin
-      minAngle: -2
-      maxAngle: -13
-      #220 SG Angle Updates end
+      #FCB realistic guns begin
+      minAngle: -11
+      maxAngle: -23
+      #FCB realistic guns end
     - type: Gun
+      angleIncrease: 0.85
       #220 SG Angle Updates begin
-      minAngle: 17
+      minAngle: 12
       maxAngle: 29
       fireRate: 6.5
       #220 SG Angle Updates end
-      burstFireRate: 18
       soundGunshot:
         path: /Audio/Weapons/Guns/Gunshots/atreides.ogg
       selectedMode: Burst
@@ -262,13 +285,20 @@
     sprite: Objects/Weapons/Guns/SMGs/wt550.rsi
   - type: ChamberMagazineAmmoProvider
     boltClosed: null
+  #FCB realistic guns begin
+  - type: Wieldable
+    unwieldOnUse: false
+  - type: GunWieldBonus
+    minAngle: -8
+    maxAngle: -20
+  #FCB realistic guns end
   - type: Gun
     #220 SG Angle Updates begin
     fireRate: 6.5
-    minAngle: 17
-    maxAngle: 27
+    minAngle: 9
+    maxAngle: 25
     #220 SG Angle Updates end
-    angleIncrease: 1.5
+    angleIncrease: 0.65
     angleDecay: 6
     selectedMode: FullAuto
     shotsPerBurst: 5

@@ -92,7 +92,6 @@
       mech-tank-slot: !type:ContainerSlot
   - type: Damageable
     damageContainer: Inorganic
-    damageModifierSet: Metallic
   - type: FootstepModifier
     footstepSoundCollection:
       path: /Audio/Mecha/mechmove03.ogg
@@ -124,6 +123,27 @@
     sprite: FCB/Objects/Mechs/cores.rsi
     state: basicloader
     noRot: true
+  - type: ArmorBlock # Ah yes,my beloved СБЭУ
+    tresholddict:
+        Radiation: 1000 # As always mechs do not care about radiation/poison/airloss/etc.
+        Poison: 1000
+        Airloss: 1000
+        Caustic: 1000
+        Piercing: 18 #Numbers higher compared to a strikeproof shield, bullets/lasers should be easily ignoring this due to AP
+        Blunt: 27
+        Heat: 13
+        Slash: 20
+        Shock: 30 # All the electronics is insulated in any industrial machine and the steel frame is not affected by it in any way
+    durabilitytresholddict:
+        Radiation: 1000
+        Poison: 1000
+        Airloss: 1000
+        Caustic: 1000
+        Piercing: 10
+        Blunt: 14
+        Heat: 7
+        Slash: 15
+        Shock: 30
   - type: AltMech
     baseState: basicloader
     openState: basicloader
@@ -148,6 +168,27 @@
     sprite: FCB/Objects/Mechs/cores.rsi
     state: basiclight
     noRot: true
+  - type: ArmorBlock # Ah yes,my beloved СБЭУ
+    tresholddict:
+        Radiation: 1000 # As always mechs do not care about radiation/poison/airloss/etc.
+        Poison: 1000
+        Airloss: 1000
+        Caustic: 1000
+        Piercing: 15 #Numbers a bit higher compared to a strikeproof shield, bullets/lasers should be easily ignoring this due to AP
+        Blunt: 20
+        Heat: 13
+        Slash: 20
+        Shock: 30 # All the electronics is insulated in any industrial machine and the steel frame is not affected by it in any way
+    durabilitytresholddict:
+        Radiation: 1000
+        Poison: 1000
+        Airloss: 1000
+        Caustic: 1000
+        Piercing: 10
+        Blunt: 13
+        Heat: 7
+        Slash: 12
+        Shock: 30
   - type: AltMech
     baseState: basiclight
     openState: basiclight

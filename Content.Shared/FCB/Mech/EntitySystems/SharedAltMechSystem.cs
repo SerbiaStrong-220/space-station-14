@@ -70,9 +70,8 @@ public abstract partial class SharedAltMechSystem : EntitySystem
     /// <inheritdoc/>
     public override void Initialize()
     {
-        SubscribeLocalEvent<AltMechComponent, MechToggleEquipmentEvent>(OnToggleEquipmentAction);
         SubscribeLocalEvent<AltMechComponent, MechEjectPilotEvent>(OnEjectPilotEvent);
-        SubscribeLocalEvent<AltMechComponent, UserActivateInWorldEvent>(RelayInteractionEvent);
+
         SubscribeLocalEvent<AltMechComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<AltMechComponent, EntityStorageIntoContainerAttemptEvent>(OnEntityStorageDump);
         SubscribeLocalEvent<AltMechComponent, GetAdditionalAccessEvent>(OnGetAdditionalAccess);
@@ -92,13 +91,6 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         SubscribeLocalEvent<AltMechComponent, ThrowableProjectileBlockAttemptEvent>(OnThrownProjectileHit, after: [typeof(AltBlockingSystem)]);
 
         InitializeRelay();
-    }
-
-    private void OnToggleEquipmentAction(EntityUid uid, AltMechComponent component, MechToggleEquipmentEvent args)
-    {
-        if (args.Handled)
-            return;
-        args.Handled = true;
     }
 
     private void OnEjectPilotEvent(EntityUid uid, AltMechComponent component, MechEjectPilotEvent args)
@@ -140,22 +132,6 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         if (TryComp<EyeProtectionComponent>(ent.Comp.ContainerDict["head"].ContainedEntity, out var immunityComp))
             args.Protection += immunityComp.ProtectionTime;
-    }
-
-    private void RelayInteractionEvent(EntityUid uid, AltMechComponent component, UserActivateInWorldEvent args)
-    {
-        var pilot = component.PilotSlot.ContainedEntity;
-        if (pilot == null)
-            return;
-
-        // TODO why is this being blocked?
-        if (!_timing.IsFirstTimePredicted)
-            return;
-
-        //if (component.CurrentSelectedEquipment != null)
-        //{
-        //    RaiseLocalEvent(component.CurrentSelectedEquipment.Value, args);
-        //}
     }
 
     private void OnStartup(Entity<AltMechComponent> ent, ref ComponentStartup args)
@@ -316,8 +292,8 @@ public abstract partial class SharedAltMechSystem : EntitySystem
             }
         }
 
-        _actions.AddAction(pilot, ref component.MechUiActionEntity, component.MechUiAction, mech);
-        _actions.AddAction(pilot, ref component.MechEjectActionEntity, component.MechEjectAction, mech);
+        //_actions.AddAction(pilot, ref component.MechUiActionEntity, component.MechUiAction, mech);
+        //_actions.AddAction(pilot, ref component.MechEjectActionEntity, component.MechEjectAction, mech);
     }
 
     /// <summary>
@@ -633,6 +609,9 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         SetupUser(uid, toInsert.Value);
         _container.Insert(toInsert.Value, component.PilotSlot);
 
+        _actions.AddAction(toInsert.Value, ref component.MechUiActionEntity, component.MechUiAction, uid);
+        _actions.AddAction(toInsert.Value, ref component.MechEjectActionEntity, component.MechEjectAction, uid);
+
         var ev = new OnMechEntryEvent();
         RaiseLocalEvent(uid, ref ev);
 
@@ -654,7 +633,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         if (!Resolve(uid, ref component))
             return false;
 
-        if (component.PilotSlot.ContainedEntity == null || component.Bolted)
+        if (component.PilotSlot.ContainedEntity == null || (component.Bolted && !component.BoltsSawed))
             return false;
 
         var pilot = component.PilotSlot.ContainedEntity.Value;
@@ -793,6 +772,11 @@ public sealed class MechPartStatusChanged : EntityEventArgs // not a by ref even
 
 [Serializable, NetSerializable]
 public sealed partial class InsertPartEvent : SimpleDoAfterEvent
+{
+}
+
+[Serializable, NetSerializable]
+public sealed partial class MechBoltsSawedEvent : SimpleDoAfterEvent
 {
 }
 

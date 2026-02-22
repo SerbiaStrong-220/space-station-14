@@ -9,8 +9,8 @@
     state: mecha_clamp
   - type: MechChassis
     maximalMass: 900
-    baseMovementSpeed: 3.6
-    acceleration: 1.0
+    baseMovementSpeed: 10.0
+    acceleration: 0.4
     efficiency: 0.01
   - type: MechPart
     integrity: 250

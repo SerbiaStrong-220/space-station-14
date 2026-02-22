@@ -2,6 +2,7 @@
 using Content.Server.Atmos.Components;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Systems;
+using Content.Server.Hands.Systems;
 using Content.Server.Mind;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Temperature.Components;
@@ -10,12 +11,17 @@ using Content.Shared.Actions;
 using Content.Shared.Alert;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Systems;
 using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Eye.Blinding.Systems;
+using Content.Shared.FCB.AltMech;
+using Content.Shared.FCB.ComplexRepairable;
+using Content.Shared.FCB.Mech.Components;
+using Content.Shared.FCB.Mech.Parts.Components;
+using Content.Shared.FCB.Mech.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Mech;
@@ -29,18 +35,18 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Power;
 using Content.Shared.Power.Components;
-using Content.Shared.FCB.AltMech;
-using Content.Shared.FCB.Mech.Components;
-using Content.Shared.FCB.Mech.Parts.Components;
-using Content.Shared.FCB.Mech.Systems;
 using Content.Shared.Temperature;
+using Content.Shared.Tools;
 using Content.Shared.Tools.Components;
+using Content.Shared.Tools.Systems;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
+using JetBrains.FormatRipper.Elf;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 
 namespace Content.Server.FCB.Mech.Systems;
 
@@ -61,17 +67,25 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly BlindableSystem _blindable = default!;
+    [Dependency] private readonly HandsSystem _hands = default!;
+    [Dependency] private readonly SharedToolSystem _toolSystem = default!;
+    [Dependency] private readonly IPrototypeManager _protoManager = default!;
 
     private readonly ProtoId<AlertPrototype> _mechIntegrityAlert = "MechHealth";
+
+    public PrototypeFlags<ToolQualityPrototype> SawToolQualities = [];
 
     /// <inheritdoc/>
     public override void Initialize()
     {
+        SawToolQualities.Add("Welding", _protoManager);
+
         base.Initialize();
 
         SubscribeLocalEvent<AltMechComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<AltMechComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<AltMechComponent, GetVerbsEvent<AlternativeVerb>>(OnAlternativeVerb);
+        SubscribeLocalEvent<AltMechComponent, MechBoltsSawedEvent>(OnMechBoltsSawed);
         SubscribeLocalEvent<AltMechComponent, MechOpenUiEvent>(OnOpenUi);
         SubscribeLocalEvent<AltMechComponent, MechEntryEvent>(OnMechEntry);
         SubscribeLocalEvent<AltMechComponent, OnMechExitEvent>(OnMechExited);
@@ -181,21 +195,60 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         Dirty(ent.Owner, ent.Comp);
     }
 
-    private void OnOpenUi(EntityUid uid, AltMechComponent component, MechOpenUiEvent args)
+    private void OnOpenUi(Entity<AltMechComponent> ent, ref MechOpenUiEvent args)
     {
         args.Handled = true;
-        ToggleMechUi(uid, component);
+        ToggleMechUi(ent.Owner, ent.Comp);
     }
 
-    private void OnToolUseAttempt(EntityUid uid, AltMechPilotComponent component, ref ToolUserAttemptUseEvent args)
+    private void OnToolUseAttempt(Entity<AltMechPilotComponent> ent, ref ToolUserAttemptUseEvent args)
     {
-        if (args.Target == component.Mech)
+        if (args.Target == ent.Comp.Mech)
             args.Cancelled = true;
     }
 
-    private void OnAlternativeVerb(EntityUid uid, AltMechComponent component, GetVerbsEvent<AlternativeVerb> args)
+    private void OnMechBoltsSawed(Entity<AltMechComponent> ent, ref MechBoltsSawedEvent args)
     {
-        if (!args.CanAccess || !args.CanInteract || component.Bolted)
+        if(ent.Comp.BoltsSawed)
+        {
+            ent.Comp.BoltsSawed = false;
+            Dirty(ent);
+            return;
+        }
+        ent.Comp.BoltsSawed = true;
+        Dirty(ent);
+    }
+
+    private void OnAlternativeVerb(EntityUid uid, AltMechComponent component, GetVerbsEvent<AlternativeVerb> args)//not by-ref because VS tells me i can't
+    {
+        if (!args.CanAccess || !args.CanInteract)
+            return;
+
+        if(_hands.TryGetActiveItem(args.User, out var item))
+        {
+            var text = Loc.GetString("mech-saw-bolts-verb");
+
+            if (component.BoltsSawed)
+                text = Loc.GetString("mech-repair-bolts-verb");
+
+            var sawVerb = new AlternativeVerb
+            {
+                Text = text,
+                Priority = 1,
+                Act = () =>
+                {
+                    if (args.User == uid || args.User == component.PilotSlot.ContainedEntity)
+                    {
+                        return;
+                    }
+
+                    _toolSystem.UseTool((EntityUid)item, args.User, uid, 30f, SawToolQualities, new MechBoltsSawedEvent(), 30f);
+                }
+            };
+            args.Verbs.Add(sawVerb);
+        }
+
+        if (component.Bolted)
             return;
 
         if (CanInsert(uid, args.User, component))
@@ -398,16 +451,17 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
     private void ExitMech(Entity<AltMechComponent> ent)
     {
-        TransferMindIntoPilot(ent);
-
         if (ent.Comp.PilotSlot.ContainedEntity == null)
             return;
 
         EntityUid pilot = (EntityUid)ent.Comp.PilotSlot.ContainedEntity;
 
         if (TryEject(ent.Owner, ent.Comp))
+        {
+            TransferMindIntoPilot(ent);
             if (TryComp<BarotraumaComponent>(pilot, out var barotraumaComp))
                 barotraumaComp.HasImmunity = false;
+        }
     }
 
     public void AddItemsToMech(EntityUid mech)

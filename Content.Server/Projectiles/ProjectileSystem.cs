@@ -5,13 +5,15 @@ using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared.Camera;
 using Content.Shared.Damage;
 using Content.Shared.Database;
+using Content.Shared.FCB.ArmorBlock;
+using Content.Shared.FCB.Mech.Components;
+using Content.Shared.FCB.Weapons.Ranged.Events;
 using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
-using Content.Shared.FCB.Mech.Components;
-using Content.Shared.FCB.Weapons.Ranged.Events;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Projectiles;
 
@@ -23,6 +25,7 @@ public sealed class ProjectileSystem : SharedProjectileSystem
     [Dependency] private readonly DestructibleSystem _destructibleSystem = default!;
     [Dependency] private readonly GunSystem _guns = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!; //FCB shield rework
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!; //FCB structure penetration rework
     [Dependency] private readonly SharedCameraRecoilSystem _sharedCameraRecoil = default!;
 
     public override void Initialize()
@@ -91,10 +94,10 @@ public sealed class ProjectileSystem : SharedProjectileSystem
         }
 
         // If penetration is to be considered, we need to do some checks to see if the projectile should stop.
-        if (modifiedDamage is not null && component.PenetrationThreshold != 0)
+        if (modifiedDamage is not null) //&& component.PenetrationThreshold != 0) // The idea is to make every weapon theorethically able to penetrate and use ArmourPiercing and the damage itself for it's logics
         {
             // If a damage type is required, stop the bullet if the hit entity doesn't have that type.
-            if (component.PenetrationDamageTypeRequirement != null)
+            if (component.PenetrationDamageTypeRequirement != null && damageableComponent != null)
             {
                 var stopPenetration = false;
                 foreach (var requiredDamageType in component.PenetrationDamageTypeRequirement)
@@ -104,25 +107,33 @@ public sealed class ProjectileSystem : SharedProjectileSystem
                         stopPenetration = true;
                         break;
                     }
+
+                    float targetThreshold = 0f;
+
+                    if (damageableComponent != null)
+                        targetThreshold = damageableComponent.PiercingThreshold.Float();
+
+                    if (damageableComponent != null && _prototypeManager.Resolve(damageableComponent.DamageModifierSetId, out var modifierSet) && modifierSet.FlatReduction.ContainsKey(requiredDamageType))
+                        targetThreshold += modifierSet.FlatReduction[requiredDamageType];
+
+                    if(TryComp<ArmorBlockComponent>(target, out var armorComp) && armorComp.TresholdDict.ContainsKey(requiredDamageType))
+                        targetThreshold += armorComp.TresholdDict[requiredDamageType].Float();
+
+                    if (component.Damage[requiredDamageType] + component.Damage.ArmourPiercing < targetThreshold)
+                        component.ProjectileSpent = true;
+
+                    var resultThreshold = Math.Clamp((targetThreshold - component.Damage.ArmourPiercing).Float(), 0f, targetThreshold + component.Damage.ArmourPiercing.Float());
+
+                    component.Damage.ArmourPiercing = Math.Clamp(component.Damage.ArmourPiercing.Float() - targetThreshold, 0f, component.Damage.ArmourPiercing.Float() + targetThreshold);
+
+                    component.Damage.DamageDict[requiredDamageType] = Math.Clamp((component.Damage.DamageDict[requiredDamageType] - resultThreshold).Float(), 0f, (component.Damage.DamageDict[requiredDamageType] + resultThreshold).Float());
+
+                    if (component.Damage[requiredDamageType] < resultThreshold)
+                        stopPenetration = true;
+
                 }
                 if (stopPenetration)
                     component.ProjectileSpent = true;
-            }
-
-            // If the object won't be destroyed, it "tanks" the penetration hit.
-            if (modifiedDamage.GetTotal() < damageRequired)
-            {
-                component.ProjectileSpent = true;
-            }
-
-            if (!component.ProjectileSpent)
-            {
-                component.PenetrationAmount += damageRequired;
-                // The projectile has dealt enough damage to be spent.
-                if (component.PenetrationAmount >= component.PenetrationThreshold)
-                {
-                    component.ProjectileSpent = true;
-                }
             }
         }
         else

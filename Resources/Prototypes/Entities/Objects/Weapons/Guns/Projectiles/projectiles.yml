@@ -89,6 +89,8 @@
     damage:
       types:
         Piercing: 14
+    penetrationDamageTypeRequirement:
+    - Piercing
     soundHit:
       path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
   - type: TimedDespawn

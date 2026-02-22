@@ -75,10 +75,12 @@
         map: ["enum.GunVisualLayers.Mag"]
   #SS220 increase-automatic-rifles-spread begin
   - type: GunWieldBonus
-    minAngle: -18
-    maxAngle: -24
+    minAngle: -14
+    maxAngle: -27
   #SS220 increase-automatic-rifles-spread end
   - type: Gun
+    minAngle: 15
+    maxAngle: 36
    #ss220 gunmodes start
     availableModes:
       - FullAuto
@@ -86,8 +88,8 @@
    #ss220 gunmodes end
     fireRate: 5
     #SS220 increase-automatic-rifles-spread begin
-    angleIncrease: 4
-    angleDecay: 14
+    angleIncrease: 1.75
+    angleDecay: 6
     #SS220 increase-automatic-rifles-spread end
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/rifle2.ogg
@@ -184,10 +186,12 @@
     sprite: SS220/Objects/Weapons/Guns/Rifles/lecter.rsi #ss220 lecter resprite
   #SS220 increase-automatic-rifles-spread begin
   - type: GunWieldBonus
-    minAngle: -19
-    maxAngle: -20
+    minAngle: -12
+    maxAngle: -30
   #SS220 increase-automatic-rifles-spread end
   - type: Gun
+    minAngle: 13
+    maxAngle: 36
   #ss220 gunmodes start
     availableModes:
       - FullAuto
@@ -195,8 +199,8 @@
       - Burst
   #ss220 gunmodes end
     #SS220 increase-automatic-rifles-spread begin
-    angleIncrease: 2
-    angleDecay: 12
+    angleIncrease: 1
+    angleDecay: 6
     #SS220 increase-automatic-rifles-spread end
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/ltrifle.ogg

@@ -12,6 +12,7 @@ namespace Content.Shared.FCB.ComplexRepairable;
 /// Use this component to mark a device as repairable.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+
 public sealed partial class ComplexRepairableComponent : Component
 {
     /// <summary>

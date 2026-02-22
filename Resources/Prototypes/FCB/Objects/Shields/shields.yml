@@ -64,7 +64,7 @@
   name: riot shield
   parent: [ BaseShieldAlt, BaseSecurityContraband ]
   id: RiotShieldAlt
-  description: A large tower shield made of strikeproof polymeres. It can be effectively used to block all types of attacks due to it's light weight but will not withstand anything more serious than melee attacks and primitive balistic projectiles. #SS220 shield rework
+  description: A large tower shield made of strikeproof polymeres. It can be effectively used to block all types of attacks due to it's light weight but will not withstand anything more serious than melee attacks and primitive balistic projectiles.
   components:
     - type: StaticPrice
       price: 90
@@ -83,6 +83,7 @@
           Poison: 1000
           Airloss: 1000
           Caustic: 1000
+          #Shock: 30
       durabilitytresholddict:
           Piercing: 7
           Blunt: 15
@@ -92,12 +93,13 @@
           Poison: 1000
           Airloss: 1000
           Caustic: 1000
+          #Shock: 40
 
 - type: entity
   name: laser shield
   parent: [ BaseShieldAlt, BaseSecurityContraband ]
   id: RiotLaserShieldAlt
-  description: Not even technically a shield but an advanced heat dissipation system. It is able to effectively reflect energy of high temperature energy bolts and lasers but is fairly useless against all mechanical attacks. #SS220 shield rework
+  description: Not even technically a shield but an advanced heat dissipation system. It is able to effectively reflect energy of high temperature energy bolts and lasers but is fairly useless against all mechanical attacks.
   components:
     - type: Sprite
       state: riot_laser-icon
@@ -118,6 +120,7 @@
           Blunt: 10
           Heat: 60
           Slash: 7
+          Shock: 30
       durabilitytresholddict:
           Radiation: 1000
           Poison: 1000
@@ -127,12 +130,13 @@
           Blunt: 5
           Heat: 35
           Slash: 4
+          Shock: 40
 
 - type: entity
   name: ballistic shield
   parent: [ BaseShieldAlt, BaseSecurityContraband ]
   id: RiotBulletShieldAlt
-  description: A heavy shield made of depelted uranium and plasteel. It is very heavy and unhandy against melee hits but can withstand all but most powerful attacks. #SS220 shield rework
+  description: A heavy shield made of depelted uranium and plasteel. It is very heavy and unhandy against melee hits but can withstand all but most powerful attacks.
   components:
     - type: Sprite
       state: riot_bullet-icon
@@ -149,19 +153,21 @@
           Poison: 1000
           Airloss: 1000
           Caustic: 1000
-          Piercing: 37
+          Piercing: 55
           Blunt: 35
           Heat: 30
           Slash: 35
+          Shock: 30
       durabilitytresholddict:
           Radiation: 1000
           Poison: 1000
           Airloss: 1000
           Caustic: 1000
-          Piercing: 30
+          Piercing: 40
           Blunt: 30
           Heat: 25
           Slash: 30
+          Shock: 40
     - type: ClothingSpeedModifier
       sprintModifier: 0.9
     - type: HeldSpeedModifier
@@ -325,7 +331,6 @@
           Poison: 1000
           Airloss: 1000
           Caustic: 1000
-    #SS220 shield rework end
     - type: Construction
       graph: MakeshiftShield
       node: makeshiftShield
@@ -356,7 +361,7 @@
   name: web shield
   parent: BaseShieldAlt
   id: WebShieldAlt
-  description: A stringy shield. It's more a decoration than an actual defence measure. #SS220 shield rework
+  description: A stringy shield. It's more a decoration than an actual defence measure.
   components:
     - type: Sprite
       sprite: Objects/Weapons/Melee/web-shield.rsi
@@ -514,7 +519,7 @@
   name: energy shield
   parent: [BaseItem]
   id: EnergyShieldAlt
-  description: A piece of advanced tech made based on the technology used in the field shields. It is lightweight and can very effectively block any types of attacks. #SS220 shield rework
+  description: A piece of advanced tech made based on the technology used in the field shields. It is lightweight and can very effectively block any types of attacks.
   components:
     - type: ItemToggle
       soundActivate:
@@ -572,7 +577,7 @@
     - type: Appearance
     - type: ArmorBlock
       tresholddict:
-        Piercing: 35
+        Piercing: 55
         Blunt: 30
         Heat: 26
         Slash: 30
@@ -582,7 +587,7 @@
         Caustic: 1000
       #Blocks effectively anything station normally uses
       durabilitytresholddict:
-        Piercing: 40
+        Piercing: 60
         Blunt: 40
         Heat: 40
         Slash: 40

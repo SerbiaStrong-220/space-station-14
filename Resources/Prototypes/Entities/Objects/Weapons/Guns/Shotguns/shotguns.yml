@@ -27,6 +27,7 @@
   - type: AmmoCounter
   - type: Gun
     fireRate: 2
+    angleIncrease: 7
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -79,6 +80,10 @@
   - type: AmmoCounter
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
   - type: Gun
+  #FCB realistic shotguns begin
+    angleIncrease: 10
+    angleDecay: 6
+  #FCB realistic shotguns end
     fireRate: 2
     selectedMode: FullAuto
     availableModes:
@@ -125,8 +130,6 @@
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
   - type: Gun
     fireRate: 3
-  - type: GunSpreadModifier
-    spread: 0.6
   - type: BallisticAmmoProvider
     capacity: 2
   - type: Construction
@@ -157,7 +160,16 @@
   - type: Item
     sprite: Objects/Weapons/Guns/Shotguns/enforcer_inhands_64x.rsi
   - type: BallisticAmmoProvider
+  #FCB realistic shotguns begin
+  - type: GunWieldBonus
+    minAngle: -16
+    maxAngle: -18
+  #FCB realistic shotguns end
   - type: Gun # Corvax-Guns
+    minAngle: 19 #FCB realistic shotguns
+    maxAngle: 26 #FCB realistic shotguns
+    angleIncrease: 3 #FCB realistic shotguns
+    angleDecay: 6 #FCB realistic shotguns
     soundGunshot:
       path: /Audio/Corvax/Weapons/Guns/Gunshots/shotgun_metal.ogg
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
@@ -191,8 +203,6 @@
     fireRate: 1
     soundGunshot: # Corvax-Guns
       path: /Audio/Corvax/Weapons/Guns/Gunshots/shotgun_alt.ogg
-  - type: GunSpreadModifier
-    spread: 0.6
   - type: Tag
     tags:
     - WeaponShotgunKammerer

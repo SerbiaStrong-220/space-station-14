@@ -8,6 +8,7 @@
     damage:
       types:
         Piercing: 33 #ss220lowTTKUpdate
+      armourPiercing: 15 #FCB armour piercing added
 
 - type: entity
   id: BulletLightRiflePractice
@@ -31,6 +32,7 @@
       types:
         Piercing: 16 #weaponBalance #Incendary rebalance
         Heat: 3 #weaponBalance
+      armourPiercing: 7 #FCB armour piercing added
 
 - type: entity
   id: BulletLightRifleUranium
@@ -43,3 +45,4 @@
       types:
         Radiation: 9
         Piercing: 14 #ss220lowTTKUpdate
+      armourPiercing: 16 #FCB armour piercing added
