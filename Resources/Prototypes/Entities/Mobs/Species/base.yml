@@ -152,8 +152,8 @@
   - type: Damageable
     piercingThreshold: 15
   - type: EyeCursorOffset
-    maxOffset: 4
-    pvsIncrease: 0.4
+    maxOffset: 6
+    pvsIncrease: 0.6
   - type: EyeOffsetInCombatMode
   - type: Cuffable
   - type: Ensnareable

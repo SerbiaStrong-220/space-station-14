@@ -456,11 +456,16 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
         EntityUid pilot = (EntityUid)ent.Comp.PilotSlot.ContainedEntity;
 
-        if (TryEject(ent.Owner, ent.Comp))
+        TransferMindIntoPilot(ent);
+        if (TryComp<BarotraumaComponent>(pilot, out var barotraumaComp))
+            barotraumaComp.HasImmunity = false;
+
+        if (!TryEject(ent.Owner, ent.Comp))
         {
-            TransferMindIntoPilot(ent);
-            if (TryComp<BarotraumaComponent>(pilot, out var barotraumaComp))
-                barotraumaComp.HasImmunity = false;
+            TransferMindIntoMech(ent);
+
+            if(barotraumaComp != null)
+                barotraumaComp.HasImmunity = true;
         }
     }
 

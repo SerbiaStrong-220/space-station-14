@@ -100,9 +100,6 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         args.Handled = true;
 
-        if (!TryEject(uid, component))
-            return;
-
         var ev = new OnMechExitEvent();
         RaiseLocalEvent(uid, ref ev);
     }

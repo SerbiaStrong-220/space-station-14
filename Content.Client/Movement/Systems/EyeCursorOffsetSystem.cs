@@ -28,6 +28,12 @@ public sealed partial class EyeCursorOffsetSystem : EntitySystem
 
     private void OnGetEyeOffsetEvent(EntityUid uid, EyeCursorOffsetComponent component, ref GetEyeOffsetEvent args)
     {
+        if (TryComp<EyeOffsetInCombatModeComponent>(uid, out var combatOffsetComp))
+        {
+            if (!TryComp<CombatModeComponent>(uid, out var combatModeComp) || !combatModeComp.IsInCombatMode)
+                return;
+        }
+
         var offset = OffsetAfterMouse(uid, component);
         if (offset == null)
             return;
@@ -61,12 +67,6 @@ public sealed partial class EyeCursorOffsetSystem : EntitySystem
         var MaxOffset = component.MaxOffset;
 
         var PvsIncrease = component.PvsIncrease;
-
-        if (TryComp<EyeOffsetInCombatModeComponent>(uid, out var combatOffsetComp))
-        {
-            if (!TryComp<CombatModeComponent>(uid, out var combatModeComp) || !combatModeComp.IsInCombatMode)
-                MaxOffset = 0f;
-        }
 
         // Doesn't move the offset if the mouse has left the game window!
         if (_inputManager.MouseScreenPosition.Window != WindowId.Invalid)

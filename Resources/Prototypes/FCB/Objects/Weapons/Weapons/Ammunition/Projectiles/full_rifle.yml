@@ -1,0 +1,11 @@
+- type: entity
+  id: BulletFullRifle
+  name: bullet (7,62x55)
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 42
+      armourPiercing: 30

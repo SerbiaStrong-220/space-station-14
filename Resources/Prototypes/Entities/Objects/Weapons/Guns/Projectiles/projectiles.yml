@@ -70,7 +70,7 @@
       projectile:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.1,-0.10,0.1,0.30" #SS220 BulletSpeed
+          bounds: "-0.15,-0.15,0.15,0.37" #FCB realistic weapons
         hard: false
         mask:
         - Impassable

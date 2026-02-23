@@ -35,14 +35,18 @@
       path: /Audio/Weapons/Guns/Gunshots/shotgun.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/empty.ogg
-  - type: BallisticAmmoProvider
-    whitelist:
-      tags:
-      - ShellShotgun
-    capacity: 7
-    proto: ShellShotgun
-    soundInsert:
-      path: /Audio/Weapons/Guns/MagIn/shotgun_insert.ogg
+  - type: ChamberMagazineAmmoProvider
+    soundRack:
+      path: /Audio/Weapons/Guns/Cock/ltrifle_cock.ogg
+  - type: ItemSlots
+    slots:
+      gun_chamber:
+        name: Chamber
+        startingItem: ShellShotgun
+        priority: 1
+        whitelist:
+          tags:
+            - ShellShotgun
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
@@ -104,11 +108,20 @@
         whitelistFailPopup: gun-magazine-whitelist-fail
         insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+      gun_chamber:
+        name: Chamber
+        startingItem: ShellShotgun
+        priority: 1
+        whitelist:
+          tags:
+            - ShellShotgun
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
-  - type: MagazineAmmoProvider
+  - type: ChamberMagazineAmmoProvider
+    soundRack:
+      path: /Audio/Weapons/Guns/Cock/ltrifle_cock.ogg
   - type: MagazineVisuals
     magState: mag
     steps: 1

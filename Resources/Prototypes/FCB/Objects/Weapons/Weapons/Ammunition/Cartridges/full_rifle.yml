@@ -1,0 +1,26 @@
+- type: entity
+  id: BaseFullRifleCartridge
+  name: cartridge (7,62x55)
+  parent: [ BaseCartridge, BaseSecurityContraband ]
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+    - FullRifleCartridge
+  - type: CartridgeAmmo
+    proto: BulletFullRifle
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/ammo_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+  - type: StaticPrice
+    price: 5
+
+- type: entity
+  id: FullRifleCartridge
+  name: cartridge (7,62x55 FMJ)
+  parent: BaseFullRifleCartridge
+  description: Full-sized rifle cartridge mostly used in battle rifles and LMGs. Bullet of this one consists of a steel core covered in soft jacket
