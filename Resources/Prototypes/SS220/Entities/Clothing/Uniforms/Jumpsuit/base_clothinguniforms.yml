@@ -3,7 +3,7 @@
 # Flipped
 - type: entity
   parent: [ClothingUniformBase, BaseFoldable]
-  id: ClothingUniformBaseFoldable
+  id: ClothingUniformFoldableBaseSS220
   abstract: true
   components:
   - type: Appearance
@@ -23,8 +23,8 @@
       visible: false
 
 - type: entity
-  parent: ClothingUniformBaseFoldable
-  id: ClothingUniformBaseFoldableTie
+  parent: ClothingUniformFoldableBaseSS220
+  id: ClothingUniformFoldableBaseTieSS220
   abstract: true
   components:
   - type: Foldable
