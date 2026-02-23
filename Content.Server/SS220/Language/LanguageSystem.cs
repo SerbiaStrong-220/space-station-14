@@ -29,7 +29,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         SubscribeLocalEvent<LanguageComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<LanguageComponent, SendLanguageMessageAttemptEvent>(OnSendLanguageMessageAttemptEvent);
         SubscribeLocalEvent<LanguageComponent, AccentGetEvent>(OnAccentGet);
-        SubscribeLocalEvent<PolymorphedEntityComponent, PolymorphedEvent>(OnPolymorphed);
+        SubscribeLocalEvent<LanguageComponent, PolymorphedEvent>(OnPolymorphed);
 
         // Client
         SubscribeNetworkEvent<ClientSelectLanguageEvent>(OnClientSelectLanguage);
@@ -140,7 +140,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         UpdateSeed();
     }
 
-    private void OnPolymorphed(Entity<PolymorphedEntityComponent> ent, ref PolymorphedEvent ev)
+    private void OnPolymorphed(Entity<LanguageComponent> ent, ref PolymorphedEvent ev)
     {
         if (ev.IsRevert)
             return;
