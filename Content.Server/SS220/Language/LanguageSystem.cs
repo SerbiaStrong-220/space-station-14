@@ -143,6 +143,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
     {
         if (ev.IsRevert)
             return;
+
         AddLanguagesFromSource(ent, ev.NewEntity);
     }
 }
