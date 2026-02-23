@@ -155,7 +155,7 @@ public abstract partial class SharedStaminaSystem : EntitySystem
             return;
         }
 
-        var ev = new StaminaDamageOnHitAttemptEvent();
+        var ev = new StaminaDamageOnHitAttemptEvent(args.Direction == null, false); //SS220 balanced staminaweapons
         RaiseLocalEvent(uid, ref ev);
         if (ev.Cancelled)
             return;
@@ -184,8 +184,14 @@ public abstract partial class SharedStaminaSystem : EntitySystem
 
         damage += hitEvent.FlatModifier;
 
+        RaiseLocalEvent(uid, new StaminaDamageMeleeHitEvent(toHit, args.Direction)); //SS220 balanced staminaweapons
+
         foreach (var (ent, comp) in toHit)
         {
+            //SS220 balanced staminaweapons begin
+            if (args.Direction == null)
+                damage *= component.LightAttackDamageMultiplier;
+            //SS220 balanced staminaweapons end
             TakeStaminaDamage(ent, damage / toHit.Count, comp, source: args.User, with: args.Weapon, sound: component.Sound, ignoreResist: component.IgnoreResistance /* SS220 Add ingnore resistance */);
         }
     }
