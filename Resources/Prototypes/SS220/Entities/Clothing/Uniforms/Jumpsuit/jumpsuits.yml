@@ -786,6 +786,81 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/wasteland_suit.rsi
 
 - type: entity
+  parent: ClothingUniformBaseFoldableBase
+  id: ClothingUniformJumpsuitWeddingBlack
+  name: black wedding suit
+  description: The very moment when a man is asked for his opinion for the last time.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/wedding_black.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/wedding_black.rsi
+
+- type: entity
+  parent: [ClothingUniformBaseFoldableBaseOpened, ClothingUniformJumpsuitWeddingBlack]
+  id: ClothingUniformJumpsuitWeddingBlackOpened
+  name: black wedding suit
+
+- type: entity
+  parent: ClothingUniformBaseFoldableBase
+  id: ClothingUniformJumpsuitWeddingBlackAndWhite
+  name: black and white wedding suit
+  description: How handsome you have become! You have grown so tall! You look like a groom. Where is your bride?
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/wedding_black_and_white.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/wedding_black_and_white.rsi
+
+- type: entity
+  parent: [ClothingUniformBaseFoldableBaseOpened, ClothingUniformJumpsuitWeddingBlackAndWhite]
+  id: ClothingUniformJumpsuitWeddingBlackAndWhiteOpened
+  name: black and white wedding suit
+
+- type: entity
+  parent: ClothingUniformBaseFoldableBase
+  id: ClothingUniformJumpsuitWeddingGreen
+  name: green wedding suit
+  description: I was drunk... I woke up at the registry office...
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/wedding_green.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/wedding_green.rsi
+
+- type: entity
+  parent: [ClothingUniformBaseFoldableBaseOpened, ClothingUniformJumpsuitWeddingGreen]
+  id: ClothingUniformJumpsuitWeddingGreenOpened
+  name: green wedding suit
+
+- type: entity
+  parent: ClothingUniformBaseFoldableBase
+  id: ClothingUniformJumpsuitWeddingWhite
+  name: white wedding suit
+  description: Well, I am ready. I transferred the house to my father and the business to my mother.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/wedding_white.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/wedding_white.rsi
+
+- type: entity
+  parent: [ClothingUniformBaseFoldableBaseOpened, ClothingUniformJumpsuitWeddingWhite]
+  id: ClothingUniformJumpsuitWeddingWhiteOpened
+  name: white wedding suit
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitWitness
+  name: witness suit
+  description: was a witness to many events.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/wedding_witness.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/wedding_witness.rsi
+
+- type: entity
   parent: [ClothingUniformJumpsuitChameleon]
   id: ClothingUniformJumpsuitElectricity
   suffix: Electrification jumpsuit

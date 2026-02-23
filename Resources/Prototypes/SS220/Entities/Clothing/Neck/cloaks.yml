@@ -3,8 +3,8 @@
 - type: entity
   parent: ClothingNeckBase
   id: ClothingNeckCloakFieldOfficerCentComm
-  name: плащ Полевого Офицера Центрального Командования
-  description: От этого плаща так и веет властью и вашим увольнением.
+  name: CentComm field officer cloak
+  description: This cloak reeks of authority and your termination.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Neck/Cloaks/centcomm_fo.rsi
@@ -12,8 +12,8 @@
 - type: entity
   parent: ClothingNeckBase
   id: ClothingNeckCloakWhiteCapFormal
-  name: белый формальный плащ капитана
-  description: Роскошный плащ почётного ветерана за выслугу лет.
+  name: white formal captain's cloak
+  description: A luxurious cloak for an honored veteran of long service.
   suffix: За время в игре
   components:
   - type: Sprite
@@ -33,8 +33,8 @@
 - type: entity
   parent: ClothingNeckBase
   id: ClothingCloakBlueShield
-  name: плащ Синего Щита
-  description: Используется офицером «Синий Щит», который верно защищает своих глав.
+  name: Blue Shield cloak
+  description: Used by a Blue Shield officer, who faithfully protects their heads of staff.
   components:
     - type: Sprite
       sprite: SS220/Clothing/Neck/Cloaks/blueshield.rsi
@@ -42,9 +42,9 @@
 - type: entity
   parent: ClothingNeckBase
   id: ClothingCloak1984
-  name: плащ 1984
+  name: 1984 cloak
+  description: Literally 1984.
   suffix: Shitspawn
-  description: Литерали 1984.
   components:
     - type: Sprite
       sprite: SS220/Clothing/Neck/Cloaks/shitty-1984.rsi
@@ -62,8 +62,8 @@
 - type: entity
   parent: ClothingNeckBase
   id: ClothingNeckCloakAlisa
-  name: сердце Алисы
-  description: Огромное доброе сердце, запечатанное в куске ткани.
+  name: heart of Alisa
+  description: A huge, kind heart sealed in a piece of cloth.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Neck/Cloaks/alisa.rsi

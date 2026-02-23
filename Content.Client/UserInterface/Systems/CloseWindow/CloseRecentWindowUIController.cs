@@ -47,7 +47,7 @@ public sealed class CloseRecentWindowUIController : UIController
             if (window.IsOpen)
             {
                 //ss220 add pin for ui start
-                if (_entityManager.System<PinUISystem>().IsPinned(window))
+                if (_entityManager.TrySystem(out PinUISystem? pinSystem) && pinSystem.IsPinned(window))
                     return;
                 //ss220 add pin for ui end
 

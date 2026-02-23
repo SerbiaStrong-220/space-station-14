@@ -210,34 +210,6 @@
   - !type:SpawnEntity
     entity: IngotSilver1
 
-#SS220 Solidify Plasma & Uranium begin
-- type: reaction
-  id: SolidifyPlasma
-  impact: Low
-  quantized: true
-  reactants:
-    Plasma:
-      amount: 10
-    FrostOil:
-      amount: 5
-  effects:
-  - !type:SpawnEntity
-    entity: SheetPlasma1
-
-- type: reaction
-  id: SolidifyUranium
-  impact: Low
-  quantized: true
-  reactants:
-    Uranium:
-      amount: 10
-    FrostOil:
-      amount: 5
-  effects:
-  - !type:SpawnEntity
-    entity: SheetUranium1
-#SS220 Solidify Plasma & Uranium end
-
 - type: reaction
   id: WehHewExplosion
   impact: High

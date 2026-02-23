@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Form>
+  <FormId>law_cc_req</FormId>
+  <PrototypeId>PaperNtFormLaw</PrototypeId>
+  <EntityName>форма НТ-ЦК-ЗАП</EntityName>
+  <PhotocopierTitle>Запрос о предоставлении информации Центральным Командованием</PhotocopierTitle>
+  <Content><![CDATA[[bold]Форма НТ-ЦК-ЗАП[/bold]
+[head=2]Запрос о предоставлении информации Центральным Командованием[/head]
+
+[italic]Дата: ДЕНЬ/МЕСЯЦ/ГОД[/italic]
+
+Я, (ПОЛНОЕ ИМЯ), как (ДОЛЖНОСТЬ), прошу предоставить Центральное Командование следующую информацию:
+
+[italic]Место для печатей[/italic]]]></Content>
+</Form>
