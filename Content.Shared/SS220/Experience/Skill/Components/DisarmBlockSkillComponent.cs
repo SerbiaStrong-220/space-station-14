@@ -17,5 +17,5 @@ public sealed partial class DisarmBlockSkillComponent : Component
 
     [DataField]
     [AutoNetworkedField]
-    public LocId DisarmBlockedPopupHand = "disarm-blocked-popup-hand ";
+    public LocId DisarmBlockedPopupHand = "disarm-blocked-popup-hand";
 }
