@@ -1,0 +1,85 @@
+- type: entity
+  parent: BaseMagazineCaselessRifle
+  id: MagazineCaselessRifleSemiAP
+  name: magazine (.25 caseless semi AP)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeCaselessRifleSemiAP
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#7c7c7c"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#7c7c7c"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#7c7c7c"
+
+- type: entity
+  id: MagazineCaselessRifleRubber
+  name: magazine (.25 caseless rubber)
+  parent: BaseMagazineCaselessRifle
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeCaselessRifleRubber
+  - type: Sprite
+    layers:
+    - state: base
+      sprite: Objects/Weapons/Guns/Ammunition/Magazine/CaselessRifle/caseless_rifle_mag.rsi
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#1E90FF"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#245EE3"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#245EE3"
+
+- type: entity
+  parent: BaseMagazinePistolCaselessRifle
+  id: MagazinePistolCaselessRifleRubber
+  name: pistol magazine (.25 caseless rubber)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeCaselessRifleRubber
+    capacity: 10
+  - type: Sprite
+    layers:
+    - state: base
+      sprite: Objects/Weapons/Guns/Ammunition/Magazine/CaselessRifle/caseless_rifle_mag.rsi
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#1E90FF"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#245EE3"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#245EE3"
+  - type: MagazineVisuals
+    magState: mag
+    steps: 6
+    zeroVisible: false
+  - type: Appearance

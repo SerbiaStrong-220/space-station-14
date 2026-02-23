@@ -1,8 +1,8 @@
 # Empty mags
 - type: entity
+  parent: [ BaseItem, BaseSecurityContraband ]
   id: BaseMagazineSniper
-  name: "magazine (.60 antimaterial)"
-  parent: [ BaseItem, BaseMajorContraband ]
+  name: magazine (.60 antimaterial)
   abstract: true
   components:
   - type: Tag
@@ -35,7 +35,40 @@
 
 # Magazines
 - type: entity
+  parent: BaseMagazineSniper
   id: MagazineSniper
   name: magazine (.60 antimaterial)
-  parent: BaseMagazineSniper
   description: Standart-issue magazine for high caliber ammo.
+
+- type: entity
+  parent: BaseMagazineSniper
+  id: MagazineSniperLight
+  name: magazine (.30 sniper)
+  description: Standart-issue magazine for .30 caliber  ammo.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/Sniper/sniper-small.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Tag
+    tags:
+      - MagazineSniperLight
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+        - CartridgeLightRifle
+    proto: CartridgeLightRifle
+    capacity: 12
+
+- type: entity
+  parent: MagazineSniperLight
+  id: MagazineSniperLightSemiAP
+  name: magazine (.30 sniper semi AP)
+  suffix: SemiAP
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeLightRifleSemiAP
+

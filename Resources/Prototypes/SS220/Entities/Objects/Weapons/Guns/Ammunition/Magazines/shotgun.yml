@@ -1,6 +1,7 @@
+### BASE
 - type: entity
   id: BaseMagazineShotgunHeavy
-  name: ammo drum (.55 shells)
+  name: box magazine (.55 shells)
   parent: [ BaseItem, BaseSecurityContraband ]
   abstract: true
   components:
@@ -14,7 +15,7 @@
         - ShellShotgunHeavy
     capacity: 10
     soundRack:
-      path: /Audio/Corvax/Weapons/Guns/Cock/shotgun_cock.ogg # Corvax-Guns
+      path: /Audio/Corvax/Weapons/Guns/Cock/shotgun_cock.ogg
   - type: Item
     size: Small
   - type: ContainerContainer
@@ -33,9 +34,10 @@
     zeroVisible: false
   - type: Appearance
 
+### .55 shotgun
 - type: entity
   id: MagazineShotgunHeavyEmpty
-  name: ammo drum (.55 shells any)
+  name: box magazine (.55 shells any)
   suffix: empty
   parent: BaseMagazineShotgunHeavy
   components:
@@ -44,7 +46,7 @@
 
 - type: entity
   id: MagazineShotgunHeavy
-  name: ammo drum (.55 pellet)
+  name: box magazine (.55 pellet)
   parent: BaseMagazineShotgunHeavy
   components:
   - type: BallisticAmmoProvider
@@ -58,7 +60,7 @@
 
 - type: entity
   id: MagazineShotgunHeavyRubber
-  name: ammo drum (.55 rubber)
+  name: box magazine (.55 rubber)
   parent: BaseMagazineShotgunHeavy
   components:
   - type: BallisticAmmoProvider
@@ -72,7 +74,7 @@
 
 - type: entity
   id: MagazineShotgunHeavySlug
-  name: ammo drum (.55 slug)
+  name: box magazine (.55 slug)
   parent: BaseMagazineShotgunHeavy
   components:
   - type: BallisticAmmoProvider
@@ -86,7 +88,7 @@
 
 - type: entity
   id: MagazineShotgunHeavyIncendiary
-  name: ammo drum (.55 incendiary)
+  name: box magazine (.55 incendiary)
   parent: BaseMagazineShotgunHeavy
   components:
   - type: BallisticAmmoProvider

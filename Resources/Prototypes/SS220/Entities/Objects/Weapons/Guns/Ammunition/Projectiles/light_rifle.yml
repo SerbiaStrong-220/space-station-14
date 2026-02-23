@@ -7,7 +7,12 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 19
+        Piercing: 15
+  - type: ArmorPenetration
+    rules:
+    - damageType: Piercing
+      armorthreshold: 0.5 # >50% res
+      multiplier: 2 # 30 dmg. Basic is 19
 
 - type: entity
   categories: [ HideSpawnMenu ]

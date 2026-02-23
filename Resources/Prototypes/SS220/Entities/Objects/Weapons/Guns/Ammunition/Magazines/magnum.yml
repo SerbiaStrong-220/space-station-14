@@ -72,3 +72,56 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-2
       map: ["enum.GunVisualLayers.Mag"]
+
+#gun variety
+- type: entity
+  parent: BaseMagazineMagnum
+  id: MagazineMagnumSemiAP
+  name: pistol magazine (.45 magnum semi AP)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeMagnumSemiAP
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#7c7c7c"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#7c7c7c"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#7c7c7c"
+
+- type: entity
+  parent: BaseMagazineMagnum
+  id: MagazineMagnumRubber
+  name: pistol magazine (.45 magnum rubber)
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeMagnumRubber
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#1E90FF"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#245EE3"
+      right:
+      - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#245EE3"

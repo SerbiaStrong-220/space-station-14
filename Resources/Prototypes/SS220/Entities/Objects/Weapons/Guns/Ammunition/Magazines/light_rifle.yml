@@ -1,11 +1,11 @@
 - type: entity
-  parent: BaseMagazineRifle
-  id: MagazineRifleSemiAP
-  name: magazine (.20 rifle semi AP)
-  description: 25-round double stack magazine for combat rifles.
+  parent: BaseMagazineLightRifle
+  id: MagazineLightRifleSemiAP
+  name: magazine (.30 rifle semi AP)
+  description: Curved 30-round double stack magazine for combat rifles.
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleSemiAP
+    proto: CartridgeLightRifleSemiAP
   - type: Sprite
     layers:
     - state: base
@@ -26,16 +26,16 @@
         color: "#7c7c7c"
 
 - type: entity
-  parent: BaseMagazineRifle
-  id: MagazineRifleRubber
-  name: magazine (.20 rifle rubber)
+  parent: BaseMagazineLightRifle
+  id: MagazineLightRifleRubber
+  name: magazine (.30 rifle rubber)
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeRifleRubber
+    proto: CartridgeLightRifleRubber
   - type: Sprite
     layers:
     - state: base
-      sprite: Objects/Weapons/Guns/Ammunition/Magazine/Rifle/rifle_mag.rsi
+      sprite: Objects/Weapons/Guns/Ammunition/Magazine/LightRifle/light_rifle_mag.rsi
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -46,8 +46,8 @@
       left:
       - state: inhand-left-mag
       - state: inhand-left-stripe
-        color: "#1E90FF"
+        color: "#245EE3"
       right:
       - state: inhand-right-mag
       - state: inhand-right-stripe
-        color: "#1E90FF"
+        color: "#245EE3"

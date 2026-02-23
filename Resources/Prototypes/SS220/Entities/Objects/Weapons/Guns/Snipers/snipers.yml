@@ -96,43 +96,47 @@
     slots:
     - Back
     - suitStorage
-
   - type: Gun
-    fireRate: 1
+    angleIncrease: 2
+    angleDecay: 2
+    minAngle: 20
+    maxAngle: 32
+    fireRate: 2.5
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/sniper.ogg
+  - type: GunWieldBonus
+    minAngle: -14
+    maxAngle: -10
   - type: ChamberMagazineAmmoProvider
-    autoCycle: false
     soundRack:
       path: /Audio/Weapons/Guns/Cock/sf_rifle_cock.ogg
   - type: ItemSlots
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineSniper
+        startingItem: MagazineSniperLight
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         priority: 2
         whitelist:
           tags:
-            - MagazineSniper
+            - MagazineSniperLight
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeAntiMateriel
+        startingItem: CartridgeLightRifleSemiAP
         priority: 1
         whitelist:
           tags:
-            - CartridgeAntiMateriel
+            - CartridgeLightRifle
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
   - type: AmmoCounter
-
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
     maxOffset: 3
