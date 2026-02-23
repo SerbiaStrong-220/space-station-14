@@ -161,6 +161,7 @@
     damage:
       groups:
         Brute: 5
+    crawlingAttackRateMultiplier: 1 # SS220 crawling combat
 
 # Used for mobs that are affected by atmospherics, pressure, and heat
 - type: entity

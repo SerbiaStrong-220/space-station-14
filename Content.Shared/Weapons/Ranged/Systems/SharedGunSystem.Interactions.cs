@@ -149,6 +149,11 @@ public abstract partial class SharedGunSystem
 
         component.NextFire = minimum;
         Dirty(uid, component);
+
+        // SS220 - crawling combat begin
+        if (_standing.IsDown(args.User)) // Update crawling combat alert if the user is downed
+            UpdateDownedGunAlert(args.User);
+        // SS220 - crawling combat end
     }
 
     ///SS220-new-feature kus start

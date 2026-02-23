@@ -38,6 +38,8 @@ public abstract partial class SharedStunSystem
     [Dependency] private readonly IConfigurationManager _cfgManager = default!;
 
     public static readonly ProtoId<AlertPrototype> KnockdownAlert = "Knockdown";
+    public static readonly ProtoId<AlertPrototype> DownedMeleeAlert = "DownedMelee"; // SS220 crawling combat
+    public static readonly ProtoId<AlertPrototype> DownedGunAlert = "DownedGun"; // SS220 crawling combat
 
     private void InitializeKnockdown()
     {

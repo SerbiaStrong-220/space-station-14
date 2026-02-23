@@ -1,0 +1,15 @@
+- type: alert
+  id: DownedMelee
+  icons:
+  - sprite: /Textures/SS220/Interface/Alerts/downed.rsi
+    state: melee
+  name: alerts-downed-melee-name
+  description: alerts-downed-melee-desc
+
+- type: alert
+  id: DownedGun
+  icons:
+  - sprite: /Textures/SS220/Interface/Alerts/downed.rsi
+    state: gun
+  name: alerts-downed-gun-name
+  description: alerts-downed-gun-desc

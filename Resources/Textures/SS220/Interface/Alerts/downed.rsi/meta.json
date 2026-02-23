@@ -1,0 +1,17 @@
+{
+    "version": 1,
+    "license": "Custom",
+    "copyright": "Gun Taken from desertrose at https://github.com/DesertRose2/desertrose/commit/120961e254d7f83a6e00a02c76e734f9e5019345, https://github.com/DesertRose2/desertrose/blob/master/icons/obj/guns/projectile.dmi (CC-BY-SA-3.0), melee taken from goonstation and modified by Swept at commit https://github.com/goonstation/goonstation/pull/3555/commits/b24eb6260647c0fcfe858268a26b6160bc50017a (CC-BY-NC-SA-3.0), both modified by LexaSvarshik(github)",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "gun"
+        },
+        {
+            "name": "melee"
+        }
+    ]
+}

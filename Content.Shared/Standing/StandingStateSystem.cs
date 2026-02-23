@@ -1,3 +1,4 @@
+using Content.Shared.Alert;
 using Content.Shared.Climbing.Events;
 using Content.Shared.Hands.Components;
 using Content.Shared.Inventory;
@@ -5,6 +6,7 @@ using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Rotation;
+using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
@@ -28,6 +30,8 @@ public sealed class StandingStateSystem : EntitySystem
         SubscribeLocalEvent<StandingStateComponent, RefreshFrictionModifiersEvent>(OnRefreshFrictionModifiers);
         SubscribeLocalEvent<StandingStateComponent, TileFrictionEvent>(OnTileFriction);
         SubscribeLocalEvent<StandingStateComponent, EndClimbEvent>(OnEndClimb);
+        SubscribeLocalEvent<StandingStateComponent, DownedEvent>(OnDowned); // SS220 crawling combat
+        SubscribeLocalEvent<StandingStateComponent, StoodEvent>(OnStood); // SS220 crawling combat
     }
 
     private void OnMobTargetCollide(Entity<StandingStateComponent> ent, ref AttemptMobTargetCollideEvent args)
@@ -211,10 +215,37 @@ public sealed class StandingStateSystem : EntitySystem
 
         entity.Comp1.ChangedFixtures.Clear();
     }
+
+    // SS220 crawling combat begin
+    private void OnDowned(Entity<StandingStateComponent> entity, ref DownedEvent args)
+    {
+        RaiseLocalEvent(entity.Owner, new StandingStateChangedEvent(entity.Owner), true);
+    }
+
+    private void OnStood(Entity<StandingStateComponent> entity, ref StoodEvent args)
+    {
+        RaiseLocalEvent(entity.Owner, new StandingStateChangedEvent(entity.Owner), true);
+    }
+    // SS220 crawling combat end
 }
 
 [ByRefEvent]
 public record struct DropHandItemsEvent();
+
+// SS220 crawling combat begin
+/// <summary>
+/// Raised when an entity's standing state changes (downed or stood up).
+/// </summary>
+public sealed class StandingStateChangedEvent : EntityEventArgs
+{
+    public EntityUid Entity;
+
+    public StandingStateChangedEvent(EntityUid entity)
+    {
+        Entity = entity;
+    }
+}
+// SS220 crawling combat end
 
 /// <summary>
 /// Subscribe if you can potentially block a down attempt.

@@ -5,6 +5,7 @@ using Content.Shared.ActionBlocker;
 using Content.Shared.Actions.Events;
 using Content.Shared.Administration.Components;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Alert;
 using Content.Shared.CombatMode;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Events;
@@ -23,7 +24,8 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
-using Content.Shared.Standing; // ss220 add block heavy attack while user is down
+using Content.Shared.Standing;
+using Content.Shared.Stunnable;
 using Content.Shared.StatusEffect;
 using Content.Shared.Weapons.Melee.Components;
 using Content.Shared.Weapons.Melee.Events;
@@ -65,10 +67,9 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
     [Dependency] protected readonly SharedPopupSystem PopupSystem = default!;
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
     [Dependency] private   readonly SharedStaminaSystem _stamina = default!;
-    // ss220 add block heavy attack while user is down start
-    [Dependency] private   readonly StandingStateSystem _standing = default!;
-    // ss220 add block heavy attack while user is down end
     [Dependency] private   readonly DamageExamineSystem _damageExamine = default!;
+    [Dependency] private   readonly StandingStateSystem _standingState = default!; // SS220 crawling combat
+    [Dependency] private   readonly AlertsSystem _alerts = default!; // SS220 crawling combat
 
     private const int AttackMask = (int) (CollisionGroup.MobMask | CollisionGroup.Opaque);
 
@@ -87,6 +88,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<MeleeWeaponComponent, HandSelectedEvent>(OnMeleeSelected);
+        SubscribeLocalEvent<MeleeWeaponComponent, HandDeselectedEvent>(OnMeleeDeselected); // SS220 crawling combat
         SubscribeLocalEvent<MeleeWeaponComponent, ShotAttemptedEvent>(OnMeleeShotAttempted);
         SubscribeLocalEvent<MeleeWeaponComponent, GunShotEvent>(OnMeleeShot);
         SubscribeLocalEvent<MeleeWeaponComponent, DamageExamineEvent>(OnMeleeExamineDamage);
@@ -95,6 +97,8 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         SubscribeLocalEvent<BonusMeleeAttackRateComponent, GetMeleeAttackRateEvent>(OnGetBonusMeleeAttackRate);
 
         SubscribeLocalEvent<ItemToggleMeleeWeaponComponent, ItemToggledEvent>(OnItemToggle);
+
+        SubscribeAllEvent<StandingStateChangedEvent>(OnStandingStateChanged); // SS220 crawling combat
 
         SubscribeAllEvent<HeavyAttackEvent>(OnHeavyAttack);
         SubscribeAllEvent<LightAttackEvent>(OnLightAttack);
@@ -144,6 +148,8 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
     }
     private void OnMeleeSelected(EntityUid uid, MeleeWeaponComponent component, HandSelectedEvent args)
     {
+        UpdateDownedMeleeAlert(args.User); // SS220 crawling combat
+
         var attackRate = GetAttackRate(uid, args.User, component);
         if (attackRate.Equals(0f))
             return;
@@ -164,6 +170,38 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         component.NextAttack = minimum;
         DirtyField(uid, component, nameof(MeleeWeaponComponent.NextAttack));
     }
+
+    // SS220 crawling combat begin
+    private void OnMeleeDeselected(EntityUid uid, MeleeWeaponComponent component, HandDeselectedEvent args)
+    {
+        UpdateDownedMeleeAlert(args.User);
+    }
+
+    private void OnStandingStateChanged(StandingStateChangedEvent args)
+    {
+        UpdateDownedMeleeAlert(args.Entity);
+    }
+
+    /// <summary>
+    /// Updates the DownedMelee alert based on whether the entity is downed and holding a melee weapon
+    /// with a crawling attack rate modifier
+    /// </summary>
+    private void UpdateDownedMeleeAlert(EntityUid entity)
+    {
+        // Try to show alert if entity is downed and has a melee weapon with crawling modifier != 1 in active hand
+        if (_standingState.IsDown(entity) &&
+            _hands.TryGetActiveItem(entity, out var activeItem) &&
+            TryComp<MeleeWeaponComponent>(activeItem, out var weapon) &&
+            weapon.CrawlingAttackRateMultiplier != 1f)
+        {
+            _alerts.ShowAlert(entity, SharedStunSystem.DownedMeleeAlert);
+            return;
+        }
+
+        // Clear alert if conditions are not met
+        _alerts.ClearAlert(entity, SharedStunSystem.DownedMeleeAlert);
+    }
+    // SS220 crawling combat end
 
     private void OnGetBonusMeleeDamage(EntityUid uid, BonusMeleeDamageComponent component, ref GetMeleeDamageEvent args)
     {
@@ -224,14 +262,6 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         if (args.SenderSession.AttachedEntity is not {} user)
             return;
 
-        // ss220 add block heavy attack and shooting while user is down start
-        if (_standing.IsDown(user))
-        {
-            PopupSystem.PopupPredictedCursor(Loc.GetString("lying-down-block-attack"), user);
-            return;
-        }
-        // ss220 add block heavy attack and shooting while user is down end
-
         if (!TryGetWeapon(user, out var weaponUid, out var weapon) ||
             weaponUid != GetEntity(msg.Weapon))
         {
@@ -272,7 +302,14 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         var ev = new GetMeleeAttackRateEvent(uid, component.AttackRate, 1, user);
         RaiseLocalEvent(uid, ref ev);
 
-        return ev.Rate * ev.Multipliers;
+        //return ev.Rate * ev.Multipliers; // SS220 crawling combat begin
+        var attackRate = ev.Rate * ev.Multipliers;
+
+        if (_standingState.IsDown(user))
+            attackRate *= component.CrawlingAttackRateMultiplier; // Apply crawling penalty if the user is downed
+        // SS220 crawling combat end
+
+        return attackRate;
     }
 
     public FixedPoint2 GetHeavyDamageModifier(EntityUid uid, EntityUid user, MeleeWeaponComponent? component = null)

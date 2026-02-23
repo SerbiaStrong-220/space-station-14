@@ -36,6 +36,8 @@ using Robust.Shared.Utility;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Standing;
+using Content.Shared.Stunnable;
+using Content.Shared.Alert;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -67,10 +69,8 @@ public abstract partial class SharedGunSystem : EntitySystem
     [Dependency] protected readonly ThrowingSystem ThrowingSystem = default!;
     [Dependency] private   readonly UseDelaySystem _useDelay = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
-
-    // ss220 add block heavy attack and shooting while user is down start
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-    // ss220 add block heavy attack and shooting while user is down end
+    [Dependency] private readonly AlertsSystem _alerts = default!; // SS220 crawling combat
+    [Dependency] private readonly StandingStateSystem _standing = default!; // SS220 crawling combat
     private static readonly ProtoId<TagPrototype> TrashTag = "Trash";
 
     private const float InteractNextFire = 0.3f;
@@ -85,6 +85,8 @@ public abstract partial class SharedGunSystem : EntitySystem
         SubscribeAllEvent<RequestShootEvent>(OnShootRequest);
         SubscribeAllEvent<RequestStopShootEvent>(OnStopShootRequest);
         SubscribeLocalEvent<GunComponent, MeleeHitEvent>(OnGunMelee);
+
+        SubscribeAllEvent<StandingStateChangedEvent>(OnStandingStateChanged); // SS220 crawling combat
 
         // Ammo providers
         InitializeBallistic();
@@ -103,6 +105,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         SubscribeLocalEvent<GunComponent, ExaminedEvent>(OnExamine);
         SubscribeLocalEvent<GunComponent, CycleModeEvent>(OnCycleMode);
         SubscribeLocalEvent<GunComponent, HandSelectedEvent>(OnGunSelected);
+        SubscribeLocalEvent<GunComponent, HandDeselectedEvent>(OnGunDeselected); // SS220 crawling combat
         SubscribeLocalEvent<GunComponent, MapInitEvent>(OnMapInit);
         // SS220-new-feature kus start
         SubscribeLocalEvent<GunComponent, GetVerbsEvent<Verb>>(OnGetVerbs);
@@ -246,14 +249,6 @@ public abstract partial class SharedGunSystem : EntitySystem
             return false;
         }
 
-        // ss220 add block heavy attack and shooting while user is down start
-        if (_standing.IsDown(user))
-        {
-            PopupSystem.PopupPredictedCursor(Loc.GetString("lying-down-block-shooting"), user);
-            return false;
-        }
-        // ss220 add block heavy attack and shooting while user is down end
-
         var toCoordinates = gun.ShootCoordinates;
 
         if (toCoordinates == null)
@@ -280,10 +275,19 @@ public abstract partial class SharedGunSystem : EntitySystem
         if (gun.NextFire > curTime)
             return false;
 
-        var fireRate = TimeSpan.FromSeconds(1f / gun.FireRateModified);
+        //var fireRate = TimeSpan.FromSeconds(1f / gun.FireRateModified); // SS220 - crawling combat begin
+
+        // Apply crawling fire rate modifier if the user is downed
+        var fireRateMultiplier = 1f;
+        if (_standing.IsDown(user) && gun.CrawlingFireRateMultiplier != 1f)
+            fireRateMultiplier = gun.CrawlingFireRateMultiplier;
+
+        var fireRate = TimeSpan.FromSeconds(1f / gun.FireRateModified / fireRateMultiplier);
 
         if (gun.SelectedMode == SelectiveFire.Burst || gun.BurstActivated)
-            fireRate = TimeSpan.FromSeconds(1f / gun.BurstFireRate);
+            fireRate = TimeSpan.FromSeconds(1f / gun.BurstFireRate / fireRateMultiplier);
+        // SS220 - crawling combat end
+
 
         // First shot
         // Previously we checked shotcounter but in some cases all the bullets got dumped at once
@@ -640,6 +644,49 @@ public abstract partial class SharedGunSystem : EntitySystem
     {
         public List<(NetCoordinates coordinates, Angle angle, SpriteSpecifier Sprite, float Distance)> Sprites = new();
     }
+
+    private void OnGunDeselected(EntityUid uid, GunComponent component, HandDeselectedEvent args)
+    {
+        UpdateDownedGunAlert(args.User);
+    }
+
+    private void OnStandingStateChanged(StandingStateChangedEvent args)
+    {
+        UpdateDownedGunAlert(args.Entity);
+    }
+
+    /// <summary>
+    /// Updates the DownedGun alert based on whether the entity is downed and holding a gun
+    /// with a crawling fire rate modifier.
+    /// </summary>
+    private void UpdateDownedGunAlert(EntityUid entity)
+    {
+        // Only show alert if entity is downed
+        if (!_standing.IsDown(entity))
+        {
+            _alerts.ClearAlert(entity, SharedStunSystem.DownedGunAlert);
+            return;
+        }
+
+        // Check if entity has a gun with crawling modifier != 1
+        if (_hands.TryGetActiveItem(entity, out var held) &&
+            TryComp<GunComponent>(held, out var gun))
+        {
+            if (gun.CrawlingFireRateMultiplier != 1f)
+            {
+                _alerts.ShowAlert(entity, SharedStunSystem.DownedGunAlert);
+            }
+            else
+            {
+                _alerts.ClearAlert(entity, SharedStunSystem.DownedGunAlert);
+            }
+        }
+        else
+        {
+            _alerts.ClearAlert(entity, SharedStunSystem.DownedGunAlert);
+        }
+    }
+
 }
 
 /// <summary>

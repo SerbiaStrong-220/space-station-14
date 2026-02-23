@@ -150,6 +150,15 @@ public sealed partial class MeleeWeaponComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool MustBeEquippedToUse = false;
+
+    // SS220 crawling combat begin
+    /// <summary>
+    /// Modifier for weapon attackrate when user is crawling. Lower penalty - lower rate.
+    /// </summary>
+    [DataField]
+    [AutoNetworkedField]
+    public float CrawlingAttackRateMultiplier = 0.7f;
+    // SS220 crawling combat end
 }
 
 /// <summary>

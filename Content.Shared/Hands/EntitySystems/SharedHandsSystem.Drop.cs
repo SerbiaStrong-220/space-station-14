@@ -39,6 +39,11 @@ public abstract partial class SharedHandsSystem
                                                 args.Container.ID); //ss220-add-cult-hand-hide-items
         RaiseLocalEvent(uid, didUnequip);
 
+        // SS220 crawling combat begin
+        if (args.Container.ID == hands.ActiveHandId)
+            RaiseLocalEvent(args.Entity, new HandDeselectedEvent(uid)); // Raise HandDeselectedEvent when item is removed from active hand (e.g. moved to storage)
+        // SS220 crawling combat end
+
         if (TryComp(args.Entity, out VirtualItemComponent? @virtual))
             _virtualSystem.DeleteVirtualItem((args.Entity, @virtual), uid);
     }
