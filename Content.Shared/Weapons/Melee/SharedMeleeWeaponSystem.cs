@@ -858,11 +858,11 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         // SS220-add-skill-to-disarm-begin
         var disarmerEv = new GetDisarmChanceDisarmerMultiplierEvent(disarmer, disarmed, inTargetHand, 1f);
         RaiseLocalEvent(disarmer, ref disarmerEv);
-        var disarmedEv = new GetDisarmChanceDisarmedMultiplierEvent(disarmer, disarmed, inTargetHand, 1f);
-        RaiseLocalEvent(disarmed, ref disarmedEv);
+        var targetEv = new GetDisarmChanceTargetMultiplierEvent(disarmer, disarmed, inTargetHand, 1f);
+        RaiseLocalEvent(disarmed, ref targetEv);
         // SS220-add-skill-to-disarm-end
 
-        return Math.Clamp(1f - (disarmerEv.Multiplier * disarmedEv.Multiplier * (1f - chance)), 0f, 1f); // SS220-add-skill-to-disarm
+        return Math.Clamp(1f - (disarmerEv.Multiplier * targetEv.Multiplier * (1f - chance)), 0f, 1f); // SS220-add-skill-to-disarm
     }
 
     private bool DoDisarm(EntityUid user, DisarmAttackEvent ev, EntityUid meleeUid, MeleeWeaponComponent component, ICommonSession? session)

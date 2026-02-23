@@ -8,8 +8,14 @@ namespace Content.Shared.SS220.Experience.Skill.Components;
 /// This is used to stop entity from being disarmed
 /// </summary>
 [RegisterComponent]
-[NetworkedComponent]
+[NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class DisarmBlockSkillComponent : Component
 {
+    [DataField]
+    [AutoNetworkedField]
+    public LocId DisarmBlockedPopupItem = "disarm-blocked-popup-item";
 
+    [DataField]
+    [AutoNetworkedField]
+    public LocId DisarmBlockedPopupHand = "disarm-blocked-popup-hand ";
 }
