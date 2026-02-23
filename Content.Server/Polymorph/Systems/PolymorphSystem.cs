@@ -282,7 +282,6 @@ public sealed partial class PolymorphSystem : EntitySystem
         // Raise an event to inform anything that wants to know about the entity swap
         var ev = new PolymorphedEvent(uid, child, false);
         RaiseLocalEvent(uid, ref ev);
-        RaiseLocalEvent(child, ref ev); //SS220 Polymorph language fix
 
         // visual effect spawn
         if (configuration.EffectProto != null)

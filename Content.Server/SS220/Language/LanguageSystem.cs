@@ -11,7 +11,6 @@ using Content.Shared.SS220.CCVars;
 using Content.Shared.Speech;
 using Content.Server.Speech.EntitySystems;
 using System.Linq;
-using Content.Server.Polymorph.Components;
 using Content.Shared.Polymorph;
 
 namespace Content.Server.SS220.Language;
@@ -144,13 +143,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
     {
         if (ev.IsRevert)
             return;
-
-        if (!TryComp<LanguageComponent>(ev.OldEntity, out var oldLangComp))
-        {
-            return;
-        }
-
-        AddLanguagesFromSource((ev.OldEntity, oldLangComp), ent.Owner);
+        AddLanguagesFromSource(ent, ev.NewEntity);
     }
 }
 
