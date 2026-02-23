@@ -105,6 +105,12 @@ public sealed partial class CultYoggRuleComponent : Component
     {
         Tags = ["CultYoggInnerHandToggleable"]
     };
+
+    /// <summary>
+    ///     Sleep effects that need to be removed.
+    /// </summary>
+    [DataField]
+    public List<EntProtoId> OnRemoveEffects = ["Muted", "StatusEffectForcedSleeping"];
     #endregion
 
     #region GodSummoning
