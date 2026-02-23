@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: NightmareStalker
-  changes:
-  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0430 \u043E\u0448\
-      \u0438\u0431\u043A\u0430 \u043E\u0442\u043A\u0430\u0442\u0430, \u0442\u0435\u043F\
-      \u0435\u0440\u044C \u0410\u043A\u0441\u0438\u043E\u043C\u0430 \u0442\u043E\u0447\
-      \u043D\u043E \u0432\u0435\u0440\u043D\u0443\u043B\u0430\u0441\u044C \u0432 \u043B\
-      \u0435\u0442\u043E"
-    type: Fix
-  id: 904
-  time: '2025-03-18T18:03:17.0000000+00:00'
-  url: https://github.com/SerbiaStrong-220/space-station-14/pull/2728
 - author: SIXSEVENONE
   changes:
   - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D \u043E\u0431\u0449\u0435\
@@ -8265,3 +8254,13 @@
   id: 1403
   time: '2026-02-21T13:17:12.0000000+00:00'
   url: https://github.com/SerbiaStrong-220/space-station-14/pull/3854
+- author: AlwyAnri
+  changes:
+  - message: "\u0410\u0434\u043C\u0438\u043D\u0438\u0441\u0442\u0440\u0430\u0446\u0438\
+      \u044F \u0442\u0435\u043F\u0435\u0440\u044C \u043C\u043E\u0436\u0435\u0442 \u0438\
+      \u0437\u043C\u0435\u043D\u044F\u0442\u044C TTS \u0438\u0433\u0440\u043E\u043A\
+      \u043E\u0432"
+    type: Fix
+  id: 1404
+  time: '2026-02-23T10:25:19.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/3932
