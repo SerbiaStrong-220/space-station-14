@@ -2150,11 +2150,6 @@
       amount: 1
     - id: SheetUranium1
       amount: 1
-  # SS220 Add stamina resistence begin
-  - type: StaminaResistance
-    damageCoefficient: 0.5
-    worn: false
-  # SS220 Add stamina resistence end
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: Zombie
@@ -2637,7 +2632,7 @@
     damageContainer: Biological
     damageModifierSet: MobBasicSpider
   - type: StaminaResistance
-    damageCoefficient: 0.2
+    damageCoefficient: 0.5
   #SS220-fauna-damagesets-ended
   - type: SolutionContainerManager
     solutions:
@@ -3237,10 +3232,10 @@
   id: MobCat
   description: Feline pet, very funny.
   components:
-#SS220 cat organ begin 
+#SS220 cat organ begin
   - type: Body
     prototype: AnimalCat
-#SS220 cat organ end 
+#SS220 cat organ end
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Pets/cat.rsi

@@ -83,3 +83,5 @@
   - type: Construction
     graph: scraparmor
     node: scraparmorfinished
+  - type: StaminaResistance #SS220 staminaweapons
+    damageCoefficient: 0.5

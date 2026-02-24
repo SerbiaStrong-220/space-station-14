@@ -32,7 +32,7 @@
         Radiation: 0.5
   # SS220 add stamina resistance begin
   - type: StaminaResistance
-    damageCoefficient: 0.5
+    damageCoefficient: 0.7
   # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
     walkModifier: 0.7
@@ -73,7 +73,7 @@
         Radiation: 0.2
   # SS220 add stamina resistance begin
   - type: StaminaResistance
-    damageCoefficient: 0.5
+    damageCoefficient: 0.7
   # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
     walkModifier: 0.7
@@ -217,7 +217,7 @@
         Caustic: 0.8
   # SS220 add stamina resistance for goliath hardsuit begin
   - type: StaminaResistance
-    damageCoefficient: 0.55
+    damageCoefficient: 0.6
   # SS220 add stamina resistance for goliath hardsuit end
   - type: ClothingSpeedModifier
     walkModifier: 0.8
@@ -266,6 +266,8 @@
     coolingCoefficient: 0.001
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitMaxim
+  - type: StaminaResistance #SS220 staminaweapons
+    damageCoefficient: 0.5
 
 #Security Hardsuit
 - type: entity
@@ -293,7 +295,7 @@
         Caustic: 0.7
   # SS220 add stamina resistance begin
   - type: StaminaResistance
-    damageCoefficient: 0.4
+    damageCoefficient: 0.6
   # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
     walkModifier: 0.75
@@ -409,7 +411,7 @@
         Caustic: 0.6
   # SS220 add stamina resistance begin
   - type: StaminaResistance
-    damageCoefficient: 0.35
+    damageCoefficient: 0.75
   # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
     walkModifier: 0.8
@@ -452,7 +454,7 @@
         Caustic: 0.7
   # SS220 add stamina resistance begin
   - type: StaminaResistance
-    damageCoefficient: 0.5
+    damageCoefficient: 0.8
   # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
     walkModifier: 0.8
@@ -591,7 +593,7 @@
         Caustic: 0.6
   # SS220 add stamina resistance begin
   - type: StaminaResistance
-    damageCoefficient: 0.35
+    damageCoefficient: 0.5
   # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
     walkModifier: 0.8
@@ -692,7 +694,7 @@
   # SS220-MIT-add-field-shields-end
   # SS220 add stamina resistance begin
   - type: StaminaResistance
-    damageCoefficient: 0.3
+    damageCoefficient: 0.45 #ss220 staminaweapons
   # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
     walkModifier: 0.9
@@ -745,7 +747,7 @@
         Caustic: 0.5  #ss-220 armReb
   # SS220 add stamina resistance begin
   - type: StaminaResistance
-    damageCoefficient: 0.1
+    damageCoefficient: 0.45 #ss220 staminaweapons
   # SS220 add stamina resistance end
   # SS220-MIT-add-field-shields-begin
   - type: FieldShieldProvider
@@ -805,7 +807,7 @@
         Caustic: 0.5
   # SS220 add stamina resistance begin
   - type: StaminaResistance
-    damageCoefficient: 0.1
+    damageCoefficient: 0.55 #ss220 staminaweapons
   # SS220 add stamina resistance end
   # SS220-MIT-add-field-shields-begin
   - type: FieldShieldProvider
@@ -874,7 +876,7 @@
         Caustic: 0.4
   # SS220 add stamina resistance begin
   - type: StaminaResistance
-    damageCoefficient: 0.1
+    damageCoefficient: 0.35
   # SS220 add stamina resistance end
   # SS220-MIT-add-field-shields-begin
   - type: FieldShieldProvider
@@ -942,7 +944,8 @@
         Caustic: 0.2
   # SS220 add stamina resistance begin
   - type: StaminaResistance
-    damageCoefficient: 0.1
+    damageCoefficient: 0.7
+  - type: DelayedKnockdownImmunity # so you can stamcrit jugg, but it will ignore batong/telescopic knockdown
   # SS220 add stamina resistance end
   # SS220-MIT-add-field-shields-begin
   - type: FieldShieldProvider
@@ -1081,7 +1084,7 @@
         Caustic: 0.75
   # SS220 add stamina resistance begin
   - type: StaminaResistance
-    damageCoefficient: 0.5
+    damageCoefficient: 0.65
   # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
     walkModifier: 0.6
@@ -1120,7 +1123,7 @@
         Caustic: 0.75
   # SS220 add stamina resistance begin
   - type: StaminaResistance
-    damageCoefficient: 0.35
+    damageCoefficient: 0.55
   # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
     walkModifier: 0.8
@@ -1286,7 +1289,7 @@
   - type: FireProtection
     reduction: 0.8
   - type: StaminaResistance # do not add these to other equipment or mobs, we don't want to microbalance these everywhere
-    damageCoefficient: 0.15 # Needs 21 hits with a disabler to stun :godo:
+    damageCoefficient: 0 # Needs 21 hits with a disabler to stun :godo: #SS220 staminaweapons
   - type: Armor
     modifiers:
       coefficients:
@@ -1317,6 +1320,7 @@
     radius: 1.5
     energy: 0.3
     netsync: false
+  - type: DelayedKnockdownImmunity
   #SS220-Deathsquad-Update-End
   - type: HeldSpeedModifier
   - type: ToggleableClothing
@@ -1407,7 +1411,7 @@
         Caustic: 0.8
   # SS220 add stamina resistance begin
   - type: StaminaResistance
-    damageCoefficient: 0.8
+    damageCoefficient: 0.9 #literally a painted EVA
   # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
     walkModifier: 0.9

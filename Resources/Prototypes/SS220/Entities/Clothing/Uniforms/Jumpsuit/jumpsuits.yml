@@ -28,7 +28,7 @@
 
   # Главный врач
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] 
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220]
   id: ClothingUniformJumpsuitCMOCorporate
   name: corporate CMO Jumpsuit
   description: «A beautiful, stylish suit of a real chief medical officer. It emphasises the person's nature and the beauty of his charisma...» Nothing further on the unopened label.
@@ -288,7 +288,7 @@
 
   # Бармен
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] 
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220]
   id: ClothingUniformJumpsuitBartenderRed
   name: red bartender's uniform
   description: A special red outfit to serve drinks.
@@ -299,7 +299,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/bartender_red.rsi
 
 - type: entity
-  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V2 
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING resprite V2
   id: ClothingUniformJumpsuitBartenderGreen
   name: green bartender's uniform
   description: A special green outfit to serve drinks.
