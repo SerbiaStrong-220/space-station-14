@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from TG Station at https://github.com/tgstation/tgstation/blob/master/icons/obj/chairs.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "comfy",
+      "directions": 4
+    },
+    {
+      "name": "comfy-overlay",
+      "directions": 4
+    }
+  ]
+}

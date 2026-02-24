@@ -1,0 +1,443 @@
+# Color Comfy Chairs
+- type: entity
+  parent: ChairBase
+  abstract: true
+  id: ComfyChairColorBase
+  name: comfy chair
+  description: It looks comfy.
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/comfy_chair_color.rsi
+    state: comfy
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorWhiteLight
+  suffix: White, Light
+  components:
+  - type: Sprite
+    color: "#eeeeee"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorWhiteMid
+  suffix: White, Mid
+  components:
+  - type: Sprite
+    color: "#cbcdd1"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorDarkLight
+  suffix: Dark, Light
+  components:
+  - type: Sprite
+    color: "#39393f"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorDarkMid
+  suffix: Dark, Mid
+  components:
+  - type: Sprite
+    color: "#2d2d33"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorCommandBlueLight
+  suffix: CommandBlue, Light
+  components:
+  - type: Sprite
+    color: "#418290"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorCommandBlueMid
+  suffix: CommandBlue, Mid
+  components:
+  - type: Sprite
+    color: "#2e5b76"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorCapBlueLight
+  suffix: CapBlue, Light
+  components:
+  - type: Sprite
+    color: "#41579a"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorCapBlueMid
+  suffix: CapBlue, Mid
+  components:
+  - type: Sprite
+    color: "#3d4379"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorLawIndigoLight
+  suffix: LawIndigo, Light
+  components:
+  - type: Sprite
+    color: "#293289"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorLawIndigoMid
+  suffix: LawIndigo, Mid
+  components:
+  - type: Sprite
+    color: "#293289"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorSecRedLight
+  suffix: SecRed, Light
+  components:
+  - type: Sprite
+    color: "#a52f29"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorSecRedMid
+  suffix: SecRed, Mid
+  components:
+  - type: Sprite
+    color: "#88242d"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorDecBrownLight
+  suffix: DecBrown, Light
+  components:
+  - type: Sprite
+    color: "#784f44"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorDecBrownMid
+  suffix: DecBrown, Mid
+  components:
+  - type: Sprite
+    color: "#573735"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorMedBlueLight
+  suffix: MedBlue, Light
+  components:
+  - type: Sprite
+    color: "#5fa4cc"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorMedBlueMid
+  suffix: MedBlue, Mid
+  components:
+  - type: Sprite
+    color: "#3e658c"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorMedCMOBlueLight
+  suffix: MedCMOBlue, Light
+  components:
+  - type: Sprite
+    color: "#286a90"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorMedCMOBlueMid
+  suffix: MedCMOBlue, Mid
+  components:
+  - type: Sprite
+    color: "#224e6d"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorMedCMOGreenLight
+  suffix: MedCMOGreen, Light
+  components:
+  - type: Sprite
+    color: "#27907b"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorMedCMOGreenMid
+  suffix: MedCMOGreen, Mid
+  components:
+  - type: Sprite
+    color: "#226d61"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorMedChemOrangeLight
+  suffix: MedChemOrange, Light
+  components:
+  - type: Sprite
+    color: "#d15b1b"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorMedChemOrangeMid
+  suffix: MedChemOrange, Mid
+  components:
+  - type: Sprite
+    color: "#a63a16"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorMedVirGreenLight
+  suffix: MedVirGreen, Light
+  components:
+  - type: Sprite
+    color: "#488c40"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorMedVirGreenMid
+  suffix: MedVirGreen, Mid
+  components:
+  - type: Sprite
+    color: "#29722e"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorEngYellowLight
+  suffix: EngYellow, Light
+  components:
+  - type: Sprite
+    color: "#edcf61"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorEngYellowMid
+  suffix: EngYellow, Mid
+  components:
+  - type: Sprite
+    color: "#d99330"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorEngGreenLight
+  suffix: EngGreen, Light
+  components:
+  - type: Sprite
+    color: "#39bf45"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorEngGreenMid
+  suffix: EngGreen, Mid
+  components:
+  - type: Sprite
+    color: "#2a8c32"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorEngOrangeLight
+  suffix: EngOrange, Light
+  components:
+  - type: Sprite
+    color: "#e0922b"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorEngOrangeMid
+  suffix: EngOrange, Mid
+  components:
+  - type: Sprite
+    color: "#cd610a"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorEngBlueLight
+  suffix: EngBlue, Light
+  components:
+  - type: Sprite
+    color: "#697896"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorEngBlueMid
+  suffix: EngBlue, Mid
+  components:
+  - type: Sprite
+    color: "#505277"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorAtmosBlueLight
+  suffix: AtmosBlue, Light
+  components:
+  - type: Sprite
+    color: "#43c8df"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorAtmosBlueMid
+  suffix: AtmosBlue, Mid
+  components:
+  - type: Sprite
+    color: "#2291ba"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorRNDPurpleLight
+  suffix: RNDPurple, Light
+  components:
+  - type: Sprite
+    color: "#793482"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorRNDPurpleMid
+  suffix: RNDPurple, Mid
+  components:
+  - type: Sprite
+    color: "#542a6c"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorRNDBrownLight
+  suffix: RNDBrown, Light
+  components:
+  - type: Sprite
+    color: "#6b5526"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorRNDBrownMid
+  suffix: RNDBrown, Mid
+  components:
+  - type: Sprite
+    color: "#876c33"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorRobRedLight
+  suffix: RobRed, Light
+  components:
+  - type: Sprite
+    color: "#92213d"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorRobRedMid
+  suffix: RobRed, Mid
+  components:
+  - type: Sprite
+    color: "#741327"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorCargoBrownLight
+  suffix: CargoBrown, Light
+  components:
+  - type: Sprite
+    color: "#b5722c"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorCargoBrownMid
+  suffix: CargoBrown, Mid
+  components:
+  - type: Sprite
+    color: "#864a23"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorSalvagePurpleLight
+  suffix: SalvagePurple, Light
+  components:
+  - type: Sprite
+    color: "#bc48cc"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorSalvagePurpleMid
+  suffix: SalvagePurple, Mid
+  components:
+  - type: Sprite
+    color: "#8133a8"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorNTBlueLight
+  suffix: NTBlue, Light
+  components:
+  - type: Sprite
+    color: "#446597"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorNTBlueMid
+  suffix: NTBlue, Mid
+  components:
+  - type: Sprite
+    color: "#314272"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorSyndiRedLight
+  suffix: SyndiRed, Light
+  components:
+  - type: Sprite
+    color: "#a00815"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorSyndiRedMid
+  suffix: SyndiRed, Mid
+  components:
+  - type: Sprite
+    color: "#7f0a14"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorGorlexRedLight
+  suffix: GorlexRed, Light
+  components:
+  - type: Sprite
+    color: "#cc0003"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorGorlexRedMid
+  suffix: GorlexRed, Mid
+  components:
+  - type: Sprite
+    color: "#980002"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorHydroBlueLight
+  suffix: HydroBlue, Light
+  components:
+  - type: Sprite
+    color: "#4a6dd9"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorHydroBlueMid
+  suffix: HydroBlue, Mid
+  components:
+  - type: Sprite
+    color: "#004da6"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorHydroGreenLight
+  suffix: HydroGreen, Light
+  components:
+  - type: Sprite
+    color: "#50d967"
+
+- type: entity
+  parent: ComfyChairColorBase
+  id: ComfyChairColorHydroGreenMid
+  suffix: HydroGreen, Mid
+  components:
+  - type: Sprite
+    color: "#00a658"
