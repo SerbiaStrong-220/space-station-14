@@ -131,8 +131,11 @@
     unwieldOnUse: false
   - type: GunWieldBonus
     #FCB realistic guns begin
-    minAngle: -10
-    maxAngle: -25
+    minAngle: -8
+    maxAngle: -18
+  - type: GunAimable
+    minAngle: -4
+    maxAngle: -11
     #FCB realistic guns end
   - type: Gun
     #FCB realistic guns begin
@@ -140,8 +143,8 @@
     angleDecay: 6
     #FCB realistic guns end
     #220 SG Angle Updates begin
-    minAngle: 11
-    maxAngle: 29
+    minAngle: 15
+    maxAngle: 35
     shotsPerBurst: 6
     #220 SG Angle Updates end
     availableModes:
@@ -290,17 +293,21 @@
   #FCB realistic guns begin
   - type: Wieldable
     unwieldOnUse: false
+  - type: GunAimable
+    minAngle: -4
+    maxAngle: -4
   - type: GunWieldBonus
-    minAngle: -8
-    maxAngle: -20
+    minAngle: -2
+    maxAngle: -19
+    angleIncrease: 0.65
   #FCB realistic guns end
   - type: Gun
     #220 SG Angle Updates begin
     fireRate: 6.5
-    minAngle: 9
-    maxAngle: 25
+    minAngle: 12
+    maxAngle: 30
     #220 SG Angle Updates end
-    angleIncrease: 0.65
+    angleIncrease: 1.3
     angleDecay: 6
     selectedMode: FullAuto
     shotsPerBurst: 5

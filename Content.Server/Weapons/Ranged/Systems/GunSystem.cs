@@ -37,7 +37,7 @@ public sealed partial class GunSystem : SharedGunSystem
     [Dependency] private readonly SharedStaminaSystem _stamina = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!; //SS220 shield rework
+    [Dependency] private readonly SharedPopupSystem _popup = default!; //FCB shield rework
     [Dependency] private readonly ShuttleNavInfoSystem _shuttleNavInfo = default!; // SS220 Add projectiles & hitscan on shuttle nav
 
     private const float DamagePitchVariation = 0.05f;

@@ -32,18 +32,18 @@ public sealed class StandingStateSystem : EntitySystem
 
     private void OnMobTargetCollide(Entity<StandingStateComponent> ent, ref AttemptMobTargetCollideEvent args)
     {
-        if (!ent.Comp.Standing)
-        {
-            args.Cancelled = true;
-        }
+        //if (!ent.Comp.Standing)
+        //{
+        //    args.Cancelled = true;
+        //}
     }
 
     private void OnMobCollide(Entity<StandingStateComponent> ent, ref AttemptMobCollideEvent args)
     {
-        if (!ent.Comp.Standing)
-        {
-            args.Cancelled = true;
-        }
+        //if (!ent.Comp.Standing)
+        //{
+        //    args.Cancelled = true;
+        //}
     }
 
     private void OnRefreshFrictionModifiers(Entity<StandingStateComponent> entity, ref RefreshFrictionModifiersEvent args)

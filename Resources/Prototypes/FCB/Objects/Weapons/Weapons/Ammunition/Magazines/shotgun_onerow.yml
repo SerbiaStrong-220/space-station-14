@@ -3,6 +3,9 @@
   name: "magazine (12x72 shotgun)"
   parent: [ BaseItem, BaseSecurityContraband ]
   components:
+  - type: Tag
+    tags:
+    - MagazineShotgun
   - type: Item
     size: Small
   - type: BallisticAmmoProvider

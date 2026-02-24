@@ -1,5 +1,6 @@
 // © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
 using Content.Client.Weapons.Ranged.Systems;
+using Content.Shared.FCB.Weapons.Components;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.Player;
@@ -66,8 +67,13 @@ public sealed class GunTargetingOverlay : Overlay //Basically WizDen's code with
             gun.MinAngleModified.Theta, gun.MaxAngleModified.Theta));
         var direction = (mousePos.Position - mapPos.Position);
 
+        var overlayColor = Color.LightBlue;
+
+        if (_entManager.TryGetComponent<GunAimableComponent>(gunUid, out var aimableComp) && aimableComp.IsAimed)
+            overlayColor = Color.Orange;
+
         // Show current angle
-        worldHandle.DrawLine(mapPos.Position, mapPos.Position + currentAngle.RotateVec(direction), Color.LightBlue);
-        worldHandle.DrawLine(mapPos.Position, mapPos.Position + (-currentAngle).RotateVec(direction), Color.LightBlue);
+        worldHandle.DrawCircle(mapPos.Position + currentAngle.RotateVec(direction), 0.1f, overlayColor, true);
+        worldHandle.DrawCircle(mapPos.Position + (-currentAngle).RotateVec(direction), 0.1f, overlayColor, true);
     }
 }

@@ -120,7 +120,7 @@ public sealed class ProjectileSystem : SharedProjectileSystem
                         targetThreshold += armorComp.TresholdDict[requiredDamageType].Float();
 
                     if (component.Damage[requiredDamageType] + component.Damage.ArmourPiercing < targetThreshold)
-                        component.ProjectileSpent = true;
+                        stopPenetration = true;
 
                     var resultThreshold = Math.Clamp((targetThreshold - component.Damage.ArmourPiercing).Float(), 0f, targetThreshold + component.Damage.ArmourPiercing.Float());
 
@@ -133,7 +133,11 @@ public sealed class ProjectileSystem : SharedProjectileSystem
 
                 }
                 if (stopPenetration)
+                {
                     component.ProjectileSpent = true;
+                    SetShooter(uid, component, target);
+                    QueueDel(uid);
+                }
             }
         }
         else
