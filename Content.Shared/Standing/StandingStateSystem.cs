@@ -236,15 +236,7 @@ public record struct DropHandItemsEvent();
 /// <summary>
 /// Raised when an entity's standing state changes (downed or stood up).
 /// </summary>
-public sealed class StandingStateChangedEvent : EntityEventArgs
-{
-    public EntityUid Entity;
-
-    public StandingStateChangedEvent(EntityUid entity)
-    {
-        Entity = entity;
-    }
-}
+public record struct StandingStateChangedEvent(EntityUid Entity);
 // SS220 crawling combat end
 
 /// <summary>
