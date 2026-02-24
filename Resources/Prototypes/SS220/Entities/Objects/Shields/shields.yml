@@ -7,7 +7,7 @@
     - type: Item
       sprite: SS220/Objects/Weapons/Melee/e_shield_syndi.rsi
     - type: PointLight
-      color: redd
+      color: red
     - type: Destructible
       thresholds:
         - trigger:
