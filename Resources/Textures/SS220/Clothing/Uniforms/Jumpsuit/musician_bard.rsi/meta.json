@@ -1,30 +1,37 @@
 {
     "version": 1,
     "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
-    "copyright": "Made by funny_mushroom (Discord) for SS220",
+    "copyright": "Made by funny_mushroom (Discord) for SS220, tie-equipped-INNERCLOTHING and icon_tie by dinazewwr for SS220",
     "size": {
         "x": 32,
         "y": 32
     },
-    "states": [
-        {
-            "name": "icon"
-        },
-        {
-            "name": "equipped-INNERCLOTHING",
-            "directions": 4
-        },
-        {
-            "name": "equipped-INNERCLOTHING-monkey",
-            "directions": 4
-        },
-        {
-            "name": "inhand-left",
-            "directions": 4
-        },
-        {
-            "name": "inhand-right",
-            "directions": 4
-        }
-    ]
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "icon_tie"
+    },
+    {
+      "name": "equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "tie-equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "equipped-INNERCLOTHING-monkey",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    }
+  ]
 }

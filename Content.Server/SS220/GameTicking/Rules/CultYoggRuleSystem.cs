@@ -124,7 +124,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
             SetSacrificeTarget(sacrificial.Value);
             return true;
         }
-        _chatManager.SendAdminAlert(Loc.GetString("CultYogg failed to pick any non cultist alive sacrificial on station, Game rule needs a manual admin picking"));
+        _chatManager.SendAdminAlert("CultYogg failed to pick any non cultist alive sacrificial on station, Game rule needs a manual admin picking");
         return false;
     }
 
@@ -579,12 +579,6 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         _adminLogger.Add(LogType.RoundFlow, LogImpact.High, $"Cult Yogg progressed to {stage}");
         _chatManager.SendAdminAlert(Loc.GetString("cult-yogg-stage-admin-alert", ("stage", stage)));
 
-        if (!TryGetNextStage(rule, out _, out var nextStageDefinition))
-            return;
-
-        //Adding Stage sacrificials for progressing for a next stage
-        TryInitializeNextStageSacrificials(rule, nextStageDefinition);
-
         //doing stage non-entity-related things
         DoStageEffects(rule, stage);
 
@@ -593,6 +587,11 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
         UpdateStageOnEnts<CultYoggComponent>(ref changeStageEvent, stageDefinition);
         UpdateStageOnEnts<MiGoComponent>(ref changeStageEvent, stageDefinition);
+
+        if (TryGetNextStage(rule, out _, out var nextStageDefinition))//No next stage = no new sacraficials
+        {
+            TryInitializeNextStageSacrificials(rule, nextStageDefinition);
+        }
     }
 
     private void UpdateStageOnEnts<T>(ref ChangeCultYoggStageEvent stageEvent, CultYoggStageDefinition stageDef) where T : IComponent

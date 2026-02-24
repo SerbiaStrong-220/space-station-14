@@ -154,8 +154,8 @@ public abstract partial class SharedGunSystem
                 Del(ent.Value);
         }
 
-        UpdateBallisticAppearance(args.Target.Value, component);
-        UpdateAmmoCount(args.Target.Value);
+        //UpdateBallisticAppearance(args.Target.Value, component); // ss220 edit - these lines will be gone at upstream anyway
+        //UpdateAmmoCount(args.Target.Value); // ss220 edit
         // repeat if there is more space in the target and more ammo to fill
         var moreSpace = target.Entities.Count + target.UnspawnedCount < target.Capacity;
         var moreAmmo = component.Entities.Count + component.UnspawnedCount > 0;

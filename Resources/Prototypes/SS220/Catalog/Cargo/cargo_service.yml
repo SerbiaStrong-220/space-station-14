@@ -18,7 +18,7 @@
   cost: 3500
   category: cargoproduct-category-name-service
   group: market
-  
+
 - type: cargoProduct
   id: ServiceBioLumPottedPlant
   icon:
@@ -67,5 +67,25 @@
     state: icon
   product: CrateServiceWedding
   cost: 500
+  category: cargoproduct-category-name-service
+  group: market
+
+- type: cargoProduct
+  id: HolyWaterKit
+  icon:
+    sprite: SS220/Objects/Consumable/Drinks/holy_water_jug.rsi
+    state: icon
+  product: CrateHolyWaterKit
+  cost: 15000
+  category: cargoproduct-category-name-service
+  group: market
+
+- type: cargoProduct
+  id: CargoPhotocopier
+  icon:
+    sprite: SS220/Structures/Machines/photocopier.rsi
+    state: off
+  product: CratePhotocopier
+  cost: 1250
   category: cargoproduct-category-name-service
   group: market
