@@ -27,11 +27,4 @@ public sealed partial class FlashOnTriggerComponent : BaseXOnTriggerComponent
     [DataField, AutoNetworkedField]
     public float Probability = 1.0f;
 
-    // start 220 flash grenade stun
-    [DataField, AutoNetworkedField]
-    public bool Stun = false;
-
-    [DataField, AutoNetworkedField]
-    public float StunDuration = 3.0f;
-    // end 220 flash grenade stun
 }

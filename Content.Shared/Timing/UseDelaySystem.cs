@@ -47,7 +47,8 @@ public sealed class UseDelaySystem : EntitySystem
     {
         // Set default delay length from the prototype
         // This makes it easier for simple use cases that only need a single delay
-        SetLength((ent, ent.Comp), ent.Comp.Delay, DefaultId);
+        if (!ent.Comp.Delays.ContainsKey(DefaultId)) // SS220 staminaweapons - Only set default delay if it's not already present
+            SetLength((ent, ent.Comp), ent.Comp.Delay, DefaultId);
     }
 
     private void OnUnpaused(Entity<UseDelayComponent> ent, ref EntityUnpausedEvent args)

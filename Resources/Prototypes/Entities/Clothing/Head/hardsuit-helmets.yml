@@ -311,7 +311,7 @@
     lowPressureMultiplier: 1000
   #ss220 brigmedic hardsuit head virus resistance begin
   - type: ZombificationResistance
-    zombificationResistanceCoefficient: 0.85 
+    zombificationResistanceCoefficient: 0.85
   #ss220 brigmedic hardsuit head virus resistance end
 
 - type: entity
@@ -409,7 +409,7 @@
     lowPressureMultiplier: 1000
   #ss220 cmo hardsuit head virus resistance begin
   - type: ZombificationResistance
-    zombificationResistanceCoefficient: 0.85 
+    zombificationResistanceCoefficient: 0.85
   #ss220 cmo hardsuit head virus resistance end
   - type: Tag
     tags:
@@ -510,6 +510,7 @@
     tags:
     - CorgiWearable
     - WhitelistChameleon
+  - type: NoiseSuppression #SS220 staminaweapons
 
 #Blood-red Medic Hardsuit
 - type: entity
@@ -534,6 +535,7 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
+  - type: NoiseSuppression #SS220 staminaweapons
 
 #Syndicate Elite Hardsuit
 - type: entity
@@ -567,6 +569,7 @@
     tags:
     - CorgiWearable
     - WhitelistChameleon
+  - type: NoiseSuppression #SS220 staminaweapons
 
 #Syndicate Commander Hardsuit
 - type: entity
@@ -595,6 +598,7 @@
     tags:
     - CorgiWearable
     - WhitelistChameleon
+  - type: NoiseSuppression #SS220 staminaweapons
 
 #Cybersun Juggernaut Hardsuit
 - type: entity
@@ -621,6 +625,8 @@
     tags:
     - CorgiWearable
     - WhitelistChameleon
+  - type: NoiseSuppression #SS220 staminaweapons
+    suppressionRange: 0
 
 #Wizard Hardsuit
 - type: entity
@@ -649,6 +655,7 @@
     tags:
     - CorgiWearable
     - WhitelistChameleon
+  - type: NoiseSuppression #SS220 staminaweapons
 
 #Organic Space Suit
 - type: entity
@@ -680,6 +687,8 @@
   - type: PressureProtection
     highPressureMultiplier: 0.3
     lowPressureMultiplier: 1000
+  - type: NoiseSuppression #SS220 staminaweapons
+    suppressionRange: 4
 
 #Pirate Captain Hardsuit
 - type: entity
@@ -731,6 +740,8 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
+  - type: NoiseSuppression #SS220 staminaweapons
+    suppressionRange: 4
 
 #CENTCOMM / ERT HARDSUITS
 #ERT Leader Hardsuit
@@ -872,6 +883,7 @@
         Heat: 0.9
   - type: ZombificationResistance
     zombificationResistanceCoefficient: 0.75
+  - type: NoiseSuppression #SS220 staminaweapons
 
 #Deathsquad Hardsuit
 - type: entity
@@ -901,6 +913,8 @@
         Heat: 0.80
         Radiation: 0.80
         Caustic: 0.95
+  - type: NoiseSuppression #SS220 staminaweapons
+    suppressionRange: 0
 
 #MISC. HARDSUITS
 #Clown Hardsuit

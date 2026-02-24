@@ -92,6 +92,7 @@
   - type: HideLayerClothing
     layers:
       Hair: HEAD
+  - type: NoiseSuppression #SS220 staminaweapons
 
 #Syndicate SWAT Helmet
 - type: entity
@@ -266,6 +267,7 @@
     autoRechargeRate: 2
   - type: NeedleProtection
     # SS220 Ninja Resprite End
+  - type: NoiseSuppression #SS220 staminaweapons
 
 #Knight Helmet
 - type: entity
@@ -510,6 +512,7 @@
   - type: HideLayerClothing
     layers:
       Hair: HEAD
+  - type: NoiseSuppression #SS220 staminaweapons
 
 #Bone Helmet
 #No need to hide the hair on this one

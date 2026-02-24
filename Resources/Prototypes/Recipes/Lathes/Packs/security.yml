@@ -64,6 +64,9 @@
   - Stunbaton
   - CombatKnife
   - RiotShield
+  #SS220 staminaweapons begin
+  - GrenadeFlashBang
+  #SS220 staminaweapons end
 
 ## Dynamic recipes
 

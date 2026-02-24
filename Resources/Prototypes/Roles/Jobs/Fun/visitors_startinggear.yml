@@ -224,7 +224,7 @@
     id: VisitorPDA
     belt: ClothingBeltSecurityFilled
     back: ClothingBackpackSecurity
-    ears: ClothingHeadsetSecurity
+    ears: ClothingHeadsetAltSecurityNonCom #SS220 staminaweapons
     eyes: ClothingEyesGlassesSecurity
     outerClothing: ClothingOuterArmorBasic
     pocket1: WeaponPistolMk58
@@ -242,7 +242,7 @@
     id: VisitorPDA
     belt: ClothingBeltSecurityFilled
     back: ClothingBackpackSatchelSecurity
-    ears: ClothingHeadsetSecurity
+    ears: ClothingHeadsetAltSecurityNonCom #SS220 staminaweapons
     eyes: ClothingEyesGlassesSecurity
     outerClothing: ClothingOuterArmorBasicSlim
     pocket1: WeaponPistolMk58
@@ -259,7 +259,7 @@
     id: VisitorPDA
     belt: ClothingBeltSecurityWebbingFilled
     back: ClothingBackpackSecurity
-    ears: ClothingHeadsetSecurity
+    ears: ClothingHeadsetAltSecurityNonCom #SS220 staminaweapons
     eyes: ClothingEyesGlassesSecurity
     outerClothing: ClothingOuterArmorBasic
     pocket1: WeaponPistolMk58
@@ -277,7 +277,7 @@
     id: VisitorPDA
     belt: ClothingBeltSecurityFilled
     back: ClothingBackpackSatchelSecurity
-    ears: ClothingHeadsetSecurity
+    ears: ClothingHeadsetAltSecurityNonCom #SS220 staminaweapons
     eyes: ClothingEyesGlassesSecurity
     outerClothing: ClothingOuterArmorBasicSlim
     pocket1: WeaponPistolMk58
@@ -295,7 +295,7 @@
     id: VisitorPDA
     belt: ClothingBeltHolsterFilled
     back: ClothingBackpackSecurity
-    ears: ClothingHeadsetSecurity
+    ears: ClothingHeadsetAltSecurityNonCom #SS220 staminaweapons
     eyes: ClothingEyesGlassesSecurity
     outerClothing: ClothingOuterCoatDetectiveLoadout
     pocket1: ForensicScanner
@@ -313,7 +313,7 @@
     id: VisitorPDA
     belt: ClothingBeltHolsterFilled
     back: ClothingBackpackSatchelSecurity
-    ears: ClothingHeadsetSecurity
+    ears: ClothingHeadsetAltSecurityNonCom #SS220 staminaweapons
     eyes: ClothingEyesGlassesSecurity
     outerClothing: ClothingOuterVestDetective
     pocket1: ForensicScanner
@@ -332,7 +332,7 @@
     id: VisitorPDA
     belt: ClothingBeltSecurityWebbingFilled
     back: ClothingBackpackSecurity
-    ears: ClothingHeadsetSecurity
+    ears: ClothingHeadsetAltSecurityNonCom #SS220 staminaweapons
     eyes: ClothingEyesGlassesSecurity
     outerClothing: ClothingOuterCoatWarden
     pocket1: WeaponDisabler
@@ -351,7 +351,7 @@
     id: VisitorPDA
     belt: ClothingBeltSecurityFilled
     back: ClothingBackpackSatchelSecurity
-    ears: ClothingHeadsetSecurity
+    ears: ClothingHeadsetAltSecurityNonCom #SS220 staminaweapons
     eyes: ClothingEyesGlassesSecurity
     outerClothing: ClothingOuterWinterWarden
     pocket1: WeaponDisabler
