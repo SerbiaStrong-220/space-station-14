@@ -2,11 +2,12 @@ using Content.Shared.Inventory;
 
 namespace Content.Shared.SS220.Deafenation;
 
-public sealed class OnDeafenedEvent(float range) : EntityEventArgs, IInventoryRelayEvent
+[ByRefEvent]
+public record struct OnDeafenedEvent(float Range) : IInventoryRelayEvent
 {
-    public float SuppressionRange = range;
+    public float SuppressionRange = Range;
 
-    public SlotFlags TargetSlots => SlotFlags.EARS | SlotFlags.HEAD;
+    SlotFlags IInventoryRelayEvent.TargetSlots => SlotFlags.EARS | SlotFlags.HEAD;
 }
 
 public sealed class AreaNoiseEvent(float range, float distance, EntityUid target) : EntityEventArgs

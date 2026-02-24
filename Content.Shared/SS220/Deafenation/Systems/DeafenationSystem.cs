@@ -16,6 +16,7 @@ public sealed class DeafenationSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
 
     private HashSet<EntityUid> _tempEntitySet = new();
 
@@ -26,7 +27,7 @@ public sealed class DeafenationSystem : EntitySystem
         SubscribeLocalEvent<InventoryComponent, OnDeafenedEvent>(
             OnInventoryDeafened);
     }
-
+    private static readonly string[] SuppressingSlots = ["head", "ears"];
     public void DeafenArea(EntityUid source, EntityUid? user, float range, float knockdownTime, float stunTime, float probability = 1f)
     {
         var transform = Transform(source);
@@ -35,14 +36,12 @@ public sealed class DeafenationSystem : EntitySystem
         _tempEntitySet.Clear();
         _entityLookup.GetEntitiesInRange(transform.Coordinates, range, _tempEntitySet);
 
-        var rand = new System.Random((int)_timing.CurTick.Value + GetNetEntity(source).Id);
-
         foreach (var entity in _tempEntitySet)
         {
-            if (!rand.Prob(probability))
+            if (!_random.Prob(probability))
                 continue;
 
-            if (!_examine.InRangeUnOccluded(entity, mapPosition, range, predicate: e => e == entity))
+            if (!_examine.InRangeUnOccluded(entity, mapPosition, range))
                 continue;
 
             var distance = (_transform.GetMapCoordinates(entity).Position - mapPosition.Position).Length();
@@ -57,7 +56,7 @@ public sealed class DeafenationSystem : EntitySystem
             return;
 
         var ev = new OnDeafenedEvent(range);
-        RaiseLocalEvent(target, ev, true);
+        RaiseLocalEvent(target, ref ev, true);
 
         var suppressionRange = ev.SuppressionRange;
         var deafeningRange = MathF.Max(0f, distance);
@@ -78,7 +77,7 @@ public sealed class DeafenationSystem : EntitySystem
 
     private void OnInventoryDeafened(Entity<InventoryComponent> ent, ref OnDeafenedEvent args)
     {
-        foreach (var slot in new[] { "head", "ears" })
+        foreach (var slot in SuppressingSlots)
         {
             if (_inventory.TryGetSlotEntity(ent, slot, out var item, ent.Comp) &&
                 TryComp<NoiseSuppressionComponent>(item, out var noiseSuppressor))
