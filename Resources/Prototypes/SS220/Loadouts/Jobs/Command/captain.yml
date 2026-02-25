@@ -20,7 +20,7 @@
     requirement:
       !type:RoleTimeRequirement
       role: JobCaptain
-      time: 648000 # 300
+      time: 1080000 # 300 hrs
   sponsorTierLoadoutEffects:
   - !type:GroupLoadoutEffect
     proto: SeniorDevTeamTier
@@ -48,7 +48,7 @@
     requirement:
       !type:RoleTimeRequirement
       role: JobCaptain
-      time: 64800 # 30
+      time: 108000 # 30 hrs
   sponsorTierLoadoutEffects:
   - !type:GroupLoadoutEffect
     proto: SeniorDevTeamTier

@@ -20,7 +20,7 @@
     requirement:
       !type:RoleTimeRequirement
       role: JobHeadOfSecurity
-      time: 64800 # 30
+      time: 108000 # 30 hrs
   sponsorTierLoadoutEffects:
   - !type:GroupLoadoutEffect
     proto: SeniorDevTeamTier
