@@ -9,6 +9,7 @@
     - id: UnknownShuttleDisasterEvacPod
     - id: UnknownShuttleHonki
     - id: UnknownShuttleCivil
+    - id: UnknownShuttleMimesLost
 #SS220-NoUnknownShuttles begin
 #    - id: UnknownShuttleNTQuark
 #    - id: UnknownShuttleCruiser

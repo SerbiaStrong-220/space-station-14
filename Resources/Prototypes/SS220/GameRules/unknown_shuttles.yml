@@ -7,3 +7,13 @@
     weight: 2
   - type: LoadMapRule
     preloadedGrid: Civil
+
+- type: entity
+  parent: BaseUnknownShuttleRule
+  id: UnknownShuttleMimesLost
+  components:
+  - type: StationEvent
+    max0ccurrences: 1
+    weight: 4
+  - type: LoadMapRule
+    preloadedGrid: ShuttleMimesLost
