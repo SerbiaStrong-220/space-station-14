@@ -47,10 +47,10 @@
     - DoorBumpOpener
 
 - type: entity
-  parent: [ SimpleMobBase, MobCombat, StripableInventoryBase, MobPassiveCollision ]
-  id: MobBnuuy
+  parent: [ SimpleMobBase, StripableInventoryBase, MobPassiveCollision ]
+  id: MobBunnyBnuuy
   name: Bnuuy
-  description: A frisky kid who can't sit still, always rushes into battle, loves carrots, and also likes to arrange a brig race with Roxy.
+  description: In addition to its fluffiness, love of carrots, and lively personality, it has a strong attachment to its owner. After all, even the Wardens needs someone to look after him.
   components:
   - type: MovementSpeedModifier
     baseWalkSpeed: 3.5
@@ -71,13 +71,6 @@
       canSpeak: false
     - id: Piggish
       canSpeak: false
-  - type: GhostRole
-    makeSentient: true
-    allowSpeech: true
-    allowMovement: true
-    name: ghost-role-information-pet-bnuuy-name
-    description: ghost-role-information-pet-bnuuy-description
-  - type: GhostTakeoverAvailable
   - type: Speech
     speechVerb: SmallMob
     speechSounds: SqueakBnuuy
@@ -116,8 +109,8 @@
       40: Critical
       60: Dead
   - type: Inventory
-    speciesId: bnuuy
-    templateId: bnuuyinventory
+    speciesId: bunnyBnuuy
+    templateId: bunnyBnuuyinventory
     displacements:
       eyes:
         sizeMaps:
@@ -176,12 +169,9 @@
     damage:
       types:
         Blunt: 0.1
-  - type: CombatMode
   - type: MeleeWeapon
     soundHit:
         path: /Audio/Effects/bite.ogg
-    angle: 0
-    animation: WeaponArcBite
     damage:
       types:
         Piercing: 3

@@ -256,7 +256,7 @@
 
 - type: entity
   name: Bnuuy Spawner
-  id: SpawnMobBnuuyPetGhostRole
+  id: SpawnMobBunnyBnuuyPetGhostRole
   parent: MarkerBase
   suffix: Role
   components:
@@ -266,4 +266,4 @@
     - state: ai
   - type: ConditionalSpawner
     prototypes:
-    - MobMobBnuuyGhostRole
+    - MobBunnyBnuuyGhostRole
