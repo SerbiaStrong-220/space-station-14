@@ -37,7 +37,7 @@ namespace Content.Client.Paper.UI
 
         private static Color DefaultTextColor = new(25, 25, 25);
 
-        private readonly ProtoId<SkillPrototype> _allMarkupShowingSkill = "BureaucracyTrained";
+        private readonly ProtoId<SkillPrototype> _allMarkupShowingSkill = "BureaucracyTrained"; // ss220-experience-update
 
         // <summary>
         // Size of resize handles around the paper
@@ -55,10 +55,12 @@ namespace Content.Client.Paper.UI
         // we're able to resize this UI or not. Default to everything enabled:
         private DragMode _allowedResizeModes = ~DragMode.None;
 
+        // ss220-experience-update-begin
         private readonly Type[] _baseAllowedTags = new Type[] {
             typeof(ColorTag),
             typeof(LanguageMessageTag) // SS220 language
         };
+        // ss220-experience-update-end
 
         private readonly Type[] _allowedTags = new Type[] {
             typeof(BoldItalicTag),

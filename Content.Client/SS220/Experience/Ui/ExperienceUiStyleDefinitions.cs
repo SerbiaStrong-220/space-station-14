@@ -8,7 +8,6 @@ namespace Content.Client.SS220.Experience.Ui;
 
 public static class ExperienceUiStyleDefinitions
 {
-    // TODO I f**p somewhere
     public static readonly float RightMargin = 30f;
     public static readonly float LeftMargin = 10f;
 

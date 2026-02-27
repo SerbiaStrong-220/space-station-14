@@ -18,10 +18,10 @@ public sealed class RandomShuffle<T> where T : ShuffleChanceGetterEvent, new()
 
     private float _reshuffleChance = 0f;
 
-    Dictionary<string, float> _cachedShuffleFloat = new();
-    Dictionary<string, bool> _cachedShuffleBool = new();
+    private Dictionary<string, float> _cachedShuffleFloat = new();
+    private Dictionary<string, bool> _cachedShuffleBool = new();
 
-    Dictionary<string, bool> _cachedProbValue = new();
+    private Dictionary<string, bool> _cachedProbValue = new();
 
     public RandomShuffle()
     {

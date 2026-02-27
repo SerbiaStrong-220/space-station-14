@@ -27,7 +27,6 @@ using Robust.Shared.Random;//SS220 LimitationRevive
 using Content.Server.SS220.LimitationRevive; //SS220 LimitationRevive
 using Content.Shared.Ghost; //SS220 LimitationRevive
 using Content.Shared.Inventory;
-
 using Content.Shared.SS220.Experience.Skill.Components;
 
 namespace Content.Server.Medical;

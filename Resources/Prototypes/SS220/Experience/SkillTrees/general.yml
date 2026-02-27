@@ -1,12 +1,3 @@
-# - type: skillTree
-#   id: Piloting
-#   skillGroupId: SkillGroupGeneral
-#   skillTreeName: piloting-skill-tree-name
-#   skillTree:
-#   - PilotingBase
-#   - PilotingCombat
-#   studyingProgressPossible: false
-
 - type: skillTree
   id: ExtravehicularActivity
   skillGroupId: SkillGroupGeneral
