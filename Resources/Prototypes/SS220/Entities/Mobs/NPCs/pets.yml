@@ -74,7 +74,7 @@
   - type: Speech
     speechVerb: SmallMob
     speechSounds: SqueakBnuuy
-    allowedEmotes: ['SqueakBnuuy']
+    allowedEmotes: ['Squeak']
   - type: Sprite
     drawdepth: SmallMobs
     layers:
@@ -200,4 +200,4 @@
     interactFailureString: petting-failure-rabbit
     interactSuccessSpawn: EffectHearts
     interactSuccessSound:
-      path: /Audio/Animals/fox_squeak.ogg
+      path: /Audio/SS220/Animals/bnuuy_squeak_2.ogg
