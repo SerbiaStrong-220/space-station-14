@@ -5,7 +5,6 @@ using Content.Shared.Flash.Components;
 using Content.Shared.Prototypes;
 using Content.Shared.Trigger.Components;
 using Content.Shared.Trigger.Components.Effects;
-using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.RoundEnd;
@@ -13,12 +12,8 @@ namespace Content.Shared.SS220.RoundEnd;
 public abstract class SharedRoundEndPacifiedSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly INetManager _netManager = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-    }
+    private const int ExplosiveLimit = 3;
 
     public bool CheckInteraction(Entity<RoundEndPacifiedComponent> user, EntityUid item)
     {
@@ -32,7 +27,7 @@ public abstract class SharedRoundEndPacifiedSystem : EntitySystem
         // Allow only toy explosives
         if (TryComp<ExplosiveComponent>(item, out var explosive))
         {
-            if (explosive.TotalIntensity > 3 || explosive.IntensitySlope > 3 || explosive.CanCreateVacuum)
+            if (explosive.TotalIntensity > ExplosiveLimit || explosive.IntensitySlope > ExplosiveLimit || explosive.CanCreateVacuum)
             {
                 return false;
             }

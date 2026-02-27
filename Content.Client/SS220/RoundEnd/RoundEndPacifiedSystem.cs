@@ -3,6 +3,8 @@
 using Content.Shared.Interaction.Events;
 using Content.Shared.SS220.RoundEnd;
 
+namespace Content.Client.SS220.RestrictedItem;
+
 public sealed partial class RoundEndPacifiedSystem : SharedRoundEndPacifiedSystem
 {
     public override void Initialize()
@@ -14,8 +16,7 @@ public sealed partial class RoundEndPacifiedSystem : SharedRoundEndPacifiedSyste
 
     private void OnUseAttempt(Entity<RoundEndPacifiedComponent> ent, ref UseAttemptEvent args)
     {
-        bool allowed = CheckInteraction(ent, args.Used);
-        if (!allowed)
+        if (!CheckInteraction(ent, args.Used))
         {
             args.Cancel();
         }

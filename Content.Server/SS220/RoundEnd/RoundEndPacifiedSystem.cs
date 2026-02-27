@@ -2,8 +2,9 @@
 
 using Content.Server.Explosion.Components;
 using Content.Shared.Interaction.Events;
+using Content.Shared.SS220.RoundEnd;
 
-namespace Content.Shared.SS220.RoundEnd;
+namespace Content.Server.SS220.RoundEnd;
 
 public sealed partial class RoundEndPacifiedSystem : SharedRoundEndPacifiedSystem
 {
@@ -16,8 +17,7 @@ public sealed partial class RoundEndPacifiedSystem : SharedRoundEndPacifiedSyste
 
     private void OnUseAttempt(Entity<RoundEndPacifiedComponent> ent, ref UseAttemptEvent args)
     {
-        bool allowed = CheckInteraction(ent, args.Used);
-        if (!allowed || HasComp<ProjectileGrenadeComponent>(args.Used))
+        if (!CheckInteraction(ent, args.Used) || HasComp<ProjectileGrenadeComponent>(args.Used))
         {
             args.Cancel();
         }
