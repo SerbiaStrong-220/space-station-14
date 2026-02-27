@@ -38,9 +38,7 @@ public abstract class SharedRoundEndPacifiedSystem : EntitySystem
         {
             var fill = _prototypeManager.Index(grenade.FillPrototype.Value);
             if (fill.HasComponent<ExplosiveComponent>())
-            {
                 return false;
-            }
         }
 
         return true;

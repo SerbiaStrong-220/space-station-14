@@ -27,7 +27,7 @@ public sealed class PeacefulRoundEndSystem : EntitySystem
     private void OnRoundEnded(RoundEndTextAppendEvent ev)
     {
         if (!_isEnabled) return;
-// SS220-centcomm-grief-start
+        // SS220-centcomm-grief-start
         var maps = _emergency.GetCentcommMaps();
 
         var query = AllEntityQuery<FTLMapComponent>();
@@ -47,6 +47,6 @@ public sealed class PeacefulRoundEndSystem : EntitySystem
                 EnsureComp<RoundEndPacifiedComponent>(session.AttachedEntity.Value);
             }
         }
-// SS220-centcomm-grief-end
+        // SS220-centcomm-grief-end
     }
 }
