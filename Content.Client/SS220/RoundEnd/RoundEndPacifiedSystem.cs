@@ -17,8 +17,6 @@ public sealed partial class RoundEndPacifiedSystem : SharedRoundEndPacifiedSyste
     private void OnUseAttempt(Entity<RoundEndPacifiedComponent> ent, ref UseAttemptEvent args)
     {
         if (!CheckInteraction(ent, args.Used))
-        {
             args.Cancel();
-        }
     }
 }
