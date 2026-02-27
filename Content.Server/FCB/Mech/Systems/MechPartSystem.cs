@@ -115,7 +115,7 @@ public sealed class MechPartSystem : EntitySystem
         if (mechComp.PilotSlot.ContainedEntity == null)
             return;
 
-        if (!TryComp<BlindableComponent>(ent.Owner, out var blindableCompMech))
+        if (!TryComp<BlindableComponent>(args.Mech, out var blindableCompMech))
             return;
 
         if (TryComp<BlindableComponent>(mechComp.PilotSlot.ContainedEntity, out var blindableComp))

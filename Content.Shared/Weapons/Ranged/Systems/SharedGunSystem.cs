@@ -1,5 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
-using System.Numerics;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
@@ -7,11 +5,15 @@ using Content.Shared.Audio;
 using Content.Shared.CombatMode;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Damage;
+using Content.Shared.DoAfter;
 using Content.Shared.Examine;
+using Content.Shared.FCB.AltBlocking;
+using Content.Shared.FCB.Weapons.Ranged.Events;
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.Standing;
 using Content.Shared.Tag;
 using Content.Shared.Throwing;
 using Content.Shared.Timing;
@@ -33,9 +35,8 @@ using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using Content.Shared.DoAfter;
-using Content.Shared.FCB.AltBlocking;
-using Content.Shared.Standing;
+using System.Diagnostics.CodeAnalysis;
+using System.Numerics;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -104,6 +105,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         SubscribeLocalEvent<GunComponent, CycleModeEvent>(OnCycleMode);
         SubscribeLocalEvent<GunComponent, HandSelectedEvent>(OnGunSelected);
         SubscribeLocalEvent<GunComponent, MapInitEvent>(OnMapInit);
+        SubscribeAllEvent<GunCycleRequestEvent>(OnGunUsed);//FCB realistic weapons
         // SS220-new-feature kus start
         SubscribeLocalEvent<GunComponent, GetVerbsEvent<Verb>>(OnGetVerbs);
         SubscribeLocalEvent<SuicideDoAfterEvent>(OnDoSuicideComplete);
@@ -121,6 +123,36 @@ public abstract partial class SharedGunSystem : EntitySystem
 
         RefreshModifiers((gun, gun));
     }
+
+    //FCB realistic weapons begin
+    private void OnGunUsed(GunCycleRequestEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (!TryGetEntity(args.User, out var localUser) || !TryGetEntity(args.Gun, out var localGun))
+            return;
+
+        if (TryComp<ChamberMagazineAmmoProviderComponent>(localGun, out var chamberMagComp))
+        {
+            args.Handled = true;
+            if (chamberMagComp.CanRack)
+                UseChambered((EntityUid)localGun, chamberMagComp, (EntityUid)localUser);
+            else
+                ToggleBolt((EntityUid)localGun, chamberMagComp, (EntityUid)localUser);
+
+            return;
+        }
+
+        if (TryComp<BallisticAmmoProviderComponent>(localGun, out var ballisticComp))
+        {
+            ManualCycle((EntityUid)localGun, ballisticComp, TransformSystem.GetMapCoordinates((EntityUid)localGun), (EntityUid)localUser);
+            args.Handled = true;
+
+            return;
+        }
+    }
+    //FCB realistic weapons end
 
     private void OnGunMelee(EntityUid uid, GunComponent component, MeleeHitEvent args)
     {

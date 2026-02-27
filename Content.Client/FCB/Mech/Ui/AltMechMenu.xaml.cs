@@ -170,7 +170,7 @@ public sealed partial class AltMechMenu : FancyWindow
                 continue;
 
             FixedPoint2 partintegrityPercent;
-            if (mechComp.ContainerDict[integrityBarDict[bar]].ContainedEntity == null || !_ent.TryGetComponent<MechPartComponent>(mechComp.ContainerDict[integrityBarDict[bar]].ContainedEntity, out var partComp) || partComp.PartOwner==null)
+            if (mechComp.ContainerDict[integrityBarDict[bar]].ContainedEntity == null || !_ent.TryGetComponent<MechPartComponent>(mechComp.ContainerDict[integrityBarDict[bar]].ContainedEntity, out var partComp))
             {
                 partintegrityPercent = 0;
                 bar.Value = partintegrityPercent.Float();
@@ -186,7 +186,7 @@ public sealed partial class AltMechMenu : FancyWindow
             if (spriteTextDict[text] == "core")
                 continue;
 
-            if (mechComp.ContainerDict[spriteTextDict[text]].ContainedEntity == null || !_ent.TryGetComponent<MechPartComponent>(mechComp.ContainerDict[spriteTextDict[text]].ContainedEntity, out var partComp) || partComp.PartOwner == null)
+            if (mechComp.ContainerDict[spriteTextDict[text]].ContainedEntity == null || !_ent.TryGetComponent<MechPartComponent>(mechComp.ContainerDict[spriteTextDict[text]].ContainedEntity, out var partComp))
             {
                 text.Text = Loc.GetString("mech-integrity-display", ("amount", 0));
                 continue;
@@ -195,12 +195,12 @@ public sealed partial class AltMechMenu : FancyWindow
             var partintegrityPercent = partComp.Integrity / partComp.MaxIntegrity;
             text.Text = Loc.GetString("mech-integrity-display", ("amount", (partintegrityPercent * 100).Int()));
         }
-            
+
         if (mechComp.MaxEnergy != 0f)
         {
             var energyPercent = mechComp.Energy / mechComp.MaxEnergy;
             EnergyDisplayBar.Value = energyPercent.Float();
-            EnergyDisplay.Text = Loc.GetString("mech-energy-display", ("amount", (energyPercent*100).Int()));
+            EnergyDisplay.Text = Loc.GetString("mech-energy-display", ("amount", (energyPercent * 100).Int()));
         }
         else
         {

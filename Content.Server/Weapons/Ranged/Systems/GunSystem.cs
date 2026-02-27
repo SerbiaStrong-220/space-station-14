@@ -38,6 +38,7 @@ public sealed partial class GunSystem : SharedGunSystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!; //FCB shield rework
+    [Dependency] private readonly RequireProjectileTargetSystem _requireTarget = default!; //FCB realistic weapons
     [Dependency] private readonly ShuttleNavInfoSystem _shuttleNavInfo = default!; // SS220 Add projectiles & hitscan on shuttle nav
 
     private const float DamagePitchVariation = 0.05f;
@@ -215,7 +216,7 @@ public sealed partial class GunSystem : SharedGunSystem
                                     foreach (var collide in rayCastResults)
                                     {
                                         if (collide.HitEntity != gun.Target &&
-                                            CompOrNull<RequireProjectileTargetComponent>(collide.HitEntity)?.Active == true)
+                                            TryComp<RequireProjectileTargetComponent>(collide.HitEntity, out var targetComp) && _requireTarget.PreventHitscan((collide.HitEntity, targetComp), gunUid)) // FCB realistic weapons
                                         {
                                             continue;
                                         }

@@ -7,7 +7,6 @@ using Content.Shared.Weapons.Ranged.Events;
 using Robust.Client.GameObjects;
 using Robust.Client.Player;
 using Robust.Shared.Input;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Client.FCB.Weapons;
@@ -22,7 +21,6 @@ public sealed partial class GunAimingSystem : SharedGunAimingSystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<GunAimableComponent, GunRefreshModifiersEvent>(OnGunRefreshModifiers);
     }
 
     public override void Update(float frameTime)
@@ -53,16 +51,5 @@ public sealed partial class GunAimingSystem : SharedGunAimingSystem
 
         if(_inputSystem.CmdStates.GetState(useKey) == BoundKeyState.Up && aimableComp.IsAimed)
             RaisePredictiveEvent(new AimStatusChangedEvent { Gun = GetNetEntity(gunUid), Aim = false, User = GetNetEntity(entity) });
-    }
-
-    private void OnGunRefreshModifiers(Entity<GunAimableComponent> ent, ref GunRefreshModifiersEvent args)
-    {
-        if (!ent.Comp.IsAimed)
-            return;
-
-        args.MinAngle += ent.Comp.MinAngle;
-        args.MaxAngle += ent.Comp.MaxAngle;
-        args.AngleDecay += ent.Comp.AngleDecay;
-        args.AngleIncrease += ent.Comp.AngleIncrease;
     }
 }

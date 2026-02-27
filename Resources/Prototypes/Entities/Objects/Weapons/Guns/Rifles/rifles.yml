@@ -73,24 +73,26 @@
         map: ["enum.GunVisualLayers.Base"]
       - state: mag-0
         map: ["enum.GunVisualLayers.Mag"]
-  #SS220 increase-automatic-rifles-spread begin
   - type: GunWieldBonus
-    minAngle: -14
-    maxAngle: -27
-  #SS220 increase-automatic-rifles-spread end
+  #FCB realistic guns begin
+    minAngle: -4
+    maxAngle: -22
+    angleIncrease: -1.2
+  - type: GunAimable
+    minAngle: -10
+    maxAngle: -7
+  #FCB realistic guns end
   - type: Gun
     minAngle: 15
     maxAngle: 36
-   #ss220 gunmodes start
+   #ss220 gunmodes begin
     availableModes:
       - FullAuto
       - SemiAuto
    #ss220 gunmodes end
     fireRate: 5
-    #SS220 increase-automatic-rifles-spread begin
-    angleIncrease: 1.75
-    angleDecay: 6
-    #SS220 increase-automatic-rifles-spread end
+    angleIncrease: 2.50 #FCB realistic guns
+    angleDecay: 6 #SS220 increase-automatic-rifles-spread end
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/rifle2.ogg
   - type: ChamberMagazineAmmoProvider
@@ -184,11 +186,15 @@
         map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
     sprite: SS220/Objects/Weapons/Guns/Rifles/lecter.rsi #ss220 lecter resprite
-  #SS220 increase-automatic-rifles-spread begin
   - type: GunWieldBonus
-    minAngle: -12
-    maxAngle: -30
-  #SS220 increase-automatic-rifles-spread end
+  #FCB realistic guns start
+    minAngle: -4
+    maxAngle: -22
+    angleIncrease: -1.2
+  - type: GunAimable
+    minAngle: -8
+    maxAngle: -7
+  #FCB realistic guns end
   - type: Gun
     minAngle: 13
     maxAngle: 36
@@ -198,10 +204,8 @@
       - SemiAuto
       - Burst
   #ss220 gunmodes end
-    #SS220 increase-automatic-rifles-spread begin
-    angleIncrease: 1
-    angleDecay: 6
-    #SS220 increase-automatic-rifles-spread end
+    angleIncrease: 2.30
+    angleDecay: 6 #SS220 increase-automatic-rifles-spread end
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/ltrifle.ogg
   - type: ItemSlots
@@ -275,20 +279,26 @@
   - type: Clothing
     sprite: Objects/Weapons/Guns/Rifles/estoc.rsi
   - type: Gun
-    angleIncrease: 2
+    angleIncrease: 3
     angleDecay: 3
-    fireRate: 3.6
+    fireRate: 3.3
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/lmg.ogg
-    minAngle: 17
-    maxAngle: 30
-    selectedMode: SemiAuto
+    minAngle: 13
+    maxAngle: 42
+    selectedMode: FullAuto #FCB realistic guns
     availableModes:
     - FullAuto
     - SemiAuto
   - type: GunWieldBonus
-    minAngle: -16
-    maxAngle: -23
+    #FCB realistic guns start
+    minAngle: -4
+    maxAngle: -28
+    angleIncrease: -1.25
+  - type: GunAimable
+    minAngle: -8
+    maxAngle: -10
+  #FCB realistic guns end
   - type: ItemSlots
     slots:
       gun_magazine:

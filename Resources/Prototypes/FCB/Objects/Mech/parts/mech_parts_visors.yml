@@ -7,8 +7,8 @@
   - type: FlashImmunity
   - type: EyeProtection
   - type: Sprite
-    sprite: Objects/Specific/Mech/mecha_equipment.rsi
-    state: mecha_clamp
+    sprite: FCB/Objects/Mechs/items/mecha_parts.rsi
+    state: visor_basic
   - type: MechPart
     integrity: 100
     maxIntegrity: 100

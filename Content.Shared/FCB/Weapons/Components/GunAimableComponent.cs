@@ -12,13 +12,13 @@ public sealed partial class GunAimableComponent : Component//This component sign
     public bool IsAimed = false;
 
     [ViewVariables(VVAccess.ReadWrite), DataField("minAngle"), AutoNetworkedField]
-    public Angle MinAngle = Angle.FromDegrees(-1);
+    public Angle MinAngle = Angle.FromDegrees(0);
 
     /// <summary>
     /// Angle bonus applied upon being aimed.
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite), DataField("maxAngle"), AutoNetworkedField]
-    public Angle MaxAngle = Angle.FromDegrees(-1);
+    public Angle MaxAngle = Angle.FromDegrees(0);
 
     /// <summary>
     /// Recoil bonuses applied upon being aimed.

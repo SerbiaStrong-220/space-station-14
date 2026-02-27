@@ -56,6 +56,20 @@ public sealed class RequireProjectileTargetSystem : EntitySystem
         //FCB realistic weapons end
     }
 
+    // FCB realistic begin
+    public bool PreventHitscan(Entity<RequireProjectileTargetComponent> ent, EntityUid gunUid)
+    {
+        if (!ent.Comp.Active)
+            return false;
+
+        if (TryComp<GunAimableComponent>(gunUid, out var aimComp) && aimComp.IsAimed)
+            if (TryComp<MobStateComponent>(ent.Owner, out var statesComp) && (statesComp.CurrentState == Mobs.MobState.Alive))
+                return false;
+
+        return true;
+    }
+    // FCB realistic weapons end
+
     private void SetActive(Entity<RequireProjectileTargetComponent> ent, bool value)
     {
         if (ent.Comp.Active == value)

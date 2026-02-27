@@ -184,6 +184,11 @@ binds:
 - function: ActivateItemInHand
   type: State
   key: Z
+#FCB realistic weapons begin
+- function: ActivateGunInHand
+  type: State
+  key: R
+#FCB realistic weapons end
 - function: AltActivateItemInHand
   type: State
   key: Z
