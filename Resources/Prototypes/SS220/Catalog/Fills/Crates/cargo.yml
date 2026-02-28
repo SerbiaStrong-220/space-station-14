@@ -1,0 +1,22 @@
+- type: entity
+  id: CrateCargoLottery5
+  parent: CratePrivateSecure
+  name: lottery ticket crate
+  description: More tickets means more chances to win! Become a millionaire today!
+  suffix: 5 штук
+  components:
+  - type: StorageFill
+    contents:
+    - id: LotteryCash
+      amount: 5
+
+- type: entity
+  id: CrateCargoLottery10
+  parent: CrateCargoLottery5
+  name: large lottery ticket crate
+  suffix: 10 штук
+  components:
+  - type: StorageFill
+    contents:
+    - id: LotteryCash
+      amount: 10
