@@ -1,8 +1,6 @@
 using Content.Server.GameTicking;
-using Content.Server.Shuttles.Systems;
 using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Corvax.CCCVars;
-using Content.Shared.Shuttles.Components;
 using Content.Shared.SS220.RoundEnd;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
@@ -12,7 +10,6 @@ namespace Content.Server.Corvax.PeacefulRoundEnd;
 public sealed class PeacefulRoundEndSystem : EntitySystem
 {
     [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly EmergencyShuttleSystem _emergency = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
 
     private bool _isEnabled = false;
