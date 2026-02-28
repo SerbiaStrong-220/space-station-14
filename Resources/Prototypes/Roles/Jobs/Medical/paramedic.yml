@@ -32,6 +32,7 @@
   storage:
     back:
     - EmergencyRollerBedSpawnFolded
+    - FilledSurgeryMedkit # ss220-surgery-update
 
 - type: chameleonOutfit
   id: ParamedicChameleonOutfit

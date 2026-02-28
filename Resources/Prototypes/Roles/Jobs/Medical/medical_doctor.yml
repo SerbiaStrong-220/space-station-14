@@ -30,9 +30,11 @@
   equipment:
     ears: ClothingHeadsetMedical
     belt: ClothingBeltMedicalFilled
-  #storage:
-    #back:
-    #- Stuff
+  # ss220-surgery-update-begin
+  storage:
+    back:
+    - FilledSurgeryMedkit
+  # ss220-surgery-update-end
 
 - type: chameleonOutfit
   id: MedicalDoctorChameleonOutfit
