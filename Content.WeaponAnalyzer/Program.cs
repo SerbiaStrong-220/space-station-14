@@ -133,7 +133,7 @@ public static class Program
                 hitDamage = new(hitDamage);
                 foreach (var damageType in originalDamage.DamageDict.Keys)
                 {
-                    if (!target.SupportedDamageTypes?.Contains(damageType) ?? false)
+                    if (target.SupportedDamageTypes != null && !target.SupportedDamageTypes.Contains(damageType))
                     {
                         hitDamage.DamageDict.Remove(damageType);
                     }
@@ -209,7 +209,7 @@ public static class Program
             var newName = $"{fileName}_{targetName}{extension}";
             return string.IsNullOrEmpty(directory)
                 ? newName
-                : Path.Combine(directory, fileName);
+                : Path.Combine(directory, newName);
         }
     }
 
@@ -279,11 +279,6 @@ public static class Program
                 proto = _prototypeManager.Index(magazine.StartingItem);
                 info.MagazineId = magazine.StartingItem;
             }
-            //if (itemSlots.Slots.TryGetValue("gun_chamber", out var chamber))
-            //{
-            //    ammoId = chamber.StartingItem;
-            //    return ammoId != null;
-            //}
 #pragma warning restore RA0002 // Invalid access
         }
         if (proto.TryGetComponent<BallisticAmmoProviderComponent>(out var ballisticProvider, _componentFactory))
