@@ -33,7 +33,7 @@ public static class Program
         [Option("keep-errors", HelpText = "Set this flag to keep weapons with analyze errors in resulting list.")]
         public bool KeepErrors { get; set; }
 
-        [Option('o', "out", Default = "weapons.csv", HelpText = "Output .csv file path.")]
+        [Option('o', "out", Default = "Content.WeaponAnalyzer/weapons.csv", HelpText = "Output .csv file path.")]
         public string? OutputPath { get; set; }
 
         [Option('t', "targets", Default = new string[] { "MobHuman" }, HelpText = "List of targets.")]
