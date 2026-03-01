@@ -215,17 +215,6 @@
   id: EmergencyRollerBedSpawnFolded
   result: EmergencyRollerBedSpawnFolded
 
-#SS220-autoinjectors-update begin
-- type: latheRecipe
-  id: MedAutoinjector
-  result: MedAutoinjector
-  completetime: 2
-  materials:
-    Glass: 400
-    Plastic: 600
-    Steel: 60
-#SS220-autoinjectors-update end
-
 - type: latheRecipe
   id: WhiteCane
   result: WhiteCane
@@ -268,4 +257,3 @@
     Steel: 200
     Glass: 100
     Plastic: 100
-

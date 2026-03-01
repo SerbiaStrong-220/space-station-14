@@ -4,6 +4,7 @@
   id: MiGoJob
   name: job-name-migo
   description: job-description-migo
+  setPreference: false
   playTimeTracker: CultistOfYogg
   requirements:
   - !type:OverallPlaytimeRequirement

@@ -285,8 +285,8 @@
 - type: entity
   parent: ClothingBeltStorageBase
   id: ClothingBeltChefApronBase
-  name: фартук
-  description: Фартук, который используют первоклассные повара, с карманами для хранения кухонных ножей и быстрого доступа к приправам.
+  name: apron
+  description: An apron used by top-tier chefs, featuring pockets for storing kitchen knives and quick access to seasonings.
   abstract: true
   components:
   - type: Sprite
@@ -325,8 +325,8 @@
 - type: entity
   parent: ClothingBeltChefApronBase
   id: ClothingBeltChefApronWhite
-  name: белый фартук
-  description: Фартук, который используют первоклассные повара, с карманами для хранения кухонных ножей и быстрого доступа к приправам.
+  name: white apron
+  description: An apron used by top-tier chefs, featuring pockets for storing kitchen knives and quick access to seasonings.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Belt/chef_white.rsi
@@ -336,8 +336,8 @@
 - type: entity
   parent: ClothingBeltChefApronBase
   id: ClothingBeltChefApronGreen
-  name: зелёный фартук
-  description: Фартук, который используют первоклассные повара, с карманами для хранения кухонных ножей и быстрого доступа к приправам.
+  name: green apron
+  description: An apron used by top-tier chefs, featuring pockets for storing kitchen knives and quick access to seasonings.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Belt/chef_green.rsi
@@ -347,8 +347,8 @@
 - type: entity
   parent: ClothingBeltChefApronBase
   id: ClothingBeltChefApronBlack
-  name: чёрный фартук
-  description: Фартук, который используют первоклассные повара, с карманами для хранения кухонных ножей и быстрого доступа к приправам.
+  name: black apron
+  description: An apron used by top-tier chefs, featuring pockets for storing kitchen knives and quick access to seasonings.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Belt/chef_black.rsi
@@ -358,8 +358,8 @@
 - type: entity
   parent: ClothingBeltChefApronBase
   id: ClothingBeltChefApronRed
-  name: красный фартук
-  description: Фартук, который используют первоклассные повара, с карманами для хранения кухонных ножей и быстрого доступа к приправам.
+  name: red apron
+  description: An apron used by top-tier chefs, featuring pockets for storing kitchen knives and quick access to seasonings.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Belt/chef_red.rsi
@@ -369,8 +369,8 @@
 - type: entity
   parent: ClothingBeltChefApronBase
   id: ClothingBeltChefApronNanotrasen
-  name: синий фартук
-  description: Фартук высокого качества с карманами, сделанный на заказ. Нужен для хранения кухонных ножей и быстрого доступа к приправам.
+  name: blue apron
+  description: A high-quality custom-made apron with pockets. Essential for storing kitchen knives and providing quick access to seasonings.
   suffix: За время в игре, Сеньор
   components:
   - type: Sprite

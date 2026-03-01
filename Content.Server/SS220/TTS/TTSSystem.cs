@@ -15,6 +15,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
+using Robust.Shared.Enums;
 
 namespace Content.Server.SS220.TTS;
 
@@ -83,6 +84,9 @@ public sealed partial class TTSSystem : EntitySystem
     private void ServerSendMessage(NetMessage message, ICommonSession recipient)
     {
         if (_sessionsNotToSend.Contains(recipient))
+            return;
+
+        if (recipient.Status == SessionStatus.Disconnected)
             return;
 
         _netManager.ServerSendMessage(message, recipient.Channel);

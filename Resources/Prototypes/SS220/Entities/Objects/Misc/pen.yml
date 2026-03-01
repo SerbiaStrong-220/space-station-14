@@ -12,6 +12,7 @@
     - Write
     - WriteIgnoreStamps
     - Pickaxe
+    - Pen
   - type: Sprite
     sprite: SS220/Objects/Misc/pen.rsi
     state: pen_centcom
@@ -52,7 +53,7 @@
       deviceNetId: Wireless
       receiveFrequencyId: BasicDevice
     - type: WirelessNetworkConnection
-      range: 15
+      range: 60
     - type: Tag
       tags:
         - Write

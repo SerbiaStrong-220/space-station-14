@@ -5,7 +5,7 @@
   description: "It produces light!"
   components:
   - type: Sprite
-    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    sprite: SS220/Structures/Furniture/PottedPlants/ss220_potted_plants.rsi
     state: plant-01
   - type: PointLight
     radius: 1.5
@@ -18,7 +18,7 @@
   description: "It produces light!"
   components:
   - type: Sprite
-    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    sprite: SS220/Structures/Furniture/PottedPlants/ss220_potted_plants.rsi
     state: plant-02
   - type: PointLight
     radius: 2
@@ -31,7 +31,7 @@
   description: "It produces light!"
   components:
   - type: Sprite
-    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    sprite: SS220/Structures/Furniture/PottedPlants/ss220_potted_plants.rsi
     state: plant-03
   - type: PointLight
     radius: 2.2
@@ -44,7 +44,7 @@
   description: "It produces light!"
   components:
   - type: Sprite
-    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    sprite: SS220/Structures/Furniture/PottedPlants/ss220_potted_plants.rsi
     state: plant-04
   - type: PointLight
     radius: 1.5
@@ -57,7 +57,7 @@
   description: "It produces light!"
   components:
   - type: Sprite
-    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    sprite: SS220/Structures/Furniture/PottedPlants/ss220_potted_plants.rsi
     state: plant-05
   - type: PointLight
     radius: 2
@@ -70,7 +70,7 @@
   description: "It produces light!"
   components:
   - type: Sprite
-    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    sprite: SS220/Structures/Furniture/PottedPlants/ss220_potted_plants.rsi
     state: plant-06
   - type: PointLight
     radius: 2.2
@@ -83,7 +83,7 @@
   description: "It produces light!"
   components:
   - type: Sprite
-    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    sprite: SS220/Structures/Furniture/PottedPlants/ss220_potted_plants.rsi
     state: plant-07
   - type: PointLight
     radius: 1.5
@@ -96,7 +96,7 @@
   description: "It produces light!"
   components:
   - type: Sprite
-    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    sprite: SS220/Structures/Furniture/PottedPlants/ss220_potted_plants.rsi
     state: plant-08
   - type: PointLight
     radius: 2
@@ -109,7 +109,7 @@
   description: "It produces light!"
   components:
   - type: Sprite
-    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    sprite: SS220/Structures/Furniture/PottedPlants/ss220_potted_plants.rsi
     state: plant-09
   - type: PointLight
     radius: 2.2
@@ -122,7 +122,7 @@
   description: "It produces light!"
   components:
   - type: Sprite
-    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    sprite: SS220/Structures/Furniture/PottedPlants/ss220_potted_plants.rsi
     state: plant-10
   - type: PointLight
     radius: 1.5
@@ -135,7 +135,7 @@
   description: "It produces light!"
   components:
   - type: Sprite
-    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    sprite: SS220/Structures/Furniture/PottedPlants/ss220_potted_plants.rsi
     state: plant-11
   - type: PointLight
     radius: 2
@@ -148,7 +148,7 @@
   description: "It produces light!"
   components:
   - type: Sprite
-    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    sprite: SS220/Structures/Furniture/PottedPlants/ss220_potted_plants.rsi
     state: plant-12
   - type: PointLight
     radius: 2.2
@@ -161,7 +161,7 @@
   description: "It produces light!"
   components:
   - type: Sprite
-    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    sprite: SS220/Structures/Furniture/PottedPlants/ss220_potted_plants.rsi
     state: plant-13
   - type: PointLight
     radius: 1.5
@@ -174,7 +174,7 @@
   description: "It produces light!"
   components:
   - type: Sprite
-    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    sprite: SS220/Structures/Furniture/PottedPlants/ss220_potted_plants.rsi
     state: plant-14
   - type: PointLight
     radius: 2
@@ -187,7 +187,7 @@
   description: "It produces light!"
   components:
   - type: Sprite
-    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    sprite: SS220/Structures/Furniture/PottedPlants/ss220_potted_plants.rsi
     state: plant-15
   - type: PointLight
     radius: 2.2
@@ -200,7 +200,7 @@
   description: "It produces light!"
   components:
   - type: Sprite
-    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    sprite: SS220/Structures/Furniture/PottedPlants/ss220_potted_plants.rsi
     state: plant-16
   - type: PointLight
     radius: 1.5
@@ -213,7 +213,7 @@
   description: "It produces light!"
   components:
   - type: Sprite
-    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    sprite: SS220/Structures/Furniture/PottedPlants/ss220_potted_plants.rsi
     state: plant-17
   - type: PointLight
     radius: 2
@@ -226,7 +226,7 @@
   description: "It produces light!"
   components:
   - type: Sprite
-    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    sprite: SS220/Structures/Furniture/PottedPlants/ss220_potted_plants.rsi
     state: plant-18
   - type: PointLight
     radius: 2.2
@@ -239,7 +239,7 @@
   description: "It produces light!"
   components:
   - type: Sprite
-    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    sprite: SS220/Structures/Furniture/PottedPlants/ss220_potted_plants.rsi
     state: plant-19
   - type: PointLight
     radius: 1.5
@@ -252,7 +252,7 @@
   description: "It produces light!"
   components:
   - type: Sprite
-    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    sprite: SS220/Structures/Furniture/PottedPlants/ss220_potted_plants.rsi
     state: plant-20
   - type: PointLight
     radius: 2
@@ -265,7 +265,7 @@
   description: "It produces light!"
   components:
   - type: Sprite
-    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    sprite: SS220/Structures/Furniture/PottedPlants/ss220_potted_plants.rsi
     state: plant-21
   - type: PointLight
     radius: 2.2
@@ -278,7 +278,7 @@
   description: "It produces light!"
   components:
   - type: Sprite
-    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    sprite: SS220/Structures/Furniture/PottedPlants/ss220_potted_plants.rsi
     state: plant-22
   - type: PointLight
     radius: 1.5
@@ -291,7 +291,7 @@
   description: "It produces light!"
   components:
   - type: Sprite
-    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    sprite: SS220/Structures/Furniture/PottedPlants/ss220_potted_plants.rsi
     state: plant-23
   - type: PointLight
     radius: 2
@@ -304,7 +304,7 @@
   description: "It produces light!"
   components:
   - type: Sprite
-    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    sprite: SS220/Structures/Furniture/PottedPlants/ss220_potted_plants.rsi
     state: plant-24
   - type: PointLight
     radius: 2.2
@@ -317,7 +317,7 @@
   description: "It produces light!"
   components:
   - type: Sprite
-    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    sprite: SS220/Structures/Furniture/PottedPlants/ss220_potted_plants.rsi
     state: plant-25
   - type: PointLight
     radius: 1.5
@@ -330,7 +330,7 @@
   description: "It produces light!"
   components:
   - type: Sprite
-    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    sprite: SS220/Structures/Furniture/PottedPlants/ss220_potted_plants.rsi
     state: plant-26
   - type: PointLight
     radius: 2
@@ -343,7 +343,7 @@
   description: "It produces light!"
   components:
   - type: Sprite
-    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    sprite: SS220/Structures/Furniture/PottedPlants/ss220_potted_plants.rsi
     state: plant-27
   - type: PointLight
     radius: 2.2
@@ -356,7 +356,7 @@
   description: "It produces light!"
   components:
   - type: Sprite
-    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    sprite: SS220/Structures/Furniture/PottedPlants/ss220_potted_plants.rsi
     state: plant-28
   - type: PointLight
     radius: 1.5
@@ -369,7 +369,7 @@
   description: "It produces light!"
   components:
   - type: Sprite
-    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    sprite: SS220/Structures/Furniture/PottedPlants/ss220_potted_plants.rsi
     state: plant-29
   - type: PointLight
     radius: 2
@@ -382,7 +382,7 @@
   description: "It produces light!"
   components:
   - type: Sprite
-    sprite: SS220/Structures/Furniture/potted_plants.rsi
+    sprite: SS220/Structures/Furniture/PottedPlants/ss220_potted_plants.rsi
     state: plant-30
   - type: PointLight
     radius: 2.2

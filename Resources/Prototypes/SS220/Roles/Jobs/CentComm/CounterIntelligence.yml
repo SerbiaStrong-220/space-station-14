@@ -1,0 +1,55 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+#CIOfficer
+- type: playTimeTracker
+  id: JobCIOfficer
+
+- type: job
+  id: CIOffcier
+  name: job-name-cc-ci-officer
+  description: job-description-centcomoff
+  setPreference: false
+  startingGear: CentCommOfficerGear
+  playTimeTracker: JobCIOfficer
+  icon: "JobIconNanotrasen"
+  supervisors: job-supervisors-centcom
+  canBeAntag: false
+  radioBold: true
+  accessGroups:
+  - AllAccess
+  access:
+  - CentralCommand
+  - CentralCommandERT
+  - CentralCommandBSO
+  - CentralCommandCBURN
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: DefibrillatorSkill
+
+#CIAgent
+- type: playTimeTracker
+  id: JobCIAgent
+
+- type: job
+  id: CIAgent
+  name: job-name-cc-ci-agent
+  description: job-description-centcomoff
+  setPreference: false
+  startingGear: CentCommOfficerGear
+  playTimeTracker: JobCIAgent
+  icon: "JobIconNanotrasen"
+  supervisors: job-supervisors-centcom
+  canBeAntag: false
+  radioBold: true
+  accessGroups:
+  - AllAccess
+  access:
+  - CentralCommand
+  - CentralCommandERT
+  - CentralCommandBSO
+  - CentralCommandCBURN
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: DefibrillatorSkill

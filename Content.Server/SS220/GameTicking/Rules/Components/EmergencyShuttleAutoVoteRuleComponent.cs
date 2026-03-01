@@ -10,6 +10,9 @@ public sealed partial class EmergencyShuttleAutoVoteRuleComponent : Component
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan LastEvacVoteTime = TimeSpan.Zero;
+        
+    [ViewVariables]
+    public int EvacVoteCount = 0;
 
     /// <summary>
     /// Time after round start when we want to make first vote for round end

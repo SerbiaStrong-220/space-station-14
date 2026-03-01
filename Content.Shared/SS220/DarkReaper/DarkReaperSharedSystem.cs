@@ -19,6 +19,7 @@ using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
+using Content.Shared.Shuttles.Components;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
@@ -31,7 +32,6 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using System.Linq;
@@ -68,7 +68,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<DarkReaperComponent, ComponentStartup>(OnCompInit);
+        SubscribeLocalEvent<DarkReaperComponent, ComponentStartup>(OnCompStartup);
         SubscribeLocalEvent<DarkReaperComponent, ComponentShutdown>(OnCompShutdown);
 
         // actions
@@ -377,8 +377,10 @@ public abstract class SharedDarkReaperSystem : EntitySystem
     }
 
     // Crap
-    protected virtual void OnCompInit(Entity<DarkReaperComponent> ent, ref ComponentStartup args)
+    protected virtual void OnCompStartup(Entity<DarkReaperComponent> ent, ref ComponentStartup args)
     {
+        ent.Comp.SpawnedTime = _timing.CurTime;
+
         UpdateStageAppearance(ent, ent.Comp);
         ChangeForm(ent, ent.Comp.PhysicalForm);
 
@@ -415,6 +417,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
 
         if (isMaterial)
         {
+            RemCompDeferred<FTLSmashImmuneComponent>(uid);
             EnsureComp<PullerComponent>(uid).NeedsHands = false;
             _tag.AddTag(uid, _doorBumpOpenerTag);
 
@@ -448,6 +451,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
 
             RemComp<PullerComponent>(uid);
             RemComp<ActivePullerComponent>(uid);
+            EnsureComp<FTLSmashImmuneComponent>(uid);
         }
 
         _actions.SetEnabled(comp.StunActionEntity, isMaterial);

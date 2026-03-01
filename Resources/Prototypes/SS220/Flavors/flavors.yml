@@ -67,3 +67,8 @@
   id: Skooma
   flavorType: Complex
   description: flavor-complex-skooma
+
+- type: flavor
+  id: olivier
+  flavorType: Complex
+  description: flavor-complex-olivier

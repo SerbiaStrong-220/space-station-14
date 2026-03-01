@@ -697,6 +697,6 @@ public abstract class SharedStrippableSystem : EntitySystem
         if (viewer == null)
             return true;
 
-        return !HasComp<BypassInteractionChecksComponent>(viewer);
+        return !HasComp<BypassInteractionChecksComponent>(viewer) && definition.FullyHidden; // ss220 fix admin ghost pocket items
     }
 }

@@ -146,4 +146,33 @@
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsPsychologist ]
+
+- type: entity
+  parent: AirlockMedical
+  id: AirlockMeidicalParamedicLocked
+  suffix: Medical, Paramedic
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsParamedic ]
+
+- type: entity
+  parent: AirlockMedicalGlass
+  id: AirlockMeidicalGlassParamedicLocked
+  suffix: Medical, Paramedic
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsParamedic ]
+
+- type: entity
+  parent: WindoorSecure
+  id: WindoorSecureMedicalParamedicLocked
+  suffix: Medical, Paramedic
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsParamedic ]
+  - type: Wires
+    layoutId: AirlockMedical
 #SS220 New_accesses_and_some_tweaks end

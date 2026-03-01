@@ -342,6 +342,20 @@
         Caustic: 0.4
   - type: StaminaResistance
     damageCoefficient: 0.1
+  # SS220-MIT-add-field-shields-begin
+  - type: FieldShieldProvider
+    rechargeShieldData:
+      rechargeTime: 15
+    shieldData:
+      shieldMaxCharge: 2
+      shieldSprite:
+        sprite: SS220/Effects/field_shield.rsi
+        state: blue
+    lightData:
+      color: "#0061d8"
+      radius: 1
+      energy: 4
+  # SS220-MIT-add-field-shields-end
   - type: ClothingSpeedModifier
     walkModifier: 1
     sprintModifier: 1
@@ -365,6 +379,20 @@
         Caustic: 0.5
   - type: StaminaResistance
     damageCoefficient: 0.1
+  # SS220-MIT-add-field-shields-begin
+  - type: FieldShieldProvider
+    rechargeShieldData:
+      rechargeTime: 15
+    shieldData:
+      shieldMaxCharge: 2
+      shieldSprite:
+        sprite: SS220/Effects/field_shield.rsi
+        state: blue
+    lightData:
+      color: "#0061d8"
+      radius: 1
+      energy: 4
+  # SS220-MIT-add-field-shields-end
   - type: ClothingSpeedModifier
     walkModifier: 1
     sprintModifier: 1
@@ -378,6 +406,20 @@
   components:
   - type: ExplosionResistance
     damageCoefficient: 0.3
+  # SS220-MIT-add-field-shields-begin
+  - type: FieldShieldProvider
+    rechargeShieldData:
+      rechargeTime: 15
+    shieldData:
+      shieldMaxCharge: 2
+      shieldSprite:
+        sprite: SS220/Effects/field_shield.rsi
+        state: blue
+    lightData:
+      color: "#0061d8"
+      radius: 1
+      energy: 4
+  # SS220-MIT-add-field-shields-end
   - type: Armor
     modifiers:
       coefficients:

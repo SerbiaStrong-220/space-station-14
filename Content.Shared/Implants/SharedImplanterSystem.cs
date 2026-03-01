@@ -10,7 +10,6 @@ using Content.Shared.Implants.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
-using Content.Shared.SS220.ChemicalImplant;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
@@ -133,8 +132,7 @@ public abstract class SharedImplanterSystem : EntitySystem
             return;
         }
 
-        //SS220-mindslave
-        implantComp.user = user;
+        implantComp.User = user; //SS220-mindslave
 
         //If the target doesn't have the implanted component, add it.
         var implantedComp = EnsureComp<ImplantedComponent>(target);

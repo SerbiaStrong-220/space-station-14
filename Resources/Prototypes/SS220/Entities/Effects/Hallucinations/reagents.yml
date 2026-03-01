@@ -17,7 +17,7 @@
     CrystalOrange: 1
 
 - type: weightedRandomEntity
-  id: HallucinationReagentMorphine
+  id: HallucinationReagentAglomorphine
   weights:
     DarkReaperPortalEffect: 10
     NormalHeadSkeleton: 10

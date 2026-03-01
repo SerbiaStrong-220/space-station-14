@@ -675,6 +675,7 @@
   minLimit: 0
   loadouts:
   - HatSeniorService
+  - HatBeretSeniorService
 
 - type: loadoutGroup
   id: SeniorServiceJumpsuit
@@ -682,6 +683,14 @@
   loadouts:
   - SeniorServiceJumpsuit
   - SeniorJumpskirtService
+  - SeniorServiceJumpsuitDelux
+
+- type: loadoutGroup
+  id: SeniorServiceShoes
+  name: loadout-group-senior-service-shoes
+  loadouts:
+  - ShoesColorBrown
+  - SeniorServiceBootsLaceup
   # Сервисный администратор (Конец)
 
   # Шеф-повар (Начало)

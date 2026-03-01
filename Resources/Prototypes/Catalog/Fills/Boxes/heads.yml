@@ -13,6 +13,10 @@
       - id: SalvageMagnetMachineCircuitboard
       - id: SalvageJobBoardComputerCircuitboard
       - id: MailTeleporterMachineCircuitboard
+      #SS220 cargo Circuitboard issue begin
+      - id: SalvageShuttleConsoleCircuitboard
+      - id: SalvageExpeditionsComputerCircuitboard
+      #SS220 cargo Circuitboard issue end
 
 - type: entity
   name: stamp box [QM]

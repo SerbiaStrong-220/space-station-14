@@ -87,13 +87,13 @@
       heal:
         types:
           Slash: -6
-          Blunt: -6
+          Blunt: -10
           Piercing: -6
           Heat: -4
           Cold: -4
           Shock: -4
           Radiation: -1
-          Сerebral: -20
+          Cerebral: -20
           Caustic: -3
           Cellular: -5
           Poison: -3
@@ -101,8 +101,8 @@
         groups:
           Airloss: -5
       modifyStamina: -5
-      bloodlossModifier: -1
-      modifyBloodLevel: 2
+      bloodlossModifier: -6
+      modifyBloodLevel: 10
 
 - type: entity
   id: ActionMiGoAstral
@@ -137,7 +137,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    useDelay: 600
+    useDelay: 240
     itemIconStyle: NoItem
     icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: "summon"}
   - type: InstantAction

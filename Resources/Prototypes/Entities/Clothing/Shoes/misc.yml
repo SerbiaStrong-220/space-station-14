@@ -138,8 +138,8 @@
   - type: ToggleClothing
     action: ActionToggleSpeedBoots
   - type: ClothingSpeedModifier
-    walkModifier: 1.5
-    sprintModifier: 1.5
+    walkModifier: 1.25 # SS220 speedboots rebalance
+    sprintModifier: 1.25 # SS220 speedboots rebalance
     standing: true
   - type: Appearance
   - type: GenericVisualizer
@@ -151,7 +151,7 @@
   - type: StaticPrice
     price: 500
   - type: PowerCellDraw
-    drawRate: 4
+    drawRate: 30 # SS220 speedboots rebalance
   - type: ToggleCellDraw
   - type: ItemSlots
     slots:

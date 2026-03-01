@@ -14,6 +14,7 @@ using Content.Shared.Station.Components;
 using Content.Shared.Tag;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Events;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.CultYogg.Nyarlathotep;
 
@@ -29,6 +30,8 @@ public sealed class NyarlathotepHorizonSystem : SharedNyarlathotepHorizonSystem
     [Dependency] private readonly MobStateSystem _mob = default!;
     [Dependency] private readonly BodySystem _bodySystem = default!;
     #endregion Dependencies
+
+    private readonly ProtoId<TagPrototype> _highRiskItemTag = "HighRiskItem";
 
     public override void Initialize()
     {
@@ -106,7 +109,7 @@ public sealed class NyarlathotepHorizonSystem : SharedNyarlathotepHorizonSystem
     {
         if (!EntityManager.IsQueuedForDeletion(entityToConsume)
             && (HasComp<MindContainerComponent>(entityToConsume)
-            || _tagSystem.HasTag(entityToConsume, "HighRiskItem")))
+            || _tagSystem.HasTag(entityToConsume, _highRiskItemTag)))
         {
             _adminLogger.Add(LogType.EntityDelete, LogImpact.Extreme, $"{ToPrettyString(entityToConsume)} entered the event horizon of {ToPrettyString(nyarlathotep)} and was deleted");
         }

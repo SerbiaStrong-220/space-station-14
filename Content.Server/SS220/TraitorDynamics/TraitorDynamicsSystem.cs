@@ -6,12 +6,12 @@ using Content.Server.Antag.Components;
 using Content.Server.Chat.Managers;
 using Content.Server.CrewManifest;
 using Content.Server.GameTicking;
-using Content.Server.RoundEnd;
 using Content.Server.Station.Systems;
 using Content.Server.Store.Systems;
 using Content.Server.StoreDiscount.Systems;
 using Content.Shared.Database;
 using Content.Shared.FixedPoint;
+using Content.Shared.GameTicking;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
 using Content.Shared.SS220.TraitorDynamics;
@@ -68,8 +68,14 @@ public sealed class TraitorDynamicsSystem : EntitySystem
         SubscribeLocalEvent<RoundEndTextAppendEvent>(OnRoundEndAppend);
         SubscribeLocalEvent<DynamicSettedEvent>(OnDynamicAdded);
         SubscribeLocalEvent<StoreDiscountsInitializedEvent>(OnStoreFinish);
-        SubscribeLocalEvent<RoundEndSystemChangedEvent>(OnRoundEnded);
         SubscribeLocalEvent<DynamicRemoveEvent>(OnDynamicRemove);
+        SubscribeLocalEvent<RoundEndedEvent>(OnRoundEnd);
+    }
+
+    private void OnRoundEnd(RoundEndedEvent _)
+    {
+        if (_currentDynamic.HasValue)
+            RemoveDynamic();
     }
 
     private void OnStoreFinish(ref StoreDiscountsInitializedEvent ev)
@@ -144,14 +150,6 @@ public sealed class TraitorDynamicsSystem : EntitySystem
 
         var locName = Loc.GetString(dynamicProto.Name);
         ev.AddLine(Loc.GetString("dynamic-show-end-round", ("dynamic", locName)));
-    }
-
-    private void OnRoundEnded(RoundEndSystemChangedEvent ev)
-    {
-        if (!_currentDynamic.HasValue)
-            return;
-
-        RemoveDynamic();
     }
 
     private void OnDynamicRemove(DynamicRemoveEvent ev)

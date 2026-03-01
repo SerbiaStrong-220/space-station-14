@@ -2,21 +2,25 @@
   id: CentralCommandCBURN
   name: id-card-access-level-central-command-cburn
   canBeSwitchableInReader: false #DoorElectronicsConfiguratorFix
+  showInPda: false
 
 - type: accessLevel
   id: CentralCommandERT
   name: id-card-access-level-central-command-ert
   canBeSwitchableInReader: false #DoorElectronicsConfiguratorFix
+  showInPda: false
 
 - type: accessLevel
   id: CentralCommandBSO
   name: id-card-access-level-central-command-bs-operative
   canBeSwitchableInReader: false #DoorElectronicsConfiguratorFix
+  showInPda: false
 
 - type: accessLevel
   id: CentralCommandDeathSquad
   name: id-card-access-level-central-command-death-squad
   canBeSwitchableInReader: false #DoorElectronicsConfiguratorFix
+  showInPda: false
 
 # Группа полного доступа
 - type: accessGroup

@@ -191,6 +191,9 @@
     - state: zippo_shlepa_open
       map: ["open"]
       visible: false
+    - state: top
+      map: ["top"]
+      visible: false
     - state: lighter_flame
       map: ["flame"]
       visible: false
@@ -199,6 +202,11 @@
     size: Tiny
     sprite: SS220/Objects/Sponsor/Cigs/floppa-zippo.rsi
     heldPrefix: zippo
+  - type: PointLight
+    enabled: false
+    netsync: false
+    radius: 2
+    color: Gold
 
 - type: entity
   id: SmokingPipeSponsor

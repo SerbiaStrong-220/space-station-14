@@ -6,9 +6,13 @@ using Robust.Client.GameObjects;
 namespace Content.Client.SS220.CultYogg.Cultists;
 
 /// <summary>
+/// Сontrols the visual during the acsending to the Mi-Go.
 /// </summary>
 public sealed class AcsendingVisualizerSystem : VisualizerSystem<AcsendingComponent>
 {
+
+    [Dependency] private readonly SpriteSystem _sprite = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -21,10 +25,12 @@ public sealed class AcsendingVisualizerSystem : VisualizerSystem<AcsendingCompon
     {
         // Need LayerMapTryGet because Init fails if there's no existing sprite / appearancecomp
         // which means in some setups (most frequently no AppearanceComp) the layer never exists.
-        if (TryComp<SpriteComponent>(uid, out var sprite) &&
-            sprite.LayerMapTryGet(AcsendingVisualLayers.Particles, out var layer))
+        if (!TryComp<SpriteComponent>(uid, out var sprite))
+            return;
+
+        if (_sprite.LayerMapTryGet((uid, sprite), AcsendingVisualLayers.Particles, out var layer, false))
         {
-            sprite.RemoveLayer(layer);
+            _sprite.RemoveLayer((uid, sprite), layer);
         }
     }
 
@@ -33,15 +39,15 @@ public sealed class AcsendingVisualizerSystem : VisualizerSystem<AcsendingCompon
         if (!TryComp<SpriteComponent>(uid, out var sprite) || !TryComp(uid, out AppearanceComponent? appearance))
             return;
 
-        sprite.LayerMapReserveBlank(AcsendingVisualLayers.Particles);
-        sprite.LayerSetVisible(AcsendingVisualLayers.Particles, true);
+        _sprite.LayerMapReserve((uid, sprite), AcsendingVisualLayers.Particles);
+        _sprite.LayerSetVisible((uid, sprite), AcsendingVisualLayers.Particles, true);
         sprite.LayerSetShader(AcsendingVisualLayers.Particles, "unshaded");
 
         if (uid.Comp.Sprite == null)
             return;
 
-        sprite.LayerSetRSI(AcsendingVisualLayers.Particles, uid.Comp.Sprite.RsiPath);
-        sprite.LayerSetState(AcsendingVisualLayers.Particles, uid.Comp.Sprite.RsiState);
+        _sprite.LayerSetRsi((uid, sprite), AcsendingVisualLayers.Particles, uid.Comp.Sprite.RsiPath);
+        _sprite.LayerSetRsiState((uid, sprite), AcsendingVisualLayers.Particles, uid.Comp.Sprite.RsiState);
     }
 }
 

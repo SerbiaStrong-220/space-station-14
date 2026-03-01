@@ -82,6 +82,11 @@
           types:
             Caustic: 10.0
             Heat: 10.0
+      - !type:MovementSpeedModifier
+        walkSpeedModifier: 0.6
+        sprintSpeedModifier: 0.6
+        type: Add
+        time: 10
       - !type:PopupMessage
         type: Local
         visualType: Large
@@ -97,7 +102,7 @@
   group: Narcotics
   desc: reagent-desc-essence-of-the-abyss
   physicalDesc: reagent-physical-desc-gloopy
-  color: "#0D0A10"
+  color: "#6e10da"
   boilingPoint: 444.0
   meltingPoint: 128.0
   metabolisms:
@@ -112,6 +117,7 @@
           inverted: true
           components:
           - BibleUser
+          - CultYogg
         effectProto: StatusEffectForcedSleeping
         time: 3
         type: Add
@@ -128,3 +134,4 @@
           inverted: true
           components:
           - BibleUser
+          - CultYogg

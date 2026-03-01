@@ -8,8 +8,8 @@
     - type: Sprite
       sprite: SS220/Objects/CultYogg/miko_trap_shroom.rsi
       layers:
-        - state: produce
-          map: ["base"]
+      - state: produce
+        map: ["base"]
     - type: Item
       sprite: SS220/Objects/CultYogg/miko_trap_shroom.rsi
     - type: Appearance
@@ -23,10 +23,11 @@
       trapsLimit: 6
       armedVisibility: 0.3
       unArmedVisibility: 1
-    - type: Trap
-      blacklist:
+    - type: WhitelistTriggerCondition
+      userBlacklist:
         components:
         - CultYogg
+    - type: Trap
       durationStun: 1
       setTrapSound: /Audio/SS220/Items/CultYogg/sound_trapCult_set.ogg
       defuseTrapSound: /Audio/SS220/Items/CultYogg/sound_trapCult_defuse.ogg
@@ -40,12 +41,14 @@
     - type: SolutionContainerManager
       solutions:
         food:
-          maxVol: 2.0
+          maxVol: 5.0
           reagents:
           - ReagentId: Nutriment
             Quantity: 1
           - ReagentId: Water
             Quantity: 1
+          - ReagentId: Toxin
+            Quantity: 3
     - type: InjectionOnTrigger
       reagent: Toxin
       quantity: 3
@@ -64,10 +67,10 @@
   description: We didn't understand how to use it, so we just wear it on our feet
   id: MikoTrapShroomSeeds
   components:
-    - type: Seed
-      seedId: MikoTrapShroomSpores
-    - type: Sprite
-      sprite: SS220/Objects/CultYogg/miko_trap_shroom.rsi
+  - type: Seed
+    seedId: MikoTrapShroomSpores
+  - type: Sprite
+    sprite: SS220/Objects/CultYogg/miko_trap_shroom.rsi
 
 - type: seed
   id: MikoTrapShroomSpores
@@ -77,7 +80,7 @@
   plantRsi: SS220/Objects/CultYogg/miko_trap_shroom.rsi
   packetPrototype: MikoTrapShroomSeeds
   productPrototypes:
-    - FoodMikoTrapShroomCult
+  - FoodMikoTrapShroomCult
   lifespan: 25
   maturation: 12
   production: 2

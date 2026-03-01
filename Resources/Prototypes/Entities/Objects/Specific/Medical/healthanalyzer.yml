@@ -23,10 +23,8 @@
     interfaces:
       enum.HealthAnalyzerUiKey.Key:
         type: HealthAnalyzerBoundUserInterface
-  #ss220 fix interact with 'E' start
-  #- type: ItemToggle
-  #  onUse: false
-  #ss220 fix interact with 'E' end
+  - type: ItemToggle
+    onUse: false
   - type: HealthAnalyzer
     scanningEndSound:
       path: "/Audio/Items/Medical/healthscanner.ogg"

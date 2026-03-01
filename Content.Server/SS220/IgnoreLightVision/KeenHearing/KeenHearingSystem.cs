@@ -3,6 +3,7 @@
 using Content.Server.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.SS220.IgnoreLightVision;
+using Content.Shared.SS220.IgnoreLightVision.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 

@@ -39,7 +39,7 @@
     - type: MobThresholds
       thresholds:
         0: Alive
-        40: Dead
+        60: Dead #SS220 Carp HP buff
     - type: MovementSpeedModifier
       baseWalkSpeed: 2.5
       baseSprintSpeed: 3.5
@@ -210,7 +210,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      50: Dead
+      60: Dead #SS220 Carp HP buff
   - type: SlowOnDamage
     speedModifierThresholds:
       25: 0.7

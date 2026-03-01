@@ -88,6 +88,7 @@
     global: true
   - type: RadarConsole
     followEntity: true
+    maxRange: 4096 # ss220-radar-aghost-buff
   - type: CargoOrderConsole
   - type: CrewMonitoringConsole
   - type: GeneralStationRecordConsole

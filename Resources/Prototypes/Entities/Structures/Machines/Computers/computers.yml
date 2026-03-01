@@ -411,6 +411,21 @@
   - type: GuideHelp
     guides:
     - Forensics
+  - type: ContainerContainer
+    containers:
+      id_card_slot: !type:ContainerSlot { }
+      board: !type:Container { }
+  - type: ItemSlots
+    slots:
+      id_card_slot:
+        name: id-card-console-target-id
+        ejectSound: /Audio/Machines/id_swipe.ogg
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectOnBreak: true
+        swap: false
+        whitelist:
+          components:
+          - IdCard
   #SS220 Criminal-Records end
   - type: Computer
     board: CriminalRecordsComputerCircuitboard

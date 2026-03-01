@@ -1,11 +1,13 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Chat.Systems;
+using Content.Server.Interaction;
 using Content.Server.Pinpointer;
 using Content.Server.SS220.SpiderQueen.Components;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
+using Content.Shared.Maps;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
@@ -18,6 +20,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -41,6 +44,9 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly HungerSystem _hunger = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
+    [Dependency] private readonly TileSystem _tile = default!;
+    [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private readonly InteractionSystem _interaction = default!;
 
     public override void Initialize()
     {
@@ -175,6 +181,13 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
             !CheckEnoughBloodPoints(performer, args.Cost))
             return;
 
+        var mapCoords = _transform.ToMapCoordinates(args.Target);
+        if (!_interaction.InRangeUnobstructed(performer, mapCoords))
+            return;
+
+        if (GetNearestGrid(mapCoords) == null)
+            return;
+
         var netCoordinates = GetNetCoordinates(args.Target);
         var doAfterArgs = new DoAfterArgs(
             EntityManager,
@@ -183,6 +196,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
             new SpiderTileSpawnDoAfterEvent()
             {
                 Prototype = args.Prototype,
+                InSpacePrototype = args.InSpacePrototype,
                 TargetCoordinates = netCoordinates,
                 Cost = args.Cost,
             },
@@ -205,24 +219,62 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
     private void OnTileSpawnDoAfter(SpiderTileSpawnDoAfterEvent args)
     {
         var user = args.User;
-        if (args.Cancelled ||
-            !CheckEnoughBloodPoints(user, args.Cost))
+        if (args.Cancelled
+            || args.Handled
+            || !CheckEnoughBloodPoints(user, args.Cost))
             return;
 
-        var coordinates = GetCoordinates(args.TargetCoordinates);
-        var gridUid = _transform.GetGrid(coordinates);
-        if (!TryComp<MapGridComponent>(gridUid, out var mapGrid))
+        var targetCoords = GetCoordinates(args.TargetCoordinates);
+        var mapCoords = _transform.ToMapCoordinates(targetCoords);
+        if (!_interaction.InRangeUnobstructed(user, mapCoords))
             return;
 
-        var position = _mapSystem.TileIndicesFor(gridUid.Value, mapGrid, coordinates);
+        var grid = GetNearestGrid(mapCoords);
+        if (grid == null)
+            return;
 
-        _mapSystem.SetTile(gridUid.Value,
-            mapGrid,
-            position,
-            new Tile(_tileDefinitionManager[args.Prototype].TileId));
+        var gridCoords = _transform.ToCoordinates(grid.Value.Owner, mapCoords);
+        var curTile = _mapSystem.GetTileRef(grid.Value, gridCoords);
 
-        if (TryComp<SpiderQueenComponent>(user, out var spiderQueen))
-            ChangeBloodPointsAmount(user, spiderQueen, -args.Cost);
+        var tileProto = args.InSpacePrototype is { } spaceProto && _turf.IsSpace(curTile)
+            ? spaceProto
+            : args.Prototype;
+
+        var placedTile = _tileDefinitionManager[tileProto];
+        var variant = _tile.PickVariant((ContentTileDefinition)placedTile);
+
+        _mapSystem.SetTile(grid.Value, curTile.GridIndices, new Tile(placedTile.TileId, variant: variant));
+
+        if (TryComp<SpiderQueenComponent>(args.User, out var spiderQueen))
+            ChangeBloodPointsAmount(args.User, spiderQueen, -args.Cost);
+
+        args.Handled = true;
+    }
+
+    private Entity<MapGridComponent>? GetNearestGrid(MapCoordinates mapCoords, float range = 1f)
+    {
+        var circle = new PhysShapeCircle(range, mapCoords.Position);
+        var grids = new List<Entity<MapGridComponent>>();
+        _mapManager.FindGridsIntersecting(mapCoords.MapId, circle, Robust.Shared.Physics.Transform.Empty, ref grids, includeMap: false);
+
+        Entity<MapGridComponent>? result = null;
+        var distance = float.PositiveInfinity;
+        var circleBox = circle.CalcLocalBounds();
+        foreach (var grid in grids)
+        {
+            var gridXform = Transform(grid);
+            var worldMatrix = _transform.GetWorldMatrix(gridXform);
+            var gridIntersect = circleBox.Intersect(worldMatrix.TransformBox(grid.Comp.LocalAABB));
+            var gridDist = (gridIntersect.Center - mapCoords.Position).LengthSquared();
+
+            if (gridDist >= distance)
+                continue;
+
+            result = grid;
+            distance = gridDist;
+        }
+
+        return result;
     }
 
     /// <summary>

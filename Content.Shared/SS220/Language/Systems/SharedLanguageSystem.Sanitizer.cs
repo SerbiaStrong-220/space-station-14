@@ -259,7 +259,8 @@ public sealed partial class LanguageMessage
         }
 
         sb.AppendJoin(' ', messages);
-        return sb.ToString();
+        var message = RemoveLanguagePrefix(sb.ToString());
+        return message;
     }
 
     /// <summary>
@@ -297,6 +298,15 @@ public sealed partial class LanguageMessage
     {
         foreach (var node in Nodes)
             node.SetMessage(func.Invoke(node.Message));
+    }
+
+    
+    /// <summary>
+    /// Removes language prefixes from the message (in case they are left)
+    /// </summary>
+    private string RemoveLanguagePrefix(string text)
+    {
+        return Regex.Replace(text, @"^(?:%[a-zA-Z0-9]+\s*)+", "", RegexOptions.IgnoreCase).TrimStart();
     }
 }
 

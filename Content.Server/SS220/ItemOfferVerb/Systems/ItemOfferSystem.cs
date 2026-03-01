@@ -7,8 +7,6 @@ using Content.Shared.Alert;
 using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
-using Content.Shared.Silicons.Borgs.Components;
-using Content.Shared.Interaction.Components;
 using Robust.Shared.Input.Binding;
 using Content.Shared.SS220.Input;
 using Content.Shared.SS220.ItemOffer;
@@ -118,7 +116,7 @@ public sealed class ItemOfferSystem : SharedItemOfferSystem
             return;
 
         // (fix https://github.com/SerbiaStrong-220/space-station-14/issues/2054)
-        if (HasComp<BorgChassisComponent>(user) || target == user)
+        if (target == user)
             return;
 
         if (_hands.CountFreeHands((target, handsComponent)) == 0)
@@ -130,7 +128,16 @@ public sealed class ItemOfferSystem : SharedItemOfferSystem
         if (!_hands.TryGetActiveItem(user, out var item))
             return;
 
-        if (HasComp<UnremoveableComponent>(item))
+        var evItem = new CanOfferItemEvent(user, target);
+        RaiseLocalEvent(item.Value, ref evItem, true);
+
+        if (evItem.Cancelled)
+            return;
+
+        var evUser = new CanOfferItemEvent(user, target);
+        RaiseLocalEvent(user, ref evUser, true);
+
+        if (evUser.Cancelled)
             return;
 
         var itemReceiver = EnsureComp<ItemReceiverComponent>(target);

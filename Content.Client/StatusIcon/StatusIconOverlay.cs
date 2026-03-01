@@ -22,7 +22,8 @@ public sealed class StatusIconOverlay : Overlay
     private readonly StatusIconSystem _statusIcon;
     private readonly ShaderInstance _unshadedShader;
 
-    public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
+    private OverlaySpace _space = OverlaySpace.WorldSpaceBelowFOV; // ss220 add render icons in no vision for migo
+    public override OverlaySpace Space => _space; // ss220 add render icons in no vision for migo
 
     internal StatusIconOverlay()
     {
@@ -33,6 +34,13 @@ public sealed class StatusIconOverlay : Overlay
         _statusIcon = _entity.System<StatusIconSystem>();
         _unshadedShader = _prototype.Index(UnshadedShader).Instance();
     }
+
+    // ss220 add render icons in no vision for migo start
+    public void UpdateSpace(OverlaySpace space)
+    {
+        _space = space;
+    }
+    // ss220 add render icons in no vision for migo end
 
     protected override void Draw(in OverlayDrawArgs args)
     {

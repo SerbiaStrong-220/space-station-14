@@ -9,3 +9,10 @@
     stealGroup: SalvageShuttleConsoleCircuitboard
   - type: Objective
     difficulty: 0.7
+
+- type: entity
+  parent: BaseThiefStealObjective
+  id: ThiefStealObjective
+  components:
+  - type: Objective
+    difficulty: 0.25

@@ -119,6 +119,10 @@
     # - id: WeaponTaser
     #  amount: 2
     # SS220 No tasers end
+    # SS220 Return trackers for brigmed Begin
+    - id: TrackingImplanter
+      amount: 2
+    # SS220 Return trackers for brigmed End
     - id: ClothingOuterHardsuitBrigmedic
     - id: OxygenTankFilled   #SS220 add-tanks-brigmed
     - id: NitrogenTankFilled #SS220 add-tanks-brigmed
