@@ -1,0 +1,39 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: HolopadLongRange
+  id: HolopadLaborCommandLongRange
+  suffix: Labor - Command
+  components:
+  - type: Label
+    currentLabel: holopad-labor-command
+  - type: Telephone
+    ignoreTelephonesOnSameGrid: false
+
+- type: entity
+  parent: HolopadLongRange
+  id: HolopadLaborPrisonBlockLongRange
+  suffix: Labor - Prison block
+  components:
+  - type: Label
+    currentLabel: holopad-labor-prison-block
+  - type: Telephone
+    ignoreTelephonesOnSameGrid: false
+
+- type: entity
+  parent: HolopadLongRange
+  id: HolopadLaborSecurityLongRange
+  suffix: Labor - Security
+  components:
+  - type: Label
+    currentLabel: holopad-labor-security
+  - type: Telephone
+    ignoreTelephonesOnSameGrid: false
+
+- type: entity
+  parent: HolopadLongRange
+  id: HolopadStationWardenLongRange
+  suffix: Station Warden
+  components:
+  - type: Label
+    currentLabel: holopad-station-warden
