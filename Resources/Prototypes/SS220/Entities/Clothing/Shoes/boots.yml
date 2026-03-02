@@ -3,7 +3,8 @@
 - type: entity
   parent: ClothingShoesBaseWinterBoots
   id: ClothingShoesBootsWinterSecMed
-  name: зимние ботинки бригмедика
+  name: brigmedic's winter boots
+  description: Sturdy, insulated boots designed for a medic working in the cold corridors of the brig.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Shoes/Boots/winterbootssecmed.rsi
