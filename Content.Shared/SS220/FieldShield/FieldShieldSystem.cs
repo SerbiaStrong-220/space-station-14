@@ -130,9 +130,13 @@ public sealed class FieldShieldProviderSystem : EntitySystem
         RemCompDeferred<FieldShieldComponent>(args.Equipee);
     }
 
-    private FixedPoint2 GetIgnoredDamage(Entity<FieldShieldComponent> entity, DamageSpecifier damage, EntityUid? origin)
+    private FixedPoint2 GetBlockableDamage(Entity<FieldShieldComponent> entity, DamageSpecifier damageSpec, EntityUid? origin)
     {
-        FixedPoint2 totalIgnored = FixedPoint2.Zero;
+        var totalIgnored = FixedPoint2.Zero;
+
+        var damage = DamageSpecifier.GetPositive(damageSpec);
+        if (damage.Empty)
+            return totalIgnored;
 
         // Lack of origin usually indicates indirect damage, e.g. status effect (burning), metabolism, ambient radiation.
         // Some sources of damage (projectile grenades) don't pass Origin, so we can't be a 100% sure what's hitting us.
@@ -149,7 +153,7 @@ public sealed class FieldShieldProviderSystem : EntitySystem
             }
         }
 
-        return totalIgnored;
+        return damage.GetTotal() - totalIgnored;
     }
 
     private void OnFieldShieldBeforeDamage(Entity<FieldShieldComponent> entity, ref BeforeDamageChangedEvent args)
@@ -157,15 +161,9 @@ public sealed class FieldShieldProviderSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        var damage = DamageSpecifier.GetPositive(args.Damage);
-
-        if (damage.Empty)
-            return;
-
-        var totalIgnored = GetIgnoredDamage(entity, damage, args.Origin);
-
-        if (damage.GetTotal() - totalIgnored > entity.Comp.ShieldData.MaxDamageConsumable
-            || damage.GetTotal() - totalIgnored < entity.Comp.ShieldData.DamageThreshold)
+        var blockableDamage = GetBlockableDamage(entity, args.Damage, args.Origin);
+        if (blockableDamage > entity.Comp.ShieldData.MaxDamageConsumable ||
+            blockableDamage < entity.Comp.ShieldData.DamageThreshold)
             return;
 
         UpdateShieldTimer(entity);
@@ -179,14 +177,8 @@ public sealed class FieldShieldProviderSystem : EntitySystem
 
     private void OnShieldDamageModify(Entity<FieldShieldComponent> entity, ref DamageModifyEvent args)
     {
-        var damage = DamageSpecifier.GetPositive(args.Damage);
-
-        if (damage.Empty)
-            return;
-
-        var totalIgnored = GetIgnoredDamage(entity, damage, args.Origin);
-
-        if (damage.GetTotal() - totalIgnored < entity.Comp.ShieldData.DamageThreshold)
+        var blockableDamage = GetBlockableDamage(entity, args.Damage, args.Origin);
+        if (blockableDamage < entity.Comp.ShieldData.DamageThreshold)
             return;
 
         UpdateShieldTimer(entity);
