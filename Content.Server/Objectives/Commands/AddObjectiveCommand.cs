@@ -101,7 +101,7 @@ public sealed class AddObjectiveCommand : LocalizedEntityCommands
                 _targetObjective.SetTarget(objective.Value, targetEnt.Value, targetObj);
                 _targetObjective.ResetEntityName(objective.Value, log: true);
             }
-            else
+            else if (!EntityManager.HasComponent<PickRandomPersonComponent>(objective.Value) || targetObj.Target == null)
             {
                 _mind.TryRemoveObjective(mindId, mind, objective.Value);
                 return;

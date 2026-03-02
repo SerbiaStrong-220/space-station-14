@@ -86,25 +86,6 @@
   category: construction-category-weapons
   objectType: Item
 
-#ss220 handmade gun buff begin
-- type: construction
-  id: WeaponMakeshiftLaser
-  graph: WeaponMakeshiftLaserGraph
-  startNode: start
-  targetNode: pistol
-  category: construction-category-weapons
-  objectType: Item
-
-- type: construction
-  id: WeaponShotgunHandmade
-  graph: WeaponShotgunHandmadeGraph
-  startNode: start
-  targetNode: HDpistol
-  category: construction-category-weapons
-  objectType: Item
-
-#ss220 handmade gun buff end
-
 - type: construction
   id: ShellShotgunImprovised
   graph: ImprovisedShotgunShellGraph

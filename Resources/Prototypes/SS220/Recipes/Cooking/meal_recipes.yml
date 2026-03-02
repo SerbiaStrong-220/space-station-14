@@ -1,3 +1,5 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 - type: microwaveMealRecipe
   id: RecipeCheburek
   name: Cheburek recipe
@@ -265,6 +267,7 @@
     Grenadine: 5
   solids:
     CaramelFood: 2
+
 #SS220 cluwnecomms start
 - type: microwaveMealRecipe
   id: CluwneComms
