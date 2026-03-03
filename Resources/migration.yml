@@ -858,3 +858,10 @@ ToyOwlman: ToyFigurineOwlman
 ToySkeleton: ToyFigurineSkeleton
 
 BoxFolderYellow: null
+
+# ss220 tweak proto part 1 start
+# 2026-02-14
+WarderobePrisonSecureFilled: WardrobePrisonSecureFilled
+BlueShieldGasMask: ClothingMaskGasBlueShield
+BlueShieldSWAT: ClothingMaskGasBlueShieldSWAT
+# ss220 tweak proto part 1 end
