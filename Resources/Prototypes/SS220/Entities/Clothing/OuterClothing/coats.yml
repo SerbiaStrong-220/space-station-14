@@ -43,8 +43,8 @@
 - type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterCoatOfficerFieldUniform
-  name: полевая форма Офицера Флота NanoTrasen
-  description: Парадный плащ, разработанный в качестве массового варианта формы Верховного Главнокомандующего. У этой униформы нет тех же защитных свойств, что и у оригинала, но она все ещё является довольно удобным и стильным предметом гардероба.
+  name: NanoTrasen Navy officer field uniform
+  description: A ceremonial cloak designed as a mass-produced version of the High Command uniform. While lacking the protective properties of the original, it remains a comfortable and stylish wardrobe choice.
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Coats/centcom_field_officer_coat.rsi
@@ -90,8 +90,8 @@
 - type: entity
   parent: ClothingUniformJumpskirtCapFormalDress
   id: ClothingOuterWhiteCoatCaptain
-  name: белое пальто капитана
-  description: Белый цвет - символ власти на флоте.
+  name: white captain's coat
+  description: The color white is a symbol of authority in the fleet.
   suffix: За время в игре
   components:
   - type: Sprite
@@ -102,8 +102,8 @@
 - type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterCoatHoPFormalDress
-  name: торжественное платье главы персонала
-  description: Только для настоящих машин бюрократии.
+  name: head of personnel's formal dress
+  description: For true bureaucratic machines only.
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Coats/hop_coat.rsi
@@ -126,8 +126,8 @@
 - type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterCoatQM
-  name: торжественная куртка квартирмейстера
-  description: Торжественная куртка квартирмейстера, инкрустированная золотом.
+  name: quartermaster's ceremonial jacket
+  description: A ceremonial quartermaster's jacket inlaid with gold.
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Coats/qm_coat.rsi
@@ -157,8 +157,8 @@
 - type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterCoatCEFormalDress
-  name: торжественное платье старшего инженера
-  description: Сделано из самых лучших огнеупорных тканей, а золото поможет вам маршировать от Сингулярности, не боясь излучения.
+  name: chief engineer's formal dress
+  description: Made from the finest fire-resistant fabrics, with gold accents to help you march away from the Singularity without fear of radiation.
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Coats/ce_coat.rsi
@@ -174,8 +174,8 @@
 - type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterCoatCMOFormalDress
-  name: торжественное платье главного врача
-  description: Встречайте - Главный Врач!
+  name: chief medical officer's formal dress
+  description: Behold — the Chief Medical Officer!
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Coats/cmo_coat.rsi
@@ -190,8 +190,8 @@
 - type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterCoatRDFormalDress
-  name: торжественное платье научного руководителя
-  description: Специально для самых величайших открытий! Устройте в свою честь марш киборгов и салют из взрывающихся артефактов.
+  name: research director's formal dress
+  description: Specially for the greatest discoveries! Have a cyborg march and a salute of exploding artifacts in your honor.
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Coats/rd_coat.rsi
@@ -207,8 +207,8 @@
 - type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterCoatDanger
-  name: опасная куртка
-  description: Опасный лук, опасного человека.
+  name: dangerous jacket
+  description: A dangerous look for a dangerous person.
   suffix: За время в игре
   components:
   - type: Sprite
