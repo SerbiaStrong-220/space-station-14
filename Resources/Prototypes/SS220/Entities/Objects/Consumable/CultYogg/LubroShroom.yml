@@ -44,6 +44,7 @@
     tags:
     - Omnivorous
     - CultYoggStealthProvidable
+    - WhitelistChameleon
 
 - type: entity
   parent: SeedBase
