@@ -68,3 +68,91 @@
   - type: InternalTemperature
     thickness: 0.06
 
+- type: entity
+  parent: FoodMeatBase
+  id: FoodMeatRabbit
+  name: raw rabbit meat
+  description: A raw rabbit meat
+  components:
+  - type: Tag
+    tags:
+    - Raw
+    - Meat
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/meat.rsi
+    state: rabbit
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: UncookedAnimalProteins
+          Quantity: 5
+        - ReagentId: Fat
+          Quantity: 3
+  - type: Construction
+    graph: RabbitSteak
+    node: start
+    defaultTarget: cooked rabbit
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: rabbit-inhand-left
+      right:
+      - state: rabbit-inhand-right
+
+- type: entity
+  parent: FoodMeatBase
+  id: FoodMeatBnuuy
+  name: dried bnuuy meat
+  description: You should have followed the rabbit...
+  components:
+  - type: Construction
+    graph: BnuuySteak
+    node: start
+    defaultTarget: cooked bnuuy
+
+- type: entity
+  parent: FoodMeatBase
+  id: FoodMeatRabbitSteak
+  name: rabbit steak
+  components:
+  - type: Tag
+    tags:
+    - Cooked
+    - Meat
+    - Steak
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/meat.rsi
+    state: rabbit-grilled
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 3
+        - ReagentId: Protein
+          Quantity: 5
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: rabbit-inhand-left-grilled
+      right:
+      - state: rabbit-inhand-right-grilled
+
+- type: entity
+  parent: FoodMeatBase
+  id: FoodMeatBnuuySteak
+  name: bnuuy steak
+  description: "You're a monster..."
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 3
+        - ReagentId: Protein
+          Quantity: 5
+        # Что-то уникальное
+
+

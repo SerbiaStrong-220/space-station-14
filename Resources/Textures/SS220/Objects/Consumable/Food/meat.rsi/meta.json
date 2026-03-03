@@ -29,6 +29,28 @@
         "name": "goliath-cooked-inhand-left",
         "directions": 4
       },
+      {
+        "name": "rabbit"
+      },
+      {
+        "name": "rabbit-cooked"
+      },
+      {
+        "name": "rabbit-inhand-right",
+        "directions": 4
+      },
+      {
+        "name": "rabbit-inhand-left",
+        "directions": 4
+      },
+      {
+        "name": "rabbit-cooked-inhand-right",
+        "directions": 4
+      },
+      {
+        "name": "rabbit-cooked-inhand-left",
+        "directions": 4
+      },
 	    {
         "name": "spider-grilled"
       },

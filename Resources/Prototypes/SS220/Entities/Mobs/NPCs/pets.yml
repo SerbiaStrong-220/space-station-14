@@ -191,8 +191,8 @@
           Quantity: 5
   - type: Butcherable
     spawned:
-    - id: FoodMeat
-      amount: 1
+    - id: FoodMeatRabbit
+      amount: 2
   - type: Tag
     tags:
     - VimPilot
