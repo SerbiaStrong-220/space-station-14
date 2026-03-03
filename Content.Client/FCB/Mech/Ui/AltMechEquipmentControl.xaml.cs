@@ -10,12 +10,13 @@ public sealed partial class AltMechEquipmentControl : Control
 {
     public event Action? OnRemoveButtonPressed;
 
-    public AltMechEquipmentControl(EntityUid entity, string itemName, Control? fragment)
+    public AltMechEquipmentControl(EntityUid entity, string itemName, Control? fragment, bool buttonVisible = true)
     {
         RobustXamlLoader.Load(this);
         EquipmentName.SetMessage(itemName);
         EquipmentView.SetEntity(entity);
         RemoveButton.TexturePath = "/Textures/Interface/Nano/cross.svg.png";
+        RemoveButton.Visible = buttonVisible;
 
         if (fragment != null)
         {

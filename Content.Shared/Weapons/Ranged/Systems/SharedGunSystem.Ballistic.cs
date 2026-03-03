@@ -1,8 +1,6 @@
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
-using Content.Shared.FCB.Weapons.Ranged.Events;
 using Content.Shared.Interaction;
-using Content.Shared.Interaction.Events;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;

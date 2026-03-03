@@ -40,7 +40,7 @@
                         MaxSize="64 64"
                         Scale="2 2">
                     </SpriteView>
-                    <TextureButton Name="RemoveButtonHead" Scale="0.5 0.5" SetSize="20 20"></TextureButton>
+                    <TextureButton Name="RemoveButtonHead" Scale="0.5 0.5" SetSize="64 24"></TextureButton>
                     <ProgressBar Name="IntegrityDisplayBarHead"
                                  HorizontalExpand="True"
                                  SetHeight="25"
@@ -64,7 +64,7 @@
                         MaxSize="64 64"
                         Scale="2 2">
                     </SpriteView>
-                    <TextureButton Name="RemoveButtonRightArm" Scale="0.5 0.5" SetSize="20 20"></TextureButton>
+                    <TextureButton Name="RemoveButtonRightArm" Scale="0.5 0.5" SetSize="64 24"></TextureButton>
                     <ProgressBar Name="IntegrityDisplayBarRightArm"
                                  HorizontalExpand="True"
                                  SetHeight="25"
@@ -109,7 +109,7 @@
                         MaxSize="64 64"
                         Scale="2 2">
                     </SpriteView>
-                    <TextureButton Name="RemoveButtonLeftArm" Scale="0.5 0.5" SetSize="20 20"></TextureButton>
+                    <TextureButton Name="RemoveButtonLeftArm" Scale="0.5 0.5" SetSize="64 24"></TextureButton>
                     <ProgressBar Name="IntegrityDisplayBarLeftArm"
                                  HorizontalExpand="True"
                                  SetHeight="25"
@@ -134,7 +134,7 @@
                         MaxSize="64 64"
                         Scale="2 2">
                     </SpriteView>
-                    <TextureButton Name="RemoveButtonChassis" Scale="0.5 0.5" SetSize="20 20"></TextureButton>
+                    <TextureButton Name="RemoveButtonChassis" Scale="0.5 0.5" SetSize="64 24"></TextureButton>
                     <ProgressBar Name="IntegrityDisplayBarChassis"
                                  HorizontalExpand="True"
                                  SetHeight="25"
@@ -156,7 +156,7 @@
                         MaxSize="64 64"
                         Scale="2 2">
                     </SpriteView>
-                    <TextureButton Name="RemoveButtonPower" Scale="0.5 0.5" SetSize="20 20"></TextureButton>
+                    <TextureButton Name="RemoveButtonPower" Scale="0.5 0.5" SetSize="64 24"></TextureButton>
                     <ProgressBar Name="IntegrityDisplayBarPower"
                                  HorizontalExpand="True"
                                  SetHeight="25"
@@ -183,6 +183,10 @@
             </BoxContainer>
         </BoxContainer>
         <BoxContainer VerticalExpand="True" Margin="10 0 10 10" Orientation="Vertical">
+            <Label Name="SlotDisplay"
+                       HorizontalAlignment="Left"
+                       Access="Public"
+                       HorizontalExpand="True" />
             <PanelContainer VerticalExpand="True" MinSize="0 200">
                 <PanelContainer.PanelOverride>
                     <gfx:StyleBoxFlat BackgroundColor="#1B1B1E" />

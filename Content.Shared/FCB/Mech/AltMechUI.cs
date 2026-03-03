@@ -18,6 +18,17 @@ public sealed class MechPartRemoveMessage : BoundUserInterfaceMessage
 }
 
 [Serializable, NetSerializable]
+public sealed class AltMechEquipmentRemoveMessage : BoundUserInterfaceMessage
+{
+    public NetEntity Equipment;
+
+    public AltMechEquipmentRemoveMessage(NetEntity equipment)
+    {
+        Equipment = equipment;
+    }
+}
+
+[Serializable, NetSerializable]
 public sealed class MechMaintenanceToggleMessage : BoundUserInterfaceMessage
 {
     public bool Toggled;

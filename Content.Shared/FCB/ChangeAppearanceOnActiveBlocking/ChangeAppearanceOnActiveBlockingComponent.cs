@@ -12,6 +12,9 @@ public sealed partial class ChangeAppearanceOnActiveBlockingComponent : Componen
     [DataField, AutoNetworkedField]
     public bool Toggled = false;
 
+    [DataField]
+    public bool RequiresToggle = false;
+
     /// <summary>
     /// Sprite layer that will have its visibility toggled when this item is toggled.
     /// </summary>

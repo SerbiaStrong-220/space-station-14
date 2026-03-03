@@ -1,8 +1,5 @@
 // © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
 using Content.Shared.Flash;
-using Content.Shared.Interaction.Events;
-using Content.Shared.Inventory;
-using Content.Shared.Mech.Components;
 using Content.Shared.Mech.EntitySystems;
 using Content.Shared.FCB.Mech.Components;
 

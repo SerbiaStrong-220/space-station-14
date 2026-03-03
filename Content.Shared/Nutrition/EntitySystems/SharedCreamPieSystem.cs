@@ -65,7 +65,7 @@ namespace Content.Shared.Nutrition.EntitySystems
             var resistEv = new StunAttemptEvent(StunSource.Creampie);
             RaiseLocalEvent(uid, ref resistEv);
 
-            if (resistEv.stunCancelled)
+            if (resistEv.StunCancelled)
                 return;
             //FCB instastun resist end
 

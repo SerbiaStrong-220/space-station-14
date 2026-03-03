@@ -76,7 +76,7 @@ public sealed partial class AltBlockingSystem : EntitySystem
     /// <param name="compUsert"> The <see cref="AltBlockingUserComponent"/></param>
     /// <param name="user"> The entity who's using the item to block</param>
     /// <returns></returns>
-    public bool StartBlocking(AltBlockingUserComponent compUser, EntityUid user)//SS220 shield rework
+    public bool StartBlocking(AltBlockingUserComponent compUser, EntityUid user)//FCB shield rework
     {
         if (compUser.IsBlocking)
             return false;
@@ -153,7 +153,7 @@ public sealed partial class AltBlockingSystem : EntitySystem
     {
         var userQuery = GetEntityQuery<AltBlockingUserComponent>();
 
-        if (!userQuery.TryGetComponent(user, out var component1))
+        if (!userQuery.TryGetComponent(user, out var componentUser))
             return;
 
         var handQuery = GetEntityQuery<HandsComponent>();
@@ -163,8 +163,10 @@ public sealed partial class AltBlockingSystem : EntitySystem
 
         var shields = _handsSystem.EnumerateHeld((user, hands)).ToArray();
 
-        if (component1 != null && component1.BlockingItemsShields.Contains(uid))
-            component1.BlockingItemsShields.Remove(uid);
+        if (componentUser != null && componentUser.BlockingItemsShields.Contains(uid))
+            componentUser.BlockingItemsShields.Remove(uid);
+
+        component.User = null;
 
         foreach (var shield in shields)
         {
@@ -172,16 +174,15 @@ public sealed partial class AltBlockingSystem : EntitySystem
                 return;
         }
 
-        component.User = null;
-        if (component1 != null)
+        if (componentUser != null)
         {
-            component1.BlockingItemsShields.Clear();
+            componentUser.BlockingItemsShields.Clear();
             if (_net.IsServer)
             {
-                if (component1.IsBlocking)
-                    StopBlocking(component1, user);
+                if (componentUser.IsBlocking)
+                    StopBlocking(componentUser, user);
 
-                _actionsSystem.RemoveAction(component1.BlockingToggleActionEntity);
+                _actionsSystem.RemoveAction(componentUser.BlockingToggleActionEntity);
                 RemComp<AltBlockingUserComponent>(user);
             }
         }

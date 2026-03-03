@@ -2,7 +2,6 @@
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands;
-using Content.Shared.Damage.Systems;
 using Content.Shared.Interaction.Events;
 
 namespace Content.Shared.FCB.ArmorBlock;
@@ -90,10 +89,7 @@ public sealed class ArmorBlockSystem : EntitySystem
 
     public FixedPoint2 CountDifference(Dictionary<string,FixedPoint2> dict,FixedPoint2 damage, FixedPoint2 resist,string type, FixedPoint2 piercing)
     {
-        resist = resist - piercing;
-
-        if (resist < 0)
-            resist = 0;
+        resist = Math.Clamp(resist.Float() - piercing.Float(), 0f, Math.Abs(resist.Float()) + Math.Abs(piercing.Float()));
 
         if (damage > resist)
         {

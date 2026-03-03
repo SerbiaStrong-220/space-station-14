@@ -11,15 +11,13 @@ using Content.Shared.Actions;
 using Content.Shared.Alert;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Components;
-using Content.Shared.Damage.Systems;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.FCB.AltMech;
-using Content.Shared.FCB.ComplexRepairable;
 using Content.Shared.FCB.Mech.Components;
+using Content.Shared.FCB.Mech.Equipment.Components;
 using Content.Shared.FCB.Mech.Parts.Components;
 using Content.Shared.FCB.Mech.Systems;
 using Content.Shared.FixedPoint;
@@ -41,7 +39,6 @@ using Content.Shared.Tools.Components;
 using Content.Shared.Tools.Systems;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
-using JetBrains.FormatRipper.Elf;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
@@ -100,7 +97,8 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         SubscribeLocalEvent<AltMechPilotComponent, MindAddedMessage>(OnMindAdded);
 
         #region MechMenu UI messages
-        SubscribeLocalEvent<MechPartComponent, MechEquipmentRemoveMessage>(OnRemoveEquipmentMessage);
+        SubscribeLocalEvent<AltMechComponent, AltMechEquipmentRemoveMessage>(OnRemoveEquipmentMessage);
+
         SubscribeLocalEvent<AltMechComponent, MechPartRemoveMessage>(OnRemovePartMessage);
         SubscribeLocalEvent<AltMechComponent, MechMaintenanceToggleMessage>(OnMaintenanceToggledMessage);
         SubscribeLocalEvent<AltMechComponent, MechBoltMessage>(OnMechBoltMessage);
@@ -169,14 +167,17 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         Dirty(uid, component);
     }
 
-    private void OnRemoveEquipmentMessage(EntityUid uid, MechPartComponent component, MechEquipmentRemoveMessage args)
+    private void OnRemoveEquipmentMessage(Entity<AltMechComponent> ent, ref AltMechEquipmentRemoveMessage args)
     {
         var equip = GetEntity(args.Equipment);
 
         if (!Exists(equip) || Deleted(equip))
             return;
 
-        RemoveEquipment(uid, equip, component);
+        if (!TryComp<AltMechEquipmentComponent>(equip, out var equipmentComp))
+            return;
+
+        RemoveEquipment(ent.Owner, equip);
     }
 
     private void OnRemovePartMessage(Entity<AltMechComponent> ent, ref MechPartRemoveMessage args)

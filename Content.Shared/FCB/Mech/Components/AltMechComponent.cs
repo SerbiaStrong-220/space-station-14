@@ -71,13 +71,12 @@ public sealed partial class AltMechComponent : Component
     /// A container for storing the equipment entities.
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    //public Container EquipmentContainer = default!;
     public Container EquipmentContainer = new();
 
     [ViewVariables]
     public readonly string EquipmentContainerId = "part-mech-equipment-container";
 
-    [AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public int CurrentEquipmentAmount = 0;
 
     /// <summary>
@@ -91,15 +90,6 @@ public sealed partial class AltMechComponent : Component
     /// </summary>
     [DataField]
     public EntityWhitelist? EquipmentWhitelist;
-
-    /// <summary>
-    /// The slot the battery is stored in.
-    /// </summary>
-    //[ViewVariables]
-    //public ContainerSlot BatterySlot = default!;
-
-    //[ViewVariables]
-    //public readonly string BatterySlotId = "mech-battery-slot";
 
     /// <summary>
     /// Whether the mech has been destroyed and is no longer pilotable.
@@ -151,14 +141,6 @@ public sealed partial class AltMechComponent : Component
 
     [ViewVariables(VVAccess.ReadWrite)]
     public Dictionary<string, ContainerSlot> ContainerDict = new Dictionary<string, ContainerSlot>();
-    //{
-    //    //["core"] = new ContainerSlot(),
-    //    ["head"] = new ContainerSlot(),
-    //    ["right-arm"] = new ContainerSlot(),
-    //    ["left-arm"] = new ContainerSlot(),
-    //    ["chassis"] = new ContainerSlot(),
-    //    ["power"] = new ContainerSlot()
-    //};
 
     [ViewVariables(VVAccess.ReadWrite)]
     public List<string> ContainersToCreate = new List<string>{ "head", "right-arm", "left-arm", "chassis", "power" };
@@ -174,36 +156,6 @@ public sealed partial class AltMechComponent : Component
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     [AutoNetworkedField]
     public TimeSpan NextPowerDrain = TimeSpan.Zero;
-
-    //[ViewVariables(VVAccess.ReadWrite)]
-    //public ContainerSlot HeadSlot = default!;
-
-    //[ViewVariables]
-    //public readonly string HeadSlotId = "mech-head-slot";
-
-    //[ViewVariables(VVAccess.ReadWrite)]
-    //public ContainerSlot LegsSlot = default!;
-
-    //[ViewVariables]
-    //public readonly string LegsSlotId = "mech-legs-slot";
-
-    //[ViewVariables(VVAccess.ReadWrite)]
-    //public ContainerSlot PowerGridSlot = default!;
-
-    //[ViewVariables]
-    //public readonly string PowerGridSlotId = "mech-power-slot";
-
-    //[ViewVariables(VVAccess.ReadWrite)]
-    //public ContainerSlot LeftArmSlot = default!;
-
-    //[ViewVariables]
-    //public readonly string LeftArmSlotId = "mech-left-arm-slot";
-
-    //[ViewVariables(VVAccess.ReadWrite)]
-    //public ContainerSlot RightArmSlot = default!;
-
-    //[ViewVariables]
-    //public readonly string RightArmSlotSlotId = "mech-right-arm-slot";
 
     [DataField]
     public EntityWhitelist? HeadWhitelist;
@@ -267,10 +219,6 @@ public sealed partial class AltMechComponent : Component
     public EntProtoId MechUiAction = "ActionMechOpenUI";
     [DataField]
     public EntProtoId MechEjectAction = "ActionMechEject";
-    [DataField]
-    public EntProtoId MechClothingUiAction= "ActionMechClothingOpenUI"; //SS220-AddMechToClothing
-    [DataField]
-    public EntProtoId MechClothingGrabAction= "ActionMechClothingGrab"; //SS220-AddMechToClothing
     #endregion
 
     #region Visualizer States
@@ -285,7 +233,5 @@ public sealed partial class AltMechComponent : Component
     [DataField] public EntityUid? MechCycleActionEntity;
     [DataField] public EntityUid? MechUiActionEntity;
     [DataField] public EntityUid? MechEjectActionEntity;
-    [DataField] public EntityUid? MechClothingUiActionEntity; //SS220-AddMechToClothing
-    [DataField] public EntityUid? MechClothingGrabActionEntity; //SS220-AddMechToClothing
 
 }

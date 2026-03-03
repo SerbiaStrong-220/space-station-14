@@ -27,7 +27,7 @@ internal sealed class StunOnCollideSystem : EntitySystem
         var resistEv = new StunAttemptEvent(StunSource.Projectile);
         RaiseLocalEvent(target, ref resistEv);
         
-        if (resistEv.stunCancelled)
+        if (resistEv.StunCancelled)
             return;
         //FCB instastun resist end
 

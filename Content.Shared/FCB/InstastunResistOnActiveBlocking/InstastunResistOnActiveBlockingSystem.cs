@@ -9,25 +9,40 @@ public sealed partial class InstastunResistOnActiveBlockingSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<InstastunResistOnActiveBlockingComponent, ActiveBlockingEvent>(OnActiveBlock);
+        SubscribeLocalEvent<InstastunResistOnActiveBlockingComponent, ActiveBlockingEvent>(OnActiveBlock); 
+        SubscribeLocalEvent<InstastunResistOnActiveBlockingComponent, StunAttemptEvent>(OnStunAttempt);
     }
-    public void OnActiveBlock(EntityUid uid, InstastunResistOnActiveBlockingComponent component, ActiveBlockingEvent args)
+
+    public void OnStunAttempt(Entity<InstastunResistOnActiveBlockingComponent> ent, ref StunAttemptEvent args)
     {
-        if (!TryComp<AltBlockingComponent>(uid, out var BlockComp) || !TryComp<AltBlockingUserComponent>(BlockComp.User, out var userComp))
-            return; 
+        if (args.StunCancelled)
+            return;
+
+        if (ent.Comp.Active && ent.Comp.ResistedStunTypes.Contains(args.Origin))
+            args.StunCancelled = true;
+    }
+
+    public void OnActiveBlock(Entity<InstastunResistOnActiveBlockingComponent> ent, ref ActiveBlockingEvent args)
+    {
+        if (!TryComp<AltBlockingComponent>(ent.Owner, out var blockComp) || !TryComp<AltBlockingUserComponent>(blockComp.User, out var userComp))
+            return;
+
+        ent.Comp.Active = args.Active;
+        return;
 
         if (args.Active)
         {
-            var resistComp = EnsureComp<InstastunResistComponent>((EntityUid)BlockComp.User);
+
+            var resistComp = EnsureComp<InstastunResistComponent>((EntityUid)blockComp.User);
 
             resistComp.Active = true;
-            resistComp.ResistedStunTypes = component.ResistedStunTypes;
+            resistComp.ResistedStunTypes = ent.Comp.ResistedStunTypes;
 
-            Dirty((EntityUid)BlockComp.User, resistComp);
+            Dirty((EntityUid)blockComp.User, resistComp);
             return;
         }
 
-        RemComp<InstastunResistComponent>((EntityUid)BlockComp.User);
+        RemComp<InstastunResistComponent>((EntityUid)blockComp.User);
 
         return;
     }

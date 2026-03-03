@@ -24,25 +24,23 @@ public sealed partial class ChangeAppearanceOnActiveBlockingSystem : EntitySyste
 
     public void OnAppearanceChange(Entity<ChangeAppearanceOnActiveBlockingComponent> ent, ref AppearanceChangeEvent args)
     {
-        if (!TryComp<AppearanceComponent>(ent.Owner, out var AppearanceComp))
+        if (!TryComp<AppearanceComponent>(ent.Owner, out var appearanceComp))
             return;
 
-        if (!TryComp<SpriteComponent>(ent.Owner, out var SpriteComp))
+        if (!TryComp<SpriteComponent>(ent.Owner, out var spriteComp))
             return;
 
         if (!_appearanceSystem.TryGetData<bool>(ent.Owner, ActiveBlockingVisuals.Enabled, out var enabled, args.Component))
             return;
 
-        var modulateColor =
-            _appearanceSystem.TryGetData<Color>(ent.Owner, ToggleableVisuals.Color, out var color, args.Component);
+        var modulateColor = _appearanceSystem.TryGetData<Color>(ent.Owner, ToggleableVisuals.Color, out var color, args.Component);
 
-        if (args.Sprite != null && ent.Comp.SpriteLayer != null &&
-            _spriteSystem.LayerMapTryGet((ent.Owner, SpriteComp), ent.Comp.SpriteLayer, out var layer, false))
+        if (args.Sprite != null && ent.Comp.SpriteLayer != null && _spriteSystem.LayerMapTryGet((ent.Owner, spriteComp), ent.Comp.SpriteLayer, out var layer, false))
         {
-            _spriteSystem.LayerSetVisible((ent.Owner, SpriteComp), layer, enabled);
+            _spriteSystem.LayerSetVisible((ent.Owner, spriteComp), layer, enabled);
 
             if (modulateColor)
-                _spriteSystem.LayerSetColor((ent.Owner, SpriteComp), ent.Comp.SpriteLayer, color);
+                _spriteSystem.LayerSetColor((ent.Owner, spriteComp), ent.Comp.SpriteLayer, color);
         }
 
         _item.VisualsChanged(ent.Owner);
@@ -50,11 +48,10 @@ public sealed partial class ChangeAppearanceOnActiveBlockingSystem : EntitySyste
 
     private void OnGetHeldVisuals(Entity<ChangeAppearanceOnActiveBlockingComponent> ent, ref GetInhandVisualsEvent args)
     {
-        if(!TryComp<AppearanceComponent>(ent.Owner, out var appearance))
+        if (!TryComp<AppearanceComponent>(ent.Owner, out var appearance))
             return;
 
-        if(!_appearanceSystem.TryGetData<bool>(ent.Owner, ActiveBlockingVisuals.Enabled, out var enabled, appearance)
-            || !enabled)
+        if (!_appearanceSystem.TryGetData<bool>(ent.Owner, ActiveBlockingVisuals.Enabled, out var enabled, appearance) || !enabled)
             return;
 
         if (!ent.Comp.InhandVisuals.TryGetValue(args.Location, out var layers))

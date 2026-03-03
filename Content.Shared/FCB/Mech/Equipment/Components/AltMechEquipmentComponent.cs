@@ -1,10 +1,7 @@
 // © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
-using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.FCB.Mech.Components;
 using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Shared.FCB.Mech.Equipment.Components;
 
@@ -25,10 +22,7 @@ public sealed partial class AltMechEquipmentComponent : Component
     /// </summary>
     [ViewVariables]
     [AutoNetworkedField]
-    public EntityUid? EquipmentOwner;
-
-    [DataField]
-    public EntityUid? EquipmentAbilityAction;
+    public EntityUid? EquipmentOwner = null;
 
     /// <summary>
     /// How much does this equipment weight
@@ -39,14 +33,8 @@ public sealed partial class AltMechEquipmentComponent : Component
     public FixedPoint2 OwnMass = 0;
 
     /// <summary>
-    /// Prototype of action this equpment provides
-    /// </summary>
-    [DataField]
-    public EntProtoId EquipmentAbilityActionName;
-
-    /// <summary>
     /// How much space this equipment takes
     /// </summary>
     [DataField("size")]
-    public int EqipmentSize;
+    public int EqipmentSize = 20;
 }

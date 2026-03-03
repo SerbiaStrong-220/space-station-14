@@ -1,10 +1,5 @@
 // © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
-using Content.Shared.Damage;
-using Content.Shared.FixedPoint;
-using Content.Shared.Stacks;
-using Content.Shared.Tools;
 using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Shared.FCB.ComplexRepairable;
 

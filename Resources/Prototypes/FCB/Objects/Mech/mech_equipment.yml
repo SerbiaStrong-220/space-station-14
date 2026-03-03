@@ -6,3 +6,17 @@
   - type: Item
     size: Ginormous
   - type: AltMechEquipment
+
+- type: entity
+  id: MechEquipmentTest
+  parent: MechEquipmentBase
+  components:
+  - type: Item
+    size: Ginormous
+  - type: Sprite
+    sprite: Objects/Specific/Mech/mecha_equipment.rsi
+    state: mecha_clamp
+  - type: AltMechEquipment
+    ownMass: 20
+  - type: MechEquipmentStatModifier
+    maximalArmMassDelta: 50
