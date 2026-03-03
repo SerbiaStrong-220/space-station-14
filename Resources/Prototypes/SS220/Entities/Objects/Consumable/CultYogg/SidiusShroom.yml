@@ -50,11 +50,12 @@
   packetPrototype: SidiousShroomSeeds
   productPrototypes:
     - FoodSidiousShroomCult
+  harvestRepeat: Repeat
   lifespan: 55
   maturation: 12
-  production: 2
-  yield: 1
-  potency: 30
+  production: 10
+  yield: 3
+  potency: 2
   growthStages: 7
   chemicals:
     Nutriment:
