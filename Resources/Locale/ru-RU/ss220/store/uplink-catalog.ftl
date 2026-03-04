@@ -28,7 +28,7 @@ uplink-shutdown-nearest-apc-desc = Внимание! Активируется с
 
 # Implants
 uplink-mindslave-implanter-name = Имплантер Подчинитель разума
-uplink-mindslave-implanter-desc = { ent-MindSlaveImplant.desc }
+uplink-mindslave-implanter-desc = Получите полный контроль над другим разумным существом! Внимание: продолжительное использование имплантера подчинения может быть вредно для здоровья подчинённого.
 
 uplink-mindslave-fix-surgery-bundle-name = Конфигуратор подчинителя разума
 uplink-mindslave-fix-surgery-bundle-desc = Позволяет вашим подчинённым прожить дольше, требует вмешательства каждый раз при возникновении проблем. Идёт вместе с хирургическим набором и инструкцией!

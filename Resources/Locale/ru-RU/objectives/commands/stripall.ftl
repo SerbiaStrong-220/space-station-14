@@ -1,3 +1,4 @@
-cmd-stripall-desc = Снимает с сущности все вещи в инвентаре и из рук.
+# stripall
+cmd-stripall-desc = Снимает всё из слотов и рук сущности
 cmd-stripall-help = Использование: stripall <EntityUid>
 cmd-stripall-player-completion = <EntityUid>
