@@ -70,6 +70,6 @@
   equipment:
     eyes: ClothingEyesBlueShieldGlasses
     head: ClothingHeadHatBeretSecurity
-    mask: BlueShieldGasMask
+    mask: ClothingMaskGasBlueShield
     neck: ClothingBeltHolster
     gloves: ClothingHandsGlovesCombat

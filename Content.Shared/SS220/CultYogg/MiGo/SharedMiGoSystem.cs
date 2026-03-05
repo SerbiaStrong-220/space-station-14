@@ -18,12 +18,12 @@ using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Revolutionary.Components;
 using Content.Shared.Roles.Components;
+using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.SS220.CultYogg.Altar;
 using Content.Shared.SS220.CultYogg.Buildings;
 using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.SS220.CultYogg.Rave;
-using Content.Shared.SS220.CultYogg.Sacraficials;
-using Content.Shared.StatusEffectNew;
+using Content.Shared.SS220.CultYogg.Sacrificials;
 using Content.Shared.Verbs;
 using Content.Shared.Zombies;
 using Robust.Shared.Audio;
@@ -45,10 +45,8 @@ public abstract class SharedMiGoSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffectsSystem = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedMiGoErectSystem _miGoErectSystem = default!;
-    [Dependency] private readonly SharedCultYoggHealSystem _heal = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
@@ -127,7 +125,7 @@ public abstract class SharedMiGoSystem : EntitySystem
             case "Teleport":
                 _userInterfaceSystem.SetUiState(args.Entity, args.UiKey, new MiGoTeleportBuiState()
                 {
-                    Warps = GetTeleportsPoints(),
+                    Warps = GetTeleportsPoints(entity),
                 });
                 return;
         }
@@ -192,28 +190,23 @@ public abstract class SharedMiGoSystem : EntitySystem
         if (!uid.Comp.IsPhysicalForm)
             return;
 
-        if (!HasComp<MobStateComponent>(args.Target))
+        if (!HasComp<MobStateComponent>(args.Target) || HasComp<BorgChassisComponent>(args.Target))
         {
             _popup.PopupClient(Loc.GetString("cult-yogg-cant-heal-this", ("target", args.Target)), args.Target, uid);
             return;
         }
 
-        //check if effect is already applyed
-        if (_statusEffectsSystem.HasStatusEffect(args.Target, uid.Comp.RequiedEffect))
-        {
-            _popup.PopupClient(Loc.GetString("cult-yogg-heal-already-have-effect"), args.Target, uid);
-            return;
-        }
-
-        _heal.ApplyMiGoHeal(args.Target, uid.Comp.HealingEffectTime);
 
         var healComponent = EnsureComp<CultYoggHealComponent>(args.Target);
+
+        healComponent.HealingEffectTime = _timing.CurTime + uid.Comp.HealingEffectTime;
         healComponent.Heal = args.Heal;
         healComponent.BloodlossModifier = args.BloodlossModifier;
         healComponent.ModifyBloodLevel = args.ModifyBloodLevel;
-        healComponent.TimeBetweenIncidents = args.TimeBetweenIncidents;
+        healComponent.TimeBetweenHealingTicks = args.TimeBetweenIncidents;
         healComponent.Sprite = args.EffectSprite;
         healComponent.ModifyStamina = args.ModifyStamina;
+
         Dirty(args.Target, healComponent);
 
         args.Handled = true;
@@ -239,7 +232,7 @@ public abstract class SharedMiGoSystem : EntitySystem
     {
         if (!uid.Comp.IsPhysicalForm)
         {
-            _popup.PopupClient(Loc.GetString("cult-yogg-cant-sacrafice-in-astral"), uid);
+            _popup.PopupClient(Loc.GetString("cult-yogg-cant-sacrifice-in-astral"), uid);
             return;
         }
 
@@ -531,7 +524,7 @@ public abstract class SharedMiGoSystem : EntitySystem
 
         if (HasComp<CultYoggSacrificialComponent>(target))
         {
-            reason = Loc.GetString("cult-yogg-enslave-is-sacraficial");
+            reason = Loc.GetString("cult-yogg-enslave-is-sacrificial");
             return false;
         }
 
@@ -582,17 +575,26 @@ public abstract class SharedMiGoSystem : EntitySystem
             args.Handled = true;
     }
 
-    private List<(string, NetEntity)> GetTeleportsPoints()
+    private List<(string, NetEntity)> GetTeleportsPoints(EntityUid owner)
     {
         List<(string, NetEntity)> warps = [];
 
-        var query = EntityQueryEnumerator<CultYoggComponent>();
+        AddTeleportPoints<CultYoggComponent>(owner, warps);
+        AddTeleportPoints<MiGoComponent>(owner, warps);
 
-        while (query.MoveNext(out var ent, out _))
-        {
-            warps.Add((MetaData(ent).EntityName, GetNetEntity(ent)));//Am i doing some canser move with sending netent?
-        }
         return warps;
+    }
+
+    private void AddTeleportPoints<T>(EntityUid owner, List<(string, NetEntity)> warps) where T : IComponent
+    {
+        var query = EntityQueryEnumerator<T>();
+        while (query.MoveNext(out var uid, out _))
+        {
+            if (owner == uid)
+                continue;
+
+            warps.Add((MetaData(uid).EntityName, GetNetEntity(uid)));
+        }
     }
 
     private void OnMiGoTeleportToTarget(Entity<MiGoComponent> ent, ref MiGoTeleportToTargetMessage args)
@@ -637,7 +639,7 @@ public abstract class SharedMiGoSystem : EntitySystem
     {
         _userInterfaceSystem.SetUiState(ent, MiGoUiKey.Teleport, new MiGoTeleportBuiState()
         {
-            Warps = GetTeleportsPoints(),
+            Warps = GetTeleportsPoints(ent),
         });
     }
     #endregion

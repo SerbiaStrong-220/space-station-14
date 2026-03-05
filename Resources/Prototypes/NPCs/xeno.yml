@@ -3,7 +3,7 @@
   branches:
     - tasks:
         - !type:HTNCompoundTask
-          task: MeleeCombatCompound
+          task: MeleeAgressiveCombatCompound #SS220 Agressive Combat
     - tasks:
         - !type:HTNCompoundTask
           task: IdleCompound

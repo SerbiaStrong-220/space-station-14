@@ -38,7 +38,7 @@
   - type: Physics
     bodyType: Static
   - type: Sprite
-    sprite: Structures/Piping/Atmospherics/directionalfan.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/directionalfan.rsi # SS220 atmospherics-sprite-update
     state: icon
   - type: Fixtures
     fixtures:

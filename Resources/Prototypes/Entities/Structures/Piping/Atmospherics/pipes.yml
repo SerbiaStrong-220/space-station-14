@@ -74,9 +74,9 @@
   - type: AtmosPipeLayers
     spriteLayersRsiPaths:
       enum.PipeVisualLayers.Pipe:
-        Primary: Structures/Piping/Atmospherics/pipe.rsi
-        Secondary: Structures/Piping/Atmospherics/pipe_alt1.rsi
-        Tertiary: Structures/Piping/Atmospherics/pipe_alt2.rsi
+        Primary: SS220/Structures/Piping/Atmospherics/pipe.rsi # SS220 atmospherics-sprite-update
+        Secondary: SS220/Structures/Piping/Atmospherics/pipe_alt1.rsi # SS220 atmospherics-sprite-update
+        Tertiary: SS220/Structures/Piping/Atmospherics/pipe_alt2.rsi # SS220 atmospherics-sprite-update
 
 #Note: The PipeDirection of the PipeNode should be the south-facing version, because the entity starts at an angle of 0 (south)
 
@@ -108,7 +108,7 @@
   - type: Item
     size: Small
     storedSprite:
-      sprite: Structures/Piping/Atmospherics/pipe.rsi
+      sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi # SS220 atmospherics-sprite-update
       state: storageHalf
   - type: GuideHelp
     guides:
@@ -281,7 +281,7 @@
   - type: Item
     heldPrefix: Fourway
     storedSprite:
-      sprite: Structures/Piping/Atmospherics/pipe.rsi
+      sprite: SS220/Structures/Piping/Atmospherics/pipe.rsi # SS220 atmospherics-sprite-update
       state: storageFourway
   - type: MeleeWeapon
     wideAnimationRotation: 90
@@ -338,7 +338,7 @@
     mode: SnapgridCenter
   components:
   - type: Sprite
-    sprite: Structures/Piping/Atmospherics/manifold.rsi
+    sprite: SS220/Structures/Piping/Atmospherics/manifold.rsi # SS220 atmospherics-sprite-update
     layers:
     - state: pipeManifold
       map: [ "enum.PipeVisualLayers.Pipe" ]
@@ -346,9 +346,9 @@
     pipeLayersLocked: true
   - type: PipeAppearance
     sprite:
-    - { sprite: Structures/Piping/Atmospherics/manifold.rsi, state: pipeConnector }
-    - { sprite: Structures/Piping/Atmospherics/manifold.rsi, state: pipeConnector_alt1 }
-    - { sprite: Structures/Piping/Atmospherics/manifold.rsi, state: pipeConnector_alt2 }
+    - { sprite: SS220/Structures/Piping/Atmospherics/manifold.rsi, state: pipeConnector } # SS220 atmospherics-sprite-update
+    - { sprite: SS220/Structures/Piping/Atmospherics/manifold.rsi, state: pipeConnector_alt1 } # SS220 atmospherics-sprite-update
+    - { sprite: SS220/Structures/Piping/Atmospherics/manifold.rsi, state: pipeConnector_alt2 } # SS220 atmospherics-sprite-update
   - type: Construction
     graph: GasPipe
     node: manifold
@@ -357,7 +357,7 @@
     shape:
     - 0,0,1,0
     storedSprite:
-      sprite: Structures/Piping/Atmospherics/manifold.rsi
+      sprite: SS220/Structures/Piping/Atmospherics/manifold.rsi # SS220 atmospherics-sprite-update
       state: storageManifold
   - type: NodeContainer
     nodes:
