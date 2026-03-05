@@ -1,3 +1,73 @@
+# Base
+
+- type: entity
+  parent: FoodMeatBase
+  id: FoodCutletBase
+  abstract: true
+  components:
+  - type: InternalTemperature
+    thickness: 0.06
+
+# Raw
+
+- type: entity
+  parent: FoodMeatRawBase
+  id: FoodMeatRabbit
+  name: raw rabbit meat
+  description: Natural white meat that is low in fat and high in protein. It features a tender texture and a pleasant, slightly sweet flavor.
+  components:
+  - type: Tag
+    tags:
+    - Raw
+    - Meat
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/meat.rsi
+    state: rabbit
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: UncookedAnimalProteins
+          Quantity: 3
+        - ReagentId: Fat
+          Quantity: 1
+  - type: Construction
+    graph: RabbitSteak
+    node: start
+    defaultTarget: cooked rabbit
+  - type: RotInto
+    entity: FoodMeatRottenRabbit
+
+- type: entity
+  parent: FoodMeatRabbit
+  id: FoodMeatRabbitBnuuy
+  name: bnuuynyatina
+  description: You should have followed the rabbit...
+  components:
+  - type: FlavorProfile
+    flavors:
+      - bnuuynyatina
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: UncookedAnimalProteins
+          Quantity: 3
+        - ReagentId: Fat
+          Quantity: 1
+        - ReagentId: Toxin
+          Quantity: 2
+        - ReagentId: Stimulants
+          Quantity: 2
+  - type: Construction
+    graph: RabbitBnuuySteak
+    node: start
+    defaultTarget: cooked bnuuy
+  - type: RotInto
+    entity: FoodMeatRottenRabbitBnuuy
+
+# Cooked
+
 - type: entity
   name: spider steak
   parent: FoodMeatBase
@@ -62,59 +132,9 @@
 
 - type: entity
   parent: FoodMeatBase
-  id: FoodCutletBase
-  abstract: true
-  components:
-  - type: InternalTemperature
-    thickness: 0.06
-
-- type: entity
-  parent: FoodMeatBase
-  id: FoodMeatRabbit
-  name: raw rabbit meat
-  description: A raw rabbit meat
-  components:
-  - type: Tag
-    tags:
-    - Raw
-    - Meat
-  - type: Sprite
-    sprite: SS220/Objects/Consumable/Food/meat.rsi
-    state: rabbit
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 5
-        - ReagentId: Fat
-          Quantity: 3
-  - type: Construction
-    graph: RabbitSteak
-    node: start
-    defaultTarget: cooked rabbit
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: rabbit-inhand-left
-      right:
-      - state: rabbit-inhand-right
-
-- type: entity
-  parent: FoodMeatBase
-  id: FoodMeatBnuuy
-  name: dried bnuuy meat
-  description: You should have followed the rabbit...
-  components:
-  - type: Construction
-    graph: BnuuySteak
-    node: start
-    defaultTarget: cooked bnuuy
-
-- type: entity
-  parent: FoodMeatBase
   id: FoodMeatRabbitSteak
   name: rabbit steak
+  description: A perfectly cooked piece of rabbit meat. Tender, juicy, and healthy.
   components:
   - type: Tag
     tags:
@@ -123,36 +143,52 @@
     - Steak
   - type: Sprite
     sprite: SS220/Objects/Consumable/Food/meat.rsi
-    state: rabbit-grilled
+    state: rabbit_cooked
   - type: SolutionContainerManager
     solutions:
       food:
         reagents:
         - ReagentId: Nutriment
-          Quantity: 3
+          Quantity: 2
         - ReagentId: Protein
-          Quantity: 5
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: rabbit-inhand-left-grilled
-      right:
-      - state: rabbit-inhand-right-grilled
+          Quantity: 2
 
 - type: entity
-  parent: FoodMeatBase
-  id: FoodMeatBnuuySteak
-  name: bnuuy steak
-  description: "You're a monster..."
+  parent: FoodMeatRabbitSteak
+  id: FoodMeatRabbitBnuuySteak
+  name: bnuuynyatina steak
+  description: "Disgusting... And this isn't about bnuuynyatina..."
   components:
   - type: SolutionContainerManager
     solutions:
       food:
         reagents:
         - ReagentId: Nutriment
-          Quantity: 3
+          Quantity: 2
         - ReagentId: Protein
-          Quantity: 5
-        # Что-то уникальное
+          Quantity: 2
+        - ReagentId: Toxin
+          Quantity: 1
+        - ReagentId: Stimulants
+          Quantity: 2
+
+- type: entity
+  parent: FoodMeatRabbitSteak
+  id: FoodMeatRabbitBnuuyBaked
+  name: baked bnuuy
+  description: High cuisine requires sacrifices, served with the warden's tears.
+  components:
+  - type: Sprite
+    state: rabbit_baked
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 14
+        - ReagentId: Protein
+          Quantity: 6
+        - ReagentId: Stimulants
+          Quantity: 4
 
 

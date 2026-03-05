@@ -18,7 +18,7 @@
 
 # bnuuy steak
 - type: constructionGraph
-  id: BnuuySteak
+  id: RabbitBnuuySteak
   start: start
   graph:
 
@@ -32,4 +32,4 @@
       - minTemperature: 345
 
   - node: cooked bnuuy
-    entity: FoodMeatBnuuySteak
+    entity: FoodMeatRabbitBnuuySteak

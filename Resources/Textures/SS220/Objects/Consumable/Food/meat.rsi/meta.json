@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "Taken from TG Station at https://github.com/tgstation/tgstation/blob/HEAD/icons/obj/food/meat.dmi, spider and snake grilled sprites are made by TonyBigShoes (github) for SS220",
+    "copyright": "Taken from TG Station at https://github.com/tgstation/tgstation/blob/HEAD/icons/obj/food/meat.dmi. Spider and snake grilled sprites are made by TonyBigShoes (github) for SS220. Rabbit meat`s sprited by EstKemran (Github)",
     "size": {
       "x": 32,
       "y": 32
@@ -33,23 +33,10 @@
         "name": "rabbit"
       },
       {
-        "name": "rabbit-cooked"
+        "name": "rabbit_baked"
       },
       {
-        "name": "rabbit-inhand-right",
-        "directions": 4
-      },
-      {
-        "name": "rabbit-inhand-left",
-        "directions": 4
-      },
-      {
-        "name": "rabbit-cooked-inhand-right",
-        "directions": 4
-      },
-      {
-        "name": "rabbit-cooked-inhand-left",
-        "directions": 4
+        "name": "rabbit_cooked"
       },
 	    {
         "name": "spider-grilled"
@@ -63,15 +50,15 @@
         "directions": 4
       },
       {
-		"name": "snake-grilled"
+        "name": "snake-grilled"
       },
       {
-      "name": "snake-inhand-left-grilled" ,
-      "directions": 4
+        "name": "snake-inhand-left-grilled" ,
+        "directions": 4
       },
       {
-      "name": "snake-inhand-right-grilled" ,
-      "directions": 4
+        "name": "snake-inhand-right-grilled" ,
+        "directions": 4
       }
     ]
   }

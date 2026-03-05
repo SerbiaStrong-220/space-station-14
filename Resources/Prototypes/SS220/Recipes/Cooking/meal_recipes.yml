@@ -302,3 +302,31 @@
     FoodPeaPod: 1
     FoodMeatPatty: 1
     FoodBowlBig: 1
+
+- type: microwaveMealRecipe
+  id: RecipeBnuuyBurger
+  name: bnuuy burger recipe
+  result: FoodBurgerBnuuy
+  time: 10
+  group: Savory
+  solids:
+    FoodBreadBun: 1
+    FoodMeatRabbitBnuuy: 1
+    ClothingHeadHatCapWardenAlt: 1
+
+- type: microwaveMealRecipe
+  id: RecipeBnuuyBaked
+  name: bnuuy baked recipe
+  result: FoodMeatRabbitBnuuyBaked
+  time: 20
+  group: Savory
+  reagents:
+    OilOlive: 5
+    Cream: 10
+  solids:
+    FoodMeatRabbitBnuuy: 2
+    FoodPotato: 1
+    FoodPlate: 1
+    FoodCarrot: 1
+    FoodGarlic: 1
+    FoodTomato: 1

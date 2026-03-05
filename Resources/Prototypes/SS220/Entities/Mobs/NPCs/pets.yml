@@ -191,7 +191,7 @@
           Quantity: 5
   - type: Butcherable
     spawned:
-    - id: FoodMeatRabbit
+    - id: FoodMeatRabbitBnuuy
       amount: 2
   - type: Tag
     tags:
