@@ -281,8 +281,8 @@
   id: UplinkEshield
   name: uplink-eshield-name
   description: uplink-eshield-desc
-  icon: { sprite: /Textures/Objects/Weapons/Melee/e_shield.rsi, state: eshield-on }
-  productEntity: EnergyShield
+  icon: { sprite: /Textures/SS220/Objects/Weapons/Melee/e_shield_syndi.rsi, state: eshield-on } # SS220 Syndi energy shield
+  productEntity: EnergyShieldSyndi # SS220 Syndi energy shield
   discountCategory: veryRareDiscounts
   discountDownTo:
     Telecrystal: 4
