@@ -36,7 +36,32 @@
     node: start
     defaultTarget: cooked rabbit
   - type: RotInto
-    entity: FoodMeatRottenRabbit
+    entity: FoodMeatRabbitRotten
+
+- type: entity
+  parent: FoodMeatBase
+  id: FoodMeatRabbitRotten
+  name: rotten rabbit meat
+  components:
+  - type: Tag
+    tags:
+    - Raw
+    - Meat
+    - Trash
+    - Recyclable
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/meat.rsi
+    state: rabbit_rotten
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: UncookedAnimalProteins
+          Quantity: 3
+        - ReagentId: GastroToxin
+          Quantity: 2
+        - ReagentId: Fat
+          Quantity: 1
 
 - type: entity
   parent: FoodMeatRabbit
@@ -64,7 +89,31 @@
     node: start
     defaultTarget: cooked bnuuy
   - type: RotInto
-    entity: FoodMeatRottenRabbitBnuuy
+    entity: FoodMeatRabbitBnuuyDried
+
+- type: entity
+  parent: FoodMeatBase
+  id: FoodMeatRabbitBnuuyDried
+  name: dried bnuuynyatina
+  description: "Specialties of the Vnuch's asteroid."
+  components:
+  - type: Tag
+    tags:
+    - Raw
+    - Meat
+    - Trash
+    - Recyclable
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/meat.rsi
+    state: rabbit_dried
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 2
+        - ReagentId: Protein
+          Quantity: 2
 
 # Cooked
 
