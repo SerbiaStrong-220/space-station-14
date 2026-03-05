@@ -240,7 +240,7 @@
   id: FakeCaptainIDCard
   name: captain ID card
   description: A card necessary to access various areas aboard the station.
-  suffix: [fake]
+  suffix: fake
   components:
   - type: Clothing
     slots:
