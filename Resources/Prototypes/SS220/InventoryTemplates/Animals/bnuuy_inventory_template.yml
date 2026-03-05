@@ -1,5 +1,5 @@
 - type: inventoryTemplate
-  id: bunnyBnuuyinventory
+  id: rabbitBnuuyinventory
   slots:
   - name: mask
     slotTexture: mask
@@ -10,7 +10,7 @@
     whitelist:
       tags:
         - PetWearable
-        - BunnyBnuuyWearable
+        - RabbitBnuuyWearable
         - HamsterWearable
   - name: neck
     slotTexture: neck
@@ -20,7 +20,7 @@
     displayName: Neck
     whitelist:
       tags:
-        - BunnyBnuuyWearable
+        - RabbitBnuuyWearable
   - name: eyes
     slotTexture: glasses
     slotFlags: EYES

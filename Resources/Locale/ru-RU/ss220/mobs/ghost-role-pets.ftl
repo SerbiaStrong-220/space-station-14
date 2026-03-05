@@ -102,9 +102,9 @@ ent-SpawnMobStevenCrocodile = Спавнер Стивена
 ghost-role-information-pet-steven-name = Стивен
 ghost-role-information-pet-steven-description = Питомец Магистрата. Символ статуса и силы, преданный друг своего хозяина, который не прочь прикусить деловые бумаги и поиграть с финансовыми документами.
 
-ent-MobBunnyBnuuyGhostRole = бнууй
+ent-MobRabbitBnuuyGhostRole = бнууй
     .desc = Любимый декоративный кролик Смотрителя. Следите за оружейной и не спускайте взгляд с нерасторопных офицеров!
     .suffix = Роль
-ent-SpawnMobBunnyBnuuyPetGhostRole = Спавнер Бнууя
+ent-SpawnMobRabbitBnuuyPetGhostRole = Спавнер Бнууя
 ghost-role-information-pet-bnuuy-name = Бнууй
 ghost-role-information-pet-bnuuy-description = Любимый декоративный кролик Смотрителя. Следите за оружейной и не спускайте взгляд с нерасторопных офицеров!

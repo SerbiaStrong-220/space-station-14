@@ -89,7 +89,7 @@
 
 - type: entity
   parent: [ SimpleMobBase, StripableInventoryBase, MobPassiveCollision ]
-  id: MobBunnyBnuuy
+  id: MobRabbitBnuuy
   name: Bnuuy
   description: In addition to its fluffiness, love of carrots, and lively personality, it has a strong attachment to its owner. After all, even the Wardens needs someone to look after him.
   components:
@@ -150,8 +150,8 @@
       40: Critical
       60: Dead
   - type: Inventory
-    speciesId: bunnyBnuuy
-    templateId: bunnyBnuuyinventory
+    speciesId: rabbitBnuuy
+    templateId: rabbitBnuuyinventory
     displacements:
       eyes:
         sizeMaps:

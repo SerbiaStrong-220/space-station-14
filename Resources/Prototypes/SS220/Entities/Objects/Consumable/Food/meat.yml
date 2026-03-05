@@ -97,6 +97,9 @@
   name: dried bnuuynyatina
   description: "Specialties of the Vnuch's asteroid."
   components:
+  - type: FlavorProfile
+    flavors:
+      - driedbnuuynyatina
   - type: Tag
     tags:
     - Raw
