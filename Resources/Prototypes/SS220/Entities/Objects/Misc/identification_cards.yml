@@ -259,7 +259,7 @@
     jobTitle: job-name-captain
     jobIcon: JobIconCaptain
     jobColor: '#2A4EF6FF'
-    RadioBold: true
+    radioBold: true
   - type: Access
     enabled: false
   - type: Tag
