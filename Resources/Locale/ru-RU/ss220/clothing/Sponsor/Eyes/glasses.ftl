@@ -1,3 +1,9 @@
 ent-ClothingSponsorGlassesJujutsuShlepaSunglasses = очки офисного работника
     .desc = Семь к трём - идеальное соотношение.
     .suffix = Шлёпа, Солнцезащитные
+ent-ClothingSponsorTylerRedGlasses = очки Tyler.Co
+    .desc = Серебряные очки-авиаторы со встроенным светофильтром.
+ent-ClothingSponsorWaltuhGlasses = прозрачные авиаторы
+    .desc = Простые дешёвые очки с корректирующими линзами.
+ent-ClothingSponsorGlassesJujutsuShlepa = очки офисного работника
+    .desc = Семь к трём — идеальное соотношение.
