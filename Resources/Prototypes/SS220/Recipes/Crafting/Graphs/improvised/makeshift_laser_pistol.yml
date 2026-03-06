@@ -7,11 +7,17 @@
     - to: pistol
       steps:
       - material: Steel
-        amount: 2
+        amount: 15
         doAfter: 5
+      - material: Plastic
+        amount: 5
+        doAfter: 3
+      - material: Gold
+        amount: 2
+        doAfter: 3
       - material: Cable
         amount: 5
-        doAfter: 5
+        doAfter: 3
       - material: Manipulator
         amount: 2
         doAfter: 10
