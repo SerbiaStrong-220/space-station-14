@@ -15,6 +15,9 @@ ent-ClothingBackpackBlueShieldHightFilled = { ent-ClothingBackpackBlueShield }
     .suffix = Тяжелый скафандр, заполненный
     .desc = { ent-ClothingBackpackBlueShield.desc }
 
+ent-ClothingBackpackSpaceNinja = рюкзак космического ниндзя
+    .desc = Рюкзак для снаряжения космического ниндзя.
+
 ent-ClothingBackpackERTLeaderGammaFilled = { ent-ClothingBackpackERTLeader }
     .suffix = Гамма ОБР, заполненный
     .desc = { ent-ClothingBackpackERTLeader.desc }

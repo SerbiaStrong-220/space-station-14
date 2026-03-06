@@ -71,3 +71,11 @@
   sprites:
     - sprite: SS220/Mobs/Customization/human_hair.rsi
       state: ponytail9
+
+- type: marking
+  id: HumanHairMullet
+  bodyPart: Hair
+  markingCategory: Hair
+  sprites:
+  - sprite: SS220/Mobs/Customization/human_hair.rsi
+    state: mullet
