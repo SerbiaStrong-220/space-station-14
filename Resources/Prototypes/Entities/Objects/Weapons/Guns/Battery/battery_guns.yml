@@ -235,7 +235,7 @@
   - type: Clothing
     sprite: SS220/Objects/Weapons/Guns/Battery/makeshift.rsi #SS220 resprite
   - type: HitscanBatteryAmmoProvider
-    proto: RedLightLaser # SS220 Makeshift laser tweak
+    proto: RedMediumLaser # SS220 Makeshift laser tweak
     fireCost: 62.5
   - type: Battery
     maxCharge: 500
