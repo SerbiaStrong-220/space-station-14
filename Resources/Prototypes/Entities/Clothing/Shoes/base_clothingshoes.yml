@@ -15,6 +15,7 @@
     state: icon
   - type: Item
     size: Normal
+# SS220: Removed edibility components
   - type: Tag
     tags:
     - ClothMade
