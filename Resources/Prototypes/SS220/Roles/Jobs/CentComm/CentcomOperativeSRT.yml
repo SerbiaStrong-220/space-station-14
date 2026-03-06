@@ -19,8 +19,8 @@
       hair: HairBald
     - type: RandomMetadata
       nameSegments:
-        - NamesFirstSRTMember
-        - NamesLastSRTMember
+      - NamesFirstSRTMember
+      - NamesLastSRTMember
     - type: MindShield
     - type: GhostRole
       name: ghost-role-information-centcom-srt-name
