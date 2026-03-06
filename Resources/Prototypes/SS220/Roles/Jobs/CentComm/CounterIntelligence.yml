@@ -21,7 +21,7 @@
   access:
   - CentralCommand
   - CentralCommandERT
-  - CentralCommandBSO
+  - CentralCommandSRT
   - CentralCommandCBURN
 
 #CIAgent
@@ -45,5 +45,5 @@
   access:
   - CentralCommand
   - CentralCommandERT
-  - CentralCommandBSO
+  - CentralCommandSRT
   - CentralCommandCBURN

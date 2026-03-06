@@ -66,6 +66,11 @@
   - type: Item
     heldPrefix: steel
   - type: Appearance
+  # SS220-steel plating start
+  - type: FloorTile
+    outputs:
+    - Plating
+  # SS220-steel plating ended
   - type: Extractable
     grindableSolutionName: steel
   - type: SolutionContainerManager

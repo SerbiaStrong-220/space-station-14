@@ -105,7 +105,7 @@
     hiddenName: ent-BaseWall
 
 - type: entity
-  parent: BaseMaterialDoor
+  parent: BaseSecretDoor
   id: CultYoggDoor
   suffix: CultYogg, secret door
   name: cursed secreddoor

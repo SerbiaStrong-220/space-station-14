@@ -95,3 +95,6 @@
 
 - files: ["cultyogg-teleport-hub.yml"]
   authors: SkaldetSkaeg, MixNikita
+
+- files: ["tox.yml"]
+  authors: VictorBoum

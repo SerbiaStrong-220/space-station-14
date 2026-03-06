@@ -36,6 +36,11 @@ public sealed partial class ResourceMinerComponent : Component
     [DataField]
     [AutoNetworkedField]
     [AlwaysPushInheritance]
+    public Color ErrorColor = Color.FromHex("#E71616");
+
+    [DataField]
+    [AutoNetworkedField]
+    [AlwaysPushInheritance]
     public SoundSpecifier WorkSound = new SoundPathSpecifier("/Audio/Ambience/Objects/engine_hum.ogg")
     {
         Params = AudioParams.Default.WithVariation(1.15f).WithVolume(-3f)

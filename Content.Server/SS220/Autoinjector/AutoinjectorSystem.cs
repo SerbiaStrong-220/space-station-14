@@ -3,6 +3,8 @@ using Content.Shared.Chemistry.Components;
 using Content.Server.Popups;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Examine;
+using Robust.Shared.Prototypes;
+using Content.Shared.Tag;
 
 namespace Content.Server.SS220.Autoinjector;
 
@@ -10,6 +12,9 @@ public sealed partial class AutoinjectorSystem : EntitySystem
 {
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly TagSystem _tagSystem = default!;
+
+    private static readonly ProtoId<TagPrototype> TrashTag = "Trash";
 
     public override void Initialize()
     {
@@ -31,6 +36,8 @@ public sealed partial class AutoinjectorSystem : EntitySystem
 
         RemComp<RefillableSolutionComponent>(entity);
         entity.Comp.Used = true;
+
+        _tagSystem.AddTag(entity.Owner, TrashTag);
 
         var message = Loc.GetString(entity.Comp.OnUseMessage);
         _popup.PopupEntity(message, ev.Target, ev.User);

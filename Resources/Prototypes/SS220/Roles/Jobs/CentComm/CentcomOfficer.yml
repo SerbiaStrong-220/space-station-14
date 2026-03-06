@@ -49,7 +49,7 @@
   access:
   - CentralCommand
   - CentralCommandERT
-  - CentralCommandBSO
+  - CentralCommandSRT
   - CentralCommandCBURN
 
 - type: startingGear

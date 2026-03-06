@@ -28,7 +28,6 @@ using Content.Shared.StatusEffect;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 
-
 namespace Content.Server.SS220.CultYogg.MiGo;
 
 public sealed partial class MiGoSystem : SharedMiGoSystem
@@ -151,7 +150,7 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
 
         UpdateMovementSpeed(uid, comp);
 
-        Dirty(uid, comp);
+        DirtyEntity(uid);// We "are making dirty" the entire entity, since ChangeForm affects many components and visual state.
     }
 
     //moving in astral faster

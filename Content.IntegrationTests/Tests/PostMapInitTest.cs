@@ -141,6 +141,7 @@ namespace Content.IntegrationTests.Tests
             "Nightshift",
             "SS220_syndicate",
             "SS220_CentComm",
+            "Tox",
 
             // SS220 Event Maps
             "Snout",

@@ -28,6 +28,8 @@ public sealed class FrenchAccentSystem : EntitySystem
 
         msg = _replacement.ApplyReplacements(msg, "french");
 
+        return msg; //SS220 French accent
+
         // replaces h with ' at the start of words.
         msg = RegexStartH.Replace(msg, "'");
 
@@ -50,8 +52,6 @@ public sealed class FrenchAccentSystem : EntitySystem
                 msg = msg.Substring(0, match.Index) + "'" + c + msg.Substring(idxLetter);
             }
         }
-
-        return msg;
     }
 
     private void OnAccentGet(EntityUid uid, FrenchAccentComponent component, AccentGetEvent args)

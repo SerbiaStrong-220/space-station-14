@@ -49,6 +49,7 @@
   - type: PhysicalComposition
     materialComposition:
       Glass: 25
+  - type: ClinkGlasses #SS220-clink-glasses
 
 # Porcelain (like glass but no shard)
 - type: entity
