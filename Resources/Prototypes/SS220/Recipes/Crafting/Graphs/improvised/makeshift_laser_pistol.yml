@@ -19,7 +19,7 @@
         amount: 5
         doAfter: 3
       - material: Manipulator
-        amount: 2
+        amount: 1
         doAfter: 10
       - tag: PowerCellHigh
         name: construction-graph-tag-power-cell-high
