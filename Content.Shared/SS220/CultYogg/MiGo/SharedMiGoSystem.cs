@@ -28,6 +28,7 @@ using Content.Shared.Verbs;
 using Content.Shared.Zombies;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
@@ -63,7 +64,7 @@ public abstract class SharedMiGoSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<MiGoComponent, ComponentStartup>(OnCompInit);
+        SubscribeLocalEvent<MiGoComponent, ComponentStartup>(OnComponentStartup);
 
         // actions
         SubscribeLocalEvent<MiGoComponent, MiGoHealActionEvent>(MiGoHealAction);
@@ -91,7 +92,7 @@ public abstract class SharedMiGoSystem : EntitySystem
         SubscribeLocalEvent<MiGoComponent, ChangeCultYoggStageEvent>(OnUpdateStage);
     }
 
-    protected virtual void OnCompInit(Entity<MiGoComponent> uid, ref ComponentStartup args)
+    protected virtual void OnComponentStartup(Entity<MiGoComponent> uid, ref ComponentStartup args)
     {
         _actions.AddAction(uid, ref uid.Comp.MiGoHealActionEntity, uid.Comp.MiGoHealAction);
         _actions.AddAction(uid, ref uid.Comp.MiGoEnslavementActionEntity, uid.Comp.MiGoEnslavementAction);

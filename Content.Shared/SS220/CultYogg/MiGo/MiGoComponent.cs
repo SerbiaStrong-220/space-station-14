@@ -13,7 +13,6 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.SS220.CultYogg.MiGo;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedMiGoSystem), typeof(SharedMiGoErectSystem), Friend = AccessPermissions.ReadWriteExecute, Other = AccessPermissions.Read)]
 public sealed partial class MiGoComponent : Component
 {
     #region Abilities
