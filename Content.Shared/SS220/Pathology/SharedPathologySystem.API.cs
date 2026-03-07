@@ -171,6 +171,7 @@ public abstract partial class SharedPathologySystem
         {
             foreach (var stackAddEffect in pathologyPrototype.Definition[instanceData.Level].AddStackEffects)
             {
+                instanceData.PathologyContexts.Add(context);
                 stackAddEffect.ApplyEffect(entity, instanceData, EntityManager);
             }
         }

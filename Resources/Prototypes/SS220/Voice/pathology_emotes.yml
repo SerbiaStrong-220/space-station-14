@@ -6,7 +6,7 @@
   whitelist:
     components:
     - Vocal
-    - BloodStream
+    - Bloodstream
   blacklist:
     components:
     - BorgChassis

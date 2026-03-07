@@ -10,6 +10,7 @@ namespace Content.Shared.SS220.Pathology;
 [NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class PathologyHolderComponent : Component
 {
+    [ViewVariables]
     [AutoNetworkedField]
     public Dictionary<ProtoId<PathologyPrototype>, PathologyInstanceData> ActivePathologies = new();
 }

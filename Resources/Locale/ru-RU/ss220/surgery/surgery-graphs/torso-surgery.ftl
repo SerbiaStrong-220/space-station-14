@@ -30,3 +30,6 @@ direct-compact-defibrillator-cant-zap = Это оборудование долж
 
 surgery-requirement-direct-compact-defib-required = Контактный компактный дефибриллятор
 surgery-requirement-direct-compact-defib-failure = Вы не знаете что делать с этим
+
+surgery-pathology-requirement-description-torso-fragments = Инородные тела в торсе пациента
+surgery-pathology-requirement-failure-torso-fragments = Никаких инородных тел в торсе пациента нету

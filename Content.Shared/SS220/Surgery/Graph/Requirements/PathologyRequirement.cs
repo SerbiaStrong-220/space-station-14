@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared.SS220.Surgery.Graph.Requirements;
 
 [DataDefinition]
-public sealed partial class PathologyRequirement : SurgeryGraphRequirement
+public sealed partial class SurgeryPathologyRequirement : SurgeryGraphRequirement
 {
     [DataField(required: true)]
     public HashSet<ProtoId<PathologyPrototype>> CurePathologies = new();

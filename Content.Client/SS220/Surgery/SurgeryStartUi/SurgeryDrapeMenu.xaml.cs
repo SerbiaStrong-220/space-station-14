@@ -18,11 +18,6 @@ namespace Content.Client.SS220.Surgery.SurgeryStartUi;
 [GenerateTypedNameReferences]
 public sealed partial class SurgeryDrapeMenu : FancyWindow
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-
-    private readonly SharedSurgerySystem _surgery = default!;
-
     public event Action<ProtoId<SurgeryGraphPrototype>, EntityUid>? OnSurgeryConfirmClicked;
 
     public EntityUid Target;
@@ -37,8 +32,6 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
-
-        _surgery = _entityManager.System<SharedSurgerySystem>();
 
         Puppet.Initialize();
 
@@ -152,7 +145,7 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
     {
         if (part == null)
             return "surgery-puppet-part-none";
-        return $"surgery-puppet-part-{Enum.GetName(typeof(SurgeryPuppetPart), part)!}";
+        return $"surgery-puppet-part-{Enum.GetName(typeof(SurgeryPuppetPart), part)!.ToLower()}";
     }
 
     /// <summary>

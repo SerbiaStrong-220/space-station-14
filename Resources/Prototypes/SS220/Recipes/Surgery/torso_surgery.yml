@@ -86,6 +86,26 @@
     - to: open-heart-incision
       baseEdge: incision
       edgeTooltip: to-open-heart-incision
+    # remove bullet fragments
+    - to: saw-rib-bone
+      delay: 4
+      edgeTooltip: to-remove-bullet-fragments
+      sound:
+        path: /Audio/SS220/Surgery/organ.ogg
+        params:
+          variation: 0.125
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-torso-fragments
+        failureMessage: surgery-pathology-requirement-failure-torso-fragments
+        curePathologies:
+        - TorsoProjectileFragment
     # TOOD: better back
     - to: retract-torso-skin
       baseEdge: seal-wound
