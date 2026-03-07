@@ -14,6 +14,8 @@ using Content.Shared.Database;
 using Content.Shared.Weapons.Melee;
 using Robust.Shared.Utility;
 using System.Linq;
+using Content.Shared.Damage;
+using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.Surgery.Systems;
 
@@ -23,7 +25,9 @@ public abstract partial class SharedSurgerySystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogManager = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _meleeWeapon = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _userInterface = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
@@ -36,6 +40,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
     private readonly LocId _surgeryCancelledOnStart = "surgery-cancelled-on-start";
     private readonly LocId _surgeryCantCancelOnStart = "surgery-cant-be-cancelled-on-start";
+    private readonly LocId _surgeryToolFailureDamage = "surgery-tool-damage-on-failure";
 
     public override void Initialize()
     {
@@ -154,18 +159,17 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
         PopupSurgeryGraphFailures(entity, surgeryGraphProto, args.Used, args.User);
 
-        // TODO: it needs changing in future to not use only weapons
-        if (TryComp<MeleeWeaponComponent>(args.Used, out var meleeWeapon))
-            _meleeWeapon.AttemptLightAttack(args.User, args.Used.Value, meleeWeapon, args.Target.Value, checkCombatMode: false);
-
         ev.Cancel();
         return;
     }
 
     private void OnSurgeryDoAfter(Entity<SurgeryPatientComponent> entity, ref SurgeryDoAfterEvent args)
     {
-        if (args.Cancelled || !entity.Comp.OngoingSurgeries.TryGetValue(args.SurgeryGraph, out var currentNode))
+        if (args.Cancelled)
+        {
+            OnSurgeryFailure(args);
             return;
+        }
 
         if (!_prototype.Resolve(args.SurgeryGraph, out var surgeryPrototype))
             return;
@@ -342,5 +346,30 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             _audio.PlayPredicted(surgeryTool.UsingSound, entity.Owner, user);
 
         return true;
+    }
+
+    private void OnSurgeryFailure(SurgeryDoAfterEvent args)
+    {
+        if (args.Target is null)
+            return;
+
+        if (TryComp<MeleeWeaponComponent>(args.Used, out var meleeWeapon))
+        {
+            if (!_meleeWeapon.AttemptLightAttack(args.User, args.Used.Value, meleeWeapon, args.Target.Value, checkCombatMode: false))
+                return;
+        }
+        else if (TryComp<SurgeryToolComponent>(args.Used, out var surgeryTool) && surgeryTool.FailureDamage is not null)
+        {
+            if (_gameTiming.CurTime < surgeryTool.NextFailureDamageTime)
+                return;
+
+            surgeryTool.NextFailureDamageTime = _gameTiming.CurTime + surgeryTool.FailureDamageDelay;
+            _damageable.TryChangeDamage(args.Target, surgeryTool.FailureDamage, origin: args.User);
+        }
+        else
+            return;
+
+        _popup.PopupPredicted(Loc.GetString(_surgeryToolFailureDamage, ("used", args.Used), ("target", args.Target)), args.Target.Value, args.User, PopupType.SmallCaution);
+        _adminLogManager.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(args.User):user} failed performing edge of surgery and damaged {ToPrettyString(args.Target):target}!");
     }
 }

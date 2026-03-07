@@ -2,10 +2,12 @@
 surgery-null-used = руками
 surgery-invalid-target-buckle = Цель должна быть пристёгнута!
 
-surgery-cancelled-on-start = {THE($user)} убирает хирургические простыни с {THE($target)}
+surgery-cancelled-on-start = {THE(CAPITALIZE($user))} убирает хирургические простыни с {THE(CAPITALIZE($target))}
 surgery-cant-be-cancelled-on-start = Вы не можете завершить операцию, чтобы начать новую. Закончите начатую операцию.
 
-surgery-start-ui-target = Начать операцию на {THE($target)}
+surgery-tool-damage-on-failure = Неосторожнее движение { $used } повреждает ткани { CAPITALIZE(THE($target)) }
+
+surgery-start-ui-target = Начать операцию на {THE(CAPITALIZE($target))}
 
 surgery-edge-tooltip-err = [ошбк];
 

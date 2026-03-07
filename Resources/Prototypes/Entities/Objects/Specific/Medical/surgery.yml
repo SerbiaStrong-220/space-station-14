@@ -209,6 +209,9 @@
     storedRotation: 90
   # SS220 Surgery begin
   - type: SurgeryTool
+    failureDamage:
+      types:
+        Slash: 5
     toolType: Retractor
     sound:
       path: /Audio/SS220/Surgery/retractor.ogg
@@ -229,6 +232,9 @@
     storedRotation: 90
   # SS220 Surgery begin
   - type: SurgeryTool
+    failureDamage:
+      types:
+        Slash: 5
     toolType: Hemostat
     sound:
       path: /Audio/SS220/Surgery/hemostat.ogg

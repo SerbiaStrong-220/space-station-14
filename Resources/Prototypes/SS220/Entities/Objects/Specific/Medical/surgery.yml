@@ -84,6 +84,9 @@
   - type: MindSlaveDisfunctionFixer
   - type: SurgeryTool
     toolType: Specific
+    failureDamage:
+      types:
+        Cerebral: 5
   - type: HiddenDescription
     entries:
     - label: hidden-desc-implant-manipulator-medical
