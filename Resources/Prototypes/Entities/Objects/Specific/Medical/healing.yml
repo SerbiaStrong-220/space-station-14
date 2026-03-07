@@ -237,6 +237,13 @@
     count: 10
   - type: StackPrice
     price: 10
+  #SS220 Extractable bloodpacks begin
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 15
+  #SS220 Extractable bloodpacks end
 
 - type: entity
   parent: Bloodpack

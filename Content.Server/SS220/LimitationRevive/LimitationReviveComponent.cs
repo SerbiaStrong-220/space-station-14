@@ -35,7 +35,7 @@ public sealed partial class LimitationReviveComponent : SharedLimitationReviveCo
     {
         DamageDict = new()
         {
-            { "Cerebral", 400 }
+            { "Cerebral", 20 }
         },
     };
 

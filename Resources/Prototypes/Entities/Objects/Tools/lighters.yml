@@ -20,12 +20,17 @@
     activatedSize: Small
   - type: ItemToggleHot
   - type: Sprite
-    sprite: Objects/Tools/Lighters/lighters.rsi
+    sprite: SS220/Objects/Tools/Lighters/lighters.rsi #SS220 lighters_resprite
     layers:
     - state: icon_map
     - state: cheap_icon_base
       map: [ "skin" ]
     - state: basic_icon_top
+    #SS220 lighters_resprite start
+    - state: basic_piston
+      visible: false
+      map: [ "piston" ]
+    #SS220 lighters_resprite end
     - state: lighter_flame
       visible: false
       shader: unshaded
@@ -45,12 +50,38 @@
           basic_icon_base-9: ""
           basic_icon_base-10: ""
           basic_icon_base-11: ""
+          #SS220 lighters_resprite start
+          basic_icon_base-12: ""
+          basic_icon_base-13: ""
+          basic_icon_base-14: ""
+          basic_icon_base-15: ""
+          basic_icon_base-16: ""
+          basic_icon_base-17: ""
+          basic_icon_base-18: ""
+          basic_icon_base-19: ""
+          basic_icon_base-20: ""
+          basic_icon_base-21: ""
+          basic_icon_base-22: ""
+          basic_icon_base-23: ""
+          basic_icon_base-24: ""
+          basic_icon_base-25: ""
+          basic_icon_base-26: ""
+          basic_icon_base-27: ""
+          basic_icon_base-28: ""
+          basic_icon_base-29: ""
+          basic_icon_base-30: ""
+          #SS220 lighters_resprite end
   - type: GenericVisualizer
     visuals:
       enum.ToggleableVisuals.Enabled:
         flame:
           True: { visible: true }
           False: { visible: false }
+  #SS220 lighters_resprite start
+        piston:
+          True: { visible: false }
+          False: { visible: true }
+  #SS220 lighters_resprite end
   - type: ToggleableVisuals
     spriteLayer: lighter_flame
     inhandVisuals:
@@ -62,7 +93,7 @@
         shader: unshaded
   - type: Item
     size: Tiny
-    sprite: Objects/Tools/Lighters/lighters.rsi
+    sprite: SS220/Objects/Tools/Lighters/lighters.rsi #SS220 lighters_resprite
   - type: UseDelay
   - type: RefillableSolution
     solution: Welder
@@ -100,12 +131,22 @@
   description: "A dangerously inexpensive plastic lighter, don't burn your thumb!"
   components:
   - type: Sprite
-    sprite: Objects/Tools/Lighters/lighters.rsi
+    sprite: SS220/Objects/Tools/Lighters/lighters.rsi #SS220 lighters_resprite
     layers:
     - state: icon_map
+    #SS220 lighters_resprite start
+    - state: icon-1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+    #SS220 lighters_resprite end
     - state: cheap_icon_base
       map: [ "skin" ]
     - state: cheap_icon_top
+    #SS220 lighters_resprite start
+    - state: cheap_piston
+      visible: false
+      map: [ "piston" ]
+    #SS220 lighters_resprite end
     - state: lighter_flame
       visible: false
       shader: unshaded
@@ -121,6 +162,11 @@
         - ReagentId: WeldingFuel
           Quantity: 4
         maxVol: 4 #uses less fuel than a welder, so this isnt as bad as it looks
+  #SS220 lighters_resprite start
+  - type: SolutionContainerVisuals
+    maxFillLevels: 5
+    fillBaseName: icon-
+  #SS220 lighters_resprite end
 
 - type: entity
   name: flippo lighter
@@ -129,16 +175,18 @@
   description: "A rugged metal lighter, lasts quite a while."
   components:
   - type: Sprite
-    sprite: Objects/Tools/Lighters/lighters.rsi
+    sprite: SS220/Objects/Tools/Lighters/zippo_lighters.rsi #SS220 lighters_resprite
     layers:
     - state: zippo_icon_base
       map: ["base"]
-    - state: zippo_top
-      map: ["top"]
-      visible: false
+      #SS220 lighters_resprite start
     - state: zippo_open
       map: ["open"]
       visible: false
+    - state: zippo_top
+      map: ["top"]
+      visible: false
+      #SS220 lighters_resprite end
     - state: lighter_flame
       map: ["flame"]
       visible: false
@@ -162,7 +210,7 @@
   - type: ItemToggleHot
   - type: Item
     size: Tiny
-    sprite: Objects/Tools/Lighters/lighters.rsi
+    sprite: SS220/Objects/Tools/Lighters/zippo_lighters.rsi #SS220 lighters_resprite
     heldPrefix: zippo
   - type: Appearance
   - type: GenericVisualizer
@@ -225,16 +273,18 @@
   description: "A rugged golden lighter, lasts quite a while. Engravings serve no tactical advantage whatsoever."
   components:
   - type: Sprite
-    sprite: Objects/Tools/Lighters/lighters.rsi
+    sprite: SS220/Objects/Tools/Lighters/zippo_lighters.rsi #SS220 lighters_resprite
     layers:
     - state: zippo_engraved_icon_base
       map: ["base"]
-    - state: zippo_top
-      map: ["top"]
-      visible: false
+      #SS220 lighters_resprite start
     - state: zippo_engraved_open
       map: ["open"]
       visible: false
+    - state: zippo_top
+      map: ["top"]
+      visible: false
+      #SS220 lighters_resprite end
     - state: lighter_flame
       map: ["flame"]
       visible: false
@@ -278,12 +328,14 @@
     layers:
     - state: icon
       map: [ "base" ]
-    - state: top
-      map: [ "top" ]
-      visible: false
+      #SS220 lighters_resprite start
     - state: open
       map: [ "open" ]
       visible: false
+    - state: top
+      map: [ "top" ]
+      visible: false
+      #SS220 lighters_resprite end
     - state: flame
       map: [ "flame" ]
       visible: false
@@ -324,9 +376,9 @@
   description: "A 'Valid' choice in lighters. Contains no copper."
   components:
   - type: Sprite
-    sprite: Objects/Tools/Lighters/syndielighter.rsi
+    sprite: SS220/Objects/Tools/Lighters/syndielighter.rsi #SS220 lighters_resprite
   - type: Item
-    sprite: Objects/Tools/Lighters/syndielighter.rsi
+    sprite: SS220/Objects/Tools/Lighters/syndielighter.rsi #SS220 lighters_resprite
   - type: Welder
     fuelConsumption: 0.005
     fuelLitCost: 0.01
@@ -344,12 +396,17 @@
   description: "The worst lighter ever produced, lighterburn is inevitable, do not refuel while lit."
   components:
   - type: Sprite
-    sprite: Objects/Tools/Lighters/lighters.rsi
+    sprite: SS220/Objects/Tools/Lighters/lighters.rsi #SS220 lighters_resprite
     layers:
     - state: icon_map
     - state: discount_icon_base
       map: [ "skin" ]
-    - state: basic_icon_top
+    #SS220 lighters_resprite start
+    - state: cheap_icon_top
+    - state: cheap_piston
+      visible: true
+      map: [ "piston" ]
+    #SS220 lighters_resprite end
     - state: lighter_flame
       visible: false
       shader: unshaded
@@ -359,7 +416,7 @@
     fuelLitCost: 0.1
     tankSafe: false
   - type: Item
-    sprite: Objects/Tools/Lighters/lighters.rsi
+    sprite: SS220/Objects/Tools/Lighters/lighters.rsi #SS220 lighters_resprite
   - type: ToggleableVisuals
     spriteLayer: lighter_flame
     inhandVisuals:
@@ -399,9 +456,9 @@
   description: "A Sleek black and magenta flippo lighter, bearing the logo and iconography of CyberSun Industries."
   components:
   - type: Sprite
-    sprite: Objects/Tools/Lighters/cybersun.rsi
+    sprite: SS220/Objects/Tools/Lighters/cybersun.rsi #SS220 lighters_resprite
   - type: Item
-    sprite: Objects/Tools/Lighters/cybersun.rsi
+    sprite: SS220/Objects/Tools/Lighters/cybersun.rsi #SS220 lighters_resprite
   - type: Welder #
     fuelConsumption: 0.005
     fuelLitCost: 0.01
@@ -419,9 +476,9 @@
   description: "A deep blue flippo lighter, decorated with the logo of Interdyne Pharmaceuticals' 'Gene Clean' clinics. Become the master of your own cigarette."
   components:
   - type: Sprite
-    sprite: Objects/Tools/Lighters/interdyne.rsi
+    sprite: SS220/Objects/Tools/Lighters/interdyne.rsi #SS220 lighters_resprite
   - type: Item
-    sprite: Objects/Tools/Lighters/interdyne.rsi
+    sprite: SS220/Objects/Tools/Lighters/interdyne.rsi #SS220 lighters_resprite
   - type: Welder #
     fuelConsumption: 0.005
     fuelLitCost: 0.01
@@ -443,9 +500,9 @@
   description: "A navy blue luxury flippo, generally handed out to loyal heads of staff instead of a payraise. Fueled with liquid plasma"
   components:
   - type: Sprite
-    sprite: Objects/Tools/Lighters/nanotrasen.rsi
+    sprite: SS220/Objects/Tools/Lighters/nanotrasen.rsi #SS220 lighters_resprite
   - type: Item
-    sprite: Objects/Tools/Lighters/nanotrasen.rsi
+    sprite: SS220/Objects/Tools/Lighters/nanotrasen.rsi #SS220 lighters_resprite
   - type: Welder #
     fuelConsumption: 0.005
     fuelLitCost: 1
@@ -474,9 +531,9 @@
   suffix: DO NOT MAP
   components:
   - type: Sprite
-    sprite: Objects/Tools/Lighters/centcomm.rsi
+    sprite: SS220/Objects/Tools/Lighters/centcomm.rsi #SS220 lighters_resprite
   - type: Item
-    sprite: Objects/Tools/Lighters/centcomm.rsi
+    sprite: SS220/Objects/Tools/Lighters/centcomm.rsi #SS220 lighters_resprite
   - type: ItemToggleRequiresLock
     requireLocked: false
   - type: Welder #
@@ -519,9 +576,9 @@
   description: "A high tech jet lighter, engineered to function even in deep space. Runs on a tiny microfusion cell."
   components:
   - type: Sprite
-    sprite: Objects/Tools/Lighters/spiderclan.rsi
+    sprite: SS220/Objects/Tools/Lighters/spiderclan.rsi #SS220 lighters_resprite
   - type: Item
-    sprite: Objects/Tools/Lighters/spiderclan.rsi
+    sprite: SS220/Objects/Tools/Lighters/spiderclan.rsi #SS220 lighters_resprite
   - type: Welder #
     fuelConsumption: 0
     fuelLitCost: 0
@@ -539,9 +596,9 @@
   description: "A robust mass produced lighter. The Waffle Co. logo turns the spark wheel when pushed up, minimising risk of lighter burns for even the most inept user."
   components:
   - type: Sprite
-    sprite: Objects/Tools/Lighters/waffleco.rsi
+    sprite: SS220/Objects/Tools/Lighters/waffleco.rsi #SS220 lighters_resprite
   - type: Item
-    sprite: Objects/Tools/Lighters/waffleco.rsi
+    sprite: SS220/Objects/Tools/Lighters/waffleco.rsi #SS220 lighters_resprite
   - type: Welder #
     fuelConsumption: 0.005
     fuelLitCost: 0.05

@@ -10,10 +10,28 @@ jobs:
   send_changelog:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    name: Send a changelog to the Discord server
+    name: Sends a changelog to the Discord server
     steps:
-      - name: Generate and send message
-        uses: SerbiaStrong-220/ss220-DiscordCLAct@main
+      - name: Copy repository
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
         with:
-          webhook_id: ${{ secrets.DISCORD_WEBHOOK_ID }}
-          webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
+          node-version: '22.13.1'
+
+      - name: Install dependencies
+        run: |
+          cd ToolsSS220/DiscordChangelog
+          npm install
+
+      - name: Run script
+        env:
+          WEBHOOK_TOKEN: ${{ secrets.DISCORD_WEBHOOK_ID }}/${{ secrets.DISCORD_WEBHOOK_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PULL_URL: ${{ github.event.pull_request.url }}
+          WEBHOOK_USERNAME: 'SS220 Changelogger'
+          WEBHOOK_AVATAR_URL: 'https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/refs/heads/master/logo.png'
+        run: |
+          cd ToolsSS220/DiscordChangelog
+          node index.js

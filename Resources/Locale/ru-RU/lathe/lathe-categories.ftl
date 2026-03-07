@@ -1,4 +1,4 @@
-# Generic
+﻿# Generic
 lathe-category-circuitry = Электроника
 lathe-category-clothing = Одежда
 lathe-category-lights = Лампы

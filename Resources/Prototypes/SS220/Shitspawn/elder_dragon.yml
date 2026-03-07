@@ -2,7 +2,7 @@
   parent: [ SimpleSpaceMobBase, FlyingMobBase, MobPassiveCollision ]
   id: MobElderDragon
   suffix: Shitspawn, Lanc
-  name: elrich space dragon
+  name: eldrich space dragon
   description: Really old really angry flying leviathan, loosely related to space carps.
   components:
   - type: Bloodstream
@@ -64,7 +64,7 @@
       fix1:
         shape:
           !type:PhysShapeCircle
-          radius: 0.50 #ehhh
+          radius: 0.50 
         density: 100
         mask:
         - FlyingMobMask
@@ -121,8 +121,8 @@
       path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
     damage:
       types:
-        Piercing: 25
-        Slash: 25
+        Piercing: 20
+        Slash: 15
   - type: Tag
     tags:
     - CannotSuicide
@@ -162,7 +162,7 @@
       components:
       - MobState
     chemical: Ichor
-    healRate: 35.0
+    healRate: 25.0
     whitelist:
       components:
       - MobState
@@ -345,7 +345,7 @@
     - type: MobThresholds
       thresholds:
         0: Alive
-        100: Dead
+        120: Dead
     - type: Stamina
       critThreshold: 150
     - type: DamageStateVisuals
