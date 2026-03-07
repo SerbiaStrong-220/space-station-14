@@ -6,8 +6,10 @@
   components:
   - type: StorageFill
     contents:
+      - id: SurgeryDrapes # ss220-surgery-update
       - id: Hemostat
       - id: Saw
+      - id: SawElectric # ss220-surgery-update
       - id: Drill
       - id: Cautery
       - id: Retractor

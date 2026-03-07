@@ -32,4 +32,4 @@ surgery-requirement-direct-compact-defib-required = Контактный ком�
 surgery-requirement-direct-compact-defib-failure = Вы не знаете что делать с этим
 
 surgery-pathology-requirement-description-torso-fragments = Инородные тела в торсе пациента
-surgery-pathology-requirement-failure-torso-fragments = Никаких инородных тел в торсе пациента нету
+surgery-pathology-requirement-failure-torso-fragments = Инородных тел в торсе пациента нету

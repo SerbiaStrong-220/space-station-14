@@ -7,6 +7,7 @@ using Content.Shared.StatusEffectNew;
 using Content.Shared.Traits;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.Pathology;
 
@@ -93,6 +94,7 @@ public abstract partial class SharedPathologySystem : EntitySystem
 
         instanceData.PathologyContexts.Add(context);
         AddPathologyDefinitionEffects(entity, pathologyPrototype.Definition[instanceData.Level]);
+        DebugTools.Assert(instanceData.PathologyContexts.Count == instanceData.StackCount);
 
         var ev = new PathologySeverityChanged(pathologyPrototype.ID, instanceData.Level - 1, instanceData.Level);
         RaiseLocalEvent(entity, ref ev);

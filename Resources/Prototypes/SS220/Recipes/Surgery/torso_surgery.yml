@@ -90,6 +90,9 @@
     - to: saw-rib-bone
       delay: 4
       edgeTooltip: to-remove-bullet-fragments
+      edgeIcon:
+        sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+        state: retractor
       sound:
         path: /Audio/SS220/Surgery/organ.ogg
         params:

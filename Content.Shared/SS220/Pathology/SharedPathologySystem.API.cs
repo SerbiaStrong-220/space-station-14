@@ -169,24 +169,24 @@ public abstract partial class SharedPathologySystem
 
         if (newStackCount > instanceData.StackCount)
         {
-            foreach (var stackAddEffect in pathologyPrototype.Definition[instanceData.Level].AddStackEffects)
-            {
+            for (var _ = 0; _ < newStackCount - instanceData.StackCount; _++)
                 instanceData.PathologyContexts.Add(context);
+
+            foreach (var stackAddEffect in pathologyPrototype.Definition[instanceData.Level].AddStackEffects)
                 stackAddEffect.ApplyEffect(entity, instanceData, EntityManager);
-            }
         }
         else
         {
             for (var _ = 0; _ < instanceData.StackCount - newStackCount; _++)
-            {
                 ApplyPathologyContext(entity!, instanceData.PathologyContexts.Pop());
-            }
         }
 
         var ev = new PathologyStackCountChanged(pathologyId, instanceData.StackCount, newStackCount);
         RaiseLocalEvent(entity, ref ev);
 
         instanceData.StackCount = newStackCount;
+
+        DebugTools.Assert(instanceData.PathologyContexts.Count == instanceData.StackCount);
         Dirty(entity);
         return true;
     }
