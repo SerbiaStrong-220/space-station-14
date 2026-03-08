@@ -105,7 +105,7 @@
       modifyBloodLevel: 10
 
 - type: entity
-  id: ActionMiGoAstral
+  id: ActionMiGoAstralOld
   name: Access to the astral
   description: Step into the interdimensional realm.
   categories: [ HideSpawnMenu ]
@@ -167,3 +167,18 @@
     icon: { sprite: SS220/Interface/Actions/cult_yogg.rsi, state: "migo_teleport"}
   - type: InstantAction
     event: !type:MiGoTeleportActionEvent
+
+- type: entity
+  parent: BaseActionPolymorph
+  id: ActionMiGoAstral
+  name: Access to the astral
+  description: Step into the interdimensional realm.
+  components:
+  - type: Action
+    useDelay: 30
+    icon:
+      sprite: SS220/Interface/Actions/cult_yogg.rsi
+      state: migoastral
+  - type: InstantAction
+    event: !type:PolymorphActionEvent
+      protoId: MiGoInAstral

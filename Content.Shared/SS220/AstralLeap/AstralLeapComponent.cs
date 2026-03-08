@@ -9,7 +9,7 @@ namespace Content.Shared.SS220.AstralLeap;
 public sealed partial class AstralLeapComponent : Component
 {
     [DataField]
-    public EntProtoId AstralAction = "ActionMiGoAstral2";//ToDo_SS220 make it required Datafield?
+    public EntProtoId AstralAction = "ActionMiGoAstral";//ToDo_SS220 make it required Datafield?
 
     [ViewVariables, AutoNetworkedField]
     public EntityUid? AstralActionEntity;

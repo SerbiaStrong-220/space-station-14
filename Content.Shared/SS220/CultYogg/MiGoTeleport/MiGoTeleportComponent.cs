@@ -27,9 +27,3 @@ public enum MiGoTeleportUiKey : byte
 {
     Key
 }
-
-[Serializable, NetSerializable]
-public sealed class MiGoTeleportToTargetMessage(NetEntity target) : BoundUserInterfaceMessage
-{
-    public NetEntity Target = target;
-}

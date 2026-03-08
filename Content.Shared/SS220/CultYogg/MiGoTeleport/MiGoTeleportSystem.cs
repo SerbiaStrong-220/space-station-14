@@ -124,7 +124,7 @@ public sealed class MiGoTeleportSystem : EntitySystem
 
     public void UpdateTeleportTargets(EntityUid ent)
     {
-        _userInterfaceSystem.SetUiState(ent, MiGoUiKey.Teleport, new MiGoTeleportBuiState()
+        _userInterfaceSystem.SetUiState(ent, MiGoTeleportUiKey.Key, new MiGoTeleportBuiState()
         {
             Warps = GetTeleportsPoints(ent),
         });

@@ -35,7 +35,7 @@
     sprite: SS220/Mobs/CultYogg/MiGo.rsi
     color: "#bbbbff88"
     layers:
-      - map: [ "enum.MiGoVisual.Base", "enum.DamageStateVisualLayers.Base"]
+      - map: ["enum.DamageStateVisualLayers.Base"]
         state: alive
     noRot: true
     overrideContainerOcclusion: true
@@ -48,31 +48,3 @@
   - type: ShowCultYoggIcons #not sure
   - type: PolymorphTimer
     polymorphTimerAlert: MiGoAstralAlert
-
-- type: polymorph
-  id: MiGoInAstral
-  configuration:
-    entity: MobAstralMiGo
-    transferName: true
-    inventory: None
-    revertOnDeath: true
-    revertOnCrit: true
-    allowRepeatedMorphs: false
-    polymorphSound: /Audio/SS220/CultYogg/migo_astral_in.ogg
-    exitPolymorphSound: /Audio/SS220/CultYogg/migo_astral_out.ogg
-    duration: 35
-
-- type: entity
-  parent: BaseActionPolymorph
-  id: ActionMiGoAstral2
-  name: Access to the astral
-  description: Step into the interdimensional realm.
-  components:
-  - type: Action
-    useDelay: 30
-    icon:
-    sprite: SS220/Interface/Actions/cult_yogg.rsi
-    state: migoastral
-  - type: InstantAction
-    event: !type:PolymorphActionEvent
-      protoId: MiGoInAstral

@@ -1,10 +1,11 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.SS220.CultYogg.MiGo;
+using Content.Client.SS220.CultYogg.MiGo.UI;
+using Content.Shared.SS220.CultYogg.MiGoTeleport;
 using Robust.Client.UserInterface;
 using static Robust.Client.UserInterface.Controls.BaseButton;
 
-namespace Content.Client.SS220.CultYogg.MiGo.UI;
+namespace Content.Client.SS220.CultYogg.MiGoTeleport;
 
 public sealed class MiGoTeleportBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {

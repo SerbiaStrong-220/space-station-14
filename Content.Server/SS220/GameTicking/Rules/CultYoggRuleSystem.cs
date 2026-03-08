@@ -32,6 +32,7 @@ using Content.Shared.SS220.CultYogg.Altar;
 using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.SS220.CultYogg.CultYoggIcons;
 using Content.Shared.SS220.CultYogg.MiGo;
+using Content.Shared.SS220.CultYogg.MiGoTeleport;
 using Content.Shared.SS220.CultYogg.Sacrificials;
 using Content.Shared.SS220.InnerHandToggleable;
 using Content.Shared.SS220.RestrictedItem;
@@ -76,7 +77,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly SharedRestrictedItemSystem _sharedRestrictedItemSystem = default!;
     [Dependency] private readonly SharedStuckOnEquipSystem _stuckOnEquip = default!;
-    [Dependency] private readonly SharedMiGoSystem _migo = default!;
+    [Dependency] private readonly MiGoTeleportSystem _migoTeleport = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
 
     public TimeSpan DefaultShuttleArriving { get; set; } = TimeSpan.FromSeconds(85);
@@ -779,11 +780,11 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
     public void UpdateMiGoTeleportList()//i made this cause idk any other ways to properly trigger this like PrototypesReloadedEventArgs
     {
-        var queryMiGo = EntityQueryEnumerator<MiGoComponent>();
+        var queryMiGo = EntityQueryEnumerator<MiGoTeleportComponent>();
 
         while (queryMiGo.MoveNext(out var ent, out _))
         {
-            _migo.UpdateTeleportTargets(ent);
+            _migoTeleport.UpdateTeleportTargets(ent);
         }
     }
 
