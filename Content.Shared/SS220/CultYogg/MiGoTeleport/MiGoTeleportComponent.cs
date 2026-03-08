@@ -14,6 +14,12 @@ public sealed partial class MiGoTeleportComponent : Component
 
     [ViewVariables, AutoNetworkedField]
     public EntityUid? TeleportActionEntity;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan TeleportCooldown = TimeSpan.FromSeconds(1);//To avoid spamming
+
+    [ViewVariables]
+    public TimeSpan? NextTeleportAvaliable;
 }
 
 [Serializable, NetSerializable]

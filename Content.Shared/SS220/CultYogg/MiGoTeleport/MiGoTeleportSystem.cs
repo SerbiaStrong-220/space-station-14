@@ -8,6 +8,7 @@ using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.SS220.CultYogg.MiGo;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.CultYogg.MiGoTeleport;
 
@@ -19,6 +20,7 @@ public sealed class MiGoTeleportSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
 
     public override void Initialize()
     {
@@ -80,6 +82,13 @@ public sealed class MiGoTeleportSystem : EntitySystem
             return;
         }
 
+        if (ent.Comp.NextTeleportAvaliable != null && ent.Comp.NextTeleportAvaliable > _gameTiming.CurTime)
+        {
+            var timeLeft = (ent.Comp.NextTeleportAvaliable.Value - _gameTiming.CurTime).TotalSeconds;
+            _popup.PopupClient(Loc.GetString("cult-yogg-teleport-cooldown", ("time", timeLeft.ToString("0.0"))), ent.Owner);
+            return;
+        }
+
         var migoMapCoord = _transformSystem.ToMapCoordinates(Transform(ent).Coordinates);
 
         var targetMapCoord = _transformSystem.ToMapCoordinates(Transform(target.Value).Coordinates);
@@ -91,6 +100,8 @@ public sealed class MiGoTeleportSystem : EntitySystem
         }
 
         WarpTo(ent, target.Value);
+
+        ent.Comp.NextTeleportAvaliable = _gameTiming.CurTime + ent.Comp.TeleportCooldown;
     }
 
     private void WarpTo(EntityUid ent, EntityUid target)
