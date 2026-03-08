@@ -6,6 +6,7 @@ using Content.Shared.Database;
 using Content.Shared.Popups;
 using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.SS220.CultYogg.MiGo;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
 
 namespace Content.Shared.SS220.CultYogg.MiGoTeleport;
@@ -17,6 +18,7 @@ public sealed class MiGoTeleportSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
     public override void Initialize()
     {
@@ -52,6 +54,12 @@ public sealed class MiGoTeleportSystem : EntitySystem
 
     private void OnBoundUIOpened(Entity<MiGoTeleportComponent> ent, ref BoundUIOpenedEvent args)
     {
+        if (_net.IsClient)
+            return;
+
+        if (!MiGoTeleportUiKey.Key.Equals(args.UiKey))
+            return;
+
         _userInterfaceSystem.SetUiState(args.Entity, args.UiKey, new MiGoTeleportBuiState()
         {
             Warps = GetTeleportsPoints(ent),

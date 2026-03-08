@@ -4,7 +4,7 @@ using Content.Shared.Actions;
 
 namespace Content.Shared.SS220.AstralLeap;
 
-public sealed class SharedAstralLeapSystem : EntitySystem
+public sealed class AstralLeapSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
 

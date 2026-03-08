@@ -4,6 +4,7 @@
   name: jaunt
   parent: [Incorporeal, BaseMob]
   id: BaseMobAstral
+  abstract: true
   description: Faint traces of a humanoid figure linger here
   components:
   - type: ContentEye
@@ -27,6 +28,7 @@
   name: jaunt
   parent: BaseMobAstral
   id: MobAstralMiGo
+  noSpawn: true
   suffix: CultYogg
   components:
   - type: Sprite
@@ -41,9 +43,11 @@
   - type: MiGoTeleport
   - type: UserInterface
     interfaces:
-      enum.MiGoUiKey.Teleport:
+      enum.MiGoTeleportUiKey.Key:
         type: MiGoTeleportBoundUserInterface
   - type: ShowCultYoggIcons #not sure
+  - type: PolymorphTimer
+    polymorphTimerAlert: MiGoAstralAlert
 
 - type: polymorph
   id: MiGoInAstral
@@ -64,12 +68,11 @@
   name: Access to the astral
   description: Step into the interdimensional realm.
   components:
-  - type: Magic
   - type: Action
     useDelay: 30
     icon:
-      sprite: SS220/Interface/Actions/magic_spells.rsi # SS220 Wizard getting used to
-      state: jaunt
+    sprite: SS220/Interface/Actions/cult_yogg.rsi
+    state: migoastral
   - type: InstantAction
     event: !type:PolymorphActionEvent
       protoId: MiGoInAstral
