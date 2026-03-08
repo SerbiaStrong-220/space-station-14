@@ -340,7 +340,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         //Removing "common enslaving effects"
         foreach (var effect in rule.Comp.OnRemoveEffects)
         {
-            _statusEffects.TryRemoveStatusEffect(uid, effect);//Here is 2 chairs...
+            _statusEffects.TryRemoveStatusEffect(uid, effect);//Two systems with one name, very sad
         }
 
         var cultifiedEv = new GotCultifiedEvent();

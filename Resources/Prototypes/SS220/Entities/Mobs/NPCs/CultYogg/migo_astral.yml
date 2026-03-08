@@ -1,7 +1,7 @@
 # EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
-  name: jaunt
+  name: astral
   parent: [Incorporeal, BaseMob]
   id: BaseMobAstral
   abstract: true
@@ -25,7 +25,7 @@
   - type: Spectral
 
 - type: entity
-  name: jaunt
+  name: MiGo in Astral
   parent: BaseMobAstral
   id: MobAstralMiGo
   noSpawn: true
@@ -48,3 +48,13 @@
   - type: ShowCultYoggIcons #not sure
   - type: PolymorphTimer
     polymorphTimerAlert: MiGoAstralAlert
+    #not sure about this one
+  - type: Telepathy
+    canSend: true
+    telepathyChannelPrototype: TelepathyChannelYoggSothothCult
+  - type: TTS
+    voice: forester
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: true
