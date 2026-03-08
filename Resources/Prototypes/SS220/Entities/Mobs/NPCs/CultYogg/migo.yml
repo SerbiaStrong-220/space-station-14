@@ -8,6 +8,7 @@
     - MobCombat
     - BaseSimpleMob
     - MobFlammable
+    - MobPolymorphable
   description: The child of the Dark God.
   id: MobMiGo
   suffix: CultYogg
@@ -63,6 +64,8 @@
         type: MiGoErectBoundUserInterface
   - type: AstralLeap
     astralAction: ActionMiGoAstral
+    astralEnt: MiGoInAstral
+    astralLeapDoAfterTime: 3
   - type: ShowCultYoggIcons
   - type: NpcFactionMember
     factions:
