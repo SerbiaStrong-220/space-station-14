@@ -7,7 +7,7 @@
     - FlyingMobBase
     - MobCombat
     - BaseSimpleMob
-    #- MobFlammable #Removed cause wierd interactions in astral
+    - MobFlammable
   description: The child of the Dark God.
   id: MobMiGo
   suffix: CultYogg
