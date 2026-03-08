@@ -23,6 +23,7 @@ public sealed partial class SharedStuckOnEquipSystem : EntitySystem
         SubscribeLocalEvent<StuckOnEquipComponent, GotEquippedEvent>(GotEquipped);
         SubscribeLocalEvent<StuckOnEquipComponent, GotEquippedHandEvent>(GotPickuped);
         SubscribeLocalEvent<MobStateChangedEvent>(OnDeath);
+        SubscribeLocalEvent<BeingGibbedEvent>(OnGibbed);
     }
 
     private void OnRemoveAttempt(Entity<StuckOnEquipComponent> ent, ref ContainerGettingRemovedAttemptEvent args)
@@ -61,6 +62,11 @@ public sealed partial class SharedStuckOnEquipSystem : EntitySystem
     {
         if (ev.NewMobState == MobState.Dead)
             RemoveAllStuckItemsByDeath(ev.Target);
+    }
+
+    private void OnGibbed(BeingGibbedEvent ev)
+    {
+        RemoveAllStuckItems(ev.Target);
     }
 
     public void UnstuckItem(Entity<StuckOnEquipComponent> ent)
