@@ -3,7 +3,7 @@
 using Content.Shared.Actions;
 
 namespace Content.Shared.SS220.AstralLeap;
+
 public sealed partial class AstralLeapActionEvent : InstantActionEvent
 {
 }
-

@@ -28,7 +28,7 @@
   name: MiGo in Astral
   parent: BaseMobAstral
   id: MobAstralMiGo
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   suffix: CultYogg
   components:
   - type: Sprite

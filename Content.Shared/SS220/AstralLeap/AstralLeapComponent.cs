@@ -8,8 +8,8 @@ namespace Content.Shared.SS220.AstralLeap;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class AstralLeapComponent : Component
 {
-    [DataField]
-    public EntProtoId AstralAction = "ActionMiGoAstral";//ToDo_SS220 make it required Datafield?
+    [DataField(required: true)]
+    public EntProtoId AstralAction;
 
     [ViewVariables, AutoNetworkedField]
     public EntityUid? AstralActionEntity;
