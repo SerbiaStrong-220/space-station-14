@@ -9,7 +9,7 @@
     - BaseSimpleMob
     #- MobFlammable #Removed cause wierd interactions in astral
   description: The child of the Dark God.
-  id: MiGo
+  id: MobMiGo
   suffix: CultYogg
   components:
   #cultists comps
