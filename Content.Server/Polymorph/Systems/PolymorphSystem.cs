@@ -16,7 +16,6 @@ using Content.Shared.Nutrition;
 using Content.Shared.Polymorph;
 using Content.Shared.Popups;
 using Content.Shared.SS220.PolymorphTimer;
-using JetBrains.FormatRipper.Elf;
 using Robust.Server.Audio;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
