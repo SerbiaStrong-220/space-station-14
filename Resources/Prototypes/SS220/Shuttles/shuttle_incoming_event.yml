@@ -1,0 +1,4 @@
+- type: preloadedGrid
+  id: ShuttleMimesLost
+  path: /Maps/SS220/Shuttles/lostSoul/lost_mimes.yml
+  copies: 1 

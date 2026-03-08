@@ -6,6 +6,7 @@
   name: Dark Reaper
   description: A terrifying creature that looks like it was stitched together from random pieces of human flesh.
   components:
+  - type: Lifesteal
   - type: DarkReaper
     healPerConsume:
       types:
