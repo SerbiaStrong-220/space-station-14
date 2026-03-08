@@ -48,7 +48,7 @@ public sealed class MiGoTeleportSystem : EntitySystem
         if (args.Handled || !TryComp<ActorComponent>(ent, out var actor))
             return;
 
-        if (_userInterfaceSystem.TryToggleUi(ent.Owner, MiGoTeleportUiKey.Key, actor.PlayerSession))
+        if (_userInterfaceSystem.TryToggleUi(ent.Owner, MiGoTeleportUiKey.Teleport, actor.PlayerSession))
             args.Handled = true;
     }
 
@@ -57,7 +57,7 @@ public sealed class MiGoTeleportSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (!MiGoTeleportUiKey.Key.Equals(args.UiKey))
+        if (!MiGoTeleportUiKey.Teleport.Equals(args.UiKey))
             return;
 
         _userInterfaceSystem.SetUiState(args.Entity, args.UiKey, new MiGoTeleportBuiState()
@@ -68,11 +68,13 @@ public sealed class MiGoTeleportSystem : EntitySystem
 
     private void OnCultistsTeleportToTarget(Entity<MiGoTeleportComponent> ent, ref MiGoTeleportToTargetMessage args)
     {
+        if (_net.IsClient)
+            return;
 
         if (!TryGetEntity(args.Target, out var target))
             return;
 
-        if (!HasComp<CultYoggComponent>(target))
+        if (!HasComp<CultYoggComponent>(target) && !HasComp<MiGoComponent>(target))
         {
             _popup.PopupClient(Loc.GetString("cult-yogg-teleport-must-be-cultist"), ent.Owner);
             return;
@@ -124,7 +126,7 @@ public sealed class MiGoTeleportSystem : EntitySystem
 
     public void UpdateTeleportTargets(EntityUid ent)
     {
-        _userInterfaceSystem.SetUiState(ent, MiGoTeleportUiKey.Key, new MiGoTeleportBuiState()
+        _userInterfaceSystem.SetUiState(ent, MiGoTeleportUiKey.Teleport, new MiGoTeleportBuiState()
         {
             Warps = GetTeleportsPoints(ent),
         });

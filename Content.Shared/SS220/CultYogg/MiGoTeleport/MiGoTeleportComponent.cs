@@ -25,5 +25,5 @@ public sealed class MiGoTeleportBuiState : BoundUserInterfaceState
 [Serializable, NetSerializable]
 public enum MiGoTeleportUiKey : byte
 {
-    Key
+    Teleport
 }

@@ -61,8 +61,8 @@
     interfaces:
       enum.MiGoUiKey.Erect:
         type: MiGoErectBoundUserInterface
-      enum.MiGoUiKey.Teleport:
-        type: MiGoTeleportBoundUserInterface
+  - type: AstralLeap
+    astralAction: ActionMiGoAstral
   - type: ShowCultYoggIcons
   - type: NpcFactionMember
     factions:

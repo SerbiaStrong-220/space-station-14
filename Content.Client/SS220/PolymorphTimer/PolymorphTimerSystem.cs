@@ -17,7 +17,6 @@ public sealed class PolymorphTimerSystem : SharedPolymorphTimerSystem
         SubscribeLocalEvent<PolymorphTimerComponent, UpdateAlertSpriteEvent>(OnUpdateAlert);
     }
 
-    //trying to make alert revenant-like
     private void OnUpdateAlert(Entity<PolymorphTimerComponent> ent, ref UpdateAlertSpriteEvent args)
     {
         if (args.Alert.ID != ent.Comp.PolymorphTimerAlert)

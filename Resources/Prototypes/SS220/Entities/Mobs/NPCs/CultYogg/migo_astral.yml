@@ -43,7 +43,7 @@
   - type: MiGoTeleport
   - type: UserInterface
     interfaces:
-      enum.MiGoTeleportUiKey.Key:
+      enum.MiGoTeleportUiKey.Teleport:
         type: MiGoTeleportBoundUserInterface
   - type: ShowCultYoggIcons #not sure
   - type: PolymorphTimer
