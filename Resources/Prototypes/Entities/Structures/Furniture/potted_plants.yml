@@ -205,10 +205,12 @@
   components:
   - type: Sprite
     state: plant-20
-  - type: PointLight #SS220 PottedUpdate
+  #SS220 PottedUpdate begin
+  - type: PointLight
     radius: 1.5
     energy: 3
     color: "#f5c96d"
+  #SS220 PottedUpdate end
 
 - type: entity
   id: PottedPlant21
