@@ -6,5 +6,3 @@ ent-ThrusterBigRightMachineCircuitboard = большой ракетный дви
     .desc = { ent-BaseMachineCircuitboard.desc }
 ent-ThrusterBigCenterMachineCircuitboard = большой ракетный двигатель (середина) (машинная плата)
     .desc = { ent-BaseMachineCircuitboard.desc }
-ent-SMESAdvancedMachineCircuitboard = продвинутый СМЭС (машинная плата)
-    .desc = Печатная плата для продвинутого СМЭС.

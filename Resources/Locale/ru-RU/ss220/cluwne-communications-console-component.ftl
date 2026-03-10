@@ -19,7 +19,7 @@ cluwne-comms-console-menu-time-remaining = Оставшееся время: { $t
 cluwne-comms-console-permission-denied = В шутке отказано
 cluwne-comms-console-shuttle-unavailable = В настоящее время шаттл недоступен
 # Placeholder values
-cluwne-comms-console-announcement-sent-by = Отправитель шутки
+cluwne-comms-console-announcement-sent-by = Отправитель шутки { $author }
 cluwne-comms-console-announcement-unknown-sender = Неизвестный
 # Comms console variant titles
 cluwne-comms-console-announcement-title-station = Консоль смешной связи
