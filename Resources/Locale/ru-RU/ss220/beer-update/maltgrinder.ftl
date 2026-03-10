@@ -1,0 +1,10 @@
+ent-MaltGrinder = Обжарщик солода
+    .desc = Машина, подготавливающая солод из зерна силой чудес науки
+MaltGrinderCircuitboard = обжарщик солода (машинная плата)
+    .desc = Печатная плата обжарщика солода
+malt-grinder-examine-input = Внутрь загружено сырьё
+malt-grinder-examine-input-empty = Внутри пусто
+malt-grinder-examine-output = Внутри тара для солода
+malt-grinder-examine-output-empty = Внутри нет тары
+malt-grinder-start-button = Запуск
+malt-grinder-eject-button = Извлечь содержимое

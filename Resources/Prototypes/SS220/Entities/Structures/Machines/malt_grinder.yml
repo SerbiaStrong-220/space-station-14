@@ -1,0 +1,118 @@
+- type: entity
+  parent: [BaseStructureDynamic, ConstructibleMachine]
+  id: MaltGrinder
+  name: Malt Grinder
+  description: A machine that grinds wheat into malt for brewing.
+  components:
+  - type: StationAiWhitelist
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.MaltGrinderVisualLayers.On:
+        enum.MaltGrinderVisualLayers.On:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Sprite
+    sprite: SS220/Structures/Machines/maltgrinder.rsi
+    snapCardinals: true
+    layers:
+    - state: maltgrinder
+      map: ["enum.MaltGrinderVisualLayers.Base"]
+    - state: on
+      map: ["enum.MaltGrinderVisualLayers.On"]
+      shader: unshaded
+      visible: false
+  - type: PointLight
+    radius: 0.5
+    energy: 1.1
+    color: "#9dc5c9"
+  - type: Machine
+    board: MaltGrinderCircuitboard
+  - type: MaltGrinder
+    inputWhitelist:
+      tags:
+      - Wheat
+  - type: ItemSlots
+    slots:
+      beakerSlot:
+        whitelist:
+          components:
+            - FitsInDispenser
+  - type: ContainerContainer
+    containers:
+      beakerSlot: !type:ContainerSlot
+      inputContainer: !type:Container
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: Construction
+    graph: Machine
+    node: machine
+    containers:
+    - machine_parts
+    - machine_board
+  - type: EmptyOnMachineDeconstruct
+    containers:
+    - inputContainer
+  - type: ApcPowerReceiver
+    powerLoad: 350
+  - type: ExtensionCableReceiver
+  - type: ActivatableUI
+    inHandsOnly: false
+    singleUser: true
+    key: enum.MaltGrinderUiKey.Key
+    requiresComplex: true
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.MaltGrinderUiKey.Key:
+        type: MaltGrinderBoundUserInterface
+  - type: AccessReader
+    access: [["Kitchen"], ["Hydroponics"], ["Bar"]]
+  - type: UseDelay
+    delay: 1
+  - type: AntiRottingContainer
+  - type: ResistLocker
+  - type: Physics
+    bodyType: Static
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        density: 80
+  - type: Anchorable
+    delay: 2
+  - type: InteractionOutline
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: DamageOnHighSpeedImpact
+    damage:
+      types:
+        Blunt: 5
+    soundHit:
+      collection: MetalThud
+  - type: ExplosionResistance
+    damageCoefficient: 0.1
+  - type: Airtight

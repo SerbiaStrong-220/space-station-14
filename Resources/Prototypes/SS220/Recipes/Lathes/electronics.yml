@@ -108,3 +108,8 @@
   parent: BaseCircuitboardRecipe
   id: CloningConsoleComputerCircuitboard
   result: CloningConsoleComputerCircuitboard
+
+- type: latheRecipe
+  parent: [BaseCircuitboardRecipe]
+  id: MaltGrinderCircuitboard
+  result: MaltGrinderCircuitboard
