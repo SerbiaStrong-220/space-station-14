@@ -1,7 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Administration.Managers;
-using Content.Shared.Body.Events;
 using Content.Shared.Hands;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
@@ -24,7 +23,6 @@ public sealed partial class SharedStuckOnEquipSystem : EntitySystem
         SubscribeLocalEvent<StuckOnEquipComponent, GotEquippedEvent>(GotEquipped);
         SubscribeLocalEvent<StuckOnEquipComponent, GotEquippedHandEvent>(GotPickuped);
         SubscribeLocalEvent<MobStateChangedEvent>(OnDeath);
-        SubscribeLocalEvent<BeingGibbedEvent>(OnGibbed);
     }
 
     private void OnRemoveAttempt(Entity<StuckOnEquipComponent> ent, ref ContainerGettingRemovedAttemptEvent args)
@@ -63,11 +61,6 @@ public sealed partial class SharedStuckOnEquipSystem : EntitySystem
     {
         if (ev.NewMobState == MobState.Dead)
             RemoveAllStuckItemsByDeath(ev.Target);
-    }
-
-    private void OnGibbed(BeingGibbedEvent ev)
-    {
-        RemoveAllStuckItems(ev.Target);
     }
 
     public void UnstuckItem(Entity<StuckOnEquipComponent> ent)
