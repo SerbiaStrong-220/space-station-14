@@ -80,7 +80,7 @@ public sealed partial class PolymorphSystem : EntitySystem
                 continue;
             }
 
-            //SS220_cult_hotfix_23 start
+            //SS220-cult-hotfix-23-start #3988
             if (TryComp<PolymorphTimerComponent>(uid, out var timerComp) && comp.Configuration.Duration != null)
             {
                 timerComp.AlertTime = (int)(comp.Configuration.Duration - comp.Time);
@@ -88,7 +88,7 @@ public sealed partial class PolymorphSystem : EntitySystem
 
                 _alerts.ShowAlert(uid, timerComp.PolymorphTimerAlert);
             }
-            //SS220_cult_hotfix_23 end
+            //SS220-cult-hotfix-23-end #3988
 
             if (!TryComp<MobStateComponent>(uid, out var mob))
                 continue;
