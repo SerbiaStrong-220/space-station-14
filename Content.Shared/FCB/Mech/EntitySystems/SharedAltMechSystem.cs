@@ -153,6 +153,9 @@ public abstract partial class SharedAltMechSystem : EntitySystem
             _blindable.AdjustEyeDamage((ent.Owner, blindableComp), 9); //Mech cannot see anything if it has no eyes
         }
 
+        _actions.AddAction(ent.Owner, ref ent.Comp.MechUiActionEntity, ent.Comp.MechUiAction, ent.Owner);
+        _actions.AddAction(ent.Owner, ref ent.Comp.MechEjectActionEntity, ent.Comp.MechEjectAction, ent.Owner);
+
         UpdateAppearance(ent.Owner, ent.Comp);
     }
 
@@ -264,9 +267,9 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         if (!Resolve(mech, ref component))
             return;
 
-        var rider = EnsureComp<AltMechPilotComponent>(pilot);
+        var pilotComp = EnsureComp<AltMechPilotComponent>(pilot);
 
-        rider.Mech = mech;
+        pilotComp.Mech = mech;
 
         if (_net.IsClient)
             return;
@@ -289,8 +292,8 @@ public abstract partial class SharedAltMechSystem : EntitySystem
             }
         }
 
-        //_actions.AddAction(pilot, ref component.MechUiActionEntity, component.MechUiAction, mech);
-        //_actions.AddAction(pilot, ref component.MechEjectActionEntity, component.MechEjectAction, mech);
+        _actions.AddAction(pilot, ref pilotComp.PilotUiActionEntity, pilotComp.PilotUiAction, mech);
+        _actions.AddAction(pilot, ref pilotComp.PilotEjectActionEntity, pilotComp.PilotEjectAction, mech);
     }
 
     /// <summary>
@@ -610,9 +613,6 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         SetupUser(uid, toInsert.Value);
         _container.Insert(toInsert.Value, component.PilotSlot);
 
-        _actions.AddAction(toInsert.Value, ref component.MechUiActionEntity, component.MechUiAction, uid);
-        _actions.AddAction(toInsert.Value, ref component.MechEjectActionEntity, component.MechEjectAction, uid);
-
         var ev = new OnMechEntryEvent();
         RaiseLocalEvent(uid, ref ev);
 
@@ -639,8 +639,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         var pilot = component.PilotSlot.ContainedEntity.Value;
 
-        //RemoveUser(uid, pilot);
-        if (!RemComp<AltMechPilotComponent>(pilot))
+        if (!TryComp<AltMechPilotComponent>(pilot, out var pilotComp))
             return false;
 
         if (TryComp<ActiveRadioComponent>(uid, out var mechRadio))
@@ -648,8 +647,16 @@ public abstract partial class SharedAltMechSystem : EntitySystem
             mechRadio.Channels.Clear();
         }
 
-        _actions.RemoveProvidedActions(pilot, uid);
+        if (pilotComp.PilotUiActionEntity != null)
+            _actions.RemoveProvidedAction(pilot, uid, (EntityUid)pilotComp.PilotUiActionEntity);
+
+        if (pilotComp.PilotEjectActionEntity != null)
+            _actions.RemoveProvidedAction(pilot, uid, (EntityUid)pilotComp.PilotEjectActionEntity);
+
         _container.RemoveEntity(uid, pilot);
+
+        if (!RemComp<AltMechPilotComponent>(pilot))
+            return false;
 
         if (TryComp<ArmorBlockComponent>(uid, out var blockComp))
             blockComp.Owner = null;
@@ -796,6 +803,13 @@ public readonly record struct MechEquipmentInsertedEvent(EntityUid Mech)
 public readonly record struct MechEquipmentRemovedEvent(EntityUid Mech)
 {
     public readonly EntityUid Mech = Mech;
+}
+
+[ByRefEvent]
+public record struct RefreshOpticHudEvent<T>() where T : IComponent
+{
+    public bool Active = false;
+    public List<T> Components = new();
 }
 
 

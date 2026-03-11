@@ -2,6 +2,7 @@
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.Components;
 using Content.Shared.Whitelist;
+using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -212,6 +213,36 @@ public sealed partial class AltMechComponent : Component
     [DataField]
     public bool Transparent = false;
 
+    /// <summary>
+    /// The sound to be played when mech is bolted
+    /// </summary>
+    [DataField]
+    public SoundSpecifier BoltSound =
+        new SoundPathSpecifier("/Audio/Machines/boltsdown.ogg")
+        {
+            Params = AudioParams.Default
+        };
+
+    /// <summary>
+    /// The sound to be played when is unbolted
+    /// </summary>
+    [DataField]
+    public SoundSpecifier UnboltSound =
+        new SoundPathSpecifier("/Audio/Machines/boltsup.ogg")
+        {
+            Params = AudioParams.Default
+        };
+
+    /// <summary>
+    /// The sound to be played when is unbolted
+    /// </summary>
+    [DataField]
+    public SoundSpecifier SealSound =
+        new SoundPathSpecifier("/Audio/Mecha/mechmove03.ogg")
+        {
+            Params = AudioParams.Default
+        };
+
     #region Action Prototypes
     [DataField]
     public EntProtoId MechCycleAction = "ActionMechCycleEquipment";
@@ -219,6 +250,11 @@ public sealed partial class AltMechComponent : Component
     public EntProtoId MechUiAction = "ActionMechOpenUI";
     [DataField]
     public EntProtoId MechEjectAction = "ActionMechEject";
+
+    //[DataField]
+    //public EntProtoId PilotUiAction = "ActionPilotOpenUI";//Why? Because mech and pilot couldn't have same actions so or this or adding/deleting actions aaaall the way
+    //[DataField]
+    //public EntProtoId PilotEjectAction = "ActionPilotEject";
     #endregion
 
     #region Visualizer States
@@ -233,5 +269,7 @@ public sealed partial class AltMechComponent : Component
     [DataField] public EntityUid? MechCycleActionEntity;
     [DataField] public EntityUid? MechUiActionEntity;
     [DataField] public EntityUid? MechEjectActionEntity;
+    //[DataField] public EntityUid? PilotUiActionEntity;
+    //[DataField] public EntityUid? PilotEjectActionEntity;
 
 }

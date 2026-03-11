@@ -22,7 +22,8 @@ public sealed class ArmorBlockSystem : EntitySystem
 
     public void OnDamageChange(Entity<ArmorBlockComponent> ent, ref DamageModifyEvent args)
     {
-        if (args.OriginalDamage == null || ent.Comp.Owner == null) { return; }
+        if (args.OriginalDamage == null)
+            return;
 
         FixedPoint2 maximalDamage = 0;
         string? maximalDamageType = null;
@@ -38,7 +39,8 @@ public sealed class ArmorBlockSystem : EntitySystem
                     args.OriginalDamage.DamageDict[type],
                     ent.Comp.DurabilityTresholdDict[type],
                     type,
-                    piercing: args.OriginalDamage.ArmourPiercing);//armor damage
+                    piercing: args.OriginalDamage.ArmourPiercing
+                );//armor damage
 
             else
                 resultArmorDamage.DamageDict.Add(type, args.OriginalDamage.DamageDict[type]);
@@ -50,7 +52,8 @@ public sealed class ArmorBlockSystem : EntitySystem
                     args.OriginalDamage.DamageDict[type],
                     ent.Comp.TresholdDict[type],
                     type,
-                    args.OriginalDamage.ArmourPiercing);//user damage
+                    args.OriginalDamage.ArmourPiercing
+                );//user damage
 
                 if (damageDiff > maximalDamage)
                 {
@@ -63,7 +66,8 @@ public sealed class ArmorBlockSystem : EntitySystem
                         resultDamage.DamageDict,
                         args.OriginalDamage.DamageDict[type],
                         ent.Comp.TresholdDict[ent.Comp.TransformSpecifierDict[type]],
-                        ent.Comp.TransformSpecifierDict[type], FixedPoint2.Zero); //Piercing is not applied here
+                        ent.Comp.TransformSpecifierDict[type], FixedPoint2.Zero
+                    ); //Piercing is not applied here
 
                 continue;
 
@@ -72,6 +76,9 @@ public sealed class ArmorBlockSystem : EntitySystem
             CountDifference(resultDamage.DamageDict, args.OriginalDamage.DamageDict[type], FixedPoint2.Zero, type, FixedPoint2.Zero);
         }
         args.Damage = resultArmorDamage;
+
+        if (ent.Comp.Owner == null)
+            return;
 
         if(maximalDamageType != null)
         {

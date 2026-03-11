@@ -70,6 +70,7 @@
     showInHands: false
     disableExplosionRecursion: true
     canBeStripped: true
+    handsOverrideDamage: true
   - type: Fixtures
     fixtures:
       fix1:
@@ -83,6 +84,11 @@
         - MobLayer
   - type: Appearance
   - type: IntrinsicRadioReceiver
+  - type: MeleeWeapon
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 0
   - type: ActiveRadio
   - type: ZombieImmune
   - type: ContainerContainer
@@ -205,6 +211,65 @@
     - trigger:
         !type:DamageTrigger
         damage: 300
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: MechArmoredSynth
+  parent: BaseAltMech
+  name: Executor
+  description: The peak of modern mech design. Materials, drives, electronics - everything was picked without a glance on the price
+  components:
+  - type: Sprite
+    sprite: FCB/Objects/Mechs/cores.rsi
+    state: armoredsynthold
+    noRot: true
+  - type: ArmorBlock
+    tresholddict:
+        Radiation: 1000
+        Poison: 1000
+        Airloss: 1000
+        Caustic: 1000
+        Piercing: 140 #This is a DS frame and logically a tank
+        Blunt: 80
+        Heat: 120
+        Slash: 70
+        Shock: 150
+    durabilitytresholddict:
+        Radiation: 1000
+        Poison: 1000
+        Airloss: 1000
+        Caustic: 1000
+        Piercing: 110
+        Blunt: 80
+        Heat: 120
+        Slash: 70
+        Shock: 150
+  - type: FlashImmunity
+  - type: EyeProtection
+  - type: AltMech
+    baseState: basiclight
+    openState: basiclight
+    brokenState: basiclight
+    integrity: 300
+    maxIntegrity: 300
+    ownMass: 300
+    maximalArmMass: 200
+    transparent: true
+    pilotWhitelist:
+      components:
+        - HumanoidAppearance
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 450
       behaviors:
       - !type:PlaySoundBehavior
         sound:

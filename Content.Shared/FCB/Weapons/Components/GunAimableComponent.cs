@@ -1,4 +1,5 @@
 // © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
+using Content.Shared.EntityEffects.Effects.StatusEffects;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared.FCB.Weapons.Components;
@@ -11,13 +12,13 @@ public sealed partial class GunAimableComponent : Component//This component sign
     [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public bool IsAimed = false;
 
-    [ViewVariables(VVAccess.ReadWrite), DataField("minAngle"), AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadWrite), DataField("minAngle")]
     public Angle MinAngle = Angle.FromDegrees(0);
 
     /// <summary>
     /// Angle bonus applied upon being aimed.
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite), DataField("maxAngle"), AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadWrite), DataField("maxAngle")]
     public Angle MaxAngle = Angle.FromDegrees(0);
 
     /// <summary>
@@ -25,7 +26,7 @@ public sealed partial class GunAimableComponent : Component//This component sign
     /// Higher angle decay bonus, quicker recovery.
     /// Lower angle increase bonus (negative numbers), slower buildup.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public Angle AngleDecay = Angle.FromDegrees(0);
 
     /// <summary>
@@ -33,7 +34,12 @@ public sealed partial class GunAimableComponent : Component//This component sign
     /// Higher angle decay bonus, quicker recovery.
     /// Lower angle increase bonus (negative numbers), slower buildup.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public Angle AngleIncrease = Angle.FromDegrees(0);
 
+    [DataField]
+    public float? AimedSprintSpeedModifier = 0.7f;
+
+    [DataField]
+    public float? AimedWalkingSpeedModifier = 1f;
 }

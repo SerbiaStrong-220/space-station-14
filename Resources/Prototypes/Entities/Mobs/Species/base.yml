@@ -124,6 +124,8 @@
     baseAcceleration: 0.6
     baseFriction: 1.3
   #FCB realistic movement update end
+  - type: Item #FCB rofls
+    size: Gigantic #FCB rofls
   - type: StatusEffects
     allowed:
     - Electrocution

@@ -335,7 +335,7 @@
     meleeBlockProb: 0
     activeRangeBlockProb: 0.85
     activeMeleeBlockProb: 0.85
-  - type: ItemToggleBlockingDamage
+  - type: ToggleBlockingChance
     toggledRangeBlockProb: 0.4
     toggledMeleeBlockProb: 0.35
   - type: ChangeAppearanceOnActiveBlocking
@@ -350,7 +350,7 @@
         shader: unshaded
   - type: ArmorBlock
     tresholddict:
-      Piercing: 40
+      Piercing: 48
       Blunt: 30
       Heat: 35
       Slash: 30
@@ -363,7 +363,7 @@
       Blunt: 10000
       Heat: 10000
       Slash: 10000
-      Radiation: 1000
+      Radiation: 10000
       Poison: 1000
       Airloss: 1000
       Caustic: 1000

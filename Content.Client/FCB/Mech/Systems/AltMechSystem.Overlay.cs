@@ -1,25 +1,12 @@
 // © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
-using Content.Client.FCB.Mech.Ui;
-using Content.Client.UserInterface.Systems.DamageOverlays.Overlays;
 using Content.Shared.Damage;
-using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.FCB.Mech.Components;
-using Content.Shared.FCB.Mech.Parts.Components;
-using Content.Shared.FCB.Mech.Systems;
 using Content.Shared.FixedPoint;
-using Content.Shared.Mech;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.Popups;
-using Content.Shared.StatusEffectNew;
 using Content.Shared.Traits.Assorted;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
-using Robust.Client.Player;
-using Robust.Shared.Containers;
 using Robust.Shared.Player;
-using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
 
 namespace Content.Client.FCB.Mech;
 
@@ -28,29 +15,29 @@ public sealed partial class AltMechSystem
 {
     private void OnPlayerAttach(Entity<AltMechComponent> ent, ref LocalPlayerAttachedEvent args)
     {
-        DamageOverlayInit(args);
+        DamageOverlayInit(args.Entity);
     }
 
-    private void DamageOverlayInit(LocalPlayerAttachedEvent args)
+    private void DamageOverlayInit(EntityUid entity)
     {
         ClearOverlay();
 
-        if (!EntityManager.TryGetComponent<AltMechComponent>(args.Entity, out var mechComp) || mechComp.PilotSlot.ContainedEntity == null)
+        if (!EntityManager.TryGetComponent<AltMechComponent>(entity, out var mechComp) || mechComp.PilotSlot.ContainedEntity == null)
             return;
 
         if (!EntityManager.TryGetComponent<MobStateComponent>(mechComp.PilotSlot.ContainedEntity, out var mobState))
             return;
 
-        if (mobState.CurrentState != MobState.Dead)
-            UpdateOverlays(args.Entity, mobState);
         _overlay.AddOverlay(_damageOverlay);
+
+        if (mobState.CurrentState != MobState.Dead)
+            UpdateOverlays(entity, mobState);
     }
 
     private void OnPlayerDetached(Entity<AltMechComponent> ent, ref LocalPlayerDetachedEvent args)
     {
         _overlay.RemoveOverlay(_damageOverlay);
         ClearOverlay();
-        RemComp<BlurryVisionComponent>(args.Entity);
     }
 
     private void OnMobStateChanged(MobStateChangedEvent args)
@@ -113,7 +100,7 @@ public sealed partial class AltMechSystem
                     _damageOverlay.PainLevel = 0;
 
                     //if (!_statusEffects.TryEffectsWithComp<PainNumbnessStatusEffectComponent>(pilot, out _)) uncomment on upstream
-                    if(TryComp<PainNumbnessComponent>(pilot, out var numbnessComp))
+                    if(!TryComp<PainNumbnessComponent>(pilot, out var numbnessComp))
                     {
                         foreach (var painDamageType in damageable.PainDamageGroups)
                         {

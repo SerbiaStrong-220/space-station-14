@@ -1,7 +1,6 @@
 // © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
 using Content.Shared.FCB.AltBlocking;
 using Content.Shared.Item.ItemToggle.Components;
-using Content.Shared.FCB.AltBlocking;
 using Content.Shared.FCB.ChangeAppearanceOnActiveBlocking;
 
 namespace Content.Shared.FCB.ToggleBlocking;
@@ -19,7 +18,7 @@ public sealed class ToggleBlockingChanceSystem : EntitySystem
         if (!TryComp<AltBlockingComponent>(ent.Owner, out var blockingComponent))
             return;
 
-        ActivateBlock(ent, blockingComponent);
+        DectivateBlock(ent, blockingComponent);
     }
 
     private void OnToggled(Entity<ToggleBlockingChanceComponent> ent, ref ItemToggledEvent args)
@@ -44,12 +43,13 @@ public sealed class ToggleBlockingChanceSystem : EntitySystem
 
     private void DectivateBlock(Entity<ToggleBlockingChanceComponent> ent, AltBlockingComponent blockingComponent)
     {
+        ent.Comp.IsToggled = false;
+
         if (TryComp<ChangeAppearanceOnActiveBlockingComponent>(ent.Owner, out var appearanceComp))
         {
             var ev = new ActiveBlockingEvent(false);
             RaiseLocalEvent(ent.Owner, ref ev);
         }
-        ent.Comp.IsToggled = false;
 
         blockingComponent.RangeBlockProb = ent.Comp.BaseRangeBlockProb;
         blockingComponent.MeleeBlockProb = ent.Comp.BaseMeleeBlockProb;
@@ -57,12 +57,13 @@ public sealed class ToggleBlockingChanceSystem : EntitySystem
 
     private void ActivateBlock(Entity<ToggleBlockingChanceComponent> ent, AltBlockingComponent blockingComponent)
     {
+        ent.Comp.IsToggled = true;
+
         if (TryComp<ChangeAppearanceOnActiveBlockingComponent>(ent.Owner, out var appearanceComp))
         {
             var ev = new ActiveBlockingEvent(true);
             RaiseLocalEvent(ent.Owner, ref ev);
         }
-        ent.Comp.IsToggled = true;
 
         blockingComponent.RangeBlockProb = ent.Comp.ToggledRangeBlockProb;
         blockingComponent.MeleeBlockProb = ent.Comp.ToggledMeleeBlockProb;

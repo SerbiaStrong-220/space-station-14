@@ -17,7 +17,6 @@ public sealed partial class SharedChangeAppearanceOnActiveBlockingSystem : Entit
         base.Initialize();
         SubscribeLocalEvent<ChangeAppearanceOnActiveBlockingComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<ChangeAppearanceOnActiveBlockingComponent, ActiveBlockingEvent>(OnActiveBlock);
-        SubscribeLocalEvent<ChangeAppearanceOnActiveBlockingComponent, GotUnequippedHandEvent>(OnUnequip);
     }
 
     private void OnInit(Entity<ChangeAppearanceOnActiveBlockingComponent> ent, ref ComponentInit args)
@@ -33,19 +32,7 @@ public sealed partial class SharedChangeAppearanceOnActiveBlockingSystem : Entit
 
     public void OnActiveBlock(Entity<ChangeAppearanceOnActiveBlockingComponent> ent, ref ActiveBlockingEvent args)
     {
-        bool toggleCheck = true;
-
-        if(TryComp<ItemToggleComponent>(ent.Owner, out var toggleComp) && !toggleComp.Activated && ent.Comp.RequiresToggle)
-            toggleCheck = false;
-
-        ent.Comp.Toggled = args.Active && toggleCheck;
-        Dirty(ent);
-        UpdateVisuals((ent.Owner, ent.Comp));
-    }
-
-    public void OnUnequip(Entity<ChangeAppearanceOnActiveBlockingComponent> ent, ref GotUnequippedHandEvent args)
-    {
-        ent.Comp.Toggled = false;
+        ent.Comp.Toggled = args.Active;
         Dirty(ent);
         UpdateVisuals((ent.Owner, ent.Comp));
     }

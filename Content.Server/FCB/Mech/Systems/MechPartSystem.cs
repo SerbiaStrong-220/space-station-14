@@ -53,7 +53,6 @@ public sealed class MechPartSystem : EntitySystem
         SubscribeLocalEvent<MechOpticsComponent, MechPartRemovedEvent>(OnOpticsRemoved);
 
         SubscribeLocalEvent<MechPartComponent, DestructionEventArgs>(OnPartDestroyed);
-        //SubscribeLocalEvent<MechPartComponent, InsertPartEvent>(OnArmInserted);
     }
 
     private void OnPartDestroyed(Entity<MechPartComponent> ent, ref DestructionEventArgs args)

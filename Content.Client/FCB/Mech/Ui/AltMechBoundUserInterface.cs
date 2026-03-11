@@ -2,7 +2,6 @@
 using Content.Client.UserInterface.Fragments;
 using Content.Shared.FCB.AltMech;
 using Content.Shared.FCB.Mech.Components;
-using Content.Shared.FCB.Mech.Parts.Components;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 

@@ -30,7 +30,6 @@
     maxCharge: 15000
     startingCharge: 15000
     pricePerJoule: 0.15
-  - type: PowerCell
   - type: Explosive
     explosionType: Default
     maxIntensity: 200

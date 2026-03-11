@@ -2,7 +2,6 @@
 using Content.Shared.Damage;
 using Content.Shared.FCB.ToggleBlocking;
 using Content.Shared.FCB.Weapons.Melee.Events;
-using Content.Shared.FCB.Weapons.Ranged;
 using Content.Shared.FCB.Weapons.Ranged.Events;
 using Content.Shared.Hands;
 using Content.Shared.Interaction.Events;
@@ -11,7 +10,6 @@ using Content.Shared.Random.Helpers;
 using Content.Shared.Throwing;
 //using Content.Shared.Weapons.Hitscan.Components;
 //using Content.Shared.Weapons.Hitscan.Events;
-using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Containers;
 using Robust.Shared.Random;
 
@@ -19,7 +17,6 @@ namespace Content.Shared.FCB.AltBlocking;
 
 public sealed partial class AltBlockingSystem
 {
-
     private void OnBlockUserCollide(Entity<AltBlockingUserComponent> ent, ref ProjectileBlockAttemptEvent args)
     {
         args.CancelledHit = TryBlock(ent.Comp.BlockingItemsShields, args.Damage, ent.Comp);

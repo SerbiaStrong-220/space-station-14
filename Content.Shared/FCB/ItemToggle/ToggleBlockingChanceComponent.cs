@@ -11,6 +11,7 @@ public sealed partial class ToggleBlockingChanceComponent : Component
     [DataField]
     [AutoNetworkedField]
     public DamageModifierSet? OriginalActiveModifier;
+
     [DataField, AutoNetworkedField]
     public bool IsToggled = false;
 

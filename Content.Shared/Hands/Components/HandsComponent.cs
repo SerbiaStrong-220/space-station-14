@@ -1,6 +1,9 @@
+using Content.Shared.Damage;
 using Content.Shared.DisplacementMap;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Item;
 using Content.Shared.Whitelist;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -101,6 +104,14 @@ public sealed partial class HandsComponent : Component
     /// </summary>
     [DataField]
     public bool CanBeStripped = true;
+
+    //FCB add hand damage override begin
+    /// <summary>
+    /// If false, hands will not override damage
+    /// </summary>
+    [DataField]
+    public bool HandsOverrideDamage = false;
+    //FCB add hand damage override end
 }
 
 [DataDefinition]
@@ -135,6 +146,27 @@ public partial record struct Hand
     [DataField]
     public EntityWhitelist? Blacklist;
 
+    //FCB added hand damage begin
+    [DataField]
+    public DamageSpecifier? DamageOverride;
+
+    [DataField, AutoNetworkedField]
+    public float AttackRate = 1f;
+
+    [DataField, AutoNetworkedField]
+    public bool AltDisarm = true;
+
+    [DataField, AutoNetworkedField]
+    public bool AutoAttack;
+
+    [DataField, AutoNetworkedField]
+    public float Range = 1.5f;
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField("soundHit"), AutoNetworkedField]
+    public SoundSpecifier? HitSound;
+    //FCB added hand damage end
+
     public Hand()
     {
 
@@ -147,6 +179,12 @@ public partial record struct Hand
         EmptyRepresentative = emptyRepresentative;
         Whitelist = whitelist;
         Blacklist = blacklist;
+
+        if (Whitelist == null)
+        {
+            Whitelist = new EntityWhitelist();
+            Whitelist.Sizes = new List<ProtoId<ItemSizePrototype>> { "Tiny", "Small", "Normal", "Large", "Huge", "Ginormous" };
+        }
     }
 }
 

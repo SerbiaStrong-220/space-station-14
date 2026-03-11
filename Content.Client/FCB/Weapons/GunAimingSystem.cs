@@ -45,11 +45,11 @@ public sealed partial class GunAimingSystem : SharedGunAimingSystem
 
         if (_inputSystem.CmdStates.GetState(useKey) == BoundKeyState.Down && !aimableComp.IsAimed)
         {
-            RaisePredictiveEvent(new AimStatusChangedEvent { Gun = GetNetEntity(gunUid), Aim = true, User = GetNetEntity(entity) });
+            RaisePredictiveEvent(new AimStatusChangeAttemptEvent { Gun = GetNetEntity(gunUid), Aim = true, User = GetNetEntity(entity) });
             return;
         }
 
-        if(_inputSystem.CmdStates.GetState(useKey) == BoundKeyState.Up && aimableComp.IsAimed)
-            RaisePredictiveEvent(new AimStatusChangedEvent { Gun = GetNetEntity(gunUid), Aim = false, User = GetNetEntity(entity) });
+        if (_inputSystem.CmdStates.GetState(useKey) == BoundKeyState.Up && aimableComp.IsAimed)
+            RaisePredictiveEvent(new AimStatusChangeAttemptEvent { Gun = GetNetEntity(gunUid), Aim = false, User = GetNetEntity(entity) });
     }
 }

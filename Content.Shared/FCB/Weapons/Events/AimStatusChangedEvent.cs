@@ -7,7 +7,7 @@ namespace Content.Shared.Weapons.Ranged.Events;
 /// Raised on the client to request it change of aiming status.
 /// </summary>
 [Serializable, NetSerializable]
-public sealed class AimStatusChangedEvent : EntityEventArgs
+public sealed class AimStatusChangeAttemptEvent : EntityEventArgs
 {
     public NetEntity Gun;
 

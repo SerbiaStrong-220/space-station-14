@@ -22,6 +22,10 @@
     {
         "name": "medicalmultitool",
         "directions": 4
+    },
+    {
+        "name": "armoredsynth",
+        "directions": 4
     }
   ]
 }
