@@ -72,3 +72,8 @@
   id: olivier
   flavorType: Complex
   description: flavor-complex-olivier
+
+- type: flavor
+  id: pear
+  flavorType: Complex
+  description: flavor-complex-pear

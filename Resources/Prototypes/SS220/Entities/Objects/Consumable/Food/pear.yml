@@ -1,0 +1,60 @@
+- type: entity
+  name: груша
+  parent: FoodProduceBase
+  id: FoodPear
+  description: НАЛЕЙ ПАХАНУ ЧИФИРОЧКУ
+  components:
+  - type: FlavorProfile
+    flavors:
+      - pear
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 14
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Vitamin
+          Quantity: 4
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Hydroponics/pear.rsi
+  - type: Item
+    heldPrefix: produce
+  - type: Produce
+    seedId: pear
+  - type: Tag
+    tags:
+    - Fruit
+  - type: FoodSequenceElement
+    entries:
+      Burger: Pear
+      Taco: Pear
+
+- type: entity
+  name: грушевый тарт
+  parent: FoodPieBase
+  id: FoodTartPear
+  description: Вкуснейший грушевый тарт, который можно приготовить в печи. НАЛЕЙ ПАХАНУ ЧИФИРОЧКУ
+  components:
+  - type: FlavorProfile
+    flavors:
+      - sweet
+      - pear
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/Baked/pie.rsi
+    state: pear
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+        - ReagentId: Vitamin
+          Quantity: 5
+        - ReagentId: Sugar
+          Quantity: 5
+  - type: Tag
+    tags:
+    - Fruit
+    - Pie

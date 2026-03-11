@@ -24,6 +24,7 @@ food-sequence-content-lime = лаймом
 food-sequence-content-orange = апельсином
 food-sequence-content-potato = картофелем
 food-sequence-content-apple = яблоком
+food-sequence-content-pear = грушей
 food-sequence-content-cocoa = какао
 food-sequence-content-corn = кукурузой
 food-sequence-content-chili = чили
