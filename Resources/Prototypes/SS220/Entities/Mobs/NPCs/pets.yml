@@ -24,8 +24,8 @@
     makeSentient: true
     allowSpeech: true
     allowMovement: true
-    name: "Рокси"
-    description: "Собака службы безопасности. Издевайтесь над офицерами, чтобы погладить их по голове и преследовать жестоких преступников по пятам"
+    name: ghost-role-information-security-pet-Roxi-name
+    description: ghost-role-information-security-pet-Roxi-description
     job: SecurityPet
   - type: GhostTakeoverAvailable
   - type: InteractionPopup
