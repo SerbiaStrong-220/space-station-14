@@ -125,10 +125,10 @@ public abstract partial class SharedChatSystem : EntitySystem
         output = input;
 
         //SS220-Fix-DefaultRadioPrefix-Begin
-        if (input.StartsWith($":{DefaultChannelKey}")) // ":р"
+        if (input.StartsWith($":{DefaultChannelKey}"))
         {
-            prefix = input[..2];  // ":р"
-            output = input[2..].TrimStart();  // "Привет"
+            prefix = input[..2];
+            output = input[2..].TrimStart();
             return;
         }
         //SS220-Fix-DefaultRadioPrefix-End
