@@ -31,16 +31,13 @@ public sealed partial class PathologySystem : SharedPathologySystem
         }
 
         var entity = _random.Pick(randomEntityPrototype.Weights);
+        context = new EntityProvidedPathologyContext { ProtoId = entity };
 
-        if (!Resolve(provider.Owner, ref provider.Comp, logMissing: false))
-            return false;
-
-        context = new EntityProvidedPathologyContext()
+        if (Resolve(provider.Owner, ref provider.Comp, logMissing: false))
         {
-            ProtoId = entity,
-            DNAs = provider.Comp.DNAs,
-            Fingerprints = provider.Comp.Fingerprints
-        };
+            context.DNAs = provider.Comp.DNAs;
+            context.Fingerprints = provider.Comp.Fingerprints;
+        }
 
         return true;
     }

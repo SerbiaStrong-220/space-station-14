@@ -4,7 +4,6 @@
   name: bullet (.60, deformed)
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
     state: bullet
 
 - type: entity
@@ -13,7 +12,7 @@
   name: large bullet fragment (.60)
   components:
   - type: Sprite
-    state: metal-2
+    state: metal-1
 
 - type: entity
   id: FragmentAntiMaterielSmall
@@ -21,4 +20,4 @@
   name: bullet fragments (.60)
   components:
   - type: Sprite
-    state: metal-3
+    state: metal-0

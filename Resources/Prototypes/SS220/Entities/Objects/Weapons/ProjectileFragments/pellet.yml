@@ -4,5 +4,4 @@
   name: pellet fragments
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
     state: bullet-casing

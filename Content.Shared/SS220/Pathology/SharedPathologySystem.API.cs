@@ -60,7 +60,7 @@ public abstract partial class SharedPathologySystem
 
         var pickedPathology = _random.Pick(correctInput);
 
-        return TryAddPathology(entity, pickedPathology);
+        return TryAddPathology(entity, pickedPathology, context);
     }
 
     public bool TryAddPathology(Entity<PathologyHolderComponent?> entity, ProtoId<PathologyPrototype> pathologyId, IPathologyContext? context = null)
