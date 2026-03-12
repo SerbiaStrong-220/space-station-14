@@ -131,7 +131,7 @@ public abstract partial class SharedChatSystem : EntitySystem
             output = input[2..].TrimStart();  // "Привет"
             return;
         }
-        //SS220-Fix-DefaultRadioPrefix-Begin
+        //SS220-Fix-DefaultRadioPrefix-End
 
         // If the string is less than 2, then it's probably supposed to be an emote.
         // No one is sending empty radio messages!
