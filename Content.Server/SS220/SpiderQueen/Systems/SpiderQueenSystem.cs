@@ -3,6 +3,7 @@
 using Content.Server.Chat.Systems;
 using Content.Server.Interaction;
 using Content.Server.Pinpointer;
+using Content.Server.Popups;
 using Content.Server.SS220.SpiderQueen.Components;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.DoAfter;
@@ -11,6 +12,7 @@ using Content.Shared.Maps;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
+using Content.Shared.Spider;
 using Content.Shared.SS220.SpiderQueen;
 using Content.Shared.SS220.SpiderQueen.Components;
 using Content.Shared.SS220.SpiderQueen.Systems;
@@ -22,6 +24,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -47,6 +50,8 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
     [Dependency] private readonly TileSystem _tile = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly InteractionSystem _interaction = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     public override void Initialize()
     {
@@ -85,6 +90,18 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         if (args.Handled ||
             !CheckEnoughBloodPoints(performer, args.Cost))
             return;
+
+        if (args.Target.GetGridUid(EntityManager) == null)
+        {
+            _popup.PopupEntity(Loc.GetString("spider-web-action-nogrid"), performer, performer);
+            return;
+        }
+
+        if (AllPrototypesAreWeb(args.Prototypes) && IsTileBlockedByWeb(args.Target))
+        {
+            _popup.PopupEntity(Loc.GetString("spider-web-action-fail"), performer, performer);
+            return;
+        }
 
         if (TryStartSpiderSpawnDoAfter(performer, args.DoAfter, args.Target, args.Prototypes, args.Offset, args.SnapToGrid, args.Cost))
         {
@@ -349,5 +366,39 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
 
         var started = _doAfter.TryStartDoAfter(doAfterArgs);
         return started;
+    }
+
+    private bool IsTileBlockedByWeb(EntityCoordinates coords)
+    {
+        var gridUid = coords.GetGridUid(EntityManager);
+        if (gridUid == null)
+            return false;
+
+        if (!TryComp<MapGridComponent>(gridUid.Value, out var gridComp))
+            return false;
+
+        var anchored = _mapSystem.GetAnchoredEntities((gridUid.Value, gridComp), coords);
+        foreach (var ent in anchored)
+        {
+            if (HasComp<SpiderWebObjectComponent>(ent))
+                return true;
+        }
+        return false;
+    }
+
+    private bool AllPrototypesAreWeb(List<EntitySpawnEntry> prototypes)
+    {
+        foreach (var entry in prototypes)
+        {
+            if (string.IsNullOrEmpty(entry.PrototypeId))
+                continue;
+
+            if (!_prototype.TryIndex<EntityPrototype>(entry.PrototypeId, out var proto))
+                continue;
+
+            if (!proto.Components.ContainsKey("SpiderWebObject"))
+                return false;
+        }
+        return true;
     }
 }
