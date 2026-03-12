@@ -139,7 +139,9 @@
         Blunt: 12
     shuttleNavInfo:
       enabled: true
-
+  - type: Tag
+    tags:
+    - AirDefenseTarget
 
 - type: entity
   id: BulletGrenadeSuperArta
