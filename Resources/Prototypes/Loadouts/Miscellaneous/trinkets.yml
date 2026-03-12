@@ -265,13 +265,6 @@
     - ClothingNeckGenderfluidPin
   groupBy: "pin"
 
-- type: loadout
-  id: ClothingNeckUSSPPin
-  storage:
-    back:
-    - ClothingNeckUSSPPin
-  groupBy: "pin"
-
 # Canes
 # The white cane is intentionally not included here. Thats for the blind.
 - type: loadout
