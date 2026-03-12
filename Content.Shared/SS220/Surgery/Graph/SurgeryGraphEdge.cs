@@ -14,6 +14,9 @@ public sealed partial class SurgeryGraphEdge : ISerializationHooks
     [DataField("to", required: true)]
     public string Target = string.Empty;
 
+    [DataField("id", required: true)]
+    public string Id = string.Empty;
+
     [DataField]
     public ProtoId<AbstractSurgeryEdgePrototype>? BaseEdge { get; private set; }
 

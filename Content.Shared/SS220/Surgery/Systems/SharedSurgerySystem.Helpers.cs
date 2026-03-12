@@ -141,6 +141,9 @@ public abstract partial class SharedSurgerySystem
             return;
         }
 
+        if (entity.Comp.OngoingSurgeries.TryGetValue(surgeryGraph.ID, out var currentNode) && currentNode == foundNode.Name)
+            return;
+
         entity.Comp.OngoingSurgeries[surgeryGraph.ID] = foundNode.Name;
 
         if (SurgeryGraph.Popup(foundNode) is null)

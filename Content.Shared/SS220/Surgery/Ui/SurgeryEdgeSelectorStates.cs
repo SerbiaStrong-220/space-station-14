@@ -16,8 +16,9 @@ public sealed partial class SurgeryEdgeSelectorEdgesState : BoundUserInterfaceSt
 }
 
 [Serializable, NetSerializable]
-public sealed partial class EdgeSelectInfo(string targetNode, ProtoId<SurgeryGraphPrototype> surgeryProtoId, LocId tooltip, bool metEdgeRequirement, SpriteSpecifier? icon, string? failureReason)
+public sealed partial class EdgeSelectInfo(string edgeId, string targetNode, ProtoId<SurgeryGraphPrototype> surgeryProtoId, LocId tooltip, bool metEdgeRequirement, SpriteSpecifier? icon, string? failureReason)
 {
+    public string TargetEdgeId = edgeId;
     public string TargetNode = targetNode;
     public ProtoId<SurgeryGraphPrototype> SurgeryProtoId = surgeryProtoId;
 

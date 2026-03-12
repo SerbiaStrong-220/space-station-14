@@ -6,15 +6,17 @@ using Robust.Shared.Serialization;
 using Robust.Shared.Prototypes;
 
 [Serializable, NetSerializable]
-public sealed partial class SurgeryDoAfterEvent : SimpleDoAfterEvent
+public sealed partial class SurgeryDoAfterEvent: SimpleDoAfterEvent
 {
     public ProtoId<SurgeryGraphPrototype> SurgeryGraph;
 
+    public string EdgeId;
     public string TargetEdge;
 
-    public SurgeryDoAfterEvent(ProtoId<SurgeryGraphPrototype> surgeryGraph, string targetEdge) : base()
+    public SurgeryDoAfterEvent(ProtoId<SurgeryGraphPrototype> surgeryGraph, string targetEdgeId, string targetEdge) : base()
     {
         SurgeryGraph = surgeryGraph;
+        EdgeId = targetEdgeId;
         TargetEdge = targetEdge;
     }
 }

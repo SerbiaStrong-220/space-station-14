@@ -30,6 +30,10 @@ mind-slave-disfunction-fix-surgery-examine-description = В открытой ч�
 mind-slave-disfunction-fix-surgery-popup = {THE($user)} подключает порты {THE($used)} к импланту {$used}
 mind-slave-disfunction-fix-surgery-description = SS220 REDACTED
 
+remove-head-bullet-fragments = убирает инородные тела в голову пациента, например фрагменты пуль
+surgery-pathology-requirement-description-head-fragments = Инородные тела в голове пациента
+surgery-pathology-requirement-failure-head-fragments = Инородных тел в голове пациента нету
+
 surgery-requirement-scanner-required = Сканер имплантов
 surgery-requirement-fixer-required = [color=red]{ CAPITALIZE(ent-MindslaveFixerCerebralImplant) }[/color]
 

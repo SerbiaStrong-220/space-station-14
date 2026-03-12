@@ -10,6 +10,6 @@ namespace Content.Shared.SS220.Surgery.Ui;
 public sealed partial class SurgeryEdgeSelectorEdgeSelectedMessage : BoundUserInterfaceMessage
 {
     public ProtoId<SurgeryGraphPrototype> SurgeryId { init; get; } = default;
-    public string TargetNode { init; get; } = string.Empty;
+    public string TargetId { init; get; } = string.Empty;
     public NetEntity? Used;
 }

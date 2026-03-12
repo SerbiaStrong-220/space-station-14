@@ -48,7 +48,7 @@ public sealed class EdgeSelectorBUI(EntityUid owner, Enum uiKey) : BoundUserInte
         ValueList<RadialMenuActionOptionBase> actions = new(selectInfos.Count);
         foreach (var info in selectInfos)
         {
-            var action = new RadialMenuDoubleArgumentActionOption<ProtoId<SurgeryGraphPrototype>, string>(SendSelectedEdge, info.SurgeryProtoId, info.TargetNode)
+            var action = new RadialMenuDoubleArgumentActionOption<ProtoId<SurgeryGraphPrototype>, string>(SendSelectedEdge, info.SurgeryProtoId, info.TargetEdgeId)
             {
                 IconSpecifier = RadialMenuIconSpecifier.With(info.Icon),
                 ToolTip = info.FailureReason ?? Loc.GetString(info.Tooltip),
@@ -62,12 +62,12 @@ public sealed class EdgeSelectorBUI(EntityUid owner, Enum uiKey) : BoundUserInte
         return actions;
     }
 
-    private void SendSelectedEdge(ProtoId<SurgeryGraphPrototype> surgeryId, string targetNode)
+    private void SendSelectedEdge(ProtoId<SurgeryGraphPrototype> surgeryId, string targetEdgeId)
     {
         var msg = new SurgeryEdgeSelectorEdgeSelectedMessage()
         {
             SurgeryId = surgeryId,
-            TargetNode = targetNode,
+            TargetId = targetEdgeId,
             Used = _used
         };
 

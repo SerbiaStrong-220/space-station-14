@@ -99,7 +99,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             case 1:
                 var info = edgeSelectorState.Infos[0];
 
-                if (GetEdgeTargeting(entity, info.SurgeryProtoId, info.TargetNode) is not { } targetingEdge)
+                if (GetEdgeTargeting(entity, info.SurgeryProtoId, info.TargetEdgeId) is not { } targetingEdge)
                     return;
 
                 args.Handled = TryPerformOperationStep(entity, info.SurgeryProtoId, targetingEdge, args.Used, args.User);
@@ -111,7 +111,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
                 {
                     var metedInfo = metedEdges[0];
 
-                    if (GetEdgeTargeting(entity, metedInfo.SurgeryProtoId, metedInfo.TargetNode) is not { } metedEdge)
+                    if (GetEdgeTargeting(entity, metedInfo.SurgeryProtoId, metedInfo.TargetEdgeId) is not { } metedEdge)
                         return;
 
                     args.Handled = TryPerformOperationStep(entity, metedInfo.SurgeryProtoId, metedEdge, args.Used, args.User);
@@ -136,7 +136,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
     private void OnSurgeryEdgeSelectorEdgeSelectedMessage(Entity<SurgeryPatientComponent> entity, ref SurgeryEdgeSelectorEdgeSelectedMessage args)
     {
-        if (GetEdgeTargeting(entity, args.SurgeryId, args.TargetNode) is not { } chosenEdge)
+        if (GetEdgeTargeting(entity, args.SurgeryId, args.TargetId) is not { } chosenEdge)
             return;
 
         TryPerformOperationStep(entity, args.SurgeryId, chosenEdge, GetEntity(args.Used), args.Actor);
@@ -174,7 +174,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         if (!_prototype.Resolve(args.SurgeryGraph, out var surgeryPrototype))
             return;
 
-        if (GetEdgeTargeting(entity, surgeryPrototype, args.TargetEdge) is not { } chosenEdge)
+        if (GetEdgeTargeting(entity, surgeryPrototype, args.EdgeId) is not { } chosenEdge)
             return;
 
         if (!TryMeetRequirement(entity, chosenEdge, args.Used, args.User))
@@ -315,7 +315,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
         if (SurgeryGraph.Delay(chosenEdge) is not { } secondsDelay)
         {
-            Log.Fatal($"Found edge {chosenEdge} with zero delay, graph id {surgeryGraph}");
+            Log.Fatal($"Found edge {chosenEdge.Id} with zero delay, graph id {surgeryGraph}");
             secondsDelay = ErrorGettingDelayDelay;
         }
 
@@ -331,7 +331,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
         var performerDoAfterEventArgs =
             new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(secondsDelay),
-                new SurgeryDoAfterEvent(surgeryGraph, chosenEdge.Target), entity.Owner, target: entity.Owner, used: used)
+                new SurgeryDoAfterEvent(surgeryGraph, chosenEdge.Id, chosenEdge.Target), entity.Owner, target: entity.Owner, used: used)
             {
                 NeedHand = true,
                 BreakOnMove = true,

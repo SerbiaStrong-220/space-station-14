@@ -53,6 +53,7 @@
   id: incision
   edge:
     to: abstract
+    id: abstract
     delay: 4
     edgeTooltip: abstract
     sound: /Audio/SS220/Surgery/incision.ogg
@@ -74,6 +75,7 @@
   id: retract-skin
   edge:
     to: abstract
+    id: abstract
     delay: 4
     edgeTooltip: abstract
     sound: /Audio/SS220/Surgery/retract_skin.ogg
@@ -95,6 +97,7 @@
   id: saw-bone
   edge:
     to: abstract
+    id: abstract
     delay: 12
     edgeTooltip: abstract
     sound: /Audio/SS220/Surgery/saw.ogg
@@ -116,6 +119,7 @@
   id: clamp-bleeders
   edge:
     to: abstract
+    id: abstract
     delay: 4
     edgeTooltip: abstract
     sound: /Audio/SS220/Surgery/organ.ogg
@@ -137,6 +141,7 @@
   id: seal-wound
   edge:
     to: abstract
+    id: abstract
     delay: 4
     edgeTooltip: abstract
     sound: /Audio/SS220/Surgery/seal_wound.ogg

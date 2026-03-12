@@ -47,7 +47,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
                     break;
                 }
 
-                edgesInfoList.Add(new(edge.Target, surgeryId, edge.EdgeTooltip, meetRequirement, SurgeryGraph.EdgeIcon(edge), failureReason));
+                edgesInfoList.Add(new(edge.Id, edge.Target, surgeryId, edge.EdgeTooltip, meetRequirement, SurgeryGraph.EdgeIcon(edge), failureReason));
             }
         }
 
@@ -89,24 +89,15 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         }
     }
 
-    private SurgeryGraphEdge? GetEdgeTargeting(Entity<SurgeryPatientComponent> entity, ProtoId<SurgeryGraphPrototype> surgeryGraphId, string targetNode)
+    private SurgeryGraphEdge? GetEdgeTargeting(Entity<SurgeryPatientComponent> entity, ProtoId<SurgeryGraphPrototype> surgeryGraphId, string edgeId)
     {
         if (!entity.Comp.OngoingSurgeries.TryGetValue(surgeryGraphId, out var currentNode))
         {
-            Log.Error($"Tried to get edge targeting node {targetNode} in surgery {surgeryGraphId}, but entity doesn't have this surgery ongoing!");
+            Log.Error($"Tried to get edge with id {edgeId} in surgery {surgeryGraphId}, but entity doesn't have this surgery ongoing!");
             return null;
         }
 
-        if (!_prototype.Resolve(surgeryGraphId, out var graphProto))
-            return null;
-
-        if (!graphProto.TryGetNode(currentNode, out var currentSurgeryNode))
-        {
-            Log.Fatal($"Current node has incorrect value {currentNode} for graph proto {surgeryGraphId}");
-            return null;
-        }
-
-        return currentSurgeryNode.Edges.FirstOrDefault<SurgeryGraphEdge?>(x => x?.Target == targetNode);
+        return GetEdges(surgeryGraphId, currentNode).FirstOrDefault<SurgeryGraphEdge?>(x => x?.Id == edgeId);
     }
 
     public bool CanPerformAnyEdgeInSurgery(Entity<SurgeryPatientComponent> entity, ProtoId<SurgeryGraphPrototype> graphProtoId, EntityUid? used, EntityUid user)
