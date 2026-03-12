@@ -12,6 +12,7 @@ using Content.Shared.Maps;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
+using Content.Shared.Prototypes;
 using Content.Shared.Spider;
 using Content.Shared.SS220.SpiderQueen;
 using Content.Shared.SS220.SpiderQueen.Components;
@@ -396,7 +397,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
             if (!_prototype.TryIndex<EntityPrototype>(entry.PrototypeId, out var proto))
                 continue;
 
-            if (!proto.Components.ContainsKey("SpiderWebObject"))
+            if (!proto.HasComponent<SpiderWebObjectComponent>())
                 return false;
         }
         return true;

@@ -231,12 +231,16 @@
   - type: Airtight
   - type: Sprite
     sprite: SS220/Structures/web_passage.rsi
-    state: webpassage
     color: gray
+    layers:
+    - state: webpassage
+      shader: unshaded
   - type: Icon
     sprite: SS220/Structures/web_passage.rsi
-    state: webpassage
     color: gray
+    layers:
+    - state: webpassage
+      shader: unshaded
   - type: SpiderWebPassage
 
 # Cocoon

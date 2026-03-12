@@ -64,7 +64,7 @@ ent-ActionSpawnSingleSpiderWebLongDelay = { ent-ActionSpawnSingleSpiderWebShortD
 ent-ActionSpawnSingleSpiderWebDurable = Пустить прочную паутину
     .desc = { ent-ActionSpawnSingleSpiderWebShortDelay.desc }
 
-ent-ActionSpawnSingleSpiderWebDurableBloodPoints  = { ent-ActionSpawnSingleSpiderWebDurable }
+ent-ActionSpawnSingleSpiderWebDurableBloodPoints = { ent-ActionSpawnSingleSpiderWebDurable }
     .desc = Создаёт паутину, которая замедляет вашу добычу.
             Стоимость [color=#800000]2 крови[/color].
 
