@@ -124,6 +124,15 @@ public abstract partial class SharedChatSystem : EntitySystem
         prefix = string.Empty;
         output = input;
 
+        //SS220-Fix-DefaultRadioPrefix-Begin
+        if (input.StartsWith($":{DefaultChannelKey}")) // ":р"
+        {
+            prefix = input[..2];  // ":р"
+            output = input[2..].TrimStart();  // "Привет"
+            return;
+        }
+        //SS220-Fix-DefaultRadioPrefix-Begin
+
         // If the string is less than 2, then it's probably supposed to be an emote.
         // No one is sending empty radio messages!
 
