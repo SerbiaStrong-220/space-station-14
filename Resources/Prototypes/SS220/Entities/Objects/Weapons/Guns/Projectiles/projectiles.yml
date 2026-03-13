@@ -139,7 +139,9 @@
         Blunt: 12
     shuttleNavInfo:
       enabled: true
-
+  - type: Tag
+    tags:
+    - AirDefenseTarget
 
 - type: entity
   id: BulletGrenadeSuperArta
@@ -564,7 +566,7 @@
     impactEffect: BulletImpactEffectBlaster
     damage:
       types:
-        Heat: 12
+        Heat: 14
         Piercing: 4
     soundHit:
       collection: WeakHit
