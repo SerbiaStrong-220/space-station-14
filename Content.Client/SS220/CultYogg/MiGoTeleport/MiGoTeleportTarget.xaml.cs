@@ -5,7 +5,7 @@ using Robust.Client.Graphics;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 
-namespace Content.Client.SS220.CultYogg.MiGo.UI;
+namespace Content.Client.SS220.CultYogg.MiGoTeleport;
 
 [GenerateTypedNameReferences]
 public sealed partial class MiGoTeleportTarget : BoxContainer
