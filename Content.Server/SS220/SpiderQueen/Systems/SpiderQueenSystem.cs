@@ -4,6 +4,7 @@ using Content.Server.Chat.Systems;
 using Content.Server.Interaction;
 using Content.Server.Pinpointer;
 using Content.Server.Popups;
+using Content.Server.SS220.Spider;
 using Content.Server.SS220.SpiderQueen.Components;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.DoAfter;
@@ -19,6 +20,7 @@ using Content.Shared.SS220.SpiderQueen.Components;
 using Content.Shared.SS220.SpiderQueen.Systems;
 using Content.Shared.Storage;
 using Robust.Server.GameObjects;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
@@ -53,6 +55,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
     [Dependency] private readonly InteractionSystem _interaction = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly SpiderWebSystem _spiderWeb = default!;
 
     public override void Initialize()
     {
@@ -112,7 +115,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
             return true;
         }
 
-        if (AllPrototypesAreWeb(args.Prototypes) && IsTileBlockedByWeb(args.Target))
+        if (AllPrototypesAreWeb(args.Prototypes) && _spiderWeb.IsTileBlockedByWeb(args.Target))
         {
             _popup.PopupEntity(Loc.GetString("spider-web-action-fail"), performer, performer);
             return;
@@ -328,7 +331,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         var msg = Loc.GetString("spider-queen-warning",
             ("location", FormattedMessage.RemoveMarkupOrThrow(_navMap.GetNearestBeaconString((uid, xform)))));
         _chat.DispatchGlobalAnnouncement(msg, playSound: false, colorOverride: Color.Red);
-        _audio.PlayGlobal("/Audio/Misc/notice1.ogg", Filter.Broadcast(), true);
+        _audio.PlayGlobal(new SoundPathSpecifier("/Audio/Misc/notice1.ogg"), Filter.Broadcast(), true);
         component.IsAnnouncedOnce = true;
     }
 
@@ -387,23 +390,5 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
 
         var started = _doAfter.TryStartDoAfter(doAfterArgs);
         return started;
-    }
-
-    private bool IsTileBlockedByWeb(EntityCoordinates coords)
-    {
-        var gridUid = coords.GetGridUid(EntityManager);
-        if (gridUid == null)
-            return false;
-
-        if (!TryComp<MapGridComponent>(gridUid.Value, out var gridComp))
-            return false;
-
-        var anchored = _mapSystem.GetAnchoredEntities((gridUid.Value, gridComp), coords);
-        foreach (var ent in anchored)
-        {
-            if (HasComp<SpiderWebObjectComponent>(ent))
-                return true;
-        }
-        return false;
     }
 }

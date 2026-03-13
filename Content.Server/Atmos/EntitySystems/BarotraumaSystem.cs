@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Server.Administration.Logs;
 using Content.Server.Atmos.Components;
+using Content.Server.SS220.Spider;
 using Content.Server.SS220.SpiderQueen.Components;
 using Content.Shared.Alert;
 using Content.Shared.Atmos;
@@ -9,9 +10,7 @@ using Content.Shared.Database;
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
-using Content.Shared.Spider;
 using Robust.Shared.Containers;
-using Robust.Shared.Map.Components;
 
 namespace Content.Server.Atmos.EntitySystems
 {
@@ -22,7 +21,7 @@ namespace Content.Server.Atmos.EntitySystems
         [Dependency] private readonly AlertsSystem _alertsSystem = default!;
         [Dependency] private readonly IAdminLogManager _adminLogger= default!;
         [Dependency] private readonly InventorySystem _inventorySystem = default!;
-        [Dependency] private readonly SharedMapSystem _mapSystem = default!; // SS220 spider queen update
+        [Dependency] private readonly SpiderWebSystem _spiderWeb = default!; // SS220 spider queen update
 
         private const float UpdateTimer = 1f;
         private float _timer;
@@ -208,19 +207,7 @@ namespace Content.Server.Atmos.EntitySystems
                 return false;
 
             var transform = Transform(uid);
-            if (transform.GridUid == null)
-                return false;
-
-            if (!TryComp<MapGridComponent>(transform.GridUid.Value, out var gridComp))
-                return false;
-
-            var anchored = _mapSystem.GetAnchoredEntities((transform.GridUid.Value, gridComp), transform.Coordinates);
-            foreach (var ent in anchored)
-            {
-                if (HasComp<SpiderWebObjectComponent>(ent))
-                    return true;
-            }
-            return false;
+            return _spiderWeb.IsTileBlockedByWeb(transform.Coordinates);
         }
         // SS220 spider queen update END
 
