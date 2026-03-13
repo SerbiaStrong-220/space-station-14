@@ -6,24 +6,30 @@ using Content.Shared.FCB.Mech.Components;
 using Content.Shared.FCB.Mech.Equipment.Components;
 using Content.Shared.FCB.Mech.Parts.Components;
 using Content.Shared.FCB.Mech.Systems;
+using Content.Shared.Flash;
+using Content.Shared.Flash.Components;
 using Content.Shared.Interaction;
+using Content.Shared.Item.ItemToggle;
+using Content.Shared.Toggleable;
 using Robust.Shared.Containers;
 
 namespace Content.Server.FCB.Mech.Systems;
 
 /// <summary>
-/// Handles the insertion of mech equipment into mechs.
+/// Handles the insertion of mech equipment into mechs and it's logic
 /// </summary>
 public sealed class MechEquipmentSystem : EntitySystem
 {
     [Dependency] private readonly AltMechSystem _mech = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly ItemToggleSystem _toggle = default!;
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<MechEquipmentActionComponent, ComponentStartup>(OnStartup);
+
         SubscribeLocalEvent<AltMechEquipmentComponent, AfterInteractEvent>(OnUsed);
         SubscribeLocalEvent<AltMechEquipmentComponent, InsertEquipmentEvent>(OnInsertEquipment);
 
@@ -32,6 +38,15 @@ public sealed class MechEquipmentSystem : EntitySystem
 
         SubscribeLocalEvent<MechEquipmentStatModifierComponent, MechEquipmentInsertedEvent>(OnStatsEquipmentInserted);
         SubscribeLocalEvent<MechEquipmentStatModifierComponent, MechEquipmentRemovedEvent>(OnStatsEquipmentRemoved);
+
+        SubscribeLocalEvent<ToggleableMechEquipmentComponent, ToggleActionEvent>(OnEquipmentToggle);
+
+        SubscribeLocalEvent<AltMechEquipmentComponent, MechEquipmentRelayedEvent<FlashAttemptEvent>>(OnFlashAttempt);
+    }
+
+    private void OnStartup(Entity<MechEquipmentActionComponent> ent, ref ComponentStartup args)
+    {
+        _actions.AddAction(ent.Owner, ref ent.Comp.EquipmentAbilityAction, ent.Comp.EquipmentAbilityActionName, ent.Owner);
     }
 
     private void OnUsed(Entity<AltMechEquipmentComponent> ent, ref AfterInteractEvent args)
@@ -79,10 +94,7 @@ public sealed class MechEquipmentSystem : EntitySystem
         if (!TryComp<AltMechComponent>(args.Mech, out var mechComp))
             return;
 
-        //if (ent.Comp.EquipmentAbilityAction != null)
-        //    _actions.AddAction(args.Mech, ent.Comp.EquipmentAbilityActionName, (EntityUid)ent.Comp.EquipmentAbilityAction);
-
-        _actions.AddAction(args.Mech, ref ent.Comp.EquipmentAbilityAction, ent.Comp.EquipmentAbilityActionName, args.Mech);
+        _actions.AddAction(args.Mech, ref ent.Comp.EquipmentAbilityAction, ent.Comp.EquipmentAbilityActionName, ent.Owner);
     }
 
     private void OnEquipmentActionRemoved(Entity<MechEquipmentActionComponent> ent, ref MechEquipmentRemovedEvent args)
@@ -90,10 +102,8 @@ public sealed class MechEquipmentSystem : EntitySystem
         if (!TryComp<AltMechComponent>(args.Mech, out var mechComp))
             return;
 
-        //if (ent.Comp.EquipmentAbilityAction != null)
-        //    _actions.RemoveAction(args.Mech, ent.Comp.EquipmentAbilityAction);
-
-        _actions.RemoveAction(ent.Comp.EquipmentAbilityAction);
+        if (ent.Comp.EquipmentAbilityAction != null)
+            _actions.RemoveProvidedAction(args.Mech, ent.Owner, (EntityUid)ent.Comp.EquipmentAbilityAction);
     }
 
     private void OnStatsEquipmentInserted(Entity<MechEquipmentStatModifierComponent> ent, ref MechEquipmentInsertedEvent args)
@@ -106,6 +116,12 @@ public sealed class MechEquipmentSystem : EntitySystem
         mechComp.OwnMass += ent.Comp.OwnMassDelta;
 
         mechComp.MaximalArmMass += ent.Comp.MaximalArmMassDelta;
+    }
+
+    private void OnFlashAttempt(Entity<AltMechEquipmentComponent> ent, ref MechEquipmentRelayedEvent<FlashAttemptEvent> args)
+    {
+        if (TryComp<FlashImmunityComponent>(ent.Owner, out var _))
+            args.Args.Cancelled = true;
     }
 
     private void OnStatsEquipmentRemoved(Entity<MechEquipmentStatModifierComponent> ent, ref MechEquipmentRemovedEvent args)
@@ -133,5 +149,10 @@ public sealed class MechEquipmentSystem : EntitySystem
         }
 
         mechComp.MaximalArmMass -= ent.Comp.MaximalArmMassDelta;
+    }
+
+    private void OnEquipmentToggle(Entity<ToggleableMechEquipmentComponent> ent, ref ToggleActionEvent args)
+    {
+        args.Handled = _toggle.Toggle(ent.Owner, args.Performer);
     }
 }

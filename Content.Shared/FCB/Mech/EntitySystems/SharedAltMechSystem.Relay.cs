@@ -12,9 +12,9 @@ public abstract partial class SharedAltMechSystem
         SubscribeLocalEvent<AltMechPilotComponent, FlashAttemptEvent>(RelayRefToMech);
     }
 
-    private void RelayToPilot<T>(Entity<AltMechComponent> uid, T args) where T : class
+    protected void RelayToPilot<T>(Entity<AltMechComponent> ent, T args) where T : class
     {
-        if (uid.Comp.PilotSlot.ContainedEntity is not { } pilot)
+        if (ent.Comp.PilotSlot.ContainedEntity is not { } pilot)
             return;
 
         var ev = new MechPilotRelayedEvent<T>(args);
@@ -22,9 +22,9 @@ public abstract partial class SharedAltMechSystem
         RaiseLocalEvent(pilot, ref ev);
     }
 
-    private void RelayRefToPilot<T>(Entity<AltMechComponent> uid, ref T args) where T :struct
+    protected void RelayRefToPilot<T>(Entity<AltMechComponent> ent, ref T args) where T :struct
     {
-        if (uid.Comp.PilotSlot.ContainedEntity is not { } pilot)
+        if (ent.Comp.PilotSlot.ContainedEntity is not { } pilot)
             return;
 
         var ev = new MechPilotRelayedEvent<T>(args);
@@ -34,20 +34,47 @@ public abstract partial class SharedAltMechSystem
         args = ev.Args;
     }
 
-    private void RelayToMech<T>(Entity<AltMechPilotComponent> uid, T args) where T : class
+    protected void RelayToMech<T>(Entity<AltMechPilotComponent> ent, T args) where T : class
     {
         var ev = new MechPilotRelayedEvent<T>(args);
 
-        RaiseLocalEvent(uid.Comp.Mech, ref ev);
+        RaiseLocalEvent(ent.Comp.Mech, ref ev);
 
         args = ev.Args;
     }
 
-    private void RelayRefToMech<T>(Entity<AltMechPilotComponent> uid, ref T args) where T : struct
+    protected void RelayRefToMech<T>(Entity<AltMechPilotComponent> ent, ref T args) where T : struct
     {
         var ev = new MechPilotRelayedEvent<T>(args);
 
-        RaiseLocalEvent(uid.Comp.Mech, ref ev);
+        RaiseLocalEvent(ent.Comp.Mech, ref ev);
+
+        args = ev.Args;
+    }
+
+    protected void RelayRefToParts<T>(Entity<AltMechComponent> ent, ref T args) where T : struct
+    {
+        var ev = new MechPartRelayedEvent<T>(args);
+
+        foreach (var slot in ent.Comp.ContainerDict)
+        {
+            if (slot.Value.ContainedEntity == null)
+                continue;
+
+            RaiseLocalEvent((EntityUid)slot.Value.ContainedEntity, ref ev);
+        }
+
+        args = ev.Args;
+    }
+
+    protected void RelayRefToEquipment<T>(Entity<AltMechComponent> ent, ref T args) where T : struct
+    {
+        var ev = new MechEquipmentRelayedEvent<T>(args);
+
+        foreach (var equipment in ent.Comp.EquipmentContainer.ContainedEntities)
+        {
+            RaiseLocalEvent(equipment, ref ev);
+        }
 
         args = ev.Args;
     }
@@ -55,4 +82,16 @@ public abstract partial class SharedAltMechSystem
 
 public interface IMechRelayEvent
 {
+}
+
+[ByRefEvent]
+public record struct MechPartRelayedEvent<TEvent>(TEvent Args)
+{
+    public TEvent Args = Args;
+}
+
+[ByRefEvent]
+public record struct MechEquipmentRelayedEvent<TEvent>(TEvent Args)
+{
+    public TEvent Args = Args;
 }

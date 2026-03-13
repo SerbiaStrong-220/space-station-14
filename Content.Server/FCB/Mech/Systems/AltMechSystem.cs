@@ -17,11 +17,11 @@ using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.FCB.AltMech;
 using Content.Shared.FCB.Mech.Components;
-using Content.Shared.FCB.Mech.Equipment.Components;
 using Content.Shared.FCB.Mech.Parts.Components;
 using Content.Shared.FCB.Mech.Systems;
 using Content.Shared.FCB.Mind.Systems;
 using Content.Shared.FixedPoint;
+using Content.Shared.Gravity;
 using Content.Shared.Interaction;
 using Content.Shared.Mech;
 using Content.Shared.Mech.EntitySystems;
@@ -92,8 +92,8 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         SubscribeLocalEvent<AltMechComponent, MechExitEvent>(OnMechExit);
 
         SubscribeLocalEvent<MechPartComponent, ChargeChangedEvent>(OnChargeChanged);
-        SubscribeLocalEvent<AltMechComponent, DamageChangedEvent>(OnDamageChanged);
 
+        SubscribeLocalEvent<AltMechComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<AltMechComponent, DestructionEventArgs>(OnMechDestroyed);
 
         SubscribeLocalEvent<AltMechPilotComponent, MobStateChangedEvent>(OnPilotStateChanged);
@@ -112,13 +112,9 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         #endregion
 
         SubscribeLocalEvent<AltMechComponent, UpdateCanMoveEvent>(OnMechCanMoveEvent);
-
         SubscribeLocalEvent<AltMechComponent, MassChangedEvent>(OnMassChanged);
-
         SubscribeLocalEvent<AltMechPilotComponent, ToolUserAttemptUseEvent>(OnToolUseAttempt);
         SubscribeLocalEvent<AltMechPilotComponent, InhaleLocationEvent>(OnInhale);
-        //SubscribeLocalEvent<AltMechPilotComponent, ExhaleLocationEvent>(OnExhale);
-        //SubscribeLocalEvent<AltMechPilotComponent, AtmosExposedGetAirEvent>(OnExpose);
 
         SubscribeLocalEvent<AltMechPilotComponent, ModifyChangedTemperatureEvent>(OnTemperatureChange);
 
@@ -164,47 +160,12 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         Dirty(uid, component);
     }
 
-    private void OnMapInit(EntityUid uid, AltMechComponent component, MapInitEvent args)
+    private void OnMapInit(Entity<AltMechComponent> ent, ref MapInitEvent args)
     {
-        var xform = Transform(uid);
+        var xform = Transform(ent.Owner);
 
-        _actionBlocker.UpdateCanMove(uid);
-        Dirty(uid, component);
-    }
-
-    private void OnRemoveEquipmentMessage(Entity<AltMechComponent> ent, ref AltMechEquipmentRemoveMessage args)
-    {
-        var equip = GetEntity(args.Equipment);
-
-        if (!Exists(equip) || Deleted(equip))
-            return;
-
-        if (!TryComp<AltMechEquipmentComponent>(equip, out var equipmentComp))
-            return;
-
-        RemoveEquipment(ent.Owner, equip);
-    }
-
-    private void OnRemovePartMessage(Entity<AltMechComponent> ent, ref MechPartRemoveMessage args)
-    {
-        var equip = (ent.Comp.ContainerDict[args.Part].ContainedEntity);
-
-        if (!Exists(equip) || Deleted(equip))
-            return;
-
-        RemovePart(ent.Owner, (EntityUid)equip);
-    }
-
-    private void OnMaintenanceToggledMessage(Entity<AltMechComponent> ent, ref MechMaintenanceToggleMessage args)
-    {
-        ent.Comp.MaintenanceMode = args.Toggled;
-        Dirty(ent.Owner, ent.Comp);
-    }
-
-    private void OnOpenUi(Entity<AltMechComponent> ent, ref MechOpenUiEvent args)
-    {
-        args.Handled = true;
-        ToggleMechUi(ent.Owner, ent.Comp);
+        _actionBlocker.UpdateCanMove(ent.Owner);
+        Dirty(ent);
     }
 
     private void OnToolUseAttempt(Entity<AltMechPilotComponent> ent, ref ToolUserAttemptUseEvent args)
@@ -411,53 +372,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
             return;
     }
 
-    public void OnMechBoltMessage(Entity<AltMechComponent> ent, ref MechBoltMessage args)
-    {
-        if (ent.Comp.BoltsSawed)
-        {
-            _popup.PopupEntity(Loc.GetString("mech-bolts-error"), ent.Owner);
-            return;
-        }
-
-        ent.Comp.Bolted = args.Toggled;
-
-        if (ent.Comp.Bolted)
-        {
-            _audio.PlayPvs(ent.Comp.BoltSound, ent.Owner);
-            return;
-        }
-        _audio.PlayPvs(ent.Comp.UnboltSound, ent.Owner);
-
-        Dirty(ent);
-    }
-
-    public void OnMechSealMessage(Entity<AltMechComponent> ent, ref MechSealMessage args)
-    {
-        ent.Comp.Airtight = args.Toggled;
-
-        _audio.PlayPvs(ent.Comp.SealSound, ent.Owner);
-
-        Dirty(ent);
-
-        if (ent.Comp.PilotSlot == null || ent.Comp.PilotSlot.ContainedEntity == null)
-            return;
-
-        if (TryComp<BarotraumaComponent>(ent.Comp.PilotSlot.ContainedEntity, out var barotraumaComp))
-            barotraumaComp.HasImmunity = ent.Comp.Airtight && ent.Comp.Sealable;
-    }
-
-    public void OnTankDetachMessage(Entity<AltMechComponent> ent, ref MechDetachTankMessage args)
-    {
-        if(ent.Comp.TankSlot.ContainedEntity != null)
-            _container.Remove(ent.Comp.TankSlot.ContainedEntity.Value, ent.Comp.TankSlot);
-    }
-
     private void OnMechExited(Entity<AltMechComponent> ent, ref OnMechExitEvent args)
-    {
-        ExitMech(ent);
-    }
-
-    private void OnMechExit(Entity<AltMechComponent> ent, ref MechExitEvent args)
     {
         ExitMech(ent);
     }
@@ -479,7 +394,9 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         if (TryComp<BarotraumaComponent>(pilot, out var barotraumaComp))
             barotraumaComp.HasImmunity = false;
 
-        if (!TryEject(ent.Owner, ent.Comp))
+        _alerts.ShowAlert(pilot, "Internals", 2);
+
+        if (!TryEject(ent))
         {
             TransferMindIntoMech(ent);
 
@@ -494,12 +411,14 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
             return;
 
         var LeftArmEquipment = mechComp.ContainerDict["left-arm"].ContainedEntity;
+
         if (LeftArmEquipment != null)
         {
             _parts.ProvideItems(mech, (EntityUid)LeftArmEquipment);
         }
 
         var RightArmEquipment = mechComp.ContainerDict["right-arm"].ContainedEntity;
+
         if (RightArmEquipment != null)
         {
             _parts.ProvideItems(mech, (EntityUid)RightArmEquipment);
@@ -512,12 +431,14 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
             return;
 
         var LeftArmEquipment = mechComp.ContainerDict["left-arm"].ContainedEntity;
+
         if (LeftArmEquipment != null)
         {
             _parts.RemoveProvidedItems(mech, (EntityUid)LeftArmEquipment);
         }
 
         var RightArmEquipment = mechComp.ContainerDict["right-arm"].ContainedEntity;
+
         if (RightArmEquipment != null)
         {
             _parts.RemoveProvidedItems(mech, (EntityUid)RightArmEquipment);
@@ -527,7 +448,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
     private void OnMechDestroyed(Entity<AltMechComponent> ent, ref DestructionEventArgs args)
     {
         TransferMindIntoPilot(ent);
-        BreakMech(ent.Owner, ent.Comp);
+        BreakMech(ent);
     }
 
     private void OnDamageChanged(Entity<AltMechComponent> ent, ref DamageChangedEvent args)
@@ -625,6 +546,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
     {
         if (!Resolve(uid, ref component))
             return;
+
         user ??= component.PilotSlot.ContainedEntity;
         if (user == null)
             return;
@@ -640,7 +562,6 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         }
 
         _ui.TryToggleUi(uid, MechUiKey.Key, actor.PlayerSession);
-        //UpdateUserInterface(uid, component);
     }
 
     private void ReceiveEquipmentUiMesssages<T>(EntityUid uid, AltMechComponent component, T args) where T : MechEquipmentUiMessage
@@ -664,8 +585,6 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         if (!Resolve(uid, ref component))
             return;
 
-        //base.UpdateUserInterface(uid, component);
-
         var ev = new MechEquipmentUiStateReadyEvent();
         foreach (var ent in component.ContainerDict.Values)
         {
@@ -686,17 +605,14 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         _ui.SetUiState(uid, MechUiKey.Key, state);
     }
 
-    public override void BreakMech(EntityUid uid, AltMechComponent? component = null)
+    public override void BreakMech(Entity<AltMechComponent> ent)
     {
-        if(!Resolve(uid, ref component))
-            return;
+        TransferMindIntoPilot(ent);
 
-        TransferMindIntoPilot((uid, component));
+        base.BreakMech(ent);
 
-        base.BreakMech(uid, component);
-
-        _ui.CloseUi(uid, MechUiKey.Key);
-        _actionBlocker.UpdateCanMove(uid);
+        _ui.CloseUi(ent.Owner, MechUiKey.Key);
+        _actionBlocker.UpdateCanMove(ent.Owner);
     }
 
     public override void SetIntegrity(EntityUid uid, FixedPoint2 value, AltMechComponent? component = null)
@@ -735,17 +651,14 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         if (!TryComp<BatteryComponent>(battery, out var batteryComp))
             return false;
 
-        //_battery.SetCharge(((EntityUid)battery,batteryComp), batteryComp.LastCharge + delta.Float());
-        //if (batteryComp.LastCharge != component.Energy) //if there's a discrepency, we have to resync them
         _battery.SetCharge((EntityUid)battery, batteryComp.CurrentCharge + delta.Float(), batteryComp);
         if (batteryComp.CurrentCharge != component.Energy) //if there's a discrepency, we have to resync them
         {
-            //Log.Debug($"Battery charge was not equal to mech charge. Battery {batteryComp.LastCharge}. Mech {component.Energy}");
-            //component.Energy = batteryComp.LastCharge;
             Log.Debug($"Battery charge was not equal to mech charge. Battery {batteryComp.CurrentCharge}. Mech {component.Energy}");
             component.Energy = batteryComp.CurrentCharge;
             Dirty(uid, component);
         }
+
         _actionBlocker.UpdateCanMove(uid);
         return true;
     }
@@ -753,40 +666,6 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
     public override void OnStartupServer(Entity<AltMechComponent> ent)
     {
         AddItemsToMech(ent.Owner);
-    }
-
-    public void InsertBattery(EntityUid uid, EntityUid toInsert, AltMechComponent? component = null, BatteryComponent? battery = null)
-    {
-        if (!Resolve(uid, ref component, false))
-            return;
-
-        if (!Resolve(toInsert, ref battery, false))
-            return;
-
-        _container.Insert(toInsert, component.ContainerDict["power"]);
-        //component.Energy = battery.LastCharge; uncomment when upstream goes out
-        component.Energy = battery.CurrentCharge;
-        component.MaxEnergy = battery.MaxCharge;
-
-        _actionBlocker.UpdateCanMove(uid);
-
-        Dirty(uid, component);
-        //UpdateUserInterface(uid, component);
-    }
-
-    public void RemoveBattery(EntityUid uid, AltMechComponent? component = null)
-    {
-        if (!Resolve(uid, ref component))
-            return;
-
-        _container.EmptyContainer(component.ContainerDict["power"]);
-        component.Energy = 0;
-        component.MaxEnergy = 0;
-
-        _actionBlocker.UpdateCanMove(uid);
-
-        Dirty(uid, component);
-        //UpdateUserInterface(uid, component);
     }
 
     private void OnTemperatureChange(Entity<AltMechPilotComponent> ent, ref ModifyChangedTemperatureEvent args)
@@ -804,20 +683,34 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
     #region Atmos Handling
     private void OnInhale(Entity<AltMechPilotComponent> ent, ref InhaleLocationEvent args)
     {
-        if (!TryComp<AltMechComponent>(ent.Comp.Mech, out var mech) || mech.TankSlot == null || mech.TankSlot.ContainedEntity == null)
+        if (!TryComp<AltMechComponent>(ent.Comp.Mech, out var mechComp) || mechComp.TankSlot == null || mechComp.TankSlot.ContainedEntity == null)
         {
             return;
         }
 
-        if (!TryComp<GasTankComponent>(mech.TankSlot.ContainedEntity, out var tankComp))
+        if (!TryComp<GasTankComponent>(mechComp.TankSlot.ContainedEntity, out var tankComp))
             return;
 
-        if (mech.Airtight)
+        if (mechComp.Airtight)
         {
-            args.Gas = _gasTank.RemoveAirVolume((mech.TankSlot.ContainedEntity.Value, tankComp), args.Respirator.BreathVolume);
-            // TODO: Should listen to gas tank updates instead I guess?
-            //_alerts.ShowAlert(ent.Owner, "Internals", GetSeverity(ent));
+            args.Gas = _gasTank.RemoveAirVolume((mechComp.TankSlot.ContainedEntity.Value, tankComp), args.Respirator.BreathVolume);
+            _alerts.ShowAlert(ent.Owner, "Internals", GetSeverity((ent.Comp.Mech, mechComp)));
         }
+    }
+
+    private short GetSeverity(Entity<AltMechComponent> ent)
+    {
+        short severity = 2;
+
+        if (ent.Comp.Airtight && ent.Comp.TankSlot.ContainedEntity != null)
+        {
+            --severity;
+
+            if (TryComp<GasTankComponent>(ent.Comp.TankSlot.ContainedEntity, out var tankComp) && tankComp.IsLowPressure)
+                --severity;
+        }
+
+        return severity;
     }
     #endregion
 }

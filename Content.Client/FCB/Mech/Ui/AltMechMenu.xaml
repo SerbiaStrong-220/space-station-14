@@ -194,12 +194,12 @@
                 <ScrollContainer
                     HScrollEnabled="False"
                     HorizontalExpand="True"
-                    MinSize="100 256"
+                    MinSize="256 512"
                     SizeFlagsStretchRatio="2"
                     VerticalExpand="True">
                     <BoxContainer
                         Name="EquipmentControlContainer"
-                        MinSize="100 256"
+                        MinSize="256 512"
                         Orientation="Vertical"
                         SizeFlagsStretchRatio="2"
                         VerticalExpand="True">

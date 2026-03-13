@@ -7,15 +7,18 @@ using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Eye.Blinding.Systems;
+using Content.Shared.FCB.Mech.Components;
+using Content.Shared.FCB.Mech.Equipment.Components;
+using Content.Shared.FCB.Mech.Parts.Components;
+using Content.Shared.FCB.Mech.Systems;
+using Content.Shared.Flash;
+using Content.Shared.Flash.Components;
 using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Power.Components;
-using Content.Shared.FCB.Mech.Components;
-using Content.Shared.FCB.Mech.Parts.Components;
-using Content.Shared.FCB.Mech.Systems;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 
@@ -53,6 +56,8 @@ public sealed class MechPartSystem : EntitySystem
         SubscribeLocalEvent<MechOpticsComponent, MechPartRemovedEvent>(OnOpticsRemoved);
 
         SubscribeLocalEvent<MechPartComponent, DestructionEventArgs>(OnPartDestroyed);
+
+        SubscribeLocalEvent<MechPartComponent, MechPartRelayedEvent<FlashAttemptEvent>>(OnFlashAttempt);
     }
 
     private void OnPartDestroyed(Entity<MechPartComponent> ent, ref DestructionEventArgs args)
@@ -311,5 +316,11 @@ public sealed class MechPartSystem : EntitySystem
         mechComp.MaxEnergy = 1;
 
         _mech.UpdateMechOnlineStatus(args.Mech, ent.Owner);
+    }
+
+    private void OnFlashAttempt(Entity<MechPartComponent> ent, ref MechPartRelayedEvent<FlashAttemptEvent> args)
+    {
+        if (TryComp<FlashImmunityComponent>(ent.Owner, out var _))
+            args.Args.Cancelled = true;
     }
 }

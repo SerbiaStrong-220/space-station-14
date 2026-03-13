@@ -123,7 +123,6 @@ public sealed partial class AltBlockingSystem
 
     private void OnGotEquip(Entity<AltBlockingComponent> ent, ref GotEquippedEvent args)
     {
-
         if (!ent.Comp.AvaliableSlots.ContainsKey(args.SlotFlags))
             return;
 

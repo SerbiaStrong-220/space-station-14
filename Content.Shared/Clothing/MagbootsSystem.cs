@@ -7,6 +7,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Item;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.FCB.Mech.Systems;
 using Robust.Shared.Containers;
 
 namespace Content.Shared.Clothing;
@@ -27,6 +28,7 @@ public sealed class SharedMagbootsSystem : EntitySystem
         SubscribeLocalEvent<MagbootsComponent, ClothingGotUnequippedEvent>(OnGotUnequipped);
         SubscribeLocalEvent<MagbootsComponent, IsWeightlessEvent>(OnIsWeightless);
         SubscribeLocalEvent<MagbootsComponent, InventoryRelayedEvent<IsWeightlessEvent>>(OnIsWeightless);
+        SubscribeLocalEvent<MagbootsComponent, MechEquipmentRelayedEvent<IsWeightlessEvent>>(OnIsWeightless);//FCB mech magpads added
     }
 
     private void OnToggled(Entity<MagbootsComponent> ent, ref ItemToggledEvent args)
@@ -81,6 +83,13 @@ public sealed class SharedMagbootsSystem : EntitySystem
     {
         OnIsWeightless(ent, ref args.Args);
     }
+
+    //FCB add mech magpads begin
+    private void OnIsWeightless(Entity<MagbootsComponent> ent, ref MechEquipmentRelayedEvent<IsWeightlessEvent> args)
+    {
+        OnIsWeightless(ent, ref args.Args);
+    }
+    //FCB add mech magpads end
 }
 
 //SS220 Magboots with jet fix begin
