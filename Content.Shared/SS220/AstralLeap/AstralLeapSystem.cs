@@ -15,14 +15,14 @@ public sealed class AstralLeapSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<AstralLeapComponent, MapInitEvent>(OnInit);
+        SubscribeLocalEvent<AstralLeapComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<AstralLeapComponent, ComponentShutdown>(OnShutdown);
 
         SubscribeLocalEvent<AstralLeapComponent, AstralLeapActionEvent>(OnAstralLeapAction);
         SubscribeLocalEvent<AstralLeapComponent, AstralLeapDoAfterEvent>(OnAstralLeapDoAfter);
     }
 
-    private void OnInit(Entity<AstralLeapComponent> ent, ref MapInitEvent args)
+    private void OnMapInit(Entity<AstralLeapComponent> ent, ref MapInitEvent args)
     {
         _actions.AddAction(ent, ref ent.Comp.AstralActionEntity, ent.Comp.AstralAction);
     }
