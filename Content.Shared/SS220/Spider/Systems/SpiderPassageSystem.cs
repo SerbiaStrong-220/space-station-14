@@ -19,5 +19,4 @@ public sealed class SpiderPassageSystem : EntitySystem
         if (HasComp<SpiderComponent>(args.OtherEntity))
             args.Cancelled = true;
     }
-
 }

@@ -27,7 +27,7 @@
     staminaDamage: 0
     canThrowTrigger: true
     canMoveBreakout: false
-    maxEnsnares: 3
+    maxEnsnares: 1
   - type: LandAtCursor
   - type: Fixtures
     fixtures:
