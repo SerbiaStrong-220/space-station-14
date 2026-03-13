@@ -513,6 +513,7 @@
       Steel: 4000 # 40 sheets
       Uranium: 2500 # 25 sheets
       Plastic: 500 # 5 sheets
+  - type: RadiationDecrease # SS220 radioactiveness fix
   - type: RadiationSource
     intensity: 1.0
 
