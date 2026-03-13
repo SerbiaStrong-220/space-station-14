@@ -11,10 +11,10 @@ public sealed class SpiderPassageSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<SpiderWebPassageComponent, PreventCollideEvent>(OnPassagePreventCollide);
+        SubscribeLocalEvent<SpiderPassageComponent, PreventCollideEvent>(OnPassagePreventCollide);
     }
 
-    private void OnPassagePreventCollide(EntityUid uid, SpiderWebPassageComponent component, ref PreventCollideEvent args)
+    private void OnPassagePreventCollide(EntityUid uid, SpiderPassageComponent component, ref PreventCollideEvent args)
     {
         if (HasComp<SpiderComponent>(args.OtherEntity))
             args.Cancelled = true;

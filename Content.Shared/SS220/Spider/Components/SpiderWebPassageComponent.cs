@@ -5,6 +5,6 @@ using Robust.Shared.GameStates;
 namespace Content.Shared.SS220.Spider;
 
 [RegisterComponent, NetworkedComponent]
-public sealed partial class SpiderWebPassageComponent : Component
+public sealed partial class SpiderPassageComponent : Component
 {
 }

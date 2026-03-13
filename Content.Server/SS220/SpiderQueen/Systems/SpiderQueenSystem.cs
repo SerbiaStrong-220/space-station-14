@@ -92,10 +92,24 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
             !CheckEnoughBloodPoints(performer, args.Cost))
             return;
 
-        if (args.Target.GetGridUid(EntityManager) == null)
+        if (_transform.GetGrid(args.Target) == null)
         {
             _popup.PopupEntity(Loc.GetString("spider-web-action-nogrid"), performer, performer);
             return;
+        }
+
+        bool AllPrototypesAreWeb(List<EntitySpawnEntry> prototypes)
+        {
+            foreach (var entry in prototypes)
+            {
+                if (string.IsNullOrEmpty(entry.PrototypeId))
+                    continue;
+                if (!_prototype.TryIndex<EntityPrototype>(entry.PrototypeId, out var proto))
+                    continue;
+                if (!proto.HasComponent<SpiderWebObjectComponent>())
+                    return false;
+            }
+            return true;
         }
 
         if (AllPrototypesAreWeb(args.Prototypes) && IsTileBlockedByWeb(args.Target))
@@ -122,6 +136,12 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
             !TryComp<TransformComponent>(performer, out var transform) ||
             !CheckEnoughBloodPoints(performer, args.Cost))
             return;
+
+        if (_transform.GetGrid(transform.Coordinates) == null)
+        {
+            _popup.PopupEntity(Loc.GetString("spider-web-action-nogrid"), performer, performer);
+            return;
+        }
 
         if (TryStartSpiderSpawnDoAfter(performer, args.DoAfter, transform.Coordinates, args.Prototypes, args.Offset, args.SnapToGrid, args.Cost))
         {
@@ -385,21 +405,5 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
                 return true;
         }
         return false;
-    }
-
-    private bool AllPrototypesAreWeb(List<EntitySpawnEntry> prototypes)
-    {
-        foreach (var entry in prototypes)
-        {
-            if (string.IsNullOrEmpty(entry.PrototypeId))
-                continue;
-
-            if (!_prototype.TryIndex<EntityPrototype>(entry.PrototypeId, out var proto))
-                continue;
-
-            if (!proto.HasComponent<SpiderWebObjectComponent>())
-                return false;
-        }
-        return true;
     }
 }

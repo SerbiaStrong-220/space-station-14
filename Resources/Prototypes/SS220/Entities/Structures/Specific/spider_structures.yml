@@ -151,12 +151,12 @@
     tags:
       - Wall
   - type: Sprite
-    sprite: SS220/Structures/Walls/web.rsi #SS220-Walss-Sprite-Update-V4
+    sprite: SS220/Structures/Walls/web.rsi
     color: gray
     layers:
     - shader: unshaded
   - type: Icon
-    sprite: SS220/Structures/Walls/web.rsi #SS220-Walss-Sprite-Update-V4
+    sprite: SS220/Structures/Walls/web.rsi
   - type: Destructible
     thresholds:
     - trigger:
@@ -237,11 +237,8 @@
       shader: unshaded
   - type: Icon
     sprite: SS220/Structures/web_passage.rsi
-    color: gray
-    layers:
-    - state: webpassage
-      shader: unshaded
-  - type: SpiderWebPassage
+    state: webpassage
+  - type: SpiderPassage
 
 # Cocoon
 - type: entity
