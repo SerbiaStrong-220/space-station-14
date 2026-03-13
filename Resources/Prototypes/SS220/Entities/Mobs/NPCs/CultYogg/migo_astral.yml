@@ -12,8 +12,8 @@
   - type: Eye
     drawFov: false
     visMask:
-      - Normal
-      - Ghost #somehow actions visible only with this one
+    - Normal
+    - Ghost #somehow actions visible only with this one
   - type: Input
     context: "ghost"
   - type: InputMover
