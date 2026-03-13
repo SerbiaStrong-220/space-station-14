@@ -18,6 +18,7 @@ using Content.Server.SS220.CultYogg.Sacrificials;
 using Content.Server.SS220.GameTicking.Rules.Components;
 using Content.Server.Station.Systems;
 using Content.Shared.Audio;
+using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Database;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Humanoid;
@@ -41,6 +42,7 @@ using Content.Shared.SS220.StuckOnEquip;
 using Content.Shared.SS220.Telepathy;
 using Content.Shared.Station.Components;
 using Content.Shared.StatusEffect;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Zombies;
 using Robust.Server.Player;
 using Robust.Shared.Audio.Systems;
@@ -78,7 +80,8 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
     [Dependency] private readonly SharedRestrictedItemSystem _sharedRestrictedItemSystem = default!;
     [Dependency] private readonly SharedStuckOnEquipSystem _stuckOnEquip = default!;
     [Dependency] private readonly MiGoTeleportSystem _migoTeleport = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private readonly Shared.StatusEffect.StatusEffectsSystem _statusEffectsOld = default!;
+    [Dependency] private readonly Shared.StatusEffectNew.StatusEffectsSystem _statusEffectsNew = default!;
 
     public TimeSpan DefaultShuttleArriving { get; set; } = TimeSpan.FromSeconds(85);
 
@@ -337,10 +340,13 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         EnsureComp<ShowCultYoggIconsComponent>(uid);//icons of cultists and sacrificials
         EnsureComp<ZombieImmuneComponent>(uid);//they are practically mushrooms
 
+        RemComp<PacifiedComponent>(uid);//ok lets try this
+
         //Removing "common enslaving effects"
         foreach (var effect in rule.Comp.OnRemoveEffects)
         {
-            _statusEffects.TryRemoveStatusEffect(uid, effect);//I don't know how to call StatusEffectsSystem and StatusEffectsSystemNew in one place, so there will be only one
+            _statusEffectsOld.TryRemoveStatusEffect(uid, effect);//because some effects are in the old format
+            _statusEffectsNew.TryRemoveStatusEffect(uid, effect);
         }
 
         var cultifiedEv = new GotCultifiedEvent();
