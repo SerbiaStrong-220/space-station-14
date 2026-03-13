@@ -103,14 +103,17 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
 
         bool AllPrototypesAreWeb(List<EntitySpawnEntry> prototypes)
         {
+            if (prototypes.Count == 0)
+                return false;
+
             foreach (var entry in prototypes)
             {
-                if (string.IsNullOrEmpty(entry.PrototypeId))
-                    continue;
-                if (!_prototype.TryIndex<EntityPrototype>(entry.PrototypeId, out var proto))
-                    continue;
-                if (!proto.HasComponent<SpiderWebObjectComponent>())
+                if (string.IsNullOrEmpty(entry.PrototypeId) ||
+                    !_prototype.TryIndex<EntityPrototype>(entry.PrototypeId, out var proto) ||
+                    !proto.HasComponent<SpiderWebObjectComponent>())
+                {
                     return false;
+                }
             }
             return true;
         }
