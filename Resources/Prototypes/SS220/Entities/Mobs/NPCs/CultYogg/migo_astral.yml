@@ -35,8 +35,8 @@
     sprite: SS220/Mobs/CultYogg/MiGo.rsi
     color: "#bbbbff88"
     layers:
-      - map: ["enum.DamageStateVisualLayers.Base"]
-        state: alive
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: alive
     noRot: true
     overrideContainerOcclusion: true
     drawdepth: Ghosts
