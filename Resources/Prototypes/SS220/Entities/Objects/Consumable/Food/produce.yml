@@ -236,3 +236,23 @@
     containers:
       payloadSlot: !type:ContainerSlot
   - type: Food
+
+- type: entity
+  name: hops head
+  description: A hops head, used for brewing beer and other alcoholic beverages.
+  id: HopsHead
+  parent: ProduceBase
+  components:
+    - type: FlavorProfile
+      flavors:
+      - bitter
+    - type: Sprite
+      sprite: SS220/Objects/Specific/Hydroponics/hop.rsi
+    - type: SolutionContainerManager
+      solutions:
+        food:
+          reagents:
+          - ReagentId: HopsExtract
+            Quantity: 7
+    - type: Produce
+      seedId: hop
