@@ -34,6 +34,6 @@ public sealed class SpeakOnActionSystem : SharedSpeakOnActionSystem
         if (string.IsNullOrWhiteSpace(ent.Comp.Sentence))
             return;
 
-        _chat.TrySendInGameICMessage(user, Loc.GetString(ent.Comp.Sentence), InGameICChatType.Speak, false);
+        _chat.TrySendInGameICMessage(user, Loc.GetString(ent.Comp.Sentence), InGameICChatType.Speak, false, bypyssEnglishFilter: true); // SS220 FIX wizard spell speak
     }
 }
