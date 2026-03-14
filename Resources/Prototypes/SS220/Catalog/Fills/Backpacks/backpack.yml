@@ -169,11 +169,12 @@
     contents:
       - id: BoxSurvivalCentcom
       - id: WeaponBlasterKRV
-      - id: BlasterPowerCellPulse
+      - id: PowerCellBlasterHighCapacity
         amount: 3
       - id: FlashlightSeclite
       - id: MedkitCombatFilled
-      - id: BlueShieldGasMask
+      - id: ClothingHeadHelmetTactical
+      - id: ClothingMaskGasBlueShield
 
 # CBURNleader
 - type: entity

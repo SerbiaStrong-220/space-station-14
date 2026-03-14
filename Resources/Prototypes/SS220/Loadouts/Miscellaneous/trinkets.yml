@@ -15,3 +15,10 @@
   storage:
     back:
     - ClothingEyesEyepatch
+
+- type: loadout
+  id: ClothingNeckUSSPPin
+  storage:
+    back:
+    - ClothingNeckUSSPPin
+  groupBy: "pin"

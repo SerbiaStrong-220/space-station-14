@@ -20,7 +20,7 @@
   access:
   - CentralCommand
   - CentralCommandERT
-  - CentralCommandBSO
+  - CentralCommandSRT
   - CentralCommandCBURN
   special:
   - !type:AddComponentSpecial
@@ -47,7 +47,7 @@
   access:
   - CentralCommand
   - CentralCommandERT
-  - CentralCommandBSO
+  - CentralCommandSRT
   - CentralCommandCBURN
   special:
   - !type:AddComponentSpecial

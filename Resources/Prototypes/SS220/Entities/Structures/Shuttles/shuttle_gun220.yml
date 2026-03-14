@@ -204,6 +204,9 @@
   - type: Projectile
     shuttleNavInfo:
       enabled: true
+  - type: Tag
+    tags:
+    - AirDefenseTarget
 
 - type: entity
   id: CartridgeNURS
@@ -213,7 +216,8 @@
   components:
   - type: Tag
     tags:
-      - CartridgeNURS
+    - CartridgeNURS
+    - AirDefenseTarget
   - type: Item
     size: Small
   - type: CartridgeAmmo

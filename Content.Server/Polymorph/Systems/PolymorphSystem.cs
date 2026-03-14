@@ -2,6 +2,7 @@ using Content.Server.Actions;
 using Content.Server.Humanoid;
 using Content.Server.Inventory;
 using Content.Server.Polymorph.Components;
+using Content.Shared.Alert;
 using Content.Shared.Buckle;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
@@ -14,6 +15,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition;
 using Content.Shared.Polymorph;
 using Content.Shared.Popups;
+using Content.Shared.SS220.PolymorphTimer;
 using Robust.Server.Audio;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
@@ -42,6 +44,7 @@ public sealed partial class PolymorphSystem : EntitySystem
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly SharedMindSystem _mindSystem = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private readonly AlertsSystem _alerts = default!;//SS220_cult_hotfix_23
 
     public const string EffectDesynchronizer = "EffectDesynchronizer"; //SS220-cryo-mobs-fix
 
@@ -76,6 +79,16 @@ public sealed partial class PolymorphSystem : EntitySystem
                 Revert((uid, comp));
                 continue;
             }
+
+            //SS220-cult-hotfix-23-start #3988
+            if (TryComp<PolymorphTimerComponent>(uid, out var timerComp) && comp.Configuration.Duration != null)
+            {
+                timerComp.AlertTime = (int)(comp.Configuration.Duration - comp.Time);
+                Dirty(uid, timerComp);
+
+                _alerts.ShowAlert(uid, timerComp.PolymorphTimerAlert);
+            }
+            //SS220-cult-hotfix-23-end #3988
 
             if (!TryComp<MobStateComponent>(uid, out var mob))
                 continue;
