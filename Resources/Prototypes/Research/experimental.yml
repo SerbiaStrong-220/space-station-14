@@ -84,7 +84,7 @@
 #SS220 Energy field shield begin
 - type: technology
   id: EnergyGenerator
-  name: research-technology-enegry-transformer
+  name: research-technology-energy-transformer
   icon:
     sprite: SS220/Objects/Devices/field_generator.rsi
     state: icon

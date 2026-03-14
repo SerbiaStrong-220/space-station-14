@@ -2,7 +2,7 @@
   parent: Clothing
   id: FieldShieldGenerator
   name: shield generator
-  description: shield generator
+  description: An energy field generator that creates an energy shield around the carrier.
   components:
   - type: Item
     size: Normal
