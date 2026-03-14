@@ -22,6 +22,7 @@ public sealed partial class SpiderEggSystem : EntitySystem
     [Dependency] private readonly NPCSystem _npc = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly SpiderWebSystem _spiderWeb = default!;
+
     public override void Initialize()
     {
         base.Initialize();
