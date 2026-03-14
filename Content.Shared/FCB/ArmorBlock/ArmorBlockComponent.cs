@@ -32,4 +32,16 @@ public sealed partial class ArmorBlockComponent : Component
     /// </summary>
     [DataField("conversiondict"), AutoNetworkedField]
     public Dictionary<string, string> TransformSpecifierDict = new Dictionary<string, string>();
+
+    /// <summary>
+    /// Does damage on this entity affect it's protection
+    /// </summary>
+    [DataField("damageaffects"), AutoNetworkedField]
+    public bool DamageAffectsProtection = true;
+
+    /// <summary>
+    /// At which amount of damage taken does this entity looses all it's protection
+    /// </summary>
+    [DataField("zeroprotection"), AutoNetworkedField]
+    public int ZeroProtectionThreshold = 100;
 }
