@@ -38,11 +38,13 @@
   groups:
   - BlueShieldHead
   - BlueShieldGlasses
+  - BlueShieldMask
   - BlueShieldNeck
   - BlueShieldJumpsuit
   - BlueShieldOuterclothing
   - BlueShieldBelt
   - BlueShieldBackpack
+  - BlueShieldShoes
   - Survival
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration

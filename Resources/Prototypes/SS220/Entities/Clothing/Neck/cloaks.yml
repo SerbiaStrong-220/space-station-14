@@ -32,15 +32,6 @@
 
 - type: entity
   parent: ClothingNeckBase
-  id: ClothingCloakBlueShield
-  name: Blue Shield cloak
-  description: Used by a Blue Shield officer, who faithfully protects their heads of staff.
-  components:
-    - type: Sprite
-      sprite: SS220/Clothing/Neck/Cloaks/blueshield.rsi
-
-- type: entity
-  parent: ClothingNeckBase
   id: ClothingCloak1984
   name: 1984 cloak
   description: Literally 1984.

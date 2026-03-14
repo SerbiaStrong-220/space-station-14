@@ -1,7 +1,7 @@
-ent-ClothingOuterHardsuitLightBlueshield = лёгкий скафандр "Синий Щит"
+ent-ClothingOuterHardsuitLightBlueshield = лёгкий скафандр синего щита
     .desc = Специальный скафандр, разработанный для "Синий щит". Он отличается своей легкостью и высокой маневренностью.
-ent-ClothingOuterHardsuitHightBlueshield = тяжелый скафандр "Синий Щит"
-    .desc = Специальный скафандр, разработанный для оперативников «Синего щита». Защитит даже от ядерного взрыва!
+ent-ClothingOuterHardsuitHightBlueshield = тяжелый скафандр синего щита
+    .desc = Специальный скафандр, разработанный для оперативников ГСН. Защитит даже от ядерного взрыва!
 
 ent-ClothingOuterHardsuitDeathsquadCommander = скафандр командира Эскадрона Смерти
     .suffix = Эскадрон Смерти, dq

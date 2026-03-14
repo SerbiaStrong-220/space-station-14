@@ -130,9 +130,10 @@
   packetPrototype: CultStrangeFruitSeed
   productPrototypes:
     - ProductStrangeFruitCultYogg
+  harvestRepeat: Repeat
   lifespan: 25
   maturation: 12
-  production: 3
+  production: 10
   yield: 1
   potency: 10
   growthStages: 7

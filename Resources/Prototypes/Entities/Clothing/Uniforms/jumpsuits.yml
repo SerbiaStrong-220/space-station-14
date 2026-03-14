@@ -1174,22 +1174,6 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformJumpsuitBlueShield
-  name: blueshield's uniform
-  description: A short-sleeved black uniform, paired with grey digital-camo cargo pants, all made out of a sturdy material. Blueshield standard issue.
-  components:
-  - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/blueshield.rsi
-  - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/blueshield.rsi
-  - type: Armor
-    modifiers:
-      coefficients:
-        Slash: 0.9
-        Piercing: 0.9
-
-- type: entity
-  parent: ClothingUniformBase
   id: ClothingUniformJumpsuitSeniorEngineer
   name: senior engineer jumpsuit
   description: A sign of skill and prestige within the engineering department.

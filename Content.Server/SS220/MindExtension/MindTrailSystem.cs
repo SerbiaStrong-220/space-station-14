@@ -12,7 +12,7 @@ using Content.Shared.FCB.Mech.Components;
 
 namespace Content.Server.SS220.MindExtension;
 
-public partial class MindExtensionSystem : EntitySystem //MindTrailSystem
+public partial class MindExtensionSystem //MindTrailSystem
 {
     private void SubscribeTrailSystemEvents()
     {

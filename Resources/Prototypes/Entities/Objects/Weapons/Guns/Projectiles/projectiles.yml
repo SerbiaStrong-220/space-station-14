@@ -896,6 +896,11 @@
     shuttleNavInfo:
       enabled: true
   # SS220 Add projectiles on shuttle nav end
+  # SS220 add kaz start
+  - type: Tag
+    tags:
+    - AirDefenseTarget
+  # SS220 add kaz end
 
 - type: entity
   id: BulletGrenadeFlash
@@ -947,6 +952,11 @@
     shuttleNavInfo:
       enabled: true
   # SS220 Add projectiles on shuttle nav end
+  # SS220 add kaz start
+  - type: Tag
+    tags:
+    - AirDefenseTarget
+  # SS220 add kaz end
 
 - type: entity
   parent: BaseBulletTrigger

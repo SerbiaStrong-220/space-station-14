@@ -31,6 +31,7 @@
   - Chapel
   - Hydroponics
   - External
+  - Cryogenics
   - Chemistry
   - Engineering
   - Research
@@ -38,11 +39,19 @@
   - Salvage
   - Security
   - Brig
+  - Lawyer
   - Cargo
   - Atmospherics
   - Cargo
   - Medical
   - Blueshield
+  - Paramedic
+  - Clown
+  - Librarian
+  - Psychologist
+  - Reporter
+  - Mime
+  - Musician
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
@@ -53,22 +62,23 @@
 - type: startingGear
   id: BlueShieldGear
   equipment:
-    shoes: ClothingShoesBootsBlueShieldJackFilled
     id: BlueShieldPDA
     ears: ClothingHeadsetBlueShield
-    pocket1: WeaponSynergisticEnergyGun
+    pocket1: WeaponPistolMk58Nonlethal
     gloves: ClothingHandsGlovesCombat
   storage:
     back:
     - Stunbaton
     - Flash
+    - MagazinePistolRubber
+    - MagazinePistol
 
 - type: chameleonOutfit
   id: BlueShieldChameleonOutfit
   job: BlueShield
   hasMindShield: true
   equipment:
-    eyes: ClothingEyesBlueShieldGlasses
+    eyes: ClothingEyesGlassesBlueShield
     head: ClothingHeadHatBeretSecurity
     mask: ClothingMaskGasBlueShield
     neck: ClothingBeltHolster
