@@ -51,8 +51,8 @@ public sealed partial class AltBlockingSystem : EntitySystem
 
         SubscribeLocalEvent<AltBlockingComponent, ComponentShutdown>(OnShutdown);
 
-        SubscribeLocalEvent<AltBlockingComponent, ThrowItemAttemptEvent>(OnThrowAttempt);
-        SubscribeLocalEvent<AltBlockingComponent, ContainerGettingRemovedAttemptEvent>(OnDropAttempt);
+        //SubscribeLocalEvent<AltBlockingComponent, ThrowItemAttemptEvent>(OnThrowAttempt);
+        //SubscribeLocalEvent<AltBlockingComponent, ContainerGettingRemovedAttemptEvent>(OnDropAttempt);
     }
 
     private bool IsDropBlocked(Entity<AltBlockingComponent> ent)

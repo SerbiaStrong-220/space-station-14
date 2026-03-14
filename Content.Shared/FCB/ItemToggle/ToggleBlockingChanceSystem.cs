@@ -59,12 +59,6 @@ public sealed class ToggleBlockingChanceSystem : EntitySystem
     {
         ent.Comp.IsToggled = true;
 
-        if (TryComp<ChangeAppearanceOnActiveBlockingComponent>(ent.Owner, out var appearanceComp))
-        {
-            var ev = new ActiveBlockingEvent(true);
-            RaiseLocalEvent(ent.Owner, ref ev);
-        }
-
         blockingComponent.RangeBlockProb = ent.Comp.ToggledRangeBlockProb;
         blockingComponent.MeleeBlockProb = ent.Comp.ToggledMeleeBlockProb;
     }
