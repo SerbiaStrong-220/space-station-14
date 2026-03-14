@@ -58,6 +58,16 @@
     Gold: 200
 
 - type: latheRecipe
+  id: FieldShieldGenerator
+  result: FieldShieldGenerator
+  completetime: 10
+  materials:
+    Steel: 2000
+    Silver: 500
+    Plasma: 500
+    Uranium: 1500
+
+- type: latheRecipe
   id: WeaponEnergyCrossbow
   result: WeaponEnergyCrossbow
   completetime: 5
