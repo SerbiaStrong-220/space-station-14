@@ -1,8 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Server.Administration.Logs;
 using Content.Server.Atmos.Components;
-using Content.Server.SS220.Spider;
-using Content.Server.SS220.SpiderQueen.Components;
 using Content.Shared.Alert;
 using Content.Shared.Atmos;
 using Content.Shared.Damage;
@@ -10,6 +8,7 @@ using Content.Shared.Database;
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
+using Content.Shared.SS220.Atmos;
 using Robust.Shared.Containers;
 
 namespace Content.Server.Atmos.EntitySystems
@@ -21,7 +20,6 @@ namespace Content.Server.Atmos.EntitySystems
         [Dependency] private readonly AlertsSystem _alertsSystem = default!;
         [Dependency] private readonly IAdminLogManager _adminLogger= default!;
         [Dependency] private readonly InventorySystem _inventorySystem = default!;
-        [Dependency] private readonly SpiderWebSystem _spiderWeb = default!; // SS220 spider queen update
 
         private const float UpdateTimer = 1f;
         private float _timer;
@@ -200,17 +198,6 @@ namespace Content.Server.Atmos.EntitySystems
             return true;
         }
 
-        // SS220 spider queen update BGN
-        private bool IsSpiderEggOnWeb(EntityUid uid)
-        {
-            if (!HasComp<SpiderEggComponent>(uid))
-                return false;
-
-            var transform = Transform(uid);
-            return _spiderWeb.IsTileBlockedByWeb(transform.Coordinates);
-        }
-        // SS220 spider queen update END
-
         public override void Update(float frameTime)
         {
             _timer += frameTime;
@@ -233,9 +220,13 @@ namespace Content.Server.Atmos.EntitySystems
                 if (totalDamage >= barotrauma.MaxDamage)
                     continue;
 
+                // SS220 spider queen update BGN
+                var ev = new BarotraumaDamageAttemptEvent();
+                RaiseLocalEvent(uid, ref ev);
 
-                if (IsSpiderEggOnWeb(uid)) // SS220 spider queen update
+                if (ev.Cancelled)
                     continue;
+                // SS220 spider queen update END
 
                 var pressure = 1f;
 

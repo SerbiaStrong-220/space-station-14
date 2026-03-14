@@ -14,7 +14,7 @@ public sealed class SpiderPassageSystem : EntitySystem
         SubscribeLocalEvent<SpiderPassageComponent, PreventCollideEvent>(OnPassagePreventCollide);
     }
 
-    private void OnPassagePreventCollide(EntityUid uid, SpiderPassageComponent component, ref PreventCollideEvent args)
+    private void OnPassagePreventCollide(Entity<SpiderPassageComponent> ent, ref PreventCollideEvent args)
     {
         if (HasComp<SpiderComponent>(args.OtherEntity))
             args.Cancelled = true;

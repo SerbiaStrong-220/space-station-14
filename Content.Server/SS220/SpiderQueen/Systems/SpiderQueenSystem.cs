@@ -101,6 +101,22 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
             return;
         }
 
+        if (AllPrototypesAreWeb(args.Prototypes) && _spiderWeb.IsTileBlockedByWeb(args.Target))
+        {
+            _popup.PopupEntity(Loc.GetString("spider-web-action-fail"), performer, performer);
+            return;
+        }
+
+        if (TryStartSpiderSpawnDoAfter(performer, args.DoAfter, args.Target, args.Prototypes, args.Offset, args.SnapToGrid, args.Cost))
+        {
+            args.Handled = true;
+        }
+        else
+        {
+            Log.Error($"Failed to start DoAfter by {performer}");
+            return;
+        }
+
         bool AllPrototypesAreWeb(List<EntitySpawnEntry> prototypes)
         {
             if (prototypes.Count == 0)
@@ -116,22 +132,6 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
                 }
             }
             return true;
-        }
-
-        if (AllPrototypesAreWeb(args.Prototypes) && _spiderWeb.IsTileBlockedByWeb(args.Target))
-        {
-            _popup.PopupEntity(Loc.GetString("spider-web-action-fail"), performer, performer);
-            return;
-        }
-
-        if (TryStartSpiderSpawnDoAfter(performer, args.DoAfter, args.Target, args.Prototypes, args.Offset, args.SnapToGrid, args.Cost))
-        {
-            args.Handled = true;
-        }
-        else
-        {
-            Log.Error($"Failed to start DoAfter by {performer}");
-            return;
         }
     }
 
