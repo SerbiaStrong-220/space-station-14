@@ -387,3 +387,56 @@
     stateDoorClosed: armory_gun_door
   - type: AccessReader
     access: [["Armory"]]
+
+#Интердайн
+- type: entity
+  id: LockerInterdyneArmory
+  parent: LockerBase
+  name: Red Wings locker
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: armory_steel_locker
+    stateDoorOpen: steellocker_storage_open
+    stateDoorClosed: interdyne_armory_door
+  - type: AccessReader
+    access: [ [ "Interdyne" ] ]
+
+- type: entity
+  id: LockerInterdyneArmoryArmored
+  parent: LockerBaseSecure
+  name: Armored Red Wings locker
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: armory_steel_locker
+    stateDoorOpen: medsteel_open
+    stateDoorClosed: interdyne_armory_armored_door
+  - type: AccessReader
+    access: [ [ "Interdyne" ] ]
+
+- type: entity
+  id: LockerInterdyne
+  parent: LockerBase
+  name: Interdyne locker
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: interdyne
+    stateDoorOpen: steellocker_storage_open
+    stateDoorClosed: interdyne_door
+  - type: AccessReader
+    access: [ [ "Interdyne" ] ]
+
+- type: entity
+  id: LockerInterdyneArmored
+  parent: LockerBaseSecure
+  name: Armored Interdyne locker
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: interdyne
+    stateDoorOpen: medsteel_open
+    stateDoorClosed: interdyne_armored_door
+  - type: AccessReader
+    access: [ [ "Interdyne" ] ]

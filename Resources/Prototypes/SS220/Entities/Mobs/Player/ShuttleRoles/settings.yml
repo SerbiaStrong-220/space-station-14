@@ -8,3 +8,67 @@
     - type: Loadout
       prototypes: [ VisitorTourist ]
       roleLoadout: [ RoleSurvivalStandard ]
+
+- type: randomHumanoidSettings
+  id: RedWings
+  parent: EventHumanoid
+  speciesBlacklist: [ Felinid, Diona, Arachnid, Moth, Vox, Reptilian, Skeleton, SlimePerson, Vulpkanin, Tajaran, Dwarf]
+  components:
+    - type: GhostRole
+      description: ghost-role-information-redwing-description
+      rules: ghost-role-information-nonantagonist-rules
+      raffle:
+        settings: short
+
+- type: randomHumanoidSettings
+  id: RedWingsOfficer
+  parent: RedWings
+  components:
+    - type: GhostRole
+      name: ghost-role-information-redwings-officer-name
+      description: ghost-role-information-redwings-officer-description
+    - type: Loadout
+      prototypes: [ RedWingsOfficerGear ]
+    - type: AutoImplant
+      implants:
+      - DeathRattleImplantInterdyne
+    - type: RandomMetadata
+      nameSegments:
+      - NamesRedwingsLast
+      nameFormat: name-format-redwings-officer
+
+- type: randomHumanoidSettings
+  id: RedWingsMedic
+  parent: RedWings
+  components:
+    - type: GhostRole
+      name: ghost-role-information-redwings-medic-name
+      description: ghost-role-information-redwings-medic-description
+      job: RedWingsMedic
+    - type: Loadout
+      prototypes: [ RedWingsMedicGear ]
+    - type: AutoImplant
+      implants:
+      - DeathRattleImplantInterdyne
+    - type: RandomMetadata
+      nameSegments:
+      - NamesRedwingsLast
+      nameFormat: name-format-redwings-medic
+
+- type: randomHumanoidSettings
+  id: RedWingsPilot
+  parent: RedWings
+  components:
+    - type: GhostRole
+      name: ghost-role-information-redwings-pilot-name
+      description: ghost-role-information-redwings-pilot-description
+      job: RedWingsPilot
+    - type: Loadout
+      prototypes: [ RedWingsPilotGear ]
+    - type: AutoImplant
+      implants:
+      - DeathRattleImplantInterdyne
+    - type: RandomMetadata
+      nameSegments:
+      - NamesRedwingsLast
+      nameFormat: name-format-redwings-pilot

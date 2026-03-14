@@ -1,0 +1,15 @@
+- type: job
+  id: RedWingsMedic
+  name: ghost-role-information-redwings-medic-name
+  description: ghost-role-information-redwings-medic-description
+  playTimeTracker: JobRedWingsMedic
+  canBeAntag: false
+  icon: JobIconRedWingsMedic
+  setPreference: false
+  overrideConsoleVisibility: true
+  access:
+  - Medical
+  - Brig
+  - Maintenance
+  - External
+  - Interdyne
