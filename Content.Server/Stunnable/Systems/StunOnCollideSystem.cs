@@ -1,7 +1,8 @@
 using Content.Server.Stunnable.Components;
+using Content.Shared.FCB.InstastunResist;
 using Content.Shared.Movement.Systems;
-using JetBrains.Annotations;
 using Content.Shared.Throwing;
+using JetBrains.Annotations;
 using Robust.Shared.Physics.Events;
 
 namespace Content.Server.Stunnable.Systems;
@@ -22,6 +23,14 @@ internal sealed class StunOnCollideSystem : EntitySystem
 
     private void TryDoCollideStun(Entity<StunOnCollideComponent> ent, EntityUid target)
     {
+        //FCB instastun resist begin
+        var resistEv = new StunAttemptEvent(StunSource.Projectile);
+        RaiseLocalEvent(target, ref resistEv);
+
+        if (resistEv.StunCancelled)
+            return;
+        //FCB instastun resist end
+
         _stunSystem.TryKnockdown(target, ent.Comp.KnockdownAmount, ent.Comp.Refresh, ent.Comp.AutoStand, ent.Comp.Drop, true);
 
         if (ent.Comp.Refresh)

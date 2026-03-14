@@ -1,5 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
-using System.Numerics;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
@@ -7,11 +5,15 @@ using Content.Shared.Audio;
 using Content.Shared.CombatMode;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Damage;
+using Content.Shared.DoAfter;
 using Content.Shared.Examine;
+using Content.Shared.FCB.AltBlocking;
 using Content.Shared.Hands;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.Standing;
 using Content.Shared.Tag;
 using Content.Shared.Throwing;
 using Content.Shared.Timing;
@@ -33,9 +35,8 @@ using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using Content.Shared.DoAfter;
-using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Standing;
+using System.Diagnostics.CodeAnalysis;
+using System.Numerics;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -253,6 +254,14 @@ public abstract partial class SharedGunSystem : EntitySystem
             return false;
         }
         // ss220 add block heavy attack and shooting while user is down end
+
+        //FCB shield rework begin
+        if (TryComp<AltBlockingUserComponent>(user, out var blockComp) && blockComp.IsBlocking)
+        {
+            PopupSystem.PopupPredictedCursor(Loc.GetString("actively-blocking-attack"), user);
+            return false;
+        }
+        //FCB shield rework begin
 
         var toCoordinates = gun.ShootCoordinates;
 
