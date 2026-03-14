@@ -237,7 +237,7 @@
         Airloss: 1000
         Caustic: 1000
         Piercing: 140 #This is a DS frame and logically a tank
-        Blunt: 80
+        Blunt: 150
         Heat: 120
         Slash: 70
         Shock: 150
@@ -247,7 +247,7 @@
         Airloss: 1000
         Caustic: 1000
         Piercing: 110
-        Blunt: 80
+        Blunt: 150
         Heat: 120
         Slash: 70
         Shock: 150

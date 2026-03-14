@@ -497,7 +497,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         Dirty(uid, component);
 
         if(TryGetNetEntity(uid, out var netMech) && TryGetNetEntity(toRemove, out var netPart))
-            RaiseNetworkEvent( new MechPartStatusChanged((NetEntity)netMech, (NetEntity)netPart, false, slot));
+            RaiseNetworkEvent(new MechPartStatusChanged((NetEntity)netMech, (NetEntity)netPart, false, slot));
 
        // UpdateUserInterface(uid, component);
     }

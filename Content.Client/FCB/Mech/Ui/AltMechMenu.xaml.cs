@@ -186,6 +186,7 @@ public sealed partial class AltMechMenu : FancyWindow
                 continue;
 
             FixedPoint2 partintegrityPercent;
+
             if (mechComp.ContainerDict[IntegrityBarDict[bar]].ContainedEntity == null || !_ent.TryGetComponent<MechPartComponent>(mechComp.ContainerDict[IntegrityBarDict[bar]].ContainedEntity, out var partComp))
             {
                 partintegrityPercent = 0;
@@ -238,8 +239,10 @@ public sealed partial class AltMechMenu : FancyWindow
             return;
 
         EquipmentControlContainer.Children.Clear();
+
         if (!_ent.TryGetComponent<MechPartComponent>(_mech, out var partCore))
             return;
+
         foreach (var ent in mechComp.EquipmentContainer.ContainedEntities)
         {
             if (!_ent.TryGetComponent<MetaDataComponent>(ent, out var metaData))

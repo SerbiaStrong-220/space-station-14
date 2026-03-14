@@ -46,6 +46,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         SubscribeLocalEvent<AltMechComponent, EntRemovedFromContainerMessage>(OnRemoved);
 
         SubscribeLocalEvent<AltMechComponent, DamageChangedEvent>(OnDamageChanged);
+        SubscribeLocalEvent<MechPartComponent, DamageChangedEvent>(OnPartDamageChanged);
 
         SubscribeLocalEvent<AltMechComponent, OnMechExitEvent>(OnPilotEjected);
 
@@ -141,6 +142,31 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
     private void OnDamageChanged(Entity<AltMechComponent> ent, ref DamageChangedEvent args)
     {
         if (!TryComp<UserInterfaceComponent>(ent, out var uiComp))
+            return;
+
+        if (uiComp.ClientOpenInterfaces.ContainsKey(MechUiKey.Key) && uiComp.ClientOpenInterfaces[MechUiKey.Key] is AltMechBoundUserInterface)
+        {
+            var bui = (AltMechBoundUserInterface)uiComp.ClientOpenInterfaces[MechUiKey.Key];
+
+            if (bui == null)
+                return;
+
+            bui.UpdateUI();
+        }
+
+    }
+
+    private void OnPartDamageChanged(Entity<MechPartComponent> ent, ref DamageChangedEvent args)
+    {
+        if (ent.Comp.PartOwner == null)
+            return;
+
+        var mech = (EntityUid)ent.Comp.PartOwner;
+
+        if (mech != _playerManager.LocalEntity)
+            return;
+
+        if (!TryComp<UserInterfaceComponent>(mech, out var uiComp))
             return;
 
         if (uiComp.ClientOpenInterfaces.ContainsKey(MechUiKey.Key) && uiComp.ClientOpenInterfaces[MechUiKey.Key] is AltMechBoundUserInterface)

@@ -11,6 +11,7 @@ using Content.Shared.FCB.Mech.Components;
 using Content.Shared.FCB.Mech.Equipment.Components;
 using Content.Shared.FCB.Mech.Parts.Components;
 using Content.Shared.FCB.Mech.Systems;
+using Content.Shared.FixedPoint;
 using Content.Shared.Flash;
 using Content.Shared.Flash.Components;
 using Content.Shared.Hands.Components;
@@ -21,6 +22,7 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Power.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
+using YamlDotNet.Core.Tokens;
 
 namespace Content.Server.FCB.Mech.Systems;
 
@@ -58,6 +60,8 @@ public sealed class MechPartSystem : EntitySystem
         SubscribeLocalEvent<MechPartComponent, DestructionEventArgs>(OnPartDestroyed);
 
         SubscribeLocalEvent<MechPartComponent, MechPartRelayedEvent<FlashAttemptEvent>>(OnFlashAttempt);
+
+        SubscribeLocalEvent<MechPartComponent, DamageChangedEvent>(OnDamageChanged);
     }
 
     private void OnPartDestroyed(Entity<MechPartComponent> ent, ref DestructionEventArgs args)
@@ -322,5 +326,14 @@ public sealed class MechPartSystem : EntitySystem
     {
         if (TryComp<FlashImmunityComponent>(ent.Owner, out var _))
             args.Args.Cancelled = true;
+    }
+
+    private void OnDamageChanged(Entity<MechPartComponent> ent, ref DamageChangedEvent args)
+    {
+        var integrity = ent.Comp.MaxIntegrity - args.Damageable.TotalDamage;
+
+        ent.Comp.Integrity = FixedPoint2.Clamp(integrity, 0, ent.Comp.MaxIntegrity);
+
+        Dirty(ent);
     }
 }

@@ -2,7 +2,7 @@
   id: HydraulicRightArm
   parent: BaseMechRightArm
   name: hydraulic arm (right)
-  description: A simple, reliable, cheap and very, very strong hydraulic manipulator.
+  description: "Old but gold - hydraulic pistons, electromagnetic valves and tens of kilograms of steel. \nA heavy, unprecise and bulky but very strong manipulator."
   components:
   - type: Sprite
     sprite: Objects/Specific/Mech/mecha_equipment.rsi
@@ -223,6 +223,17 @@
   - type: Sprite
     sprite: Objects/Specific/Mech/mecha_equipment.rsi
     state: mecha_clamp
+  - type: ArmorBlock # Ah yes,my beloved СБЭУ
+    durabilitytresholddict:
+        Radiation: 1000
+        Poison: 1000
+        Airloss: 1000
+        Caustic: 1000
+        Piercing: 110
+        Blunt: 100
+        Heat: 120
+        Slash: 70
+        Shock: 150
   - type: MechArm
     hands:
     - hand:

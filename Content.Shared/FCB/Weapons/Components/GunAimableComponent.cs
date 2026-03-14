@@ -38,7 +38,7 @@ public sealed partial class GunAimableComponent : Component//This component sign
     public Angle AngleIncrease = Angle.FromDegrees(0);
 
     [DataField]
-    public float? AimedSprintSpeedModifier = 0.7f;
+    public float? AimedSprintSpeedModifier = 0.5f;
 
     [DataField]
     public float? AimedWalkingSpeedModifier = 1f;
