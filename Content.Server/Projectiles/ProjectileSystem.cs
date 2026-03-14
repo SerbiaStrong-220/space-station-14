@@ -59,7 +59,6 @@ public sealed class ProjectileSystem : SharedProjectileSystem
         {
             SetShooter(uid, component, target);
             QueueDel(uid);
-            _popup.PopupEntity(Loc.GetString("block-shot"), target);
 
             if (blockattemptEv.hitMarkColor != null) 
                 _color.RaiseEffect((Color)blockattemptEv.hitMarkColor, new List<EntityUid>() { target }, Filter.Pvs(target, entityManager: EntityManager));

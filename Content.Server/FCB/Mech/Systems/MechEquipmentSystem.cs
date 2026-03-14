@@ -11,7 +11,6 @@ using Content.Shared.Flash.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Toggleable;
-using Robust.Shared.Containers;
 
 namespace Content.Server.FCB.Mech.Systems;
 

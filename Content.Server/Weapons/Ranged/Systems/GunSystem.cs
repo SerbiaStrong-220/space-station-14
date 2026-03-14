@@ -259,10 +259,8 @@ public sealed partial class GunSystem : SharedGunSystem
                                 if(blockEv.hitColor != null)
                                     _color.RaiseEffect((Color)blockEv.hitColor, new List<EntityUid>() { lastHit.Value }, Filter.Pvs(lastHit.Value, entityManager: EntityManager));
 
-                                _popup.PopupEntity(Loc.GetString("block-shot"), hitEntity);
-
                                 if (dmg == null)
-                                    continue; 
+                                    continue;
                             }
 
                             if(!blockEv.CancelledHit)

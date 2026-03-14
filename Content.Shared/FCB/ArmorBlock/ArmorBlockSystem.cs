@@ -1,8 +1,6 @@
 // © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
-using Content.Shared.Hands;
-using Content.Shared.Interaction.Events;
 
 namespace Content.Shared.FCB.ArmorBlock;
 
@@ -14,10 +12,6 @@ public sealed class ArmorBlockSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<ArmorBlockComponent, DamageModifyEvent>(OnDamageChange);
-
-        SubscribeLocalEvent<ArmorBlockComponent, GotEquippedHandEvent>(OnEquip);
-        SubscribeLocalEvent<ArmorBlockComponent, GotUnequippedHandEvent>(OnUnequip);
-        SubscribeLocalEvent<ArmorBlockComponent, DroppedEvent>(OnDrop);
     }
 
     public void OnDamageChange(Entity<ArmorBlockComponent> ent, ref DamageModifyEvent args)
@@ -110,20 +104,5 @@ public sealed class ArmorBlockSystem : EntitySystem
             return damage - resist;
         }
         return 0;
-    }
-
-    public void OnEquip(Entity<ArmorBlockComponent> ent, ref GotEquippedHandEvent args)
-    {
-        ent.Comp.Owner = args.User;
-    }
-
-    public void OnUnequip(Entity<ArmorBlockComponent> ent, ref GotUnequippedHandEvent args)
-    {
-        ent.Comp.Owner = null;
-    }
-
-    public void OnDrop(Entity<ArmorBlockComponent> ent, ref DroppedEvent args)
-    {
-        ent.Comp.Owner = null;
     }
 }

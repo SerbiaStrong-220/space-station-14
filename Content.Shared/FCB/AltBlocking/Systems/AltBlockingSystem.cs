@@ -2,6 +2,7 @@
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Damage;
+using Content.Shared.FCB.ArmorBlock;
 using Content.Shared.FCB.ToggleBlocking;
 using Content.Shared.FCB.Weapons.Melee.Events;
 using Content.Shared.FCB.Weapons.Ranged.Events;
@@ -45,8 +46,8 @@ public sealed partial class AltBlockingSystem : EntitySystem
         SubscribeLocalEvent<AltBlockingComponent, GotUnequippedHandEvent>(OnUnequip);
         SubscribeLocalEvent<AltBlockingComponent, DroppedEvent>(OnDrop);
 
-        SubscribeLocalEvent<AltBlockingComponent, GotEquippedEvent>(OnGotEquip);
-        SubscribeLocalEvent<AltBlockingComponent, GotUnequippedEvent>(OnGotUnequipped);
+        //SubscribeLocalEvent<AltBlockingComponent, GotEquippedEvent>(OnGotEquip);
+        //SubscribeLocalEvent<AltBlockingComponent, GotUnequippedEvent>(OnGotUnequipped);
 
         SubscribeLocalEvent<AltBlockingComponent, ComponentShutdown>(OnShutdown);
 
@@ -146,7 +147,7 @@ public sealed partial class AltBlockingSystem : EntitySystem
     /// <param name="uid"> The item the component is attached to</param>
     /// <param name="component"> The <see cref="AltBlockingComponent"/> </param>
     /// <param name="user"> The person holding the blocking item </param>
-    private void StopBlockingHelper(EntityUid uid, AltBlockingComponent component, EntityUid user)
+    private void StopBlockingHelper(Entity<AltBlockingComponent> ent, EntityUid user)
     {
         var userQuery = GetEntityQuery<AltBlockingUserComponent>();
 
@@ -160,10 +161,13 @@ public sealed partial class AltBlockingSystem : EntitySystem
 
         var shields = _handsSystem.EnumerateHeld((user, hands)).ToArray();
 
-        if (componentUser != null && componentUser.BlockingItemsShields.Contains(uid))
-            componentUser.BlockingItemsShields.Remove(uid);
+        if (componentUser != null && componentUser.BlockingItemsShields.Contains(ent.Owner))
+            componentUser.BlockingItemsShields.Remove(ent.Owner);
 
-        component.User = null;
+        if (TryComp<ArmorBlockComponent>(ent.Owner, out var armorComp))
+            armorComp.Owner = null;
+
+        ent.Comp.User = null;
 
         foreach (var shield in shields)
         {

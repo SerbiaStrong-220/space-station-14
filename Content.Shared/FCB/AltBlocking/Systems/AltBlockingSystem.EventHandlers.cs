@@ -1,5 +1,6 @@
 // © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
 using Content.Shared.Damage;
+using Content.Shared.FCB.ArmorBlock;
 using Content.Shared.FCB.ToggleBlocking;
 using Content.Shared.FCB.Weapons.Melee.Events;
 using Content.Shared.FCB.Weapons.Ranged.Events;
@@ -32,18 +33,12 @@ public sealed partial class AltBlockingSystem
         args.CancelledHit = TryBlock(ent.Comp.BlockingItemsShields, args.Damage, ent.Comp);
     }
 
-    //private void OnBlockUserHitscan(Entity<HitscanBasicDamageComponent> ent, ref AttemptHitscanRaycastFiredEvent args)
-    //{
-    //    if(TryComp<AltBlockingUserComponent>(args.Data.HitEntity, out var blockUserComp) && TryBlock(blockUserComp.BlockingItemsShields, ent.Comp.Damage, blockUserComp))
-    //        return;
-    //}
-
     private void OnBlockUserMeleeHit(Entity<AltBlockingUserComponent> ent, ref MeleeHitBlockAttemptEvent args)
     {
         foreach (var item in ent.Comp.BlockingItemsShields)
         {
             if (!TryComp<AltBlockingComponent>(item, out var blockComp))
-                return; 
+                return;
 
             if (!TryGetNetEntity(item, out var netEnt))
                 return;
@@ -67,7 +62,7 @@ public sealed partial class AltBlockingSystem
             {
                 if (rand.Prob(blockComp.ActiveMeleeBlockProb))
                 {
-                    if(_net.IsServer)
+                    if (_net.IsServer)
                     {
                         _audio.PlayPvs(blockComp.BlockSound, (EntityUid)item);
                         _popupSystem.PopupEntity(Loc.GetString("block-shot"), ent.Owner);
@@ -117,45 +112,28 @@ public sealed partial class AltBlockingSystem
         var userComp = EnsureComp<AltBlockingUserComponent>(args.User);
         userComp.BlockingItemsShields.Add(ent.Owner);
 
+        if (TryComp<ArmorBlockComponent>(ent.Owner, out var armorComp))
+            armorComp.Owner = args.User;
+
         _actionsSystem.AddAction(args.User, ref userComp.BlockingToggleActionEntity, userComp.BlockingToggleAction, args.User);
         Dirty(args.User, userComp);
     }
 
-    private void OnGotEquip(Entity<AltBlockingComponent> ent, ref GotEquippedEvent args)
-    {
-        if (!ent.Comp.AvaliableSlots.ContainsKey(args.SlotFlags))
-            return;
-
-        ent.Comp.User = args.Equipee;
-        Dirty(ent.Owner, ent.Comp);
-
-        var userComp = EnsureComp<AltBlockingUserComponent>(args.Equipee);
-        _actionsSystem.AddAction(args.Equipee, ref userComp.BlockingToggleActionEntity, userComp.BlockingToggleAction, args.Equipee);
-
-        userComp.BlockingItemsShields.Add(ent.Owner);
-        Dirty(args.Equipee, userComp);
-    }
-
-    private void OnGotUnequipped(Entity<AltBlockingComponent> ent, ref GotUnequippedEvent args)
-    {
-        StopBlockingHelper(ent.Owner, ent.Comp, args.Equipee);
-    }
-
     private void OnUnequip(Entity<AltBlockingComponent> ent, ref GotUnequippedHandEvent args)
     {
-        StopBlockingHelper(ent.Owner, ent.Comp, args.User);
+        StopBlockingHelper(ent, args.User);
     }
 
     private void OnDrop(Entity<AltBlockingComponent> ent, ref DroppedEvent args)
     {
-        StopBlockingHelper(ent.Owner, ent.Comp, args.User);
+        StopBlockingHelper(ent, args.User);
     }
 
     private void OnShutdown(Entity<AltBlockingComponent> ent, ref ComponentShutdown args)
     {
         //In theory the user should not be null when this fires off
         if (ent.Comp.User != null)
-            StopBlockingHelper(ent.Owner, ent.Comp, ent.Comp.User.Value);
+            StopBlockingHelper(ent, ent.Comp.User.Value);
     }
 
     private bool TryBlock(List<EntityUid?> items, DamageSpecifier? damage, AltBlockingUserComponent comp)
@@ -170,6 +148,9 @@ public sealed partial class AltBlockingSystem
                 if (!toggleComp.IsToggled)
                     continue;
             }
+
+            if (blockComp.User == null)
+                return false;
 
             if (!TryGetNetEntity(blockComp.User, out var NetUser))
                 continue;
@@ -186,6 +167,7 @@ public sealed partial class AltBlockingSystem
                 {
                     _damageable.TryChangeDamage((EntityUid)item, damage);
                     _audio.PlayPvs(blockComp.BlockSound, (EntityUid)item);
+                    _popupSystem.PopupEntity(Loc.GetString("block-shot"), (EntityUid)blockComp.User);
                     return true;
                 }
             }
@@ -196,6 +178,7 @@ public sealed partial class AltBlockingSystem
                 {
                     _damageable.TryChangeDamage((EntityUid)item, damage);
                     _audio.PlayPvs(blockComp.BlockSound, (EntityUid)item);
+                    _popupSystem.PopupEntity(Loc.GetString("block-shot"), (EntityUid)blockComp.User);
                     return true;
                 }
             }

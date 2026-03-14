@@ -1,6 +1,5 @@
 // © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
 using Content.Shared.Access.Components;
-using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
@@ -18,14 +17,11 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Flash;
 using Content.Shared.Flash.Components;
 using Content.Shared.Gravity;
-using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Mech;
 using Content.Shared.Mech.Components;
 using Content.Shared.Mech.EntitySystems;
-using Content.Shared.Mech.Equipment.Components;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;

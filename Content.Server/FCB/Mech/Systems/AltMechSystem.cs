@@ -21,7 +21,6 @@ using Content.Shared.FCB.Mech.Parts.Components;
 using Content.Shared.FCB.Mech.Systems;
 using Content.Shared.FCB.Mind.Systems;
 using Content.Shared.FixedPoint;
-using Content.Shared.Gravity;
 using Content.Shared.Interaction;
 using Content.Shared.Mech;
 using Content.Shared.Mech.EntitySystems;
@@ -64,7 +63,6 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
     [Dependency] private readonly MechPartSystem _parts = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifier = default!;
     [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly BlindableSystem _blindable = default!;
     [Dependency] private readonly HandsSystem _hands = default!;
     [Dependency] private readonly SharedToolSystem _toolSystem = default!;
@@ -136,9 +134,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
             return;
 
         if (TryComp<GasTankComponent>(args.Used, out var tank))
-        {
             InsertTank(ent.Owner, args.Used, ent.Comp, tank);
-        }
     }
 
     private void InsertTank(EntityUid uid, EntityUid toInsert, AltMechComponent? component = null, GasTankComponent? tank = null)

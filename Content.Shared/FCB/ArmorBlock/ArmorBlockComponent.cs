@@ -10,10 +10,11 @@ namespace Content.Shared.FCB.ArmorBlock;
 public sealed partial class ArmorBlockComponent : Component
 {
     /// <summary>
-    /// The entity this armor protects
+    /// The entity this armor protects(must be set manually in every implementation, made for reusability)
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntityUid? Owner = null;
+
     /// <summary>
     /// The damage tresholds(a.k.a. resists)
     /// </summary>
