@@ -159,4 +159,4 @@
     stampedColor: "#902922"
     stampState: "paper_stamp-syndicate"
   - type: Sprite
-    state: stamp-warden
+    state: stamp-warden # TODO: make a unique sprite
