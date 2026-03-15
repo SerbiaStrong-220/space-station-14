@@ -7,76 +7,116 @@ on:
       - synchronize
       - reopened
       - ready_for_review
+      - labeled
 
 jobs:
   assign_review_teams:
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
-      contents: read
+    if: github.event.pull_request.draft == false
     steps:
-      # затычка, как будет время и желание - переписать скрипт на самостоятельную проверку изменённых файлов, а не на опору в виде Labels: PR
       - name: Wait for labels to be added
-        run: sleep 5
+        run: sleep 5 # затычка до нормального бобработчика
+
+      - name: Generate token
+        id: generate_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.REVIEWER_APP }}
+          private-key: ${{ secrets.REVIEWER_PRIVATE_KEY }}
 
       - uses: actions/github-script@v8
         with:
+          github-token: ${{ steps.generate_token.outputs.token }}
           script: |
             const prNumber = context.payload.pull_request.number;
-            console.log('PR Number:', prNumber);
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            console.log(`Processing PR #${prNumber}`);
+
+            // I. REQUESTING
 
             const { data: pullRequest } = await github.rest.pulls.get({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
+              owner,
+              repo,
               pull_number: prNumber
             });
+
+            if (pullRequest.draft) {
+              console.log('PR is a draft. Skipping review assignment.');
+              return;
+            }
 
             const prLabels = pullRequest.labels.map(label => label.name);
             console.log('Found labels:', prLabels);
 
             const labelTeamMap = {
-              'Changes: C#': '[Review] Code',
-              'Changes: Localization': '[Review] Code',
-              'Changes: Prototypes': '[Review] Code',
-              'Changes: Shaders': '[Review] Code',
-              'Changes: UI': '[Review] Code',
-              'Changes: Sprites': '[Review] Sprite',
-              'Changes: Map': '[Review] Map'
+              'Changes: C#': 'review-code',
+              'Changes: Localization': 'review-code',
+              'Changes: Prototypes': 'review-code',
+              'Changes: Shaders': 'review-code',
+              'Changes: UI': 'review-code',
+              'Changes: Sprites': 'review-sprite',
+              'Changes: Map': 'review-map'
             };
 
-            const teamsToAdd = new Set();
+            const potentialTeams = new Set();
             for (const label of prLabels) {
               if (labelTeamMap[label]) {
-                console.log(`Mapping found: "${label}" → "${labelTeamMap[label]}"`);
-                teamsToAdd.add(labelTeamMap[label]);
-              } else {
-                console.log(`No mapping for label: "${label}"`);
+                potentialTeams.add(labelTeamMap[label]);
               }
             }
 
-            console.log('Teams to add:', Array.from(teamsToAdd));
+            if (potentialTeams.size === 0) {
+              console.log('No matching team labels found.');
+              return;
+            }
 
-            if (teamsToAdd.size > 0) {
+            // II. ACTIVE REVIEWERS
+            const currentReviewerLogins = pullRequest.requested_reviewers.map(u => u.login);
+            console.log('Current individual reviewers:', currentReviewerLogins);
+
+            const teamsToActuallyAdd = [];
+
+            // III. DND TEAM IF...
+            for (const teamSlug of potentialTeams) {
+              console.log(`Checking team: ${teamSlug}...`);
+
               try {
-                console.log('Adding teams:', Array.from(teamsToAdd));
-                const response = await github.rest.pulls.requestReviewers({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  pull_number: prNumber,
-                  team_reviewers: Array.from(teamsToAdd)
+                const { data: members } = await github.rest.teams.listMembersInOrg({
+                  org: owner,
+                  team_slug: teamSlug
                 });
-                console.log(`Successfully added teams: ${Array.from(teamsToAdd).join(', ')}`);
-                console.log('Response status:', response.status);
-              } catch (error) {
-                if (error.status === 422) {
-                  console.log('HTTP 422 - One or more teams could not be added');
-                  console.log('Error details:', error.message);
+
+                const memberLogins = members.map(m => m.login);
+
+                const alreadyHasReviewer = memberLogins.some(login => currentReviewerLogins.includes(login));
+
+                if (alreadyHasReviewer) {
+                  console.log(`Skipping team "${teamSlug}".`);
                 } else {
-                  console.error('Unexpected error:', error.message);
-                  console.error('Status:', error.status);
-                  console.error('Data:', error.response?.data);
+                  console.log(`Team "${teamSlug}" is valid for assignment.`);
+                  teamsToActuallyAdd.push(teamSlug);
                 }
+
+              } catch (error) {
+                console.error(`Failed to fetch members for team ${teamSlug}. Error: ${error.message}`);
+              }
+            }
+
+            // IV. ADD REVIEW IF...
+            if (teamsToActuallyAdd.length > 0) {
+              try {
+                await github.rest.pulls.requestReviewers({
+                  owner,
+                  repo,
+                  pull_number: prNumber,
+                  team_reviewers: teamsToActuallyAdd
+                });
+                console.log(`Successfully requested review from teams: ${teamsToActuallyAdd.join(', ')}`);
+              } catch (error) {
+                console.error('API Error when requesting reviewers:', error.message);
               }
             } else {
-              console.log('No labels found');
+              console.log('No new teams need to be added (all filtered out).');
             }

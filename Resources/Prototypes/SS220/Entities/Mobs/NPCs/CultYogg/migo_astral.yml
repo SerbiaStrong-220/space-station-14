@@ -1,0 +1,60 @@
+# EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: astral
+  parent: [Incorporeal, BaseMob]
+  id: BaseMobAstral
+  abstract: true
+  description: Faint traces of a humanoid figure linger here
+  components:
+  - type: ContentEye
+    maxZoom: 1.44,1.44
+  - type: Eye
+    drawFov: false
+    visMask:
+    - Normal
+    - Ghost #somehow actions visible only with this one
+  - type: Input
+    context: "ghost"
+  - type: InputMover
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 12
+    baseWalkSpeed: 8
+  - type: Visibility
+    layer: 2
+  - type: Spectral
+
+- type: entity
+  name: MiGo in Astral
+  parent: BaseMobAstral
+  id: MobAstralMiGo
+  categories: [ HideSpawnMenu ]
+  suffix: CultYogg
+  components:
+  - type: Sprite
+    sprite: SS220/Mobs/CultYogg/MiGo.rsi
+    color: "#bbbbff88"
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: alive
+    noRot: true
+    overrideContainerOcclusion: true
+    drawdepth: Ghosts
+  - type: MiGoTeleport
+  - type: UserInterface
+    interfaces:
+      enum.MiGoTeleportUiKey.Teleport:
+        type: MiGoTeleportBoundUserInterface
+  - type: ShowCultYoggIcons #not sure
+  - type: PolymorphTimer
+    polymorphTimerAlert: MiGoAstralAlert
+    #not sure about this one
+  - type: Telepathy
+    canSend: true
+    telepathyChannelPrototype: TelepathyChannelYoggSothothCult
+  - type: TTS
+    voice: forester
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: true
