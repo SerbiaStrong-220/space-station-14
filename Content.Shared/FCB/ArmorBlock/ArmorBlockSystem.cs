@@ -103,6 +103,7 @@ public sealed class ArmorBlockSystem : EntitySystem
 
     public FixedPoint2 CountDifference(Dictionary<string, FixedPoint2> dict, FixedPoint2 damage, FixedPoint2 resist,string type, FixedPoint2 piercing, FixedPoint2 durabilityCoefficient)
     {
+        resist *= durabilityCoefficient;
         resist = Math.Clamp(resist.Float() - piercing.Float(), 0f, Math.Abs(resist.Float()) + Math.Abs(piercing.Float()));
 
         if (damage > resist)

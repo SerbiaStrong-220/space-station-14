@@ -37,7 +37,7 @@ public sealed partial class ArmorBlockComponent : Component
     /// Does damage on this entity affect it's protection
     /// </summary>
     [DataField("damageaffects"), AutoNetworkedField]
-    public bool DamageAffectsProtection = true;
+    public bool DamageAffectsProtection = false;//for now
 
     /// <summary>
     /// At which amount of damage taken does this entity looses all it's protection
