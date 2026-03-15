@@ -257,7 +257,7 @@
   parent: DeathRattleImplant
   id: DeathRattleImplantInterdyne
   name: interdyne death rattle implant
-  description: This implant will inform the Security radio channel should the user fall into critical condition or die.
+  description: This implant will inform the Interdyne radio channel should the user fall into critical condition or die.
   categories: [ HideSpawnMenu ]
   components:
   - type: RattleOnTrigger
