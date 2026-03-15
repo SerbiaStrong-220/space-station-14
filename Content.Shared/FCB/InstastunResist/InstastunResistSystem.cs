@@ -1,5 +1,7 @@
 // © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
 using Content.Shared.Damage;
+using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Robust.Shared.Utility;
 using static Content.Shared.Inventory.InventorySystem;
@@ -8,12 +10,14 @@ namespace Content.Shared.FCB.InstastunResist;
 public sealed partial class InstastunResistSystem : EntitySystem
 {
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
 
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<InstastunResistComponent, StunAttemptEvent>(OnStunAttempt);
         SubscribeLocalEvent<InventoryComponent, StunAttemptEvent>(RelayInventoryEvent);
+        SubscribeLocalEvent<HandsComponent, StunAttemptEvent>(RelayToHeld);
     }
 
     public void OnStunAttempt(Entity<InstastunResistComponent> ent, ref StunAttemptEvent args)
@@ -24,7 +28,22 @@ public sealed partial class InstastunResistSystem : EntitySystem
 
     public void RelayInventoryEvent(Entity<InventoryComponent> ent, ref StunAttemptEvent args)
     {
-        _inventory.RelayEvent<StunAttemptEvent>(ent, ref args);
+        _inventory.RelayEvent(ent, ref args);
+    }
+
+    public void RelayToHeld(Entity<HandsComponent> ent, ref StunAttemptEvent args)
+    {
+        foreach (var hand in ent.Comp.Hands)
+        {
+            if (_hands.TryGetHeldItem(ent.Owner, hand.Key, out var item))
+            {
+                if (TryComp<InstastunResistComponent>(item, out var resistComp) && resistComp.Active)
+                {
+                    if (resistComp.ResistedStunTypes.Contains(args.Origin))
+                        args.StunCancelled = true;
+                }
+            }
+        }
     }
 }
 

@@ -370,10 +370,12 @@
       Poison: 1000
       Airloss: 1000
       Caustic: 1000
-  - type: InstastunResistOnActiveBlocking
+  - type: InstastunResist
     resistedStunTypes:
       - Creampie
       - Projectile
+    active: false
+  - type: InstastunResistOnActiveBlocking
   #FCB shield rework end
   - type: ItemToggle
     onUse: false # wielding events control it instead
@@ -513,12 +515,18 @@
         visible: false
         shader: unshaded
         map: [ "blade" ]
+  - type: InstastunResist
+    resistedStunTypes:
+      - Creampie
+      - Projectile
+    active: false
+  - type: InstastunResistOnActiveBlocking
   - type: AltBlocking
     rangeBlockProb: 0
     meleeBlockProb: 0
     activeRangeBlockProb: 0.60 #As we have no indication of the double esword being turned on or off chance frameworks were shrinked
     activeMeleeBlockProb: 0.65
-  - type: ItemToggleBlockingDamage
+  - type: ToggleBlockingChance
     toggledRangeBlockProb: 0.60
     toggledMeleeBlockProb: 0.45
   - type: ChangeAppearanceOnActiveBlocking
