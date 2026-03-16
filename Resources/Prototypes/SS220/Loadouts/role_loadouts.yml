@@ -2,6 +2,20 @@
 
 #! Юридический (Начало)
 
+  # Прадставитель НаноТрейзен
+- type: roleLoadout
+  id: JobNanoTrasenRepresentative
+  groups:
+  - MagistrateHead
+  - MagistrateEyes
+  - MagistrateHeadset
+  - MagistrateJumpsuit
+  - MagistrateOuterClothing
+  - IAABackpacks
+  - Trinkets
+  - Survival
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+
   # Магистрат
 - type: roleLoadout
   id: JobMagistrate

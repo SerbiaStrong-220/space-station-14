@@ -121,6 +121,53 @@
   #ss220 add pdaidpainter end
 
 - type: entity
+  parent: BasePDA
+  id: NanoTrasenRepresentativePDA
+  name: NanoTrasen representative PDA
+  description: Add funny description. TODO SS220
+  components:
+  - type: Pda
+    id: MagistrateIDCard
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-magistrate # TODO SS220
+  - type: PdaBorderColor
+    borderColor: "#414452"
+    accentVColor: "#262c8a"
+    accentHColor: "#dfac5c"
+  - type: Sprite
+    layers:
+    - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda"
+    - state: "screen-nt"
+      shader: "unshaded"
+    - state: "light_overlay"
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: "unshaded"
+      visible: false
+    - state: "id_overlay"
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      visible: false
+  - type: Icon
+    state: pda-magistrate # TODO SS220
+  - type: CartridgeLoader
+    preinstalled:
+    - CrewManifestCartridge
+    - NotekeeperCartridge
+    - NanoTaskCartridge
+    - NewsReaderCartridge
+    - WantedListCartridge
+    - MessengerCartridgeClient
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+
+- type: entity
   parent: DeathsquadPDA
   id: DeathsquadCommanderPDA
   suffix: Death Squad Commander

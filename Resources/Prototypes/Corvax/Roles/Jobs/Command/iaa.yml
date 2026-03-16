@@ -1,6 +1,7 @@
 - type: job
   id: IAA
   name: job-name-iaa
+  setPreference: false # SS220 Роль отключена
   playTimeTracker: JobIAA
   requirements:
   - !type:DepartmentTimeRequirement

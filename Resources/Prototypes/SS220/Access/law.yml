@@ -6,5 +6,4 @@
 - type: accessGroup
   id: Lawyer
   tags:
-  - Magistrate
   - Lawyer

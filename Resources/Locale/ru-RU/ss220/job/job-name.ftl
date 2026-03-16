@@ -1,4 +1,5 @@
 job-name-magistrate = магистрат
+job-name-nanotrasen-representative = представитель НаноТрейзен
 job-name-tourist = турист
 
 job-name-cc-default = ЦК
