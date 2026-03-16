@@ -49,34 +49,22 @@ public sealed class RedWingsClientPaperSystem : EntitySystem
     {
         redWingsClientList = null;
         var clientAmount = component.ClientAmount;
+        var forbiddenDepartment = component.ForbiddenDepartment;
         var clientMessage = new FormattedMessage();
 
         if (_station.GetStations().FirstOrNull() is not { } station)
             return false;
 
-        if (!TryComp<StationRecordsComponent>(station, out var stationRecords))
-            return false;
-
-        var recordCount = stationRecords.Records.Keys.Count;
-
-        if (recordCount == 0)
-            return false;
-
         var allRecords = _stationRecords.GetRecordsOfType<GeneralStationRecord>(station).ToList();
 
-        if (allRecords.Count == 0)
-        {
-            return false;
-        }
-            
         var forbiddenJobIds = new HashSet<string>();
-        foreach (var deptId in new[] { "Command", "Security" })
+        foreach (var deptId in forbiddenDepartment)
         {
             if (_prototypeManager.TryIndex<DepartmentPrototype>(deptId, out var dept))
             {
                 foreach (var jobId in dept.Roles)
                 {
-                        forbiddenJobIds.Add(jobId);
+                    forbiddenJobIds.Add(jobId);
                 }
             }
         }
@@ -84,36 +72,31 @@ public sealed class RedWingsClientPaperSystem : EntitySystem
         var filteredRecords = allRecords
             .Where(record => !forbiddenJobIds.Contains(record.Item2.JobPrototype))
             .ToList();
-                
+
         if (filteredRecords.Count == 0)
-        {
             return false;
-        }
-            
+
         _random.Shuffle(filteredRecords);
-        var selectedRecords = filteredRecords.Take(clientAmount).ToList();   
-            
+        var selectedRecords = filteredRecords.Take(clientAmount).ToList();
+
         clientMessage.PushNewline();
         foreach (var record in selectedRecords)
         {
             var name = record.Item2.Name;
             var dna = record.Item2.DNA;
+            
             clientMessage.PushNewline();
-            clientMessage.AddMarkupOrThrow(Loc.GetString("book-text-rw-client-name", ("name", name)));
+            clientMessage.AddMarkupPermissive(Loc.GetString("book-text-rw-client-name", ("name", name)));
             clientMessage.PushNewline();
-            clientMessage.AddMarkupOrThrow(Loc.GetString("book-text-rw-client-dna", ("dna", dna ?? "")));
+            clientMessage.AddMarkupPermissive(Loc.GetString("book-text-rw-client-dna", ("dna", dna ?? "")));
             clientMessage.PushNewline();
-            clientMessage.AddMarkupOrThrow(Loc.GetString("book-text-rw-client-middle"));
+            clientMessage.AddMarkupPermissive(Loc.GetString("book-text-rw-client-middle"));
             clientMessage.PushNewline();
         }
         clientMessage.PushNewline();
-            
-        if (!clientMessage.IsEmpty)
-        {
-            redWingsClientList = Loc.GetString("book-text-rw-client-start") + clientMessage + Loc.GetString("book-text-rw-client-end");
-            return true;
-        }
 
-        return false;
+        redWingsClientList = Loc.GetString("book-text-rw-client-start") + clientMessage + Loc.GetString("book-text-rw-client-end");
+
+        return true;
     }
 }
