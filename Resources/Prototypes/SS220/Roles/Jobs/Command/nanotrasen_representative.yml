@@ -1,26 +1,18 @@
 - type: job
-  id: Magistrate
-  name: job-name-magistrate
-  description: job-description-magistrate
-  setPreference: false # Роль отключена
-  playTimeTracker: JobMagistrate
+  id: NanoTrasenRepresentative
+  name: job-name-nanotrasen-representative
+  description: job-description-nanotrasen-representative
+  playTimeTracker: JobNanoTrasenRepresentative
   requirements:
     - !type:DepartmentTimeRequirement
       department: Command
-      time: 288000 # Заглушка - 80 часов
-    - !type:RoleTimeRequirement
-      role: JobIAA
-      time: 180000 # Заглушка - 50 часов
-    - !type:AgeRequirement
-      requiredAge: 32
-    - !type:SpeciesRequirement #SS220-jobbans begin
-      inverted: true
+      time: 288000 # 80 hours
+    - !type:SpeciesRequirement
       species:
-      - Felinid #SS220-jobbans end
+      - Human
   weight: 20
-  startingGear: MagistrateGear
-  experienceDefinition: MagistrateRoleExperience
-  icon: "JobIconMagistrate"
+  startingGear: NanoTrasenRepresentativeGear
+  icon: "JobIconNanotrasen" # TODO SS220
   requireAdminNotify: true
   joinNotifyCrew: true
   supervisors: job-supervisors-centcom
@@ -29,7 +21,7 @@
   access:
   - Command
   - Lawyer
-  - Magistrate
+  - NanoTrasenRepresentative
   - Service
   - Brig
   - Security
@@ -59,10 +51,10 @@
       - type: CommandStaff
 
 - type: startingGear
-  id: MagistrateGear
+  id: NanoTrasenRepresentativeGear
   equipment:
     shoes: ClothingShoesBootsLaceup
-    id: MagistratePDA
+    id: NanoTrasenRepresentativePDA
   inhand:
     - BriefcaseMagistrateFilled
   storage:
@@ -70,8 +62,8 @@
     - Flash
 
 - type: chameleonOutfit
-  id: MagistrateChameleonOutfit
-  job: Magistrate
+  id: NanoTrasenRepresentativeGearChameleonOutfit
+  job: NanoTrasenRepresentative
   hasMindShield: true
   equipment:
     mask: ClothingMaskBreath

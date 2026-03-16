@@ -1,0 +1,4 @@
+- type: accessLevel
+  id: NanoTrasenRepresentative
+  name: id-card-access-level-nanotrasen-representative
+  canBeSwitchableInReader: false

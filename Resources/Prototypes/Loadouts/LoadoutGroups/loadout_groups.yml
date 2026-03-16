@@ -51,7 +51,8 @@
   - OffsetCaneMime
   - OffsetCaneNT
   - Cane
-  #- ExpensiveCane #SS220 TODO NanoTraisen Representative
+  - ExpensiveCane # SS220 ntr add
+  - TowelColorBlack
   - TowelColorWhite
   # SS220 Hand/FootWraps begin
   - ClothingHandWraps
