@@ -124,15 +124,6 @@ public abstract partial class SharedChatSystem : EntitySystem
         prefix = string.Empty;
         output = input;
 
-        //SS220-Fix-DefaultRadioPrefix-Begin
-        if (input.Length >= 2 && input[0] == ':' && input[1] == DefaultChannelKey)
-        {
-            prefix = input[..2];
-            output = input[2..].TrimStart();
-            return;
-        }
-        //SS220-Fix-DefaultRadioPrefix-End
-
         // If the string is less than 2, then it's probably supposed to be an emote.
         // No one is sending empty radio messages!
 
@@ -168,8 +159,11 @@ public abstract partial class SharedChatSystem : EntitySystem
         }
         // SS220-add-radio-frequency-end
 
-        if (!_keyCodes.TryGetValue(char.ToLower(input[1]), out _))
+        // SS220-Fix-DefaultRadioPrefix-begin
+        var channelKey = char.ToLower(input[1]);
+        if (!_keyCodes.TryGetValue((channelKey), out _) && channelKey != DefaultChannelKey)
             return;
+        //SS220-Fix-DefaultRadioPrefix-end
 
         prefix = input[..2];
         output = input[2..];
