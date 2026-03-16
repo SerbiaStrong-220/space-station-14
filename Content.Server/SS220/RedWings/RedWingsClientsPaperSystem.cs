@@ -99,18 +99,18 @@ public sealed class RedWingsClientPaperSystem : EntitySystem
             var name = record.Item2.Name;
             var dna = record.Item2.DNA;
             clientMessage.PushNewline();
-            clientMessage.AddMarkupOrThrow(Loc.GetString("book-text-rw-client-name", ("name", name)));
+            clientMessage.AddMarkupOrThrow(Loc.GetString("book-text-redwings-client-name", ("name", name)));
             clientMessage.PushNewline();
-            clientMessage.AddMarkupOrThrow(Loc.GetString("book-text-rw-client-dna", ("dna", dna ?? "")));
+            clientMessage.AddMarkupOrThrow(Loc.GetString("book-text-redwings-client-dna", ("dna", dna ?? "")));
             clientMessage.PushNewline();
-            clientMessage.AddMarkupOrThrow(Loc.GetString("book-text-rw-client-middle"));
+            clientMessage.AddMarkupOrThrow(Loc.GetString("book-text-redwings-client-middle"));
             clientMessage.PushNewline();
         }
         clientMessage.PushNewline();
             
         if (!clientMessage.IsEmpty)
         {
-            redWingsClientList = Loc.GetString("book-text-rw-client-start") + clientMessage + Loc.GetString("book-text-rw-client-end");
+            redWingsClientList = Loc.GetString("book-text-redwings-client-start") + clientMessage + Loc.GetString("book-text-redwings-client-end");
             return true;
         }
 

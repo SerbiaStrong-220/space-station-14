@@ -87,7 +87,7 @@
   - type: Pinpointer
     mode: Dna
   - type: Sprite
-    sprite: Objects/Devices/pinpointer.rsi
+    sprite: SS220/Objects/Devices/pinpointer.rsi
     layers:
     - state: pinpointer-redwings
       map: ["enum.PinpointerLayers.Base"]
