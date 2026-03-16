@@ -196,7 +196,7 @@
     stateDoorOpen: medsteel_open
     stateDoorClosed: psychologist_door
   - type: AccessReader
-    access: [ [ "Psychologist" ] ] # SS220 psychologist access
+    access: [ [ "Psychologist" ] ]
 
 - type: entity
   id: LockerMedicineParamedic
