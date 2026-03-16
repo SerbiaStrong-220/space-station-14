@@ -23,6 +23,7 @@ public sealed partial class PinpointerBoundUserInterface(EntityUid owner, Enum u
             case PinpointerCrewUIState crewState:
                 if (_crewMenu == null)
                     return;
+                
                 _crewMenu.CrewListCoords = crewState.Sensors;
                 _crewMenu.PopulateList();
                 break;
@@ -30,6 +31,7 @@ public sealed partial class PinpointerBoundUserInterface(EntityUid owner, Enum u
             case PinpointerItemUIState itemState:
                 if (_itemMenu == null)
                     return;
+                
                 _itemMenu.ItemListSet = itemState.Items;
                 _itemMenu.PopulateList();
                 break;
@@ -37,6 +39,7 @@ public sealed partial class PinpointerBoundUserInterface(EntityUid owner, Enum u
             case PinpointerComponentUIState targetState:
                 if (_crewMenu == null)
                     return;
+                
                 _crewMenu.CrewListCoords = targetState.Targets;
                 _crewMenu.PopulateList();
                 break;
@@ -44,6 +47,7 @@ public sealed partial class PinpointerBoundUserInterface(EntityUid owner, Enum u
             case PinpointerDnaUIState dnaState:
                 if (_dnaMenu == null)
                     return;
+                
                 _dnaMenu.ItemListSet = dnaState.Items;
                 _dnaMenu.PopulateList();
                 break;

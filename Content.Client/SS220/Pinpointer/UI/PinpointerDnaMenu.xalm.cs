@@ -12,7 +12,7 @@ namespace Content.Client.SS220.Pinpointer.UI;
 [GenerateTypedNameReferences]
 public sealed partial class PinpointerDnaMenu : FancyWindow
 {
-    private FancyWindow? DnaWindow;
+    private FancyWindow? _dnaWindow;
 
     public HashSet<TrackedItem> ItemListSet = [];
 
@@ -27,13 +27,13 @@ public sealed partial class PinpointerDnaMenu : FancyWindow
 
     private void OnDNASearch(BaseButton.ButtonEventArgs args)
     {
-        if (DnaWindow != null)
+        if (_dnaWindow != null)
         {
-            DnaWindow.Open();
+            _dnaWindow.Open();
             return;
         }
 
-        DnaWindow = new FancyWindow
+        _dnaWindow = new FancyWindow
         {
             Title = Loc.GetString("pinpointer-ui-uplink-search-by-dna"),
             SetSize = new Vector2(200, 200),
@@ -66,13 +66,13 @@ public sealed partial class PinpointerDnaMenu : FancyWindow
                 return;
 
             OnDnaPicked?.Invoke(lineEdit.Text);
-            DnaWindow?.Close();
+            _dnaWindow?.Close();
         };
 
         boxContainer.AddChild(lineEdit);
         boxContainer.AddChild(button);
-        DnaWindow.AddChild(boxContainer);
-        DnaWindow.OpenCentered();
+        _dnaWindow.AddChild(boxContainer);
+        _dnaWindow.OpenCentered();
     }
 
     public void PopulateList()
@@ -82,9 +82,6 @@ public sealed partial class PinpointerDnaMenu : FancyWindow
         foreach (var entry in ItemListSet)
         {
             var button = CreateTargetButton(entry.Name, () => OnTargetPicked?.Invoke(entry.Entity));
-
-            if (button == null)
-                continue;
 
             ItemList.AddChild(button);
         }
