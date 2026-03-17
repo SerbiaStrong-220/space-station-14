@@ -96,5 +96,5 @@
       shader: unshaded
       visible: false
   - type: Icon
-    sprite: Objects/Devices/pinpointer.rsi
+    sprite: SS220/Objects/Devices/pinpointer.rsi
     state: pinpointer-redwings
