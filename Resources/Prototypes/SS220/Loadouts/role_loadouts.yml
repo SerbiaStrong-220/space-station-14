@@ -2,7 +2,7 @@
 
 #! Юридический (Начало)
 
-  # Прадставитель НаноТрейзен
+  # Представитель НаноТрейзен
 - type: roleLoadout
   id: JobNanoTrasenRepresentative # TODO SS220
   groups:

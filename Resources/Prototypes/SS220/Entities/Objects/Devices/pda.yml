@@ -127,7 +127,7 @@
   description: Add funny description. TODO SS220
   components:
   - type: Pda
-    id: MagistrateIDCard
+    id: NanoTrasenRepresentativeIDCard
     penSlot:
       startingItem: CentCommNewPen
       priority: -1

@@ -29,7 +29,7 @@
 
 # Magistrate
 - type: entityTable
-  id: LockerFillNanoTrasenRepresentative
+  id: LockerFillNanoTrasenRepresentative # TODO SS220
   table: !type:AllSelector
     children:
     - id: ClothingHeadsetAltMagistrate
