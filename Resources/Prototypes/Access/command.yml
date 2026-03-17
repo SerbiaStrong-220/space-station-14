@@ -32,6 +32,7 @@
   - ResearchDirector
   - Blueshield #SS220 Blueshield
   - Magistrate #SS220 Law Department
+  #- NanoTrasenRepresentative # TODO SS220 Add
 
 - type: accessLevel
   id: EmergencyShuttleRepealAll

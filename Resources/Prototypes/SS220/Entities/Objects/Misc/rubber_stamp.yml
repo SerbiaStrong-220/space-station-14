@@ -138,7 +138,7 @@
 - type: entity
   parent: RubberStampBaseAlt
   id: RubberStampNanoTrasenRepresentative
-  name: NanoTrasen representative rubber stamp
+  name: NanoTrasen Representative rubber stamp
   suffix: DO NOT MAP
   components:
   - type: Stamp
