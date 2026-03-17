@@ -1,5 +1,6 @@
 using Content.Server.Administration.Logs;
 using Content.Shared.Database;
+using Content.Shared.Doors.Components;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Item;
@@ -61,7 +62,13 @@ public sealed class LubeSystem : EntitySystem
         args.Verbs.Add(verb);
     }
 
-    private bool TryLube(Entity<LubeComponent> entity, EntityUid target, EntityUid actor)
+    private bool TryLube(Entity<LubeComponent> entity, EntityUid target, EntityUid actor) {
+        if (HasComp<DoorComponent>(target)) return TryLubeDoor(entity, target, actor);
+        else if (HasComp<ItemComponent>(target)) return TryLubeItem(entity, target, actor);
+        else return false;
+    }
+
+    private bool TryLubeItem(Entity<LubeComponent> entity, EntityUid target, EntityUid actor)
     {
         if (HasComp<LubedComponent>(target) || !HasComp<ItemComponent>(target))
         {
@@ -86,4 +93,30 @@ public sealed class LubeSystem : EntitySystem
         _popup.PopupEntity(Loc.GetString("lube-failure", ("target", Identity.Entity(target, EntityManager))), actor, actor, PopupType.Medium);
         return false;
     }
+
+    private bool TryLubeDoor(Entity<LubeComponent> entity, EntityUid target, EntityUid actor)
+    {
+        if (!HasComp<DoorComponent>(target))
+        {
+            _popup.PopupEntity(Loc.GetString("lube-failure", ("target", Identity.Entity(target, EntityManager))), actor, actor, PopupType.Medium);
+            return false;
+        }
+
+        if (_solutionContainer.TryGetSolution(entity.Owner, entity.Comp.Solution, out _, out var solution))
+        {
+            var quantity = solution.RemoveReagent(entity.Comp.Reagent, entity.Comp.Consumption);
+            if (quantity > 0)
+            {
+                var lubricated = EnsureComp<LubricatedComponent>(target);
+                lubricated.Remaining += _random.Next(entity.Comp.MinSlips * quantity.Int(), entity.Comp.MaxSlips * quantity.Int());
+				Dirty(target, lubricated);
+                _adminLogger.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(actor):actor} lubricated {ToPrettyString(target):subject} with {ToPrettyString(entity.Owner):tool}");
+                _audio.PlayPvs(entity.Comp.Squeeze, entity.Owner);
+                _popup.PopupEntity(Loc.GetString("lube-success", ("target", Identity.Entity(target, EntityManager))), actor, actor, PopupType.Medium);
+                return true;
+            }
+        }
+        _popup.PopupEntity(Loc.GetString("lube-failure", ("target", Identity.Entity(target, EntityManager))), actor, actor, PopupType.Medium);
+        return false;
+	}
 }

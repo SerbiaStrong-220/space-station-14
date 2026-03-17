@@ -6,6 +6,7 @@ using Content.Shared.Database;
 using Content.Shared.Doors.Components;
 using Content.Shared.Emag.Systems;
 using Content.Shared.Interaction;
+using Content.Shared.Lube;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Power.EntitySystems;
@@ -365,10 +366,21 @@ public abstract partial class SharedDoorSystem : EntitySystem
         if (!SetState(uid, DoorState.Opening, door))
             return;
 
-        if (predicted)
-            Audio.PlayPredicted(door.OpenSound, uid, user, AudioParams.Default.WithVolume(-5));
-        else if (_net.IsServer)
-            Audio.PlayPvs(door.OpenSound, uid, AudioParams.Default.WithVolume(-5));
+        var silent = false;
+        if (EntityManager.TryGetComponent<LubricatedComponent>(uid, out var lubComp)) {
+            if (lubComp.Remaining > 0) {
+                lubComp.Remaining--;
+                Dirty(uid, lubComp);
+                silent = true;
+            }
+        }
+
+        if (!silent) {
+            if (predicted)
+                Audio.PlayPredicted(door.OpenSound, uid, user, AudioParams.Default.WithVolume(-5));
+            else if (_net.IsServer)
+                Audio.PlayPvs(door.OpenSound, uid, AudioParams.Default.WithVolume(-5));
+        }
 
         if (lastState == DoorState.Emagging && TryComp<DoorBoltComponent>(uid, out var doorBoltComponent))
             SetBoltsDown((uid, doorBoltComponent), !doorBoltComponent.BoltsDown, user, true);
@@ -457,6 +469,14 @@ public abstract partial class SharedDoorSystem : EntitySystem
 
         if (!SetState(uid, DoorState.Closing, door))
             return;
+
+        if (EntityManager.TryGetComponent<LubricatedComponent>(uid, out var lubComp)) {
+            if (lubComp.Remaining > 0) {
+                lubComp.Remaining--;
+                Dirty(uid, lubComp);
+                return;
+            }
+        }
 
         if (predicted)
             Audio.PlayPredicted(door.CloseSound, uid, user, AudioParams.Default.WithVolume(-5));
