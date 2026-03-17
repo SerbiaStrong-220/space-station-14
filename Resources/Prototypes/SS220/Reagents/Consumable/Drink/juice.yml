@@ -38,7 +38,7 @@
   name: reagent-name-juice-pear
   parent: BaseJuice
   desc: reagent-desc-juice-pear
-  physicalDesc: reagent-physical-desc-citric
+  physicalDesc: reagent-physical-desc-sweet
   flavor: pear
   color: "#f2d36b"
   metamorphicSprite:
