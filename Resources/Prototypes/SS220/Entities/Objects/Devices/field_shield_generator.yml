@@ -1,0 +1,30 @@
+- type: entity
+  parent: Clothing
+  id: FieldShieldGenerator
+  name: shield generator
+  description: An energy field generator that creates an energy shield around the carrier.
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Objects/Devices/field_generator.rsi
+    state: icon
+  - type: Clothing
+    sprite: SS220/Objects/Devices/field_generator.rsi
+    quickEquip: false
+    slots:
+    - suitStorage
+    equipDelay: 3
+    unequipDelay: 3
+  - type: FieldShieldProvider
+    rechargeShieldData:
+      rechargeTime: 15
+    shieldData:
+      shieldMaxCharge: 1
+      shieldSprite:
+        sprite: SS220/Effects/field_shield.rsi
+        state: blue
+    lightData:
+      color: "#0061d8"
+      radius: 1
+      energy: 4
