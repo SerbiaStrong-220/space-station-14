@@ -119,9 +119,12 @@ public static class Program
 
             foreach (var weapon in weapons)
             {
-                if (weapon.Error != WeaponAnalyzeError.None && !_options.KeepErrors)
+                if (weapon.Error != WeaponAnalyzeError.None)
                 {
-                    continue;
+                    if (!_options.KeepErrors)
+                        continue;
+
+                    Console.WriteLine($"Got error for weapon {weapon.Id} error is {weapon.Error}!");
                 }
 
                 var hitDamage = weapon.HitDamage;
@@ -270,14 +273,25 @@ public static class Program
 
     private static bool TryGetAmmo(EntityPrototype proto, WeaponInfo info, [NotNullWhen(true)] out string? ammoId)
     {
+        EntityPrototype? powerCellProto = null;
+
+        Console.WriteLine($"Trying to get ammo of {proto}");
         if (proto.TryGetComponent<ItemSlotsComponent>(out var itemSlots, _componentFactory))
         {
 #pragma warning disable RA0002 // Invalid access
             if (itemSlots.Slots.TryGetValue("gun_magazine", out var magazine) &&
                 magazine.StartingItem != null)
             {
-                proto = _prototypeManager.Index(magazine.StartingItem);
+                if (_prototypeManager.Resolve(magazine.StartingItem, out var resolvedProto))
+                    proto = resolvedProto;
                 info.MagazineId = magazine.StartingItem;
+            }
+            else if (itemSlots.Slots.TryGetValue("cell_slot", out var cell) &&
+                cell.StartingItem != null)
+            {
+                if (_prototypeManager.Resolve(cell.StartingItem, out var resolvedProto))
+                    powerCellProto = resolvedProto;
+                info.MagazineId = cell.StartingItem;
             }
 #pragma warning restore RA0002 // Invalid access
         }
@@ -290,7 +304,8 @@ public static class Program
         if (proto.TryGetComponent<ProjectileBatteryAmmoProviderComponent>(out var projectileBatteryProvider, _componentFactory))
         {
             ammoId = projectileBatteryProvider.Prototype;
-            if (proto.TryGetComponent<BatteryComponent>(out var battery, _componentFactory))
+            if (proto.TryGetComponent<BatteryComponent>(out var battery, _componentFactory)
+                || (powerCellProto is not null && powerCellProto.TryGetComponent<BatteryComponent>(out battery, _componentFactory)))
                 info.Capacity = (int)(battery.MaxCharge / projectileBatteryProvider.FireCost);
             else
                 info.Error = WeaponAnalyzeError.BatteryNotFound;
