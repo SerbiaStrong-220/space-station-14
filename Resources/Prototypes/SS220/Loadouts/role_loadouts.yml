@@ -2,6 +2,22 @@
 
 #! Юридический (Начало)
 
+  # Прадставитель НаноТрейзен
+- type: roleLoadout
+  id: JobNanoTrasenRepresentative # TODO SS220
+  groups:
+  - IAAHead
+  - IAAHeadset
+  - IAAGlasses
+  - IAANeck
+  - IAAJumpsuit
+  - IAAOuterclothing
+  - IAABackpacks #ss220 iaa loadout fix
+  - Survival
+  - Trinkets
+  - Gloves
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+
   # Магистрат
 - type: roleLoadout
   id: JobMagistrate

@@ -2,6 +2,7 @@
   id: Magistrate
   name: job-name-magistrate
   description: job-description-magistrate
+  #setPreference: false # TODO SS220 Роль отключена
   playTimeTracker: JobMagistrate
   requirements:
     - !type:DepartmentTimeRequirement
