@@ -366,16 +366,8 @@ public abstract partial class SharedDoorSystem : EntitySystem
         if (!SetState(uid, DoorState.Opening, door))
             return;
 
-        var silent = false;
-        if (EntityManager.TryGetComponent<LubricatedComponent>(uid, out var lubComp)) {
-            if (lubComp.Remaining > 0) {
-                lubComp.Remaining--;
-                Dirty(uid, lubComp);
-                silent = true;
-            }
-        }
-
-        if (!silent) {
+        if (!TryUseLubricant(uid))
+        {
             if (predicted)
                 Audio.PlayPredicted(door.OpenSound, uid, user, AudioParams.Default.WithVolume(-5));
             else if (_net.IsServer)
@@ -470,13 +462,8 @@ public abstract partial class SharedDoorSystem : EntitySystem
         if (!SetState(uid, DoorState.Closing, door))
             return;
 
-        if (EntityManager.TryGetComponent<LubricatedComponent>(uid, out var lubComp)) {
-            if (lubComp.Remaining > 0) {
-                lubComp.Remaining--;
-                Dirty(uid, lubComp);
-                return;
-            }
-        }
+        if (TryUseLubricant(uid))
+            return;
 
         if (predicted)
             Audio.PlayPredicted(door.CloseSound, uid, user, AudioParams.Default.WithVolume(-5));
@@ -858,4 +845,18 @@ public abstract partial class SharedDoorSystem : EntitySystem
         }
     }
     #endregion
+
+    /// <summary>
+    ///     Tries to use remaining lubricant.
+    /// </summary>
+    private bool TryUseLubricant(Entity uid)
+    {
+        if (!EntityManager.TryGetComponent<LubricatedComponent>(uid, out var lubComp)) return false;
+
+        if (lubComp.Remaining <= 0) return false;
+
+        lubComp.Remaining--;
+        Dirty(uid, lubComp);
+        return true;
+    }
 }
