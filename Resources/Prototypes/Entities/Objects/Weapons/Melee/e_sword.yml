@@ -409,7 +409,7 @@
     sprite: Objects/Weapons/Melee/e_sword_double-inhands.rsi
 # ss220 FixESword
   - type: Reflect
-    reflectProb: 0.50 #ss220 ttkTweaks
+    reflectProb: 0.65 #ss220 ttkTweaks
     reflectProbBehind: 0.10 #ss220 add reflect in back
     reflects:
       - NonEnergy
