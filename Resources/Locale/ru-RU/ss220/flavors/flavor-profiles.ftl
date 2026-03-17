@@ -3,3 +3,6 @@ flavor-complex-xlebnuldiesel = как химически-сладкое пиво
 flavor-complex-rrranta = как сладкая синтетика
 flavor-complex-skooma = как сладкие мечты
 flavor-complex-olivier = как праздник
+flavor-complex-stout = как горький шоколад
+flavor-complex-ipa = как фруктовый взрыв
+flavor-complex-plasmabeer = как глоток космоса
