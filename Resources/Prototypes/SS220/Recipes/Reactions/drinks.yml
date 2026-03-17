@@ -131,3 +131,17 @@
     amount: 1 
   products: 
     Skooma: 4
+
+- type: reaction
+  id: Dushes
+  requiredMixerCategories:
+  - Stir
+  reactants:
+    JuicePear:
+      amount: 1
+    Sugar:
+      amount: 1
+    Water:
+      amount: 1
+  products:
+    Dushes: 3

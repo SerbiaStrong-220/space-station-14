@@ -77,3 +77,8 @@
   id: pear
   flavorType: Complex
   description: flavor-complex-pear
+
+- type: flavor
+  id: dushes
+  flavorType: Complex
+  description: flavor-complex-dushes

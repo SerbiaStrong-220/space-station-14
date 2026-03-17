@@ -164,3 +164,25 @@
           types:
             Poison: 0.4
   fizziness: 0.6
+
+# pearDushes
+- type: reagent
+  id: Dushes
+  parent: BaseDrink
+  name: reagent-name-dushes
+  group: Drinks
+  desc: reagent-desc-dushes
+  physicalDesc: reagent-physical-desc-refreshing
+  flavor: dushes
+  color: "#e39a3a"
+  metamorphicSprite:
+    sprite: SS220/Objects/Consumable/Drinks/dushes.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 6
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2

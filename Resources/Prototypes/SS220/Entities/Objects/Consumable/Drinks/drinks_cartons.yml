@@ -1,0 +1,35 @@
+# carton of pear juice
+- type: entity
+  parent: DrinkCartonSmallBaseFull
+  id: DrinkJuicePearCarton
+  name: pear juice
+  description: Absolutely legaly exported from USSP!
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: JuicePear
+          Quantity: 50
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Drinks/pearcarton.rsi
+
+# carton of pear juice XL
+
+- type: entity
+  parent: DrinkCartonBaseXtraLargeFull
+  id: DrinkJuicePearCartonXL
+  name: pear juice XL
+  description: Absolutely legaly exported from USSP!
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 150
+        reagents:
+        - ReagentId: JuicePear
+          Quantity: 150
+  - type: Label
+    currentLabel: reagent-name-juice-pear
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Drinks/pearcarton.rsi

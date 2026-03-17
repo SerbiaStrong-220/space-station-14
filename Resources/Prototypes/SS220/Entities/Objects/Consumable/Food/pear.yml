@@ -1,8 +1,8 @@
 - type: entity
-  name: груша
+  name: pear
   parent: FoodProduceBase
   id: FoodPear
-  description: НАЛЕЙ ПАХАНУ ЧИФИРОЧКУ
+  description: its a pear
   components:
   - type: FlavorProfile
     flavors:
@@ -22,6 +22,11 @@
     heldPrefix: produce
   - type: Produce
     seedId: pear
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: JuicePear
+        Quantity: 10
   - type: Tag
     tags:
     - Fruit
@@ -31,15 +36,16 @@
       Taco: Pear
 
 - type: entity
-  name: грушевый тарт
+  name: pear tart
   parent: FoodPieBase
   id: FoodTartPear
-  description: Вкуснейший грушевый тарт, который можно приготовить в печи. НАЛЕЙ ПАХАНУ ЧИФИРОЧКУ
+  description: Its a pear tart.
   components:
   - type: FlavorProfile
     flavors:
       - sweet
       - pear
+      - bread 
   - type: Sprite
     sprite: SS220/Objects/Consumable/Food/Baked/pie.rsi
     state: pear

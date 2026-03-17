@@ -97,6 +97,7 @@
       - id: PeaSeeds
       - id: CherrySeeds
       - id: BeetSeeds #ss220 seeds
+      - id: PearSeeds #ss220 seeds
 
 - type: entity
   id: CrateHydroponicsTray
