@@ -13,8 +13,8 @@
   name: red wings officer
   components:
     - type: Sprite
-      sprite: Markers/jobs.rsi
-      state: passenger
+      sprite: SS220/Markers/jobs.rsi
+      state: redwingssec
     - type: RandomHumanoidSpawner
       settings: RedWingsOfficer
 
@@ -23,8 +23,8 @@
   name: red wings medic
   components:
     - type: Sprite
-      sprite: Markers/jobs.rsi
-      state: passenger
+      sprite: SS220/Markers/jobs.rsi
+      state: redwingsmed
     - type: RandomHumanoidSpawner
       settings: RedWingsMedic
 
@@ -33,7 +33,7 @@
   name: red wings pilot
   components:
     - type: Sprite
-      sprite: Markers/jobs.rsi
-      state: passenger
+      sprite: SS220/Markers/jobs.rsi
+      state: redwingspilot
     - type: RandomHumanoidSpawner
       settings: RedWingsPilot

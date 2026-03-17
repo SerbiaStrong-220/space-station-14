@@ -15,7 +15,7 @@
   speciesBlacklist: [ Felinid, Diona, Arachnid, Moth, Vox, Reptilian, Skeleton, SlimePerson, Vulpkanin, Tajaran, Dwarf]
   components:
     - type: GhostRole
-      rules: ghost-role-information-nonantagonist-rules
+      rules: ghost-role-information-redwings-rules
       raffle:
         settings: short
 
