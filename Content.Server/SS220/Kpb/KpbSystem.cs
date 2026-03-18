@@ -60,7 +60,7 @@ public sealed partial class KpbSystem : EntitySystem
     private void OnMapInit(Entity<KpbComponent> ent, ref MapInitEvent args)
     {
         UpdateBatteryAlert((ent, ent.Comp));
-        _action.AddAction(ent, ref ent.Comp.ActionEntity, ent.Comp.DrainBatteryAction);
+        _action.AddAction(ent, ref ent.Comp.DrainBatteryActionEntity, ent.Comp.DrainBatteryAction);
         _action.AddAction(ent, ref ent.Comp.ChangeFaceActionEntity, ent.Comp.ChangeFaceAction);
         _movementSpeedModifier.RefreshMovementSpeedModifiers(ent);
 
@@ -75,7 +75,7 @@ public sealed partial class KpbSystem : EntitySystem
 
     private void OnComponentShutdown(Entity<KpbComponent> ent, ref ComponentShutdown args)
     {
-        _action.RemoveAction(ent.Owner, ent.Comp.ActionEntity);
+        _action.RemoveAction(ent.Owner, ent.Comp.DrainBatteryActionEntity);
         _action.RemoveAction(ent.Owner, ent.Comp.ChangeFaceActionEntity);
     }
 
@@ -94,7 +94,7 @@ public sealed partial class KpbSystem : EntitySystem
             return;
 
         ent.Comp.DrainActivated = !ent.Comp.DrainActivated;
-        _action.SetToggled(ent.Comp.ActionEntity, ent.Comp.DrainActivated);
+        _action.SetToggled(ent.Comp.DrainBatteryActionEntity, ent.Comp.DrainActivated);
         args.Handled = true;
 
         if (ent.Comp.DrainActivated && _powerCell.TryGetBatteryFromSlot(ent, out var battery, out var _))

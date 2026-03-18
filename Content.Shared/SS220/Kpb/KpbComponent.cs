@@ -25,7 +25,7 @@ public sealed partial class KpbComponent : Component
     public EntProtoId ChangeFaceAction = "ActionKpbChangeFace";
 
     [DataField]
-    public EntityUid? ActionEntity;
+    public EntityUid? DrainBatteryActionEntity;
 
     [DataField]
     public EntityUid? ChangeFaceActionEntity;
