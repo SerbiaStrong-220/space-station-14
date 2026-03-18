@@ -6,7 +6,6 @@ using Content.Shared.Database;
 using Content.Shared.Doors.Components;
 using Content.Shared.Emag.Systems;
 using Content.Shared.Interaction;
-using Content.Shared.Lube;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Power.EntitySystems;
@@ -366,6 +365,7 @@ public abstract partial class SharedDoorSystem : EntitySystem
         if (!SetState(uid, DoorState.Opening, door))
             return;
 
+        // SS220 Add door lubrication
         if (!TryUseLubricant(uid))
         {
             if (predicted)
@@ -373,6 +373,7 @@ public abstract partial class SharedDoorSystem : EntitySystem
             else if (_net.IsServer)
                 Audio.PlayPvs(door.OpenSound, uid, AudioParams.Default.WithVolume(-5));
         }
+        // SS220 Add door lubrication
 
         if (lastState == DoorState.Emagging && TryComp<DoorBoltComponent>(uid, out var doorBoltComponent))
             SetBoltsDown((uid, doorBoltComponent), !doorBoltComponent.BoltsDown, user, true);
@@ -462,13 +463,16 @@ public abstract partial class SharedDoorSystem : EntitySystem
         if (!SetState(uid, DoorState.Closing, door))
             return;
 
-        if (TryUseLubricant(uid))
-            return;
+        // SS220 Add door lubrication
+        if (!TryUseLubricant(uid))
+        {
+            if (predicted)
+                Audio.PlayPredicted(door.CloseSound, uid, user, AudioParams.Default.WithVolume(-5));
+            else if (_net.IsServer)
+                Audio.PlayPvs(door.CloseSound, uid, AudioParams.Default.WithVolume(-5));
+        }
+        // SS220 Add door lubrication
 
-        if (predicted)
-            Audio.PlayPredicted(door.CloseSound, uid, user, AudioParams.Default.WithVolume(-5));
-        else if (_net.IsServer)
-            Audio.PlayPvs(door.CloseSound, uid, AudioParams.Default.WithVolume(-5));
     }
 
     /// <summary>
@@ -846,12 +850,13 @@ public abstract partial class SharedDoorSystem : EntitySystem
     }
     #endregion
 
+    // SS220 Add door lubrication (begin)
     /// <summary>
     ///     Tries to use remaining lubricant.
     /// </summary>
     private bool TryUseLubricant(EntityUid uid)
     {
-        if (!EntityManager.TryGetComponent<LubricatedComponent>(uid, out var lubComp)) return false;
+        if (!EntityManager.TryGetComponent<DoorLubedComponent>(uid, out var lubComp)) return false;
 
         if (lubComp.Remaining <= 0) return false;
 
@@ -859,4 +864,5 @@ public abstract partial class SharedDoorSystem : EntitySystem
         Dirty(uid, lubComp);
         return true;
     }
+    // SS220 Add door lubrication (end)
 }
