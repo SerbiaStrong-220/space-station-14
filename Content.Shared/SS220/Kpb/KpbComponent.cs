@@ -40,6 +40,9 @@ public sealed partial class KpbComponent : Component
 
     [DataField]
     public float LowChargeSpeed = 0.2f;
+
+    [DataField]
+    public float DamageFromEmp = 30;
 }
 
 public sealed partial class ToggleDrainActionEvent : InstantActionEvent

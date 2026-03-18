@@ -120,7 +120,7 @@ public sealed partial class KpbSystem : EntitySystem
             return;
         }
 
-        var chargePercent = (short) MathF.Round(battery.CurrentCharge / battery.MaxCharge * 10f);
+        var chargePercent = (short) MathF.Round(battery.CurrentCharge / battery.MaxCharge * 10f); //if 100f - crash
 
         if (chargePercent == 0 && _powerCell.HasDrawCharge(ent, cell: slot))
             chargePercent = 1;
@@ -179,7 +179,7 @@ public sealed partial class KpbSystem : EntitySystem
         args.Affected = true;
 
         var damage = new DamageSpecifier();
-        damage.DamageDict.Add("Shock", 30);
+        damage.DamageDict.Add("Shock", ent.Comp.DamageFromEmp);
         _damageable.TryChangeDamage(ent, damage);
 
     }
