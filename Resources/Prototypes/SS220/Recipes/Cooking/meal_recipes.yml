@@ -327,7 +327,7 @@
     TableSalt: 5
   solids:
     FoodCheeseSlice: 1
-    
+
 - type: microwaveMealRecipe
   id: RecipeFoodMealPigblanket
   name: food meal pigblanket
