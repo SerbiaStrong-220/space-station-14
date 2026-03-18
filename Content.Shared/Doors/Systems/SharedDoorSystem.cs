@@ -365,7 +365,7 @@ public abstract partial class SharedDoorSystem : EntitySystem
         if (!SetState(uid, DoorState.Opening, door))
             return;
 
-        // SS220 Add door lubrication
+        // SS220 Add door lubrication (begin)
         if (!TryUseLubricant(uid))
         {
             if (predicted)
@@ -373,7 +373,7 @@ public abstract partial class SharedDoorSystem : EntitySystem
             else if (_net.IsServer)
                 Audio.PlayPvs(door.OpenSound, uid, AudioParams.Default.WithVolume(-5));
         }
-        // SS220 Add door lubrication
+        // SS220 Add door lubrication (end)
 
         if (lastState == DoorState.Emagging && TryComp<DoorBoltComponent>(uid, out var doorBoltComponent))
             SetBoltsDown((uid, doorBoltComponent), !doorBoltComponent.BoltsDown, user, true);
@@ -463,7 +463,7 @@ public abstract partial class SharedDoorSystem : EntitySystem
         if (!SetState(uid, DoorState.Closing, door))
             return;
 
-        // SS220 Add door lubrication
+        // SS220 Add door lubrication (begin)
         if (!TryUseLubricant(uid))
         {
             if (predicted)
@@ -471,7 +471,7 @@ public abstract partial class SharedDoorSystem : EntitySystem
             else if (_net.IsServer)
                 Audio.PlayPvs(door.CloseSound, uid, AudioParams.Default.WithVolume(-5));
         }
-        // SS220 Add door lubrication
+        // SS220 Add door lubrication (end)
 
     }
 
@@ -856,9 +856,11 @@ public abstract partial class SharedDoorSystem : EntitySystem
     /// </summary>
     private bool TryUseLubricant(EntityUid uid)
     {
-        if (!EntityManager.TryGetComponent<DoorLubedComponent>(uid, out var lubComp)) return false;
+        if (!EntityManager.TryGetComponent<DoorLubedComponent>(uid, out var lubComp)) 
+           return false;
 
-        if (lubComp.Remaining <= 0) return false;
+        if (lubComp.Remaining <= 0)
+           return false;
 
         lubComp.Remaining--;
         Dirty(uid, lubComp);

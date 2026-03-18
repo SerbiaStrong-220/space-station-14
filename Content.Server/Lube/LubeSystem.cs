@@ -65,10 +65,10 @@ public sealed class LubeSystem : EntitySystem
 
     private bool TryLube(Entity<LubeComponent> entity, EntityUid target, EntityUid actor)
     {
-        // SS220 Add door lubrication
+        // SS220 Add door lubrication (begin)
         if (HasComp<DoorComponent>(target))
             return TryLubeDoor(entity, target, actor);
-        // SS220 Add door lubrication
+        // SS220 Add door lubrication (end)
 
         if (HasComp<LubedComponent>(target) || !HasComp<ItemComponent>(target))
         {
