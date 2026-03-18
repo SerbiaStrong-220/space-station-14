@@ -856,13 +856,13 @@ public abstract partial class SharedDoorSystem : EntitySystem
     /// </summary>
     private bool TryUseLubricant(EntityUid uid)
     {
-        if (!EntityManager.TryGetComponent<DoorLubedComponent>(uid, out var lubComp)) 
+        if (!EntityManager.TryGetComponent<DoorLubedComponent>(uid, out var lubComp))
            return false;
 
-        if (lubComp.Remaining <= 0)
+        if (lubComp.SilentUsesLeft <= 0)
            return false;
 
-        lubComp.Remaining--;
+        lubComp.SilentUsesLeft--;
         Dirty(uid, lubComp);
         return true;
     }

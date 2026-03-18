@@ -109,7 +109,7 @@ public sealed class LubeSystem : EntitySystem
             if (quantity > 0)
             {
                 var lubed = EnsureComp<DoorLubedComponent>(target);
-                lubed.Remaining += _random.Next(entity.Comp.MinSlips * quantity.Int(), entity.Comp.MaxSlips * quantity.Int());
+                lubed.SilentUsesLeft += _random.Next(entity.Comp.MinSlips * quantity.Int(), entity.Comp.MaxSlips * quantity.Int());
                 Dirty(target, lubed);
                 _adminLogger.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(actor):actor} lubed {ToPrettyString(target):subject} with {ToPrettyString(entity.Owner):tool}");
                 _audio.PlayPvs(entity.Comp.Squeeze, entity.Owner);
