@@ -37,6 +37,9 @@ public sealed partial class KpbComponent : Component
     public ProtoId<KpbFaceProfilePrototype> FaceProfile = "DefaultKpbFaces";
 
     public bool DrainActivated;
+
+    [DataField]
+    public float LowChargeSpeed = 0.2f;
 }
 
 public sealed partial class ToggleDrainActionEvent : InstantActionEvent

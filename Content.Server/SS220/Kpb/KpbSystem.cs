@@ -136,7 +136,7 @@ public sealed partial class KpbSystem : EntitySystem
     {
         if (!_powerCell.TryGetBatteryFromSlot(ent, out var battery) || battery.CurrentCharge / battery.MaxCharge < 0.01f)
         {
-            args.ModifySpeed(0.2f);
+            args.ModifySpeed(ent.Comp.LowChargeSpeed);
         }
     }
 
