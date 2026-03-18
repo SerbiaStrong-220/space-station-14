@@ -61,7 +61,7 @@ public sealed class KpbFaceMenu : FancyWindow
             if (!_prototype.TryIndex(face, out MarkingPrototype? marking) || marking.Sprites.Count == 0)
                 continue;
 
-            if (marking.Sprites[0] is not SpriteSpecifier.Rsi rsi)
+            if (marking.Sprites[0] is not SpriteSpecifier rsi)
                 continue;
 
             var texture = _sprite.Frame0(rsi);
