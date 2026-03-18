@@ -2,3 +2,12 @@
   id: Forcefield
   supportedTypes:
   - Forcefield
+
+- type: damageContainer
+  id: KpbContainer
+  supportedGroups:
+    - Brute
+    - Burn
+  supportedTypes:
+    - Heat
+    - Shock

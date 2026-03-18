@@ -1,0 +1,131 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Yogstation at https://github.com/yogstation13/Yogstation/commit/9c046aa5327c71f9e93e45a34283b3a4aff58bd1,",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "kpb_antenna_tv",
+      "directions": 4
+    },
+    {
+      "name": "kpb_antenna_tesla",
+      "directions": 4,
+      "delays": [
+        [
+          4,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          4,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          4,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          4,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "kpb_antenna_lightb",
+      "directions": 4,
+      "delays": [
+        [
+          4,
+          0.5,
+          0.1,
+          0.5
+        ],
+        [
+          4,
+          0.5,
+          0.1,
+          0.5
+        ],
+        [
+          4,
+          0.5,
+          0.1,
+          0.5
+        ],
+        [
+          4,
+          0.5,
+          0.1,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "kpb_antenna_light",
+      "directions": 4
+    },
+    {
+      "name": "kpb_antenna_cyberhead",
+      "directions": 4
+    },
+    {
+      "name": "kpb_antenna_sidelights",
+      "directions": 4
+    },
+    {
+      "name": "kpb_antenna_antlers",
+      "directions": 4
+    },
+    {
+      "name": "kpb_antenna_droneeyes",
+      "directions": 4
+    },
+    {
+      "name": "kpb_antenna_crowned",
+      "directions": 4
+    },
+    {
+      "name": "kpb_antenna_towers",
+      "directions": 4
+    },
+    {
+      "name": "kpb_antenna_duality",
+      "directions": 4
+    },
+    {
+      "name": "kpb_antenna_holo_aura",
+      "directions": 4
+    },
+    {
+      "name": "kpb_antenna_wireless_connection",
+      "directions": 4
+    },
+    {
+      "name": "kpb_small_eye",
+      "directions": 4
+    },
+        {
+      "name": "kpb_antenna_tvalt",
+      "directions": 4
+    },
+        {
+      "name": "kpb_antenna_cat",
+      "directions": 4
+    }
+  ]
+}

@@ -182,6 +182,22 @@
           Quantity: 3
         - ReagentId: Copper
           Quantity: 2
+##ss220-start
+  - type: Healing
+    damageContainers:
+      - KpbContainer
+    damage:
+      types:
+        Shock: -6
+        Blunt: -6
+        Slash: -6
+        Piercing: -6
+        Heat: -8
+    healingBeginSound:
+      path: "/Audio/Items/Medical/brutepack_begin.ogg"
+    healingEndSound:
+      path: "/Audio/Items/Medical/brutepack_end.ogg"
+##ss220-end
 
 - type: entity
   parent: CableApcStack

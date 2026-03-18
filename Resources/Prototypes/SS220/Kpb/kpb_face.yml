@@ -1,0 +1,35 @@
+- type: kpbFaceProfile
+  id: DefaultKpbFaces
+  faces:
+  - ScreenEyes
+  - ScreenEyestall
+  - ScreenSinewave
+  - ScreenPink
+  - ScreenQuestion
+  - ScreenHeart
+  - ScreenLoading
+  - ScreenTetris
+  - ScreenTv
+  - ScreenTextdrop
+  - ScreenStars
+  - ScreenFrown
+  - ScreenRing
+  - ScreenL
+  - SScreenPoxui
+  - SScreenAbsolutepoxui
+  - SScreenAwesome
+  - SScreenBestfriend
+  - SScreenBigsmile
+  - SScreenBoredom
+  - SScreenClown
+  - SScreenCreeper
+  - SScreenDealmaker
+  - SScreenMime
+  - SScreenMonkey
+  - SScreenMrgutsy
+  - SScreenNerd
+  - SScreenNya
+  - SScreenNerd
+  - SScreenSkull
+  - SScreenTenna
+
