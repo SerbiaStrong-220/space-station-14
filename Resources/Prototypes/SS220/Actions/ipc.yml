@@ -1,0 +1,26 @@
+- type: entity
+  id: ActionDrainBattery
+  name: Drain Battery
+  description: Drains nearby batteries to recharge yourself
+  components:
+    - type: Action
+      icon:
+        sprite: SS220/Interface/Actions/ipc/drainbattery.rsi
+        state: off
+      iconOn:
+        sprite: SS220/Interface/Actions/ipc/drainbattery.rsi
+        state: on
+      itemIconStyle: NoItem
+    - type: InstantAction
+      event: !type:ToggleDrainActionEvent
+
+- type: entity
+  id: ActionIpcChangeFace
+  name: Change IPC Face
+  description: Opens the IPC face selection menu
+  components:
+    - type: Action
+      icon: { sprite: SS220/Interface/Actions/ipc/ipcscreen.rsi, state: screen }
+      itemIconStyle: NoItem
+    - type: InstantAction
+      event: !type:OpenIpcFaceActionEvent

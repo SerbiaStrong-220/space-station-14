@@ -1,0 +1,512 @@
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenStatic
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_static
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenBlue
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_blue
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenBreakout
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_breakout
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenEight
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_eight
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenGoggles
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_goggles
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenExclaim
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_exclaim
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenHeart
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_heart
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenMonoeye
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_monoeye
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenNature
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_nature
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenOrange
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_orange
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenPink
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_pink
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenQuestion
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_question
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenShower
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_shower
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenYellow
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_yellow
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenScroll
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_scroll
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenConsole
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_console
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenRgb
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_rgb
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenGlider
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_glider
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenRainbowhoriz
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_rainbowhoriz
+      
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenBsod
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_bsod
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenRedtext
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_redtext
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenSinewave
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_sinewave
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenSquarewave
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_squarewave
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenEcgwave
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_ecgwave
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenEyes
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_eyes
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenEyestall
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_eyestall
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenEyesangry
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_eyesangry
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenLoading
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_loading
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenWindowsxp
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_windowsxp
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenTetris
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_tetris
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenTv
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_tv
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenTextdrop
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_textdrop
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenStars
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_stars
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenRainbowdiag
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_rainbowdiag
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenBlank
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_blank
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenSmile
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_smile
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenFrown
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_frown
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenRing
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_ring
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenL
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_l
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: SScreenPoxui
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_poxui
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: SScreenAbsolutepoxui
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_absolute_poxui
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: SScreenAwesome
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_awesome
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: SScreenBestfriend
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_best_friend
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: SScreenBigsmile
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_bigsmile
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: SScreenBoredom
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_boredom
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: SScreenClown
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_clown
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: SScreenCreeper
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_creeper
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: SScreenDealmaker
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_dealmaker
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: SScreenMime
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_mime
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: SScreenMonkey
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_monkey
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: SScreenMrgutsy
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_mr_gutsy
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: SScreenNerd
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_nerd
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: SScreenNya
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_nya
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: SScreenOko
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_oko
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: SScreenRock
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_rock
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: SScreenSkull
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_skull
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: SScreenTenna
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_tenna

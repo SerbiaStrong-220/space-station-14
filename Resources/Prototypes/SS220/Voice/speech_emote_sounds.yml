@@ -177,56 +177,56 @@
     CritGasp:
       collection: FemaleCritGasp
       
-# species KPB
+# species IPC
 - type: emoteSounds
-  id: MaleKpb
+  id: MaleIpc
   params:
     variation: 0.125
   sounds:
     Scream:
-      path: /Audio/SS220/Effects/Kpb/scream.ogg
+      path: /Audio/SS220/Effects/Ipc/scream.ogg
     Laugh:
-      path: /Audio/SS220/Effects/Kpb/laugh.ogg
+      path: /Audio/SS220/Effects/Ipc/laugh.ogg
     Snore:
       path: /Audio/Machines/buzz-two.ogg
     Crying:
-      path: /Audio/SS220/Effects/Kpb/cry.ogg
+      path: /Audio/SS220/Effects/Ipc/cry.ogg
     Weh:
       collection: Weh
 
 
 - type: emoteSounds
-  id: FemaleKpb
+  id: FemaleIpc
   params:
     variation: 0.125
   sounds:
     Scream:
-      path: /Audio/SS220/Effects/Kpb/scream.ogg
+      path: /Audio/SS220/Effects/Ipc/scream.ogg
     Laugh:
-      path: /Audio/SS220/Effects/Kpb/laugh.ogg
+      path: /Audio/SS220/Effects/Ipc/laugh.ogg
     Snore:
       path: /Audio/Machines/buzz-two.ogg
     Crying:
-      path: /Audio/SS220/Effects/Kpb/cry.ogg
+      path: /Audio/SS220/Effects/Ipc/cry.ogg
     Weh:
       collection: Weh
 
 
 
 - type: emoteSounds
-  id: KpbEmotes
+  id: IpcEmotes
   sounds:
-    BeepKpb:
+    BeepIpc:
       path: /Audio/Machines/twobeep.ogg
-    ChimeKpb:
+    ChimeIpc:
       path: /Audio/Machines/chime.ogg
-    BuzzKpb:
+    BuzzIpc:
       path: /Audio/Machines/buzz-sigh.ogg
-    Buzz-TwoKpb:
+    Buzz-TwoIpc:
       path: /Audio/Machines/buzz-two.ogg
-    HonkKpb:
+    HonkIpc:
       path: /Audio/Items/bikehorn.ogg
-    PingKpb:
+    PingIpc:
       path: /Audio/Effects/Cargo/ping.ogg
     Clap:
       collection: Claps
