@@ -39,7 +39,7 @@
     mask: /Textures/Effects/LightMasks/cone.png
     autoRot: true
     radius: 4
-    netsync: false
+    netsync: True
   - type: HandheldLight
     toggleOnInteract: false
     wattage: 0.2
@@ -338,7 +338,7 @@
     availableLanguages:
     - id: Galactic
     - id: Binary
-    - id: Universal
+
   - type: Puller
   - type: Speech
     speechSounds: Alto
