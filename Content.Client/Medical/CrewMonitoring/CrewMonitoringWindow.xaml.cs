@@ -58,18 +58,6 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
         NavMap.ForceNavMapUpdate();
     }
 
-    // SS220 FIX Monitoring Health BGN
-    private static int GetCrewMonitoringHealthIndex(float damagePercentage)
-    {
-        return damagePercentage switch
-        {
-            >= 1f => 5,
-            >= 0.9f => 4,
-            _ => Math.Clamp((int)MathF.Round(4f * damagePercentage), 0, 3)
-        };
-    }
-    // SS220 FIX Monitoring Health END
-
     protected override void FrameUpdate(FrameEventArgs args)
     {
         base.FrameUpdate(args);
@@ -208,15 +196,14 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
             }
             else if (sensor.DamagePercentage != null)
             {
-                var index = GetCrewMonitoringHealthIndex(sensor.DamagePercentage.Value); // SS220 FIX Monitoring Health
-
-                if (index >= 5)
+                if (sensor.DamagePercentage.Value >= 1f) // SS220 FIX Monitoring Health
                 {
                     specifier = new SpriteSpecifier.Rsi(new ResPath("Interface/Alerts/human_crew_monitoring.rsi"), "critical");
                     dotColor = Color.Red;
                 }
                 else
                 {
+                    var index = (int)MathF.Round(4f * sensor.DamagePercentage.Value); // SS220 FIX Monitoring Health
                     specifier = new SpriteSpecifier.Rsi(new ResPath("Interface/Alerts/human_crew_monitoring.rsi"), "health" + index);
                     dotColor = index switch
                     {
