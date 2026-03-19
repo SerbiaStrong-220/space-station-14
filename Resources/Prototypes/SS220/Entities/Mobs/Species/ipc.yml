@@ -114,11 +114,7 @@
       Alive: BorgHealth
       Critical: BorgCrit
       Dead: BorgDead
-  - type: Barotrauma
-    damage:
-      types:
-        Blunt: 0
-        Heat: 0
+  - type: PressureImmunity
   - type: DamageVisuals
     damageOverlayGroups:
       Brute:
@@ -372,17 +368,6 @@
     heatDamage:
       types:
         Heat: 1.5 #per second, scales with temperature & other constants
-  - type: TemperatureSpeed
-    thresholds:
-      293: 0.8
-  - type: ThermalRegulator
-    metabolismHeat: 800
-    radiatedHeat: 100
-    implicitHeatRegulation: 500
-    sweatHeatRegulation: 2000
-    shiveringHeatRegulation: 2000
-    normalBodyTemperature: 310.15
-    thermalRegulationTemperatureThreshold: 2
 
 - type: entity
   save: false
