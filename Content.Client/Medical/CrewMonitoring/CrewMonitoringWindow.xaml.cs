@@ -203,7 +203,7 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
                 }
                 else
                 {
-                    var index = (int)MathF.Round(4f * sensor.DamagePercentage.Value); // SS220 FIX Monitoring Health
+                    var index = MathF.Round(4f * sensor.DamagePercentage.Value); // SS220 FIX Monitoring Health
                     specifier = new SpriteSpecifier.Rsi(new ResPath("Interface/Alerts/human_crew_monitoring.rsi"), "health" + index);
                     dotColor = index switch
                     {
