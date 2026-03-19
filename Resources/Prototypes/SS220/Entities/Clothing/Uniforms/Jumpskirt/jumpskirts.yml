@@ -163,7 +163,7 @@
   id: ClothingUniformEveningDressMusician
   name: musician's evening dress
   description: A beautiful musician's dress for a quiet evening at the bar.
-  suffix: За время в игре
+  suffix: For playtime
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpskirt/musician_evening_dress.rsi
