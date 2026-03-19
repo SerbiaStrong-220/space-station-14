@@ -415,7 +415,7 @@
       - NonEnergy
       - Energy #SS220-FixReflects
     spread: 45
-    reflectProbProjectile: 0.70 #ss220lowTTKUpdate
+    reflectProbProjectile: 0.65 #ss220lowTTKUpdate
     spreadProjectile: 180
 # ss220 FixESword
   #SS220 craftable desword start
