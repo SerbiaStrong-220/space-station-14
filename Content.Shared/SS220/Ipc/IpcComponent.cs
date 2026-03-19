@@ -1,4 +1,6 @@
-﻿using Content.Shared.Actions;
+﻿// Taken from: Corvax https://github.com/space-syndicate/space-station-14
+
+using Content.Shared.Actions;
 using Content.Shared.Alert;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;

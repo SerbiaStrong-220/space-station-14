@@ -1,4 +1,6 @@
-﻿using Content.Server.PowerCell;
+﻿// Taken from: Corvax https://github.com/space-syndicate/space-station-14
+
+using Content.Server.PowerCell;
 using Content.Shared.Actions;
 using Content.Shared.Alert;
 using Content.Shared.SS220.Ipc;
