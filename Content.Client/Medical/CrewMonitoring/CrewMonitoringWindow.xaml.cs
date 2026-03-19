@@ -59,7 +59,7 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
     }
 
     // SS220 FIX Monitoring Health BGN
-    public static int GetCrewMonitoringHealthIndex(float damagePercentage)
+    private static int GetCrewMonitoringHealthIndex(float damagePercentage)
     {
         if (damagePercentage >= 1.0f)
             return 5;
