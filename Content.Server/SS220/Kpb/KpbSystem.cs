@@ -66,7 +66,7 @@ public sealed partial class KpbSystem : EntitySystem
 
         if (TryComp<HumanoidAppearanceComponent>(ent, out var appearance) &&
             appearance.MarkingSet.TryGetCategory(MarkingCategories.Snout, out var markings) &&
-            markings.Count > 0)
+            markings.Count > ent.Comp.OnMapInitMarkCount)
         {
             ent.Comp.SelectedFace = markings[0].MarkingId;
             Dirty(ent);

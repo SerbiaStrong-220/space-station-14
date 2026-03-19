@@ -43,6 +43,9 @@ public sealed partial class KpbComponent : Component
 
     [DataField]
     public float DamageFromEmp = 30;
+
+    [DataField]
+    public float OnMapInitMarkCount = 0;
 }
 
 public sealed partial class ToggleDrainActionEvent : InstantActionEvent
