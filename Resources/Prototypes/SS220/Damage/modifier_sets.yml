@@ -187,7 +187,7 @@
     Heat: 0.4
     
 - type: damageModifierSet
-  id: Kpb
+  id: Ipc
   coefficients:
     Blunt: 1.5
     Slash: 1.5

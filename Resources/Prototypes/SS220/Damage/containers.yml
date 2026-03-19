@@ -4,7 +4,7 @@
   - Forcefield
 
 - type: damageContainer
-  id: KpbContainer
+  id: IpcContainer
   supportedGroups:
     - Brute
     - Burn

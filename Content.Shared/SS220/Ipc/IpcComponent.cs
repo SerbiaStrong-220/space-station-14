@@ -1,0 +1,58 @@
+﻿using Content.Shared.Actions;
+using Content.Shared.Alert;
+using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
+
+namespace Content.Shared.SS220.Ipc;
+
+/// <summary>
+/// This is used for...
+/// </summary>
+[RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState]
+public sealed partial class IpcComponent : Component
+{
+    [DataField]
+    public ProtoId<AlertPrototype> BatteryAlert = "BorgBattery";
+
+    [DataField]
+    public ProtoId<AlertPrototype> NoBatteryAlert = "BorgBatteryNone";
+
+    [DataField]
+    public EntProtoId DrainBatteryAction = "ActionDrainBattery";
+
+    [DataField]
+    public EntProtoId ChangeFaceAction = "ActionIpcChangeFace";
+
+    [DataField]
+    public EntityUid? DrainBatteryActionEntity;
+
+    [DataField]
+    public EntityUid? ChangeFaceActionEntity;
+
+    [DataField, AutoNetworkedField]
+    public string SelectedFace = string.Empty;
+
+    [DataField, AutoNetworkedField]
+    public ProtoId<IpcFaceProfilePrototype> FaceProfile = "DefaultIpcFaces";
+
+    public bool DrainActivated;
+
+    [DataField]
+    public float LowChargeSpeed = 0.2f;
+
+    [DataField]
+    public float DamageFromEmp = 30;
+
+    [DataField]
+    public float OnMapInitMarkCount = 0;
+}
+
+public sealed partial class ToggleDrainActionEvent : InstantActionEvent
+{
+
+}
+
+public sealed partial class OpenIpcFaceActionEvent : InstantActionEvent
+{
+}
