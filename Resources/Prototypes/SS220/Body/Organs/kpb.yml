@@ -12,6 +12,7 @@
   - type: Organ
   - type: Input
     context: "ghost"
+  - type: BorgBrain
   - type: Brain
   - type: InputMover
   - type: Examiner
