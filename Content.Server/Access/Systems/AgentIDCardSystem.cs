@@ -165,7 +165,7 @@ namespace Content.Server.Access.Systems
         {
             foreach (var jobPrototype in _prototypeManager.EnumeratePrototypes<JobPrototype>())
             {
-                if (jobPrototype.LocalizedName?.Trim() == jobName.Trim())
+                if (jobPrototype.LocalizedName?.Trim() == jobName)
                 {
                     job = jobPrototype;
                     return true;
