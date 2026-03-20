@@ -11,10 +11,7 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction.Events;
-using Content.Shared.Inventory.Events;
 using Content.Shared.Popups;
-using Content.Shared.Throwing;
-using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -22,7 +19,7 @@ using System.Linq;
 
 namespace Content.Shared.FCB.AltBlocking;
 
-public sealed partial class AltBlockingSystem : EntitySystem
+public partial class SharedAltBlockingSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;

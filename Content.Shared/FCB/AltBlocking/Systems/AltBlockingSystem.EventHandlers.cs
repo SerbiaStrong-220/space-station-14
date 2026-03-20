@@ -6,7 +6,6 @@ using Content.Shared.FCB.Weapons.Melee.Events;
 using Content.Shared.FCB.Weapons.Ranged.Events;
 using Content.Shared.Hands;
 using Content.Shared.Interaction.Events;
-using Content.Shared.Inventory.Events;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Throwing;
 //using Content.Shared.Weapons.Hitscan.Components;
@@ -16,7 +15,7 @@ using Robust.Shared.Random;
 
 namespace Content.Shared.FCB.AltBlocking;
 
-public sealed partial class AltBlockingSystem
+public partial class SharedAltBlockingSystem
 {
     private void OnBlockUserCollide(Entity<AltBlockingUserComponent> ent, ref ProjectileBlockAttemptEvent args)
     {

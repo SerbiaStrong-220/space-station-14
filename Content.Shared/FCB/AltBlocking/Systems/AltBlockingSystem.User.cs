@@ -4,7 +4,7 @@ using Content.Shared.Toggleable;
 using Robust.Shared.Audio.Systems;
 namespace Content.Shared.FCB.AltBlocking;
 
-public sealed partial class AltBlockingSystem
+public partial class SharedAltBlockingSystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     private void InitializeUser()
