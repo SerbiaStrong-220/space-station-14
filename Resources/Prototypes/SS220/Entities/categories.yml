@@ -1,0 +1,4 @@
+- type: entityCategory
+  id: Zones
+  name: entity-category-name-zones
+  hideSpawnMenu: true

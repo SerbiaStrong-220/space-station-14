@@ -21,7 +21,7 @@ binds:
   type: State
   key: MouseRight
   canFocus: true
-  priority: -1 # UIRightClick & EditorCancelPlace should fire first.
+  priority: -1 # UIRightClick & EditorCancelPlace & BoxLayoutCancel(SS220) should fire first.
 - function: ShowDebugMonitors
   type: Toggle
   key: F3
@@ -719,3 +719,13 @@ binds:
   key: P
   mod1: Alt
 # SS220 add pinnable ui func end
+# SS220 mapping zones begin
+- function: BoxLayoutSetPoint
+  type: State
+  key: MouseLeft
+  canFocus: true
+- function: BoxLayoutCancel
+  type: State
+  key: MouseRight
+  canFocus: true
+# SS220 mapping zones end

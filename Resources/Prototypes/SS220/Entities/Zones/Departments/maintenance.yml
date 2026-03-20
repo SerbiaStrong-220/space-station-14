@@ -1,0 +1,19 @@
+- type: entity
+  parent: ZoneBase
+  id: ZoneMaintenance
+  name: maintenance
+
+- type: entity
+  parent: ZoneMaintenance
+  id: ZoneMaintenanceCorridor
+  name: maintenance corridor
+
+- type: entity
+  parent: ZoneMaintenance
+  id: ZoneMaintenanceDepartmentSubstation
+  name: maintenance department substation
+
+- type: entity
+  parent: ZoneMaintenance
+  id: ZoneMaintenanceSpaceAirlock
+  name: maintenance space airlock

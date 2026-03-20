@@ -1,0 +1,1 @@
+palette.png, palette.svg: Public Domain, taken from www.svgrepo.com

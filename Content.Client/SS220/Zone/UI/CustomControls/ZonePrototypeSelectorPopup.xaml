@@ -1,0 +1,11 @@
+<Popup xmlns="https://spacestation14.io"
+       MinSize="350 250">
+    <PanelContainer StyleClasses="BorderedWindowPanel">
+        <BoxContainer Orientation="Vertical" VerticalExpand="True"  HorizontalExpand="True">
+            <LineEdit Name="SearchBar" PlaceHolder="{Loc zone-prototype-selector-popup-searchbar-placeholder}" HorizontalExpand="True" Margin ="0 4"/>
+            <ScrollContainer Name="ScrollContainer" VerticalExpand="True" HorizontalExpand="True">
+                <BoxContainer Name="PrototypesContainer" Orientation="Vertical" HorizontalExpand="True"/>
+            </ScrollContainer>
+        </BoxContainer>
+    </PanelContainer>
+</Popup>
