@@ -15,6 +15,14 @@ namespace Content.Server.Dragon
         [DataField("rifts")]
         public List<EntityUid> Rifts = new();
 
+        // SS220 Dragon rifts charged buff BGN
+        public int RiftsCharged = 0;
+
+        public bool RiftSpeedBoostPermanent = false;
+
+        public float RiftSpeedBoostTime = 0f;
+        // SS220 Dragon rifts charged buff END
+
         public bool Weakened => WeakenedAccumulator > 0f;
 
         /// <summary>
