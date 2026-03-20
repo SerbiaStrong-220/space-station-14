@@ -1,3 +1,5 @@
+// Taken from: Corvax https://github.com/space-syndicate/space-station-14
+
 using Robust.Shared.GameStates;
 
 namespace Content.Shared.SS220.Ipc;

@@ -1,3 +1,5 @@
+// Taken from: Corvax https://github.com/space-syndicate/space-station-14
+
 using Robust.Shared.Prototypes;
 using Content.Shared.Humanoid.Markings;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;

@@ -1,3 +1,5 @@
+// Taken from: Corvax https://github.com/space-syndicate/space-station-14
+
 using Content.Shared.SS220.Ipc;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;

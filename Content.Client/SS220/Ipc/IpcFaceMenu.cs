@@ -1,3 +1,5 @@
+// Taken from: Corvax https://github.com/space-syndicate/space-station-14
+
 using System;
 using System.Numerics;
 using Content.Shared.SS220.Ipc;

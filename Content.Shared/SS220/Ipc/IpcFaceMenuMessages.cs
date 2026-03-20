@@ -1,3 +1,5 @@
+// Taken from: Corvax https://github.com/space-syndicate/space-station-14
+
 using Content.Shared.UserInterface;
 using Robust.Shared.Serialization;
 
