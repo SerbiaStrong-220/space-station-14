@@ -1,21 +1,34 @@
 // © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
-using Robust.Shared.Input;
-using Robust.Shared.Timing;
+using Content.Shared.FCB.AltBlocking;
+using Content.Shared.FCB.Weapons.Ranged.Events;
+using Content.Shared.Input;
 using Robust.Client.GameObjects;
 using Robust.Client.Player;
+using Robust.Shared.Input;
+using Robust.Shared.Timing;
 
-namespace Content.Shared.FCB.AltBlocking;
+namespace Content.Client.FCB.AltBlocking;
 
-public partial class AltBlockingSystem : SharedAltBlockingSystem
+public partial class AltBlockingInputSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly InputSystem _inputSystem = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
 
+    private bool ShouldReact = true;
+
     public override void Update(float frameTime)
     {
         if (!_timing.IsFirstTimePredicted)
             return;
+
+        var useKey = ContentKeyFunctions.ToggleActiveBlocking;
+
+        if (_inputSystem.CmdStates.GetState(useKey) == BoundKeyState.Up)
+        {
+            ShouldReact = true;
+            return;
+        }
 
         var entityNull = _player.LocalEntity;
 
@@ -24,15 +37,11 @@ public partial class AltBlockingSystem : SharedAltBlockingSystem
 
         var entity = entityNull.Value;
 
-        var useKey = EngineKeyFunctions.UseSecondary;
-
-        if (_inputSystem.CmdStates.GetState(useKey) == BoundKeyState.Down && !userComp.IsBlocking)
-        {
-            RaisePredictiveEvent(new AimStatusChangeAttemptEvent { Gun = GetNetEntity(gunUid), Aim = true, User = GetNetEntity(entity) });
+        if (!ShouldReact)
             return;
-        }
 
-        if (_inputSystem.CmdStates.GetState(useKey) == BoundKeyState.Up && userComp.IsBlocking)
-            RaisePredictiveEvent(new AimStatusChangeAttemptEvent { Gun = GetNetEntity(gunUid), Aim = false, User = GetNetEntity(entity) });
+        RaisePredictiveEvent(new BlockAttemptEvent { User = GetNetEntity(entity) });
+        ShouldReact = false;
+        return;
     }
 }

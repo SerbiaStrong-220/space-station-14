@@ -19,7 +19,7 @@ using System.Linq;
 
 namespace Content.Shared.FCB.AltBlocking;
 
-public partial class SharedAltBlockingSystem : EntitySystem
+public sealed partial class SharedAltBlockingSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;

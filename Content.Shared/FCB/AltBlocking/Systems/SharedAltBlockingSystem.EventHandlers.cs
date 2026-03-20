@@ -15,7 +15,7 @@ using Robust.Shared.Random;
 
 namespace Content.Shared.FCB.AltBlocking;
 
-public partial class SharedAltBlockingSystem
+public sealed partial class SharedAltBlockingSystem
 {
     private void OnBlockUserCollide(Entity<AltBlockingUserComponent> ent, ref ProjectileBlockAttemptEvent args)
     {
