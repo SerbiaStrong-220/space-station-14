@@ -122,8 +122,6 @@
     - map: ["enum.DamageStateVisualLayers.Base"]
       sprite: SS220/Mobs/Pets/bnuuy.rsi
       state: bnuuy
-  - type: Item
-    size: Tiny
   - type: Physics
   - type: Fixtures
     fixtures:
@@ -171,14 +169,8 @@
         Base: bnuuy_critical
       Dead:
         Base: bnuuy_dead
-  - type: Food
-  - type: FlavorProfile
-    flavors:
-    - meaty
   - type: Hunger
     baseDecayRate: 0.3
-  - type: Extractable
-    grindableSolutionName: food
   - type: SolutionContainerManager
     solutions:
       food:
@@ -193,12 +185,6 @@
     spawned:
     - id: FoodMeatRabbitBnuuy
       amount: 2
-  - type: Tag
-    tags:
-    - VimPilot
-    - ChefPilot
-    - Trash
-    - Meat
   - type: Respirator
     damage:
       types:
