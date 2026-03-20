@@ -13,9 +13,11 @@
       size: Ginormous
       heldPrefix: riot
     - type: AltBlocking
-    - type: InstastunResistOnActiveBlocking
+    - type: InstastunResist
       resistedStunTypes:
-        - Creampie
+      - Projectile
+      active: false
+    - type: InstastunResistOnActiveBlocking
     - type: ArmorBlock
       tresholddict:
           Radiation: 1000
