@@ -153,7 +153,7 @@
           Poison: 1000
           Airloss: 1000
           Caustic: 1000
-          Piercing: 55
+          Piercing: 37
           Blunt: 35
           Heat: 30
           Slash: 35
@@ -163,7 +163,7 @@
           Poison: 1000
           Airloss: 1000
           Caustic: 1000
-          Piercing: 40
+          Piercing: 30
           Blunt: 30
           Heat: 25
           Slash: 30

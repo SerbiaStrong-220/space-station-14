@@ -342,7 +342,6 @@
     toggledRangeBlockProb: 0.4
     toggledMeleeBlockProb: 0.35
   - type: ChangeAppearanceOnActiveBlocking
-    requiresToggle: true
     spriteLayer: shield
     inhandVisuals:
       left:
