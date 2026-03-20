@@ -315,18 +315,16 @@
     ClothingHeadHatCapWardenAlt: 1
 
 - type: microwaveMealRecipe
-  id: RecipeBnuuyBaked
-  name: bnuuy baked recipe
-  result: FoodMeatRabbitBnuuyBaked
+  id: RecipeBnuuyBakedOrange
+  name: bnuuy baked with oranges recipe
+  result: FoodMeatRabbitBnuuyBakedOrange
   time: 20
   group: Savory
   reagents:
-    OilOlive: 5
-    Cream: 10
+    SoySauce: 10
+    JuiceOrange: 20
   solids:
     FoodMeatRabbitBnuuy: 2
-    FoodPotato: 1
     FoodPlate: 1
-    FoodCarrot: 1
-    FoodGarlic: 1
-    FoodTomato: 1
+    FoodOrange: 2
+    FoodOnionSlice: 5

@@ -13,5 +13,5 @@ ent-FoodMeatRabbitSteak = стейк из крольчатины
     .desc = Идеально прожаренный кусочек крольчатины. Нежный, сочный и полезный.
 ent-FoodMeatRabbitBnuuySteak = стейк из бнууйнятины
     .desc = Отвратительно... И это сейчас не о бнууйнятине...
-ent-FoodMeatRabbitBnuuyBaked = запечённый бнууй
+ent-FoodMeatRabbitBnuuyBakedOrange = запечённый Бнууй с апельсинами
     .desc = Высокая кухня требует жертв — подавать со слезами смотрителя.

@@ -223,24 +223,3 @@
           Quantity: 1
         - ReagentId: Stimulants
           Quantity: 2
-
-- type: entity
-  parent: FoodMeatRabbitSteak
-  id: FoodMeatRabbitBnuuyBaked
-  name: baked bnuuy
-  description: High cuisine requires sacrifices, served with the warden's tears.
-  components:
-  - type: Sprite
-    state: rabbit_baked
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 14
-        - ReagentId: Protein
-          Quantity: 6
-        - ReagentId: Stimulants
-          Quantity: 4
-
-
