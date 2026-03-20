@@ -221,7 +221,7 @@ public sealed partial class DragonSystem : EntitySystem
             _audio.PlayPvs(component.SoundDeath, uid);
 
         // SS220 Dragon rifts charged buff BGN
-        if (component.RiftSpeedBoostPermanent && _lights.TryGetLight(uid, out var light))
+        if (component.RiftSpeedBoostPermanent)
             _lights.RemoveLightDeferred(uid);
         // SS220 Dragon rifts charged buff END
 
@@ -303,7 +303,7 @@ public sealed partial class DragonSystem : EntitySystem
                 _lights.SetEnergy(uid, 3.5f, light);
                 _lights.SetEnabled(uid, true, light);
 
-                _popup.PopupEntity(Loc.GetString("carp-rift-permanent-speed") , uid, uid);
+                _popup.PopupEntity(Loc.GetString("carp-rift-permanent-speed"), uid, uid);
             }
             else
             {

@@ -16,10 +16,13 @@ namespace Content.Server.Dragon
         public List<EntityUid> Rifts = new();
 
         // SS220 Dragon rifts charged buff BGN
+        [ViewVariables(VVAccess.ReadWrite)]
         public int RiftsCharged = 0;
 
+        [ViewVariables(VVAccess.ReadWrite)]
         public bool RiftSpeedBoostPermanent = false;
 
+        [ViewVariables(VVAccess.ReadWrite)]
         public float RiftSpeedBoostTime = 0f;
         // SS220 Dragon rifts charged buff END
 
