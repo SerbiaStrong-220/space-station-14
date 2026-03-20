@@ -89,6 +89,7 @@
       cell_slot: !type:ContainerSlot { }
   - type: Ipc
   - type: ZombieImmune
+  - type: Crawler
   - type: Repairable
     fuelCost: 30
     doAfterDelay: 20
