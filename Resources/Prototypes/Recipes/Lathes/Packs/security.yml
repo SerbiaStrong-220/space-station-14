@@ -81,6 +81,7 @@
   - ClothingBackpackHarmpack
   - RiotBulletShield #FCB Shield rework
   - RiotLaserShield #FCB Shield rework
+  - FieldShieldGenerator #SS220 Energy shield
 
 - type: latheRecipePack
   id: SecurityBoards
