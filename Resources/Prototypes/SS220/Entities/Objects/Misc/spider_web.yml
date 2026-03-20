@@ -80,7 +80,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 30
+        damage: 20
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
@@ -95,9 +95,9 @@
         Piercing: -1.5
         Blunt: -0.75
         Slash: -0.75
-        Heat: -1.5
-        Cold: -0.75
+        Heat: -1
       groups:
+        Burn: -2
         Toxin: -5
         Airloss: -2.5
     ignoreBlacklist:
@@ -115,11 +115,13 @@
     snap:
       - Wall
   components:
+  - type: Sprite
+    color: "#cccccc"
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 50
+        damage: 40
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
@@ -135,8 +137,8 @@
         Blunt: -1.5
         Slash: -1.5
         Heat: -3
-        Cold: -1.5
       groups:
+        Burn: -4
         Toxin: -8
         Airloss: -4
     ignoreBlacklist:
