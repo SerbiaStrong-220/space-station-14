@@ -36,6 +36,7 @@ using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using System.Linq;
 using System.Numerics;
+using Content.Shared.SS220.Lifesteal;
 
 namespace Content.Shared.SS220.DarkReaper;
 
@@ -63,6 +64,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
     [Dependency] private readonly PullingSystem _puller = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffectsSystem = default!;
+    [Dependency] private readonly LifestealSystem _lifesteal = default!;
 
     public override void Initialize()
     {
@@ -467,6 +469,11 @@ public abstract class SharedDarkReaperSystem : EntitySystem
     {
         comp.CurrentStage = stage;
         UpdateStageAppearance(uid, comp);
+
+        if (!comp.LifestealPerStage.TryGetValue(stage, out var lifestealPerStage))
+            return;
+
+        _lifesteal.ChangeLifesteal(uid, lifestealPerStage);
     }
 
     public void UpdateStage(EntityUid uid, DarkReaperComponent comp)

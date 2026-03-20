@@ -61,8 +61,8 @@
     coverage: EYES
 
 - type: entity
-  parent: ClothingEyesGlassesBlueShield
-  id: ClothingEyesBlueShieldGlasses
+  parent: ClothingEyesBase
+  id: ClothingEyesGlassesBlueShield
   name: blueshield glasses
   description: Upgraded sunglasses for blue shields.
   components:
@@ -74,12 +74,21 @@
     tags:
     - HamsterWearable
     - WhitelistChameleon
+  - type: FlashImmunity
+  - type: EyeProtection
+    protectionTime: 5
   - type: IdentityBlocker
     coverage: EYES
   - type: ShowJobIcons
+  - type: ShowHealthBars
+    damageContainers:
+    - Biological
+  - type: ShowHealthIcons
+    damageContainers:
+    - Biological
 
 - type: entity
-  parent: ClothingEyesBlueShieldGlasses
+  parent: ClothingEyesGlassesBlueShield
   id: ClothingEyesBlueShieldTacticGlasses
   name: blueshield tactic glasses
   description: Tactical glasses for combat situations.
@@ -88,6 +97,17 @@
     sprite: SS220/Clothing/Eyes/Glasses/blueshield_tactic.rsi
   - type: Clothing
     sprite: SS220/Clothing/Eyes/Glasses/blueshield_tactic.rsi
+
+- type: entity
+  parent: ClothingEyesGlassesBlueShield
+  id: ClothingEyesGlassesBallisticBlueShield
+  name: ballistic glasses
+  description: These glasses won't protect your eyes from splinters, but they will complement your tactical look. They have the functions of standard blue shield glasses.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Eyes/Glasses/blueshield_ballistic.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Eyes/Glasses/blueshield_ballistic.rsi
 
 - type: entity
   parent: [ClothingEyesBase, ShowMedicalIcons]
@@ -173,23 +193,3 @@
     - Security
   - type: IdentityBlocker
     coverage: EYES
-
-- type: entity
-  parent: ClothingEyesBase
-  id: ClothingEyesGlassesBlueShield
-  name: blue shield sunglasses
-  description: Strangely ancient technology used to help provide rudimentary eye cover. Enhanced shielding blocks many flashes.
-  components:
-  - type: Sprite
-    sprite: Clothing/Eyes/Glasses/bsglasses.rsi
-  - type: Clothing
-    sprite: Clothing/Eyes/Glasses/bsglasses.rsi
-  - type: FlashImmunity
-  - type: EyeProtection
-    protectionTime: 5
-  - type: ShowHealthBars
-    damageContainers:
-    - Biological
-  - type: ShowHealthIcons
-    damageContainers:
-    - Biological #ss220-blueshield-fix-end

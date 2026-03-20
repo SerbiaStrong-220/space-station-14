@@ -10,11 +10,14 @@ ent-ThermalVisorRND = термальный визор
 ent-ClothingEyesThermalGlassesSecurity = термальные очки охраны
     .desc = Модернизированные солнцезащитные очки с функцией защиты от вспышек, визором СБ и термальными визорами.
 
-ent-ClothingEyesBlueShieldGlasses = очки "Синий Щит"
+ent-ClothingEyesGlassesBlueShield = очки синего щита
     .desc = Модернизированные солнцезащитные очки для синих щитов.
 
-ent-ClothingEyesBlueShieldTacticGlasses = тактические очки "Синий Щит"
+ent-ClothingEyesBlueShieldTacticGlasses = тактические очки синего щита
     .desc = Тактические очки для боевых ситуаций.
+
+ent-ClothingEyesGlassesBallisticBlueShield = { ent-ClothingEyesGlassesBallistic }
+    .desc = Эти очки не защитят ваши глаза от осколков, но дополнят ваш тактический образ. Имеют функции стандартных очков синего щита.
 
 ent-ClothingEyesGlassesBallistic = баллистические очки
     .desc = Эти очки не защитят ваши глаза от осколков, но дополнят ваш тактический образ. Имеют функции стандартных очков СБ.

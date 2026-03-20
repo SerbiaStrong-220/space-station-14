@@ -81,6 +81,7 @@
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/hop_silverheadband.rsi
 
+  # Синий Щит
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadBeretBlueshield
@@ -91,6 +92,28 @@
       sprite: SS220/Clothing/Head/Hats/beret_blueshield.rsi
     - type: Clothing
       sprite: SS220/Clothing/Head/Hats/beret_blueshield.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadBeretBlue
+  name: blue beret
+  description: Beret in blue color for those who want to stand out as much as possible.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/beret_blue.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/beret_blue.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatBeretNavyBlue
+  name: navy blue officers beret
+  description: A navy blue beret adorned with the shield—a silver kite shield with an engraved sword—of the Nanotrasen security forces, announcing to the world that the wearer is a defender of Nanotrasen.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/beret_navyblue.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/beret_navyblue.rsi
 
 # Юридический департамент
 

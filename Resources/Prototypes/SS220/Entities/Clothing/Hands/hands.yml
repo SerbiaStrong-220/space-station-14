@@ -98,6 +98,8 @@
       types:
         Blunt: 45
     animation: WeaponArcFist
+    soundHit:
+      path: /Audio/SS220/Weapons/Melee/Punches/punch_ds.ogg
   - type: Fiber
     fiberMaterial: fibers-insulative
   - type: FingerprintMask
@@ -148,7 +150,7 @@
   - type: MeleeWeapon
     damage:
       types:
-        Blunt: 7
+        Blunt: 12
     bluntStaminaDamageFactor: 2.0
     mustBeEquippedToUse: true
   - type: StaminaDamageOnHit
@@ -196,6 +198,9 @@
           False: {state: icon}
   - type: ToggleClothing
     action: ActionTogglePowergloveDisabler
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 50
 
 - type: entity
   id: ActionTogglePowergloveDisabler
