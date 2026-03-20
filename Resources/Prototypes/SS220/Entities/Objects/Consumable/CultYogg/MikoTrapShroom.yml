@@ -1,10 +1,9 @@
 - type: entity
   name: miko trap
-  parent: [BaseBearTrap, CultYoggRestrictedItem, FoodProduceBase]
+  parent: [BaseBearTrap, CultYoggRestrictedItem]
   id: FoodMikoTrapShroomCult
   description: a hidden mushroom trap for infidels.
   components:
-    - type: Food
     - type: Sprite
       sprite: SS220/Objects/CultYogg/miko_trap_shroom.rsi
       layers:
@@ -28,6 +27,8 @@
         components:
         - CultYogg
     - type: Trap
+      setTrapDelay: 2.5
+      defuseTrapDelay: 2.5
       durationStun: 1
       setTrapSound: /Audio/SS220/Items/CultYogg/sound_trapCult_set.ogg
       defuseTrapSound: /Audio/SS220/Items/CultYogg/sound_trapCult_defuse.ogg
@@ -35,27 +36,11 @@
     - type: Stealth
       minVisibility: -0.2
       maxVisibility: 2
-    - type: FlavorProfile
-      flavors:
-      - menacing
-    - type: SolutionContainerManager
-      solutions:
-        food:
-          maxVol: 5.0
-          reagents:
-          - ReagentId: Nutriment
-            Quantity: 1
-          - ReagentId: Water
-            Quantity: 1
-          - ReagentId: Toxin
-            Quantity: 3
     - type: InjectionOnTrigger
       reagent: Toxin
       quantity: 3
     - type: Produce
       seedId: MikoTrapShroomSpores
-    - type: Extractable
-      grindableSolutionName: food
     - type: Tag
       tags:
       - Omnivorous
@@ -81,10 +66,11 @@
   packetPrototype: MikoTrapShroomSeeds
   productPrototypes:
   - FoodMikoTrapShroomCult
+  harvestRepeat: Repeat
   lifespan: 25
   maturation: 12
-  production: 2
-  yield: 1
+  production: 10
+  yield: 2
   potency: 2
   growthStages: 5
   chemicals:
