@@ -321,10 +321,10 @@
   time: 20
   group: Savory
   reagents:
-    SoySauce: 10
+    Soysauce: 10
     JuiceOrange: 20
   solids:
     FoodMeatRabbitBnuuy: 2
     FoodPlate: 1
     FoodOrange: 2
-    FoodOnionSlice: 5
+    FoodOnionSlice: 1
