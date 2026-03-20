@@ -76,3 +76,25 @@
     interfaces:
       enum.PinpointerUIKey.Key:
         type: PinpointerBoundUserInterface
+
+- type: entity
+  parent: PinpointerCrew
+  id: PinpointerDNA
+  name: advanced crew pinpointer
+  description: An advanced version of the crew pinpointer, which allows, in addition to tracking by sensors, to track a crew member by their DNA.
+  suffix: Dna, Pinpointer, Red Wings
+  components:
+  - type: Pinpointer
+    mode: Dna
+  - type: Sprite
+    sprite: SS220/Objects/Devices/pinpointer.rsi
+    layers:
+    - state: pinpointer-redwings
+      map: ["enum.PinpointerLayers.Base"]
+    - state: pinonnull
+      map: ["enum.PinpointerLayers.Screen"]
+      shader: unshaded
+      visible: false
+  - type: Icon
+    sprite: SS220/Objects/Devices/pinpointer.rsi
+    state: pinpointer-redwings

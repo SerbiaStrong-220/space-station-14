@@ -62,6 +62,10 @@ public sealed class PinpointerSystem : EntitySystem
             case PinpointerMode.Component:
                 UpdateTargetsTrackers(uid, comp);
                 break;
+
+            case PinpointerMode.Dna:
+                UpdateDnaTrackers(uid, comp);
+                break;
         }
 
         if (comp.Target != null && !IsTargetValid(comp))
@@ -141,6 +145,16 @@ public sealed class PinpointerSystem : EntitySystem
         }
     }
 
+    private void UpdateDnaTrackers(EntityUid uid, PinpointerComponent comp)
+    {
+        comp.TrackedItems.Clear();
+
+        if (string.IsNullOrEmpty(comp.DnaToTrack) || comp.TrackedByDnaEntity == null)
+            return;
+
+        comp.TrackedItems.Add(new TrackedItem(GetNetEntity(comp.TrackedByDnaEntity.Value), comp.DnaToTrack));
+    }
+
     private bool IsTargetValid(PinpointerComponent comp)
     {
         return comp.Mode switch
@@ -148,6 +162,7 @@ public sealed class PinpointerSystem : EntitySystem
             PinpointerMode.Crew => comp.Sensors.Any(sensor => GetEntity(sensor.Entity) == comp.Target),
             PinpointerMode.Item => comp.TrackedItems.Any(item => item.Entity == GetNetEntity(comp.Target!.Value)),
             PinpointerMode.Component => comp.Targets.Any(target => GetEntity(target.Entity) == comp.Target),
+            PinpointerMode.Dna => comp.TrackedItems.Any(item => item.Entity == GetNetEntity(comp.Target!.Value)),
             _ => false,
         };
     }
@@ -203,6 +218,10 @@ public sealed class PinpointerSystem : EntitySystem
 
             case PinpointerMode.Component:
                 _uiSystem.SetUiState(ent.Owner, PinpointerUIKey.Key, new PinpointerComponentUIState(ent.Comp.Targets));
+                break;
+
+            case PinpointerMode.Dna:
+                _uiSystem.SetUiState(ent.Owner, PinpointerUIKey.Key, new PinpointerDnaUIState(ent.Comp.TrackedItems));
                 break;
         }
     }

@@ -1,0 +1,5 @@
+- type: accessLevel
+  id: Interdyne
+  name: id-card-access-level-interdyne
+  canBeSwitchableInReader: false #SS220 DoorElectronicsConfiguratorFix
+  showInPda: false # ss220 add additional info for pda
