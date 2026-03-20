@@ -206,5 +206,5 @@
   name: chat-radio-interdyne
   keycode: 'й'
   frequency: 1001
-  color: "#36664c"
+  color: "#60b781"
   longRange: true

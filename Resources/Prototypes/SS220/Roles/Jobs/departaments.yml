@@ -15,11 +15,11 @@
   id: RedWings
   name: department-RedWings
   description: department-redwings-description
-  color: "#772026" #ss220-chatcolor
+  color: "#ab3128" #ss220-chatcolor
   roles:
   - RedWingsOfficer
   - RedWingsMedic
   - RedWingsPilot
   editorHidden: true
   weight: 90
-  lightColor: "#902922"
+  
