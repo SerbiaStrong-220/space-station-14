@@ -13,8 +13,7 @@ using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
-using Content.Shared.SS220.EquipmentDnaLock.Components;
-using Content.Shared.SS220.SwitchableWeapon;
+using Content.Shared.SS220.DnaLockable.Components;
 using Content.Shared.Storage;
 using Content.Shared.Storage.Components;
 using Content.Shared.Verbs;
@@ -23,9 +22,9 @@ using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 
-namespace Content.Shared.SS220.EquipmentDnaLock;
+namespace Content.Shared.SS220.DnaLock;
 
-public sealed class EquipmentDnaLockSystem : EntitySystem
+public sealed class ItemDnaLockSystem : EntitySystem
 {
     [Dependency] private readonly SharedEntityEffectsSystem _entityEffects = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -38,57 +37,52 @@ public sealed class EquipmentDnaLockSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<EquipmentDnaLockComponent, ItemToggleActivateAttemptEvent>(OnActivateAttempt);
-        SubscribeLocalEvent<EquipmentDnaLockComponent, UseInHandEvent>(OnUseInHand);
-        SubscribeLocalEvent<EquipmentDnaLockComponent, AttemptShootEvent>(OnAttemptShoot);
-        SubscribeLocalEvent<EquipmentDnaLockComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerbs);
-        SubscribeLocalEvent<EquipmentDnaLockComponent, GetVerbsEvent<Verb>>(OnGetVerbs, after: new[] { typeof(BatteryWeaponFireModesSystem) });
-        SubscribeLocalEvent<EquipmentDnaLockComponent, StorageOpenAttemptEvent>(OnStorageOpenAttempt);
-        SubscribeLocalEvent<EquipmentDnaLockComponent, StorageInteractAttemptEvent>(OnStorageInteractAttempt);
-        SubscribeLocalEvent<EquipmentDnaLockComponent, ToggleClothingEvent>(OnToggleableClothing, before: new[] { typeof(ToggleableClothingSystem) });
-        SubscribeLocalEvent<EquipmentDnaLockComponent, ItemSlotEjectAttemptEvent>(OnItemSlotEjectAttempt);
-        SubscribeLocalEvent<EquipmentDnaLockComponent, ExaminedEvent>(OnExamined);
+        SubscribeLocalEvent<DnaLockableComponent, ItemToggleActivateAttemptEvent>(OnActivateAttempt);
+        SubscribeLocalEvent<DnaLockableComponent, UseInHandEvent>(OnUseInHand);
+        SubscribeLocalEvent<DnaLockableComponent, AttemptShootEvent>(OnAttemptShoot);
+        SubscribeLocalEvent<DnaLockableComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerbs);
+        SubscribeLocalEvent<DnaLockableComponent, GetVerbsEvent<Verb>>(OnGetVerbs, after: [typeof(BatteryWeaponFireModesSystem)]);
+        SubscribeLocalEvent<DnaLockableComponent, StorageOpenAttemptEvent>(OnStorageOpenAttempt);
+        SubscribeLocalEvent<DnaLockableComponent, StorageInteractAttemptEvent>(OnStorageInteractAttempt);
+        SubscribeLocalEvent<DnaLockableComponent, ToggleClothingEvent>(OnToggleableClothing, before: [typeof(ToggleableClothingSystem)]);
+        SubscribeLocalEvent<DnaLockableComponent, ItemSlotEjectAttemptEvent>(OnItemSlotEjectAttempt);
+        SubscribeLocalEvent<DnaLockableComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<RoleAddedEvent>(OnRoleAdded);
-        SubscribeLocalEvent<EquipmentDnaLockComponent, GotEmaggedEvent>(OnEmagged);
+        SubscribeLocalEvent<DnaLockableComponent, GotEmaggedEvent>(OnEmagged);
     }
 
-    private void OnActivateAttempt(Entity<EquipmentDnaLockComponent> ent, ref ItemToggleActivateAttemptEvent args)
+    private void OnActivateAttempt(Entity<DnaLockableComponent> ent, ref ItemToggleActivateAttemptEvent args)
     {
         if (args.User is not {} user)
             return;
 
-        if (CheckUse(ent, user, args.Silent))
+        if (CheckAccess(ent, user, args.Silent))
             return;
 
         args.Cancelled = true;
     }
 
-    private void OnUseInHand(Entity<EquipmentDnaLockComponent> ent, ref UseInHandEvent args)
+    private void OnUseInHand(Entity<DnaLockableComponent> ent, ref UseInHandEvent args)
     {
-        var comp = ent.Comp;
-
-        if (comp.RequireSwitchableWeaponForHandUse && !HasComp<SwitchableWeaponComponent>(ent))
-            return;
-
-        if (CheckUse(ent, args.User))
+        if (CheckAccess(ent, args.User))
             return;
 
         args.Handled = true;
     }
 
-    private void OnAttemptShoot(Entity<EquipmentDnaLockComponent> ent, ref AttemptShootEvent args)
+    private void OnAttemptShoot(Entity<DnaLockableComponent> ent, ref AttemptShootEvent args)
     {
-        if (CheckUse(ent, args.User))
+        if (CheckAccess(ent, args.User))
             return;
 
         args.Cancelled = true;
     }
 
-    private void OnGetVerbs(Entity<EquipmentDnaLockComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
+    private void OnGetVerbs(Entity<DnaLockableComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
         var comp = ent.Comp;
 
-        if (comp.Mode != EquipmentDnaLockMode.InRound || comp.Emagged)
+        if (comp.Mode != DnaLockMode.InRound || comp.Emagged)
             return;
 
         if (!args.CanInteract)
@@ -104,7 +98,7 @@ public sealed class EquipmentDnaLockSystem : EntitySystem
 
             args.Verbs.Add(new AlternativeVerb
             {
-                Text = Loc.GetString("equipment-dna-lock-verb-register"),
+                Text = Loc.GetString("dna-lock-verb-register"),
                 Act = () => RegisterDna(ent, user, dnaComp.DNA)
             });
         }
@@ -117,14 +111,14 @@ public sealed class EquipmentDnaLockSystem : EntitySystem
             args.Verbs.Add(new AlternativeVerb
             {
                 Text = comp.LockActive
-                    ? Loc.GetString("equipment-dna-lock-verb-deactivate")
-                    : Loc.GetString("equipment-dna-lock-verb-activate"),
+                    ? Loc.GetString("dna-lock-verb-deactivate")
+                    : Loc.GetString("dna-lock-verb-activate"),
                 Act = () => ToggleLock(ent)
             });
         }
     }
 
-    private void OnGetVerbs(Entity<EquipmentDnaLockComponent> ent, ref GetVerbsEvent<Verb> args)
+    private void OnGetVerbs(Entity<DnaLockableComponent> ent, ref GetVerbsEvent<Verb> args)
     {
         var comp = ent.Comp;
 
@@ -140,46 +134,46 @@ public sealed class EquipmentDnaLockSystem : EntitySystem
         args.Verbs.RemoveWhere(v => v.Category == VerbCategory.SelectType);
     }
 
-    private void OnStorageOpenAttempt(Entity<EquipmentDnaLockComponent> ent, ref StorageOpenAttemptEvent args)
+    private void OnStorageOpenAttempt(Entity<DnaLockableComponent> ent, ref StorageOpenAttemptEvent args)
     {
         var comp = ent.Comp;
 
         if (!comp.BlockStorageOpen)
             return;
 
-        if (CheckUse(ent, args.User, args.Silent))
+        if (CheckAccess(ent, args.User, args.Silent))
             return;
 
         args.Cancelled = true;
     }
 
-    private void OnStorageInteractAttempt(Entity<EquipmentDnaLockComponent> ent, ref StorageInteractAttemptEvent args)
+    private void OnStorageInteractAttempt(Entity<DnaLockableComponent> ent, ref StorageInteractAttemptEvent args)
     {
         var comp = ent.Comp;
 
         if (!comp.BlockStorageOpen)
             return;
 
-        if (CheckUse(ent, args.User, args.Silent))
+        if (CheckAccess(ent, args.User, args.Silent))
             return;
 
         args.Cancelled = true;
     }
 
-    private void OnToggleableClothing(Entity<EquipmentDnaLockComponent> ent, ref ToggleClothingEvent args)
+    private void OnToggleableClothing(Entity<DnaLockableComponent> ent, ref ToggleClothingEvent args)
     {
         var comp = ent.Comp;
 
         if (!comp.BlockToggleableClothing)
             return;
 
-        if (CheckUse(ent, args.Performer))
+        if (CheckAccess(ent, args.Performer))
             return;
 
         args.Handled = true;
     }
 
-    private void OnItemSlotEjectAttempt(Entity<EquipmentDnaLockComponent> ent, ref ItemSlotEjectAttemptEvent args)
+    private void OnItemSlotEjectAttempt(Entity<DnaLockableComponent> ent, ref ItemSlotEjectAttemptEvent args)
     {
         var comp = ent.Comp;
 
@@ -189,59 +183,41 @@ public sealed class EquipmentDnaLockSystem : EntitySystem
         if (args.User == null)
             return;
 
-        if (CheckUse(ent, args.User.Value))
+        if (CheckAccess(ent, args.User.Value))
             return;
 
         args.Cancelled = true;
     }
 
-    private void RegisterDna(Entity<EquipmentDnaLockComponent> ent, EntityUid user, string dna)
-    {
-        var comp = ent.Comp;
-
-        comp.AllowedDna.Clear();
-        comp.AllowedDna.Add(dna);
-        comp.LockActive = true;
-
-        Dirty(ent);
-        _popup.PopupClient(Loc.GetString("equipment-dna-lock-registered-popup"), ent.Owner, user);
-    }
-
-    private void ToggleLock(Entity<EquipmentDnaLockComponent> ent)
-    {
-        ent.Comp.LockActive = !ent.Comp.LockActive;
-        Dirty(ent);
-    }
-
-    private void OnExamined(Entity<EquipmentDnaLockComponent> ent, ref ExaminedEvent args)
+    private void OnExamined(Entity<DnaLockableComponent> ent, ref ExaminedEvent args)
     {
         var comp = ent.Comp;
 
         if (comp.Emagged)
         {
-            args.PushMarkup(Loc.GetString("equipment-dna-lock-examine-emagged"));
+            args.PushMarkup(Loc.GetString("dna-lock-examine-emagged"));
             return;
         }
 
-        if (comp.Mode == EquipmentDnaLockMode.Roundstart)
+        if (comp.Mode == DnaLockMode.Roundstart)
         {
             if (comp.AllowedDna.Count > 0)
-                args.PushMarkup(Loc.GetString("equipment-dna-lock-examine-roundstart-locked"));
+                args.PushMarkup(Loc.GetString("dna-lock-examine-roundstart-locked"));
             else
-                args.PushMarkup(Loc.GetString("equipment-dna-lock-examine-roundstart-waiting"));
+                args.PushMarkup(Loc.GetString("dna-lock-examine-roundstart-waiting"));
 
             return;
         }
 
         if (comp.AllowedDna.Count == 0)
         {
-            args.PushMarkup(Loc.GetString("equipment-dna-lock-examine-inround-unset"));
+            args.PushMarkup(Loc.GetString("dna-lock-examine-inround-unset"));
             return;
         }
 
         args.PushMarkup(comp.LockActive
-            ? Loc.GetString("equipment-dna-lock-examine-inround-active")
-            : Loc.GetString("equipment-dna-lock-examine-inround-inactive"));
+            ? Loc.GetString("dna-lock-examine-inround-active")
+            : Loc.GetString("dna-lock-examine-inround-inactive"));
     }
 
     private void OnRoleAdded(RoleAddedEvent ev)
@@ -259,11 +235,11 @@ public sealed class EquipmentDnaLockSystem : EntitySystem
             return;
 
         var dna = dnaComp.DNA;
-        var query = EntityQueryEnumerator<EquipmentDnaLockComponent>();
+        var query = EntityQueryEnumerator<DnaLockableComponent>();
 
         while (query.MoveNext(out var uid, out var comp))
         {
-            if (comp.Mode != EquipmentDnaLockMode.Roundstart ||
+            if (comp.Mode != DnaLockMode.Roundstart ||
                 comp.RoundstartJob != jobId ||
                 comp.Emagged)
             {
@@ -275,9 +251,9 @@ public sealed class EquipmentDnaLockSystem : EntitySystem
         }
     }
 
-    private void OnEmagged(Entity<EquipmentDnaLockComponent> ent, ref GotEmaggedEvent args)
+    private void OnEmagged(Entity<DnaLockableComponent> ent, ref GotEmaggedEvent args)
     {
-        if (ent.Comp.Mode != EquipmentDnaLockMode.InRound)
+        if (ent.Comp.Mode != DnaLockMode.InRound)
             return;
 
         ent.Comp.Emagged = true;
@@ -288,7 +264,25 @@ public sealed class EquipmentDnaLockSystem : EntitySystem
         args.Repeatable = true;
     }
 
-    private bool IsAuthorized(Entity<EquipmentDnaLockComponent> ent, EntityUid user)
+    public void RegisterDna(Entity<DnaLockableComponent> ent, EntityUid user, string dna)
+    {
+        var comp = ent.Comp;
+
+        comp.AllowedDna.Clear();
+        comp.AllowedDna.Add(dna);
+        comp.LockActive = true;
+
+        Dirty(ent);
+        _popup.PopupClient(Loc.GetString("dna-lock-registered-popup"), ent.Owner, user);
+    }
+
+    public void ToggleLock(Entity<DnaLockableComponent> ent)
+    {
+        ent.Comp.LockActive = !ent.Comp.LockActive;
+        Dirty(ent);
+    }
+
+    private bool IsAuthorized(Entity<DnaLockableComponent> ent, EntityUid user)
     {
         var comp = ent.Comp;
 
@@ -298,10 +292,10 @@ public sealed class EquipmentDnaLockSystem : EntitySystem
         if (comp.Emagged)
             return true;
 
-        if (comp.Mode == EquipmentDnaLockMode.InRound && !comp.LockActive)
+        if (comp.Mode == DnaLockMode.InRound && !comp.LockActive)
             return true;
 
-        if (comp.Mode == EquipmentDnaLockMode.Roundstart && comp.AllowedDna.Count == 0)
+        if (comp.Mode == DnaLockMode.Roundstart && comp.AllowedDna.Count == 0)
             return false;
 
         if (!TryComp<DnaComponent>(user, out var dnaComp))
@@ -310,18 +304,18 @@ public sealed class EquipmentDnaLockSystem : EntitySystem
         return comp.AllowedDna.Contains(dnaComp.DNA ?? string.Empty);
     }
 
-    private bool CheckUse(Entity<EquipmentDnaLockComponent> ent, EntityUid user, bool silent = false)
+    public bool CheckAccess(Entity<DnaLockableComponent> ent, EntityUid user, bool silentFail = false)
     {
         if (IsAuthorized(ent, user))
             return true;
 
-        if (!silent)
+        if (!silentFail)
             DenyUse(ent, user);
 
         return false;
     }
 
-    private void DenyUse(Entity<EquipmentDnaLockComponent> ent, EntityUid user)
+    private void DenyUse(Entity<DnaLockableComponent> ent, EntityUid user)
     {
         var comp = ent.Comp;
 

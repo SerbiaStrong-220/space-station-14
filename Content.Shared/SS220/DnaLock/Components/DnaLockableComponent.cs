@@ -6,23 +6,13 @@ using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.SS220.EquipmentDnaLock.Components;
-
-public enum EquipmentDnaLockMode
-{
-    Roundstart,
-    InRound
-}
+namespace Content.Shared.SS220.DnaLockable.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class EquipmentDnaLockComponent : Component
+public sealed partial class DnaLockableComponent : Component
 {
-
     [DataField, AutoNetworkedField]
-    public EquipmentDnaLockMode Mode = EquipmentDnaLockMode.InRound;
-
-    [DataField, AutoNetworkedField]
-    public bool RequireSwitchableWeaponForHandUse = true;
+    public DnaLockMode Mode = DnaLockMode.InRound;
 
     [DataField, AutoNetworkedField]
     public ProtoId<JobPrototype>? RoundstartJob;
@@ -37,7 +27,7 @@ public sealed partial class EquipmentDnaLockComponent : Component
     public EntityEffect[] UnauthorizedUseEffects = Array.Empty<EntityEffect>();
 
     [DataField]
-    public LocId? UnauthorizedUsePopup = "equipment-dna-lock-unauthorized-popup";
+    public LocId? UnauthorizedUsePopup = "dna-lock-unauthorized-popup";
 
     [DataField]
     public SoundSpecifier? UnauthorizedUseSound = new SoundPathSpecifier("/Audio/Machines/custom_deny.ogg");
@@ -56,4 +46,10 @@ public sealed partial class EquipmentDnaLockComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool BlockBatteryEject = true;
+}
+
+public enum DnaLockMode
+{
+    Roundstart,
+    InRound
 }

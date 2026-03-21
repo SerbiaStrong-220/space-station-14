@@ -146,7 +146,7 @@
   name: blaster KRS
   description: An old reliable blaster rifle. There is only a semi-automatic type of shooting.
   components:
-  - type: EquipmentDnaLock
+  - type: DnaLockable
     mode: Roundstart
     roundstartJob: BlueShield
     unauthorizedUseEffects:
