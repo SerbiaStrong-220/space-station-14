@@ -1,0 +1,20 @@
+- type: entity
+  parent: DrinkBottleGlassBaseFull
+  id: DrinkVodkaKazakiBottleFull
+  name: '"Kazaki" vodka bottle'
+  description: An incredibly cloudy bottle of an unknown brand. How long has it been lying here?
+  components:
+  - type: SolutionContainerVisuals
+    maxFillLevels: 5
+    fillBaseName: fill-
+    inHandsMaxFillLevels: 3
+    inHandsFillBaseName: null # -fill-
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: VodkaKazaki
+          Quantity: 100
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Drinks/vodkakazaki.rsi
+  - type: Sealable

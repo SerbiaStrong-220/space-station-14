@@ -1,13 +1,16 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Humanoid;
+using Content.Server.SS220.Bed.Cryostorage;
 using Content.Server.SS220.GameTicking.Rules;
 using Content.Shared.Actions;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
+using Content.Server.Chat.Managers;
 using Content.Shared.Cloning.Events;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
+using Content.Shared.Medical;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -15,12 +18,11 @@ using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.SS220.CultYogg.Cultists;
+using Content.Shared.SS220.EntityEffects.Events;
 using Content.Shared.SS220.StuckOnEquip;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using System.Linq;
-using Content.Shared.SS220.EntityEffects.Events;
-using Content.Shared.Medical;
 
 namespace Content.Server.SS220.CultYogg.Cultists;
 
@@ -39,6 +41,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
     [Dependency] private readonly ThirstSystem _thirstSystem = default!;
     [Dependency] private readonly VomitSystem _vomitSystem = default!;
     [Dependency] private readonly CultYoggRuleSystem _cultRuleSystem = default!;
+    [Dependency] private readonly IChatManager _chatManager = default!;
 
     private const string CultDefaultMarking = "CultStage-Halo";
 
@@ -53,6 +56,8 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         SubscribeLocalEvent<CultYoggComponent, OnSaintWaterDrinkEvent>(OnSaintWaterDrinked);
         SubscribeLocalEvent<CultYoggComponent, ChangeCultYoggStageEvent>(OnUpdateStage);
         SubscribeLocalEvent<CultYoggComponent, CloningEvent>(OnCloning);
+
+        SubscribeLocalEvent<CultYoggComponent, BeingCryoDeletedEvent>(OnCryoDeleted);
     }
 
     #region Visuals
@@ -291,5 +296,13 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
             return;
 
         _cultRuleSystem.MakeCultist(args.CloneUid, rule.Value);
+    }
+
+    private void OnCryoDeleted(Entity<CultYoggComponent> ent, ref BeingCryoDeletedEvent args)
+    {
+        _chatManager.SendAdminAlert(Loc.GetString("cult-yogg-cultist-deleted-by-cryo", ("ent", ent)));
+
+        var ev = new CultYoggDeCultingEvent(ent);
+        RaiseLocalEvent(ent, ref ev, true);
     }
 }

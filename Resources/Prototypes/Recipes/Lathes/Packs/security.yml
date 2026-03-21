@@ -79,6 +79,7 @@
   - TelescopicShield
   - ClothingEyesThermalGlassesSecurity #SS220 Thermals
   - ClothingBackpackHarmpack
+  - FieldShieldGenerator #SS220 Energy shield
 
 - type: latheRecipePack
   id: SecurityBoards

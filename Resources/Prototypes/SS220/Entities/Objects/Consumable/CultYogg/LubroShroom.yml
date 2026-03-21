@@ -44,6 +44,7 @@
     tags:
     - Omnivorous
     - CultYoggStealthProvidable
+    - WhitelistChameleon
 
 - type: entity
   parent: SeedBase
@@ -65,9 +66,10 @@
   packetPrototype: LubroShroomSeeds
   productPrototypes:
     - FoodLubroShroomCult
+  harvestRepeat: Repeat
   lifespan: 55
-  maturation: 40
-  production: 2
+  maturation: 12
+  production: 10
   yield: 1
   potency: 2
   growthStages: 7

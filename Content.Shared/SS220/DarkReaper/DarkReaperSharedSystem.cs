@@ -32,11 +32,11 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using System.Linq;
 using System.Numerics;
+using Content.Shared.SS220.Lifesteal;
 
 namespace Content.Shared.SS220.DarkReaper;
 
@@ -64,12 +64,13 @@ public abstract class SharedDarkReaperSystem : EntitySystem
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
     [Dependency] private readonly PullingSystem _puller = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffectsSystem = default!;
+    [Dependency] private readonly LifestealSystem _lifesteal = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<DarkReaperComponent, ComponentStartup>(OnCompInit);
+        SubscribeLocalEvent<DarkReaperComponent, ComponentStartup>(OnCompStartup);
         SubscribeLocalEvent<DarkReaperComponent, ComponentShutdown>(OnCompShutdown);
 
         // actions
@@ -378,8 +379,10 @@ public abstract class SharedDarkReaperSystem : EntitySystem
     }
 
     // Crap
-    protected virtual void OnCompInit(Entity<DarkReaperComponent> ent, ref ComponentStartup args)
+    protected virtual void OnCompStartup(Entity<DarkReaperComponent> ent, ref ComponentStartup args)
     {
+        ent.Comp.SpawnedTime = _timing.CurTime;
+
         UpdateStageAppearance(ent, ent.Comp);
         ChangeForm(ent, ent.Comp.PhysicalForm);
 
@@ -466,6 +469,11 @@ public abstract class SharedDarkReaperSystem : EntitySystem
     {
         comp.CurrentStage = stage;
         UpdateStageAppearance(uid, comp);
+
+        if (!comp.LifestealPerStage.TryGetValue(stage, out var lifestealPerStage))
+            return;
+
+        _lifesteal.ChangeLifesteal(uid, lifestealPerStage);
     }
 
     public void UpdateStage(EntityUid uid, DarkReaperComponent comp)

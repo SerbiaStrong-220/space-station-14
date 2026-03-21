@@ -2,19 +2,14 @@
 
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
-using Content.Shared.Alert;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
-using Content.Shared.FixedPoint;
 using Content.Shared.Humanoid;
-using Content.Shared.Interaction.Events;
 using Content.Shared.Mind;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.Movement.Pulling.Events;
-using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Revolutionary.Components;
 using Content.Shared.Roles.Components;
@@ -26,11 +21,8 @@ using Content.Shared.SS220.CultYogg.Rave;
 using Content.Shared.SS220.CultYogg.Sacrificials;
 using Content.Shared.Verbs;
 using Content.Shared.Zombies;
-using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
-using Robust.Shared.Physics;
-using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -44,62 +36,43 @@ public abstract class SharedMiGoSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedMiGoErectSystem _miGoErectSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _userInterfaceSystem = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<MiGoComponent, ComponentStartup>(OnCompInit);
+        SubscribeLocalEvent<MiGoComponent, ComponentStartup>(OnComponentStartup);
 
         // actions
         SubscribeLocalEvent<MiGoComponent, MiGoHealActionEvent>(MiGoHealAction);
         SubscribeLocalEvent<MiGoComponent, MiGoErectActionEvent>(MiGoErectAction);
         SubscribeLocalEvent<MiGoComponent, MiGoSacrificeActionEvent>(MiGoSacrificeAction);
-        SubscribeLocalEvent<MiGoComponent, MiGoAstralActionEvent>(MiGoAstralAction);
-        SubscribeLocalEvent<MiGoComponent, MiGoTeleportActionEvent>(MiGoTeleportAction);
         SubscribeLocalEvent<MiGoComponent, MiGoEnslavementActionEvent>(OnMiGoEnslaveAction);
-
-        //astral DoAfterEvents
-        SubscribeLocalEvent<MiGoComponent, AfterMaterialize>(OnAfterMaterialize);
-        SubscribeLocalEvent<MiGoComponent, AfterDeMaterialize>(OnAfterDeMaterialize);
-
-        SubscribeLocalEvent<MiGoComponent, AttackAttemptEvent>(CheckAct);
-        SubscribeLocalEvent<MiGoComponent, PullAttemptEvent>(OnPullAttempt);
 
         SubscribeLocalEvent<MiGoComponent, BoundUIOpenedEvent>(OnBoundUIOpened);
 
         SubscribeLocalEvent<GetVerbsEvent<Verb>>(OnGetVerb);
 
-        SubscribeLocalEvent<MiGoComponent, MiGoTeleportToTargetMessage>(OnMiGoTeleportToTarget);
-
-        SubscribeLocalEvent<MiGoComponent, InteractionAttemptEvent>(OnInteractionAttempt);
-
         SubscribeLocalEvent<MiGoComponent, ChangeCultYoggStageEvent>(OnUpdateStage);
     }
 
-    protected virtual void OnCompInit(Entity<MiGoComponent> uid, ref ComponentStartup args)
+    protected virtual void OnComponentStartup(Entity<MiGoComponent> uid, ref ComponentStartup args)
     {
         _actions.AddAction(uid, ref uid.Comp.MiGoHealActionEntity, uid.Comp.MiGoHealAction);
         _actions.AddAction(uid, ref uid.Comp.MiGoEnslavementActionEntity, uid.Comp.MiGoEnslavementAction);
-        _actions.AddAction(uid, ref uid.Comp.MiGoAstralActionEntity, uid.Comp.MiGoAstralAction);
         _actions.AddAction(uid, ref uid.Comp.MiGoErectActionEntity, uid.Comp.MiGoErectAction);
         _actions.AddAction(uid, ref uid.Comp.MiGoSacrificeActionEntity, uid.Comp.MiGoSacrificeAction);
         _actions.AddAction(uid, ref uid.Comp.MiGoToggleLightActionEntity, uid.Comp.MiGoToggleLightAction);
-        _actions.AddAction(uid, ref uid.Comp.MiGoTeleportActionEntity, uid.Comp.MiGoTeleportAction);
 
         SyncStage(uid);
     }
@@ -115,26 +88,18 @@ public abstract class SharedMiGoSystem : EntitySystem
                 {
                     Buildings = _proto.GetInstances<CultYoggBuildingPrototype>().Values.ToList(),
                 });
-                return;
+                break;
+
             case "Plant":
                 _userInterfaceSystem.SetUiState(args.Entity, args.UiKey, new MiGoPlantBuiState()
                 {
                     Seeds = _proto.GetInstances<CultYoggSeedsPrototype>().Values.ToList(),
                 });
-                return;
-            case "Teleport":
-                _userInterfaceSystem.SetUiState(args.Entity, args.UiKey, new MiGoTeleportBuiState()
-                {
-                    Warps = GetTeleportsPoints(entity),
-                });
-                return;
-        }
-    }
+                break;
 
-    private void OnInteractionAttempt(Entity<MiGoComponent> ent, ref InteractionAttemptEvent args)
-    {
-        if (!ent.Comp.IsPhysicalForm && args.Target != null && args.Target != ent.Owner)
-            args.Cancelled = true;
+            default:
+                break;
+        }
     }
 
     private void OnGetVerb(GetVerbsEvent<Verb> args)
@@ -187,9 +152,6 @@ public abstract class SharedMiGoSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (!uid.Comp.IsPhysicalForm)
-            return;
-
         if (!HasComp<MobStateComponent>(args.Target) || HasComp<BorgChassisComponent>(args.Target))
         {
             _popup.PopupClient(Loc.GetString("cult-yogg-cant-heal-this", ("target", args.Target)), args.Target, uid);
@@ -220,9 +182,6 @@ public abstract class SharedMiGoSystem : EntitySystem
         if (args.Handled || !TryComp<ActorComponent>(entity, out var actor))
             return;
 
-        if (!entity.Comp.IsPhysicalForm)
-            return;
-
         _miGoErectSystem.OpenUI(entity, actor);
     }
     #endregion
@@ -230,12 +189,6 @@ public abstract class SharedMiGoSystem : EntitySystem
     #region MiGoSacrifice
     private void MiGoSacrificeAction(Entity<MiGoComponent> uid, ref MiGoSacrificeActionEvent args)
     {
-        if (!uid.Comp.IsPhysicalForm)
-        {
-            _popup.PopupClient(Loc.GetString("cult-yogg-cant-sacrifice-in-astral"), uid);
-            return;
-        }
-
         if (uid.Comp.CurrentStage < CultYoggStage.Alarm)
         {
             _popup.PopupClient(Loc.GetString("cult-yogg-sacrifice-only-stage-alarm"), uid);
@@ -301,164 +254,16 @@ public abstract class SharedMiGoSystem : EntitySystem
 
     #endregion
 
-    #region Astral
-    public override void Update(float delta)
-    {
-        base.Update(delta);
-        var query = EntityQueryEnumerator<MiGoComponent>();
-
-        while (query.MoveNext(out var uid, out var comp))
-        {
-            if (IsPaused(uid))//not sure what it is
-                continue;
-
-            if (comp.MaterializationTime == null)
-                continue;
-
-            var secondsLeft = (FixedPoint2)Math.Round((comp.MaterializationTime.Value - _timing.CurTime).TotalSeconds);//calculate time left in seconds
-
-            if (comp.AlertTime == 0 || comp.AlertTime > secondsLeft)//update alert if buffer has a different value
-            {
-                comp.AlertTime = secondsLeft;
-                _alerts.ShowAlert(uid, comp.AstralAlert);
-            }
-
-            if (_timing.CurTime <= comp.MaterializationTime.Value)
-                continue;
-
-            if (!comp.AudioPlayed)
-            {
-                _audio.PlayPredicted(comp.SoundMaterialize, uid, uid, AudioParams.Default.WithMaxDistance(0.5f));
-                comp.AudioPlayed = true;
-            }
-
-            ChangeForm(uid, comp, true);
-
-            _actions.StartUseDelay(comp.MiGoAstralActionEntity);
-            DirtyEntity(uid);
-        }
-    }
-
-    private void MiGoAstralAction(Entity<MiGoComponent> uid, ref MiGoAstralActionEvent args)
-    {
-        if (!uid.Comp.IsPhysicalForm)
-        {
-            var doafterArgs = new DoAfterArgs(EntityManager, uid, uid.Comp.ExitingAstralDoAfter, new AfterMaterialize(), uid)
-            {
-                Broadcast = false,
-                BreakOnDamage = false,
-                NeedHand = false,
-                BlockDuplicate = true,
-                CancelDuplicate = false
-            };
-
-            _doAfter.TryStartDoAfter(doafterArgs);
-        }
-        else
-        {
-            var doafterArgs = new DoAfterArgs(EntityManager, uid, uid.Comp.EnteringAstralDoAfter, new AfterDeMaterialize(), uid)
-            {
-                Broadcast = false,
-                BreakOnDamage = false,
-                NeedHand = false,
-                BlockDuplicate = true,
-                CancelDuplicate = false
-            };
-
-            var started = _doAfter.TryStartDoAfter(doafterArgs);
-            if (started)
-            {
-                _audio.PlayPredicted(uid.Comp.SoundDeMaterialize, uid, uid, AudioParams.Default.WithMaxDistance(0.5f));
-            }
-        }
-    }
-
-    private void OnAfterMaterialize(Entity<MiGoComponent> uid, ref AfterMaterialize args)
-    {
-        if (args.Cancelled)
-            return;
-
-        if (args.Handled)
-            return;
-
-        args.Handled = true;
-
-        _audio.PlayPredicted(uid.Comp.SoundMaterialize, uid, uid, AudioParams.Default.WithMaxDistance(0.5f));
-
-        ChangeForm(uid, uid.Comp, true);
-        _actions.StartUseDelay(uid.Comp.MiGoAstralActionEntity);
-        Dirty(uid);
-    }
-
-    private void OnAfterDeMaterialize(Entity<MiGoComponent> uid, ref AfterDeMaterialize args)
-    {
-        if (args.Cancelled)
-            return;
-
-        if (args.Handled)
-            return;
-
-        args.Handled = true;
-
-        ChangeForm(uid, uid.Comp, false);
-        uid.Comp.MaterializationTime = _timing.CurTime + uid.Comp.AstralDuration;
-
-        var cooldownStart = _timing.CurTime;
-        var cooldownEnd = cooldownStart + uid.Comp.CooldownAfterDematerialize;
-
-        _actions.SetCooldown(uid.Comp.MiGoAstralActionEntity, cooldownStart, cooldownEnd);
-
-        Dirty(uid);
-    }
-
-    public virtual void ChangeForm(EntityUid uid, MiGoComponent comp, bool isMaterial)
-    {
-        if (TryComp<FixturesComponent>(uid, out var fixtures) && fixtures.FixtureCount >= 1)
-        {
-            var fixture = fixtures.Fixtures.First();
-
-            var mask = (int)(isMaterial ? CollisionGroup.FlyingMobMask : CollisionGroup.None);
-            var layer = (int)(isMaterial ? CollisionGroup.FlyingMobLayer : CollisionGroup.None);
-
-            _physics.SetCollisionMask(uid, fixture.Key, fixture.Value, mask, fixtures);
-            _physics.SetCollisionLayer(uid, fixture.Key, fixture.Value, layer, fixtures);
-        }
-
-        //full vision during astral
-        if (TryComp<EyeComponent>(uid, out var eye))
-        {
-            _eye.SetDrawFov(uid, isMaterial, eye);
-            _eye.SetDrawLight((uid, eye), isMaterial);
-        }
-    }
-
-    private void CheckAct(Entity<MiGoComponent> uid, ref AttackAttemptEvent args)
-    {
-        if (!uid.Comp.IsPhysicalForm)
-            args.Cancel();
-    }
-
-    private void OnPullAttempt(Entity<MiGoComponent> uid, ref PullAttemptEvent args)
-    {
-        if (!uid.Comp.IsPhysicalForm)
-            args.Cancelled = true;
-    }
-    #endregion
-
     #region Enslave
     private void OnMiGoEnslaveAction(Entity<MiGoComponent> ent, ref MiGoEnslavementActionEvent args)
     {
         if (args.Handled)
             return;
 
-        var (uid, comp) = ent;
-        if (!comp.IsPhysicalForm)
-            return;
-
         var target = args.Target;
         if (!CanEnslaveTarget(ent, target, out var reason))
         {
-            _popup.PopupClient(reason, target, uid);
+            _popup.PopupClient(reason, target, ent);
             _adminLogger.Add(LogType.Action, $"MiGo {ToPrettyString(ent):user} failed to enslave {ToPrettyString(target):target} because \"{reason}\"");
             return;
         }
@@ -562,85 +367,6 @@ public abstract class SharedMiGoSystem : EntitySystem
         }
 
         return false;
-    }
-    #endregion
-
-    #region Teleport
-    private void MiGoTeleportAction(Entity<MiGoComponent> ent, ref MiGoTeleportActionEvent args)
-    {
-        if (args.Handled || !TryComp<ActorComponent>(ent, out var actor))
-            return;
-
-        if (_userInterfaceSystem.TryToggleUi(ent.Owner, MiGoUiKey.Teleport, actor.PlayerSession))
-            args.Handled = true;
-    }
-
-    private List<(string, NetEntity)> GetTeleportsPoints(EntityUid owner)
-    {
-        List<(string, NetEntity)> warps = [];
-
-        AddTeleportPoints<CultYoggComponent>(owner, warps);
-        AddTeleportPoints<MiGoComponent>(owner, warps);
-
-        return warps;
-    }
-
-    private void AddTeleportPoints<T>(EntityUid owner, List<(string, NetEntity)> warps) where T : IComponent
-    {
-        var query = EntityQueryEnumerator<T>();
-        while (query.MoveNext(out var uid, out _))
-        {
-            if (owner == uid)
-                continue;
-
-            warps.Add((MetaData(uid).EntityName, GetNetEntity(uid)));
-        }
-    }
-
-    private void OnMiGoTeleportToTarget(Entity<MiGoComponent> ent, ref MiGoTeleportToTargetMessage args)
-    {
-        if (ent.Comp.IsPhysicalForm)
-        {
-            _popup.PopupClient(Loc.GetString("cult-yogg-teleport-must-be-in-astral"), ent.Owner);
-            return;
-        }
-
-        if (!TryGetEntity(args.Target, out var target))
-            return;
-
-        if (!HasComp<CultYoggComponent>(target))
-        {
-            _popup.PopupClient(Loc.GetString("cult-yogg-teleport-must-be-cultist"), ent.Owner);
-            return;
-        }
-
-        var migoMapCoord = _transformSystem.ToMapCoordinates(Transform(ent).Coordinates);
-
-        var targetMapCoord = _transformSystem.ToMapCoordinates(Transform(target.Value).Coordinates);
-
-        if (migoMapCoord.MapId != targetMapCoord.MapId)
-        {
-            _popup.PopupClient(Loc.GetString("cult-yogg-teleport-out-of-range"), ent.Owner);
-            return;
-        }
-
-        WarpTo(ent, target.Value);
-    }
-
-    private void WarpTo(EntityUid ent, EntityUid target)
-    {
-        _adminLogger.Add(LogType.Teleport, $"MiGo {ToPrettyString(ent):user} teleported to {ToPrettyString(target):target}");
-
-        var xform = Transform(ent);
-        _transformSystem.SetCoordinates(ent, xform, Transform(target).Coordinates);
-    }
-
-    public void UpdateTeleportTargets(EntityUid ent)
-    {
-        _userInterfaceSystem.SetUiState(ent, MiGoUiKey.Teleport, new MiGoTeleportBuiState()
-        {
-            Warps = GetTeleportsPoints(ent),
-        });
     }
     #endregion
 

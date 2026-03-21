@@ -1,7 +1,6 @@
 - type: job
   id: AggressiveAnimals
   name: job-name-aggressive-animals
-  description: job-description-aggressive-animals
   playTimeTracker: AntahAggressiveAnimals
   setPreference: false
   requirements:

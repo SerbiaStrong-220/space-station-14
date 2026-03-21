@@ -14,6 +14,7 @@
   - GroupSpeciesBreathTool
   - CAPSiutstorage #SS220-Cutlass-Update
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobHeadOfPersonnel
@@ -29,6 +30,7 @@
   - Trinkets
   - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 
 # Silicons
 - type: roleLoadout
@@ -61,6 +63,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobBartender
@@ -75,6 +78,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobServiceWorker
@@ -86,6 +90,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobChef
@@ -101,6 +106,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobLibrarian
@@ -113,6 +119,7 @@
   - Trinkets
   - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobLawyer
@@ -129,6 +136,7 @@
   - Gloves #SS220-IAA-Loadouts
   - Trinkets
   - GroupSpeciesBreathTool
+  - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobChaplain
@@ -145,6 +153,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobJanitor
@@ -162,6 +171,7 @@
   - Trinkets
   - JanitorPlunger
   - GroupSpeciesBreathTool
+  - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobBotanist
@@ -178,6 +188,7 @@
   - BotanistBelt #SS220 druid loadout
   - BotanistNeck #SS220 druid loadout
   - BotanistShoes #SS220 druid loadout
+  - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobClown
@@ -196,6 +207,7 @@
   - SurvivalClown
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobMime
@@ -213,6 +225,7 @@
   - SurvivalMime
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobMusician
@@ -230,6 +243,7 @@
   - Instruments
   - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - WorkerCash #SS220-Cash-personal
 
 # Cargo
 - type: roleLoadout
@@ -247,6 +261,7 @@
   - Trinkets
   - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobCargoTechnician
@@ -262,6 +277,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobSalvageSpecialist
@@ -277,6 +293,7 @@
   - Trinkets
   - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - WorkerCash #SS220-Cash-personal
 
 # Engineering
 - type: roleLoadout
@@ -295,6 +312,7 @@
   - Trinkets
   - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobTechnicalAssistant
@@ -305,6 +323,7 @@
   - SurvivalExtended
   - Trinkets
   - GroupSpeciesBreathTool
+  - CivilianCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobStationEngineer
@@ -321,6 +340,7 @@
   - Trinkets
   - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobAtmosphericTechnician
@@ -335,6 +355,7 @@
   - Trinkets
   - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - WorkerCash #SS220-Cash-personal
 
 # Science
 - type: roleLoadout
@@ -355,6 +376,7 @@
   - Trinkets
   - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobScientist
@@ -374,6 +396,7 @@
   - Trinkets
   - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobResearchAssistant
@@ -385,6 +408,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - CivilianCash #SS220-Cash-personal
 
 # Security
 - type: roleLoadout
@@ -405,6 +429,7 @@
   - GroupSpeciesBreathToolSecurity
   - SecurityHoSSiutstorage #SS220-OfficerCutlass
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobWarden
@@ -423,6 +448,7 @@
   - SecurityStar
   - GroupSpeciesBreathToolSecurity
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobSecurityOfficer
@@ -443,6 +469,7 @@
   - SecurityStar
   - GroupSpeciesBreathToolSecurity
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobDetective
@@ -459,6 +486,7 @@
   - SecurityStar
   - GroupSpeciesBreathToolSecurity
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobSecurityCadet
@@ -468,6 +496,7 @@
   - SurvivalSecurity
   - Trinkets
   - GroupSpeciesBreathToolSecurity
+  - CivilianCash #SS220-Cash-personal
 
 # Medical
 - type: roleLoadout
@@ -489,6 +518,7 @@
   - Trinkets
   - GroupSpeciesBreathToolMedical
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobMedicalDoctor
@@ -510,6 +540,7 @@
   - Trinkets
   - GroupSpeciesBreathToolMedical
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobMedicalIntern
@@ -522,6 +553,7 @@
   - SurvivalMedical
   - Trinkets
   - GroupSpeciesBreathToolMedical
+  - CivilianCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobChemist
@@ -539,6 +571,7 @@
   - Trinkets
   - GroupSpeciesBreathToolMedical
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobParamedic
@@ -560,6 +593,7 @@
   - Trinkets
   - GroupSpeciesBreathToolMedical
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - WorkerCash #SS220-Cash-personal
 
 #SS220-brigmedic-loadout-begin
 - type: roleLoadout
@@ -578,6 +612,7 @@
 #  - Glasses #SS220-TwoOne-Floppa-Iteration
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - WorkerCash #SS220-Cash-personal
 #SS220-brigmedic-loadout-end
 
 # Wildcards
@@ -590,6 +625,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobReporter
@@ -601,6 +637,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobPsychologist
@@ -614,6 +651,7 @@
   - Trinkets
   - GroupSpeciesBreathTool
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
   id: JobBoxer
@@ -626,6 +664,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - WorkerCash #SS220-Cash-personal
 
 # These loadouts are used for non-crew spawns, like off-station antags and event mobs
 # They will be used without player configuration, thus they will only ever apply what is forced by MinLimit
