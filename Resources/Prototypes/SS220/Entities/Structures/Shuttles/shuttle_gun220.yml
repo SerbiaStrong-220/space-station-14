@@ -6,7 +6,10 @@
   components:
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/Shuttles/mlg.rsi
+    granularLayersRendering: true
     layers:
+    - state: support
+      renderingStrategy: NoRotation
     - state: spg-mlg
     - state: mag-7
       map: ["enum.GunVisualLayers.Mag"]
@@ -65,7 +68,10 @@
   components:
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/Shuttles/nurs.rsi
+    granularLayersRendering: true
     layers:
+    - state: support
+      renderingStrategy: NoRotation
     - state: exp-nurs
     - state: mag-16
       map: ["enum.GunVisualLayers.Mag"]
@@ -122,7 +128,10 @@
   components:
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/Shuttles/pkt.rsi
+    granularLayersRendering: true
     layers:
+    - state: support
+      renderingStrategy: NoRotation
     - state: base
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]

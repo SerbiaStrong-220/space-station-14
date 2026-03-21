@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Helm, TTTomaTTT
-  changes:
-  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D \u0440\u0435\u0446\u0435\
-      \u043F\u0442 \u043A\u0443\u043B\u0438\u0447\u0430! 15 \u0441\u0430\u0445\u0430\
-      \u0440\u0430, 3 \u043A\u0443\u0441\u043E\u0447\u043A\u0430 \u043C\u0430\u0441\
-      \u043B\u0430, 1 \u0442\u043E\u0440\u0442!"
-    type: Add
-  id: 944
-  time: '2025-04-19T22:09:07.0000000+00:00'
-  url: https://github.com/SerbiaStrong-220/space-station-14/pull/2821
 - author: Mockrons
   changes:
   - message: "\u0422\u0435\u043F\u0435\u0440\u044C \u0432\u0441\u0435 \u043E\u0440\
@@ -8133,3 +8123,13 @@
   id: 1443
   time: '2026-03-20T20:27:26.0000000+00:00'
   url: https://github.com/SerbiaStrong-220/space-station-14/pull/4015
+- author: ReeZii, MIXnikita
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0430 \u043A\u043E\u043D\
+      \u0441\u043E\u043B\u044C \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043D\u043D\
+      \u043E\u0433\u043E \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F\
+      \ \u0448\u0430\u0442\u0442\u043B\u043E\u043C."
+    type: Add
+  id: 1444
+  time: '2026-03-21T18:06:57.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/4006
