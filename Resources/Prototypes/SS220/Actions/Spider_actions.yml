@@ -37,6 +37,19 @@
         amount: 1
       offset: 0, 1
 
+- type: entity
+  parent: BaseActionSpawnSingleSpiderWeb
+  id: BaseActionSpawnSingleSpiderWebDurable
+  name: spin a web
+  description: Creates a web that slows down your prey.
+  abstract: true
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/action_spider.rsi
+      state: web_spawn_durable
+
 #Egg
 - type: entity
   parent: BaseActionSpawnSpiderEgg
@@ -140,7 +153,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    useDelay: 30
+    useDelay: 20
     itemIconStyle: BigAction
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi
@@ -162,7 +175,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    useDelay: 5
+    useDelay: 3
     itemIconStyle: BigAction
     icon:
       sprite: SS220/Interface/Actions/action_spider.rsi
@@ -233,6 +246,45 @@
       offset: 0, 1
       cost: 10
 
+#Passage
+- type: entity
+  id: ActionSpawnSpiderWebPassage
+  name: create a passage
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    useDelay: 12
+    itemIconStyle: BigAction
+    icon:
+      sprite: SS220/Interface/Actions/action_spider.rsi
+      state: passage_spawn
+  - type: TargetAction
+    range: 1.5
+  - type: WorldTargetAction
+    event: !type:SpiderTargetSpawnEvent
+      prototypes:
+      - id: WebPassageSpawn
+        amount: 1
+      snapToGrid: true
+      offset: 0, 1
+
+- type: entity
+  parent: ActionSpawnSpiderWebPassage
+  id: ActionSpawnSpiderWebPassageBloodPoints
+  name: create a web passage
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    useDelay: 6
+  - type: TargetAction
+  - type: WorldTargetAction
+    event: !type:SpiderTargetSpawnEvent
+      prototypes:
+      - id: WebPassageSpawn
+        amount: 1
+      snapToGrid: true
+      cost: 6
+
 #Tile
 - type: entity
   id: ActionSpawnWebTile
@@ -287,13 +339,13 @@
     useDelay: 6
 
 - type: entity
-  parent: BaseActionSpawnSingleSpiderWeb
+  parent: BaseActionSpawnSingleSpiderWebDurable
   id: ActionSpawnSingleSpiderWebDurable
   name: spin a durable web
   categories: [ HideSpawnMenu ]
   components:
   - type: Action
-    useDelay: 4
+    useDelay: 6
   - type: TargetAction
   - type: WorldTargetAction
     event: !type:SpiderTargetSpawnEvent
@@ -303,7 +355,7 @@
       offset: 0, 1
 
 - type: entity
-  parent: BaseActionSpawnSingleSpiderWeb
+  parent: BaseActionSpawnSingleSpiderWebDurable
   id: ActionSpawnSingleSpiderWebDurableBloodPoints
   name: spin a durable web
   categories: [ HideSpawnMenu ]
