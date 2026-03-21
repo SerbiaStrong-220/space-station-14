@@ -1,3 +1,5 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using System;
 using Content.Shared.SS220.Ipc;
 using Content.Shared.Humanoid.Markings;
@@ -41,7 +43,7 @@ public sealed partial class IpcFaceMenu : FancyWindow
         CategoryList.RemoveAllChildren();
 
         var categories = new HashSet<string> { "all" };
-        
+
         foreach (var entry in profile.Faces)
         {
             if (!string.IsNullOrEmpty(entry.Category))
