@@ -5,10 +5,9 @@
   description: "The source of incredible, unending intelligence. Honk."
   components:
   - type: Sprite
-    sprite: Objects/Specific/Robotics/mmi.rsi
+    sprite: SS220/Mobs/Species/Ipcbrain.rsi
     layers:
-    - state: posibrain
-      map: ["base"]
+    - state: icon
   - type: Organ
   - type: Input
     context: "ghost"
