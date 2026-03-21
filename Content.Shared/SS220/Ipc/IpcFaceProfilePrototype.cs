@@ -15,9 +15,16 @@ public sealed partial class IpcFaceProfilePrototype : IPrototype
     [IdDataField]
     public string ID { get; private set; } = default!;
 
-    /// <summary>
-    /// Available face markings for this profile.
-    /// </summary>
     [DataField("faces", required: true)]
-    public List<ProtoId<MarkingPrototype>> Faces { get; private set; } = new();
+    public List<IpcFaceEntry> Faces { get; private set; } = new();
+}
+
+[DataDefinition]
+public sealed partial class IpcFaceEntry
+{
+    [DataField("id", required: true)]
+    public ProtoId<MarkingPrototype> Id { get; private set; }
+
+    [DataField("category")]
+    public string Category { get; private set; } = "all"; 
 }
