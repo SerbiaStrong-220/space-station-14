@@ -13,6 +13,7 @@ using Content.Shared.Emp;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Sound.Components;
 using Content.Shared.UserInterface;
 using Robust.Shared.Audio;
@@ -40,6 +41,7 @@ public sealed partial class IpcSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
     [Dependency] private readonly MarkingManager _markingManager = default!;
+    [Dependency] private readonly MobThresholdSystem _mobThresholdSystem = default!;
 
     public override void Initialize()
     {
@@ -53,6 +55,7 @@ public sealed partial class IpcSystem : EntitySystem
         SubscribeLocalEvent<IpcComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovementSpeedModifiers);
         SubscribeLocalEvent<IpcComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<IpcComponent, OpenIpcFaceActionEvent>(OnOpenFaceAction);
+        SubscribeLocalEvent<IpcComponent, DamageChangedEvent>(OnDamageChanged);
         Subs.BuiEvents<IpcComponent>(IpcFaceUiKey.Face, subs =>
         {
             subs.Event<IpcFaceSelectMessage>(OnFaceSelected);
@@ -200,5 +203,26 @@ public sealed partial class IpcSystem : EntitySystem
         {
             RemComp<SpamEmitSoundComponent>(ent);
         }
+
+    }
+
+    private void OnDamageChanged(Entity<IpcComponent> ent, ref DamageChangedEvent args)
+    {
+        if (!TryComp<MobStateComponent>(ent, out var mobComp))
+            return;
+
+        if (!_mobState.IsDead(ent, mobComp))
+            return;
+
+        if (!TryComp<DamageableComponent>(ent, out var damageableComp))
+            return;
+
+        if (!_mobThresholdSystem.TryGetDeadThreshold(ent, out var threshold))
+            return;
+
+        if (damageableComp.TotalDamage > threshold)
+            return;
+
+        _mobState.ChangeMobState(ent, MobState.Critical);
     }
 }
