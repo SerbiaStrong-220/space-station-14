@@ -1,4 +1,4 @@
-ent-ActionDrainBattery = Опустошить заряд.
+ent-ActionDrainBattery = Опустошить заряд
     .desc = Опустошает энергию из источника питания, чтобы зарядить себя.
 
 ent-ActionIpcChangeFace = Сменить интерфейс КПБ
