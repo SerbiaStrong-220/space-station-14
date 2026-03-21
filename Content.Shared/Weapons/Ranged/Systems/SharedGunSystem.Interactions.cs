@@ -176,10 +176,8 @@ public abstract partial class SharedGunSystem
                     NeedHand = true,
                     Broadcast = true
                 };
-
                 var locSelf = Loc.GetString("suicide-start-popup-self", ("weapon", MetaData(entity).EntityName));
                 var locOthers = Loc.GetString("suicide-start-popup-others", ("user", MetaData(user).EntityName), ("weapon", MetaData(entity).EntityName));
-
                 if (_doAfter.TryStartDoAfter(doAfter))
                 {
                     PopupSystem.PopupPredicted(locSelf, locOthers, user, user);
