@@ -16,6 +16,7 @@ using Content.Shared.Roles.Jobs;
 using Content.Shared.SS220.DnaLockable.Components;
 using Content.Shared.Storage;
 using Content.Shared.Storage.Components;
+using Content.Shared.UserInterface;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
@@ -24,7 +25,7 @@ using Robust.Shared.Network;
 
 namespace Content.Shared.SS220.DnaLock;
 
-public sealed class ItemDnaLockSystem : EntitySystem
+public sealed class DnaLockSystem : EntitySystem
 {
     [Dependency] private readonly SharedEntityEffectsSystem _entityEffects = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -49,6 +50,7 @@ public sealed class ItemDnaLockSystem : EntitySystem
         SubscribeLocalEvent<DnaLockableComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<RoleAddedEvent>(OnRoleAdded);
         SubscribeLocalEvent<DnaLockableComponent, GotEmaggedEvent>(OnEmagged);
+        SubscribeLocalEvent<DnaLockableComponent, ActivatableUIOpenAttemptEvent>(OnActivatableUIOpenAttempt);
     }
 
     private void OnActivateAttempt(Entity<DnaLockableComponent> ent, ref ItemToggleActivateAttemptEvent args)
@@ -64,7 +66,7 @@ public sealed class ItemDnaLockSystem : EntitySystem
 
     private void OnUseInHand(Entity<DnaLockableComponent> ent, ref UseInHandEvent args)
     {
-        if (CheckAccess(ent, args.User))
+        if (CheckAccess(ent, args.User, silentFail: true))
             return;
 
         args.Handled = true;
@@ -72,7 +74,7 @@ public sealed class ItemDnaLockSystem : EntitySystem
 
     private void OnAttemptShoot(Entity<DnaLockableComponent> ent, ref AttemptShootEvent args)
     {
-        if (CheckAccess(ent, args.User))
+        if (CheckAccess(ent, args.User, silentFail: true))
             return;
 
         args.Cancelled = true;
@@ -167,7 +169,7 @@ public sealed class ItemDnaLockSystem : EntitySystem
         if (!comp.BlockToggleableClothing)
             return;
 
-        if (CheckAccess(ent, args.Performer))
+        if (CheckAccess(ent, args.Performer, silentFail: true))
             return;
 
         args.Handled = true;
@@ -183,10 +185,18 @@ public sealed class ItemDnaLockSystem : EntitySystem
         if (args.User == null)
             return;
 
-        if (CheckAccess(ent, args.User.Value))
+        if (CheckAccess(ent, args.User.Value, silentFail: true))
             return;
 
         args.Cancelled = true;
+    }
+
+    private void OnActivatableUIOpenAttempt(Entity<DnaLockableComponent> ent, ref ActivatableUIOpenAttemptEvent args)
+    {
+        if (CheckAccess(ent, args.User, silentFail: true))
+            return;
+
+        args.Cancel();
     }
 
     private void OnExamined(Entity<DnaLockableComponent> ent, ref ExaminedEvent args)
