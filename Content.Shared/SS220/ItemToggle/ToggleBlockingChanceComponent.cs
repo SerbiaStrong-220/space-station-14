@@ -15,21 +15,12 @@ public sealed partial class ToggleBlockingChanceComponent : Component
     [DataField, AutoNetworkedField]
     public bool IsToggled = false;
 
-    [DataField]
-    [AutoNetworkedField]
-    public DamageModifierSet? OriginalPassiveModifier;
     [DataField, AutoNetworkedField]
     public float ToggledRangeBlockProb = 0.5f;
 
-    [DataField]
-    [AutoNetworkedField]
-    public DamageModifierSet? DeactivatedActiveModifier;
     [DataField, AutoNetworkedField]
     public float BaseRangeBlockProb = 0f;
 
-    [DataField]
-    [AutoNetworkedField]
-    public DamageModifierSet? DeactivatedPassiveModifier;
     [DataField, AutoNetworkedField]
     public float ToggledMeleeBlockProb = 0.5f;
 
