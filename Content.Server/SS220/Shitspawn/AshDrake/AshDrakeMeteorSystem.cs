@@ -4,6 +4,7 @@ using Content.Shared.SS220.Shitspawn.AshDrake;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
+using Robust.Shared.Timing;
 using Robust.Shared.Random;
 using System;
 using System.Numerics;
@@ -16,7 +17,6 @@ public sealed class AshDrakeMeteorSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedTimerSystem _timer = default!;
 
     private readonly List<(EntityUid Uid, Vector2 Target, float Speed)> _falling = new();
 
@@ -81,7 +81,7 @@ public sealed class AshDrakeMeteorSystem : EntitySystem
             var height = comp.SpawnHeight;
             var speed = comp.Speed;
 
-            _timer.Spawn(delay, () => SpawnMeteor(pos, height, speed));
+            Timer.Spawn(delay, () => SpawnMeteor(pos, height, speed));
         }
     }
 
