@@ -197,7 +197,6 @@ public sealed partial class IpcSystem : EntitySystem
             sound.Sound = new SoundPathSpecifier("/Audio/Machines/buzz-two.ogg");
             sound.MinInterval = TimeSpan.FromSeconds(15);
             sound.MaxInterval = TimeSpan.FromSeconds(30);
-            sound.PopUp = Loc.GetString("sleep-Ipc");
         }
         else
         {
