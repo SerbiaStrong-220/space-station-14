@@ -3,6 +3,7 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
+using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
@@ -29,10 +30,10 @@ public sealed partial class ComplexRepairableSystem : EntitySystem
 
     private void OnDamageChanged(Entity<ComplexRepairableComponent> ent, ref DamageChangedEvent args)
     {
-        if(args.Damageable.TotalDamage >= ent.Comp.MaterialRepairTreshold)
-        {
-            ent.Comp.LeftToInsert = (args.Damageable.TotalDamage / ent.Comp.MaterialRepairTreshold).Int();
-        }
+        var damageTaken = args.DamageDelta?.GetTotal() ?? FixedPoint2.Zero;
+
+        if (damageTaken > 0)
+            ent.Comp.LeftToInsert += (damageTaken / ent.Comp.MaterialRepairTreshold).Int();
 
         Dirty(ent);
     }
