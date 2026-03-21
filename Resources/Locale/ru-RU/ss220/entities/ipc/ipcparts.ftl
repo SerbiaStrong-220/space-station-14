@@ -1,0 +1,12 @@
+ent-OrganIpcBrain = Мозг КПБ
+    .desc = Источник невероятного, бесконечного интеллекта.
+ent-TorsoIpc = Туловище КПБ
+ent-HeadIpc = Голова КПБ
+ent-LeftArmIpc = Левая рука КПБ
+ent-RightArmIpc = Правая рука КПБ
+ent-LeftHandIpc = Левая кисть КПБ
+ent-RightHandIpc = Правая кисть КПБ
+ent-LeftLegIpc = Левая нога КПБ
+ent-RightLegIpc = Правая нога КПБ
+ent-LeftFootIpc = Правая ступня КПБ
+ent-RightFootIpc = Правая ступня КПБ
