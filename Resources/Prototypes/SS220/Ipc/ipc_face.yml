@@ -1,35 +1,65 @@
 - type: ipcFaceProfile
   id: DefaultIpcFaces
   faces:
-  - ScreenEyes
-  - ScreenEyestall
-  - ScreenSinewave
-  - ScreenPink
-  - ScreenQuestion
-  - ScreenHeart
-  - ScreenLoading
-  - ScreenTetris
-  - ScreenTv
-  - ScreenTextdrop
-  - ScreenStars
-  - ScreenFrown
-  - ScreenRing
-  - ScreenL
-  - ScreenPoxui
-  - ScreenAbsolutepoxui
-  - ScreenAwesome
-  - ScreenBestfriend
-  - ScreenBigsmile
-  - ScreenBoredom
-  - ScreenClown
-  - ScreenCreeper
-  - ScreenDealmaker
-  - ScreenMime
-  - ScreenMonkey
-  - ScreenMrgutsy
-  - ScreenNerd
-  - ScreenNya
-  - ScreenNerd
-  - ScreenSkull
-  - ScreenTenna
-
+  - id: ScreenEyes
+    category: misc
+  - id: ScreenEyestall
+    category: misc
+  - id: ScreenSinewave
+    category: misc
+  - id: ScreenPink
+    category: fun
+  - id: ScreenQuestion
+    category: misc
+  - id: ScreenHeart
+    category: misc
+  - id: ScreenLoading
+    category: misc
+  - id: ScreenTetris
+    category: fun
+  - id: ScreenTv
+    category: fun
+  - id: ScreenTextdrop
+    category: misc
+  - id: ScreenStars
+    category: misc
+  - id: ScreenFrown
+    category: fun
+  - id: ScreenRing
+    category: misc
+  - id: ScreenL
+    category: misc
+  - id: ScreenPoxui
+    category: fun
+  - id: ScreenAbsolutepoxui
+    category: fun
+  - id: ScreenAwesome
+    category: misc
+  - id: ScreenBestfriend
+    category: fun
+  - id: ScreenBigsmile
+    category: fun
+  - id: ScreenBoredom
+    category: misc
+  - id: ScreenClown
+    category: fun
+  - id: ScreenCreeper
+    category: fun
+  - id: ScreenDealmaker
+    category: misc
+  - id: ScreenMime
+    category: fun
+  - id: ScreenMonkey
+    category: fun
+  - id: ScreenMrgutsy
+    category: fun
+  - id: ScreenNerd
+    category: misc
+  - id: ScreenNya
+    category: misc
+  - id: ScreenNerd
+    category: misc
+  - id: ScreenSkull
+    category: misc
+  - id: ScreenTenna
+    category: misc
