@@ -196,20 +196,21 @@ public abstract partial class SharedGunSystem
         if (!_netManager.IsServer)
             return;
         var user = args.User;
+        var failMessage = Loc.GetString("suicide-failed-popup");
         if (args.Cancelled || args.Handled || args.Used == null)
         {
-            PopupSystem.PopupPredicted(Loc.GetString("suicide-failed-popup"), user, null);
+            PopupSystem.PopupPredicted(failMessage, user, null);
             return;
         }
         var weapon = args.Used.Value;
         if (!_hands.IsHolding(user, weapon, out _))
         {
-            PopupSystem.PopupPredicted(Loc.GetString("suicide-failed-popup"), user, null);
+            PopupSystem.PopupPredicted(failMessage, user, null);
             return;
         }
         if (!TryComp<GunComponent>(weapon, out var guncomp))
         {
-            PopupSystem.PopupPredicted(Loc.GetString("suicide-failed-popup"), user, null);
+            PopupSystem.PopupPredicted(failMessage, user, null);
             return;
         }
 
