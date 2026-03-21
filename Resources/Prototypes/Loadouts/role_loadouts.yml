@@ -63,6 +63,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-Two Floppa Iteration
   - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
@@ -78,6 +79,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-Two Floppa Iteration
   - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
@@ -90,6 +92,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-Two Floppa Iteration
   - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
@@ -106,6 +109,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-Two Floppa Iteration
   - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
@@ -124,7 +128,6 @@
 - type: roleLoadout
   id: JobLawyer
   groups:
-  - IAAGlasses #SS220-Two Floppa Iteration
   - LawyerHeadset #SS220-Law Department & SS220 add-iaa-command-key
   - GroupTankHarness
   - LawyerNeck
@@ -136,6 +139,7 @@
   - Gloves #SS220-IAA-Loadouts
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-Two Floppa Iteration
   - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
@@ -153,6 +157,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-Two Floppa Iteration
   - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
@@ -171,6 +176,7 @@
   - Trinkets
   - JanitorPlunger
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-Two Floppa Iteration
   - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
@@ -188,6 +194,7 @@
   - BotanistBelt #SS220 druid loadout
   - BotanistNeck #SS220 druid loadout
   - BotanistShoes #SS220 druid loadout
+  - SponsorNeck #SS220-Two Floppa Iteration
   - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
@@ -277,6 +284,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-Two Floppa Iteration
   - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
@@ -323,6 +331,7 @@
   - SurvivalExtended
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-Two Floppa Iteration
   - CivilianCash #SS220-Cash-personal
 
 - type: roleLoadout
@@ -408,6 +417,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-Two Floppa Iteration
   - CivilianCash #SS220-Cash-personal
 
 # Security
@@ -496,6 +506,7 @@
   - SurvivalSecurity
   - Trinkets
   - GroupSpeciesBreathToolSecurity
+  - SponsorNeck #SS220-Two Floppa Iteration
   - CivilianCash #SS220-Cash-personal
 
 # Medical
@@ -553,6 +564,7 @@
   - SurvivalMedical
   - Trinkets
   - GroupSpeciesBreathToolMedical
+  - SponsorNeck #SS220-Two Floppa Iteration
   - CivilianCash #SS220-Cash-personal
 
 - type: roleLoadout
@@ -625,6 +637,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-Two Floppa Iteration
   - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
@@ -637,6 +650,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-Two Floppa Iteration
   - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout
@@ -664,6 +678,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-Two Floppa Iteration
   - WorkerCash #SS220-Cash-personal
 
 # These loadouts are used for non-crew spawns, like off-station antags and event mobs
