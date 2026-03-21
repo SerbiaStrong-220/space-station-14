@@ -546,7 +546,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         if (TryComp<AltBlockingUserComponent>(target, out var blockcomp))
         {
             var meleeblockEvent = new MeleeHitBlockAttemptEvent();
-            RaiseLocalEvent((EntityUid)target, ref meleeblockEvent);
+            RaiseLocalEvent(targetEntity, ref meleeblockEvent);
             if (meleeblockEvent.CancelledHit && TryGetEntity(meleeblockEvent.blocker, out EntityUid? shield))
             {
                 PopupSystem.PopupEntity(Loc.GetString("block-shot"), targetEntity);

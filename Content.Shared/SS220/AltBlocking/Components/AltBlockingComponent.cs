@@ -36,7 +36,7 @@ public sealed partial class AltBlockingComponent : Component
         };
 
     [DataField]
-    public Dictionary<SlotFlags, float> AvaliableSlots = new();
+    public Dictionary<SlotFlags, float> AvailableSlots = new();
 
     [DataField, AutoNetworkedField]
     public float RangeBlockProb = 0.5f;

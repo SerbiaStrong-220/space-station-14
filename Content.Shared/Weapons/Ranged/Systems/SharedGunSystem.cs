@@ -260,7 +260,7 @@ public abstract partial class SharedGunSystem : EntitySystem
             PopupSystem.PopupPredictedCursor(Loc.GetString("actively-blocking-attack"), user);
             return false;
         }
-        //SS220 shield rework begin
+        //SS220 shield rework end
 
         var toCoordinates = gun.ShootCoordinates;
 

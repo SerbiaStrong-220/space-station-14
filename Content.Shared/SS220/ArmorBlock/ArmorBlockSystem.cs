@@ -33,6 +33,9 @@ public sealed class ArmorBlockSystem : EntitySystem
 
             if (durabilityCoefficient < 0)//Didn't use Math.Clamp because there is no override of this function for FixedPoint2 and i don't want to convert types 2 times every time we calculate this
                 durabilityCoefficient = 0;
+
+            if (durabilityCoefficient > 1)
+                durabilityCoefficient = 1;
         }
 
         foreach (var type in args.OriginalDamage.DamageDict.Keys)//Here we start counting damage for each type
