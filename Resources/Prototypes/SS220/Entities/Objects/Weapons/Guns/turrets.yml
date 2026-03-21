@@ -143,7 +143,10 @@
   - type: Appearance
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/Turrets/kaz_uroboros.rsi
+    granularLayersRendering: true
     layers:
+    - state: support
+      renderingStrategy: NoRotation
     - state: base
     - state: power-0
       map: [ "kaz_battery_body" ]

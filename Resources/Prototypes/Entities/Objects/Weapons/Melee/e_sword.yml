@@ -409,13 +409,13 @@
     sprite: Objects/Weapons/Melee/e_sword_double-inhands.rsi
 # ss220 FixESword
   - type: Reflect
-    reflectProb: 0.80 #ss220 ttkTweaks
-    reflectProbBehind: 0.3 #ss220 add reflect in back
+    reflectProb: 0.65 #ss220 ttkTweaks
+    reflectProbBehind: 0.10 #ss220 add reflect in back
     reflects:
       - NonEnergy
       - Energy #SS220-FixReflects
     spread: 45
-    reflectProbProjectile: 0.70 #ss220lowTTKUpdate
+    reflectProbProjectile: 0.65 #ss220lowTTKUpdate
     spreadProjectile: 180
 # ss220 FixESword
   #SS220 craftable desword start

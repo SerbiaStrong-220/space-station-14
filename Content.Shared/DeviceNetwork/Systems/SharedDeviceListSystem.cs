@@ -13,6 +13,20 @@ public abstract class SharedDeviceListSystem : EntitySystem
         }
         return component.Devices;
     }
+
+    // SS220 add additional control for shuttle start
+    public void DeleteDeviceFromList(Entity<DeviceListComponent?> ent, EntityUid device)
+    {
+        if (!Resolve(ent.Owner, ref ent.Comp))
+            return;
+
+        if (!ent.Comp.Devices.Contains(device))
+            return;
+
+        ent.Comp.Devices.Remove(device);
+        Dirty(ent);
+    }
+    // SS220 add additional control for shuttle end
 }
 
 public sealed class DeviceListUpdateEvent : EntityEventArgs

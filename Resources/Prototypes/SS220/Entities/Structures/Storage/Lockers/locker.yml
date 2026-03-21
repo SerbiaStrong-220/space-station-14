@@ -196,7 +196,7 @@
     stateDoorOpen: medsteel_open
     stateDoorClosed: psychologist_door
   - type: AccessReader
-    access: [ [ "Medical" ] ]
+    access: [ [ "Psychologist" ] ]
 
 - type: entity
   id: LockerMedicineParamedic
