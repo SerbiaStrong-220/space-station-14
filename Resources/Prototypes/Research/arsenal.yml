@@ -99,10 +99,10 @@
     sprite: Objects/Weapons/Melee/truncheon.rsi
     state: icon
   discipline: Arsenal
-  tier: 2 # FCB shield rework
+  tier: 2 # SS220 shield rework
   cost: 8000
   recipeUnlocks:
-  - RiotBulletShield # FCB shield rework
+  - RiotBulletShield # SS220 shield rework
   - Truncheon
   - TelescopicShield
   - HoloprojectorSecurity
@@ -153,7 +153,7 @@
   cost: 10000
   recipeUnlocks:
   - WeaponLaserCannon
-  - RiotLaserShield #FCB shield rework
+  - RiotLaserShield #SS220 shield rework
 
 - type: technology
   id: WaveParticleHarnessing

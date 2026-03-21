@@ -14,4 +14,4 @@
               doAfter: 2
 
     - node: makeshiftShield
-      entity: MakeshiftShieldAlt #FCB shield rework
+      entity: MakeshiftShieldAlt #SS220 shield rework

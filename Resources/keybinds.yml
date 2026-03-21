@@ -184,12 +184,12 @@ binds:
 - function: ActivateItemInHand
   type: State
   key: Z
-#FCB shield rework begin
+#SS220 shield rework begin
 - function: ToggleActiveBlocking
   type: State
   key: R
   mod1: Shift
-#FCB shield rework end
+#SS220 shield rework end
 - function: AltActivateItemInHand
   type: State
   key: Z
