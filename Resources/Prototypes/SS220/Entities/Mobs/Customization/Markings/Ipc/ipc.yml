@@ -351,7 +351,7 @@
 
 - type: marking
   speciesRestriction: [Ipc]
-  id: SScreenPoxui
+  id: ScreenPoxui
   bodyPart: Snout
   markingCategory: Snout
   sprites:
@@ -360,7 +360,7 @@
 
 - type: marking
   speciesRestriction: [Ipc]
-  id: SScreenAbsolutepoxui
+  id: ScreenAbsolutepoxui
   bodyPart: Snout
   markingCategory: Snout
   sprites:
@@ -369,7 +369,7 @@
 
 - type: marking
   speciesRestriction: [Ipc]
-  id: SScreenAwesome
+  id: ScreenAwesome
   bodyPart: Snout
   markingCategory: Snout
   sprites:
@@ -378,7 +378,7 @@
 
 - type: marking
   speciesRestriction: [Ipc]
-  id: SScreenBestfriend
+  id: ScreenBestfriend
   bodyPart: Snout
   markingCategory: Snout
   sprites:
@@ -387,7 +387,7 @@
 
 - type: marking
   speciesRestriction: [Ipc]
-  id: SScreenBigsmile
+  id: ScreenBigsmile
   bodyPart: Snout
   markingCategory: Snout
   sprites:
@@ -396,7 +396,7 @@
 
 - type: marking
   speciesRestriction: [Ipc]
-  id: SScreenBoredom
+  id: ScreenBoredom
   bodyPart: Snout
   markingCategory: Snout
   sprites:
@@ -405,7 +405,7 @@
 
 - type: marking
   speciesRestriction: [Ipc]
-  id: SScreenClown
+  id: ScreenClown
   bodyPart: Snout
   markingCategory: Snout
   sprites:
@@ -414,7 +414,7 @@
 
 - type: marking
   speciesRestriction: [Ipc]
-  id: SScreenCreeper
+  id: ScreenCreeper
   bodyPart: Snout
   markingCategory: Snout
   sprites:
@@ -423,7 +423,7 @@
 
 - type: marking
   speciesRestriction: [Ipc]
-  id: SScreenDealmaker
+  id: ScreenDealmaker
   bodyPart: Snout
   markingCategory: Snout
   sprites:
@@ -432,7 +432,7 @@
 
 - type: marking
   speciesRestriction: [Ipc]
-  id: SScreenMime
+  id: ScreenMime
   bodyPart: Snout
   markingCategory: Snout
   sprites:
@@ -441,7 +441,7 @@
 
 - type: marking
   speciesRestriction: [Ipc]
-  id: SScreenMonkey
+  id: ScreenMonkey
   bodyPart: Snout
   markingCategory: Snout
   sprites:
@@ -450,7 +450,7 @@
 
 - type: marking
   speciesRestriction: [Ipc]
-  id: SScreenMrgutsy
+  id: ScreenMrgutsy
   bodyPart: Snout
   markingCategory: Snout
   sprites:
@@ -459,7 +459,7 @@
 
 - type: marking
   speciesRestriction: [Ipc]
-  id: SScreenNerd
+  id: ScreenNerd
   bodyPart: Snout
   markingCategory: Snout
   sprites:
@@ -468,7 +468,7 @@
 
 - type: marking
   speciesRestriction: [Ipc]
-  id: SScreenNya
+  id: ScreenNya
   bodyPart: Snout
   markingCategory: Snout
   sprites:
@@ -477,7 +477,7 @@
 
 - type: marking
   speciesRestriction: [Ipc]
-  id: SScreenOko
+  id: ScreenOko
   bodyPart: Snout
   markingCategory: Snout
   sprites:
@@ -486,7 +486,7 @@
 
 - type: marking
   speciesRestriction: [Ipc]
-  id: SScreenRock
+  id: ScreenRock
   bodyPart: Snout
   markingCategory: Snout
   sprites:
@@ -495,7 +495,7 @@
 
 - type: marking
   speciesRestriction: [Ipc]
-  id: SScreenSkull
+  id: ScreenSkull
   bodyPart: Snout
   markingCategory: Snout
   sprites:
@@ -504,7 +504,7 @@
 
 - type: marking
   speciesRestriction: [Ipc]
-  id: SScreenTenna
+  id: ScreenTenna
   bodyPart: Snout
   markingCategory: Snout
   sprites:
