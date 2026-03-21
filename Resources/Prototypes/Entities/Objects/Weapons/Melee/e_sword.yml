@@ -339,7 +339,7 @@
     activeRangeBlockProb: 0.85
     activeMeleeBlockProb: 0.85
   - type: ToggleBlockingChance
-    toggledRangeBlockProb: 0.4
+    toggledRangeBlockProb: 0.3
     toggledMeleeBlockProb: 0.35
   - type: ChangeAppearanceOnActiveBlocking
     spriteLayer: shield
@@ -526,8 +526,8 @@
     activeRangeBlockProb: 0.60 #As we have no indication of the double esword being turned on or off chance frameworks were shrinked
     activeMeleeBlockProb: 0.65
   - type: ToggleBlockingChance
-    toggledRangeBlockProb: 0.60
-    toggledMeleeBlockProb: 0.45
+    toggledRangeBlockProb: 0.50
+    toggledMeleeBlockProb: 0.35
   - type: ChangeAppearanceOnActiveBlocking
     spriteLayer: shield
     inhandVisuals:

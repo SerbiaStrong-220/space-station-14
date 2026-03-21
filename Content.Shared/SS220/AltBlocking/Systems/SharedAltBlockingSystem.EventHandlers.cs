@@ -37,10 +37,10 @@ public sealed partial class SharedAltBlockingSystem
         foreach (var item in ent.Comp.BlockingItemsShields)
         {
             if (!TryComp<AltBlockingComponent>(item, out var blockComp))
-                return;
+                continue;
 
             if (!TryGetNetEntity(item, out var netEnt))
-                return;
+                continue;
 
             if (TryComp<ToggleBlockingChanceComponent>(item, out var toggleComp))
             {
@@ -139,7 +139,7 @@ public sealed partial class SharedAltBlockingSystem
     {
         foreach (var item in items)
         {
-            if ((!TryComp<AltBlockingComponent>(item, out var blockComp)) || damage == null)
+            if (!TryComp<AltBlockingComponent>(item, out var blockComp) || damage == null)
                 continue;
 
             if (TryComp<ToggleBlockingChanceComponent>(item, out var toggleComp))

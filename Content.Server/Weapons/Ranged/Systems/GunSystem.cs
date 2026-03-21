@@ -246,8 +246,6 @@ public sealed partial class GunSystem : SharedGunSystem
                             var dmg = hitscan.Damage; //SS220 shield rework
 
                             var hitEntity = lastHit.Value;
-                            if (hitscan.StaminaDamage > 0f)
-                                _stamina.TakeStaminaDamage(hitEntity, hitscan.StaminaDamage, source: user);
 
                             //SS220 shield rework begin
                             var blockEv = new HitscanBlockAttemptEvent(hitscan.Damage);
