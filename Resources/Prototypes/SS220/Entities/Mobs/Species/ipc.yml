@@ -90,6 +90,7 @@
   - type: Ipc
   - type: ZombieImmune
   - type: Crawler
+  - type: Unrevivable
   - type: Repairable
     fuelCost: 30
     doAfterDelay: 20
@@ -110,7 +111,7 @@
     thresholds:
       0: Alive
       100: Critical
-      300: Dead # ПРОВЕРИМ НА ТЕСТ ЧТОБ НЕ УПАЛ
+      200: Dead # ПРОВЕРИМ НА ТЕСТ ЧТОБ НЕ УПАЛ
     stateAlertDict:
       Alive: BorgHealth
       Critical: BorgCrit
