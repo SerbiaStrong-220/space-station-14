@@ -23,13 +23,13 @@ internal sealed class StunOnCollideSystem : EntitySystem
 
     private void TryDoCollideStun(Entity<StunOnCollideComponent> ent, EntityUid target)
     {
-        //FCB instastun resist begin
+        //SS220 instastun resist begin
         var resistEv = new StunAttemptEvent(StunSource.Projectile);
         RaiseLocalEvent(target, ref resistEv);
 
         if (resistEv.StunCancelled)
             return;
-        //FCB instastun resist end
+        //SS220 instastun resist end
 
         _stunSystem.TryKnockdown(target, ent.Comp.KnockdownAmount, ent.Comp.Refresh, ent.Comp.AutoStand, ent.Comp.Drop, true);
 

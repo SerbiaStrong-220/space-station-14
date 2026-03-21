@@ -1,8 +1,8 @@
 - type: alert
   id: ActiveBlocking
   icons:
-  - sprite: /Textures/FCB/Interface/Alerts/active_blocking.rsi
-    state: power0
+  - sprite: /Textures/Objects/Alerts/Weapons/Melee/shields.rsi
+    state: teleriot-on
   name: alerts-active-blocking
   description: alerts-active-blocking
   minSeverity: 0

@@ -43,12 +43,9 @@ public sealed partial class SharedAltBlockingSystem : EntitySystem
         SubscribeLocalEvent<AltBlockingComponent, GotUnequippedHandEvent>(OnUnequip);
         SubscribeLocalEvent<AltBlockingComponent, DroppedEvent>(OnDrop);
 
-        //SubscribeLocalEvent<AltBlockingComponent, GotEquippedEvent>(OnGotEquip);
-        //SubscribeLocalEvent<AltBlockingComponent, GotUnequippedEvent>(OnGotUnequipped);
-
         SubscribeLocalEvent<AltBlockingComponent, ComponentShutdown>(OnShutdown);
 
-        //SubscribeLocalEvent<AltBlockingComponent, ThrowItemAttemptEvent>(OnThrowAttempt);
+        //SubscribeLocalEvent<AltBlockingComponent, ThrowItemAttemptEvent>(OnThrowAttempt); // didn't remove these just in case i want to get them back
         //SubscribeLocalEvent<AltBlockingComponent, ContainerGettingRemovedAttemptEvent>(OnDropAttempt);
     }
 

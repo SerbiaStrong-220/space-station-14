@@ -44,7 +44,7 @@ public sealed class DamageOtherOnHitSystem : SharedDamageOtherOnHitSystem
             return;
         // SS220-add-miss-chance-?-end
 
-        //FCB shield rework begin
+        //SS220 shield rework begin
         var blockEv = new ThrowableProjectileBlockAttemptEvent(component.Damage);
 
         RaiseLocalEvent(args.Target, ref blockEv);
@@ -53,7 +53,7 @@ public sealed class DamageOtherOnHitSystem : SharedDamageOtherOnHitSystem
             _color.RaiseEffect(Color.Red, [args.Target], Filter.Pvs(args.Target, entityManager: EntityManager));
             return;
         }
-        //FCB shield rework end
+        //SS220 shield rework end
 
         var dmg = _damageable.TryChangeDamage(args.Target, component.Damage * _damageable.UniversalThrownDamageModifier, component.IgnoreResistances, origin: args.Component.Thrower);
 

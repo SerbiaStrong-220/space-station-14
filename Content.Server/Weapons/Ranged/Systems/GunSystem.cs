@@ -36,7 +36,6 @@ public sealed partial class GunSystem : SharedGunSystem
     [Dependency] private readonly SharedStaminaSystem _stamina = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!; //FCB shield rework
     [Dependency] private readonly ShuttleNavInfoSystem _shuttleNavInfo = default!; // SS220 Add projectiles & hitscan on shuttle nav
 
     private const float DamagePitchVariation = 0.05f;
@@ -244,13 +243,13 @@ public sealed partial class GunSystem : SharedGunSystem
 
                         if (lastHit != null)
                         {
-                            var dmg = hitscan.Damage; //FCB shield rework
+                            var dmg = hitscan.Damage; //SS220 shield rework
 
                             var hitEntity = lastHit.Value;
                             if (hitscan.StaminaDamage > 0f)
                                 _stamina.TakeStaminaDamage(hitEntity, hitscan.StaminaDamage, source: user);
 
-                            //FCB shield rework begin
+                            //SS220 shield rework begin
                             var blockEv = new HitscanBlockAttemptEvent(hitscan.Damage);
                             RaiseLocalEvent(lastHit.Value, ref blockEv);
 
@@ -271,7 +270,7 @@ public sealed partial class GunSystem : SharedGunSystem
                                 if (dmg != null)
                                     dmg = Damageable.TryChangeDamage(hitEntity, dmg * Damageable.UniversalHitscanDamageModifier, origin: user);
                             }
-                            //FCB shield rework end
+                            //SS220 shield rework end
 
                             var hitName = ToPrettyString(hitEntity);
                             if (dmg != null)
