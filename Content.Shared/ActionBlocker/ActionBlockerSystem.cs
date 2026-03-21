@@ -1,6 +1,6 @@
 using Content.Shared.Body.Events;
 using Content.Shared.Emoting;
-using Content.Shared.FCB.AltBlocking;
+using Content.Shared.SS220.AltBlocking;
 using Content.Shared.Hands;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;

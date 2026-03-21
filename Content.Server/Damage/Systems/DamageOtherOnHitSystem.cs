@@ -7,7 +7,7 @@ using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.Effects;
-using Content.Shared.FCB.Weapons.Ranged.Events;
+using Content.Shared.SS220.Weapons.Ranged.Events;
 using Content.Shared.Mobs.Components;
 using Content.Shared.SS220.Damage;
 using Content.Shared.Throwing;

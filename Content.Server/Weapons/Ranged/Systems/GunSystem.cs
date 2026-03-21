@@ -7,7 +7,6 @@ using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.Effects;
-using Content.Shared.FCB.Weapons.Ranged.Events;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.SS220.Weapons.Ranged.Events;

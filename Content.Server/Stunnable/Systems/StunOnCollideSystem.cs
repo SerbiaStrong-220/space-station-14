@@ -1,5 +1,5 @@
 using Content.Server.Stunnable.Components;
-using Content.Shared.FCB.InstastunResist;
+using Content.Shared.SS220.InstastunResist;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Throwing;
 using JetBrains.Annotations;

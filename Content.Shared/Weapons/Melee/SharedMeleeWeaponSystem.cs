@@ -7,8 +7,8 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
-using Content.Shared.FCB.AltBlocking;
-using Content.Shared.FCB.Weapons.Melee.Events;
+using Content.Shared.SS220.AltBlocking;
+using Content.Shared.SS220.Weapons.Melee.Events;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
@@ -212,13 +212,13 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         if (args.SenderSession.AttachedEntity is not {} user)
             return;
 
-        //FCB shield rework begin
+        //SS220 shield rework begin
         if (TryComp<AltBlockingUserComponent>(user, out var comp) && comp.IsBlocking)
         {
             PopupSystem.PopupPredictedCursor(Loc.GetString("actively-blocking-attack"), user);
             return;
         }
-        //FCB shield rework end
+        //SS220 shield rework end
 
         if (!TryGetWeapon(user, out var weaponUid, out var weapon) ||
             weaponUid != GetEntity(msg.Weapon))
@@ -234,13 +234,13 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         if (args.SenderSession.AttachedEntity is not {} user)
             return;
 
-        //FCB shield rework begin
+        //SS220 shield rework begin
         if (TryComp<AltBlockingUserComponent>(user, out var comp) && comp.IsBlocking)
         {
             PopupSystem.PopupPredictedCursor(Loc.GetString("actively-blocking-attack"), user);
             return;
         }
-        //FCB shield rework end
+        //SS220 shield rework end
 
         // ss220 add block heavy attack and shooting while user is down start
         if (_standing.IsDown(user))
@@ -541,7 +541,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             return;
         }
 
-        //FCB shield rework begin
+        //SS220 shield rework begin
         EntityUid targetEntity = target.Value;
         if (TryComp<AltBlockingUserComponent>(target, out var blockcomp))
         {
@@ -553,12 +553,12 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
                 targetEntity = (EntityUid)shield;
             }
         }
-        //FCB shield rework end
+        //SS220 shield rework end
 
         // Sawmill.Debug($"Melee damage is {damage.Total} out of {component.Damage.Total}");
 
         // Raise event before doing damage so we can cancel damage if the event is handled
-        var hitEvent = new MeleeHitEvent(new List<EntityUid> { targetEntity }, user, meleeUid, damage, null);//FCB shield rework  
+        var hitEvent = new MeleeHitEvent(new List<EntityUid> { targetEntity }, user, meleeUid, damage, null);//SS220 shield rework  
         RaiseLocalEvent(meleeUid, hitEvent);
 
         if (hitEvent.Handled)
@@ -566,7 +566,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         var targets = new List<EntityUid>(1)
         {
-            targetEntity//FCB shield rework
+            targetEntity//SS220 shield rework
         };
 
         var weapon = GetEntity(ev.Weapon);
@@ -580,7 +580,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         // For stuff that cares about it being attacked.
         var attackedEvent = new AttackedEvent(meleeUid, user, targetXform.Coordinates);
-        RaiseLocalEvent(targetEntity, attackedEvent);//FCB shield rework
+        RaiseLocalEvent(targetEntity, attackedEvent);//SS220 shield rework
 
         //ss220 extended weapon logic start
         var weaponAttackEvent = new WeaponAttackEvent(user, targetEntity, AttackType.LIGHT);
@@ -593,14 +593,14 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         // SS220 hook attack event end
 
         var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEvent.BonusDamage, hitEvent.ModifiersList);
-        var damageResult = Damageable.TryChangeDamage(targetEntity, modifiedDamage, origin: user, ignoreResistances: resistanceBypass);//FCB shield rework
+        var damageResult = Damageable.TryChangeDamage(targetEntity, modifiedDamage, origin: user, ignoreResistances: resistanceBypass);//SS220 shield rework
 
         if (damageResult is {Empty: false})
         {
             // If the target has stamina and is taking blunt damage, they should also take stamina damage based on their blunt to stamina factor
             if (damageResult.DamageDict.TryGetValue("Blunt", out var bluntDamage))
             {
-                _stamina.TakeStaminaDamage(targetEntity, (bluntDamage * component.BluntStaminaDamageFactor).Float(), visual: false, source: user, with: meleeUid == user ? null : meleeUid);//FCB shield rework
+                _stamina.TakeStaminaDamage(targetEntity, (bluntDamage * component.BluntStaminaDamageFactor).Float(), visual: false, source: user, with: meleeUid == user ? null : meleeUid);//SS220 shield rework
             }
 
             if (meleeUid == user)
@@ -616,7 +616,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         }
 
-        _meleeSound.PlayHitSound(targetEntity, user, GetHighestDamageSound(modifiedDamage, _protoManager), hitEvent.HitSoundOverride, component);//FCB shield rework
+        _meleeSound.PlayHitSound(targetEntity, user, GetHighestDamageSound(modifiedDamage, _protoManager), hitEvent.HitSoundOverride, component);//SS220 shield rework
 
         if (damageResult?.GetTotal() > FixedPoint2.Zero)
         {
@@ -693,7 +693,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         var targets = new List<EntityUid>();
         var damageQuery = GetEntityQuery<DamageableComponent>();
-        var targetseffectonly = new List<EntityUid>();//FCB shield rework
+        var targetseffectonly = new List<EntityUid>();//SS220 shield rework
 
         foreach (var entity in entities)
         {
@@ -701,7 +701,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
                 !damageQuery.HasComponent(entity))
                 continue;
 
-            //FCB shield rework begin
+            //SS220 shield rework begin
             if (TryComp<AltBlockingUserComponent>(entity, out var blockcomp))
             {
                 var meleeblockEvent = new MeleeHitBlockAttemptEvent();
@@ -718,7 +718,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
                 targets.Add(entity);
                 continue;
             }
-            //FCB shield rework end
+            //SS220 shield rework end
 
             targets.Add(entity);
         }
@@ -810,7 +810,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         if (appliedDamage.GetTotal() > FixedPoint2.Zero)
         {
             DoDamageEffect(targets, user, Transform(targets[0]));
-            DoDamageEffect(targetseffectonly, user, Transform(targets[0]));//FCB shield rework
+            DoDamageEffect(targetseffectonly, user, Transform(targets[0]));//SS220 shield rework
         }
 
         return true;

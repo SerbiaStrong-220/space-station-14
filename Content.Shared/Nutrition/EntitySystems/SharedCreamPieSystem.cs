@@ -1,4 +1,4 @@
-using Content.Shared.FCB.InstastunResist;
+using Content.Shared.SS220.InstastunResist;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;

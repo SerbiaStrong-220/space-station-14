@@ -5,7 +5,7 @@ using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared.Camera;
 using Content.Shared.Damage;
 using Content.Shared.Database;
-using Content.Shared.FCB.Weapons.Ranged.Events;
+using Content.Shared.SS220.Weapons.Ranged.Events;
 using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;

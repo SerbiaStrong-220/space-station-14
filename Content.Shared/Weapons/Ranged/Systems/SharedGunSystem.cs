@@ -7,9 +7,8 @@ using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
-using Content.Shared.FCB.AltBlocking;
+using Content.Shared.SS220.AltBlocking;
 using Content.Shared.Hands;
-using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
@@ -255,13 +254,13 @@ public abstract partial class SharedGunSystem : EntitySystem
         }
         // ss220 add block heavy attack and shooting while user is down end
 
-        //FCB shield rework begin
+        //SS220 shield rework begin
         if (TryComp<AltBlockingUserComponent>(user, out var blockComp) && blockComp.IsBlocking)
         {
             PopupSystem.PopupPredictedCursor(Loc.GetString("actively-blocking-attack"), user);
             return false;
         }
-        //FCB shield rework begin
+        //SS220 shield rework begin
 
         var toCoordinates = gun.ShootCoordinates;
 
