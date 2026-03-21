@@ -226,7 +226,10 @@
   components:
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/Shuttles/launcher.rsi #SS220-Duster-Resprite
+    granularLayersRendering: true #ss220-fix
     layers:
+    - state: support
+      renderingStrategy: NoRotation
     - state: exp-2100g
     - state: mag-5 #SS220-Duster-Resprite
       map: ["enum.GunVisualLayers.Mag"]
