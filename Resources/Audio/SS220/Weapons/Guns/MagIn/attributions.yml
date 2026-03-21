@@ -2,3 +2,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Is taken from tgstation at https://github.com/ss220-space/tgstation/blob/eee5e8ffb539d91a507316abf17839779326aa99/sound/weapons/draw_bow2.ogg"
   source: "https://github.com/tgstation/tgstation"
+
+- files: ["drozd_magIn.ogg"]
+  license: "CC0-1.0"
+  copyright: "Is taken from https://freesound.org/people/ser%C3%B8t%C5%8Dnin/sounds/674742/"
+  source: "https://freesound.org/people/ser%C3%B8t%C5%8Dnin/sounds/674742/"
