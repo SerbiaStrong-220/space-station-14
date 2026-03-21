@@ -1,6 +1,5 @@
 // © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
 using Content.Shared.Actions;
-using Content.Shared.Actions.Components;
 using Content.Shared.Damage;
 using Content.Shared.SS220.ArmorBlock;
 using Content.Shared.SS220.ToggleBlocking;
@@ -16,18 +15,19 @@ using Robust.Shared.Network;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using System.Linq;
+using Content.Shared.Alert;
 
 namespace Content.Shared.SS220.AltBlocking;
 
 public sealed partial class SharedAltBlockingSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly AlertsSystem _alerts = default!;
 
     public override void Initialize()
     {
@@ -49,41 +49,29 @@ public sealed partial class SharedAltBlockingSystem : EntitySystem
         //SubscribeLocalEvent<AltBlockingComponent, ContainerGettingRemovedAttemptEvent>(OnDropAttempt);
     }
 
-    private bool IsDropBlocked(Entity<AltBlockingComponent> ent)
-    {
-        if (!TryComp<AltBlockingUserComponent>(ent.Comp.User, out var userComp))
-            return false;
-
-        var action = userComp.BlockingToggleActionEntity;
-
-        if (action == null || !TryComp<ActionComponent>(action.Value, out var actionComponent))
-            return false;
-
-        return _gameTiming.CurTime <= actionComponent.Cooldown?.End;
-    }
-
     /// <summary>
     /// Called where you want the user to start blocking
     /// </summary>
     /// <param name="compUsert"> The <see cref="AltBlockingUserComponent"/></param>
     /// <param name="user"> The entity who's using the item to block</param>
     /// <returns></returns>
-    public bool StartBlocking(AltBlockingUserComponent compUser, EntityUid user)
+    public bool StartBlocking(Entity<AltBlockingUserComponent> ent)
     {
-        if (compUser.IsBlocking)
+        if (ent.Comp.IsBlocking)
             return false;
 
-        var blockerName = Identity.Entity(user, EntityManager);
+        var blockerName = Identity.Entity(ent.Owner, EntityManager);
         var msgUser = Loc.GetString("actively-blocking-attack");
         var msgOther = Loc.GetString("actively-blocking-others", ("blockerName", blockerName));
 
-        _actionsSystem.SetToggled(compUser.BlockingToggleActionEntity, true);
-        _popupSystem.PopupPredicted(msgUser, msgOther, user, user);
+        _popupSystem.PopupPredicted(msgUser, msgOther, ent.Owner, ent.Owner);
 
-        compUser.IsBlocking = true;
-        Dirty(user, compUser);
+        ent.Comp.IsBlocking = true;
+        Dirty(ent);
 
-        foreach (var shield in compUser.BlockingItemsShields)
+        _alerts.ShowAlert(ent.Owner, ent.Comp.BlockingAlertProtoId, 0);
+
+        foreach (var shield in ent.Comp.BlockingItemsShields)
         {
             if (shield == null)
                 continue;
@@ -109,23 +97,24 @@ public sealed partial class SharedAltBlockingSystem : EntitySystem
     /// <param name="compUsert"> The <see cref="AltBlockingUserComponent"/></param>
     /// <param name="user"> The entity who's using the item to block</param>
     /// <returns></returns>
-    public bool StopBlocking(AltBlockingUserComponent compUser, EntityUid user)
+    public bool StopBlocking(Entity<AltBlockingUserComponent> ent)
     {
-        if (!compUser.IsBlocking)
+        if (!ent.Comp.IsBlocking)
             return false;
 
-        var blockerName = Identity.Entity(user, EntityManager);
+        var blockerName = Identity.Entity(ent.Owner, EntityManager);
 
         var msgUser = Loc.GetString("actively-blocking-stop");
         var msgOther = Loc.GetString("actively-blocking-stop-others", ("blockerName", blockerName));
 
-        _popupSystem.PopupPredicted(msgUser, msgOther, user, user);
-        _actionsSystem.SetToggled(compUser.BlockingToggleActionEntity, false);
+        _popupSystem.PopupPredicted(msgUser, msgOther, ent.Owner, ent.Owner);
 
-        compUser.IsBlocking = false;
-        Dirty(user, compUser);
+        ent.Comp.IsBlocking = false;
+        Dirty(ent);
 
-        foreach (var shield in compUser.BlockingItemsShields)
+        _alerts.ClearAlert(ent.Owner, ent.Comp.BlockingAlertProtoId);
+
+        foreach (var shield in ent.Comp.BlockingItemsShields)
         {
             if (shield == null)
                 continue;
@@ -181,9 +170,8 @@ public sealed partial class SharedAltBlockingSystem : EntitySystem
             if (_net.IsServer)
             {
                 if (componentUser.IsBlocking)
-                    StopBlocking(componentUser, user);
+                    StopBlocking((user,componentUser));
 
-                _actionsSystem.RemoveAction(componentUser.BlockingToggleActionEntity);
                 RemComp<AltBlockingUserComponent>(user);
             }
         }

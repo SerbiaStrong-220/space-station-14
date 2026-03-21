@@ -7,3 +7,4 @@ ui-options-audio-tts-part-title = Настройки TTS
 ui-options-receive-tts = Получать TTS аудио
 ui-options-play-together-message-from-different-channels = Проигрывать одновременно сообщения из рации в разных каналах
 ui-options-play-together-message-from-different-speak-source = Проигрывать одновременно сообщения разговора от разных источников
+ui-options-function-toggle-active-blocking = Переключение активного блокирования

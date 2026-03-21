@@ -7,10 +7,8 @@ using Content.Shared.SS220.Weapons.Ranged.Events;
 using Content.Shared.Hands;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Random.Helpers;
-using Content.Shared.Throwing;
 //using Content.Shared.Weapons.Hitscan.Components;
 //using Content.Shared.Weapons.Hitscan.Events;
-using Robust.Shared.Containers;
 using Robust.Shared.Random;
 
 namespace Content.Shared.SS220.AltBlocking;
@@ -91,18 +89,6 @@ public sealed partial class SharedAltBlockingSystem
         return;
     }
 
-    private void OnDropAttempt(Entity<AltBlockingComponent> ent, ref ContainerGettingRemovedAttemptEvent args)
-    {
-        if (IsDropBlocked(ent))
-            args.Cancel();
-    }
-
-    private void OnThrowAttempt(Entity<AltBlockingComponent> ent, ref ThrowItemAttemptEvent args)
-    {
-        if (IsDropBlocked(ent))
-            args.Cancelled = false;
-    }
-
     private void OnEquip(Entity<AltBlockingComponent> ent, ref GotEquippedHandEvent args)
     {
         ent.Comp.User = args.User;
@@ -114,7 +100,6 @@ public sealed partial class SharedAltBlockingSystem
         if (TryComp<ArmorBlockComponent>(ent.Owner, out var armorComp))
             armorComp.Owner = args.User;
 
-        _actionsSystem.AddAction(args.User, ref userComp.BlockingToggleActionEntity, userComp.BlockingToggleAction, args.User);
         Dirty(args.User, userComp);
     }
 

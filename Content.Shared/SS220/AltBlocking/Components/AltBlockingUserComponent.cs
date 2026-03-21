@@ -1,4 +1,5 @@
 // © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
+using Content.Shared.Alert;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -19,8 +20,5 @@ public sealed partial class AltBlockingUserComponent : Component
     public bool IsBlocking = false;
 
     [DataField]
-    public EntProtoId BlockingToggleAction = "ActionToggleBlock";
-
-    [DataField]
-    public EntityUid? BlockingToggleActionEntity;
+    public ProtoId<AlertPrototype> BlockingAlertProtoId = "ActiveBlocking";
 }
