@@ -78,7 +78,7 @@
       - !type:HealthChange
         damage:
           types:
-            Poison: 1.0
+            Poison: 0.8
       - !type:Hallucination
         setting:
           randomEntities: HallucinationReagentAglomorphine
@@ -96,9 +96,11 @@
       effects:
       - !type:HealthChange
           damage:
-            groups:
-              Burn: -0.7
-              Brute: -0.9
+            types:
+              Blunt: -0.6
+              Slash: -0.6
+              Piercing: -0.6
+              Heat: -0.6
 
 - type: reagent
   id: Frontier
@@ -142,7 +144,7 @@
       - !type:HealthChange
         damage:
           types:
-            Poison: 1.0
+            Poison: 2.0
       - !type:GenericStatusEffect
         key: Muted
         component: Muted
@@ -168,6 +170,8 @@
       effects:
       - !type:HealthChange
           damage:
-            groups:
-              Burn: -0.7
-              Brute: -0.9
+            types:
+              Blunt: -0.7
+              Slash: -0.7
+              Piercing: -0.7
+              Heat: -0.7
