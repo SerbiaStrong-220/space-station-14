@@ -2,15 +2,15 @@
   id: MiGoRoleExperience
   skills:
     Bureaucracy:
-      level: 1
+      level: 2
     ExtravehicularActivity:
-      level: 1
+      level: 4
     CombatTraining:
-      level: 1
+      level: 3
     Construction:
-      level: 1
+      level: 3
     Medicine:
-      level: 1
+      level: 3
     PhysicalTraining:
       level: 3
   knowledges:

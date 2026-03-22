@@ -35,7 +35,7 @@
     skillDescription: medicine-base-desc
   components:
   - type: MedicineMachineUseSkillIssue
-    healthAnalyzerInfoShuffleChance: 0.1
+    healthAnalyzerInfoShuffleChance: 0
     defibrillatorSelfDamageChance: 0.1
   - type: MedicineDoAfterSkill
     durationScale: 1
