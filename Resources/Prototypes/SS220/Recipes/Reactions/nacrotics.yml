@@ -19,6 +19,8 @@
       amount: 1
     SodiumCarbonate:
       amount: 1
+    Desoxyephedrine:
+      amount: 1
   products:
     Aglomorphine: 4
 
@@ -28,6 +30,8 @@
     Vestine:
       amount: 1
     Aglomorphine:
+      amount: 1
+    SodiumHydroxide:
       amount: 1
   products:
     Frontier: 3
