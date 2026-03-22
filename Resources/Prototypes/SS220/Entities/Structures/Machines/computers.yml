@@ -196,3 +196,11 @@
             min: 1
             max: 1
 
+- type: entity
+  parent: ComputerShuttle
+  id: ComputerShuttleAdditionalControl
+  name: shuttle additional control computer
+  components:
+  - type: ShuttleGunControl
+  - type: ShuttleConsole
+    canControlShuttle: false
