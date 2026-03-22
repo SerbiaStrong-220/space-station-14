@@ -1,7 +1,10 @@
 ﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Shared.Explosion;
+using Content.Shared.Explosion.EntitySystems;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.DnaLock.Components;
 
@@ -56,7 +59,7 @@ public sealed partial class DnaLockClothingComponent : Component
     public string TimerPopupWearer = "dna-lock-clothing-timer-warning-self";
 
     [DataField]
-    public string ExplosionType = "Default";
+    public ProtoId<ExplosionPrototype> ExplosionType = SharedExplosionSystem.DefaultExplosionPrototypeId;
 
     /// <summary>
     /// Интенсивность взрыва. Достаточно для крита, но не смерти <= так задумано
