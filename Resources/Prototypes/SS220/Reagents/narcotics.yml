@@ -97,10 +97,10 @@
       - !type:HealthChange
           damage:
             types:
-              Blunt: -0.3
-              Slash: -0.3
-              Piercing: -0.3
-              Heat: -0.2
+              Blunt: -0.6
+              Slash: -0.6
+              Piercing: -0.6
+              Heat: -0.5
 
 - type: reagent
   id: Frontier
@@ -171,7 +171,7 @@
       - !type:HealthChange
           damage:
             types:
-              Blunt: -0.6
-              Slash: -0.6
-              Piercing: -0.6
-              Heat: -0.4
+              Blunt: -0.8
+              Slash: -0.8
+              Piercing: -0.8
+              Heat: -0.7
