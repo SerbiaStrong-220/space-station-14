@@ -128,7 +128,7 @@ public sealed class HealthAnalyzerSystem : EntitySystem
     /// </summary>
     private void OnInsertedIntoContainer(Entity<HealthAnalyzerComponent> uid, ref EntGotInsertedIntoContainerMessage args)
     {
-        if (uid.Comp.ScannedEntity != null) // SS220-health-analyzer-report
+        if (uid.Comp.ScannedEntity is not null) // SS220-health-analyzer-report
             _toggle.TryDeactivate(uid.Owner);
     }
 
@@ -146,7 +146,7 @@ public sealed class HealthAnalyzerSystem : EntitySystem
     /// </summary>
     private void OnDropped(Entity<HealthAnalyzerComponent> uid, ref DroppedEvent args)
     {
-        if (uid.Comp.ScannedEntity != null) // SS220-health-analyzer-report
+        if (uid.Comp.ScannedEntity is not null) // SS220-health-analyzer-report
             _toggle.TryDeactivate(uid.Owner);
     }
 
