@@ -40,14 +40,59 @@ public sealed partial class IpcComponent : Component
 
     public bool DrainActivated;
 
+    /// <summary>
+    /// Speed when the battery is low
+    /// </summary>
     [DataField]
     public float LowChargeSpeed = 0.2f;
 
+    /// <summary>
+    /// Damage from Emp Pulse
+    /// </summary>
     [DataField]
     public float DamageFromEmp = 30;
 
+    /// <summary>
+    /// Something for IPC faces...?
+    /// </summary>
     [DataField]
     public float OnMapInitMarkCount = 0;
+
+    /// <summary>
+    /// Ideal temp for IPC
+    /// </summary>
+    [DataField]
+    public float NormalTemperature = 293.2f;
+
+    /// <summary>
+    /// Delta for temp when IPC battery is overheated
+    /// </summary>
+    [DataField]
+    public float OverDelta = 20f;
+
+    /// <summary>
+    /// Delta for temp when IPC battery is at critical state
+    /// </summary>
+    [DataField]
+    public float CritDelta = 60.0f;
+
+    /// <summary>
+    /// Base draw rate battery
+    /// </summary>
+    [DataField]
+    public float BaseDrawRate = 0.8f;
+
+    /// <summary>
+    /// Draw rate when delta temp +-20
+    /// </summary>
+    [DataField]
+    public float OverDrawRate = 2.5f;
+
+    /// <summary>
+    /// Draw rate when delta temp +-60
+    /// </summary>
+    [DataField]
+    public float CritDrawRate = 5.0f;
 }
 
 public sealed partial class ToggleDrainActionEvent : InstantActionEvent

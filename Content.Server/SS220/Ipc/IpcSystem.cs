@@ -7,6 +7,7 @@ using Content.Shared.SS220.Ipc;
 using Content.Shared.Ninja.Components;
 using Content.Shared.Ninja.Systems;
 using Content.Shared.Popups;
+using Content.Shared.PowerCell;
 using Content.Shared.PowerCell.Components;
 using Content.Shared.Damage;
 using Content.Shared.Emp;
@@ -16,6 +17,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Sound.Components;
 using Content.Shared.UserInterface;
+using Content.Shared.Temperature;
 using Robust.Shared.Audio;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Utility;
@@ -56,6 +58,7 @@ public sealed partial class IpcSystem : EntitySystem
         SubscribeLocalEvent<IpcComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<IpcComponent, OpenIpcFaceActionEvent>(OnOpenFaceAction);
         SubscribeLocalEvent<IpcComponent, DamageChangedEvent>(OnDamageChanged);
+        SubscribeLocalEvent<IpcComponent, OnTemperatureChangeEvent>(OnTemperatureChanged);
         Subs.BuiEvents<IpcComponent>(IpcFaceUiKey.Face, subs =>
         {
             subs.Event<IpcFaceSelectMessage>(OnFaceSelected);
@@ -223,5 +226,26 @@ public sealed partial class IpcSystem : EntitySystem
             return;
 
         _mobState.ChangeMobState(ent, MobState.Critical);
+    }
+
+    private void OnTemperatureChanged(Entity<IpcComponent> ent, ref OnTemperatureChangeEvent args)
+    {
+        if (!TryComp<PowerCellDrawComponent>(ent, out var draw))
+            return;
+
+        var delta = Math.Abs(args.CurrentTemperature - ent.Comp.NormalTemperature);
+
+        float newDrawRate = ent.Comp.BaseDrawRate;
+
+        if (delta > ent.Comp.CritDelta)
+            newDrawRate = ent.Comp.CritDrawRate;
+        else if (delta > ent.Comp.OverDelta)
+            newDrawRate = ent.Comp.OverDrawRate;
+
+        if (MathHelper.CloseTo(draw.DrawRate, newDrawRate))
+            return;
+
+        draw.DrawRate = newDrawRate;
+        Dirty(ent, draw);
     }
 }
