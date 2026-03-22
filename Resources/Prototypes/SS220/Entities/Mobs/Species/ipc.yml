@@ -91,6 +91,11 @@
   - type: ZombieImmune
   - type: Crawler
   - type: Unrevivable
+  - type: Butcherable
+    butcheringType: Spike
+    spawned:
+    - id: CableApcStack1
+      amount: 4
   - type: Repairable
     fuelCost: 30
     doAfterDelay: 20
@@ -102,11 +107,6 @@
     snore: /Audio/Machines/buzz-two.ogg
     interval: 30
     popUp: sleep-ipc
-  - type: Butcherable
-    butcheringType: Spike
-    spawned:
-      - id: HeadIpc
-        amount: 1
   - type: MobThresholds
     thresholds:
       0: Alive
