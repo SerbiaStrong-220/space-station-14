@@ -17,7 +17,7 @@
   - type: MobThresholdsModifierStatusEffect
     modifiers:
       Critical:
-        flat: 20
+        flat: 15
 
 - type: entity
   parent: MobThresholdsModifierStatusEffect
@@ -27,4 +27,4 @@
   - type: MobThresholdsModifierStatusEffect
     modifiers:
       Critical:
-        flat: 50
+        flat: 35

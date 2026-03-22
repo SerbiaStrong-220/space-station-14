@@ -52,6 +52,36 @@
   physicalDesc: reagent-physical-desc-bitter
   flavor: medicine
   metabolisms:
+    Medicine:
+      effects:
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentCondition
+          reagent: Epinephrine
+          min: 1
+        reagent: Epinephrine
+        amount: -20
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentCondition
+          reagent: Ephedrine
+          min: 1
+        reagent: Ephedrine
+        amount: -20
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentCondition
+          reagent: Desoxyephedrine
+          min: 1
+        reagent: Desoxyephedrine
+        amount: -20
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentCondition
+          reagent: Stimulants
+          min: 1
+        reagent: Stimulants
+        amount: -20
     Poison:
       metabolismRate: 0.5
       effects:
@@ -68,41 +98,13 @@
       metabolismRate: 0.1
       effects:
       - !type:MovementSpeedModifier
-        walkSpeedModifier: 1.2
-        sprintSpeedModifier: 1.2
-      - !type:GenericStatusEffect
-        key: Stutter
-        component: StutteringAccent
-        time: 3
+        walkSpeedModifier: 1.0
+        sprintSpeedModifier: 0.95
       - !type:Jitter
-      - !type:HealthChange
-        damage:
-          types:
-            Poison: 1.0
-      - !type:Hallucination
-        setting:
-          randomEntities: HallucinationReagentAglomorphine
-          betweenHallucinations: 4
-          hallucinationMinTime: 2
-          hallucinationMaxTime: 10
-          totalDuration: 3
-          checkPockets: false
       - !type:MobThresholdsModifier
         statusEffectId: MobThresholdsModifierAglomorphine
         duration: 5
         refresh: false
-    Medicine:
-      metabolismRate: 0.5
-      effects:
-      - !type:HealthChange
-          damage:
-            types:
-              Blunt: -1.0
-              Slash: -1.0
-              Piercing: -1.0
-              Cold: -0.5
-              Shock: -0.5
-              Heat: -0.5
 
 - type: reagent
   id: Frontier
@@ -113,6 +115,36 @@
   physicalDesc: reagent-physical-desc-tingling
   flavor: medicine
   metabolisms:
+    Medicine:
+      effects:
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentCondition
+          reagent: Epinephrine
+          min: 1
+        reagent: Epinephrine
+        amount: -20
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentCondition
+          reagent: Ephedrine
+          min: 1
+        reagent: Ephedrine
+        amount: -20
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentCondition
+          reagent: Desoxyephedrine
+          min: 1
+        reagent: Desoxyephedrine
+        amount: -20
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentCondition
+          reagent: Stimulants
+          min: 1
+        reagent: Stimulants
+        amount: -20
     Poison:
       metabolismRate: 0.5
       effects:
@@ -125,53 +157,15 @@
           types:
             Cellular: 10.0
             Poison: 5.0
-      - !type:StaminaChange
-        conditions:
-        - !type:ReagentCondition
-          reagent: Frontier
-          min: 20.5
-        value: 100
     Narcotic:
-      metabolismRate: 0.5
+      metabolismRate: 0.1
       effects:
       - !type:MovementSpeedModifier
-        walkSpeedModifier: 1.3
-        sprintSpeedModifier: 1.3
-      - !type:GenericStatusEffect
-        key: Stutter
-        component: StutteringAccent
-        time: 8
+        walkSpeedModifier: 1.0
+        sprintSpeedModifier: 0.95
       - !type:Jitter
         time: 8
-      - !type:GenericStatusEffect
-        key: Muted
-        component: Muted
-        type: Add
-        time: 5
       - !type:MobThresholdsModifier
         statusEffectId: MobThresholdsModifierFrontier
         duration: 5
         refresh: false
-      - !type:StaminaChange
-        probability: 0.1
-        value: 10
-      - !type:Hallucination
-        setting:
-          randomEntities: HallucinationReagentFrontier
-          betweenHallucinations: 4
-          hallucinationMinTime: 2
-          hallucinationMaxTime: 10
-          totalDuration: 8
-          checkPockets: false
-    Medicine:
-      metabolismRate: 0.5
-      effects:
-      - !type:HealthChange
-          damage:
-            types:
-              Blunt: -2.0
-              Slash: -2.0
-              Piercing: -2.0
-              Cold: -1.0
-              Shock: -1.0
-              Heat: -1.0
