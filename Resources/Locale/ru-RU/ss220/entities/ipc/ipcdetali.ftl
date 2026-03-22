@@ -14,3 +14,5 @@ ipc-face-customization-screen = Экран (выберите один)
 ipc-cat-all = Все
 ipc-cat-fun = Веселье
 ipc-cat-misc = Разное
+ipc-cat-humanoids = Гуманоидные
+ipc-cat-robotic = Робот

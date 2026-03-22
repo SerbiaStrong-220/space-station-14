@@ -2,11 +2,11 @@
   id: DefaultIpcFaces
   faces:
   - id: ScreenEyes
-    category: misc
+    category: humanoids
   - id: ScreenEyestall
-    category: misc
+    category: humanoids
   - id: ScreenSinewave
-    category: misc
+    category: robotic
   - id: ScreenPink
     category: fun
   - id: ScreenQuestion
@@ -14,19 +14,19 @@
   - id: ScreenHeart
     category: misc
   - id: ScreenLoading
-    category: misc
+    category: robotic
   - id: ScreenTetris
-    category: fun
+    category: robotic
   - id: ScreenTv
-    category: fun
+    category: robotic
   - id: ScreenTextdrop
-    category: misc
+    category: robotic
   - id: ScreenStars
-    category: misc
+    category: robotic
   - id: ScreenFrown
-    category: fun
+    category: humanoids
   - id: ScreenRing
-    category: misc
+    category: robotic
   - id: ScreenL
     category: misc
   - id: ScreenPoxui
@@ -36,17 +36,17 @@
   - id: ScreenAwesome
     category: misc
   - id: ScreenBestfriend
-    category: fun
+    category: humanoids
   - id: ScreenBigsmile
-    category: fun
+    category: humanoids
   - id: ScreenBoredom
-    category: misc
+    category: humanoids
   - id: ScreenClown
     category: fun
   - id: ScreenCreeper
     category: fun
   - id: ScreenDealmaker
-    category: misc
+    category: fun
   - id: ScreenMime
     category: fun
   - id: ScreenMonkey
@@ -56,7 +56,7 @@
   - id: ScreenNerd
     category: misc
   - id: ScreenNya
-    category: misc
+    category: humanoids
   - id: ScreenNerd
     category: misc
   - id: ScreenSkull
