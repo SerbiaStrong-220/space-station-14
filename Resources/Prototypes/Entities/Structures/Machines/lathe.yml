@@ -180,7 +180,6 @@
   name: protolathe
   description: Converts raw materials into advanced items.
   components:
-  - type: DnaLockable
   - type: Sprite
     sprite: Structures/Machines/protolathe.rsi
     snapCardinals: true

@@ -53,7 +53,18 @@ public sealed class DnaLockClothingSystem : EntitySystem
             {
                 var timeLeft = (int)(active.ExplodeAt - curTime).TotalSeconds;
                 PlayTimerWarning(uid, active.WearerUid, clothing, timeLeft);
-                active.NextBeepAt = curTime + clothing.BeepInterval;
+
+                if (clothing.BeepInterval <= TimeSpan.Zero)
+                {
+                    active.NextBeepAt = curTime + TimeSpan.FromSeconds(1);
+                    continue;
+                }
+
+                active.NextBeepAt += clothing.BeepInterval;
+                while (active.NextBeepAt <= curTime)
+                {
+                    active.NextBeepAt += clothing.BeepInterval;
+                }
             }
         }
     }
