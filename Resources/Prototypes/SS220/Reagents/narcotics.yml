@@ -97,9 +97,6 @@
     Narcotic:
       metabolismRate: 0.1
       effects:
-      - !type:MovementSpeedModifier
-        walkSpeedModifier: 1.0
-        sprintSpeedModifier: 0.95
       - !type:Jitter
       - !type:MobThresholdsModifier
         statusEffectId: MobThresholdsModifierAglomorphine
@@ -160,9 +157,6 @@
     Narcotic:
       metabolismRate: 0.1
       effects:
-      - !type:MovementSpeedModifier
-        walkSpeedModifier: 1.0
-        sprintSpeedModifier: 0.95
       - !type:Jitter
         time: 8
       - !type:MobThresholdsModifier
