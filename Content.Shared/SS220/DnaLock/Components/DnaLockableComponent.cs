@@ -6,7 +6,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.SS220.DnaLockable.Components;
+namespace Content.Shared.SS220.DnaLock.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class DnaLockableComponent : Component

@@ -13,13 +13,14 @@ using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
-using Content.Shared.SS220.DnaLockable.Components;
+using Content.Shared.SS220.DnaLock.Components;
 using Content.Shared.Storage;
 using Content.Shared.Storage.Components;
 using Content.Shared.UserInterface;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Shared.Wieldable;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 
@@ -39,7 +40,7 @@ public sealed class DnaLockSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<DnaLockableComponent, ItemToggleActivateAttemptEvent>(OnActivateAttempt);
-        SubscribeLocalEvent<DnaLockableComponent, UseInHandEvent>(OnUseInHand);
+        SubscribeLocalEvent<DnaLockableComponent, UseInHandEvent>(OnUseInHand, after: [typeof(SharedWieldableSystem)]);
         SubscribeLocalEvent<DnaLockableComponent, AttemptShootEvent>(OnAttemptShoot);
         SubscribeLocalEvent<DnaLockableComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerbs);
         SubscribeLocalEvent<DnaLockableComponent, GetVerbsEvent<Verb>>(OnGetVerbs, after: [typeof(BatteryWeaponFireModesSystem)]);
@@ -51,6 +52,7 @@ public sealed class DnaLockSystem : EntitySystem
         SubscribeLocalEvent<RoleAddedEvent>(OnRoleAdded);
         SubscribeLocalEvent<DnaLockableComponent, GotEmaggedEvent>(OnEmagged);
         SubscribeLocalEvent<DnaLockableComponent, ActivatableUIOpenAttemptEvent>(OnActivatableUIOpenAttempt);
+        SubscribeLocalEvent<DnaLockableComponent, BoundUserInterfaceMessageAttempt>(OnBoundUiMessageAttempt);
     }
 
     private void OnActivateAttempt(Entity<DnaLockableComponent> ent, ref ItemToggleActivateAttemptEvent args)
@@ -66,6 +68,9 @@ public sealed class DnaLockSystem : EntitySystem
 
     private void OnUseInHand(Entity<DnaLockableComponent> ent, ref UseInHandEvent args)
     {
+        if (args.Handled)
+            return;
+
         if (CheckAccess(ent, args.User, silentFail: true))
             return;
 
@@ -74,7 +79,7 @@ public sealed class DnaLockSystem : EntitySystem
 
     private void OnAttemptShoot(Entity<DnaLockableComponent> ent, ref AttemptShootEvent args)
     {
-        if (CheckAccess(ent, args.User, silentFail: true))
+        if (CheckAccess(ent, args.User))
             return;
 
         args.Cancelled = true;
@@ -169,7 +174,7 @@ public sealed class DnaLockSystem : EntitySystem
         if (!comp.BlockToggleableClothing)
             return;
 
-        if (CheckAccess(ent, args.Performer, silentFail: true))
+        if (CheckAccess(ent, args.Performer))
             return;
 
         args.Handled = true;
@@ -194,6 +199,19 @@ public sealed class DnaLockSystem : EntitySystem
     private void OnActivatableUIOpenAttempt(Entity<DnaLockableComponent> ent, ref ActivatableUIOpenAttemptEvent args)
     {
         if (CheckAccess(ent, args.User, silentFail: true))
+            return;
+
+        args.Cancel();
+    }
+
+    private void OnBoundUiMessageAttempt(Entity<DnaLockableComponent> ent, ref BoundUserInterfaceMessageAttempt args)
+    {
+        if (args.Target != ent.Owner)
+            return;
+
+        var silentFail = args.Message is not OpenBoundInterfaceMessage;
+
+        if (CheckAccess(ent, args.Actor, silentFail))
             return;
 
         args.Cancel();

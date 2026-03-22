@@ -333,6 +333,7 @@
   - type: Battery
     maxCharge: 2000
     startingCharge: 2000
+  - type: DnaLockable # SS220 Dna lock
 
 - type: entity
   name: pulse carbine
@@ -371,6 +372,7 @@
   - type: Battery
     maxCharge: 5000
     startingCharge: 5000
+  - type: DnaLockable # SS220 Dna lock
 
 - type: entity
   name: pulse rifle
@@ -407,6 +409,7 @@
   - type: Battery
     maxCharge: 40000
     startingCharge: 40000
+  - type: DnaLockable # SS220 Dna lock
 
 - type: entity
   name: laser cannon
@@ -942,6 +945,11 @@
   - type: Battery
     maxCharge: 1200 # SS220-shotgun-battery
     startingCharge: 1200 # SS220-shotgun-battery
+  # SS220 Dna lock begin
+  - type: DnaLockable
+    mode: Roundstart
+    roundstartJob: Warden
+  # SS220 Dna lock end
 
 - type: entity
   name: energy magnum
@@ -991,6 +999,7 @@
     autoRechargeRate: 48
     autoRechargePause: true
     autoRechargePauseTime: 10
+  - type: DnaLockable # SS220 Dna lock
 
 - type: entity
   name: temperature gun

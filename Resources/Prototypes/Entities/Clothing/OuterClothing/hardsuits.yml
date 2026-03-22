@@ -381,6 +381,12 @@
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitWarden
+  # SS220 Dna lock begin
+  - type: DnaLockClothing
+  - type: DnaLockable
+    mode: Roundstart
+    roundstartJob: Warden
+  # SS220 Dna lock end
 
 #Captain's Hardsuit
 - type: entity

@@ -98,6 +98,7 @@
     autoRechargeRate: 48
     autoRechargePause: true
     autoRechargePauseTime: 10
+  - type: DnaLockable
 
 # Base KR
 - type: entity
@@ -213,6 +214,7 @@
         whitelist:
           tags:
             - PowerCellBlaster
+  - type: DnaLockable
 
 - type: entity
   name: ik 40 laser carbine
@@ -268,6 +270,7 @@
         whitelist:
           tags:
             - LaserSMGPowerCell
+  - type: DnaLockable
 
 - type: entity
   name: IK 60 Laser Carbine
@@ -328,6 +331,7 @@
         whitelist:
           tags:
             - LaserCarabinePowerCell
+  - type: DnaLockable
 
 # Новые прототипы пишите выше
 # Death Squad
@@ -368,6 +372,7 @@
       fireCost: 5
       gunModifiers:
         soundGunshot:  /Audio/SS220/Weapons/Guns/Gunshots/rifle.ogg
+  - type: DnaLockable
 
 - type: entity
   name: pulse shotgun
@@ -410,3 +415,4 @@
       gunModifiers:
         soundGunshot: /Audio/SS220/Weapons/Guns/Gunshots/hidg_rifle.ogg
       magState: heal-mag
+  - type: DnaLockable
