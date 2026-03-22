@@ -530,7 +530,7 @@ public struct RefreshMobThresholdsModifiersEvent(Entity<MobThresholdsComponent> 
 
     public void ApplyModifier(MobState state, MobThresholdsModifier modifier)
     {
-        if (_modifiers.TryGetValue(state, out var exist))
+        if (_modifiers.TryGetValue(state, out var exist) && modifier.Compatible)
             modifier += exist;
 
         _modifiers[state] = modifier;
@@ -611,6 +611,9 @@ public partial struct MobThresholdsModifier()
 
     [DataField]
     public FixedPoint2 Multiplier = 1f;
+
+    [DataField]
+    public bool Compatible = false;
 
     public MobThresholdsModifier(FixedPoint2 flat, FixedPoint2 multiplier) : this()
     {
