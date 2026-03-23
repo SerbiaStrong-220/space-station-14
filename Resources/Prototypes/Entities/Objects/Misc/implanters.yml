@@ -36,6 +36,7 @@
     - StorageImplant
     - AdrenalImplant # SS220 implant-removing fix
     - ThermalVisionImplant # SS220 implant-removing fix
+    - DeathRattleImplantStation # SS220 death rattle implants
     - FreedomImplant
     - UplinkImplant
     - EmpImplant

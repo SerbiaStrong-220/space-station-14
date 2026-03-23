@@ -151,6 +151,52 @@
       - NukeOperative
 
 - type: entity
+  parent: DeathRattleImplant
+  id: DeathRattleImplantStation
+  name: station death rattle implant
+  description: This implant will inform the Security radio channel should the user fall into critical condition or die.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RattleOnTrigger
+    possibleChannels:
+    - Security
+    - Medical
+    - Command
+  - type: Item
+    # hidden-desc-begin, also yeah mapping slide in 1 space =|
+  - type: HiddenDescription
+    entries:
+    - label: hidden-desc-DeathRattleImplanterStation-medical
+      jobRequired:
+      - Paramedic
+      - MedicalDoctor
+      - SeniorPhysician
+      - Brigmedic
+      - ChiefMedicalOfficer
+    - label: hidden-desc-DeathRattleImplanterStation-research
+      jobRequired:
+      - ResearchAssistant
+      - ResearchDirector
+      - Scientist
+      - BorgExpand commentComment on lines R170 to R173Resolved
+      - SeniorResearcher
+    - label: hidden-desc-DeathRattleImplanterStation-security
+      jobRequired:
+      - Captain
+      - HeadOfSecurity
+      - SeniorOfficer
+      - SecurityOfficer
+      - Warden
+      - Detective
+      - BlueShield
+    - label: hidden-desc-DeathRattleImplanterStation-syndicate
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperativeExpand commentComment on lines R186 to R187Resolved
+      - Thief
+    # hidden-desc-end
+
+- type: entity
   parent: BaseSubdermalImplant
   id: EmptyChemicalImplant
   name: empty chemical implant
