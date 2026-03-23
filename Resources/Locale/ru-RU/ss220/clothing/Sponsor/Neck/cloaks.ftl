@@ -1,3 +1,7 @@
+ent-ClothingSponsorNeckParadise = накидка причастия
+    .desc = Вручается избранным, удостоенным уникального места в этом мире.
+ent-ClothingSponsorNeckCoder = плащ созидания
+    .desc = Особый плащ, носителям оного дозволено вмешиваться и менять правила мира.
 ent-ClothingSponsorNeckMapper = плащ сотворения
     .desc = Особый плащ, чьим обладателям выпала честь участвовать в сотворении мира.
 ent-ClothingSponsorNeckSpriter = плащ начертания
