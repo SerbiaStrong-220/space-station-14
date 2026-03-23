@@ -2,12 +2,12 @@
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 
-namespace Content.Client.SS220.GhostHearing;
+namespace Content.Client.SS220.Trigger.UI;
 
 [UsedImplicitly]
 public sealed class RattleBoundUserInterface : BoundUserInterface
 {
-    private GhostHearingWindow? _window;
+    private RattleWindow? _window;
 
     public RattleBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
@@ -17,7 +17,7 @@ public sealed class RattleBoundUserInterface : BoundUserInterface
     {
         base.Open();
 
-        _window = this.CreateWindow<GhostHearingWindow>();
+        _window = this.CreateWindow<RattleWindow>();
 
         _window.OnChannelToggled += (channel, enabled) =>
         {
@@ -42,5 +42,4 @@ public sealed class RattleBoundUserInterface : BoundUserInterface
 
         _window.SetChannels(rattleState.Channels);
     }
-
 }

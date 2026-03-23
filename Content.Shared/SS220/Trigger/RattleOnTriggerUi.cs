@@ -7,13 +7,16 @@ namespace Content.Shared.SS220.Trigger;
 [Serializable, NetSerializable]
 public sealed class RattleBoundUiState : BoundUserInterfaceState
 {
-    public List<(string Key, Color Color, string Name, bool Enabled)> Channels { get; }
+    public List<RattleChannelEntry> Channels { get; }
 
-    public RattleBoundUiState(List<(string Key, Color Color, string Name, bool Enabled)> channels)
+    public RattleBoundUiState(List<RattleChannelEntry> channels)
     {
         Channels = channels;
     }
 }
+
+[Serializable, NetSerializable]
+public readonly record struct RattleChannelEntry(string Key, Color Color, string Name, bool Enabled);
 
 [Serializable, NetSerializable]
 public sealed class RattleChannelToggledMessage : BoundUserInterfaceMessage

@@ -54,7 +54,7 @@ public sealed class RattleOnTriggerSystem : EntitySystem
 
         var message = Loc.GetString(messageId, ("user", target.Value), ("position", posText));
         // SS220 - death-rattle-implant - BGN
-        foreach (var channel in GetEnabledChannels(ent.Comp))
+        foreach (var channel in ent.Comp.ActiveChannels)
         {
             if (!_prototypeManager.TryIndex(channel, out RadioChannelPrototype? channelProto))
                 continue;
@@ -90,7 +90,7 @@ public sealed class RattleOnTriggerSystem : EntitySystem
             return;
         }
 
-        var allowed = GetAllowedChannels(rattle.Comp);
+        var allowed = rattle.Comp.AllowedChannels.ToHashSet();
 
         if (!allowed.Contains(args.ChannelKey))
             return;
@@ -100,15 +100,14 @@ public sealed class RattleOnTriggerSystem : EntitySystem
 
         if (args.Enabled)
         {
-            if (!rattle.Comp.EnabledChannels.Contains(args.ChannelKey))
-                rattle.Comp.EnabledChannels.Add(args.ChannelKey);
+            rattle.Comp.EnabledChannels.Add(args.ChannelKey);
         }
         else
         {
             rattle.Comp.EnabledChannels.Remove(args.ChannelKey);
         }
 
-        SyncPrimaryChannel(rattle.Comp);
+        rattle.Comp.SyncPrimaryChannel();
         Dirty(rattle);
 
         _ui.SetUiState(ent.Owner, RattleUIKey.Key, new RattleBoundUiState(GetChannelState(rattle.Comp)));
@@ -125,20 +124,11 @@ public sealed class RattleOnTriggerSystem : EntitySystem
             return;
         }
 
-        rattle.Comp.EnabledChannels.Clear();
+        rattle.Comp.EnabledChannels = args.Enabled
+            ? rattle.Comp.AllowedChannels.ToHashSet()
+            : new HashSet<ProtoId<RadioChannelPrototype>>();
 
-        if (args.Enabled)
-        {
-            foreach (var channel in GetAllowedChannels(rattle.Comp))
-            {
-                if (!_prototypeManager.HasIndex<RadioChannelPrototype>(channel))
-                    continue;
-
-                rattle.Comp.EnabledChannels.Add(channel);
-            }
-        }
-
-        SyncPrimaryChannel(rattle.Comp);
+        rattle.Comp.SyncPrimaryChannel();
         Dirty(rattle);
 
         _ui.SetUiState(ent.Owner, RattleUIKey.Key, new RattleBoundUiState(GetChannelState(rattle.Comp)));
@@ -159,42 +149,22 @@ public sealed class RattleOnTriggerSystem : EntitySystem
         return true;
     }
 
-    private List<(string Key, Color Color, string Name, bool Enabled)> GetChannelState(RattleOnTriggerComponent component)
+    private List<RattleChannelEntry> GetChannelState(RattleOnTriggerComponent component)
     {
-        var options = GetAllowedChannels(component);
-        var enabled = GetEnabledChannels(component).Select(id => id.ToString()).ToHashSet();
+        var options = component.AllowedChannels;
+        // UI reflects only explicit user selection; fallback default channel is runtime-only.
+        var enabled = component.EnabledChannels.Select(id => id.ToString()).ToHashSet();
 
-        var result = new List<(string, Color, string, bool)>();
+        var result = new List<RattleChannelEntry>();
         foreach (var channel in options)
         {
             if (!_prototypeManager.TryIndex(channel, out RadioChannelPrototype? proto))
                 continue;
 
-            result.Add((proto.ID, proto.Color, Loc.GetString(proto.Name), enabled.Contains(channel)));
+            result.Add(new RattleChannelEntry(proto.ID, proto.Color, Loc.GetString(proto.Name), enabled.Contains(channel)));
         }
 
         return result;
-    }
-
-    private List<ProtoId<RadioChannelPrototype>> GetAllowedChannels(RattleOnTriggerComponent component)
-    {
-        return component.PossibleChannels.Count == 0
-            ? new List<ProtoId<RadioChannelPrototype>> { component.RadioChannel }
-            : component.PossibleChannels;
-    }
-
-    private List<ProtoId<RadioChannelPrototype>> GetEnabledChannels(RattleOnTriggerComponent component)
-    {
-        if (component.EnabledChannels.Count > 0)
-            return component.EnabledChannels;
-
-        return new List<ProtoId<RadioChannelPrototype>> { component.RadioChannel };
-    }
-
-    private static void SyncPrimaryChannel(RattleOnTriggerComponent component)
-    {
-        if (component.EnabledChannels.Count > 0)
-            component.RadioChannel = component.EnabledChannels[0];
     }
     // SS220 - death-rattle-implant - END
 }
