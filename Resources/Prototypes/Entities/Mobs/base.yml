@@ -136,6 +136,7 @@
     - Caustic
     - Asphyxiation
     - Radiation
+    - Cerebral # SS220 Brain damage examinable
   - type: DamageOnHighSpeedImpact
     damage:
       types:

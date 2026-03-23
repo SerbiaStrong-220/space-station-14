@@ -719,3 +719,8 @@ binds:
   key: P
   mod1: Alt
 # SS220 add pinnable ui func end
+# SS220 add additional control for shuttle start
+- function: FireShuttle
+  type: State
+  key: Space
+# SS220 add additional control for shuttle end

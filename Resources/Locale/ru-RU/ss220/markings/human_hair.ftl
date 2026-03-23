@@ -7,3 +7,4 @@ marking-HumanHairShortWavy = Вьющиеся (Короткая)
 marking-HumanHairUraraka = Урарака
 marking-HumanHairPonytail8 = Хвостик 8
 marking-HumanHairPonytail9 = Хвостик 9
+marking-HumanHairMullet = Маллет

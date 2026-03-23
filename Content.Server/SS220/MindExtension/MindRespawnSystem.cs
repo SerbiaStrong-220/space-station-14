@@ -12,7 +12,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server.SS220.MindExtension;
 
-public partial class MindExtensionSystem : EntitySystem //MindRespawnSystem
+public partial class MindExtensionSystem //MindRespawnSystem
 {
     private void SubscribeRespawnSystemEvents()
     {

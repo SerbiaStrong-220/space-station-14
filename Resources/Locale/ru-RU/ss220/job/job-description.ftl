@@ -9,3 +9,11 @@ job-description-blueshield = Ваша главная цель - защитить
 job-description-deathsquad = Член эскадрона смерти. Уничтожьте всё живое!
 
 job-description-migo = Вы - возвысившийся культист. Ваша задача - постройка баз, вербовка новых служителей, лечение и разведка.
+
+job-description-security-pet = Питомец службы безопасности. Издевайтесь над офицерами или помогайте им.
+
+job-description-space-dragon = { roles-antag-dragon-objective }
+
+job-description-syndicate-borg = { ghost-role-information-syndicate-cyborg-description }
+
+job-description-syndicate-reinforcement = { ghost-role-information-syndicate-reinforcement-description }
