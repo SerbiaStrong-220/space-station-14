@@ -302,3 +302,177 @@
     FoodPeaPod: 1
     FoodMeatPatty: 1
     FoodBowlBig: 1
+
+- type: microwaveMealRecipe
+  id: RecipeFoodMealEggsbenedict
+  name: food meal eggsbenedict
+  result: FoodMealEggsbenedict
+  time: 15
+  group: Breakfast
+  reagents:
+    Egg: 6
+    TableSalt: 5
+  solids:
+    FoodMeatBacon: 2
+    FoodBreadBun: 1
+
+- type: microwaveMealRecipe
+  id: RecipeFoodMealOmelette
+  name: food meal omelette
+  result: FoodMealOmelette
+  time: 15
+  group: Breakfast
+  reagents:
+    Egg: 18
+    TableSalt: 5
+  solids:
+    FoodCheeseSlice: 1
+
+- type: microwaveMealRecipe
+  id: RecipeFoodMealPigblanket
+  name: food meal pigblanket
+  result: FoodMealPigblanket
+  time: 10
+  group: Breads
+  solids:
+    FoodMeatCutlet: 1
+    FoodDoughSlice: 1
+
+- type: microwaveMealRecipe
+  id: RecipeFoodMealEggplantParm
+  name: food meal eggplantparm
+  result: FoodMealEggplantParm
+  time: 20
+  group: Savory
+  reagents:
+    Blackpepper: 5
+    TableSalt: 5
+  solids:
+    FoodEggplant: 1
+    FoodCheeseSlice: 2
+    FoodOnionSlice: 2
+
+- type: microwaveMealRecipe
+  id: RecipeFoodMealCornedbeef
+  name: food meal cornedbeef
+  result: FoodMealCornedbeef
+  time: 20
+  group: Savory
+  reagents:
+    TableSalt: 20
+    Blackpepper: 5
+  solids:
+    FoodMeat: 1
+    FoodCabbage: 2
+    FoodCarrot: 1
+
+- type: microwaveMealRecipe
+  id: RecipeFoodMealMilkape
+  name: food meal milkape
+  result: FoodMealMilkape
+  time: 30
+  group: Dessert
+  reagents:
+    Milk: 20
+  solids:
+    FoodSnackChocolateBar: 2
+    MonkeyCube: 1
+    FoodBanana: 1
+
+- type: microwaveMealRecipe
+  id: RecipeFoodNoodlesSpesslaw
+  name: food noodles spesslaw
+  result: FoodNoodlesSpesslaw
+  time: 20
+  group: Pasta
+  solids:
+    FoodNoodlesBoiled: 1
+    FoodMeatMeatball: 3
+    ClothingNeckLawyerbadge: 1
+
+- type: microwaveMealRecipe
+  id: RecipeFoodSaladEden
+  name: food salad eden
+  result: FoodSaladEden
+  time: 30
+  group: Salad
+  reagents:
+    TableSalt: 5
+  solids:
+    FoodBowlBig: 1
+    FoodAmbrosiaDeus: 2
+    FoodEggplant: 1
+    FoodCarrot: 1
+
+- type: microwaveMealRecipe
+  id: RecipeFoodSoupElectron
+  name: food soup electron
+  result: FoodSoupElectron
+  time: 25
+  group: Soup
+  reagents:
+    Licoxide: 10
+    Water: 10
+  solids:
+    FoodBowlBig: 1
+    SheetPlasma1: 1
+    FoodPotato: 1
+    Foodbeet: 1
+
+- type: microwaveMealRecipe
+  id: RecipeFoodBakedBunHotX
+  name: food baked bunhotx
+  result: FoodBakedBunHotX
+  time: 5
+  group: Dessert
+  reagents:
+    Sugar: 5
+    Milk: 5
+  solids:
+    FoodDoughSlice: 1
+
+- type: microwaveMealRecipe
+  id: RecipeFoodCakeSpaceman
+  name: food cake spaceman
+  result: FoodCakeSpaceman
+  time: 15
+  group: Cake
+  solids:
+    FoodCakePlain: 1
+    FoodSpacemansTrumpet: 4
+
+- type: microwaveMealRecipe
+  id: RecipeFoodBreadVolcanic
+  name: food bread volcanic
+  result: FoodBreadVolcanic
+  time: 15
+  group: Breads
+  reagents:
+    Ale: 5
+  solids:
+    FoodDough: 1
+    Ash: 3
+
+- type: microwaveMealRecipe
+  id: RecipeFoodBakedBunMeat
+  name: food baked bunmeat
+  result: FoodBakedBunMeat
+  time: 5
+  group: Breads
+  solids:
+    FoodDoughSlice: 1
+    FoodMeatCutlet: 1
+
+- type: microwaveMealRecipe
+  id: RecipeFoodMealBearsteak
+  name: food meal bearsteak
+  result: FoodMealBearsteak
+  time: 30
+  group: Other
+  reagents:
+    TableSalt: 5
+    Hotsauce: 10
+    Blackpepper: 5
+  solids:
+    FoodMeatBear: 1
+    FoodMeatFish: 2
