@@ -1,0 +1,9 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+- type: alert
+  id: ClinkGlasses
+  name: alerts-clink-glasses-name
+  description: alerts-clink-glasses-desc
+  icons:
+  - sprite: /Textures/SS220/Interface/Alerts/clink_glasses.rsi #TODO Replace placeholder with something better
+    state: icon
+  clickEvent: !type:ClinkGlassesAlertEvent

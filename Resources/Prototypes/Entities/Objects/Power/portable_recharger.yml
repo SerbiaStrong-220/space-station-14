@@ -40,7 +40,16 @@
           components:
           - HitscanBatteryAmmoProvider
           - ProjectileBatteryAmmoProvider
-          # SS220 Added WeaponRechargerWhitelist tag for charging support begin
+          - Stunbaton # SS220 Added
+          - PowerCell # SS220 Added
+          # SS220 Added tags for charging support begin
           tags:
           - WeaponRechargerWhitelist
-          # SS220 Added WeaponRechargerWhitelist tag for charging support end
+          - DefibrillatorCompact
+          # SS220 Added tags for charging support end
+        # SS220 Added blacklist begin
+        blacklist:
+          tags:
+          - PotatoBattery
+          - E-N
+        # SS220 Added blacklist end
