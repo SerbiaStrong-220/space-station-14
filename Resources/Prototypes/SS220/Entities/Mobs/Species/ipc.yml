@@ -97,8 +97,11 @@
     - id: CableApcStack1
       amount: 4
   - type: Repairable
+    damage: 
+      groups:
+        Brute: -50
     fuelCost: 30
-    doAfterDelay: 20
+    doAfterDelay: 10
     selfRepairPenalty: 2
   - type: DamagedSiliconAccent
   - type: Reflect

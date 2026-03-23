@@ -189,9 +189,6 @@
     damage:
       types:
         Shock: -6
-        Blunt: -6
-        Slash: -6
-        Piercing: -6
         Heat: -8
     healingBeginSound:
       path: "/Audio/Items/Medical/brutepack_begin.ogg"
