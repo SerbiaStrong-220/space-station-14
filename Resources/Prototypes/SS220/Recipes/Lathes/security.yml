@@ -176,3 +176,12 @@
     Glass: 200
     Plastic: 300
     Gold: 50
+
+- type: latheRecipe
+  id: WeaponCompactAntimateriel
+  result: WeaponCompactAntimateriel
+  completetime: 5
+  materials:
+    Steel: 2000
+    Glass: 100
+    Plastic: 300

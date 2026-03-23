@@ -51,6 +51,7 @@
   - MagazineRifleEmpty
   - SpeedLoaderMagnum
   - SpeedLoaderMagnumEmpty
+  - MagazineBoxAntiMateriel
   #ss220 more recipies begin
   - SpeedLoaderLightRifle
   - MagazineMagnumEmpty
@@ -136,6 +137,7 @@
 - type: latheRecipePack
   id: SecurityWeapons
   recipes:
+  - WeaponCompactAntimateriel #SS220 WeaponCompactAntimateriel
   - LaserSMGPowerCell #SS220 WeaponLaserSMG
   - WeaponLaserSMG #SS220 WeaponLaserSMG
   - Truncheon
