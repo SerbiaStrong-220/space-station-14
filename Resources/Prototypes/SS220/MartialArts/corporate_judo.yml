@@ -1,6 +1,7 @@
 - type: martialArt
   id: CorporateJudo
   name: martial-art-judo
+  grabDelayCoefficient: 0.5
   effects:
   - !type:WeaponRestrictionMartialArtEffect
     blacklist:
@@ -22,6 +23,9 @@
   - name: martial-art-judo-eye-poke
     steps: [ Push, Harm ]
     entry:
+      conditions:
+      - !type:EyeProtectionCombatCondition
+        eq: 0
       effects:
       - !type:ApplyOldStatusEffectCombatEffect
         effect: TemporaryBlindness

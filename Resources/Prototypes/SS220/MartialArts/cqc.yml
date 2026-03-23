@@ -51,6 +51,7 @@
           ignoreResist: true
   - name: martial-art-cqc-restrain
     steps: [ Grab, Grab ]
+    preventGrabReset: true
     entry:
       effects:
       - !type:StunTargetCombatEffect
@@ -58,6 +59,10 @@
       - !type:ApplyStaminaCombatEffect
         damage: 20
         ignoreResist: true
+      - !type:SetGrabStageCombatEffect
+        stage: Chokehold
+      - !type:GrabShoveKnockoutCombatEffect
+        knockdownTime: 40
   - name: martial-art-cqc-pressure
     steps: [ Push, Grab ]
     entry:

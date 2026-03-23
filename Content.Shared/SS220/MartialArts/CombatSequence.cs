@@ -19,6 +19,9 @@ public partial struct CombatSequence
 
     [DataField]
     public TimeSpan Cooldown = TimeSpan.FromSeconds(2);
+
+    [DataField]
+    public bool PreventGrabReset;
 }
 
 [DataDefinition]

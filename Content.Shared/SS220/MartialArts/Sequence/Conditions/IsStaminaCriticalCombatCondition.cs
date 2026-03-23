@@ -10,6 +10,7 @@ public sealed partial class IsStaminaCriticalCombatCondition : CombatSequenceCon
     {
         if (!Entity.TryGetComponent<StaminaComponent>(target, out var stamina))
             return false;
+
         return stamina.Critical;
     }
 }

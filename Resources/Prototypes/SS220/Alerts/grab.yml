@@ -11,8 +11,8 @@
     state: neckgrab
   name: alerts-grabbed-name
   description: alerts-grabbed-desc
-  minSeverity: 0
-  maxSeverity: 3
+  minSeverity: 1
+  maxSeverity: 4
   clickEvent: !type:GrabBreakoutAttemptAlertEvent
 
 - type: alert
@@ -28,5 +28,5 @@
     state: neckgrab
   name: alerts-grabbing-name
   description: alerts-grabbing-desc
-  minSeverity: 0
-  maxSeverity: 3
+  minSeverity: 1
+  maxSeverity: 4

@@ -66,7 +66,7 @@ public sealed class PullingSystem : EntitySystem
     [Dependency] private readonly HeldSpeedModifierSystem _clothingMoveSpeed = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedVirtualItemSystem _virtual = default!;
-    [Dependency] private readonly GrabSystem _grab = default!; // SS220-Grabs
+    [Dependency] private readonly SharedGrabSystem _grab = default!; // SS220-Grabs
 
     static readonly Color СolorCaptureEffect = Color.Yellow; // SS220-MIT-pull-visualization
 

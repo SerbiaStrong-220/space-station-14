@@ -1,3 +1,5 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using System.Numerics;
 using Content.Shared.Alert;
 using Robust.Shared.Audio;
@@ -13,10 +15,16 @@ public sealed partial class GrabberComponent : Component
     public Vector2 GrabOffset = new Vector2(0, -0.25f);
 
     [DataField, AutoNetworkedField]
+    public int NeededHands = 2;
+
+    [DataField, AutoNetworkedField]
     public EntityUid? Grabbing;
 
     [DataField, AutoNetworkedField]
     public float Range = 1f;
+
+    [DataField, AutoNetworkedField]
+    public string? GrabJointId;
 
     /// <summary>
     /// Delay used when failed to get grab delay from GrabDelays dictionary

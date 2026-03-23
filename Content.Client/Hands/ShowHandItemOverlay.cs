@@ -37,13 +37,6 @@ namespace Content.Client.Hands
         private const float PerformedStepsIndexOffset = 1f;
         private const float PerformedStepsYDivisor = 1.8f;
         private const float PerformedStepsHalfDivisor = 2f;
-
-        private static readonly Dictionary<CombatSequenceStep, string> StepToString = new()
-        {
-            { CombatSequenceStep.Harm, "harm" },
-            { CombatSequenceStep.Push, "push" },
-            { CombatSequenceStep.Grab, "grab" }
-        };
         // SS220-MartialArts-End
 
         private HandsSystem? _hands;
@@ -130,22 +123,13 @@ namespace Content.Client.Hands
 
                 if (combo is { Count: > 0 })
                 {
-                    if (!_resourceCache.TryGetResource<RSIResource>(_martialArtsActionsRsi, out var rsiResource))
-                    {
-                        DebugTools.Assert($"Couldn't get resource for martial arts actions, expected path: {_martialArtsActionsRsi.CanonPath}");
-                        return;
-                    }
-
+                    var rsiResource = _resourceCache.GetResource<RSIResource>(_martialArtsActionsRsi, useFallback: false);
                     var rsiActual = rsiResource.RSI;
 
                     for (var i = 0; i < combo.Count; i++)
                     {
                         var step = combo[i];
-                        if (!StepToString.TryGetValue(step, out var stateName))
-                        {
-                            DebugTools.Assert($"No string representation found for martial arts step \"{step}\"");
-                            continue;
-                        }
+                        var stateName = step.ToString().ToLower();
 
                         if (!rsiActual.TryGetState(stateName, out var state))
                         {

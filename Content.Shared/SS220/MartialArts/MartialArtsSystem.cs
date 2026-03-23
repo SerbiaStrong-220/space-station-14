@@ -4,12 +4,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Alert;
-using Content.Shared.CombatMode;
 using Content.Shared.Effects;
 using Content.Shared.Inventory.Events;
-using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Movement.Pulling.Components;
-using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
 using Content.Shared.SS220.Grab;
@@ -33,10 +30,9 @@ public sealed partial class MartialArtsSystem : EntitySystem, IMartialArtEffectE
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
     [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
-    [Dependency] private readonly GrabSystem _grab = default!;
+    [Dependency] private readonly SharedGrabSystem _grab = default!;
 
     private static readonly ProtoId<AlertPrototype> CooldownAlert = "MartialArtCooldown";
     private static readonly LocId UnknownArt = "martial-arts-unknown";
@@ -178,6 +174,9 @@ public sealed partial class MartialArtsSystem : EntitySystem, IMartialArtEffectE
 
     private void OnGrab(EntityUid user, MartialArtistComponent artist, ref GrabStageChangeEvent ev)
     {
+        if (ev.Grabber != user)
+            return;
+
         if (artist.MartialArt == null)
             return;
 
@@ -200,6 +199,12 @@ public sealed partial class MartialArtsSystem : EntitySystem, IMartialArtEffectE
     {
         if (!_prototype.TryIndex(artist.MartialArt, out var martialArt))
             return;
+
+        if (_grab.IsGrabbed(ev.Grabbable) && artist.CurrentSteps.Count > 0)
+        {
+            ev.Multiply(0); // make it instant if target already grabbed and part of combo
+            return;
+        }
 
         ev.Multiply(martialArt.GrabDelayCoefficient);
     }
@@ -240,8 +245,8 @@ public sealed partial class MartialArtsSystem : EntitySystem, IMartialArtEffectE
         if (TryComp<PullableComponent>(target, out var pullable))
             _pulling.TryStopPull(target, pullable);
 
-        if (TryComp<GrabbableComponent>(target, out var grabbable))
-            _grab.BreakGrab((target, grabbable));
+        if (_grab.IsGrabbed(target) && !sequence.PreventGrabReset)
+            _grab.BreakGrab(target);
 
         PerformSequenceEntry(user, target, artist, sequence.Entry, sequence);
 

@@ -13,7 +13,7 @@ public sealed partial class StealHeldItemCombatEffect : CombatSequenceEffect
 
         var held = hands.EnumerateHeld(target);
 
-        if (held.TryFirstOrNull(out var item))
+        if (held.TryFirstOrNull(out var item) && hands.CanDrop(target, item.Value))
             hands.PickupOrDrop(user, item.Value);
     }
 }

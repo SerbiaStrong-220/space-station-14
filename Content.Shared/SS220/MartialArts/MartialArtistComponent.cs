@@ -23,7 +23,7 @@ public sealed partial class MartialArtistComponent : Component
 
     [DataField]
     [AutoNetworkedField]
-    public TimeSpan SequenceTimeout = TimeSpan.FromSeconds(3);
+    public TimeSpan SequenceTimeout = TimeSpan.FromSeconds(2);
 
     [DataField]
     [AutoNetworkedField]

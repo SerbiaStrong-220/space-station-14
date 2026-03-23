@@ -2,6 +2,7 @@
 
 using System.Linq;
 using Content.Shared.Damage;
+using Content.Shared.FixedPoint;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee.Events;
@@ -35,23 +36,27 @@ public sealed partial class LegSweepMartialArtEffectSystem : BaseMartialArtEffec
         if (ev.HitEntities.FirstOrNull() is not { } target)
             return;
 
-        var newDamage = new DamageSpecifier(ev.BaseDamage);
+        var bonusDamage = new DamageSpecifier
+        {
+            DamageDict = ev.BaseDamage.DamageDict.Select((pair) => (pair.Key, FixedPoint2.Zero)).ToDictionary()
+        };
 
         if (effect.BonusDamage != 0)
-            newDamage.AddDamageEvenly(effect.BonusDamage);
+            bonusDamage.AddDamageEvenly(effect.BonusDamage);
 
         if (TryComp<StandingStateComponent>(target, out var targetStanding))
         {
             if (effect.BonusDamageTargetDown != 0 && !targetStanding.Standing)
-                newDamage.AddDamageEvenly(effect.BonusDamageTargetDown);
+                bonusDamage.AddDamageEvenly(effect.BonusDamageTargetDown);
 
             if (effect.BonusDamageTargetUp != 0 && targetStanding.Standing)
-                newDamage.AddDamageEvenly(effect.BonusDamageTargetUp);
+                bonusDamage.AddDamageEvenly(effect.BonusDamageTargetUp);
 
             if (effect.KnockdownTime > TimeSpan.Zero)
                 _stun.TryKnockdown(target, effect.KnockdownTime, effect.KnockdownRefresh);
         }
-        ev.BonusDamage += newDamage - ev.BaseDamage;
+
+        ev.BonusDamage += bonusDamage;
     }
 }
 

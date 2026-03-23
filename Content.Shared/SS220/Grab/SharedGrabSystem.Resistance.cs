@@ -1,12 +1,28 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+using Content.Shared.Random.Helpers;
 using Robust.Shared.Random;
 
 namespace Content.Shared.SS220.Grab;
 
-public sealed partial class GrabSystem
+public partial class SharedGrabSystem
 {
     private void InitializeResistance()
     {
         SubscribeLocalEvent<GrabResistanceComponent, GrabBreakoutAttemptAlertEvent>(OnBreakoutAttemptAlert);
+        SubscribeLocalEvent<GrabResistanceComponent, GrabStageChangeEvent>(OnGrabStageChange);
+    }
+
+    private void OnGrabStageChange(Entity<GrabResistanceComponent> ent, ref GrabStageChangeEvent args)
+    {
+        if (args.Grabbable != ent.Owner)
+            return;
+
+        if (args.OldStage == GrabStage.None && args.NewStage > GrabStage.None)
+        {
+            ent.Comp.LastBreakoutAttemptAt = _timing.CurTime;
+            ent.Comp.NextBreakoutAttemptAt = _timing.CurTime + ent.Comp.FirstBreakoutAttemptDelay;
+        }
     }
 
     private void OnBreakoutAttemptAlert(Entity<GrabResistanceComponent> ent, ref GrabBreakoutAttemptAlertEvent args)
@@ -18,13 +34,22 @@ public sealed partial class GrabSystem
             return;
 
         // alerts system doesn't handles cooldowns
-        var (_, cooldownEnd) = GetResistanceCooldown((ent.Owner, ent.Comp));
-        if (cooldownEnd > _timing.CurTime)
+        var cooldown = GetResistanceCooldownSpan((ent, ent.Comp));
+        if (cooldown > TimeSpan.Zero)
             return;
 
         args.Handled = true;
 
         TryBreakGrab((ent.Owner, grabbable));
+    }
+
+    private TimeSpan GetResistanceCooldownSpan(Entity<GrabResistanceComponent?> grabbable)
+    {
+        if (!Resolve(grabbable, ref grabbable.Comp, false))
+            return TimeSpan.Zero;
+
+        var cooldown = grabbable.Comp.NextBreakoutAttemptAt - _timing.CurTime;
+        return cooldown > TimeSpan.Zero ? cooldown : TimeSpan.Zero;
     }
 
     /// <summary>
@@ -39,7 +64,7 @@ public sealed partial class GrabSystem
         var resistance = grabbable.Comp;
 
         var start = resistance.LastBreakoutAttemptAt;
-        var end = start + resistance.BreakoutAttemptCooldown;
+        var end = resistance.NextBreakoutAttemptAt;
 
         return (start, end);
     }
@@ -61,7 +86,11 @@ public sealed partial class GrabSystem
         if (chance <= 0)
             return;
 
-        if (chance >= 1 || _random.Prob(chance))
+        // TODO: Once we have predicted randomness delete this for something sane...
+        var seed = SharedRandomExtensions.HashCodeCombine(new() { (int)_timing.CurTick.Value, GetNetEntity(grabbable.Owner).Id });
+        var rand = new System.Random(seed);
+
+        if (chance >= 1 || rand.Prob(chance))
         {
             BreakGrab(grabbable);
         }
@@ -69,7 +98,8 @@ public sealed partial class GrabSystem
         {
             _popup.PopupPredicted(Loc.GetString(resistance.ResistingPopup, ("grabbable", MetaData(grabbable).EntityName)), grabbable, grabbable);
             resistance.LastBreakoutAttemptAt = _timing.CurTime;
-            UpdateAlertsGrabbable((grabbable, grabbable.Comp), grabbable.Comp.GrabStage);
+            resistance.NextBreakoutAttemptAt = _timing.CurTime + resistance.BreakoutAttemptCooldown;
+            UpdateAlertFor(grabbable, grabbable.Comp.Alert, grabbable.Comp.GrabStage, true);
         }
     }
 

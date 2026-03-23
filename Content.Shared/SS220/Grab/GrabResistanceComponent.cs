@@ -1,3 +1,5 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.Alert;
 using Robust.Shared.GameStates;
 
@@ -19,10 +21,16 @@ public sealed partial class GrabResistanceComponent : Component
     public Dictionary<GrabStage, float> CurrentStageBreakoutChance = new();
 
     [DataField, AutoNetworkedField]
+    public TimeSpan FirstBreakoutAttemptDelay = TimeSpan.FromSeconds(10);
+
+    [DataField, AutoNetworkedField]
     public TimeSpan BreakoutAttemptCooldown = TimeSpan.FromSeconds(30);
 
     [DataField, AutoNetworkedField]
     public TimeSpan LastBreakoutAttemptAt = TimeSpan.Zero;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan NextBreakoutAttemptAt = TimeSpan.Zero;
 
     [DataField]
     public LocId ResistingPopup = "grab-resistance-component-resisting";

@@ -1,6 +1,8 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using System.Linq;
 using Content.Shared.Damage;
+using Content.Shared.FixedPoint;
 using Content.Shared.Standing;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.GameStates;
@@ -24,21 +26,24 @@ public sealed partial class BonusDamageMartialArtEffectSystem : BaseMartialArtEf
         if (!effect.WithWeapons && ev.Weapon != ev.User)
             return;
 
-        var newDamage = new DamageSpecifier(ev.BaseDamage);
+        var bonusDamage = new DamageSpecifier
+        {
+            DamageDict = ev.BaseDamage.DamageDict.Select((pair) => (pair.Key, FixedPoint2.Zero)).ToDictionary()
+        };
 
         if (effect.BonusDamage != 0)
-            newDamage.AddDamageEvenly(effect.BonusDamage);
+            bonusDamage.AddDamageEvenly(effect.BonusDamage);
 
         if (TryComp<StandingStateComponent>(uid, out var standing))
         {
             if (effect.BonusDamageTargetDown != 0 && !standing.Standing)
-                newDamage.AddDamageEvenly(effect.BonusDamageTargetDown);
+                bonusDamage.AddDamageEvenly(effect.BonusDamageTargetDown);
 
             if (effect.BonusDamageTargetUp != 0 && standing.Standing)
-                newDamage.AddDamageEvenly(effect.BonusDamageTargetUp);
+                bonusDamage.AddDamageEvenly(effect.BonusDamageTargetUp);
         }
 
-        ev.BonusDamage += newDamage - ev.BaseDamage;
+        ev.BonusDamage += bonusDamage;
     }
 }
 

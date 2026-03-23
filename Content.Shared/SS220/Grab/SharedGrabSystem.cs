@@ -1,9 +1,12 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using System.Numerics;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Alert;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Interaction.Events;
@@ -19,8 +22,10 @@ using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.Grab;
 
@@ -28,14 +33,13 @@ namespace Content.Shared.SS220.Grab;
 // This is a system separate from PullingSystem due to their different purposes: PullingSystem is meant just to pull things around and GrabSystem is designed for combat
 // Current hacks:
 // - The control flow comes from PullingSystem 'cuz of input handling
-public sealed partial class GrabSystem : EntitySystem
+public abstract partial class SharedGrabSystem : EntitySystem
 {
     [Dependency] private readonly ActionBlockerSystem _blocker = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
@@ -45,19 +49,27 @@ public sealed partial class GrabSystem : EntitySystem
     [Dependency] private readonly SharedJointSystem _joints = default!;
     [Dependency] private readonly AlertsSystem _alerts = default!;
 
+    protected EntityQuery<GrabbableComponent> _grabbableQuery;
+    private EntityQuery<GrabberComponent> _grabberQuery;
+    private EntityQuery<PhysicsComponent> _physicsQuery;
+
     public override void Initialize()
     {
         base.Initialize();
+        UpdatesAfter.Add(typeof(SharedMouseRotatorSystem));
 
         SubscribeLocalEvent<GrabberComponent, GrabDoAfterEvent>(OnGrabDoAfter);
         SubscribeLocalEvent<GrabbableComponent, MoveInputEvent>(OnMove);
         SubscribeLocalEvent<GrabbableComponent, DownedEvent>(OnDowned);
         SubscribeLocalEvent<GrabbableComponent, ThrownEvent>(OnThrown);
         SubscribeLocalEvent<GrabberComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovementSpeed);
+        SubscribeLocalEvent<GrabbableComponent, ComponentShutdown>(OnGrabbableShutdown);
+        SubscribeLocalEvent<GrabberComponent, ComponentShutdown>(OnGrabberShutdown);
 
         SubscribeLocalEvent<GrabberComponent, EnableMouseRotationAttemptEvent>(OnMouseRotatorAttempt);
         SubscribeLocalEvent<GrabbableComponent, UpdateCanMoveEvent>(OnCanMove);
         SubscribeLocalEvent<GrabbableComponent, InteractionAttemptEvent>(OnInteractionAttempt);
+        SubscribeLocalEvent<GrabbableComponent, DownAttemptEvent>(OnDownAttempt);
         SubscribeLocalEvent<GrabbableComponent, AttackAttemptEvent>(OnCanAttack);
 
         SubscribeLocalEvent<GrabberComponent, AttemptMobTargetCollideEvent>(OnAttemptMobTargetCollide);
@@ -69,22 +81,10 @@ public sealed partial class GrabSystem : EntitySystem
         SubscribeLocalEvent<GrabberComponent, VirtualItemDeletedEvent>(OnVirtualItemDeleted);
 
         InitializeResistance();
-    }
 
-    public override void Update(float frameTime)
-    {
-        var query = EntityQueryEnumerator<GrabberComponent>();
-        while (query.MoveNext(out var uid, out var grabber))
-        {
-            if (grabber.Grabbing is not { } grabbable)
-                continue;
-
-            if (!Exists(grabbable))
-                continue;
-
-            var grabberRot = _transform.GetWorldRotation(uid);
-            _transform.SetWorldRotation(grabbable, grabberRot);
-        }
+        _grabbableQuery = GetEntityQuery<GrabbableComponent>();
+        _grabberQuery = GetEntityQuery<GrabberComponent>();
+        _physicsQuery = GetEntityQuery<PhysicsComponent>();
     }
 
     #region Events Handling
@@ -97,7 +97,7 @@ public sealed partial class GrabSystem : EntitySystem
         if (ev.Target is not { } grabbable)
             return;
 
-        if (!TryComp<GrabbableComponent>(grabbable, out var grabbableComp))
+        if (!_grabbableQuery.TryComp(grabbable, out var grabbableComp))
             return;
 
         _audio.PlayPredicted(grabber.Comp.GrabSound, grabber, grabber);
@@ -130,7 +130,7 @@ public sealed partial class GrabSystem : EntitySystem
         if (grabber.Comp.Grabbing is not { } grabbing)
             return;
 
-        if (!TryComp<GrabbableComponent>(grabbing, out var grabbableComp))
+        if (!_grabbableQuery.TryComp(grabbing, out var grabbableComp))
             return;
 
         if (!grabber.Comp.GrabStagesSpeedModifier.TryGetValue(grabbableComp.GrabStage, out var modifier))
@@ -147,19 +147,25 @@ public sealed partial class GrabSystem : EntitySystem
 
     private void OnCanMove(Entity<GrabbableComponent> grabbable, ref UpdateCanMoveEvent ev)
     {
-        if (grabbable.Comp.GrabStage != GrabStage.None)
+        if (IsGrabbed((grabbable, grabbable.Comp)))
             ev.Cancel();
     }
 
     private void OnInteractionAttempt(Entity<GrabbableComponent> grabbable, ref InteractionAttemptEvent ev)
     {
-        if (grabbable.Comp.GrabStage != GrabStage.None)
+        if (IsGrabbed((grabbable, grabbable.Comp)))
             ev.Cancelled = true;
+    }
+
+    private void OnDownAttempt(Entity<GrabbableComponent> grabbable, ref DownAttemptEvent ev)
+    {
+        if (IsGrabbed((grabbable, grabbable.Comp)))
+            ev.Cancel();
     }
 
     private void OnCanAttack(Entity<GrabbableComponent> grabbable, ref AttackAttemptEvent ev)
     {
-        if (grabbable.Comp.GrabStage != GrabStage.None)
+        if (IsGrabbed((grabbable, grabbable.Comp)))
             ev.Cancel();
     }
 
@@ -178,18 +184,16 @@ public sealed partial class GrabSystem : EntitySystem
 
     private void OnDowned(Entity<GrabbableComponent> grabbable, ref DownedEvent ev)
     {
-        if (grabbable.Comp.GrabStage != GrabStage.None)
-        {
+        if (!IsGrabbed((grabbable, grabbable.Comp)))
             BreakGrab((grabbable, grabbable.Comp));
-        }
     }
 
     private void OnVirtualItemDeleted(Entity<GrabberComponent> grabber, ref VirtualItemDeletedEvent ev)
     {
-        if (!TryComp<GrabbableComponent>(ev.BlockingEntity, out var grabbable))
+        if (!_grabbableQuery.TryComp(ev.BlockingEntity, out var grabbable))
             return;
 
-        if (grabbable.GrabStage == GrabStage.None)
+        if (!IsGrabbed((ev.BlockingEntity, grabbable)))
             return;
 
         BreakGrab((ev.BlockingEntity, grabbable));
@@ -207,15 +211,41 @@ public sealed partial class GrabSystem : EntitySystem
             ev.Cancel();
     }
 
+    private void OnGrabbableShutdown(Entity<GrabbableComponent> grabbable, ref ComponentShutdown ev)
+    {
+        var comp = grabbable.Comp;
+
+        if (!comp.Grabbed)
+            return;
+
+        var grabber = comp.GrabbedBy.Value;
+        _grabberQuery.TryComp(grabber, out var grabberComp);
+
+        ClearJoints((grabber, grabberComp), (grabbable, grabbable.Comp));
+    }
+
+    private void OnGrabberShutdown(Entity<GrabberComponent> grabber, ref ComponentShutdown ev)
+    {
+        var comp = grabber.Comp;
+
+        if (comp.Grabbing is not { } grabbable)
+            return;
+
+        _grabbableQuery.TryComp(grabbable, out var grabbableComp);
+
+        ClearJoints((grabber, grabber.Comp), (grabbable, grabbableComp));
+    }
+
     #endregion
 
     #region Public API
     public bool TryDoGrab(Entity<GrabberComponent?> grabber, Entity<GrabbableComponent?> grabbable)
     {
         // checks
-        if (!Resolve(grabber, ref grabber.Comp))
+        if (!_grabberQuery.Resolve(grabber, ref grabber.Comp))
             return false;
-        if (!Resolve(grabbable, ref grabbable.Comp))
+
+        if (!_grabbableQuery.Resolve(grabbable, ref grabbable.Comp))
             return false;
 
         if (!CanGrab(grabber, grabbable, checkCanPull: false)) // the control flow comes from pulling system after pull checks
@@ -225,12 +255,12 @@ public sealed partial class GrabSystem : EntitySystem
             return true;
 
         // popup
-        var grabberMeta = MetaData(grabber);
-        var grabbableMeta = MetaData(grabbable);
+        var grabberName = Identity.Name(grabber, EntityManager);
+        var grabbableName = Identity.Name(grabbable, EntityManager);
 
         var msg = grabbable.Comp.GrabStage == GrabStage.None
-            ? Loc.GetString(grabber.Comp.NewGrabPopup, ("grabber", grabberMeta.EntityName), ("grabbable", grabbableMeta.EntityName))
-            : Loc.GetString(grabber.Comp.GrabUpgradePopup, ("grabber", grabberMeta.EntityName), ("grabbable", grabbableMeta.EntityName));
+            ? Loc.GetString(grabber.Comp.NewGrabPopup, ("grabber", grabberName), ("grabbable", grabbableName))
+            : Loc.GetString(grabber.Comp.GrabUpgradePopup, ("grabber", grabberName), ("grabbable", grabbableName));
 
         _popup.PopupPredicted(msg, grabber, grabber);
 
@@ -244,6 +274,7 @@ public sealed partial class GrabSystem : EntitySystem
             BlockDuplicate = true,
             BreakOnDamage = true,
             BreakOnMove = true,
+            DistanceThreshold = 2f
         };
 
         return _doAfter.TryStartDoAfter(args);
@@ -251,15 +282,16 @@ public sealed partial class GrabSystem : EntitySystem
 
     public bool CanGrab(Entity<GrabberComponent?> grabber, Entity<GrabbableComponent?> grabbable, bool checkCanPull = true)
     {
-        if (!Resolve(grabber, ref grabber.Comp, false))
+        if (!_grabberQuery.Resolve(grabber, ref grabber.Comp, false))
             return false;
-        if (!Resolve(grabbable, ref grabbable.Comp, false))
+
+        if (!_grabbableQuery.Resolve(grabbable, ref grabbable.Comp, false))
             return false;
 
         if (grabbable.Comp.GrabbedBy != null && grabbable.Comp.GrabbedBy != grabber)
             return false;
 
-        if (TryComp<GrabbableComponent>(grabber, out var grabberGrabbable) && grabberGrabbable.GrabbedBy != null)
+        if (_grabbableQuery.TryComp(grabber, out var grabberGrabbable) && grabberGrabbable.GrabbedBy != null)
             return false;
 
         if (!_interaction.InRangeAndAccessible(grabber.Owner, grabbable.Owner, grabber.Comp.Range))
@@ -273,70 +305,67 @@ public sealed partial class GrabSystem : EntitySystem
 
     public void ChangeGrabStage(Entity<GrabberComponent> grabber, Entity<GrabbableComponent> grabbable, GrabStage newStage)
     {
+        var oldStage = grabbable.Comp.GrabStage;
         grabbable.Comp.GrabStage = newStage;
+        Dirty(grabbable);
 
         RefreshGrabResistance((grabbable, grabbable.Comp));
-        _movementSpeed.RefreshMovementSpeedModifiers(grabber);
-        UpdateAlerts(grabber, grabbable, newStage);
-        _blocker.UpdateCanMove(grabbable);
 
-        var ev = new GrabStageChangeEvent(grabber, grabbable, newStage);
+        var ev = new GrabStageChangeEvent(grabber, grabbable, oldStage, newStage); // all fields are readonly so using for both entities should be ok
         RaiseLocalEvent(grabber, ev);
+        RaiseLocalEvent(grabbable, ev);
+
+        _movementSpeed.RefreshMovementSpeedModifiers(grabber);
+        _blocker.UpdateCanMove(grabbable);
+        UpdateAlerts(grabber, grabbable, newStage);
     }
 
     public void BreakGrab(Entity<GrabbableComponent?> grabbable)
     {
-        if (!Resolve(grabbable, ref grabbable.Comp))
+        if (!_grabbableQuery.Resolve(grabbable, ref grabbable.Comp))
             return;
 
         if (grabbable.Comp.GrabbedBy is not { } grabber)
             return;
 
-        if (!TryComp<GrabberComponent>(grabber, out var grabberComp))
+        if (!_grabberQuery.TryComp(grabber, out var grabberComp))
             return;
 
         ChangeGrabStage((grabber, grabberComp), (grabbable, grabbable.Comp), GrabStage.None);
+
         grabberComp.Grabbing = null;
+        Dirty(grabber, grabberComp);
+
         grabbable.Comp.GrabbedBy = null;
+        Dirty(grabbable);
 
-        if (grabbable.Comp.GrabJointId != null)
-        {
-            _joints.RemoveJoint(grabbable, grabbable.Comp.GrabJointId);
-            grabbable.Comp.GrabJointId = null;
-        }
+        ClearJoints((grabber, grabberComp), grabbable);
 
-        _popup.PopupPredicted(Loc.GetString(grabbable.Comp.BreakFreePopup, ("grabbable", MetaData(grabbable).EntityName)), grabbable, grabbable);
+        _popup.PopupPredicted(Loc.GetString(grabbable.Comp.BreakFreePopup, ("grabbable", MetaData(grabbable).EntityName)), grabbable, null); // cannot be predicted but if somehow BreakGrab will be called at the client side we'll ensure nothing wrong happens
 
         _virtualItem.DeleteInHandsMatching(grabber, grabbable);
         _virtualItem.DeleteInHandsMatching(grabbable, grabber);
     }
 
-    #endregion
-
-    #region Private API
-    private void DoInitialGrab(Entity<GrabberComponent> grabber, Entity<GrabbableComponent> grabbable, GrabStage grabStage)
+    public bool IsGrabbed(Entity<GrabbableComponent?> grabbable)
     {
-        var freeHands = 0;
+        if (!_grabbableQuery.Resolve(grabbable, ref grabbable.Comp, false))
+            return false;
+
+        return grabbable.Comp.GrabStage != GrabStage.None;
+    }
+
+    public void DoInitialGrab(Entity<GrabberComponent> grabber, Entity<GrabbableComponent> grabbable, GrabStage grabStage)
+    {
+        if (IsGrabbed((grabbable, grabbable.Comp)))
+            return;
 
         foreach (var hand in _hands.EnumerateHands(grabber.Owner))
-        {
-            if (!_hands.TryGetHeldItem(grabber.Owner, hand, out var held))
-            {
-                freeHands++;
-                continue;
-            }
+            _hands.TryDrop(grabber.Owner, hand);
 
-            if (HasComp<UnremoveableComponent>(held))
-                continue;
+        var freeHands = _hands.GetEmptyHandCount(grabber.Owner);
 
-            _hands.DoDrop(grabber.Owner, hand, true);
-            freeHands++;
-
-            if (freeHands == 2)
-                break;
-        }
-
-        if (freeHands < 2)
+        if (freeHands < grabber.Comp.NeededHands)
         {
             _popup.PopupClient(Loc.GetString(grabber.Comp.NoFreeHandsPopup), grabber);
             return;
@@ -344,30 +373,28 @@ public sealed partial class GrabSystem : EntitySystem
 
         // grab confirmed
 
-        _virtualItem.TrySpawnVirtualItemInHand(grabbable, grabber, out _);
-        _virtualItem.TrySpawnVirtualItemInHand(grabbable, grabber, out _);
+        for (var i = 0; i < grabber.Comp.NeededHands; i++)
+        {
+            _virtualItem.TrySpawnVirtualItemInHand(grabbable, grabber, out _);
 
-        if (_virtualItem.TrySpawnVirtualItemInHand(grabber, grabbable, out var virtualItem))
-            EnsureComp<UnremoveableComponent>(virtualItem.Value);
-        if (_virtualItem.TrySpawnVirtualItemInHand(grabber, grabbable, out var virtualItem2))
-            EnsureComp<UnremoveableComponent>(virtualItem2.Value);
+            if (_virtualItem.TrySpawnVirtualItemInHand(grabber, grabbable, out var virtualItem))
+                EnsureComp<UnremoveableComponent>(virtualItem.Value);
+        }
 
         grabber.Comp.Grabbing = grabbable;
         grabbable.Comp.GrabbedBy = grabber;
 
-        // Position victim in front of grabber
-        var grabberXform = Transform(grabber);
-        var worldRot = _transform.GetWorldRotation(grabberXform);
-        var worldPos = _transform.GetWorldPosition(grabberXform) + worldRot.RotateVec(grabber.Comp.GrabOffset);
-
-        _transform.SetWorldPositionRotation(grabbable, worldPos, worldRot);
+        PlaceGrabbable(grabber, grabbable);
 
         // Create the joint
-        grabbable.Comp.GrabJointId = $"grab_joint_{GetNetEntity(grabbable)}";
+        var jointId = $"grab_joint_{GetNetEntity(grabbable)}";
+        grabber.Comp.GrabJointId = jointId;
+        grabbable.Comp.GrabJointId = jointId;
+
         var joint = _joints.CreatePrismaticJoint(grabbable, grabber, id: grabbable.Comp.GrabJointId);
         joint.CollideConnected = false;
 
-        if (TryComp<PhysicsComponent>(grabbable, out var grabbablePhysics) && TryComp<PhysicsComponent>(grabber, out var grabberPhysics))
+        if (_physicsQuery.TryComp(grabbable, out var grabbablePhysics) && _physicsQuery.TryComp(grabber, out var grabberPhysics))
         {
             joint.LocalAnchorA = grabbablePhysics.LocalCenter;
             joint.LocalAnchorB = grabberPhysics.LocalCenter + grabber.Comp.GrabOffset;
@@ -383,63 +410,67 @@ public sealed partial class GrabSystem : EntitySystem
         joint.LowerTranslation = 0f;
         joint.UpperTranslation = 0f;
 
+        Dirty(grabbable);
+        Dirty(grabber);
+
         // grab initialized, update statuses
         ChangeGrabStage(grabber, grabbable, grabStage);
     }
 
+    #endregion
+
+    #region Private API
+    /// <summary>
+    /// Position victim in front of grabber
+    /// </summary>
+    protected void PlaceGrabbable(Entity<GrabberComponent> grabber, Entity<GrabbableComponent> grabbable)
+    {
+
+        var grabberXform = Transform(grabber);
+        var worldRot = _transform.GetWorldRotation(grabberXform);
+        var worldPos = _transform.GetWorldPosition(grabberXform) + worldRot.RotateVec(grabber.Comp.GrabOffset);
+
+        _transform.SetWorldPositionRotation(grabbable, worldPos, worldRot);
+    }
+
     private void UpgradeGrab(Entity<GrabberComponent> grabber, Entity<GrabbableComponent> grabbable)
     {
+        Log.Info($"Upgrade Grab; New Stage: {grabbable.Comp.GrabStage}; Predicted: {!_timing.IsFirstTimePredicted}");
         ChangeGrabStage(grabber, grabbable, grabbable.Comp.GrabStage + 1);
     }
 
     private void UpdateAlerts(Entity<GrabberComponent> grabber, Entity<GrabbableComponent> grabbable, GrabStage stage)
     {
-        UpdateAlertsGrabber(grabber, stage);
-        UpdateAlertsGrabbable(grabbable, stage);
+        UpdateAlertFor(grabber, grabber.Comp.Alert, stage, false);
+        UpdateAlertFor(grabbable, grabbable.Comp.Alert, stage, true);
     }
 
-    private void UpdateAlertsGrabber(Entity<GrabberComponent> grabber, GrabStage stage)
+    private void UpdateAlertFor(EntityUid uid, ProtoId<AlertPrototype> alert, GrabStage stage, bool showResistanceCooldown)
     {
-        if (stage == GrabStage.None && _alerts.IsShowingAlert(grabber.Owner, grabber.Comp.Alert))
+        if (stage == GrabStage.None && _alerts.IsShowingAlert(uid, alert))
         {
-            _alerts.ClearAlert(grabber.Owner, grabber.Comp.Alert);
+            _alerts.ClearAlert(uid, alert);
         }
         else if (stage != GrabStage.None)
         {
-            var severity = (short)(stage - 1); // -1 cuz in alerts prototype zero stands for passive, none stage stands for no alert
-            if (_alerts.IsShowingAlert(grabber.Owner, grabber.Comp.Alert))
-                _alerts.UpdateAlert(grabber.Owner, grabber.Comp.Alert, severity);
-            else
-                _alerts.ShowAlert(grabber.Owner, grabber.Comp.Alert, severity);
-        }
-    }
-
-    private void UpdateAlertsGrabbable(Entity<GrabbableComponent> grabbable, GrabStage stage)
-    {
-        if (stage == GrabStage.None && _alerts.IsShowingAlert(grabbable.Owner, grabbable.Comp.Alert))
-        {
-            _alerts.ClearAlert(grabbable.Owner, grabbable.Comp.Alert);
-        }
-        else if (stage != GrabStage.None)
-        {
-            var severity = (short)(stage - 1); // -1 cuz in alerts prototype zero stands for passive, none stage stands for no alert
-            var cooldown = GetResistanceCooldown(grabbable.Owner);
-            if (_alerts.IsShowingAlert(grabbable.Owner, grabbable.Comp.Alert))
+            var severity = (short)stage;
+            Log.Info($"Severity: {severity}; Alert: {alert};");
+            var cooldown = GetResistanceCooldown(uid);
+            if (_alerts.IsShowingAlert(uid, alert))
             {
                 var (_, cooldownEnd) = cooldown;
-                _alerts.UpdateAlert(grabbable.Owner, grabbable.Comp.Alert, severity, cooldownEnd);
+                _alerts.UpdateAlert(uid, alert, severity, showResistanceCooldown ? cooldownEnd : null);
             }
             else
-                _alerts.ShowAlert(grabbable.Owner, grabbable.Comp.Alert, severity, cooldown);
+                _alerts.ShowAlert(uid, alert, severity, showResistanceCooldown ? cooldown : null);
         }
     }
 
     private TimeSpan GetDelay(Entity<GrabberComponent> grabber, Entity<GrabbableComponent> grabbable, GrabStage nextStage)
     {
-        var (uid, comp) = grabber;
-        var delay = comp.FallbackGrabDelay;
+        var delay = grabber.Comp.FallbackGrabDelay;
 
-        if (comp.GrabDelays.TryGetValue(nextStage, out var fetchedDelay))
+        if (grabber.Comp.GrabDelays.TryGetValue(nextStage, out var fetchedDelay))
         {
             delay = fetchedDelay;
         }
@@ -448,6 +479,32 @@ public sealed partial class GrabSystem : EntitySystem
         RaiseLocalEvent(grabber, ev);
 
         return ev.Delay;
+    }
+
+    /// <summary>
+    /// NOTE: Doesn't resolves null components on entities
+    /// </summary>
+    private void ClearJoints(Entity<GrabberComponent?> grabber, Entity<GrabbableComponent?> grabbable)
+    {
+        if (grabbable.Comp?.GrabJointId != null)
+        {
+            DebugTools.Assert(grabbable.Comp.GrabJointId == grabber.Comp?.GrabJointId);
+
+            _joints.RemoveJoint(grabbable, grabbable.Comp.GrabJointId);
+            grabbable.Comp.GrabJointId = null;
+
+            if (grabber.Comp != null)
+                grabber.Comp.GrabJointId = null;
+        }
+
+        if (grabber.Comp?.GrabJointId != null) // in most cases joint should be cleaned up in block above, but to ensure nothing is broken
+        {
+            _joints.RemoveJoint(grabber, grabber.Comp.GrabJointId);
+            grabber.Comp.GrabJointId = null;
+        }
+
+        Dirty(grabbable);
+        Dirty(grabber);
     }
     #endregion
 }
