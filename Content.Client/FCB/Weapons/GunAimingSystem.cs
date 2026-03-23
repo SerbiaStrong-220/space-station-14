@@ -2,8 +2,8 @@
 using Content.Client.Weapons.Ranged.Systems;
 using Content.Shared.CombatMode;
 using Content.Shared.FCB.Weapons.Components;
+using Content.Shared.FCB.Weapons.Ranged.Events;
 using Content.Shared.FCB.Weapons.Ranged.Systems;
-using Content.Shared.Weapons.Ranged.Events;
 using Robust.Client.GameObjects;
 using Robust.Client.Player;
 using Robust.Shared.Input;

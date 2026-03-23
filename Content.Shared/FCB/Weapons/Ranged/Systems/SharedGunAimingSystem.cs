@@ -1,6 +1,7 @@
 // © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
 using Content.Shared.CombatMode;
 using Content.Shared.FCB.Weapons.Components;
+using Content.Shared.FCB.Weapons.Ranged.Events;
 using Content.Shared.Hands;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Movement.Systems;
