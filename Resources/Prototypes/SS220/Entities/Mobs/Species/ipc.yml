@@ -96,13 +96,25 @@
     spawned:
     - id: CableApcStack1
       amount: 4
-  - type: Repairable
-    damage: 
-      groups:
-        Brute: -50
-    fuelCost: 30
-    doAfterDelay: 10
+  - type: MultiRepairable
     selfRepairPenalty: 2
+    options:
+      - qualityNeeded: Welding
+        doAfterDelay: 10
+        fuelCost: 30
+        damage:
+          types:
+             Slash: -20
+      - qualityNeeded: Screwing
+        doAfterDelay: 10
+        damage:
+          types:
+             Piercing: -25
+      - qualityNeeded: Anchoring
+        doAfterDelay: 10
+        damage:
+          types:
+             Blunt: -25
   - type: DamagedSiliconAccent
   - type: Reflect
     reflectProb: 0.05
