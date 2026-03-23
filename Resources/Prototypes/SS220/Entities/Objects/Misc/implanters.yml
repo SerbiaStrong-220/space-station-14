@@ -41,6 +41,11 @@
   components:
   - type: Implanter
     implant: DeathRattleImplantStation
+  - type: UserInterface
+    interfaces:
+      enum.RattleUIKey.Key:
+        type: RattleBoundUserInterface
+        interactionRange: 0
 
 - type: entity
   name: Chemical Implanter

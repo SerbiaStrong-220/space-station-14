@@ -158,12 +158,18 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: RattleOnTrigger
+    radioChannel: Medical
     possibleChannels:
-    - Security
     - Medical
+    - Security
     - Command
+    - Engineering
+    - Science
+    - Service
+    - Supply
+    - Law
+    - Common
   - type: Item
-    # hidden-desc-begin, also yeah mapping slide in 1 space =|
   - type: HiddenDescription
     entries:
     - label: hidden-desc-DeathRattleImplanterStation-medical
@@ -178,7 +184,7 @@
       - ResearchAssistant
       - ResearchDirector
       - Scientist
-      - BorgExpand commentComment on lines R170 to R173Resolved
+      - Borg
       - SeniorResearcher
     - label: hidden-desc-DeathRattleImplanterStation-security
       jobRequired:
@@ -192,9 +198,8 @@
     - label: hidden-desc-DeathRattleImplanterStation-syndicate
       whitelistMindRoles:
       - TraitorRole
-      - NukeOperativeExpand commentComment on lines R186 to R187Resolved
+      - NukeOperative
       - Thief
-    # hidden-desc-end
 
 - type: entity
   parent: BaseSubdermalImplant

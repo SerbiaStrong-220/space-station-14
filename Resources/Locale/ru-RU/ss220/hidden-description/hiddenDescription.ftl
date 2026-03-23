@@ -57,7 +57,7 @@ ent-AdrenalImplant = имплант Адреналина
 
 ent-DeathRattleImplanterStation = { ent-Implanter }
     .desc = { ent-Implanter.desc }
-    .suffix = станционный предсмертный хрип
+    .suffix = Станционный предсмертный хрип
 
 ent-DeathRattleImplantStation = имплант "Предсмертный хрип"
     .desc = Микрочип, который вживляют под кожу.

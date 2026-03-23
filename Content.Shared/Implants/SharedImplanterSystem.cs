@@ -9,6 +9,8 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Implants.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
+using Content.Shared.SS220.Trigger;
+using Content.Shared.Trigger.Components.Effects;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
@@ -98,7 +100,25 @@ public abstract class SharedImplanterSystem : EntitySystem
 
         if (component.CurrentMode == ImplanterToggleMode.Draw)
             TryOpenUi(uid, args.User, component);
+        // SS220 - death-rattle-implant - BGN
+        else
+            TryOpenRattleUi(uid, component, args.User);
+        // SS220 - death-rattle-implant - END
     }
+
+    // SS220 - death-rattle-implant - BGN
+    private void TryOpenRattleUi(EntityUid uid, ImplanterComponent component, EntityUid user)
+    {
+        var implant = component.ImplanterSlot.ContainerSlot?.ContainedEntity;
+        if (implant == null)
+            return;
+
+        if (!TryComp<RattleOnTriggerComponent>(implant.Value, out var rattle) || rattle.PossibleChannels.Count == 0)
+            return;
+
+        _uiSystem.TryToggleUi(uid, RattleUIKey.Key, user);
+    }
+    // SS220 - death-rattle-implant - END
 
     private void OnSelected(EntityUid uid, ImplanterComponent component, DeimplantChangeVerbMessage args)
     {
