@@ -58,6 +58,7 @@ public sealed class MartialArtsTest
   - type: DoAfter
   - type: StatusEffectContainer
   - type: MartialArtist
+    sequenceTimeout: 9999
   - type: MartialArtsTarget
   - type: Physics
     bodyType: KinematicController

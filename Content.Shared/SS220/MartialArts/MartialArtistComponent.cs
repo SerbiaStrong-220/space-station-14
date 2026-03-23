@@ -21,9 +21,13 @@ public sealed partial class MartialArtistComponent : Component
     [AutoNetworkedField]
     public TimeSpan LastStepPerformedAt = TimeSpan.Zero;
 
+    /// <summary>
+    /// Time to perform sequence before it will reset.
+    /// If you're searching for cooldown between successfull sequences look to <see cref="CombatSequence.Cooldown">
+    /// </summary>
     [DataField]
     [AutoNetworkedField]
-    public TimeSpan SequenceTimeout = TimeSpan.FromSeconds(2);
+    public TimeSpan SequenceTimeout = TimeSpan.FromSeconds(3);
 
     [DataField]
     [AutoNetworkedField]
