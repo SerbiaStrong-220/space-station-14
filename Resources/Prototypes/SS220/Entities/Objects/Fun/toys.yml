@@ -399,15 +399,15 @@
     - state: base
   - type: RandomSpawner
     prototypes:
-      - ClothingBackpackDuffelSyndicateFilledShotgunToy
-      - ClothingBackpackDuffelSyndicateFilledSMGToy
-      - ClothingBackpackDuffelSyndicateFilledRevolverToy
-      - ClothingBackpackDuffelSyndicateFilledLMGToy
-      - ClothingBackpackDuffelSyndicateFilledGrenadeLauncherToy
-      - ClothingBackpackDuffelSyndicateFilledWeaponPistolCobraToy
-      - ClothingBackpackDuffelSyndicateFilledWeaponPistolViperToy
-      - ClothingBackpackDuffelSyndicateFilledWeaponSniperMosinToy
-      - BriefcaseSyndieSniperToyBundleFilled
+    - ClothingBackpackDuffelSyndicateFilledShotgunToy
+    - ClothingBackpackDuffelSyndicateFilledSMGToy
+    - ClothingBackpackDuffelSyndicateFilledRevolverToy
+    - ClothingBackpackDuffelSyndicateFilledLMGToy
+    - ClothingBackpackDuffelSyndicateFilledGrenadeLauncherToy
+    - ClothingBackpackDuffelSyndicateFilledWeaponPistolCobraToy
+    - ClothingBackpackDuffelSyndicateFilledWeaponPistolViperToy
+    - ClothingBackpackDuffelSyndicateFilledWeaponSniperMosinToy
+    - BriefcaseSyndieSniperToyBundleFilled
     chance: 1
 
 - type: entity
@@ -421,9 +421,9 @@
     - state: icon
   - type: RandomSpawner
     prototypes:
-      - ClothingOuterHardsuitSyndieFake
-      - ClothingOuterHardsuitSyndieMedicFake
-      - ClothingOuterHardsuitSyndieEliteFake
-      - ClothingOuterHardsuitSyndieCommanderFake
-      - ClothingOuterHardsuitJuggernautFake
+    - ClothingOuterHardsuitSyndieFake
+    - ClothingOuterHardsuitSyndieMedicFake
+    - ClothingOuterHardsuitSyndieEliteFake
+    - ClothingOuterHardsuitSyndieCommanderFake
+    - ClothingOuterHardsuitJuggernautFake
     chance: 1

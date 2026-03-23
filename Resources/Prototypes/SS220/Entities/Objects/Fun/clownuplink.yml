@@ -115,7 +115,7 @@
   cost:
     TrashBananaPeel: 30
   categories:
-    - AdditionalClown
+  - AdditionalClown
 
 - type: listing
   id: ToyWeaponsBundleSet
@@ -125,7 +125,7 @@
   cost:
     TrashBananaPeel: 200
   categories:
-    - AdditionalClown
+  - AdditionalClown
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 2
@@ -138,7 +138,7 @@
   cost:
     TrashBananaPeel: 150
   categories:
-    - AdditionalClown
+  - AdditionalClown
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 2
@@ -151,7 +151,7 @@
   cost:
     TrashBananaPeel: 250
   categories:
-    - AdditionalClown
+  - AdditionalClown
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
