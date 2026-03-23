@@ -36,9 +36,9 @@ public sealed partial class SuperMatterSystem
     public const float CHEMISTRY_POTENTIAL_BASE = 12f; // parrots now, but need to concrete in future
     public const float MATTER_DECAY_BASE_RATE = 85f; // parrots now, but need to concrete in future
     /// <summary> Defines how fast SM gets in thermal equilibrium with gas in it. Do not make it greater than 1! </summary>
-    public const float SM_HEAT_TRANSFER_RATIO = 0.07f;
+    public const float SM_HEAT_TRANSFER_RATIO = 0.17f;
 
-    private const float RestructureProbability = 0.0002f; // remember that we have about 30 times trying it in a second. 2e-4 is like one chance in 3 minutes.
+    private const float RestructureProbability = 0.001f;
     private const float RestructureAdditionalMatterDimensionLess = 42f;
 
     private void EvaluateDeltaInternalEnergy(Entity<SuperMatterComponent> crystal, GasMixture gasMixture, float frameTime)

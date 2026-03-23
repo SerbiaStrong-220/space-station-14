@@ -26,6 +26,7 @@
       shoutPhrases: GoalPhrases
 
 - type: entity
+  parent: BaseImplantAction
   id: ActionActivateDnaCopy
   name: Dna Copy Implant
   components:
@@ -35,10 +36,9 @@
     icon:
       sprite: /Textures/SS220/Interface/Actions/implants.rsi
       state: dna-copy
-  - type: InstantAction
-    event: !type:UseDnaCopyImplantEvent
 
 - type: entity
+  parent: BaseImplantAction
   id: ActionActivateAdrenalImplant
   components:
   - type: LimitedCharges
@@ -52,8 +52,6 @@
       sprite: /Textures/SS220/Interface/Actions/implants.rsi
       state: adrenal
     useDelay: 30
-  - type: InstantAction
-    event: !type:UseAdrenalImplantEvent
 
 - type: entity
   id: ActionActivateThermalVision

@@ -45,7 +45,7 @@ namespace Content.Server.Access.Systems
             if (!TryComp<IdCardComponent>(ent, out var idCardComp))
                 return;
 
-            _prototypeManager.TryIndex(args.Args.ChameleonOutfit.Job, out var jobProto);
+            _prototypeManager.Resolve(args.Args.ChameleonOutfit.Job, out var jobProto);
 
             var jobIcon = args.Args.ChameleonOutfit.Icon ?? jobProto?.Icon;
             var jobName = args.Args.ChameleonOutfit.Name ?? jobProto?.Name ?? "";
@@ -114,10 +114,11 @@ namespace Content.Server.Access.Systems
             if (!TryComp<IdCardComponent>(uid, out var idCard))
                 return;
 
-            _cardSystem.TryChangeJobTitle(uid, args.Job, idCard);
-
             // SS220 Radio-Job-Color-start
-            if (TryFindJobProtoFromJobName(args.Job.ToLowerInvariant(), out var job))
+            var jobTitle = args.Job?.Trim() ?? string.Empty;
+            _cardSystem.TryChangeJobTitle(uid, jobTitle, idCard);
+
+            if (TryFindJobProtoFromJobName(jobTitle.ToLowerInvariant(), out var job))
                 _cardSystem.TryChangeJobColor(uid, PresetIdCardSystem.GetJobColor(_prototypeManager, job), job.RadioIsBold);
             // SS220 Radio-Job-Color-end
         }
@@ -135,7 +136,7 @@ namespace Content.Server.Access.Systems
             if (!TryComp<IdCardComponent>(uid, out var idCard))
                 return;
 
-            if (!_prototypeManager.TryIndex(args.JobIconId, out var jobIcon))
+            if (!_prototypeManager.Resolve(args.JobIconId, out var jobIcon))
                 return;
 
             _cardSystem.TryChangeJobIcon(uid, jobIcon, idCard);
@@ -164,7 +165,7 @@ namespace Content.Server.Access.Systems
         {
             foreach (var jobPrototype in _prototypeManager.EnumeratePrototypes<JobPrototype>())
             {
-                if (jobPrototype.LocalizedName == jobName)
+                if (jobPrototype.LocalizedName?.Trim() == jobName)
                 {
                     job = jobPrototype;
                     return true;

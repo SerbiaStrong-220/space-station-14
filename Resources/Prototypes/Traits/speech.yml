@@ -14,12 +14,15 @@
     - type: LizardAccent
     - type: MothAccent
     - type: OwOAccent #SS220
-    - type: ReplacementAccent
-      accent: dwarf
+  # SS220 Fix Dwarf Accentless
+  #  - type: ReplacementAccent
+  #    accent: dwarf
+  # SS220 Fix Dwarf Accentless
   #SS220-Vox accent Begin
     - type: TajaranAccent
     - type: VoxAccent
   #SS220-Vox accent End
+    - type: DwarfAccent # SS220 Fix Dwarf Accentless
 
 # 1 Cost
 
@@ -48,8 +51,11 @@
   category: SpeechTraits
   cost: 1
   components:
-  - type: ReplacementAccent
-    accent: cowboy
+  #SS220 Accent system begin
+  #- type: ReplacementAccent
+  #  accent: cowboy
+  - type: CowboyAccent
+  #SS220 Accent system end
 
 - type: trait
   id: GermanAccent
@@ -67,8 +73,11 @@
   category: SpeechTraits
   cost: 1
   components:
-  - type: ReplacementAccent
-    accent: italian
+  #SS220 Accent system begin
+  #- type: ReplacementAccent
+  #  accent: italian
+  - type: ItalianAccent
+  #SS220 Accent system end
 
 - type: trait
   id: FrenchAccent
@@ -95,8 +104,11 @@
   category: SpeechTraits
   cost: 1
   components:
-  - type: ReplacementAccent
-    accent: liar
+  #SS220 Accent system begin
+  #- type: ReplacementAccent
+  #  accent: liar
+  - type: LiarAccent
+  #SS220 Accent system end
 
 # 2 Cost
 

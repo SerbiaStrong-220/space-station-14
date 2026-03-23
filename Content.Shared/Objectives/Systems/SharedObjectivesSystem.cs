@@ -55,7 +55,7 @@ public abstract class SharedObjectivesSystem : EntitySystem
     /// The objective is not added to the mind's objectives, mind system does that in TryAddObjective.
     /// If the objective could not be assigned the objective is deleted and null is returned.
     /// </summary>
-    public EntityUid? TryCreateObjective(EntityUid mindId, MindComponent mind, string proto)
+    public EntityUid? TryCreateObjective(EntityUid mindId, MindComponent mind, string proto, bool force = false) // ss220 add custom antag goals
     {
         if (!_protoMan.HasIndex<EntityPrototype>(proto))
             return null;
@@ -68,7 +68,7 @@ public abstract class SharedObjectivesSystem : EntitySystem
             return null;
         }
 
-        if (!CanBeAssigned(uid, mindId, mind, comp))
+        if (!CanBeAssigned(uid, mindId, mind, comp) && !force) // ss220 add custom antag goals
         {
             Log.Warning($"Objective {proto} did not match the requirements for {_mind.MindOwnerLoggingString(mind)}, deleted it");
             return null;
@@ -76,7 +76,7 @@ public abstract class SharedObjectivesSystem : EntitySystem
 
         var ev = new ObjectiveAssignedEvent(mindId, mind);
         RaiseLocalEvent(uid, ref ev);
-        if (ev.Cancelled)
+        if (ev.Cancelled && !force) // ss220 add custom antag goals
         {
             Del(uid);
             Log.Warning($"Could not assign objective {proto}, deleted it");
@@ -141,7 +141,7 @@ public abstract class SharedObjectivesSystem : EntitySystem
         if (ev.Progress != null)
             return ev.Progress;
 
-        Log.Error($"Objective {ToPrettyString(uid):objective} of {_mind.MindOwnerLoggingString(mind.Comp)} didn't set a progress value!");
+        Log.Error($"Objective {ToPrettyString(uid):objective} of {_mind.MindOwnerLoggingString(mind)} didn't set a progress value!");
         return null;
     }
 

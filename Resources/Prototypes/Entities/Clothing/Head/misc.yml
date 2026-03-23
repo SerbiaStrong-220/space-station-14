@@ -156,9 +156,9 @@
   description: The tag reads "All proceeds go to the Hakurei Shrine."
   components:
   - type: Sprite
-    sprite: Clothing/Head/Misc/shrine-maidens-wig.rsi
+    sprite: SS220/Clothing/Head/Misc/shrine-maidens-wig.rsi #SS220 resprited
   - type: Clothing
-    sprite: Clothing/Head/Misc/shrine-maidens-wig.rsi
+    sprite: SS220/Clothing/Head/Misc/shrine-maidens-wig.rsi #SS220 resprited
   - type: Tag
     tags:
     - HamsterWearable
@@ -200,7 +200,7 @@
     sprite: SS220/Clothing/Head/Misc/fancycrown.rsi #SS220 resprited
   - type: TypingIndicatorClothing
     proto: regal
-  - type: MobPrice
+  - type: StaticPrice
     price: 3000
   - type: AddAccentClothing
     accent: MobsterAccent
@@ -335,6 +335,7 @@
     solution: drink
     delay: 0.5
     forceFeedDelay: 1.5
+    utensil: Spoon
   - type: FlavorProfile
     flavors:
       - water

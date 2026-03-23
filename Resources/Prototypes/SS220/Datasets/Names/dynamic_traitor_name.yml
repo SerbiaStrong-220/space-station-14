@@ -1,0 +1,17 @@
+- type: localizedDataset
+  id: NamesLightDynamic
+  values:
+    prefix: dynamic-light-lore-dataset-
+    count: 5
+
+- type: localizedDataset
+  id: NamesMediumDynamic
+  values:
+    prefix: dynamic-medium-lore-dataset-
+    count: 5
+
+- type: localizedDataset
+  id: NamesHardDynamic
+  values:
+    prefix: dynamic-hard-lore-dataset-
+    count: 5

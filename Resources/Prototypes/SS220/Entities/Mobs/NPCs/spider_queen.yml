@@ -90,7 +90,7 @@
   - type: Barotrauma
     damage:
       types:
-        Blunt: 0.3
+        Blunt: 0.2
         Heat: 0.1
   - type: Respirator
     damage:
@@ -126,6 +126,8 @@
   - type: Telepathy
     canSend: true
     telepathyChannelPrototype: TelepathyChannelHive
+  - type: FlashImmunity
+  - type: Lifesteal
 
 - type: entity
   parent: BaseMobSpiderQueen
@@ -175,6 +177,7 @@
     - ActionSpawnSingleSpiderWebDurableBloodPoints
     - ActionSpawnWebTileBloodPoints
     - ActionSpawnSpiderWallWebDurableBloodPoints
+    - ActionSpawnSpiderWebPassageBloodPoints
     - ActionSpiderCoconning
   - type: Hunger
     thresholds: # only animals and rats are derived from this prototype so let's override it here and in rats' proto
@@ -208,6 +211,8 @@
         Piercing: 25 #Damage
         Poison: 5
         Structural: 25
+  - type: Lifesteal
+    lifesteal: 10
   - type: Gun
     fireRate: 1
     useKey: false
@@ -252,7 +257,6 @@
         Cold: -0.15
       groups:
         Toxin: -4
-        Airloss: -2
 
 #Spiders-servants
 - type: entity
@@ -293,7 +297,6 @@
         Cold: -0.15
       groups:
         Toxin: -4
-        Airloss: -2
   - type: MeleeWeapon #Damage
     hidden: true
     soundHit:
@@ -316,6 +319,8 @@
     - ActionSpawnSpiderWallWebDurable
     - ActionSpawnSpiderCrystal
     - ActionSpawnSingleSpiderWebShortDelay
+    - ActionSpawnSingleSpiderWebDurable
+    - ActionSpawnSpiderWebPassage
   - type: Spider
     webPrototype: SpiderWebDespawned
   - type: MovementSpeedModifier
@@ -360,7 +365,11 @@
         Cold: -0.25
       groups:
         Toxin: -4
-        Airloss: -2.5
+  - type: Barotrauma
+    damage:
+      types:
+        Blunt: 0.18
+        Heat: 0.12
   - type: MeleeWeapon
     hidden: true
     soundHit:
@@ -372,6 +381,8 @@
         Piercing: 20
         Poison: 5
         Structural: 10
+  - type: Lifesteal
+    lifesteal: 7
   - type: StaminaResistance
     damageCoefficient: 0.7
     worn: false
@@ -386,6 +397,19 @@
   - type: ActionGrant
     actions:
     - ActionSpawnSingleSpiderWebLongDelay
+  - type: RechargeBasicEntityAmmo
+    rechargeCooldown: 1
+  - type: BasicEntityAmmoProvider
+    proto: StickyWeb
+    capacity: 1
+    count: 1
+  - type: Gun
+    fireRate: 4
+    useKey: false
+    selectedMode: FullAuto
+    availableModes:
+      - FullAuto
+    soundGunshot: /Audio/Weapons/Xeno/alien_spitacid.ogg
 
 - type: entity
   parent:
@@ -425,7 +449,11 @@
         Cold: -0.25
       groups:
         Toxin: -4
-        Airloss: -2.5
+  - type: Barotrauma
+    damage:
+      types:
+        Blunt: 0.18
+        Heat: 0.12
   - type: MeleeWeapon
     hidden: true
     soundHit:
@@ -481,6 +509,9 @@
   name: spider shooter
   description: spider dance
   components:
+  - type: HTN
+    rootTask:
+      task: SpiderServantShooterCompound
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Animals/spider.rsi
@@ -511,7 +542,11 @@
         Cold: -0.15
       groups:
         Toxin: -4
-        Airloss: -2
+  - type: Barotrauma
+    damage:
+      types:
+        Blunt: 0.18
+        Heat: 0.12
   - type: MeleeWeapon
     hidden: true
     soundHit:
@@ -628,9 +663,7 @@
     allowMovement: true
     name: spider-royQueen-name
     description: spider-royQueen-desc
-    requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 216000 # 60h
+    job: SpiderQueen
     raffle:
       settings: default
   - type: GhostTakeoverAvailable #Ghost role
@@ -646,9 +679,7 @@
     allowMovement: true
     name: spider-royDrone-name
     description: spider-royDrone-desc
-    requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 18000 # 5h
+    job: SpiderQueenServant
     raffle:
       settings: short
   - type: GhostTakeoverAvailable #Ghost role
@@ -664,9 +695,7 @@
     allowMovement: true
     name: spider-royHunter-name
     description: spider-royHunter-desc
-    requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 18000 # 5h
+    job: SpiderQueenServant
     raffle:
       settings: short
   - type: GhostTakeoverAvailable #Ghost role
@@ -682,9 +711,7 @@
     allowMovement: true
     name: spider-royGhost-name
     description: spider-royGhost-desc
-    requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 18000 # 5h
+    job: SpiderQueenServant
     raffle:
       settings: short
   - type: GhostTakeoverAvailable #Ghost role
@@ -700,9 +727,7 @@
     allowMovement: true
     name: spider-royShooter-name
     description: spider-royShooter-desc
-    requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 3600 # 5h
+    job: SpiderQueenServant
     raffle:
       settings: short
   - type: GhostTakeoverAvailable #Ghost role
@@ -718,9 +743,7 @@
     allowMovement: true
     name: spider-royLittle-name
     description: spider-royLittle-desc
-    requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 3600 # 1h
+    job: SpiderQueenServant
     raffle:
       settings: short
   - type: GhostTakeoverAvailable #Ghost role

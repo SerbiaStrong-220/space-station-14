@@ -11,8 +11,8 @@ namespace Content.Shared.SS220.TTS;
 public sealed class MsgPlayAnnounceTts : NetMessage
 {
     public TtsAudioData Data { get; set; }
-    public string AnnouncementSound { get; set; } = "";
-    public AudioParams AnnouncementParams { get; set; } = AudioParams.Default;
+    public SoundSpecifier AnnouncementSound { get; set; } = new SoundPathSpecifier("");
+    public AudioWithTTSPlayOperation PlayAudioMask = AudioWithTTSPlayOperation.PlayAll;
 
     public override MsgGroups MsgGroup => MsgGroups.Command;
 
@@ -21,27 +21,39 @@ public sealed class MsgPlayAnnounceTts : NetMessage
         var data = new TtsAudioData();
         data.ReadFromNetBuffer(buffer);
         Data = data;
-        AnnouncementSound = buffer.ReadString();
 
         var streamLength = buffer.ReadVariableInt32();
         using var stream = new MemoryStream(streamLength);
         buffer.ReadAlignedMemory(stream, streamLength);
         {
-            AnnouncementParams = serializer.Deserialize<AudioParams>(stream);
+            AnnouncementSound = serializer.Deserialize<SoundSpecifier>(stream);
         }
+
+        PlayAudioMask = (AudioWithTTSPlayOperation)buffer.ReadByte();
     }
 
     public override void WriteToBuffer(NetOutgoingMessage buffer, IRobustSerializer serializer)
     {
         Data.WriteToNetBuffer(buffer);
-        buffer.Write(AnnouncementSound);
 
         using var stream = new MemoryStream();
         {
-            serializer.Serialize(stream, AnnouncementParams);
+            serializer.Serialize(stream, AnnouncementSound);
         }
         var streamLength = (int)stream.Length;
         buffer.WriteVariableInt32(streamLength);
         buffer.Write(stream.GetBuffer().AsSpan(0, streamLength));
+
+        buffer.Write((byte)PlayAudioMask);
     }
+}
+
+[Flags]
+public enum AudioWithTTSPlayOperation : byte
+{
+    NotPlay = 1 << 0,
+    PlayAudio = 1 << 1,
+    PlayTTS = 1 << 2,
+
+    PlayAll = PlayAudio | PlayTTS,
 }

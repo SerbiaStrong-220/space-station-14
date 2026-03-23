@@ -136,6 +136,47 @@
     price: 5000
 
 - type: entity
+  name: C-20r ROW #I think ROW stands for Recharging Onboard Weapon so i'm following the L6C's example
+  id: WeaponSubMachineGunC20rROW
+  parent: BaseItem
+  description: A burst-fire C-20r submachine gun for use by cyborgs. Creates .35 caliber ammo on the fly from an internal ammo fabricator, which slowly self-charges.
+  components:
+  - type: Gun
+    minAngle: 2
+    maxAngle: 16
+    angleIncrease: 4
+    angleDecay: 16
+    fireRate: 8
+    burstFireRate: 8
+    selectedMode: Burst
+    availableModes:
+    - Burst
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/c-20r.ogg
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/SMGs/c20r.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-5
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    size: Huge
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: ProjectileBatteryAmmoProvider
+    proto: CartridgePistol
+    fireCost: 100
+  - type: Battery
+    maxCharge: 3000
+    startingCharge: 3000
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 25
+  - type: AmmoCounter
+
+- type: entity
   name: Drozd
   parent: [BaseWeaponSubMachineGun, BaseSecurityContraband]
   id: WeaponSubMachineGunDrozd
@@ -165,7 +206,7 @@
       #220 SG Angle Updates end
       burstFireRate: 18
       soundGunshot:
-        path: /Audio/Weapons/Guns/Gunshots/atreides.ogg
+        path: /Audio/SS220/Weapons/Guns/Gunshots/drozd_shot.ogg #SS220 drozd update
       selectedMode: Burst
       availableModes:
       - Burst
@@ -178,8 +219,8 @@
         gun_magazine:
           name: Magazine
           startingItem: MagazinePistolSubMachineGun
-          insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
-          ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+          insertSound: /Audio/SS220/Weapons/Guns/MagIn/drozd_magIn.ogg #SS220 drozd update
+          ejectSound: /Audio/SS220/Weapons/Guns/MagOut/drozd_magOut.ogg #SS220 drozd update
           priority: 2
           whitelist:
             tags:

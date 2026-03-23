@@ -1,0 +1,24 @@
+- type: technology
+  id: PortableReloadingEquipment
+  name: research-technology-portable-reloading-equipment
+  icon:
+    sprite: Objects/Power/portable_recharger.rsi
+    state: charging
+  discipline: Arsenal
+  tier: 2
+  cost: 9000
+  recipeUnlocks:
+  - PortableRecharger
+
+- type: technology
+  id: PlasmaConverterAcceleration
+  name: research-technology-plasma-converter-acceleration
+  icon:
+    sprite: SS220/Objects/Weapons/Guns/Battery/laser_carabine.rsi
+    state: icon
+  discipline: Arsenal
+  tier: 3
+  cost: 15000
+  recipeUnlocks:
+  - WeaponLaserSMG
+  - LaserSMGPowerCell

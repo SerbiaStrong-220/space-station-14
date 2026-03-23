@@ -73,7 +73,7 @@ public sealed partial class SmartGasMaskMenu : RadialMenu
     }
 }
 
-public sealed class SmartGasMaskMenuButton : RadialMenuTextureButtonWithSector
+public sealed class SmartGasMaskMenuButton : RadialMenuButtonWithSector
 {
 }
 

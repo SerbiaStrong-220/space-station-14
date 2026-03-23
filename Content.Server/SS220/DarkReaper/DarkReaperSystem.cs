@@ -20,6 +20,8 @@ using Robust.Shared.Utility;
 using Content.Shared.Projectiles;
 using Content.Server.Projectiles;
 using Content.Shared.Light.Components;
+using Content.Shared.Popups;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.DarkReaper;
@@ -43,6 +45,7 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly BuckleSystem _buckle = default!;
     [Dependency] private readonly ProjectileSystem _projectile = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     private readonly ProtoId<AlertPrototype> _deadscoreStage1Alert = "DeadscoreStage1";
 
@@ -53,6 +56,41 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
     public override void Initialize()
     {
         base.Initialize();
+
+        SubscribeLocalEvent<DarkReaperComponent, PlayerAttachedEvent>(OnPlayerAttached);
+    }
+
+    public override void Update(float delta)
+    {
+        base.Update(delta);
+
+        var reaperQuery = EntityQueryEnumerator<DarkReaperComponent>();
+
+        while (reaperQuery.MoveNext(out var reaper, out var reaperComp))
+        {
+            if (reaperComp.SpawnedTime == null)
+                continue;
+
+            reaperComp.NextDamageTime += TimeSpan.FromSeconds(delta);
+
+            if (reaperComp.NextDamageTime < reaperComp.DamageInterval)
+                continue;
+
+            reaperComp.NextDamageTime -= reaperComp.DamageInterval;
+
+            var stageIndex = reaperComp.CurrentStage - 1;
+            if (stageIndex < 0 || stageIndex >= reaperComp.NonActiveDamagePerInterval.Count)
+                continue;
+
+            var damageSpec = reaperComp.NonActiveDamagePerInterval[stageIndex];
+            _damageable.TryChangeDamage(reaper, damageSpec, ignoreResistances: true);
+        }
+    }
+
+    private void OnPlayerAttached(Entity<DarkReaperComponent> ent, ref PlayerAttachedEvent args)
+    {
+        var message = Loc.GetString("dark-reaper-damage-per-interval");
+        _popup.PopupEntity(message, ent, ent);
     }
 
     public override void ChangeForm(Entity<DarkReaperComponent> entity, bool isMaterial)
@@ -88,18 +126,27 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
         if (args is not { Cancelled: false, Target: { } target })
             return;
 
-        if (!ent.Comp.PhysicalForm || !target.IsValid() || EntityManager.IsQueuedForDeletion(target) ||
-            !_mobState.IsDead(target))
-            return;
+        TryConsumeTarget(ent, target);
+    }
+
+    public bool TryConsumeTarget(Entity<DarkReaperComponent> ent, EntityUid target)
+    {
+        if (!ent.Comp.PhysicalForm)
+            return false;
+
+        if (!target.IsValid()
+            || EntityManager.IsQueuedForDeletion(target)
+            || !_mobState.IsDead(target))
+            return false;
 
         if (!_container.TryGetContainer(ent.Owner, DarkReaperComponent.ConsumedContainerId, out var container))
-            return;
+            return false;
 
         if (!_container.CanInsert(target, container))
-            return;
+            return false;
 
-        if (_buckle.IsBuckled(args.Target.Value))
-            _buckle.TryUnbuckle(args.Target.Value, args.Target.Value, true);
+        if (_buckle.IsBuckled(target))
+            _buckle.TryUnbuckle(target, target, true);
 
         // spawn gore
         Spawn(ent.Comp.EntityToSpawnAfterConsuming, Transform(target).Coordinates);
@@ -129,7 +176,8 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
         }
 
         _container.Insert(target, container);
-        _damageable.TryChangeDamage(ent.Owner, ent.Comp.HealPerConsume, true, origin: args.Args.User);
+        SetPaused(target, true);
+        _damageable.TryChangeDamage(ent.Owner, ent.Comp.HealPerConsume, true, origin: ent);
 
         ent.Comp.Consumed++;
         var stageBefore = ent.Comp.CurrentStage;
@@ -148,15 +196,17 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
             _chat.DispatchStationAnnouncement(stationUid ?? ent, announcement, sender, false, null, Color.Red);//SS220 CluwneComms
         }
 
-        // update consoom counter alert
+        // update consume counter alert
         UpdateAlert(ent);
         Dirty(ent);
+
+        return true;
     }
 
     private void UpdateAlert(Entity<DarkReaperComponent> entity)
     {
-        _alerts.ClearAlert(entity, _deadscoreStage1Alert);
-        _alerts.ClearAlert(entity, _deadscoreStage2Alert);
+        _alerts.ClearAlert(entity.Owner, _deadscoreStage1Alert);
+        _alerts.ClearAlert(entity.Owner, _deadscoreStage2Alert);
 
         string alert;
         switch (entity.Comp.CurrentStage)
@@ -190,17 +240,17 @@ public sealed class DarkReaperSystem : SharedDarkReaperSystem
 
         if (severity <= 0)
         {
-            _alerts.ClearAlert(entity, _deadscoreStage1Alert);
-            _alerts.ClearAlert(entity, _deadscoreStage2Alert);
+            _alerts.ClearAlert(entity.Owner, _deadscoreStage1Alert);
+            _alerts.ClearAlert(entity.Owner, _deadscoreStage2Alert);
             return;
         }
 
-        _alerts.ShowAlert(entity, alert, (short)severity);
+        _alerts.ShowAlert(entity.Owner, alert, (short)severity);
     }
 
-    protected override void OnCompInit(Entity<DarkReaperComponent> ent, ref ComponentStartup args)
+    protected override void OnCompStartup(Entity<DarkReaperComponent> ent, ref ComponentStartup args)
     {
-        base.OnCompInit(ent, ref args);
+        base.OnCompStartup(ent, ref args);
 
         _container.EnsureContainer<Container>(ent, DarkReaperComponent.ConsumedContainerId);
 

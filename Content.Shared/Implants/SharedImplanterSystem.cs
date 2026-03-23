@@ -10,7 +10,6 @@ using Content.Shared.Implants.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
-using Content.Shared.SS220.ChemicalImplant;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
@@ -120,7 +119,7 @@ public abstract class SharedImplanterSystem : EntitySystem
     //Set to draw mode if not implant only
     public void Implant(EntityUid user, EntityUid target, EntityUid implanter, ImplanterComponent component)
     {
-        if (!CanImplant(user, target, implanter, component, out var implant, out var implantComp))
+        if (!CanImplant(user, target, implanter, component, out var implant, out var implantComp)) // SS220-add-implant-comp-for-mindslave
             return;
 
         // Check if we are trying to implant a implant which is already implanted
@@ -133,8 +132,7 @@ public abstract class SharedImplanterSystem : EntitySystem
             return;
         }
 
-        //SS220-mindslave
-        implantComp.user = user;
+        implantComp.User = user; //SS220-mindslave
 
         //If the target doesn't have the implanted component, add it.
         var implantedComp = EnsureComp<ImplantedComponent>(target);
@@ -142,7 +140,6 @@ public abstract class SharedImplanterSystem : EntitySystem
 
         if (component.ImplanterSlot.ContainerSlot != null)
             _container.Remove(implant.Value, component.ImplanterSlot.ContainerSlot);
-        implantComp.ImplantedEntity = target;
         implantContainer.OccludesLight = false;
         _container.Insert(implant.Value, implantContainer);
 
@@ -285,7 +282,6 @@ public abstract class SharedImplanterSystem : EntitySystem
     private void DrawImplantIntoImplanter(EntityUid implanter, EntityUid target, EntityUid implant, BaseContainer implantContainer, ContainerSlot implanterContainer, SubdermalImplantComponent implantComp)
     {
         _container.Remove(implant, implantContainer);
-        implantComp.ImplantedEntity = null;
         _container.Insert(implant, implanterContainer);
 
         var ev = new TransferDnaEvent { Donor = target, Recipient = implanter };

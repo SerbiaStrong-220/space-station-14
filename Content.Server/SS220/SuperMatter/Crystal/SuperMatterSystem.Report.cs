@@ -51,6 +51,7 @@ public sealed partial class SuperMatterSystem
         if (!(announceType == AnnounceIntegrityTypeEnum.DelaminationStopped
             || announceType == AnnounceIntegrityTypeEnum.Delamination))
             return;
+
         var integrity = GetIntegrity(crystal.Comp);
         var localePath = GetLocalePath(announceType);
         var message = Loc.GetString(localePath, ("integrity", integrity.ToString("n2")));

@@ -58,12 +58,12 @@
     outerClothing: ClothingOuterWinterHoSUnarmored
 
 - type: loadout
-  id: Outer1984
+  id: Outer1984HoS
   effects:
   - !type:GroupLoadoutEffect
-    proto: CriticalMassShlopaSponsorTier
+    proto: HugeShlopaSponsorTier
   equipment:
-    outerClothing: ClothingSponsor1984
+    outerClothing: ClothingSponsor1984HoS
 
 # SUITSTORAGE
 - type: loadout

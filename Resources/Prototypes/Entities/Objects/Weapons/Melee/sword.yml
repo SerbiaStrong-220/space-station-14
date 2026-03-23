@@ -158,6 +158,8 @@
       types:
         Slash: 14
 # SS220 Throwable Changes end
+  - type: StealTarget
+    stealGroup: CaptainSword
 
 - type: entity
   name: katana
@@ -212,8 +214,10 @@
   id: EnergyKatana
   description: A katana infused with strong energy.
   components:
+  - type: Contraband
+    severity: HighlyIllegal
   - type: Sprite
-    sprite: Objects/Weapons/Melee/energykatana.rsi
+    sprite: SS220/Objects/Weapons/Melee/Sword/energykatana.rsi # SS220 Ninja Resprite
   - type: MeleeWeapon
     wideAnimationRotation: -60
     damage:
@@ -232,7 +236,7 @@
   - type: AutoRecharge
     rechargeDuration: 20
   - type: Clothing
-    sprite: Objects/Weapons/Melee/energykatana.rsi
+    sprite: SS220/Objects/Weapons/Melee/Sword/energykatana.rsi # SS220 Ninja Resprite
     slots:
     - Back
     - Belt

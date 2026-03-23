@@ -4,8 +4,8 @@ using Content.Client.SS220.TextureFade;
 using Content.Shared.SS220.CultYogg.Rave;
 using Content.Shared.SS220.EntityEffects.Events;
 using Robust.Client.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.CultYogg.Rave;
 
@@ -13,7 +13,6 @@ public sealed class RaveSystem : SharedRaveSystem
 {
     [Dependency] private readonly IPlayerManager _playerManager = default!;
 
-    [ValidatePrototypeId<EntityPrototype>]
     private readonly EntProtoId _effectPrototype = "CultYoggRaveEffect";
 
     public override void Initialize()

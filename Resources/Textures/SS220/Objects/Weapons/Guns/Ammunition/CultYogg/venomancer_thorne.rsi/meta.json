@@ -1,0 +1,25 @@
+{
+    "version": 1,
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+    "copyright": "by MIXnikita for SS220",
+    "states": [
+      {
+        "name": "spire"
+      },
+      {
+        "name": "spire_fly",
+        "delays": [
+             [
+                0.15,
+                0.15,
+                0.15,
+                0.15
+             ]
+        ]
+      }
+    ]
+}

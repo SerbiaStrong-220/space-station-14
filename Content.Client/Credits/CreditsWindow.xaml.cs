@@ -80,7 +80,7 @@ public sealed partial class CreditsWindow : DefaultWindow
 
     private async void PopulateAttributions(BoxContainer attributionsContainer, int count)
     {
-        attributionsContainer.DisposeAllChildren();
+        attributionsContainer.RemoveAllChildren();
 
         if (_attributions.Count == 0)
         {
@@ -100,11 +100,11 @@ public sealed partial class CreditsWindow : DefaultWindow
 
         var container = new BoxContainer { Orientation = LayoutOrientation.Horizontal };
 
-        var previousPageButton = new Button { Text = "Previous Page" };
+        var previousPageButton = new Button { Text = Loc.GetString("credits-window-previous-page-button") };
         previousPageButton.OnPressed +=
             _ => PopulateAttributions(attributionsContainer, count - AttributionsSourcesPerPage);
 
-        var nextPageButton = new Button { Text = "Next Page" };
+        var nextPageButton = new Button { Text = Loc.GetString("credits-window-next-page-button") };
         nextPageButton.OnPressed +=
             _ => PopulateAttributions(attributionsContainer, count + AttributionsSourcesPerPage);
 
@@ -253,6 +253,8 @@ public sealed partial class CreditsWindow : DefaultWindow
 
     private void PopulateLicenses(BoxContainer licensesContainer)
     {
+        licensesContainer.RemoveAllChildren();
+
         foreach (var entry in CreditsManager.GetLicenses(_resourceManager).OrderBy(p => p.Name))
         {
             licensesContainer.AddChild(new Label
@@ -269,6 +271,8 @@ public sealed partial class CreditsWindow : DefaultWindow
 
     private void PopulatePatrons(BoxContainer patronsContainer)
     {
+        patronsContainer.RemoveAllChildren();
+
         var patrons = LoadPatrons();
 
         // Do not show "become a patron" button on Steam builds
@@ -318,6 +322,8 @@ public sealed partial class CreditsWindow : DefaultWindow
 
     private void PopulateContributors(BoxContainer ss14ContributorsContainer)
     {
+        ss14ContributorsContainer.RemoveAllChildren();
+
         Button contributeButton;
 
         ss14ContributorsContainer.AddChild(new BoxContainer

@@ -11,8 +11,13 @@ namespace Content.Shared.Mobs.Components;
 [Access(typeof(MobThresholdSystem))]
 public sealed partial class MobThresholdsComponent : Component
 {
+    // SS220 modifiable_mob_thresholds begin
     [DataField("thresholds", required: true)]
-    public SortedDictionary<FixedPoint2, MobState> Thresholds = new();
+    public SortedDictionary<FixedPoint2, MobState> BaseThresholds = [];
+
+    [ViewVariables]
+    public SortedDictionary<FixedPoint2, MobState> Thresholds = [];
+    // SS220 modifiable_mob_thresholds end
 
     [DataField("triggersAlerts")]
     public bool TriggersAlerts = true;

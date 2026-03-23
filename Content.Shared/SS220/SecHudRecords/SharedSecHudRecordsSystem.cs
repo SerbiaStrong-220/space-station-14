@@ -23,6 +23,9 @@ public abstract class SharedSecHudRecordsSystem : EntitySystem
 
     private void OnGetVerb(Entity<StatusIconComponent> ent, ref GetVerbsEvent<ExamineVerb> args)
     {
+        if (!args.CanInteract)
+            return;
+
         if (!_inv.TryGetSlotEntity(args.User, EyesSlot, out var glasses) ||
             !TryComp<SecHudRecordsComponent>(glasses.Value, out var secHudRecords))
             return;

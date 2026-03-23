@@ -19,7 +19,7 @@
     shape:
     - 0,0,4,0
   - type: Clothing
-    sprite: Objects/Weapons/Guns/Shotguns/db_shotgun.rsi
+    sprite: SS220/Objects/Weapons/Guns/Shotguns/db_shotgun.rsi #ss220 double-barreled shotgun resprite 
     quickEquip: false
     slots:
     - Back
@@ -119,9 +119,9 @@
   description: An immortal classic. Uses .50 shotgun shells.
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Shotguns/db_shotgun.rsi
+    sprite: SS220/Objects/Weapons/Guns/Shotguns/db_shotgun.rsi #ss220 double-barreled shotgun resprite
   - type: Item
-    sprite: Objects/Weapons/Guns/Shotguns/db_shotgun_inhands_64x.rsi
+    sprite: SS220/Objects/Weapons/Guns/Shotguns/db_shotgun_inhands_64x.rsi #ss220 double-barreled shotgun resprite
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
   - type: Gun
     fireRate: 3
@@ -204,14 +204,14 @@
   description: Groovy! Uses .50 shotgun shells.
   components: # needs to be super inaccurate because you don't need to wield it
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Shotguns/sawn.rsi
+    sprite: SS220/Objects/Weapons/Guns/Shotguns/sawn.rsi #SS220 sawn-off shotgun resprite
   - type: Clothing
-    sprite: Objects/Weapons/Guns/Shotguns/sawn.rsi
+    sprite: SS220/Objects/Weapons/Guns/Shotguns/sawn.rsi #SS220 sawn-off shotgun resprite
   - type: Item
     size: Small
     shape:
     - 0,0,2,0
-    sprite: Objects/Weapons/Guns/Shotguns/sawn_inhands_64x.rsi
+    sprite: SS220/Objects/Weapons/Guns/Shotguns/sawn_inhands_64x.rsi #SS220 sawn-off shotgun resprite
   - type: Gun
     canSuicide: true ##SS220-new-feature kus
     fireRate: 3

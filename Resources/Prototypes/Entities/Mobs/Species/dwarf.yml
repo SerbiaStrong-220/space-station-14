@@ -55,8 +55,7 @@
       Male: UnisexDwarf
       Female: FemaleDwarf
       Unsexed: UnisexDwarf
-  - type: ReplacementAccent
-    accent: dwarf
+  - type: DwarfAccent #SS220 Dwarf accent
   - type: Speech
     speechSounds: Bass
   # SS220-Add-Languages begin

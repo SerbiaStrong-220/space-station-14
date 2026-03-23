@@ -43,6 +43,7 @@
   loadouts:
   - GlassesCommand
   - MagistrateMonocle
+  - EyesHudCommand
 
 - type: loadoutGroup
   id: MagistrateJumpsuit
@@ -121,6 +122,7 @@
   - GlassesJensen
   - Sunglasses
   - GlassesujutsuShlepa
+  - EyesHudCommand
 
 - type: loadoutGroup
   id: IAABackpacks
@@ -162,24 +164,31 @@
   loadouts:
   - BlueshieldBeret
   - BlueshieldBlueBeret
+  - BlueshieldNavyBlueBeret
 
 - type: loadoutGroup
   id: BlueShieldGlasses
   name: loadout-group-blueshield-glasses
-  minLimit: 1
   loadouts:
   - BlueshieldGlasses
   - BlueshieldTacticGlasses
+  - BlueshieldBallisticGlasses
+
+- type: loadoutGroup
+  id: BlueShieldMask
+  name: loadout-group-blueshield-mask
+  minLimit: 0
+  loadouts:
+  - MaskBlueshieldGaiter
+  - MaskBlueshieldBalaclava
 
 - type: loadoutGroup
   id: BlueShieldNeck
   name: loadout-group-blueshield-neck
   minLimit: 0
   loadouts:
-  - SecurityHolster
-  - Headphones
-  - ProtectGearBlue
-  - BlueShieldNeckCloak
+  - CloakCape
+  - CloakCapeBlue
 
 - type: loadoutGroup
   id: BlueShieldJumpsuit
@@ -195,10 +204,9 @@
 - type: loadoutGroup
   id: BlueShieldOuterclothing
   name: loadout-group-blueshield-outerclothing
+  hidden: true
   loadouts:
-  - BlueShieldArmorAssault
-  - BlueShieldArmorScale
-  - BlueShieldOperativeCoat
+  - BlueShieldArmorBulletproof
 
 - type: loadoutGroup
   id: BlueShieldBelt
@@ -213,6 +221,15 @@
   hidden: true
   loadouts:
   - BlueShieldBackpack
+
+- type: loadoutGroup
+  id: BlueShieldShoes
+  name: loadout-group-blueshield-shoes
+  loadouts:
+  - JackBoots
+  - BlueShieldJackBoots
+  - BlueShieldWinterBoots
+  - CombatBoots
   # Офицер "Синий Щит" (Конец)
 #! Юридический (Конец)
 
@@ -235,6 +252,7 @@
   loadouts:
   - MaskTacSec
   - SecTacGasMask
+  - MaskSecBalaclava
 
 - type: loadoutGroup
   id: SecurityGlasses
@@ -281,6 +299,7 @@
   - SecurityBeret
   - SecurityHat
   - PilotCapCap
+  - PilotBeret
   - HelmetTacSec
 
 - type: loadoutGroup
@@ -310,7 +329,7 @@
   id: DetectiveGlasses
   name: loadout-group-detective-glasses
   minLimit: 0
-  loadouts: 
+  loadouts:
   - GlassesSecurity
   - CyberGlassesSecurity
   - GlassesBallistic
@@ -327,22 +346,6 @@
 #! Служба безопасности (Конец)
 
 #! Медицинский отдел (Начало)
-
-  # Главный врач (Начало)
-- type: loadoutGroup
-  id: ChefMedicalNeck
-  minLimit: 0
-  name: loadout-group-chef-medical-neck
-  loadouts:
-  - WhiteScarf
-  - CoderNeck
-  - MapperNeck
-  - SpriterNeck
-  - TrackerExpertNeck
-  - AdministratorNeck
-  - HeadDeveloperNeck
-  - WikiEditorsNeck
-  # Главный врач (Конец)
 
   # Ведущий врач (Начало)
 - type: loadoutGroup
@@ -653,6 +656,7 @@
   minLimit: 0
   loadouts:
   - HatSeniorService
+  - HatBeretSeniorService
 
 - type: loadoutGroup
   id: SeniorServiceJumpsuit
@@ -660,6 +664,14 @@
   loadouts:
   - SeniorServiceJumpsuit
   - SeniorJumpskirtService
+  - SeniorServiceJumpsuitDelux
+
+- type: loadoutGroup
+  id: SeniorServiceShoes
+  name: loadout-group-senior-service-shoes
+  loadouts:
+  - ShoesColorBrown
+  - SeniorServiceBootsLaceup
   # Сервисный администратор (Конец)
 
   # Шеф-повар (Начало)

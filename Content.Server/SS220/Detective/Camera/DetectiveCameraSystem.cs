@@ -3,6 +3,7 @@
 using Content.Server.Popups;
 using Content.Server.SurveillanceCamera;
 using Content.Shared.Interaction.Events;
+using Content.Shared.SurveillanceCamera.Components;
 using Robust.Shared.Audio.Systems;
 
 namespace Content.Server.SS220.Detective.Camera;

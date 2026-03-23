@@ -1,3 +1,5 @@
+using Content.Client.SS220.UserInterface.Controls;
+using Content.Client.SS220.UserInterface.System.PinUI;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Chemistry;
@@ -15,7 +17,7 @@ namespace Content.Client.Chemistry.UI
     /// Client-side UI used to control a <see cref="ReagentDispenserComponent"/>.
     /// </summary>
     [GenerateTypedNameReferences]
-    public sealed partial class ReagentDispenserWindow : FancyWindow
+    public sealed partial class ReagentDispenserWindow : FancyWindow, IPinnableWindow // ss220 add pin for ui
     {
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
         [Dependency] private readonly IEntityManager _entityManager = default!;
@@ -30,6 +32,10 @@ namespace Content.Client.Chemistry.UI
         {
             RobustXamlLoader.Load(this);
             IoCManager.InjectDependencies(this);
+
+            // SS220 add pin button begin
+            PinUISystem.AddPinButtonBeforeTarget(this, CloseButton);
+            // SS220 add pin button end
         }
 
         /// <summary>

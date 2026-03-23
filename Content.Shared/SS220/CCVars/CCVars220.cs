@@ -71,9 +71,6 @@ public sealed partial class CCVars220
     public static readonly CVarDef<float> AfkTimeKick =
         CVarDef.Create("afk.time_kick", 600f, CVar.SERVERONLY);
 
-    public static readonly CVarDef<float> AfkTeleportToCryo =
-        CVarDef.Create("afk.teleport_to_cryo", 1800f, CVar.SERVERONLY);
-
     public static readonly CVarDef<float> AfkActivityMessageInterval =
         CVarDef.Create("afk.activity_message_interval", 20f, CVar.CLIENTONLY | CVar.CHEAT);
 
@@ -136,14 +133,4 @@ public sealed partial class CCVars220
     /// </summary>
     public static readonly CVarDef<string> AdditionalBanInfo =
         CVarDef.Create("ban.additional_info", "", CVar.SERVERONLY | CVar.ARCHIVE);
-    /// <summary>
-    /// Maximum entity capacity for tts queue
-    /// </summary>
-    public static readonly CVarDef<int> MaxQueuedPerEntity =
-        CVarDef.Create("tts.max_queued_entity", 20, CVar.CLIENTONLY | CVar.ARCHIVE);
-    /// <summary>
-    /// Maximum of queued tts entities
-    /// </summary>
-    public static readonly CVarDef<int> MaxEntitiesQueued =
-        CVarDef.Create("tts.max_entities_queued", 30, CVar.CLIENTONLY | CVar.ARCHIVE);
 }

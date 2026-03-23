@@ -11,13 +11,16 @@ public sealed partial class BasicStationEventSchedulerComponent : Component
     /// How long the the scheduler waits to begin starting rules.
     /// </summary>
     [DataField]
-    public float MinimumTimeUntilFirstEvent = 300f; //SS220 Event_spawn_decrease
+    // public float MinimumTimeUntilFirstEvent = 200; // [wizden-code]
+    // It has hard-coded random addition +2 minutes so first event fire in [3, 5] minutes of round
+    public float MinimumTimeUntilFirstEvent = 180f; //SS220-cut-round-duration
 
     /// <summary>
     /// The minimum and maximum time between rule starts in seconds.
     /// </summary>
     [DataField]
-    public MinMax MinMaxEventTiming = new(60 * 8, 60 * 15); //SS220 Event_spawn_decrease
+    // public MinMax MinMaxEventTiming = new(3 * 60, 10 * 60); // [wizden-code]
+    public MinMax MinMaxEventTiming = new(60 * 5, 60 * 10); //SS220-cut-round-duration
 
     /// <summary>
     /// How long until the next check for an event runs, is initially set based on MinimumTimeUntilFirstEvent & MinMaxEventTiming.

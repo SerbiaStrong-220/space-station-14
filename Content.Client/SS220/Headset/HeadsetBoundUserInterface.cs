@@ -23,6 +23,11 @@ public sealed partial class HeadsetBoundUserInterface : BoundUserInterface
         {
             SendMessage(new HeadsetChannelToggledMessage(channel, enabled));
         };
+
+        _window.RadioSetting.OnFrequencySubmit += (_, frequency) =>
+        {
+            SendMessage(new HeadsetChangeFrequencyMessage(frequency));
+        };
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
@@ -36,6 +41,10 @@ public sealed partial class HeadsetBoundUserInterface : BoundUserInterface
             return;
 
         _window.SetChannels(s.Channels);
+
+        _window.RadioSetting.Visible = s.FrequencySettings is not null;
+        if (s.FrequencySettings is not null)
+            _window.SetRadioSettings(s.FrequencySettings.Value);
     }
 
     protected override void Dispose(bool disposing)

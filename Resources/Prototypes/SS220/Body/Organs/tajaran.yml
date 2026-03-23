@@ -23,3 +23,9 @@
         reagents:
         - ReagentId: UncookedAnimalProteins
           Quantity: 5
+  - type: Metabolizer
+    maxReagents: 3
+    metabolizerTypes: [ Tajaran ]
+    groups:
+    - id: Food
+    - id: Drink

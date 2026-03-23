@@ -8,7 +8,7 @@
   #SS220 Add antags playtime trackers begin
   requirements:
   - !type:OverallPlaytimeRequirement
-    time: 72000 # 20h SS220 time
+    time: 20h # 20h SS220 time
   playTimeTracker: AntagThief
   #SS220 Add antags playtime trackers end
 

@@ -149,7 +149,8 @@ public sealed class CluwneCommsConsoleSystem : EntitySystem
 
             var tryGetIdentityShortInfoEvent = new TryGetIdentityShortInfoEvent(ent, mob);
             RaiseLocalEvent(tryGetIdentityShortInfoEvent);
-            author = tryGetIdentityShortInfoEvent.Title;
+            if (tryGetIdentityShortInfoEvent.Title is not null)
+                author = tryGetIdentityShortInfoEvent.Title;
 
             if (TryComp<TTSComponent>(mob, out var tts))
                 voiceId = tts.VoicePrototypeId;
@@ -160,15 +161,15 @@ public sealed class CluwneCommsConsoleSystem : EntitySystem
         title ??= ent.Comp.Title;
 
         msg = _chatManager.DeleteProhibitedCharacters(msg, args.Actor);
-        msg += "\n" + Loc.GetString("cluwne-comms-console-announcement-sent-by") + author;
+        msg += "\n" + Loc.GetString("cluwne-comms-console-announcement-sent-by", ("author", author));
 
         _chatSystem.DispatchStationAnnouncement(ent,
             msg,
             title,
             true,
-            ent.Comp.Sound,
+            announcementSound: ent.Comp.Sound,
             colorOverride: ent.Comp.Color,
-            voiceId);
+            voiceId: voiceId);
 
         _adminLogger.Add(LogType.Chat,
             LogImpact.Low,

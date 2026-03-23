@@ -72,6 +72,9 @@
         acts: [ "Destruction" ]
   - type: StaticPrice
     price: 200
+  - type: Tag
+    tags:
+    - HighRiskItem # to prevent stealing the highrisk in it
 
 - type: entity
   parent: GlassCaseEngravedKnuckleduster

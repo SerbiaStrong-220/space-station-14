@@ -40,7 +40,7 @@ public static class SuperMatterInternalProcess
         return DeltaChemistryPotentialFunction(temperature, pressure);
     }
 
-    private const float BASE_HEAT_CAPACITY = 20f;
+    private const float BASE_HEAT_CAPACITY = 10f;
 
     /// <summary> Defines how many J you need to raise the temperature to 1 grad </summary>
     /// <returns> heat capacity in J/K </returns>
@@ -61,7 +61,7 @@ public static class SuperMatterInternalProcess
     public static float GetReleaseEnergyConversionEfficiency(float temperature, float pressure)
     {
         var resultEfficiency = ReleaseEnergyConversionEfficiencyFunction(temperature, pressure);
-        return Math.Clamp(resultEfficiency, 0.00002f, 0.003f);
+        return Math.Clamp(resultEfficiency, 0.002f, 0.1f);
     }
 
     public static float GetZapToRadiationRatio(float temperature, float pressure, SuperMatterPhaseState smState)
@@ -92,33 +92,38 @@ public static class SuperMatterInternalProcess
                             / (O2ToPlasmaBaseRatio + O2ToPlasmaFloatRatio * SqrtOfMaxRatioValue);
     }
 
+
+    private const float OverallCoeff = 3f;
+    private const float TemperatureFactorCoeff = 2f;
+    private const float CombinedFactorCoeff = 0.5f;
+
     private static float DecayMatterMultiplierFunction(float temperature, float pressure)
     {
-        return DecayMatterCombinedFactorFunction(temperature, pressure)
-                + DecayMatterTemperatureFactorFunction(temperature);
+        return OverallCoeff * (CombinedFactorCoeff * DecayMatterCombinedFactorFunction(temperature, pressure)
+                + TemperatureFactorCoeff * DecayMatterTemperatureFactorFunction(temperature));
     }
 
-    private const float TemperatureFactorCoeff = 2f;
     private const float TemperatureFactorNormalizedTemperatureOffset = 20f;
 
     private static float DecayMatterTemperatureFactorFunction(float temperature)
     {
-        var normalizedTemperature = temperature / TriplePointTemperature;
+        var normalizedTemperature = (temperature + Atmospherics.TCMB) / TriplePointTemperature;
 
-        return TemperatureFactorCoeff * normalizedTemperature / (normalizedTemperature + TemperatureFactorNormalizedTemperatureOffset);
+        return normalizedTemperature / (normalizedTemperature + TemperatureFactorNormalizedTemperatureOffset);
     }
 
-    private const float CombinedFactorCoeff = 0.5f;
     private const float CombinedFactorSlowerNormalizedTemperatureOffset = 10f;
     private const float CombinedFactorSlowerNormalizedPressureOffset = 10f;
+    private const float LowPressureThreshold = 0.2f;
 
     private static float DecayMatterCombinedFactorFunction(float temperature, float pressure)
     {
         var normalizedTemperature = temperature / TriplePointTemperature;
         var normalizedPressure = pressure / TriplePointPressure;
 
-        return CombinedFactorCoeff * normalizedTemperature * normalizedTemperature
-                    * normalizedPressure * normalizedPressure
+        return (normalizedTemperature * normalizedTemperature
+                    * normalizedPressure * normalizedPressure +
+                    1f / (normalizedPressure * normalizedPressure + LowPressureThreshold))
                     / (normalizedPressure + normalizedTemperature)
                     / (normalizedPressure + CombinedFactorSlowerNormalizedPressureOffset)
                     / (normalizedTemperature + CombinedFactorSlowerNormalizedTemperatureOffset);
@@ -135,8 +140,8 @@ public static class SuperMatterInternalProcess
         var normalizedPressure = pressure / TriplePointPressure;
 
         return ReactionEfficiencyCoeff
-                    * (temperature / (temperature + ReactionEfficiencySlowerNormalizedTemperatureOffset) * ReactionEfficiencyTemperatureCoeff
-                    + pressure / (pressure + ReactionEfficiencySlowerNormalizedPressureOffset));
+                    * (normalizedTemperature / (normalizedTemperature + ReactionEfficiencySlowerNormalizedTemperatureOffset) * ReactionEfficiencyTemperatureCoeff
+                    + normalizedPressure / (normalizedPressure + ReactionEfficiencySlowerNormalizedPressureOffset));
     }
 
     private const float ChemistryPotentialCoeff = 4f;
@@ -151,8 +156,8 @@ public static class SuperMatterInternalProcess
         return ChemistryPotentialCoeff * MathF.Pow(normalizedCombined, 2) * MathF.Exp(-MathF.Pow(normalizedCombined, 2));
     }
 
-    private const float ReleaseEnergyConversionEfficiencyCoeff = 0.0011f;
-    private const float ReleaseEnergyConversionEfficiencyNormalizedCombinedCoeff = 0.0025f;
+    private const float ReleaseEnergyConversionEfficiencyCoeff = 0.2f;
+    private const float ReleaseEnergyConversionEfficiencyNormalizedCombinedCoeff = 0.025f;
     private const float ReleaseEnergyConversionEfficiencyNormalizedTemperatureOffset = 20f;
     private const float ReleaseEnergyConversionEfficiencySlowerNormalizedPressureOffset = 80f;
 
@@ -162,8 +167,8 @@ public static class SuperMatterInternalProcess
         var normalizedPressure = pressure / TriplePointPressure;
         var normalizedCombined = normalizedPressure * normalizedTemperature / ChemistryPotentialCombinedStretchCoeff;
 
-        return ReleaseEnergyConversionEfficiencyCoeff * (temperature / (temperature + ReleaseEnergyConversionEfficiencyNormalizedTemperatureOffset)
-                                    + pressure / (pressure + ReleaseEnergyConversionEfficiencySlowerNormalizedPressureOffset)
+        return ReleaseEnergyConversionEfficiencyCoeff * ((temperature + 1 / (16 * temperature * temperature + 1)) / (temperature + ReleaseEnergyConversionEfficiencyNormalizedTemperatureOffset)
+                                    + (pressure + 1 / (pressure * pressure + 1)) / (pressure + ReleaseEnergyConversionEfficiencySlowerNormalizedPressureOffset)
                                     + MathF.Sqrt(normalizedCombined) * ReleaseEnergyConversionEfficiencyNormalizedCombinedCoeff);
     }
 

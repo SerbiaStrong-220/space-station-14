@@ -98,6 +98,7 @@
     # DO NOT ADD MORE, USE UNIFORM DYING
   contrabandInventory:
     ClothingMaskNeckGaiter: 2
+    ClothingMaskBalaclava: 2 #SS220 balaclava update
     ClothingUniformJumpsuitTacticool: 1
     ClothingUniformJumpskirtTacticool: 1
     ToyFigurinePassenger: 1

@@ -400,12 +400,12 @@
 
 - type: entity
   parent: CentcomNewPDA
-  id: CentcomOperativeBSOPDA
-  name: КПК Оперативника "Синий Щит"
-  description: КПК Оперативника "Синий Щит". Несмотря на идеально выполненный дизайн, этот КПК был заляпан кровью не один десяток раз.
+  id: CentcomOperativeSRTPDA
+  name: КПК Оперативника ГСН
+  description: КПК Оперативника ГСН. Несмотря на идеально выполненный дизайн, этот КПК был заляпан кровью не один десяток раз.
   components:
     - type: Pda
-      id: OperativeBSOIDCard
+      id: OperativeSRTIDCard
 
 - type: entity
   parent: CentcomNewPDA
@@ -453,3 +453,54 @@
         visible: false
     - type: Icon
       state: pda-admiral
+
+#CounterIntelligence
+- type: entity
+  parent: CentcomNewPDA
+  id: CentcomCIAgentPDA
+  name: PDA CI Agent
+  description: CI Agent PDA
+  components:
+    - type: Pda
+      id: CIAgentIDCard
+
+- type: entity
+  parent: CentcomNewPDA
+  id: CentcomCIOfficerPDA
+  name: PDA CI Officer
+  description: CI Officer PDA
+  components:
+    - type: Pda
+      id: CIOfficerIDCard
+
+# CBURNLeader
+- type: entity
+  parent: BasePDA
+  id: CBURNLeaderPDA
+  name: CBURN Leader PDA
+  description: Smells like rotten flesh.
+  components:
+  - type: Pda
+    id: CBURNIDLeadercard
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-cburn
+  - type: PdaBorderColor
+    borderColor: "#7a998d"
+  - type: Sprite
+    layers:
+    - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda"
+    - state: "screen-nt"
+      shader: "unshaded"
+    - state: "light_overlay"
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: "unshaded"
+      visible: false
+    - state: "id_overlay"
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      visible: false
+  - type: Icon
+    state: pda-cburn

@@ -10,6 +10,7 @@ using Content.Shared.StoreDiscount.Components;
 using Robust.Server.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Content.Shared.SS220.TraitorDynamics;
 
 namespace Content.Server.StoreDiscount.Systems;
 
@@ -74,6 +75,11 @@ public sealed class StoreDiscountSystem : EntitySystem
         var discounts = InitializeDiscounts(ev.Listings);
         ApplyDiscounts(ev.Listings, discounts);
         discountComponent.Discounts = discounts;
+
+        // SS220 TraitorDynamics - start
+        var newEv = new StoreDiscountsInitializedEvent(ev.TargetUser, ev.Store, ev.Listings);
+        RaiseLocalEvent(ref newEv);
+        // SS220 TraitorDynamics - end
     }
 
     private IReadOnlyList<StoreDiscountData> InitializeDiscounts(
@@ -398,7 +404,79 @@ public sealed class StoreDiscountSystem : EntitySystem
         discountComponent.Discounts = discounts;
     }
     // ss220 nukeops discount end
+
+    //SS220 - dynamics - start
+    /// <summary>
+    /// Retrieves a dictionary of store items with their discount percentages that were previously installed
+    /// </summary>
+    /// <param name="storeUid"> store entity.</param>
+    /// <param name="listings"> list of store listings with cost modifiers.</param>
+    /// <returns>
+    /// A dictionary where:
+    ///   Key - item (listingId)
+    ///   Value - dictionary CurrencyPrototype, FixPoint2 percentages
+    /// </returns>
+    public IEnumerable<ItemDiscounts> GetItemsDiscount(
+        EntityUid storeUid,
+        IReadOnlyList<ListingDataWithCostModifiers> listings)
+    {
+        if (!TryComp<StoreDiscountComponent>(storeUid, out var discountComponent))
+            return [];
+
+        var result = new List<ItemDiscounts>(discountComponent.Discounts.Count);
+        var listingIndex = listings.ToDictionary(l => l.ID);
+
+        foreach (var discountData in discountComponent.Discounts)
+        {
+            if (!listingIndex.TryGetValue(discountData.ListingId, out var listing))
+                continue;
+
+            var discounts = GetCalculatedDiscounts(discountData, listing);
+
+            if (discounts.Count > 0)
+                result.Add(new ItemDiscounts(discountData.ListingId, discounts));
+        }
+
+        return result;
+    }
+
+    private Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> GetCalculatedDiscounts(
+        StoreDiscountData discountData,
+        ListingDataWithCostModifiers listing)
+    {
+        var discounts = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>();
+
+        foreach (var (currency, discountAmount) in discountData.DiscountAmountByCurrency)
+        {
+            if (!listing.OriginalCost.TryGetValue(currency, out var originalPrice))
+                continue;
+
+            if (originalPrice <= 0 || discountAmount >= 0) // discount modifier is negative value
+                continue;
+
+            var percentage = -discountAmount / originalPrice;
+            var roundedPercentage = FixedPoint2.New(Math.Round(percentage.Double(), 2));
+            discounts[currency] = roundedPercentage;
+        }
+
+        return discounts;
+    }
+    //SS220 - dynamics - end
 }
+
+// SS220 TraitorDynamics begin
+public readonly struct ItemDiscounts
+{
+    public readonly string ListingId;
+    public readonly Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> Discounts;
+
+    public ItemDiscounts(string listingId, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> discounts)
+    {
+        ListingId = listingId;
+        Discounts = discounts;
+    }
+}
+// SS220 TraitorDynamics end
 
 /// <summary>
 /// Event of store being initialized.
@@ -412,5 +490,12 @@ public record struct StoreInitializedEvent(
     EntityUid TargetUser,
     EntityUid Store,
     bool UseDiscounts,
+    IReadOnlyList<ListingDataWithCostModifiers> Listings
+);
+
+[ByRefEvent]
+public record struct StoreDiscountsInitializedEvent(
+    EntityUid TargetUser,
+    EntityUid Store,
     IReadOnlyList<ListingDataWithCostModifiers> Listings
 );

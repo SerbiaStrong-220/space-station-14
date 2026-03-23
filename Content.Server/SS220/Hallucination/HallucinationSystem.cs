@@ -14,7 +14,7 @@ namespace Content.Server.SS220.Hallucination;
 /// <summary>
 /// System which make it easier to work with Hallucinations
 /// </summary>
-public sealed class HallucinationSystem : EntitySystem
+public sealed class HallucinationSystem : SharedHallucinationSystem
 {
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
@@ -88,7 +88,7 @@ public sealed class HallucinationSystem : EntitySystem
     /// Adds component if needed and then after adding hallucination dirties.
     /// </summary>
     /// <returns> false if protected and true if not</returns>
-    public bool TryAdd(EntityUid target, HallucinationSetting hallucination)
+    public override bool TryAdd(EntityUid target, HallucinationSetting hallucination)
     {
         if (Protected(target, hallucination))
             return false;
@@ -103,6 +103,14 @@ public sealed class HallucinationSystem : EntitySystem
 
         Add(target, hallucination);
         return true;
+    }
+
+    public override bool Remove(Entity<SharedHallucinationComponent> entity, HallucinationSetting hallucination)
+    {
+        if (entity.Comp is not HallucinationComponent component)
+            return false;
+
+        return Remove((entity.Owner, component), hallucination);
     }
 
     /// <summary>

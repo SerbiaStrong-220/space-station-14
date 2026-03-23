@@ -2,6 +2,7 @@ using Content.Server.Actions;
 using Content.Server.Humanoid;
 using Content.Server.Inventory;
 using Content.Server.Polymorph.Components;
+using Content.Shared.Alert;
 using Content.Shared.Buckle;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
@@ -14,6 +15,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition;
 using Content.Shared.Polymorph;
 using Content.Shared.Popups;
+using Content.Shared.SS220.PolymorphTimer;
 using Robust.Server.Audio;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
@@ -42,6 +44,7 @@ public sealed partial class PolymorphSystem : EntitySystem
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly SharedMindSystem _mindSystem = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private readonly AlertsSystem _alerts = default!;//SS220_cult_hotfix_23
 
     public const string EffectDesynchronizer = "EffectDesynchronizer"; //SS220-cryo-mobs-fix
 
@@ -57,6 +60,7 @@ public sealed partial class PolymorphSystem : EntitySystem
 
         SubscribeLocalEvent<PolymorphedEntityComponent, BeforeFullySlicedEvent>(OnBeforeFullySliced);
         SubscribeLocalEvent<PolymorphedEntityComponent, DestructionEventArgs>(OnDestruction);
+        SubscribeLocalEvent<PolymorphedEntityComponent, EntityTerminatingEvent>(OnPolymorphedTerminating);
 
         InitializeMap();
     }
@@ -75,6 +79,16 @@ public sealed partial class PolymorphSystem : EntitySystem
                 Revert((uid, comp));
                 continue;
             }
+
+            //SS220-cult-hotfix-23-start #3988
+            if (TryComp<PolymorphTimerComponent>(uid, out var timerComp) && comp.Configuration.Duration != null)
+            {
+                timerComp.AlertTime = (int)(comp.Configuration.Duration - comp.Time);
+                Dirty(uid, timerComp);
+
+                _alerts.ShowAlert(uid, timerComp.PolymorphTimerAlert);
+            }
+            //SS220-cult-hotfix-23-end #3988
 
             if (!TryComp<MobStateComponent>(uid, out var mob))
                 continue;
@@ -113,7 +127,7 @@ public sealed partial class PolymorphSystem : EntitySystem
 
     private void OnPolymorphActionEvent(Entity<PolymorphableComponent> ent, ref PolymorphActionEvent args)
     {
-        if (!_proto.TryIndex(args.ProtoId, out var prototype) || args.Handled)
+        if (!_proto.Resolve(args.ProtoId, out var prototype) || args.Handled)
             return;
 
         PolymorphEntity(ent, prototype.Configuration);
@@ -129,12 +143,11 @@ public sealed partial class PolymorphSystem : EntitySystem
 
     private void OnBeforeFullySliced(Entity<PolymorphedEntityComponent> ent, ref BeforeFullySlicedEvent args)
     {
-        var (_, comp) = ent;
-        if (comp.Configuration.RevertOnEat)
-        {
-            args.Cancel();
-            Revert((ent, ent));
-        }
+        if (ent.Comp.Reverted || !ent.Comp.Configuration.RevertOnEat)
+            return;
+
+        args.Cancel();
+        Revert((ent, ent));
     }
 
     /// <summary>
@@ -143,10 +156,23 @@ public sealed partial class PolymorphSystem : EntitySystem
     /// </summary>
     private void OnDestruction(Entity<PolymorphedEntityComponent> ent, ref DestructionEventArgs args)
     {
-        if (ent.Comp.Configuration.RevertOnDeath)
-        {
-            Revert((ent, ent));
-        }
+        if (ent.Comp.Reverted || !ent.Comp.Configuration.RevertOnDeath)
+            return;
+
+        Revert((ent, ent));
+    }
+
+    private void OnPolymorphedTerminating(Entity<PolymorphedEntityComponent> ent, ref EntityTerminatingEvent args)
+    {
+        if (ent.Comp.Reverted)
+            return;
+
+        if (ent.Comp.Configuration.RevertOnDelete)
+            Revert(ent.AsNullable());
+
+        // Remove our original entity too
+        // Note that Revert will set Parent to null, so reverted entities will not be deleted
+        QueueDel(ent.Comp.Parent);
     }
 
     /// <summary>
@@ -291,18 +317,26 @@ public sealed partial class PolymorphSystem : EntitySystem
         if (Deleted(uid))
             return null;
 
-        var parent = component.Parent;
+        if (component.Parent is not { } parent)
+            return null;
+
         if (Deleted(parent))
             return null;
 
         var uidXform = Transform(uid);
         var parentXform = Transform(parent);
 
+        // Don't swap back onto a terminating grid
+        if (TerminatingOrDeleted(uidXform.ParentUid))
+            return null;
+
         if (component.Configuration.ExitPolymorphSound != null)
             _audio.PlayPvs(component.Configuration.ExitPolymorphSound, uidXform.Coordinates);
 
         _transform.SetParent(parent, parentXform, uidXform.ParentUid);
         _transform.SetCoordinates(parent, parentXform, uidXform.Coordinates, uidXform.LocalRotation);
+
+        component.Reverted = true;
 
         if (component.Configuration.TransferDamage &&
             TryComp<DamageableComponent>(parent, out var damageParent) &&
@@ -375,7 +409,7 @@ public sealed partial class PolymorphSystem : EntitySystem
         if (target.Comp.PolymorphActions.ContainsKey(id))
             return;
 
-        if (!_proto.TryIndex(id, out var polyProto))
+        if (!_proto.Resolve(id, out var polyProto))
             return;
 
         var entProto = _proto.Index(polyProto.Configuration.Entity);

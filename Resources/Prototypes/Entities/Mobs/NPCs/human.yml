@@ -68,6 +68,11 @@
   name: syndicate shuttle pilot
   parent: MobSyndicateFootsoldier
   id: MobSyndicateFootsoldierPilot
+  #SS220 Completely prevent mapped mobs from falling asleep start
+  components:
+  - type: SSDIndicator
+    disableAutoSleep: true
+  #SS220 Completely prevent mapped mobs from falling asleep end
 
 - type: entity
   parent: BaseMobHuman

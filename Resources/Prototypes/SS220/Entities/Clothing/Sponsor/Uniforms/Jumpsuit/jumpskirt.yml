@@ -4,8 +4,8 @@
 - type: entity
   parent: ClothingSponsorUniformSkirtBase
   id: ClothingSponsorMaidSuit
-  name: чёрный костюм горничной
-  description: Почти не пачкается.
+  name: black maid suit
+  description: Hardly ever gets dirty.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Uniform/Jumpskirt/maidsuit.rsi
@@ -16,8 +16,8 @@
 - type: entity
   parent: ClothingSponsorUniformSkirtBase
   id: ClothingSponsorStudentSuit
-  name: форма студентки
-  description: Чисто.
+  name: student uniform
+  description: Clean.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Uniform/Jumpskirt/student_suit.rsi
@@ -27,8 +27,8 @@
 - type: entity
   parent: ClothingSponsorUniformSkirtBase
   id: ClothingSponsorStudentSuitBlack
-  name: чёрная форма студентки
-  description: Чисто.
+  name: black student uniform
+  description: Clean.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Uniform/Jumpskirt/student_suit_black.rsi

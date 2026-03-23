@@ -29,6 +29,7 @@
     - alertType: Pacified
     - alertType: Stealthy
     - alertType: CountDown #SS220 CultYogg
+    - alertType: ClinkGlasses #SS220-clink-glasses
 
 - type: entity
   id: AlertSpriteView
@@ -456,9 +457,9 @@
   id: Stealthy
   clickEvent: !type:ToggleThievingEvent
   icons:
-  - sprite: /Textures/Interface/Alerts/stealthy.rsi
+  - sprite: /Textures/SS220/Interface/Alerts/stealthy.rsi #SS220 stealthy alert locale
     state: stealthy-off
-  - sprite: /Textures/Interface/Alerts/stealthy.rsi
+  - sprite: /Textures/SS220/Interface/Alerts/stealthy.rsi #SS220 stealthy alert locale
     state: stealthy-on
   name: alerts-stealthy-name
   description: alerts-stealthy-desc

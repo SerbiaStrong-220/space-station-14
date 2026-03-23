@@ -108,7 +108,7 @@
   parent: [ ClothingShoesBase, BaseJanitorContraband ]
   id: ClothingShoesGaloshes
   name: galoshes
-  description: Rubber boots.
+  description: Specialised non-slip rubber boots, designed to reduce janitorial workplace accidents; a tider's treasure.
   components:
   - type: Sprite
     sprite: Clothing/Shoes/Specific/galoshes.rsi
@@ -131,9 +131,9 @@
   description: A pair of nano-enhanced boots with built-in magnetic suction cups.
   components:
   - type: Sprite
-    sprite: Clothing/Shoes/Specific/spaceninja.rsi
+    sprite: SS220/Clothing/Shoes/Specific/spaceninja.rsi # SS220 Ninja Resprite
   - type: Clothing
-    sprite: Clothing/Shoes/Specific/spaceninja.rsi
+    sprite: SS220/Clothing/Shoes/Specific/spaceninja.rsi # SS220 Ninja Resprite
   - type: NoSlip
   - type: Magboots # always have gravity because le suction cups
   - type: ClothingSpeedModifier

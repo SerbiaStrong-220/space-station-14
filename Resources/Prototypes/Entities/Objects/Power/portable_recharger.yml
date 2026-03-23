@@ -6,6 +6,10 @@
   components:
   - type: Item
     size: Huge
+    # SS220 PortableRecharger begin
+    shape:
+    - 0,0,4,1
+    # SS220 PortableRecharger end
   - type: Sprite
     sprite: Objects/Power/portable_recharger.rsi
     state: charging
@@ -36,7 +40,16 @@
           components:
           - HitscanBatteryAmmoProvider
           - ProjectileBatteryAmmoProvider
-          # SS220 Added WeaponRechargerWhitelist tag for charging support begin
+          - Stunbaton # SS220 Added
+          - PowerCell # SS220 Added
+          # SS220 Added tags for charging support begin
           tags:
           - WeaponRechargerWhitelist
-          # SS220 Added WeaponRechargerWhitelist tag for charging support end
+          - DefibrillatorCompact
+          # SS220 Added tags for charging support end
+        # SS220 Added blacklist begin
+        blacklist:
+          tags:
+          - PotatoBattery
+          - E-N
+        # SS220 Added blacklist end

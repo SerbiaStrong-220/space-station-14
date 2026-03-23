@@ -1,24 +1,33 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Chat.Systems;
+using Content.Server.Interaction;
 using Content.Server.Pinpointer;
+using Content.Server.Popups;
+using Content.Server.SS220.Spider;
 using Content.Server.SS220.SpiderQueen.Components;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
+using Content.Shared.Maps;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
+using Content.Shared.Prototypes;
+using Content.Shared.Spider;
 using Content.Shared.SS220.SpiderQueen;
 using Content.Shared.SS220.SpiderQueen.Components;
 using Content.Shared.SS220.SpiderQueen.Systems;
 using Content.Shared.Storage;
 using Robust.Server.GameObjects;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -41,6 +50,12 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly HungerSystem _hunger = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
+    [Dependency] private readonly TileSystem _tile = default!;
+    [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private readonly InteractionSystem _interaction = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly SpiderWebSystem _spiderWeb = default!;
 
     public override void Initialize()
     {
@@ -80,6 +95,18 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
             !CheckEnoughBloodPoints(performer, args.Cost))
             return;
 
+        if (_transform.GetGrid(args.Target) == null)
+        {
+            _popup.PopupEntity(Loc.GetString("spider-web-action-nogrid"), performer, performer);
+            return;
+        }
+
+        if (AllPrototypesAreWeb(args.Prototypes) && _spiderWeb.IsTileBlockedByWeb(args.Target))
+        {
+            _popup.PopupEntity(Loc.GetString("spider-web-action-fail"), performer, performer);
+            return;
+        }
+
         if (TryStartSpiderSpawnDoAfter(performer, args.DoAfter, args.Target, args.Prototypes, args.Offset, args.SnapToGrid, args.Cost))
         {
             args.Handled = true;
@@ -88,6 +115,23 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         {
             Log.Error($"Failed to start DoAfter by {performer}");
             return;
+        }
+
+        bool AllPrototypesAreWeb(List<EntitySpawnEntry> prototypes)
+        {
+            if (prototypes.Count == 0)
+                return false;
+
+            foreach (var entry in prototypes)
+            {
+                if (string.IsNullOrEmpty(entry.PrototypeId) ||
+                    !_prototype.TryIndex<EntityPrototype>(entry.PrototypeId, out var proto) ||
+                    !proto.HasComponent<SpiderWebObjectComponent>())
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 
@@ -98,6 +142,12 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
             !TryComp<TransformComponent>(performer, out var transform) ||
             !CheckEnoughBloodPoints(performer, args.Cost))
             return;
+
+        if (_transform.GetGrid(transform.Coordinates) == null)
+        {
+            _popup.PopupEntity(Loc.GetString("spider-web-action-nogrid"), performer, performer);
+            return;
+        }
 
         if (TryStartSpiderSpawnDoAfter(performer, args.DoAfter, transform.Coordinates, args.Prototypes, args.Offset, args.SnapToGrid, args.Cost))
         {
@@ -175,6 +225,13 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
             !CheckEnoughBloodPoints(performer, args.Cost))
             return;
 
+        var mapCoords = _transform.ToMapCoordinates(args.Target);
+        if (!_interaction.InRangeUnobstructed(performer, mapCoords))
+            return;
+
+        if (GetNearestGrid(mapCoords) == null)
+            return;
+
         var netCoordinates = GetNetCoordinates(args.Target);
         var doAfterArgs = new DoAfterArgs(
             EntityManager,
@@ -183,6 +240,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
             new SpiderTileSpawnDoAfterEvent()
             {
                 Prototype = args.Prototype,
+                InSpacePrototype = args.InSpacePrototype,
                 TargetCoordinates = netCoordinates,
                 Cost = args.Cost,
             },
@@ -205,24 +263,62 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
     private void OnTileSpawnDoAfter(SpiderTileSpawnDoAfterEvent args)
     {
         var user = args.User;
-        if (args.Cancelled ||
-            !CheckEnoughBloodPoints(user, args.Cost))
+        if (args.Cancelled
+            || args.Handled
+            || !CheckEnoughBloodPoints(user, args.Cost))
             return;
 
-        var coordinates = GetCoordinates(args.TargetCoordinates);
-        var gridUid = _transform.GetGrid(coordinates);
-        if (!TryComp<MapGridComponent>(gridUid, out var mapGrid))
+        var targetCoords = GetCoordinates(args.TargetCoordinates);
+        var mapCoords = _transform.ToMapCoordinates(targetCoords);
+        if (!_interaction.InRangeUnobstructed(user, mapCoords))
             return;
 
-        var position = _mapSystem.TileIndicesFor(gridUid.Value, mapGrid, coordinates);
+        var grid = GetNearestGrid(mapCoords);
+        if (grid == null)
+            return;
 
-        _mapSystem.SetTile(gridUid.Value,
-            mapGrid,
-            position,
-            new Tile(_tileDefinitionManager[args.Prototype].TileId));
+        var gridCoords = _transform.ToCoordinates(grid.Value.Owner, mapCoords);
+        var curTile = _mapSystem.GetTileRef(grid.Value, gridCoords);
 
-        if (TryComp<SpiderQueenComponent>(user, out var spiderQueen))
-            ChangeBloodPointsAmount(user, spiderQueen, -args.Cost);
+        var tileProto = args.InSpacePrototype is { } spaceProto && _turf.IsSpace(curTile)
+            ? spaceProto
+            : args.Prototype;
+
+        var placedTile = _tileDefinitionManager[tileProto];
+        var variant = _tile.PickVariant((ContentTileDefinition)placedTile);
+
+        _mapSystem.SetTile(grid.Value, curTile.GridIndices, new Tile(placedTile.TileId, variant: variant));
+
+        if (TryComp<SpiderQueenComponent>(args.User, out var spiderQueen))
+            ChangeBloodPointsAmount(args.User, spiderQueen, -args.Cost);
+
+        args.Handled = true;
+    }
+
+    private Entity<MapGridComponent>? GetNearestGrid(MapCoordinates mapCoords, float range = 1f)
+    {
+        var circle = new PhysShapeCircle(range, mapCoords.Position);
+        var grids = new List<Entity<MapGridComponent>>();
+        _mapManager.FindGridsIntersecting(mapCoords.MapId, circle, Robust.Shared.Physics.Transform.Empty, ref grids, includeMap: false);
+
+        Entity<MapGridComponent>? result = null;
+        var distance = float.PositiveInfinity;
+        var circleBox = circle.CalcLocalBounds();
+        foreach (var grid in grids)
+        {
+            var gridXform = Transform(grid);
+            var worldMatrix = _transform.GetWorldMatrix(gridXform);
+            var gridIntersect = circleBox.Intersect(worldMatrix.TransformBox(grid.Comp.LocalAABB));
+            var gridDist = (gridIntersect.Center - mapCoords.Position).LengthSquared();
+
+            if (gridDist >= distance)
+                continue;
+
+            result = grid;
+            distance = gridDist;
+        }
+
+        return result;
     }
 
     /// <summary>
@@ -238,7 +334,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         var msg = Loc.GetString("spider-queen-warning",
             ("location", FormattedMessage.RemoveMarkupOrThrow(_navMap.GetNearestBeaconString((uid, xform)))));
         _chat.DispatchGlobalAnnouncement(msg, playSound: false, colorOverride: Color.Red);
-        _audio.PlayGlobal("/Audio/Misc/notice1.ogg", Filter.Broadcast(), true);
+        _audio.PlayGlobal(new SoundPathSpecifier("/Audio/Misc/notice1.ogg"), Filter.Broadcast(), true);
         component.IsAnnouncedOnce = true;
     }
 

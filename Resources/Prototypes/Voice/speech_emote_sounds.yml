@@ -327,10 +327,10 @@
   id: UnisexVox
   sounds:
     #SS220 emote sounds
-    DefaultDeathgasp:
-      collection: Deathgasp
-    Gasp:
-      collection: Gasp
+    # DefaultDeathgasp:
+    #   collection: Deathgasp
+    # Gasp:
+    #   collection: Gasp
     CritGasp:
       collection: MaleCritGasp
     #SS220 emote sounds end
@@ -338,15 +338,25 @@
       path: /Audio/Voice/Vox/shriek1.ogg
     Laugh:
       path: /Audio/Voice/Vox/vox_laugh.ogg
+    Cough:
+      path: /Audio/Voice/Vox/vox_cough.ogg
+    Sigh:
+      path: /Audio/Voice/Vox/vox_sigh.ogg
     Honk:
       collection: BikeHorn
+    Crying:
+      path: /Audio/Voice/Vox/vox_cry.ogg
     Weh:
       collection: Weh
     Hew:
       collection: Hew
+    Gasp:
+      path: /Audio/Effects/Gasp/vox_gasp.ogg
+    DefaultDeathgasp:
+      path: /Audio/Effects/Gasp/vox_DeathGasp.ogg
   params:
     variation: 0.125
-    # We need vox sounds for the other emotes
+    # TODO: We need vox sounds for the other emotes
 
 - type: emoteSounds
   id: UnisexDiona
@@ -602,6 +612,93 @@
       collection: XenoborgBikeHorn
     Ping:
       collection: XenoborgPing
+
+# Vulp Sounds
+- type: emoteSounds
+  id: MaleVulpkanin
+  params:
+    variation: 0.125
+  sounds:
+    Laugh:
+      collection: MaleLaugh
+    Sneeze:
+      collection: MaleSneezes
+    Cough:
+      collection: MaleCoughs
+    Whistle:
+      collection: Whistles
+    Sigh:
+      collection: MaleSigh
+    Scream:
+      collection: VulpkaninScreams
+    # Growl:
+    #   collection: VulpkaninGrowls
+    Growl:
+      collection: GrowlVulpin
+    Snarl:
+      collection: VulpkaninSnarls
+    # Bark:
+    #   collection: VulpkaninBarks
+    Bark:
+      collection: BarkVulpin
+    Whine:
+      collection: VulpkaninWhines
+    # Howl:
+    #   collection: VulpkaninHowls
+    Howl:
+      collection: HowlVulpin
+    Gasp:
+      collection: MaleGasp
+    DefaultDeathgasp:
+      collection: MaleDeathGasp
+
+- type: emoteSounds
+  id: FemaleVulpkanin
+  params:
+    variation: 0.125
+  sounds:
+  # SS220-port-vulpkanins-begin
+    Crying:
+      collection: FemaleCry
+  # SS220-port-vulpkanins-end
+    Laugh:
+      collection: FemaleLaugh
+    Sneeze:
+      collection: FemaleSneezes
+    Cough:
+      collection: FemaleCoughs
+    Whistle:
+      collection: Whistles
+    Sigh:
+      collection: FemaleSigh
+    Scream:
+      collection: VulpkaninScreams
+    # SS220-port-vulpkanins-begin
+    # Growl:
+    #   collection: VulpkaninGrowls
+    Growl:
+      collection: GrowlVulpin
+    # SS220-port-vulpkanins-end
+    Snarl:
+      collection: VulpkaninSnarls
+    # SS220-port-vulpkanins-begin
+    # Bark:
+    #   collection: VulpkaninBarks
+    Bark:
+      collection: BarkVulpin
+    # SS220-port-vulpkanins-end
+    Whine:
+      collection: VulpkaninWhines
+    # SS220-port-vulpkanins-begin
+    # Howl:
+    #   collection: VulpkaninHowls
+    Howl:
+      collection: HowlVulpin
+    # SS220-port-vulpkanins-end
+    Gasp:
+      collection: FemaleGasp
+    DefaultDeathgasp:
+      collection: FemaleDeathGasp
 
 # body emotes
 - type: emoteSounds

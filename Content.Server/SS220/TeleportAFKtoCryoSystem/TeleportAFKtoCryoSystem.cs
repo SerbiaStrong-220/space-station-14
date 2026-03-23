@@ -1,47 +1,50 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Linq;
+using Content.Server.Ghost;
+using Content.Server.Mind;
 using Content.Server.Preferences.Managers;
+using Content.Server.Station.Systems;
+using Content.Shared.Administration.Logs;
+using Content.Shared.Audio;
+using Content.Shared.Bed.Cryostorage;
 using Content.Shared.Body.Components;
+using Content.Shared.Database;
+using Content.Shared.DoAfter;
+using Content.Shared.GameTicking;
 using Content.Shared.Mind.Components;
 using Content.Shared.Preferences;
+using Content.Shared.SS220.CCVars;
+using Content.Shared.SS220.TeleportAFKtoCryoSystem;
+using Robust.Server.Containers;
 using Robust.Server.Player;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
-using Content.Shared.Bed.Cryostorage;
-using Content.Server.Station.Systems;
-using Content.Shared.Database;
-using Robust.Server.Containers;
-using Content.Shared.Audio;
-using Robust.Shared.Audio.Systems;
-using Content.Shared.DoAfter;
-using Content.Shared.SS220.TeleportAFKtoCryoSystem;
-using Content.Shared.Administration.Logs;
-using Content.Server.Ghost;
-using Content.Server.Mind;
-using Content.Shared.SS220.CCVars;
+using System.Linq;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.TeleportAFKtoCryoSystem;
 
 public sealed class TeleportAFKtoCryoSystem : EntitySystem
 {
-    [Dependency] private readonly IServerPreferencesManager _preferencesManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly ContainerSystem _containerSystem = default!;
+    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
+    [Dependency] private readonly GhostSystem _ghostSystem = default!;
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private readonly IServerPreferencesManager _preferencesManager = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private readonly MindSystem _mindSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly GhostSystem _ghostSystem = default!;
-    [Dependency] private readonly MindSystem _mindSystem = default!;
+    [Dependency] private readonly StationSystem _station = default!;
 
-    private float _afkTeleportToCryo;
+    private TimeSpan _afkTeleportToCryo;
+    private TimeSpan _ssdTimeout;
 
     private readonly Dictionary<(EntityUid, NetUserId), TimeSpan> _entityEnteredSSDTimes = new();
     private readonly List<(EntityUid, NetUserId)> _toRemove = new();
@@ -51,18 +54,33 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
         base.Initialize();
 
         _cfg.OnValueChanged(CCVars220.AfkTeleportToCryo, SetAfkTeleportToCryo, true);
+        _cfg.OnValueChanged(CCVars220.SSDTimeOut, SetSSDTimeout, true);
+
         _playerManager.PlayerStatusChanged += OnPlayerChange;
+
         SubscribeLocalEvent<CryostorageComponent, TeleportToCryoFinished>(HandleTeleportFinished);
+        SubscribeLocalEvent<RoundEndMessageEvent>(OnRoundEnd);
     }
 
     private void SetAfkTeleportToCryo(float value)
-        => _afkTeleportToCryo = value;
+        => _afkTeleportToCryo = TimeSpan.FromSeconds(value);
+
+    private void SetSSDTimeout(float value)
+        => _ssdTimeout = TimeSpan.FromSeconds(value);
+
+    private void OnRoundEnd(RoundEndMessageEvent ev)
+    {
+        _entityEnteredSSDTimes.Clear();
+        _toRemove.Clear();
+    }
 
     public override void Shutdown()
     {
         base.Shutdown();
 
         _cfg.UnsubValueChanged(CCVars220.AfkTeleportToCryo, SetAfkTeleportToCryo);
+        _cfg.UnsubValueChanged(CCVars220.SSDTimeOut, SetSSDTimeout);
+
         _playerManager.PlayerStatusChanged -= OnPlayerChange;
     }
 
@@ -73,7 +91,7 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
         if (_entityEnteredSSDTimes.Count == 0)
             return;
 
-        foreach (var key in _entityEnteredSSDTimes.Keys.ToList())
+        foreach (var key in _entityEnteredSSDTimes.Keys.AsEnumerable())
         {
             if (Deleted(key.Item1))
                 _entityEnteredSSDTimes.Remove(key);
@@ -83,11 +101,20 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
 
         foreach (var pair in _entityEnteredSSDTimes)
         {
+            if (pair.Value + _ssdTimeout < _gameTiming.CurTime)
+            {
+                Log.Error($"Got entry in ssd dictionary for too long! Entity is {ToPrettyString(pair.Key.Item1)} and user is {pair.Key.Item2}");
+                _toRemove.Add(pair.Key);
+                continue;
+            }
+
             if (!IsTeleportAfkToCryoTime(pair.Value))
                 continue;
 
-            if (TeleportEntityToCryoStorage(pair.Key.Item1))
-                _toRemove.Add(pair.Key);
+            if (!TeleportEntityToCryoStorage(pair.Key.Item1))
+                Log.Warning($"Cant find any cryo for {ToPrettyString(pair.Key.Item1)}! Removing from ssd teleport queue...");
+
+            _toRemove.Add(pair.Key);
         }
 
         foreach (var key in _toRemove)
@@ -98,8 +125,7 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
 
     private bool IsTeleportAfkToCryoTime(TimeSpan time)
     {
-        var timeOut = TimeSpan.FromSeconds(_afkTeleportToCryo);
-        return _gameTiming.CurTime - time > timeOut;
+        return _gameTiming.CurTime - time > _afkTeleportToCryo;
     }
 
     private void OnPlayerChange(object? sender, SessionStatusEventArgs e)
@@ -149,13 +175,19 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
         if (station is null)
             return false;
 
+        // this cant be null, cauze GetOwningStation check xform.GridUid, but..., just for sure
+        if (xform.GridUid == null)
+            return false;
+
         if (TargetAlreadyInCryo(target))
             return true;
 
-        var cryostorageComponents = EntityQueryEnumerator<CryostorageComponent>();
-        while (cryostorageComponents.MoveNext(out var cryostorageUid, out var cryostorageComp))
+        HashSet<Entity<CryostorageComponent>> cryoStorageOnGrid = new();
+        _entityLookup.GetGridEntities(xform.GridUid.Value, cryoStorageOnGrid);
+
+        foreach (var cryo in cryoStorageOnGrid)
         {
-            if (TryTeleportToCryo(target, cryostorageUid, station.Value, cryostorageComp.TeleportPortralID))
+            if (TryTeleportToCryo(target, cryo, station.Value, cryo.Comp.TeleportPortalId))
                 return true;
         }
 
@@ -167,7 +199,7 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
         return EntityQuery<CryostorageComponent>().Any(comp => comp.StoredPlayers.Contains(target));
     }
 
-    private bool TryTeleportToCryo(EntityUid target, EntityUid cryopodUid, EntityUid station, string teleportPortralID)
+    private bool TryTeleportToCryo(EntityUid target, EntityUid cryopodUid, EntityUid station, EntProtoId teleportPortalId)
     {
         if (station != _station.GetOwningStation(cryopodUid))
             return false;
@@ -182,7 +214,7 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
             return true;
         }
 
-        var portal = Spawn(teleportPortralID, Transform(target).Coordinates);
+        var portal = Spawn(teleportPortalId, Transform(target).Coordinates);
 
         if (TryComp<AmbientSoundComponent>(portal, out var ambientSoundComponent))
             _audioSystem.PlayPvs(ambientSoundComponent.Sound, portal);
@@ -221,6 +253,6 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
         if (TryComp<AmbientSoundComponent>(portalEntity, out var ambientSoundComponent))
             _audioSystem.PlayPvs(ambientSoundComponent.Sound, portalEntity);
 
-        EntityManager.DeleteEntity(portalEntity);
+        EntityManager.QueueDeleteEntity(portalEntity);
     }
 }

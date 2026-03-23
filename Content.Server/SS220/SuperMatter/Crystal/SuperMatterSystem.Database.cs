@@ -21,7 +21,7 @@ public sealed partial class SuperMatterSystem
     // TODO add shifts counter for not delaminate
     private void InitializeDatabase()
     {
-        Subs.CVar(_config, CCVars220.SuperMatterUpdateNetworkDelay, OnBroadcastDelayChanged, true);
+        Subs.CVar(_config, CCVars220.SuperMatterUpdateNetworkDelay, (x) => _broadcastDelay = x, true);
     }
 
     public void BroadcastData(Entity<SuperMatterComponent> crystal)
@@ -83,10 +83,5 @@ public sealed partial class SuperMatterSystem
         {
             smComp.AccumulatedGasesMoles[gas] = 0;
         }
-    }
-
-    private void OnBroadcastDelayChanged(float delay)
-    {
-        _broadcastDelay = delay;
     }
 }

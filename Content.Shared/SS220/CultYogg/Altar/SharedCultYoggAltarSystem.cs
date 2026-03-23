@@ -4,7 +4,7 @@ using Content.Shared.Buckle.Components;
 using Content.Shared.Construction.Components;
 using Content.Shared.Examine;
 using Content.Shared.Popups;
-using Content.Shared.SS220.CultYogg.Sacraficials;
+using Content.Shared.SS220.CultYogg.Sacrificials;
 
 namespace Content.Shared.SS220.CultYogg.Altar;
 
@@ -46,7 +46,7 @@ public abstract partial class SharedCultYoggAltarSystem : EntitySystem
         if (!HasComp<CultYoggSacrificialComponent>(args.Buckle))
         {
             args.Cancelled = true;
-            _popup.PopupClient (Loc.GetString("cult-yogg-buckle-attempt", ("user", args.Buckle)),
+            _popup.PopupClient(Loc.GetString("cult-yogg-buckle-attempt", ("user", args.Buckle)),
                  args.Buckle, args.User.Value, PopupType.SmallCaution);
         }
 

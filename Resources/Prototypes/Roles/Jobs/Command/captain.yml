@@ -21,7 +21,7 @@
     # off
     - !type:DepartmentTimeRequirement
       department: Command
-      time: 288000 # SS220-RoleTime 2
+      time: 80h # SS220-RoleTime 2
     - !type:AgeRequirement
       requiredAge: 20
     - !type:SpeciesRequirement #SS220-jobbans begin

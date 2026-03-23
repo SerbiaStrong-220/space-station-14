@@ -81,6 +81,7 @@ entities:
       parent: 1
     - type: BecomesStation
       id: CookingEventMap
+    - type: SkipAutoVariantize  
     - type: MapGrid
       chunks:
         0,0:

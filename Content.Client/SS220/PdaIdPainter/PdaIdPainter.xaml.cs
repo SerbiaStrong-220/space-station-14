@@ -45,14 +45,14 @@ public sealed partial class PdaIdPainter : FancyWindow
         foreach (var entry in PdaAndIds)
         {
             if (entry.HasComponent<PdaComponent>() &&
-                (string.IsNullOrEmpty(searchPdaTerm) || entry.Name.Contains(searchPdaTerm as string, StringComparison.CurrentCultureIgnoreCase)))
+                (string.IsNullOrEmpty(searchPdaTerm) || entry.Name.Contains(searchPdaTerm, StringComparison.CurrentCultureIgnoreCase)))
             {
                 var button = CreateButton(entry, groupForPda, pdaDefaultProto?.Id, OnPdaPicked);
                 PdaList.AddChild(button);
             }
 
             if (entry.HasComponent<IdCardComponent>() &&
-                (string.IsNullOrEmpty(searchIdTerm) || entry.Name.Contains(searchIdTerm as string, StringComparison.CurrentCultureIgnoreCase)))
+                (string.IsNullOrEmpty(searchIdTerm) || entry.Name.Contains(searchIdTerm, StringComparison.CurrentCultureIgnoreCase)))
             {
                 var button = CreateButton(entry, groupForId, idDefaultProto?.Id, OnIdPicked);
                 IdList.AddChild(button);
@@ -60,7 +60,7 @@ public sealed partial class PdaIdPainter : FancyWindow
         }
     }
 
-    private Button CreateButton(EntityPrototype entry, ButtonGroup group, string? defaultId, Action<string>? onPicked)
+    private static Button CreateButton(EntityPrototype entry, ButtonGroup group, string? defaultId, Action<string>? onPicked)
     {
         var button = new Button
         {

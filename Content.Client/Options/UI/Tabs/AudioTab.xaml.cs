@@ -56,21 +56,6 @@ public sealed partial class AudioTab : Control
             scale: ContentAudioSystem.LobbyMultiplier);
 
         Control.AddOptionPercentSlider(
-            CCCVars.TTSVolume,
-            SliderVolumeTts,
-            scale: ContentAudioSystem.TTSMultiplier);
-
-        Control.AddOptionPercentSlider(
-            CCCVars.TTSRadioVolume,
-            SliderVolumeTtsRadio,
-            scale: ContentAudioSystem.TTSRadioMultiplier);
-
-        Control.AddOptionPercentSlider(
-            CCCVars.TTSAnnounceVolume,
-            SliderVolumeTtsAnnounce,
-            scale: ContentAudioSystem.TTSAnnounceMultiplier);
-
-        Control.AddOptionPercentSlider(
             CCVars.InterfaceVolume,
             SliderVolumeInterface,
             scale: ContentAudioSystem.InterfaceMultiplier);
@@ -86,6 +71,27 @@ public sealed partial class AudioTab : Control
         Control.AddOptionCheckBox(CCVars.EventMusicEnabled, EventMusicCheckBox);
         Control.AddOptionCheckBox(CCVars.AdminSoundsEnabled, AdminSoundsCheckBox);
         Control.AddOptionCheckBox(CCVars.BwoinkSoundEnabled, BwoinkSoundCheckBox);
+
+        // SS220-TTS-begin
+        Control.AddOptionPercentSlider(
+            CCCVars.TTSVolume,
+            SliderVolumeTts,
+            scale: ContentAudioSystem.TTSMultiplier);
+
+        Control.AddOptionPercentSlider(
+            CCCVars.TTSRadioVolume,
+            SliderVolumeTtsRadio,
+            scale: ContentAudioSystem.TTSRadioMultiplier);
+
+        Control.AddOptionPercentSlider(
+            CCCVars.TTSAnnounceVolume,
+            SliderVolumeTtsAnnounce,
+            scale: ContentAudioSystem.TTSAnnounceMultiplier);
+
+        Control.AddOptionCheckBox(CCVars220.RecieveTTS, ReceiveTTSCheckbox);
+        Control.AddOptionCheckBox(CCVars220.PlayDifferentRadioTogether, PlayDifferentRadioTogetherCheckbox);
+        Control.AddOptionCheckBox(CCVars220.PlayDifferentTalkingTogether, PlayDifferentTalkingTogetherCheckbox);
+        // SS220-TTS-end
 
         Control.Initialize();
     }

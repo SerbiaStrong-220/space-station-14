@@ -10,3 +10,7 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from https://github.com/ss220club/BandaStation"
   source: "https://github.com/ss220club/BandaStation/blob/master/sound/effects/butcher.ogg"
+- files: ["clink_glasses.ogg"]
+  license: "CC0-1.0"
+  copyright: "Original is created by danhelbling"
+  source: "https://freesound.org/people/danhelbling/sounds/272384/"

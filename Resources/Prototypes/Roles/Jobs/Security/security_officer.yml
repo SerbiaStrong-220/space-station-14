@@ -6,7 +6,7 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 36000 # SS220-RoleTime
+      time: 10h # SS220-RoleTime
     - !type:SpeciesRequirement #SS220-jobbans begin
       inverted: true
       species:

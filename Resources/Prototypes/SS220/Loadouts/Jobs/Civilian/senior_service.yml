@@ -1,8 +1,31 @@
+# Job Time
+- type: loadoutEffectGroup
+  id: SeniorServiceDelux
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobSeniorService
+      time: 360000 # 100 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+
 # Head
 - type: loadout
   id: HatSeniorService
   equipment:
     head: ClothingHeadHatSeniorService
+
+- type: loadout
+  id: HatBeretSeniorService
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorServiceDelux
+  equipment:
+    head: ClothingHeadHatBeretSeniorService
 
 # Jumpsuit
 - type: loadout
@@ -14,3 +37,25 @@
   id: SeniorJumpskirtService
   equipment:
     jumpsuit: ClothingUniformJumpskirtSeniorService
+
+- type: loadout
+  id: SeniorServiceJumpsuitDelux
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorServiceDelux
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSeniorServiceDelux
+
+# Shoes
+- type: loadout
+  id: ShoesColorBrown
+  equipment:
+    shoes: ClothingShoesColorBrown
+
+- type: loadout
+  id: SeniorServiceBootsLaceup
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorServiceDelux
+  equipment:
+    shoes: ClothingShoesBootsLaceupSeniorService

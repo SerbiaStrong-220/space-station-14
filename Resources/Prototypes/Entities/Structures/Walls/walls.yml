@@ -9,6 +9,10 @@
     snap:
     - Wall
   components:
+  - type: Anchorable
+    flags:
+    - Anchorable
+  - type: Rotatable
   - type: RangedDamageSound
     soundGroups:
       Brute:
@@ -1133,9 +1137,9 @@
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: Sprite
-    sprite: Structures/Walls/xeno.rsi
+    sprite: SS220/Structures/Walls/xeno.rsi # SS220 walls-sprite-update-v6
   - type: Icon
-    sprite: Structures/Walls/xeno.rsi
+    sprite: SS220/Structures/Walls/xeno.rsi # SS220 walls-sprite-update-v6
   - type: IconSmooth
     key: chitin
     base: solid
@@ -1153,9 +1157,9 @@
   name: reinforced chitin
   components:
   - type: Sprite
-    sprite: Structures/Walls/xeno.rsi
+    sprite: SS220/Structures/Walls/xeno.rsi # SS220 walls-sprite-update-v6
   - type: Icon
-    sprite: Structures/Walls/xeno.rsi
+    sprite: SS220/Structures/Walls/xeno.rsi # SS220 walls-sprite-update-v6
     state: rgeneric
   - type: Damageable
     damageContainer: StructuralInorganic
@@ -1204,6 +1208,33 @@
   - type: Construction
     graph: Girder
     node: reinforcedWallChitin
+
+- type: entity
+  parent: WallPlastitanium
+  id: WallXenoborg
+  name: xenoborg wall
+  components:
+  - type: Sprite
+    sprite: Structures/Walls/xenoborg.rsi
+  - type: Icon
+    sprite: Structures/Walls/xenoborg.rsi
+  - type: IconSmooth
+    key: walls
+    base: xenoborg
+
+- type: entity
+  parent: WallPlastitaniumDiagonal
+  id: WallXenoborgDiagonal
+  name: xenoborg wall
+  suffix: diagonal
+  components:
+  - type: Sprite
+    drawdepth: Walls
+    sprite: Structures/Walls/xenoborg_diagonal.rsi
+    state: state0
+  - type: Icon
+    sprite: Structures/Walls/xenoborg_diagonal.rsi
+    state: state0
 
 - type: entity
   parent: BaseWall
@@ -1664,9 +1695,9 @@
     - Wall
   - type: Sprite
     drawdepth: SmallObjects #so bullets pass 'through'
-    sprite: Structures/Walls/card.rsi
+    sprite: SS220/Structures/Walls/card.rsi # SS220 walls-sprite-update-v6
   - type: Icon
-    sprite: Structures/Walls/card.rsi
+    sprite: SS220/Structures/Walls/card.rsi # SS220 walls-sprite-update-v6
     state: full
   - type: Construction
     graph: Cardwall
@@ -1709,6 +1740,6 @@
   - type: IconSmooth
     key: cards
     base: card
-  - type: Occluder 
+  - type: Occluder
   - type: BlockWeather
   - type: SunShadowCast

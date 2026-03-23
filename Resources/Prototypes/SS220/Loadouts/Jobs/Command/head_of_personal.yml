@@ -22,6 +22,17 @@
   equipment:
     head: ClothingHeadHoPSilverHeadBand
 
+# Jumpsuit
+- type: loadout
+  id: HoPJumpsuitTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitHoPTurtleneck
+
+- type: loadout
+  id: HoPJumpskirtTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtHoPTurtleneck
+
 # Outer clothing
 - type: loadout
   id: HoPPurpleDress

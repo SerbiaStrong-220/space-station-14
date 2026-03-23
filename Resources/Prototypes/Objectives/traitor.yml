@@ -17,7 +17,7 @@
   - type: Objective
     icon:
       sprite: Objects/Misc/folders.rsi
-      state: folder-white
+      state: folder-colormap
   - type: MultipleTraitorsRequirement
 
 - type: entity
@@ -247,21 +247,20 @@
 
 ## hos
 
-#SS220 HOS shotgun removal begin
-#- type: entity
-  #categories: [ HideSpawnMenu ]
-  #parent: BaseTraitorStealObjective
-  #id: EnergyShotgunStealObjective
-  #components:
-  #- type: Objective
-    # HoS will have this on them a lot of the time so..
-    #difficulty: 3
-  #- type: NotJobRequirement
-    #job: HeadOfSecurity
-  #- type: StealCondition
-    #stealGroup: WeaponEnergyShotgun
-    #owner: job-name-hos
-##SS220 HOS shotgun removal end
+# SS220-remove-energy-magnum-begin
+# - type: entity
+#   parent: BaseTraitorStealObjective
+#   id: EnergyMagnumStealObjective
+#   components:
+#   - type: Objective
+#     # HoS will have this on them a lot of the time so..
+#     difficulty: 3
+#   - type: NotJobRequirement
+#     job: HeadOfSecurity
+#   - type: StealCondition
+#     stealGroup: WeaponEnergyMagnum
+#     owner: job-name-hos
+# SS220-remove-energy-magnum-end
 
 ## ce
 
