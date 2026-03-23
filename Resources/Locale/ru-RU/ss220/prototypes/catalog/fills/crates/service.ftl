@@ -1,5 +1,3 @@
-ent-CrateServiceHolidayLights = ящик праздничных лампочек
-    .desc = Украсьте залы праздничными лампочками!
 ent-CratePottedPlant = ящик с комнатным растением
     .desc = Содержит одно случайное растение в горшке для вашей станции!
 ent-CrateRandomPottedPlants = ящик с комнатными растениями

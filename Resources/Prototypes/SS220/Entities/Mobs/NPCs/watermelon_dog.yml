@@ -1,0 +1,191 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: MobWatermelonDog
+  parent:
+  - BaseSimpleMob
+  - MobDamageable
+  - MobPolymorphable
+  - MobBloodstream
+  - MobFlammable
+  - MobCombat
+  name: watermelon dog
+  description: Looks like a watermelon with distinct dog features.
+  components:
+  - type: GhostRole
+    prob: 0.25
+    makeSentient: true
+    allowSpeech: true
+    name: ghost-role-information-watermelondog-name
+    description: ghost-role-information-watermelondog-description
+    rules: ghost-role-information-familiar-rules
+  - type: GhostTakeoverAvailable
+  - type: CanEscapeInventory
+    baseResistTime: 3
+  - type: Reactive
+    groups:
+      Flammable: [ Touch ]
+      Extinguish: [ Touch ]
+    reactions:
+    - reagents: [ Water ]
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        scaling: true
+        damage:
+          groups:
+            Brute: -0.15
+    - reagents: [ Blood ]
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        scaling: true
+        damage:
+          groups:
+            Brute: -0.25
+            Burn: -0.25
+    - reagents: [ RobustHarvest ]
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        scaling: true
+        damage:
+          groups:
+            Brute: -1
+            Burn: -1
+    - reagents: [ WeedKiller, PlantBGone ]
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        scaling: true
+        damage:
+          types:
+            Heat: 1
+  - type: Grammar
+    attributes:
+      gender: epicene
+  - type: Speech
+    speechVerb: Canine
+    speechSounds: Dog
+  - type: ReplacementAccent
+    accent: dog
+  - type: MessyDrinker
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+      canSpeak: false
+    - id: Doggish
+      canSpeak: true
+    - id: Mousey
+      canSpeak: false
+    - id: Feline
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  - type: Item
+    size: Huge
+  - type: MultiHandedItem
+  - type: NpcFactionMember
+    factions:
+    - NanoTrasen
+  - type: HTN
+    rootTask:
+      task: WatermelonDogCompound
+  - type: NPCImprintingOnSpawnBehaviour
+    whitelist:
+      components:
+      - HumanoidAppearance
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: WatermelonDog
+  - type: Sprite
+    sprite: SS220/Mobs/Animals/watermelondog.rsi
+    noRot: true
+    layers:
+      - map: [ "enum.DamageStateVisualLayers.Base" ]
+        state: alive
+  - type: Bloodstream
+    bloodReagent: JuiceWatermelon
+    bloodMaxVolume: 90
+    chemicalMaxVolume: 30
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodWatermelonSlice:
+            min: 4
+            max: 5
+      - !type:PlaySoundBehavior
+        sound:
+          collection: gib
+      - !type:GibBehavior { }
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      40: 0.8
+      60: 0.6
+      80: 0.4
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.30
+        density: 80
+        mask:
+          - MobMask
+        layer:
+          - MobLayer
+  - type: MeleeWeapon
+    hidden: true
+    angle: 0
+    altDisarm: false
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    damage:
+      types:
+        Blunt: 2 # Сложно арбузными зубками кусать
+    animation: WeaponArcBite
+  - type: Climbing
+  - type: NameIdentifier
+    group: GenericNumber
+  - type: Tag
+    tags:
+      - CannotSuicide
+      - Fruit
+  - type: Extractable
+    grindableSolutionName: bloodstream
+  - type: PotencyVisuals
+  - type: Appearance
+  - type: Produce
+    seedId: watermelondog
+  - type: IgnoreKudzu
+  - type: Puller
+    needsHands: false
+  - type: PassiveDamage # Очень жаль, но спамить станцию собаками мы не хотим
+    allowedStates:
+    - Alive
+    damageCap: 100
+    damage:
+      types:
+        Blunt: 0.05
+  - type: Body # Для корректной работы гиба
+  - type: InteractionPopup
+    successChance: 0.9
+    interactSuccessString: petting-success-watermelondog
+    interactFailureString: petting-failure-watermelondog
+    interactSuccessSpawn: EffectHearts
+    interactSuccessSound:
+      path: /Audio/Animals/small_dog_bark_happy.ogg
+  - type: StaticPrice
+    price: 200
