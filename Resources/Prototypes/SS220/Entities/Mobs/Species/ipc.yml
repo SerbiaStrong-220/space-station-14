@@ -177,11 +177,6 @@
         Heat: 0
   - type: Fingerprint
   - type: Blindable
-  - type: Butcherable
-    butcheringType: Spike
-    spawned:
-      - id: FoodMeat
-        amount: 5
   - type: FireVisuals
     alternateState: Standing
   - type: Sprite
