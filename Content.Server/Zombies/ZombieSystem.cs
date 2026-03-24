@@ -358,6 +358,7 @@ namespace Content.Server.Zombies
         private void OnZombieCloning(Entity<ZombieComponent> ent, ref CloningEvent args)
         {
             UnZombify(ent.Owner, args.CloneUid, ent.Comp);
+            _faction.RemoveFaction(args.CloneUid, ZombieFaction); // SS220 - bug fixs
         }
 
         // Make sure players that enter a zombie (for example via a ghost role or the mind swap spell) count as an antagonist.
