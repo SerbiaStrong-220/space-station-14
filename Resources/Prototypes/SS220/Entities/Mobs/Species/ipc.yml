@@ -100,21 +100,36 @@
     selfRepairPenalty: 2
     options:
       - qualityNeeded: Welding
-        doAfterDelay: 10
+        doAfterDelay: 7
         fuelCost: 30
         damage:
           types:
              Slash: -20
       - qualityNeeded: Screwing
-        doAfterDelay: 10
+        doAfterDelay: 7
         damage:
           types:
              Piercing: -25
       - qualityNeeded: Anchoring
-        doAfterDelay: 10
+        doAfterDelay: 7
         damage:
           types:
              Blunt: -25
+      - qualityNeeded: Cutting
+        doAfterDelay: 7
+        damage:
+          types:
+             Heat: -20
+      - qualityNeeded: Pulsing
+        doAfterDelay: 7
+        damage:
+          types:
+             Shock: -15
+      - qualityNeeded: Prying
+        doAfterDelay: 7
+        damage:
+          types:
+             Caustic: -5
   - type: DamagedSiliconAccent
   - type: Reflect
     reflectProb: 0.05
@@ -126,7 +141,7 @@
     thresholds:
       0: Alive
       100: Critical
-      200: Dead # ПРОВЕРИМ НА ТЕСТ ЧТОБ НЕ УПАЛ
+      200: Dead
     stateAlertDict:
       Alive: BorgHealth
       Critical: BorgCrit
