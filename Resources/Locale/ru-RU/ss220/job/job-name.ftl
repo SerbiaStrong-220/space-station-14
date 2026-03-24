@@ -29,6 +29,7 @@ job-name-death-squad-healer = медик Эскадрона Смерти
 job-name-migo = Ми-Го
 
 job-name-security-pet = питомец службы безопасности
+job-name-peaceful-pet = безобидный питомец
 
 job-name-aggressive-animals = агрессивная фауна
 

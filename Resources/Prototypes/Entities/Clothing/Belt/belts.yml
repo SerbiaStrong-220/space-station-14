@@ -155,6 +155,7 @@
       tags:
         - PowerCellBlaster
         - LaserSMGPowerCell # SS220 IK-40 PowerCell-Storage-Fix
+        - LaserCarabinePowerCell # SS220 IK-60 PowerCell-Storage-Fix
     # SS220 blueshield-whitelist-storage-fix
 
 - type: entity
