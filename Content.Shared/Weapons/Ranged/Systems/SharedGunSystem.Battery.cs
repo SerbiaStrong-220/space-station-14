@@ -163,10 +163,10 @@ public abstract partial class SharedGunSystem
 
         // SS220 - bug fixs - BGN
         var magLoaded = true;
-        if (TryComp<PowerCellSlotComponent>(uid, out var slotComp) &&
-            _slots.TryGetSlot(uid, slotComp.CellSlotId, out var itemSlot))
+        if (TryComp<PowerCellSlotComponent>(uid, out var slotComp))
         {
-            magLoaded = itemSlot.Item is not null;
+            magLoaded = _slots.TryGetSlot(uid, slotComp.CellSlotId, out var itemSlot) &&
+                        itemSlot.Item is not null;
         }
         // SS220 - bug fixs - END
 
