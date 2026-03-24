@@ -572,3 +572,13 @@
     blacklist:
       tags:
       - NukeOpsUplink
+
+- type: listing
+  id: UplinkFakeCaptainIDCard
+  name: uplink-fake-captain-id-card-name
+  description: uplink-fake-captain-id-card-desc
+  productEntity: FakeCaptainIDCard
+  cost:
+    Telecrystal: 1
+  categories:
+  - UplinkDeception
