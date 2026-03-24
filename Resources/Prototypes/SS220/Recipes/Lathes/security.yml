@@ -182,6 +182,8 @@
   result: WeaponCompactAntimateriel
   completetime: 5
   materials:
-    Steel: 2000
+    Steel: 2500
     Glass: 100
     Plastic: 300
+    Gold: 200
+    Silver: 200
