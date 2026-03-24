@@ -114,10 +114,11 @@ namespace Content.Server.Access.Systems
             if (!TryComp<IdCardComponent>(uid, out var idCard))
                 return;
 
-            _cardSystem.TryChangeJobTitle(uid, args.Job, idCard);
-
             // SS220 Radio-Job-Color-start
-            if (TryFindJobProtoFromJobName(args.Job.ToLowerInvariant(), out var job))
+            var jobTitle = args.Job?.Trim() ?? string.Empty;
+            _cardSystem.TryChangeJobTitle(uid, jobTitle, idCard);
+
+            if (TryFindJobProtoFromJobName(jobTitle.ToLowerInvariant(), out var job))
                 _cardSystem.TryChangeJobColor(uid, PresetIdCardSystem.GetJobColor(_prototypeManager, job), job.RadioIsBold);
             // SS220 Radio-Job-Color-end
         }
@@ -164,7 +165,7 @@ namespace Content.Server.Access.Systems
         {
             foreach (var jobPrototype in _prototypeManager.EnumeratePrototypes<JobPrototype>())
             {
-                if (jobPrototype.LocalizedName == jobName)
+                if (jobPrototype.LocalizedName?.Trim() == jobName)
                 {
                     job = jobPrototype;
                     return true;

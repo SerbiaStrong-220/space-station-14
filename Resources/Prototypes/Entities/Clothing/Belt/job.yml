@@ -417,6 +417,7 @@
     whitelist:
       tags:
       - LaserSMGPowerCell # SS220 IK-40 PowerCell-Storage-Fix
+      - LaserCarabinePowerCell # SS220 IK-60 PowerCell-Storage-Fix
       - CigPack
       - Taser
       - SecBeltEquip

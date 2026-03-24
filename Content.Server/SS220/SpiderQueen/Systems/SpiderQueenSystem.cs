@@ -3,6 +3,8 @@
 using Content.Server.Chat.Systems;
 using Content.Server.Interaction;
 using Content.Server.Pinpointer;
+using Content.Server.Popups;
+using Content.Server.SS220.Spider;
 using Content.Server.SS220.SpiderQueen.Components;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.DoAfter;
@@ -11,17 +13,21 @@ using Content.Shared.Maps;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
+using Content.Shared.Prototypes;
+using Content.Shared.Spider;
 using Content.Shared.SS220.SpiderQueen;
 using Content.Shared.SS220.SpiderQueen.Components;
 using Content.Shared.SS220.SpiderQueen.Systems;
 using Content.Shared.Storage;
 using Robust.Server.GameObjects;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -47,6 +53,9 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
     [Dependency] private readonly TileSystem _tile = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly InteractionSystem _interaction = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly SpiderWebSystem _spiderWeb = default!;
 
     public override void Initialize()
     {
@@ -86,6 +95,18 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
             !CheckEnoughBloodPoints(performer, args.Cost))
             return;
 
+        if (_transform.GetGrid(args.Target) == null)
+        {
+            _popup.PopupEntity(Loc.GetString("spider-web-action-nogrid"), performer, performer);
+            return;
+        }
+
+        if (AllPrototypesAreWeb(args.Prototypes) && _spiderWeb.IsTileBlockedByWeb(args.Target))
+        {
+            _popup.PopupEntity(Loc.GetString("spider-web-action-fail"), performer, performer);
+            return;
+        }
+
         if (TryStartSpiderSpawnDoAfter(performer, args.DoAfter, args.Target, args.Prototypes, args.Offset, args.SnapToGrid, args.Cost))
         {
             args.Handled = true;
@@ -94,6 +115,23 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         {
             Log.Error($"Failed to start DoAfter by {performer}");
             return;
+        }
+
+        bool AllPrototypesAreWeb(List<EntitySpawnEntry> prototypes)
+        {
+            if (prototypes.Count == 0)
+                return false;
+
+            foreach (var entry in prototypes)
+            {
+                if (string.IsNullOrEmpty(entry.PrototypeId) ||
+                    !_prototype.TryIndex<EntityPrototype>(entry.PrototypeId, out var proto) ||
+                    !proto.HasComponent<SpiderWebObjectComponent>())
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 
@@ -104,6 +142,12 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
             !TryComp<TransformComponent>(performer, out var transform) ||
             !CheckEnoughBloodPoints(performer, args.Cost))
             return;
+
+        if (_transform.GetGrid(transform.Coordinates) == null)
+        {
+            _popup.PopupEntity(Loc.GetString("spider-web-action-nogrid"), performer, performer);
+            return;
+        }
 
         if (TryStartSpiderSpawnDoAfter(performer, args.DoAfter, transform.Coordinates, args.Prototypes, args.Offset, args.SnapToGrid, args.Cost))
         {
@@ -290,7 +334,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         var msg = Loc.GetString("spider-queen-warning",
             ("location", FormattedMessage.RemoveMarkupOrThrow(_navMap.GetNearestBeaconString((uid, xform)))));
         _chat.DispatchGlobalAnnouncement(msg, playSound: false, colorOverride: Color.Red);
-        _audio.PlayGlobal("/Audio/Misc/notice1.ogg", Filter.Broadcast(), true);
+        _audio.PlayGlobal(new SoundPathSpecifier("/Audio/Misc/notice1.ogg"), Filter.Broadcast(), true);
         component.IsAnnouncedOnce = true;
     }
 

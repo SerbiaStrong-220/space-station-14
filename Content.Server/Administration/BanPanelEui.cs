@@ -150,6 +150,15 @@ public sealed class BanPanelEui : BaseEui
                 );
             }
 
+            Close();
+
+            return;
+        }
+
+        // SS220 species ban begin
+        if (ban.BannedSpecies?.Length > 0)
+        {
+            var now = DateTimeOffset.UtcNow;
             foreach (var specie in ban.BannedSpecies ?? [])
             {
                 _banManager.CreateSpeciesBan(
@@ -168,9 +177,9 @@ public sealed class BanPanelEui : BaseEui
             }
 
             Close();
-
             return;
         }
+        // SS220 species ban end
 
         if (ban.Erase && targetUid is not null)
         {
