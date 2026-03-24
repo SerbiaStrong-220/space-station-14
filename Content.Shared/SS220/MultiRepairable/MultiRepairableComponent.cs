@@ -29,7 +29,7 @@ public sealed partial class RepairOption
     public DamageSpecifier? Damage;
 
     [DataField] 
-    public float FuelCost = 5f; // Изменено на float для совместимости с ToolSystem
+    public float FuelCost = 5f;
 
     [DataField] 
     public float DoAfterDelay = 1f;

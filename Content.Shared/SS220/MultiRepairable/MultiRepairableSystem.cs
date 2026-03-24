@@ -23,71 +23,65 @@ public sealed class MultiRepairableSystem : EntitySystem
         SubscribeLocalEvent<MultiRepairableComponent, MultiRepairDoAfterEvent>(OnDoAfter);
     }
 
-    private void OnInteractUsing(EntityUid uid, MultiRepairableComponent component, InteractUsingEvent args)
+    private void OnInteractUsing(Entity<MultiRepairableComponent> ent, ref InteractUsingEvent args)
     {
-        if (args.Handled) return;
-
-        // 1. Проверяем, нужно ли вообще чинить
-        if (!TryComp<DamageableComponent>(uid, out var damageable) || damageable.TotalDamage == 0)
+        if (args.Handled)
             return;
 
-        foreach (var option in component.Options)
+        if (!TryComp<DamageableComponent>(ent, out var damageable) || damageable.TotalDamage == 0)
+            return;
+
+        foreach (var option in ent.Comp.Options)
         {
-            // Проверяем, подходит ли инструмент (качество)
             if (!_toolSystem.HasQuality(args.Used, option.QualityNeeded))
                 continue;
 
             var delay = option.DoAfterDelay;
-            if (args.User == uid)
+            if (args.User == ent.Owner)
             {
-                if (!component.AllowSelfRepair) return;
-                delay *= component.SelfRepairPenalty;
+                if (!ent.Comp.AllowSelfRepair) 
+                    return;
+                delay *= ent.Comp.SelfRepairPenalty;
             }
 
-            // 2. Используем UseTool вместо прямого DoAfter. 
-            // Это автоматически проверит топливо (FuelCost) и запустит прогресс-бар.
             args.Handled = _toolSystem.UseTool(
                 args.Used, 
                 args.User, 
-                uid, 
+                ent, 
                 delay, 
                 option.QualityNeeded, 
                 new MultiRepairDoAfterEvent(option), 
-                option.FuelCost);
+                option.FuelCost
+            );
             
             if (args.Handled)
                 break;
         }
     }
 
-    private void OnDoAfter(EntityUid uid, MultiRepairableComponent component, MultiRepairDoAfterEvent args)
+    private void OnDoAfter(Entity<MultiRepairableComponent> ent, ref MultiRepairDoAfterEvent args)
     {
-        if (args.Cancelled || args.Handled || args.Args.Used == null) return;
+        if (args.Cancelled || args.Handled || args.Args.Used == null) 
+            return;
 
         var option = args.RepairOption;
-        
-        // 3. Применяем лечение
+
         if (option.Damage != null)
         {
-            var damageChanged = _damageableSystem.TryChangeDamage(uid, option.Damage, true, origin: args.User);
-            
-            // Админ-лог для истории
-            _adminLogger.Add(LogType.Healed, $"{ToPrettyString(args.User):user} repaired {ToPrettyString(uid):target} by {damageChanged?.GetTotal()} using {ToPrettyString(args.Args.Used.Value):tool}");
+            var damageChanged = _damageableSystem.TryChangeDamage(ent, option.Damage, true, origin: args.User);
+            _adminLogger.Add(LogType.Healed, $"{ToPrettyString(args.User):user} repaired {ToPrettyString(ent):target} by {damageChanged?.GetTotal()} using {ToPrettyString(args.Args.Used.Value):tool}");
         }
 
-        // Сообщение игроку
-        var str = Loc.GetString("comp-repairable-repair", ("target", uid), ("tool", args.Args.Used.Value));
-        _popup.PopupClient(str, uid, args.User);
+        var str = Loc.GetString("comp-repairable-repair", ("target", ent), ("tool", args.Args.Used.Value));
+        _popup.PopupClient(str, ent, args.User);
 
-        // Вызываем событие об успешном ремонте для других систем
-        var ev = new MultiRepairedEvent(uid, args.User, option);
-        RaiseLocalEvent(uid, ref ev);
+        var ev = new MultiRepairedEvent(ent, args.User, option);
+        RaiseLocalEvent(ent, ref ev);
 
         args.Handled = true;
     }
 }
 
-// Обновленное событие с данными о выбранной опции
 [ByRefEvent]
 public readonly record struct MultiRepairedEvent(EntityUid Target, EntityUid User, RepairOption Option);
 
