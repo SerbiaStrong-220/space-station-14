@@ -20,7 +20,7 @@
   tier: 2
   cost: 9000
   recipeUnlocks:
-  - WeaponCompactAntimateriel
+  - WeaponSniperCompact
 
 - type: technology
   id: PlasmaConverterAcceleration

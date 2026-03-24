@@ -178,8 +178,8 @@
     Gold: 50
 
 - type: latheRecipe
-  id: WeaponCompactAntimateriel
-  result: WeaponCompactAntimateriel
+  id: WeaponSniperCompact
+  result: WeaponSniperCompact
   completetime: 5
   materials:
     Steel: 2500

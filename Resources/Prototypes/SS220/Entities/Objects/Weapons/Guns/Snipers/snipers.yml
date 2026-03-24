@@ -65,7 +65,7 @@
 - type: entity
   name: SAR-60
   parent: [BaseItem, BaseGunWieldable]
-  id: WeaponCompactAntimateriel
+  id: WeaponSniperCompact
   description: "A compact, single-shot rifle that fires powerful antimateriel rounds. This one has a reflex sight and a recoil compensator on it. \n It has a marking on it's frame saying 'NT-SAD-SAR-60'"
   components:
   - type: Sprite
@@ -76,7 +76,7 @@
   - type: Item
     size: Large
     shape:
-    - 0,0,3,1
+    - 0,0,4,1
     sprite: SS220/Objects/Weapons/Guns/Snipers/heavy_sniper.rsi
   - type: ItemSlots
     slots:
