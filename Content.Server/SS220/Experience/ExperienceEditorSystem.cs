@@ -16,11 +16,13 @@ public sealed class ExperienceEditorSystem : EntitySystem
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly IConGroupController _groupController = default!;
 
-    private const string _editorCommand = "expeditor";
+    private const string EditorCommand = "expeditor";
 
     public override void Initialize()
     {
         base.Initialize();
+
+        // SubscribeLocalEvent<ExperienceComponent, Cultii>
 
         SubscribeNetworkEvent<ChangeEntityExperienceAdminRequest>(OnChangeAdminRequest);
         SubscribeNetworkEvent<ChangeEntityExperiencePlayerRequest>(OnChangePlayerRequest);
@@ -29,7 +31,7 @@ public sealed class ExperienceEditorSystem : EntitySystem
 
     private void OnChangeAdminRequest(ChangeEntityExperienceAdminRequest ev, EntitySessionEventArgs args)
     {
-        if (!_groupController.CanCommand(args.SenderSession, _editorCommand))
+        if (!_groupController.CanCommand(args.SenderSession, EditorCommand))
             return;
 
         var targetEntity = GetEntity(ev.Target);

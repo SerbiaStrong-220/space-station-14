@@ -14,7 +14,7 @@
 - type: skill
   id: BureaucracyTrained
   levelInfo:
-    maximumSublevel: 5
+    maximumSublevel: 10
     levelUpPopup: bureaucracy-trained-level-up-popup
     sublevelUpPopup: bureaucracy-trained-sublevel-up-popup
   levelDescription:

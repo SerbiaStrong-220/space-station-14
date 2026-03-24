@@ -162,8 +162,10 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (!ResolveCurrentSkillPrototype(info, skillTree, out var skillPrototype))
             return;
 
-        // Do not save overflow progress of it
-        entity.Comp.StudyingProgress[skillTree] = StartLearningProgress;
+        // Do not save overflow progress
+        if (entity.Comp.StudyingProgress[skillTree] > EndLearningProgress)
+            entity.Comp.StudyingProgress[skillTree] = StartLearningProgress;
+
         entity.Comp.EarnedSkillSublevel[skillTree]++;
         info.Sublevel++;
 
