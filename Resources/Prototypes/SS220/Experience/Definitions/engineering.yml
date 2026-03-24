@@ -2,7 +2,7 @@
   id: AtmosphericTechnicianRoleExperience
   skills:
     Bureaucracy:
-      level: 1
+      level: 2
     ExtravehicularActivity:
       level: 3
     CombatTraining:
@@ -41,7 +41,7 @@
   id: SeniorEngineerRoleExperience
   skills:
     Bureaucracy:
-      level: 1
+      level: 2
     ExtravehicularActivity:
       level: 3
     CombatTraining:
@@ -60,7 +60,7 @@
   id: StationEngineerRoleExperience
   skills:
     Bureaucracy:
-      level: 1
+      level: 2
     ExtravehicularActivity:
       level: 2
     CombatTraining:

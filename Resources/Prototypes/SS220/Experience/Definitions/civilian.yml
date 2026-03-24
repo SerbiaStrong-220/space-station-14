@@ -36,7 +36,7 @@
   id: BotanistRoleExperience
   skills:
     Bureaucracy:
-      level: 1
+      level: 2
     ExtravehicularActivity:
       level: 1
     CombatTraining:
@@ -55,7 +55,7 @@
   id: ChaplainRoleExperience
   skills:
     Bureaucracy:
-      level: 1
+      level: 2
     ExtravehicularActivity:
       level: 1
     CombatTraining:
@@ -74,7 +74,7 @@
   id: ChefRoleExperience
   skills:
     Bureaucracy:
-      level: 1
+      level: 2
     ExtravehicularActivity:
       level: 1
     CombatTraining:
@@ -91,7 +91,7 @@
   id: ClownRoleExperience
   skills:
     Bureaucracy:
-      level: 1
+      level: 2
     ExtravehicularActivity:
       level: 1
     CombatTraining:
@@ -146,7 +146,7 @@
   id: MimeRoleExperience
   skills:
     Bureaucracy:
-      level: 1
+      level: 2
     ExtravehicularActivity:
       level: 1
     CombatTraining:
@@ -165,7 +165,7 @@
   id: MusicianRoleExperience
   skills:
     Bureaucracy:
-      level: 1
+      level: 2
     ExtravehicularActivity:
       level: 1
     CombatTraining:

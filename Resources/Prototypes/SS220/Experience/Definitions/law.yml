@@ -1,9 +1,8 @@
 - type: experienceDefinition
   id: LawyerRoleExperience
   skills:
-    # Lawyer that cant write can be fun
     Bureaucracy:
-      level: 1
+      level: 2
     ExtravehicularActivity:
       level: 1
     CombatTraining:

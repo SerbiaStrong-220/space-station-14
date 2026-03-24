@@ -2,7 +2,7 @@
   id: BrigmedicRoleExperience
   skills:
     Bureaucracy:
-      level: 1
+      level: 2
     ExtravehicularActivity:
       level: 1
     CombatTraining:
@@ -21,7 +21,7 @@
   id: ChemistRoleExperience
   skills:
     Bureaucracy:
-      level: 1
+      level: 2
     ExtravehicularActivity:
       level: 1
     CombatTraining:
@@ -59,7 +59,7 @@
   id: SeniorPhysicianRoleExperience
   skills:
     Bureaucracy:
-      level: 1
+      level: 2
     ExtravehicularActivity:
       level: 1
     CombatTraining:
@@ -79,7 +79,7 @@
   id: MedicalDoctorRoleExperience
   skills:
     Bureaucracy:
-      level: 1
+      level: 2
     CombatTraining:
       level: 1
     Construction:
@@ -113,7 +113,7 @@
   id: ParamedicRoleExperience
   skills:
     Bureaucracy:
-      level: 1
+      level: 2
     CombatTraining:
       level: 1
     Construction:
@@ -130,7 +130,7 @@
   id: PsychologistRoleExperience
   skills:
     Bureaucracy:
-      level: 1
+      level: 2
     CombatTraining:
       level: 1
     Construction:

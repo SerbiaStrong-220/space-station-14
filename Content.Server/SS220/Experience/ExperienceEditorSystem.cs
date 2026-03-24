@@ -3,6 +3,7 @@
 using Content.Server.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.GameTicking;
+using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.SS220.Experience;
 using Content.Shared.SS220.Experience.Systems;
 using Robust.Server.Console;
@@ -22,11 +23,33 @@ public sealed class ExperienceEditorSystem : EntitySystem
     {
         base.Initialize();
 
-        // SubscribeLocalEvent<ExperienceComponent, Cultii>
+        SubscribeLocalEvent<ExperienceComponent, GotCultifiedEvent>(OnCultified);
+        SubscribeLocalEvent<ExperienceComponent, LiberationFromCultEvent>(OnLiberationFromCult);
 
         SubscribeNetworkEvent<ChangeEntityExperienceAdminRequest>(OnChangeAdminRequest);
         SubscribeNetworkEvent<ChangeEntityExperiencePlayerRequest>(OnChangePlayerRequest);
         SubscribeLocalEvent<RoundEndedEvent>(OnRoundEnd);
+    }
+
+    // !! DO NOT DO THE SAME !!
+    // It requires own system with dict like <obj, int> to resolve different sources of points
+    // just don't have time to implement & test it =(
+    // so you can actually make `god-add-experience` comp with own system to kill 10+ components and also do somewhat with role add knowledges or points
+    // zero idea should it be added with mindrole feels kinda other thing for this system
+    private void OnCultified(Entity<ExperienceComponent> entity, ref GotCultifiedEvent args)
+    {
+        var addPointsComp = EnsureComp<AntagFreeSublevelPointsAddComponent>(entity);
+
+        if (addPointsComp.AddFreeSublevelPoints < 5)
+            addPointsComp.AddFreeSublevelPoints = 5;
+    }
+
+    private void OnLiberationFromCult(Entity<ExperienceComponent> entity, ref LiberationFromCultEvent args)
+    {
+        var addPointsComp = EnsureComp<AntagFreeSublevelPointsAddComponent>(entity);
+
+        if (addPointsComp.AddFreeSublevelPoints == 5)
+            RemComp<AntagFreeSublevelPointsAddComponent>(entity);
     }
 
     private void OnChangeAdminRequest(ChangeEntityExperienceAdminRequest ev, EntitySessionEventArgs args)

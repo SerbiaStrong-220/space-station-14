@@ -41,7 +41,7 @@
   id: SeniorResearcherRoleExperience
   skills:
     Bureaucracy:
-      level: 1
+      level: 2
     ExtravehicularActivity:
       level: 1
     CombatTraining:
@@ -60,7 +60,7 @@
   id: ScientistRoleExperience
   skills:
     Bureaucracy:
-      level: 1
+      level: 2
     ExtravehicularActivity:
       level: 1
     CombatTraining:
