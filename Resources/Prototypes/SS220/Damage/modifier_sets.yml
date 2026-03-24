@@ -185,3 +185,14 @@
     Slash: 0.4
     Piercing: 0.6
     Heat: 0.4
+
+- type: damageModifierSet
+  id: WatermelonDog
+  coefficients:
+    Blunt: 0.7
+    Slash: 1.3
+    Piercing: 1.3
+    Shock: 1.3
+    Cold: 1.5
+    Poison: 0.6
+    Radiation: 0.5

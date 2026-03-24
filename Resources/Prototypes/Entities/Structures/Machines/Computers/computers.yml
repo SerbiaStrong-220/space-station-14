@@ -176,6 +176,11 @@
       state: generic_panel_open
   - type: Computer
     board: ShuttleConsoleCircuitboard
+  # SS220 add additional control for shuttle start
+  - type: DeviceList
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+  # SS220 add additional control for shuttle end
 
 - type: entity
   parent: BaseComputerShuttle

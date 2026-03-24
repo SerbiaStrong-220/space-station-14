@@ -1631,6 +1631,7 @@
     - FoodWatermelon
   mutationPrototypes:
     - holymelon
+    - watermelondog # SS220-watermelondog
   lifespan: 55
   maturation: 12
   production: 3

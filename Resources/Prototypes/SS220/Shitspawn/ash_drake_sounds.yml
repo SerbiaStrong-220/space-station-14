@@ -1,0 +1,17 @@
+- type: soundCollection
+  id: FootstepDrake
+  files:
+  - /Audio/SS220/Shitspawn/AshDrake/footstep.ogg
+
+- type: soundCollection
+  id: DrakeRoar
+  files:
+  - /Audio/SS220/Shitspawn/AshDrake/roar.ogg
+
+- type: emoteSounds
+  id: AshDrakeRoar
+  sound:
+    collection: DrakeRoar
+  sounds:
+    AshDrakeRoar:
+      collection: DrakeRoar
