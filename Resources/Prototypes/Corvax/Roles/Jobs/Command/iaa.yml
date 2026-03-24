@@ -1,6 +1,7 @@
 - type: job
   id: IAA
   name: job-name-iaa
+  # setPreference: false # SS220 TODO NanoTraisen Representative
   playTimeTracker: JobIAA
   requirements:
   - !type:DepartmentTimeRequirement
