@@ -24,7 +24,7 @@
             BlueShield: [ 1, 1 ]
             HeadOfPersonnel: [ 1, 1 ]
             #Law
-            #NanoTrasenRepresentative: [ 1, 1 ] # TODO SS220
+            #NanoTrasenRepresentative: [ 1, 1 ] #SS220 TODO NanoTraisen Representative
             IAA: [ 2, 2 ]
             Magistrate: [1, 1]
             Lawyer: [ 3, 3 ]

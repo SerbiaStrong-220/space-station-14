@@ -4,6 +4,6 @@ ent-AltRnDDirPDA = альтернативный КПК научного руко
 ent-MagistratePDA = КПК магистрата
     .desc = Концентрация правосудия. Не захлебнитесь!
 ent-NanoTrasenRepresentativePDA = КПК представителя НаноТрейзен
-    .desc = Придумать смешное описание. TODO SS220
+    .desc = Пахнет документами.
 ent-BlueShieldPDA = КПК офицера "Синий Щит"
     .desc = Неповторимый стиль.

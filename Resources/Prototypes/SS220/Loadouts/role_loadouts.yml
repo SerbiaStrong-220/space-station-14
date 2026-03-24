@@ -4,7 +4,7 @@
 
   # Представитель НаноТрейзен
 - type: roleLoadout
-  id: JobNanoTrasenRepresentative # TODO SS220
+  id: JobNanoTrasenRepresentative #SS220 TODO NanoTraisen Representative
   groups:
   - IAAHead
   - IAAHeadset

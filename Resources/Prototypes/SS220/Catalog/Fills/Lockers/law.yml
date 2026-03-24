@@ -29,7 +29,7 @@
 
 # Magistrate
 - type: entityTable
-  id: LockerFillNanoTrasenRepresentative # TODO SS220
+  id: LockerFillNanoTrasenRepresentative #SS220 TODO NanoTraisen Representative
   table: !type:AllSelector
     children:
     - id: ClothingHeadsetAltMagistrate
@@ -47,9 +47,9 @@
     - id: GavelStand
 
 - type: entity
+  parent: LockerNanoTrasenRepresentative
   id: LockerNanoTrasenRepresentativeFilled
   suffix: Filled
-  parent: LockerNanoTrasenRepresentative
   components:
   - type: EntityTableContainerFill
     containers:

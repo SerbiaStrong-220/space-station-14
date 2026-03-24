@@ -11,6 +11,6 @@
 - type: accessGroup
   id: Lawyer
   tags:
-  - Magistrate # TODO SS220
+  - Magistrate #SS220 TODO NanoTraisen Representative
   # - NanoTrasenRepresentative
   - Lawyer

@@ -124,7 +124,7 @@
   parent: BasePDA
   id: NanoTrasenRepresentativePDA
   name: NanoTrasen Representative PDA
-  description: Add funny description. TODO SS220
+  description: Smells like documents.
   components:
   - type: Pda
     id: NanoTrasenRepresentativeIDCard

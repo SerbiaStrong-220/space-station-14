@@ -143,11 +143,11 @@
   components:
   - type: Stamp
     stampedName: stamp-component-stamped-name-nanotrasen-representative
-    stampedColor: "#eebe35" # TODO SS220
-    stampState: "paper_stamp-centcom" # TODO SS220
+    stampedColor: "#eebe35" #SS220 TODO NanoTraisen Representative
+    stampState: "paper_stamp-centcom" #SS220 TODO NanoTraisen Representative
   - type: Sprite
     sprite: SS220/Objects/Misc/stamps.rsi
-    state: stamp-centcom # TODO SS220
+    state: stamp-centcom #SS220 TODO NanoTraisen Representative
 
 - type: entity
   name: Blue Shield rubber stamp
