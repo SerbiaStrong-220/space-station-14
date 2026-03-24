@@ -304,6 +304,32 @@
     FoodBowlBig: 1
 
 - type: microwaveMealRecipe
+  id: RecipeBnuuyBurger
+  name: bnuuy burger recipe
+  result: FoodBurgerBnuuy
+  time: 10
+  group: Savory
+  solids:
+    FoodBreadBun: 1
+    FoodMeatRabbitBnuuy: 1
+    ClothingHeadHatCapWardenAlt: 1
+
+- type: microwaveMealRecipe
+  id: RecipeBnuuyBakedOrange
+  name: bnuuy baked with oranges recipe
+  result: FoodMeatRabbitBnuuyBakedOrange
+  time: 20
+  group: Savory
+  reagents:
+    Soysauce: 10
+    JuiceOrange: 20
+  solids:
+    FoodMeatRabbitBnuuy: 2
+    FoodPlate: 1
+    FoodOrange: 2
+    FoodOnionSlice: 1
+
+- type: microwaveMealRecipe
   id: RecipeFoodMealEggsbenedict
   name: food meal eggsbenedict
   result: FoodMealEggsbenedict

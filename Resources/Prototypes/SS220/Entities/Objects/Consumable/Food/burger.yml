@@ -1,0 +1,36 @@
+- type: entity
+  parent: FoodBurgerBase
+  id: FoodBurgerBnuuy
+  name: bnuuyburger
+  description: "You're a monster."
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/burger.rsi
+    state: bnuuy
+  - type: Item
+    size: Normal
+    shape:
+    - 0,0,1,1
+    storedOffset: -1,2
+    inhandVisuals:
+      left:
+      - state: bnuuy-inhand-left
+      right:
+      - state: bnuuy-inhand-right
+  - type: FlavorProfile
+    flavors:
+      - bun
+      - bnuuynyatina
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Protein
+          Quantity: 4
+        - ReagentId: Vitamin
+          Quantity: 7
+        - ReagentId: Aglomorphine
+          Quantity: 2
