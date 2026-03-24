@@ -86,3 +86,145 @@
     tags:
     - CannotSuicide
     - VimPilot
+
+- type: entity
+  parent: [ SimpleMobBase, StripableInventoryBase, MobPassiveCollision ]
+  id: MobRabbitBnuuy
+  name: Bnuuy
+  description: In addition to its fluffiness, love of carrots, and lively personality, it has a strong attachment to its owner. After all, even the Wardens needs someone to look after him.
+  components:
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3.5
+    baseSprintSpeed: 8 # In the future, with the introduction of "sprint" mechanics, the speed will be reduced with the addition of a fast sprint.
+  - type: Language
+    availableLanguages:
+    - id: Mousey
+      canSpeak: true
+    - id: Doggish
+      canSpeak: false
+    - id: Galactic
+      canSpeak: false
+    - id: Feline
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  - type: Speech
+    speechVerb: SmallMob
+    speechSounds: SqueakBnuuy
+    allowedEmotes: ['Squeak']
+  - type: Sprite
+    drawdepth: SmallMobs
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      sprite: SS220/Mobs/Pets/bnuuy.rsi
+      state: bnuuy
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.1
+        density: 120
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: MobState
+  - type: Deathgasp
+  - type: MobStateActions
+    actions:
+      Critical:
+      - ActionCritSuccumb
+      - ActionCritFakeDeath
+      - ActionCritLastWords
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      40: Critical
+      60: Dead
+  - type: Inventory
+    speciesId: rabbitBnuuy
+    templateId: rabbitBnuuyinventory
+    displacements:
+      eyes:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Pets/displacements.rsi
+            state: bnuuy_eyes_displacement
+      head:
+        sizeMaps:
+          32:
+            sprite: SS220/Mobs/Pets/displacements.rsi
+            state: bnuuy_head_displacement
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: bnuuy
+      Critical:
+        Base: bnuuy_critical
+      Dead:
+        Base: bnuuy_dead
+  - type: Hunger
+    baseDecayRate: 0.3
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Blood
+          Quantity: 55
+        - ReagentId: Fat
+          Quantity: 5
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatRabbitBnuuy
+      amount: 2
+  - type: Respirator
+    damage:
+      types:
+        Asphyxiation: 0.25
+    damageRecovery:
+      types:
+        Asphyxiation: -0.25
+  - type: Barotrauma
+    damage:
+      types:
+        Blunt: 0.1
+  - type: MeleeWeapon
+    soundHit:
+        path: /Audio/Effects/bite.ogg
+    damage:
+      types:
+        Piercing: 3
+  - type: Bloodstream
+    bloodMaxVolume: 60
+  - type: CanEscapeInventory
+    baseResistTime: 3
+  - type: MobPrice
+    price: 60
+  - type: NonSpreaderZombie
+  - type: FireVisuals
+    sprite: Mobs/Effects/onfire.rsi
+    normalState: Mouse_burning
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 120
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+  - type: InteractionPopup
+    successChance: 0.5
+    interactSuccessString: petting-success-rabbit
+    interactFailureString: petting-failure-rabbit
+    interactSuccessSpawn: EffectHearts
+    interactSuccessSound:
+      path: /Audio/SS220/Animals/bnuuy_squeak_2.ogg

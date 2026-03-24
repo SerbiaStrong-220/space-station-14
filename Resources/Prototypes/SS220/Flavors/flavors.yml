@@ -72,3 +72,13 @@
   id: olivier
   flavorType: Complex
   description: flavor-complex-olivier
+
+- type: flavor
+  id: bnuuynyatina
+  flavorType: Base
+  description: flavor-base-bnuuynyatina
+
+- type: flavor
+  id: driedbnuuynyatina
+  flavorType: Base
+  description: flavor-base-driedbnuuynyatina
