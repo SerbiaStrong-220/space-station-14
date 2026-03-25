@@ -36,7 +36,7 @@ public sealed class DnaLockClothingSystem : EntitySystem
 
         while (query.MoveNext(out var uid, out var active, out var clothing))
         {
-            if (!EntityManager.EntityExists(active.WearerUid))
+            if (TerminatingOrDeleted(active.WearerUid))
             {
                 RemComp<DnaLockClothingActiveComponent>(uid);
                 continue;
@@ -48,7 +48,7 @@ public sealed class DnaLockClothingSystem : EntitySystem
                 continue;
             }
 
-            // Биппер и попап обратного отсчета
+            // Beeper and popap countdown
             if (curTime >= active.NextBeepAt)
             {
                 var timeLeft = (int)(active.ExplodeAt - curTime).TotalSeconds;
@@ -81,7 +81,7 @@ public sealed class DnaLockClothingSystem : EntitySystem
 
         PlayInitialWarning(ent.Owner, wearer, ent.Comp);
 
-        // Запуск таймера
+        // Starting the timer
         var curTime = _timing.CurTime;
         var active = EnsureComp<DnaLockClothingActiveComponent>(ent);
         active.WearerUid = wearer;
@@ -139,13 +139,13 @@ public sealed class DnaLockClothingSystem : EntitySystem
     {
         var wearer = active.WearerUid;
 
-        if (EntityManager.EntityExists(wearer))
+        if (!TerminatingOrDeleted(active.WearerUid))
         {
             var detonMsg = Loc.GetString("dna-lock-clothing-detonating");
             _popup.PopupEntity(detonMsg, wearer, Filter.Pvs(wearer), recordReplay: true, type: PopupType.LargeCaution);
         }
 
-        var epicenterUid = EntityManager.EntityExists(wearer) ? wearer : itemUid;
+        var epicenterUid = !TerminatingOrDeleted(active.WearerUid) ? wearer : itemUid;
 
         _explosion.QueueExplosion(
             epicenterUid,
