@@ -33,7 +33,7 @@ accent-pirate-replacement-11 = вам
 
 accent-pirate-replaced-12 = вас
 accent-pirate-replacement-12 = вас
-# SS220 - bug fix - end
+# SS220 pirate-accent-fix end
 
 accent-pirate-replaced-13 = привет
 accent-pirate-replacement-13 = э-хей
