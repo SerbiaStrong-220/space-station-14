@@ -21,7 +21,7 @@ accent-pirate-replacement-7 = тысяча чертей
 accent-pirate-replaced-8 = пошел нахуй
 accent-pirate-replacement-8 = чтоб тебя черти драли
 
-# SS220 - bug fix - bgn
+# SS220 pirate-accent-fix begin
 accent-pirate-replaced-9 = вы
 accent-pirate-replacement-9 = вы
 
