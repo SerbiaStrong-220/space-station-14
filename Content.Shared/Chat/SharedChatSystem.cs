@@ -161,9 +161,9 @@ public abstract partial class SharedChatSystem : EntitySystem
 
         // SS220-Fix-DefaultRadioPrefix-begin
         var channelKey = char.ToLower(input[1]);
-        if (!_keyCodes.TryGetValue((channelKey), out _) && channelKey != DefaultChannelKey)
+        if (!_keyCodes.TryGetValue(channelKey, out _) && channelKey != DefaultChannelKey)
             return;
-        //SS220-Fix-DefaultRadioPrefix-end
+        // SS220-Fix-DefaultRadioPrefix-end
 
         prefix = input[..2];
         output = input[2..];
