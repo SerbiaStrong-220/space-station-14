@@ -9,51 +9,51 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared.SS220.DnaLock.Components;
 
 /// <summary>
-/// Компонент для одежды с ДНК-локом: если неавторизованный персонаж надевает предмет,
-/// запускается таймер с бипом и попапом. По истечению - взрыв и удаление предмета.
-/// Требует наличия DnaLockableComponent на том же объекте.
+/// Clothing component with a DNA lock: when an unauthorized user equips the item,
+/// it starts a warning timer with beeps and popups. When the timer expires, the item detonates and is deleted.
+/// Requires a DnaLockableComponent on the same entity.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class DnaLockClothingComponent : Component
 {
     /// <summary>
-    /// Время до взрыва после надевания неавторизованным пользователем
+    /// Time until detonation after an unauthorized user equips the item.
     /// </summary>
     [DataField, AutoNetworkedField]
     public TimeSpan TimeToExplode = TimeSpan.FromSeconds(5);
 
     /// <summary>
-    /// Интервал между сигналами бипера
+    /// Interval between warning beeps.
     /// </summary>
     [DataField, AutoNetworkedField]
     public TimeSpan BeepInterval = TimeSpan.FromSeconds(1);
 
     /// <summary>
-    /// Звук предупреждения (бипа)
+    /// Warning beep sound.
     /// </summary>
     [DataField]
     public SoundSpecifier WarningSound = new SoundPathSpecifier("/Audio/Items/beep.ogg");
 
     /// <summary>
-    /// Попап, видимый всем в зоне видимости
+    /// Popup shown to everyone in PVS.
     /// </summary>
     [DataField]
     public string WarningPopupOthers = "dna-lock-clothing-unauthorized-warning";
 
     /// <summary>
-    /// Попап для самого нарушителя
+    /// Popup shown to the unauthorized wearer.
     /// </summary>
     [DataField]
     public string WarningPopupWearer = "dna-lock-clothing-unauthorized-warning-self";
 
     /// <summary>
-    /// Попап обратного отсчета для окружающих
+    /// Countdown popup shown to nearby players.
     /// </summary>
     [DataField]
     public string TimerPopupOthers = "dna-lock-clothing-timer-warning";
 
     /// <summary>
-    /// Попап обратного отсчета для самого нарушителя
+    /// Countdown popup shown to the unauthorized wearer.
     /// </summary>
     [DataField]
     public string TimerPopupWearer = "dna-lock-clothing-timer-warning-self";
@@ -62,13 +62,13 @@ public sealed partial class DnaLockClothingComponent : Component
     public ProtoId<ExplosionPrototype> ExplosionType = SharedExplosionSystem.DefaultExplosionPrototypeId;
 
     /// <summary>
-    /// Интенсивность взрыва. Достаточно для крита, но не смерти <= так задумано
+    /// Explosion intensity. Intended to put the wearer into crit, not kill outright.
     /// </summary>
     [DataField]
     public float ExplosionTotalIntensity = 10f;
 
     /// <summary>
-    /// Затухание взрыва
+    /// Explosion falloff slope.
     /// </summary>
     [DataField]
     public float ExplosionSlope = 100f;

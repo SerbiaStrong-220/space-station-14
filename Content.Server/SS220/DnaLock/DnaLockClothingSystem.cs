@@ -48,7 +48,7 @@ public sealed class DnaLockClothingSystem : EntitySystem
                 continue;
             }
 
-            // Beeper and popap countdown
+            // Beeper and popup countdown
             if (curTime >= active.NextBeepAt)
             {
                 var timeLeft = (int)(active.ExplodeAt - curTime).TotalSeconds;
