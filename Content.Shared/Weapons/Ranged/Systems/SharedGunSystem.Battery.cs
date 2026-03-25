@@ -173,7 +173,7 @@ public abstract partial class SharedGunSystem
         Appearance.SetData(uid, AmmoVisuals.HasAmmo, component.Shots != 0, appearance);
         Appearance.SetData(uid, AmmoVisuals.AmmoCount, component.Shots, appearance);
         Appearance.SetData(uid, AmmoVisuals.AmmoMax, component.Capacity, appearance);
-        Appearance.SetData(uid, AmmoVisuals.MagLoaded, magLoaded, appearance); // SS220 - bug fixs
+        Appearance.SetData(uid, AmmoVisuals.MagLoaded, magLoaded, appearance); // SS220 power-cell-mag-fix
     }
 
     private (EntityUid? Entity, IShootable) GetShootable(BatteryAmmoProviderComponent component, EntityCoordinates coordinates)
