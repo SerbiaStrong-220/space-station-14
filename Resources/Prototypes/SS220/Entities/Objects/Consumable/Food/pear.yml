@@ -1,0 +1,66 @@
+- type: entity
+  name: pear
+  parent: FoodProduceBase
+  id: FoodPear
+  description: its a pear
+  components:
+  - type: FlavorProfile
+    flavors:
+      - pear
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 14
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Vitamin
+          Quantity: 4
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Hydroponics/pear.rsi
+  - type: Item
+    heldPrefix: produce
+  - type: Produce
+    seedId: pear
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: JuicePear
+        Quantity: 10
+  - type: Tag
+    tags:
+    - Fruit
+  - type: FoodSequenceElement
+    entries:
+      Burger: Pear
+      Taco: Pear
+
+- type: entity
+  name: pear tart
+  parent: FoodPieBase
+  id: FoodTartPear
+  description: Its a pear tart.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - sweet
+      - pear
+      - bread 
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/Baked/pie.rsi
+    state: pear
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+        - ReagentId: Vitamin
+          Quantity: 5
+        - ReagentId: Sugar
+          Quantity: 5
+  - type: Tag
+    tags:
+    - Fruit
+    - Pie

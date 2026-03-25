@@ -130,6 +130,16 @@
 
 - type: entity
   parent: SeedBase
+  name: пакет семян (груша)
+  id: PearSeeds
+  components:
+    - type: Seed
+      seedId: pear
+    - type: Sprite
+      sprite: SS220/Objects/Specific/Hydroponics/pear.rsi
+
+- type: entity
+  parent: SeedBase
   name: packet of watermelondog seeds
   id: WatermelonDogSeeds
   components:

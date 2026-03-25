@@ -74,6 +74,16 @@
   description: flavor-complex-olivier
 
 - type: flavor
+  id: pear
+  flavorType: Complex
+  description: flavor-complex-pear
+
+- type: flavor
+  id: dushes
+  flavorType: Complex
+  description: flavor-complex-dushes
+  
+- type: flavor
   id: bnuuynyatina
   flavorType: Base
   description: flavor-base-bnuuynyatina

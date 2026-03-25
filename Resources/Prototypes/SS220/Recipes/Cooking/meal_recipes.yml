@@ -1,4 +1,4 @@
-# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+# � SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: microwaveMealRecipe
   id: RecipeCheburek
@@ -502,3 +502,16 @@
   solids:
     FoodMeatBear: 1
     FoodMeatFish: 2
+
+- type: microwaveMealRecipe
+  id: RecipePearTart
+  name: pear tart recipe
+  result: FoodTartPear
+  time: 15
+  reagents:
+    Sugar: 5
+    Milk: 5
+  solids:
+    FoodDoughPie: 1
+    FoodPear: 3
+    FoodPlateTin: 1

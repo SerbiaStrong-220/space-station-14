@@ -1,0 +1,10 @@
+# Pear
+
+- type: foodSequenceElement
+  id: Pear
+  name: food-sequence-content-pear
+  sprites:
+  - sprite: SS220/Objects/Specific/Hydroponics/pear.rsi
+    state: produce
+  tags:
+  - Fruit
