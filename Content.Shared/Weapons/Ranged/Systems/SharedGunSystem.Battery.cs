@@ -161,7 +161,7 @@ public abstract partial class SharedGunSystem
         if (!TryComp<AppearanceComponent>(uid, out var appearance))
             return;
 
-        // SS220 - bug fixs - BGN
+        // SS220 power-cell-mag-fix begin
         var magLoaded = true;
         if (TryComp<PowerCellSlotComponent>(uid, out var slotComp))
         {
