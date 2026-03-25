@@ -17,5 +17,3 @@ id-card-access-level-librarian = Библиотекарь
 id-card-access-level-reporter = Репортёр
 id-card-access-level-musician = Музыкант
 id-card-access-level-clown = Клоун
-
-id-card-access-level-interdyne = Интердайн
