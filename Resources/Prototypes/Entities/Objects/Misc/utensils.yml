@@ -141,8 +141,10 @@
     tags:
     - Metal
   - type: Sprite
+    sprite: SS220/Objects/Misc/utensils.rsi #SS220 Resprite
     state: bar_spoon
   - type: Item
+    sprite: SS220/Objects/Misc/utensils.rsi #SS220 Resprite
     heldPrefix: spoon
   - type: Utensil
     types:
