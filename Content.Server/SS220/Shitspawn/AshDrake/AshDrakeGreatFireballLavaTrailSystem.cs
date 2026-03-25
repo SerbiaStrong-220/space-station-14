@@ -1,8 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Physics.Events;
 using System.Numerics;
 
 namespace Content.Server.SS220.Shitspawn.AshDrake;
@@ -11,12 +9,6 @@ public sealed class AshDrakeGreatFireballLavaTrailSystem : EntitySystem
 {
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<AshDrakeGreatFireballLavaTrailComponent, StartCollideEvent>(OnCollide);
-    }
-
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -24,28 +16,20 @@ public sealed class AshDrakeGreatFireballLavaTrailSystem : EntitySystem
         var query = EntityQueryEnumerator<AshDrakeGreatFireballLavaTrailComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
+            if (!TryComp<TransformComponent>(uid, out var xform))
+                continue;
+
             comp.TimeSinceLastLava += frameTime;
             if (comp.TimeSinceLastLava < AshDrakeGreatFireballLavaTrailComponent.LavaTrailInterval)
                 continue;
 
             comp.TimeSinceLastLava = 0f;
-            SpawnLavaAt(uid);
+            SpawnLavaAt(uid, xform);
         }
     }
 
-    private void OnCollide(EntityUid uid, AshDrakeGreatFireballLavaTrailComponent comp, ref StartCollideEvent args)
+    private void SpawnLavaAt(EntityUid uid, TransformComponent xform)
     {
-        if (!args.OtherFixture.Hard || Deleted(uid))
-            return;
-
-        var coords = Transform(uid).Coordinates;
-        Spawn("AshDrakeGreatFireballExplosion", coords);
-        Del(uid);
-    }
-
-    private void SpawnLavaAt(EntityUid uid)
-    {
-        var xform = Transform(uid);
         if (xform.GridUid == null || !TryComp<MapGridComponent>(xform.GridUid, out var grid))
             return;
 
@@ -55,8 +39,7 @@ public sealed class AshDrakeGreatFireballLavaTrailSystem : EntitySystem
         for (var x = -1; x <= 1; x++)
         for (var y = -1; y <= 1; y++)
         {
-            var offset = new Vector2i(center.X + x, center.Y + y);
-            Spawn("AshDrakeFlyLava", grid.GridTileToLocal(offset));
+            Spawn("AshDrakeFlyLava", grid.GridTileToLocal(new Vector2i(center.X + x, center.Y + y)));
         }
     }
 }

@@ -3,9 +3,9 @@ using Content.Shared.Actions;
 using Content.Shared.Mobs;
 using Content.Shared.SS220.Shitspawn.AshDrake;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Random;
 using System.Numerics;
@@ -50,7 +50,11 @@ public sealed class AshDrakeFlySystem : EntitySystem
             if (!comp.IsFlying)
                 continue;
 
-            var xform = Transform(uid);
+            if (!TryComp<TransformComponent>(uid, out var xform))
+            {
+                _toRemove.Add(uid);
+                continue;
+            }
 
             if (xform.MapID != data.MapId)
             {
@@ -81,7 +85,9 @@ public sealed class AshDrakeFlySystem : EntitySystem
     }
 
     private void OnMapInit(EntityUid uid, AshDrakeFlyComponent comp, MapInitEvent args)
-        => _actions.AddAction(uid, ref comp.ActionEntity, comp.ActionId);
+    {
+        _actions.AddAction(uid, ref comp.ActionEntity, comp.ActionId);
+    }
 
     private void OnShutdown(EntityUid uid, AshDrakeFlyComponent comp, ComponentShutdown args)
     {
@@ -99,7 +105,7 @@ public sealed class AshDrakeFlySystem : EntitySystem
         var targetMap = _transform.ToMapCoordinates(args.Target);
         _flying[uid] = (new Vector2(targetMap.X, targetMap.Y), targetMap.MapId);
 
-        if (TryComp(uid, out Robust.Shared.Physics.Components.PhysicsComponent? body))
+        if (TryComp(uid, out PhysicsComponent? body))
             _physics.SetLinearVelocity(uid, Vector2.Zero, body: body);
 
         _audio.PlayPvs(comp.FlySound, uid);

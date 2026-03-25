@@ -132,3 +132,16 @@
     stateDoorClosed: magistrate_door
   - type: AccessReader
     access: [ [ "Magistrate" ] ]
+
+- type: entity
+  id: LockerNanoTrasenRepresentative
+  parent: LockerBase
+  name: NanoTrasen Representative locker
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: nt
+    stateDoorOpen: medsteel_open
+    stateDoorClosed: magistrate_door
+  - type: AccessReader
+    access: [ [ "NanoTrasenRepresentative" ] ]

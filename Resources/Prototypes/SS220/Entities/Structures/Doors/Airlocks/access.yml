@@ -42,6 +42,28 @@
     containers:
       board: [ DoorElectronicsMagistrate ]
 
+- type: entity
+  parent: AirlockCommandGlass
+  id: AirlockNanoTrasenRepresentativeGlassLocked
+  suffix: NanoTrasen Representative, Locked
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Doors/Airlocks/Glass/magistrate.rsi
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsNanoTrasenRepresentative ]
+
+- type: entity
+  parent: Airlock
+  id: AirlockNanoTrasenRepresentativeLocked
+  suffix: NanoTrasen Representative, Locked
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Doors/Airlocks/Standard/magistrate.rsi
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsNanoTrasenRepresentative ]
+
 # Clown
 - type: entity
   parent: AirlockGlass
