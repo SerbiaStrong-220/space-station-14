@@ -74,17 +74,15 @@ public sealed class DnaLockClothingSystem : EntitySystem
         if (!TryComp<DnaLockableComponent>(ent, out var dnaLock))
             return;
 
-        var wearer = args.Wearer;
-
-        if (_dnaLock.CheckAccess((ent.Owner, dnaLock), wearer, silentFail: true))
+        if (_dnaLock.CheckAccess((ent.Owner, dnaLock), args.Wearer, silentFail: true))
             return;
 
-        PlayInitialWarning(ent.Owner, wearer, ent.Comp);
+        PlayInitialWarning(ent.Owner, args.Wearer, ent.Comp);
 
         // Starting the timer
         var curTime = _timing.CurTime;
         var active = EnsureComp<DnaLockClothingActiveComponent>(ent);
-        active.WearerUid = wearer;
+        active.WearerUid = args.Wearer;
         active.ExplodeAt = curTime + ent.Comp.TimeToExplode;
         active.NextBeepAt = curTime + ent.Comp.BeepInterval;
     }
