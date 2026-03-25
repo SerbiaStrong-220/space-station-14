@@ -168,7 +168,7 @@ public abstract partial class SharedGunSystem
             magLoaded = _slots.TryGetSlot(uid, slotComp.CellSlotId, out var itemSlot) &&
                         itemSlot.Item is not null;
         }
-        // SS220 - bug fixs - END
+        // SS220 power-cell-mag-fix end
 
         Appearance.SetData(uid, AmmoVisuals.HasAmmo, component.Shots != 0, appearance);
         Appearance.SetData(uid, AmmoVisuals.AmmoCount, component.Shots, appearance);
