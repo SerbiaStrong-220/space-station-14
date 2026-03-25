@@ -156,6 +156,24 @@
         sprite: Mobs/Effects/burn_damage.rsi
   - type: ProtectedFromStepTriggers
   - type: EyeProtection
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTypeTrigger
+        damageType: Heat
+        damage: 1500
+      behaviors:
+      - !type:EmptyContainersBehaviour
+        containers:
+        - cell_slot
+      - !type:GibBehavior {}
+    - trigger: !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 400
+      behaviors:
+      - !type:EmptyContainersBehaviour
+        containers:
+        - cell_slot
+      - !type:GibBehavior {}
 
 - type: entity
   save: false
