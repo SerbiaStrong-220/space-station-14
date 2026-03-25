@@ -25,7 +25,6 @@ namespace Content.Server.SS220.Medical;
 
 public sealed class HealthAnalyzerPrintSystem : EntitySystem
 {
-
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly PaperSystem _paperSystem = default!;
@@ -33,6 +32,7 @@ public sealed class HealthAnalyzerPrintSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
     [Dependency] private readonly SharedDocumentHelperSystem _documentHelper = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!; // SS220-health-analyzer-report
     [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
@@ -40,25 +40,29 @@ public sealed class HealthAnalyzerPrintSystem : EntitySystem
         SubscribeLocalEvent<HealthAnalyzerComponent, HealthAnalyzerPrintMessage>(OnPrint);
     }
 
-    private void OnPrint(EntityUid uid, HealthAnalyzerComponent component, HealthAnalyzerPrintMessage args)
+    private void OnPrint(Entity<HealthAnalyzerComponent> ent, ref HealthAnalyzerPrintMessage args)
     {
-        if (!component.CanPrint)
+        var uid = ent.Owner;
+        var comp = ent.Comp;
+        var user = args.Actor;
+
+        if (!comp.CanPrint)
             return;
 
-        if (_timing.CurTime < component.PrintReadyAt)
+        if (_timing.CurTime < comp.PrintReadyAt)
         {
-            _popupSystem.PopupEntity(Loc.GetString("health-analyzer-printer-not-ready"), uid, args.Actor);
+            _popupSystem.PopupEntity(Loc.GetString("health-analyzer-printer-not-ready"), uid, user);
             return;
         }
 
-        if (string.IsNullOrWhiteSpace(component.LastScannedReport))
+        if (string.IsNullOrWhiteSpace(comp.LastScannedReport))
         {
-            _popupSystem.PopupEntity(Loc.GetString("health-analyzer-printer-no-data"), uid, args.Actor);
+            _popupSystem.PopupEntity(Loc.GetString("health-analyzer-printer-no-data"), uid, user);
             return;
         }
 
-        var printed = Spawn(component.MachineOutput, Transform(uid).Coordinates);
-        _handsSystem.PickupOrDrop(args.Actor, printed, checkActionBlocker: false);
+        var printed = Spawn(comp.MachineOutput, Transform(uid).Coordinates);
+        _handsSystem.PickupOrDrop(user, printed, checkActionBlocker: false);
 
         if (!TryComp<PaperComponent>(printed, out var paperComp))
         {
@@ -66,11 +70,11 @@ public sealed class HealthAnalyzerPrintSystem : EntitySystem
             return;
         }
 
-        _metaData.SetEntityName(printed, Loc.GetString("health-analyzer-report-title", ("entity", component.LastScannedName)));
-        _paperSystem.SetContent((printed, paperComp), component.LastScannedReport);
-        EntityManager.System<SharedAudioSystem>().PlayPvs(component.SoundPrint, uid);
+        _metaData.SetEntityName(printed, Loc.GetString("health-analyzer-report-title", ("entity", comp.LastScannedName)));
+        _paperSystem.SetContent((printed, paperComp), comp.LastScannedReport);
+        _audio.PlayPvs(comp.SoundPrint, uid);
 
-        component.PrintReadyAt = _timing.CurTime + component.PrintCooldown;
+        comp.PrintReadyAt = _timing.CurTime + comp.PrintCooldown;
     }
 
     public string BuildScanReport(

@@ -2,6 +2,7 @@ using Content.Server.Medical.Components;
 using Content.Server.PowerCell;
 using Content.Shared.Body.Components;
 using Content.Server.SS220.LimitationRevive; //SS220 LimitationRevive
+using Content.Server.SS220.Medical;
 using Content.Shared.Traits.Assorted;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage;
@@ -42,6 +43,7 @@ public sealed class HealthAnalyzerSystem : EntitySystem
     [Dependency] private readonly PaperSystem _paperSystem = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly HealthAnalyzerPrintSystem _healthSystem = default!;
     // SS220-health-analyzer-report - end
 
     public override void Initialize()
@@ -196,7 +198,7 @@ public sealed class HealthAnalyzerSystem : EntitySystem
     /// <param name="scanMode">True makes the UI show ACTIVE, False makes the UI show INACTIVE</param>
     public void UpdateScannedUser(EntityUid healthAnalyzer, EntityUid target, bool scanMode)
     {
-        if (!TryComp(healthAnalyzer, out HealthAnalyzerComponent? healthAnalyzerComp)) // SS220-health-analyzer-report
+        if (!TryComp<HealthAnalyzerComponent>(healthAnalyzer, out var healthAnalyzerComp)) // SS220-health-analyzer-report
             return;
 
         if (!TryComp<DamageableComponent>(target, out var damageable)) // SS220-health-analyzer-report
@@ -234,7 +236,7 @@ public sealed class HealthAnalyzerSystem : EntitySystem
             : Loc.GetString("health-analyzer-window-entity-unknown-text");
 
         healthAnalyzerComp.LastScannedName = scannedName;
-        healthAnalyzerComp.LastScannedReport = EntityManager.System<Content.Server.SS220.Medical.HealthAnalyzerPrintSystem>().BuildScanReport(
+        healthAnalyzerComp.LastScannedReport = _healthSystem.BuildScanReport(
             target,
             damageable,
             scannedName,

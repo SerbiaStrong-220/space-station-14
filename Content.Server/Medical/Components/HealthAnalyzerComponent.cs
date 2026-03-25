@@ -1,3 +1,4 @@
+using Content.Server.SS220.Medical;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
@@ -12,7 +13,7 @@ namespace Content.Server.Medical.Components;
 /// Requires <c>ItemToggleComponent</c>.
 /// </remarks>
 [RegisterComponent, AutoGenerateComponentPause]
-[Access(typeof(HealthAnalyzerSystem), typeof(CryoPodSystem), typeof(Content.Server.SS220.Medical.HealthAnalyzerPrintSystem))]
+[Access(typeof(HealthAnalyzerSystem), typeof(CryoPodSystem), typeof(HealthAnalyzerPrintSystem))] // SS220-health-analyzer-report
 public sealed partial class HealthAnalyzerComponent : Component
 {
     /// <summary>
@@ -80,8 +81,8 @@ public sealed partial class HealthAnalyzerComponent : Component
     /// <summary>
     /// The paper entity spawned when printing a report
     /// </summary>
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string MachineOutput = "HealthAnalyzerReportPaper";
+    [DataField]
+    public EntProtoId MachineOutput = "HealthAnalyzerReportPaper";
 
     /// <summary>
     /// Name of the last scanned patient, used for report titles
@@ -102,8 +103,7 @@ public sealed partial class HealthAnalyzerComponent : Component
     /// <summary>
     /// Next time when report printing becomes available.
     /// </summary>
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
-    [AutoPausedField]
+    [DataField, AutoPausedField]
     public TimeSpan PrintReadyAt = TimeSpan.Zero;
     // SS220-health-analyzer-report - end
 }
