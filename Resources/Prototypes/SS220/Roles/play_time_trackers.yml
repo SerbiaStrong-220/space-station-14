@@ -17,6 +17,9 @@
   id: JobMagistrate
 
 - type: playTimeTracker
+  id: JobNanoTrasenRepresentative
+
+- type: playTimeTracker
   id: JobSecurityPet
 
 - type: playTimeTracker

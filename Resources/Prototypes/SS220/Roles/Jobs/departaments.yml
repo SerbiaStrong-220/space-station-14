@@ -5,6 +5,7 @@
   description: department-law-description
   color: "#323ba9"
   roles:
+  #- NanoTrasenRepresentative #SS220 TODO NanoTraisen Representative
   - Magistrate
   - IAA
   - Lawyer

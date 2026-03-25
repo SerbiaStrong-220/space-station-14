@@ -116,8 +116,8 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitNTR
-  name: nanotrasen representative uniform
-  description: The uniform of the NanoTrasen representative. Carry the truth of the corporation with your own hands.
+  name: NanoTrasen Representative uniform
+  description: The uniform of the NanoTrasen Representative. Carry the truth of the corporation with your own hands.
   suffix: For playtime
   components:
   - type: Sprite

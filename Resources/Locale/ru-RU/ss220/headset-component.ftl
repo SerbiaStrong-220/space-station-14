@@ -8,7 +8,7 @@ chat-radio-honk = Хонк-сквад
 
 chat-radio-law = Юридический
 
-chat-radio-nanotrasen-operatives = Силы Нанотрейзен
+chat-radio-nanotrasen-operatives = Силы НаноТрейзен
 chat-radio-syndicate-operatives = Силы Синдиката
 
 base-frequency-channel-name = Частота-{NATURALFIXED($freq, 2)}

@@ -4,7 +4,7 @@
   parent: Clothing
   id: ClothingWristWatch
   name: наручные часы
-  description: Показывают точное время. Произведено Нанотрейзен.
+  description: Показывают точное время. Произведено НаноТрейзен.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Hands/WristWatch/nt-watch.rsi
@@ -61,7 +61,7 @@
   parent: ClothingWristWatch
   id: ClothingWristWatchGold
   name: наручные часы командования
-  description: Показывают точное время. Произведено Нанотрейзен специально для командного состава.
+  description: Показывают точное время. Произведено НаноТрейзен специально для командного состава.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Hands/WristWatch/nt-watch-gold.rsi

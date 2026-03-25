@@ -150,6 +150,24 @@
       - WhitelistChameleonIdCard
     #ss220 add pdaidpainter end
 
+- type: entity
+  parent: IDCardStandard
+  id: NanoTrasenRepresentativeIDCard
+  name: NanoTrasen Representative ID card
+  components:
+    - type: Sprite
+      layers:
+        - state: silver
+        - state: idmagistrate
+    - type: PresetIdCard
+      job: NanoTrasenRepresentative
+    - type: Tag
+      tags:
+      - WhitelistPdaIdPainter
+      - DoorBumpOpener
+      - WhitelistChameleon
+      - WhitelistChameleonIdCard
+
 # Deathsquad
 - type: entity
   parent: IDCardStandard
