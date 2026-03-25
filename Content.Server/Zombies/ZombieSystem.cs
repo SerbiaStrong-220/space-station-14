@@ -341,6 +341,7 @@ namespace Content.Server.Zombies
             }
             _humanoidAppearance.SetSkinColor(target, zombiecomp.BeforeZombifiedSkinColor, false);
             _bloodstream.ChangeBloodReagent(target, zombiecomp.BeforeZombifiedBloodReagent);
+            _faction.RemoveFaction(target, ZombieFaction); // SS220 - Bug fixs
 
             //SS220 ZOMBIE NAME FIX START (fix: https://github.com/SerbiaStrong-220/space-station-14/issues/1651 && https://github.com/SerbiaStrong-220/space-station-14/issues/1567)
             var targetModifierComponent = AddComp<NameModifierComponent>(target);
@@ -358,7 +359,6 @@ namespace Content.Server.Zombies
         private void OnZombieCloning(Entity<ZombieComponent> ent, ref CloningEvent args)
         {
             UnZombify(ent.Owner, args.CloneUid, ent.Comp);
-            _faction.RemoveFaction(args.CloneUid, ZombieFaction); // SS220 - bug fixs
         }
 
         // Make sure players that enter a zombie (for example via a ghost role or the mind swap spell) count as an antagonist.
