@@ -51,6 +51,7 @@
   - OffsetCaneMime
   - OffsetCaneNT
   - Cane
+  #- ExpensiveCane #SS220 TODO NanoTraisen Representative
   - TowelColorBlack
   - TowelColorWhite
   # SS220 Too many towels begin
@@ -1356,7 +1357,7 @@
   - JackBoots
   - SecurityWinterBoots
   - BootsJackSec #ss220 sec loadout update
-  - CombatBoots #SS220 Army boots for sec 
+  - CombatBoots #SS220 Army boots for sec
 
 - type: loadoutGroup
   id: SecurityPDA
