@@ -1,6 +1,6 @@
 ent-TableWebSpiders = каркас стены из паутины
     .desc = Очень гладкий и удивительно прочный.
-    .suffix = Улей пауков	
+    .suffix = Улей пауков
 
 ent-FloorTileItemWebSpiders = конструкция из паутины
     .desc = { ent-TableWebSpiders.desc }
@@ -16,6 +16,10 @@ ent-TableWebSpidersDurable = каркас стены из паутины
 
 ent-WallWebDurable = прочная паутинная стена
     .desc = Удерживает паучат внутри, а ассистентов снаружи.
+    .suffix = { ent-TableWebSpiders.suffix }
+
+ent-WebPassage = проход из паутины
+    .desc = Удерживает воздух внутри, а вакуум снаружи.
     .suffix = { ent-TableWebSpiders.suffix }
 
 ent-BaseSpiderCocoon = кокон из паутины
