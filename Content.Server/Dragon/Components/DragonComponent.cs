@@ -23,7 +23,7 @@ namespace Content.Server.Dragon
         public bool RiftSpeedBoostPermanent = false;
 
         [ViewVariables(VVAccess.ReadWrite)]
-        public float RiftSpeedBoostTime = 0f;
+        public TimeSpan RiftSpeedBoostEndTime = TimeSpan.Zero;
         // SS220 Dragon rifts charged buff END
 
         public bool Weakened => WeakenedAccumulator > 0f;
