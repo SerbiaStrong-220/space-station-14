@@ -13,10 +13,17 @@ public abstract partial class BaseSublevelAddComponent : Component
     /// <summary>
     /// This field contains only Sublevel from ExperienceSkillInfo which means that it starts from StartSublevel
     /// </summary>
+    [ViewVariables(VVAccess.ReadOnly)]
+    [DataField] // to make copying possible for engine
+    [AutoNetworkedField]
     public Dictionary<ProtoId<SkillTreePrototype>, int> Skills = new();
 
+    [ViewVariables(VVAccess.ReadOnly)]
+    [DataField] // to make copying possible for engine
+    [AutoNetworkedField]
     public int SpentSublevelPoints;
 }
 
 [RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState]
 public sealed partial class JobBackgroundSublevelAddComponent : BaseSublevelAddComponent;

@@ -30,8 +30,8 @@
                 <BoxContainer Name="FreePointsOptionContainer" Orientation="Vertical" HorizontalAlignment="Left">
                     <RichTextLabel Name="FreePointsShower" Text="free points placeholder"/>
                     <BoxContainer Orientation="Horizontal" HorizontalAlignment="Left">
-                        <Button Name="SubmitButton" Text="{Loc 'experience-view-tree-submit-button-text'}"/>
                         <Button Name="ClearSpentPointsButton" Text="{Loc 'experience-view-tree-clear-spent-points-button-text'}"/>
+                        <Button Name="SubmitButton" Text="{Loc 'experience-view-tree-submit-button-text'}"/>
                     </BoxContainer>
                 </BoxContainer>
             </BoxContainer>

@@ -42,6 +42,7 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
     private SkillTreeInfo? _overrideInfo;
 
     private string _skillTreeName = string.Empty;
+    public new string Name => _skillTreeName;
     private List<int> _maxLevels = [];
     private List<ResPath?> _skillIconResPaths = new();
     private List<ProtoId<SkillPrototype>> _skillsTree = [];

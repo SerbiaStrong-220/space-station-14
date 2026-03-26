@@ -8,14 +8,18 @@ using Content.Shared.SS220.Experience;
 using Content.Shared.SS220.Experience.Systems;
 using Robust.Server.Console;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 using System.Linq;
 
 namespace Content.Server.SS220.Experience;
 
 public sealed class ExperienceEditorSystem : EntitySystem
 {
+    [Dependency] private readonly ExperienceSystem _experience = default!;
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly IConGroupController _groupController = default!;
+
+    private static readonly ProtoId<KnowledgePrototype> CultYoggKnowledge = "CultYoggKnowledge";
 
     private const string EditorCommand = "expeditor";
 
@@ -38,6 +42,7 @@ public sealed class ExperienceEditorSystem : EntitySystem
     // zero idea should it be added with mindrole feels kinda other thing for this system
     private void OnCultified(Entity<ExperienceComponent> entity, ref GotCultifiedEvent args)
     {
+        _experience.TryAddKnowledge(entity!, CultYoggKnowledge);
         var addPointsComp = EnsureComp<AntagFreeSublevelPointsAddComponent>(entity);
 
         if (addPointsComp.AddFreeSublevelPoints < 5)
@@ -46,6 +51,7 @@ public sealed class ExperienceEditorSystem : EntitySystem
 
     private void OnLiberationFromCult(Entity<ExperienceComponent> entity, ref LiberationFromCultEvent args)
     {
+        _experience.TryRemoveKnowledge(entity!, CultYoggKnowledge);
         var addPointsComp = EnsureComp<AntagFreeSublevelPointsAddComponent>(entity);
 
         if (addPointsComp.AddFreeSublevelPoints == 5)
@@ -108,6 +114,7 @@ public sealed class ExperienceEditorSystem : EntitySystem
         _adminLog.Add(LogType.Experience, LogImpact.Low, $"{ToPrettyString(playerEntity):user} used free points for adding sublevels. Used to {GetSublevelStringView(validInput)}");
 
         playerChangedComp.SpentSublevelPoints += totalPointsSpend;
+        Dirty(playerEntity, playerChangedComp);
 
         var afterInitEv = new RecalculateEntityExperience();
         RaiseLocalEvent(playerEntity, ref afterInitEv);

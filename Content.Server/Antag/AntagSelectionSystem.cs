@@ -473,7 +473,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         if (def.StartingGear is not null && _prototype.Resolve(def.StartingGear, out var gearPrototype))
         {
             var skillRoleAddComp = EnsureComp<RoleExperienceAddComponent>(antagEnt.Value);
-            skillRoleAddComp.DefinitionId = gearPrototype.ExperienceDefinition;
+            skillRoleAddComp.DefinitionId ??= gearPrototype.ExperienceDefinition;
 
             var recalculateEv = new RecalculateEntityExperience();
             RaiseLocalEvent(antagEnt.Value, ref recalculateEv);

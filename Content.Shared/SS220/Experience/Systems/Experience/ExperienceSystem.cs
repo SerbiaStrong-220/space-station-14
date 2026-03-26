@@ -33,7 +33,6 @@ public sealed partial class ExperienceSystem : EntitySystem
         InitializeGainedExperience();
         InitializeSkillEntityEvents();
         InitializePrivate();
-        InitializeEventHandlers();
 
         SubscribeLocalEvent<ExperienceComponent, SkillCheckEvent>(OnSkillCheckEvent);
         SubscribeLocalEvent<ExperienceComponent, MapInitEvent>(OnMapInit);
@@ -52,12 +51,14 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     private void InitExperienceSkillTree(Entity<ExperienceComponent> entity, ProtoId<SkillTreePrototype> skillTree, bool logReiniting = true)
     {
+        FixedPoint4 startProgress = StartLearningProgress;
         if (entity.Comp.Skills.ContainsKey(skillTree) || entity.Comp.StudyingProgress.ContainsKey(skillTree))
         {
             if (logReiniting)
                 Log.Error("Tried to init skill that already existed or being studied");
 
             entity.Comp.Skills.Remove(skillTree);
+            startProgress = entity.Comp.StudyingProgress.TryGetValue(skillTree, out var oldProgress) ? oldProgress : startProgress;
             entity.Comp.StudyingProgress.Remove(skillTree);
         }
 
@@ -83,7 +84,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         ResolveInitLeveling(entity, ev.Info, ev.SkillTree);
 
         entity.Comp.Skills.Add(skillTree, ev.Info);
-        entity.Comp.StudyingProgress.Add(skillTree, StartLearningProgress);
+        entity.Comp.StudyingProgress.Add(skillTree, startProgress);
 
         DirtyField(entity!, nameof(ExperienceComponent.Skills));
     }
