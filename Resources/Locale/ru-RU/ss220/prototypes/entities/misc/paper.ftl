@@ -7,3 +7,4 @@ ent-RedWingsClientPaper = список клиентов "Красных Крыл
 
 ent-PaperInterdyneForm = бумага
     .desc = Лист белой бумаги с логотипом Interdyne
+    .suffix = Форма Interdyne

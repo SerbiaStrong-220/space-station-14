@@ -160,7 +160,7 @@
   name: paper
   parent: Paper
   id: PaperInterdyneForm
-  suffix: Форма Interdyne
+  suffix: Interdyne Form
   description: "A sheet of office paper. The logo on it looks a bit suspicious."
   components:
     - type: PaperVisuals
