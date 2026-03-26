@@ -1,6 +1,6 @@
 - type: entity
   parent: Windoor
-  id: WindoorNanoTrasenRepresentativelLocked
+  id: WindoorNanoTrasenRepresentativeLocked
   suffix: NanoTrasen Representative, Locked
   components:
   - type: ContainerFill
@@ -13,7 +13,7 @@
 
 - type: entity
   parent: WindoorSecureCommandLocked
-  id: WindoorSecureNanoTrasenRepresentativelLocked
+  id: WindoorSecureNanoTrasenRepresentativeLocked
   suffix: NanoTrasen Representative, Locked
   components:
   - type: ContainerFill
@@ -22,7 +22,7 @@
 
 - type: entity
   parent: WindoorPlasma
-  id: PlasmaWindoorNanoTrasenRepresentativelLocked
+  id: PlasmaWindoorNanoTrasenRepresentativeLocked
   suffix: NanoTrasen Representative, Locked, Plasma
   components:
   - type: ContainerFill
@@ -35,7 +35,7 @@
 
 - type: entity
   parent: WindoorSecurePlasma
-  id: PlasmaWindoorSecureNanoTrasenRepresentativelLocked
+  id: PlasmaWindoorSecureNanoTrasenRepresentativeLocked
   suffix: NanoTrasen Representative, Locked, Plasma
   components:
   - type: ContainerFill
@@ -48,7 +48,7 @@
 
 - type: entity
   parent: WindoorUranium
-  id: UraniumWindoorNanoTrasenRepresentativelLocked
+  id: UraniumWindoorNanoTrasenRepresentativeLocked
   suffix: NanoTrasen Representative, Locked, Uranium
   components:
   - type: ContainerFill
@@ -61,7 +61,7 @@
 
 - type: entity
   parent: WindoorSecureUranium
-  id: UraniumWindoorSecureNanoTrasenRepresentativelLocked
+  id: UraniumWindoorSecureNanoTrasenRepresentativeLocked
   suffix: NanoTrasen Representative, Locked, Uranium
   components:
   - type: ContainerFill

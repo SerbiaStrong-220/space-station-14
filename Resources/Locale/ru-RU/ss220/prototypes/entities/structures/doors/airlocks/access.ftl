@@ -291,5 +291,5 @@ ent-AirlockNanoTrasenRepresentativeLocked = { ent-AirlockCommand }
     .suffix = Представитель НТ, Закрыто
 
 ent-AirlockMaintNanoTrasenRepresentativeLocked = { ent-AirlockMaintCommandLocked }
-    .desc = { ent-AirlockMaintCommandLocked }
+    .desc = { ent-AirlockMaintCommandLocked.desc }
     .suffix = Представитель НТ, Закрыто
