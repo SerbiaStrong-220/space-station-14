@@ -236,7 +236,7 @@
       fireRate: 6.5
       #220 SG Angle Updates end
       soundGunshot:
-        path: /Audio/Weapons/Guns/Gunshots/atreides.ogg
+        path: /Audio/SS220/Weapons/Guns/Gunshots/drozd_shot.ogg #SS220 drozd update
       selectedMode: Burst
       availableModes:
       - Burst
@@ -249,8 +249,8 @@
         gun_magazine:
           name: Magazine
           startingItem: MagazinePistolSubMachineGun
-          insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
-          ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+          insertSound: /Audio/SS220/Weapons/Guns/MagIn/drozd_magIn.ogg #SS220 drozd update
+          ejectSound: /Audio/SS220/Weapons/Guns/MagOut/drozd_magOut.ogg #SS220 drozd update
           priority: 2
           whitelist:
             tags:

@@ -403,6 +403,16 @@ public abstract partial class SharedMindSystem : EntitySystem
         AddObjective(mindId, mind, objective.Value);
         return true;
     }
+
+    public bool TryAddObjectiveWithMetadata(EntityUid mindId, MindComponent mind, string name, string desc, SpriteSpecifier icon, string locIssuer)
+    {
+        var objective = _objectives.TryCreateObjective((mindId, mind), name, desc, icon, locIssuer);
+        if (objective == null)
+            return false;
+
+        AddObjective(mindId, mind, objective.Value);
+        return true;
+    }
     // ss220 add custom antag goals end
 
     /// <summary>

@@ -2,6 +2,22 @@
 
 #! Юридический (Начало)
 
+  # Представитель НаноТрейзен
+- type: roleLoadout
+  id: JobNanoTrasenRepresentative #SS220 TODO NanoTraisen Representative
+  groups:
+  - IAAHead
+  - IAAHeadset
+  - IAAGlasses
+  - IAANeck
+  - IAAJumpsuit
+  - IAAOuterclothing
+  - IAABackpacks #ss220 iaa loadout fix
+  - Survival
+  - Trinkets
+  - Gloves
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+
   # Магистрат
 - type: roleLoadout
   id: JobMagistrate
@@ -15,6 +31,7 @@
   - Trinkets
   - Survival
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 
   # Агент внутренних дел
 - type: roleLoadout
@@ -31,6 +48,7 @@
   - Trinkets
   - Gloves
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 
   # Офицер "Синий Щит"
 - type: roleLoadout
@@ -48,6 +66,7 @@
   - Survival
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 
 #! Служба безопасности (Начало)
 
@@ -68,6 +87,7 @@
   - SecurityBelt
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 
   # Пилот
 - type: roleLoadout
@@ -84,6 +104,7 @@
   - SecurityShoes
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - WorkerCash #SS220-Cash-personal
 #! Служба безопасности (Конец)
 
 #! Медицинский отдел (Начало)
@@ -106,6 +127,7 @@
 #  - Glasses #SS220-TwoOne-Floppa-Iteration
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 #! Медицинский отдел (Конец)
 
 #! Инженерный отдел (Начало)
@@ -123,6 +145,7 @@
   - StationEngineerShoes
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 #! Инженерный отдел (Конец)
 
 #! Исследовательский отдел (Начало)
@@ -143,6 +166,7 @@
 #  - Glasses #SS220-TwoOne-Floppa-Iteration
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 #! Исследовательский отдел (Конец)
 
 #! Сервис (Начало)
@@ -159,4 +183,5 @@
   - SeniorServiceShoes
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 #! Сервис (Конец)
