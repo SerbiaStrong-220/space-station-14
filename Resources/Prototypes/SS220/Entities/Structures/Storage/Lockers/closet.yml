@@ -135,7 +135,7 @@
 
 - type: entity
   id: LockerNanoTrasenRepresentative
-  parent: LockerBase
+  parent: LockerBaseSecure
   name: NanoTrasen Representative locker
   components:
   - type: Appearance
@@ -145,3 +145,5 @@
     stateDoorClosed: magistrate_door
   - type: AccessReader
     access: [ [ "NanoTrasenRepresentative" ] ]
+  - type: TargetLockPick
+    chanceToLockPick: 0.55
