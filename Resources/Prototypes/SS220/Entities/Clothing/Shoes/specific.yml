@@ -287,3 +287,25 @@
         - Scientist
         - Borg
 # HiddenDesc-End
+
+- type: entity
+  parent: ClothingShoesBase
+  id: ClothingShoesSpaceNinjaFake
+  name: space ninja shoes
+  description: Stylish ninja boots from the popular anime.
+  suffix: Fake
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Specific/spaceninja.rsi 
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Specific/spaceninja.rsi 
+  - type: HiddenDescription
+    entries:
+    - label: hidden-desc-toy-armour-syndicate
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
+    - label: hidden-desc-toy-armour-clown
+      jobRequired:
+        - Clown
+        - Mime

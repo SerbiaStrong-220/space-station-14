@@ -14,3 +14,6 @@ ent-ClothingShoesBootsWinterBS = зимние ботинки синего щит
 ent-ClothingShoesResponsibility = обувь ответственного врача
         .desc = Для тех, кто верит, что минуты слабости ещё не делают из нас чудовищ.
         .suffix = За время в игре
+ent-ClothingShoesSpaceNinjaFake = { ent-ClothingShoesSpaceNinja }
+    .desc = Стильные ботинки ниндзя из популярного аниме.
+    .suffix = Поддельный

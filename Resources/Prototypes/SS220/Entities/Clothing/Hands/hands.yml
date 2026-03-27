@@ -227,3 +227,27 @@
   - type: Fiber
     fiberColor: fibers-brown
   - type: FingerprintMask
+
+- type: entity
+  parent: ClothingHandsGlovesSyntheticBase
+  id: ClothingHandsGlovesSpaceNinjaFake
+  name: space ninja gloves
+  suffix: Fake
+  description: Rubberized Fabric Gloves for Ninja Cosplay.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Hands/Gloves/spaceninja.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Hands/Gloves/spaceninja.rsi
+  - type: Fiber
+    fiberColor: fibers-black
+  - type: HiddenDescription
+    entries:
+    - label: hidden-desc-toy-armour-syndicate
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
+    - label: hidden-desc-toy-armour-clown
+      jobRequired:
+        - Clown
+        - Mime

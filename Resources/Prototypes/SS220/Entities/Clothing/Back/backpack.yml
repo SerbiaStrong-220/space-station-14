@@ -53,7 +53,19 @@
   - type: Storage
     grid:
     - 0,0,6,4
+    storageOpenSound: null
+    storageInsertSound: null
 
+# Ninja fake
+- type: entity
+  parent: ClothingBackpackSpaceNinja
+  id: ClothingBackpackSpaceNinjaFake
+  suffix: Fake
+  components:
+  - type: Storage
+    grid:
+    - 0,0,6,3
+    
  # Гамма ОБР
 
 - type: entity
