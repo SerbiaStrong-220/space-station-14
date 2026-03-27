@@ -239,7 +239,7 @@
       - !type:ChemicalAdaptationEffect
         reagent: Nicergoline
         duration: 1200
-        modifier: 0.8
       - !type:BrainDamageTimerChange
         reagent: Nicergoline
         addTime: 60
+        decay: 0.8

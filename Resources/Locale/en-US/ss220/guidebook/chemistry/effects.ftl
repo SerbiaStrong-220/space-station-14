@@ -8,7 +8,4 @@ reagent-effect-guidebook-ss220-cult-cleanse = a couple of sips can cleanse you f
 
 reagent-effect-guidebook-ss220-brain-damage-slow = extends brain life by {$time} seconds
 
-reagent-effect-guidebook-ss220-chemical-adaptation = digestion causes a tolerance to the reagent equal to {$modifier} of the previous reagent effect, which lasts for {$duration} seconds, { $refresh ->
-[true] duration is refreshed on each digestion
-*[false] digestion does not affect duration
-}
+reagent-effect-guidebook-ss220-chemical-adaptation = digestion causes a tolerance to the reagent

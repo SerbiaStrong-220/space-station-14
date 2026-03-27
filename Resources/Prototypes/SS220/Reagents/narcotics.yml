@@ -78,7 +78,7 @@
       - !type:HealthChange
         damage:
           types:
-            Poison: 0.8
+            Poison: 1.0
       - !type:Hallucination
         setting:
           randomEntities: HallucinationReagentAglomorphine
@@ -135,16 +135,24 @@
       - !type:MovementSpeedModifier
         walkSpeedModifier: 1.17
         sprintSpeedModifier: 1.17
+        dependsOnAdaptation: true
+        metabolizedModifier: -0.00056 #Approximate value, the speed will be 1 on 300 stacks and then go below
+        reagent: Frontier
+      - !type:ChemicalAdaptationEffect
+        reagent: Frontier
+        duration: 300
       - !type:GenericStatusEffect
         key: Stutter
         component: StutteringAccent
         time: 8
       - !type:Jitter
         time: 8
-      - !type:HealthChange
+      - !type:HealthChangeOnAdaptation
+        reagent: Frontier
         damage:
           types:
-            Poison: 2.0
+            Poison: 1.0
+        decay: -0.003
       - !type:GenericStatusEffect
         key: Muted
         component: Muted
@@ -168,10 +176,12 @@
     Medicine:
       metabolismRate: 0.5
       effects:
-      - !type:HealthChange
+      - !type:HealthChangeOnAdaptation
+          reagent: Frontier
           damage:
             types:
               Blunt: -0.7
               Slash: -0.7
               Piercing: -0.7
               Heat: -0.7
+          decay: 0.0023
