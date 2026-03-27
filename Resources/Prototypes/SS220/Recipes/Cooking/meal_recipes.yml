@@ -55,16 +55,6 @@
     FoodCabbage: 1
 
 - type: microwaveMealRecipe
-  id: RecipeFoodMealFriedegg
-  name: Friedegg recipe
-  result: FoodMealFriedegg
-  time: 15
-  reagents:
-    Egg: 12
-    TableSalt: 5
-    Blackpepper: 5
-
-- type: microwaveMealRecipe
   id: RecipeOkroshka
   name: Okroshka recipe
   result: FoodSoupOkroshka
