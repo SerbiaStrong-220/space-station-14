@@ -49,6 +49,14 @@
   - type: AccessReader
     access: [["Magistrate"]]
 
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsNanoTrasenRepresentative
+  suffix: NanoTrasen Representative, Locked
+  components:
+  - type: AccessReader
+    access: [["NanoTrasenRepresentative"]]
+
 # BlueShield access
 - type: entity
   parent: DoorElectronics
