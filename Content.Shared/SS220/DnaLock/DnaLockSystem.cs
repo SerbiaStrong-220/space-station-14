@@ -92,20 +92,17 @@ public sealed class DnaLockSystem : EntitySystem
 
     private void OnGetVerbs(Entity<DnaLockableComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
-        if (ent.Comp.Mode != DnaLockMode.InRound || ent.Comp.Emagged)
-            return;
-
-        if (!args.CanInteract)
+        if (ent.Comp.Mode != DnaLockMode.InRound || ent.Comp.Emagged || !args.CanInteract)
             return;
 
         var user = args.User;
 
+        if (!TryComp<DnaComponent>(user, out var dnaComp) || string.IsNullOrEmpty(dnaComp.DNA))
+            return;
+
         // Register DNA
         if (!ent.Comp.LockActive || ent.Comp.AllowedDna.Count == 0)
         {
-            if (!TryComp<DnaComponent>(user, out var dnaComp) || string.IsNullOrEmpty(dnaComp.DNA))
-                return;
-
             args.Verbs.Add(new AlternativeVerb
             {
                 Text = Loc.GetString("dna-lock-verb-register"),
@@ -114,9 +111,7 @@ public sealed class DnaLockSystem : EntitySystem
         }
 
         // On/off lock
-        if (ent.Comp.AllowedDna.Count > 0 &&
-            TryComp<DnaComponent>(user, out var userDna) &&
-            ent.Comp.AllowedDna.Contains(userDna.DNA ?? string.Empty))
+        if (ent.Comp.AllowedDna.Contains(dnaComp.DNA))
         {
             args.Verbs.Add(new AlternativeVerb
             {
