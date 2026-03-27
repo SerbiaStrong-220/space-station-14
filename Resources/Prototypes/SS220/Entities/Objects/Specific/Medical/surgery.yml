@@ -88,7 +88,6 @@
     - state: paper_stamp-generic
       map: ["enum.PaperVisualLayers.Stamp"]
       visible: false
-  - type:
   - type: PaperVisuals
     backgroundImagePath: "/Textures/Interface/Paper/paper_background_perforated.svg.96dpi.png"
     headerImagePath: "/Textures/Interface/Paper/paper_heading_forensic_scanner.svg.96dpi.png"

@@ -62,8 +62,6 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
         SubscribeLocalEvent<SurgeryStarterComponent, AfterInteractEvent>(OnSurgeryStarterAfterInteract);
         SubscribeLocalEvent<SurgeryStarterComponent, StartSurgeryEvent>(OnStartSurgeryMessage);
-
-        SubscribeLocalEvent<BodyAnalyzerComponent, AfterInteractEvent>(OnBodyAnalyzerAfterInteract);
     }
 
     private void OnExamined(Entity<SurgeryPatientComponent> entity, ref ExaminedEvent args)
@@ -199,25 +197,6 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
         UpdateUserInterface(entity, args.User, args.Target.Value);
         args.Handled = true;
-    }
-
-    private void OnBodyAnalyzerAfterInteract(Entity<BodyAnalyzerComponent> entity, ref AfterInteractEvent args)
-    {
-        if (args.Target == null || !args.CanReach)
-            return;
-
-        if (!_userInterface.HasUi(entity, BodyAnalyzerUiKey.Key))
-        {
-            Log.Debug($"Entity {ToPrettyString(entity)} has {nameof(BodyAnalyzerComponent)} but don't have its UI!");
-            return;
-        }
-
-        _userInterface.OpenUi(entity.Owner, BodyAnalyzerUiKey.Key, args.User);
-
-        var netTarget = GetNetEntity(args.Target.Value);
-
-        var state = new BodyAnalyzerTargetUpdate(netTarget);
-        _userInterface.SetUiState(entity.Owner, BodyAnalyzerUiKey.Key, state);
     }
 
     public void UpdateUserInterface(EntityUid drape, EntityUid user, EntityUid target)
