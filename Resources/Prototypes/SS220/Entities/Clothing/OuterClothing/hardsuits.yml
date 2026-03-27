@@ -6,10 +6,6 @@
   name: blueshield's light hardsuit
   description: A special suit designed for the Blue Shield. It is characterized by lightness and maneuverability.
   components:
-  - type: DnaLockClothing
-  - type: DnaLockable
-    mode: Roundstart
-    roundstartJob: BlueShield
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Hardsuits/blueshield_light.rsi
   - type: Clothing

@@ -197,6 +197,9 @@ public sealed class DnaLockSystem : EntitySystem
         if (args.Target != ent.Owner)
             return;
 
+        if (args.UiKey is StorageComponent.StorageUiKey.Key && !ent.Comp.BlockStorageOpen)
+            return;
+
         var silentFail = args.Message is not OpenBoundInterfaceMessage;
 
         if (CheckAccess(ent, args.Actor, silentFail))
@@ -334,6 +337,8 @@ public sealed class DnaLockSystem : EntitySystem
             _audio.PlayPredicted(sound, ent.Owner, user);
 
         foreach (var effect in ent.Comp.UnauthorizedUseEffects)
+        {
             _entityEffects.ApplyEffect(user, effect);
+        }
     }
 }

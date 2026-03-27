@@ -3,7 +3,6 @@
 using Content.Shared.Explosion;
 using Content.Shared.Explosion.EntitySystems;
 using Robust.Shared.Audio;
-using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.DnaLock.Components;
@@ -13,19 +12,19 @@ namespace Content.Shared.SS220.DnaLock.Components;
 /// it starts a warning timer with beeps and popups. When the timer expires, the item detonates and is deleted.
 /// Requires a DnaLockableComponent on the same entity.
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent]
 public sealed partial class DnaLockClothingComponent : Component
 {
     /// <summary>
     /// Time until detonation after an unauthorized user equips the item.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public TimeSpan TimeToExplode = TimeSpan.FromSeconds(5);
 
     /// <summary>
     /// Interval between warning beeps.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public TimeSpan BeepInterval = TimeSpan.FromSeconds(1);
 
     /// <summary>

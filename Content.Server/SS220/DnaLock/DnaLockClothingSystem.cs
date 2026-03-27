@@ -2,6 +2,7 @@
 
 using Content.Server.Explosion.EntitySystems;
 using Content.Shared.Clothing;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
 using Content.Shared.SS220.DnaLock;
 using Content.Shared.SS220.DnaLock.Components;
@@ -94,9 +95,11 @@ public sealed class DnaLockClothingSystem : EntitySystem
 
     private void PlayInitialWarning(EntityUid itemUid, EntityUid wearer, DnaLockClothingComponent clothing)
     {
+        var wearerName = Identity.Name(wearer, EntityManager, wearer);
+
         var othersMsg = Loc.GetString(
             clothing.WarningPopupOthers,
-            ("wearer", wearer));
+            ("wearer", wearerName));
 
         var selfMsg = Loc.GetString(clothing.WarningPopupWearer);
 
@@ -113,9 +116,11 @@ public sealed class DnaLockClothingSystem : EntitySystem
 
     private void PlayTimerWarning(EntityUid itemUid, EntityUid wearer, DnaLockClothingComponent clothing, int secondsLeft)
     {
+        var wearerName = Identity.Name(wearer, EntityManager, wearer);
+
         var othersMsg = Loc.GetString(
             clothing.TimerPopupOthers,
-            ("wearer", wearer),
+            ("wearer", wearerName),
             ("seconds", secondsLeft));
 
         var selfMsg = Loc.GetString(
