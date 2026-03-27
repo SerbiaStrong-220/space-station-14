@@ -2,10 +2,7 @@
 
 using Content.Server.Administration.Managers;
 using Content.Server.Mind;
-using Content.Server.Silicons.Borgs;
-using Content.Shared.Ghost;
 using Content.Shared.Mobs.Components;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.SS220.MindExtension;
 using Robust.Server.Containers;
 using Robust.Server.Player;
@@ -13,6 +10,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared.Mobs;
 
 namespace Content.Server.SS220.MindExtension;
 
@@ -24,11 +22,9 @@ namespace Content.Server.SS220.MindExtension;
 public sealed partial class MindExtensionSystem : EntitySystem
 {
     [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly IAdminManager _admin = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly BorgSystem _borg = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
 
     private EntityQuery<MindExtensionComponent> _mindExtQuery;
@@ -56,10 +52,12 @@ public sealed partial class MindExtensionSystem : EntitySystem
             return entity.Value;
 
         var newEnt = EntityManager.CreateEntityUninitialized(null);
-        var mindExtComponent = new MindExtensionComponent() { Player = player };
+        var mindExtComponent = new MindExtensionComponent { Player = player };
 
         EntityManager.AddComponent(newEnt, mindExtComponent);
         EntityManager.InitializeEntity(newEnt);
+        EntityManager.StartEntity(newEnt);
+
         return new(newEnt, mindExtComponent);
     }
 
@@ -99,14 +97,11 @@ public sealed partial class MindExtensionSystem : EntitySystem
         if (!TryComp<MobStateComponent>(entity, out var mobState))
             return false;
 
-        switch (mobState.CurrentState)
+        return mobState.CurrentState switch
         {
-            case Shared.Mobs.MobState.Invalid:
-                return false;
-            case Shared.Mobs.MobState.Dead:
-                return false;
-        }
-
-        return true;
+            MobState.Invalid => false,
+            MobState.Dead => false,
+            _ => true,
+        };
     }
 }

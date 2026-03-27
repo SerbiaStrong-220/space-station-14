@@ -79,6 +79,19 @@
       - state: green
       - state: lawyer
 
+# Представитель НаноТрейзен
+- type: entity
+  parent: SpawnPointJobBase
+  id: SpawnPointNanoTrasenRepresentative
+  name: NanoTrasen Representative
+  components:
+  - type: SpawnPoint
+    job_id: NanoTrasenRepresentative
+  - type: Sprite
+    layers:
+      - state: green
+      - state: lawyer
+
 # Сервисный администратор
 - type: entity
   id: SpawnPointServiceOfficer

@@ -51,6 +51,7 @@
   - MagazineRifleEmpty
   - SpeedLoaderMagnum
   - SpeedLoaderMagnumEmpty
+  - MagazineBoxAntiMateriel #SS220 WeaponSniperCompact
   #ss220 more recipies begin
   - SpeedLoaderLightRifle
   - MagazineMagnumEmpty
@@ -79,6 +80,7 @@
   - TelescopicShield
   - ClothingEyesThermalGlassesSecurity #SS220 Thermals
   - ClothingBackpackHarmpack
+  - FieldShieldGenerator #SS220 Energy shield
 
 - type: latheRecipePack
   id: SecurityBoards
@@ -135,6 +137,7 @@
 - type: latheRecipePack
   id: SecurityWeapons
   recipes:
+  - WeaponSniperCompact #SS220 WeaponSniperCompact
   - LaserSMGPowerCell #SS220 WeaponLaserSMG
   - WeaponLaserSMG #SS220 WeaponLaserSMG
   - Truncheon

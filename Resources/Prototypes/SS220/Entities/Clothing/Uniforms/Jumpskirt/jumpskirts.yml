@@ -156,6 +156,19 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpskirt/chef_nt.rsi
 
+# Музыкант
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformEveningDressMusician
+  name: musician's evening dress
+  description: A beautiful musician's dress for a quiet evening at the bar.
+  suffix: For playtime
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/musician_evening_dress.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/musician_evening_dress.rsi
 
   # Medical
 

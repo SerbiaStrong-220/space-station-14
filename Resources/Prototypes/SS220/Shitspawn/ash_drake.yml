@@ -1,0 +1,669 @@
+# Базовый тип для дрейка — как SimpleSpaceMobBase, но без MobFlammable
+- type: entity
+  abstract: true
+  parent:
+  - BaseSimpleMob
+  - MobAtmosExposed
+  - MobCombat
+  - MobBloodstream
+  id: AshDrakeMobBase
+
+- type: entity
+  parent: [ AshDrakeMobBase, MobPassiveCollision ]
+  id: MobAshDrake
+  suffix: Shitspawn
+  name: пепельный дракон
+  description: Огромный крылатый монстр, почитаемый страж Некрополиса. Этот дракон бродит по выжженным пустошам, изрыгая смертоносное пламя.
+  components:
+  - type: Bloodstream
+    bloodMaxVolume: 1500
+  - type: GhostRole
+    allowMovement: true
+    allowSpeech: true
+    makeSentient: true
+    name: ghost-role-information-ash-drake-name
+    description: ghost-role-information-ash-drake-description
+    rules: ghost-role-information-space-dragon-rules
+    raffle:
+      settings: default
+  - type: GhostTakeoverAvailable
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: MovementIgnoreGravity
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepDrake
+  - type: Speech
+    speechVerb: LargeMob
+    allowedEmotes:
+    - AshDrakeRoar
+  - type: Vocal
+    sounds:
+      Male: AshDrakeRoar
+      Female: AshDrakeRoar
+      Unsexed: AshDrakeRoar
+  - type: Emoting
+  - type: CombatMode
+  - type: MobMover
+  - type: InputMover
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2
+    baseSprintSpeed: 4.5
+  - type: Sprite
+    sprite: SS220/Shitspawn/AshDrake/ash_drake.rsi
+    noRot: true
+    scale: 2, 2
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+  - type: Appearance
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+      Dead:
+        Base: dead
+  - type: Physics
+    bodyType: KinematicController
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.70
+        density: 100
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: MobState
+  - type: MobStateActions
+    actions:
+      Critical:
+      - ActionCritSuccumb
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      2800: Critical
+      3000: Dead
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      1800: 0.7
+      2200: 0.5
+  - type: Insulated
+  - type: StatusEffects
+    allowed:
+    - TemporaryBlindness
+    - Pacified
+  - type: Temperature
+    heatDamageThreshold: 99999
+  - type: ExplosionResistance
+    damageCoefficient: 0.0
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatDragon
+      amount: 30
+    - id: AshDrakeCloak
+      amount: 1
+    - id: AshDrakeCursedChalk
+      amount: 1
+  - type: MeleeWeapon
+    altDisarm: false
+    range: 2.0
+    soundHit:
+      path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
+    damage:
+      types:
+        Blunt: 30
+        Slash: 10
+        Structural: 200
+  - type: StaminaResistance
+    damageCoefficient: 0.0
+  - type: ContentEye
+    targetZoom: 1.5, 1.5
+    maxZoom: 1.5, 1.5
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 5000
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+  - type: Tag
+    tags:
+    - CannotSuicide
+    - DoorBumpOpener
+    - StunImmune
+    - FootstepSound
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: Dragon
+  - type: NavMapBeacon
+    color: "#ff4400"
+    text: Огненный сигнал
+    enabled: true
+  - type: InteractionPopup
+    successChance: 0.1
+    interactSuccessString: petting-success-dragon
+    interactFailureString: petting-failure-dragon
+    interactFailureSound:
+      path: /Audio/SS220/Shitspawn/AshDrake/roar.ogg
+    soundPerceivedByOthers: false
+  - type: ActionGun
+    action: ActionAshDrakeFireCone
+    gunProto: AshDrakeFireConeGun
+  - type: AshDrakeMeteor
+    count: 20
+    radius: 8
+    spawnHeight: 10
+    speed: 8
+    spawnInterval: 0.15
+    actionId: ActionAshDrakeFireMeteor
+  - type: AshDrakeGreatFireball
+    fireballSpeed: 2
+    actionId: ActionAshDrakeGreatFireball
+  - type: AshDrakeFly
+    flySpeed: 18
+    lavaRadius: 3
+    lavaChance: 0.75
+    actionId: ActionAshDrakeFly
+  - type: AshDrakeRoar
+  - type: AshDrakeSummonSkeletons
+    count: 6
+    spawnRadius: 1.5
+    actionId: ActionAshDrakeSummonSkeletons
+- type: entity
+  categories: [ HideSpawnMenu ]
+  id: AshDrakeFireConeGun
+  suffix: Shitspawn
+  name: огненный конус дракона
+  components:
+  - type: RechargeBasicEntityAmmo
+    rechargeCooldown: 8
+    rechargeSound:
+      path: /Audio/SS220/Shitspawn/AshDrake/fireball.ogg
+  - type: BasicEntityAmmoProvider
+    proto: ProjectileAshDrakeFireConeSpread
+    capacity: 1
+    count: 1
+  - type: Gun
+    soundGunshot:
+      path: /Audio/SS220/Shitspawn/AshDrake/fireball.ogg
+    projectileSpeed: 6
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  id: ProjectileAshDrakeFireConeSpread
+  parent: ProjectileAshDrakeFireCone
+  components:
+  - type: ProjectileSpread
+    proto: ProjectileAshDrakeFireCone
+    count: 5
+    spread: 75
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseBulletTrigger
+  id: ProjectileAshDrakeFireCone
+  name: огненный конус
+  description: Смертоносный поток огня.
+  components:
+  - type: PointLight
+    color: "#E25822"
+    radius: 1.0
+    energy: 8.0
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/magic.rsi
+    layers:
+    - state: fireball
+      shader: unshaded
+  - type: IgnitionSource
+    temperature: 1100
+    ignited: true
+  - type: RepeatingTrigger
+    delay: 0.2
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: FireBomb
+    totalIntensity: 1
+    intensitySlope: 1
+    maxIntensity: 1
+    canCreateVacuum: false
+    deleteAfterExplosion: false
+    repeatable: true
+  - type: TimedDespawn
+    lifetime: 4
+
+- type: entity
+  parent: BaseAction
+  id: ActionAshDrakeFireCone
+  suffix: Shitspawn
+  name: "[color=orange]Огненный конус[/color]"
+  description: Выпускает смертоносный конус огня в цель!
+  components:
+  - type: Action
+    icon: { sprite: SS220/Shitspawn/AshDrake/icons/fire_cone.rsi, state: icon }
+    useDelay: 8
+    priority: 2
+  - type: TargetAction
+    checkCanAccess: false
+    range: 0
+  - type: WorldTargetAction
+    event: !type:ActionGunShootEvent
+
+- type: entity
+  parent: BaseAction
+  id: ActionAshDrakeFireMeteor
+  suffix: Shitspawn
+  name: "[color=red]Огненный метеорит[/color]"
+  description: Вызывает огненный дождь из метеоритов вокруг!
+  components:
+  - type: Action
+    icon: { sprite: SS220/Shitspawn/AshDrake/icons/fire_meteor.rsi, state: icon }
+    useDelay: 15
+    priority: 3
+  - type: InstantAction
+    event: !type:AshDrakeMeteorActionEvent
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  id: AshDrakeFireMeteorMarker
+  name: маркер метеорита
+  components:
+  - type: Sprite
+    sprite: SS220/Shitspawn/AshDrake/meteor_marker.rsi
+    state: marker_ping
+  - type: TimedDespawn
+    lifetime: 1.5
+  - type: SpawnOnDespawn
+    prototype: AshDrakeFireMeteorExplosion
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  id: AshDrakeFireMeteorExplosion
+  name: взрыв метеорита
+  components:
+  - type: TriggerOnSpawn
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: FireBomb
+    totalIntensity: 1
+    intensitySlope: 1
+    maxIntensity: 5
+    canCreateVacuum: false
+    deleteAfterExplosion: true
+  - type: IgnitionSource
+    temperature: 1100
+    ignited: true
+  - type: TimedDespawn
+    lifetime: 0.1
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  id: AshDrakeFireMeteorFalling
+  name: падающий огненный шар
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/magic.rsi
+    layers:
+    - state: fireball
+      shader: unshaded
+  - type: PointLight
+    color: "#FF6600"
+    radius: 3.0
+    energy: 8.0
+  - type: TimedDespawn
+    lifetime: 1.8
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  parent: BaseAction
+  id: ActionAshDrakeFly
+  suffix: Shitspawn
+  name: "[color=orangered]Пикирование[/color]"
+  description: Стремительно летит к цели и обрушивается вниз, оставляя за собой лаву!
+  components:
+  - type: Action
+    icon: { sprite: SS220/Shitspawn/AshDrake/icons/wing_dive.rsi, state: icon }
+    itemIconStyle: BigAction
+    useDelay: 20
+    priority: 5
+  - type: TargetAction
+    checkCanAccess: false
+    range: 20
+  - type: WorldTargetAction
+    event: !type:AshDrakeFlyActionEvent
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  id: AshDrakeFlyLava
+  parent: FloorLavaEntity
+  suffix: AshDrake
+  components:
+  - type: TimedDespawn
+    lifetime: 10
+
+- type: entity
+  parent: BulletRocket
+  categories: [ HideSpawnMenu ]
+  id: ProjectileAshDrakeGreatFireball
+  name: великий огненный шар
+  description: Огромный огненный шар.
+  components:
+  - type: Physics
+    linearDamping: 0
+    angularDamping: 0
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
+  - type: Projectile
+    damage: {}
+    ignoreShooter: true
+  - type: Explosive
+    explosionType: FireBomb
+    totalIntensity: 400
+    intensitySlope: 6
+    maxIntensity: 60
+    canCreateVacuum: false
+    deleteAfterExplosion: true
+  - type: IgnitionSource
+    temperature: 1200
+    ignited: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/magic.rsi
+    scale: 3.0, 3.0
+    layers:
+    - state: fireball
+      shader: unshaded
+  - type: PointLight
+    color: "#FF4400"
+    radius: 6.0
+    energy: 12.0
+  - type: TileFrictionModifier
+    modifier: 0
+  - type: AshDrakeGreatFireballLavaTrail
+  - type: TimedDespawn
+    lifetime: 8
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  parent: BaseAction
+  id: ActionAshDrakeGreatFireball
+  suffix: Shitspawn
+  name: "[color=red]Великий огненный шар[/color]"
+  description: Запускает медленный огромный шар пламени, который взрывается при ударе!
+  components:
+  - type: Action
+    icon: { sprite: SS220/Shitspawn/AshDrake/icons/great_fireball.rsi, state: icon }
+    itemIconStyle: BigAction
+    useDelay: 25
+    priority: 6
+  - type: TargetAction
+    checkCanAccess: false
+    range: 30
+  - type: WorldTargetAction
+    event: !type:AshDrakeGreatFireballActionEvent
+
+- type: entity
+  parent: ClothingHeadBase
+  id: AshDrakeHoodItem
+  name: капюшон дрейка
+  description: Капюшон, сшитый из чешуи пепельного дрейка.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Shitspawn/AshDrake/ash_drake_hood.rsi
+  - type: Clothing
+    sprite: SS220/Shitspawn/AshDrake/ash_drake_hood.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+  - type: HideLayerClothing
+    slots:
+    - Hair
+
+- type: entity
+  parent: ClothingNeckBase
+  id: AshDrakeCloak
+  name: плащ дрейка
+  description: Этот плащ источает огромное количество тепла. Вы чувствуете, что под его покровом вы неуязвимы к огню.
+  suffix: Shitspawn
+  components:
+  - type: Sprite
+    sprite: SS220/Shitspawn/AshDrake/ash_drake_cloak.rsi
+  - type: ToggleableClothing
+    clothingPrototype: AshDrakeHoodItem
+    requiredSlot:
+    - neck
+    slot: head
+  - type: ContainerContainer
+    containers:
+      toggleable-clothing: !type:ContainerSlot {}
+  - type: FireProtection
+    reduction: 1.0
+  - type: Armor
+    modifiers:
+      coefficients:
+        Heat: 0.0
+
+- type: entity
+  id: ActionToggleAshDrakeHood
+  parent: BaseAction
+  name: Переключить капюшон
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    icon: { sprite: SS220/Shitspawn/AshDrake/ash_drake_hood.rsi, state: icon }
+  - type: InstantAction
+    event: !type:ToggleClothingEvent {}
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseSimpleMob
+  id: MobAshDrakeSkeleton
+  name: скелет дрейка
+  description: Восставший из пепла слуга пепельного дракона.
+  components:
+  - type: AshDrakeSkeleton
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+  - type: CombatMode
+  - type: MeleeWeapon
+    hidden: true
+    angle: 0
+    animation: WeaponArcClaw
+    damage:
+      types:
+        Blunt: 10
+  - type: MobState
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      50: Dead
+  - type: Damageable
+    damageContainer: Biological
+  - type: Sprite
+    noRot: true
+    sprite: SS220/Shitspawn/AshDrake/ash_drake_skeleton.rsi
+    layers:
+    - state: alive
+  - type: Appearance
+  - type: TimedDespawn
+    lifetime: 15
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 50
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: NameIdentifier
+    group: GenericNumber
+
+- type: entity
+  parent: BaseAction
+  id: ActionAshDrakeSummonSkeletons
+  suffix: Shitspawn
+  name: "[color=gray]Призыв скелетов[/color]"
+  description: Призывает 6 скелетов вокруг дракона, враждебных ко всем!
+  components:
+  - type: Action
+    icon: { sprite: Mobs/Species/Skeleton/parts.rsi, state: skull_icon }
+    useDelay: 30
+    priority: 4
+  - type: InstantAction
+    event: !type:AshDrakeSummonSkeletonsActionEvent
+
+- type: entity
+  id: AshDrakeRoarEffect
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    drawdepth: Effects
+    sprite: Effects/emp.rsi
+    scale: 4, 4
+    layers:
+    - state: emp_pulse
+  - type: PointLight
+    radius: 12
+    energy: 18
+    color: "#ff6a00"
+  - type: TimedDespawn
+    lifetime: 0.8
+
+- type: entity
+  parent: BaseAction
+  id: ActionAshDrakeRoar
+  suffix: Shitspawn
+  name: "[color=firebrick]Рёв дракона[/color]"
+  description: Издаёт оглушающий рёв, сбивающий с ног всех в большом радиусе на 1.5 секунды!
+  components:
+  - type: Action
+    icon: /Textures/Interface/Actions/scream.png
+    useDelay: 45
+    priority: 3
+  - type: InstantAction
+    event: !type:AshDrakeRoarActionEvent
+
+- type: emote
+  id: AshDrakeRoar
+  name: chat-emote-name-roar
+  category: Vocal
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  chatMessages: ["chat-emote-msg-roar"]
+  chatTriggers:
+  - roar
+  - roars
+  - рёв
+  - ревёт
+
+
+# Polymorph прототип — превращает в скелета
+- type: polymorph
+  id: AshDrakeSkeletonPolymorph
+  configuration:
+    entity: MobSkeletonPerson
+    forced: true
+    inventory: Transfer
+    transferName: true
+    revertOnDeath: false
+
+
+# Проклятый мел пепельного дрейка — рисует руну
+- type: entity
+  parent: BaseItem
+  id: AshDrakeCursedChalk
+  suffix: Shitspawn
+  name: проклятый мел
+  description: Осколок кости пепельного дрейка, заточенный в форме мелка. Говорят, нарисованная им руна способна наложить проклятие на любого, кто наступит на неё.
+  components:
+  - type: Sprite
+    sprite: Objects/Fun/crayons.rsi
+    state: white
+  - type: Item
+    size: Tiny
+    sprite: Objects/Fun/crayons.rsi
+  - type: AshDrakeCursedChalk
+
+# Руна скелета — ловушка на полу
+- type: entity
+  categories: [ HideSpawnMenu ]
+  id: AshDrakeSkeletonRune
+  name: проклятая руна
+  description: Жуткая руна, нарисованная прахом.
+  components:
+  - type: Transform
+    anchored: true
+  - type: Clickable
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      rune:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        hard: false
+        mask:
+        - ItemMask
+        layer:
+        - SlipLayer
+  - type: TriggerOnCollide
+    fixtureID: rune
+    maxTriggers: 1
+  - type: PolymorphOnTrigger
+    targetUser: true
+    polymorph: AshDrakeSkeletonPolymorph
+  - type: EmitSoundOnTrigger
+    positional: true
+    sound:
+      path: /Audio/SS220/Shitspawn/AshDrake/drake_roar.ogg
+      params:
+        volume: 6
+  - type: DeleteOnTrigger
+  - type: Sprite
+    drawdepth: FloorObjects
+    sprite: Effects/crayondecals.rsi
+    scale: 3, 3
+    layers:
+    - state: rune1
+      shader: unshaded
+      color: "#8B0000"
+  - type: PointLight
+    radius: 1.5
+    energy: 4
+    color: "#8B0000"
+  - type: Tag
+    tags:
+    - HideContextMenu

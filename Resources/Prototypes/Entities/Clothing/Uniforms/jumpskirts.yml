@@ -899,9 +899,9 @@
   description: A fancy skirt for the musically inclined. Perfect for any lounge act!
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpskirt/musician.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/musician.rsi #SS220-musician-skirt-resprite
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpskirt/musician.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/musician.rsi #SS220-musician-skirt-resprite
 
 - type: entity
   parent: ClothingUniformSkirtBase

@@ -16,6 +16,8 @@
   name: double toy sword
   description: New Sandy-Cat plastic sword! Twice as much more epic and loud noises!
   components:
+    - type: Tag
+      tags: []
     - type: EnergySword
     - type: ItemToggle
       onUse: false # wielding events control it instead
@@ -366,14 +368,12 @@
     damage:
       types:
         Slash: 0.01
-  # Energy Katana in storage fix begin
   - type: Item
     storedSprite:
       state: storage
       sprite: Objects/Weapons/Melee/energykatana_storage_64x.rsi
     shape:
     - 0,0,0,3
-  # Energy Katana in storage fix end
   - type: Clothing
     sprite: SS220/Objects/Weapons/Melee/Sword/energykatana.rsi
     slots:
@@ -388,3 +388,44 @@
     damage:
       types:
         Slash: 0.01
+  - type: ThrowingAngle
+    angle: 305
+
+- type: entity
+  id: RandomToyWeaponsBundleSpawner
+  name: Random Toy Weapons Bundle Spawner
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Revolvers/toy.rsi
+    layers:
+    - state: base
+  - type: RandomSpawner
+    prototypes:
+    - ClothingBackpackDuffelSyndicateFilledShotgunToy
+    - ClothingBackpackDuffelSyndicateFilledSMGToy
+    - ClothingBackpackDuffelSyndicateFilledRevolverToy
+    - ClothingBackpackDuffelSyndicateFilledLMGToy
+    - ClothingBackpackDuffelSyndicateFilledGrenadeLauncherToy
+    - ClothingBackpackDuffelSyndicateFilledWeaponPistolCobraToy
+    - ClothingBackpackDuffelSyndicateFilledWeaponPistolViperToy
+    - ClothingBackpackDuffelSyndicateFilledWeaponSniperMosinToy
+    - BriefcaseSyndieSniperToyBundleFilled
+    chance: 1
+
+- type: entity
+  parent: BaseItem
+  id: RandomFakeSyndieHardsuitSpawner
+  name: Random Fake Syndie Hardsuit Spawner
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/syndicate.rsi
+    layers:
+    - state: icon
+  - type: RandomSpawner
+    prototypes:
+    - ClothingOuterHardsuitSyndieFake
+    - ClothingOuterHardsuitSyndieMedicFake
+    - ClothingOuterHardsuitSyndieEliteFake
+    - ClothingOuterHardsuitSyndieCommanderFake
+    - ClothingOuterHardsuitJuggernautFake
+    chance: 1

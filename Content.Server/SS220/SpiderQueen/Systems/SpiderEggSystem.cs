@@ -2,12 +2,14 @@
 using Content.Server.Mind;
 using Content.Server.NPC;
 using Content.Server.NPC.Systems;
+using Content.Server.SS220.Spider;
 using Content.Server.SS220.SpiderQueen.Components;
 using Content.Shared.Examine;
 using Content.Shared.Mind.Components;
 using Content.Shared.Speech;
 using Content.Shared.Spider;
 using Content.Shared.Storage;
+using Content.Shared.SS220.Atmos;
 using Robust.Shared.Map;
 using Robust.Shared.Random;
 using System.Numerics;
@@ -19,16 +21,31 @@ public sealed partial class SpiderEggSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly NPCSystem _npc = default!;
     [Dependency] private readonly MindSystem _mind = default!;
+    [Dependency] private readonly SpiderWebSystem _spiderWeb = default!;
+
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<SpiderEggComponent, SpeakAttemptEvent>(OnTrySpeak);
         SubscribeLocalEvent<SpiderEggComponent, ExaminedEvent>(OnExamine);
+        SubscribeLocalEvent<SpiderEggComponent, BarotraumaDamageAttemptEvent>(OnBarotraumaDamageAttempt);
     }
     private void OnTrySpeak(EntityUid uid, SpiderEggComponent comp, ref SpeakAttemptEvent ev)
     {
         ev.Cancel();
     }
+
+    private void OnBarotraumaDamageAttempt(Entity<SpiderEggComponent> ent, ref BarotraumaDamageAttemptEvent args)
+    {
+        var (uid, comp) = ent;
+        var transform = Transform(uid);
+        if (transform.GridUid == null)
+            return;
+
+        if (_spiderWeb.IsTileBlockedByWeb(transform.Coordinates))
+            args.Cancel();
+    }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -54,7 +71,7 @@ public sealed partial class SpiderEggSystem : EntitySystem
         {
             var ent = Spawn(proto, coordinates);
             if (TryComp<MindContainerComponent>(uid, out var mind) && mind.HasMind)
-                _mind.TransferTo(mind.Mind.Value, ent); // transferto сам по себе если не может зарезолвить mind дает return, на проверки должно быть пофиг, но mind нужен
+                _mind.TransferTo(mind.Mind.Value, ent); // transferto сам по себе если не может зарезолвить mind, дает return, на проверки должно быть пофиг, но mind нужен
             if (component.EggOwner is { } owner)
                 _npc.SetBlackboard(ent, NPCBlackboard.FollowTarget, new EntityCoordinates(owner, Vector2.Zero));
         }

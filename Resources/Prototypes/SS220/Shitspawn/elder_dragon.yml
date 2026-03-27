@@ -64,7 +64,7 @@
       fix1:
         shape:
           !type:PhysShapeCircle
-          radius: 0.50 
+          radius: 0.50
         density: 100
         mask:
         - FlyingMobMask
@@ -84,6 +84,14 @@
     speedModifierThresholds:
       650: 0.7
       700: 0.5
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 1000
+      behaviors:
+      - !type:GibBehavior { }
   - type: Flammable
     damage:
       types: {}
@@ -266,7 +274,7 @@
   - type: Fixtures
   - type: Sprite
     layers:
-    - sprite: SS220/Shitspawn/ElderDragon/carp_rift.rsi 
+    - sprite: SS220/Shitspawn/ElderDragon/carp_rift.rsi
       state: icon
   - type: InteractionOutline
   - type: Clickable
@@ -309,7 +317,7 @@
       allowMovement: true
       allowSpeech: true
       makeSentient: true
-      name: ghost-role-information-elder-dragon-shark-name 
+      name: ghost-role-information-elder-dragon-shark-name
       description: ghost-role-information-elder-dragon-shark-description
       rules: ghost-role-information-space-dragon-summoned-carp-rules
       mindRoles:
@@ -381,7 +389,7 @@
       telepathyChannelPrototype: TelepathyChannelSpaceDragon
 
 
-#loot sword 
+#loot sword
 - type: entity
   name: forgotten captain's sabre
   parent: [ BaseSword]

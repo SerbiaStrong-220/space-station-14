@@ -169,9 +169,10 @@ public sealed partial class ChatSystem : SharedChatSystem
         IConsoleShell? shell = null,
         ICommonSession? player = null, string? nameOverride = null,
         bool checkRadioPrefix = true,
-        bool ignoreActionBlocker = false)
+        bool ignoreActionBlocker = false,
+        bool bypassEnglishFilter = false) // SS220 FIX wizard spell speak
     {
-        TrySendInGameICMessage(source, message, desiredType, hideChat ? ChatTransmitRange.HideChat : ChatTransmitRange.Normal, hideLog, shell, player, nameOverride, checkRadioPrefix, ignoreActionBlocker);
+        TrySendInGameICMessage(source, message, desiredType, hideChat ? ChatTransmitRange.HideChat : ChatTransmitRange.Normal, hideLog, shell, player, nameOverride, checkRadioPrefix, ignoreActionBlocker, bypassEnglishFilter); // SS220 FIX wizard spell speak
     }
 
     /// <summary>
@@ -195,7 +196,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         ICommonSession? player = null,
         string? nameOverride = null,
         bool checkRadioPrefix = true,
-        bool ignoreActionBlocker = false
+        bool ignoreActionBlocker = false,
+        bool bypassEnglishFilter = false // SS220 FIX wizard spell speak
         )
     {
         if (HasComp<GhostComponent>(source))
@@ -246,7 +248,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             || (CultureInfo.CurrentCulture.IsNeutralCulture && CultureInfo.CurrentCulture.Name == "en");
 
         message = _chatManager.DeleteProhibitedCharacters(message, source); // SS220 delete prohibited characters
-        message = SanitizeInGameICMessage(source, message, /* SS220 languages */ desiredType, out var emoteStr, shouldCapitalize, shouldPunctuate, shouldCapitalizeTheWordI);
+        message = SanitizeInGameICMessage(source, message, /* SS220 languages */ desiredType, out var emoteStr, shouldCapitalize, shouldPunctuate, shouldCapitalizeTheWordI, bypassEnglishFilter); // SS220 FIX wizard spell speak
 
         // Was there an emote in the message? If so, send it.
         if (player != null && emoteStr != message && emoteStr != null)
@@ -903,7 +905,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         out string? emoteStr,
         bool capitalize = true,
         bool punctuate = false,
-        bool capitalizeTheWordI = true)
+        bool capitalizeTheWordI = true,
+        bool bypassEnglishFilter = false) // SS220 FIX wizard spell speak
     {
         var newMessage = message.Trim();
         // SS220 languages begin
@@ -961,7 +964,7 @@ public sealed partial class ChatSystem : SharedChatSystem
                 GetRadioKeycodePrefix(source, newMessage, out newMessage, out prefix);
 
             _sanitizer.TrySanitizeEmoteShorthands(newMessage, source, out newMessage, out newEmoteStr);
-            if (!_sanitizer.CheckNoEnglish(source, newMessage))
+            if (!bypassEnglishFilter && !_sanitizer.CheckNoEnglish(source, newMessage)) // SS220 FIX wizard spell speak
                 foundEnglish = true;
 
             if (capitalize)

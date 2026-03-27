@@ -150,6 +150,24 @@
       - WhitelistChameleonIdCard
     #ss220 add pdaidpainter end
 
+- type: entity
+  parent: IDCardStandard
+  id: NanoTrasenRepresentativeIDCard
+  name: NanoTrasen Representative ID card
+  components:
+    - type: Sprite
+      layers:
+        - state: silver
+        - state: idmagistrate
+    - type: PresetIdCard
+      job: NanoTrasenRepresentative
+    - type: Tag
+      tags:
+      - WhitelistPdaIdPainter
+      - DoorBumpOpener
+      - WhitelistChameleon
+      - WhitelistChameleonIdCard
+
 # Deathsquad
 - type: entity
   parent: IDCardStandard
@@ -234,3 +252,34 @@
       jobTitle: job-name-cc-ci-officer
     - type: PresetIdCard
       job: CIOffcier
+
+- type: entity
+  parent: [Clothing]
+  id: FakeCaptainIDCard
+  name: captain ID card
+  description: A card necessary to access various areas aboard the station.
+  suffix: fake
+  components:
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: SS220/Objects/Misc/id_cards.rsi
+  - type: Sprite
+    sprite: SS220/Objects/Misc/id_cards.rsi
+    layers:
+    - state: gold
+    - state: idcaptain
+  - type: Item
+    size: Small
+    storedRotation: -90
+    heldPrefix: gold
+  - type: IdCard
+    jobTitle: job-name-captain
+    jobIcon: JobIconCaptain
+    jobColor: '#2A4EF6FF'
+    radioBold: true
+  - type: Access
+    enabled: false
+  - type: Tag
+    tags:
+    - DoorBumpOpener

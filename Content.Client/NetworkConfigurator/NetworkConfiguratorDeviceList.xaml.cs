@@ -27,11 +27,12 @@ public sealed partial class NetworkConfiguratorDeviceList : ScrollContainer
             Margin = new Thickness(8)
         };
 
-        var name = new Label()
+        // SS220 add additional control for shuttle start
+        var name = new Label
         {
-            Text = savedDevice.name[..Math.Min(11, savedDevice.name.Length)],
-            SetWidth = 84
+            Text = savedDevice.name,
         };
+        // SS220 add additional control for shuttle end
 
         var address = new Label()
         {

@@ -89,3 +89,13 @@
   cost: 1250
   category: cargoproduct-category-name-service
   group: market
+
+- type: cargoProduct
+  id: WaterCooler
+  icon:
+    sprite: Structures/Storage/tanks.rsi
+    state: watercooler
+  product: WaterCooler
+  cost: 1000
+  category: cargoproduct-category-name-service
+  group: market

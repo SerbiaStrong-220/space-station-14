@@ -262,8 +262,7 @@
   description: Stylish black shoes.
   components:
   - type: FootstepModifier
-    footstepSoundCollection:
-      collection: null
+    footstepSoundCollection: null
   # HiddenDesc-Start
   - type: HiddenDescription
     entries:
