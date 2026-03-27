@@ -8,6 +8,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Player;
 using System.Linq;
 using System.Numerics;
+using Content.Shared.SS220.Damage.SplitDamage;
 
 namespace Content.Server.Weapons.Melee;
 
