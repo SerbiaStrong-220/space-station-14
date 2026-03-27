@@ -656,14 +656,6 @@ public sealed class PlantHolderSystem : EntitySystem
 
         CheckHealth(uid, component);
 
-        //SS220-Mob-Spawn-Nerf start
-        if (component.Harvest && component.Seed.AutoSpawnMob)
-        {
-            component.Seed.HarvestRepeat = HarvestType.NoRepeat;
-            AutoHarvest(uid, component);
-        }
-        //SS220-Mob-Spawn-Nerf end
-
         if (component.Harvest && component.Seed.HarvestRepeat == HarvestType.SelfHarvest)
             AutoHarvest(uid, component);
 
@@ -692,6 +684,14 @@ public sealed class PlantHolderSystem : EntitySystem
 
         if (component.UpdateSpriteAfterUpdate)
             UpdateSprite(uid, component);
+
+        //SS220-Mob-Spawn-Nerf start
+        if (component.Harvest && component.Seed.AutoSpawnMob)
+        {
+            component.Seed.HarvestRepeat = HarvestType.NoRepeat;
+            AutoHarvest(uid, component);
+        }
+        //SS220-Mob-Spawn-Nerf end
     }
 
     //TODO: kill this bullshit
