@@ -19,6 +19,7 @@
       active: false
     - type: InstastunResistOnActiveBlocking
     - type: ArmorBlock
+    - type: AltArmor
       tresholddict:
           Radiation: 1000
           Poison: 1000
@@ -75,7 +76,7 @@
       meleeBlockProb: 0.65
       activeRangeBlockProb: 0.60
       activeMeleeBlockProb: 0.75
-    - type: ArmorBlock
+    - type: AltArmor
       tresholddict:
           Piercing: 6
           Blunt: 20
@@ -112,7 +113,7 @@
       meleeBlockProb: 0.65
       activeRangeBlockProb: 0.60
       activeMeleeBlockProb: 0.75
-    - type: ArmorBlock
+    - type: AltArmor
       tresholddict:
           Radiation: 1000
           Poison: 1000
@@ -149,7 +150,7 @@
       meleeBlockProb: 0.33
       activeRangeBlockProb: 0.65
       activeMeleeBlockProb: 0.37
-    - type: ArmorBlock
+    - type: AltArmor
       tresholddict:
           Radiation: 1000
           Poison: 1000
@@ -193,7 +194,7 @@
       meleeBlockProb: 0.60
       activeRangeBlockProb: 0.50
       activeMeleeBlockProb: 0.70
-    - type: ArmorBlock
+    - type: AltArmor
       tresholddict:
           Piercing: 6
           Slash: 15
@@ -255,7 +256,7 @@
       meleeBlockProb: 0.50
       activeRangeBlockProb: 0.60
       activeMeleeBlockProb: 0.65
-    - type: ArmorBlock
+    - type: AltArmor
       tresholddict:
           Piercing: 1
           Blunt: 1
@@ -314,7 +315,7 @@
       meleeBlockProb: 0.50
       activeRangeBlockProb: 0.60
       activeMeleeBlockProb: 0.65
-    - type: ArmorBlock
+    - type: AltArmor
       tresholddict:
           Piercing: 6
           Blunt: 20
@@ -376,7 +377,7 @@
       meleeBlockProb: 0.50
       activeRangeBlockProb: 0.60
       activeMeleeBlockProb: 0.65
-    - type: ArmorBlock
+    - type: AltArmor
       tresholddict:
           Piercing: 4
           Blunt: 7
@@ -438,7 +439,7 @@
       meleeBlockProb: 0.55
       activeRangeBlockProb: 0.40
       activeMeleeBlockProb: 0.70
-    - type: ArmorBlock
+    - type: AltArmor
       tresholddict:
           Piercing: 17
           Blunt: 25
@@ -480,7 +481,7 @@
       activeMeleeBlockProb: 0.45 #Mirror shield reflects heat/laser, but is relatively weak to everything else.
       blockSound: !type:SoundPathSpecifier
         path: /Audio/Effects/glass_step.ogg
-    - type: ArmorBlock
+    - type: AltArmor
       tresholddict:
           Piercing: 7
           Blunt: 10
@@ -523,6 +524,7 @@
   id: EnergyShieldAlt
   description: A piece of advanced tech made based on the technology used in the field shields. It is lightweight and can very effectively block any types of attacks.
   components:
+    - type: ArmorBlock
     - type: ItemToggle
       soundActivate:
         path: /Audio/Weapons/ebladeon.ogg
@@ -577,7 +579,7 @@
       toggledRangeBlockProb: 0.40
       toggledMeleeBlockProb: 0.65 #No more stunbatons
     - type: Appearance
-    - type: ArmorBlock
+    - type: AltArmor
       tresholddict:
         Piercing: 55
         Blunt: 30
@@ -645,6 +647,7 @@
   id: TelescopicShieldAlt
   description: An advanced riot shield made of lightweight materials that collapses for easy storage.
   components:
+    - type: ArmorBlock
     - type: AltBlocking
       rangeBlockProb: 0
       meleeBlockProb: 0
@@ -653,7 +656,7 @@
     - type: ToggleBlockingChance
       toggledRangeBlockProb: 0.50
       toggledMeleeBlockProb: 0.65
-    - type: ArmorBlock
+    - type: AltArmor
       tresholddict:
           Piercing: 15
           Blunt: 20

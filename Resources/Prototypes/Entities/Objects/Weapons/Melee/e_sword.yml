@@ -350,7 +350,10 @@
       right:
       - state: inhand-right-shield
         shader: unshaded
+  - type: Damageable
+    damageContainer: Invulnerable
   - type: ArmorBlock
+  - type: AltArmor
     tresholddict:
       Piercing: 48
       Blunt: 30
@@ -537,7 +540,10 @@
       right:
       - state: inhand-right-shield
         shader: unshaded
+  - type: Damageable
+    damageContainer: Invulnerable
   - type: ArmorBlock
+  - type: AltArmor
     tresholddict:
       Piercing: 40
       Blunt: 30

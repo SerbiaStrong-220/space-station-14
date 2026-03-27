@@ -136,6 +136,9 @@ public sealed partial class SharedAltBlockingSystem
             if (blockComp.User == null)
                 return false;
 
+            var user = (EntityUid)blockComp.User;
+
+
             if (!TryGetNetEntity(blockComp.User, out var NetUser))
                 continue;
 
@@ -151,7 +154,7 @@ public sealed partial class SharedAltBlockingSystem
                 {
                     _damageable.TryChangeDamage((EntityUid)item, damage);
                     _audio.PlayPvs(blockComp.BlockSound, (EntityUid)item);
-                    _popupSystem.PopupEntity(Loc.GetString("block-shot"), (EntityUid)blockComp.User);
+                    _popupSystem.PopupEntity(Loc.GetString("block-shot"), user);
                     return true;
                 }
             }
@@ -162,7 +165,7 @@ public sealed partial class SharedAltBlockingSystem
                 {
                     _damageable.TryChangeDamage((EntityUid)item, damage);
                     _audio.PlayPvs(blockComp.BlockSound, (EntityUid)item);
-                    _popupSystem.PopupEntity(Loc.GetString("block-shot"), (EntityUid)blockComp.User);
+                    _popupSystem.PopupEntity(Loc.GetString("block-shot"), user);
                     return true;
                 }
             }
