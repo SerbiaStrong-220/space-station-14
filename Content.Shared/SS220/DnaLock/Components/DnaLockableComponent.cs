@@ -36,16 +36,7 @@ public sealed partial class DnaLockableComponent : Component
     public bool Emagged;
 
     [DataField, AutoNetworkedField]
-    public bool BlockStorageOpen = true;
-
-    [DataField, AutoNetworkedField]
-    public bool BlockToggleableClothing = true;
-
-    [DataField, AutoNetworkedField]
-    public bool BlockBatteryFireModeChange = true;
-
-    [DataField, AutoNetworkedField]
-    public bool BlockBatteryEject = true;
+    public DnaLockBlockedActions BlockedActions = DnaLockBlockedActions.All;
 }
 
 public enum DnaLockMode
@@ -53,3 +44,15 @@ public enum DnaLockMode
     Roundstart,
     InRound
 }
+
+[Flags]
+public enum DnaLockBlockedActions : byte
+{
+    None = 0,
+    StorageOpen = 1 << 0,
+    ToggleableClothing = 1 << 1,
+    BatteryFireModeChange = 1 << 2,
+    BatteryEject = 1 << 3,
+    All = StorageOpen | ToggleableClothing | BatteryFireModeChange | BatteryEject
+}
+

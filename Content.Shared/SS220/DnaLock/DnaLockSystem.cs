@@ -55,6 +55,11 @@ public sealed class DnaLockSystem : EntitySystem
         SubscribeLocalEvent<DnaLockableComponent, BoundUserInterfaceMessageAttempt>(OnBoundUiMessageAttempt);
     }
 
+    private static bool IsBlocked(Entity<DnaLockableComponent> ent, DnaLockBlockedActions action)
+    {
+        return (ent.Comp.BlockedActions & action) != 0;
+    }
+
     private void OnActivateAttempt(Entity<DnaLockableComponent> ent, ref ItemToggleActivateAttemptEvent args)
     {
         if (args.User is not {} user)
@@ -125,7 +130,7 @@ public sealed class DnaLockSystem : EntitySystem
 
     private void OnGetVerbs(Entity<DnaLockableComponent> ent, ref GetVerbsEvent<Verb> args)
     {
-        if (!ent.Comp.BlockBatteryFireModeChange)
+        if (!IsBlocked(ent, DnaLockBlockedActions.BatteryFireModeChange))
             return;
 
         if (!TryComp<BatteryWeaponFireModesComponent>(ent, out _))
@@ -139,7 +144,7 @@ public sealed class DnaLockSystem : EntitySystem
 
     private void OnStorageOpenAttempt(Entity<DnaLockableComponent> ent, ref StorageOpenAttemptEvent args)
     {
-        if (!ent.Comp.BlockStorageOpen)
+        if (!IsBlocked(ent, DnaLockBlockedActions.StorageOpen))
             return;
 
         if (CheckAccess(ent, args.User, args.Silent))
@@ -150,7 +155,7 @@ public sealed class DnaLockSystem : EntitySystem
 
     private void OnStorageInteractAttempt(Entity<DnaLockableComponent> ent, ref StorageInteractAttemptEvent args)
     {
-        if (!ent.Comp.BlockStorageOpen)
+        if (!IsBlocked(ent, DnaLockBlockedActions.StorageOpen))
             return;
 
         if (CheckAccess(ent, args.User, args.Silent))
@@ -161,7 +166,7 @@ public sealed class DnaLockSystem : EntitySystem
 
     private void OnToggleableClothing(Entity<DnaLockableComponent> ent, ref ToggleClothingEvent args)
     {
-        if (!ent.Comp.BlockToggleableClothing)
+        if (!IsBlocked(ent, DnaLockBlockedActions.ToggleableClothing))
             return;
 
         if (CheckAccess(ent, args.Performer))
@@ -172,7 +177,7 @@ public sealed class DnaLockSystem : EntitySystem
 
     private void OnItemSlotEjectAttempt(Entity<DnaLockableComponent> ent, ref ItemSlotEjectAttemptEvent args)
     {
-        if (!ent.Comp.BlockBatteryEject)
+        if (!IsBlocked(ent, DnaLockBlockedActions.BatteryEject))
             return;
 
         if (args.User == null)
@@ -197,7 +202,7 @@ public sealed class DnaLockSystem : EntitySystem
         if (args.Target != ent.Owner)
             return;
 
-        if (args.UiKey is StorageComponent.StorageUiKey.Key && !ent.Comp.BlockStorageOpen)
+        if (args.UiKey is StorageComponent.StorageUiKey.Key && !IsBlocked(ent, DnaLockBlockedActions.StorageOpen))
             return;
 
         var silentFail = args.Message is not OpenBoundInterfaceMessage;

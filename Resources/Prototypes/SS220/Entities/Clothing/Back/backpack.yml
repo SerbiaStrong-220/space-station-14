@@ -20,7 +20,7 @@
   - type: DnaLockable
     mode: Roundstart
     roundstartJob: BlueShield
-    blockStorageOpen: false
+    blockedActions: ToggleableClothing
   - type: Sprite
     sprite: SS220/Clothing/Back/Backpacks/blueshield.rsi
   - type: Storage
