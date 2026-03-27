@@ -6,7 +6,7 @@ namespace Content.Shared.SS220.MartialArts.Sequence.Conditions;
 
 public sealed partial class IsDownCombatCondition : CombatSequenceCondition
 {
-    public override bool Execute(EntityUid user, EntityUid target, MartialArtistComponent artist)
+    public override bool Execute(Entity<MartialArtistComponent> user, EntityUid target)
     {
         var standing = Entity.System<StandingStateSystem>();
         return standing.IsDown(target);

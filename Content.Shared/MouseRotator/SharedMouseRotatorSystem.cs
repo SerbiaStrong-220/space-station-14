@@ -76,6 +76,7 @@ public abstract class SharedMouseRotatorSystem : EntitySystem
         {
             if (!enabled)
                 return;
+
             ent.Comp = AddComp<MouseRotatorComponent>(ent);
         }
 

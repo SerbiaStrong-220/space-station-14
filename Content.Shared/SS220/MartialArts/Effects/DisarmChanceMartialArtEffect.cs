@@ -21,7 +21,6 @@ public sealed partial class DisarmChanceMartialArtEffectSystem : BaseMartialArtE
 
         // if we applied our effect we will mark DisarmedEvent as handled and hands system wont do anything
         // if we haven't did anything the other systems should take care about it
-        // hacky but do we have other way?
         SubscribeLocalEvent<MartialArtsTargetComponent, DisarmedEvent>(OnDisarm, before: [typeof(SharedHandsSystem), typeof(SharedStaminaSystem)]);
     }
 

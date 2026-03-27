@@ -15,5 +15,5 @@ public abstract partial class CombatSequenceEffect
     protected IEntityManager Entity => _entMan ??= IoCManager.Resolve<IEntityManager>();
     protected IGameTiming Timing => _timing ??= IoCManager.Resolve<IGameTiming>();
 
-    public abstract void Execute(EntityUid user, EntityUid target, MartialArtistComponent artist);
+    public abstract void Execute(Entity<MartialArtistComponent> user, EntityUid target);
 }

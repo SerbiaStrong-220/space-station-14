@@ -16,7 +16,7 @@ public abstract partial class CombatSequenceCondition
     protected IEntityManager Entity => _entMan ??= IoCManager.Resolve<IEntityManager>();
     protected IGameTiming Timing => _timing ??= IoCManager.Resolve<IGameTiming>();
 
-    public virtual bool Execute(EntityUid user, EntityUid target, MartialArtistComponent artist)
+    public virtual bool Execute(Entity<MartialArtistComponent> user, EntityUid target)
     {
         return true;
     }

@@ -10,7 +10,7 @@ namespace Content.Shared.SS220.MartialArts;
 
 public sealed partial class MartialArtsSystem
 {
-    private void OnTrigger(EntityUid uid, MartialArtOnTriggerComponent comp, TriggerEvent ev)
+    private void OnTrigger(Entity<MartialArtOnTriggerComponent> entity, ref TriggerEvent ev)
     {
         if (!_timing.IsFirstTimePredicted)
             return;
@@ -21,13 +21,13 @@ public sealed partial class MartialArtsSystem
         if (!TryComp<MartialArtistComponent>(user, out var artist))
             return;
 
-        if (!TryGrantMartialArt(user, comp.MartialArt, false, true, artist))
+        if (!TryGrantMartialArt((user, artist), entity.Comp.MartialArt, false, true))
             _popup.PopupClient(Loc.GetString(artist.CantGrantArtPopup), user, user);
 
         ev.Handled = true;
     }
 
-    private void OnEquipped(EntityUid uid, MartialArtOnEquipComponent comp, GotEquippedEvent ev)
+    private void OnEquipped(Entity<MartialArtOnEquipComponent> entity, ref GotEquippedEvent ev)
     {
         if (!_timing.IsFirstTimePredicted)
             return;
@@ -35,17 +35,17 @@ public sealed partial class MartialArtsSystem
         if (!CanHaveMartialArts(ev.Equipee))
             return;
 
-        DebugTools.Assert(comp.Granted == false, $"Tried to give martial art on equipped event but this item already is granting martial art; UID: {uid}");
+        DebugTools.Assert(entity.Comp.Granted == false, $"Tried to give martial art on equipped event but this item already is granting martial art; entity: {entity}");
 
-        comp.Granted = TryGrantMartialArt(ev.Equipee, comp.MartialArt, comp.OverrideExisting);
+        entity.Comp.Granted = TryGrantMartialArt(ev.Equipee, entity.Comp.MartialArt, entity.Comp.OverrideExisting);
     }
 
-    private void OnUnequipped(EntityUid uid, MartialArtOnEquipComponent comp, GotUnequippedEvent ev)
+    private void OnUnequipped(Entity<MartialArtOnEquipComponent> entity, ref GotUnequippedEvent ev)
     {
         if (!_timing.IsFirstTimePredicted)
             return;
 
-        if (!comp.Granted)
+        if (!entity.Comp.Granted)
             return;
 
         if (!CanHaveMartialArts(ev.Equipee))
@@ -53,28 +53,28 @@ public sealed partial class MartialArtsSystem
 
         RevokeMartialArt(ev.Equipee);
 
-        comp.Granted = false;
+        entity.Comp.Granted = false;
     }
 
-    private void OnEquipShutdown(EntityUid uid, MartialArtOnEquipComponent comp, ComponentShutdown ev)
+    private void OnEquipShutdown(Entity<MartialArtOnEquipComponent> entity, ref ComponentShutdown ev)
     {
         if (!_timing.IsFirstTimePredicted)
             return;
 
-        if (!comp.Granted)
+        if (!entity.Comp.Granted)
             return;
 
-        if (!_container.TryGetContainingContainer(uid, out var container))
+        if (!_container.TryGetContainingContainer(entity.Owner, out var container))
             return;
 
-        DebugTools.Assert(HasComp<MartialArtistComponent>(container.Owner), $"On shutdown, entity {uid} had granted martial art but container entity ({container.Owner}) isn't martial artist");
+        DebugTools.Assert(HasComp<MartialArtistComponent>(container.Owner), $"On shutdown, entity {entity} had granted martial art but container entity ({container.Owner}) isn't martial artist");
 
         RevokeMartialArt(container.Owner);
     }
 
-    public bool TryGrantMartialArt(EntityUid user, ProtoId<MartialArtPrototype> martialArt, bool overrideExisting = false, bool popups = true, MartialArtistComponent? artist = null)
+    public bool TryGrantMartialArt(Entity<MartialArtistComponent?> user, ProtoId<MartialArtPrototype> martialArt, bool overrideExisting = false, bool popups = true)
     {
-        if (!Resolve(user, ref artist))
+        if (!Resolve(user.Owner, ref user.Comp))
             return false;
 
         if (!CanHaveMartialArts(user))
@@ -83,61 +83,58 @@ public sealed partial class MartialArtsSystem
         if (!_prototype.TryIndex(martialArt, out var proto))
             return false;
 
-        if (artist.MartialArt != null)
+        if (user.Comp.MartialArt != null)
         {
             if (!overrideExisting)
                 return false;
 
-            RevokeMartialArt(user, popups, artist);
+            RevokeMartialArt(user, popups);
         }
 
-        artist.MartialArt = martialArt;
+        user.Comp.MartialArt = martialArt;
 
         StartupEffects(user, proto);
 
         if (popups)
-            _popup.PopupClient(Loc.GetString(artist.GrantedArtPopup, ("art", Loc.GetString(proto.Name))), user, user);
+            _popup.PopupClient(Loc.GetString(user.Comp.GrantedArtPopup, ("art", Loc.GetString(proto.Name))), user, user);
 
         _adminLog.Add(LogType.Experience, LogImpact.Medium, $"{ToPrettyString(user):player} was granted with \"{proto.ID:martial art}\"");
 
         return true;
     }
 
-    public void RevokeMartialArt(EntityUid user, bool popups = true, MartialArtistComponent? artist = null)
+    public void RevokeMartialArt(Entity<MartialArtistComponent?> user, bool popups = true)
     {
-        if (!Resolve(user, ref artist))
+        if (!Resolve(user.Owner, ref user.Comp))
             return;
 
-        if (artist.MartialArt == null)
+        if (user.Comp.MartialArt == null)
             return;
 
-        _prototype.TryIndex(artist.MartialArt, out var proto);
+        _prototype.TryIndex(user.Comp.MartialArt, out var proto);
 
-        artist.MartialArt = null;
+        user.Comp.MartialArt = null;
 
         if (proto != null)
             ShutdownEffects(user, proto);
 
         if (popups)
-            _popup.PopupClient(Loc.GetString(artist.RevokedArtPopup, ("art", Loc.GetString(proto?.Name ?? UnknownArt))), user, user);
+            _popup.PopupClient(Loc.GetString(user.Comp.RevokedArtPopup, ("art", Loc.GetString(proto?.Name ?? UnknownArt))), user, user);
 
         _adminLog.Add(LogType.Experience, LogImpact.Medium, $"\"{proto?.ID:martial art}\" has been revoked for {ToPrettyString(user):player}");
     }
 
-    public bool HasMartialArt(EntityUid user, MartialArtistComponent? artist = null)
+    public bool HasMartialArt(Entity<MartialArtistComponent?> user)
     {
-        if (!Resolve(user, ref artist))
+        if (!Resolve(user.Owner, ref user.Comp))
             return false;
 
-        return artist.MartialArt != null;
+        return user.Comp.MartialArt != null;
     }
 
-    public bool CanHaveMartialArts(EntityUid user, MartialArtistComponent? artist = null)
+    public bool CanHaveMartialArts(Entity<MartialArtistComponent?> user)
     {
-        if (!Resolve(user, ref artist))
-            return false;
-
-        return true;
+        return Resolve(user.Owner, ref user.Comp, logMissing: true);
     }
 
 }

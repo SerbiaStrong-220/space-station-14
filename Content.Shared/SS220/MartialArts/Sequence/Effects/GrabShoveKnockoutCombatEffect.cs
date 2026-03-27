@@ -9,7 +9,7 @@ public sealed partial class GrabShoveKnockoutCombatEffect : CombatSequenceEffect
     [DataField(required: true)]
     public TimeSpan KnockdownTime;
 
-    public override void Execute(EntityUid user, EntityUid target, MartialArtistComponent artist)
+    public override void Execute(Entity<MartialArtistComponent> user, EntityUid target)
     {
         var knockout = Entity.System<GrabShoveKnockoutSystem>();
 

@@ -15,7 +15,7 @@ public sealed partial class SetGrabStageCombatEffect : CombatSequenceEffect
     [DataField]
     public bool CreateGrab = true;
 
-    public override void Execute(EntityUid user, EntityUid target, MartialArtistComponent artist)
+    public override void Execute(Entity<MartialArtistComponent> user, EntityUid target)
     {
         var grab = Entity.System<SharedGrabSystem>();
 

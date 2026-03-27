@@ -6,9 +6,9 @@ namespace Content.Shared.SS220.MartialArts;
 
 public sealed partial class MartialArtsSystem
 {
-    private void OnShutdown(EntityUid user, MartialArtistComponent artist, ComponentShutdown ev)
+    private void OnShutdown(Entity<MartialArtistComponent> user, ref ComponentShutdown ev)
     {
-        if (!_prototype.TryIndex(artist.MartialArt, out var martialArt))
+        if (!_prototype.TryIndex(user.Comp.MartialArt, out var martialArt))
             return;
 
         ShutdownEffects(user, martialArt);

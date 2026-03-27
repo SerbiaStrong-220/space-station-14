@@ -9,7 +9,7 @@ public sealed partial class ApplyDamageCombatEffect : CombatSequenceEffect
     [DataField(required: true)]
     public DamageSpecifier Damage = default!;
 
-    public override void Execute(EntityUid user, EntityUid target, MartialArtistComponent artist)
+    public override void Execute(Entity<MartialArtistComponent> user, EntityUid target)
     {
         var damageable = Entity.System<DamageableSystem>();
         damageable.TryChangeDamage(target, Damage, origin: user);

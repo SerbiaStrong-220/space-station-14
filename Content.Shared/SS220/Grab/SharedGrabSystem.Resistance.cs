@@ -56,7 +56,7 @@ public partial class SharedGrabSystem
     /// Gets cooldown resistance for grabbable
     /// </summary>
     /// <returns>(TimeStart, TimeEnd)</returns>
-    private (TimeSpan, TimeSpan) GetResistanceCooldown(Entity<GrabResistanceComponent?> grabbable)
+    private (TimeSpan, TimeSpan) GetResistanceStartEndTime(Entity<GrabResistanceComponent?> grabbable)
     {
         if (!Resolve(grabbable, ref grabbable.Comp, false))
             return (TimeSpan.Zero, TimeSpan.Zero);
@@ -77,7 +77,7 @@ public partial class SharedGrabSystem
         if (!TryComp<GrabResistanceComponent>(grabbable, out var resistance)) // you don't have ability to resist lol
             return;
 
-        var (_, cooldownEnd) = GetResistanceCooldown((grabbable.Owner, resistance));
+        var (_, cooldownEnd) = GetResistanceStartEndTime((grabbable.Owner, resistance));
         if (cooldownEnd > _timing.CurTime)
             return;
 

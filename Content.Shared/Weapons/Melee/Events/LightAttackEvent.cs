@@ -1,25 +1,7 @@
 using Robust.Shared.Map;
-using Robust.Shared.Serialization;
 
 namespace Content.Shared.Weapons.Melee.Events;
 
-/// <summary>
-/// Raised when a light attack is made.
-/// </summary>
-[Serializable, NetSerializable]
-public sealed class LightAttackEvent : AttackEvent
-{
-    public readonly NetEntity? Target;
-    public readonly NetEntity Weapon;
-
-    public LightAttackEvent(NetEntity? target, NetEntity weapon, NetCoordinates coordinates) : base(coordinates)
-    {
-        Target = target;
-        Weapon = weapon;
-    }
-}
-
-// SS220-MartialArts-Start
 // Why:
 // LightAttackEvent is used only for internal use in MeleeWeaponSystem, prediction and etc,
 // it raises before any checks is performed at server side not even talking about of applying effects
@@ -44,4 +26,3 @@ public sealed partial class LightAttackPerformedEvent : EntityEventArgs
         Coordinates = coordinates;
     }
 };
-// SS220-MartialArts-End

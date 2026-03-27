@@ -23,7 +23,7 @@ public sealed partial class ApplyOldStatusEffectCombatEffect : CombatSequenceEff
     [DataField]
     public bool Refresh = false;
 
-    public override void Execute(EntityUid user, EntityUid target, MartialArtistComponent artist)
+    public override void Execute(Entity<MartialArtistComponent> user, EntityUid target)
     {
         var status = Entity.System<StatusEffectsSystem>();
 

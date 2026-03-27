@@ -18,7 +18,7 @@ public sealed partial class KnockdownCombatEffect : CombatSequenceEffect
     [DataField]
     public bool Force = false;
 
-    public override void Execute(EntityUid user, EntityUid target, MartialArtistComponent artist)
+    public override void Execute(Entity<MartialArtistComponent> user, EntityUid target)
     {
         var stun = Entity.System<SharedStunSystem>();
 

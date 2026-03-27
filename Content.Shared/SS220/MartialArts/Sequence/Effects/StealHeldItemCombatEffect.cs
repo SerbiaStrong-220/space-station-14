@@ -7,7 +7,7 @@ namespace Content.Shared.SS220.MartialArts.Sequence.Effects;
 
 public sealed partial class StealHeldItemCombatEffect : CombatSequenceEffect
 {
-    public override void Execute(EntityUid user, EntityUid target, MartialArtistComponent artist)
+    public override void Execute(Entity<MartialArtistComponent> user, EntityUid target)
     {
         var hands = Entity.System<SharedHandsSystem>();
 

@@ -435,7 +435,6 @@ public abstract partial class SharedGrabSystem : EntitySystem
 
     private void UpgradeGrab(Entity<GrabberComponent> grabber, Entity<GrabbableComponent> grabbable)
     {
-        Log.Info($"Upgrade Grab; New Stage: {grabbable.Comp.GrabStage}; Predicted: {!_timing.IsFirstTimePredicted}");
         ChangeGrabStage(grabber, grabbable, grabbable.Comp.GrabStage + 1);
     }
 
@@ -454,8 +453,7 @@ public abstract partial class SharedGrabSystem : EntitySystem
         else if (stage != GrabStage.None)
         {
             var severity = (short)stage;
-            Log.Info($"Severity: {severity}; Alert: {alert};");
-            var cooldown = GetResistanceCooldown(uid);
+            var cooldown = GetResistanceStartEndTime(uid);
             if (_alerts.IsShowingAlert(uid, alert))
             {
                 var (_, cooldownEnd) = cooldown;

@@ -9,7 +9,7 @@ public sealed partial class StunTargetCombatEffect : CombatSequenceEffect
     [DataField]
     public TimeSpan Time = TimeSpan.FromSeconds(5);
 
-    public override void Execute(EntityUid user, EntityUid target, MartialArtistComponent artist)
+    public override void Execute(Entity<MartialArtistComponent> user, EntityUid target)
     {
         var stun = Entity.System<SharedStunSystem>();
 

@@ -57,12 +57,12 @@ public sealed partial class MartialArtsSystem : EntitySystem, IMartialArtEffectE
 
     #region Public API
 
-    public List<MartialArtEffect> GetMartialArtEffects(EntityUid user, MartialArtistComponent? artist = null)
+    public List<MartialArtEffect> GetMartialArtEffects(Entity<MartialArtistComponent?> user)
     {
-        if (!Resolve(user, ref artist))
+        if (!Resolve(user.Owner, ref user.Comp))
             return [];
 
-        if (!_prototype.TryIndex(artist.MartialArt, out var martialArt))
+        if (!_prototype.TryIndex(user.Comp.MartialArt, out var martialArt))
             return [];
 
         return martialArt.Effects.ToList();
@@ -71,40 +71,40 @@ public sealed partial class MartialArtsSystem : EntitySystem, IMartialArtEffectE
     /// <summary>
     /// Checks current combo for timeout and breaks it if combo timed out
     /// </summary>
-    public void RefreshSequence(EntityUid user, MartialArtistComponent artist)
+    public void RefreshSequence(Entity<MartialArtistComponent> user)
     {
-        if (artist.CurrentSteps.Count > 0 && !CheckSequenceTimeout(artist))
+        if (user.Comp.CurrentSteps.Count > 0 && !CheckSequenceTimeout(user.Comp))
         {
-            ResetSequence(user, artist);
+            ResetSequence(user);
         }
     }
 
-    public void PerformStep(EntityUid user, EntityUid target, CombatSequenceStep step, MartialArtistComponent? artist = null)
+    public void PerformStep(Entity<MartialArtistComponent?> user, EntityUid target, CombatSequenceStep step)
     {
-        if (!Resolve(user, ref artist))
+        if (!Resolve(user.Owner, ref user.Comp))
             return;
 
-        if (artist.MartialArt is not { } martialArt)
+        if (user.Comp.MartialArt is not { } martialArt)
             return;
 
-        if (!CanAttack(user, artist))
+        if (!CanAttack(user))
             return;
 
-        RefreshSequence(user, artist);
+        RefreshSequence(user!);
 
         var sequences = GetSequences(martialArt);
 
-        AddStep(user, artist, step);
+        AddStep(user!, step);
 
-        if (!TryGetSequence(artist.CurrentSteps, sequences, out var sequence, out var complete))
+        if (!TryGetSequence(user.Comp.CurrentSteps, sequences, out var sequence, out var complete))
         {
-            ResetSequence(user, artist);
+            ResetSequence(user!);
             return;
         }
 
         if (complete)
         {
-            PerformSequence(user, target, artist, sequence.Value);
+            PerformSequence(user!, target, sequence.Value);
         }
     }
 
@@ -128,62 +128,62 @@ public sealed partial class MartialArtsSystem : EntitySystem, IMartialArtEffectE
 
     #region Private API
 
-    private bool CanAttack(EntityUid user, MartialArtistComponent? artist = null)
+    private bool CanAttack(Entity<MartialArtistComponent?> user)
     {
-        if (!Resolve(user, ref artist))
+        if (!Resolve(user.Owner, ref user.Comp))
             return false;
 
-        if (_melee.TryGetWeapon(user, out var meleeUid, out _) && meleeUid != user)
+        if (_melee.TryGetWeapon(user, out var meleeUid, out _) && meleeUid != user.Owner)
             return false;
 
-        if (IsInCooldown(user, artist))
+        if (IsInCooldown(user))
             return false;
 
         return true;
     }
 
-    private void OnDisarm(EntityUid user, MartialArtistComponent artist, ref DisarmAttackPerformedEvent ev)
+    private void OnDisarm(Entity<MartialArtistComponent> user, ref DisarmAttackPerformedEvent ev)
     {
         if (ev.Target is not { } target)
             return;
 
-        if (artist.MartialArt == null)
+        if (user.Comp.MartialArt == null)
             return;
 
         if (!CanBeAttackedWithMartialArts(target))
             return;
 
-        PerformStep(user, target, CombatSequenceStep.Push, artist);
+        PerformStep(user!, target, CombatSequenceStep.Push);
         _color.RaiseEffect(Color.Aqua, new List<EntityUid> { target }, Filter.Pvs(user, entityManager: EntityManager));
     }
 
-    private void OnHarm(EntityUid user, MartialArtistComponent artist, ref LightAttackPerformedEvent ev)
+    private void OnHarm(Entity<MartialArtistComponent> user, ref LightAttackPerformedEvent ev)
     {
         if (ev.Target is not { } target)
             return;
 
-        if (artist.MartialArt == null)
+        if (user.Comp.MartialArt == null)
             return;
 
         if (!CanBeAttackedWithMartialArts(target))
             return;
 
-        PerformStep(user, target, CombatSequenceStep.Harm, artist);
+        PerformStep(user!, target, CombatSequenceStep.Harm);
         _color.RaiseEffect(Color.Red, new List<EntityUid> { target }, Filter.Pvs(user, entityManager: EntityManager));
     }
 
-    private void OnGrab(EntityUid user, MartialArtistComponent artist, ref GrabStageChangeEvent ev)
+    private void OnGrab(Entity<MartialArtistComponent> user, ref GrabStageChangeEvent ev)
     {
-        if (ev.Grabber != user)
+        if (ev.Grabber != user.Owner)
             return;
 
-        if (artist.MartialArt == null)
+        if (user.Comp.MartialArt == null)
             return;
 
         if (ev.NewStage == GrabStage.None)
         {
-            if (artist.CurrentSteps.Count > 0)
-                ResetSequence(user, artist);
+            if (user.Comp.CurrentSteps.Count > 0)
+                ResetSequence(user);
 
             return;
         }
@@ -191,16 +191,16 @@ public sealed partial class MartialArtsSystem : EntitySystem, IMartialArtEffectE
         if (!CanBeAttackedWithMartialArts(ev.Grabbable))
             return;
 
-        PerformStep(user, ev.Grabbable, CombatSequenceStep.Grab, artist);
+        PerformStep(user!, ev.Grabbable, CombatSequenceStep.Grab);
         _color.RaiseEffect(Color.Yellow, new List<EntityUid> { ev.Grabbable }, Filter.Pvs(user, entityManager: EntityManager));
     }
 
-    private void OnGrabDelayModifiers(EntityUid user, MartialArtistComponent artist, ref GrabDelayModifiersEvent ev)
+    private void OnGrabDelayModifiers(Entity<MartialArtistComponent> user, ref GrabDelayModifiersEvent ev)
     {
-        if (!_prototype.TryIndex(artist.MartialArt, out var martialArt))
+        if (!_prototype.TryIndex(user.Comp.MartialArt, out var martialArt))
             return;
 
-        if (_grab.IsGrabbed(ev.Grabbable) && artist.CurrentSteps.Count > 0)
+        if (_grab.IsGrabbed(ev.Grabbable) && user.Comp.CurrentSteps.Count > 0)
         {
             ev.Multiply(0); // make it instant if target already grabbed and part of combo
             return;
@@ -215,12 +215,12 @@ public sealed partial class MartialArtsSystem : EntitySystem, IMartialArtEffectE
         return artist.LastStepPerformedAt + artist.SequenceTimeout > _timing.CurTime;
     }
 
-    public bool IsInCooldown(EntityUid user, MartialArtistComponent? artist = null)
+    public bool IsInCooldown(Entity<MartialArtistComponent?> user)
     {
-        if (!Resolve(user, ref artist))
+        if (!Resolve(user.Owner, ref user.Comp))
             return false;
 
-        return _timing.CurTime < artist.LastSequencePerformedAt + artist.LastSequenceCooldown;
+        return _timing.CurTime < user.Comp.LastSequencePerformedAt + user.Comp.LastSequenceCooldown;
     }
 
     private List<CombatSequence> GetSequences(ProtoId<MartialArtPrototype> martialArt)
@@ -231,16 +231,16 @@ public sealed partial class MartialArtsSystem : EntitySystem, IMartialArtEffectE
         return proto.Sequences.ToList();
     }
 
-    private void AddStep(EntityUid user, MartialArtistComponent artist, CombatSequenceStep step)
+    private void AddStep(Entity<MartialArtistComponent> user, CombatSequenceStep step)
     {
-        artist.CurrentSteps.Add(step);
-        artist.LastStepPerformedAt = _timing.CurTime;
-        Dirty(user, artist);
+        user.Comp.CurrentSteps.Add(step);
+        user.Comp.LastStepPerformedAt = _timing.CurTime;
+        Dirty(user);
     }
 
-    private void PerformSequence(EntityUid user, EntityUid target, MartialArtistComponent artist, CombatSequence sequence)
+    private void PerformSequence(Entity<MartialArtistComponent> user, EntityUid target, CombatSequence sequence)
     {
-        ResetSequence(user, artist);
+        ResetSequence(user);
 
         if (TryComp<PullableComponent>(target, out var pullable))
             _pulling.TryStopPull(target, pullable);
@@ -248,24 +248,24 @@ public sealed partial class MartialArtsSystem : EntitySystem, IMartialArtEffectE
         if (_grab.IsGrabbed(target) && !sequence.PreventGrabReset)
             _grab.BreakGrab(target);
 
-        PerformSequenceEntry(user, target, artist, sequence.Entry, sequence);
+        PerformSequenceEntry(user, target, sequence.Entry, sequence);
 
-        _popup.PopupClient(Loc.GetString(artist.PerformedSequencePopup, ("sequence", Loc.GetString(sequence.Name))), user);
+        _popup.PopupClient(Loc.GetString(user.Comp.PerformedSequencePopup, ("sequence", Loc.GetString(sequence.Name))), user);
 
-        artist.LastSequencePerformedAt = _timing.CurTime;
-        artist.LastSequenceCooldown = sequence.Cooldown;
+        user.Comp.LastSequencePerformedAt = _timing.CurTime;
+        user.Comp.LastSequenceCooldown = sequence.Cooldown;
 
-        _alerts.ShowAlert(user, CooldownAlert, null, (artist.LastSequencePerformedAt, artist.LastSequencePerformedAt + artist.LastSequenceCooldown), autoRemove: true);
+        _alerts.ShowAlert(user.Owner, CooldownAlert, null, (user.Comp.LastSequencePerformedAt, user.Comp.LastSequencePerformedAt + user.Comp.LastSequenceCooldown), autoRemove: true);
     }
 
-    private void PerformSequenceEntry(EntityUid user, EntityUid target, MartialArtistComponent artist, CombatSequenceEntry entry, CombatSequence sequence)
+    private void PerformSequenceEntry(Entity<MartialArtistComponent> user, EntityUid target, CombatSequenceEntry entry, CombatSequence sequence)
     {
         // conditions
         foreach (var condition in entry.Conditions)
         {
-            if (!condition.Execute(user, target, artist) ^ condition.Invert)
+            if (!condition.Execute(user, target) ^ condition.Invert)
             {
-                ResetSequence(user, artist);
+                ResetSequence(user);
                 return;
             }
         }
@@ -273,24 +273,24 @@ public sealed partial class MartialArtsSystem : EntitySystem, IMartialArtEffectE
         // effects
         foreach (var effect in entry.Effects)
         {
-            effect.Execute(user, target, artist);
+            effect.Execute(user, target);
         }
 
         // recursive entries
         foreach (var subentry in entry.Entries)
         {
-            PerformSequenceEntry(user, target, artist, subentry, sequence);
+            PerformSequenceEntry(user, target, subentry, sequence);
         }
     }
 
     /// <summary>
     /// Called to clear current sequence state
     /// </summary>
-    private void ResetSequence(EntityUid user, MartialArtistComponent artist)
+    private void ResetSequence(Entity<MartialArtistComponent> user)
     {
-        artist.CurrentSteps = [];
-        artist.LastStepPerformedAt = TimeSpan.Zero;
-        Dirty(user, artist);
+        user.Comp.CurrentSteps = [];
+        user.Comp.LastStepPerformedAt = TimeSpan.Zero;
+        Dirty(user);
     }
 
     // made public for tests

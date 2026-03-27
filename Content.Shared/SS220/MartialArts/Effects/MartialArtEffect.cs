@@ -17,19 +17,19 @@ public abstract partial class BaseMartialArtEffectSystem<TEffect> : EntitySystem
         SubscribeLocalEvent<MartialArtistComponent, MartialArtEffectShutdownEvent<TEffect>>(OnShutdownEvent);
     }
 
-    protected bool HasEffect(EntityUid uid, MartialArtistComponent? artist = null)
+    protected bool HasEffect(Entity<MartialArtistComponent?> entity)
     {
-        return TryEffect(uid, out _, artist);
+        return TryEffect(entity, out _);
     }
 
-    protected bool TryEffect(EntityUid uid, [NotNullWhen(true)] out TEffect? effect, MartialArtistComponent? artist = null)
+    protected bool TryEffect(Entity<MartialArtistComponent?> entity, [NotNullWhen(true)] out TEffect? effect)
     {
         effect = null;
 
-        if (!Resolve(uid, ref artist))
+        if (!Resolve(entity.Owner, ref entity.Comp))
             return false;
 
-        var effects = MartialArts.GetMartialArtEffects(uid, artist);
+        var effects = MartialArts.GetMartialArtEffects(entity);
 
         foreach (var sub in effects)
         {
@@ -43,21 +43,21 @@ public abstract partial class BaseMartialArtEffectSystem<TEffect> : EntitySystem
         return false;
     }
 
-    private void OnStartupEvent(EntityUid uid, MartialArtistComponent comp, MartialArtEffectStartupEvent<TEffect> ev)
+    private void OnStartupEvent(Entity<MartialArtistComponent> entity, ref MartialArtEffectStartupEvent<TEffect> ev)
     {
-        StartupEffect(uid, comp, ev.Effect);
+        StartupEffect(entity, ev.Effect);
     }
 
-    private void OnShutdownEvent(EntityUid uid, MartialArtistComponent comp, MartialArtEffectShutdownEvent<TEffect> ev)
+    private void OnShutdownEvent(Entity<MartialArtistComponent> entity, ref MartialArtEffectShutdownEvent<TEffect> ev)
     {
-        ShutdownEffect(uid, comp, ev.Effect);
+        ShutdownEffect(entity, ev.Effect);
     }
 
-    protected virtual void StartupEffect(EntityUid user, MartialArtistComponent artist, TEffect effect)
+    protected virtual void StartupEffect(Entity<MartialArtistComponent> user, TEffect effect)
     {
     }
 
-    protected virtual void ShutdownEffect(EntityUid user, MartialArtistComponent artist, TEffect effect)
+    protected virtual void ShutdownEffect(Entity<MartialArtistComponent> user, TEffect effect)
     {
     }
 }
@@ -65,14 +65,14 @@ public abstract partial class BaseMartialArtEffectSystem<TEffect> : EntitySystem
 public abstract partial class BaseMartialArtEffectSystem<TEffect, TComp> : BaseMartialArtEffectSystem<TEffect> where TEffect : MartialArtEffect where TComp : IComponent, new()
 {
     [MustCallBase]
-    protected override void StartupEffect(EntityUid user, MartialArtistComponent artist, TEffect effect)
+    protected override void StartupEffect(Entity<MartialArtistComponent> user, TEffect effect)
     {
         DebugTools.Assert(!HasComp<TComp>(user), $"On startup of effect \"{typeof(TEffect)}\" the component \"{typeof(TComp)}\" already was assigned");
         EnsureComp<TComp>(user);
     }
 
     [MustCallBase]
-    protected override void ShutdownEffect(EntityUid user, MartialArtistComponent artist, TEffect effect)
+    protected override void ShutdownEffect(Entity<MartialArtistComponent> user, TEffect effect)
     {
         if (!TryComp<TComp>(user, out var comp))
         {

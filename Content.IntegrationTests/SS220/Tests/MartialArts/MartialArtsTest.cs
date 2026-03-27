@@ -213,7 +213,7 @@ public sealed class MartialArtsTest
         {
             Assert.That(artist.Comp1.CurrentSteps, Is.EquivalentTo(new List<CombatSequenceStep>()), "Current steps expected to be empty after finishing combo");
             // idk how to properly check that combo was successfull, gonna rely on cooldown for now
-            Assert.That(artsSys.IsInCooldown(artist, artist.Comp1), "Expected artist to be in cooldown after successfull combo");
+            Assert.That(artsSys.IsInCooldown((artist, artist.Comp1)), "Expected artist to be in cooldown after successfull combo");
         });
 
         await pair.CleanReturnAsync();
@@ -290,7 +290,7 @@ public sealed class MartialArtsTest
 
         await server.WaitPost(() =>
         {
-            Assert.That(artsSys.TryGrantMartialArt(artist, artId, artist: artist.Comp1), "Cannot give martial art to dummy artist");
+            Assert.That(artsSys.TryGrantMartialArt((artist, artist.Comp1), artId), "Cannot give martial art to dummy artist");
         });
 
         await server.WaitRunTicks(1);

@@ -15,7 +15,7 @@ public sealed partial class ThrowTargetCombatEffect : CombatSequenceEffect
     [DataField]
     public float PushbackRatio = 0f;
 
-    public override void Execute(EntityUid user, EntityUid target, MartialArtistComponent artist)
+    public override void Execute(Entity<MartialArtistComponent> user, EntityUid target)
     {
         var throwing = Entity.System<ThrowingSystem>();
         var transform = Entity.System<SharedTransformSystem>();

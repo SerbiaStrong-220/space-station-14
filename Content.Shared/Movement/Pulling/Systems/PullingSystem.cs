@@ -496,9 +496,7 @@ public sealed class PullingSystem : EntitySystem
 
         // SS220-PullingCooldown-Start
         if (_timing.CurTime < pullerComp.LastPullAt + pullerComp.PullCooldown)
-        {
             return false;
-        }
         // SS220-PullingCooldown-End
 
         var getPulled = new BeingPulledAttemptEvent(puller, pullableUid);

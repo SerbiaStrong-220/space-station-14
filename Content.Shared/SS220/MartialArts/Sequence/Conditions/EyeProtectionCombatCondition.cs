@@ -15,7 +15,7 @@ public sealed partial class EyeProtectionCombatCondition : CombatSequenceConditi
     [DataField("eq")]
     public TimeSpan? EqualsTo;
 
-    public override bool Execute(EntityUid user, EntityUid target, MartialArtistComponent artist)
+    public override bool Execute(Entity<MartialArtistComponent> user, EntityUid target)
     {
         var ev = new GetEyeProtectionEvent();
         Entity.EventBus.RaiseLocalEvent(user, ev);
