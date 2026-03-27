@@ -14,4 +14,4 @@ public record struct GetDisarmChanceTargetMultiplierEvent(EntityUid Disarmer, En
 /// </summary>
 /// <param name="Multiplier">this could like chance to not disarm...</param>
 [ByRefEvent]
-public record struct GetDisarmChanceDisarmerMultiplierEvent(EntityUid Disarmer, EntityUid Disarmed, EntityUid? InTargetHand, float Multiplier);
+public record struct GetDisarmChanceDisarmerMultiplierEvent(EntityUid Disarmer, EntityUid Disarmed, EntityUid? InTargetHand, float Multiplier, float BaseChance);

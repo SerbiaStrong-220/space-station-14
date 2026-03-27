@@ -77,6 +77,9 @@ namespace Content.Client.HealthAnalyzer.UI
 
         public void Populate(HealthAnalyzerScannedUserMessage msg)
         {
+            PrintButton.Visible = msg.CanPrint; // SS220-health-analyzer-report
+            PrintButton.Disabled = true; // SS220-health-analyzer-report
+
             // ss220 add reagents to health analyzer start
             ReagentsContainer.DisposeAllChildren();
             // ss220 add reagents to health analyzer end
@@ -89,6 +92,8 @@ namespace Content.Client.HealthAnalyzer.UI
                 NoPatientDataText.Visible = true;
                 return;
             }
+
+            PrintButton.Disabled = !msg.CanPrint; // SS220-health-analyzer-report
 
             // ss220 add reagents to health analyzer start
             if (_entityManager.TryGetComponent<SolutionContainerManagerComponent>(target, out var solComp))

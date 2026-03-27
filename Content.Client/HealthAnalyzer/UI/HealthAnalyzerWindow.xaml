@@ -57,6 +57,16 @@
 
             <PanelContainer StyleClasses="LowDivider" />
 
+            <!-- SS220-health-analyzer-report BGN -->
+            <Button
+                Name="PrintButton"
+                Margin="0 5 0 5"
+                Access="Public"
+                Visible="False"
+                Disabled="True"
+                Text="{Loc 'health-analyzer-window-print-text'}" />
+            <!-- SS220-health-analyzer-report END -->
+
             <BoxContainer
                 Name="GroupsContainer"
                 Margin="0 5 0 5"

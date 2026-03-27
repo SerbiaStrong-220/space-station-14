@@ -5,3 +5,4 @@ research-technology-portable-reloading-equipment = Портативное зар
 research-technology-plasma-converter-acceleration = Ускорение преобразователя плазмы
 research-technology-compact-defibrillator = Компактный дефибриллятор
 research-technology-energy-transformer = Полеобразователь энергии
+research-technology-heavy-ballistics = Крупнокалиберное баллистическое вооружение

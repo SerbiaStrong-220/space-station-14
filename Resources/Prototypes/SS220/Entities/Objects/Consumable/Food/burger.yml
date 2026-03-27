@@ -8,6 +8,7 @@
     sprite: SS220/Objects/Consumable/Food/burger.rsi
     state: bnuuy
   - type: Item
+    sprite: SS220/Objects/Consumable/Food/burger.rsi
     size: Normal
     shape:
     - 0,0,1,1

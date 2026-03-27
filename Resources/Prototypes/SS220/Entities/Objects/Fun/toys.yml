@@ -16,6 +16,8 @@
   name: double toy sword
   description: New Sandy-Cat plastic sword! Twice as much more epic and loud noises!
   components:
+    - type: Tag
+      tags: []
     - type: EnergySword
     - type: ItemToggle
       onUse: false # wielding events control it instead

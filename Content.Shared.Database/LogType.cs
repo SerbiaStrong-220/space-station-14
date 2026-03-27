@@ -501,6 +501,5 @@ public enum LogType
     /// All related to experience system
     /// </summary>
     Experience = 10002,
-
     //SS220 log types end
 }

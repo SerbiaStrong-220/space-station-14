@@ -281,3 +281,15 @@ ent-AirlockShuttleUsspLocked = { ent-AirlockShuttleUssp }
 ent-AirlockNoPassenger = { ent-AirlockGlass }
     .desc = { ent-AirlockMaint.desc }
     .suffix = Без пассажиров, Закрыто
+
+ent-AirlockNanoTrasenRepresentativeGlassLocked = { ent-AirlockCommandGlass }
+    .desc = { ent-AirlockCommandGlass.desc }
+    .suffix = Представитель НТ, Закрыто
+
+ent-AirlockNanoTrasenRepresentativeLocked = { ent-AirlockCommand }
+    .desc = { ent-AirlockCommand.desc }
+    .suffix = Представитель НТ, Закрыто
+
+ent-AirlockMaintNanoTrasenRepresentativeLocked = { ent-AirlockMaintCommandLocked }
+    .desc = { ent-AirlockMaintCommandLocked.desc }
+    .suffix = Представитель НТ, Закрыто
