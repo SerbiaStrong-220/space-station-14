@@ -11,7 +11,7 @@
     sprite: Clothing/Under/Socks/bee.rsi
   - type: Clothing
     sprite: Clothing/Under/Socks/bee.rsi
-#SS220 Add edibility components begin
+#SS220-Edible-Components begin
   - type: Edible
     requiresSpecialDigestion: true
   - type: SolutionContainerManager
@@ -21,7 +21,7 @@
         reagents:
         - ReagentId: Fiber
           Quantity: 10
-#SS220 Add edibility components end
+#SS220-Edible-Components end
 
 - type: entity
   parent: ClothingShoesBase
@@ -33,7 +33,7 @@
     sprite: Clothing/Under/Socks/coder.rsi
   - type: Clothing
     sprite: Clothing/Under/Socks/coder.rsi
-#SS220 Add edibility components begin
+#SS220-Edible-Components begin
   - type: Edible
     requiresSpecialDigestion: true
   - type: SolutionContainerManager
@@ -43,4 +43,4 @@
         reagents:
         - ReagentId: Fiber
           Quantity: 10
-#SS220 Add edibility components end
+#SS220-Edible-Components end
