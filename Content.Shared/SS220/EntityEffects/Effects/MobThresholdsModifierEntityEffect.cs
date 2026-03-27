@@ -1,5 +1,4 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Shared.Chemistry.Reagent;
 using Content.Shared.EntityEffects;
 using Content.Shared.SS220.Chemistry.MobThresholdsModifierStatusEffect;
 using Robust.Shared.Prototypes;
@@ -20,6 +19,9 @@ public sealed partial class MobThresholdsModifier : EntityEffectBase<MobThreshol
     /// </summary>
     [DataField]
     public TimeSpan Duration = TimeSpan.FromSeconds(2);
+
+    [DataField]
+    public bool DependsOnAdaptation = false;
 
     /// <summary>
     /// Should the duration of the effect reset with each use

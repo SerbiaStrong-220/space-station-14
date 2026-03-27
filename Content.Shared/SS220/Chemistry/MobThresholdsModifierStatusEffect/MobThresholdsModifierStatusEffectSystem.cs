@@ -47,13 +47,10 @@ public sealed class MobThresholdsModifierStatusEffectSystem : EntitySystem
 
             if (modifier.DependsOnAdaptation
             && modifier.Reagent != null
-            && _chemicalAdaptation.TryGetMetabolized(entity, modifier.Reagent, out var metabolized)
+            && _chemicalAdaptation.TryGetMetabolized(args.Args.Entity, modifier.Reagent, out var metabolized)
             )
-            {
-                NewModifier.Flat = metabolized * modifier.DecayFlat;
+                NewModifier.Flat += metabolized * modifier.DecayFlat;
 
-                NewModifier.Multiplier = metabolized * modifier.DecayMultiplier;
-            }
             args.Args.ApplyModifier(state, NewModifier);
         }
     }

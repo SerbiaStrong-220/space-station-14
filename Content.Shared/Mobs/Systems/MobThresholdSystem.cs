@@ -626,9 +626,6 @@ public partial struct MobThresholdsModifier()
     public float DecayFlat = 1;
 
     [DataField]
-    public float DecayMultiplier = 1;
-
-    [DataField]
     public ProtoId<ReagentPrototype>? Reagent = null;
     // SS220 add damage threshold modification depending on the adaptation end
 

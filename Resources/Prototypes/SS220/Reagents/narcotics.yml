@@ -160,6 +160,7 @@
         time: 5
       - !type:MobThresholdsModifier
         statusEffectId: MobThresholdsModifierFrontier
+        dependsOnAdaptation: true
         duration: 5
         refresh: false
       - !type:StaminaChange
