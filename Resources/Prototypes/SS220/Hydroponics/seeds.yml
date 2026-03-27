@@ -331,3 +331,32 @@
       Min: 1
       Max: 20
       PotencyDivisor: 20
+
+- type: seed
+  id: watermelondog
+  name: seeds-watermelondog-name
+  noun: seeds-noun-seeds
+  displayName: seeds-watermelondog-display-name
+  plantRsi: SS220/Objects/Specific/Hydroponics/watermelondog.rsi
+  harvestLogImpact: Medium
+  packetPrototype: WatermelonDogSeeds
+  productPrototypes:
+    - MobWatermelonDog
+  lifespan: 50
+  maturation: 12
+  production: 6
+  yield: 1
+  idealLight: 8
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 10
+      PotencyDivisor: 10
+    Water:
+      Min: 1
+      Max: 10
+      PotencyDivisor: 10
+    Vitamin:
+      Min: 1
+      Max: 5
+      PotencyDivisor: 20

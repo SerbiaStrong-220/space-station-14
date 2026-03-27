@@ -57,6 +57,7 @@ public sealed partial class CryoPodSystem : SharedCryoPodSystem
                 bloodstream.BloodSolutionName, ref bloodstream.BloodSolution, out var bloodSolution))
                 ? bloodSolution.FillFraction
                 : 0,
+            false, // SS220-health-analyzer-report
             null,
             null, //SS220 LimitationRevive
             null,

@@ -1,12 +1,9 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.Actions;
 using Content.Shared.SS220.Shitspawn.AshDrake;
+using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
-using Robust.Shared.Physics;
-using Robust.Shared.Physics.Components;
-using Robust.Shared.Physics.Systems;
 using System.Numerics;
 
 namespace Content.Server.SS220.Shitspawn.AshDrake;
@@ -15,8 +12,8 @@ public sealed class AshDrakeGreatFireballSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedGunSystem _gun = default!;
 
     public override void Initialize()
     {
@@ -50,14 +47,10 @@ public sealed class AshDrakeGreatFireballSystem : EntitySystem
         if (dir.LengthSquared() < 0.01f)
             return;
 
-        var velocity = Vector2.Normalize(dir) * comp.FireballSpeed;
-        var spawnPos = new MapCoordinates(drakePos + Vector2.Normalize(dir) * 1.5f, drakeXform.MapID);
+        var dirNorm = Vector2.Normalize(dir);
+        var spawnPos = new MapCoordinates(drakePos + dirNorm * 1.5f, drakeXform.MapID);
         var fireball = Spawn(comp.FireballProto, spawnPos);
 
-        _transform.SetWorldRotation(fireball, new Angle(velocity));
-
-        var body = EnsureComp<PhysicsComponent>(fireball);
-        _physics.SetBodyStatus(fireball, body, BodyStatus.InAir);
-        _physics.SetLinearVelocity(fireball, velocity, body: body);
+        _gun.ShootProjectile(fireball, dirNorm, Vector2.Zero, uid, uid, comp.FireballSpeed);
     }
 }

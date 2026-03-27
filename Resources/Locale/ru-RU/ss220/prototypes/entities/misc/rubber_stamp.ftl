@@ -10,6 +10,10 @@ ent-RubberStampMagistrate = печать магистрата
     .suffix = НЕ МАППИТЬ
     .desc = { ent-RubberStampBase.desc }
 
+ent-RubberStampNanoTrasenRepresentative = печать представителя НаноТрейзен
+    .suffix = НЕ МАППИТЬ
+    .desc = { ent-RubberStampBase.desc }
+
 ent-RubberStampBlueShield = печать Синего Щита
     .suffix = НЕ МАППИТЬ
     .desc = { ent-RubberStampBase.desc }

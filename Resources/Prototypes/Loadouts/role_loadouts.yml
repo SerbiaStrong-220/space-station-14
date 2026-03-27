@@ -124,7 +124,6 @@
 - type: roleLoadout
   id: JobLawyer
   groups:
-  - IAAGlasses #SS220-Two Floppa Iteration
   - LawyerHeadset #SS220-Law Department & SS220 add-iaa-command-key
   - GroupTankHarness
   - LawyerNeck
@@ -136,6 +135,7 @@
   - Gloves #SS220-IAA-Loadouts
   - Trinkets
   - GroupSpeciesBreathTool
+  - SponsorNeck #SS220-Two Floppa Iteration
   - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout

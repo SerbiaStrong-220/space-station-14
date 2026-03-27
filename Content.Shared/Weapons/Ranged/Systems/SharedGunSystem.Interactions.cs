@@ -176,13 +176,11 @@ public abstract partial class SharedGunSystem
                     NeedHand = true,
                     Broadcast = true
                 };
+                var locSelf = Loc.GetString("suicide-start-popup-self", ("weapon", MetaData(entity).EntityName));
+                var locOthers = Loc.GetString("suicide-start-popup-others", ("user", MetaData(user).EntityName), ("weapon", MetaData(entity).EntityName));
                 if (_doAfter.TryStartDoAfter(doAfter))
                 {
-                    PopupSystem.PopupPredicted(Loc.GetString("suicide-start-popup-self",
-                            ("weapon", MetaData(entity).EntityName)), user, user);
-                    PopupSystem.PopupEntity(Loc.GetString("suicide-start-popup-others",
-                            ("user", MetaData(user).EntityName),
-                            ("weapon", MetaData(entity).EntityName)), user, Filter.PvsExcept(user), true);
+                    PopupSystem.PopupPredicted(locSelf, locOthers, user, user);
                 }
             },
             Text = Loc.GetString("suicide-verb-name"),
@@ -196,20 +194,21 @@ public abstract partial class SharedGunSystem
         if (!_netManager.IsServer)
             return;
         var user = args.User;
+        var failMessage = Loc.GetString("suicide-failed-popup");
         if (args.Cancelled || args.Handled || args.Used == null)
         {
-            PopupSystem.PopupPredicted(Loc.GetString("suicide-failed-popup"), user, user);
+            PopupSystem.PopupPredicted(failMessage, user, null);
             return;
         }
         var weapon = args.Used.Value;
         if (!_hands.IsHolding(user, weapon, out _))
         {
-            PopupSystem.PopupPredicted(Loc.GetString("suicide-failed-popup"), user, user);
+            PopupSystem.PopupPredicted(failMessage, user, null);
             return;
         }
         if (!TryComp<GunComponent>(weapon, out var guncomp))
         {
-            PopupSystem.PopupPredicted(Loc.GetString("suicide-failed-popup"), user, user);
+            PopupSystem.PopupPredicted(failMessage, user, null);
             return;
         }
 
