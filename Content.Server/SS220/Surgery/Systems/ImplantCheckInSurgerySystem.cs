@@ -22,9 +22,10 @@ public sealed class ImplantCheckInSurgerySystem : EntitySystem
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly HandsSystem _handsSystem = default!;
 
-    private readonly LocId _implantCheckReportTitle = "implant-check-report-title";
-    private readonly LocId _implantCheckHeader = "implant-check-report-header";
-    private readonly LocId _implantCheckReportImplantEntry = "implant-check-report-implant-entry";
+    private static readonly LocId ImplantCheckNoImplantSlot = "implant-check-surgery-no-implants";
+    private static readonly LocId ImplantCheckReportTitle = "implant-check-report-title";
+    private static readonly LocId ImplantCheckHeader = "implant-check-report-header";
+    private static readonly LocId ImplantCheckReportImplantEntry = "implant-check-report-implant-entry";
 
     public bool MakeImplantCheckPaper(EntityUid user, Entity<ImplantCheckInSurgeryComponent?> used, EntityUid target)
     {
@@ -33,10 +34,10 @@ public sealed class ImplantCheckInSurgerySystem : EntitySystem
 
         if (!_container.TryGetContainer(target, ImplanterComponent.ImplantSlotId, out var implantContainer))
         {
-            _popup.PopupClient("implant-check-surgery-no-implants", user);
+            _popup.PopupClient(ImplantCheckNoImplantSlot, user);
         }
 
-        var implantsList = implantContainer?.ContainedEntities ?? new List<EntityUid>();
+        var implantsList = implantContainer?.ContainedEntities ?? [];
 
         return MakePaper((used.Owner, used.Comp), user, target, implantsList);
     }
@@ -58,11 +59,11 @@ public sealed class ImplantCheckInSurgerySystem : EntitySystem
             targetDNA = dnaComponent.DNA;
         }
 
-        _metaData.SetEntityName(printed, Loc.GetString(_implantCheckReportTitle, ("dna", targetDNA)));
+        _metaData.SetEntityName(printed, Loc.GetString(ImplantCheckReportTitle, ("dna", targetDNA)));
 
         var text = new StringBuilder();
 
-        text.AppendLine(Loc.GetString(_implantCheckHeader, ("dna", targetDNA)));
+        text.AppendLine(Loc.GetString(ImplantCheckHeader, ("dna", targetDNA)));
 
         foreach (var implant in implants)
         {
@@ -79,7 +80,7 @@ public sealed class ImplantCheckInSurgerySystem : EntitySystem
                 implantName = MetaData(implant).EntityName;
             }
 
-            text.AppendLine(Loc.GetString(_implantCheckReportImplantEntry, ("implantName", implantName)));
+            text.AppendLine(Loc.GetString(ImplantCheckReportImplantEntry, ("implantName", implantName)));
         }
 
         _paper.SetContent((printed, paperComp), text.ToString());

@@ -45,10 +45,38 @@
         type: BodyAnalyzerBUI
 
 - type: entity
+  name: compact direct defibrillator
+  description: small and low power hand-held defibrillator for direct heart apply only
+  parent: BaseItem
+  id: DirectHandHeldDefibrillator
+  components:
+  - type: Sprite
+    sprite: Objects/Devices/forensic_scanner.rsi # TODO: ADD ME
+    state: icon
+  - type: Item
+    size: Small
+    storedRotation: 90
+  - type: DirectCompactDefibrillator
+
+- type: entity
+  name: implant scanner
+  description: Advanced scanner which can find poorly hidden uncommon objects in person body
+  parent: BaseItem
+  id: HandHeldImplantMedicalScanner
+  components:
+  - type: Sprite
+    sprite: Objects/Devices/forensic_scanner.rsi # TODO: ADD ME
+    state: icon
+  - type: Item
+    size: Small
+    storedRotation: 90
+  - type: ImplantCheckInSurgery
+
+- type: entity
   name: implant scanner report
+  description: Better than get playing russian roulette with implanter
   parent: Paper
   id: ImplantCheckReportPaper
-  description: Better than get playing russian roulette with implanter
   components:
   - type: Sprite
     sprite: Objects/Misc/bureaucracy.rsi
@@ -60,6 +88,7 @@
     - state: paper_stamp-generic
       map: ["enum.PaperVisualLayers.Stamp"]
       visible: false
+  - type:
   - type: PaperVisuals
     backgroundImagePath: "/Textures/Interface/Paper/paper_background_perforated.svg.96dpi.png"
     headerImagePath: "/Textures/Interface/Paper/paper_heading_forensic_scanner.svg.96dpi.png"

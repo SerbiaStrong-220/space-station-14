@@ -17,10 +17,11 @@
     # SS220-add-christmas-baton-begin
     - state: christmasbaton_off
       map: [ "christmas" ]
-      visible: False      
+      visible: False
     # SS220-add-christmas-baton-end
   - type: Stunbaton
     energyPerUse: 50
+  - type: DirectCompactDefibrillator # SS220-stunbaton-as-defib
   - type: ItemToggle
     predictable: false
     soundActivate:
