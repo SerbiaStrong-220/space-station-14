@@ -1,6 +1,7 @@
 // © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
+using Content.Shared.SS220.AltArmor.Components;
 
 namespace Content.Shared.SS220.AltArmor;
 
@@ -70,7 +71,7 @@ public sealed class AltArmorSystem : EntitySystem
                 if (ent.Comp.TransformSpecifierDict.ContainsKey(type))
                     CountDifference(
                         resultDamage.DamageDict,
-                        damage.DamageDict[type],
+                        damage.DamageDict[type] - damageDiff,
                         ent.Comp.TresholdDict[ent.Comp.TransformSpecifierDict[type]],
                         ent.Comp.TransformSpecifierDict[type], FixedPoint2.Zero,
                         durabilityCoefficient: durabilityCoefficient

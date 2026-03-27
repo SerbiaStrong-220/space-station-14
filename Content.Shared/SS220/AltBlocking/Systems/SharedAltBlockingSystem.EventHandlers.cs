@@ -98,7 +98,7 @@ public sealed partial class SharedAltBlockingSystem
         userComp.BlockingItemsShields.Add(ent.Owner);
 
         if (TryComp<ArmorBlockComponent>(ent.Owner, out var armorComp))
-            armorComp.Owner = args.User;
+            armorComp.User = args.User;
 
         Dirty(args.User, userComp);
     }

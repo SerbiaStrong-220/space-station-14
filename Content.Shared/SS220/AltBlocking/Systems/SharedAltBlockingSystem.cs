@@ -154,7 +154,7 @@ public sealed partial class SharedAltBlockingSystem : EntitySystem
             componentUser.BlockingItemsShields.Remove(ent.Owner);
 
         if (TryComp<ArmorBlockComponent>(ent.Owner, out var armorComp))
-            armorComp.Owner = null;
+            armorComp.User = null;
 
         ent.Comp.User = null;
 

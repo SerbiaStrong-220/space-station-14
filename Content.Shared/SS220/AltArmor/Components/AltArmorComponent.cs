@@ -2,7 +2,7 @@
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 
-namespace Content.Shared.SS220.AltArmor;
+namespace Content.Shared.SS220.AltArmor.Components;
 
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState]
