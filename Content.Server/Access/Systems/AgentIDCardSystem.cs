@@ -15,6 +15,8 @@ using Content.Shared.Implants;
 using Content.Shared.Inventory;
 using Content.Shared.Lock;
 using Content.Shared.PDA;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Audio;
 
 namespace Content.Server.Access.Systems
 {
@@ -27,6 +29,7 @@ namespace Content.Server.Access.Systems
         [Dependency] private readonly ChameleonClothingSystem _chameleon = default!;
         [Dependency] private readonly ChameleonControllerSystem _chamController = default!;
         [Dependency] private readonly LockSystem _lock = default!;
+        [Dependency] private readonly SharedAudioSystem _audio = default!; // ss220 agentid tweak
 
         public override void Initialize()
         {
@@ -93,6 +96,12 @@ namespace Content.Server.Access.Systems
             var addedLength = access.Tags.Count - beforeLength;
 
             _popupSystem.PopupEntity(Loc.GetString("agent-id-new", ("number", addedLength), ("card", args.Target)), args.Target.Value, args.User);
+            // ss220 agentid tweak
+            var usePopup = Loc.GetString("agen-id-use-popup", ("user", args.User), ("agentid", uid), ("otherid", args.Target));
+            _popupSystem.PopupEntity(usePopup, uid, Shared.Popups.PopupType.Small);
+            SoundSpecifier useSound = new SoundCollectionSpecifier("sparks");
+            _audio.PlayPvs(useSound, uid);
+            // ss220 agentid tweak
             if (addedLength > 0)
                 Dirty(uid, access);
         }
