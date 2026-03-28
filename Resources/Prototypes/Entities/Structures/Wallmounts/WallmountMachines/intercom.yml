@@ -43,7 +43,7 @@
   - type: Sprite
     noRot: false
     drawdepth: SmallObjects
-    sprite: Structures/Wallmounts/intercom.rsi
+    sprite: SS220/Structures/Wallmounts/intercom.rsi # SS220-resprite
     layers:
     - state: base
     - state: unshaded
@@ -126,7 +126,7 @@
   components:
   - type: Sprite
     drawdepth: SmallObjects
-    sprite: Structures/Wallmounts/intercom.rsi
+    sprite: SS220/Structures/Wallmounts/intercom.rsi # SS220-resprite
     layers:
     - state: build
     - state: panel
