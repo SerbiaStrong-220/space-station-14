@@ -235,7 +235,7 @@
       - Fruit
   - type: Extractable
     grindableSolutionName: bloodstream
-  - type: PotencyVisuals
+  # - type: PotencyVisuals #SS220 Tomato-Killer-Balance
   - type: Appearance
   - type: Produce
     seedId: killerTomato

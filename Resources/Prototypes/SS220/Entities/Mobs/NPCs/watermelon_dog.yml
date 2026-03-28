@@ -166,7 +166,7 @@
       - Fruit
   - type: Extractable
     grindableSolutionName: bloodstream
-  - type: PotencyVisuals
+  # - type: PotencyVisuals
   - type: Appearance
   - type: Produce
     seedId: watermelondog
