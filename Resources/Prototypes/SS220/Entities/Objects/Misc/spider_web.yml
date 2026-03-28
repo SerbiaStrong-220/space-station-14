@@ -147,6 +147,12 @@
       - SpiderServant
       - SpiderLittle
     bloodlossModifier: -12
+  - type: SpiderWebObject
+    barotraumaImmuneWhitelist:
+      tags:
+      - SpiderQueen
+      - SpiderServant
+      - SpiderLittle
 
 - type: entity
   parent: BaseSpiderWeb
