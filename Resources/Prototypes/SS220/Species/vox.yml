@@ -1,0 +1,5 @@
+- type: humanoidBaseSprite
+  id: MobVoxSnout
+  baseSprite:
+    sprite: Mobs/Species/Vox/parts.rsi
+    state: beak

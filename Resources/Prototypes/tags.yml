@@ -438,11 +438,6 @@
 - type: Tag
   id: CrystalRed # ConstructionGraph: RedLight, RedLightBulb
 
-#SS220-New-Crystals-start
-- type: Tag
-  id: CrystalPurple
-#SS220-New-Crystals-end
-
 - type: Tag
   id: CrystalYellow # ConstructionGraph: YellowLight, YellowLightBulb
 

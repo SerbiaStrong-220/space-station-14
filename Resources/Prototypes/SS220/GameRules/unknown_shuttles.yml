@@ -1,3 +1,19 @@
+- type: entityTable
+  id: SpaceTrafficControlTable
+  table: !type:NestedSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
+    tableId: UnknownShuttlesFriendlyTable
+
+- type: entityTable
+  id: UnknownShuttlesFriendlyTable
+  table: !type:AllSelector
+    children:
+    - id: UnknownShuttleCargoLost
+    - id: UnknownShuttleTravelingCuisine
+    - id: UnknownShuttleDisasterEvacPod
+    - id: UnknownShuttleHonki
+    - id: UnknownShuttleCivil
+    - id: UnknownShuttleMimesLost
+
 - type: entity
   parent: BaseUnknownShuttleRule
   id: UnknownShuttleCivil
@@ -17,4 +33,3 @@
     weight: 4
   - type: LoadMapRule
     preloadedGrid: ShuttleMimesLost
-    

@@ -533,11 +533,6 @@
     - !type:NestedSelector
       tableId: SpicyPestEventsTable
 
-- type: entityTable
-  id: SpaceTrafficControlTable
-  table: !type:NestedSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
-    tableId: UnknownShuttlesFriendlyTable # SS220-Unknown-Shuttles
-
 - type: entity
   id: BasicStationEventScheduler
   parent: BaseGameRule
