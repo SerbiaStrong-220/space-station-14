@@ -96,6 +96,7 @@
     rootTask:
       task: WatermelonDogCompound
   - type: NPCImprintingOnSpawnBehaviour
+    spawnFriendsSearchRadius: 5
     whitelist:
       components:
       - HumanoidAppearance
