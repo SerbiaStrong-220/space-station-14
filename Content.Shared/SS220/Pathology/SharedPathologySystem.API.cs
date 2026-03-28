@@ -2,6 +2,7 @@
 
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
+using Content.Shared.SS220.PathologyStatusEffects;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -181,7 +182,7 @@ public abstract partial class SharedPathologySystem
                 ApplyPathologyContext(entity!, instanceData.PathologyContexts.Pop());
         }
 
-        var ev = new PathologyStackCountChanged(pathologyId, instanceData.StackCount, newStackCount);
+        var ev = new PathologyStackCountChanged(pathologyId, instanceData.Level, instanceData.StackCount, newStackCount);
         RaiseLocalEvent(entity, ref ev);
 
         instanceData.StackCount = newStackCount;

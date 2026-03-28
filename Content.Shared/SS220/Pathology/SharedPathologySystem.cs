@@ -4,6 +4,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
 using Content.Shared.StatusEffectNew;
+using Content.Shared.StatusEffectNew.Components;
 using Content.Shared.Traits;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -28,6 +29,8 @@ public abstract partial class SharedPathologySystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<PathologyHolderComponent, RejuvenateEvent>(OnRejuvenate);
+
+        InitializeStatusEffectContainerEvents();
     }
 
     public override void Update(float frameTime)
@@ -108,19 +111,18 @@ public abstract partial class SharedPathologySystem : EntitySystem
         var ev = new PathologyAddedEvent(pathologyPrototype.ID);
         RaiseLocalEvent(entity, ref ev);
 
+        entity.Comp.ActivePathologies.Add(pathologyPrototype.ID, new PathologyInstanceData(_gameTiming.CurTime, context));
+
         AddPathologyDefinitionEffects(entity, pathologyPrototype.Definition[0]);
 
-        entity.Comp.ActivePathologies.Add(pathologyPrototype.ID, new PathologyInstanceData(_gameTiming.CurTime, context));
+        var severityChangedEv = new PathologySeverityChanged(pathologyPrototype.ID, -1, 0);
+        RaiseLocalEvent(entity, ref severityChangedEv);
+
         Dirty(entity);
     }
 
     private void AddPathologyDefinitionEffects(Entity<PathologyHolderComponent> entity, PathologyDefinition definition)
     {
-        foreach (var effect in definition.StatusEffects)
-        {
-            _statusEffects.TrySetStatusEffectDuration(entity, effect, out _);
-        }
-
         AddTrait(entity, definition.Trait);
 
         // we don't want to popup dead ones

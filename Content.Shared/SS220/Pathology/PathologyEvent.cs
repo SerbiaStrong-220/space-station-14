@@ -8,20 +8,20 @@ namespace Content.Shared.SS220.Pathology;
 public record struct PathologyAddedAttempt(ProtoId<PathologyPrototype> PathologyId, bool Cancelled = false);
 
 [ByRefEvent]
-public record struct PathologyAddedEvent(ProtoId<PathologyPrototype> PathologyId);
+public readonly record struct PathologyAddedEvent(ProtoId<PathologyPrototype> PathologyId);
 
 [ByRefEvent]
-public record struct PathologySeverityChanged(ProtoId<PathologyPrototype> PathologyId, int PreviousSeverity, int CurrentSeverity);
+public readonly record struct PathologySeverityChanged(ProtoId<PathologyPrototype> PathologyId, int PreviousSeverity, int CurrentSeverity);
 
 /// <summary>
 /// Raised on pathology owner, count for pathology instance not changed in time of raising event
 /// </summary>
 [ByRefEvent]
-public record struct PathologyStackCountChanged(ProtoId<PathologyPrototype> PathologyId, int PreviousCount, int NewCount);
+public readonly record struct PathologyStackCountChanged(ProtoId<PathologyPrototype> PathologyId, int Severity, int PreviousCount, int NewCount);
 
 [ByRefEvent]
 public record struct PathologyRemoveAttempt(ProtoId<PathologyPrototype> PathologyId, int CurrentSeverity, bool Cancelled = false);
 
 [ByRefEvent]
-public record struct PathologyRemoveEvent(ProtoId<PathologyPrototype> PathologyId);
+public readonly record struct PathologyRemovedEvent(ProtoId<PathologyPrototype> PathologyId);
 
