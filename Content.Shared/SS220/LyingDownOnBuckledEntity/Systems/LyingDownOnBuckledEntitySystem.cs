@@ -3,10 +3,9 @@
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Buckle.Components;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
-using Content.Shared.Gibbing.Events;
-using Content.Shared.Humanoid;
+using Content.Shared.Gibbing;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
@@ -51,7 +50,7 @@ public sealed partial class LyingDownOnBuckledEntitySystem : EntitySystem
 
         SubscribeLocalEvent<UnderLyingPetComponent, UnbuckleAttemptEvent>(OnUnbuckleAttempt);
         SubscribeLocalEvent<UnderLyingPetComponent, UnstrapAttemptEvent>(OnUnstrapAttempt);
-        SubscribeLocalEvent<UnderLyingPetComponent, EntityGibbedEvent>(OnEntityGibbed);
+        SubscribeLocalEvent<UnderLyingPetComponent, BeingGibbedEvent>(OnEntityGibbed);
 
         SubscribeLocalEvent<GetVerbsEvent<AlternativeVerb>>(OnAlternativeVerb);
     }
@@ -224,7 +223,7 @@ public sealed partial class LyingDownOnBuckledEntitySystem : EntitySystem
         args.Cancelled = true;
     }
 
-    private void OnEntityGibbed(Entity<UnderLyingPetComponent> entity, ref EntityGibbedEvent args)
+    private void OnEntityGibbed(Entity<UnderLyingPetComponent> entity, ref BeingGibbedEvent args)
     {
         if (entity.Comp.PetUid is { } pet)
             StandUp(pet);

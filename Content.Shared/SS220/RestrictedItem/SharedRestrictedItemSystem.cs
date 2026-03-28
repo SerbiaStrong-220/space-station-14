@@ -1,7 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Administration.Managers;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
@@ -62,7 +62,7 @@ public abstract class SharedRestrictedItemSystem : EntitySystem
         if (!_whitelistSystem.IsWhitelistFail(item.Comp.Whitelist, user))
             return true;
 
- 
+
         _popup.PopupPredicted(Loc.GetString(item.Comp.LocalizedPopup), item, user);
 
         if (!item.Comp.DamageOnFail.Empty)

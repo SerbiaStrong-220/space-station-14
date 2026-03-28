@@ -15,6 +15,7 @@ using Content.Shared.Humanoid;
 using Content.Shared.Sprite;
 using Robust.Client.GameObjects;
 using Robust.Client.Player;
+using Content.Shared.Body;
 
 namespace Content.Client.SS220.CriminalRecords.UI;
 
@@ -106,14 +107,14 @@ public sealed partial class CharacterVisualisation : BoxContainer
 
     public void SetupEntitySpriteView(EntityUid target, EntProtoId dollPrototype)
     {
-        var appearanceSystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<HumanoidAppearanceSystem>();
+        var visualBody = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<SharedVisualBodySystem>();
 
         _entMan.DeleteEntity(_previewDummy);
         _previewDummy = _entMan.SpawnEntity(dollPrototype, MapCoordinates.Nullspace);
         _entMan.EnsureComponent<HumanoidAppearanceComponent>(_previewDummy);
         _entMan.EnsureComponent<SpriteComponent>(_previewDummy);
 
-        appearanceSystem.CloneAppearance(target, _previewDummy);
+        visualBody.CopyAppearanceFrom(target, _previewDummy);
         _sprite.CopySprite(target, _previewDummy);
 
         SetEntity();

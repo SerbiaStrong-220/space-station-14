@@ -1,3 +1,4 @@
+using Content.Server.Body;
 using Content.Shared.DoAfter;
 using Content.Shared.Forensics.Components;
 using Content.Shared.Humanoid;
@@ -15,7 +16,7 @@ public sealed class PenScramblerSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly MetaDataSystem _metaSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedHumanoidAppearanceSystem _humanoidSystem = default!;
+    [Dependency] private readonly VisualBodySystem _visualBody = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public override void Initialize()
@@ -80,7 +81,7 @@ public sealed class PenScramblerSystem : EntitySystem
 
         var mob = Spawn(speciesPrototype.Prototype, MapCoordinates.Nullspace);
 
-        _humanoidSystem.CloneAppearance(target, mob);
+        _visualBody.CopyAppearanceFrom(target, mob);
 
         if (!TryComp<FingerprintComponent>(mob, out var fingerPrint))
             return null;

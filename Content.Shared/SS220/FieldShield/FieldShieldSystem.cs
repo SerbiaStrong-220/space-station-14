@@ -1,12 +1,12 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.
 
 using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Emp;
 using Content.Shared.Examine;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.FieldShield;

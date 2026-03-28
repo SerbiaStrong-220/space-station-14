@@ -2,7 +2,6 @@
 
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
-using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Explosion.Components;
@@ -37,6 +36,7 @@ using Robust.Shared.Utility;
 using System.Linq;
 using System.Numerics;
 using Content.Shared.SS220.Lifesteal;
+using Content.Shared.Damage.Systems;
 
 namespace Content.Shared.SS220.DarkReaper;
 

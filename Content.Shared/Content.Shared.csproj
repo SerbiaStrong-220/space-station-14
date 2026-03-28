@@ -7,6 +7,7 @@
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" PrivateAssets="All" />
     <PackageReference Include="YamlDotNet" />
+    <PackageReference Include="Pidgin" /> <!-- SS220 -->
   </ItemGroup>
 
   <Import Project="..\RobustToolbox\Imports\Lidgren.props" />

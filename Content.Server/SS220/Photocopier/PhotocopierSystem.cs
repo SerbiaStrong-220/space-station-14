@@ -114,14 +114,14 @@ public sealed partial class PhotocopierSystem : EntitySystem
     private void OnShutdown(Entity<PhotocopierComponent> ent, ref ComponentShutdown args)
     {
         ent.Comp.EntityOnTop = null;
-        ent.Comp.HumanoidAppearanceOnTop = null;
+        ent.Comp.HumanoidProfileOnTop = null;
         ent.Comp.PrintAudioStream = null;
     }
 
     private void OnCollisionChanged(Entity<PhotocopierComponent> ent, ref ShapeCollisionTrackerUpdatedEvent args)
     {
         if (ent.Comp.EntityOnTop is { } currentEntity &&
-            ent.Comp.HumanoidAppearanceOnTop is not null &&
+            ent.Comp.HumanoidProfileOnTop is not null &&
             args.Colliding.Contains(currentEntity) &&
             !Deleted(currentEntity))
         {
@@ -129,14 +129,14 @@ public sealed partial class PhotocopierSystem : EntitySystem
         }
 
         ent.Comp.EntityOnTop = null;
-        ent.Comp.HumanoidAppearanceOnTop = null;
+        ent.Comp.HumanoidProfileOnTop = null;
 
         foreach (var otherEntity in args.Colliding)
         {
             if (!TryComp<HumanoidAppearanceComponent>(otherEntity, out var humanoidAppearance))
                 continue;
 
-            ent.Comp.HumanoidAppearanceOnTop = humanoidAppearance;
+            ent.Comp.HumanoidProfileOnTop = humanoidAppearance;
             ent.Comp.EntityOnTop = otherEntity;
             break;
         }
@@ -204,7 +204,7 @@ public sealed partial class PhotocopierSystem : EntitySystem
             return;
 
         if (ent.Comp.EntityOnTop is not { } entityOnTop ||
-            ent.Comp.HumanoidAppearanceOnTop is not { } humanoidAppearanceOnTop ||
+            ent.Comp.HumanoidProfileOnTop is not { } humanoidAppearanceOnTop ||
             Deleted(entityOnTop))
             return;
 
@@ -245,7 +245,7 @@ public sealed partial class PhotocopierSystem : EntitySystem
 
     private bool IsHumanoidOnTop(PhotocopierComponent component)
     {
-        return component.HumanoidAppearanceOnTop is not null &&
+        return component.HumanoidProfileOnTop is not null &&
                component.EntityOnTop is { } entityOnTop &&
                !Deleted(entityOnTop);
     }
@@ -479,7 +479,7 @@ public sealed partial class PhotocopierSystem : EntitySystem
             if (component.IsCopyingPhysicalButt)
             {
                 // If there is no butt or someones else butt is in the way - stop copying.
-                if (component.HumanoidAppearanceOnTop is not { } humanoid
+                if (component.HumanoidProfileOnTop is not { } humanoid
                     || component.ButtSpecies is null
                     || component.ButtSpecies != humanoid.Species)
                 {
