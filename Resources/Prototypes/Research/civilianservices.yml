@@ -83,19 +83,6 @@
   - BiofabricatorMachineCircuitboard
   - BiomassReclaimerMachineCircuitboard
   
-#SS220 Hud MediChem begin
-- type: technology
-  id: ClothingEyesHudMediChem
-  name: research-clothing-eyes-hud-medichem
-  icon:
-    sprite: SS220/Clothing/Eyes/Hud/medichem.rsi
-    state: icon
-  discipline: CivilianServices
-  tier: 1
-  cost: 5000
-  recipeUnlocks:
-  - ClothingEyesHudMediChem
-  #SS220 Hud Medichem end
 
 # Tier 2
 
