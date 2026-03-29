@@ -105,7 +105,8 @@ public sealed partial class SharedAltBlockingSystem
 
     private void OnUnequip(Entity<AltBlockingComponent> ent, ref GotUnequippedHandEvent args)
     {
-        StopBlockingHelper(ent, args.User);
+        if (_net.IsServer)
+            StopBlockingHelper(ent, args.User);
     }
 
     private void OnDrop(Entity<AltBlockingComponent> ent, ref DroppedEvent args)

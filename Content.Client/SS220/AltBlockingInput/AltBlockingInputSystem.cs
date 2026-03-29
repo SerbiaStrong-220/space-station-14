@@ -24,8 +24,6 @@ public partial class AltBlockingInputSystem : EntitySystem
         if (!_timing.IsFirstTimePredicted)
             return;
 
-
-
         var useKey = ContentKeyFunctions.ToggleActiveBlocking;
 
         if (_inputSystem.CmdStates.GetState(useKey) == BoundKeyState.Up)
