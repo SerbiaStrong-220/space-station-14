@@ -171,11 +171,11 @@
           - ProjectileBatteryAmmoProvider
           - Stunbaton
           - PowerCell
-          # SS220 Added WeaponRechargerWhitelist tag for charging support begin
+          # SS220 Added tags for charging support begin
           tags:
           - WeaponRechargerWhitelist
-          # SS220 Added WeaponRechargerWhitelist tag for charging support end
-          - DefibrillatorCompact # SS220 Compact Defib
+          - DefibrillatorCompact
+          # SS220 Added tags for charging support end
         blacklist:
           tags:
           - PotatoBattery
@@ -203,13 +203,15 @@
           - ProjectileBatteryAmmoProvider
           - Stunbaton
           - PowerCell
-          # SS220 Compact Defib-start
+          # SS220 Added tags for charging support begin
           tags:
+          - WeaponRechargerWhitelist
           - DefibrillatorCompact
-          # SS220 Compact Defib-ended
+          # SS220 Added tags for charging support end
         blacklist:
           tags:
           - PotatoBattery
+          - E-N # SS220 E-N
 
 - type: entity
   parent: [ BaseItemRecharger, BaseWallmount ]
@@ -231,7 +233,7 @@
   - type: Fixtures # SS220/Directionl wall charger
     fixtures: {} # SS220/Directionl wall charger
   - type: Charger
-    chargeRate: 25
+    chargeRate: 20 # SS220 Changed from 25 to 20
   - type: Physics
     bodyType: Static
     canCollide: false
@@ -244,14 +246,16 @@
           - HitscanBatteryAmmoProvider
           - ProjectileBatteryAmmoProvider
           - Stunbaton
-          # SS220 Added WeaponRechargerWhitelist tag for charging support begin
+          - PowerCell # SS220 Added
+          # SS220 Added tags for charging support begin
           tags:
           - WeaponRechargerWhitelist
-          # SS220 Added WeaponRechargerWhitelist tag for charging support end
-          - DefibrillatorCompact # SS220 Compact Defib
+          - DefibrillatorCompact
+          # SS220 Added tags for charging support end
         blacklist:
           tags:
           - PotatoBattery
+          - E-N # SS220 E-N
 
 - type: entity
   parent: BaseRecharger

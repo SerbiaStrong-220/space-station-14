@@ -16,6 +16,6 @@
     sprite: /Textures/SS220/Interface/Alerts/migo_astral.rsi
     layers:
     - map: [ "enum.AlertVisualLayers.Base" ]
-    - map: [ "enum.MiGoTimerVisualLayers.Digit1" ]
-    - map: [ "enum.MiGoTimerVisualLayers.Digit2" ]
+    - map: [ "enum.PolymorphTimerVisualLayers.Digit1" ]
+    - map: [ "enum.PolymorphTimerVisualLayers.Digit2" ]
       offset: 0.125, 0 #this sing moving

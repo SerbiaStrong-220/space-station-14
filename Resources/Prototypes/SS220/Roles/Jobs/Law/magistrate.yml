@@ -2,6 +2,7 @@
   id: Magistrate
   name: job-name-magistrate
   description: job-description-magistrate
+  #setPreference: false #SS220 TODO NanoTraisen Representative
   playTimeTracker: JobMagistrate
   requirements:
     - !type:DepartmentTimeRequirement
