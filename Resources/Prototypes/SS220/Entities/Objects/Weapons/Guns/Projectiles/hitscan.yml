@@ -8,6 +8,10 @@
     damage:
       types:
         Heat: 13
+  - type: ShowNavInfoComponent
+    navInfo: !type:ShuttleNavHitscanInfo
+      enabled: true
+      width: 0.6
 
 - type: entity
   parent: BasicHitscan

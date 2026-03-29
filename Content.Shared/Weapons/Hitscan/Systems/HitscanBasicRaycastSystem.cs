@@ -2,6 +2,7 @@ using System.Numerics;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Damage.Components;
 using Content.Shared.Database;
+using Content.Shared.SS220.Shuttles.UI;
 using Content.Shared.Weapons.Hitscan.Components;
 using Content.Shared.Weapons.Hitscan.Events;
 using Content.Shared.Weapons.Ranged.Systems;
@@ -16,6 +17,7 @@ namespace Content.Shared.Weapons.Hitscan.Systems;
 
 public sealed class HitscanBasicRaycastSystem : EntitySystem
 {
+    [Dependency] private readonly SharedShuttleNavInfoSystem _sharedShuttleNavInfo = default!; // SS220-add-hitscan-to-map
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly ISharedAdminLogManager _log = default!;
@@ -93,6 +95,7 @@ public sealed class HitscanBasicRaycastSystem : EntitySystem
         if (distance == 0 || !_visualsQuery.TryComp(hitscanUid, out var vizComp))
             return;
 
+        _sharedShuttleNavInfo.AddHitscan(_transform.ToMapCoordinates(fromCoordinates), distance, shotAngle, hitscanUid); // SS220-add-hitscan-to-map
         var sprites = new List<(NetCoordinates coordinates, Angle angle, SpriteSpecifier sprite, float scale)>();
         var fromXform = Transform(fromCoordinates.EntityId);
 

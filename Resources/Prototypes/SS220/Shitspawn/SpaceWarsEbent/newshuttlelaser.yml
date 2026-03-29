@@ -22,10 +22,9 @@
   - type: HitscanBasicRaycast
     collisionMask: 256
     maxLength: 200
-#  UPSTREAM_TODO: Add spread to hitscan
-#  shuttleNavInfo:
-#    enabled: true
-#  UPSTREAM_TODO: Add spread to hitscan
+  - type: ShowNavInfoComponent
+    navInfo: !type:ShuttleNavHitscanInfo
+      enabled: true
 
 - type: entity
   id: ShuttleGunPerforatorSW
