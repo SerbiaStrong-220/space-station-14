@@ -1425,6 +1425,7 @@
   - EmergencyNitrogenSecurity
   - EmergencyOxygenSecurity
   - LoadoutSpeciesVoxNitrogen
+  - LoadoutSpeciesSecurityIpc #SS220-add-ipc
 
 - type: loadoutGroup
   id: SecurityStar
