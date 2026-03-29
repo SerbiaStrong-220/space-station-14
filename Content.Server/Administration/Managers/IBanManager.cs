@@ -85,6 +85,9 @@ public interface IBanManager
     /// <returns>Returns True if an active role ban is found for this player for any of the listed roles.</returns>
     public bool IsRoleBanned(ICommonSession player, List<ProtoId<JobPrototype>> jobs);
 
+    public bool IsSpeciesBanned(ICommonSession pSession, ProtoId<SpeciesPrototype> specie); // SS220-add-specie-ban
+    public bool IsChatBanned(ICommonSession pSession, BannableChats chat); // SS220-add-chat-ban
+
     /// <summary>
     /// Gets a list of prototype IDs with the player's job bans.
     /// </summary>
@@ -95,10 +98,16 @@ public interface IBanManager
     /// </summary>
     public HashSet<ProtoId<AntagPrototype>>? GetAntagBans(NetUserId playerUserId);
 
+    public HashSet<ProtoId<SpeciesPrototype>>? GetSpeciesBans(NetUserId playerUserId); // SS220-species-bans
+    public HashSet<BannableChats>? GetChatsBans(NetUserId playerUserId); // SS220-chat-bans
+
     /// <summary>
     /// Creates a role ban, preventing matching players from playing said roles.
     /// </summary>
     public void CreateRoleBan(CreateRoleBanInfo banInfo);
+
+    public void CreateSpeciesBan(CreateSpeciesBanInfo banInfo); // SS220-species-bans
+    public void CreateChatsBan(CreateChatsBanInfo banInfo); // SS220-chat-bans
 
     /// <summary>
     /// Pardons a role ban by its ID.
@@ -108,56 +117,17 @@ public interface IBanManager
     /// <param name="unbanTime">The time at which this role ban was pardoned.</param>
     public Task<string> PardonRoleBan(int banId, NetUserId? unbanningAdmin, DateTimeOffset unbanTime);
 
+    public Task<string> PardonSpeciesBan(int banId, NetUserId? unbanningAdmin, DateTimeOffset unbanTime); // SS220-species-bans
+    public Task<string> PardonChatsBan(int banId, NetUserId? unbanningAdmin, DateTimeOffset unbanTime); // SS220-chat-bans
+
     /// <summary>
     /// Sends role bans to the target
     /// </summary>
     /// <param name="pSession">Player's session</param>
     public void SendRoleBans(ICommonSession pSession);
 
-    // SS220 Species bans begin
-    #region Species bans
-    HashSet<string>? GetSpeciesBans(NetUserId playerUserId);
-
-    bool IsSpeciesBanned(NetUserId playerUserId, SpeciesPrototype speciesPrototype);
-    bool IsSpeciesBanned(NetUserId playerUserId, string speciesId);
-
-    /// <summary>
-    /// Creates a species ban for the specified target, username or GUID
-    /// </summary>
-    /// <param name="target">Target user, username or GUID, null for none</param>
-    /// <param name="speciesId">Species id to be banned from</param>
-    /// <param name="severity">Severity of the resulting ban note</param>
-    /// <param name="reason">Reason for the ban</param>
-    /// <param name="minutes">Number of minutes to ban for. 0 and null mean permanent</param>
-    /// <param name="timeOfBan">Time when the ban was applied, used for grouping species bans</param>
-    void CreateSpeciesBan(
-        NetUserId? target,
-        string? targetUsername,
-        NetUserId? banningAdmin,
-        (IPAddress, int)? addressRange,
-        ImmutableTypedHwid? hwid,
-        string speciesId,
-        uint? minutes,
-        NoteSeverity severity,
-        string reason,
-        DateTimeOffset timeOfBan,
-        bool postBanInfo);
-
-    /// <summary>
-    /// Pardons a species ban for the specified target, username or GUID
-    /// </summary>
-    /// <param name="banId">The id of the species ban to pardon.</param>
-    /// <param name="unbanningAdmin">The admin, if any, that pardoned the species ban.</param>
-    /// <param name="unbanTime">The time at which this species ban was pardoned.</param>
-    Task<string> PardonSpeciesBan(int banId, NetUserId? unbanningAdmin, DateTimeOffset unbanTime);
-
-    /// <summary>
-    /// Sends species bans to the target
-    /// </summary>
-    /// <param name="pSession">Player's session</param>
-    void SendSpeciesBans(ICommonSession pSession);
-    #endregion
-    // SS220 Species bans end
+    public void SendSpeciesBans(ICommonSession pSession); // SS220-species-bans
+    public void SendChatsBans(ICommonSession pSession); // SS220-chat-bans
 }
 
 /// <summary>
@@ -181,6 +151,7 @@ public abstract class CreateBanInfo
     internal NoteSeverity? Severity;
     internal string Reason;
     internal NetUserId? BanningAdmin;
+    internal bool PostBanInfo; // SS220-post-ban-info
 
     protected CreateBanInfo(string reason)
     {
@@ -375,6 +346,14 @@ public abstract class CreateBanInfo
         BanningAdmin = banningAdmin;
         return this;
     }
+
+    // SS220-post-ban-info-begin
+    public CreateBanInfo WithBanningAdmin(bool postBanInfo)
+    {
+        PostBanInfo = postBanInfo;
+        return this;
+    }
+    // SS220-post-ban-info-end
 }
 
 /// <summary>

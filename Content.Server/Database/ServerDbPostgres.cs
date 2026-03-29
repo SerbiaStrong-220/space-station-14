@@ -8,7 +8,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Administration.Logs;
 using Content.Server.IP;
-using Content.Server.SS220.Database;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Microsoft.EntityFrameworkCore;
@@ -223,11 +222,21 @@ namespace Content.Server.Database
 
             var unbanDef = ConvertUnban(ban.Unban);
 
-            ImmutableArray<BanRoleDef>? roles = null;
+            ImmutableArray<IBanRoleDef>? roles = null; // SS220-abstract-ban-role
             if (ban.Type == BanType.Role)
             {
-                roles = [..ban.Roles!.Select(br => new BanRoleDef(br.RoleType, br.RoleId))];
+                roles = [.. ban.Roles!.OfType<BanRole>().Select(br => new BanRoleDef(br.RoleType, br.RoleId))]; // SS220-abstract-ban-role
             }
+            // SS220-specie-chat-ban-begin
+            else if (ban.Type == BanType.Species)
+            {
+                roles = [.. ban.Roles!.OfType<BanSpecie>().Select(bs => new BanSpecieDef(bs.SpecieId))];
+            }
+            else if (ban.Type == BanType.Chat)
+            {
+                roles = [.. ban.Roles!.OfType<BanChat>().Select(bc => new BanChatDef(Enum.Parse<BannableChats>(bc.Chat, ignoreCase: true)))];
+            }
+            // SS220-specie-chat-ban-end
 
             return new BanDef(
                 ban.Id,
@@ -242,6 +251,7 @@ namespace Content.Server.Database
                 ban.Reason,
                 ban.Severity,
                 aUid,
+                ban.AdminNameInBanTime, // SS220-add-admin-name-in-ban
                 unbanDef,
                 ban.ExemptFlags,
                 roles);
@@ -278,6 +288,7 @@ namespace Content.Server.Database
                 Reason = ban.Reason,
                 Severity = ban.Severity,
                 BanningAdmin = ban.BanningAdmin?.UserId,
+                AdminNameInBanTime = ban.BanningAdminName, // SS220-add-admin-name-to-ban
                 BanTime = ban.BanTime.UtcDateTime,
                 ExpirationTime = ban.ExpirationTime?.UtcDateTime,
                 Rounds = [..ban.RoundIds.Select(bri => new BanRound { RoundId = bri })],
@@ -286,12 +297,29 @@ namespace Content.Server.Database
                 ExemptFlags = ban.ExemptFlags,
                 Roles = ban.Roles == null
                     ? []
-                    : ban.Roles.Value.Select(brd => new BanRole
+                    // SS220-abstract-ban-role-begin
+                    : ban.Roles.Value.Select<IBanRoleDef, IBanRole>(brd => brd switch
+                    {
+                        BanRoleDef roleBanDef => new BanRole
                         {
-                            RoleType = brd.RoleType,
-                            RoleId = brd.RoleId
-                        })
-                        .ToList(),
+                            RoleType = roleBanDef.RoleType,
+                            RoleId = roleBanDef.RoleId,
+                        },
+
+                        BanSpecieDef roleSpecieDef => new BanSpecie
+                        {
+                            SpecieId = roleSpecieDef.Specie,
+                        },
+
+                        BanChatDef banChatDef => new BanChat
+                        {
+                            Chat = banChatDef.Chat.ToString(),
+                        },
+
+                        _ => throw new InvalidOperationException($"unknown IBanRole: {brd.GetType().Name}")
+                    })
+                    .ToList(),
+                    // SS220-abstract-ban-role-end
             };
             db.PgDbContext.Ban.Add(banEntity);
 
@@ -313,176 +341,6 @@ namespace Content.Server.Database
             await db.PgDbContext.SaveChangesAsync();
         }
         #endregion
-
-        // SS220 species ban begin
-        #region Species ban
-        public override async Task<ServerSpeciesBanDef?> GetServerSpeciesBanAsync(int id)
-        {
-            await using var db = await GetDbImpl();
-
-            var query = db.PgDbContext.SpeciesBan
-                .Include(p => p.Unban)
-                .Where(p => p.Id == id);
-
-            var ban = await query.SingleOrDefaultAsync();
-
-            return ConvertSpeciesBan(ban);
-        }
-
-        public override async Task<List<ServerSpeciesBanDef>> GetServerSpeciesBansAsync(IPAddress? address,
-            NetUserId? userId,
-            ImmutableArray<byte>? hwId,
-            ImmutableArray<ImmutableArray<byte>>? modernHWIds,
-            bool includeUnbanned)
-        {
-            if (address == null && userId == null && hwId == null)
-            {
-                throw new ArgumentException("Address, userId, and hwId cannot all be null");
-            }
-
-            await using var db = await GetDbImpl();
-
-            var query = MakeSpeciesBanLookupQuery(address, userId, hwId, modernHWIds, db, includeUnbanned)
-                .OrderByDescending(b => b.BanTime);
-
-            return await QuerySpeciesBans(query);
-        }
-
-        private static async Task<List<ServerSpeciesBanDef>> QuerySpeciesBans(IQueryable<ServerSpeciesBan> query)
-        {
-            var queryRoleBans = await query.ToArrayAsync();
-            var bans = new List<ServerSpeciesBanDef>(queryRoleBans.Length);
-
-            foreach (var ban in queryRoleBans)
-            {
-                var banDef = ConvertSpeciesBan(ban);
-
-                if (banDef != null)
-                    bans.Add(banDef);
-            }
-
-            return bans;
-        }
-
-        private static IQueryable<ServerSpeciesBan> MakeSpeciesBanLookupQuery(
-            IPAddress? address,
-            NetUserId? userId,
-            ImmutableArray<byte>? hwId,
-            ImmutableArray<ImmutableArray<byte>>? modernHWIds,
-            DbGuardImpl db,
-            bool includeUnbanned)
-        {
-            var query = MakeBanLookupQualityShared<ServerSpeciesBan, ServerSpeciesUnban>(
-                userId,
-                hwId,
-                modernHWIds,
-                db.PgDbContext.SpeciesBan);
-
-            if (address != null)
-            {
-                var newQ = db.PgDbContext.SpeciesBan
-                    .Include(p => p.Unban)
-                    .Where(b => b.Address != null && EF.Functions.ContainsOrEqual(b.Address.Value, address));
-
-                query = query == null ? newQ : query.Union(newQ);
-            }
-
-            if (!includeUnbanned)
-            {
-                query = query?.Where(p =>
-                    p.Unban == null && (p.ExpirationTime == null || p.ExpirationTime.Value > DateTime.UtcNow));
-            }
-
-            query = query!.Distinct();
-            return query;
-        }
-
-        [return: NotNullIfNotNull(nameof(ban))]
-        private static ServerSpeciesBanDef? ConvertSpeciesBan(ServerSpeciesBan? ban)
-        {
-            if (ban is null)
-                return null;
-
-            NetUserId? uid = null;
-            if (ban.PlayerUserId is { } guid)
-                uid = new NetUserId(guid);
-
-            NetUserId? aUid = null;
-            if (ban.BanningAdmin is { } aGuid)
-                aUid = new NetUserId(aGuid);
-
-            var unbanDef = ConvertSpeciesUnban(ban.Unban);
-
-            return new ServerSpeciesBanDef(
-                ban.Id,
-                uid,
-                ban.Address.ToTuple(),
-                ban.HWId,
-                ban.BanTime,
-                ban.ExpirationTime,
-                ban.RoundId,
-                ban.PlaytimeAtNote,
-                ban.Reason,
-                ban.Severity,
-                aUid,
-                unbanDef,
-                ban.SpeciesId);
-        }
-
-        private static ServerSpeciesUnbanDef? ConvertSpeciesUnban(ServerSpeciesUnban? unban)
-        {
-            if (unban is null)
-                return null;
-
-            NetUserId? aUid = null;
-            if (unban.UnbanningAdmin is { } aGuid)
-                aUid = new NetUserId(aGuid);
-
-            return new ServerSpeciesUnbanDef(
-                unban.Id,
-                aUid,
-                unban.UnbanTime);
-        }
-
-        public override async Task<ServerSpeciesBanDef> AddServerSpeciesBanAsync(ServerSpeciesBanDef serverSpeciesBan)
-        {
-            await using var db = await GetDbImpl();
-
-            var ban = new ServerSpeciesBan
-            {
-                Address = serverSpeciesBan.Address.ToNpgsqlInet(),
-                HWId = serverSpeciesBan.HWId,
-                Reason = serverSpeciesBan.Reason,
-                Severity = serverSpeciesBan.Severity,
-                BanningAdmin = serverSpeciesBan.BanningAdmin?.UserId,
-                BanTime = serverSpeciesBan.BanTime.UtcDateTime,
-                ExpirationTime = serverSpeciesBan.ExpirationTime?.UtcDateTime,
-                RoundId = serverSpeciesBan.RoundId,
-                PlaytimeAtNote = serverSpeciesBan.PlaytimeAtNote,
-                PlayerUserId = serverSpeciesBan.UserId?.UserId,
-                SpeciesId = serverSpeciesBan.SpeciesId
-            };
-            db.PgDbContext.SpeciesBan.Add(ban);
-
-            await db.PgDbContext.SaveChangesAsync();
-            return ConvertSpeciesBan(ban);
-        }
-
-        public override async Task AddServerSpeciesUnbanAsync(ServerSpeciesUnbanDef serverSpeciesUnban)
-        {
-            await using var db = await GetDbImpl();
-
-            db.PgDbContext.SpeciesUnban.Add(new ServerSpeciesUnban
-            {
-                BanId = serverSpeciesUnban.BanId,
-                UnbanningAdmin = serverSpeciesUnban.UnbanningAdmin?.UserId,
-                UnbanTime = serverSpeciesUnban.UnbanTime.UtcDateTime
-            });
-
-            await db.PgDbContext.SaveChangesAsync();
-        }
-        #endregion
-        // SS220 species ban end
 
         public override async Task<int> AddConnectionLogAsync(
             NetUserId userId,

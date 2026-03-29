@@ -1,21 +1,20 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.Humanoid.Prototypes;
+using Content.Shared.Database;
 using Lidgren.Network;
 using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Players;
 
 /// <summary>
-/// Sent server -> client to inform the client of their species bans.
+/// Sent server -> client to inform the client of their chats bans.
 /// </summary>
-public sealed class MsgSpeciesBans : NetMessage
+public sealed class MsgChatsBans : NetMessage
 {
     public override MsgGroups MsgGroup => MsgGroups.EntityEvent;
 
-    public List<ProtoId<SpeciesPrototype>> Bans = [];
+    public List<BannableChats> Bans = [];
 
     public override void ReadFromBuffer(NetIncomingMessage buffer, IRobustSerializer serializer)
     {
@@ -24,7 +23,7 @@ public sealed class MsgSpeciesBans : NetMessage
 
         for (var i = 0; i < count; i++)
         {
-            Bans.Add(buffer.ReadString());
+            Bans.Add((BannableChats)buffer.ReadByte());
         }
     }
 
@@ -34,7 +33,7 @@ public sealed class MsgSpeciesBans : NetMessage
 
         foreach (var ban in Bans)
         {
-            buffer.Write(ban);
+            buffer.Write((byte)ban);
         }
     }
 }

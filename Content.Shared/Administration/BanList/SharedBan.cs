@@ -17,4 +17,5 @@ public record SharedBan(
     string Reason,
     string? BanningAdminName,
     SharedUnban? Unban,
-    ImmutableArray<BanRoleDef>? Roles);
+    ImmutableArray<IBanRoleDef>? Roles /* SSS220-role-bans-abstract */);
+

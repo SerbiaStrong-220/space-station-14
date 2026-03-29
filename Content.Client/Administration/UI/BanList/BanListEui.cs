@@ -70,6 +70,7 @@ public sealed class BanListEui : BaseEui
         BanControl.SetBans(s.Bans);
         RoleBanControl.SetRoleBans(s.RoleBans);
         SpeciesBanControl.SetSpeciesBans(s.SpeciesBans); // SS220 Species bans
+        ChatBanControl.SetChatBans(s.ChatBans)
     }
 
     public override void Opened()

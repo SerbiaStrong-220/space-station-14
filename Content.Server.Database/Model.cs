@@ -36,6 +36,8 @@ namespace Content.Server.Database
         public DbSet<BanAddress> BanAddress { get; set; } = default!;
         public DbSet<BanHwid> BanHwid { get; set; } = default!;
         public DbSet<BanRole> BanRole { get; set; } = default!;
+        public DbSet<BanSpecie> BanSpecie { get; set; } = default!; // SS220-specie-ban
+        public DbSet<BanChat> BanChat { get; set; } = default!; // SS220-chat-ban
         public DbSet<Unban> Unban { get; set; } = default!;
         public DbSet<ServerBanExemption> BanExemption { get; set; } = default!;
         public DbSet<ConnectionLog> ConnectionLog { get; set; } = default!;

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
+using Content.Shared.SS220.CCVars;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 
@@ -24,10 +25,11 @@ namespace Content.Server.Database
         public string Reason { get; }
         public NoteSeverity Severity { get; set; }
         public NetUserId? BanningAdmin { get; }
+        public string? BanningAdminName { get; } // SS220-save-admin-name
         public UnbanDef? Unban { get; }
         public ServerBanExemptFlags ExemptFlags { get; }
 
-        public ImmutableArray<BanRoleDef>? Roles { get; }
+        public ImmutableArray<IBanRoleDef>? Roles { get; } // SS220-ase-abstract-gush
 
         public BanDef(
             int? id,
@@ -42,9 +44,10 @@ namespace Content.Server.Database
             string reason,
             NoteSeverity severity,
             NetUserId? banningAdmin,
+            string? banningAdminName, // SS220-save-admin-name
             UnbanDef? unban,
             ServerBanExemptFlags exemptFlags = default,
-            ImmutableArray<BanRoleDef>? roles = null)
+            ImmutableArray<IBanRoleDef>? roles = null) // SS220-ase-abstract-gush
         {
             if (userIds.Length == 0 && addresses.Length == 0 && hwIds.Length == 0)
             {
@@ -76,6 +79,7 @@ namespace Content.Server.Database
             Reason = reason;
             Severity = severity;
             BanningAdmin = banningAdmin;
+            BanningAdminName = banningAdminName; // SS220-save-admin-name
             Unban = unban;
             ExemptFlags = exemptFlags;
 
@@ -100,7 +104,7 @@ namespace Content.Server.Database
             Roles = roles;
         }
 
-        public string FormatBanMessage(IConfigurationManager cfg, ILocalizationManager loc)
+        public string FormatBanMessage(IConfigurationManager cfg, ILocalizationManager loc, string playerLogin) // SS220-ad-login-into-ban-screen
         {
             string expires;
             if (ExpirationTime is { } expireTime)
@@ -117,11 +121,19 @@ namespace Content.Server.Database
                     : loc.GetString("ban-banned-permanent");
             }
 
+            playerLogin = playerLogin is null ? "" : playerLogin; // SS220-ad-login-into-ban-screen
+            string additionalInfo = cfg.GetCVar(CCVars220.AdditionalBanInfo); // add-some-admin-changeable-info
+
             return $"""
                    {loc.GetString("ban-banned-1")}
+                   {loc.GetString("ban-banned-8", ("banId", Id.HasValue ? Id.Value : "-"))}
+                   {loc.GetString("ban-banned-4", ("admin", BanningAdminName ?? "Console"))}
+                   {loc.GetString("ban-banned-9", ("login", playerLogin))}
+                   {loc.GetString("ban-banned-6", ("round", RoundIds.Length != 0 ? RoundIds : loc.GetString("ban-banned-7")))}
                    {loc.GetString("ban-banned-2", ("reason", Reason))}
                    {expires}
                    {loc.GetString("ban-banned-3")}
+                   {additionalInfo}
                    """;
         }
     }

@@ -183,12 +183,29 @@ namespace Content.Server.Database
                 ExemptFlags = ban.ExemptFlags,
                 Roles = ban.Roles == null
                     ? []
-                    : ban.Roles.Value.Select(brd => new BanRole
+                    // SS220-abstract-ban-role-begin
+                    : ban.Roles.Value.Select<IBanRoleDef, IBanRole>(brd => brd switch
+                    {
+                        BanRoleDef roleBanDef => new BanRole
                         {
-                            RoleType = brd.RoleType,
-                            RoleId = brd.RoleId
-                        })
-                        .ToList(),
+                            RoleType = roleBanDef.RoleType,
+                            RoleId = roleBanDef.RoleId,
+                        },
+
+                        BanSpecieDef roleSpecieDef => new BanSpecie
+                        {
+                            SpecieId = roleSpecieDef.Specie,
+                        },
+
+                        BanChatDef banChatDef => new BanChat
+                        {
+                            Chat = banChatDef.Chat.ToString(),
+                        },
+
+                        _ => throw new InvalidOperationException($"unknown IBanRole: {brd.GetType().Name}")
+                    })
+                    .ToList(),
+                    // SS220-abstract-ban-role-end
             };
             db.SqliteDbContext.Ban.Add(banEntity);
 
@@ -227,11 +244,21 @@ namespace Content.Server.Database
 
             var unban = ConvertUnban(ban.Unban);
 
-            ImmutableArray<BanRoleDef>? roles = null;
+            ImmutableArray<IBanRoleDef>? roles = null; // SS220-abstract-ban-role
             if (ban.Type == BanType.Role)
             {
-                roles = [..ban.Roles!.Select(br => new BanRoleDef(br.RoleType, br.RoleId))];
+                roles = [.. ban.Roles!.OfType<BanRole>().Select(br => new BanRoleDef(br.RoleType, br.RoleId))]; // SS220-abstract-ban-role
             }
+            // SS220-specie-chat-ban-begin
+            else if (ban.Type == BanType.Species)
+            {
+                roles = [.. ban.Roles!.OfType<BanSpecie>().Select(bs => new BanSpecieDef(bs.SpecieId))];
+            }
+            else if (ban.Type == BanType.Chat)
+            {
+                roles = [.. ban.Roles!.OfType<BanChat>().Select(bc => new BanChatDef(Enum.Parse<BannableChats>(bc.Chat, ignoreCase: true)))];
+            }
+            // SS220-specie-chat-ban-end
 
             return new BanDef(
                 ban.Id,
@@ -247,6 +274,7 @@ namespace Content.Server.Database
                 ban.Reason,
                 ban.Severity,
                 aUid,
+                ban.AdminNameInBanTime, // SS220-add-admin-name-in-ban
                 unban,
                 ban.ExemptFlags,
                 roles);

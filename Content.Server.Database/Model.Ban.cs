@@ -44,6 +44,16 @@ internal static class ModelBan
             .HasIndex(bp => new { bp.RoleType, bp.RoleId, bp.BanId })
             .IsUnique();
 
+        // SS220-specie-chat-ban-begin
+        modelBuilder.Entity<BanSpecie>()
+            .HasIndex(bp => new { bp.SpecieId, bp.BanId })
+            .IsUnique();
+
+        modelBuilder.Entity<BanChat>()
+            .HasIndex(bp => new { bp.Chat, bp.BanId })
+            .IsUnique();
+        // SS220-specie-chat-ban-end
+
         modelBuilder.Entity<BanRound>()
             .HasIndex(bp => new { bp.RoundId, bp.BanId })
             .IsUnique();
@@ -127,6 +137,8 @@ public sealed class Ban
 
     public Player? CreatedBy { get; set; }
 
+    public string? AdminNameInBanTime { get; set; }
+
     /// <summary>
     /// User ID of the admin that last edited the note
     /// </summary>
@@ -166,7 +178,7 @@ public sealed class Ban
     public List<BanPlayer>? Players { get; set; }
     public List<BanAddress>? Addresses { get; set; }
     public List<BanHwid>? Hwids { get; set; }
-    public List<BanRole>? Roles { get; set; }
+    public List<IBanRole>? Roles { get; set; } // SS220-abstract-ban-role
     public List<ServerBanHit>? BanHits { get; set; }
 }
 
@@ -274,7 +286,7 @@ public sealed class BanHwid : IBanSelector
 /// to store which roles are actually banned.
 /// It is invalid for <see cref="BanType.Server"/> bans to have <see cref="BanRole"/> entities.
 /// </remarks>
-public sealed class BanRole
+public sealed class BanRole : IBanRole // SS220-abstract-BanRole
 {
     public int Id { get; set; }
 

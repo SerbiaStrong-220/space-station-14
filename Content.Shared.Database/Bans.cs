@@ -14,6 +14,18 @@ public enum BanType : byte
     /// A ban from playing one or more roles.
     /// </summary>
     Role,
+
+    // SS220-ban-types-begin
+    /// <summary>
+    /// A ban from using or ooc or looc chat
+    /// </summary>
+    Chat = 16,
+
+    /// <summary>
+    /// A ban from playing one or more species
+    /// </summary>
+    Species = 17,
+    // SS220-ban-types-end
 }
 
 /// <summary>
@@ -24,7 +36,7 @@ public enum BanType : byte
 /// The ID of the role being banned. This is likely a prototype ID based on <paramref name="RoleType"/>.
 /// </param>
 [Serializable]
-public record struct BanRoleDef(string RoleType, string RoleId)
+public record struct BanRoleDef(string RoleType, string RoleId) : IBanRoleDef /* SSS220-role-bans-abstract */
 {
     public override string ToString()
     {

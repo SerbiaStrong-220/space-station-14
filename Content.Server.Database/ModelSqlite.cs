@@ -64,11 +64,11 @@ namespace Content.Server.Database
                 .HasConversion(ipMaskConverter);
 
             // SS220 Species bans begin
-            modelBuilder
-                .Entity<ServerSpeciesBan>()
-                .Property(e => e.Address)
-                .HasColumnType("TEXT")
-                .HasConversion(ipMaskConverter);
+            // modelBuilder
+            //     .Entity<ServerSpeciesBan>()
+            //     .Property(e => e.Address)
+            //     .HasColumnType("TEXT")
+            //     .HasConversion(ipMaskConverter);
             // SS220 Species bans end
 
             var jsonStringConverter = new ValueConverter<JsonDocument, string>(

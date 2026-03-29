@@ -28,7 +28,8 @@ public sealed class BanListEui : BaseEui
     private string BanListPlayerName { get; set; } = string.Empty;
     private List<SharedBan> Bans { get; } = new();
     private List<SharedBan> RoleBans { get; } = new();
-    private List<SharedServerSpeciesBan> SpeciesBans { get; } = []; // SS220 Species bans
+    private List<SharedBan> SpeciesBans { get; } = []; // SS220 Species bans
+    private List<SharedBan> ChatBans { get; } = []; // SS220 Species bans
 
     public override void Opened()
     {
@@ -46,7 +47,7 @@ public sealed class BanListEui : BaseEui
 
     public override EuiStateBase GetNewState()
     {
-        return new BanListEuiState(BanListPlayerName, Bans, RoleBans, /* SS220 Species bans */ SpeciesBans);
+        return new BanListEuiState(BanListPlayerName, Bans, RoleBans,/* SS220-bans-begin */ SpeciesBans, ChatBans /* SS220-ban-end */);
     }
 
     private void OnPermsChanged(AdminPermsChangedEventArgs args)
@@ -61,6 +62,8 @@ public sealed class BanListEui : BaseEui
     {
         await LoadBansCore(userId, BanType.Server, Bans);
         await LoadBansCore(userId, BanType.Role, RoleBans);
+        await LoadBansCore(userId, BanType.Species, SpeciesBans);
+        await LoadBansCore(userId, BanType.Chat, ChatBans);
     }
 
     private async Task LoadBansCore(NetUserId userId, BanType banType, List<SharedBan> list)
