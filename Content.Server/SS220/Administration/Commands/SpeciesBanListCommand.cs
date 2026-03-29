@@ -50,31 +50,32 @@ public sealed class SpeciesBanListCommand : LocalizedCommands
             return;
         }
 
-        if (shell.Player is not { } player)
-        {
-            // TODO UPSTREAM
-            var bans = await _db.GetServerSpeciesBansAsync(data.LastAddress, data.UserId, data.LastLegacyHWId, data.LastModernHWIds, includeUnbanned);
-            if (bans.Count == 0)
-            {
-                shell.WriteLine(Loc.GetString("cmd-speciesbanlist-player-has-not-bans", ("player", data.Username)));
-                return;
-            }
+        // TODO UPSTREAM
+        // if (shell.Player is not { } player)
+        // {
+        //     // TODO UPSTREAM
+        //     var bans = await _db.GetServerSpeciesBansAsync(data.LastAddress, data.UserId, data.LastLegacyHWId, data.LastModernHWIds, includeUnbanned);
+        //     if (bans.Count == 0)
+        //     {
+        //         shell.WriteLine(Loc.GetString("cmd-speciesbanlist-player-has-not-bans", ("player", data.Username)));
+        //         return;
+        //     }
 
-            foreach (var ban in bans)
-            {
-                shell.WriteLine(Loc.GetString("cmd-speciesbanlist-ban-info",
-                    ("id", ban.Id?.ToString() ?? "null"),
-                    ("species", ban.SpeciesId),
-                    ("reason", ban.Reason),
-                    ("unbanned", ban.Unban != null)));
-            }
+        //     foreach (var ban in bans)
+        //     {
+        //         shell.WriteLine(Loc.GetString("cmd-speciesbanlist-ban-info",
+        //             ("id", ban.Id?.ToString() ?? "null"),
+        //             ("species", ban.SpeciesId),
+        //             ("reason", ban.Reason),
+        //             ("unbanned", ban.Unban != null)));
+        //     }
 
-            return;
-        }
+        //     return;
+        // }
 
-        var ui = new BanListEui();
-        _eui.OpenEui(ui, player);
-        await ui.ChangeBanListPlayer(data.UserId);
+        // var ui = new BanListEui();
+        // _eui.OpenEui(ui, player);
+        // await ui.ChangeBanListPlayer(data.UserId);
     }
 
     public override CompletionResult GetCompletion(IConsoleShell shell, string[] args)

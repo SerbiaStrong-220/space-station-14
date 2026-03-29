@@ -3,7 +3,6 @@ using System.Numerics;
 using Content.Client.Administration.UI.BanList.Bans;
 using Content.Client.Administration.UI.BanList.RoleBans;
 using Content.Client.Eui;
-using Content.Client.SS220.Administration.UI.BanList.SpeciesBans;
 using Content.Shared.Administration.BanList;
 using Content.Shared.Eui;
 using JetBrains.Annotations;
@@ -33,13 +32,19 @@ public sealed class BanListEui : BaseEui
         SpeciesBanControl = BanWindow.SpeciesBanList;
         SpeciesBanControl.LineIdsClicked += OnLineIdsClicked;
         // SS220 Species bans end
+
+        // SS220 chat bans begin
+        ChatsBanControl = BanWindow.ChatsBanList;
+        ChatsBanControl.LineIdsClicked += OnLineIdsClicked;
+        // SS220 chat bans end
     }
 
     private BanListWindow BanWindow { get; }
 
     private BanListControl BanControl { get; }
     private RoleBanListControl RoleBanControl { get; }
-    private SpeciesBanListControl SpeciesBanControl { get; } // SS220 Species bans
+    private RoleBanListControl SpeciesBanControl { get; } // SS220 Species bans
+    private RoleBanListControl ChatsBanControl { get; } // SS220 Species bans
 
     private void OnClosed()
     {
@@ -69,8 +74,8 @@ public sealed class BanListEui : BaseEui
         s.Bans.Sort((a, b) => a.BanTime.CompareTo(b.BanTime));
         BanControl.SetBans(s.Bans);
         RoleBanControl.SetRoleBans(s.RoleBans);
-        SpeciesBanControl.SetSpeciesBans(s.SpeciesBans); // SS220 Species bans
-        ChatBanControl.SetChatBans(s.ChatBans);
+        SpeciesBanControl.SetRoleBans(s.SpeciesBans); // SS220 Species bans
+        ChatsBanControl.SetRoleBans(s.ChatBans); // SS220 chat bans
     }
 
     public override void Opened()
