@@ -96,12 +96,15 @@ namespace Content.Server.Access.Systems
             var addedLength = access.Tags.Count - beforeLength;
 
             _popupSystem.PopupEntity(Loc.GetString("agent-id-new", ("number", addedLength), ("card", args.Target)), args.Target.Value, args.User);
-            // ss220 agentid tweak
-            var usePopup = Loc.GetString("agen-id-use-popup", ("user", args.User), ("agentid", uid), ("otherid", args.Target));
-            _popupSystem.PopupEntity(usePopup, uid, Shared.Popups.PopupType.Small);
-            SoundSpecifier useSound = new SoundCollectionSpecifier("sparks");
-            _audio.PlayPvs(useSound, uid);
-            // ss220 agentid tweak
+            // ss220 agentid tweak begin
+            _audio.PlayPvs(component.UseSound, uid);
+
+            if (component.ShouldPopup)
+            {
+                var usePopup = Loc.GetString("agen-id-use-popup", ("user", args.User), ("agentid", uid), ("otherid", args.Target));
+                _popupSystem.PopupEntity(usePopup, uid, Shared.Popups.PopupType.Small);
+            }
+            // ss220 agentid tweak end
             if (addedLength > 0)
                 Dirty(uid, access);
         }
