@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using Content.Server.Administration.Logs;
 using Content.Server.IP;
 using Content.Server.Preferences.Managers;
-using Content.Server.SS220.Database;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Microsoft.EntityFrameworkCore;

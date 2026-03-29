@@ -5,7 +5,7 @@ namespace Content.Server.Corvax.StationGoal
     [Serializable, Prototype("stationGoal")]
     public sealed class StationGoalPrototype : IPrototype
     {
-        [IdDataFieldAttribute] public string ID { get; } = default!;
+        [IdDataFieldAttribute] public string ID { get; private set; } = default!;
 
         [DataField]
         public string Text { get; set; } = string.Empty;

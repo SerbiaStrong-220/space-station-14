@@ -8,7 +8,6 @@ using Content.Shared.Administration;
 using Content.Shared.Administration.BanList;
 using Content.Shared.Database;
 using Content.Shared.Eui;
-using Content.Shared.SS220.Administration.BanList;
 using Robust.Shared.Network;
 
 namespace Content.Server.Administration.BanList;

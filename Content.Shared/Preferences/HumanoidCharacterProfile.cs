@@ -33,6 +33,7 @@ namespace Content.Shared.Preferences
     public sealed partial class HumanoidCharacterProfile
     {
         public static readonly ProtoId<SpeciesPrototype> DefaultSpecies = "Human";
+        public static readonly ProtoId<TTSVoicePrototype> DefaultVoice = "father_grigori"; // SS220-add-tts
         private static readonly Regex RestrictedNameRegex = new(@"[^А-Яа-яёЁ0-9' -]"); // Corvax: Only cyrillic names
         private static readonly Regex ICNameCaseRegex = new(@"^(?<word>\w)|\b(?<word>\w)(?=\w*$)");
 
@@ -78,7 +79,7 @@ namespace Content.Shared.Preferences
 
         // Corvax-TTS begin
         [DataField]
-        public string Voice { get; private set; } = SharedHumanoidAppearanceSystem.DefaultVoice;
+        public string Voice { get; private set; } = DefaultVoice;
         // Corvax-TTS end
 
         /// <summary>
@@ -706,7 +707,7 @@ namespace Content.Shared.Preferences
             // Corvax-TTS-Start
             prototypeManager.TryIndex<TTSVoicePrototype>(Voice, out var voice);
             if (voice is null || !CanHaveVoice(voice, Sex))
-                Voice = SharedHumanoidAppearanceSystem.DefaultSexVoice[sex];
+                Voice = DefaultVoice;
             // Corvax-TTS-End
         }
 

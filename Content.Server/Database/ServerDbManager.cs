@@ -5,7 +5,6 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Administration.Logs;
-using Content.Server.SS220.Database;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CCVar;
 using Content.Shared.Construction.Prototypes;
@@ -268,7 +267,6 @@ namespace Content.Server.Database
         Task<AdminWatchlistRecord?> GetAdminWatchlist(int id);
         Task<AdminMessageRecord?> GetAdminMessage(int id);
         Task<BanNoteRecord?> GetBanAsNoteAsync(int id);
-        Task<ServerSpeciesBanNoteRecord?> GetServerSpeciesBanAsNoteAsync(int id); // SS220 Species bans // UPSTREAM_TODO
         Task<List<IAdminRemarksRecord>> GetAllAdminRemarks(Guid player);
         Task<List<IAdminRemarksRecord>> GetVisibleAdminNotes(Guid player);
         Task<List<AdminWatchlistRecord>> GetActiveWatchlists(Guid player);
@@ -876,14 +874,6 @@ namespace Content.Server.Database
             DbReadOpsMetric.Inc();
             return RunDbCommand(() => _db.GetBanAsNoteAsync(id));
         }
-
-        // SS220 Species bans begin
-        public Task<ServerSpeciesBanNoteRecord?> GetServerSpeciesBanAsNoteAsync(int id)
-        {
-            DbReadOpsMetric.Inc();
-            return RunDbCommand(() => _db.GetServerSpeciesBanAsNoteAsync((int)id));
-        }
-        // SS220 Species bans end
 
         public Task<List<IAdminRemarksRecord>> GetAllAdminRemarks(Guid player)
         {

@@ -21,6 +21,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Content.Shared.Body;
 using Content.Shared.Gibbing;
+using Content.Server.Body;
 
 namespace Content.Server.SS220.CultYogg.Cultists;
 
@@ -30,7 +31,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
     [Dependency] private readonly GibbingSystem _gibbing = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly HumanoidAppearanceSystem _humanoidAppearance = default!; // TODO
+    [Dependency] private readonly VisualBodySystem _visualBody = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
@@ -42,6 +43,8 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
     [Dependency] private readonly IChatManager _chatManager = default!;
 
     private const string CultDefaultMarking = "CultStage-Halo";
+
+    private static readonly ProtoId<OrganCategoryPrototype> EyesCategory = "Eyes";
 
     public override void Initialize()
     {
@@ -70,9 +73,11 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         Dirty(ent);
     }
 
+    // TODO UPSTREAM
     public void UpdateCultVisuals(Entity<CultYoggComponent> ent)
     {
-        if (!TryComp<HumanoidProfileComponent>(ent, out var huAp))
+        if (!_visualBody.TryGatherMarkingsData(ent.Owner, [HumanoidVisualLayers.Eyes, HumanoidVisualLayers.Special],
+                out var profiles, out var markings, out var applied))
             return;
 
         switch (ent.Comp.CurrentStage)
@@ -81,8 +86,14 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
                 break;
 
             case CultYoggStage.Reveal:
-                ent.Comp.PreviousEyeColor = new Color(huAp.EyeColor.R, huAp.EyeColor.G, huAp.EyeColor.B, huAp.EyeColor.A);
-                huAp.EyeColor = Color.Green;
+                if (!profiles.TryGetValue(EyesCategory, out var eyesProfile))
+                    break;
+
+                ent.Comp.PreviousEyeColor = new Color(eyesProfile.EyeColor.R, eyesProfile.EyeColor.G, eyesProfile.EyeColor.B, eyesProfile.EyeColor.A);
+                break;
+                // TODO UPSTREAM and somehow apply this
+            /*
+                eyesProfile.EyeColor = Color.Green;
                 break;
 
             case CultYoggStage.Alarm:
@@ -92,24 +103,24 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
                     return;
                 }
 
-                if (huAp.MarkingSet.Markings.TryGetValue(MarkingCategories.Special, out var value))
+                if (humProfile.MarkingSet.Markings.TryGetValue(MarkingCategories.Special, out var value))
                 {
                     ent.Comp.PreviousTail = value.FirstOrDefault();
                     value.Clear();
                 }
 
-                if (!huAp.MarkingSet.Markings.ContainsKey(MarkingCategories.Special))
+                if (!humProfile.MarkingSet.Markings.ContainsKey(MarkingCategories.Special))
                 {
-                    huAp.MarkingSet.Markings.Add(MarkingCategories.Special, new List<Marking>([new Marking(CultDefaultMarking, colorCount: 1)]));
+                    humProfile.MarkingSet.Markings.Add(MarkingCategories.Special, new List<Marking>([new Marking(CultDefaultMarking, colorCount: 1)]));
                 }
 
-                _humanoidAppearance.SetMarkingId(ent.Owner,
+                _visualBody.ApplyMarkings .SetMarkingId(ent.Owner,
                     MarkingCategories.Special,
                     0,
                     CultDefaultMarking,
-                    huAp);
+                    humProfile);
 
-                var newMarkingId = $"CultStage-{huAp.Species}";
+                var newMarkingId = $"CultStage-{humProfile.Species}";
 
                 if (!_prototype.HasIndex<MarkingPrototype>(newMarkingId))
                 {
@@ -118,7 +129,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
                     return;
                 }
 
-                huAp.MarkingSet.Markings[MarkingCategories.Special].Add(new Marking(newMarkingId, colorCount: 1));
+                humProfile.MarkingSet.Markings[MarkingCategories.Special].Add(new Marking(newMarkingId, colorCount: 1));
                 break;
 
             case CultYoggStage.God:
@@ -130,6 +141,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
 
                 AcsendCultist(ent);
                 break;
+            */
 
             default:
                 Log.Error("Something went wrong with CultYogg stages");
@@ -142,18 +154,19 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         if (!TryComp<HumanoidProfileComponent>(ent, out var huAp))
             return;
 
-        if (ent.Comp.PreviousEyeColor != null)
-            huAp.EyeColor = ent.Comp.PreviousEyeColor.Value;
+        // TODO UPSTREAM FIX
+        // if (ent.Comp.PreviousEyeColor != null)
+        //     huAp.EyeColor = ent.Comp.PreviousEyeColor.Value;
 
-        huAp.MarkingSet.Markings.Remove(MarkingCategories.Special);
+        // huAp.MarkingSet.Markings.Remove(MarkingCategories.Special);
 
-        if (huAp.MarkingSet.Markings.TryGetValue(MarkingCategories.Tail, out var value) &&
-            ent.Comp.PreviousTail != null)
-        {
-            value.Add(ent.Comp.PreviousTail);
-        }
+        // if (huAp.MarkingSet.Markings.TryGetValue(MarkingCategories.Tail, out var value) &&
+        //     ent.Comp.PreviousTail != null)
+        // {
+        //     value.Add(ent.Comp.PreviousTail);
+        // }
 
-        Dirty(ent.Owner, huAp);
+        // Dirty(ent.Owner, huAp);
     }
     #endregion
 

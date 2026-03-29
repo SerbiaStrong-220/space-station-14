@@ -4,6 +4,8 @@ using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
+using Content.Shared.SS220.Signature;
+using Content.Shared.SS220.TTS;
 using Content.Shared.Traits;
 using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
@@ -61,6 +63,11 @@ public sealed partial class HumanoidCharacterProfileV1
     [DataField]
     public ProtoId<SpeciesPrototype> Species;
 
+    // SS220-TTS begin
+    [DataField]
+    public ProtoId<TTSVoicePrototype> Voice;
+    // SS220-TTS end
+
     [DataField]
     public int Age;
 
@@ -81,7 +88,7 @@ public sealed partial class HumanoidCharacterProfileV1
 
     public HumanoidCharacterProfile ToV2()
     {
-        return new(Name, FlavorText, Species, Age, Sex, Gender, Appearance.ToV2(Species), SpawnPriority, JobPriorities, PreferenceUnavailable, AntagPreferences, TraitPreferences, Loadouts);
+        return new(Name, FlavorText, Species, Voice, Age, Sex, Gender, Appearance.ToV2(Species), SpawnPriority, JobPriorities, PreferenceUnavailable, AntagPreferences, TraitPreferences, Loadouts);
     }
 }
 

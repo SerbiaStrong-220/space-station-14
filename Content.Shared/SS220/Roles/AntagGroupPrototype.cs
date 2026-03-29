@@ -10,7 +10,7 @@ namespace Content.Shared.SS220.Roles;
 public sealed partial class AntagGroupPrototype : IPrototype
 {
     [IdDataField]
-    public string ID { get; } = string.Empty;
+    public string ID { get; private set; } = string.Empty;
 
     [DataField(required: true)]
     public LocId Name = string.Empty;

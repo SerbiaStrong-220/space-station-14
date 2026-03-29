@@ -5,7 +5,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared.SS220.CriminalRecords;
 
 [Prototype("criminalStatus")]
-public sealed class CriminalStatusPrototype : IPrototype
+public sealed partial class CriminalStatusPrototype : IPrototype
 {
     [IdDataField]
     public string ID { get; private set; } = default!;

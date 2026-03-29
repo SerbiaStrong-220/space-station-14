@@ -1,7 +1,6 @@
 using System.Collections.Immutable;
 using System.Linq;
 using Content.Server.Database;
-using Content.Server.SS220.Database;
 using Content.Shared.Administration.Notes;
 using Content.Shared.Database;
 
@@ -15,7 +14,8 @@ public static class AdminNotesExtensions
         var secret = false;
         NoteType type;
         ImmutableArray<BanRoleDef>? bannedRoles = null;
-        stringTODO[]? bannedSpecies = null; // SS220 Species bans
+        // TODO UPSTREAM
+        // string[]? bannedSpecies = null; // SS220 Species bans
         string? unbannedByName = null;
         DateTime? unbannedTime = null;
         bool? seen = null;
@@ -50,15 +50,23 @@ public static class AdminNotesExtensions
                 unbannedTime = roleBan.UnbanTime;
                 unbannedByName = roleBan.UnbanningAdmin?.LastSeenUserName ?? Loc.GetString("system-user");
                 break;
-            // SS220 Species bans begin
-            case ServerSpeciesBanNoteRecord speciesBan:
+            // SS220 Species chat bans begin
+            // TODO UPSTREAM
+            case BanNoteRecord { Type: BanType.Species } speciesBan:
                 type = NoteType.SpeciesBan;
                 severity = speciesBan.Severity;
                 bannedSpecies = speciesBan.Species;
                 unbannedTime = speciesBan.UnbanTime;
                 unbannedByName = speciesBan.UnbanningAdmin?.LastSeenUserName ?? Loc.GetString("system-user");
                 break;
-            // SS220 Species bans end
+            case BanNoteRecord { Type: BanType.Chat } speciesBan:
+                type = NoteType.SpeciesBan;
+                severity = speciesBan.Severity;
+                bannedSpecies = speciesBan.Species;
+                unbannedTime = speciesBan.UnbanTime;
+                unbannedByName = speciesBan.UnbanningAdmin?.LastSeenUserName ?? Loc.GetString("system-user");
+                break;
+            // SS220 Species chat bans end
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), note.GetType(), "Unknown note type");
         }

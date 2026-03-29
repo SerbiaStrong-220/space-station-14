@@ -125,8 +125,8 @@ public sealed partial class SpeciesPrototype : IPrototype
     public string ButtScanTexture = "/Textures/SS220/Interface/Butts/human.png";
 
     //SS220 Species-Job-Requirement
-    [DataField(customTypeSerializer: typeof(DictionarySerializer<string, string[]>))]
-    public Dictionary<string, string[]> BlockedJobsByAccessor { get; } = new();
+    [DataField]
+    public Dictionary<string, string[]> BlockedJobsByAccessor { get; set; } = new();
 
     //ss220 add species loadout start
     [DataField]

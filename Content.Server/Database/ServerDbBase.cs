@@ -9,7 +9,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
-using Content.Server.SS220.Database;
 using Content.Server.SS220.Signature;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Construction.Prototypes;

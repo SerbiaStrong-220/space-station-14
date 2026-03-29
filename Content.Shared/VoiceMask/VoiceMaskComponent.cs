@@ -1,4 +1,4 @@
-using Content.Shared.Humanoid;
+using Content.Shared.Preferences;
 using Content.Shared.Speech;
 using Robust.Shared.Prototypes;
 
@@ -16,7 +16,7 @@ namespace Content.Shared.VoiceMask;
 public sealed partial class VoiceMaskComponent : Component
 {
     [ViewVariables(VVAccess.ReadWrite)]
-    public string VoiceId = SharedHumanoidAppearanceSystem.DefaultVoice; // Corvax-TTS
+    public string VoiceId = HumanoidCharacterProfile.DefaultVoice; // Corvax-TTS
 
     /// <summary>
     ///     The name that will override an entities default name. If null, it will use the default override.
