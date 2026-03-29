@@ -229,7 +229,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
             : string.Join(", ", banInfo.Users.Select(u => $"{u.UserName} ({u.UserId})"));
         var bannedChats = string.Join(", ", banInfo.Chats);
 
-        _chat.SendAdminAlert(Loc.GetString("cmd-chat-ban-success", ("target", targetName), ("species", bannedChats), ("reason", banInfo.Reason), ("length", length)));
+        _chat.SendAdminAlert(Loc.GetString("cmd-chat-ban-success", ("target", targetName), ("chats", bannedChats), ("reason", banInfo.Reason), ("length", length)));
 
         if (banInfo.PostBanInfo && banDef.Id is { } banId)
         {
