@@ -1,5 +1,6 @@
 
 
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -71,7 +72,8 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
             ? Loc.GetString("system-user")
             : (await _db.GetPlayerRecordByUserId(banInfo.BanningAdmin.Value))?.LastSeenUserName ?? Loc.GetString("system-user");
 
-        var (banDef, expires) = await CreateBanDef(banInfo, BanType.Species, null, adminName);
+        ImmutableArray<IBanRoleDef> speciesDefs = [.. banInfo.SpeciesPrototypes.Where(x => _prototypeManager.HasIndex(x)).Select(x => new BanSpecieDef(x))];
+        var (banDef, expires) = await CreateBanDef(banInfo, BanType.Species, speciesDefs, adminName);
 
         await AddSpeciesBan(banDef);
 
@@ -215,7 +217,8 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
             ? Loc.GetString("system-user")
             : (await _db.GetPlayerRecordByUserId(banInfo.BanningAdmin.Value))?.LastSeenUserName ?? Loc.GetString("system-user");
 
-        var (banDef, expires) = await CreateBanDef(banInfo, BanType.Chat, null, adminName);
+        ImmutableArray<IBanRoleDef> chatDefs = [.. banInfo.Chats.Where(x => x is not BannableChats.Invalid).Select(x => new BanChatDef(x))];
+        var (banDef, expires) = await CreateBanDef(banInfo, BanType.Chat, chatDefs, adminName);
 
         await AddChatsBan(banDef);
 
