@@ -196,8 +196,8 @@ marking-ScreenFrown = Экран-грусть
 marking-ScreenRing = Экран-кольцо
 marking-ScreenL = Экран «L»
 
-marking-ScreenPoxui = Экран «Ага»
-marking-ScreenAbsolutepoxui = Экран «Ага Вер.2»
+marking-ScreenAga = Экран «Ага»
+marking-ScreenAgaAga = Экран «Ага Вер.2»
 marking-ScreenAwesome = Экран «Крутой»
 marking-ScreenBestfriend = Экран «Лучший друг»
 marking-ScreenBigsmile = Экран-широкая улыбка
