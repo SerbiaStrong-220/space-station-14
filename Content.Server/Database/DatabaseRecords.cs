@@ -49,7 +49,7 @@ public sealed record BanNoteRecord(
     bool Deleted,
     PlayerRecord? UnbanningAdmin,
     DateTime? UnbanTime,
-    ImmutableArray<BanRoleDef> Roles) : IAdminRemarksRecord;
+    ImmutableArray<IBanRoleDef> Roles) : IAdminRemarksRecord; // SS220-abstract-ban-role-def
 
 public sealed record AdminNoteRecord(
     int Id,

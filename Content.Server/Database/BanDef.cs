@@ -104,7 +104,7 @@ namespace Content.Server.Database
             Roles = roles;
         }
 
-        public string FormatBanMessage(IConfigurationManager cfg, ILocalizationManager loc, string playerLogin) // SS220-ad-login-into-ban-screen
+        public string FormatBanMessage(IConfigurationManager cfg, ILocalizationManager loc, string? playerLogin) // SS220-ad-login-into-ban-screen
         {
             string expires;
             if (ExpirationTime is { } expireTime)

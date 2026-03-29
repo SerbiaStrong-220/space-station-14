@@ -169,7 +169,7 @@ namespace Content.Server.GameTicking
                 return;
 
             // SS220 Species bans begin
-            if (!_randomizeCharacters && _banManager.IsSpeciesBanned(player.UserId, character.Species.Id))
+            if (!_randomizeCharacters && _banManager.IsSpeciesBanned(player, character.Species.Id))
             {
                 if (!LobbyEnabled)
                     JoinAsObserver(player);
@@ -210,7 +210,7 @@ namespace Content.Server.GameTicking
                     foreach (var proto in speciesPrototypes)
                     {
                         // SS220 Species bans begin
-                        if (_banManager.IsSpeciesBanned(player.UserId, proto.ID))
+                        if (_banManager.IsSpeciesBanned(player, proto.ID))
                             continue;
                         // SS220 Species bans end
 

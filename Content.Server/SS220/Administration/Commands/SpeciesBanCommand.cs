@@ -123,6 +123,7 @@ public sealed class SpeciesBanCommand : LocalizedCommands
             return;
         }
 
+        // TODO UPSTREAM
         _ban.CreateSpeciesBan(located.UserId,
             located.Username,
             shell.Player?.UserId,

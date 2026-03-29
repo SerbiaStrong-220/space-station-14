@@ -2,23 +2,14 @@ using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Systems;
 using Content.Server.Construction;
 using Content.Server.Construction.Components;
-using Content.Server.SS220.LockPick.Components;
-using Content.Server.Storage.Components;
-using Content.Shared.Destructible;
-using Content.Shared.Explosion;
-using Content.Shared.Foldable;
-using Content.Shared.Interaction;
+using Content.Shared.Atmos;
 using Content.Shared.Lock;
-using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
 using Content.Shared.SS220.LockPick;
-using Content.Shared.Atmos;
 using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Containers;
-using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Random;
 
@@ -101,19 +92,18 @@ public sealed class EntityStorageSystem : SharedEntityStorageSystem
         }
     }
 
-    // SS220-FixEntityStorageAtmosphereMerge-Begin
-    //private TileRef? GetOffsetTileRef(EntityUid uid, EntityStorageComponent component)
-    //{
-    //    var targetCoordinates = TransformSystem.ToMapCoordinates(new EntityCoordinates(uid, component.EnteringOffset));
-    //
-    //     if (_map.TryFindGridAt(targetCoordinates, out var gridId, out var grid))
-    //     {
-    //         return _mapSystem.GetTileRef(gridId, grid, targetCoordinates);
-    //     }
-    //
-    //     return null;
-    // }
-    // SS220-FixEntityStorageAtmosphereMerge-End
+    // TODO UPSTREAM - ref [https://github.com/SerbiaStrong-220/space-station-14/pull/2771]
+    private TileRef? GetOffsetTileRef(EntityUid uid, EntityStorageComponent component)
+    {
+        var targetCoordinates = TransformSystem.ToMapCoordinates(new EntityCoordinates(uid, component.EnteringOffset));
+
+        if (_map.TryFindGridAt(targetCoordinates, out var gridId, out var grid))
+        {
+            return _mapSystem.GetTileRef(gridId, grid, targetCoordinates);
+        }
+
+        return null;
+    }
 
     #region Gas mix event handlers
 

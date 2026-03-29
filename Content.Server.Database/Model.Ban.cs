@@ -137,7 +137,9 @@ public sealed class Ban
 
     public Player? CreatedBy { get; set; }
 
-    public string? AdminNameInBanTime { get; set; }
+    public string? AdminNameInBanTime { get; set; } // SS220-add-admin-name
+
+    public int StatedRound { get; set; } // SS220-add-stated-round
 
     /// <summary>
     /// User ID of the admin that last edited the note

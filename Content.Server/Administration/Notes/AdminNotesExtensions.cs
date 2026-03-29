@@ -14,8 +14,8 @@ public static class AdminNotesExtensions
         var secret = false;
         NoteType type;
         ImmutableArray<BanRoleDef>? bannedRoles = null;
-        // TODO UPSTREAM
-        // string[]? bannedSpecies = null; // SS220 Species bans
+        ImmutableArray<BanSpecieDef>? bannedSpecies = null;
+        ImmutableArray<BanChatDef>? bannedChats = null;
         string? unbannedByName = null;
         DateTime? unbannedTime = null;
         bool? seen = null;
@@ -46,7 +46,7 @@ public static class AdminNotesExtensions
             case BanNoteRecord { Type: BanType.Role } roleBan:
                 type = NoteType.RoleBan;
                 severity = roleBan.Severity;
-                bannedRoles = roleBan.Roles;
+                bannedRoles = [.. roleBan.Roles.OfType<BanRoleDef>()]; // SS220-abstract-role-ban
                 unbannedTime = roleBan.UnbanTime;
                 unbannedByName = roleBan.UnbanningAdmin?.LastSeenUserName ?? Loc.GetString("system-user");
                 break;
@@ -55,16 +55,16 @@ public static class AdminNotesExtensions
             case BanNoteRecord { Type: BanType.Species } speciesBan:
                 type = NoteType.SpeciesBan;
                 severity = speciesBan.Severity;
-                bannedSpecies = speciesBan.Species;
+                bannedSpecies = [.. speciesBan.Roles.OfType<BanSpecieDef>()];
                 unbannedTime = speciesBan.UnbanTime;
                 unbannedByName = speciesBan.UnbanningAdmin?.LastSeenUserName ?? Loc.GetString("system-user");
                 break;
-            case BanNoteRecord { Type: BanType.Chat } speciesBan:
+            case BanNoteRecord { Type: BanType.Chat } chatBan:
                 type = NoteType.SpeciesBan;
-                severity = speciesBan.Severity;
-                bannedSpecies = speciesBan.Species;
-                unbannedTime = speciesBan.UnbanTime;
-                unbannedByName = speciesBan.UnbanningAdmin?.LastSeenUserName ?? Loc.GetString("system-user");
+                severity = chatBan.Severity;
+                bannedChats = [.. chatBan.Roles.OfType<BanChatDef>()];
+                unbannedTime = chatBan.UnbanTime;
+                unbannedByName = chatBan.UnbanningAdmin?.LastSeenUserName ?? Loc.GetString("system-user");
                 break;
             // SS220 Species chat bans end
             default:
@@ -92,6 +92,7 @@ public static class AdminNotesExtensions
             note.ExpirationTime?.UtcDateTime,
             bannedRoles,
             bannedSpecies, // SS220 Species bans
+            bannedChats, // SS220 chats ban
             unbannedTime,
             unbannedByName,
             statedRound,

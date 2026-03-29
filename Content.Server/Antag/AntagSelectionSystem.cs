@@ -554,11 +554,11 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
             return false;
 
         // SS220 Antag ban fix begin
-        if (_ban.GetRoleBans(session.UserId) is { } roleBans)
+        if (_ban.GetAntagBans(session.UserId) is { } antagBans)
         {
             foreach (var role in def.PrefRoles)
             {
-                if (roleBans.Contains(role))
+                if (antagBans.Contains(role))
                     return false;
             }
         }

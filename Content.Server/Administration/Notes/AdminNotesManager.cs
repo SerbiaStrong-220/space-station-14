@@ -166,6 +166,7 @@ public sealed class AdminNotesManager : IAdminNotesManager, IPostInjectInit
             expiryTime,
             null,
             null, // SS220 Species bans
+            null, // SS220 chat bans
             null,
             null,
             null,

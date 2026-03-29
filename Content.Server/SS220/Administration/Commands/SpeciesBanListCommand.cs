@@ -52,6 +52,7 @@ public sealed class SpeciesBanListCommand : LocalizedCommands
 
         if (shell.Player is not { } player)
         {
+            // TODO UPSTREAM
             var bans = await _db.GetServerSpeciesBansAsync(data.LastAddress, data.UserId, data.LastLegacyHWId, data.LastModernHWIds, includeUnbanned);
             if (bans.Count == 0)
             {

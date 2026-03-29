@@ -1477,6 +1477,7 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                 ban.PlaytimeAtNote,
                 ban.Reason,
                 ban.Severity,
+                ban.StatedRound, // SS220-add-stated-round
                 MakePlayerRecord(ban.CreatedBy!),
                 NormalizeDatabaseTime(ban.BanTime),
                 MakePlayerRecord(ban.LastEditedBy!),
@@ -1489,7 +1490,32 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                         ban.Unban.UnbanningAdmin.Value,
                         await dbContext.Player.SingleOrDefaultAsync(p => p.UserId == ban.Unban.UnbanningAdmin.Value)),
                 NormalizeDatabaseTime(ban.Unban?.UnbanTime),
-                [..ban.Roles!.Select(br => new BanRoleDef(br.RoleType, br.RoleId))]);
+                // SS220-abstract-ban-role-begin
+                ban.Roles == null
+                    ? []
+                    : ban.Roles.Select<IBanRole, IBanRoleDef>(ibr => ibr switch
+                    {
+                        BanRole roleBan => new BanRoleDef
+                        {
+                            RoleType = roleBan.RoleType,
+                            RoleId = roleBan.RoleId,
+                        },
+
+                        BanSpecie roleSpecie => new BanSpecieDef
+                        {
+                            Specie = roleSpecie.SpecieId,
+                        },
+
+                        BanChat banChat => new BanChatDef
+                        {
+                            Chat = Enum.Parse<BannableChats>(banChat.Chat, ignoreCase: true),
+                        },
+
+                        _ => throw new InvalidOperationException($"unknown IBanRole: {ibr.GetType().Name}")
+                    })
+                    .ToImmutableArray()
+                // SS220-abstract-ban-role-end
+                );
         }
 
         // These two are here because they get converted into notes later

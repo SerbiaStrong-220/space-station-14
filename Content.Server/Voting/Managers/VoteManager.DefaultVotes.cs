@@ -551,9 +551,13 @@ namespace Content.Server.Voting.Managers
                         if (minutes > 0)
                             banInfo.WithMinutes(minutes);
 
-                        _bans.CreateServerBan(banInfo);
+                        // SS220-ban-begin
+                        banInfo.WithPostBanInfo(false);
+                        banInfo.WithBanningAdminName(null);
+                        banInfo.WithStatedRound(ticker.RoundId);
+                        // SS220-ban-end
 
-                        _bans.CreateServerBan(targetUid, target, null, null /* SS220 */, targetHWid, minutes, severity, null /* SS220*/, ticker.RoundId /* SS220 */, Loc.GetString("votekick-ban-reason", ("reason", reason)), false /* SS220 */); // UPSTREAM_TODO
+                        _bans.CreateServerBan(banInfo);
                     }
                 }
                 else

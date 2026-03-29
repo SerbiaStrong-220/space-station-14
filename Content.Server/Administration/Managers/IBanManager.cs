@@ -151,6 +151,8 @@ public abstract class CreateBanInfo
     internal NoteSeverity? Severity;
     internal string Reason;
     internal NetUserId? BanningAdmin;
+    internal string? BanningAdminName; // SS220-add-banning-admin
+    internal int? StatedRound; // SS220-add-stated-round
     internal bool PostBanInfo; // SS220-post-ban-info
 
     protected CreateBanInfo(string reason)
@@ -347,13 +349,25 @@ public abstract class CreateBanInfo
         return this;
     }
 
-    // SS220-post-ban-info-begin
-    public CreateBanInfo WithBanningAdmin(bool postBanInfo)
+    // SS220-ban-info-begin
+    public CreateBanInfo WithPostBanInfo(bool postBanInfo)
     {
         PostBanInfo = postBanInfo;
         return this;
     }
-    // SS220-post-ban-info-end
+
+    public CreateBanInfo WithBanningAdminName(string? banningAdminName)
+    {
+        BanningAdminName = banningAdminName;
+        return this;
+    }
+
+    public CreateBanInfo WithStatedRound(int? statedRound)
+    {
+        StatedRound = statedRound;
+        return this;
+    }
+    // SS220-ban-info-end
 }
 
 /// <summary>

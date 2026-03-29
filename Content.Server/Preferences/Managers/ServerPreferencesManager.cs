@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Corvax.Sponsors;
 using Content.Server.Database;
+using Content.Server.SS220.Signature;
 using Content.Shared.Body;
 using Content.Shared.CCVar;
 using Content.Shared.Construction.Prototypes;
@@ -100,6 +101,12 @@ namespace Content.Server.Preferences.Managers
             if (Enum.TryParse<Sex>(profile.Sex, true, out var sexVal))
                 sex = sexVal;
 
+            // Corvax-TTS-Start
+            var voice = profile.Voice;
+            if (voice == String.Empty)
+                voice = HumanoidCharacterProfile.DefaultVoice;
+            // Corvax-TTS-End
+
             var spawnPriority = (SpawnPriorityPreference) profile.SpawnPriority;
 
             var gender = sex == Sex.Male ? Gender.Male : Gender.Female;
@@ -168,10 +175,13 @@ namespace Content.Server.Preferences.Managers
                 loadouts[role.RoleName] = loadout;
             }
 
+            var signatureData = SignatureSerializer.Deserialize(profile.SignatureData); // ss220 add signature
+
             return new HumanoidCharacterProfile(
                 profile.CharacterName,
                 profile.FlavorText,
                 species,
+                profile.Voice,
                 profile.Age,
                 sex,
                 gender,
@@ -186,7 +196,9 @@ namespace Content.Server.Preferences.Managers
                 (PreferenceUnavailableMode) profile.PreferenceUnavailable,
                 antags.ToHashSet(),
                 traits.ToHashSet(),
-                loadouts
+                loadouts,
+                signatureData,
+                profile.TeleportAfkToCryoStorage
             );
         }
 

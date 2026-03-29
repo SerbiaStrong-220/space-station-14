@@ -347,6 +347,7 @@ namespace Content.Server.Database
         public List<Antag> Antags { get; } = new();
         public List<Trait> Traits { get; } = new();
         public string? SignatureData { get; set; } // ss220 add signature
+        public bool TeleportAfkToCryoStorage { get; set; } = true; // SS220-teleport-to-cryo-storage
 
         public List<ProfileRoleLoadout> Loadouts { get; } = new();
 
