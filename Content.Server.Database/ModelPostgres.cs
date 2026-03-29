@@ -42,10 +42,6 @@ namespace Content.Server.Database
             modelBuilder.Entity<BanAddress>().ToTable(t =>
                 t.HasCheckConstraint("AddressNotIPv6MappedIPv4", "NOT inet '::ffff:0.0.0.0/96' >>= address"));
 
-            // SS220 Species bans begin
-            // modelBuilder.Entity<ServerSpeciesBan>().ToTable(t =>
-            //     t.HasCheckConstraint("AddressNotIPv6MappedIPv4", "NOT inet '::ffff:0.0.0.0/96' >>= address"));
-            // SS220 Species bans end
 
             modelBuilder.Entity<Player>().ToTable(t =>
                 t.HasCheckConstraint("LastSeenAddressNotIPv6MappedIPv4",
