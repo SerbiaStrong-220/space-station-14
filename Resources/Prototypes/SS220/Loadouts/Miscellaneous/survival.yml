@@ -15,3 +15,19 @@
   storage:
     back:
     - BoxSurvivalBrigmedicNitrogen
+
+- type: loadoutEffectGroup
+  id: EffectSpeciesIpc
+  effects:
+  - !type:SpeciesLoadoutEffect
+    species:
+    - Ipc
+
+- type: loadout
+  id: LoadoutSpeciesIpc
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    back:
+    - BoxSurvivalIpc

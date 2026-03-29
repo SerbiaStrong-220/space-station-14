@@ -116,6 +116,7 @@
   - EmergencyNitrogen
   - EmergencyOxygen
   - LoadoutSpeciesVoxNitrogen
+  - LoadoutSpeciesIpc #SS220-add-ipc
 
 # nitrogen or oxygen tank, depending on what your species needs
 - type: loadoutGroup

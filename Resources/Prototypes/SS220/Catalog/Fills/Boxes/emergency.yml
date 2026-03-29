@@ -70,3 +70,29 @@
     - id: CombatKnife
     - id: Matchbox
     - id: DrinkMREFlask
+
+- type: entity
+  parent: BoxCardboard
+  id: BoxSurvivalIpc
+  name: survival box Ipc
+  description: It's a box with basic internals inside.
+  suffix: Standard
+  components:
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,2,1 
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,2,3
+  - type: StorageFill
+    contents:
+    - id: GlowstickBase
+    - id: WelderMini
+    - id: PowerCellSmall
+    - id: Flare
+  - type: Sprite
+    layers:
+    - state: internals
+    - state: emergencytank
