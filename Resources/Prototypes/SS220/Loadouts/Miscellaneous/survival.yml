@@ -31,3 +31,12 @@
   storage:
     back:
     - BoxSurvivalIpc
+
+- type: loadout
+  id: LoadoutSpeciesEngineerIpc
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    back:
+    - BoxSurvivalEngineerIpc

@@ -74,7 +74,7 @@
 - type: entity
   parent: BoxCardboard
   id: BoxSurvivalIpc
-  name: survival box Ipc
+  name: survival box ipc
   description: It's a box with basic internals inside.
   suffix: Standard
   components:
@@ -92,6 +92,34 @@
     - id: WelderMini
     - id: PowerCellSmall
     - id: Flare
+  - type: Sprite
+    layers:
+    - state: internals
+    - state: emergencytank
+
+- type: entity
+  parent: BoxCardboard
+  id: BoxSurvivalEngineerIpc
+  name: survival box engineer ipc
+  description: It's a box with basic internals inside.
+  suffix: Standard
+  components:
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,2,1 
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,2,3
+  - type: StorageFill
+    contents:
+    - id: GlowstickBase
+    - id: WelderMini
+    - id: PowerCellMedium
+    - id: Flare
+    - id: InflatableWallStack5
+    - id: InflatableDoorStack1
   - type: Sprite
     layers:
     - state: internals

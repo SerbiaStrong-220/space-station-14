@@ -1065,6 +1065,7 @@
   - EmergencyNitrogenExtended
   - EmergencyOxygenExtended
   - LoadoutSpeciesVoxNitrogen
+  - LoadoutSpeciesEngineerIpc #SS220-add-ipc
 
 # Science
 - type: loadoutGroup
