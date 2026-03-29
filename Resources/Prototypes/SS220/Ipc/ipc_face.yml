@@ -57,8 +57,6 @@
     category: misc
   - id: ScreenNya
     category: humanoids
-  - id: ScreenNerd
-    category: misc
   - id: ScreenSkull
     category: misc
   - id: ScreenTenna
@@ -73,3 +71,57 @@
     category: fun
   - id: ScreenStupid
     category: fun
+  - id: ScreenStatic
+    category: misc
+  - id: ScreenBlue
+    category: misc
+  - id: ScreenBreakout
+    category: robotic
+  - id: ScreenEight
+    category: misc
+  - id: ScreenGoggles
+    category: misc
+  - id: ScreenExclaim
+    category: misc
+  - id: ScreenMonoeye
+    category: humanoids
+  - id: ScreenNature
+    category: misc
+  - id: ScreenOrange
+    category: misc
+  - id: ScreenShower
+    category: misc
+  - id: ScreenYellow
+    category: misc
+  - id: ScreenScroll
+    category: robotic
+  - id: ScreenConsole
+    category: robotic
+  - id: ScreenRgb
+    category: robotic
+  - id: ScreenGlider
+    category: robotic
+  - id: ScreenRainbowhoriz
+    category: misc
+  - id: ScreenBsod
+    category: robotic
+  - id: ScreenRedtext
+    category: misc
+  - id: ScreenSquarewave
+    category: robotic
+  - id: ScreenEcgwave
+    category: robotic
+  - id: ScreenEyesangry
+    category: humanoids
+  - id: ScreenWindowsxp
+    category: robotic
+  - id: ScreenRainbowdiag
+    category: misc
+  - id: ScreenBlank
+    category: misc
+  - id: ScreenSmile
+    category: humanoids
+  - id: ScreenOko
+    category: humanoids
+  - id: ScreenRock
+    category: misc
