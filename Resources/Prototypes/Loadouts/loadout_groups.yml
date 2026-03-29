@@ -664,6 +664,7 @@
   - EmergencyNitrogenClown
   - EmergencyOxygenClown
   - LoadoutSpeciesVoxNitrogen
+  - LoadoutSpeciesClownIpc #SS220-add-ipc
 
 - type: loadoutGroup
   id: MimeHead
@@ -724,6 +725,7 @@
   - EmergencyOxygenMime
   - EmergencySpeciesMothMime
   - LoadoutSpeciesVoxNitrogen
+  - LoadoutSpeciesMimeIpc #SS220-add-ipc
 
 - type: loadoutGroup
   id: MusicianJumpsuit

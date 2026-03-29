@@ -49,3 +49,21 @@
   storage:
     back:
     - BoxSurvivalSecurityIpc
+
+- type: loadout
+  id: LoadoutSpeciesClownIpc
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    back:
+    - BoxSurvivalClownIpc
+
+- type: loadout
+  id: LoadoutSpeciesMimeIpc
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    back:
+    - BoxSurvivalMimeIpc

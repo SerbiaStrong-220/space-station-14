@@ -150,3 +150,57 @@
     layers:
     - state: internals
     - state: emergencytank
+
+- type: entity
+  parent: BoxCardboard
+  id: BoxSurvivalClownIpc
+  name: survival box clown ipc
+  description: It's a box with basic internals inside.
+  suffix: Standard
+  components:
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,2,1 
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,2,3
+  - type: StorageFill
+    contents:
+    - id: GlowstickBase
+    - id: WelderMini
+    - id: PowerCellSmall
+    - id: Flare
+    - id: WhoopieCushion
+  - type: Sprite
+    layers:
+    - state: internals
+    - state: emergencytank
+
+- type: entity
+  parent: BoxCardboard
+  id: BoxSurvivalMimeIpc
+  name: survival box mime ipc
+  description: It's a box with basic internals inside.
+  suffix: Standard
+  components:
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,2,1 
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,2,3
+  - type: StorageFill
+    contents:
+    - id: GlowstickBase
+    - id: WelderMini
+    - id: PowerCellSmall
+    - id: Flare
+    - id: FoodBreadNutriBatard
+  - type: Sprite
+    layers:
+    - state: internals
+    - state: emergencytank
