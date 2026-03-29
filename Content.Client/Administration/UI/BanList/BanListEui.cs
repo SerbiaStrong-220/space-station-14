@@ -44,7 +44,7 @@ public sealed class BanListEui : BaseEui
     private BanListControl BanControl { get; }
     private RoleBanListControl RoleBanControl { get; }
     private RoleBanListControl SpeciesBanControl { get; } // SS220 Species bans
-    private RoleBanListControl ChatsBanControl { get; } // SS220 Species bans
+    private RoleBanListControl ChatsBanControl { get; } // SS220 chats bans
 
     private void OnClosed()
     {

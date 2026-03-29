@@ -60,7 +60,7 @@ public static class AdminNotesExtensions
                 unbannedByName = speciesBan.UnbanningAdmin?.LastSeenUserName ?? Loc.GetString("system-user");
                 break;
             case BanNoteRecord { Type: BanType.Chat } chatBan:
-                type = NoteType.SpeciesBan;
+                type = NoteType.ChatBan;
                 severity = chatBan.Severity;
                 bannedChats = [.. chatBan.Roles.OfType<BanChatDef>()];
                 unbannedTime = chatBan.UnbanTime;

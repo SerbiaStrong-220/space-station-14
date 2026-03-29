@@ -182,7 +182,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
 
         if (chatsBans.Any(x => x.Roles is null))
         {
-            _sawmill.Error($"Got empty specie ban for player {session.UserId}: {session.Name}!");
+            _sawmill.Error($"Got empty срфе ban for player {session.UserId}: {session.Name}!");
             chatsBans = [.. chatsBans.Where(x => x.Roles is not null)];
         }
 
@@ -219,14 +219,14 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
 
         await AddChatsBan(banDef);
 
-        var length = expires == null ? Loc.GetString("cmd-species-ban-inf") : Loc.GetString("cmd-species-ban-until", ("expires", expires));
+        var length = expires == null ? Loc.GetString("cmd-chat-ban-inf") : Loc.GetString("cmd-chat-ban-until", ("expires", expires));
 
         var targetName = banInfo.Users.Count == 0
             ? "null"
             : string.Join(", ", banInfo.Users.Select(u => $"{u.UserName} ({u.UserId})"));
         var bannedChats = string.Join(", ", banInfo.Chats);
 
-        _chat.SendAdminAlert(Loc.GetString("cmd-species-ban-success", ("target", targetName), ("species", bannedChats), ("reason", banInfo.Reason), ("length", length)));
+        _chat.SendAdminAlert(Loc.GetString("cmd-chat-ban-success", ("target", targetName), ("species", bannedChats), ("reason", banInfo.Reason), ("length", length)));
 
         if (banInfo.PostBanInfo && banDef.Id is { } banId)
         {
@@ -270,7 +270,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
             if (_playerManager.TryGetSessionById(user, out var session)
                 && _cachedChatsBans.TryGetValue(session, out var chatsBans))
             {
-                chatsBans.RemoveAll(speciesBan => speciesBan.Id == ban.Id);
+                chatsBans.RemoveAll(chatBan => chatBan.Id == ban.Id);
                 SendChatsBans(session);
             }
 

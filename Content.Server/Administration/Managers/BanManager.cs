@@ -98,7 +98,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
         _cachedSpeciesBans[player] = [.. speciesBans]; // SS220 Species bans
 
         var chatBans = await _db.GetBansAsync(netChannel.RemoteEndPoint.Address, player.UserId, hwId, modernHwids, false, type: BanType.Chat); // SS220 chat bans
-        _cachedSpeciesBans[player] = [.. chatBans]; // SS220 chat bans
+        _cachedChatsBans[player] = [.. chatBans]; // SS220 chat bans
 
         SendRoleBans(player);
         SendSpeciesBans(player); // SS220 Species bans
@@ -308,7 +308,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
         CreateBanInfo banInfo,
         BanType type,
         ImmutableArray<IBanRoleDef>? roleBans, // SS220-role-bans-abstract
-        string? bannigAdminName) // SS220-save-ban-admin-name
+        string? banningAdminName) // SS220-save-ban-admin-name
     {
         if (banInfo.Users.Count == 0 && banInfo.HWIds.Count == 0 && banInfo.AddressRanges.Count == 0)
             throw new ArgumentException("Must specify at least one user, HWID, or address range");
@@ -344,7 +344,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
             banInfo.Reason,
             GetSeverityForServerBan(banInfo, CCVars.ServerBanDefaultSeverity),
             banInfo.BanningAdmin,
-            bannigAdminName,
+            banningAdminName,
             null,
             roles: roleBans), expires);
     }
