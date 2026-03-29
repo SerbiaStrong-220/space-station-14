@@ -28,7 +28,6 @@ using Content.Shared.Zombies;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
-using Content.Shared.Emoting;
 using Content.Shared.SS220.Telepathy;
 
 namespace Content.Shared.Bed.Sleep;

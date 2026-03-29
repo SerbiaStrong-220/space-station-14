@@ -120,7 +120,12 @@ public sealed class MedibotSystem : EntitySystem
             return false;
         }
 
-        if (!TryGetTreatment(medibot.Comp, mobState.CurrentState, out var treatment) || !treatment.IsValid(damageable.Damage, isEmagged, _proto) && !manual) return false;
+        if (!TryGetTreatment(medibot.Comp, mobState.CurrentState, out var treatment) ||
+            !treatment.IsValid(_damageable.GetAllDamage(target), isEmagged, _proto) &&
+            !manual)
+        {
+            return false;
+        }
         //ss220 fix medibot end
 
         return true;

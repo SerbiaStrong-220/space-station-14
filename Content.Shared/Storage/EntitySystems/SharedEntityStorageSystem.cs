@@ -362,7 +362,7 @@ public abstract class SharedEntityStorageSystem : EntitySystem
         // SS220 fix #1121 begin
         EntityStorageComponent? insertedComp = null;
 
-        if (ResolveStorage(toInsert, ref insertedComp))
+        if (Resolve(toInsert, ref insertedComp))
             return false;
         // SS220 fix #1121 end
 

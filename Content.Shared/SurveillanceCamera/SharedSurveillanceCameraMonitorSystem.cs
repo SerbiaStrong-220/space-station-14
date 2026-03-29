@@ -1,4 +1,3 @@
-using System.Numerics;
 using Content.Shared.DeviceNetwork;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -20,14 +19,18 @@ public sealed class SurveillanceCameraMonitorUiState : BoundUserInterfaceState
 
     public string ActiveAddress;
 
-    // Known cameras, by address and name.
-    public Dictionary<string, Dictionary<string, (string, Vector2)>> Cameras { get; } // SS220 Camera-Map
+    // Currently active subnet.
+    public string ActiveSubnet { get; }
 
-    public SurveillanceCameraMonitorUiState(NetEntity? activeCamera, HashSet<string> subnets, string activeAddress, Dictionary<string, Dictionary<string, (string, Vector2)>> cameras)
+    // Known cameras, by address and name.
+    public Dictionary<string, string> Cameras { get; }
+
+    public SurveillanceCameraMonitorUiState(NetEntity? activeCamera, HashSet<string> subnets, string activeAddress, string activeSubnet, Dictionary<string, string> cameras)
     {
         ActiveCamera = activeCamera;
         Subnets = subnets;
         ActiveAddress = activeAddress;
+        ActiveSubnet = activeSubnet;
         Cameras = cameras;
     }
 }

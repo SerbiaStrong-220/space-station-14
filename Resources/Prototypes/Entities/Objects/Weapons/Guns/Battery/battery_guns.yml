@@ -184,7 +184,7 @@
     steps: 5
     zeroVisible: true
  # SS220 EDIT START - Add HitscanBatteryAmmoProvider moved from base class
-  - type: HitscanBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: RedLightLaser
     fireCost: 50
   # SS220 EDIT END
@@ -799,7 +799,7 @@
   - type: Gun
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
-  - type: HitscanBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: RedMediumLaser
     #ss220 add stun mode begin
   - type: BatteryWeaponFireModes

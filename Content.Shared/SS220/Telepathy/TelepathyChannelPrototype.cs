@@ -9,7 +9,7 @@ namespace Content.Shared.SS220.Telepathy;
 public sealed partial class TelepathyChannelPrototype : IHearableChannelPrototype
 {
     [IdDataField, ViewVariables]
-    public string ID { get; } = default!;
+    public string ID { get; private set; } = default!;
 
     [DataField]
     public ChannelParameters ChannelParameters = new();

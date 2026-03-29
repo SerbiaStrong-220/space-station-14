@@ -1,5 +1,4 @@
 using System.Linq;
-using System.Numerics;
 using Content.Server.DeviceNetwork;
 using Content.Server.DeviceNetwork.Systems;
 using Content.Server.Power.Components;
@@ -32,7 +31,7 @@ public sealed class SurveillanceCameraMonitorSystem : EntitySystem
             subs.Event<SurveillanceCameraRefreshCamerasMessage>(OnRefreshCamerasMessage);
             subs.Event<SurveillanceCameraRefreshSubnetsMessage>(OnRefreshSubnetsMessage);
             subs.Event<SurveillanceCameraDisconnectMessage>(OnDisconnectMessage);
-            //subs.Event<SurveillanceCameraMonitorSubnetRequestMessage>(OnSubnetRequest);
+            subs.Event<SurveillanceCameraMonitorSubnetRequestMessage>(OnSubnetRequest);
             subs.Event<SurveillanceCameraMonitorSwitchMessage>(OnSwitchMessage);
             subs.Event<BoundUIClosedEvent>(OnBoundUiClose);
         });
@@ -91,7 +90,6 @@ public sealed class SurveillanceCameraMonitorSystem : EntitySystem
         RefreshSubnets(uid, component);
     }
 
-    /*
     private void OnSubnetRequest(EntityUid uid, SurveillanceCameraMonitorComponent component,
         SurveillanceCameraMonitorSubnetRequestMessage args)
     {
@@ -100,7 +98,6 @@ public sealed class SurveillanceCameraMonitorSystem : EntitySystem
             SetActiveSubnet(uid, args.Subnet, component);
         }
     }
-    */
 
     private void OnPacketReceived(EntityUid uid, SurveillanceCameraMonitorComponent component,
         DeviceNetworkPacketEvent args)
@@ -138,21 +135,14 @@ public sealed class SurveillanceCameraMonitorSystem : EntitySystem
                         return;
                     }
 
-                    // SS220 Camera-Map begin
-                    if (!component.KnownCameras.TryGetValue(subnetData, out var subnetCameras))
+                    if (component.ActiveSubnet != subnetData)
                     {
-                        subnetCameras = new Dictionary<string, (string, Vector2)>();
-                        component.KnownCameras[subnetData] = subnetCameras;
+                        DisconnectFromSubnet(uid, subnetData);
                     }
-                    // SS220 Camera-Map end
 
-                    if (!subnetCameras.ContainsKey(address))
+                    if (!component.KnownCameras.ContainsKey(address))
                     {
-                        //SS220 Camera-Map begin
-                        if (!args.Data.TryGetValue(SurveillanceCameraSystem.CameraPositionData, out var position) || position is not Vector2)
-                            position = Vector2.Zero;
-                        subnetCameras.Add(address, (name, (Vector2) position));
-                        //SS220 Camera-Map end
+                        component.KnownCameras.Add(address, name);
                     }
 
                     UpdateUserInterface(uid, component);
@@ -163,7 +153,6 @@ public sealed class SurveillanceCameraMonitorSystem : EntitySystem
                         && !component.KnownSubnets.ContainsKey(subnet))
                     {
                         component.KnownSubnets.Add(subnet, args.SenderAddress);
-                        ConnectToSubnet(uid, subnet, component); //SS220 Camera-Map
                     }
 
                     UpdateUserInterface(uid, component);
@@ -182,14 +171,12 @@ public sealed class SurveillanceCameraMonitorSystem : EntitySystem
         SurveillanceCameraRefreshCamerasMessage message)
     {
         component.KnownCameras.Clear();
-        RequestAllSubnetInfo(uid, component);
+        RequestActiveSubnetInfo(uid, component);
     }
 
     private void OnRefreshSubnetsMessage(EntityUid uid, SurveillanceCameraMonitorComponent component,
         SurveillanceCameraRefreshSubnetsMessage message)
     {
-        component.KnownCameras.Clear();
-        UpdateUserInterface(uid, component);
         RefreshSubnets(uid, component);
     }
 
@@ -207,7 +194,7 @@ public sealed class SurveillanceCameraMonitorSystem : EntitySystem
         {
             RemoveActiveCamera(uid, component);
             component.NextCameraAddress = null;
-            component.ActiveSubnet = null; // SS220 Camera-Map
+            component.ActiveSubnet = string.Empty;
         }
     }
 
@@ -240,7 +227,8 @@ public sealed class SurveillanceCameraMonitorSystem : EntitySystem
     {
         if (!Resolve(uid, ref monitor)
             || monitor.LastHeartbeatSent < _heartbeatDelay
-            || string.IsNullOrEmpty(monitor.ActiveSubnet)) // SS220 Camera-Map
+            || string.IsNullOrEmpty(monitor.ActiveSubnet)
+            || !monitor.KnownSubnets.TryGetValue(monitor.ActiveSubnet, out var subnetAddress))
         {
             return;
         }
@@ -251,7 +239,7 @@ public sealed class SurveillanceCameraMonitorSystem : EntitySystem
             { SurveillanceCameraSystem.CameraAddressData, monitor.ActiveCameraAddress }
         };
 
-        _deviceNetworkSystem.QueuePacket(uid, monitor.ActiveSubnet, payload); //ss220 edit
+        _deviceNetworkSystem.QueuePacket(uid, subnetAddress, payload);
     }
 
     private void DisconnectCamera(EntityUid uid, bool removeViewers, SurveillanceCameraMonitorComponent? monitor = null)
@@ -268,7 +256,6 @@ public sealed class SurveillanceCameraMonitorSystem : EntitySystem
 
         monitor.ActiveCamera = null;
         monitor.ActiveCameraAddress = string.Empty;
-        monitor.ActiveSubnet = null; // SS220 Camera-Map
         RemComp<ActiveSurveillanceCameraMonitorComponent>(uid);
         UpdateUserInterface(uid, monitor);
     }
@@ -298,7 +285,6 @@ public sealed class SurveillanceCameraMonitorSystem : EntitySystem
         _deviceNetworkSystem.QueuePacket(uid, null, payload);
     }
 
-    /*
     private void SetActiveSubnet(EntityUid uid, string subnet,
         SurveillanceCameraMonitorComponent? monitor = null)
     {
@@ -317,35 +303,22 @@ public sealed class SurveillanceCameraMonitorSystem : EntitySystem
 
         ConnectToSubnet(uid, subnet);
     }
-    */
 
-    private void RequestAllSubnetInfo(EntityUid uid, SurveillanceCameraMonitorComponent? monitor = null)
+    private void RequestActiveSubnetInfo(EntityUid uid, SurveillanceCameraMonitorComponent? monitor = null)
     {
         if (!Resolve(uid, ref monitor)
-            || string.IsNullOrEmpty(monitor.ActiveSubnet))
-            //|| !monitor.KnownSubnets.TryGetValue(monitor.ActiveSubnet, out var address))
+            || string.IsNullOrEmpty(monitor.ActiveSubnet)
+            || !monitor.KnownSubnets.TryGetValue(monitor.ActiveSubnet, out var address))
         {
             return;
         }
 
-        // SS220 Camera-Map begin
-        foreach (var (freqId, address) in monitor.KnownSubnets)
-        {
-            RequestSubnetInfo(uid, address);
-        }
-        // SS220 Camera-Map end
-    }
-
-    // SS220 Camera-Map begin
-    private void RequestSubnetInfo(EntityUid uid, string address)
-    {
         var payload = new NetworkPayload()
         {
             {DeviceNetworkConstants.Command, SurveillanceCameraSystem.CameraPingSubnetMessage},
         };
         _deviceNetworkSystem.QueuePacket(uid, address, payload);
     }
-    // SS220 Camera-Map end
 
     private void ConnectToSubnet(EntityUid uid, string subnet, SurveillanceCameraMonitorComponent? monitor = null)
     {
@@ -362,7 +335,7 @@ public sealed class SurveillanceCameraMonitorSystem : EntitySystem
         };
         _deviceNetworkSystem.QueuePacket(uid, address, payload);
 
-        RequestSubnetInfo(uid, address);
+        RequestActiveSubnetInfo(uid);
     }
 
     private void DisconnectFromSubnet(EntityUid uid, string subnet, SurveillanceCameraMonitorComponent? monitor = null)
@@ -472,23 +445,6 @@ public sealed class SurveillanceCameraMonitorSystem : EntitySystem
             {SurveillanceCameraSystem.CameraAddressData, address}
         };
 
-        // SS220 Camera-Map begin
-        string? subnetAddress = null;
-        foreach (var (subnetData, cameras) in monitor.KnownCameras)
-        {
-            if (cameras.ContainsKey(address))
-            {
-                if (!monitor.KnownSubnets.TryGetValue(subnetData, out subnetAddress))
-                    return;
-            }
-        }
-
-        if (subnetAddress == null)
-            return;
-
-        monitor.ActiveSubnet = subnetAddress;
-        // SS220 Camera-Map end
-
         monitor.NextCameraAddress = address;
         _deviceNetworkSystem.QueuePacket(uid, subnetAddress, payload);
     }
@@ -545,7 +501,7 @@ public sealed class SurveillanceCameraMonitorSystem : EntitySystem
             return;
         }
 
-        var state = new SurveillanceCameraMonitorUiState(GetNetEntity(monitor.ActiveCamera), monitor.KnownSubnets.Keys.ToHashSet(), monitor.ActiveCameraAddress, monitor.KnownCameras); // SS220 Camera-Map
+        var state = new SurveillanceCameraMonitorUiState(GetNetEntity(monitor.ActiveCamera), monitor.KnownSubnets.Keys.ToHashSet(), monitor.ActiveCameraAddress, monitor.ActiveSubnet, monitor.KnownCameras);
         _userInterface.SetUiState(uid, SurveillanceCameraMonitorUiKey.Key, state);
     }
 }
