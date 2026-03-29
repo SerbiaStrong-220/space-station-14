@@ -214,4 +214,8 @@ marking-ScreenOko = Экран-око
 marking-ScreenRock = Экран-рок
 marking-ScreenSkull = Экран-череп
 marking-ScreenTenna = Экран-антенна
-
+marking-ScreenEnder = Экран-эндер
+marking-ScreenHmm = Экран-хм
+marking-ScreenPig = Экран-свинья
+marking-ScreenSheep = Экран-овца
+marking-ScreenStupid = Экран-глупый

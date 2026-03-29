@@ -356,7 +356,7 @@
   markingCategory: Snout
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
-      state: ipc_screen_poxui
+      state: ipc_screen_aga
 
 - type: marking
   speciesRestriction: [Ipc]
@@ -365,7 +365,7 @@
   markingCategory: Snout
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
-      state: ipc_screen_absolute_poxui
+      state: ipc_screen_aga_aga
 
 - type: marking
   speciesRestriction: [Ipc]
@@ -510,3 +510,48 @@
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
       state: ipc_screen_tenna
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenEnder
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_ender
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenHmm
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_hmm
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenPig
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_pig
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenSheep
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_sheep
+
+- type: marking
+  speciesRestriction: [Ipc]
+  id: ScreenStupid
+  bodyPart: Snout
+  markingCategory: Snout
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_screens.rsi
+      state: ipc_screen_stupid

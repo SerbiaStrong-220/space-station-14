@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from Yogstation at https://github.com/yogstation13/Yogstation/commit/9c046aa5327c71f9e93e45a34283b3a4aff58bd1",
+  "copyright": "Taken from Yogstation at https://github.com/yogstation13/Yogstation/commit/9c046aa5327c71f9e93e45a34283b3a4aff58bd1. ipc_screen_ender, ipc_screen_hmm, ipc_screen_pig, ipc_screen_sheep, ipc_screen_stupid Sprited by Gabka (Discord) for SS220",
   "size": {
     "x": 32,
     "y": 32
@@ -1360,11 +1360,11 @@
       "directions": 4
     },
     {
-      "name": "ipc_screen_poxui",
+      "name": "ipc_screen_aga",
       "directions": 4
     },
     {
-      "name": "ipc_screen_absolute_poxui",
+      "name": "ipc_screen_aga_aga",
       "directions": 4
     },
     {
@@ -1527,6 +1527,26 @@
     },
     {
       "name": "ipc_screen_tenna",
+      "directions": 4
+    },
+    {
+      "name": "ipc_screen_ender",
+      "directions": 4
+    },
+        {
+      "name": "ipc_screen_hmm",
+      "directions": 4
+    },
+        {
+      "name": "ipc_screen_pig",
+      "directions": 4
+    },
+        {
+      "name": "ipc_screen_sheep",
+      "directions": 4
+    },
+        {
+      "name": "ipc_screen_stupid",
       "directions": 4
     }
   ]
