@@ -17,9 +17,6 @@ namespace Content.Server.Administration.Managers;
 
 public sealed partial class BanManager : IBanManager, IPostInjectInit
 {
-    public const string PrefixSpecie = "Species";
-    public const string PrefixChat = "Chat";
-
     private readonly Dictionary<ICommonSession, List<BanDef>> _cachedSpeciesBans = [];
     private readonly Dictionary<ICommonSession, List<BanDef>> _cachedChatsBans = [];
 
@@ -184,7 +181,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
 
         if (chatsBans.Any(x => x.Roles is null))
         {
-            _sawmill.Error($"Got empty срфе ban for player {session.UserId}: {session.Name}!");
+            _sawmill.Error($"Got empty chat ban for player {session.UserId}: {session.Name}!");
             chatsBans = [.. chatsBans.Where(x => x.Roles is not null)];
         }
 
