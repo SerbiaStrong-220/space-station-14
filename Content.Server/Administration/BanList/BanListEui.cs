@@ -28,7 +28,7 @@ public sealed class BanListEui : BaseEui
     private List<SharedBan> Bans { get; } = new();
     private List<SharedBan> RoleBans { get; } = new();
     private List<SharedBan> SpeciesBans { get; } = []; // SS220 Species bans
-    private List<SharedBan> ChatBans { get; } = []; // SS220 Species bans
+    private List<SharedBan> ChatBans { get; } = []; // SS220 chats bans
 
     public override void Opened()
     {

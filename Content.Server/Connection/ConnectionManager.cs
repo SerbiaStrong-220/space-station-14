@@ -241,7 +241,7 @@ namespace Content.Server.Connection
             if (bans.Count > 0)
             {
                 var firstBan = bans[0];
-                var name = firstBan.UserIds.Length == 0 ? await _playerLocator.LookupIdAsync(firstBan.UserIds[0]) : null; // SS220-ad-login-into-ban-screen
+                var name = firstBan.UserIds.Length > 0 ? await _playerLocator.LookupIdAsync(firstBan.UserIds[0]) : null; // SS220-ad-login-into-ban-screen
                 var message = firstBan.FormatBanMessage(_cfg, _loc, name?.Username); // SS220-ad-login-into-ban-screen
                 return (ConnectionDenyReason.Ban, message, bans);
             }
