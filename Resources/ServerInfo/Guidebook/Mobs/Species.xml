@@ -13,7 +13,7 @@
   <GuideEntityEmbed Entity="AppearanceMoth" Caption="Ниан"/>
   <GuideEntityEmbed Entity="AppearanceReptilian" Caption="Унатх"/>
   <GuideEntityEmbed Entity="AppearanceSlimePerson" Caption="Слаймолюд"/>
-  <GuideEntityEmbed Entity="MobTajaran" Caption="Таяран"/> <!-- SS220 Tajaran -->
+  <GuideEntityEmbed Entity="AppearanceTajaran" Caption="Таяран"/> <!-- SS220 Tajaran -->
   <GuideEntityEmbed Entity="AppearanceVox" Caption="Вокс"/>
   </Box>
   <Box>

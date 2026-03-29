@@ -172,7 +172,7 @@
   parent: BaseStationTile
   name: tiles-steel-floor-diagonal-mini
   # SS220 Tiles Retexture begin
-  sprite: /Textures/SS220/Tiles/steel_diagonal_mini.png
+  sprite: /Textures/SS220/Tiles/steel_diagonal_mini.png # SS220 Tiles Retexture
   variants: 1
 #  placementVariants:
 #  - 1.0
@@ -213,21 +213,6 @@
   - 1.0
   - 1.0
   itemDrop: FloorTileItemSteelVerticalSlatsBordered
-
-- type: tile
-  id: FloorSteelDiagonalMini
-  name: tiles-steel-floor-diagonal-mini
-  # SS220 Tiles Retexture begin
-  sprite: /Textures/SS220/Tiles/steel_diagonal_mini.png # SS220 Tiles Retexture
-  variants: 1
-#  placementVariants:
-#  - 1.0
-#  - 1.0
-#  - 1.0
-#  - 1.0
-  # SS220 Tiles Retexture end
-  itemDrop: FloorTileItemSteelDiagonalMini
-  heatCapacity: 10000
 
 - type: tile
   id: FloorBrassFilled

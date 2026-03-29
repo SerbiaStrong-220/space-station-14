@@ -655,8 +655,6 @@
       collection: VulpkaninWhines
     Crying:
       collection: VulpkaninWhines
-    Crying:
-      collection: VulpkaninWhines
     Howl:
       collection: VulpkaninHowls
     Weh:
@@ -708,8 +706,6 @@
       collection: BarkVulpin
     # SS220-port-vulpkanins-end
     Whine:
-      collection: VulpkaninWhines
-    Crying:
       collection: VulpkaninWhines
     Crying:
       collection: VulpkaninWhines

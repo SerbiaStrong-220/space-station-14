@@ -258,19 +258,6 @@
     - id: PlushieLizardJobReporter
     - id: PlushieLizardJobZookeeper
 
-- type: entityTable
-  id: MaintenancePlushies
-  table: !type:GroupSelector
-    children:
-    - id: PlushieLizardJobBoxer
-    - id: PlushieLizardJobClown
-    - id: PlushieLizardJobLibrarian
-    - id: PlushieLizardJobMime
-    - id: PlushieLizardJobMusician
-    - id: PlushieLizardJobPassenger
-    - id: PlushieLizardJobReporter
-    - id: PlushieLizardJobZookeeper
-
 - type: entity
   id: ClosetMaintenanceFilledRandom
   suffix: Filled, Random

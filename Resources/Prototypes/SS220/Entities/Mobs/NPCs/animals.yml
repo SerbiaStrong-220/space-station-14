@@ -454,7 +454,7 @@
 - type: entity
   name: Mousi
   id: MobMousi
-  parent: SimpleMobBase
+  parent: [ SimpleMobBase, BaseMobRuminant ]
   description: Peep?...
   components:
   - type: NameIdentifier
@@ -537,9 +537,6 @@
   - type: Speech
     speechSounds: Squeak
     speechVerb: SmallMob
-  - type: Body
-    prototype: Mousi
-    requiredLegs: 1
   - type: Butcherable
     butcheringType: Spike
     spawned:

@@ -5,8 +5,7 @@
 - type: marking
   id: TajaranEarsPiercing
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   coloring:
     default:
       type:
@@ -28,8 +27,7 @@
 - type: marking
   id: TajaranEars
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   coloring:
     default:
       type:
@@ -51,8 +49,7 @@
 - type: marking
   id: TajaranEarsNyshka
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   coloring:
     default:
       type:
@@ -74,8 +71,7 @@
 - type: marking
   id: TajaranEarsPointy
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   coloring:
     default:
       type:
@@ -97,8 +93,7 @@
 - type: marking
   id: TajaranEarsSiberia
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   coloring:
     default:
       type:
@@ -120,8 +115,7 @@
 - type: marking
   id: TajaranEarsShort
   bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   coloring:
     default:
       type:
@@ -145,8 +139,7 @@
 - type: marking
   id: TajaranTail
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   sprites:
   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
     state: tajaran_tail
@@ -154,8 +147,7 @@
 - type: marking
   id: TajaranTailLines
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   sprites:
   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
     state: tajaran_tail
@@ -165,8 +157,7 @@
 - type: marking
   id: TajaranTailLeo
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   sprites:
   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
     state: tajaran_tail
@@ -176,8 +167,7 @@
 - type: marking
   id: TajaranTailPoints
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   coloring:
     default:
       type:
@@ -202,8 +192,7 @@
 - type: marking
   id: TajaranTailAnimated
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: []
+  groupWhitelist: []
   sprites:
   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
     state: tajaran_tail_wagging
@@ -211,8 +200,7 @@
 - type: marking
   id: TajaranTailLinesAnimated
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: []
+  groupWhitelist: []
   sprites:
   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
     state: tajaran_tail_wagging
@@ -222,8 +210,7 @@
 - type: marking
   id: TajaranTailLeoAnimated
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: []
+  groupWhitelist: []
   sprites:
   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
     state: tajaran_tail_wagging
@@ -233,8 +220,7 @@
 - type: marking
   id: TajaranTailPointsAnimated
   bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: []
+  groupWhitelist: []
   coloring:
     default:
       type:
@@ -260,9 +246,8 @@
 - type: marking
   id: TajaranSnout
   bodyPart: Snout
-  markingCategory: Snout
   forcedColoring: true
-  speciesRestriction: []
+  groupWhitelist: []
   sprites:
   - sprite: SS220/Mobs/Species/Tajaran/parts.rsi
     state: nose
@@ -270,9 +255,8 @@
 - type: marking
   id: TajaranSnoutBluish
   bodyPart: Snout
-  markingCategory: Snout
   forcedColoring: true
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   sprites:
   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
     state: nose_bluish
@@ -280,9 +264,8 @@
 - type: marking
   id: TajaranSnoutBlack
   bodyPart: Snout
-  markingCategory: Snout
   forcedColoring: true
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   sprites:
   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
     state: nose_black
@@ -290,9 +273,8 @@
 - type: marking
   id: TajaranSnoutOrange
   bodyPart: Snout
-  markingCategory: Snout
   forcedColoring: true
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   sprites:
   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
     state: nose_orange
@@ -300,9 +282,8 @@
 - type: marking
   id: TajaranSnoutDark
   bodyPart: Snout
-  markingCategory: Snout
   forcedColoring: true
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   sprites:
   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
     state: nose_dark
@@ -310,9 +291,8 @@
 - type: marking
   id: TajaranSnoutPinkBright
   bodyPart: Snout
-  markingCategory: Snout
   forcedColoring: true
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   sprites:
   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
     state: nose_pink_light
@@ -320,9 +300,8 @@
 - type: marking
   id: TajaranSnoutPinkLight
   bodyPart: Snout
-  markingCategory: Snout
   forcedColoring: true
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   sprites:
   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_parts.rsi
     state: nose_pink_bright
@@ -333,8 +312,7 @@
 - type: marking
   id: TajaranChestLeo
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   sprites:
   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: leo_body
@@ -342,8 +320,7 @@
 - type: marking
   id: TajaranHeadLeo
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   sprites:
   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: leo_head
@@ -351,8 +328,7 @@
 - type: marking
   id: TajaranLArmLeo
   bodyPart: LArm
-  markingCategory: Arms
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   sprites:
   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: leo_hand_l
@@ -360,8 +336,7 @@
 - type: marking
   id: TajaranRArmLeo
   bodyPart: RArm
-  markingCategory: Arms
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   sprites:
   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: leo_hand_r
@@ -369,8 +344,7 @@
 - type: marking
   id: TajaranLLegLeo
   bodyPart: LLeg
-  markingCategory: Legs
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   sprites:
   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: leo_leg_l
@@ -378,8 +352,7 @@
 - type: marking
   id: TajaranRLegLeo
   bodyPart: RLeg
-  markingCategory: Legs
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   sprites:
   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: leo_leg_r
@@ -388,8 +361,7 @@
 - type: marking
   id: TajaranChestLines
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   sprites:
   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: lines_body
@@ -397,8 +369,7 @@
 - type: marking
   id: TajaranHeadLines
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   sprites:
   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: lines_head
@@ -406,8 +377,7 @@
 - type: marking
   id: TajaranLArmLines
   bodyPart: LArm
-  markingCategory: Arms
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   sprites:
   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: lines_arm_l
@@ -415,8 +385,7 @@
 - type: marking
   id: TajaranRArmLines
   bodyPart: RArm
-  markingCategory: Arms
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   sprites:
   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: lines_arm_r
@@ -424,8 +393,7 @@
 - type: marking
   id: TajaranLLegLines
   bodyPart: LLeg
-  markingCategory: Legs
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   sprites:
   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: lines_leg_l
@@ -433,8 +401,7 @@
 - type: marking
   id: TajaranRLegLines
   bodyPart: RLeg
-  markingCategory: Legs
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   sprites:
   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: lines_leg_r
@@ -443,8 +410,7 @@
 - type: marking
   id: TajaranChestTwoTone
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   sprites:
   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: taj_body
@@ -452,8 +418,7 @@
 - type: marking
   id: TajaranHeadTwoTone
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   coloring:
     default:
       type:
@@ -475,8 +440,7 @@
 - type: marking
   id: TajaranLArmTwoTone
   bodyPart: LArm
-  markingCategory: Arms
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   coloring:
     default:
       type:
@@ -510,8 +474,7 @@
           !type:SimpleColoring
           color: "#FFFFFF"
   bodyPart: RArm
-  markingCategory: Arms
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   sprites:
   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: taj_arms_r
@@ -521,8 +484,7 @@
 - type: marking
   id: TajaranLLegCommon
   bodyPart: LLeg
-  markingCategory: Legs
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   sprites:
   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: taj_legs_l
@@ -530,8 +492,7 @@
 - type: marking
   id: TajaranRLegCommon
   bodyPart: RLeg
-  markingCategory: Legs
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   sprites:
   - sprite: SS220/Mobs/Customization/Tajaran/tajaran_color.rsi
     state: taj_legs_r
@@ -540,8 +501,7 @@
 - type: marking
   id: TajaranChestPoints
   bodyPart: Chest
-  markingCategory: Chest
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   coloring:
     default:
       type:
@@ -563,8 +523,7 @@
 - type: marking
   id: TajaranHeadPoints
   bodyPart: Head
-  markingCategory: Head
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   coloring:
     default:
       type:
@@ -586,8 +545,7 @@
 - type: marking
   id: TajaranLArmPoints
   bodyPart: LArm
-  markingCategory: Arms
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   coloring:
     default:
       type:
@@ -609,8 +567,7 @@
 - type: marking
   id: TajaranRArmPoints
   bodyPart: RArm
-  markingCategory: Arms
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   coloring:
     default:
       type:
@@ -632,8 +589,7 @@
 - type: marking
   id: TajaranLLegPoints
   bodyPart: LLeg
-  markingCategory: Legs
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   coloring:
     default:
       type:
@@ -655,8 +611,7 @@
 - type: marking
   id: TajaranRLegPoints
   bodyPart: RLeg
-  markingCategory: Legs
-  speciesRestriction: [Tajaran]
+  groupWhitelist: [Tajaran]
   coloring:
     default:
       type:
