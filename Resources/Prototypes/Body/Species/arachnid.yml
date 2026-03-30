@@ -74,7 +74,7 @@
   name: Urist McWebs
   components:
   # SS220-change-races-height begin
-  - type: Sprite # I'd prefer if these maps were better. Insert map pun here.
+  - type: Sprite
     scale: 1.1, 1.1
   - type: Fixtures
     fixtures:

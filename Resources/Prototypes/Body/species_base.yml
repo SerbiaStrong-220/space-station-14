@@ -151,7 +151,6 @@
       Unsexed: MaleHuman
   - type: Emoting
     chatEmoteCooldown: 5.0 #ss220 emote 5 sec
-  #ss220 emote 5 sec end
   - type: BodyEmotes
     soundsId: GeneralBodyEmotes
   - type: Grammar

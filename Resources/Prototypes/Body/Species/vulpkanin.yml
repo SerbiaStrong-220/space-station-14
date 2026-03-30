@@ -210,8 +210,6 @@
         Quantity: 300
   # SS220-port-vulpkanins-begin
   - type: VulpkaninAccent
-  - type: Wagging
-    action: ActionToggleWaggingVulp
   - type: Language
     selectedLanguage: Galactic
     availableLanguages:

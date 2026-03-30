@@ -186,7 +186,6 @@
         Structural: 7.5
 #SS220-TweakDamageSpecies-End
 
-
 - type: entity
   parent: OrganBase
   id: OrganDiona
