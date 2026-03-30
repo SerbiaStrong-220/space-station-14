@@ -171,8 +171,11 @@
     animation: WeaponArcClaw
     damage:
       types:
-        Piercing: 2
-        Slash: 3
+        #SS220-port-vulpkanins-begin
+        # Piercing: 2
+        # Slash: 3
+        Slash: 5.5
+        #SS220-port-vulpkanins-end
   - type: Temperature
     specificHeat: 44
   - type: TemperatureDamage
@@ -185,7 +188,8 @@
       types:
         Heat: 2.5 # Per second, scales with temperature & other constants
   - type: Wagging
-    action: ActionToggleWaggingVulpkanin
+    # action: ActionToggleWaggingVulpkanin # SS220-smtng-happend-here
+    action: ActionToggleWaggingVulp # SS220-smtng-happend-here
   - type: TemperatureProtection
     heatingCoefficient: 1.2
     coolingCoefficient: 0.3
@@ -204,6 +208,16 @@
       reagents:
       - ReagentId: SulfurBlood
         Quantity: 300
+  # SS220-port-vulpkanins-begin
+  - type: VulpkaninAccent
+  - type: Wagging
+    action: ActionToggleWaggingVulp
+  - type: Language
+    selectedLanguage: Galactic
+    availableLanguages:
+    - id: Galactic
+    - id: Canilunzt
+  # SS220-port-vulpkanins-end
 
 - type: entity
   parent: OrganBase

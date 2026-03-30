@@ -28,7 +28,7 @@
       required: false
 
 - type: entity
-  name: tajaran appearance Urist McTajaran
+  name: tajaran appearance
   parent: BaseSpeciesAppearance
   id: AppearanceTajaran
   components:
@@ -46,30 +46,28 @@
           32:
             sprite: SS220/Mobs/Species/Tajaran/displacement.rsi
             state: jumpsuit-male
-  - type: EntityTableContainerFill
-    containers:
-      body_organs: !type:AllSelector
-        children:
-        - id: OrganTajaranTorso
-        - id: OrganTajaranHead
-        - id: OrganTajaranArmLeft
-        - id: OrganTajaranArmRight
-        - id: OrganTajaranHandRight
-        - id: OrganTajaranHandLeft
-        - id: OrganTajaranLegLeft
-        - id: OrganTajaranLegRight
-        - id: OrganTajaranFootLeft
-        - id: OrganTajaranFootRight
-        - id: OrganTajaranBrain
-        - id: OrganTajaranEyes
-        - id: OrganTajaranTongue
-        - id: OrganTajaranAppendix
-        - id: OrganTajaranEars
-        - id: OrganTajaranLungs
-        - id: OrganTajaranHeart
-        - id: OrganTajaranStomach
-        - id: OrganTajaranLiver
-        - id: OrganTajaranKidneys
+  - type: InitialBody
+    organs:
+      Torso: OrganTajaranTorso
+      Head: OrganTajaranHead
+      ArmLeft: OrganTajaranArmLeft
+      ArmRight: OrganTajaranArmRight
+      HandRight: OrganTajaranHandRight
+      HandLeft: OrganTajaranHandLeft
+      LegLeft: OrganTajaranLegLeft
+      LegRight: OrganTajaranLegRight
+      FootLeft: OrganTajaranFootLeft
+      FootRight: OrganTajaranFootRight
+      Brain: OrganTajaranBrain
+      Eyes: OrganTajaranEyes
+      Tongue: OrganTajaranTongue
+      Appendix: OrganTajaranAppendix
+      Ears: OrganTajaranEars
+      Lungs: OrganTajaranLungs
+      Heart: OrganTajaranHeart
+      Stomach: OrganTajaranStomach
+      Liver: OrganTajaranLiver
+      Kidneys: OrganTajaranKidneys
   - type: HumanoidAppearance
     species: Tajaran
     hideLayersOnEquip:
@@ -77,29 +75,18 @@
     - HeadTop
     - HeadSide
     - Tail
-    undergarmentBottom: UndergarmentBottomBoxersTajaran # TODO SS220 Sprites
 
 - type: entity
-  save: false
   name: Urist McTajaran
   parent:
   - AppearanceTajaran
   - BaseSpeciesMobOrganic
   id: BaseMobTajaran
   components:
-  - type: Icon
-    sprite: SS220/Mobs/Species/Tajaran/parts.rsi
-    state: full
   - type: Sprite
-    noRot: true
     drawdepth: Mobs
     scale: 0.95, 0.95
-  - type: Body
-    prototype: Tajaran
-    requiredLegs: 2
-    #акцент, эмоуты, хвост и маски
   - type: Damageable
-    damageContainer: Biological
     damageModifierSet: Tajaran
   - type: TajaranAccent
   - type: TypingIndicator
@@ -121,7 +108,6 @@
         Blunt: 0.9
     soundHit:
       path: /Audio/Effects/hit_kick.ogg
-  - type: Perishable
   - type: Butcherable
     butcheringType: Spike
     spawned:
@@ -139,10 +125,6 @@
         - MobMask
         layer:
         - MobLayer
-  - type: Emoting
-    chatEmoteCooldown: 5.0
-  - type: Thirst
-  - type: Hunger
   - type: MeleeWeapon
     soundHit:
       collection: AlienClaw
