@@ -3293,7 +3293,7 @@
 
 - type: entity
   name: cat
-  parent: [SimpleMobBase, StripableInventoryBase, BaseMobRuminant] # SS220 cat organ
+  parent: [SimpleMobBase, StripableInventoryBase, BaseMobCatBody] # SS220 cat organ
   id: MobCat
   description: Feline pet, very funny.
   components:

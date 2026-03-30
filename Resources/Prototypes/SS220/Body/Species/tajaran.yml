@@ -1,6 +1,6 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-- type: markingGroup
+- type: markingsGroup
   parent: Undergarments
   id: Tajaran
   onlyWhitelisted: true
@@ -81,7 +81,7 @@
   parent:
   - AppearanceTajaran
   - BaseSpeciesMobOrganic
-  id: BaseMobTajaran
+  id: MobTajaran
   components:
   - type: Sprite
     drawdepth: Mobs
