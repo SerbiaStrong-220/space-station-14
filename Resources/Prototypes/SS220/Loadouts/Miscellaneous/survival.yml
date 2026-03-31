@@ -67,3 +67,12 @@
   storage:
     back:
     - BoxSurvivalMimeIpc
+
+- type: loadout
+  id: LoadoutSpeciesMedicalIpc
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: EffectSpeciesIpc
+  storage:
+    back:
+    - BoxSurvivalMedicalIpc

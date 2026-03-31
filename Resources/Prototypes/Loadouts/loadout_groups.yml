@@ -1660,6 +1660,7 @@
   - EmergencyNitrogenMedical
   - EmergencyOxygenMedical
   - LoadoutSpeciesVoxNitrogen
+  - LoadoutSpeciesMedicalIpc #SS220-add-ipc
 
 # Wildcards
 - type: loadoutGroup

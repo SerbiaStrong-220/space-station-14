@@ -33,3 +33,7 @@ ent-BoxSurvivalClownIpc = аварийный запас КПБ
 ent-BoxSurvivalMimeIpc = аварийный запас КПБ
     .desc = Это коробка с аварийными припасами.
     .suffix = Мим
+
+ent-BoxSurvivalMedicalIpc = аварийный запас КПБ
+    .desc = Это коробка с аварийными припасами.
+    .suffix = Медицинский
