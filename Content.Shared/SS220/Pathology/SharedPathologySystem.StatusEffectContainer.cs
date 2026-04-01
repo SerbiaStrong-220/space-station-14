@@ -1,9 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.Rejuvenate;
 using Content.Shared.SS220.PathologyStatusEffects;
-using Content.Shared.StatusEffectNew.Components;
-
 
 namespace Content.Shared.SS220.Pathology;
 
@@ -11,13 +8,11 @@ public abstract partial class SharedPathologySystem : EntitySystem
 {
     public void InitializeStatusEffectContainerEvents()
     {
-        SubscribeLocalEvent<PathologyHolderComponent, RejuvenateEvent>(OnRejuvenate);
-
-        SubscribeLocalEvent<StatusEffectContainerComponent, PathologyStackCountChanged>(OnStatusEffectPathologyStackChange);
-        SubscribeLocalEvent<StatusEffectContainerComponent, PathologySeverityChanged>(OnStatusEffectPathologySeverityChange);
+        SubscribeLocalEvent<PathologyHolderComponent, PathologyStackCountChanged>(OnStatusEffectPathologyStackChange);
+        SubscribeLocalEvent<PathologyHolderComponent, PathologySeverityChanged>(OnStatusEffectPathologySeverityChange);
     }
 
-    private void OnStatusEffectPathologyStackChange(Entity<StatusEffectContainerComponent> entity, ref PathologyStackCountChanged args)
+    private void OnStatusEffectPathologyStackChange(Entity<PathologyHolderComponent> entity, ref PathologyStackCountChanged args)
     {
         if (!_prototype.Resolve(args.PathologyId, out var pathologyPrototype))
             return;
@@ -38,10 +33,11 @@ public abstract partial class SharedPathologySystem : EntitySystem
                 continue;
 
             stackableComponent.StackCount = args.NewCount;
+            Dirty(effect.Value, stackableComponent);
         }
     }
 
-    private void OnStatusEffectPathologySeverityChange(Entity<StatusEffectContainerComponent> entity, ref PathologySeverityChanged args)
+    private void OnStatusEffectPathologySeverityChange(Entity<PathologyHolderComponent> entity, ref PathologySeverityChanged args)
     {
         if (!_prototype.Resolve(args.PathologyId, out var pathologyPrototype))
             return;
@@ -56,7 +52,7 @@ public abstract partial class SharedPathologySystem : EntitySystem
         foreach (var effectId in definition.StatusEffects)
         {
             if (!_statusEffects.TryUpdateStatusEffectDuration(entity, effectId, null, null))
-                return;
+                continue;
         }
     }
 }

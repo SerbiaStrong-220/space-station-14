@@ -4,7 +4,6 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
 using Content.Shared.StatusEffectNew;
-using Content.Shared.StatusEffectNew.Components;
 using Content.Shared.Traits;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -111,12 +110,16 @@ public abstract partial class SharedPathologySystem : EntitySystem
         var ev = new PathologyAddedEvent(pathologyPrototype.ID);
         RaiseLocalEvent(entity, ref ev);
 
-        entity.Comp.ActivePathologies.Add(pathologyPrototype.ID, new PathologyInstanceData(_gameTiming.CurTime, context));
+        var instanceData = new PathologyInstanceData(_gameTiming.CurTime, context);
+        entity.Comp.ActivePathologies.Add(pathologyPrototype.ID, instanceData);
 
         AddPathologyDefinitionEffects(entity, pathologyPrototype.Definition[0]);
 
         var severityChangedEv = new PathologySeverityChanged(pathologyPrototype.ID, -1, 0);
         RaiseLocalEvent(entity, ref severityChangedEv);
+
+        var stackChangeEv = new PathologyStackCountChanged(pathologyPrototype.ID, instanceData.Level, 0, instanceData.StackCount);
+        RaiseLocalEvent(entity, ref stackChangeEv);
 
         Dirty(entity);
     }
@@ -137,7 +140,10 @@ public abstract partial class SharedPathologySystem : EntitySystem
     {
         var data = entity.Comp.ActivePathologies[pathologyPrototype.ID];
 
-        for (var i = 0; i < data.Level; i++)
+        for (var _ = 0; _ < data.PathologyContexts.Count; _++)
+            ApplyPathologyContext(entity, data.PathologyContexts.Pop());
+
+        for (var i = 0; i <= data.Level; i++)
         {
             if (i >= pathologyPrototype.Definition.Length)
             {

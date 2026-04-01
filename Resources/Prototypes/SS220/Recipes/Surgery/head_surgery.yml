@@ -156,6 +156,34 @@
           - MindSlave
       actions:
       - !type:FixMindSlaveDisfunctionAction
+    - to: brain-exposed
+      id: brain-exposed-remove-brain-pathology
+      delay: 10
+      edgeTooltip: remove-brain-pathology
+      edgeIcon:
+        sprite: Objects/Specific/Medical/Surgery/scissors.rsi
+        state: hemostat
+      sound:
+        path: /Audio/SS220/Surgery/organ.ogg
+        params:
+          variation: 0.125
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: hemostat
+        description: surgery-requirement-tool-required-hemostat
+        failureMessage: surgery-requirement-tool-miss
+      - !type:SurgeryPathologyRequirement
+        subject: target
+        description: surgery-pathology-requirement-description-remove-brain-pathology
+        failureMessage: surgery-pathology-requirement-failure-remove-brain-pathology
+        curePathologies:
+        - Slowness
+        - PainNumbness
+        - PoorVision
+        - Muted
+        - Narcolepsy
+        - Blindness
     # return
     - to: saw-skull-bone
       id: saw-skull-bone

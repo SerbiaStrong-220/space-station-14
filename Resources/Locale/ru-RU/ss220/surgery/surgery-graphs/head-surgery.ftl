@@ -32,9 +32,13 @@ mind-slave-disfunction-fix-surgery-description = SS220 REDACTED
 
 remove-head-bullet-fragments = убирает инородные тела в голову пациента, например фрагменты пуль
 surgery-pathology-requirement-description-head-fragments = Инородные тела в голове пациента
-surgery-pathology-requirement-failure-head-fragments = Инородных тел в голове пациента нету
+surgery-pathology-requirement-failure-head-fragments = Вы внимательно осматриваете голову пациента, но не находите инородных тел
 
 surgery-requirement-scanner-required = Сканер имплантов
 surgery-requirement-fixer-required = [color=red]{ CAPITALIZE(ent-MindslaveFixerCerebralImplant) }[/color]
 
 surgery-requirement-slave-target = В мозгу пациента должен быть имплант [color=red]"{ent-MindSlaveImplant}"[/color]
+
+remove-brain-pathology = Иссечь поврежденные нервные ткани
+surgery-pathology-requirement-description-remove-brain-pathology = Присутствие неврологических отклонений
+surgery-pathology-requirement-failure-remove-brain-pathology = Вы внимательно осматриваете открытый мозг, но не находите поврежденных участков.

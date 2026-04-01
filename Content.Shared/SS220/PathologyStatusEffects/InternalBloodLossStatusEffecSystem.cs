@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Body.Components;
+using Content.Shared.Body.Events;
 using Content.Shared.Body.Systems;
 using Content.Shared.Chat;
 using Content.Shared.EntityEffects;
@@ -21,9 +22,9 @@ public sealed partial class InternalBloodLossStatusEffectSystem : EntitySystem
     [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!;
     [Dependency] private readonly SharedChatSystem _chat = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
 
-    private static readonly TimeSpan BleedingTimeUpdate = TimeSpan.FromSeconds(0.8f);
+    private const float UpdateRate = 0.8f;
+    private static readonly TimeSpan BleedingTimeUpdate = TimeSpan.FromSeconds(UpdateRate);
     private static readonly FixedPoint2 DecreaseLoss = 0.6f;
 
     private EntityQuery<BloodstreamComponent> _bloodstreamQuery = default!;
@@ -34,6 +35,9 @@ public sealed partial class InternalBloodLossStatusEffectSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<InternalBloodLossStatusEffectComponent, StatusEffectRemovedEvent>(OnStatusEffectRemoved);
+        SubscribeLocalEvent<InternalBloodLossStatusEffectComponent, StatusEffectRelayedEvent<ApplyMetabolicMultiplierEvent>>(OnMetabolicMultiplierApply);
+
+        _bloodstreamQuery = GetEntityQuery<BloodstreamComponent>();
     }
 
     public override void Update(float frameTime)
@@ -55,7 +59,7 @@ public sealed partial class InternalBloodLossStatusEffectSystem : EntitySystem
                 continue;
             }
 
-            var bloodLoss = internalBloodLoss.BloodLossRatePerStack * stackableComponent.StackCount * BleedingTimeUpdate.TotalSeconds;
+            var bloodLoss = internalBloodLoss.BloodLossRatePerStack * internalBloodLoss.Multiplier * stackableComponent.StackCount * UpdateRate;
 
             // Add some 'last stand' effect for ux
             if (bloodstreamComponent.BloodSolution is { } bloodSolution)
@@ -96,5 +100,10 @@ public sealed partial class InternalBloodLossStatusEffectSystem : EntitySystem
 
         bloodstream.InternalBleedingBloodAccumulator = FixedPoint2.Zero;
         DirtyField(args.Target, bloodstream, nameof(BloodstreamComponent.InternalBleedingBloodAccumulator));
+    }
+
+    private void OnMetabolicMultiplierApply(Entity<InternalBloodLossStatusEffectComponent> entity, ref StatusEffectRelayedEvent<ApplyMetabolicMultiplierEvent> args)
+    {
+        entity.Comp.Multiplier = args.Args.Multiplier;
     }
 }

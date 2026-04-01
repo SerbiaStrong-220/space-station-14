@@ -8,9 +8,12 @@ namespace Content.Shared.SS220.PathologyStatusEffects;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class InternalBloodLossStatusEffectComponent : Component
 {
+    [ViewVariables(VVAccess.ReadWrite)]
+    public float Multiplier = 1f;
+
     [DataField]
     [AutoNetworkedField]
-    public FixedPoint2 BloodLossRatePerStack = 0.25f;
+    public FixedPoint2 BloodLossRatePerStack = 0.15f;
 
     [AutoNetworkedField]
     public TimeSpan NextEffectTime;

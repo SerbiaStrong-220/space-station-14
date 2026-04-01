@@ -50,7 +50,7 @@ public sealed class BodyAnalyzerSystem : EntitySystem
                 continue;
             }
 
-            UpdateAnalyzerTarget(uid, patient);
+            UpdateAnalyzerTarget((uid, component), patient);
         }
     }
 
@@ -67,14 +67,15 @@ public sealed class BodyAnalyzerSystem : EntitySystem
 
         _userInterface.OpenUi(entity.Owner, BodyAnalyzerUiKey.Key, args.User);
 
-        UpdateAnalyzerTarget(entity.Owner, args.Target.Value);
+        UpdateAnalyzerTarget(entity, args.Target.Value);
     }
 
-    private void UpdateAnalyzerTarget(EntityUid analyzer, EntityUid target)
+    private void UpdateAnalyzerTarget(Entity<BodyAnalyzerComponent> analyzer, EntityUid target)
     {
+        analyzer.Comp.ScannedEntity = target;
         var netTarget = GetNetEntity(target);
 
         var state = new BodyAnalyzerTargetUpdate(netTarget);
-        _userInterface.SetUiState(analyzer, BodyAnalyzerUiKey.Key, state);
+        _userInterface.SetUiState(analyzer.Owner, BodyAnalyzerUiKey.Key, state);
     }
 }

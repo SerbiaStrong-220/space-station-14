@@ -8,5 +8,6 @@ namespace Content.Shared.SS220.PathologyStatusEffects;
 public sealed partial class PathologyStatusEffectStackableComponent : Component
 {
     [AutoNetworkedField]
+    [DataField]
     public int StackCount;
 }

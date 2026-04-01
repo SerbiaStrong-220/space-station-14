@@ -2,7 +2,6 @@
 
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
-using Content.Shared.SS220.PathologyStatusEffects;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -163,7 +162,7 @@ public abstract partial class SharedPathologySystem
         if (!entity.Comp.ActivePathologies.TryGetValue(pathologyId, out var instanceData))
             return false;
 
-        var newStackCount = Math.Clamp(instanceData.StackCount + toAdd, OneStack, pathologyPrototype.Definition[instanceData.Level].MaxStackCount);
+        var newStackCount = Math.Clamp(instanceData.StackCount + toAdd, OneStack - 1, pathologyPrototype.Definition[instanceData.Level].MaxStackCount);
 
         if (newStackCount == instanceData.StackCount)
             return false;
@@ -189,6 +188,10 @@ public abstract partial class SharedPathologySystem
 
         DebugTools.Assert(instanceData.PathologyContexts.Count == instanceData.StackCount);
         Dirty(entity);
+
+        if (instanceData.StackCount == OneStack - 1)
+            return TryRemovePathology(entity, pathologyId);
+
         return true;
     }
 }

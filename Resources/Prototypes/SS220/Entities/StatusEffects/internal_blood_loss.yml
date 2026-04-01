@@ -4,4 +4,4 @@
   name: internal blood loss
   components:
   - type: InternalBloodLossStatusEffect
-  - type: PathologyStatusEffectStackableComponent
+  - type: PathologyStatusEffectStackable

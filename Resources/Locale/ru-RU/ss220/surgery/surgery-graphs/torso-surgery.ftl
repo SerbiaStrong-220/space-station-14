@@ -33,4 +33,4 @@ surgery-requirement-direct-compact-defib-failure = Вы не знаете что
 
 remove-torso-bullet-fragments = убирает инородные тела в торсе пациента, например фрагменты пуль
 surgery-pathology-requirement-description-torso-fragments = Инородные тела в торсе пациента
-surgery-pathology-requirement-failure-torso-fragments = Инородных тел в торсе пациента нету
+surgery-pathology-requirement-failure-torso-fragments = Вы внимательно осмотриваете торс пациента, но не находите в нём инородных тел.
