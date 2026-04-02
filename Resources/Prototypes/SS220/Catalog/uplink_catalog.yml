@@ -304,6 +304,48 @@
 #ss220 dynamic-price end
 
 - type: listing
+  id: NanoSurgeryMachinesImplanter
+  name: uplink-nano-surgery-machines-implanter-name
+  description: uplink-nano-surgery-machines-implanter-desc
+  icon:  {sprite: /Textures/SS220/Interface/Actions/implants.rsi, state: surgery_nanomachines}
+  productEntity: NanoSurgeryMachinesImplanter
+  discountCategory: rareDiscounts
+  discountDownTo:
+    Telecrystal: 5
+  cost:
+    Telecrystal: 8
+  categories:
+  - UplinkImplants
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 12
+    MediumDynamic:
+      Telecrystal: 8
+    HardDynamic:
+      Telecrystal: 6
+
+- type: listing
+  id: SyndicateFragmentExtractor
+  name: uplink-syndicate-fragment-extractor-name
+  description: uplink-syndicate-fragment-extractor-desc
+  icon: {sprite: SS220/Objects/Specific/Medical/fragments_extractors.rsi, state: syndicate}
+  productEntity: SyndicateFragmentExtractor
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 3
+  cost:
+    Telecrystal: 5
+  categories:
+  - UplinkWearables
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 8
+    MediumDynamic:
+      Telecrystal: 6
+    HardDynamic:
+      Telecrystal: 4
+
+- type: listing
   id: ClothingHeadHelmetSwatSyndicate
   name: uplink-helmet-swat-syndicate-name
   description: uplink-helmet-swat-syndicate-desc

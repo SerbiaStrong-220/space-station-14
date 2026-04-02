@@ -16,6 +16,8 @@ public sealed class PathologyProviderSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     private readonly HashSet<ProtoId<DamageTypePrototype>> _damageTypesToIgnore = new() { "Structural" };
+    // having any armor is better than nothing
+    private const float AnyArmorModifierBonus = 0.85f;
 
     public override void Initialize()
     {
@@ -37,15 +39,16 @@ public sealed class PathologyProviderSystem : EntitySystem
         if (!_prototype.Resolve(entity.Comp.WeightedRandomPathology, out var weightedRandomPrototype))
             return;
 
-        var armorAffectedWeights = GetAffectedByArmoredChance(weightedRandomPrototype.Weights, key);
+        var (armorAffectedWeights, chanceMultiplier) = GetAffectedByArmoredChance(weightedRandomPrototype.Weights, args.Target, key);
         _pathology.TryMakeEntityContext(entity.Owner, entity.Comp.WeighedRandomProviderEntity, out var context);
 
-        _pathology.TryAddRandom(args.Target, armorAffectedWeights, entity.Comp.ChanceToApply, context);
+        _pathology.TryAddRandom(args.Target, armorAffectedWeights, entity.Comp.ChanceToApply * chanceMultiplier, context);
     }
 
-    private Dictionary<string, float> GetAffectedByArmoredChance(Dictionary<string, float> baseValues, ProtoId<DamageTypePrototype> maxDamageTypeId)
+    private (Dictionary<string, float>, float) GetAffectedByArmoredChance(Dictionary<string, float> baseValues, EntityUid target, ProtoId<DamageTypePrototype> maxDamageTypeId)
     {
-        Dictionary<string, float> result = new();
+        var chanceMultiplier = 1f;
+        Dictionary<string, float> result = [];
         foreach (var (key, value) in baseValues)
         {
             if (!_prototype.Resolve<PathologyPrototype>(key, out var pathologyPrototype))
@@ -55,13 +58,18 @@ public sealed class PathologyProviderSystem : EntitySystem
                 continue;
 
             var armorEv = new CoefficientQueryEvent(pathologyPrototype.ArmorSlotFlags.Value);
+            RaiseLocalEvent(target, armorEv);
 
-            var newValue = armorEv.DamageModifiers.Coefficients.TryGetValue(maxDamageTypeId, out var armorCoefficient) ? armorCoefficient * value : value;
+            var newValue = armorEv.DamageModifiers.Coefficients.TryGetValue(maxDamageTypeId, out var armorCoefficient) ? armorCoefficient * AnyArmorModifierBonus * value : value;
 
             result.Add(key, newValue);
         }
 
-        return result;
+        var baseSum = baseValues.Values.Sum();
+        var newSum = result.Values.Sum();
+        chanceMultiplier = newSum / baseSum;
+
+        return (result, chanceMultiplier);
     }
 
 

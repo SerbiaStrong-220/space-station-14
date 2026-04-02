@@ -10,6 +10,7 @@ surgery-requirement-tool-required-scalpel = Инструмент для хиру
 surgery-requirement-tool-required-retractor = Инструмент для хирургической [color=blue]манипуляции[/color], например { ent-Retractor }
 surgery-requirement-tool-required-hemostat = Инструмент для [color=blue]зажима[/color] сосудов, например { ent-Hemostat }
 surgery-requirement-tool-required-saw = Инструмент для [color=blue]распиливания[/color] костей, например { ent-SawElectric }
+surgery-requirement-tool-required-bone-gel = гель для [color=blue]восстановления[/color] костей, например { ent-BoneGel }
 surgery-requirement-tool-required-cautery = Инструмент способного точечно [color=blue]прижечь[/color] рану, например { ent-Cautery }
 surgery-requirement-tool-required-specific = [color=gold]Особый[/color] инструмент
 

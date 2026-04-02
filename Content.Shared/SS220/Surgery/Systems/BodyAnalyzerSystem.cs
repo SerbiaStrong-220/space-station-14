@@ -28,7 +28,6 @@ public sealed class BodyAnalyzerSystem : EntitySystem
         var analyzerQuery = EntityQueryEnumerator<BodyAnalyzerComponent, TransformComponent>();
         while (analyzerQuery.MoveNext(out var uid, out var component, out var transform))
         {
-            //Update rate limited to 1 second
             if (component.NextUpdate > _timing.CurTime)
                 continue;
 
@@ -37,7 +36,7 @@ public sealed class BodyAnalyzerSystem : EntitySystem
 
             if (Deleted(patient))
             {
-                component.ScannedEntity = null;
+                UpdateAnalyzerTarget((uid, component), null);
                 continue;
             }
 
@@ -46,7 +45,7 @@ public sealed class BodyAnalyzerSystem : EntitySystem
             var patientCoordinates = Transform(patient).Coordinates;
             if (component.MaxScanRange != null && !_transformSystem.InRange(patientCoordinates, transform.Coordinates, component.MaxScanRange.Value))
             {
-                component.ScannedEntity = null;
+                UpdateAnalyzerTarget((uid, component), null);
                 continue;
             }
 
@@ -56,8 +55,14 @@ public sealed class BodyAnalyzerSystem : EntitySystem
 
     private void OnBodyAnalyzerAfterInteract(Entity<BodyAnalyzerComponent> entity, ref AfterInteractEvent args)
     {
-        if (args.Target == null || !args.CanReach)
+        if (!args.CanReach)
             return;
+
+        if (args.Target == null)
+        {
+            UpdateAnalyzerTarget(entity, args.Target);
+            return;
+        }
 
         if (!_userInterface.HasUi(entity, BodyAnalyzerUiKey.Key))
         {
@@ -70,7 +75,7 @@ public sealed class BodyAnalyzerSystem : EntitySystem
         UpdateAnalyzerTarget(entity, args.Target.Value);
     }
 
-    private void UpdateAnalyzerTarget(Entity<BodyAnalyzerComponent> analyzer, EntityUid target)
+    private void UpdateAnalyzerTarget(Entity<BodyAnalyzerComponent> analyzer, EntityUid? target)
     {
         analyzer.Comp.ScannedEntity = target;
         var netTarget = GetNetEntity(target);

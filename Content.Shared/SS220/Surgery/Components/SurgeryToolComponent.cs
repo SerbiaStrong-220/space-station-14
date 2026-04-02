@@ -38,5 +38,6 @@ public enum SurgeryToolType
     Retractor,
     Hemostat,
     Saw,
+    BoneGel,
     Cautery
 }

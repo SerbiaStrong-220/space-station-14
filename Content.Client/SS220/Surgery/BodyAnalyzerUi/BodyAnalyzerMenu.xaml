@@ -9,6 +9,7 @@
     Title="{Loc 'surgery-observer-title'}"
     Resizable="True"
     SetSize="920 470"
+    MinSize="920 470"
     RectClipContent="False">
     <Control>
         <PanelContainer>

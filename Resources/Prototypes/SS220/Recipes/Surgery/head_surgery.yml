@@ -74,6 +74,22 @@
       baseEdge: seal-wound
       edgeTooltip: to-seal-head-incision
 
+  - node: saw-skull-bone-gelled-fixed
+    baseNode: saw-bone-gelled-fixed
+    edges:
+    - to: retract-head-skin
+      id: bone-gel
+      baseEdge: bone-gel
+      edgeTooltip: to-retract-head-skin-after-gel
+
+  - node: saw-skull-bone-gelled
+    baseNode: saw-bone-gelled
+    edges:
+    - to: saw-skull-bone-gelled-fixed
+      id: set-bones
+      baseEdge: set-bones
+      edgeTooltip: to-saw-skull-bone-gelled-fixed
+
   - node: saw-skull-bone
     baseNode: saw-bone
     edges:
@@ -106,11 +122,11 @@
       id: brain-exposed
       baseEdge: retract-skin
       edgeTooltip: to-open-brain
-    # TODO: better return
-    - to: retract-head-skin
-      id: retract-head-skin
-      baseEdge: seal-wound
-      edgeTooltip: to-fix-skull-bone
+    # return
+    - to: saw-skull-bone-gelled
+      id: saw-skull-bone-gelled
+      baseEdge: bone-gel
+      edgeTooltip: to-saw-skull-bone-gelled
 
   - node: brain-exposed
     baseNode: retract-skin

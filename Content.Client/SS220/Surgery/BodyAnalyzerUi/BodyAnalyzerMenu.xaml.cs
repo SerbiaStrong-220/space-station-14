@@ -34,9 +34,12 @@ public sealed partial class BodyAnalyzerMenu : FancyWindow
         };
     }
 
-    public void ChangeTarget(EntityUid target, ProtoId<SurgeryGraphPrototype>? id = null)
+    public void ChangeTarget(EntityUid? target, ProtoId<SurgeryGraphPrototype>? id = null)
     {
-        var status = _surgeryPatientAnalyzer.GetStatus(target);
+        if (target is not { } patient)
+            return;
+
+        var status = _surgeryPatientAnalyzer.GetStatus(patient);
         PatientStatus.ShowStatus(status);
         TreatmentSuggestion.ShowSuggestion(_surgeryPatientAnalyzer.GetTreatmentRecommendation(status));
 

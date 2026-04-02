@@ -24,6 +24,23 @@
 
 - type: entity
   parent: BaseToolSurgery
+  id: BoneGel
+  name: bone gel
+  description: A specialized bioactive gel used in surgery to rapidly fuse and repair bone tissue.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi
+    state: bone-gel
+  - type: StaticPrice
+    price: 20
+  - type: SurgeryTool
+    toolType: BoneGel
+  - type: Tag
+    tags:
+    - SurgeryTool
+
+- type: entity
+  parent: BaseToolSurgery
   id: BodyAnalyzer
   name: Body analyzer
   description: modern analyzer. Comes handy to surgeons.

@@ -109,6 +109,22 @@
       baseEdge: seal-wound
       edgeTooltip: to-seal-torso-incision
 
+  - node: saw-rib-bone-gelled-fixed
+    baseNode: saw-bone-gelled-fixed
+    edges:
+    - to: retract-torso-skin
+      id: bone-gel
+      baseEdge: bone-gel
+      edgeTooltip: to-retract-torso-skin-after-gel
+
+  - node: saw-rib-bone-gelled
+    baseNode: saw-bone-gelled
+    edges:
+    - to: saw-rib-bone-gelled-fixed
+      id: set-bones
+      baseEdge: set-bones
+      edgeTooltip: to-saw-rib-bone-gelled-fixed
+
   - node: saw-rib-bone
     baseNode: saw-bone
     edges:
@@ -117,11 +133,11 @@
       id: open-heart-incision
       baseEdge: incision
       edgeTooltip: to-open-heart-incision
-    # TOOD: better back
-    - to: retract-torso-skin
-      id: retract-torso-skin
-      baseEdge: seal-wound
-      edgeTooltip: to-fix-rib-bone
+    # return
+    - to: saw-rib-bone-gelled
+      id: saw-rib-bone-gelled
+      baseEdge: bone-gel
+      edgeTooltip: to-saw-rib-bone-gelled
 
   - node: open-heart-incision
     baseNode: incision
