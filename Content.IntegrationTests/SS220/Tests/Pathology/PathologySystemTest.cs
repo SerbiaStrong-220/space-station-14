@@ -24,9 +24,9 @@ public sealed class PathologySystemTest
     private const string StackablePrototypes = @"
 - type: pathology
   id: TestPathology
-  name: test-pathology-name
+  name: cmd-testlog-desc
   definition:
-  - description: test-pathology-description
+  - description: cmd-testlog-desc
     maxStackCount: 4
     statusEffects: []
 ";
@@ -127,19 +127,19 @@ public sealed class PathologySystemTest
     private const string ProgressionPrototype = @"
 - type: trait
   id: TestPathologyProgression
-  name: test pathology progression trait
+  name: cmd-testlog-desc
   components:
   - type: TestPathologyProgressionTrait
 
 - type: pathology
   id: TestPathologyProgression
-  name: pathology-test-name
+  name: cmd-testlog-desc
   definition:
-  - description: pathology-start-test-description
+  - description: cmd-testlog-desc
     progressConditions:
     - !type:PathologyTimeProgressCondition
       delay: 2s
-  - description: pathology-test-description
+  - description: cmd-testlog-desc
     trait: TestPathologyProgression
 ";
 

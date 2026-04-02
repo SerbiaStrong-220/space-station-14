@@ -5,16 +5,15 @@
   graph:
     - node: start
       edges:
-        - to: ImprovisedFragmentExtractor
-          completed:
-          - !type:AdminLog
-            message: "Construction"
-            impact: Medium
-          steps:
-          - material: MetalRod
-            amount: 1
-          - material: Cable
-            amount: 10
-          doAfter: 15
+      - to: ImprovisedFragmentExtractor
+        completed:
+        - !type:AdminLog
+          message: "Construction"
+          impact: Medium
+        steps:
+        - material: MetalRod
+          amount: 1
+        - material: Cable
+          amount: 10
     - node: ImprovisedFragmentExtractor
       entity: ImprovisedFragmentExtractor
