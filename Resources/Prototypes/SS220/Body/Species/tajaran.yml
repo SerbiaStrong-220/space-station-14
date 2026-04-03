@@ -68,8 +68,18 @@
       Stomach: OrganTajaranStomach
       Liver: OrganTajaranLiver
       Kidneys: OrganTajaranKidneys
+<<<<<<< HEAD
   - type: HumanoidProfile
     species: Tajaran
+=======
+  - type: HumanoidAppearance
+    species: Tajaran
+    hideLayersOnEquip:
+    - Snout
+    - HeadTop
+    - HeadSide
+    - Tail
+>>>>>>> upstream/staging-upstream-fixes
 
 - type: entity
   name: Urist McTajaran
@@ -168,7 +178,15 @@
   abstract: true
   components:
   - type: Metabolizer
+<<<<<<< HEAD
     metabolizerTypes: [ Animal ]
+=======
+    maxReagents: 3
+    metabolizerTypes: [ Tajaran ]
+    groups:
+    - id: Food
+    - id: Drink
+>>>>>>> upstream/staging-upstream-fixes
 
 - type: entity
   parent: OrganTajaran
@@ -185,6 +203,7 @@
   components:
   - type: Sprite
     sprite: SS220/Mobs/Species/Tajaran/parts.rsi
+<<<<<<< HEAD
   - type: VisualOrgan
     data:
       sprite: SS220/Mobs/Species/Tajaran/parts.rsi
@@ -204,6 +223,16 @@
     hideableLayers:
     - enum.HumanoidVisualLayers.Hair
     - enum.HumanoidVisualLayers.Snout
+=======
+
+- type: entity
+  parent: [ OrganBaseTorso, OrganTajaranExternal ]
+  id: OrganTajaranTorso
+
+- type: entity
+  parent: [ OrganBaseHead, OrganTajaranExternal ]
+  id: OrganTajaranHead
+>>>>>>> upstream/staging-upstream-fixes
 
 - type: entity
   parent: [ OrganBaseArmLeft, OrganTajaranExternal ]
@@ -242,12 +271,17 @@
   id: OrganTajaranBrain
 
 - type: entity
+<<<<<<< HEAD
   parent: [ OrganBaseEyes, OrganTajaranInternal, OrganTajaranExternal ]
   id: OrganTajaranEyes
   components:
   - type: VisualOrgan
     data:
       sprite: Mobs/Customization/eyes.rsi
+=======
+  parent: [ OrganBaseEyes, OrganTajaranInternal ]
+  id: OrganTajaranEyes
+>>>>>>> upstream/staging-upstream-fixes
 
 - type: entity
   parent: [ OrganBaseTongue, OrganTajaranInternal ]

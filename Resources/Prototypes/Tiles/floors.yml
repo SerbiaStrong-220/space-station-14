@@ -1370,14 +1370,16 @@
     collection: FootstepHull
   itemDrop: FloorTileItemBCircuit
 
-#- type: tile
-#  id: FloorRedCircuit
-#  parent: BaseStationTile
-#  name: tiles-red-circuit-floor
-#  sprite: /Textures/Tiles/red_circuit.png
-#  footstepSounds:
-#    collection: FootstepHull
-#  itemDrop: FloorTileItemRCircuit
+# SS220-own-tiles-begin
+# - type: tile
+#   id: FloorRedCircuit
+#   parent: BaseStationTile
+#   name: tiles-red-circuit-floor
+#   sprite: /Textures/Tiles/red_circuit.png
+#   footstepSounds:
+#     collection: FootstepHull
+#   itemDrop: FloorTileItemRCircuit
+# SS220-own-tiles-end
 
 # Terrain
 - type: tile
