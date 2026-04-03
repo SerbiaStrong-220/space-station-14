@@ -68,7 +68,7 @@
       Stomach: OrganTajaranStomach
       Liver: OrganTajaranLiver
       Kidneys: OrganTajaranKidneys
-  - type: HumanoidAppearance
+  - type: HumanoidProfile
     species: Tajaran
     hideLayersOnEquip:
     - Snout

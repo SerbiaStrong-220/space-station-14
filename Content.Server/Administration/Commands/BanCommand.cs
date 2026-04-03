@@ -156,11 +156,13 @@ public sealed class BanCommand : LocalizedCommands
 
         var banInfo = new CreateServerBanInfo(reason);
         banInfo.WithBanningAdmin(player?.UserId);
+        banInfo.WithBanningAdminName(shell.Player?.Name); // SS220-add-post-ban-info
         banInfo.AddUser(targetUid, target);
         banInfo.AddHWId(targetHWid);
         if (minutes > 0)
             banInfo.WithMinutes(minutes);
         banInfo.WithSeverity(severity);
+        banInfo.WithPostBanInfo(postBanInfo); // SS220-add-post-ban-info
 
         _bans.CreateServerBan(banInfo);
     }

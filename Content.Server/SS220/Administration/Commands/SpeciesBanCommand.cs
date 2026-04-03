@@ -34,6 +34,7 @@ public sealed class SpeciesBanCommand : LocalizedCommands
         string reason;
         uint minutes;
         var postBanInfo = true;
+
         if (!Enum.TryParse(_cfg.GetCVar(CCVars220.SpeciesBanDefaultSeverity), out NoteSeverity severity))
         {
             _sawmill ??= _log.GetSawmill("admin.species_ban");
@@ -123,12 +124,19 @@ public sealed class SpeciesBanCommand : LocalizedCommands
             return;
         }
 
+        var targetUid = located.UserId;
+        var targetHWid = located.LastHWId;
+
         var speciesBanInfo = new CreateSpeciesBanInfo(reason);
+        if (minutes > 0)
+            speciesBanInfo.WithMinutes(minutes);
+        speciesBanInfo.AddUser(targetUid, located.Username);
         speciesBanInfo.WithBanningAdmin(shell.Player?.UserId);
-        speciesBanInfo.WithMinutes(minutes);
-        speciesBanInfo.WithPostBanInfo(postBanInfo);
+        speciesBanInfo.WithBanningAdminName(shell.Player?.Name);
+        speciesBanInfo.AddHWId(targetHWid);
         speciesBanInfo.WithSeverity(severity);
-        speciesBanInfo.AddUser(located.UserId, located.Username);
+        speciesBanInfo.WithPostBanInfo(postBanInfo);
+
         speciesBanInfo.AddSpecie(speciesId);
 
         _ban.CreateSpeciesBan(speciesBanInfo);

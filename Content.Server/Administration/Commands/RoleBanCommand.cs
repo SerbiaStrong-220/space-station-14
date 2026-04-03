@@ -1,8 +1,7 @@
-using Content.Server.Administration.Managers;
+﻿using Content.Server.Administration.Managers;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
-using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Roles;
 using Robust.Shared.Configuration;
 using Robust.Shared.Console;
@@ -131,8 +130,10 @@ public sealed class RoleBanCommand : IConsoleCommand
             banInfo.WithMinutes(minutes);
         banInfo.AddUser(targetUid, located.Username);
         banInfo.WithBanningAdmin(shell.Player?.UserId);
+        banInfo.WithBanningAdminName(shell.Player?.Name); // SS220-add-post-ban-info
         banInfo.AddHWId(targetHWid);
         banInfo.WithSeverity(severity);
+        banInfo.WithPostBanInfo(postBanInfo); // SS220-add-post-ban-info
 
         if (_proto.HasIndex<JobPrototype>(role))
         {
@@ -181,13 +182,8 @@ public sealed class RoleBanCommand : IConsoleCommand
         {
             1 => CompletionResult.FromHintOptions(CompletionHelper.SessionNames(),
                 Loc.GetString("cmd-roleban-hint-1")),
-            // SS220 antag bans begin
-            //2 => CompletionResult.FromHintOptions(CompletionHelper.PrototypeIDs<JobPrototype>(),
-            //    Loc.GetString("cmd-roleban-hint-2")),
-            2 => CompletionResult.FromHintOptions([.. CompletionHelper.PrototypeIDs<JobPrototype>(),
-                .. CompletionHelper.PrototypeIDs<AntagPrototype>()],
+            2 => CompletionResult.FromHintOptions(CompletionHelper.PrototypeIDs<JobPrototype>(),
                 Loc.GetString("cmd-roleban-hint-2")),
-            // SS220 antag bans end
             3 => CompletionResult.FromHint(Loc.GetString("cmd-roleban-hint-3")),
             4 => CompletionResult.FromHintOptions(durOpts, Loc.GetString("cmd-roleban-hint-4")),
             5 => CompletionResult.FromHintOptions(severities, Loc.GetString("cmd-roleban-hint-5")),

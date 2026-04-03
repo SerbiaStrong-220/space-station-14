@@ -90,6 +90,10 @@ namespace Content.Server.Database
                         throw new ArgumentException("Cannot specify roles for server ban types", nameof(roles));
                     break;
 
+                // SS220-add-bans-for-spices-chats-begin
+                case BanType.Species:
+                case BanType.Chat:
+                // SS220-add-bans-for-spices-chats-end
                 case BanType.Role:
                     if (roles is not { Length: > 0 })
                         throw new ArgumentException("Must specify roles for server ban types", nameof(roles));
@@ -97,9 +101,6 @@ namespace Content.Server.Database
                         throw new ArgumentException("Role bans cannot have exempt flags", nameof(exemptFlags));
                     break;
 
-                case BanType.Species:
-                case BanType.Chat:
-                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type));
             }

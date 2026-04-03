@@ -43,35 +43,42 @@ public sealed class ChatBanCommand : LocalizedCommands
             case 3:
                 target = args[0];
                 if (!Enum.TryParse(args[1], out bannableChat))
+                {
+                    shell.WriteError(Loc.GetString("cmd-chat-ban-chat-parse", ("time", args[1]), ("help", Help)));
                     return;
+                }
                 reason = args[2];
                 minutes = 0;
                 break;
+
             case 4:
                 target = args[0];
                 if (!Enum.TryParse(args[1], out bannableChat))
-                    bannableChat = BannableChats.Invalid;
+                {
+                    shell.WriteError(Loc.GetString("cmd-chat-ban-chat-parse", ("time", args[1]), ("help", Help)));
+                    return;
+                }
                 reason = args[2];
-
                 if (!uint.TryParse(args[3], out minutes))
                 {
                     shell.WriteError(Loc.GetString("cmd-chat-ban-minutes-parse", ("time", args[3]), ("help", Help)));
                     return;
                 }
-
                 break;
+
             case 5:
                 target = args[0];
                 if (!Enum.TryParse(args[1], out bannableChat))
+                {
+                    shell.WriteError(Loc.GetString("cmd-chat-ban-chat-parse", ("time", args[1]), ("help", Help)));
                     return;
+                }
                 reason = args[2];
-
                 if (!uint.TryParse(args[3], out minutes))
                 {
                     shell.WriteError(Loc.GetString("cmd-chat-ban-minutes-parse", ("time", args[3]), ("help", Help)));
                     return;
                 }
-
                 if (!Enum.TryParse(args[4], ignoreCase: true, out severity))
                 {
                     shell.WriteLine(Loc.GetString("cmd-chat-ban-severity-parse",
@@ -79,20 +86,21 @@ public sealed class ChatBanCommand : LocalizedCommands
                         ("help", Help)));
                     return;
                 }
-
                 break;
+
             case 6:
                 target = args[0];
                 if (!Enum.TryParse(args[1], out bannableChat))
+                {
+                    shell.WriteError(Loc.GetString("cmd-chat-ban-chat-parse", ("time", args[1]), ("help", Help)));
                     return;
+                }
                 reason = args[2];
-
                 if (!uint.TryParse(args[3], out minutes))
                 {
                     shell.WriteError(Loc.GetString("cmd-chat-ban-minutes-parse", ("time", args[3]), ("help", Help)));
                     return;
                 }
-
                 if (!Enum.TryParse(args[4], ignoreCase: true, out severity))
                 {
                     shell.WriteLine(Loc.GetString("cmd-chat-ban-severity-parse",
@@ -100,18 +108,18 @@ public sealed class ChatBanCommand : LocalizedCommands
                         ("help", Help)));
                     return;
                 }
-
                 if (!bool.TryParse(args[5], out postBanInfo))
                 {
                     shell.WriteLine(Loc.GetString("cmd-ban-invalid-post-ban", ("postBan", args[5])));
                     shell.WriteLine(Help);
                     return;
                 }
-
                 break;
+
             default:
                 shell.WriteError(Loc.GetString("cmd-chat-ban-arg-count"));
                 shell.WriteLine(Help);
+
                 return;
         }
 
@@ -122,12 +130,19 @@ public sealed class ChatBanCommand : LocalizedCommands
             return;
         }
 
+        var targetUid = located.UserId;
+        var targetHWid = located.LastHWId;
+
         var chatBanInfo = new CreateChatsBanInfo(reason);
+        if (minutes > 0)
+            chatBanInfo.WithMinutes(minutes);
+        chatBanInfo.AddUser(targetUid, located.Username);
         chatBanInfo.WithBanningAdmin(shell.Player?.UserId);
-        chatBanInfo.WithMinutes(minutes);
-        chatBanInfo.WithPostBanInfo(postBanInfo);
+        chatBanInfo.WithBanningAdminName(shell.Player?.Name);
+        chatBanInfo.AddHWId(targetHWid);
         chatBanInfo.WithSeverity(severity);
-        chatBanInfo.AddUser(located.UserId, located.Username);
+        chatBanInfo.WithPostBanInfo(postBanInfo);
+
         chatBanInfo.AddChat(bannableChat);
 
         _ban.CreateChatsBan(chatBanInfo);

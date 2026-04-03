@@ -75,9 +75,21 @@ public sealed class BanPanelEui : BaseEui
 
         var isRoleBan = ban.BannedJobs?.Length > 0 || ban.BannedAntags?.Length > 0;
 
-        CreateBanInfo banInfo = isRoleBan ? new CreateRoleBanInfo(ban.Reason) : new CreateServerBanInfo(ban.Reason);
+        // SS220-more-reasonable-ban-type-begin
+        // CreateBanInfo banInfo = isRoleBan ? new CreateRoleBanInfo(ban.Reason) : new CreateServerBanInfo(ban.Reason); [wizden]
+        CreateBanInfo banInfo = ban.BanType switch
+        {
+            BanType.Chat => new CreateChatsBanInfo(ban.Reason),
+            BanType.Species => new CreateSpeciesBanInfo(ban.Reason),
+            BanType.Role => new CreateRoleBanInfo(ban.Reason),
+            BanType.Server => new CreateServerBanInfo(ban.Reason),
+            _ => throw new NotImplementedException($"Ban type {ban.BanType} has no implementations!"),
+        };
+        // SS220-more-reasonable-ban-type-end
 
         banInfo.WithBanningAdmin(Player.UserId);
+        banInfo.WithBanningAdminName(Player.Name); // SS220-add-admin-name-in-ban
+        banInfo.WithPostBanInfo(ban.PostBanInfo); // SSS220-add-post-ban-info
         banInfo.WithSeverity(ban.Severity);
         if (ban.BanDurationMinutes > 0)
             banInfo.WithMinutes(ban.BanDurationMinutes);
@@ -130,37 +142,61 @@ public sealed class BanPanelEui : BaseEui
 
         banInfo.AddHWId(targetHWid);
 
-        if (isRoleBan)
+
+        switch (ban.BanType)
         {
-            var roleBanInfo = (CreateRoleBanInfo)banInfo;
-            foreach (var row in ban.BannedJobs ?? [])
-            {
-                roleBanInfo.AddJob(row);
-            }
-
-            foreach (var row in ban.BannedAntags ?? [])
-            {
-                roleBanInfo.AddAntag(row);
-            }
-
-            _banManager.CreateRoleBan(roleBanInfo);
-        }
-        else
-        {
-            if (ban.Erase && targetUid is not null)
-            {
-                try
+            case BanType.Chat:
+                var chatBanInfo = (CreateChatsBanInfo)banInfo;
+                foreach (var chat in ban.BannedChats ?? [])
                 {
-                    if (_entities.TrySystem(out AdminSystem? adminSystem))
-                        adminSystem.Erase(targetUid.Value);
+                    chatBanInfo.AddChat(chat);
                 }
-                catch (Exception e)
-                {
-                    _sawmill.Error($"Error while erasing banned player:\n{e}");
-                }
-            }
+                _banManager.CreateChatsBan(chatBanInfo);
+                break;
 
-            _banManager.CreateServerBan((CreateServerBanInfo)banInfo);
+            case BanType.Species:
+                var speciesBanInfo = (CreateSpeciesBanInfo)banInfo;
+                foreach (var specie in ban.BannedSpecies ?? [])
+                {
+                    speciesBanInfo.AddSpecie(specie);
+                }
+                _banManager.CreateSpeciesBan(speciesBanInfo);
+                break;
+
+            case BanType.Role:
+                var roleBanInfo = (CreateRoleBanInfo)banInfo;
+                foreach (var row in ban.BannedJobs ?? [])
+                {
+                    roleBanInfo.AddJob(row);
+                }
+
+                foreach (var row in ban.BannedAntags ?? [])
+                {
+                    roleBanInfo.AddAntag(row);
+                }
+
+                _banManager.CreateRoleBan(roleBanInfo);
+                break;
+
+            case BanType.Server:
+                if (ban.Erase && targetUid is not null)
+                {
+                    try
+                    {
+                        if (_entities.TrySystem(out AdminSystem? adminSystem))
+                            adminSystem.Erase(targetUid.Value);
+                    }
+                    catch (Exception e)
+                    {
+                        _sawmill.Error($"Error while erasing banned player:\n{e}");
+                    }
+                }
+
+                _banManager.CreateServerBan((CreateServerBanInfo)banInfo);
+                break;
+
+            default:
+                throw new NotImplementedException($"Ban type {ban.BanType} has no implementations!");
         }
 
         Close();
