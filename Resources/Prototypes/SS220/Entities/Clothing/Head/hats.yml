@@ -483,6 +483,31 @@
     - HamsterWearable
     - WhitelistChameleon
 
+  # Репортер
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadUmbrellaHat
+  name: umbrella hat
+  description: Stylish in any weather!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/umbrella_hat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/umbrella_hat.rsi
+  - type: Item
+    size: Normal
+  - type: Reflect
+    reflectProb: 0.00001
+    spread: 360
+    reflective:
+    - NonEnergy
+  - type: Tag
+    tags:
+    - ClothMade
+    - HamsterWearable
+    - WhitelistChameleon
+
 # Служба безопасности
 
   # ГСБ

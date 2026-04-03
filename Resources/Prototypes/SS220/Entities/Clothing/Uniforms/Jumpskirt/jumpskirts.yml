@@ -63,6 +63,62 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpskirt/hydro_white.rsi
 
+  # Репортёр
+- type: entity
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220]
+  id: ClothingUniformJumpskirtJournalistRed
+  name: red journalist jumpskirt
+  description: If journalism is good, it is controversial, by nature.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/reporter_red.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/reporter_red.rsi
+
+- type: entity
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220]
+  id: ClothingUniformJumpskirtJournalistBrown
+  name: brown journalist jumpskirt
+  description: If journalism is good, it is controversial, by nature.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/reporter_brown.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/reporter_brown.rsi
+
+- type: entity
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220]
+  id: ClothingUniformJumpskirtJournalistGreen
+  name: green journalist jumpskirt
+  description: If journalism is good, it is controversial, by nature.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/reporter_green.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/reporter_green.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtJournalist
+  name: journalist jumpskirt
+  description: If journalism is good, it is controversial, by nature.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/journalist.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/journalist.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtReporter
+  name: reporter jumpskirt
+  description: A good reporter remains a skeptic all their life.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/reporter.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/reporter.rsi
+
   # Бармен
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -356,6 +412,32 @@
     sprite: SS220/Clothing/Uniforms/Jumpskirt/rd_professor.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpskirt/rd_professor.rsi
+
+
+  # Служба Безопасности
+
+  # Детектив
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtDetectiveBlackRed
+  name: detectivse shirt
+  description: The secret of success is an absolute ungovernable curiosity.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/detective_blackred_shirt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/detective_blackred_shirt.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtDetectiveBlackWhite
+  name: detective shirt
+  description: The secret of success is an absolute ungovernable curiosity.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/detective_blackwhite_shirt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/detective_blackwhite_shirt.rsi
 
 # Other
 - type: entity

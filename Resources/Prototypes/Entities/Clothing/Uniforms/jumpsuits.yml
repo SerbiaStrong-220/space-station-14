@@ -948,7 +948,7 @@
     sprite: Clothing/Uniforms/Jumpsuit/safari.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220] #SS220 folded-equipped-INNERCLOTHING
   id: ClothingUniformJumpsuitJournalist
   name: journalist suit
   description: If journalism is good, it is controversial, by nature.

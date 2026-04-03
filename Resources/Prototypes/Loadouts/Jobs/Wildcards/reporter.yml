@@ -10,8 +10,73 @@
     jumpsuit: ClothingUniformJumpsuitJournalist
 
   #SS220-Clothes-Start
+
+  # Reporter Time
+- type: loadoutEffectGroup
+  id: UmbrellaHat
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobReporter
+      time: 54000 # 15 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+
+  # Jumpsuit/Jumpskirt
+
 - type: loadout
   id: JumpsuitJournalistRed
   equipment:
     jumpsuit: ClothingUniformJumpsuitJournalistRed
+
+- type: loadout
+  id: JumpsuitJournalistBrown
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitJournalistBrown
+
+- type: loadout
+  id: JumpsuitJournalistGreen
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitJournalistGreen
+
+- type: loadout
+  id: JumpskirtJournalistRed
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtJournalistRed
+
+- type: loadout
+  id: JumpskirtJournalistBrown
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtJournalistBrown
+
+- type: loadout
+  id: JumpskirtJournalistGreen
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtJournalistGreen
+
+- type: loadout
+  id: ReporterJumpskirt
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtReporter
+
+- type: loadout
+  id: JournalistJumpskirt
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtJournalist
+
+
+  # Head
+
+- type: loadout
+  id: UmbrellaHat
+  equipment:
+    head: ClothingHeadUmbrellaHat
+
+  # Outer
+
+
   #SS220-Clothes-End

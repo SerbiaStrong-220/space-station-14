@@ -14,3 +14,8 @@
     proto: SeniorDevTeamTier
   - !type:GroupLoadoutEffect
     proto: AdministratorSponsorTier
+
+- type: loadout
+  id: MicrophonePocket
+  inhand:
+    - MicrophoneInstrument

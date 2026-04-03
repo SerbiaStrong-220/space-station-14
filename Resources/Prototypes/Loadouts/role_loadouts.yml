@@ -632,6 +632,8 @@
   groups:
   - GroupTankHarness
   - ReporterJumpsuit
+  - ReporterHead #SS220
+  - Microphones #SS220
   - CommonBackpack
   - Glasses
   - Survival
