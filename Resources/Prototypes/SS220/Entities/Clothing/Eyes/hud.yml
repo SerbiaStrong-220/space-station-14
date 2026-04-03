@@ -63,7 +63,7 @@
 - type: entity
   parent: ClothingEyesBase
   id: ClothingEyesHudMediChem
-  name: medichem hud
+  name: chemi-medical hud
   description: They have a striking resemblance to the glasses from the movie theater.
   components:
   - type: Sprite
