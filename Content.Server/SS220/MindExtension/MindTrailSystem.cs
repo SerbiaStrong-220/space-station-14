@@ -149,7 +149,7 @@ public partial class MindExtensionSystem //MindTrailSystem
         NetUserId session)
     {
 
-        if (!EntityManager.EntityExists(target))
+        if (!Exists(target))
             return BodyStateToEnter.Destroyed;
 
         if (TryComp<CryostorageContainedComponent>(target, out var cryo))

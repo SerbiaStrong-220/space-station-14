@@ -162,7 +162,7 @@ public sealed class ServerSedativeStingSystem : EntitySystem
         var ev = new TransferDnaEvent { Donor = target, Recipient = uid };
         RaiseLocalEvent(target, ref ev);
 
-        _adminLogger.Add(LogType.ForceFeed, $"{EntityManager.ToPrettyString(user):user} injected {EntityManager.ToPrettyString(target):target} with a solution {SharedSolutionContainerSystem.ToPrettyString(removedSolution):removedSolution} using a {EntityManager.ToPrettyString(uid):using}");
+        _adminLogger.Add(LogType.ForceFeed, $"{ToPrettyString(user):user} injected {ToPrettyString(target):target} with a solution {SharedSolutionContainerSystem.ToPrettyString(removedSolution):removedSolution} using a {ToPrettyString(uid):using}");
 
         return true;
     }

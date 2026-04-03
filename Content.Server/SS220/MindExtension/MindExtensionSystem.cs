@@ -54,7 +54,7 @@ public sealed partial class MindExtensionSystem : EntitySystem
         var newEnt = EntityManager.CreateEntityUninitialized(null);
         var mindExtComponent = new MindExtensionComponent { Player = player };
 
-        EntityManager.AddComponent(newEnt, mindExtComponent);
+        AddComp(newEnt, mindExtComponent);
         EntityManager.InitializeEntity(newEnt);
         EntityManager.StartEntity(newEnt);
 

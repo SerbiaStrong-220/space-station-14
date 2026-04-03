@@ -90,7 +90,7 @@ public sealed partial class SuperMatterSystem
 
         if (!entity.Comp.Activated)
         {
-            SendAdminChatAlert(entity, Loc.GetString("supermatter-admin-alert-activated"), $"{EntityManager.ToPrettyString(args.Target)}");
+            SendAdminChatAlert(entity, Loc.GetString("supermatter-admin-alert-activated"), $"{ToPrettyString(args.Target)}");
             _adminLog.Add(LogType.Action, LogImpact.High, $"Crystal {ToPrettyString(entity):user} was activated by {ToPrettyString(args.Target):target}");
             entity.Comp.Activated = true;
         }

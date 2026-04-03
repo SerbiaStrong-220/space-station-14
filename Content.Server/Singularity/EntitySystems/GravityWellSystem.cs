@@ -128,12 +128,11 @@ public sealed class GravityWellSystem : SharedGravityWellSystem
     private bool CanGravPulseAffect(EntityUid entity)
     {
         //SS220-gravpull-straps-fix begin
-        if (
-            EntityManager.HasComponent<GhostComponent>(entity) ||
-            EntityManager.HasComponent<MapGridComponent>(entity) ||
-            EntityManager.HasComponent<MapComponent>(entity) ||
-            EntityManager.HasComponent<GravityWellComponent>(entity)
-        ) return false;
+        if (HasComp<GhostComponent>(entity) || HasComp<MapGridComponent>(entity) ||
+            HasComp<MapComponent>(entity) || HasComp<GravityWellComponent>(entity))
+        {
+            return false;
+        }
 
         // Can't be affected if you're fully buckled up
         // btw looks ugly to me, but it'll work for now
@@ -142,6 +141,7 @@ public sealed class GravityWellSystem : SharedGravityWellSystem
         {
             if (_buckle.IsFastenedSeatbelt(entity, buckleComp))
                 return false;
+
             // Can't be affected if you're handcuffed (like, you're cuffed to the chair???)
             if (TryComp<CuffableComponent>(entity, out var cuffableComp))
                 return cuffableComp.CanStillInteract;

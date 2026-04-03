@@ -39,7 +39,7 @@ public sealed class ItemOfferSystem : SharedItemOfferSystem
 
     private bool HandleItemOfferKey(in PointerInputCmdHandler.PointerInputCmdArgs args)
     {
-        if (!args.EntityUid.IsValid() || !EntityManager.EntityExists(args.EntityUid))
+        if (!args.EntityUid.IsValid() || !Exists(args.EntityUid))
             return false;
 
         var user = args.Session?.AttachedEntity;

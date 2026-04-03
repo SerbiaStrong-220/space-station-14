@@ -110,7 +110,7 @@ public sealed class EventCapturePointSystem : EntitySystem
 
         if (entity.Comp.FlagEntity.HasValue &&
             entity.Comp.FlagEntity.Value.Valid &&
-            EntityManager.EntityExists(entity.Comp.FlagEntity.Value))
+            Exists(entity.Comp.FlagEntity.Value))
         {
             RemoveFlagInstantly(entity);
         }

@@ -115,7 +115,7 @@ public sealed class NyarlathotepHorizonSystem : SharedNyarlathotepHorizonSystem
             _adminLogger.Add(LogType.EntityDelete, LogImpact.Extreme, $"{ToPrettyString(entityToConsume)} entered the event horizon of {ToPrettyString(nyarlathotep)} and was deleted");
         }
 
-        EntityManager.QueueDeleteEntity(entityToConsume);
+        QueueDel(entityToConsume);
         var evEaten = new NyarlathotepHorizonConsumedEntityEvent(
                             entityToConsume,
                             nyarlathotep,

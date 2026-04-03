@@ -32,7 +32,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly VisualBodySystem _visualBody = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    //[Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly HungerSystem _hungerSystem = default!;

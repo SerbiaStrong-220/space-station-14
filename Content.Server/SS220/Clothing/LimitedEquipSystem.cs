@@ -49,7 +49,7 @@ public sealed class LimitedEquipSystem : EntitySystem
 
         // Delete entity only if component was successfully used
         if (uid.Comp.Uses <= 0)
-            EntityManager.QueueDeleteEntity(uid);
+            QueueDel(uid);
 
         if (entityToPlaceInHands != null)
             _hands.PickupOrDrop(args.Equipee, entityToPlaceInHands.Value);

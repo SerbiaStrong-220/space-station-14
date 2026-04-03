@@ -22,7 +22,7 @@ public sealed class SurveillanceCameraSystem : SharedSurveillanceCameraSystem
     [Dependency] private readonly DeviceNetworkSystem _deviceNetworkSystem = default!;
     [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly ContainerSystem _container = default!;
+    //[Dependency] private readonly ContainerSystem _container = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly SurveillanceCameraMapSystem _cameraMapSystem = default!;
 
