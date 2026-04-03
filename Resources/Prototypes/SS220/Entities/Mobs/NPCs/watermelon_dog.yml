@@ -98,7 +98,7 @@
   - type: NPCImprintingOnSpawnBehaviour
     whitelist:
       components:
-      - HumanoidAppearance
+      - HumanoidProfile
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: WatermelonDog
@@ -109,9 +109,10 @@
       - map: [ "enum.DamageStateVisualLayers.Base" ]
         state: alive
   - type: Bloodstream
-    bloodReagent: JuiceWatermelon
-    bloodMaxVolume: 90
-    chemicalMaxVolume: 30
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: JuiceWatermelon
+        Quantity: 90
   - type: Destructible
     thresholds:
     - trigger:

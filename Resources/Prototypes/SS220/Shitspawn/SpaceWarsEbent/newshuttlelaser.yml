@@ -21,7 +21,7 @@
       state: impact_beam_heavy2
   - type: HitscanBasicRaycast
     collisionMask: 256
-    maxLength: 200
+    maxDistance: 200
   - type: ShowNavInfo
     navInfo: !type:ShuttleNavHitscanInfo
       enabled: true

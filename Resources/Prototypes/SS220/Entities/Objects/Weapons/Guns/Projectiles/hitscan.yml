@@ -128,4 +128,4 @@
       state: impact_laser
   - type: HitscanBasicRaycast
     collisionMask: 256
-    maxLength: 10
+    maxDistance: 10
