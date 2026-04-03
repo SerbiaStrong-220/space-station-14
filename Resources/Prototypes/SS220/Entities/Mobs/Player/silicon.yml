@@ -166,6 +166,20 @@
   - type: InstantAction
     event: !type:ToggleIntrinsicUIEvent { key: enum.SuperMatterObserverUiKey.Key }
 
+# - type: entity
+#   id: ActionAiShowSMInterface
+#   name: Teleport Interface
+#   description: Teleport to an entity
+#   components:
+#   - type: Action
+#     icon:
+#       sprite: SS220/Interface/Actions/actions_ai.rsi # SS220-Resprite
+#       state: sm_console # TODO: change the sprite
+#     keywords: [ "AI", "console", "interface" ]
+#     priority: -9
+#   - type: InstantAction
+#     event: !type:ToggleIntrinsicUIEvent { key: enum.StationAiTeleportUiKey.Key }
+
 - type: entity
   id: PlayerBorgChassisClownMimeBattery
   parent: BorgChassisClownMime
