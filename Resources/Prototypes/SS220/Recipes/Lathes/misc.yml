@@ -64,6 +64,14 @@
     Plastic: 1600
 
 - type: latheRecipe
+  id: ExtendedPlasmaTank
+  result: ExtendedPlasmaTank
+  completetime: 4
+  materials:
+    Plasteel: 300
+    Silver: 10
+
+- type: latheRecipe
   id: CassetteTape
   result: CassetteTape
   categories: [ Tools ]

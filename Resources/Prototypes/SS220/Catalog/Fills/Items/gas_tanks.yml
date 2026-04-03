@@ -1,0 +1,18 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  id: ExtendedPlasmaTankFilled
+  parent: ExtendedPlasmaTank
+  suffix: Filled
+  components:
+  - type: GasTank
+    outputPressure: 101.3
+    air:
+      # 6 minutes of agony
+      volume: 10
+      moles:
+        - 0           # oxygen
+        - 0           # nitrogen
+        - 0           # CO2
+        - 10.1027581  # plasma ss220
+      temperature: 120.06 #ss220
