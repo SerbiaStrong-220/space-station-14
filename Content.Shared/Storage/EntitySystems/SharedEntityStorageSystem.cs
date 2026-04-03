@@ -360,9 +360,7 @@ public abstract class SharedEntityStorageSystem : EntitySystem
             return false;
 
         // SS220 fix #1121 begin
-        EntityStorageComponent? insertedComp = null;
-
-        if (Resolve(toInsert, ref insertedComp))
+        if (HasComp<EntityStorageComponent>(toInsert))
             return false;
         // SS220 fix #1121 end
 

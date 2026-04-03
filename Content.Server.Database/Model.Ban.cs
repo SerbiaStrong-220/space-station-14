@@ -290,7 +290,7 @@ public sealed class BanHwid : IBanSelector
 /// </remarks>
 public sealed class BanRole : IBanRole // SS220-abstract-BanRole
 {
-    public int Id { get; set; }
+    //public int Id { get; set; } // // SS220 Chat bans
 
     /// <summary>
     /// What type of role is being banned. For example <c>Job</c> or <c>Antag</c>.
@@ -302,13 +302,15 @@ public sealed class BanRole : IBanRole // SS220-abstract-BanRole
     /// </summary>
     public required string RoleId { get; set; }
 
-    /// <summary>
-    /// The ID of the ban to which this applies.
-    /// </summary>
-    [ForeignKey(nameof(Ban))]
-    public int BanId { get; set; }
-
-    public Ban? Ban { get; set; }
+    // // SS220 Chat bans begin
+    // /// <summary>
+    // /// The ID of the ban to which this applies.
+    // /// </summary>
+    // [ForeignKey(nameof(Ban))]
+    // public int BanId { get; set; }
+    //
+    // public Ban? Ban { get; set; }
+    // // SS220 Chat bans end
 }
 
 /// <summary>

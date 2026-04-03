@@ -24,6 +24,7 @@ using Content.Client.Radiation.Overlays;
 using Content.Client.Replay;
 using Content.Client.Screenshot;
 using Content.Client.Singularity;
+using Content.Client.SS220.ChatBans;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface;
 using Content.Client.Viewport;
@@ -91,6 +92,7 @@ namespace Content.Client.Entry
         [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
         [Dependency] private readonly ClientsidePlaytimeTrackingManager _clientsidePlaytimeManager = default!;
         [Dependency] private readonly SpeciesRequirementsManager _speciesRequirements = default!; // SS220 Species bans
+        [Dependency] private readonly ChatRequirementsManager _chatRequirements = default!; // SS220 Chat bans
         [Dependency] private readonly ClientFeedbackManager _feedbackManager = null!;
 
         public override void PreInit()
@@ -156,6 +158,7 @@ namespace Content.Client.Entry
             _extendedDisconnectInformation.Initialize();
             _jobRequirements.Initialize();
             _speciesRequirements.Initialize(); // SS220 Species bans
+            _chatRequirements.Initialize(); // SS220 Chat bans
             _playbackMan.Initialize();
             _clientsidePlaytimeManager.Initialize();
 

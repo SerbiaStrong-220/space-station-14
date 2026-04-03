@@ -22,7 +22,7 @@
   - type: HitscanBasicRaycast
     collisionMask: 256
     maxLength: 200
-  - type: ShowNavInfoComponent
+  - type: ShowNavInfo
     navInfo: !type:ShuttleNavHitscanInfo
       enabled: true
 

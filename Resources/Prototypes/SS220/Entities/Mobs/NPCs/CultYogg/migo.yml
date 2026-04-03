@@ -20,7 +20,6 @@
       - CultYoggBuilding
       - CultYoggBuildingFrame
   - type: Body
-    prototype: MiGoBody
   - type: Hands
     hands:
       body_part_slot_far right hand:

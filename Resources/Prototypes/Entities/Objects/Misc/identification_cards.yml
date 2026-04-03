@@ -1699,15 +1699,18 @@
   suffix: Ninja
   components:
   - type: Sprite
+    sprite: Objects/Misc/id_cards.rsi
     layers:
     - state: ninja
     - state: stripe_top
       color: "#38D848"
     - state: stripe_bottom
       color: "#309000"
-    - sprite: *icon-rsi
-      offset: *icon-offset
-      state: Ninja
+# ss220 remove sprite layer start
+#    - sprite: icon-rsi
+#      offset: icon-offset
+#      state: Ninja
+# ss220 remove sprite layer end
   - type: Item
     heldPrefix: green
   - type: AgentIDCard
@@ -1725,9 +1728,11 @@
   - type: Sprite
     layers:
     - state: pirate
-    - sprite: *icon-rsi
-      offset: *icon-offset
-      state: Pirate
+# ss220 remove sprite layer start
+#    - sprite: icon-rsi
+#      offset: icon-offset
+#      state: Pirate
+# ss220 remove sprite layer end
   - type: Item
     heldPrefix: orange #this is close enough to the weird puce color pirate IDs have going on
   - type: IdCard

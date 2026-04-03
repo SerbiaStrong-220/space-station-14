@@ -12,12 +12,12 @@
     offset: 0, 0
     layers:
     - state: base
-      map: ["enum.StorageVisualLayers.Base"]
+      map: [ "enum.StorageVisualLayers.Base" ]
     - state: closed
-      map: ["enum.StorageVisualLayers.Door"]
+      map: [ "enum.StorageVisualLayers.Door" ]
     - state: paper
       sprite: Structures/Storage/Crates/labels.rsi
-      map: ["enum.PaperLabelVisuals.Layer"]
+      map: [ "enum.PaperLabelVisuals.Layer" ]
       offset: "-0.350, 0.230"
   - type: Construction
     graph: TrashCan
@@ -46,9 +46,10 @@
   id: TrashCanFilled
   suffix: Заполненный
   components:
-    - type: StorageFill
-      contents:
-          # Creatures
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
         - id: MobCockroach
           prob: 0.05
         - id: MobMothroach

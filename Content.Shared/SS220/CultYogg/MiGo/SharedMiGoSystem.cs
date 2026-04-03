@@ -86,18 +86,19 @@ public abstract class SharedMiGoSystem : EntitySystem
             case "Erect":
                 _userInterfaceSystem.SetUiState(args.Entity, args.UiKey, new MiGoErectBuiState()
                 {
-                    Buildings = _proto.GetInstances<CultYoggBuildingPrototype>().Values.ToList(),
+                    Buildings = _proto.GetInstances<CultYoggBuildingPrototype>()
+                        .Values.Select(proto => (ProtoId<CultYoggBuildingPrototype>) proto)
+                        .ToList(),
                 });
                 break;
 
             case "Plant":
                 _userInterfaceSystem.SetUiState(args.Entity, args.UiKey, new MiGoPlantBuiState()
                 {
-                    Seeds = _proto.GetInstances<CultYoggSeedsPrototype>().Values.ToList(),
+                    Seeds = _proto.GetInstances<CultYoggSeedsPrototype>()
+                        .Values.Select(proto => (ProtoId<CultYoggSeedsPrototype>) proto)
+                        .ToList(),
                 });
-                break;
-
-            default:
                 break;
         }
     }

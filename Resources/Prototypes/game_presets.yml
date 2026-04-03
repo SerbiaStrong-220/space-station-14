@@ -255,22 +255,6 @@
   - EmergencyShuttleAutoVote # SS220-evac-vote
 
 - type: gamePreset
-  id: Xenoborgs
-  alias:
-    - xenoborgs
-  name: xenoborgs-title
-  description: xenoborgs-description
-  showInVote: false
-  rules:
-  - Xenoborgs
-  - DummyNonAntagChance
-  - SubGamemodesRuleNoWizardNoXenoborg # no two motherships
-  - BasicStationEventScheduler
-  - MeteorSwarmScheduler
-  - SpaceTrafficControlEventScheduler
-  - BasicRoundstartVariation
-
-- type: gamePreset
   id: Zombie
   alias:
   - zombie

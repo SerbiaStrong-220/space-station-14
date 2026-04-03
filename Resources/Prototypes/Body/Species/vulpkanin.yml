@@ -171,8 +171,11 @@
     animation: WeaponArcClaw
     damage:
       types:
-        Piercing: 2
-        Slash: 3
+        #SS220-port-vulpkanins-begin
+        # Piercing: 2
+        # Slash: 3
+        Slash: 5.5
+        #SS220-port-vulpkanins-end
   - type: Temperature
     specificHeat: 44
   - type: TemperatureDamage
@@ -185,7 +188,8 @@
       types:
         Heat: 2.5 # Per second, scales with temperature & other constants
   - type: Wagging
-    action: ActionToggleWaggingVulpkanin
+    # action: ActionToggleWaggingVulpkanin # SS220-smtng-happend-here
+    action: ActionToggleWaggingVulp # SS220-smtng-happend-here
   - type: TemperatureProtection
     heatingCoefficient: 1.2
     coolingCoefficient: 0.3
@@ -204,6 +208,14 @@
       reagents:
       - ReagentId: SulfurBlood
         Quantity: 300
+  # SS220-port-vulpkanins-begin
+  - type: VulpkaninAccent
+  - type: Language
+    selectedLanguage: Galactic
+    availableLanguages:
+    - id: Galactic
+    - id: Canilunzt
+  # SS220-port-vulpkanins-end
 
 - type: entity
   parent: OrganBase
@@ -232,7 +244,7 @@
   components:
   - type: VisualOrgan
     data:
-      sprite: Mobs/Species/Vulpkanin/parts.rsi
+      sprite: SS220/Mobs/Species/Vulpkanin/parts.rsi # SS220 Vulplkanin sprites
   - type: VisualOrganMarkings
     markingData:
       group: Vulpkanin
@@ -243,14 +255,14 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: Mobs/Species/Vulpkanin/parts.rsi
+    sprite: SS220/Mobs/Species/Vulpkanin/parts.rsi # SS220 Vulplkanin sprites
 
 - type: entity
   parent: [ OrganBaseTorsoSexed, OrganBaseTorso, OrganVulpkaninExternal ]
   id: OrganVulpkaninTorso
 
 - type: entity
-  parent: [ OrganBaseHead, OrganVulpkaninExternal ]
+  parent: [ OrganBaseHeadSexed, OrganBaseHead, OrganVulpkaninExternal ] # SS220 Vulplkanin sprites
   id: OrganVulpkaninHead
   components:
   - type: VisualOrganMarkings
@@ -301,37 +313,43 @@
   id: OrganVulpkaninBrain
 
 - type: entity
-  parent: [ OrganVulpkaninVisual, OrganBaseEyes, OrganVulpkaninInternal ]
+  parent: [ OrganVulpkaninVisual, OrganSpriteHumanInternal, OrganBaseEyes, OrganVulpkaninInternal ] # SS220 Vulplkanin sprites
   id: OrganVulpkaninEyes
+  # SS220 Vulplkanin sprites start
+  components:
+  - type: VisualOrgan
+    data:
+      sprite: Mobs/Customization/eyes.rsi
+  # SS220 Vulplkanin sprites end
 
 - type: entity
-  parent: [ OrganBaseTongue, OrganVulpkaninInternal ]
+  parent: [ OrganBaseTongue, OrganSpriteHumanInternal, OrganVulpkaninInternal ] # SS220 Vulplkanin sprites
   id: OrganVulpkaninTongue
 
 - type: entity
-  parent: [ OrganBaseAppendix, OrganVulpkaninInternal ]
+  parent: [ OrganBaseAppendix, OrganSpriteHumanInternal, OrganVulpkaninInternal ] # SS220 Vulplkanin sprites
   id: OrganVulpkaninAppendix
 
 - type: entity
-  parent: [ OrganBaseEars, OrganVulpkaninInternal ]
+  parent: [ OrganBaseEars, OrganSpriteHumanInternal, OrganVulpkaninInternal ] # SS220 Vulplkanin sprites
   id: OrganVulpkaninEars
 
 - type: entity
-  parent: [ OrganBaseLungs, OrganVulpkaninInternal, OrganVulpkaninMetabolizer ]
+  parent: [ OrganBaseLungs, OrganSpriteHumanInternal, OrganVulpkaninInternal, OrganVulpkaninMetabolizer ] # SS220 Vulplkanin sprites
   id: OrganVulpkaninLungs
 
 - type: entity
-  parent: [ OrganBaseHeart, OrganVulpkaninInternal, OrganVulpkaninMetabolizer ]
+  parent: [ OrganBaseHeart, OrganSpriteHumanInternal, OrganVulpkaninInternal, OrganVulpkaninMetabolizer ] # SS220 Vulplkanin sprites
   id: OrganVulpkaninHeart
 
 - type: entity
-  parent: [ OrganBaseStomach, OrganVulpkaninInternal, OrganVulpkaninMetabolizer ]
+  parent: [ OrganBaseStomach, OrganSpriteHumanInternal, OrganVulpkaninInternal, OrganVulpkaninMetabolizer ] # SS220 Vulplkanin sprites
   id: OrganVulpkaninStomach
 
 - type: entity
-  parent: [ OrganBaseLiver, OrganVulpkaninInternal, OrganVulpkaninMetabolizer ]
+  parent: [ OrganBaseLiver, OrganSpriteHumanInternal, OrganVulpkaninInternal, OrganVulpkaninMetabolizer ] # SS220 Vulplkanin sprites
   id: OrganVulpkaninLiver
 
 - type: entity
-  parent: [ OrganBaseKidneys, OrganVulpkaninInternal, OrganVulpkaninMetabolizer ]
+  parent: [ OrganBaseKidneys, OrganSpriteHumanInternal, OrganVulpkaninInternal, OrganVulpkaninMetabolizer ] # SS220 Vulplkanin sprites
   id: OrganVulpkaninKidneys

@@ -123,18 +123,15 @@ public sealed class SpeciesBanCommand : LocalizedCommands
             return;
         }
 
-        // TODO UPSTREAM
-        // _ban.CreateSpeciesBan(located.UserId,
-        //     located.Username,
-        //     shell.Player?.UserId,
-        //     null,
-        //     located.LastHWId,
-        //     speciesId,
-        //     minutes,
-        //     severity,
-        //     reason,
-        //     DateTimeOffset.UtcNow,
-        //     postBanInfo);
+        var speciesBanInfo = new CreateSpeciesBanInfo(reason);
+        speciesBanInfo.WithBanningAdmin(shell.Player?.UserId);
+        speciesBanInfo.WithMinutes(minutes);
+        speciesBanInfo.WithPostBanInfo(postBanInfo);
+        speciesBanInfo.WithSeverity(severity);
+        speciesBanInfo.AddUser(located.UserId, located.Username);
+        speciesBanInfo.AddSpecie(speciesId);
+
+        _ban.CreateSpeciesBan(speciesBanInfo);
     }
 
     public override CompletionResult GetCompletion(IConsoleShell shell, string[] args)

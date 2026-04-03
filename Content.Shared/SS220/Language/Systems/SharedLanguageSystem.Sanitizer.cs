@@ -334,6 +334,7 @@ public sealed partial class LanguageNode
     }
     private ProtoId<LanguagePrototype> _languageId;
 
+    [NonSerialized]
     public LanguagePrototype Language;
 
     [DataField]

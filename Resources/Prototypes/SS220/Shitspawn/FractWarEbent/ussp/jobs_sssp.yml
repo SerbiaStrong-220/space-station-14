@@ -8,24 +8,26 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: AccessReader
-    access: []
-  - type: StorageFill
-    contents:
-    - id: ClothingNeckUSSPPin
-    - id: ClothingUniformJumpskirtColorRed
-    - id: ClothingUniformJumpskirtColorBlack
-    - id: ClothingShoesUSSPBlack
-    - id: ClothingUniformJumpsuitUSSPBlack
-    - id: ClothingUniformJumpsuitColorBlack
-    - id: ClothingHeadHatCapUSSPBlack
-    - id: CigPackRed
-    - id: ClothingUniformJumpsuitUssp
-    - id: ClothingOuterCoatUssp
-    - id: ClothingNeckSSSPMedal
-      amount: 6
-    - id: EnergyAxe
-    - id: JobIconChangerUSSP
-    - id: Binoculars
+    access: [ ]
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: ClothingNeckUSSPPin
+        - id: ClothingUniformJumpskirtColorRed
+        - id: ClothingUniformJumpskirtColorBlack
+        - id: ClothingShoesUSSPBlack
+        - id: ClothingUniformJumpsuitUSSPBlack
+        - id: ClothingUniformJumpsuitColorBlack
+        - id: ClothingHeadHatCapUSSPBlack
+        - id: CigPackRed
+        - id: ClothingUniformJumpsuitUssp
+        - id: ClothingOuterCoatUssp
+        - id: ClothingNeckSSSPMedal
+          amount: 6
+        - id: EnergyAxe
+        - id: JobIconChangerUSSP
+        - id: Binoculars
 
 - type: startingGear
   id: EbentUSSPLeaderGear
@@ -48,30 +50,30 @@
   name: 1Спавнер Маршала СССП
   suffix: Shitspawn, Ebent, FractWar
   components:
-    - type: Sprite
-      sprite: Markers/jobs.rsi
-      state: ertleader
-    - type: RandomHumanoidSpawner
-      settings: EbentUSSPLeader
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    state: ertleader
+  - type: RandomHumanoidSpawner
+    settings: EbentUSSPLeader
 
 - type: randomHumanoidSettings
   id: EbentUSSPLeader
   randomizeName: true
   speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran ]
   components:
-    - type: Loadout
-      prototypes: [ EbentUSSPLeaderGear ]
-    - type: EventRole
-      roleGroupKey: USSPEbent
-      statusIcon: USSPMarshal
-    - type: NpcFactionMember
-      factions:
-      - EbentUssp
-    - type: DefibrillatorSkill
-      chanceWithMedSkill: 1
-    - type: LimitationRevive
-      reviveLimit: 3
-      beforeDamageDelay: 180
+  - type: Loadout
+    prototypes: [ EbentUSSPLeaderGear ]
+  - type: EventRole
+    roleGroupKey: USSPEbent
+    statusIcon: USSPMarshal
+  - type: NpcFactionMember
+    factions:
+    - EbentUssp
+  - type: DefibrillatorSkill
+    chanceWithMedSkill: 1
+  - type: LimitationRevive
+    reviveLimit: 3
+    beforeDamageDelay: 180
 
 - type: job
   id: USSPLeader
@@ -82,7 +84,7 @@
   setPreference: false
   canBeAntag: false
   accessGroups: [ UsspAllAccess ]
-  access: []
+  access: [ ]
 
 - type: playTimeTracker
   id: USSPLeader
@@ -95,29 +97,31 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: AccessReader
-    access: []
-  - type: StorageFill
-    contents:
-    - id: ClothingNeckUSSPPin
-    - id: ClothingUniformJumpskirtColorRed
-    - id: ClothingUniformJumpskirtColorBlack
-    - id: ClothingShoesUSSPBlack
-    - id: ClothingUniformJumpsuitUSSPBlack
-    - id: ClothingUniformJumpsuitColorBlack
-    - id: ClothingHeadHatCapUSSPBlack
-    - id: CigPackRed
-    - id: JawsOfLife
-    - id: ClothingHeadHatBeretEngineering
-    - id: ClothingOuterCoatUssp
-    - id: ClothingBeltChiefEngineerFilled
-    - id: ClothingUniformJumpsuitUssp
-    - id: JetpackVoidFilled
-    - id: RCD
-    - id: RCDAmmo
-      amount: 4
-    - id: JobIconChangerUSSP
-    - id: ClothingEyesGlassesMeson
-    - id: Binoculars
+    access: [ ]
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: ClothingNeckUSSPPin
+        - id: ClothingUniformJumpskirtColorRed
+        - id: ClothingUniformJumpskirtColorBlack
+        - id: ClothingShoesUSSPBlack
+        - id: ClothingUniformJumpsuitUSSPBlack
+        - id: ClothingUniformJumpsuitColorBlack
+        - id: ClothingHeadHatCapUSSPBlack
+        - id: CigPackRed
+        - id: JawsOfLife
+        - id: ClothingHeadHatBeretEngineering
+        - id: ClothingOuterCoatUssp
+        - id: ClothingBeltChiefEngineerFilled
+        - id: ClothingUniformJumpsuitUssp
+        - id: JetpackVoidFilled
+        - id: RCD
+        - id: RCDAmmo
+          amount: 4
+        - id: JobIconChangerUSSP
+        - id: ClothingEyesGlassesMeson
+        - id: Binoculars
 
 - type: startingGear
   id: EbentUSSPEngineerGear
@@ -141,30 +145,30 @@
   name: 2Спавнер заслуженного инженера СССП
   suffix: Shitspawn, Ebent, FractWar
   components:
-    - type: Sprite
-      sprite: Markers/jobs.rsi
-      state: ertleader
-    - type: RandomHumanoidSpawner
-      settings: EbentUSSPEngineer
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    state: ertleader
+  - type: RandomHumanoidSpawner
+    settings: EbentUSSPEngineer
 
 - type: randomHumanoidSettings
   id: EbentUSSPEngineer
   randomizeName: true
   speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran ]
   components:
-    - type: Loadout
-      prototypes: [ EbentUSSPEngineerGear ]
-    - type: EventRole
-      roleGroupKey: USSPEbent
-      statusIcon: USSPEngineerOfficer
-    - type: NpcFactionMember
-      factions:
-      - EbentUssp
-    - type: DefibrillatorSkill
-      chanceWithMedSkill: 1
-    - type: LimitationRevive
-      reviveLimit: 3
-      beforeDamageDelay: 180
+  - type: Loadout
+    prototypes: [ EbentUSSPEngineerGear ]
+  - type: EventRole
+    roleGroupKey: USSPEbent
+    statusIcon: USSPEngineerOfficer
+  - type: NpcFactionMember
+    factions:
+    - EbentUssp
+  - type: DefibrillatorSkill
+    chanceWithMedSkill: 1
+  - type: LimitationRevive
+    reviveLimit: 3
+    beforeDamageDelay: 180
 
 - type: job
   id: USSPEngineer
@@ -175,7 +179,7 @@
   setPreference: false
   canBeAntag: false
   accessGroups: [ UsspAllAccess ]
-  access: []
+  access: [ ]
 
 - type: playTimeTracker
   id: USSPEngineer
@@ -188,26 +192,28 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: AccessReader
-    access: []
-  - type: StorageFill
-    contents:
-    - id: ClothingNeckUSSPPin
-    - id: ClothingUniformJumpskirtColorRed
-    - id: ClothingUniformJumpskirtColorBlack
-    - id: ClothingShoesUSSPBlack
-    - id: ClothingUniformJumpsuitUSSPBlack
-    - id: ClothingUniformJumpsuitColorBlack
-    - id: ClothingHeadHatCapUSSPBlack
-    - id: CigPackRed
-    - id: UsspHypo
-    - id: EmergencyRollerBedSpawnFolded
-      amount: 2
-    - id: BoxBeaker
-      amount: 2
-    - id: ClothingUniformJumpsuitUssp
-    - id: ClothingOuterCoatUssp
-    - id: ClothingEyesHudMedSec
-    - id: DefibrillatorCompact
+    access: [ ]
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: ClothingNeckUSSPPin
+        - id: ClothingUniformJumpskirtColorRed
+        - id: ClothingUniformJumpskirtColorBlack
+        - id: ClothingShoesUSSPBlack
+        - id: ClothingUniformJumpsuitUSSPBlack
+        - id: ClothingUniformJumpsuitColorBlack
+        - id: ClothingHeadHatCapUSSPBlack
+        - id: CigPackRed
+        - id: UsspHypo
+        - id: EmergencyRollerBedSpawnFolded
+          amount: 2
+        - id: BoxBeaker
+          amount: 2
+        - id: ClothingUniformJumpsuitUssp
+        - id: ClothingOuterCoatUssp
+        - id: ClothingEyesHudMedSec
+        - id: DefibrillatorCompact
 
 - type: startingGear
   id: EbentUSSPCorpsmanGear
@@ -230,34 +236,34 @@
   name: 5Спавнер полевого медика СССП
   suffix: Shitspawn, Ebent, FractWar
   components:
-    - type: Sprite
-      sprite: Markers/jobs.rsi
-      state: ertleader
-    - type: RandomHumanoidSpawner
-      settings: EbentUSSPCorpsman
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    state: ertleader
+  - type: RandomHumanoidSpawner
+    settings: EbentUSSPCorpsman
 
 - type: randomHumanoidSettings
   id: EbentUSSPCorpsman
   randomizeName: true
   speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran ]
   components:
-    - type: Loadout
-      prototypes: [ EbentUSSPCorpsmanGear ]
-    - type: GhostRole
-      makeSentient: true
-      name: Полевой медик СССП
-    - type: GhostTakeoverAvailable
-    - type: EventRole
-      roleGroupKey: USSPEbent
-      statusIcon: USSPMedic
-    - type: NpcFactionMember
-      factions:
-      - EbentUssp
-    - type: DefibrillatorSkill
-      chanceWithMedSkill: 1
-    - type: LimitationRevive
-      reviveLimit: 3
-      beforeDamageDelay: 180
+  - type: Loadout
+    prototypes: [ EbentUSSPCorpsmanGear ]
+  - type: GhostRole
+    makeSentient: true
+    name: Полевой медик СССП
+  - type: GhostTakeoverAvailable
+  - type: EventRole
+    roleGroupKey: USSPEbent
+    statusIcon: USSPMedic
+  - type: NpcFactionMember
+    factions:
+    - EbentUssp
+  - type: DefibrillatorSkill
+    chanceWithMedSkill: 1
+  - type: LimitationRevive
+    reviveLimit: 3
+    beforeDamageDelay: 180
 
 - type: job
   id: USSPCorpsman
@@ -268,7 +274,7 @@
   setPreference: false
   canBeAntag: false
   accessGroups: [ UsspAllAccess ]
-  access: []
+  access: [ ]
 
 - type: playTimeTracker
   id: USSPCorpsman
@@ -281,28 +287,30 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: AccessReader
-    access: []
-  - type: StorageFill
-    contents:
-    - id: ClothingNeckUSSPPin
-    - id: ClothingUniformJumpskirtColorRed
-    - id: ClothingUniformJumpskirtColorBlack
-    - id: ClothingShoesUSSPBlack
-    - id: ClothingUniformJumpsuitUSSPBlack
-    - id: ClothingUniformJumpsuitColorBlack
-    - id: ClothingHeadHatCapUSSPBlack
-    - id: CigPackRed
-    - id: UsspHypo
-    - id: EmergencyRollerBedSpawnFolded
-      amount: 2
-    - id: BoxBeaker
-      amount: 2
-    - id: ClothingUniformJumpsuitUssp
-    - id: ClothingOuterCoatUssp
-    - id: ClothingEyesHudMedSec
-    - id: JobIconChangerUSSP
-    - id: DefibrillatorCompact
-    - id: Binoculars
+    access: [ ]
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: ClothingNeckUSSPPin
+        - id: ClothingUniformJumpskirtColorRed
+        - id: ClothingUniformJumpskirtColorBlack
+        - id: ClothingShoesUSSPBlack
+        - id: ClothingUniformJumpsuitUSSPBlack
+        - id: ClothingUniformJumpsuitColorBlack
+        - id: ClothingHeadHatCapUSSPBlack
+        - id: CigPackRed
+        - id: UsspHypo
+        - id: EmergencyRollerBedSpawnFolded
+          amount: 2
+        - id: BoxBeaker
+          amount: 2
+        - id: ClothingUniformJumpsuitUssp
+        - id: ClothingOuterCoatUssp
+        - id: ClothingEyesHudMedSec
+        - id: JobIconChangerUSSP
+        - id: DefibrillatorCompact
+        - id: Binoculars
 
 - type: startingGear
   id: EbentUSSPCMOGear
@@ -326,30 +334,30 @@
   name: 3Спавнер народного врача СССП
   suffix: Shitspawn, Ebent, FractWar
   components:
-    - type: Sprite
-      sprite: Markers/jobs.rsi
-      state: ertleader
-    - type: RandomHumanoidSpawner
-      settings: EbentUSSPCMO
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    state: ertleader
+  - type: RandomHumanoidSpawner
+    settings: EbentUSSPCMO
 
 - type: randomHumanoidSettings
   id: EbentUSSPCMO
   randomizeName: true
   speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran ]
   components:
-    - type: Loadout
-      prototypes: [ EbentUSSPCMOGear ]
-    - type: EventRole
-      roleGroupKey: USSPEbent
-      statusIcon: USSPMedicalOfficer
-    - type: NpcFactionMember
-      factions:
-      - EbentUssp
-    - type: DefibrillatorSkill
-      chanceWithMedSkill: 1
-    - type: LimitationRevive
-      reviveLimit: 3
-      beforeDamageDelay: 180
+  - type: Loadout
+    prototypes: [ EbentUSSPCMOGear ]
+  - type: EventRole
+    roleGroupKey: USSPEbent
+    statusIcon: USSPMedicalOfficer
+  - type: NpcFactionMember
+    factions:
+    - EbentUssp
+  - type: DefibrillatorSkill
+    chanceWithMedSkill: 1
+  - type: LimitationRevive
+    reviveLimit: 3
+    beforeDamageDelay: 180
 
 - type: job
   id: USSPCMO
@@ -360,7 +368,7 @@
   setPreference: false
   canBeAntag: false
   accessGroups: [ UsspAllAccess ]
-  access: []
+  access: [ ]
 
 - type: playTimeTracker
   id: USSPCMO
@@ -373,19 +381,21 @@
   suffix: Shitspawn, Ebent, FractWar
   components:
   - type: AccessReader
-    access: []
-  - type: StorageFill
-    contents:
-    - id: ClothingNeckUSSPPin
-    - id: ClothingUniformJumpskirtColorRed
-    - id: ClothingUniformJumpskirtColorBlack
-    - id: ClothingShoesUSSPBlack
-    - id: ClothingUniformJumpsuitUSSPBlack
-    - id: ClothingUniformJumpsuitColorBlack
-    - id: ClothingHeadHatCapUSSPBlack
-    - id: CigPackRed
-    - id: ClothingUniformJumpsuitUssp
-    - id: ClothingOuterCoatUssp
+    access: [ ]
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: ClothingNeckUSSPPin
+        - id: ClothingUniformJumpskirtColorRed
+        - id: ClothingUniformJumpskirtColorBlack
+        - id: ClothingShoesUSSPBlack
+        - id: ClothingUniformJumpsuitUSSPBlack
+        - id: ClothingUniformJumpsuitColorBlack
+        - id: ClothingHeadHatCapUSSPBlack
+        - id: CigPackRed
+        - id: ClothingUniformJumpsuitUssp
+        - id: ClothingOuterCoatUssp
 
 - type: startingGear
   id: EbentUSSPTrooperGear
@@ -408,34 +418,34 @@
   name: 4Спавнер красноармейца СССП
   suffix: Shitspawn, Ebent, FractWar
   components:
-    - type: Sprite
-      sprite: Markers/jobs.rsi
-      state: ertleader
-    - type: RandomHumanoidSpawner
-      settings: EbentUSSPTrooper
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    state: ertleader
+  - type: RandomHumanoidSpawner
+    settings: EbentUSSPTrooper
 
 - type: randomHumanoidSettings
   id: EbentUSSPTrooper
   randomizeName: true
   speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran ]
   components:
-    - type: Loadout
-      prototypes: [ EbentUSSPTrooperGear ]
-    - type: GhostRole
-      makeSentient: true
-      name: Красноармеец
-    - type: GhostTakeoverAvailable
-    - type: EventRole
-      roleGroupKey: USSPEbent
-      statusIcon: USSPCombatant
-    - type: NpcFactionMember
-      factions:
-      - EbentUssp
-    - type: DefibrillatorSkill
-      chanceWithMedSkill: 1
-    - type: LimitationRevive
-      reviveLimit: 3
-      beforeDamageDelay: 180
+  - type: Loadout
+    prototypes: [ EbentUSSPTrooperGear ]
+  - type: GhostRole
+    makeSentient: true
+    name: Красноармеец
+  - type: GhostTakeoverAvailable
+  - type: EventRole
+    roleGroupKey: USSPEbent
+    statusIcon: USSPCombatant
+  - type: NpcFactionMember
+    factions:
+    - EbentUssp
+  - type: DefibrillatorSkill
+    chanceWithMedSkill: 1
+  - type: LimitationRevive
+    reviveLimit: 3
+    beforeDamageDelay: 180
 
 - type: job
   id: USSPFighter
@@ -446,7 +456,7 @@
   setPreference: false
   canBeAntag: false
   accessGroups: [ UsspAllAccess ]
-  access: []
+  access: [ ]
 
 - type: playTimeTracker
   id: USSPFighter

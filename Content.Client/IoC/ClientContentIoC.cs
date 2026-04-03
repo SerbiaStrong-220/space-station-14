@@ -25,6 +25,7 @@ using Content.Client.Voting;
 using Content.Shared.Administration.Logs;
 using Content.Client.Lobby;
 using Content.Client.Players.RateLimiting;
+using Content.Client.SS220.ChatBans;
 using Content.Shared.Administration.Managers;
 using Content.Client.SS220.Discord;
 using Content.Shared.Chat;
@@ -69,6 +70,7 @@ namespace Content.Client.IoC
             collection.Register<ContentReplayPlaybackManager>();
             collection.Register<ISharedPlaytimeManager, JobRequirementsManager>();
             collection.Register<SpeciesRequirementsManager>(); // SS220 Species bans
+            collection.Register<ChatRequirementsManager>(); // SS220 Chat bans
             collection.Register<MappingManager>();
             collection.Register<DebugMonitorManager>();
             collection.Register<PlayerRateLimitManager>();

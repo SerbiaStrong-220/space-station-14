@@ -5,7 +5,9 @@
   suffix: Stimkit, Filled
   parent: MedkitCombat
   components:
-  - type: StorageFill
-    contents:
-      - id: StimpackERT
-        amount: 6
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: StimpackERT
+          amount: 6

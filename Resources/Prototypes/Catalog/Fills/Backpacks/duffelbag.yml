@@ -191,18 +191,20 @@
   components:
   - type: Tag
     tags: [] # ignore "WhitelistChameleon" tag
-  - type: StorageFill
-    contents:
-      - id: ClothingOuterArmorBasic
-      - id: ClothingHeadHatCentcom
-      - id: ClothingEyesGlassesSunglasses
-      - id: ClothingUniformJumpsuitCentcomOfficial
-      - id: ClothingShoesBootsJack
-      - id: ClothingHandsGlovesColorBlack
-      - id: ClothingHeadsetAltCentComFake
-      - id: Paper
-      - id: Pen
-      - id: CentcomPDAFake
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingOuterArmorBasic
+        - id: ClothingHeadHatCentcom
+        - id: ClothingEyesGlassesSunglasses
+        - id: ClothingUniformJumpsuitCentcomOfficial
+        - id: ClothingShoesBootsJack
+        - id: ClothingHandsGlovesColorBlack
+        - id: ClothingHeadsetAltCentComFake
+        - id: Paper
+        - id: Pen
+        - id: CentcomPDAFake
 
 - type: entity
   parent: ClothingBackpackDuffelClown
@@ -405,12 +407,14 @@
   id: ClothingBackpackDuffelSyndicateOperative
   name: operative duffelbag
   components:
-  - type: StorageFill
-    contents:
-      - id: BoxSurvivalSyndicate
-      - id: WeaponPistolViper
-      - id: PinpointerSyndicateNuclear
-      - id: DeathAcidifierImplanter
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BoxSurvivalSyndicate
+        - id: WeaponPistolViper
+        - id: PinpointerSyndicateNuclear
+        - id: DeathAcidifierImplanter
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicateMedicalBundle
@@ -418,18 +422,20 @@
   name: operative medic duffelbag
   description: A large duffel bag for holding extra medical supplies.
   components:
-  - type: StorageFill
-    contents:
-      - id: SyndiHypo
-      - id: BoxSurvivalSyndicate
-      - id: SawAdvanced
-      - id: Cautery
-      - id: CombatKnife
-      - id: WeaponPistolViper
-      - id: PinpointerSyndicateNuclear
-      - id: HandheldHealthAnalyzer
-      - id: CombatMedipen
-      - id: DeathAcidifierImplanter
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: SyndiHypo
+        - id: BoxSurvivalSyndicate
+        - id: SawAdvanced
+        - id: Cautery
+        - id: CombatKnife
+        - id: WeaponPistolViper
+        - id: PinpointerSyndicateNuclear
+        - id: HandheldHealthAnalyzer
+        - id: CombatMedipen
+        - id: DeathAcidifierImplanter
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicateMedicalBundle

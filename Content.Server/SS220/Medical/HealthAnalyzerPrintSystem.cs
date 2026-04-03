@@ -169,7 +169,7 @@ public sealed class HealthAnalyzerPrintSystem : EntitySystem
 
         var hasReagents = false;
         if (TryComp<SolutionContainerManagerComponent>(target, out var solComp) &&
-            _solutionContainerSystem.TryGetSolution((target, solComp), BloodstreamComponent.DefaultMetabolitesSolutionName, out var solution))
+            _solutionContainerSystem.TryGetSolution((target, solComp), BloodstreamComponent.DefaultBloodSolutionName, out var solution))
         {
             foreach (var (reagent, valueReagent) in solution.Value.Comp.Solution.Contents)
             {

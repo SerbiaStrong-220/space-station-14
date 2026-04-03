@@ -54,21 +54,23 @@
     grid:
     - 0,0,6,4
 
- # Гамма ОБР
+# Гамма ОБР
 
 - type: entity
-  parent: [ ClothingBackpackERTLeader]
+  parent: [ ClothingBackpackERTLeader ]
   id: ClothingBackpackERTLeaderGammaFilled
   name: ERT leader backpack
   description: A spacious backpack with lots of pockets, worn by the Commander of an Emergency Response Team.
   suffix: Filled
   components:
-    - type: StorageFill
-      contents:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
         - id: BoxSurvivalCentcom
         - id: MedkitCombatFilled
         - id: MagazinePistolSubMachineGunAcp
-        - id: MagazinePistolSubMachineGunAcp
+          amount: 2
         - id: CrowbarRed
         - id: DoorRemoteAll
         - id: PinpointerCrew
@@ -78,24 +80,23 @@
         - id: WeaponPulsePistol
         - id: StimpackERT
         - id: LaserCarabinePowerCell
-        - id: LaserCarabinePowerCell
-        - id: LaserCarabinePowerCell
-        - id: LaserCarabinePowerCell
+          amount: 4
 
 - type: entity
-  parent: [ ClothingBackpackERTSecurity]
+  parent: [ ClothingBackpackERTSecurity ]
   id: ClothingBackpackERTSecurityGammaFilled
   name: ERT security backpack
   description: A spacious backpack with lots of pockets, worn by Security Officers of an Emergency Response Team.
   suffix: Filled
   components:
-    - type: StorageFill
-      contents:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
         - id: BoxSurvivalCentcom
         - id: MedkitCombatFilled
         - id: MagazinePistolSubMachineGunAcp
-        - id: MagazinePistolSubMachineGunAcp
-        - id: MagazinePistolSubMachineGunAcp
+          amount: 3
         - id: CrowbarRed
         - id: ClothingMaskGasERT
         - id: C4
@@ -103,34 +104,33 @@
         - id: WeaponPulsePistol
         - id: StimpackERT
         - id: LaserCarabinePowerCell
-        - id: LaserCarabinePowerCell
-        - id: LaserCarabinePowerCell
-        - id: LaserCarabinePowerCell
+          amount: 4
 
 - type: entity
-  parent: [ ClothingBackpackERTMedical]
+  parent: [ ClothingBackpackERTMedical ]
   id: ClothingBackpackERTMedicalGammaFilled
   name: ERT medical backpack
   description: A spacious backpack with lots of pockets, worn by Medical Officers of an Emergency Response Team.
   suffix: Filled
   components:
-    - type: StorageFill
-      contents:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
         - id: BoxSurvivalCentcom
         - id: BoxBodyBag
         - id: MedicatedSuture
-        - id: MedicatedSuture
+          amount: 2
         - id: StimkitCombatFilled
         - id: RegenerativeMesh
-        - id: RegenerativeMesh
+          amount: 2
         - id: CrowbarRed
         - id: ClothingMaskGasERT
         - id: PinpointerCrew
         - id: DefibrillatorCompact
         - id: MagazinePistolSubMachineGunAcp
-        - id: MagazinePistolSubMachineGunAcp
+          amount: 2
         - id: Hypospray
         - id: LaserCarabinePowerCell
-        - id: LaserCarabinePowerCell
-        - id: LaserCarabinePowerCell
+          amount: 3
         - id: StimpackERT

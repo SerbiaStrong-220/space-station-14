@@ -34,16 +34,18 @@
     capacity: 1
     count: 1
 
-- type: entity
-  parent: [WeaponEnergyCrossbowBase, BaseSyndicateContraband]
-  id: WeaponEnergyCrossbow
-  name: mini energy crossbow
-  description: Launches renewable toxic arrows capable of flooring targets instantly.
-  components:
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Basic/energy_crossbow.rsi
-    state: icon
-  - type: Item
-    sprite: Objects/Weapons/Guns/Basic/energy_crossbow.rsi
-  - type: StaticPrice
-    price: 2500
+# SS220 tweak ss220 crossbow start
+#- type: entity
+#  parent: [WeaponEnergyCrossbowBase, BaseSyndicateContraband]
+#  id: WeaponEnergyCrossbow
+#  name: mini energy crossbow
+#  description: Launches renewable toxic arrows capable of flooring targets instantly.
+#  components:
+#  - type: Sprite
+#    sprite: Objects/Weapons/Guns/Basic/energy_crossbow.rsi
+#    state: icon
+#  - type: Item
+#    sprite: Objects/Weapons/Guns/Basic/energy_crossbow.rsi
+#  - type: StaticPrice
+#    price: 2500
+# SS220 tweak ss220 crossbow end

@@ -8,7 +8,7 @@
     damage:
       types:
         Heat: 13
-  - type: ShowNavInfoComponent
+  - type: ShowNavInfo
     navInfo: !type:ShuttleNavHitscanInfo
       enabled: true
       width: 0.6

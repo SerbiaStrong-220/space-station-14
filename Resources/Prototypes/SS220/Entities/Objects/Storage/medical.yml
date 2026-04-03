@@ -16,14 +16,16 @@
   name: syndicate surgical duffel bag with surgery
   description: A large duffel bag containing a full suite of surgical tools and mindslave fixer.
   components:
-  - type: StorageFill
-    contents:
-      - id: Hemostat
-      - id: SawElectric
-      - id: Cautery
-      - id: Retractor
-      - id: Scalpel
-      - id: ClothingHandsGlovesNitrile
-      - id: SurgeryDrapes
-      - id: MindslaveFixerCerebralImplant
-      - id: MindslaveFixSurgeryGuide
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: Hemostat
+        - id: SawElectric
+        - id: Cautery
+        - id: Retractor
+        - id: Scalpel
+        - id: ClothingHandsGlovesNitrile
+        - id: SurgeryDrapes
+        - id: MindslaveFixerCerebralImplant
+        - id: MindslaveFixSurgeryGuide

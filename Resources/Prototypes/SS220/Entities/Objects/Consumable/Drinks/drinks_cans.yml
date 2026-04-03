@@ -36,10 +36,12 @@
       tags:
       - Beer
     hideStackVisualsWhenClosed: false
-  - type: StorageFill
-    contents:
-      - id: DrinkBeerCan
-        amount: 6
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: DrinkBeerCan
+          amount: 6
   - type: ItemCounter
     count:
       tags: [Beer]

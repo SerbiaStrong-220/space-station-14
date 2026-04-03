@@ -38,7 +38,7 @@
         reagents:
         - ReagentId: GastroToxin
           Quantity: 1
-  - type: Food 
+  - type: Edible # ss220 edible cigars
   - type: FlavorProfile
     flavors:
       - punishment #SS220-Eat-Cigarettes-end
@@ -83,7 +83,7 @@
         reagents:
         - ReagentId: GastroToxin
           Quantity: 1
-  - type: Food 
+  - type: Edible # ss220 edible cigars
   - type: FlavorProfile
     flavors:
       - punishment #SS220-Eat-Cigarettes-end

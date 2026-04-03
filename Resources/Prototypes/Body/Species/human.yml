@@ -93,6 +93,13 @@
     spawned:
     - id: FoodMeatHuman
       amount: 5
+  # SS220-Add-Languages begin
+  - type: Language
+    selectedLanguage: Galactic
+    availableLanguages:
+    - id: Galactic
+    - id: SolCommon
+  # SS220-Add-Languages end
 
 - type: entity
   parent: OrganBase

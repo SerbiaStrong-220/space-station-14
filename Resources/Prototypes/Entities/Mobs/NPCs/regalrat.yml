@@ -228,7 +228,6 @@
       shader: unshaded
   - type: Bloodstream
     bloodMaxVolume: 40 #SS220 RatBlood fix
-  - type: Insulated #SS220 RatKing Tweaks and changes
   - type: SpriteMovement
     movementLayers:
       movement:

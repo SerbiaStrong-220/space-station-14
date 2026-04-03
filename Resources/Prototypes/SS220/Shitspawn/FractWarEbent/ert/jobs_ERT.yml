@@ -9,16 +9,18 @@
   components:
   - type: AccessReader
     access: [[ Command ]]
-  - type: StorageFill
-    contents:
-    - id: ClothingUniformJumpsuitColorBlack
-    - id: ClothingUniformJumpsuitColorRed
-    - id: ClothingUniformJumpsuitHoS
-    - id: ClothingUniformJumpsuitSeniorOfficer
-    - id: ClothingUniformJumpsuitSec
-    - id: ClothingUniformJumpsuitTacticool
-    - id: ClothingHeadHatBeretNavyBlue
-    - id: CigPackBlack
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: ClothingUniformJumpsuitColorBlack
+        - id: ClothingUniformJumpsuitColorRed
+        - id: ClothingUniformJumpsuitHoS
+        - id: ClothingUniformJumpsuitSeniorOfficer
+        - id: ClothingUniformJumpsuitSec
+        - id: ClothingUniformJumpsuitTacticool
+        - id: ClothingHeadHatBeretNavyBlue
+        - id: CigPackBlack
 
 - type: entity
   parent: LockerCaptain
@@ -29,30 +31,32 @@
   components:
   - type: AccessReader
     access: [[ Command ]]
-  - type: StorageFill
-    contents:
-    - id: ClothingHeadHatERTLeaderBeret
-    - id: ClothingNeckEarthPin
-    - id: ClothingHeadHatCaptain
-    - id: ClothingNeckMantleERTLeader
-    - id: ClothingShoesCentcomBlack
-    - id: ClothingNeckCloakNanotrasen
-    - id: ClothingNeckCloakCap
-    - id: ClothingNeckCloakCapFormal
-    - id: ClothingHeadCapCentcomBlack
-    - id: ClothingUniformJumpsuitCapFormal
-    - id: WeaponRevolverMatebaSouvenir
-    - id: ClothingUniformJumpsuitColorBlack
-    - id: ClothingUniformJumpsuitCentcomOfficerBlack
-    - id: ClothingNeckPolarIMedal
-      amount: 2
-    - id: ClothingNeckPolarIIMedal
-      amount: 3
-    - id: ClothingNeckPolarIIIMedal
-      amount: 4
-    - id: EnergySwordEbentDouble
-    - id: JobIconChangerNT
-    - id: Binoculars
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: ClothingHeadHatERTLeaderBeret
+        - id: ClothingNeckEarthPin
+        - id: ClothingHeadHatCaptain
+        - id: ClothingNeckMantleERTLeader
+        - id: ClothingShoesCentcomBlack
+        - id: ClothingNeckCloakNanotrasen
+        - id: ClothingNeckCloakCap
+        - id: ClothingNeckCloakCapFormal
+        - id: ClothingHeadCapCentcomBlack
+        - id: ClothingUniformJumpsuitCapFormal
+        - id: WeaponRevolverMatebaSouvenir
+        - id: ClothingUniformJumpsuitColorBlack
+        - id: ClothingUniformJumpsuitCentcomOfficerBlack
+        - id: ClothingNeckPolarIMedal
+          amount: 2
+        - id: ClothingNeckPolarIIMedal
+          amount: 3
+        - id: ClothingNeckPolarIIIMedal
+          amount: 4
+        - id: EnergySwordEbentDouble
+        - id: JobIconChangerNT
+        - id: Binoculars
 
 - type: entity
   parent: LockerChiefMedicalOfficer
@@ -63,24 +67,26 @@
   components:
   - type: AccessReader
     access: [[ Command ]]
-  - type: StorageFill
-    contents:
-    - id: ClothingHeadHatBeretCmo
-    - id: BoxBeaker
-      amount: 2
-    - id: Hypospray
-    - id: EmergencyRollerBedSpawnFolded
-      amount: 2
-    - id: ClothingNeckEarthPin
-    - id: ClothingOuterCoatLabCmo
-    - id: ClothingCloakCmo
-    - id: ClothingNeckCloakNanotrasen
-    - id: ClothingUniformJumpsuitColorBlack
-    - id: ClothingNeckMantleERTLeader
-    - id: ClothingEyesHudMedSec
-    - id: JobIconChangerNT
-    - id: DefibrillatorCompact
-    - id: Binoculars
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: ClothingHeadHatBeretCmo
+        - id: BoxBeaker
+          amount: 2
+        - id: Hypospray
+        - id: EmergencyRollerBedSpawnFolded
+          amount: 2
+        - id: ClothingNeckEarthPin
+        - id: ClothingOuterCoatLabCmo
+        - id: ClothingCloakCmo
+        - id: ClothingNeckCloakNanotrasen
+        - id: ClothingUniformJumpsuitColorBlack
+        - id: ClothingNeckMantleERTLeader
+        - id: ClothingEyesHudMedSec
+        - id: JobIconChangerNT
+        - id: DefibrillatorCompact
+        - id: Binoculars
 
 - type: entity
   parent: LockerEngineer
@@ -91,22 +97,24 @@
   components:
   - type: AccessReader
     access: [[ Command ]]
-  - type: StorageFill
-    contents:
-    - id: JetpackVoidFilled
-    - id: ClothingNeckMantleERTLeader
-    - id: ClothingEyesGlassesMeson
-    - id: ClothingNeckEarthPin
-    - id: ClothingNeckCloakCe
-    - id: ClothingNeckCloakNanotrasen
-    - id: ClothingBeltChiefEngineerFilled
-    - id: ClothingUniformJumpsuitColorBlack
-    - id: JawsOfLife
-    - id: RCD
-    - id: RCDAmmo
-      amount: 4
-    - id: JobIconChangerNT
-    - id: Binoculars
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: JetpackVoidFilled
+        - id: ClothingNeckMantleERTLeader
+        - id: ClothingEyesGlassesMeson
+        - id: ClothingNeckEarthPin
+        - id: ClothingNeckCloakCe
+        - id: ClothingNeckCloakNanotrasen
+        - id: ClothingBeltChiefEngineerFilled
+        - id: ClothingUniformJumpsuitColorBlack
+        - id: JawsOfLife
+        - id: RCD
+        - id: RCDAmmo
+          amount: 4
+        - id: JobIconChangerNT
+        - id: Binoculars
 
 - type: entity
   parent: LockerMedical
@@ -117,15 +125,17 @@
   components:
   - type: AccessReader
     access: [[ Command ]]
-  - type: StorageFill
-    contents:
-    - id: BoxBeaker
-      amount: 2
-    - id: Hypospray
-    - id: EmergencyRollerBedSpawnFolded
-      amount: 2
-    - id: ClothingEyesHudMedSec
-    - id: DefibrillatorCompact
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: BoxBeaker
+          amount: 2
+        - id: Hypospray
+        - id: EmergencyRollerBedSpawnFolded
+          amount: 2
+        - id: ClothingEyesHudMedSec
+        - id: DefibrillatorCompact
 
 #Leader
 - type: startingGear

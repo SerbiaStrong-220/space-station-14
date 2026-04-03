@@ -65,8 +65,8 @@
       weight: 4.0
     - id: XenoArtifactFaunaSpawn
       weight: 10.0
-    - id: XenoArtifactHostileFaunaSpawn
-      weight: 10.0
+#    - id: XenoArtifactHostileFaunaSpawn
+#      weight: 10.0
     - id: XenoArtifactCashSpawn
       weight: 10.0
     - id: XenoArtifactShatterWindows

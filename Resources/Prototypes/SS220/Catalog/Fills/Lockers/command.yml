@@ -5,19 +5,21 @@
   suffix: Filled
   parent: LockerBlueshield
   components:
-  - type: StorageFill
-    contents:
-    - id: WeaponDisabler
-    - id: MedkitAdvancedFilled
-    - id: ExpensiveLighterShield
-    - id: ClothingHeadHelmetTactical
-    - id: RubberStampBlueShield
-    - id: JetpackMiniBlueFilled
-    - id: ExpensiveLighterShield
-    - id: ClothingMaskGasBlueShield
-    - id: RubberStampBlueShield
-    - id: JetpackMiniBlueFilled
-    - id: PinpointerCrew
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: WeaponDisabler
+        - id: MedkitAdvancedFilled
+        - id: ExpensiveLighterShield
+        - id: ClothingHeadHelmetTactical
+        - id: RubberStampBlueShield
+        - id: JetpackMiniBlueFilled
+        - id: ExpensiveLighterShield
+        - id: ClothingMaskGasBlueShield
+        - id: RubberStampBlueShield
+        - id: JetpackMiniBlueFilled
+        - id: PinpointerCrew
 
 - type: entity
   parent: GunSafe
@@ -26,9 +28,11 @@
   components:
   - type: AccessReader
     access: [ [ "Blueshield" ] ]
-  - type: StorageFill
-    contents:
-    - id: WeaponEnergyGunRevolver
-    - id: WeaponBlasterKRS
-    - id: PowerCellBlaster
-      amount: 3
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: WeaponEnergyGunRevolver
+        - id: WeaponBlasterKRS
+        - id: PowerCellBlaster
+          amount: 3

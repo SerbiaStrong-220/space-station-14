@@ -36,7 +36,7 @@ public sealed partial class BatteryWeaponFireMode
     /// The projectile prototype associated with this firing mode
     /// </summary>
     [DataField("proto", required: true)]
-    public string Prototype = default!; //SS220 Add Multifaze gun
+    public EntProtoId Prototype; //SS220 Add Multifaze gun
 
     //SS220 Add Multifaze gun begin
     /// <summary>

@@ -1398,13 +1398,6 @@
   - SecStar
 
 - type: loadoutGroup
-  id: HeadofSecurityJobTrinkets
-  name: loadout-group-jobtrinkets
-  minLimit: 0
-  loadouts:
-  - SecStar
-
-- type: loadoutGroup
   id: WardenHead
   name: loadout-group-warden-head
   minLimit: 0

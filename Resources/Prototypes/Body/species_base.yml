@@ -150,6 +150,7 @@
       Female: FemaleHuman
       Unsexed: MaleHuman
   - type: Emoting
+    chatEmoteCooldown: 5.0 #ss220 emote 5 sec
   - type: BodyEmotes
     soundsId: GeneralBodyEmotes
   - type: Grammar
@@ -246,3 +247,4 @@
     alternateState: Standing
   - type: Surgable #SS220 Surgery
   - type: StunVisuals
+  - type: LimitationRevive #SS220 LimitationRevive

@@ -57,6 +57,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
     {
         _netManager.RegisterNetMessage<MsgRoleBans>();
         _netManager.RegisterNetMessage<MsgSpeciesBans>(); // SS220 Species bans
+        _netManager.RegisterNetMessage<MsgChatsBans>(); // SS220 Chat bans
 
         _db.SubscribeToJsonNotification<BanNotificationData>(
             _taskManager,

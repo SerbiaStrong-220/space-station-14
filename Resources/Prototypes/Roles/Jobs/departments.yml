@@ -184,7 +184,9 @@
   color: "#9FED58"
   weight: 10
   roles:
+  - Boxer
   #- Reporter #ss220 remove reporter from specific department
-#  - Psychologist SS220-psychologist-chat-color-fix
+  - Zookeeper
+  #  - Psychologist SS220-psychologist-chat-color-fix
   primary: false
   roundEndTitlesHidden: true # SS220 Round End Titles

@@ -49,9 +49,11 @@
   id: PillCanisterPsycho
   suffix: Пакс 10u 5, Хлоральгидрад 10u 5
   components:
-  - type: StorageFill
-    contents:
-    - id: PillCholarHydrate
-      amount: 5
-    - id: PillPax
-      amount: 5
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: PillCholarHydrate
+          amount: 5
+        - id: PillPax
+          amount: 5

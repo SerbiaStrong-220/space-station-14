@@ -181,12 +181,8 @@
   - type: Tag
     tags:
       - DoorRemoteWhitelist
+      - Window #ss220 windows dmg fix
       # This tag is used by door remotes to allow or not a door remote to normally be able to interact with a door
-  #ss220 windows dmg fix begin
-  - type: Tag
-    tags:
-      - Window
-  #ss220 windows dmg fix end
 
 - type: entity
   id: BaseSecureWindoor

@@ -5,9 +5,11 @@
   suffix: Фальшивый
   description: Коробка, содержащая инъектор голопаразита
   components:
-  - type: StorageFill
-    contents:
-      - id: ClothingHeadHatBizarreSoft
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingHeadHatBizarreSoft
   - type: Sprite
     layers:
       - state: box

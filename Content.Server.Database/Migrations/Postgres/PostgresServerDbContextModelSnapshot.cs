@@ -528,6 +528,10 @@ namespace Content.Server.Database.Migrations.Postgres
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("AdminNameInBanTime")
+                        .HasColumnType("text")
+                        .HasColumnName("admin_name_in_ban_time");
+
                     b.Property<bool>("AutoDelete")
                         .HasColumnType("boolean")
                         .HasColumnName("auto_delete");
@@ -572,6 +576,10 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Property<int>("Severity")
                         .HasColumnType("integer")
                         .HasColumnName("severity");
+
+                    b.Property<int>("StatedRound")
+                        .HasColumnType("integer")
+                        .HasColumnName("stated_round");
 
                     b.Property<byte>("Type")
                         .HasColumnType("smallint")
@@ -668,41 +676,6 @@ namespace Content.Server.Database.Migrations.Postgres
                         .IsUnique();
 
                     b.ToTable("ban_player", (string)null);
-                });
-
-            modelBuilder.Entity("Content.Server.Database.BanRole", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("ban_role_id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("BanId")
-                        .HasColumnType("integer")
-                        .HasColumnName("ban_id");
-
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("role_id");
-
-                    b.Property<string>("RoleType")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("role_type");
-
-                    b.HasKey("Id")
-                        .HasName("PK_ban_role");
-
-                    b.HasIndex("BanId")
-                        .HasDatabaseName("IX_ban_role_ban_id");
-
-                    b.HasIndex("RoleType", "RoleId", "BanId")
-                        .IsUnique();
-
-                    b.ToTable("ban_role", (string)null);
                 });
 
             modelBuilder.Entity("Content.Server.Database.BanRound", b =>
@@ -847,6 +820,38 @@ namespace Content.Server.Database.Migrations.Postgres
                         {
                             t.HasCheckConstraint("AddressNotIPv6MappedIPv4", "NOT inet '::ffff:0.0.0.0/96' >>= address");
                         });
+                });
+
+            modelBuilder.Entity("Content.Server.Database.IBanRole", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("iban_role_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BanId")
+                        .HasColumnType("integer")
+                        .HasColumnName("ban_id");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("character varying(13)")
+                        .HasColumnName("discriminator");
+
+                    b.HasKey("Id")
+                        .HasName("PK_iban_role");
+
+                    b.HasIndex("BanId")
+                        .HasDatabaseName("IX_iban_role_ban_id");
+
+                    b.ToTable("iban_role", (string)null);
+
+                    b.HasDiscriminator().HasValue("IBanRole");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Content.Server.Database.IPIntelCache", b =>
@@ -1128,6 +1133,10 @@ namespace Content.Server.Database.Migrations.Postgres
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("species");
+
+                    b.Property<bool>("TeleportAfkToCryoStorage")
+                        .HasColumnType("boolean")
+                        .HasColumnName("teleport_afk_to_cryo_storage");
 
                     b.Property<string>("Voice")
                         .IsRequired()
@@ -1464,6 +1473,56 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.ToTable("player_round", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.BanChat", b =>
+                {
+                    b.HasBaseType("Content.Server.Database.IBanRole");
+
+                    b.Property<string>("Chat")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("chat");
+
+                    b.HasIndex("Chat", "BanId")
+                        .IsUnique();
+
+                    b.HasDiscriminator().HasValue("BanChat");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.BanRole", b =>
+                {
+                    b.HasBaseType("Content.Server.Database.IBanRole");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("role_id");
+
+                    b.Property<string>("RoleType")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("role_type");
+
+                    b.HasIndex("RoleType", "RoleId", "BanId")
+                        .IsUnique();
+
+                    b.HasDiscriminator().HasValue("BanRole");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.BanSpecie", b =>
+                {
+                    b.HasBaseType("Content.Server.Database.IBanRole");
+
+                    b.Property<string>("SpecieId")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("specie_id");
+
+                    b.HasIndex("SpecieId", "BanId")
+                        .IsUnique();
+
+                    b.HasDiscriminator().HasValue("BanSpecie");
+                });
+
             modelBuilder.Entity("Content.Server.Database.Admin", b =>
                 {
                     b.HasOne("Content.Server.Database.AdminRank", "AdminRank")
@@ -1767,18 +1826,6 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("Ban");
                 });
 
-            modelBuilder.Entity("Content.Server.Database.BanRole", b =>
-                {
-                    b.HasOne("Content.Server.Database.Ban", "Ban")
-                        .WithMany("Roles")
-                        .HasForeignKey("BanId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_ban_role_ban_ban_id");
-
-                    b.Navigation("Ban");
-                });
-
             modelBuilder.Entity("Content.Server.Database.BanRound", b =>
                 {
                     b.HasOne("Content.Server.Database.Ban", "Ban")
@@ -1838,6 +1885,18 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("HWId");
 
                     b.Navigation("Server");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.IBanRole", b =>
+                {
+                    b.HasOne("Content.Server.Database.Ban", "Ban")
+                        .WithMany("Roles")
+                        .HasForeignKey("BanId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_iban_role_ban_ban_id");
+
+                    b.Navigation("Ban");
                 });
 
             modelBuilder.Entity("Content.Server.Database.Job", b =>

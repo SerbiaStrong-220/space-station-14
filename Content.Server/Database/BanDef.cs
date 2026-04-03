@@ -97,6 +97,9 @@ namespace Content.Server.Database
                         throw new ArgumentException("Role bans cannot have exempt flags", nameof(exemptFlags));
                     break;
 
+                case BanType.Species:
+                case BanType.Chat:
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type));
             }

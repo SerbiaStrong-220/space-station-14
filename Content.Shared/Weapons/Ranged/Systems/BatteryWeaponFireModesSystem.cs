@@ -131,8 +131,6 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
         Dirty(ent);
 
         //SS220 Add Multifaze gun begin
-        var name = string.Empty;
-
         //if (_prototypeManager.TryIndex<EntityPrototype>(fireMode.Prototype, out var prototype))
         //{
         //    if (TryComp<AppearanceComponent>(uid, out var appearance))
@@ -159,13 +157,13 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
         //    RaiseLocalEvent(uid, ref updateClientAmmoEvent);
         //}
 
-        if (_prototypeManager.TryIndex<EntityPrototype>(fireMode.Prototype, out var entProto))
+        if (_prototypeManager.TryIndex(fireMode.Prototype, out var entProto))
         {
             if (TryComp<AppearanceComponent>(ent, out var appearance))
-                _appearanceSystem.SetData(ent, BatteryWeaponFireModeVisuals.State, entProto, appearance);
+                _appearanceSystem.SetData(ent, BatteryWeaponFireModeVisuals.State, entProto.ID, appearance);
 
-            if (user != null)
-                _popupSystem.PopupClient(Loc.GetString("gun-set-fire-mode-popup", ("mode", entProto.Name)), ent, user.Value);
+            if (user != null && fireMode.FireModeName != null)
+                _popupSystem.PopupClient(Loc.GetString("gun-set-fire-mode-popup", ("mode", Loc.GetString(fireMode.FireModeName))), ent, user.Value);
         }
 
         if (TryComp(ent, out BatteryAmmoProviderComponent? batteryAmmoProviderComponent))

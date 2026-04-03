@@ -1,7 +1,7 @@
 - type: entity
   id: LeadChemistryVial
   name: lead vial
-  parent: BaseChemistryEmptyVial
+  parent: ChemistryEmptyVial
   components:
     - type: SolutionContainerManager
       solutions:
@@ -16,7 +16,7 @@
 - type: entity
   id: UraniumChemistryVial
   name: uranium vial
-  parent: BaseChemistryEmptyVial
+  parent: ChemistryEmptyVial
   components:
     - type: SolutionContainerManager
       solutions:

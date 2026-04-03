@@ -655,8 +655,6 @@
       collection: VulpkaninWhines
     Crying:
       collection: VulpkaninWhines
-    Crying:
-      collection: VulpkaninWhines
     Howl:
       collection: VulpkaninHowls
     Weh:
@@ -675,10 +673,6 @@
   params:
     variation: 0.125
   sounds:
-  # SS220-port-vulpkanins-begin
-    Crying:
-      collection: FemaleCry
-  # SS220-port-vulpkanins-end
     Laugh:
       collection: FemaleLaugh
     Sneeze:
@@ -708,8 +702,6 @@
       collection: BarkVulpin
     # SS220-port-vulpkanins-end
     Whine:
-      collection: VulpkaninWhines
-    Crying:
       collection: VulpkaninWhines
     Crying:
       collection: VulpkaninWhines

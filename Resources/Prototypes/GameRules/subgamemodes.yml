@@ -46,6 +46,7 @@
   components:
   - type: GameRule
     minPlayers: 30 # SS 220 Wiz Req 30 players min
+    cancelPresetOnTooFewPlayers: false
   - type: AntagSelection
     agentName: wizard-round-end-name
     selectionTime: PrePlayerSpawn
@@ -74,8 +75,6 @@
         nameFormat: name-format-wizard
       mindRoles:
       - MindRoleWizard
-  - type: GameRule
-    cancelPresetOnTooFewPlayers: false
 
 - type: entity
   parent: BaseXenoborgsRule

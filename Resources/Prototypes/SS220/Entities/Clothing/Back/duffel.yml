@@ -15,14 +15,16 @@
   parent: ClothingBackpackDuffelCBURN
   suffix: Filled
   components:
-  - type: StorageFill
-    contents:
-    - id: BoxSurvivalCentcom #SS220 More_Centcomm_Prototypes
-    - id: WeaponShotgunDoubleBarreled
-    - id: BoxShotgunIncendiary
-      amount: 2
-    - id: GrenadeFlashBang
-      amount: 2
-    - id: PillAmbuzolPlus
-    - id: PillAmbuzol
-      amount: 4
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BoxSurvivalCentcom
+        - id: WeaponShotgunDoubleBarreled
+        - id: BoxShotgunIncendiary
+          amount: 2
+        - id: GrenadeFlashBang
+          amount: 2
+        - id: PillAmbuzolPlus
+        - id: PillAmbuzol
+          amount: 4

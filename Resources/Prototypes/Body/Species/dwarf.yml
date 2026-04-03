@@ -62,11 +62,29 @@
       Male: UnisexDwarf
       Female: FemaleDwarf
       Unsexed: UnisexDwarf
-  - type: ReplacementAccent
-    accent: scottish
+  # TODO UPSTREAM
+  - type: DwarfAccent #SS220 Dwarf accent
+  # - type: ReplacementAccent
+  #   accent: scottish
   - type: Speech
     speechSounds: Bass
-
+  #SS220-TweakDamageSpecies-Begin
+  - type: MeleeWeapon
+    soundHit:
+      collection: Punch
+    animation: WeaponArcFist
+    attackRate: 0.625
+    damage:
+      types:
+        Blunt: 8
+  #SS220-TweakDamageSpecies-End
+  # SS220-Add-Languages begin
+  - type: Language
+    selectedLanguage: Galactic
+    availableLanguages:
+    - id: Galactic
+    - id: Eldwarf
+  # SS220-Add-Languages end
 - type: entity
   parent: OrganBase
   id: OrganDwarf

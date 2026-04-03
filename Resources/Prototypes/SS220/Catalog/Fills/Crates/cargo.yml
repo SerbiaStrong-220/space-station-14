@@ -5,10 +5,12 @@
   description: More tickets means more chances to win! Become a millionaire today!
   suffix: 5 штук
   components:
-  - type: StorageFill
-    contents:
-    - id: LotteryCash
-      amount: 5
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: LotteryCash
+          amount: 5
 
 - type: entity
   id: CrateCargoLottery10
@@ -16,7 +18,9 @@
   name: large lottery ticket crate
   suffix: 10 штук
   components:
-  - type: StorageFill
-    contents:
-    - id: LotteryCash
-      amount: 10
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: LotteryCash
+          amount: 10

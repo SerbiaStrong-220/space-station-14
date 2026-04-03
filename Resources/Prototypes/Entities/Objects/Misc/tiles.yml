@@ -211,6 +211,7 @@
   name: dark steel continuous slat tile
   components:
   - type: Sprite
+    sprite: Objects/Tiles/tile.rsi
     state: dark-vertical-slats
   - type: FloorTile
     outputs:
@@ -225,6 +226,7 @@
   name: dark steel bordered vertical slat tile
   components:
   - type: Sprite
+    sprite: Objects/Tiles/tile.rsi
     state: dark-vertical-slats
   - type: FloorTile
     outputs:
@@ -239,6 +241,7 @@
   name: dark steel bordered horizontal slat tile
   components:
   - type: Sprite
+    sprite: Objects/Tiles/tile.rsi
     state: dark-horizontal-slats
   - type: FloorTile
     outputs:
@@ -333,6 +336,7 @@
   name: steel continuous slat tile
   components:
   - type: Sprite
+    sprite: Objects/Tiles/tile.rsi
     state: steel-vertical-slats
   - type: FloorTile
     outputs:
@@ -347,6 +351,7 @@
   name: steel vertical bordered slat tile
   components:
   - type: Sprite
+    sprite: Objects/Tiles/tile.rsi
     state: steel-vertical-slats
   - type: FloorTile
     outputs:
@@ -361,6 +366,7 @@
   name: steel horizontal bordered slat tile
   components:
   - type: Sprite
+    sprite: Objects/Tiles/tile.rsi
     state: steel-horizontal-slats
   - type: FloorTile
     outputs:
@@ -590,6 +596,7 @@
   name: white steel vertical bordered slat tile
   components:
   - type: Sprite
+    sprite: Objects/Tiles/tile.rsi
     state: white-vertical-slats
   - type: FloorTile
     outputs:
@@ -604,6 +611,7 @@
   name: white steel continuous slat tile
   components:
   - type: Sprite
+    sprite: Objects/Tiles/tile.rsi
     state: white-vertical-slats
   - type: FloorTile
     outputs:
@@ -618,6 +626,7 @@
   name: white steel horizontal bordered slat tile
   components:
   - type: Sprite
+    sprite: Objects/Tiles/tile.rsi
     state: white-horizontal-slats
   - type: FloorTile
     outputs:
