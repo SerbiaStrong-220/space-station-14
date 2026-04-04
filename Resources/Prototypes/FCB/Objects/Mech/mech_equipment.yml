@@ -1,0 +1,89 @@
+- type: entity
+  id: MechEquipmentBase
+  parent: BaseItem
+  abstract: true
+  components:
+  - type: Item
+    size: Ginormous
+  - type: AltMechEquipment
+
+- type: entity
+  id: ShoulderReinforcement
+  parent: MechEquipmentBase
+  name: mech shoulder reinforcement
+  description: "Set of steel planks, joints and servos that reinforce mech's 'spine' and 'shoulders', allowing to install heavier arms on it. \nSide effects are increase of structural integrity and mass"
+  components:
+  - type: Item
+    size: Ginormous
+  - type: Sprite
+    sprite: Objects/Specific/Mech/mecha_equipment.rsi
+    state: mecha_clamp
+  - type: AltMechEquipment
+    ownMass: 50
+  - type: MechEquipmentStatModifier
+    maximalArmMassDelta: 40
+    maxIntegrityDelta: 30
+
+- type: entity
+  id: FrameReinforcementMechMod
+  parent: MechEquipmentBase
+  name: mech frame reinforcement
+  description: "Additional steel reinforcement for the frame of the mech. Increases structural integrity but is also pretty heavy."
+  components:
+  - type: Item
+    size: Ginormous
+  - type: Sprite
+    sprite: Objects/Specific/Mech/mecha_equipment.rsi
+    state: mecha_clamp
+  - type: AltMechEquipment
+    ownMass: 30
+  - type: MechEquipmentStatModifier
+    maxIntegrityDelta: 60
+
+- type: entity
+  id: CompositeFrameMechMod
+  parent: MechEquipmentBase
+  name: mech composite frame
+  description: "Composite replacements for least stressed parts of the frame. They are lighter but less durable."
+  components:
+  - type: Item
+    size: Ginormous
+  - type: Sprite
+    sprite: Objects/Specific/Mech/mecha_equipment.rsi
+    state: mecha_clamp
+  - type: AltMechEquipment
+    ownMass: -30
+  - type: MechEquipmentStatModifier
+    maxIntegrityDelta: -60
+
+- type: entity
+  id: MagneticPadMechMod
+  parent: MechEquipmentBase
+  name: mech magpads
+  description: "Magpads for the mech's feet."
+  components:
+  - type: Item
+    size: Ginormous
+  - type: Actions
+  - type: ActionsContainer
+  - type: Sprite
+    sprite: Objects/Specific/Mech/mecha_equipment.rsi
+    state: mecha_clamp
+  - type: Magboots
+  - type: AltMechEquipment
+    ownMass: 10
+  - type: MechEquipmentAction
+    equipmentAbilityActionName: ActionToggleMagpads
+  - type: ItemToggle
+  - type: ToggleableMechEquipment
+
+- type: entity
+  parent: BaseAction
+  id: ActionToggleMagpads
+  name: Toggle Magpads
+  description: Toggles the magpads on and off.
+  components:
+  - type: Action
+    itemIconStyle: BigItem
+  - type: InstantAction
+    event: !type:ToggleActionEvent

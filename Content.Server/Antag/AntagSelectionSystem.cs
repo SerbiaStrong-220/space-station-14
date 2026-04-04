@@ -1,4 +1,4 @@
-using System.Linq;
+using Content.Server.Administration.Managers;
 using Content.Server.Administration.Managers;
 using Content.Server.Antag.Components;
 using Content.Server.Chat.Managers;
@@ -14,6 +14,9 @@ using Content.Server.Preferences.Managers;
 using Content.Server.Roles;
 using Content.Server.Roles.Jobs;
 using Content.Server.Shuttles.Components;
+using Content.Server.SS220.DefibrillatorSkill; //SS220 LimitationRevive
+using Content.Server.SS220.MindSlave;
+using Content.Shared.FCB.Mech.Components;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Antag;
 using Content.Shared.Clothing;
@@ -30,14 +33,13 @@ using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Enums;
-using Content.Server.Administration.Managers;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
-using Content.Server.SS220.MindSlave;
-using Content.Server.SS220.DefibrillatorSkill; //SS220 LimitationRevive
+using System.Linq;
+using Content.Server.FCB.Mech.Systems;//FCB mech rework
 
 namespace Content.Server.Antag;
 
@@ -58,6 +60,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly MindSlaveSystem _mindSlave = default!; // SS220 MindSlave
+    [Dependency] private readonly AltMechSystem _altmech = default!;//FCB mech rework
 
     // arbitrary random number to give late joining some mild interest.
     public const float LateJoinRandomChance = 0.5f;
@@ -396,7 +399,17 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
 
             // we shouldn't be blocking the entity if they're just a ghost or smth.
             if (!HasComp<GhostComponent>(session.AttachedEntity))
-                antagEnt = session.AttachedEntity;
+            //FCB mech rework begin
+            {
+                if (TryComp<AltMechComponent>(session.AttachedEntity, out var mechComp))
+                {
+                    if (mechComp.PilotSlot.ContainedEntity != null)
+                        antagEnt = (EntityUid)mechComp.PilotSlot.ContainedEntity;
+                }
+                else
+                    antagEnt = session.AttachedEntity;
+            }
+            //FCB mech rework end
         }
         else if (!ignoreSpawner && def.SpawnerPrototype != null) // don't add spawners if we have a player, dummy.
         {
@@ -482,7 +495,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
                 curMind = _mind.CreateMind(session.UserId, Name(antagEnt.Value));
                 _mind.SetUserId(curMind.Value, session.UserId);
             }
-
+            
             _mind.TransferTo(curMind.Value, antagEnt, ghostCheckOverride: true);
             _role.MindAddRoles(curMind.Value, def.MindRoles, null, true);
             ent.Comp.AssignedMinds.Add((curMind.Value, Name(player)));
@@ -494,6 +507,11 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
 
         var afterEv = new AfterAntagEntitySelectedEvent(session, player, ent, def);
         RaiseLocalEvent(ent, ref afterEv, true);
+
+        //FCB mech rework begin
+        if (TryComp<AltMechPilotComponent>(player, out var pilotComp) && TryComp<AltMechComponent>(pilotComp.Mech, out var playerMechComp))
+            _altmech.TransferMindIntoMech((pilotComp.Mech,playerMechComp));
+        //FCB mech rework end
     }
 
     /// <summary>

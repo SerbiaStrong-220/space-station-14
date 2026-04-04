@@ -1,0 +1,26 @@
+- type: entity
+  name: Industrial mining drill
+  parent: BaseItem
+  id: MechMiningDrill
+  description: Large and powerfull drill on a manipulator for use on mechs and other large-scale machines
+  components:
+  - type: Item
+    storedRotation: -90
+  - type: Tag
+    tags:
+    - Pickaxe
+  - type: Sprite
+    sprite: Objects/Specific/Mech/mecha_equipment.rsi
+    state: mecha_drill
+  - type: MeleeWeapon
+    autoAttack: true
+    angle: 0
+    wideAnimationRotation: -90
+    soundHit:
+      path: "/Audio/Items/drill_hit.ogg"
+    attackRate: 4
+    damage:
+      groups:
+        Brute: 25
+      types:
+        Structural: 70

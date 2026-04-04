@@ -5,6 +5,7 @@
   id: BaseAlertOrder
   order:
     - alertType: BloodPoints #SS220 Spider queen antag
+    - alertType: MechHealth #FCB mech rework
     - category: Health
     - category: Stamina
     - alertType: SuitPower

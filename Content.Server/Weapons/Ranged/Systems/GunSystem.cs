@@ -1,29 +1,31 @@
-using System.Linq;
-using System.Numerics;
 using Content.Server.Cargo.Systems;
+using Content.Server.SS220.Shuttles.UI;
 using Content.Server.Weapons.Ranged.Components;
 using Content.Shared.Cargo;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.Effects;
+using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.SS220.Weapons.Ranged.Events;
+using Content.Shared.FCB.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Weapons.Reflect;
-using Content.Shared.Damage.Components;
 using Robust.Shared.Audio;
+using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Physics;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-using Robust.Shared.Containers;
-using Content.Shared.SS220.Weapons.Ranged.Events;
-using Content.Server.SS220.Shuttles.UI;
+using System.Linq;
+using System.Numerics;
 
 namespace Content.Server.Weapons.Ranged.Systems;
 
@@ -35,6 +37,8 @@ public sealed partial class GunSystem : SharedGunSystem
     [Dependency] private readonly SharedStaminaSystem _stamina = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!; //FCB shield rework
+    [Dependency] private readonly RequireProjectileTargetSystem _requireTarget = default!; //FCB realistic weapons
     [Dependency] private readonly ShuttleNavInfoSystem _shuttleNavInfo = default!; // SS220 Add projectiles & hitscan on shuttle nav
 
     private const float DamagePitchVariation = 0.05f;
@@ -212,7 +216,7 @@ public sealed partial class GunSystem : SharedGunSystem
                                     foreach (var collide in rayCastResults)
                                     {
                                         if (collide.HitEntity != gun.Target &&
-                                            CompOrNull<RequireProjectileTargetComponent>(collide.HitEntity)?.Active == true)
+                                            TryComp<RequireProjectileTargetComponent>(collide.HitEntity, out var targetComp) && _requireTarget.PreventHitscan((collide.HitEntity, targetComp), gunUid)) // FCB realistic weapons
                                         {
                                             continue;
                                         }
@@ -242,15 +246,34 @@ public sealed partial class GunSystem : SharedGunSystem
 
                         if (lastHit != null)
                         {
+                            var dmg = hitscan.Damage; //FCB shield rework
                             var hitEntity = lastHit.Value;
-                            if (hitscan.StaminaDamage > 0f)
-                                _stamina.TakeStaminaDamage(hitEntity, hitscan.StaminaDamage, source: user);
 
-                            var dmg = hitscan.Damage;
+                            //FCB shield rework begin
+
+                            var blockEv = new HitscanBlockAttemptEvent(hitscan.Damage);
+                            RaiseLocalEvent(lastHit.Value, ref blockEv);
+
+                            if(blockEv.CancelledHit)
+                            {
+                                if(blockEv.hitColor != null)
+                                    _color.RaiseEffect((Color)blockEv.hitColor, new List<EntityUid>() { lastHit.Value }, Filter.Pvs(lastHit.Value, entityManager: EntityManager));
+
+                                if (dmg == null)
+                                    continue;
+                            }
+
+                            if(!blockEv.CancelledHit)
+                            {
+                                if (hitscan.StaminaDamage > 0f)
+                                    _stamina.TakeStaminaDamage(hitEntity, hitscan.StaminaDamage, source: user);
+
+                                if (dmg != null)
+                                    dmg = Damageable.TryChangeDamage(hitEntity, dmg * Damageable.UniversalHitscanDamageModifier, origin: user);
+                            }
+                            //FCB shield rework end
 
                             var hitName = ToPrettyString(hitEntity);
-                            if (dmg != null)
-                                dmg = Damageable.TryChangeDamage(hitEntity, dmg * Damageable.UniversalHitscanDamageModifier, origin: user);
 
                             // check null again, as TryChangeDamage returns modified damage values
                             if (dmg != null)
@@ -258,9 +281,7 @@ public sealed partial class GunSystem : SharedGunSystem
                                 if (!Deleted(hitEntity))
                                 {
                                     if (dmg.AnyPositive())
-                                    {
                                         _color.RaiseEffect(Color.Red, new List<EntityUid>() { hitEntity }, Filter.Pvs(hitEntity, entityManager: EntityManager));
-                                    }
 
                                     // TODO get fallback position for playing hit sound.
                                     PlayImpactSound(hitEntity, dmg, hitscan.Sound, hitscan.ForceSound);
@@ -271,6 +292,7 @@ public sealed partial class GunSystem : SharedGunSystem
                                     Logs.Add(LogType.HitScanHit,
                                         $"{ToPrettyString(user.Value):user} hit {hitName:target} using hitscan and dealt {dmg.GetTotal():damage} damage");
                                 }
+
                                 else
                                 {
                                     Logs.Add(LogType.HitScanHit,
@@ -303,8 +325,8 @@ public sealed partial class GunSystem : SharedGunSystem
                 var spreadEvent = new GunGetAmmoSpreadEvent(ammoSpreadComp.Spread);
                 RaiseLocalEvent(gunUid, ref spreadEvent);
 
-                var angles = LinearSpread(mapAngle - spreadEvent.Spread / 2,
-                    mapAngle + spreadEvent.Spread / 2, ammoSpreadComp.Count);
+                var angles = LinearSpread(mapDirection.ToAngle() - spreadEvent.Spread / 2,//FCB realistic shotguns
+                    mapDirection.ToAngle() + spreadEvent.Spread / 2, ammoSpreadComp.Count);//FCB realistic shotguns
 
                 ShootOrThrow(ammoEnt, angles[0].ToVec(), gunVelocity, gun, gunUid, user);
                 shotProjectiles.Add(ammoEnt);

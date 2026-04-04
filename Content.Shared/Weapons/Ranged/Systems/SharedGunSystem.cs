@@ -1,5 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
-using System.Numerics;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
@@ -7,11 +5,15 @@ using Content.Shared.Audio;
 using Content.Shared.CombatMode;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Damage;
+using Content.Shared.DoAfter;
 using Content.Shared.Examine;
+using Content.Shared.FCB.AltBlocking;
+using Content.Shared.FCB.Weapons.Ranged.Events;
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.Standing;
 using Content.Shared.Tag;
 using Content.Shared.Throwing;
 using Content.Shared.Timing;
@@ -33,9 +35,8 @@ using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using Content.Shared.DoAfter;
-using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Standing;
+using System.Diagnostics.CodeAnalysis;
+using System.Numerics;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -104,6 +105,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         SubscribeLocalEvent<GunComponent, CycleModeEvent>(OnCycleMode);
         SubscribeLocalEvent<GunComponent, HandSelectedEvent>(OnGunSelected);
         SubscribeLocalEvent<GunComponent, MapInitEvent>(OnMapInit);
+        SubscribeAllEvent<GunCycleRequestEvent>(OnGunUsed);//FCB realistic weapons
         // SS220-new-feature kus start
         SubscribeLocalEvent<GunComponent, GetVerbsEvent<Verb>>(OnGetVerbs);
         SubscribeLocalEvent<SuicideDoAfterEvent>(OnDoSuicideComplete);
@@ -121,6 +123,36 @@ public abstract partial class SharedGunSystem : EntitySystem
 
         RefreshModifiers((gun, gun));
     }
+
+    //FCB realistic weapons begin
+    private void OnGunUsed(GunCycleRequestEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (!TryGetEntity(args.User, out var localUser) || !TryGetEntity(args.Gun, out var localGun))
+            return;
+
+        if (TryComp<ChamberMagazineAmmoProviderComponent>(localGun, out var chamberMagComp))
+        {
+            args.Handled = true;
+            if (chamberMagComp.CanRack)
+                UseChambered((EntityUid)localGun, chamberMagComp, (EntityUid)localUser);
+            else
+                ToggleBolt((EntityUid)localGun, chamberMagComp, (EntityUid)localUser);
+
+            return;
+        }
+
+        if (TryComp<BallisticAmmoProviderComponent>(localGun, out var ballisticComp))
+        {
+            ManualCycle((EntityUid)localGun, ballisticComp, TransformSystem.GetMapCoordinates((EntityUid)localGun), (EntityUid)localUser);
+            args.Handled = true;
+
+            return;
+        }
+    }
+    //FCB realistic weapons end
 
     private void OnGunMelee(EntityUid uid, GunComponent component, MeleeHitEvent args)
     {
@@ -253,6 +285,14 @@ public abstract partial class SharedGunSystem : EntitySystem
             return false;
         }
         // ss220 add block heavy attack and shooting while user is down end
+
+        //FCB shield rework begin
+        if (TryComp<AltBlockingUserComponent>(user,out var blockComp) && blockComp.IsBlocking)
+        {
+            PopupSystem.PopupPredictedCursor(Loc.GetString("actively-blocking-attack"), user);
+            return false;
+        }
+        //FCB shield rework begin
 
         var toCoordinates = gun.ShootCoordinates;
 
@@ -439,7 +479,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         EntityUid? user = null,
         bool throwItems = false);
 
-    public void ShootProjectile(EntityUid uid, Vector2 direction, Vector2 gunVelocity, EntityUid? gunUid, EntityUid? user = null, float speed = 40f) //SS220 BulletSpeed
+    public void ShootProjectile(EntityUid uid, Vector2 direction, Vector2 gunVelocity, EntityUid? gunUid, EntityUid? user = null, float speed = 75f) //FCB realistic weapons
     {
         var physics = EnsureComp<PhysicsComponent>(uid);
         Physics.SetBodyStatus(uid, physics, BodyStatus.InAir);
@@ -529,6 +569,11 @@ public abstract partial class SharedGunSystem : EntitySystem
 
     protected void MuzzleFlash(EntityUid gun, AmmoComponent component, Angle worldAngle, EntityUid? user = null)
     {
+        //FCB shield rework begin
+        if (TryComp<AltBlockingUserComponent>(user,out var comp) && comp.IsBlocking)
+            return;
+        //FCB shield rework end
+
         var attemptEv = new GunMuzzleFlashAttemptEvent();
         RaiseLocalEvent(gun, ref attemptEv);
         if (attemptEv.Cancelled)

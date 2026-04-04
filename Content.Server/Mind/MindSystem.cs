@@ -1,22 +1,23 @@
 using Content.Server.Administration.Logs;
 using Content.Server.GameTicking;
 using Content.Server.Ghost;
+using Content.Server.Polymorph.Systems; //SS220-cryo-mobs-fix
+using Content.Server.SS220.MindExtension;
+using Content.Shared.Body.Systems; //SS220-cryo-mobs-fix
 using Content.Shared.Database;
+using Content.Shared.FCB.Mind.Systems;
 using Content.Shared.Ghost;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Players;
 using Content.Shared.Polymorph;
+using Content.Shared.SS220.Containers; //SS220-cryo-mobs-fix
 using Robust.Server.GameStates;
 using Robust.Server.Player;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
-using Content.Shared.SS220.Containers; //SS220-cryo-mobs-fix
-using Content.Server.Polymorph.Systems; //SS220-cryo-mobs-fix
-using Content.Shared.Body.Systems; //SS220-cryo-mobs-fix
-using Content.Server.SS220.MindExtension;
 
 namespace Content.Server.Mind;
 
@@ -156,6 +157,11 @@ public sealed class MindSystem : SharedMindSystem
         if (_players.TryGetSessionById(mind.UserId, out var session))
             _players.SetAttachedEntity(session, entity);
 
+        //FCB add mind visit events begin
+        var ev = new EntityVisitedEvent(mindId, mind);
+        RaiseLocalEvent(entity, ref ev);
+        //FCB add mind visit events end
+
         Log.Info($"Session {session?.Name} visiting entity {entity}.");
     }
 
@@ -179,6 +185,14 @@ public sealed class MindSystem : SharedMindSystem
 
         var owned = mind.OwnedEntity;
         _players.SetAttachedEntity(session, owned);
+
+        //FCB add mind visit events begin
+        if(mind.OwnedEntity != null)
+        {
+            var ev = new EntityUnvisitedEvent(mindId, mind);
+            RaiseLocalEvent((EntityUid)mind.OwnedEntity, ref ev);
+        }
+        //FCB add mind visit events end
 
         if (owned.HasValue)
         {

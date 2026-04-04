@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared.Actions;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
@@ -18,7 +18,6 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Utility;
-using Content.Shared.Weapons.Reflect;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Throwing;
 using Robust.Shared.Containers;

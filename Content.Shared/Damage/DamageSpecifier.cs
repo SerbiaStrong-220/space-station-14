@@ -1,12 +1,13 @@
-using System.Linq;
-using System.Text.Json.Serialization;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
 using Robust.Shared.Utility;
-using Robust.Shared.Serialization;
+using System.Linq;
+using System.Numerics;
+using System.Text.Json.Serialization;
 
 namespace Content.Shared.Damage
 {
@@ -43,6 +44,9 @@ namespace Content.Shared.Damage
         [ViewVariables(VVAccess.ReadWrite)]
         [IncludeDataField(customTypeSerializer: typeof(DamageSpecifierDictionarySerializer), readOnly: true)]
         public Dictionary<string, FixedPoint2> DamageDict { get; set; } = new();
+
+        [DataField]//FCB armour piercing added
+        public FixedPoint2 ArmourPiercing = 0;//FCB armour piercing added
 
         /// <summary>
         ///     Returns a sum of the damage values.
@@ -371,6 +375,7 @@ namespace Content.Shared.Damage
             {
                 newDamage.DamageDict.Add(entry.Key, entry.Value * factor);
             }
+            newDamage.ArmourPiercing = damageSpec.ArmourPiercing * factor;//FCB armour piercing added
             return newDamage;
         }
 
@@ -381,6 +386,7 @@ namespace Content.Shared.Damage
             {
                 newDamage.DamageDict.Add(entry.Key, entry.Value * factor);
             }
+            newDamage.ArmourPiercing = damageSpec.ArmourPiercing * factor;//FCB armour piercing added
             return newDamage;
         }
 
@@ -391,6 +397,7 @@ namespace Content.Shared.Damage
             {
                 newDamage.DamageDict.Add(entry.Key, entry.Value / factor);
             }
+            newDamage.ArmourPiercing = damageSpec.ArmourPiercing / factor;//FCB armour piercing added
             return newDamage;
         }
 
@@ -402,6 +409,7 @@ namespace Content.Shared.Damage
             {
                 newDamage.DamageDict.Add(entry.Key, entry.Value / factor);
             }
+            newDamage.ArmourPiercing = damageSpec.ArmourPiercing / factor;//FCB armour piercing added
             return newDamage;
         }
 
@@ -419,6 +427,7 @@ namespace Content.Shared.Damage
                     newDamage.DamageDict[entry.Key] += entry.Value;
                 }
             }
+            newDamage.ArmourPiercing = damageSpecA.ArmourPiercing + damageSpecB.ArmourPiercing;//FCB armour piercing added
             return newDamage;
         }
 
@@ -435,6 +444,7 @@ namespace Content.Shared.Damage
                     newDamage.DamageDict[entry.Key] -= entry.Value;
                 }
             }
+            newDamage.ArmourPiercing = damageSpecA.ArmourPiercing - damageSpecB.ArmourPiercing;//FCB armour piercing added
             return newDamage;
         }
 
@@ -456,6 +466,9 @@ namespace Content.Shared.Damage
                 if (!other.DamageDict.TryGetValue(key, out var otherValue) || value != otherValue)
                     return false;
             }
+
+            if(ArmourPiercing != other.ArmourPiercing) //FCB armour piercing added
+                return false;//FCB armour piercing added
 
             return true;
         }

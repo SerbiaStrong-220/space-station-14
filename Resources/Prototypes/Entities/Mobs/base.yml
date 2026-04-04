@@ -71,6 +71,7 @@
   components:
   - type: Damageable
     damageContainer: Biological
+    piercingThreshold: 7
   - type: Destructible
     thresholds:
     - trigger:

@@ -1,0 +1,16 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: ClothingBeltMilitaryWebbing
+  id: ClothingBeltMechTest
+  name: Mech webbing vest
+  description: This enormous webbing vest is fitted to be worn on mechs
+  components:
+  - type: Clothing
+    slots: [mechouter]
+    sprite: SS220/Objects/Specific/Robotics/Mechs/belts.rsi
+  - type: Storage
+    maxItemSize: Normal
+    defaultStorageOrientation: Vertical
+    grid:
+    - 0,0,8,4
