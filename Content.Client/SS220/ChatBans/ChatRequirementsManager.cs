@@ -46,6 +46,9 @@ public sealed partial class ChatRequirementsManager
     public bool IsBanned(ChatSelectChannel channel)
     {
         var chatName = Enum.GetName(channel);
-        return Enum.TryParse<BannableChats>(chatName, out var banType) && _chatBans.Contains(banType);
+        if (Enum.TryParse<BannableChats>(chatName, out var banType) && _chatBans.Contains(banType))
+            return true;
+
+        return false;
     }
 }

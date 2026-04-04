@@ -299,6 +299,11 @@ internal sealed partial class ChatManager : IChatManager
             return;
         }
 
+        // SS220-chat-bans-begin
+        if (_banManager.IsChatBanned(player, BannableChats.OOC))
+            return;
+        // SS220-chat-bans-end
+
         Color? colorOverride = null;
         var wrappedMessage = Loc.GetString("chat-manager-send-ooc-wrap-message", ("playerName",player.Name), ("message", FormattedMessage.EscapeText(message)));
         if (_adminManager.HasAdminFlag(player, AdminFlags.NameColor))
@@ -394,6 +399,10 @@ internal sealed partial class ChatManager : IChatManager
 
     public void ChatMessageToMany(ChatChannel channel, string message, string wrappedMessage, EntityUid source, bool hideChat, bool recordReplay, List<INetChannel> clients, Color? colorOverride = null, string? audioPath = null, float audioVolume = 0, NetUserId? author = null)
     {
+        // SS220-add-chat-bans-begin
+        if (ChatBannedForAuthor(channel, author))
+            return;
+        // SS220-add-chat-bans-end
         var user = author == null ? null : EnsurePlayer(author);
         var netSource = _entityManager.GetNetEntity(source);
         user?.AddEntity(netSource);
@@ -428,6 +437,10 @@ internal sealed partial class ChatManager : IChatManager
 
     public void ChatMessageToAll(ChatChannel channel, string message, string wrappedMessage, EntityUid source, bool hideChat, bool recordReplay, Color? colorOverride = null, string? audioPath = null, float audioVolume = 0, NetUserId? author = null)
     {
+        // SS220-add-chat-bans-begin
+        if (ChatBannedForAuthor(channel, author))
+            return;
+        // SS220-add-chat-bans-end
         var user = author == null ? null : EnsurePlayer(author);
         var netSource = _entityManager.GetNetEntity(source);
         user?.AddEntity(netSource);

@@ -75,6 +75,7 @@ public sealed record Ban
         Reason = reason;
         Severity = severity;
         StatedRound = statedRound;
+        BanType = banType; // SS220-add-ban-type
         BannedJobs = bannedJobs;
         BannedAntags = bannedAntags;
         BannedSpecies = bannedSpecies; // SS220-species-ban

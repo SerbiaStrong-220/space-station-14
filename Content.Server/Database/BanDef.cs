@@ -133,7 +133,7 @@ namespace Content.Server.Database
                    {loc.GetString("ban-banned-8", ("banId", Id.HasValue ? Id.Value : "-"))}
                    {loc.GetString("ban-banned-4", ("admin", BanningAdminName ?? "Console"))}
                    {loc.GetString("ban-banned-9", ("login", playerLogin))}
-                   {loc.GetString("ban-banned-6", ("round", RoundIds.Length != 0 ? RoundIds : loc.GetString("ban-banned-7")))}
+                   {loc.GetString("ban-banned-6", ("round", RoundIds.Length != 0 ? RoundIds[0] : loc.GetString("ban-banned-7")))}
                    {loc.GetString("ban-banned-2", ("reason", Reason))}
                    {expires}
                    {loc.GetString("ban-banned-3")}

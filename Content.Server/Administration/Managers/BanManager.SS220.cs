@@ -67,7 +67,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
     {
         var adminName = banInfo.BanningAdmin == null
             ? Loc.GetString("system-user")
-            : (await _db.GetPlayerRecordByUserId(banInfo.BanningAdmin.Value))?.LastSeenUserName ?? Loc.GetString("system-user");
+            : banInfo.BanningAdminName ?? (await _db.GetPlayerRecordByUserId(banInfo.BanningAdmin.Value))?.LastSeenUserName ?? Loc.GetString("system-user");
 
         ImmutableArray<IBanRoleDef> speciesDefs = [.. banInfo.SpeciesPrototypes.Where(x => _prototypeManager.HasIndex(x)).Select(x => new BanSpecieDef(x))];
         var (banDef, expires) = await CreateBanDef(banInfo, BanType.Species, speciesDefs, adminName);
@@ -212,7 +212,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
     {
         var adminName = banInfo.BanningAdmin == null
             ? Loc.GetString("system-user")
-            : (await _db.GetPlayerRecordByUserId(banInfo.BanningAdmin.Value))?.LastSeenUserName ?? Loc.GetString("system-user");
+            : banInfo.BanningAdminName ?? (await _db.GetPlayerRecordByUserId(banInfo.BanningAdmin.Value))?.LastSeenUserName ?? Loc.GetString("system-user");
 
         ImmutableArray<IBanRoleDef> chatDefs = [.. banInfo.Chats.Where(x => x is not BannableChats.Invalid).Select(x => new BanChatDef(x))];
         var (banDef, expires) = await CreateBanDef(banInfo, BanType.Chat, chatDefs, adminName);

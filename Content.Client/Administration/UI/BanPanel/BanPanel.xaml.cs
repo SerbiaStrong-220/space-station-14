@@ -212,7 +212,12 @@ public sealed partial class BanPanel : DefaultWindow
         // SS220 Species bans end
         // SS220 chats bans begin
         foreach (var chat in Enum.GetValues<BannableChats>())
+        {
+            if (chat == BannableChats.Invalid)
+                continue;
+
             AddChatsCheckbox(chat);
+        }
         // SS220 chats bans end
     }
 

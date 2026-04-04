@@ -143,7 +143,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
         // SS220-save-admin-name-begin
         var adminName = banInfo.BanningAdmin == null
             ? Loc.GetString("system-user")
-            : (await _db.GetPlayerRecordByUserId(banInfo.BanningAdmin.Value))?.LastSeenUserName ?? Loc.GetString("system-user");
+            : banInfo.BanningAdminName ?? (await _db.GetPlayerRecordByUserId(banInfo.BanningAdmin.Value))?.LastSeenUserName ?? Loc.GetString("system-user");
         // SS220-save-admin-name-end
 
         var (banDef, expires) = await CreateBanDef(banInfo, BanType.Server, null, adminName); // SS220-save-admin-name

@@ -174,6 +174,7 @@ namespace Content.Server.Database
                 Reason = ban.Reason,
                 Severity = ban.Severity,
                 BanningAdmin = ban.BanningAdmin?.UserId,
+                AdminNameInBanTime = ban.BanningAdminName, // SS220-add-admin-name
                 BanTime = ban.BanTime.UtcDateTime,
                 ExpirationTime = ban.ExpirationTime?.UtcDateTime,
                 Rounds = [..ban.RoundIds.Select(bri => new BanRound { RoundId = bri })],
