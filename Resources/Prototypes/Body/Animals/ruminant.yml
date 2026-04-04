@@ -9,6 +9,7 @@
       - Ruminant
       - Wheat
       - BananaPeel
+      - Omnivorous #SS220 CultYoggs
   - type: SolutionContainerManager
     solutions:
       stomach:

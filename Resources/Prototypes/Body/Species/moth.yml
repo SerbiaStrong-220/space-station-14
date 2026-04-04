@@ -347,6 +347,7 @@
       - ClothMade
       - Paper
       - Pill
+      - Omnivorous #SS220 CultYoggs
 
 - type: entity
   parent: [ OrganBaseLiver, OrganSpriteHumanInternal, OrganMothInternal, OrganAnimalMetabolizer ]
