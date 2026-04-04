@@ -3,6 +3,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
 using Content.Shared.Interaction;
+using Content.Shared.Kitchen;
 using Content.Shared.Materials;
 using Content.Shared.Storage;
 using Content.Shared.Tag;
@@ -32,9 +33,7 @@ public sealed class TransferMaterialsInStorageSystem : EntitySystem
 
         var target = args.Target.Value;
         var isMaterialStorage = HasComp<MaterialStorageComponent>(target);
-        BaseContainer? container = null;
-
-        if (!isMaterialStorage && !(_tag.HasTag(target, ReagentGrinderTag) && _container.TryGetContainer(target, "inputContainer", out container)))
+        if (!isMaterialStorage && !(_tag.HasTag(target, ReagentGrinderTag) && _container.TryGetContainer(target, SharedReagentGrinder.InputContainerId, out _)))
             return;
 
         var items = storageComponent.Container.ContainedEntities.ToList();
@@ -42,9 +41,16 @@ public sealed class TransferMaterialsInStorageSystem : EntitySystem
 
         foreach (var item in items)
         {
-            var inserted = isMaterialStorage
-                ? _material.TryInsertMaterialEntity(args.User, item, target)
-                : _container.Insert(item, container!);
+            bool inserted;
+
+            if (isMaterialStorage)
+                inserted = _material.TryInsertMaterialEntity(args.User, item, target);
+            else
+            {
+                var ev = new InteractUsingEvent(args.User, item, target, coords);
+                RaiseLocalEvent(args.Target.Value, ev);
+                continue;
+            }
 
             if (inserted)
                 continue;
