@@ -31,7 +31,6 @@ using Content.Shared.Station.Components;
 using Content.Shared.Whitelist;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
-using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Console;
 using Robust.Shared.Network;
@@ -68,7 +67,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly StationSystem _stationSystem = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    //[Dependency] private readonly SharedAudioSystem _audio = default!; // ss220 remove unused dep
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly ReplacementAccentSystem _wordreplacement = default!;
     [Dependency] private readonly ExamineSystemShared _examineSystem = default!;

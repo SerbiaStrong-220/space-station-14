@@ -23,7 +23,7 @@ public partial class MindExtensionSystem //MindTransferSystem
         {
             //Main check for abandonment
             ChangeOrAddTrailPoint(mindExt, oldEntity.Value, CheckEntityAbandoned(oldEntity.Value));
-            EntityManager.RemoveComponent<MindExtensionContainerComponent>(oldEntity.Value);
+            RemComp<MindExtensionContainerComponent>(oldEntity.Value);
         }
 
         if (newEntity is null)

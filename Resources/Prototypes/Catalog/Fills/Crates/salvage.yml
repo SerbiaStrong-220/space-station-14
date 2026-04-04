@@ -9,10 +9,12 @@
     containers:
       entity_storage: !type:AllSelector
         children:
-        - id: ClothingOuterHardsuitSalvage
-          orGroup: Suit #SS220-Fashion-start
-        - id: ClothingOuterExosuitSalvage
-          orGroup: Suit #SS220-Fashion-end
+        - !type:GroupSelector
+          children:
+          - id: ClothingOuterHardsuitSalvage
+            weight: 1
+          - id: ClothingOuterExosuitSalvage
+            weight: 1
         - id: ClothingMaskBreath
         - id: OxygenTankFilled
         - id: FireExtinguisher

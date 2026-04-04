@@ -120,7 +120,7 @@
         # hardhat loot (orGroup: hardhat)
         - !type:GroupSelector
           children:
-          - id: null
+          - !type:NoneSelector
             prob: 0.3
           - id: ClothingHeadHatHardhatWhite
             prob: 0.1
@@ -144,7 +144,7 @@
         # plushie loot (orGroup: shark)
         - !type:GroupSelector
           children:
-          - id: null
+          - !type:NoneSelector
             prob: 0.80
           - id: PlushieSharkPink
             prob: 0.05
@@ -155,7 +155,7 @@
         # part loot (orGroup: part)
         - !type:GroupSelector
           children:
-          - id: null
+          - !type:NoneSelector
             prob: 0.60
           - id: MicroManipulatorStockPart
             prob: 0.2
@@ -166,7 +166,7 @@
         # Syndicate loot (orGroup: syndiemaintloot)
         - !type:GroupSelector
           children:
-          - id: null
+          - !type:NoneSelector
             prob: 0.95
           - id: ClothingUniformJumpskirtOperative
             prob: 0.005

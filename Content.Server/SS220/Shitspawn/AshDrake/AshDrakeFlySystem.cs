@@ -50,7 +50,7 @@ public sealed class AshDrakeFlySystem : EntitySystem
             if (!comp.IsFlying)
                 continue;
 
-            if (!TryComp<TransformComponent>(uid, out var xform))
+            if (!TryComp(uid, out TransformComponent? xform))
             {
                 _toRemove.Add(uid);
                 continue;

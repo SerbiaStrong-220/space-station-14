@@ -13,12 +13,7 @@ namespace Content.Client.SS220.Administration.UI.Tabs.RoundTab;
 public sealed partial class ActiveGameRulesWindow : DefaultWindow
 {
     [Dependency] private readonly IEntityManager _entMan = default!;
-    private List<GameRuleInfo>? _gameRulesList;
     private GameRuleInfo? _selectedGamerule;
-
-    public IReadOnlyList<GameRuleInfo>? GameRuleInfo => _gameRulesList;
-
-    public Func<GameRuleInfo, string, string>? OverrideText;
 
     public ActiveGameRulesWindow()
     {

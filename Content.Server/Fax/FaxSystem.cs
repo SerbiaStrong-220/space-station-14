@@ -685,7 +685,7 @@ public sealed class FaxSystem : EntitySystem
         else
         {
             var entityToSpawn = printout.PrototypeId.Length == 0 ? component.PrintPaperId.ToString() : printout.PrototypeId;
-            printed = EntityManager.SpawnEntity(entityToSpawn, Transform(uid).Coordinates);
+            printed = Spawn(entityToSpawn, Transform(uid).Coordinates);
 
             if (TryComp<PaperComponent>(printed, out var paper))
             {

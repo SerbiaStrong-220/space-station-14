@@ -92,7 +92,7 @@
         # orGroup: carp
         - !type:GroupSelector
           children:
-          - id: null
+          - !type:NoneSelector
             prob: 0.67
           - id: PlushieCarp
             prob: 0.2
@@ -129,7 +129,7 @@
             prob: 0.20
           - id: DrinkVodkaKazakiBottleFull
             prob: 0.05
-          - id: null
+          - !type:NoneSelector
             prob: 0.75
           - id: DrinkBankateJarFull
             prob: 0.20
@@ -146,7 +146,7 @@
         # orGroup: syndiemaintloot
         - !type:GroupSelector
           children:
-          - id: null
+          - !type:NoneSelector
             prob: 0.95
           - id: ClothingUniformJumpskirtOperative
             prob: 0.005

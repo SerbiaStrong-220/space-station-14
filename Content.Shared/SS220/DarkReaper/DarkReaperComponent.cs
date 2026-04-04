@@ -69,15 +69,15 @@ public sealed partial class DarkReaperComponent : Component
     [ViewVariables, DataField(serverOnly: true)]
     public HashSet<EntProtoId> SpawnOnDeathPool = new()
     {
-        "LeftLegHuman",
-        "RightLegHuman",
-        "LeftFootHuman",
-        "RightFootHuman",
-        "LeftArmHuman",
-        "RightArmHuman",
-        "LeftHandHuman",
-        "RightHandHuman",
-        "TorsoSkeleton",
+        "OrganHumanLegLeft",
+        "OrganHumanLegRight",
+        "OrganHumanFootLeft",
+        "OrganHumanFootRight",
+        "OrganHumanArmLeft",
+        "OrganHumanArmRight",
+        "OrganHumanHandLeft",
+        "OrganHumanHandRight",
+        "OrganSkeletonPersonTorso",
         "NormalHeadSkeleton",
     };
 

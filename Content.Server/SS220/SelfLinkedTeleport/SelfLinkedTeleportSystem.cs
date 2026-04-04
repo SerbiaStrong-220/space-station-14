@@ -4,7 +4,6 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
-using Content.Shared.Popups;
 using Content.Shared.SS220.SelfLinkedTeleport;
 using Content.Shared.Whitelist;
 
@@ -15,7 +14,6 @@ public sealed class SelfLinkedTeleportSystem : SharedSelfLinkedTeleportSystem
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
 
     public override void Initialize()

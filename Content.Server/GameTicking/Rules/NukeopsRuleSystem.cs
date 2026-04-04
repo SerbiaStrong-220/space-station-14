@@ -45,16 +45,14 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
     [Dependency] private readonly RoundEndSystem _roundEndSystem = default!;
     [Dependency] private readonly StoreSystem _store = default!;
     [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    //[Dependency] private readonly IPrototypeManager _prototype = default!; // ss220 remove unused dep
     [Dependency] private readonly AlertLevelSystem _alertLevel = default!; //ss220 nukeops autogamma
     [Dependency] private readonly StationSystem _station = default!; //ss220 nukeops autogamma
     [Dependency] private readonly GameTicker _gameTicker = default!; //ss220 nukeops autogamma
 
     private static readonly ProtoId<CurrencyPrototype> TelecrystalCurrencyPrototype = "Telecrystal";
     private static readonly ProtoId<TagPrototype> NukeOpsUplinkTagPrototype = "NukeOpsUplink";
-
-    [ValidatePrototypeId<TagPrototype>]
-    private const string LoneOpsUplinkTagPrototype = "LoneOpsUplink"; //SS220 Lone-Ops-War
+    private static readonly ProtoId<TagPrototype> LoneOpsUplinkTagPrototype = "LoneOpsUplink"; //SS220 Lone-Ops-War
 
     public override void Initialize()
     {

@@ -26,7 +26,7 @@ public sealed class SmesConsoleSystem : EntitySystem
         if (!Resolve(uid, ref component))
             return;
 
-        if (!TryComp<MetaDataComponent>(uid, out var metaDataComponent))
+        if (!TryComp(uid, out MetaDataComponent? metaDataComponent))
             return;
 
         if (!TryComp<DeviceNetworkComponent>(uid, out var deviceNetworkComp))

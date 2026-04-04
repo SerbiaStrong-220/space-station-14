@@ -197,7 +197,7 @@
   id: ExpensiveLighterNanotrasenStealObjective
   components:
   - type: NotJobRequirement
-    job: Captain
+    jobs: [ Captain ]
   - type: StealCondition
     stealGroup: ExpensiveLighterNanotrasen
   - type: Objective
@@ -208,7 +208,7 @@
   id: ExpensiveLighterShieldStealObjective
   components:
   - type: NotJobRequirement
-    job: BlueShield
+    jobs: [ BlueShield ]
   - type: StealCondition
     stealGroup: ExpensiveLighterShield
   - type: Objective

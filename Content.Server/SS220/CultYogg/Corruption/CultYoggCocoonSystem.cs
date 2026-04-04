@@ -41,7 +41,7 @@ public sealed class CultYoggCocoonSystem : EntitySystem
             comp.Recipe = corruptComp.Recipe;
         }
 
-        EntityManager.DeleteEntity(ent);
+        Del(ent);
         _hands.PickupOrDrop(args.User, newEnt);
         if (ent.Comp.Sound != null)
         {
@@ -86,7 +86,7 @@ public sealed class CultYoggCocoonSystem : EntitySystem
             corrComp.SoftDeletedOriginalEntity = corruptComp.SoftDeletedOriginalEntity;
             corrComp.Recipe = corruptComp.Recipe;
 
-            EntityManager.DeleteEntity(ent);
+            Del(ent);
         }
     }
 }

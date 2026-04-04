@@ -66,7 +66,7 @@
     teleportDoAfterTime: 2
     userWhitelist:
       components:
-      - HumanoidAppearance
+      - HumanoidProfile
   - type: RandomTeleport
     targetsComponent: "RandomTeleportTarget"
     whitelist:

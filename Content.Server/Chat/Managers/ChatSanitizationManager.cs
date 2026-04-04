@@ -12,7 +12,7 @@ namespace Content.Server.Chat.Managers;
 ///     It currently ony removes the shorthands for emotes (like "lol" or "^-^") from a chat message and returns the last
 ///     emote in their message
 /// </summary>
-public sealed class ChatSanitizationManager : IChatSanitizationManager
+public sealed partial class ChatSanitizationManager : IChatSanitizationManager // ss220 add static regex
 {
     // private static readonly Dictionary<Regex, string> ShorthandToEmote = new()
     // {
@@ -111,6 +111,11 @@ public sealed class ChatSanitizationManager : IChatSanitizationManager
     //     { "('=", "chatsan-tearfully-smiles" },
     //     { "['=", "chatsan-tearfully-smiles" }
     // };
+
+    // ss220 add static regex start
+    [GeneratedRegex(@"[a-zA-Z]")]
+    private static partial Regex LatinRegex();
+    // ss220 add static regex end
 
     private static readonly (Regex regex, string emoteKey)[] ShorthandToEmote =
     [
@@ -277,7 +282,7 @@ public sealed class ChatSanitizationManager : IChatSanitizationManager
         var ntAllowed = message.Replace("NanoTrasen", string.Empty, StringComparison.OrdinalIgnoreCase);
         ntAllowed = ntAllowed.Replace("nt", string.Empty, StringComparison.OrdinalIgnoreCase);
 
-        if (Regex.Matches(ntAllowed, @"[a-zA-Z]").Any())
+        if (LatinRegex().IsMatch(ntAllowed)) // ss220 add static regex
             return false;
 
         return true;

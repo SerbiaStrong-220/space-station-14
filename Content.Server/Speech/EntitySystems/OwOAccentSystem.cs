@@ -1,13 +1,12 @@
 using Content.Server.Speech.Components;
 using Content.Shared.Speech;
 using Content.Shared.StatusEffectNew;
-using Robust.Shared.Random;
 
 namespace Content.Server.Speech.EntitySystems
 {
     public sealed class OwOAccentSystem : EntitySystem
     {
-        [Dependency] private readonly IRobustRandom _random = default!;
+        //[Dependency] private readonly IRobustRandom _random = default!; // ss220 remove unused dep
 
         private static readonly IReadOnlyList<string> Faces = new List<string>{
             " (•`ω´•)", " ;;w;;", " owo", " UwU", " >w<", " ^w^"

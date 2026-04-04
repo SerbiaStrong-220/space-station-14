@@ -254,6 +254,6 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
         if (TryComp<AmbientSoundComponent>(portalEntity, out var ambientSoundComponent))
             _audioSystem.PlayPvs(ambientSoundComponent.Sound, portalEntity);
 
-        EntityManager.QueueDeleteEntity(portalEntity);
+        QueueDel(portalEntity);
     }
 }

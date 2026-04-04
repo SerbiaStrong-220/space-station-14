@@ -70,7 +70,7 @@ public sealed partial class SuperMatterSystem
 
     private void SendAdminChatAlert(Entity<SuperMatterComponent> crystal, string msg, string? whom = null)
     {
-        var stringBuilder = new StringBuilder($"SuperMatter {EntityManager.ToPrettyString(crystal)} Alert! ");
+        var stringBuilder = new StringBuilder($"SuperMatter {ToPrettyString(crystal)} Alert! ");
         stringBuilder.Append(msg);
         if (whom != null)
             stringBuilder.Append($" caused by {whom}.");

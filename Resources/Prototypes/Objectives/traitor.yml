@@ -213,7 +213,7 @@
   components:
   #ss220 paramed crewmonitor begin
   - type: NotJobRequirement
-    job: Paramedic
+    jobs: [ Paramedic ]
   #ss220 paramed crewmonitor end
   - type: StealCondition
     stealGroup: HandheldCrewMonitor

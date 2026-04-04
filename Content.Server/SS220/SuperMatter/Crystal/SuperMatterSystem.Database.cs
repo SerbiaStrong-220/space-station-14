@@ -42,11 +42,11 @@ public sealed partial class SuperMatterSystem
         // just in case...
         if (!HasComp<TransformComponent>(uid))
         {
-            Log.Error($" Tried to get TransformComp of {EntityManager.ToPrettyString(crystal)}, but it hasnt it");
+            Log.Error($" Tried to get TransformComp of {ToPrettyString(crystal)}, but it hasnt it");
             return;
         }
 
-        var ev = new SuperMatterStateUpdate(uid.Id, EntityManager.GetNetEntity(Transform(uid).GridUid), comp.Activated,
+        var ev = new SuperMatterStateUpdate(uid.Id, GetNetEntity(Transform(uid).GridUid), comp.Activated,
                                             comp.Name, GetIntegrity(comp), pressure, comp.Temperature,
                                             (comp.Matter, matterDerv),
                                             (comp.InternalEnergy, internalEnergyDerv),

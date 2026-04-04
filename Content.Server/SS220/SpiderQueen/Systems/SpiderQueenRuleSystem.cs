@@ -43,7 +43,7 @@ public sealed class SpiderQueenRuleSystem : GameRuleSystem<SpiderQueenRuleCompon
         while (query.MoveNext(out var uid, out _))
         {
             if (_entityWhitelist.IsWhitelistFail(ent.Comp.MarkersWhitelist, uid) ||
-                !TryComp<TransformComponent>(uid, out var transform))
+                !TryComp(uid, out TransformComponent? transform))
                 continue;
 
             validCoordinates.Add(_transform.ToMapCoordinates(transform.Coordinates));

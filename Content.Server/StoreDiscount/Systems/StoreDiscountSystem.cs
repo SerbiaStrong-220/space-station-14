@@ -23,7 +23,6 @@ public sealed class StoreDiscountSystem : EntitySystem
 
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly StoreSystem _store = default!; // ss220 nukeops discount
 
     /// <inheritdoc />
     public override void Initialize()
