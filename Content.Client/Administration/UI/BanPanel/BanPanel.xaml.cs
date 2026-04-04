@@ -174,7 +174,7 @@ public sealed partial class BanPanel : DefaultWindow
         // SS220 Species bans end
 
         // SS220 chat bans begin
-        Tabs.SetTabTitle((int)TabNumbers.Chats, Loc.GetString("ban-panel-tabs-chat"));
+        Tabs.SetTabTitle((int)TabNumbers.Chats, Loc.GetString("ban-panel-tabs-chats"));
         Tabs.SetTabVisible((int)TabNumbers.Chats, false);
         // SS220 chat bans end
 
