@@ -10,7 +10,7 @@ public sealed class MarkovTextGenerator : EntitySystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
 
-    private Dictionary<string, List<string>> _transitionMatrix = new();
+    private readonly Dictionary<string, List<string>> _transitionMatrix = new();
 
     private readonly char[] _punctuationChars = { ',', '.', '!', '?', ';', ':' };
     private readonly char[] _endSentenceChars = { '.', '!', '?' };
@@ -33,7 +33,7 @@ public sealed class MarkovTextGenerator : EntitySystem
             }
 
 
-            var words = text.ToString().Split().ToArray();
+            var words = text.ToString().Split();
 
             for (int i = 0; i < words.Length - keySize; i++)
             {

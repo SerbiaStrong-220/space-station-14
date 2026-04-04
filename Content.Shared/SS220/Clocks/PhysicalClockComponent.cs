@@ -8,6 +8,6 @@ namespace Content.Shared.SS220.Clocks;
 [RegisterComponent]
 public sealed partial class PhysicalClockComponent : Component
 {
-    [DataField("enabled"), ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public bool Enabled = true;
 }

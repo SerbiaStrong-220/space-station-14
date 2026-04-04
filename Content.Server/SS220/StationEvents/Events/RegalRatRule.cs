@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Server.Station.Components;
 using Content.Server.SS220.StationEvents.Components;
 using Content.Server.StationEvents.Components;
@@ -23,14 +24,14 @@ public sealed class RegalRatRule : StationEventSystem<RegalRatRuleComponent>
         }
 
         var mouseLocations = EntityQueryEnumerator<VentCritterSpawnLocationComponent, TransformComponent>();
-        var mouseVaidLocations = new List<EntityCoordinates>();
+        var mouseValidLocations = new List<EntityCoordinates>();
 
         while (mouseLocations.MoveNext(out _, out _, out var transform))
         {
             if (CompOrNull<StationMemberComponent>(transform.GridUid)?.Station == station &&
                 HasComp<BecomesStationComponent>(transform.GridUid))
             {
-                mouseVaidLocations.Add(transform.Coordinates);
+                mouseValidLocations.Add(transform.Coordinates);
                 foreach (var spawn in EntitySpawnCollection.GetSpawns(component.Entries, RobustRandom))
                 {
                     Spawn(spawn, transform.Coordinates);

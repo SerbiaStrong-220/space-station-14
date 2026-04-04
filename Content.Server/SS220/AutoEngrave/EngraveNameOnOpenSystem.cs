@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.Access.Systems;
 using Content.Shared.Interaction;
 using Content.Shared.Storage;
@@ -15,25 +16,22 @@ public sealed class EngraveNameOnOpenSystem : EntitySystem
         SubscribeLocalEvent<EngraveNameOnOpenComponent, ActivateInWorldEvent>(OnActivate);
     }
 
-    private void OnActivate(EntityUid uid, EngraveNameOnOpenComponent component, ActivateInWorldEvent args)
+    private void OnActivate(Entity<EngraveNameOnOpenComponent> ent, ref ActivateInWorldEvent args)
     {
-        if (!TryComp<StorageComponent>(uid, out var storageComp))
+        if (!TryComp<StorageComponent>(ent.Owner, out var storageComp))
             return;
 
         var character = args.User;
 
-        if (!_accessReader.IsAllowed(character, uid))
+        if (!_accessReader.IsAllowed(character, ent.Owner))
             return;
 
-        TryEngrave(character, storageComp, component);
+        TryEngrave(character, storageComp, ent.Comp);
     }
 
     private void TryEngrave(EntityUid user, StorageComponent storageComp, EngraveNameOnOpenComponent engraveComp)
     {
         if (engraveComp.Activated)
-            return;
-
-        if (storageComp.Container is null)
             return;
 
         foreach (var item in storageComp.Container.ContainedEntities)

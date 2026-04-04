@@ -2,8 +2,6 @@
 
 using Content.Shared.Verbs;
 using Content.Shared.SS220.Cart.Components;
-using Content.Shared.DragDrop;
-using Content.Shared.Interaction;
 using Content.Shared.Movement.Pulling.Components;
 
 namespace Content.Shared.SS220.Cart;

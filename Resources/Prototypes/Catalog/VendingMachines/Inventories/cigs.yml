@@ -19,9 +19,17 @@
     Lighter: 2
     FlippoLighter: 2
   contrabandInventory:
+#SS220 New_accesses_and_some_tweaks start
+    CigPackWEH: 1
+    CigPackMED: 1
+#SS220 New_accesses_and_some_tweaks end
     GroundTobacco: 3
     CigarGold: 2
     Igniter: 1
-  emaggedInventory:
-    CigPackSyndicate: 1
+    #CigPackSyndicate: 1 # SS220-let-give-players-something-value-able-ish
     ExpensiveLighterSyndicate: 1 #SS220-Zippo
+#SS220 New_accesses_and_some_tweaks start
+  emaggedInventory:
+    CigPackSyndicate: 2
+    UplinkLighterBox: 1
+#SS220 New_accesses_and_some_tweaks end

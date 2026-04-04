@@ -10,7 +10,6 @@
     name: chat-telepathy-space-dragon
     color: "#7567b6"
 
-
 - type: telepathyChannel
   id: TelepathyChannelHive
   channelParameters:

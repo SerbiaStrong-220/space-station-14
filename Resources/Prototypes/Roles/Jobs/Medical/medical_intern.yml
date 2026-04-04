@@ -5,7 +5,7 @@
   playTimeTracker: JobMedicalIntern
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 3600 # SS220-RoleTime 2
+      time: 1h # SS220-RoleTime 2
   startingGear: MedicalInternGear
   icon: "JobIconMedicalIntern"
   supervisors: job-supervisors-medicine
@@ -31,3 +31,14 @@
   #storage:
     #back:
     #- Stuff
+
+- type: chameleonOutfit
+  id: MedicalInternChameleonOutfit
+  job: MedicalIntern
+  equipment:
+    head: ClothingHeadHatBeretMedic
+    eyes: ClothingEyesHudMedical
+    mask: ClothingMaskSterile
+    neck: ClothingNeckStethoscope
+    outerClothing: ClothingOuterCoatLabOpened
+    gloves: ClothingHandsGlovesLatex

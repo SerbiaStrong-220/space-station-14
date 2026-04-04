@@ -15,6 +15,10 @@
     ChemistryBottleRobustHarvest: 3
     ChemistryBottleEZNutrient: 3
     Bucket: 3
+    # SS220 beaker-for-botanists begin
+    Beaker: 5
+    LargeBeaker: 5 
+    # SS220 beaker-for-botanists end
     BoxMouthSwab: 1
     BoxAgrichem: 1
     #TO DO:
@@ -22,5 +26,4 @@
   contrabandInventory:
     ChemistryBottleUnstableMutagen: 1
     Joint: 1
-  emaggedInventory:
     ChemistryBottleLeft4Zed: 1

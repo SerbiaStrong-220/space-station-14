@@ -13,3 +13,6 @@ ent-SpiderEggGhost = яйцо паука призрака
 ent-SpiderEggShooter = яйцо паука стрелка
     .desc = { ent-SpiderEggHunter.desc }
     .suffix = { ent-SpiderEggHunter.suffix }
+
+SpiderEgg-IncubationMe = Вы вылупитесь через {$sec} секунд.
+SpiderEgg-IncubationYou = Оно вылупится через {$sec} секунд.

@@ -4,10 +4,10 @@ using Content.Server.SS220.CriminalRecords;
 using Content.Server.SS220.Trackers.Components;
 using Content.Shared.Mind.Components;
 
+namespace Content.Server.SS220.Trackers.Systems;
 
 public sealed class CriminalStatusTrackerSystem : EntitySystem
 {
-
     public override void Initialize()
     {
         base.Initialize();
@@ -30,4 +30,3 @@ public sealed class CriminalStatusTrackerSystem : EntitySystem
         comp.TryMove(args.CurrentCriminalRecord.RecordType.Value, mindUid);
     }
 }
-

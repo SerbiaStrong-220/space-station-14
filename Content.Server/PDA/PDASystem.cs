@@ -5,16 +5,20 @@ using Content.Server.Chat.Managers;
 using Content.Server.Instruments;
 using Content.Server.PDA.Ringer;
 using Content.Server.Station.Systems;
+using Content.Server.StationRecords.Systems;
 using Content.Server.Store.Systems;
 using Content.Server.Traitor.Uplink;
 using Content.Shared.Access.Components;
 using Content.Shared.CartridgeLoader;
 using Content.Shared.Chat;
 using Content.Shared.DeviceNetwork.Components;
+using Content.Shared.Implants;
+using Content.Shared.Inventory;
 using Content.Shared.Light;
 using Content.Shared.Light.EntitySystems;
 using Content.Shared.PDA;
 using Content.Shared.PDA.Ringer;
+using Content.Shared.StationRecords;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
@@ -35,6 +39,7 @@ namespace Content.Server.PDA
         [Dependency] private readonly UnpoweredFlashlightSystem _unpoweredFlashlight = default!;
         [Dependency] private readonly ContainerSystem _containerSystem = default!;
         [Dependency] private readonly IdCardSystem _idCard = default!;
+        [Dependency] private readonly StationRecordsSystem _records = default!; // ss220 add additional info for pda
 
         public override void Initialize()
         {
@@ -56,6 +61,14 @@ namespace Content.Server.PDA
             SubscribeLocalEvent<StationRenamedEvent>(OnStationRenamed);
             SubscribeLocalEvent<EntityRenamedEvent>(OnEntityRenamed, after: new[] { typeof(IdCardSystem) });
             SubscribeLocalEvent<AlertLevelChangedEvent>(OnAlertLevelChanged);
+            SubscribeLocalEvent<PdaComponent, InventoryRelayedEvent<ChameleonControllerOutfitSelectedEvent>>(ChameleonControllerOutfitItemSelected);
+        }
+
+        private void ChameleonControllerOutfitItemSelected(Entity<PdaComponent> ent, ref InventoryRelayedEvent<ChameleonControllerOutfitSelectedEvent> args)
+        {
+            // Relay it to your ID so it can update as well.
+            if (ent.Comp.ContainedId != null)
+                RaiseLocalEvent(ent.Comp.ContainedId.Value, args);
         }
 
         private void OnEntityRenamed(ref EntityRenamedEvent ev)
@@ -190,6 +203,16 @@ namespace Content.Server.PDA
 
             var programs = _cartridgeLoader.GetAvailablePrograms(uid, loader);
             var id = CompOrNull<IdCardComponent>(pda.ContainedId);
+            // ss220 add additional info for pda start
+            var recordStorage = CompOrNull<StationRecordKeyStorageComponent>(pda.ContainedId);
+
+            GeneralStationRecord? record = null;
+            if (recordStorage is { Key: not null } && TryComp<StationRecordsComponent>(recordStorage.Key.Value.OriginStation, out var stationRecords))
+            {
+                _records.TryGetRecord(recordStorage.Key.Value, out record, stationRecords);
+            }
+            // ss220 add additional info for pda end
+
             var state = new PdaUpdateState(
                 programs,
                 GetNetEntity(loader.ActiveProgram),
@@ -201,9 +224,19 @@ namespace Content.Server.PDA
                     ActualOwnerName = pda.OwnerName,
                     IdOwner = id?.FullName,
                     JobTitle = id?.LocalizedJobTitle,
+                    //ss220 add color for job in pda start
+                    CardColor = id?.JobColor,
+                    //ss220 add color for job in pda end
                     StationAlertLevel = pda.StationAlertLevel,
-                    StationAlertColor = pda.StationAlertColor
+                    StationAlertColor = pda.StationAlertColor,
                 },
+                // ss220 add additional info for pda start
+                new PdaIdExtendedInfo
+                {
+                    Record = record,
+                    IdCard = GetNetEntity(pda.ContainedId),
+                },
+                // ss220 add additional info for pda end
                 pda.StationName,
                 showUplink,
                 hasInstrument,

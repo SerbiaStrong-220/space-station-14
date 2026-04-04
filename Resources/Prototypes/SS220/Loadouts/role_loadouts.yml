@@ -2,6 +2,22 @@
 
 #! Юридический (Начало)
 
+  # Представитель НаноТрейзен
+- type: roleLoadout
+  id: JobNanoTrasenRepresentative #SS220 TODO NanoTraisen Representative
+  groups:
+  - IAAHead
+  - IAAHeadset
+  - IAAGlasses
+  - IAANeck
+  - IAAJumpsuit
+  - IAAOuterclothing
+  - IAABackpacks #ss220 iaa loadout fix
+  - Survival
+  - Trinkets
+  - Gloves
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+
   # Магистрат
 - type: roleLoadout
   id: JobMagistrate
@@ -15,6 +31,7 @@
   - Trinkets
   - Survival
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 
   # Агент внутренних дел
 - type: roleLoadout
@@ -31,6 +48,7 @@
   - Trinkets
   - Gloves
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 
   # Офицер "Синий Щит"
 - type: roleLoadout
@@ -38,14 +56,17 @@
   groups:
   - BlueShieldHead
   - BlueShieldGlasses
+  - BlueShieldMask
   - BlueShieldNeck
   - BlueShieldJumpsuit
   - BlueShieldOuterclothing
   - BlueShieldBelt
   - BlueShieldBackpack
+  - BlueShieldShoes
   - Survival
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 
 #! Служба безопасности (Начало)
 
@@ -56,6 +77,8 @@
   - SecurityHead
   - SecurityGlasses #SS220-TwoOne-Floppa-Iteration
   - SecurityNeck  #holster loadout
+  - SecurityMask #SS220 Security Tactical Gas Mask
+  - SecurityGloves #Sec Tactical Gloves for Senior Officer
   - SeniorSecJumpsuit
   - SecurityBackpack
   - SecurityOuterClothing
@@ -64,6 +87,7 @@
   - SecurityBelt
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 
   # Пилот
 - type: roleLoadout
@@ -72,14 +96,15 @@
   - SecurityPilotHead
   - SecurityGlasses #SS220-TwoOne-Floppa-Iteration
   - SecurityNeck #holster loadout
+  - SecurityMask #SS220 Security Tactical Gas Mask
   - SecurityJumpsuit
   - SecurityBackpack
   - SecurityPilotOuterClothing
   - SurvivalSecurity
   - SecurityShoes
-  - SecurityPDA
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - WorkerCash #SS220-Cash-personal
 #! Служба безопасности (Конец)
 
 #! Медицинский отдел (Начало)
@@ -90,7 +115,7 @@
   groups:
   - HatSeniorMedical
   - MedicalNeck
-  - MedicalGlasses #SS220-TwoOne-Floppa-Iteration
+# - MedicalGlasses #SS220-TwoOne-Floppa-Iteration
   - SeniorMedicalJumpsuit
   - MedicalGloves
   - MedicalsBackpack
@@ -98,9 +123,11 @@
   - SeniorMedicalOuterClothing
   - SurvivalMedical
   - SeniorShoes
+  - MedicalEyewear
 #  - Glasses #SS220-TwoOne-Floppa-Iteration
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 #! Медицинский отдел (Конец)
 
 #! Инженерный отдел (Начало)
@@ -118,6 +145,7 @@
   - StationEngineerShoes
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 #! Инженерный отдел (Конец)
 
 #! Исследовательский отдел (Начало)
@@ -138,6 +166,7 @@
 #  - Glasses #SS220-TwoOne-Floppa-Iteration
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 #! Исследовательский отдел (Конец)
 
 #! Сервис (Начало)
@@ -151,6 +180,8 @@
   - CommonBackpack
   - Survival
   - Glasses
+  - SeniorServiceShoes
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 #! Сервис (Конец)

@@ -6,6 +6,7 @@ using Content.Shared.Fax.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.Paper;
 using Content.Shared.SS220.Photocopier;
+using Content.Shared.Station.Components;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;

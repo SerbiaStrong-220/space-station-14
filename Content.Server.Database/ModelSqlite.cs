@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -17,6 +17,9 @@ namespace Content.Server.Database
     {
         public SqliteServerDbContext(DbContextOptions<SqliteServerDbContext> options) : base(options)
         {
+#if USE_SYSTEM_SQLITE
+            SQLitePCL.raw.SetProvider(new SQLitePCL.SQLite3Provider_sqlite3());
+#endif
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
@@ -65,6 +68,14 @@ namespace Content.Server.Database
                 .Property(e => e.Address)
                 .HasColumnType("TEXT")
                 .HasConversion(ipMaskConverter);
+
+            // SS220 Species bans begin
+            modelBuilder
+                .Entity<ServerSpeciesBan>()
+                .Property(e => e.Address)
+                .HasColumnType("TEXT")
+                .HasConversion(ipMaskConverter);
+            // SS220 Species bans end
 
             var jsonStringConverter = new ValueConverter<JsonDocument, string>(
                 v => JsonDocumentToString(v),

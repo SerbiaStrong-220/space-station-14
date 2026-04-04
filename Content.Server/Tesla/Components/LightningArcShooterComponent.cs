@@ -1,5 +1,4 @@
-using Content.Server.SS220.SuperMatterCrystal;
-using Content.Server.SS220.SuperMatterCrystal.Components;
+using Content.Server.SS220.SuperMatter.Crystal;
 using Content.Server.Tesla.EntitySystems;
 using Robust.Shared.Prototypes;
 

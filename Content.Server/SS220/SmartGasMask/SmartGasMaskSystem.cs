@@ -2,6 +2,7 @@
 using Content.Server.Chat.Systems;
 using Content.Server.Pinpointer;
 using Content.Shared.Actions;
+using Content.Shared.Chat;
 using Content.Shared.Clothing;
 using Content.Shared.SS220.SmartGasMask;
 using Content.Shared.SS220.SmartGasMask.Events;

@@ -4,7 +4,6 @@
     prefix: figurines-admiral-
     count: 3
 
-
 - type: localizedDataset
   id: FigurinesBlueshield
   values:
@@ -39,12 +38,6 @@
   id: FigurinesZombie
   values:
     prefix: figurines-zombie-
-    count: 3
-
-- type: localizedDataset
-  id: FigurinesGriffin
-  values:
-    prefix: figurines-griffin-
     count: 3
 
 - type: localizedDataset

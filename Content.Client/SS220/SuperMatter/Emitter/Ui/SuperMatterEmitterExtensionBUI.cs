@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Robust.Client.UserInterface;
 using Content.Shared.SS220.SuperMatter.Ui;
 using Content.Shared.SS220.SuperMatter.Emitter;
@@ -28,9 +29,7 @@ public sealed class SuperMatterEmitterExtensionBUI : BoundUserInterface
         }
 
         if (EntMan.TryGetComponent<EmitterComponent>(Owner, out var emitterComponent))
-        {
             _emitterActivated = emitterComponent.IsOn;
-        }
 
         _menu = this.CreateWindow<SuperMatterEmitterExtensionMenu>();
         _menu.SetEmitterParams(_ratio, _power);

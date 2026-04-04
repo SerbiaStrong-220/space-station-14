@@ -7,11 +7,13 @@ using Content.Shared.Administration.Components;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CombatMode;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
@@ -21,6 +23,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
+using Content.Shared.Standing; // ss220 add block heavy attack while user is down
 using Content.Shared.StatusEffect;
 using Content.Shared.Weapons.Melee.Components;
 using Content.Shared.Weapons.Melee.Events;
@@ -51,6 +54,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
     [Dependency] protected readonly ISharedAdminLogManager AdminLogger = default!;
     [Dependency] protected readonly ActionBlockerSystem Blocker = default!;
     [Dependency] protected readonly DamageableSystem Damageable = default!;
+    [Dependency] private   readonly SharedHandsSystem _hands = default!;
     [Dependency] private   readonly InventorySystem _inventory = default!;
     [Dependency] private   readonly MeleeSoundSystem _meleeSound = default!;
     [Dependency] protected readonly MobStateSystem MobState = default!;
@@ -60,7 +64,11 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
     [Dependency] private   readonly SharedPhysicsSystem _physics = default!;
     [Dependency] protected readonly SharedPopupSystem PopupSystem = default!;
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
-    [Dependency] private   readonly StaminaSystem _stamina = default!;
+    [Dependency] private   readonly SharedStaminaSystem _stamina = default!;
+    // ss220 add block heavy attack while user is down start
+    [Dependency] private   readonly StandingStateSystem _standing = default!;
+    // ss220 add block heavy attack while user is down end
+    [Dependency] private   readonly DamageExamineSystem _damageExamine = default!;
 
     private const int AttackMask = (int) (CollisionGroup.MobMask | CollisionGroup.Opaque);
 
@@ -81,6 +89,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         SubscribeLocalEvent<MeleeWeaponComponent, HandSelectedEvent>(OnMeleeSelected);
         SubscribeLocalEvent<MeleeWeaponComponent, ShotAttemptedEvent>(OnMeleeShotAttempted);
         SubscribeLocalEvent<MeleeWeaponComponent, GunShotEvent>(OnMeleeShot);
+        SubscribeLocalEvent<MeleeWeaponComponent, DamageExamineEvent>(OnMeleeExamineDamage);
         SubscribeLocalEvent<BonusMeleeDamageComponent, GetMeleeDamageEvent>(OnGetBonusMeleeDamage);
         SubscribeLocalEvent<BonusMeleeDamageComponent, GetHeavyDamageModifierEvent>(OnGetBonusHeavyDamageModifier);
         SubscribeLocalEvent<BonusMeleeAttackRateComponent, GetMeleeAttackRateEvent>(OnGetBonusMeleeAttackRate);
@@ -93,8 +102,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         SubscribeAllEvent<StopAttackEvent>(OnStopAttack);
 
 #if DEBUG
-        SubscribeLocalEvent<MeleeWeaponComponent,
-                            MapInitEvent>                   (OnMapInit);
+        SubscribeLocalEvent<MeleeWeaponComponent, MapInitEvent>(OnMapInit);
     }
 
     private void OnMapInit(EntityUid uid, MeleeWeaponComponent component, MapInitEvent args)
@@ -122,6 +130,18 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         }
     }
 
+    private void OnMeleeExamineDamage(EntityUid uid, MeleeWeaponComponent component, ref DamageExamineEvent args)
+    {
+        if (component.Hidden)
+            return;
+
+        var damageSpec = GetDamage(uid, args.User, component);
+
+        if (damageSpec.Empty)
+            return;
+
+        _damageExamine.AddDamageExamine(args.Message, Damageable.ApplyUniversalAllModifiers(damageSpec), Loc.GetString("damage-melee"));
+    }
     private void OnMeleeSelected(EntityUid uid, MeleeWeaponComponent component, HandSelectedEvent args)
     {
         var attackRate = GetAttackRate(uid, args.User, component);
@@ -203,6 +223,14 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
     {
         if (args.SenderSession.AttachedEntity is not {} user)
             return;
+
+        // ss220 add block heavy attack and shooting while user is down start
+        if (_standing.IsDown(user))
+        {
+            PopupSystem.PopupPredictedCursor(Loc.GetString("lying-down-block-attack"), user);
+            return;
+        }
+        // ss220 add block heavy attack and shooting while user is down end
 
         if (!TryGetWeapon(user, out var weaponUid, out var weapon) ||
             weaponUid != GetEntity(msg.Weapon))
@@ -288,15 +316,14 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         }
 
         // Use inhands entity if we got one.
-        if (EntityManager.TryGetComponent(entity, out HandsComponent? hands) &&
-            hands.ActiveHandEntity is { } held)
+        if (_hands.TryGetActiveItem(entity, out var held))
         {
             // Make sure the entity is a weapon AND it doesn't need
             // to be equipped to be used (E.g boxing gloves).
-            if (EntityManager.TryGetComponent(held, out melee) &&
+            if (TryComp(held, out melee) &&
                 !melee.MustBeEquippedToUse)
             {
-                weaponUid = held;
+                weaponUid = held.Value;
                 return true;
             }
 
@@ -409,6 +436,22 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         DirtyField(weaponUid, weapon, nameof(MeleeWeaponComponent.NextAttack));
 
         // Do this AFTER attack so it doesn't spam every tick
+
+        // SS220-Extend Weapon Logic-Start
+        var userEv = new AttemptMeleeUserEvent(weaponUid);
+        RaiseLocalEvent(user, ref userEv);
+
+        if (userEv.Cancelled)
+        {
+            if (userEv.Message != null)
+            {
+                PopupSystem.PopupClient(userEv.Message, weaponUid, user);
+            }
+
+            return false;
+        }
+        // SS220-Extend Weapon Logic-End
+
         var ev = new AttemptMeleeEvent();
         RaiseLocalEvent(weaponUid, ref ev);
 
@@ -493,6 +536,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             var missEvent = new MeleeHitEvent(new List<EntityUid>(), user, meleeUid, damage, null);
             RaiseLocalEvent(meleeUid, missEvent);
             _meleeSound.PlaySwingSound(user, meleeUid, component);
+            RaiseLocalEvent(user, new LightAttackPerformedEvent(null, meleeUid, GetCoordinates(ev.Coordinates))); // SS220-MartialArts
             return;
         }
 
@@ -563,6 +607,8 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         {
             DoDamageEffect(targets, user, targetXform);
         }
+
+        RaiseLocalEvent(user, new LightAttackPerformedEvent(target.Value, meleeUid, targetXform.Coordinates)); // SS220-MartialArts
     }
 
     protected abstract void DoDamageEffect(List<EntityUid> targets, EntityUid? user,  TransformComponent targetXform);
@@ -583,6 +629,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         var distance = Math.Min(component.Range, direction.Length());
 
         var damage = GetDamage(meleeUid, user, component);
+        var resistanceBypass = GetResistanceBypass(meleeUid, user, component);
         var entities = GetEntityList(ev.Entities);
 
         if (entities.Count == 0)
@@ -696,7 +743,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
             var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEvent.BonusDamage, hitEvent.ModifiersList);
 
-            var damageResult = Damageable.TryChangeDamage(entity, modifiedDamage, origin:user);
+            var damageResult = Damageable.TryChangeDamage(entity, modifiedDamage, origin: user, ignoreResistances: resistanceBypass);
 
             if (damageResult != null && damageResult.GetTotal() > FixedPoint2.Zero)
             {
@@ -825,6 +872,12 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             chance += malus.Malus;
         }
 
+        // SS220-Extended Weapon Logic-Start
+        var ev = new DisarmChanceModifierEvent(chance);
+        RaiseLocalEvent(disarmer, ev);
+        chance = ev.BaseChance + ev.Bonus;
+        // SS220-Extended Weapon Logic-End
+
         return Math.Clamp(chance, 0f, 1f);
     }
 
@@ -871,9 +924,9 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         EntityUid? inTargetHand = null;
 
-        if (targetHandsComponent?.ActiveHand is { IsEmpty: false })
+        if (_hands.TryGetActiveItem(target.Value, out var activeHeldEntity))
         {
-            inTargetHand = targetHandsComponent.ActiveHand.HeldEntity!.Value;
+            inTargetHand = activeHeldEntity.Value;
         }
 
         var attemptEvent = new DisarmAttemptEvent(target.Value, user, inTargetHand);
@@ -887,6 +940,11 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         if (attemptEvent.Cancelled)
             return false;
+
+        // SS220-MartialArts-Begin
+        // i'm struggling where to put this block, i hope it will fit here
+        RaiseLocalEvent(user, new DisarmAttackPerformedEvent(target.Value, Transform(target.Value).Coordinates));
+        // SS220-MartialArts-End
 
         var chance = CalculateDisarmChance(user, target.Value, inTargetHand, combatMode);
 

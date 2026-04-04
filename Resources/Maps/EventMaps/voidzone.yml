@@ -57,9 +57,7 @@ entities:
       name: map 15
     - type: Transform
     - type: Map
-    - type: PhysicsMap
     - type: GridTree
-    - type: MovedGrids
     - type: Broadphase
     - type: OccluderTree
     - type: LoadedMap
@@ -70106,153 +70104,78 @@ entities:
     - type: Transform
       pos: -1.5,12.5
       parent: 5
-    - type: ForcefieldGeneratorSS220
-      damageToEnergyCoefficient: 50
-      radius: 8
-      angle: 0.3490658503988659 rad
-      fieldLength: 12
   - uid: 874
     components:
     - type: Transform
       pos: 2.5,12.5
       parent: 5
-    - type: ForcefieldGeneratorSS220
-      damageToEnergyCoefficient: 50
-      radius: 8
-      angle: 5.934119456780721 rad
-      fieldLength: 12
   - uid: 875
     components:
     - type: Transform
       pos: -1.5,-16.5
       parent: 5
-    - type: ForcefieldGeneratorSS220
-      damageToEnergyCoefficient: 50
-      radius: 4
-      angle: 2.9670597283903604 rad
-      fieldLength: 12
   - uid: 876
     components:
     - type: Transform
       pos: 2.5,-16.5
       parent: 5
-    - type: ForcefieldGeneratorSS220
-      damageToEnergyCoefficient: 50
-      radius: 4
-      angle: 3.3161255787892263 rad
-      fieldLength: 12
   - uid: 5691
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 6.5,-54.5
       parent: 1667
-    - type: ForcefieldGeneratorSS220
-      damageToEnergyCoefficient: 50
-      radius: 5
-      angle: 0.17453292519943295 rad
-      fieldLength: 12
   - uid: 5692
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -5.5,-54.5
       parent: 1667
-    - type: ForcefieldGeneratorSS220
-      damageToEnergyCoefficient: 50
-      radius: 5
-      angle: 6.1086523819801535 rad
-      fieldLength: 12
   - uid: 5693
     components:
     - type: Transform
       pos: -5.5,34.5
       parent: 1667
-    - type: ForcefieldGeneratorSS220
-      damageToEnergyCoefficient: 50
-      radius: 6
-      angle: 0.9599310885968813 rad
-      fieldLength: 15
   - uid: 5694
     components:
     - type: Transform
       pos: 6.5,34.5
       parent: 1667
-    - type: ForcefieldGeneratorSS220
-      damageToEnergyCoefficient: 50
-      radius: 6
-      angle: 5.323254218582705 rad
-      fieldLength: 15
   - uid: 10239
     components:
     - type: Transform
       pos: 0.5,-1.5
       parent: 9990
-    - type: ForcefieldGeneratorSS220
-      damageToEnergyCoefficient: 50
-      radius: 8
-      angle: 1.3962634015954636 rad
-      fieldLength: 14
   - uid: 10240
     components:
     - type: Transform
       pos: 0.5,-2.5
       parent: 9990
-    - type: ForcefieldGeneratorSS220
-      damageToEnergyCoefficient: 50
-      radius: 8
-      angle: 4.886921905584122 rad
-      fieldLength: 14
   - uid: 10689
     components:
     - type: Transform
       pos: 0.5,-0.5
       parent: 10463
-    - type: ForcefieldGeneratorSS220
-      damageToEnergyCoefficient: 35
-      radius: 8
-      angle: 1.9198621771937625 rad
-      fieldLength: 12
   - uid: 10690
     components:
     - type: Transform
       pos: 0.5,0.5
       parent: 10463
-    - type: ForcefieldGeneratorSS220
-      damageToEnergyCoefficient: 35
-      radius: 8
-      angle: 5.497787143782138 rad
-      fieldLength: 7
   - uid: 10691
     components:
     - type: Transform
       pos: 0.5,1.5
       parent: 10463
-    - type: ForcefieldGeneratorSS220
-      damageToEnergyCoefficient: 35
-      radius: 8
-      angle: 0.7853981633974483 rad
-      fieldLength: 13
   - uid: 11116
     components:
     - type: Transform
       pos: -3.5,5.5
       parent: 10886
-    - type: ForcefieldGeneratorSS220
-      damageToEnergyCoefficient: 50
-      radius: 5
-      angle: 0.17453292519943295 rad
-      fieldLength: 10
   - uid: 11117
     components:
     - type: Transform
       pos: 4.5,5.5
       parent: 10886
-    - type: ForcefieldGeneratorSS220
-      damageToEnergyCoefficient: 50
-      radius: 5
-      angle: 6.1086523819801535 rad
-      fieldLength: 10
 - proto: GasCanisterBrokenBase
   entities:
   - uid: 5695

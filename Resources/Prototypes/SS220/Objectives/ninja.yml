@@ -79,4 +79,16 @@
       allowedState: [Alive]
       targetAmount: 120
 
-
+# Imperial/SS220 start
+- type: entity
+  parent: [BaseNinjaObjective, BaseCodeObjective]
+  id: LeaveNoTraceObjective
+  name: Do Not Reveal Yourself
+  description: Keep out of sight and avoid detection by the crew.
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Weapons/Melee/stunbaton.rsi
+      state: stunbaton_on
+  - type: LeaveNoTraceCondition
+# Imperial/SS220 end

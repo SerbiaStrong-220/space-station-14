@@ -99,6 +99,7 @@
     delayBeforeTriggerContents: 60
     randomDistance: true
     velocity: 3
+    triggerKey: trigger
   - type: Item
     sprite: SS220/Objects/Specific/Janitorial/soap.rsi
     storedRotation: -90
@@ -141,7 +142,7 @@
     - state: snotlet
   - type: Slippery
     slipData:
-      paralyzeTime: 1.5
+      knockdownTime: 1.5
       launchForwardsMultiplier: 1.5
   - type: SolutionContainerManager
     solutions:

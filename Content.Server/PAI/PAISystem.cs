@@ -6,16 +6,17 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Mind.Components;
 using Content.Shared.PAI;
 using Content.Shared.Popups;
-using Robust.Shared.Random;
-using System.Text;
 using Content.Shared.Instruments;
 using Robust.Shared.Player;
 using Content.Server.SS220.Language;
 using Content.Shared.SS220.Language.Components; // SS220-Add-Languages
+using Robust.Shared.Random;
+using System.Text;
+using Content.Server.SS220.Events;
 
 namespace Content.Server.PAI;
 
-public sealed class PAISystem : SharedPAISystem
+public sealed class PAISystem : EntitySystem
 {
     [Dependency] private readonly InstrumentSystem _instrumentSystem = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -27,7 +28,7 @@ public sealed class PAISystem : SharedPAISystem
     /// <summary>
     /// Possible symbols that can be part of a scrambled pai's name.
     /// </summary>
-    private static readonly char[] SYMBOLS = new[] { '#', '~', '-', '@', '&', '^', '%', '$', '*', ' '};
+    private static readonly char[] SYMBOLS = new[] { '#', '~', '-', '@', '&', '^', '%', '$', '*', ' ' };
 
     public override void Initialize()
     {
@@ -37,6 +38,8 @@ public sealed class PAISystem : SharedPAISystem
         SubscribeLocalEvent<PAIComponent, MindAddedMessage>(OnMindAdded);
         SubscribeLocalEvent<PAIComponent, MindRemovedMessage>(OnMindRemoved);
         SubscribeLocalEvent<PAIComponent, BeingMicrowavedEvent>(OnMicrowaved);
+
+        SubscribeLocalEvent<PAIComponent, GetInsteadIdCardNameEvent>(OnGetPaiName); // SS220 PAI-job-id-fix
     }
 
     private void OnUseInHand(EntityUid uid, PAIComponent component, UseInHandEvent args)
@@ -108,7 +111,6 @@ public sealed class PAISystem : SharedPAISystem
         var val = Loc.GetString("pai-system-pai-name-raw", ("name", name.ToString()));
         _metaData.SetEntityName(uid, val);
     }
-
     public void PAITurningOff(EntityUid uid)
     {
         //  Close the instrument interface if it was open
@@ -136,4 +138,11 @@ public sealed class PAISystem : SharedPAISystem
         }
         // SS220-Add-Languages end
     }
+
+    // SS220 PAI-job-id-fix start
+    public void OnGetPaiName(EntityUid uid, PAIComponent comp, ref GetInsteadIdCardNameEvent args)
+    {
+        args.Name = Loc.GetString("pai-system-role-name");
+    }
+    // SS220 PAI-job-id-fix end
 }

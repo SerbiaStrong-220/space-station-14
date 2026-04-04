@@ -59,6 +59,10 @@
     sprite: Clothing/Shoes/Boots/combatboots.rsi
   - type: Clothing
     sprite: Clothing/Shoes/Boots/combatboots.rsi
+#SS220 Army boots for sec begin
+  - type: ClothingSlowOnDamageModifier
+    modifier: 0.5
+#SS220 Army boots for sec end
 
 - type: entity
   parent: ClothingShoesMilitaryBase
@@ -78,6 +82,7 @@
     footstepSoundCollection:
       collection: FootstepHighHeels
       params:
+        volume: -6
         variation: 0.09
 
 - type: entity
@@ -218,6 +223,7 @@
       collection: FootstepSpurs
       params:
         variation: 0.09
+        volume: -6
 
 - type: entity
   parent: ClothingShoesBootsCowboyBrown

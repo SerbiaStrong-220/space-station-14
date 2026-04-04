@@ -30,5 +30,5 @@
   components:
   - type: Objective
     icon:
-      sprite: Objects/Magic/magicactions.rsi
+      sprite: SS220/Interface/Actions/magic_spells.rsi # SS220 Wizard getting used to
       state: fireball

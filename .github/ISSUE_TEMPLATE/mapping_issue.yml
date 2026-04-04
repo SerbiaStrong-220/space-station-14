@@ -30,6 +30,8 @@ body:
         - Donuts
         - Eclipse
         - Astro
+        - Nightshift
+        - Tox
         - Другое
     validations:
       required: true

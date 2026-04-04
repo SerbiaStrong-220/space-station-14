@@ -1,7 +1,9 @@
 ### UI
 
 # For the PDA screen
-comp-pda-ui = ID: [color=white]{ $owner }[/color], [color=yellow]{ CAPITALIZE($jobTitle) }[/color]
+#ss220 add color for job in pda start
+comp-pda-ui = ID: [color=white]{ $owner }[/color], [color={$cardColor}]{ CAPITALIZE($jobTitle) }[/color]
+#ss220 add color for job in pda end
 comp-pda-ui-blank = ID:
 comp-pda-ui-owner = Владелец: [color=white]{ $actualOwnerName }[/color]
 comp-pda-io-program-list-button = Программы

@@ -13,27 +13,27 @@
       visible: false
     - state: cig1
       map: ["cig1"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer_alt.rsi # SS220 from cabinet to 3/4 Part 1
       visible: false
     - state: cig2
       map: ["cig2"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer_alt.rsi # SS220 from cabinet to 3/4 Part 1
       visible: false
     - state: cig3
       map: ["cig3"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer_alt.rsi # SS220 from cabinet to 3/4 Part 1
       visible: false
     - state: cig4
       map: ["cig4"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer_alt.rsi # SS220 from cabinet to 3/4 Part 1
       visible: false
     - state: cig5
       map: ["cig5"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer_alt.rsi # SS220 from cabinet to 3/4 Part 1
       visible: false
     - state: cig6
       map: ["cig6"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer_alt.rsi # SS220 from cabinet to 3/4 Part 1
       visible: false
   - type: Tag
     tags:
@@ -87,27 +87,27 @@
       visible: false
     - state: cig1
       map: ["cig1"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer_alt.rsi # SS220 from cabinet to 3/4 Part 1
       visible: false
     - state: cig2
       map: ["cig2"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer_alt.rsi # SS220 from cabinet to 3/4 Part 1
       visible: false
     - state: cig3
       map: ["cig3"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer_alt.rsi # SS220 from cabinet to 3/4 Part 1
       visible: false
     - state: cig4
       map: ["cig4"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer_alt.rsi # SS220 from cabinet to 3/4 Part 1
       visible: false
     - state: cig5
       map: ["cig5"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer_alt.rsi # SS220 from cabinet to 3/4 Part 1
       visible: false
     - state: cig6
       map: ["cig6"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer.rsi
+      sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/visualizer_alt.rsi # SS220 from cabinet to 3/4 Part 1
       visible: false
   - type: Tag
     tags:
@@ -122,12 +122,15 @@
     shape: # Yes, this is cursed, but it breaks otherwise, dont question it.
     - 0,0,0,1
   - type: Storage
+    # SS220 cigarette pack fix start
+    whitelist:
+      tags:
+      - Cigarette
+      - Lighter
+      - Cigar
+    # SS220 cigarette pack fix end
     grid:
     - 0,0,4,1
-  - type: StorageFill
-    contents:
-    - id: CigaretteRandom
-      amount: 10
   - type: ItemCounter
     count:
       tags: [Cigarette]
@@ -148,9 +151,9 @@
   description: A label on the packaging reads, Wouldn't a slow death make a change?
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/green.rsi
+    sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/green.rsi # SS220 from cabinet to 3/4 Part 1
   - type: Item
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/green.rsi
+    sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/green.rsi # SS220 from cabinet to 3/4 Part 1
 
 - type: entity
   id: CigPackRed
@@ -159,11 +162,11 @@
   description: The most popular brand of Space Cigarettes, sponsors of the Space Olympics.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/red.rsi
+    sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/red.rsi # SS220 from cabinet to 3/4 Part 1
   - type: Item
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/red.rsi
+    sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/red.rsi # SS220 from cabinet to 3/4 Part 1
     #SS220 Cigarettes rework start
-  - type: StorageFill 
+  - type: StorageFill
     contents:
     - id: CigaretteDromedaryCo
       amount: 10
@@ -176,9 +179,9 @@
   description: For those who somehow want to obtain the record for the most amount of cancerous tumors.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/blue.rsi
+    sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/blue.rsi # SS220 from cabinet to 3/4 Part 1
   - type: Item
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/blue.rsi
+    sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/blue.rsi # SS220 from cabinet to 3/4 Part 1
     #SS220 Cigarettes rework start
   - type: StorageFill
     contents:
@@ -193,9 +196,9 @@
   description: Nomads's extra strong, for when your life is more extra hard.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/black.rsi
+    sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/black.rsi # SS220 from cabinet to 3/4 Part 1
   - type: Item
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/black.rsi
+    sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/black.rsi # SS220 from cabinet to 3/4 Part 1
     #SS220 Cigarettes rework start
   - type: StorageFill
     contents:
@@ -210,41 +213,13 @@
   description: Elite cigarettes for elite syndicate agents. Infused with medicine for when you need to do more than calm your nerves.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/syndicate.rsi
+    sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/syndicate.rsi # SS220 from cabinet to 3/4 Part 1
   - type: Item
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/syndicate.rsi
+    sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/syndicate.rsi # SS220 from cabinet to 3/4 Part 1
   - type: StorageFill
     contents:
     - id: CigaretteSyndicate
       amount: 10
-
-- type: entity
-  id: CigPackMixedMedical
-  parent: CigPackMixedBase
-  name: Dan's soaked smokes
-  suffix: Medical
-  description: Dan worked with NT chemistry to dispose of excess chemicals, ENJOY.
-  components:
-  - type: Sprite
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/mixed.rsi
-  - type: Item
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/mixed.rsi
-  - type: StorageFill
-    contents:
-    - id: CigaretteIron
-    - id: CigaretteTricordrazine
-    - id: CigaretteDylovene
-    - id: CigaretteDermaline
-    - id: CigaretteArithrazine
-    - id: CigaretteBicaridine
-    - id: CigaretteIpecac
-    - id: CigaretteOmnizine
-      prob: 0.25
-    - id: CigaretteDexalin
-      prob: 0.25
-    - id: CigarettePax
-      prob: 0.10
-
 
 - type: entity
   id: CigPackMixed
@@ -254,55 +229,70 @@
   description: Dan worked with NT chemistry to dispose of excess chemicals, ENJOY.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/mixed.rsi
+    sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/mixed.rsi # SS220 from cabinet to 3/4 Part 1
   - type: Item
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/mixed.rsi
-  - type: StorageFill
-    contents:
-    - id: CigaretteBbqSauce
-      prob: 0.70
-    - id: CigaretteBlackPepper
-      prob: 0.70
-    - id: CigaretteCapsaicinOil
-      prob: 0.70
-    - id: CigaretteBread
-      prob: 0.70
-    - id: CigaretteMilk
-      prob: 0.70
-    - id: CigaretteBanana
-      prob: 0.10
-    - id: CigaretteTHC
-      prob: 0.70
-    - id: CigaretteTricordrazine
-      prob: 0.25
-    - id: CigaretteSpaceDrugs
-      prob: 0.50
-    - id: CigaretteLicoxide
-      prob: 0.10
+    sprite: SS220/Objects/Consumable/Smokeables/Cigarettes/Packs/mixed.rsi # SS220 from cabinet to 3/4 Part 1
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:NestedSelector
+        rolls: !type:RangeNumberSelector
+          range: 2, 9
+        tableId: RandomSoakedSmokeTable
 
-- type: entity
-  id: CigPackMixedNasty
-  parent: CigPackMixedBase
-  name: Dan's soaked smokes
-  suffix: Nasty
-  description: Dan worked with NT chemistry to dispose of excess chemicals, ENJOY.
-  components:
-  - type: Sprite
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/mixed.rsi
-  - type: Item
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/mixed.rsi
-  - type: StorageFill
-    contents:
-    - id: CigaretteSpaceDrugs
-      amount: 2
-    - id: CigaretteWeldingFuel
-      amount: 2
-    - id: CigaretteMold
-      amount: 2
-    - id: CigaretteTHC
+# Entity tables
+
+- type: entityTable
+  id: RandomSoakedSmokeTable
+  table: !type:GroupSelector
+    children:
     - id: CigaretteLicoxide
-      prob: 0.50
-    - id: CigarettePax
-      prob: 0.10
-    - id: CigaretteMuteToxin
-      prob: 0.05
+      weight: 1
+    - id: CigaretteFrezon
+      weight: 1
+    - id: CigarettePhlogiston
+      weight: 1
+    - id: CigaretteWeldingFuel
+      weight: 3
+    - id: CigaretteMold
+      weight: 3
+    - id: CigaretteRadium
+      weight: 3
+    - id: CigaretteOmnizine
+      weight: 4
+    - id: CigaretteTricordrazine
+      weight: 4
+    - id: CigaretteIron
+      weight: 4
+    - id: CigaretteDylovene
+      weight: 4
+    - id: CigaretteDermaline
+      weight: 4
+    - id: CigaretteArithrazine
+      weight: 4
+    - id: CigaretteBicaridine
+      weight: 4
+    - id: CigaretteDexalin
+      weight: 4
+    - id: CigaretteHaloperidol
+      weight: 6
+    - id: CigaretteLaughter
+      weight: 6
+    - id: CigaretteLipolicide
+      weight: 6
+    - id: CigaretteSodiumPolyacrylate
+      weight: 6
+    - id: CigaretteRobustHarvest
+      weight: 6
+    - id: CigaretteBanana
+      weight: 7
+    - id: CigaretteBlackPepper
+      weight: 7
+    - id: CigaretteCapsaicinOil
+      weight: 7
+    - id: CigaretteBbqSauce
+      weight: 7
+    - id: CigaretteNutriment
+      weight: 7
+    - id: CigaretteSaline
+      weight: 7
+

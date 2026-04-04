@@ -228,7 +228,6 @@ public sealed partial class SingleMarkingPicker : BoxContainer
 
         var marking = _markings[Slot];
 
-        ColorSelectorContainer.DisposeAllChildren();
         ColorSelectorContainer.RemoveAllChildren();
 
         if (marking.MarkingColors.Count != proto.Sprites.Count)
@@ -243,6 +242,7 @@ public sealed partial class SingleMarkingPicker : BoxContainer
                 HorizontalExpand = true
             };
             selector.Color = marking.MarkingColors[i];
+            selector.SelectorType = ColorSelectorSliders.ColorSelectorType.Hsv; // defaults color selector to HSV
 
             var colorIndex = i;
             selector.OnColorChanged += color =>

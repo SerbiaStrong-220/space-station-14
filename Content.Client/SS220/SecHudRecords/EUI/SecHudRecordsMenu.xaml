@@ -1,0 +1,43 @@
+<controls:SecHudRecordsMenu
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client.SS220.SecHudRecords.EUI"
+    xmlns:userInterface="clr-namespace:Content.Client.SS220.UserInterface"
+    xmlns:ui="clr-namespace:Content.Client.SS220.CriminalRecords.UI"
+    MinSize="550 450"
+    Resizable="True">
+
+    <BoxContainer Orientation="Vertical" Margin="5">
+        <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+            <BoxContainer Orientation="Vertical" VerticalAlignment="Center" HorizontalExpand="False">
+                <ui:CharacterVisualisation Margin="10 10"
+                                           Name="RecordSprite"
+                                           HorizontalExpand="True"
+                                           VerticalExpand="True"
+                                           HorizontalAlignment="Center"
+                                           FaceScale="3 3"
+                                           IsOnlyFace="True"/>
+            </BoxContainer>
+
+            <BoxContainer Orientation="Vertical" HorizontalExpand="True" Margin="10 0 0 0">
+                <Label Name="NameLabel"/>
+                <Label Name="JobLabel"/>
+                <Label Text="{Loc 'sec-hud-records-history-status'}" Margin="0 10 0 0"/>
+                <ScrollContainer Name="ScrollCatalogContainer" MinWidth="350" MinHeight="150" HorizontalAlignment="Left" HScrollEnabled="False">
+                    <BoxContainer Name="RecordHistory" Orientation="Vertical"/>
+                </ScrollContainer>
+                <Label Text="{Loc 'sec-hud-records-enter-reason'}" Margin="0 5 0 0" />
+                <LineEdit Name="Reason" PlaceHolder="{Loc 'sec-hud-records-reason'}" HorizontalExpand="True" />
+            </BoxContainer>
+        </BoxContainer>
+
+        <!--<GridContainer HorizontalAlignment="Center" Name="CriminalStatuses" Columns="2"/>-->
+        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <BoxContainer Name="ChangeStatusContainer" VerticalExpand="True" Orientation="Vertical" Margin="0 10 0 0"/>
+            <userInterface:ShapeButton Name="ConfirmableButton"
+                                       Text="{Loc 'sec-hud-records-confirm'}"
+                                       SetSize="170 32"
+                                       Margin="0 10 0 0"
+                                       VerticalAlignment="Top"/>
+        </BoxContainer>
+    </BoxContainer>
+</controls:SecHudRecordsMenu>

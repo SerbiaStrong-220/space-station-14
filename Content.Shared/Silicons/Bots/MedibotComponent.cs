@@ -1,4 +1,7 @@
+using System.Linq; //ss220 fix medibot
 using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Damage; //ss220 fix medibot
+using Content.Shared.EntityEffects.Effects; //ss220 fix medibot
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs;
 using Robust.Shared.Audio;
@@ -59,12 +62,34 @@ public sealed partial class MedibotTreatment
     [DataField]
     public FixedPoint2? MaxDamage;
 
+    //ss220 fix medibot start
     /// <summary>
     /// Returns whether the treatment will probably work for an amount of damage.
     /// Doesn't account for specific damage types only total amount.
     /// </summary>
-    public bool IsValid(FixedPoint2 damage)
+    public bool IsValid(DamageSpecifier damage, bool isEmagged, IPrototypeManager proto)
     {
-        return (MaxDamage == null || damage < MaxDamage) && (MinDamage == null || damage > MinDamage);
+        if (isEmagged)
+            return true;
+
+        var reagent = proto.Index(Reagent);
+
+        var heals = reagent.Metabolisms?
+            .Values
+            .SelectMany(m => m.Effects)
+            .OfType<HealthChange>()
+            .SelectMany(h => h.Damage.DamageDict.Keys)
+            .ToHashSet();
+
+        var canHeal = heals != null && heals.Any(type => damage.DamageDict.GetValueOrDefault(type) > 0);
+
+        if (!canHeal)
+            return false;
+
+        var total = damage.GetTotal();
+
+        return (MaxDamage == null || total < MaxDamage) &&
+               (MinDamage == null || total > MinDamage);
     }
+    //ss220 fix medibot end
 }

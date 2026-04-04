@@ -61,6 +61,20 @@
       - EncryptionKeyCommand
 
 - type: entity
+  parent: ClothingHeadsetAltLaw
+  id: ClothingHeadsetAltIAA
+  name: full-size headset of the iaa
+  description: A headset for internal affairs agent to hear the captain's last words.
+  components:
+    - type: ContainerFill
+      containers:
+        key_slots:
+        - EncryptionKeyLaw
+        - EncryptionKeySecurity
+        - EncryptionKeyCommon
+        - EncryptionKeyCommand
+
+- type: entity
   parent: ClothingHeadsetAlt
   id: ClothingHeadsetAltCaptain
   name: full-size headset of the Captain

@@ -1,4 +1,5 @@
 using Content.Server.Radio;
+using Content.Server.Radio.EntitySystems;
 using Content.Shared.Mind;
 using Content.Shared.Radio;
 using Content.Shared.Radio.Components;
@@ -19,7 +20,7 @@ public sealed class HeadsetToggledSystem : SharedHeadsetToggledSystem
     {
         SubscribeLocalEvent<HeadsetToggledComponent, ComponentInit>(OnStartup);
         SubscribeLocalEvent<HeadsetToggledComponent, EncryptionChannelsChangedEvent>(OnChangeKey);
-        SubscribeLocalEvent<HeadsetToggledComponent, RadioReceiveAttemptEvent>(OnSendRadio);
+        SubscribeLocalEvent<HeadsetToggledComponent, RadioReceiveAttemptEvent>(OnSendRadio, after: [typeof(HeadsetSystem)]);
         SubscribeLocalEvent<HeadsetToggledComponent, BoundUIOpenedEvent>(OnBoundOpen);
         SubscribeLocalEvent<HeadsetToggledComponent, HeadsetChannelToggledMessage>(OnToggleChannel);
     }

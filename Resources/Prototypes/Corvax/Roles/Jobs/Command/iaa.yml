@@ -1,6 +1,7 @@
 - type: job
   id: IAA
   name: job-name-iaa
+  # setPreference: false # SS220 TODO NanoTraisen Representative
   playTimeTracker: JobIAA
   requirements:
   - !type:DepartmentTimeRequirement
@@ -46,3 +47,14 @@
     - Flash
     - ExpensiveLighterNanotrasen
 #SS220-IAA-Loadout-End
+
+- type: chameleonOutfit
+  id: IAAChameleonOutfit
+  job: IAA
+  equipment:
+    head: ClothingHeadHatBowlerHat
+    eyes: ClothingEyesGlassesSunglasses
+    mask: ClothingMaskBreath
+    neck: ClothingNeckLawyerbadge
+    outerClothing: ClothingOuterWinterColorBlack
+    gloves: ClothingHandsGlovesColorBlack

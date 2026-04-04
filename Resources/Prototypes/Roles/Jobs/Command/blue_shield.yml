@@ -6,16 +6,16 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 72000 # SS220-RoleTime
+      time: 72000
     - !type:DepartmentTimeRequirement
       department: Medical
-      time: 72000 # SS220-RoleTime
+      time: 72000
     - !type:OverallPlaytimeRequirement
-      time: 180000 # SS220-RoleTime
-    - !type:SpeciesRequirement #SS220-jobbans begin
+      time: 180000
+    - !type:SpeciesRequirement
       inverted: true
       species:
-      - Felinid #SS220-jobbans end
+      - Felinid
   startingGear: BlueShieldGear
   icon: "JobIconBlueShield"
   supervisors: job-supervisors-centcom
@@ -31,6 +31,7 @@
   - Chapel
   - Hydroponics
   - External
+  - Cryogenics
   - Chemistry
   - Engineering
   - Research
@@ -38,46 +39,47 @@
   - Salvage
   - Security
   - Brig
+  - Lawyer
   - Cargo
   - Atmospherics
   - Cargo
   - Medical
   - Blueshield
+  - Paramedic
+  - Clown
+  - Librarian
+  - Psychologist
+  - Reporter
+  - Mime
+  - Musician
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
-#  - !type:AddComponentSpecial
-#    components:
-#      - type: CQCCombat
-#        availableSpells:
-#        - NonLethalBlowback
-#        - NonLethalPunch
-#        - NonLethalDisarm
-#        - NonLethalLongSleep
-#      - type: Missable
-  #SS220 LimitationRevive - start
   - !type:AddComponentSpecial
     components:
-    - type: DefibrillatorSkill 
-  #SS220 LimitationRevive - end
+    - type: DefibrillatorSkill
 
 - type: startingGear
   id: BlueShieldGear
   equipment:
-#    jumpsuit: ClothingUniformJumpsuitBlueShield #SS220-blueshield-loadouts
-    shoes: ClothingShoesBootsBlueShieldJackFilled #SS220 BlueShield Rework
-#    eyes: ClothingEyesBlueShieldGlasses #SS220 BlueShield Rework
-#    head: ClothingHeadHatBeretNavyBlue #SS220 BlueShield Rework
-#    outerClothing: ClothingOuterArmorBulletproof #SS220-blueshield-loadouts
     id: BlueShieldPDA
-    ears: ClothingHeadsetBlueShield #SS220 BlueShield Rework
-    pocket1: WeaponSynergisticEnergyGun #SS220 BlueShield Rework
-#    belt: ClothingBeltSecurityFilled #SS220-blueshield-loadouts
+    ears: ClothingHeadsetBlueShield
+    pocket1: WeaponPistolMk58Nonlethal
     gloves: ClothingHandsGlovesCombat
-# SS220-Blueshield-Storage-Fix-Begin
   storage:
     back:
-#    - BoxSurvival SS220-Two Floppa Iteration
-    - Stunbaton #SS220 BlueShieldReworks
+    - Stunbaton
     - Flash
-# SS220-Blueshield-Storage-Fix-End
+    - MagazinePistolRubber
+    - MagazinePistol
+
+- type: chameleonOutfit
+  id: BlueShieldChameleonOutfit
+  job: BlueShield
+  hasMindShield: true
+  equipment:
+    eyes: ClothingEyesGlassesBlueShield
+    head: ClothingHeadHatBeretSecurity
+    mask: ClothingMaskGasBlueShield
+    neck: ClothingBeltHolster
+    gloves: ClothingHandsGlovesCombat

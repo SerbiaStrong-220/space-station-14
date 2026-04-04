@@ -6,11 +6,12 @@
   description: Прочитайте молитву, которая снимает порчу.
   categories: [ HideSpawnMenu ]
   components:
-  - type: InstantAction
+  - type: Action
     icon: { sprite: SS220/Interface/Actions/bible.rsi, state: exorcism }
     itemIconStyle: BigAction
-    event: !type:ExorcismActionEvent
     useDelay: 10
+  - type: InstantAction
+    event: !type:ExorcismActionEvent
 
 - type: entity
   id: ExorcismUncorruptEffect

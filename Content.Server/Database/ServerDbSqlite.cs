@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Content.Server.Administration.Logs;
 using Content.Server.IP;
 using Content.Server.Preferences.Managers;
+using Content.Server.SS220.Database;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Microsoft.EntityFrameworkCore;
@@ -380,6 +381,184 @@ namespace Content.Server.Database
                 DateTime.SpecifyKind(unban.UnbanTime, DateTimeKind.Utc));
         }
         #endregion
+
+        // SS220 species ban begin
+        #region Species ban
+        public override async Task<ServerSpeciesBanDef?> GetServerSpeciesBanAsync(int id)
+        {
+            await using var db = await GetDbImpl();
+
+            var ban = await db.SqliteDbContext.SpeciesBan
+                .Include(p => p.Unban)
+                .Where(p => p.Id == id)
+                .SingleOrDefaultAsync();
+
+            return ConvertSpeciesBan(ban);
+        }
+
+        public override async Task<List<ServerSpeciesBanDef>> GetServerSpeciesBansAsync(
+            IPAddress? address,
+            NetUserId? userId,
+            ImmutableArray<byte>? hwId,
+            ImmutableArray<ImmutableArray<byte>>? modernHWIds,
+            bool includeUnbanned)
+        {
+            await using var db = await GetDbImpl();
+
+            // SQLite can't do the net masking stuff we need to match IP address ranges.
+            // So just pull down the whole list into memory.
+            var queryBans = await GetAllSpeciesBans(db.SqliteDbContext, includeUnbanned);
+
+            return queryBans
+                .Where(b => SpeciesBanMatches(b, address, userId, hwId, modernHWIds))
+                .Select(ConvertSpeciesBan)
+                .ToList()!;
+        }
+
+        private static async Task<List<ServerSpeciesBan>> GetAllSpeciesBans(
+            SqliteServerDbContext db,
+            bool includeUnbanned)
+        {
+            IQueryable<ServerSpeciesBan> query = db.SpeciesBan.Include(p => p.Unban);
+            if (!includeUnbanned)
+            {
+                query = query.Where(p =>
+                    p.Unban == null && (p.ExpirationTime == null || p.ExpirationTime.Value > DateTime.UtcNow));
+            }
+
+            return await query.ToListAsync();
+        }
+
+        private static bool SpeciesBanMatches(
+            ServerSpeciesBan ban,
+            IPAddress? address,
+            NetUserId? userId,
+            ImmutableArray<byte>? hwId,
+            ImmutableArray<ImmutableArray<byte>>? modernHWIds)
+        {
+            if (address != null && ban.Address is not null && address.IsInSubnet(ban.Address.ToTuple().Value))
+                return true;
+
+            if (userId is { } id && ban.PlayerUserId == id.UserId)
+                return true;
+
+            switch (ban.HWId?.Type)
+            {
+                case HwidType.Legacy:
+                    if (hwId is { Length: > 0 } hwIdVar && hwIdVar.AsSpan().SequenceEqual(ban.HWId.Hwid))
+                        return true;
+                    break;
+
+                case HwidType.Modern:
+                    if (modernHWIds != null)
+                    {
+                        foreach (var modernHWId in modernHWIds)
+                        {
+                            if (modernHWId.AsSpan().SequenceEqual(ban.HWId.Hwid))
+                                return true;
+                        }
+                    }
+
+                    break;
+            }
+
+            return false;
+        }
+
+        public override async Task<ServerSpeciesBanDef> AddServerSpeciesBanAsync(ServerSpeciesBanDef serverBan)
+        {
+            await using var db = await GetDbImpl();
+
+            var ban = new ServerSpeciesBan
+            {
+                Address = serverBan.Address.ToNpgsqlInet(),
+                Reason = serverBan.Reason,
+                Severity = serverBan.Severity,
+                BanningAdmin = serverBan.BanningAdmin?.UserId,
+                HWId = serverBan.HWId,
+                BanTime = serverBan.BanTime.UtcDateTime,
+                ExpirationTime = serverBan.ExpirationTime?.UtcDateTime,
+                RoundId = serverBan.RoundId,
+                PlaytimeAtNote = serverBan.PlaytimeAtNote,
+                PlayerUserId = serverBan.UserId?.UserId,
+                SpeciesId = serverBan.SpeciesId,
+            };
+            db.SqliteDbContext.SpeciesBan.Add(ban);
+
+            await db.SqliteDbContext.SaveChangesAsync();
+            return ConvertSpeciesBan(ban);
+        }
+
+        public override async Task AddServerSpeciesUnbanAsync(ServerSpeciesUnbanDef serverUnban)
+        {
+            await using var db = await GetDbImpl();
+
+            db.SqliteDbContext.SpeciesUnban.Add(new ServerSpeciesUnban
+            {
+                BanId = serverUnban.BanId,
+                UnbanningAdmin = serverUnban.UnbanningAdmin?.UserId,
+                UnbanTime = serverUnban.UnbanTime.UtcDateTime
+            });
+
+            await db.SqliteDbContext.SaveChangesAsync();
+        }
+
+        [return: NotNullIfNotNull(nameof(ban))]
+        private static ServerSpeciesBanDef? ConvertSpeciesBan(ServerSpeciesBan? ban)
+        {
+            if (ban == null)
+            {
+                return null;
+            }
+
+            NetUserId? uid = null;
+            if (ban.PlayerUserId is { } guid)
+            {
+                uid = new NetUserId(guid);
+            }
+
+            NetUserId? aUid = null;
+            if (ban.BanningAdmin is { } aGuid)
+            {
+                aUid = new NetUserId(aGuid);
+            }
+
+            var unban = ConvertSpeciesUnban(ban.Unban);
+
+            return new ServerSpeciesBanDef(
+                ban.Id,
+                uid,
+                ban.Address.ToTuple(),
+                ban.HWId,
+                // SQLite apparently always reads DateTime as unspecified, but we always write as UTC.
+                DateTime.SpecifyKind(ban.BanTime, DateTimeKind.Utc),
+                ban.ExpirationTime == null ? null : DateTime.SpecifyKind(ban.ExpirationTime.Value, DateTimeKind.Utc),
+                ban.RoundId,
+                ban.PlaytimeAtNote,
+                ban.Reason,
+                ban.Severity,
+                aUid,
+                unban,
+                ban.SpeciesId);
+        }
+
+        private static ServerSpeciesUnbanDef? ConvertSpeciesUnban(ServerSpeciesUnban? unban)
+        {
+            if (unban is null)
+                return null;
+
+            NetUserId? aUid = null;
+            if (unban.UnbanningAdmin is { } aGuid)
+                aUid = new NetUserId(aGuid);
+
+            return new ServerSpeciesUnbanDef(
+                unban.Id,
+                aUid,
+                // SQLite apparently always reads DateTime as unspecified, but we always write as UTC.
+                DateTime.SpecifyKind(unban.UnbanTime, DateTimeKind.Utc));
+        }
+        #endregion
+        // SS220 species ban end
 
         [return: NotNullIfNotNull(nameof(ban))]
         private static ServerBanDef? ConvertBan(ServerBan? ban)

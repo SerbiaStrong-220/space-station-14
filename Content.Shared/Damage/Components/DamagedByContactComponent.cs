@@ -28,4 +28,9 @@ public sealed partial class DamagedByContactComponent : Component
     [DataField, AutoNetworkedField]
     public bool IgnoreResistances = false;
     //SS220 Add IgnoreResistances datafield end
+
+    //SS220 Add BloodlossModifier datafield start
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public float? BloodlossModifier;
+    //SS220 Add BloodlossModifier datafield end
 }

@@ -16,17 +16,16 @@ public sealed class TonerCartridgeSystem : EntitySystem
         SubscribeLocalEvent<TonerCartridgeComponent, ExaminedEvent>(OnExamine);
     }
 
-    private void OnExamine(EntityUid uid, TonerCartridgeComponent component, ExaminedEvent args)
+    private void OnExamine(Entity<TonerCartridgeComponent> ent, ref ExaminedEvent args)
     {
-        var fullness = component.Capacity == 0 ? 0 : (float)component.Charges / component.Capacity;
+        var fullness = ent.Comp.Capacity == 0 ? 0 : (float)ent.Comp.Charges / ent.Comp.Capacity;
         var amountLocId = fullness switch
         {
-            (>= 1) => "toner-cartridge-full",
-            (>= 0.6f and < 1) => "toner-cartridge-nearly-full",
-            (>= 0.4f and < 0.6f) => "toner-cartridge-half-full",
-            (> 0 and < 0.4f) => "toner-cartridge-nearly-empty",
-            (<= 0) => "toner-cartridge-empty",
-            _ => "toner-cartridge-empty"
+            >= 1.0f => "toner-cartridge-full",
+            >= 0.6f => "toner-cartridge-nearly-full",
+            >= 0.4f => "toner-cartridge-half-full",
+            > 0.0f => "toner-cartridge-nearly-empty",
+            _ => "toner-cartridge-empty",
         };
 
         args.PushMarkup(Loc.GetString(amountLocId));

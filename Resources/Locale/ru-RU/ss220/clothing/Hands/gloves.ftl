@@ -20,3 +20,12 @@ ent-ClothingHandsGlovesPowergloveDisabler = силовые перчатки
 ent-ActionTogglePowergloveDisabler = Переключить силовые перчатки
     .desc = Включает или выключает силовые перчатки.
 toggle-powergloves-text = Переключить силовые перчатки
+
+ent-ClothingHandsStormgloves = штормглавы
+    .desc = Наша молодая раса верила, что ресурсы планеты бесконечны. Но когда мы осознали всю глубину заблуждений, было уже поздно.
+    .suffix = За емаг одеждомата
+
+ent-ClothingHandsWhiteGlovesCaptain = белые перчатки капитана
+    .desc = Дорогие перчатки ветерана флотской службы NT.
+ent-ClothingHandsGlovesOrangeJanitor = оранжевые резиновые перчатки
+    .desc = Высококачественные резиновые перчатки, скрипящие от желания сделать уборку!

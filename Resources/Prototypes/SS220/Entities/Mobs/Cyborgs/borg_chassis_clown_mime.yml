@@ -18,6 +18,7 @@
   - type: RotationVisuals
     horizontalRotation: 90
   - type: Language
+    selectedLanguage: Galactic
     availableLanguages:
     - id: Galactic
     - id: SolCommon

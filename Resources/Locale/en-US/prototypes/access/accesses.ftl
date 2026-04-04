@@ -9,6 +9,8 @@ id-card-access-level-security = Security
 id-card-access-level-armory = Armory
 id-card-access-level-brig = Brig
 id-card-access-level-detective = Detective
+id-card-access-level-genpop-enter = Enter Genpop
+id-card-access-level-genpop-leave = Leave Genpop
 
 id-card-access-level-chief-engineer = Chief Engineer
 id-card-access-level-engineering = Engineering
@@ -21,6 +23,9 @@ id-card-access-level-chief-medical-officer = Chief Medical Officer
 id-card-access-level-medical = Medical
 id-card-access-level-chemistry = Chemistry
 id-card-access-level-paramedic = Paramedic
+# SS220 New_accesses_and_some_tweaks start
+id-card-access-level-psychologist = Psychologist
+# SS220 New_accesses_and_some_tweaks end
 
 id-card-access-level-quartermaster = Quartermaster
 id-card-access-level-cargo = Cargo
@@ -49,3 +54,5 @@ id-card-access-level-wizard = Wizard
 id-card-access-level-station-ai = Artifical Intelligence
 id-card-access-level-borg = Cyborg
 id-card-access-level-basic-silicon = Robot
+
+id-card-access-level-basic-xenoborg = Xenoborg

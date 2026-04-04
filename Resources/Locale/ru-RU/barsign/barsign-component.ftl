@@ -58,7 +58,7 @@ barsign-prototype-description-ale-nath = По какой-то причине п�
 ## The Net
 
 barsign-prototype-name-the-net = Сеть
-barsign-prototype-description-the-net = Незаметишь как затянет на пару часов.
+barsign-prototype-description-the-net = Не заметишь, как затянет на пару часов.
 
 ## Maid Cafe
 
@@ -119,6 +119,16 @@ barsign-prototype-description-emprah = Нравится и фанатикам, �
 
 barsign-prototype-name-spacebucks = Спейсбакс
 barsign-prototype-description-spacebucks = От них нельзя скрыться, даже в космосе, и даже после того, как некоторые стали называть их "срубли".
+
+## Maltroach
+
+barsign-prototype-name-maltroach = Пивная Моль
+barsign-prototype-description-maltroach = Сквик!
+
+## Whiskey Echoes
+
+barsign-prototype-name-whiskeyechoes = Виски Эхо
+barsign-prototype-description-whiskeyechoes = Элитный бар для элитных опер... Подождите, это же станция Nanotrasen. Почему эта вывеска в базе данных?
 
 ## EmpBarSign
 

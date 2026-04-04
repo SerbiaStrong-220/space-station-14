@@ -19,7 +19,7 @@ public sealed partial class PaperComponent : Component, IPhotocopyableComponent
     public bool Writable { get; set; } = true;
 
     [DataField("contentSize")]
-    public int ContentSize { get; set; } = 6000;
+    public int ContentSize { get; set; } = 10000;
 
     [DataField("stampedBy"), AutoNetworkedField]
     public List<StampDisplayInfo> StampedBy { get; set; } = new();

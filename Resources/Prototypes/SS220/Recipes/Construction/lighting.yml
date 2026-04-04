@@ -1,10 +1,9 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 - type: construction
-  name: purple light tube
   id: PurpleLight
   graph: PurpleLight
   startNode: start
   targetNode: icon
   category: construction-category-utilities
-  description: A high powered light tube containing a purple crystal
-  icon: { sprite: Objects/Power/light_tube.rsi, state: normal }
   objectType: Item

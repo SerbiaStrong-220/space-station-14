@@ -7,7 +7,6 @@ namespace Content.Server.SS220.MindSlave.Components;
 [RegisterComponent]
 public sealed partial class MindSlaveDisfunctionComponent : Component
 {
-
     [ViewVariables]
     public Dictionary<MindSlaveDisfunctionType, List<string>> Disfunction => DisfunctionParameters.Disfunction;
 

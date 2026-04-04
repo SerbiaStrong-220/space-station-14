@@ -1,8 +1,11 @@
 // Original code github.com/CM-14 Licence MIT, All edits under © SS220, EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Client.StatusIcon;
 using Content.Shared.SS220.IgnoreLightVision;
+using Content.Shared.SS220.IgnoreLightVision.Components;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
+using Robust.Shared.Enums;
 using Robust.Shared.Player;
 
 namespace Content.Client.SS220.IgnoreLightVision;
@@ -26,9 +29,9 @@ public abstract class AddIgnoreLightVisionOverlaySystem<T> : SharedAddIgnoreLigh
 
     protected override void VisionChanged(Entity<T> ent)
     {
-
         if (ent != _player.LocalEntity)
             return;
+
         // Do you know what is the worst finite state automat realization?
         // After code below you will know
         switch (ent.Comp.State)
@@ -46,21 +49,27 @@ public abstract class AddIgnoreLightVisionOverlaySystem<T> : SharedAddIgnoreLigh
             default:
                 throw new ArgumentOutOfRangeException();
         }
+
+        UpdateStatusIconsSpace(ent.Comp.ChangeIconOverlaySpace);
     }
+
     protected override void VisionRemoved(Entity<T> ent)
     {
         if (ent != _player.LocalEntity)
             return;
 
         Off();
+        UpdateStatusIconsSpace(false);
     }
 
     private void OnAttached(Entity<T> ent, ref LocalPlayerAttachedEvent args)
     {
         VisionChanged(ent);
     }
+
     private void OnDetached(Entity<T> ent, ref LocalPlayerDetachedEvent args)
     {
+        UpdateStatusIconsSpace(false);
         Off();
     }
 
@@ -69,14 +78,22 @@ public abstract class AddIgnoreLightVisionOverlaySystem<T> : SharedAddIgnoreLigh
         _overlay.RemoveOverlay(GetOverlayType());
         _light.DrawLighting = true;
     }
+
     private void Half(Overlay overlay)
     {
         _overlay.AddOverlay(overlay);
         _light.DrawLighting = true;
     }
+
     private void Full(Overlay overlay)
     {
         _overlay.AddOverlay(overlay);
         _light.DrawLighting = false;
+    }
+
+    private void UpdateStatusIconsSpace(bool alwaysSeen)
+    {
+        var status = _overlay.GetOverlay<StatusIconOverlay>();
+        status.UpdateSpace(alwaysSeen ? OverlaySpace.WorldSpace : OverlaySpace.WorldSpaceBelowFOV);
     }
 }

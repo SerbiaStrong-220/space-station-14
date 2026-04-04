@@ -1,4 +1,4 @@
-﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Pinpointer;
 using Content.Shared.SS220.Pinpointer;
@@ -8,20 +8,16 @@ using Robust.Client.UserInterface;
 namespace Content.Client.SS220.Pinpointer.UI;
 
 [UsedImplicitly]
-public sealed partial class PinpointerBoundUserInterface : BoundUserInterface
+public sealed partial class PinpointerBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     private PinpointerMenu? _crewMenu;
     private PinpointerUplinkMenu? _itemMenu;
-
-    public PinpointerBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
-    {
-    }
 
     protected override void UpdateState(BoundUserInterfaceState state)
     {
         base.UpdateState(state);
 
-        switch (state)
+        switch (state)//ToDo_SS220 fix cursed pinpointer https://github.com/SerbiaStrong-220/DevTeam220/issues/219
         {
             case PinpointerCrewUIState crewState:
                 if (_crewMenu == null)
@@ -38,6 +34,14 @@ public sealed partial class PinpointerBoundUserInterface : BoundUserInterface
                 _itemMenu.ItemListSet = itemState.Items;
                 _itemMenu.PopulateList();
                 break;
+
+            case PinpointerComponentUIState targetState:
+                if (_crewMenu == null)
+                    return;
+
+                _crewMenu.CrewListCoords = targetState.Targets;
+                _crewMenu.PopulateList();
+                break;
         }
     }
 
@@ -48,24 +52,32 @@ public sealed partial class PinpointerBoundUserInterface : BoundUserInterface
         if (!EntMan.TryGetComponent<PinpointerComponent>(Owner, out var pinpointer))
             return;
 
-        switch (pinpointer.Mode)
+        switch (pinpointer.Mode)//ToDo_SS220 fix cursed pinpointer https://github.com/SerbiaStrong-220/DevTeam220/issues/219
         {
             case PinpointerMode.Crew:
-            {
-                _crewMenu = this.CreateWindow<PinpointerMenu>();
-                _crewMenu.OnTargetPicked = OnTargetPicked;
-                _crewMenu.PopulateList();
-                break;
-            }
+                {
+                    _crewMenu = this.CreateWindow<PinpointerMenu>();
+                    _crewMenu.OnTargetPicked = OnCrewTargetPicked;
+                    _crewMenu.PopulateList();
+                    break;
+                }
 
             case PinpointerMode.Item:
-            {
-                _itemMenu = this.CreateWindow<PinpointerUplinkMenu>();
-                _itemMenu.OnTargetPicked = OnTargetPicked;
-                _itemMenu.OnDnaPicked = OnDnaPicked;
-                _itemMenu.PopulateList();
-                break;
-            }
+                {
+                    _itemMenu = this.CreateWindow<PinpointerUplinkMenu>();
+                    _itemMenu.OnTargetPicked = OnTargetPicked;
+                    _itemMenu.OnDnaPicked = OnDnaPicked;
+                    _itemMenu.PopulateList();
+                    break;
+                }
+
+            case PinpointerMode.Component:
+                {
+                    _crewMenu = this.CreateWindow<PinpointerMenu>();
+                    _crewMenu.OnTargetPicked = OnTargetPicked;
+                    _crewMenu.PopulateList();
+                    break;
+                }
         }
     }
 
@@ -77,6 +89,10 @@ public sealed partial class PinpointerBoundUserInterface : BoundUserInterface
         _itemMenu?.DnaWindow?.Close();
     }
 
+    private void OnCrewTargetPicked(NetEntity target)
+    {
+        SendMessage(new PinpointerCrewTargetPick(target));
+    }
     private void OnTargetPicked(NetEntity target)
     {
         SendMessage(new PinpointerTargetPick(target));

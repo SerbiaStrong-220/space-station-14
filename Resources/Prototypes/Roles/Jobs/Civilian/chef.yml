@@ -6,7 +6,7 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Civilian
-      time: 18000 # SS220-RoleTime
+      time: 5h # SS220-RoleTime
   startingGear: ChefGear
   icon: "JobIconChef"
   supervisors: job-supervisors-hop
@@ -17,16 +17,6 @@
   extendedAccess:
   - Hydroponics
   - Bar
-#  special:
-#    - !type:AddComponentSpecial
-#      components:
-#      - type: CQCCombat
-#        availableSpells:
-#        - NonLethalBlowback
-#        - NonLethalPunch
-#        - NonLethalDisarm
-#        - NonLethalLongSleep
-#      - type: Missable
 
 - type: startingGear
   id: ChefGear
@@ -38,3 +28,15 @@
   #storage:
     #back:
     #- Stuff
+
+- type: chameleonOutfit
+  id: ChefChameleonOutfit
+  job: Chef
+  equipment:
+    head: ClothingHeadHatChef
+    eyes: ClothingEyesGlassesCheapSunglasses
+    mask: ClothingMaskItalianMoustache
+    neck: ClothingNeckScarfStripedBrown
+    outerClothing: ClothingOuterJacketChef
+    gloves: ClothingHandsGlovesColorWhite
+    shoes: ClothingShoesChef

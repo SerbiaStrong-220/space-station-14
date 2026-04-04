@@ -6,12 +6,12 @@
   components:
   - type: Appearance
   - type: Sprite
-    sprite: Structures/Decoration/mannequin.rsi
+    sprite: SS220/Structures/Decorations/mannequin.rsi # SS220 A mannequin with limbs
     state: mannequin
     noRot: true
     layers:
     - map: [ "mannequin" ]
-      sprite: Structures/Decoration/mannequin.rsi
+      sprite: SS220/Structures/Decorations/mannequin.rsi # SS220 A mannequin with limbs
       state: mannequin
     - map: [ "jumpsuit" ]
     - map: [ "outerClothing" ]

@@ -23,6 +23,7 @@ ban-banned-2 = The ban reason is: "{$reason}"
 ban-banned-3 = If you don't agree with the sanction, you can apeal it in our Discord: https://discord.gg/ss220
 ban-banned-4 = Attempts to circumvent this ban such as creating a new account will be logged.
 ban-banned-8 = Ban number: { $banId }
+ban-banned-9 = Banned player login: "{$login}".
 
 soft-player-cap-full = The server is full!
 panic-bunker-account-denied = This server is in panic bunker mode, often enabled as a precaution against raids. New connections by accounts not meeting certain requirements are temporarily not accepted. Try again later
@@ -61,8 +62,8 @@ kick-afk = You were kicked for AFK
 
 generic-misconfigured = The server is misconfigured and is not accepting players. Please contact the server owner and try again later.
 
-ipintel-server-ratelimited = This server uses a security system with external verification, which has reached its maximum verification limit. Please contact the administration team of the server for assistance and try again later.
-ipintel-unknown = This server uses a security system with external verification, but it encountered an error. Please contact the administration team of the server for assistance and try again later.
-ipintel-suspicious = You seem to be connecting through a datacenter or VPN. For administrative reasons we do not allow VPN connections to play. Please contact the administration team of the server for assistance if you believe this is false.
+ipintel-server-ratelimited = This server uses an auditing system with external verification, but the server has reached its maximum verification limit with the external service. Please contact the administration team of the server to inform them and for further assistance, or try again later.
+ipintel-unknown = This server uses an auditing system with external verification, but an error was encountered while verifying your connection. Please contact the administration team of the server to inform them and for further assistance, or try again later.
+ipintel-suspicious = You seem to be attempting to connect using a datacenter, proxy, VPN or otherwise suspicious connection. For administrative reasons, we do not allow these connections to play. If you have a VPN or similar enabled, please turn it off and attempt to reconnect or contact the administration team of the server for assistance on how to continue if you believe this is false or require using these services to play.
 
 hwid-required = Your client has refused to send a hardware id. Please contact the administration team for further assistance.

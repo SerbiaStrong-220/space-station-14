@@ -1,0 +1,11 @@
+<sb:SpeciesBanListControl
+    xmlns="https://spacestation14.io"
+    xmlns:sb="clr-namespace:Content.Client.SS220.Administration.UI.BanList.SpeciesBans">
+    <PanelContainer StyleClasses="BackgroundDark">
+        <ScrollContainer>
+            <BoxContainer Name="SpeciesBans" Access="Public" Orientation="Vertical">
+                <sb:SpeciesBanListHeader Name="BansHeader"/>
+            </BoxContainer>
+        </ScrollContainer>
+    </PanelContainer>
+</sb:SpeciesBanListControl>

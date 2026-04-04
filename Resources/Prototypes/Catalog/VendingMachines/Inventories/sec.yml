@@ -23,6 +23,7 @@
     RiotBulletShield: 2
     RadioHandheldSecurity: 5
     CigPackSEC: 2 #SS220 Cigarettes
+    Bola: 12 # SS220-yes-it-was-6-now-12-cause-techfab-dont-have-craft-recipe
   # security officers need to follow a diet regimen!
   contrabandInventory:
     WeaponMeleeNeedle: 2

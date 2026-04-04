@@ -1,4 +1,5 @@
 ﻿using Content.Shared.Interaction;
+using Content.Shared.Movement.Components;
 
 namespace Content.Shared.MouseRotator;
 
@@ -27,6 +28,11 @@ public abstract class SharedMouseRotatorSystem : EntitySystem
         var query = EntityQueryEnumerator<MouseRotatorComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var rotator, out var xform))
         {
+            // SS220-Grabs-Start
+            if (!rotator.Enabled)
+                continue;
+            // SS220-Grabs-End
+
             if (rotator.GoalRotation == null)
                 continue;
 
@@ -47,6 +53,11 @@ public abstract class SharedMouseRotatorSystem : EntitySystem
 
     private void OnRequestRotation(RequestMouseRotatorRotationEvent msg, EntitySessionEventArgs args)
     {
+        // Ignore the request if the requested entity is not the user's attached entity.
+        // This can happen when a player switches controlled entities while rotating.
+        if (args.SenderSession.AttachedEntity != GetEntity(msg.User))
+            return;
+
         if (args.SenderSession.AttachedEntity is not { } ent
             || !TryComp<MouseRotatorComponent>(ent, out var rotator))
         {
@@ -57,4 +68,54 @@ public abstract class SharedMouseRotatorSystem : EntitySystem
         rotator.GoalRotation = msg.Rotation;
         Dirty(ent, rotator);
     }
+
+    // SS220-Grabs-Start
+    public void SetEnabled(Entity<MouseRotatorComponent?> ent, bool enabled)
+    {
+        if (!Resolve(ent, ref ent.Comp, false))
+        {
+            if (!enabled)
+                return;
+
+            ent.Comp = AddComp<MouseRotatorComponent>(ent);
+        }
+
+        if (enabled && !ent.Comp.Enabled)
+        {
+            var attemptEv = new EnableMouseRotationAttemptEvent();
+            RaiseLocalEvent(ent, attemptEv);
+
+            if (attemptEv.Cancelled)
+                return;
+        }
+
+        ent.Comp.Enabled = enabled;
+
+        if (enabled)
+        {
+            EnsureComp<NoRotateOnMoveComponent>(ent);
+        }
+        else if (HasComp<NoRotateOnMoveComponent>(ent))
+        {
+            RemCompDeferred<NoRotateOnMoveComponent>(ent);
+        }
+    }
+
+    public void RefreshEnabled(Entity<MouseRotatorComponent?> ent)
+    {
+        if (!Resolve(ent, ref ent.Comp, false))
+            return;
+
+        if (!ent.Comp.Enabled)
+            return;
+
+        var attemptEv = new EnableMouseRotationAttemptEvent();
+        RaiseLocalEvent(ent, attemptEv);
+
+        if (!attemptEv.Cancelled)
+            return;
+
+        ent.Comp.Enabled = false;
+    }
+    // SS220-Grabs-End
 }

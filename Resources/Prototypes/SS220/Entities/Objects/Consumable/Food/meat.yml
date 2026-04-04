@@ -1,0 +1,225 @@
+# Base
+
+- type: entity
+  parent: FoodMeatBase
+  id: FoodCutletBase
+  abstract: true
+  components:
+  - type: InternalTemperature
+    thickness: 0.06
+
+# Raw
+
+- type: entity
+  parent: FoodMeatRawBase
+  id: FoodMeatRabbit
+  name: raw rabbit meat
+  description: Natural white meat that is low in fat and high in protein. It features a tender texture and a pleasant, slightly sweet flavor.
+  components:
+  - type: Tag
+    tags:
+    - Raw
+    - Meat
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/meat.rsi
+    state: rabbit
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: UncookedAnimalProteins
+          Quantity: 3
+        - ReagentId: Fat
+          Quantity: 1
+  - type: Construction
+    graph: RabbitSteak
+    node: start
+    defaultTarget: cooked rabbit
+  - type: RotInto
+    entity: FoodMeatRabbitRotten
+
+- type: entity
+  parent: FoodMeatBase
+  id: FoodMeatRabbitRotten
+  name: rotten rabbit meat
+  components:
+  - type: Tag
+    tags:
+    - Raw
+    - Meat
+    - Trash
+    - Recyclable
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/meat.rsi
+    state: rabbit_rotten
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: UncookedAnimalProteins
+          Quantity: 3
+        - ReagentId: GastroToxin
+          Quantity: 2
+        - ReagentId: Fat
+          Quantity: 1
+
+- type: entity
+  parent: FoodMeatRabbit
+  id: FoodMeatRabbitBnuuy
+  name: bnuuynyatina
+  description: You should have followed the rabbit...
+  components:
+  - type: FlavorProfile
+    flavors:
+      - bnuuynyatina
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: UncookedAnimalProteins
+          Quantity: 3
+        - ReagentId: Fat
+          Quantity: 1
+        - ReagentId: Toxin
+          Quantity: 2
+        - ReagentId: Stimulants
+          Quantity: 2
+  - type: Construction
+    graph: RabbitBnuuySteak
+    node: start
+    defaultTarget: cooked bnuuy
+  - type: RotInto
+    entity: FoodMeatRabbitBnuuyDried
+
+- type: entity
+  parent: FoodMeatBase
+  id: FoodMeatRabbitBnuuyDried
+  name: dried bnuuynyatina
+  description: "Specialties of the Vnuch's asteroid."
+  components:
+  - type: FlavorProfile
+    flavors:
+      - driedbnuuynyatina
+  - type: Tag
+    tags:
+    - Raw
+    - Meat
+    - Trash
+    - Recyclable
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/meat.rsi
+    state: rabbit_dried
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 2
+        - ReagentId: Protein
+          Quantity: 2
+
+# Cooked
+
+- type: entity
+  name: spider steak
+  parent: FoodMeatBase
+  id: FoodMeatSpiderSteak
+  description: A cooked spider. Smells primal.
+  components:
+  - type: Tag
+    tags:
+    - Cooked
+    - Meat
+    - Steak
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/meat.rsi
+    state: spider-grilled
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Protein
+          Quantity: 5
+  - type: SliceableFood
+    count: 3
+    slice: FoodMeatSpiderCutletCooked
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: spider-inhand-left-grilled
+      right:
+      - state: spider-inhand-right-grilled
+
+- type: entity
+  name: snake steak
+  parent: FoodMeatBase
+  id: FoodMeatSnakeSteak
+  components:
+  - type: Tag
+    tags:
+    - Cooked
+    - Meat
+    - Steak
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/meat.rsi
+    state: snake-grilled
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 4
+        - ReagentId: Protein
+          Quantity: 8
+        - ReagentId: Toxin
+          Quantity: 1
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: snake-inhand-left-grilled
+      right:
+      - state: snake-inhand-right-grilled
+
+- type: entity
+  parent: FoodMeatBase
+  id: FoodMeatRabbitSteak
+  name: rabbit steak
+  description: A perfectly cooked piece of rabbit meat. Tender, juicy, and healthy.
+  components:
+  - type: Tag
+    tags:
+    - Cooked
+    - Meat
+    - Steak
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/meat.rsi
+    state: rabbit_cooked
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 2
+        - ReagentId: Protein
+          Quantity: 2
+
+- type: entity
+  parent: FoodMeatRabbitSteak
+  id: FoodMeatRabbitBnuuySteak
+  name: bnuuynyatina steak
+  description: "Disgusting... And this isn't about bnuuynyatina..."
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 2
+        - ReagentId: Protein
+          Quantity: 2
+        - ReagentId: Toxin
+          Quantity: 1
+        - ReagentId: Stimulants
+          Quantity: 2

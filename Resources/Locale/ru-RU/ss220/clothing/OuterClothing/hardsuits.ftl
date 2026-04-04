@@ -1,7 +1,7 @@
-ent-ClothingOuterHardsuitLightBlueshield = лёгкий скафандр "Синий Щит"
+ent-ClothingOuterHardsuitLightBlueshield = лёгкий скафандр синего щита
     .desc = Специальный скафандр, разработанный для "Синий щит". Он отличается своей легкостью и высокой маневренностью.
-ent-ClothingOuterHardsuitHightBlueshield = тяжелый скафандр "Синий Щит"
-    .desc = Специальный скафандр, разработанный для оперативников «Синего щита». Защитит даже от ядерного взрыва!
+ent-ClothingOuterHardsuitHightBlueshield = тяжелый скафандр синего щита
+    .desc = Специальный скафандр, разработанный для оперативников ГСН. Защитит даже от ядерного взрыва!
 
 ent-ClothingOuterHardsuitDeathsquadCommander = скафандр командира Эскадрона Смерти
     .suffix = Эскадрон Смерти, dq
@@ -12,3 +12,13 @@ ent-ClothingOuterHardsuitDeathsquadAlpha = скафандр специалист
 
 ent-ClothingOuterHardsuitCentcom = скафандр Центрального Командования
     .desc = Сочетание непоколебимой защиты и передовых технологий, воплощение мощи и стратегического превосходства.
+
+ent-ClothingOuterHardsuitERTLeaderGamma = скафандр лидера гамма ОБР
+    .desc = Защитный скафандр, используемый лидерами отряда быстрого реагирования.
+ent-ClothingOuterHardsuitERTMedicalGamma = скафандр медика гамма ОБР
+    .desc = Защитный скафандр, используемый медиками отряда быстрого реагирования.
+ent-ClothingOuterHardsuitERTSecurityGamma = скафандр офицера безопасности гамма ОБР
+    .desc = Защитный скафандр, используемый офицерами безопасности отряда быстрого реагирования.
+
+ent-ClothingOuterHardsuitQuartermaster = скафандр квартирмейстера
+    .desc = Прототип нового скафандра для Квартирмейстера, предназначенный для выполнения работ в опасных условиях.

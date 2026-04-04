@@ -1,4 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+using System.Linq;
 using Content.Server.GameTicking;
 using Content.Server.Popups;
 using Content.Server.Radio.EntitySystems;
@@ -8,14 +10,14 @@ using Content.Server.StationRecords.Systems;
 using Content.Shared.UserInterface;
 using Content.Shared.Access.Systems;
 using Content.Shared.Radio;
-using Content.Shared.Roles;
 using Content.Shared.SS220.CriminalRecords;
 using Content.Shared.StationRecords;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
-using System.Linq;
 using Content.Server.StationRecords.Components;
+using Content.Shared.Containers.ItemSlots;
+using Content.Shared.CrewManifest;
 
 namespace Content.Server.SS220.CriminalRecords;
 
@@ -40,23 +42,24 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
         SubscribeLocalEvent<CriminalRecordsConsole220Component, SelectStationRecord>(OnKeySelected);
         SubscribeLocalEvent<CriminalRecordsConsole220Component, UpdateCriminalRecordStatus>(OnCriminalStatusUpdate);
         SubscribeLocalEvent<CriminalRecordsConsole220Component, DeleteCriminalRecordStatus>(OnCriminalStatusDelete);
+        SubscribeLocalEvent<CriminalRecordsConsole220Component, RequestLinkIdToRecord>(OnRequestLinkIdToRecord);
         SubscribeLocalEvent<RecordModifiedEvent>(OnRecordModified);
         SubscribeLocalEvent<AfterGeneralRecordCreatedEvent>(OnRecordCreated);
         SubscribeLocalEvent<GeneralStationRecordConsoleComponent, ActivatableUIOpenAttemptEvent>(OnAttemptOpenUI);
     }
 
-    private void OnAttemptOpenUI(EntityUid uid, GeneralStationRecordConsoleComponent comp, ActivatableUIOpenAttemptEvent args)
+    private void OnAttemptOpenUI(Entity<GeneralStationRecordConsoleComponent> ent, ref ActivatableUIOpenAttemptEvent args)
     {
-        if (!_accessReader.IsAllowed(args.User, uid))
-        {
-            _popup.PopupEntity(Loc.GetString("criminal-records-ui-no-access"), uid, recipient: args.User);
-            args.Cancel();
-        }
+        if (_accessReader.IsAllowed(args.User, ent.Owner))
+            return;
+
+        _popup.PopupEntity(Loc.GetString("criminal-records-ui-no-access"), ent.Owner, recipient: args.User);
+        args.Cancel();
     }
 
     private void OnRecordCreated(AfterGeneralRecordCreatedEvent args)
     {
-        var query = EntityManager.EntityQueryEnumerator<CriminalRecordsConsole220Component>();
+        var query = EntityQueryEnumerator<CriminalRecordsConsole220Component>();
 
         while (query.MoveNext(out var uid, out var comp))
         {
@@ -67,7 +70,7 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
 
     private void OnRecordModified(RecordModifiedEvent args)
     {
-        var query = EntityManager.EntityQueryEnumerator<CriminalRecordsConsole220Component>();
+        var query = EntityQueryEnumerator<CriminalRecordsConsole220Component>();
 
         while (query.MoveNext(out var uid, out var comp))
         {
@@ -76,9 +79,9 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
         }
     }
 
-    private void UpdateUserInterface<T>(EntityUid uid, CriminalRecordsConsole220Component component, T ev)
+    private void UpdateUserInterface<T>(Entity<CriminalRecordsConsole220Component> ent, ref T ev)
     {
-        UpdateUserInterface(uid, component);
+        UpdateUserInterface(ent);
     }
 
     private void OnKeySelected(Entity<CriminalRecordsConsole220Component> entity, ref SelectStationRecord msg)
@@ -100,7 +103,7 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
     private StationRecordKey? TryGetConsoleActiveRecordKey(Entity<CriminalRecordsConsole220Component> entity)
     {
         var consoleStation = _stationSystem.GetOwningStation(entity);
-        if (!consoleStation.HasValue || !consoleStation.Value.Valid)
+        if (consoleStation is not { Valid: true })
             return null;
 
         if (!entity.Comp.ActiveKey.HasValue)
@@ -109,30 +112,30 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
         return new StationRecordKey(entity.Comp.ActiveKey.Value, consoleStation.Value);
     }
 
-    private void OnCriminalStatusUpdate(EntityUid uid, CriminalRecordsConsole220Component component, UpdateCriminalRecordStatus args)
+    private void OnCriminalStatusUpdate(Entity<CriminalRecordsConsole220Component> ent, ref UpdateCriminalRecordStatus args)
     {
-        if (!component.IsSecurity)
+        if (!ent.Comp.IsSecurity)
             return;
 
-        if (TryGetConsoleActiveRecordKey((uid, component)) is not { } key)
+        if (TryGetConsoleActiveRecordKey(ent) is not { } key)
             return;
 
-        if (!_accessReader.IsAllowed(args.Actor, uid))
+        if (!_accessReader.IsAllowed(args.Actor, ent.Owner))
         {
-            _popup.PopupEntity(Loc.GetString("criminal-records-ui-no-access"), uid, recipient: args.Actor);
+            _popup.PopupEntity(Loc.GetString("criminal-records-ui-no-access"), ent.Owner, recipient: args.Actor);
             return;
         }
 
         var currentTime = _gameTicker.RoundDuration();
-        if (component.LastEditTime != null && component.LastEditTime + component.EditCooldown - CooldownLagTolerance > currentTime)
+        if (ent.Comp.LastEditTime != null && ent.Comp.LastEditTime + ent.Comp.EditCooldown - CooldownLagTolerance > currentTime)
         {
-            _popup.PopupEntity(Loc.GetString("criminal-status-cooldown-popup"), uid, args.Actor);
+            _popup.PopupEntity(Loc.GetString("criminal-status-cooldown-popup"), ent.Owner, args.Actor);
             return;
         }
 
         var messageCut = args.Message;
-        if (messageCut.Length > component.MaxMessageLength)
-            messageCut = messageCut.Substring(0, component.MaxMessageLength);
+        if (messageCut.Length > ent.Comp.MaxMessageLength)
+            messageCut = messageCut.Substring(0, ent.Comp.MaxMessageLength);
 
         // get previous record so we can compare criminal status later
         _criminalRecord.TryGetLastRecord(key, out var generalRecord, out var prevRecord);
@@ -150,16 +153,16 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
                     if (!string.IsNullOrWhiteSpace(status.RadioReportMessage))
                     {
                         SendRadioMessage(
-                            uid,
+                            ent.Owner,
                             Loc.GetString(status.RadioReportMessage, ("target", generalRecord.Name), ("reason", messageCut)),
-                            component.ReportRadioChannel);
+                            ent.Comp.ReportRadioChannel);
                     }
                 }
             }
         }
 
-        component.LastEditTime = currentTime;
-        _audio.PlayPvs(component.DatabaseActionSound, uid);
+        ent.Comp.LastEditTime = currentTime;
+        _audio.PlayPvs(ent.Comp.DatabaseActionSound, ent.Owner);
     }
 
     private void OnCriminalStatusDelete(Entity<CriminalRecordsConsole220Component> entity, ref DeleteCriminalRecordStatus args)
@@ -182,12 +185,38 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
         _audio.PlayPvs(entity.Comp.DatabaseActionSound, entity);
     }
 
+    private void OnRequestLinkIdToRecord(Entity<CriminalRecordsConsole220Component> ent, ref RequestLinkIdToRecord args)
+    {
+        if (!_accessReader.IsAllowed(args.Actor, ent.Owner))
+        {
+            _popup.PopupEntity(Loc.GetString("criminal-records-ui-no-access"), ent.Owner, recipient: args.Actor);
+            return;
+        }
+
+        if (!TryComp<ItemSlotsComponent>(ent, out var itemSlots) || itemSlots.Slots.Count == 0)
+            return;
+
+        if (itemSlots.Slots.First().Value.Item is not { } idCard)
+            return;
+
+        if (_stationSystem.GetOwningStation(idCard) is not { } station)
+            return;
+
+        (NetEntity, uint)? rec = (GetNetEntity(station), args.Key);
+        var recordKey = _stationRecords.Convert(rec);
+        if (recordKey == null)
+            return;
+
+        EnsureComp<StationRecordKeyStorageComponent>(idCard, out var storage);
+        storage.Key = recordKey.Value;
+
+        Dirty(idCard, storage);
+    }
+
     private void UpdateUserInterface(EntityUid uid, CriminalRecordsConsole220Component? console = null)
     {
         if (!Resolve(uid, ref console))
-        {
             return;
-        }
 
         var owningStation = _stationSystem.GetOwningStation(uid);
 

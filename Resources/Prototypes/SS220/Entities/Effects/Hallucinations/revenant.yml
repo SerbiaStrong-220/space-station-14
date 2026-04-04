@@ -1,0 +1,17 @@
+- type: weightedRandomEntity
+  id: HallucinationRevenant
+  weights:
+    DarkReaperPortalEffect: 10
+    NormalHeadSkeleton: 10
+    Lightning: 8
+    CrateWoodenGrave: 6
+    CrateStoneGrave: 6
+    EffectEmpPulse: 6
+    EffectSparks: 5
+    SS220Gore: 5
+    PortalRed: 2
+    PortalBlue: 2
+    CrystalGreen: 1
+    CrystalPink: 1
+    CrystalGrey: 1
+    CrystalOrange: 1

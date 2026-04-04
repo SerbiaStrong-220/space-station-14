@@ -1,14 +1,3 @@
-- type: entity
-  parent: BaseThiefStealStructureObjective
-  id: VehicleSecwayStealObjective
-  components:
-  - type: NotJobRequirement
-    job: SecurityOfficer
-  - type: StealCondition
-    stealGroup: VehicleSecway
-  - type: Objective
-    difficulty: 1
-
 #SALVAGE SHUTTLE RETURN
 - type: entity
   parent: BaseThiefStealObjective
@@ -20,3 +9,10 @@
     stealGroup: SalvageShuttleConsoleCircuitboard
   - type: Objective
     difficulty: 0.7
+
+- type: entity
+  parent: BaseThiefStealObjective
+  id: ThiefStealObjective
+  components:
+  - type: Objective
+    difficulty: 0.25

@@ -35,6 +35,7 @@
     - type: Stamina
       critThreshold: 100
     - type: Butcherable
+      willRenameEnt: false
       spawned:
         - id: FoodMiGomyceteCult
           amount: 2
@@ -75,9 +76,12 @@
     - type: Telepathy
       canSend: false
       telepathyChannelPrototype: TelepathyChannelYoggSothothCult
+    - type: Language
+      availableLanguages:
+      - id: Galactic
 
 - type: entity
-  name: corrupted сow
+  name: corrupted cow
   parent: [BaseMobCorrupted, MobCow]
   id: CultCowCorrupted
   components:
@@ -746,8 +750,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      100: Critical
-      120: Dead
+      30: Critical
+      40: Dead
   #- type: Thirst
   #  startingThirst: 25
   #  thresholds:
@@ -759,3 +763,6 @@
   #    Okay: 25
   #    Dead: 0
   #  baseDecayRate: 0.000001
+  - type: Tag #Not inheriting DoorBumpOpener
+    tags:
+      - CannotSuicide

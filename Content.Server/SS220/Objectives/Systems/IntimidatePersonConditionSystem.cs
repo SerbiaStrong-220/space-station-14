@@ -32,7 +32,7 @@ public sealed class IntimidatePersonConditionSystem : EntitySystem
 
     private void OnGetProgress(Entity<IntimidatePersonConditionComponent> entity, ref ObjectiveGetProgressEvent args)
     {
-        if (!_target.GetTarget(entity.Owner, out var target))
+        if (!_target.GetTarget(entity.Owner, out _))
             return;
 
         if (entity.Comp.ObjectiveIsDone)

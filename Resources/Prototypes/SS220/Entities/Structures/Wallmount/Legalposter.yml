@@ -1,0 +1,14 @@
+- type: entity
+  id: Legalposters
+  name: Roll of posters
+  description: The usual poster
+  parent: BaseItem
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: SS220/Objects/Misc/Legalposter.rsi
+    state: legalposter
+  - type: Tag
+    tags:
+    - Legalposter

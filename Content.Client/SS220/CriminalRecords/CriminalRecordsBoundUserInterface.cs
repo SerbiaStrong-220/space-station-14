@@ -1,5 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Client.SS220.CriminalRecords.UI;
+using Content.Shared.CrewManifest;
 using Content.Shared.SS220.CriminalRecords;
 using Content.Shared.StationRecords;
 using Robust.Shared.Prototypes;
@@ -8,7 +10,7 @@ namespace Content.Client.SS220.CriminalRecords;
 
 public sealed class CriminalRecordsBoundUserInterface : BoundUserInterface
 {
-    CriminalRecordsWindow? _window;
+    private CriminalRecordsWindow? _window;
 
     public CriminalRecordsBoundUserInterface(EntityUid owner, Enum key) : base(owner, key)
     {
@@ -23,11 +25,11 @@ public sealed class CriminalRecordsBoundUserInterface : BoundUserInterface
         _window.OnKeySelected += OnKeySelected;
         _window.OnCriminalStatusChange += OnStatusUpdated;
         _window.OnCriminalStatusDelete += OnStatusDeleted;
+        _window.OnLinkRecordToId += OnLinkRecord;
 
         if (EntMan.TryGetComponent<CriminalRecordsConsole220Component>(Owner, out var comp))
         {
             _window.SetSecurityMode(comp.IsSecurity);
-            _window.MaxEntryMessageLength = comp.MaxMessageLength;
             _window.EditCooldown = (int) comp.EditCooldown.TotalSeconds;
         }
 
@@ -45,9 +47,15 @@ public sealed class CriminalRecordsBoundUserInterface : BoundUserInterface
     {
         SendMessage(new UpdateCriminalRecordStatus(statusUpdate.Item1, statusUpdate.Item2));
     }
+
     private void OnStatusDeleted(int time)
     {
         SendMessage(new DeleteCriminalRecordStatus(time));
+    }
+
+    private void OnLinkRecord(uint key)
+    {
+        SendMessage(new RequestLinkIdToRecord(key));
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)

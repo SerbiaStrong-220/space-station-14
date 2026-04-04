@@ -753,14 +753,6 @@ entities:
     - type: RadiationGridResistance
     - type: IFF
       color: '#FFFACDFF'
-- proto: ActionToggleInternals
-  entities:
-  - uid: 1093
-    components:
-    - type: Transform
-      parent: 1072
-    - type: InstantAction
-      container: 1072
 - proto: AgentIDCard
   entities:
   - uid: 1023
@@ -5547,16 +5539,8 @@ entities:
     components:
     - type: Transform
       parent: 1071
-    - type: GasTank
-      toggleActionEntity: 1093
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 1093
     - type: InsideEntityStorage
 - proto: Pallet
   entities:

@@ -96,13 +96,6 @@
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
-  id: MagazinePistolCaselessRifle
-  result: MagazinePistolCaselessRifle
-  materials:
-    Steel: 135
-
-- type: latheRecipe
-  parent: BaseAmmoRecipe
   id: MagazineMagnumEmpty
   result: MagazineMagnumEmpty
   materials:
@@ -163,3 +156,34 @@
     Plastic: 300
     Gold: 250
     Silver: 500
+
+- type: latheRecipe
+  id: WeaponLaserSMG
+  result: WeaponLaserSMG
+  completetime: 5
+  materials:
+    Steel: 2000
+    Plastic: 1000
+    Gold: 500
+    Plasma: 1000
+
+- type: latheRecipe
+  id: LaserSMGPowerCell
+  result: LaserSMGPowerCell
+  completetime: 5
+  materials:
+    Steel: 300
+    Glass: 200
+    Plastic: 300
+    Gold: 50
+
+- type: latheRecipe
+  id: WeaponSniperCompact
+  result: WeaponSniperCompact
+  completetime: 5
+  materials:
+    Steel: 2500
+    Glass: 100
+    Plastic: 300
+    Gold: 200
+    Silver: 200

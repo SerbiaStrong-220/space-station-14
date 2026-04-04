@@ -10,10 +10,12 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using System.Linq;
 using System.Numerics;
+using Content.Client.SS220.UserInterface.Controls;
 using Content.Shared.FixedPoint;
 using Robust.Client.Graphics;
 using static Robust.Client.UserInterface.Controls.BoxContainer;
 using Robust.Client.GameObjects;
+using Content.Client.SS220.UserInterface.System.PinUI;
 
 namespace Content.Client.Chemistry.UI
 {
@@ -21,7 +23,7 @@ namespace Content.Client.Chemistry.UI
     /// Client-side UI used to control a <see cref="SharedChemMasterComponent"/>
     /// </summary>
     [GenerateTypedNameReferences]
-    public sealed partial class ChemMasterWindow : FancyWindow
+    public sealed partial class ChemMasterWindow : FancyWindow, IPinnableWindow // ss220 add pin for ui
     {
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
         [Dependency] private readonly IEntityManager _entityManager = default!;
@@ -96,6 +98,10 @@ namespace Content.Client.Chemistry.UI
 
             Tabs.SetTabTitle(0, Loc.GetString("chem-master-window-input-tab"));
             Tabs.SetTabTitle(1, Loc.GetString("chem-master-window-output-tab"));
+
+            // SS220 add pin button begin
+            PinUISystem.AddPinButtonBeforeTarget(this, CloseButton);
+            // SS220 add pin button end
         }
 
         private ReagentButton MakeReagentButton(string text, ChemMasterReagentAmount amount, ReagentId id, bool isBuffer, string styleClass)
@@ -119,8 +125,14 @@ namespace Content.Client.Chemistry.UI
                 ("1", ChemMasterReagentAmount.U1, StyleBase.ButtonOpenBoth),
                 ("5", ChemMasterReagentAmount.U5, StyleBase.ButtonOpenBoth),
                 ("10", ChemMasterReagentAmount.U10, StyleBase.ButtonOpenBoth),
+                ("15", ChemMasterReagentAmount.U15, StyleBase.ButtonOpenBoth),
+                ("20", ChemMasterReagentAmount.U20, StyleBase.ButtonOpenBoth),
                 ("25", ChemMasterReagentAmount.U25, StyleBase.ButtonOpenBoth),
+                ("30", ChemMasterReagentAmount.U30, StyleBase.ButtonOpenBoth),
                 ("50", ChemMasterReagentAmount.U50, StyleBase.ButtonOpenBoth),
+                // ss220 add 75u for chem master start
+                ("75", ChemMasterReagentAmount.U75, StyleBase.ButtonOpenBoth),
+                // ss220 add 75u for chem master end
                 ("100", ChemMasterReagentAmount.U100, StyleBase.ButtonOpenBoth),
                 (Loc.GetString("chem-master-window-buffer-all-amount"), ChemMasterReagentAmount.All, StyleBase.ButtonOpenLeft),
             };

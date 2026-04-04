@@ -1,72 +1,68 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.SS220.CultYogg.FungusMachine;
 using Robust.Client.UserInterface.Controls;
 using System.Linq;
 using Robust.Client.UserInterface;
 
-namespace Content.Client.SS220.CultYogg.FungusMachine.UI
+namespace Content.Client.SS220.CultYogg.FungusMachine;
+
+public sealed class FungusMachineBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    public sealed class FungusMachineBoundUserInterface : BoundUserInterface
+    [ViewVariables]
+    private FungusMachineMenu? _menu;
+
+    [ViewVariables]
+    private List<FungusMachineInventoryEntry> _cachedInventory = [];
+
+    [ViewVariables]
+    private List<int> _cachedFilteredIndex = [];
+
+    protected override void Open()
     {
-        [ViewVariables]
-        private FungusMachineMenu? _menu;
+        base.Open();
 
-        [ViewVariables]
-        private List<FungusMachineInventoryEntry> _cachedInventory = new();
+        var fungusMachineSys = EntMan.System<SharedFungusMachineSystem>();
 
-        [ViewVariables]
-        private List<int> _cachedFilteredIndex = new();
+        _cachedInventory = fungusMachineSys.GetInventory(Owner);
 
-        public FungusMachineBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
-        {
-        }
+        _menu = this.CreateWindow<FungusMachineMenu>();
+        _menu.OpenCenteredLeft();
+        _menu.Title = EntMan.GetComponent<MetaDataComponent>(Owner).EntityName;
 
-        protected override void Open()
-        {
-            base.Open();
+        _menu.OnItemSelected += OnItemSelected;
+        _menu.OnSearchChanged += OnSearchChanged;
 
-            var fungusMachineSys = EntMan.System<SharedFungusMachineSystem>();
+        _menu.Populate(_cachedInventory, out _cachedFilteredIndex);
+    }
 
-            _cachedInventory = fungusMachineSys.GetInventory(Owner);
+    protected override void UpdateState(BoundUserInterfaceState state)
+    {
+        base.UpdateState(state);
 
-            _menu = this.CreateWindow<FungusMachineMenu>();
-            _menu.OpenCenteredLeft();
-            _menu.Title = EntMan.GetComponent<MetaDataComponent>(Owner).EntityName;
+        if (state is not FungusMachineInterfaceState newState)
+            return;
 
-            _menu.OnItemSelected += OnItemSelected;
-            _menu.OnSearchChanged += OnSearchChanged;
+        _cachedInventory = newState.Inventory;
 
-            _menu.Populate(_cachedInventory, out _cachedFilteredIndex);
-        }
+        _menu?.Populate(_cachedInventory, out _cachedFilteredIndex, _menu.SearchBar.Text);
+    }
 
-        protected override void UpdateState(BoundUserInterfaceState state)
-        {
-            base.UpdateState(state);
+    private void OnItemSelected(ItemList.ItemListSelectedEventArgs args)
+    {
+        if (_cachedInventory.Count == 0)
+            return;
 
-            if (state is not FungusMachineInterfaceState newState)
-                return;
+        var selectedItem = _cachedInventory.ElementAtOrDefault(_cachedFilteredIndex.ElementAtOrDefault(args.ItemIndex));
 
-            _cachedInventory = newState.Inventory;
+        if (selectedItem == null)
+            return;
 
-            _menu?.Populate(_cachedInventory, out _cachedFilteredIndex, _menu.SearchBar.Text);
-        }
+        SendMessage(new FungusSelectedId(selectedItem.Id));
+    }
 
-        private void OnItemSelected(ItemList.ItemListSelectedEventArgs args)
-        {
-            if (_cachedInventory.Count == 0)
-                return;
-
-            var selectedItem = _cachedInventory.ElementAtOrDefault(_cachedFilteredIndex.ElementAtOrDefault(args.ItemIndex));
-
-            if (selectedItem == null)
-                return;
-
-            SendMessage(new FungusSelectedId(selectedItem.Id));
-        }
-
-        private void OnSearchChanged(string? filter)
-        {
-            _menu?.Populate(_cachedInventory, out _cachedFilteredIndex, filter);
-        }
+    private void OnSearchChanged(string? filter)
+    {
+        _menu?.Populate(_cachedInventory, out _cachedFilteredIndex, filter);
     }
 }

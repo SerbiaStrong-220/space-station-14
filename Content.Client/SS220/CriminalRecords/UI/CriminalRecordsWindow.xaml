@@ -4,7 +4,6 @@
     xmlns="https://spacestation14.io"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
-    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
     xmlns:ui="clr-namespace:Content.Client.SS220.CriminalRecords.UI"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     xmlns:phui="clr-namespace:Content.Client.SS220.Photocopier.UI"
@@ -37,7 +36,7 @@
             <BoxContainer Name="PanelRight" Orientation="Vertical" Margin="5 0 0 0" HorizontalExpand="true" Visible="False">
                 <!-- Character Name -->
                 <BoxContainer Orientation="Horizontal">
-                    <Label Name="CharacterName" Text="Имя Фамилия" StyleClasses="LabelBig" SetHeight="25" HorizontalExpand="True"/>
+                    <Label Name="CharacterName" Text="{Loc 'criminal-records-ui-name'}" StyleClasses="LabelBig" SetHeight="25" HorizontalExpand="True"/>
                     <Label Name="RecordIdLabel" HorizontalAlignment="Right" SetHeight="25" StyleClasses="LabelBig"/>
                 </BoxContainer>
                 <!-- Details widget -->
@@ -45,15 +44,16 @@
 
                 <!-- Records history -->
                 <BoxContainer Name="RecordHistoryPanel" Orientation="Vertical" Margin="0 5 0 0" VerticalExpand="True">
+                    <Button Name="LinkRecordToIdCardButton" Text="{Loc 'criminal-records-ui-link-id-to-record'}" Margin="0 5 0 0"/>
                     <BoxContainer Orientation="Horizontal">
                         <phui:IconButton Name="ExpandButton"
                             Margin="0 0 5 0"
                             IconTexture="/Textures/SS220/Interface/Misc/up.png"
                             SetWidth="40"
                             StyleClasses="OpenLeft"/>
-                        <Label Text="Криминальные записи:"/>
+                        <Label Text="{Loc 'criminal-records-ui-criminal-records-text'}"/>
                         <BoxContainer Orientation="Vertical" HorizontalExpand="True">
-                            <Button Name="ChangeStatusButton" Text="Сменить статус" HorizontalAlignment="Right"/>
+                            <Button Name="ChangeStatusButton" Text="{Loc 'criminal-records-ui-change-status'}" HorizontalAlignment="Right"/>
                         </BoxContainer>
                     </BoxContainer>
 
@@ -79,8 +79,8 @@
                         <Label Text="Создание записи:"/>
                         <BoxContainer Orientation="Vertical" HorizontalExpand="True">
                             <BoxContainer Orientation="Horizontal" HorizontalExpand="True" HorizontalAlignment="Right">
-                                <Button Name="SaveRecordCreationButton" Text="Сохранить" Margin="0 0 1 0" StyleClasses="OpenRight"/>
-                                <Button Name="CancelRecordCreationButton" Text="Отмена"/>
+                                <Button Name="SaveRecordCreationButton" Text="{Loc 'criminal-records-ui-save-button'}" Margin="0 0 1 0" StyleClasses="OpenRight"/>
+                                <Button Name="CancelRecordCreationButton" Text="{Loc 'criminal-records-ui-discard-button'}"/>
                             </BoxContainer>
                         </BoxContainer>
                     </BoxContainer>
@@ -90,7 +90,7 @@
 
             </BoxContainer>
             <PanelContainer Name="PanelRightPlaceholder" HorizontalExpand="true" Visible="True">
-                <Label Text="Выберите запись слева" StyleClasses="LabelBig" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Text="{Loc 'criminal-records-ui-choose-record-left'}" StyleClasses="LabelBig" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </PanelContainer>
         </BoxContainer>
 

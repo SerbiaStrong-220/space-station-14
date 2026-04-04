@@ -3,5 +3,4 @@
 namespace Content.Server.SS220.MindSlave.DisfunctionComponents;
 
 [RegisterComponent]
-public sealed partial class WieldUnabilityComponent : Component
-{ }
+public sealed partial class WieldUnabilityComponent : Component;

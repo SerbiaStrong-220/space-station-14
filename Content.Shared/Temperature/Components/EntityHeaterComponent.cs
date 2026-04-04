@@ -30,3 +30,5 @@ public sealed partial class EntityHeaterComponent : Component
     [DataField]
     public SoundPathSpecifier? SettingSound;
 }
+
+

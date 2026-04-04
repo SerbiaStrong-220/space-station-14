@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Brownie and nutribrick sprited by @mishutka09",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "mre-brownie"
+    },
+    {
+      "name": "mre-brownie-open"
+    },
+    {
+      "name": "nutribrick"
+    },
+    {
+      "name": "nutribrick-open"
+    }
+  ]
+}

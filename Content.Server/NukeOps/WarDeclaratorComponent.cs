@@ -39,12 +39,14 @@ public sealed partial class WarDeclaratorComponent : Component
     [DataField]
     public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/Announcements/war.ogg");
 
+    // ss220 add editable title for war declarator start
     /// <summary>
     /// Fluent ID for the declaration sender title
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
     [DataField]
-    public LocId SenderTitle = "comms-console-announcement-title-nukie";
+    public string SenderTitle = "comms-console-announcement-title-nukie";
+    // ss220 add editable title for war declarator end
 
     /// <summary>
     /// Time allowed for declaration of war

@@ -20,7 +20,7 @@ public sealed partial class CultYoggLampComponent : Component
     ///     mostly here for backwards compatibility.
     /// </remarks>
     [DataField]
-    public bool AddPrefix = false;
+    public bool AddPrefix;
 
     /// <summary>
     /// Whether or not the light can be toggled via standard interactions
@@ -38,9 +38,9 @@ public sealed partial class CultYoggLampComponent : Component
     [DataField]
     public EntityUid? SelfToggleActionEntity;
 
-    [DataField("turnOnSound")]
+    [DataField]
     public SoundSpecifier TurnOnSound = new SoundPathSpecifier("/Audio/SS220/CultYogg/lamp_on.ogg");
 
-    [DataField("turnOffSound")]
+    [DataField]
     public SoundSpecifier TurnOffSound = new SoundPathSpecifier("/Audio/SS220/CultYogg/lamp_off.ogg");
 }

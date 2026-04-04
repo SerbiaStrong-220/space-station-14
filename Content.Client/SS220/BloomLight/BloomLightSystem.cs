@@ -18,7 +18,7 @@ public sealed class BloomLightSystem : EntitySystem
     {
         base.Initialize();
 
-        _overlay = new(this.EntityManager, _prototype);
+        _overlay = new(EntityManager, _prototype);
         _cfg.OnValueChanged(CCVars220.BloomLightingEnabled, SetOverlayEnabled, true);
     }
 

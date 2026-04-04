@@ -10,7 +10,7 @@
 
 - type: guideEntry
   id: SS220LethalForce
-  name: Применение летальной силы
+  name:  ROE, регламент применение силы
   priority: 2
   text: "/ServerInfo/SS220/Guidebook/Security/LethalForce.xml"
 

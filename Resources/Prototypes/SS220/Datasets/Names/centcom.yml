@@ -105,11 +105,11 @@
 #   - Лаврова
 
 
-### Blue Shield Operative
+### SRT Operative
 
 #Временно не используется
 # - type: dataset
-#   id: NamesFirstBSOLeader
+#   id: NamesFirstSRTLeader
 #   values:
 #   - Коммандер
 #   - Полковник
@@ -118,13 +118,13 @@
 #   - Лейтенант
 
 - type: localizedDataset
-  id: NamesFirstBSOMember
+  id: NamesFirstSRTMember
   values:
-    prefix: names-bso-member-first-dataset-
+    prefix: names-srt-member-first-dataset-
     count: 5
 
 - type: localizedDataset
-  id: NamesLastBSOMember
+  id: NamesLastSRTMember
   values:
-    prefix: names-bso-member-last-dataset-
+    prefix: names-srt-member-last-dataset-
     count: 56

@@ -22,6 +22,7 @@
 - type: speciesBaseSprites
   id: MobTajaranSprites
   sprites:
+    Special: MobHumanoidAnyMarking
     Head: MobTajaranHead
     Snout: MobHumanoidAnyMarking
     Chest: MobTajaranTorso

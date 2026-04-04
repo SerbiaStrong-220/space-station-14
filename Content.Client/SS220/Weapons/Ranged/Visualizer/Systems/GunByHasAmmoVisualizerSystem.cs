@@ -1,4 +1,5 @@
 ﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Client.Items.Systems;
 using Content.Client.SS220.Weapons.Ranged.Visualizer.Components;
 using Content.Client.Weapons.Ranged.Components;
@@ -15,6 +16,7 @@ namespace Content.Client.SS220.Weapons.Ranged.Visualizer.Systems;
 public sealed class GunByHasAmmoVisualizerSystem : VisualizerSystem<GunByHasAmmoVisualsComponent>
 {
     [Dependency] private readonly SharedItemSystem _itemSys = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -30,6 +32,7 @@ public sealed class GunByHasAmmoVisualizerSystem : VisualizerSystem<GunByHasAmmo
         {
             component.LayerNumber = layer;
         }
+
         _itemSys.VisualsChanged(uid);
     }
 

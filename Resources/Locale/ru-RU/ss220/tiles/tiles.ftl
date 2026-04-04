@@ -235,6 +235,73 @@ floor-sanitary-dark-mini = санитарная тёмная мини-плитк
 floor-sanitary-dark-mini-horizontal = санитарная тёмная горизонтальная мини-плитка
 floor-sanitary-dark-mini-vertical = санитарная тёмная вертикальная мини-плитка
 
+## Я НЕ ШАРЮ ПАЦАНЫ ПЛИТКА
+floor-tile-steel-reinforced = стальная шестиугольная плитка
+floor-tile-white-reinforced = белая шестиугольная плитка
+floor-tile-black-reinforced = белая шестиугольная плитка
+
+## СИРКУТЫ ПЛИТКА
+floor-tile-purple-circuit = плитка фиолетовых микросхем
+floor-tile-yellow-circuit = плитка жёлтых микросхем
+floor-tile-orange-circuit = плитка оранжевых микросхем
+floor-tile-red-circuit = плитка красных микросхем
+
+## KITCHEN PLITKA
+floor-tile-kitchen-red = красная кухонная плитка
+
+## WOODEN PLITOCHKA
+floor-tile-item-wood-black = чёрный деревянный пол
+floor-tile-item-wood-dark = тёмный деревянный пол
+floor-tile-item-wood-light = светлый деревянный пол
+floor-tile-item-wood-red = красный деревянный пол
+
+## БОЛЬШАЯ ДЕРЕВЯННАЯ ПЛИТКА
+floor-tile-item-wood-large-black = крупный чёрный деревянный пол
+floor-tile-item-wood-large-dark = крупный тёмный деревянный пол
+floor-tile-item-wood-large-light = крупный светлый деревянный пол
+floor-tile-item-wood-large-red = крупный красный деревянный пол
+
+## ПАРКЕТНАЯ ПЛИТКА
+floor-tile-item-wood-parquet-black = паркетный чёрный деревянный пол
+floor-tile-item-wood-parquet-dark = паркетный тёмный деревянный пол
+floor-tile-item-wood-parquet-light = паркетный светлый деревянный пол
+floor-tile-item-wood-parquet-red = паркетный красный деревянный пол
+
+## Tile-bla-bla-Tile Плитка
+floor-tile-item-wood-tile-black = черная плитка для пола
+floor-tile-item-wood-tile-dark = тёмная плитка для пола
+floor-tile-item-wood-tile-light = светлая плитка для пола
+floor-tile-item-wood-tile-red = красная плитка для пола
+
+## КОВРЫ
+floor-tile-stack-carpet-white = белый ковролин
+floor-tile-stack-carpet-black = чёрный ковролин
+floor-tile-stack-carpet-blue = синий ковролин
+floor-tile-stack-carpet-orange = оранжевый ковролин
+floor-tile-stack-carpet-cyan = голубой ковролин
+floor-tile-stack-carpet-magenta = пурпурный ковролин
+floor-tile-stack-carpet-green = зеленый  ковролин
+floor-tile-stack-carpet-purple = фиолетовый  ковролин
+floor-tile-stack-carpet-red = красный  ковролин
+
+## МРАМОРНАЯ ПЛИТКА
+floor-tile-item-marble-black = чёрная мраморная плитка
+floor-tile-item-marble-white = белая мраморная плитка
+floor-tile-item-marble-border-w-b = бордюрная мраморная плитка
+floor-tile-item-marble-border-b-w = бордюрная мраморная плитка
+floor-tile-item-marble-diagonal-w-b = диагональная мраморная плитка
+floor-tile-item-marble-diagonal-b-w = диагональная мраморная плитка
+floor-tile-item-marble-vertical-w-b = вертикальная мраморная плитка
+floor-tile-item-marble-vertical-b-w = вертикальная мраморная плитка
+floor-tile-item-marble-corner-n-e = вертикальная мраморная плитка
+floor-tile-item-marble-corner-n-w = вертикальная мраморная плитка
+floor-tile-item-marble-corner-s-e = вертикальная мраморная плитка
+floor-tile-item-marble-corner-s-w = вертикальная мраморная плитка
+floor-tile-item-marble-inner-n-e = внутренняя мраморная плитка
+floor-tile-item-marble-inner-n-w = внутренняя мраморная плитка
+floor-tile-item-marble-inner-s-e = внутренняя мраморная плитка
+floor-tile-item-marble-inner-s-w = внутренняя мраморная плитка
+
 ## ВЫСТАВОЧНАЯ ПЛИТКА
 floor-showroom-mono = выставочная моно-плитка
 floor-showroom-horizontal = выставочная горизонтальная плитка
@@ -301,7 +368,7 @@ floor-tech-maint-mono = техническая моно-плитка
 floor-tech-maint-vertical = техническая вертикальная плитка
 floor-tech-maint-horizontal = техническая горизонтальная плитка
 floor-tech-maint-mini = техническая мини-плитка
-
+floor-tech-maint-drain-middle = техническая решётчатая плитка с центральной решёткой
 
 ## КАМЕННАЯ ПЛИТКА
 floor-rock-vault-mono = каменная моно-плитка

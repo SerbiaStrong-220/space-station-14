@@ -11,6 +11,7 @@ using Content.Server.SS220.Trackers.Components;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Roles;
+using Content.Shared.Roles.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 

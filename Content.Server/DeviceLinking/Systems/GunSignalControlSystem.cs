@@ -2,6 +2,7 @@ using Content.Server.DeviceLinking.Components;
 using Content.Shared.DeviceLinking.Events;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Server.Power.Components;
 
 namespace Content.Server.DeviceLinking.Systems;
 
@@ -25,6 +26,17 @@ public sealed partial class GunSignalControlSystem : EntitySystem
     {
         if (!TryComp<GunComponent>(gunControl, out var gun))
             return;
+
+        //SS220 ShuttleGuns_fix start (#3180)
+        if (!TryComp<AutoShootGunComponent>(gunControl, out var autoShootGun))
+            return;
+
+        if (EntityManager.TryGetComponent(gunControl, out TransformComponent? transform) && !transform.Anchored && !autoShootGun.CanShootUnanchored)
+            return;
+
+        if (TryComp<ApcPowerReceiverComponent>(gunControl, out var apc) && !apc.Powered && autoShootGun.RequiredPower)
+            return;
+        //SS220 ShuttleGuns_fix end (#3180)
 
         if (args.Port == gunControl.Comp.TriggerPort)
             _gun.AttemptShoot(gunControl, gun);

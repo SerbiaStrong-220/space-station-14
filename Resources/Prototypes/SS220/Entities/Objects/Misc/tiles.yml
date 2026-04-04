@@ -144,7 +144,7 @@
     stackType: FloorTileKitchenRed
 
 - type: entity
-  name: tiles-wood-parquet
+  name: wood parquet floor
   parent: FloorTileItemBase
   id: FloorTileItemWoodParquet
   components:
@@ -162,7 +162,7 @@
     stackType: FloorTileWood
 
 - type: entity
-  name: tiles-wood-black
+  name: wood black floor
   parent: FloorTileItemBase
   id: FloorTileItemWoodBlack
   components:
@@ -180,7 +180,7 @@
     stackType: FloorTileItemWoodBlack
 
 - type: entity
-  name: tiles-wood-dark
+  name: wood dark floor
   parent: FloorTileItemBase
   id: FloorTileItemWoodDark
   components:
@@ -198,7 +198,7 @@
     stackType: FloorTileItemWoodDark
 
 - type: entity
-  name: tiles-wood-light
+  name: wood light floor
   parent: FloorTileItemBase
   id: FloorTileItemWoodLight
   components:
@@ -216,7 +216,7 @@
     stackType: FloorTileItemWoodLight
 
 - type: entity
-  name: tiles-wood-red
+  name: wood red floor
   parent: FloorTileItemBase
   id: FloorTileItemWoodRed
   components:
@@ -915,7 +915,7 @@
 
 
 - type: entity
-  name: floor-dark-california
+  name: dark california floor
   id: FloorItemDarkCalifornia
   parent: FloorTileItemBase
   components:
@@ -933,7 +933,7 @@
     stackType: FloorItemStacksDarkCalifornia
 
 - type: entity
-  name: floor-dark-eight-bricks
+  name: dark eight bricks floor
   id: FloorItemDarkEightBricks
   parent: FloorTileItemBase
   components:
@@ -951,7 +951,7 @@
     stackType: FloorItemStacksDarkEightBricks
 
 - type: entity
-  name: floor-dark-mixed-bricks
+  name: dark mixed bricks floor
   id: FloorItemDarkMixedBricks
   parent: FloorTileItemBase
   components:
@@ -969,7 +969,7 @@
     stackType: FloorItemStacksDarkMixedBricks
 
 - type: entity
-  name: floor-dark-mixed-bricks-mini
+  name: dark mixed bricks mini floor
   id: FloorItemDarkMixedBricksMini
   parent: FloorTileItemBase
   components:
@@ -987,7 +987,7 @@
     stackType: FloorItemStacksDarkMixedBricksMini
 
 - type: entity
-  name: floor-dark-mixed-pavement-horizontal
+  name: dark mixed pavement horizontal floor
   id: FloorItemDarkMixedPavementHorizontal
   parent: FloorTileItemBase
   components:
@@ -1005,7 +1005,7 @@
     stackType: FloorItemStacksDarkMixedPavementHorizontal
 
 - type: entity
-  name: floor-dark-mixed-pavement-vertical
+  name: dark mixed pavement vertical floor
   id: FloorItemDarkMixedPavementVertical
   parent: FloorTileItemBase
   components:
@@ -1023,7 +1023,7 @@
     stackType: FloorItemStacksDarkMixedPavementVertical
 
 - type: entity
-  name: floor-dark-shifted-eight-bricks
+  name: dark shifted eight bricks floor
   id: FloorItemDarkShiftedEightBricks
   parent: FloorTileItemBase
   components:
@@ -1041,7 +1041,7 @@
     stackType: FloorItemStacksDarkShiftedEightBricks
 
 - type: entity
-  name: floor-dark-shifted-mini-horizontal
+  name: dark shifted mini horizontal floor
   id: FloorItemDarkShiftedMiniHorizontal
   parent: FloorTileItemBase
   components:
@@ -1060,7 +1060,7 @@
 
 
 - type: entity
-  name: floor-dark-shifted-mini-vertical
+  name: dark shifted mini vertical floor
   id: FloorItemDarkShiftedMiniVertical
   parent: FloorTileItemBase
   components:
@@ -1078,7 +1078,7 @@
     stackType: FloorItemStacksDarkShiftedMiniVertical
 
 - type: entity
-  name: floor-freezer-horizontal
+  name: freezer horizontal floor
   id: FloorItemFreezerHorizontal
   parent: FloorTileItemBase
   components:
@@ -1096,7 +1096,7 @@
     stackType: FloorItemStacksFreezerHorizontal
 
 - type: entity
-  name: floor-freezer-mini
+  name: freezer mini floor
   id: FloorItemFreezerMini
   parent: FloorTileItemBase
   components:
@@ -1114,7 +1114,7 @@
     stackType: FloorItemStacksFreezerMini
 
 - type: entity
-  name: floor-freezer-mini-horizontal
+  name: freezer mini horizontal floor
   id: FloorItemFreezerMiniHorizontal
   parent: FloorTileItemBase
   components:
@@ -1132,7 +1132,7 @@
     stackType: FloorItemStacksFreezerMiniHorizontal
 
 - type: entity
-  name: floor-freezer-mini-vertical
+  name: freezer mini vertical floor
   id: FloorItemFreezerMiniVertical
   parent: FloorTileItemBase
   components:
@@ -1150,7 +1150,7 @@
     stackType: FloorItemStacksFreezerMiniVertical
 
 - type: entity
-  name: floor-freezer-mono
+  name: freezer mono floor
   id: FloorItemFreezerMono
   parent: FloorTileItemBase
   components:
@@ -1168,7 +1168,7 @@
     stackType: FloorItemStacksFreezerMono
 
 - type: entity
-  name: floor-freezer-vertical
+  name: freezer vertical floor
   id: FloorItemFreezerVertical
   parent: FloorTileItemBase
   components:
@@ -1186,7 +1186,7 @@
     stackType: FloorItemStacksFreezerVertical
 
 - type: entity
-  name: floor-grating-maint-drain-horizontal
+  name: grating maint drain horizontal floor
   id: FloorItemGratingMaintDrainHorizontal
   parent: FloorTileItemBase
   components:
@@ -1204,7 +1204,7 @@
     stackType: FloorItemStacksGratingMaintDrainHorizontal
 
 - type: entity
-  name: floor-grating-maint-drain-middle
+  name: grating maint drain middle floor
   id: FloorItemGratingMaintDrainMiddle
   parent: FloorTileItemBase
   components:
@@ -1222,7 +1222,7 @@
     stackType: FloorItemStacksGratingMaintDrainMiddle
 
 - type: entity
-  name: floor-grating-maint-drain-vertical
+  name: grating maint drain vertical floor
   id: FloorItemGratingMaintDrainVertical
   parent: FloorTileItemBase
   components:
@@ -1240,7 +1240,7 @@
     stackType: FloorItemStacksGratingMaintDrainVertical
 
 - type: entity
-  name: floor-grating-maint-horizontal
+  name: grating maint horizontal floor
   id: FloorItemGratingMaintHorizontal
   parent: FloorTileItemBase
   components:
@@ -1258,7 +1258,7 @@
     stackType: FloorItemStacksGratingMaintHorizontal
 
 - type: entity
-  name: floor-grating-maint-mini
+  name: grating maint mini floor
   id: FloorItemGratingMaintMini
   parent: FloorTileItemBase
   components:
@@ -1276,7 +1276,7 @@
     stackType: FloorItemStacksGratingMaintMini
 
 - type: entity
-  name: floor-grating-maint-mono
+  name: grating maint mono floor
   id: FloorItemGratingMaintMono
   parent: FloorTileItemBase
   components:
@@ -1294,7 +1294,7 @@
     stackType: FloorItemStacksGratingMaintMono
 
 - type: entity
-  name: floor-grating-maint-vertical
+  name: grating maint vertical floor
   id: FloorItemGratingMaintVertical
   parent: FloorTileItemBase
   components:
@@ -1312,7 +1312,7 @@
     stackType: FloorItemStacksGratingMaintVertical
 
 - type: entity
-  name: floor-mining-dark-grating-directed-horizontal
+  name: mining dark grating directed horizontal floor
   id: FloorItemMiningDarkGratingDirectedHorizontal
   parent: FloorTileItemBase
   components:
@@ -1330,7 +1330,7 @@
     stackType: FloorItemStacksMiningDarkGratingDirectedHorizontal
 
 - type: entity
-  name: floor-mining-dark-grating-directed-vertical
+  name: mining dark grating directed vertical floor
   id: FloorItemMiningDarkGratingDirectedVertical
   parent: FloorTileItemBase
   components:
@@ -1348,7 +1348,7 @@
     stackType: FloorItemStacksMiningDarkGratingDirectedVertical
 
 - type: entity
-  name: floor-mining-dark-grating-horizontal
+  name: mining dark grating horizontal floor
   id: FloorItemMiningDarkGratingHorizontal
   parent: FloorTileItemBase
   components:
@@ -1366,7 +1366,7 @@
     stackType: FloorItemStacksMiningDarkGratingHorizontal
 
 - type: entity
-  name: floor-mining-dark-grating-middle
+  name: mining dark grating middle floor
   id: FloorItemMiningDarkGratingMiddle
   parent: FloorTileItemBase
   components:
@@ -1384,7 +1384,7 @@
     stackType: FloorItemStacksMiningDarkGratingMiddle
 
 - type: entity
-  name: floor-mining-dark-grating-vertical
+  name: mining dark grating vertical floor
   id: FloorItemMiningDarkGratingVertical
   parent: FloorTileItemBase
   components:
@@ -1402,7 +1402,7 @@
     stackType: FloorItemStacksMiningDarkGratingVertical
 
 - type: entity
-  name: floor-mining-dark-mono
+  name: mining dark mono floor
   id: FloorItemMiningDarkMono
   parent: FloorTileItemBase
   components:
@@ -1420,7 +1420,7 @@
     stackType: FloorItemStacksMiningDarkMono
 
 - type: entity
-  name: floor-mining-dark-reinforced
+  name: mining dark reinforced floor
   id: FloorItemMiningDarkReinforced
   parent: FloorTileItemBase
   components:
@@ -1438,7 +1438,7 @@
     stackType: FloorItemStacksMiningDarkReinforced
 
 - type: entity
-  name: floor-mining-grating-directed-horizontal
+  name: mining grating directed horizontal floor
   id: FloorItemMiningGratingDirectedHorizontal
   parent: FloorTileItemBase
   components:
@@ -1456,7 +1456,7 @@
     stackType: FloorItemStacksMiningGratingDirectedHorizontal
 
 - type: entity
-  name: floor-mining-grating-directed-vertical
+  name: mining grating directed vertical floor
   id: FloorItemMiningGratingDirectedVertical
   parent: FloorTileItemBase
   components:
@@ -1474,7 +1474,7 @@
     stackType: FloorItemStacksMiningGratingDirectedVertical
 
 - type: entity
-  name: floor-mining-grating-horizontal
+  name: floor mining grating horizontal floor
   id: FloorItemMiningGratingHorizontal
   parent: FloorTileItemBase
   components:
@@ -1492,7 +1492,7 @@
     stackType: FloorItemStacksMiningGratingHorizontal
 
 - type: entity
-  name: floor-mining-grating-middle
+  name: mining grating middle floor
   id: FloorItemMiningGratingMiddle
   parent: FloorTileItemBase
   components:
@@ -1510,7 +1510,7 @@
     stackType: FloorItemStacksMiningGratingMiddle
 
 - type: entity
-  name: floor-mining-grating-vertical
+  name: mining grating vertical floor
   id: FloorItemMiningGratingVertical
   parent: FloorTileItemBase
   components:
@@ -1528,7 +1528,7 @@
     stackType: FloorItemStacksMiningGratingVertical
 
 - type: entity
-  name: floor-mining-light-grating-directed-horizontal
+  name: mining light grating directed horizontal floor
   id: FloorItemMiningLightGratingDirectedHorizontal
   parent: FloorTileItemBase
   components:
@@ -1546,7 +1546,7 @@
     stackType: FloorItemStacksMiningLightGratingDirectedHorizontal
 
 - type: entity
-  name: floor-mining-light-grating-directed-vertical
+  name: mining light grating directed vertical floor
   id: FloorItemMiningLightGratingDirectedVertical
   parent: FloorTileItemBase
   components:
@@ -1564,7 +1564,7 @@
     stackType: FloorItemStacksMiningLightGratingDirectedVertical
 
 - type: entity
-  name: floor-mining-light-grating-horizontal
+  name: mining light grating horizontal floor
   id: FloorItemMiningLightGratingHorizontal
   parent: FloorTileItemBase
   components:
@@ -1582,7 +1582,7 @@
     stackType: FloorItemStacksMiningLightGratingHorizontal
 
 - type: entity
-  name: floor-mining-light-grating-middle
+  name: mining light grating middle floor
   id: FloorItemMiningLightGratingMiddle
   parent: FloorTileItemBase
   components:
@@ -1600,7 +1600,7 @@
     stackType: FloorItemStacksMiningLightGratingMiddle
 
 - type: entity
-  name: floor-mining-light-grating-vertical
+  name: mining light grating vertical floor
   id: FloorItemMiningLightGratingVertical
   parent: FloorTileItemBase
   components:
@@ -1618,7 +1618,7 @@
     stackType: FloorItemStacksMiningLightGratingVertical
 
 - type: entity
-  name: floor-mining-light-mono
+  name: mining light mono floor
   id: FloorItemMiningLightMono
   parent: FloorTileItemBase
   components:
@@ -1636,7 +1636,7 @@
     stackType: FloorItemStacksMiningLightMono
 
 - type: entity
-  name: floor-mining-light-reinforced
+  name: mining light reinforced floor
   id: FloorItemMiningLightReinforced
   parent: FloorTileItemBase
   components:
@@ -1654,7 +1654,7 @@
     stackType: FloorItemStacksMiningLightReinforced
 
 - type: entity
-  name: floor-mining-mono
+  name: mining mono floor
   id: FloorItemMiningMono
   parent: FloorTileItemBase
   components:
@@ -1672,7 +1672,7 @@
     stackType: FloorItemStacksMiningMono
 
 - type: entity
-  name: floor-mining-reinforced
+  name: mining reinforced floor
   id: FloorItemMiningReinforced
   parent: FloorTileItemBase
   components:
@@ -1690,7 +1690,7 @@
     stackType: FloorItemStacksMiningReinforced
 
 - type: entity
-  name: floor-rock-vault-herringbone
+  name: rock vault herringbone floor
   id: FloorItemRockVaultHerringbone
   parent: FloorTileItemBase
   components:
@@ -1708,7 +1708,7 @@
     stackType: FloorItemStacksRockVaultHerringbone
 
 - type: entity
-  name: floor-rock-vault-horizontal
+  name: rock vault horizontal floor
   id: FloorItemRockVaultHorizontal
   parent: FloorTileItemBase
   components:
@@ -1726,7 +1726,7 @@
     stackType: FloorItemStacksRockVaultHorizontal
 
 - type: entity
-  name: floor-rock-vault-mini
+  name: rock vault mini floor
   id: FloorItemRockVaultMini
   parent: FloorTileItemBase
   components:
@@ -1744,7 +1744,7 @@
     stackType: FloorItemStacksRockVaultMini
 
 - type: entity
-  name: floor-rock-vault-mono
+  name: rock vault mono floor
   id: FloorItemRockVaultMono
   parent: FloorTileItemBase
   components:
@@ -1762,7 +1762,7 @@
     stackType: FloorItemStacksRockVaultMono
 
 - type: entity
-  name: floor-rock-vault-pavement-horizontal
+  name: rock vault pavement horizontal floor
   id: FloorItemRockVaultPavementHorizontal
   parent: FloorTileItemBase
   components:
@@ -1780,7 +1780,7 @@
     stackType: FloorItemStacksRockVaultPavementHorizontal
 
 - type: entity
-  name: floor-rock-vault-vertical
+  name: rock vault vertical floor
   id: FloorItemRockVaultVertical
   parent: FloorTileItemBase
   components:
@@ -1798,7 +1798,7 @@
     stackType: FloorItemStacksRockVaultVertical
 
 - type: entity
-  name: floor-sanitary
+  name: sanitary floor
   id: FloorItemSanitary
   parent: FloorTileItemBase
   components:
@@ -1816,7 +1816,7 @@
     stackType: FloorItemStacksSanitary
 
 - type: entity
-  name: floor-sanitary-dark
+  name: sanitary dark floor
   id: FloorItemSanitaryDark
   parent: FloorTileItemBase
   components:
@@ -1834,7 +1834,7 @@
     stackType: FloorItemStacksSanitaryDark
 
 - type: entity
-  name: floor-sanitary-dark-horizontal
+  name: sanitary dark horizontal floor
   id: FloorItemSanitaryDarkHorizontal
   parent: FloorTileItemBase
   components:
@@ -1852,7 +1852,7 @@
     stackType: FloorItemStacksSanitaryDarkHorizontal
 
 - type: entity
-  name: floor-sanitary-dark-mini
+  name: sanitary dark mini floor
   id: FloorItemSanitaryDarkMini
   parent: FloorTileItemBase
   components:
@@ -1870,7 +1870,7 @@
     stackType: FloorItemStacksSanitaryDarkMini
 
 - type: entity
-  name: floor-sanitary-dark-mini-horizontal
+  name: sanitary dark mini horizontal floor
   id: FloorItemSanitaryDarkMiniHorizontal
   parent: FloorTileItemBase
   components:
@@ -1888,7 +1888,7 @@
     stackType: FloorItemStacksSanitaryDarkMiniHorizontal
 
 - type: entity
-  name: floor-sanitary-dark-mini-vertical
+  name: floor sanitary dark mini vertical floor
   id: FloorItemSanitaryDarkMiniVertical
   parent: FloorTileItemBase
   components:
@@ -1906,7 +1906,7 @@
     stackType: FloorItemStacksSanitaryDarkMiniVertical
 
 - type: entity
-  name: floor-sanitary-dark-mono
+  name: sanitary dark mono floor
   id: FloorItemSanitaryDarkMono
   parent: FloorTileItemBase
   components:
@@ -1924,7 +1924,7 @@
     stackType: FloorItemStacksSanitaryDarkMono
 
 - type: entity
-  name: floor-sanitary-dark-vertical
+  name: sanitary dark vertical floor
   id: FloorItemSanitaryDarkVertical
   parent: FloorTileItemBase
   components:
@@ -1942,7 +1942,7 @@
     stackType: FloorItemStacksSanitaryDarkVertical
 
 - type: entity
-  name: floor-sanitary-horizontal
+  name: sanitary horizontal floor
   id: FloorItemSanitaryHorizontal
   parent: FloorTileItemBase
   components:
@@ -1960,7 +1960,7 @@
     stackType: FloorItemStacksSanitaryHorizontal
 
 - type: entity
-  name: floor-sanitary-mini
+  name: sanitary mini floor
   id: FloorItemSanitaryMini
   parent: FloorTileItemBase
   components:
@@ -1978,7 +1978,7 @@
     stackType: FloorItemStacksSanitaryMini
 
 - type: entity
-  name: floor-sanitary-mini-horizontal
+  name: sanitary mini horizontal floor
   id: FloorItemSanitaryMiniHorizontal
   parent: FloorTileItemBase
   components:
@@ -1996,7 +1996,7 @@
     stackType: FloorItemStacksSanitaryMiniHorizontal
 
 - type: entity
-  name: floor-sanitary-mini-vertical
+  name: sanitary mini vertical floor
   id: FloorItemSanitaryMiniVertical
   parent: FloorTileItemBase
   components:
@@ -2014,7 +2014,7 @@
     stackType: FloorItemStacksSanitaryMiniVertical
 
 - type: entity
-  name: floor-sanitary-mono
+  name: sanitary mono floor
   id: FloorItemSanitaryMono
   parent: FloorTileItemBase
   components:
@@ -2032,7 +2032,7 @@
     stackType: FloorItemStacksSanitaryMono
 
 - type: entity
-  name: floor-sanitary-vertical
+  name: sanitary vertical floor
   id: FloorItemSanitaryVertical
   parent: FloorTileItemBase
   components:
@@ -2050,7 +2050,7 @@
     stackType: FloorItemStacksSanitaryVertical
 
 - type: entity
-  name: floor-showroom-horizontal
+  name: showroom horizontal floor
   id: FloorItemShowroomHorizontal
   parent: FloorTileItemBase
   components:
@@ -2068,7 +2068,7 @@
     stackType: FloorItemStacksShowroomHorizontal
 
 - type: entity
-  name: floor-showroom-mini
+  name: showroom mini floor
   id: FloorItemShowroomMini
   parent: FloorTileItemBase
   components:
@@ -2086,7 +2086,7 @@
     stackType: FloorItemStacksShowroomMini
 
 - type: entity
-  name: floor-showroom-mini-horizontal
+  name: showroom mini horizontal floor
   id: FloorItemShowroomMiniHorizontal
   parent: FloorTileItemBase
   components:
@@ -2104,7 +2104,7 @@
     stackType: FloorItemStacksShowroomMiniHorizontal
 
 - type: entity
-  name: floor-showroom-mini-vertical
+  name: showroom mini vertical floor
   id: FloorItemShowroomMiniVertical
   parent: FloorTileItemBase
   components:
@@ -2122,7 +2122,7 @@
     stackType: FloorItemStacksShowroomMiniVertical
 
 - type: entity
-  name: floor-showroom-mono
+  name: showroom mono floor
   id: FloorItemShowroomMono
   parent: FloorTileItemBase
   components:
@@ -2140,7 +2140,7 @@
     stackType: FloorItemStacksShowroomMono
 
 - type: entity
-  name: floor-showroom-vertical
+  name: showroom vertical floor
   id: FloorItemShowroomVertical
   parent: FloorTileItemBase
   components:
@@ -2158,7 +2158,7 @@
     stackType: FloorItemStacksShowroomVertical
 
 - type: entity
-  name: floor-steel-california
+  name: steel california floor
   id: FloorItemSteelCalifornia
   parent: FloorTileItemBase
   components:
@@ -2176,7 +2176,7 @@
     stackType: FloorItemStacksSteelCalifornia
 
 - type: entity
-  name: floor-steel-eight-bricks
+  name: steel eight bricks floor
   id: FloorItemSteelEightBricks
   parent: FloorTileItemBase
   components:
@@ -2194,7 +2194,7 @@
     stackType: FloorItemStacksSteelEightBricks
 
 - type: entity
-  name: floor-steel-maint-drain-horizontal
+  name: steel maint drain horizontal floor
   id: FloorItemSteelMaintDrainHorizontal
   parent: FloorTileItemBase
   components:
@@ -2212,7 +2212,7 @@
     stackType: FloorItemStacksSteelMaintDrainHorizontal
 
 - type: entity
-  name: floor-steel-maint-drain-middle
+  name: steel maint drain middle floor
   id: FloorItemSteelMaintDrainMiddle
   parent: FloorTileItemBase
   components:
@@ -2230,7 +2230,7 @@
     stackType: FloorItemStacksSteelMaintDrainMiddle
 
 - type: entity
-  name: floor-steel-maint-drain-vertical
+  name: steel maint drain vertical floor
   id: FloorItemSteelMaintDrainVertical
   parent: FloorTileItemBase
   components:
@@ -2248,7 +2248,7 @@
     stackType: FloorItemStacksSteelMaintDrainVertical
 
 - type: entity
-  name: floor-steel-maint-horizontal
+  name: steel maint horizontal floor
   id: FloorItemSteelMaintHorizontal
   parent: FloorTileItemBase
   components:
@@ -2266,7 +2266,7 @@
     stackType: FloorItemStacksSteelMaintHorizontal
 
 - type: entity
-  name: floor-steel-maint-mini
+  name: steel maint mini floor
   id: FloorItemSteelMaintMini
   parent: FloorTileItemBase
   components:
@@ -2284,7 +2284,7 @@
     stackType: FloorItemStacksSteelMaintMini
 
 - type: entity
-  name: floor-steel-maint-mono
+  name: steel maint mono floor
   id: FloorItemSteelMaintMono
   parent: FloorTileItemBase
   components:
@@ -2302,7 +2302,7 @@
     stackType: FloorItemStacksSteelMaintMono
 
 - type: entity
-  name: floor-steel-maint-vertical
+  name: steel maint vertical floor
   id: FloorItemSteelMaintVertical
   parent: FloorTileItemBase
   components:
@@ -2320,7 +2320,7 @@
     stackType: FloorItemStacksSteelMaintVertical
 
 - type: entity
-  name: floor-steel-mixed-bricks
+  name: steel mixed bricks floor
   id: FloorItemSteelMixedBricks
   parent: FloorTileItemBase
   components:
@@ -2338,7 +2338,7 @@
     stackType: FloorItemStacksSteelMixedBricks
 
 - type: entity
-  name: floor-steel-mixed-bricks-mini
+  name: steel mixed bricks mini floor
   id: FloorItemSteelMixedBricksMini
   parent: FloorTileItemBase
   components:
@@ -2356,7 +2356,7 @@
     stackType: FloorItemStacksSteelMixedBricksMini
 
 - type: entity
-  name: floor-steel-mixed-pavement-horizontal
+  name: steel mixed pavement horizontal floor
   id: FloorItemSteelMixedPavementHorizontal
   parent: FloorTileItemBase
   components:
@@ -2374,7 +2374,7 @@
     stackType: FloorItemStacksSteelMixedPavementHorizontal
 
 - type: entity
-  name: floor-steel-mixed-pavement-vertical
+  name: steel mixed pavement vertical floor
   id: FloorItemSteelMixedPavementVertical
   parent: FloorTileItemBase
   components:
@@ -2392,7 +2392,7 @@
     stackType: FloorItemStacksSteelMixedPavementVertical
 
 - type: entity
-  name: floor-steel-shifted-eight-bricks
+  name: steel shifted eight bricks floor
   id: FloorItemSteelShiftedEightBricks
   parent: FloorTileItemBase
   components:
@@ -2410,7 +2410,7 @@
     stackType: FloorItemStacksSteelShiftedEightBricks
 
 - type: entity
-  name: floor-steel-shifted-mini-horizontal
+  name: steel shifted mini horizontal floor
   id: FloorItemSteelShiftedMiniHorizontal
   parent: FloorTileItemBase
   components:
@@ -2428,7 +2428,7 @@
     stackType: FloorItemStacksSteelShiftedMiniHorizontal
 
 - type: entity
-  name: floor-steel-shifted-mini-vertical
+  name: steel shifted mini vertical floor
   id: FloorItemSteelShiftedMiniVertical
   parent: FloorTileItemBase
   components:
@@ -2446,7 +2446,7 @@
     stackType: FloorItemStacksSteelShiftedMiniVertical
 
 - type: entity
-  name: floor-tech-maint-horizontal
+  name: tech maint horizontal floor
   id: FloorItemTechMaintHorizontal
   parent: FloorTileItemBase
   components:
@@ -2464,7 +2464,7 @@
     stackType: FloorItemStacksTechMaintHorizontal
 
 - type: entity
-  name: floor-tech-maint-mini
+  name: tech maint mini floor
   id: FloorItemTechMaintMini
   parent: FloorTileItemBase
   components:
@@ -2482,7 +2482,7 @@
     stackType: FloorItemStacksTechMaintMini
 
 - type: entity
-  name: floor-tech-maint-mono
+  name: tech maint mono floor
   id: FloorItemTechMaintMono
   parent: FloorTileItemBase
   components:
@@ -2500,7 +2500,7 @@
     stackType: FloorItemStacksTechMaintMono
 
 - type: entity
-  name: floor-tech-maint-vertical
+  name: tech maint vertical floor
   id: FloorItemTechMaintVertical
   parent: FloorTileItemBase
   components:
@@ -2518,7 +2518,7 @@
     stackType: FloorItemStacksTechMaintVertical
 
 - type: entity
-  name: floor-tech-maint-drain-middle
+  name: tech maint drain middle floor
   id: FloorItemTechMainDrainMiddle
   parent: FloorTileItemBase
   components:
@@ -2536,7 +2536,7 @@
     stackType: StackFloorItemTechMainDrainMiddle
 
 - type: entity
-  name: floor-white-california
+  name: white california floor
   id: FloorItemWhiteCalifornia
   parent: FloorTileItemBase
   components:
@@ -2554,7 +2554,7 @@
     stackType: FloorItemStacksWhiteCalifornia
 
 - type: entity
-  name: floor-white-eight-bricks
+  name: white eight bricks floor
   id: FloorItemWhiteEightBricks
   parent: FloorTileItemBase
   components:
@@ -2572,7 +2572,7 @@
     stackType: FloorItemStacksWhiteEightBricks
 
 - type: entity
-  name: floor-white-mixed-bricks
+  name: white mixed bricks floor
   id: FloorItemWhiteMixedBricks
   parent: FloorTileItemBase
   components:
@@ -2590,7 +2590,7 @@
     stackType: FloorItemStacksWhiteMixedBricks
 
 - type: entity
-  name: floor-white-mixed-bricks-mini
+  name: white mixed bricks mini floor
   id: FloorItemWhiteMixedBricksMini
   parent: FloorTileItemBase
   components:
@@ -2608,7 +2608,7 @@
     stackType: FloorItemStacksWhiteMixedBricksMini
 
 - type: entity
-  name: floor-white-mixed-pavement-horizontal
+  name: white mixed pavement horizontal floor
   id: FloorItemWhiteMixedPavementHorizontal
   parent: FloorTileItemBase
   components:
@@ -2626,7 +2626,7 @@
     stackType: FloorItemStacksWhiteMixedPavementHorizontal
 
 - type: entity
-  name: floor-white-mixed-pavement-vertical
+  name: white mixed pavement vertical floor
   id: FloorItemWhiteMixedPavementVertical
   parent: FloorTileItemBase
   components:
@@ -2644,7 +2644,7 @@
     stackType: FloorItemStacksWhiteMixedPavementVertical
 
 - type: entity
-  name: floor-white-shifted-eight-bricks
+  name: white shifted eight bricks floor
   id: FloorItemWhiteShiftedEightBricks
   parent: FloorTileItemBase
   components:
@@ -2662,7 +2662,7 @@
     stackType: FloorItemStacksWhiteShiftedEightBricks
 
 - type: entity
-  name: floor-white-shifted-mini-horizontal
+  name: white shifted mini horizontal floor
   id: FloorItemWhiteShiftedMiniHorizontal
   parent: FloorTileItemBase
   components:
@@ -2680,7 +2680,7 @@
     stackType: FloorItemStacksWhiteShiftedMiniHorizontal
 
 - type: entity
-  name: floor-white-shifted-mini-vertical
+  name: white shifted mini vertical floor
   id: FloorItemWhiteShiftedMiniVertical
   parent: FloorTileItemBase
   components:
@@ -2699,7 +2699,7 @@
 
 
 - type: entity
-  name: floor-concrete-pavement-horizontal
+  name: concrete pavement horizontal floor
   id: FloorItemConcretePavementHorizontal
   parent: FloorTileItemBase
   components:
@@ -2717,7 +2717,7 @@
     stackType: FloorItemStacksConcretePavementHorizontal
 
 - type: entity
-  name: floor-concrete-pavement-vertical
+  name: concrete pavement vertical floor
   id: FloorItemConcretePavementVertical
   parent: FloorTileItemBase
   components:
@@ -2735,7 +2735,7 @@
     stackType: FloorItemStacksConcretePavementVertical
 
 - type: entity
-  name: floor-grayconcrete-pavement-horizontal
+  name: gray concrete pavement horizontal floor
   id: FloorItemGrayconcretePavementHorizontal
   parent: FloorTileItemBase
   components:
@@ -2753,7 +2753,7 @@
     stackType: FloorItemStacksGrayconcretePavementHorizontal
 
 - type: entity
-  name: floor-grayconcrete-pavement-vertical
+  name: gray concrete pavement vertical floor
   id: FloorItemGrayconcretePavementVertical
   parent: FloorTileItemBase
   components:
@@ -2771,7 +2771,7 @@
     stackType: FloorItemStacksGrayconcretePavementVertical
 
 - type: entity
-  name: floor-oldconcrete-pavement-horizontal
+  name: old concrete pavement horizontal floor
   id: FloorItemOldconcretePavementHorizontal
   parent: FloorTileItemBase
   components:
@@ -2789,7 +2789,7 @@
     stackType: FloorItemStacksOldconcretePavementHorizontal
 
 - type: entity
-  name: floor-oldconcrete-pavement-vertical
+  name: old concrete pavement vertical floor
   id: FloorItemOldconcretePavementVertical
   parent: FloorTileItemBase
   components:

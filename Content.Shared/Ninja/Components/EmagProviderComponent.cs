@@ -13,6 +13,7 @@ namespace Content.Shared.Ninja.Components;
 /// No charges but checks against a whitelist.
 /// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(EmagProviderSystem))]
+[AutoGenerateComponentState(true)]
 public sealed partial class EmagProviderComponent : Component
 {
     /// <summary>
@@ -24,6 +25,7 @@ public sealed partial class EmagProviderComponent : Component
     /// <summary>
     /// Whitelist that entities must be on to work.
     /// </summary>
+    [AutoNetworkedField]
     [DataField]
     public EntityWhitelist? Whitelist;
 

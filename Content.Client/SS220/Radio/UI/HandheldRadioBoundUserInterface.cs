@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.SS220.Radio;
 using Content.Shared.SS220.Radio.Components;
 using JetBrains.Annotations;
@@ -10,12 +11,12 @@ namespace Content.Client.SS220.Radio.UI;
 [UsedImplicitly]
 public sealed class HandheldRadioBoundUserInterface : BoundUserInterface
 {
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
+
     [ViewVariables]
     private HandheldRadioMenu? _menu;
 
-    private int startedFreq;//idk how to set value which isnt 0, and dont fall into UpdateState=>Channel.ValueChanged=>UpdateState cycle, so fuck it
-
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    private int _startedFreq;//idk how to set value which isnt 0, and dont fall into UpdateState=>Channel.ValueChanged=>UpdateState cycle, so fuck it
 
     public HandheldRadioBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
@@ -64,7 +65,7 @@ public sealed class HandheldRadioBoundUserInterface : BoundUserInterface
         _menu.Update(msg);
 
         int channel = _prototype.Index<RadioChannelPrototype>(msg.SelectedChannel).Frequency;
-        _menu.SetChannel(channel == 1390? startedFreq : channel);
+        _menu.SetChannel(channel == 1390? _startedFreq : channel);
     }
 
     private void SetChannelBorders(HandheldRadioMenu? _menu)
@@ -78,6 +79,6 @@ public sealed class HandheldRadioBoundUserInterface : BoundUserInterface
         _menu.Channel.IsValid = n => (n >= handheldRadio.LowerFrequencyBorder) && (n <= handheldRadio.UpperFrequencyBorder);//set borders for UI from component
         _menu.SetChannelDesc(handheldRadio.LowerFrequencyBorder, handheldRadio.UpperFrequencyBorder);
 
-        startedFreq = _prototype.Index<RadioChannelPrototype>(String.Format("Handheld{0}", handheldRadio.LowerFrequencyBorder % 1390)).Frequency;
+        _startedFreq = _prototype.Index<RadioChannelPrototype>(String.Format("Handheld{0}", handheldRadio.LowerFrequencyBorder % 1390)).Frequency;
     }
 }

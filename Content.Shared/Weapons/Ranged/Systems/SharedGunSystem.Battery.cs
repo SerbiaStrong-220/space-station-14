@@ -1,8 +1,13 @@
+using Content.Shared.Damage;
+using Content.Shared.Damage.Events;
 using Content.Shared.Examine;
+using Content.Shared.PowerCell.Components;
+using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
@@ -18,6 +23,7 @@ public abstract partial class SharedGunSystem
         SubscribeLocalEvent<HitscanBatteryAmmoProviderComponent, TakeAmmoEvent>(OnBatteryTakeAmmo);
         SubscribeLocalEvent<HitscanBatteryAmmoProviderComponent, GetAmmoCountEvent>(OnBatteryAmmoCount);
         SubscribeLocalEvent<HitscanBatteryAmmoProviderComponent, ExaminedEvent>(OnBatteryExamine);
+        SubscribeLocalEvent<HitscanBatteryAmmoProviderComponent, DamageExamineEvent>(OnBatteryDamageExamine);
 
         // Projectile
         SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, ComponentGetState>(OnBatteryGetState);
@@ -25,6 +31,7 @@ public abstract partial class SharedGunSystem
         SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, TakeAmmoEvent>(OnBatteryTakeAmmo);
         SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, GetAmmoCountEvent>(OnBatteryAmmoCount);
         SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, ExaminedEvent>(OnBatteryExamine);
+        SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, DamageExamineEvent>(OnBatteryDamageExamine);
     }
 
     private void OnBatteryHandleState(EntityUid uid, BatteryAmmoProviderComponent component, ref ComponentHandleState args)
@@ -42,7 +49,7 @@ public abstract partial class SharedGunSystem
         else if (component is HitscanBatteryAmmoProviderComponent hitscanComp)
             hitscanComp.Prototype = state.Prototype;
         //SS220 Add Multifaze gun end
-        
+
         UpdateAmmoCount(uid, prediction: false);
     }
 
@@ -71,6 +78,51 @@ public abstract partial class SharedGunSystem
         args.PushMarkup(Loc.GetString("gun-battery-examine", ("color", AmmoExamineColor), ("count", component.Shots)));
     }
 
+    private void OnBatteryDamageExamine<T>(Entity<T> entity, ref DamageExamineEvent args) where T : BatteryAmmoProviderComponent
+    {
+        var damageSpec = GetDamage(entity.Comp);
+
+        if (damageSpec == null)
+            return;
+
+        var damageType = entity.Comp switch
+        {
+            HitscanBatteryAmmoProviderComponent => Loc.GetString("damage-hitscan"),
+            ProjectileBatteryAmmoProviderComponent => Loc.GetString("damage-projectile"),
+            _ => throw new ArgumentOutOfRangeException(),
+        };
+
+        _damageExamine.AddDamageExamine(args.Message, Damageable.ApplyUniversalAllModifiers(damageSpec), damageType);
+    }
+
+    private DamageSpecifier? GetDamage(BatteryAmmoProviderComponent component)
+    {
+        if (component is ProjectileBatteryAmmoProviderComponent battery)
+        {
+            if (ProtoManager.Index<EntityPrototype>(battery.Prototype)
+                .Components
+                .TryGetValue(Factory.GetComponentName<ProjectileComponent>(), out var projectile))
+            {
+                var p = (ProjectileComponent)projectile.Component;
+
+                if (!p.Damage.Empty)
+                {
+                    return p.Damage * Damageable.UniversalProjectileDamageModifier;
+                }
+            }
+
+            return null;
+        }
+
+        if (component is HitscanBatteryAmmoProviderComponent hitscan)
+        {
+            var dmg = ProtoManager.Index<HitscanPrototype>(hitscan.Prototype).Damage;
+            return dmg == null ? dmg : dmg * Damageable.UniversalHitscanDamageModifier;
+        }
+
+        return null;
+    }
+
     private void OnBatteryTakeAmmo(EntityUid uid, BatteryAmmoProviderComponent component, TakeAmmoEvent args)
     {
         var shots = Math.Min(args.Shots, component.Shots);
@@ -85,7 +137,7 @@ public abstract partial class SharedGunSystem
             component.Shots--;
         }
 
-        TakeCharge(uid, component);
+        TakeCharge((uid, component));
         UpdateBatteryAppearance(uid, component);
         Dirty(uid, component);
     }
@@ -99,9 +151,9 @@ public abstract partial class SharedGunSystem
     /// <summary>
     /// Update the battery (server-only) whenever fired.
     /// </summary>
-    protected virtual void TakeCharge(EntityUid uid, BatteryAmmoProviderComponent component)
+    protected virtual void TakeCharge(Entity<BatteryAmmoProviderComponent> entity)
     {
-        UpdateAmmoCount(uid, prediction: false);
+        UpdateAmmoCount(entity, prediction: false);
     }
 
     protected void UpdateBatteryAppearance(EntityUid uid, BatteryAmmoProviderComponent component)
@@ -109,9 +161,19 @@ public abstract partial class SharedGunSystem
         if (!TryComp<AppearanceComponent>(uid, out var appearance))
             return;
 
+        // SS220 power-cell-mag-fix begin
+        var magLoaded = true;
+        if (TryComp<PowerCellSlotComponent>(uid, out var slotComp))
+        {
+            magLoaded = _slots.TryGetSlot(uid, slotComp.CellSlotId, out var itemSlot) &&
+                        itemSlot.Item is not null;
+        }
+        // SS220 power-cell-mag-fix end
+
         Appearance.SetData(uid, AmmoVisuals.HasAmmo, component.Shots != 0, appearance);
         Appearance.SetData(uid, AmmoVisuals.AmmoCount, component.Shots, appearance);
         Appearance.SetData(uid, AmmoVisuals.AmmoMax, component.Capacity, appearance);
+        Appearance.SetData(uid, AmmoVisuals.MagLoaded, magLoaded, appearance); // SS220 power-cell-mag-fix
     }
 
     private (EntityUid? Entity, IShootable) GetShootable(BatteryAmmoProviderComponent component, EntityCoordinates coordinates)

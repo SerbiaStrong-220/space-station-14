@@ -13,6 +13,7 @@ namespace Content.Shared.Atmos.Piping.Unary.Components
         public ScrubberPumpDirection PumpDirection { get; set; } = ScrubberPumpDirection.Scrubbing;
         public float VolumeRate { get; set; } = 200f;
         public bool WideNet { get; set; } = false;
+        public bool AirAlarmPanicWireCut { get; set; }
 
         //SS220-AirAlarm start
         public static HashSet<Gas> DefaultFilterGases = new()
@@ -105,7 +106,7 @@ namespace Content.Shared.Atmos.Piping.Unary.Components
             FilterGases = new(GasVentScrubberData.DefaultPanicFilterGases), //SS220-AirAlarm
             PumpDirection = ScrubberPumpDirection.Siphoning,
             VolumeRate = 200f,
-            WideNet = true //SS220-AirAlarm
+            WideNet = true
         };
 
         public static GasVentScrubberData ReplaceModePreset = new GasVentScrubberData

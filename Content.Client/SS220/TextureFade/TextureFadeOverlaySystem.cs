@@ -1,4 +1,5 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Client.SS220.Overlays;
 using Robust.Client.Graphics;
 
@@ -30,15 +31,14 @@ public sealed class TextureFadeOverlaySystem : EntitySystem
 
     private void HandleOverlayActivityUpdate(TextureFadeOverlayComponent component)
     {
-        if (component.IsEnabled && !component.IsOverlayInitialized)
+        switch (component.IsEnabled)
         {
-            InitializeLayers(component);
-            return;
-        }
-        if (!component.IsEnabled && component.IsOverlayInitialized)
-        {
-            DeinitializeLayers(component);
-            return;
+            case true when !component.IsOverlayInitialized:
+                InitializeLayers(component);
+                return;
+            case false when component.IsOverlayInitialized:
+                DeinitializeLayers(component);
+                return;
         }
     }
 
@@ -47,12 +47,14 @@ public sealed class TextureFadeOverlaySystem : EntitySystem
         var component = entity.Comp;
         if (!component.IsOverlayInitialized)
             return;
+
         var fadedOutCount = 0;
         for (var i = 0; i < component.Layers.Count; i++)
         {
             var layer = component.Layers[i];
             if (layer.Overlay is null)
                 continue;
+
             if (layer.ProgressSpeed != 0f)
             {
                 layer.FadeProgress += layer.ProgressSpeed * frameTime;
@@ -65,16 +67,16 @@ public sealed class TextureFadeOverlaySystem : EntitySystem
                     fadedOutCount++;
                 }
             }
+
             var fadeProgressMod = layer.FadeProgress;
             fadeProgressMod += (float)Math.Sin(Math.PI * layer.Overlay.Time.TotalSeconds * layer.PulseRate) * layer.PulseMagnitude;
             fadeProgressMod = Math.Clamp(fadeProgressMod, 0f, 1f);
             layer.Overlay.FadeProgress = fadeProgressMod;
             layer.Overlay.Modulate = layer.Modulate;
             layer.Overlay.ZIndex = layer.ZIndex;
+
             if (component.DeleteAfterFadedOut && fadedOutCount == component.Layers.Count)
-            {
                 Del(entity);
-            }
         }
     }
 
@@ -82,6 +84,7 @@ public sealed class TextureFadeOverlaySystem : EntitySystem
     {
         if (component.IsOverlayInitialized)
             return;
+
         component.IsOverlayInitialized = true;
         for (var i = 0; i < component.Layers.Count; i++)
         {
@@ -92,6 +95,7 @@ public sealed class TextureFadeOverlaySystem : EntitySystem
                 Modulate = layer.Modulate,
                 ZIndex = layer.ZIndex,
             };
+
             OverlayStack.Get(_overlayManager).AddOverlay(layer.Overlay);
             component.Layers[i] = layer;
         }
@@ -101,6 +105,7 @@ public sealed class TextureFadeOverlaySystem : EntitySystem
     {
         if (!component.IsOverlayInitialized)
             return;
+
         component.IsOverlayInitialized = false;
         for (var i = 0; i < component.Layers.Count; i++)
         {

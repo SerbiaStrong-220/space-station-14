@@ -21,22 +21,22 @@
         - to: ClothingFootWraps
           steps:
           - tag: Footwraps
-            name: обмотки для ног
+            name: construction-graph-tag-foot-wraps
             icon:
               sprite: SS220/Clothing/Shoes/Specific/footwraps.rsi
               state: icon
           - tag: Flower
-            name: мак
+            name: construction-graph-tag-flower
             icon:
               sprite: Objects/Specific/Hydroponics/poppy.rsi
               state: produce
           - tag: Ambrosia
-            name: амброзия
+            name: construction-graph-tag-ambrosia
             icon:
               sprite: Objects/Specific/Hydroponics/ambrosia_vulgaris.rsi
               state: produce
           - tag: Fruit
-            name: ягоды
+            name: construction-graph-tag-fruit
             icon:
               sprite: Objects/Specific/Hydroponics/berries.rsi
               state: produce
@@ -53,12 +53,12 @@
         - to: ClothingFootWraps
           steps:
           - tag: Footwraps
-            name: обмотки для ног
+            name: construction-graph-tag-foot-wraps
             icon:
               sprite: SS220/Clothing/Shoes/Specific/footwraps.rsi
               state: icon
           - tag: Fruit
-            name: ягоды
+            name: construction-graph-tag-fruit
             icon:
               sprite: Objects/Specific/Hydroponics/berries.rsi
               state: produce
@@ -75,12 +75,12 @@
         - to: ClothingFootWraps
           steps:
           - tag: Footwraps
-            name: обмотки для ног
+            name: construction-graph-tag-foot-wraps
             icon:
               sprite: SS220/Clothing/Shoes/Specific/footwraps.rsi
               state: icon
           - tag: Ambrosia
-            name: амброзия
+            name: construction-graph-tag-ambrosia
             icon:
               sprite: Objects/Specific/Hydroponics/ambrosia_vulgaris.rsi
               state: produce
@@ -97,12 +97,12 @@
         - to: ClothingFootWraps
           steps:
           - tag: Footwraps
-            name: обмотки для ног
+            name: construction-graph-tag-foot-wraps
             icon:
               sprite: SS220/Clothing/Shoes/Specific/footwraps.rsi
               state: icon
           - tag: Flower
-            name: мак
+            name: construction-graph-tag-flower
             icon:
               sprite: Objects/Specific/Hydroponics/poppy.rsi
               state: produce
@@ -119,17 +119,17 @@
         - to: ClothingFootWraps
           steps:
           - tag: Footwraps
-            name: обмотки для ног
+            name: construction-graph-tag-foot-wraps
             icon:
               sprite: SS220/Clothing/Shoes/Specific/footwraps.rsi
               state: icon
           - tag: Fruit
-            name: ягоды
+            name: construction-graph-tag-fruit
             icon:
               sprite: Objects/Specific/Hydroponics/berries.rsi
               state: produce
           - tag: Ambrosia
-            name: амброзия
+            name: construction-graph-tag-ambrosia
             icon:
               sprite: Objects/Specific/Hydroponics/ambrosia_vulgaris.rsi
               state: produce

@@ -63,11 +63,13 @@
   - type: Clothing
     sprite: Clothing/Eyes/Glasses/meson.rsi
   - type: EyeProtection
-  - type: Tag
-    tags:
-    - SecDogWearable # Roxi
   - type: IdentityBlocker
     coverage: EYES
+  - type: Tag
+    tags:
+    - PetWearable
+    - WhitelistChameleon
+    - SecDogWearable # Roxi
 
 - type: entity
   parent: ClothingEyesBase
@@ -129,6 +131,8 @@
     sprite: Clothing/Eyes/Glasses/outlawglasses.rsi
   - type: VisionCorrection
   - type: IdentityBlocker
+  - type: StaticPrice
+    price: 500
 
 - type: entity
   parent: ClothingEyesBase
@@ -143,6 +147,7 @@
   - type: Tag
     tags:
     - HamsterWearable
+    - PetWearable
     - WhitelistChameleon
     - SecDogWearable # Roxi
   - type: IdentityBlocker
@@ -160,6 +165,7 @@
   - type: Tag
     tags:
     - Sunglasses
+    - PetWearable
     - HamsterWearable
     - WhitelistChameleon
 
@@ -182,6 +188,7 @@
   - type: Tag
     tags:
     - HamsterWearable
+    - PetWearable
     - WhitelistChameleon
     - SecDogWearable # Roxi
   - type: GuideHelp
@@ -207,6 +214,7 @@
   - type: Tag
     tags:
     - HamsterWearable
+    - PetWearable
     - WhitelistChameleon
   - type: IdentityBlocker
     coverage: EYES
@@ -260,29 +268,10 @@
     - type: SolutionScanner
     - type: IdentityBlocker
       coverage: EYES
-
-#SS220-Blueshield-begin
-- type: entity
-  parent: ClothingEyesBase
-  id: ClothingEyesGlassesBlueShield
-  name: blue shield sunglasses
-  description: Strangely ancient technology used to help provide rudimentary eye cover. Enhanced shielding blocks many flashes.
-  components:
-  - type: Sprite
-    sprite: Clothing/Eyes/Glasses/bsglasses.rsi
-  - type: Clothing
-    sprite: Clothing/Eyes/Glasses/bsglasses.rsi
-  - type: FlashImmunity
-  - type: EyeProtection
-    protectionTime: 5
-  #- type: ShowSecurityIcons #ss220-blueshield-fix-begin
-  - type: ShowHealthBars
-    damageContainers:
-    - Biological
-  - type: ShowHealthIcons
-    damageContainers:
-    - Biological #ss220-blueshield-fix-end
-#SS220-Blueshield-end
+    - type: Tag
+      tags:
+      - PetWearable
+      - WhitelistChameleon
 
 - type: entity
   parent: [ClothingEyesBase]
@@ -291,7 +280,28 @@
   description: An advanced visor protecting a ninja's eyes from flashing lights.
   components:
   - type: Sprite
-    sprite: Clothing/Eyes/Glasses/ninjavisor.rsi
+    sprite: SS220/Clothing/Eyes/Glasses/ninjavisor.rsi # SS220 Ninja Resprite
   - type: Clothing
-    sprite: Clothing/Eyes/Glasses/ninjavisor.rsi
+    sprite: SS220/Clothing/Eyes/Glasses/ninjavisor.rsi # SS220 Ninja Resprite
   - type: FlashImmunity
+
+- type: entity
+  parent: [ClothingEyesBase, ShowSecurityIcons, BaseSecurityContraband]
+  id: ClothingEyesGlassesNoir
+  name: noir-tech glasses
+  description: A pair of glasses that simulate what the world looked like before the invention of color.
+  components:
+  - type: Sprite
+    sprite: Clothing/Eyes/Glasses/noir.rsi
+  - type: Clothing
+    sprite: Clothing/Eyes/Glasses/sunglasses.rsi
+  - type: IdentityBlocker
+    coverage: EYES
+  - type: FlashImmunity
+  - type: EyeProtection
+    protectionTime: 5
+  - type: NoirOverlay
+  - type: Tag
+    tags:
+    - HamsterWearable
+    - WhitelistChameleon

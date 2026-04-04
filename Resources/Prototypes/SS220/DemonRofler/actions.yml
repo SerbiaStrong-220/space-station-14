@@ -3,63 +3,70 @@
   name: Запугивание
   description: Чем больше страха, тем слаще добыча.
   components:
-  - type: InstantAction
-    event: !type:ReaperRoflEvent
+  - type: Action
     itemIconStyle: NoItem
     icon: Interface/Actions/scream.png
     useDelay: 25
+  - type: InstantAction
+    event: !type:ReaperRoflEvent
 
 - type: entity
   id: ActionDarkReaperStun
   name: Крик
   description: Громкий вопль, оглушающий добычу.
   components:
-  - type: InstantAction
-    event: !type:ReaperStunEvent
+  - type: Action
     itemIconStyle: NoItem
     icon: { sprite: SS220/DemonRofler/dark_reaper.rsi, state: icon_jnecscream }
     useDelay: 30
+  - type: InstantAction
+    event: !type:ReaperStunEvent
 
 - type: entity
   id: ActionDarkReaperConsume
   name: Жатва
   description: Растерзать и поглотить добычу.
   components:
-  - type: EntityTargetAction
-    event: !type:ReaperConsumeEvent
+  - type: Action
     itemIconStyle: NoItem
     icon: { sprite: SS220/DemonRofler/dark_reaper.rsi, state: icon_jneceat }
     useDelay: 10
+  - type: TargetAction
+  - type: EntityTargetAction
+    event: !type:ReaperConsumeEvent
 
 - type: entity
   id: ActionDarkReaperMaterialize
   name: Врата
   description: Проход между материальным миром и не материальным.
   components:
-  - type: InstantAction
-    event: !type:ReaperMaterializeEvent
+  - type: Action
     itemIconStyle: NoItem
     icon: { sprite: SS220/DemonRofler/dark_reaper.rsi, state: jnecexit }
     useDelay: 15
+  - type: InstantAction
+    event: !type:ReaperMaterializeEvent
 
 - type: entity
   id: ActionDarkReaperSpawn
   name: Явить себя
   description: Смертные не будут вас дожидаться.
   components:
-  - type: InstantAction
-    event: !type:ReaperSpawnEvent
+  - type: Action
     itemIconStyle: NoItem
     icon: { sprite: SS220/DemonRofler/dark_reaper.rsi, state: jnecexit }
     useDelay: 1
+  - type: InstantAction
+    event: !type:ReaperSpawnEvent
 
 - type: entity
   id: ActionDarkReaperBloodMist
   name: Кровавый туман
   description: Выпустить кровавый туман.
   components:
-  - type: InstantAction
-    event: !type:ReaperBloodMistEvent
+  - type: Action
     itemIconStyle: NoItem
     icon: { sprite: SS220/DemonRofler/dark_reaper.rsi, state: icon_bloodmist }
     useDelay: 60
+  - type: InstantAction
+    event: !type:ReaperBloodMistEvent

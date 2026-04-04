@@ -16,6 +16,8 @@
     components:
     - BorgChassis
     - PAI # SS220 borg emotes to PAI
+    tags:
+    - SiliconEmotes
   chatMessages: ["chat-emote-msg-cough"]
   chatTriggers:
     - cough
@@ -68,6 +70,8 @@
     components:
     - BorgChassis
     - PAI # SS220 borg emotes to PAI
+    tags:
+    - SiliconEmotes
   chatMessages: ["chat-emote-msg-yawn"]
   chatTriggers:
     - yawn

@@ -1,0 +1,29 @@
+- type: dynamic
+  id: LightDynamic
+  antagLimits:
+    Traitor: 8
+    TraitorSleeper: 4
+  name: dynamic-light-name
+  loreNames: NamesLightDynamic
+  briefing: dynamic-briefing-light
+
+- type: dynamic
+  id: MediumDynamic
+  antagLimits:
+    Traitor: 6
+    TraitorSleeper: 2
+  name: dynamic-medium-name
+  loreNames: NamesMediumDynamic
+  briefing: dynamic-briefing-medium
+
+- type: dynamic
+  id: HardDynamic
+  antagLimits:
+    Traitor: 4
+    TraitorSleeper: 1
+  playersRequirement: 25
+  departmentLimits:
+    Security: 5
+  name: dynamic-hard-name
+  loreNames: NamesHardDynamic
+  briefing: dynamic-briefing-hard

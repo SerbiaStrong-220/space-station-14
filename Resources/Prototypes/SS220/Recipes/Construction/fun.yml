@@ -1,16 +1,23 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 - type: construction
-  name: костёр
   id: BonFireCraft
   graph: BonFire
   startNode: start
   targetNode: BonfireNode
   category: construction-category-structures
   placementMode: SnapgridCenter
-  description: Что может быть лучше позднего вечера под открытым небом с гитарой и друзьями.
   objectType: Structure
   canBuildInImpassable: false
-  icon:
-    sprite: Structures/Decoration/bonfire.rsi
-    state: burning
   conditions:
     - !type:TileNotBlocked
+
+- type: construction
+  id: SingingFishCraft
+  graph: SingingFish
+  startNode: start
+  targetNode: SingingFishNode
+  category: construction-category-structures
+  placementMode: SnapgridCenter
+  objectType: Structure
+  canBuildInImpassable: true

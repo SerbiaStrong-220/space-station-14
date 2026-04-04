@@ -19,9 +19,9 @@ public sealed class AttachedCameraSystem : EntitySystem
         SubscribeLocalEvent<AttachedCameraComponent, GetVerbsEvent<InteractionVerb>>(AddDetachVerbs);
     }
 
-    private void OnExamined(EntityUid uid, AttachedCameraComponent component, ExaminedEvent args)
+    private void OnExamined(Entity<AttachedCameraComponent> ent, ref ExaminedEvent args)
     {
-        TryGetCameraFromSlot(uid, out var detectiveCamera, component);
+        TryGetCameraFromSlot(ent, out var detectiveCamera, ent);
 
         if (!args.IsInDetailsRange && detectiveCamera == null)
             return;
@@ -29,20 +29,22 @@ public sealed class AttachedCameraSystem : EntitySystem
         args.PushMarkup(Loc.GetString("detective-camera-attached-description"), -1);
     }
 
-    private void AddDetachVerbs(EntityUid uid, AttachedCameraComponent component, GetVerbsEvent<InteractionVerb> args)
+    private void AddDetachVerbs(Entity<AttachedCameraComponent> ent, ref GetVerbsEvent<InteractionVerb> args)
     {
-        TryGetCameraFromSlot(uid, out var detectiveCamera, component);
+        TryGetCameraFromSlot(ent, out var detectiveCamera, ent);
 
-        if (component.UserOwner == null || args.User != component.UserOwner)
+        if (ent.Comp.UserOwner == null || args.User != ent.Comp.UserOwner)
             return;
 
         if ((!args.CanInteract || !args.CanAccess) && detectiveCamera == null)
             return;
 
+        var user = args.User;
+
         InteractionVerb detachVerb = new()
         {
-            Text = $"{Loc.GetString("detective-camera-detach-verb")}",
-            Act = () => _detectiveCameraAttach.TryDetachVerb(component.AttachedCamera, uid, args.User)
+            Text = Loc.GetString("detective-camera-detach-verb"),
+            Act = () => _detectiveCameraAttach.TryDetachVerb(ent.Comp.AttachedCamera, ent, user),
         };
 
         args.Verbs.Add(detachVerb);

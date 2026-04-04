@@ -19,12 +19,40 @@ public sealed class RadarConsoleSystem : SharedRadarConsoleSystem
     {
         base.Initialize();
         SubscribeLocalEvent<RadarConsoleComponent, ComponentStartup>(OnRadarStartup);
+
+        // SS220 Shuttle nav info begin
+        Subs.BuiEvents<RadarConsoleComponent>(RadarConsoleUiKey.Key, subs =>
+        {
+            subs.Event<BoundUIOpenedEvent>(OnRadarUIOpen);
+            subs.Event<BoundUIClosedEvent>(OnRadarUIClose);
+        });
+        // SS220 Shuttle nav info end
     }
 
     private void OnRadarStartup(EntityUid uid, RadarConsoleComponent component, ComponentStartup args)
     {
         UpdateState(uid, component);
     }
+
+    // SS220 Shuttle nav info begin
+    private void OnRadarUIOpen(Entity<RadarConsoleComponent> entity, ref BoundUIOpenedEvent args)
+    {
+        if ((RadarConsoleUiKey)args.UiKey != RadarConsoleUiKey.Key)
+            return;
+
+        var ev = new RadarBoundUIOpenedEvent(entity, args);
+        RaiseLocalEvent(ev);
+    }
+
+    private void OnRadarUIClose(Entity<RadarConsoleComponent> entity, ref BoundUIClosedEvent args)
+    {
+        if ((RadarConsoleUiKey)args.UiKey != RadarConsoleUiKey.Key)
+            return;
+
+        var ev = new RadarBoundUIClosedEvent(entity, args);
+        RaiseLocalEvent(ev);
+    }
+    // SS220 Shuttle nav info end
 
     protected override void UpdateState(EntityUid uid, RadarConsoleComponent component)
     {
@@ -58,4 +86,18 @@ public sealed class RadarConsoleSystem : SharedRadarConsoleSystem
             _uiSystem.SetUiState(uid, RadarConsoleUiKey.Key, new NavBoundUserInterfaceState(state));
         }
     }
+
+    // SS220 Shuttle nav info begin
+    public sealed class RadarBoundUIOpenedEvent(Entity<RadarConsoleComponent> radar, BoundUIOpenedEvent openedEvent) : EntityEventArgs
+    {
+        public Entity<RadarConsoleComponent> Radar = radar;
+        public BoundUIOpenedEvent OpenedEvent = openedEvent;
+    }
+
+    public sealed class RadarBoundUIClosedEvent(Entity<RadarConsoleComponent> radar, BoundUIClosedEvent closedEvent) : EntityEventArgs
+    {
+        public Entity<RadarConsoleComponent> Radar = radar;
+        public BoundUIClosedEvent ClosedEvent = closedEvent;
+    }
+    // SS220 Shuttle nav info end
 }

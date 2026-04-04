@@ -142,7 +142,7 @@
 - type: loadout
   id: JanitorBaseBelt
   equipment:
-    belt: ClothingBeltJanitor
+    belt: ClothingBeltJanitorFilled
 
 - type: loadout
   id: JanitorJRBelt

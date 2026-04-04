@@ -7,66 +7,65 @@ using Robust.Shared.Configuration;
 using Content.Shared.SS220.CluwneComms;
 using Content.Shared.MassMedia.Systems;
 
-namespace Content.Client.SS220.CluwneComms.UI
+namespace Content.Client.SS220.CluwneComms.UI;
+
+public sealed class CluwneCommsConsoleBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    public sealed class CluwneCommsConsoleBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
+
+    [ViewVariables]
+    private CluwneCommsConsoleMenu? _menu;
+
+    protected override void Open()
     {
-        [Dependency] private readonly IConfigurationManager _cfg = default!;
+        base.Open();
 
-        [ViewVariables]
-        private CluwneCommsConsoleMenu? _menu;
+        _menu = this.CreateWindow<CluwneCommsConsoleMenu>();
+        _menu.OnAnnounce += AnnounceButtonPressed;
+        _menu.OnAlert += AlertButtonPressed;
+        _menu.OnBoom += BoomButtonPressed;
+    }
 
-        protected override void Open()
-        {
-            base.Open();
+    public void AnnounceButtonPressed(string message)
+    {
+        var msg = SharedChatSystem.SanitizeAnnouncement(message, _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength));
 
-            _menu = this.CreateWindow<CluwneCommsConsoleMenu>();
-            _menu.OnAnnounce += AnnounceButtonPressed;
-            _menu.OnAlert += AlertButtonPressed;
-            _menu.OnBoom += BoomButtonPressed;
-        }
+        SendMessage(new CluwneCommsConsoleAnnounceMessage(msg));
+    }
 
-        public void AnnounceButtonPressed(string message)
-        {
-            var msg = SharedChatSystem.SanitizeAnnouncement(message, _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength));
+    public void BoomButtonPressed()
+    {
+        SendMessage(new CluwneCommsConsoleBoomMessage());
+    }
 
-            SendMessage(new CluwneCommsConsoleAnnounceMessage(msg));
-        }
+    public void AlertButtonPressed(string level, string message, string instructions)
+    {
+        var msg = SharedChatSystem.SanitizeAnnouncement(message, _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength));
+        var instr = SharedChatSystem.SanitizeAnnouncement(instructions, SharedNewsSystem.MaxContentLength);
 
-        public void BoomButtonPressed()
-        {
-            SendMessage(new CluwneCommsConsoleBoomMessage());
-        }
+        SendMessage(new CluwneCommsConsoleAlertMessage(level, msg, instr));
+    }
 
-        public void AlertButtonPressed(string level, string message, string instructions)
-        {
-            var msg = SharedChatSystem.SanitizeAnnouncement(message, _cfg.GetCVar(CCVars.ChatMaxAnnouncementLength));
-            var instr = SharedChatSystem.SanitizeAnnouncement(instructions, SharedNewsSystem.MaxContentLength);
+    protected override void UpdateState(BoundUserInterfaceState state)
+    {
+        base.UpdateState(state);
 
-            SendMessage(new CluwneCommsConsoleAlertMessage(level, msg, instr));
-        }
+        if (state is not CluwneCommsConsoleInterfaceState commsState)
+            return;
 
-        protected override void UpdateState(BoundUserInterfaceState state)
-        {
-            base.UpdateState(state);
+        if (_menu == null)
+            return;
 
-            if (state is not CluwneCommsConsoleInterfaceState commsState)
-                return;
+        _menu.CanAnnounce = commsState.CanAnnounce;
+        _menu.AnnounceButton.Disabled = !_menu.CanAnnounce;
 
-            if (_menu != null)
-            {
-                _menu.CanAnnounce = commsState.CanAnnounce;
-                _menu.AnnounceButton.Disabled = !_menu.CanAnnounce;
+        _menu.CanAlert = commsState.CanAlert;
+        _menu.AlertButton.Disabled = !_menu.CanAlert;
+        _menu.AlertLevelButton.Disabled = !_menu.CanAlert;
 
-                _menu.CanAlert = commsState.CanAlert;
-                _menu.AlertButton.Disabled = !_menu.CanAlert;
-                _menu.AlertLevelButton.Disabled = !_menu.CanAlert;
+        _menu.UpdateAlertLevels(commsState.AlertLevels);
 
-                _menu.UpdateAlertLevels(commsState.AlertLevels);
-
-                _menu.AnnounceCountdownEnd = commsState.AnnouncementCooldownRemaining;
-                _menu.AlertCountdownEnd = commsState.AlertCooldownRemaining;
-            }
-        }
+        _menu.AnnounceCountdownEnd = commsState.AnnouncementCooldownRemaining;
+        _menu.AlertCountdownEnd = commsState.AlertCooldownRemaining;
     }
 }

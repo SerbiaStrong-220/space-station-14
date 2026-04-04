@@ -20,6 +20,10 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Utility;
 using Content.Shared.Weapons.Reflect;
 using Content.Shared.Inventory.Events;
+using Content.Shared.Throwing;
+using Robust.Shared.Containers;
+using Robust.Shared.Timing;
+using Content.Shared.Actions.Components;
 
 namespace Content.Shared.Blocking;
 
@@ -34,6 +38,8 @@ public sealed partial class BlockingSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private readonly TurfSystem _turf = default!;
 
     public override void Initialize()
     {
@@ -58,7 +64,36 @@ public sealed partial class BlockingSystem : EntitySystem
         SubscribeLocalEvent<BlockingComponent, MapInitEvent>(OnMapInit);
 
         SubscribeLocalEvent<BlockingComponent, ItemToggledEvent>(OnToggleItem);
+
+        //ss220 fix drop shields start
+        SubscribeLocalEvent<BlockingComponent, ThrowItemAttemptEvent>(OnThrowAttempt);
+        SubscribeLocalEvent<BlockingComponent, ContainerGettingRemovedAttemptEvent>(OnDropAttempt);
+        //ss220 fix drop shields end
     }
+
+    //ss220 fix drop shields start
+    private void OnDropAttempt(Entity<BlockingComponent> ent, ref ContainerGettingRemovedAttemptEvent args)
+    {
+        if (IsDropBlocked(ent))
+            args.Cancel();
+    }
+
+    private void OnThrowAttempt(Entity<BlockingComponent> ent, ref ThrowItemAttemptEvent args)
+    {
+        if (IsDropBlocked(ent))
+            args.Cancelled = false;
+    }
+
+    private bool IsDropBlocked(Entity<BlockingComponent> ent)
+    {
+        var action = ent.Comp.BlockingToggleActionEntity;
+
+        if (action == null || !TryComp<ActionComponent>(action.Value, out var actionComponent))
+            return false;
+
+        return _gameTiming.CurTime <= actionComponent.Cooldown?.End;
+    }
+    //ss220 fix drop shields end
 
     //ss220 raise shield activated fix start
     private void OnToggleItem(Entity<BlockingComponent> ent, ref ItemToggledEvent args)
@@ -143,7 +178,7 @@ public sealed partial class BlockingSystem : EntitySystem
         if (!handQuery.TryGetComponent(args.Performer, out var hands))
             return;
 
-        var shields = _handsSystem.EnumerateHeld(args.Performer, hands).ToArray();
+        var shields = _handsSystem.EnumerateHeld((args.Performer, hands)).ToArray();
 
         foreach (var shield in shields)
         {
@@ -212,7 +247,7 @@ public sealed partial class BlockingSystem : EntitySystem
         }
 
         //Don't allow someone to block if someone else is on the same tile
-        var playerTileRef = xform.Coordinates.GetTileRef();
+        var playerTileRef = _turf.GetTileRef(xform.Coordinates);
         if (playerTileRef != null)
         {
             var intersecting = _lookup.GetLocalEntitiesIntersecting(playerTileRef.Value, 0f);
@@ -323,7 +358,7 @@ public sealed partial class BlockingSystem : EntitySystem
         if (!handQuery.TryGetComponent(user, out var hands))
             return;
 
-        var shields = _handsSystem.EnumerateHeld(user, hands).ToArray();
+        var shields = _handsSystem.EnumerateHeld((user, hands)).ToArray();
 
         foreach (var shield in shields)
         {

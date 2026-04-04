@@ -1,40 +1,4 @@
 - type: entity
-  parent: ClothingNeckBase
-  id: ClothingNeckHeadphones
-  name: headphones
-  description: Quality headphones from Drunk Masters, with good sound insulation.
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/Neck/Misc/headphones.rsi #SS220HeadphonesResprite
-    layers:
-    - state: icon
-      map: [ "enum.ToggleVisuals.Layer" ]
-  - type: Clothing
-    equippedPrefix: on #ss220 fix
-    sprite: SS220/Clothing/Neck/Misc/headphones.rsi #SS220HeadphonesResprite
-  - type: ToggleableLightVisuals
-    spriteLayer: enum.ToggleVisuals.Layer
-    clothingVisuals:
-      neck:
-      - state: on-equipped-NECK
-  - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.ToggleVisuals.Toggled:
-        enum.ToggleVisuals.Layer:
-          True: {state: icon-on}
-          False: {state: icon}
-  - type: ItemToggle
-    predictable: false
-    soundActivate:
-      path: /Audio/Items/flashlight_on.ogg
-    soundDeactivate:
-      path: /Audio/Items/flashlight_off.ogg
-  - type: Tag #SS220-pr: FIX CLOTHING TAGS
-    tags: #SS220-pr: FIX CLOTHING TAGS
-    - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS
-
-- type: entity
   parent: Clothing
   id: ClothingNeckStethoscope
   name: stethoscope
@@ -56,17 +20,20 @@
     - WhitelistChameleon #SS220-pr: FIX CLOTHING TAGS
 
 - type: entity
+  parent: BaseAction
   id: ActionStethoscope
   name: Listen with stethoscope
   components:
-  - type: EntityTargetAction
+  - type: Action
     icon:
       sprite: Clothing/Neck/Misc/stethoscope.rsi
       state: icon
-    event: !type:StethoscopeActionEvent
-    checkCanInteract: false
     priority: -1
     itemIconStyle: BigAction
+    checkCanInteract: false
+  - type: TargetAction
+  - type: EntityTargetAction
+    event: !type:StethoscopeActionEvent
 
 - type: entity
   parent: ClothingNeckBase

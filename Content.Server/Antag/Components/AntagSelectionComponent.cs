@@ -121,6 +121,15 @@ public partial struct AntagSelectionDefinition()
     [DataField]
     public int PlayerRatio = 10;
 
+    // SS220-add-adjustment-for-antag-count-begin
+    /// <summary>
+    /// On antag number computing that value is being added to player count multiplied by PlayerRation <br/>
+    /// Can be used to fine tune antag count without changing player ratio
+    /// </summary>
+    [DataField]
+    public float AddPlayerCountPerRatio = 0f;
+    // SS220-add-adjustment-for-antag-count-begin
+
     /// <summary>
     /// Whether or not players should be picked to inhabit this antag or not.
     /// If no players are left and <see cref="SpawnerPrototype"/> is set, it will make a ghost role.

@@ -9,6 +9,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: WallMount
     arc: 360 # interact despite grilles
   - type: Tag
@@ -114,6 +115,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: Sprite
     sprite: SS220/Structures/Windows/directionals/angular.rsi
     state: plasma_window
@@ -161,6 +163,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: Sprite
     sprite: SS220/Structures/Windows/directionals/angular.rsi
     state: reinforced_window
@@ -312,6 +315,8 @@
             max: 2
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: RadiationBlocker
+    resistance: 2.5
   - type: StaticPrice
     price: 215
 
@@ -325,6 +330,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: Sprite
     sprite: SS220/Structures/Windows/directionals/angular.rsi
     state: uranium_window
@@ -357,6 +363,8 @@
             max: 2
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: RadiationBlocker
+    resistance: 1.5
   - type: StaticPrice
     price: 200
 
@@ -370,6 +378,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: Sprite
     sprite: SS220/Structures/Windows/directionals/angular.rsi
     state: clock_window
@@ -418,6 +427,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: WallMount
     arc: 360 # interact despite grilles
   - type: Tag
@@ -533,6 +543,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: Sprite
     sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
     state: plasma_window
@@ -580,6 +591,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: Sprite
     sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
     state: reinforced_window
@@ -731,6 +743,8 @@
             max: 3
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: RadiationBlocker
+    resistance: 2.5
   - type: StaticPrice
     price: 322.5
 
@@ -744,6 +758,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: Sprite
     sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
     state: uranium_window
@@ -776,6 +791,8 @@
             max: 3
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: RadiationBlocker
+    resistance: 1.5
   - type: StaticPrice
     price: 300
 
@@ -789,6 +806,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: Sprite
     sprite: SS220/Structures/Windows/directionals/U-shaped.rsi
     state: clock_window
@@ -837,6 +855,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: WallMount
     arc: 360 # interact despite grilles
   - type: Tag
@@ -942,6 +961,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: Sprite
     sprite: SS220/Structures/Windows/directionals/double.rsi
     state: plasma_window
@@ -1140,6 +1160,8 @@
             max: 2
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: RadiationBlocker
+    resistance: 2.5
   - type: StaticPrice
     price: 215
 
@@ -1153,6 +1175,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: Sprite
     sprite: SS220/Structures/Windows/directionals/double.rsi
     state: uranium_window
@@ -1185,6 +1208,8 @@
             max: 2
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: RadiationBlocker
+    resistance: 1.5
   - type: StaticPrice
     price: 200
 
@@ -1198,6 +1223,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: Sprite
     sprite: SS220/Structures/Windows/directionals/double.rsi
     state: clock_window
@@ -1371,6 +1397,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: Sprite
     sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
     state: plasma_window
@@ -1569,6 +1596,8 @@
             max: 4
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: RadiationBlocker
+    resistance: 2.5
   - type: StaticPrice
     price: 430
 
@@ -1582,6 +1611,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: Sprite
     sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
     state: uranium_window
@@ -1614,6 +1644,8 @@
             max: 4
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: RadiationBlocker
+    resistance: 1.5
   - type: StaticPrice
     price: 400
 
@@ -1627,6 +1659,7 @@
     snap:
     - Window
   components:
+  - type: DeltaPressure
   - type: Sprite
     sprite: SS220/Structures/Windows/directionals/O-shaped.rsi
     state: clock_window

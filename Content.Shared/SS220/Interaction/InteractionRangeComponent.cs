@@ -6,7 +6,6 @@ namespace Content.Shared.SS220.Interaction;
 public sealed partial class InteractionRangeComponent : Component
 {
     [AutoNetworkedField]
-    [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("range")]
+    [DataField]
     public float Range = 1.5f;
 }

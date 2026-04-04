@@ -52,19 +52,10 @@ namespace Content.Server.Inventory
             var textInfo = CultureInfo.CurrentCulture.TextInfo;
             string idCardName = Loc.GetString("chat-radio-no-id");
             idCardName = textInfo.ToTitleCase(idCardName);
-            // Проверка слота
-            if (TryGetSlotEntity(uid, "id", out var idUid))
-            {
-                _sharedIdCard.TryGetIdCard(idUid.Value, out idCard);
-
-                idCardName = idCard.Comp.LocalizedJobTitle ?? idCardName;
-                idCardName = textInfo.ToTitleCase(idCardName);
-                args.Name = $"\\[{idCardName}\\] ";
-                return;
-            }
-            // если карту не нашли, отправляем "[Без ID]"
+            if (TryGetSlotEntity(uid, "id", out var idUid) && _sharedIdCard.TryGetIdCard(idUid.Value, out idCard))
+                args.Name = idCard.Comp.LocalizedJobTitle ?? idCardName;
             else
-                args.Name = $"\\[{idCardName}\\] ";
+                args.Name = idCardName;
         }
         // SS220 Borgs-Id-fix end
     }

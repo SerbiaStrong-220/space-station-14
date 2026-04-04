@@ -7,10 +7,6 @@
   whitelist:
     components:
     - Vocal
-  blacklist:
-    components:
-    - BorgChassis
-    - PAI # SS220 borg emotes to PAI
   chatMessages: ["chat-emote-msg-scream"]
   chatTriggers:
     - scream
@@ -50,6 +46,8 @@
     components:
     - BorgChassis
     - PAI # SS220 borg emotes to PAI
+    tags:
+    - SiliconEmotes
   chatMessages: ["chat-emote-msg-laugh"]
   chatTriggers:
     - laugh
@@ -77,7 +75,8 @@
     requireAll: true
     components:
     - Vocal
-    - BorgChassis
+    tags:
+    - SiliconEmotes
   chatMessages: ["chat-emote-msg-honk"]
   chatTriggers:
     - honk
@@ -100,6 +99,8 @@
     components:
     - BorgChassis
     - PAI # SS220 borg emotes to PAI
+    tags:
+    - SiliconEmotes
   chatMessages: ["chat-emote-msg-sigh"]
   chatTriggers:
     - sigh
@@ -124,6 +125,8 @@
     components:
     - BorgChassis
     - PAI # SS220 borg emotes to PAI
+    tags:
+    - SiliconEmotes
   chatMessages: ["chat-emote-msg-whistle"]
   chatTriggers:
     - whistle
@@ -150,6 +153,8 @@
     components:
     - BorgChassis
     - PAI # SS220 borg emotes to PAI
+    tags:
+    - SiliconEmotes
   chatMessages: ["chat-emote-msg-crying"]
   chatTriggers:
     - cry
@@ -181,6 +186,8 @@
     components:
     - BorgChassis
     - PAI # SS220 borg emotes to PAI
+    tags:
+    - SiliconEmotes
   chatMessages: ["chat-emote-msg-squish"]
   chatTriggers:
     - squish
@@ -208,6 +215,8 @@
     components:
     - BorgChassis
     - PAI # SS220 borg emotes to PAI
+    tags:
+    - SiliconEmotes
   chatMessages: ["chat-emote-msg-chitter"]
   chatTriggers:
    - chitter
@@ -231,14 +240,17 @@
     components:
     - BorgChassis
     - PAI # SS220 borg emotes to PAI
+    tags:
+    - SiliconEmotes
   chatMessages: ["chat-emote-msg-squeak"]
   chatTriggers:
    - squeak
    - squeaks
    - squeaked
    #220-Localization-Start
-   - скрип
-   - скрипит
+   - писк
+   - пищит
+   - пискнул
    #220-Localization-End
 
 - type: emote
@@ -254,10 +266,146 @@
     components:
     - BorgChassis
     - PAI # SS220 borg emotes to PAI
+    tags:
+    - SiliconEmotes
   chatMessages: ["chat-emote-msg-click"]
   chatTriggers:
    - click
    - clicks
+
+# Vulpkanin
+- type: emote
+  id: Bark
+  name: chat-emote-name-bark
+  category: Vocal
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["chat-emote-msg-bark"]
+  chatTriggers:
+  - bark
+  - barks
+  - barked
+  - barking
+  # SS220-port-vulpkanins-begin
+  - лает
+  - лает.
+  - лает?
+  - лает!
+  - гавкнул
+  - гавкнул.
+  - гавкнул?
+  - гавкнул!
+  - гавкает
+  - гавкает.
+  - гавкает!
+  - гавкает?
+  # SS220-port-vulpkanins-end
+
+- type: emote
+  id: Snarl
+  name: chat-emote-name-snarl
+  category: Vocal
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["chat-emote-msg-snarl"]
+  chatTriggers:
+  - snarl
+  - snarls
+  - snarled
+  - snarling
+
+- type: emote
+  id: Whine
+  name: chat-emote-name-whine
+  category: Vocal
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["chat-emote-msg-whine"]
+  chatTriggers:
+  - whine
+  - whines
+  - whined
+  - whining
+
+- type: emote
+  id: Howl
+  name: chat-emote-name-howl
+  category: Vocal
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["chat-emote-msg-howl"]
+  chatTriggers:
+  - howl
+  - howls
+  - howling
+  - howled
+  # SS220-port-vulpkanins-begin
+  - выть
+  - выть.
+  - выть!
+  - выть?
+  - воет
+  - воет.
+  - воет!
+  - воет?
+  - завыл
+  - завыл.
+  - завыл!
+  - завыл?
+  - завывает
+  - завывает.
+  - завывает!
+  - завывает?
+  # SS220-port-vulpkanins-end
+
+- type: emote
+  id: Growl
+  name: chat-emote-name-growl
+  category: Vocal
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["chat-emote-msg-growl"]
+  chatTriggers:
+  - growl
+  - growls
+  - growled
+  - growling
+# SS220-port-vulpkanins-begin
+  - рычать
+  - рычать.
+  - рычать?
+  - рычать!
+  - рычит
+  - рычит.
+  - рычит!
+  - рычит?
+  - ррр
+# SS220-port-vulpkanins-end
 
 # hand emotes
 - type: emote
@@ -272,6 +420,8 @@
     components:
     - BorgChassis
     - PAI # SS220 borg emotes to PAI
+    tags:
+    - SiliconEmotes
   chatMessages: ["chat-emote-msg-clap"]
   chatTriggers:
     - claps
@@ -296,8 +446,8 @@
     components:
     - Hands
   blacklist:
-    components:
-    - BorgChassis
+    tags:
+    - SiliconEmotes
   chatMessages: [ "chat-emote-msg-clap-single" ]
   chatTriggers:
     - clap
@@ -318,6 +468,8 @@
     components:
     - BorgChassis
     - PAI # SS220 borg emotes to PAI
+    tags:
+    - SiliconEmotes
   chatMessages: ["chat-emote-msg-snap"]
   chatTriggers:
     - snap
@@ -357,8 +509,8 @@
     components:
     - Hands
   blacklist:
-    components:
-    - BorgChassis
+    tags:
+    - SiliconEmotes
   chatMessages: ["chat-emote-msg-thump"]
   chatTriggers:
     - thump
@@ -398,6 +550,8 @@
     components:
     - BorgChassis
     - PAI # SS220 borg emotes to PAI
+    tags:
+    - SiliconEmotes
   chatMessages: ["chat-emote-msg-salute"]
   chatTriggers:
     - salute
@@ -441,6 +595,8 @@
     components:
     - BorgChassis
     - PAI # SS220 borg emotes to PAI
+    tags:
+    - SiliconEmotes
   chatMessages: ["chat-emote-msg-fart"]
   chatTriggers:
   - fart
@@ -471,6 +627,8 @@
     components:
     - BorgChassis
     - PAI # SS220 borg emotes to PAI
+    tags:
+    - SiliconEmotes
   chatMessages: ["chat-emote-msg-giggle"]
   chatTriggers:
   - хихикает
@@ -498,6 +656,8 @@
     components:
     - BorgChassis
     - PAI # SS220 borg emotes to PAI
+    tags:
+    - SiliconEmotes
   chatMessages: ["chat-emote-msg-hiss"]
   chatTriggers:
   - шипение
@@ -520,6 +680,12 @@
   chatMessages: ["chat-emote-msg-deathgasp-monkey"]
 
 - type: emote
+  id: ScurretDeathgasp
+  name: chat-emote-name-deathgasp
+  icon: Interface/Emotes/deathgasp.png
+  chatMessages: ["chat-emote-msg-deathgasp-scurret"]
+
+- type: emote
   id: Buzz
   name: chat-emote-name-buzz
   category: Vocal
@@ -527,8 +693,9 @@
   whitelist:
     requireAll: true
     components:
-    - BorgChassis
     - Vocal
+    tags:
+    - SiliconEmotes
   chatMessages: ["chat-emote-msg-buzz"]
   chatTriggers:
     - buzzing
@@ -561,8 +728,8 @@
     - Nymph
     - Vocal
   blacklist:
-    components:
-    - BorgChassis
+    tags:
+    - SiliconEmotes
   chatMessages: ["chat-emote-msg-chirp"]
   chatTriggers:
     - chirp
@@ -584,6 +751,8 @@
     - BorgChassis
     - PAI # SS220 TODO borg emotes to PAI
 #    - Vocal # SS220 TODO borg emotes to PAI
+    tags:
+    - SiliconEmotes
   chatMessages: ["chat-emote-msg-beep"]
   chatTriggers:
     - beep
@@ -605,6 +774,8 @@
     - BorgChassis
     - PAI # SS220 TODO borg emotes to PAI
 #    - Vocal # SS220 TODO borg emotes to PAI
+    tags:
+    - SiliconEmotes
   chatMessages: ["chat-emote-msg-chime"]
   chatTriggers:
     - chime
@@ -626,6 +797,8 @@
     - BorgChassis
     - PAI # SS220 TODO borg emotes to PAI
 #    - Vocal # SS220 TODO borg emotes to PAI
+    tags:
+    - SiliconEmotes
   chatMessages: ["chat-emote-msg-buzzestwo"]
   chatTriggers:
     - buzztwice
@@ -658,6 +831,8 @@
     - BorgChassis
     - PAI # SS220 TODO borg emotes to PAI
 #    - Vocal # SS220 TODO borg emotes to PAI
+    tags:
+    - SiliconEmotes
   chatMessages: ["chat-emote-msg-ping"]
   chatTriggers:
     - ping

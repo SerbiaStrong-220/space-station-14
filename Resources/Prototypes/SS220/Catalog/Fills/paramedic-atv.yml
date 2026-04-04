@@ -1,8 +1,0 @@
-- type: entity
-  id: CrateParamedicATV
-  parent: CrateLivestock
-  components:
-  - type: StorageFill
-    contents:
-      - id: VehicleParamedicATV
-      - id: VehicleKeyParamedicATV

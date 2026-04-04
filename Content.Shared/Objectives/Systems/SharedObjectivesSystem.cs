@@ -1,6 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
+using Content.Shared.Prototypes;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -13,15 +15,34 @@ public abstract class SharedObjectivesSystem : EntitySystem
 {
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly IPrototypeManager _protoMan = default!;
+    [Dependency] private readonly MetaDataSystem _meta = default!; // ss220 add custom goals x2
 
     private EntityQuery<MetaDataComponent> _metaQuery;
+
+    private static readonly EntProtoId FreeObjectiveProto = "SS220FreeObjective"; // ss220 add custom goals x2
+
+    public IEnumerable<string>? ObjectivesQuery; // ss220 add custom goals x2
 
     public override void Initialize()
     {
         base.Initialize();
 
         _metaQuery = GetEntityQuery<MetaDataComponent>();
+
+        // ss220 add custom goals x2 start
+        CreateCompletions();
+        _protoMan.PrototypesReloaded += CreateCompletions;
+        // ss220 add custom goals x2 end
     }
+
+    // ss220 add custom goals x2 start
+    public override void Shutdown()
+    {
+        base.Shutdown();
+
+        _protoMan.PrototypesReloaded -= CreateCompletions;
+    }
+    // ss220 add custom goals x2 end
 
     /// <summary>
     /// Checks requirements and duplicate objectives to see if an objective can be assigned.
@@ -55,7 +76,7 @@ public abstract class SharedObjectivesSystem : EntitySystem
     /// The objective is not added to the mind's objectives, mind system does that in TryAddObjective.
     /// If the objective could not be assigned the objective is deleted and null is returned.
     /// </summary>
-    public EntityUid? TryCreateObjective(EntityUid mindId, MindComponent mind, string proto)
+    public EntityUid? TryCreateObjective(EntityUid mindId, MindComponent mind, string proto, bool force = false) // ss220 add custom antag goals
     {
         if (!_protoMan.HasIndex<EntityPrototype>(proto))
             return null;
@@ -68,7 +89,7 @@ public abstract class SharedObjectivesSystem : EntitySystem
             return null;
         }
 
-        if (!CanBeAssigned(uid, mindId, mind, comp))
+        if (!CanBeAssigned(uid, mindId, mind, comp) && !force) // ss220 add custom antag goals
         {
             Log.Warning($"Objective {proto} did not match the requirements for {_mind.MindOwnerLoggingString(mind)}, deleted it");
             return null;
@@ -76,7 +97,7 @@ public abstract class SharedObjectivesSystem : EntitySystem
 
         var ev = new ObjectiveAssignedEvent(mindId, mind);
         RaiseLocalEvent(uid, ref ev);
-        if (ev.Cancelled)
+        if (ev.Cancelled && !force) // ss220 add custom antag goals
         {
             Del(uid);
             Log.Warning($"Could not assign objective {proto}, deleted it");
@@ -101,6 +122,29 @@ public abstract class SharedObjectivesSystem : EntitySystem
         objective = TryCreateObjective(mind.Owner, mind.Comp, proto);
         return objective != null;
     }
+
+    // ss220 add custom goals x2 start
+    public EntityUid? TryCreateObjective(Entity<MindComponent> mind, string name, string desc, SpriteSpecifier icon, string locIssuer)
+    {
+        var objective = Spawn(FreeObjectiveProto);
+
+        if (!TryComp<ObjectiveComponent>(objective, out var comp))
+        {
+            Del(objective);
+            Log.Error("Invalid objective proto (custom objective), missing ObjectiveComponent");
+            return null;
+        }
+
+        _meta.SetEntityName(objective, name);
+        _meta.SetEntityDescription(objective, desc);
+
+        comp.Completed = false;
+        comp.Icon = icon;
+        comp.Issuer = locIssuer;
+
+        return objective;
+    }
+    // ss220 add custom goals x2 end
 
     /// <summary>
     /// Get the title, description, icon and progress of an objective using <see cref="ObjectiveGetInfoEvent"/>.
@@ -136,12 +180,17 @@ public abstract class SharedObjectivesSystem : EntitySystem
     /// </summary>
     public float? GetProgress(EntityUid uid, Entity<MindComponent> mind)
     {
+        // ss220 add custom goals x2 start
+        if (TryComp<ObjectiveComponent>(uid, out var comp) && comp.Completed is not null)
+            return comp.Completed.Value ? 1f : 0f;
+        // ss220 add custom goals x2 end
+
         var ev = new ObjectiveGetProgressEvent(mind, mind.Comp);
         RaiseLocalEvent(uid, ref ev);
         if (ev.Progress != null)
             return ev.Progress;
 
-        Log.Error($"Objective {ToPrettyString(uid):objective} of {_mind.MindOwnerLoggingString(mind.Comp)} didn't set a progress value!");
+        Log.Error($"Objective {ToPrettyString(uid):objective} of {_mind.MindOwnerLoggingString(mind)} didn't set a progress value!");
         return null;
     }
 
@@ -164,4 +213,49 @@ public abstract class SharedObjectivesSystem : EntitySystem
 
         comp.Icon = icon;
     }
+
+    // ss220 add custom goals x2 start
+    public static void SetCompleted(Entity<ObjectiveComponent> objective, bool completed)
+    {
+        objective.Comp.Completed = completed;
+    }
+
+    public static void ToggleCompleted(Entity<ObjectiveComponent> objective)
+    {
+        if (objective.Comp.Completed == null)
+        {
+            objective.Comp.Completed = true;
+            return;
+        }
+
+        objective.Comp.Completed = !objective.Comp.Completed;
+    }
+    // ss220 add custom goals x2 end
+
+    // ss220 add custom goals x2 start
+    private void CreateCompletions(PrototypesReloadedEventArgs _)
+    {
+        CreateCompletions();
+    }
+
+    /// <summary>
+    /// Get all objective prototypes by their IDs.
+    /// This is used for completions in <see cref="AddObjectiveCommand"/>
+    /// </summary>
+    public IEnumerable<string> Objectives()
+    {
+        if (ObjectivesQuery == null)
+            CreateCompletions();
+
+        return ObjectivesQuery!;
+    }
+
+    private void CreateCompletions()
+    {
+        ObjectivesQuery = _protoMan.EnumeratePrototypes<EntityPrototype>()
+            .Where(p => p.HasComponent<ObjectiveComponent>())
+            .Select(p => p.ID)
+            .Order();
+    }
+    // ss220 add custom goals x2 end
 }

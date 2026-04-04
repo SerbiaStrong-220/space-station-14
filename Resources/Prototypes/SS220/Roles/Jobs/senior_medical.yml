@@ -32,3 +32,13 @@
     id: SeniorPhysicianPDA
     ears: ClothingHeadsetMedical
     belt: ClothingBeltMedicalFilled
+
+- type: chameleonOutfit
+  id: SeniorPhysicianChameleonOutfit
+  job: SeniorPhysician
+  equipment:
+    head: ClothingHeadHatBeretMedic
+    eyes: ClothingEyesHudMedical
+    mask: ClothingMaskSterile
+    outerClothing: ClothingOuterCoatLab
+    gloves: ClothingHandsGlovesLatex

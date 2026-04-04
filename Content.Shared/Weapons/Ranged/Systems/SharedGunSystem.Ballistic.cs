@@ -58,6 +58,7 @@ public abstract partial class SharedGunSystem
         Audio.PlayPredicted(component.SoundInsert, uid, args.User);
         args.Handled = true;
         UpdateBallisticAppearance(uid, component);
+        UpdateAmmoCount(args.Target);
         DirtyField(uid, component, nameof(BallisticAmmoProviderComponent.Entities));
     }
 
@@ -153,7 +154,9 @@ public abstract partial class SharedGunSystem
                 Del(ent.Value);
         }
 
-        // repeat if there is more space in the target and more ammo to fill it
+        //UpdateBallisticAppearance(args.Target.Value, component); // ss220 edit - these lines will be gone at upstream anyway
+        //UpdateAmmoCount(args.Target.Value); // ss220 edit
+        // repeat if there is more space in the target and more ammo to fill
         var moreSpace = target.Entities.Count + target.UnspawnedCount < target.Capacity;
         var moreAmmo = component.Entities.Count + component.UnspawnedCount > 0;
         args.Repeat = moreSpace && moreAmmo;

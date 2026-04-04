@@ -37,10 +37,39 @@
   suffix: Magistrate, Locked
   components:
   - type: Sprite
-    sprite: SS220/Structures/Doors/Airlocks/Standart/magistrate.rsi
+    sprite: SS220/Structures/Doors/Airlocks/Standard/magistrate.rsi
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsMagistrate ]
+
+- type: entity
+  parent: AirlockCommandGlass
+  id: AirlockNanoTrasenRepresentativeGlassLocked
+  suffix: NanoTrasen Representative, Locked
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Doors/Airlocks/Glass/magistrate.rsi
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsNanoTrasenRepresentative ]
+
+- type: entity
+  parent: AirlockCommand
+  id: AirlockNanoTrasenRepresentativeLocked
+  suffix: NanoTrasen Representative, Locked
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Doors/Airlocks/Standard/magistrate.rsi
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsNanoTrasenRepresentative ]
+
+- type: entity
+  parent: AirlockNanoTrasenRepresentativeLocked
+  id: AirlockMaintNanoTrasenRepresentativeLocked
+  components:
+  - type: Sprite
+    sprite: Structures/Doors/Airlocks/Standard/maint.rsi
 
 # Clown
 - type: entity
@@ -50,13 +79,11 @@
   components:
   - type: Sprite
     sprite: SS220/Structures/Doors/clown.rsi
-  - type: PaintableAirlock
-    group: Glass
 
 - type: entity
   parent: AirlockClown
-  id: AirlockClownLocked
-  suffix: Clown, Locked
+  id: AirlockClownTheatreLocked
+  suffix: Clown, Locked, Theatre
   components:
   - type: ContainerFill
     containers:
@@ -90,8 +117,6 @@
   components:
   - type: Sprite
     sprite: SS220/Structures/Doors/centcomm_glass.rsi
-  - type: PaintableAirlock
-    group: Glass
   - type: Wires
     layoutId: AirlockCommand
 
@@ -102,8 +127,6 @@
   components:
   - type: Sprite
     sprite: SS220/Structures/Doors/centcomm_glass.rsi
-  - type: PaintableAirlock
-    group: Glass
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsCentralCommand ]
@@ -115,16 +138,16 @@
   components:
   - type: ContainerFill
     containers:
-      board: [ DoorElectronicsCentralCommand ]
+      board: [ DoorElectronicsCentralCommandERT ]
 
 - type: entity
   parent: AirlockGlassCentcomm
-  id: AirlockGlassCentcommLockedBlueShieldOperative
-  suffix: ЦК, Закрыто, Оперативник "Синий Щит"
+  id: AirlockGlassCentcommLockedSRTOperative
+  suffix: ЦК, Закрыто, Оперативник ГСН
   components:
   - type: ContainerFill
     containers:
-      board: [ DoorElectronicsCentralCommand ]
+      board: [ DoorElectronicsCentralCommandSRT ]
 
 - type: entity
   parent: AirlockGlassCentcomm
@@ -133,7 +156,7 @@
   components:
   - type: ContainerFill
     containers:
-      board: [ DoorElectronicsCentralCommand ]
+      board: [ DoorElectronicsCentralCommandDeathSquad ]
 
 - type: entity
   parent: AirlockGlassCentcomm
@@ -142,7 +165,7 @@
   components:
   - type: ContainerFill
     containers:
-      board: [ DoorElectronicsCentralCommand ]
+      board: [ DoorElectronicsCentralCommandCBURN ]
 
 - type: entity
   parent: Airlock
@@ -167,12 +190,12 @@
 
 - type: entity
   parent: AirlockCentcomm
-  id: AirlockCentcommLockedBSO
-  suffix: ЦК, Закрыто, Оперативник "Синий Щит"
+  id: AirlockCentcommLockedSRT
+  suffix: ЦК, Закрыто, Оперативник ГСН
   components:
   - type: ContainerFill
     containers:
-      board: [ DoorElectronicsCentralCommand ]
+      board: [ DoorElectronicsCentralCommandSRT ]
 
 - type: entity
   parent: AirlockCentcomm
@@ -181,7 +204,7 @@
   components:
   - type: ContainerFill
     containers:
-      board: [ DoorElectronicsCentralCommand ]
+      board: [ DoorElectronicsCentralCommandERT ]
 
 - type: entity
   parent: AirlockCentcomm
@@ -190,7 +213,7 @@
   components:
   - type: ContainerFill
     containers:
-      board: [ DoorElectronicsCentralCommand ]
+      board: [ DoorElectronicsCentralCommandDeathSquad ]
 
 
 - type: entity
@@ -200,7 +223,43 @@
   components:
   - type: ContainerFill
     containers:
-      board: [ DoorElectronicsCentralCommand ]
+      board: [ DoorElectronicsCentralCommandCBURN ]
+
+- type: entity
+  parent: HighSecCentralCommandLocked
+  id: HighSecCentcommLockedSRT
+  suffix: CC, Locked, SRT
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsCentralCommandSRT ]
+
+- type: entity
+  parent: HighSecCentralCommandLocked
+  id: HighSecCentcommLockedERT
+  suffix: CC, Locked, ERT
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsCentralCommandERT ]
+
+- type: entity
+  parent: HighSecCentralCommandLocked
+  id: HighSecCentcommLockedCBURN
+  suffix: CC, Locked, CBURN
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsCentralCommandCBURN ]
+
+- type: entity
+  parent: HighSecCentralCommandLocked
+  id: HighSecCentcommLockedDeathSquad
+  suffix: CC, Locked, DeathSquad
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsCentralCommandDeathSquad ]
 
 #USSP
 - type: entity
@@ -210,8 +269,6 @@
   components:
   - type: Sprite
     sprite: SS220/Structures/Doors/Airlocks/Glass/ussp_basic.rsi
-  - type: PaintableAirlock
-    group: Glass
 
 - type: entity
   parent: AirlockGlassUssp
@@ -280,7 +337,7 @@
   suffix: USSP
   components:
   - type: Sprite
-    sprite: SS220/Structures/Doors/Airlocks/Standart/ussp_basic.rsi
+    sprite: SS220/Structures/Doors/Airlocks/Standard/ussp_basic.rsi
 
 - type: entity
   parent: AirlockUssp
@@ -297,7 +354,7 @@
   suffix: USSP, Locked, Command
   components:
   - type: Sprite
-    sprite: SS220/Structures/Doors/Airlocks/Standart/ussp_command.rsi
+    sprite: SS220/Structures/Doors/Airlocks/Standard/ussp_command.rsi
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsUsspLockedCommand ]
@@ -308,7 +365,7 @@
   suffix: USSP, Locked, Medical
   components:
   - type: Sprite
-    sprite: SS220/Structures/Doors/Airlocks/Standart/ussp_med.rsi
+    sprite: SS220/Structures/Doors/Airlocks/Standard/ussp_med.rsi
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsUsspLockedMedical ]
@@ -319,7 +376,7 @@
   suffix: USSP, Locked, Engineering
   components:
   - type: Sprite
-    sprite: SS220/Structures/Doors/Airlocks/Standart/ussp_eng.rsi
+    sprite: SS220/Structures/Doors/Airlocks/Standard/ussp_eng.rsi
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsUsspLockedEngineering ]
@@ -332,7 +389,7 @@
   description: Necessary for connecting two space craft together.
   components:
   - type: Sprite
-    sprite: SS220/Structures/Doors/Airlocks/Standart/ussp_shuttle.rsi
+    sprite: SS220/Structures/Doors/Airlocks/Standard/ussp_shuttle.rsi
 
 - type: entity
   parent: AirlockShuttleUssp

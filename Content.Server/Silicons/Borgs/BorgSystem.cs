@@ -1,12 +1,14 @@
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Content.Server.Actions;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.DeviceNetwork.Systems;
-using Content.Server.Explosion.EntitySystems;
 using Content.Server.Hands.Systems;
 using Content.Server.PowerCell;
 using Content.Server.SS220.Events;
 using Content.Shared.Alert;
+using Content.Shared.Body.Events;
 using Content.Shared.Database;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
@@ -23,15 +25,16 @@ using Content.Shared.Roles;
 using Content.Shared.Silicons.Borgs;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Throwing;
+using Content.Shared.Trigger.Systems;
 using Content.Shared.Whitelist;
 using Content.Shared.Wires;
 using Robust.Server.GameObjects;
+using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using System.Globalization;
 
 namespace Content.Server.Silicons.Borgs;
 
@@ -40,6 +43,7 @@ public sealed partial class BorgSystem : SharedBorgSystem
 {
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly IBanManager _banManager = default!;
+    [Dependency] private readonly IConfigurationManager _cfgManager = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ActionsSystem _actions = default!;
@@ -60,8 +64,7 @@ public sealed partial class BorgSystem : SharedBorgSystem
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly IPrototypeManager _protoManager = default!; // SS220 Borgs-Id-fix
 
-    [ValidatePrototypeId<JobPrototype>]
-    public const string BorgJobId = "Borg";
+    public static readonly ProtoId<JobPrototype> BorgJobId = "Borg";
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -73,9 +76,11 @@ public sealed partial class BorgSystem : SharedBorgSystem
         SubscribeLocalEvent<BorgChassisComponent, MindAddedMessage>(OnMindAdded);
         SubscribeLocalEvent<BorgChassisComponent, MindRemovedMessage>(OnMindRemoved);
         SubscribeLocalEvent<BorgChassisComponent, MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<BorgChassisComponent, BeingGibbedEvent>(OnBeingGibbed);
         SubscribeLocalEvent<BorgChassisComponent, PowerCellChangedEvent>(OnPowerCellChanged);
         SubscribeLocalEvent<BorgChassisComponent, PowerCellSlotEmptyEvent>(OnPowerCellSlotEmpty);
         SubscribeLocalEvent<BorgChassisComponent, GetCharactedDeadIcEvent>(OnGetDeadIC);
+        SubscribeLocalEvent<BorgChassisComponent, GetCharacterUnrevivableIcEvent>(OnGetUnrevivableIC);
         SubscribeLocalEvent<BorgChassisComponent, ItemToggledEvent>(OnToggled);
 
         SubscribeLocalEvent<BorgBrainComponent, MindAddedMessage>(OnBrainMindAdded);
@@ -200,6 +205,14 @@ public sealed partial class BorgSystem : SharedBorgSystem
         }
     }
 
+    private void OnBeingGibbed(EntityUid uid, BorgChassisComponent component, ref BeingGibbedEvent args)
+    {
+        TryEjectPowerCell(uid, component, out var _);
+
+        _container.EmptyContainer(component.BrainContainer);
+        _container.EmptyContainer(component.ModuleContainer);
+    }
+
     private void OnPowerCellChanged(EntityUid uid, BorgChassisComponent component, PowerCellChangedEvent args)
     {
         UpdateBatteryAlert((uid, component));
@@ -222,6 +235,11 @@ public sealed partial class BorgSystem : SharedBorgSystem
     private void OnGetDeadIC(EntityUid uid, BorgChassisComponent component, ref GetCharactedDeadIcEvent args)
     {
         args.Dead = true;
+    }
+
+    private void OnGetUnrevivableIC(EntityUid uid, BorgChassisComponent component, ref GetCharacterUnrevivableIcEvent args)
+    {
+        args.Unrevivable = true;
     }
 
     private void OnToggled(Entity<BorgChassisComponent> ent, ref ItemToggledEvent args)
@@ -276,8 +294,8 @@ public sealed partial class BorgSystem : SharedBorgSystem
     {
         if (!_powerCell.TryGetBatteryFromSlot(ent, out var battery, slotComponent))
         {
-            _alerts.ClearAlert(ent, ent.Comp.BatteryAlert);
-            _alerts.ShowAlert(ent, ent.Comp.NoBatteryAlert);
+            _alerts.ClearAlert(ent.Owner, ent.Comp.BatteryAlert);
+            _alerts.ShowAlert(ent.Owner, ent.Comp.NoBatteryAlert);
             return;
         }
 
@@ -290,8 +308,22 @@ public sealed partial class BorgSystem : SharedBorgSystem
             chargePercent = 1;
         }
 
-        _alerts.ClearAlert(ent, ent.Comp.NoBatteryAlert);
-        _alerts.ShowAlert(ent, ent.Comp.BatteryAlert, chargePercent);
+        _alerts.ClearAlert(ent.Owner, ent.Comp.NoBatteryAlert);
+        _alerts.ShowAlert(ent.Owner, ent.Comp.BatteryAlert, chargePercent);
+    }
+
+    public bool TryEjectPowerCell(EntityUid uid, BorgChassisComponent component, [NotNullWhen(true)] out List<EntityUid>? ents)
+    {
+        ents = null;
+
+        if (!TryComp<PowerCellSlotComponent>(uid, out var slotComp) ||
+            !Container.TryGetContainer(uid, slotComp.CellSlotId, out var container) ||
+            !container.ContainedEntities.Any())
+            return false;
+
+        ents = Container.EmptyContainer(container);
+
+        return true;
     }
 
     /// <summary>
@@ -334,13 +366,12 @@ public sealed partial class BorgSystem : SharedBorgSystem
     // SS220 Borgs-Id-fix start
     private void OnGetBorgName(EntityUid uid, BorgChassisComponent component, ref GetInsteadIdCardNameEvent args)
     {
-
         if (TryComp<BorgSwitchableTypeComponent>(uid, out var switchComp)
             && switchComp.SelectedBorgType is not null
             && _protoManager.TryIndex<BorgTypePrototype>(switchComp.SelectedBorgType, out var borgType))
-            args.Name = $"\\[{Loc.GetString(borgType.Name)}\\] ";
+            args.Name = Loc.GetString(borgType.Name);
         else
-            args.Name = $"\\[{Loc.GetString("borg-type-prototype-generic")}\\] ";
+            args.Name = Loc.GetString("borg-type-prototype-generic");
     }
     // SS220 Borgs-Id-fix end
 }

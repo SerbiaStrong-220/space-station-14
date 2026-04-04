@@ -9,6 +9,10 @@ suit-sensor-mode-cords = Координаты
 
 suit-sensor-mode-state = Датчики костюма: { $mode }
 
+#ss220 tweak sensors start
+suit-sensor-do-after-start = Вы чувствуете, как кто-то возится с вашим комбинезоном
+#ss220 tweak sensors end
+
 ## Components
 
 suit-sensor-component-unknown-name = Н/Д

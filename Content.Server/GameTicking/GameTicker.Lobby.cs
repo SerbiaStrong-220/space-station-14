@@ -8,6 +8,7 @@ using Content.Server.Administration.Managers;
 using Content.Server.AlertLevel;
 using Content.Server.Station.Systems;
 using Content.Shared.Administration;
+using Content.Shared.Station.Components;
 
 namespace Content.Server.GameTicking
 {
@@ -34,7 +35,6 @@ namespace Content.Server.GameTicking
         [ViewVariables]
         private bool _roundStartCountdownHasNotStartedYetDueToNoPlayers;
 
-        [Dependency] private readonly IAdminManager _adminMgr = default!;
         [Dependency] private readonly StationSystem _stationSystem = default!; //ss220 add alert level in lobby start
 
         //ss220 add alert level in lobby start
@@ -79,7 +79,7 @@ namespace Content.Server.GameTicking
             {
                 foundOne = true;
                 if (stationNames.Length > 0)
-                        stationNames.Append('\n');
+                    stationNames.Append('\n');
 
                 stationNames.Append(meta.EntityName);
             }
@@ -92,7 +92,7 @@ namespace Content.Server.GameTicking
 
             // SS220 Ограничение информации для пользователей о текущем режиме игры.
             // Для не администрации текущий режим всегда отображается как секрет.
-            var isAdmin = _adminMgr.HasAdminFlag(session, AdminFlags.Admin);
+            var isAdmin = _adminManager.HasAdminFlag(session, AdminFlags.Admin);
 
             var gmTitle = isAdmin
                 ? Loc.GetString(preset.ModeTitle)
@@ -160,7 +160,7 @@ namespace Content.Server.GameTicking
 
         private TickerLobbyInfoEvent GetInfoMsg(ICommonSession session)
         {
-            return new (GetInfoText(session));
+            return new (GetInfoText(session), RoundId); // SS220-mask-game-mode-and-client-round-id
         }
 
         private void UpdateLateJoinStatus()
@@ -226,7 +226,6 @@ namespace Content.Server.GameTicking
                 return;
             }
 
-            var status = ready ? PlayerGameStatus.ReadyToPlay : PlayerGameStatus.NotReadyToPlay;
             _playerGameStatuses[player.UserId] = ready ? PlayerGameStatus.ReadyToPlay : PlayerGameStatus.NotReadyToPlay;
             RaiseNetworkEvent(GetStatusMsg(player), player.Channel);
             // update server info to reflect new ready count

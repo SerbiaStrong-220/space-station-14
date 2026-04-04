@@ -30,7 +30,7 @@
         component: ScrambledAccent
     Narcotic:
       effects:
-      - !type:MovespeedModifier
+      - !type:MovementSpeedModifier
         walkSpeedModifier: 1.35
         sprintSpeedModifier: 1.35
       - !type:Jitter

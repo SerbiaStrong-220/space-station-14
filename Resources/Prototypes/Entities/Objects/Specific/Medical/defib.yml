@@ -10,14 +10,14 @@
       layers:
         - state: icon
         - state: screen
-          map: [ "enum.ToggleVisuals.Layer" ]
+          map: [ "enum.ToggleableVisuals.Layer" ]
           visible: false
           shader: unshaded
     - type: Appearance
     - type: GenericVisualizer
       visuals:
-        enum.ToggleVisuals.Toggled:
-          enum.ToggleVisuals.Layer:
+        enum.ToggleableVisuals.Enabled:
+          enum.ToggleableVisuals.Layer:
             True: { visible: true }
             False: { visible: false }
     - type: Item
@@ -33,14 +33,14 @@
       zapHeal:
         types:
           Asphyxiation: -40
-      zapСoeffDamage: 8 #SS220 LimitationRevive
+      zapCoeffDamage: 8 #SS220 LimitationRevive
     - type: DoAfter
     - type: UseDelay
     - type: StaticPrice
       price: 30
     - type: GuideHelp
       guides:
-      - Medical Doctor
+      - MedicalDoctor
 
 - type: entity
   id: Defibrillator
@@ -64,11 +64,11 @@
 - type: entity
   id: DefibrillatorOneHandedUnpowered
   parent: BaseDefibrillator
-  suffix: One-Handed, Unpowered
+  suffix: One-Handed, Always Powered
 
 - type: entity
   id: DefibrillatorCompact # This should be a research item at some point
-  parent: [ BaseDefibrillator, PowerCellSlotMediumItem ]
+  parent: [ BaseDefibrillator] #SS220 Compact Defib-start
   name: compact defibrillator
   description: Now in fun size!
   components:
@@ -77,7 +77,7 @@
     layers:
       - state: icon
       - state: screen
-        map: [ "enum.ToggleVisuals.Layer" ]
+        map: [ "enum.ToggleableVisuals.Layer" ]
         visible: false
         shader: unshaded
       - state: ready
@@ -87,7 +87,25 @@
     size: Normal
   - type: ToggleCellDraw
   - type: PowerCellDraw
-    useRate: 100
+    # SS220 Compact Defib-start
+    useRate: 144
+    drawRate: 0
+  - type: Tag
+    tags:
+    - DefibrillatorCompact
+  - type: ContainerContainer
+    containers:
+      cell_slot: !type:ContainerSlot { }
+  - type: PowerCellSlot
+    cellSlotId: cell_slot
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellMedium
+        locked: true
+        disableEject: true
+  # SS220 Compact Defib-ended
   - type: Defibrillator
     zapHeal:
       types:
@@ -98,7 +116,7 @@
 
 - type: entity
   id: DefibrillatorSyndicate
-  parent: DefibrillatorCompact
+  parent: [ DefibrillatorCompact, BaseSyndicateContraband ]
   name: interdyne defibrillator
   description: Doubles as a self-defense weapon against war-crime inclined tiders.
   components:
@@ -107,7 +125,7 @@
     layers:
       - state: icon
       - state: screen
-        map: [ "enum.ToggleVisuals.Layer" ]
+        map: [ "enum.ToggleableVisuals.Layer" ]
         visible: false
         shader: unshaded
       - state: ready

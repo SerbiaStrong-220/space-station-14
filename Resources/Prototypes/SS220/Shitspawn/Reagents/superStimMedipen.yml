@@ -6,12 +6,12 @@
   description: Одноразовый медипен, содержащий химические вещества, восстанавливающие большинство видов повреждений.
   components:
   - type: Sprite
-    sprite: Objects/Specific/Medical/medipen.rsi
+    sprite: SS220/Objects/Specific/Medical/medipen.rsi #SS220 Repsrite Medipen
     layers:
     - state: ebentpen
       map: ["enum.SolutionContainerLayers.Fill"]
   - type: Item
-    sprite: Objects/Specific/Medical/medipen.rsi
+    sprite: SS220/Objects/Specific/Medical/medipen.rsi #SS220 Repsrite Medipen
     size: Small
   - type: SolutionContainerManager
     solutions:

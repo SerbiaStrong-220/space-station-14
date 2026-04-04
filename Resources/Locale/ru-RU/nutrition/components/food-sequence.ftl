@@ -1,4 +1,4 @@
-food-sequence-no-space = Вы не можете положить больше!
+﻿food-sequence-no-space = Вы не можете положить больше!
 
 # GENERAL
 
@@ -13,7 +13,8 @@ food-sequence-content-tomato = томатом
 food-sequence-content-salami = салями
 food-sequence-content-slime = слаймом
 food-sequence-content-clown = клоуном
-food-sequence-content-pea = бобами
+food-sequence-content-pea = горохом
+food-sequence-content-world-pea = мировым горохом
 food-sequence-content-bungo = бунго
 food-sequence-content-banana = бананом
 food-sequence-content-mimana = миманом
@@ -64,6 +65,7 @@ food-sequence-content-glasstle = стеклополохом
 food-sequence-content-gatfruit = гатфруктом
 food-sequence-content-koibean = коибобами
 food-sequence-content-watermelon = арбузом
+food-sequence-content-holymelon = святым арбузом
 food-sequence-content-cannabis = коноплёй
 food-sequence-content-rainbow-cannabis = радужной коноплёй
 food-sequence-content-tobacco = табаком
@@ -78,19 +80,15 @@ food-sequence-content-anomaly-berry = аномальной ягодой
 
 # BURGERS
 
-food-sequence-burger-gen = {$content}бургер
-
+food-sequence-burger-gen = { $content }бургер
 food-sequence-burger-content-raw-meat = сыро
 food-sequence-burger-content-meat = мясо
 food-sequence-burger-content-carp = карпо
 food-sequence-burger-content-bear = медве
+food-sequence-burger-content-crab = крабо
 food-sequence-burger-content-penguin = пингви
-food-sequence-burger-content-chiken = кури
-food-sequence-burger-content-duck = утко
 food-sequence-burger-content-corgi = корги
-food-sequence-burger-content-crab = крабс
 food-sequence-burger-content-goliath = голиафо
-food-sequence-burger-content-dragon = драко
 food-sequence-burger-content-rat = крысо
 food-sequence-burger-content-lizard = ящеро
 food-sequence-burger-content-plant = растене
@@ -100,17 +98,7 @@ food-sequence-burger-content-carrot = моркво
 food-sequence-burger-content-cabbage = капусто
 food-sequence-burger-content-garlic = чесно
 food-sequence-burger-content-pineapple = ананасо
-food-sequence-burger-content-potato = картопле
-food-sequence-burger-content-apple = яблоко
-food-sequence-burger-content-cocoa = какао
-food-sequence-burger-content-corn = кукурузо
 food-sequence-burger-content-onion = луко
-food-sequence-burger-content-mushroom = грибо
-food-sequence-burger-content-chili = чили
-food-sequence-burger-content-chilly = чилли
-food-sequence-burger-content-aloe = алоэ
-food-sequence-burger-content-poppy = мако
-food-sequence-burger-content-lily = лили
 food-sequence-burger-content-ambrosia = амбро
 food-sequence-burger-content-galaxy = галакто
 food-sequence-burger-content-glasstle = стекло
@@ -134,8 +122,43 @@ food-sequence-burger-content-world-pea = миро
 
 # TACO
 
-food-sequence-taco-gen = тако с {$content}
+food-sequence-cotton-burger-gen = { $content }бургер
+food-sequence-cotton-burger-content-cotton-bol = хлопко
+food-sequence-cotton-burger-content-pyrotton-bol = пиро
+food-sequence-cotton-burger-content-plushie-throngler = нагибатор
+food-sequence-cotton-burger-content-plushie-ghost = жуть
+food-sequence-cotton-burger-content-plushie-revenant = страх
+food-sequence-cotton-burger-content-plushie-bee = жужжжо
+food-sequence-cotton-burger-content-plushie-hamptr = хома
+food-sequence-cotton-burger-content-plushie-nukie = нюко
+food-sequence-cotton-burger-content-plushie-rouny = руни
+food-sequence-cotton-burger-content-plushie-lamp = лампо
+food-sequence-cotton-burger-content-plushie-arachnid = пауко
+food-sequence-cotton-burger-content-plushie-lizard = вех
+food-sequence-cotton-burger-content-plushie-experiment = эксперимент
+food-sequence-cotton-burger-content-plushie-spacelizard = космо
+food-sequence-cotton-burger-content-plushie-lizard-inversed = вех
+food-sequence-cotton-burger-content-plushie-diona = дион
+food-sequence-cotton-burger-content-plushie-shark = акуло
+food-sequence-cotton-burger-content-plushie-ratvar = ратваро
+food-sequence-cotton-burger-content-plushie-narsie = нар'
+food-sequence-cotton-burger-content-plushie-carp = карпо
+food-sequence-cotton-burger-content-plushie-magicarp = маги
+food-sequence-cotton-burger-content-plushie-holocarp = голо
+food-sequence-cotton-burger-content-plushie-slime = слайм
+food-sequence-cotton-burger-content-plushie-snake = змее
+food-sequence-cotton-burger-content-plushie-mouse = мыше
+food-sequence-cotton-burger-content-plushie-vox = скрии
+food-sequence-cotton-burger-content-plushie-atmosian = атмос
+food-sequence-cotton-burger-content-plushie-xeno = ксено
+food-sequence-cotton-burger-content-plushie-penguin = пинг
+food-sequence-cotton-burger-content-plushie-human = уристмак
+food-sequence-cotton-burger-content-plushie-moth = пуши
+food-sequence-cotton-burger-content-plushie-vulp = вульп
+food-sequence-cotton-burger-content-plushie-ian = корги
+food-sequence-cotton-burger-content-among-pequeno = сас
+food-sequence-taco-gen = тако с { $content }
 
 # SKEWER
 
-food-sequence-skewer-gen = шашлык с {$content}
+food-sequence-skewer-gen = шашлык с { $content }

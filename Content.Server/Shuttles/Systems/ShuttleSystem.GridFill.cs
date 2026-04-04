@@ -1,9 +1,8 @@
+using System.Linq;
 using System.Numerics;
 using Content.Server.Shuttles.Components;
-using Content.Server.Station.Components;
 using Content.Server.Station.Events;
 using Content.Shared.CCVar;
-using Content.Shared.Salvage;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Station.Components;
 using Robust.Shared.Collections;
@@ -62,10 +61,7 @@ public sealed partial class ShuttleSystem
         if (!_cfg.GetCVar(CCVars.GridFill))
             return;
 
-        if (!TryComp(uid, out StationDataComponent? dataComp))
-            return;
-
-        var targetGrid = _station.GetLargestGrid(dataComp);
+        var targetGrid = _station.GetLargestGrid(uid);
 
         if (targetGrid == null)
             return;
@@ -94,7 +90,7 @@ public sealed partial class ShuttleSystem
 
         var dungeonProtoId = _random.Pick(group.Protos);
 
-        if (!_protoManager.TryIndex(dungeonProtoId, out var dungeonProto))
+        if (!_protoManager.Resolve(dungeonProtoId, out var dungeonProto))
         {
             return false;
         }
@@ -141,12 +137,22 @@ public sealed partial class ShuttleSystem
         var path = paths[^1];
         paths.RemoveAt(paths.Count - 1);
 
+        // SS220-MIT-use-group-params-begin
+        var targetSpot = Transform(targetGrid).Coordinates;
+        if (group.MinimumDistance > 0f)
+        {
+            // we divide it by 2 because Coordinates in grid center, so actual padding should be twice less
+            var distancePadding = TryComp<MapGridComponent>(targetGrid, out var mapGridComp) ? MathF.Max(mapGridComp.LocalAABB.Width, mapGridComp.LocalAABB.Height) / 2f : 0f;
+            targetSpot = targetSpot.Offset(_random.NextVector2(distancePadding + group.MinimumDistance, distancePadding + group.MaximumDistance));
+        }
+        // SS220-MIT-use-group-params-end
+
         if (_loader.TryLoadGrid(mapId, path, out var grid))
         {
             if (HasComp<ShuttleComponent>(grid))
-                TryFTLProximity(grid.Value, targetGrid);
+                TryFTLProximity(grid.Value.Owner, targetSpot); // SS220-MIT-use-group-params
 
-            if (group.NameGrid)
+            if (group.NameGrid && MetaData(grid.Value).EntityName == "grid") // SS220-MIT-use-group-params
             {
                 var name = path.FilenameWithoutExtension;
                 _metadata.SetEntityName(grid.Value, name);
@@ -165,12 +171,7 @@ public sealed partial class ShuttleSystem
         if (!_cfg.GetCVar(CCVars.GridFill))
             return;
 
-        if (!TryComp<StationDataComponent>(uid, out var data))
-        {
-            return;
-        }
-
-        var targetGrid = _station.GetLargestGrid(data);
+        var targetGrid = _station.GetLargestGrid(uid);
 
         if (targetGrid == null)
             return;
@@ -178,7 +179,7 @@ public sealed partial class ShuttleSystem
         // Spawn on a dummy map and try to FTL if possible, otherwise dump it.
         _mapSystem.CreateMap(out var mapId);
 
-        foreach (var group in component.Groups.Values)
+        foreach (var group in component.Groups.Values.OrderByDescending(x => x.GetType() == typeof(DungeonSpawnGroup))) // SS220-MIT-make-dungeon-spawn-first
         {
             var count = _random.Next(group.MinCount, group.MaxCount + 1);
 
@@ -202,7 +203,7 @@ public sealed partial class ShuttleSystem
                         throw new NotImplementedException();
                 }
 
-                if (_protoManager.TryIndex(group.NameDataset, out var dataset))
+                if (_protoManager.Resolve(group.NameDataset, out var dataset))
                 {
                     _metadata.SetEntityName(spawned, _salvage.GetFTLName(dataset, _random.Next()));
                 }
@@ -271,7 +272,7 @@ public sealed partial class ShuttleSystem
                 if (HasComp(grid.Value, compType))
                     continue;
 
-                var comp = _factory.GetComponent(compType);
+                var comp = Factory.GetComponent(compType);
                 AddComp(grid.Value, comp, true);
             }
         }

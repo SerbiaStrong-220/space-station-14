@@ -1,7 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Server.Ghost.Roles;
 using Content.Shared.Roles;
+using Content.Shared.Roles.Components;
 
 namespace Content.Server.SS220.GhostRoleMarkerRole;
 
@@ -20,7 +20,7 @@ public sealed class GhostRoleMarkerRoleTimeTracker : EntitySystem
 
     private void OnMindGetAllRoles(EntityUid uid, GhostRoleMarkerRoleComponent component, ref MindGetAllRoleInfoEvent args)
     {
-        string name = component.Name == null ? UnknownRoleName : component.Name;
-        args.Roles.Add(new RoleInfo(name, false, GhostRoleTracker, GhostRolePrototype));
+        //TODO-SS220-enqueue-removing:
+        // args.Roles.Add(new RoleInfo(nameof(GhostRoleMarkerRoleComponent), false, GhostRoleTracker, GhostRolePrototype));
     }
 }

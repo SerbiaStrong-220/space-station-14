@@ -1,7 +1,8 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Server.Body.Components;
+
 using Content.Server.Body.Systems;
 using Content.Server.DoAfter;
+using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
@@ -80,11 +81,13 @@ public sealed partial class SpiderCocoonSystem : EntitySystem
         }
     }
 
-    private void OnAlternativeVerb(EntityUid uid, SpiderCocoonComponent component, GetVerbsEvent<AlternativeVerb> args)
+    private void OnAlternativeVerb(Entity<SpiderCocoonComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
         if (!args.CanAccess ||
             !TryComp<SpiderQueenComponent>(args.User, out var spiderQueen))
             return;
+
+        var user = args.User;
 
         var extractVerb = new AlternativeVerb
         {
@@ -92,11 +95,11 @@ public sealed partial class SpiderCocoonSystem : EntitySystem
             Act = () =>
             {
                 var doAfterEventArgs = new DoAfterArgs(EntityManager,
-                    args.User,
+                    user,
                     spiderQueen.CocoonExtractTime,
                     new CocoonExtractBloodPointsEvent(),
-                    uid,
-                    uid)
+                    ent.Owner,
+                    ent.Owner)
                 {
                     Broadcast = false,
                     BreakOnDamage = false,
@@ -139,7 +142,7 @@ public sealed partial class SpiderCocoonSystem : EntitySystem
         if (solutionEnt.Comp.Solution.Volume <= FixedPoint2.Zero)
             return;
 
-        _bloodstream.TryModifyBleedAmount(target, -1f, bloodstream);
+        _bloodstream.TryModifyBleedAmount((target, bloodstream), -1f);
         _solutionContainer.SplitSolution(solutionEnt, amount);
         component.BloodPointsAmount += amount * component.BloodConversionCoefficient;
         Dirty(uid, component);

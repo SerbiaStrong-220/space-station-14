@@ -13,7 +13,12 @@
     sprite: Objects/Weapons/Melee/stunbaton.rsi
     layers:
     - state: stunbaton_off
-      map: [ "enum.ToggleVisuals.Layer" ]
+      map: [ "enum.ToggleableVisuals.Layer" ]
+    # SS220-add-christmas-baton-begin
+    - state: christmasbaton_off
+      map: [ "christmas" ]
+      visible: False      
+    # SS220-add-christmas-baton-end
   - type: Stunbaton
     energyPerUse: 50
   - type: ItemToggle
@@ -95,12 +100,26 @@
   - type: DisarmMalus
     malus: 0.225
   - type: Appearance
+  # SS220-add-christmas-baton-begin
+  - type: HolidayVisuals
+    holidays:
+      festive:
+      - FestiveSeason
+  # SS220-add-christmas-baton-end
   - type: GenericVisualizer
     visuals:
-     enum.ToggleVisuals.Toggled:
-        enum.ToggleVisuals.Layer:
+     enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
           True: {state: stunbaton_on}
           False: {state: stunbaton_off}
+     # SS220-add-christmas-baton-begin
+        christmas:
+          True: {state: christmasbaton_on}
+          False: {state: christmasbaton_off}
+     enum.HolidayVisuals.Holiday:
+        christmas:
+          festive: { visible: true }
+     # SS220-add-christmas-baton-end
   - type: StaticPrice
     price: 80
   - type: Riggable
@@ -182,9 +201,9 @@
       sprite: Objects/Weapons/Melee/flash.rsi
       layers:
       - state: flash
-        map: [ "enum.FlashVisuals.BaseLayer" ]
+        map: [ "enum.FlashVisualLayers.BaseLayer" ]
       - state: flashing
-        map: [ "enum.FlashVisuals.LightLayer" ]
+        map: [ "enum.FlashVisualLayers.LightLayer" ]
         visible: false
         shader: unshaded
     - type: Flash
@@ -200,16 +219,18 @@
       size: Small
       sprite: Objects/Weapons/Melee/flash.rsi
     - type: UseDelay
+      delay: 4 # has to be the same as the FlashingTime datafield in FlashComponent
+    - type: UseDelayOnMeleeHit
     - type: StaticPrice
       price: 40
     - type: Appearance
     - type: GenericVisualizer
       visuals:
         enum.FlashVisuals.Burnt:
-          enum.FlashVisuals.BaseLayer:
+          enum.FlashVisualLayers.BaseLayer:
             True: {state: burnt}
         enum.FlashVisuals.Flashing:
-          enum.FlashVisuals.LightLayer:
+          enum.FlashVisualLayers.LightLayer:
             True: {visible: true}
             False: {visible: false}
     - type: GuideHelp
@@ -233,6 +254,7 @@
   description: An ultrabright flashbulb with a proximity trigger, useful for making an area security-only.
   components:
     - type: EmitSoundOnTrigger
+      predicted: true
       sound:
         path: /Audio/Weapons/flash.ogg
     - type: FlashOnTrigger
@@ -240,7 +262,6 @@
     - type: TriggerOnProximity
       enabled: true
       cooldown: 5
-      triggerBehindWall: false
       shape:
         !type:PhysShapeCircle
           radius: 2

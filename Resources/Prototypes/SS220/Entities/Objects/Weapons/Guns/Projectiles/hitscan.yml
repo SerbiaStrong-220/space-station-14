@@ -1,0 +1,17 @@
+- type: hitscan
+  id: RedShuttleLightLaser
+  damage:
+    types:
+      Heat: 13 #lowTTKUpdate
+  muzzleFlash:
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+    state: muzzle_laser
+  travelFlash:
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+    state: beam
+  impactFlash:
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+    state: impact_laser
+  shuttleNavInfo:
+    enabled: true
+    width: 0.6

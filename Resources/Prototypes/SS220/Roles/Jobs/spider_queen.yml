@@ -1,0 +1,22 @@
+- type: job
+  id: SpiderQueen
+  name: job-name-spider-queen
+  description: job-description-spider-queen
+  setPreference: false
+  playTimeTracker: AntagSpiderQueen
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 5h
+    - !type:OverallPlaytimeRequirement
+      time: 30h
+
+- type: job
+  id: SpiderQueenServant
+  name: job-name-spider-queen-servant
+  description: job-description-spider-queen-servant
+  setPreference: false
+  playTimeTracker: AntagSpiderQueenServant
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 5h

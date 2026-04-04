@@ -103,6 +103,14 @@
       visible: false
   - type: Icon
     state: pda-magistrate
+  - type: CartridgeLoader
+    preinstalled:
+    - CrewManifestCartridge
+    - NotekeeperCartridge
+    - NanoTaskCartridge
+    - NewsReaderCartridge
+    - WantedListCartridge
+    - MessengerCartridgeClient
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -111,6 +119,59 @@
     - WhitelistChameleon
     - WhitelistChameleonPDA
   #ss220 add pdaidpainter end
+
+- type: entity
+  parent: BasePDA
+  id: NanoTrasenRepresentativePDA
+  name: NanoTrasen Representative PDA
+  description: Smells like documents.
+  components:
+  - type: Pda
+    id: NanoTrasenRepresentativeIDCard
+    penSlot:
+      startingItem: CentCommNewPen
+      priority: -1
+      whitelist:
+        tags:
+        - Write
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-magistrate
+  - type: PdaBorderColor
+    borderColor: "#414452"
+    accentVColor: "#262c8a"
+    accentHColor: "#dfac5c"
+  - type: Sprite
+    layers:
+    - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda"
+    - state: "screen-nt"
+      shader: "unshaded"
+    - state: "light_overlay"
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: "unshaded"
+      visible: false
+    - state: "id_overlay"
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      visible: false
+  - type: Icon
+    state: pda-magistrate
+  - type: CartridgeLoader
+    preinstalled:
+    - CrewManifestCartridge
+    - NotekeeperCartridge
+    - NanoTaskCartridge
+    - NewsReaderCartridge
+    - WantedListCartridge
+    - MessengerCartridgeClient
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
 
 - type: entity
   parent: DeathsquadPDA
@@ -155,6 +216,7 @@
   - type: PdaBorderColor
     borderColor: "#98afb8"
     accentHColor: "#542a6c"
+  - type: Sprite
     layers:
     - map: [ "enum.PdaVisualLayers.Base" ]
       state: "pda" #ss220 fix
@@ -201,6 +263,15 @@
       visible: false
   - type: Icon
     state: pda-bs
+  - type: CartridgeLoader
+    uiKey: enum.PdaUiKey.Key
+    preinstalled:
+      - CrewManifestCartridge
+      - NotekeeperCartridge
+      - NanoTaskCartridge
+      - NewsReaderCartridge
+      - MedTekCartridge
+      - MessengerCartridgeClient # SS220 Messenger
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -211,7 +282,7 @@
   #ss220 add pdaidpainter end
 
 - type: entity
-  parent: BasePDA
+  parent: BaseSecurityPDA
   id: SecurityPilotPDA
   name: КПК пилота СБ
   description: Красный, чтобы скрыть пятна крови ассистента.
@@ -240,6 +311,15 @@
       visible: false
   - type: Icon
     state: pda-security
+  - type: CartridgeLoader
+    preinstalled:
+    - CrewManifestCartridge
+    - NotekeeperCartridge
+    - NanoTaskCartridge
+    - NewsReaderCartridge
+    - WantedListCartridge
+    - AstroNavCartridge
+    - MessengerCartridgeClient
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -312,6 +392,18 @@
         visible: false
     - type: Icon
       state: pda-centcomnew
+    - type: CartridgeLoader
+      uiKey: enum.PdaUiKey.Key
+      preinstalled:
+      - CrewManifestCartridge
+      - NotekeeperCartridge
+      - NanoTaskCartridge
+      - NewsReaderCartridge
+      - MedTekCartridge
+      - MessengerCartridgeClient # SS220 Messenger
+      - AstroNavCartridge
+      - WantedListCartridge
+      - LogProbeCartridge
 
 - type: entity
   parent: BasePDA
@@ -361,12 +453,12 @@
 
 - type: entity
   parent: CentcomNewPDA
-  id: CentcomOperativeBSOPDA
-  name: КПК Оперативника "Синий Щит"
-  description: КПК Оперативника "Синий Щит". Несмотря на идеально выполненный дизайн, этот КПК был заляпан кровью не один десяток раз.
+  id: CentcomOperativeSRTPDA
+  name: КПК Оперативника ГСН
+  description: КПК Оперативника ГСН. Несмотря на идеально выполненный дизайн, этот КПК был заляпан кровью не один десяток раз.
   components:
     - type: Pda
-      id: OperativeBSOIDCard
+      id: OperativeSRTIDCard
 
 - type: entity
   parent: CentcomNewPDA
@@ -414,3 +506,54 @@
         visible: false
     - type: Icon
       state: pda-admiral
+
+#CounterIntelligence
+- type: entity
+  parent: CentcomNewPDA
+  id: CentcomCIAgentPDA
+  name: PDA CI Agent
+  description: CI Agent PDA
+  components:
+    - type: Pda
+      id: CIAgentIDCard
+
+- type: entity
+  parent: CentcomNewPDA
+  id: CentcomCIOfficerPDA
+  name: PDA CI Officer
+  description: CI Officer PDA
+  components:
+    - type: Pda
+      id: CIOfficerIDCard
+
+# CBURNLeader
+- type: entity
+  parent: BasePDA
+  id: CBURNLeaderPDA
+  name: CBURN Leader PDA
+  description: Smells like rotten flesh.
+  components:
+  - type: Pda
+    id: CBURNIDLeadercard
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-cburn
+  - type: PdaBorderColor
+    borderColor: "#7a998d"
+  - type: Sprite
+    layers:
+    - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda"
+    - state: "screen-nt"
+      shader: "unshaded"
+    - state: "light_overlay"
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: "unshaded"
+      visible: false
+    - state: "id_overlay"
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      visible: false
+  - type: Icon
+    state: pda-cburn

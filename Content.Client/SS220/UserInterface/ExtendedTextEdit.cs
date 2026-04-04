@@ -9,6 +9,7 @@ namespace Content.Client.SS220.UserInterface;
 public sealed class ExtendedTextEdit : ExtendedStringEditBase
 {
     public TextEdit Edit => _edit;
+
     public Rope.Node TextRope
     {
         get => Edit.TextRope;
@@ -23,7 +24,7 @@ public sealed class ExtendedTextEdit : ExtendedStringEditBase
 
     private readonly TextEdit _edit;
 
-    public ExtendedTextEdit() : base()
+    public ExtendedTextEdit()
     {
         _edit = new TextEdit()
         {

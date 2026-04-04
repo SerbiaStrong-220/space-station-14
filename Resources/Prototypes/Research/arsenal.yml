@@ -124,6 +124,8 @@
   - FlashPayload
   - ExplosivePayload
   - ChemicalPayload
+  - CableDetStack1
+  - EmptyDetonator
 
 - type: technology
   id: SpecialMeans
@@ -178,6 +180,20 @@
 #SS220 taserback end
 
 - type: technology
+  id: KineticModifications
+  name: research-technology-kinetic-modifications
+  icon:
+    sprite: Objects/Tools/upgrade.rsi
+    state: display
+  discipline: Arsenal
+  tier: 2
+  cost: 7500
+  recipeUnlocks:
+  - PKAUpgradeDamage
+  - PKAUpgradeRange
+  - PKAUpgradeFireRate
+
+- type: technology
   id: BasicShuttleArmament
   name: research-technology-basic-shuttle-armament
   icon:
@@ -199,6 +215,18 @@
   technologyPrerequisites:
   - SalvageWeapons
 
+- type: technology
+  id: DualWieldingTechnology
+  name: research-technology-dual-wielding-technology
+  icon:
+    sprite: Clothing/Back/Specific/harmpack.rsi
+    state: icon
+  discipline: Arsenal
+  tier: 2
+  cost: 10000
+  recipeUnlocks:
+  - ClothingBackpackHarmpack
+
 # Tier 3
 
 - type: technology
@@ -213,7 +241,7 @@
   recipeUnlocks:
   - WeaponAdvancedLaser
   - WeaponEnergyCrossbow #SS220 Energy crossbow
-  - PortableRecharger
+  # - PortableRecharger SS220 PortableRecharger 
 
 - type: technology
   id: ThermalWeaponry

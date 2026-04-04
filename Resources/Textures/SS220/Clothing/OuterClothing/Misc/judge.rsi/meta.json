@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/blob/HEAD/icons/mob/clothing/suits/costume.dmi, vox & rezomi & inhands states sprited by Estkemran (Github) for SS220",
+  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/blob/HEAD/icons/mob/clothing/suits/costume.dmi, vox & resomi & inhands states sprited by Estkemran (Github) for SS220",
   "size": {
     "x": 32,
     "y": 32
@@ -19,7 +19,7 @@
       "directions": 4
     },
     {
-      "name": "equipped-OUTERCLOTHING-rezomi",
+      "name": "equipped-OUTERCLOTHING-resomi",
       "directions": 4
     },
     {

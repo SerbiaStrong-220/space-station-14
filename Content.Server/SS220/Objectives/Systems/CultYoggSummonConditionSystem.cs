@@ -5,14 +5,13 @@ using Content.Shared.Mind;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.Objectives.Components;
 using Content.Server.SS220.GameTicking.Rules;
-using Content.Shared.SS220.CultYogg.Sacraficials;
+using Content.Shared.SS220.CultYogg.Sacrificials;
 using Content.Server.SS220.Objectives.Components;
-using Robust.Shared.Serialization;
 
 namespace Content.Server.SS220.Objectives.Systems;
 
 /// <summary>
-/// Handle amount of sacrafices
+/// Handle amount of sacrifices
 /// </summary>
 public sealed class CultYoggSummonConditionSystem : EntitySystem
 {
@@ -28,60 +27,59 @@ public sealed class CultYoggSummonConditionSystem : EntitySystem
         SubscribeLocalEvent<CultYoggSummonConditionComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<CultYoggSummonConditionComponent, ObjectiveAfterAssignEvent>(OnAfterAssign);
         SubscribeLocalEvent<CultYoggSummonConditionComponent, ObjectiveGetProgressEvent>(OnGetProgress);
-        SubscribeLocalEvent<CultYoggSummonConditionComponent, CultYoggReinitObjEvent>(OnReInit);
         SubscribeLocalEvent<CultYoggSummonConditionComponent, CultYoggUpdateSacrObjEvent>(OnSacrUpdate);
     }
+
     //check if gamerule was rewritten
     private void OnInit(Entity<CultYoggSummonConditionComponent> ent, ref ComponentInit args)
     {
-        TaskNumberUpdate(ent);
+        ObjNumberUpdate(ent);
     }
 
     private void OnAfterAssign(Entity<CultYoggSummonConditionComponent> ent, ref ObjectiveAfterAssignEvent args)
     {
-        SacraficialsUpdate(ent);
+        SacrificialsUpdate(ent);
     }
+
     private void OnSacrUpdate(Entity<CultYoggSummonConditionComponent> ent, ref CultYoggUpdateSacrObjEvent args)
     {
-        SacraficialsUpdate(ent);
+        SacrificialsUpdate(ent);
     }
-    private void OnReInit(Entity<CultYoggSummonConditionComponent> ent, ref CultYoggReinitObjEvent args)
-    {
-        SacraficialsUpdate(ent);
-    }
+
     private void OnGetProgress(Entity<CultYoggSummonConditionComponent> ent, ref ObjectiveGetProgressEvent args)
     {
         args.Progress = 0;
 
-        var ruleComp = _cultRule.GetCultGameRule();
-
-        if (ruleComp is null)
+        if (!_cultRule.TryGetCultGameRule(out var rule))
             return;
 
-        args.Progress = ruleComp.AmountOfSacrifices / ent.Comp.reqSacrAmount;
+        args.Progress = rule.Value.Comp.AmountOfSacrifices / (float)ent.Comp.ReqSacrAmount;
     }
 
-    private void TaskNumberUpdate(Entity<CultYoggSummonConditionComponent> ent)
+    private void ObjNumberUpdate(Entity<CultYoggSummonConditionComponent> ent)
     {
-        var ruleComp = _cultRule.GetCultGameRule();
-
-        if (ruleComp is null)
+        if (!_cultRule.TryGetCultGameRule(out var rule))
             return;
 
         var sacrificesRequired = 0;
-        foreach ((_, var stageDefinition) in ruleComp.Stages)
+        foreach ((_, var stageDefinition) in rule.Value.Comp.Stages)
         {
-            if (stageDefinition.SacrificesRequired is { } stageSacrifices)
-                sacrificesRequired = stageSacrifices;
+            if (stageDefinition.SacrificesRequired is null)
+                continue;
+
+            if (sacrificesRequired >= stageDefinition.SacrificesRequired.Value)
+                continue;
+
+            sacrificesRequired = stageDefinition.SacrificesRequired.Value;
         }
 
-        ent.Comp.reqSacrAmount = sacrificesRequired;
+        ent.Comp.ReqSacrAmount = sacrificesRequired;
     }
 
-    private void SacraficialsUpdate(Entity<CultYoggSummonConditionComponent> ent)
+    private void SacrificialsUpdate(Entity<CultYoggSummonConditionComponent> ent)
     {
         var title = new StringBuilder();
-        title.AppendLine(Loc.GetString("objective-cult-yogg-sacrafice-start"));
+        title.AppendLine(Loc.GetString("objective-cult-yogg-sacrifice-start"));
 
         var query = EntityQueryEnumerator<CultYoggSacrificialComponent>();
         while (query.MoveNext(out var uid, out var _))
@@ -96,15 +94,11 @@ public sealed class CultYoggSummonConditionSystem : EntitySystem
                     jobTitle = jobName;
             }
 
-            title.AppendLine(Loc.GetString("objective-condition-cult-yogg-sacrafice-person", ("targetName", targetName), ("job", jobTitle)));
+            title.AppendLine(Loc.GetString("objective-condition-cult-yogg-sacrifice-person", ("targetName", targetName), ("job", jobTitle)));
         }
 
         _metaData.SetEntityName(ent, title.ToString());
     }
-}
-[ByRefEvent, Serializable]
-public sealed class CultYoggReinitObjEvent : EntityEventArgs
-{
 }
 
 [ByRefEvent, Serializable]

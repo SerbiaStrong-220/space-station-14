@@ -28,6 +28,11 @@ public sealed class MouseRotatorSystem : SharedMouseRotatorSystem
         if (player == null || !TryComp<MouseRotatorComponent>(player, out var rotator))
             return;
 
+        // SS220-Grabs-Start
+        if (!rotator.Enabled)
+            return;
+        // SS220-Grabs-End
+
         var xform = Transform(player.Value);
 
         // Get mouse loc and convert to angle based on player location
@@ -57,7 +62,8 @@ public sealed class MouseRotatorSystem : SharedMouseRotatorSystem
                 rotation += 2 * Math.PI;
             RaisePredictiveEvent(new RequestMouseRotatorRotationEvent
             {
-                Rotation = rotation
+                Rotation = rotation,
+                User = GetNetEntity(player)
             });
 
             return;
@@ -77,7 +83,8 @@ public sealed class MouseRotatorSystem : SharedMouseRotatorSystem
 
         RaisePredictiveEvent(new RequestMouseRotatorRotationEvent
         {
-            Rotation = angle
+            Rotation = angle,
+            User = GetNetEntity(player)
         });
     }
 }

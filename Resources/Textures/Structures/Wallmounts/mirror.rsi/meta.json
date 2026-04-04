@@ -11,12 +11,18 @@
         {
             "name": "mirror",
             "directions": 4
-
         },
         {
-            "name": "mirror_broke",
+            "name": "mirror-broke",
             "directions": 4
-
+        },
+        {
+            "name": "rectangle-mirror",
+            "directions": 1
+        },
+        {
+            "name": "rectangle-mirror-broke",
+            "directions": 1
         }
     ]
 

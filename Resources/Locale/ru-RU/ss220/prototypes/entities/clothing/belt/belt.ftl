@@ -9,3 +9,33 @@ ent-ClothingBeltCutlassSheath = ножны офицерского кортика
     .suffix = За время в игре
 ent-ClothingBeltSecurityMedical = пояс бригмедика
     .desc = { ent-ClothingBeltMedical.desc }
+
+ent-ClothingBeltLegendaryMarksmanHolsterFilled = плечевая кобура Легендарного стрелка
+    .desc = Кобура для ношения пистолета и боеприпасов. ВНИМАНИЕ: Только для крутых.
+
+ent-ClothingBeltBlackAngelHolsterFilled = плечевая кобура Чёрного ангела
+    .desc = Кобура для ношения пистолета и боеприпасов. ВНИМАНИЕ: Только для крутых.
+
+ent-ClothingBeltChefApronBase = фартук
+    .desc = Фартук, который используют первоклассные повара, с карманами для хранения кухонных ножей и быстрого доступа к приправам.
+ent-ClothingBeltChefApronWhite = белый фартук
+    .desc = { ent-ClothingBeltChefApronBase.desc }
+ent-ClothingBeltChefApronGreen = зелёный фартук
+    .desc = { ent-ClothingBeltChefApronBase.desc }
+ent-ClothingBeltChefApronBlack = чёрный фартук
+    .desc = { ent-ClothingBeltChefApronBase.desc }
+ent-ClothingBeltChefApronRed = красный фартук
+    .desc = { ent-ClothingBeltChefApronBase.desc }
+ent-ClothingBeltChefApronNanotrasen = синий фартук
+    .desc = Фартук высокого качества с карманами, сделанный на заказ. Нужен для хранения кухонных ножей и быстрого доступа к приправам.
+
+ent-ClothingBeltChefApronWhiteFilled = { ent-ClothingBeltChefApronWhite }
+    .desc = { ent-ClothingBeltChefApronWhite.desc }
+ent-ClothingBeltChefApronGreenFilled = { ent-ClothingBeltChefApronGreen }
+    .desc = { ent-ClothingBeltChefApronGreen.desc }
+ent-ClothingBeltChefApronBlackFilled = { ent-ClothingBeltChefApronBlack }
+    .desc = { ent-ClothingBeltChefApronBlack.desc }
+ent-ClothingBeltChefApronRedFilled = { ent-ClothingBeltChefApronRed }
+    .desc = { ent-ClothingBeltChefApronRed.desc }
+ent-ClothingBeltChefApronNanotrasenFilled = { ent-ClothingBeltChefApronNanotrasen }
+    .desc = { ent-ClothingBeltChefApronNanotrasen.desc }

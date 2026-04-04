@@ -32,11 +32,13 @@
   - ResearchDirector
   - Blueshield #SS220 Blueshield
   - Magistrate #SS220 Law Department
-
+  #- NanoTrasenRepresentative #SS220 TODO NanoTraisen Representative
 - type: accessLevel
   id: EmergencyShuttleRepealAll
   name: id-card-access-level-emergency-shuttle-repeal
   canAddToIdCard: false
+  canBeSwitchableInReader: false #SS220 DoorElectronicsConfiguratorFix
+  showInPda: false # ss220 add additional info for pda
 
 - type: accessLevel
   id: Cryogenics

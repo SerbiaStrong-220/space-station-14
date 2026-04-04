@@ -19,6 +19,7 @@ entities:
     - type: Transform
       pos: 0.5,0.5
       parent: invalid
+    - type: SkipAutoVariantize        
     - type: MapGrid
       chunks:
         -1,-1:
@@ -524,7 +525,7 @@ entities:
       enabled: True
     - type: Fixtures
       fixtures: {}
-- proto: BorgModuleGrapplingGun
+- proto: BorgModuleTraversal
   entities:
   - uid: 18
     components:

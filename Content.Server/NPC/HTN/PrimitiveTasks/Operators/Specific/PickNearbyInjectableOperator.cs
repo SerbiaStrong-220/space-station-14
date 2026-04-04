@@ -10,12 +10,15 @@ using Content.Shared.Silicons.Bots;
 using Content.Shared.Emag.Components;
 using Content.Shared.Stealth.Components;
 using Robust.Shared.Containers;
+using Robust.Shared.Prototypes; //ss220 fix medibot
 
 namespace Content.Server.NPC.HTN.PrimitiveTasks.Operators.Specific;
 
 public sealed partial class PickNearbyInjectableOperator : HTNOperator
 {
     [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!; //ss220 fix medibot
+
     private EntityLookupSystem _lookup = default!;
     private MedibotSystem _medibot = default!;
     private PathfindingSystem _pathfinding = default!;
@@ -59,7 +62,7 @@ public sealed partial class PickNearbyInjectableOperator : HTNOperator
         var injectQuery = _entManager.GetEntityQuery<InjectableSolutionComponent>();
         var recentlyInjected = _entManager.GetEntityQuery<NPCRecentlyInjectedComponent>();
         var mobState = _entManager.GetEntityQuery<MobStateComponent>();
-        var emaggedQuery = _entManager.GetEntityQuery<EmaggedComponent>();
+        //var emaggedQuery = _entManager.GetEntityQuery<EmaggedComponent>(); //ss220 fix medibot
         var stealthQuery = _entManager.GetEntityQuery<StealthComponent>(); //ss220 medibot inject in stealth entity fix
 
         foreach (var entity in _lookup.GetEntitiesInRange(owner, range))
@@ -84,11 +87,12 @@ public sealed partial class PickNearbyInjectableOperator : HTNOperator
                 if (!_medibot.TryGetTreatment(medibot, state.CurrentState, out var treatment))
                     continue;
 
-                // Only go towards a target if the bot can actually help them or if the medibot is emagged
-                // note: this and the actual injecting don't check for specific damage types so for example,
-                // radiation damage will trigger injection but the tricordrazine won't heal it.
-                if (!emaggedQuery.HasComponent(entity) && !treatment.IsValid(damage.TotalDamage))
+                //ss220 fix medibot start
+                var emagged = _entManager.HasComponent<EmaggedComponent>(owner);
+
+                if (!treatment.IsValid(damage.Damage, emagged, _proto))
                     continue;
+                //ss220 fix medibot end
 
                 //Needed to make sure it doesn't sometimes stop right outside it's interaction range
                 var pathRange = SharedInteractionSystem.InteractionRange - 1f;

@@ -9,15 +9,17 @@
     <BoxContainer Orientation="Horizontal">
         <BoxContainer Orientation="Vertical" MinWidth="170">
             <Label Text="{Loc 'reagent-dispenser-window-amount-to-dispense-label'}" HorizontalAlignment="Center" />
+            <!-- SS220 ADD 75U FOR DISPENSER START -->
             <ui:ButtonGrid
                 Name="AmountGrid"
                 Access="Public"
-                Columns="3"
+                Columns="2"
                 HorizontalAlignment="Center"
                 Margin="5"
-                ButtonList="1,5,10,15,20,25,30,50,100"
+                ButtonList="1,5,10,15,20,25,30,50,75,100"
                 RadioGroup="True">
             </ui:ButtonGrid>
+            <!-- SS220 ADD 75U FOR DISPENSER END -->
             <Control VerticalExpand="True" />
             <Label Name="ContainerInfoName"
                    Access="Public"

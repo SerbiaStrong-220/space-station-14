@@ -18,7 +18,6 @@
     - PassengerStandartGear
     - ReporterStandartGear #SS220 new roles corpses
     - ZookeeperStandartGear #SS220 new roles corpses
-    - DetectiveStandartGear #SS220 Detective in service
     #SS220 corpses equipment fix end
 
 - type: entity
@@ -85,7 +84,7 @@
     - SecurityCadetStandartGear
     - SecurityPilotStandartGear #SS220 new roles corpses
     - SecurityOfficerStandartGear
-    # - DetectiveStandartGear
+    - DetectiveStandartGear
     - WardenStandartGear
     #SS220 corpses equipment fix end
 
