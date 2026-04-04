@@ -30,29 +30,26 @@ public sealed class TransferMaterialsInStorageSystem : EntitySystem
         if (!TryComp<StorageComponent>(ent.Owner, out var storageComponent))
             return;
 
+        var target = args.Target.Value;
+        var isMaterialStorage = HasComp<MaterialStorageComponent>(target);
+        BaseContainer container = null;
+
+        if (!isMaterialStorage && !(_tag.HasTag(target, ReagentGrinderTag) && _container.TryGetContainer(target, "inputContainer", out container)))
+            return;
+
         var items = storageComponent.Container.ContainedEntities.ToList();
+        var coords = Transform(target).Coordinates;
 
-        if (HasComp<MaterialStorageComponent>(args.Target.Value))
+        foreach (var item in items)
         {
-            foreach (var item in items)
-            {
-                if (_material.TryInsertMaterialEntity(args.User, item, args.Target.Value))
-                    continue;
+            var inserted = isMaterialStorage
+                ? _material.TryInsertMaterialEntity(args.User, item, target)
+                : _container.Insert(item, container!);
 
-                RaiseLocalEvent(args.Target.Value, new AfterInteractUsingEvent(args.User, item, args.Target.Value, Transform(args.Target.Value).Coordinates, true));
-            }
-        }
-        else if (TryComp<TagComponent>(args.Target.Value, out var tag) &&
-                 _tag.HasTag(args.Target.Value, ReagentGrinderTag) &&
-                 _container.TryGetContainer(args.Target.Value, "inputContainer", out var container))
-        {
-            foreach (var item in items)
-            {
-                if (_container.Insert(item, container))
-                    continue;
+            if (inserted)
+                continue;
 
-                RaiseLocalEvent(args.Target.Value, new AfterInteractUsingEvent(args.User, item, args.Target.Value, Transform(args.Target.Value).Coordinates, true));
-            }
+            RaiseLocalEvent(target, new AfterInteractUsingEvent(args.User, item, target, coords, true));
         }
     }
 }
