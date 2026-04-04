@@ -6,6 +6,7 @@ using Content.Shared.Hands;
 using Content.Shared.Inventory;
 using Content.Shared.Item;
 using Content.Shared.Light.Components;
+using Content.Shared.SS220.ChangeAppearanceOnActiveBlocking;
 using Content.Shared.Toggleable;
 using Robust.Client.GameObjects;
 using Robust.Shared.Utility;
@@ -114,6 +115,11 @@ public sealed class ToggleableVisualsSystem : VisualizerSystem<ToggleableVisuals
             || !AppearanceSystem.TryGetData<bool>(uid, ToggleableVisuals.Enabled, out var enabled, appearance)
             || !enabled)
             return;
+
+        //SS220 add ChangeAppearanceOnActiveBlockingSystem begin
+        if (TryComp<ChangeAppearanceOnActiveBlockingComponent>(uid, out var blockAppearanceComp) && blockAppearanceComp.Toggled)
+            return;
+        //SS220 add ChangeAppearanceOnActiveBlockingSystem end
 
         if (!component.InhandVisuals.TryGetValue(args.Location, out var layers))
             return;

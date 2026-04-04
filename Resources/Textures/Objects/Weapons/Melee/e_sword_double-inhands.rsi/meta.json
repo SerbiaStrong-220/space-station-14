@@ -38,6 +38,28 @@
             ]
         },
         {
+            "name": "inhand-right-shield",
+            "directions": 4,
+            "delays": [
+                [
+                    0.1,
+                    0.1
+                ],
+                [
+                    0.1,
+                    0.1
+                ],
+                [
+                    0.1,
+                    0.1
+                ],
+                [
+                    0.1,
+                    0.1
+                ]
+            ]
+        },
+        {
             "name": "inhand-right",
             "directions": 4
         },
@@ -69,28 +91,6 @@
         },
         {
             "name": "inhand-left-shield",
-            "directions": 4,
-            "delays": [
-                [
-                    0.1,
-                    0.1
-                ],
-                [
-                    0.1,
-                    0.1
-                ],
-                [
-                    0.1,
-                    0.1
-                ],
-                [
-                    0.1,
-                    0.1
-                ]
-            ]
-        },
-        {
-            "name": "inhand-right-shield",
             "directions": 4,
             "delays": [
                 [

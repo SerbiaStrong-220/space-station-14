@@ -1,4 +1,5 @@
 // © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
+using Content.Client.Toggleable;
 using Content.Shared.Hands;
 using Content.Shared.Item;
 using Content.Shared.SS220.ChangeAppearanceOnActiveBlocking;
@@ -18,8 +19,8 @@ public sealed partial class ChangeAppearanceOnActiveBlockingSystem : EntitySyste
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ChangeAppearanceOnActiveBlockingComponent, AppearanceChangeEvent>(OnAppearanceChange);
-        SubscribeLocalEvent<ChangeAppearanceOnActiveBlockingComponent, GetInhandVisualsEvent>(OnGetHeldVisuals);
+        SubscribeLocalEvent<ChangeAppearanceOnActiveBlockingComponent, AppearanceChangeEvent>(OnAppearanceChange, after: [typeof(ToggleableVisualsSystem)]);
+        SubscribeLocalEvent<ChangeAppearanceOnActiveBlockingComponent, GetInhandVisualsEvent>(OnGetHeldVisuals, after: [typeof(ToggleableVisualsSystem)]);
     }
 
     public void OnAppearanceChange(Entity<ChangeAppearanceOnActiveBlockingComponent> ent, ref AppearanceChangeEvent args)
