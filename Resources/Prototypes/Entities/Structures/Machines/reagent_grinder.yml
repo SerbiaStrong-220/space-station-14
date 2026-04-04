@@ -8,7 +8,7 @@
   # SS220 reagent-grinder-update begin
   - type: Tag
     tags:
-      - ReagentGrinder
+    - ReagentGrinder
   # SS220 reagent-grinder-update end
   - type: ReagentGrinder
   - type: ActivatableUI

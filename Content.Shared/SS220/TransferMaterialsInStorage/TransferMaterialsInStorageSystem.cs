@@ -31,8 +31,11 @@ public sealed class TransferMaterialsInStorageSystem : EntitySystem
             return;
 
         var target = args.Target.Value;
-        var isMaterialStorage = HasComp<MaterialStorageComponent>(target);
-        if (!isMaterialStorage && !(_tag.HasTag(target, ReagentGrinderTag) && _container.TryGetContainer(target, SharedReagentGrinder.InputContainerId, out _)))
+
+        bool isMaterialStorage = HasComp<MaterialStorageComponent>(target);
+        bool isGrinder = _tag.HasTag(target, ReagentGrinderTag) && _container.TryGetContainer(target, SharedReagentGrinder.InputContainerId, out _);
+
+        if (!isMaterialStorage && !isGrinder)
             return;
 
         args.Handled = true;
