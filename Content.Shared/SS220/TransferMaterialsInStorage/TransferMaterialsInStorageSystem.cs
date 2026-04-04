@@ -1,6 +1,5 @@
 using System.Linq;
 using Robust.Shared.Containers;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
 using Content.Shared.Interaction;
 using Content.Shared.Kitchen;
@@ -36,6 +35,8 @@ public sealed class TransferMaterialsInStorageSystem : EntitySystem
         if (!isMaterialStorage && !(_tag.HasTag(target, ReagentGrinderTag) && _container.TryGetContainer(target, SharedReagentGrinder.InputContainerId, out _)))
             return;
 
+        args.Handled = true;
+
         var items = storageComponent.Container.ContainedEntities.ToList();
         var coords = Transform(target).Coordinates;
 
@@ -48,7 +49,7 @@ public sealed class TransferMaterialsInStorageSystem : EntitySystem
             else
             {
                 var ev = new InteractUsingEvent(args.User, item, target, coords);
-                RaiseLocalEvent(args.Target.Value, ev);
+                RaiseLocalEvent(target, ev);
                 continue;
             }
 
