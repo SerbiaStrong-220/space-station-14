@@ -9,8 +9,18 @@
     sprite: Mobs/Species/Human/organs.rsi
   - type: StaticPrice
     price: 50
+    # SS220 organ-extraction-fix begin
+  - type: Extractable
+    grindableSolutionName: organ
+    # SS220 organ-extraction-fix end
   - type: SolutionContainerManager
     solutions:
+      # SS220 organ-extraction-fix begin
+      organ:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+      # SS220 organ-extraction-fix end
       food:
         maxVol: 5
         reagents:
@@ -53,6 +63,12 @@
       rateModifier: 100.0
   - type: SolutionContainerManager
     solutions:
+      # SS220 organ-extraction-fix begin
+      organ:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+      # SS220 organ-extraction-fix end
       Lung:
         maxVol: 100.0
         canReact: false
@@ -76,6 +92,12 @@
   - type: Organ
   - type: SolutionContainerManager
     solutions:
+      # SS220 organ-extraction-fix begin
+      organ:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+      # SS220 organ-extraction-fix end
       stomach:
         maxVol: 40
       food:

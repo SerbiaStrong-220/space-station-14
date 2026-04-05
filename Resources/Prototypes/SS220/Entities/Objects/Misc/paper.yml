@@ -647,3 +647,10 @@
        stampedColor: "#3b704f"
      - stampedName: Red Wings
        stampedColor: "#902922"
+
+# Отчёт от анилизатора здоровья - SS220-health-analyzer-report
+- type: entity
+  id: HealthAnalyzerReportPaper
+  parent: PaperAccessLogs
+  name: health analyzer report
+  description: Printed diagnostic report from a handheld health analyzer.

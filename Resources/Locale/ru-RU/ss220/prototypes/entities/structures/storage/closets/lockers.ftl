@@ -11,3 +11,6 @@ ent-LockerInterdyneArmory = шкаф отряда "Красные Крылья"
     .desc = { ent-BaseWallCloset.desc }
 ent-LockerInterdyneArmoryArmored = укрепленный шкаф отряда "Красные Крылья"
     .desc = { ent-BaseWallCloset.desc }
+
+ent-LockerNanoTrasenRepresentative = шкаф представителя НТ
+    .desc = { ent-LockerBaseSecure.desc }

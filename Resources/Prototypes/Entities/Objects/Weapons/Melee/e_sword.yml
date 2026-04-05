@@ -225,6 +225,7 @@
       types:
         Slash: 10
         Heat: 10
+        Structural: 15 #SS220-add-struct-damage
   - type: ComponentToggler
     components:
     - type: Sharp

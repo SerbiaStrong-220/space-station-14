@@ -1,6 +1,7 @@
 using Content.Shared.Damage;
 using Content.Shared.Damage.Events;
 using Content.Shared.Examine;
+using Content.Shared.PowerCell.Components;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -48,7 +49,7 @@ public abstract partial class SharedGunSystem
         else if (component is HitscanBatteryAmmoProviderComponent hitscanComp)
             hitscanComp.Prototype = state.Prototype;
         //SS220 Add Multifaze gun end
-        
+
         UpdateAmmoCount(uid, prediction: false);
     }
 
@@ -160,9 +161,19 @@ public abstract partial class SharedGunSystem
         if (!TryComp<AppearanceComponent>(uid, out var appearance))
             return;
 
+        // SS220 power-cell-mag-fix begin
+        var magLoaded = true;
+        if (TryComp<PowerCellSlotComponent>(uid, out var slotComp))
+        {
+            magLoaded = _slots.TryGetSlot(uid, slotComp.CellSlotId, out var itemSlot) &&
+                        itemSlot.Item is not null;
+        }
+        // SS220 power-cell-mag-fix end
+
         Appearance.SetData(uid, AmmoVisuals.HasAmmo, component.Shots != 0, appearance);
         Appearance.SetData(uid, AmmoVisuals.AmmoCount, component.Shots, appearance);
         Appearance.SetData(uid, AmmoVisuals.AmmoMax, component.Capacity, appearance);
+        Appearance.SetData(uid, AmmoVisuals.MagLoaded, magLoaded, appearance); // SS220 power-cell-mag-fix
     }
 
     private (EntityUid? Entity, IShootable) GetShootable(BatteryAmmoProviderComponent component, EntityCoordinates coordinates)

@@ -730,6 +730,7 @@
   loadouts:
   - MusicianJumpsuit
   - MusicianJumpskirt
+  - EveningDress #SS220 musician dresses
   - BardUniform #SS220 bard loadout
 
 - type: loadoutGroup
