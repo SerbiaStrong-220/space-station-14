@@ -54,7 +54,7 @@
       board: [ DoorElectronicsNanoTrasenRepresentative ]
 
 - type: entity
-  parent: Airlock
+  parent: AirlockCommand
   id: AirlockNanoTrasenRepresentativeLocked
   suffix: NanoTrasen Representative, Locked
   components:
@@ -63,6 +63,13 @@
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsNanoTrasenRepresentative ]
+
+- type: entity
+  parent: AirlockNanoTrasenRepresentativeLocked
+  id: AirlockMaintNanoTrasenRepresentativeLocked
+  components:
+  - type: Sprite
+    sprite: Structures/Doors/Airlocks/Standard/maint.rsi
 
 # Clown
 - type: entity

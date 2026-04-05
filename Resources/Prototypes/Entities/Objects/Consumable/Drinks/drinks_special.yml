@@ -34,7 +34,7 @@
         - ReagentId: Ice
           Quantity: 200
   - type: Sprite
-    sprite: Objects/Consumable/Drinks/icebucket.rsi
+    sprite: SS220/Objects/Consumable/Drinks/icebucket.rsi #SS220 Resprite
     state: icon
   - type: PhysicalComposition
     materialComposition:
@@ -124,10 +124,10 @@
   - type: ExaminableSolution
     heldOnly: true # Opaque, can't see inside from a distance
   - type: Sprite
-    sprite: Objects/Consumable/Drinks/shaker.rsi
+    sprite: SS220/Objects/Consumable/Drinks/shaker.rsi #SS220 Resprite
     state: icon
   - type: Item
-    sprite: Objects/Consumable/Drinks/shaker.rsi
+    sprite: SS220/Objects/Consumable/Drinks/shaker.rsi #SS220 Resprite
   - type: PhysicalComposition
     materialComposition:
       Steel: 50
@@ -144,9 +144,9 @@
   description: A gold-plated shaker given as a token of appreciation for years of service. It doesn't make the drinks taste any different.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Drinks/shaker_gold.rsi
+    sprite: SS220/Objects/Consumable/Drinks/shaker_gold.rsi #SS220 Resprite
   - type: Item
-    sprite: Objects/Consumable/Drinks/shaker_gold.rsi
+    sprite: SS220/Objects/Consumable/Drinks/shaker_gold.rsi #SS220 Resprite
   - type: PhysicalComposition
     materialComposition:
       Gold: 10 # Gold plated, not solid gold
@@ -172,7 +172,7 @@
     heldOnly: true
     exactVolume: true
   - type: Sprite
-    sprite: Objects/Consumable/Drinks/jigger.rsi
+    sprite: SS220/Objects/Consumable/Drinks/jigger.rsi #SS220 Resprite
     state: icon
   - type: PhysicalComposition
     materialComposition:

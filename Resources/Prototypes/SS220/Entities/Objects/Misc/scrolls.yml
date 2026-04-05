@@ -1,0 +1,71 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+# this file contains prototypes for all items that gives martial arts
+
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: CQCManual
+  name: old manual
+  description: A small, black manual. There are drawn instructions of tactical hand-to-hand combat.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Misc/cqc_manual.rsi
+    layers:
+    - state: icon
+  - type: Item
+    size: Small
+  - type: StaticPrice
+    price: 3000
+  - type: TriggerOnActivate
+  - type: DeleteOnTrigger
+  - type: MartialArtOnTrigger
+    martialArt: CloseQuartersCombat
+
+- type: entity
+  parent: ClothingBeltSecurity
+  id: ClothingBeltCorporateJudo
+  name: Corporate Judo Belt
+  description: Teaches the wearer NT Corporate Judo.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Belt/judobelt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Belt/judobelt.rsi
+  - type: Storage
+    whitelist:
+      tags:
+      - CigPack
+      - Taser
+      - SecBeltEquip
+      - Radio
+      - Sidearm
+      - MagazinePistol
+      - MagazineMagnum
+      - CombatKnife
+      - Truncheon
+      - HandGrenade
+      components:
+      - FlashOnTrigger
+      - SmokeOnTrigger
+      - Flash
+      - Handcuff
+      - BallisticAmmoProvider
+      - CartridgeAmmo
+      - DoorRemote
+      - Whistle
+      - BalloonPopper
+      - ScatteringGrenade
+  - type: MartialArtOnEquip
+    martialArt: CorporateJudo
+
+# - type: entity
+#   parent: [ BaseItem, BaseSyndicateContraband ]
+#   id: SleepingCarpScroll
+#   name: mysterious scroll
+#   description: A scroll filled with strange markings. It seems to be drawings of some sort of martial art.
+#   components:
+#   - type: Sprite
+#     sprite: Objects/Magic/magicactions.rsi
+#     layers:
+#     - state: spell_default
+#   - type: StaticPrice
+#     price: 3000
