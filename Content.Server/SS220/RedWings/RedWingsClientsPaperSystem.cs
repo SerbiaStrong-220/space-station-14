@@ -86,11 +86,7 @@ public sealed class RedWingsClientPaperSystem : EntitySystem
             var dna = record.Item2.DNA;
             
             clientMessage.PushNewline();
-            clientMessage.AddMarkupPermissive(Loc.GetString("book-text-redwings-client-name", ("name", name)));
-            clientMessage.PushNewline();
-            clientMessage.AddMarkupPermissive(Loc.GetString("book-text-redwings-client-dna", ("dna", dna ?? "")));
-            clientMessage.PushNewline();
-            clientMessage.AddMarkupPermissive(Loc.GetString("book-text-redwings-client-middle"));
+            clientMessage.AddMarkupPermissive(Loc.GetString("book-text-redwings-client-middle", ("dna", dna ?? ""), ("name", name)));
             clientMessage.PushNewline();
         }
         clientMessage.PushNewline();

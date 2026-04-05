@@ -80,9 +80,9 @@ book-text-redwings-client-start =
 
     Настоящим Центральное Медицинское Управление Interdyne Pharmaceutics уведомляет оперативный состав отряда «RedWings» о вступлении в силу следующих индивидуальных страховых контрактов. Указанные лица обладают активным статусом медицинской страховки и подлежат обслуживанию в соответствии с выбранным уровнем покрытия.
 
-book-text-redwings-client-middle = Уровень страховки: ◼ Серебряный ☐ Золотой ☐ Платиновый
-book-text-redwings-client-name = ФИО: { $name }
-book-text-redwings-client-dna = ДНК: { $dna }
+book-text-redwings-client-middle =  ФИО: { $name }
+    ДНК: { $dna }
+    Уровень страховки: ◼ Серебряный ☐ Золотой ☐ Платиновый
 
 book-text-redwings-client-end =
     {"["}bold{"]"}Предписания для отряда «RedWings»:{"["}/bold{"]"}
