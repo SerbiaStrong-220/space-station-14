@@ -53,7 +53,7 @@
     - BoxSurvivalBrigmedic
     - CrowbarRed
     - MedkitCombatFilled
-    - PinpointerDNA
+    - PinpointerUplink
 
 - type: startingGear
   id: RedWingsMedicGear
@@ -85,7 +85,7 @@
     - BoxSurvivalBrigmedic
     - CrowbarRed
     - MedkitCombatFilled
-    - PinpointerDNA
+    - PinpointerUplink
     - LaserSMGPowerCell
     - LaserSMGPowerCell
     - DefibrillatorSyndicate
@@ -123,4 +123,4 @@
     - CrowbarRed
     - MedkitCombatFilled
     - HandHeldMassScanner
-    - PinpointerDNA
+    - PinpointerUplink
