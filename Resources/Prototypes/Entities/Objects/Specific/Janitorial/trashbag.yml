@@ -3,6 +3,9 @@
   id: TrashBag
   parent: BaseStorageItem
   components:
+  #ss220 add transfer items in storage start
+  - type: TransferMaterialsInStorage
+  #ss220 add transfer items in storage start
   - type: Sprite
     sprite: Objects/Specific/Janitorial/trashbag.rsi
     layers:
