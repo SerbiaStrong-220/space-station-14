@@ -40,7 +40,7 @@ public sealed class PathologyProviderSystem : EntitySystem
             return;
 
         var (armorAffectedWeights, chanceMultiplier) = GetAffectedByArmoredChance(weightedRandomPrototype.Weights, args.Target, key);
-        _pathology.TryMakeEntityContext(entity.Owner, entity.Comp.WeighedRandomProviderEntity, out var context);
+        _pathology.TryMakeEntityContext(entity.Owner, entity.Comp.WeightedRandomProviderEntity, out var context);
 
         _pathology.TryAddRandom(args.Target, armorAffectedWeights, entity.Comp.ChanceToApply * chanceMultiplier, context);
     }

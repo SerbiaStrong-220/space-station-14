@@ -102,7 +102,6 @@ public sealed class SurgeryPatientAnalyzer : EntitySystem
         return recommendation;
     }
 
-    // TODO: after redoing LimRev shared comp come here
     public int GetBrainRotDegree(LimitationReviveComponent limitationRevive, MobStateComponent mobState)
     {
         if (limitationRevive.DamageCountingTime is { } damageCountingTime)
