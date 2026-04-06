@@ -20,7 +20,7 @@
       - Bed
       components:
       - StasisBed
-      requiredAll: false
+      requireAll: false
   start: start-torso-surgery
   end: seal-wound
   graph:

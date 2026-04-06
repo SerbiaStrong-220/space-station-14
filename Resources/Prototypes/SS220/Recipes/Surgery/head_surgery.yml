@@ -19,7 +19,7 @@
       - Bed
       components:
       - StasisBed
-      requiredAll: false
+      requireAll: false
   start: surgery-head-start
   end: seal-wound
   graph:
