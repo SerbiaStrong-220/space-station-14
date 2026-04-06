@@ -8,7 +8,7 @@
       department: Security
       time: 50h
     - !type:RoleTimeRequirement
-      role: JobJobParamedic
+      role: JobParamedic
       time: 10h
     - !type:RoleTimeRequirement
       role: JobBlueShield
