@@ -59,7 +59,6 @@ public record struct TrackedItem(NetEntity Entity, string Name, string? Job = nu
 {
 }
 
-
 public enum PinpointerMode//ToDo_SS220 fix cursed pinpointer https://github.com/SerbiaStrong-220/DevTeam220/issues/219
 {
     Crew,

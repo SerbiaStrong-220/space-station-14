@@ -38,14 +38,14 @@ public sealed class RedWingsClientPaperSystem : EntitySystem
 
         if (TryComp(uid, out PaperComponent? paperComp))
         {
-            if (TryGetClientList(out var paperContent, component))
+            if (TryGetClientList(component, out var paperContent))
             {
-                    _paper.SetContent((uid, paperComp), paperContent);
+                _paper.SetContent((uid, paperComp), paperContent);
             }
         }
     }
 
-    private bool TryGetClientList([NotNullWhen(true)] out string? redWingsClientList, RedWingsClientPaperComponent component)
+    private bool TryGetClientList(RedWingsClientPaperComponent component, [NotNullWhen(true)] out string? redWingsClientList)
     {
         redWingsClientList = null;
         var clientAmount = component.ClientAmount;
@@ -91,12 +91,8 @@ public sealed class RedWingsClientPaperSystem : EntitySystem
         }
         clientMessage.PushNewline();
             
-        if (!clientMessage.IsEmpty)
-        {
-            redWingsClientList = Loc.GetString("book-text-redwings-client-start") + clientMessage + Loc.GetString("book-text-redwings-client-end");
-            return true;
-        }
+        redWingsClientList = Loc.GetString("book-text-redwings-client-start") + clientMessage + Loc.GetString("book-text-redwings-client-end");
 
-        return false;
+        return true;
     }
 }
