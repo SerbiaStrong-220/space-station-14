@@ -3,6 +3,19 @@
   name: ghost-role-information-redwings-medic-name
   description: ghost-role-information-redwings-medic-description
   playTimeTracker: JobRedWingsMedic
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 35h
+    - !type:RoleTimeRequirement
+      role: JobChemist
+      time: 10h
+    - !type:RoleTimeRequirement
+      role: JobParamedic
+      time: 15h
+    - !type:RoleTimeRequirement
+      role: JobBlueShield
+      time: 10h
   canBeAntag: false
   icon: JobIconRedWingsMedic
   setPreference: false
