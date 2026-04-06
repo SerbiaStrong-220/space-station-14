@@ -110,7 +110,7 @@
         state: alive
   - type: Bloodstream
     bloodReagent: JuiceWatermelon
-    bloodMaxVolume: 90
+    bloodMaxVolume: 50
     chemicalMaxVolume: 30
   - type: Destructible
     thresholds:
@@ -121,8 +121,8 @@
       - !type:SpawnEntitiesBehavior
         spawn:
           FoodWatermelonSlice:
-            min: 4
-            max: 5
+            min: 3
+            max: 4
       - !type:PlaySoundBehavior
         sound:
           collection: gib
