@@ -9,7 +9,7 @@
     state: slug
   # SS220-add-projectile-wounds-begin
   - type: PathologyOnProjectileHit
-    weighedRandomProviderEntity: LargeHeavyCaliberFragment
+    weightedRandomProviderEntity: LargeHeavyCaliberFragment
   # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
@@ -30,7 +30,7 @@
   # SS220-add-projectile-wounds-begin
   - type: PathologyOnProjectileHit
     chanceToApply: 0.3
-    weighedRandomProviderEntity: LargeHeavyCaliberFragment
+    weightedRandomProviderEntity: LargeHeavyCaliberFragment
   # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
@@ -51,7 +51,7 @@
   # SS220-add-projectile-wounds-begin
   - type: PathologyOnProjectileHit
     chanceToApply: 0.2
-    weighedRandomProviderEntity: LargeHeavyCaliberFragment
+    weightedRandomProviderEntity: LargeHeavyCaliberFragment
   # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
@@ -137,7 +137,7 @@
   # SS220-add-projectile-wounds-begin
   - type: PathologyOnProjectileHit
     chanceToApply: 0.1
-    weighedRandomProviderEntity: PelletFragment
+    weightedRandomProviderEntity: PelletFragment
   # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
@@ -241,7 +241,7 @@
   # SS220-add-projectile-wounds-begin
   - type: PathologyOnProjectileHit
     chanceToApply: 0.1
-    weighedRandomProviderEntity: PelletFragment
+    weightedRandomProviderEntity: PelletFragment
   # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
@@ -274,7 +274,7 @@
   # SS220-add-projectile-wounds-begin
   - type: PathologyOnProjectileHit
     chanceToApply: 0.2
-    weighedRandomProviderEntity: PelletFragment
+    weightedRandomProviderEntity: PelletFragment
   # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
@@ -309,7 +309,7 @@
   # SS220-add-projectile-wounds-begin
   - type: PathologyOnProjectileHit
     chanceToApply: 0.2
-    weighedRandomProviderEntity: PelletFragment
+    weightedRandomProviderEntity: PelletFragment
   # SS220-add-projectile-wounds-end
   - type: Projectile
     deleteOnCollide: false

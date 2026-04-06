@@ -17,6 +17,9 @@
     whitelist:
       tags:
       - Bed
+      components:
+      - StasisBed
+      requiredAll: false
   start: surgery-head-start
   end: seal-wound
   graph:

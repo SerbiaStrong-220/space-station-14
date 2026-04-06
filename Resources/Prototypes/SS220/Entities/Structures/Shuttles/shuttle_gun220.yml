@@ -341,7 +341,7 @@
     ignoreResistance: true
   - type: PathologyOnProjectileHit
     chanceToApply: 0.9
-    weighedRandomProviderEntity: LargeHeavyCaliberFragment
+    weightedRandomProviderEntity: LargeHeavyCaliberFragment
   - type: Projectile
     damage:
       types:

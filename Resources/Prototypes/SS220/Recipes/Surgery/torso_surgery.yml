@@ -18,6 +18,9 @@
     whitelist:
       tags:
       - Bed
+      components:
+      - StasisBed
+      requiredAll: false
   start: start-torso-surgery
   end: seal-wound
   graph:

@@ -14,8 +14,8 @@ public sealed class EdgeSelectorBUI(EntityUid owner, Enum uiKey) : BoundUserInte
     [ViewVariables]
     private SimpleRadialMenu? _menu;
 
-    private readonly Color _backGroundUnavailableEdge = Color.Black.WithAlpha(0.4f);
-    private readonly Color _hoverBackGroundUnavailableEdge = Color.Black.WithAlpha(0.4f);
+    private readonly Color _backGroundUnavailableEdge = Color.Black.WithAlpha(0.7f);
+    private readonly Color _hoverBackGroundUnavailableEdge = Color.Black.WithAlpha(0.5f);
 
     private NetEntity? _used;
 

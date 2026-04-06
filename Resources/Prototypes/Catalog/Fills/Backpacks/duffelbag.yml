@@ -10,6 +10,7 @@
       - id: Hemostat
       - id: Saw
       - id: SawElectric # ss220-surgery-update
+      - id: BoneGel
       - id: Drill
       - id: Cautery
       - id: Retractor

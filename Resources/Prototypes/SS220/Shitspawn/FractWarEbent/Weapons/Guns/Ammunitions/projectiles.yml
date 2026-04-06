@@ -45,7 +45,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: PathologyOnProjectileHit
-    weighedRandomProviderEntity: HeavyCaliberFragment
+    weightedRandomProviderEntity: HeavyCaliberFragment
   - type: Projectile
     damage:
       types:

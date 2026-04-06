@@ -105,15 +105,18 @@ public sealed class SurgeryPatientAnalyzer : EntitySystem
     // TODO: after redoing LimRev shared comp come here
     public int GetBrainRotDegree(LimitationReviveComponent limitationRevive, MobStateComponent mobState)
     {
-        if (limitationRevive.DamageCountingTime is not null)
+        if (limitationRevive.DamageCountingTime is { } damageCountingTime)
         {
-            var result = (MaxBrainRotPercentage * (int)(_gameTiming.CurTime - limitationRevive.DamageCountingTime.Value).TotalSeconds) / (int)limitationRevive.BeforeDamageDelay.TotalSeconds;
-            return result >= 0 ? result : 0;
+            var delaySeconds = limitationRevive.BeforeDamageDelay.TotalSeconds;
+            if (delaySeconds <= 0)
+                return 0;
+
+            var result = (int)(MaxBrainRotPercentage * (_gameTiming.CurTime - damageCountingTime).TotalSeconds / delaySeconds);
+            return Math.Clamp(result, 0, MaxBrainRotPercentage);
         }
 
         if (mobState.CurrentState == MobState.Dead)
             return MaxBrainRotPercentage;
-
 
         return 0;
     }
