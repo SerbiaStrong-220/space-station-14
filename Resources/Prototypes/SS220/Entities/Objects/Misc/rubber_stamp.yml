@@ -162,3 +162,15 @@
     sprite: SS220/Objects/Misc/stamps.rsi
     state: stamp-blue-shield
 
+- type: entity
+  name: Red Wings rubber stamp
+  parent: RubberStampBase
+  id: RubberStampRedwings
+  description: Red Wings' rubber stamp.
+  components:
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-redwings
+    stampedColor: "#902922"
+    stampState: "paper_stamp-syndicate"
+  - type: Sprite
+    state: stamp-warden # TODO: make a unique sprite
