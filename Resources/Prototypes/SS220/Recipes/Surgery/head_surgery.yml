@@ -175,6 +175,7 @@
           - MindSlave
       actions:
       - !type:FixMindSlaveDisfunctionAction
+    # fix brain-related pathologies
     - to: brain-exposed
       id: brain-exposed-remove-brain-pathology
       delay: 10
