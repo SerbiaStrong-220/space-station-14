@@ -16,10 +16,16 @@ public partial class MindExtensionSystem //MindTransferSystem
         if (player is null)
             return;
 
-        var mindExtEnt = GetMindExtension(player.Value);
-        var mindExt = mindExtEnt.Comp;
+        TryGetMindExtension(player.Value, out var mindExtEnt);
 
-        if (TryComp<MindExtensionContainerComponent>(oldEntity, out var oldMindExt))
+        if (newEntity == null && mindExtEnt == null)
+            return;
+
+        mindExtEnt ??= GetMindExtension(player.Value);
+
+        var mindExt = mindExtEnt.Value.Comp;
+
+        if (oldEntity != null && HasComp<MindExtensionContainerComponent>(oldEntity))
         {
             //Main check for abandonment
             ChangeOrAddTrailPoint(mindExt, oldEntity.Value, CheckEntityAbandoned(oldEntity.Value));
@@ -32,12 +38,8 @@ public partial class MindExtensionSystem //MindTransferSystem
         ChangeOrAddTrailPoint(mindExt, newEntity.Value, false);
         SetRespawnTimer(mindExt, newEntity.Value, player.Value);
 
-        var mindExtCont = new MindExtensionContainerComponent() { MindExtension = mindExtEnt.Owner };
-
-        if (!TryComp<MindExtensionContainerComponent>(newEntity, out var newMindExt))
-            newMindExt = EnsureComp<MindExtensionContainerComponent>(newEntity.Value);
-
-        newMindExt.MindExtension = mindExtEnt.Owner;
+        var newMindExt = EnsureComp<MindExtensionContainerComponent>(newEntity.Value);
+        newMindExt.MindExtension = mindExtEnt.Value.Owner;
     }
 
     /// <summary>
