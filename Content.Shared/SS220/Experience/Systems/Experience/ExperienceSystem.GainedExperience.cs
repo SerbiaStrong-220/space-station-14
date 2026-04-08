@@ -135,6 +135,9 @@ public sealed partial class ExperienceSystem : EntitySystem
 
     private void SublevelAddOnSkillTreeAdded<T>(Entity<T> entity, ref SkillTreeAdded args) where T : BaseSublevelAddComponent
     {
+        if (args.DenyChanges)
+            return;
+
         if (!entity.Comp.Skills.TryGetValue(args.SkillTree, out var sublevels))
             return;
 

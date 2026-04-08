@@ -64,7 +64,7 @@ public sealed class ExperienceEditorSystem : EntitySystem
             return;
 
         var targetEntity = GetEntity(ev.Target);
-        if (!HasComp<ExperienceComponent>(targetEntity))
+        if (!TryComp<ExperienceComponent>(targetEntity, out var targetEntityExperienceComp))
         {
             Log.Error($"Tried to change {nameof(ExperienceComponent)} of entity which don't have one, entity is {ToPrettyString(targetEntity)}!");
             return;

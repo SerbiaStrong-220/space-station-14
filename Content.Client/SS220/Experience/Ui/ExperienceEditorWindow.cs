@@ -39,7 +39,7 @@ public sealed partial class ExperienceEditorWindow : FancyWindow
         var experienceEntities = _entityManager.EntityQueryEnumerator<ExperienceComponent>();
         while (experienceEntities.MoveNext(out var uid, out var _))
         {
-            ExperienceEntityOption.AddItem(metadataQuery.TryComp(uid, out var metaDataComponent) ? metaDataComponent.EntityName : uid.ToString(), uid.Id);
+            ExperienceEntityOption.AddItem(metadataQuery.TryComp(uid, out var metaDataComponent) ? $"{metaDataComponent.EntityName} ({metaDataComponent.NetEntity.Id})" : uid.ToString(), uid.Id);
         }
 
         ExperienceEntityOption.OnItemSelected += (args) =>
@@ -122,7 +122,7 @@ public sealed partial class ExperienceEditorWindow : FancyWindow
 
     private void PopulateCharacterInfo(EntityUid uid)
     {
-        CharacterName.SetMessage(_entityManager.TryGetComponent<MetaDataComponent>(uid, out var metaData) ? metaData.EntityName : uid.Id.ToString());
+        CharacterName.SetMessage(_entityManager.TryGetComponent<MetaDataComponent>(uid, out var metaData) ? $"{metaData.EntityName} ({metaData.NetEntity.Id})" : uid.Id.ToString());
 
         if (!_entityManager.System<SharedMindSystem>().TryGetMind(uid, out var mindId, out var mindComponent))
             return;

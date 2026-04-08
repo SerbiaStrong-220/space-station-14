@@ -9,7 +9,7 @@
     Title="{Loc 'experience-view-editor-title'}"
     Resizable="True"
     MinSize="240 240"
-    SetSize="720 480"
+    SetSize="520 640"
     RectClipContent="False">
     <Control>
         <PanelContainer>
@@ -21,6 +21,8 @@
             <BoxContainer Name="CharacterInfoContainer" Orientation="Horizontal">
                 <OptionButton Name="ExperienceEntityOption"/>
                 <RichTextLabel Name="CharacterName" Text="Name place holder" Margin="5 0"/>
+            </BoxContainer>
+            <BoxContainer Name="CharacterAdditionalInfoContainer" Orientation="Horizontal">
                 <RichTextLabel Name="OccupationName" Text="occupation name holder" Margin="5 0"/>
                 <RichTextLabel Name="AntagName" Text="antag name holder" Margin="5 0"/>
             </BoxContainer>
@@ -34,6 +36,7 @@
                         <!-- Added by code -->
                     </BoxContainer>
                 </ScrollContainer>
+                <PanelContainer StyleClasses="LowDivider" Margin="5"/>
                 <BoxContainer Name="KnowledgeInfoContainer" HorizontalAlignment="Left" VerticalExpand="True" HorizontalExpand="True" Orientation="Vertical" Margin="0 5">
                     <BoxContainer Orientation="Horizontal">
                         <Label Text="{Loc 'experience-editor-knowledge-name'}"/>

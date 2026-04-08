@@ -3,6 +3,7 @@
   name: ghost-role-information-redwings-pilot-name
   description: ghost-role-information-redwings-pilot-description
   playTimeTracker: JobRedWingsPilot
+  experienceDefinition: SecurityPilotRoleExperience
   canBeAntag: false
   icon: JobIconRedWingsPilot
   setPreference: false
