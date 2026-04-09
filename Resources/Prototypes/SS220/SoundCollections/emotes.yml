@@ -312,3 +312,8 @@
   id: TajaranAnnoyedMeows
   files:
   - /Audio/SS220/Emotes/Tajaran/annoyed_tajaran_meow.ogg
+
+- type: soundCollection
+  id: MaleGachiScream
+  files:
+    - /Audio/SS220/Voice/Gachi/aaaaaaaaaaaaaah.ogg
