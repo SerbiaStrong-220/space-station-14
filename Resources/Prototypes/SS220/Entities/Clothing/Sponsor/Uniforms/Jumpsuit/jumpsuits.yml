@@ -110,8 +110,8 @@
 - type: entity
   parent: ClothingSponsorUniformBase
   id: ClothingUniformJumpsuitJabroniOutfit
-  name: кожаный костюм
-  description: Дружок-пирожок, думаю ты ошибся станцией.
+  name: leather suit
+  description: Buddy, I think you got the wrong station.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Uniform/Jumpsuit/jabroni.rsi
