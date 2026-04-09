@@ -11,6 +11,18 @@
   - PortableRecharger
 
 - type: technology
+  id: HeavyBallistics
+  name: research-technology-heavy-ballistics
+  icon:
+    sprite: SS220/Objects/Weapons/Guns/Snipers/heavy_sniper.rsi
+    state: base
+  discipline: Arsenal
+  tier: 2
+  cost: 9000
+  recipeUnlocks:
+  - WeaponSniperCompact
+
+- type: technology
   id: PlasmaConverterAcceleration
   name: research-technology-plasma-converter-acceleration
   icon:

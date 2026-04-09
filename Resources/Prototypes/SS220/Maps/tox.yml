@@ -26,6 +26,9 @@
             HeadOfPersonnel: [ 1, 1 ]
             NanoTrasenRepresentative: [ 1, 1 ]
             #Law
+            IAA: [ 2, 2 ]
+            Magistrate: [1, 1]
+            # NanoTrasenRepresentative: [ 1, 1 ] #SS220 TODO NanoTraisen Representative
             Lawyer: [ 3, 3 ]
             #Security
             HeadOfSecurity: [ 1, 1 ]

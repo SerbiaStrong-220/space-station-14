@@ -1,0 +1,25 @@
+- type: job
+  id: RedWingsPilot
+  name: ghost-role-information-redwings-pilot-name
+  description: ghost-role-information-redwings-pilot-description
+  playTimeTracker: JobRedWingsPilot
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 50h
+    - !type:RoleTimeRequirement
+      role: JobSecurityPilot
+      time: 10h
+    - !type:RoleTimeRequirement
+      role: JobBlueShield
+      time: 10h
+  canBeAntag: false
+  icon: JobIconRedWingsPilot
+  setPreference: false
+  overrideConsoleVisibility: true
+  access:
+  - Medical
+  - Brig
+  - Maintenance
+  - External
+  - Interdyne

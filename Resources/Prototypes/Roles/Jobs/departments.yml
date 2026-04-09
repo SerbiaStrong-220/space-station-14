@@ -84,7 +84,9 @@
   color: "#2a4ef6" #SS220 changed color
   roles:
   - Captain
-  - NanoTrasenRepresentative
+#  - IAA #SS220-Law Department
+  - Magistrate #SS220-Law Department
+  #- NanoTrasenRepresentative #SS220 TODO NanoTraisen Representative
   - CentralCommandOfficial
   - ChiefEngineer
   - ChiefMedicalOfficer

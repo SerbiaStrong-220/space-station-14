@@ -1,0 +1,276 @@
+- type: hitscan
+  id: RedShuttleLaserSW
+  maxLength: 200
+  damage:
+    types:
+      Heat: 50 #ss220lowTTKUpdate
+      Structural: 30 #ss220lowTTKUpdate
+  muzzleFlash:
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+    state: muzzle_beam_heavy2
+  travelFlash:
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+    state: beam_heavy2
+  impactFlash:
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+    state: impact_beam_heavy2
+  # SS220 Add hitscan on shuttle nav begin
+  shuttleNavInfo:
+    enabled: true
+  # SS220 Add hitscan on shuttle nav end
+
+
+- type: entity
+  id: ShuttleGunPerforatorSW
+  parent: ShuttleGunPerforator
+  components:
+  - type: Machine
+    board: ShuttleGunPerforatorCircuitboardSW
+  - type: HitscanBatteryAmmoProvider
+    proto: RedShuttleLaserSW
+    fireCost: 120
+
+
+- type: entity
+  id: ShuttleGunPerforatorCircuitboardSW
+  parent: ShuttleGunPerforatorCircuitboard
+  components:
+  - type: MachineBoard
+    prototype: ShuttleGunPerforatorSW
+    stackRequirements:
+      Manipulator: 10
+      Steel: 10
+      CableHV: 5
+
+
+
+
+
+- type: entity
+  id: ShuttleGunHarkonen
+  parent: [ShuttleGunBase, ConstructibleMachine]
+  name: KHC-40 "Harkonen"
+  description: Automatic, anti-ship gun .60 caliber.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Shuttles/harkonen.rsi
+    granularLayersRendering: true
+    layers:
+    - state: support
+      renderingStrategy: NoRotation
+    - state: base
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+      ballistic-ammo: !type:Container
+      gun_magazine: !type:ContainerSlot
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 800
+      behaviors:
+        - !type:ChangeConstructionNodeBehavior
+          node: machineFrame
+        - !type:DoActsBehavior
+          acts: ["Destruction"]
+  - type: Machine
+    board: ShuttleGunHarkonenCircuitboard
+  - type: Gun
+    projectileSpeed: 60
+    burstFireRate: 6
+    angleIncrease: 0.2
+    angleDecay: 7
+    minAngle: 1
+    maxAngle: 7
+    shotsPerBurst: 4
+    selectedMode: Burst
+    availableModes:
+    - Burst
+    soundGunshot:
+      path: /Audio/SS220/Weapons/Guns/Gunshots/pkt_shot.ogg
+      params:
+        variation: 0.2
+    soundEmpty:
+      path: /Audio/Weapons/Guns/Empty/empty.ogg
+  - type: MagazineAmmoProvider
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: true
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        priority: 2
+        whitelist:
+          tags:
+          - BaseMagazineHarkonen
+        insertSound:
+          path: /Audio/Weapons/Guns/MagIn/kinetic_reload.ogg
+          params:
+            pitch: 2
+        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+
+
+- type: entity
+  id: ShuttleGunHarkonenCircuitboard
+  parent: ShuttleGunPerforatorCircuitboard
+  name: circuit board KHC-40 "Harkonen"
+  description: Circuit board for assembling the KHC-40 "Harkonen"
+  components:
+  - type: MachineBoard
+    prototype: ShuttleGunHarkonen
+    stackRequirements:
+      Manipulator: 5
+      Steel: 20
+      CableHV: 8
+
+
+
+- type: entity
+  id: BaseMagazineHarkonen
+  name: box (.60 caliber)
+  parent: BaseItem
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+    - BaseMagazineHarkonen
+  - type: Item
+    size: Large
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+        - CartridgeHarkonen
+    capacity: 60
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/harkonen_box.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-3
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 4
+    zeroVisible: false
+  - type: Appearance
+
+- type: Tag
+  id: BaseMagazineHarkonen
+
+- type: entity
+  id: MagazineHarkonenFull
+  name: box (.60 caliber)
+  parent: BaseMagazineHarkonen
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeHarkonen
+
+
+- type: entity
+  id: CartridgeHarkonen
+  name: cartridge (.60 caliber)
+  parent: BaseCartridgeHeavyRifle
+  components:
+  - type: CartridgeAmmo
+    proto: BulletHarkonen
+    deleteOnSpawn: true
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseBullet
+  id: BulletHarkonen
+  name: bullet (.60)
+  components:
+  - type: Reflective
+    reflective: None
+  - type: TimedDespawn
+    lifetime: 4
+  - type: StaminaDamageOnCollide
+    damage: 50
+    ignoreResistance: true
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 35
+        Structural: 55
+    ignoreResistances: true
+    shuttleNavInfo:
+      enabled: true
+      radius: 0.4
+
+
+- type: Tag
+  id: CartridgeHarkonen
+
+
+
+
+- type: entity
+  id: ShuttleGunMLGSW
+  parent: ShuttleGunMLG
+  components:
+  - type: RechargeBasicEntityAmmo
+    rechargeCooldown: 0.7
+  - type: BasicEntityAmmoProvider
+    proto: BulletMLG
+    capacity: 26
+    count: 26
+  - type: Machine
+    board: ShuttleGunMLGSWCircuitboard
+  - type: MagazineVisuals
+    magState: mag
+    steps: 8
+    zeroVisible: false
+
+- type: entity
+  id: ShuttleGunMLGSWCircuitboard
+  parent: ShuttleGunPerforatorCircuitboard
+  name: circuit board SPG-300 "Marauder"
+  description: Circuit board for assembling the SPG-300 "Marauder"
+  components:
+  - type: MachineBoard
+    prototype: ShuttleGunMLGSW
+    stackRequirements:
+      Manipulator: 10
+      Steel: 10
+      CableHV: 12
+
+
+
+- type: entity
+  id: ShuttleGunPktSW
+  parent: ShuttleGunPkt
+  components:
+  - type: Gun
+    projectileSpeed: 50
+    fireRate: 5.2
+    angleDecay: 45
+    minAngle: 2
+    maxAngle: 35
+  - type: Machine
+    board: ShuttleGunPktSWCircuitboard
+
+
+
+- type: entity
+  id: ShuttleGunPktSWCircuitboard
+  parent: ShuttleGunPerforatorCircuitboard
+  name: circuit board OKMG-500 "PKT"
+  description: Circuit board for assembling the OKMG-500 "PKT"
+  components:
+  - type: MachineBoard
+    prototype: ShuttleGunPktSW
+    stackRequirements:
+      Manipulator: 8
+      Steel: 10
+      CableHV: 5

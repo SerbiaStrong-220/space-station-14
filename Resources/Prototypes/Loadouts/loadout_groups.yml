@@ -51,7 +51,7 @@
   - OffsetCaneMime
   - OffsetCaneNT
   - Cane
-  - ExpensiveCane # SS220 Add
+  #- ExpensiveCane #SS220 TODO NanoTraisen Representative
   - TowelColorBlack
   - TowelColorWhite
   # SS220 Too many towels begin
@@ -730,6 +730,7 @@
   loadouts:
   - MusicianJumpsuit
   - MusicianJumpskirt
+  - EveningDress #SS220 musician dresses
   - BardUniform #SS220 bard loadout
 
 - type: loadoutGroup

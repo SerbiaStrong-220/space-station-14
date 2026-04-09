@@ -1983,6 +1983,7 @@
       - WantedListCartridge
       - LogProbeCartridge
       - AstroNavCartridge
+      - MessengerCartridgeClient # SS220 Messenger
 
 - type: entity
   parent: ERTLeaderPDA

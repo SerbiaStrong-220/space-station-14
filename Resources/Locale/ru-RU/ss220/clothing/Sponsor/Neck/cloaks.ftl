@@ -1,3 +1,7 @@
+ent-ClothingSponsorNeckParadise = накидка причастия
+    .desc = Вручается избранным, удостоенным уникального места в этом мире.
+ent-ClothingSponsorNeckCoder = плащ созидания
+    .desc = Особый плащ, носителям оного дозволено вмешиваться и менять правила мира.
 ent-ClothingSponsorNeckMapper = плащ сотворения
     .desc = Особый плащ, чьим обладателям выпала честь участвовать в сотворении мира.
 ent-ClothingSponsorNeckSpriter = плащ начертания
@@ -16,3 +20,5 @@ ent-ClothingSponsorNeckWikiEditors = плащ познания
     .desc = Особый плащ, предоставленный первым, кто вообразил и сочинил правила нашего мира.
 ent-ClothingNeckCloakFloppa = шкура Шлёпы
     .desc = Это — не то, что вы думаете.
+ent-ClothingSponsorNeckLoroveds = плащ повествования
+    .desc = Особый плащ, преподнесенный хранителям, чье предназначение в сохранении памяти мира.

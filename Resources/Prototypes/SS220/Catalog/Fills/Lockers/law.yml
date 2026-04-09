@@ -26,3 +26,32 @@
     containers:
       entity_storage: !type:NestedSelector
         tableId: LockerFillMagistrate
+
+# Magistrate
+- type: entityTable
+  id: LockerFillNanoTrasenRepresentative #SS220 TODO NanoTraisen Representative
+  table: !type:AllSelector
+    children:
+    - id: ClothingHeadsetAltMagistrate
+    - id: DoorRemoteLaw
+    - id: RubberStampMagistrate
+    - id: ClothingOuterRobesJudge
+    - id: ClothingHeadHatPwig
+    - id: WeaponDisabler
+    - id: ClothingWristWatchGold
+    - id: ClothingEyesGlassesCommand
+    - id: Telescopichka
+    - id: BoxEncryptionKeyLaw
+    - id: BoxTapeRecorder
+    - id: JudgeGavel
+    - id: GavelStand
+
+- type: entity
+  parent: LockerNanoTrasenRepresentative
+  id: LockerNanoTrasenRepresentativeFilled
+  suffix: Filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: LockerFillNanoTrasenRepresentative
