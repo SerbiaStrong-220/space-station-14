@@ -217,6 +217,14 @@ public abstract partial class SharedDoorSystem : EntitySystem
 
     private void OnPryTimeModifier(EntityUid uid, DoorComponent door, ref GetPryTimeModifierEvent args)
     {
+        // ss220 fix pry with hand start
+        if (args.Tool == null)
+        {
+            args.BaseTime = door.HandPryTime;
+            return;
+        }
+        // ss220 fix pry with hand end
+
         args.BaseTime = door.PryTime;
     }
 
