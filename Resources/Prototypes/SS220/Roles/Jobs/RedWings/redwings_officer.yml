@@ -3,6 +3,16 @@
   name: ghost-role-information-redwings-officer-name
   description: ghost-role-information-redwings-officer-description
   playTimeTracker: JobRedWingsOfficer
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 50h
+    - !type:RoleTimeRequirement
+      role: JobParamedic
+      time: 10h
+    - !type:RoleTimeRequirement
+      role: JobBlueShield
+      time: 10h
   canBeAntag: false
   icon: JobIconRedWingsOfficer
   setPreference: false
