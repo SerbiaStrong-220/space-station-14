@@ -8,26 +8,38 @@
     xmlns:styleDef="clr-namespace:Content.Client.SS220.Experience.Ui"
     xmlns:ExperienceUiElements="clr-namespace:Content.Client.SS220.Experience.UiElements" VerticalExpand="False">
     <BoxContainer Name="ContentContainer" Orientation="Vertical" Margin="0 2" HorizontalExpand="True">
-        <BoxContainer Orientation="Vertical" Margin="{x:Static styleDef:ExperienceUiStyleDefinitions.BaseTabLikeThickness}">
-            <BoxContainer Name ="InfoContainer" Orientation="Horizontal" MouseFilter="Stop" TrackingTooltip="true" TooltipDelay="0.5">
-                <TextureRect Name="TreeIconRect"/>
-                <RichTextLabel Name="TreeName" Text="place-holder"/>
-            </BoxContainer>
-            <BoxContainer Orientation="Horizontal">
-                <TextureButton Name="ShowSubLevelsButton" TexturePath="/Textures/SS220/Interface/ExperienceView/unroll-button.png"  Margin="0 0 5 0"/>
-                <BoxContainer Name ="TreeLevelsContainer" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <!-- Added here by code -->
+        <BoxContainer Orientation="Vertical">
+            <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                <BoxContainer Name ="InfoContainer" Orientation="Horizontal" HorizontalAlignment="Left" HorizontalExpand="True" MouseFilter="Stop" TrackingTooltip="true" TooltipDelay="0.5">
+                    <TextureRect Name="TreeIconRect"/>
+                    <RichTextLabel Name="TreeName" Text="place-holder"/>
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal" HorizontalExpand="True" HorizontalAlignment="Right" MaxHeight="16">
+                    <BoxContainer Name ="TreeLevelsContainer" Orientation="Horizontal" HorizontalExpand="True" HorizontalAlignment="Right" Margin="0 0 2 0">
+                        <!-- Added here by code -->
+                    </BoxContainer>
+                    <ExperienceUiElements:FancyTextureButton Name="ShowSubLevelsButton" ToggleMode="True"
+                        BackgroundColor="{x:Static styleDef:ExperienceUiStyleDefinitions.BaseTextureButtonBackgroundColor}"
+                        PathIconNormal="/Textures/SS220/Interface/ExperienceView/unroll-button-normal.png"
+                        PathIconPressed="/Textures/SS220/Interface/ExperienceView/unroll-button-pressed.png"
+                        PathIconHover="/Textures/SS220/Interface/ExperienceView/unroll-button-hover.png"
+                        PathIconDisabled="/Textures/SS220/Interface/ExperienceView/unroll-button-disabled.png"/>
                 </BoxContainer>
             </BoxContainer>
-        </BoxContainer>
-        <BoxContainer Name="SubdataContainer" Access="Public" Orientation="Horizontal" Visible="False" Margin="20 2 0 2"
-            HorizontalExpand="True" VerticalExpand="True">
-            <TextureButton Name="AddSublevelPoint" TexturePath="/Textures/SS220/Interface/ExperienceView/add-button.png" MaxHeight="32"
-                VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 0 5 0"/>
-            <BoxContainer Name="SublevelsContainer" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <!-- Sublevels visual added by code -->
+            <BoxContainer Name="SubdataContainer" Access="Public" Orientation="Horizontal" Visible="False" HorizontalAlignment="Right"
+                HorizontalExpand="True" VerticalExpand="True" MaxHeight="32"  VerticalAlignment="Center">
+                <Label Name="SpendPointsShower" Text="123456" HorizontalExpand="True" VerticalAlignment="Center" Margin="0 0 5 3"/>
+                <BoxContainer Name="SublevelsContainer" HorizontalAlignment="Right" VerticalAlignment="Center" VerticalExpand="True" Margin="0 0 2 0">
+                    <!-- Sublevels visual added by code -->
+                </BoxContainer>
+                <PanelContainer MouseFilter="Pass" Margin="0 2 0 6">
+                    <PanelContainer.PanelOverride>
+                        <gfx:StyleBoxFlat BackgroundColor="{x:Static styleDef:ExperienceUiStyleDefinitions.BaseTextureButtonBackgroundColor}"/>
+                    </PanelContainer.PanelOverride>
+                    <TextureButton Name="AddSublevelPoint" TexturePath="/Textures/SS220/Interface/ExperienceView/add-button.png"
+                        VerticalExpand="True" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                </PanelContainer>
             </BoxContainer>
-            <RichTextLabel Name="SpendPointsShower" Text="123456" HorizontalExpand="True" VerticalAlignment="Center" Margin="4 0"/>
         </BoxContainer>
     </BoxContainer>
 </ExperienceUiElements:ExperienceTreeContainer>

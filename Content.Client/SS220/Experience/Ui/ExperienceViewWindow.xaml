@@ -8,8 +8,8 @@
     xmlns:styleDef="clr-namespace:Content.Client.SS220.Experience.Ui"
     Title="{Loc 'experience-view-panel-title'}"
     Resizable="True"
-    MinSize="320 420"
-    SetSize="320 420"
+    MinSize="380 240"
+    SetSize="380 420"
     RectClipContent="False">
     <Control>
         <PanelContainer>
@@ -17,24 +17,31 @@
                 <gfx:StyleBoxFlat BackgroundColor="{x:Static styleDef:ExperienceUiStyleDefinitions.BaseBackgroundColor}"/>
             </PanelContainer.PanelOverride>
         </PanelContainer>
-        <ScrollContainer HScrollEnabled="False">
-            <BoxContainer Orientation="Vertical" Margin="5">
-                <RichTextLabel Name="KnowledgeTitle" Text="{Loc 'experience-view-knowledge-title'}"/>
-                <BoxContainer Name="knowledgesContainer" Orientation="Vertical" Margin="{x:Static styleDef:ExperienceUiStyleDefinitions.BaseTabLikeThickness}">
-                    <!-- Added by code -->
-                </BoxContainer>
-                <RichTextLabel Name="TreeGroupsTitle" Text="{Loc 'experience-view-tree-groups-title'}"/>
-                <BoxContainer Name="ExperienceTreeGroupsContainer" Orientation="Vertical" Margin="{x:Static styleDef:ExperienceUiStyleDefinitions.BaseTabLikeThickness}">
-                    <!-- Added by code -->
-                </BoxContainer>
-                <BoxContainer Name="FreePointsOptionContainer" Orientation="Vertical" HorizontalAlignment="Left">
-                    <RichTextLabel Name="FreePointsShower" Text="free points placeholder"/>
-                    <BoxContainer Orientation="Horizontal" HorizontalAlignment="Left">
-                        <Button Name="ClearSpentPointsButton" Text="{Loc 'experience-view-tree-clear-spent-points-button-text'}"/>
-                        <Button Name="SubmitButton" Text="{Loc 'experience-view-tree-submit-button-text'}"/>
+        <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True">
+            <ScrollContainer HScrollEnabled="False" VerticalExpand="True" HorizontalExpand="True">
+                <BoxContainer Orientation="Vertical" Margin="5">
+                    <RichTextLabel Name="KnowledgeTitle" Text="{Loc 'experience-view-knowledge-title'}" HorizontalAlignment="Center" ModulateSelfOverride="#e9dac0"/>
+                    <BoxContainer Name="knowledgesContainer" Orientation="Vertical" Margin="{x:Static styleDef:ExperienceUiStyleDefinitions.BaseTabLikeThickness}">
+                        <!-- Added by code -->
+                    </BoxContainer>
+                    <PanelContainer StyleClasses="LowDivider" Margin="5" SetHeight="2" >
+                        <PanelContainer.PanelOverride>
+                            <gfx:StyleBoxFlat BackgroundColor="#e9dac0"/>
+                        </PanelContainer.PanelOverride>
+                    </PanelContainer>
+                    <RichTextLabel Name="TreeGroupsTitle" Text="{Loc 'experience-view-tree-groups-title'}" HorizontalAlignment="Center" ModulateSelfOverride="#e9dac0"/>
+                    <BoxContainer Name="ExperienceTreeGroupsContainer" Orientation="Vertical" Margin="{x:Static styleDef:ExperienceUiStyleDefinitions.BaseTabLikeThickness}">
+                        <!-- Added by code -->
                     </BoxContainer>
                 </BoxContainer>
+            </ScrollContainer>
+            <BoxContainer Name="FreePointsOptionContainer" Orientation="Vertical" HorizontalAlignment="Left">
+                <RichTextLabel Name="FreePointsShower" Text="free points placeholder"/>
+                <BoxContainer Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Button Name="ClearSpentPointsButton" Text="{Loc 'experience-view-tree-clear-spent-points-button-text'}"/>
+                    <Button Name="SubmitButton" Text="{Loc 'experience-view-tree-submit-button-text'}"/>
+                </BoxContainer>
             </BoxContainer>
-        </ScrollContainer>
+        </BoxContainer>
     </Control>
 </controls:FancyWindow>

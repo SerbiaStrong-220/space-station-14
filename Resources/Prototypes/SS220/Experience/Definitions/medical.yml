@@ -53,6 +53,7 @@
       level: 2
   knowledges:
   - MedicalKnowledge
+  - InformedPersonalKnowledge
   addSublevelPoints: 5
 
 - type: experienceDefinition

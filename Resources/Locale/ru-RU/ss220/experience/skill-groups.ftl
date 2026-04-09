@@ -1,7 +1,7 @@
-skill-group-general = Общие
+skill-group-general = [bold] Общие [/bold]
 
-skill-group-medicine = Медицина
+skill-group-medicine = [bold] Медицина [/bold]
 
-skill-group-security = Безопасность
+skill-group-security = [bold] Безопасность [/bold]
 
-skill-group-engineering = Инженерия
+skill-group-engineering = [bold] Инженерия [/bold]

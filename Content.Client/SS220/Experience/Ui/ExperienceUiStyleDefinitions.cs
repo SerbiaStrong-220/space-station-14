@@ -9,9 +9,9 @@ namespace Content.Client.SS220.Experience.Ui;
 public static class ExperienceUiStyleDefinitions
 {
     public static readonly float RightMargin = 30f;
-    public static readonly float LeftMargin = 10f;
+    public static readonly float LeftMargin = 15f;
 
-    public static readonly Thickness BaseTabLikeThickness = new(LeftMargin, 0f, 0f, 0f);
+    public static readonly Thickness BaseTabLikeThickness = new(LeftMargin, 0f, LeftMargin, 0f);
     public static readonly Thickness DividerThickness = new(LeftMargin, 0f, RightMargin, 0f);
     public static readonly Thickness DividerOnlyRightThickness = new(0f, 0f, RightMargin, 0f);
 
@@ -20,6 +20,8 @@ public static class ExperienceUiStyleDefinitions
     public static readonly float TooltipMinWidth = 300f;
 
     public static readonly Color BaseBackgroundColor = Color.FromHex("#1B1B1E");
+    public static readonly Color BaseTextureButtonBackgroundColor = Color.FromHex("#3F3F3E");
+    public static readonly Color InnerDividerColor = Color.FromHex("#faeace").WithAlpha(0.8f);
 
     public static Control RichExperienceTooltip(Control hovered)
     {

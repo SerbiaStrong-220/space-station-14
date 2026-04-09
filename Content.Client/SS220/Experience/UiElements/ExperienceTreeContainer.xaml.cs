@@ -26,9 +26,12 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
     // common
     private ResPath _fullBarResPath = new ResPath("/Textures/SS220/Interface/ExperienceView/full-bar.png");
     private ResPath _emptyBarResPath = new ResPath("/Textures/SS220/Interface/ExperienceView/empty-bar.png");
+    private ResPath _fullTriangleResPath = new ResPath("/Textures/SS220/Interface/ExperienceView/full-triangle.png");
+    private ResPath _emptyTriangleResPath = new ResPath("/Textures/SS220/Interface/ExperienceView/empty-triangle.png");
 
     private Color _unavailableLevelColor = Color.Red;
     private Color _gainedLevelColor = Color.Green;
+    private Color _addedSublevelColor = Color.LightYellow;
 
     private ShaderInstance _subLevelFillingShaderInstance;
     private ShaderInstance _levelFillingShaderInstance;
@@ -83,12 +86,16 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
         _subLevelFillingShaderInstance = _prototype.Index(_fillingShaderProto).InstanceUnique();
         _levelFillingShaderInstance = _prototype.Index(_fillingShaderProto).InstanceUnique();
 
-        Margin = ExperienceUiStyleDefinitions.BaseTabLikeThickness;
-
         ShowSubLevelsButton.OnPressed += (_) =>
         {
             OpenedByUser = !SubdataContainer.Visible;
             SubdataContainer.Visible = !SubdataContainer.Visible;
+        };
+
+        // sync different states of control and button
+        SubdataContainer.OnVisibilityChanged += (self) =>
+        {
+            ShowSubLevelsButton.Pressed = self.Visible;
         };
 
         AddSublevelPoint.OnPressed += (args) =>
@@ -142,18 +149,20 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
         SublevelsContainer.RemoveAllChildren();
         for (var i = 0; i < maxSublevels; i++)
         {
+            var color = GetColorForSublevel(i, correctInfo);
+
             if (i < correctInfo.Sublevel)
-                SublevelsContainer.AddChild(GetExperienceSublevelVisualRect(ExperienceSystem.EndLearningProgress));
+                SublevelsContainer.AddChild(GetExperienceSublevelVisualRect(ExperienceSystem.EndLearningProgress, color));
             else if (i > correctInfo.Sublevel)
-                SublevelsContainer.AddChild(GetExperienceSublevelVisualRect(ExperienceSystem.StartLearningProgress));
+                SublevelsContainer.AddChild(GetExperienceSublevelVisualRect(ExperienceSystem.StartLearningProgress, color));
             else
-                SublevelsContainer.AddChild(GetExperienceSublevelVisualRect(_progress, shader: _subLevelFillingShaderInstance));
+                SublevelsContainer.AddChild(GetExperienceSublevelVisualRect(_progress, color, shader: _subLevelFillingShaderInstance));
         }
 
         SpendPointsShower.Visible = _haveFreePoints;
         AddSublevelPoint.Visible = _haveFreePoints;
 
-        SpendPointsShower.SetMessage(Loc.GetString("experience-tree-container-spend-points", ("SpendPointsSign", int.Sign(SpendPoints)), ("SpendPoints", SpendPoints)));
+        SpendPointsShower.Text = Loc.GetString("experience-tree-container-spend-points", ("SpendPointsSign", int.Sign(SpendPoints)), ("SpendPoints", SpendPoints));
     }
 
     public void SetProgressAndUpdate(FixedPoint4 progress)
@@ -195,32 +204,32 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
 
     private TextureRect GetExperienceSublevelVisualRect(FixedPoint4 fillingRatio, Color? color = null, in ShaderInstance? shader = null)
     {
-        return GetVisualRect(fillingRatio.Float(), ExperienceSystem.EndLearningProgress.Float(), ExperienceSystem.StartLearningProgress.Float(), color, shader);
+        return GetVisualRect(fillingRatio.Float(), ExperienceSystem.EndLearningProgress.Float(), ExperienceSystem.StartLearningProgress.Float(), color, shader, useBars: false);
     }
 
-    private TextureRect GetVisualRect(float fillingRatio, float endValue, float firstValue, Color? color = null, in ShaderInstance? shader = null)
+    private TextureRect GetVisualRect(float fillingRatio, float endValue, float firstValue, Color? color = null, in ShaderInstance? shader = null, bool useBars = true)
     {
         var control = new TextureRect();
-
-        control.ModulateSelfOverride = color;
+        if (color is not null)
+            control.Modulate = color.Value;
 
         if (fillingRatio == endValue)
         {
-            control.TexturePath = _fullBarResPath.CanonPath;
+            control.TexturePath = useBars ? _fullBarResPath.CanonPath : _fullTriangleResPath.CanonPath;
             control.ShaderOverride = null;
             return control;
         }
 
         if (fillingRatio == firstValue)
         {
-            control.TexturePath = _emptyBarResPath.CanonPath;
+            control.TexturePath = useBars ? _emptyBarResPath.CanonPath : _emptyTriangleResPath.CanonPath;
             control.ShaderOverride = null;
             return control;
         }
 
         var background = new TextureRect
         {
-            TexturePath = _emptyBarResPath.CanonPath,
+            TexturePath = useBars ? _emptyBarResPath.CanonPath : _emptyTriangleResPath.CanonPath,
             HorizontalAlignment = HAlignment.Center,
             VerticalAlignment = VAlignment.Center
         };
@@ -237,7 +246,7 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
             control.ShaderOverride = uniqueShader;
         }
 
-        control.TexturePath = _fullBarResPath.CanonPath;
+        control.TexturePath = useBars ? _fullBarResPath.CanonPath : _fullTriangleResPath.CanonPath;
 
         return control;
     }
@@ -252,6 +261,14 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
 
         if (levelToDraw < info.Level && levelToDraw > _overrideInfo.Level)
             return _unavailableLevelColor;
+
+        return null;
+    }
+
+    private Color? GetColorForSublevel(int sublevelToDraw, SkillTreeInfo info)
+    {
+        if (sublevelToDraw > info.Sublevel)
+            return _addedSublevelColor;
 
         return null;
     }

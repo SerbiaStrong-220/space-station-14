@@ -1,6 +1,6 @@
 experience-view-panel-title = Опыт персонажа
-experience-view-knowledge-title = Знания
-experience-view-tree-groups-title = Умения
+experience-view-knowledge-title = [head=3] Знания [/head]
+experience-view-tree-groups-title = [head=3] Умения [/head]
 
 experience-view-free-sublevel-points-text = Всего свободных очков: { $FreeSublevel }
 

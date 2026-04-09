@@ -157,7 +157,10 @@ public sealed partial class ExperienceEditorWindow : FancyWindow
         HighDivider? divider = null;
         foreach (var knowledge in data.Knowledges.OrderBy((x) => x.Id))
         {
-            divider = new();
+            divider = new()
+            {
+                ModulateSelfOverride = ExperienceUiStyleDefinitions.InnerDividerColor,
+            };
             var knowledgeControl = new KnowledgeLabel();
             knowledgeControl.SetKnowledge(knowledge);
 
@@ -193,6 +196,7 @@ public sealed partial class ExperienceEditorWindow : FancyWindow
             divider = new()
             {
                 Margin = ExperienceUiStyleDefinitions.DividerThickness,
+                ModulateSelfOverride = ExperienceUiStyleDefinitions.InnerDividerColor,
             };
             SkillEditor.AddChild(divider);
         }
