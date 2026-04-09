@@ -8,8 +8,8 @@
     xmlns:styleDef="clr-namespace:Content.Client.SS220.Experience.Ui"
     Title="{Loc 'experience-view-panel-title'}"
     Resizable="True"
-    MinSize="380 240"
-    SetSize="380 420"
+    MinSize="380 280"
+    SetSize="380 440"
     RectClipContent="False">
     <Control>
         <PanelContainer>
@@ -35,7 +35,7 @@
                     </BoxContainer>
                 </BoxContainer>
             </ScrollContainer>
-            <BoxContainer Name="FreePointsOptionContainer" Orientation="Vertical" HorizontalAlignment="Left">
+            <BoxContainer Name="FreePointsOptionContainer" Orientation="Vertical" HorizontalAlignment="Center" Margin="5">
                 <RichTextLabel Name="FreePointsShower" Text="free points placeholder"/>
                 <BoxContainer Orientation="Horizontal" HorizontalAlignment="Left">
                     <Button Name="ClearSpentPointsButton" Text="{Loc 'experience-view-tree-clear-spent-points-button-text'}"/>
