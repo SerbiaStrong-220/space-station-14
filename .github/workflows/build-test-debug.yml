@@ -6,11 +6,11 @@ on:
   merge_group:
   pull_request:
     types: [ opened, reopened, synchronize, ready_for_review ]
-    branches: [ master ]
+    branches: [ master, staging-upstream, staging-upstream-fixes ]
 
 jobs:
   build:
-    if: github.actor != 'IanComradeBot' && github.event.pull_request.draft == false
+    if: (github.actor != 'IanComradeBot' || github.actor != 'Maxon') && github.event.pull_request.draft == false
     strategy:
       matrix:
         os: [ubuntu-latest]
