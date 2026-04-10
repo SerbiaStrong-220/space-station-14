@@ -976,3 +976,15 @@ cqc_lethal: CQCManual
 
 # 2026-04-06 - SS220 remove necrosol
 JugNecrosol: JugArcryox
+
+# 2026-04-10 - SS220 old parts to new
+RightLegSkeleton: OrganSkeletonPersonLegRight
+HeadVulpkanin: OrganVulpkaninHead
+LeftArmVulpkanin: OrganVulpkaninArmLeft
+RightArmVulpkanin: OrganVulpkaninArmRight
+LeftHandVulpkanin: OrganVulpkaninHandLeft
+RightHandVulpkanin: OrganVulpkaninHandRight
+LeftLegVulpkanin: OrganVulpkaninLegLeft
+RightLegVulpkanin: OrganVulpkaninLegRight
+LeftFootVulpkanin: OrganVulpkaninFootLeft
+RightFootVulpkanin: OrganVulpkaninFootRight
