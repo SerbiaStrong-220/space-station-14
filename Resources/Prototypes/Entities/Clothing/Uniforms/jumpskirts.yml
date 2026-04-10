@@ -450,7 +450,7 @@
 
 
 - type: entity
-  parent: ClothingUniformSkirtBase
+  parent: [ClothingUniformSkirtBase, ClothingUniformFoldableBaseSS220] #SS220 Foldable jumpskirts
   id: ClothingUniformJumpskirtLibrarian
   name: librarian jumpskirt
   description: A cosy green jumper fit for a curator of books.
@@ -533,7 +533,7 @@
     price: 500
 
 - type: entity
-  parent: ClothingUniformSkirtBase
+  parent: [ClothingUniformSkirtBase, ClothingUniformFoldableBaseSS220] #SS220 Foldable jumpskirts
   id: ClothingUniformJumpskirtTacticool
   name: tacticool jumpskirt
   description: Uniform for subpar operative LARPers performing tactical insulated glove theft in deep space.
