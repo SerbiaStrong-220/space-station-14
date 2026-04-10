@@ -14,18 +14,22 @@
       department: Medical
       time: 216000 # 60 hrs
   startingGear: SeniorPhysicianGear
+  experienceDefinition: SeniorPhysicianRoleExperience
   icon: "JobIconSeniorPhysician"
   supervisors: job-supervisors-cmo
   access:
   - Medical
   - Maintenance
   - Chemistry
-  #SS220 LimitationRevive - start
   special:
   - !type:AddComponentSpecial
     components:
-    - type: DefibrillatorSkill
-  #SS220 LimitationRevive - end
+    - type: MentorRole
+      teachInfo:
+        Medicine:
+          multiplier: 1.5
+          maxBuffSkillLevel: 3
+
 - type: startingGear
   id: SeniorPhysicianGear
   equipment:

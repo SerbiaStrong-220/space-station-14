@@ -12,6 +12,7 @@
       species:
       - Felinid #SS220-jobbans end
   startingGear: DetectiveGear
+  experienceDefinition: DetectiveRoleExperience # SS220-experience
   icon: "JobIconDetective"
   supervisors: job-supervisors-hos #SS220-Transfer Detective To Security
   canBeAntag: false #SS220-Transfer Detective To Security
