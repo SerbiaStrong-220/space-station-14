@@ -9,26 +9,18 @@
     state: combat_hypo
   - type: GuardianCreator
     guardianProto: MobHoloparasiteGuardian
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-HoloparasiteInjector-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: corvax-hidden-desc-HoloparasiteInjector-research
-      jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
-    - label: corvax-hidden-desc-IllegalImplants-medical
-      jobRequired:
-        - Paramedic
-        - MedicalDoctor
-        - ChiefMedicalOfficer
-        - Brigmedic #SS220 brigmedic implanters fix
-# Corvax-HiddenDesc-End
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-HoloparasiteInjector-syndicate ]
+      ScienceKnowledge: [ corvax-hidden-desc-HoloparasiteInjector-research ]
+      MedicalKnowledge: [ corvax-hidden-desc-IllegalImplants-medical ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ScienceKnowledge, null]
+    - [MedicalKnowledge, ent-HoloparasiteInjector]
+    hiddenName: ent-HoloparasiteInjector
+# SS220-hidden-desc-end
 
 - type: entity
   name: holoclown injector
@@ -38,26 +30,18 @@
   components:
   - type: GuardianCreator
     guardianProto: MobHoloClownGuardian
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-HoloClownInjector-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: corvax-hidden-desc-HoloClownInjector-research
-      jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
-    - label: corvax-hidden-desc-IllegalImplants-medical
-      jobRequired:
-        - Paramedic
-        - MedicalDoctor
-        - ChiefMedicalOfficer
-        - Brigmedic #SS220 brigmedic implanters fix
-# Corvax-HiddenDesc-End
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-HoloClownInjector-syndicate ]
+      ScienceKnowledge: [ corvax-hidden-desc-HoloClownInjector-research ]
+      MedicalKnowledge: [ corvax-hidden-desc-IllegalImplants-medical ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ScienceKnowledge, null]
+    - [MedicalKnowledge, ent-HoloClownInjector]
+    hiddenName: ent-HoloClownInjector
+# SS220-hidden-desc-end
 
 - type: entity
   name: magical lamp

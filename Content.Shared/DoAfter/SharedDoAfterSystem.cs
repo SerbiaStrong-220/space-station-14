@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Damage;
 using Content.Shared.Hands.Components;
-using Content.Shared.SS220.ChangeSpeedDoAfters;
 using Content.Shared.SS220.ChangeSpeedDoAfters.Events;
 using Content.Shared.Tag;
 using Robust.Shared.GameStates;
@@ -20,6 +19,11 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TagSystem _tag = default!;
+
+    //SS220-change-doafter-bar-color-begin
+    public readonly Color FasterDoAfterBarColor = Color.FromHex("#ffe054ff");
+    public readonly Color SlowerDoAfterBarColor = Color.FromHex("#5d4dc8ff");
+    //SS220-change-doafter-bar-color-end
 
     /// <summary>
     ///     We'll use an excess time so stuff like finishing effects can show.
@@ -200,10 +204,20 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         id = new DoAfterId(args.User, comp.NextId++);
 
         //ss220 add traits start
+        var baseDelay = args.Delay;
         RaiseLocalEvent(args.User, new BeforeDoAfterStartEvent(args, id.Value.Index), true);
         //ss220 add traits end
 
         var doAfter = new DoAfter(id.Value.Index, args, GameTiming.CurTime);
+
+        //SS220-change-doafter-bar-color-begin
+        doAfter.BarColorOverride = args.Delay.CompareTo(baseDelay) switch
+        {
+            < 0 => FasterDoAfterBarColor,
+            > 0 => SlowerDoAfterBarColor,
+            _ => null
+        };
+        //SS220-change-doafter-bar-color-end
 
         // Networking yay
         args.NetTarget = GetNetEntity(args.Target);

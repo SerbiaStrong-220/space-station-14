@@ -28,6 +28,7 @@
     # SS220 Role requirements end
   weight: 10
   startingGear: ChiefEngineerGear
+  experienceDefinition: ChiefEngineerRoleExperience # SS220-experience
   icon: "JobIconChiefEngineer"
   supervisors: job-supervisors-captain
   access:
@@ -43,7 +44,6 @@
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff
-      - type: DefibrillatorSkill #SS220 LimitationRevive
 
 - type: startingGear
   id: ChiefEngineerGear
