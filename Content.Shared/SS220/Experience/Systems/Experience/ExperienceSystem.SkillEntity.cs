@@ -255,7 +255,7 @@ public sealed partial class ExperienceSystem : EntitySystem
 
             if (currentInfo.Level == ensureInfo.Level)
             {
-                currentInfo.Sublevel = currentInfo.Sublevel > ensureInfo.Sublevel ? currentInfo.Sublevel : ensureInfo.Sublevel;
+                currentInfo.Sublevel = Math.Max(currentInfo.Sublevel, ensureInfo.Sublevel);
                 continue;
             }
 

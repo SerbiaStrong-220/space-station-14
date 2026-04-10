@@ -66,7 +66,7 @@ public sealed partial class ExperienceSystem : EntitySystem
         skillPrototype = null;
         var skillIndex = skillLevel - 1;
 
-        if (skillIndex > treeProto.SkillTree.Count || skillIndex < 0)
+        if (skillIndex >= treeProto.SkillTree.Count || skillIndex < 0)
         {
             Log.Error($"Got error with resolving skill in {treeProto.ID} skill tree with provided level {skillLevel}");
             return false;

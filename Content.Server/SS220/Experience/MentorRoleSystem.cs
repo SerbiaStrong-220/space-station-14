@@ -30,7 +30,7 @@ public sealed class MentorRoleSystem : EntitySystem
 
         foreach (var experienceEntity in experienceEntities)
         {
-            var affectedComp = EnsureComp<AffectedByMentorComponent>(entity);
+            var affectedComp = EnsureComp<AffectedByMentorComponent>(experienceEntity);
 
             foreach (var (skillTreeId, info) in entity.Comp.TeachInfo)
             {
