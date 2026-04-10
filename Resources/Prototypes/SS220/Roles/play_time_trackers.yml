@@ -116,3 +116,12 @@
 
 - type: playTimeTracker
   id: JobCBURNLeader
+
+- type: playTimeTracker
+  id: JobRedWingsOfficer
+
+- type: playTimeTracker
+  id: JobRedWingsMedic
+  
+- type: playTimeTracker
+  id: JobRedWingsPilot

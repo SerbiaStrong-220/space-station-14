@@ -252,3 +252,43 @@
         reagents:
         - ReagentId: Amatoxin
           Quantity: 10
+
+- type: entity
+  parent: DeathRattleImplant
+  id: DeathRattleImplantInterdyne
+  name: interdyne death rattle implant
+  description: This implant will inform the Interdyne radio channel should the user fall into critical condition or die.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RattleOnTrigger
+    radioChannel: Interdyne
+  - type: HiddenDescription
+    entries:
+    - label: hidden-desc-DeathRattleImplanterInterdyne-medical
+      jobRequired:
+      - Paramedic
+      - MedicalDoctor
+      - SeniorPhysician
+      - Brigmedic
+      - ChiefMedicalOfficer
+    - label: hidden-desc-DeathRattleImplanterInterdyne-research
+      jobRequired:
+      - ResearchAssistant
+      - ResearchDirector
+      - Scientist
+      - Borg
+      - SeniorResearcher
+    - label: hidden-desc-DeathRattleImplanterInterdyne-security
+      jobRequired:
+      - Captain
+      - HeadOfSecurity
+      - SeniorOfficer
+      - SecurityOfficer
+      - Warden
+      - Detective
+      - BlueShield
+    - label: hidden-desc-DeathRattleImplanterInterdyne-syndicate
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative
+      - Thief
