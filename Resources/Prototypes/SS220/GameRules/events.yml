@@ -47,3 +47,17 @@
     maxOccurrences: 1
     weight: 1
   - type: MindShieldCombustionRule
+
+- type: entity
+  id: GravityGeneratorAnomaly
+  parent: BaseStationEventShortDelay
+  components:
+  - type: StationEvent
+    weight: 4
+    startAnnouncement: station-event-gravity-generator-anomaly-start-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+      params:
+        volume: -4
+    duration: 5
+  - type: GravityGeneratorAnomalyRule

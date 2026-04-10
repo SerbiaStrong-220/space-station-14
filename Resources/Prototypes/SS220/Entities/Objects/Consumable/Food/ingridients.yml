@@ -144,7 +144,7 @@
   name: green caramel rooster
   parent: FoodBakingBase
   id: GreenCaramelRoosterFood
-  description: There is, a pleasent sourness
+  description: There is a pleasant sourness.
   components:
   - type: Sprite
     sprite: SS220/Objects/Consumable/Food/caramel_rooster.rsi
@@ -183,7 +183,7 @@
   name: red caramel rooster
   parent: GreenCaramelRoosterFood
   id: RedCaramelRoosterFood
-  description: Taste, like sweet berries
+  description: Tastes like sweet berries.
   components:
   - type: Sprite
     sprite: SS220/Objects/Consumable/Food/caramel_rooster.rsi
@@ -203,7 +203,7 @@
   name: yellow caramel rooster
   parent: GreenCaramelRoosterFood
   id: YellowCaramelRoosterFood
-  description: Taste, not like chicken
+  description: Tastes not like chicken.
   components:
   - type: Sprite
     sprite: SS220/Objects/Consumable/Food/caramel_rooster.rsi
