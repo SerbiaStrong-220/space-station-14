@@ -21,6 +21,8 @@ hidden-desc-AdrenalImplant-medical = [color=#52B4E9]Этот имплант со
 hidden-desc-AdrenalImplant-research = [color=#D381C9]Имплант с запасом лечебных растворов, предназначенных для поддержки жизненных функций.[/color]
 hidden-desc-AdrenalImplant-syndicate = [color=#E31735]Имплант с инъекционным механизмом, содержащий жидкости для ускоренного восстановления организма.[/color]
 
+corvax-hidden-desc-MindShieldImplanter-security = Вы узнаете имплант внутри, это имплант защиты разума.
+
 hidden-desc-DeathRattleImplanterInterdyne-medical = [color=#52B4E9]Сверив серийные номера, вы понимаете, что это легальный, сертифицированный имплант Interdyne Pharmaceutics внутри.[/color]
 hidden-desc-DeathRattleImplanterInterdyne-research = [color=#D381C9]Внутри имплантера находится имплант "Предсмертный хрип".[/color]
 hidden-desc-DeathRattleImplanterInterdyne-security = [color=#009ae1]Внутри имплантера находится имплант "Предсмертный хрип" гражданского образца.[/color]
@@ -63,7 +65,7 @@ ent-DeathRattleImplanterInterdyne = { ent-Implanter }
     .suffix = Interdyne Rattle
 
 ent-DeathRattleImplantInterdyne = имплант "Предсмертный хрип"
-    .desc = Микрочип, который вживляют под кожу.   
+    .desc = Микрочип, который вживляют под кожу.
 
 # Uplink locale
 

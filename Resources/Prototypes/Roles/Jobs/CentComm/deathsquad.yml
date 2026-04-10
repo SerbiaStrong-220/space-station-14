@@ -5,6 +5,7 @@
   playTimeTracker: JobDeathSquad
   setPreference: false
   startingGear: DeathSquadOperativeGear #SS220-DeathSquad Update
+  experienceDefinition: DeathSquadRoleExperience # SS220-experience
   icon: "JobIconDeathsquadOperative" #SS220-DeathSquad Update
   supervisors: job-supervisors-centcom
   canBeAntag: false
@@ -17,11 +18,6 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, DeathRattleImplantCentcomm ]
-  #SS220 LimitationRevive - start
-  - !type:AddComponentSpecial
-    components:
-    - type: DefibrillatorSkill
-  #SS220 LimitationRevive - end
 
 - type: startingGear
   id: DeathSquadGear

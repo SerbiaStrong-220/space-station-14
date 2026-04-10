@@ -275,6 +275,12 @@ public abstract class SharedJetpackSystem : EntitySystem
             RemComp<ActiveJetpackComponent>(uid);
         }
 
+        // SS220-add-gas-usage-modifier-begin
+        TryComp<ActiveJetpackComponent>(uid, out var activeJetpack);
+
+        var ev = new JetPackActivatedEvent((uid, activeJetpack));
+        RaiseLocalEvent(user.Value, ref ev);
+        // SS220-add-gas-usage-modifier-end
 
         Appearance.SetData(uid, JetpackVisuals.Enabled, enabled);
         Dirty(uid, component);

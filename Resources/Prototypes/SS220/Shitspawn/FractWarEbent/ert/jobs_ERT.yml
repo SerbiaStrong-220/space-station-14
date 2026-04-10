@@ -170,8 +170,6 @@
     - type: NpcFactionMember
       factions:
       - EbentNanoTrasen
-    - type: DefibrillatorSkill
-      chanceWithMedSkill: 1
     - type: LimitationRevive
       reviveLimit: 3
       beforeDamageDelay: 180
@@ -183,6 +181,7 @@
   name: job-name-spec-ops-leader
   description: job-description-spec-ops-leader
   startingGear: EbentSpecOpsLeaderGear
+  experienceDefinition: SpecOpsLeaderRoleExperience
   playTimeTracker: SpecOpsLeader
   setPreference: false
   canBeAntag: false
@@ -233,8 +232,6 @@
     - type: NpcFactionMember
       factions:
       - EbentNanoTrasen
-    - type: DefibrillatorSkill
-      chanceWithMedSkill: 1
     - type: LimitationRevive
       reviveLimit: 3
       beforeDamageDelay: 180
@@ -246,6 +243,7 @@
   name: job-name-spec-ops-engineer
   description: job-description-spec-ops-engineer
   startingGear: EbentSpecOpsEngineerGear
+  experienceDefinition: SpecOpsEngineerRoleExperience
   playTimeTracker: SpecOpsEngineer
   setPreference: false
   canBeAntag: false
@@ -301,8 +299,6 @@
     - type: NpcFactionMember
       factions:
       - EbentNanoTrasen
-    - type: DefibrillatorSkill
-      chanceWithMedSkill: 1
     - type: LimitationRevive
       reviveLimit: 3
       beforeDamageDelay: 180
@@ -314,6 +310,7 @@
   name: job-name-spec-ops-corpsman
   description: job-description-spec-ops-corpsman
   startingGear: EbentSpecOpsCorpsmanGear
+  experienceDefinition: SpecOpsCorpsmanRoleExperience
   playTimeTracker: SpecOpsCorpsman
   setPreference: false
   canBeAntag: false
@@ -366,8 +363,6 @@
     - type: NpcFactionMember
       factions:
       - EbentNanoTrasen
-    - type: DefibrillatorSkill
-      chanceWithMedSkill: 1
     - type: LimitationRevive
       reviveLimit: 3
       beforeDamageDelay: 180
@@ -377,6 +372,7 @@
   name: job-name-spec-ops-cmo
   description: job-description-spec-ops-cmo
   startingGear: EbentSpecOpsCMOGear
+  experienceDefinition: SpecOpsCMORoleExperience
   playTimeTracker: SpecOpsCMO
   setPreference: false
   canBeAntag: false
@@ -433,8 +429,6 @@
     - type: NpcFactionMember
       factions:
       - EbentNanoTrasen
-    - type: DefibrillatorSkill
-      chanceWithMedSkill: 1
     - type: LimitationRevive
       reviveLimit: 3
       beforeDamageDelay: 180
@@ -444,6 +438,7 @@
   name: job-name-spec-ops-fighter
   description: job-description-spec-ops-fighter
   startingGear: EbentSpecOpsTrooperGear
+  experienceDefinition: SpecOpsFighterRoleExperience
   playTimeTracker: SpecOpsFighter
   setPreference: false
   canBeAntag: false

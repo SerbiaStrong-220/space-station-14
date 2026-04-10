@@ -34,26 +34,18 @@
   - type: GhostRoleMobSpawner
     prototype: MobHumanSyndicateAgentSpy
     selectablePrototypes: ["SyndicateAgentMedic", "SyndicateAgentSpy", "SyndicateAgentThief"]
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-ReinforcementRadioSyndicate-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: corvax-hidden-desc-ReinforcementRadio-engineering
-      jobRequired:
-        - ChiefEngineer
-        - AtmosphericTechnician
-        - StationEngineer
-        - TechnicalAssistant
-    - label: corvax-hidden-desc-ReinforcementRadio-research
-      jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
-# Corvax-HiddenDesc-End
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-ReinforcementRadioSyndicate-syndicate ]
+      EngineerKnowledge: [ corvax-hidden-desc-ReinforcementRadio-engineering ]
+      ScienceKnowledge: [ corvax-hidden-desc-ReinforcementRadio-research ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [EngineerKnowledge, null]
+    - [ScienceKnowledge, null]
+    hiddenName: ent-ReinforcementRadio
+# SS220-hidden-desc-end
 
 - type: entity
   parent: ReinforcementRadio
@@ -92,26 +84,18 @@
   - type: GhostRoleMobSpawner
     prototype: MobMonkeySyndicateAgent
     selectablePrototypes: ["SyndicateMonkey", "SyndicateKobold"]
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-ReinforcementRadioSyndicateMonkey-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: corvax-hidden-desc-ReinforcementRadio-engineering
-      jobRequired:
-        - ChiefEngineer
-        - AtmosphericTechnician
-        - StationEngineer
-        - TechnicalAssistant
-    - label: corvax-hidden-desc-ReinforcementRadio-research
-      jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
-# Corvax-HiddenDesc-End
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-ReinforcementRadioSyndicateMonkey-syndicate ]
+      EngineerKnowledge: [ corvax-hidden-desc-ReinforcementRadio-engineering ]
+      ScienceKnowledge: [ corvax-hidden-desc-ReinforcementRadio-research ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [EngineerKnowledge, null]
+    - [ScienceKnowledge, null]
+    hiddenName: ent-ReinforcementRadio
+# SS220-hidden-desc-end
 
 
 - type: entity
@@ -164,23 +148,15 @@
       job: SyndicateBorg
     - type: GhostRoleMobSpawner
       prototype: PlayerBorgSyndicateAssaultBattery
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
     - type: HiddenDescription
       entries:
-      - label: corvax-hidden-desc-ReinforcementRadioSyndicateCyborgAssault-syndicate
-        whitelistMindRoles:
-        - TraitorRole
-        - NukeOperative
-      - label: corvax-hidden-desc-ReinforcementRadio-engineering
-        jobRequired:
-          - ChiefEngineer
-          - AtmosphericTechnician
-          - StationEngineer
-          - TechnicalAssistant
-      - label: corvax-hidden-desc-ReinforcementRadio-research
-        jobRequired:
-          - ResearchAssistant
-          - ResearchDirector
-          - Scientist
-          - Borg
-# Corvax-HiddenDesc-End
+        SyndicateAgentKnowledge: [ corvax-hidden-desc-ReinforcementRadioSyndicateCyborgAssault-syndicate ]
+        EngineerKnowledge: [ corvax-hidden-desc-ReinforcementRadio-engineering ]
+        ScienceKnowledge: [ corvax-hidden-desc-ReinforcementRadio-research ]
+      nameEntries:
+      - [SyndicateAgentKnowledge, null]
+      - [EngineerKnowledge, null]
+      - [ScienceKnowledge, null]
+      hiddenName: ent-ReinforcementRadio
+# SS220-hidden-desc-end
