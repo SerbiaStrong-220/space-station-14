@@ -3,6 +3,7 @@ light_mode unshaded;
 uniform sampler2D SCREEN_TEXTURE;
 uniform highp float visibility; // number between -1 and 1
 uniform mediump vec2 reference;
+uniform highp float hideDistortion; // SS220-stealth-no-distortion: 1.0 = disable distortion at full invisibility
 
 const mediump float time_scale = 0.25;
 const mediump float distance_scale = 0.125;
@@ -23,6 +24,11 @@ void fragment() {
     // COLOR = vec4(w,w,w,1.0);
 
     w *= (3.0 + visibility * 2.0);
+    // SS220 stealth no distortion begin
+    // When hideDistortion is active and entity is fully invisible,
+    // eliminate distortion offset to remove visible artifacts.
+    w *= 1.0 - step(0.5, hideDistortion) * step(visibility, -0.999);
+    // SS220 stealth no distortion end
 
     highp vec4 background = zTextureSpec(SCREEN_TEXTURE, ( FRAGCOORD.xy + vec2(w) ) * SCREEN_PIXEL_SIZE );
 

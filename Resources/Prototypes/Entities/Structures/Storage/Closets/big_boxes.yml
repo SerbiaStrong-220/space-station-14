@@ -87,10 +87,19 @@
       quiet: true
     - type: Stealth
       hadOutline: true
-      # SS220 Changes invis so that box is less visible at all times.
+      # SS220 stealth box rework start
+      hideDistortion: true
+      # SS220 stealth box rework end
     - type: StealthOnMove
-      passiveVisibilityRate: -1
-      movementVisibilityRate: 0
+      # SS220 stealth box rework start
+      passiveVisibilityRate: -0.3
+      movementVisibilityRate: 0.15
+      # SS220 stealth box rework end
+    # SS220 stealth box rework start
+    - type: MovementSpeedModifier
+      baseWalkSpeed: 3
+      baseSprintSpeed: 4
+    # SS220 stealth box rework end
 # Corvax-HiddenDesc-Start
     - type: HiddenDescription
       entries:

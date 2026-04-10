@@ -95,6 +95,10 @@ public sealed class StealthSystem : SharedStealthSystem
         _shader.SetParameter("reference", reference);
         _shader.SetParameter("visibility", visibility);
 
+        // SS220 stealth no distortion begin
+        _shader.SetParameter("hideDistortion", component.HideDistortionAtFullVisibility && visibility <= -1f ? 1f : 0f);
+        // SS220 stealth no distortion end
+
         visibility = MathF.Max(0, visibility);
         _sprite.SetColor((uid, args.Sprite), new Color(visibility, visibility, 1, 1));
     }

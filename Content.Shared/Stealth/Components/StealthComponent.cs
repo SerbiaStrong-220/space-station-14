@@ -72,6 +72,15 @@ public sealed partial class StealthComponent : Component
     /// </summary>
     [DataField("examinedDesc")]
     public string ExaminedDesc = "stealth-visual-effect";
+
+    // SS220 stealth no distortion begin
+    /// <summary>
+    /// If true, disables the distortion shader effect when the entity
+    /// reaches full invisibility (visibility = -1f).
+    /// </summary>
+    [DataField("hideDistortion")]
+    public bool HideDistortionAtFullVisibility;
+    // SS220 stealth no distortion end
 }
 
 [Serializable, NetSerializable]
@@ -80,11 +89,15 @@ public sealed class StealthComponentState : ComponentState
     public readonly float Visibility;
     public readonly TimeSpan? LastUpdated;
     public readonly bool Enabled;
+    // SS220 stealth no distortion begin
+    public readonly bool HideDistortionAtFullVisibility;
+    // SS220 stealth no distortion end
 
-    public StealthComponentState(float stealthLevel, TimeSpan? lastUpdated, bool enabled)
+    public StealthComponentState(float stealthLevel, TimeSpan? lastUpdated, bool enabled, bool hideDistortionAtFullVisibility) // SS220 stealth no distortion
     {
         Visibility = stealthLevel;
         LastUpdated = lastUpdated;
         Enabled = enabled;
+        HideDistortionAtFullVisibility = hideDistortionAtFullVisibility; // SS220 stealth no distortion
     }
 }
