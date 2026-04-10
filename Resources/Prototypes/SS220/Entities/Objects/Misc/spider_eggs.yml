@@ -48,8 +48,6 @@
       - !type:PlaySoundBehavior
         sound:
           collection: desecration
-      - !type:SpillBehavior
-        solution: food
       - !type:SpawnEntitiesBehavior
         spawn:
           EggshellsSpider:

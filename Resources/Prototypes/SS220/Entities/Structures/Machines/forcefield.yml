@@ -113,6 +113,7 @@
     softness: 8.0
   - type: Appearance
   - type: Battery
+    netsync: false
     startingCharge: 0
     maxCharge: 5000
   - type: ExaminableBattery

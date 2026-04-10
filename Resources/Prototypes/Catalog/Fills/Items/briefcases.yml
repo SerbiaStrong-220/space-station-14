@@ -34,20 +34,19 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: ClothingOuterCoatJensenSyndie
-        - id: ClothingUniformJumpsuitTacticool
+        # - id: ClothingOuterCoatJensenSyndie # SS220-lobbying-bundle-less-items
+        # - id: ClothingUniformJumpsuitTacticool # SS220-lobbying-bundle-less-items
         - id: ClothingEyesGlassesSunglasses
         - id: SpaceCash30000
-        - id: EncryptionKeySyndie
+        # - id: EncryptionKeySyndie # SS220-lobbying-bundle-less-items
         - id: RubberStampTrader
         - id: PhoneInstrumentSyndicate
-        - id: ClothingHandsGlovesCombat
+        # - id: ClothingHandsGlovesCombat # SS220-lobbying-bundle-less-items
         - id: ClothingMaskNeckGaiter
         # SS220-lobbying-bundle-fake-money begin
         - id: ClothingUniformJumpsuitLawyerBlackSyndieLobbyingBundle
         - id: ClothingShoesBootsLaceup
         - id: SpaceCashFake50000
-        - id: RubberStampTrader
         # SS220-lobbying-bundle-fake-money end
 
 - type: entity

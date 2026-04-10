@@ -481,11 +481,10 @@
         - id: BalloonElite
         - id: BalloonJuggernaut
         - id: BalloonCommander
-        - id: SnapPopBox
         - id: GrenadeDummy
-          amount: 2
+          amount: 1 # SS220 more space for other items
         - id: SyndieTrickyBomb
-          amount: 2
+          amount: 1 # SS220 more space for other items
         #ss220 toys begin
         #- id: SnapPopBox
         - id: BoxDonkSoftBox
@@ -500,10 +499,10 @@
           - id: WeaponPistolViperToy
           - id: WeaponPistolCobraToy
           - id: FoamCrossbow
-        - !type:GroupSelector
-          children:
-          - id: DoubleToySword
-          - id: ToySword
+        # - !type:GroupSelector
+        #   children:
+        #   - id: DoubleToySword
+        #   - id: ToySword
       #ss220 toys end
 
 - type: entity
