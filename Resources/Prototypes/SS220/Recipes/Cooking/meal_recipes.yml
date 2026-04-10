@@ -59,12 +59,13 @@
   name: Okroshka recipe
   result: FoodSoupOkroshka
   time: 10
+  reagents:
+    EggCooked: 6
   solids:
     FoodBowlBig: 1
     FoodMeatChicken: 1
     FoodPotato: 1
     FoodOnionSlice: 1
-    FoodEggBoiled: 1
 
 - type: microwaveMealRecipe
   id: RecipeOkroshkaKvass
@@ -73,12 +74,12 @@
   time: 10
   reagents:
     Kvass: 10
+    EggCooked: 6
   solids:
     FoodBowlBig: 1
     FoodMeatChicken: 1
     FoodPotato: 1
     FoodOnionSlice: 1
-    FoodEggBoiled: 1
 
 - type: microwaveMealRecipe
   id: RecipeVinaigrette

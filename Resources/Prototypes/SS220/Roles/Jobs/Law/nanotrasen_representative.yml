@@ -13,6 +13,7 @@
       - Human
   weight: 20
   startingGear: NanoTrasenRepresentativeGear
+  experienceDefinition: IAARoleExperience
   icon: "JobIconNanotrasen" #SS220 TODO NanoTraisen Representative
   requireAdminNotify: true
   joinNotifyCrew: true

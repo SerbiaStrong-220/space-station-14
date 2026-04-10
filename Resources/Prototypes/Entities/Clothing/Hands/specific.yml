@@ -17,20 +17,15 @@
     - type: Fiber
       fiberMaterial: fibers-chameleon
     - type: FingerprintMask
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
     - type: HiddenDescription
       entries:
-      - label: corvax-hidden-desc-Chameleon-syndicate
-        whitelistMindRoles:
-        - TraitorRole
-        - NukeOperative
-      - label: corvax-hidden-desc-Chameleon-research
-        jobRequired:
-          - ResearchAssistant
-          - ResearchDirector
-          - Scientist
-          - Borg
-# Corvax-HiddenDesc-End
+        SyndicateAgentKnowledge: [ corvax-hidden-desc-Chameleon-syndicate ]
+        ScienceKnowledge: [ corvax-hidden-desc-Chameleon-research ]
+      nameEntries:
+      - [SyndicateAgentKnowledge, null]
+      hiddenName: null
+# SS220-hidden-desc-end
 
 - type: entity
   parent: ClothingHandsChameleon
@@ -40,27 +35,19 @@
   - type: Thieving
     stripTimeReduction: 2
     stealthy: true
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-Chameleon-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: corvax-hidden-desc-ThievingGloves-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: corvax-hidden-desc-Chameleon-thief
-      whitelistMindRoles:
-      - ThiefRole
-    - label: corvax-hidden-desc-ThievingGloves-thief
-      whitelistMindRoles:
-      - ThiefRole
-    - label: corvax-hidden-desc-Chameleon-research
-      jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
-# Corvax-HiddenDesc-End
+      SyndicateAgentKnowledge:
+        - corvax-hidden-desc-Chameleon-syndicate
+        - corvax-hidden-desc-ThievingGloves-syndicate
+      ThiefKnowledge:
+        - corvax-hidden-desc-Chameleon-thief
+        - corvax-hidden-desc-ThievingGloves-thief
+      ScienceKnowledge: [ corvax-hidden-desc-Chameleon-research ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ThiefKnowledge, null]
+    - [ScienceKnowledge, null]
+    hiddenName: null
+# SS220-hidden-desc-end
