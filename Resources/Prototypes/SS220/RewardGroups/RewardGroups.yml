@@ -50,6 +50,7 @@
     SponsorBoxJujutsuShlepa: 4 # Вторая итерация
     SponsorCigCarton: 2
     ClothingWristWatchUssp: 2
+    ClothingUniformJumpsuitJabroniOutfit: 4
     ClothingSponsorSamuraiJacket: 1 # Вторая итерация
     ClothingHeadHatDevilHorns: 1 # Вторая итерация
     ClothingHeadHatHalo: 1 # Вторая итерация
@@ -94,7 +95,7 @@
   requiredRole: Spriter
   isExactRoleRequired: true
   isHiddenOnInsufficient: true
-  
+
 - type: ShlepaRewardGroup
   id: QA
   name: Обеспечение качества
