@@ -35,3 +35,6 @@ ent-ClothingEyesQuartermasterGlasses = очки квартирмейстера
 ent-ClothingEyesVisorNinjaFake = { ent-ClothingEyesVisorNinja }
     .desc = Пластиковая реплика ПНВ, которое носил ниндзя из популярного аниме.
     .suffix = Поддельный
+
+ent-ClothingEyesHudMediChem = химико-медицинские очки
+    .desc = Имеют поразительное сходство с очками из кинотеатра.

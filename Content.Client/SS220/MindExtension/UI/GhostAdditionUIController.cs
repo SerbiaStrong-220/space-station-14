@@ -3,11 +3,14 @@
 using Content.Client.UserInterface.Systems.Gameplay;
 using Content.Shared.Ghost;
 using Content.Shared.SS220.MindExtension.Events;
+using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
 using Robust.Shared.Timing;
 
 namespace Content.Client.SS220.MindExtension.UI;
+
+[UsedImplicitly]
 public sealed partial class GhostAdditionUIController : UIController, IOnSystemChanged<MindExtensionSystem>
 {
     [Dependency] private readonly IEntityNetworkManager _net = default!;
@@ -15,7 +18,7 @@ public sealed partial class GhostAdditionUIController : UIController, IOnSystemC
 
     [UISystemDependency] private readonly MindExtensionSystem _extensionSystem = default!;
 
-    private GhostAdditionGui? additionGui => UIManager.GetActiveUIWidgetOrNull<GhostAdditionGui>();
+    private GhostAdditionGui? AdditionGui => UIManager.GetActiveUIWidgetOrNull<GhostAdditionGui>();
 
     public override void Initialize()
     {
@@ -31,11 +34,12 @@ public sealed partial class GhostAdditionUIController : UIController, IOnSystemC
         if (_extensionSystem?.RespawnTime is not null)
         {
             var respawnRemainTime = _extensionSystem.RespawnTime.Value - _gameTiming.CurTime;
-            additionGui?.SetRespawnRemainTimer(respawnRemainTime);
+            AdditionGui?.SetRespawnRemainTimer(respawnRemainTime);
         }
         else
-            additionGui?.LockRespawnTimer();
+            AdditionGui?.LockRespawnTimer();
     }
+
     private void OnScreenLoad()
     {
         LoadGui();
@@ -48,23 +52,26 @@ public sealed partial class GhostAdditionUIController : UIController, IOnSystemC
 
     public void LoadGui()
     {
-        if (additionGui == null)
+        if (AdditionGui == null)
             return;
 
-        additionGui.OnRespawnPressed += RequestRespawn;
-        additionGui.OnReturnToBodyPressed += RequestReturnToBody;
-        additionGui.BodyMenuWindow.OnFollowBodyAction += OnFollowBodyAction;
-        additionGui.BodyMenuWindow.OnToBodyAction += OnToBodyAction;
-        additionGui.BodyMenuWindow.OnDeleteTrailPointAction += DeleteTrailPointAction;
+        AdditionGui.OnRespawnPressed += RequestRespawn;
+        AdditionGui.OnReturnToBodyPressed += RequestReturnToBody;
+        AdditionGui.BodyMenuWindow.OnFollowBodyAction += OnFollowBodyAction;
+        AdditionGui.BodyMenuWindow.OnToBodyAction += OnToBodyAction;
+        AdditionGui.BodyMenuWindow.OnDeleteTrailPointAction += DeleteTrailPointAction;
     }
 
     public void UnloadGui()
     {
-        if (additionGui == null)
+        if (AdditionGui == null)
             return;
 
-        additionGui.OnRespawnPressed -= RequestRespawn;
-        additionGui.OnReturnToBodyPressed -= RequestReturnToBody;
+        AdditionGui.OnRespawnPressed -= RequestRespawn;
+        AdditionGui.OnReturnToBodyPressed -= RequestReturnToBody;
+        AdditionGui.BodyMenuWindow.OnFollowBodyAction -= OnFollowBodyAction;
+        AdditionGui.BodyMenuWindow.OnToBodyAction -= OnToBodyAction;
+        AdditionGui.BodyMenuWindow.OnDeleteTrailPointAction -= DeleteTrailPointAction;
     }
 
     public void OnSystemLoaded(MindExtensionSystem system)
@@ -101,13 +108,15 @@ public sealed partial class GhostAdditionUIController : UIController, IOnSystemC
     private void RequestBodies()
     {
         _extensionSystem.RequestBodies();
-        additionGui?.BodyMenuWindow.OpenCentered();
+        AdditionGui?.BodyMenuWindow.OpenCentered();
     }
+
     private void OnFollowBodyAction(NetEntity entity)
     {
         var msg = new GhostWarpToTargetRequestEvent(entity);
         _net.SendSystemNetworkMessage(msg);
     }
+
     private void OnToBodyAction(NetEntity entity)
     {
         _extensionSystem?.MoveToBody(entity);
@@ -124,21 +133,22 @@ public sealed partial class GhostAdditionUIController : UIController, IOnSystemC
 
     private void OnGhostBodyListResponse(GhostBodyListResponse ev)
     {
-        additionGui?.BodyMenuWindow.UpdateBodies(ev.TrailPoints);
+        AdditionGui?.BodyMenuWindow.UpdateBodies(ev.TrailPoints);
     }
 
     private void OnDeleteTrailPointResponse(DeleteTrailPointResponse response)
     {
-        additionGui?.BodyMenuWindow.DeleteBodyCard(response.Entity);
+        AdditionGui?.BodyMenuWindow.DeleteBodyCard(response.Entity);
     }
 
     private void OnExtensionReturnResponse(ExtensionReturnResponse response)
     {
-        additionGui?.BodyMenuWindow.Close();
+        AdditionGui?.BodyMenuWindow.Close();
     }
+
     private void OnRespawnedResponse(RespawnedResponse response)
     {
-        additionGui?.BodyMenuWindow.Close();
+        AdditionGui?.BodyMenuWindow.Close();
     }
 
     #endregion
