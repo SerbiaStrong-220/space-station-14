@@ -272,7 +272,7 @@
   id: FigurinesThief
   values:
     prefix: figurines-thief-
-    count: 3 # SS220-griffin-dataset-to-out-count
+    count: 5
 
 - type: localizedDataset
   id: FigurinesSkeleton
@@ -290,7 +290,7 @@
   id: FigurinesGriffin
   values:
     prefix: figurines-griffin-
-    count: 3 # SS220-griffin-dataset-to-out-count
+    count: 5
 
 - type: localizedDataset
   id: FigurinesMechGeneric
