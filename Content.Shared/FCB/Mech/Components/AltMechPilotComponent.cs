@@ -24,6 +24,7 @@ public sealed partial class AltMechPilotComponent : Component
 
     [DataField]
     public EntProtoId PilotUiAction = "ActionPilotOpenUI";//Why? Because mech and pilot couldn't have same actions so or this or adding/deleting actions aaaall the way
+
     [DataField]
     public EntProtoId PilotEjectAction = "ActionPilotEject";
 }
