@@ -69,3 +69,6 @@
     sprite: SS220/Objects/Consumable/Drinks/rrranta.rsi
   - type: Item
     sprite: SS220/Objects/Consumable/Drinks/rrranta.rsi
+  - type: EmptyCanCrush
+    CrushedCan: CrushedCanRrranta
+

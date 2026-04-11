@@ -35,6 +35,7 @@
   - type: Tag
     tags:
     - DrinkCan
+  - type: EmptyCanCrush #ss220
 
 ## Filled
 
@@ -60,6 +61,8 @@
     sprite: Objects/Consumable/Drinks/cola.rsi
   - type: Item
     sprite: Objects/Consumable/Drinks/cola.rsi
+  - type: EmptyCanCrush  #ss220
+    CrushedCan: CrushedCanCola
 
 # created when taking apart an ied
 - type: entity
@@ -96,6 +99,8 @@
     sprite: Objects/Consumable/Drinks/ice_tea_can.rsi
   - type: Item
     sprite: Objects/Consumable/Drinks/ice_tea_can.rsi
+  - type: EmptyCanCrush  #ss220
+    CrushedCan: CrushedCanIcedTea
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -115,6 +120,8 @@
     sprite: Objects/Consumable/Drinks/lemon-lime.rsi
   - type: Item
     sprite: Objects/Consumable/Drinks/lemon-lime.rsi
+  - type: EmptyCanCrush  #ss20
+    CrushedCan: CrushedCanLemonLime
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -167,6 +174,8 @@
       types:
         Blunt: 1
         Cold: 2 # Refreshing
+  - type: EmptyCanCrush  #ss220
+    CrushedCan: CrushedCanLemonLimeCranberry
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -186,6 +195,8 @@
     sprite: Objects/Consumable/Drinks/purple_can.rsi
   - type: Item
     sprite: Objects/Consumable/Drinks/purple_can.rsi
+  - type: EmptyCanCrush  #ss220
+    CrushedCan: CrushedCanGrape
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -209,6 +220,8 @@
     tags:
     - Beer
     - DrinkCan
+  - type: EmptyCanCrush  #ss220
+    CrushedCan: CrushedCanRootBeer
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -228,6 +241,8 @@
     sprite: Objects/Consumable/Drinks/sodawater.rsi
   - type: Item
     sprite: Objects/Consumable/Drinks/sodawater.rsi
+  - type: EmptyCanCrush  #ss220
+    CrushedCan: CrushedCanSodaWater
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -247,6 +262,8 @@
     sprite: Objects/Consumable/Drinks/space_mountain_wind.rsi
   - type: Item
     sprite: Objects/Consumable/Drinks/space_mountain_wind.rsi
+  - type: EmptyCanCrush  #ss220
+    CrushedCan: CrushedCanSpaceMountainWind
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -266,6 +283,8 @@
     sprite: Objects/Consumable/Drinks/space-up.rsi
   - type: Item
     sprite: Objects/Consumable/Drinks/space-up.rsi
+  - type: EmptyCanCrush  #ss220
+    CrushedCan: CrushedCanSpaceUp
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -282,9 +301,15 @@
           Quantity: 30
       grindable: *grindable
   - type: Sprite
-    sprite: SS220/Objects/Consumable/Drinks/sol_dry.rsi #ss220-drinks-can-resprite
+    sprite: Objects/Consumable/Drinks/sol_dry.rsi
   - type: Item
+<<<<<<< Updated upstream
+    sprite: Objects/Consumable/Drinks/sol_dry.rsi
+=======
     sprite: SS220/Objects/Consumable/Drinks/sol_dry.rsi #ss220-drinks-can-resprite
+  - type: EmptyCanCrush  #ss220
+    CrushedCan: CrushedCanSolDry
+>>>>>>> Stashed changes
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -304,9 +329,13 @@
     sprite: Objects/Consumable/Drinks/starkist.rsi
   - type: Item
     sprite: Objects/Consumable/Drinks/starkist.rsi
+  - type: EmptyCanCrush  #ss220
+    CrushedCan: CrushedCanStarkist
 
 - type: entity
   parent: DrinkCanBaseFull
+<<<<<<< Updated upstream
+=======
   id: DrinkRelaxingPeachCan
   name: Расслабляющая Персиковая Газировка
   description: Ходят слухи, что ежедневное употребление данного напитка сделает вас добрее и эмпатичнее к окружающим. Но это лишь слухи! Продается под взрывной маркой "РПГ"!
@@ -324,13 +353,17 @@
           Quantity: 8
         - ReagentId: DoctorsDelight
           Quantity: 6
+      grindable: *grindable
   - type: Sprite
     sprite: Objects/Consumable/Drinks/starkist.rsi
   - type: Item
     sprite: Objects/Consumable/Drinks/starkist.rsi
+  - type: EmptyCanCrush  #ss220
+    CrushedCan: CrushedCanRelaxingPeach
 
 - type: entity
   parent: DrinkCanBaseFull
+>>>>>>> Stashed changes
   id: DrinkTonicWaterCan
   name: tonic water can
   description: Quinine tastes funny, but at least it'll keep that Space Malaria away.
@@ -347,6 +380,8 @@
     sprite: Objects/Consumable/Drinks/tonic.rsi
   - type: Item
     sprite: Objects/Consumable/Drinks/tonic.rsi
+  - type: EmptyCanCrush  #ss220
+    CrushedCan: CrushedCanTonicWater
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -366,6 +401,8 @@
     sprite: Objects/Consumable/Drinks/fourteen_loko.rsi
   - type: Item
     sprite: Objects/Consumable/Drinks/fourteen_loko.rsi
+  - type: EmptyCanCrush  #ss220
+    CrushedCan: CrushedCanFourteenLoko
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -385,6 +422,8 @@
     sprite: Objects/Consumable/Drinks/changelingsting.rsi
   - type: Item
     sprite: Objects/Consumable/Drinks/changelingsting.rsi
+  - type: EmptyCanCrush  #ss220
+    CrushedCan: CrushedCanChangelingSting
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -404,6 +443,8 @@
     sprite: Objects/Consumable/Drinks/dr_gibb.rsi
   - type: Item
     sprite: Objects/Consumable/Drinks/dr_gibb.rsi
+  - type: EmptyCanCrush  #ss220
+    CrushedCan: CrushedCanDrGibb
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -427,6 +468,8 @@
     sprite: Objects/Consumable/Drinks/robustnukie.rsi
   - type: Item
     sprite: Objects/Consumable/Drinks/robustnukie.rsi
+  - type: EmptyCanCrush  #ss220
+    CrushedCan: CrushedCanNukie
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -446,6 +489,8 @@
     sprite: Objects/Consumable/Drinks/energy_drink.rsi
   - type: Item
     sprite: Objects/Consumable/Drinks/energy_drink.rsi
+  - type: EmptyCanCrush  #ss220
+    CrushedCan: CrushedCanEnergyDrink
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -465,6 +510,8 @@
     sprite: Objects/Consumable/Drinks/shamblersjuice.rsi
   - type: Item
     sprite: Objects/Consumable/Drinks/shamblersjuice.rsi
+  - type: EmptyCanCrush  #ss220
+    CrushedCan: CrushedCanShamblersJuice
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -484,6 +531,8 @@
     sprite: Objects/Consumable/Drinks/pwrgame.rsi
   - type: Item
     sprite: Objects/Consumable/Drinks/pwrgame.rsi
+  - type: EmptyCanCrush  #ss220
+    CrushedCan: CrushedCanPwrGame
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -500,13 +549,15 @@
           Quantity: 30
       grindable: *grindable
   - type: Sprite
-    sprite: SS220/Objects/Consumable/Drinks/beer_can.rsi #ss220-drinks-can-resprite
+    sprite: Objects/Consumable/Drinks/beer_can.rsi
   - type: Item
-    sprite: SS220/Objects/Consumable/Drinks/beer_can.rsi #ss220-drinks-can-resprite
+    sprite: Objects/Consumable/Drinks/beer_can.rsi
   - type: Tag
     tags:
     - Beer
     - DrinkCan
+  - type: EmptyCanCrush  #ss220
+    CrushedCan: CrushedCanBeer
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -523,10 +574,12 @@
           Quantity: 30
       grindable: *grindable
   - type: Sprite
-    sprite: SS220/Objects/Consumable/Drinks/wine_can.rsi #ss220-drinks-can-resprite
+    sprite: Objects/Consumable/Drinks/wine_can.rsi
   - type: Item
-    sprite: SS220/Objects/Consumable/Drinks/wine_can.rsi #ss220-drinks-can-resprite
+    sprite: Objects/Consumable/Drinks/wine_can.rsi
   - type: Tag
     tags:
     - Wine
     - DrinkCan
+  - type: EmptyCanCrush  #ss220
+    CrushedCan: CrushedCanWine
