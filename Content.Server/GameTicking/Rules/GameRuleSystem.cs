@@ -38,7 +38,7 @@ public abstract partial class GameRuleSystem<T> : EntitySystem where T : ICompon
         if (args.Forced || args.Cancelled)
             return;
 
-        var allPlayerCount = PlayerManager.Sessions.Count(session => session.Status is not SessionStatus.Disconnected or SessionStatus.Zombie); // SS220-make-antag-selection-based-on-all-players
+        var allPlayerCount = PlayerManager.Sessions.Count(session => session.Status is not (SessionStatus.Disconnected or SessionStatus.Zombie)); // SS220-make-antag-selection-based-on-all-players
 
         var query = QueryAllRules();
         while (query.MoveNext(out var uid, out _, out var gameRule))

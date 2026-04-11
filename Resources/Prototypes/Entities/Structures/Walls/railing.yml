@@ -7,9 +7,9 @@
   components:
   - type: Sprite
     drawdepth: SmallObjects
-    sprite: Structures/Walls/railing.rsi
+    sprite: SS220/Structures/Walls/railing.rsi # SS220 | Railing resprite
   - type: Icon
-    sprite: Structures/Walls/railing.rsi
+    sprite: SS220/Structures/Walls/railing.rsi # SS220 | Railing resprite
   - type: Physics
     bodyType: Static
   - type: InteractionOutline
