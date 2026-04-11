@@ -112,7 +112,7 @@
     tags:
     - CorgiWearable
     - WhitelistChameleon
-    - PressureProtectionSuit # SS220-add-atmos-suit-weightless-protection-
+    - PressureProtectionSuit # SS220-add-atmos-suit-weightless-protection
   - type: HideLayerClothing
     slots:
     - Tail
@@ -207,7 +207,7 @@
   # SS220-add-tag-for-proper-skill-check-begin
   - type: Tag
     tags:
-    - Hardsuit
+    - PressureProtectionSuit
   # SS220-add-tag-for-proper-skill-check-end
   - type: UseDelay
     delay: 5 # disable time
