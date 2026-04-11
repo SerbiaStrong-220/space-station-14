@@ -32,6 +32,7 @@
 
 - type: startingGear
   id: ERTLeaderGear
+  experienceDefinition: ERTLeaderRoleExperience # SS220-experience-update
   equipment:
     jumpsuit: ClothingUniformJumpsuitERTLeader
     back: ClothingBackpackERTLeader
@@ -56,6 +57,7 @@
 
 - type: startingGear
   id: ERTLeaderGearEVA
+  experienceDefinition: ERTLeaderRoleExperience # SS220-experience-update
   equipment:
     jumpsuit: ClothingUniformJumpsuitERTLeader
     back: ClothingBackpackERTLeader
@@ -80,6 +82,7 @@
 
 - type: startingGear
   id: ERTLeaderGearEVALecter
+  experienceDefinition: ERTLeaderRoleExperience # SS220-experience-update
   equipment:
     jumpsuit: ClothingUniformJumpsuitERTLeader
     back: ClothingBackpackERTLeader
@@ -146,6 +149,7 @@
 
 - type: startingGear
   id: ERTChaplainGear
+  experienceDefinition: ERTChaplainRoleExperience # SS220-experience
   equipment:
     jumpsuit: ClothingUniformJumpsuitERTChaplain
     back: ClothingBackpackERTChaplain
@@ -177,6 +181,7 @@
 
 - type: startingGear
   id: ERTChaplainGearEVA
+  experienceDefinition: ERTChaplainRoleExperience # SS220-experience
   equipment:
     jumpsuit: ClothingUniformJumpsuitERTChaplain
     back: ClothingBackpackERTChaplain
@@ -250,6 +255,7 @@
 
 - type: startingGear
   id: ERTEngineerGear
+  experienceDefinition: ERTEngineerRoleExperience # SS220-experience
   equipment:
     jumpsuit: ClothingUniformJumpsuitERTEngineer
     back: ClothingBackpackERTEngineer
@@ -278,6 +284,7 @@
 
 - type: startingGear
   id: ERTEngineerGearEVA
+  experienceDefinition: ERTEngineerRoleExperience # SS220-experience
   equipment:
     jumpsuit: ClothingUniformJumpsuitERTEngineer
     back: ClothingBackpackERTEngineer
@@ -343,6 +350,7 @@
 
 - type: startingGear
   id: ERTSecurityGear
+  experienceDefinition: ERTSecurityRoleExperience # SS220-experience
   equipment:
     jumpsuit: ClothingUniformJumpsuitERTSecurity
     back: ClothingBackpackERTSecurity
@@ -367,6 +375,7 @@
 
 - type: startingGear
   id: ERTSecurityGearEVA
+  experienceDefinition: ERTSecurityRoleExperience # SS220-experience
   equipment:
     jumpsuit: ClothingUniformJumpsuitERTSecurity
     back: ClothingBackpackERTSecurity
@@ -391,6 +400,7 @@
 
 - type: startingGear
   id: ERTSecurityGearEVALecter
+  experienceDefinition: ERTSecurityRoleExperience # SS220-experience
   equipment:
     jumpsuit: ClothingUniformJumpsuitERTSecurity
     back: ClothingBackpackERTSecurity
@@ -457,6 +467,7 @@
 
 - type: startingGear
   id: ERTMedicalGear
+  experienceDefinition: ERTMedicalRoleExperience # SS220-experience
   equipment:
     jumpsuit: ClothingUniformJumpsuitERTMedic
     back: ClothingBackpackERTMedical
@@ -481,6 +492,7 @@
 
 - type: startingGear
   id: ERTMedicalGearEVA
+  experienceDefinition: ERTMedicalRoleExperience # SS220-experience
   equipment:
     jumpsuit: ClothingUniformJumpsuitERTMedic
     back: ClothingBackpackERTMedical
@@ -542,6 +554,7 @@
 
 - type: startingGear
   id: ERTJanitorGear
+  experienceDefinition: ERTJanitorRoleExperience # SS220-experience
   equipment:
     jumpsuit: ClothingUniformJumpsuitERTJanitor
     back: ClothingBackpackERTJanitor
@@ -564,6 +577,7 @@
 
 - type: startingGear
   id: ERTJanitorGearEVA
+  experienceDefinition: ERTJanitorRoleExperience # SS220-experience
   equipment:
     jumpsuit: ClothingUniformJumpsuitERTJanitor
     back: ClothingBackpackERTJanitor

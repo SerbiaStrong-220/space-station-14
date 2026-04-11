@@ -10,7 +10,7 @@
   components:
   - type: ConstructionDoAfterSkill
     durationScale: 1.6
-    failureChance: 0.6
+    failureChance: 0.4
     failurePopup: construction-fail-with-reinforced-material
     complexMaterials:
     - ReinforcedGlass
@@ -19,7 +19,7 @@
     - Plasteel
   - type: ConstructionToolDoAfterSkill
     durationScale: 1.6
-    failureChance: 0.3
+    failureChance: 0.2
 
 - type: skill
   id: ConstructionBase
@@ -33,7 +33,7 @@
   components:
   - type: ConstructionDoAfterSkill
     durationScale: 1.2
-    failureChance: 0.3
+    failureChance: 0.2
     failurePopup: construction-fail-with-reinforced-material
     complexMaterials:
     - ReinforcedGlass

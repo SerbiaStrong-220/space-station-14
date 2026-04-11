@@ -46,7 +46,7 @@ public abstract partial class BaseDoAfterSkillSystem<TComp, TEvent> : SkillEntit
 
     private void OnDoAfterEndInternal(Entity<TComp> entity, ref BeforeDoAfterCompleteEvent args)
     {
-        if (args.Args.Event is not TEvent)
+        if (args.Args.Event is not TEvent || args.Cancel)
             return;
 
         if (!SkillEffect(entity, args.Args))
@@ -54,7 +54,7 @@ public abstract partial class BaseDoAfterSkillSystem<TComp, TEvent> : SkillEntit
 
         OnDoAfterEnd(entity, ref args);
 
-        if (args.Cancel || args.Args.Used is null)
+        if (args.Args.Used is null)
             return;
 
         if (!LearnedAfterComplete(in args))
