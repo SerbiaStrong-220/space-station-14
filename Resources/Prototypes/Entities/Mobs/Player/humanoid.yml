@@ -487,7 +487,6 @@
   speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
   parent: ERTLeader
   components:
-    - type: DefibrillatorSkill #ss220 ert defib skill (#2787)
     - type: GhostRole
       name: ghost-role-information-ert-medical-name
       description: ghost-role-information-ert-medical-description
@@ -521,7 +520,6 @@
   speciesBlacklist: [ Diona, Skeleton, Vox, Felinid, Reptilian, Moth, Arachnid, SlimePerson, Tajaran] #SS220-centcom-human-ERT-update
   parent: ERTMedical
   components:
-    - type: DefibrillatorSkill #ss220 ert defib skill (#2787)
     - type: GhostRole
       name: ghost-role-information-ert-medical-name
       description: ghost-role-information-ert-medical-description

@@ -16,6 +16,7 @@
   # SS220-AITime-end
   canBeAntag: false
   icon: JobIconStationAi
+  experienceDefinition: StationAiRoleExperience # SS220-experience
   supervisors: job-supervisors-rd
   jobEntity: StationAiBrain
   jobPreviewEntity: PlayerStationAiPreview
@@ -29,6 +30,7 @@
   id: Borg
   name: job-name-borg
   description: job-description-borg
+  experienceDefinition: StationBorgsRoleExperience
   playTimeTracker: JobBorg
   requirements:
     - !type:OverallPlaytimeRequirement

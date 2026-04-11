@@ -35,6 +35,9 @@
       nameSegments:
       - NamesRedwingsLast
       nameFormat: name-format-redwings-officer
+    - type: RoleExperienceAdd
+      definitionId: SecurityOfficerRoleExperience
+      addSublevelPoints: 5
 
 - type: randomHumanoidSettings
   id: RedWingsMedic
@@ -54,6 +57,9 @@
       nameSegments:
       - NamesRedwingsLast
       nameFormat: name-format-redwings-medic
+    - type: RoleExperienceAdd
+      definitionId: BrigmedicRoleExperience
+      addSublevelPoints: 5
 
 - type: randomHumanoidSettings
   id: RedWingsPilot
@@ -73,3 +79,6 @@
       nameSegments:
       - NamesRedwingsLast
       nameFormat: name-format-redwings-pilot
+    - type: RoleExperienceAdd
+      definitionId: SecurityPilotRoleExperience
+      addSublevelPoints: 5
