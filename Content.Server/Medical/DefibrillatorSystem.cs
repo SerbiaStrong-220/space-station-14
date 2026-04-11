@@ -28,6 +28,7 @@ using Content.Server.SS220.LimitationRevive; //SS220 LimitationRevive
 using Content.Shared.Ghost; //SS220 LimitationRevive
 using Content.Shared.Inventory;
 using Content.Shared.SS220.Experience.Skill.Components;
+using Content.Shared.SS220.Surgery.Components;
 
 namespace Content.Server.Medical;
 
@@ -52,6 +53,7 @@ public sealed class DefibrillatorSystem : EntitySystem
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
     [Dependency] private readonly InventorySystem _inventory = default!; // SS220 NewDefib
+    [Dependency] private readonly IRobustRandom _random = default!; // SS220-defib-failure-chance
 
     // SS220
     private readonly LocId _directCompactDefibrillatorNonSurgeryUse = "direct-compact-defibrillator-cant-zap";
