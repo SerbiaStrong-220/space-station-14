@@ -21,6 +21,7 @@
 
 - type: startingGear
   id: DeathSquadGear
+  experienceDefinition: DeathSquadRoleExperience # SS220-experience
   equipment:
     jumpsuit: ClothingUniformJumpsuitDeathSquad
     back: ClothingBackpackDeathSquad

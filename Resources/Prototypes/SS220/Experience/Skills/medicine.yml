@@ -13,11 +13,11 @@
     defibrillatorSelfDamageChance: 0.6
   - type: MedicineDoAfterSkill
     durationScale: 1.5
-    failureChance: 0.35
+    failureChance: 0.3
     failurePopup: healing-item-use-failure
   - type: InjectorUseOnDoAfterSkill
     durationScale: 1.5
-    failureChance: 0.7
+    failureChance: 0.6
     failurePopup: injector-use-failure
     damageOnFailure:
       types:
@@ -41,7 +41,7 @@
     durationScale: 1
   - type: InjectorUseOnDoAfterSkill
     durationScale: 1
-    failureChance: 0.3
+    failureChance: 0.1
     failurePopup: injector-use-failure
     damageOnFailure:
       types:
