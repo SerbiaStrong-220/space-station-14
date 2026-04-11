@@ -1,7 +1,7 @@
-using Content.Shared.Chemistry.Reagent;// SS220 add movement speed modification depending on the adaptation
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
-using Content.Shared.SS220.ChemicalAdaptation;// SS220 add movement speed modification depending on the adaptation
+using Content.Shared.SS220.ChemicalAdaptation;
 using Content.Shared.StatusEffectNew;
 using Robust.Shared.Prototypes;
 
