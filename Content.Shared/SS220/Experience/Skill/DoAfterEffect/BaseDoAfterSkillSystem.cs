@@ -72,7 +72,7 @@ public abstract partial class BaseDoAfterSkillSystem<TComp, TEvent> : SkillEntit
     {
         if (!entity.Comp.FullBlock)
         {
-            args.Args.Delay *= entity.Comp.DurationScale;
+            args.Args.DelayModifier *= entity.Comp.DurationScale;
             return;
         }
 

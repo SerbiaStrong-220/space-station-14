@@ -201,7 +201,7 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
             return false;
         }
 
-        args.Delay *= _doAfterDelayModifier; // SS220-all-doafter-change-speed
+        args.DelayModifier *= _doAfterDelayModifier; // SS220-all-doafter-change-speed
 
         // Duplicate blocking & cancellation.
         if (!ProcessDuplicates(args, comp))
@@ -213,14 +213,14 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         id = new DoAfterId(args.User, comp.NextId++);
 
         //ss220 add traits start
-        var baseDelay = args.Delay;
         RaiseLocalEvent(args.User, new BeforeDoAfterStartEvent(args, id.Value.Index), true);
+        args.Delay *= args.DelayModifier;
         //ss220 add traits end
 
         var doAfter = new DoAfter(id.Value.Index, args, GameTiming.CurTime);
 
         //SS220-change-doafter-bar-color-begin
-        doAfter.BarColorOverride = args.Delay.CompareTo(baseDelay) switch
+        doAfter.BarColorOverride = args.DelayModifier.CompareTo(_doAfterDelayModifier) switch
         {
             < 0 => FasterDoAfterBarColor,
             > 0 => SlowerDoAfterBarColor,
