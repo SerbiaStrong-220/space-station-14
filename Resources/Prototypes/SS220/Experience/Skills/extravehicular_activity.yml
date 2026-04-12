@@ -9,11 +9,12 @@
     skillDescription: extravehicular-activity-initial-desc
   components:
   - type: JetPackUseSkill
-    failChance: 0.4
+    failChance: 0
+    gasUsageModifier: 1.5
   - type: WeightlessChangingReadySkill
-    hardsuitFallChance:  0.7
+    hardsuitFallChance: 0.3
     withoutHardsuitFallChance: 1
-    vomitChance: 1
+    vomitChance: 0.4
   - type: WeightlessDoAfterSkill
     durationScale: 1.3
 
@@ -28,13 +29,16 @@
     skillDescription: extravehicular-activity-base-desc
   components:
   - type: JetPackUseSkill
-    failChance: 0.2
+    failChance: 0
+    gasUsageModifier: 1.2
   - type: WeightlessChangingReadySkill
-    hardsuitFallChance:  0.3
+    hardsuitFallChance:  0.1
     withoutHardsuitFallChance: 0.5
-    vomitChance: 0.3
+    vomitChance: 0.2
   - type: WeightlessDoAfterSkill
     durationScale: 1.1
+  - type: EvaHelmetDoAfterSkill
+    durationScale: 0
 
 - type: skill
   id: ExtravehicularActivityTrained
@@ -47,12 +51,14 @@
     skillDescription: extravehicular-activity-trained-desc
   components:
   - type: WeightlessChangingReadySkill
-    hardsuitFallChance:  0.1
+    hardsuitFallChance:  0
     withoutHardsuitFallChance: 0.2
-    vomitChance: 0.1
+    vomitChance: 0
     weightlessAcceleration: 1.2
     weightlessFriction: 1.1
     weightlessModifier: 1.1
+  - type: EvaHelmetDoAfterSkill
+    durationScale: 0
   removeComponents:
   - type: WeightlessDoAfterSkill
   - type: JetPackUseSkill
@@ -72,7 +78,7 @@
     gasUsageModifier: 0.75
   - type: WeightlessChangingReadySkill
     hardsuitFallChance:  0
-    withoutHardsuitFallChance: 0.1
+    withoutHardsuitFallChance: 0
     vomitChance: 0
     weightlessAcceleration: 1.4
     weightlessFriction: 1.2

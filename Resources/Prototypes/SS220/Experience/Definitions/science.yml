@@ -2,20 +2,20 @@
   id: ResearchAssistantRoleExperience
   skills:
     Bureaucracy:
-      level: 1
+      level: 2
     ExtravehicularActivity:
-      level: 1
+      level: 2
     CombatTraining:
       level: 1
     Construction:
-      level: 1
+      level: 2
     Medicine:
-      level: 1
+      level: 2
     PhysicalTraining:
       level: 1
   knowledges:
   - ScienceKnowledge
-  addSublevelPoints: 15
+  addSublevelPoints: 10
 
 - type: experienceDefinition
   id: ResearchDirectorRoleExperience
@@ -25,7 +25,7 @@
     ExtravehicularActivity:
       level: 2
     CombatTraining:
-      level: 1
+      level: 2
     Construction:
       level: 2
     Medicine:
@@ -35,7 +35,7 @@
   knowledges:
   - InformedPersonalKnowledge
   - ScienceKnowledge
-  addSublevelPoints: 10
+  addSublevelPoints: 15
 
 - type: experienceDefinition
   id: SeniorResearcherRoleExperience
@@ -43,7 +43,7 @@
     Bureaucracy:
       level: 2
     ExtravehicularActivity:
-      level: 1
+      level: 2
     CombatTraining:
       level: 1
     Construction:
@@ -51,7 +51,7 @@
     Medicine:
       level: 2
     PhysicalTraining:
-      level: 1
+      level: 2
   knowledges:
   - ScienceKnowledge
   addSublevelPoints: 10
@@ -62,7 +62,7 @@
     Bureaucracy:
       level: 2
     ExtravehicularActivity:
-      level: 1
+      level: 2
     CombatTraining:
       level: 1
     Construction:
@@ -73,4 +73,4 @@
       level: 1
   knowledges:
   - ScienceKnowledge
-  addSublevelPoints: 10
+  addSublevelPoints: 15

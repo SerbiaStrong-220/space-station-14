@@ -15,7 +15,7 @@
       level: 3
   knowledges:
   - NinjaKnowledge
-  addSublevelPoints: 5
+  addSublevelPoints: 10
 
 - type: experienceDefinition
   id: WizardExperience

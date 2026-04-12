@@ -10,6 +10,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.SS220.Experience.Skill.Components;
 using Content.Shared.SS220.Experience.Systems;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -18,8 +19,6 @@ namespace Content.Shared.SS220.Experience.Skill.Systems;
 
 public sealed class DisarmOnDamageSkillSystem : SkillEntitySystem
 {
-    [Dependency] private readonly ExperienceSystem _experience = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
@@ -36,7 +35,7 @@ public sealed class DisarmOnDamageSkillSystem : SkillEntitySystem
 
     public void OnDamageChangedEvent(Entity<DisarmOnDamageSkillComponent> entity, ref DamageChangedEvent args)
     {
-        if (args.DamageDelta is null)
+        if (args.DamageDelta is null || !GameTiming.IsFirstTimePredicted)
             return;
 
         if (DamageSpecifier.GetPositive(args.DamageDelta).GetTotal() < entity.Comp.DamageThreshold)
@@ -63,7 +62,8 @@ public sealed class DisarmOnDamageSkillSystem : SkillEntitySystem
             _hands.TryDrop(experienceEntity.Value.Owner, hand);
         }
 
-        _popupSystem.PopupEntity(Loc.GetString(entity.Comp.OnDropPopup, ("target", Identity.Entity(experienceEntity.Value.Owner, EntityManager))), experienceEntity.Value.Owner, PopupType.MediumCaution);
+        _popupSystem.PopupPredicted(Loc.GetString(entity.Comp.OnDropPopup, ("target", Identity.Entity(experienceEntity.Value.Owner, EntityManager))),
+            experienceEntity.Value.Owner, experienceEntity.Value.Owner, PopupType.MediumCaution);
 
         TryAddToAdminLogs(entity, $"dropping all items in hands due to {nameof(DisarmOnDamageSkillComponent)}", LogImpact.High);
     }
