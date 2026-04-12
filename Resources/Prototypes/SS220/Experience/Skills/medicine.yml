@@ -21,8 +21,8 @@
     failurePopup: injector-use-failure
     damageOnFailure:
       types:
-        Slash: 3
-        Piercing: 6
+        Slash: 2
+        Piercing: 3
 
 - type: skill
   id: MedicineBase
@@ -39,6 +39,7 @@
     defibrillatorSelfDamageChance: 0
   - type: MedicineDoAfterSkill
     durationScale: 1
+    failureChance: 0
   - type: InjectorUseOnDoAfterSkill
     durationScale: 1
     failureChance: 0
