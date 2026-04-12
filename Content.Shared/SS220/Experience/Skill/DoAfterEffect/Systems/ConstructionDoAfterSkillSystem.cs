@@ -18,6 +18,6 @@ public sealed class ConstructionDoAfterSkillSystem : BaseDoAfterSkillSystem<Cons
             return;
 
         if (entity.Comp.ComplexMaterials.Contains(stack.StackTypeId))
-            base.OnDoAfterEnd(entity, ref args);
+            args.Args.Delay *= entity.Comp.ComplexMaterialDelayMultiplier;
     }
 }

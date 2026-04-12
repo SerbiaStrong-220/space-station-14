@@ -4,15 +4,15 @@
     Bureaucracy:
       level: 2
     ExtravehicularActivity:
-      level: 2
+      level: 3
     CombatTraining:
-      level: 2
+      level: 3
     Construction:
-      level: 2
+      level: 3
     Medicine:
-      level: 2
+      level: 3
     PhysicalTraining:
-      level: 2
+      level: 3
   knowledges:
   - AllJobKnowledge
   addSublevelPoints: 0

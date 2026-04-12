@@ -3,8 +3,10 @@ using System.Threading.Tasks;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Damage;
 using Content.Shared.Hands.Components;
+using Content.Shared.SS220.CCVars;
 using Content.Shared.SS220.ChangeSpeedDoAfters.Events;
 using Content.Shared.Tag;
+using Robust.Shared.Configuration;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -19,11 +21,14 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private readonly IConfigurationManager _cfg = default!; // SS220-alldoafter-change-speed
 
     //SS220-change-doafter-bar-color-begin
     public readonly Color FasterDoAfterBarColor = Color.FromHex("#ffe054ff");
     public readonly Color SlowerDoAfterBarColor = Color.FromHex("#5d4dc8ff");
     //SS220-change-doafter-bar-color-end
+
+    private float _doAfterDelayModifier = 1f; // SS220-all-doafter-change-speed
 
     /// <summary>
     ///     We'll use an excess time so stuff like finishing effects can show.
@@ -40,6 +45,8 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         SubscribeLocalEvent<DoAfterComponent, EntityUnpausedEvent>(OnUnpaused);
         SubscribeLocalEvent<DoAfterComponent, ComponentGetState>(OnDoAfterGetState);
         SubscribeLocalEvent<DoAfterComponent, ComponentHandleState>(OnDoAfterHandleState);
+
+        _cfg.OnValueChanged(CCVars220.DoafterDelayModifier, x => _doAfterDelayModifier = x, true); // SS220-all-doafter-change-speed
     }
 
     private void OnUnpaused(EntityUid uid, DoAfterComponent component, ref EntityUnpausedEvent args)
@@ -193,6 +200,8 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
             id = null;
             return false;
         }
+
+        args.Delay *= _doAfterDelayModifier; // SS220-all-doafter-change-speed
 
         // Duplicate blocking & cancellation.
         if (!ProcessDuplicates(args, comp))
