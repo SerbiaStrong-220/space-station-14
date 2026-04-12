@@ -1,13 +1,13 @@
 {
-    "version": 1,
-    "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
-    "copyright": "Made by @ozzi.daydream (Discord) for SS220, tie-equipped-INNERCLOTHING and icon_tie by dinazewwr for SS220",
-    "size": {
-        "x": 32,
-        "y": 32
-    },
-    "states": [
-        {
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Made by @ozzi.daydream (Discord) for SS220, tie-equipped-INNERCLOTHING and icon_tie by dinazewwr for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
       "name": "icon"
     },
     {
