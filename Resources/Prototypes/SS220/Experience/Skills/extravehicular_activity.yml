@@ -12,7 +12,7 @@
     failChance: 0
     gasUsageModifier: 1.5
   - type: WeightlessChangingReadySkill
-    hardsuitFallChance:  0.3
+    hardsuitFallChance: 0.3
     withoutHardsuitFallChance: 1
     vomitChance: 0.4
   - type: WeightlessDoAfterSkill
