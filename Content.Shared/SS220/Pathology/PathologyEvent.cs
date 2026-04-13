@@ -25,3 +25,7 @@ public record struct PathologyRemoveAttempt(ProtoId<PathologyPrototype> Patholog
 [ByRefEvent]
 public readonly record struct PathologyRemovedEvent(ProtoId<PathologyPrototype> PathologyId);
 
+// related to pathology, but not the main logic
+
+[ByRefEvent]
+public record struct GetPathologyHealerDamageModifier(ProtoId<PathologyPrototype> PathologyId, EntityUid Owner, EntityUid Target, float Modifier = 1f);

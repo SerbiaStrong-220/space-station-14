@@ -55,7 +55,7 @@ public sealed class PathologyHealerSystem : EntitySystem
         if (!_powerCell.TryUseActivatableCharge(args.Used.Value, user: args.User))
             return;
 
-        var cures = 0;
+        var damageModifier = 0f;
         foreach (var selector in healing.CurePathologyStacksSelectors)
         {
             foreach (var (id, deltaStack) in selector)
@@ -63,15 +63,18 @@ public sealed class PathologyHealerSystem : EntitySystem
                 if (!_pathology.TryChangePathologyStack(target!, id, deltaStack))
                     continue;
 
-                cures++;
+                var modifierEv = new GetPathologyHealerDamageModifier(id, target.Owner, args.User);
+                RaiseLocalEvent(target, ref modifierEv);
+
+                damageModifier += (modifierEv.Modifier * Math.Abs(deltaStack));
                 break;
             }
         }
 
-        if (cures == 0)
+        if (damageModifier == 0f)
             return;
 
-        _damageable.TryChangeDamage(target.Owner, healing.DamagePerCure * cures, origin: args.User, ignoreResistances: true);
+        _damageable.TryChangeDamage(target.Owner, healing.DamagePerCure * damageModifier, origin: args.User, ignoreResistances: true);
     }
 
     private bool TryHeal(Entity<PathologyHealerComponent> healing, Entity<PathologyHolderComponent?> target, EntityUid user)

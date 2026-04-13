@@ -48,7 +48,7 @@
       HeadProjectileFragment: -1
     damagePerCure:
       types:
-        Blunt: 7
+        Blunt: 8
   - type: Construction
     graph: ImprovisedFragmentExtractorCraft
     node: ImprovisedFragmentExtractor

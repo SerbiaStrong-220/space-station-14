@@ -11,6 +11,8 @@
       level: 2
     Medicine:
       level: 3
+    Anatomy:
+      level: 3
     PhysicalTraining:
       level: 4
   knowledges:
@@ -30,6 +32,8 @@
       level: 4
     Medicine:
       level: 4
+    Anatomy:
+      level: 4
     PhysicalTraining:
       level: 4
   knowledges:
@@ -47,6 +51,8 @@
     Construction:
       level: 2
     Medicine:
+      level: 2
+    Anatomy:
       level: 2
     PhysicalTraining:
       level: 2

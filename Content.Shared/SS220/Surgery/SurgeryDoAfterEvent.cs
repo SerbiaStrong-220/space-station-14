@@ -5,8 +5,10 @@ using Content.Shared.DoAfter;
 using Robust.Shared.Serialization;
 using Robust.Shared.Prototypes;
 
+namespace Content.Shared.SS220.Surgery;
+
 [Serializable, NetSerializable]
-public sealed partial class SurgeryDoAfterEvent: SimpleDoAfterEvent
+public sealed partial class SurgeryDoAfterEvent : SimpleDoAfterEvent
 {
     public ProtoId<SurgeryGraphPrototype> SurgeryGraph;
 
