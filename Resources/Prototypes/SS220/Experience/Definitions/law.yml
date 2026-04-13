@@ -12,8 +12,8 @@
     Medicine:
       level: 1
     PhysicalTraining:
-      level: 1
-  addSublevelPoints: 15
+      level: 2
+  addSublevelPoints: 20
 
 - type: experienceDefinition
   id: IAARoleExperience
@@ -23,14 +23,14 @@
     ExtravehicularActivity:
       level: 1
     CombatTraining:
-      level: 1
+      level: 2
     Construction:
       level: 1
     Medicine:
       level: 1
     PhysicalTraining:
       level: 2
-  addSublevelPoints: 10
+  addSublevelPoints: 15
   knowledges:
   - InformedPersonalKnowledge
 
@@ -46,9 +46,9 @@
     Construction:
       level: 1
     Medicine:
-      level: 1
+      level: 2
     PhysicalTraining:
       level: 2
-  addSublevelPoints: 5
+  addSublevelPoints: 10
   knowledges:
   - InformedPersonalKnowledge

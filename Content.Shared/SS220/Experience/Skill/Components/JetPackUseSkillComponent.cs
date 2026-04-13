@@ -13,7 +13,7 @@ public sealed partial class JetPackUseSkillComponent : Component
 
     [DataField]
     [AutoNetworkedField]
-    public float FailChance = 0.1f;
+    public float FailChance = 0f;
 
     [DataField]
     [AutoNetworkedField]

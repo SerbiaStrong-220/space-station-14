@@ -18,6 +18,10 @@ public sealed partial class ConstructionDoAfterSkillComponent : BaseDoAfterSkill
     [DataField]
     [AutoNetworkedField]
     public HashSet<ProtoId<StackPrototype>> ComplexMaterials = new();
+
+    [DataField]
+    [AutoNetworkedField]
+    public float ComplexMaterialDelayMultiplier = 1f;
 }
 
 
