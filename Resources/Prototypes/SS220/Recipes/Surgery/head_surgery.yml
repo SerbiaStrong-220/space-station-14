@@ -144,14 +144,11 @@
         params:
           variation: 0.125
       visibilityRequirements:
-      # TODO: better when time comes
-      - !type:WhitelistRequirement
-        subject: performer
-        description: surgery-requirement-whitelist-no-text
-        failureMessage: surgery-requirement-whitelist-no-text
-        whitelist:
-          components:
-          - MindShield
+      - !type:HaveKnowledgeRequirement
+        subject: target
+        description: surgery-syndicate-agent-knowledge-requirement-description
+        failureMessage: surgery-syndicate-agent-knowledge-requirement-failure
+        knowledge: SyndicateAgentKnowledge
       requirements:
       # to give player popup about incorrect tool <- do I need it?
       - !type:SurgeryToolRequirement
