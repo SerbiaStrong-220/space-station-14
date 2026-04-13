@@ -69,7 +69,7 @@
       points: 3
       required: false
     Legs:
-      points: 2
+      points: 3 #SS220-underwear-resprite
       required: false
     # SS220 Add foots marking begin
     Foots:
