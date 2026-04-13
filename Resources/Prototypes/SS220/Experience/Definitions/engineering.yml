@@ -15,7 +15,7 @@
       level: 2
   knowledges:
   - EngineerKnowledge
-  addSublevelPoints: 10
+  addSublevelPoints: 15
 
 - type: experienceDefinition
   id: ChiefEngineerRoleExperience
@@ -25,7 +25,7 @@
     ExtravehicularActivity:
       level: 3
     CombatTraining:
-      level: 1
+      level: 2
     Construction:
       level: 3
     Medicine:
@@ -35,7 +35,7 @@
   knowledges:
   - InformedPersonalKnowledge
   - EngineerKnowledge
-  addSublevelPoints: 5
+  addSublevelPoints: 10
 
 - type: experienceDefinition
   id: SeniorEngineerRoleExperience
@@ -54,7 +54,7 @@
       level: 2
   knowledges:
   - EngineerKnowledge
-  addSublevelPoints: 10
+  addSublevelPoints: 15
 
 - type: experienceDefinition
   id: StationEngineerRoleExperience
@@ -73,23 +73,23 @@
       level: 2
   knowledges:
   - EngineerKnowledge
-  addSublevelPoints: 10
+  addSublevelPoints: 15
 
 - type: experienceDefinition
   id: TechnicalAssistantRoleExperience
   skills:
     Bureaucracy:
-      level: 1
+      level: 2
     ExtravehicularActivity:
-      level: 1
+      level: 2
     CombatTraining:
       level: 1
     Construction:
-      level: 1
+      level: 2
     Medicine:
       level: 1
     PhysicalTraining:
       level: 1
   knowledges:
   - EngineerKnowledge
-  addSublevelPoints: 15
+  addSublevelPoints: 20

@@ -10,19 +10,19 @@
   components:
   - type: MedicineMachineUseSkillIssue
     healthAnalyzerInfoShuffleChance: 0.6
-    defibrillatorSelfDamageChance: 0.6
+    defibrillatorSelfDamageChance: 0.1
   - type: MedicineDoAfterSkill
-    durationScale: 1.5
-    failureChance: 0.3
+    durationScale: 1.2
+    failureChance: 0
     failurePopup: healing-item-use-failure
   - type: InjectorUseOnDoAfterSkill
-    durationScale: 1.5
-    failureChance: 0.6
+    durationScale: 1.2
+    failureChance: 0.2
     failurePopup: injector-use-failure
     damageOnFailure:
       types:
-        Slash: 3
-        Piercing: 6
+        Slash: 2
+        Piercing: 3
 
 - type: skill
   id: MedicineBase
@@ -36,12 +36,13 @@
   components:
   - type: MedicineMachineUseSkillIssue
     healthAnalyzerInfoShuffleChance: 0
-    defibrillatorSelfDamageChance: 0.1
+    defibrillatorSelfDamageChance: 0
   - type: MedicineDoAfterSkill
     durationScale: 1
+    failureChance: 0
   - type: InjectorUseOnDoAfterSkill
     durationScale: 1
-    failureChance: 0.1
+    failureChance: 0
     failurePopup: injector-use-failure
     damageOnFailure:
       types:
