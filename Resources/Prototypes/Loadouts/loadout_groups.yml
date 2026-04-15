@@ -1677,13 +1677,32 @@
   - JumpsuitJournalistBrown
   - JumpskirtJournalistBrown
   - JumpsuitJournalistGreen
-  - JumpskirtJournalistGreen #SS220-Clothes-End
+  - JumpskirtJournalistGreen
+  - InterviewerJumpsuitGreenShirt
+  - InterviewerJumpskirtGreenShirt
+  - InterviewerJumpsuitBlueShirt
+  - InterviewerJumpskirtBlueShirt #SS220-Clothes-End
 
 - type: loadoutGroup
   id: ReporterHead
   name: loadout-group-reporter-head
+  minLimit: 0
   loadouts:
-  - UmbrellaHat #SS220-Clothes
+  - UmbrellaHat #SS220-Clothes-Start
+  - BlueBowlerHat
+  - BowlerHat
+  - RedBowlerHat
+  - BrownBowlerHat
+  - GreenBowlerHat
+  - SpyBowlerHat #SS220-Clothes-End
+
+- type: loadoutGroup
+  id: ReporterOuterClothing
+  name: loadout-group-reporter-outerclothing
+  minLimit: 0
+  loadouts:
+  - WassermanWaistcoat #SS220-Clothes
+  - TrenchCoat
 
 - type: loadoutGroup
   id: PsychologistJumpsuit

@@ -632,6 +632,7 @@
   groups:
   - GroupTankHarness
   - ReporterJumpsuit
+  - ReporterOuterClothing #SS220
   - ReporterHead #SS220
   - Microphones #SS220
   - CommonBackpack

@@ -35,6 +35,10 @@ ent-ClothingUniformJumpskirtJournalist = юбка журналиста
     .desc = Если журналистская работа хороша, она противоречива по своей природе.
 ent-ClothingUniformJumpskirtReporter = юбка репортёра
     .desc = Хороший репортёр остаётся скептиком всю свою жизнь.
+ent-ClothingUniformJumpskirtInterviewerGreenShirt = зелёная юбка интервьюера
+    .desc = Пока я говорила, я так ничего и не поняла.
+ent-ClothingUniformJumpskirtInterviewerBlueShirt = голубая юбка интервьюера
+    .desc = Пока я говорила, я так ничего и не поняла.
 
 ent-ClothingUniformJumpskirtBartenderRed = красная униформа бармена
     .desc = Красивая и опрятная форма. Жаль только, что про бар этого не скажешь.
@@ -91,7 +95,7 @@ ent-ClothingUniformWeddingDress3 = свадебное платье
 ent-ClothingUniformWeddingDress4 = свадебное платье
     .desc = Клянётся ли он отдать Вам свою хату после развода?
 
-ent-ClothingUniformJumpskirtDetectiveBlackRedShirt = рубашка детектива
+ent-ClothingUniformJumpskirtDetectiveBlackRedShirt = юбка детектива
     .desc = Секрет успеха - в абсолютном неуправляемом любопытстве.
-ent-ClothingUniformJumpskirtDetectiveBlackWhiteShirt = рубашка детектива
+ent-ClothingUniformJumpskirtDetectiveBlackWhiteShirt = юбка детектива
     .desc = Секрет успеха - в абсолютном неуправляемом любопытстве.

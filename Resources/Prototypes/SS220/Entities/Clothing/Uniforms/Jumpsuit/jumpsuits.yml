@@ -304,8 +304,8 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformJumpsuitInterviewerGreen
-  name: green journalist suit
+  id: ClothingUniformJumpsuitInterviewerGreenShirt
+  name: green interviewer shirt
   description: If journalism is good, it is controversial, by nature.
   components:
   - type: Sprite
@@ -315,7 +315,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformJumpsuitInterviewerBlue
+  id: ClothingUniformJumpsuitInterviewerBlueShirt
   name: blue interviewer shirt
   description: I never learned anything while i was talking.
   components:
@@ -734,7 +734,7 @@
    # Детектив
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformJumpsuitDetectiveBlackRed
+  id: ClothingUniformJumpsuitDetectiveBlackRedShirt
   name: detectivse shirt
   description: The secret of success is an absolute ungovernable curiosity.
   components:
@@ -745,7 +745,7 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformJumpsuitDetectiveBlackWhite
+  id: ClothingUniformJumpsuitDetectiveBlackWhiteShirt
   name: detective shirt
   description: The secret of success is an absolute ungovernable curiosity.
   components:

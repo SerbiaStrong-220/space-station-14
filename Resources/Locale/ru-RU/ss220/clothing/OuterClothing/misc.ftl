@@ -23,3 +23,6 @@ ent-ClothingOuterJacketChefNanotrasen = жакет заслуженного ше
     .desc = Фартук-жакет, используемый шеф-поваром высочайшего класса — его мастерство неоспоримо.
 
 clothing-outer-radio-handheld = Рация
+
+ent-ClothingOuterwWassermanWaistcoat = жилетка "Вайзерман"
+    .desc = Карманы для маленьких секретов.

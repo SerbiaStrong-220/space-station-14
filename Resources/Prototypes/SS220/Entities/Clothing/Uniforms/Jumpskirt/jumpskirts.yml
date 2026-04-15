@@ -119,6 +119,28 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpskirt/reporter.rsi
 
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtInterviewerGreenShirt
+  name: green interviewer skirt
+  description: If journalism is good, it is controversial, by nature.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/interviewer_green_shirt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/interviewer_green_shirt.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpskirtInterviewerBlueShirt
+  name: blue interviewer skirt
+  description: I never learned anything while i was talking.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/interviewer_blue_shirt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/interviewer_blue_shirt.rsi
+
   # Бармен
 - type: entity
   parent: ClothingUniformSkirtBase
@@ -419,8 +441,8 @@
   # Детектив
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformJumpskirtDetectiveBlackRed
-  name: detectivse shirt
+  id: ClothingUniformJumpskirtDetectiveBlackRedShirt
+  name: detective skirt
   description: The secret of success is an absolute ungovernable curiosity.
   components:
   - type: Sprite
@@ -430,8 +452,8 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformJumpskirtDetectiveBlackWhite
-  name: detective shirt
+  id: ClothingUniformJumpskirtDetectiveBlackWhiteShirt
+  name: detective skirt
   description: The secret of success is an absolute ungovernable curiosity.
   components:
   - type: Sprite

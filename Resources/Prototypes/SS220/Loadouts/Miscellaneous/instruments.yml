@@ -17,5 +17,10 @@
 
 - type: loadout
   id: MicrophonePocket
-  inhand:
-    - MicrophoneInstrument
+  equipment:
+    pocket1: MicrophoneInstrument
+
+- type: loadout
+  id: MicrophoneChannel13Pocket
+  equipment:
+    pocket1: MicrophoneChannel13Instrument
