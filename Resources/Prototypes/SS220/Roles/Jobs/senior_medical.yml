@@ -39,6 +39,9 @@
     id: SeniorPhysicianPDA
     ears: ClothingHeadsetMedical
     belt: ClothingBeltMedicalFilled
+  storage:
+    back:
+    - FilledSurgeryMedkit
 
 - type: chameleonOutfit
   id: SeniorPhysicianChameleonOutfit

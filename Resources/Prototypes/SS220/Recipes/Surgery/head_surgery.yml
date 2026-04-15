@@ -179,7 +179,7 @@
       edgeTooltip: remove-brain-pathology
       edgeIcon:
         sprite: Objects/Specific/Medical/Surgery/scissors.rsi
-        state: hemostat
+        state: retractor
       sound:
         path: /Audio/SS220/Surgery/organ.ogg
         params:
@@ -187,8 +187,8 @@
       requirements:
       - !type:SurgeryToolRequirement
         subject: used
-        surgeryTool: hemostat
-        description: surgery-requirement-tool-required-hemostat
+        surgeryTool: retractor
+        description: surgery-requirement-tool-required-retractor
         failureMessage: surgery-requirement-tool-miss
       - !type:SurgeryPathologyRequirement
         subject: target

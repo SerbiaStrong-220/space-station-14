@@ -13,6 +13,8 @@ public sealed partial class BodyAnalyzerMenu : FancyWindow
 {
     private SurgeryPatientAnalyzer _surgeryPatientAnalyzer = default!;
 
+    private EntityUid? _target = null;
+
     public BodyAnalyzerMenu()
     {
         RobustXamlLoader.Load(this);
@@ -37,10 +39,19 @@ public sealed partial class BodyAnalyzerMenu : FancyWindow
     public void ChangeTarget(EntityUid? target, ProtoId<SurgeryGraphPrototype>? id = null)
     {
         if (target is not { } patient)
+        {
+            _target = null;
             return;
+        }
 
         var status = _surgeryPatientAnalyzer.GetStatus(patient);
         PatientStatus.ShowStatus(status);
+
+        if (patient == _target)
+            return;
+
+        _target = patient;
+
         TreatmentSuggestion.ShowSuggestion(_surgeryPatientAnalyzer.GetTreatmentRecommendation(status));
 
         if (!id.HasValue)
