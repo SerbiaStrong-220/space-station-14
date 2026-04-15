@@ -1,0 +1,12 @@
+﻿- type: stack
+  id: Capacitor
+  name: stack-capacitor
+  icon: { sprite: /Textures/Objects/Misc/stock_parts.rsi, state: capacitor }
+  spawn: CapacitorStockPart
+  maxCount: 10
+
+- type: stack
+  id: MatterBin
+  name: stack-matter-bin
+  spawn: MatterBinStockPart
+  maxCount: 10

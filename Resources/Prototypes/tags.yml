@@ -231,6 +231,9 @@
 
 - type: Tag
   id: CanPilot # Used by ShuttleConsoleSystem to guard who's allowed to pilot ships.
+  
+- type: Tag
+  id: CapacitorStockPart
 
 - type: Tag
   id: CaptainSabre # Storage whitelist: ClothingBeltSheath. ItemMapper: ClothingBeltSheath
