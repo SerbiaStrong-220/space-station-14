@@ -640,7 +640,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             DoDamageEffect(targets, user, targetXform);
         }
 
-        RaiseLocalEvent(user, new LightAttackPerformedEvent(target.Value, meleeUid, targetXform.Coordinates)); // SS220-MartialArts
+        RaiseLocalEvent(user, new LightAttackPerformedEvent(targetEntity, meleeUid, targetXform.Coordinates)); // SS220-MartialArts
     }
 
     protected abstract void DoDamageEffect(List<EntityUid> targets, EntityUid? user,  TransformComponent targetXform);
@@ -994,12 +994,26 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         if (attemptEvent.Cancelled)
             return false;
 
+        //SS220 shield rework begin
+        EntityUid targetEntity = target.Value;
+        if (TryComp<AltBlockingUserComponent>(target, out var blockcomp))
+        {
+            var meleeblockEvent = new MeleeHitBlockAttemptEvent();
+            RaiseLocalEvent(targetEntity, ref meleeblockEvent);
+            if (meleeblockEvent.CancelledHit && TryGetEntity(meleeblockEvent.blocker, out EntityUid? shield))
+            {
+                PopupSystem.PopupEntity(Loc.GetString("block-shot"), targetEntity);
+                targetEntity = (EntityUid)shield;
+            }
+        }
+        //SS220 shield rework end
+
         // SS220-MartialArts-Begin
         // i'm struggling where to put this block, i hope it will fit here
-        RaiseLocalEvent(user, new DisarmAttackPerformedEvent(target.Value, Transform(target.Value).Coordinates));
+        RaiseLocalEvent(user, new DisarmAttackPerformedEvent(targetEntity, Transform(target.Value).Coordinates));
         // SS220-MartialArts-End
 
-        var chance = CalculateDisarmChance(user, target.Value, inTargetHand, combatMode);
+        var chance = CalculateDisarmChance(user, targetEntity, inTargetHand, combatMode);//SS220 shield rework
 
         // At this point we diverge
         if (_netMan.IsClient)
@@ -1014,8 +1028,8 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             return false;
         }
 
-        var eventArgs = new DisarmedEvent(target.Value, user, 1 - chance);
-        RaiseLocalEvent(target.Value, ref eventArgs);
+        var eventArgs = new DisarmedEvent(targetEntity, user, 1 - chance);//SS220 shield rework
+        RaiseLocalEvent(targetEntity, ref eventArgs);//SS220 shield rework
 
         // Nothing handled it so abort.
         if (!eventArgs.Handled)
@@ -1029,7 +1043,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         AdminLogger.Add(LogType.DisarmedAction, $"{ToPrettyString(user):user} used disarm on {ToPrettyString(target):target}");
 
         _audio.PlayPvs(combatMode.DisarmSuccessSound, target.Value, AudioParams.Default.WithVariation(0.025f).WithVolume(5f));
-        var targetEnt = Identity.Entity(target.Value, EntityManager);
+        var targetEnt = Identity.Entity(targetEntity, EntityManager);//SS220 shield rework
         var userEnt = Identity.Entity(user, EntityManager);
 
         var msgOther = Loc.GetString(
@@ -1042,7 +1056,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         var filterOther = Filter.PvsExcept(user, entityManager: EntityManager);
 
         PopupSystem.PopupEntity(msgOther, user, filterOther, true);
-        PopupSystem.PopupEntity(msgUser, target.Value, user);
+        PopupSystem.PopupEntity(msgUser, targetEntity, user);//SS220 shield rework
 
         if (eventArgs.IsStunned)
         {
