@@ -40,13 +40,6 @@ namespace Content.Shared.Construction
                         ("requiredElement", Loc.GetString(name))));
                 }
 
-                foreach (var (material, amount) in component.MaterialRequirements)
-                {
-                    args.PushMarkup(Loc.GetString("machine-board-component-required-element-entry-text",
-                        ("amount", amount),
-                        ("requiredElement", Loc.GetString(material.Name))));
-                }
-
                 foreach (var (_, info) in component.ComponentRequirements)
                 {
                     var examineName = _construction.GetExamineName(info);
