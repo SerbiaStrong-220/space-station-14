@@ -89,10 +89,9 @@
         - id: GrenadeFlashBang
         - id: GrenadeFlashBang
         - id: RadioHandheldSecurity
-  - type: ContainerFill
-    containers:
-      item:
-      - Stunbaton
+      item: !type:AllSelector
+        children:
+        - id: Stunbaton
 
 - type: entity
   parent: ClothingBeltSheath

@@ -116,14 +116,6 @@
           type: BatteryBoundUserInterface
     - type: ActivatableUI
       key: enum.BatteryUiKey.Key
-# UPSTREAM_TODO: remove if not needed
-    # - type: ActivatableUI #SS220 smes-ui-fix
-    #   key: enum.SmesUiKey.Key
-    # - type: UserInterface #SS220 smes-ui-fix
-    #   interfaces:
-    #     enum.SmesUiKey.Key:
-    #       type: SmesBoundUserInterface
-
 
 # SMES' in use
 

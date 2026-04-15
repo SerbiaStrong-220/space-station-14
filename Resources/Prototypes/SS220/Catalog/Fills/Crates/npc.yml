@@ -1,7 +1,7 @@
 - type: entity
   id: BaseCrateNPCLocked
   parent: CrateLivestock
-  abstract: True
+  categories: [ HideSpawnMenu ]
   components:
   - type: Lock
 # - type: LockVisuals - Если будете добавлять визуал для закрытых ящиков, вынести из коммента

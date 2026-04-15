@@ -166,6 +166,11 @@ public abstract partial class SharedBatterySystem : EntitySystem
             state = BatteryChargingState.Decharging;
 
         _appearance.SetData(ent.Owner, BatteryVisuals.Charging, state);
+
+        // SS220-battery-levels-begin
+        if (ent.Comp.Levels > 0)
+            UpdateBatteryLevel(ent);
+        // SS220-battery-levels-end
     }
 
     private void OnVisualsStateChanged(Entity<BatteryVisualsComponent> ent, ref BatteryStateChangedEvent args)
@@ -173,5 +178,39 @@ public abstract partial class SharedBatterySystem : EntitySystem
         // Update the appearance data for the fill level (empty, full, in-between).
         // We have a separate component for this to not duplicate the networking cost unless we actually use it.
         _appearance.SetData(ent.Owner, BatteryVisuals.State, args.NewState);
+
+        // SS220-battery-levels-begin
+        if (ent.Comp.Levels > 0)
+            UpdateBatteryLevel(ent);
+        // SS220-battery-levels-end
     }
+
+    // SS220-battery-levels-begin
+    private void UpdateBatteryLevel(Entity<BatteryVisualsComponent> ent)
+    {
+        if (!TryComp<BatteryComponent>(ent.Owner, out var battery) || ent.Comp.Levels <= 0)
+            return;
+
+        int level;
+        switch (battery.State)
+        {
+            case BatteryState.Empty:
+                level = 0;
+                break;
+            case BatteryState.Full:
+                level = ent.Comp.Levels;
+                break;
+            default:
+            {
+                var fraction = GetChargeLevel((ent.Owner, battery));
+                var maxLevel = Math.Max(1, ent.Comp.Levels - 1);
+                var minLevel = 1;
+                level = Math.Clamp((int) Math.Ceiling(fraction * ent.Comp.Levels), minLevel, maxLevel);
+                break;
+            }
+        }
+
+        _appearance.SetData(ent.Owner, BatteryLevels.Level, level);
+    }
+    // SS220-battery-levels-end
 }

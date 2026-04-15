@@ -227,3 +227,8 @@
     sprite: SS220/Clothing/OuterClothing/Coats/bomberhos.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Coats/bomberhos.rsi
+  - type: ContainerContainer
+    containers:
+      item_radio: !type:ContainerSlot { }
+      storagebase: !type:Container
+        ents: [ ]

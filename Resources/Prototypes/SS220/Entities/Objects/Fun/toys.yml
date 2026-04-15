@@ -65,7 +65,7 @@
     - type: Item
       sprite: Objects/Weapons/Melee/e_sword_double-inhands.rsi
     - type: Appearance
-    - type: ToggleableLightVisuals
+    - type: ToggleableVisuals
       spriteLayer: blade
       inhandVisuals:
         left:
@@ -330,7 +330,7 @@
       heldPrefix: eshield
     - type: UseDelay
       delay: 0.5
-    - type: ToggleableLightVisuals
+    - type: ToggleableVisuals
       spriteLayer: shield
       inhandVisuals:
         left:

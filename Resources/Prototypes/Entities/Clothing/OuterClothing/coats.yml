@@ -35,6 +35,13 @@
     microFiberMaterial: micro-fibers-cotton
     microFiberColor: micro-fibers-brown
   #SS220 Micro_fibers end
+  # ss220 add radio slot start
+  - type: ContainerContainer
+    containers:
+      item_radio: !type:ContainerSlot { }
+      storagebase: !type:Container
+        ents: [ ]
+  # ss220 add radio slot end
 
 - type: entity
   parent: [ClothingOuterCoatDetectiveLoadout]
@@ -51,11 +58,25 @@
     microFiberMaterial: micro-fibers-cotton
     microFiberColor: micro-fibers-grey
 #SS220 Micro_fibers end
+  # ss220 add radio slot start
+  - type: ContainerContainer
+    containers:
+      item_radio: !type:ContainerSlot { }
+      storagebase: !type:Container
+        ents: [ ]
+  # ss220 add radio slot end
 
 - type: entity
   parent: ClothingOuterCoatDetective
   id: ClothingOuterCoatDetectiveLoadout
   components:
+  # ss220 add radio slot start
+  - type: ContainerContainer
+    containers:
+      item_radio: !type:ContainerSlot { }
+      storagebase: !type:Container
+        ents: [ ]
+  # ss220 add radio slot end
   - type: EntityTableContainerFill
     containers:
       storagebase: !type:AllSelector
@@ -117,6 +138,13 @@
     microFiberMaterial: micro-fibers-reinforced-cotton
     microFiberColor: micro-fibers-black
 #SS220 Micro_fibers end
+  # ss220 add radio slot start
+  - type: ContainerContainer
+    containers:
+      item_radio: !type:ContainerSlot { }
+      storagebase: !type:Container
+        ents: [ ]
+  # ss220 add radio slot end
 
 - type: entity
   parent: ClothingOuterStorageToggleableBase
@@ -566,6 +594,13 @@
     microFiberMaterial: micro-fibers-reinforced-cotton
     microFiberColor: micro-fibers-red
 #SS220 Micro_fibers end
+  # ss220 add radio slot start
+  - type: ContainerContainer
+    containers:
+      item_radio: !type:ContainerSlot { }
+      storagebase: !type:Container
+        ents: [ ]
+  # ss220 add radio slot end
 
 - type: entity
   parent: ClothingOuterStorageBase

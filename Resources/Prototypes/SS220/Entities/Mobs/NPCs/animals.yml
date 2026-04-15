@@ -267,7 +267,8 @@
       startValue: 0.05
       endValue: 1.0
       isLooped: true
-  - type: ToggleableLightVisuals
+  - type: ToggleableVisuals
+    spriteLayer: light
   - type: PointLight
     color: red
     enabled: false

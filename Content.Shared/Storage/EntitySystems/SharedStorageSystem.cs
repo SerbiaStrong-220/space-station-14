@@ -932,10 +932,18 @@ public abstract class SharedStorageSystem : EntitySystem
         if (args.Container.ID != StorageComponent.ContainerId)
             return;
 
-        if (entity.Comp.StoredItems.Remove(args.Entity, out var loc))
+        // SS220-storage-missing-item-comp-fix-begin
+        // Entities with obsolete/removed prototypes need to be deleted during load map
+        // without ItemComponent. Skip them.
+        if (!HasComp<ItemComponent>(args.Entity))
+        {
+            entity.Comp.StoredItems.Remove(args.Entity);
+        }
+        else if (entity.Comp.StoredItems.Remove(args.Entity, out var loc))
         {
             RemoveOccupiedEntity(entity, args.Entity, loc);
         }
+        // SS220-storage-missing-item-comp-fix-end
 
         Dirty(entity, entity.Comp);
 

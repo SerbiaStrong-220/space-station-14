@@ -185,6 +185,13 @@
         Heat: 0.9
   - type: StaticPrice
     price: 1500
+  # ss220 add radio slot start
+  - type: ContainerContainer
+    containers:
+      item_radio: !type:ContainerSlot { }
+      storagebase: !type:Container
+        ents: [ ]
+  # ss220 add radio slot end
 
 #Elite web vest
 - type: entity
@@ -238,7 +245,13 @@
         Slash: 0.7
         Piercing: 0.5
         Heat: 0.9
-
+  # ss220 add radio slot start
+  - type: ContainerContainer
+    containers:
+      item_radio: !type:ContainerSlot { }
+      storagebase: !type:Container
+        ents: [ ]
+  # ss220 add radio slot end
 
 # Armor covering multiple body parts including limbs
 - type: entity

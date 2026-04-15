@@ -9,7 +9,13 @@ namespace Content.Shared.Power.Components;
 /// Also works with an entity with <see cref="PowerCellSlotComponent"/> and will relay the state of the inserted powercell.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class BatteryVisualsComponent : Component;
+public sealed partial class BatteryVisualsComponent : Component
+{
+    // SS220-battery-levels-begin
+    [DataField]
+    public int Levels;
+    // SS220-battery-levels-end
+}
 
 /// <summary>
 /// Keys for the appearance data.
@@ -49,3 +55,11 @@ public enum BatteryChargingState : byte
     /// </summary>
     Constant,
 }
+
+// SS220-battery-levels-begin
+[Serializable, NetSerializable]
+public enum BatteryLevels : byte
+{
+    Level,
+}
+// SS220-battery-levels-end

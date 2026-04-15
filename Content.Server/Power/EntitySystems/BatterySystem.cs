@@ -65,15 +65,4 @@ public sealed class BatterySystem : SharedBatterySystem
             SetCharge((uid, bat), netBat.NetworkBattery.CurrentStorage);
         }
     }
-
-    // SS220 smes-ui-fix begin
-    public int GetChargePercentRounded(BatteryComponent component)
-    {
-        var effectiveMax = component.MaxCharge;
-        if (effectiveMax == 0)
-            effectiveMax = 1;
-        var chargeFraction = component.LastCharge / effectiveMax;
-        return (int)(chargeFraction * 100);
-    }
-    // SS220 smes-ui-fix end
 }

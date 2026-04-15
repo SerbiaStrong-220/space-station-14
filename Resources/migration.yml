@@ -876,8 +876,8 @@ SpeedLoaderPistolPractice: null
 GlowstickBase: GlowstickGreen
 
 # 2025-12-06
-SpawnPointZookeeper: null
-SpawnPointBoxer: null
+#SpawnPointZookeeper: null
+#SpawnPointBoxer: null
 
 # 2025-12-07
 FigureSpawner: MechFigurineSpawner50
@@ -988,3 +988,17 @@ LeftLegVulpkanin: OrganVulpkaninLegLeft
 RightLegVulpkanin: OrganVulpkaninLegRight
 LeftFootVulpkanin: OrganVulpkaninFootLeft
 RightFootVulpkanin: OrganVulpkaninFootRight
+
+# 2026-04-12 - SS220 remove old parts
+LeftFootHuman: OrganHumanFootLeft
+RightFootHuman: OrganHumanFootRight
+RightHandHuman: OrganHumanHandRight
+LeftHandHuman: OrganHumanHandRight
+TorsoHuman: OrganHumanTorso
+HeadSlime: OrganSlimePersonHead
+LeftFootSkeleton: OrganSkeletonPersonFootLeft
+RightFootSkeleton: OrganSkeletonPersonFootRight
+
+# 2026-04-13 - SS220 remove gingerbread parts
+HeadGingerbread: OrganGingerbreadHead
+LeftLegGingerbread: OrganGingerbreadLegLeft

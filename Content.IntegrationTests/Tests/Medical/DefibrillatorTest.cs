@@ -22,7 +22,7 @@ public sealed class DefibrillatorTest : InteractionTest
     // We need two hands to use a defbrillator.
     protected override string PlayerPrototype => "MobHuman";
 
-    private static readonly EntProtoId DefibrillatorProtoId = "Defibrillator";
+    private static readonly EntProtoId DefibrillatorProtoId = "DefibrillatorOneHandedUnpowered"; // ss220 fix defibrillator test
     private static readonly EntProtoId TargetProtoId = "MobHuman";
     private static readonly ProtoId<DamageTypePrototype> BluntDamageTypeId = "Blunt";
 

@@ -78,7 +78,7 @@ public sealed partial class ForcefieldGeneratorSystem : EntitySystem
 
     public void SetActive(Entity<ForcefieldGeneratorComponent> entity, bool active)
     {
-        if (active && (!TryComp<BatteryComponent>(entity, out var battery) || battery.LastCharge < battery.MaxCharge))
+        if (active && (!TryComp<BatteryComponent>(entity, out var battery) || _battery.GetCharge((entity.Owner, battery)) < battery.MaxCharge))
             return;
 
         entity.Comp.Active = active;
@@ -104,7 +104,7 @@ public sealed partial class ForcefieldGeneratorSystem : EntitySystem
 
         if (TryComp<BatteryComponent>(entity, out var battery))
         {
-            var charge = battery.LastCharge / battery.MaxCharge;
+            var charge = _battery.GetCharge((entity.Owner, battery)) / battery.MaxCharge;
             _appearance.SetData(entity, ForcefieldGeneratorVisual.Charge, charge);
         }
     }
@@ -124,7 +124,7 @@ public sealed partial class ForcefieldGeneratorSystem : EntitySystem
 
         if (!enabled)
         {
-            if (TryComp<BatteryComponent>(entity, out var battery) && battery.LastCharge <= 0)
+            if (TryComp<BatteryComponent>(entity, out var battery) && _battery.GetCharge((entity.Owner, battery)) <= 0)
             {
                 _popup.PopupEntity(
                     Loc.GetString("forcefield-generator-ss220-unpowered"),
@@ -195,7 +195,7 @@ public sealed partial class ForcefieldGeneratorSystem : EntitySystem
     {
         if (entity.Comp.Active)
         {
-            if (TryComp<BatteryComponent>(entity, out var battery) && battery.LastCharge > 0)
+            if (TryComp<BatteryComponent>(entity, out var battery) && _battery.GetCharge((entity.Owner, battery)) > 0)
             {
                 SetForcefieldEnabled(entity, true);
                 return;

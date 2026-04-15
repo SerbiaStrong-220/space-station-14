@@ -146,6 +146,7 @@
         showEnts: False
         occludes: True
         ent: null
+      body_organs: !type:Container { }
   - type: Inventory
     templateId: human
   - type: Hands

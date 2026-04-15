@@ -8,6 +8,7 @@ using Content.Shared.PowerCell;
 using Content.Shared.Weapons.Hitscan.Components;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
+using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 
@@ -25,6 +26,11 @@ public abstract partial class SharedGunSystem
         SubscribeLocalEvent<BatteryAmmoProviderComponent, DamageExamineEvent>(OnBatteryDamageExamine);
         SubscribeLocalEvent<BatteryAmmoProviderComponent, PowerCellChangedEvent>(OnPowerCellChanged);
         SubscribeLocalEvent<BatteryAmmoProviderComponent, ChargeChangedEvent>(OnChargeChanged);
+
+        // SS220-battery-levels-begin
+        SubscribeLocalEvent<BatteryAmmoProviderComponent, EntInsertedIntoContainerMessage>(OnCellSlotInserted);
+        SubscribeLocalEvent<BatteryAmmoProviderComponent, EntRemovedFromContainerMessage>(OnCellSlotRemoved);
+        // SS220-battery-levels-end
     }
 
     private void OnBatteryExamine(Entity<BatteryAmmoProviderComponent> ent, ref ExaminedEvent args)
@@ -148,6 +154,24 @@ public abstract partial class SharedGunSystem
         // Queue the update for when the autorecharge reaches enough charge for another shot.
         UpdateNextUpdate(ent, args.CurrentCharge, args.MaxCharge, args.CurrentChargeRate);
     }
+
+    // SS220-battery-levels-begin
+    private void OnCellSlotInserted(Entity<BatteryAmmoProviderComponent> ent, ref EntInsertedIntoContainerMessage args)
+    {
+        if (!TryComp<AppearanceComponent>(ent, out var appearance))
+            return;
+
+        Appearance.SetData(ent.Owner, AmmoVisuals.MagLoaded, true, appearance);
+    }
+
+    private void OnCellSlotRemoved(Entity<BatteryAmmoProviderComponent> ent, ref EntRemovedFromContainerMessage args)
+    {
+        if (!TryComp<AppearanceComponent>(ent, out var appearance))
+            return;
+
+        Appearance.SetData(ent.Owner, AmmoVisuals.MagLoaded, false, appearance);
+    }
+    // SS220-battery-levels-end
 
     private void UpdateNextUpdate(Entity<BatteryAmmoProviderComponent> ent, float currentCharge, float maxCharge, float currentChargeRate)
     {

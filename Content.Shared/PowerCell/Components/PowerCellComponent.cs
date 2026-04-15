@@ -8,10 +8,4 @@ namespace Content.Shared.PowerCell.Components;
 /// The actual power functionality is provided by the <see cref="BatteryComponent"/>.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class PowerCellComponent : Component
-{
-    //ss220 add states for power cells start
-    [DataField]
-    public int PowerCellVisualsLevels = 2;
-    //ss220 add states for power cells end
-}
+public sealed partial class PowerCellComponent : Component;

@@ -465,6 +465,7 @@
   - type: ContainerContainer
     containers:
       toggleable-clothing: !type:ContainerSlot { }
+      item_radio: !type:ContainerSlot { } # ss220 add radio slot
       storagebase: !type:Container
         ents: [ ]
 ##########################################################
@@ -897,6 +898,7 @@
   - type: ContainerContainer
     containers:
       toggleable-clothing: !type:ContainerSlot { }
+      item_radio: !type:ContainerSlot { } # ss220 add radio slot
       storagebase: !type:Container
         ents: [ ]
 ################################################################

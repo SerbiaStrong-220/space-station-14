@@ -34,6 +34,15 @@ public sealed class StationPowerTests
         "Snowball",
         "Reach",
         "Exo",
+        // ss220 add our maps for test start
+        "Frankenstein",
+        "Astro",
+        "Axioma",
+        "Donuts",
+        "Eclipse",
+        "Nightshift",
+        "Tox",
+        // ss220 add our maps for test end
     ];
 
     [Explicit]
