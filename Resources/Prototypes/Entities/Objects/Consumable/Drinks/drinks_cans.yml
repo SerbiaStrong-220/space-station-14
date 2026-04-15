@@ -301,15 +301,11 @@
           Quantity: 30
       grindable: *grindable
   - type: Sprite
-    sprite: Objects/Consumable/Drinks/sol_dry.rsi
+    sprite: SS220/Objects/Consumable/Drinks/sol_dry.rsi #ss220-drinks-can-resprite
   - type: Item
-<<<<<<< Updated upstream
-    sprite: Objects/Consumable/Drinks/sol_dry.rsi
-=======
     sprite: SS220/Objects/Consumable/Drinks/sol_dry.rsi #ss220-drinks-can-resprite
   - type: EmptyCanCrush  #ss220
     CrushedCan: CrushedCanSolDry
->>>>>>> Stashed changes
 
 - type: entity
   parent: DrinkCanBaseFull
@@ -334,8 +330,6 @@
 
 - type: entity
   parent: DrinkCanBaseFull
-<<<<<<< Updated upstream
-=======
   id: DrinkRelaxingPeachCan
   name: Расслабляющая Персиковая Газировка
   description: Ходят слухи, что ежедневное употребление данного напитка сделает вас добрее и эмпатичнее к окружающим. Но это лишь слухи! Продается под взрывной маркой "РПГ"!
@@ -353,7 +347,6 @@
           Quantity: 8
         - ReagentId: DoctorsDelight
           Quantity: 6
-      grindable: *grindable
   - type: Sprite
     sprite: Objects/Consumable/Drinks/starkist.rsi
   - type: Item
@@ -363,7 +356,6 @@
 
 - type: entity
   parent: DrinkCanBaseFull
->>>>>>> Stashed changes
   id: DrinkTonicWaterCan
   name: tonic water can
   description: Quinine tastes funny, but at least it'll keep that Space Malaria away.
@@ -549,9 +541,9 @@
           Quantity: 30
       grindable: *grindable
   - type: Sprite
-    sprite: Objects/Consumable/Drinks/beer_can.rsi
+    sprite: SS220/Objects/Consumable/Drinks/beer_can.rsi #ss220-drinks-can-resprite
   - type: Item
-    sprite: Objects/Consumable/Drinks/beer_can.rsi
+    sprite: SS220/Objects/Consumable/Drinks/beer_can.rsi #ss220-drinks-can-resprite
   - type: Tag
     tags:
     - Beer
@@ -574,9 +566,9 @@
           Quantity: 30
       grindable: *grindable
   - type: Sprite
-    sprite: Objects/Consumable/Drinks/wine_can.rsi
+    sprite: SS220/Objects/Consumable/Drinks/wine_can.rsi #ss220-drinks-can-resprite
   - type: Item
-    sprite: Objects/Consumable/Drinks/wine_can.rsi
+    sprite: SS220/Objects/Consumable/Drinks/wine_can.rsi #ss220-drinks-can-resprite
   - type: Tag
     tags:
     - Wine

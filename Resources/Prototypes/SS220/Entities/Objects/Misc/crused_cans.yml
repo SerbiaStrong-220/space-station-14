@@ -9,7 +9,7 @@
     sprite: SS220/Objects/Consumable/TrashDrinks/crushed_cans/cola.rsi
     state: icon
   - type: Item
-    size: Small
+    size: Tiny
   - type: SolutionContainerManager
     solutions:
       grindable: &grindable
@@ -21,6 +21,9 @@
   - type: Extractable
     grindableSolutionName: grindable
   - type: SpaceGarbage
+  - type: Tag
+    tags:
+    - Trash
 
 - type: entity
   parent: CrushedCanBase
