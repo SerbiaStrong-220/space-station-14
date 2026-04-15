@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Shared.Construction.Components;
+using Content.Shared.Construction.Prototypes;
 using Content.Shared.Examine;
 using Content.Shared.Lathe;
 using Content.Shared.Materials;
@@ -34,10 +35,16 @@ namespace Content.Shared.Construction
                 {
                     var stack = _prototype.Index(material);
                     var name = _prototype.Index(stack.Spawn).Name;
-
                     args.PushMarkup(Loc.GetString("machine-board-component-required-element-entry-text",
                         ("amount", amount),
-                        ("requiredElement", Loc.GetString(name))));
+                        ("requiredElement", Loc.GetString(_prototype.Index<MachinePartPrototype>(part).Name))));
+                }
+
+                foreach (var (material, amount) in component.MaterialRequirements)
+                {
+                    args.PushMarkup(Loc.GetString("machine-board-component-required-element-entry-text",
+                        ("amount", amount),
+                        ("requiredElement", Loc.GetString(material.Name))));
                 }
 
                 foreach (var (_, info) in component.ComponentRequirements)
@@ -63,6 +70,23 @@ namespace Content.Shared.Construction
             var (_, comp) = entity;
 
             var materials = new Dictionary<string, int>();
+            foreach (var (partId, amount) in comp.Requirements)
+            {
+                var partProto = _prototype.Index<MachinePartPrototype>(partId);
+
+                if (!_lathe.TryGetRecipesFromEntity(partProto.StockPartPrototype, out var recipes))
+                    continue;
+
+                var partRecipe = recipes[0];
+                if (recipes.Count > 1)
+                    partRecipe = recipes.MinBy(p => p.RequiredMaterials.Values.Sum());
+
+                foreach (var (mat, matAmount) in partRecipe!.RequiredMaterials)
+                {
+                    materials.TryAdd(mat, 0);
+                    materials[mat] += matAmount * amount * coefficient;
+                }
+            }
 
             foreach (var (stackId, amount) in comp.StackRequirements)
             {
@@ -109,8 +133,8 @@ namespace Content.Shared.Construction
                         materials[mat] += matAmount * amount * coefficient;
                     }
                 }
-                else if (_prototype.Resolve(defaultProtoId, out var defaultProto) &&
-                         defaultProto.TryGetComponent<PhysicalCompositionComponent>(out var physComp, EntityManager.ComponentFactory))
+                else if (_prototype.TryIndex(defaultProtoId, out var defaultProto) &&
+                         defaultProto.TryGetComponent<PhysicalCompositionComponent>(out var physComp))
                 {
                     foreach (var (mat, matAmount) in physComp.MaterialComposition)
                     {
