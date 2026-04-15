@@ -1,0 +1,283 @@
+- type: marking
+  id: UndergarmentBottomBoxersPolkadot
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
+  speciesRestriction: [Arachnid, Diona, Human, Dwarf, Moth, SlimePerson]
+  coloring:
+    default:
+      type: null
+      fallbackColor: '#FFFFFF'
+  sprites:
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: boxers_polkadot_primary
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: boxers_polkadot_secondary
+
+- type: marking
+  id: UndergarmentBottomBoxersPolkadotReptilian
+  bodyPart: UndergarmentBottom
+  markingCategory: UndergarmentBottom
+  speciesRestriction: [Reptilian]
+  coloring:
+    default:
+      type: null
+      fallbackColor: '#FFFFFF'
+  sprites:
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: boxers_polkadot_primary_reptilian
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: boxers_polkadot_secondary_reptilian
+
+- type: marking
+  id: UndergarmentBottomBoxersStriped
+  bodyPart: UndergarmentBottom 
+  markingCategory: UndergarmentBottom
+  speciesRestriction: [Arachnid, Diona, Human, Dwarf, Moth, SlimePerson]
+  coloring:
+    default:
+      type: null
+      fallbackColor: '#FFFFFF'
+  sprites:
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: boxers_striped_primary
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: boxers_striped_secondary
+
+- type: marking
+  id: UndergarmentBottomBoxersStripedReptilian
+  bodyPart: UndergarmentBottom 
+  markingCategory: UndergarmentBottom
+  speciesRestriction: [Reptilian]
+  coloring:
+    default:
+      type: null
+      fallbackColor: '#FFFFFF'
+  sprites:
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: boxers_striped_primary_reptilian
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: boxers_striped_secondary_reptilian
+
+- type: marking
+  id: UndergarmentBottomShorts
+  bodyPart: UndergarmentBottom 
+  markingCategory: UndergarmentBottom
+  speciesRestriction: [Arachnid, Diona, Human, Dwarf, Moth, SlimePerson]
+  coloring:
+    default:
+      type: null
+      fallbackColor: '#FFFFFF'
+  sprites:
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: shorts
+
+- type: marking
+  id: UndergarmentBottomShortsReptilian
+  bodyPart: UndergarmentBottom 
+  markingCategory: UndergarmentBottom
+  speciesRestriction: [Reptilian]
+  coloring:
+    default:
+      type: null
+      fallbackColor: '#FFFFFF'
+  sprites:
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: shorts_reptilian
+
+- type: marking
+  id: UndergarmentBottomTights
+  bodyPart: UndergarmentBottom 
+  markingCategory: UndergarmentBottom
+  speciesRestriction: [Arachnid, Diona, Human, Dwarf, Moth, SlimePerson]
+  coloring:
+    default:
+      type: null
+      fallbackColor: '#FFFFFF'
+  sprites:
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: tights
+
+- type: marking
+  id: UndergarmentTopTanktopHeart
+  bodyPart: UndergarmentTop
+  markingCategory: UndergarmentTop
+  speciesRestriction: [Arachnid, Diona, Human, Dwarf, Moth, Reptilian, SlimePerson]
+  coloring:
+    default:
+      type: null
+      fallbackColor: '#FFFFFF'
+  sprites:
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: tanktop_heart_primary
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: tanktop_heart_secondary
+
+- type: marking
+  id: UndergarmentTopTanktopHeartVox
+  bodyPart: UndergarmentTop
+  markingCategory: UndergarmentTop
+  speciesRestriction: [Vox]
+  coloring:
+    default:
+      type: null
+      fallbackColor: '#FFFFFF'
+  sprites:
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: tanktop_heart_primary_vox
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: tanktop_heart_secondary_vox
+
+- type: marking
+  id: UndergarmentTopTanktopStriped
+  bodyPart: UndergarmentTop
+  markingCategory: UndergarmentTop
+  speciesRestriction: [Arachnid, Diona, Human, Dwarf, Moth, Reptilian, SlimePerson]
+  coloring:
+    default:
+      type: null
+      fallbackColor: '#FFFFFF'
+  sprites:
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: tanktop_striped_primary
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: tanktop_striped_secondary
+
+- type: marking
+  id: UndergarmentTopTanktopStripedVox
+  bodyPart: UndergarmentTop
+  markingCategory: UndergarmentTop
+  speciesRestriction: [Vox]
+  coloring:
+    default:
+      type: null
+      fallbackColor: '#FFFFFF'
+  sprites:
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: tanktop_striped_primary_vox
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: tanktop_striped_secondary_vox
+
+- type: marking
+  id: UndergarmentTopTanktopNT
+  bodyPart: UndergarmentTop
+  markingCategory: UndergarmentTop
+  speciesRestriction: [Arachnid, Diona, Human, Dwarf, Moth, Reptilian, SlimePerson]
+  coloring:
+    default:
+      type: null
+      fallbackColor: '#FFFFFF'
+  sprites:
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: tanktop_NT_primary
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: tanktop_NT_secondary
+
+- type: marking
+  id: UndergarmentTopTanktopNTVox
+  bodyPart: UndergarmentTop
+  markingCategory: UndergarmentTop
+  speciesRestriction: [Vox]
+  coloring:
+    default:
+      type: null
+      fallbackColor: '#FFFFFF'
+  sprites:
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: tanktop_NT_primary_vox
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: tanktop_NT_secondary_vox
+
+- type: marking
+  id: UndergarmentTopTanktopSkull
+  bodyPart: UndergarmentTop
+  markingCategory: UndergarmentTop
+  speciesRestriction: [Arachnid, Diona, Human, Dwarf, Moth, Reptilian, SlimePerson]
+  coloring:
+    default:
+      type: null
+      fallbackColor: '#FFFFFF'
+  sprites:
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: tanktop_skull_primary
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: tanktop_skull_secondary
+
+- type: marking
+  id: UndergarmentTopTanktopSkullVox
+  bodyPart: UndergarmentTop
+  markingCategory: UndergarmentTop
+  speciesRestriction: [Vox]
+  coloring:
+    default:
+      type: null
+      fallbackColor: '#FFFFFF'
+  sprites:
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: tanktop_skull_primary_vox
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: tanktop_skull_secondary_vox
+
+- type: marking
+  id: UndergarmentTopTanktopUSSP
+  bodyPart: UndergarmentTop
+  markingCategory: UndergarmentTop
+  speciesRestriction: [Arachnid, Diona, Human, Dwarf, Moth, Reptilian, SlimePerson]
+  sprites:
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: tanktop_ussp
+
+- type: marking
+  id: UndergarmentSocksSock
+  bodyPart: RFoot
+  markingCategory: Legs
+  speciesRestriction: [Arachnid, Human, Dwarf, Reptilian, SlimePerson]
+  coloring:
+    default:
+      type: null
+      fallbackColor: '#FFFFFF'
+  sprites:
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: sock
+
+- type: marking
+  id: UndergarmentSocksSockPolkadot
+  bodyPart: RFoot
+  markingCategory: Legs
+  speciesRestriction: [Arachnid, Human, Dwarf, Reptilian, SlimePerson]
+  coloring:
+    default:
+      type: null
+      fallbackColor: '#FFFFFF'
+  sprites:
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: sock_polkadot_primary
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: sock_polkadot_secondary
+
+- type: marking
+  id: UndergarmentSocksSockStriped
+  bodyPart: RFoot
+  markingCategory: Legs
+  speciesRestriction: [Arachnid, Human, Dwarf, Reptilian, SlimePerson]
+  coloring:
+    default:
+      type: null
+      fallbackColor: '#FFFFFF'
+  sprites:
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: sock_striped_primary
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: sock_striped_secondary
+
+- type: marking
+  id: UndergarmentSocksNylonSock
+  bodyPart: RFoot
+  markingCategory: Legs
+  speciesRestriction: [Arachnid, Human, Dwarf, Reptilian, SlimePerson]
+  coloring:
+    default:
+      type: null
+      fallbackColor: '#FFFFFF'
+  sprites:
+  - sprite: SS220/Mobs/Customization/undergarments.rsi
+    state: nylon_sock

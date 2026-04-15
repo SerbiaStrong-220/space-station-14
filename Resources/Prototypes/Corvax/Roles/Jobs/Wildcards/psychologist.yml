@@ -8,6 +8,7 @@
       department: Medical
       time: 18000 # SS220-RoleTime
   startingGear: PsychologistGear
+  experienceDefinition: PsychologistRoleExperience # SS220-experience
   icon: "JobIconPsychologist"
   supervisors: job-supervisors-cmo
   access:
@@ -16,12 +17,6 @@
   - Psychologist #SS220 New_accesses_and_some_tweaks
   extendedAccess:
   - Chemistry
-  #SS220 LimitationRevive - start
-  special:
-  - !type:AddComponentSpecial
-    components:
-    - type: DefibrillatorSkill
-  #SS220 LimitationRevive - end
 
 - type: startingGear
   id: PsychologistGear

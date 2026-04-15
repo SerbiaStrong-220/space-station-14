@@ -17,4 +17,13 @@
     weight: 4
   - type: LoadMapRule
     preloadedGrid: ShuttleMimesLost
-    
+
+- type: entity
+  parent: BaseUnknownShuttleRule
+  id: UnknownShuttleRedwings
+  components:
+  - type: StationEvent
+    maxOccurrences: 1
+    weight: 1
+  - type: LoadMapRule
+    preloadedGrid: Redwings

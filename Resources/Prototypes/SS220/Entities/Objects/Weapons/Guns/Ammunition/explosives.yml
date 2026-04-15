@@ -62,14 +62,11 @@
     - ToyGrenade
   - type: HiddenDescription
     entries:
-      - label: hidden-desc-toy-weapons-explosive-syndicate
-        whitelistMindRoles:
-        - TraitorRole
-        - NukeOperative
-      - label: hidden-desc-toy-weapons-explosive-clown
-        jobRequired:
-          - Clown
-          - Mime
+      SyndicateAgentKnowledge: [ hidden-desc-toy-weapons-explosive-syndicate ]
+      ServiceActorKnowledge: [ hidden-desc-toy-weapons-explosive-clown ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ServiceActorKnowledge, null]
 
 #funny kaboom. Totally harmless!
 - type: entity
@@ -167,11 +164,9 @@
     - Grenade #will fit into normal China Lake.
   - type: HiddenDescription
     entries:
-      - label: hidden-desc-toy-weapons-lubebomb-syndicate
-        whitelistMindRoles:
-        - TraitorRole
-        - NukeOperative
-      - label: hidden-desc-toy-weapons-lubebomb-clown
-        jobRequired:
-          - Clown
-          - Mime
+      SyndicateAgentKnowledge: [ hidden-desc-toy-weapons-lubebomb-syndicate ]
+      ServiceActorKnowledge: [ hidden-desc-toy-weapons-lubebomb-clown ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ServiceActorKnowledge, null]
+    hiddenName: ent-GrenadeLubeToy
