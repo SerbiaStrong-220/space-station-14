@@ -21,6 +21,40 @@
       groups:
         Brute: 5
   - type: Wieldable
+  #SS220 melee weapon block added begin
+  - type: AltBlocking
+    rangeBlockProb: 0
+    meleeBlockProb: 0
+    activeRangeBlockProb: 0
+    activeMeleeBlockProb: 0.3
+  - type: Damageable
+    damageContainer: Invulnerable
+  - type: ArmorBlock
+  - type: AltArmor
+    tresholddict:
+      Piercing: 10
+      Blunt: 25
+      Heat: 15
+      Slash: 30
+      Radiation: 1000
+      Poison: 1000
+      Airloss: 1000
+      Caustic: 1000
+    durabilitytresholddict:
+      Piercing: 10000
+      Blunt: 10000
+      Heat: 10000
+      Slash: 10000
+      Radiation: 10000
+      Poison: 1000
+      Airloss: 1000
+      Caustic: 1000
+  - type: InstastunResist
+    resistedStunTypes:
+      - Creampie
+      - Projectile
+    active: false
+  #SS220 melee weapon block added end
   - type: IncreaseDamageOnWield
     damage:
       groups:
@@ -150,6 +184,40 @@
     slots:
     - Back
     - suitStorage
+  #SS220 melee weapon block added begin
+  - type: AltBlocking
+    rangeBlockProb: 0
+    meleeBlockProb: 0
+    activeRangeBlockProb: 0
+    activeMeleeBlockProb: 0.4
+  - type: Damageable
+    damageContainer: Invulnerable
+  - type: ArmorBlock
+  - type: AltArmor
+    tresholddict:
+      Piercing: 10
+      Blunt: 25
+      Heat: 15
+      Slash: 30
+      Radiation: 1000
+      Poison: 1000
+      Airloss: 1000
+      Caustic: 1000
+    durabilitytresholddict:
+      Piercing: 10000
+      Blunt: 10000
+      Heat: 10000
+      Slash: 10000
+      Radiation: 10000
+      Poison: 1000
+      Airloss: 1000
+      Caustic: 1000
+  - type: InstastunResist
+    resistedStunTypes:
+      - Creampie
+      - Projectile
+    active: false
+  #SS220 melee weapon block added end
   - type: AmmoCounter
   - type: UseDelayOnShoot
   - type: UseDelay
@@ -265,6 +333,40 @@
     proto: BulletChargeGlaive
     capacity: 1
     count: 1
+  #SS220 melee weapon block added begin
+  - type: AltBlocking
+    rangeBlockProb: 0
+    meleeBlockProb: 0
+    activeRangeBlockProb: 0
+    activeMeleeBlockProb: 0.6
+  - type: Damageable
+    damageContainer: Invulnerable
+  - type: ArmorBlock
+  - type: AltArmor
+    tresholddict:
+      Piercing: 10
+      Blunt: 25
+      Heat: 15
+      Slash: 30
+      Radiation: 1000
+      Poison: 1000
+      Airloss: 1000
+      Caustic: 1000
+    durabilitytresholddict:
+      Piercing: 10000
+      Blunt: 10000
+      Heat: 10000
+      Slash: 10000
+      Radiation: 10000
+      Poison: 1000
+      Airloss: 1000
+      Caustic: 1000
+  - type: InstastunResist
+    resistedStunTypes:
+      - Creampie
+      - Projectile
+    active: false
+  #SS220 melee weapon block added end
   - type: LeechOnMarker
     leech:
       groups:

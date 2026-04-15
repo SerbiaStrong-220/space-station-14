@@ -15,6 +15,40 @@
     state: icon
   - type: Item
     size: Normal
+  #SS220 melee weapon block added begin
+  - type: AltBlocking
+    rangeBlockProb: 0
+    meleeBlockProb: 0
+    activeRangeBlockProb: 0
+    activeMeleeBlockProb: 0.5 # Well, it should depend on the user's melee weapon skill but unfortunately there is none as for now
+  - type: Damageable
+    damageContainer: Invulnerable
+  - type: ArmorBlock
+  - type: AltArmor
+    tresholddict:
+      Piercing: 10
+      Blunt: 25
+      Heat: 15
+      Slash: 30
+      Radiation: 1000
+      Poison: 1000
+      Airloss: 1000
+      Caustic: 1000
+    durabilitytresholddict:
+      Piercing: 10000
+      Blunt: 10000
+      Heat: 10000
+      Slash: 10000
+      Radiation: 10000
+      Poison: 1000
+      Airloss: 1000
+      Caustic: 1000
+  - type: InstastunResist
+    resistedStunTypes:
+      - Creampie
+      - Projectile
+    active: false
+  #SS220 melee weapon block added end
   - type: Utensil
     types:
       - Knife
