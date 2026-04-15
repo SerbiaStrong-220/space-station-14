@@ -37,7 +37,7 @@ namespace Content.Shared.Construction
                     var name = _prototype.Index(stack.Spawn).Name;
                     args.PushMarkup(Loc.GetString("machine-board-component-required-element-entry-text",
                         ("amount", amount),
-                        ("requiredElement", Loc.GetString(_prototype.Index<MachinePartPrototype>(part).Name))));
+                        ("requiredElement", Loc.GetString(name))));
                 }
 
                 foreach (var (material, amount) in component.MaterialRequirements)
