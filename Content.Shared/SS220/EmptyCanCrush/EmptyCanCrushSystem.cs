@@ -1,3 +1,4 @@
+//© SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
 using Content.Shared.Tag;
@@ -57,7 +58,7 @@ public sealed class EmptyCanCrushSystem : EntitySystem
         {
             _handsSystem.TryForcePickup(user, crushedCan, handID);
         }
-        
+
         PredictedQueueDel(entity.Owner);
 
     }
