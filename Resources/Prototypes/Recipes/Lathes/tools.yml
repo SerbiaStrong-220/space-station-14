@@ -224,3 +224,13 @@
     Steel: 750
     Plasma: 150
     Uranium: 150
+  
+- type: latheRecipe
+  id: RPED
+  result: RPED
+  category: Tools
+  completetime: 10
+  materials:
+    Steel: 650
+    Plastic: 150
+    Gold: 50
