@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Server.Construction.Components;
 using Content.Shared.Construction.Components;
 using Content.Shared.Verbs;
@@ -9,10 +10,13 @@ namespace Content.Server.Construction;
 
 public sealed partial class ConstructionSystem
 {
+    [Dependency] private readonly ExamineSystem _examineSystem = default!;
+
     private void InitializeMachines()
     {
         SubscribeLocalEvent<MachineComponent, ComponentInit>(OnMachineInit);
         SubscribeLocalEvent<MachineComponent, MapInitEvent>(OnMachineMapInit);
+        SubscribeLocalEvent<MachineComponent, GetVerbsEvent<ExamineVerb>>(OnMachineExaminableVerb);
     }
 
     private void OnMachineInit(EntityUid uid, MachineComponent component, ComponentInit args)
@@ -151,5 +155,52 @@ public sealed partial class ConstructionSystem
                     throw new Exception($"Couldn't insert machine component part with default prototype '{tagName}' to machine with prototype {Prototype(uid)?.ID ?? "N/A"}");
             }
         }
+    }
+}
+
+public sealed class RefreshPartsEvent : EntityEventArgs
+{
+    public IReadOnlyList<MachinePartComponent> Parts = new List<MachinePartComponent>();
+
+    public Dictionary<string, float> PartRatings = new();
+}
+
+public sealed class UpgradeExamineEvent : EntityEventArgs
+{
+    private FormattedMessage Message;
+
+    public UpgradeExamineEvent(ref FormattedMessage message)
+    {
+        Message = message;
+    }
+
+    /// <summary>
+    /// Add a line to the upgrade examine tooltip with a percentage-based increase or decrease.
+    /// </summary>
+    public void AddPercentageUpgrade(string upgradedLocId, float multiplier)
+    {
+        var percent = Math.Round(100 * MathF.Abs(multiplier - 1), 2);
+        var locId = multiplier switch {
+            < 1 => "machine-upgrade-decreased-by-percentage",
+            1 or float.NaN => "machine-upgrade-not-upgraded",
+            > 1 => "machine-upgrade-increased-by-percentage",
+        };
+        var upgraded = Loc.GetString(upgradedLocId);
+        this.Message.AddMarkup(Loc.GetString(locId, ("upgraded", upgraded), ("percent", percent)) + '\n');
+    }
+
+    /// <summary>
+    /// Add a line to the upgrade examine tooltip with a numeric increase or decrease.
+    /// </summary>
+    public void AddNumberUpgrade(string upgradedLocId, int number)
+    {
+        var difference = Math.Abs(number);
+        var locId = number switch {
+            < 0 => "machine-upgrade-decreased-by-amount",
+            0 => "machine-upgrade-not-upgraded",
+            > 0 => "machine-upgrade-increased-by-amount",
+        };
+        var upgraded = Loc.GetString(upgradedLocId);
+        this.Message.AddMarkup(Loc.GetString(locId, ("upgraded", upgraded), ("difference", difference)) + '\n');
     }
 }
