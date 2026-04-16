@@ -37,12 +37,12 @@ public sealed class SurgerySystemTest
   graph:
   - node: surgery-head-start
     edges:
-    - to: incision
-      id: incision
+    - to: head-skin-incision
+      id: head-skin-incision
       baseEdge: incision
       edgeTooltip: to-torso-skin-incision
       delay: 1
-  - node: incision
+  - node: head-skin-incision
     edges:
     - to: seal-wound
       baseEdge: incision
