@@ -14,6 +14,12 @@ namespace Content.Server.Construction.Components
 
         [ViewVariables]
         public bool HasBoard => BoardContainer?.ContainedEntities.Count != 0;
+        
+        [DataField("requirements")]
+        public Dictionary<string, int> Requirements = new();
+
+        [DataField("progress")]
+        public Dictionary<string, int> Progress = new();
 
         [ViewVariables]
         public readonly Dictionary<ProtoId<StackPrototype>, int> MaterialProgress = new();
