@@ -3,6 +3,8 @@ using Content.Server.Construction.Components;
 using Content.Server.Examine;
 using Content.Shared.Construction.Components;
 using Content.Shared.Verbs;
+using Content.Shared.Construction.Prototypes;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Robust.Shared.Containers;
 
@@ -12,6 +14,7 @@ namespace Content.Server.Construction;
 public sealed partial class ConstructionSystem
 {
     [Dependency] private readonly ExamineSystem _examineSystem = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
     private void InitializeMachines()
     {
