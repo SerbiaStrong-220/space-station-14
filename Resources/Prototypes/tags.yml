@@ -1142,6 +1142,12 @@
   id: Pizza
 
 - type: Tag
+  id: PlantAnalyzer # Storage whitelist: ClothingBeltPlant. ItemMapper: ClothingBeltPlant
+
+- type: Tag
+  id: PlantBGone # Storage whitelist: ClothingBeltPlant. ItemMapper: ClothingBeltPlant
+
+- type: Tag
   id: PKAUpgrade
 
 - type: Tag
