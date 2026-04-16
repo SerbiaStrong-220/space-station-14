@@ -50,7 +50,7 @@ jobs:
     - name: Run Content.IntegrationTests
       shell: pwsh
       run: |
-        $env:DOTNET_gcServer=1
+        $env:DOTNET_gcServer=0
         dotnet test --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj -- NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
 
   ci-success:
