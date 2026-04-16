@@ -3,11 +3,12 @@ using Content.Shared.Stacks;
 using Content.Shared.Tag;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.Construction.Components;
 
 [RegisterComponent, NetworkedComponent]
-public sealed partial class MachineBoardComponent : Component
+public partial class MachineBoardComponent : Component
 {
 
     [DataField]
@@ -34,8 +35,8 @@ public sealed partial class MachineBoardComponent : Component
     /// <summary>
     /// The machine that's constructed when this machine board is completed.
     /// </summary>
-    [DataField(required: true)]
-    public EntProtoId Prototype;
+    [DataField]
+    public EntProtoId? Prototype;
 }
 
 [DataDefinition, Serializable]
@@ -49,4 +50,9 @@ public partial struct GenericPartInfo
 
     [DataField]
     public LocId? ExamineName;
+}
+[RegisterComponent, NetworkedComponent]
+[ComponentProtoName("Circuitboard")]
+public sealed partial class CircuitboardComponent : MachineBoardComponent
+{
 }

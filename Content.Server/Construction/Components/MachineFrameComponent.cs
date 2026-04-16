@@ -1,4 +1,5 @@
 ﻿using Content.Shared.Construction.Components;
+using Content.Shared.Construction.Prototypes;
 using Content.Shared.Stacks;
 using Content.Shared.Tag;
 using Robust.Shared.Containers;
@@ -16,10 +17,10 @@ namespace Content.Server.Construction.Components
         public bool HasBoard => BoardContainer?.ContainedEntities.Count != 0;
         
         [DataField("requirements")]
-        public Dictionary<string, int> Requirements = new();
+        public Dictionary<ProtoId<MachinePartPrototype>, int> Requirements = new();
 
         [DataField("progress")]
-        public Dictionary<string, int> Progress = new();
+        public Dictionary<ProtoId<MachinePartPrototype>, int> Progress = new();
 
         [ViewVariables]
         public readonly Dictionary<ProtoId<StackPrototype>, int> MaterialProgress = new();
