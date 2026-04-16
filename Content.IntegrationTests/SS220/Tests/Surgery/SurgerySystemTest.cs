@@ -32,24 +32,24 @@ public sealed class SurgerySystemTest
   description: surgery-edge-tooltip-err
   targetPart: Torso
   requirements: []
-  start: start-node
-  end: end-node
+  start: surgery-head-start
+  end: seal-wound
   graph:
-  - node: start-node
+  - node: surgery-head-start
     edges:
-    - to: step-1
+    - to: incision
+      id: incision
       baseEdge: incision
       edgeTooltip: to-torso-skin-incision
-      id: edge-1
       delay: 1
-  - node: step-1
+  - node: incision
     edges:
-    - to: end-node
+    - to: seal-wound
       baseEdge: incision
       edgeTooltip: to-torso-skin-incision
       id: edge-2
       delay: 1
-  - node: end-node
+  - node: seal-wound
 ";
 
     [Test]
