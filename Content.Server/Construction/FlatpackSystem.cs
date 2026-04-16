@@ -84,8 +84,13 @@ public sealed class FlatpackSystem : SharedFlatpackSystem
         EntProtoId proto;
         if (TryComp<MachineBoardComponent>(board, out var machine))
         {
+            if (machine.Prototype == null)
+            {
+                Log.Error($"Machine board {ToPrettyString(board)} missing prototype!");
+                return;
+            }
             cost = GetFlatpackCreationCost(ent, (board, machine));
-            proto = machine.Prototype;
+            proto = machine.Prototype.Value;
         }
         else if (TryComp<ComputerBoardComponent>(board, out var computer) && computer.Prototype != null)
         {
