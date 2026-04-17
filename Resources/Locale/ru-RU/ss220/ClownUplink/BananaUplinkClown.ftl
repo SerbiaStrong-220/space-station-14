@@ -20,6 +20,9 @@ uplink-clown-soap-desc = Мыло. Оно более скользкое, чем 
 uplink-clown-cigpack-name = Пачка сигарет синдиката
 uplink-clown-cigpack-desc = Тяжелая жизнь клоуна, посиди покури с мимом...
 
+uplink-clown-pigrenade-name = Хряконата
+uplink-clown-pigrenade-desc = Наведите суету поварам этим одноразовым проектором голодных свиней.
+
 uplink-clown-omegasoap-name = ОМЕГА мыло
 uplink-clown-omegasoap-desc = Я получил власть, которая и не снилась моей маме!! СЛАВА ХОНК-МАТЕРИ!
 

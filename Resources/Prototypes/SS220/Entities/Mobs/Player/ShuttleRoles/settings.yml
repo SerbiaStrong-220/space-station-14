@@ -8,3 +8,77 @@
     - type: Loadout
       prototypes: [ VisitorTourist ]
       roleLoadout: [ RoleSurvivalStandard ]
+
+- type: randomHumanoidSettings
+  id: RedWings
+  parent: EventHumanoid
+  speciesBlacklist: [ Felinid, Diona, Arachnid, Moth, Vox, Reptilian, Skeleton, SlimePerson, Vulpkanin, Tajaran, Dwarf]
+  components:
+    - type: GhostRole
+      raffle:
+        settings: short
+
+- type: randomHumanoidSettings
+  id: RedWingsOfficer
+  parent: RedWings
+  components:
+    - type: GhostRole
+      name: ghost-role-information-redwings-officer-name
+      description: ghost-role-information-redwings-officer-description
+      rules: ghost-role-information-redwings-officer-rules
+    - type: Loadout
+      prototypes: [ RedWingsOfficerGear ]
+    - type: AutoImplant
+      implants:
+      - DeathRattleImplantInterdyne
+    - type: RandomMetadata
+      nameSegments:
+      - NamesRedwingsLast
+      nameFormat: name-format-redwings-officer
+    - type: RoleExperienceAdd
+      definitionId: SecurityOfficerRoleExperience
+      addSublevelPoints: 5
+
+- type: randomHumanoidSettings
+  id: RedWingsMedic
+  parent: RedWings
+  components:
+    - type: GhostRole
+      name: ghost-role-information-redwings-medic-name
+      description: ghost-role-information-redwings-medic-description
+      rules: ghost-role-information-redwings-medic-rules
+      job: RedWingsMedic
+    - type: Loadout
+      prototypes: [ RedWingsMedicGear ]
+    - type: AutoImplant
+      implants:
+      - DeathRattleImplantInterdyne
+    - type: RandomMetadata
+      nameSegments:
+      - NamesRedwingsLast
+      nameFormat: name-format-redwings-medic
+    - type: RoleExperienceAdd
+      definitionId: BrigmedicRoleExperience
+      addSublevelPoints: 5
+
+- type: randomHumanoidSettings
+  id: RedWingsPilot
+  parent: RedWings
+  components:
+    - type: GhostRole
+      name: ghost-role-information-redwings-pilot-name
+      description: ghost-role-information-redwings-pilot-description
+      rules: ghost-role-information-redwings-pilot-rules
+      job: RedWingsPilot
+    - type: Loadout
+      prototypes: [ RedWingsPilotGear ]
+    - type: AutoImplant
+      implants:
+      - DeathRattleImplantInterdyne
+    - type: RandomMetadata
+      nameSegments:
+      - NamesRedwingsLast
+      nameFormat: name-format-redwings-pilot
+    - type: RoleExperienceAdd
+      definitionId: SecurityPilotRoleExperience
+      addSublevelPoints: 5

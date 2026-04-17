@@ -29,16 +29,33 @@ using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using Content.Client.SS220.Experience;
+using Content.Shared.SS220.Experience.Skill;
 
 namespace Content.Client.HealthAnalyzer.UI
 {
     [GenerateTypedNameReferences]
     public sealed partial class HealthAnalyzerWindow : FancyWindow
     {
+        private readonly RandomShuffle<GetHealthAnalyzerShuffleChance> _randomShuffle = new();  // SS220-experience-update
+
         private readonly IEntityManager _entityManager;
         private readonly SpriteSystem _spriteSystem;
         private readonly IPrototypeManager _prototypes;
         private readonly IResourceCache _cache;
+
+        // SS220-experience-update-begin
+        /// <summary> This value was chosen for better user experience </summary>
+        private const float SkillIssueReshuffleChance = 0.15f;
+
+        private const float TemperatureSkillIssueRandomScaleAmplitude = 0.3f;
+        private const float BloodSkillIssueRandomScaleAmplitude = 0.3f;
+        private const float DamageSkillIssueRandomScaleAmplitude = 0.3f;
+
+        private const float MaxRandomSkillIssueFlatDamageAddition = 12f;
+        private const float MinRandomSkillIssueFlatDamageAddition = 0f;
+        // SS220-experience-update-end
+
         // ss220 add reagents to health analyzer start
         private readonly SharedSolutionContainerSystem _solSystem;
         // ss220 add reagents to health analyzer end
@@ -46,6 +63,7 @@ namespace Content.Client.HealthAnalyzer.UI
         public HealthAnalyzerWindow()
         {
             RobustXamlLoader.Load(this);
+            _randomShuffle.MakeNewRandomChange(SkillIssueReshuffleChance); // SS220-experience-update
 
             var dependencies = IoCManager.Instance!;
             _entityManager = dependencies.Resolve<IEntityManager>();
@@ -59,6 +77,9 @@ namespace Content.Client.HealthAnalyzer.UI
 
         public void Populate(HealthAnalyzerScannedUserMessage msg)
         {
+            PrintButton.Visible = msg.CanPrint; // SS220-health-analyzer-report
+            PrintButton.Disabled = true; // SS220-health-analyzer-report
+
             // ss220 add reagents to health analyzer start
             ReagentsContainer.DisposeAllChildren();
             // ss220 add reagents to health analyzer end
@@ -71,6 +92,8 @@ namespace Content.Client.HealthAnalyzer.UI
                 NoPatientDataText.Visible = true;
                 return;
             }
+
+            PrintButton.Disabled = !msg.CanPrint; // SS220-health-analyzer-report
 
             // ss220 add reagents to health analyzer start
             if (_entityManager.TryGetComponent<SolutionContainerManagerComponent>(target, out var solComp))
@@ -102,6 +125,14 @@ namespace Content.Client.HealthAnalyzer.UI
             // ss220 add reagents to health analyzer end
 
             NoPatientDataText.Visible = false;
+
+            // SS220-experience-update-begin
+            if (msg.Bleeding is not null)
+                msg.Bleeding = _randomShuffle.GetRandomBool(nameof(msg.Bleeding), msg.Bleeding.Value);
+
+            msg.Temperature = _randomShuffle.GetRandomFromScaleAmplitude(nameof(msg.Temperature), msg.Temperature, TemperatureSkillIssueRandomScaleAmplitude);
+            msg.BloodLevel = _randomShuffle.GetRandomFromScaleAmplitude(nameof(msg.BloodLevel), msg.BloodLevel, BloodSkillIssueRandomScaleAmplitude);
+            // SS220-experience-update-end
 
             // Scan Mode
 
@@ -155,7 +186,11 @@ namespace Content.Client.HealthAnalyzer.UI
 
             // Total Damage
 
-            DamageLabel.Text = damageable.TotalDamage.ToString();
+            // SS220-experience-update-begin
+            var totalDamage = _randomShuffle.GetRandomFromScaleAmplitude(nameof(damageable), damageable.TotalDamage, DamageSkillIssueRandomScaleAmplitude);
+            DamageLabel.Text = totalDamage.ToString();
+            // SS220-experience-update-end
+            // DamageLabel.Text = damageable.TotalDamage.ToString();
 
             // Alerts
 
@@ -211,10 +246,15 @@ namespace Content.Client.HealthAnalyzer.UI
         {
             GroupsContainer.RemoveAllChildren();
 
-            foreach (var (damageGroupId, damageAmount) in groups)
+            // foreach (var (damageGroupId, damageAmount) in groups) // SS220-experience-update
+            foreach (var (damageGroupId, startDamageAmount) in groups) // SS220-experience-update
             {
+                var damageAmount = _randomShuffle.GetRandomBounded(damageGroupId, startDamageAmount, MinRandomSkillIssueFlatDamageAddition, MaxRandomSkillIssueFlatDamageAddition); // SS220-experience-update
+
                 if (damageAmount == 0)
                     continue;
+
+                damageAmount *= _randomShuffle.GetRandomFromScaleAmplitude(damageGroupId, 1f, DamageSkillIssueRandomScaleAmplitude); // SS220-experience-update
 
                 var groupTitleText = $"{Loc.GetString(
                     "health-analyzer-window-damage-group-text",
@@ -237,8 +277,20 @@ namespace Content.Client.HealthAnalyzer.UI
 
                 foreach (var type in group.DamageTypes)
                 {
-                    if (!damageDict.TryGetValue(type, out var typeAmount) || typeAmount <= 0)
+                    // SS220-experience-update-begin
+                    // if (!damageDict.TryGetValue(type, out var typeAmount) || typeAmount <= 0) [wizden]
+                    //     continue; [wizden]
+
+                    if (!damageDict.TryGetValue(type, out var typeAmount))
                         continue;
+
+                    typeAmount = _randomShuffle.GetRandomBounded(damageGroupId, typeAmount, MinRandomSkillIssueFlatDamageAddition, MaxRandomSkillIssueFlatDamageAddition);
+
+                    if (typeAmount <= 0)
+                        continue;
+                    // SS220-experience-update-end
+
+                    typeAmount *= _randomShuffle.GetRandomFromScaleAmplitude(type, 1f, DamageSkillIssueRandomScaleAmplitude); // SS220-experience-update
 
                     var damageString = Loc.GetString(
                         "health-analyzer-window-damage-type-text",

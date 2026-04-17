@@ -82,6 +82,8 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
     /// </summary>
     public const float GracePeriod = 0.05f;
 
+    private const float MaxDisarmPercentStaminaDamage = 0.3f; // SS220-add-disarm-stamina-damage-cap
+
     public override void Initialize()
     {
         base.Initialize();
@@ -436,6 +438,22 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         DirtyField(weaponUid, weapon, nameof(MeleeWeaponComponent.NextAttack));
 
         // Do this AFTER attack so it doesn't spam every tick
+
+        // SS220-Extend Weapon Logic-Start
+        var userEv = new AttemptMeleeUserEvent(weaponUid);
+        RaiseLocalEvent(user, ref userEv);
+
+        if (userEv.Cancelled)
+        {
+            if (userEv.Message != null)
+            {
+                PopupSystem.PopupClient(userEv.Message, weaponUid, user);
+            }
+
+            return false;
+        }
+        // SS220-Extend Weapon Logic-End
+
         var ev = new AttemptMeleeEvent();
         RaiseLocalEvent(weaponUid, ref ev);
 
@@ -520,6 +538,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             var missEvent = new MeleeHitEvent(new List<EntityUid>(), user, meleeUid, damage, null);
             RaiseLocalEvent(meleeUid, missEvent);
             _meleeSound.PlaySwingSound(user, meleeUid, component);
+            RaiseLocalEvent(user, new LightAttackPerformedEvent(null, meleeUid, GetCoordinates(ev.Coordinates))); // SS220-MartialArts
             return;
         }
 
@@ -590,6 +609,8 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         {
             DoDamageEffect(targets, user, targetXform);
         }
+
+        RaiseLocalEvent(user, new LightAttackPerformedEvent(target.Value, meleeUid, targetXform.Coordinates)); // SS220-MartialArts
     }
 
     protected abstract void DoDamageEffect(List<EntityUid> targets, EntityUid? user,  TransformComponent targetXform);
@@ -853,7 +874,15 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             chance += malus.Malus;
         }
 
-        return Math.Clamp(chance, 0f, 1f);
+        // SS220-add-skill-to-disarm-begin
+        var disarmerEv = new GetDisarmChanceDisarmerMultiplierEvent(disarmer, disarmed, inTargetHand, 1f, chance);
+        RaiseLocalEvent(disarmer, ref disarmerEv);
+        var targetEv = new GetDisarmChanceTargetMultiplierEvent(disarmer, disarmed, inTargetHand, 1f);
+        RaiseLocalEvent(disarmed, ref targetEv);
+        chance = disarmerEv.BaseChance;
+        // SS220-add-skill-to-disarm-end
+
+        return Math.Clamp(1f - (disarmerEv.Multiplier * targetEv.Multiplier * (1f - chance)), 0f, 1f); // SS220-add-skill-to-disarm
     }
 
     private bool DoDisarm(EntityUid user, DisarmAttackEvent ev, EntityUid meleeUid, MeleeWeaponComponent component, ICommonSession? session)
@@ -916,6 +945,11 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         if (attemptEvent.Cancelled)
             return false;
 
+        // SS220-MartialArts-Begin
+        // i'm struggling where to put this block, i hope it will fit here
+        RaiseLocalEvent(user, new DisarmAttackPerformedEvent(target.Value, Transform(target.Value).Coordinates));
+        // SS220-MartialArts-End
+
         var chance = CalculateDisarmChance(user, target.Value, inTargetHand, combatMode);
 
         // At this point we diverge
@@ -932,6 +966,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         }
 
         var eventArgs = new DisarmedEvent(target.Value, user, 1 - chance);
+        eventArgs.MaxPercentStaminaDamage = MaxDisarmPercentStaminaDamage; // SS220-add-disarm-stamina-damage-cap
         RaiseLocalEvent(target.Value, ref eventArgs);
 
         // Nothing handled it so abort.

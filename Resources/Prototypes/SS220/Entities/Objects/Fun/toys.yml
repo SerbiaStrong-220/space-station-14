@@ -16,6 +16,8 @@
   name: double toy sword
   description: New Sandy-Cat plastic sword! Twice as much more epic and loud noises!
   components:
+    - type: Tag
+      tags: []
     - type: EnergySword
     - type: ItemToggle
       onUse: false # wielding events control it instead
@@ -90,14 +92,11 @@
     clumsyProof: true
   - type: HiddenDescription
     entries:
-    - label: hidden-desc-toy-weapons-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: hidden-desc-toy-weapons-clown
-      jobRequired:
-        - Clown
-        - Mime
+      SyndicateAgentKnowledge: [ hidden-desc-toy-weapons-syndicate ]
+      ServiceActorKnowledge: [ hidden-desc-toy-weapons-clown ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ServiceActorKnowledge, null]
 
 - type: entity
   parent: [ BaseGunToy, WeaponLauncherChinaLake ]
@@ -347,10 +346,10 @@
     - type: Appearance
     - type: HiddenDescription
       entries:
-      - label: hidden-desc-toy-weapons-syndicate
-        whitelistMindRoles:
-        - TraitorRole
-        - NukeOperative
+        SyndicateAgentKnowledge: [ hidden-desc-toy-weapons-syndicate ]
+      nameEntries:
+      - [SyndicateAgentKnowledge, null]
+      hiddenName: ent-EnergyShieldToy
 
 #katana for some reason
 - type: entity

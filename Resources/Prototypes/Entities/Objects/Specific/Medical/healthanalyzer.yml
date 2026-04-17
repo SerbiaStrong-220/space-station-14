@@ -28,6 +28,7 @@
   - type: HealthAnalyzer
     scanningEndSound:
       path: "/Audio/Items/Medical/healthscanner.ogg"
+    canPrint: true # SS220-health-analyzer-report
   - type: Tag
     tags:
       - DiscreteHealthAnalyzer

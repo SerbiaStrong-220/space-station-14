@@ -5,8 +5,22 @@
   description: department-law-description
   color: "#323ba9"
   roles:
+  #- NanoTrasenRepresentative #SS220 TODO NanoTraisen Representative
   - Magistrate
   - IAA
   - Lawyer
   primary: false
   weight: 80
+
+- type: department
+  id: RedWings
+  name: department-RedWings
+  description: department-redwings-description
+  color: "#ab3128" #ss220-chatcolor
+  roles:
+  - RedWingsOfficer
+  - RedWingsMedic
+  - RedWingsPilot
+  editorHidden: true
+  weight: 90
+  

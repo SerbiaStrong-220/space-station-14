@@ -66,7 +66,7 @@
       points: 2
       required: false
     Legs:
-      points: 2
+      points: 3 #SS220-underwear-resprite
       required: false
     Arms:
       points: 2
