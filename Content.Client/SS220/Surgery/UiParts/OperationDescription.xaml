@@ -18,10 +18,10 @@
         <BoxContainer Orientation="Vertical" VerticalExpand="True">
             <BoxContainer Orientation="Horizontal">
                 <TextureRect Name="LockIcon" Stretch="Keep" TexturePath="/Textures/Interface/VerbIcons/lock.svg.192dpi.png"
-                    Visible="False" TextureScale="0.25 0.25"/>
+                    Visible="False" TextureScale="0.25 0.25" SetSize="16 16"/>
+                <RichTextLabel Name="Header" Text="{Loc 'operation-description-header'}" HorizontalExpand="True" HorizontalAlignment="Left"/>
             </BoxContainer>
             <BoxContainer Orientation="Vertical" VerticalExpand="True">
-                <RichTextLabel Name="Header" Text="{Loc 'operation-description-header'}" HorizontalExpand="True" HorizontalAlignment="Left"/>
                 <RichTextLabel Name="OperationName" Text="operation-name" HorizontalExpand="True" HorizontalAlignment="Left" Margin="20 5 5 0"/>
                 <ScrollContainer Name="ScrollOperationContainer" HScrollEnabled="False" Margin="10 5 5 0"
                     HorizontalExpand="False" VerticalExpand="True" MouseFilter="Pass">

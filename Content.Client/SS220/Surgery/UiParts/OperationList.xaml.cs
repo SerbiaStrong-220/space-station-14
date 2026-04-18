@@ -70,6 +70,18 @@ public sealed partial class OperationList : Control
 
             OperationContainer.AddChild(button);
         }
+
+        OperationContainer.InvalidateArrange();
+        OperationContainer.InvalidateMeasure();
+
+        OperationScroll.InvalidateArrange();
+        OperationScroll.InvalidateMeasure();
+
+        ContentContainer.InvalidateArrange();
+        ContentContainer.InvalidateMeasure();
+
+        InvalidateArrange();
+        InvalidateMeasure();
     }
 
     public void SetAllSurgeryButtonsPress(bool pressed)

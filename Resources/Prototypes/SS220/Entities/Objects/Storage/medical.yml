@@ -18,15 +18,15 @@
   components:
   - type: StorageFill
     contents:
-      - id: Hemostat
-      - id: SawElectric
-      - id: Cautery
-      - id: Retractor
-      - id: Scalpel
-      - id: ClothingHandsGlovesNitrile
-      - id: SurgeryDrapes
-      - id: MindslaveFixerCerebralImplant
-      - id: MindslaveFixSurgeryGuide
+    - id: Hemostat
+    - id: SawElectric
+    - id: Cautery
+    - id: Retractor
+    - id: Scalpel
+    - id: ClothingHandsGlovesNitrile
+    - id: SurgeryDrapes
+    - id: MindslaveFixerCerebralImplant
+    - id: BodyAnalyzer
 
 - type: entity
   parent: BoxCardboard
@@ -46,7 +46,7 @@
   - type: Storage
     maxItemSize: Small
     grid:
-    - 0,0,4,3
+    - 0,0,3,3
     whitelist:
       tags:
       - SurgeryTool

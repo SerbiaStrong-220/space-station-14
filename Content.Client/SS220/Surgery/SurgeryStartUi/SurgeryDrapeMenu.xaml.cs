@@ -35,7 +35,7 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
 
         Puppet.SelectedPartChanged += (part, prevPart) =>
         {
-            OperationsLabel.Text = LocPuppetPartPath(part);
+            OperationsLabel.Text = Loc.GetString(LocPuppetPartPath(part));
             UpdateOperations(part, prevPart);
         };
 
