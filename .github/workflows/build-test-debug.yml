@@ -59,7 +59,7 @@ jobs:
       shell: pwsh
       run: |
         $env:DOTNET_gcServer=1
-        dotnet test --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj -- NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results" NUnit.Where="not test =~ 'PostMapInitTest' and not test =~ 'StationPowerTests' and not test =~ 'ShuttlesLoadableTest' and not test =~ 'NoSavedPostMapInitTest' and not test =~ 'NonGameMapsLoadableTest' and not test =~ 'EntityTest'"
+        dotnet test --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj -- NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results" NUnit.Where="test !~ 'PostMapInitTest' and test !~ 'StationPowerTests' and test !~ 'ShuttlesLoadableTest' and test !~ 'NoSavedPostMapInitTest' and test !~ 'NonGameMapsLoadableTest' and test !~ 'EntityTest'"
     
     # SS220-separate-tests-begin
     - name: Run Content.IntegrationTests maps test
