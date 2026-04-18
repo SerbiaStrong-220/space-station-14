@@ -170,7 +170,7 @@
   - !type:GroupLoadoutEffect
     proto: WassermanWaistcoat
   equipment:
-    outerClothing: ClothingOuterwWassermanWaistcoat
+    outerClothing: ClothingOuterWassermanWaistcoat
 
 - type: loadout
   id: TrenchCoat

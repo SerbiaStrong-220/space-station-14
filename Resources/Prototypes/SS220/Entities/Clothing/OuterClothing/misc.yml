@@ -97,7 +97,7 @@
 
 - type: entity
   parent: ClothingOuterStorageBase
-  id: ClothingOuterwWassermanWaistcoat
+  id: ClothingOuterWassermanWaistcoat
   name: wasserman waistcoat
   description: Secrets stay safest in your pocket.
   components:
@@ -106,22 +106,16 @@
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Misc/wasserman_waistcoat.rsi
   - type: ClothingSpeedModifier
-    walkModifier: 0.8
-    sprintModifier: 0.7
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.90
-        Slash: 0.90
-        Piercing: 0.95
+    walkModifier: 0.9
+    sprintModifier: 0.8
   - type: HeldSpeedModifier
   - type: Storage
     grid:
     - 0,0,0,1
     - 0,3,0,4
-    - 2,0,3,1
-    - 2,3,3,5
-    - 5,0,6,1
-    - 5,3,6,5
-    - 8,0,8,1
-    - 8,3,8,4
+    - 2,0,2,0
+    - 2,5,2,1
+    - 4,0,4,0
+    - 4,5,4,1
+    - 6,0,6,1
+    - 6,3,6,4

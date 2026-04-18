@@ -24,5 +24,5 @@ ent-ClothingOuterJacketChefNanotrasen = жакет заслуженного ше
 
 clothing-outer-radio-handheld = Рация
 
-ent-ClothingOuterwWassermanWaistcoat = жилетка "Вайзерман"
-    .desc = Карманы для маленьких секретов.
+ent-ClothingOuterWassermanWaistcoat = жилетка "Вайзерман"
+    .desc = Карманов мало не бывает.
