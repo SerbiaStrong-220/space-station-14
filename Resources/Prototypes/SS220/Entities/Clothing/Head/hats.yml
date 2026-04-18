@@ -500,7 +500,7 @@
   - type: Reflect
     reflectProb: 0.00001
     spread: 360
-    reflective:
+    reflects:
     - NonEnergy
   - type: Tag
     tags:
