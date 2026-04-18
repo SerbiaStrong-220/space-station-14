@@ -21,7 +21,7 @@
     requirement:
       !type:RoleTimeRequirement
       role: JobMusician
-      time: 72000 # 20 hrs
+      time: 36000 # 10 hrs
   sponsorTierLoadoutEffects:
   - !type:GroupLoadoutEffect
     proto: SeniorDevTeamTier
@@ -37,7 +37,7 @@
     requirement:
       !type:RoleTimeRequirement
       role: JobMusician
-      time: 144000 # 40 hrs
+      time: 36000 # 10 hrs
   sponsorTierLoadoutEffects:
   - !type:GroupLoadoutEffect
     proto: SeniorDevTeamTier
