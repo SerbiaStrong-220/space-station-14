@@ -131,7 +131,7 @@
 
 - type: entity
   parent: CrushedCanBase
-  name: crushed Расслабляющая Персиковая Газировка
+  name: crushed Relaxing Peach Soda
   id: CrushedCanRelaxingPeach
   description: A crushed can of Relaxing Peach Soda. Rumors say it makes you kinder and more empathetic.
   components:
@@ -241,12 +241,12 @@
 
 - type: entity
   parent: CrushedCanBase
-  name: crushed beer "Trakcer" can
+  name: crushed beer "Traсker" can
   id: CrushedCanSponsorBeer
   description: A crushed beer can. Small joy, big taste, no worries!
   components:
   - type: Sprite
-    sprite: SS220/Objects/Consumable/TrashDrinks/crushed_cans/220/спонсор/beer_can.rsi
+    sprite: SS220/Objects/Consumable/TrashDrinks/crushed_cans/220/sponsor/beer_can.rsi
 
 - type: entity
   parent: CrushedCanBase
@@ -256,7 +256,6 @@
   components:
   - type: Sprite
     sprite: SS220/Objects/Consumable/TrashDrinks/crushed_cans/220/rrranta.rsi
-
 
 - type: entity
   parent: CrushedCanBase

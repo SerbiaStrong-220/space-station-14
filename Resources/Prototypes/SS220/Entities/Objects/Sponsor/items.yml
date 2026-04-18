@@ -335,7 +335,7 @@
   - type: Item
     sprite: SS220/Objects/Sponsor/Drinks/beer_can.rsi
   - type: EmptyCanCrush
-    CrushedCan: CrushedCanSponsorBeer
+    crushedCan: CrushedCanSponsorBeer
   - type: Tag
     tags:
     - SponsorBeer

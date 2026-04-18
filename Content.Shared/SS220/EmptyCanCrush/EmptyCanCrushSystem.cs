@@ -14,8 +14,10 @@ public sealed class EmptyCanCrushSystem : EntitySystem
     [Dependency] private readonly TagSystem _tagSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
+
     private static readonly ProtoId<TagPrototype> TrashTag = "Trash";
     private static readonly ProtoId<TagPrototype> CanTag = "DrinkCan";
+
     public override void Initialize()
     {
         base.Initialize();
@@ -32,22 +34,23 @@ public sealed class EmptyCanCrushSystem : EntitySystem
         args.Verbs.Add(new()
         {
             Act = () => TryCrush(entity, user),
-            Text = Loc.GetString(Loc.GetString("can-crush-verb-text")),
-            Message = Loc.GetString(Loc.GetString("can-crush-verb-message")),
+            Text = Loc.GetString("can-crush-verb-text"),
+            Message = Loc.GetString("can-crush-verb-message"),
         });
     }
-    private void TryCrush (Entity<EmptyCanCrushComponent> entity, EntityUid user)
+
+    private void TryCrush(Entity<EmptyCanCrushComponent> entity, EntityUid user)
     {
-        if (!EntityManager.TryGetComponent<TransformComponent>(entity, out var transform))
+        if (!TryComp(entity, out TransformComponent? transform))
             return;
 
-        if (!(_tagSystem.HasTag(entity, TrashTag) && _tagSystem.HasTag(entity, CanTag)))
+        if (!_tagSystem.HasAllTags(entity, TrashTag, CanTag))
         {
             _popup.PopupPredicted(Loc.GetString("try-crush-can-false"), entity.Owner, null);
             return;
         }
 
-        var crushedCan = PredictedSpawnAtPosition(entity.Comp.CrushedCanId, transform.Coordinates);
+        var crushedCan = PredictedSpawnAtPosition(entity.Comp.crushedCanId, transform.Coordinates);
 
         if (crushedCan == null)
             return;
@@ -55,12 +58,9 @@ public sealed class EmptyCanCrushSystem : EntitySystem
         _audio.PlayPredicted(entity.Comp.CrushSound, crushedCan, entity);
 
         if (_handsSystem.IsHolding(user, entity, out var handID))
-        {
             _handsSystem.TryForcePickup(user, crushedCan, handID);
-        }
 
         PredictedQueueDel(entity.Owner);
-
     }
 
 }
