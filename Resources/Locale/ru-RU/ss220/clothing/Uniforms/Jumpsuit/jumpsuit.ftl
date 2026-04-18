@@ -198,3 +198,6 @@ ent-ClothingUniformJumpsuitWitness = костюм свидетеля
 ent-ClothingUniformJumpsuitElectricity = чёрный комбинезон
     .desc = Обычный чёрный комбинезон без знаков различия
     .suffix = Костюм электрофикации
+
+ent-ClothingUniformJumpsuitJabroniOutfit = кожаный костюм
+    .desc = Дружок-пирожок, думаю ты ошибся станцией.

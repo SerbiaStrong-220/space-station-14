@@ -24,6 +24,12 @@
       lateJoinAdditional: false
       mindRoles:
         - MindRoleCultYogg
+      components:
+      - type: AntagFreeSublevelPointsAdd
+        addFreeSublevelPoints: 5
+      - type: AntagAddKnowledge
+        knowledgesToAdd:
+        - CultYoggKnowledge
 
 - type: entity
   id: CultYoggRuleMidPop

@@ -22,3 +22,108 @@
     ears: ClothingHeadsetGrey
     pocket1: TapeRecorder
     pocket2: CassetteTape
+
+- type: startingGear
+  id: RedWingsOfficerGear
+  experienceDefinition: SecurityOfficerRoleExperience
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitMilitaryFeldsher
+    back: ClothingBackpackSecurity
+    shoes: ClothingShoesBootsCombatFilled
+    eyes: ClothingEyesGlassesBallistic
+    mask: ClothingMaskNeckGaiter
+    gloves: ClothingHandsGlovesCombat
+    outerClothing: ClothingOuterHardsuitRedWingsSec
+    suitstorage: WeaponLaserSMG
+    id: RedWingsSecurityPDA
+    ears: ClothingHeadsetRedWings
+    belt: ClothingBeltSecurity
+    pocket1: DoubleEmergencyOxygenTankFilled
+    pocket2: WeaponDisabler
+  storage:
+    belt:
+    - Stunbaton
+    - LaserSMGPowerCell
+    - LaserSMGPowerCell
+    - LaserSMGPowerCell
+    - GrenadeFlashBang
+    - TearGasGrenade
+    - Zipties
+    - Zipties
+    back:
+    - BoxSurvivalBrigmedic
+    - CrowbarRed
+    - MedkitCombatFilled
+    - PinpointerUplink
+
+- type: startingGear
+  id: RedWingsMedicGear
+  experienceDefinition: BrigmedicRoleExperience
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitMilitaryFeldsher
+    back: ClothingBackpackSatchelBrigmedic
+    shoes: ClothingShoesBootsCombatFilled
+    eyes: ClothingEyesHudSyndChem
+    mask: ClothingMaskNeckGaiterRed
+    gloves: ClothingHandsGlovesCombat
+    outerClothing: ClothingOuterHardsuitRedWingsMedic
+    suitstorage: WeaponLaserSMG
+    id: RedWingsMedicPDA
+    ears: ClothingHeadsetRedWings
+    belt: ClothingBeltSecurityMedical
+    pocket1: DoubleEmergencyOxygenTankFilled
+    pocket2: WeaponDisabler
+  storage:
+    belt:
+    - MedicatedSuture
+    - RegenerativeMesh
+    - CombatMedipen
+    - CombatMedipen
+    - PunctAutoInjector
+    - PyraAutoInjector
+    - AirlossAutoInjector
+    - AntiPoisonMedipen
+    back:
+    - BoxSurvivalBrigmedic
+    - CrowbarRed
+    - MedkitCombatFilled
+    - PinpointerUplink
+    - LaserSMGPowerCell
+    - LaserSMGPowerCell
+    - DefibrillatorSyndicate
+    - EmergencyRollerBedSpawnFolded
+
+- type: startingGear
+  id: RedWingsPilotGear
+  experienceDefinition: SecurityPilotRoleExperience
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitMilitaryFeldsher
+    back: ClothingBackpackSecurity
+    shoes: ClothingShoesBootsCombatFilled
+    eyes: ClothingEyesGlassesBallistic
+    mask: ClothingMaskNeckGaiter
+    gloves: ClothingHandsGlovesCombat
+    outerClothing: ClothingOuterHardsuitRedWingsPilot
+    suitstorage: WeaponDisablerSMG
+    id: RedWingsPilotPDA
+    ears: ClothingHeadsetRedWings
+    belt: ClothingBeltSecurity
+    pocket1: DoubleEmergencyOxygenTankFilled
+    pocket2: WeaponPistolViper
+  storage:
+    belt:
+    - Stunbaton
+    - Zipties
+    - Zipties
+    - Zipties
+    - Zipties
+    - Flash
+    - MagazinePistol
+    - MagazinePistolRubber
+    - MagazinePistolRubber
+    back:
+    - BoxSurvivalBrigmedic
+    - CrowbarRed
+    - MedkitCombatFilled
+    - HandHeldMassScanner
+    - PinpointerUplink

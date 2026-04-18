@@ -376,3 +376,6 @@
 
 - type: Tag
   id: AirDefenseTarget
+
+- type: Tag
+  id: PressureProtectionSuit

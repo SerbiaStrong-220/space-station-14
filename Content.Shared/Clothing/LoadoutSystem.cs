@@ -5,6 +5,7 @@ using Content.Shared.Humanoid;
 using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
+using Content.Shared.SS220.Experience;
 using Content.Shared.Station;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -173,6 +174,11 @@ public sealed class LoadoutSystem : EntitySystem
     {
         var ev = new StartingGearEquippedEvent(uid);
         RaiseLocalEvent(uid, ref ev);
+
+        // SS220-experience-update-begin
+        var expRecalculateEvent = new RecalculateEntityExperience();
+        RaiseLocalEvent(uid, ref expRecalculateEvent);
+        // SS220-experience-update-end
     }
 
     public HumanoidCharacterProfile GetProfile(EntityUid? uid)
