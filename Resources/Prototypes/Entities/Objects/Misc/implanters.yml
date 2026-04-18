@@ -46,6 +46,7 @@
     - DeathAcidifierImplant
     - MindSlaveImplant # SS220 implant-removing fix
     - DeathRattleImplant
+    - DeathRattleImplantInterdyne # SS220 implant-removing fix
     - MindShieldImplant
     - FakeMindShieldImplant
     - RadioImplant
