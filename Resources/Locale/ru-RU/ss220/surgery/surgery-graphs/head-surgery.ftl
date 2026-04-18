@@ -22,7 +22,7 @@ to-saw-skull-bone-gelled = Обработать череп костным гел
 to-seal-head-incision = Зашить надрез
 to-open-brain = Вскрыть черепную коробку
 to-fix-skull-bone = Восстановить кость черепа
-to-fix-mindslave-dysfunction = Исправить работу импланта подчинения
+to-fix-mindslave-disfunction = Исправить работу импланта подчинения
 to-close-brain-exposure = Закрыть твердую оболочку
 
 surgery-head-complex-inventory-requirement-description = У пациента должна быть открыта голова
@@ -46,6 +46,11 @@ surgery-requirement-scanner-required = Сканер имплантов
 surgery-requirement-fixer-required = [color=red]{ CAPITALIZE(ent-MindslaveFixerCerebralImplant) }[/color]
 
 surgery-requirement-slave-target = В мозгу пациента должен быть имплант [color=red]"{ent-MindSlaveImplant}"[/color]
+
+to-brain-exposed-heal-brain-damage = Этот шаг позволит убрать поврежденные ткани в мозгу пациента
+
+surgery-requirement-total-damage-requirement-brain-damage-heal-description = Отсекает поврежденные ткани в мозгу пациента, позволяя организму быстрее регенерировать
+surgery-requirement-total-damage-requirement-brain-damage-no-damage = Мозг пациента не имеет поврежденных областей
 
 remove-brain-pathology = Иссечь поврежденные нервные ткани
 surgery-pathology-requirement-description-remove-brain-pathology = Присутствие неврологических отклонений

@@ -97,6 +97,9 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             case 1:
                 var info = edgeSelectorState.Infos[0];
 
+                if (!info.MetEdgeRequirement)
+                    return;
+
                 if (GetEdgeTargeting(entity, info.SurgeryProtoId, info.TargetEdgeId) is not { } targetingEdge)
                     return;
 
@@ -170,6 +173,9 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         }
 
         if (!_prototype.Resolve(args.SurgeryGraph, out var surgeryPrototype))
+            return;
+
+        if (!_gameTiming.IsFirstTimePredicted)
             return;
 
         if (GetEdgeTargeting(entity, surgeryPrototype, args.EdgeId) is not { } chosenEdge)

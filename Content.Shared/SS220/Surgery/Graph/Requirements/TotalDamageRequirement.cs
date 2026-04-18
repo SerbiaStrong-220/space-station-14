@@ -3,12 +3,16 @@
 using Robust.Shared.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
 
 namespace Content.Shared.SS220.Surgery.Graph.Requirements;
 
 [DataDefinition]
 public sealed partial class TotalDamageRequirement : SurgeryGraphRequirement
 {
+    [DataField]
+    public ProtoId<DamageGroupPrototype>? DamageGroup;
+
     [DataField(required: true)]
     public FixedPoint2 Damage;
 
@@ -17,7 +21,9 @@ public sealed partial class TotalDamageRequirement : SurgeryGraphRequirement
         if (!entityManager.TryGetComponent<DamageableComponent>(uid, out var damageableComponent))
             return false;
 
-        return damageableComponent.TotalDamage > Damage;
+        if (DamageGroup is not null)
+            return damageableComponent.DamagePerGroup[DamageGroup] >= Damage;
+        else
+            return damageableComponent.TotalDamage >= Damage;
     }
-
 }

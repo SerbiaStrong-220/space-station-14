@@ -136,9 +136,9 @@
     edges:
     # fix mind slave disfunction
     - to: brain-exposed
-      id: brain-exposed
+      id: brain-exposed-fix-mindslave-disfunction
       delay: 6
-      edgeTooltip: to-fix-mindslave-dysfunction
+      edgeTooltip: to-fix-mindslave-disfunction
       sound:
         path: /Audio/SS220/Surgery/organ.ogg
         params:
@@ -169,9 +169,32 @@
         failureMessage: surgery-requirement-slave-target
         whitelist:
           components:
-          - MindSlave
+          - MindSlaveDisfunction
       actions:
       - !type:FixMindSlaveDisfunctionAction
+    # remove brain damage
+    - to: brain-exposed
+      id: brain-exposed-heal-brain-damage
+      baseEdge: retract-skin
+      edgeTooltip: to-brain-exposed-heal-brain-damage
+      actions:
+      - !type:ApplyDamageAction
+        damage:
+          types:
+            Cerebral: -10
+      requirements:
+      - !type:SurgeryToolRequirement
+        subject: used
+        surgeryTool: retractor
+        requirementPriority: -1
+        description: surgery-requirement-tool-required-retractor
+        failureMessage: surgery-requirement-tool-miss
+      - !type:TotalDamageRequirement
+        subject: target
+        damageGroup: Genetic
+        damage: 0.0001
+        description: surgery-requirement-total-damage-requirement-brain-damage-heal-description
+        failureMessage: surgery-requirement-total-damage-requirement-brain-damage-no-damage
     # fix brain-related pathologies
     - to: brain-exposed
       id: brain-exposed-remove-brain-pathology
@@ -201,6 +224,10 @@
         - Muted
         - Narcolepsy
         - Blindness
+        - Paracusia
+        - LightweightDrunk
+        - FrontalLisp
+        - Nervousness
     # return
     - to: saw-skull-bone
       id: saw-skull-bone
