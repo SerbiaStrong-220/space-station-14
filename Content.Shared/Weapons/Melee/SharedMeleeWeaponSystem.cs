@@ -384,7 +384,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         if (weapon.NextAttack > curTime)
             return false;
 
-        if (checkCombatMode && !CombatMode.IsInCombatMode(user))
+        if (checkCombatMode && !CombatMode.IsInCombatMode(user)) // SS220-attack-without-combat-mode
             return false;
 
         EntityUid? target = null;

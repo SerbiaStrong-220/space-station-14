@@ -29,7 +29,7 @@ public abstract partial class SharedSubdermalImplantSystem : EntitySystem
 
     private readonly ProtoId<TagPrototype> ThermalImplantTag = "ThermalImplant";
 
-    private const float HiddenImplantInjectionChance = 0.15f;
+    private const float HiddenImplantInjectionChance = 0.15f;  // SS220-add-stealth-implant
 
     public override void Initialize()
     {
