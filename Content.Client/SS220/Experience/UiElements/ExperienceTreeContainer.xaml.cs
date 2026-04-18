@@ -204,7 +204,8 @@ public sealed partial class ExperienceTreeContainer : BoxContainer
 
     private TextureRect GetExperienceSublevelVisualRect(FixedPoint4 fillingRatio, Color? color = null, in ShaderInstance? shader = null)
     {
-        return GetVisualRect(fillingRatio.Float(), ExperienceSystem.EndLearningProgress.Float(), ExperienceSystem.StartLearningProgress.Float(), color, shader, useBars: false);
+        var progress = fillingRatio < ExperienceSystem.EndLearningProgress ? ExperienceSystem.StartLearningProgress : ExperienceSystem.EndLearningProgress;
+        return GetVisualRect(progress.Float(), ExperienceSystem.EndLearningProgress.Float(), ExperienceSystem.StartLearningProgress.Float(), color, shader, useBars: false);
     }
 
     private TextureRect GetVisualRect(float fillingRatio, float endValue, float firstValue, Color? color = null, in ShaderInstance? shader = null, bool useBars = true)

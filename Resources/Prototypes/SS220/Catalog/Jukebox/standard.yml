@@ -205,3 +205,9 @@
   name: Wall GG - Broken
   path:
     path: /Audio/SS220/Jukebox/broken.ogg
+
+- type: jukebox
+  id: wycc_sixteen_tons
+  name: Wycc - Sixteen Tons
+  path:
+    path: /Audio/SS220/Jukebox/Wycc_SixteenTons.ogg

@@ -9,17 +9,18 @@
     skillDescription: construction-initial-desc
   components:
   - type: ConstructionDoAfterSkill
-    durationScale: 1.6
-    failureChance: 0.4
+    durationScale: 1.2
+    failureChance: 0
     failurePopup: construction-fail-with-reinforced-material
     complexMaterials:
     - ReinforcedGlass
     - ReinforcedPlasmaGlass
     - ReinforcedUraniumGlass
     - Plasteel
+    complexMaterialDelayMultiplier: 1.2
   - type: ConstructionToolDoAfterSkill
-    durationScale: 1.6
-    failureChance: 0.2
+    durationScale: 1.2
+    failureChance: 0
 
 - type: skill
   id: ConstructionBase
@@ -32,17 +33,18 @@
     skillDescription: construction-base-desc
   components:
   - type: ConstructionDoAfterSkill
-    durationScale: 1.2
-    failureChance: 0.2
+    durationScale: 1
+    failureChance: 0
     failurePopup: construction-fail-with-reinforced-material
     complexMaterials:
     - ReinforcedGlass
     - ReinforcedPlasmaGlass
     - ReinforcedUraniumGlass
     - Plasteel
+    complexMaterialDelayMultiplier: 1.2
   - type: ConstructionToolDoAfterSkill
     durationScale: 1
-    failureChance: 0.1
+    failureChance: 0
 
 - type: skill
   id: ConstructionTrained
@@ -55,9 +57,9 @@
     skillDescription: construction-trained-desc
   components:
   - type: ConstructionDoAfterSkill
-    durationScale: 1
+    durationScale: 0.9
   - type: ConstructionToolDoAfterSkill
-    durationScale: 1
+    durationScale: 0.9
 
 - type: skill
   id: ConstructionProfessional
