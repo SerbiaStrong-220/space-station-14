@@ -20,7 +20,7 @@
   - !type:JobRequirementLoadoutEffect
     requirement:
       !type:RoleTimeRequirement
-      role: JobMusician
+      role: JobReporter
       time: 36000 # 10 hrs
   sponsorTierLoadoutEffects:
   - !type:GroupLoadoutEffect
@@ -36,7 +36,7 @@
   - !type:JobRequirementLoadoutEffect
     requirement:
       !type:RoleTimeRequirement
-      role: JobMusician
+      role: JobReporter
       time: 36000 # 10 hrs
   sponsorTierLoadoutEffects:
   - !type:GroupLoadoutEffect

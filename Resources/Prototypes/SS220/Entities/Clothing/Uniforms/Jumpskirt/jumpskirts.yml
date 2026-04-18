@@ -134,7 +134,7 @@
   parent: ClothingUniformBase
   id: ClothingUniformJumpskirtInterviewerBlueShirt
   name: blue interviewer skirt
-  description: I never learned anything while i was talking.
+  description: I never learned anything while I was talking.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Uniforms/Jumpskirt/interviewer_blue_shirt.rsi
