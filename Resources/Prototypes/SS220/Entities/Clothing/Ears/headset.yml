@@ -120,3 +120,19 @@
     sprite: SS220/Clothing/Ears/Headsets/blueshield.rsi
   - type: Clothing
     sprite: SS220/Clothing/Ears/Headsets/blueshield.rsi
+
+- type: entity
+  parent: ClothingHeadset
+  id: ClothingHeadsetRedWings
+  name: full-size headset of the RedWings Squad
+  description: An impeccable headset for the RedWings operators.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyInterdyne
+      - EncryptionKeyCommon
+  - type: Sprite
+    sprite: SS220/Clothing/Ears/Headsets/redwings.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Ears/Headsets/redwings.rsi

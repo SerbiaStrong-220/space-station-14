@@ -177,7 +177,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpskirt/bartender_nt.rsi
 
 - type: entity
-  parent: ClothingUniformSkirtBase
+  parent: [ClothingUniformSkirtBase, ClothingUniformFoldableBaseSS220]
   id: ClothingUniformJumpskirtWaitress
   name: waitress uniform
   description: The uniform of an errand girl.
@@ -265,7 +265,7 @@
 
   # Главный врач
 - type: entity
-  parent: ClothingUniformSkirtBase
+  parent: [ClothingUniformSkirtBase, ClothingUniformFoldableBaseSS220]
   id: ClothingUniformJumpskirtCMOCorporate
   name: corporate CMO Jumpskirt
   description: «A beautiful, stylish suit of a real chief medical officer. It emphasises the person's nature and the beauty of his charisma...» Nothing further on the unopened label.
@@ -306,7 +306,7 @@
 
   # Старший инженер
 - type: entity
-  parent: ClothingUniformSkirtBase
+  parent: [ClothingUniformSkirtBase, ClothingUniformFoldableBaseSS220]
   id: ClothingUniformJumpskirtChiefEngineerDark
   name: dark uniform chief engineer
   description: Dark uniform for years of service as head of the engineering department.
@@ -359,7 +359,7 @@
 
   #Квартирмейстер
 - type: entity
-  parent: ClothingUniformSkirtBase
+  parent: [ClothingUniformSkirtBase, ClothingUniformFoldableBaseSS220]
   id: ClothingUniformJumpskirtWarehouseman
   name: the overalls of the warehouse manager
   description: Practical, comfortable, movement-free and, most importantly, stylish jumpskirt. You have bad memories of your former boss with him.
@@ -374,7 +374,7 @@
 
   # Ассистент
 - type: entity
-  parent: ClothingUniformSkirtBase
+  parent: [ClothingUniformSkirtBase, ClothingUniformFoldableBaseSS220]
   id: ClothingUniformJumpskirtBachelor
   name: bachelor's graduation uniform
   description: In vain students wait for a friend in the pub, Science is not without sacrifice.
@@ -398,7 +398,7 @@
 
   # Ученый
 - type: entity
-  parent: ClothingUniformSkirtBase
+  parent: [ClothingUniformSkirtBase, ClothingUniformFoldableBaseSS220]
   id: ClothingUniformJumpskirtPhdCandidate
   name: phd candidate uniform
   description: Students, prepare for a lecture.
@@ -411,7 +411,7 @@
 
   # Ведущий учёный
 - type: entity
-  parent: ClothingUniformSkirtBase
+  parent: [ClothingUniformSkirtBase, ClothingUniformFoldableBaseSS220]
   id: ClothingUniformJumpskirtAssociateProfessor
   name: assistant professor's uniform
   description:
@@ -424,7 +424,7 @@
 
   # Научрук
 - type: entity
-  parent: ClothingUniformSkirtBase
+  parent: [ClothingUniformSkirtBase, ClothingUniformFoldableBaseSS220]
   id: ClothingUniformJumpskirtProfessor
   name: professor's uniform
   description:

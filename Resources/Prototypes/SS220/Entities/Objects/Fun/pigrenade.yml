@@ -1,0 +1,60 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: ScatteringGrenadeBase
+  id: Pigrenade
+  name: pigrenade
+  description: Grenade that creates a small but devastating oink.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Grenades/pigrenade.rsi
+    layers:
+    - state: icon
+      map: ["enum.TriggerVisualLayers.Base"]
+  - type: ScatteringGrenade
+    fillPrototype: MobPigrenadeScatter
+    randomDistance: true
+    randomThrowDistanceMax: 5
+    capacity: 6
+    velocity: 2
+  - type: LandAtCursor
+  - type: TimerTrigger
+    beepSound:
+      path: "/Audio/SS220/Effects/pigrenade/hru.ogg"
+      params:
+        volume: 15
+    initialBeepDelay: 0
+    beepInterval: 2
+  - type: EmitSoundOnTrigger
+    keysIn:
+    - timer
+    sound:
+      path: "/Audio/SS220/Effects/pigrenade/pig_grenade.ogg"
+    positional: true
+  - type: GenericVisualizer
+    visuals:
+      enum.Trigger.TriggerVisuals.VisualState:
+        enum.ConstructionVisuals.Layer:
+          Primed: { state: primed }
+          Unprimed: { state: icon }
+
+- type: entity
+  parent: MobPig
+  id: MobPigrenadeScatter
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 8
+  - type: Hunger
+    baseDecayRate: 100 # always hungry
+    starvingSlowdownModifier: 1.50
+  - type: SpawnOnDespawn
+    prototype: PuddleSparkle
+
+- type: entity
+  parent: Pigrenade
+  id: PigrenadeAdmeme
+  suffix: Pigs stay
+  components:
+  - type: ScatteringGrenade
+    fillPrototype: MobPig

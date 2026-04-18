@@ -110,6 +110,9 @@
   - type: Visibility
     layer: 1
   #other
+  - type: Experience
+  - type: RoleExperienceAdd
+    definitionId: MiGoRoleExperience
   - type: MovementSpeedModifier
     baseWalkSpeed : 6
     baseSprintSpeed : 6

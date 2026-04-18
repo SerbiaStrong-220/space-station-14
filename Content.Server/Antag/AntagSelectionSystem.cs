@@ -37,7 +37,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using Content.Server.SS220.MindSlave;
-using Content.Server.SS220.DefibrillatorSkill; //SS220 LimitationRevive
+using Content.Shared.SS220.Experience;
 
 namespace Content.Server.Antag;
 
@@ -58,6 +58,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly MindSlaveSystem _mindSlave = default!; // SS220 MindSlave
+    [Dependency] private readonly IPrototypeManager _prototype = default!; //SS220-experience-update
 
     // arbitrary random number to give late joining some mild interest.
     public const float LateJoinRandomChance = 0.5f;
@@ -196,7 +197,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
             DebugTools.AssertNotEqual(antag.SelectionTime, AntagSelectionTime.PrePlayerSpawn);
 
             // do not count players in the lobby for the antag ratio
-            var players = PlayerManager.Sessions.Count(session => session.Status is not SessionStatus.Disconnected or SessionStatus.Zombie); // SS220-make-antag-selection-based-on-all-players
+            var players = PlayerManager.Sessions.Count(session => session.Status is not (SessionStatus.Disconnected or SessionStatus.Zombie)); // SS220-make-antag-selection-based-on-all-players
 
             if (!TryGetNextAvailableDefinition((uid, antag), out var def, players))
                 continue;
@@ -281,7 +282,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
     {
         var playerPool = GetPlayerPool(ent, pool, def);
         var existingAntagCount = ent.Comp.PreSelectedSessions.TryGetValue(def, out var existingAntags) ?  existingAntags.Count : 0;
-        var allPlayerCount = PlayerManager.Sessions.Count(session => session.Status is not SessionStatus.Disconnected or SessionStatus.Zombie); // SS220-make-antag-selection-based-on-all-players
+        var allPlayerCount = PlayerManager.Sessions.Count(session => session.Status is not (SessionStatus.Disconnected or SessionStatus.Zombie)); // SS220-make-antag-selection-based-on-all-players
         var count = GetTargetAntagCount(ent, allPlayerCount, def) - existingAntagCount; // SS220 GetTotalPlayerCount(pool) -> allPlayerCount
 
         // if there is both a spawner and players getting picked, let it fall back to a spawner.
@@ -462,12 +463,22 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
 
         // The following is where we apply components, equipment, and other changes to our antagonist entity.
         EntityManager.AddComponents(player, def.Components);
-        EnsureComp<DefibrillatorSkillComponent>(player); //SS220 LimitationRevive
 
         // Equip the entity's RoleLoadout and LoadoutGroup
         List<ProtoId<StartingGearPrototype>> gear = new();
         if (def.StartingGear is not null)
             gear.Add(def.StartingGear.Value);
+
+        // SS220-experience-update-begin
+        if (def.StartingGear is not null && _prototype.Resolve(def.StartingGear, out var gearPrototype))
+        {
+            var skillRoleAddComp = EnsureComp<RoleExperienceAddComponent>(antagEnt.Value);
+            skillRoleAddComp.DefinitionId ??= gearPrototype.ExperienceDefinition;
+
+            var recalculateEv = new RecalculateEntityExperience();
+            RaiseLocalEvent(antagEnt.Value, ref recalculateEv);
+        }
+        // SS220-experience-update-end
 
         _loadout.Equip(player, gear, def.RoleLoadout);
 

@@ -1,0 +1,84 @@
+- type: experienceDefinition
+  id: USSPLeaderRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    ExtravehicularActivity:
+      level: 4
+    CombatTraining:
+      level: 4
+    Construction:
+      level: 3
+    Medicine:
+      level: 3
+    PhysicalTraining:
+      level: 3
+  addSublevelPoints: 5
+
+- type: experienceDefinition
+  id: USSPEngineerRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    ExtravehicularActivity:
+      level: 4
+    CombatTraining:
+      level: 3
+    Construction:
+      level: 4
+    Medicine:
+      level: 3
+    PhysicalTraining:
+      level: 4
+  addSublevelPoints: 0
+
+- type: experienceDefinition
+  id: USSPCorpsmanRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    ExtravehicularActivity:
+      level: 3
+    CombatTraining:
+      level: 3
+    Construction:
+      level: 3
+    Medicine:
+      level: 4
+    PhysicalTraining:
+      level: 4
+  addSublevelPoints: 0
+
+- type: experienceDefinition
+  id: USSPCMORoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    ExtravehicularActivity:
+      level: 3
+    CombatTraining:
+      level: 4
+    Construction:
+      level: 3
+    Medicine:
+      level: 4
+    PhysicalTraining:
+      level: 4
+  addSublevelPoints: 0
+
+- type: experienceDefinition
+  id: USSPFighterRoleExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    ExtravehicularActivity:
+      level: 3
+    CombatTraining:
+      level: 3
+    Construction:
+      level: 2
+    Medicine:
+      level: 2
+    PhysicalTraining:
+      level: 3
+  addSublevelPoints: 5
