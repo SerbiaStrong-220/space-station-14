@@ -12,7 +12,6 @@ public sealed class ScotopicVisionSystem : EntitySystem
 {
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly PointLightSystem _pointLight = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -52,10 +51,7 @@ public sealed class ScotopicVisionSystem : EntitySystem
         }
 
         var visuals = EnsureComp<ScotopicVisionVisualsComponent>(ent);
-
-        if (visuals.LightEntity == null)
-            visuals.LightEntity = Spawn(null, new EntityCoordinates(ent, default));
-        _transform.SetParent(visuals.LightEntity.Value, ent);
+        visuals.LightEntity ??= SpawnAttachedTo(null, new EntityCoordinates(ent, default));
 
         var light = EnsureComp<PointLightComponent>(visuals.LightEntity.Value);
         _pointLight.SetMask(ent.Comp.MaskPath, light);
@@ -76,14 +72,4 @@ public sealed class ScotopicVisionSystem : EntitySystem
         QueueDel(visuals.LightEntity.Value);
         visuals.LightEntity = null;
     }
-}
-
-/// <summary>
-///     This component is used to store the entity of the light spawned for scotopic vision,
-///     so it can be deleted when the component is removed or the player detaches from the entity.
-/// </summary>
-[RegisterComponent]
-public sealed partial class ScotopicVisionVisualsComponent : Component
-{
-    public EntityUid? LightEntity;
 }
