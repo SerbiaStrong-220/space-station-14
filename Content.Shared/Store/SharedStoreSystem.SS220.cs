@@ -14,7 +14,8 @@ public abstract partial class SharedStoreSystem : EntitySystem
         if (args.Handled || args.Cancelled || args.Target is not { } target || args.Used is not { } used)
             return;
 
-        if (!TryGetEntity(args.TargetOverride, out var targetOverride))
+        TryGetEntity(args.TargetOverride, out var targetOverride);
+        if (args.TargetOverride is not null && targetOverride is null)
             return;
 
         if (!TryComp<CurrencyComponent>(used, out var currencyComp))
