@@ -1141,11 +1141,13 @@
 - type: Tag
   id: Pizza
 
+#SS220-plant-analyzer begin
 - type: Tag
   id: PlantAnalyzer # Storage whitelist: ClothingBeltPlant. ItemMapper: ClothingBeltPlant
 
 - type: Tag
   id: PlantBGone # Storage whitelist: ClothingBeltPlant. ItemMapper: ClothingBeltPlant
+#SS220-plant-analyzer end
 
 - type: Tag
   id: PKAUpgrade

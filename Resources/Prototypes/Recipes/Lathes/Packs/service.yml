@@ -39,6 +39,7 @@
   - SodaDispenserMachineCircuitboard
   - SmartFridgeCircuitboard
 
+#SS220-plant-analyzer begin
 - type: latheRecipePack
   id: HydroponicsStatic
   recipes:
@@ -48,6 +49,7 @@
   - HydroponicsToolSpade
   - HydroponicsToolClippers
   - PlantAnalyzer
+#SS220-plant-analyzer end
 
 ## Dynamic
 

@@ -6,7 +6,7 @@
     HydroponicsToolClippers: 4
     HydroponicsToolScythe: 4
     HydroponicsToolHatchet: 4
-    PlantAnalyzer: 4
+    PlantAnalyzer: 4 #SS220-plant-analyzer
     Dropper: 4
     PlantBag: 3
     PlantBGoneSpray: 20

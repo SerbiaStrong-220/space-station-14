@@ -149,7 +149,9 @@ public sealed partial class BotanySystem : EntitySystem
 
     public IEnumerable<EntityUid> GenerateProduct(SeedData proto, EntityCoordinates position, int yieldMod = 1)
     {
+        //SS220-plant-analyzer begin
         var totalYield = CalculateTotalYield(proto.Yield, yieldMod);
+        //SS220-plant-analyzer end
         var products = new List<EntityUid>();
 
         if (totalYield > 1 || proto.HarvestRepeat != HarvestType.NoRepeat)
@@ -187,6 +189,7 @@ public sealed partial class BotanySystem : EntitySystem
         return !proto.Ligneous || proto.Ligneous && held != null && HasComp<SharpComponent>(held);
     }
 
+    //SS220-plant-analyzer begin
     public static int CalculateTotalYield(int yield, int yieldMod)
     {
         var totalYield = 0;
@@ -201,6 +204,7 @@ public sealed partial class BotanySystem : EntitySystem
         }
         return totalYield;
     }
+    //SS220-plant-analyzer end
 
     #endregion
 }
