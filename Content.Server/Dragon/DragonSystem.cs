@@ -21,7 +21,6 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Timing;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
-using Content.Shared.Gibbing;
 
 namespace Content.Server.Dragon;
 
