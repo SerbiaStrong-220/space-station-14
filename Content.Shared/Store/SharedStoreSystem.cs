@@ -90,7 +90,7 @@ public abstract partial class SharedStoreSystem : EntitySystem
         if (store.Value.Comp.CurrencyInsertTime is { } insertTime)
         {
             var doAfter = new DoAfterArgs(EntityManager, args.User, insertTime,
-                new InsertCurrencyDoAfterEvent(uid, target, ev.TargetOverride),
+                new InsertCurrencyDoAfterEvent(GetNetEntity(ev.TargetOverride)),
                 args.Target.Value, used: uid)
             {
                 NeedHand = true,

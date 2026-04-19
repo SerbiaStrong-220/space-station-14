@@ -9,14 +9,10 @@ namespace Content.Shared.SS220.Store;
 [Serializable, NetSerializable]
 public sealed partial class InsertCurrencyDoAfterEvent : DoAfterEvent
 {
-    public EntityUid Currency;
-    public EntityUid Store;
-    public EntityUid? TargetOverride;
+    public NetEntity? TargetOverride;
 
-    public InsertCurrencyDoAfterEvent(EntityUid currency, EntityUid store, EntityUid? targetOverride)
+    public InsertCurrencyDoAfterEvent(NetEntity? targetOverride)
     {
-        Currency = currency;
-        Store = store;
         TargetOverride = targetOverride;
     }
 

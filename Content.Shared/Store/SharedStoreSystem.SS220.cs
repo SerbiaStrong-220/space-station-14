@@ -9,20 +9,22 @@ namespace Content.Shared.Store;
 /// </summary>
 public abstract partial class SharedStoreSystem : EntitySystem
 {
-
     private void OnInsertCurrencyDoAfter(Entity<StoreComponent> store, ref InsertCurrencyDoAfterEvent args)
     {
-        if (args.Handled || args.Cancelled || args.Target is not { } target)
+        if (args.Handled || args.Cancelled || args.Target is not { } target || args.Used is not { } used)
             return;
 
-        if (!TryComp<CurrencyComponent>(args.Currency, out var currencyComp))
+        if (!TryGetEntity(args.TargetOverride, out var targetOverride))
             return;
 
-        if (!TryAddCurrency((args.Currency, currencyComp), store!))
+        if (!TryComp<CurrencyComponent>(used, out var currencyComp))
+            return;
+
+        if (!TryAddCurrency((used, currencyComp), store!))
             return;
 
         args.Handled = true;
-        var msg = Loc.GetString("store-currency-inserted", ("used", args.Currency), ("target", args.TargetOverride ?? target));
+        var msg = Loc.GetString("store-currency-inserted", ("used", used), ("target", targetOverride ?? target));
         Popup.PopupEntity(msg, target, args.User);
     }
 }

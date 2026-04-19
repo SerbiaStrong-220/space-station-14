@@ -16,8 +16,6 @@
 #SS220 languages tweaks end
   - type: InputMover
     #SS220 RatKing tweaks and changes update start
-  - type: Puller
-    needsHands: false
   - type: KeenHearing
     visionRadius: 14
     highSensitiveVisionRadius: 0
