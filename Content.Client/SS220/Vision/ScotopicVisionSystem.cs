@@ -69,7 +69,7 @@ public sealed class ScotopicVisionSystem : EntitySystem
         if (!TryComp<ScotopicVisionVisualsComponent>(ent, out var visuals) || visuals.LightEntity == null)
             return;
 
-        QueueDel(visuals.LightEntity.Value);
+        Del(visuals.LightEntity.Value);
         visuals.LightEntity = null;
     }
 }
