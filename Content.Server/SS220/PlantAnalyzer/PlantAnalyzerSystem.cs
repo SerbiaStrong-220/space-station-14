@@ -2,9 +2,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server.Botany.Components;
 using Content.Server.Popups;
-using Content.Shared.AbstractAnalyzer;
+using Content.Shared.SS220.AbstractAnalyzer;
 using Content.Shared.Botany.Components;
-using Content.Shared.Botany.PlantAnalyzer;
+using Content.Shared.SS220.PlantAnalyzer;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Labels.EntitySystems;
@@ -15,7 +15,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 using Content.Server.Botany.Systems;
 
-namespace Content.Server.Botany.Systems;
+namespace Content.Server.SS220.PlantAnalyzer;
 
 public sealed class PlantAnalyzerSystem : AbstractAnalyzerSystem<PlantAnalyzerComponent, PlantAnalyzerDoAfterEvent>
 {

@@ -4,7 +4,7 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Localizations;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.Botany.PlantAnalyzer;
+namespace Content.Shared.SS220.PlantAnalyzer;
 
 public sealed class PlantAnalyzerLocalizationHelper : EntitySystem
 {

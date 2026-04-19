@@ -1,11 +1,11 @@
-using Content.Shared.AbstractAnalyzer;
+using Content.Shared.SS220.AbstractAnalyzer;
 using Content.Shared.Paper;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
-namespace Content.Shared.Botany.Components;
+namespace Content.Shared.SS220.PlantAnalyzer;
 
 /// <inheritdoc/>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentPause]

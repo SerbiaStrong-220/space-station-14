@@ -2,7 +2,7 @@ using Content.Shared.Atmos;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.Botany.PlantAnalyzer;
+namespace Content.Shared.SS220.PlantAnalyzer;
 
 [Serializable, NetSerializable]
 public sealed class PlantAnalyzerScannedUserMessage(NetEntity? targetEntity, bool? scanMode, PlantAnalyzerPlantData? plantData, PlantAnalyzerTrayData? trayData, PlantAnalyzerTolerancesData? tolerancesData, PlantAnalyzerProduceData? produceData, TimeSpan? printReadyAt) : BoundUserInterfaceMessage

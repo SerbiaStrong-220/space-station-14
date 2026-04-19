@@ -10,7 +10,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 
-namespace Content.Shared.AbstractAnalyzer;
+namespace Content.Shared.SS220.AbstractAnalyzer;
 
 public abstract class AbstractAnalyzerSystem<TAnalyzerComponent, TAnalyzerDoAfterEvent> : EntitySystem
     where TAnalyzerComponent : AbstractAnalyzerComponent
