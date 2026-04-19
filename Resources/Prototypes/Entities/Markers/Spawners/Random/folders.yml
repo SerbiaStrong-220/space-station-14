@@ -19,7 +19,7 @@
       - id: BoxFolderBase
       - id: BoxFolderRed
       - id: BoxFolderBlue
-      - id: BoxFolderYellow
+      # - id: BoxFolderYellow # SS220-remove-cause-no-entity
       - id: BoxFolderGrey
       - id: BoxFolderBlack
       - id: BoxFolderGreen

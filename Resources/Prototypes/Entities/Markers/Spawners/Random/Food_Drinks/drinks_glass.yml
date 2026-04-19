@@ -75,7 +75,7 @@
         - id: DrinkJungleBirdGlass
         - id: DrinkKalimotxoGlass
         - id: DrinkKiraSpecialGlass #ss220 kira special return
-        - id: DrinkOrangeLimeSodaGlass
+        # - id: DrinkOrangeLimeSodaGlass #ss220 kira special return
         - id: DrinkLongIslandIcedTeaGlass
         - id: DrinkManhattanGlass
         - id: DrinkManlyDorfGlass
