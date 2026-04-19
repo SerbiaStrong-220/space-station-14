@@ -136,16 +136,15 @@ public sealed partial class BlockingSystem : EntitySystem
     // SS220 equip shield on back begin
     private void OnGotEquip(EntityUid uid, BlockingComponent component, GotEquippedEvent args)
     {
-
         if (!component.AvaliableSlots.ContainsKey(args.SlotFlags))
             return;
 
-        component.User = args.Equipee;
+        component.User = args.EquipTarget;
         Dirty(uid, component);
 
-        if (TryComp<PhysicsComponent>(args.Equipee, out var physicsComponent) && physicsComponent.BodyType != BodyType.Static)
+        if (TryComp<PhysicsComponent>(args.EquipTarget, out var physicsComponent) && physicsComponent.BodyType != BodyType.Static)
         {
-            var userComp = EnsureComp<BlockingUserComponent>(args.Equipee);
+            var userComp = EnsureComp<BlockingUserComponent>(args.EquipTarget);
             userComp.BlockingItem = uid;
             userComp.OriginalBodyType = physicsComponent.BodyType;
         }
@@ -153,7 +152,7 @@ public sealed partial class BlockingSystem : EntitySystem
 
     private void OnGotUnequipped(EntityUid uid, BlockingComponent component, GotUnequippedEvent args)
     {
-        StopBlockingHelper(uid, component, args.Equipee);
+        StopBlockingHelper(uid, component, args.EquipTarget);
     }
     // SS220 equip shield on back end
 
