@@ -180,9 +180,11 @@ public sealed class DeathMatchRuleSystem : GameRuleSystem<DeathMatchRuleComponen
         }
     }
 
+    // SS220-add-uplink-begin
     public void AddUplink(ICommonSession session)
     {
         if (session?.AttachedEntity is not { } user) { return; }
-        if (!_uplink.AddUplink(user, _deathMatchStartingBalance)) { }
+        _uplink.AddUplink(user, _deathMatchStartingBalance, out _);
     }
+    // SS220-add-uplink-end
 }

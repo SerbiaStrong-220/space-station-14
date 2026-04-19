@@ -27,7 +27,7 @@ public sealed partial class ClothingSpecialEmotesSystem : EntitySystem
     private void OnEquipped(Entity<ClothingSpecialEmotesComponent> entity, ref GotEquippedEvent args)
     {
         if (entity.Comp.Emotes.Count <= 0 ||
-            !TryComp<SpeechComponent>(args.Equipee, out var speech))
+            !TryComp<SpeechComponent>(args.EquipTarget, out var speech))
             return;
 
         foreach (var newEmote in entity.Comp.Emotes)
@@ -39,17 +39,17 @@ public sealed partial class ClothingSpecialEmotesSystem : EntitySystem
             if (!speech.ClothingEmotes.Contains(newEmote))
                 speech.ClothingEmotes.Add(newEmote);
         }
-        Dirty(args.Equipee, speech);
+        Dirty(args.EquipTarget, speech);
     }
 
     private void OnUnequipped(Entity<ClothingSpecialEmotesComponent> entity, ref GotUnequippedEvent args)
     {
         if (!_temporaryEmotes.TryGetValue(entity.Owner, out var toRemove) ||
-            !TryComp<SpeechComponent>(args.Equipee, out var speech))
+            !TryComp<SpeechComponent>(args.EquipTarget, out var speech))
             return;
 
         //doesn't remove emotion if equipee has other clothes that give it
-        var slotEnumerator = _inventory.GetSlotEnumerator(args.Equipee);
+        var slotEnumerator = _inventory.GetSlotEnumerator(args.EquipTarget);
         while (slotEnumerator.NextItem(out var item))
         {
             if (item == entity.Owner ||
@@ -68,6 +68,6 @@ public sealed partial class ClothingSpecialEmotesSystem : EntitySystem
         }
 
         _temporaryEmotes.Remove(entity.Owner);
-        Dirty(args.Equipee, speech);
+        Dirty(args.EquipTarget, speech);
     }
 }

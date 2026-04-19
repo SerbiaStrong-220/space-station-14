@@ -215,7 +215,7 @@ public sealed class HallucinationSystem : SharedHallucinationSystem
     /// <param name="args"></param>
     private void OnEquip(GotEquippedEvent args)
     {
-        if (TryComp<HallucinationComponent>(args.Equipee, out var hallucinationComponent))
+        if (TryComp<HallucinationComponent>(args.EquipTarget, out var hallucinationComponent))
         {
             foreach (var hallucination in new List<HallucinationSetting>(hallucinationComponent.Hallucinations))
             {
@@ -226,7 +226,7 @@ public sealed class HallucinationSystem : SharedHallucinationSystem
                     continue;
 
                 if (ItemProtects(args.Equipment, args.SlotFlags, protectionComponentType, hallucination.Protection.CheckPockets))
-                    Remove(args.Equipee, hallucination);
+                    Remove(args.EquipTarget, hallucination);
             }
         }
     }
