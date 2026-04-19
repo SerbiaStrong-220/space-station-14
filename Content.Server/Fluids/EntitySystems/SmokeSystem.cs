@@ -112,6 +112,11 @@ public sealed class SmokeSystem : EntitySystem
             if (!_smokeQuery.HasComponent(ent))
                 continue;
 
+            // SS220-fix-smoke-test-fail-begin
+            if (TerminatingOrDeleted(args.OtherEntity) || !args.OtherEntity.Valid)
+                continue;
+            // SS220-fix-smoke-test-fail-end
+
             smokeAffectedComponent ??= EnsureComp<SmokeAffectedComponent>(args.OtherEntity);
             smokeAffectedComponent.SmokeEntity = ent;
             return; // exit the function so we don't remove the component.
