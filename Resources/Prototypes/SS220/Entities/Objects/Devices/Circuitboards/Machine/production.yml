@@ -102,17 +102,17 @@
           amount: 1
           defaultPrototype: Beaker
 
-# - type: entity
-#   parent: BaseMachineCircuitboard
-#   id: FermentationBarrelCircuitboard
-#   name: fermentation barrel machine board
-#   description: A machine printed circuit board for a Fermentation Barrel.
-#   components:
-#   - type: Sprite
-#     state: service
-#   - type: MachineBoard
-#     prototype: FermentationalBarrel
-#     stackRequirements:
-#       Glass: 2
-#       Manipulator: 2
-#       Steel: 3
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: FermentationBarrelCircuitboard
+  name: fermentation barrel machine board
+  description: A machine printed circuit board for a Fermentation Barrel.
+  components:
+  - type: Sprite
+    state: service
+  - type: MachineBoard
+    prototype: FermentationBarrel
+    stackRequirements:
+      Glass: 2
+      Manipulator: 2
+      Steel: 3

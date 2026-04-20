@@ -100,14 +100,6 @@ namespace Content.Shared.Chemistry.Reaction
         /// <returns></returns>
         private bool CanReact(Entity<SolutionComponent> soln, ReactionPrototype reaction, ReactionMixerComponent? mixerComponent, out FixedPoint2 lowestUnitReactions, bool isFermentation = false) // SS220-beer-update
         {
-            // SS220-beer-update-start
-            if (isFermentation)
-            {
-                lowestUnitReactions = FixedPoint2.Zero;
-                return false;
-            }
-            // SS220-beer-update-end
-
             var solution = soln.Comp.Solution;
 
             lowestUnitReactions = FixedPoint2.MaxValue;
@@ -241,6 +233,9 @@ namespace Content.Shared.Chemistry.Reaction
             // attempt to perform any applicable reaction
             foreach (var reaction in reactions)
             {
+                if (reaction.Fermentation) // SS220-beer-update
+                    continue;
+
                 if (!CanReact(soln, reaction, mixerComponent, out var unitReactions))
                 {
                     continue;
@@ -293,7 +288,6 @@ namespace Content.Shared.Chemistry.Reaction
         }
 
         // SS220-beer-update-start
-        // Проверить есть ли в растворе подходящая ферментационная реакция
         public bool TryGetFermentationReaction(Entity<SolutionComponent> soln, out ReactionPrototype? reaction, out FixedPoint2 unitReactions)
         {
             foreach (var reactant in soln.Comp.Solution.Contents)
@@ -319,8 +313,17 @@ namespace Content.Shared.Chemistry.Reaction
             return false;
         }
 
-        // Выполнить ферментацию (обёртка над существующим PerformReaction)
         public void PerformFermentationReaction(Entity<SolutionComponent> soln, ReactionPrototype reaction, FixedPoint2 unitReactions)
+        {
+            PerformReaction(soln, reaction, unitReactions);
+        }
+
+        public bool TryCanReact(Entity<SolutionComponent> soln, ReactionPrototype reaction, ReactionMixerComponent? mixer, out FixedPoint2 unitReactions)
+        {
+            return CanReact(soln, reaction, mixer, out unitReactions);
+        }
+
+        public void TryPerformReaction(Entity<SolutionComponent> soln, ReactionPrototype reaction, FixedPoint2 unitReactions)
         {
             PerformReaction(soln, reaction, unitReactions);
         }

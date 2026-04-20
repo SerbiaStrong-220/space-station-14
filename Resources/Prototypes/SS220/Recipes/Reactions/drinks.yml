@@ -131,3 +131,16 @@
     amount: 1
   products:
     Skooma: 4
+
+
+- type: reaction
+  id: Stout
+  reactants:
+    WortStout:
+      amount: 1
+    Yeast:
+      amount: 1
+  fermentation: true
+  fermentationDuration: 20
+  products:
+    Stout: 2
