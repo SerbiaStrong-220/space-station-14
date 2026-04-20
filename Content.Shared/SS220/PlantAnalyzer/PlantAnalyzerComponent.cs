@@ -1,3 +1,5 @@
+// Taken from: https://github.com/space-wizards/space-station-14/pull/34600
+
 using Content.Shared.SS220.AbstractAnalyzer;
 using Content.Shared.Paper;
 using Robust.Shared.Audio;

@@ -1,3 +1,5 @@
+// Taken from: https://github.com/space-wizards/space-station-14/pull/34600
+
 using Content.Shared.Atmos;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;

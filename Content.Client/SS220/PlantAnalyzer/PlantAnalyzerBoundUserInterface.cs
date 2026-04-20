@@ -1,3 +1,5 @@
+// Taken from: https://github.com/space-wizards/space-station-14/pull/34600
+
 using Content.Shared.SS220.PlantAnalyzer;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;

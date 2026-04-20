@@ -1,3 +1,5 @@
+# Taken from: https://github.com/space-wizards/space-station-14/pull/34600
+
 - type: entity
   id: PlantAnalyzer
   parent: BaseItem
@@ -24,7 +26,6 @@
   - type: ItemToggle
     onUse: false
   - type: PlantAnalyzer
-    scanDelay: 1
   - type: GuideHelp
     guides:
     - Botany
