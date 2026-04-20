@@ -1,0 +1,70 @@
+- type: job
+  id: NanoTrasenRepresentative
+  name: job-name-nanotrasen-representative
+  description: job-description-nanotrasen-representative
+  setPreference: false #SS220 TODO NanoTraisen Representative
+  playTimeTracker: JobNanoTrasenRepresentative
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Command
+      time: 288000 # 40 hours #SS220 TODO NanoTraisen Representative
+    - !type:SpeciesRequirement
+      species:
+      - Human
+  weight: 20
+  startingGear: NanoTrasenRepresentativeGear
+  experienceDefinition: IAARoleExperience
+  icon: "JobIconNanotrasen" #SS220 TODO NanoTraisen Representative
+  requireAdminNotify: true
+  joinNotifyCrew: true
+  supervisors: job-supervisors-centcom
+  canBeAntag: false
+  radioBold: true
+  access:
+  - Command
+  - Lawyer
+  - NanoTrasenRepresentative
+  - Service
+  - Brig
+  - Security
+  - Maintenance
+  - External
+  # Расширенный доступ
+  - Bar
+  - Janitor
+  - Theatre
+  - Kitchen
+  - Chapel
+  - Hydroponics
+  - Cryogenics
+  - Chemistry
+  - Engineering
+  - Research
+  - Detective
+  - Salvage
+  - Cargo
+  - Atmospherics
+  - Medical
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant ]
+  - !type:AddComponentSpecial
+    components:
+      - type: CommandStaff
+
+- type: startingGear
+  id: NanoTrasenRepresentativeGear
+  equipment:
+    shoes: ClothingShoesBootsLaceup
+    id: NanoTrasenRepresentativePDA
+  storage:
+    back:
+    - Flash
+
+- type: chameleonOutfit
+  id: NanoTrasenRepresentativeGearChameleonOutfit
+  job: NanoTrasenRepresentative
+  hasMindShield: true
+  equipment:
+    mask: ClothingMaskBreath
+    gloves: ClothingHandsGlovesColorWhite

@@ -217,6 +217,14 @@ public abstract partial class SharedDoorSystem : EntitySystem
 
     private void OnPryTimeModifier(EntityUid uid, DoorComponent door, ref GetPryTimeModifierEvent args)
     {
+        // ss220 fix pry with hand start
+        if (args.Tool == null || (TryComp<AirlockComponent>(uid, out var airlock) && airlock.Powered))
+        {
+            args.BaseTime = door.HandPryTime;
+            return;
+        }
+        // ss220 fix pry with hand end
+
         args.BaseTime = door.PryTime;
     }
 
@@ -365,10 +373,15 @@ public abstract partial class SharedDoorSystem : EntitySystem
         if (!SetState(uid, DoorState.Opening, door))
             return;
 
-        if (predicted)
-            Audio.PlayPredicted(door.OpenSound, uid, user, AudioParams.Default.WithVolume(-5));
-        else if (_net.IsServer)
-            Audio.PlayPvs(door.OpenSound, uid, AudioParams.Default.WithVolume(-5));
+        // SS220 Add door lubrication (begin)
+        if (!TryUseLubricant(uid))
+        {
+            if (predicted)
+                Audio.PlayPredicted(door.OpenSound, uid, user, AudioParams.Default.WithVolume(-5));
+            else if (_net.IsServer)
+                Audio.PlayPvs(door.OpenSound, uid, AudioParams.Default.WithVolume(-5));
+        }
+        // SS220 Add door lubrication (end)
 
         if (lastState == DoorState.Emagging && TryComp<DoorBoltComponent>(uid, out var doorBoltComponent))
             SetBoltsDown((uid, doorBoltComponent), !doorBoltComponent.BoltsDown, user, true);
@@ -458,10 +471,16 @@ public abstract partial class SharedDoorSystem : EntitySystem
         if (!SetState(uid, DoorState.Closing, door))
             return;
 
-        if (predicted)
-            Audio.PlayPredicted(door.CloseSound, uid, user, AudioParams.Default.WithVolume(-5));
-        else if (_net.IsServer)
-            Audio.PlayPvs(door.CloseSound, uid, AudioParams.Default.WithVolume(-5));
+        // SS220 Add door lubrication (begin)
+        if (!TryUseLubricant(uid))
+        {
+            if (predicted)
+                Audio.PlayPredicted(door.CloseSound, uid, user, AudioParams.Default.WithVolume(-5));
+            else if (_net.IsServer)
+                Audio.PlayPvs(door.CloseSound, uid, AudioParams.Default.WithVolume(-5));
+        }
+        // SS220 Add door lubrication (end)
+
     }
 
     /// <summary>
@@ -838,4 +857,22 @@ public abstract partial class SharedDoorSystem : EntitySystem
         }
     }
     #endregion
+
+    // SS220 Add door lubrication (begin)
+    /// <summary>
+    ///     Tries to use remaining lubricant.
+    /// </summary>
+    private bool TryUseLubricant(EntityUid uid)
+    {
+        if (!EntityManager.TryGetComponent<DoorLubedComponent>(uid, out var lubComp))
+           return false;
+
+        if (lubComp.SilentUsesLeft <= 0)
+           return false;
+
+        lubComp.SilentUsesLeft--;
+        Dirty(uid, lubComp);
+        return true;
+    }
+    // SS220 Add door lubrication (end)
 }

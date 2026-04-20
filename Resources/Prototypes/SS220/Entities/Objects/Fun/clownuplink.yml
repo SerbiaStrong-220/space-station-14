@@ -108,6 +108,65 @@
     - AdditionalClown
 
 - type: listing
+  id: PigrenadeSet
+  name: uplink-clown-pigrenade-name
+  description: uplink-clown-pigrenade-desc
+  productEntity: Pigrenade
+  cost:
+    TrashBananaPeel: 50
+  categories:
+    - AdditionalClown
+
+- type: listing
+  id: ClownStampBoxSet
+  name: uplink-clown-stampbox-name
+  description: uplink-clown-stampbox-desc
+  productEntity: ClownStampBox
+  cost:
+    TrashBananaPeel: 30
+  categories:
+  - AdditionalClown
+
+- type: listing
+  id: ToyWeaponsBundleSet
+  name: uplink-clown-toy-weapons-bundle-name
+  description: uplink-clown-toy-weapons-bundle-desc
+  productEntity: RandomToyWeaponsBundleSpawner
+  cost:
+    TrashBananaPeel: 200
+  categories:
+  - AdditionalClown
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 2
+
+- type: listing
+  id: FakeSyndieHardsuitsSet
+  name: uplink-clown-fake-syndie-hardsuits-name
+  description: uplink-clown-fake-syndie-hardsuits-desc
+  productEntity: RandomFakeSyndieHardsuitSpawner
+  cost:
+    TrashBananaPeel: 150
+  categories:
+  - AdditionalClown
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 2
+
+- type: listing
+  id: CluwneCommsComputerCircuitboardUnconvertible
+  name: uplink-clown-cluwne-comms-circuitboard-name
+  description: uplink-clown-cluwne-comms-circuitboard-desc
+  productEntity: CluwneCommsComputerCircuitboardUnconvertible
+  cost:
+    TrashBananaPeel: 250
+  categories:
+  - AdditionalClown
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+- type: listing
   id: SoapOmegaSet
   name: uplink-clown-omegasoap-name
   description: uplink-clown-omegasoap-desc
@@ -261,10 +320,18 @@
     balance:
       TrashBananaPeel: 0
 
+- type: entity
+  parent: ClownUplink
+  id: ClownUplinkDebug
+  suffix: clown uplink, DEBUG
+  components:
+  - type: Store
+    balance:
+      TrashBananaPeel: 99999
+
 - type: currency
   id: TrashBananaPeel
   displayName: uplink-clown-currency
   cash:
     1: TrashBananaPeel
   canWithdraw: false
-

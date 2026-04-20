@@ -1,31 +1,16 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Body.Systems;
-using Content.Server.Projectiles;
 using Content.Server.Roles.Jobs;
 using Content.Server.SS220.GameTicking.Rules;
-using Content.Shared.Alert;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
-using Content.Shared.Explosion.Components;
-using Content.Shared.Eye;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mind.Components;
-using Content.Shared.Movement.Components;
-using Content.Shared.Movement.Pulling.Components;
-using Content.Shared.Movement.Pulling.Systems;
-using Content.Shared.Movement.Systems;
-using Content.Shared.NPC.Components;
-using Content.Shared.NPC.Prototypes;
-using Content.Shared.NPC.Systems;
-using Content.Shared.Projectiles;
-using Content.Shared.Shuttles.Components;
 using Content.Shared.SS220.CultYogg.MiGo;
-using Content.Shared.SS220.Temperature;
 using Content.Shared.StatusEffect;
-using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.CultYogg.MiGo;
@@ -33,22 +18,13 @@ namespace Content.Server.SS220.CultYogg.MiGo;
 public sealed partial class MiGoSystem : SharedMiGoSystem
 {
     [Dependency] private readonly StatusEffectsSystem _statusEffectsSystem = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _speedModifier = default!;
-    [Dependency] private readonly VisibilitySystem _visibility = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
-    [Dependency] private readonly AlertsSystem _alerts = default!;
     [Dependency] private readonly StomachSystem _stomach = default!;
     [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly ProjectileSystem _projectile = default!;
-    [Dependency] private readonly PullingSystem _pullingSystem = default!;
     [Dependency] private readonly JobSystem _jobSystem = default!;
     [Dependency] private readonly CultYoggRuleSystem _cultRuleSystem = default!;
 
     private readonly ProtoId<ReagentPrototype> _ascensionReagent = "TheBloodOfYogg";
-    private readonly ProtoId<NpcFactionPrototype> _cultYoggFaction = "CultYogg";
-    private readonly ProtoId<NpcFactionPrototype> _simpleNeutralFaction = "SimpleNeutral";
 
     public override void Initialize()
     {
@@ -58,7 +34,6 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
         SubscribeLocalEvent<MiGoComponent, MiGoEnslaveDoAfterEvent>(MiGoEnslaveOnDoAfter);
 
         SubscribeLocalEvent<MiGoComponent, MindAddedMessage>(OnMindAdded);
-        SubscribeLocalEvent<MiGoComponent, TemperatureChangeAttemptEvent>(OnTemperatureDamage);
     }
 
     protected override void SyncStage(Entity<MiGoComponent> ent)
@@ -74,96 +49,6 @@ public sealed partial class MiGoSystem : SharedMiGoSystem
     {
         _jobSystem.MindAddJob(args.Mind, ent.Comp.JobName);
     }
-
-    private void OnTemperatureDamage(Entity<MiGoComponent> ent, ref TemperatureChangeAttemptEvent args)
-    {
-        if (!ent.Comp.IsPhysicalForm)
-            args.Cancel();
-    }
-
-    #region Astral
-    public override void ChangeForm(EntityUid uid, MiGoComponent comp, bool isMaterial)
-    {
-        comp.IsPhysicalForm = isMaterial;
-
-        base.ChangeForm(uid, comp, isMaterial);
-
-        if (!TryComp<VisibilityComponent>(uid, out var vis))
-            return;
-
-        if (isMaterial)
-        {
-            comp.MaterializationTime = null;
-            comp.AlertTime = 0;
-
-            _alerts.ClearAlert(uid, comp.AstralAlert);
-
-            RemCompDeferred<MovementIgnoreGravityComponent>(uid);
-            RemCompDeferred<FTLSmashImmuneComponent>(uid);
-            RemCompDeferred<ExplosionResistanceComponent>(uid);
-
-            //some copypaste invisibility shit
-            _visibility.AddLayer((uid, vis), (int)VisibilityFlags.Normal, false);
-            _visibility.RemoveLayer((uid, vis), (int)VisibilityFlags.Ghost, false);
-
-            //trying make migo transpartent visout sprite, like reaper
-            _appearance.SetData(uid, MiGoVisual.Base, false);
-            _appearance.RemoveData(uid, MiGoVisual.Astral);
-
-            //for agro and turrets
-            if (HasComp<NpcFactionMemberComponent>(uid))
-            {
-                _npcFaction.ClearFactions(uid);
-                _npcFaction.AddFaction(uid, _cultYoggFaction);
-            }
-        }
-        else
-        {
-            comp.AudioPlayed = false;
-            _alerts.ShowAlert(uid, comp.AstralAlert);
-
-            //no phisyc during astral
-            EnsureComp<MovementIgnoreGravityComponent>(uid);
-            EnsureComp<FTLSmashImmuneComponent>(uid);
-            EnsureComp<ExplosionResistanceComponent>(uid);
-            RemCompDeferred<SpeedModifiedByContactComponent>(uid);
-
-            if (HasComp<NpcFactionMemberComponent>(uid))
-            {
-                _npcFaction.ClearFactions(uid);
-                _npcFaction.AddFaction(uid, _simpleNeutralFaction);
-            }
-            _visibility.AddLayer((uid, vis), (int)VisibilityFlags.Ghost, false);
-            _visibility.RemoveLayer((uid, vis), (int)VisibilityFlags.Normal, false);
-
-            if (TryComp<EmbeddedContainerComponent>(uid, out var embeddedContainer))
-                _projectile.DetachAllEmbedded((uid, embeddedContainer));
-
-            if (TryComp(uid, out PullerComponent? puller) && TryComp(puller.Pulling, out PullableComponent? pullable))
-                _pullingSystem.TryStopPull(puller.Pulling.Value, pullable);
-
-            _appearance.SetData(uid, MiGoVisual.Astral, false);
-            _appearance.RemoveData(uid, MiGoVisual.Base);
-        }
-
-        _visibility.RefreshVisibility(uid, vis);
-
-        UpdateMovementSpeed(uid, comp);
-
-        DirtyEntity(uid);// We "are making dirty" the entire entity, since ChangeForm affects many components and visual state.
-    }
-
-    //moving in astral faster
-    private void UpdateMovementSpeed(EntityUid uid, MiGoComponent comp)
-    {
-        if (!TryComp<MovementSpeedModifierComponent>(uid, out var modifComp))
-            return;
-
-        var speed = comp.IsPhysicalForm ? comp.MaterialMovementSpeed : comp.UnMaterialMovementSpeed;
-        _speedModifier.ChangeBaseSpeed(uid, speed, speed, modifComp.Acceleration, modifComp);
-    }
-
-    #endregion
 
     #region Enslave
     private void MiGoEnslaveOnDoAfter(Entity<MiGoComponent> uid, ref MiGoEnslaveDoAfterEvent args)

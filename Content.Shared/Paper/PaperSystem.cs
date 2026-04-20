@@ -316,6 +316,10 @@ public sealed class PaperSystem : EntitySystem
         // SS220 Add document tags begin
         var ev = new PaperSetContentAttemptEvent(entity, content, writer);
         RaiseLocalEvent(entity, ref ev, true);
+
+        if (writer is not null)
+            RaiseLocalEvent(writer.Value, ref ev);
+
         if (ev.Cancelled)
             return;
 

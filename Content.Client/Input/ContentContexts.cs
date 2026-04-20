@@ -63,6 +63,7 @@ namespace Content.Client.Input
             human.AddFunction(KeyFunctions220.ItemOffer); // SS220 ItemOffer bind
             human.AddFunction(ContentKeyFunctions.UseItemInHand);
             human.AddFunction(ContentKeyFunctions.AltUseItemInHand);
+            human.AddFunction(KeyFunctions220.OpenExperienceViewerMenu); // SS220-experience-update
             human.AddFunction(ContentKeyFunctions.OpenCharacterMenu);
             human.AddFunction(ContentKeyFunctions.OpenEmotesMenu);
             human.AddFunction(ContentKeyFunctions.ActivateItemInWorld);
@@ -95,7 +96,7 @@ namespace Content.Client.Input
             human.AddFunction(ContentKeyFunctions.Arcade2);
             human.AddFunction(ContentKeyFunctions.Arcade3);
 
-            Shared.SS220.Input.KeyFunctions220.AddCalculatorKeys(human); // SS220 Calculator
+            KeyFunctions220.AddCalculatorKeys(human); // SS220 Calculator
 
             // actions should be common (for ghosts, mobs, etc)
             common.AddFunction(ContentKeyFunctions.OpenActionsMenu);

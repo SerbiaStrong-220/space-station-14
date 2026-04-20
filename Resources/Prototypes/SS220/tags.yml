@@ -370,3 +370,12 @@
 
 - type: Tag
   id: EnvelopeWhitelist
+
+- type: Tag
+  id: RabbitBnuuyWearable
+
+- type: Tag
+  id: AirDefenseTarget
+
+- type: Tag
+  id: PressureProtectionSuit

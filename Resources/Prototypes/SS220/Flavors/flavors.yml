@@ -74,6 +74,16 @@
   description: flavor-complex-olivier
 
 - type: flavor
+  id: bnuuynyatina
+  flavorType: Base
+  description: flavor-base-bnuuynyatina
+
+- type: flavor
+  id: driedbnuuynyatina
+  flavorType: Base
+  description: flavor-base-driedbnuuynyatina
+
+- type: flavor
   id: stout
   flavorType: Complex
   description: flavor-complex-stout

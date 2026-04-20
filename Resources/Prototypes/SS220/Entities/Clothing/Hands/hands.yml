@@ -98,6 +98,8 @@
       types:
         Blunt: 45
     animation: WeaponArcFist
+    soundHit:
+      path: /Audio/SS220/Weapons/Melee/Punches/punch_ds.ogg
   - type: Fiber
     fiberMaterial: fibers-insulative
   - type: FingerprintMask

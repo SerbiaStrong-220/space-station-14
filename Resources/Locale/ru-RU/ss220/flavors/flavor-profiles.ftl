@@ -6,3 +6,5 @@ flavor-complex-olivier = как праздник
 flavor-complex-stout = как горький шоколад
 flavor-complex-ipa = как фруктовый взрыв
 flavor-complex-plasmabeer = как глоток космоса
+flavor-base-bnuuynyatina = не бнууйно
+flavor-base-driedbnuuynyatina = пламенно бнууйно

@@ -5,6 +5,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Item;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
+using Content.Shared.SS220.Experience;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
 using Robust.Shared.Collections;
@@ -117,6 +118,14 @@ public abstract class SharedStationSpawningSystem : EntitySystem
     {
         if (startingGear == null)
             return;
+
+        // SS220-experience-update-begin
+        if (startingGear is StartingGearPrototype startingGearProto)
+        {
+            var skillRoleAddComp = EnsureComp<RoleExperienceAddComponent>(entity);
+            skillRoleAddComp.DefinitionId = startingGearProto.ExperienceDefinition ?? skillRoleAddComp.DefinitionId;
+        }
+        // SS220-experience-update-end
 
         var xform = _xformQuery.GetComponent(entity);
 

@@ -11,7 +11,7 @@
       type: null
       fallbackColor: '#FFFFFF'
   sprites:
-  - sprite: Mobs/Customization/undergarments.rsi
+  - sprite: SS220/Mobs/Customization/undergarments.rsi #SS220-underwear-resprite
     state: boxers
 
 - type: marking
@@ -76,7 +76,7 @@
       type: null
       fallbackColor: '#FFFFFF'
   sprites:
-  - sprite: Mobs/Customization/undergarments.rsi
+  - sprite: SS220/Mobs/Customization/undergarments.rsi #SS220-underwear-resprite
     state: binder
 
 - type: marking
@@ -89,7 +89,7 @@
       type: null
       fallbackColor: '#FFFFFF'
   sprites:
-  - sprite: Mobs/Customization/undergarments.rsi
+  - sprite: SS220/Mobs/Customization/undergarments.rsi #SS220-underwear-resprite
     state: tanktop
 
 - type: marking
@@ -167,7 +167,7 @@
       type: null
       fallbackColor: '#FFFFFF'
   sprites:
-  - sprite: Mobs/Customization/undergarments.rsi
+  - sprite: SS220/Mobs/Customization/undergarments.rsi #SS220-underwear-resprite
     state: binder_vox
 
 - type: marking
@@ -180,7 +180,7 @@
       type: null
       fallbackColor: '#FFFFFF'
   sprites:
-  - sprite: Mobs/Customization/undergarments.rsi
+  - sprite: SS220/Mobs/Customization/undergarments.rsi #SS220-underwear-resprite
     state: tanktop_vox
 
 - type: marking
@@ -193,7 +193,7 @@
       type: null
       fallbackColor: '#FFFFFF'
   sprites:
-  - sprite: Mobs/Customization/undergarments.rsi
+  - sprite: SS220/Mobs/Customization/undergarments.rsi #SS220-underwear-resprite
     state: boxers_reptilian
 
 - type: marking

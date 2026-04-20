@@ -11,6 +11,7 @@
       species:
       - Felinid #SS220-jobbans end
   startingGear: SecurityCadetGear
+  experienceDefinition: SecurityCadetRoleExperience # SS220-experience
   icon: "JobIconSecurityCadet"
   supervisors: job-supervisors-security
   canBeAntag: false

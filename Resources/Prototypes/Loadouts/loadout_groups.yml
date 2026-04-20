@@ -42,6 +42,7 @@
   - ClothingNeckGenderqueerPin
   - ClothingNeckGenderfluidPin
   - ClothingNeckTransPin
+  - ClothingNeckUSSPPin # ss220 add neck ussp pin to loadout
   - ClothingNeckAutismPin
   - ClothingNeckGoldAutismPin
   - OffsetCane
@@ -50,6 +51,7 @@
   - OffsetCaneMime
   - OffsetCaneNT
   - Cane
+  #- ExpensiveCane #SS220 TODO NanoTraisen Representative
   - TowelColorBlack
   - TowelColorWhite
   # SS220 Too many towels begin
@@ -728,6 +730,7 @@
   loadouts:
   - MusicianJumpsuit
   - MusicianJumpskirt
+  - EveningDress #SS220 musician dresses
   - BardUniform #SS220 bard loadout
 
 - type: loadoutGroup
@@ -1355,7 +1358,7 @@
   - JackBoots
   - SecurityWinterBoots
   - BootsJackSec #ss220 sec loadout update
-  - CombatBoots #SS220 Army boots for sec 
+  - CombatBoots #SS220 Army boots for sec
 
 - type: loadoutGroup
   id: SecurityPDA
