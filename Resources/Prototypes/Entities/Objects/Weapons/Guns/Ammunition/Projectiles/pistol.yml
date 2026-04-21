@@ -8,7 +8,7 @@
     damage:
       types:
         Piercing: 20 #ss220lowTTKUpdate
-      armourPiercing: 12 #SS220 armor piercing added
+      armourPiercing: 7 #SS220 armor piercing added
 
 - type: entity
   id: BulletPistolPractice
