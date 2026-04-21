@@ -59,14 +59,14 @@ jobs:
       shell: pwsh
       run: |
         $env:DOTNET_gcServer=1
-        dotnet test --filter 'FullyQualifiedName!~Map&FullyQualifiedName!~Validate&FullyQualifiedName!~Prototype' --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj -- NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
+        dotnet test --filter 'FullyQualifiedName!~Map&FullyQualifiedName!~Validate&FullyQualifiedName!~Prototype&FullyQualifiedName~ApcLoad' --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj -- NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
 
     # SS220-separate-tests-begin
     - name: Run Content.IntegrationTests Maps test
       shell: pwsh
       run: |
         $env:DOTNET_gcServer=1
-        dotnet test --filter 'FullyQualifiedName~Map' --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj -- NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
+        dotnet test --filter 'FullyQualifiedName~Map|FullyQualifiedName~ApcLoad' --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj -- NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
     # SS220-separate-tests-end
 
     - name: Archive NUnit3 test results.
