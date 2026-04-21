@@ -171,7 +171,7 @@ namespace Content.Shared.Damage
                     if (coefficient + damageSpec.ArmourPiercing.Float() / 100 > 1)
                         armorPiercing = 0;
 
-                    newValue *= coefficient + Math.Clamp(damageSpec.ArmourPiercing.Float() / 100, 0, 1);
+                    newValue *= coefficient + damageSpec.ArmourPiercing.Float() / 100;
                 }
                 //SS220 armor piercing added end
 
