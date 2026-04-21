@@ -166,12 +166,16 @@ namespace Content.Shared.Damage
 
                 if (modifierSet.Coefficients.TryGetValue(key, out var coefficient))
                 {
-                    var cap = 1f;
+                    var upperCap = 1f;
+                    var lowerCap = 0f;
 
                     if (coefficient > 1f)
-                        cap = coefficient;
+                        upperCap = coefficient;
 
-                    newValue *= Math.Clamp(coefficient + damageSpec.ArmourPiercing.Float() / 100f, 0f, cap);
+                    if (coefficient < 0f)
+                        lowerCap = coefficient;
+
+                    newValue *= Math.Clamp(coefficient + damageSpec.ArmourPiercing.Float() / 100f, lowerCap, upperCap);
                 }
 
                 if (newValue != 0)
