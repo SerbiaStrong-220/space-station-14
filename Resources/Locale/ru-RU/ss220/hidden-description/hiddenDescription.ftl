@@ -64,7 +64,7 @@ ent-DeathRattleImplanterInterdyne = { ent-Implanter }
     .desc = { ent-Implanter.desc }
     .suffix = Interdyne Rattle
 
-ent-DeathRattleImplantInterdyne = имплант "Предсмертный хрип"
+ent-DeathRattleImplantInterdyne = имплант Предсмертный хрип Интердайн
     .desc = Микрочип, который вживляют под кожу.
 
 # Uplink locale
