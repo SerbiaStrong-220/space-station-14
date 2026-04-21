@@ -161,10 +161,10 @@ namespace Content.Shared.Damage
                 float newValue = value.Float();
 
                 if (modifierSet.FlatReduction.TryGetValue(key, out var reduction))
-                    newValue = Math.Max(0f, newValue - reduction); // flat reductions can't heal you
+                    newValue = Math.Max(0f, newValue - reduction + damageSpec.ArmourPiercing.Float()); //SS220 weapon overhaul
 
                 if (modifierSet.Coefficients.TryGetValue(key, out var coefficient))
-                    newValue *= coefficient; // coefficients can heal you, e.g. cauterizing bleeding
+                    newValue *= coefficient + damageSpec.ArmourPiercing.Float() / 100; //SS220 weapon overhaul
 
                 if (newValue != 0)
                     newDamage.DamageDict[key] = FixedPoint2.New(newValue);

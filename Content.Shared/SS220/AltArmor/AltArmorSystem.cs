@@ -84,7 +84,7 @@ public sealed class AltArmorSystem : EntitySystem
             CountDifference(resultDamage.DamageDict, damage.DamageDict[type], FixedPoint2.Zero, type, FixedPoint2.Zero, durabilityCoefficient: durabilityCoefficient);
         }
 
-        if (ent.Owner == null)
+        if (!ent.Owner.IsValid())
             return;
 
         if(maximalDamageType != null)
