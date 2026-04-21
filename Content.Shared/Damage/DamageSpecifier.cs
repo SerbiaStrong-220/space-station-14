@@ -169,7 +169,10 @@ namespace Content.Shared.Damage
                     var armorPiercing = damageSpec.ArmourPiercing.Float() / 100;
 
                     if (coefficient + damageSpec.ArmourPiercing.Float() / 100 > 1)
+                    {
                         armorPiercing = 0;
+                        coefficient = 1;
+                    }
 
                     newValue *= coefficient + damageSpec.ArmourPiercing.Float() / 100;
                 }
