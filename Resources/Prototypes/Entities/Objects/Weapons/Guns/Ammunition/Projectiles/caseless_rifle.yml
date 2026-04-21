@@ -8,7 +8,7 @@
     damage:
       types:
         Piercing: 24 #ss220lowTTKUpdate
-      armourPiercing: 15 #FCB armour piercing added
+      armourPiercing: 15 #SS220 armor piercing added
 
 - type: entity
   id: BulletCaselessRiflePractice

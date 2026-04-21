@@ -116,8 +116,8 @@
     selectedMode: SemiAuto
     minAngle: 17
     maxAngle: 30
-    angleIncrease: 10
-    angleDecay: 7 #Shorter and easier to wield
+    angleIncrease: 20
+    angleDecay: 6 #Shorter and easier to wield
     availableModes:
       - SemiAuto
     soundGunshot:
