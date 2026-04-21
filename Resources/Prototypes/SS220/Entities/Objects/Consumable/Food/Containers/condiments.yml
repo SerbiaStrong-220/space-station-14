@@ -12,7 +12,7 @@
           Quantity: 10
   - type: Sprite
   - type: Icon
-    state: packet-ketchup
+    state: packet-greygoo
   - type: Appearance
   - type: SolutionContainerVisuals
     maxFillLevels: 2

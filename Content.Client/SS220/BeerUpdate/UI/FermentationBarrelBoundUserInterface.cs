@@ -8,8 +8,7 @@ public sealed class FermentationBarrelBoundUserInterface : BoundUserInterface
     [ViewVariables]
     private FermentationBarrelMenu? _menu;
 
-    public FermentationBarrelBoundUserInterface(EntityUid owner, Enum uiKey)
-        : base(owner, uiKey) { }
+    public FermentationBarrelBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey) { }
 
     protected override void Open()
     {
@@ -27,7 +26,7 @@ public sealed class FermentationBarrelBoundUserInterface : BoundUserInterface
         if (state is not FermentationBarrelInterfaceState cState)
             return;
 
-        _menu?.UpdateState(cState.IsActive, cState.ElapsedTime, cState.Reagents);
+        _menu?.UpdateState(cState.IsActive, cState.ElapsedTime, cState.Reagents, cState.IsDrawMode, cState.TotalSolution, cState.MaxSolution);
     }
 
     private void OnStartStop()

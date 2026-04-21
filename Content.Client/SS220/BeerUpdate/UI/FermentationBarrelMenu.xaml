@@ -19,10 +19,26 @@
 
         <BoxContainer Orientation="Horizontal"
                       Margin="0 0 0 8">
+            <Label Text="{Loc fermentation-barrel-menu-mode-label}"
+                   Margin="0 0 8 0"/>
+            <Label Name="ModeLabel"
+                   Text="{Loc fermentation-barrel-menu-mode-fill}"/>
+        </BoxContainer>
+
+        <BoxContainer Orientation="Horizontal"
+                      Margin="0 0 0 8">
             <Label Text="{Loc fermentation-barrel-menu-timer-label}"
                    Margin="0 0 8 0"/>
             <Label Name="TimerLabel"
                    Text="00:00"/>
+        </BoxContainer>
+
+        <BoxContainer Orientation="Horizontal"
+                      Margin="0 0 0 8">
+            <Label Text="{Loc fermentation-barrel-menu-volume-label}"
+                   Margin="0 0 8 0"/>
+            <Label Name="VolumeLabel"
+                   Text="0u/0u"/>
         </BoxContainer>
 
         <BoxContainer Orientation="Horizontal"
@@ -40,13 +56,13 @@
                Margin="0 0 0 4"/>
 
         <PanelContainer VerticalExpand="True"
-                MinSize="0 100">
+                        MinSize="0 100">
             <PanelContainer.PanelOverride>
                 <gfx:StyleBoxFlat BackgroundColor="#1B1B1E"/>
             </PanelContainer.PanelOverride>
 
             <ScrollContainer HorizontalExpand="True"
-                    VerticalExpand="True">
+                             VerticalExpand="True">
                 <BoxContainer Name="ReagentList"
                               Orientation="Vertical"
                               Margin="4"

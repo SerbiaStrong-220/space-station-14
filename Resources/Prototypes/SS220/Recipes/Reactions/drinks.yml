@@ -134,6 +134,30 @@
 
 
 - type: reaction
+  id: BeerFermentation
+  reactants:
+    WortLager:
+      amount: 1
+    Yeast:
+      amount: 1
+  fermentation: true
+  fermentationDuration: 40
+  products:
+    Beer: 2
+
+- type: reaction
+  id: AleFermentation
+  reactants:
+    WortAle:
+      amount: 1
+    Yeast:
+      amount: 1
+  fermentation: true
+  fermentationDuration: 40
+  products:
+    Ale: 2
+
+- type: reaction
   id: Stout
   reactants:
     WortStout:
@@ -141,6 +165,32 @@
     Yeast:
       amount: 1
   fermentation: true
-  fermentationDuration: 20
+  fermentationDuration: 120
   products:
     Stout: 2
+
+- type: reaction
+  id: Ipa
+  reactants:
+    WortIpa:
+      amount: 1
+    Yeast:
+      amount: 1
+  fermentation: true
+  fermentationDuration: 140
+  products:
+    Ipa: 2
+
+- type: reaction
+  id: PlasmaBeer
+  reactants:
+    WortPlama:
+      amount: 1
+    Yeast:
+      amount: 1
+    Enzyme:
+      amount: 1
+  fermentation: true
+  fermentationDuration: 200
+  products:
+    PlasmaBeer: 2

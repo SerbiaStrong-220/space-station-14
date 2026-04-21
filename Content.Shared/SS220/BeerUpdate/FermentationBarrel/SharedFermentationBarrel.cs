@@ -36,12 +36,18 @@ namespace Content.Shared.SS220.BeerUpdate.FermentationBarrel
         public bool IsActive;
         public float ElapsedTime;
         public ReagentQuantity[]? Reagents;
+        public bool IsDrawMode;
+        public float TotalSolution;
+        public float MaxSolution;
 
-        public FermentationBarrelInterfaceState(bool isActive, float elapsedTime, ReagentQuantity[]? reagents = null)
+        public FermentationBarrelInterfaceState(bool isActive, float elapsedTime, ReagentQuantity[]? reagents = null, bool isDrawMode = false, float totalSolution = 0f, float maxSolution = 0f)
         {
             IsActive = isActive;
             ElapsedTime = elapsedTime;
             Reagents = reagents;
+            IsDrawMode = isDrawMode;
+            TotalSolution = totalSolution;
+            MaxSolution = maxSolution;
         }
     }
 }

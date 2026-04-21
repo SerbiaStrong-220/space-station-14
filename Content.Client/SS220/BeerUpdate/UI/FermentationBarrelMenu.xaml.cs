@@ -24,12 +24,16 @@ public sealed partial class FermentationBarrelMenu : FancyWindow
         ModeChangeButton.OnPressed += _ => OnModeChange?.Invoke();
     }
 
-    public void UpdateState(bool isActive, float elapsedTime, ReagentQuantity[]? reagents = null)
+    public void UpdateState(bool isActive, float elapsedTime, ReagentQuantity[]? reagents = null, bool isDrawMode = false, float totalSolution = 0f, float maxSolution = 0f)
     {
         StatusLabel.Text = Loc.GetString(isActive ? "fermentation-barrel-menu-status-active" : "fermentation-barrel-menu-status-idle");
 
+        ModeLabel.Text = Loc.GetString(isDrawMode ? "fermentation-barrel-menu-mode-draw" : "fermentation-barrel-menu-mode-fill");
+
         var span = TimeSpan.FromSeconds(elapsedTime);
         TimerLabel.Text = $"{(int)span.TotalMinutes:D2}:{span.Seconds:D2}";
+
+        VolumeLabel.Text = $"{(int)totalSolution}u/{(int)maxSolution}u";
 
         StartStopButton.Text = Loc.GetString(isActive ? "fermentation-barrel-menu-stop-button" : "fermentation-barrel-menu-start-button");
 
