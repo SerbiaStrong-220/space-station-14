@@ -26,7 +26,7 @@
 
 - type: reaction
   id: WortAle
-  minTemp: 355
+  minTemp: 335
   maxTemp: 372
   reactants:
     WortBase:
@@ -38,8 +38,8 @@
 
 - type: reaction
   id: WortStout
-  minTemp: 335
-  maxTemp: 352
+  minTemp: 345
+  maxTemp: 362
   reactants:
     WortAle:
       amount: 1
@@ -49,7 +49,7 @@
     WortStout: 2
 
 - type: reaction
-  id: WortWheat
+  id: WortIpa
   minTemp: 335
   maxTemp: 352
   reactants:
@@ -60,7 +60,7 @@
     HopsExtract:
       amount: 1
   products:
-    WortWheat: 3
+    WortIpa: 3
 
 - type: reaction
   id: WortPlasma

@@ -24,6 +24,10 @@
         amount: 2
       - id: BungoSeeds
         amount: 2
+      # SS220-beer-update-start
+      - id: HopSeeds
+        amount: 2
+      # SS220-beer-update-end
 
 - type: entity
   id: CrateHydroponicsSeedsMedicinal

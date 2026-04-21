@@ -4,6 +4,7 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reaction;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.SS220.BeerUpdate.FermentationBarrel;
+using Content.Shared.Examine;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 
@@ -17,6 +18,8 @@ public sealed class FermentationBarrelSystem : EntitySystem
     [Dependency] private readonly UserInterfaceSystem _userInterfaceSystem = default!;
 
     private List<ReactionPrototype> _fermentationReactions = new();
+    private float _uiUpdateAccumulator = 0f;
+    private const float UiUpdateInterval = 0.1f;
 
     public override void Initialize()
     {
@@ -32,6 +35,7 @@ public sealed class FermentationBarrelSystem : EntitySystem
         SubscribeLocalEvent<FermentationBarrelComponent, BoundUIOpenedEvent>(OnBoundUIOpenedEvent);
         SubscribeLocalEvent<FermentationBarrelComponent, FermentationBarrelToggleEvent>(OnToggleEvent);
         SubscribeLocalEvent<FermentationBarrelComponent, FermentationBarrelModeChangeEvent>(OnModeChangeEvent);
+        SubscribeLocalEvent<FermentationBarrelComponent, ExaminedEvent>(OnExamined);
     }
 
     private void OnStartup(Entity<FermentationBarrelComponent> ent, ref ComponentStartup args)
@@ -60,11 +64,23 @@ public sealed class FermentationBarrelSystem : EntitySystem
     private void OnModeChangeEvent(Entity<FermentationBarrelComponent> ent, ref FermentationBarrelModeChangeEvent args)
     {
         if (ent.Comp.IsActive)
+        {
             return;
+        }
 
         ent.Comp.IsDrawMode = !ent.Comp.IsDrawMode;
         SetSolutionMode(ent, locked: false, drawMode: ent.Comp.IsDrawMode);
         UpdateUiState(ent);
+    }
+
+    private void OnExamined(Entity<FermentationBarrelComponent> ent, ref ExaminedEvent args)
+    {
+        var modeText = Loc.GetString(ent.Comp.IsDrawMode ? "fermentation-barrel-menu-mode-draw" : "fermentation-barrel-menu-mode-fill");
+        var span = TimeSpan.FromSeconds(ent.Comp.ElapsedTime);
+        var timerText = $"{(int)span.TotalMinutes:D2}:{span.Seconds:D2}";
+
+        args.PushMarkup($"{Loc.GetString("fermentation-barrel-menu-mode-label")} [color=yellow]{modeText}[/color]");
+        args.PushMarkup($"{Loc.GetString("fermentation-barrel-menu-timer-label")} {timerText}");
     }
 
     private void Start(Entity<FermentationBarrelComponent> ent)
@@ -103,9 +119,6 @@ public sealed class FermentationBarrelSystem : EntitySystem
         UpdateUiState(ent, ent.Comp);
     }
 
-    private float _uiUpdateAccumulator = 0f;
-    private const float UiUpdateInterval = 0.1f; // Update UI every 100ms
-
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -126,25 +139,35 @@ public sealed class FermentationBarrelSystem : EntitySystem
             foreach (var reaction in _fermentationReactions)
             {
                 if (barrel.ReactionsFired.TryGetValue(reaction.ID, out var fired) && fired)
+                {
                     continue;
+                }
 
                 if (barrel.ElapsedTime < reaction.FermentationDuration)
+                {
                     break;
+                }
 
                 if (!_reactions.TryCanReact(soln.Value, reaction, null, out var unitReactions))
+                {
                     continue;
+                }
 
                 var attempt = new FermentationBarrelReactionAttemptEvent(reaction);
                 RaiseLocalEvent(uid, attempt);
                 if (attempt.Cancelled)
+                {
                     continue;
+                }
 
                 _reactions.TryPerformReaction(soln.Value, reaction, unitReactions);
                 barrel.ReactionsFired[reaction.ID] = true;
             }
 
             if (shouldUpdateUi)
+            {
                 UpdateUiState(uid, barrel);
+            }
 
             Dirty(uid, barrel);
         }
@@ -153,14 +176,20 @@ public sealed class FermentationBarrelSystem : EntitySystem
     private void UpdateUiState(EntityUid uid, FermentationBarrelComponent barrel)
     {
         ReagentQuantity[]? reagents = null;
+        float totalSolution = 0f;
+        float maxSolution = 0f;
+
         if (_solutions.TryGetSolution(uid, barrel.SolutionName, out var solution))
         {
             reagents = solution.Value.Comp.Solution.Contents
                 .Select(r => new ReagentQuantity(r.Reagent, r.Quantity))
                 .ToArray();
+
+            totalSolution = (float)solution.Value.Comp.Solution.Volume;
+            maxSolution = (float)solution.Value.Comp.Solution.MaxVolume;
         }
 
-        var state = new FermentationBarrelInterfaceState(barrel.IsActive, barrel.ElapsedTime, reagents);
+        var state = new FermentationBarrelInterfaceState(barrel.IsActive, barrel.ElapsedTime, reagents, barrel.IsDrawMode, totalSolution, maxSolution);
         _userInterfaceSystem.SetUiState(uid, FermentationBarrelUiKey.Key, state);
     }
 

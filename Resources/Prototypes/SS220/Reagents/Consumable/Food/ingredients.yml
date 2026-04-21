@@ -104,11 +104,11 @@
   color: "#2b1b0c"
 
 - type: reagent
-  id: WortWheat
+  id: WortIpa
   parent: WortBase
-  name: reagent-name-wort-wheat
+  name: reagent-name-wort-ipa
   group: Foods
-  desc: reagent-desc-wort-wheat
+  desc: reagent-desc-wort-ipa
   color: "#c8b48c"
 
 - type: reagent

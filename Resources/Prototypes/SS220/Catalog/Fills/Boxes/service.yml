@@ -1,0 +1,10 @@
+- type: entity
+  name: yeast box
+  parent: BoxCardboard
+  id: BoxYeast
+  description: Box with 9 yeast packs.
+  components:
+  - type: StorageFill
+    contents:
+      - id: FoodCondimentPacketYeast
+        amount: 9
