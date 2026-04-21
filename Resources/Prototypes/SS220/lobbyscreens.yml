@@ -1,4 +1,4 @@
-﻿- type: lobbyBackground
+- type: lobbyBackground
   id: DeepInSpiders
   background: /Textures/SS220/LobbyScreens/deep-in-spiders.png
 
@@ -77,3 +77,7 @@
 - type: lobbyBackground
   id: MouseKiller
   background: /Textures/SS220/LobbyScreens/MouseKiller.png
+  
+- type: lobbyBackground
+  id: WatermelonApocalypse
+  background: /Textures/SS220/LobbyScreens/WatermelonApocalypse.webp
