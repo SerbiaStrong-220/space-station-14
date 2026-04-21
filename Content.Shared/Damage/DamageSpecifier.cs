@@ -161,10 +161,10 @@ namespace Content.Shared.Damage
                 float newValue = value.Float();
 
                 if (modifierSet.FlatReduction.TryGetValue(key, out var reduction))
-                    newValue = Math.Max(0f, newValue - reduction + damageSpec.ArmourPiercing.Float()); //SS220 weapon overhaul
+                    newValue = Math.Max(0f, newValue - Math.Clamp(reduction - damageSpec.ArmourPiercing.Float(), 0, reduction)); //SS220 weapon overhaul
 
                 if (modifierSet.Coefficients.TryGetValue(key, out var coefficient))
-                    newValue *= coefficient + damageSpec.ArmourPiercing.Float() / 100; //SS220 weapon overhaul
+                    newValue *= Math.Clamp(coefficient + damageSpec.ArmourPiercing.Float() / 100, 0, 1); //SS220 weapon overhaul
 
                 if (newValue != 0)
                     newDamage.DamageDict[key] = FixedPoint2.New(newValue);
