@@ -1,0 +1,41 @@
+name: "NDA Team Contributor Inviting"
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  invite-contributor:
+    if: github.event.pull_request.merged == true && contains(fromJson('["NONE","CONTRIBUTOR","FIRST_TIMER","FIRST_TIME_CONTRIBUTOR"]'), github.event.pull_request.author_association)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inviting
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const body = `🚀 **${context.payload.pull_request.user.login}, спасибо за твой вклад в проект! PR успешно принят.**
+
+            В качестве благодарности мы хотим пригласить тебя в наш закрытый трекер задач. Он представляет собой приватный репозиторий, где хранятся задачи и сырые идеи с нашего трекера SS14. Для тебя это может быть полезно, если ты хочешь опробовать свои силы ещё в каких-либо задачах, но не желаешь брать на себя никаких обязательств.
+
+            Доступ выдается на основе взаимного доверия. Чтобы получить инвайт, тебе нужно принять **три простых правила**:
+            1. **Без спойлеров и сливов:** Не публиковать в открытом доступе авторские идеи, тексты задач, черновики спрайтов и внутренние обсуждения до их официального релиза. Релизом считается открытый и принятый PR по связанной задаче или идее.
+            2. **Не воруй идеи:** Не использовать наши уникальные закрытые концепты и наработки для сторонних проектов без разрешения авторов.
+            3. **Не используй уязвимости во вред:** Если увидишь задачу на исправление критического бага или эксплойта, не используй эту уязвимость на практике и не рассказывай о ней третьим лицам.
+
+            *За слив информации или вредительство доступ будет навсегда отозван.*
+
+            💪 **Если ты согласен с правилами, просто напиши в ответ на это сообщение комментарий:** \`Я согласен\``;
+
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
+
+            await github.rest.issues.addLabels({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ['nda-pending']
+            });
