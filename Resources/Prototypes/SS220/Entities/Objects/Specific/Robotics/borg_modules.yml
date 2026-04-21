@@ -100,3 +100,11 @@
     - item: ToyFigurineClown
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: clowning-module }
+
+- type: entity
+  id: BorgModuleTanksPlaceholder
+  parent: BaseItem
+  components:
+  - type: Sprite
+    sprite: SS220/Placeholders/tanks.rsi
+    state: tanks
