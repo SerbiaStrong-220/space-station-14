@@ -1,10 +1,10 @@
-ent-BaseCartridgeCaselessRifle = патрон (.25 винтовочный)
+ent-BaseCartridgeCaselessRifle = патрон (8x18 безгильзовый)
     .desc = { ent-BaseCartridge.desc }
-ent-CartridgeCaselessRifle = патрон (.25 безгильзовый)
+ent-CartridgeCaselessRifle = патрон (8x18 безгильзовый)
     .desc = { ent-BaseCartridgeCaselessRifle.desc }
-ent-CartridgeCaselessRifleHighVelocity = патрон (.25 безгильзовый высокоскоростной)
+ent-CartridgeCaselessRifleHighVelocity = патрон (8x18 безгильзовый высокоскоростной)
     .desc = { ent-BaseCartridgeCaselessRifle.desc }
-ent-CartridgeCaselessRiflePractice = патрон (.25 безгильзовый учебный)
+ent-CartridgeCaselessRiflePractice = патрон (8x18 безгильзовый учебный)
     .desc = { ent-BaseCartridgeCaselessRifle.desc }
-ent-CartridgeCaselessRifleRubber = патрон (.25 безгильзовый резиновый)
+ent-CartridgeCaselessRifleRubber = патрон (8x18 безгильзовый резиновый)
     .desc = { ent-BaseCartridgeCaselessRifle.desc }
