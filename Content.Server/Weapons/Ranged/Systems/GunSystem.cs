@@ -37,6 +37,8 @@ public sealed partial class GunSystem : SharedGunSystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly ShuttleNavInfoSystem _shuttleNavInfo = default!; // SS220 Add projectiles & hitscan on shuttle nav
+    [Dependency] private readonly SharedPopupSystem _popup = default!; //SS220 weapon overhaul
+    [Dependency] private readonly RequireProjectileTargetSystem _requireTarget = default!; //SS220 weapon overhaul
 
     private const float DamagePitchVariation = 0.05f;
 
@@ -213,7 +215,7 @@ public sealed partial class GunSystem : SharedGunSystem
                                     foreach (var collide in rayCastResults)
                                     {
                                         if (collide.HitEntity != gun.Target &&
-                                            CompOrNull<RequireProjectileTargetComponent>(collide.HitEntity)?.Active == true)
+                                            TryComp<RequireProjectileTargetComponent>(collide.HitEntity, out var targetComp) && _requireTarget.PreventHitscan((collide.HitEntity, targetComp), gunUid)) // SS220 weapon overhaul
                                         {
                                             continue;
                                         }
@@ -325,8 +327,8 @@ public sealed partial class GunSystem : SharedGunSystem
                 var spreadEvent = new GunGetAmmoSpreadEvent(ammoSpreadComp.Spread);
                 RaiseLocalEvent(gunUid, ref spreadEvent);
 
-                var angles = LinearSpread(mapAngle - spreadEvent.Spread / 2,
-                    mapAngle + spreadEvent.Spread / 2, ammoSpreadComp.Count);
+                var angles = LinearSpread(mapDirection.ToAngle() - spreadEvent.Spread / 2,//SS220 weapon overhaul
+                    mapDirection.ToAngle() + spreadEvent.Spread / 2, ammoSpreadComp.Count);//SS220 weapon overhaul
 
                 ShootOrThrow(ammoEnt, angles[0].ToVec(), gunVelocity, gun, gunUid, user);
                 shotProjectiles.Add(ammoEnt);

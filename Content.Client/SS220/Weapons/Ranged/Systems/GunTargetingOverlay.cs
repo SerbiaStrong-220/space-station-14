@@ -10,7 +10,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.SS220.Weapons;
 
-public sealed class GunTargetingOverlay : Overlay //Basically WizDen's code with four lines cut off
+public sealed class GunTargetingOverlay : Overlay
 {
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
 
@@ -73,7 +73,7 @@ public sealed class GunTargetingOverlay : Overlay //Basically WizDen's code with
             overlayColor = Color.Orange;
 
         // Show current angle
-        worldHandle.DrawCircle(mapPos.Position + currentAngle.RotateVec(direction), 0.1f, overlayColor, true);
-        worldHandle.DrawCircle(mapPos.Position + (-currentAngle).RotateVec(direction), 0.1f, overlayColor, true);
+        worldHandle.DrawCircle(mapPos.Position + currentAngle.RotateVec(direction), 0.08f, overlayColor, true);
+        worldHandle.DrawCircle(mapPos.Position + (-currentAngle).RotateVec(direction), 0.08f, overlayColor, true);
     }
 }
