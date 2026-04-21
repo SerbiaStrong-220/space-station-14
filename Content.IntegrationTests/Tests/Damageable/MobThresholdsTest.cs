@@ -11,28 +11,33 @@ public sealed class MobThresholdsTest : GameTest
 
     [Test]
     [TestOf(typeof(MobThresholdsComponent))]
-    [TestCaseSource(nameof(_entitiesWithThresholds))]
+    // [TestCaseSource(nameof(_entitiesWithThresholds))] SS220-move-to-test-loop
     [Description("Ensures every entity with mob thresholds has valid mob state configuration corresponding to some AlertPrototype.")]
-    public async Task ValidateMobThresholds(string protoKey)
+    public async Task ValidateMobThresholds() // SS220
     {
         var pair = Pair;
         var server = pair.Server;
 
         var protoMan = server.ProtoMan;
 
-        Assert.Multiple(() =>
+        // SS220-move-to-test-loop-begin
+        foreach (var protoKey in _entitiesWithThresholds)
         {
-            var proto = protoMan.Index(protoKey);
-            var comp = (MobThresholdsComponent)proto.Components["MobThresholds"].Component;
-
-            // See which mob states are mapped to alerts
-            var alertStates = comp.StateAlertDict.Keys;
-            // Check each mob state that this mob can be in
-            foreach (var (_, state) in comp.Thresholds)
+            Assert.Multiple(() =>
             {
-                // Make sure that an alert exists for each possible mob state
-                Assert.That(alertStates, Does.Contain(state), $"{proto.ID} does not have an alert state for mob state {state}");
-            }
-        });
+                var proto = protoMan.Index(protoKey);
+                var comp = (MobThresholdsComponent)proto.Components["MobThresholds"].Component;
+
+                // See which mob states are mapped to alerts
+                var alertStates = comp.StateAlertDict.Keys;
+                // Check each mob state that this mob can be in
+                foreach (var (_, state) in comp.Thresholds)
+                {
+                    // Make sure that an alert exists for each possible mob state
+                    Assert.That(alertStates, Does.Contain(state), $"{proto.ID} does not have an alert state for mob state {state}");
+                }
+            });
+        }
+        // SS220-move-to-test-loop-end
     }
 }

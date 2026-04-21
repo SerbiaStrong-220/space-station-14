@@ -18,9 +18,9 @@ public sealed class GuideEntryPrototypeTests : GameTest
     private static string[] _guideEntries = GameDataScrounger.PrototypesOfKind<GuideEntryPrototype>();
 
     [Test]
-    [TestCaseSource(nameof(_guideEntries))]
+    // [TestCaseSource(nameof(_guideEntries))] // SS220-reuse-test
     [Description("Ensures a given guidebook entry is valid, checking the document/etc.")]
-    public async Task Validate(string protoKey)
+    public async Task Validate()
     {
         var pair = Pair;
         var client = pair.Client;
@@ -28,14 +28,20 @@ public sealed class GuideEntryPrototypeTests : GameTest
         var protoMan = client.ResolveDependency<IPrototypeManager>();
         var resMan = client.ResolveDependency<IResourceManager>();
         var parser = client.ResolveDependency<DocumentParsingManager>();
-        var proto = protoMan.Index<GuideEntryPrototype>(protoKey);
 
-        await client.WaitAssertion(() =>
+        // SS220-move-to-test-loop-begin
+        foreach (var protoKey in _guideEntries)
         {
-            using var reader = resMan.ContentFileReadText(proto.Text);
-            var text = reader.ReadToEnd();
+            var proto = protoMan.Index<GuideEntryPrototype>(protoKey);
 
-            Assert.That(parser.TryAddMarkup(new Document(), text), $"Failed to parse the guide entry's document.");
-        });
+            await client.WaitAssertion(() =>
+            {
+                using var reader = resMan.ContentFileReadText(proto.Text);
+                var text = reader.ReadToEnd();
+
+                Assert.That(parser.TryAddMarkup(new Document(), text), $"Failed to parse the guide entry's document.");
+            });
+        }
+        // SS220-move-to-test-loop-end
     }
 }
