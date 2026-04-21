@@ -19,7 +19,7 @@
     shape:
     - 0,0,4,0
   - type: Clothing
-    sprite: SS220/Objects/Weapons/Guns/Shotguns/db_shotgun.rsi #ss220 double-barreled shotgun resprite 
+    sprite: SS220/Objects/Weapons/Guns/Shotguns/db_shotgun.rsi #ss220 double-barreled shotgun resprite
     quickEquip: false
     slots:
     - Back
@@ -137,50 +137,6 @@
     price: 5000
 
 - type: entity
-  name: SF-FAS
-  id: SFShotgun
-  parent: WeaponShotgunBulldog
-  description: A devastating close-quarters weapon. This is what happens when old and reliable design of lecter meets 12x71.
-  components:
-  - type: Clothing
-    sprite: SS220/Objects/Weapons/Guns/Shotguns/sf_fas.rsi
-    quickEquip: false
-    slots:
-    - Back
-    - suitStorage
-  - type: AmmoCounter
-  - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
-  - type: Gun
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: MagazineShotgun
-        priority: 2
-        whitelist:
-          tags:
-          - MagazineShotgun
-        whitelistFailPopup: gun-magazine-whitelist-fail
-        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
-      gun_chamber:
-        name: Chamber
-        startingItem: ShellShotgun
-        priority: 1
-        whitelist:
-          tags:
-            - ShellShotgun
-  - type: Sprite
-    sprite: SS220/Objects/Weapons/Guns/Shotguns/sf_fas.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-0
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: Item
-    size: Large
-
-- type: entity
   name: double-barreled shotgun
   parent: [BaseWeaponShotgun, BaseGunWieldable, BaseSecurityBartenderZookeeperContraband]
   id: WeaponShotgunDoubleBarreled
@@ -212,7 +168,7 @@
 
 - type: entity
   name: Enforcer
-  parent: [BaseWeaponShotgun, BaseGunWieldable, BaseSecurityContraband] #FCB realistic weapons
+  parent: [BaseWeaponShotgun, BaseGunWieldable, BaseSecurityContraband] #SS220 weapon overhaul
   id: WeaponShotgunEnforcer
   description: A premium semi-automatic shotgun, and the pride of all security forces. Uses .50 shotgun shells.
   components: # intend for Enforcer to have wider choke for semi-auto function
@@ -250,7 +206,7 @@
 
 - type: entity
   name: Kammerer
-  parent: [BaseWeaponShotgun, BaseGunWieldable, BaseSecurityContraband] #FCB realistic weapons
+  parent: [BaseWeaponShotgun, BaseGunWieldable, BaseSecurityContraband] #SS220 weapon overhaul
   id: WeaponShotgunKammerer
   description: An old yet faithful design, and a favorite among irregular forces of many worlds. Uses .50 shotgun shells.
   components: # intend for Kammerer to have tighter choke for slower fire rate and/or manual cycling

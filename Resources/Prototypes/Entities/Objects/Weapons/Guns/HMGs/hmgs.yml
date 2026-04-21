@@ -49,7 +49,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/minigun.ogg
   - type: BallisticAmmoProvider
-    proto: CartridgeMinigun
+    proto: CartridgeFullRifle
     capacity: 1000
   - type: ContainerContainer
     containers:
