@@ -184,6 +184,11 @@ binds:
 - function: ActivateItemInHand
   type: State
   key: Z
+#SS220 weapon overhaul begin
+- function: ActivateGunInHand
+  type: State
+  key: R
+#SS220 weapon overhaul end
 #SS220 shield rework begin
 - function: ToggleActiveBlocking
   type: State

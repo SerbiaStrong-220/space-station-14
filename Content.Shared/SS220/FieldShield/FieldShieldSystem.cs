@@ -133,8 +133,8 @@ public sealed class FieldShieldProviderSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (args.Damage.GetTotal() > entity.Comp.ShieldData.MaxDamageConsumable
-            || args.Damage.GetTotal() < entity.Comp.ShieldData.DamageThreshold)
+        if (args.Damage.GetTotal() + args.Damage.ArmourPiercing > entity.Comp.ShieldData.MaxDamageConsumable
+            || args.Damage.GetTotal() + args.Damage.ArmourPiercing < entity.Comp.ShieldData.DamageThreshold)
             return;
 
         UpdateShieldTimer(entity);

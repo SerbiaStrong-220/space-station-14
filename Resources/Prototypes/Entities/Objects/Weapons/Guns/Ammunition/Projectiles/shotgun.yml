@@ -12,7 +12,7 @@
       types:
         Piercing: 40
         Structural: 15
-      armourPiercing: 7 #FCB armour piercing added
+      armourPiercing: 7 #SS220 armor piercing added
 
 
 - type: entity
@@ -28,7 +28,7 @@
     damage:
       types:
         Blunt: 16 #ss220lowTTKUpdate
-      armourPiercing: -10 #FCB armour piercing added
+      armourPiercing: -10 #SS220 armor piercing added
   - type: StaminaDamageOnCollide
     damage: 60 # 2 hits to stun #ss220lowTTKUpdate
 

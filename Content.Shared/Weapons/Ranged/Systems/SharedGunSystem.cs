@@ -7,11 +7,12 @@ using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
-using Content.Shared.SS220.AltBlocking;
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.SS220.AltBlocking;
+using Content.Shared.SS220.Weapons.Ranged.Events;
 using Content.Shared.Standing;
 using Content.Shared.Tag;
 using Content.Shared.Throwing;
@@ -108,6 +109,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         SubscribeLocalEvent<GunComponent, GetVerbsEvent<Verb>>(OnGetVerbs);
         SubscribeLocalEvent<SuicideDoAfterEvent>(OnDoSuicideComplete);
         // SS220-new-feature kus end
+        SubscribeAllEvent<GunCycleRequestEvent>(OnGunUsed);//SS220 weapon overhaul
     }
 
     private void OnMapInit(Entity<GunComponent> gun, ref MapInitEvent args)
@@ -121,6 +123,36 @@ public abstract partial class SharedGunSystem : EntitySystem
 
         RefreshModifiers((gun, gun));
     }
+
+    //SS220 weapon overhaul begin
+    private void OnGunUsed(GunCycleRequestEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (!TryGetEntity(args.User, out var localUser) || !TryGetEntity(args.Gun, out var localGun))
+            return;
+
+        if (TryComp<ChamberMagazineAmmoProviderComponent>(localGun, out var chamberMagComp))
+        {
+            args.Handled = true;
+            if (chamberMagComp.CanRack)
+                UseChambered((EntityUid)localGun, chamberMagComp, (EntityUid)localUser);
+            else
+                ToggleBolt((EntityUid)localGun, chamberMagComp, (EntityUid)localUser);
+
+            return;
+        }
+
+        if (TryComp<BallisticAmmoProviderComponent>(localGun, out var ballisticComp))
+        {
+            ManualCycle((EntityUid)localGun, ballisticComp, TransformSystem.GetMapCoordinates((EntityUid)localGun), (EntityUid)localUser);
+            args.Handled = true;
+
+            return;
+        }
+    }
+    //SS220 weapon overhaul end
 
     private void OnGunMelee(EntityUid uid, GunComponent component, MeleeHitEvent args)
     {
@@ -447,7 +479,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         EntityUid? user = null,
         bool throwItems = false);
 
-    public void ShootProjectile(EntityUid uid, Vector2 direction, Vector2 gunVelocity, EntityUid? gunUid, EntityUid? user = null, float speed = 40f) //SS220 BulletSpeed
+    public void ShootProjectile(EntityUid uid, Vector2 direction, Vector2 gunVelocity, EntityUid? gunUid, EntityUid? user = null, float speed = 75f) //SS220 BulletSpeed
     {
         var physics = EnsureComp<PhysicsComponent>(uid);
         Physics.SetBodyStatus(uid, physics, BodyStatus.InAir);

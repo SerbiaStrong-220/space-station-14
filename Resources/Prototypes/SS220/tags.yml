@@ -5,6 +5,12 @@
   id: DeusAmbrosia
 
 - type: Tag
+  id: FullRifleCartridge
+
+- type: Tag
+  id: FullRifleMagazine
+
+- type: Tag
   id: MeatSlime
 
 - type: Tag
