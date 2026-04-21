@@ -164,7 +164,7 @@ namespace Content.Shared.Damage
                 if (modifierSet.FlatReduction.TryGetValue(key, out var reduction))
                     newValue = Math.Max(0f, newValue - Math.Clamp(reduction - damageSpec.ArmourPiercing.Float(), 0, reduction));
 
-                if (modifierSet.Coefficients.TryGetValue(key, out var coefficient) && coefficient + damageSpec.ArmourPiercing.Float() / 100 <= 1)
+                if (modifierSet.Coefficients.TryGetValue(key, out var coefficient))
                 {
                     var armorPiercing = damageSpec.ArmourPiercing.Float() / 100;
 
