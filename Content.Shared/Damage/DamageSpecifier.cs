@@ -162,16 +162,20 @@ namespace Content.Shared.Damage
 
                 //SS220 armor piercing added begin
                 if (modifierSet.FlatReduction.TryGetValue(key, out var reduction))
-                    newValue = Math.Max(0f, newValue - Math.Max(reduction - damageSpec.ArmourPiercing.Float(), 0f)); 
+                    newValue = Math.Max(0f, newValue - Math.Max(reduction - damageSpec.ArmourPiercing.Float(), 0f));
 
                 if (modifierSet.Coefficients.TryGetValue(key, out var coefficient))
                 {
-                    var cap = 1f;
+                    var upperCap = 1f;
+                    var lowerCap = 0f;
 
                     if (coefficient > 1f)
-                        cap = coefficient;
+                        upperCap = coefficient;
 
-                    newValue *= Math.Clamp(coefficient + damageSpec.ArmourPiercing.Float() / 100f, 0f, cap);
+                    if (coefficient < 0f)
+                        lowerCap = coefficient;
+
+                    newValue *= Math.Clamp(coefficient + damageSpec.ArmourPiercing.Float() / 100f, lowerCap, upperCap);
                 }
                 //SS220 armor piercing added end
 
