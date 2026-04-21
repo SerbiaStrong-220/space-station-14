@@ -221,6 +221,13 @@
   - type: StaminaResistance
     damageCoefficient: 0.55 #SS220 stamina resist for elite vest to 45%
   # SS220 add stamina resistance end
+  # ss220 add radio slot start
+  - type: ContainerContainer
+    containers:
+      item_radio: !type:ContainerSlot { }
+      storagebase: !type:Container
+        ents: [ ]
+  # ss220 add radio slot end
   - type: ExplosionResistance
     damageCoefficient: 0.5
   - type: FireProtection
