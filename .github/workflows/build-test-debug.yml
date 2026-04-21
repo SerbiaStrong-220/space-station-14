@@ -52,21 +52,21 @@ jobs:
       shell: pwsh
       run: |
         $env:DOTNET_gcServer=1
-        dotnet test --filter 'Name=EntityTest|Name=Validate' --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj -- NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
+        dotnet test --filter 'FullyQualifiedName~EntityTest|FullyQualifiedName~Validate|FullyQualifiedName~SaveTest' --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj -- NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
     # SS220-separate-tests-end
 
     - name: Run Content.IntegrationTests
       shell: pwsh
       run: |
         $env:DOTNET_gcServer=1
-        dotnet test --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj --filter "FullyQualifiedName!~PostMapInitTest&FullyQualifiedName!~StationPowerTests&FullyQualifiedName!~ShuttlesLoadableTest&FullyQualifiedName!~NoSavedPostMapInitTest&FullyQualifiedName!~NonGameMapsLoadableTest&FullyQualifiedName!~EntityTest&FullyQualifiedName!~Validate" -- NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
+        dotnet test --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj --filter "FullyQualifiedName!~PostMapInitTest&FullyQualifiedName!~StationPowerTests&FullyQualifiedName!~ShuttlesLoadableTest&FullyQualifiedName!~NoSavedPostMapInitTest&FullyQualifiedName!~NonGameMapsLoadableTest&FullyQualifiedName!~EntityTest&FullyQualifiedName!~Validate&FullyQualifiedName!~SaveTest" -- NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
 
     # SS220-separate-tests-begin
     - name: Run Content.IntegrationTests maps test
       shell: pwsh
       run: |
         $env:DOTNET_gcServer=1
-        dotnet test --filter 'Name=PostMapInitTest|Name=StationPowerTests|Name=ShuttlesLoadableTest|Name=NoSavedPostMapInitTest|Name=NonGameMapsLoadableTest' --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj -- NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
+        dotnet test --filter 'FullyQualifiedName~PostMapInitTest|FullyQualifiedName~StationPowerTests|FullyQualifiedName~ShuttlesLoadableTest|FullyQualifiedName~NoSavedPostMapInitTest|FullyQualifiedName~NonGameMapsLoadableTest' --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj -- NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
     # SS220-separate-tests-end
 
     - name: Archive NUnit3 test results.
