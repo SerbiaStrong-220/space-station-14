@@ -160,11 +160,20 @@ namespace Content.Shared.Damage
 
                 float newValue = value.Float();
 
+                //SS220 armor piercing added begin
                 if (modifierSet.FlatReduction.TryGetValue(key, out var reduction))
-                    newValue = Math.Max(0f, newValue - Math.Clamp(reduction - damageSpec.ArmourPiercing.Float(), 0, reduction)); //SS220 armor piercing added
+                    newValue = Math.Max(0f, newValue - Math.Clamp(reduction - damageSpec.ArmourPiercing.Float(), 0, reduction));
 
                 if (modifierSet.Coefficients.TryGetValue(key, out var coefficient) && coefficient + damageSpec.ArmourPiercing.Float() / 100 <= 1)
-                    newValue *= coefficient + Math.Clamp(damageSpec.ArmourPiercing.Float() / 100, 0, 1); //SS220 armor piercing added
+                {
+                    var armorPiercing = damageSpec.ArmourPiercing.Float() / 100;
+
+                    if (coefficient + damageSpec.ArmourPiercing.Float() / 100 > 1)
+                        armorPiercing = 0;
+
+                    newValue *= coefficient + Math.Clamp(damageSpec.ArmourPiercing.Float() / 100, 0, 1);
+                }
+                //SS220 armor piercing added end
 
                 if (newValue != 0)
                     newDamage.DamageDict[key] = FixedPoint2.New(newValue);
