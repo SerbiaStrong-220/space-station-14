@@ -52,7 +52,7 @@ public sealed class EmptyCanCrushSystem : EntitySystem
 
         var crushedCan = PredictedSpawnAtPosition(entity.Comp.CrushedCanId, transform.Coordinates);
 
-        if (crushedCan == null)
+        if (!Exists(crushedCan))
             return;
 
         _audio.PlayPredicted(entity.Comp.CrushSound, crushedCan, entity);
