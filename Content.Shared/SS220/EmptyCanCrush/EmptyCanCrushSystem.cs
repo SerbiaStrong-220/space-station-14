@@ -50,7 +50,7 @@ public sealed class EmptyCanCrushSystem : EntitySystem
             return;
         }
 
-        var crushedCan = PredictedSpawnAtPosition(entity.Comp.crushedCanId, transform.Coordinates);
+        var crushedCan = PredictedSpawnAtPosition(entity.Comp.CrushedCanId, transform.Coordinates);
 
         if (crushedCan == null)
             return;
