@@ -11,7 +11,7 @@ namespace Content.Shared.SS220.EmptyCanCrush;
 public sealed partial class EmptyCanCrushComponent : Component
 {
     [DataField("crushedCan")]
-    public EntProtoId crushedCanId = "CrushedCanCola";
+    public EntProtoId crushedCanId = "crushedCanCola";
 
     [DataField]
     public SoundSpecifier CrushSound =
