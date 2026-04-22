@@ -2,7 +2,7 @@
   abstract: true
   parent: BaseItem
   id: CrushedCanBase
-  name: Crushed Can
+  name: crushed can
   description: A sweet, carbonated soft drink.
   components:
   - type: Sprite

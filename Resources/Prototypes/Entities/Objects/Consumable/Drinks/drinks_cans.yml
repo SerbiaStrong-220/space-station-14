@@ -354,35 +354,6 @@
 
 - type: entity
   parent: DrinkCanBaseFull
-  id: DrinkRelaxingPeachCan
-  name: Расслабляющая Персиковая Газировка
-  description: Ходят слухи, что ежедневное употребление данного напитка сделает вас добрее и эмпатичнее к окружающим. Но это лишь слухи! Продается под взрывной маркой "РПГ"!
-  components:
-  - type: SolutionContainerManager
-    solutions:
-      drink:
-        maxVol: 30
-        reagents:
-        - ReagentId: KiraSpecial
-          Quantity: 8
-        - ReagentId: RootBeerFloat
-          Quantity: 8
-        - ReagentId: Antifreeze
-          Quantity: 8
-        - ReagentId: DoctorsDelight
-          Quantity: 6
-      grindable: *grindable
-  - type: Sprite
-    sprite: Objects/Consumable/Drinks/starkist.rsi
-  - type: Item
-    sprite: Objects/Consumable/Drinks/starkist.rsi
-  #ss220-can-crush start
-  - type: EmptyCanCrush
-    crushedCan: CrushedCanRelaxingPeach
-  #ss220-can-crush end
-
-- type: entity
-  parent: DrinkCanBaseFull
   id: DrinkTonicWaterCan
   name: tonic water can
   description: Quinine tastes funny, but at least it'll keep that Space Malaria away.
