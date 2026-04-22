@@ -6,7 +6,7 @@
   description: A sweet, carbonated soft drink.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Consumable/TrashDrinks/crushed_cans/cola.rsi
+    sprite: SS220/Objects/Consumable/TrashDrinks/CrushedCans/cola.rsi
     state: icon
   - type: Item
     size: Tiny
@@ -32,7 +32,7 @@
   description: A sweet, carbonated soft drink.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Consumable/TrashDrinks/crushed_cans/cola.rsi
+    sprite: SS220/Objects/Consumable/TrashDrinks/CrushedCans/cola.rsi
     state: icon
 
 - type: entity
@@ -42,7 +42,7 @@
   description: A crushed can of iced tea.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Consumable/TrashDrinks/crushed_cans/ice_tea_can.rsi
+    sprite: SS220/Objects/Consumable/TrashDrinks/CrushedCans/ice_tea_can.rsi
     state: icon
 
 - type: entity
@@ -52,7 +52,7 @@
   description: A crushed Smite Cranberry can. Beloved by administrators everywhere.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Consumable/TrashDrinks/crushed_cans/lemon-lime-cranberry.rsi
+    sprite: SS220/Objects/Consumable/TrashDrinks/CrushedCans/lemon-lime-cranberry.rsi
     state: icon
 
 - type: entity
@@ -62,7 +62,7 @@
   description: A crushed can of grape soda with a deep purple color.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Consumable/TrashDrinks/crushed_cans/purple_can.rsi
+    sprite: SS220/Objects/Consumable/TrashDrinks/CrushedCans/purple_can.rsi
     state: icon
 
 - type: entity
@@ -72,7 +72,7 @@
   description: A crushed can of tasty root beer.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Consumable/TrashDrinks/crushed_cans/rootbeer.rsi
+    sprite: SS220/Objects/Consumable/TrashDrinks/CrushedCans/rootbeer.rsi
     state: icon
   - type: Tag
     tags:
@@ -86,7 +86,7 @@
   description: A crushed can of soda water.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Consumable/TrashDrinks/crushed_cans/sodawater.rsi
+    sprite: SS220/Objects/Consumable/TrashDrinks/CrushedCans/sodawater.rsi
     state: icon
 
 - type: entity
@@ -96,7 +96,7 @@
   description: A crushed can that once contained something that blows right through you like a solar wind.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Consumable/TrashDrinks/crushed_cans/space_mountain_wind.rsi
+    sprite: SS220/Objects/Consumable/TrashDrinks/CrushedCans/space_mountain_wind.rsi
     state: icon
 
 - type: entity
@@ -106,7 +106,7 @@
   description: A crushed Space-Up can. Tastes like a hull breach in your mouth.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Consumable/TrashDrinks/crushed_cans/space-up.rsi
+    sprite: SS220/Objects/Consumable/TrashDrinks/CrushedCans/space-up.rsi
     state: icon
 
 - type: entity
@@ -116,7 +116,7 @@
   description: A crushed can of sweet ginger soda from outer space!
   components:
   - type: Sprite
-    sprite: SS220/Objects/Consumable/TrashDrinks/crushed_cans/sol_dry.rsi
+    sprite: SS220/Objects/Consumable/TrashDrinks/CrushedCans/sol_dry.rsi
     state: icon
 
 - type: entity
@@ -126,7 +126,7 @@
   description: A crushed Starkist can. The taste of a star in liquid form. And, a bit of tuna...?
   components:
   - type: Sprite
-    sprite: SS220/Objects/Consumable/TrashDrinks/crushed_cans/starkist.rsi
+    sprite: SS220/Objects/Consumable/TrashDrinks/CrushedCans/starkist.rsi
     state: icon
 
 - type: entity
@@ -136,7 +136,7 @@
   description: A crushed can of Relaxing Peach Soda. Rumors say it makes you kinder and more empathetic.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Consumable/TrashDrinks/crushed_cans/starkist.rsi
+    sprite: SS220/Objects/Consumable/TrashDrinks/CrushedCans/starkist.rsi
     state: icon
 
 - type: entity
@@ -146,7 +146,7 @@
   description: A crushed can of tonic water. Quinine tastes funny, but at least it'll keep that Space Malaria away.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Consumable/TrashDrinks/crushed_cans/tonic.rsi
+    sprite: SS220/Objects/Consumable/TrashDrinks/CrushedCans/tonic.rsi
     state: icon
 
 - type: entity
@@ -156,7 +156,7 @@
   description: A crushed Fourteen Loko can. May result in seizures, blindness, drunkeness, or even death.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Consumable/TrashDrinks/crushed_cans/fourteen_loko.rsi
+    sprite: SS220/Objects/Consumable/TrashDrinks/CrushedCans/fourteen_loko.rsi
     state: icon
 
 - type: entity
@@ -166,7 +166,7 @@
   description: A crushed Changeling Sting can. You take a tiny sip and feel a burning sensation...
   components:
   - type: Sprite
-    sprite: SS220/Objects/Consumable/TrashDrinks/crushed_cans/changelingsting.rsi
+    sprite: SS220/Objects/Consumable/TrashDrinks/CrushedCans/changelingsting.rsi
     state: icon
 
 - type: entity
@@ -176,7 +176,7 @@
   description: A crushed Dr. Gibb can. A delicious blend of 42 different flavours.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Consumable/TrashDrinks/crushed_cans/dr_gibb.rsi
+    sprite: SS220/Objects/Consumable/TrashDrinks/CrushedCans/dr_gibb.rsi
     state: icon
 
 - type: entity
@@ -186,7 +186,7 @@
   description: A crushed Blood-red Brew can. Home-brewed by the Syndicate. Not recommended by doctors.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Consumable/TrashDrinks/crushed_cans/robustnukie.rsi
+    sprite: SS220/Objects/Consumable/TrashDrinks/CrushedCans/robustnukie.rsi
     state: icon
 
 - type: entity
@@ -196,7 +196,7 @@
   description: A crushed Red Bool can. With enough caffeine to kill a horse.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Consumable/TrashDrinks/crushed_cans/energy_drink.rsi
+    sprite: SS220/Objects/Consumable/TrashDrinks/CrushedCans/energy_drink.rsi
     state: icon
 
 - type: entity
@@ -206,7 +206,7 @@
   description: A crushed Shambler's Juice can. ~Shake me up some of that Shambler's Juice!~
   components:
   - type: Sprite
-    sprite: SS220/Objects/Consumable/TrashDrinks/crushed_cans/shamblersjuice.rsi
+    sprite: SS220/Objects/Consumable/TrashDrinks/CrushedCans/shamblersjuice.rsi
     state: icon
 
 - type: entity
@@ -216,7 +216,7 @@
   description: A crushed PWR Game can. The only drink with the PWR that true gamers crave.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Consumable/TrashDrinks/crushed_cans/pwrgame.rsi
+    sprite: SS220/Objects/Consumable/TrashDrinks/CrushedCans/pwrgame.rsi
     state: icon
 
 #SS220-start
@@ -228,7 +228,7 @@
   description: A crushed beer can. Small joy, big taste, no worries!
   components:
   - type: Sprite
-    sprite: SS220/Objects/Consumable/TrashDrinks/crushed_cans/220/beer_can.rsi
+    sprite: SS220/Objects/Consumable/TrashDrinks/CrushedCans/beer_can.rsi
 
 - type: entity
   parent: CrushedCanBase
@@ -237,7 +237,7 @@
   description: A crushed wine can. Your way to forgetting all worries and having fun!
   components:
   - type: Sprite
-    sprite: SS220/Objects/Consumable/TrashDrinks/crushed_cans/220/wine_can.rsi
+    sprite: SS220/Objects/Consumable/TrashDrinks/CrushedCans/wine_can.rsi
 
 - type: entity
   parent: CrushedCanBase
@@ -246,7 +246,7 @@
   description: A crushed beer can. Small joy, big taste, no worries!
   components:
   - type: Sprite
-    sprite: SS220/Objects/Consumable/TrashDrinks/crushed_cans/220/sponsor/beer_can.rsi
+    sprite: SS220/Objects/Consumable/TrashDrinks/CrushedCans/sponsor/beer_can.rsi
 
 - type: entity
   parent: CrushedCanBase
@@ -255,7 +255,7 @@
   description: A crushed beer can. The most synthetic drink in the most synthetic container. Drink at your own risk.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Consumable/TrashDrinks/crushed_cans/220/rrranta.rsi
+    sprite: SS220/Objects/Consumable/TrashDrinks/CrushedCans/rrranta.rsi
 
 - type: entity
   parent: CrushedCanBase
@@ -264,7 +264,7 @@
   description: A crushed Smite can. You wanted ORANGE. It gave you Lemon-Lime.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Consumable/TrashDrinks/crushed_cans/220/lemon-lime.rsi
+    sprite: SS220/Objects/Consumable/TrashDrinks/CrushedCans/lemon-lime.rsi
     state: icon
 
 #SS220-end
