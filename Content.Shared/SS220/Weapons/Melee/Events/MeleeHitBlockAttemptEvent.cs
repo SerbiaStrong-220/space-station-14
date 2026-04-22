@@ -10,4 +10,6 @@ public record struct MeleeHitBlockAttemptEvent()
     public NetEntity? blocker = null;
 
     public Color? hitMarkColor = Color.Red;
+
+    public Angle HitAngle;
 }

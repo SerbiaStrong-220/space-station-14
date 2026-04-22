@@ -5,11 +5,13 @@ using Content.Shared.Projectiles;
 namespace Content.Shared.SS220.Weapons.Ranged.Events;
 
 [ByRefEvent]
-public record struct ProjectileBlockAttemptEvent(EntityUid ProjUid, ProjectileComponent Component, bool Cancelled, DamageSpecifier damage)
+public record struct ProjectileBlockAttemptEvent(EntityUid ProjUid, ProjectileComponent Component, bool Cancelled, DamageSpecifier damage, Angle ProjAngle)
 {
     public bool CancelledHit = false;
 
     public Color? hitMarkColor = Color.Red;
 
     public DamageSpecifier? Damage = damage;
+
+    public Angle ProjectileRotation = ProjAngle;
 }

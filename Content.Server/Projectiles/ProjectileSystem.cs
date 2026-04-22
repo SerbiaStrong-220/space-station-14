@@ -22,6 +22,7 @@ public sealed class ProjectileSystem : SharedProjectileSystem
     [Dependency] private readonly DestructibleSystem _destructibleSystem = default!;
     [Dependency] private readonly GunSystem _guns = default!;
     [Dependency] private readonly SharedCameraRecoilSystem _sharedCameraRecoil = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!; //SS220 shield rework
 
     public override void Initialize()
     {
@@ -47,7 +48,8 @@ public sealed class ProjectileSystem : SharedProjectileSystem
         }
 
         //SS220 shield rework begin
-        var blockattemptEv = new ProjectileBlockAttemptEvent(uid, component, false, component.Damage);
+        var projectileAngle = _transform.GetWorldRotation(uid);
+        var blockattemptEv = new ProjectileBlockAttemptEvent(uid, component, false, component.Damage, projectileAngle);
         RaiseLocalEvent(target, ref blockattemptEv);
         if (blockattemptEv.CancelledHit)
         {

@@ -49,4 +49,7 @@ public sealed partial class AltBlockingComponent : Component
 
     [DataField, AutoNetworkedField]
     public float ActiveMeleeBlockProb = 0.65f;
+
+    [DataField, AutoNetworkedField]
+    public Angle CoveredAngle = Math.PI;
 }
