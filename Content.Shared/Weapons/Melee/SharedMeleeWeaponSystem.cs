@@ -569,17 +569,16 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             var fromMap = TransformSystem.GetMapCoordinates(user);
             var toMap = TransformSystem.GetMapCoordinates(target.Value);
 
-            Angle HitAngle = (toMap.Position - fromMap.Position).ToAngle();
+            Angle HitAngle = (toMap.Position - fromMap.Position).ToWorldAngle() + new Angle(Math.PI);
 
             var meleeBlockEvent = new MeleeHitBlockAttemptEvent();
 
-            meleeBlockEvent.HitAngle = HitAngle + new Angle(Math.PI);
+            meleeBlockEvent.HitAngle = HitAngle.Reduced();
+
             RaiseLocalEvent(targetEntity, ref meleeBlockEvent);
+
             if (meleeBlockEvent.CancelledHit && TryGetEntity(meleeBlockEvent.blocker, out EntityUid? shield))
-            {
-                PopupSystem.PopupEntity(Loc.GetString("block-shot"), targetEntity);
                 targetEntity = (EntityUid)shield;
-            }
         }
         //SS220 shield rework end
 
@@ -737,13 +736,14 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
                 var fromMap = TransformSystem.GetMapCoordinates(user);
                 var toMap = TransformSystem.GetMapCoordinates(entity);
 
-                Angle HitAngle = (toMap.Position - fromMap.Position).ToAngle();
+                Angle HitAngle = (toMap.Position - fromMap.Position).ToWorldAngle() + new Angle(Math.PI);
 
                 var meleeBlockEvent = new MeleeHitBlockAttemptEvent();
 
-                meleeBlockEvent.HitAngle = HitAngle + new Angle(Math.PI);
+                meleeBlockEvent.HitAngle = HitAngle.Reduced();
 
                 RaiseLocalEvent(entity, ref meleeBlockEvent);
+
                 if (meleeBlockEvent.CancelledHit && TryGetEntity(meleeBlockEvent.blocker, out EntityUid? shield))
                 {
                     var shield1 = (EntityUid)shield;
@@ -1019,14 +1019,14 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         var fromMap = TransformSystem.GetMapCoordinates(user);
         var toMap = TransformSystem.GetMapCoordinates(target.Value);
 
-        Angle HitAngle = (toMap.Position - fromMap.Position).ToAngle();
+        Angle HitAngle = (toMap.Position - fromMap.Position).ToWorldAngle() + new Angle(Math.PI);
 
         EntityUid targetEntity = target.Value;
         if (TryComp<AltBlockingUserComponent>(target, out var blockcomp))
         {
             var meleeBlockEvent = new MeleeHitBlockAttemptEvent();
 
-            meleeBlockEvent.HitAngle = HitAngle + new Angle(Math.PI);
+            meleeBlockEvent.HitAngle = HitAngle.Reduced();
 
             RaiseLocalEvent(targetEntity, ref meleeBlockEvent);
             if (meleeBlockEvent.CancelledHit && TryGetEntity(meleeBlockEvent.blocker, out EntityUid? shield))

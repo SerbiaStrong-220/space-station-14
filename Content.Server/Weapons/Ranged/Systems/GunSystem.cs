@@ -248,7 +248,7 @@ public sealed partial class GunSystem : SharedGunSystem
                             var hitEntity = lastHit.Value;
 
                             //SS220 shield rework begin
-                            var blockEv = new HitscanBlockAttemptEvent(hitscan.Damage, mapAngle + new Angle(Math.PI));
+                            var blockEv = new HitscanBlockAttemptEvent(hitscan.Damage, mapAngle.Reduced());
                             RaiseLocalEvent(lastHit.Value, ref blockEv);
 
                             if (blockEv.CancelledHit)

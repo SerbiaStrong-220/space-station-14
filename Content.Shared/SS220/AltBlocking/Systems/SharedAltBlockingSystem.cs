@@ -21,7 +21,6 @@ namespace Content.Shared.SS220.AltBlocking;
 
 public sealed partial class SharedAltBlockingSystem : EntitySystem
 {
-    [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;

@@ -10,6 +10,7 @@ using Content.Shared.Random.Helpers;
 //using Content.Shared.Weapons.Hitscan.Components;
 //using Content.Shared.Weapons.Hitscan.Events;
 using Robust.Shared.Random;
+using Robust.Shared.Toolshed.Commands.Math;
 
 namespace Content.Shared.SS220.AltBlocking;
 
@@ -37,7 +38,7 @@ public sealed partial class SharedAltBlockingSystem
             if (!TryComp<AltBlockingComponent>(item, out var blockComp))
                 continue;
 
-            if (!IsCovered(args.HitAngle, blockComp.CoveredAngle, _transform.GetWorldRotation(ent.Owner)))
+            if (!IsCovered(args.HitAngle, blockComp.CoveredZones, _transform.GetWorldRotation(ent.Owner)))
                 continue;
 
             if (!TryGetNetEntity(item, out var netEnt))
@@ -131,8 +132,8 @@ public sealed partial class SharedAltBlockingSystem
             if (!TryComp<AltBlockingComponent>(item, out var blockComp) || damage == null)
                 continue;
 
-            //if (!IsCovered(HitRotation, blockComp.CoveredAngle, _transform.GetWorldRotation(owner.Owner)))
-            //    continue;
+            if (!IsCovered(HitRotation, blockComp.CoveredZones, _transform.GetWorldRotation(owner.Owner)))
+                continue;
 
             if (TryComp<ToggleBlockingChanceComponent>(item, out var toggleComp))
             {
@@ -180,14 +181,15 @@ public sealed partial class SharedAltBlockingSystem
         return false;
     }
 
-    private bool IsCovered(Angle Incoming, Angle CoveredAngle, Angle UserRotation)
+    private bool IsCovered(Angle Incoming, int CoveredZones, Angle UserRotation)
     {
-        Incoming += new Angle(Math.PI);
-        Incoming = Incoming.Reduced();
-        UserRotation = UserRotation.Reduced();
-
-        if (Math.Abs(Incoming.Theta - UserRotation.Theta) < CoveredAngle.Theta / 2)
+        if (Incoming.GetDir() == UserRotation.GetDir() || Math.Abs((int)Incoming.GetDir() - (int)UserRotation.GetDir()) <= CoveredZones)
             return true;
+
+        if ((int)UserRotation.GetDir() + CoveredZones >= 8)
+            if (CoveredZones - (8 - (int)UserRotation.GetDir()) > (int)Incoming.GetDir())
+                return true;
+
 
         return false;
     }

@@ -49,7 +49,7 @@ public sealed class ProjectileSystem : SharedProjectileSystem
 
         //SS220 shield rework begin
         var projectileAngle = _transform.GetWorldRotation(uid);
-        var blockattemptEv = new ProjectileBlockAttemptEvent(uid, component, false, component.Damage, projectileAngle);
+        var blockattemptEv = new ProjectileBlockAttemptEvent(uid, component, false, component.Damage, (projectileAngle + new Angle(Math.PI)).Reduced());
         RaiseLocalEvent(target, ref blockattemptEv);
         if (blockattemptEv.CancelledHit)
         {
