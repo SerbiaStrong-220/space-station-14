@@ -17,6 +17,7 @@
     - id: MimicVendorRule
     - id: MouseMigration
     - id: PowerGridCheck
+    - id: GravityGeneratorAnomaly # SS220-add-gravity-anomaly
     - id: RandomSentience
     - id: SlimesSpawn
     - id: SolarFlare
@@ -693,6 +694,10 @@
       roleLoadout:
       - RoleSurvivalNukie
       components:
+      # SS220-experience-update-begin
+      - type: RoleExperienceAdd
+        definitionId: SyndicateCommanderRoleExperience
+      # SS220-experience-update-end
       - type: NukeOperative
       - type: RandomMetadata
         nameSegments:
@@ -734,6 +739,14 @@
         - AntagImmune
       mindRoles:
       - MindRoleTraitorSleeper
+      # SS220-experience-update-begin
+      components:
+      - type: AntagFreeSublevelPointsAdd
+        addFreeSublevelPoints: 10
+      - type: AntagAddKnowledge
+        knowledgesToAdd:
+        - SyndicateAgentKnowledge
+      # SS220-experience-update-end
 
 - type: entity
   id: MassHallucinations

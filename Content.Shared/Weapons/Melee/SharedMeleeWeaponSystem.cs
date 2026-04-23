@@ -82,6 +82,8 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
     /// </summary>
     public const float GracePeriod = 0.05f;
 
+    private const float MaxDisarmPercentStaminaDamage = 0.3f; // SS220-add-disarm-stamina-damage-cap
+
     public override void Initialize()
     {
         base.Initialize();
@@ -872,13 +874,15 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             chance += malus.Malus;
         }
 
-        // SS220-Extended Weapon Logic-Start
-        var ev = new DisarmChanceModifierEvent(chance);
-        RaiseLocalEvent(disarmer, ev);
-        chance = ev.BaseChance + ev.Bonus;
-        // SS220-Extended Weapon Logic-End
+        // SS220-add-skill-to-disarm-begin
+        var disarmerEv = new GetDisarmChanceDisarmerMultiplierEvent(disarmer, disarmed, inTargetHand, 1f, chance);
+        RaiseLocalEvent(disarmer, ref disarmerEv);
+        var targetEv = new GetDisarmChanceTargetMultiplierEvent(disarmer, disarmed, inTargetHand, 1f);
+        RaiseLocalEvent(disarmed, ref targetEv);
+        chance = disarmerEv.BaseChance;
+        // SS220-add-skill-to-disarm-end
 
-        return Math.Clamp(chance, 0f, 1f);
+        return Math.Clamp(1f - (disarmerEv.Multiplier * targetEv.Multiplier * (1f - chance)), 0f, 1f); // SS220-add-skill-to-disarm
     }
 
     private bool DoDisarm(EntityUid user, DisarmAttackEvent ev, EntityUid meleeUid, MeleeWeaponComponent component, ICommonSession? session)
@@ -962,6 +966,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         }
 
         var eventArgs = new DisarmedEvent(target.Value, user, 1 - chance);
+        eventArgs.MaxPercentStaminaDamage = MaxDisarmPercentStaminaDamage; // SS220-add-disarm-stamina-damage-cap
         RaiseLocalEvent(target.Value, ref eventArgs);
 
         // Nothing handled it so abort.

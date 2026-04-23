@@ -1,0 +1,84 @@
+- type: experienceDefinition
+  id: IronSquadLeaderRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    ExtravehicularActivity:
+      level: 4
+    CombatTraining:
+      level: 4
+    Construction:
+      level: 3
+    Medicine:
+      level: 3
+    PhysicalTraining:
+      level: 3
+  addSublevelPoints: 5
+
+- type: experienceDefinition
+  id: IronSquadEngineerRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    ExtravehicularActivity:
+      level: 4
+    CombatTraining:
+      level: 3
+    Construction:
+      level: 4
+    Medicine:
+      level: 3
+    PhysicalTraining:
+      level: 4
+  addSublevelPoints: 0
+
+- type: experienceDefinition
+  id: IronSquadCorpsmanRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    ExtravehicularActivity:
+      level: 3
+    CombatTraining:
+      level: 3
+    Construction:
+      level: 3
+    Medicine:
+      level: 4
+    PhysicalTraining:
+      level: 4
+  addSublevelPoints: 0
+
+- type: experienceDefinition
+  id: IronSquadCMORoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    ExtravehicularActivity:
+      level: 3
+    CombatTraining:
+      level: 4
+    Construction:
+      level: 3
+    Medicine:
+      level: 4
+    PhysicalTraining:
+      level: 4
+  addSublevelPoints: 0
+
+- type: experienceDefinition
+  id: IronSquadFighterRoleExperience
+  skills:
+    Bureaucracy:
+      level: 1
+    ExtravehicularActivity:
+      level: 3
+    CombatTraining:
+      level: 3
+    Construction:
+      level: 2
+    Medicine:
+      level: 2
+    PhysicalTraining:
+      level: 3
+  addSublevelPoints: 5

@@ -25,6 +25,7 @@
 
 - type: startingGear
   id: RedWingsOfficerGear
+  experienceDefinition: SecurityOfficerRoleExperience
   equipment:
     jumpsuit: ClothingUniformJumpsuitMilitaryFeldsher
     back: ClothingBackpackSecurity
@@ -40,11 +41,11 @@
     pocket1: DoubleEmergencyOxygenTankFilled
     pocket2: WeaponDisabler
   storage:
-    belt: 
+    belt:
     - Stunbaton
     - LaserSMGPowerCell
     - LaserSMGPowerCell
-    - LaserSMGPowerCell 
+    - LaserSMGPowerCell
     - GrenadeFlashBang
     - TearGasGrenade
     - Zipties
@@ -57,6 +58,7 @@
 
 - type: startingGear
   id: RedWingsMedicGear
+  experienceDefinition: BrigmedicRoleExperience
   equipment:
     jumpsuit: ClothingUniformJumpsuitMilitaryFeldsher
     back: ClothingBackpackSatchelBrigmedic
@@ -72,7 +74,7 @@
     pocket1: DoubleEmergencyOxygenTankFilled
     pocket2: WeaponDisabler
   storage:
-    belt: 
+    belt:
     - MedicatedSuture
     - RegenerativeMesh
     - CombatMedipen
@@ -93,6 +95,7 @@
 
 - type: startingGear
   id: RedWingsPilotGear
+  experienceDefinition: SecurityPilotRoleExperience
   equipment:
     jumpsuit: ClothingUniformJumpsuitMilitaryFeldsher
     back: ClothingBackpackSecurity
@@ -108,7 +111,7 @@
     pocket1: DoubleEmergencyOxygenTankFilled
     pocket2: WeaponPistolViper
   storage:
-    belt: 
+    belt:
     - Stunbaton
     - Zipties
     - Zipties

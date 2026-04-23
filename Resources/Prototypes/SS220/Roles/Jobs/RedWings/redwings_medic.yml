@@ -3,6 +3,7 @@
   name: ghost-role-information-redwings-medic-name
   description: ghost-role-information-redwings-medic-description
   playTimeTracker: JobRedWingsMedic
+  experienceDefinition: BrigmedicRoleExperience
   requirements:
     - !type:DepartmentTimeRequirement
       department: Security

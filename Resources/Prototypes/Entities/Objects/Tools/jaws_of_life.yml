@@ -7,6 +7,12 @@
   - type: Tag
     tags:
     - JawsOfLife
+  # SS220-construction-skill-begin
+  - type: LearningOnDoAfterEndWith
+    progress:
+      Construction:
+        baseLearning: 0.02
+  # SS220-construction-skill-end
   - type: Sprite
     sprite: Objects/Tools/jaws_of_life.rsi
     state: jaws_pry

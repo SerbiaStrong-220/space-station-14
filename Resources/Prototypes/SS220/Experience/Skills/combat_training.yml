@@ -1,0 +1,56 @@
+- type: skill
+  id: CombatTrainingInitial
+  levelInfo:
+    maximumSublevel: 5
+    levelUpPopup: combat-training-initial-level-up-popup
+    sublevelUpPopup: combat-training-initial-sublevel-up-popup
+  levelDescription:
+    skillName: combat-training-initial-name
+    skillDescription: combat-training-initial-desc
+  components:
+  - type: DisarmChanceChangerSkill
+    disarmByMultiplier: 0.75
+    disarmedMultiplier: 1.25
+
+- type: skill
+  id: CombatTrainingBase
+  levelInfo:
+    maximumSublevel: 5
+    levelUpPopup: combat-training-base-level-up-popup
+    sublevelUpPopup: combat-training-base-sublevel-up-popup
+  levelDescription:
+    skillName: combat-training-base-name
+    skillDescription: combat-training-base-desc
+  components:
+  - type: DisarmChanceChangerSkill
+    disarmByMultiplier: 1
+    disarmedMultiplier: 1
+
+- type: skill
+  id: CombatTrainingTrained
+  levelInfo:
+    maximumSublevel: 5
+    levelUpPopup: combat-training-trained-level-up-popup
+    sublevelUpPopup: combat-training-trained-sublevel-up-popup
+  levelDescription:
+    skillName: combat-training-trained-name
+    skillDescription: combat-training-trained-desc
+  components:
+  - type: DisarmChanceChangerSkill
+    disarmByMultiplier: 1.5
+    disarmedMultiplier: 0.75
+
+- type: skill
+  id: CombatTrainingProfessional
+  levelInfo:
+    maximumSublevel: 1
+    levelUpPopup: combat-training-professional-level-up-popup
+    sublevelUpPopup: combat-training-professional-sublevel-up-popup
+  levelDescription:
+    skillName: combat-training-professional-name
+    skillDescription: combat-training-professional-desc
+  components:
+  - type: DisarmChanceChangerSkill
+    disarmByMultiplier: 2
+    disarmedMultiplier: 0.5
+  - type: DisarmBlockSkill

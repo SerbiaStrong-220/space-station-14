@@ -96,6 +96,7 @@
     rootTask:
       task: WatermelonDogCompound
   - type: NPCImprintingOnSpawnBehaviour
+    spawnFriendsSearchRadius: 5
     whitelist:
       components:
       - HumanoidAppearance
@@ -165,7 +166,7 @@
       - Fruit
   - type: Extractable
     grindableSolutionName: bloodstream
-  - type: PotencyVisuals
+  # - type: PotencyVisuals
   - type: Appearance
   - type: Produce
     seedId: watermelondog

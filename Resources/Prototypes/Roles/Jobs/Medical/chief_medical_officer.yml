@@ -20,6 +20,7 @@
       - Felinid #SS220-jobbans end
   weight: 10
   startingGear: CMOGear
+  experienceDefinition: ChiefMedicalOfficerRoleExperience # SS220-experience
   icon: "JobIconChiefMedicalOfficer"
   supervisors: job-supervisors-captain
   radioBold: true
@@ -37,7 +38,6 @@
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff
-      - type: DefibrillatorSkill #SS220 LimitationRevive
 
 - type: startingGear
   id: CMOGear

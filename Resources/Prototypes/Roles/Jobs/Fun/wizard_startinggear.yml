@@ -1,6 +1,7 @@
 #Wizard outfit startingGear definitions.
 - type: startingGear
   id: WizardBlueGear
+  experienceDefinition: WizardExperience # ss220-experience-update
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorDarkBlue
     head: ClothingHeadHatWizard

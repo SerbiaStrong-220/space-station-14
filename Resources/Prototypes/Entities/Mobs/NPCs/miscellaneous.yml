@@ -150,6 +150,7 @@
     rootTask:
       task: KillerTomatoCompound
   - type: NPCImprintingOnSpawnBehaviour
+    spawnFriendsSearchRadius: 8 #SS220 Tomato-Killer-Balance
     whitelist:
       components:
       - HumanoidAppearance
@@ -234,7 +235,7 @@
       - Fruit
   - type: Extractable
     grindableSolutionName: bloodstream
-  - type: PotencyVisuals
+  # - type: PotencyVisuals #SS220 Tomato-Killer-Balance
   - type: Appearance
   - type: Produce
     seedId: killerTomato

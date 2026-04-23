@@ -3,6 +3,7 @@
   name: ghost-role-information-redwings-pilot-name
   description: ghost-role-information-redwings-pilot-description
   playTimeTracker: JobRedWingsPilot
+  experienceDefinition: SecurityPilotRoleExperience
   requirements:
     - !type:DepartmentTimeRequirement
       department: Security

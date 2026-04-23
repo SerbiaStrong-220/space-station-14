@@ -10,6 +10,7 @@ using Content.Shared.PDA;
 using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
+using Content.Shared.SS220.Experience;
 using Content.Shared.Station;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -78,12 +79,33 @@ public sealed class OutfitSystem : EntitySystem
             }
         }
 
+        // SS220-experience-update-begin
+        if (startingGear.ExperienceDefinition is { } definitionId)
+        {
+            RemComp<JobBackgroundSublevelAddComponent>(target);
+
+            var skillRoleAddComp = EnsureComp<RoleExperienceAddComponent>(target);
+            skillRoleAddComp.DefinitionId = definitionId;
+        }
+        // SS220-experience-update-end
+
         // See if this starting gear is associated with a job
         var jobs = _prototypeManager.EnumeratePrototypes<JobPrototype>();
         foreach (var job in jobs)
         {
             if (job.StartingGear != gear)
                 continue;
+
+            // SS220-experience-update-begin
+            var skillRoleAddComp = EnsureComp<RoleExperienceAddComponent>(target);
+            skillRoleAddComp.DefinitionId = job.ExperienceDefinition;
+
+            // This used to give admins better experience with clearing player choice, it can be removed or moved if needed
+            RemComp<JobBackgroundSublevelAddComponent>(target);
+
+            foreach (var jobSpecial in job.Special)
+                jobSpecial.AfterEquip(target);
+            // SS220-experience-update-end
 
             var jobProtoId = LoadoutSystem.GetJobPrototype(job.ID);
             if (!_prototypeManager.TryIndex<RoleLoadoutPrototype>(jobProtoId, out var jobProto))
@@ -106,6 +128,11 @@ public sealed class OutfitSystem : EntitySystem
             // Equip the target with the job loadout
             _spawningSystem.EquipRoleLoadout(target, roleLoadout, jobProto);
         }
+
+        // SS220-add-experience-init-event-post-spawn
+        var recalculateEv = new RecalculateEntityExperience();
+        RaiseLocalEvent(target, ref recalculateEv);
+        // SS220-add-experience-init-event-post-spawn
 
         return true;
     }
