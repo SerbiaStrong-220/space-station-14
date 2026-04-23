@@ -62,9 +62,9 @@
             Detective: [ 1, 1 ]
             SecurityPilot: [ 1, 2 ]
             SecurityCadet: [ 1, 2 ]
-            Magistrate: [ 1, 1 ]
-            IAA: [ 2, 2 ] # Corvax-IAA
-            # NanoTrasenRepresentative: [ 1, 1 ] #SS220 TODO NanoTraisen Representative
+            #Magistrate: [ 1, 1 ] #SS220 Replaced NTR
+            #IAA: [ 2, 2 ] # Corvax-IAA #SS220 Replaced NTR
+            NanoTrasenRepresentative: [ 1, 1 ] #SS220-Map-Jobs NanoTrasen Representative
             Lawyer: [ 3, 3 ]
             Brigmedic: [ 1, 1 ]
             #supply
