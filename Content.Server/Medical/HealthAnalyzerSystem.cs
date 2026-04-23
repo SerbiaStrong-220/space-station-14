@@ -254,7 +254,7 @@ public sealed class HealthAnalyzerSystem : EntitySystem
 
         //SS220 LimitationRevive - start
         if (TryComp<LimitationReviveComponent>(target, out var reviveComp))
-             counterDeath = reviveComp.DeathCounter;
+            counterDeath = reviveComp.DeathCounter;
         //SS220 LimitationRevive - end
 
         // ss220 add health analyzer start
@@ -262,19 +262,19 @@ public sealed class HealthAnalyzerSystem : EntitySystem
             ? Identity.Name(target.Value, EntityManager)
             : Loc.GetString("health-analyzer-window-entity-unknown-text");
 
-        if (!TryComp<HealthAnalyzerComponent>(healthAnalyzer, out var healthAnalyzerComp))
-            return new HealthAnalyzerUiState();
-
-        healthAnalyzerComp.LastScannedName = scannedName;
-        healthAnalyzerComp.LastScannedReport = _healthAnalyzerPrint.BuildScanReport(
-            target.Value,
-            damageable,
-            scannedName,
-            bodyTemperature,
-            bloodAmount,
-            bleeding,
-            unrevivable,
-            counterDeath);
+        if (TryComp<HealthAnalyzerComponent>(healthAnalyzer, out var healthAnalyzerComp))
+        {
+            healthAnalyzerComp.LastScannedName = scannedName;
+            healthAnalyzerComp.LastScannedReport = _healthAnalyzerPrint.BuildScanReport(
+                target.Value,
+                damageable,
+                scannedName,
+                bodyTemperature,
+                bloodAmount,
+                bleeding,
+                unrevivable,
+                counterDeath);
+        }
         // ss220 add health analyzer end
 
         return new HealthAnalyzerUiState(
@@ -285,7 +285,7 @@ public sealed class HealthAnalyzerSystem : EntitySystem
             bleeding,
             unrevivable,
             counterDeath, //SS220 LimitationRevive
-            healthAnalyzerComp.CanPrint // SS220-health-analyzer-report
+            healthAnalyzerComp?.CanPrint ?? false // SS220-health-analyzer-report
         );
     }
 }
