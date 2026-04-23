@@ -25,7 +25,7 @@
             BlueShield: [ 1, 1 ]
             HeadOfPersonnel: [ 1, 1 ]
             # Magistrate: [ 1, 1 ] #SS220 Replaced NTR
-            NanoTrasenRepresentative: [ 1, 1 ] #SS220-Map-Jobs NanoTraisen Representative
+            NanoTrasenRepresentative: [ 1, 1 ] #SS220-Map-Jobs NanoTrasen Representative
             #Security
             HeadOfSecurity: [ 1, 1 ]
             Warden: [ 1, 1 ]
