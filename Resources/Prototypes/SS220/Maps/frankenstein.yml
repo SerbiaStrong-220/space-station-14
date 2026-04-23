@@ -61,7 +61,7 @@
             SecurityCadet: [ 1, 2 ]
             #Magistrate: [ 1, 1 ] #SS220 Replaced NTR
             #IAA: [ 2, 2 ] # Corvax-IAA #SS220 Replaced NTR
-            NanoTrasenRepresentative: [ 1, 1 ] #SS220 NanoTraisen Representative
+            NanoTrasenRepresentative: [ 1, 1 ] #SS220-Map-Jobs NanoTraisen Representative
             Lawyer: [ 3, 3 ]
             BlueShield: [ 1, 1 ]
             Brigmedic: [ 1, 1 ]

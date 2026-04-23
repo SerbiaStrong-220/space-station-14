@@ -24,7 +24,7 @@
             BlueShield: [ 1, 1 ]
             HeadOfPersonnel: [ 1, 1 ]
             #Law
-            NanoTrasenRepresentative: [ 1, 1 ] #SS220 NanoTraisen Representative
+            NanoTrasenRepresentative: [ 1, 1 ] #SS220-Map-Jobs NanoTraisen Representative
             # IAA: [ 2, 2 ] #SS220 Replaced NTR
             # Magistrate: [1, 1] #SS220 Replaced NTR
             Lawyer: [ 3, 3 ]
