@@ -45,7 +45,6 @@
       types:
         Piercing: 32 # 20% decrease #ss220lowTTKUpdate
       armourPiercing: 15 #SS220 armor piercing added
-    ignoreResistances: true
 
 - type: entity
   id: BulletMagnumUranium
