@@ -146,6 +146,7 @@
     activeModeProtoId: HyposprayInjectMode
     allowedModes:
     - HyposprayInjectMode
+    ignoreProtection: false
   - type: RefillableSolution
     solution: pen
   - type: Autoinjector

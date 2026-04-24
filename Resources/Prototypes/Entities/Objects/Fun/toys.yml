@@ -60,7 +60,7 @@
     containers:
       storagebase:
         id: SnapPop
-        amount: 5
+        amount: 15 #ss220 toys
   - type: Dumpable
 
 - type: entity
