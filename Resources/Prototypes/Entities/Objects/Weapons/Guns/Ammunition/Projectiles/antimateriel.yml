@@ -10,8 +10,5 @@
         Piercing: 75
         Structural: 50 #Isn't that important any more i guess
       armourPiercing: 50 #SS220 armor piercing added
-    penetrationThreshold: 360
     #penetrationDamageTypeRequirement:
     #- Structural
-  - type: StaminaDamageOnCollide
-    damage: 60

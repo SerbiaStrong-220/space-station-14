@@ -1,0 +1,25 @@
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BulletAntiMateriel
+  id: BulletAntiMaterielAP
+  name: bullet (15,24x140 AP)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 55
+        Structural: 50
+      armourPiercing: 120
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BulletAntiMateriel
+  id: BulletAntiMaterielHP
+  name: bullet (15,24x140 AP)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 140
+        Structural: 20
+

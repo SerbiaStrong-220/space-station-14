@@ -25,6 +25,7 @@ public sealed class ProjectileSystem : SharedProjectileSystem
     [Dependency] private readonly GunSystem _guns = default!;
     [Dependency] private readonly SharedCameraRecoilSystem _sharedCameraRecoil = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!; //SS220 structure penetration rework
+    [Dependency] private readonly SharedTransformSystem _transform = default!; //SS220 shield rework
 
     public override void Initialize()
     {
@@ -50,7 +51,8 @@ public sealed class ProjectileSystem : SharedProjectileSystem
         }
 
         //SS220 shield rework begin
-        var blockattemptEv = new ProjectileBlockAttemptEvent(uid, component, false, component.Damage);
+        var projectileAngle = _transform.GetWorldRotation(uid);
+        var blockattemptEv = new ProjectileBlockAttemptEvent(uid, component, false, component.Damage, (projectileAngle + new Angle(Math.PI)).Reduced());
         RaiseLocalEvent(target, ref blockattemptEv);
         if (blockattemptEv.CancelledHit)
         {
@@ -75,6 +77,10 @@ public sealed class ProjectileSystem : SharedProjectileSystem
             damageRequired = FixedPoint2.Max(damageRequired, FixedPoint2.Zero);
         }
         var modifiedDamage = _damageableSystem.TryChangeDamage(target, ev.Damage, component.IgnoreResistances, damageable: damageableComponent, origin: component.Shooter);
+
+        if(modifiedDamage != null) //SS220 weapon overhaul
+            component.Damage = modifiedDamage; //SS220 weapon overhaul
+
         var deleted = Deleted(target);
 
         if (modifiedDamage is not null && Exists(component.Shooter))
@@ -89,8 +95,8 @@ public sealed class ProjectileSystem : SharedProjectileSystem
                 $"Projectile {ToPrettyString(uid):projectile} shot by {ToPrettyString(component.Shooter!.Value):user} hit {otherName:target} and dealt {modifiedDamage.GetTotal():damage} damage");
         }
 
-
-        if (modifiedDamage is not null)//SS220 structure penetration overhaul// The idea is to make every weapon theorethically able to penetrate and use ArmourPiercing and the damage itself for it's logics
+        //SS220 structure penetration overhaul begin
+        if (modifiedDamage is not null)// The idea is to make every weapon theorethically able to penetrate and use ArmourPiercing and the damage itself for it's logics
         {
             // If a damage type is required, stop the bullet if the hit entity doesn't have that type.
             if (component.PenetrationDamageTypeRequirement != null && damageableComponent != null)//SS220 structure penetration overhaul
@@ -117,9 +123,9 @@ public sealed class ProjectileSystem : SharedProjectileSystem
                     if (component.Damage[requiredDamageType] + component.Damage.ArmourPiercing < targetThreshold)
                         stopPenetration = true;
 
-                    var resultThreshold = Math.Clamp((targetThreshold - component.Damage.ArmourPiercing).Float(), 0f, targetThreshold + component.Damage.ArmourPiercing.Float());
+                    var resultThreshold = Math.Clamp((targetThreshold - component.Damage.ArmourPiercing).Float(), 0f, Math.Abs(targetThreshold + component.Damage.ArmourPiercing.Float()));
 
-                    component.Damage.ArmourPiercing = Math.Clamp(component.Damage.ArmourPiercing.Float() - targetThreshold, 0f, component.Damage.ArmourPiercing.Float() + targetThreshold);
+                    component.Damage.ArmourPiercing = component.Damage.ArmourPiercing.Float() - targetThreshold;
 
                     component.Damage.DamageDict[requiredDamageType] = Math.Clamp((component.Damage.DamageDict[requiredDamageType] - resultThreshold).Float(), 0f, (component.Damage.DamageDict[requiredDamageType] + resultThreshold).Float());
 
@@ -134,6 +140,7 @@ public sealed class ProjectileSystem : SharedProjectileSystem
                 }
             }
         }
+        //SS220 structure penetration overhaul end
         else
         {
             component.ProjectileSpent = true;

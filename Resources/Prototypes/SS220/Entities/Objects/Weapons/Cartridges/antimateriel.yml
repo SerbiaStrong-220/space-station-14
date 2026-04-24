@@ -1,0 +1,42 @@
+- type: entity
+  parent: [ BaseCartridge]
+  id: CartridgeAntiMaterielAP
+  name: cartridge (15,24x140 AP)
+  description: An antimaterial uranium-cored AP round designed to get through even the toughest armor of infantry, LAVs and mechs.
+  components:
+  - type: Tag
+    tags:
+    - CartridgeAntiMateriel
+  - type: CartridgeAmmo
+    proto: BulletAntiMaterielAP
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/large_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+  - type: StaticPrice
+    price: 10
+
+- type: entity
+  parent: [ BaseCartridge]
+  id: CartridgeAntiMaterielHEIB
+  name: cartridge (15,24x140 HPIB)
+  description: This enormous HPIB round, designated to use against megafauna, is powerful enough to shred even light-armored targets to pieces.
+  components:
+  - type: Tag
+    tags:
+    - CartridgeAntiMateriel
+  - type: CartridgeAmmo
+    proto: BulletAntiMaterielHP
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/large_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+  - type: StaticPrice
+    price: 10
+

@@ -7,7 +7,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 33 #ss220lowTTKUpdate
+        Piercing: 27 #ss220lowTTKUpdate
       armourPiercing: 15 #SS220 armor piercing added
 
 - type: entity

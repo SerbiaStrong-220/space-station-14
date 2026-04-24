@@ -250,7 +250,7 @@ public sealed partial class GunSystem : SharedGunSystem
                             var hitEntity = lastHit.Value;
 
                             //SS220 shield rework begin
-                            var blockEv = new HitscanBlockAttemptEvent(hitscan.Damage);
+                            var blockEv = new HitscanBlockAttemptEvent(hitscan.Damage, mapAngle.Reduced());
                             RaiseLocalEvent(lastHit.Value, ref blockEv);
 
                             if (blockEv.CancelledHit)
@@ -258,8 +258,7 @@ public sealed partial class GunSystem : SharedGunSystem
                                 if (blockEv.hitColor != null)
                                     _color.RaiseEffect((Color)blockEv.hitColor, new List<EntityUid>() { lastHit.Value }, Filter.Pvs(lastHit.Value, entityManager: EntityManager));
 
-                                if (dmg == null)
-                                    continue;
+                                continue;
                             }
 
                             if (!blockEv.CancelledHit)
@@ -273,8 +272,6 @@ public sealed partial class GunSystem : SharedGunSystem
                             //SS220 shield rework end
 
                             var hitName = ToPrettyString(hitEntity);
-                            if (dmg != null)
-                                dmg = Damageable.TryChangeDamage(hitEntity, dmg * Damageable.UniversalHitscanDamageModifier, origin: user);
 
                             // check null again, as TryChangeDamage returns modified damage values
                             if (dmg != null)

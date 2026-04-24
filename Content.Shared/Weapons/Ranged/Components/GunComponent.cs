@@ -212,7 +212,7 @@ public sealed partial class GunComponent : Component
     /// The base value for how fast the projectile moves.
     /// </summary>
     [DataField]
-    public float ProjectileSpeed = 40f;  //SS220 BulletSpeed
+    public float ProjectileSpeed = 75f;  //SS220 weapon overhaul
 
     /// <summary>
     /// How fast the projectile moves.

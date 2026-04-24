@@ -168,7 +168,6 @@
     damage:
       types:
         Piercing: 11 # 20% decrease
-    ignoreResistances: true
 
 - type: entity
   id: BaseBulletUranium

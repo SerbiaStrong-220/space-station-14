@@ -7,8 +7,6 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
-using Content.Shared.SS220.AltBlocking;
-using Content.Shared.SS220.Weapons.Melee.Events;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
@@ -22,6 +20,8 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
+using Content.Shared.SS220.AltBlocking;
+using Content.Shared.SS220.Weapons.Melee.Events;
 using Content.Shared.Standing; // ss220 add block heavy attack while user is down
 using Content.Shared.StatusEffect;
 using Content.Shared.Weapons.Melee.Components;
@@ -31,6 +31,7 @@ using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
@@ -562,15 +563,22 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         //SS220 shield rework begin
         EntityUid targetEntity = target.Value;
+
         if (TryComp<AltBlockingUserComponent>(target, out var blockcomp))
         {
-            var meleeblockEvent = new MeleeHitBlockAttemptEvent();
-            RaiseLocalEvent(targetEntity, ref meleeblockEvent);
-            if (meleeblockEvent.CancelledHit && TryGetEntity(meleeblockEvent.blocker, out EntityUid? shield))
-            {
-                PopupSystem.PopupEntity(Loc.GetString("block-shot"), targetEntity);
+            var fromMap = TransformSystem.GetMapCoordinates(user);
+            var toMap = TransformSystem.GetMapCoordinates(target.Value);
+
+            Angle HitAngle = (toMap.Position - fromMap.Position).ToWorldAngle() + new Angle(Math.PI);
+
+            var meleeBlockEvent = new MeleeHitBlockAttemptEvent();
+
+            meleeBlockEvent.HitAngle = HitAngle.Reduced();
+
+            RaiseLocalEvent(targetEntity, ref meleeBlockEvent);
+
+            if (meleeBlockEvent.CancelledHit && TryGetEntity(meleeBlockEvent.blocker, out EntityUid? shield))
                 targetEntity = (EntityUid)shield;
-            }
         }
         //SS220 shield rework end
 
@@ -725,9 +733,18 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             //SS220 shield rework begin
             if (TryComp<AltBlockingUserComponent>(entity, out var blockcomp))
             {
-                var meleeblockEvent = new MeleeHitBlockAttemptEvent();
-                RaiseLocalEvent(entity, ref meleeblockEvent);
-                if (meleeblockEvent.CancelledHit && TryGetEntity(meleeblockEvent.blocker, out EntityUid? shield))
+                var fromMap = TransformSystem.GetMapCoordinates(user);
+                var toMap = TransformSystem.GetMapCoordinates(entity);
+
+                Angle HitAngle = (toMap.Position - fromMap.Position).ToWorldAngle() + new Angle(Math.PI);
+
+                var meleeBlockEvent = new MeleeHitBlockAttemptEvent();
+
+                meleeBlockEvent.HitAngle = HitAngle.Reduced();
+
+                RaiseLocalEvent(entity, ref meleeBlockEvent);
+
+                if (meleeBlockEvent.CancelledHit && TryGetEntity(meleeBlockEvent.blocker, out EntityUid? shield))
                 {
                     var shield1 = (EntityUid)shield;
                     targets.Add(shield1);
@@ -999,12 +1016,20 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             return false;
 
         //SS220 shield rework begin
+        var fromMap = TransformSystem.GetMapCoordinates(user);
+        var toMap = TransformSystem.GetMapCoordinates(target.Value);
+
+        Angle HitAngle = (toMap.Position - fromMap.Position).ToWorldAngle() + new Angle(Math.PI);
+
         EntityUid targetEntity = target.Value;
         if (TryComp<AltBlockingUserComponent>(target, out var blockcomp))
         {
-            var meleeblockEvent = new MeleeHitBlockAttemptEvent();
-            RaiseLocalEvent(targetEntity, ref meleeblockEvent);
-            if (meleeblockEvent.CancelledHit && TryGetEntity(meleeblockEvent.blocker, out EntityUid? shield))
+            var meleeBlockEvent = new MeleeHitBlockAttemptEvent();
+
+            meleeBlockEvent.HitAngle = HitAngle.Reduced();
+
+            RaiseLocalEvent(targetEntity, ref meleeBlockEvent);
+            if (meleeBlockEvent.CancelledHit && TryGetEntity(meleeBlockEvent.blocker, out EntityUid? shield))
             {
                 PopupSystem.PopupEntity(Loc.GetString("block-shot"), targetEntity);
                 targetEntity = (EntityUid)shield;

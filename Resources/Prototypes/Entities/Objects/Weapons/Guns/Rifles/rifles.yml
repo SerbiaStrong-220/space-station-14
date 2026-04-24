@@ -74,14 +74,14 @@
       - state: mag-0
         map: ["enum.GunVisualLayers.Mag"]
   - type: GunWieldBonus
-  #FCB realistic guns begin
+  #SS220 weapon overhaul begin
     minAngle: -4
     maxAngle: -22
     angleIncrease: -1.2
   - type: GunAimable
     minAngle: -10
     maxAngle: -7
-  #FCB realistic guns end
+  #SS220 weapon overhaul end
   - type: Gun
     minAngle: 15
     maxAngle: 36
@@ -91,7 +91,7 @@
       - SemiAuto
    #ss220 gunmodes end
     fireRate: 5
-    angleIncrease: 2.50 #FCB realistic guns
+    angleIncrease: 2.50 #SS220 weapon overhaul
     angleDecay: 6 #SS220 increase-automatic-rifles-spread end
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/rifle2.ogg
@@ -187,14 +187,14 @@
   - type: Clothing
     sprite: SS220/Objects/Weapons/Guns/Rifles/lecter.rsi #ss220 lecter resprite
   - type: GunWieldBonus
-  #FCB realistic guns start
+  #SS220 weapon overhaul start
     minAngle: -4
     maxAngle: -22
     angleIncrease: -1.2
   - type: GunAimable
     minAngle: -8
     maxAngle: -7
-  #FCB realistic guns end
+  #SS220 weapon overhaul end
   - type: Gun
     minAngle: 13
     maxAngle: 36
@@ -286,19 +286,19 @@
       path: /Audio/Weapons/Guns/Gunshots/lmg.ogg
     minAngle: 13
     maxAngle: 42
-    selectedMode: FullAuto #FCB realistic guns
+    selectedMode: FullAuto #SS220 weapon overhaul
     availableModes:
     - FullAuto
     - SemiAuto
   - type: GunWieldBonus
-    #FCB realistic guns start
+    #SS220 weapon overhaul start
     minAngle: -4
     maxAngle: -28
     angleIncrease: -1.25
   - type: GunAimable
     minAngle: -8
     maxAngle: -10
-  #FCB realistic guns end
+  #SS220 weapon overhaul end
   - type: ItemSlots
     slots:
       gun_magazine:

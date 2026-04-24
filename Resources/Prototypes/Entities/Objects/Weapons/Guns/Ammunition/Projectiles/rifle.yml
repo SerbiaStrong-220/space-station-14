@@ -7,8 +7,8 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 24 #ss220lowTTKUpdate
-      armourPiercing: 24 #SS220 armor piercing added
+        Piercing: 29 #ss220lowTTKUpdate
+      armourPiercing: 10 #SS220 armor piercing added
 
 - type: entity
   id: BulletRiflePractice
@@ -32,7 +32,7 @@
       types:
         Piercing: 15 #weaponBalance #Incendary rebalance
         Heat: 5 #weaponBalance #ss220lowTTKUpdate
-      armourPiercing: 20 #SS220 armor piercing added
+      armourPiercing: 4 #SS220 armor piercing added
 
 - type: entity
   id: BulletRifleUranium

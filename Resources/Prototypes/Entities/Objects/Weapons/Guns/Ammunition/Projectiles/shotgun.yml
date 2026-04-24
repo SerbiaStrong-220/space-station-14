@@ -12,7 +12,7 @@
       types:
         Piercing: 40
         Structural: 15
-      armourPiercing: 7 #SS220 armor piercing added
+      armourPiercing: 20 #SS220 armor piercing added
 
 
 - type: entity
@@ -71,9 +71,10 @@
     damage:
       types:
         Piercing: 10 #ss220weaponBalance #Incendary rebalance
-        Heat: 3 #ss220weaponBalance
   - type: IgnitionSource
     ignited: true
+  - type: IgniteOnCollide #SS220 weapon overhaul
+    fireStacks: 0.4 #SS220 weapon overhaul
 
 - type: entity
   id: PelletShotgunIncendiarySpread

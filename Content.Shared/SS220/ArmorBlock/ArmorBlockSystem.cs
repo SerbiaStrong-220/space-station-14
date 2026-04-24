@@ -19,8 +19,8 @@ public sealed class ArmorBlockSystem : EntitySystem
     {
         _altArmor.ModifyDamage(ent.Owner, args.OriginalDamage, out var resultDamage, out var resultArmorDamage);
 
-        args.Damage = resultDamage;
+        args.Damage = resultArmorDamage;
 
-        _damageable.TryChangeDamage(ent.Comp.User, resultArmorDamage);
+        _damageable.TryChangeDamage(ent.Comp.User, resultDamage);
     }
 }

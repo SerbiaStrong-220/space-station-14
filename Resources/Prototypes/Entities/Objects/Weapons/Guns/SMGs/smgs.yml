@@ -92,10 +92,10 @@
   - type: Appearance
 
 - type: entity
-  name: C-20r assault rifle #FCB realistic guns begin
+  name: C-20r assault rifle #SS220 weapon overhaul begin
   parent: [BaseWeaponRifle]
   id: WeaponSubMachineGunC20r
-  description: A classic and widespread bullpup-configured assault rifle, infamous for its use by the Gorlex Marauders. One of the first homegrown Waffle Corp. designs, it remains in service today. Feeds from .20 rifle magazines. #FCB realistic guns begin
+  description: A classic and widespread bullpup-configured assault rifle, infamous for its use by the Gorlex Marauders. One of the first homegrown Waffle Corp. designs, it remains in service today. Feeds from .20 rifle magazines. #SS220 weapon overhaul begin
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/SMGs/c20r.rsi
@@ -106,7 +106,7 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
     sprite: Objects/Weapons/Guns/SMGs/c20r.rsi
-  #FCB realistic guns begin
+  #SS220 weapon overhaul begin
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -126,23 +126,23 @@
         whitelist:
           tags:
             - CartridgeRifle
-  #FCB realistic guns end
+  #SS220 weapon overhaul end
   - type: Wieldable
     unwieldOnUse: false
   - type: GunWieldBonus
-    #FCB realistic guns begin
+    #SS220 weapon overhaul begin
     minAngle: -5
     maxAngle: -18
     angleIncrease: -0.85
   - type: GunAimable
     minAngle: -7
     maxAngle: -11
-    #FCB realistic guns end
+    #SS220 weapon overhaul end
   - type: Gun
-    #FCB realistic guns begin
+    #SS220 weapon overhaul begin
     angleIncrease: 1.8
     angleDecay: 6
-    #FCB realistic guns end
+    #SS220 weapon overhaul end
     minAngle: 15
     maxAngle: 35
     shotsPerBurst: 6
@@ -221,13 +221,13 @@
     - type: Wieldable
       unwieldOnUse: false
     - type: GunWieldBonus
-      #FCB realistic guns begin
+      #SS220 weapon overhaul begin
       minAngle: -4
       maxAngle: -14
     - type: GunAimable
       minAngle: -7
       maxAngle: -8
-      #FCB realistic guns end
+      #SS220 weapon overhaul end
     - type: Gun
       angleIncrease: 0.85
       #220 SG Angle Updates begin
@@ -292,7 +292,7 @@
     sprite: Objects/Weapons/Guns/SMGs/wt550.rsi
   - type: ChamberMagazineAmmoProvider
     boltClosed: null
-  #FCB realistic guns begin
+  #SS220 weapon overhaul begin
   - type: Wieldable
     unwieldOnUse: false
   - type: GunAimable
@@ -302,7 +302,7 @@
     minAngle: -2
     maxAngle: -19
     angleIncrease: 0.65
-  #FCB realistic guns end
+  #SS220 weapon overhaul end
   - type: Gun
     #220 SG Angle Updates begin
     fireRate: 6.5

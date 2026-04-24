@@ -10,6 +10,7 @@ using Content.Shared.Random.Helpers;
 //using Content.Shared.Weapons.Hitscan.Components;
 //using Content.Shared.Weapons.Hitscan.Events;
 using Robust.Shared.Random;
+using Robust.Shared.Toolshed.Commands.Math;
 
 namespace Content.Shared.SS220.AltBlocking;
 
@@ -17,17 +18,17 @@ public sealed partial class SharedAltBlockingSystem
 {
     private void OnBlockUserCollide(Entity<AltBlockingUserComponent> ent, ref ProjectileBlockAttemptEvent args)
     {
-        args.CancelledHit = TryBlock(ent.Comp.BlockingItemsShields, args.Damage, ent.Comp);
+        args.CancelledHit = TryBlock(ent.Comp.BlockingItemsShields, args.Damage, ent, args.ProjectileRotation);
     }
 
     private void OnBlockThrownProjectile(Entity<AltBlockingUserComponent> ent, ref ThrowableProjectileBlockAttemptEvent args)
     {
-        args.CancelledHit = TryBlock(ent.Comp.BlockingItemsShields, args.Damage, ent.Comp);
+        args.CancelledHit = TryBlock(ent.Comp.BlockingItemsShields, args.Damage, ent, args.HitAngle);
     }
 
     private void OnBlockUserHitscan(Entity<AltBlockingUserComponent> ent, ref HitscanBlockAttemptEvent args)
     {
-        args.CancelledHit = TryBlock(ent.Comp.BlockingItemsShields, args.Damage, ent.Comp);
+        args.CancelledHit = TryBlock(ent.Comp.BlockingItemsShields, args.Damage, ent, args.HitAngle);
     }
 
     private void OnBlockUserMeleeHit(Entity<AltBlockingUserComponent> ent, ref MeleeHitBlockAttemptEvent args)
@@ -35,6 +36,9 @@ public sealed partial class SharedAltBlockingSystem
         foreach (var item in ent.Comp.BlockingItemsShields)
         {
             if (!TryComp<AltBlockingComponent>(item, out var blockComp))
+                continue;
+
+            if (!IsCovered(args.HitAngle, blockComp.CoveredZones, _transform.GetWorldRotation(ent.Owner)))
                 continue;
 
             if (!TryGetNetEntity(item, out var netEnt))
@@ -121,11 +125,14 @@ public sealed partial class SharedAltBlockingSystem
             StopBlockingHelper(ent, ent.Comp.User.Value);
     }
 
-    private bool TryBlock(List<EntityUid?> items, DamageSpecifier? damage, AltBlockingUserComponent comp)
+    private bool TryBlock(List<EntityUid?> items, DamageSpecifier? damage, Entity<AltBlockingUserComponent> owner, Angle HitRotation)
     {
         foreach (var item in items)
         {
             if (!TryComp<AltBlockingComponent>(item, out var blockComp) || damage == null)
+                continue;
+
+            if (!IsCovered(HitRotation, blockComp.CoveredZones, _transform.GetWorldRotation(owner.Owner)))
                 continue;
 
             if (TryComp<ToggleBlockingChanceComponent>(item, out var toggleComp))
@@ -149,7 +156,7 @@ public sealed partial class SharedAltBlockingSystem
             var seed = SharedRandomExtensions.HashCodeCombine(new() { (int)_gameTiming.CurTick.Value, ((NetEntity)NetUser).Id, ((NetEntity)NetItem).Id });
             var rand = new System.Random(seed);
 
-            if (comp.IsBlocking)
+            if (owner.Comp.IsBlocking)
             {
                 if (rand.Prob(blockComp.ActiveRangeBlockProb))
                 {
@@ -171,6 +178,19 @@ public sealed partial class SharedAltBlockingSystem
                 }
             }
         }
+        return false;
+    }
+
+    private bool IsCovered(Angle Incoming, int CoveredZones, Angle UserRotation)
+    {
+        if (Incoming.GetDir() == UserRotation.GetDir() || Math.Abs((int)Incoming.GetDir() - (int)UserRotation.GetDir()) <= CoveredZones)
+            return true;
+
+        if ((int)UserRotation.GetDir() + CoveredZones >= 8)
+            if (CoveredZones - (8 - (int)UserRotation.GetDir()) > (int)Incoming.GetDir())
+                return true;
+
+
         return false;
     }
 }

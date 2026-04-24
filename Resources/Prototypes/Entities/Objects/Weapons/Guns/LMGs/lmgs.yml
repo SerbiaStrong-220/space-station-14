@@ -23,7 +23,7 @@
     - suitStorage
   - type: Wieldable
     unwieldOnUse: false
-  #FCB realistic guns begin
+  #SS220 weapon overhaul begin
   - type: GunWieldBonus
     minAngle: -7
     maxAngle: -26
@@ -37,11 +37,11 @@
     angleIncrease: 2.50
     angleDecay: 16
     fireRate: 6
-  #FCB realistic guns end
+  #SS220 weapon overhaul end
     selectedMode: FullAuto
     availableModes:
       - FullAuto
-      - SemiAuto #FCB realistic guns
+      - SemiAuto #SS220 weapon overhaul
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/lmg.ogg
     soundEmpty:
