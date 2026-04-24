@@ -64,10 +64,7 @@ public abstract partial class SharedBarricadeSystem : EntitySystem
             entity.Comp.CollideBarricades.Remove(args.OtherEntity);
     }
 
-    protected virtual bool HitscanTryPassBarricade(Entity<BarricadeComponent> entity, EntityUid source, TransformComponent? sourceXform = null)
-    {
-        return false;
-    }
+    protected abstract bool HitscanTryPassBarricade(Entity<BarricadeComponent> entity, EntityUid source, TransformComponent? sourceXform = null);
 
     protected virtual bool ProjectileTryPassBarricade(Entity<BarricadeComponent> entity, Entity<ProjectileComponent> projEnt)
     {
