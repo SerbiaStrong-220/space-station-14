@@ -46,8 +46,8 @@ public sealed class HitscanBasicRaycastSystem : EntitySystem
         //  2.) Hit the first entity that doesn't require you to aim at it specifically to be hit.
         var result = _container.IsEntityOrParentInContainer(shooter)
             ? rayCastResults.FirstOrNull()
-            : rayCastResults.FirstOrNull(hit => hit.HitEntity == target
-                                                || CompOrNull<RequireProjectileTargetComponent>(hit.HitEntity)?.Active != true);
+            : rayCastResults.FirstOrNull(hit => CanBeTargeted(hit.HitEntity, ent.Owner) && (hit.HitEntity == target // SS220-make-hitscan-target-change
+                                                || CompOrNull<RequireProjectileTargetComponent>(hit.HitEntity)?.Active != true)); // SS220-make-hitscan-target-change
 
         var distanceTried = result?.Distance ?? ent.Comp.MaxDistance;
 
@@ -80,6 +80,17 @@ public sealed class HitscanBasicRaycastSystem : EntitySystem
         var hitEvent = new HitscanRaycastFiredEvent { Data = data };
         RaiseLocalEvent(ent, ref hitEvent);
     }
+
+    // SS220-make-hitscan-target-change-begin
+    private bool CanBeTargeted(EntityUid? ent, EntityUid hitScanUid)
+    {
+        var hitAttemptEvent = new AttemptHitscanRaycastHitEvent { HitScanEntity = hitScanUid };
+        if (ent.HasValue)
+            RaiseLocalEvent(ent.Value, ref hitAttemptEvent);
+
+        return !hitAttemptEvent.Cancelled;
+    }
+    // SS220-make-hitscan-target-change-end
 
     /// <summary>
     /// Create visual effects for the fired hitscan weapon.
