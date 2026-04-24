@@ -147,7 +147,7 @@ namespace Content.Shared.Damage
             DamageSpecifier newDamage = new();
             newDamage.DamageDict.EnsureCapacity(damageSpec.DamageDict.Count);
 
-            var minCoefficient = 1f;
+            var minCoefficient = 1f;//SS220 armor piercing added
 
             foreach (var (key, value) in damageSpec.DamageDict)
             {
@@ -186,7 +186,7 @@ namespace Content.Shared.Damage
                     newDamage.DamageDict[key] = FixedPoint2.New(newValue);
             }
 
-            newDamage.ArmourPiercing = Math.Max(Math.Min(0f, damageSpec.ArmourPiercing.Float()), damageSpec.ArmourPiercing.Float() - (1f - minCoefficient) * 100);
+            newDamage.ArmourPiercing = Math.Max(Math.Min(0f, damageSpec.ArmourPiercing.Float()), damageSpec.ArmourPiercing.Float() - (1f - minCoefficient) * 100); //SS220 armor piercing added
 
             return newDamage;
         }
