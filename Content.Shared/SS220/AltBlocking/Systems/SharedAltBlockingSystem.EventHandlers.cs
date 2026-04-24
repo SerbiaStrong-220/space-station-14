@@ -183,14 +183,10 @@ public sealed partial class SharedAltBlockingSystem
 
     private bool IsCovered(Angle Incoming, int CoveredZones, Angle UserRotation)
     {
-        if (Incoming.GetDir() == UserRotation.GetDir() || Math.Abs((int)Incoming.GetDir() - (int)UserRotation.GetDir()) <= CoveredZones)
-            return true;
+        var diff = Math.Abs((int)Incoming.GetDir() - (int)UserRotation.GetDir());
+        if (diff > 4)
+            diff = 8 - diff;
 
-        if ((int)UserRotation.GetDir() + CoveredZones >= 8)
-            if (CoveredZones - (8 - (int)UserRotation.GetDir()) > (int)Incoming.GetDir())
-                return true;
-
-
-        return false;
+        return diff <= CoveredZones;
     }
 }
