@@ -88,15 +88,7 @@ public sealed class AltArmorSystem : EntitySystem
             return;
 
         if(maximalDamageType != null)
-        {
-            if (damage.ArmourPiercing > ent.Comp.TresholdDict[maximalDamageType])// A kostyl made to lower the piercing stat to prevent infinite/too good penetration of anything
-            {
-                resultDamage.ArmourPiercing = damage.ArmourPiercing - ent.Comp.TresholdDict[maximalDamageType];
-                _damageable.TryChangeDamage(ent.Owner, resultDamage);
-                return;
-            }
-            resultDamage.ArmourPiercing = 0;
-        }
+            resultDamage.ArmourPiercing = Math.Max(Math.Min(0f, damage.ArmourPiercing.Float()), (damage.ArmourPiercing - ent.Comp.TresholdDict[maximalDamageType]).Float());
     }
 
     public FixedPoint2 CountDifference(Dictionary<string, FixedPoint2> dict, FixedPoint2 damage, FixedPoint2 resist,string type, FixedPoint2 piercing, FixedPoint2 durabilityCoefficient)
