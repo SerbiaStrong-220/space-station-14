@@ -2,7 +2,7 @@
   id: SyndicateReinforcementRoleExperience
   skills:
     Bureaucracy:
-      level: 1
+      level: 2
     ExtravehicularActivity:
       level: 2
     CombatTraining:
@@ -15,7 +15,7 @@
       level: 2
   knowledges:
   - SyndicateAgentKnowledge
-  addSublevelPoints: 10
+  addSublevelPoints: 15
 
 - type: experienceDefinition
   id: SyndicateCommanderRoleExperience

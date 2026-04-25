@@ -4,13 +4,13 @@
     Bureaucracy:
       level: 2
     ExtravehicularActivity:
-      level: 1
+      level: 2
     CombatTraining:
       level: 2
     Construction:
       level: 1
     Medicine:
-      level: 1
+      level: 2
     PhysicalTraining:
       level: 2
   knowledges:
@@ -27,7 +27,7 @@
     CombatTraining:
       level: 3
     Construction:
-      level: 1
+      level: 2
     Medicine:
       level: 2
     PhysicalTraining:
@@ -35,7 +35,7 @@
   knowledges:
   - InformedPersonalKnowledge
   - SecurityKnowledge
-  addSublevelPoints: 5
+  addSublevelPoints: 10
 
 - type: experienceDefinition
   id: SecuritySeniorRoleExperience
@@ -54,23 +54,23 @@
       level: 2
   knowledges:
   - SecurityKnowledge
-  addSublevelPoints: 5
+  addSublevelPoints: 10
 
 - type: experienceDefinition
   id: SecurityCadetRoleExperience
   skills:
     Bureaucracy:
-      level: 1
+      level: 2
     ExtravehicularActivity:
-      level: 1
+      level: 2
     CombatTraining:
-      level: 1
+      level: 2
     Construction:
       level: 1
     Medicine:
       level: 1
     PhysicalTraining:
-      level: 1
+      level: 2
   knowledges:
   - SecurityKnowledge
   addSublevelPoints: 15
@@ -87,12 +87,12 @@
     Construction:
       level: 1
     Medicine:
-      level: 1
+      level: 2
     PhysicalTraining:
       level: 2
   knowledges:
   - SecurityKnowledge
-  addSublevelPoints: 10
+  addSublevelPoints: 15
 
 - type: experienceDefinition
   id: SecurityPilotRoleExperience
@@ -104,14 +104,14 @@
     CombatTraining:
       level: 2
     Construction:
-      level: 1
+      level: 2
     Medicine:
-      level: 1
+      level: 2
     PhysicalTraining:
       level: 2
   knowledges:
   - SecurityKnowledge
-  addSublevelPoints: 10
+  addSublevelPoints: 15
 
 - type: experienceDefinition
   id: WardenRoleExperience
@@ -123,14 +123,14 @@
     CombatTraining:
       level: 3
     Construction:
-      level: 1
+      level: 3
     Medicine:
       level: 2
     PhysicalTraining:
       level: 2
   knowledges:
   - SecurityKnowledge
-  addSublevelPoints: 5
+  addSublevelPoints: 10
 
 - type: experienceDefinition
   id: SecurityPetRoleExperience
@@ -138,15 +138,15 @@
     Bureaucracy:
       level: 1
     ExtravehicularActivity:
-      level: 1
-    CombatTraining:
       level: 2
+    CombatTraining:
+      level: 3
     Construction:
       level: 1
     Medicine:
-      level: 1
-    PhysicalTraining:
       level: 2
+    PhysicalTraining:
+      level: 3
   knowledges:
   - SecurityKnowledge
   addSublevelPoints: 0

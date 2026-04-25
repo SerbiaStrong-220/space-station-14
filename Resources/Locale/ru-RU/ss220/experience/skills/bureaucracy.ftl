@@ -11,7 +11,7 @@ bureaucracy-trained-level-up-popup = Формы стали понятнее, а 
 bureaucracy-trained-sublevel-up-popup = Вы лучше разбираетесь в формах и канцеляритах!
 
 bureaucracy-professional-name = Акула бюрократии
-bureaucracy-professional-desc = Вы постигли дзен канцелярита. Вы способны составить документ на языке, понятном только избранным чиновникам, и заставить систему работать на вас.
+bureaucracy-professional-desc = Вы постигли дзен канцелярита. Вы можете использовать язык, понятный только избранным чиновникам, и заставить систему работать на вас.
 
 bureaucracy-professional-level-up-popup =  Вы постигли дзен канцелярита. Теперь вы говорите только по существу... и только в трёх экземплярах!
 bureaucracy-professional-sublevel-up-popup = Вы успешно согласовали согласование о согласовании!

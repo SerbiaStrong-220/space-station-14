@@ -22,7 +22,7 @@ public sealed partial class StartingGearPrototype : IPrototype, IInheritingProto
 
     // SS220-experience-update-begin
     [DataField]
-    public ProtoId<ExperienceDefinitionPrototype>? ExperienceDefinition = null;
+    public ProtoId<ExperienceDefinitionPrototype>? ExperienceDefinition { get; private set; }
     // SS220-experience-update-end
 
     // SS220 fix inheritance begin

@@ -22,6 +22,11 @@ public sealed partial class DoAfterArgs
     [DataField(required: true)]
     public TimeSpan Delay;
 
+    // SS220-changeable-doafter-delay-multiplier-begin
+    [DataField]
+    public float DelayModifier = 1f;
+    // SS220-changeable-doafter-delay-multiplier-end
+
     // SS220-changeable-doafter-bar-color-begin
     [DataField]
     public Color? BarColorOverride;

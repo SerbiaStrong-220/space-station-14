@@ -11,7 +11,7 @@ namespace Content.Shared.SS220.Experience.Skill.Components;
 public sealed partial class WeightlessChangingReadySkillComponent : Component
 {
     [ViewVariables(VVAccess.ReadOnly)]
-    public HashSet<ProtoId<TagPrototype>> HardsuitTags = new() { "Hardsuit" };
+    public HashSet<ProtoId<TagPrototype>> HardsuitTags = new() { "Hardsuit", "PressureProtectionSuit" };
 
     [ViewVariables(VVAccess.ReadOnly)]
     public bool MagbootsActive;

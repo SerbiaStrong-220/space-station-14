@@ -28,6 +28,7 @@
 
 - type: startingGear
   id: CBURNGear
+  experienceDefinition: CBURNRoleExperience # SS220-experience
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorBrown
     back: ClothingBackpackDuffelCBURN

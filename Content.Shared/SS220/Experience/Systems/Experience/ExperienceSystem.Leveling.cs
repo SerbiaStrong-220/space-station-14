@@ -163,7 +163,7 @@ public sealed partial class ExperienceSystem : EntitySystem
             return;
 
         // Do not save overflow progress
-        if (entity.Comp.StudyingProgress[skillTree] > EndLearningProgress)
+        if (entity.Comp.StudyingProgress[skillTree] >= EndLearningProgress)
             entity.Comp.StudyingProgress[skillTree] = StartLearningProgress;
 
         entity.Comp.EarnedSkillSublevel[skillTree]++;

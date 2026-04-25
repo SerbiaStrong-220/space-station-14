@@ -30,7 +30,7 @@ public sealed class WeightlessDoAfterSkillSystem : BaseDoAfterSkillSystem<Weight
     {
         base.AfterDoAfterComplete(entity, args);
 
-        TryChangeStudyingProgress(entity, _affectedSkillTree, _learningRewardPreSecond * args.Args.Delay.TotalSeconds);
+        TryChangeStudyingProgress(entity, _affectedSkillTree, _learningRewardPreSecond * args.Args.Delay.TotalSeconds * args.Args.DelayModifier);
     }
 
     private void OnWeightlessChange(Entity<WeightlessDoAfterSkillComponent> entity, ref WeightlessnessChangedEvent args)

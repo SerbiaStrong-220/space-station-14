@@ -151,8 +151,14 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         // SS220-add-skills-affect-do-after-end
 
         doAfter.Completed = true;
+        var delayBefore = doAfter.Args.Delay; // SS220-add-skills-affect-do-after
 
         RaiseDoAfterEvents(doAfter, component);
+
+        // SS220-add-skills-affect-do-after-begin
+        if (delayBefore != doAfter.Args.Delay)
+            doAfter.Args.Delay *= doAfter.Args.DelayModifier;
+        // SS220-add-skills-affect-do-after-end
 
         if (doAfter.Args.Event.Repeat)
         {

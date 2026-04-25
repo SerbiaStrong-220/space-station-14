@@ -2,9 +2,9 @@
   id: CargoTechnicianRoleExperience
   skills:
     Bureaucracy:
-      level: 1
+      level: 2
     ExtravehicularActivity:
-      level: 1
+      level: 2
     CombatTraining:
       level: 1
     Construction:
@@ -15,13 +15,13 @@
       level: 1
   knowledges:
   - CargoKnowledge
-  addSublevelPoints: 15
+  addSublevelPoints: 20
 
 - type: experienceDefinition
   id: SalvageSpecialistRoleExperience
   skills:
     Bureaucracy:
-      level: 1
+      level: 2
     ExtravehicularActivity:
       level: 2
     CombatTraining:
@@ -34,7 +34,7 @@
       level: 2
   knowledges:
   - CargoKnowledge
-  addSublevelPoints: 10
+  addSublevelPoints: 15
 
 - type: experienceDefinition
   id: QuartermasterRoleExperience
@@ -54,4 +54,4 @@
   knowledges:
   - CargoKnowledge
   - InformedPersonalKnowledge
-  addSublevelPoints: 5
+  addSublevelPoints: 10

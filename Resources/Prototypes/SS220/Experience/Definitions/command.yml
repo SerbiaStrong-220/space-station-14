@@ -17,7 +17,7 @@
   - InformedPersonalKnowledge
   - MedicalKnowledge
   - SecurityKnowledge
-  addSublevelPoints: 5
+  addSublevelPoints: 10
 
 - type: experienceDefinition
   id: CaptainRoleExperience
@@ -36,7 +36,7 @@
       level: 2
   knowledges:
   - InformedPersonalKnowledge
-  addSublevelPoints: 5
+  addSublevelPoints: 10
 
 - type: experienceDefinition
   id: HeadOfPersonnelRoleExperience
@@ -44,11 +44,11 @@
     Bureaucracy:
       level: 2
     ExtravehicularActivity:
-      level: 1
+      level: 2
     CombatTraining:
       level: 1
     Construction:
-      level: 1
+      level: 2
     Medicine:
       level: 1
     PhysicalTraining:
