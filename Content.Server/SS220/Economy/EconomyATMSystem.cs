@@ -115,7 +115,7 @@ public sealed class ATMSystem : SharedEconomyATMSystem
             || !_itemSlotsSystem.TryGetSlot(ent.Owner, IdCardSlotName, out var itemSlot, component: itemSlotsComponent)
             || !itemSlot.HasItem
             || !TryComp<EconomyBankCardComponent>(itemSlot.Item, out var bankCard)
-            || ent.Comp.PinInput.Length != 4 // This magic number again, what does it mean?
+            || ent.Comp.PinInput.Length != SharedEconomyBankCardSystem.PinCodeLength
             || args.Amount <= 0
             )
             return;

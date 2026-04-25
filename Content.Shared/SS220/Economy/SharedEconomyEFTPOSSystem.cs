@@ -57,7 +57,7 @@ public abstract partial class SharedEconomyEFTPOSSystem : EntitySystem
 
     private void OnKeypadButtonPressed(Entity<EconomyEFTPOSComponent> ent, ref EconomyEFTPOSKeypadMessage args)
     {
-        if (ent.Comp.PayerPinInput.Length >= 4) // Hardcoded magic number 4, very professional.
+        if (ent.Comp.PayerPinInput.Length >= SharedEconomyBankCardSystem.PinCodeLength)
             return;
 
         if (ent.Comp.PayerBankAccountId == default)

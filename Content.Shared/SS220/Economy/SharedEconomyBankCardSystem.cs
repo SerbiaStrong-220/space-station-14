@@ -9,6 +9,7 @@ namespace Content.Shared.SS220.Economy;
 public abstract class SharedEconomyBankCardSystem : EntitySystem
 {
     public static readonly SpriteSpecifier VerbIcon = new SpriteSpecifier.Texture(new("/Textures/SS220/Interface/VerbIcons/brain.png"));
+    public const int PinCodeLength = 4;
 
     public override void Initialize()
     {

@@ -39,9 +39,9 @@ public sealed partial class EconomyEFTPOSWindow : FancyWindow
         AmountLineEdit.OnTextChanged += _ =>
         {
             if (!int.TryParse(AmountLineEdit.Text, out var result) || result <= 0)
+            {
                 AmountLineEdit.Text = string.Empty;
-
-            AmountLineEdit.Text = result.ToString();
+            }
         };
 
         CardLockButton.OnPressed += _ =>
@@ -151,10 +151,10 @@ public sealed partial class EconomyEFTPOSWindow : FancyWindow
             : Loc.GetString("economy-eftpos-ui-account-name-text", ("ownerName", eftposState.OwnerName));
     }
 
-    private static string VisualizePinCode(int codeLength, int maxLength = 4)
+    private static string VisualizePinCode(int codeLength)
     {
         var code = new string('*', codeLength);
-        var blanksCount = maxLength - codeLength;
+        var blanksCount = SharedEconomyBankCardSystem.PinCodeLength - codeLength;
         var blanks = new string('_', blanksCount);
         return code + blanks;
     }

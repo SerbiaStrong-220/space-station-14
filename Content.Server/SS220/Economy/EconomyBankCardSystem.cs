@@ -16,7 +16,6 @@ using Content.Shared.SS220.Economy;
 using Content.Shared.Stacks;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
-using Pidgin;
 using Robust.Server.Containers;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -39,7 +38,7 @@ public sealed class EconomyBankCardSystem : SharedEconomyBankCardSystem
     [Dependency] private readonly IChatManager _chatManager = default!;
 
     public readonly List<BankAccount> Accounts = [];
-    private static readonly string SpaceCashProto = "SpaceCash";
+    private static readonly ProtoId<StackPrototype> SpaceCashProto = "SpaceCash";
 
     public override void Initialize()
     {
@@ -144,7 +143,7 @@ public sealed class EconomyBankCardSystem : SharedEconomyBankCardSystem
         if (!HasComp<TransformComponent>(user))
             return;
 
-        var itemToSpawn = EntityManager.SpawnEntity(SpaceCashProto, EntityManager.GetComponent<TransformComponent>(user).Coordinates);
+        var itemToSpawn = EntityManager.SpawnEntity(SpaceCashProto, Transform(user).Coordinates);
 
         _stackSystem.SetCount(itemToSpawn, withdrawnAmount);
 
@@ -222,7 +221,7 @@ public sealed class EconomyBankCardSystem : SharedEconomyBankCardSystem
 
         BankAccount account;
 
-        var accountPin = _random.Next(1000, 10000);
+        var accountPin = _random.Next((int)Math.Pow(10, PinCodeLength - 1), (int)Math.Pow(10, PinCodeLength));
 
         if (accountId == default)
         {
@@ -230,7 +229,7 @@ public sealed class EconomyBankCardSystem : SharedEconomyBankCardSystem
 
             do
             {
-                accountNumber = _random.Next(100000, 1000000);
+                accountNumber = _random.Next(100000, 1000000); // Строка с генерацией ПИН-кода выглядит сложнее, чем эта - не так ли? Зато без волшебных чисел
             } while (AccountExist(accountNumber));
 
             account = new BankAccount(accountNumber, accountPin, startingBalance);

@@ -140,10 +140,10 @@ public sealed partial class EconomyATMWindow : FancyWindow
         }
     }
 
-    private static string VisualizePinCode(int codeLength, int maxLength = 4)
+    private static string VisualizePinCode(int codeLength)
     {
         var code = new string('*', codeLength);
-        var blanksCount = maxLength - codeLength;
+        var blanksCount = SharedEconomyBankCardSystem.PinCodeLength - codeLength;
         var blanks = new string('_', blanksCount);
         return code + blanks;
     }

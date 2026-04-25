@@ -35,7 +35,7 @@ public abstract partial class SharedEconomyATMSystem : EntitySystem
 
     private void OnKeypadButtonPressed(Entity<EconomyATMComponent> ent, ref EconomyATMKeypadMessage args)
     {
-        if (ent.Comp.PinInput.Length >= 4) // Hardcoded magic number 4, very professional.
+        if (ent.Comp.PinInput.Length >= SharedEconomyBankCardSystem.PinCodeLength)
             return;
 
         if (ent.Comp.CardState != CardStateEnum.Valid)

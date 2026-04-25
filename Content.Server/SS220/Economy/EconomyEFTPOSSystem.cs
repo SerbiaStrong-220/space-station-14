@@ -24,7 +24,7 @@ public sealed class EconomyEFTPOSSystem : SharedEconomyEFTPOSSystem
         if (ent.Comp.OwnerBankAccountId == default
             || ent.Comp.PayerBankAccountId == default
             || ent.Comp.OwnerBankAccountId == ent.Comp.PayerBankAccountId
-            || ent.Comp.PayerPinInput.Length != 4 // This magic number again, what does it mean?
+            || ent.Comp.PayerPinInput.Length != SharedEconomyBankCardSystem.PinCodeLength
             || ent.Comp.Amount <= 0
             )
             return;
