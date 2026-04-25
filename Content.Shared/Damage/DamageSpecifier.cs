@@ -374,49 +374,6 @@ namespace Content.Shared.Damage
             return newDamage;
         }
 
-
-        //SS220 damage specifier extension(nasral) begin
-        public static DamageSpecifier operator +(DamageSpecifier damageSpec, float factor)
-        {
-            DamageSpecifier newDamage = new();
-            foreach (var entry in damageSpec.DamageDict)
-            {
-                newDamage.DamageDict.Add(entry.Key, entry.Value + factor);
-            }
-            return newDamage;
-        }
-
-        public static DamageSpecifier operator -(DamageSpecifier damageSpec, float factor)
-        {
-            DamageSpecifier newDamage = new();
-            foreach (var entry in damageSpec.DamageDict)
-            {
-                newDamage.DamageDict.Add(entry.Key, entry.Value - factor);
-            }
-            return newDamage;
-        }
-
-        public static DamageSpecifier operator +(DamageSpecifier damageSpec, FixedPoint2 factor)
-        {
-            DamageSpecifier newDamage = new();
-            foreach (var entry in damageSpec.DamageDict)
-            {
-                newDamage.DamageDict.Add(entry.Key, entry.Value + factor);
-            }
-            return newDamage;
-        }
-
-        public static DamageSpecifier operator -(DamageSpecifier damageSpec, FixedPoint2 factor)
-        {
-            DamageSpecifier newDamage = new();
-            foreach (var entry in damageSpec.DamageDict)
-            {
-                newDamage.DamageDict.Add(entry.Key, entry.Value - factor);
-            }
-            return newDamage;
-        }
-        //SS220 damage specifier extension(nasral) end
-
         public static DamageSpecifier operator *(DamageSpecifier damageSpec, float factor)
         {
             DamageSpecifier newDamage = new();

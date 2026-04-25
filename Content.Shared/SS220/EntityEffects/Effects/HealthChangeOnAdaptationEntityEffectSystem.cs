@@ -24,8 +24,13 @@ public sealed partial class HealthChangeOnAdaptationEntityEffectSystem : EntityE
 
         damageSpec *= args.Scale;
 
-        if (args.Effect.Reagent != null && _chemicalAdaptation.TryGetMetabolized(entity, args.Effect.Reagent, out var metabolized))
-            damageSpec += metabolized * args.Effect.Decay;
+        if (args.Effect.Reagent == null || !_chemicalAdaptation.TryGetMetabolized(entity, args.Effect.Reagent, out var metabolized))
+            return;
+
+        DamageSpecifier modifiedDamage = new DamageSpecifier();
+
+        foreach (var (type, value) in damageSpec.DamageDict)
+            modifiedDamage.DamageDict.Add(type, value + metabolized * args.Effect.Decay);
 
         _damageable.TryChangeDamage(
                 entity,
