@@ -11,7 +11,7 @@ public abstract partial class SharedStoreSystem : EntitySystem
 {
     private void OnInsertCurrencyDoAfter(Entity<StoreComponent> store, ref InsertCurrencyDoAfterEvent args)
     {
-        if (args.Handled || args.Cancelled || args.Target is not { } target || args.Used is not { } used)
+        if (args.Handled || args.Cancelled || args.Used is not { } used)
             return;
 
         TryGetEntity(args.TargetOverride, out var targetOverride);
@@ -25,8 +25,8 @@ public abstract partial class SharedStoreSystem : EntitySystem
             return;
 
         args.Handled = true;
-        var msg = Loc.GetString("store-currency-inserted", ("used", used), ("target", targetOverride ?? target));
-        Popup.PopupEntity(msg, target, args.User);
+        var msg = Loc.GetString("store-currency-inserted", ("used", used), ("target", targetOverride ?? store));
+        Popup.PopupEntity(msg, store, args.User);
     }
 }
 

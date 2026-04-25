@@ -91,7 +91,7 @@ public abstract partial class SharedStoreSystem : EntitySystem
         {
             var doAfter = new DoAfterArgs(EntityManager, args.User, insertTime,
                 new InsertCurrencyDoAfterEvent(GetNetEntity(ev.TargetOverride)),
-                args.Target.Value, used: uid)
+                store, used: uid)
             {
                 NeedHand = true,
                 BreakOnDamage = true

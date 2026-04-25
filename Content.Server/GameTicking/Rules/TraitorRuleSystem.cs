@@ -56,7 +56,7 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
     // SS220 TraitorDynamics start
     private void OnBeforeAntagSelection(Entity<TraitorRuleComponent> entity, ref BeforeAntagSelection _)
     {
-        InitDynamic(entity.AsNullable(), GetStationWithRecords());
+        InitDynamic(entity!, GetStationWithRecords());
     }
 
     protected override void Ended(EntityUid uid, TraitorRuleComponent component, GameRuleComponent gameRule, GameRuleEndedEvent args)
