@@ -63,6 +63,7 @@
     icon:
       sprite: SS220/Structures/Machines/atm.rsi
       state: icon
+  - type: EconomyBankingCartridge
 
 - type: entity
   parent: BaseMachinePowered
