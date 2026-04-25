@@ -26,6 +26,7 @@
   special: #SS220-Transfer Detective To Security begin
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ] #SS220-Transfer Detective To Security end
+  economySalaryPrototype: Worker # SS220 Economy
 
 - type: startingGear
   id: DetectiveGear

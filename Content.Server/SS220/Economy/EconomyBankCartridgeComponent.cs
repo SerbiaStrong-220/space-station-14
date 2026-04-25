@@ -1,0 +1,10 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+namespace Content.Server.SS220.Economy;
+
+[RegisterComponent]
+public sealed partial class EconomyBankingCartridgeComponent : Component
+{
+    [DataField, ViewVariables]
+    public EntityUid Loader = default;
+}

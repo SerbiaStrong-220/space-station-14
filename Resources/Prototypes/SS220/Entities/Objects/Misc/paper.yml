@@ -626,3 +626,10 @@
   parent: PaperAccessLogs
   name: health analyzer report
   description: Printed diagnostic report from a handheld health analyzer.
+
+# SS220 Economy
+- type: entity
+  id: TransactionReceiptPaper
+  parent: PaperAccessLogs
+  name: transaction receipt
+  description: Printed transaction receipt from a EFTPOS.

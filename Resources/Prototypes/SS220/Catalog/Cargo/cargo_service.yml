@@ -99,3 +99,13 @@
   cost: 1000
   category: cargoproduct-category-name-service
   group: market
+
+- type: cargoProduct
+  id: EconomyATM
+  icon:
+    sprite: SS220/Structures/Machines/atm.rsi
+    state: icon
+  product: EconomyATM
+  cost: 500
+  category: cargoproduct-category-name-service
+  group: market

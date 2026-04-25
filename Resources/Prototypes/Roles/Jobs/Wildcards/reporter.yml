@@ -10,6 +10,7 @@
   - Service
   - Maintenance
   - Reporter #SS220 New_accesses_and_some_tweaks
+  economySalaryPrototype: Worker # SS220 Economy
 
 - type: startingGear
   id: ReporterGear

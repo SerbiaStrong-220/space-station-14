@@ -58,6 +58,7 @@
   - !type:AddComponentSpecial
     components:
     - type: DefibrillatorSkill
+  economySalaryPrototype: SeniorStaff
 
 - type: startingGear
   id: BlueShieldGear

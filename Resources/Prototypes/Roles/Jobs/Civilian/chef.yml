@@ -17,6 +17,7 @@
   extendedAccess:
   - Hydroponics
   - Bar
+  economySalaryPrototype: Worker # SS220 Economy
 
 - type: startingGear
   id: ChefGear

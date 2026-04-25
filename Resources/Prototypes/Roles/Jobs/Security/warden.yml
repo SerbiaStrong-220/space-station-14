@@ -28,6 +28,7 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
+  economySalaryPrototype: SeniorStaff # SS220 Economy
 
 - type: startingGear
   id: WardenGear

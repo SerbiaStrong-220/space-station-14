@@ -89,6 +89,7 @@
       - NanoTaskCartridge
       - NewsReaderCartridge
       - MessengerCartridgeClient # SS220 Messenger
+      - EconomyBankingCartridge # SS220 Economy
     cartridgeSlot:
       priority: -1
       name: device-pda-slot-component-slot-name-cartridge
@@ -161,6 +162,7 @@
     - NewsReaderCartridge
     - WantedListCartridge
     - MessengerCartridgeClient # SS220 Messenger
+    - EconomyBankingCartridge # SS220 Economy
 
 - type: entity
   parent: BasePDA
@@ -176,6 +178,7 @@
       - NewsReaderCartridge
       - MedTekCartridge
       - MessengerCartridgeClient # SS220 Messenger
+      - EconomyBankingCartridge # SS220 Economy
 
 - type: entity
   parent: BasePDA
@@ -732,6 +735,7 @@
     - NewsReaderCartridge
     - AstroNavCartridge
     - MessengerCartridgeClient #SS220 Messenger
+    - EconomyBankingCartridge # SS220 Economy
 
 - type: entity
   parent: BasePDA
@@ -812,6 +816,7 @@
       - NewsReaderCartridge
       - AstroNavCartridge
       - MessengerCartridgeClient # SS220 Messenger
+      - EconomyBankingCartridge # SS220 Economy
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -1484,6 +1489,7 @@
     - WantedListCartridge
     - LogProbeCartridge
     - MessengerCartridgeClient #SS220 SD-pda-some-fixes
+    - EconomyBankingCartridge # SS220 Economy
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -1620,6 +1626,7 @@
       - WantedListCartridge
       - LogProbeCartridge
       - AstroNavCartridge
+      - EconomyBankingCartridge # SS220 Economy
 
 - type: entity
   parent: BasePDA #SS220 PDA-Resprite
@@ -1672,6 +1679,7 @@
       - LogProbeCartridge
       - WantedListCartridge
       - MessengerCartridgeClient # SS220 Messenger
+      - EconomyBankingCartridge # SS220 Economy
       - MedTekCartridge
       - AstroNavCartridge
   - type: Tag #  Ignore Chameleon tags
@@ -1880,6 +1888,7 @@
     preinstalled:
       - NotekeeperCartridge
       - MessengerCartridgeClient # SS220 Messenger
+      - EconomyBankingCartridge # SS220 Economy
       - NanoTaskCartridge
 
 - type: entity
@@ -1921,6 +1930,7 @@
       - NotekeeperCartridge
       - NanoTaskCartridge
       - MedTekCartridge
+      - EconomyBankingCartridge # SS220 Economy
 
 - type: entity
   parent: [ SyndiOperativePDA, BaseSyndicateContraband ]
@@ -1984,6 +1994,7 @@
       - LogProbeCartridge
       - AstroNavCartridge
       - MessengerCartridgeClient # SS220 Messenger
+      - EconomyBankingCartridge # SS220 Economy
 
 - type: entity
   parent: ERTLeaderPDA
@@ -2085,6 +2096,7 @@
       - MedTekCartridge
       - WantedListCartridge
       - MessengerCartridgeClient # SS220 Messenger
+      - EconomyBankingCartridge # SS220 Economy
 
 - type: entity
   parent: ERTLeaderPDA
@@ -2307,6 +2319,7 @@
     - WantedListCartridge
     - LogProbeCartridge
     - MessengerCartridgeClient #SS220 SD-pda-some-fixes
+    - EconomyBankingCartridge # SS220 Economy
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -2357,6 +2370,7 @@
     - WantedListCartridge
     - MedTekCartridge
     - MessengerCartridgeClient #SS220 SD-pda-some-fixes
+    - EconomyBankingCartridge # SS220 Economy
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -2667,6 +2681,7 @@
       - NanoTaskCartridge
       - MedTekCartridge
       - MessengerCartridgeClient # SS220 Messenger
+      - EconomyBankingCartridge # SS220 Economy
 
 - type: entity
   parent: [BasePDA, SelectableLock]

@@ -19,6 +19,7 @@
   - !type:GiveItemOnHolidaySpecial
     holiday: FirefighterDay
     prototype: FireAxe
+  economySalaryPrototype: Worker # SS220 Economy
 
 - type: startingGear
   id: AtmosphericTechnicianGear

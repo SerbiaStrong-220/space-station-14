@@ -26,6 +26,8 @@
     components:
     - type: DefibrillatorSkill
   #SS220 LimitationRevive - end
+  economySalaryPrototype: SeniorStaff
+
 - type: startingGear
   id: SeniorPhysicianGear
   equipment:

@@ -31,6 +31,7 @@
   - Kitchen
   - Hydroponics
   - Maintenance
+  economySalaryPrototype: SeniorStaff
 
 - type: startingGear
   id: SeniorAssistantGear

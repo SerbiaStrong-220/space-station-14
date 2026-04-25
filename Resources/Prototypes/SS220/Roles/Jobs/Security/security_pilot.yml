@@ -24,6 +24,7 @@
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
+  economySalaryPrototype: Worker
 
 - type: startingGear
   id: SecurityPilotGear

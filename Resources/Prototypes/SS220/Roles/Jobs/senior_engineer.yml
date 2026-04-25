@@ -21,6 +21,7 @@
   - Engineering
   - External
   - Atmospherics
+  economySalaryPrototype: SeniorStaff
 
 - type: startingGear
   id: SeniorEngineerGear

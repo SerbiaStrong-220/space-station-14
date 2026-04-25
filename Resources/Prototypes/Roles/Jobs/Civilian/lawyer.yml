@@ -16,6 +16,7 @@
   - Lawyer
   - Brig
   - Maintenance
+  economySalaryPrototype: Worker # SS220 Economy
 
 - type: startingGear
   id: LawyerGear

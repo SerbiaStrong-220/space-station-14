@@ -24,6 +24,7 @@
   - !type:AddComponentSpecial
     components:
     - type: DefibrillatorSkill
+  economySalaryPrototype: Worker # SS220 Economy
 
 
 - type: startingGear

@@ -18,6 +18,7 @@
   - !type:GiveItemOnHolidaySpecial
     holiday: BoxingDay
     prototype: BoxCardboard
+  economySalaryPrototype: Worker # SS220 Economy
 
 - type: startingGear
   id: CargoTechGear

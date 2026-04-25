@@ -10,6 +10,7 @@
         amount: 2
       - id: ClothingHandsGlovesLatex
       - id: BoxZiptie
+      - id: EconomyEFTPOS
       - id: ClothingOuterStraightjacket
         amount: 2
       - id: TherapeuticPai

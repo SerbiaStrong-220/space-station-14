@@ -1,0 +1,22 @@
+<ui:EconomyBankingUiFragment xmlns="https://spacestation14.io"
+                             xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                             xmlns:ui="clr-namespace:Content.Client.SS220.Economy"
+                             Orientation="Vertical"
+                             HorizontalExpand="True"
+                             VerticalExpand="True"
+                             Margin="8 8 8 8">
+    <Label Name="CardDefaultLabel"
+        Text="{Loc 'banking-program-ui-card-default'}"
+        Visible="True" />
+    <Label Name="CardAbsentLabel"
+        Text="{Loc 'banking-program-ui-card-absent'}"
+        Visible="False" />
+    <Label Name="CardInvalidLabel"
+        Text="{Loc 'banking-program-ui-card-invalid'}"
+        Visible="False" />
+    <BoxContainer Name="CardValidBox" Orientation="Vertical" Visible="False">
+        <Label Name="AccountIdLabel" />
+        <Label Name="AccountOwnerNameLabel" />
+        <Label Name="AccountBalanceLabel" />
+    </BoxContainer>
+</ui:EconomyBankingUiFragment>

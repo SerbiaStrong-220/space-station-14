@@ -15,6 +15,7 @@
   - !type:GiveItemOnHolidaySpecial
     holiday: MikuDay
     prototype: BoxPerformer
+  economySalaryPrototype: Worker # SS220 Economy
 
 - type: startingGear
   id: MusicianGear

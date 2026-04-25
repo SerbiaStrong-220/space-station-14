@@ -13,6 +13,7 @@
   access:
   - Research
   - Maintenance
+  economySalaryPrototype: Worker # SS220 Economy
 
 - type: startingGear
   id: ScientistGear

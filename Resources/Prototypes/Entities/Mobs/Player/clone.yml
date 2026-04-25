@@ -56,6 +56,7 @@
   - SouthernAccent
   - SpanishAccent
   - StutteringAccent
+  - EconomySalaryReceiver # SS220 Economy
 
 # for job-specific traits etc.
 - type: cloningSettings
