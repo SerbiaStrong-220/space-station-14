@@ -21,6 +21,7 @@
         Security: [ ]
         Service: [ ]
     - type: StationCargoBountyDatabase
+    - type: EconomyDeCentralBank # Economy
 
 - type: entity
   id: BaseStationJobsSpawning
@@ -170,6 +171,8 @@
   abstract: true
   components:
     - type: StationCentcomm
+    - type: EconomyDeCentralBank # Economy
+      isCentralNode: true
 
 - type: entity
   id: BaseStationEvacuation

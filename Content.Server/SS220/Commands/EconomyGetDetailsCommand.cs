@@ -52,7 +52,12 @@ public sealed class EconomyGetDetailsCommand : IConsoleCommand
         {
             var bankCardSystem = _entityManager.System<EconomyBankCardSystem>();
 
-            var options = bankCardSystem.Accounts.Select(c => c.AccountId.ToString()).OrderBy(c => c).ToArray();
+            var bankAccounts = bankCardSystem.GetBankAccounts();
+
+            string[] options = [""];
+
+            if (bankAccounts is not null)
+                options = [.. bankAccounts.Select(c => c.AccountId.ToString()).OrderBy(c => c)];
 
             return CompletionResult.FromHintOptions(options, "AccountId");
         }

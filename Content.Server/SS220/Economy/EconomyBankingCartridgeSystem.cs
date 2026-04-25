@@ -7,7 +7,7 @@ using Content.Shared.SS220.Economy;
 
 namespace Content.Server.SS220.Economy;
 
-public sealed class BankingCartridgeSystem : EntitySystem
+public sealed class EconomyBankingCartridgeSystem : EntitySystem
 {
     [Dependency] private readonly CartridgeLoaderSystem? _cartridgeLoaderSystem = default!;
     [Dependency] private readonly EconomyBankCardSystem _bankCardSystem = default!;

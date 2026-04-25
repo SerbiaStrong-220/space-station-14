@@ -37,14 +37,12 @@ public sealed class EconomyBankCardSystem : SharedEconomyBankCardSystem
     [Dependency] private readonly PopupSystem _popupSystem = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
 
-    public readonly List<BankAccount> Accounts = [];
     private static readonly EntProtoId SpaceCashProto = "SpaceCash";
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawned);
         SubscribeLocalEvent<EconomyBankCardComponent, BeingMicrowavedEvent>(OnMicrowaved);
     }
@@ -74,11 +72,6 @@ public sealed class EconomyBankCardSystem : SharedEconomyBankCardSystem
 
         _popupSystem.PopupEntity(msg, user, user, PopupType.Medium);
         _chatManager.ChatMessageToOne(ChatChannel.Local, msg, msg, EntityUid.Invalid, false, actor.PlayerSession.Channel);
-    }
-
-    private void OnRoundRestart(RoundRestartCleanupEvent ev)
-    {
-        Accounts.Clear();
     }
 
     private void OnPlayerSpawned(PlayerSpawnCompleteEvent ev)
@@ -239,7 +232,8 @@ public sealed class EconomyBankCardSystem : SharedEconomyBankCardSystem
             account = new BankAccount(accountId, accountPin, startingBalance);
         }
 
-        Accounts.Add(account);
+        var bankAccounts = GetBankAccounts();
+        bankAccounts?.Add(account);
 
         return account;
     }
@@ -249,7 +243,9 @@ public sealed class EconomyBankCardSystem : SharedEconomyBankCardSystem
         if (accountId == default)
             return false;
 
-        return Accounts.Any(x => x.AccountId == accountId);
+        var bankAccounts = GetBankAccounts();
+
+        return bankAccounts is not null && bankAccounts.Any(x => x.AccountId == accountId);
     }
 
     public bool TryGetAccount(int accountId, [NotNullWhen(true)] out BankAccount? account)
@@ -260,7 +256,9 @@ public sealed class EconomyBankCardSystem : SharedEconomyBankCardSystem
             return false;
         }
 
-        account = Accounts.FirstOrDefault(x => x.AccountId == accountId);
+        var bankAccounts = GetBankAccounts();
+
+        account = bankAccounts?.FirstOrDefault(x => x.AccountId == accountId);
         return account != null;
     }
 
@@ -277,5 +275,17 @@ public sealed class EconomyBankCardSystem : SharedEconomyBankCardSystem
     public static int GetEmaggedTax(int input)
     {
         return (int)Math.Floor((float)(5 + input / 100)); // HARDCODED TAX
+    }
+
+    public List<BankAccount>? GetBankAccounts()
+    {
+        var enumerator = EntityQueryEnumerator<EconomyDeCentralBankComponent>();
+        while (enumerator.MoveNext(out var _, out var deCentralBankComponent))
+        {
+            if (deCentralBankComponent.IsCentralNode)
+                return deCentralBankComponent.Accounts;
+        }
+
+        return null;
     }
 }
