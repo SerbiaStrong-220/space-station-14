@@ -21,7 +21,7 @@ public sealed class EconomyDeCentralBankSystem : EntitySystem
                     continue;
 
                 comp.IsCentralNode = true;
-                ent.Comp.Accounts.CopyTo([.. comp.Accounts], 0);
+                comp.Accounts.AddRange(ent.Comp.Accounts);
                 break;
             }
         }
@@ -33,9 +33,13 @@ public sealed class EconomyDeCentralBankSystem : EntitySystem
 
         var isCentralNodePresent = false;
 
-        while (enumerator.MoveNext(out var _, out var comp) || isCentralNodePresent)
+        while (enumerator.MoveNext(out var uid, out var comp))
         {
-            isCentralNodePresent = comp is not null && comp.IsCentralNode;
+            if (uid != ent.Owner && comp.IsCentralNode)
+            {
+                isCentralNodePresent = true;
+                break;
+            }
         }
 
         ent.Comp.IsCentralNode = !isCentralNodePresent;

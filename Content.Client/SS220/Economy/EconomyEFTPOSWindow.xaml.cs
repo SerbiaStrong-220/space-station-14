@@ -84,6 +84,7 @@ public sealed partial class EconomyEFTPOSWindow : FancyWindow
         enterBtn.OnPressed += _ => OnEnterButtonPressed?.Invoke();
         KeypadGrid.AddChild(enterBtn);
     }
+
     private void AddKeypadButton(int i)
     {
         var btn = new Button()
