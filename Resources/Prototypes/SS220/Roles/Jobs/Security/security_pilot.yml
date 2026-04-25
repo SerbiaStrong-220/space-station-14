@@ -12,6 +12,7 @@
       species:
       - Felinid
   startingGear: SecurityPilotGear
+  experienceDefinition: SecurityPilotRoleExperience
   icon: "JobIconSecurityPilot"
   supervisors: job-supervisors-hos
   canBeAntag: false

@@ -1,0 +1,28 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: marking
+  id: BrowSmall
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [Human, Dwarf]
+  sprites:
+  - sprite: SS220/Mobs/Customization/brow.rsi
+    state: small
+
+- type: marking
+  id: BrowNormal
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [Human, Dwarf]
+  sprites:
+  - sprite: SS220/Mobs/Customization/brow.rsi
+    state: normal
+
+- type: marking
+  id: BrowUnibrow
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [Human, Dwarf]
+  sprites:
+  - sprite: SS220/Mobs/Customization/brow.rsi
+    state: unibrow

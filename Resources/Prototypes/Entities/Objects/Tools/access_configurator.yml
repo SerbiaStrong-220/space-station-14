@@ -148,6 +148,7 @@
     - Xenoborg
     - GenpopEnter
     - GenpopLeave
+    - Interdyne #SS220 Redwings lost soul
     privilegedIdSlot:
       name: id-card-console-privileged-id
       startingItem: UniversalIDCard

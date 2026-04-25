@@ -85,12 +85,14 @@ public readonly record struct PriedEvent(EntityUid User)
 public record struct GetPryTimeModifierEvent
 {
     public readonly EntityUid User;
+    public readonly EntityUid? Tool; // ss220 fix pry with hand
     public float PryTimeModifier = 1.0f;
     public TimeSpan BaseTime = TimeSpan.FromSeconds(5);
 
-    public GetPryTimeModifierEvent(EntityUid user)
+    public GetPryTimeModifierEvent(EntityUid user, EntityUid? tool = null) // ss220 fix pry with hand
     {
         User = user;
+        Tool = tool; // ss220 fix pry with hand
     }
 }
 

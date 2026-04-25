@@ -1,0 +1,56 @@
+name: "NDA Team Contributor Accepted"
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  accept-contributor:
+    if: >
+      github.event.issue.pull_request &&
+      contains(github.event.comment.body, 'Я согласен') &&
+      contains(github.event.issue.labels.*.name, 'nda-pending')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/create-github-app-token@v3
+        id: app-token
+        with:
+          client-id: ${{ vars.APP_CONTRIBUTOR_CLIENT_ID }}
+          private-key: ${{ secrets.APP_CONTRIBUTOR_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+      - name: Check author and accept
+        uses: actions/github-script@v8
+        with:
+          github-token: ${{ steps.app-token.outputs.token }}
+          script: |
+            if (context.payload.comment.user.login !== context.payload.pull_request.user.login) {
+              return;
+            }
+            try {
+              await github.rest.teams.addOrUpdateMembershipForUserInOrg({
+                org: 'SerbiaStrong-220',
+                team_slug: 'read-only-contributor',
+                username: context.payload.comment.user.login,
+                role: 'member'
+              });
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: `✅ **${context.payload.comment.user.login}**, соглашение принято! Приглашение отправлено. \n\n👉 **[Принять приглашение можно по этой ссылке](https://github.com/orgs/SerbiaStrong-220/invitation)** (или проверьте почту). Добро пожаловать!`
+              });
+              await github.rest.issues.removeLabel({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                name: 'nda-pending'
+              });
+            } catch (error) {
+              console.error(error);
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: `❌ Ошибка при добавлении в команду. @review-managers приглашены для выяснения обстаятельств.`
+              });
+            }

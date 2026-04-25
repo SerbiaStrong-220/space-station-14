@@ -24,6 +24,12 @@
       lateJoinAdditional: false
       mindRoles:
         - MindRoleCultYogg
+      components:
+      - type: AntagFreeSublevelPointsAdd
+        addFreeSublevelPoints: 5
+      - type: AntagAddKnowledge
+        knowledgesToAdd:
+        - CultYoggKnowledge
 
 - type: entity
   id: CultYoggRuleMidPop
@@ -100,3 +106,15 @@
   parent: Traitor
   components:
   - type: TraitorDynamics
+
+- type: entity
+  id: SpaceTrafficControlNeutralEventScheduler
+  parent: BaseGameRule
+  components:
+  - type: BasicStationEventScheduler
+    minimumTimeUntilFirstEvent: 1200 # 20 mins
+    minMaxEventTiming:
+      min: 600 # 10 mins
+      max: 1800 # 30 mins
+    scheduledGameRules: !type:NestedSelector
+      tableId: UnknownShuttlesNeutralTable

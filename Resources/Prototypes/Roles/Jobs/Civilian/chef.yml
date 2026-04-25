@@ -8,6 +8,7 @@
       department: Civilian
       time: 5h # SS220-RoleTime
   startingGear: ChefGear
+  experienceDefinition: ChefRoleExperience # SS220-experience
   icon: "JobIconChef"
   supervisors: job-supervisors-hop
   access:

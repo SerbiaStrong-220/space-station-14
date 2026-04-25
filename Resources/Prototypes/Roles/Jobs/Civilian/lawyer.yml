@@ -8,6 +8,7 @@
       department: Security
       time: 10h # SS220-RoleTime 2
   startingGear: LawyerGear
+  experienceDefinition: LawyerRoleExperience # SS220-experience
   setPreference: true # SS220 return-of-the-lawyer
   icon: "JobIconLawyer"
   supervisors: job-supervisors-magistrate #SS220-Law Department

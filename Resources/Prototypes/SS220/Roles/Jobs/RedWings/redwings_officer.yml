@@ -1,0 +1,26 @@
+- type: job
+  id: RedWingsOfficer
+  name: ghost-role-information-redwings-officer-name
+  description: ghost-role-information-redwings-officer-description
+  playTimeTracker: JobRedWingsOfficer
+  experienceDefinition: SecurityOfficerRoleExperience
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 50h
+    - !type:RoleTimeRequirement
+      role: JobParamedic
+      time: 10h
+    - !type:RoleTimeRequirement
+      role: JobBlueShield
+      time: 10h
+  canBeAntag: false
+  icon: JobIconRedWingsOfficer
+  setPreference: false
+  overrideConsoleVisibility: true
+  access:
+  - Medical
+  - Brig
+  - Maintenance
+  - External
+  - Interdyne

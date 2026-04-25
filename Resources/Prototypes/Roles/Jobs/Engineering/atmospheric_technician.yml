@@ -8,6 +8,7 @@
       department: Engineering
       time: 10h # SS220-RoleTime 2
   startingGear: AtmosphericTechnicianGear
+  experienceDefinition: AtmosphericTechnicianRoleExperience #SS220-experience
   icon: "JobIconAtmosphericTechnician"
   supervisors: job-supervisors-ce
   access:

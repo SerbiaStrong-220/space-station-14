@@ -1,0 +1,113 @@
+- type: experienceDefinition
+  id: ERTLeaderRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    ExtravehicularActivity:
+      level: 3
+    CombatTraining:
+      level: 3
+    Construction:
+      level: 2
+    Medicine:
+      level: 2
+    PhysicalTraining:
+      level: 3
+  knowledges:
+  - CentCommKnowledge
+  - InformedPersonalKnowledge
+  addSublevelPoints: 10
+
+- type: experienceDefinition
+  id: ERTChaplainRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    ExtravehicularActivity:
+      level: 2
+    CombatTraining:
+      level: 2
+    Construction:
+      level: 2
+    Medicine:
+      level: 2
+    PhysicalTraining:
+      level: 3
+  knowledges:
+  - CentCommKnowledge
+  - SupernaturalBookKnowledge
+
+- type: experienceDefinition
+  id: ERTEngineerRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    ExtravehicularActivity:
+      level: 3
+    CombatTraining:
+      level: 2
+    Construction:
+      level: 3
+    Medicine:
+      level: 2
+    PhysicalTraining:
+      level: 3
+  knowledges:
+  - CentCommKnowledge
+  - EngineerKnowledge
+
+- type: experienceDefinition
+  id: ERTSecurityRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    ExtravehicularActivity:
+      level: 2
+    CombatTraining:
+      level: 3
+    Construction:
+      level: 2
+    Medicine:
+      level: 2
+    PhysicalTraining:
+      level: 3
+  knowledges:
+  - CentCommKnowledge
+  - SecurityKnowledge
+
+- type: experienceDefinition
+  id: ERTMedicalRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    ExtravehicularActivity:
+      level: 2
+    CombatTraining:
+      level: 2
+    Construction:
+      level: 2
+    Medicine:
+      level: 3
+    PhysicalTraining:
+      level: 3
+  knowledges:
+  - CentCommKnowledge
+  - MedicalKnowledge
+
+- type: experienceDefinition
+  id: ERTJanitorRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    ExtravehicularActivity:
+      level: 2
+    CombatTraining:
+      level: 2
+    Construction:
+      level: 2
+    Medicine:
+      level: 2
+    PhysicalTraining:
+      level: 3
+  knowledges:
+  - CentCommKnowledge

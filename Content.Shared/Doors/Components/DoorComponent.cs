@@ -273,6 +273,11 @@ public sealed partial class DoorComponent : Component
     [DataField]
     public TimeSpan PryTime = TimeSpan.FromSeconds(1.5f);
 
+    // ss220 fix pry with hand start
+    [DataField]
+    public TimeSpan HandPryTime = TimeSpan.FromSeconds(1.5f);
+    // ss220 fix pry with hand end
+
     [DataField]
     public bool ChangeAirtight = true;
 

@@ -156,6 +156,19 @@
       backgroundPatchMargin: 16.0, 16.0, 16.0, 16.0
       contentMargin: 32.0, 16.0, 32.0, 0.0
 
+- type: entity
+  name: paper
+  parent: Paper
+  id: PaperInterdyneForm
+  suffix: Interdyne Form
+  description: "A sheet of office paper. The logo on it looks a bit suspicious."
+  components:
+    - type: PaperVisuals
+      headerImagePath: "/Textures/SS220/Interface/Paper/interdyne_pharm_form_header.png"
+      backgroundImagePath: "/Textures/Interface/Paper/paper_background_default.svg.96dpi.png"
+      backgroundPatchMargin: 16.0, 16.0, 16.0, 16.0
+      contentMargin: 32.0, 16.0, 32.0, 0.0
+
 # Added new CentComm clipboard and folder begin
 
 - type: entity
@@ -619,6 +632,21 @@
     - type: Paper
       contentSize: 10000
       content: station-goal-sports
+
+- type: entity
+  parent: PaperInterdyneForm
+  id: RedWingsClientPaper
+  name: list of Red Wings' clients
+  description: List of clients in this sector.
+  components:
+  - type: RedWingsClientPaper
+  - type: Paper
+    stampState: paper_stamp-syndicate
+    stampedBy:
+     - stampedName: Interdyne Pharmaceutics
+       stampedColor: "#3b704f"
+     - stampedName: Red Wings
+       stampedColor: "#902922"
 
 # Отчёт от анилизатора здоровья - SS220-health-analyzer-report
 - type: entity

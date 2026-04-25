@@ -46,16 +46,13 @@
         base:
           Primed: { state: primed }
           Unprimed: { state: icon }
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-SpiderCharge-ninja
-      whitelistMindRoles:
-      - NinjaRole
-    - label: corvax-hidden-desc-SpiderCharge-research
-      jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
-# Corvax-HiddenDesc-End
+      NinjaKnowledge: [ corvax-hidden-desc-SpiderCharge-ninja ]
+      ScienceKnowledge: [ corvax-hidden-desc-SpiderCharge-research ]
+    nameEntries:
+    - [NinjaKnowledge, null]
+    - [ScienceKnowledge, null]
+    hiddenName: ent-SpiderCharge
+# SS220-hidden-desc-end

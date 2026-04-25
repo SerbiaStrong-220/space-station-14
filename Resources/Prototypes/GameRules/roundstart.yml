@@ -115,7 +115,7 @@
   id: Nukeops
   components:
   - type: GameRule
-    minPlayers: 35 # SS220 Nukeops ratio fix
+    minPlayers: 25 # SS220 Nukeops ratio fix
   - type: LoadMapRule
     mapPath: /Maps/SS220/ss220-nukeoutpost.yml
   - type: AntagSelection
@@ -132,6 +132,10 @@
       roleLoadout:
       - RoleSurvivalNukie
       components:
+      # SS220-experience-update-begin
+      - type: RoleExperienceAdd
+        definitionId: SyndicateCommanderRoleExperience
+      # SS220-experience-update-end
       - type: NukeOperative
       - type: RandomMetadata
         nameSegments:
@@ -153,6 +157,10 @@
       roleLoadout:
       - RoleSurvivalNukie
       components:
+      # SS220-experience-update-begin
+      - type: RoleExperienceAdd
+        definitionId: SyndicateMedicRoleExperience
+      # SS220-experience-update-end
       - type: NukeOperative
       - type: RandomMetadata
         nameSegments:
@@ -169,11 +177,14 @@
       min: 0 # SS220 Nukeops ratio fix
       max: 3
       playerRatio: 23 # SS220 Nukeops ratio fix
-      addPlayerCountPerRatio: 1 # SS220-nuke-spawn-in-segment
       startingGear: SyndicateOperativeGearFull
       roleLoadout:
       - RoleSurvivalNukie
       components:
+      # SS220-experience-update-begin
+      - type: RoleExperienceAdd
+        definitionId: SyndicateOperativeRoleExperience
+      # SS220-experience-update-end
       - type: NukeOperative
       - type: RandomMetadata
         nameSegments:
@@ -225,6 +236,14 @@
       lateJoinAdditional: true # ss220 traitor latejoin back
       mindRoles:
       - MindRoleTraitor
+      # SS220-experience-update-begin
+      components:
+      - type: AntagFreeSublevelPointsAdd
+        addFreeSublevelPoints: 10
+      - type: AntagAddKnowledge
+        knowledgesToAdd:
+        - SyndicateAgentKnowledge
+      # SS220-experience-update-end
 
 #- type: entity
 #  id: Sandbox
@@ -246,6 +265,14 @@
     - prefRoles: [ Traitor ]
       mindRoles:
       - MindRoleTraitorReinforcement
+      # SS220-experience-update-begin
+      components:
+      - type: AntagFreeSublevelPointsAdd
+        addFreeSublevelPoints: 10
+      - type: AntagAddKnowledge
+        knowledgesToAdd:
+        - SyndicateAgentKnowledge
+      # SS220-experience-update-end
   #ss220 reinforcement objective fix begin
   - type: AntagRandomObjectives
     enabled: false
@@ -269,6 +296,10 @@
         color: Red
         sound: /Audio/Ambience/Antag/changeling_start.ogg
       components:
+      # SS220-experience-update-begin
+      - type: AntagFreeSublevelPointsAdd
+        addFreeSublevelPoints: 10
+      # SS220-experience-update-end
       - type: ChangelingDevour
       - type: ChangelingIdentity
       - type: ChangelingTransform
@@ -300,6 +331,10 @@
         sound: "/Audio/Ambience/Antag/headrev_start.ogg"
       startingGear: HeadRevGear
       components:
+      # SS220-experience-update-begin
+      - type: AntagFreeSublevelPointsAdd
+        addFreeSublevelPoints: 10
+      # SS220-experience-update-end
       - type: Revolutionary
       - type: HeadRevolutionary
       mindRoles:
