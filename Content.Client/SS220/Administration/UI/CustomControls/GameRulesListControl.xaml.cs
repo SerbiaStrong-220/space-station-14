@@ -76,7 +76,7 @@ public sealed partial class GameRulesListControl : BoxContainer
 
     private string GetText(GameRuleInfo info)
     {
-        var text = $"{_entityManager.GetEntity(info.Entity)} - {info.Name}";
+        var text = $"n{info.Entity} - {info.Name}";
         if (OverrideText != null)
             text = OverrideText.Invoke(info, text);
         return text;
