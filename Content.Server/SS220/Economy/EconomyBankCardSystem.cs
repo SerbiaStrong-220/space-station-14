@@ -38,7 +38,7 @@ public sealed class EconomyBankCardSystem : SharedEconomyBankCardSystem
     [Dependency] private readonly IChatManager _chatManager = default!;
 
     public readonly List<BankAccount> Accounts = [];
-    private static readonly ProtoId<StackPrototype> SpaceCashProto = "SpaceCash";
+    private static readonly EntProtoId SpaceCashProto = "SpaceCash";
 
     public override void Initialize()
     {
