@@ -21,12 +21,12 @@
   components:
   - type: Sprite
     layers:
-      - state: explosive
+      - state: tranquilizer
         map: [ "enum.AmmoVisualLayers.Base" ]
   - type: CartridgeAmmo
     proto: PelletShotgunSlugExplosive
   - type: SpentAmmoVisuals
-    state: "explosive"
+    state: "tranquilizer"
 
 - type: entity
   id: ShellShotgunSlugMagnesium

@@ -7,4 +7,22 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 36 
+        Piercing: 36
+
+- type: entity
+  id: BulletPistolHP
+  name: bullet (9x20 HP)
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 27
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#cf0404"

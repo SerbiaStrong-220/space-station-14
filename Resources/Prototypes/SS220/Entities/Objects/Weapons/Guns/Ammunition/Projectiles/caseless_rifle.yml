@@ -1,0 +1,10 @@
+- type: entity
+  id: BulletCaselessRifleHP
+  name: bullet (8x18 caseless HPIB)
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 26

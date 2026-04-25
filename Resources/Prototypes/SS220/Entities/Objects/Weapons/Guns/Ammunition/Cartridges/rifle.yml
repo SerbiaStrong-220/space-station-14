@@ -1,6 +1,6 @@
 - type: entity
   id: CartridgeRifleAP
-  name: cartridge (.20 rifle AP)
+  name: cartridge (6,3x47 rifle AP)
   parent: BaseCartridgeRifle
   description: A modern intermediate cartridge for combat rifles. This one has a uranium core that is especially good against armor.
   components:
@@ -9,7 +9,7 @@
 
 - type: entity
   id: CartridgeRifleExplosive
-  name: cartridge (.20 rifle incendiary)
+  name: cartridge (6,3x47 rifle incendiary)
   parent: BaseCartridgeRifle
   description: A modern intermediate cartridge for combat rifles. This one has 'incendiary' payload with a primer in it.
   components:
@@ -18,7 +18,7 @@
 
 - type: entity
   id: CartridgeRifleHP
-  name: cartridge (.20 rifle HPIB)
+  name: cartridge (6,3x47 rifle HPIB)
   parent: BaseCartridgeRifle
   description: A modern intermediate cartridge for combat rifles. This one has a cavity full of hard polymer instead of it's core.
   components:

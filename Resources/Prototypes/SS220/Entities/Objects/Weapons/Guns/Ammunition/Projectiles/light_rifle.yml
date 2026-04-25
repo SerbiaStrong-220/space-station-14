@@ -1,0 +1,11 @@
+- type: entity
+  id: BulletLightRifleHP
+  name: bullet (7,62x41 HP)
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 37 #ss220lowTTKUpdate
+      armourPiercing: 6

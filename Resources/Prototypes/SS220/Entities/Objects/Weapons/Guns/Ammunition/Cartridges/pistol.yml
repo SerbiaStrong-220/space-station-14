@@ -16,3 +16,20 @@
   - type: Appearance
   - type: SpentAmmoVisuals
 
+- type: entity
+  id: CartridgePistolHP
+  name: cartridge (9x20 HPIB)
+  description: Arguably the most popular caliber on the market, used by all manner of pistols and submachine guns. HPIB ammo is very effective against unarmored targets.
+  parent: BaseCartridgePistol
+  components:
+  - type: CartridgeAmmo
+    proto: BulletPistolHP
+  -  type: Sprite
+     layers:
+       - state: base
+         map: [ "enum.AmmoVisualLayers.Base" ]
+       - state: tip
+         map: [ "enum.AmmoVisualLayers.Tip" ]
+         color: "#cf0404"
+
+
