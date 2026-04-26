@@ -22,6 +22,7 @@ public sealed partial class MobThresholdsModifierEffectSystem : EntityEffectSyst
         else
             statusEffectsSys.TryAddStatusEffectDuration(entity, args.Effect.StatusEffectId, args.Effect.Duration);
 
-        _mobThreshold.RefreshModifiers(entity);
+        if (args.Effect.DependsOnAdaptation)
+            _mobThreshold.RefreshModifiers(entity);
     }
 }
