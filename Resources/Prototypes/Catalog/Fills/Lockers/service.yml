@@ -18,6 +18,7 @@
     - id: ClothingEyesHudBeer
     - id: HandLabeler
     - id: EconomyEFTPOS # SS220 Economy
+    - id: HookahBase        # SS220 hookah
     - id: DrinkBeerBottleFull
       amount: !type:BinomialNumberSelector
         trials: 3
