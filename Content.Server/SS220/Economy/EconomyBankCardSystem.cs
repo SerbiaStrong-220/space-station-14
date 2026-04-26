@@ -39,6 +39,9 @@ public sealed class EconomyBankCardSystem : SharedEconomyBankCardSystem
 
     private static readonly EntProtoId SpaceCashProto = "SpaceCash";
 
+    public const int FlatEmaggedTax = 5;
+    public const int PercentEmaggedTax = 1;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -274,7 +277,7 @@ public sealed class EconomyBankCardSystem : SharedEconomyBankCardSystem
 
     public static int GetEmaggedTax(int input)
     {
-        return (int)Math.Floor((float)(5 + input / 100)); // HARDCODED TAX
+        return (int)Math.Floor(FlatEmaggedTax + (float)(input / 100 * PercentEmaggedTax));
     }
 
     public List<BankAccount>? GetBankAccounts()
