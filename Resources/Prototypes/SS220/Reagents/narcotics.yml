@@ -90,7 +90,7 @@
       - !type:MobThresholdsModifier
         statusEffectId: MobThresholdsModifierAglomorphine
         duration: 5
-        refresh: true
+        refresh: false
     Medicine:
       metabolismRate: 0.5
       effects:
@@ -162,7 +162,7 @@
         statusEffectId: MobThresholdsModifierFrontier
         dependsOnAdaptation: true
         duration: 5
-        refresh: true
+        refresh: false
       - !type:StaminaChange
         probability: 0.1
         value: 10
