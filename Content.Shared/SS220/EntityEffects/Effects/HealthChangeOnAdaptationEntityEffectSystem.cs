@@ -34,7 +34,7 @@ public sealed partial class HealthChangeOnAdaptationEntityEffectSystem : EntityE
 
         _damageable.TryChangeDamage(
                 entity,
-                damageSpec,
+                modifiedDamage,
                 args.Effect.IgnoreResistances,
                 interruptsDoAfters: false);
     }
