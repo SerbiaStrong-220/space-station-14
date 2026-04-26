@@ -103,6 +103,11 @@
       289: 0.8
       275: 0.6
       250: 0.4
+  - type: ScotopicVision
+    radius: 6
+    energy: 0.12
+    softness: 1
+    color: "#ffffff"
   - type: KeenHearing
     visionRadius: 5
     highSensitiveVisionRadius: 2
