@@ -47,7 +47,12 @@
   id: TraitorObjectiveGroupSocial
   weights:
 #    RandomTraitorAliveObjective: 1 - Removed because the objective was boring and didn't progress the round.
-    RandomTraitorProgressObjective: 1
+    # ss220 upraise midround events begin
+    RandomTraitorProgressObjective: 4
+    TraitorIntimidateBruteTargetObjective: 5 # easiest
+    TraitorIntimidateBurnTargetObjective: 3
+    TraitorIntimidateToxinTargetObjective: 1 # hardest
+     # ss220 upraise midround events end
 
 #Thief groups
 - type: weightedRandom

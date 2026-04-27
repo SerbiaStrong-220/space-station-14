@@ -221,7 +221,7 @@
   id: DragonSpawn
   components:
   - type: StationEvent
-    weight: 6.5
+    weight: 9.5 # ss220 upraise midround events
     earliestStart: 40
     reoccurrenceDelay: 20
     minimumPlayers: 20
@@ -252,7 +252,7 @@
   id: NinjaSpawn
   components:
   - type: StationEvent
-    weight: 6
+    weight: 9 # ss220 upraise midround events
     duration: null
     earliestStart: 30
     reoccurrenceDelay: 20
@@ -324,7 +324,7 @@
   id: ParadoxCloneSpawn
   components:
   - type: StationEvent
-    weight: 5
+    weight: 8 # ss220 upraise midround events
     duration: null
     earliestStart: 20
     reoccurrenceDelay: 20
@@ -362,7 +362,7 @@
   id: RevenantSpawn
   components:
   - type: StationEvent
-    weight: 7.5
+    weight: 10.5 # ss220 upraise midround events
     duration: 1
     earliestStart: 45
     minimumPlayers: 20
@@ -374,7 +374,7 @@
   id: WizardSpawn
   components:
   - type: StationEvent
-    weight: 0.1 # SS 220 0.1 weight wiz spawn midround
+    weight: 0.2 # ss220 upraise midround events
     duration: 1
     earliestStart: 30
     reoccurrenceDelay: 60
@@ -634,7 +634,7 @@
   - type: StationEvent
     earliestStart: 50
     minimumPlayers: 30
-    weight: 1 # SS220 Zombie tweak
+    weight: 5 # ss220 upraise midround events
     duration: 1
   - type: ZombieRule
   - type: AntagSelection
@@ -718,7 +718,7 @@
   components:
   - type: StationEvent
     earliestStart: 30
-    weight: 8
+    weight: 9 # ss220 upraise midround events
     minimumPlayers: 15
     maxOccurrences: 1 # can only happen once per round
     startAnnouncement: station-event-communication-interception

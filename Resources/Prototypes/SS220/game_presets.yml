@@ -23,7 +23,10 @@
   maxPlayers: 59 # WARNING: this should be always synced with other cult game rules and presets!
   rules:
   - CultYoggRuleMidPop
+  - BasicRoundstartVariation
+  - SubGamemodesRule
   - NoNewCrewAntagsStationEventScheduler
+  - SpaceTrafficControlFriendlyEventScheduler
   - EmergencyShuttleAutoVote
 
 
@@ -38,7 +41,11 @@
   minPlayers: 60 # WARNING: this should be always synced with other cult game rules and presets!
   rules:
   - CultYoggRuleHighPop
+  - BasicRoundstartVariation
+  - SubGamemodesRule
+  - MeteorSwarmScheduler
   - NoNewCrewAntagsStationEventScheduler
+  - SpaceTrafficControlFriendlyEventScheduler
   - EmergencyShuttleAutoVote
 
 - type: gamePreset
@@ -90,8 +97,8 @@
     - id: KingRatMigration
     - id: NinjaSpawn
     - id: RevenantSpawn
-    #- id: SleeperAgents
-    #- id: ZombieOutbreak
+    - id: SleeperAgents
+    # - id: ZombieOutbreak
     - id: DarkReaperSpawn #ss220 darkreaper middle event
     - id: SpiderQueenSpawn #SS220 spider queen midround event
     - id: LoneOpsSpawn

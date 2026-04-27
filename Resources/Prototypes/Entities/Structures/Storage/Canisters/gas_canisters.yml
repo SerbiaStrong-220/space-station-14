@@ -36,6 +36,7 @@
             2: { state: can-o2, shader: "unshaded" }
             3: { state: can-o3, shader: "unshaded" }
     - type: ActivatableUI
+      blockSpectators: true # ss220 fix spam sounds from ghost while activate canister
       key: enum.GasCanisterUiKey.Key
     - type: UIRequiresLock
       userInterfaceKeys:
