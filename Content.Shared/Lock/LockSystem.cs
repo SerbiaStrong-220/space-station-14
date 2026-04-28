@@ -5,9 +5,11 @@ using Content.Shared.Construction.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Emag.Systems;
 using Content.Shared.Examine;
+using Content.Shared.Ghost;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
+using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Storage;
 using Content.Shared.Storage.Components;
 using Content.Shared.UserInterface;
@@ -71,6 +73,10 @@ public sealed class LockSystem : EntitySystem
         if (args.Handled || !args.Complex)
             return;
 
+        // SS220 fix ghosts should not interact with borg locks
+        if (HasComp<GhostComponent>(args.User) && HasComp<BorgChassisComponent>(uid))
+            return;
+
         // Only attempt an unlock by default on Activate
         if (lockComp.Locked && lockComp.UnlockOnClick)
         {
@@ -89,6 +95,10 @@ public sealed class LockSystem : EntitySystem
         if (!component.Locked)
             return;
 
+        // SS220 fix ghosts should not interact with borg locks
+        if (HasComp<GhostComponent>(args.User) && HasComp<BorgChassisComponent>(uid))
+            return;
+
         if (!args.Silent)
             _sharedPopupSystem.PopupClient(Loc.GetString("entity-storage-component-locked-message"), uid, args.User);
 
@@ -98,6 +108,10 @@ public sealed class LockSystem : EntitySystem
     private void OnExamined(EntityUid uid, LockComponent lockComp, ExaminedEvent args)
     {
         if (!lockComp.ShowExamine)
+            return;
+
+        // SS220 fix ghosts should not interact with borg locks
+        if (HasComp<GhostComponent>(args.Examiner) && HasComp<BorgChassisComponent>(uid))
             return;
 
         args.PushText(Loc.GetString(lockComp.Locked
@@ -418,6 +432,10 @@ public sealed class LockSystem : EntitySystem
         if (args.Cancelled)
             return;
 
+        // SS220 fix ghosts should not interact with borg locks
+        if (HasComp<GhostComponent>(args.User) && HasComp<BorgChassisComponent>(uid))
+            return;
+
         if (!TryComp<LockComponent>(uid, out var lockComp) || lockComp.Locked == component.RequireLocked)
             return;
 
@@ -450,6 +468,10 @@ public sealed class LockSystem : EntitySystem
     private void OnActivateAttempt(EntityUid uid, ItemToggleRequiresLockComponent component, ref ItemToggleActivateAttemptEvent args)
     {
         if (args.Cancelled)
+            return;
+
+        // Ghosts should not trigger borg lock activation attempts
+        if (HasComp<GhostComponent>(args.User) && HasComp<BorgChassisComponent>(uid))
             return;
 
         if (!TryComp<LockComponent>(uid, out var lockComp) || lockComp.Locked == component.RequireLocked)
