@@ -937,3 +937,54 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
+
+- type: construction
+  id: CurbWood
+  graph: CurbWood
+  startNode: start
+  targetNode: curbWood
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+
+- type: construction
+  id: CurbWoodCorner
+  name: construction-recipe-railing-corner
+  graph: CurbWood
+  startNode: start
+  targetNode: curbWoodCorner
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+
+- type: construction
+  id: CurbWoodCornerSmall
+  name: construction-recipe-railing-corner-small
+  graph: CurbWood
+  startNode: start
+  targetNode: curbWoodCornerSmall
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+
+- type: construction
+  id: CurbWoodRound
+  name: construction-recipe-railing-round
+  graph: CurbWood
+  startNode: start
+  targetNode: curbWoodRound
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked

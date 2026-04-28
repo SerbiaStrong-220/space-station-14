@@ -1,0 +1,86 @@
+- type: constructionGraph
+  id: CurbWood
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: CurbWood
+          completed:
+            - !type:SnapToGrid { }
+          steps:
+            - material: MaterialWoodPlank
+              amount: 1
+              doAfter: 2
+        - to: CurbWoodCorner
+          completed:
+            - !type:SnapToGrid { }
+          steps:
+            - material: MaterialWoodPlank
+              amount: 2
+              doAfter: 2.5
+        - to: CurbWoodCornerSmall
+          completed:
+            - !type:SnapToGrid { }
+          steps:
+            - material: MaterialWoodPlank
+              amount: 1
+              doAfter: 2
+        - to: CurbWoodRound
+          completed:
+            - !type:SnapToGrid { }
+          steps:
+            - material: MaterialWoodPlank
+              amount: 2
+              doAfter: 2
+
+    - node: curbWood
+      entity: CurbWood
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: MaterialWoodPlank
+              amount: 1
+            - !type:DeleteEntity
+          steps:
+            - tool: Screwing
+              doAfter: 0.25
+
+    - node: curbWoodCorner
+      entity: CurbWoodCorner
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: MaterialWoodPlank
+              amount: 2
+            - !type:DeleteEntity
+          steps:
+            - tool: Screwing
+              doAfter: 0.5
+
+    - node: curbWoodCornerSmall
+      entity: CurbWoodCornerSmall
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: MaterialWoodPlank
+              amount: 1
+            - !type:DeleteEntity
+          steps:
+            - tool: Screwing
+              doAfter: 0.25
+
+    - node: curbWoodRound
+      entity: CurbWoodRound
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: MaterialWoodPlank
+              amount: 2
+            - !type:DeleteEntity
+          steps:
+            - tool: Screwing
+              doAfter: 0.5
