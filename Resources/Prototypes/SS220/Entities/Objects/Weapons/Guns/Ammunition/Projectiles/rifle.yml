@@ -1,6 +1,6 @@
 - type: entity
   id: BulletRifleAP
-  name: bullet (.20 rifle AP)
+  name: bullet (6,3x47 rifle AP)
   parent: BaseBulletAP
   categories: [ HideSpawnMenu ]
   components:
@@ -16,7 +16,7 @@
 
 - type: entity
   id: BulletRifleHP
-  name: bullet (.20 rifle HPIB)
+  name: bullet (6,3x47 rifle HPIB)
   parent: BaseBulletHP
   categories: [ HideSpawnMenu ]
   components:

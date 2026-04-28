@@ -28,7 +28,7 @@
     maxIntensity: 2
     intensitySlope: 1
     totalIntensity: 4
-    maxTileBreak: 1
+    maxTileBreak: 0
 
 - type: entity
   id: PelletShotgunSlugMagnesium

@@ -27,10 +27,8 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 16 #ss220lowTTKUpdate
+        Blunt: 25 #ss220lowTTKUpdate
       armourPiercing: -10 #SS220 armor piercing added
-  - type: StaminaDamageOnCollide
-    damage: 60 # 2 hits to stun #ss220lowTTKUpdate
 
 - type: entity
   id: PelletShotgun
@@ -70,7 +68,8 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 10 #ss220weaponBalance #Incendary rebalance
+        Piercing: 7 #ss220weaponBalance #Incendary rebalance
+      armourPiercing: -30 #SS220 armor piercing added
   - type: IgnitionSource
     ignited: true
   - type: IgniteOnCollide #SS220 weapon overhaul
