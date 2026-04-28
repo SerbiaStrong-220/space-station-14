@@ -596,12 +596,6 @@
         behaviors:
           - !type:DoActsBehavior
             acts: [ "Destruction" ]
-      - trigger:
-          !type:DamageTrigger
-          damage: 25
-        behaviors:
-          - !type:DoActsBehavior
-            acts: [ "Destruction" ]
           - !type:PlaySoundBehavior
             sound:
               collection: MetalBreak

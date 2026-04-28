@@ -77,24 +77,13 @@
     thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 100
-        behaviors:
-          - !type:DoActsBehavior
-            acts: [ "Destruction" ]
-      - trigger:
-          !type:DamageTrigger
-          damage: 80
+          damage: 60
         behaviors:
           - !type:DoActsBehavior
             acts: [ "Destruction" ]
           - !type:PlaySoundBehavior
             sound:
               collection: MetalBreak
-          - !type:SpawnEntitiesBehavior
-            spawn:
-              SheetSteel:
-                min: 0
-                max: 2
   - type: Tag
     tags:
     - HamsterWearable

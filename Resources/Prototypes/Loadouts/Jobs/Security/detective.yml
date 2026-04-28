@@ -38,27 +38,6 @@
   equipment:
     jumpsuit: ClothingUniformJumpskirtDetectiveGrey
 
- #SS220
-- type: loadout
-  id: DetectiveJumpsuitBlackRedShirt
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitDetectiveBlackRedShirt
-
-- type: loadout
-  id: DetectiveJumpskirtBlackRedShirt
-  equipment:
-    jumpsuit: ClothingUniformJumpskirtDetectiveBlackRedShirt
-
-- type: loadout
-  id: DetectiveJumpsuitBlackWhiteShirt
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitDetectiveBlackWhiteShirt
-
-- type: loadout
-  id: DetectiveJumpskirtBlackWhiteShirt
-  equipment:
-    jumpsuit: ClothingUniformJumpskirtDetectiveBlackWhiteShirt
-
 # OuterClothing
 - type: loadout
   id: DetectiveArmorVest
