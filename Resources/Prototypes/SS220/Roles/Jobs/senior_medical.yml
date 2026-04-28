@@ -31,7 +31,6 @@
   equipment:
     id: SeniorPhysicianPDA
     ears: ClothingHeadsetMedical
-    belt: ClothingBeltMedicalFilled
 
 - type: chameleonOutfit
   id: SeniorPhysicianChameleonOutfit

@@ -401,6 +401,7 @@
     implantAction: ActionActivateScramImplant
   - type: TriggerOnActivateImplant
   - type: ScramOnTrigger
+    teleportRadius: 25.0,40.0 # SS220-make-scram-more-usefull
     targetUser: true
   # hidden-desc-begin
   - type: HiddenDescription
