@@ -1,5 +1,6 @@
 using Content.Shared.ActionBlocker;
 using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.Power.Components;
 
 namespace Content.Shared.Stunnable;
 
@@ -17,7 +18,7 @@ public abstract class SharedStunbatonSystem : EntitySystem
 
     protected virtual void TryTurnOn(Entity<StunbatonComponent> entity, ref ItemToggleActivateAttemptEvent args)
     {
-        if (args.User != null && !_actionBlocker.CanComplexInteract(args.User.Value)) {
+        if (args.User != null && !_actionBlocker.CanComplexInteract(args.User.Value) || !TryComp<BatteryComponent>(entity, out var battery) || battery.CurrentCharge < entity.Comp.EnergyPerUse) { //SS220 stun overhaul
             args.Cancelled = true;
             return;
         }

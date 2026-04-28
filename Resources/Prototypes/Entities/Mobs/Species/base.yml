@@ -69,6 +69,7 @@
         color: "#FF0000"
       Burn:
         sprite: Mobs/Effects/burn_damage.rsi
+  - type: StaminaDamageConversion #SS220 stun rework
   - type: GenericVisualizer
     visuals:
       enum.CreamPiedVisuals.Creamed:

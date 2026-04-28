@@ -32,7 +32,8 @@
       path: /Audio/Weapons/egloves.ogg #ss220 stunprod stamina damage fix
     activatedDamage:
       types:
-        Blunt: 0 #ss220 stunprod fix
+        Blunt: 9 #ss220 stun overhaul
+        Shock: 7 #ss220 stun overhaul
   - type: Stunbaton
     energyPerUse: 120
   - type: MeleeWeapon
@@ -42,13 +43,6 @@
         Blunt: 9
     angle: 60
     animation: WeaponArcThrust
-  - type: StaminaDamageOnHit
-    damage: 35 #ss220 stunprod stamina damage
-    sound: /Audio/Weapons/egloves.ogg
-  - type: StaminaDamageOnCollide
-    damage: 35 #ss220 stunprod stamina damage
-    sound: /Audio/Weapons/egloves.ogg
-  #ss220 stunprod stamina damage fix begin
   - type: DamageOtherOnHit
     damage:
       types:
