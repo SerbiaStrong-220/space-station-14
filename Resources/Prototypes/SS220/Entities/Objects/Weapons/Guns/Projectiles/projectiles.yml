@@ -81,15 +81,10 @@
     impactEffect: BulletImpactEffectGreenLaser
     damage:
       types:
-        Poison: 15
+        Poison: 35
     soundHit:
       collection: WeakHit
     forceSound: true
-  - type: StaminaDamageOnCollide
-    damage: 25 #weaponBalance
-  - type: StunOnCollide
-    stunAmount: 2 #weaponBalance #ss220 fix 4 -> 2
-    knockdownAmount: 2 #weaponBalance
 
 - type: entity
   name: energy crossbow bolt
@@ -100,12 +95,7 @@
   - type: Projectile
     damage:
       types:
-        Poison: 10
-  - type: StaminaDamageOnCollide
-    damage: 55 #weaponBalance
-  - type: StunOnCollide
-    stunAmount: 1 #weaponBalance
-    knockdownAmount: 1 #weaponBalance
+        Poison: 30
 
 
 - type: entity
