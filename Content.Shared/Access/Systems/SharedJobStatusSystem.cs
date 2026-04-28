@@ -16,7 +16,7 @@ public abstract class SharedJobStatusSystem : EntitySystem
 
     private static readonly ProtoId<JobIconPrototype> JobIconForNoId = "JobIconNoId";
 
-    private static readonly ProtoId<JobIconPrototype> JobIconForBorg = "JobIconBorg"; /// SS220 Add borg icon
+    private static readonly ProtoId<JobIconPrototype> JobIconForBorg = "JobIconBorg"; // SS220 Add borg icon
 
     public override void Initialize()
     {
@@ -61,10 +61,10 @@ public abstract class SharedJobStatusSystem : EntitySystem
             }
         }
 
-        /// SS220 Add borg icon for hud begin
+        // SS220 Add borg icon for hud begin
         if (HasComp<BorgChassisComponent>(ent) && iconId == JobIconForNoId)
             iconId = JobIconForBorg;
-        /// SS220 Add borg icon for hud end
+        // SS220 Add borg icon for hud end
 
         ent.Comp.JobStatusIcon = iconId;
         ent.Comp.IsCrew = _prototype.Index(iconId).IsCrewJob;

@@ -199,21 +199,25 @@ public sealed partial class InjectorSystem : EntitySystem
     private bool TryMobsDoAfter(Entity<InjectorComponent> injector, EntityUid user, EntityUid target)
     {
         //ss220 needleprotection begin
-        if (HasComp<NeedleProtectionComponent>(target) && !injector.Comp.IgnoreProtection)
+        if (!injector.Comp.IgnoreProtection)
         {
-            _popup.PopupEntity(Loc.GetString("loc-hypo-protection-popup"), injector, user);
-            return false;
-        }
-
-        if (_inventory.TryGetSlots(target, out var slots) && !injector.Comp.IgnoreProtection)
-        {
-            foreach (var slot in slots)
+            var hasNeedleProtection = HasComp<NeedleProtectionComponent>(target);
+            if (!hasNeedleProtection && _inventory.TryGetSlots(target, out var slots))
             {
-                if (_inventory.TryGetSlotEntity(target, slot.Name, out var item) && HasComp<NeedleProtectionComponent>(item))
+                foreach (var slot in slots)
                 {
-                    _popup.PopupEntity(Loc.GetString("loc-hypo-protection-popup"), injector, user);
-                    return false;
+                    if (_inventory.TryGetSlotEntity(target, slot.Name, out var item) && HasComp<NeedleProtectionComponent>(item))
+                        continue;
+
+                    hasNeedleProtection = true;
+                    break;
                 }
+            }
+
+            if (hasNeedleProtection)
+            {
+                _popup.PopupEntity(Loc.GetString("loc-hypo-protection-popup"), injector, user);
+                return false;
             }
         }
         //ss220 needleprotection end
