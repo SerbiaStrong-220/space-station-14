@@ -9,9 +9,16 @@ jobs:
     if: github.event.pull_request.merged == true && contains(fromJson('["NONE","CONTRIBUTOR","FIRST_TIMER","FIRST_TIME_CONTRIBUTOR"]'), github.event.pull_request.author_association)
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/create-github-app-token@v3
+        id: app-token
+        with:
+          client-id: ${{ vars.APP_CONTRIBUTOR_CLIENT_ID }}
+          private-key: ${{ secrets.APP_CONTRIBUTOR_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
       - name: Inviting
         uses: actions/github-script@v8
         with:
+          github-token: ${{ steps.app-token.outputs.token }}
           script: |
             const body = `🚀 **${context.payload.pull_request.user.login}, спасибо за твой вклад в проект! PR успешно принят.**
 
