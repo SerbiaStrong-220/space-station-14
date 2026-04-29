@@ -18,9 +18,6 @@
 #  - ChiefMedicalOfficerJobTrinkets
   - GroupSpeciesBreathToolMedical
   #SS220-TwoOne-Floppa-Iteration begin
-  - SurvivalMedical
-  - Trinkets
-  - GroupSpeciesBreathToolMedical
   - SponsorNeck
   #SS220-TwoOne-Floppa-Iteration end
   - SeniorStaffCash #SS220-Cash-personal
@@ -43,9 +40,6 @@
   - GroupSpeciesBreathToolMedical
   - MedicalNeck #SS220-WhiteScarf
   #SS220-Two Floppa Iteration begin
-  - SurvivalMedical
-  - Trinkets
-  - GroupSpeciesBreathToolMedical
   - SponsorNeck
   #SS220-TwoOne-Floppa-Iteration end
   - WorkerCash #SS220-Cash-personal

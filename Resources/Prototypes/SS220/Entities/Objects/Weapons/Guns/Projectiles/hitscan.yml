@@ -77,11 +77,6 @@
     impactFlash:
       sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
       state: impact_blue
-#  UPSTREAM_TODO: Add spread to hitscan
-#  hitscanSpread:
-#    spread: 20
-#    count: 5
-#  UPSTREAM_TODO: Add spread to hitscan
 
 - type: entity
   parent: BasicHitscan

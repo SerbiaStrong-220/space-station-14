@@ -294,6 +294,7 @@ public sealed partial class HumanoidProfileEditor
                 }
         }
 
+        _rgbSkinColorSelector.Color = Profile.Appearance.SkinColor; // SS220-fix-color-mis-showing
         ReloadProfilePreview();
     }
 }

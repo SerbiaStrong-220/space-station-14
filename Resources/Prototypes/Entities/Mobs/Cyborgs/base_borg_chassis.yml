@@ -356,6 +356,12 @@
   - type: AccessReader
     access: [["Command"], ["Research"]]
   - type: ShowJobIcons
+  # S220-add-borg-icons-begin
+  - type: JobStatus
+    jobStatusIcon: JobIconBorg
+    isCrew: false
+  - type: StatusIcon
+  # S220-add-borg-icons-end
   - type: ShowCrewIcons
   - type: InteractionPopup
     interactSuccessSound:

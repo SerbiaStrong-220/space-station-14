@@ -1,5 +1,7 @@
-﻿using Content.Server.Database;
+using Content.Server.Administration.Managers;
+using Content.Server.Database;
 using Content.Shared.Administration;
+using Content.Shared.Database;
 using Robust.Shared.Console;
 
 namespace Content.Server.Administration.Commands
@@ -8,6 +10,7 @@ namespace Content.Server.Administration.Commands
     public sealed class PardonCommand : LocalizedCommands
     {
         [Dependency] private readonly IServerDbManager _dbManager = default!;
+        [Dependency] private readonly IBanManager _banManager = default!; // SS220-make-pardon-better
 
         public override string Command => "pardon";
 
@@ -50,7 +53,31 @@ namespace Content.Server.Administration.Commands
                 return;
             }
 
-            await _dbManager.AddUnbanAsync(new UnbanDef(banId, player?.UserId, DateTimeOffset.Now));
+            // SS220-make-pardon-better-begin
+            // await _dbManager.AddUnbanAsync(new UnbanDef(banId, player?.UserId, DateTimeOffset.Now)); [wizden-coded]
+            switch (ban.Type)
+            {
+                case BanType.Server:
+                    await _dbManager.AddUnbanAsync(new UnbanDef(banId, player?.UserId, DateTimeOffset.Now));
+                    break;
+
+                case BanType.Role:
+                    await _banManager.PardonRoleBan(banId, player?.UserId, DateTimeOffset.Now);
+                    break;
+
+                case BanType.Chat:
+                    await _banManager.PardonChatsBan(banId, player?.UserId, DateTimeOffset.Now);
+                    break;
+
+                case BanType.Species:
+                    await _banManager.PardonSpeciesBan(banId, player?.UserId, DateTimeOffset.Now);
+                    break;
+
+                default:
+                    shell.WriteLine($"Ban with undefined type found with id {ban.Id} and type {ban.Type}!");
+                    break;
+            }
+            // SS220-make-pardon-better-end
 
             shell.WriteLine(Loc.GetString($"cmd-pardon-success", ("id", banId)));
         }

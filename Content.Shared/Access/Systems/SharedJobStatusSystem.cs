@@ -2,6 +2,7 @@ using Content.Shared.Access.Components;
 using Content.Shared.Hands;
 using Content.Shared.Inventory.Events;
 using Content.Shared.PDA;
+using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.StatusIcon;
 using Content.Shared.StatusIcon.Components;
 using Robust.Shared.Prototypes;
@@ -14,6 +15,8 @@ public abstract class SharedJobStatusSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     private static readonly ProtoId<JobIconPrototype> JobIconForNoId = "JobIconNoId";
+
+    private static readonly ProtoId<JobIconPrototype> JobIconForBorg = "JobIconBorg"; // SS220 Add borg icon
 
     public override void Initialize()
     {
@@ -57,6 +60,11 @@ public abstract class SharedJobStatusSystem : EntitySystem
                 }
             }
         }
+
+        // SS220 Add borg icon for hud begin
+        if (HasComp<BorgChassisComponent>(ent) && iconId == JobIconForNoId)
+            iconId = JobIconForBorg;
+        // SS220 Add borg icon for hud end
 
         ent.Comp.JobStatusIcon = iconId;
         ent.Comp.IsCrew = _prototype.Index(iconId).IsCrewJob;

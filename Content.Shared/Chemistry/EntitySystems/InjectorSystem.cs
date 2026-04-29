@@ -11,8 +11,11 @@ using Content.Shared.Forensics.Systems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Inventory;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
+using Content.Shared.SS220.AutoInjector;
+using Content.Shared.SS220.Cryostasis.Events;
 using Content.Shared.Stacks;
 using Content.Shared.Standing;
 using Content.Shared.Timing;
@@ -31,6 +34,7 @@ namespace Content.Shared.Chemistry.EntitySystems;
 /// <seealso cref="InjectorModePrototype"/>
 public sealed partial class InjectorSystem : EntitySystem
 {
+    [Dependency] private readonly InventorySystem _inventory = default!; //ss220 needleprotection
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -194,9 +198,41 @@ public sealed partial class InjectorSystem : EntitySystem
     /// </summary>
     private bool TryMobsDoAfter(Entity<InjectorComponent> injector, EntityUid user, EntityUid target)
     {
+        //ss220 needleprotection begin
+        if (!injector.Comp.IgnoreProtection)
+        {
+            var hasNeedleProtection = HasComp<NeedleProtectionComponent>(target);
+            if (!hasNeedleProtection)
+            {
+                var enumerator = _inventory.GetSlotEnumerator(target);
+                while (enumerator.NextItem(out var item))
+                {
+                    if (HasComp<NeedleProtectionComponent>(item))
+                    {
+                        hasNeedleProtection = true;
+                        break;
+                    }
+                }
+            }
+
+            if (hasNeedleProtection)
+            {
+                _popup.PopupEntity(Loc.GetString("loc-hypo-protection-popup"), injector, user);
+                return false;
+            }
+        }
+        //ss220 needleprotection end
+
         if (_useDelay.IsDelayed(injector.Owner) // Check for Delay.
             || !GetMobsDoAfterTime(injector, user, target, out var doAfterTime, out var amount)) // Get the DoAfter time.
             return false;
+
+        // ss220 add fast injection with cryo syringe start
+        var changeDelayEv = new ChangeInjectorDelayEvent(injector, target, user, doAfterTime);
+        RaiseLocalEvent(injector, ref changeDelayEv);
+
+        doAfterTime = changeDelayEv.Delay;
+        // ss220 add fast injection with cryo syringe end
 
         if (!_doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, doAfterTime, new InjectorDoAfterEvent(), injector.Owner, target: target, used: injector.Owner)
         {

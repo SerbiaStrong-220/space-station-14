@@ -56,7 +56,7 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
     // SS220 TraitorDynamics start
     private void OnBeforeAntagSelection(Entity<TraitorRuleComponent> entity, ref BeforeAntagSelection _)
     {
-        InitDynamic(entity.AsNullable(), GetStationWithRecords());
+        InitDynamic(entity!, GetStationWithRecords());
     }
 
     protected override void Ended(EntityUid uid, TraitorRuleComponent component, GameRuleComponent gameRule, GameRuleEndedEvent args)
@@ -189,7 +189,6 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
         var pda = _uplink.FindUplinkTarget(traitor);
 
         Log.Debug($"MakeTraitor {ToPrettyString(traitor)} - Uplink add");
-        // var uplinked = _uplink.AddUplink(traitor, startingBalance, pda, true, true); TODO UPSTREAM REMOVE
         var uplinked = _uplink.AddUplink(traitor, startingBalance, out var code, pda, giveDiscounts: true, bindToPda: false, useDynamics: true);  // SS220 Dynamics
 
         if (code != null && uplinked == AddUplinkResult.Pda)

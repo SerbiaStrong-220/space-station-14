@@ -81,7 +81,7 @@
   description: Looks almost like the real thing! Ages 8 and up.
   components:
   - type: Sprite
-    sprite: Objects/Fun/capgun.rsi
+    sprite: SS220/Objects/Weapons/Guns/Revolvers/toy.rsi # ss220 revolvers resprite
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -90,13 +90,14 @@
     - 0,0,1,0
     - 0,1,0,1
     storedOffset: -2,-7
-    sprite: Objects/Fun/capgun.rsi
+    sprite: SS220/Objects/Weapons/Guns/Revolvers/toy.rsi # ss220 revolvers resprite
   - type: Tag
     tags:
     - Sidearm
     - ToySidearm
   - type: AmmoCounter
   - type: Gun
+    canSuicide: true # SS220-new-feature kus
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -119,6 +120,11 @@
   - type: ContainerContainer
     containers:
       revolver-ammo: !type:Container
+  #ss220 recyclable-plastic-pistols begin
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 150
+  #ss220 recyclable-plastic-pistols end
 
 - type: entity
   parent: RevolverCapGun
@@ -279,6 +285,15 @@
     activatedDamage:
       types:
         Heat: 0.3
+  #SS220 craftable desword start
+  - type: Tag
+    tags:
+    - ToyEnergySword
+  - type: Construction
+    deconstructionTarget: null
+    graph: DoubleToySwordGraph
+    node: esword
+  #SS220 craftable desword end
 
 - type: entity
   parent: [ BaseItem, BaseToySword ]

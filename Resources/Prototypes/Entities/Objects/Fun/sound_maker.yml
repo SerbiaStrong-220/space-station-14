@@ -158,6 +158,11 @@
     node: bananiumHorn
   - type: Tool
     useSound: *SoundBananiumHorn
+  # SS220 horn tag begin
+  - type: Tag
+    tags:
+    - BananiumHorn
+  # SS220 horn tag end
 
 - type: entity
   parent: BaseItem
@@ -287,11 +292,11 @@
   description: Not carried here by ocean currents.
   components:
   - type: Sprite
-    sprite: Objects/Fun/ducky.rsi
+    sprite: SS220/Objects/Fun/ducky.rsi #SS220-DuckRepsrite
     state: icon
   - type: Clothing
     quickEquip: false
-    sprite: Objects/Fun/ducky.rsi
+    sprite: SS220/Objects/Fun/ducky.rsi #SS220-DuckRepsrite
     slots:
     - HEAD
   - type: Item
@@ -327,8 +332,9 @@
       collection: RubberChicken
       params:
         variation: 0.125
-  - type: EmitSoundOnLand
-    sound: *SoundRubberChicken
+  # SS220 Commented to reduce sound spam
+  # - type: EmitSoundOnLand
+  #   sound: *SoundRubberChicken
   - type: EmitSoundOnActivate
     sound: *SoundRubberChicken
   - type: EmitSoundOnCollide

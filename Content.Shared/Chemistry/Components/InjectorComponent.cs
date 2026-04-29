@@ -63,6 +63,9 @@ public sealed partial class InjectorComponent : Component
     [DataField]
     public bool IgnoreMobs;
 
+    [DataField]
+    public bool IgnoreProtection = true; //ss220 needleprotection
+
     /// <summary>
     /// Whether the injector is able to draw from or inject into containers that are closed/sealed.
     /// </summary>

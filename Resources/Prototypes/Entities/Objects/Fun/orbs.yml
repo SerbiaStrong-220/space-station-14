@@ -81,6 +81,24 @@
     sprite: Objects/Fun/pondering_orb.rsi
   - type: TileFrictionModifier
     modifier: 0.001
+  # ss220 PonderingOrb speak on use begin
+  - type: SpeakOnTrigger
+    pack: PonderingOrbPhrases
+  - type: UseDelay
+    delay: 10
+  - type: Speech
+    speechSounds: Pai
+  - type: TriggerOnActivate
+  - type: TriggerOnSignal
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice
+  - type: WirelessNetworkConnection
+    range: 200
+  - type: DeviceLinkSink
+    ports:
+    - Trigger
+  # ss220 PonderingOrb speak on use end
 
 # The true orb
 - type: entity
