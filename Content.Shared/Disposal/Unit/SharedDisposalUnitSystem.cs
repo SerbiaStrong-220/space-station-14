@@ -466,7 +466,8 @@ public abstract class SharedDisposalUnitSystem : EntitySystem
     public void DoInsertDisposalUnit(EntityUid uid,
         EntityUid toInsert,
         EntityUid user,
-        DisposalUnitComponent? disposal = null)
+        DisposalUnitComponent? disposal = null,
+        bool playSound = true) // SS220-disposal-sound
     {
         if (!Resolve(uid, ref disposal))
             return;
@@ -475,16 +476,21 @@ public abstract class SharedDisposalUnitSystem : EntitySystem
             return;
 
         _adminLog.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(user):player} inserted {ToPrettyString(toInsert)} into {ToPrettyString(uid)}");
-        AfterInsert(uid, disposal, toInsert, user);
+        AfterInsert(uid, disposal, toInsert, user, playSound: playSound); // SS220-disposal-sound
     }
 
     public virtual void AfterInsert(EntityUid uid,
         DisposalUnitComponent component,
         EntityUid inserted,
         EntityUid? user = null,
-        bool doInsert = false)
+        bool doInsert = false,
+        bool playSound = true) // SS220-disposal-sound
     {
-        Audio.PlayPredicted(component.InsertSound, uid, user: user);
+        // SS220-disposal-sound-start
+        if (playSound)
+            Audio.PlayPredicted(component.InsertSound, uid, user: user);
+        // SS220-disposal-sound-end
+
         if (doInsert && !Containers.Insert(inserted, component.Container))
             return;
 
@@ -803,9 +809,13 @@ public abstract class SharedDisposalUnitSystem : EntitySystem
         args.Handled = true;
         args.PlaySound = true;
 
+        // SS220-disposal-sound-begin
         foreach (var entity in args.DumpQueue)
         {
-            DoInsertDisposalUnit(ent, entity, args.User);
+            DoInsertDisposalUnit(ent, entity, args.User, playSound: false);
         }
+
+        Audio.PlayPredicted(ent.Comp.InsertSound, ent, user: args.User);
+        // SS220-disposal-sound-end
     }
 }

@@ -10,7 +10,7 @@
     - MeteorSwarmScheduler
     - RampingStationEventScheduler
     # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
-    - SpaceTrafficControlFriendlyEventScheduler
+    - SpaceTrafficControlNeutralEventScheduler # SS220-LostSouls
     - BasicRoundstartVariation
     - EmergencyShuttleAutoVote # SS220-evac-vote
 
@@ -27,7 +27,7 @@
     - KesslerSyndromeScheduler
     - RampingStationEventScheduler
     # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
-    - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
+    - SpaceTrafficControlNeutralEventScheduler # SS220-LostSouls
     - BasicRoundstartVariation
     - EmergencyShuttleAutoVote # SS220-evac-vote
 
@@ -47,7 +47,7 @@
     - KesslerSyndromeScheduler
     - RampingStationEventScheduler
     # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
-    - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
+    - SpaceTrafficControlNeutralEventScheduler # SS220-LostSouls
     - BasicRoundstartVariation
     - EmergencyShuttleAutoVote # SS220-evac-vote
 
@@ -73,7 +73,7 @@
     - MeteorSwarmScheduler
     - RampingStationEventScheduler
     # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
-    - SpaceTrafficControlFriendlyEventScheduler
+    - SpaceTrafficControlNeutralEventScheduler # SS220-LostSouls
     - BasicRoundstartVariation
     - EmergencyShuttleAutoVote # SS220-evac-vote
 

@@ -211,13 +211,14 @@ public sealed class CriminalRecordSystem : SharedCriminalRecordSystem
             }
         }
 
+        var currentRoundTime = (int)_gameTicker.RoundDuration().TotalSeconds;
         var criminalRecord = new CriminalRecord
         {
             Message = message,
-            RecordType = validatedRecordType
+            RecordType = validatedRecordType,
+            RecordSetAt = TimeSpan.FromSeconds(currentRoundTime),
         };
 
-        var currentRoundTime = (int)_gameTicker.RoundDuration().TotalSeconds;
         if (!catalog.Records.TryAdd(currentRoundTime, criminalRecord))
             return false;
 
