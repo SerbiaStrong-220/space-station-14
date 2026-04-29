@@ -20,7 +20,7 @@ public sealed class UncuffOnTriggerSystem : XOnTriggerSystem<UncuffOnTriggerComp
             args.Handled = true;
         }
 
-         // SS220-make-freedom-remove-bola-begin
+        // SS220-make-freedom-remove-bola-begin
         if (TryComp<EnsnareableComponent>(target, out var ensnareableComponent))
         {
             var list = ensnareableComponent.Container.ContainedEntities.ToList();

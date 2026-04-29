@@ -231,7 +231,7 @@ public sealed partial class ClampedHsvColoration : ISkinColorationStrategy
     public Color ClosestSkinColor(Color color)
     {
         var hsv = Color.ToHsv(color);
-        var hsv_copy = hsv; // SS220-fix-floating-point-math-skill-issue
+        var hsvCopy = hsv; // SS220-fix-floating-point-math-skill-issue
 
         if (Hue is (var minHue, var maxHue))
             hsv.X = SkinColorationUtils.ClampHue(hsv.X, minHue, maxHue);
@@ -240,7 +240,7 @@ public sealed partial class ClampedHsvColoration : ISkinColorationStrategy
         if (Value is (var minVal, var maxVal))
             hsv.Z = Math.Clamp(hsv.Z, minVal, maxVal);
 
-        if (hsv_copy == hsv) // SS220-fix-floating-point-math-skill-issue
+        if (hsvCopy == hsv) // SS220-fix-floating-point-math-skill-issue
             return color; // SS220-fix-floating-point-math-skill-issue
 
         return Color.FromHsv(hsv);
