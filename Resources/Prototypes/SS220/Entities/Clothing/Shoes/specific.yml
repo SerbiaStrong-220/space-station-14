@@ -266,26 +266,16 @@
   # HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - label: hidden-desc-SilentShoes-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: hidden-desc-SilentShoes-research
-      jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
-    - label: corvax-hidden-desc-Chameleon-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: corvax-hidden-desc-Chameleon-research
-      jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
+      SyndicateAgentKnowledge:
+        - corvax-hidden-desc-Chameleon-syndicate
+        - hidden-desc-SilentShoes-syndicate
+      ScienceKnowledge:
+        - corvax-hidden-desc-Chameleon-research
+        - hidden-desc-SilentShoes-research
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ScienceKnowledge, null]
+    hiddenName: null
 # HiddenDesc-End
 
 - type: entity
@@ -301,22 +291,8 @@
     sprite: SS220/Clothing/Shoes/Specific/spaceninja.rsi 
   - type: HiddenDescription
     entries:
-    - label: hidden-desc-toy-armour-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: hidden-desc-toy-armour-clown
-      jobRequired:
-        - Clown
-        - Mime
-      SyndicateAgentKnowledge:
-        - hidden-desc-SilentShoes-syndicate
-        - corvax-hidden-desc-Chameleon-syndicate
-      ScienceKnowledge:
-        - hidden-desc-SilentShoes-research
-        - corvax-hidden-desc-Chameleon-research
+      SyndicateAgentKnowledge: [ hidden-desc-toy-armour-syndicate ]
+      ServiceActorKnowledge: [ hidden-desc-toy-armour-clown ]
     nameEntries:
     - [SyndicateAgentKnowledge, null]
-    - [ScienceKnowledge, null]
-    hiddenName: null
-  # HiddenDesc-End
+    - [ServiceActorKnowledge, null]
