@@ -202,15 +202,16 @@ public sealed partial class InjectorSystem : EntitySystem
         if (!injector.Comp.IgnoreProtection)
         {
             var hasNeedleProtection = HasComp<NeedleProtectionComponent>(target);
-            if (!hasNeedleProtection && _inventory.TryGetSlots(target, out var slots))
+            if (!hasNeedleProtection)
             {
-                foreach (var slot in slots)
+                var enumerator = _inventory.GetSlotEnumerator(target);
+                while (enumerator.NextItem(out var item))
                 {
-                    if (_inventory.TryGetSlotEntity(target, slot.Name, out var item) && HasComp<NeedleProtectionComponent>(item))
-                        continue;
-
-                    hasNeedleProtection = true;
-                    break;
+                    if (HasComp<NeedleProtectionComponent>(item))
+                    {
+                        hasNeedleProtection = true;
+                        break;
+                    }
                 }
             }
 
