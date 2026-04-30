@@ -12,7 +12,7 @@ jobs:
       - uses: actions/create-github-app-token@v3
         id: app-token
         with:
-          client-id: ${{ vars.APP_CONTRIBUTOR_CLIENT_ID }}
+          client-id: ${{ secrets.APP_CONTRIBUTOR_CLIENT_ID }}
           private-key: ${{ secrets.APP_CONTRIBUTOR_PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
       - name: Inviting
