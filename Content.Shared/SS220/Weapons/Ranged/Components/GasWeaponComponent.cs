@@ -1,5 +1,6 @@
 // © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
 
+using Content.Shared.Atmos;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared.SS220.Weapons.Components;
@@ -15,7 +16,7 @@ public sealed partial class GasWeaponComponent : Component
     /// </summary>
     [DataField("gasType")]
     [ViewVariables(VVAccess.ReadWrite)]
-    public string GasType = "gases-plasma";
+    public Gas GasType = Gas.Plasma;
 
     /// <summary>
     ///     Amount of moles to consume for each shot at any power.

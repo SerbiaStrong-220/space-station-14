@@ -278,14 +278,6 @@ public abstract partial class SharedGunSystem : EntitySystem
             return false;
         }
 
-        // ss220 add block heavy attack and shooting while user is down start
-        if (_standing.IsDown(user))
-        {
-            PopupSystem.PopupPredictedCursor(Loc.GetString("lying-down-block-shooting"), user);
-            return false;
-        }
-        // ss220 add block heavy attack and shooting while user is down end
-
         //SS220 shield rework begin
         if (TryComp<AltBlockingUserComponent>(user, out var blockComp) && blockComp.IsBlocking)
         {

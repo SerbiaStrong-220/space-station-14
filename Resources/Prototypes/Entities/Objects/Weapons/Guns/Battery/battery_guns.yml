@@ -308,6 +308,7 @@
     magState: mag
     steps: 4
     zeroVisible: true
+  - type: GasWeapon
   - type: ItemSlots
     slots:
       cell_slot:
@@ -318,9 +319,23 @@
         whitelist:
           tags:
             - WeaponPowerCell
+      gas_tank:
+        name: pneumatic-cannon-component-itemslot-name
+        whitelist:
+          components:
+          - GasTank
+        insertSound:
+          path: /Audio/Weapons/click.ogg
+          params:
+            volume: -3
   - type: HitscanBatteryAmmoProvider
     proto: RedLaser
     fireCost: 50
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
+      gas_tank: !type:ContainerSlot
 #SS220 weapon overhaul end
 
 - type: entity
