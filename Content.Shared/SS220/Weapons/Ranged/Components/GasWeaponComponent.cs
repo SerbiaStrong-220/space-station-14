@@ -6,10 +6,12 @@ using Robust.Shared.GameStates;
 namespace Content.Shared.SS220.Weapons.Components;
 
 [RegisterComponent]
-[NetworkedComponent]
+[NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class GasWeaponComponent : Component
 {
-    public const string TankSlotId = "gas_tank";
+    [DataField("tankSlot")]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public string TankSlotId = "gas_tank";
 
     /// <summary>
     ///     Amount of moles to consume for each shot at any power.
@@ -24,4 +26,7 @@ public sealed partial class GasWeaponComponent : Component
     [DataField("gasUsage")]
     [ViewVariables(VVAccess.ReadWrite)]
     public float GasUsage = 0.142f;
+
+    [AutoNetworkedField]
+    public bool CanShoot = false;
 }

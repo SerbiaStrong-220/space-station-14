@@ -4,4 +4,4 @@ using Content.Shared.SS220.Weapons.Components;
 namespace Content.Shared.SS220.Weapons.Ranged.Events;
 
 [ByRefEvent]
-public record struct GasWeaponWrongGasEvent(Entity<GasWeaponComponent>, float amountOfMoles);
+public record struct GasWeaponWrongGasEvent(Entity<GasWeaponComponent> ent, float amountOfMoles);

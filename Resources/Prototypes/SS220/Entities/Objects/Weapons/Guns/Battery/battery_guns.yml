@@ -405,3 +405,43 @@
       gunModifiers:
         soundGunshot: /Audio/SS220/Weapons/Guns/Gunshots/hidg_rifle.ogg
       magState: heal-mag
+
+- type: entity
+  name: M32-OTW-P
+  parent: [BaseWeaponPowerCellSmall, BaseSecurityContraband]
+  id: WeaponLaserPistol
+  description: Model 32 Optical Thermal Weapon - Pistol. This pistol-like pulse laser is widely used due to it being relatively cheap, easy to use and quite effective against humanoid targets.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Battery/laser_pistol.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-3
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: Gun
+    fireRate: 1.8
+  - type: Item
+    shape:
+    - 0,0,1,0
+    - 0,1,0,1
+    storedOffset: 0,-7
+    sprite: SS220/Objects/Weapons/Guns/Battery/laser_pistol.rsi
+  - type: MagazineVisuals
+    magState: mag
+    steps: 4
+    zeroVisible: true
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: Magazine
+        startingItem: WeaponPowerCell
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        whitelist:
+          tags:
+            - WeaponPowerCell
+  - type: HitscanBatteryAmmoProvider
+    proto: RedLaser
+    fireCost: 70

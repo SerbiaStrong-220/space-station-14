@@ -81,7 +81,7 @@
     size: Huge
   - type: AmmoCounter
   - type: Gun
-    fireRate: 2
+    fireRate: 2.5 #SS220 weapon oerhaul
     projectileSpeed: 25 # SS220 Bullet Speed
     selectedMode: SemiAuto
     availableModes:
@@ -282,10 +282,10 @@
 
 #SS220 weapon overhaul begin
 - type: entity
-  name: laser carbine
+  name: M32-OTW
   parent: [BaseWeaponPowerCell, BaseGunWieldable, BaseSecurityContraband]
   id: WeaponLaserCarbine
-  description: Favoured by Nanotrasen Security for being cheap and easy to use.
+  description: Optical Thermal Weapon Model 32. This carabine-sized pulse laser is widely used due to it being relatively cheap, easy to use and quite effective against humanoid targets.
   components:
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/laser_gun.rsi
@@ -308,7 +308,6 @@
     magState: mag
     steps: 4
     zeroVisible: true
-  - type: GasWeapon
   - type: ItemSlots
     slots:
       cell_slot:
@@ -319,23 +318,9 @@
         whitelist:
           tags:
             - WeaponPowerCell
-      gas_tank:
-        name: pneumatic-cannon-component-itemslot-name
-        whitelist:
-          components:
-          - GasTank
-        insertSound:
-          path: /Audio/Weapons/click.ogg
-          params:
-            volume: -3
   - type: HitscanBatteryAmmoProvider
     proto: RedLaser
     fireCost: 50
-  - type: ContainerContainer
-    containers:
-      storagebase: !type:Container
-        ents: []
-      gas_tank: !type:ContainerSlot
 #SS220 weapon overhaul end
 
 - type: entity
@@ -348,7 +333,7 @@
     price: 300
   - type: HitscanBatteryAmmoProvider
     proto: RedLaserPractice
-    fireCost: 50
+    fireCost: 2.5
   - type: PacifismAllowedGun
 
 - type: entity

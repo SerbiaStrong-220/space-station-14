@@ -224,7 +224,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0.5
   - type: FireProtection
-    reduction: 0.85
+    reduction: 0.65 #SS220 weapon overhaul
   - type: StaticPrice
     price: 2500
 
