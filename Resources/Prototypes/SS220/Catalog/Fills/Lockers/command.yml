@@ -28,7 +28,6 @@
     access: [ [ "Blueshield" ] ]
   - type: StorageFill
     contents:
-    - id: WeaponEnergyGunRevolver
     - id: WeaponBlasterKRS
     - id: PowerCellBlaster
       amount: 3

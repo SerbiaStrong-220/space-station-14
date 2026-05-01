@@ -1,0 +1,39 @@
+- type: entity
+  name: Corvus
+  parent: [BaseWeaponPistol]
+  id: WeaponPistolCorvus
+  description: Another modification of classic Schneider&Weber P093, the Corvus is a pistol chambered in 9x20 auto with recoil compensator and stronger spring. It is favored by assasins and bodyguards because of it's small size and suppressed muzzle flash.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Pistols/corvus.rsi
+  - type: Gun
+    fireRate: 6.2
+  - type: GunAimable
+    minAngle: -5
+    maxAngle: -9
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazinePistolHighCapacity
+        insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazinePistol
+            - MagazinePistolHighCapacity
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgePistol
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgePistol
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: StaticPrice
+    price: 1000
