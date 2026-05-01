@@ -420,7 +420,7 @@
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
   - type: GunAimable
-    minAngle: -6
+    minAngle: -6.5
     maxAngle: -6
   - type: Gun
     fireRate: 1.8

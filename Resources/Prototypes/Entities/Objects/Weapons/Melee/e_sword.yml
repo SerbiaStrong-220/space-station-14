@@ -40,8 +40,8 @@
         variation: 0.125
     activatedDamage:
       types:
-        Slash: 15
-        Heat: 15
+        Slash: 5 #SS220 weapon overhaul
+        Heat: 25 #SS220 weapon overhaul
         Structural: 20
   - type: MeleeWeapon
     wideAnimationRotation: -135
@@ -127,8 +127,8 @@
         variation: 0.250
     activatedDamage:
         types:
-            Slash: 10
-            Heat: 10
+            Slash: 5 #SS220 weapon overhaul
+            Heat: 15 #SS220 weapon overhaul
     deactivatedSecret: true
   - type: ItemToggleActiveSound
     activeSound:
@@ -285,8 +285,8 @@
   - type: ItemToggleMeleeWeapon
     activatedDamage:
         types:
-            Slash: 10
-            Heat: 12
+            Slash: 5 #SS220 weapon overhaul
+            Heat: 17 #SS220 weapon overhaul
             Blunt: -1
             Structural: 10
     deactivatedSecret: true
@@ -384,8 +384,8 @@
         variation: 0.250
     activatedDamage:
         types:
-            Slash: 12
-            Heat: 12
+            Slash: 5
+            Heat: 20 #SS220 weapon overhaul
             Structural: 15
   - type: ItemToggleActiveSound
     activeSound:
@@ -487,6 +487,17 @@
   components: # could add energy-draining like the L6C
    #Inheriting from usual double esword somehow and somewhy throwed the exeption(No, this is not related to shield rework in any way)
   #SS220 shield rework begin
+  - type: ItemToggleMeleeWeapon
+    activatedSoundOnSwing:
+      path: /Audio/Weapons/eblademiss.ogg
+      params:
+        volume: 3
+        variation: 0.250
+    activatedDamage:
+        types:
+            Slash: 5
+            Heat: 20 #SS220 weapon overhaul
+            Structural: 15
   - type: MeleeWeapon
     wideAnimationRotation: -135
     attackRate: 1.5

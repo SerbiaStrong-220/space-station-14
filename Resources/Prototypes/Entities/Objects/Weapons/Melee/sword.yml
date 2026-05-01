@@ -71,7 +71,7 @@
   - type: MeleeWeapon
     damage:
       types:
-        Slash: 16
+        Slash: 23 #SS220 weapon overhaul
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: Item
@@ -113,7 +113,7 @@
   - type: MeleeWeapon
     damage:
       types:
-        Slash: 15
+        Slash: 22 #SS220 weapon overhaul
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: Item
@@ -159,7 +159,7 @@
     attackRate: 1.5
     damage:
       types:
-        Slash: 17 #cmon, it has to be at least BETTER than the rest.
+        Slash: 25 #SS220 weapon overhaul
     soundHit:
         path: /Audio/Weapons/bladeslice.ogg
   - type: Item
@@ -216,7 +216,7 @@
   - type: MeleeWeapon
     damage:
       types:
-        Slash: 15
+        Slash: 25 #SS220 weapon overhaul
     soundHit:
         path: /Audio/Weapons/bladeslice.ogg
   - type: Item
@@ -253,7 +253,7 @@
     wideAnimationRotation: -60
     damage:
       types:
-        Slash: 30
+        Slash: 35 #SS220 weapon overhaul
   - type: Item
     storedSprite:
       state: storage
@@ -294,7 +294,7 @@
     attackRate: 0.75
     damage:
       types:
-        Slash: 20
+        Slash: 25 #SS220 weapon overhaul
     soundHit:
         path: /Audio/Weapons/bladeslice.ogg
   - type: Item
@@ -335,7 +335,7 @@
       attackRate: 10
       damage:
         types:
-          Structural: 150
+          Structural: 150 #SS220 weapon overhaul doesn't affect this shitspawn garbage
           Slash: 20 #Horror
           Blunt: 20
           Heat: 20
