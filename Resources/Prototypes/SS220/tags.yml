@@ -35,6 +35,9 @@
   id: LaserSMGPowerCell
 
 - type: Tag
+  id: WeaponPowerCell
+
+- type: Tag
   id: WeaponRechargerWhitelist
 
 # ss220 shlepi

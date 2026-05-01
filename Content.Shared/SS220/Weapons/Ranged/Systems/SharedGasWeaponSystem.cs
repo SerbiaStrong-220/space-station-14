@@ -9,7 +9,7 @@ using System.Drawing;
 
 namespace Content.Shared.SS220.Weapons.Ranged.Systems;
 
-public sealed class HitscanBlockSystem : EntitySystem
+public sealed class SharedGasWeaponSystem : EntitySystem
 {
     public override void Initialize()
     {

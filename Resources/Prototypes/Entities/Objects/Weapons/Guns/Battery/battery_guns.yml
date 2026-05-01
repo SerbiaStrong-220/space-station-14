@@ -280,15 +280,52 @@
     zeroVisible: true
   - type: Appearance
 
+#SS220 weapon overhaul begin
 - type: entity
   name: laser carbine
-  parent: [BaseLaserRifle, BaseGunWieldable, BaseSecurityContraband]
+  parent: [BaseWeaponPowerCell, BaseGunWieldable, BaseSecurityContraband]
   id: WeaponLaserCarbine
   description: Favoured by Nanotrasen Security for being cheap and easy to use.
+  components:
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Battery/laser_gun.rsi
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage
+    - Belt
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Battery/laser_gun.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-4
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: Item
+    sprite: Objects/Weapons/Guns/Battery/laser_gun.rsi
+  - type: MagazineVisuals
+    magState: mag
+    steps: 4
+    zeroVisible: true
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: Magazine
+        startingItem: WeaponPowerCell
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        whitelist:
+          tags:
+            - WeaponPowerCell
+  - type: HitscanBatteryAmmoProvider
+    proto: RedLaser
+    fireCost: 50
+#SS220 weapon overhaul end
 
 - type: entity
   name: practice laser carbine
-  parent: [BaseLaserRifle, BaseGunWieldable]
+  parent: WeaponLaserCarbine #SS220 weapon overhaul
   id: WeaponLaserCarbinePractice
   description: This modified laser carbine fires nearly harmless beams in the 40-watt range, for target practice.
   components:
@@ -296,7 +333,7 @@
     price: 300
   - type: HitscanBatteryAmmoProvider
     proto: RedLaserPractice
-    fireCost: 62.5
+    fireCost: 50
   - type: PacifismAllowedGun
 
 - type: entity
