@@ -233,14 +233,16 @@
     steps: 5
     zeroVisible: false
   - type: Appearance
+  - type: Gun #SS220 weapon overhaul
+    fireRate: 1.4 #SS220 weapon overhaul
   - type: Clothing
     sprite: SS220/Objects/Weapons/Guns/Battery/makeshift.rsi #SS220 resprite
   - type: HitscanBatteryAmmoProvider
     proto: RedLaser
     fireCost: 62.5
   - type: Battery
-    maxCharge: 500
-    startingCharge: 500
+    maxCharge: 250 #SS220 weapon overhaul
+    startingCharge: 250 #SS220 weapon overhaul
 #ss220 handmade gun buff begin
   - type: Construction
     graph: WeaponMakeshiftLaserGraph
@@ -304,6 +306,17 @@
       shader: unshaded
   - type: Item
     sprite: Objects/Weapons/Guns/Battery/laser_gun.rsi
+  - type: GunAimable
+    minAngle: -5
+    maxAngle: -5
+  - type: Gun
+    cameraRecoilScalar: 0 #Laser weapons have effectively no recoil
+    maxAngle: 20
+    minAngle: 15 #Very low values for the same reason
+    angleIncrease: 0.09
+  - type: GunWieldBonus
+    minAngle: -8
+    maxAngle: -13
   - type: MagazineVisuals
     magState: mag
     steps: 4

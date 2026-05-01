@@ -33,8 +33,8 @@
     - Belt
   - type: Gun
     canSuicide: true ##SS220-new-feature kus
-    minAngle: 9 #FCB realistic guns
-    maxAngle: 19 #FCB realistic guns
+    minAngle: 9 #SS220 weapon overhaul
+    maxAngle: 19 #SS220 weapon overhaul
     fireRate: 6
     selectedMode: SemiAuto
     availableModes:
@@ -85,11 +85,11 @@
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Pistols/viper.rsi
-  #FCB realistic guns start
+  #SS220 weapon overhaul start
   - type: GunAimable
     minAngle: -5
     maxAngle: -9
-  #FCB realistic guns end
+  #SS220 weapon overhaul end
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -123,11 +123,11 @@
   id: WeaponPistolEchis
   description: A cyborg-mounted weapon system based on the Viper pistol. Creates ammunition on the fly from an internal fabricator, which slowly self-charges.
   components:
-  #FCB realistic guns start
+  #SS220 weapon overhaul start
   - type: GunAimable
     minAngle: -5
     maxAngle: -9
-  #FCB realistic guns end
+  #SS220 weapon overhaul end
   - type: Gun
     fireRate: 5
     selectedMode: SemiAuto
@@ -163,11 +163,11 @@
   id: WeaponPistolCobra
   description: Integrally suppressed semi-automatic pistol used by the Syndicate, firing caseless subsonic rounds. Favored by any agent who likes to keep things quiet and leave no evidence behind. Feeds from .25 pistol magazines.
   components:
-  #FCB realistic guns start
+  #SS220 weapon overhaul start
   - type: GunAimable
     minAngle: -5
     maxAngle: -9
-  #FCB realistic guns end
+  #SS220 weapon overhaul end
   - type: Sprite
     sprite: Objects/Weapons/Guns/Pistols/cobra.rsi
     layers:
@@ -181,6 +181,7 @@
     boltClosed: null
   - type: Gun
     fireRate: 4
+    muzzleFlashSupressed: true #SS220 weapon overhaul
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/silenced.ogg
       params:
@@ -231,18 +232,18 @@
   - type: Item
     storedOffset: 0,-2
   - type: Gun
-    minAngle: 9 #FCB realistic guns
-    maxAngle: 18 #FCB realistic guns
+    minAngle: 9 #SS220 weapon overhaul
+    maxAngle: 18 #SS220 weapon overhaul
     fireRate: 5
     availableModes:
     - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/mk58.ogg
-  #FCB realistic guns start
+  #SS220 weapon overhaul start
   - type: GunAimable
     minAngle: -5
     maxAngle: -10
-  #FCB realistic guns end
+  #SS220 weapon overhaul end
   - type: StealTarget
     stealGroup: OfficerHandgun
 
@@ -261,15 +262,15 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
     sprite: Objects/Weapons/Guns/Pistols/N1984.rsi
-  #FCB realistic guns start
+  #SS220 weapon overhaul start
   - type: GunAimable
     minAngle: -4
     maxAngle: -10
-  #FCB realistic guns end
+  #SS220 weapon overhaul end
   - type: Gun
-    minAngle: 10 #FCB realistic guns
-    maxAngle: 24 #FCB realistic guns
-    angleIncrease: 5 #FCB realistic guns
+    minAngle: 10 #SS220 weapon overhaul
+    maxAngle: 24 #SS220 weapon overhaul
+    angleIncrease: 5 #SS220 weapon overhaul
     angleDecay: 9
     fireRate: 4
     availableModes:

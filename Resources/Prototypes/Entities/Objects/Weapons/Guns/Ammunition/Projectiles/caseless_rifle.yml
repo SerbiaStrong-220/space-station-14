@@ -7,7 +7,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 20 #ss220lowTTKUpdate
+        Piercing: 18 #SS220 weapon overhaul
 
 - type: entity
   id: BulletCaselessRiflePractice

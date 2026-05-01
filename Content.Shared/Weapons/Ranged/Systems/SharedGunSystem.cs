@@ -561,6 +561,11 @@ public abstract partial class SharedGunSystem : EntitySystem
 
     protected void MuzzleFlash(EntityUid gun, AmmoComponent component, Angle worldAngle, EntityUid? user = null)
     {
+        //SS220 weapon overhaul begin
+        if (TryComp<GunComponent>(gun, out var gunComponent) && gunComponent.MuzzleFlashSupressed)
+            return;
+        //SS220 weapon overhaul end
+
         var attemptEv = new GunMuzzleFlashAttemptEvent();
         RaiseLocalEvent(gun, ref attemptEv);
         if (attemptEv.Cancelled)

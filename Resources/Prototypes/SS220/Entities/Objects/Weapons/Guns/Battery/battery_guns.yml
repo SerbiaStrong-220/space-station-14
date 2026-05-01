@@ -144,12 +144,17 @@
   parent: BaseWeaponBlaster
   id: WeaponBlasterKRS
   name: blaster KRS
-  description: An old reliable blaster rifle. There is only a semi-automatic type of shooting.
+  description: An old reliable plasma rifle. It is devastating against all types of targets but requires both energy and phorone to shoot.
   components:
+  - type: GasWeapon
+    tankSlot: cell_slot
+    gasUsage: 0.03
   - type: Gun
-    selectedMode: Burst
+    fireRate: 1.7
+    selectedMode: SemiAuto
+    projectileSpeed: 35
     availableModes:
-      - Burst
+      - SemiAuto
   - type: ProjectileBatteryAmmoProvider
     proto: BulletBlasterBolt
     fireCost: 62.5
@@ -158,12 +163,6 @@
       - proto: BulletBlasterBolt
         name: firemode-name-blaster
         fireCost: 62.5
-      - proto: BulletBlasterBoltPiercingWindow
-        name: firemode-name-blaster-piercing-window
-        fireCost: 62.5
-      - proto: BulletDisablerSmg
-        name: firemode-name-disabler
-        fireCost: 40
   - type: ItemSlots
     slots:
       cell_slot:
@@ -181,28 +180,28 @@
   name: blaster KRV
   description: An advanced blaster rifle. Used by special operatives.
   components:
+  - type: GasWeapon
+    tankSlot: cell_slot
+    gasUsage: 0.03
   - type: Gun
-    selectedMode: FullAuto
+    fireRate: 2.4
+    selectedMode: SemiAuto
+    projectileSpeed: 35
     availableModes:
       - SemiAuto
-      - Burst
-      - FullAuto
   - type: ProjectileBatteryAmmoProvider
-    proto: BulletBlasterPulse
-    fireCost: 87.5
+    proto: BulletBlasterBolt
+    fireCost: 62.5
   - type: BatteryWeaponFireModes
     fireModes:
-      - proto: BulletBlasterPulse
+      - proto: BulletBlasterBolt
         name: firemode-name-blaster
-        fireCost: 87.5
-      - proto: BulletDisablerSmg
-        name: firemode-name-disabler
-        fireCost: 40
+        fireCost: 62.5
   - type: ItemSlots
     slots:
       cell_slot:
         name: Magazine
-        startingItem: PowerCellBlasterHighCapacity
+        startingItem: PowerCellBlaster
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         whitelist:
@@ -420,8 +419,15 @@
     - state: mag-unshaded-3
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
+  - type: GunAimable
+    minAngle: -6
+    maxAngle: -6
   - type: Gun
     fireRate: 1.8
+    cameraRecoilScalar: 0 #Laser weapons have effectively no recoil
+    maxAngle: 15
+    minAngle: 9 #Very low values for the same reason
+    angleIncrease: 0.09 #Basically the force of a finger pulling the trigger
   - type: Item
     shape:
     - 0,0,1,0

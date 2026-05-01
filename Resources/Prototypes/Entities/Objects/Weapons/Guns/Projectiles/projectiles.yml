@@ -70,7 +70,7 @@
       projectile:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.1,-0.30,0.1,0.30" #FCB realistic weapons
+          bounds: "-0.1,-0.30,0.1,0.30" #SS220 weapon overhaul
         hard: false
         mask:
         - Impassable
@@ -89,8 +89,8 @@
     damage:
       types:
         Piercing: 14
-    penetrationDamageTypeRequirement:
-    - Piercing
+    penetrationDamageTypeRequirement: #SS220 weapon overhaul
+    - Piercing #SS220 weapon overhaul
     soundHit:
       path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
   - type: TimedDespawn

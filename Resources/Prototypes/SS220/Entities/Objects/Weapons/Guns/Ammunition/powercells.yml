@@ -3,7 +3,7 @@
 #Base
 - type: entity
   abstract: true
-  parent: BaseItem
+  parent: [ BaseItem, GasTankBase ]
   id: BasePowerCellBlaster
   components:
   - type: Item
