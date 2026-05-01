@@ -7,7 +7,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Random;
 using System.Drawing;
 
-namespace Content.Shared.FCB.Weapons.Ranged.Systems;
+namespace Content.Shared.SS220.Weapons.Ranged.Systems;
 
 public sealed class HitscanBlockSystem : EntitySystem
 {
