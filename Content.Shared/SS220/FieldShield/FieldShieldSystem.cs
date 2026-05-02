@@ -5,7 +5,10 @@ using Content.Shared.Emp;
 using Content.Shared.Examine;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Popups;
+using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
@@ -13,6 +16,7 @@ namespace Content.Shared.SS220.FieldShield;
 
 public sealed class FieldShieldProviderSystem : EntitySystem
 {
+    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -34,6 +38,8 @@ public sealed class FieldShieldProviderSystem : EntitySystem
 
         SubscribeLocalEvent<FieldShieldProviderComponent, GotEquippedEvent>(OnProviderEquipped);
         SubscribeLocalEvent<FieldShieldProviderComponent, GotUnequippedEvent>(OnProviderUnequipped);
+
+        SubscribeLocalEvent<FieldShieldProviderComponent, GetVerbsEvent<AlternativeVerb>>(OnGetAltVerbs);
 
         SubscribeLocalEvent<FieldShieldComponent, BeforeDamageChangedEvent>(OnFieldShieldBeforeDamage);
         SubscribeLocalEvent<FieldShieldComponent, DamageModifyEvent>(OnShieldDamageModify);
@@ -114,6 +120,8 @@ public sealed class FieldShieldProviderSystem : EntitySystem
         if (!_gameTiming.IsFirstTimePredicted)
             return;
 
+        entity.Comp.Wearer = args.Equipee;
+
         var shieldComp = EnsureComp<FieldShieldComponent>(args.Equipee);
         shieldComp.ShieldData = entity.Comp.ShieldData;
         shieldComp.RechargeShieldData = entity.Comp.RechargeShieldData;
@@ -125,7 +133,21 @@ public sealed class FieldShieldProviderSystem : EntitySystem
 
     private void OnProviderUnequipped(Entity<FieldShieldProviderComponent> entity, ref GotUnequippedEvent args)
     {
+        entity.Comp.Wearer = null;
         RemCompDeferred<FieldShieldComponent>(args.Equipee);
+    }
+
+    private void OnGetAltVerbs(Entity<FieldShieldProviderComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        foreach (var (id, mode) in ent.Comp.Modes)
+        {
+            args.Verbs.Add(new AlternativeVerb
+            {
+                Text = Loc.GetString("field-shield-set-mode" + id),
+                Act = () => SetMode(ent, id),
+                Priority = 2
+            });
+        }
     }
 
     private void OnFieldShieldBeforeDamage(Entity<FieldShieldComponent> entity, ref BeforeDamageChangedEvent args)
@@ -199,5 +221,28 @@ public sealed class FieldShieldProviderSystem : EntitySystem
         entity.Comp.RechargeEndTime = _gameTiming.CurTime + entity.Comp.RechargeShieldData.RechargeTime * entity.Comp.RechargeShieldData.EmpRechargeMultiplier;
         entity.Comp.ShieldCharge = 0;
         Dirty(entity);
+    }
+
+    public void SetMode(Entity<FieldShieldProviderComponent> ent, string mode)
+    {
+        if (!_gameTiming.IsFirstTimePredicted)
+            return;
+
+        if (ent.Comp.Wearer == null)
+            return;
+
+        if (!ent.Comp.Modes.ContainsKey(mode))
+            return;
+
+        if (!TryComp<FieldShieldComponent>(ent.Comp.Wearer, out var shieldComp))
+            return;
+
+        shieldComp.ShieldData = ent.Comp.Modes[mode];
+
+        ent.Comp.ShieldData = ent.Comp.Modes[mode];
+
+        Dirty((EntityUid)ent.Comp.Wearer, shieldComp);
+
+        Dirty(ent);
     }
 }
