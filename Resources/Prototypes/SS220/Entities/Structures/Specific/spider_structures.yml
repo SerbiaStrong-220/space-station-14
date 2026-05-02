@@ -229,6 +229,7 @@
         sound:
           collection: WoodDestroy
   - type: Airtight
+    noAirWhenFullyAirBlocked: false
   - type: Sprite
     sprite: SS220/Structures/web_passage.rsi
     color: gray
@@ -238,7 +239,15 @@
   - type: Icon
     sprite: SS220/Structures/web_passage.rsi
     state: webpassage
-  - type: SpiderPassage
+  - type: CollisionPassage
+    whitelist:
+      components:
+      - ShardCrystalBlueXeno
+      tags:
+      - SpiderQueen
+      - SpiderServant
+      - SpiderLittle
+    allowIncapacitatedMobs: true
 
 # Cocoon
 - type: entity

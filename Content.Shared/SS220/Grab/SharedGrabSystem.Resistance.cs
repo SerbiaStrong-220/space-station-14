@@ -81,7 +81,11 @@ public partial class SharedGrabSystem
         if (cooldownEnd > _timing.CurTime)
             return;
 
-        var chance = resistance.CurrentStageBreakoutChance[grabbable.Comp.GrabStage];
+        if (!resistance.CurrentStageBreakoutChance.TryGetValue(grabbable.Comp.GrabStage, out var chance))
+        {
+            RefreshGrabResistance(grabbable!);
+            return;
+        }
 
         if (chance <= 0)
             return;

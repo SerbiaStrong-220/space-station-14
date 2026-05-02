@@ -86,11 +86,13 @@ namespace Content.Client.Access.UI
                 JobPresetOptionButton.AddItem(Loc.GetString(job.Name), _jobPrototypeIds.Count - 1);
             }
 
-            SelectAllButton.OnPressed += _ =>
-            {
-                SetAllAccess(true);
-                SubmitData();
-            };
+            // SS220-ID console extended access button-bgn
+            // SelectAllButton.OnPressed += _ =>
+            // {
+            //     SetAllAccess(true);
+            //     SubmitData();
+            // };
+            // SS220-ID console extended access button-end
 
             DeselectAllButton.OnPressed += _ =>
             {
@@ -122,6 +124,13 @@ namespace Content.Client.Access.UI
                 if (!button.Disabled && button.Pressed != enabled)
                     button.Pressed = enabled;
             }
+
+            // SS220-ID console extended access button-bgn
+            var postfix = Loc.GetString("id-card-console-window-extended-access-job-title-postfix");
+
+            if (JobTitleLineEdit.Text.EndsWith(postfix) && !enabled)
+                JobTitleLineEdit.Text = JobTitleLineEdit.Text[..^postfix.Length];
+            // SS220-ID console extended access button-end
         }
 
         private void SelectJobPreset(OptionButton.ItemSelectedEventArgs args)

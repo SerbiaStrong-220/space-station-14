@@ -29,3 +29,7 @@ ent-ClothingHandsWhiteGlovesCaptain = белые перчатки капитан
     .desc = Дорогие перчатки ветерана флотской службы NT.
 ent-ClothingHandsGlovesOrangeJanitor = оранжевые резиновые перчатки
     .desc = Высококачественные резиновые перчатки, скрипящие от желания сделать уборку!
+
+ent-ClothingHandsGlovesSpaceNinjaFake = { ent-ClothingHandsGlovesSpaceNinja }
+    .desc = Прорезиненные тканевые перчатки для косплея ниндзя.
+    .suffix = Поддельный

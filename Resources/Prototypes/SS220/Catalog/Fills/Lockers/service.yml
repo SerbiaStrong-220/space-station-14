@@ -43,15 +43,19 @@
   suffix: Filled
   parent: LockerMime
   components:
-  - type: StorageFill
-    contents:
-    - id: ClothingMaskMime
-    - id: ClothingBackpackDuffelMime
-    - id: ClothingBackpackMime
-    - id: ClothingUniformJumpsuitMime
-    - id: ClothingUniformJumpskirtMime
-    - id: CrayonMime
-    - id: ClownStampBox #ss220-fake-stump-update
-    - id: ClownMimeCyborgInstruction #ss220-clownmimecyborg-update
-    - id: MaterialBananium1 #ss220-clownmimecyborg-update
-    - id: MaterialBananium1 #ss220-clownmimecyborg-update
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: ClothingMaskMime
+        - id: ClothingBackpackDuffelMime
+        - id: ClothingBackpackMime
+        - id: ClothingUniformJumpsuitMime
+        - id: ClothingUniformJumpskirtMime
+        - id: CrayonMime
+        - id: ClownStampBox #ss220-fake-stump-update
+        - id: ClownMimeCyborgInstruction #ss220-clownmimecyborg-update
+        - id: MaterialBananium1 #ss220-clownmimecyborg-update
+        - id: MaterialBananium1 #ss220-clownmimecyborg-update
+        - id: ClothingBackpackNinjaSetFake 
+          prob: 0.10

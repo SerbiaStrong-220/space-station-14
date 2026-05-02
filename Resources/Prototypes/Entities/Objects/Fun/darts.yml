@@ -128,20 +128,16 @@
     solution: melee
   - type: SolutionTransfer
     maxTransferAmount: 7
-# Corvax-HiddenDesc-Start
+# SS220-hidden-desc-begin
   - type: HiddenDescription
     entries:
-    - label: corvax-hidden-desc-HypoDart-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: corvax-hidden-desc-HypoDart-research
-      jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
-# Corvax-HiddenDesc-End
+      SyndicateAgentKnowledge: [ corvax-hidden-desc-HypoDart-syndicate ]
+      ScienceKnowledge: [ corvax-hidden-desc-HypoDart-research ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ScienceKnowledge, null]
+    hiddenName: ent-Dart
+# SS220-hidden-desc-end
 
 - type: entity
   name: dartboard

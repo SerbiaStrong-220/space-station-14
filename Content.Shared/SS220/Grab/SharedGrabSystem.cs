@@ -309,7 +309,7 @@ public abstract partial class SharedGrabSystem : EntitySystem
         grabbable.Comp.GrabStage = newStage;
         Dirty(grabbable);
 
-        RefreshGrabResistance((grabbable, grabbable.Comp));
+        RefreshGrabResistance(grabbable);
 
         var ev = new GrabStageChangeEvent(grabber, grabbable, oldStage, newStage); // all fields are readonly so using for both entities should be ok
         RaiseLocalEvent(grabber, ev);

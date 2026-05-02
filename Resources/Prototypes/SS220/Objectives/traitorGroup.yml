@@ -1,0 +1,6 @@
+- type: weightedRandom
+  id: TraitorIntimidateTargetGroup
+  weights:
+    TraitorIntimidateBruteTargetObjective: 5 # easiest
+    TraitorIntimidateBurnTargetObjective: 3
+    TraitorIntimidateToxinTargetObjective: 1 # hardest

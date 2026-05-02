@@ -107,6 +107,14 @@
   - type: Construction
     graph: Egg
     node: start
+  # SS220-fri-eggs-begin
+  - type: InternalTemperature
+    thickness: 0.8
+    area: 0.012
+  - type: Grillable
+    timeToCook: 10
+    cookingResult: FoodMealFriedegg
+  # SS220-fri-eggs-end
 
 - type: entity
   parent: FoodEggBase

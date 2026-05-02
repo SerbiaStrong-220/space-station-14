@@ -233,6 +233,7 @@ public partial class SeedData
 
     [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))] public string KudzuPrototype = "WeakKudzu";
     [DataField("tomatokillerPrototype")] public EntProtoId TomatoKillerPrototype = "MobTomatoKiller"; // SS220 Tomato-Killer
+    [DataField] public bool AutoSpawnMob = false; //SS220-Mob-Spawn-Nerf
 
     [DataField] public bool TurnIntoKudzu;
     [DataField("turnIntoTomatoKiller")] public bool TurnIntoTomatoKiller; // SS220 Tomato-Killer
@@ -310,7 +311,8 @@ public partial class SeedData
             PlantIconState = PlantIconState,
             CanScream = CanScream,
             TurnIntoKudzu = TurnIntoKudzu,
-            TurnIntoTomatoKiller = TurnIntoTomatoKiller,
+            TurnIntoTomatoKiller = TurnIntoTomatoKiller, //SS220 Tomato-Killer
+            AutoSpawnMob = AutoSpawnMob, //SS220-Mob-Spawn-Nerf
             SplatPrototype = SplatPrototype,
             Mutations = new List<RandomPlantMutation>(),
 
@@ -374,7 +376,8 @@ public partial class SeedData
             PlantIconState = other.PlantIconState,
             CanScream = CanScream,
             TurnIntoKudzu = TurnIntoKudzu,
-            TurnIntoTomatoKiller = TurnIntoTomatoKiller,
+            TurnIntoTomatoKiller = TurnIntoTomatoKiller, //SS220 Tomato-Killer
+            AutoSpawnMob = other.AutoSpawnMob, //SS220-Mob-Spawn-Nerf
             SplatPrototype = other.SplatPrototype,
 
             // Newly cloned seed is unique. No need to unnecessarily clone if repeatedly modified.

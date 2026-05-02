@@ -57,7 +57,7 @@
       points: 1 # Corvax Sponsors
       required: false
     Legs:
-      points: 4
+      points: 5 #SS220-underwear-resprite
       required: false
     Arms:
       points: 4

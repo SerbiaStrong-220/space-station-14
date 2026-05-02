@@ -1296,7 +1296,7 @@
   description: recipes-secret-door-desc
   graph: Girder # SS220 Graph changed (SecretSolidDoor Recipe Update)
   startNode: start
-  targetNode: secretWall # SS220 Graph changed (SecretSolidDoor Recipe Update)
+  targetNode: solidSecretDoor # SS220 Graph changed (SecretSolidDoor Recipe Update)
   category: construction-category-structures
   objectType: Structure
   placementMode: SnapgridCenter

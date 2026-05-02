@@ -376,3 +376,9 @@
 
 - type: Tag
   id: AirDefenseTarget
+
+- type: Tag
+  id: PressureProtectionSuit
+
+- type: Tag
+  id: HookahCoal

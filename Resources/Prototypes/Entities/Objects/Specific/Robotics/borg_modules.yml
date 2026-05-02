@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: BaseBorgModule
   parent: BaseItem
   name: borg module
@@ -713,6 +713,15 @@
         whitelist:
           components:
           - FloorTile
+    # SS220 engineer borg tanks slot (begin)
+    - hand:
+        emptyRepresentative: BorgModuleTanksPlaceholder
+        emptyLabel: borg-slot-construction-empty
+        whitelist:
+          components:
+          - AmeFuelContainer
+          - GasTank
+    # SS220 engineer borg tanks slot (end)
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: construction-module }
 

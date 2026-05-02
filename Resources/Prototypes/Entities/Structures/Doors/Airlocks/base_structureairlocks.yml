@@ -70,6 +70,7 @@
   - type: AccessReader
     containerAccessProvider: board
   - type: Door
+    pryTime: 0 # ss220 airlock insta open
     crushDamage:
       types:
         Blunt: 15

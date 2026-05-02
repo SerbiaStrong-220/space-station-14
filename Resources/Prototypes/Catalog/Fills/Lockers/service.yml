@@ -17,6 +17,7 @@
     - id: DrinkShaker
     - id: ClothingEyesHudBeer
     - id: HandLabeler
+    - id: HookahBase        # SS220 hookah
     - id: DrinkBeerBottleFull
       amount: !type:BinomialNumberSelector
         trials: 3

@@ -4,6 +4,7 @@
   description: job-description-zookeeper
   playTimeTracker: JobZookeeper
   startingGear: ZookeeperGear
+  experienceDefinition: NoSpecialRoleExperience # SS220-experience
   icon: "JobIconZookeeper"
   supervisors: job-supervisors-hop
   access:

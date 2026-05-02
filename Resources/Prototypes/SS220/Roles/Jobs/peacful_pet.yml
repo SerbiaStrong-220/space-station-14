@@ -1,6 +1,7 @@
 - type: job
   id: PeacefulPet # just imagine here joke pls
   name: job-name-peaceful-pet
+  experienceDefinition: NoExperience
   setPreference: false
   playTimeTracker: JobPeacefulPet
   requirements:

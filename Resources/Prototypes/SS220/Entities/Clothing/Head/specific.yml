@@ -80,14 +80,11 @@
       cell_slot: !type:ContainerSlot
   - type: HiddenDescription
     entries:
-    - label: hidden-desc-toy-armour-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: hidden-desc-toy-armour-clown
-      jobRequired:
-        - Clown
-        - Mime
+      SyndicateAgentKnowledge: [ hidden-desc-toy-armour-syndicate ]
+      ServiceActorKnowledge: [ hidden-desc-toy-armour-clown ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ServiceActorKnowledge, null]
 
 #syndie hardsuits helmets
 - type: entity
@@ -155,7 +152,7 @@
 
 #ninja
 - type: entity
-  parent: ClothingHeadBase
+  parent: ClothingHeadHardsuitWithLightFakeBase
   id: ClothingHeadHelmetSpaceNinjaFake
   name: space ninja helmet
   description: The helmet from the Samurai Vamplu costume, an essential part of cosplay.

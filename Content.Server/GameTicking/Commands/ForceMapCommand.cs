@@ -12,7 +12,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.GameTicking.Commands
 {
-    [AdminCommand(AdminFlags.Host)] // SS220-map-force-admin-flag-change
+    [AdminCommand(AdminFlags.Round)]
     public sealed class ForceMapCommand : LocalizedCommands
     {
         [Dependency] private readonly IConfigurationManager _configurationManager = default!;
