@@ -92,8 +92,8 @@
   - type: StaminaResistance
     damageCoefficient: 0.4
   - type: ClothingSpeedModifier
-    walkModifier: 0.80
-    sprintModifier: 0.80
+    walkModifier: 0.9 #SS220 sec hardsuit buff
+    sprintModifier: 0.9 #SS220 sec hardsuit buff
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSecurityPilot
