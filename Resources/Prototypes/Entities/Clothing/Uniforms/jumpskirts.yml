@@ -402,23 +402,25 @@
   description: A jumpskirt made of strong material, providing robust protection.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpskirt/security.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/security.rsi #SS220 sec-skirts-fix
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpskirt/security.rsi
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left
-        color: "#C12D30"
-        sprite: Clothing/Uniforms/Jumpskirt/color.rsi
-      - state: inhand-left # SS220 fix #1729
-        sprite: Clothing/Uniforms/Jumpsuit/security.rsi
-      right:
-      - state: inhand-right
-        color: "#C12D30"
-        sprite: Clothing/Uniforms/Jumpskirt/color.rsi
-      - state: inhand-right # SS220 fix #1729
-        sprite: Clothing/Uniforms/Jumpsuit/security.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/security.rsi #SS220 sec-skirts-fix
+#SS220 sec-skirts-fix begin
+#  - type: Item
+#    inhandVisuals:
+#      left:
+#      - state: inhand-left
+#        color: "#C12D30"
+#        sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+#      - state: inhand-left # SS220 fix #1729
+#        sprite: Clothing/Uniforms/Jumpsuit/security.rsi
+#      right:
+#      - state: inhand-right
+#        color: "#C12D30"
+#        sprite: Clothing/Uniforms/Jumpskirt/color.rsi
+#      - state: inhand-right # SS220 fix #1729
+#        sprite: Clothing/Uniforms/Jumpsuit/security.rsi
+#SS220 sec-skirts-fix end
 
 
 - type: entity
@@ -715,9 +717,9 @@
   suffix: For playtime #SS220-add-time-loadout-suffix
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpskirt/senior_officer.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/senior_officer.rsi #SS220 sec-skirts-fix
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpskirt/senior_officer.rsi
+    sprite: SS220/Clothing/Uniforms/Jumpskirt/senior_officer.rsi #SS220 sec-skirts-fix
 
 - type: entity
   parent: [ClothingUniformSkirtBase, BaseSecurityContraband]

@@ -152,7 +152,7 @@
 
 #ninja
 - type: entity
-  parent: ClothingHeadBase
+  parent: ClothingHeadHardsuitWithLightFakeBase
   id: ClothingHeadHelmetSpaceNinjaFake
   name: space ninja helmet
   description: The helmet from the Samurai Vamplu costume, an essential part of cosplay.
