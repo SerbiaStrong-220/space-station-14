@@ -60,6 +60,8 @@ public sealed class PlantAnalyzerSystem : AbstractAnalyzerSystem<PlantAnalyzerCo
         PlantAnalyzerTrayData? trayData = null;
         PlantAnalyzerTolerancesData? tolerancesData = null;
         PlantAnalyzerProduceData? produceData = null;
+        PlantAnalyzerMutationData? mutationData = null;
+        
         if (_entityManager.TryGetComponent<PlantHolderComponent>(target, out var plantHolder))
         {
             if (plantHolder.Seed is not null)
@@ -95,7 +97,13 @@ public sealed class PlantAnalyzerSystem : AbstractAnalyzerSystem<PlantAnalyzerCo
                     chemicals: [.. plantHolder.Seed.Chemicals.Keys],
                     produce: plantHolder.Seed.ProductPrototypes,
                     exudeGasses: [.. plantHolder.Seed.ExudeGasses.Keys],
-                    seedless: plantHolder.Seed.Seedless
+                    seedless: plantHolder.Seed.Seedless,
+                    harvestType: (byte) plantHolder.Seed.HarvestRepeat
+                );
+                mutationData = new PlantAnalyzerMutationData(
+                    immutable: plantHolder.Seed.Immutable,
+                    ligneous: plantHolder.Seed.Ligneous,
+                    canScream: plantHolder.Seed.CanScream
                 );
             }
             trayData = new PlantAnalyzerTrayData(
@@ -115,6 +123,7 @@ public sealed class PlantAnalyzerSystem : AbstractAnalyzerSystem<PlantAnalyzerCo
             trayData,
             tolerancesData,
             produceData,
+            mutationData,
             analyzer.PrintReadyAt
         );
     }
@@ -167,8 +176,12 @@ public sealed class PlantAnalyzerSystem : AbstractAnalyzerSystem<PlantAnalyzerCo
             ("endurance", data.PlantData?.Endurance.ToString("0.00") ?? missingData),
             ("lifespan", data.PlantData?.Lifespan.ToString("0.00") ?? missingData),
             ("seeds", data.ProduceData is not null ? (data.ProduceData.Seedless ? "no" : "yes") : "other"),
+            ("harvest", data.ProduceData is not null ? _localizationHelper.HarvestTypeToLocalizedStrings(data.ProduceData.HarvestType) : "other"),
             ("viable", data.PlantData is not null ? (data.PlantData.Viable ? "yes" : "no") : "other"),
-            ("kudzu", data.PlantData is not null ? (data.PlantData.Kudzu ? "yes" : "no") : "other")
+            ("kudzu", data.PlantData is not null ? (data.PlantData.Kudzu ? "yes" : "no") : "other"),
+            ("mutations", data.MutationData is not null ? _localizationHelper.MutationsToLocalizedStrings(data.MutationData.Immutable, 
+                                                                                                        data.MutationData.Ligneous, 
+                                                                                                        data.MutationData.CanScream) : missingData)
         ];
 
         _paperSystem.SetContent((printed, paperComp), Loc.GetString($"plant-analyzer-printout", [.. parameters]));

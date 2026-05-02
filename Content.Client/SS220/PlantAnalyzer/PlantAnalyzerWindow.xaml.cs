@@ -184,8 +184,10 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
             var gases = _localizationHelper.GasesToLocalizedStrings(msg.ProduceData.ExudeGasses);
             var (produce, producePlural, firstProduce) = _localizationHelper.ProduceToLocalizedStrings(msg.ProduceData.Produce);
             var chemicals = _localizationHelper.ChemicalsToLocalizedStrings(msg.ProduceData.Chemicals);
+            var harvest = _localizationHelper.HarvestTypeToLocalizedStrings(msg.ProduceData.HarvestType);
 
             (string, object)[] parameters = [
+                ("harvest", harvest),
                 ("yield", msg.ProduceData.Yield),
                 ("gasCount", msg.ProduceData.ExudeGasses.Count),
                 ("gases", gases),
@@ -207,5 +209,26 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
             ProduceBox.Visible = false;
         }
         ProduceDivider.Visible = ProduceBox.Visible;
+
+        // Section 6: Mutations
+        if (msg.MutationData is not null)
+        {
+            (string, object)[] parameters = [
+                ("immutable", msg.MutationData.Immutable),
+                ("ligneous", msg.MutationData.Ligneous),
+                ("canScream", msg.MutationData.CanScream),
+                ("anyMutations", msg.MutationData.Immutable || 
+                                msg.MutationData.Ligneous || 
+                                msg.MutationData.CanScream)
+            ];
+            
+            MutationLabel.Text = Loc.GetString("plant-analyzer-mutation", [.. parameters]);
+            MutationBox.Visible = true;
+        }
+        else
+        {
+            MutationBox.Visible = false;
+        }
+        MutationDivider.Visible = MutationBox.Visible;
     }
 }

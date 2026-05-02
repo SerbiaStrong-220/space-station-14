@@ -63,4 +63,32 @@ public sealed class PlantAnalyzerLocalizationHelper : EntitySystem
             singularStrings[0]
         );
     }
+
+    public string MutationsToLocalizedStrings(bool immutable, bool ligneous, bool canScream)
+    {
+        var mutations = new List<string>();
+
+        if (immutable)
+            mutations.Add(Loc.GetString("plant-analyzer-mutation-immutable"));
+        if (ligneous)
+            mutations.Add(Loc.GetString("plant-analyzer-mutation-ligneous"));
+        if (canScream)
+            mutations.Add(Loc.GetString("plant-analyzer-mutation-canscream"));
+
+        if (mutations.Count == 0)
+            return Loc.GetString("plant-analyzer-mutation-none");
+
+        return ContentLocalizationManager.FormatList(mutations);
+    }
+
+    public string HarvestTypeToLocalizedStrings(byte harvestType)
+    {
+        return harvestType switch
+        {
+            0 => "norepeat",
+            1 => "repeat",
+            2 => "selfharvest",
+            _ => "other"
+        };
+    }
 }

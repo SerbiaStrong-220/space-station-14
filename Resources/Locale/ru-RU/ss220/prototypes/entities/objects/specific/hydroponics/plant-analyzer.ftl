@@ -33,12 +33,43 @@ plant-analyzer-component-environemt = Растение [color=green]{$seedName}[
 plant-analyzer-component-environemt-void = Растение [color=green]{$seedName}[/color] должно выращиваться [bolditalic]в вакууме космоса[/bolditalic] при уровне освещения [color=white]{$lightLevel} ± {$lightTolerance}[/color].
 plant-analyzer-component-environemt-gas = Растение [color=green]{$seedName}[/color] требует атмосферу, содержащую [bold]{$gases}[/bold], с уровнем давления [color=lightblue]{$kpa}кПа ± {$kpaTolerance}кПа[/color], температуру [color=lightsalmon]{$temp}°К ± {$tempTolerance}°К[/color] и уровень освещения [color=white]{$lightLevel} ± {$lightTolerance}[/color].
 plant-analyzer-produce-plural = {$thing}
+plant-analyzer-mutation-immutable = не может мутировать
+plant-analyzer-mutation-ligneous = требуется инструмент для сбора
+plant-analyzer-mutation-canscream = может кричать
+plant-analyzer-mutation-none = отсутствуют
+plant-analyzer-mutation = Особые мутации: { $anyMutations ->
+    [false] { plant-analyzer-mutation-none }.
+    *[true] { $immutable ->
+        [true] [color=red]{ plant-analyzer-mutation-immutable }[/color]
+        *[false] {""}
+    }{ $ligneous ->
+        [true] { $immutable ->
+            [true] ,{" "}
+            *[false] {""}
+        }[color=lightsalmon]{ plant-analyzer-mutation-ligneous }[/color]
+        *[false] {""}
+    }{ $canScream ->
+        [true] { $immutable ->
+            [true] ,{" "}
+            *[false] { $ligneous ->
+                [true] ,{" "}
+                *[false] {""}
+            }
+        }{ plant-analyzer-mutation-canscream }
+        *[false] {""}
+    }.
+}
 plant-analyzer-output = {$yield ->
     [0]{$gasCount ->
         [0]Единственное, что оно делает - потребляет воду и питательные вещества.
         *[other]Единственное, что оно делает - превращает воду и питательные вещества в [bold]{$gases}[/bold].
     }
-    *[other]Имеет [color=lightgreen]{$yield} {$potency}[/color]{$seedless ->
+    *[other]{ $harvest ->
+        [norepeat] [color=orange]Однолетнее.[/color]
+        [repeat] [color=lightblue]Многолетнее.[/color]
+        [selfharvest] [color=purple]Многолетнее. Сбрасывает плоды самостоятельно.[/color]
+        *[other] {""}
+    }{" "}Имеет [color=lightgreen]{$yield} {$potency}[/color]{$seedless ->
         [true]{" "}но [color=red]бессемянных[/color]
         *[false]{$nothing}
     }{" "}{$yield ->
@@ -104,6 +135,12 @@ plant-analyzer-printout =
     {"    "}[bullet/] Давление: [color=lightblue]{$kpa}кПа ± {$kpaTolerance}кПа[/color]
     {"    "}[bullet/] Температура: [color=lightsalmon]{$temp}°К ± {$tempTolerance}°К[/color]
     {"    "}[bullet/] Освещение: [color=gray][bold]{$lightLevel} ± {$lightTolerance}[/bold][/color]
+    {"[bullet/]"} Сбор: {$harvest ->
+        [norepeat][color=orange]Однолетнее[/color]
+        [repeat][color=lightblue]Многолетнее[/color]
+        [selfharvest][color=purple]Многолетнее. Сбрасывает плоды самостоятельно.[/color]
+        *[other]{LOC("plant-analyzer-printout-missing")}
+    }
     {"[bullet/]"} Цветы: {$yield ->
         [-1]{LOC("plant-analyzer-printout-missing")}
         [0][color=red]0[/color]
@@ -116,3 +153,4 @@ plant-analyzer-printout =
     }
     {"[bullet/]"} Химикаты: [color=gray][bold]{$chemicals}[/bold][/color]
     {"[bullet/]"} Выбросы: [bold]{$gasesOut}[/bold]
+    {"[bullet/]"} Особые мутации: {$mutations}

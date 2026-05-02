@@ -7,7 +7,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.SS220.PlantAnalyzer;
 
 [Serializable, NetSerializable]
-public sealed class PlantAnalyzerScannedUserMessage(NetEntity? targetEntity, bool? scanMode, PlantAnalyzerPlantData? plantData, PlantAnalyzerTrayData? trayData, PlantAnalyzerTolerancesData? tolerancesData, PlantAnalyzerProduceData? produceData, TimeSpan? printReadyAt) : BoundUserInterfaceMessage
+public sealed class PlantAnalyzerScannedUserMessage(NetEntity? targetEntity, bool? scanMode, PlantAnalyzerPlantData? plantData, PlantAnalyzerTrayData? trayData, PlantAnalyzerTolerancesData? tolerancesData, PlantAnalyzerProduceData? produceData, PlantAnalyzerMutationData? mutationData, TimeSpan? printReadyAt) : BoundUserInterfaceMessage
 {
     public readonly NetEntity? TargetEntity = targetEntity;
     public bool? ScanMode = scanMode;
@@ -15,6 +15,7 @@ public sealed class PlantAnalyzerScannedUserMessage(NetEntity? targetEntity, boo
     public PlantAnalyzerTrayData? TrayData = trayData;
     public PlantAnalyzerTolerancesData? TolerancesData = tolerancesData;
     public PlantAnalyzerProduceData? ProduceData = produceData;
+    public PlantAnalyzerMutationData? MutationData = mutationData;
     public readonly TimeSpan? PrintReadyAt = printReadyAt;
 }
 
@@ -75,7 +76,7 @@ public sealed class PlantAnalyzerPlantData(string seedDisplayName, float health,
 /// Information about the output of a plant (produce and gas).
 /// </summary>
 [Serializable, NetSerializable]
-public sealed class PlantAnalyzerProduceData(int yield, float potency, List<string> chemicals, List<EntProtoId> produce, List<Gas> exudeGasses, bool seedless)
+public sealed class PlantAnalyzerProduceData(int yield, float potency, List<string> chemicals, List<EntProtoId> produce, List<Gas> exudeGasses, bool seedless, byte harvestType)
 {
     public int Yield = yield;
     public string Potency = ObscurePotency(potency);
@@ -83,6 +84,7 @@ public sealed class PlantAnalyzerProduceData(int yield, float potency, List<stri
     public List<EntProtoId> Produce = produce;
     public List<Gas> ExudeGasses = exudeGasses;
     public bool Seedless = seedless;
+    public byte HarvestType = harvestType;
 
     private static string ObscurePotency(float potency)
     {
@@ -102,6 +104,18 @@ public sealed class PlantAnalyzerProduceData(int yield, float potency, List<stri
 
         return potencyFtl;
     }
+}
+
+
+/// <summary>
+/// Information about mutations.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class PlantAnalyzerMutationData(bool immutable, bool ligneous, bool canScream)
+{
+    public bool Immutable = immutable;
+    public bool Ligneous = ligneous;
+    public bool CanScream = canScream;
 }
 
 [Serializable, NetSerializable]

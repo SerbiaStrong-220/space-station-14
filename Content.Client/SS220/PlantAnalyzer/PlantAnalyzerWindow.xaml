@@ -108,6 +108,10 @@
                     <RichTextLabel Name="ProduceLabel" SetWidth="290" />
                 </BoxContainer>
                 <PanelContainer Name="ProduceDivider" Visible="false" StyleClasses="LowDivider" />
+                <BoxContainer Name="MutationBox" Visible="false" Orientation="Horizontal" Margin="5">
+                    <RichTextLabel Name="MutationLabel" SetWidth="290" />
+                </BoxContainer>
+                <PanelContainer Name="MutationDivider" Visible="false" StyleClasses="LowDivider" />
                 <Button Name="Print"
                     TextAlign="Center"
                     HorizontalExpand="True"
