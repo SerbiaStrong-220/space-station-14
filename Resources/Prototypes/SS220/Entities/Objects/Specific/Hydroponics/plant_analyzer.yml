@@ -13,7 +13,6 @@
     - state: analyzer
       shader: unshaded
   - type: Item
-    storedRotation: -90
   - type: Tag
     tags:
     - PlantAnalyzer
