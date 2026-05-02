@@ -68,7 +68,7 @@ public sealed class AltArmorSystem : EntitySystem
                     maximalDamageType = type;
                 }
 
-                if (ent.Comp.TransformSpecifierDict.ContainsKey(type))
+                if (ent.Comp.TransformSpecifierDict.ContainsKey(type) && ent.Comp.TresholdDict.ContainsKey(ent.Comp.TransformSpecifierDict[type]))
                     CountDifference(
                         resultDamage.DamageDict,
                         damage.DamageDict[type] - damageDiff,
