@@ -237,6 +237,8 @@ namespace Content.Shared.Damage
             var delta = new DamageSpecifier();
             delta.DamageDict.EnsureCapacity(damage.DamageDict.Count);
 
+            delta.ArmourPiercing = damage.ArmourPiercing; //SS220 armor piercing added
+
             var dict = damageable.Damage.DamageDict;
             foreach (var (type, value) in damage.DamageDict)
             {
