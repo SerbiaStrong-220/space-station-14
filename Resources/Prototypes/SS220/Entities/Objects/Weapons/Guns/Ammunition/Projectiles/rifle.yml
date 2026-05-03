@@ -11,8 +11,8 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 20
-      armourPiercing: 15
+        Piercing: 29
+      armourPiercing: 18
 
 - type: entity
   id: BulletRifleHP

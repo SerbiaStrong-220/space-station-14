@@ -139,8 +139,14 @@ public sealed class FieldShieldProviderSystem : EntitySystem
 
     private void OnGetAltVerbs(Entity<FieldShieldProviderComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
+        if (ent.Comp.Wearer != args.User)
+            return;
+
         foreach (var (id, mode) in ent.Comp.Modes)
         {
+            if (id == ent.Comp.Mode)
+                continue;
+
             args.Verbs.Add(new AlternativeVerb
             {
                 Text = Loc.GetString("field-shield-set-mode" + id),
@@ -240,6 +246,8 @@ public sealed class FieldShieldProviderSystem : EntitySystem
         shieldComp.ShieldData = ent.Comp.Modes[mode];
 
         ent.Comp.ShieldData = ent.Comp.Modes[mode];
+
+        ent.Comp.Mode = mode;
 
         Dirty((EntityUid)ent.Comp.Wearer, shieldComp);
 

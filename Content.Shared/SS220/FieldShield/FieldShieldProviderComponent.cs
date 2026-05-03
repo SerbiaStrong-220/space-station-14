@@ -21,6 +21,10 @@ public sealed partial class FieldShieldProviderComponent : Component
     [AutoNetworkedField]
     public Dictionary<string, FieldShieldData> Modes = new Dictionary<string, FieldShieldData> { };
 
+    [DataField]
+    [AutoNetworkedField]
+    public string Mode = "any";
+
     [ViewVariables]
     [AutoNetworkedField]
     public TimeSpan UnLockAfterEmpTime;

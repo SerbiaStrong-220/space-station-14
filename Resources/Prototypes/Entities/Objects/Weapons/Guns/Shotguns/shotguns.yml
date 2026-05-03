@@ -78,7 +78,7 @@
     - Back
     - suitStorage
   - type: AmmoCounter
-  #FCB realistic guns begin
+  #SS220 weapon overhaul begin
   - type: GunWieldBonus
     minAngle: -5
     maxAngle: -20
@@ -86,14 +86,14 @@
   - type: GunAimable
     minAngle: -8
     maxAngle: -6
-  #FCB realistic guns end
+  #SS220 weapon overhaul end
   - type: Gun
-  #FCB realistic shotguns begin
+  #SS220 weapon overhaul begin
     angleIncrease: 7
     angleDecay: 6
     minAngle: 15
     maxAngle: 35
-  #FCB realistic shotguns end
+  #SS220 weapon overhaul end
     fireRate: 2
     selectedMode: FullAuto
     availableModes:
@@ -178,7 +178,7 @@
     sprite: Objects/Weapons/Guns/Shotguns/enforcer.rsi
   - type: Item
     sprite: Objects/Weapons/Guns/Shotguns/enforcer_inhands_64x.rsi
-  #FCB realistic guns begin
+  #SS220 weapon overhaul begin
   - type: GunWieldBonus
     minAngle: -5
     maxAngle: -20
@@ -191,7 +191,7 @@
     angleDecay: 6
     minAngle: 15
     maxAngle: 35
-  #FCB realistic guns end
+  #SS220 weapon overhaul end
     soundGunshot:
       path: /Audio/Corvax/Weapons/Guns/Gunshots/shotgun_metal.ogg
 
@@ -218,7 +218,7 @@
   - type: Clothing
     sprite: SS220/Objects/Weapons/Guns/Shotguns/pump.rsi #SS220 kammerer resprite
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
-  #FCB realistic guns begin
+  #SS220 weapon overhaul begin
   - type: GunWieldBonus
     minAngle: -5
     maxAngle: -21
@@ -231,7 +231,7 @@
     angleDecay: 8
     minAngle: 15
     maxAngle: 35
-  #FCB realistic guns end
+  #SS220 weapon overhaul end
     fireRate: 1
     soundGunshot: # Corvax-Guns
       path: /Audio/Corvax/Weapons/Guns/Gunshots/shotgun_alt.ogg
