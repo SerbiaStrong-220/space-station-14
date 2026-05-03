@@ -1,14 +1,17 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Atmos.Components;
+using Content.Server.Damage.Components;
 using Content.Server.Stunnable;
 using Content.Server.Temperature.Systems;
-using Content.Server.Damage.Components;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Alert;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
+using Content.Shared.Body.Systems;
 using Content.Shared.Damage;
 using Content.Shared.Database;
+using Content.Shared.FixedPoint;
+using Content.Shared.Hands;
 using Content.Shared.IgnitionSource;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
@@ -16,22 +19,23 @@ using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Rejuvenate;
+using Content.Shared.SS220.Input;
+using Content.Shared.SS220.Projectiles.Components;
+using Content.Shared.SS220.Weapons.Ranged.Events;
 using Content.Shared.Temperature;
+using Content.Shared.Temperature.Components;
 using Content.Shared.Throwing;
 using Content.Shared.Timing;
 using Content.Shared.Toggleable;
 using Content.Shared.Weapons.Melee.Events;
-using Content.Shared.FixedPoint;
-using Content.Shared.Hands;
-using Content.Shared.Temperature.Components;
 using Robust.Server.Audio;
+using Robust.Shared.Input.Binding;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Random;
-using Robust.Shared.Input.Binding;
-using Content.Shared.SS220.Input;
 using Robust.Shared.Player;
+using Robust.Shared.Random;
+using Content.Server.Projectiles;
 
 namespace Content.Server.Atmos.EntitySystems
 {
@@ -72,14 +76,14 @@ namespace Content.Server.Atmos.EntitySystems
 
             SubscribeLocalEvent<FlammableComponent, MapInitEvent>(OnMapInit);
             SubscribeLocalEvent<FlammableComponent, InteractUsingEvent>(OnInteractUsing);
-            SubscribeLocalEvent<FlammableComponent, StartCollideEvent>(OnCollide);
+            SubscribeLocalEvent<FlammableComponent, StartCollideEvent>(OnCollide, after: [typeof(ProjectileSystem)]);//SS220 shield rework
             SubscribeLocalEvent<FlammableComponent, IsHotEvent>(OnIsHot);
             SubscribeLocalEvent<FlammableComponent, TileFireEvent>(OnTileFire);
             SubscribeLocalEvent<FlammableComponent, RejuvenateEvent>(OnRejuvenate);
             SubscribeLocalEvent<FlammableComponent, ResistFireAlertEvent>(OnResistFireAlert);
             Subs.SubscribeWithRelay<FlammableComponent, ExtinguishEvent>(OnExtinguishEvent);
 
-            SubscribeLocalEvent<IgniteOnCollideComponent, StartCollideEvent>(IgniteOnCollide);
+            SubscribeLocalEvent<IgniteOnCollideComponent, StartCollideEvent>(IgniteOnCollide, after: [typeof(ProjectileSystem)]);//SS220 shield rework
             SubscribeLocalEvent<IgniteOnCollideComponent, LandEvent>(OnIgniteLand);
 
             SubscribeLocalEvent<IgniteOnMeleeHitComponent, MeleeHitEvent>(OnMeleeHit);
@@ -124,6 +128,11 @@ namespace Content.Server.Atmos.EntitySystems
         {
             if (!args.OtherFixture.Hard || component.Count == 0)
                 return;
+
+            //SS220 shield rework begin
+            if (TryComp<BlockedProjectileComponent>(uid, out var blockedProjectile) && TryGetEntity(blockedProjectile.BlockerEntity, out var localBlocker) && localBlocker == args.OtherEntity)
+                return;
+            //SS220 shield rework end
 
             var otherEnt = args.OtherEntity;
 

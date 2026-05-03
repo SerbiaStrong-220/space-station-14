@@ -1,5 +1,6 @@
-﻿using Content.Shared.Trigger.Components.Triggers;
+using Content.Shared.SS220.Weapons.Ranged.Events;
 using Content.Shared.StepTrigger.Systems;
+using Content.Shared.Trigger.Components.Triggers;
 using Robust.Shared.Physics.Events;
 
 namespace Content.Shared.Trigger.Systems;
