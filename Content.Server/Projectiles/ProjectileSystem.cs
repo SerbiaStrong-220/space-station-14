@@ -114,9 +114,6 @@ public sealed class ProjectileSystem : SharedProjectileSystem
                     if (damageableComponent != null)
                         targetThreshold = damageableComponent.PiercingThreshold.Float();
 
-                    if (damageableComponent != null && _prototypeManager.Resolve(damageableComponent.DamageModifierSetId, out var modifierSet) && modifierSet.FlatReduction.ContainsKey(requiredDamageType))
-                        targetThreshold += modifierSet.FlatReduction[requiredDamageType];
-
                     if (TryComp<AltArmorComponent>(target, out var armorComp) && armorComp.TresholdDict.ContainsKey(requiredDamageType))
                         targetThreshold += armorComp.TresholdDict[requiredDamageType].Float();
 
