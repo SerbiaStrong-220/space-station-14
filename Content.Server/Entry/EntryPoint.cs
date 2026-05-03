@@ -40,6 +40,7 @@ using Robust.Shared.Utility;
 using Content.Server.SS220.BackEndApi;
 using Content.Shared.SS220.CCVars;
 using Content.Server.SS220.Wiki.Generators;
+using Content.Server.SS220.GuideGenerator;
 
 namespace Content.Server.Entry
 {
@@ -195,6 +196,17 @@ namespace Content.Server.Entry
                 return;
             }
             // SS220 wiki end
+            // SS220-Start: Webmap
+            if (_cfg.GetCVar(CCVars220.GenerateWebmapDataRun))
+            {
+                var resPath = new ResPath(_cfg.GetCVar(CCVars220.StationsJsonSavePath) + ".json").ToRootedPath();
+                var file = _res.UserData.OpenWriteText(resPath);
+                StationsJsonGenerator.PublishJson(file);
+
+                Dependencies.Resolve<IBaseServer>().Shutdown("Stations data generation done");
+                return;
+            }
+            // SS220-End
 
             _recipe.Initialize();
             _admin.Initialize();
