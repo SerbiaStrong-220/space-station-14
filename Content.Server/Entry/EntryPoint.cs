@@ -202,6 +202,7 @@ namespace Content.Server.Entry
                 var resPath = new ResPath(_cfg.GetCVar(CCVars220.StationsJsonSavePath) + ".json").ToRootedPath();
                 var file = _res.UserData.OpenWriteText(resPath);
                 StationsJsonGenerator.PublishJson(file);
+                file.Flush();
 
                 Dependencies.Resolve<IBaseServer>().Shutdown("Stations data generation done");
                 return;

@@ -26,9 +26,8 @@ public sealed class StationsJsonGenerator
             return;
         }
 
-        var stations = prototypeManager
-            .EnumeratePrototypes<GameMapPrototype>()
-            .Select(x => new StationEntry(x))
+        var stations = poolPrototype.Maps
+            .Select(x => new StationEntry(prototypeManager.Index<GameMapPrototype>(x)))
             .ToList();
 
         var serializeOptions = new JsonSerializerOptions
