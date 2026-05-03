@@ -19,8 +19,8 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 32
-      armourPiercing: 35
+        Piercing: 42
+      armourPiercing: 25
 
 - type: entity
   id: BulletFullRifleAPM2
@@ -31,8 +31,8 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 32
-      armourPiercing: 45
+        Piercing: 42
+      armourPiercing: 35
 
 - type: entity
   id: BulletFullRifleIncendiary

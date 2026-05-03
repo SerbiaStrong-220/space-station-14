@@ -79,24 +79,24 @@
     - type: AltArmor
       tresholddict:
           Piercing: 6
-          Blunt: 20
+          Blunt: 30
           Heat: 10
+          Slash: 25
+          Radiation: 1000
+          Poison: 1000
+          Airloss: 1000
+          Caustic: 1000
+          Shock: 30
+      durabilitytresholddict:
+          Piercing: 7
+          Blunt: 15
+          Heat: 7
           Slash: 15
           Radiation: 1000
           Poison: 1000
           Airloss: 1000
           Caustic: 1000
-          #Shock: 30
-      durabilitytresholddict:
-          Piercing: 7
-          Blunt: 15
-          Heat: 7
-          Slash: 10
-          Radiation: 1000
-          Poison: 1000
-          Airloss: 1000
-          Caustic: 1000
-          #Shock: 40
+          Shock: 40
 
 - type: entity
   name: laser shield
@@ -120,8 +120,8 @@
           Airloss: 1000
           Caustic: 1000
           Piercing: 7
-          Blunt: 10
-          Heat: 60
+          Blunt: 15
+          Heat: 70
           Slash: 7
           Shock: 30
       durabilitytresholddict:
@@ -130,8 +130,8 @@
           Airloss: 1000
           Caustic: 1000
           Piercing: 4
-          Blunt: 5
-          Heat: 35
+          Blunt: 10
+          Heat: 50
           Slash: 4
           Shock: 40
 
@@ -156,9 +156,9 @@
           Poison: 1000
           Airloss: 1000
           Caustic: 1000
-          Piercing: 37
+          Piercing: 50
           Blunt: 35
-          Heat: 30
+          Heat: 40
           Slash: 35
           Shock: 30
       durabilitytresholddict:
@@ -166,9 +166,9 @@
           Poison: 1000
           Airloss: 1000
           Caustic: 1000
-          Piercing: 30
-          Blunt: 30
-          Heat: 25
+          Piercing: 38
+          Blunt: 35
+          Heat: 36
           Slash: 30
           Shock: 40
     - type: ClothingSpeedModifier
@@ -318,18 +318,18 @@
     - type: AltArmor
       tresholddict:
           Piercing: 6
-          Blunt: 20
+          Blunt: 30
           Heat: 10
-          Slash: 15
+          Slash: 30
           Radiation: 1000
           Poison: 1000
           Airloss: 1000
           Caustic: 1000
       durabilitytresholddict:
           Piercing: 5
-          Blunt: 15
+          Blunt: 20
           Heat: 7
-          Slash: 10
+          Slash: 20
           Radiation: 1000
           Poison: 1000
           Airloss: 1000
@@ -581,9 +581,9 @@
     - type: Appearance
     - type: AltArmor
       tresholddict:
-        Piercing: 55
+        Piercing: 65
         Blunt: 30
-        Heat: 26
+        Heat: 40
         Slash: 30
         Radiation: 1000
         Poison: 1000
@@ -593,7 +593,7 @@
       durabilitytresholddict:
         Piercing: 60
         Blunt: 40
-        Heat: 40
+        Heat: 50
         Slash: 40
         Radiation: 1000
         Poison: 1000
@@ -659,9 +659,9 @@
     - type: AltArmor
       tresholddict:
           Piercing: 15
-          Blunt: 20
+          Blunt: 30
           Heat: 10
-          Slash: 15
+          Slash: 25
           Radiation: 1000
           Poison: 1000
           Airloss: 1000
@@ -670,7 +670,7 @@
           Piercing: 12
           Blunt: 15
           Heat: 7
-          Slash: 10
+          Slash: 15
           Radiation: 1000
           Poison: 1000
           Airloss: 1000
