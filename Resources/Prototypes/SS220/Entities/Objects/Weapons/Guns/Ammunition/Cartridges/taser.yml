@@ -1,0 +1,9 @@
+- type: entity
+  parent: BaseCartridge
+  id: TaserDartCartridge
+  components:
+  - type: Tag
+    tags:
+      - TaserDart
+  - type: CartridgeAmmo
+    proto: TaserDart

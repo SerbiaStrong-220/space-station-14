@@ -154,8 +154,6 @@
   materials:
     Steel: 700
     Plastic: 300
-    Gold: 250
-    Silver: 500
 
 - type: latheRecipe
   id: WeaponLaserSMG
@@ -195,12 +193,9 @@
     Uranium: 700
 
 - type: latheRecipe
-  id: WeaponSniperCompact
-  result: WeaponSniperCompact
-  completetime: 5
+  id: TaserCartridge
+  result: MagazineTaser
+  completetime: 1
   materials:
-    Steel: 2500
-    Glass: 100
-    Plastic: 300
-    Gold: 200
-    Silver: 200
+    Steel: 50 # Very cheap because it's weak
+    Plastic: 50

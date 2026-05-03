@@ -167,20 +167,6 @@
   recipeUnlocks:
   - WeaponXrayCannon
 
-#SS220 taserback
-- type: technology
-  id: HandheldElectricalPropulsion
-  name: research-technology-handheld-electrical-propulsion
-  icon:
-    sprite: Objects/Weapons/Guns/Battery/taser.rsi
-    state: icon
-  discipline: Arsenal
-  tier: 3
-  cost: 12500
-  recipeUnlocks:
-  - WeaponTaser
-#SS220 taserback end
-
 - type: technology
   id: KineticModifications
   name: research-technology-kinetic-modifications

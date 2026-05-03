@@ -57,3 +57,32 @@
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
+
+- type: entity
+  id: MagazineTaser
+  name: taser cartridge
+  parent: [ BaseItem, BaseSecurityContraband ]
+  components:
+  - type: Tag
+    tags:
+    - TaserCartridge
+  - type: BallisticAmmoProvider
+    proto: TaserDartCartridge
+    cycleable: false
+    mayTransfer: false
+    whitelist:
+      tags:
+        - TaserDart
+    capacity: 2
+    soundRack:
+      path: /Audio/Corvax/Weapons/Guns/Cock/shotgun_cock.ogg
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/taser.rsi
+    layers:
+    - state: mag
+  - type: Appearance

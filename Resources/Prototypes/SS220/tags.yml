@@ -161,6 +161,12 @@
   id: ToyGrenade
 
 - type: Tag
+  id: TaserDart
+
+- type: Tag
+  id: TaserCartridge
+
+- type: Tag
   id: MagazineLightRifleBoxToy
 
 - type: Tag
