@@ -3,10 +3,11 @@
 using Content.Shared.Damage;
 using Content.Shared.Emp;
 using Content.Shared.Examine;
+using Content.Shared.FixedPoint;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.FieldShield;
@@ -16,6 +17,7 @@ public sealed class FieldShieldProviderSystem : EntitySystem
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     private const int FieldShieldPushPriority = 2;
 
@@ -128,13 +130,40 @@ public sealed class FieldShieldProviderSystem : EntitySystem
         RemCompDeferred<FieldShieldComponent>(args.Equipee);
     }
 
+    private FixedPoint2 GetBlockableDamage(Entity<FieldShieldComponent> entity, DamageSpecifier damageSpec, EntityUid? origin)
+    {
+        var totalIgnored = FixedPoint2.Zero;
+
+        var damage = DamageSpecifier.GetPositive(damageSpec);
+        if (damage.Empty)
+            return totalIgnored;
+
+        // Lack of origin usually indicates indirect damage, e.g. status effect (burning), metabolism, ambient radiation.
+        // Some sources of damage (projectile grenades) don't pass Origin, so we can't be a 100% sure what's hitting us.
+        // Let's ignore safe bets - metabolic overdose, airloss, etc.
+        if (origin is null)
+        {
+            foreach (var groupType in entity.Comp.ShieldData.IgnoredDamage)
+            {
+                var damageGroup = _prototype.Index(groupType);
+                if (damage.TryGetDamageInGroup(damageGroup, out var total))
+                {
+                    totalIgnored += total;
+                }
+            }
+        }
+
+        return damage.GetTotal() - totalIgnored;
+    }
+
     private void OnFieldShieldBeforeDamage(Entity<FieldShieldComponent> entity, ref BeforeDamageChangedEvent args)
     {
         if (args.Cancelled)
             return;
 
-        if (args.Damage.GetTotal() > entity.Comp.ShieldData.MaxDamageConsumable
-            || args.Damage.GetTotal() < entity.Comp.ShieldData.DamageThreshold)
+        var blockableDamage = GetBlockableDamage(entity, args.Damage, args.Origin);
+        if (blockableDamage > entity.Comp.ShieldData.MaxDamageConsumable ||
+            blockableDamage < entity.Comp.ShieldData.DamageThreshold)
             return;
 
         UpdateShieldTimer(entity);
@@ -148,7 +177,8 @@ public sealed class FieldShieldProviderSystem : EntitySystem
 
     private void OnShieldDamageModify(Entity<FieldShieldComponent> entity, ref DamageModifyEvent args)
     {
-        if (args.OriginalDamage.GetTotal() < entity.Comp.ShieldData.DamageThreshold)
+        var blockableDamage = GetBlockableDamage(entity, args.Damage, args.Origin);
+        if (blockableDamage < entity.Comp.ShieldData.DamageThreshold)
             return;
 
         UpdateShieldTimer(entity);

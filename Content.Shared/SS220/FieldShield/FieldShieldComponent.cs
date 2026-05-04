@@ -1,9 +1,11 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 
 using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
@@ -96,6 +98,19 @@ public partial struct FieldShieldData
             {"Cold", 0.5f},
             {"Stamina", 0.2f}
         }
+    };
+
+    /// <summary>
+    /// Indirect damage instances of these types are ignored by the shield entity.
+    /// </summary>
+    [DataField]
+    [AutoNetworkedField]
+    public List<ProtoId<DamageGroupPrototype>> IgnoredDamage = new()
+    {
+        "Airloss",
+        "Toxin",
+        "Genetic",
+        "Metaphysical"
     };
 
     [DataField]
