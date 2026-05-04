@@ -276,7 +276,6 @@
         - id: ClothingOuterSuitSpaceNinjaFake
         - id: ClothingMaskNinja
         - id: EnergyKatanaToy
-        - id: ClothingHandsGlovesSpaceNinja #real ones, but they are anyway usuless if wearer isn't real ninja, so yeah.
         - id: ThrowingStar
           amount: 2
         - id: ClothingFootWrapsBlack
