@@ -34,7 +34,7 @@
         coefficients:
           Blunt: 0.8
           Slash: 0.8
-          Piercing: 0.6
+          Piercing: 0.7 #SS220 detective outer rebalance
           Heat: 0.9
 
 - type: entity
