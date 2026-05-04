@@ -1,4 +1,5 @@
 using System.Collections.Frozen;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chemistry.Components;
@@ -97,7 +98,7 @@ namespace Content.Shared.Chemistry.Reaction
         /// <param name="reaction">The reaction to check.</param>
         /// <param name="lowestUnitReactions">How many times this reaction can occur.</param>
         /// <returns></returns>
-        private bool CanReact(Entity<SolutionComponent> soln, ReactionPrototype reaction, ReactionMixerComponent? mixerComponent, out FixedPoint2 lowestUnitReactions)
+        private bool CanReact(Entity<SolutionComponent> soln, ReactionPrototype reaction, ReactionMixerComponent? mixerComponent, out FixedPoint2 lowestUnitReactions, bool isFermentation = false) // SS220-beer-update
         {
             var solution = soln.Comp.Solution;
 
@@ -158,7 +159,7 @@ namespace Content.Shared.Chemistry.Reaction
             }
 
             if (reaction.Quantized)
-                lowestUnitReactions = (int) lowestUnitReactions;
+                lowestUnitReactions = (int)lowestUnitReactions;
 
             return lowestUnitReactions > 0;
         }
@@ -232,6 +233,9 @@ namespace Content.Shared.Chemistry.Reaction
             // attempt to perform any applicable reaction
             foreach (var reaction in reactions)
             {
+                if (reaction.Fermentation) // SS220-beer-update
+                    continue;
+
                 if (!CanReact(soln, reaction, mixerComponent, out var unitReactions))
                 {
                     continue;
@@ -282,6 +286,48 @@ namespace Content.Shared.Chemistry.Reaction
 
             Log.Error($"{nameof(Solution)} {soln.Owner} could not finish reacting in under {MaxReactionIterations} loops.");
         }
+
+        // SS220-beer-update-start
+        public bool TryGetFermentationReaction(Entity<SolutionComponent> soln, out ReactionPrototype? reaction, out FixedPoint2 unitReactions)
+        {
+            foreach (var reactant in soln.Comp.Solution.Contents)
+            {
+                if (!_reactionsSingle.TryGetValue(reactant.Reagent.Prototype, out var candidates))
+                    continue;
+
+                foreach (var candidate in candidates)
+                {
+                    if (!candidate.Fermentation)
+                        continue;
+
+                    if (!CanReact(soln, candidate, null, out unitReactions, isFermentation: true))
+                        continue;
+
+                    reaction = candidate;
+                    return true;
+                }
+            }
+
+            reaction = null;
+            unitReactions = FixedPoint2.Zero;
+            return false;
+        }
+
+        public void PerformFermentationReaction(Entity<SolutionComponent> soln, ReactionPrototype reaction, FixedPoint2 unitReactions)
+        {
+            PerformReaction(soln, reaction, unitReactions);
+        }
+
+        public bool TryCanReact(Entity<SolutionComponent> soln, ReactionPrototype reaction, ReactionMixerComponent? mixer, out FixedPoint2 unitReactions)
+        {
+            return CanReact(soln, reaction, mixer, out unitReactions);
+        }
+
+        public void TryPerformReaction(Entity<SolutionComponent> soln, ReactionPrototype reaction, FixedPoint2 unitReactions)
+        {
+            PerformReaction(soln, reaction, unitReactions);
+        }
+        // SS220-beer-update-end
     }
 
     /// <summary>

@@ -1,0 +1,120 @@
+- type: reagent
+  id: Malt
+  name: reagent-name-malt
+  group: Foods
+  desc: reagent-desc-malt
+  physicalDesc: reagent-physical-desc-powdery
+  flavor: chalky
+  color: "#D4B890"
+  recognizable: true
+  metabolisms:
+    Food:
+      effects:
+      - !type:AdjustReagent
+        reagent: Sugar
+        amount: 0.2
+      - !type:SatiateThirst
+        factor: -0.1
+      - !type:AdjustReagent
+        reagent: Nutriment
+        amount: 0.2
+
+- type: reagent
+  id: Yeast
+  name: reagent-name-yeast
+  group: Foods
+  desc: reagent-desc-yeast
+  physicalDesc: reagent-physical-desc-powdery
+  flavor: bitter
+  color: "#979591"
+  recognizable: true
+  metabolisms:
+    Food:
+      effects:
+      - !type:SatiateThirst
+        factor: -0.1
+      - !type:AdjustReagent
+        reagent: Nutriment
+        amount: 0.2
+
+- type: reagent
+  id: HopsExtract
+  name: reagent-name-hops-extract
+  group: Foods
+  desc: reagent-desc-hops-extract
+  physicalDesc: reagent-physical-desc-powdery
+  flavor: bitter
+  color: "#6f9c3c"
+  recognizable: true
+  metabolisms:
+    Food:
+      effects:
+      - !type:AdjustReagent
+        reagent: Sugar
+        amount: 0.1
+      - !type:SatiateThirst
+        factor: -0.05
+      - !type:AdjustReagent
+        reagent: Nutriment
+        amount: 0.05
+
+- type: reagent
+  id: WortBase
+  name: reagent-name-wort
+  group: Foods
+  desc: reagent-desc-wort
+  physicalDesc: reagent-physical-desc-thick-and-grainy
+  flavor: sweet
+  color: "#523816"
+  recognizable: true
+  metabolisms:
+    Food:
+      effects:
+      - !type:AdjustReagent
+        reagent: Sugar
+        amount: 0.5
+      - !type:AdjustReagent
+        reagent: Nutriment
+        amount: 0.15
+      - !type:SatiateThirst
+        factor: 0.2
+
+- type: reagent
+  id: WortLager
+  parent: WortBase
+  name: reagent-name-wort-lager
+  group: Foods
+  desc: reagent-desc-wort-lager
+  color: "#a87737"
+
+- type: reagent
+  id: WortAle
+  parent: WortBase
+  name: reagent-name-wort-ale
+  group: Foods
+  desc: reagent-desc-wort-ale
+  color: "#5c3f23"
+
+- type: reagent
+  id: WortStout
+  parent: WortBase
+  name: reagent-name-wort-stout
+  group: Foods
+  desc: reagent-desc-wort-stout
+  color: "#2b1b0c"
+
+- type: reagent
+  id: WortIpa
+  parent: WortBase
+  name: reagent-name-wort-ipa
+  group: Foods
+  desc: reagent-desc-wort-ipa
+  color: "#c8b48c"
+
+- type: reagent
+  id: WortPlasma
+  parent: WortBase
+  name: reagent-name-wort-plasma
+  group: Foods
+  desc: reagent-desc-wort-plasma
+  color: "#5f495e"

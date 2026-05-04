@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Baystation12 at https://github.com/Baystation12/Baystation12/blob/1df0db5784e3b3e35201682b1351a5de09fed27f/icons/obj/machines/vending.dmi and modiffied by Oxygen033 for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "maltgrinder"
+    },
+	{
+	  "name": "on"
+	}
+  ]
+}
