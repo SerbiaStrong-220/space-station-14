@@ -274,11 +274,10 @@
         children:
         - id: ClothingUniformJumpsuitNinja
         - id: ClothingOuterSuitSpaceNinjaFake
-        - id: ClothingMaskNinja
-        - id: EnergyKatanaToy
-        - id: ThrowingStar
-          amount: 2
-        - id: ClothingFootWrapsBlack
+        # - id: ClothingMaskNinja # nope, no real mask
         - id: ClothingHandsGlovesSpaceNinjaFake
         - id: ClothingShoesSpaceNinjaFake
         - id: ClothingEyesVisorNinjaFake
+        - id: EnergyKatanaToy
+        - id: ThrowingStar
+          amount: 2
