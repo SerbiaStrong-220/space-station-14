@@ -619,7 +619,7 @@
       min: 3000 # 40 mins
       max: 3600 # 60 mins
     scheduledGameRules: !type:NestedSelector
-      tableId: UnknownShuttlesFriendlyTable
+      tableId: UnknownShuttlesNeutralTable
 #SS220-LostSoulsRevive end
 
 # variation passes

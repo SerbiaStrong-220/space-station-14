@@ -122,9 +122,10 @@
       - map: [ "enum.DamageStateVisualLayers.Base" ]
         state: alive
   - type: Bloodstream
-    bloodReagent: JuiceWatermelon
-    bloodMaxVolume: 50
-    chemicalMaxVolume: 30
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: JuiceWatermelon
+        Quantity: 50
   - type: Destructible
     thresholds:
     - trigger:

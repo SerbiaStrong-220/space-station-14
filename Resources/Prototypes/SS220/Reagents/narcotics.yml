@@ -53,7 +53,7 @@
   flavor: medicine
   metabolisms:
     Bloodstream:
-      metabolismRate: 0.5
+      metabolismRate: 0.1
       effects:
       - !type:HealthChange
         conditions:
@@ -64,9 +64,6 @@
           types:
             Cerebral: 5.0
             Poison: 5.0
-    Narcotic:
-      metabolismRate: 0.1
-      effects:
       - !type:MovementSpeedModifier
         walkSpeedModifier: 1.17
         sprintSpeedModifier: 1.17
@@ -168,9 +165,6 @@
           hallucinationMaxTime: 10
           totalDuration: 8
           checkPockets: false
-    Medicine:
-      metabolismRate: 0.5
-      effects:
       - !type:HealthChangeOnAdaptation
           reagent: Frontier
           damage:
