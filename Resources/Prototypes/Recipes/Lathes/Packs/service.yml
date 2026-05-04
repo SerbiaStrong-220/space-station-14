@@ -39,6 +39,18 @@
   - SodaDispenserMachineCircuitboard
   - SmartFridgeCircuitboard
 
+#SS220-plant-analyzer begin
+- type: latheRecipePack
+  id: HydroponicsStatic
+  recipes:
+  - HydroponicsToolMiniHoe
+  - HydroponicsToolScythe
+  - HydroponicsToolHatchet
+  - HydroponicsToolSpade
+  - HydroponicsToolClippers
+  - PlantAnalyzer
+#SS220-plant-analyzer end
+
 ## Dynamic
 
 - type: latheRecipePack

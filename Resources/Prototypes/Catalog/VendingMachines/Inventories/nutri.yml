@@ -6,6 +6,7 @@
     HydroponicsToolClippers: 4
     HydroponicsToolScythe: 4
     HydroponicsToolHatchet: 4
+    PlantAnalyzer: 4 #SS220-plant-analyzer
     Dropper: 4
     PlantBag: 3
     PlantBGoneSpray: 20
@@ -21,8 +22,6 @@
     # SS220 beaker-for-botanists end
     BoxMouthSwab: 1
     BoxAgrichem: 1
-    #TO DO:
-    #plant analyzer
   contrabandInventory:
     ChemistryBottleUnstableMutagen: 1
     Joint: 1

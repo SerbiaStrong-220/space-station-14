@@ -37,3 +37,10 @@
   parent: BaseHydroToolRecipe
   id: HydroponicsToolClippers
   result: HydroponicsToolClippers
+
+#SS220-plant-analyzer begin
+- type: latheRecipe
+  parent: HandheldHealthAnalyzer
+  id: PlantAnalyzer
+  result: PlantAnalyzer
+#SS220-plant-analyzer end
