@@ -36,6 +36,7 @@ public sealed partial class JukeboxMenu : FancyWindow
     private EntityUid? _audio;
 
     private float _lockTimer;
+    private float _volumeLockTimer; // SS220-jukebox-tweak
 
     public JukeboxMenu()
     {
@@ -81,7 +82,7 @@ public sealed partial class JukeboxMenu : FancyWindow
     {
         _audio = audio;
         //ss220-jukebox-tweak-begin
-        if (_entManager.TryGetComponent(_audio, out AudioComponent? audioComp))
+        if (_entManager.TryGetComponent(_audio, out AudioComponent? audioComp) && _volumeLockTimer <= 0f) // SS220-jukebox-tweak
         {
             VolumeSlider.Value = SharedAudioSystem.VolumeToGain(audioComp.Volume);
         }
@@ -98,6 +99,7 @@ public sealed partial class JukeboxMenu : FancyWindow
     private void VolumeSliderKeyUp(Slider args)
     {
         SetGain?.Invoke(VolumeSlider.Value);
+        _volumeLockTimer = 0.5f;
     }
     //SS220-jukebox-tweak-end
 
@@ -147,6 +149,13 @@ public sealed partial class JukeboxMenu : FancyWindow
         }
 
         PlaybackSlider.Disabled = _lockTimer > 0f;
+
+        // SS220-jukebox-tweak-begin
+        if (_volumeLockTimer > 0f)
+        {
+            _volumeLockTimer -= args.DeltaSeconds;
+        }
+        // SS220-jukebox-tweak-end
 
         if (_entManager.TryGetComponent(_audio, out AudioComponent? audio))
         {

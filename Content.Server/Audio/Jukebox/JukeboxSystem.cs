@@ -57,8 +57,16 @@ public sealed class JukeboxSystem : SharedJukeboxSystem
                 return;
             }
 
-            component.AudioStream = Audio.PlayPvs(jukeboxProto.Path, uid, AudioParams.Default.WithVolume(SharedAudioSystem.GainToVolume(component.Gain)).WithMaxDistance(10f))?.Entity;
-            //SS220-jukebox-tweak я ебать насрал
+            component.AudioStream =
+            Audio.PlayPvs(
+                jukeboxProto.Path,
+                uid,
+                AudioParams.Default
+                    .WithVolume(SharedAudioSystem.GainToVolume(component.Gain))
+                    .WithMaxDistance(component.Range)
+                    .WithReferenceDistance(component.Range*MathF.Min(1f, component.Reference))
+                    .WithRolloffFactor(1f))
+            ?.Entity; // ss220-jukebox-tweak
             Dirty(uid, component);
         }
     }
