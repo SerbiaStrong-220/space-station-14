@@ -698,8 +698,6 @@
     - HyposprayInjectMode
     - HypopenDynamicMode
   # SS220-hidden-desc-end
-  - type: Hypospray
-    onlyAffectsMobs: false
   - type: UseDelay
     delay: 0.5
   - type: StaticPrice # A new shitcurity meta

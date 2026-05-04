@@ -53,7 +53,7 @@
         BoundKey = "{x:Static is220:KeyFunctions220.OpenExperienceViewerMenu}"
         MinSize="42 64"
         HorizontalExpand="True"
-        AppendStyleClass="{x:Static style:StyleBase.ButtonSquare}"
+        AppendStyleClass="{x:Static style:StyleClass.ButtonSquare}"
         />
     <!-- SS220-experience-update-end -->
     <ui:MenuButton
