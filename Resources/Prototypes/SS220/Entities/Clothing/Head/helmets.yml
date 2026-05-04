@@ -34,3 +34,56 @@
         Caustic: 0.95
   - type: ExplosionResistance
     damageCoefficient: 0.75
+
+#SyndicateReporter
+- type: entity
+  parent: [ ClothingHeadBase, BaseSyndicateContraband ]
+  id: ClothingHeadUmbrellaHelmet
+  name: umbrella helmet
+  description: A little heavier than usual.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Helmets/umbrella_helmet.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Helmets/umbrella_helmet.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.95
+        Heat: 0.95
+        Radiation: 0.95
+        Caustic: 0.95
+  - type: Blocking
+    passiveBlockModifier:
+      coefficients:
+        Blunt: 0.1
+        Slash: 0.1
+        Piercing: 0.1
+    activeBlockModifier:
+      coefficients:
+        Blunt: 0.05
+        Slash: 0.05
+        Piercing: 0.05
+  - type: Reflect
+    reflectProb: 0.42
+    reflects:
+      - NonEnergy
+    spread: 90
+  - type: Damageable
+    damageContainer: Shield
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 60
+        behaviors:
+          - !type:DoActsBehavior
+            acts: [ "Destruction" ]
+          - !type:PlaySoundBehavior
+            sound:
+              collection: MetalBreak
+  - type: Tag
+    tags:
+    - HamsterWearable

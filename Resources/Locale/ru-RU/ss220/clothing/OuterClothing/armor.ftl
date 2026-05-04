@@ -21,3 +21,6 @@ ent-ClothingOuterMechLoaderFull = экзоскелет класса погруз
 
 ent-ClothingOuterWhiteArmorCaptainCarapace = белый панцирь капитана
     .desc = Белый панцирь, обеспечивающий хорошую защиту носителя и подчёркивающий его статус ветерана.
+
+ent-ClothingOuterArmorElectricity = { ent-ClothingOuterVestArmorSec }
+    .desc = { ent-ClothingOuterVestArmorSec.desc }

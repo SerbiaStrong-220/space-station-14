@@ -749,6 +749,16 @@
   - MoryakShoes
   # Мим (Конец)
 
+ # Репортер (Начало)
+- type: loadoutGroup
+  id: Microphones
+  name: loadout-group-reporter-microphone
+  minLimit: 0
+  loadouts:
+  - MicrophonePocket
+  - MicrophoneChannel13Pocket
+ # Репортер (Конец)
+
  # Уборщик (Начало)
 - type: loadoutGroup
   id: JanitorShoes

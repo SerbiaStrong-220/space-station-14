@@ -14,3 +14,13 @@
     proto: SeniorDevTeamTier
   - !type:GroupLoadoutEffect
     proto: AdministratorSponsorTier
+
+- type: loadout
+  id: MicrophonePocket
+  equipment:
+    pocket1: MicrophoneInstrument
+
+- type: loadout
+  id: MicrophoneChannel13Pocket
+  equipment:
+    pocket1: MicrophoneChannel13Instrument

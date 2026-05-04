@@ -280,6 +280,50 @@
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/reporter_red.rsi
 
+- type: entity
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220]
+  id: ClothingUniformJumpsuitJournalistBrown
+  name: brown journalist suit
+  description: If journalism is good, it is controversial, by nature.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/reporter_brown.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/reporter_brown.rsi
+
+- type: entity
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220]
+  id: ClothingUniformJumpsuitJournalistGreen
+  name: green journalist suit
+  description: If journalism is good, it is controversial, by nature.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/reporter_green.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/reporter_green.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitInterviewerGreenShirt
+  name: green interviewer shirt
+  description: If journalism is good, it is controversial, by nature.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/interviewer_green_shirt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/interviewer_green_shirt.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitInterviewerBlueShirt
+  name: blue interviewer shirt
+  description: I never learned anything while i was talking.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/interviewer_blue_shirt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/interviewer_blue_shirt.rsi
+
   # Бармен
 - type: entity
   parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220]
@@ -686,6 +730,29 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/security_tacuniform.rsi
   - type: Clothing
     sprite: SS220/Clothing/Uniforms/Jumpsuit/security_tacuniform.rsi
+
+   # Детектив
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitDetectiveBlackRedShirt
+  name: detective shirt
+  description: The secret of success is an absolute ungovernable curiosity.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/detective_blackred_shirt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/detective_blackred_shirt.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitDetectiveBlackWhiteShirt
+  name: detective shirt
+  description: The secret of success is an absolute ungovernable curiosity.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/detective_blackwhite_shirt.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Uniforms/Jumpsuit/detective_blackwhite_shirt.rsi
 
 # Центральное Командование / НаноТрейзен
 

@@ -29,6 +29,15 @@
         - TableMask
 
 - type: entity
+  parent: MicrophoneInstrument
+  id: MicrophoneChannel13Instrument
+  name: microphone "channel 13"
+  description: With a cardboard box specifically for Channel 13!
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Fun/Instruments/microphone_channel13.rsi
+
+- type: entity
   id: BigDrumsInstrument
   parent: BasePlaceableInstrumentRotatable
   name: drum kit

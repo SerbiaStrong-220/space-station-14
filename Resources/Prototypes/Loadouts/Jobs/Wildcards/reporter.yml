@@ -3,15 +3,10 @@
   id: ReporterJumpsuit
   equipment:
     jumpsuit: ClothingUniformJumpsuitReporter
+  groupBy: "suit"
 
 - type: loadout
   id: JournalistJumpsuit
   equipment:
     jumpsuit: ClothingUniformJumpsuitJournalist
-
-  #SS220-Clothes-Start
-- type: loadout
-  id: JumpsuitJournalistRed
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitJournalistRed
-  #SS220-Clothes-End
+  groupBy: "suit"

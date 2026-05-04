@@ -272,9 +272,9 @@
   description: A stylish bowler hat.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Hats/bowler_hat.rsi
+    sprite: SS220/Clothing/Head/Hats/bowler_hat.rsi
   - type: Clothing
-    sprite: Clothing/Head/Hats/bowler_hat.rsi
+    sprite: SS220/Clothing/Head/Hats/bowler_hat.rsi
   - type: Tag
     tags:
     - PetWearable

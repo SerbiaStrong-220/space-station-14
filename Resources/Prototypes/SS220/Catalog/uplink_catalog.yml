@@ -139,6 +139,50 @@
       components:
       - SurplusBundle
 
+- type: listing
+  id: UplinkUmbrellaHelmet
+  name: uplink-umbrella-helmet-name
+  description: uplink-umbrella-helmet-desc
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 4
+  productEntity: ClothingHeadUmbrellaHelmet
+  cost:
+    Telecrystal: 5
+  categories:
+  - UplinkJob
+  conditions:
+  - !type:BuyerJobCondition
+    whitelist:
+    - Reporter
+  - !type:ListingLimitedStockCondition
+      stock: 1
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 3
+    MediumDynamic:
+      Telecrystal: 4
+    HardDynamic:
+      Telecrystal: 6
+
+- type: listing
+  id: UplinkMicrophoneGun
+  name: uplink-microphone-gun-name
+  description: uplink-microphone-gun-desc
+  productEntity: MicrophoneGun
+  cost:
+    Telecrystal: 1
+  categories:
+  - UplinkJob
+  conditions:
+  - !type:BuyerJobCondition
+    whitelist:
+    - Reporter
+  - !type:ListingLimitedStockCondition
+      stock: 5
+
+#ss220 dynamic-price end
  # Pointless
 
 - type: listing

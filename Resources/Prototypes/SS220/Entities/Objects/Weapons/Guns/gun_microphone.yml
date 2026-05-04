@@ -1,0 +1,50 @@
+- type: entity
+
+  parent: BaseItem
+  id: MicrophoneGun
+  components:
+  - type: Gun
+    soundGunshot: /Audio/Weapons/Guns/Gunshots/shotgun.ogg
+    cameraRecoilScalar: 1
+    soundEmpty: null
+    fireRate: 0.5
+    projectileSpeed: 40
+  - type: AmmoCounter
+  - type: BasicEntityAmmoProvider
+    proto: BulletMicrophone
+    capacity: 1
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Misc/gun_microphone.rsi
+    layers:
+    - state: icon
+      map: ["sprite"]
+  - type: Item
+    size: Small
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.AmmoVisuals.HasAmmo:
+        sprite:
+          False: {state: "icon_empty"}
+          True: {state: "icon"}
+  - type: GunByHasAmmoVisuals
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
+
+
+- type: entity
+  parent: BulletGrenadeFlash
+  id: BulletMicrophone
+  name: microphone bullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Misc/gun_microphone.rsi
+    layers:
+      - state: projectile
+  - type: FlashOnTrigger
+    range: 0.7
+

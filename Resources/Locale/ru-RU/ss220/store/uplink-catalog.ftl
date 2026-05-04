@@ -83,3 +83,9 @@ uplink-suit-electrification-desc = Костюм, позволяющий конв
 
 uplink-fake-captain-id-card-name = Фальшивая ID карта капитана
 uplink-fake-captain-id-card-desc = ID карта со сломанным модулем доступов, внешне неотличимая от ID карты капитана. Они не заметят подмены.
+
+uplink-umbrella-helmet-name = Зонт-рикошет
+uplink-umbrella-helmet-desc = Благодаря сноровке и удаче даст избежать пулевого ранения! Никаких гарантий не прилагается.
+
+uplink-microphone-gun-name = Светошумовой микрофон
+uplink-microphone-gun-desc = Выстреливает 1 светошумовой заряд малой области поражения. Не рекомендуется подставлять к своему лицу.

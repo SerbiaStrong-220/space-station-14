@@ -1392,6 +1392,12 @@
   - DetectiveJumpskirt
   - NoirJumpsuit
   - NoirJumpskirt
+  #SS220
+  - DetectiveJumpsuitBlackRedShirt
+  - DetectiveJumpskirtBlackRedShirt
+  - DetectiveJumpsuitBlackWhiteShirt
+  - DetectiveJumpskirtBlackWhiteShirt
+  #SS220
 
 - type: loadoutGroup
   id: DetectiveOuterClothing
@@ -1663,8 +1669,40 @@
   name: loadout-group-reporter-jumpsuit
   loadouts:
   - ReporterJumpsuit
+  - ReporterJumpskirt #SS220-Clothes
   - JournalistJumpsuit
-  - JumpsuitJournalistRed #SS220-Clothes
+  - JournalistJumpskirt #SS220-Clothes-Start
+  - JumpsuitJournalistRed
+  - JumpskirtJournalistRed
+  - JumpsuitJournalistBrown
+  - JumpskirtJournalistBrown
+  - JumpsuitJournalistGreen
+  - JumpskirtJournalistGreen
+  - InterviewerJumpsuitGreenShirt
+  - InterviewerJumpskirtGreenShirt
+  - InterviewerJumpsuitBlueShirt
+  - InterviewerJumpskirtBlueShirt #SS220-Clothes-End
+
+- type: loadoutGroup
+  id: ReporterHead
+  name: loadout-group-reporter-head
+  minLimit: 0
+  loadouts:
+  - UmbrellaHat #SS220-Clothes-Start
+  - BlueBowlerHat
+  - BowlerHat
+  - RedBowlerHat
+  - BrownBowlerHat
+  - GreenBowlerHat
+  - SpyBowlerHat #SS220-Clothes-End
+
+- type: loadoutGroup
+  id: ReporterOuterClothing
+  name: loadout-group-reporter-outerclothing
+  minLimit: 0
+  loadouts:
+  - WassermanWaistcoat #SS220-Clothes
+  - TrenchCoat
 
 - type: loadoutGroup
   id: PsychologistJumpsuit

@@ -9,6 +9,28 @@
   equipment:
     back: ClothingBackpackNoirSatchel
 
+ #Jumpsuit
+
+- type: loadout
+  id: DetectiveJumpsuitBlackRedShirt
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitDetectiveBlackRedShirt
+
+- type: loadout
+  id: DetectiveJumpskirtBlackRedShirt
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtDetectiveBlackRedShirt
+
+- type: loadout
+  id: DetectiveJumpsuitBlackWhiteShirt
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitDetectiveBlackWhiteShirt
+
+- type: loadout
+  id: DetectiveJumpskirtBlackWhiteShirt
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtDetectiveBlackWhiteShirt
+
 # Shoes
 
 - type: loadout

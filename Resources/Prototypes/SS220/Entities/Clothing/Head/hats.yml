@@ -483,6 +483,131 @@
     - HamsterWearable
     - WhitelistChameleon
 
+  # Репортер
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadUmbrellaHat
+  name: umbrella hat
+  description: Stylish in any weather!
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/umbrella_hat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/umbrella_hat.rsi
+  - type: Item
+    size: Normal
+  - type: Reflect
+    reflectProb: 0.00001
+    spread: 360
+    reflects:
+    - NonEnergy
+  - type: Tag
+    tags:
+    - ClothMade
+    - HamsterWearable
+    - WhitelistChameleon
+
+- type: entity
+  parent: ClothingHeadHatBowlerHat
+  id: ClothingHeadHatRedBowlerHat
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/bowler_red_hat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/bowler_red_hat.rsi
+
+- type: entity
+  parent: ClothingHeadHatBowlerHat
+  id: ClothingHeadHatGreenBowlerHat
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/bowler_green_hat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/bowler_green_hat.rsi
+
+- type: entity
+  parent: ClothingHeadHatBowlerHat
+  id: ClothingHeadHatBlueBowlerHat
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/bowler_blue_hat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/bowler_blue_hat.rsi
+
+- type: entity
+  parent: ClothingHeadHatBowlerHat
+  id: ClothingHeadHatBrownBowlerHat
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/bowler_brown_hat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/bowler_brown_hat.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatSpyBowlerHat
+  name: spybowler hat
+  description: A blinking bowler hat?
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Head/Hats/spybowler_hat.rsi
+    layers:
+    - state: icon
+    - state: icon-unshaded
+      shader: unshaded
+  - type: Clothing
+    sprite: SS220/Clothing/Head/Hats/spybowler_hat.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+      - state: equipped-HELMET-unshaded
+        shader: unshaded
+      head-hamster:
+      - state: equipped-HELMET-hamster
+      - state: equipped-HELMET-unshaded-hamster
+        shader: unshaded
+      head-dog:
+      - state: equipped-HELMET-dog
+      - state: equipped-HELMET-unshaded-dog
+        shader: unshaded
+  - type: InteractionOutline
+  - type: Eye
+  - type: WirelessNetworkConnection
+    range: 100
+  - type: UserInterface
+    interfaces:
+      enum.SurveillanceCameraSetupUiKey.Camera:
+        type: SurveillanceCameraSetupBoundUi
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: SurveillanceCameraEntertainment
+    transmitFrequencyId: SurveillanceCamera
+  - type: SurveillanceCamera
+    networkSet: true
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 50
+        behaviors:
+          - !type:DoActsBehavior
+            acts: [ "Destruction" ]
+          - !type:PlaySoundBehavior
+            sound:
+              collection: MetalBreak
+              params:
+                volume: -8
+
+  - type: Tag
+    tags:
+    - PetWearable
+    - CorgiWearable
+    - HamsterWearable
+
 # Служба безопасности
 
   # ГСБ

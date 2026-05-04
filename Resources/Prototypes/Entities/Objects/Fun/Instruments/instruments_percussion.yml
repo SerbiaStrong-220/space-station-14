@@ -59,7 +59,7 @@
       "Wah": {6: 100} # Defined in space-station-14.sf2
       "Meowsynth": {2: 20} # Defined in Serbia-Strong-220.sf2
   - type: Sprite
-    sprite: Objects/Fun/Instruments/microphone.rsi
+    sprite: SS220/Objects/Fun/Instruments/microphone.rsi #SS220
   - type: Item
     size: Small
 

@@ -94,3 +94,28 @@
     damageCoefficient: 0.3
     ignoredEffects:
     - Paralyze
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterWassermanWaistcoat
+  name: wasserman waistcoat
+  description: Secrets stay safest in your pocket.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Misc/wasserman_waistcoat.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Misc/wasserman_waistcoat.rsi
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.8
+  - type: HeldSpeedModifier
+  - type: Storage
+    grid:
+    - 0,0,0,1
+    - 0,3,0,4
+    - 2,2,2,4
+    - 4,2,4,4
+    - 2,0,2,0
+    - 4,0,4,0
+    - 6,0,6,1
+    - 6,3,6,4
