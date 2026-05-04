@@ -21,6 +21,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 using Content.Server.Body.Systems;
+using Content.Shared.SS220.LimitationRevive;
 
 namespace Content.Server.Medical;
 

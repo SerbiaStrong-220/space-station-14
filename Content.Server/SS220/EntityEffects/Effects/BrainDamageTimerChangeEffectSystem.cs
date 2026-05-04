@@ -3,6 +3,7 @@ using Content.Server.SS220.LimitationRevive;
 using Content.Shared.EntityEffects;
 using Content.Shared.SS220.ChemicalAdaptation;
 using Content.Shared.SS220.EntityEffects.Effects;
+using Content.Shared.SS220.LimitationRevive;
 
 namespace Content.Server.SS220.EntityEffects.Effects;
 
