@@ -9,38 +9,38 @@ public enum SlotMachineUiKey
 }
 
 [Serializable, NetSerializable]
-public sealed class SlotMachineBoundUserInterfaceState : BoundUserInterfaceState
+public sealed class SlotMachineBoundUserInterfaceState(
+    List<string> reels,
+    int storedCredits,
+    bool isWin,
+    string winText,
+    int lastBet,
+    int lastPayout,
+    bool isSpinning,
+    List<SlotMachineRule> rules,
+    List<SlotMachineReelDef> reelPools) : BoundUserInterfaceState
 {
-    public string[] Reels { get; }
-    public int StoredCredits { get; }
-    public SlotMachineResult LastResult { get; }
-    public int LastBet { get; }
-    public int LastPayout { get; }
-    public bool IsSpinning { get; }
-
-    public SlotMachineBoundUserInterfaceState(string[] reels, int storedCredits, SlotMachineResult lastResult, int lastBet, int lastPayout, bool isSpinning)
-    {
-        Reels = reels;
-        StoredCredits = storedCredits;
-        LastResult = lastResult;
-        LastBet = lastBet;
-        LastPayout = lastPayout;
-        IsSpinning = isSpinning;
-    }
+    public List<string> Reels { get; } = reels;
+    public int StoredCredits { get; } = storedCredits;
+    public bool IsWin { get; } = isWin;
+    public string WinText { get; } = winText;
+    public int LastBet { get; } = lastBet;
+    public int LastPayout { get; } = lastPayout;
+    public bool IsSpinning { get; } = isSpinning;
+    public List<SlotMachineRule> Rules { get; } = rules;
+    public List<SlotMachineReelDef> ReelPools { get; } = reelPools;
 }
 
 [Serializable, NetSerializable]
-public sealed class SlotMachineSpinMessage : BoundUserInterfaceMessage
+public sealed class SlotMachineSpinMessage(int bet) : BoundUserInterfaceMessage
 {
-    public int Bet { get; }
-    public SlotMachineSpinMessage(int bet) => Bet = bet;
+    public int Bet { get; } = bet;
 }
 
 [Serializable, NetSerializable]
-public sealed class SlotMachineInsertMessage : BoundUserInterfaceMessage
+public sealed class SlotMachineInsertMessage(int amount) : BoundUserInterfaceMessage
 {
-    public int Amount { get; }
-    public SlotMachineInsertMessage(int amount) => Amount = amount;
+    public int Amount { get; } = amount;
 }
 
 [Serializable, NetSerializable]

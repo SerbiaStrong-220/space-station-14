@@ -17,9 +17,9 @@ public sealed class SlotMachineBoundUserInterface : BoundUserInterface
     {
         base.Open();
         _window = this.CreateWindow<SlotMachineWindow>();
-        _window.OnSpin    += bet    => SendMessage(new SlotMachineSpinMessage(bet));
-        _window.OnInsert  += amount => SendMessage(new SlotMachineInsertMessage(amount));
-        _window.OnCollect += ()     => SendMessage(new SlotMachineCollectMessage());
+        _window.OnSpin += bet => SendMessage(new SlotMachineSpinMessage(bet));
+        _window.OnInsert += amount => SendMessage(new SlotMachineInsertMessage(amount));
+        _window.OnCollect += () => SendMessage(new SlotMachineCollectMessage());
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)

@@ -23,47 +23,18 @@ public sealed class SlotMachineSystem : EntitySystem
 
     private static readonly TimeSpan SpinDuration = TimeSpan.FromSeconds(2.5);
 
-    private readonly string[] _reel1 =
-    {
-        "blue_cherry", "blue_cherry", "blue_cherry", "blue_cherry", "blue_cherry", "blue_cherry", "blue_cherry", "blue_cherry", "blue_cherry",
-        "apple", "apple", "apple", "apple", "apple", "apple", "apple",
-        "cherry", "cherry", "cherry", "cherry", "cherry", "cherry",
-        "bell", "bell", "bell", "bell", "bell",
-        "seven", "seven", "seven", "seven", "seven",
-        "diamond", "diamond", "diamond",
-    };
-
-    private readonly string[] _reel2 =
-    {
-        "blue_cherry", "blue_cherry", "blue_cherry", "blue_cherry", "blue_cherry", "blue_cherry", "blue_cherry", "blue_cherry",
-        "apple", "apple", "apple", "apple", "apple", "apple", "apple",
-        "cherry", "cherry", "cherry", "cherry", "cherry", "cherry",
-        "bell", "bell", "bell", "bell",
-        "seven", "seven", "seven",
-        "diamond", "diamond",
-    };
-
-    private readonly string[] _reel3 =
-    {
-        "blue_cherry", "blue_cherry", "blue_cherry", "blue_cherry", "blue_cherry", "blue_cherry", "blue_cherry", "blue_cherry",
-        "apple", "apple", "apple", "apple", "apple", "apple", "apple",
-        "cherry", "cherry", "cherry", "cherry", "cherry",
-        "bell", "bell", "bell", "bell",
-        "seven", "seven", "seven",
-        "diamond",
-    };
-
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<SlotMachineComponent, AfterActivatableUIOpenEvent>(OnAfterUIOpen);
 
-        Subs.BuiEvents<SlotMachineComponent>(SlotMachineUiKey.Key, subs =>
-        {
-            subs.Event<SlotMachineSpinMessage>(OnSpin);
-            subs.Event<SlotMachineInsertMessage>(OnInsert);
-            subs.Event<SlotMachineCollectMessage>(OnCollect);
-        });
+        Subs.BuiEvents<SlotMachineComponent>(SlotMachineUiKey.Key,
+            subs =>
+            {
+                subs.Event<SlotMachineSpinMessage>(OnSpin);
+                subs.Event<SlotMachineInsertMessage>(OnInsert);
+                subs.Event<SlotMachineCollectMessage>(OnCollect);
+            });
     }
 
     public override void Update(float frameTime)
@@ -79,26 +50,27 @@ public sealed class SlotMachineSystem : EntitySystem
 
             comp.HasPendingResult = false;
             comp.Reels = comp.PendingReels;
-            comp.LastResult = comp.PendingResult;
+            comp.IsWin = comp.PendingIsWin;
+            comp.WinText = comp.PendingWinText;
             comp.LastPayout = comp.PendingPayout;
             comp.StoredCredits += comp.PendingPayout;
             Dirty(uid, comp);
 
-            if (comp.LastResult != SlotMachineResult.Lose)
+            if (comp.IsWin)
                 _audio.PlayPvs(comp.WinSound, uid);
 
             UpdateUI(uid, comp, spinning: false);
         }
     }
 
-    private void OnAfterUIOpen(EntityUid uid, SlotMachineComponent comp, AfterActivatableUIOpenEvent args)
+    private void OnAfterUIOpen(Entity<SlotMachineComponent> entity, ref AfterActivatableUIOpenEvent args)
     {
-        UpdateUI(uid, comp, spinning: comp.HasPendingResult);
+        UpdateUI(entity.Owner, entity.Comp, spinning: entity.Comp.HasPendingResult);
     }
 
-    private void OnInsert(EntityUid uid, SlotMachineComponent comp, SlotMachineInsertMessage args)
+    private void OnInsert(Entity<SlotMachineComponent> entity, ref SlotMachineInsertMessage args)
     {
-        if (comp.HasPendingResult)
+        if (entity.Comp.HasPendingResult)
         {
             _popup.PopupEntity(Loc.GetString("slot-machine-popup-spinning"), args.Actor, args.Actor);
             return;
@@ -113,110 +85,146 @@ public sealed class SlotMachineSystem : EntitySystem
         }
 
         var amountToTake = Math.Min(args.Amount, stack.Count);
-        if (!_stack.Use(item!.Value, amountToTake, stack))
+        if (!_stack.Use(item.Value, amountToTake, stack))
             return;
 
-        comp.StoredCredits += amountToTake;
-        Dirty(uid, comp);
-        _audio.PlayPvs(comp.InsertSound, uid);
-        _popup.PopupEntity(Loc.GetString("slot-machine-popup-inserted", ("amount", amountToTake)), args.Actor, args.Actor);
-        UpdateUI(uid, comp, spinning: false);
+        entity.Comp.StoredCredits += amountToTake;
+        Dirty(entity.Owner, entity.Comp);
+        _audio.PlayPvs(entity.Comp.InsertSound, entity.Owner);
+        _popup.PopupEntity(Loc.GetString("slot-machine-popup-inserted", ("amount", amountToTake)),
+            args.Actor,
+            args.Actor);
+        UpdateUI(entity.Owner, entity.Comp, spinning: false);
     }
 
-    private void OnSpin(EntityUid uid, SlotMachineComponent comp, SlotMachineSpinMessage args)
+    private void OnSpin(Entity<SlotMachineComponent> entity, ref SlotMachineSpinMessage args)
     {
-        if (comp.HasPendingResult)
+        if (entity.Comp.HasPendingResult)
             return;
 
         var bet = Math.Max(SlotMachineComponent.MinBet, args.Bet);
 
-        if (comp.StoredCredits < bet)
+        if (entity.Comp.StoredCredits < bet)
         {
             _popup.PopupEntity(Loc.GetString("slot-machine-popup-no-funds"), args.Actor, args.Actor);
             return;
         }
 
-        comp.StoredCredits -= bet;
-        comp.LastBet = bet;
-        Dirty(uid, comp);
+        entity.Comp.StoredCredits -= bet;
+        entity.Comp.LastBet = bet;
+        Dirty(entity.Owner, entity.Comp);
 
-        var reels = new[]
+        var reels = new List<string>();
+        foreach (var pool in entity.Comp.ReelPools)
         {
-            _random.Pick(_reel1),
-            _random.Pick(_reel2),
-            _random.Pick(_reel3),
-        };
+            var weightedSymbols = new List<string>();
+            foreach (var symbol in pool.Symbols)
+            {
+                for (int i = 0; i < symbol.Weight; i++)
+                {
+                    weightedSymbols.Add(symbol.Id);
+                }
+            }
 
-        var (result, payout) = CalculateResult(reels, bet);
+            reels.Add(_random.Pick(weightedSymbols));
+        }
 
-        comp.PendingReels = reels;
-        comp.PendingResult = result;
-        comp.PendingPayout = payout;
-        comp.HasPendingResult = true;
-        comp.SpinEndTime = _timing.CurTime + SpinDuration;
+        var (isWin, winText, payout) = CalculateResult(entity.Comp, reels, bet);
 
-        _audio.PlayPvs(comp.SpinSound, uid);
-        UpdateUI(uid, comp, spinning: true);
+        entity.Comp.PendingReels = reels;
+        entity.Comp.PendingIsWin = isWin;
+        entity.Comp.PendingWinText = winText;
+        entity.Comp.PendingPayout = payout;
+        entity.Comp.HasPendingResult = true;
+        entity.Comp.SpinEndTime = _timing.CurTime + SpinDuration;
+
+        _audio.PlayPvs(entity.Comp.SpinSound, entity.Owner);
+        UpdateUI(entity.Owner, entity.Comp, spinning: true);
     }
 
-    private void OnCollect(EntityUid uid, SlotMachineComponent comp, SlotMachineCollectMessage args)
+    private void OnCollect(Entity<SlotMachineComponent> entity, ref SlotMachineCollectMessage args)
     {
-        if (comp.HasPendingResult)
+        if (entity.Comp.HasPendingResult)
         {
             _popup.PopupEntity(Loc.GetString("slot-machine-popup-spinning"), args.Actor, args.Actor);
             return;
         }
 
-        if (comp.StoredCredits <= 0)
+        if (entity.Comp.StoredCredits <= 0)
             return;
 
-        var money = Spawn(SlotMachineComponent.CashPrototypeId, Transform(uid).Coordinates);
+        var money = Spawn(SlotMachineComponent.CashPrototypeId, Transform(entity.Owner).Coordinates);
         if (TryComp<StackComponent>(money, out var stack))
-            _stack.SetCount(money, comp.StoredCredits, stack);
+            _stack.SetCount(money, entity.Comp.StoredCredits, stack);
 
-        _popup.PopupEntity(Loc.GetString("slot-machine-popup-collected", ("amount", comp.StoredCredits)), args.Actor, args.Actor);
-        comp.StoredCredits = 0;
-        Dirty(uid, comp);
-        UpdateUI(uid, comp, spinning: false);
+        _popup.PopupEntity(Loc.GetString("slot-machine-popup-collected", ("amount", entity.Comp.StoredCredits)),
+            args.Actor,
+            args.Actor);
+        entity.Comp.StoredCredits = 0;
+        Dirty(entity.Owner, entity.Comp);
+        UpdateUI(entity.Owner, entity.Comp, spinning: false);
     }
 
     private void UpdateUI(EntityUid uid, SlotMachineComponent comp, bool spinning)
     {
-        _uiSystem.SetUiState(uid, SlotMachineUiKey.Key,
+        _uiSystem.SetUiState(uid,
+            SlotMachineUiKey.Key,
             new SlotMachineBoundUserInterfaceState(
-                comp.Reels, comp.StoredCredits,
-                spinning ? SlotMachineResult.None : comp.LastResult,
-                comp.LastBet, comp.LastPayout, spinning));
+                comp.Reels,
+                comp.StoredCredits,
+                comp.IsWin,
+                comp.WinText,
+                comp.LastBet,
+                comp.LastPayout,
+                spinning,
+                comp.Rules,
+                comp.ReelPools));
     }
 
-    private (SlotMachineResult result, int payout) CalculateResult(string[] reels, int bet)
+    private (bool isWin, string winText, int payout) CalculateResult(SlotMachineComponent comp,
+        List<string> reels,
+        int bet)
     {
-        if (reels[0] == reels[1] && reels[1] == reels[2])
+        foreach (var rule in comp.Rules)
         {
-            var mult = reels[0] switch
+            if (rule.Symbols == null || rule.Symbols.Count == 0)
+                continue;
+
+            bool match = true;
+            if (rule.Index.HasValue)
             {
-                "diamond" => 100,
-                "seven"   => 50,
-                "bell"    => 30,
-                "cherry"  => 20,
-                "apple"   => 15,
-                _         => 10,
-            };
-            var result = reels[0] switch
+                var idx = rule.Index.Value;
+                if (idx < 0 || idx + rule.Symbols.Count > reels.Count)
+                    continue;
+
+                for (var i = 0; i < rule.Symbols.Count; i++)
+                {
+                    if (reels[idx + i] != rule.Symbols[i])
+                    {
+                        match = false;
+                        break;
+                    }
+                }
+            }
+            else
             {
-                "diamond" => SlotMachineResult.Jackpot,
-                "seven"   => SlotMachineResult.Triple7,
-                _         => SlotMachineResult.Triple,
-            };
-            return (result, bet * mult);
+                if (rule.Symbols.Count != reels.Count)
+                    continue;
+
+                for (var i = 0; i < reels.Count; i++)
+                {
+                    if (reels[i] != rule.Symbols[i])
+                    {
+                        match = false;
+                        break;
+                    }
+                }
+            }
+
+            if (match)
+                return (true, rule.WinText, bet * rule.Multiplier);
         }
 
-        if (reels[0] == "apple" && reels[1] == "apple" && reels[2] != "apple")
-            return (SlotMachineResult.ApplePair, bet * 2);
-
-        if (reels[1] == "cherry" && reels[2] == "cherry" && reels[0] != "cherry")
-            return (SlotMachineResult.CherryPair, bet * 2);
-
-        return (SlotMachineResult.Lose, 0);
+        return (false, "", 0);
     }
 }

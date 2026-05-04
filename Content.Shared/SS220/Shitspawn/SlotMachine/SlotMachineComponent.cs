@@ -1,6 +1,7 @@
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
+using Robust.Shared.Utility;
 
 namespace Content.Shared.SS220.Shitspawn.SlotMachine;
 
@@ -12,7 +13,13 @@ public sealed partial class SlotMachineComponent : Component
     public const string CashPrototypeId = "SpaceCash";
 
     [DataField, AutoNetworkedField]
-    public string[] Reels = { "seven", "seven", "seven" };
+    public List<string> Reels = new() { "seven", "seven", "seven" };
+
+    [DataField]
+    public List<SlotMachineReelDef> ReelPools = new();
+
+    [DataField, AutoNetworkedField]
+    public List<SlotMachineRule> Rules = new();
 
     [DataField, AutoNetworkedField]
     public int StoredCredits;
@@ -24,7 +31,10 @@ public sealed partial class SlotMachineComponent : Component
     public int LastPayout;
 
     [AutoNetworkedField]
-    public SlotMachineResult LastResult = SlotMachineResult.None;
+    public bool IsWin = false;
+
+    [AutoNetworkedField]
+    public string WinText = "";
 
     [DataField]
     public SoundSpecifier InsertSound = new SoundPathSpecifier("/Audio/Machines/id_insert.ogg");
@@ -36,20 +46,51 @@ public sealed partial class SlotMachineComponent : Component
     public SoundSpecifier WinSound = new SoundPathSpecifier("/Audio/SS220/Shitspawn/SlotMachine/slot_win.ogg");
 
     public bool HasPendingResult;
-    public string[] PendingReels = { "seven", "seven", "seven" };
-    public SlotMachineResult PendingResult = SlotMachineResult.None;
+    public List<string> PendingReels = new() { "seven", "seven", "seven" };
+    public bool PendingIsWin = false;
+    public string PendingWinText = "";
     public int PendingPayout;
     public TimeSpan SpinEndTime;
 }
 
-[Serializable, NetSerializable]
-public enum SlotMachineResult
+[DataDefinition, Serializable, NetSerializable]
+public sealed partial class SlotMachineRule
 {
-    None,
-    Lose,
-    ApplePair,
-    CherryPair,
-    Triple,
-    Triple7,
-    Jackpot
+    [DataField]
+    public List<string>? Symbols;
+
+    [DataField]
+    public int? Index;
+
+    [DataField]
+    public int Multiplier;
+
+    [DataField]
+    public string WinText = "";
+
+    [DataField]
+    public Color MultiplierColor = Color.White;
+}
+
+[DataDefinition, Serializable, NetSerializable]
+public sealed partial class SlotMachineSymbolDef
+{
+    [DataField(required: true)]
+    public string Id = string.Empty;
+
+    [DataField]
+    public string Name = "slot-machine-symbol-default";
+
+    [DataField]
+    public float Weight = 1f;
+
+    [DataField]
+    public SpriteSpecifier Icon = SpriteSpecifier.Invalid;
+}
+
+[DataDefinition, Serializable, NetSerializable]
+public sealed partial class SlotMachineReelDef
+{
+    [DataField(required: true)]
+    public List<SlotMachineSymbolDef> Symbols = new();
 }

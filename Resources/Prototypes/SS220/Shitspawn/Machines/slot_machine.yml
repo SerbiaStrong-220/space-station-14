@@ -1,25 +1,182 @@
 - type: entity
   id: SlotMachine
-  parent: BaseMachine
-  name: Игровой автомат
-  description: Рискни зарплатой ради мечты.
+  parent: BaseMachinePowered
+  name: slot machine
+  description: One-armed bandit. The house always wins.
   components:
+  - type: SlotMachine
+    rules:
+      - symbols: ["diamond", "diamond", "diamond"]
+        multiplier: 100
+        multiplierColor: gold
+        winText: "slot-machine-ui-win-jackpot"
+      - symbols: ["seven", "seven", "seven"]
+        multiplier: 50
+        multiplierColor: magenta
+        winText: "slot-machine-ui-win-triple"
+      - symbols: ["bell", "bell", "bell"]
+        multiplier: 30
+        multiplierColor: orange
+        winText: "slot-machine-ui-win-triple"
+      - symbols: ["apple", "apple", "apple"]
+        multiplier: 15
+        multiplierColor: green
+        winText: "slot-machine-ui-win-apples"
+      - symbols: ["blue_cherry", "blue_cherry", "blue_cherry"]
+        multiplier: 10
+        multiplierColor: yellow
+        winText: "slot-machine-ui-win-blue-cherries"
+      - symbols: ["cherry", "cherry"]
+        index: 1
+        multiplier: 3
+        multiplierColor: white
+        winText: "slot-machine-ui-win-cherries"
+      - symbols: ["apple", "apple"]
+        index: 0
+        multiplier: 2
+        multiplierColor: white
+        winText: "slot-machine-ui-win-apples"
+    reelPools:
+      - symbols:
+        - id: "cherry"
+          name: "slot-machine-symbol-cherry"
+          weight: 6
+          icon:
+            sprite: /Textures/SS220/Shitspawn/Structures/Machines/slot_machine.rsi
+            state: cherry
+        - id: "apple"
+          name: "slot-machine-symbol-apple"
+          weight: 8
+          icon:
+            sprite: /Textures/SS220/Shitspawn/Structures/Machines/slot_machine.rsi
+            state: apple
+        - id: "blue_cherry"
+          name: "slot-machine-symbol-blue-cherry"
+          weight: 8
+          icon:
+            sprite: /Textures/SS220/Shitspawn/Structures/Machines/slot_machine.rsi
+            state: blue_cherry
+        - id: "bell"
+          name: "slot-machine-symbol-bell"
+          weight: 5
+          icon:
+            sprite: /Textures/SS220/Shitspawn/Structures/Machines/slot_machine.rsi
+            state: bell
+        - id: "seven"
+          name: "slot-machine-symbol-seven"
+          weight: 4
+          icon:
+            sprite: /Textures/SS220/Shitspawn/Structures/Machines/slot_machine.rsi
+            state: seven
+        - id: "diamond"
+          name: "slot-machine-symbol-diamond"
+          weight: 3
+          icon:
+            sprite: /Textures/SS220/Shitspawn/Structures/Machines/slot_machine.rsi
+            state: diamond
+      - symbols:
+        - id: "cherry"
+          name: "slot-machine-symbol-cherry"
+          weight: 6
+          icon:
+            sprite: /Textures/SS220/Shitspawn/Structures/Machines/slot_machine.rsi
+            state: cherry
+        - id: "apple"
+          name: "slot-machine-symbol-apple"
+          weight: 8
+          icon:
+            sprite: /Textures/SS220/Shitspawn/Structures/Machines/slot_machine.rsi
+            state: apple
+        - id: "blue_cherry"
+          name: "slot-machine-symbol-blue-cherry"
+          weight: 8
+          icon:
+            sprite: /Textures/SS220/Shitspawn/Structures/Machines/slot_machine.rsi
+            state: blue_cherry
+        - id: "bell"
+          name: "slot-machine-symbol-bell"
+          weight: 5
+          icon:
+            sprite: /Textures/SS220/Shitspawn/Structures/Machines/slot_machine.rsi
+            state: bell
+        - id: "seven"
+          name: "slot-machine-symbol-seven"
+          weight: 4
+          icon:
+            sprite: /Textures/SS220/Shitspawn/Structures/Machines/slot_machine.rsi
+            state: seven
+        - id: "diamond"
+          name: "slot-machine-symbol-diamond"
+          weight: 3
+          icon:
+            sprite: /Textures/SS220/Shitspawn/Structures/Machines/slot_machine.rsi
+            state: diamond
+      - symbols:
+        - id: "cherry"
+          name: "slot-machine-symbol-cherry"
+          weight: 6
+          icon:
+            sprite: /Textures/SS220/Shitspawn/Structures/Machines/slot_machine.rsi
+            state: cherry
+        - id: "apple"
+          name: "slot-machine-symbol-apple"
+          weight: 8
+          icon:
+            sprite: /Textures/SS220/Shitspawn/Structures/Machines/slot_machine.rsi
+            state: apple
+        - id: "blue_cherry"
+          name: "slot-machine-symbol-blue-cherry"
+          weight: 8
+          icon:
+            sprite: /Textures/SS220/Shitspawn/Structures/Machines/slot_machine.rsi
+            state: blue_cherry
+        - id: "bell"
+          name: "slot-machine-symbol-bell"
+          weight: 5
+          icon:
+            sprite: /Textures/SS220/Shitspawn/Structures/Machines/slot_machine.rsi
+            state: bell
+        - id: "seven"
+          name: "slot-machine-symbol-seven"
+          weight: 4
+          icon:
+            sprite: /Textures/SS220/Shitspawn/Structures/Machines/slot_machine.rsi
+            state: seven
+        - id: "diamond"
+          name: "slot-machine-symbol-diamond"
+          weight: 3
+          icon:
+            sprite: /Textures/SS220/Shitspawn/Structures/Machines/slot_machine.rsi
+            state: diamond
   - type: Sprite
     sprite: SS220/Shitspawn/Structures/Machines/slot_machine.rsi
-    state: machine
     noRot: false
+    layers:
+    - state: machine
   - type: Transform
     noRot: false
-  - type: SlotMachine
-    insertSound: /Audio/Machines/id_insert.ogg
-    spinSound: /Audio/SS220/Shitspawn/SlotMachine/slot_spin.ogg
-    winSound: /Audio/SS220/Shitspawn/SlotMachine/slot_win.ogg
+  - type: Rotatable
   - type: ActivatableUI
-    key: enum.Content.Shared.SS220.Shitspawn.SlotMachine.SlotMachineUiKey.Key
+    key: enum.SlotMachineUiKey.Key
   - type: UserInterface
     interfaces:
-      enum.Content.Shared.SS220.Shitspawn.SlotMachine.SlotMachineUiKey.Key:
+      enum.SlotMachineUiKey.Key:
         type: SlotMachineBoundUserInterface
   - type: Clickable
   - type: InteractionOutline
+  - type: Anchorable
+  - type: ApcPowerReceiver
+    powerLoad: 500
   - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.5,0.25,0.5"
+        density: 500
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer

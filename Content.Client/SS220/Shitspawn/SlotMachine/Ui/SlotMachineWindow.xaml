@@ -47,64 +47,7 @@
 
         <Label Text="{Loc 'slot-machine-ui-payout-table'}" HorizontalAlignment="Center"
                FontColorOverride="#888888" Margin="0 4 0 0"/>
-        <GridContainer Columns="2" HorizontalAlignment="Center">
-
-            <BoxContainer Orientation="Horizontal" SeparationOverride="2">
-                <TextureRect Name="PayDiamond1" MinSize="24 24" Stretch="KeepAspectCentered"/>
-                <TextureRect Name="PayDiamond2" MinSize="24 24" Stretch="KeepAspectCentered"/>
-                <TextureRect Name="PayDiamond3" MinSize="24 24" Stretch="KeepAspectCentered"/>
-            </BoxContainer>
-            <Label Text="x100" FontColorOverride="Gold" VerticalAlignment="Center"/>
-
-            <BoxContainer Orientation="Horizontal" SeparationOverride="2">
-                <TextureRect Name="PaySeven1" MinSize="24 24" Stretch="KeepAspectCentered"/>
-                <TextureRect Name="PaySeven2" MinSize="24 24" Stretch="KeepAspectCentered"/>
-                <TextureRect Name="PaySeven3" MinSize="24 24" Stretch="KeepAspectCentered"/>
-            </BoxContainer>
-            <Label Text="x50" FontColorOverride="Red" VerticalAlignment="Center"/>
-
-            <BoxContainer Orientation="Horizontal" SeparationOverride="2">
-                <TextureRect Name="PayBell1" MinSize="24 24" Stretch="KeepAspectCentered"/>
-                <TextureRect Name="PayBell2" MinSize="24 24" Stretch="KeepAspectCentered"/>
-                <TextureRect Name="PayBell3" MinSize="24 24" Stretch="KeepAspectCentered"/>
-            </BoxContainer>
-            <Label Text="x30" FontColorOverride="Orange" VerticalAlignment="Center"/>
-
-            <BoxContainer Orientation="Horizontal" SeparationOverride="2">
-                <TextureRect Name="PayCherry1" MinSize="24 24" Stretch="KeepAspectCentered"/>
-                <TextureRect Name="PayCherry2" MinSize="24 24" Stretch="KeepAspectCentered"/>
-                <TextureRect Name="PayCherry3" MinSize="24 24" Stretch="KeepAspectCentered"/>
-            </BoxContainer>
-            <Label Text="x20" FontColorOverride="Green" VerticalAlignment="Center"/>
-
-            <BoxContainer Orientation="Horizontal" SeparationOverride="2">
-                <TextureRect Name="PayApple1" MinSize="24 24" Stretch="KeepAspectCentered"/>
-                <TextureRect Name="PayApple2" MinSize="24 24" Stretch="KeepAspectCentered"/>
-                <TextureRect Name="PayApple3" MinSize="24 24" Stretch="KeepAspectCentered"/>
-            </BoxContainer>
-            <Label Text="x15" FontColorOverride="Yellow" VerticalAlignment="Center"/>
-
-            <BoxContainer Orientation="Horizontal" SeparationOverride="2">
-                <TextureRect Name="PayBlue1" MinSize="24 24" Stretch="KeepAspectCentered"/>
-                <TextureRect Name="PayBlue2" MinSize="24 24" Stretch="KeepAspectCentered"/>
-                <TextureRect Name="PayBlue3" MinSize="24 24" Stretch="KeepAspectCentered"/>
-            </BoxContainer>
-            <Label Text="x10" FontColorOverride="Cyan" VerticalAlignment="Center"/>
-
-            <BoxContainer Orientation="Horizontal" SeparationOverride="2">
-                <TextureRect Name="PayApplePairL1" MinSize="24 24" Stretch="KeepAspectCentered"/>
-                <TextureRect Name="PayApplePairL2" MinSize="24 24" Stretch="KeepAspectCentered"/>
-                <Label Text="?" MinSize="24 24" Align="Center" VerticalAlignment="Center" FontColorOverride="#555555"/>
-            </BoxContainer>
-            <Label Text="x2" VerticalAlignment="Center"/>
-
-            <BoxContainer Orientation="Horizontal" SeparationOverride="2">
-                <Label Text="?" MinSize="24 24" Align="Center" VerticalAlignment="Center" FontColorOverride="#555555"/>
-                <TextureRect Name="PayCherryPairR1" MinSize="24 24" Stretch="KeepAspectCentered"/>
-                <TextureRect Name="PayCherryPairR2" MinSize="24 24" Stretch="KeepAspectCentered"/>
-            </BoxContainer>
-            <Label Text="x2" VerticalAlignment="Center"/>
-
+        <GridContainer Name="PayoutTableContainer" Columns="2" HorizontalAlignment="Center">
         </GridContainer>
     </BoxContainer>
 </DefaultWindow>
