@@ -514,6 +514,12 @@
     solutions:
       injector:
         maxVol: 100
+  # SS220-injector-skill-begin
+  - type: LearningOnDoAfterEndWith
+    progress:
+      Medicine:
+        baseLearning: 0.05
+  # SS220-injector-skill-end
   - type: Injector
     delay: 2.5
     injectOnly: false
@@ -564,6 +570,12 @@
     - 10
     currentTransferAmount: 10
   - type: Cryostasis # ss220 add fast injection with cryo syringe
+  # SS220-injector-skill-begin
+  - type: LearningOnDoAfterEndWith
+    progress:
+      Medicine:
+        baseLearning: 0.05
+  # SS220-injector-skill-end
   - type: Tag
     tags:
     - Syringe

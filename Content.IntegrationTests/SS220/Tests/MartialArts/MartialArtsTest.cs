@@ -74,7 +74,6 @@ public sealed class MartialArtsTest
   - type: Stamina
   - type: Pullable
   - type: Puller
-    pullCooldown: 0
   - type: Fixtures
     fixtures:
       fix1:

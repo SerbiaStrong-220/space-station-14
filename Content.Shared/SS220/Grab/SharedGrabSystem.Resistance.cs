@@ -2,11 +2,12 @@
 
 using Content.Shared.Random.Helpers;
 using Robust.Shared.Random;
-
+using Robust.Shared.Network;
 namespace Content.Shared.SS220.Grab;
 
 public partial class SharedGrabSystem
 {
+    [Dependency] private readonly INetManager _netManager = default!;
     private void InitializeResistance()
     {
         SubscribeLocalEvent<GrabResistanceComponent, GrabBreakoutAttemptAlertEvent>(OnBreakoutAttemptAlert);

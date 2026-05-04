@@ -83,7 +83,7 @@ public sealed partial class SuperMatterSystem
         _chatSystem.DispatchStationAnnouncement(uid, message, localizedSender, colorOverride: Color.FromHex("#deb63d"));
     }
 
-    private bool TryChangeStationAlertLevel(Entity<SuperMatterComponent> crystal, string alertLevel, [NotNullWhen(true)] out string? previousAlertLevel, bool force = true, bool locked = true)
+    private bool TryChangeStationAlertLevel(Entity<SuperMatterComponent> crystal, string alertLevel, [NotNullWhen(true)] out string? previousAlertLevel, bool force = true, bool locked = false)
     {
         previousAlertLevel = null;
         var stationUid = _station.GetStationInMap(Transform(crystal.Owner).MapID);

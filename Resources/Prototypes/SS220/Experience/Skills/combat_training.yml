@@ -9,8 +9,8 @@
     skillDescription: combat-training-initial-desc
   components:
   - type: DisarmChanceChangerSkill
-    disarmByMultiplier: 0.75
-    disarmedMultiplier: 1.25
+    disarmByMultiplier: 0.85
+    disarmedMultiplier: 1.1
 
 - type: skill
   id: CombatTrainingBase
@@ -37,8 +37,8 @@
     skillDescription: combat-training-trained-desc
   components:
   - type: DisarmChanceChangerSkill
-    disarmByMultiplier: 1.5
-    disarmedMultiplier: 0.75
+    disarmByMultiplier: 1.15
+    disarmedMultiplier: 0.9
 
 - type: skill
   id: CombatTrainingProfessional
@@ -51,6 +51,5 @@
     skillDescription: combat-training-professional-desc
   components:
   - type: DisarmChanceChangerSkill
-    disarmByMultiplier: 2
-    disarmedMultiplier: 0.5
-  - type: DisarmBlockSkill
+    disarmByMultiplier: 1.3
+    disarmedMultiplier: 0.8
