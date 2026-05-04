@@ -59,7 +59,7 @@
     startAnnouncement: station-event-unknown-shuttle-incoming #SS220 Lost Souls Revive
     weight: 2 #SS220 ReWork Soul Shuttle
   - type: LoadMapRule
-    gridPath: /Maps/Shuttles/ShuttleEvent/honki.yml
+    gridPath: /Maps/SS220/Shuttles/lostSoul/honki.yml # SS220 ReWork Soul Shuttle
 
 - type: entity
   parent: BaseUnknownShuttleRule
