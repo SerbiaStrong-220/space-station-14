@@ -1,6 +1,7 @@
 - type: entity
   parent: BaseRailing
   id: CurbWood
+  suffix: For mapping
   components:
   - type: Sprite
     drawdepth: FloorTiles
@@ -144,6 +145,7 @@
 - type: entity
   parent: BaseRailing
   id: CurbSteel
+  suffix: For mapping
   components:
   - type: Sprite
     drawdepth: FloorTiles
@@ -181,7 +183,7 @@
           collection: MetalBreak
       - !type:SpawnEntitiesBehavior
         spawn:
-          PartRodMetal1:
+          SheetSteel1:
             min: 1
             max: 2
       - !type:DoActsBehavior
@@ -286,7 +288,8 @@
 
 - type: entity
   parent: BaseRailing
-  id: CurbDarckSteel
+  id: CurbDarkSteel
+  suffix: For mapping
   components:
   - type: Sprite
     drawdepth: FloorTiles
@@ -324,7 +327,7 @@
           collection: MetalBreak
       - !type:SpawnEntitiesBehavior
         spawn:
-          PartRodMetal1:
+          SheetSteel1:
             min: 1
             max: 2
       - !type:DoActsBehavior
@@ -334,8 +337,8 @@
 
 
 - type: entity
-  parent: CurbDarckSteel
-  id: CurbDarckSteelCorner
+  parent: CurbDarkSteel
+  id: CurbDarkSteelCorner
   components:
   - type: Sprite
     drawdepth: FloorTiles
@@ -368,8 +371,8 @@
     node: railing
 
 - type: entity
-  parent: CurbDarckSteel
-  id: CurbDarckSteelCornerSmall
+  parent: CurbDarkSteel
+  id: CurbDarkSteelCornerSmall
   components:
   - type: Sprite
     drawdepth: FloorTiles
@@ -385,8 +388,8 @@
     node: railing
 
 - type: entity
-  parent: CurbDarckSteel
-  id: CurbDarckSteelRound
+  parent: CurbDarkSteel
+  id: CurbDarkSteelRound
   components:
   - type: Sprite
     drawdepth: FloorTiles
@@ -426,3 +429,267 @@
         - TableLayer
   - type: Construction
     node: railing
+
+- type: entity
+  parent: CurbWood
+  id: CurbWoodDecoration
+  suffix: Building in game
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WoodDestroy
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialWoodPlank:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: CurbWoodCorner
+  id: CurbWoodCornerDecoration
+  suffix: Building in game
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WoodDestroy
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialWoodPlank:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: CurbWoodCornerSmall
+  id: CurbWoodCornerSmallDecoration
+  suffix: Building in game
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WoodDestroy
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialWoodPlank:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: CurbWoodRound
+  id: CurbWoodRoundDecoration
+  suffix: Building in game
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WoodDestroy
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialWoodPlank:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: CurbSteel
+  id: CurbSteelDecoration
+  suffix: Building in game
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          PartRodMetal1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: CurbSteelCorner
+  id: CurbSteelCornerDecoration
+  suffix: Building in game
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          PartRodMetal1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: CurbSteelCornerSmall
+  id: CurbSteelCornerSmallDecoration
+  suffix: Building in game
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          PartRodMetal1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: CurbSteelRound
+  id: CurbSteelRoundDecoration
+  suffix: Building in game
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          PartRodMetal1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: CurbDarkSteel
+  id: CurbDarkSteelDecoration
+  suffix: Building in game
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          PartRodMetal1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: CurbDarkSteelCorner
+  id: CurbDarkSteelCornerDecoration
+  suffix: Building in game
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          PartRodMetal1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: CurbDarkSteelCornerSmall
+  id: CurbDarkSteelCornerSmallDecoration
+  suffix: Building in game
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          PartRodMetal1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: CurbDarkSteelRound
+  id: CurbDarkSteelRoundDecoration
+  suffix: Building in game
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          PartRodMetal1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]

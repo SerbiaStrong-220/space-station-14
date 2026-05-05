@@ -938,6 +938,7 @@
   placementMode: SnapgridCenter
   canBuildInImpassable: false
 
+#Бордюры
 - type: construction
   id: CurbWood
   graph: CurbWood
@@ -952,7 +953,7 @@
 
 - type: construction
   id: CurbWoodCorner
-  name: construction-recipe-railing-corner
+  name: recipes-construction-curbwood-corner
   graph: CurbWood
   startNode: start
   targetNode: curbWoodCorner
@@ -965,7 +966,7 @@
 
 - type: construction
   id: CurbWoodCornerSmall
-  name: construction-recipe-railing-corner-small
+  name: recipes-construction-curbwood-corner-small
   graph: CurbWood
   startNode: start
   targetNode: curbWoodCornerSmall
@@ -978,10 +979,112 @@
 
 - type: construction
   id: CurbWoodRound
-  name: construction-recipe-railing-round
+  name: recipes-construction-curbwood-round
   graph: CurbWood
   startNode: start
   targetNode: curbWoodRound
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+
+- type: construction
+  id: CurbSteel
+  graph: CurbSteel
+  startNode: start
+  targetNode: curbSteel
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+
+- type: construction
+  id: CurbSteelCorner
+  name: recipes-construction-curbsteel-corner
+  graph: CurbSteel
+  startNode: start
+  targetNode: curbSteelCorner
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+
+- type: construction
+  id: CurbSteelCornerSmall
+  name: recipes-construction-curbsteel-corner-small
+  graph: CurbSteel
+  startNode: start
+  targetNode: curbSteelCornerSmall
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+
+- type: construction
+  id: CurbSteelRound
+  name: recipes-construction-curbsteel-round
+  graph: CurbSteel
+  startNode: start
+  targetNode: curbSteelRound
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+
+- type: construction
+  id: CurbDarkSteel
+  graph: CurbDarkSteel
+  startNode: start
+  targetNode: curbDarkSteel
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+
+- type: construction
+  id: CurbDarkSteelCorner
+  name: recipes-construction-curbdarksteel-corner
+  graph: CurbDarkSteel
+  startNode: start
+  targetNode: curbDarkSteelCorner
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+
+- type: construction
+  id: CurbDarkSteelCornerSmall
+  name: recipes-construction-curbdarksteel-corner-small
+  graph: CurbDarkSteel
+  startNode: start
+  targetNode: curbDarkSteelCornerSmall
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+
+- type: construction
+  id: CurbDarkSteelRound
+  name: recipes-construction-curbdarksteel-round
+  graph: CurbDarkSteel
+  startNode: start
+  targetNode: curbDarkSteelRound
   category: construction-category-structures
   objectType: Structure
   placementMode: SnapgridCenter

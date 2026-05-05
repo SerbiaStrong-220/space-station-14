@@ -4,42 +4,42 @@
   graph:
     - node: start
       edges:
-        - to: CurbWood
+        - to: curbWood
           completed:
             - !type:SnapToGrid { }
           steps:
-            - material: MaterialWoodPlank
+            - material: WoodPlank
               amount: 1
               doAfter: 2
-        - to: CurbWoodCorner
+        - to: curbWoodCorner
           completed:
             - !type:SnapToGrid { }
           steps:
-            - material: MaterialWoodPlank
+            - material: WoodPlank
               amount: 2
               doAfter: 2.5
-        - to: CurbWoodCornerSmall
+        - to: curbWoodCornerSmall
           completed:
             - !type:SnapToGrid { }
           steps:
-            - material: MaterialWoodPlank
+            - material: WoodPlank
               amount: 1
               doAfter: 2
-        - to: CurbWoodRound
+        - to: curbWoodRound
           completed:
             - !type:SnapToGrid { }
           steps:
-            - material: MaterialWoodPlank
+            - material: WoodPlank
               amount: 2
               doAfter: 2
 
     - node: curbWood
-      entity: CurbWood
+      entity: CurbWoodDecoration
       edges:
         - to: start
           completed:
             - !type:SpawnPrototype
-              prototype: MaterialWoodPlank
+              prototype: MaterialWoodPlank1
               amount: 1
             - !type:DeleteEntity
           steps:
@@ -47,12 +47,12 @@
               doAfter: 0.25
 
     - node: curbWoodCorner
-      entity: CurbWoodCorner
+      entity: CurbWoodCornerDecoration
       edges:
         - to: start
           completed:
             - !type:SpawnPrototype
-              prototype: MaterialWoodPlank
+              prototype: MaterialWoodPlank1
               amount: 2
             - !type:DeleteEntity
           steps:
@@ -60,12 +60,12 @@
               doAfter: 0.5
 
     - node: curbWoodCornerSmall
-      entity: CurbWoodCornerSmall
+      entity: CurbWoodCornerSmallDecoration
       edges:
         - to: start
           completed:
             - !type:SpawnPrototype
-              prototype: MaterialWoodPlank
+              prototype: MaterialWoodPlank1
               amount: 1
             - !type:DeleteEntity
           steps:
@@ -73,12 +73,12 @@
               doAfter: 0.25
 
     - node: curbWoodRound
-      entity: CurbWoodRound
+      entity: CurbWoodRoundDecoration
       edges:
         - to: start
           completed:
             - !type:SpawnPrototype
-              prototype: MaterialWoodPlank
+              prototype: MaterialWoodPlank1
               amount: 2
             - !type:DeleteEntity
           steps:

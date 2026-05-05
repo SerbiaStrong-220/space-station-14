@@ -2941,7 +2941,7 @@ entities:
     - type: Transform
       pos: 2.5,2.5
       parent: 1
-- proto: CurbDarckSteel
+- proto: CurbDarkSteel
   entities:
   - uid: 188
     components:
@@ -3003,7 +3003,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: 13.5,-7.5
       parent: 1
-- proto: CurbDarckSteelCornerSmall
+- proto: CurbDarkSteelCornerSmall
   entities:
   - uid: 198
     components:

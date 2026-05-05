@@ -1,84 +1,84 @@
 - type: constructionGraph
-  id: Railing
+  id: CurbDarkSteel
   start: start
   graph:
     - node: start
       edges:
-        - to: railing
+        - to: curbDarkSteel
           completed:
             - !type:SnapToGrid { }
           steps:
-            - material: MetalRod
+            - material: Steel
               amount: 1
               doAfter: 2
-        - to: railingCorner
+        - to: curbDarkSteelCorner
           completed:
             - !type:SnapToGrid { }
           steps:
-            - material: MetalRod
+            - material: Steel
               amount: 2
               doAfter: 2.5
-        - to: railingCornerSmall
+        - to: curbDarkSteelCornerSmall
           completed:
             - !type:SnapToGrid { }
           steps:
-            - material: MetalRod
+            - material: Steel
               amount: 1
               doAfter: 2
-        - to: railingRound
+        - to: curbDarkSteelRound
           completed:
             - !type:SnapToGrid { }
           steps:
-            - material: MetalRod
+            - material: Steel
               amount: 2
               doAfter: 2
 
-    - node: railing
-      entity: Railing
+    - node: curbDarkSteel
+      entity: CurbDarkSteelDecoration
       edges:
         - to: start
           completed:
             - !type:SpawnPrototype
-              prototype: PartRodMetal1
+              prototype: SheetSteel1
               amount: 1
             - !type:DeleteEntity
           steps:
             - tool: Screwing
               doAfter: 0.25
 
-    - node: railingCorner
-      entity: RailingCorner
+    - node: curbDarkSteelCorner
+      entity: CurbDarkSteelCornerDecoration
       edges:
         - to: start
           completed:
             - !type:SpawnPrototype
-              prototype: PartRodMetal1
+              prototype: SheetSteel1
               amount: 2
             - !type:DeleteEntity
           steps:
             - tool: Screwing
               doAfter: 0.5
 
-    - node: railingCornerSmall
-      entity: RailingCornerSmall
+    - node: curbDarkSteelCornerSmall
+      entity: CurbDarkSteelCornerSmallDecoration
       edges:
         - to: start
           completed:
             - !type:SpawnPrototype
-              prototype: PartRodMetal1
+              prototype: SheetSteel1
               amount: 1
             - !type:DeleteEntity
           steps:
             - tool: Screwing
               doAfter: 0.25
 
-    - node: railingRound
-      entity: RailingRound
+    - node: curbDarkSteelRound
+      entity: CurbDarkSteelRoundDecoration
       edges:
         - to: start
           completed:
             - !type:SpawnPrototype
-              prototype: PartRodMetal1
+              prototype: SheetSteel1
               amount: 2
             - !type:DeleteEntity
           steps:

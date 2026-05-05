@@ -49984,7 +49984,7 @@ entities:
     - type: Transform
       pos: -30.5,11.5
       parent: 1
-- proto: CurbDarckSteel
+- proto: CurbDarkSteel
   entities:
   - uid: 6143
     components:
@@ -50498,7 +50498,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -1.5,-32.5
       parent: 1
-- proto: CurbDarckSteelCorner
+- proto: CurbDarkSteelCorner
   entities:
   - uid: 6232
     components:
@@ -50610,7 +50610,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: 34.5,-1.5
       parent: 1
-- proto: CurbDarckSteelCornerSmall
+- proto: CurbDarkSteelCornerSmall
   entities:
   - uid: 6251
     components:
@@ -50942,7 +50942,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: -7.5,-31.5
       parent: 1
-- proto: CurbDarckSteelRound
+- proto: CurbDarkSteelRound
   entities:
   - uid: 6309
     components:
