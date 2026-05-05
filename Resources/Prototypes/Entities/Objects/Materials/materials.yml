@@ -311,6 +311,16 @@
   - type: Stack
     count: 1
 
+#SS220-ChemicalBiomass begin
+- type: entity
+  parent: MaterialBiomass
+  id: MaterialBiomass10
+  suffix: Ten
+  components:
+  - type: Stack
+    count: 10
+#SS220-ChemicalBiomass end
+
 # Following not used currently
 - type: entity
   parent: MaterialBase

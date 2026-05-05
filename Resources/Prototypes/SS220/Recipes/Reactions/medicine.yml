@@ -83,11 +83,11 @@
   quantized: true
   reactants:
     Protein:
-      amount: 1
+      amount: 10
     Cryoxadone:
-      amount: 1
+      amount: 10
     Blood:
-      amount: 1
+      amount: 10
   effects:
   - !type:SpawnEntity
-    entity: MaterialBiomass1
+    entity: MaterialBiomass10
