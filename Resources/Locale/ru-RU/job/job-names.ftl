@@ -117,3 +117,25 @@ JobTechnicalAssistant = технический ассистент
 JobWarden = смотритель
 JobBoxer = боксёр
 JobZookeeper = зоотехник
+
+job-name-cburn = Офицер карантина ЦентКома
+
+job-name-centcommoff = Представитель ЦентКома
+
+job-name-cluwne = Клувень
+
+job-name-deathsquad = Эскадрон смерти
+
+job-name-ninja = Ниндзя
+
+job-name-syndicate-commander = Командир Синдиката
+
+job-name-syndicate-corpsman = Медик Синдиката
+
+job-name-syndicate-operative = Оперативник Синдиката
+
+job-name-pirate = Пират
+
+job-name-wizard = Волшебник
+
+JobVisitor = Посетитель

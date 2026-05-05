@@ -26,3 +26,5 @@ ent-ClothingOuterSuitCarp = костюм карпа
 ent-ClothingOuterHardsuitCarp = { ent-ClothingOuterSuitCarp }
     .suffix = Скафандр, НЕ МАППИТЬ
     .desc = { ent-ClothingOuterSuitCarp.desc }
+
+ent-ClothingOuterSuitSpaceninja = костюм космического ниндзя\n  .desc = Этот черный высокотехнологичный, кибернетически-усиленный костюм обеспечивает хорошую защиту и множество способностей, таких как невидимость или телепортация.

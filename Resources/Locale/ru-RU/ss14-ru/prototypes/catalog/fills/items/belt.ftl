@@ -43,3 +43,5 @@ ent-ClothingBeltHolsterFilled = { ent-ClothingBeltHolster }
 ent-ClothingBeltChefFilled = { ent-ClothingBeltChef }
     .suffix = Заполненный
     .desc = { ent-ClothingBeltChef.desc }
+
+ent-ClothingBeltParamedicFilled = { ent-ClothingBeltMedical }\n  .suffix = Заполненный\n  .desc = { ent-ClothingBeltMedical.desc }

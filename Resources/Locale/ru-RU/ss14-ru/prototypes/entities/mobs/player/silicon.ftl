@@ -76,3 +76,9 @@ ent-PlayerSyndicateAssaultBorgDerelict = { ent-SyndicateAssaultBorgChassisDereli
 ent-PlayerBorgSyndicateDerelictGhostRole = { ent-PlayerSyndicateAssaultBorgDerelict }
     .suffix = Роль призрака
     .desc = { ent-PlayerSyndicateAssaultBorgDerelict.desc }
+
+ent-PlayerSiliconBase = { "" }\n  .desc = { "" }
+
+ent-Drone = дрон\n  .desc = { ent-PlayerSiliconBase.desc }
+
+ent-Onestar = меха onestar\n  .desc = { ent-PlayerSiliconBase.desc }

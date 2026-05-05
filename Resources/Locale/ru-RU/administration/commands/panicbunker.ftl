@@ -24,3 +24,7 @@ cmd-panicbunker_min_overall_minutes-desc = Gets or sets the minimum overall play
 cmd-panicbunker_min_overall_minutes-help = Usage: panicbunker_min_overall_minutes <minutes>
 panicbunker-command-min-overall-minutes-is = The minimum overall playtime for the panic bunker is {$minutes} minutes.
 panicbunker-command-min-overall-minutes-set = Set the minimum overall playtime for the panic bunker to {$minutes} minutes.
+
+cmd-panicbunker-desc = Переключает паник-бункер, который включает более строгие ограничения на то, кому разрешено подключаться к серверу.
+
+cmd-panicbunker-help = Использование: panicbunker

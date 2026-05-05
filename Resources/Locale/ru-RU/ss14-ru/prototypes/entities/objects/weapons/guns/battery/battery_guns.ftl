@@ -78,3 +78,5 @@ ent-XenoborgLaserGun = лазерная пушка ксеноборга
     .desc = { ent-WeaponAdvancedLaser.desc }
 ent-XenoborgHeavyLaserGun = тяжёлая лазерная пушка ксеноборга
     .desc = { ent-WeaponAdvancedLaser.desc }
+
+ent-WeaponAdvancedRevolver = продвинутый лазерный револьвер\n  .desc = Мощный и робастный лазерный револьвер для защиты глав станции. Он настолько крут, что даже самые закоренелые преступники остановились бы, чтобы похвалить его.

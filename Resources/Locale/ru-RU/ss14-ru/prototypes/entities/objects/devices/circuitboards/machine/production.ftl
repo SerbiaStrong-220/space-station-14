@@ -174,3 +174,7 @@ ent-CutterMachineCircuitboard = лазерный станок (машинная 
 #SS220 Loc-Change
 ent-SmartFridgeCircuitboard = умный холодильник (машинная плата)
     .desc = Печатная плата для умного холодильника.
+
+ent-GeneratorPlasmaMachineCircuitboard = плата плазменного генератора\n  .desc = { ent-BaseMachineCircuitboard.desc }
+
+ent-MaterialReclaimerMachineCircuitboard = плата машины утилизатора материалов\n  .desc = { ent-BaseMachineCircuitboard.desc }

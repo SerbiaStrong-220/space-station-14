@@ -158,3 +158,5 @@ ent-VendingMachineWallMedicalCivilian = НаноМед-Бандаж
     .desc = Это настенный раздатчик медицинского снаряжения. Только натуральные химикаты!
 ent-VendingMachineWallMedical = НаноМед
     .desc = { ent-VendingMachineWallMedicalCivilian.desc }
+
+ent-VendingMachineSmartFridge = Умный Холодильник\n  .desc = Холодильная установка для хранения продуктов холодными и свежими.

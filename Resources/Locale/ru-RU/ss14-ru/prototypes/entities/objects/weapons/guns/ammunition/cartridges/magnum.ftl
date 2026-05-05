@@ -12,3 +12,13 @@ ent-CartridgeMagnumAP = патрон (.45 магнум бронебойный)
     .desc = { ent-BaseCartridgeMagnum.desc }
 ent-CartridgeMagnumUranium = патрон (.45 магнум урановый)
     .desc = { ent-BaseCartridgeMagnum.desc }
+
+ent-BaseAnomalousCartridge = { ent-BaseCartridgeMagnum }\n  .desc = Бьет в два раза сильнее, чем стандартная частица A.P.E.
+
+ent-CartridgeAnomalousParticleDelta = патрон (дельта-частица)\n  .desc = { ent-BaseAnomalousCartridge.desc }
+
+ent-CartridgeAnomalousParticleEpsilon = патрон (эпсилон-частица)\n  .desc = { ent-BaseAnomalousCartridge.desc }
+
+ent-CartridgeAnomalousParticleZeta = патрон (дзета-частица)\n  .desc = { ent-BaseAnomalousCartridge.desc }
+
+ent-CartridgeAnomalousParticleOmega = патрон (омега-частица)\n  .desc = Экспериментальная и зачастую опасная частица.

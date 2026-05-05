@@ -36,3 +36,5 @@ ent-IntercomSupply = { ent-Intercom }
 ent-IntercomAll = { ent-Intercom }
     .suffix = Все
     .desc = { ent-Intercom.desc }
+
+ent-IntercomAssesmbly = каркас интеркома\n  .desc = Интерком. Похоже, от него сейчас мало толку.

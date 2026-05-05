@@ -436,3 +436,21 @@ ent-HolopadCargoBayLongRange = { ent-HolopadLongRange }
 ent-HolopadCentCommEvacShuttle = { ent-HolopadLongRange }
     .desc = { ent-HolopadLongRange.desc }
     .suffix = { holopad-centcomm-evac }
+
+holopad-window-relay-label = Трансляция из:
+
+holopad-window-filter-line-placeholder = Поиск контакта
+
+holopad-science-artifact-north = РНД - Артефакты (Север)
+
+holopad-science-artifact-south = РНД - Артефакты (Юг)
+
+holopad-medical-clinic = Медицинский - Клиника
+
+holopad-cargo-mailroom = Карго - Почтовое отделение
+
+holopad-engineering-main = Инженерия - Главная
+
+holopad-security-evac-checkpoint = СБ - КПП Эвакуации
+
+holopad-security-arrivals-checkpoint = СБ - КПП Прибытия

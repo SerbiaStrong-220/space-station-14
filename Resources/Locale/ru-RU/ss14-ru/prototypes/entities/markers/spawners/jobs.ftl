@@ -109,3 +109,5 @@ ent-SpawnPointZookeeper = зоотехник
     .desc = { ent-SpawnPointJobBase.desc }
 ent-SpawnPointBlueShield = офицер "Синий щит"
     .desc = { ent-SpawnPointJobBase.desc }
+
+ent-SpawnPointAssistant = пассажир\n  .desc = { ent-SpawnPointJobBase.desc }

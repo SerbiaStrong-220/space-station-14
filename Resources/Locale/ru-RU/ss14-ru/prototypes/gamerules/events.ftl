@@ -56,3 +56,7 @@ ent-IonStorm = { ent-BaseGameRule }
     .desc = { ent-BaseGameRule.desc }
 ent-MimicVendorRule = { ent-BaseGameRule }
     .desc = { ent-BaseGameRule.desc }
+
+ent-FalseAlarm = { ent-BaseGameRule }\n  .desc = { ent-BaseGameRule.desc }
+
+ent-VentCritters = { ent-BaseGameRule }\n  .desc = { ent-BaseGameRule.desc }

@@ -54,3 +54,5 @@ ent-DrinkCartonSoyMilk = { ent-DrinkCartonBaseLargeEmpty }
     .desc = { ent-DrinkCartonBaseLargeEmpty.desc }
 ent-DrinkCartonOatMilk = { ent-DrinkCartonBaseLargeEmpty }
     .desc = { ent-DrinkCartonBaseLargeEmpty.desc }
+
+ent-DrinkBottleGoldschlager = бутылка гольдшлягера\n  .desc = { ent-DrinkBottleBaseEmpty.desc }

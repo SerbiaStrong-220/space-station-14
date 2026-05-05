@@ -57,3 +57,5 @@ ent-FoodDonutJellyScurret = желейный слизеньковый пончи
 ent-FoodDonutPoison = { ent-FoodDonutPink }
     .desc = { ent-FoodDonutPink.desc }
     .suffix = Яд
+
+ent-FoodDonutBlumpkin = пончик с блампкином\n  .desc = Отлично сочетается с кружкой успокаивающего пьяного блампкина.

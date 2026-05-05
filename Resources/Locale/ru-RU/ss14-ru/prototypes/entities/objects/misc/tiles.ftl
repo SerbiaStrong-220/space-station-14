@@ -222,3 +222,5 @@ ent-FloorTileItemXenoborg = ксеноборг-пол
     .desc = { ent-FloorTileItemBase.desc }
 ent-FloorTileItemDarkSquiggly = тёмная волнистая стальная плитка
     .desc = { ent-FloorTileItemDark.desc }
+
+ent-FloorTileItemReinforced = укрепленная плитка\n  .desc = { ent-FloorTileItemBase.desc }

@@ -250,3 +250,15 @@ ent-ChemistryBottleSugar = { ent-BaseChemistryBottleFilled }
 ent-ChemistryBottleSulfur = { ent-BaseChemistryBottleFilled }
     .suffix = Сера
     .desc = { ent-BaseChemistryBottleFilled.desc }
+
+ent-EpinephrineChemistryBottle = бутылочка эпинефрина\n  .desc = { ent-BaseChemistryEmptyBottle.desc }
+
+ent-RobustHarvestChemistryBottle = бутылочка робаст харвеста\n  .desc = Это увеличит потенцию ваших растений.
+
+ent-UnstableMutagenChemistryBottle = бутылочка нестабильного мутагена\n  .desc = Это вызовет быстрые мутации в ваших растениях.
+
+ent-NocturineChemistryBottle = бутылочка ноктюрина\n  .desc = Это заставит кого-то упасть почти сразу. Сложно получить передозировку.
+
+ent-EphedrineChemistryBottle = бутылочка эфедрина\n  .desc = { ent-BaseChemistryEmptyBottle.desc }
+
+ent-OmnizineChemistryBottle = бутылочка омнизина\n  .desc = { ent-BaseChemistryEmptyBottle.desc }

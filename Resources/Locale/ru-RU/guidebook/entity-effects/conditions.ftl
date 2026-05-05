@@ -84,3 +84,5 @@ entity-effect-condition-guidebook-internals =
         [true] использует дыхательную маску
        *[false] дышит атмосферным газом
     }
+
+entity-condition-guidebook-internals = метаболизатор { $usingInternals ->\n  [true] использует баллон с газом\n *[false] дышит атмосферным воздухом\n}

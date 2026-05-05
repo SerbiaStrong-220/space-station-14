@@ -262,3 +262,7 @@ ent-PosterMapWaystation = карта Waystation
     .desc = Карта станции Waystation... подожди, разве это не перевёрнутая Packed??
 ent-PosterMapOrigin = карта Origin
     .desc = Карта станции Origin.
+
+ent-PosterContrabandLustyExomorph = Похотливый Экзоморф\n  .desc = Еретический плакат с изображением главной героини не менее еретической книги.
+
+ent-PosterContrabandBustyBackdoorExoBabes6 = Грудастые Экзо-Детки с Черного Входа 6\n  .desc = Получите, или дайте, дозу этих полностью естественных Экзо!

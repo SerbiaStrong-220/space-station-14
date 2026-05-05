@@ -26,3 +26,5 @@ ent-BlackKnight = чёрный конь
     .desc = { ent-BaseTabletopPiece.desc }
 ent-BlackPawn = чёрная пешка
     .desc = { ent-BaseTabletopPiece.desc }
+
+ent-BaseChessPiece = { ent-BaseItem }\n  .desc = { ent-BaseItem.desc }

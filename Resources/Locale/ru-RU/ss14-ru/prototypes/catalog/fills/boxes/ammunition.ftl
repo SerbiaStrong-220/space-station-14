@@ -72,3 +72,5 @@ ent-BoxMagazineRifleHighVelocity = коробка магазинов с .20 ви
     .desc = Полная коробка магазинов с высокоскоростными патронами калибра .20 винтовочный.
 ent-BoxMagazineRiflePractice = коробка магазинов с .20 винтовочными (учебные)
     .desc = Полная коробка магазинов с учебными патронами калибра .20 винтовочный.
+
+ent-BoxAmmoProvider = { ent-BoxMagazine }\n  .desc = { ent-BoxMagazine.desc }

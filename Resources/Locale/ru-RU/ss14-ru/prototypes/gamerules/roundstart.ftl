@@ -38,3 +38,7 @@ ent-SpaceTrafficControlFriendlyEventScheduler = { ent-BaseGameRule }
     .desc = { ent-BaseGameRule.desc }
 ent-BasicRoundstartVariation = { ent-BaseGameRule }
     .desc = { ent-BaseGameRule.desc }
+
+ent-DeathMatch = { ent-BaseGameRule }\n  .desc = { ent-BaseGameRule.desc }
+
+ent-Pirates = { ent-BaseGameRule }\n  .desc = { ent-BaseGameRule.desc }

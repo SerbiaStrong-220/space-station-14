@@ -138,3 +138,5 @@ ent-WizardIDCard = ID-карта волшебника
 ent-UniversalIDCard = универсальная ID-карта
     .desc = ID-карта, которая позволит вам осуществить свои самые сокровенные желания.
     .suffix = Админ
+
+ent-CentcomIDCardSyndie = ID карта ЦентКома\n  .desc = { ent-IDCardStandard.desc }

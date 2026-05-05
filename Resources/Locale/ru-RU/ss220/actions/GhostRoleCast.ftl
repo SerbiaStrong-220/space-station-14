@@ -8,3 +8,5 @@ action-toggle-ghostrole-remove-popup = Убрал роль призрака.
 
 action-toggle-ghostrole-cast-settings-name = Преднастройки GhostRole.
 action-toggle-ghostrole-cast-settings-desc = Указать имя, описание и правила для будущих ролей призрака.
+
+ent-ActionToggleGhostRoleName = Настройки ГостРоли.\n  .desc = Настройка имени, описания и правил ГостРоли (роли призрака).

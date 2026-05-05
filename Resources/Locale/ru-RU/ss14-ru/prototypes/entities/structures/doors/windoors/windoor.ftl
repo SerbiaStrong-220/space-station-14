@@ -180,3 +180,23 @@ ent-UraniumWindoorNukeopLocked = { ent-WindoorUranium }
 ent-UraniumWindoorSecureNukeopLocked = { ent-WindoorSecureUranium }
     .suffix = Ядерные оперативники, Закрыт, Уран
     .desc = { ent-WindoorSecureUranium.desc }
+
+ent-WindoorArmoryLocked = { ent-WindoorSecurityLocked }\n  .suffix = Оружейная, Заперта\n  .desc = { ent-WindoorSecurityLocked.desc }
+
+ent-WindoorBrigLocked = { ent-WindoorSecurityLocked }\n  .suffix = Бриг, Заперта\n  .desc = { ent-WindoorSecurityLocked.desc }
+
+ent-WindoorChemistryLocked = { ent-WindoorSecure }\n  .suffix = Химия, Заперта\n  .desc = { ent-WindoorSecure.desc }
+
+ent-WindoorCommandLocked = { ent-WindoorSecure }\n  .suffix = Командование, Заперта\n  .desc = { ent-WindoorSecure.desc }
+
+ent-WindoorEngineeringLocked = { ent-WindoorSecure }\n  .suffix = Инженерия, Заперта\n  .desc = { ent-WindoorSecure.desc }
+
+ent-WindoorExternalLocked = { ent-WindoorSecure }\n  .suffix = Наружная, Заперта\n  .desc = { ent-WindoorSecure.desc }
+
+ent-WindoorMedicalLocked = { ent-WindoorSecure }\n  .suffix = Медицина, Заперта\n  .desc = { ent-WindoorSecure.desc }
+
+ent-WindoorSecurityLocked = { ent-WindoorSecure }\n  .suffix = Служба Безопасности, Заперта\n  .desc = { ent-WindoorSecure.desc }
+
+ent-WindoorScienceLocked = { ent-WindoorSecure }\n  .suffix = Наука, Заперта\n  .desc = { ent-WindoorSecure.desc }
+
+ent-WindoorHeadOfPersonnelLocked = { ent-WindoorSecure }\n  .suffix = Глава Персонала, Заперта\n  .desc = { ent-WindoorSecure.desc }

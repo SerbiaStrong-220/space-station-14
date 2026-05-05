@@ -52,3 +52,5 @@ ent-NitrousOxideCanisterBroken = { ent-GasCanisterBrokenBase }
     .desc = { ent-GasCanisterBrokenBase.desc }
 ent-FrezonCanisterBroken = { ent-GasCanisterBrokenBase }
     .desc = { ent-GasCanisterBrokenBase.desc }
+
+ent-MiasmaCanister = { ent-GasCanister }\n  .desc = { ent-GasCanister.desc }

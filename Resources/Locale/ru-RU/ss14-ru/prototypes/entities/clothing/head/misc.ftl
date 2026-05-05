@@ -41,3 +41,5 @@ ent-WaterDropletHat = капелька воды
     .desc = Делает 8-глазых друзей в 8 раз очаровательнее!
 ent-ClothingHeadHatHairflower = цветок для волос
     .desc = Красивый цветок для волос, который можно вставить между локонами.
+
+ent-ClothingHeadHatFlowerCrown = цветочная корона\n  .desc = Венец из свежих и ароматных цветов.

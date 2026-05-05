@@ -58,3 +58,7 @@ ent-ActionToggleJusticeHelm = Переключить шлем правосуди
     .desc = Включает или выключает шлем правосудия.
 ent-CardHelmet = картонный шлем
     .desc = Средневековый шлем, сделанный из картона.
+
+ent-ClothingHeadHelmetBasicOld = шлем\n  .desc = Старый обычный шлем.
+
+ent-ClothingHeadHelmetScaf = скафандр-шлем\n  .desc = Прочный, надежный шлем.
