@@ -1,4 +1,4 @@
-ent-MaterialBiomass10 = биомасса
+ent-MaterialBiomass10 = { ent-MaterialBiomass }
     .suffix = 10
-    .desc = Сырьё.
+    .desc = { ent-MaterialBiomass.desc }
     
