@@ -5,7 +5,6 @@
     - node: start
       edges:
         - to: FlowerHedge
-          entity: FlowerHedge
           completed:
             - !type:SnapToGrid
               southRotation: true
@@ -13,18 +12,16 @@
             - material: WoodPlank
               amount: 5
               doAfter: 5
-    - node: FlowerHedge
-      entity: FlowerHedge
 
     - node: FlowerHedge
       entity: FlowerHedge
       edges:
         - to: start
           completed:
-          - !type:SpawnPrototype
-                prototype: MaterialWoodPlank
-                amount: 3
-          - !type:DeleteEntity {}
+            - !type:SpawnPrototype
+              prototype: MaterialWoodPlank
+              amount: 3
+            - !type:DeleteEntity {}
           steps:
             - tool: Prying
               doAfter: 2
@@ -45,16 +42,13 @@
               doAfter: 5
     - node: FlowerHedgeRed
       entity: FlowerHedgeRed
-
-    - node: FlowerHedgeRed
-      entity: FlowerHedgeRed
       edges:
         - to: start
           completed:
-          - !type:SpawnPrototype
-                prototype: MaterialWoodPlank
-                amount: 3
-          - !type:DeleteEntity {}
+            - !type:SpawnPrototype
+              prototype: MaterialWoodPlank
+              amount: 3
+            - !type:DeleteEntity {}
           steps:
             - tool: Prying
               doAfter: 2
@@ -75,16 +69,13 @@
               doAfter: 5
     - node: FlowerHedgeOrange
       entity: FlowerHedgeOrange
-
-    - node: FlowerHedgeOrange
-      entity: FlowerHedgeOrange
       edges:
         - to: start
           completed:
-          - !type:SpawnPrototype
-                prototype: MaterialWoodPlank
-                amount: 3
-          - !type:DeleteEntity {}
+            - !type:SpawnPrototype
+              prototype: MaterialWoodPlank
+              amount: 3
+            - !type:DeleteEntity {}
           steps:
             - tool: Prying
               doAfter: 2
@@ -105,16 +96,13 @@
               doAfter: 5
     - node: FlowerHedgeYellow
       entity: FlowerHedgeYellow
-
-    - node: FlowerHedgeYellow
-      entity: FlowerHedgeYellow
       edges:
         - to: start
           completed:
-          - !type:SpawnPrototype
-                prototype: MaterialWoodPlank
-                amount: 3
-          - !type:DeleteEntity {}
+            - !type:SpawnPrototype
+              prototype: MaterialWoodPlank
+              amount: 3
+            - !type:DeleteEntity {}
           steps:
             - tool: Prying
               doAfter: 2
@@ -135,16 +123,13 @@
               doAfter: 5
     - node: FlowerHedgeBlue
       entity: FlowerHedgeBlue
-
-    - node: FlowerHedgeBlue
-      entity: FlowerHedgeBlue
       edges:
         - to: start
           completed:
-          - !type:SpawnPrototype
-                prototype: MaterialWoodPlank
-                amount: 3
-          - !type:DeleteEntity {}
+            - !type:SpawnPrototype
+              prototype: MaterialWoodPlank
+              amount: 3
+            - !type:DeleteEntity {}
           steps:
             - tool: Prying
               doAfter: 2
@@ -165,16 +150,14 @@
               doAfter: 5
     - node: FlowerHedgeWhite
       entity: FlowerHedgeWhite
-
-    - node: FlowerHedgeWhite
-      entity: FlowerHedgeWhite
       edges:
         - to: start
           completed:
-          - !type:SpawnPrototype
-                prototype: MaterialWoodPlank
-                amount: 3
-          - !type:DeleteEntity {}
+            - !type:SpawnPrototype
+              prototype: MaterialWoodPlank
+              amount: 3
+            - !type:DeleteEntity {}
           steps:
             - tool: Prying
               doAfter: 2
+              
