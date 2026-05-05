@@ -937,3 +937,75 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
+
+- type: construction
+  id: FlowerHedgeCraft
+  graph: FlowerHedgeGraph
+  startNode: start
+  targetNode: FlowerHedge
+  category: construction-category-structures
+  placementMode: SnapgridCenter
+  objectType: Structure
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: FlowerHedgeRedCraft
+  graph: FlowerHedgeRedGraph
+  startNode: start
+  targetNode: FlowerHedgeRed
+  category: construction-category-structures
+  placementMode: SnapgridCenter
+  objectType: Structure
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: FlowerHedgeOrangeCraft
+  graph: FlowerHedgeOrangeGraph
+  startNode: start
+  targetNode: FlowerHedgeOrange
+  category: construction-category-structures
+  placementMode: SnapgridCenter
+  objectType: Structure
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: FlowerHedgeYellowCraft
+  graph: FlowerHedgeYellowGraph
+  startNode: start
+  targetNode: FlowerHedgeYellow
+  category: construction-category-structures
+  placementMode: SnapgridCenter
+  objectType: Structure
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: FlowerHedgeBlueCraft
+  graph: FlowerHedgeBlueGraph
+  startNode: start
+  targetNode: FlowerHedgeBlue
+  category: construction-category-structures
+  placementMode: SnapgridCenter
+  objectType: Structure
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: FlowerHedgeWhiteCraft
+  graph: FlowerHedgeWhiteGraph
+  startNode: start
+  targetNode: FlowerHedgeWhite
+  category: construction-category-structures
+  placementMode: SnapgridCenter
+  objectType: Structure
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked

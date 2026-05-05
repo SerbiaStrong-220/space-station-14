@@ -1,0 +1,101 @@
+- type: constructionGraph
+  id: FlowerHedgeGraph
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: FlowerHedge
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
+          steps:
+            - material: WoodPlank
+              amount: 5
+              doAfter: 5
+    - node: FlowerHedge
+      entity: FlowerHedge
+
+- type: constructionGraph
+  id: FlowerHedgeRedGraph
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: FlowerHedgeRed
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
+          steps:
+            - material: WoodPlank
+              amount: 5
+              doAfter: 5
+    - node: FlowerHedgeRed
+      entity: FlowerHedgeRed
+
+- type: constructionGraph
+  id: FlowerHedgeOrangeGraph
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: FlowerHedgeOrange
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
+          steps:
+            - material: WoodPlank
+              amount: 5
+              doAfter: 5
+    - node: FlowerHedgeOrange
+      entity: FlowerHedgeOrange
+
+- type: constructionGraph
+  id: FlowerHedgeYellowGraph
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: FlowerHedgeYellow
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
+          steps:
+            - material: WoodPlank
+              amount: 5
+              doAfter: 5
+    - node: FlowerHedgeYellow
+      entity: FlowerHedgeYellow
+
+- type: constructionGraph
+  id: FlowerHedgeBlueGraph
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: FlowerHedgeBlue
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
+          steps:
+            - material: WoodPlank
+              amount: 5
+              doAfter: 5
+    - node: FlowerHedgeBlue
+      entity: FlowerHedgeBlue
+
+- type: constructionGraph
+  id: FlowerHedgeWhiteGraph
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: FlowerHedgeWhite
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
+          steps:
+            - material: WoodPlank
+              amount: 5
+              doAfter: 5
+    - node: FlowerHedgeWhite
+      entity: FlowerHedgeWhite

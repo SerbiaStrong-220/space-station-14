@@ -95,6 +95,20 @@
   - type: IconSmooth
     key: hedge
     base: state_
+  - type: Construction
+    graph: FlowerHedgeGraph
+    node: FlowerHedge
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.28,-0.37,0.28,0.40"
+        hard: false
+        mask:
+        - FullTileMask
+        layer:
+        - TableLayer
 
 - type: entity
   id: FlowerHedgeRed
@@ -107,6 +121,9 @@
   - type: Icon
     sprite: SS220/Structures/Furniture/Hedge/ColorFlower/hedge_flower_red.rsi
     state: full
+  - type: Construction
+    graph: FlowerHedgeRedGraph
+    node: FlowerHedgeRed
 
 - type: entity
   id: FlowerHedgeOrange
@@ -119,6 +136,9 @@
   - type: Icon
     sprite: SS220/Structures/Furniture/Hedge/ColorFlower/hedge_flower_orange.rsi
     state: full
+  - type: Construction
+    graph: FlowerHedgeOrangeGraph
+    node: FlowerHedgeOrange
 
 - type: entity
   id: FlowerHedgeYellow
@@ -131,6 +151,9 @@
   - type: Icon
     sprite: SS220/Structures/Furniture/Hedge/ColorFlower/hedge_flower_yellow.rsi
     state: full
+  - type: Construction
+    graph: FlowerHedgeYellowGraph
+    node: FlowerHedgeYellow
 
 - type: entity
   id: FlowerHedgeBlue
@@ -143,6 +166,9 @@
   - type: Icon
     sprite: SS220/Structures/Furniture/Hedge/ColorFlower/hedge_flower_blue.rsi
     state: full
+  - type: Construction
+    graph: FlowerHedgeBlueGraph
+    node: FlowerHedgeBlue
 
 - type: entity
   id: FlowerHedgeWhite
@@ -155,6 +181,9 @@
   - type: Icon
     sprite: SS220/Structures/Furniture/Hedge/ColorFlower/hedge_flower_white.rsi
     state: full
+  - type: Construction
+    graph: FlowerHedgeWhiteGraph
+    node: FlowerHedgeWhite
 
 - type: entity
   id: HedgeBioluminscent
