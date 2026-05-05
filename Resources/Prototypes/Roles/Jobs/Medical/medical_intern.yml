@@ -4,8 +4,14 @@
   description: job-description-intern
   playTimeTracker: JobMedicalIntern
   requirements:
+    # SS220-RoleTime begin
     - !type:OverallPlaytimeRequirement
-      time: 1h # SS220-RoleTime 2
+      time: 1h
+    # - !type:DepartmentTimeRequirement
+    #   department: Medical
+    #   time: 10h
+    #   inverted: true # stop playing intern if you're good at med!
+    # SS220-RoleTime end
   startingGear: MedicalInternGear
   experienceDefinition: MedicalInternRoleExperience # SS220-experience
   icon: "JobIconMedicalIntern"
@@ -21,11 +27,7 @@
     shoes: ClothingShoesColorWhite
     id: MedicalInternPDA
     ears: ClothingHeadsetMedical
-    belt: ClothingBeltMedicalFilled
     pocket2: BookMedicalReferenceBook
-  #storage:
-    #back:
-    #- Stuff
 
 - type: chameleonOutfit
   id: MedicalInternChameleonOutfit

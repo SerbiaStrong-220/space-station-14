@@ -16,8 +16,8 @@
   name: noir leather satchel
   description: A fashionable noir-style bag from a bygone era.
   components:
-    - type: Sprite
-      sprite: SS220/Clothing/Back/Satchels/leather-noir.rsi
+  - type: Sprite
+    sprite: SS220/Clothing/Back/Satchels/leather-noir.rsi
 
 - type: entity
   parent: ClothingBackpackSatchelLeather
@@ -25,8 +25,10 @@
   name: leather satchel
   description: A slightly worn-out bag that hasn't been replaced at CentComm for years — they say the budget wasn't allocated.
   components:
-    - type: StorageFill
-      contents:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
         - id: BoxSurvival
         - id: NTbaton
         - id: RubberStampCentcomm

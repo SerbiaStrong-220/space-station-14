@@ -13,7 +13,6 @@ namespace Content.Client.SS220.FieldShield;
 public sealed class FieldShieldVisualizerSystem : EntitySystem
 {
     [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly PointLightSystem _lights = default!;
 

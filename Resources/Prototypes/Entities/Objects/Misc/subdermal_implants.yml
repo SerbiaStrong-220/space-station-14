@@ -217,7 +217,7 @@
     # hidden-desc-end
 
 - type: entity
-  parent: [ BaseSubdermalImplant, StorePresetUplink ]
+  parent: BaseSubdermalImplant
   id: UplinkImplant
   name: uplink implant
   description: This implant lets the user access a hidden Syndicate uplink at will.
@@ -228,9 +228,7 @@
     whitelist:
       components:
       - Hands # prevent mouse buying grenade penguin since its not telepathic
-  - type: Store
-    balance:
-      Telecrystal: 0
+  - type: RemoteStore
   - type: UserInterface
     interfaces:
       enum.StoreUiKey.Key:
@@ -278,6 +276,7 @@
     implantAction: ActionActivateScramImplant
   - type: TriggerOnActivateImplant
   - type: ScramOnTrigger
+    teleportRadius: 25.0,40.0 # SS220-make-scram-more-usefull
     targetUser: true
   # hidden-desc-begin
   - type: HiddenDescription
@@ -299,7 +298,7 @@
     implantAction: ActionActivateDnaScramblerImplant
     whitelist:
       components:
-      - HumanoidAppearance # syndies cant turn hamlet into a human
+      - HumanoidProfile # syndies cant turn hamlet into a human
   - type: TriggerOnActivateImplant
   - type: DnaScrambleOnTrigger
     targetUser: true
@@ -329,6 +328,26 @@
     interfaces:
       enum.ChameleonControllerKey.Key:
         type: ChameleonControllerBoundUserInterface
+
+- type: entity
+  parent: BaseSubdermalImplant
+  id: VoiceMaskImplant
+  name: identity mask implant
+  description: This implant allows you to change your identity at will.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SubdermalImplant
+    implantAction: ActionChangeVoiceMaskImplant
+  - type: VoiceMask
+    overrideIdentity: true
+    changeIDName: true
+  - type: UserInterface
+    interfaces:
+      enum.VoiceMaskUIKey.Key:
+        type: VoiceMaskBoundUserInterface
+  - type: Tag
+    tags:
+    - SubdermalImplant
 
 #Nuclear Operative/Special Exclusive implants
 
@@ -412,15 +431,14 @@
       tags:
       - SubdermalImplant
       - HideContextMenu
-      - MacroBomb
-    # hidden-desc-begin
+    # SS220 hidden-desc-begin
     - type: HiddenDescription
       entries:
         MedicalKnowledge: [ corvax-hidden-desc-IllegalImplants-medical ]
         SyndicateAgentKnowledge: [ corvax-hidden-desc-MacroBombImplanter-syndicate ]
         ScienceKnowledge: [ corvax-hidden-desc-MacroBombImplanter-research ]
       hiddenName: null
-    # hidden-desc-end
+    # SS220 hidden-desc-end
 
 - type: entity
   parent: BaseSubdermalImplant
@@ -446,15 +464,14 @@
     tags:
     - SubdermalImplant
     - HideContextMenu
-    - DeathAcidifier
-  # hidden-desc-begin
+  # S220 hidden-desc-begin
   - type: HiddenDescription
     entries:
       MedicalKnowledge: [ corvax-hidden-desc-IllegalImplants-medical ]
       SyndicateAgentKnowledge: [ corvax-hidden-desc-DeathAcidifierImplanter-syndicate ]
       ScienceKnowledge: [ corvax-hidden-desc-DeathAcidifierImplanter-research ]
     hiddenName: null
-  # hidden-desc-end
+  # S220 hidden-desc-end
 
 - type: entity
   parent: BaseSubdermalImplant

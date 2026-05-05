@@ -96,13 +96,14 @@
           damage:
             types:
               Heat: 0.5
-    - type: Temperature
+    - type: TemperatureDamage
       heatDamage:
         types:
           Heat: 10
       coldDamage:
         types:
           Cold: 5
+    - type: Temperature
     - type: AtmosExposed
     - type: Barotrauma
       damage:

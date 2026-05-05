@@ -62,13 +62,13 @@
   equipment:
     id: BlueShieldPDA
     ears: ClothingHeadsetBlueShield
-    pocket1: WeaponPistolMk58Nonlethal
+    pocket1: WeaponPistolMk58
     gloves: ClothingHandsGlovesCombat
   storage:
     back:
     - Stunbaton
     - Flash
-    - MagazinePistolRubber
+    - MagazinePistol
     - MagazinePistol
 
 - type: chameleonOutfit

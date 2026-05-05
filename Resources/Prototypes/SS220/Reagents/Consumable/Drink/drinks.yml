@@ -68,14 +68,14 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 2
       - !type:AdjustReagent
         reagent: Ethanol
         amount: 0.07
-    Poison:
+    Bloodstream:
       effects:
       - !type:AdjustTemperature
         amount: 250 # thermal energy, not temp
@@ -99,7 +99,7 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 1
@@ -115,14 +115,14 @@
   color: "#790c0c"
   recognizable: true
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 0.5
       - !type:AdjustReagent
         reagent: Nutriment
         amount: 2.0
-    Poison:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -155,7 +155,7 @@
   color: "#9aae07"
   recognizable: false
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:Vomit
         probability: 0.35
