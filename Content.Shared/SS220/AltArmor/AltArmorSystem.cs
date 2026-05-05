@@ -88,9 +88,6 @@ public sealed class AltArmorSystem : EntitySystem
             CountDifference(resultDamage.DamageDict, damage.DamageDict[type], FixedPoint2.Zero, type, FixedPoint2.Zero, durabilityCoefficient: durabilityCoefficient);
         }
 
-        if (ent.Owner == null)
-            return;
-
         if(maximalDamageType != null)
         {
             if (damage.ArmourPiercing > ent.Comp.TresholdDict[maximalDamageType])// A kostyl made to lower the piercing stat to prevent infinite/too good penetration of anything

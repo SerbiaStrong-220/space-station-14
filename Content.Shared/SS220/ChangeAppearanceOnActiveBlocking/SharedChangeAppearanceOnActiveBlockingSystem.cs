@@ -1,6 +1,5 @@
 // © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
 using Content.Shared.SS220.AltBlocking;
-using Content.Shared.Item;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.ChangeAppearanceOnActiveBlocking;
@@ -8,7 +7,6 @@ namespace Content.Shared.SS220.ChangeAppearanceOnActiveBlocking;
 public sealed partial class SharedChangeAppearanceOnActiveBlockingSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
-    [Dependency] private readonly SharedItemSystem _item = default!;
 
     public override void Initialize()
     {
