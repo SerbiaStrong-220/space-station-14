@@ -10,7 +10,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.SS220.AltBlocking;
 
-public partial class AltBlockingInputSystem : EntitySystem
+public sealed partial class AltBlockingInputSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly InputSystem _inputSystem = default!;

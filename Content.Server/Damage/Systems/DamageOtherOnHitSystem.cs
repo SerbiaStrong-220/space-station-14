@@ -23,7 +23,7 @@ public sealed class DamageOtherOnHitSystem : SharedDamageOtherOnHitSystem
     [Dependency] private readonly Shared.Damage.Systems.DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedCameraRecoilSystem _sharedCameraRecoil = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
-    [Dependency] protected readonly SharedTransformSystem _transformSystem = default!; // SS220 shield rework
+    [Dependency] private readonly SharedTransformSystem _transformSystem = default!; // SS220 shield rework
 
     public override void Initialize()
     {
