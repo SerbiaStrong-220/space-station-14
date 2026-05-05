@@ -140,7 +140,6 @@
 - type: latheRecipePack
   id: SecurityWeapons
   recipes:
-  - WeaponSniperCompact #SS220 WeaponSniperCompact
   - LaserSMGPowerCell #SS220 WeaponLaserSMG
   - WeaponLaserSMG #SS220 WeaponLaserSMG
   - Truncheon

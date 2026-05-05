@@ -7,7 +7,7 @@
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
     layers:
-    - state: incendiary
+    - state: bullet
   - type: Projectile
     damage:
       types:

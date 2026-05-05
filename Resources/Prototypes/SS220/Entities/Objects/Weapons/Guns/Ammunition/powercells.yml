@@ -170,8 +170,8 @@
 - type: entity
   parent: BaseItem
   id: WeaponPowerCell
-  name: Carabine power cell
-  description: It contains a lot more pain than you ever dreamed of.
+  name: weapon power cell
+  description: Highly reliable portable battery that is standard issue for every popular energy weapon in local space. Can fit into most power cell slots.
   suffix:  Laser
   components:
   - type: Item

@@ -146,7 +146,7 @@
   - type: StorageFill
     contents:
       - id: MagazineShotgun
-        amount: 4
+        amount: 1 #SS220 weapon overhaul
 
 - type: entity
   name: box of (.50 beanbag) ammo drums
@@ -157,7 +157,7 @@
   - type: StorageFill
     contents:
       - id: MagazineShotgunBeanbag
-        amount: 4
+        amount: 1 #SS220 weapon overhaul
 
 - type: entity
   name: box of (.50 slug) ammo drums
@@ -168,7 +168,7 @@
   - type: StorageFill
     contents:
       - id: MagazineShotgunSlug
-        amount: 4
+        amount: 1 #SS220 weapon overhaul
 
 - type: entity
   name: box of (.50 incendiary) ammo drums
@@ -179,7 +179,7 @@
   - type: StorageFill
     contents:
       - id: MagazineShotgunIncendiary
-        amount: 4
+        amount: 1 #SS220 weapon overhaul
 
 # Rifle
 - type: entity
