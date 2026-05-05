@@ -1,32 +1,22 @@
 using System.Numerics;
 using Content.Server.Cargo.Systems;
-using Content.Server.SS220.Shuttles.UI;
 using Content.Server.Weapons.Ranged.Components;
 using Content.Shared.Cargo;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
-using Content.Shared.Database;
-using Content.Shared.Effects;
-using Content.Shared.Popups;
 using Content.Shared.Projectiles;
-using Content.Shared.SS220.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
-using Content.Shared.Weapons.Reflect;
 using Content.Shared.Weapons.Hitscan.Components;
 using Content.Shared.Weapons.Hitscan.Events;
 using Robust.Shared.Audio;
-using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-using System.Linq;
-using System.Numerics;
 using Robust.Shared.Containers;
 using Robust.Shared.Random;
 
@@ -159,131 +149,6 @@ public sealed partial class GunSystem : SharedGunSystem
                     };
                     RaiseLocalEvent(ent.Value, ref hitscanEv);
 
-                        //in the situation when user == null, means that the cannon fires on its own (via signals). And we need the gun to not fire by itself in this case
-                        var lastUser = user ?? gunUid;
-
-                        if (hitscan.Reflective != ReflectType.None)
-                        {
-                            for (var reflectAttempt = 0; reflectAttempt < 3; reflectAttempt++)
-                            {
-                                var ray = new CollisionRay(from.Position, dir, hitscan.CollisionMask);
-                                var rayCastResults =
-                                    Physics.IntersectRay(from.MapId, ray, hitscan.MaxLength, lastUser, false).ToList();
-
-                                // SS220 add barricade begin
-                                for (var r = 0; r < rayCastResults.Count; r++)
-                                {
-                                    var attemptEv = new HitscanAttempt(lastUser);
-                                    RaiseLocalEvent(rayCastResults[r].HitEntity, ref attemptEv);
-                                    if (attemptEv.Cancelled)
-                                    {
-                                        rayCastResults.RemoveAt(r);
-                                        r--;
-                                    }
-                                }
-                                // SS220 add barricade end
-
-                                if (!rayCastResults.Any())
-                                    break;
-
-                                var result = rayCastResults[0];
-
-                                // Check if laser is shot from in a container
-                                if (!_container.IsEntityOrParentInContainer(lastUser))
-                                {
-                                    // Checks if the laser should pass over unless targeted by its user
-                                    foreach (var collide in rayCastResults)
-                                    {
-                                        if (collide.HitEntity != gun.Target &&
-                                            CompOrNull<RequireProjectileTargetComponent>(collide.HitEntity)?.Active == true)
-                                        {
-                                            continue;
-                                        }
-
-                                        result = collide;
-                                        break;
-                                    }
-                                }
-
-                                var hit = result.HitEntity;
-                                lastHit = hit;
-
-                                FireEffects(fromEffect, result.Distance, dir.Normalized().ToAngle(), hitscan, hit);
-
-                                var ev = new HitScanReflectAttemptEvent(user, gunUid, hitscan.Reflective, dir, false);
-                                RaiseLocalEvent(hit, ref ev);
-
-                                if (!ev.Reflected)
-                                    break;
-
-                                fromEffect = Transform(hit).Coordinates;
-                                from = TransformSystem.ToMapCoordinates(fromEffect);
-                                dir = ev.Direction;
-                                lastUser = hit;
-                            }
-                        }
-
-                        if (lastHit != null)
-                        {
-                            var dmg = hitscan.Damage; //SS220 shield rework
-
-                            var hitEntity = lastHit.Value;
-
-                            //SS220 shield rework begin
-                            var blockEv = new HitscanBlockAttemptEvent(hitscan.Damage, mapAngle.Reduced());
-                            RaiseLocalEvent(lastHit.Value, ref blockEv);
-
-                            if (blockEv.CancelledHit)
-                            {
-                                if (blockEv.hitColor != null)
-                                    _color.RaiseEffect((Color)blockEv.hitColor, new List<EntityUid>() { lastHit.Value }, Filter.Pvs(lastHit.Value, entityManager: EntityManager));
-
-                                continue;
-                            }
-
-                            if (!blockEv.CancelledHit)
-                            {
-                                if (hitscan.StaminaDamage > 0f)
-                                    _stamina.TakeStaminaDamage(hitEntity, hitscan.StaminaDamage, source: user);
-
-                                if (dmg != null)
-                                    dmg = Damageable.TryChangeDamage(hitEntity, dmg * Damageable.UniversalHitscanDamageModifier, origin: user);
-                            }
-                            //SS220 shield rework end
-
-                            var hitName = ToPrettyString(hitEntity);
-
-                            // check null again, as TryChangeDamage returns modified damage values
-                            if (dmg != null)
-                            {
-                                if (!Deleted(hitEntity))
-                                {
-                                    if (dmg.AnyPositive())
-                                    {
-                                        _color.RaiseEffect(Color.Red, new List<EntityUid>() { hitEntity }, Filter.Pvs(hitEntity, entityManager: EntityManager));
-                                    }
-
-                                    // TODO get fallback position for playing hit sound.
-                                    PlayImpactSound(hitEntity, dmg, hitscan.Sound, hitscan.ForceSound);
-                                }
-
-                                if (user != null)
-                                {
-                                    Logs.Add(LogType.HitScanHit,
-                                        $"{ToPrettyString(user.Value):user} hit {hitName:target} using hitscan and dealt {dmg.GetTotal():damage} damage");
-                                }
-                                else
-                                {
-                                    Logs.Add(LogType.HitScanHit,
-                                        $"{hitName:target} hit by hitscan dealing {dmg.GetTotal():damage} damage");
-                                }
-                            }
-                        }
-                        else
-                        {
-                            FireEffects(fromEffect, hitscan.MaxLength, dir.ToAngle(), hitscan);
-                        }
-                    } //SS220 Add hitscan spread
                     Del(ent);
 
                     Audio.PlayPredicted(gun.Comp.SoundGunshotModified, gun, user);

@@ -50,18 +50,12 @@ public sealed partial class SharedAltBlockingSystem
                     continue;
             }
 
-            if (!TryGetNetEntity(blockComp.User, out var NetUser))
-                continue;
-
             if (!TryGetNetEntity(item, out var NetItem))
                 continue;
 
-            var seed = SharedRandomExtensions.HashCodeCombine(new() { (int)_gameTiming.CurTick.Value, ((NetEntity)NetUser).Id, ((NetEntity)NetItem).Id });
-            var rand = new System.Random(seed);
-
             if (ent.Comp.IsBlocking)
             {
-                if (rand.Prob(blockComp.ActiveMeleeBlockProb))
+                if (SharedRandomExtensions.PredictedProb(_gameTiming, blockComp.ActiveMeleeBlockProb, (NetEntity)NetItem))
                 {
                     if (_net.IsServer)
                     {
@@ -77,7 +71,7 @@ public sealed partial class SharedAltBlockingSystem
 
             else
             {
-                if (rand.Prob(blockComp.MeleeBlockProb))
+                if (SharedRandomExtensions.PredictedProb(_gameTiming, blockComp.MeleeBlockProb, (NetEntity)NetItem))
                 {
                     if (_net.IsServer)
                     {
@@ -146,19 +140,12 @@ public sealed partial class SharedAltBlockingSystem
 
             var user = (EntityUid)blockComp.User;
 
-
-            if (!TryGetNetEntity(blockComp.User, out var NetUser))
-                continue;
-
             if (!TryGetNetEntity(item, out var NetItem))
                 continue;
 
-            var seed = SharedRandomExtensions.HashCodeCombine(new() { (int)_gameTiming.CurTick.Value, ((NetEntity)NetUser).Id, ((NetEntity)NetItem).Id });
-            var rand = new System.Random(seed);
-
             if (owner.Comp.IsBlocking)
             {
-                if (rand.Prob(blockComp.ActiveRangeBlockProb))
+                if (SharedRandomExtensions.PredictedProb(_gameTiming, blockComp.ActiveRangeBlockProb, (NetEntity)NetItem))
                 {
                     _damageable.TryChangeDamage((EntityUid)item, damage);
                     _audio.PlayPvs(blockComp.BlockSound, (EntityUid)item);
@@ -169,7 +156,7 @@ public sealed partial class SharedAltBlockingSystem
 
             else
             {
-                if (rand.Prob(blockComp.RangeBlockProb))
+                if (SharedRandomExtensions.PredictedProb(_gameTiming, blockComp.RangeBlockProb, (NetEntity)NetItem))
                 {
                     _damageable.TryChangeDamage((EntityUid)item, damage);
                     _audio.PlayPvs(blockComp.BlockSound, (EntityUid)item);

@@ -1,7 +1,11 @@
 // © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Prototypes;
+using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.SS220.AltArmor.Components;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.AltArmor;
 
@@ -27,7 +31,7 @@ public sealed class AltArmorSystem : EntitySystem
 
         if (TryComp<DamageableComponent>(ent, out var damageableComp) && ent.Comp.DamageAffectsProtection)
         {
-            durabilityCoefficient = 1 - (damageableComp.TotalDamage / ent.Comp.ZeroProtectionThreshold);
+            durabilityCoefficient = 1 - (_damageable.GetTotalDamage(ent.Owner) / ent.Comp.ZeroProtectionThreshold);
 
             if (durabilityCoefficient < 0)//Didn't use Math.Clamp because there is no override of this function for FixedPoint2 and i don't want to convert types 2 times every time we calculate this
                 durabilityCoefficient = 0;
@@ -99,7 +103,7 @@ public sealed class AltArmorSystem : EntitySystem
         }
     }
 
-    public FixedPoint2 CountDifference(Dictionary<string, FixedPoint2> dict, FixedPoint2 damage, FixedPoint2 resist,string type, FixedPoint2 piercing, FixedPoint2 durabilityCoefficient)
+    public FixedPoint2 CountDifference(Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2> dict, FixedPoint2 damage, FixedPoint2 resist,string type, FixedPoint2 piercing, FixedPoint2 durabilityCoefficient)
     {
         resist *= durabilityCoefficient;
         resist = FixedPoint2.Max(resist - piercing, FixedPoint2.Zero);

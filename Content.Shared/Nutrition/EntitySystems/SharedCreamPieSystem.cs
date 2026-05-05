@@ -110,18 +110,15 @@ public abstract class SharedCreamPieSystem : EntitySystem
     {
         SplatCreamPie(ent);
     }
-
-            //SS220 instastun resist begin
-            var resistEv = new StunAttemptEvent(StunSource.Creampie);
-            RaiseLocalEvent(uid, ref resistEv);
-
-            if (resistEv.StunCancelled)
-                return;
-            //SS220 instastun resist end
-
-            SetCreamPied(uid, creamPied, true);
     private void OnCreamPieHit(Entity<CreamPieComponent> ent, ref ThrowDoHitEvent args)
     {
+        //SS220 instastun resist begin
+        var resistEv = new StunAttemptEvent(StunSource.Creampie);
+        RaiseLocalEvent(ent.Owner, ref resistEv);
+
+        if (resistEv.StunCancelled)
+            return;
+        //SS220 instastun resist end
         SplatCreamPie(ent);
     }
 

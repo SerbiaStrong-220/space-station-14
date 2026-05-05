@@ -287,7 +287,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         }
         //SS220 shield rework end
 
-        var toCoordinates = gun.ShootCoordinates;
+        var toCoordinates = gun.Comp.ShootCoordinates;
 
         if (toCoordinates == null)
             return false;

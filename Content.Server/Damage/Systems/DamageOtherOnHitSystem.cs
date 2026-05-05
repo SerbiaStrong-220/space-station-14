@@ -7,9 +7,9 @@ using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.Effects;
-using Content.Shared.SS220.Weapons.Ranged.Events;
 using Content.Shared.Mobs.Components;
 using Content.Shared.SS220.Damage;
+using Content.Shared.SS220.Weapons.Ranged.Events;
 using Content.Shared.Throwing;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
@@ -56,7 +56,6 @@ public sealed class DamageOtherOnHitSystem : SharedDamageOtherOnHitSystem
         }
         //SS220 shield rework end
 
-        var dmg = _damageable.TryChangeDamage(args.Target, component.Damage * _damageable.UniversalThrownDamageModifier, component.IgnoreResistances, origin: args.Component.Thrower);
         var dmg = _damageable.ChangeDamage(args.Target, component.Damage * _damageable.UniversalThrownDamageModifier, component.IgnoreResistances, origin: args.Component.Thrower);
 
         // Log damage only for mobs. Useful for when people throw spears at each other, but also avoids log-spam when explosions send glass shards flying.
