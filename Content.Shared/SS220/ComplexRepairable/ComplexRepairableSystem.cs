@@ -1,7 +1,6 @@
 // © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
 using Content.Shared.Administration.Logs;
 using Content.Shared.Damage.Systems;
-using Content.Shared.Damage.Components;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
@@ -21,7 +20,6 @@ public sealed partial class ComplexRepairableSystem : EntitySystem
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedStackSystem _stack = default!;
-    [Dependency] private readonly MetaDataSystem _meta = default!;
 
     public override void Initialize()
     {
@@ -81,7 +79,9 @@ public sealed partial class ComplexRepairableSystem : EntitySystem
 
         if (ent.Comp.LeftToInsert > 0 )
         {
-            if (!TryComp<MetaDataComponent>(args.Used, out var metaData) || metaData.EntityPrototype == null)
+            var metaData = MetaData(args.Used);
+
+            if ( metaData == null || metaData.EntityPrototype == null)
                 return;
 
             if (ent.Comp.Material.Id != metaData.EntityPrototype.ID)
