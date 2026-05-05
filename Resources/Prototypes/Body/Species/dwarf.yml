@@ -63,7 +63,6 @@
       Male: UnisexDwarf
       Female: FemaleDwarf
       Unsexed: UnisexDwarf
-  # TODO UPSTREAM
   - type: DwarfAccent #SS220 Dwarf accent
   # - type: ReplacementAccent
   #   accent: scottish

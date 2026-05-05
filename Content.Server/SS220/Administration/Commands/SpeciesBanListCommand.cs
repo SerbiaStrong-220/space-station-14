@@ -9,6 +9,9 @@
 
 // namespace Content.Server.SS220.Administration.Commands;
 
+// -----------
+// [ATTENTION] Now admins can see them in all wide menu. Kept in case of my misunderstanding what it does
+// -----------
 // [AdminCommand(AdminFlags.Ban)]
 // public sealed class SpeciesBanListCommand : LocalizedCommands
 // {

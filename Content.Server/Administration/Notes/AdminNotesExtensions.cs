@@ -51,7 +51,6 @@ public static class AdminNotesExtensions
                 unbannedByName = roleBan.UnbanningAdmin?.LastSeenUserName ?? Loc.GetString("system-user");
                 break;
             // SS220 Species chat bans begin
-            // TODO UPSTREAM
             case BanNoteRecord { Type: BanType.Species } speciesBan:
                 type = NoteType.SpeciesBan;
                 severity = speciesBan.Severity;

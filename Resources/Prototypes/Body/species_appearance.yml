@@ -53,6 +53,8 @@
     - map: [ "enum.HumanoidVisualLayers.Tail" ]
     - map: [ "enum.HumanoidVisualLayers.TailOverlay" ]
 
+    - map: [ "enum.HumanoidVisualLayers.Special" ] # SS220-cult-halo
+
     # Stuff that goes in front of stuff that goes in front of equipment
     - map: [ "mask" ]
     - map: [ "head" ]

@@ -22,19 +22,17 @@ using Robust.Shared.Timing;
 using Content.Shared.Body;
 using Content.Shared.Gibbing;
 using Content.Server.Body;
+using Robust.Shared.Utility;
 
 namespace Content.Server.SS220.CultYogg.Cultists;
 
-public sealed class CultYoggSystem : SharedCultYoggSystem
+public sealed partial class CultYoggSystem : SharedCultYoggSystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly GibbingSystem _gibbing = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly VisualBodySystem _visualBody = default!;
-    //[Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly HungerSystem _hungerSystem = default!;
     [Dependency] private readonly SharedStuckOnEquipSystem _stuckOnEquip = default!;
     [Dependency] private readonly ThirstSystem _thirstSystem = default!;
@@ -42,13 +40,11 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
     [Dependency] private readonly CultYoggRuleSystem _cultRuleSystem = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
 
-    private const string CultDefaultMarking = "CultStage-Halo";
-
-    private static readonly ProtoId<OrganCategoryPrototype> EyesCategory = "Eyes";
-
     public override void Initialize()
     {
         base.Initialize();
+
+        DebugTools.Assert(CultDefaultMarking.Id.Contains(CultMarkingCommonPart));
 
         // actions
         SubscribeLocalEvent<CultYoggComponent, CultYoggPukeShroomActionEvent>(OnPukeAction);
@@ -73,12 +69,8 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         Dirty(ent);
     }
 
-    // TODO UPSTREAM
     public void UpdateCultVisuals(Entity<CultYoggComponent> ent)
     {
-        if (!_visualBody.TryGatherMarkingsData(ent.Owner, [HumanoidVisualLayers.Eyes, HumanoidVisualLayers.Special],
-                out var profiles, out var markings, out var applied))
-            return;
 
         switch (ent.Comp.CurrentStage)
         {
@@ -86,50 +78,12 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
                 break;
 
             case CultYoggStage.Reveal:
-                if (!profiles.TryGetValue(EyesCategory, out var eyesProfile))
-                    break;
-
-                ent.Comp.PreviousEyeColor = new Color(eyesProfile.EyeColor.R, eyesProfile.EyeColor.G, eyesProfile.EyeColor.B, eyesProfile.EyeColor.A);
-                break;
-                // TODO UPSTREAM and somehow apply this
-            /*
-                eyesProfile.EyeColor = Color.Green;
+                EnsureEyesColor(ent);
                 break;
 
             case CultYoggStage.Alarm:
-                if (!_prototype.HasIndex<MarkingPrototype>(CultDefaultMarking))
-                {
-                    Log.Error($"{CultDefaultMarking} marking doesn't exist");
-                    return;
-                }
-
-                if (humProfile.MarkingSet.Markings.TryGetValue(MarkingCategories.Special, out var value))
-                {
-                    ent.Comp.PreviousTail = value.FirstOrDefault();
-                    value.Clear();
-                }
-
-                if (!humProfile.MarkingSet.Markings.ContainsKey(MarkingCategories.Special))
-                {
-                    humProfile.MarkingSet.Markings.Add(MarkingCategories.Special, new List<Marking>([new Marking(CultDefaultMarking, colorCount: 1)]));
-                }
-
-                _visualBody.ApplyMarkings .SetMarkingId(ent.Owner,
-                    MarkingCategories.Special,
-                    0,
-                    CultDefaultMarking,
-                    humProfile);
-
-                var newMarkingId = $"CultStage-{humProfile.Species}";
-
-                if (!_prototype.HasIndex<MarkingPrototype>(newMarkingId))
-                {
-                    // We have species-marking only for the Nians, so this log only leads to unnecessary errors.
-                    //Log.Error($"{newMarkingId} marking doesn't exist");
-                    return;
-                }
-
-                humProfile.MarkingSet.Markings[MarkingCategories.Special].Add(new Marking(newMarkingId, colorCount: 1));
+                EnsureEyesColor(ent);
+                EnsureHalo(ent);
                 break;
 
             case CultYoggStage.God:
@@ -141,7 +95,6 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
 
                 AcsendCultist(ent);
                 break;
-            */
 
             default:
                 Log.Error("Something went wrong with CultYogg stages");
@@ -151,22 +104,32 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
 
     public override void DeleteVisuals(Entity<CultYoggComponent> ent)
     {
-        if (!TryComp<HumanoidProfileComponent>(ent, out var huAp))
-            return;
+        _visualBody.TryGatherMarkingsData(ent.Owner, [HumanoidVisualLayers.Eyes], out var eyesProfiles, out _, out _);
+        _visualBody.TryGatherMarkingsData(ent.Owner, [HumanoidVisualLayers.Special], out _, out _, out var appliedMarkings);
+        _visualBody.TryGatherMarkingsData(ent.Owner, [HumanoidVisualLayers.Tail], out _, out _, out var appliedTailMarkings);
 
-        // TODO UPSTREAM FIX
-        // if (ent.Comp.PreviousEyeColor != null)
-        //     huAp.EyeColor = ent.Comp.PreviousEyeColor.Value;
+        if (ent.Comp.PreviousEyeColor is not null && eyesProfiles is not null
+            && eyesProfiles.TryGetValue(EyesCategory, out var eyesProfile))
+        {
+            eyesProfile.EyeColor = ent.Comp.PreviousEyeColor.Value;
+            _visualBody.ApplyProfile(ent, eyesProfile);
+            ent.Comp.PreviousEyeColor = null;
+        }
 
-        // huAp.MarkingSet.Markings.Remove(MarkingCategories.Special);
+        if (appliedMarkings is not null && appliedMarkings.TryGetValue(TorsoCategory, out var torsoSpecialMarkings)
+            && torsoSpecialMarkings.TryGetValue(HumanoidVisualLayers.Special, out var specialMarkingsList))
+        {
+            specialMarkingsList.RemoveAll(x => x.MarkingId.Id.Contains(CultMarkingCommonPart));
+            _visualBody.ApplyMarkings(ent, new() { { TorsoCategory, torsoSpecialMarkings } });
+        }
 
-        // if (huAp.MarkingSet.Markings.TryGetValue(MarkingCategories.Tail, out var value) &&
-        //     ent.Comp.PreviousTail != null)
-        // {
-        //     value.Add(ent.Comp.PreviousTail);
-        // }
-
-        // Dirty(ent.Owner, huAp);
+        if (ent.Comp.PreviousTailMarkings is { } previousTailMarkings
+            && appliedTailMarkings is not null && appliedTailMarkings.TryGetValue(TorsoCategory, out var torsoTailMarkings)
+            && torsoTailMarkings.TryGetValue(HumanoidVisualLayers.Tail, out var tailMarkingsList))
+        {
+            _visualBody.ApplyMarkings(ent, new() { { TorsoCategory, new() { { HumanoidVisualLayers.Tail, previousTailMarkings } } } });
+            ent.Comp.PreviousTailMarkings = null;
+        }
     }
     #endregion
 
@@ -179,7 +142,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         args.Handled = true;
 
         _vomitSystem.Vomit(ent);
-        _entityManager.SpawnEntity(ent.Comp.PukedEntity, Transform(ent).Coordinates);
+        Spawn(ent.Comp.PukedEntity, Transform(ent).Coordinates);
 
         _actions.RemoveAction(ent.Owner, ent.Comp.PukeShroomActionEntity);
         _actions.AddAction(ent, ref ent.Comp.DigestActionEntity, ent.Comp.DigestAction);
@@ -229,7 +192,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
             return;
 
         // Get original body position and spawn MiGo here
-        var migo = _entityManager.SpawnAtPosition(ent.Comp.AscendedEntity, Transform(ent).Coordinates);
+        var migo = SpawnAtPosition(ent.Comp.AscendedEntity, Transform(ent).Coordinates);
 
 
         if (_mind.TryGetMind(ent, out var mindId, out var mind))
