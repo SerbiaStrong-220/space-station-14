@@ -98,17 +98,6 @@
   - type: Construction
     graph: FlowerHedgeGraph
     node: FlowerHedge
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.28,-0.37,0.28,0.40"
-        hard: false
-        mask:
-        - FullTileMask
-        layer:
-        - TableLayer
 
 - type: entity
   id: FlowerHedgeRed
