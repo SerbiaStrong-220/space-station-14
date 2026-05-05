@@ -134,3 +134,22 @@
         - id: LaserCarabinePowerCell
         - id: LaserCarabinePowerCell
         - id: StimpackERT
+
+#EVA Modsuit backpack
+- type: entity
+  parent: ClothingBackpackBlueShield
+  id: ClothingBackpackEmergencyEVA
+  name: backpack "ISHAK"
+  description: The product has passed all tests except those that required preserving the user's dignity. Use for those cases when you need to endure, survive, and carry all the essentials.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Back/Backpacks/emergency.rsi
+  - type: Storage
+    grid:
+    - 0,0,6,3
+  - type: ToggleableClothing
+    clothingPrototype: ClothingOuterModSuitEmergency
+  - type: ClothingSpeedModifier
+    walkModifier: 1
+    sprintModifier: 0.9
+  - type: HeldSpeedModifier

@@ -1,4 +1,16 @@
 - type: technology
+  id: BackpackModsuit
+  name: research-technology-individual-staff-emergency-kit
+  icon:
+    sprite: SS220/Clothing/Back/Backpacks/emergency.rsi
+    state: icon
+  discipline: Experimental
+  tier: 2
+  cost: 7500
+  recipeUnlocks:
+  - ClothingBackpackEmergencyEVA
+
+- type: technology
   id: AdvancedThermalSensors
   name: research-technology-advanced-thermal-sensors
   icon:

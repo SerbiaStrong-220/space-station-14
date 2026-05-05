@@ -566,3 +566,12 @@
     tags:
     - Hardsuit
     - WhitelistChameleon
+
+#EVA ModSuit
+- type: entity
+  parent: ClothingOuterHardsuitEVA
+  id: ClothingOuterModSuitEmergency
+  components:
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetEVALarge
+    slot: head

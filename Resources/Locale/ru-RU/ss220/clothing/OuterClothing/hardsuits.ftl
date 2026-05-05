@@ -29,3 +29,6 @@ ent-ClothingOuterHardsuitRedWingsMedic = скафандр медика "Крас
     .desc = Облегченная версия бронескафандра офицера безопасности Red Wings.
 ent-ClothingOuterHardsuitRedWingsPilot = скафандр пилота "Красных крыльев"
     .desc = Легкий бронированный скафандр, обеспечивающий неограниченную свободу движений. Он оснащен портами для подключения к бортовому компьютеру.
+
+ent-ClothingOuterModSuitEmergency = { ent-ClothingOuterHardsuitEVA }
+    .desc = { ent-ClothingOuterHardsuitEVA.desc }
