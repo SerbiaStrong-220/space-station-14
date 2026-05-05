@@ -7,4 +7,4 @@ access-overrider-window-missing-privileges = Доступ к этому устр
 access-overrider-cannot-modify-access = Вы не обладаете достаточными правами для модификации этого устройства!
 access-overrider-out-of-range = Подключённое устройство слишком далеко
 
-access-overrider-window-missing-privileges-no-id = Доступ к этому устройству не может быть изменен. Отсутствуют следующие привилегии:
+access-overrider-window-missing-privileges-no-id = Доступ к этому устройству не может быть изменён. Отсутствуют следующие привилегии: # SS220-localization

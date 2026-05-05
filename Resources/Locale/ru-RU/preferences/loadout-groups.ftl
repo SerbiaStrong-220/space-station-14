@@ -182,7 +182,7 @@ loadout-group-psychologist-jumpsuit = Психолог, комбинезон
 loadout-group-boxer-jumpsuit = Боксёр, комбинезон
 loadout-group-boxer-gloves = Боксёр, перчатки
 
-loadout-group-survival-military = Смотри строку 14, никто этого не увидит, так что :3
+loadout-group-survival-military = Военное снаряжение выживания
 
 loadout-group-reporter-head = Шляпа репортера
 

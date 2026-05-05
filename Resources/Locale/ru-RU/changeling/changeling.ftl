@@ -17,7 +17,7 @@ changeling-devour-attempt-failed-cannot-devour = Мы не можем это п�
 
 changeling-devour-attempt-failed-already-devoured = Мы уже поглотили это тело!
 
-changeling-devour-attempt-failed-not-dead = Это тело еще живо! Мы не можем поглотить его живым!
+changeling-devour-attempt-failed-not-dead = Это тело ещё живо! Мы не можем поглотить его живым!
 
 changeling-transform-bui-select-entity = { $entity }
 
