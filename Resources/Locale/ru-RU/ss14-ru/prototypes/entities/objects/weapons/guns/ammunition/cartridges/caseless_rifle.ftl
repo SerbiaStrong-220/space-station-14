@@ -6,5 +6,3 @@ ent-CartridgeCaselessRifleHighVelocity = патрон (8x18 безгильзов
     .desc = { ent-BaseCartridgeCaselessRifle.desc }
 ent-CartridgeCaselessRiflePractice = патрон (8x18 безгильзовый учебный)
     .desc = { ent-BaseCartridgeCaselessRifle.desc }
-ent-CartridgeCaselessRifleRubber = патрон (8x18 безгильзовый резиновый)
-    .desc = { ent-BaseCartridgeCaselessRifle.desc }

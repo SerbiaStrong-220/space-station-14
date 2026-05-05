@@ -89,7 +89,7 @@ public sealed class SuperMatterObserverSystem : EntitySystem
         if (args.SMGridId == null)
             return;
 
-        _entityLookup.GetChildEntities(EntityManager.GetEntity(args.SMGridId.Value), _observerEntities);
+        _entityLookup.GetChildEntities(GetEntity(args.SMGridId.Value), _observerEntities);
         foreach (var observerEnt in _observerEntities)
         {
             // To make possible many SMs on different grids
@@ -97,7 +97,7 @@ public sealed class SuperMatterObserverSystem : EntitySystem
             if (!HasComp<TransformComponent>(observerUid))
                 continue;
 
-            if (Transform(observerUid).GridUid != EntityManager.GetEntity(args.SMGridId))
+            if (Transform(observerUid).GridUid != GetEntity(args.SMGridId))
                 continue;
 
             // still it will store without power, cause, you know... caching =)
@@ -120,7 +120,7 @@ public sealed class SuperMatterObserverSystem : EntitySystem
             AddToCacheList(observerComp.InternalEnergy[args.Id], args.InternalEnergy);
 
             // here dispatches events to sprites of SM itself
-            _entityLookup.GetChildEntities(EntityManager.GetEntity(args.SMGridId.Value), _visualReceivers);
+            _entityLookup.GetChildEntities(GetEntity(args.SMGridId.Value), _visualReceivers);
             var state = GetVisualState(args);
 
             if (_robustRandom.Prob(RandomEventChance))
@@ -157,7 +157,7 @@ public sealed class SuperMatterObserverSystem : EntitySystem
 
     private void OnCrystalDelete(SuperMatterStateDeleted args)
     {
-        var enumerator = EntityManager.EntityQuery<SuperMatterObserverComponent>();
+        var enumerator = EntityQuery<SuperMatterObserverComponent>();
         foreach (var observerComp in enumerator)
         {
             TryDeleteData(args.ID, observerComp);

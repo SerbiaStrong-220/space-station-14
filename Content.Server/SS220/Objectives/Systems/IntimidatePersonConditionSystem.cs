@@ -8,6 +8,7 @@ using Content.Server.SS220.Objectives.Components;
 using Content.Server.SS220.Trackers.Components;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
+using Content.Shared.Objectives.Systems;
 using Content.Shared.SSDIndicator;
 using Robust.Shared.Random;
 
@@ -16,9 +17,9 @@ namespace Content.Server.SS220.Objectives.Systems;
 public sealed class IntimidatePersonConditionSystem : EntitySystem
 {
     [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
+    [Dependency] private readonly TargetSystem _target = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly TargetObjectiveSystem _target = default!;
+    [Dependency] private readonly TargetObjectiveSystem _targetObjective = default!;
 
     public override void Initialize()
     {
@@ -32,7 +33,7 @@ public sealed class IntimidatePersonConditionSystem : EntitySystem
 
     private void OnGetProgress(Entity<IntimidatePersonConditionComponent> entity, ref ObjectiveGetProgressEvent args)
     {
-        if (!_target.GetTarget(entity.Owner, out _))
+        if (!_targetObjective.GetTarget(entity.Owner, out _))
             return;
 
         if (entity.Comp.ObjectiveIsDone)
@@ -72,7 +73,7 @@ public sealed class IntimidatePersonConditionSystem : EntitySystem
         if (targetObjectiveComponent.Target != null)
             return;
 
-        var targetableMinds = _mind.GetAliveHumans(args.MindId)
+        var targetableMinds = _target.GetAliveHumans(args.MindId)
                     .Where(x => TryComp<MindComponent>(x, out var mindComponent)
                                 && !HasComp<DamageReceivedTrackerComponent>(GetEntity(mindComponent.OriginalOwnedEntity)))
                     .ToList();
@@ -93,7 +94,7 @@ public sealed class IntimidatePersonConditionSystem : EntitySystem
             return;
         }
 
-        _target.SetTarget(uid, targetMindUid, targetObjectiveComponent);
+        _targetObjective.SetTarget(uid, targetMindUid, targetObjectiveComponent);
         var damageReceivedTracker = AddComp<DamageReceivedTrackerComponent>(target.Value);
         entity.Comp.TargetMob = target.Value;
         damageReceivedTracker.WhomDamageTrack = args.Mind.CurrentEntity.Value;

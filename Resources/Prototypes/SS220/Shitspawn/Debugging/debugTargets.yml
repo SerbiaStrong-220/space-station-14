@@ -10,8 +10,8 @@
         !type:DamageTrigger
         damage: 100000
       behaviors:
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
 
 - type: entity
   name: Urist Spawner 1000

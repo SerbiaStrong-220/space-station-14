@@ -61,8 +61,7 @@ public sealed class WeightlessChangingReadySkillSystem : SkillEntitySystem
             if (hardsuitEquipped)
                 return;
 
-            var predictedRandomForVomit = GetPredictedRandomOnCurTick(new() { GetNetEntity(entity).Id });
-
+            var predictedRandomForVomit = GetPredictedRandomOnCurTick(GetNetEntity(entity));
             if (predictedRandomForVomit.Prob(entity.Comp.VomitChance))
                 _vomit.Vomit(experienceEntity.Value);
 
@@ -74,8 +73,7 @@ public sealed class WeightlessChangingReadySkillSystem : SkillEntitySystem
         }
 
         var chance = hardsuitEquipped ? entity.Comp.HardsuitFallChance : entity.Comp.WithoutHardsuitFallChance;
-        var predictedRandom = GetPredictedRandomOnCurTick(new() { GetNetEntity(entity).Id });
-
+        var predictedRandom = GetPredictedRandomOnCurTick(GetNetEntity(entity));
         if (!predictedRandom.Prob(chance))
         {
             _popup.PopupPredicted(Loc.GetString(_evadedFallPopup, ("entity", Identity.Name(experienceEntity.Value, EntityManager))), experienceEntity.Value.Owner, experienceEntity);

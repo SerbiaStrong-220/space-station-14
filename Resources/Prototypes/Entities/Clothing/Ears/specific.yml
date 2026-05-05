@@ -24,3 +24,11 @@
       - [ScienceKnowledge, null]
       hiddenName: null
 # SS220-hidden-desc-end
+# SS220 Fix start
+    - type: UserInterface
+      interfaces:
+        enum.ChameleonUiKey.Key:
+          type: ChameleonBoundUserInterface
+        enum.HeadsetKey.Key:
+          type: HeadsetBoundUserInterface
+# SS220 fix end

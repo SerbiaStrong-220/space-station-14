@@ -1,5 +1,5 @@
 // © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
-using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.SS220.AltArmor;
 
 namespace Content.Shared.SS220.ArmorBlock;
@@ -21,6 +21,9 @@ public sealed class ArmorBlockSystem : EntitySystem
 
         args.Damage = resultArmorDamage;
 
-        _damageable.TryChangeDamage(ent.Comp.User, resultDamage);
+        if (ent.Comp.User == null)
+            return;
+
+        _damageable.TryChangeDamage((EntityUid)ent.Comp.User, resultDamage);
     }
 }

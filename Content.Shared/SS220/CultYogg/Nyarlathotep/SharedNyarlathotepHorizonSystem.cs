@@ -81,7 +81,7 @@ public abstract class SharedNyarlathotepHorizonSystem : EntitySystem
             _physics.SetHard(uid, collider, false, fixtures);
         }
 
-        EntityManager.Dirty(uid, fixtures);
+        Dirty(uid, fixtures);
     }
 
     #endregion Getters/Setters

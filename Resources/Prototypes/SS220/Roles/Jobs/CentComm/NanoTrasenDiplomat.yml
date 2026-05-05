@@ -4,30 +4,29 @@
   name: Дипломат NanoTrasen
   id: CentCommNanoTrasenDiplomat
   components:
-    - type: Sprite
-      sprite: SS220/Markers/jobs.rsi
-      state: nanotrasendiplomat
-    - type: RandomHumanoidSpawner
-      settings: CentCommNanoTrasenDiplomat
+  - type: Sprite
+    sprite: SS220/Markers/jobs.rsi
+    state: nanotrasendiplomat
+  - type: RandomHumanoidSpawner
+    settings: CentCommNanoTrasenDiplomat
 
 - type: randomHumanoidSettings
   id: CentCommNanoTrasenDiplomat
-  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran]
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran ]
   components:
-    - type: RandomHumanoidAppearance
-      randomizeName: false
-      hair: HairBald
-    - type: RandomMetadata
-      nameSegments:
-        - NamesFirstDiplomatMale
-        - NamesLastDiplomatMale
-    - type: MindShield
-    - type: GhostRole
-      name: ghost-role-information-nanotrasen-Diplomat-name
-      description: ghost-role-information-nanotrasen-Diplomat-description
-    - type: GhostTakeoverAvailable
-    - type: Loadout
-      prototypes: [ CentCommNanoTrasenDiplomatGear ]
+  - type: RandomHumanoidAppearance
+    randomizeName: false
+  - type: RandomMetadata
+    nameSegments:
+    - NamesFirstDiplomatMale
+    - NamesLastDiplomatMale
+  - type: MindShield
+  - type: GhostRole
+    name: ghost-role-information-nanotrasen-Diplomat-name
+    description: ghost-role-information-nanotrasen-Diplomat-description
+  - type: GhostTakeoverAvailable
+  - type: Loadout
+    prototypes: [ CentCommNanoTrasenDiplomatGear ]
 
 - type: playTimeTracker
   id: JobCentcommDiplomat

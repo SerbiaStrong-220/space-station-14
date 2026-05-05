@@ -13,18 +13,18 @@ public sealed partial class GrabResistanceComponent : Component
     {
         { GrabStage.Passive, 1.0f },
         { GrabStage.Aggressive, 0.2f },
-        { GrabStage.NeckGrab, 0.02f },
-        { GrabStage.Chokehold, 0.02f }
+        { GrabStage.NeckGrab, 0.015f },
+        { GrabStage.Chokehold, 0.01f }
     };
 
     [DataField, AutoNetworkedField]
     public Dictionary<GrabStage, float> CurrentStageBreakoutChance = new();
 
     [DataField, AutoNetworkedField]
-    public TimeSpan FirstBreakoutAttemptDelay = TimeSpan.FromSeconds(3);
+    public TimeSpan FirstBreakoutAttemptDelay = TimeSpan.FromSeconds(0.3);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan BreakoutAttemptCooldown = TimeSpan.FromSeconds(30);
+    public TimeSpan BreakoutAttemptCooldown = TimeSpan.FromSeconds(1);
 
     [DataField, AutoNetworkedField]
     public TimeSpan LastBreakoutAttemptAt = TimeSpan.Zero;

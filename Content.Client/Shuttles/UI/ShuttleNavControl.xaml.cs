@@ -22,7 +22,6 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using TerraFX.Interop.Xlib;
 
 namespace Content.Client.Shuttles.UI;
 

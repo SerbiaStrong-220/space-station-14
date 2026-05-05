@@ -38,7 +38,7 @@
       - PowerCellBlaster
       - WeaponRechargerWhitelist
   - type: Appearance
-  - type: PowerCellVisuals
+  - type: BatteryVisuals
   - type: Riggable
 
 # Standard 1000 charge battery
@@ -91,9 +91,18 @@
     pricePerJoule: 0.15
     maxCharge: 1200
     startingCharge: 1200
-  - type: PowerCellVisuals
+  - type: BatteryVisuals
+    levels: 4
   - type: PowerCell
-    powerCellVisualsLevels: 4
+  - type: GenericVisualizer
+    visuals:
+      enum.BatteryLevels.Level:
+        enum.PowerCellVisualLayers.Unshaded:
+          0: { visible: false }
+          1: { visible: true, state: o1 }
+          2: { visible: true, state: o2 }
+          3: { visible: true, state: o3 }
+          4: { visible: true, state: o4 }
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/laser_carabine.rsi
     layers:
@@ -135,9 +144,18 @@
     pricePerJoule: 0.15
     maxCharge: 1200
     startingCharge: 1200
-  - type: PowerCellVisuals
+  - type: BatteryVisuals
+    levels: 4
   - type: PowerCell
-    powerCellVisualsLevels: 4
+  - type: GenericVisualizer
+    visuals:
+      enum.BatteryLevels.Level:
+        enum.PowerCellVisualLayers.Unshaded:
+          0: { visible: false }
+          1: { visible: true, state: o1 }
+          2: { visible: true, state: o2 }
+          3: { visible: true, state: o3 }
+          4: { visible: true, state: o4 }
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/laser_carabine.rsi
     layers:

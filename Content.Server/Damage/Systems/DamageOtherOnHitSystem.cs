@@ -1,15 +1,14 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared.Camera;
-using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.Effects;
-using Content.Shared.SS220.Weapons.Ranged.Events;
 using Content.Shared.Mobs.Components;
 using Content.Shared.SS220.Damage;
+using Content.Shared.SS220.Weapons.Ranged.Events;
 using Content.Shared.Throwing;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
@@ -20,10 +19,10 @@ public sealed class DamageOtherOnHitSystem : SharedDamageOtherOnHitSystem
 {
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly GunSystem _guns = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly Shared.Damage.Systems.DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedCameraRecoilSystem _sharedCameraRecoil = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
-    [Dependency] protected readonly SharedTransformSystem _transformSystem = default!; // SS220 shield rework
+    [Dependency] private readonly SharedTransformSystem _transformSystem = default!; // SS220 shield rework
 
     public override void Initialize()
     {
@@ -56,13 +55,13 @@ public sealed class DamageOtherOnHitSystem : SharedDamageOtherOnHitSystem
         }
         //SS220 shield rework end
 
-        var dmg = _damageable.TryChangeDamage(args.Target, component.Damage * _damageable.UniversalThrownDamageModifier, component.IgnoreResistances, origin: args.Component.Thrower);
+        var dmg = _damageable.ChangeDamage(args.Target, component.Damage * _damageable.UniversalThrownDamageModifier, component.IgnoreResistances, origin: args.Component.Thrower);
 
         // Log damage only for mobs. Useful for when people throw spears at each other, but also avoids log-spam when explosions send glass shards flying.
-        if (dmg != null && HasComp<MobStateComponent>(args.Target))
+        if (HasComp<MobStateComponent>(args.Target))
             _adminLogger.Add(LogType.ThrowHit, $"{ToPrettyString(args.Target):target} received {dmg.GetTotal():damage} damage from collision");
 
-        if (dmg is { Empty: false })
+        if (!dmg.Empty)
         {
             _color.RaiseEffect(Color.Red, [args.Target], Filter.Pvs(args.Target, entityManager: EntityManager));
         }

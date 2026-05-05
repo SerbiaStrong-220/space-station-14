@@ -36,28 +36,28 @@ public abstract partial class SharedGunAimingSystem : EntitySystem
         if (!TryComp<CombatModeComponent>(user, out var combatComp) || !combatComp.IsInCombatMode)
             return;
 
-        if (!_gun.TryGetGun(user, out var gunUid, out var gun) || !gun.UseKey)
+        if (!_gun.TryGetGun(user, out var gun) || !gun.Comp.UseKey)
             return;
 
-        if (gunUid != GetEntity(args.Gun))
+        if (gun.Owner != GetEntity(args.Gun))
             return;
 
-        if (!TryComp<GunAimableComponent>(gunUid, out var aimableComp))
+        if (!TryComp<GunAimableComponent>(gun.Owner, out var aimableComp))
             return;
 
         aimableComp.IsAimed = args.Aim;
 
         if (_net.IsServer)
-            Dirty(gunUid, aimableComp);
+            Dirty(gun.Owner, aimableComp);
 
-        _gun.RefreshModifiers((gunUid, gun));
+        _gun.RefreshModifiers((gun.Owner, gun));
 
         _movementSpeedModifier.RefreshMovementSpeedModifiers(user);
     }
 
     private void OnRefreshMovementSpeed(Entity<CombatModeComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
-        if (!_gun.TryGetGun(ent.Owner, out var gunUid, out var gun) || !TryComp<GunAimableComponent>(gunUid, out var aimableComp))
+        if (!_gun.TryGetGun(ent.Owner, out var gun) || !TryComp<GunAimableComponent>(gun.Owner, out var aimableComp))
             return;
 
         if (aimableComp.AimedSprintSpeedModifier == null && aimableComp.AimedWalkingSpeedModifier == null)

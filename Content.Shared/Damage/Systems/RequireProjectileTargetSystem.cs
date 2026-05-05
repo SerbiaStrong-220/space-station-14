@@ -1,12 +1,13 @@
 using Content.Shared.Mobs.Components;
 using Content.Shared.Projectiles;
 using Content.Shared.SS220.Weapons.Components;
+using Content.Shared.Damage.Components;
 using Content.Shared.Standing;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Containers;
 using Robust.Shared.Physics.Events;
 
-namespace Content.Shared.Damage.Components;
+namespace Content.Shared.Damage.Systems;
 
 public sealed class RequireProjectileTargetSystem : EntitySystem
 {

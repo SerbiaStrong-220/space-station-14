@@ -1,6 +1,7 @@
 // © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
 using Content.Shared.Administration.Logs;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
+using Content.Shared.Damage.Components;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
@@ -43,7 +44,7 @@ public sealed partial class ComplexRepairableSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (!TryComp<DamageableComponent>(ent.Owner, out var damageable) || damageable.TotalDamage == 0)
+        if (_damageableSystem.GetTotalDamage(ent.Owner) == 0)
             return;
 
         if (ent.Comp.Damage != null)
@@ -55,7 +56,7 @@ public sealed partial class ComplexRepairableSystem : EntitySystem
         else
         {
             // Repair all damage
-            _damageableSystem.SetAllDamage(ent.Owner, damageable, 0);
+            _damageableSystem.SetAllDamage(ent.Owner, 0);
             _adminLogger.Add(LogType.Healed, $"{ToPrettyString(args.User):user} repaired {ToPrettyString(ent.Owner):target} back to full health");
         }
 
@@ -74,7 +75,7 @@ public sealed partial class ComplexRepairableSystem : EntitySystem
         //if(args.Used.Proto)
 
         // Only try repair the target if it is damaged
-        if (!TryComp<DamageableComponent>(ent.Owner, out var damageable) || damageable.TotalDamage == 0)
+        if (_damageableSystem.GetTotalDamage(ent.Owner) == 0)
             return;
 
         if (ent.Comp.LeftToInsert > 0 )
@@ -115,7 +116,7 @@ public sealed partial class ComplexRepairableSystem : EntitySystem
             return;
         }
 
-        float delay = ent.Comp.DoAfterModifier * (damageable.TotalDamage.Int() / 10);
+        float delay = ent.Comp.DoAfterModifier * (_damageableSystem.GetTotalDamage(ent.Owner).Float() / 10f);
 
         // Add a penalty to how long it takes if the user is repairing itself
         if (args.User == args.Target)

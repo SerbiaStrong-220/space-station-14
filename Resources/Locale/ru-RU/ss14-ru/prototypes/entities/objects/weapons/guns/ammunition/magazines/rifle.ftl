@@ -9,7 +9,5 @@ ent-MagazineRifleIncendiary = магазин (6,3х47 промежуточные
     .desc = { ent-MagazineRifle.desc }
 ent-MagazineRiflePractice = магазин (6,3х47 промежуточные учебные)
     .desc = { ent-BaseMagazineRifle.desc }
-ent-MagazineRifleRubber = магазин (6,3х47 промежуточные резиновые)
-    .desc = { ent-BaseMagazineRifle.desc }
 ent-MagazineRifleUranium = магазин (6,3х47 промежуточные урановые)
     .desc = { ent-BaseMagazineRifle.desc }

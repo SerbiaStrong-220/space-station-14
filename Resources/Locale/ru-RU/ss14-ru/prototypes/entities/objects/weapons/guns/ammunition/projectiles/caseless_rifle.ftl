@@ -4,5 +4,3 @@ ent-BulletCaselessRifleHighVelocity = пуля (8x18 безгильзовя вы
     .desc = { ent-BaseBulletHighVelocity.desc }
 ent-BulletCaselessRiflePractice = пуля (8x18 безгильзовая учебная)
     .desc = { ent-BaseBulletPractice.desc }
-ent-BulletCaselessRifleRubber = пуля (8x18 безгильзовая резиновая)
-    .desc = { ent-BaseBulletRubber.desc }

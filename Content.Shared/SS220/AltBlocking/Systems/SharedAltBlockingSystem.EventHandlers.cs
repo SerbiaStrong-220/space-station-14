@@ -56,38 +56,38 @@ public sealed partial class SharedAltBlockingSystem
             if (!TryGetNetEntity(item, out var NetItem))
                 continue;
 
-            var seed = SharedRandomExtensions.HashCodeCombine(new() { (int)_gameTiming.CurTick.Value, ((NetEntity)NetUser).Id, ((NetEntity)NetItem).Id });
-            var rand = new System.Random(seed);
+            //var seed = SharedRandomExtensions.HashCodeCombine(new() { (int)_gameTiming.CurTick.Value, ((NetEntity)NetUser).Id, ((NetEntity)NetItem).Id });
+            //var rand = new System.Random(seed);
 
             if (ent.Comp.IsBlocking)
             {
-                if (rand.Prob(blockComp.ActiveMeleeBlockProb))
-                {
-                    if (_net.IsServer)
-                    {
-                        _audio.PlayPvs(blockComp.BlockSound, (EntityUid)item);
-                        _popupSystem.PopupEntity(Loc.GetString("block-shot"), ent.Owner);
-                    }
-
-                    args.CancelledHit = true;
-                    args.blocker = netEnt;
-                    return;
-                }
+                //if (rand.Prob(blockComp.ActiveMeleeBlockProb))
+                //{
+                //   if (_net.IsServer)
+                //    {
+                       _audio.PlayPvs(blockComp.BlockSound, (EntityUid)item);
+                //     _popupSystem.PopupEntity(Loc.GetString("block-shot"), ent.Owner);
+                //  }
+                //
+                //    args.CancelledHit = true;
+                //    args.blocker = netEnt;
+                //    return;
+                //}
             }
 
             else
             {
-                if (rand.Prob(blockComp.MeleeBlockProb))
-                {
-                    if (_net.IsServer)
-                    {
-                        _audio.PlayPvs(blockComp.BlockSound, (EntityUid)item);
-                        _popupSystem.PopupEntity(Loc.GetString("block-shot"), ent.Owner);
-                    }
-                    args.CancelledHit = true;
-                    args.blocker = netEnt;
-                    return;
-                }
+                //if (rand.Prob(blockComp.MeleeBlockProb))
+                //{
+                //    if (_net.IsServer)
+                //    {
+                //        _audio.PlayPvs(blockComp.BlockSound, (EntityUid)item);
+                //        _popupSystem.PopupEntity(Loc.GetString("block-shot"), ent.Owner);
+                //    }
+                //    args.CancelledHit = true;
+                //    args.blocker = netEnt;
+                //    return;
+                //}
             }
         }
         return;
@@ -153,29 +153,29 @@ public sealed partial class SharedAltBlockingSystem
             if (!TryGetNetEntity(item, out var NetItem))
                 continue;
 
-            var seed = SharedRandomExtensions.HashCodeCombine(new() { (int)_gameTiming.CurTick.Value, ((NetEntity)NetUser).Id, ((NetEntity)NetItem).Id });
-            var rand = new System.Random(seed);
+            //var seed = SharedRandomExtensions.HashCodeCombine(new() { (int)_gameTiming.CurTick.Value, ((NetEntity)NetUser).Id, ((NetEntity)NetItem).Id });
+            //var rand = new System.Random(seed);
 
             if (owner.Comp.IsBlocking)
             {
-                if (rand.Prob(blockComp.ActiveRangeBlockProb))
-                {
-                    _damageable.TryChangeDamage((EntityUid)item, damage);
-                    _audio.PlayPvs(blockComp.BlockSound, (EntityUid)item);
-                    _popupSystem.PopupEntity(Loc.GetString("block-shot"), user);
-                    return true;
-                }
+                //if (rand.Prob(blockComp.ActiveRangeBlockProb))
+                //{
+                //    _damageable.TryChangeDamage((EntityUid)item, damage);
+                //    _audio.PlayPvs(blockComp.BlockSound, (EntityUid)item);
+                //   _popupSystem.PopupEntity(Loc.GetString("block-shot"), user);
+                //    return true;
+                //}
             }
 
             else
             {
-                if (rand.Prob(blockComp.RangeBlockProb))
-                {
-                    _damageable.TryChangeDamage((EntityUid)item, damage);
-                    _audio.PlayPvs(blockComp.BlockSound, (EntityUid)item);
-                    _popupSystem.PopupEntity(Loc.GetString("block-shot"), user);
-                    return true;
-                }
+                //if (rand.Prob(blockComp.RangeBlockProb))
+                //{
+                //    _damageable.TryChangeDamage((EntityUid)item, damage);
+                //    _audio.PlayPvs(blockComp.BlockSound, (EntityUid)item);
+                //    _popupSystem.PopupEntity(Loc.GetString("block-shot"), user);
+                //    return true;
+                //}
             }
         }
         return false;

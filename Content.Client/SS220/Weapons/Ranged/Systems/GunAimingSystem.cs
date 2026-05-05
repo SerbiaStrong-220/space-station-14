@@ -35,21 +35,21 @@ public sealed partial class GunAimingSystem : SharedGunAimingSystem
 
         var entity = entityNull.Value;
 
-        if (!_gun.TryGetGun(entity, out var gunUid, out var gun) || !gun.UseKey)
+        if (!_gun.TryGetGun(entity, out var gun) || !gun.Comp.UseKey)
             return;
 
-        if (!TryComp<GunAimableComponent>(gunUid, out var aimableComp))
+        if (!TryComp<GunAimableComponent>(gun.Owner, out var aimableComp))
             return;
 
         var useKey = EngineKeyFunctions.UseSecondary;
 
         if (_inputSystem.CmdStates.GetState(useKey) == BoundKeyState.Down && !aimableComp.IsAimed)
         {
-            RaisePredictiveEvent(new AimStatusChangeAttemptEvent { Gun = GetNetEntity(gunUid), Aim = true, User = GetNetEntity(entity) });
+            RaisePredictiveEvent(new AimStatusChangeAttemptEvent { Gun = GetNetEntity(gun.Owner), Aim = true, User = GetNetEntity(entity) });
             return;
         }
 
         if (_inputSystem.CmdStates.GetState(useKey) == BoundKeyState.Up && aimableComp.IsAimed)
-            RaisePredictiveEvent(new AimStatusChangeAttemptEvent { Gun = GetNetEntity(gunUid), Aim = false, User = GetNetEntity(entity) });
+            RaisePredictiveEvent(new AimStatusChangeAttemptEvent { Gun = GetNetEntity(gun.Owner), Aim = false, User = GetNetEntity(entity) });
     }
 }

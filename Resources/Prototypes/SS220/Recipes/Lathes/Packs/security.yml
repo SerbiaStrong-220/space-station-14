@@ -10,18 +10,9 @@
   - MagazinePistolHighCapacityEmpty
   - MagazinePistolHighCapacity
 
-# Rubber ammo/mags
+# LessLethal
 - type: latheRecipePack
   id: SecurityAmmoRubberStatic
   recipes:
-  - MagazineBoxLightRifleRubber
-  - MagazineBoxMagnumRubber
-  - MagazineBoxPistolRubber
-  - MagazineBoxRifleRubber
-  - MagazineLightRifleRubber
-  - MagazinePistolRubber
-  - MagazinePistolSubMachineGunRubber
-  - MagazineRifleRubber
-  - SpeedLoaderMagnumRubber
-  - MagazineMagnumRubber
   - TaserCartridge
+

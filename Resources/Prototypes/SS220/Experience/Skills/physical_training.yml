@@ -9,7 +9,7 @@
     skillDescription: physical-training-initial-desc
   components:
   - type: DisarmOnDamageSkill
-    disarmChance: 0.5
+    disarmChance: 0.4
     damageThreshold: 15.
 
 - type: skill
@@ -23,7 +23,7 @@
     skillDescription: physical-training-base-desc
   components:
   - type: DisarmOnDamageSkill
-    disarmChance: 0.5
+    disarmChance: 0.35
     damageThreshold: 20.
 
 - type: skill

@@ -4,108 +4,122 @@
   id: ClothingBackpackERTLeaderFilled
   suffix: Filled
   components:
-  - type: StorageFill
-    contents:
-      - id: BoxSurvivalCentcom
-      - id: WeaponDisabler
-      - id: MedicatedSuture
-      - id: RegenerativeMesh
-      - id: BoxZiptie
-      - id: CrowbarRed
-      - id: MagazineMagnum
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BoxSurvivalCentcom
+        - id: WeaponDisabler
+        - id: MedicatedSuture
+        - id: RegenerativeMesh
+        - id: BoxZiptie
+        - id: CrowbarRed
+        - id: MagazineMagnum
 
 - type: entity
   parent: ClothingBackpackERTChaplain
   id: ClothingBackpackERTChaplainFilled
   suffix: Filled
   components:
-  - type: StorageFill
-    contents:
-      - id: BoxSurvivalCentcom
-      - id: BoxCandle
-      - id: BoxBodyBag
-      - id: DrinkWaterMelonJuiceJug
-      - id: Lantern
-        amount: 2
-      - id: Bible
-      - id: CrowbarRed
-      - id: FoodBakedBunHotX
-        amount: 4
-      - id: Lighter
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BoxSurvivalCentcom
+        - id: BoxCandle
+        - id: BoxBodyBag
+        - id: DrinkWaterMelonJuiceJug
+        - id: Lantern
+          amount: 2
+        - id: Bible
+        - id: CrowbarRed
+        - id: FoodBakedBunHotX
+          amount: 4
+        - id: Lighter
 
 - type: entity
   parent: ClothingBackpackERTEngineer
   id: ClothingBackpackERTEngineerFilled
   suffix: Filled
   components:
-  - type: StorageFill
-    contents:
-      - id: BoxSurvivalCentcom
-      - id: trayScanner
-      - id: RCD
-      - id: RCDAmmo
-        amount: 2
-      - id: CableMVStack
-      - id: CableHVStack
-      - id: CableApcStack
-      - id: SheetPlasteel
-      - id: SheetSteel
-      - id: SheetGlass
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BoxSurvivalCentcom
+        - id: trayScanner
+        - id: RCD
+        - id: RCDAmmo
+          amount: 2
+        - id: CableMVStack
+        - id: CableHVStack
+        - id: CableApcStack
+        - id: SheetPlasteel
+        - id: SheetSteel
+        - id: SheetGlass
 
 - type: entity
   parent: ClothingBackpackERTSecurity
   id: ClothingBackpackERTSecurityFilled
   suffix: Filled
   components:
-   - type: StorageFill
-     contents:
-      - id: BoxSurvivalCentcom
-      - id: WeaponDisabler
-      - id: MedicatedSuture
-      - id: RegenerativeMesh
-      - id: BoxZiptie
-      - id: CrowbarRed
-      - id: MagazinePistol
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BoxSurvivalCentcom
+        - id: WeaponDisabler
+        - id: MedicatedSuture
+        - id: RegenerativeMesh
+        - id: BoxZiptie
+        - id: CrowbarRed
+        - id: MagazinePistol
 
 - type: entity
   parent: ClothingBackpackERTMedical
   id: ClothingBackpackERTMedicalFilled
   suffix: Filled
   components:
-  - type: StorageFill
-    contents:
-      - id: BoxSurvivalCentcom
-      - id: Hypospray
-      - id: MedkitAdvancedFilled
-      - id: CrowbarRed
-      - id: ChemistryBottleOmnizine
-      - id: ChemistryBottleEpinephrine
-      - id: ChemistryBottleEpinephrine
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BoxSurvivalCentcom
+        - id: Hypospray
+        - id: MedkitAdvancedFilled
+        - id: CrowbarRed
+        - id: ChemistryBottleOmnizine
+        - id: ChemistryBottleEpinephrine
+        - id: ChemistryBottleEpinephrine
 
 - type: entity
   parent: ClothingBackpackERTJanitor
   id: ClothingBackpackERTJanitorFilled
   suffix: Filled
   components:
-  - type: StorageFill
-    contents:
-      - id: BoxSurvivalCentcom
-      - id: LightReplacer
-      - id: BoxLightMixed
-        amount: 2
-      - id: Soap
-      - id: CrowbarRed
-      - id: AdvMopItem
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BoxSurvivalCentcom
+        - id: LightReplacer
+        - id: BoxLightMixed
+          amount: 2
+        - id: Soap
+        - id: CrowbarRed
+        - id: AdvMopItem
 
 - type: entity
   parent: ClothingBackpackERTJanitor
   id: ClothingBackpackERTJanitorFilledGrenadeCleanade
   suffix: Filled, GrenadeCleanade
   components:
-  - type: StorageFill
-    contents:
-    - id: GrenadeCleanade
-      amount: 24
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: GrenadeCleanade
+          amount: 24
 
 - type: entity
   parent: ClothingBackpackERTSecurity
@@ -113,13 +127,15 @@
   name: death squad backpack
   description: Holds the kit of CentComm's most feared agents.
   components:
-    - type: Sprite
-      sprite: Corvax/Back/Backpacks/deathsquad-backpack.rsi
-    - type: Storage
-      grid:
-      - 0,0,8,6
-    - type: StorageFill
-      contents:
+  - type: Sprite
+    sprite: Corvax/Back/Backpacks/deathsquad-backpack.rsi
+  - type: Storage
+    grid:
+    - 0,0,8,6
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
         - id: WeaponPulseRifle2
         - id: WeaponPulsePistol
         - id: WeaponRevolverMateba
@@ -140,13 +156,15 @@
   name: death squad backpack
   description: Holds the kit of CentComm's most feared agents.
   components:
-    - type: Sprite
-      sprite: Corvax/Back/Backpacks/deathsquad-backpack.rsi
-    - type: Storage
-      grid:
-      - 0,0,8,6
-    - type: StorageFill
-      contents:
+  - type: Sprite
+    sprite: Corvax/Back/Backpacks/deathsquad-backpack.rsi
+  - type: Storage
+    grid:
+    - 0,0,8,6
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
         - id: WeaponPulseRifle2
         - id: WeaponPulsePistol
         - id: WeaponRevolverMateba
@@ -165,16 +183,18 @@
   parent: ClothingBackpackBlueShieldHight
   id: ClothingBackpackBlueShieldHightFilled
   components:
-  - type: StorageFill
-    contents:
-      - id: BoxSurvivalCentcom
-      - id: WeaponBlasterKRV
-      - id: PowerCellBlasterHighCapacity
-        amount: 3
-      - id: FlashlightSeclite
-      - id: MedkitCombatFilled
-      - id: ClothingHeadHelmetTactical
-      - id: ClothingMaskGasBlueShield
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BoxSurvivalCentcom
+        - id: WeaponBlasterKRV
+        - id: PowerCellBlasterHighCapacity
+          amount: 3
+        - id: FlashlightSeclite
+        - id: MedkitCombatFilled
+        - id: ClothingHeadHelmetTactical
+        - id: ClothingMaskGasBlueShield
 
 # CBURNleader
 - type: entity
@@ -184,18 +204,20 @@
   description: A spacious backpack with lots of pockets, worn by the Commander of an CBURN.
   suffix: Filled
   components:
-  - type: StorageFill
-    contents:
-      - id: BoxSurvivalCentcom
-      - id: MedicatedSuture
-      - id: RegenerativeMesh
-      - id: CrowbarRed
-      - id: BoxShotgunIncendiary
-        amount: 2
-      - id: GrenadeFlashBang
-        amount: 2
-      - id: PillAmbuzolPlus
-      - id: WeaponShotgunSawn
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BoxSurvivalCentcom
+        - id: MedicatedSuture
+        - id: RegenerativeMesh
+        - id: CrowbarRed
+        - id: BoxShotgunIncendiary
+          amount: 2
+        - id: GrenadeFlashBang
+          amount: 2
+        - id: PillAmbuzolPlus
+        - id: WeaponShotgunSawn
 
 # CounterIntelligence
 - type: entity
@@ -205,15 +227,17 @@
   description: A spacious backpack with lots of pockets, worn by the Counterintelligence Agent.
   suffix: Filled
   components:
-   - type: StorageFill
-     contents:
-      - id: BoxSurvivalCentcom
-      - id: CrowbarRed
-      - id: MedicatedSuture
-      - id: RegenerativeMesh
-      - id: MedkitCombatFilled
-      - id: BoxFlashbang
-      - id: DeathRattleImplanterCentcomm
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BoxSurvivalCentcom
+        - id: CrowbarRed
+        - id: MedicatedSuture
+        - id: RegenerativeMesh
+        - id: MedkitCombatFilled
+        - id: BoxFlashbang
+        - id: DeathRattleImplanterCentcomm
 
 - type: entity
   parent: ClothingBackpackNoirSatchel
@@ -222,17 +246,19 @@
   description: A fashionable bag in noir style, custom-made for a counterintelligence officer.
   suffix: Filled
   components:
-   - type: StorageFill
-     contents:
-      - id: BoxSurvivalCentcom
-      - id: RubberStampDenied
-      - id: RubberStampApproved
-      - id: RubberStampDoAP
-      - id: MedkitCombatFilled
-      - id: NTbaton
-      - id: BoxFolderCentComm
-      - id: ExpensiveLighterNanotrasen
-      - id: DeathRattleImplanterCentcomm
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BoxSurvivalCentcom
+        - id: RubberStampDenied
+        - id: RubberStampApproved
+        - id: RubberStampDoAP
+        - id: MedkitCombatFilled
+        - id: NTbaton
+        - id: BoxFolderCentComm
+        - id: ExpensiveLighterNanotrasen
+        - id: DeathRattleImplanterCentcomm
 
 # Svarshik's toys
 - type: entity
@@ -248,7 +274,10 @@
         children:
         - id: ClothingUniformJumpsuitNinja
         - id: ClothingOuterSuitSpaceNinjaFake
-        - id: EnergyKatanaToy
+        # - id: ClothingMaskNinja # nope, no real mask
         - id: ClothingHandsGlovesSpaceNinjaFake
         - id: ClothingShoesSpaceNinjaFake
         - id: ClothingEyesVisorNinjaFake
+        - id: EnergyKatanaToy
+        - id: ThrowingStar
+          amount: 2
