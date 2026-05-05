@@ -13,6 +13,8 @@
             - material: WoodPlank
               amount: 5
               doAfter: 5
+    - node: FlowerHedge
+      entity: FlowerHedge
 
     - node: FlowerHedge
       entity: FlowerHedge
