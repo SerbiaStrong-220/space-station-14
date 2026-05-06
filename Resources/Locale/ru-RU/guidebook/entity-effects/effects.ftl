@@ -1,11 +1,29 @@
-entity-effect-guidebook-destroy = { $chance ->\n  [1] Уничтожает\n *[other] уничтожает\n} объект
+entity-effect-guidebook-destroy = { $chance ->
+    [1] Уничтожает
+    *[other] уничтожает
+    } объект
 
-entity-effect-guidebook-break = { $chance ->\n  [1] Ломает\n *[other] ломает\n} объект
+entity-effect-guidebook-break = { $chance ->
+    [1] Ломает
+    *[other] ломает
+    } объект
 
-entity-effect-guidebook-extinguish-reaction = { $chance ->\n  [1] Тушит\n *[other] тушит\n} огонь
+entity-effect-guidebook-extinguish-reaction = { $chance ->
+    [1] Тушит
+    *[other] тушит
+    } огонь
 
-entity-effect-guidebook-movespeed-modifier = { $chance ->\n  [1] Изменяет\n *[other] изменяет\n} скорость передвижения на {NATURALFIXED($sprintspeed, 3)}x минимум на {NATURALFIXED($time, 3)} {MANY("секунду", $time)}
+entity-effect-guidebook-movespeed-modifier = { $chance ->
+    [1] Изменяет
+    *[other] изменяет
+    } скорость передвижения на {NATURALFIXED($sprintspeed, 3)}x минимум на {NATURALFIXED($time, 3)} {MANY("секунду", $time)}
 
-entity-effect-guidebook-plant-remove-kudzu = { $chance ->\n  [1] Удаляет\n *[other] удаляет\n} кудзу с растения
+entity-effect-guidebook-plant-remove-kudzu = { $chance ->
+    [1] Удаляет
+    *[other] удаляет
+    } кудзу с растения
 
-entity-effect-guidebook-plant-mutate-chemicals = { $chance ->\n  [1] Мутирует\n *[other] мутирует\n} растение, чтобы производить {$name}
+entity-effect-guidebook-plant-mutate-chemicals = { $chance ->
+    [1] Мутирует\n
+    *[other] мутирует
+    } растение, чтобы производить {$name}

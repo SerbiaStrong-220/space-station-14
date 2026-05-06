@@ -1,4 +1,7 @@
-photograph-name-text = Это фотография { PROPER($entity) ->\n *[false] { INDEFINITE($entity) } { $entity }\n  [true] { $entity }\n }.
+photograph-name-text = Это фотография { PROPER($entity) ->
+    *[false] { INDEFINITE($entity) } { $entity }
+    [true] { $entity }
+    }.
 
 photograph-name-text-empty = Это фотография.
 

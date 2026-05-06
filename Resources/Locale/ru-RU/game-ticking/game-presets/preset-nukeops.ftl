@@ -31,6 +31,12 @@ nukeops-role-operator = Оператор
 
 nukeops-disk-location-title = Итоговое местоположение Диска:
 
-nukeops-disk-carried-by = {" "}его несет [color=White]{$name}[/color], [color=orange]{$job}[/color], {$location} { $user ->\n    [unknown] { "" }\n   *[other] ([color=gray]{$user}[/color])\n}
+nukeops-disk-carried-by = {" "} его несет [color=White]{$name}[/color], [color=orange]{$job}[/color], {$location} { $user ->
+    [unknown] { "" }
+    *[other] ([color=gray]{$user}[/color])
+    }
 
-storage-hierarchy-list = { $items-left ->\n  [0] { $existing-text } { $item },\n *[other] { $existing-text } { $item }, внутри\n}
+storage-hierarchy-list = { $items-left ->
+    [0] { $existing-text } { $item },
+    *[other] { $existing-text } { $item }, внутри
+    }

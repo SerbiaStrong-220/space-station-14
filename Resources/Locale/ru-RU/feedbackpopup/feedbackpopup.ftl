@@ -2,7 +2,11 @@ feedbackpopup-window-name = Запрос отзыва
 
 feedbackpopup-control-button-text = Открыть ссылку
 
-feedbackpopup-control-total-surveys = {$num ->\n  [one] {$num} запись\n  [few] {$num} записи\n *[other] {$num} записей\n}
+feedbackpopup-control-total-surveys = {$num ->
+    [one] {$num} запись
+    [few] {$num} записи
+    *[other] {$num} записей
+    }
 
 feedbackpopup-control-no-entries = Нет записей
 

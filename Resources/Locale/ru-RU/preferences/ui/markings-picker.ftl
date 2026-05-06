@@ -35,11 +35,28 @@ markings-category-Legs = Ноги
 markings-category-Tail = Хвост
 markings-category-Overlay = Наложение
 
--markings-selection = { $selectable ->\n  [0] У вас не осталось доступных меток.\n  [one] Вы можете выбрать еще одну метку.\n *[other] Вы можете выбрать еще { $selectable } меток.\n}
+-markings-selection = { $selectable ->
+    [0] У вас не осталось доступных черт.
+    [one] Вы можете выбрать еще одну черту.
+    *[other] Вы можете выбрать еще { $selectable } черт.
+    }
 
-markings-limits = { $required ->\n  [true] { $count ->\n      [-1] Выберите как минимум одну метку.\n      [0] Вы не можете выбрать метки, но каким-то образом должны? Это баг.\n      [one] Выберите одну метку.\n     *[other] Выберите минимум одну и максимум {$count} меток. { -markings-selection(selectable: $selectable) }\n  }\n *[false] { $count ->\n      [-1] Выберите любое количество меток.\n      [0] Вы не можете выбрать никаких меток.\n      [one] Выберите до одной метки.\n     *[other] Выберите до {$count} меток. { -markings-selection(selectable: $selectable) }\n  }\n}
+markings-limits = { $required ->
+    [true] { $count ->
+        [-1] Выберите как минимум одну черту.
+        [0] Вы не можете выбрать эти черты персонажи, но каким-то образом должны? Это баг.
+        [one] Выберите одну черту.
+        *[other] Выберите минимум черту и максимум {$count} черт. { -markings-selection(selectable: $selectable) }
+        }
+    *[false] { $count ->
+        [-1] Выберите любое количество черт.
+        [0] Вы не можете выбрать никаких черт.
+        [one] Выберите до одной черты.
+        *[other] Выберите до {$count} черт. { -markings-selection(selectable: $selectable) }
+        }
+    }
 
-markings-reorder = Изменить порядок меток
+markings-reorder = Изменить порядок черт
 
 humanoid-marking-modifier-respect-limits = Соблюдать лимиты
 
@@ -77,7 +94,7 @@ markings-layer-Hair = Волосы
 
 markings-layer-FacialHair = Волосы на лице
 
-markings-layer-UndergarmentTop = Нижняя рубашка
+markings-layer-UndergarmentTop = Майка
 
 markings-layer-UndergarmentBottom = Нижнее белье
 
@@ -111,6 +128,6 @@ markings-layer-RFoot = П. Ступня
 
 markings-layer-LFoot = Л. Ступня
 
-markings-layer-Overlay = Оверлей
+markings-layer-Overlay = Наложение
 
-markings-layer-TailOverlay = Оверлей Хвоста
+markings-layer-TailOverlay = Наложение Хвоста

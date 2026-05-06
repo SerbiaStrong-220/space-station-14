@@ -52,4 +52,7 @@ edible-force-feed = { CAPITALIZE($user) } пытается заставить в
 edible-force-feed-success = { CAPITALIZE($user) } заставил вас что-то { $verb }! { $flavors }
 edible-force-feed-success-user = Вы успешно накормили { $target }
 
-edible-satiated = { $satiated ->\n  [true] {" "}Вы не чувствуете, что можете { $verb } еще.\n *[false] {""}\n}
+edible-satiated = { $satiated ->
+    [true] {" "}Вы не чувствуете, что можете { $verb } еще.
+    *[false] {""}
+    }
