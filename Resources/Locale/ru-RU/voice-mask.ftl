@@ -9,7 +9,7 @@ voice-mask-popup-failure = Имя не может быть изменено.
 
 voice-mask-name-change-toggle = Переключить маску голоса
 
-voice-mask-name-change-accent-toggle = Блокировать акцент
+voice-mask-name-change-accent-toggle = Скрыть акцент
 
 voice-mask-popup-toggle = Маска голоса переключена.
 

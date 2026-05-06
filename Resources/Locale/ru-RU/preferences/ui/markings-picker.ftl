@@ -39,22 +39,22 @@ markings-category-Overlay = Наложение
     [0] У вас не осталось доступных черт.
     [one] Вы можете выбрать еще одну черту.
     *[other] Вы можете выбрать еще { $selectable } черт.
-    }
+}
 
 markings-limits = { $required ->
     [true] { $count ->
         [-1] Выберите как минимум одну черту.
         [0] Вы не можете выбрать эти черты персонажи, но каким-то образом должны? Это баг.
         [one] Выберите одну черту.
-        *[other] Выберите минимум черту и максимум {$count} черт. { -markings-selection(selectable: $selectable) }
-        }
+        *[other] Выберите как минимум черту и максимум {$count} черт. { -markings-selection(selectable: $selectable) }
+    }
     *[false] { $count ->
         [-1] Выберите любое количество черт.
         [0] Вы не можете выбрать никаких черт.
         [one] Выберите до одной черты.
         *[other] Выберите до {$count} черт. { -markings-selection(selectable: $selectable) }
-        }
     }
+}
 
 markings-reorder = Изменить порядок черт
 

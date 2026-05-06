@@ -8,7 +8,7 @@ cmd-changecvar-value-out-of-range = Значение вне диапазона. 
 
 cmd-changecvar-desc = Изменяет значение cvar.
 
-cmd-changecvar-help = Использование: changecvar <cvar | ? | search> <значение>
+cmd-changecvar-help = Использование: changecvar <cvar | ? | поиск> <значение>
 
 cmd-changecvar-available-cvars = Список доступных cvar:
 
