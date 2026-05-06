@@ -8,4 +8,3 @@ ent-ThrusterBigCenterMachineCircuitboard = большой ракетный дв�
     .desc = { ent-BaseMachineCircuitboard.desc }
 ent-ShuttleGunMLGSWCircuitboard = SPG-300 "Мародёр" (машинная плата)
     .desc = Печатная плата SPG-300 "Мародёр"
-    
