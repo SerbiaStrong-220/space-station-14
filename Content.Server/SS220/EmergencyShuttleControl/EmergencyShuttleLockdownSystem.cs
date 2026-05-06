@@ -89,7 +89,7 @@ public sealed class EmergencyShuttleLockdownSystem : EntitySystem
             ValidateGridInStation(ent))
         {
             ent.Comp.IsActive = true;
-            _roundEnd.CancelRoundEndCountdown(ent.Owner, false);
+            _roundEnd.CancelRoundEndCountdown(ent.Owner, forceRecall: false);
 
             var args = new EmergencyShuttleLockdownActivatedEvent();
             RaiseLocalEvent(ent, ref args, true);

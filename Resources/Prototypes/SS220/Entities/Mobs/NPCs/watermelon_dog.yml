@@ -33,26 +33,38 @@
       - !type:HealthChange
         scaling: true
         damage:
-          groups:
-            Brute: -0.15
+          types:
+            Blunt: -0.05
+            Slash: -0.05
+            Piercing: -0.05
     - reagents: [ Blood ]
       methods: [ Touch ]
       effects:
       - !type:HealthChange
         scaling: true
         damage:
-          groups:
-            Brute: -0.25
-            Burn: -0.25
+          types:
+            Blunt: -0.083
+            Slash: -0.083
+            Piercing: -0.083
+            Heat: -0.0625
+            Shock: -0.0625
+            Cold: -0.0625
+            Caustic: -0.0625
     - reagents: [ RobustHarvest ]
       methods: [ Touch ]
       effects:
       - !type:HealthChange
         scaling: true
         damage:
-          groups:
-            Brute: -1
-            Burn: -1
+          types:
+            Blunt: -0.33
+            Slash: -0.33
+            Piercing: -0.33
+            Heat: -0.25
+            Shock: -0.25
+            Cold: -0.25
+            Caustic: -0.25
     - reagents: [ WeedKiller, PlantBGone ]
       methods: [ Touch ]
       effects:
@@ -99,7 +111,7 @@
     spawnFriendsSearchRadius: 5
     whitelist:
       components:
-      - HumanoidAppearance
+      - HumanoidProfile
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: WatermelonDog
@@ -110,9 +122,10 @@
       - map: [ "enum.DamageStateVisualLayers.Base" ]
         state: alive
   - type: Bloodstream
-    bloodReagent: JuiceWatermelon
-    bloodMaxVolume: 50
-    chemicalMaxVolume: 30
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: JuiceWatermelon
+        Quantity: 50
   - type: Destructible
     thresholds:
     - trigger:
@@ -176,7 +189,6 @@
   - type: PassiveDamage # Очень жаль, но спамить станцию собаками мы не хотим
     allowedStates:
     - Alive
-    damageCap: 100
     damage:
       types:
         Blunt: 0.05

@@ -6,7 +6,7 @@ on:
 
 jobs:
   invite-contributor:
-    if: github.event.pull_request.merged == true && contains(fromJson('["NONE","CONTRIBUTOR","FIRST_TIMER","FIRST_TIME_CONTRIBUTOR"]'), github.event.pull_request.author_association)
+    if: github.event.pull_request.merged == true && contains(fromJson('["NONE","FIRST_TIMER","FIRST_TIME_CONTRIBUTOR"]'), github.event.pull_request.author_association)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/create-github-app-token@v3

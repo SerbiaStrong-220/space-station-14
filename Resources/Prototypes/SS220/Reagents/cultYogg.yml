@@ -9,7 +9,7 @@
   flavor: menacing
   color: "#afdd9a" #change color to a shroom color
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
       - !type:ChemMiGomyceliumEffect
       - !type:GenericStatusEffect
@@ -35,7 +35,7 @@
   flavor: menacing
   color: "#afdd9a" #change color to a shroom color
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
       - !type:ChemElixirOfLiberationEffect
       - !type:GenericStatusEffect
@@ -74,7 +74,7 @@
         emote: Scream
         probability: 0.3
   metabolisms:
-    Poison:
+    Bloodstream:
       metabolismRate : 3.00
       effects:
       - !type:HealthChange
@@ -106,7 +106,7 @@
   boilingPoint: 444.0
   meltingPoint: 128.0
   metabolisms:
-    Narcotic:
+    Bloodstream:
       effects:
       - !type:ModifyStatusEffect
         conditions:

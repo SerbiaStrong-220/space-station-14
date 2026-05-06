@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.Tools.Components;
 using Content.Shared.Tools.Systems;
@@ -42,7 +43,7 @@ public sealed class CorruptInteractionsSystem : EntitySystem
         if (!TryComp<DamageableComponent>(ent, out var damageableComp))
             return;
 
-        _damageable.TryChangeDamage(ent, ent.Comp.Damage, true, interruptsDoAfters: false, damageableComp);
+        _damageable.TryChangeDamage(ent.Owner, ent.Comp.Damage, true, interruptsDoAfters: false);
 
         args.Handled = true;
 

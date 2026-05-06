@@ -15,7 +15,7 @@ namespace Content.Shared.SS220.SpiderQueen.Systems;
 
 public abstract class SharedSpiderQueenSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!; 
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
@@ -79,7 +79,7 @@ public abstract class SharedSpiderQueenSystem : EntitySystem
             return;
         }
 
-        if (!HasComp<HumanoidAppearanceComponent>(target))
+        if (!HasComp<HumanoidProfileComponent>(target))
         {
             _popup.PopupEntity(Loc.GetString("cocooning-target-not-humanoid"), performer, performer);
             return;

@@ -6,7 +6,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Surgery.Graph;
 
-[Prototype("surgeryGraph")]
+[Prototype]
 public sealed partial class SurgeryGraphPrototype : IPrototype, ISerializationHooks
 {
     [ViewVariables]

@@ -3,13 +3,13 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server.Access.Systems;
-using Content.Server.Mind;
 using Content.Server.Objectives.Components;
 using Content.Server.Objectives.Systems;
 using Content.Server.SS220.Objectives.Components;
 using Content.Server.SS220.Trackers.Components;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
+using Content.Shared.Objectives.Systems;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Components;
 using Robust.Shared.Prototypes;
@@ -20,7 +20,7 @@ namespace Content.Server.SS220.Objectives.Systems;
 public sealed class FramePersonConditionSystem : EntitySystem
 {
     [Dependency] private readonly IdCardSystem _idCard = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
+    [Dependency] private readonly TargetSystem _target = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedRoleSystem _roleSystem = default!;
@@ -92,7 +92,7 @@ public sealed class FramePersonConditionSystem : EntitySystem
         if (targetObjective.Target != null)
             return false;
 
-        var whitelistedPlayers = _mind.GetAliveHumans(objectiveOwnerMind)
+        var whitelistedPlayers = _target.GetAliveHumans(objectiveOwnerMind)
                                     .Where(x => CorrectJob(x) && (blacklist == null || !EntityHasAnyComponent(x, blacklist)))
                                     .ToList();
 

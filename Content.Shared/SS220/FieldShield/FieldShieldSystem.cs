@@ -1,12 +1,12 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.
 
 using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Emp;
 using Content.Shared.Examine;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.FieldShield;
@@ -92,12 +92,12 @@ public sealed class FieldShieldProviderSystem : EntitySystem
 
     private void OnBeingEquippedAttempt(Entity<FieldShieldProviderComponent> entity, ref BeingEquippedAttemptEvent args)
     {
-        if (!HasComp<FieldShieldComponent>(args.Equipee))
+        if (!HasComp<FieldShieldComponent>(args.User))
             return;
 
         args.Cancel();
 
-        _popup.PopupClient(Loc.GetString("field-shield-provider-cant-equip-when-you-already-have-one"), args.Equipee);
+        _popup.PopupClient(Loc.GetString("field-shield-provider-cant-equip-when-you-already-have-one"), args.User);
     }
 
     private void OnUneqippingAttempt(Entity<FieldShieldProviderComponent> entity, ref BeingUnequippedAttemptEvent args)
@@ -114,18 +114,18 @@ public sealed class FieldShieldProviderSystem : EntitySystem
         if (!_gameTiming.IsFirstTimePredicted)
             return;
 
-        var shieldComp = EnsureComp<FieldShieldComponent>(args.Equipee);
+        var shieldComp = EnsureComp<FieldShieldComponent>(args.EquipTarget);
         shieldComp.ShieldData = entity.Comp.ShieldData;
         shieldComp.RechargeShieldData = entity.Comp.RechargeShieldData;
         shieldComp.LightData = entity.Comp.LightData;
 
         shieldComp.RechargeEndTime = _gameTiming.CurTime + entity.Comp.RechargeShieldData.RechargeTime;
-        Dirty(args.Equipee, shieldComp);
+        Dirty(args.EquipTarget, shieldComp);
     }
 
     private void OnProviderUnequipped(Entity<FieldShieldProviderComponent> entity, ref GotUnequippedEvent args)
     {
-        RemCompDeferred<FieldShieldComponent>(args.Equipee);
+        RemCompDeferred<FieldShieldComponent>(args.EquipTarget);
     }
 
     private void OnFieldShieldBeforeDamage(Entity<FieldShieldComponent> entity, ref BeforeDamageChangedEvent args)

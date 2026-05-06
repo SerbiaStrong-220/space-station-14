@@ -1,7 +1,7 @@
 - type: entity
   name: rat king
   id: MobRatKing
-  parent: [ SimpleMobBase, MobCombat, MobPassiveCollision ] # SS220 Add Mob Passive Collision
+  parent: [ BaseMobRat, SimpleMobBase, MobCombat, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   description: He's da rat. He make da roolz.
   components:
   - type: CombatMode
@@ -16,8 +16,6 @@
 #SS220 languages tweaks end
   - type: InputMover
     #SS220 RatKing tweaks and changes update start
-  - type: Puller
-    needsHands: false
   - type: KeenHearing
     visionRadius: 14
     highSensitiveVisionRadius: 0
@@ -50,6 +48,8 @@
     proto: regal
   - type: Physics
     bodyType: KinematicController
+  - type: Puller
+    needsHands: false
   - type: Fixtures
     fixtures:
       fix1:
@@ -76,10 +76,6 @@
       types:
         Slash: 12
         Piercing: 8
-        Structural: 25
-  - type: Body
-    prototype: Rat
-    requiredLegs: 1 # TODO: More than 1 leg
   - type: Hunger # probably should be prototyped
     thresholds:
       Overfed: 200
@@ -121,6 +117,8 @@
       - CannotSuicide
       - FootstepSound
   - type: NoSlip
+  - type: Insulated
+    coefficient: 0.5 # rat king touches more wires, see?
   - type: Rummager
   - type: RatKing
     hungerPerArmyUse: 25
@@ -192,7 +190,7 @@
 - type: entity
   name: rat servant
   id: MobRatServant
-  parent: [ SimpleMobBase, MobCombat, MobPassiveCollision ] # SS220 Add Mob Passive Collision
+  parent: [ BaseMobRat, SimpleMobBase, MobCombat, MobPassiveCollision ] # SS220 Add Mob Passive Collision
   description: He's da mini rat. He don't make da roolz.
   categories: [ HideSpawnMenu ] #Must be configured to a King or the AI breaks.
   components:
@@ -229,8 +227,10 @@
       state: eyes
       shader: unshaded
   - type: Bloodstream
-    bloodMaxVolume: 40 #SS220 RatBlood fix
-  - type: Insulated #SS220 RatKing Tweaks and changes
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 40
   - type: SpriteMovement
     movementLayers:
       movement:
@@ -267,7 +267,7 @@
       - !type:GibBehavior
         recursive: false
   - type: Stamina
-    critThreshold: 60
+    baseCritThreshold: 60
   - type: MeleeWeapon
     soundHit:
         path: /Audio/Weapons/bladeslice.ogg
@@ -277,9 +277,6 @@
       types:
         Slash: 5
         Piercing: 3
-  - type: Body
-    prototype: Rat
-    requiredLegs: 1 # TODO: More than 1 leg
   - type: Hunger # probably should be prototyped
     thresholds:
       Overfed: 200
@@ -320,6 +317,8 @@
       - CannotSuicide
       - FootstepSound
   - type: NoSlip
+  - type: Insulated
+    coefficient: 0.2 # they don't make da roolz, but they sneaky
   - type: MobPrice
     price: 500 # rat wealth
   - type: MobsterAccent

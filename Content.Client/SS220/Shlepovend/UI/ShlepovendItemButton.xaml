@@ -8,7 +8,7 @@
                  RectClipContent="True"
                  TooltipDelay="0">
     <PanelContainer Name="Panel"/>
-    <BoxContainer Orientation="Vertical" Name="Root">
+    <BoxContainer Orientation="Vertical" Name="RootContainer">
         <Label Text="0 токенов" Name="PriceLabel" Align="Center"/>
         <SpriteView Scale="3 3" Name="ItemView"/>
         <Label Text="Недоступно" Name="AvailableLabel" Modulate="#ff0000" Align="Center" Access="Public"/>

@@ -28,7 +28,7 @@ public sealed class GrillableSystem : EntitySystem
     {
         if (args.Handled)
             return;
-            
+
         args.Handled = ent.Comp.IsCooking;
     }
 
@@ -56,8 +56,7 @@ public sealed class GrillableSystem : EntitySystem
         // Cooking is done
         if (ent.Comp.CurrentCookTime >= ent.Comp.TimeToCook)
         {
-            var newEnt = EntityManager.Spawn(ent.Comp.CookingResult,
-                _transformSystem.GetMapCoordinates(ent));
+            var newEnt = Spawn(ent.Comp.CookingResult, _transformSystem.GetMapCoordinates(ent));
 
             _audio.PlayPvs(ent.Comp.CookingDoneSound, newEnt);
 

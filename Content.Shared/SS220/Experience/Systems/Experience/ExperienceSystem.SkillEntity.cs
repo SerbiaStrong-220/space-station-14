@@ -123,7 +123,7 @@ public sealed partial class ExperienceSystem : EntitySystem
 
         var oldSkillEntity = skillContainer?.ContainedEntity;
 
-        EntityManager.DeleteEntity(oldSkillEntity);
+        Del(oldSkillEntity);
         if (oldSkillEntity is null)
             return;
 
