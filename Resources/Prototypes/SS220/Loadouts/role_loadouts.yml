@@ -117,7 +117,7 @@
   - MedicalNeck
 # - MedicalGlasses #SS220-TwoOne-Floppa-Iteration
   - SeniorMedicalJumpsuit
-  - MedicalsGloves
+# - MedicalsGloves #SS220 removing gloves from Wizards
   - MedicalsBackpack
   - MedicalsMask
   - SeniorMedicalOuterClothing
@@ -137,7 +137,7 @@
   - BrigmedicGlasses #SS220-TwoOne-Floppa-Iteration
   - BrigmedicMask
   - BrigmedicJumpsuit
-  - MedicalGloves
+# - MedicalGloves #SS220 removing gloves from Wizards
   - BrigmedicBackpack
   - SurvivalBrigMedic #SS220-Brigmedic SurvivalBox Fix
   - BrigmedicOuterClothing
