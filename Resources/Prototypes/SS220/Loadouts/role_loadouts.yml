@@ -129,6 +129,7 @@
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
 
+  # Бригемдик
 - type: roleLoadout
   id: JobBrigmedic
   groups:
