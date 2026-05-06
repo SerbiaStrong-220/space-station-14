@@ -45,6 +45,14 @@
   components:
   - type: BallisticAmmoProvider
     proto: FullRifleCartridgeAP
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#65fe08"
 
 - type: entity
   id: MagazineFullRifleIncendiary
@@ -53,6 +61,14 @@
   components:
   - type: BallisticAmmoProvider
     proto: FullRifleCartridgeIncendiary
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#dbdbdb"
 
 - type: entity
   id: MagazineFullRifleAPM2
@@ -61,3 +77,11 @@
   components:
   - type: BallisticAmmoProvider
     proto: FullRifleCartridgeAPM2
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#9500ff"

@@ -1,17 +1,25 @@
-using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.SS220.MartialArts;
+using Content.Shared.Stacks;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Containers;
+using Robust.Shared.Map;
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
+using System.Security.Cryptography;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
 public abstract partial class SharedGunSystem
 {
+    [Dependency] private readonly SharedTransformSystem _transform = null!;
+
     protected virtual void InitializeChamberMagazine()
     {
         SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, ComponentStartup>(OnChamberStartup);
@@ -26,6 +34,8 @@ public abstract partial class SharedGunSystem
         SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, GetVerbsEvent<ActivationVerb>>(OnChamberActivationVerb);
         SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, GetVerbsEvent<InteractionVerb>>(OnChamberInteractionVerb);
         SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, GetVerbsEvent<AlternativeVerb>>(OnMagazineVerb);
+
+        SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, InteractUsingEvent>(OnInteractUsing); //SS220 weapon overhaul
 
         SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, EntInsertedIntoContainerMessage>(OnMagazineSlotChange);
         SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, EntRemovedFromContainerMessage>(OnMagazineSlotChange);
@@ -112,6 +122,77 @@ public abstract partial class SharedGunSystem
             }
         });
     }
+
+    //SS220 weapon overhaul begin
+    private void OnInteractUsing(Entity<ChamberMagazineAmmoProviderComponent> ent, ref InteractUsingEvent args)
+    {
+        if (args.Handled ||
+            args.Used == args.Target ||
+            Deleted(args.Target) ||
+            !TryComp<BallisticAmmoProviderComponent>(args.Used, out var usedComponent) ||
+            !usedComponent.MayTransfer ||
+            usedComponent.Whitelist == null)
+        {
+            return;
+        }
+
+        args.Handled = true;
+
+        // Continuous loading
+        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, args.User, usedComponent.FillDelay, new AmmoFillDoAfterEvent(), used: args.Used, target: args.Target, eventTarget: ent.Owner)
+        {
+            BreakOnMove = false, // 220 ammoFillFix
+            BreakOnDamage = false,
+            NeedHand = true,
+        });
+    }
+
+    private void OnChamberMagAmmoFillDoAfter(Entity<ChamberMagazineAmmoProviderComponent> ent, AmmoFillDoAfterEvent args)
+    {
+        if (!TryComp<BallisticAmmoProviderComponent>(args.Used, out var usedComp) || (usedComp.Entities.Count <= 0 && usedComp.UnspawnedCount <= 0))
+            return;
+
+        if (!ent.Comp.CanBeLoadedThroughChamber)
+            return;
+
+        if (ent.Comp.BoltClosed == null || (bool)ent.Comp.BoltClosed)
+            return;
+
+        var magEnt = GetMagazineEntity(ent.Owner);
+
+        if (!TryComp<BallisticAmmoProviderComponent>(magEnt, out var magComp) || magComp.Entities.Count >= magComp.Capacity)
+            return;
+
+        var chamberEnt = GetChamberEntity(ent.Owner);
+
+        if (chamberEnt != null)
+        {
+            magComp.Entities.Add((EntityUid)chamberEnt);
+            Containers.Insert((EntityUid)chamberEnt, magComp.Container);
+        }
+
+        if (usedComp.Entities.Count <= 0)
+        {
+            usedComp.UnspawnedCount--;
+            DirtyField<BallisticAmmoProviderComponent>(((EntityUid)args.Used, usedComp), nameof(BallisticAmmoProviderComponent.UnspawnedCount));
+            var newAmmoEntity = Spawn(usedComp.Proto, _transform.GetMapCoordinates(ent));
+            TryInsertChamber(ent, newAmmoEntity);
+            Dirty((EntityUid)args.Used, usedComp);
+            Dirty(ent);
+            Dirty((EntityUid)magEnt, magComp);
+            UpdateAmmoCount(ent);
+            return;
+        }
+        if (TryInsertChamber(ent.Owner, usedComp.Entities[^1]))
+        {
+            usedComp.Entities.Remove(usedComp.Entities[^1]);
+            Dirty((EntityUid)args.Used, usedComp);
+            Dirty(ent);
+            Dirty((EntityUid)magEnt, magComp);
+            UpdateAmmoCount(ent);
+        }
+    }
+    //SS220 weapon overhaul end
 
     /// <summary>
     /// Updates the bolt to its new state

@@ -44,6 +44,7 @@ using Robust.Shared.Timing;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
+using System.Security.Cryptography;
 using ItemToggleMeleeWeaponComponent = Content.Shared.Item.ItemToggle.Components.ItemToggleMeleeWeaponComponent;
 
 namespace Content.Shared.Weapons.Melee;
@@ -575,10 +576,10 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         if (TryComp<AltBlockingUserComponent>(target, out var blockcomp))
         {
-            var fromMap = TransformSystem.GetMapCoordinates(user);
-            var toMap = TransformSystem.GetMapCoordinates(target.Value);
+            var attackerPos = TransformSystem.GetWorldPosition(user);
+            var targetPos = TransformSystem.GetWorldPosition(target.Value);
 
-            Angle HitAngle = (toMap.Position - fromMap.Position).ToWorldAngle() + new Angle(Math.PI);
+            Angle HitAngle = new Angle(new Vector2(targetPos.X - attackerPos.X, targetPos.Y - attackerPos.Y)) - new Angle(Math.PI / 2);
 
             var meleeBlockEvent = new MeleeHitBlockAttemptEvent();
 
@@ -747,10 +748,10 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             //SS220 shield rework begin
             if (TryComp<AltBlockingUserComponent>(entity, out var blockcomp))
             {
-                var fromMap = TransformSystem.GetMapCoordinates(user);
-                var toMap = TransformSystem.GetMapCoordinates(entity);
+                var attackerPos = TransformSystem.GetWorldPosition(user);
+                var targetPos = TransformSystem.GetWorldPosition(entity);
 
-                Angle HitAngle = (toMap.Position - fromMap.Position).ToWorldAngle() + new Angle(Math.PI);
+                Angle HitAngle = new Angle(new Vector2(targetPos.X - attackerPos.X, targetPos.Y - attackerPos.Y)) - new Angle(Math.PI / 2);
 
                 var meleeBlockEvent = new MeleeHitBlockAttemptEvent();
 
@@ -1027,10 +1028,10 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             return false;
 
         //SS220 shield rework begin
-        var fromMap = TransformSystem.GetMapCoordinates(user);
-        var toMap = TransformSystem.GetMapCoordinates(target.Value);
+        var attackerPos = TransformSystem.GetWorldPosition(user);
+        var targetPos = TransformSystem.GetWorldPosition(target.Value);
 
-        Angle HitAngle = (toMap.Position - fromMap.Position).ToWorldAngle() + new Angle(Math.PI);
+        Angle HitAngle = new Angle(new Vector2(targetPos.X - attackerPos.X, targetPos.Y - attackerPos.Y)) - new Angle(Math.PI / 2);
 
         EntityUid targetEntity = target.Value;
         if (TryComp<AltBlockingUserComponent>(target, out var blockcomp))

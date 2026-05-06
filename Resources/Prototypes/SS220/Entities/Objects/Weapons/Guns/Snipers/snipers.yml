@@ -116,7 +116,7 @@
     selectedMode: SemiAuto
     minAngle: 17
     maxAngle: 30
-    angleIncrease: 20
+    angleIncrease: 15
     angleDecay: 6 #Shorter and easier to wield
     availableModes:
       - SemiAuto

@@ -23,7 +23,7 @@
     - Back
     - suitStorage
   - type: AmmoCounter
-  #FCB realistic guns begin
+  #SS220 weapon overhaul begin
   - type: GunWieldBonus
     minAngle: -3
     maxAngle: -17
@@ -35,11 +35,12 @@
     minAngle: 17
     maxAngle: 30
     angleIncrease: 4
-    angleDecay: 8
+    angleDecay: 6
     fireRate: 0.75
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/sniper.ogg
   - type: BallisticAmmoProvider
+    autoCycle: false
     capacity: 5
     proto: FullRifleCartridge
     whitelist:
@@ -49,7 +50,7 @@
     containers:
       ballistic-ammo: !type:Container
         ents: []
-  #FCB realistic guns end
+  #SS220 weapon overhaul end
   - type: StaticPrice
     price: 500
 
@@ -92,7 +93,7 @@
       - CartridgeAntiMateriel
     capacity: 5
     proto: CartridgeAntiMateriel
-  #FCB realistic guns begin
+  #SS220 weapon overhaul begin
   - type: GunWieldBonus
     minAngle: -3
     maxAngle: -13
@@ -104,11 +105,11 @@
     minAngle: 17
     maxAngle: 30
     angleIncrease: 10
-    angleDecay: 3
+    angleDecay: 5
     fireRate: 1
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/sniper.ogg
-  #FCB realistic guns end
+  #SS220 weapon overhaul end
   - type: StaticPrice
     price: 3500
 

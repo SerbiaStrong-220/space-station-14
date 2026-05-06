@@ -75,8 +75,8 @@
   - type: GunWieldBonus
   #SS220 weapon overhaul begin
     minAngle: -4
-    maxAngle: -22
-    angleIncrease: -1.2
+    maxAngle: -18
+    angleIncrease: -0.9
   - type: GunAimable
     minAngle: -10
     maxAngle: -7
@@ -95,6 +95,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/rifle2.ogg
   - type: ChamberMagazineAmmoProvider
+    canBeLoadedThroughChamber: true
     soundRack:
       path: /Audio/Weapons/Guns/Cock/ltrifle_cock.ogg
   - type: ItemSlots
@@ -140,6 +141,22 @@
         map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
     sprite: Objects/Weapons/Guns/Rifles/carbine.rsi
+  - type: GunWieldBonus
+  #SS220 weapon overhaul start
+    minAngle: -4
+    maxAngle: -22
+    angleIncrease: -1.2
+  - type: GunAimable
+    minAngle: -8
+    maxAngle: -7
+  #SS220 weapon overhaul end
+  - type: Gun
+    minAngle: 13
+    maxAngle: 36
+  #ss220 gunmodes start
+    availableModes:
+      - FullAuto
+      - SemiAuto
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -199,7 +216,6 @@
     availableModes:
       - FullAuto
       - SemiAuto
-      - Burst
   #ss220 gunmodes end
     angleIncrease: 2.30
     angleDecay: 6 #SS220 increase-automatic-rifles-spread end

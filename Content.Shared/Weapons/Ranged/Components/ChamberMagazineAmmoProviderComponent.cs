@@ -22,6 +22,11 @@ public sealed partial class ChamberMagazineAmmoProviderComponent : MagazineAmmoP
     [DataField, AutoNetworkedField]
     public bool AutoCycle = true;
 
+    //SS220 weapon overhaul begin
+    [DataField, AutoNetworkedField]
+    public bool CanBeLoadedThroughChamber = false;
+    //SS220 weapon overhaul end
+
     /// <summary>
     /// Can the gun be racked, which opens and then instantly closes the bolt to cycle a round.
     /// </summary>

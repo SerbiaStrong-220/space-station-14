@@ -297,60 +297,6 @@
     zeroVisible: true
   - type: Appearance
 
-#SS220 weapon overhaul begin
-- type: entity
-  name: M32-OTW
-  parent: [BaseWeaponPowerCell, BaseGunWieldable, BaseSecurityContraband]
-  id: WeaponLaserCarbine
-  description: Optical Thermal Weapon Model 32. This carabine-sized pulse laser is widely used due to it being relatively cheap, easy to use and quite effective against humanoid targets.
-  components:
-  - type: Clothing
-    sprite: Objects/Weapons/Guns/Battery/laser_gun.rsi
-    quickEquip: false
-    slots:
-    - Back
-    - suitStorage
-    - Belt
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Battery/laser_gun.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-unshaded-3
-      map: ["enum.GunVisualLayers.MagUnshaded"]
-      shader: unshaded
-  - type: Item
-    sprite: Objects/Weapons/Guns/Battery/laser_gun.rsi
-  - type: GunAimable
-    minAngle: -7
-    maxAngle: -5
-  - type: Gun
-    cameraRecoilScalar: 0 #Laser weapons have effectively no recoil
-    maxAngle: 20
-    minAngle: 15 #Very low values for the same reason
-    angleIncrease: 0.09
-  - type: GunWieldBonus
-    minAngle: -5
-    maxAngle: -13
-  - type: MagazineVisuals
-    magState: mag
-    steps: 4
-    zeroVisible: true
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: Magazine
-        startingItem: WeaponPowerCell
-        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
-        whitelist:
-          tags:
-            - WeaponPowerCell
-  - type: BatteryAmmoProvider
-    proto: RedLaser
-    fireCost: 50
-#SS220 weapon overhaul end
-
 - type: entity
   name: practice laser carbine
   parent: WeaponLaserCarbine #SS220 weapon overhaul
@@ -706,9 +652,19 @@
       shader: unshaded
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/antiquelasergun.rsi
+  #SS220 weapon overhaul begin
+  - type: GunAimable
+    minAngle: -6.5
+    maxAngle: -6
   - type: Gun
+    fireRate: 1.8
+    cameraRecoilScalar: 0 #Laser weapons have effectively no recoil
+    maxAngle: 15
+    minAngle: 9 #Very low values for the same reason
+    angleIncrease: 0.09 #Basically the force of a finger pulling the trigger
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+  #SS220 weapon overhaul end
   - type: BatteryAmmoProvider
     proto: RedMediumLaser
     fireCost: 100
@@ -757,9 +713,19 @@
       shader: unshaded
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/advancedlasergun.rsi
+  #SS220 weapon overhaul begin
+  - type: GunAimable
+    minAngle: -6.5
+    maxAngle: -6
   - type: Gun
+    fireRate: 1.8
+    cameraRecoilScalar: 0 #Laser weapons have effectively no recoil
+    maxAngle: 15
+    minAngle: 9 #Very low values for the same reason
+    angleIncrease: 0.09 #Basically the force of a finger pulling the trigger
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+  #SS220 weapon overhaul end
   - type: BatteryAmmoProvider
     proto: RedMediumLaser
     fireCost: 100
@@ -793,9 +759,19 @@
       shader: unshaded
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/laser_revolver.rsi
+  #SS220 weapon overhaul begin
+  - type: GunAimable
+    minAngle: -6.5
+    maxAngle: -6
   - type: Gun
+    fireRate: 1.8
+    cameraRecoilScalar: 0 #Laser weapons have effectively no recoil
+    maxAngle: 15
+    minAngle: 9 #Very low values for the same reason
+    angleIncrease: 0.09 #Basically the force of a finger pulling the trigger
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+  #SS220 weapon overhaul end
   - type: BatteryAmmoProvider
     proto: RedMediumLaser
     #ss220 add stun mode begin
@@ -850,12 +826,21 @@
     zeroVisible: false
   - type: Clothing
     sprite: Objects/Weapons/Guns/Revolvers/chimp.rsi
+  #SS220 weapon overhaul begin
+  - type: GunAimable
+    minAngle: -6.5
+    maxAngle: -6
   - type: Gun
+    cameraRecoilScalar: 0 #Laser weapons have effectively no recoil
+    maxAngle: 15
+    minAngle: 9 #Very low values for the same reason
+    angleIncrease: 0.09 #Basically the force of a finger pulling the trigger
     canSuicide: false # SS220-new-feature kus
     projectileSpeed: 10
     fireRate: 1.5
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
+  #SS220 weapon overhaul end
   - type: BatteryAmmoProvider
     proto: AnomalousParticleDeltaStrong
     fireCost: 100
@@ -904,11 +889,19 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
+  #SS220 weapon overhaul begin
+  - type: GunAimable
+    minAngle: -6.5
+    maxAngle: -6
   - type: Gun
-    canSuicide: false #SS220-new-feature kus
     fireRate: 1
+    cameraRecoilScalar: 0 #Laser weapons have effectively no recoil
+    maxAngle: 15
+    minAngle: 9 #Very low values for the same reason
+    angleIncrease: 0.09 #Basically the force of a finger pulling the trigger
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_clown.ogg
+  #SS220 weapon overhaul end
   - type: BatteryAmmoProvider
     proto: RedMediumLaser
     fireCost: 100
