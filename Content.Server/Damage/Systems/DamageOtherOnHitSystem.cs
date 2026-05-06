@@ -1,8 +1,7 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared.Camera;
-using Content.Shared.CombatMode.Pacification;
-using Content.Shared.Damage;
+using System.Numerics;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
@@ -46,7 +45,9 @@ public sealed class DamageOtherOnHitSystem : SharedDamageOtherOnHitSystem
         // SS220-add-miss-chance-?-end
 
         //SS220 shield rework begin
-        var blockEv = new ThrowableProjectileBlockAttemptEvent(component.Damage, _transformSystem.GetWorldRotation(uid) + new Angle(Math.PI));
+        var itemPos = _transformSystem.GetWorldPosition(uid);
+        var targetPos = _transformSystem.GetWorldPosition(args.Target);
+        var blockEv = new ThrowableProjectileBlockAttemptEvent(component.Damage, new Angle(new Vector2(targetPos.X - itemPos.X, targetPos.Y - itemPos.Y)) - new Angle(Math.PI / 2));
 
         RaiseLocalEvent(args.Target, ref blockEv);
         if (blockEv.CancelledHit)
