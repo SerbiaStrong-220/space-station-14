@@ -98,3 +98,10 @@
     Plastic: 300
     Gold: 200
     Silver: 200
+
+- type: latheRecipe
+  parent: [ BaseGoldCircuitboardRecipe, BaseMachineRecipeCategory ]
+  id: ShuttleGunMLGSWCircuitboard
+  result: ShuttleGunMLGSWCircuitboard
+  completetime: 12
+  
