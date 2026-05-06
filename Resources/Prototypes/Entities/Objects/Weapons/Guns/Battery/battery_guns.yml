@@ -346,7 +346,7 @@
         whitelist:
           tags:
             - WeaponPowerCell
-  - type: HitscanBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: RedLaser
     fireCost: 50
 #SS220 weapon overhaul end

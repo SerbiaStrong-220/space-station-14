@@ -62,10 +62,7 @@
   parent: BaseCartridgeRifle
   id: CartridgeRifleUranium
   name: cartridge (.20 rifle uranium)
-
-  parent: BaseCartridgeRifle
-  description: A modern intermediate cartridge for combat rifles. Uranium ammunition replaces the steel core of the bullet with fissile material, vastly increasing armour-piercing capabilities.
-
+  description: A modern intermediate cartridge for combat rifles. Uranium ammunition replaces the lead core of the bullet with fissile material, irradiating targets from the inside.
   components:
   - type: CartridgeAmmo
     proto: BulletRifleUranium

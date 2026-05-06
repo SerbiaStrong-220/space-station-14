@@ -187,17 +187,9 @@
     projectileSpeed: 35
     availableModes:
       - SemiAuto
-<<<<<<< HEAD
-  - type: ProjectileBatteryAmmoProvider
-    proto: BulletBlasterBolt
-    fireCost: 62.5
-=======
-      - Burst
-      - FullAuto
   - type: BatteryAmmoProvider
     proto: BulletBlasterPulse
     fireCost: 87.5
->>>>>>> master
   - type: BatteryWeaponFireModes
     fireModes:
       - proto: BulletBlasterBolt
@@ -329,6 +321,96 @@
           tags:
             - LaserCarabinePowerCell
 
+- type: entity
+  name: Devastator
+  parent: WeaponBlasterKRS
+  id: WeaponPlasmaPistolDevastator
+  description: "An outdated energy weapon firing EM-contained ionised gas. \nWhile it is a common antimaterial weapon of many well-equipped militaries it's a rare thing here in Tigarden."
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Battery/energy_magnum.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-unshaded-1
+      visible: false
+      map: [ "enum.GunVisualLayers.MagUnshaded" ]
+      shader: unshaded
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Battery/energy_magnum.rsi
+  - type: Gun
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+    projectileSpeed: 30
+  - type: GasWeapon
+    tankSlot: cell_slot
+    gasUsage: 0.03
+  - type: BatteryAmmoProvider
+    proto: BulletPlasma
+    fireCost: 1000
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: Magazine
+        startingItem: PowerCellBlaster
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        whitelist:
+          tags:
+            - PowerCellBlaster
+
+- type: entity
+  name: M32-OTW-P
+  parent: [BaseWeaponPowerCellSmall, BaseSecurityContraband]
+  id: WeaponLaserPistol
+  description: Model 32 Optical Thermal Weapon - Pistol. This pistol-like pulse laser is widely used due to it being relatively cheap, easy to use and quite effective against humanoid targets.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Battery/laser_pistol.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-3
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: GunAimable
+    minAngle: -6.5
+    maxAngle: -6
+  - type: Gun
+    fireRate: 1.8
+    cameraRecoilScalar: 0 #Laser weapons have effectively no recoil
+    maxAngle: 15
+    minAngle: 9 #Very low values for the same reason
+    angleIncrease: 0.09 #Basically the force of a finger pulling the trigger
+  - type: Item
+    shape:
+    - 0,0,1,0
+    - 0,1,0,1
+    storedOffset: 0,-7
+    sprite: SS220/Objects/Weapons/Guns/Battery/laser_pistol.rsi
+  - type: MagazineVisuals
+    magState: mag
+    steps: 4
+    zeroVisible: true
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: Magazine
+        startingItem: WeaponPowerCell
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        whitelist:
+          tags:
+            - WeaponPowerCell
+  - type: BatteryAmmoProvider
+    proto: RedLaser
+    fireCost: 70
+
 # Новые прототипы пишите выше
 # Death Squad
 - type: entity
@@ -410,50 +492,3 @@
       gunModifiers:
         soundGunshot: /Audio/SS220/Weapons/Guns/Gunshots/hidg_rifle.ogg
       magState: heal-mag
-
-- type: entity
-  name: M32-OTW-P
-  parent: [BaseWeaponPowerCellSmall, BaseSecurityContraband]
-  id: WeaponLaserPistol
-  description: Model 32 Optical Thermal Weapon - Pistol. This pistol-like pulse laser is widely used due to it being relatively cheap, easy to use and quite effective against humanoid targets.
-  components:
-  - type: Sprite
-    sprite: SS220/Objects/Weapons/Guns/Battery/laser_pistol.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-unshaded-3
-      map: ["enum.GunVisualLayers.MagUnshaded"]
-      shader: unshaded
-  - type: GunAimable
-    minAngle: -6.5
-    maxAngle: -6
-  - type: Gun
-    fireRate: 1.8
-    cameraRecoilScalar: 0 #Laser weapons have effectively no recoil
-    maxAngle: 15
-    minAngle: 9 #Very low values for the same reason
-    angleIncrease: 0.09 #Basically the force of a finger pulling the trigger
-  - type: Item
-    shape:
-    - 0,0,1,0
-    - 0,1,0,1
-    storedOffset: 0,-7
-    sprite: SS220/Objects/Weapons/Guns/Battery/laser_pistol.rsi
-  - type: MagazineVisuals
-    magState: mag
-    steps: 4
-    zeroVisible: true
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: Magazine
-        startingItem: WeaponPowerCell
-        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
-        whitelist:
-          tags:
-            - WeaponPowerCell
-  - type: HitscanBatteryAmmoProvider
-    proto: RedLaser
-    fireCost: 70
