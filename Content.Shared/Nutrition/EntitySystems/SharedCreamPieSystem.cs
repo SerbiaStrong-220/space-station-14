@@ -1,3 +1,4 @@
+using Content.Shared.SS220.InstastunResist;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Fluids;
@@ -5,7 +6,6 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
-using Content.Shared.SS220.InstastunResist;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Trigger.Components;
@@ -114,6 +114,13 @@ public abstract class SharedCreamPieSystem : EntitySystem
 
     private void OnCreamPieHit(Entity<CreamPieComponent> ent, ref ThrowDoHitEvent args)
     {
+        //SS220 instastun resist begin
+        var resistEv = new StunAttemptEvent(StunSource.Creampie);
+        RaiseLocalEvent(ent.Owner, ref resistEv);
+
+        if (resistEv.StunCancelled)
+            return;
+        //SS220 instastun resist end
         SplatCreamPie(ent);
     }
 

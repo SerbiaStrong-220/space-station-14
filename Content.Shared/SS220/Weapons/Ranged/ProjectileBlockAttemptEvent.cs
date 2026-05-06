@@ -5,7 +5,7 @@ using Content.Shared.Projectiles;
 namespace Content.Shared.SS220.Weapons.Ranged.Events;
 
 [ByRefEvent]
-public record struct ProjectileBlockAttemptEvent(EntityUid ProjUid, ProjectileComponent Component, bool Cancelled, DamageSpecifier damage, Angle ProjAngle)
+public record struct ProjectileBlockAttemptEvent(EntityUid ProjUid, bool Cancelled, DamageSpecifier damage, Angle ProjAngle)
 {
     public bool CancelledHit = false;
 

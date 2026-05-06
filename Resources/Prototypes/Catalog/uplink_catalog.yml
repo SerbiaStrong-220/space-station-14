@@ -249,6 +249,14 @@
     HardDynamic:
       Telecrystal: 7
   #ss220 dynamic-price end
+<<<<<<< HEAD
+=======
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+>>>>>>> shield_rework_finished
 
 - type: listing
   id: uplinkRiggedBoxingGloves

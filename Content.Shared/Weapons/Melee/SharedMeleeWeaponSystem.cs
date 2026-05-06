@@ -630,7 +630,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEvent.BonusDamage, hitEvent.ModifiersList);
 
-        if (Damageable.TryChangeDamage(targetEntity, modifiedDamage, out var damageResult, origin:user, ignoreResistances:resistanceBypass))
+        if (Damageable.TryChangeDamage(targetEntity, modifiedDamage, out var damageResult, origin:user, ignoreResistances:resistanceBypass)) //SS220 shield rework
         {
             // If the target has stamina and is taking blunt damage, they should also take stamina damage based on their blunt to stamina factor
             if (damageResult.DamageDict.TryGetValue("Blunt", out var bluntDamage))
@@ -735,7 +735,6 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         }
 
         var targets = new List<EntityUid>();
-
         var damageQuery = GetEntityQuery<DamageableComponent>();
         var targetseffectonly = new List<EntityUid>();//SS220 shield rework
 

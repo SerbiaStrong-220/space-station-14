@@ -10,6 +10,7 @@ using Content.Shared.Database;
 using Content.Shared.FixedPoint;
 using Content.Shared.Projectiles;
 using Content.Shared.SS220.AltArmor.Components;
+using Content.Shared.SS220.Projectiles.Components;
 using Content.Shared.SS220.Weapons.Ranged.Events;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
@@ -51,10 +52,17 @@ public sealed class ProjectileSystem : SharedProjectileSystem
 
         //SS220 shield rework begin
         var projectileAngle = _transform.GetWorldRotation(uid);
-        var blockattemptEv = new ProjectileBlockAttemptEvent(uid, component, false, component.Damage, (projectileAngle + new Angle(Math.PI)).Reduced());
+        var blockattemptEv = new ProjectileBlockAttemptEvent(uid, false, component.Damage, (projectileAngle + new Angle(Math.PI)).Reduced());
         RaiseLocalEvent(target, ref blockattemptEv);
         if (blockattemptEv.CancelledHit)
         {
+            if(TryGetNetEntity(target, out var netTarget))
+            {
+                EnsureComp<BlockedProjectileComponent>(uid, out var blockedComp);
+                blockedComp.BlockerEntity = netTarget;
+                Dirty(uid, blockedComp);
+            }
+
             SetShooter(uid, component, target);
             QueueDel(uid);
 

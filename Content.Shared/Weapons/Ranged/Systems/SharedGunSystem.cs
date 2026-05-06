@@ -37,10 +37,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
-using Content.Shared.DoAfter;
-using Content.Shared.Standing;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
