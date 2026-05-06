@@ -100,7 +100,7 @@ public sealed class AltArmorSystem : EntitySystem
         }
     }
 
-    public FixedPoint2 CountDifference(Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2> dict, FixedPoint2 damage, FixedPoint2 resist,string type, FixedPoint2 piercing, FixedPoint2 durabilityCoefficient)
+    public FixedPoint2 CountDifference(Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2> dict, FixedPoint2 damage, FixedPoint2 resist, ProtoId<DamageTypePrototype> type, FixedPoint2 piercing, FixedPoint2 durabilityCoefficient)
     {
         resist *= durabilityCoefficient;
         resist = FixedPoint2.Max(resist - piercing, FixedPoint2.Zero);

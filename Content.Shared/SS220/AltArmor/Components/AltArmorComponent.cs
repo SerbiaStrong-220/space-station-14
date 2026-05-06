@@ -1,6 +1,8 @@
 // © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.AltArmor.Components;
 
@@ -13,19 +15,19 @@ public sealed partial class AltArmorComponent : Component
     /// The damage tresholds(a.k.a. resists)
     /// </summary>
     [DataField("tresholddict"), AutoNetworkedField]
-    public Dictionary<string, FixedPoint2> TresholdDict = new Dictionary<string, FixedPoint2>();
+    public Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2> TresholdDict = new Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2>();
 
     /// <summary>
     /// A list of armor damage tresholds(a.k.a. resist of the armor itself)
     /// </summary>
     [DataField("durabilitytresholddict"), AutoNetworkedField]
-    public Dictionary<string, FixedPoint2> DurabilityTresholdDict = new Dictionary<string, FixedPoint2>();
+    public Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2> DurabilityTresholdDict = new Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2>();
 
     /// <summary>
     /// Specifies what types of damage should be converted to others
     /// </summary>
     [DataField("conversiondict"), AutoNetworkedField]
-    public Dictionary<string, string> TransformSpecifierDict = new Dictionary<string, string>();
+    public Dictionary<ProtoId<DamageTypePrototype>, ProtoId<DamageTypePrototype>> TransformSpecifierDict = new Dictionary<ProtoId<DamageTypePrototype>, ProtoId<DamageTypePrototype>>();
 
     /// <summary>
     /// Does damage on this entity affect it's protection
