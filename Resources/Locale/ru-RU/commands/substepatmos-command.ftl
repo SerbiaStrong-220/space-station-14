@@ -20,4 +20,4 @@ cmd-substepatmos-info-implicitly-paused-simulation = Неявно приоста
 
 cmd-substepatmos-info-substepped-grid = Выполнен один шаг (atmostick) симуляции атмосферы на {$grid}.
 
-cmd-substepatmos-completion-grid-substep = EntityUid грида, для которой вы хотите выполнить шаг. Автоматически использует шрид, на которои вы стоите, если пусто.
+cmd-substepatmos-completion-grid-substep = EntityUid грида, для которого вы хотите выполнить шаг. Автоматически использует грид, на котором вы стоите, если пусто.

@@ -14,12 +14,12 @@ cmd-changecvar-available-cvars = Список доступных cvar:
 
 cmd-changecvar-no-cvars = Не найдено cvar, которые вам разрешено изменять.
 
-cmd-changecvar-success = Cvar { $cvar } изменен с "{ $old }" на "{ $value }".
+cmd-changecvar-success = Cvar { $cvar } изменён с "{ $old }" на "{ $value }".
 
 cmd-changecvar-search-no-arguments = Вы должны указать поисковый запрос.
 
 cmd-changecvar-search-no-matches = Не найдено cvar, соответствующих поисковому запросу.
 
-cmd-changecvar-search-matches = Найдено {$count} cvar, соответствующих поисковому запросу:
+cmd-changecvar-search-matches = Найдено { $count } cvar, соответствующих поисковому запросу:
 
 cmd-changecvar-arg-name = <имя | ? | поиск>

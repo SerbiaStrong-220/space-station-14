@@ -538,6 +538,6 @@ figurines-mech-generic-1 = Системы онлайн.
 
 figurines-mech-generic-2 = Вызывали кавалерию?!
 
-figurines-mech-generic-3 = Армагедон отменяется. На очереди аппокалипсис!!
+figurines-mech-generic-3 = Армагеддон отменяется. На очереди апокалипсис!!
 
 figurines-mech-generic-4 = Завтра.
