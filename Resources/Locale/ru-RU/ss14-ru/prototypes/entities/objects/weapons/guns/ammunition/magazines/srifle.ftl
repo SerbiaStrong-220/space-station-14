@@ -1,11 +1,23 @@
-ent-MagazineSRifleBase = магазин (.20 винтовочный)\n  .desc = { ent-BaseItem.desc }\n  .suffix = { "" }
+ent-MagazineSRifleBase = магазин (.20 винтовочный)
+    .desc = { ent-BaseItem.desc }
+    .suffix = { "" }
 
-ent-MagazineSRifle = магазин (.20 винтовочный)\n  .desc = { ent-MagazineSRifleBase.desc }\n  .suffix = { "" }
+ent-MagazineSRifle = магазин (.20 винтовочный)
+    .desc = { ent-MagazineSRifleBase.desc }
+    .suffix = { "" }
 
-ent-MagazineSRifleFlash = магазин (.20 винтовочный светошумовой)\n  .desc = { ent-MagazineSRifleBase.desc }\n  .suffix = { "" }
+ent-MagazineSRifleFlash = магазин (.20 винтовочный светошумовой)
+    .desc = { ent-MagazineSRifleBase.desc }
+    .suffix = { "" }
 
-ent-MagazineSRifleHV = магазин (.20 винтовочный высокоскоростной)\n  .desc = { ent-MagazineSRifleBase.desc }\n  .suffix = { "" }
+ent-MagazineSRifleHV = магазин (.20 винтовочный высокоскоростной)
+    .desc = { ent-MagazineSRifleBase.desc }
+    .suffix = { "" }
 
-ent-MagazineSRiflePractice = магазин (.20 винтовочный учебный)\n  .desc = { ent-MagazineSRifleBase.desc }\n  .suffix = { "" }
+ent-MagazineSRiflePractice = магазин (.20 винтовочный учебный)
+    .desc = { ent-MagazineSRifleBase.desc }
+    .suffix = { "" }
 
-ent-MagazineSRifleRubber = магазин (.20 винтовочный резиновый)\n  .desc = { ent-MagazineSRifleBase.desc }\n  .suffix = { "" }
+ent-MagazineSRifleRubber = магазин (.20 винтовочный резиновый)
+    .desc = { ent-MagazineSRifleBase.desc }
+    .suffix = { "" }
