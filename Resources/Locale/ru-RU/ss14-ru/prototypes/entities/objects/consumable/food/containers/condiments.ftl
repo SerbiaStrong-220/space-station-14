@@ -30,12 +30,12 @@ ent-FoodCondimentPacketSugar = сахар
     .desc = Вкусный космический сахар!
 ent-BaseFoodCondimentBottle = бутылка приправы
     .desc = Тонкостенная стеклянная бутылка, используемая для хранения приправ.
-ent-FoodCondimentBottleVinegar = бутылка уксуса
-    .desc = Используется в кулинарии для усиления вкуса.
 ent-FoodCondimentBottleColdsauce = бутылка холодящего соуса
     .desc = Заставляет язык онеметь.
 ent-FoodCondimentBottleEnzyme = универсальный фермент
     .desc = Используется в приготовлении различных блюд.
+ent-FoodCondimentBottleVinegar = бутылка уксуса
+    .desc = Используется в кулинарии для усиления вкуса.
 ent-FoodCondimentBottleHotsauce = бутылка жгучего соуса
     .desc = Вы почти ощущаете вкус язвы желудка!
 ent-FoodCondimentBottleKetchup = бутылка кетчупа
@@ -48,5 +48,3 @@ ent-FoodShakerSalt = солонка
     .desc = Соль. Из космических океанов, предположительно.
 ent-FoodShakerPepper = перечница
     .desc = Часто используется как приправа к пище, или чтобы заставить людей чихать.
-
-ent-FoodCondimentPacketFrostoil = колдсоус\n  .desc = Холодный соус. Оставляет язык онемевшим после употребления.

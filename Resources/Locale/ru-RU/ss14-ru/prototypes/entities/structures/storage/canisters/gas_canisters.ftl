@@ -44,13 +44,11 @@ ent-PlasmaCanisterBroken = { ent-GasCanisterBrokenBase }
     .desc = { ent-GasCanisterBrokenBase.desc }
 ent-TritiumCanisterBroken = { ent-GasCanisterBrokenBase }
     .desc = { ent-GasCanisterBrokenBase.desc }
-ent-WaterVaporCanisterBroken = { ent-GasCanisterBrokenBase }
+ent-WaterVaporCanisterBroken = разбитая канистра водяного пара
     .desc = { ent-GasCanisterBrokenBase.desc }
-ent-MiasmaCanisterBroken = { ent-GasCanisterBrokenBase }
+ent-AmmoniaCanisterBroken = { ent-GasCanisterBrokenBase }
     .desc = { ent-GasCanisterBrokenBase.desc }
 ent-NitrousOxideCanisterBroken = { ent-GasCanisterBrokenBase }
     .desc = { ent-GasCanisterBrokenBase.desc }
 ent-FrezonCanisterBroken = { ent-GasCanisterBrokenBase }
     .desc = { ent-GasCanisterBrokenBase.desc }
-
-ent-MiasmaCanister = { ent-GasCanister }\n  .desc = { ent-GasCanister.desc }

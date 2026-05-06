@@ -42,7 +42,3 @@ ent-FoodDonkpocketMoth = моль-покет
     .desc = Безумная серия донк-покетов, содзанная во время массовых протестов пр-... Да какая разница? Просто донк-покеты для молей.
 ent-FoodDonkpocketMothWarm = тёплый моль-покет
     .desc = { ent-FoodDonkpocketMoth.desc }
-
-ent-FoodDonkpocketGondola = донк-покет с гондолой\n  .desc = Выбор использовать в рецепте настоящее мясо гондолы вызывает, мягко говоря, споры.
-
-ent-FoodDonkpocketGondolaWarm = теплый донк-покет с гондолой\n  .desc = { ent-FoodDonkpocketGondola.desc }

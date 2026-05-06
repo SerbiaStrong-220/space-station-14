@@ -5,7 +5,3 @@ ent-AmeControllerUnanchored = { ent-AmeController }
     .suffix = Не закреплено
 ent-AmeShielding = экранирование ДАМ
     .desc = Впускает антиматерию и выпускает материю.
-
-ent-AMEController = контроллер ДАМ\n  .desc = Это контроллер для двигателя на антиматерии.
-
-ent-AMEShielding = экранирование ДАМ\n  .desc = Удерживает антиматерию внутри, а материю снаружи.

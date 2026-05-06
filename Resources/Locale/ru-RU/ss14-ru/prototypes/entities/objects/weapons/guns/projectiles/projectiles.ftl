@@ -90,6 +90,8 @@ ent-BulletCannonBall = пушечное ядро
     .desc = { ent-BaseBulletTrigger.desc }
 ent-GrapplingHook = якорь
     .desc = { "" }
+ent-StickyHandPalm = ладонь руки липучки
+    .desc = { ent-GrapplingHook.desc }
 ent-BulletDisablerSmg = заряд станнера-пулемёта
     .desc = { ent-BaseBullet.desc }
 ent-BulletEnergyTurretBase = энергетический заряд
@@ -114,5 +116,3 @@ ent-BulletLaserWindowPiercingMagnum = пролетающий окна заряд
     .desc = { ent-BulletLaser.desc }
 ent-EnergyCrossbowBolt = энергозаряд
     .desc = Будет больно.
-
-ent-BaseBulletHighVelocity = базовая высокоскоростная пуля\n  .desc = { ent-BaseBullet.desc }

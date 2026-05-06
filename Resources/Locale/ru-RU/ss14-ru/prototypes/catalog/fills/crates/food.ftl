@@ -17,8 +17,4 @@ ent-CrateFoodIceCream = доставка мороженого
 ent-CrateFoodSnowcone = доставка снежных конусов
     .desc = Холодильник, заполненный освежающими снежными конусами для трудолюбивого или даже ленивого экипажа! Включает 16 снежных конусов.
 ent-CrateFoodHappyHonkBigBite = доставка обедов Хэппи Хонк
-    .desc = Два заполненных обеда Хэппи Хонк Большой бургер, которые дополняют сырные фри, бутылка Космо Колы, кусочек яблочного пирога и игрушка!
-
-ent-CrateFoodPizzaLarge = { ent-CratePlastic }\n  .desc = { ent-CratePlastic.desc }
-
-ent-CrateFoodSoftdrinksLarge = { ent-CratePlastic }\n  .desc = { ent-CratePlastic.desc }
+    .desc = Два заполненных обеда Хэппи Хонк Большой бургер, которых дополняют сырные фри, бутылка Космо Колы, кусочек яблочного пирога и игрушка!

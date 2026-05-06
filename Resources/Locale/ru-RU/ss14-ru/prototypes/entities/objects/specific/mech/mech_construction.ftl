@@ -48,7 +48,3 @@ ent-BaseVimPartItem = { ent-BaseVimPart }
     .desc = { ent-BaseVimPart.desc }
 ent-VimHarness = каркас ВИМ
     .desc = Небольшой кронштейн для крепления частей ВИМ.
-
-ent-RipleyChassis = шасси Рипли\n  .desc = Незавершенная конструкция меха Ripley APLU.
-
-ent-HonkerChassis = шасси H.O.N.K.\n  .desc = Незавершенная конструкция меха H.O.N.K. Содержит блок хихиканья, бананиумовое ядро и системы поддержки хонка.
