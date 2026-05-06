@@ -93,6 +93,8 @@
       amount: 3
     - id: MaterialGoliathHide1
       amount: 3
+    - id: MaterialBones1 #SS220-GoliathDrop-Tweak
+      amount: 1 #SS220-GoliathDrop-Tweak
 
 - type: entity
   parent: BaseAction
