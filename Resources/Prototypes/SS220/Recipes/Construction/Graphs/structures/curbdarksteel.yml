@@ -33,54 +33,54 @@
             amount: 2
             doAfter: 2
 
-    - node: curbDarkSteel
-      entity: CurbDarkSteelDecoration
-      edges:
-        - to: start
-          completed:
-            - !type:SpawnPrototype
-              prototype: SheetSteel1
-              amount: 1
-            - !type:DeleteEntity
-          steps:
-            - tool: Screwing
-              doAfter: 0.25
+  - node: curbDarkSteel
+    entity: CurbDarkSteelDecoration
+    edges:
+      - to: start
+        completed:
+          - !type:SpawnPrototype
+            prototype: SheetSteel1
+            amount: 1
+          - !type:DeleteEntity
+        steps:
+          - tool: Screwing
+            doAfter: 0.25
 
-    - node: curbDarkSteelCorner
-      entity: CurbDarkSteelCornerDecoration
-      edges:
-        - to: start
-          completed:
-            - !type:SpawnPrototype
-              prototype: SheetSteel1
-              amount: 2
-            - !type:DeleteEntity
-          steps:
-            - tool: Screwing
-              doAfter: 0.5
+  - node: curbDarkSteelCorner
+    entity: CurbDarkSteelCornerDecoration
+    edges:
+      - to: start
+        completed:
+          - !type:SpawnPrototype
+            prototype: SheetSteel1
+            amount: 2
+          - !type:DeleteEntity
+        steps:
+          - tool: Screwing
+            doAfter: 0.5
 
-    - node: curbDarkSteelCornerSmall
-      entity: CurbDarkSteelCornerSmallDecoration
-      edges:
-        - to: start
-          completed:
-            - !type:SpawnPrototype
-              prototype: SheetSteel1
-              amount: 1
-            - !type:DeleteEntity
-          steps:
-            - tool: Screwing
-              doAfter: 0.25
+  - node: curbDarkSteelCornerSmall
+    entity: CurbDarkSteelCornerSmallDecoration
+    edges:
+      - to: start
+        completed:
+          - !type:SpawnPrototype
+            prototype: SheetSteel1
+            amount: 1
+          - !type:DeleteEntity
+        steps:
+          - tool: Screwing
+            doAfter: 0.25
 
-    - node: curbDarkSteelRound
-      entity: CurbDarkSteelRoundDecoration
-      edges:
-        - to: start
-          completed:
-            - !type:SpawnPrototype
-              prototype: SheetSteel1
-              amount: 2
-            - !type:DeleteEntity
-          steps:
-            - tool: Screwing
-              doAfter: 0.5
+  - node: curbDarkSteelRound
+    entity: CurbDarkSteelRoundDecoration
+    edges:
+      - to: start
+        completed:
+          - !type:SpawnPrototype
+            prototype: SheetSteel1
+            amount: 2
+          - !type:DeleteEntity
+        steps:
+           - tool: Screwing
+             doAfter: 0.5

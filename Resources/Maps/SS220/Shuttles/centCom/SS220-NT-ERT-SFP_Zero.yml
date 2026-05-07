@@ -841,7 +841,7 @@ entities:
     - type: Transform
       pos: 0.5,4.5
       parent: 1
-- proto: CurbDarkSteelCornerSmall
+- proto: CurbDarckSteelCornerSmall
   entities:
   - uid: 87
     components:

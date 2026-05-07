@@ -1002,3 +1002,9 @@ RightFootSkeleton: OrganSkeletonPersonFootRight
 # 2026-04-13 - SS220 remove gingerbread parts
 HeadGingerbread: OrganGingerbreadHead
 LeftLegGingerbread: OrganGingerbreadLegLeft
+
+# 2026-05-07 - SS220 fix Dark Curb id
+CurbDarckSteel: CurbDarkSteel
+CurbDarckSteelCorner: CurbDarkSteelCorner
+CurbDarckSteelCornerSmall: CurbDarkSteelCornerSmall
+CurbDarckSteelRound: CurbDarkSteelRound
