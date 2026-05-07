@@ -2,36 +2,36 @@
   id: CurbWood
   start: start
   graph:
-    - node: start
-      edges:
-        - to: curbWood
-          completed:
-            - !type:SnapToGrid { }
-          steps:
-            - material: WoodPlank
-              amount: 1
-              doAfter: 2
-        - to: curbWoodCorner
-          completed:
-            - !type:SnapToGrid { }
-          steps:
-            - material: WoodPlank
-              amount: 2
-              doAfter: 2.5
-        - to: curbWoodCornerSmall
-          completed:
-            - !type:SnapToGrid { }
-          steps:
-            - material: WoodPlank
-              amount: 1
-              doAfter: 2
-        - to: curbWoodRound
-          completed:
-            - !type:SnapToGrid { }
-          steps:
-            - material: WoodPlank
-              amount: 2
-              doAfter: 2
+  - node: start
+    edges:
+      - to: curbWood
+        completed:
+          - !type:SnapToGrid { }
+        steps:
+          - material: WoodPlank
+            amount: 1
+            doAfter: 2
+      - to: curbWoodCorner
+        completed:
+          - !type:SnapToGrid { }
+        steps:
+          - material: WoodPlank
+            amount: 2
+            doAfter: 2.5
+      - to: curbWoodCornerSmall
+        completed:
+          - !type:SnapToGrid { }
+        steps:
+          - material: WoodPlank
+            amount: 1
+            doAfter: 2
+      - to: curbWoodRound
+        completed:
+          - !type:SnapToGrid { }
+        steps:
+          - material: WoodPlank
+            amount: 2
+            doAfter: 2
 
     - node: curbWood
       entity: CurbWoodDecoration

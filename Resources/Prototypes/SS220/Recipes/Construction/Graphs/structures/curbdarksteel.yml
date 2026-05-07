@@ -2,36 +2,36 @@
   id: CurbDarkSteel
   start: start
   graph:
-    - node: start
-      edges:
-        - to: curbDarkSteel
-          completed:
-            - !type:SnapToGrid { }
-          steps:
-            - material: Steel
-              amount: 1
-              doAfter: 2
-        - to: curbDarkSteelCorner
-          completed:
-            - !type:SnapToGrid { }
-          steps:
-            - material: Steel
-              amount: 2
-              doAfter: 2.5
-        - to: curbDarkSteelCornerSmall
-          completed:
-            - !type:SnapToGrid { }
-          steps:
-            - material: Steel
-              amount: 1
-              doAfter: 2
-        - to: curbDarkSteelRound
-          completed:
-            - !type:SnapToGrid { }
-          steps:
-            - material: Steel
-              amount: 2
-              doAfter: 2
+  - node: start
+    edges:
+      - to: curbDarkSteel
+        completed:
+          - !type:SnapToGrid { }
+        steps:
+          - material: Steel
+            amount: 1
+            doAfter: 2
+      - to: curbDarkSteelCorner
+        completed:
+          - !type:SnapToGrid { }
+        steps:
+          - material: Steel
+            amount: 2
+            doAfter: 2.5
+      - to: curbDarkSteelCornerSmall
+        completed:
+          - !type:SnapToGrid { }
+        steps:
+          - material: Steel
+            amount: 1
+            doAfter: 2
+      - to: curbDarkSteelRound
+        completed:
+          - !type:SnapToGrid { }
+        steps:
+          - material: Steel
+            amount: 2
+            doAfter: 2
 
     - node: curbDarkSteel
       entity: CurbDarkSteelDecoration
