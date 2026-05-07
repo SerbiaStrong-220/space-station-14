@@ -685,7 +685,7 @@ entities:
       flags: Hide
     - type: OccluderTree
     - type: Shuttle
-      fTLCooldown: 150
+      fTLCooldownOverride: 150
       dampingModifier: 0.25
     - type: RadiationGridResistance
     - type: GravityShake
