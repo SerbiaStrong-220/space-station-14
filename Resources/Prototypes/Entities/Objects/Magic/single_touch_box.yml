@@ -1,0 +1,27 @@
+﻿- type: entity
+  id: SingleTouchBox
+  name: single-touch-box
+  description: single-touch-box-desc
+  components:
+  - type: Item
+    size: Small
+  - type: Transform
+  - type: Sprite
+    sprite: Objects/Storage/boxes.rsi
+    state: box
+  - type: Physics
+    bodyType: Dynamic
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.15,-0.15,0.15,0.15"
+        density: 100
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Clickable
+  - type: InteractionOutline
+  - type: SingleTouchBox
