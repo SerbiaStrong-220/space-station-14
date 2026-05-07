@@ -24,7 +24,10 @@ public sealed partial class ChamberMagazineAmmoProviderComponent : MagazineAmmoP
 
     //SS220 weapon overhaul begin
     [DataField, AutoNetworkedField]
-    public bool CanBeLoadedThroughChamber = false;
+    public bool CanBeLoadedManually = false;
+
+    [DataField, AutoNetworkedField]
+    public bool MustBeLoadedThroughChamber = false;
     //SS220 weapon overhaul end
 
     /// <summary>

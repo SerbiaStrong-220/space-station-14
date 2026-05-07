@@ -1,9 +1,11 @@
+// © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
+
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
-using Content.Shared.SS220.ToggleableItemSlot;
 using Content.Shared.SS220.Weapons.Components;
 using Content.Shared.Tools.Systems;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.Weapons.Ranged.Systems;
 
@@ -17,13 +19,17 @@ public sealed class InternalMagazineSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<InternalMagazineComponent, InteractUsingEvent>(OnInteractUsing);
-
         SubscribeLocalEvent<InternalMagazineComponent, ComponentStartup>(OnComponentStartup);
+
+        SubscribeLocalEvent<InternalMagazineComponent, InteractUsingEvent>(OnInteractUsing);
+        SubscribeLocalEvent<InternalMagazineComponent, ChangeInternalMagasineLockStatusDoAfterEvent>(OnMagStatusChanged);
     }
 
     private void OnInteractUsing(Entity<InternalMagazineComponent> ent, ref InteractUsingEvent args)
     {
+        if (!ent.Comp.MagDetachable)
+            return;
+
         var item = args.Used;
         var user = args.User;
 
@@ -33,12 +39,7 @@ public sealed class InternalMagazineSystem : EntitySystem
         if (!HasComp<ItemSlotsComponent>(ent.Owner))
             return;
 
-        var doAfterArgs = new DoAfterArgs(EntityManager,
-            user,
-            ent.Comp.TimeToFix,
-            new ToggleableItemSlotEvent(),
-            ent.Owner,
-            item)
+        var doAfterArgs = new DoAfterArgs(EntityManager, user, ent.Comp.TimeToFix, new ChangeInternalMagasineLockStatusDoAfterEvent(), ent.Owner, item)
         {
             BreakOnDamage = true,
             BreakOnMove = true,
@@ -51,9 +52,26 @@ public sealed class InternalMagazineSystem : EntitySystem
         args.Handled = true;
     }
 
-    private void OnComponentStartup(Entity<InternalMagazineComponent> ent, ref ComponentStartup args)
+    private void OnMagStatusChanged(Entity<InternalMagazineComponent> ent, ref ChangeInternalMagasineLockStatusDoAfterEvent args)
     {
-        _itemSlots.SetLock(ent.Owner, ent.Comp.MagSlotId, ent.Comp.magFixed);
+        ent.Comp.MagFixed = !ent.Comp.MagFixed;
+
+        _itemSlots.SetLock(ent.Owner, ent.Comp.MagSlotId, ent.Comp.MagFixed);
     }
 
+    private void OnComponentStartup(Entity<InternalMagazineComponent> ent, ref ComponentStartup args)
+    {
+        _itemSlots.SetLock(ent.Owner, ent.Comp.MagSlotId, ent.Comp.MagFixed);
+    }
+
+}
+
+[Serializable, NetSerializable]
+public sealed partial class ChangeInternalMagasineLockStatusDoAfterEvent : DoAfterEvent
+{
+    public ChangeInternalMagasineLockStatusDoAfterEvent()
+    {
+    }
+
+    public override DoAfterEvent Clone() => this;
 }

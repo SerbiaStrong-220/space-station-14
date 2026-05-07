@@ -12,7 +12,7 @@ public sealed partial class InternalMagazineComponent : Component
 {
     [DataField("magSlot")]
     [ViewVariables(VVAccess.ReadWrite)]
-    public string MagSlotId = "internal_mag";
+    public string MagSlotId = "gun_magazine";
 
     [DataField]
     public ProtoId<ToolQualityPrototype> RequiredQuality = "Screwing";
@@ -22,5 +22,9 @@ public sealed partial class InternalMagazineComponent : Component
 
     [DataField]
     [AutoNetworkedField]
-    public bool magFixed = true;
+    public bool MagFixed = true;
+
+    [DataField]
+    [AutoNetworkedField]
+    public bool MagDetachable = false;
 }

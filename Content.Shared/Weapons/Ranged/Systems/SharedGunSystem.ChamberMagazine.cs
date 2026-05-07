@@ -9,10 +9,7 @@ using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Containers;
-using Robust.Shared.Map;
-using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Security.Cryptography;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -35,7 +32,8 @@ public abstract partial class SharedGunSystem
         SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, GetVerbsEvent<InteractionVerb>>(OnChamberInteractionVerb);
         SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, GetVerbsEvent<AlternativeVerb>>(OnMagazineVerb);
 
-        SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, InteractUsingEvent>(OnInteractUsing); //SS220 weapon overhaul
+        SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, AfterInteractUsingEvent>(OnInteractUsing); //SS220 weapon overhaul
+        SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, AmmoFillDoAfterEvent>(OnChamberMagAmmoFillDoAfter); //SS220 weapon overhaul
 
         SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, EntInsertedIntoContainerMessage>(OnMagazineSlotChange);
         SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, EntRemovedFromContainerMessage>(OnMagazineSlotChange);
@@ -124,7 +122,7 @@ public abstract partial class SharedGunSystem
     }
 
     //SS220 weapon overhaul begin
-    private void OnInteractUsing(Entity<ChamberMagazineAmmoProviderComponent> ent, ref InteractUsingEvent args)
+    private void OnInteractUsing(Entity<ChamberMagazineAmmoProviderComponent> ent, ref AfterInteractUsingEvent args)
     {
         if (args.Handled ||
             args.Used == args.Target ||
@@ -138,24 +136,23 @@ public abstract partial class SharedGunSystem
 
         args.Handled = true;
 
-        // Continuous loading
-        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, args.User, usedComponent.FillDelay, new AmmoFillDoAfterEvent(), used: args.Used, target: args.Target, eventTarget: ent.Owner)
+        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, args.User, usedComponent.FillDelay, new AmmoFillDoAfterEvent(), used: args.Used, target: args.Target, eventTarget: args.Target)
         {
-            BreakOnMove = false, // 220 ammoFillFix
+            BreakOnMove = false,
             BreakOnDamage = false,
             NeedHand = true,
         });
     }
 
-    private void OnChamberMagAmmoFillDoAfter(Entity<ChamberMagazineAmmoProviderComponent> ent, AmmoFillDoAfterEvent args)
+    private void OnChamberMagAmmoFillDoAfter(Entity<ChamberMagazineAmmoProviderComponent> ent, ref AmmoFillDoAfterEvent args)
     {
         if (!TryComp<BallisticAmmoProviderComponent>(args.Used, out var usedComp) || (usedComp.Entities.Count <= 0 && usedComp.UnspawnedCount <= 0))
             return;
 
-        if (!ent.Comp.CanBeLoadedThroughChamber)
+        if (!ent.Comp.CanBeLoadedManually)
             return;
 
-        if (ent.Comp.BoltClosed == null || (bool)ent.Comp.BoltClosed)
+        if (ent.Comp.BoltClosed == null || (bool)ent.Comp.BoltClosed && ent.Comp.MustBeLoadedThroughChamber)
             return;
 
         var magEnt = GetMagazineEntity(ent.Owner);
@@ -163,12 +160,54 @@ public abstract partial class SharedGunSystem
         if (!TryComp<BallisticAmmoProviderComponent>(magEnt, out var magComp) || magComp.Entities.Count >= magComp.Capacity)
             return;
 
-        var chamberEnt = GetChamberEntity(ent.Owner);
+        bool moreSpace = false;
+        bool moreAmmo = false;
 
-        if (chamberEnt != null)
+        if (ent.Comp.MustBeLoadedThroughChamber)
         {
-            magComp.Entities.Add((EntityUid)chamberEnt);
-            Containers.Insert((EntityUid)chamberEnt, magComp.Container);
+            var chamberEnt = GetChamberEntity(ent.Owner);
+
+            if (chamberEnt != null)
+            {
+                magComp.Entities.Add((EntityUid)chamberEnt);
+                Containers.Insert((EntityUid)chamberEnt, magComp.Container);
+            }
+
+            if (usedComp.Entities.Count <= 0)
+            {
+                usedComp.UnspawnedCount--;
+                DirtyField<BallisticAmmoProviderComponent>(((EntityUid)args.Used, usedComp), nameof(BallisticAmmoProviderComponent.UnspawnedCount));
+                var newAmmoEntity = Spawn(usedComp.Proto, _transform.GetMapCoordinates(ent));
+
+                TryInsertChamber(ent, newAmmoEntity);
+
+                Dirty((EntityUid)args.Used, usedComp);
+                Dirty(ent);
+                Dirty((EntityUid)magEnt, magComp);
+
+                UpdateAmmoCount(ent);
+
+                moreSpace = magComp.Entities.Count + magComp.UnspawnedCount < magComp.Capacity;
+                moreAmmo = usedComp.Entities.Count + usedComp.UnspawnedCount > 0;
+                args.Repeat = moreSpace && moreAmmo;
+                return;
+            }
+            if (TryInsertChamber(ent.Owner, usedComp.Entities[^1]))
+            {
+                usedComp.Entities.Remove(usedComp.Entities[^1]);
+
+                Dirty((EntityUid)args.Used, usedComp);
+                Dirty(ent);
+                Dirty((EntityUid)magEnt, magComp);
+
+                UpdateAmmoCount(ent);
+
+                moreSpace = magComp.Entities.Count + magComp.UnspawnedCount < magComp.Capacity;
+                moreAmmo = usedComp.Entities.Count + usedComp.UnspawnedCount > 0;
+                args.Repeat = moreSpace && moreAmmo;
+            }
+
+            return;
         }
 
         if (usedComp.Entities.Count <= 0)
@@ -176,21 +215,35 @@ public abstract partial class SharedGunSystem
             usedComp.UnspawnedCount--;
             DirtyField<BallisticAmmoProviderComponent>(((EntityUid)args.Used, usedComp), nameof(BallisticAmmoProviderComponent.UnspawnedCount));
             var newAmmoEntity = Spawn(usedComp.Proto, _transform.GetMapCoordinates(ent));
-            TryInsertChamber(ent, newAmmoEntity);
+
+            magComp.Entities.Add((EntityUid)newAmmoEntity);
+            Containers.Insert((EntityUid)newAmmoEntity, magComp.Container);
+
             Dirty((EntityUid)args.Used, usedComp);
             Dirty(ent);
             Dirty((EntityUid)magEnt, magComp);
+
             UpdateAmmoCount(ent);
+
+            moreSpace = magComp.Entities.Count + magComp.UnspawnedCount < magComp.Capacity;
+            moreAmmo = usedComp.Entities.Count + usedComp.UnspawnedCount > 0;
+            args.Repeat = moreSpace && moreAmmo;
             return;
         }
-        if (TryInsertChamber(ent.Owner, usedComp.Entities[^1]))
-        {
-            usedComp.Entities.Remove(usedComp.Entities[^1]);
-            Dirty((EntityUid)args.Used, usedComp);
-            Dirty(ent);
-            Dirty((EntityUid)magEnt, magComp);
-            UpdateAmmoCount(ent);
-        }
+
+        Containers.Insert(usedComp.Entities[^1], magComp.Container);
+
+        usedComp.Entities.Remove(usedComp.Entities[^1]);
+
+        Dirty((EntityUid)args.Used, usedComp);
+        Dirty(ent);
+        Dirty((EntityUid)magEnt, magComp);
+
+        UpdateAmmoCount(ent);
+
+        moreSpace = magComp.Entities.Count + magComp.UnspawnedCount < magComp.Capacity;
+        moreAmmo = usedComp.Entities.Count + usedComp.UnspawnedCount > 0;
+        args.Repeat = moreSpace && moreAmmo;
     }
     //SS220 weapon overhaul end
 
