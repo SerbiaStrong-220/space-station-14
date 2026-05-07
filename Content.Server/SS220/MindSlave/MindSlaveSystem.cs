@@ -17,6 +17,7 @@ using Content.Shared.Alert;
 using Content.Shared.Body.Events;
 using Content.Shared.Cloning.Events;
 using Content.Shared.CombatMode.Pacification;
+using Content.Shared.Gibbing;
 using Content.Shared.Implants;
 using Content.Shared.Implants.Components;
 using Content.Shared.Mindshield.Components;
@@ -52,22 +53,15 @@ public sealed class MindSlaveSystem : EntitySystem
     [Dependency] private readonly EuiManager _eui = default!;
     [Dependency] private readonly SharedSubdermalImplantSystem _implant = default!;
 
-    [ValidatePrototypeId<EntityPrototype>]
-    private const string MindSlaveAntagId = "MindRoleMindSlave";
+    private static readonly EntProtoId MindSlaveAntagId = "MindRoleMindSlave";
+    private static readonly EntProtoId MindSlaveObjectiveId = "MindSlaveObeyObjective";
 
-    [ValidatePrototypeId<EntityPrototype>]
-    private const string MindSlaveObjectiveId = "MindSlaveObeyObjective";
+    private static readonly ProtoId<NpcFactionPrototype> NanoTrasenFactionId = "NanoTrasen";
+    private static readonly ProtoId<NpcFactionPrototype> SyndicateFactionId = "Syndicate";
 
-    [ValidatePrototypeId<NpcFactionPrototype>]
-    private const string NanoTrasenFactionId = "NanoTrasen";
-
-    [ValidatePrototypeId<NpcFactionPrototype>]
-    private const string SyndicateFactionId = "Syndicate";
+    private static readonly ProtoId<AlertPrototype> EnslavedAlert = "MindSlaved";
 
     private readonly SoundSpecifier GreetSoundNotification = new SoundPathSpecifier("/Audio/Ambience/Antag/traitor_start.ogg");
-
-    [ValidatePrototypeId<AlertPrototype>]
-    private const string EnslavedAlert = "MindSlaved";
 
     /// <summary>
     /// Dictionary, containing list of all enslaved minds (as a key), and their master (as a value).

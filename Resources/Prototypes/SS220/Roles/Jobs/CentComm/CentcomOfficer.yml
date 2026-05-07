@@ -4,30 +4,29 @@
   name: Офицер Центрального Командования
   id: CentCommOfficer
   components:
-    - type: Sprite
-      sprite: SS220/Markers/jobs.rsi
-      state: centcommofficer
-    - type: RandomHumanoidSpawner
-      settings: CentCommOfficer
+  - type: Sprite
+    sprite: SS220/Markers/jobs.rsi
+    state: centcommofficer
+  - type: RandomHumanoidSpawner
+    settings: CentCommOfficer
 
 - type: randomHumanoidSettings
   id: CentCommOfficer
-  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran]
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran ]
   components:
-    - type: RandomHumanoidAppearance
-      randomizeName: false
-      hair: HairBald
-    - type: RandomMetadata
-      nameSegments:
-        - NamesFirstCentcomAgent
-        - NamesLastCentcomAgent
-    - type: MindShield
-    - type: GhostRole
-      name: ghost-role-information-centcom-Officier-name
-      description: ghost-role-information-centcom-Officier-description
-    - type: GhostTakeoverAvailable
-    - type: Loadout
-      prototypes: [ CentCommOfficerGear ]
+  - type: RandomHumanoidAppearance
+    randomizeName: false
+  - type: RandomMetadata
+    nameSegments:
+    - NamesFirstCentcomAgent
+    - NamesLastCentcomAgent
+  - type: MindShield
+  - type: GhostRole
+    name: ghost-role-information-centcom-Officier-name
+    description: ghost-role-information-centcom-Officier-description
+  - type: GhostTakeoverAvailable
+  - type: Loadout
+    prototypes: [ CentCommOfficerGear ]
 
 - type: playTimeTracker
   id: JobCentcommOfficer

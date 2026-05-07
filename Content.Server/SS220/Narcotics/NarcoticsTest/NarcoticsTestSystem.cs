@@ -23,7 +23,7 @@ public sealed class NarcoticsTestSystem : EntitySystem
 
     private void OnAfterInteract(Entity<NarcoticsTestComponent> ent, ref AfterInteractEvent args)
     {
-        if (args.Target == null || !args.CanReach || !HasComp<HumanoidAppearanceComponent>(args.Target) || ent.Comp.IsUsed)
+        if (args.Target == null || !args.CanReach || !HasComp<HumanoidProfileComponent>(args.Target) || ent.Comp.IsUsed)
             return;
 
         var doAfterArgs = new DoAfterArgs(EntityManager,

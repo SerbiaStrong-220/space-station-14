@@ -39,6 +39,7 @@
   - type: Clothing
     slots: [belt]
     sprite: Objects/Specific/Janitorial/trashbag.rsi
+    equippedState: equipped-BELT
   - type: Item
     size: Normal
 
@@ -55,6 +56,13 @@
     heldPrefix: blue
   - type: StorageFillVisualizer
     fillBaseName: blue-icon
+  - type: Clothing
+    slots: [belt]
+    sprite: Objects/Specific/Janitorial/trashbag.rsi
+    equippedState: blue-equipped-BELT
+  - type: Tag
+    tags:
+    - TrashBagBlue
 
 - type: entity
   name: spell of all-consuming cleanliness

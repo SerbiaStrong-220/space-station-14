@@ -19,7 +19,6 @@
   access:
   - Brig
   - Maintenance
-  - Service
   - Detective
 #  extendedAccess: #SS220-Transfer Detective To Security
   - Security

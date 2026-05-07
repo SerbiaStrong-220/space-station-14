@@ -4,30 +4,29 @@
   name: Оперативник ГСН
   id: CentCommOperativeSRT
   components:
-    - type: Sprite
-      sprite: SS220/Markers/jobs.rsi
-      state: centcommoperativebs
-    - type: RandomHumanoidSpawner
-      settings: CentCommOperativeSRT
+  - type: Sprite
+    sprite: SS220/Markers/jobs.rsi
+    state: centcommoperativebs
+  - type: RandomHumanoidSpawner
+    settings: CentCommOperativeSRT
 
 - type: randomHumanoidSettings
   id: CentCommOperativeSRT
-  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran]
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran ]
   components:
-    - type: RandomHumanoidAppearance
-      randomizeName: false
-      hair: HairBald
-    - type: RandomMetadata
-      nameSegments:
-      - NamesFirstSRTMember
-      - NamesLastSRTMember
-    - type: MindShield
-    - type: GhostRole
-      name: ghost-role-information-centcom-srt-name
-      description: ghost-role-information-centcom-srt-description
-    - type: GhostTakeoverAvailable
-    - type: Loadout
-      prototypes: [ CentcomOperativeSRTGear ]
+  - type: RandomHumanoidAppearance
+    randomizeName: false
+  - type: RandomMetadata
+    nameSegments:
+    - NamesFirstSRTMember
+    - NamesLastSRTMember
+  - type: MindShield
+  - type: GhostRole
+    name: ghost-role-information-centcom-srt-name
+    description: ghost-role-information-centcom-srt-description
+  - type: GhostTakeoverAvailable
+  - type: Loadout
+    prototypes: [ CentcomOperativeSRTGear ]
 
 - type: playTimeTracker
   id: JobCentcommOperativeSRT
