@@ -52,6 +52,7 @@
         hard: false
   - type: InteractionTeleport
     teleportDoAfterTime: 2
+    damageThreshold: 7
     userWhitelist:
       components:
       - CultYogg
