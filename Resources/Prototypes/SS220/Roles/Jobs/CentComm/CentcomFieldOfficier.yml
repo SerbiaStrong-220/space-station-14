@@ -1,33 +1,32 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
-  name: Полевой Офицер Центрального Комадования
+  name: Полевой Офицер Центрального Командования
   id: CentcomFieldOfficer
   components:
-    - type: Sprite
-      sprite: SS220/Markers/jobs.rsi
-      state: centcommfieldofficer
-    - type: RandomHumanoidSpawner
-      settings: CentcomFieldOfficer
+  - type: Sprite
+    sprite: SS220/Markers/jobs.rsi
+    state: centcommfieldofficer
+  - type: RandomHumanoidSpawner
+    settings: CentcomFieldOfficer
 
 - type: randomHumanoidSettings
   id: CentcomFieldOfficer
-  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran]
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran ]
   components:
-    - type: RandomHumanoidAppearance
-      randomizeName: false
-      hair: HairBald
-    - type: RandomMetadata
-      nameSegments:
-        - NamesFirstCentcomAgent
-        - NamesLastCentcomAgent
-    - type: MindShield
-    - type: GhostRole
-      name: ghost-role-information-centcom-NavyOfficier-name
-      description: ghost-role-information-centcom-NavyOfficier-description
-    - type: GhostTakeoverAvailable
-    - type: Loadout
-      prototypes: [ CentcomFieldOfficerGear ]
+  - type: RandomHumanoidAppearance
+    randomizeName: false
+  - type: RandomMetadata
+    nameSegments:
+    - NamesFirstCentcomAgent
+    - NamesLastCentcomAgent
+  - type: MindShield
+  - type: GhostRole
+    name: ghost-role-information-centcom-NavyOfficier-name
+    description: ghost-role-information-centcom-NavyOfficier-description
+  - type: GhostTakeoverAvailable
+  - type: Loadout
+    prototypes: [ CentcomFieldOfficerGear ]
 
 - type: playTimeTracker
   id: JobCentcomFieldOfficer

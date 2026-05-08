@@ -19,7 +19,7 @@
   - type: Clothing
     sprite: SS220/Objects/Weapons/Guns/Battery/synergistic_energy_gun.rsi
   - type: Gun
-  - type: HitscanBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: RedLightLaser
     fireCost: 24.5
   - type: BatteryWeaponFireModes
@@ -66,7 +66,7 @@
     fireRate: 1.2
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
-  - type: HitscanBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: LaserEnhanced
     fireCost: 150
   - type: BatteryWeaponFireModes
@@ -94,9 +94,7 @@
   suffix: SelfRecharger
   components:
   - type: BatterySelfRecharger
-    autoRecharge: true
     autoRechargeRate: 48
-    autoRechargePause: true
     autoRechargePauseTime: 10
 
 # Base KR
@@ -150,7 +148,7 @@
     selectedMode: Burst
     availableModes:
       - Burst
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: BulletBlasterBolt
     fireCost: 62.5
   - type: BatteryWeaponFireModes
@@ -187,7 +185,7 @@
       - SemiAuto
       - Burst
       - FullAuto
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: BulletBlasterPulse
     fireCost: 87.5
   - type: BatteryWeaponFireModes
@@ -218,13 +216,13 @@
   - type: Sprite
     sprite: SS220/Objects/Weapons/Guns/Battery/laser_carabine.rsi
     layers:
-      - state: base
-        map: ["enum.GunVisualLayers.Base"]
-      - state: mag-0
-        map: ["enum.GunVisualLayers.Mag"]
-      - state: mag-unshaded-4
-        map: ["enum.GunVisualLayers.MagUnshaded"]
-        shader: unshaded
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: mag-unshaded-4
+      map: [ "enum.GunVisualLayers.MagUnshaded" ]
+      shader: unshaded
   - type: Clothing
     sprite: SS220/Objects/Weapons/Guns/Battery/laser_carabine.rsi
     quickEquip: false
@@ -241,11 +239,11 @@
   - type: MagazineVisuals
     magState: mag
     steps: 5
-    zeroVisible: false
+    zeroVisible: true
   - type: GunWieldBonus
     minAngle: -2
     maxAngle: -13
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: BulletLaserSMG
     fireCost: 48
   - type: Appearance
@@ -296,8 +294,8 @@
   - type: MagazineVisuals
     magState: mag
     steps: 5
-    zeroVisible: false
-  - type: ProjectileBatteryAmmoProvider
+    zeroVisible: true
+  - type: BatteryAmmoProvider
     proto: BulletLaserCarabine
     fireCost: 48
   - type: BatteryWeaponFireModes
@@ -348,7 +346,7 @@
   - type: Battery
     maxCharge: 400
     startingCharge: 400
-  - type: HitscanBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: Pulsekill
     fireCost: 1
   - type: BatteryWeaponFireModes
@@ -384,7 +382,7 @@
   - type: Battery
     maxCharge: 400
     startingCharge: 400
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: BulletLaserDestroy
     fireCost: 10
   - type: MagazineVisuals

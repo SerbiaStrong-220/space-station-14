@@ -19,6 +19,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using Content.Shared.Projectiles;
 using Content.Server.Projectiles;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Light.Components;
 using Content.Shared.Popups;
 using Robust.Shared.Player;

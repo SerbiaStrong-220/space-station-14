@@ -3,6 +3,7 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Popups;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.Doors.Components;
 using Content.Shared.Emag.Systems;

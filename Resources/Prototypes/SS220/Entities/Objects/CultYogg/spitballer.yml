@@ -15,9 +15,9 @@
       projectileSpeed: 9
     - type: BasicEntityAmmoProvider
       proto: SpitballerGunBullet
-      capacity: 3
+      capacity: 2
     - type: RechargeBasicEntityAmmo
-      rechargeCooldown: 7
+      rechargeCooldown: 12
       rechargeSound: /Audio/SS220/Weapons/Guns/CultYogg/spitballer_reload.ogg
     - type: Sprite
       sprite: SS220/Objects/Weapons/Guns/CultYogg/spitballer.rsi

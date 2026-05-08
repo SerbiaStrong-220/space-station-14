@@ -62,7 +62,7 @@ public abstract class SharedFungusMachineSystem : EntitySystem
         return inventory;
     }
 
-    private void AddInventoryFromPrototype(EntityUid uid, Dictionary<string, uint>? entries, FungusMachineComponent? component = null)
+    private void AddInventoryFromPrototype(EntityUid uid, Dictionary<EntProtoId, uint>? entries, FungusMachineComponent? component = null)
     {
         if (!Resolve(uid, ref component) || entries == null)
             return;

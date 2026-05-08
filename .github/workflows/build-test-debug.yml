@@ -6,16 +6,16 @@ on:
   merge_group:
   pull_request:
     types: [ opened, reopened, synchronize, ready_for_review ]
-    branches: [ master ]
+    branches: [ master, staging-upstream, staging-upstream-fixes ]
 
 jobs:
   build:
-    if: github.actor != 'IanComradeBot' && github.event.pull_request.draft == false
+    if: (github.actor != 'IanComradeBot' || github.actor != 'Maxon') && github.event.pull_request.draft == false
     strategy:
       matrix:
         os: [ubuntu-latest]
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
 
     steps:
     - name: Checkout Master
@@ -36,7 +36,7 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v4.1.0
       with:
-        dotnet-version: 9.0.x
+        dotnet-version: 10.0.x
 
     - name: Install dependencies
       run: dotnet restore
@@ -45,13 +45,38 @@ jobs:
       run: dotnet build --configuration DebugOpt --no-restore /m
 
     - name: Run Content.Tests
-      run: dotnet test --no-build --configuration DebugOpt Content.Tests/Content.Tests.csproj -- NUnit.ConsoleOut=0
+      run: dotnet test --no-build --configuration DebugOpt Content.Tests/Content.Tests.csproj -- NUnit.ConsoleOut=0 NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
+
+    # SS220-separate-tests-begin
+    - name: Run Content.IntegrationTests Entity & Prototypes test
+      shell: pwsh
+      run: |
+        $env:DOTNET_gcServer=1
+        dotnet test --filter 'FullyQualifiedName~Validate|FullyQualifiedName~Prototype' --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj -- NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
+    # SS220-separate-tests-end
 
     - name: Run Content.IntegrationTests
       shell: pwsh
       run: |
         $env:DOTNET_gcServer=1
-        dotnet test --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj -- NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed
+        dotnet test --filter 'FullyQualifiedName!~Map&FullyQualifiedName!~Validate&FullyQualifiedName!~Prototype&FullyQualifiedName~ApcLoad' --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj -- NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
+
+    # SS220-separate-tests-begin
+    - name: Run Content.IntegrationTests Maps test
+      shell: pwsh
+      run: |
+        $env:DOTNET_gcServer=1
+        dotnet test --filter 'FullyQualifiedName~Map|FullyQualifiedName~ApcLoad' --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj -- NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
+    # SS220-separate-tests-end
+
+    - name: Archive NUnit3 test results.
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: nunit3-results-${{ matrix.os }}
+        path: test_results/*
+        retention-days: 7
+        compression-level: 9
   ci-success:
     name: Build & Test Debug
     needs:
@@ -60,3 +85,5 @@ jobs:
     steps:
       - name: CI succeeded
         run: exit 0
+
+
