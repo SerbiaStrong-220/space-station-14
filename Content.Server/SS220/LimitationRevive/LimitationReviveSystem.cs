@@ -4,6 +4,7 @@ using Content.Server.Zombies;
 using Content.Shared.Body.Events;
 using Content.Shared.Cloning.Events;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Mobs;
 using Content.Shared.Rejuvenate;
 using Content.Shared.SS220.LimitationRevive;

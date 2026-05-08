@@ -25,7 +25,6 @@
   id: DoctorGear
   equipment:
     ears: ClothingHeadsetMedical
-    belt: ClothingBeltMedicalFilled
   # ss220-surgery-update-begin
   storage:
     back:

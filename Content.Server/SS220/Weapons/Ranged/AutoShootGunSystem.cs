@@ -29,7 +29,7 @@ public sealed partial class AutoShootGunSystem : EntitySystem
         if (apc.Powered)
             return;
 
-        _gun.SetEnabled(ent, ent.Comp, false);
+        _gun.SetEnabled(ent, false);
     }
 
     private void OnAnchorStateChanged(Entity<AutoShootGunComponent> ent, ref AnchorStateChangedEvent args)
@@ -40,6 +40,6 @@ public sealed partial class AutoShootGunSystem : EntitySystem
         if (args.Transform.Anchored)
             return;
 
-        _gun.SetEnabled(ent, ent.Comp, false);
+        _gun.SetEnabled(ent, false);
     }
 }

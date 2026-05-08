@@ -75,8 +75,7 @@ public sealed class ShapeCollisionTrackerSystem : EntitySystem
         ShapeCollisionTrackerComponent component,
         MapInitEvent args)
     {
-        component.Enabled = !component.RequiresAnchored ||
-                            EntityManager.GetComponent<TransformComponent>(uid).Anchored;
+        component.Enabled = !component.RequiresAnchored || Comp<TransformComponent>(uid).Anchored;
 
         if (!TryComp<PhysicsComponent>(uid, out _))
             return;

@@ -9,9 +9,26 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitJournalist
 
-  #SS220-Clothes-Start
+# Head
 - type: loadout
-  id: JumpsuitJournalistRed
+  id: ReporterPressFedora
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobReporter
+      time: 10h
   equipment:
-    jumpsuit: ClothingUniformJumpsuitJournalistRed
-  #SS220-Clothes-End
+    head: ClothingHeadHatFedoraPress
+
+# Outerclothing
+- type: loadout
+  id: ReporterPressVest
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobReporter
+      time: 35h
+  equipment:
+    outerClothing: ClothingOuterVestPress

@@ -1,6 +1,6 @@
 ﻿- type: entity
   name: Largo
-  parent: SimpleMobBase
+  parent: [ BaseMobAnimal, SimpleMobBase ]
   id: MobGorillaLargo
   description: Cargo's pet gorilla. He seems to have an 'I love Mom' tattoo.
   components:
@@ -14,9 +14,6 @@
         enum.StrippingUiKey.Key:
           type: StrippableBoundUserInterface
     - type: Hands
-    - type: Body
-      prototype: Primate
-      requiredLegs: 1 # TODO: More than 1 leg
     - type: Sprite
       drawdepth: Mobs
       layers:
@@ -57,7 +54,6 @@
       rules: "Вы - выдрессированная горилла отдела снабжения. Подчиняйтесь простым командам членов отдела."
     - type: GhostTakeoverAvailable
     - type: Bloodstream
-      bloodMaxVolume: 300
     - type: Puller
     - type: InteractionPopup
       successChance: 1

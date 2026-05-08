@@ -6,6 +6,7 @@ using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Server.SS220.SuperMatter.Crystal.Components;
+using Content.Shared.Chat;
 using Content.Shared.Radio;
 using Content.Shared.SS220.SuperMatter.Functions;
 using Robust.Shared.Prototypes;
@@ -69,7 +70,7 @@ public sealed partial class SuperMatterSystem
 
     private void SendAdminChatAlert(Entity<SuperMatterComponent> crystal, string msg, string? whom = null)
     {
-        var stringBuilder = new StringBuilder($"SuperMatter {EntityManager.ToPrettyString(crystal)} Alert! ");
+        var stringBuilder = new StringBuilder($"SuperMatter {ToPrettyString(crystal)} Alert! ");
         stringBuilder.Append(msg);
         if (whom != null)
             stringBuilder.Append($" caused by {whom}.");
@@ -83,7 +84,7 @@ public sealed partial class SuperMatterSystem
         _chatSystem.DispatchStationAnnouncement(uid, message, localizedSender, colorOverride: Color.FromHex("#deb63d"));
     }
 
-    private bool TryChangeStationAlertLevel(Entity<SuperMatterComponent> crystal, string alertLevel, [NotNullWhen(true)] out string? previousAlertLevel, bool force = true, bool locked = true)
+    private bool TryChangeStationAlertLevel(Entity<SuperMatterComponent> crystal, string alertLevel, [NotNullWhen(true)] out string? previousAlertLevel, bool force = true, bool locked = false)
     {
         previousAlertLevel = null;
         var stationUid = _station.GetStationInMap(Transform(crystal.Owner).MapID);

@@ -81,5 +81,12 @@ namespace Content.Server.Shuttles.Components
         [DataField, ViewVariables(VVAccess.ReadWrite)]
         public float FTLCooldown = 10f;
         // SS220 FTLCooldown outside CVar end
+
+        /// <summary>
+        /// Optional override for the FTL cooldown for this shuttle.
+        /// If not null, then the value will be used instead of the shuttle.cooldown CCVar.
+        /// </summary>
+        [DataField]
+        public TimeSpan? FTLCooldownOverride = null;
     }
 }

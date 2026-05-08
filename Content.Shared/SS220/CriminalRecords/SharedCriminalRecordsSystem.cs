@@ -101,6 +101,10 @@ public abstract class SharedCriminalRecordSystem : EntitySystem
             }
 
             msg.AddText(record.Message);
+
+            if (record.RecordSetAt.HasValue)
+                msg.AddMarkupOrThrow("\n" + Loc.GetString("criminal-show-record-time", ("time", record.RecordSetAt.Value)));
+
             args.PushMessage(msg);
         }
     }

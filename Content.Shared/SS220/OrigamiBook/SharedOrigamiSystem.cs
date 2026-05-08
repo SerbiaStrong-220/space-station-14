@@ -1,4 +1,4 @@
-using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.IdentityManagement.Components;
 using Content.Shared.Inventory;
@@ -42,7 +42,7 @@ public abstract class SharedOrigamiSystem : EntitySystem
         if (!HasComp<OrigamiUserComponent>(args.Component.Thrower))
             return;
 
-        if (_gun.TryGetGun(args.Component.Thrower.Value, out _, out _))
+        if (_gun.TryGetGun(args.Component.Thrower.Value, out _))
             return;
 
         var hasEyeProtection = false;

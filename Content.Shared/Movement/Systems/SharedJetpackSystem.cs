@@ -29,6 +29,8 @@ public abstract class SharedJetpackSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!; //SS220 Magboots with jet fix
     [Dependency] private readonly SharedBuckleSystem _buckle = default!;
 
+    [Dependency] private readonly EntityQuery<JetpackComponent> _jetpackQuery = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -65,13 +67,11 @@ public abstract class SharedJetpackSystem : EntitySystem
     private void OnJetpackUserGravityChanged(ref GravityChangedEvent ev)
     {
         var gridUid = ev.ChangedGridIndex;
-        var jetpackQuery = GetEntityQuery<JetpackComponent>();
-
         var query = EntityQueryEnumerator<JetpackUserComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var user, out var transform))
         {
             if (transform.GridUid == gridUid && ev.HasGravity &&
-                jetpackQuery.TryGetComponent(user.Jetpack, out var jetpack))
+                _jetpackQuery.TryGetComponent(user.Jetpack, out var jetpack))
             {
                 _popup.PopupClient(Loc.GetString("jetpack-to-grid"), uid, uid);
 
@@ -266,6 +266,14 @@ public abstract class SharedJetpackSystem : EntitySystem
 
         if (enabled)
         {
+            // If the user is already using another jetpack, disable it first
+            if (TryComp<JetpackUserComponent>(user, out var userComp) &&
+                userComp.Jetpack != uid &&
+                TryComp<JetpackComponent>(userComp.Jetpack, out var oldJetpack))
+            {
+                SetEnabled(userComp.Jetpack, oldJetpack, false, user);
+            }
+
             SetupUser(user.Value, uid, component);
             EnsureComp<ActiveJetpackComponent>(uid);
         }

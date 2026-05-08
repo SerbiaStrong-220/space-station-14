@@ -19,7 +19,8 @@
           types:
               Poison: 4
               Blunt: 6
-              Airloss: 4
+              Asphyxiation: 2
+              Bloodloss: 2
         progressionPopup: "mindslave-disfunction-progress-popup"
     - type: HiddenDescription
       entries:
