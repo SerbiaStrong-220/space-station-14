@@ -117,7 +117,7 @@
       maxTotalIntensity: 100
       intensitySlope: 4
       maxIntensity: 7
-
+#SS220-new-feature begin
 - type: reaction
   id: LithiumExplosion
   impact: High
@@ -153,7 +153,7 @@
       maxTotalIntensity: 100
       intensitySlope: 4
       maxIntensity: 7
-
+#SS220-new-feature end
 - type: reaction
   id: Smoke
   priority: -10
