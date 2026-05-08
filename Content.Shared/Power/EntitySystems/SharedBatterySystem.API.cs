@@ -171,7 +171,13 @@ public abstract partial class SharedBatterySystem
         var curTime = _timing.CurTime;
         // We have a constant charge rate, so the charge changes linearly over time.
         var dt = (curTime - ent.Comp.LastUpdate).TotalSeconds;
-        var charge = Math.Clamp(ent.Comp.LastCharge + (float)(dt * ent.Comp.ChargeRate), 0f, ent.Comp.MaxCharge);
+        var charge = Math.Clamp(ent.Comp.LastCharge + (float)(dt * ent.Comp.ChargeRate), 0f, ent.Comp.IsOvercharged ? ent.Comp.StartingCharge : ent.Comp.MaxCharge); // SS220-add-smes-overcharge
+
+        // SS220-add-overcharge-begin
+        if (ent.Comp.IsOvercharged)
+            ent.Comp.IsOvercharged = charge < ent.Comp.MaxCharge;
+        // SS220-add-overcharge-end
+
         return charge;
     }
 
