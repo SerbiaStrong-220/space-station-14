@@ -119,6 +119,42 @@
       maxIntensity: 7
 
 - type: reaction
+  id: LithiumExplosion
+  impact: High
+  priority: 20
+  conserveEnergy: false
+  reactants:
+    Water:
+      amount: 1
+    Lithium:
+      amount: 1
+  effects:
+    - !type:ExplosionEffect
+      explosionType: Default
+      intensityPerUnit: 0.25
+      maxTotalIntensity: 100
+      intensitySlope: 4
+      maxIntensity: 7
+
+- type: reaction
+  id: SodiumExplosion
+  impact: High
+  priority: 20
+  conserveEnergy: false
+  reactants:
+    Water:
+      amount: 1
+    Sodium:
+      amount: 1
+  effects:
+    - !type:ExplosionEffect
+      explosionType: Default
+      intensityPerUnit: 0.25
+      maxTotalIntensity: 100
+      intensitySlope: 4
+      maxIntensity: 7
+
+- type: reaction
   id: Smoke
   priority: -10
   impact: High
