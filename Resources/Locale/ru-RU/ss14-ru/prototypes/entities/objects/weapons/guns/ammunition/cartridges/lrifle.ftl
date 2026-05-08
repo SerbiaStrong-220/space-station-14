@@ -1,3 +1,4 @@
+#SS220-weapon-overhaul-begin
 ent-CartridgeLRifleBase = патрон (7,62x41 промежуточный)
     .desc = { ent-BaseCartridge.desc }
     .suffix = { "" }
@@ -16,3 +17,4 @@ ent-CartridgeLRiflePractice = патрон (7,62x41 промежуточный �
 ent-CartridgeLRifleRubber = патрон (7,62x41 промежуточный резиновый)
     .desc = { ent-CartridgeLRifleBase.desc }
     .suffix = { "" }
+#SS220-weapon-overhaul-end

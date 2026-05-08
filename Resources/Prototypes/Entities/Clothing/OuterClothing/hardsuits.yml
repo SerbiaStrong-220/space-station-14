@@ -758,6 +758,19 @@
       shieldSprite:
         sprite: SS220/Effects/field_shield.rsi
         state: red
+    modes:
+      any:
+        damageThreshold: 7 #There are no player attacks a nuke ops will care about below this threshold
+        shieldMaxCharge: 1
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
+      high:
+        damageThreshold: 40 #Nothing except 15x24 and 18,5
+        shieldMaxCharge: 1
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
     lightData:
       color: "#D82000"
       radius: 1
@@ -818,6 +831,19 @@
       shieldSprite:
         sprite: SS220/Effects/field_shield.rsi
         state: red
+    modes:
+      any:
+        damageThreshold: 7 #There are no player attacks a nuke ops will care about below this threshold
+        shieldMaxCharge: 1
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
+      high:
+        damageThreshold: 40 #Nothing except 15x24 and 18,5
+        shieldMaxCharge: 1
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
     lightData:
       color: "#D82000"
       radius: 1
@@ -886,6 +912,19 @@
       shieldSprite:
         sprite: SS220/Effects/field_shield.rsi
         state: red
+    modes:
+      any:
+        damageThreshold: 7 #There are no player attacks a nuke ops will care about below this threshold
+        shieldMaxCharge: 1
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
+      high:
+        damageThreshold: 40 #Nothing except 15x24 and 18,5
+        shieldMaxCharge: 1
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
     lightData:
       color: "#D82000"
       radius: 1
@@ -953,6 +992,19 @@
       shieldSprite:
         sprite: SS220/Effects/field_shield.rsi
         state: red
+    modes:
+      any:
+        damageThreshold: 7 #There are no player attacks a nuke ops will care about below this threshold
+        shieldMaxCharge: 1
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
+      high:
+        damageThreshold: 40 #Nothing except 15x24 and 18,5
+        shieldMaxCharge: 1
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
     lightData:
       color: "#D82000"
       radius: 1.5
@@ -1152,6 +1204,19 @@
       shieldSprite:
         sprite: SS220/Effects/field_shield.rsi
         state: blue
+    modes:
+      any:
+        damageThreshold: 7 #There are no player attacks a nuke ops will care about below this threshold
+        shieldMaxCharge: 1
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
+      high:
+        damageThreshold: 40 #Nothing except 15x24 and 18,5
+        shieldMaxCharge: 1
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
     lightData:
       color: "#0061d8"
       radius: 1
@@ -1210,6 +1275,19 @@
       shieldSprite:
         sprite: SS220/Effects/field_shield.rsi
         state: blue
+    modes:
+      any:
+        damageThreshold: 7 #There are no player attacks a nuke ops will care about below this threshold
+        shieldMaxCharge: 1
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
+      high:
+        damageThreshold: 40 #Nothing except 15x24 and 18,5
+        shieldMaxCharge: 1
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
     lightData:
       color: "#0061d8"
       radius: 1
@@ -1242,6 +1320,19 @@
       shieldSprite:
         sprite: SS220/Effects/field_shield.rsi
         state: blue
+    modes:
+      any:
+        damageThreshold: 7 #There are no player attacks a nuke ops will care about below this threshold
+        shieldMaxCharge: 1
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
+      high:
+        damageThreshold: 40 #Nothing except 15x24 and 18,5
+        shieldMaxCharge: 1
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
     lightData:
       color: "#0061d8"
       radius: 1
@@ -1373,6 +1464,19 @@
       shieldSprite:
         sprite: SS220/Effects/field_shield.rsi
         state: blue
+    modes:
+      any:
+        damageThreshold: 7 #There are no player attacks a nuke ops will care about below this threshold
+        shieldMaxCharge: 1
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
+      high:
+        damageThreshold: 40 #Nothing except 15x24 and 18,5
+        shieldMaxCharge: 1
+        shieldSprite:
+          sprite: SS220/Effects/field_shield.rsi
+          state: red
     lightData:
       color: "#0061d8"
       radius: 1

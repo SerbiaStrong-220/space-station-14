@@ -1,3 +1,4 @@
+#SS220-weapon-overhaul-begin
 ent-BaseMagazineShotgun = барабан (18,5x72 дробь)
     .desc = { ent-BaseItem.desc }
 ent-MagazineShotgunEmpty = барабан (18,5x72 любые)
@@ -11,3 +12,4 @@ ent-MagazineShotgunSlug = барабан (18,5x72 картечь)
     .desc = { ent-BaseMagazineShotgun.desc }
 ent-MagazineShotgunIncendiary = барабан (18,5x72 магниевые)
     .desc = { ent-BaseMagazineShotgun.desc }
+#SS220-weapon-overhaul-end

@@ -1,3 +1,4 @@
+#SS220-weapon-overhaul-begin
 ent-BaseCartridgeCaselessRifle = патрон (8x18 безгильзовый)
     .desc = { ent-BaseCartridge.desc }
 ent-CartridgeCaselessRifle = патрон (8x18 безгильзовый)
@@ -6,3 +7,4 @@ ent-CartridgeCaselessRifleHighVelocity = патрон (8x18 безгильзов
     .desc = { ent-BaseCartridgeCaselessRifle.desc }
 ent-CartridgeCaselessRiflePractice = патрон (8x18 безгильзовый учебный)
     .desc = { ent-BaseCartridgeCaselessRifle.desc }
+#SS220-weapon-overhaul-end

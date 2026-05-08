@@ -1,3 +1,4 @@
+#SS220-weapon-overhaul-begin
 ent-BaseCartridgeRifle = патрон (6,3х47 промежуточный)
     .desc = { ent-BaseCartridge.desc }
 ent-CartridgeRifle = патрон (6,3х47 промежуточный)
@@ -10,3 +11,4 @@ ent-CartridgeRifleIncendiary = патрон (6,3х47 промежуточный 
     .desc = { ent-BaseCartridgeRifle.desc }
 ent-CartridgeRifleUranium = патрон (6,3х47 промежуточный урановый)
     .desc = { ent-BaseCartridgeRifle.desc }
+#SS220-weapon-overhaul-end

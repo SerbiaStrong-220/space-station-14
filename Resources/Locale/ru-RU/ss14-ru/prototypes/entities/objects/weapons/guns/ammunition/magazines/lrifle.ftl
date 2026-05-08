@@ -1,3 +1,4 @@
+#SS220-weapon-overhaul-begin
 ent-MagazineLRifleBase = магазин (7,62x41 промежуточные)
     .desc = { ent-BaseItem.desc }
     .suffix = { "" }
@@ -25,3 +26,4 @@ ent-MagazineLRifleMaxim = дисковый магазин (7,62x41 промеж�
 ent-MagazineLRiflePkBox =короб патронов ПК (7,62x41 промежуточные)
     .desc = { ent-MagazineLRifleBase.desc }
     .suffix = { "" }
+#SS220-weapon-overhaul-end

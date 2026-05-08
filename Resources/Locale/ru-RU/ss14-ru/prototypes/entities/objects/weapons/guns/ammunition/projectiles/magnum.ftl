@@ -1,3 +1,4 @@
+#SS220-weapon-overhaul-begin
 ent-BulletMagnum = пуля (11,5х32 магнум)
     .desc = { ent-BaseBullet.desc }
 ent-BulletMagnumHighVelocity = пуля (11,5х32 магнум высокоскоростная)
@@ -12,3 +13,4 @@ ent-BulletMagnumAP = пуля (11,5х32 магнум бронебойная)
     .desc = { ent-BaseBulletAP.desc }
 ent-BulletMagnumUranium = пуля (11,5х32 магнум урановая)
     .desc = { ent-BaseBulletUranium.desc }
+#SS220-weapon-overhaul-end

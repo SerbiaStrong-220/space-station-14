@@ -1,3 +1,4 @@
+#SS220-weapon-overhaul-begin
 ent-BaseMagazinePistol = пистолетный магазин (9x20)
     .desc = { ent-BaseItem.desc }
 ent-BaseMagazinePistolHighCapacity = автопистолетный магазин (9x20)
@@ -37,3 +38,4 @@ ent-MagazinePistolSubMachineGunPractice = магазин ПП (9x20 учебны
     .desc = { ent-BaseMagazinePistolSubMachineGun.desc }
 ent-MagazinePistolSubMachineGunUranium = магазин ПП (9x20 урановые)
     .desc = { ent-BaseMagazinePistolSubMachineGun.desc }
+#SS220-weapon-overhaul-end

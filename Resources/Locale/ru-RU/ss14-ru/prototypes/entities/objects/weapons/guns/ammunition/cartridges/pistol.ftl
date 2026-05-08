@@ -1,3 +1,4 @@
+#SS220-weapon-overhaul-begin
 ent-BaseCartridgePistol = патрон (9x20 пистолетный)
     .desc = { ent-BaseCartridge.desc }
 ent-CartridgePistol = патрон (9x20 пистолетный)
@@ -10,3 +11,4 @@ ent-CartridgePistolIncendiary = патрон (9x20 пистолетный тра
     .desc = { ent-BaseCartridgePistol.desc }
 ent-CartridgePistolUranium = патрон (9x20 пистолетный урановый)
     .desc = { ent-BaseCartridgePistol.desc }
+#SS220-weapon-overhaul-end

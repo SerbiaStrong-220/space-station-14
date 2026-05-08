@@ -1,3 +1,4 @@
+#SS220-weapon-overhaul-begin
 ent-BaseCartridgeMagnum = патрон (11,5х32 магнум пистолетный)
     .desc = { ent-BaseCartridge.desc }
 ent-CartridgeMagnum = патрон (11,5х32 магнум пистолетный)
@@ -12,3 +13,4 @@ ent-CartridgeMagnumAP = патрон (11,5х32 магнум пистолетны
     .desc = { ent-BaseCartridgeMagnum.desc }
 ent-CartridgeMagnumUranium = патрон (11,5х32 магнум пистолетный урановый)
     .desc = { ent-BaseCartridgeMagnum.desc }
+#SS220-weapon-overhaul-end

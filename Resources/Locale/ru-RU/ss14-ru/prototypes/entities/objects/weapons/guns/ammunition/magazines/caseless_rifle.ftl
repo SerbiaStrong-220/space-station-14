@@ -1,3 +1,4 @@
+#SS220-weapon-overhaul-begin
 ent-BaseMagazineCaselessRifle = магазин (8x18 безгильзовые)
     .desc = { ent-BaseItem.desc }
 ent-BaseMagazineCaselessRifleShort = короткий магазин безгильзовой винтовки (8x18 безгильзовые)
@@ -26,3 +27,4 @@ ent-MagazineCaselessRifleShortHighVelocity = короткий магазин (8x
     .desc = { ent-BaseMagazineCaselessRifleShort.desc }
 ent-MagazineCaselessRifleShortPractice = короткий магазин (8x18 безгильзовые учебные)
     .desc = { ent-BaseMagazineCaselessRifleShort.desc }
+#SS220-weapon-overhaul-end

@@ -1,12 +1,14 @@
-ent-BaseMagazineBoxPistol = коробка патронов (.35 авто)
+#SS220-weapon-overhaul-begin
+ent-BaseMagazineBoxPistol = коробка патронов (9x20 авто)
     .desc = { ent-BaseItem.desc }
-ent-MagazineBoxPistol = коробка патронов (.35 авто)
+ent-MagazineBoxPistol = коробка патронов (9x20 авто)
     .desc = { ent-BaseMagazineBoxPistol.desc }
-ent-MagazineBoxPistolHighVelocity = коробка патронов (.35 авто высокоскоростные)
+ent-MagazineBoxPistolHighVelocity = коробка патронов (9x20 авто высокоскоростные)
     .desc = { ent-BaseMagazineBoxPistol.desc }
-ent-MagazineBoxPistolPractice = коробка патронов (.35 авто учебные)
+ent-MagazineBoxPistolPractice = коробка патронов (9x20 авто учебные)
     .desc = { ent-BaseMagazineBoxPistol.desc }
-ent-MagazineBoxPistolIncendiary = коробка патронов (.35 авто зажигательные)
+ent-MagazineBoxPistolIncendiary = коробка патронов (9x20 авто зажигательные)
     .desc = { ent-BaseMagazineBoxPistol.desc }
-ent-MagazineBoxPistolUranium = коробка патронов (.35 авто урановые)
+ent-MagazineBoxPistolUranium = коробка патронов (9x20 авто урановые)
     .desc = { ent-BaseMagazineBoxPistol.desc }
+#SS220-weapon-overhaul-end

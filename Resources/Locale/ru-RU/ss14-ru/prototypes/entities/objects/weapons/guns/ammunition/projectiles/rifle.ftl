@@ -1,3 +1,4 @@
+#SS220-weapon-overhaul-begin
 ent-BulletRifle = пуля (6,3х47 промежуточная)
     .desc = { ent-BaseBullet.desc }
 ent-BulletRifleHighVelocity = пуля (6,3х47 промежуточная)
@@ -8,3 +9,4 @@ ent-BulletRifleIncendiary = пуля (6,3х47 промежуточная тра�
     .desc = { ent-BaseBulletIncendiary.desc }
 ent-BulletRifleUranium = пуля (6,3х47 промежуточная урановая)
     .desc = { ent-BaseBulletUranium.desc }
+#SS220-weapon-overhaul-end

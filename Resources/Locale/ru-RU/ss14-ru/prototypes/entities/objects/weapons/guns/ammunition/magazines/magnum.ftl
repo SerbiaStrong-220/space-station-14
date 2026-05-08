@@ -1,3 +1,4 @@
+#SS220-weapon-overhaul-begin
 ent-BaseMagazineMagnum = пистолетный магазин (11,5х32 магнум)
     .desc = { ent-BaseMagazinePistol.desc }
 ent-BaseMagazineMagnumSubMachineGun = магазин Вектора (11,5х32 магнум)
@@ -26,3 +27,4 @@ ent-MagazineMagnumSubMachineGunUranium = магазин Вектора (11,5х32
     .desc = { ent-BaseMagazineMagnumSubMachineGun.desc }
 ent-MagazineMagnumSubMachineGunPiercing = магазин Вектора (11,5х32 магнум бронебойные)
     .desc = { ent-BaseMagazineMagnumSubMachineGun.desc }
+#SS220-weapon-overhaul-end

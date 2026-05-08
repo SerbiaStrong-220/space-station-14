@@ -1,14 +1,16 @@
-ent-BaseMagazineBoxLightRifle = коробка патронов (.30 винтовочные)
+#SS220-weapon-overhaul-begin
+ent-BaseMagazineBoxLightRifle = коробка патронов (7,62x41 промежуточные)
     .desc = { ent-BaseItem.desc }
-ent-MagazineBoxLightRifleBig = ящик патронов (.30 винтовочные)
+ent-MagazineBoxLightRifleBig = ящик патронов (7,62x41 промежуточные)
     .desc = { ent-BaseMagazineBoxLightRifle.desc }
-ent-MagazineBoxLightRifle = коробка патронов (.30 винтовочные)
+ent-MagazineBoxLightRifle = коробка патронов (7,62x41 промежуточные)
     .desc = { ent-BaseMagazineBoxLightRifle.desc }
-ent-MagazineBoxLightRifleHighVelocity = коробка патронов (.30 винтовочные высокоскоростные)
+ent-MagazineBoxLightRifleHighVelocity = коробка патронов (7,62x41 промежуточные высокоскоростные)
     .desc = { ent-BaseMagazineBoxLightRifle.desc }
-ent-MagazineBoxLightRiflePractice = коробка патронов (.30 винтовочные учебные)
+ent-MagazineBoxLightRiflePractice = коробка патронов (7,62x41 промежуточные учебные)
     .desc = { ent-BaseMagazineBoxLightRifle.desc }
-ent-MagazineBoxLightRifleIncendiary = коробка патронов (.30 винтовочные зажигательные)
+ent-MagazineBoxLightRifleIncendiary = коробка патронов (7,62x41 промежуточные трассирующие)
     .desc = { ent-BaseMagazineBoxLightRifle.desc }
-ent-MagazineBoxLightRifleUranium = коробка патронов (.30 винтовочные урановые)
+ent-MagazineBoxLightRifleUranium = коробка патронов (7,62x41 промежуточные урановые)
     .desc = { ent-BaseMagazineBoxLightRifle.desc }
+#SS220-weapon-overhaul-end

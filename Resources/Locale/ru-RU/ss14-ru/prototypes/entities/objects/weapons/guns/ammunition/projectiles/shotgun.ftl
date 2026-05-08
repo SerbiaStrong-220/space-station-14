@@ -1,3 +1,4 @@
+#SS220-weapon-overhaul-begin
 ent-PelletShotgunSlug = дробина (18,5x72 картечь)
     .desc = { ent-BaseBullet.desc }
 ent-PelletShotgunBeanbag = дробина (18,5x72)
@@ -16,6 +17,7 @@ ent-PelletShotgunFlare = дробина (18,5x72 фальшфейер)
     .desc = { ent-BaseBullet.desc }
 ent-PelletShotgunUranium = дробина (18,5x72 урановая)
     .desc = { ent-BaseBullet.desc }
+#SS220-weapon-overhaul-end
 ent-PelletGrapeshot = картечина
     .desc = { ent-BaseBullet.desc }
 ent-PelletGlass = стеклянный осколок
