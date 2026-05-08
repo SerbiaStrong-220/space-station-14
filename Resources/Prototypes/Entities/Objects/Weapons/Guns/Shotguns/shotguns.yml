@@ -92,7 +92,7 @@
     canBeLoadedManually: true
     mustBeLoadedThroughChamber: false
     soundRack:
-      path: /Audio/Weapons/Guns/Cock/ltrifle_cock.ogg
+      path: /Audio/Weapons/Guns/Cock/m41_cock.ogg
   - type: InternalMagazine
   - type: ItemSlots
     slots:
@@ -253,6 +253,7 @@
   - type: GunAimable
     minAngle: -8
     maxAngle: -6
+  - type: GunRequiresWield
   - type: Gun
     angleIncrease: 7
     angleDecay: 6

@@ -28,6 +28,9 @@ public sealed partial class ChamberMagazineAmmoProviderComponent : MagazineAmmoP
 
     [DataField, AutoNetworkedField]
     public bool MustBeLoadedThroughChamber = false;
+
+    [DataField("soundInsert"), AutoNetworkedField]
+    public SoundSpecifier? InsertSound = new SoundPathSpecifier("/Audio/Weapons/Guns/MagIn/bullet_insert.ogg");
     //SS220 weapon overhaul end
 
     /// <summary>

@@ -54,9 +54,81 @@
   - type: StaticPrice
     price: 500
 
+
+#SS220 weapon overhaul begin
+- type: entity
+  name: BaseWeaponSniper
+  parent: BaseItem
+  id: BaseWeaponSniperAlt
+  description: A rooty tooty point and shooty.
+  abstract: true
+  components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/SS220/Effects/Drop/lsmg.ogg
+      params:
+        volume: 2
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+  - type: Item
+    size: Large
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Snipers/bolt_gun_wood.rsi
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage
+  - type: AmmoCounter
+  - type: GunWieldBonus
+    minAngle: -3
+    maxAngle: -17
+    angleIncrease: -1.1
+  - type: GunAimable
+    minAngle: -13
+    maxAngle: -3
+  - type: Gun
+    minAngle: 17
+    maxAngle: 30
+    angleIncrease: 4
+    angleDecay: 6
+    fireRate: 0.75
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/sniper.ogg
+  - type: ChamberMagazineAmmoProvider
+    canBeLoadedManually: true
+    mustBeLoadedThroughChamber: true
+    autoCycle: false
+    soundRack:
+      path: /Audio/Weapons/Guns/Cock/m41_cock.ogg
+  - type: InternalMagazine
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: InternalMagazineMosin
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+            - FullRifleCartridge
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: StaticPrice
+    price: 500
+#SS220 weapon overhaul end
+
 - type: entity
   name: Kardashev-Mosin
-  parent: [BaseWeaponSniper, BaseGunWieldable, BaseMajorContraband]
+  parent: [BaseWeaponSniperAlt, BaseGunWieldable, BaseMajorContraband] #SS220 weapon overhaul
   id: WeaponSniperMosin
   description: A true relic, the Kardashev-Mosin has served in nearly every armed conflict since its creation 670 years ago. The bolt-action design of the rifle remains virtually identical to its original design, whether used for hunting, sniping, or endless trench warfare. Loads 10 rounds of .30 rifle.
   components:

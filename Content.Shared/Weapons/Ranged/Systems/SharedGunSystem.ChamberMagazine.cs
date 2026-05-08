@@ -9,7 +9,10 @@ using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Containers;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Security.Cryptography;
+using YamlDotNet.Core.Tokens;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -32,7 +35,7 @@ public abstract partial class SharedGunSystem
         SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, GetVerbsEvent<InteractionVerb>>(OnChamberInteractionVerb);
         SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, GetVerbsEvent<AlternativeVerb>>(OnMagazineVerb);
 
-        SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, AfterInteractUsingEvent>(OnInteractUsing); //SS220 weapon overhaul
+        SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, InteractUsingEvent>(OnInteractUsing); //SS220 weapon overhaul
         SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, AmmoFillDoAfterEvent>(OnChamberMagAmmoFillDoAfter); //SS220 weapon overhaul
 
         SubscribeLocalEvent<ChamberMagazineAmmoProviderComponent, EntInsertedIntoContainerMessage>(OnMagazineSlotChange);
@@ -122,17 +125,44 @@ public abstract partial class SharedGunSystem
     }
 
     //SS220 weapon overhaul begin
-    private void OnInteractUsing(Entity<ChamberMagazineAmmoProviderComponent> ent, ref AfterInteractUsingEvent args)
+    private void OnInteractUsing(Entity<ChamberMagazineAmmoProviderComponent> ent, ref InteractUsingEvent args)
     {
-        if (args.Handled ||
+        if (!ent.Comp.CanBeLoadedManually ||
+            args.Handled ||
             args.Used == args.Target ||
-            Deleted(args.Target) ||
-            !TryComp<BallisticAmmoProviderComponent>(args.Used, out var usedComponent) ||
-            !usedComponent.MayTransfer ||
-            usedComponent.Whitelist == null)
+            Deleted(args.Target))
+            return;
+
+        var magEnt = GetMagazineEntity(ent.Owner);
+
+        if (!TryComp<BallisticAmmoProviderComponent>(magEnt, out var magComp) || magComp.Entities.Count >= magComp.Capacity)
+            return;
+
+        if (!_whitelistSystem.IsWhitelistFail(magComp.Whitelist, args.Used))
         {
+            if(ent.Comp.MustBeLoadedThroughChamber)
+            {
+                InsertCartridgeThroughChamber(args.Used, ((EntityUid)magEnt, magComp), ent);
+
+                Audio.PlayPredicted(ent.Comp.InsertSound, ent, args.User);
+                UpdateAmmoCount(ent);
+                args.Handled = true;
+
+                return;
+            }
+            InsertCartridge(args.Used, ((EntityUid)magEnt, magComp), ent);
+
+            Audio.PlayPredicted(ent.Comp.InsertSound, ent, args.User);
+            UpdateAmmoCount(ent);
+            args.Handled = true;
+
             return;
         }
+
+        if (!TryComp<BallisticAmmoProviderComponent>(args.Used, out var usedComponent) ||
+            !usedComponent.MayTransfer ||
+            usedComponent.Whitelist == null)
+            return;
 
         args.Handled = true;
 
@@ -160,90 +190,137 @@ public abstract partial class SharedGunSystem
         if (!TryComp<BallisticAmmoProviderComponent>(magEnt, out var magComp) || magComp.Entities.Count >= magComp.Capacity)
             return;
 
-        bool moreSpace = false;
-        bool moreAmmo = false;
+        bool repeat = false;
 
         if (ent.Comp.MustBeLoadedThroughChamber)
         {
-            var chamberEnt = GetChamberEntity(ent.Owner);
-
-            if (chamberEnt != null)
+            if (usedComp.Entities.Count > 0)
             {
-                magComp.Entities.Add((EntityUid)chamberEnt);
-                Containers.Insert((EntityUid)chamberEnt, magComp.Container);
-            }
+                if (!CanInsertBallistic(((EntityUid)magEnt, magComp), usedComp.Entities[^1]))
+                    return;
 
-            if (usedComp.Entities.Count <= 0)
-            {
-                usedComp.UnspawnedCount--;
-                DirtyField<BallisticAmmoProviderComponent>(((EntityUid)args.Used, usedComp), nameof(BallisticAmmoProviderComponent.UnspawnedCount));
-                var newAmmoEntity = Spawn(usedComp.Proto, _transform.GetMapCoordinates(ent));
-
-                TryInsertChamber(ent, newAmmoEntity);
-
+                InsertCartridgeThroughChamber(usedComp.Entities[^1], ((EntityUid)magEnt, magComp), ent);
+                usedComp.Entities.Remove(usedComp.Entities[^1]);
                 Dirty((EntityUid)args.Used, usedComp);
-                Dirty(ent);
-                Dirty((EntityUid)magEnt, magComp);
 
-                UpdateAmmoCount(ent);
+                repeat = magComp.Entities.Count + magComp.UnspawnedCount < magComp.Capacity && usedComp.Entities.Count + usedComp.UnspawnedCount > 0;
 
-                moreSpace = magComp.Entities.Count + magComp.UnspawnedCount < magComp.Capacity;
-                moreAmmo = usedComp.Entities.Count + usedComp.UnspawnedCount > 0;
-                args.Repeat = moreSpace && moreAmmo;
+                args.Repeat = repeat;
+
+                Audio.PlayPredicted(ent.Comp.InsertSound, ent, args.User);
+
+                UpdateBallisticAppearance(((EntityUid)args.Used, usedComp));
+
                 return;
             }
-            if (TryInsertChamber(ent.Owner, usedComp.Entities[^1]))
+
+            usedComp.UnspawnedCount--;
+            var newAmmoEntityChamber = Spawn(usedComp.Proto, _transform.GetMapCoordinates(ent));
+
+            if (!CanInsertBallistic(((EntityUid)magEnt, magComp), newAmmoEntityChamber))
             {
-                usedComp.Entities.Remove(usedComp.Entities[^1]);
+                usedComp.Entities.Add(newAmmoEntityChamber);
+                Containers.Insert(newAmmoEntityChamber, usedComp.Container);
 
                 Dirty((EntityUid)args.Used, usedComp);
-                Dirty(ent);
-                Dirty((EntityUid)magEnt, magComp);
 
-                UpdateAmmoCount(ent);
+                if (IsClientSide(newAmmoEntityChamber))
+                    Del(newAmmoEntityChamber);
 
-                moreSpace = magComp.Entities.Count + magComp.UnspawnedCount < magComp.Capacity;
-                moreAmmo = usedComp.Entities.Count + usedComp.UnspawnedCount > 0;
-                args.Repeat = moreSpace && moreAmmo;
+                return;
             }
 
+            DirtyField<BallisticAmmoProviderComponent>(((EntityUid)args.Used, usedComp), nameof(BallisticAmmoProviderComponent.UnspawnedCount));
+
+            InsertCartridgeThroughChamber(newAmmoEntityChamber, ((EntityUid)magEnt, magComp), ent);
+
+            repeat = magComp.Entities.Count + magComp.UnspawnedCount < magComp.Capacity && usedComp.Entities.Count + usedComp.UnspawnedCount > 0;
+
+            args.Repeat = repeat;
+
+            Audio.PlayPredicted(ent.Comp.InsertSound, ent, args.User);
+
+            UpdateBallisticAppearance(((EntityUid)args.Used, usedComp));
+
             return;
         }
 
-        if (usedComp.Entities.Count <= 0)
+        if (usedComp.Entities.Count > 0)
         {
-            usedComp.UnspawnedCount--;
-            DirtyField<BallisticAmmoProviderComponent>(((EntityUid)args.Used, usedComp), nameof(BallisticAmmoProviderComponent.UnspawnedCount));
-            var newAmmoEntity = Spawn(usedComp.Proto, _transform.GetMapCoordinates(ent));
+            if (!CanInsertBallistic(((EntityUid)magEnt, magComp), usedComp.Entities[^1]))
+                return;
 
-            magComp.Entities.Add((EntityUid)newAmmoEntity);
-            Containers.Insert((EntityUid)newAmmoEntity, magComp.Container);
+            InsertCartridge(usedComp.Entities[^1], ((EntityUid)magEnt, magComp), ent);
+            usedComp.Entities.Remove(usedComp.Entities[^1]);
+            Dirty((EntityUid)args.Used, usedComp);
+
+            repeat = magComp.Entities.Count + magComp.UnspawnedCount < magComp.Capacity && usedComp.Entities.Count + usedComp.UnspawnedCount > 0;
+
+            args.Repeat = repeat;
+
+            Audio.PlayPredicted(ent.Comp.InsertSound, ent, args.User);
+
+            UpdateBallisticAppearance(((EntityUid)args.Used, usedComp));
+
+            return;
+        }
+
+        usedComp.UnspawnedCount--;
+        var newAmmoEntity = Spawn(usedComp.Proto, _transform.GetMapCoordinates(ent));
+
+        if (!CanInsertBallistic(((EntityUid)magEnt, magComp), newAmmoEntity))
+        {
+            usedComp.Entities.Add(newAmmoEntity);
+            Containers.Insert(newAmmoEntity, usedComp.Container);
 
             Dirty((EntityUid)args.Used, usedComp);
-            Dirty(ent);
-            Dirty((EntityUid)magEnt, magComp);
 
-            UpdateAmmoCount(ent);
+            if (IsClientSide(newAmmoEntity))
+                Del(newAmmoEntity);
 
-            moreSpace = magComp.Entities.Count + magComp.UnspawnedCount < magComp.Capacity;
-            moreAmmo = usedComp.Entities.Count + usedComp.UnspawnedCount > 0;
-            args.Repeat = moreSpace && moreAmmo;
             return;
         }
 
-        Containers.Insert(usedComp.Entities[^1], magComp.Container);
+        DirtyField<BallisticAmmoProviderComponent>(((EntityUid)args.Used, usedComp), nameof(BallisticAmmoProviderComponent.UnspawnedCount));
 
-        usedComp.Entities.Remove(usedComp.Entities[^1]);
+        InsertCartridge(newAmmoEntity, ((EntityUid)magEnt, magComp), ent);
 
-        Dirty((EntityUid)args.Used, usedComp);
-        Dirty(ent);
-        Dirty((EntityUid)magEnt, magComp);
+        repeat = magComp.Entities.Count + magComp.UnspawnedCount < magComp.Capacity && usedComp.Entities.Count + usedComp.UnspawnedCount > 0;
 
-        UpdateAmmoCount(ent);
+        args.Repeat = repeat;
 
-        moreSpace = magComp.Entities.Count + magComp.UnspawnedCount < magComp.Capacity;
-        moreAmmo = usedComp.Entities.Count + usedComp.UnspawnedCount > 0;
-        args.Repeat = moreSpace && moreAmmo;
+        UpdateBallisticAppearance(((EntityUid)args.Used, usedComp));
+
+        Audio.PlayPredicted(usedComp.SoundInsert, ent, args.User);
+    }
+
+    void InsertCartridgeThroughChamber(EntityUid cartridge, Entity<BallisticAmmoProviderComponent> mag, Entity<ChamberMagazineAmmoProviderComponent> gun)
+    {
+        var chamberEnt = GetChamberEntity(gun);
+
+        if (chamberEnt != null)
+        {
+            mag.Comp.Entities.Add((EntityUid)chamberEnt);
+            Containers.Insert((EntityUid)chamberEnt, mag.Comp.Container);
+        }
+
+        TryInsertChamber(gun, cartridge);
+
+        Dirty(gun);
+        Dirty(mag);
+
+        UpdateAmmoCount(gun);
+    }
+
+    void InsertCartridge(EntityUid cartridge, Entity<BallisticAmmoProviderComponent> mag, Entity<ChamberMagazineAmmoProviderComponent> gun)
+    {
+        mag.Comp.Entities.Add(cartridge);
+        Containers.Insert(cartridge, mag.Comp.Container);
+
+        Dirty(gun);
+        Dirty(mag);
+
+        UpdateAmmoCount(gun);
     }
     //SS220 weapon overhaul end
 
