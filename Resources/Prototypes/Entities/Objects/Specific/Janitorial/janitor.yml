@@ -56,6 +56,11 @@
     guides:
     - Janitorial
   - type: DnaSubstanceTrace
+  - type: Clothing
+    quickEquip: false
+    sprite: SS220/Objects/Tools/mopequipped/basemop.rsi
+    slots:
+    - suitStorage
 
 - type: entity
   parent: MopItem
@@ -91,6 +96,11 @@
       tags:
         - Mop
         - MopAdv
+    - type: Clothing
+      quickEquip: false
+      sprite: SS220/Objects/Tools/mopequipped/advmop.rsi
+      slots:
+      - suitStorage
 
 - type: entity
   name: wet floor sign
