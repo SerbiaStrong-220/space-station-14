@@ -227,13 +227,13 @@ public sealed class HookahElectricSystem : EntitySystem
             return;
         }
 
-        if (!_powerCell.TryGetBatteryFromSlot(ent, out _))
+        if (!_powerCell.TryGetBatteryFromSlot(ent.Owner, out _))
         {
             _popup.PopupEntity(Loc.GetString(HookahNoBattery), ent, user);
             return;
         }
 
-        if (!_powerCell.HasDrawCharge(ent))
+        if (!_powerCell.HasDrawCharge(ent.Owner))
         {
             _popup.PopupEntity(Loc.GetString(HookahLowBattery), ent, user);
             return;
@@ -361,7 +361,7 @@ public sealed class HookahElectricSystem : EntitySystem
         if (TryComp<BloodstreamComponent>(args.User, out var bloodstream))
         {
             _reactive.DoEntityReaction(args.User, inhaled, ReactionMethod.Ingestion);
-            _bloodstream.TryAddToChemicals((args.User, bloodstream), inhaled);
+            _bloodstream.TryAddToBloodstream((args.User, bloodstream), inhaled);
         }
 
         Exhale(args.User, hookah);
@@ -424,7 +424,7 @@ public sealed class HookahElectricSystem : EntitySystem
 
         if (TryComp<StackComponent>(tobacco, out var stack) && stack.Count > 1)
         {
-            _stack.Use(tobacco, 1, stack);
+            _stack.TryUse(tobacco, 1);
             _itemSlots.SetLock(hookah, fuel.TobaccoSlot, true);
         }
         else
