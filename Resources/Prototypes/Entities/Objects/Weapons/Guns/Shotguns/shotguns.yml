@@ -214,8 +214,21 @@
   - type: Item
     sprite: SS220/Objects/Weapons/Guns/Shotguns/db_shotgun_inhands_64x.rsi #ss220 double-barreled shotgun resprite
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
+  #SS220 weapon overhaul begin
+  - type: GunWieldBonus
+    minAngle: -5
+    maxAngle: -21
+    angleIncrease: -6.2
+  - type: GunAimable
+    minAngle: -9
+    maxAngle: -8
   - type: Gun
+    angleIncrease: 8
+    angleDecay: 8
+    minAngle: 15
+    maxAngle: 35
     fireRate: 3
+  #SS220 weapon overhaul end
   - type: BallisticAmmoProvider
     capacity: 2
   - type: Construction
@@ -325,9 +338,18 @@
     shape:
     - 0,0,2,0
     sprite: SS220/Objects/Weapons/Guns/Shotguns/sawn_inhands_64x.rsi #SS220 sawn-off shotgun resprite
+  #SS220 weapon overhaul begin
+  - type: GunAimable
+    minAngle: -4
+    maxAngle: -6
   - type: Gun
-    canSuicide: true ##SS220-new-feature kus
+    angleIncrease: 8
+    angleDecay: 2
+    minAngle: 7
+    maxAngle: 35
     fireRate: 3
+  #SS220 weapon overhaul end
+    canSuicide: true ##SS220-new-feature kus
     soundGunshot: # Corvax-Guns
       path: /Audio/Corvax/Weapons/Guns/Gunshots/shotgun_sawed.ogg
   - type: GunSpreadModifier
@@ -369,7 +391,18 @@
     sprite: Objects/Weapons/Guns/Shotguns/hm_pistol.rsi
   - type: Clothing
     sprite: Objects/Weapons/Guns/Shotguns/hm_pistol.rsi
+  #SS220 weapon overhaul begin
+  - type: GunAimable
+    minAngle: -4
+    maxAngle: -6
+  - type: GunSpreadModifier
+    spread: 1.7
   - type: Gun
+    angleIncrease: 10
+    angleDecay: 2
+    minAngle: 7
+    maxAngle: 35
+  #SS220 weapon overhaul end
     fireRate: 4
     soundGunshot: # Corvax-Guns
       path: /Audio/Corvax/Weapons/Guns/Gunshots/shotgun_pipe.ogg
@@ -422,8 +455,20 @@
   - type: Item
     sprite: Objects/Weapons/Guns/Shotguns/improvised_shotgun_inhands_64x.rsi
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
+  #SS220 weapon overhaul begin
+  - type: GunWieldBonus
+    minAngle: -5
+    maxAngle: -21
+    angleIncrease: -6.2
+  - type: GunAimable
+    minAngle: -9
+    maxAngle: -8
   - type: Gun
-    fireRate: 4 #No reason to stifle the firerate since you have to manually reload every time anyways.
+    angleIncrease: 8
+    angleDecay: 8
+    minAngle: 15
+    maxAngle: 35
+  #SS220 weapon overhaul end
   - type: BallisticAmmoProvider
     capacity: 1
     proto: null
@@ -458,13 +503,41 @@
     - 0,0,3,0 # smaller than BaseShotgun by 1 tile
   - type: BallisticAmmoProvider
     capacity: 4
-  - type: GunRequiresWield
+  #SS220 weapon overhaul begin
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: InternalMagazineShotgunShort
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+            - ShellShotgun
+  - type: GunWieldBonus
+    minAngle: -5
+    maxAngle: -20
+    angleIncrease: -4
+  - type: GunAimable
+    minAngle: -5
+    maxAngle: -6
   - type: Gun
+    angleIncrease: 7
+    angleDecay: 6
+    minAngle: 15
+    maxAngle: 35
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/hushpup.ogg
       params:
         volume: -3
         rolloffFactor: 1.3
     fireRate: 2
+  #SS220 weapon overhaul end
+  - type: GunRequiresWield
   - type: GunSpreadModifier
     spread: 1.2

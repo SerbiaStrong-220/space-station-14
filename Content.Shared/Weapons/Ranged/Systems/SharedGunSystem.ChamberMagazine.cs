@@ -125,6 +125,7 @@ public abstract partial class SharedGunSystem
     }
 
     //SS220 weapon overhaul begin
+    //Basically rewrittem loading for BallisticAmmoProvider
     private void OnInteractUsing(Entity<ChamberMagazineAmmoProviderComponent> ent, ref InteractUsingEvent args)
     {
         if (!ent.Comp.CanBeLoadedManually ||

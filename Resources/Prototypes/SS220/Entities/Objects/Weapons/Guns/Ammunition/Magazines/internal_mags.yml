@@ -55,3 +55,16 @@
     whitelist:
       tags:
         - ShellShotgun
+
+- type: entity
+  id: InternalMagazineShotgunShort
+  parent: InternalMagazineShotgun
+  name: "magazine (internal)"
+  components:
+  - type: BallisticAmmoProvider
+    proto: ShellShotgun
+    mayTransfer: true
+    capacity: 4
+    whitelist:
+      tags:
+        - ShellShotgun
