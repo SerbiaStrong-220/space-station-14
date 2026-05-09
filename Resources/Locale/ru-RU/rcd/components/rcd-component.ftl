@@ -64,3 +64,5 @@ rcd-component-window-lv-cable = НВ кабель
 rcd-component-window-mv-cable = СВ кабель
 rcd-component-window-hv-cable = ВВ кабель
 rcd-component-window-cable-terminal = кабельный терминал
+
+rcd-component-cannot-build-identical-entity = Это уже существует там!
