@@ -7,3 +7,7 @@
 - type: latheCategory
   id: TileTech
   name: lathe-category-tiletech
+
+- type: latheCategory
+  id: ModSuit
+  name: lathe-category-modsuit

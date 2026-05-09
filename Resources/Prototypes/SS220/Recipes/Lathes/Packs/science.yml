@@ -1,0 +1,5 @@
+#Dynamic
+- type: latheRecipePack
+  id: EVAModSuit
+  recipes:
+  - ClothingBackpackEmergencyEVA

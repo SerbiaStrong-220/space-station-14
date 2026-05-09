@@ -1,0 +1,12 @@
+#EVAModsuit
+- type: latheRecipe
+  id: ClothingBackpackEmergencyEVA
+  result: ClothingBackpackEmergencyEVA
+  completetime: 20
+  categories:
+  - ModSuit
+  materials:
+    Plasteel: 1500
+    Durathread: 1500
+    Cloth: 1000
+    Steel: 1000

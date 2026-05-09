@@ -221,6 +221,7 @@
     - ChemistryStatic
     - SurgeryStatic
     dynamicPacks:
+    - EVAModSuit # SS220 EVAModsuit
     - AdvancedTools
     - ScienceEquipment
     - ScienceExplosives
