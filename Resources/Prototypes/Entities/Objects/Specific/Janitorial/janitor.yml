@@ -59,7 +59,7 @@
   #SS220-MopOnBack begin
   - type: Clothing
     quickEquip: false
-    sprite: SS220/Objects/Tools/mopequipped/basemop.rsi
+    sprite: SS220/Objects/Specific/mopequipped/basemop.rsi
     slots:
     - suitStorage
   #SS220-MopOnBack end
@@ -101,7 +101,7 @@
     #SS220-MopOnBack begin
     - type: Clothing
       quickEquip: false
-      sprite: SS220/Objects/Tools/mopequipped/advmop.rsi
+      sprite: SS220/Objects/Specific/mopequipped/advmop.rsi
       slots:
       - suitStorage
     #SS220-MopOnBack end
