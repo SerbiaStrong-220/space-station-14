@@ -347,7 +347,6 @@
       Slash: 30
       Radiation: 1000
       Poison: 1000
-      Airloss: 1000
       Caustic: 1000
     durabilitytresholddict:
       Piercing: 10000
@@ -356,7 +355,6 @@
       Slash: 10000
       Radiation: 10000
       Poison: 1000
-      Airloss: 1000
       Caustic: 1000
   - type: InstastunResist
     resistedStunTypes:

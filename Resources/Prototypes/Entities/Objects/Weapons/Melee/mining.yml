@@ -38,7 +38,6 @@
       Slash: 30
       Radiation: 1000
       Poison: 1000
-      Airloss: 1000
       Caustic: 1000
       Asphyxiation: 1000
       Bloodloss: 1000
@@ -188,7 +187,6 @@
       Slash: 30
       Radiation: 1000
       Poison: 1000
-      Airloss: 1000
       Caustic: 1000
       Asphyxiation: 1000
       Bloodloss: 1000
@@ -329,7 +327,6 @@
       Slash: 30
       Radiation: 1000
       Poison: 1000
-      Airloss: 1000
       Caustic: 1000
       Asphyxiation: 1000
       Bloodloss: 1000
