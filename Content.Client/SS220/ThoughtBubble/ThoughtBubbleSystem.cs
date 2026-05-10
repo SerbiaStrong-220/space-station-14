@@ -16,7 +16,6 @@ public sealed class ThoughtBubbleSystem : EntitySystem
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly IEyeManager _eyeManager = default!;
 
-    private const float VerticalOffset = 0.8f;
     public override void Initialize()
     {
         base.Initialize();
@@ -51,6 +50,8 @@ public sealed class ThoughtBubbleSystem : EntitySystem
         }
 
         ent.Comp.BubbleEntity ??= Spawn(ent.Comp.BubbleProto, mapCoord);
+
+        _transform.SetParent(ent.Comp.BubbleEntity.Value,ent.Owner);
 
         if (ent.Comp.BubbleEntity == null)
             return;
@@ -97,28 +98,5 @@ public sealed class ThoughtBubbleSystem : EntitySystem
 
         QueueDel(ent.Comp.BubbleEntity);
         ent.Comp.BubbleEntity = null;
-    }
-
-    public override void FrameUpdate(float frameTime)
-    {
-        base.FrameUpdate(frameTime);
-
-        var query = EntityQueryEnumerator<ThoughtBubbleComponent>();
-        while (query.MoveNext(out var uid, out var comp))
-        {
-            if (comp.BubbleEntity == null)
-                continue;
-
-            var ownerWorldPos = _transform.GetWorldPosition(uid);
-
-            var eyeAngle = _eyeManager.CurrentEye.Rotation;
-            var eyeWorld = (-eyeAngle).ToWorldVec();
-
-            var offset = eyeWorld * VerticalOffset;
-            _transform.SetWorldPosition(comp.BubbleEntity.Value, ownerWorldPos - offset);
-
-            var targetAngle = eyeWorld.ToAngle() + Angle.FromDegrees(90);
-            _transform.SetWorldRotation(comp.BubbleEntity.Value, targetAngle);
-        }
     }
 }
