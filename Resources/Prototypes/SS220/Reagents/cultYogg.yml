@@ -118,6 +118,7 @@
           components:
           - BibleUser
           - CultYogg
+          - MindShield
         effectProto: StatusEffectForcedSleeping
         time: 3
         type: Add
@@ -135,3 +136,4 @@
           components:
           - BibleUser
           - CultYogg
+          - MindShield
