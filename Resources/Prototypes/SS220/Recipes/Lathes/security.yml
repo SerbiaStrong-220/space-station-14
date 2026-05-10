@@ -98,3 +98,23 @@
     Plastic: 300
     Gold: 200
     Silver: 200
+
+- type: latheRecipe
+  id: WeaponEnergyTurretSecurityMachineCircuitboard
+  result: WeaponEnergyTurretSecurityMachineCircuitboard
+  completetime: 5
+  materials:
+    Glass: 400
+    Gold: 400
+    Silver: 400
+    Plasma: 200
+
+- type: latheRecipe
+  id: WeaponEnergyTurretSecurityControlPanelElectronics
+  result: WeaponEnergyTurretSecurityControlPanelElectronics
+  completetime: 5
+  materials:
+    Glass: 400
+    Gold: 400
+    Silver: 400
+    Plasma: 200
