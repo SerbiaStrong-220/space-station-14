@@ -117,3 +117,30 @@
           Quantity: 15
         - ReagentId: Vitamin
           Quantity: 30
+
+- type: entity
+  name: sawdustporridge
+  parent: FoodBowlBase
+  id: FoodSawdustPorridge
+  description: Sawdust porridge, how did we get to this point?
+  components:
+  - type: FlavorProfile
+    flavors:
+    - sawdustporridge
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/bowl.rsi
+    layers:
+    - state: bowl
+    - state: sawdustporridge
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Vitamin
+          Quantity: 1
+        - ReagentId: Water
+          Quantity: 4 
+

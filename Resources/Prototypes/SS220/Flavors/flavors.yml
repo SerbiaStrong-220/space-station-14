@@ -82,3 +82,9 @@
   id: driedbnuuynyatina
   flavorType: Base
   description: flavor-base-driedbnuuynyatina
+
+- type: flavor
+  id: sawdustporridge
+  flavorType: Complex
+  description: как отчаяние и древесина
+
