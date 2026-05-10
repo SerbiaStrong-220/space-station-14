@@ -37,6 +37,10 @@ public sealed class ThoughtBubbleSystem : EntitySystem
     private void OnStateHandled(Entity<ThoughtBubbleComponent> ent, ref AfterAutoHandleStateEvent args)
     {
         var item = GetEntity(ent.Comp.PointedItem);
+
+        if (item == null)
+            return;
+
         var mapCoord = _transform.GetMapCoordinates(ent.Owner);
 
         if (ent.Comp.BubbleEntity != null)
@@ -60,13 +64,13 @@ public sealed class ThoughtBubbleSystem : EntitySystem
                 false))
             return;
 
-        var rsiItem = _sprite.LayerGetEffectiveRsi((item, itemSprite), 0);
-        var state = _sprite.LayerGetRsiState((item, itemSprite), 0);
+        var rsiItem = _sprite.LayerGetEffectiveRsi((item.Value, itemSprite), 0);
+        var state = _sprite.LayerGetRsiState((item.Value, itemSprite), 0);
 
         if (rsiItem == null || state == null)
             return;
 
-        //Is this really a convenient way to transferring sprite data?
+        //Is this really a convenient way of transfer sprite data?
         //Possible display bugs due to multiple layers on the item.
         var layerData = new PrototypeLayerData
         {
@@ -76,6 +80,8 @@ public sealed class ThoughtBubbleSystem : EntitySystem
 
         _sprite.LayerSetData((ent.Comp.BubbleEntity.Value, thoughtSprite), targetLayer, layerData);
         _sprite.LayerSetVisible((ent.Comp.BubbleEntity.Value, thoughtSprite), targetLayer, true);
+
+        ent.Comp.PointedItem = null;
     }
 
     private void OnShutdown(Entity<ThoughtBubbleComponent> ent, ref ComponentShutdown args)

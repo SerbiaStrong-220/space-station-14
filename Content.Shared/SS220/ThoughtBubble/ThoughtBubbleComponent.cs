@@ -25,12 +25,12 @@ public sealed partial class ThoughtBubbleComponent : Component
     public EntProtoId BubbleProto = "EffectThoughtBubble";
 
     [ViewVariables, AutoNetworkedField]
-    public NetEntity PointedItem;
+    public NetEntity? PointedItem;
 
     /// <summary>
     /// Client-side bubble entity
     /// </summary>
-    [ViewVariables, AutoNetworkedField]
+    [ViewVariables]
     public EntityUid? BubbleEntity;
 }
 

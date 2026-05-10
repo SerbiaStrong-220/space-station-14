@@ -18,7 +18,7 @@ public sealed class SharedThoughtBubbleSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<MindContainerComponent,PointedOwnItemEvent>(OnPointedOwnItem);
+        SubscribeLocalEvent<MindContainerComponent, PointedOwnItemEvent>(OnPointedOwnItem);
     }
 
     private void OnPointedOwnItem(Entity<MindContainerComponent> ent, ref PointedOwnItemEvent args)
@@ -50,7 +50,8 @@ public sealed class SharedThoughtBubbleSystem : EntitySystem
 }
 
 
-public sealed class PointedOwnItemEvent : EntityEventArgs
+[ByRefEvent]
+public record struct PointedOwnItemEvent
 {
     public EntityUid Item;
 
