@@ -84,7 +84,7 @@ public abstract partial class SharedBatterySystem
             return;
 
         var oldValue = GetCharge(ent);
-        var newValue = Math.Clamp(value, 0, ent.Comp.MaxCharge);
+        var newValue = Math.Clamp(value, 0, ent.Comp.IsOvercharged ? value : ent.Comp.MaxCharge);
         var delta = newValue - oldValue;
 
         if (delta == 0f)
@@ -174,8 +174,10 @@ public abstract partial class SharedBatterySystem
         var charge = Math.Clamp(ent.Comp.LastCharge + (float)(dt * ent.Comp.ChargeRate), 0f, ent.Comp.IsOvercharged ? ent.Comp.StartingCharge : ent.Comp.MaxCharge); // SS220-add-smes-overcharge
 
         // SS220-add-overcharge-begin
-        if (ent.Comp.IsOvercharged)
-            ent.Comp.IsOvercharged = charge < ent.Comp.MaxCharge;
+        // Current logic calls GetCharge several times before setting StartingCharge
+        // That's why current logic checks if we were actually charged
+        if (ent.Comp.IsOvercharged && ent.Comp.LastCharge > 0)
+            ent.Comp.IsOvercharged = charge > ent.Comp.MaxCharge;
         // SS220-add-overcharge-end
 
         return charge;
