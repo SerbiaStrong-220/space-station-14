@@ -6,9 +6,16 @@ on:
 
 jobs:
   invite-contributor:
-    if: github.event.pull_request.merged == true && contains(fromJson('["NONE","FIRST_TIMER","FIRST_TIME_CONTRIBUTOR"]'), github.event.pull_request.author_association)
+    if: github.event.pull_request.merged == true && contains(fromJson('["FIRST_TIMER","FIRST_TIME_CONTRIBUTOR"]'), github.event.pull_request.author_association)
     runs-on: ubuntu-latest
     steps:
+      - name: "Debug Info"
+        run: |
+          echo "Login             : ${{ github.event.pull_request.user.login }}"
+          echo "author_association: ${{ github.event.pull_request.author_association }}"
+          echo "PR merged         : ${{ github.event.pull_request.merged }}"
+          echo "PR number         : ${{ github.event.pull_request.number }}"
+          echo "Repository        : ${{ github.repository }}"
       - uses: actions/create-github-app-token@v3
         id: app-token
         with:
@@ -20,6 +27,19 @@ jobs:
         with:
           github-token: ${{ steps.app-token.outputs.token }}
           script: |
+            const login       = context.payload.pull_request.user.login;
+            const association = context.payload.pull_request.author_association;
+            const merged      = context.payload.pull_request.merged;
+
+            console.log(`login=${login} | author_association=${association} | merged=${merged}`);
+
+            const ALLOWED = ["FIRST_TIMER", "FIRST_TIME_CONTRIBUTOR"];
+            if (!ALLOWED.includes(association)) {
+              console.log(`association "${association}" not include in ${JSON.stringify(ALLOWED)}`);
+              return;
+            }
+            console.log(`ok, user ${login} with association "${association}" pass, inviting.`);
+
             const body = `🚀 **${context.payload.pull_request.user.login}, спасибо за твой вклад в проект! PR успешно принят.**
 
             В качестве благодарности мы хотим пригласить тебя в наш закрытый трекер задач. Он представляет собой приватный репозиторий, где хранятся задачи и сырые идеи с нашего трекера SS14. Для тебя это может быть полезно, если ты хочешь опробовать свои силы ещё в каких-либо задачах, но не желаешь брать на себя никаких обязательств.

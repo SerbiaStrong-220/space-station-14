@@ -236,8 +236,8 @@ public abstract class SharedMiGoSystem : EntitySystem
             BlockDuplicate = true,
             CancelDuplicate = true,
             DuplicateCondition = DuplicateConditions.SameEvent,
-            DistanceThreshold = 2.5f,
-            MovementThreshold = 2.5f
+            DistanceThreshold = 2f,
+            MovementThreshold = 2f
         };
 
         var started = _doAfter.TryStartDoAfter(sacrificeDoAfter);
