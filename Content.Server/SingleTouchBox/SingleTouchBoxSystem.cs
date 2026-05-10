@@ -57,10 +57,7 @@ public sealed class SingleTouchBoxSystem : EntitySystem
         if (!ent.Comp.UsedBy.Add(user))
             return false;
 
-        _popup.PopupEntity(
-            Loc.GetString(PopupFirstLoc),
-            ent.Owner,
-            PopupType.Medium);
+        _popup.PopupEntity(Loc.GetString(PopupFirstLoc), ent.Owner, PopupType.Medium);
 
         return true;
     }
