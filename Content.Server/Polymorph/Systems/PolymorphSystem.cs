@@ -385,6 +385,7 @@ public sealed partial class PolymorphSystem : EntitySystem
         // Raise an event to inform anything that wants to know about the entity swap
         var ev = new PolymorphedEvent(uid, parent, true);
         RaiseLocalEvent(uid, ref ev);
+        RaiseLocalEvent(parent, ref ev);//SS220-cult-hotfix-24 #4167
 
         // visual effect spawn
         if (component.Configuration.EffectProto != null)

@@ -20,6 +20,8 @@ public sealed class AstralLeapSystem : EntitySystem
 
         SubscribeLocalEvent<AstralLeapComponent, AstralLeapActionEvent>(OnAstralLeapAction);
         SubscribeLocalEvent<AstralLeapComponent, AstralLeapDoAfterEvent>(OnAstralLeapDoAfter);
+
+        SubscribeLocalEvent<AstralLeapComponent, PolymorphedEvent>(OnPolymorphed);
     }
 
     private void OnMapInit(Entity<AstralLeapComponent> ent, ref MapInitEvent args)
@@ -61,5 +63,13 @@ public sealed class AstralLeapSystem : EntitySystem
     {
         var ev = new PolymorphActionEvent(ent.Comp.AstralEnt);
         RaiseLocalEvent(ent, ev);
+    }
+
+    private void OnPolymorphed(Entity<AstralLeapComponent> ent, ref PolymorphedEvent args)
+    {
+        if (!args.IsRevert)
+            return;
+
+        _actions.StartUseDelay(ent.Comp.AstralActionEntity);
     }
 }
