@@ -23,10 +23,6 @@ public sealed class SharedThoughtBubbleSystem : EntitySystem
 
     private void OnPointedOwnItem(Entity<MindContainerComponent> ent, ref PointedOwnItemEvent args)
     {
-        // Not sure if ghosts and non-ghosts can see each other, so disallow for both.
-        if (HasComp<GhostComponent>(ent.Owner))
-            return;
-
         var comp = EnsureComp<ThoughtBubbleComponent>(ent.Owner);
         comp.PointedItem = GetNetEntity(args.Item);
         comp.TimeEndShow = _timing.CurTime + comp.DurationShow;

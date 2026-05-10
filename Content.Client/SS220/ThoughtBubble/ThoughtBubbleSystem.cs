@@ -1,5 +1,6 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 
+using Content.Shared.Ghost;
 using Content.Shared.SS220.ThoughtBubble;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -57,6 +58,11 @@ public sealed class ThoughtBubbleSystem : EntitySystem
         if (!TryComp<SpriteComponent>(ent.Comp.BubbleEntity, out var thoughtSprite) ||
             !TryComp<SpriteComponent>(item, out var itemSprite))
             return;
+
+        if (HasComp<GhostComponent>(ent.Owner) && TryComp<SpriteComponent>(ent.Owner, out var ownerSprite))
+        {
+            _sprite.SetDrawDepth((ent.Comp.BubbleEntity.Value, thoughtSprite), ownerSprite.DrawDepth);
+        }
 
         if (!_sprite.LayerMapTryGet((ent.Comp.BubbleEntity.Value, thoughtSprite),
                 ThoughtBubbleVisuals.Icon,
