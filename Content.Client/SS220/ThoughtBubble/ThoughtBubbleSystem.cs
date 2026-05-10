@@ -14,7 +14,6 @@ public sealed class ThoughtBubbleSystem : EntitySystem
 {
     [Dependency] private readonly SpriteSystem _sprite = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly IEyeManager _eyeManager = default!;
 
     public override void Initialize()
     {
