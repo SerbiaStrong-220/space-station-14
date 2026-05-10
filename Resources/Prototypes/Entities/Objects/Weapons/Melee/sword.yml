@@ -34,20 +34,10 @@
       Poison: 1000
       Airloss: 1000
       Caustic: 1000
-    durabilitytresholddict:
-      Piercing: 10000
-      Blunt: 10000
-      Heat: 10000
-      Slash: 10000
-      Radiation: 10000
-      Poison: 1000
-      Airloss: 1000
-      Caustic: 1000
-  - type: InstastunResist
-    resistedStunTypes:
-      - Creampie
-      - Projectile
-    active: false
+      Asphyxiation: 1000
+      Bloodloss: 1000
+      Shock: 30
+      Cold: 20
   #SS220 melee weapon block added end
   - type: Utensil
     types:
