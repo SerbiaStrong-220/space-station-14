@@ -506,7 +506,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeSawdustPorridge
-  name: Sawdust porridge recipe
+  name: food sawdust porridge
   result: FoodSawdustPorridge
   time: 10
   group: Other
@@ -519,7 +519,7 @@
 
 - type: microwaveMealRecipe
   id: RecipeSawdustSoup
-  name: Sawdust soup recipe
+  name: food sawdust soup
   result: FoodSawdustSoup
   time: 15
   group: Other
