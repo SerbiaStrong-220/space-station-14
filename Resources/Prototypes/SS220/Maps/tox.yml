@@ -27,6 +27,7 @@
             #Law
             IAA: [ 2, 2 ]
             Magistrate: [1, 1]
+            # NanoTrasenRepresentative: [ 1, 1 ] #SS220 TODO NanoTraisen Representative
             Lawyer: [ 3, 3 ]
             #Security
             HeadOfSecurity: [ 1, 1 ]
@@ -76,7 +77,7 @@
             ServiceWorker: [ 2, 2 ]
             Zookeeper: [ 1, 1 ]
             SeniorService: [ 1, 1 ]
-            Boxer: [ 2, 2]
+            Boxer: [ 2, 2 ]
 
         - type: StationGoal
           goals:

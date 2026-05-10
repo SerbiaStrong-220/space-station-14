@@ -2,11 +2,10 @@
 using Content.Shared.Actions;
 using Content.Shared.SS220.Shitspawn.AshDrake;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using System;
 using System.Numerics;
 
 namespace Content.Server.SS220.Shitspawn.AshDrake;
@@ -48,18 +47,17 @@ public sealed class AshDrakeMeteorSystem : EntitySystem
                 mapCoords.Y + _random.NextFloat(-comp.Radius, comp.Radius),
                 mapCoords.MapId);
 
-            var delay = TimeSpan.FromSeconds(i * comp.SpawnInterval);
+            var proto = comp.ProjectileProto;
             var height = comp.SpawnHeight;
             var speed = comp.Speed;
-
-            Timer.Spawn(delay, () => SpawnMeteor(pos, height, speed));
+            Timer.Spawn(TimeSpan.FromSeconds(i * comp.SpawnInterval), () => SpawnMeteor(pos, proto, height, speed));
         }
     }
 
-    private void SpawnMeteor(MapCoordinates target, float spawnHeight, float speed)
+    private void SpawnMeteor(MapCoordinates target, EntProtoId proto, float spawnHeight, float speed)
     {
         var startPos = new MapCoordinates(target.X, target.Y + spawnHeight, target.MapId);
-        var visual = Spawn("AshDrakeFireMeteorFalling", startPos);
+        var visual = Spawn(proto, startPos);
 
         var falling = AddComp<AshDrakeMeteorFallingComponent>(visual);
         falling.Target = new Vector2(target.X, target.Y);

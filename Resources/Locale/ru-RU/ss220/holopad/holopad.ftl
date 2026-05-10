@@ -4,6 +4,8 @@ holopad-labor-prison-block = Каторга - Тюремный блок
 holopad-labor-security = Каторга - Охрана
 holopad-station-warden = Станция - Смотритель
 
+holopad-command-ntr = Командование - Представитель НТ
+
 # Entities
 ent-HolopadLaborCommandLongRange = { ent-HolopadLongRange }
     .desc = { ent-HolopadLongRange.desc }
@@ -17,3 +19,7 @@ ent-HolopadLaborSecurityLongRange = { ent-HolopadLongRange }
 ent-HolopadStationWardenLongRange = { ent-HolopadLongRange }
     .desc = { ent-HolopadLongRange.desc }
     .suffix = { holopad-station-warden }
+
+ent-HolopadCommandNanoTrasenRepresentative = { ent-Holopad }
+    .desc = { ent-Holopad.desc }
+    .suffix = { holopad-command-ntr }

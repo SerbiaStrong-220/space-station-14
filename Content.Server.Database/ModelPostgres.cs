@@ -39,16 +39,9 @@ namespace Content.Server.Database
             // ReSharper disable StringLiteralTypo
             // Enforce that an address cannot be IPv6-mapped IPv4.
             // So that IPv4 addresses are consistent between separate-socket and dual-stack socket modes.
-            modelBuilder.Entity<ServerBan>().ToTable(t =>
+            modelBuilder.Entity<BanAddress>().ToTable(t =>
                 t.HasCheckConstraint("AddressNotIPv6MappedIPv4", "NOT inet '::ffff:0.0.0.0/96' >>= address"));
 
-            modelBuilder.Entity<ServerRoleBan>().ToTable( t =>
-                t.HasCheckConstraint("AddressNotIPv6MappedIPv4", "NOT inet '::ffff:0.0.0.0/96' >>= address"));
-
-            // SS220 Species bans begin
-            modelBuilder.Entity<ServerSpeciesBan>().ToTable(t =>
-                t.HasCheckConstraint("AddressNotIPv6MappedIPv4", "NOT inet '::ffff:0.0.0.0/96' >>= address"));
-            // SS220 Species bans end
 
             modelBuilder.Entity<Player>().ToTable(t =>
                 t.HasCheckConstraint("LastSeenAddressNotIPv6MappedIPv4",

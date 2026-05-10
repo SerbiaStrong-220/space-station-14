@@ -86,11 +86,11 @@ ent-SpawnMobSlimesPetGhostRole = Спавнер { ent-MobSlimesPet }
 ghost-role-information-pet-slime-name = { ent-MobSlimesPet }
 ghost-role-information-pet-slime-description = { ent-MobSlimesPet.desc }
 
-ent-MobSpaceCatPetGhostRole = { ent-MobSpaceCatPet }
-    .desc = { ent-MobSpaceCatPet.desc }
-ent-SpawnMobSpaceCatPetGhostRole = Спавнер { ent-MobSpaceCatPet }
-ghost-role-information-pet-spacecat-name = { ent-MobSpaceCatPet }
-ghost-role-information-pet-spacecat-description = { ent-MobSpaceCatPet.desc }
+ent-MobSpaceCatPetGhostRole = { ent-MobCatSpace }
+    .desc = { ent-MobCatSpace.desc }
+ent-SpawnMobSpaceCatPetGhostRole = Спавнер { ent-MobCatSpace }
+ghost-role-information-pet-spacecat-name = { ent-MobCatSpace }
+ghost-role-information-pet-spacecat-description = { ent-MobCatSpace.desc }
 
 ent-MobENGhostRole = { ent-MobEN }
     .desc = { ent-MobEN.desc }
@@ -101,6 +101,14 @@ ent-MobStevenCrocodileGhostRole = стивен
 ent-SpawnMobStevenCrocodile = Спавнер Стивена
 ghost-role-information-pet-steven-name = Стивен
 ghost-role-information-pet-steven-description = Питомец Магистрата. Символ статуса и силы, преданный друг своего хозяина, который не прочь прикусить деловые бумаги и поиграть с финансовыми документами.
+
+ent-MobRabbitBnuuyGhostRole = бнууй
+    .desc = Любимый декоративный кролик Смотрителя. Следите за оружейной и не спускайте взгляд с нерасторопных офицеров!
+    .suffix = Роль
+
+ent-SpawnMobRabbitBnuuyPetGhostRole = Спавнер Бнууя
+ghost-role-information-pet-bnuuy-name = Бнууй
+ghost-role-information-pet-bnuuy-description = Любимый декоративный кролик Смотрителя. Следите за оружейной и не спускайте взгляд с нерасторопных офицеров!
 
 ghost-role-information-security-pet-Roxi-name = Рокси
 ghost-role-information-security-pet-Roxi-description = Собака службы безопасности. Издевайтесь над офицерами, чтобы погладить их по голове и преследовать жестоких преступников по пятам.

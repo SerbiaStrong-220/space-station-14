@@ -44,12 +44,12 @@ public sealed class SharedInnerHandToggleableSystem : EntitySystem
             return;
 
         var manager = EnsureComp<ContainerManagerComponent>(ent);
-        int unusedPrefix = SharedBodySystem.PartSlotContainerIdPrefix.Length;
 
         //pre-creating everything required
         foreach (var hand in handsComp.SortedHands)
         {
-            var name = string.Concat(InnerHandPrefix, hand.AsSpan(unusedPrefix)); ;//add and delete shit
+            // TODO UPSTREAM: wtf is here
+            var name = string.Concat(InnerHandPrefix, hand);
             var handInfo = new InnerContainerInfo
             {
                 Container = _containerSystem.EnsureContainer<ContainerSlot>(ent, name, manager),

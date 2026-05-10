@@ -340,10 +340,11 @@
   plantRsi: SS220/Objects/Specific/Hydroponics/watermelondog.rsi
   harvestLogImpact: Medium
   packetPrototype: WatermelonDogSeeds
+  autoSpawnMob: true
   productPrototypes:
     - MobWatermelonDog
   lifespan: 50
-  maturation: 12
+  maturation: 15
   production: 6
   yield: 1
   idealLight: 8

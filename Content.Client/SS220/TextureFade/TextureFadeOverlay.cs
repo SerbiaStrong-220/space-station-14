@@ -28,12 +28,13 @@ public sealed class TextureFadeOverlay : StackableOverlay
     public bool Loop = true;
 
     private readonly ShaderInstance _shader;
+    private static readonly ProtoId<ShaderPrototype> TextureFadeSharedId = "TextureFade";
 
     public TextureFadeOverlay()
     {
         IoCManager.InjectDependencies(this);
         _spriteSystem = _entityManager.EntitySysManager.GetEntitySystem<SpriteSystem>();
-        _shader = _prototypeManager.Index<ShaderPrototype>("TextureFade").InstanceUnique();
+        _shader = _prototypeManager.Index(TextureFadeSharedId).InstanceUnique();
     }
 
     protected override void FrameUpdate(FrameEventArgs args)

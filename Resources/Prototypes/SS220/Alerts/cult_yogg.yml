@@ -1,0 +1,9 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: alert
+  id: VoidBlocker
+  icons:
+  - sprite: SS220/Objects/CultYogg/voidkey.rsi
+    state: icon
+  name: alerts-void-blocker-name
+  description: alerts-void-blocker-desc

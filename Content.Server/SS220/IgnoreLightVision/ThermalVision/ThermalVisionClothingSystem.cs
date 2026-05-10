@@ -24,14 +24,14 @@ public sealed class ThermalVisionClothingSystem : EntitySystem
         if (args.Slot != "eyes")
             return;
 
-        if (!HasComp<ThermalVisionComponent>(args.Equipee))
-            AddComp(args.Equipee, new ThermalVisionComponent(ent.Comp.VisionRadius, ent.Comp.CloseVisionRadius) { State = IgnoreLightVisionOverlayState.Half } );
+        if (!HasComp<ThermalVisionComponent>(args.EquipTarget))
+            AddComp(args.EquipTarget, new ThermalVisionComponent(ent.Comp.VisionRadius, ent.Comp.CloseVisionRadius) { State = IgnoreLightVisionOverlayState.Half } );
     }
 
     private void OnCompUnequip(Entity<ThermalVisionClothingComponent> ent, ref GotUnequippedEvent args)
     {
-        if (HasComp<ThermalVisionComponent>(args.Equipee))
-            RemComp<ThermalVisionComponent>(args.Equipee);
+        if (HasComp<ThermalVisionComponent>(args.EquipTarget))
+            RemComp<ThermalVisionComponent>(args.EquipTarget);
     }
 
 }
