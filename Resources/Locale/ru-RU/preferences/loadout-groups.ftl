@@ -181,3 +181,9 @@ loadout-group-reporter-jumpsuit = Репортёр, комбинезон
 loadout-group-psychologist-jumpsuit = Психолог, комбинезон
 loadout-group-boxer-jumpsuit = Боксёр, комбинезон
 loadout-group-boxer-gloves = Боксёр, перчатки
+
+loadout-group-survival-military = Военное снаряжение выживания
+
+loadout-group-reporter-head = Шляпа репортера
+
+loadout-group-reporter-outerclothing = Жилет репортера
