@@ -144,3 +144,27 @@
         - ReagentId: Water
           Quantity: 4 
 
+- type: entity
+  name: sawdustsoup
+  parent: FoodBowlBase
+  id: FoodSawdustSoup
+  description: Sawdust soup, what a disgusting thing.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - sawdustsoup
+  - type: Sprite
+    sprite: SS220/Objects/Consumable/Food/bowl.rsi
+    layers:
+    - state: bowl
+    - state: sawdustsoup
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Water
+          Quantity: 10 
+

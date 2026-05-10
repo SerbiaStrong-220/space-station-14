@@ -509,8 +509,23 @@
   name: Sawdust porridge recipe
   result: FoodSawdustPorridge
   time: 10
+  group: Other
   reagents:
     Water: 5
     Flour: 5
     Cellulose: 5
+  solids:
+    FoodBowlBig: 1
+
+- type: microwaveMealRecipe
+  id: RecipeSawdustSoup
+  name: Sawdust soup recipe
+  result: FoodSawdustSoup
+  time: 15
+  group: Other
+  reagents:
+    Water: 10
+    Cellulose: 10
+  solids:
+    FoodBowlBig: 1
 
