@@ -1,5 +1,4 @@
-// © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
-using Content.Shared.Actions;
+// © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 using Content.Shared.Damage.Systems;
 using Content.Shared.SS220.ArmorBlock;
 using Content.Shared.SS220.ToggleBlocking;
