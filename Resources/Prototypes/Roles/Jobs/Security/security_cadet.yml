@@ -6,10 +6,18 @@
   requirements:
     - !type:OverallPlaytimeRequirement
       time: 10h # SS220-RoleTime 2
-    - !type:SpeciesRequirement #SS220-jobbans begin
+    # SS220-RoleTime begin
+    # - !type:DepartmentTimeRequirement
+    #   department: Security
+    #   time: 10h
+    #   inverted: true # stop playing intern if you're good at security!
+    # SS220-RoleTime end
+    #SS220-jobbans begin
+    - !type:SpeciesRequirement
       inverted: true
       species:
-      - Felinid #SS220-jobbans end
+      - Felinid
+    #SS220-jobbans end
   startingGear: SecurityCadetGear
   experienceDefinition: SecurityCadetRoleExperience # SS220-experience
   icon: "JobIconSecurityCadet"
@@ -19,7 +27,6 @@
   - Security
   - Brig
   - Maintenance
-  - Service
   - External
   - Cryogenics
   special:
@@ -35,13 +42,13 @@
     ears: ClothingHeadsetSecurity
     head: ClothingHeadHelmetBasic
     belt: ClothingBeltSecurityFilled
-    pocket1: WeaponPistolMk58Nonlethal # SS220 Bring-Rubber-Back
+    pocket1: WeaponPistolMk58
     pocket2: BookSecurity
   storage:
     back:
     - Flash
-    - MagazinePistolRubber #SS220-DeleteSecurityLetal-Begin
-    - MagazinePistolRubber
+    - MagazinePistol
+    - MagazinePistol
     - FlashlightSeclite
     - DrinkRelaxingPeachCan #SS220-DeleteSecurityLetal-End
 

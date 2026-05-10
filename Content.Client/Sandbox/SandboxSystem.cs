@@ -26,19 +26,10 @@ namespace Content.Client.Sandbox
         public event Action? SandboxEnabled;
         public event Action? SandboxDisabled;
 
-        public event Action? LightingToggled;
-        public event Action? FovToggled;
-        public event Action? PlayerAttached;
-
         public override void Initialize()
         {
             _adminManager.AdminStatusUpdated += CheckStatus;
             SubscribeNetworkEvent<MsgSandboxStatus>(OnSandboxStatus);
-
-            //TODO FIXME Закомментил ибо пизда всё ломается
-            //SubscribeLocalEvent<GhostComponent, ToggleLightingActionEvent>(OnToggleLighting);
-            //SubscribeLocalEvent<GhostComponent, ToggleFoVActionEvent>(OnToggleFoV);
-            //SubscribeLocalEvent<GhostComponent, PlayerAttachedEvent>(OnPlayerAttached);
         }
 
         private void CheckStatus()
@@ -74,23 +65,6 @@ namespace Content.Client.Sandbox
             CheckStatus();
         }
 
-        /*
-        private void OnPlayerAttached(EntityUid uid, GhostComponent comp, PlayerAttachedEvent ev)
-        {
-            PlayerAttached?.Invoke();
-        }
-
-        private void OnToggleFoV(EntityUid uid, GhostComponent comp, ToggleFoVActionEvent ev)
-        {
-            FovToggled?.Invoke();
-        }
-
-        private void OnToggleLighting(EntityUid uid, GhostComponent comp, ToggleLightingActionEvent ev)
-        {
-            LightingToggled?.Invoke();
-        }
-        */
-
         public void Respawn()
         {
             RaiseNetworkEvent(new MsgSandboxRespawn());
@@ -109,6 +83,11 @@ namespace Content.Client.Sandbox
         public void Suicide()
         {
             RaiseNetworkEvent(new MsgSandboxSuicide());
+        }
+
+        public void ToggleThermalVision()
+        {
+            RaiseNetworkEvent(new MsgSandboxThermalVision());
         }
 
         public bool Copy(ICommonSession? session, EntityCoordinates coords, EntityUid uid)

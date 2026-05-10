@@ -4,19 +4,13 @@
   categories: [ HideSpawnMenu ]
   parent: BaseItem
   description: base soap for SS220 sprites.
+  abstract: true
   components:
   - type: Tag
     tags:
     - Soap
   - type: Sprite
     sprite: SS220/Objects/Specific/Janitorial/soap.rsi
-    layers:
-    - state: snot-4
-      map: ["enum.SolutionContainerLayers.Fill"]
-  - type: SolutionContainerVisuals
-    maxFillLevels: 4
-    fillBaseName: snot-
-    changeColor: false
   - type: Appearance
   - type: Item
     sprite: SS220/Objects/Specific/Janitorial/soap.rsi
@@ -64,7 +58,7 @@
   - type: FlavorProfile
     flavors:
       - clean
-  - type: Food
+  - type: Edible
     solution: soap
   - type: BadFood
   - type: CleansForensics
@@ -94,7 +88,7 @@
     changeColor: false
   - type: Appearance
   - type: ScatteringGrenade
-    fillPrototype: snotlet
+    fillPrototype: Snotlet
     capacity: 30
     delayBeforeTriggerContents: 60
     randomDistance: true
@@ -132,14 +126,13 @@
 
 - type: entity
   name: snotlet
-  id: snotlet
+  id: Snotlet
   categories: [ HideSpawnMenu ]
   parent: SS220Soap
   description: A tiny piece of snots.
   components:
   - type: Sprite
-    layers:
-    - state: snotlet
+    state: snotlet
   - type: Slippery
     slipData:
       knockdownTime: 1.5

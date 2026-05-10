@@ -6,7 +6,7 @@
   setPreference: false
   startingGear: CBURNGear
   experienceDefinition: CBURNRoleExperience # SS220-experience
-  icon: "JobIconNanotrasen"
+  icon: "JobIconCBURN"
   supervisors: job-supervisors-centcom
   canBeAntag: false
   accessGroups:

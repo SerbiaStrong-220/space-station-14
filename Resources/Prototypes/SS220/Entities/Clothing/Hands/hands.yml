@@ -199,7 +199,6 @@
   - type: ToggleClothing
     action: ActionTogglePowergloveDisabler
   - type: BatterySelfRecharger
-    autoRecharge: true
     autoRechargeRate: 50
 
 - type: entity
