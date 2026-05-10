@@ -23,13 +23,17 @@
       tresholddict:
           Radiation: 1000
           Poison: 1000
-          Airloss: 1000
+          Asphyxiation: 1000
+          Bloodloss: 1000
           Caustic: 1000
+          Shock: 30
       durabilitytresholddict:
           Radiation: 1000
           Poison: 1000
-          Airloss: 1000
+          Asphyxiation: 1000
+          Bloodloss: 1000
           Caustic: 1000
+          Shock: 40
       #Those damage types cannot be dealt to the shield and, logically, to the user
     - type: Damageable
       damageContainer: Shield
@@ -84,9 +88,11 @@
           Slash: 15
           Radiation: 1000
           Poison: 1000
-          Airloss: 1000
+          Asphyxiation: 1000
+          Bloodloss: 1000
           Caustic: 1000
-          #Shock: 30
+          Shock: 30
+          Cold: 20
       durabilitytresholddict:
           Piercing: 7
           Blunt: 15
@@ -94,9 +100,11 @@
           Slash: 10
           Radiation: 1000
           Poison: 1000
-          Airloss: 1000
+          Asphyxiation: 1000
+          Bloodloss: 1000
           Caustic: 1000
-          #Shock: 40
+          Shock: 40
+          Cold: 50
 
 - type: entity
   name: laser shield
@@ -117,29 +125,33 @@
       tresholddict:
           Radiation: 1000
           Poison: 1000
-          Airloss: 1000
+          Asphyxiation: 1000
+          Bloodloss: 1000
           Caustic: 1000
           Piercing: 7
           Blunt: 10
           Heat: 60
           Slash: 7
           Shock: 30
+          Cold: 50
       durabilitytresholddict:
           Radiation: 1000
           Poison: 1000
-          Airloss: 1000
+          Asphyxiation: 1000
+          Bloodloss: 1000
           Caustic: 1000
           Piercing: 4
           Blunt: 5
           Heat: 35
           Slash: 4
           Shock: 40
+          Cold: 100
 
 - type: entity
   name: ballistic shield
   parent: [ BaseShieldAlt, BaseSecurityContraband ]
   id: RiotBulletShieldAlt
-  description: A heavy shield made of depelted uranium and plasteel. It is very heavy and unhandy against melee hits but can withstand all but most powerful attacks.
+  description: A heavy shield made of depeleted uranium and plasteel. It is very heavy and unhandy against melee hits but can withstand all but most powerful attacks.
   components:
     - type: Sprite
       state: riot_bullet-icon
@@ -154,23 +166,27 @@
       tresholddict:
           Radiation: 1000
           Poison: 1000
-          Airloss: 1000
+          Asphyxiation: 1000
+          Bloodloss: 1000
           Caustic: 1000
           Piercing: 37
           Blunt: 35
           Heat: 30
           Slash: 35
           Shock: 30
+          Cold: 40
       durabilitytresholddict:
           Radiation: 1000
           Poison: 1000
-          Airloss: 1000
+          Asphyxiation: 1000
+          Bloodloss: 1000
           Caustic: 1000
           Piercing: 30
           Blunt: 30
           Heat: 25
           Slash: 30
           Shock: 40
+          Cold: 50
     - type: ClothingSpeedModifier
       sprintModifier: 0.9
     - type: HeldSpeedModifier
@@ -202,8 +218,11 @@
           Heat: 10
           Radiation: 1000
           Poison: 1000
-          Airloss: 1000
+          Asphyxiation: 1000
+          Bloodloss: 1000
           Caustic: 1000
+          Shock: 30
+          Cold: 20
       durabilitytresholddict:
           Piercing: 5
           Slash: 9
@@ -211,8 +230,11 @@
           Heat: 5
           Radiation: 1000
           Poison: 1000
-          Airloss: 1000
+          Asphyxiation: 1000
+          Bloodloss: 1000
           Caustic: 1000
+          Shock: 40
+          Cold: 35
     - type: Construction
       graph: WoodenBuckler
       node: woodenBuckler
@@ -264,7 +286,8 @@
           Caustic: 2
           Radiation: 1000
           Poison: 1000
-          Airloss: 1000
+          Asphyxiation: 1000
+          Bloodloss: 1000
       durabilitytresholddict:
           Piercing: 0
           Blunt: 0
@@ -272,7 +295,8 @@
           Caustic: 2
           Radiation: 1000
           Poison: 1000
-          Airloss: 1000
+          Asphyxiation: 1000
+          Bloodloss: 1000
     - type: Construction
       graph: CardShield
       node: cardShield
@@ -323,8 +347,11 @@
           Slash: 15
           Radiation: 1000
           Poison: 1000
-          Airloss: 1000
+          Asphyxiation: 1000
+          Bloodloss: 1000
           Caustic: 1000
+          Shock: 10
+          Cold: 20
       durabilitytresholddict:
           Piercing: 5
           Blunt: 15
@@ -332,8 +359,11 @@
           Slash: 10
           Radiation: 1000
           Poison: 1000
-          Airloss: 1000
+          Asphyxiation: 1000
+          Bloodloss: 1000
           Caustic: 1000
+          Shock: 40
+          Cold: 40
     - type: Construction
       graph: MakeshiftShield
       node: makeshiftShield
@@ -385,8 +415,11 @@
           Slash: 7
           Radiation: 1000
           Poison: 1000
-          Airloss: 1000
+          Asphyxiation: 1000
+          Bloodloss: 1000
           Caustic: 1000
+          Shock: 30
+          Cold: 10
       durabilitytresholddict:
           Piercing: 4
           Blunt: 4
@@ -394,8 +427,11 @@
           Slash: 4
           Radiation: 1000
           Poison: 1000
-          Airloss: 1000
+          Asphyxiation: 1000
+          Bloodloss: 1000
           Caustic: 1000
+          Shock: 40
+          Cold: 20
     - type: Construction
       graph: WebObjects
       node: shield
@@ -447,8 +483,10 @@
           Slash: 25
           Radiation: 1000
           Poison: 1000
-          Airloss: 1000
+          Asphyxiation: 1000
+          Bloodloss: 1000
           Caustic: 1000
+          Shock: 10
       durabilitytresholddict:
           Piercing: 12
           Blunt: 20
@@ -456,8 +494,10 @@
           Slash: 20
           Radiation: 1000
           Poison: 1000
-          Airloss: 1000
+          Asphyxiation: 1000
+          Bloodloss: 1000
           Caustic: 1000
+          Shock: 40
       #Have it break into brass when clock cult is is
 
 - type: entity
@@ -489,8 +529,11 @@
           Slash: 7
           Radiation: 1000
           Poison: 1000
-          Airloss: 1000
+          Asphyxiation: 1000
+          Bloodloss: 1000
           Caustic: 1000
+          Shock: 30
+          Cold: 30
       durabilitytresholddict:
           Piercing: 4
           Blunt: 5
@@ -498,8 +541,11 @@
           Slash: 4
           Radiation: 1000
           Poison: 1000
-          Airloss: 1000
+          Asphyxiation: 1000
+          Bloodloss: 1000
           Caustic: 1000
+          Shock: 40
+          Cold: 40
     - type: Destructible
       thresholds:
         - trigger:
@@ -587,8 +633,11 @@
         Slash: 30
         Radiation: 1000
         Poison: 1000
-        Airloss: 1000
+        Asphyxiation: 1000
+        Bloodloss: 1000
         Caustic: 1000
+        Shock: 30
+        Cold: 50
       #Blocks effectively anything station normally uses
       durabilitytresholddict:
         Piercing: 40
@@ -597,8 +646,11 @@
         Slash: 40
         Radiation: 1000
         Poison: 1000
-        Airloss: 1000
+        Asphyxiation: 1000
+        Bloodloss: 1000
         Caustic: 1000
+        Shock: 40
+        Cold: 70
       #Immune to everything except .60
     - type: Damageable
       damageContainer: Shield
@@ -664,8 +716,11 @@
           Slash: 15
           Radiation: 1000
           Poison: 1000
-          Airloss: 1000
+          Asphyxiation: 1000
+          Bloodloss: 1000
           Caustic: 1000
+          Shock: 30
+          Cold: 20
       durabilitytresholddict:
           Piercing: 12
           Blunt: 15
@@ -673,8 +728,11 @@
           Slash: 10
           Radiation: 1000
           Poison: 1000
-          Airloss: 1000
+          Asphyxiation: 1000
+          Bloodloss: 1000
           Caustic: 1000
+          Shock: 40
+          Cold: 30
     - type: ItemToggle
       soundActivate:
         path: /Audio/Weapons/telescopicon.ogg
