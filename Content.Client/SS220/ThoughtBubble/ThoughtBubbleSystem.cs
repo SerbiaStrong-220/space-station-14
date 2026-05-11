@@ -13,7 +13,6 @@ namespace Content.Client.SS220.ThoughtBubble;
 public sealed class ThoughtBubbleSystem : EntitySystem
 {
     [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
 
     private const float ItemSpriteScale = 0.8f;
 
