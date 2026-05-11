@@ -38,6 +38,26 @@
     layers:
     - state: base
       map: ["enum.AmmoVisualLayers.Base"]
+    - state: tip
+      map: ["enum.AmmoVisualLayers.Tip"]
+      color: "#65fe08"
+
+- type: entity
+  id: FullRifleCartridgeHP
+  name: cartridge (7,62x55 HPIB)
+  parent: BaseFullRifleCartridge
+  description: Full-sized rifle cartridge mostly used in battle rifles and LMGs. This one has a hollow-point bullet
+  components:
+  - type: CartridgeAmmo
+    proto: BulletFullRifleHP
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/ammo_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+    - state: tip
+      map: ["enum.AmmoVisualLayers.Tip"]
+      color: "#cf0404"
 
 - type: entity
   id: FullRifleCartridgeIncendiary
@@ -52,6 +72,9 @@
     layers:
     - state: base
       map: ["enum.AmmoVisualLayers.Base"]
+    - state: tip
+      map: ["enum.AmmoVisualLayers.Tip"]
+      color: "#dbdbdb"
 
 - type: entity
   id: FullRifleCartridgeAPM2
@@ -66,3 +89,6 @@
     layers:
     - state: base
       map: ["enum.AmmoVisualLayers.Base"]
+    - state: tip
+      map: ["enum.AmmoVisualLayers.Tip"]
+      color: "#ad42ff"

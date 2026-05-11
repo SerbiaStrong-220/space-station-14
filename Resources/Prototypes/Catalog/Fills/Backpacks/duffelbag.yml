@@ -124,6 +124,7 @@
         children:
         - id: WeaponLightMachineGunL6
         - id: MagazineLightRifleBox
+          amount: 3 #SS220 weapon overhaul
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicateBundle

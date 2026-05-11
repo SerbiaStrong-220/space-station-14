@@ -7,5 +7,17 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 37 #ss220lowTTKUpdate
-      armourPiercing: 6
+        Piercing: 33
+      armourPiercing: -7
+
+- type: entity
+  id: BulletLightRifleAP
+  name: bullet (7,62x41 AP)
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 27
+      armourPiercing: 23

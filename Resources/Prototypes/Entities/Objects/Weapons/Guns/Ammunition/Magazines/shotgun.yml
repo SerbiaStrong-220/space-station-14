@@ -12,12 +12,12 @@
     whitelist:
       tags:
         - ShellShotgun
-    capacity: 16 # FCB realistic guns
+    capacity: 16 #SS220 weapon overhaul
     soundRack:
       path: /Audio/Corvax/Weapons/Guns/Cock/shotgun_cock.ogg # Corvax-Guns
   - type: Item
-    shape: # FCB realistic guns
-    - 0,0,1,1 # FCB realistic guns
+    shape: #SS220 weapon overhaul
+    - 0,0,1,1 #SS220 weapon overhaul
     size: Small
     inhandVisuals:
       left:

@@ -110,3 +110,133 @@
   materials:
     Steel: 50 # Very cheap because it's weak
     Plastic: 50
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: MagazineBoxAntiMaterielAP
+  result: MagazineBoxAntiMaterielAP
+  materials:
+    Steel: 200
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: MagazineBoxAntiMaterielHP
+  result: MagazineBoxAntiMaterielHP
+  materials:
+    Steel: 200
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazineRifleHP
+  result: MagazineRifleHP
+  materials:
+    Steel: 25
+    Plastic: 300
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: MagazineBoxRifleHP
+  result: MagazineBoxRifleHP
+  materials:
+    Plastic: 500
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazineLightRifleHP
+  result: MagazineLightRifleHP
+  materials:
+    Steel: 25
+    Plastic: 360
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: MagazineBoxLightRifleHP
+  result: MagazineBoxLightRifleHP
+  materials:
+    Plastic: 600
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazinePistolHP
+  result: MagazinePistolHP
+  materials:
+    Steel: 25
+    Plastic: 65
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazinePistolSubMachineGunHP
+  result: MagazinePistolSubMachineGunHP
+  materials:
+    Steel: 25
+    Plastic: 250
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: MagazineBoxPistolHP
+  result: MagazineBoxPistolHP
+  materials:
+    Plastic: 300
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: SpeedLoaderMagnumHP
+  result: SpeedLoaderMagnumHP
+  materials:
+    Steel: 50
+    Plastic: 150
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: MagazineBoxMagnumHP
+  result: MagazineBoxMagnumHP
+  materials:
+    Plastic: 240
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazineShotgunHP
+  result: MagazineShotgunHP
+  materials:
+    Steel: 100
+    Plastic: 190
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: BoxShotgunHP
+  result: BoxShotgunHP
+  materials:
+    Steel: 240
+    Plastic: 160
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazineShotgunHEI
+  result: MagazineShotgunHEI
+  materials:
+    Steel: 100
+    Plastic: 190
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: BoxShotgunHEI
+  result: BoxShotgunHEI
+  materials:
+    Steel: 240
+    Plastic: 160
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazineShotgunExplosive
+  result: MagazineShotgunExplosive
+  materials:
+    Steel: 100
+    Plastic: 190
+
+- type: latheRecipe
+  parent: BaseAmmoBoxRecipe
+  id: BoxShotgunHE
+  result: BoxShotgunHE
+  materials:
+    Steel: 240
+    Plastic: 160

@@ -93,6 +93,7 @@
     mustBeLoadedThroughChamber: false
     soundRack:
       path: /Audio/Weapons/Guns/Cock/m41_cock.ogg
+      volume: 7
   - type: InternalMagazine
   - type: ItemSlots
     slots:
@@ -303,6 +304,10 @@
   #SS220 weapon overhaul begin
   - type: ChamberMagazineAmmoProvider
     autoCycle: false
+    soundBoltOpened:
+      path: /Audio/Weapons/Guns/Cock/shotgun_open.ogg
+    soundBoltClosed:
+      path: /Audio/Weapons/Guns/Cock/shotgun_close.ogg
   - type: Appearance
   - type: GunWieldBonus
     minAngle: -5

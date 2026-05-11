@@ -55,6 +55,22 @@
       color: "#65fe08"
 
 - type: entity
+  id: MagazineFullRifleHP
+  name: "magazine (7,62x55 full rifle)"
+  parent: BaseMagazineFullRifle
+  components:
+  - type: BallisticAmmoProvider
+    proto: FullRifleCartridgeHP
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#cf0404"
+
+- type: entity
   id: MagazineFullRifleIncendiary
   name: "magazine (7,62x55 full rifle)"
   parent: BaseMagazineFullRifle

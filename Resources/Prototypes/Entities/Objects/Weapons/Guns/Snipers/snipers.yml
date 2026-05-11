@@ -165,13 +165,15 @@
     maxAngle: -13
     angleIncrease: -0.4
   - type: GunAimable
-    minAngle: -13
+    minAngle: -14
     maxAngle: -3
+    angleIncrease: -5
   - type: Gun
     minAngle: 17
-    maxAngle: 30
+    maxAngle: 50 #Yes, i really don't want people to use this on close ranges
     angleIncrease: 10
-    angleDecay: 7
+    angleDecay: 4
+    aimedSprintSpeedModifier: 0.4
     fireRate: 1
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/sniper.ogg
@@ -180,7 +182,7 @@
       gun_magazine:
         name: Magazine
         startingItem: MagazineAntiMaterialFMJ
-        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        insertSound: /Audio/Weapons/Guns/MagIn/rifle_load.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         priority: 2
         whitelist:

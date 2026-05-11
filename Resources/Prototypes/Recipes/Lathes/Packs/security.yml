@@ -112,7 +112,6 @@
   recipes:
   - BoxBeanbag
   - BoxShotgunIncendiary
-  - BoxShotgunUranium
   #- BoxShellTranquilizer #SS220-no-tranq
   - MagazineBoxLightRifleIncendiary
   - MagazineBoxLightRifleUranium
@@ -136,6 +135,25 @@
   - SpeedLoaderMagnumUranium
   - MagazineMagnumIncendiary #ss220 more recipies
   - MagazineMagnumUranium #ss220 more recipies
+  #SS220 weapon overhaul begin
+  - MagazineBoxAntiMaterielAP
+  - MagazineBoxAntiMaterielHP
+  - MagazineBoxLightRifleHP
+  - MagazineBoxMagnumHP
+  - MagazineBoxPistolHP
+  - MagazineBoxRifleHP
+  - MagazineLightRifleHP
+  - MagazinePistolHP
+  - MagazinePistolSubMachineGunHP
+  - MagazineRifleHP
+  - SpeedLoaderMagnumHP
+  - MagazineShotgunHP
+  - BoxShotgunHP
+  - MagazineShotgunHEI
+  - BoxShotgunHEI
+  - MagazineShotgunExplosive
+  - BoxShotgunHE
+  #SS220 weapon overhaul end
 
 - type: latheRecipePack
   id: SecurityWeapons

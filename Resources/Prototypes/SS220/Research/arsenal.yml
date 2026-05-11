@@ -11,6 +11,29 @@
   - PortableRecharger
 
 - type: technology
+  id: HollowPointAmmunition
+  name: research-technology-hollow-point-ammunition
+  icon:
+    sprite: Objects/Weapons/Guns/Ammunition/Boxes/pistol.rsi
+    state: incendiarydisplay
+  discipline: Arsenal
+  tier: 2
+  cost: 9000
+  recipeUnlocks:
+  - MagazineBoxAntiMaterielHP
+  - MagazineBoxLightRifleHP
+  - MagazineBoxMagnumHP
+  - MagazineBoxPistolHP
+  - MagazineBoxRifleHP
+  - MagazineLightRifleHP
+  - MagazinePistolHP
+  - MagazinePistolSubMachineGunHP
+  - MagazineRifleHP
+  - SpeedLoaderMagnumHP
+  - BoxShotgunHP
+  - MagazineShotgunHP
+
+- type: technology
   id: PlasmaConverterAcceleration
   name: research-technology-plasma-converter-acceleration
   icon:

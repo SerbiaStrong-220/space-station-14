@@ -6,6 +6,13 @@
   components:
   - type: CartridgeAmmo
     proto: BulletRifleAP
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#65fe08"
 
 - type: entity
   id: CartridgeRifleExplosive
@@ -30,5 +37,5 @@
         map: [ "enum.AmmoVisualLayers.Base" ]
       - state: tip
         map: [ "enum.AmmoVisualLayers.Tip" ]
-        color: "#ff6e52"
+        color: "#cf0404"
 

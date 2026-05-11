@@ -24,7 +24,7 @@
 
 - type: entity
   parent: [ BaseCartridge]
-  id: CartridgeAntiMaterielHPIB
+  id: CartridgeAntiMaterielHP
   name: cartridge (15,24x140 HPIB)
   description: This enormous HPIB round, designated to use against megafauna, is powerful enough to shred even light-armored targets to pieces.
   components:

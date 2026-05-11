@@ -76,7 +76,7 @@
   parent: BaseMagazineAntiMaterial
   components:
   - type: BallisticAmmoProvider
-    proto: CartridgeAntiMaterielHPIB
+    proto: CartridgeAntiMaterielHP
   - type: Sprite
     layers:
     - state: base

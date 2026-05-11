@@ -116,6 +116,25 @@
 # JobItems
 
 - type: listing
+  id: SyndicateFilledSniperBundle
+  name: uplink-sniper-bundle-name
+  description: uplink-sniper-bundle-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Snipers/heavy_sniper.rsi, state: icon }
+  productEntity: ClothingBackpackDuffelSyndicateFilledSniperBundle
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 15
+  cost:
+    Telecrystal: 19
+  categories:
+  - UplinkWeaponry
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
+
+- type: listing
   id: UplinkMimeRelic
   name: uplink-mime-relic-name
   description: uplink-mime-relic-desc

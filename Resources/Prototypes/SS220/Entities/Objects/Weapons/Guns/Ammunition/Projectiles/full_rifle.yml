@@ -23,6 +23,18 @@
       armourPiercing: 25
 
 - type: entity
+  id: BulletFullRifleHP
+  name: bullet (7,62x55 AP)
+  parent: BulletFullRifle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 49
+      armourPiercing: 0
+
+- type: entity
   id: BulletFullRifleAPM2
   name: bullet (7,62x55 AP Mark 2)
   parent: BulletFullRifle
