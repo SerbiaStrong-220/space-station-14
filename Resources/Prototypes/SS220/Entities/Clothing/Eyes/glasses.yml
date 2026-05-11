@@ -189,3 +189,22 @@
     - Security
   - type: IdentityBlocker
     coverage: EYES
+
+- type: entity
+  parent: ClothingEyesBase
+  id: ClothingEyesVisorNinjaFake
+  name: ninja visor
+  description: A plastic replica of the night vision goggles worn by a ninja from a popular anime.
+  suffix: Fake
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Eyes/Glasses/ninjavisor.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Eyes/Glasses/ninjavisor.rsi
+  - type: HiddenDescription
+    entries:
+      SyndicateAgentKnowledge: [ hidden-desc-toy-armour-syndicate ]
+      ServiceActorKnowledge: [ hidden-desc-toy-armour-clown ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ServiceActorKnowledge, null]

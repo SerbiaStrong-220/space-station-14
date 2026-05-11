@@ -2,7 +2,6 @@
 
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
-using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Explosion.Components;
@@ -36,7 +35,9 @@ using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using System.Linq;
 using System.Numerics;
+using Content.Shared.Damage;
 using Content.Shared.SS220.Lifesteal;
+using Content.Shared.Damage.Systems;
 
 namespace Content.Shared.SS220.DarkReaper;
 
@@ -130,7 +131,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
             return;
         }
 
-        if (!TryComp<HumanoidAppearanceComponent>(args.Target, out _))
+        if (!TryComp<HumanoidProfileComponent>(args.Target, out _))
         {
             if (_net.IsClient && _timing.IsFirstTimePredicted)
                 _popup.PopupEntity("Цель должна быть гуманоидом!", ent, PopupType.MediumCaution);

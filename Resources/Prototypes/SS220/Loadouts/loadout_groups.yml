@@ -498,6 +498,18 @@
   loadouts:
   - Glasses
   - CyberMedVisor
+
+- type: loadoutGroup
+  id: MedicalEyewear
+  name: loadout-group-medical-glasses
+  minLimit: 0
+  loadouts:
+  - MedicalHud
+  - MedicalEyePatchHud
+  - CyberMedVisor #SS220 II floppa iteration
+  - Glasses
+  - GlassesJamjar
+  - GlassesJensen
   # Врач (Конец)
 
   # Химик (Начало)

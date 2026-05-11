@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: [ BaseItem, StorePresetUplink ] #PDA's have uplinks so they have to inherit the data.
+  parent: [ BaseItem ]
   id: BasePDA
   name: PDA
   description: Personal Data Assistant.
@@ -112,6 +112,7 @@
         type: InstrumentBoundUserInterface
       enum.HealthAnalyzerUiKey.Key:
         type: HealthAnalyzerBoundUserInterface
+  - type: RemoteStore # PDAs can access uplinks so they need this component.
   - type: Tag
     tags:
     - DoorBumpOpener
@@ -602,6 +603,9 @@
       whitelist:
         components:
         - Cartridge
+    preinstalled:
+    - CrewManifestCartridge
+    - NewsReaderCartridge
   - type: Appearance
     appearanceDataInit:
      enum.PdaVisuals.PdaType:
@@ -2595,6 +2599,24 @@
     sprite: SS220/Objects/Devices/pda.rsi #SS220 Resprite Senior Courier PDA
     state: pda-seniorcourier #SS220 Resprite Senior Courier PDA
 
+# SS220 Remove ninja pda start
+#- type: entity
+#  parent: [ BaseHighlyIllegalContraband, BasePDA ]
+#  id: NinjaPDA
+#  name: ninja PDA
+#  description: You stealthy bastard, you!
+#  components:
+#  - type: Pda
+#    id: NinjaIDCard
+#  - type: Appearance
+#    appearanceDataInit:
+#      enum.PdaVisuals.PdaType:
+#        !type:String
+#        pda-ninja
+#  - type: Icon
+#    state: pda-ninja
+# SS220 Remove ninja pda end
+
 - type: entity
   parent: [ BaseMajorContraband, SyndiPDA ]
   id: PiratePDA
@@ -2698,6 +2720,14 @@
         type: HealthAnalyzerBoundUserInterface
       enum.ChameleonUiKey.Key:
         type: ChameleonBoundUserInterface
+
+- type: entity
+  parent: ChameleonPDA
+  id: ChameleonAgentPDA
+  suffix: Chameleon, Agent ID
+  components:
+  - type: Pda
+    id: AgentIDCard
 
 - type: entity
   parent: BaseWidePDA

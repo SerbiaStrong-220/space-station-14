@@ -9,6 +9,17 @@
   id: Body
   components:
   # general
+  - CreamPied
+  - DetailExaminable
+  - Dna
+  - Fingerprint
+  - Grammar # Pronouns
+  - HumanoidProfile # Age, Sex, Gender
+  - MeleeWeapon # Attack animation, damage and sound
+  - NpcFactionMember
+  - RandomPrice
+  - TemperatureDamage
+  - TemperatureSpeed
   # SS220-experience-start-begin
   - Experience
   - AntagFreeSublevelPointsAdd
@@ -18,21 +29,15 @@
   - MentorRole
   - AntagAddKnowledge
   # SS220-experience-start-end
-  - DetailExaminable
-  - Dna
-  - Fingerprint
-  - NpcFactionMember
   # traits
   - BlackAndWhiteOverlay
   - Clumsy
-  - Hemophilia
   - ImpairedMobility
   # - LegsParalyzed (you get healed)
   - LightweightDrunk
   - Muted
   - Narcolepsy
   - Pacified
-  - PainNumbness
   - Paracusia
   - PermanentBlindness
   - Snoring
@@ -65,6 +70,9 @@
   - SouthernAccent
   - SpanishAccent
   - StutteringAccent
+  eventComponents:
+  - Puller
+  - Vocal # voice sounds
 
 # for job-specific traits etc.
 - type: cloningSettings
@@ -92,7 +100,6 @@
   blacklist:
     components:
     - AttachedClothing # helmets, which are part of the suit
-    - HumanoidAppearance # will cause problems for downstream felinids getting cloned as Urists
     - Implanter # they will spawn full again, but you already get the implant. And we can't do item slot copying yet
     - VirtualItem
 
@@ -109,6 +116,8 @@
 - type: cloningSettings
   id: ParadoxCloningSettings
   parent: [BaseClone, Antag]
+  components:
+  - Forensics # This is so hugging data is copied to the clone, so you can't hug metagame them
 
 # changeling identity copying
 - type: cloningSettings
@@ -129,7 +138,6 @@
   # these need special treatment in the event subscription
   - Inventory # arachnid pockets and diona feet
   - Wagging # lizard tails
-  - Vocal # voice sounds
   - Storage # slime storage
   - Rootable # diona
   - Sericulture # arachnids

@@ -22,7 +22,7 @@ public sealed partial class CultYoggSacrificialComponent : Component
     /// Time required for announcement
     /// </summary>
     [ViewVariables]
-    public TimeSpan AnnounceReplacementCooldown = TimeSpan.FromSeconds(60);
+    public TimeSpan AnnounceReplacementCooldown = TimeSpan.FromSeconds(30);
 
     /// <summary>
     /// Time required for replacement

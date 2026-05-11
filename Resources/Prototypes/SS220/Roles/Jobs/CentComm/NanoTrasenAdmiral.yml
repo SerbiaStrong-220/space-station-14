@@ -4,30 +4,29 @@
   name: Адмирал NanoTrasen
   id: CentComNanoTrasenAdmiral
   components:
-    - type: Sprite
-      sprite: SS220/Markers/jobs.rsi
-      state: nanotrasenadmiral
-    - type: RandomHumanoidSpawner
-      settings: CentComNanoTrasenAdmiral
+  - type: Sprite
+    sprite: SS220/Markers/jobs.rsi
+    state: nanotrasenadmiral
+  - type: RandomHumanoidSpawner
+    settings: CentComNanoTrasenAdmiral
 
 - type: randomHumanoidSettings
   id: CentComNanoTrasenAdmiral
-  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran]
+  speciesBlacklist: [ Arachnid, Diona, Dwarf, Reptilian, Skeleton, SlimePerson, Vox, Moth, Felinid, Tajaran ]
   components:
-    - type: RandomHumanoidAppearance
-      randomizeName: false
-      hair: HairBald
-    - type: RandomMetadata
-      nameSegments:
-        - NamesFirstCentcomAgent
-        - NamesLastCentcomAgent
-    - type: MindShield
-    - type: GhostRole
-      name: ghost-role-information-nanotrasen-Admiral-name
-      description: ghost-role-information-nanotrasen-Admiral-description
-    - type: GhostTakeoverAvailable
-    - type: Loadout
-      prototypes: [ CentComNanoTrasenAdmiralGear ]
+  - type: RandomHumanoidAppearance
+    randomizeName: false
+  - type: RandomMetadata
+    nameSegments:
+    - NamesFirstCentcomAgent
+    - NamesLastCentcomAgent
+  - type: MindShield
+  - type: GhostRole
+    name: ghost-role-information-nanotrasen-Admiral-name
+    description: ghost-role-information-nanotrasen-Admiral-description
+  - type: GhostTakeoverAvailable
+  - type: Loadout
+    prototypes: [ CentComNanoTrasenAdmiralGear ]
 
 - type: playTimeTracker
   id: JobCentcomAdmiral
