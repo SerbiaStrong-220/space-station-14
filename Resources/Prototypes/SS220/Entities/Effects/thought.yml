@@ -13,6 +13,4 @@
     layers:
     - state: thought
       map: ["enum.ThoughtBubbleVisuals.Bubble"]
-    - state: icon
-      map: ["enum.ThoughtBubbleVisuals.Icon"]
-      visible: false
+

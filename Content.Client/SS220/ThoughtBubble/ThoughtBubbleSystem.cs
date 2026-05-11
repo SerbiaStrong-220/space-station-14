@@ -55,13 +55,6 @@ public sealed class ThoughtBubbleSystem : EntitySystem
             // +1 to draw over owner
             _sprite.SetDrawDepth((thought, thoughtSprite), ownerSprite.DrawDepth + 1);
 
-        if (!_sprite.LayerMapTryGet((thought, thoughtSprite),
-            ThoughtBubbleVisuals.Icon, out var targetIndexLayer, logMissing: false))
-            return;
-
-        // TODO remove
-        _sprite.LayerSetVisible((thought, thoughtSprite), targetIndexLayer, false);
-
         foreach (var layer in itemSprite.AllLayers)
         {
             if (layer is not SpriteComponent.Layer spriteLayer)
