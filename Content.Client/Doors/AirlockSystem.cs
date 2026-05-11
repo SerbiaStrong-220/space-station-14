@@ -122,6 +122,7 @@ public sealed class AirlockSystem : SharedAirlockSystem
             );
         }
 
+        return; // SS220-fix-unlig-sprites-issue
         switch (state)
         {
             case DoorState.Open:
