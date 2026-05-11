@@ -100,6 +100,12 @@
     Silver: 200
 
 - type: latheRecipe
+  parent: [ BaseGoldCircuitboardRecipe, BaseMachineRecipeCategory ]
+  id: ShuttleGunMLGSWCircuitboard
+  result: ShuttleGunMLGSWCircuitboard
+  completetime: 12
+
+- type: latheRecipe
   id: WeaponEnergyTurretSecurityMachineCircuitboard
   result: WeaponEnergyTurretSecurityMachineCircuitboard
   completetime: 5

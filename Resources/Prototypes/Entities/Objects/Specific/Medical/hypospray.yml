@@ -547,12 +547,12 @@
   - type: SolutionContainerManager
     solutions:
       pen:
-        maxVol: 30
+        maxVol: 20 #SS220-CosmoMedipen-Tweak
         reagents:
           - ReagentId: Leporazine
             Quantity: 10
           - ReagentId: Barozine
-            Quantity: 20
+            Quantity: 10 #SS220-CosmoMedipen-Tweak
 
 - type: entity
   parent: [ChemicalMedipen, BaseSyndicateContraband]
