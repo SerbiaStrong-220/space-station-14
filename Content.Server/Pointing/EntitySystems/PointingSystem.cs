@@ -248,6 +248,9 @@ namespace Content.Server.Pointing.EntitySystems
                         //SS220 - ThinkingBubble - start
                         var pointedOwnEv = new PointedOwnItemEvent(item);
                         RaiseLocalEvent(player, ref pointedOwnEv);
+
+                        if (pointedOwnEv.Handled)
+                            QueueDel(arrow);
                         //SS220 - ThinkingBubble - end
                     }
                     else
