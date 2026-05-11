@@ -1,7 +1,9 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 
+using System.Numerics;
 using Content.Shared.SS220.ThoughtBubble;
 using Robust.Client.GameObjects;
+using Robust.Shared.Map;
 
 namespace Content.Client.SS220.ThoughtBubble;
 
@@ -19,18 +21,8 @@ public sealed class ThoughtBubbleSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ThoughtBubbleComponent, ComponentInit>(OnComponentInit);
         SubscribeLocalEvent<ThoughtBubbleComponent, AfterAutoHandleStateEvent>(OnStateHandled);
         SubscribeLocalEvent<ThoughtBubbleComponent, ComponentShutdown>(OnShutdown);
-    }
-
-    private void OnComponentInit(Entity<ThoughtBubbleComponent> ent, ref ComponentInit args)
-    {
-        if (!TryComp<SpriteComponent>(ent, out var sprite))
-            return;
-
-        _sprite.LayerMapReserve((ent, sprite), ThoughtBubbleVisuals.Icon);
-        _sprite.LayerSetVisible((ent, sprite), ThoughtBubbleVisuals.Icon, false);
     }
 
     private void OnStateHandled(Entity<ThoughtBubbleComponent> ent, ref AfterAutoHandleStateEvent args)
@@ -41,11 +33,13 @@ public sealed class ThoughtBubbleSystem : EntitySystem
         if (ent.Comp.ShownInBubbleItem == item)
             return;
 
+        ent.Comp.ShownInBubbleItem = item;
+
         PredictedQueueDel(ent.Comp.BubbleEntity);
         if (!TryComp<SpriteComponent>(item, out var itemSprite))
             return;
 
-        var thought = SpawnAttachedTo(ent.Comp.BubbleProto, _transform.ToCoordinates(ent.Owner, _transform.GetMapCoordinates(ent.Owner)));
+        var thought = SpawnAttachedTo(ent.Comp.BubbleProto, new EntityCoordinates(ent.Owner, Vector2.Zero));
         ent.Comp.BubbleEntity = thought;
 
         if (!TryComp<SpriteComponent>(thought, out var thoughtSprite))
@@ -55,6 +49,7 @@ public sealed class ThoughtBubbleSystem : EntitySystem
             // +1 to draw over owner
             _sprite.SetDrawDepth((thought, thoughtSprite), ownerSprite.DrawDepth + 1);
 
+        var layerIndex = 1;
         foreach (var layer in itemSprite.AllLayers)
         {
             if (layer is not SpriteComponent.Layer spriteLayer)
@@ -64,7 +59,7 @@ public sealed class ThoughtBubbleSystem : EntitySystem
             protoData.RsiPath ??= spriteLayer.ActualRsi?.Path.CanonPath;
             protoData.Scale *= ItemSpriteScale;
 
-            _sprite.AddLayer((thought, thoughtSprite), protoData, 1);
+            _sprite.AddLayer((thought, thoughtSprite), protoData, layerIndex++);
         }
     }
 
