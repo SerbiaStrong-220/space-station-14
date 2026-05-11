@@ -30,8 +30,8 @@ public abstract class SharedGasWeaponSystem : EntitySystem
         if (ent.Comp.GasUsage == 0f)
             return;
 
-        if (!_container.TryGetContainer(ent.Owner, ent.Comp.TankSlotId, out var container) ||
-            container is not ContainerSlot slot || slot.ContainedEntity is null)
+        if ((!_container.TryGetContainer(ent.Owner, ent.Comp.TankSlotId, out var container) ||
+            container is not ContainerSlot slot || slot.ContainedEntity is null) && !ent.Comp.InternalTank)
             args.Cancel();
     }
 

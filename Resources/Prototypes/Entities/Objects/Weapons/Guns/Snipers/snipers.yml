@@ -134,11 +134,6 @@
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Snipers/bolt_gun_wood.rsi
-    layers:
-    - state: base
-    - state: base1
-      map: [ "enum.SolutionContainerLayers.Fill" ]
-      visible: false
   - type: Appearance
   - type: GunRequiresWield
   - type: StaticPrice
@@ -146,26 +141,25 @@
 
 - type: entity
   name: Hristov
-  parent: [BaseWeaponSniper, BaseGunWieldable]
+  parent: [BaseWeaponRifle, BaseGunWieldable]
   id: WeaponSniperHristov
-  description: A semi-auto antimateriel rifle equipped with 2x scope and a recoil compensator. Uses 15,24x140 anti-materiel ammo.
+  description: A semi-auto antimateriel rifle equipped with 2x scope and a recoil compensator. Uses 15,24x140 anti-materiel ammo. #SS220 weapon overhaul
   components:
   - type: Item
     size: Huge
     shape:
     - 0,0,5,1
+  #SS220 weapon overhaul begin
   - type: Sprite
     sprite: Objects/Weapons/Guns/Snipers/heavy_sniper.rsi
+    layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-0
+        map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
     sprite: Objects/Weapons/Guns/Snipers/heavy_sniper.rsi
   - type: GunRequiresWield
-  - type: BallisticAmmoProvider
-    whitelist:
-      tags:
-      - CartridgeAntiMateriel
-    capacity: 5
-    proto: CartridgeAntiMateriel
-  #SS220 weapon overhaul begin
   - type: GunWieldBonus
     minAngle: -3
     maxAngle: -13
@@ -177,10 +171,40 @@
     minAngle: 17
     maxAngle: 30
     angleIncrease: 10
-    angleDecay: 5
+    angleDecay: 7
     fireRate: 1
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/sniper.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineAntiMaterialFMJ
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - AntiMaterialMagazine
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeAntiMateriel
+  - type: ChamberMagazineAmmoProvider
+    soundRack:
+      path: /Audio/Weapons/Guns/Cock/batrifle_cock.ogg
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
   #SS220 weapon overhaul end
   - type: StaticPrice
     price: 3500

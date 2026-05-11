@@ -47,7 +47,7 @@
     activatedDamage:
       types:
         Blunt: 10 #SS220 stun overhaul
-        Shock: 5 #SS220 stun overhaul
+        Shock: 8 #SS220 stun overhaul
 #SS220-Stunbatom-rework end
   - type: MeleeWeapon
     wideAnimationRotation: -135

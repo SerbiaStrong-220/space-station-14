@@ -1,7 +1,7 @@
 ent-BaseWeaponSubMachineGun = BaseSMG
     .desc = Дерзай — налетай, целься и стреляй.
-ent-WeaponSubMachineGunAtreides = Атрейдес
 #SS220-weapon-overhaul-begin
+ent-WeaponSubMachineGunAtreides = Атрейдес
     .desc = Пле-ке-ке-ке-ке! Использует патроны калибра 9x20 авто.
     .suffix = Пистолет-пулемёт
 ent-WeaponSubMachineGunDrozd = Дрозд

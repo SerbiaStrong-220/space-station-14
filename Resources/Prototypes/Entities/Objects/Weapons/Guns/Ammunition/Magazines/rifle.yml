@@ -14,7 +14,7 @@
     whitelist:
       tags:
         - CartridgeRifle
-    capacity: 25
+    capacity: 30 #SS220 weapon overhaul
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container

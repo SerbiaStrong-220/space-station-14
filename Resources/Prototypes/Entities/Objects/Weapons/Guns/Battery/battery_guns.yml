@@ -916,9 +916,9 @@
 
 - type: entity
   name: energy shotgun
-  parent: [BaseWeaponBattery, BaseGunWieldable]
+  parent: [BaseWeaponBattery, BaseGunWieldable, GasTankBase] #SS220 weapon overhaul
   id: WeaponEnergyShotgun
-  description: A one-of-a-kind prototype energy weapon that uses various shotgun configurations. It offers the possibility of both lethal and non-lethal shots, making it a versatile weapon.
+  description: Basically a plasma cannon that throws EM-contained clouds of overheated gas. Has fairly short effective distance but that doesn't matter much on close ranges. #SS220 weapon overhaul
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Battery/energy_shotgun.rsi
@@ -933,22 +933,20 @@
     steps: 5
     zeroVisible: false
   - type: Appearance
+  #SS220 weapon overhaul begin
+  - type: GasWeapon
+    internalTank: true
+    gasUsage: 0.17
+  #SS220 weapon overhaul end
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/energy_shotgun.rsi
   - type: Gun
-    fireRate: 2
+    fireRate: 1 #SS220 weapon overhaul
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   - type: BatteryAmmoProvider
     proto: BulletLaserSpreadNarrow
-    fireCost: 80
-  - type: BatteryWeaponFireModes
-    fireModes:
-    - proto: BulletLaserSpreadNarrow
-      fireCost: 80
-    - proto: BulletDisablerSmgSpread
-      fireCost: 48
-      pacifismAllowedMode: true
+    fireCost: 160 #SS220 weapon overhaul
   - type: Item
     size: Large
     sprite: Objects/Weapons/Guns/Battery/inhands_64x.rsi

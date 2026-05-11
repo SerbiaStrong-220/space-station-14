@@ -1,0 +1,87 @@
+- type: entity
+  id: BaseMagazineAntiMaterial
+  name: "magazine (15,24x140 antimaterial)"
+  parent: [ BaseItem, BaseSecurityContraband ]
+  components:
+  - type: Tag
+    tags:
+    - AntiMaterialMagazine
+  - type: Item
+    size: Small
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    capacity: 5
+    whitelist:
+      tags:
+        - CartridgeAntiMateriel
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: SS220/Objects/Weapons/Guns/Ammunition/Magazine/antimaterial_mag.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  id: MagazineAntiMaterialFMJ
+  name: "magazine (15,24x140 antimaterial)"
+  parent: BaseMagazineAntiMaterial
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeAntiMateriel
+
+- type: entity
+  id: MagazineAntiMaterialAP
+  name: "magazine (15,24x140 antimaterial)"
+  parent: BaseMagazineAntiMaterial
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeAntiMaterielAP
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#65fe08"
+
+- type: entity
+  id: MagazineAntiMaterialExplosive
+  name: "magazine (15,24x140 antimaterial)"
+  parent: BaseMagazineAntiMaterial
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeAntiMaterielExplosive
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#121212"
+
+- type: entity
+  id: MagazineAntiMaterialHP
+  name: "magazine (15,24x140 antimaterial)"
+  parent: BaseMagazineAntiMaterial
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeAntiMaterielHPIB
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#cf0404"

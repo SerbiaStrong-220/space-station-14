@@ -2,6 +2,7 @@
 using Content.Server.Atmos.EntitySystems;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
+using Content.Shared.Hands;
 using Content.Shared.SS220.Weapons.Components;
 using Content.Shared.SS220.Weapons.Ranged.Events;
 using Content.Shared.SS220.Weapons.Ranged.Systems;
@@ -21,6 +22,7 @@ public sealed class GasWeaponSystem : SharedGasWeaponSystem
         SubscribeLocalEvent<GasWeaponComponent, ComponentStartup>(OnComponentStartup);
         SubscribeLocalEvent<GasWeaponComponent, EntInsertedIntoContainerMessage>(OnItemInserted);
         SubscribeLocalEvent<GasWeaponComponent, EntRemovedFromContainerMessage>(OnItemRemoved);
+        SubscribeLocalEvent<GasWeaponComponent, GotEquippedHandEvent>(OnGasTankState);
     }
 
     protected override void OnShootAttempt(Entity<GasWeaponComponent> ent, ref ShotAttemptedEvent args)
@@ -73,6 +75,16 @@ public sealed class GasWeaponSystem : SharedGasWeaponSystem
         }
     }
 
+    private void OnGasTankState(Entity<GasWeaponComponent> ent, ref GotEquippedHandEvent args)
+    {
+        if (CheckAbilityToShoot(ent) == !ent.Comp.CanShoot)
+        {
+            ent.Comp.CanShoot = !ent.Comp.CanShoot;
+            DirtyField<GasWeaponComponent>((ent.Owner, ent.Comp), nameof(GasWeaponComponent.CanShoot));
+            //Dirty(ent);
+        }
+    }
+
     private bool CheckAbilityToShoot(Entity<GasWeaponComponent> ent)
     {
         var gas = GetGas(ent);
@@ -119,6 +131,9 @@ public sealed class GasWeaponSystem : SharedGasWeaponSystem
 
     private Entity<GasTankComponent>? GetGas(Entity<GasWeaponComponent> ent)
     {
+        if (ent.Comp.InternalTank && TryComp<GasTankComponent>(ent, out var gasTankInternal))
+            return (ent.Owner, gasTankInternal);
+
         if (!_container.TryGetContainer(ent.Owner, ent.Comp.TankSlotId, out var container) ||
             container is not ContainerSlot slot || slot.ContainedEntity is not { } contained)
             return null;

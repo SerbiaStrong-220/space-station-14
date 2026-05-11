@@ -1,7 +1,7 @@
 ent-BaseWeaponRevolver = BaseWeaponRevolver
     .desc = Дерзай — налетай, целься и стреляй.
-ent-WeaponRevolverDeckard = Декард
 #SS220-weapon-overhaul-begin
+ent-WeaponRevolverDeckard = Декард
     .desc = Великолепно выполненный, изготавливаемый на заказ револьвер. Используется, когда нет времени на тест Войта-Кампфа. Вмещает 5 патронов калибра 11,5x32.
     .suffix = Револьвер
 ent-WeaponRevolverInspector = Инспектор

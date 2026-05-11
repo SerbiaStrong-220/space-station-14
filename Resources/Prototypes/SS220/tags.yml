@@ -11,6 +11,9 @@
   id: FullRifleMagazine
 
 - type: Tag
+  id: AntiMaterialMagazine
+
+- type: Tag
   id: MeatSlime
 
 - type: Tag

@@ -81,7 +81,7 @@
     impactEffect: BulletImpactEffectGreenLaser
     damage:
       types:
-        Poison: 35
+        Poison: 20
     soundHit:
       collection: WeakHit
     forceSound: true
@@ -95,7 +95,7 @@
   - type: Projectile
     damage:
       types:
-        Poison: 30
+        Poison: 20
 
 
 - type: entity

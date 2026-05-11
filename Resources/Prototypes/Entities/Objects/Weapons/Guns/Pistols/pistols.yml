@@ -183,9 +183,9 @@
     fireRate: 4
     muzzleFlashSupressed: true #SS220 weapon overhaul
     soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/silenced.ogg
+      path: /Audio/Weapons/Guns/Gunshots/pistol.ogg #SS220 weapon overhaul
       params:
-        volume: -14
+        volume: -4 #SS220 weapon overhaul
     availableModes:
     - SemiAuto
   - type: ItemSlots

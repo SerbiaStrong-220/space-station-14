@@ -197,9 +197,17 @@
     pricePerJoule: 0.15
     maxCharge: 1200
     startingCharge: 1200
-  - type: PowerCellVisuals
+  - type: BatteryVisuals
+    levels: 3
+  - type: GenericVisualizer
+    visuals:
+      enum.BatteryLevels.Level:
+        enum.PowerCellVisualLayers.Unshaded:
+          0: { visible: false }
+          1: { visible: true, state: o1 }
+          2: { visible: true, state: o2 }
+          3: { visible: true, state: o3 }
   - type: PowerCell
-    powerCellVisualsLevels: 3
   - type: Sprite
     sprite: SS220/Objects/Power/weapon_power_cells.rsi
     layers:

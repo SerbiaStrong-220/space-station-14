@@ -6,7 +6,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared.SS220.Weapons.Components;
 
 [RegisterComponent]
-[NetworkedComponent, AutoGenerateComponentState]
+[NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true)]
 public sealed partial class GasWeaponComponent : Component
 {
     [DataField("tankSlot")]
@@ -27,6 +27,10 @@ public sealed partial class GasWeaponComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     public float GasUsage = 0.142f;
 
+    [DataField]
     [AutoNetworkedField]
     public bool CanShoot = false;
+
+    [DataField("internalTank")]
+    public bool InternalTank = false;
 }

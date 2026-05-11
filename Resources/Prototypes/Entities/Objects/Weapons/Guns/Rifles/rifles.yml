@@ -79,7 +79,7 @@
     angleIncrease: -0.9
   - type: GunAimable
     minAngle: -10
-    maxAngle: -7
+    maxAngle: -9
   #SS220 weapon overhaul end
   - type: Gun
     minAngle: 15

@@ -1367,7 +1367,7 @@
     impactEffect: BulletImpactEffectOrangeDisabler
     damage:
       types:
-        Heat: 19  #ss220lowTTKUpdate
+        Heat: 38  #SS220 weapon overhaul
 
 - type: entity
   name: wide laser barrage
@@ -1389,7 +1389,7 @@
   - type: ProjectileSpread
     proto: BulletLaser
     count: 4 #52 heat damage if you hit all your shots, but narrower spread
-    spread: 10
+    spread: 6 #SS220 weapon overhaul
 
 - type: entity
   name: disabling laser barrage
