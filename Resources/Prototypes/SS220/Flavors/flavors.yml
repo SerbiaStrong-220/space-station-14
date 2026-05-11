@@ -86,10 +86,10 @@
 - type: flavor
   id: sawdustporridge
   flavorType: Complex
-  description: как отчаяние, древесина
+  description: flavor-complex-sawdustporridge
 
 - type: flavor
   id: sawdustsoup
   flavorType: Complex
-  description: ужасно
+  description: flavor-complex-sawdustsoup
 
