@@ -1,20 +1,3 @@
-# For mantles
-- type: loadoutEffectGroup
-  id: MasterCMO
-  effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:RoleTimeRequirement
-      role: JobChiefMedicalOfficer
-      time: 20h
-  # SS220-sponsor-tier-begin
-  sponsorTierLoadoutEffects:
-  - !type:GroupLoadoutEffect
-    proto: SeniorDevTeamTier
-  - !type:GroupLoadoutEffect
-    proto: AdministratorSponsorTier
-  # SS220-sponsor-tier-end
-
 # Jumpsuit
 - type: loadout
   id: ChiefMedicalOfficerJumpsuit
@@ -60,11 +43,6 @@
   effects:
   - !type:GroupLoadoutEffect
     proto: MasterCMO
-
-- type: startingGear
-  id: ChiefMedicalOfficerMantle
-  equipment:
-    neck: ClothingNeckMantleCMO
 
 # Outer clothing
 - type: loadout

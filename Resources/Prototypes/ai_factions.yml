@@ -9,6 +9,7 @@
   - Revolutionary
   - AllHostile
   - Wizard
+  - Xenoborg
   - DeathSquad #SS220 dq update
   - SpiderQueen #ss220 spider queen
   - CultYogg #SS220 CultYogg
@@ -39,6 +40,8 @@
 
 - type: npcFaction
   id: PetsNT
+  friendly:
+  - NanoTrasen
   hostile:
   - Mouse
   - SimpleHostile
@@ -46,7 +49,6 @@
   - Xeno
   - SpiderQueen #ss220 spider queen
   - AllHostile
-  - Wizard
   - Dragon
 
 - type: npcFaction

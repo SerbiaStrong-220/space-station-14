@@ -4,7 +4,9 @@ using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.DeviceNetwork.Systems;
 using Content.Shared.Physics;
+using Content.Shared.Prototypes;
 using Content.Shared.Shuttles.Systems;
+using Content.Shared.Weapons.Hitscan.Components;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
@@ -166,16 +168,16 @@ public abstract class SharedShuttleGunControlSystem : EntitySystem
         var gunRot = _xform.GetWorldRotation(xform);
         var direction = gunRot.ToWorldVec();
 
-        var collisionMask = (int) CollisionGroup.BulletImpassable; // can I be sure that all projectiles ammo used this collision group?
+        var collisionMask = CollisionGroup.BulletImpassable; // can I be sure that all projectiles ammo used this collision group?
 
-        if (TryComp<HitscanBatteryAmmoProviderComponent>(gun, out var hitscan) &&
-            _proto.TryIndex<HitscanPrototype>(hitscan.Prototype, out var hitscanPrototype))
+        if (TryComp<BatteryAmmoProviderComponent>(gun, out var hitscan) &&
+            _proto.Index(hitscan.Prototype).TryGetComponent<HitscanBasicRaycastComponent>(out var hitscanRaycast, EntityManager.ComponentFactory))
         {
-            collisionMask = hitscanPrototype.CollisionMask;
-            hitDistance = hitscanPrototype.MaxLength;
+            collisionMask = hitscanRaycast.CollisionMask;
+            hitDistance = hitscanRaycast.MaxDistance;
         }
 
-        var ray = new CollisionRay(gunPos, direction, collisionMask);
+        var ray = new CollisionRay(gunPos, direction, (int)collisionMask);
         var results = _physics.IntersectRay(xform.MapID, ray, ignoredEnt: gun);
 
         foreach (var result in results)

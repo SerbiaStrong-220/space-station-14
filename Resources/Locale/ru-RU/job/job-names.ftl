@@ -48,7 +48,6 @@ job-name-ertmedic = медик ОБР
 job-name-ertjanitor = уборщик ОБР
 job-name-boxer = боксёр
 job-name-zookeeper = зоотехник
-job-name-blueshield = офицер "Синий щит"
 job-name-senior-engineer = ведущий инженер
 job-name-senior-researcher = ведущий учёный
 job-name-senior-physician = ведущий врач
@@ -74,7 +73,6 @@ JobAtmosphericTechnician = атмосферный техник
 JobBartender = бармен
 JobBorg = киборг
 JobBotanist = ботаник
-JobBlueShield = офицер "Синий щит"
 JobCaptain = капитан
 JobCargoTechnician = грузчик
 JobCentralCommandOfficial = представитель Центком
@@ -119,3 +117,25 @@ JobTechnicalAssistant = технический ассистент
 JobWarden = смотритель
 JobBoxer = боксёр
 JobZookeeper = зоотехник
+
+job-name-cburn = Офицер карантина ЦентКома
+
+job-name-centcommoff = Представитель ЦентКома
+
+job-name-cluwne = Клувень
+
+job-name-deathsquad = Эскадрон смерти
+
+job-name-ninja = Ниндзя
+
+job-name-syndicate-commander = Командир Синдиката
+
+job-name-syndicate-corpsman = Медик Синдиката
+
+job-name-syndicate-operative = Оперативник Синдиката
+
+job-name-pirate = Пират
+
+job-name-wizard = Волшебник
+
+JobVisitor = Посетитель

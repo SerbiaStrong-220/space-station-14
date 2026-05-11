@@ -70,6 +70,7 @@
   - type: AccessReader
     containerAccessProvider: board
   - type: Door
+    pryTime: 0 # ss220 airlock insta open
     crushDamage:
       types:
         Blunt: 15
@@ -186,6 +187,8 @@
     tags:
       - Airlock
       # This tag is used to nagivate the Airlock construction graph. It's needed because the construction graph is shared between Airlock, AirlockGlass, and HighSecDoor
+      - DoorRemoteWhitelist
+      # This tag is used by door remotes to allow or not a door remote to normally be able to interact with a door
   - type: PryUnpowered
   - type: FoVOverlay
   - type: BlockWeather
@@ -246,3 +249,5 @@
     tags:
       - GlassAirlock
       # This tag is used to nagivate the Airlock construction graph. It's needed because the construction graph is shared between Airlock, AirlockGlass, and HighSecDoor
+      - DoorRemoteWhitelist
+      # This tag is used by door remotes to allow or not a door remote to normally be able to interact with a door

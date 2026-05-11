@@ -61,7 +61,7 @@
   - type: FlavorProfile
     flavors:
     - meaty
-  - type: Food
+  - type: Edible
     transferAmount: 3
   - type: Sprite
     sprite: SS220/Objects/Consumable/Food/cheburek.rsi
@@ -86,7 +86,7 @@
   id: FoodCheburek
   description: Crispy and juicy meat in thin dough - a true oriental taste.
   components:
-  - type: Food
+  - type: Edible
   - type: Sprite
     state: cheburek
 
@@ -98,7 +98,7 @@
   - type: FlavorProfile
     flavors:
     - sweet
-  - type: Food
+  - type: Edible
   - type: Sprite
     sprite: SS220/Objects/Consumable/Food/kulich.rsi
   - type: SolutionContainerManager
@@ -127,7 +127,7 @@
   id: FoodKulich
   description: Atheist? Why is your mouth covered in kulich?
   components:
-  - type: Food
+  - type: Edible
   - type: Sprite
     state: icon
 
@@ -235,4 +235,4 @@
   - type: ContainerContainer
     containers:
       payloadSlot: !type:ContainerSlot
-  - type: Food
+  - type: Edible

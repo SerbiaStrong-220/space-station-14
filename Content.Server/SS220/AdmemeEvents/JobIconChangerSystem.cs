@@ -5,8 +5,10 @@ using Content.Shared.SS220.AdmemeEvents;
 using Robust.Server.GameObjects;
 using System.Linq;
 using Content.Shared.NPC.Components;
+using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Shared.SS220.AdmemeEvents.EventRole;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.AdmemeEvents;
 
@@ -21,6 +23,10 @@ public sealed class JobIconChangerSystem : EntitySystem
         { EventRoleIconFilterGroup.NT, "SpecOps" },
         { EventRoleIconFilterGroup.USSP, "USSPEbent" }
     };
+
+    private static readonly ProtoId<NpcFactionPrototype> EbentIronSquad = "EbentIronSquad";
+    private static readonly ProtoId<NpcFactionPrototype> EbentUssp = "EbentUssp";
+    private static readonly ProtoId<NpcFactionPrototype> EbentNanoTrasen = "EbentNanoTrasen";
 
     public override void Initialize()
     {
@@ -82,13 +88,13 @@ public sealed class JobIconChangerSystem : EntitySystem
             switch (entity.Comp.IconFilterGroup)
             {
                 case EventRoleIconFilterGroup.IOT:
-                    _npcFaction.AddFaction(args.Target.Value, "EbentIronSquad");
+                    _npcFaction.AddFaction(args.Target.Value, EbentIronSquad);
                     break;
                 case EventRoleIconFilterGroup.USSP:
-                    _npcFaction.AddFaction(args.Target.Value,"EbentUssp");
+                    _npcFaction.AddFaction(args.Target.Value,EbentUssp);
                     break;
                 case EventRoleIconFilterGroup.NT:
-                    _npcFaction.AddFaction(args.Target.Value,"EbentNanoTrasen");
+                    _npcFaction.AddFaction(args.Target.Value,EbentNanoTrasen);
                     break;
             }
         }

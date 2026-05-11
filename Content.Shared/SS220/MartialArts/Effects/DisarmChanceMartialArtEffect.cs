@@ -17,16 +17,16 @@ public sealed partial class DisarmChanceMartialArtEffectSystem : BaseMartialArtE
     {
         base.Initialize();
 
-        SubscribeLocalEvent<DisarmChanceMartialArtEffectComponent, DisarmChanceModifierEvent>(OnDisarmChanceModifier);
+        SubscribeLocalEvent<DisarmChanceMartialArtEffectComponent, GetDisarmChanceDisarmerMultiplierEvent>(OnDisarmChanceModifier);
 
         // if we applied our effect we will mark DisarmedEvent as handled and hands system wont do anything
         // if we haven't did anything the other systems should take care about it
         SubscribeLocalEvent<MartialArtsTargetComponent, DisarmedEvent>(OnDisarm, before: [typeof(SharedHandsSystem), typeof(SharedStaminaSystem)]);
     }
 
-    private void OnDisarmChanceModifier(EntityUid user, DisarmChanceMartialArtEffectComponent comp, DisarmChanceModifierEvent ev)
+    private void OnDisarmChanceModifier(Entity<DisarmChanceMartialArtEffectComponent> entity, ref GetDisarmChanceDisarmerMultiplierEvent ev)
     {
-        if (!TryEffect(user, out var effect))
+        if (!TryEffect(entity.Owner, out var effect))
             return;
 
         ev.BaseChance = effect.Chance;

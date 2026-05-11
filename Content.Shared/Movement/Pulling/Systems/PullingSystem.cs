@@ -84,8 +84,9 @@ public sealed class PullingSystem : EntitySystem
         SubscribeLocalEvent<PullableComponent, EntGotInsertedIntoContainerMessage>(OnPullableContainerInsert);
         SubscribeLocalEvent<PullableComponent, ModifyUncuffDurationEvent>(OnModifyUncuffDuration);
         SubscribeLocalEvent<PullableComponent, StopBeingPulledAlertEvent>(OnStopBeingPulledAlert);
+        SubscribeLocalEvent<PullableComponent, GetInteractingEntitiesEvent>(OnGetInteractingEntities);
 
-        SubscribeLocalEvent<PullerComponent, UpdateMobStateEvent>(OnStateChanged, after: [typeof(MobThresholdSystem)]);
+        SubscribeLocalEvent<PullerComponent, MobStateChangedEvent>(OnStateChanged, after: [typeof(MobThresholdSystem)]);
         SubscribeLocalEvent<PullerComponent, AfterAutoHandleStateEvent>(OnAfterState);
         SubscribeLocalEvent<PullerComponent, EntGotInsertedIntoContainerMessage>(OnPullerContainerInsert);
         SubscribeLocalEvent<PullerComponent, EntityUnpausedEvent>(OnPullerUnpaused);
@@ -169,12 +170,12 @@ public sealed class PullingSystem : EntitySystem
         }
     }
 
-    private void OnStateChanged(EntityUid uid, PullerComponent component, ref UpdateMobStateEvent args)
+    private void OnStateChanged(EntityUid uid, PullerComponent component, ref MobStateChangedEvent args)
     {
         if (component.Pulling == null)
             return;
 
-        if (TryComp<PullableComponent>(component.Pulling, out var comp) && (args.State == MobState.Critical || args.State == MobState.Dead))
+        if (TryComp<PullableComponent>(component.Pulling, out var comp) && (args.NewMobState == MobState.Critical || args.NewMobState == MobState.Dead))
         {
             TryStopPull(component.Pulling.Value, comp);
         }
@@ -190,6 +191,12 @@ public sealed class PullingSystem : EntitySystem
     private void OnGotBuckled(Entity<PullableComponent> ent, ref BuckledEvent args)
     {
         StopPulling(ent, ent);
+    }
+
+    private void OnGetInteractingEntities(Entity<PullableComponent> ent, ref GetInteractingEntitiesEvent args)
+    {
+        if (ent.Comp.Puller != null)
+            args.InteractingEntities.Add(ent.Comp.Puller.Value);
     }
 
     private void OnAfterState(Entity<PullerComponent> ent, ref AfterAutoHandleStateEvent args)
@@ -494,11 +501,6 @@ public sealed class PullingSystem : EntitySystem
             return false;
         }
 
-        // SS220-PullingCooldown-Start
-        if (_timing.CurTime < pullerComp.LastPullAt + pullerComp.PullCooldown)
-            return false;
-        // SS220-PullingCooldown-End
-
         var getPulled = new BeingPulledAttemptEvent(puller, pullableUid);
         RaiseLocalEvent(pullableUid, getPulled, true);
         var startPull = new StartPullAttemptEvent(puller, pullableUid);
@@ -573,8 +575,6 @@ public sealed class PullingSystem : EntitySystem
             return false;
 
         // Pulling confirmed
-
-        pullerComp.LastPullAt = _timing.CurTime; // SS220-PullingCooldown
 
         _interaction.DoContactInteraction(pullableUid, pullerUid);
 
@@ -694,4 +694,21 @@ public sealed class PullingSystem : EntitySystem
         }
     }
     // SS220-MIT-pull-visualization-end
+
+    /// <summary>
+    /// Copies compatible datafields of <see cref="PullerComponent"/> onto the target entity.
+    /// </summary>
+    /// <param name="source">The entity who's component will be taken.</param>
+    /// <param name="target">The entity to apply it to.</param>
+    public void CopyPullerComponent(Entity<PullerComponent?> source, EntityUid target)
+    {
+        if (!Resolve(source, ref source.Comp))
+            return;
+
+        var targetComp = EnsureComp<PullerComponent>(target);
+        targetComp.ThrowCooldown = source.Comp.ThrowCooldown;
+        targetComp.NeedsHands = source.Comp.NeedsHands;
+        targetComp.PullingAlert = source.Comp.PullingAlert;
+        Dirty(target, targetComp);
+    }
 }

@@ -41,9 +41,9 @@ public sealed class GhostRoleCastSystem : EntitySystem
         var roleRule = ent.Comp.GhostRoleRule;
 
         if (string.IsNullOrEmpty(roleName))
-            roleName = EntityManager.GetComponent<MetaDataComponent>(args.Target).EntityName;
+            roleName = MetaData(args.Target).EntityName;
         if (string.IsNullOrEmpty(roleDesc))
-            roleDesc = EntityManager.GetComponent<MetaDataComponent>(args.Target).EntityName;
+            roleDesc = MetaData(args.Target).EntityName;
         if (string.IsNullOrEmpty(roleRule))
             roleRule = Loc.GetString("ghost-role-component-default-rules");
 

@@ -2,7 +2,8 @@ using System.Linq;
 using Content.Server.Administration;
 using Content.Server.GameTicking.Presets;
 using Content.Shared.Administration;
-using Linguini.Shared.Util;
+using Content.Shared.Administration.Logs;
+using Content.Shared.Database;
 using Robust.Shared.Console;
 
 namespace Content.Server.GameTicking.Commands
@@ -10,6 +11,7 @@ namespace Content.Server.GameTicking.Commands
     [AdminCommand(AdminFlags.Round)]
     public sealed class SetGamePresetCommand : IConsoleCommand
     {
+        [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!; // SS220-add-logs
         [Dependency] private readonly IEntityManager _entity = default!;
 
         public string Command => "setgamepreset";
@@ -18,7 +20,7 @@ namespace Content.Server.GameTicking.Commands
 
         public void Execute(IConsoleShell shell, string argStr, string[] args)
         {
-            if (!args.Length.InRange(1, 3))
+            if (args.Length is < 1 or > 3)
             {
                 shell.WriteError(Loc.GetString("shell-need-between-arguments", ("lower", 1), ("upper", 3), ("currentAmount", args.Length)));
                 return;
@@ -48,6 +50,7 @@ namespace Content.Server.GameTicking.Commands
                 return;
             }
 
+            _adminLogger.Add(LogType.AdminCommand, $"{shell.Player} used setgamepreset with preset id: {preset.ID} and number of rounds {rounds}");  // SS220-add-logs
             ticker.SetGamePreset(preset, false, decoy, rounds);
             if (decoy == null)
                 shell.WriteLine(Loc.GetString("set-game-preset-preset-set-finite", ("preset", preset.ID), ("rounds", rounds.ToString())));

@@ -4,14 +4,16 @@
   parent: SuitStorageBase
   suffix: Blueshield
   components:
-  - type: StorageFill
-    contents:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
         - id: NitrogenTankFilled
         - id: OxygenTankFilled
         - id: JetpackSecurityFilled
         - id: ClothingMaskBreath
   - type: AccessReader
-    access: [["Blueshield"]]
+    access: [ [ "Blueshield" ] ]
 
 #SuperMatter operator's hardsuit
 - type: entity
@@ -19,10 +21,12 @@
   parent: SuitStorageBase
   suffix: SuperMatter operator
   components:
-  - type: StorageFill
-    contents:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
         - id: OxygenTankFilled
         - id: ClothingShoesBootsMag
         - id: ClothingOuterHardsuitSuperMatterOperator
   - type: AccessReader
-    access: [["Atmospherics"]]
+    access: [ [ "Atmospherics" ] ]

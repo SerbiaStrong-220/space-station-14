@@ -203,7 +203,10 @@
       types:
         Piercing: 3
   - type: Bloodstream
-    bloodMaxVolume: 60
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 60
   - type: CanEscapeInventory
     baseResistTime: 3
   - type: MobPrice

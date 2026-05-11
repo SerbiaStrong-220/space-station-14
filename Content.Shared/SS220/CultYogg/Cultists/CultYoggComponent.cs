@@ -87,7 +87,7 @@ public sealed partial class CultYoggComponent : Component
     public Color? PreviousEyeColor;
 
     [ViewVariables]
-    public Marking? PreviousTail;
+    public List<Marking>? PreviousTailMarkings;
 
     [ViewVariables, AutoNetworkedField]
     public CultYoggStage CurrentStage = CultYoggStage.Initial;

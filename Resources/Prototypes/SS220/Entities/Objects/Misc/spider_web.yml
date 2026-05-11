@@ -40,12 +40,13 @@
   - type: Damageable
     damageModifierSet: Wood
   - type: Destructible
-  - type: Temperature
+  - type: TemperatureDamage
     heatDamage:
       types:
         Heat: 5
-    coldDamage: {}
+    coldDamage: { }
     coldDamageThreshold: 0
+  - type: Temperature
   - type: Flammable
     fireSpread: true
     damage:
@@ -95,11 +96,14 @@
         Piercing: -1.5
         Blunt: -0.75
         Slash: -0.75
-        Heat: -1
-      groups:
-        Burn: -2
-        Toxin: -5
-        Airloss: -2.5
+        Heat: -1.5
+        Shock: -0.5
+        Cold: -0.5
+        Caustic: -0.5
+        Poison: -2.5
+        Radiation: -2.5
+        Asphyxiation: -1.25
+        Bloodloss: -1.25
     ignoreBlacklist:
       tags:
       - SpiderQueen
@@ -133,14 +137,17 @@
     ignoreResistances: true
     damage:
       types:
-        Piercing: -3
+        Piercing: -3.0
         Blunt: -1.5
         Slash: -1.5
-        Heat: -3
-      groups:
-        Burn: -4
-        Toxin: -8
-        Airloss: -4
+        Heat: -4.0
+        Shock: -1.0
+        Cold: -1.0
+        Caustic: -1.0
+        Poison: -4.0
+        Radiation: -4.0
+        Asphyxiation: -2.0
+        Bloodloss: -2.0
     ignoreBlacklist:
       tags:
       - SpiderQueen

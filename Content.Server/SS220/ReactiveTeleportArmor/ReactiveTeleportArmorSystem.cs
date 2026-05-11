@@ -1,7 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Robust.Shared.Random;
-using Content.Shared.Damage;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Pulling.Components;
 using Robust.Shared.Audio.Systems;
@@ -15,6 +14,7 @@ using Robust.Shared.Collections;
 using Content.Shared.Clothing;
 using Content.Shared.Clothing.EntitySystems;
 using Content.Server.Explosion.EntitySystems;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Item;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
@@ -22,7 +22,7 @@ using Timer = Robust.Shared.Timing.Timer;
 
 namespace Content.Server.SS220.ReactiveTeleportArmor;
 
-internal class ReactiveTeleportArmorSystem : EntitySystem
+public sealed class ReactiveTeleportArmorSystem : EntitySystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
