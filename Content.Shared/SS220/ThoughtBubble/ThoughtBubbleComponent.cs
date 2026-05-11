@@ -32,6 +32,12 @@ public sealed partial class ThoughtBubbleComponent : Component
     /// </summary>
     [ViewVariables]
     public EntityUid? BubbleEntity;
+
+    /// <summary>
+    /// Client-side bubble entity
+    /// </summary>
+    [ViewVariables]
+    public EntityUid? ShownInBubbleItem;
 }
 
 [Serializable, NetSerializable]

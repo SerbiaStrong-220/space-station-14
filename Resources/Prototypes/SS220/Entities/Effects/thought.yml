@@ -4,6 +4,8 @@
   components:
   - type: Sprite
     noRot: true
+    enableOverrideDir: true
+    overrideDir: South
     offset: 0.4, 0.8
     scale: 0.8, 0.8
     drawdepth: Effects

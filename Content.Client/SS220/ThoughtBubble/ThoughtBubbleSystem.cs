@@ -1,9 +1,7 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 
-using Content.Shared.Ghost;
 using Content.Shared.SS220.ThoughtBubble;
 using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
 
 namespace Content.Client.SS220.ThoughtBubble;
 
@@ -14,6 +12,8 @@ public sealed class ThoughtBubbleSystem : EntitySystem
 {
     [Dependency] private readonly SpriteSystem _sprite = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
+
+    private const float ItemSpriteScale = 0.8f;
 
     public override void Initialize()
     {
@@ -35,67 +35,49 @@ public sealed class ThoughtBubbleSystem : EntitySystem
 
     private void OnStateHandled(Entity<ThoughtBubbleComponent> ent, ref AfterAutoHandleStateEvent args)
     {
-        var item = GetEntity(ent.Comp.PointedItem);
-
-        if (item == null)
+        if (GetEntity(ent.Comp.PointedItem) is not { Valid: true } item)
             return;
 
-        var mapCoord = _transform.GetMapCoordinates(ent.Owner);
+        if (ent.Comp.ShownInBubbleItem == item)
+            return;
 
-        if (ent.Comp.BubbleEntity != null)
+        PredictedQueueDel(ent.Comp.BubbleEntity);
+        if (!TryComp<SpriteComponent>(item, out var itemSprite))
+            return;
+
+        var thought = SpawnAttachedTo(ent.Comp.BubbleProto, _transform.ToCoordinates(ent.Owner, _transform.GetMapCoordinates(ent.Owner)));
+        ent.Comp.BubbleEntity = thought;
+
+        if (!TryComp<SpriteComponent>(thought, out var thoughtSprite))
+            return;
+
+        if (TryComp<SpriteComponent>(ent.Owner, out var ownerSprite) && ownerSprite.DrawDepth > thoughtSprite.DrawDepth)
+            // +1 to draw over owner
+            _sprite.SetDrawDepth((thought, thoughtSprite), ownerSprite.DrawDepth + 1);
+
+        if (!_sprite.LayerMapTryGet((thought, thoughtSprite),
+            ThoughtBubbleVisuals.Icon, out var targetIndexLayer, logMissing: false))
+            return;
+
+        // TODO remove
+        _sprite.LayerSetVisible((thought, thoughtSprite), targetIndexLayer, false);
+
+        foreach (var layer in itemSprite.AllLayers)
         {
-            Del(ent.Comp.BubbleEntity);
-            ent.Comp.BubbleEntity = null;
+            if (layer is not SpriteComponent.Layer spriteLayer)
+                continue;
+
+            var protoData = spriteLayer.ToPrototypeData();
+            protoData.RsiPath ??= spriteLayer.ActualRsi?.Path.CanonPath;
+            protoData.Scale *= ItemSpriteScale;
+
+            _sprite.AddLayer((thought, thoughtSprite), protoData, 1);
         }
-
-        ent.Comp.BubbleEntity ??= Spawn(ent.Comp.BubbleProto, mapCoord);
-
-        _transform.SetParent(ent.Comp.BubbleEntity.Value,ent.Owner);
-
-        if (ent.Comp.BubbleEntity == null)
-            return;
-
-        if (!TryComp<SpriteComponent>(ent.Comp.BubbleEntity, out var thoughtSprite) ||
-            !TryComp<SpriteComponent>(item, out var itemSprite))
-            return;
-
-        if (HasComp<GhostComponent>(ent.Owner) && TryComp<SpriteComponent>(ent.Owner, out var ownerSprite))
-        {
-            _sprite.SetDrawDepth((ent.Comp.BubbleEntity.Value, thoughtSprite), ownerSprite.DrawDepth);
-        }
-
-        if (!_sprite.LayerMapTryGet((ent.Comp.BubbleEntity.Value, thoughtSprite),
-                ThoughtBubbleVisuals.Icon,
-                out var targetLayer,
-                false))
-            return;
-
-        var rsiItem = _sprite.LayerGetEffectiveRsi((item.Value, itemSprite), 0);
-        var state = _sprite.LayerGetRsiState((item.Value, itemSprite), 0);
-
-        if (rsiItem == null || state == null)
-            return;
-
-        //Is this really a convenient way of transfer sprite data?
-        //Possible display bugs due to multiple layers on the item.
-        var layerData = new PrototypeLayerData
-        {
-            RsiPath = rsiItem.Path.ToString(),
-            State = state.ToString(),
-        };
-
-        _sprite.LayerSetData((ent.Comp.BubbleEntity.Value, thoughtSprite), targetLayer, layerData);
-        _sprite.LayerSetVisible((ent.Comp.BubbleEntity.Value, thoughtSprite), targetLayer, true);
-
-        ent.Comp.PointedItem = null;
     }
 
     private void OnShutdown(Entity<ThoughtBubbleComponent> ent, ref ComponentShutdown args)
     {
-        if (ent.Comp.BubbleEntity == null)
-            return;
-
-        QueueDel(ent.Comp.BubbleEntity);
+        PredictedQueueDel(ent.Comp.BubbleEntity);
         ent.Comp.BubbleEntity = null;
     }
 }

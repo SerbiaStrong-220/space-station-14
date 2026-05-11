@@ -23,9 +23,14 @@ public sealed class SharedThoughtBubbleSystem : EntitySystem
 
     private void OnPointedOwnItem(Entity<MindContainerComponent> ent, ref PointedOwnItemEvent args)
     {
-        var comp = EnsureComp<ThoughtBubbleComponent>(ent.Owner);
-        comp.PointedItem = GetNetEntity(args.Item);
-        comp.TimeEndShow = _timing.CurTime + comp.DurationShow;
+        if (args.Handled)
+            return;
+
+        var thoughtBubble = EnsureComp<ThoughtBubbleComponent>(ent.Owner);
+        thoughtBubble.PointedItem = GetNetEntity(args.Item);
+        thoughtBubble.TimeEndShow = _timing.CurTime + thoughtBubble.DurationShow;
+        Dirty(ent.Owner, thoughtBubble);
+        args.Handled = true;
     }
 
     public override void Update(float frameTime)
@@ -40,19 +45,10 @@ public sealed class SharedThoughtBubbleSystem : EntitySystem
 
             comp.TimeEndShow = null;
             RemCompDeferred(uid, comp);
-            Dirty(uid, comp);
         }
     }
 }
 
 
 [ByRefEvent]
-public record struct PointedOwnItemEvent
-{
-    public EntityUid Item;
-
-    public PointedOwnItemEvent(EntityUid item)
-    {
-        Item = item;
-    }
-}
+public record struct PointedOwnItemEvent(EntityUid Item, bool Handled = false);
