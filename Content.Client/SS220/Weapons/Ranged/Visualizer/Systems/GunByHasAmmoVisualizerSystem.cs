@@ -1,6 +1,5 @@
 ﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Linq;
 using Content.Client.Items.Systems;
 using Content.Client.SS220.Weapons.Ranged.Visualizer.Components;
 using Content.Client.Weapons.Ranged.Components;
@@ -55,8 +54,7 @@ public sealed class GunByHasAmmoVisualizerSystem : VisualizerSystem<GunByHasAmmo
         if (!args.Layers.TryGetValue(component.LayerNumber.Value, out var layerTuple))
             return;
 
-        var emptyLayer = layers.FirstOrDefault();
-        if (emptyLayer != null)
-            layerTuple.Item2.State = emptyLayer.State;
+        if (layers.Count > 0)
+            layerTuple.Item2.State = layers[0].State;
     }
 }
