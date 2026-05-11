@@ -35,6 +35,6 @@ public sealed partial class UIRequiresLockComponent : Component
 
     // ss220 prevent sound spam from ghost on borg start
     [DataField]
-    public EntityWhitelist Blacklist = new();
+    public EntityWhitelist? Blacklist;
     // ss220 prevent sound spam from ghost on borg end
 }

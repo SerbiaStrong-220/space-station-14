@@ -34,7 +34,7 @@ public sealed class LockSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _sharedPopupSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!; // ss220 prevent sound spam from ghost on borg
 
     private readonly LocId _defaultDenyReason = "lock-comp-has-user-access-fail";
 
