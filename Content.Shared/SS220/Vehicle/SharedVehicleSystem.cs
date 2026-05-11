@@ -19,6 +19,7 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 using Robust.Shared.Serialization;
 using Content.Shared.Actions.Components;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Vehicle;
 
@@ -46,6 +47,7 @@ public abstract partial class SharedVehicleSystem : EntitySystem
     [Dependency] private readonly SharedMoverController _mover = default!;
 
     private const string KeySlot = "key_slot";
+    private static readonly ProtoId<TagPrototype> DoorBumperOpenerTag = "DoorBumpOpener";
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -121,7 +123,7 @@ public abstract partial class SharedVehicleSystem : EntitySystem
         // Entity is no longer riding
         RemComp<RiderComponent>(args.Buckle);
         RemComp<RelayInputMoverComponent>(args.Buckle);
-        _tagSystem.RemoveTag(uid, "DoorBumpOpener");
+        _tagSystem.RemoveTag(uid, DoorBumperOpenerTag);
 
         Appearance.SetData(uid, VehicleVisuals.HideRider, false);
         // Reset component
@@ -178,7 +180,7 @@ public abstract partial class SharedVehicleSystem : EntitySystem
 
         _joints.ClearJoints(args.Buckle);
 
-        _tagSystem.AddTag(uid, "DoorBumpOpener");
+        _tagSystem.AddTag(uid, DoorBumperOpenerTag);
     }
 
     /// <summary>

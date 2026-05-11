@@ -5,6 +5,7 @@ using Content.Server.Administration.Logs;
 using Content.Server.Maps;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
+using Content.Shared.Maps;
 using Content.Shared.Database;
 using Robust.Shared.Configuration;
 using Robust.Shared.Console;
@@ -26,7 +27,7 @@ namespace Content.Server.GameTicking.Commands
         {
             if (args.Length != 1)
             {
-                shell.WriteLine(Loc.GetString(Loc.GetString($"shell-need-exactly-one-argument")));
+                shell.WriteLine(Loc.GetString("shell-need-exactly-one-argument"));
                 return;
             }
 

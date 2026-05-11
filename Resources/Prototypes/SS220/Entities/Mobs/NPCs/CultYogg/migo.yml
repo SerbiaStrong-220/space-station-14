@@ -20,7 +20,6 @@
       - CultYoggBuilding
       - CultYoggBuildingFrame
   - type: Body
-    prototype: MiGoBody
   - type: Hands
     hands:
       body_part_slot_far right hand:
@@ -143,7 +142,7 @@
       behaviors:
       - !type:GibBehavior { }
   - type: Stamina
-    critThreshold: 200
+    baseCritThreshold: 200
   - type: HTN
     rootTask:
       task: IdleCompound
@@ -156,9 +155,10 @@
         Blunt: 4
         Slash: 7
         Structural: 40 #anti-useless in base
-  - type: Temperature
+  - type: TemperatureDamage
     heatDamageThreshold: 360
     coldDamageThreshold: -150
+  - type: Temperature
     currentTemperature: 310.15
   - type: Tag
     tags:

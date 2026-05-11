@@ -58,10 +58,10 @@
       collection: MetalThud
 
 - type: entity
-  name: syndicate jaws of life
-  parent: [JawsOfLife]
+  name: syndicate jaws of death
+  parent: [JawsOfLife, BaseSyndicateContraband]
   id: SyndicateJawsOfLife
-  description: Useful for entering the station or its departments.
+  description: Useful for breaking into secure areas and other nefarious activities.
   components:
   - type: Sprite
     sprite: Objects/Tools/jaws_of_life.rsi
@@ -78,6 +78,7 @@
       - Prying
       - PlatingCutting #SS220 JOL TilePryingng
   - type: Prying
+    force: true
     speedModifier: 1 #SS220 even speed for both jaws
   - type: MultipleTool
     entries:

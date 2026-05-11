@@ -5,7 +5,6 @@ using Content.Server.Body.Systems;
 using Content.Shared.Atmos;
 using Content.Shared.Body.Components;
 using Content.Shared.Chemistry;
-using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DoAfter;
@@ -302,7 +301,7 @@ public sealed class HookahSystem : EntitySystem
         if (TryComp<BloodstreamComponent>(args.User, out var bloodstream))
         {
             _reactive.DoEntityReaction(args.User, inhaled, ReactionMethod.Ingestion);
-            _bloodstream.TryAddToChemicals((args.User, bloodstream), inhaled);
+            _bloodstream.TryAddToBloodstream((args.User, bloodstream), inhaled);
         }
 
         Exhale(args.User, hookah);
@@ -350,7 +349,7 @@ public sealed class HookahSystem : EntitySystem
 
         if (TryComp<StackComponent>(tobacco, out var stack) && stack.Count > 1)
         {
-            _stack.Use(tobacco, 1, stack);
+            _stack.TryUse((tobacco, stack), 1);
             _itemSlots.SetLock(hookah, fuel.TobaccoSlot, true);
         }
         else

@@ -6,6 +6,7 @@ using Content.Shared.SS220.Shitspawn.AshDrake;
 using Content.Shared.Stunnable;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.Shitspawn.AshDrake;
 
@@ -18,6 +19,7 @@ public sealed class AshDrakeRoarSystem : EntitySystem
     [Dependency] private readonly NpcFactionSystem _faction = default!;
 
     private static readonly AudioParams RoarAudio = AudioParams.Default.WithVolume(8f).WithMaxDistance(20f);
+    private static readonly EntProtoId ActionAshDrakeRoar = "ActionAshDrakeRoar";
 
     public override void Initialize()
     {
@@ -28,7 +30,7 @@ public sealed class AshDrakeRoarSystem : EntitySystem
 
     private void OnMapInit(EntityUid uid, AshDrakeRoarComponent comp, MapInitEvent args)
     {
-        _actions.AddAction(uid, ref comp.ActionEntity, "ActionAshDrakeRoar");
+        _actions.AddAction(uid, ref comp.ActionEntity, ActionAshDrakeRoar);
     }
 
     private void OnRoar(EntityUid uid, AshDrakeRoarComponent comp, AshDrakeRoarActionEvent args)

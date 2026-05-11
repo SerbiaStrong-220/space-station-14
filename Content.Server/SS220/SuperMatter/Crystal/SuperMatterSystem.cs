@@ -1,11 +1,13 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Server.Atmos.Piping.Components;
+using Content.Server.Radiation.Systems;
 using Content.Server.SS220.SuperMatter.Crystal.Components;
 using Content.Server.SS220.SuperMatter.Crystal.SuperMatterInterior;
 using Content.Server.Tesla.Components;
 using Content.Shared.Administration;
 using Content.Shared.Atmos;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Radiation.Components;
 using Content.Shared.SS220.SuperMatter.Functions;
 using Robust.Shared.Timing;
@@ -15,6 +17,7 @@ namespace Content.Server.SS220.SuperMatter.Crystal;
 public sealed partial class SuperMatterSystem
 {
     [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private readonly RadiationSystem _radiation = default!;
 
     private const float ZapPerEnergy = 55f;
     private const float ZapThreshold = 70f;
@@ -192,7 +195,7 @@ public sealed partial class SuperMatterSystem
         }
 
         var radiationIntensity = MathF.Min(MaxRadiationIntensity, smComp.AccumulatedRadiationEnergy / RadiationPerEnergy);
-        radiationSource.Intensity = radiationIntensity;
+        _radiation.SetIntensity((crystalUid, radiationSource), radiationIntensity);
     }
 
     private void EjectGases(float decayedMatter, float crystalTemperature, SuperMatterPhaseState smState, GasMixture gasMixture)

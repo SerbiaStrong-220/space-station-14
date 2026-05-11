@@ -42,14 +42,15 @@ public sealed partial class SyllablesScrambleMethod : ScrambleMethod
     private int _inputSeed;
     private bool _capitalize = false;
 
+    private static readonly Regex NonWhitespaceRegex = new Regex(@"\S+", RegexOptions.Compiled);
+
     public override string ScrambleMessage(string message, int? seed = null)
     {
         if (message == string.Empty ||
             Syllables.Count == 0)
             return message;
 
-        var wordRegex = @"\S+";
-        var matches = Regex.Matches(message, wordRegex);
+        var matches = NonWhitespaceRegex.Matches(message);
         if (matches.Count <= 0)
             return message;
 

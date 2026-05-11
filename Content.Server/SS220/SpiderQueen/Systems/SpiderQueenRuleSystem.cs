@@ -39,11 +39,10 @@ public sealed class SpiderQueenRuleSystem : GameRuleSystem<SpiderQueenRuleCompon
             return;
 
         List<MapCoordinates> validCoordinates = new();
-        var query = EntityQueryEnumerator<AntagSpawnMarkerComponent>();
-        while (query.MoveNext(out var uid, out _))
+        var query = EntityQueryEnumerator<AntagSpawnMarkerComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out _, out var transform))
         {
-            if (_entityWhitelist.IsWhitelistFail(ent.Comp.MarkersWhitelist, uid) ||
-                !TryComp<TransformComponent>(uid, out var transform))
+            if (_entityWhitelist.IsWhitelistFail(ent.Comp.MarkersWhitelist, uid))
                 continue;
 
             validCoordinates.Add(_transform.ToMapCoordinates(transform.Coordinates));

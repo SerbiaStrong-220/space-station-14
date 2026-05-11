@@ -118,7 +118,7 @@ public sealed partial class ExperienceViewWindow : FancyWindow
         {
             divider = new PanelContainer
             {
-                StyleClasses = { StyleBase.ClassLowDivider },
+                StyleClasses = { StyleClass.LowDivider },
             };
             ExperienceTreeGroupsContainer.AddChild(control);
             ExperienceTreeGroupsContainer.AddChild(divider);
@@ -137,7 +137,7 @@ public sealed partial class ExperienceViewWindow : FancyWindow
         {
             divider = new PanelContainer
             {
-                StyleClasses = { StyleBase.ClassLowDivider },
+                StyleClasses = { StyleClass.LowDivider },
             };
             var knowledgeControl = new KnowledgeLabel();
             knowledgeControl.SetKnowledge(knowledge);

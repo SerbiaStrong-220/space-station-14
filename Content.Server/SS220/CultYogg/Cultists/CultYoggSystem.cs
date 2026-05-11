@@ -1,11 +1,8 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Server.Humanoid;
 using Content.Server.SS220.Bed.Cryostorage;
 using Content.Server.SS220.GameTicking.Rules;
 using Content.Shared.Actions;
-using Content.Shared.Body.Components;
-using Content.Shared.Body.Systems;
 using Content.Server.Chat.Managers;
 using Content.Shared.Cloning.Events;
 using Content.Shared.Humanoid;
@@ -22,20 +19,20 @@ using Content.Shared.SS220.EntityEffects.Events;
 using Content.Shared.SS220.StuckOnEquip;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
-using System.Linq;
+using Content.Shared.Body;
+using Content.Shared.Gibbing;
+using Content.Server.Body;
+using Robust.Shared.Utility;
 
 namespace Content.Server.SS220.CultYogg.Cultists;
 
-public sealed class CultYoggSystem : SharedCultYoggSystem
+public sealed partial class CultYoggSystem : SharedCultYoggSystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly GibbingSystem _gibbing = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly HumanoidAppearanceSystem _humanoidAppearance = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly HungerSystem _hungerSystem = default!;
     [Dependency] private readonly SharedStuckOnEquipSystem _stuckOnEquip = default!;
     [Dependency] private readonly ThirstSystem _thirstSystem = default!;
@@ -43,11 +40,11 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
     [Dependency] private readonly CultYoggRuleSystem _cultRuleSystem = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
 
-    private const string CultDefaultMarking = "CultStage-Halo";
-
     public override void Initialize()
     {
         base.Initialize();
+
+        DebugTools.Assert(CultDefaultMarking.Id.Contains(CultMarkingCommonPart));
 
         // actions
         SubscribeLocalEvent<CultYoggComponent, CultYoggPukeShroomActionEvent>(OnPukeAction);
@@ -74,8 +71,6 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
 
     public void UpdateCultVisuals(Entity<CultYoggComponent> ent)
     {
-        if (!TryComp<HumanoidAppearanceComponent>(ent, out var huAp))
-            return;
 
         switch (ent.Comp.CurrentStage)
         {
@@ -83,44 +78,12 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
                 break;
 
             case CultYoggStage.Reveal:
-                ent.Comp.PreviousEyeColor = new Color(huAp.EyeColor.R, huAp.EyeColor.G, huAp.EyeColor.B, huAp.EyeColor.A);
-                huAp.EyeColor = Color.Green;
+                EnsureEyesColor(ent);
                 break;
 
             case CultYoggStage.Alarm:
-                if (!_prototype.HasIndex<MarkingPrototype>(CultDefaultMarking))
-                {
-                    Log.Error($"{CultDefaultMarking} marking doesn't exist");
-                    return;
-                }
-
-                if (huAp.MarkingSet.Markings.TryGetValue(MarkingCategories.Special, out var value))
-                {
-                    ent.Comp.PreviousTail = value.FirstOrDefault();
-                    value.Clear();
-                }
-
-                if (!huAp.MarkingSet.Markings.ContainsKey(MarkingCategories.Special))
-                {
-                    huAp.MarkingSet.Markings.Add(MarkingCategories.Special, new List<Marking>([new Marking(CultDefaultMarking, colorCount: 1)]));
-                }
-
-                _humanoidAppearance.SetMarkingId(ent.Owner,
-                    MarkingCategories.Special,
-                    0,
-                    CultDefaultMarking,
-                    huAp);
-
-                var newMarkingId = $"CultStage-{huAp.Species}";
-
-                if (!_prototype.HasIndex<MarkingPrototype>(newMarkingId))
-                {
-                    // We have species-marking only for the Nians, so this log only leads to unnecessary errors.
-                    //Log.Error($"{newMarkingId} marking doesn't exist");
-                    return;
-                }
-
-                huAp.MarkingSet.Markings[MarkingCategories.Special].Add(new Marking(newMarkingId, colorCount: 1));
+                EnsureEyesColor(ent);
+                EnsureHalo(ent);
                 break;
 
             case CultYoggStage.God:
@@ -141,21 +104,32 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
 
     public override void DeleteVisuals(Entity<CultYoggComponent> ent)
     {
-        if (!TryComp<HumanoidAppearanceComponent>(ent, out var huAp))
-            return;
+        _visualBody.TryGatherMarkingsData(ent.Owner, [HumanoidVisualLayers.Eyes], out var eyesProfiles, out _, out _);
+        _visualBody.TryGatherMarkingsData(ent.Owner, [HumanoidVisualLayers.Special], out _, out _, out var appliedMarkings);
+        _visualBody.TryGatherMarkingsData(ent.Owner, [HumanoidVisualLayers.Tail], out _, out _, out var appliedTailMarkings);
 
-        if (ent.Comp.PreviousEyeColor != null)
-            huAp.EyeColor = ent.Comp.PreviousEyeColor.Value;
-
-        huAp.MarkingSet.Markings.Remove(MarkingCategories.Special);
-
-        if (huAp.MarkingSet.Markings.TryGetValue(MarkingCategories.Tail, out var value) &&
-            ent.Comp.PreviousTail != null)
+        if (ent.Comp.PreviousEyeColor is not null && eyesProfiles is not null
+            && eyesProfiles.TryGetValue(EyesCategory, out var eyesProfile))
         {
-            value.Add(ent.Comp.PreviousTail);
+            eyesProfile.EyeColor = ent.Comp.PreviousEyeColor.Value;
+            _visualBody.ApplyProfile(ent, eyesProfile);
+            ent.Comp.PreviousEyeColor = null;
         }
 
-        Dirty(ent.Owner, huAp);
+        if (appliedMarkings is not null && appliedMarkings.TryGetValue(TorsoCategory, out var torsoSpecialMarkings)
+            && torsoSpecialMarkings.TryGetValue(HumanoidVisualLayers.Special, out var specialMarkingsList))
+        {
+            specialMarkingsList.RemoveAll(x => x.MarkingId.Id.Contains(CultMarkingCommonPart));
+            _visualBody.ApplyMarkings(ent, new() { { TorsoCategory, torsoSpecialMarkings } });
+        }
+
+        if (ent.Comp.PreviousTailMarkings is { } previousTailMarkings
+            && appliedTailMarkings is not null && appliedTailMarkings.TryGetValue(TorsoCategory, out var torsoTailMarkings)
+            && torsoTailMarkings.TryGetValue(HumanoidVisualLayers.Tail, out var tailMarkingsList))
+        {
+            _visualBody.ApplyMarkings(ent, new() { { TorsoCategory, new() { { HumanoidVisualLayers.Tail, previousTailMarkings } } } });
+            ent.Comp.PreviousTailMarkings = null;
+        }
     }
     #endregion
 
@@ -168,7 +142,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
         args.Handled = true;
 
         _vomitSystem.Vomit(ent);
-        _entityManager.SpawnEntity(ent.Comp.PukedEntity, Transform(ent).Coordinates);
+        Spawn(ent.Comp.PukedEntity, Transform(ent).Coordinates);
 
         _actions.RemoveAction(ent.Owner, ent.Comp.PukeShroomActionEntity);
         _actions.AddAction(ent, ref ent.Comp.DigestActionEntity, ent.Comp.DigestAction);
@@ -218,7 +192,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
             return;
 
         // Get original body position and spawn MiGo here
-        var migo = _entityManager.SpawnAtPosition(ent.Comp.AscendedEntity, Transform(ent).Coordinates);
+        var migo = SpawnAtPosition(ent.Comp.AscendedEntity, Transform(ent).Coordinates);
 
 
         if (_mind.TryGetMind(ent, out var mindId, out var mind))
@@ -226,7 +200,7 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
 
         //Gib original body
         if (TryComp<BodyComponent>(ent, out var body))
-            _body.GibBody(ent, body: body);
+            _gibbing.Gib(ent);
     }
 
     public bool TryStartAscensionByReagent(EntityUid ent, CultYoggComponent comp)

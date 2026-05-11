@@ -21,16 +21,15 @@ public sealed class ForcefieldOverlay : Overlay
     public override OverlaySpace Space => OverlaySpace.WorldSpaceEntities;
     public override bool RequestScreenTexture => true;
 
+    private static readonly ProtoId<ShaderPrototype> ShaderProtoId = "Stealth";
     private readonly ShaderInstance _shader;
-    private readonly ShaderInstance _shader_unshaded;
 
     public ForcefieldOverlay()
     {
         IoCManager.InjectDependencies(this);
 
         _transform = _entity.System<TransformSystem>();
-        _shader_unshaded = _prototype.Index<ShaderPrototype>("unshaded").InstanceUnique();
-        _shader = _prototype.Index<ShaderPrototype>("Stealth").InstanceUnique();
+        _shader = _prototype.Index(ShaderProtoId).InstanceUnique();
 
         ZIndex = (int) Shared.DrawDepth.DrawDepth.Overdoors;
     }

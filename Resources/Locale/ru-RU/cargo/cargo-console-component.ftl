@@ -87,3 +87,19 @@ cargo-acquisition-slip-body = [head=3]Детали актива[/head]
     { "[head=3]Детали покупки[/head]" }
     { "[bold]Заказчик:[/bold]" } { $orderer }
     { "[bold]Причина:[/bold]" } { $reason }
+
+cargo-console-menu-flavor-left = Заказывайте ещё больше коробок с пиццей, чем обычно!
+
+cargo-console-menu-flavor-right = v2.1
+
+cargo-console-menu-order-row-title = { $productName } (x{ $orderAmount } за { $orderPrice }$)
+
+cargo-console-menu-order-row-product-description = Причина: { $orderReason }
+
+cargo-console-menu-order-row-button-approve = Одобрить
+
+cargo-console-menu-order-row-button-cancel = Отменить
+
+cargo-console-menu-order-row-alerts-reason-absent = Причина не указана
+
+cargo-console-menu-order-row-alerts-requester-unknown = Неизвестно

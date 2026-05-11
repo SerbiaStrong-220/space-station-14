@@ -1,0 +1,40 @@
+- type: job
+  id: Brigmedic
+  name: job-name-brigmedic
+  description: job-description-brigmedic
+  playTimeTracker: JobBrigmedic
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: Medical
+    time: 72000
+  startingGear: BrigmedicGear
+  experienceDefinition: BrigmedicRoleExperience
+  icon: "JobIconBrigmedic"
+  supervisors: job-supervisors-cmo
+  access:
+  - Medical
+  - Security
+  - Brig
+  - Maintenance
+  - External
+  extendedAccess:
+  - Chemistry
+
+- type: startingGear
+  id: BrigmedicGear
+  equipment:
+    id: BrigmedicPDA
+    ears: ClothingHeadsetBrigmedic
+    belt: ClothingBeltSecurityMedicalFilled
+  storage:
+    back:
+    - Flash
+
+- type: chameleonOutfit
+  id: BrigmedicChameleonOutfit
+  job: Brigmedic
+  equipment:
+    eyes: ClothingEyesHudMedical
+    mask: ClothingMaskSterile
+    outerClothing: ClothingOuterCoatAMG
+    gloves: ClothingHandsGlovesLatex
