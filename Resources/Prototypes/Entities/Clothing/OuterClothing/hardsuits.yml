@@ -296,8 +296,8 @@
     damageCoefficient: 0.4
   # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
-    walkModifier: 0.9 #SS220 sec hardsuit buff
-    sprintModifier: 0.9 #SS220 sec hardsuit buff
+    walkModifier: 0.85 #SS220 sec hardsuit buff
+    sprintModifier: 0.85 #SS220 sec hardsuit buff
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSecurity
@@ -403,8 +403,8 @@
       coefficients:
         Blunt: 0.8
         Slash: 0.8
-        Piercing: 0.6
-        Heat: 0.5
+        Piercing: 0.55
+        Heat: 0.55
         Radiation: 0.5
         Caustic: 0.6
   # SS220 add stamina resistance begin
