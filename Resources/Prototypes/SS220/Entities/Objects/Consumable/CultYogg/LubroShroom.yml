@@ -45,10 +45,8 @@
     - Omnivorous
     - CultYoggStealthProvidable
     - WhitelistChameleon
-  #SS220 silent walk new feature begins
   - type: FootstepModifier
     footstepSoundCollection: null
-  #SS220 silent walk new feature ends
 
 - type: entity
   parent: SeedBase
