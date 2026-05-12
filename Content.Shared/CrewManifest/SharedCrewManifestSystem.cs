@@ -1,5 +1,4 @@
 using Content.Shared.Eui;
-using NetSerializer;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.CrewManifest;
@@ -73,3 +72,11 @@ public sealed class CrewManifestEntry
 [Serializable, NetSerializable]
 public sealed class CrewManifestOpenUiMessage : BoundUserInterfaceMessage
 {}
+
+// ss220 add additional info for pda start
+[Serializable, NetSerializable]
+public sealed class RequestLinkIdToRecord(uint key) : BoundUserInterfaceMessage
+{
+    public uint Key = key;
+}
+// ss220 add additional info for pda end

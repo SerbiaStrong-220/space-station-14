@@ -58,7 +58,7 @@ public sealed class BlindsSystem : EntitySystem
         processedEntities.Add(uid);
 
         // Make connected blinds change their state as well
-        if (!TryComp<TransformComponent>(uid, out var transform))
+        if (!TryComp(uid, out TransformComponent? transform))
             return;
 
         if (transform.Anchored && TryComp<MapGridComponent>(transform.GridUid, out var grid)) //SS220-upstream-merge

@@ -204,7 +204,7 @@ entities:
     - type: Transform
       pos: -0.520833,-0.4375
       parent: 1
-    - type: SkipAutoVariantize      
+    - type: SkipAutoVariantize
     - type: MapGrid
       chunks:
         0,0:
@@ -78004,7 +78004,6 @@ entities:
   - uid: 9977
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 15.5,-9.5
       parent: 2
   - uid: 9978
@@ -120327,8 +120326,7 @@ entities:
           showEnts: False
           occludes: False
           ent: 8772
-    - type: ReplacementAccent
-      accent: cowboy
+    - type: CowboyAccent
   - uid: 8790
     components:
     - type: MetaData
@@ -120410,8 +120408,7 @@ entities:
           showEnts: False
           occludes: False
           ent: 8831
-    - type: ReplacementAccent
-      accent: cowboy
+    - type: CowboyAccent
   - uid: 8834
     components:
     - type: Transform

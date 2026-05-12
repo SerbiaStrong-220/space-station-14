@@ -1,19 +1,15 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Shared.Alert;
-using Content.Shared.FixedPoint;
 using Content.Shared.Roles;
 using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.CultYogg.MiGo;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedMiGoSystem), typeof(SharedMiGoErectSystem), Friend = AccessPermissions.ReadWriteExecute, Other = AccessPermissions.Read)]
 public sealed partial class MiGoComponent : Component
 {
     #region Abilities
@@ -28,16 +24,10 @@ public sealed partial class MiGoComponent : Component
     public EntProtoId MiGoHealAction = "ActionMiGoHeal";
 
     [DataField]
-    public EntProtoId MiGoAstralAction = "ActionMiGoAstral";
-
-    [DataField]
     public EntProtoId MiGoErectAction = "ActionMiGoErect";
 
     [DataField]
     public EntProtoId MiGoSacrificeAction = "ActionMiGoSacrifice";
-
-    [DataField]
-    public EntProtoId MiGoTeleportAction = "ActionMiGoTeleport";
 
     [DataField, AutoNetworkedField]
     public EntityUid? MiGoToggleLightActionEntity;
@@ -49,9 +39,6 @@ public sealed partial class MiGoComponent : Component
     public EntityUid? MiGoHealActionEntity;
 
     [DataField, AutoNetworkedField]
-    public EntityUid? MiGoAstralActionEntity;
-
-    [DataField, AutoNetworkedField]
     public EntityUid? MiGoErectActionEntity;
 
     [DataField, AutoNetworkedField]
@@ -59,9 +46,6 @@ public sealed partial class MiGoComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntityUid? MiGoSacrificeActionEntity;
-
-    [DataField, AutoNetworkedField]
-    public EntityUid? MiGoTeleportActionEntity;
     #endregion
 
     /// <summary>
@@ -123,49 +107,6 @@ public sealed partial class MiGoComponent : Component
     public Dictionary<string, TimeSpan> CaptureCooldowns = [];
     #endregion
 
-    #region Astral
-    /// <summary>
-    /// Flag to check if the target is in the astral plane
-    /// </summary>
-    [ViewVariables, AutoNetworkedField]
-    public bool IsPhysicalForm = true;//Is MiGo in phisycal form?
-
-    public bool AudioPlayed = false; //it should be played once in timer, but this shit being called several times somehow
-
-    [DataField]
-    public SoundSpecifier? SoundMaterialize = new SoundPathSpecifier("/Audio/SS220/CultYogg/migo_astral_out.ogg");
-
-    [DataField]
-    public SoundSpecifier? SoundDeMaterialize = new SoundPathSpecifier("/Audio/SS220/CultYogg/migo_astral_in.ogg");
-
-    [DataField]
-    public TimeSpan EnteringAstralDoAfter = TimeSpan.FromSeconds(2.8);//same lenght as sound
-
-    [DataField]
-    public TimeSpan ExitingAstralDoAfter = TimeSpan.FromSeconds(1);
-
-    public TimeSpan CooldownAfterDematerialize = TimeSpan.FromSeconds(3);
-
-    /// How long MiGo can be in astral
-    [DataField, AutoNetworkedField]
-    public TimeSpan AstralDuration = TimeSpan.FromSeconds(35);
-
-    [AutoNetworkedField]
-    public TimeSpan? MaterializationTime;
-
-    [AutoNetworkedField]
-    public FixedPoint2 AlertTime;
-
-    [ViewVariables, DataField, AutoNetworkedField]
-    public float MaterialMovementSpeed = 6f; //ToDo check this thing
-
-    [ViewVariables, DataField, AutoNetworkedField]
-    public float UnMaterialMovementSpeed = 15f;//ToDo check this thing
-
-    [DataField]
-    public ProtoId<AlertPrototype> AstralAlert = "MiGoAstralAlert";
-    #endregion
-
     /// <summary>
     /// Added job
     /// </summary>
@@ -177,18 +118,4 @@ public sealed partial class MiGoComponent : Component
     /// </summary>
     [ViewVariables, AutoNetworkedField]
     public CultYoggStage CurrentStage = CultYoggStage.Initial;
-}
-
-[NetSerializable, Serializable]
-public enum MiGoTimerVisualLayers : byte
-{
-    Digit1,
-    Digit2
-}
-
-[Serializable, NetSerializable]
-public enum MiGoVisual
-{
-    Base,
-    Astral
 }

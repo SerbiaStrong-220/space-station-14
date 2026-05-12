@@ -1,7 +1,7 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: entity
-  parent: [ClothingBackpack, CultYoggRestrictedItem]
+  parent: [ClothingBackpack, CultYoggWideRestrictedItem]
   id: ClothingBackpackCultYogg
   suffix: CultYogg
   name: cult backpack
@@ -15,9 +15,9 @@
     - 0,0,9,5
   - type: RestrictedStorage
     whitelist:
-      requireAll: true
       components:
       - CultYogg
+      - MiGo
   - type: StuckOnEquip
   - type: Tag
     tags:

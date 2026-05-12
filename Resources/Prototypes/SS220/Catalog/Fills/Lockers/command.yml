@@ -5,19 +5,21 @@
   suffix: Filled
   parent: LockerBlueshield
   components:
-  - type: StorageFill
-    contents:
-    - id: WeaponDisabler
-    - id: MedkitAdvancedFilled
-#    - id: ClothingUniformJumpsuitBlueShield2 #SS220 BlueShield Rework
-#   - id: ClothingCloakBlueShield #SS220 new cloak
-    - id: ExpensiveLighterShield #SS220-Zippo
-#   - id: HandheldCrewMonitor #ss220-fix-blueshield
-#    - id: ClothingOuterBSOCoat #SS220 BlueShield Rework
-    - id: BlueShieldGasMask
-    - id: RubberStampBlueShield #SS220-additional paperwork
-    - id: JetpackMiniBlueFilled #SS220 BlueShield Rework
-    - id: PinpointerCrew
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: WeaponDisabler
+        - id: MedkitAdvancedFilled
+        - id: ExpensiveLighterShield
+        - id: ClothingHeadHelmetTactical
+        - id: RubberStampBlueShield
+        - id: JetpackMiniBlueFilled
+        - id: ExpensiveLighterShield
+        - id: ClothingMaskGasBlueShield
+        - id: RubberStampBlueShield
+        - id: JetpackMiniBlueFilled
+        - id: PinpointerCrew
 
 - type: entity
   parent: GunSafe
@@ -26,10 +28,11 @@
   components:
   - type: AccessReader
     access: [ [ "Blueshield" ] ]
-  - type: StorageFill
-    contents:
-#    - id: WeaponDisabler #SS220-MinorTweaks
-#      amount: 1 #SS220-MinorTweaks
-    - id: WeaponBlasterKRS #SS220-BlueShield Rework
-    - id: BlasterPowerCellAlt
-      amount: 3
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: WeaponEnergyGunRevolver
+        - id: WeaponBlasterKRS
+        - id: PowerCellBlaster
+          amount: 3

@@ -59,3 +59,21 @@
     sprite: SS220/Clothing/Eyes/Hud/supply.rsi
   - type: Clothing
     sprite: SS220/Clothing/Eyes/Hud/supply.rsi
+
+- type: entity
+  parent: ClothingEyesBase
+  id: ClothingEyesHudMediChem
+  name: chemi-medical hud
+  description: They have a striking resemblance to the glasses from the movie theater.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Eyes/Hud/medichem.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Eyes/Hud/medichem.rsi
+  - type: ShowHealthBars
+    damageContainers:
+    - Biological
+  - type: ShowHealthIcons
+    damageContainers:
+    - Biological
+  - type: SolutionScanner

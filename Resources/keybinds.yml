@@ -191,6 +191,11 @@ binds:
 - function: OpenCharacterMenu
   type: State
   key: U
+  # SS220-experience-update
+- function: OpenExperienceViewerMenu
+  type: State
+  key: O
+  # SS220-experience-update
 - function: OpenEmotesMenu
   type: State
   key: Y
@@ -286,6 +291,14 @@ binds:
 - function: InspectEntity
   type: State
   key: v
+  mod1: Alt
+- function: InspectServerComponent
+  type: State
+  key: b
+  mod1: Alt
+- function: InspectClientComponent
+  type: State
+  key: c
   mod1: Alt
 - function: MouseMiddle
   type: State
@@ -719,3 +732,8 @@ binds:
   key: P
   mod1: Alt
 # SS220 add pinnable ui func end
+# SS220 add additional control for shuttle start
+- function: FireShuttle
+  type: State
+  key: Space
+# SS220 add additional control for shuttle end

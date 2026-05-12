@@ -3,7 +3,7 @@
 # Flipped
 - type: entity
   parent: [ClothingUniformBase, BaseFoldable]
-  id: ClothingUniformBaseFoldable
+  id: ClothingUniformFoldableBaseSS220
   abstract: true
   components:
   - type: Appearance
@@ -23,8 +23,8 @@
       visible: false
 
 - type: entity
-  parent: ClothingUniformBaseFoldable
-  id: ClothingUniformBaseFoldableTie
+  parent: ClothingUniformFoldableBaseSS220
+  id: ClothingUniformFoldableBaseTieSS220
   abstract: true
   components:
   - type: Foldable
@@ -39,5 +39,47 @@
       map: [ "unfoldedLayer" ]
       visible: false
     - state: icon_tie
+      map: ["foldedLayer"]
+      visible: true
+
+- type: entity
+  abstract: true
+  parent: [ClothingUniformBase, BaseFoldable]
+  id: ClothingUniformBaseFoldableBase
+  components:
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: fold-zip-verb
+    foldVerbText: fold-unzip-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: open
+    foldedHeldPrefix: open
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+    - state: icon-open
+      map: ["foldedLayer"]
+      visible: false
+
+- type: entity
+  abstract: true
+  parent: ClothingUniformBaseFoldableBase
+  id: ClothingUniformBaseFoldableBaseOpened
+  suffix: opened
+  components:
+  - type: Foldable
+    folded: true
+  - type: Clothing
+    equippedPrefix: open
+  - type: Item
+    heldPrefix: open
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+      visible: false
+    - state: icon-open
       map: ["foldedLayer"]
       visible: true

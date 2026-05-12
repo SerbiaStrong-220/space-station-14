@@ -4,7 +4,7 @@ using Content.Shared.Buckle.Components;
 using Content.Shared.Construction.Components;
 using Content.Shared.Examine;
 using Content.Shared.Popups;
-using Content.Shared.SS220.CultYogg.Sacraficials;
+using Content.Shared.SS220.CultYogg.Sacrificials;
 
 namespace Content.Shared.SS220.CultYogg.Altar;
 

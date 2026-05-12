@@ -2,40 +2,6 @@
 
 - type: entity
   parent: ClothingOuterHardsuitBase
-  id: ClothingOuterHardsuitBlueshield
-  name: blueshield's hardsuit
-  description: A special suit that protects against hazardous, low pressure environments. Has an additional layer of armor.
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/blueshield.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Hardsuits/blueshield.rsi
-  - type: PressureProtection
-    highPressureMultiplier: 0.525
-    lowPressureMultiplier: 10000
-  - type: ClothingSpeedModifier
-    walkModifier: 0.75
-    sprintModifier: 0.75
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.6
-        Slash: 0.5
-        Piercing: 0.5
-        Heat: 0.8
-        Radiation: 0.25
-        Caustic: 0.6
-  - type: StaminaResistance
-    damageCoefficient: 0.35
-  - type: ExplosionResistance
-    damageCoefficient: 0.6
-  - type: ZombificationResistance
-    zombificationResistanceCoefficient: 0.35
-  - type: ToggleableClothing
-    clothingPrototype: ClothingHeadHelmetHardsuitBlueshield
-
-- type: entity
-  parent: ClothingOuterHardsuitBase
   id: ClothingOuterHardsuitLightBlueshield
   name: blueshield's light hardsuit
   description: A special suit designed for the Blue Shield. It is characterized by lightness and maneuverability.
@@ -53,18 +19,16 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.6
+        Blunt: 0.7
         Slash: 0.7
-        Piercing: 0.6
+        Piercing: 0.7
         Heat: 0.8
         Radiation: 0.4
         Caustic: 0.6
   - type: StaminaResistance
-    damageCoefficient: 0.35
+    damageCoefficient: 0.5
   - type: ExplosionResistance
-    damageCoefficient: 0.6
-  - type: ZombificationResistance
-    zombificationResistanceCoefficient: 0.35
+    damageCoefficient: 0.8
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitLightBlueshield
 
@@ -72,7 +36,7 @@
   parent: ClothingOuterHardsuitBase
   id: ClothingOuterHardsuitHightBlueshield
   name: hight hardsuit "Blue Shield"
-  description: A special spacesuit designed for Blue Shield operatives. It will even protect you from a nuclear explosion!
+  description: A special spacesuit designed for SRT operatives. It will even protect you from a nuclear explosion!
   components:
   - type: Sprite
     sprite: SS220/Clothing/OuterClothing/Hardsuits/blueshield_hight.rsi
@@ -95,10 +59,8 @@
         Caustic: 0.4
   - type: StaminaResistance
     damageCoefficient: 0.35
-  - type: ZombificationResistance
-    zombificationResistanceCoefficient: 0.35
   - type: ExplosionResistance
-    damageCoefficient: 0.3
+    damageCoefficient: 0.4
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitLightBlueshield
 
@@ -468,6 +430,138 @@
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitQuartermaster
+  - type: Tag
+    tags:
+    - Hardsuit
+    - WhitelistChameleon
+
+- type: entity
+  parent: [ClothingOuterHardsuitBase]
+  id: ClothingOuterHardsuitRedWingsSec
+  name: red wings security hardsuit
+  description: A heavy armored suit manufactured by Cybersun for Red Wings security officers.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/redwings_sec.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/redwings_sec.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.05
+    lowPressureMultiplier: 1000
+  - type: TemperatureProtection
+    heatingCoefficient: 0.001
+    coolingCoefficient: 0.001
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.5
+        Heat: 0.6
+        Radiation: 0.75
+        Caustic: 0.7
+  - type: StaminaResistance
+    damageCoefficient: 0.1
+  - type: ClothingSpeedModifier
+    walkModifier: 0.85
+    sprintModifier: 0.85
+  - type: HeldSpeedModifier
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitRedWingsSec
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleEvil
+      Female: FemaleEvil
+      Unsexed: MaleEvil
+
+- type: entity
+  parent: [ClothingOuterHardsuitBase]
+  id: ClothingOuterHardsuitRedWingsMedic
+  name: red wings medic hardsuit
+  description: A lightweight version of the Red Wings Security hardsuit.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/redwings_medic.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/redwings_medic.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.2
+    lowPressureMultiplier: 1000
+  - type: TemperatureProtection
+    heatingCoefficient: 0.001
+    coolingCoefficient: 0.001
+  - type: ExplosionResistance
+    damageCoefficient: 0.55
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.55
+        Slash: 0.55
+        Piercing: 0.60
+        Heat: 0.7
+        Radiation: 0.75
+        Caustic: 0.65
+  - type: StaminaResistance
+    damageCoefficient: 0.5
+  - type: ClothingSpeedModifier
+    walkModifier: 1
+    sprintModifier: 1
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitRedWingsMedic
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleEvil
+      Female: FemaleEvil
+      Unsexed: MaleEvil
+  - type: Tag
+    tags:
+    - Hardsuit
+    - WhitelistChameleon
+
+- type: entity
+  parent: [ClothingOuterHardsuitBase]
+  id: ClothingOuterHardsuitRedWingsPilot
+  name: red wings pilot's hardsuit
+  description: A lightly armored spacesuit that allows for unrestricted movement. It has ports for connecting to the onboard computer.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/redwings_pilot.rsi
+  - type: Item
+    size: Huge
+  - type: Clothing
+    sprite: SS220/Clothing/OuterClothing/Hardsuits/redwings_pilot.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.05
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.55
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.6
+        Piercing: 0.6
+        Heat: 0.65
+        Radiation: 0.75
+        Caustic: 0.75
+  - type: StaminaResistance
+    damageCoefficient: 0.5
+  - type: ClothingSpeedModifier
+    walkModifier: 0.95
+    sprintModifier: 0.95
+  - type: HeldSpeedModifier
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitRedWingsPilot
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleEvil
+      Female: FemaleEvil
+      Unsexed: MaleEvil
   - type: Tag
     tags:
     - Hardsuit

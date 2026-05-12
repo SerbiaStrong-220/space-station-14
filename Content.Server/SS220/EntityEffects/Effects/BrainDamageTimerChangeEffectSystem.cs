@@ -3,6 +3,7 @@ using Content.Server.SS220.LimitationRevive;
 using Content.Shared.EntityEffects;
 using Content.Shared.SS220.ChemicalAdaptation;
 using Content.Shared.SS220.EntityEffects.Effects;
+using Content.Shared.SS220.LimitationRevive;
 
 namespace Content.Server.SS220.EntityEffects.Effects;
 
@@ -21,10 +22,8 @@ public sealed partial class BrainDamageTimerChangeEffectSystem : EntityEffectSys
         var timeBuffer = args.Effect.AddTime;
 
         // SS220-todo-put it somewhere in parent
-        if (_chemicalAdaptation.TryGetModifier(entity, args.Effect.Reagent, out var modifier))
-        {
-            timeBuffer *= modifier;
-        }
+        if (_chemicalAdaptation.TryGetMetabolized(entity, args.Effect.Reagent, out var metabolized))
+            timeBuffer *= Math.Pow(args.Effect.Decay, metabolized);
 
         _limitationRevive.IncreaseTimer(entity, timeBuffer);
     }

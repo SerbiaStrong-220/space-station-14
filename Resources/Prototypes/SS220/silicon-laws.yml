@@ -21,6 +21,7 @@
 
 - type: siliconLawset
   id: CloImLawset
+  name: law-CloIm-name
   laws:
   - CloIm1
   - CloIm2
@@ -56,6 +57,7 @@
 
 - type: siliconLawset
   id: ErtLawset
+  name: law-Ert-name
   laws:
   - Ert1
   - Ert2
@@ -63,7 +65,7 @@
   - Ert4
   - Ert5
   obeysTo: laws-owner-station
-  
+
 # TerminatorOS
 - type: siliconLaw
   id: TerminatorOS1
@@ -82,6 +84,7 @@
 
 - type: siliconLawset
   id: TerminatorOSLawset
+  name: law-TerminatorOS-name
   laws:
   - TerminatorOS1
   - TerminatorOS2
@@ -106,6 +109,7 @@
 
 - type: siliconLawset
   id: EpsilonTerminatorLawset
+  name: law-EpsilonTerminator-name
   laws:
   - EpsilonTerminator1
   - EpsilonTerminator2
@@ -135,6 +139,7 @@
 
 - type: siliconLawset
   id: QuarantineLawset
+  name: law-Quarantine-name
   laws:
   - Quarantine1
   - Quarantine2

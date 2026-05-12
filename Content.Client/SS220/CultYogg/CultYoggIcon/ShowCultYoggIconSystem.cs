@@ -4,7 +4,7 @@ using Content.Shared.StatusIcon;
 using Content.Shared.StatusIcon.Components;
 using Robust.Shared.Prototypes;
 using Content.Shared.SS220.CultYogg.CultYoggIcons;
-using Content.Shared.SS220.CultYogg.Sacraficials;
+using Content.Shared.SS220.CultYogg.Sacrificials;
 using Robust.Client.Player;
 
 namespace Content.Client.SS220.CultYogg.CultYoggIcon;
@@ -19,7 +19,7 @@ public sealed class ShowCultYoggIconsSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<ShowCultYoggIconsComponent, GetStatusIconsEvent>(OnGetCultistsIconsEvent);
-        SubscribeLocalEvent<CultYoggSacrificialComponent, GetStatusIconsEvent>(OnGetSacraficialIconsEvent);
+        SubscribeLocalEvent<CultYoggSacrificialComponent, GetStatusIconsEvent>(OnGetSacrificialIconsEvent);
     }
 
     private void OnGetCultistsIconsEvent(Entity<ShowCultYoggIconsComponent> uid, ref GetStatusIconsEvent ev)
@@ -35,7 +35,7 @@ public sealed class ShowCultYoggIconsSystem : EntitySystem
             Log.Error($"Invalid faction icon prototype: {iconPrototype}");
     }
 
-    private void OnGetSacraficialIconsEvent(Entity<CultYoggSacrificialComponent> uid, ref GetStatusIconsEvent ev)
+    private void OnGetSacrificialIconsEvent(Entity<CultYoggSacrificialComponent> uid, ref GetStatusIconsEvent ev)
     {
         var viewer = _playerManager.LocalSession?.AttachedEntity;
         if (viewer == uid)

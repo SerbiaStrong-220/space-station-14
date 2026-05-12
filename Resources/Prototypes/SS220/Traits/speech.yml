@@ -4,3 +4,21 @@
   description: trait-slavic-accent-desc
   components:
     - type: SlavicAccent
+
+- type: trait
+  id: CowboyAccent
+  name: trait-cowboy-name
+  description: trait-cowboy-desc
+  category: SpeechTraits
+  cost: 1
+  components:
+  - type: CowboyAccent
+
+- type: trait
+  id: ItalianAccent
+  name: trait-italian-name
+  description: trait-italian-desc
+  category: SpeechTraits
+  cost: 1
+  components:
+  - type: ItalianAccent

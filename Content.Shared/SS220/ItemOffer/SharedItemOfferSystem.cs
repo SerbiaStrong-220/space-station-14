@@ -30,6 +30,9 @@ public abstract partial class SharedItemOfferSystem : EntitySystem
         if (item == null)
             return;
 
+        if (args.User == args.Target)
+            return;
+
         var evItem = new CanOfferItemEvent(args.User, args.Target);
         RaiseLocalEvent(item.Value, ref evItem, true);
 

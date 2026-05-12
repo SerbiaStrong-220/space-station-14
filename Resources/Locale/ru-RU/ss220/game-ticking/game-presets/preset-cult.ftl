@@ -17,8 +17,8 @@ cult-yogg-round-end-win = [color=darkred]Повелитель явился в н
 
 objective-issuer-cult-yogg = [color=crimson]По Заветам Посланника Бога Нашего Йог-Сотота[/color]
 
-objective-cult-yogg-sacrafice-start = Призовите темного бога, принеся в жертву следующие цели:
-objective-condition-cult-yogg-sacrafice-person = {$targetName}, в должности {CAPITALIZE($job)}
+objective-cult-yogg-sacrifice-start = Призовите темного бога, принеся в жертву следующие цели:
+objective-condition-cult-yogg-sacrifice-person = {$targetName}, в должности {CAPITALIZE($job)}
 objective-condition-cult-yogg-enslave = Соберите в культе не менее {$amont} прислужников
 
 cult-yogg-add-token-no-cultists = В рядах культа не осталось ни одного прислужника, любой Ми-Го может захватить культиста без Ми-Гомицелия.
@@ -38,4 +38,4 @@ cult-yogg-stage-info =
     Необходимо членов культа для прогресса стадии: {$count}
 
 cult-yogg-sacrifice-only-stage-alarm = Жертвоприношение возможно только после выполнения цели по набору.
-cult-yogg-sacrifice-warning = Жертвоприношение в { $location } пытается создать прореху в другую реальность. Остановите его любой ценой!
+cult-yogg-sacrifice-warning = Жертвоприношение в { $location }, по координатам { $coords } пытается создать прореху в другую реальность. Остановите его любой ценой!
