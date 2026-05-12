@@ -1,4 +1,5 @@
 // © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
+using Content.Shared.Examine;
 using Content.Shared.Popups;
 using Content.Shared.SS220.Weapons.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -17,6 +18,15 @@ public abstract class SharedGasWeaponSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<GasWeaponComponent, ShotAttemptedEvent>(OnShootAttempt);
+        SubscribeLocalEvent<GasWeaponComponent, ExaminedEvent>(OnBatteryExamine);
+    }
+
+    protected virtual void OnBatteryExamine(Entity<GasWeaponComponent> ent, ref ExaminedEvent args)
+    {
+        args.PushMarkup(Loc.GetString("gas-gun-examine",
+                                ("stateText", Loc.GetString(ent.Comp.CanShoot
+                                    ? "gas-gun-examine-ready"
+                                    : "gas-gun-examine-unready"))));
     }
 
     protected virtual void OnShootAttempt(Entity<GasWeaponComponent>ent, ref ShotAttemptedEvent args)
@@ -24,6 +34,7 @@ public abstract class SharedGasWeaponSystem : EntitySystem
         if (!ent.Comp.CanShoot)
         {
             args.Cancel();
+            _popup.PopupCursor(Loc.GetString("gas-gun-fired-empty"));
             return;
         }
 
