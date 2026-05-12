@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using System.Linq;
 using Content.Server.Atmos.Piping.Components;
 using Content.Server.Radiation.Systems;
 using Content.Server.SS220.SuperMatter.Crystal.Components;
@@ -19,19 +20,19 @@ public sealed partial class SuperMatterSystem
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly RadiationSystem _radiation = default!;
 
-    private const float ZapPerEnergy = 55f;
-    private const float ZapThreshold = 70f;
+    private const float ZapPerEnergy = 165f;
+    private const float ZapThreshold = 100f;
     private const float MaxTimeBetweenArcs = 8f;
     private const float MaxTimeDecreaseBetweenArcs = 4f;
     private const int MaxAmountOfArcs = 7;
     private const float ArcsToTimeDecreaseEfficiency = 0.3f;
 
-    private const float RadiationPerEnergy = 70f;
+    private const float RadiationPerEnergy = 120f;
 
     private const float IntegrityDamageICAnnounceDelay = 60f;
     private const float IntegrityDamageStationAnnouncementDelay = 5f * 60f;
 
-    private const float ReleasedEnergyToGasHeat = 60f;
+    private const float ReleasedEnergyToGasHeat = 35f;
 
     private const float MaxRadiationIntensity = 16f;
 
@@ -113,13 +114,24 @@ public sealed partial class SuperMatterSystem
 
         var releasedEnergy = frameTime * crystal.Comp.InternalEnergy * GetReleaseEnergyConversionEfficiency(crystalTemperature, pressure)
                         * (SuperMatterGasResponse.GetGasInfluenceReleaseEnergyEfficiency(gasMixture) + 1);
+
+        var beforeReleaseInternalEnergy = crystal.Comp.InternalEnergy;
+        crystal.Comp.InternalEnergy -= releasedEnergy;
+        releasedEnergy = beforeReleaseInternalEnergy - crystal.Comp.InternalEnergy;
+
         crystal.Comp.AccumulatedRadiationEnergy += releasedEnergy * GetZapToRadiationRatio(crystalTemperature, pressure, smState);
         crystal.Comp.AccumulatedZapEnergy += releasedEnergy * (1 - GetZapToRadiationRatio(crystalTemperature, pressure, smState));
 
-        crystal.Comp.InternalEnergy -= releasedEnergy;
+        // compute difficulty bonus
+        var safeInternalEnergyForModes = GetSafeInternalEnergyToMatterValue(crystal.Comp.Matter);
+        var mode = safeInternalEnergyForModes.OrderBy(x => (x.Energy - crystal.Comp.InternalEnergy) * (x.Energy - crystal.Comp.InternalEnergy)).First().Mode;
 
-        EjectGases(decayedMatter, crystalTemperature, smState, gasMixture);
+        // release gases
+        var beforeDecayMatter = crystal.Comp.Matter;
         crystal.Comp.Matter -= decayedMatter;
+        decayedMatter = beforeDecayMatter - crystal.Comp.Matter;
+
+        EjectGases(decayedMatter * mode, crystalTemperature, smState, gasMixture);
         crystal.Comp.Temperature += releasedEnergy / GetHeatCapacity(crystalTemperature, prevMatter) - decayedMatter / crystal.Comp.Matter * crystalTemperature;
 
         _atmosphere.AddHeat(gasMixture, ReleasedEnergyToGasHeat * releasedEnergy);

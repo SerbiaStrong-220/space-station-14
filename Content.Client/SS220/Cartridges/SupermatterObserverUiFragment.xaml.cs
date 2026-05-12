@@ -45,10 +45,14 @@ public sealed partial class SupermatterObserverUiFragment : BoxContainer
 
     private float GetIntegrityDamageMap(float matter, float internalEnergy)
     {
-        return SuperMatterFunctions.EnergyToMatterDamageFactorFunction(internalEnergy
-                - SuperMatterFunctions.SafeInternalEnergyToMatterFunction(matter / SuperMatterFunctions.MatterNondimensionalization),
-            matter / SuperMatterFunctions.MatterNondimensionalization);
+        var nonDimensionMatter = matter / SuperMatterFunctions.MatterNondimensionalization;
+
+        var safeInternalEnergyForModes = SuperMatterFunctions.SafeInternalEnergyToMatterFunction(nonDimensionMatter);
+        var delta = safeInternalEnergyForModes.Select(x => x.Energy - internalEnergy).OrderBy(x => x * x).First();
+        var damageFromDelta = SuperMatterFunctions.EnergyToMatterDamageFactorFunction(delta, nonDimensionMatter);
+        return damageFromDelta;
     }
+
     public void LoadCrystal()
     {
         CrystalNavigationBar.RemoveAllChildren();

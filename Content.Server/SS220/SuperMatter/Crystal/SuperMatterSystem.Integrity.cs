@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using System.Linq;
 using Content.Server.SS220.SuperMatter.Crystal.Components;
 using Content.Shared.Atmos;
 using Content.Shared.SS220.SuperMatter.Functions;
@@ -21,13 +22,13 @@ public sealed partial class SuperMatterSystem
 
     public float GetInternalEnergyToMatterDamageFactor(float internalEnergy, float matter)
     {
-        var safeInternalEnergy = GetSafeInternalEnergyToMatterValue(matter);
-        var delta = internalEnergy - safeInternalEnergy;
+        var safeInternalEnergyForModes = GetSafeInternalEnergyToMatterValue(matter);
+        var delta = safeInternalEnergyForModes.Select(x => x.Energy - internalEnergy).OrderBy(x => x * x).First();
         var damageFromDelta = SuperMatterFunctions.EnergyToMatterDamageFactorFunction(delta, matter / MatterNondimensionalization);
         return damageFromDelta;
     }
 
-    public float GetSafeInternalEnergyToMatterValue(float matter)
+    public SuperMatterFunctions.ModeSafeEnergy[] GetSafeInternalEnergyToMatterValue(float matter)
     {
         var normalizedMatter = matter / MatterNondimensionalization;
         return SuperMatterFunctions.SafeInternalEnergyToMatterFunction(normalizedMatter);
@@ -70,16 +71,20 @@ public sealed partial class SuperMatterSystem
     }
 
     private const float TemperatureDamageFactorCoeff = 3f;
-    private const float TemperatureDamageFactorSlowerOffset = 20f;
+    private const float TemperatureDamageFactorSlowerOffset = 1f;
+    private const float MinDamageFactor = 1e-2f;
 
     private float TemperatureDamageFactorFunction(float normalizedTemperature)
     {
         var normalizedMaxTemperature = Atmospherics.Tmax / SuperMatterFunctions.SuperMatterTriplePointTemperature;
-        var maxFuncValue = MathF.Pow(normalizedMaxTemperature, 1.5f) /
-                (normalizedMaxTemperature - TemperatureDamageFactorSlowerOffset);
 
-        return TemperatureDamageFactorCoeff * (MathF.Pow(normalizedTemperature, 1.5f) /
-                (normalizedTemperature - TemperatureDamageFactorSlowerOffset)) / maxFuncValue;
+        var maxFuncValue = MathF.Pow(normalizedMaxTemperature, 1.5f) /
+                (normalizedMaxTemperature + TemperatureDamageFactorSlowerOffset);
+
+        var funcValue = TemperatureDamageFactorCoeff * (MathF.Pow(normalizedTemperature, 1.5f) /
+                (normalizedTemperature + TemperatureDamageFactorSlowerOffset));
+
+        return MinDamageFactor + funcValue / maxFuncValue;
     }
     /// <summary>
     /// Just slowes down destroying the crystal to make effect of "last seconds"

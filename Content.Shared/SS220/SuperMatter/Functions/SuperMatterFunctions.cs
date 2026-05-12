@@ -111,11 +111,22 @@ public static class SuperMatterFunctions
 
     private const float SafeInternalEnergyToMatterCoeff = 800f;
     private const float SafeInternalEnergyToMatterSlowerOffset = 50f;
+    private static readonly float[] SafeModes = [1f, 4f, 8f];
 
-    public static float SafeInternalEnergyToMatterFunction(float normalizedMatter)
+    public record struct ModeSafeEnergy(int Mode, float ModeNumber, float Energy);
+
+    public static ModeSafeEnergy[] SafeInternalEnergyToMatterFunction(float normalizedMatter)
     {
-        return SafeInternalEnergyToMatterCoeff * MathF.Pow(normalizedMatter, 1.5f)
-                            / (normalizedMatter + SafeInternalEnergyToMatterSlowerOffset);
+        var result = new ModeSafeEnergy[SafeModes.Length];
+        for (var i = 0; i < SafeModes.Length; i++)
+        {
+            var safeEnergy = SafeInternalEnergyToMatterCoeff * SafeModes[i] * MathF.Pow(normalizedMatter, 1.5f)
+                            / (normalizedMatter + SafeInternalEnergyToMatterSlowerOffset / MathF.Sqrt(SafeModes[i]));
+
+            result[i] = new ModeSafeEnergy(i + 1, SafeModes[i], safeEnergy);
+        }
+
+        return result;
     }
 
     private const float MinimalWideCoeff = 0.2f;
