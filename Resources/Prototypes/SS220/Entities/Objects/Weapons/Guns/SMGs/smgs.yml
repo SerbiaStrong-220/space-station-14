@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseWeaponSubMachineGun
+  parent: WeaponSubMachineGunWt550
   id: WeaponRifleSP
   name: SP-91-RC
   description: A large submachine gun using caliber cartridges .45 magnum.

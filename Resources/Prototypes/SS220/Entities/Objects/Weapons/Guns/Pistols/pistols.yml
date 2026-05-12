@@ -57,8 +57,15 @@
     - state: mag-0
       map: ["enum.GunVisualLayers.Mag"]
   - type: AmmoCounter
+  - type: GunAimable
+    minAngle: -6.5
+    maxAngle: -6
   - type: Gun
     fireRate: 1
+    cameraRecoilScalar: 0
+    maxAngle: 15
+    minAngle: 9
+    angleIncrease: 0.09
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/taser.ogg
   - type: ItemSlots

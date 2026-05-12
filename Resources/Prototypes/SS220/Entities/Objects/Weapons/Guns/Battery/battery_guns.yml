@@ -148,7 +148,7 @@
     tankSlot: cell_slot
     gasUsage: 0.03
   - type: Gun
-    fireRate: 1.7
+    fireRate: 1.9
     selectedMode: SemiAuto
     projectileSpeed: 35
     availableModes:
@@ -180,9 +180,9 @@
   components:
   - type: GasWeapon
     tankSlot: cell_slot
-    gasUsage: 0.03
+    gasUsage: 0.07
   - type: Gun
-    fireRate: 2.4
+    fireRate: 3
     selectedMode: SemiAuto
     projectileSpeed: 35
     availableModes:

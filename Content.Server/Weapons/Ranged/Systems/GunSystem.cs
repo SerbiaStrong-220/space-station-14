@@ -26,9 +26,6 @@ public sealed partial class GunSystem : SharedGunSystem
 {
     [Dependency] private readonly PricingSystem _pricing = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly ShuttleNavInfoSystem _shuttleNavInfo = default!; // SS220 Add projectiles & hitscan on shuttle nav
-    [Dependency] private readonly SharedPopupSystem _popup = default!; //SS220 weapon overhaul
-    [Dependency] private readonly RequireProjectileTargetSystem _requireTarget = default!; //SS220 weapon overhaul
 
     private const float DamagePitchVariation = 0.05f;
 

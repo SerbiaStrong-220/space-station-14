@@ -353,7 +353,7 @@
     angleIncrease: 8
     angleDecay: 2
     minAngle: 7
-    maxAngle: 35
+    maxAngle: 18
     fireRate: 3
   #SS220 weapon overhaul end
     canSuicide: true ##SS220-new-feature kus

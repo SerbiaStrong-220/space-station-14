@@ -2,17 +2,11 @@ using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
-using Content.Shared.Interaction.Events;
-using Content.Shared.SS220.MartialArts;
-using Content.Shared.Stacks;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Containers;
-using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Security.Cryptography;
-using YamlDotNet.Core.Tokens;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 

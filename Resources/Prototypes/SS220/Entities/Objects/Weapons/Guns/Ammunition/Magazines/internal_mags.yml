@@ -24,7 +24,7 @@
     size: Small
   - type: BallisticAmmoProvider
     mayTransfer: true
-    capacity: 5
+    capacity: 4
 
 - type: entity
   id: InternalMagazineHristov
@@ -68,3 +68,16 @@
     whitelist:
       tags:
         - ShellShotgun
+
+- type: entity
+  id: InternalMagazineChinaLake
+  parent: InternalMagazineShotgun
+  name: "magazine (internal)"
+  components:
+  - type: BallisticAmmoProvider
+    proto: GrenadeFrag
+    mayTransfer: true
+    capacity: 3
+    whitelist:
+      tags:
+        - Grenade
