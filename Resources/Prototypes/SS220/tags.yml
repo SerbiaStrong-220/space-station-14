@@ -11,6 +11,12 @@
   id: FullRifleMagazine
 
 - type: Tag
+  id: RocketAuto
+
+- type: Tag
+  id: RocketAutoMagazine
+
+- type: Tag
   id: AntiMaterialMagazine
 
 - type: Tag

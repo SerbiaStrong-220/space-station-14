@@ -290,7 +290,6 @@
   - type: Clothing
     sprite: Objects/Weapons/Guns/SMGs/wt550.rsi
   - type: ChamberMagazineAmmoProvider
-    boltClosed: null
   #SS220 weapon overhaul begin
   - type: Wieldable
     unwieldOnUse: false

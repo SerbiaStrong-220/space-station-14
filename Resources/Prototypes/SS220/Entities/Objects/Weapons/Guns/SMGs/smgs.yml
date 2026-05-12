@@ -13,8 +13,9 @@
       - state: mag-0
         map: ["enum.GunVisualLayers.Mag"]
   - type: Gun
-    fireRate: 7
-  - type: ChamberMagazineAmmoProvider
+    fireRate: 5
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/rpgfire.ogg
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -23,18 +24,14 @@
         priority: 2
         whitelist:
           tags:
-            - MagazineMagnumSubMachineGunSP-91-RC
+            - RocketAutoMagazine
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeMagnum
+        startingItem: ShellRocketAuto
         priority: 1
         whitelist:
           tags:
-            - CartridgeMagnum
-  - type: ContainerContainer
-    containers:
-      gun_magazine: !type:ContainerSlot
-      gun_chamber: !type:ContainerSlot
+            - RocketAuto
   - type: MagazineVisuals
     magState: mag
     steps: 1
