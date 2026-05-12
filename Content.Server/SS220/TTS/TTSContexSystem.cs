@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Server.VoiceMask;
 using Content.Shared.Inventory;
 using Content.Shared.SS220.TTS;
+using Content.Shared.VoiceMask;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.TTS;
@@ -36,7 +37,7 @@ public sealed partial class TTSContextSystem : EntitySystem
         if (!_inventory.TryGetContainerSlotEnumerator(maskCarrier, out var carrierSlot, SlotFlags.MASK))
             return false;
 
-        while (carrierSlot.NextItem(out var itemUid, out var itemSlot))
+        while (carrierSlot.NextItem(out var itemUid, out _))
         {
             if (HasComp<VoiceMaskComponent>(itemUid))
             {

@@ -10,7 +10,7 @@
   - !type:PlantAdjustHealth
     amount: -5
   metabolisms:
-    Narcotic:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
@@ -26,7 +26,7 @@
   physicalDesc: reagent-physical-desc-bitter
   flavor: medicine
   metabolisms:
-    Narcotic:
+    Bloodstream:
       effects:
       - !type:Hallucination
         setting:
@@ -52,8 +52,8 @@
   physicalDesc: reagent-physical-desc-bitter
   flavor: medicine
   metabolisms:
-    Poison:
-      metabolismRate: 0.5
+    Bloodstream:
+      metabolismRate: 0.1
       effects:
       - !type:HealthChange
         conditions:
@@ -64,9 +64,6 @@
           types:
             Cerebral: 5.0
             Poison: 5.0
-    Narcotic:
-      metabolismRate: 0.1
-      effects:
       - !type:MovementSpeedModifier
         walkSpeedModifier: 1.17
         sprintSpeedModifier: 1.17
@@ -91,9 +88,6 @@
         statusEffectId: MobThresholdsModifierAglomorphine
         duration: 5
         refresh: false
-    Medicine:
-      metabolismRate: 0.5
-      effects:
       - !type:HealthChange
           damage:
             types:
@@ -111,7 +105,7 @@
   physicalDesc: reagent-physical-desc-tingling
   flavor: medicine
   metabolisms:
-    Poison:
+    Bloodstream:
       metabolismRate: 0.5
       effects:
       - !type:HealthChange
@@ -129,9 +123,6 @@
           reagent: Frontier
           min: 20.5
         value: 100
-    Narcotic:
-      metabolismRate: 0.5
-      effects:
       - !type:MovementSpeedModifier
         walkSpeedModifier: 1.17
         sprintSpeedModifier: 1.17
@@ -174,9 +165,6 @@
           hallucinationMaxTime: 10
           totalDuration: 8
           checkPockets: false
-    Medicine:
-      metabolismRate: 0.5
-      effects:
       - !type:HealthChangeOnAdaptation
           reagent: Frontier
           damage:

@@ -70,7 +70,7 @@ public sealed partial class SpiderEggSystem : EntitySystem
         foreach (var proto in protos)
         {
             var ent = Spawn(proto, coordinates);
-            if (TryComp<MindContainerComponent>(uid, out var mind) && mind.HasMind)
+            if (TryComp<MindContainerComponent>(uid, out var mind) && mind.Mind != null)
                 _mind.TransferTo(mind.Mind.Value, ent); // transferto сам по себе если не может зарезолвить mind, дает return, на проверки должно быть пофиг, но mind нужен
             if (component.EggOwner is { } owner)
                 _npc.SetBlackboard(ent, NPCBlackboard.FollowTarget, new EntityCoordinates(owner, Vector2.Zero));

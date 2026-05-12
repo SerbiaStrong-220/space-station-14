@@ -283,18 +283,37 @@ public sealed partial class ChatSystem
         {"пиндосы","нехорошие люди"},
     };
 
+    private static readonly Regex WordRegex = new Regex(@"\b\w+\b", RegexOptions.Compiled);
+
     public string ReplaceWords(string message)
     {
         if (string.IsNullOrEmpty(message))
             return message;
 
-        return Regex.Replace(message, "\\b(\\w+)\\b", match =>
+        return WordRegex.Replace(message, match =>
         {
-            bool isUpperCase = match.Value.All(Char.IsUpper);
+            var word = match.Value;
+            var lowerWord = word.ToLower();
 
-            if (SlangReplace.TryGetValue(match.Value.ToLower(), out var replacement))
-                return isUpperCase ? replacement.ToUpper() : replacement;
-            return match.Value;
+            if (!SlangReplace.TryGetValue(lowerWord, out var replacement))
+                return word;
+
+            if (IsAllUpper(word))
+                return replacement.ToUpper();
+
+            if (char.IsUpper(word[0]))
+                return char.ToUpper(replacement[0]) + replacement.Substring(1);
+
+            return replacement;
         });
+    }
+
+    private static bool IsAllUpper(string text)
+    {
+        for (int i = 0; i < text.Length; i++)
+            if (char.IsLetter(text[i]) && !char.IsUpper(text[i]))
+                return false;
+
+        return true;
     }
 }

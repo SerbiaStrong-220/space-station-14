@@ -19,7 +19,6 @@ public sealed class MimeRelicSystem : EntitySystem
 {
     [Dependency] private readonly EntityLookupSystem _lookupSystem = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly PopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly TurfSystem _turf = default!;

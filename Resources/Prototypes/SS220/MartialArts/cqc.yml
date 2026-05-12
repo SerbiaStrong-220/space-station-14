@@ -1,7 +1,7 @@
 - type: martialArt
   id: CloseQuartersCombat
   name: martial-art-cqc
-  grabDelayCoefficient: 0.5
+  grabDelayCoefficient: 0.3
   effects:
   - !type:DisarmChanceMartialArtEffect
     chance: 0.5
