@@ -29,9 +29,6 @@
   id: Cutlass
   description: A wickedly curved blade, often seen in the hands of space pirates.
   components:
-  - type: Tag
-    tags:
-    - Machete
   - type: Sprite
     sprite: Objects/Weapons/Melee/cutlass.rsi
   - type: MeleeWeapon
@@ -71,9 +68,6 @@
   id: Machete
   description: A large, vicious looking blade.
   components:
-  - type: Tag
-    tags:
-    - Machete
   - type: Sprite
     sprite: Objects/Weapons/Melee/machete.rsi
   - type: MeleeWeapon
@@ -167,14 +161,13 @@
   id: Katana
   description: Ancient craftwork made with not so ancient plasteel.
   components:
+  # SS220 new sound_drop effect begin
   - type: EmitSoundOnLand
     sound:
-      path: /Audio/SS220/Effects/Drop/sword.ogg ##new sound_drop effect, add MIXnikita
+      path: /Audio/SS220/Effects/Drop/sword.ogg
       params:
         volume: 2
-  - type: Tag
-    tags:
-    - Katana
+  # SS220 new sound_drop effect end
   - type: Sprite
     sprite: Objects/Weapons/Melee/katana.rsi
   - type: Clothing
@@ -217,7 +210,7 @@
   - type: Contraband
     severity: HighlyIllegal
   - type: Sprite
-    sprite: Objects/Weapons/Melee/energykatana.rsi
+    sprite: SS220/Objects/Weapons/Melee/Sword/energykatana.rsi # SS220 Ninja Resprite
   - type: MeleeWeapon
     wideAnimationRotation: -60
     damage:
@@ -236,7 +229,7 @@
   - type: AutoRecharge
     rechargeDuration: 20
   - type: Clothing
-    sprite: Objects/Weapons/Melee/energykatana.rsi
+    sprite: SS220/Objects/Weapons/Melee/Sword/energykatana.rsi # SS220 Ninja Resprite
     slots:
     - Back
     - Belt

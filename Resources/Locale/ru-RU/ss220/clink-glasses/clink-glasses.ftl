@@ -1,0 +1,10 @@
+raise-glass-verb-text = Поднять бокал
+clink-glasses-verb-text = Чокнуться бокалами
+alerts-clink-glasses-name = За здоровье!
+alerts-clink-glasses-desc = Скажите тост и чокнитесь бокалом, рюмкой или иным стаканом.
+clink-glasses-raised-self = Вы торжественно поднимаете { $item }
+clink-glasses-raised-others = { $initiator } торжественно поднимает { $item }
+clink-glasses-attempt-self = Вы протягиваете { $item }
+clink-glasses-attempt-others = { $initiator } протягивает { $item }
+clink-glasses-success-self = Вы чокаете { $item } с { $initiator }
+clink-glasses-success-others = { $receiver } чокает { $item } с { $initiator }

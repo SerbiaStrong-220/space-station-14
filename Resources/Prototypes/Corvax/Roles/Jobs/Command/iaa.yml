@@ -1,6 +1,7 @@
 - type: job
   id: IAA
   name: job-name-iaa
+  # setPreference: false # SS220 TODO NanoTraisen Representative
   playTimeTracker: JobIAA
   requirements:
   - !type:DepartmentTimeRequirement
@@ -14,6 +15,7 @@
       species:
       - Felinid #SS220-jobbans end
   startingGear: IAAGear
+  experienceDefinition: IAARoleExperience # SS220-experience
   icon: "JobIconIAA"
   supervisors: job-supervisors-magistrate #SS220-Law Department
   canBeAntag: false

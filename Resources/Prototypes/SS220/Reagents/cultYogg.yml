@@ -9,7 +9,7 @@
   flavor: menacing
   color: "#afdd9a" #change color to a shroom color
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
       - !type:ChemMiGomyceliumEffect
       - !type:GenericStatusEffect
@@ -35,7 +35,7 @@
   flavor: menacing
   color: "#afdd9a" #change color to a shroom color
   metabolisms:
-    Poison:
+    Bloodstream:
       effects:
       - !type:ChemElixirOfLiberationEffect
       - !type:GenericStatusEffect
@@ -74,7 +74,7 @@
         emote: Scream
         probability: 0.3
   metabolisms:
-    Poison:
+    Bloodstream:
       metabolismRate : 3.00
       effects:
       - !type:HealthChange
@@ -82,6 +82,11 @@
           types:
             Caustic: 10.0
             Heat: 10.0
+      - !type:MovementSpeedModifier
+        walkSpeedModifier: 0.6
+        sprintSpeedModifier: 0.6
+        type: Add
+        time: 10
       - !type:PopupMessage
         type: Local
         visualType: Large
@@ -101,7 +106,7 @@
   boilingPoint: 444.0
   meltingPoint: 128.0
   metabolisms:
-    Narcotic:
+    Bloodstream:
       effects:
       - !type:ModifyStatusEffect
         conditions:
@@ -113,6 +118,7 @@
           components:
           - BibleUser
           - CultYogg
+          - MindShield
         effectProto: StatusEffectForcedSleeping
         time: 3
         type: Add
@@ -130,3 +136,4 @@
           components:
           - BibleUser
           - CultYogg
+          - MindShield

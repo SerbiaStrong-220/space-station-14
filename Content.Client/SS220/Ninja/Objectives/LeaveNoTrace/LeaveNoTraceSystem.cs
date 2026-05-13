@@ -69,6 +69,9 @@ public sealed class LeaveNoTraceSystem : SharedLeaveNoTraceSystem
         if (_playerManager.LocalEntity != ent.Owner)
             return;
 
+        if (TerminatingOrDeleted(ent.Owner))
+            return;
+
         _overlay.IsReveal = true;
 
         var fadeComponent = EnsureComp<RevealOverlayFadeComponent>(ent.Owner);

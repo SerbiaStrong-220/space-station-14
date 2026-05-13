@@ -3,8 +3,8 @@
 - type: entity
   parent: ClothingHeadHelmetBasic
   id: ClothingHeadHelmetTactical
-  name: тактический шлем СБ
-  description: Тактический шлем для самых элитных офицеров службы безопасности НТ.
+  name: tactical security helmet
+  description: A tactical helmet for the most elite NT security officers.
   suffix: За время в игре
   components:
   - type: Sprite

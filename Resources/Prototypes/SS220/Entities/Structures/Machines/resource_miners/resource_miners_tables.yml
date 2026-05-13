@@ -1,0 +1,64 @@
+- type: entityTable
+  id: LowTierResourceMinerTable
+  table: !type:GroupSelector
+    children:
+    - id: EqualLowTierMiner
+      weight: 10
+    - id: MoreMetalLowTierMiner
+      weight: 10
+    - id: MoreGlassLowTierMiner
+      weight: 10
+    - id: PlasmaLowTierMiner
+      weight: 5
+    - id: UraniumLowTierMiner
+      weight: 5
+    - id: GoldLowTierMiner
+      weight: 5
+    - id: SilverLowTierMiner
+      weight: 5
+
+- type: entityTable
+  id: MediumTierResourceMinerTable
+  table: !type:GroupSelector
+    children:
+    - id: EqualMediumTierMiner
+      weight: 10
+    - id: GoldMediumTierMiner
+      weight: 10
+    - id: SilverMediumTierMiner
+      weight: 10
+    - id: SteelMediumTierMiner
+      weight: 10
+    - id: GlassMediumTierMiner
+      weight: 10
+    - id: GoldLowTierMiner
+      weight: 5
+    - id: PlasmaMediumTierMiner
+      weight: 5
+    - id: UraniumMediumTierMiner
+      weight: 5
+
+- type: entityTable
+  id: HighTierResourceMinerTable
+  table: !type:GroupSelector
+    children:
+    - id: EqualHighTierMiner
+      weight: 10
+    - id: PlasmaHighTierMiner
+      weight: 10
+    - id: UraniumHighTierMiner
+      weight: 10
+    - id: LowAndHighEqualTierMiner
+      weight: 5
+    - id: MediumAndHighEqualTierMiner
+      weight: 5
+    - id: GoldLowTierMiner
+      weight: 5
+    - id: DiamondHighTierMiner
+      weight: 5
+    - id: BananiumHighTierMiner
+      weight: 5
+    - id: PlasticHighTierMiner
+      weight: 5
+    - id: AllHighTierMiner
+      weight: 5

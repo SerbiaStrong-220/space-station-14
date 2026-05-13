@@ -2,17 +2,16 @@
 
 using Content.Server.Administration.Managers;
 using Content.Server.Mind;
-using Content.Server.Silicons.Borgs;
-using Content.Shared.Ghost;
 using Content.Shared.Mobs.Components;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.SS220.MindExtension;
 using Robust.Server.Containers;
 using Robust.Server.Player;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared.GameTicking;
+using Content.Shared.Mobs;
+using JetBrains.Annotations;
 
 namespace Content.Server.SS220.MindExtension;
 
@@ -24,64 +23,26 @@ namespace Content.Server.SS220.MindExtension;
 public sealed partial class MindExtensionSystem : EntitySystem
 {
     [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly IAdminManager _admin = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly BorgSystem _borg = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
 
-    private EntityQuery<MindExtensionComponent> _mindExtQuery;
+    private readonly Dictionary<NetUserId, MindExtensionData> _mindExtensions = new();
 
     public override void Initialize()
     {
         base.Initialize();
 
-        _mindExtQuery = GetEntityQuery<MindExtensionComponent>();
-
         SubscribeRespawnSystemEvents();
         SubscribeTrailSystemEvents();
+
+        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
     }
 
-    /// <summary>
-    /// Returns the player associated with entity of <see cref="MindExtensionComponent"/>.
-    /// If it doesn't exist, it will be created.
-    /// </summary>
-    public Entity<MindExtensionComponent> GetMindExtension(NetUserId player)
+    private void OnRoundRestart(RoundRestartCleanupEvent ev)
     {
-        var mindExts = EntityManager.AllComponents<MindExtensionComponent>();
-        var entity = mindExts.FirstOrNull(x => x.Component.Player == player);
-
-        if (entity is not null)
-            return entity.Value;
-
-        var newEnt = EntityManager.CreateEntityUninitialized(null);
-        var mindExtComponent = new MindExtensionComponent() { Player = player };
-
-        EntityManager.AddComponent(newEnt, mindExtComponent);
-        EntityManager.InitializeEntity(newEnt);
-        return new(newEnt, mindExtComponent);
-    }
-
-    public bool TryGetMindExtension(NetUserId player, [NotNullWhen(true)] out Entity<MindExtensionComponent>? entity)
-    {
-        var mindExts = EntityManager.AllComponents<MindExtensionComponent>();
-        entity = mindExts.FirstOrNull(x => x.Component.Player == player);
-
-        return entity is not null;
-    }
-
-    public bool TryGetMindExtension(MindExtensionContainerComponent container,
-        [NotNullWhen(true)] out Entity<MindExtensionComponent>? entity)
-    {
-        entity = null;
-
-        if (container.MindExtension is null)
-            return false;
-
-        entity = _mindExtQuery.Get(container.MindExtension.Value);
-
-        return entity is not null;
+        _mindExtensions.Clear();
     }
 
     /// <summary>
@@ -99,14 +60,34 @@ public sealed partial class MindExtensionSystem : EntitySystem
         if (!TryComp<MobStateComponent>(entity, out var mobState))
             return false;
 
-        switch (mobState.CurrentState)
+        return mobState.CurrentState switch
         {
-            case Shared.Mobs.MobState.Invalid:
-                return false;
-            case Shared.Mobs.MobState.Dead:
-                return false;
-        }
+            MobState.Invalid => false,
+            MobState.Dead => false,
+            _ => true,
+        };
+    }
 
-        return true;
+    /// <summary>
+    /// Retrieves existing extension data for a player or creates a new entry if none exists.
+    /// </summary>
+    [PublicAPI]
+    public MindExtensionData GetOrCreateExtension(NetUserId userId)
+    {
+        if (_mindExtensions.TryGetValue(userId, out var data))
+            return data;
+
+        data = new MindExtensionData();
+        _mindExtensions[userId] = data;
+        return data;
+    }
+
+    /// <summary>
+    /// Attempts to find the extension data for a specific user.
+    /// </summary>
+    [PublicAPI]
+    public bool TryGetExtension(NetUserId userId, [NotNullWhen(true)] out MindExtensionData? data)
+    {
+        return _mindExtensions.TryGetValue(userId, out data);
     }
 }

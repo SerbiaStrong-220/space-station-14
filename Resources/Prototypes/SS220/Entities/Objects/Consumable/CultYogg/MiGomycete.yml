@@ -50,9 +50,10 @@
   packetPrototype: MiGomyceteSeeds
   productPrototypes:
     - FoodMiGomyceteCult
+  harvestRepeat: Repeat
   lifespan: 25
   maturation: 12
-  production: 2
+  production: 5
   yield: 1
   potency: 2
   growthStages: 2

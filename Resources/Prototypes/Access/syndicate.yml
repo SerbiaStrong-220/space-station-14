@@ -2,8 +2,10 @@
   id: NuclearOperative
   name: id-card-access-level-nuclear-operative
   canBeSwitchableInReader: false #SS220 DoorElectronicsConfiguratorFix
+  showInPda: false # ss220 add additional info for pda
 
 - type: accessLevel
   id: SyndicateAgent
   name: id-card-access-level-syndicate-agent
   canBeSwitchableInReader: false #SS220 DoorElectronicsConfiguratorFix
+  showInPda: false # ss220 add additional info for pda

@@ -74,7 +74,7 @@
 
 - type: latheRecipe
   id: HandheldHealthAnalyzer
-  result: HandheldHealthAnalyzerEmpty
+  result: HandheldHealthAnalyzer
   categories:
   - Tools
   completetime: 4
@@ -215,17 +215,6 @@
   id: EmergencyRollerBedSpawnFolded
   result: EmergencyRollerBedSpawnFolded
 
-#SS220-autoinjectors-update begin
-- type: latheRecipe
-  id: MedAutoinjector
-  result: MedAutoinjector
-  completetime: 2
-  materials:
-    Glass: 400
-    Plastic: 600
-    Steel: 60
-#SS220-autoinjectors-update end
-
 - type: latheRecipe
   id: WhiteCane
   result: WhiteCane
@@ -269,24 +258,27 @@
     Glass: 100
     Plastic: 100
 
-# SS220 Adding AdvancedLauncherSyringe begin
 - type: latheRecipe
-  id: AdvancedMiniSyringe
-  result: AdvancedMiniSyringe
-  completetime: 2
+  id: JetInjector
+  result: JetInjector
+  categories:
+  - Tools
+  completetime: 5
   materials:
-    Steel: 200
-    Glass: 200
-    Plastic: 200
-    Plasma: 50
-# SS220 Adding AdvancedLauncherSyringe end
+    Steel: 500
+    Glass: 500
+    Plastic: 250
+    Silver: 250
 
-#SS220 add-glasses-to-medfab begin
 - type: latheRecipe
-  id: ClothingEyesGlasses
-  result: ClothingEyesGlasses
-  completetime: 2
+  id: AdvancedJetInjector
+  result: AdvancedJetInjector
+  categories:
+  - Tools
+  completetime: 5
   materials:
-    Steel: 50
-    Glass: 50
-#SS220 add-glasses-to-medfab end
+    Steel: 500
+    Glass: 500
+    Plastic: 250
+    Silver: 400
+    Gold: 50 # A bit of gold for the gold ornaments on it!

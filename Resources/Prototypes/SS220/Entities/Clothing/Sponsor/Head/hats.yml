@@ -4,8 +4,8 @@
 - type: entity
   parent: ClothingSponsorHeadBase
   id: ClothingSponsorWaltuhHat
-  name: глубокая шляпа-котелок
-  description: Синий или голубой?
+  name: deep bowler hat
+  description: Blue or cyan?
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Head/Hats/waltuh.rsi
@@ -16,8 +16,8 @@
 - type: entity
   parent: ClothingSponsorHeadBase
   id: ClothingSponsorMafiaHat
-  name: розовая шляпа
-  description: Я - Мафиозник!
+  name: pink hat
+  description: I am the Mafioso!
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Head/Hats/mafiahat.rsi
@@ -27,8 +27,8 @@
 - type: entity
   parent: ClothingSponsorHeadBase
   id: ClothingSponsorMafiaBlackHat
-  name: чёрная шляпа
-  description: Меня зовут...
+  name: black hat
+  description: My name is...
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Head/Hats/mafiablackhat.rsi
@@ -39,8 +39,8 @@
 - type: entity
   parent: ClothingSponsorHeadBase
   id: ClothingSponsorMaidHat
-  name: гребень горничной
-  description: Самое мужественное одеяние.
+  name: maid's comb
+  description: The most masculine attire.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Head/Hats/maid.rsi
@@ -51,8 +51,8 @@
 - type: entity
   parent: ClothingSponsorHeadBase
   id: ClothingSponsorWreath
-  name: розовый венец
-  description: Прекрасные цветы, сплетённые в головной убор.
+  name: pink wreath
+  description: Beautiful flowers woven into a headpiece.
   components:
   - type: Sprite
     sprite: SS220/Clothing/Sponsor/Head/Hats/wreath.rsi
@@ -87,8 +87,8 @@
 - type: entity
   parent: [ ClothingSponsorHeadBase, BaseFoldable ]
   id: ClothingHeadHatHalo
-  name: ангельский нимб с крыльями
-  description: Двойная ангельская красота!
+  name: angelic halo with wings
+  description: Double the angelic beauty!
   suffix: Шлёпа
   components:
   - type: Appearance
@@ -111,7 +111,8 @@
 - type: entity
   parent: ClothingHeadHatHalo
   id: ClothingHeadHatHaloHell
-  name: нимб падшего ангела с крыльями
+  name: fallen angel halo with wings
+  description: For those who found heaven too boring.
   components:
   - type: Foldable
     folded: true
@@ -132,8 +133,8 @@
 - type: entity
   parent: [ ClothingSponsorHeadBase, BaseFoldable ]
   id: ClothingHeadHatHaloAlt
-  name: ангельский нимб
-  description: Покажите свою ангельскую красоту!
+  name: angelic halo
+  description: Show off your angelic beauty!
   suffix: Шлёпа
   components:
   - type: Appearance
@@ -158,7 +159,8 @@
 - type: entity
   parent: ClothingHeadHatHaloAlt
   id: ClothingHeadHatHaloAltHell
-  name: нимб падшего ангела
+  name: fallen angel halo
+  description: A darkened ring for a soul that’s strayed.
   components:
   - type: Foldable
     folded: true
@@ -180,8 +182,8 @@
 - type: entity
   parent: ClothingSponsorHeadBase
   id: ClothingHeadVipCrocks
-  name: випкрок
-  description: Золотые кроксы, но одеваются.. На голову?
+  name: vip croc
+  description: Golden crocs, but you wear them... on your head?
   suffix: Шлёпа
   components:
   - type: Sprite
@@ -198,8 +200,8 @@
 - type: entity
   parent: ClothingSponsorHeadBase
   id: ClothingHeadHatMuzhik
-  name: фуражка мужика
-  description: Фуражка самогонных дел мастера.
+  name: muzhik's cap
+  description: The cap of a moonshine master.
   suffix: Шлёпа
   components:
   - type: Sprite
@@ -210,8 +212,8 @@
 - type: entity
   parent: ClothingSponsorHeadBase
   id: ClothingHeadHatMoryak
-  name: беретка морячка
-  description: Берет матроса с рыжим помпончиком.
+  name: sailor's beret
+  description: A sailor's beret with a little ginger pom-pom.
   suffix: Шлёпа
   components:
   - type: Sprite

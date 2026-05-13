@@ -4,6 +4,7 @@ using Content.Shared.Tag;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.MapMigration;
 
@@ -14,6 +15,7 @@ public sealed class MapMigrationSystem_SS220 : EntitySystem
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
 
+    private static readonly HashSet<ProtoId<TagPrototype>> TagsForTileOccupied = ["Wall", "Window"];
     private bool _rotateDoors;
 
     public override void Initialize()
@@ -52,7 +54,7 @@ public sealed class MapMigrationSystem_SS220 : EntitySystem
                     return true;
             }
 
-            if (_tag.HasAnyTag(entity.Value, "Wall", "Window"))
+            if (_tag.HasAnyTag(entity.Value, TagsForTileOccupied))
                 return true;
 
             if (HasComp<DoorComponent>(entity))

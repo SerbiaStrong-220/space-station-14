@@ -121,6 +121,59 @@
   #ss220 add pdaidpainter end
 
 - type: entity
+  parent: BasePDA
+  id: NanoTrasenRepresentativePDA
+  name: NanoTrasen Representative PDA
+  description: Smells like documents.
+  components:
+  - type: Pda
+    id: NanoTrasenRepresentativeIDCard
+    penSlot:
+      startingItem: CentCommNewPen
+      priority: -1
+      whitelist:
+        tags:
+        - Write
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-magistrate
+  - type: PdaBorderColor
+    borderColor: "#414452"
+    accentVColor: "#262c8a"
+    accentHColor: "#dfac5c"
+  - type: Sprite
+    layers:
+    - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda"
+    - state: "screen-nt"
+      shader: "unshaded"
+    - state: "light_overlay"
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: "unshaded"
+      visible: false
+    - state: "id_overlay"
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      visible: false
+  - type: Icon
+    state: pda-magistrate
+  - type: CartridgeLoader
+    preinstalled:
+    - CrewManifestCartridge
+    - NotekeeperCartridge
+    - NanoTaskCartridge
+    - NewsReaderCartridge
+    - WantedListCartridge
+    - MessengerCartridgeClient
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+
+- type: entity
   parent: DeathsquadPDA
   id: DeathsquadCommanderPDA
   suffix: Death Squad Commander
@@ -400,12 +453,12 @@
 
 - type: entity
   parent: CentcomNewPDA
-  id: CentcomOperativeBSOPDA
-  name: КПК Оперативника "Синий Щит"
-  description: КПК Оперативника "Синий Щит". Несмотря на идеально выполненный дизайн, этот КПК был заляпан кровью не один десяток раз.
+  id: CentcomOperativeSRTPDA
+  name: КПК Оперативника ГСН
+  description: КПК Оперативника ГСН. Несмотря на идеально выполненный дизайн, этот КПК был заляпан кровью не один десяток раз.
   components:
     - type: Pda
-      id: OperativeBSOIDCard
+      id: OperativeSRTIDCard
 
 - type: entity
   parent: CentcomNewPDA
@@ -504,3 +557,105 @@
       visible: false
   - type: Icon
     state: pda-cburn
+
+- type: entity
+  parent: BasePDA
+  id: RedWingsMedicPDA
+  name: red wings medic PDA
+  description: Shiny and sterile.
+  components:
+  - type: Pda
+    id: RedWingsMedicIDCard
+  - type: Appearance
+    appearanceDataInit:
+     enum.PdaVisuals.PdaType:
+       !type:String
+       pda-red-wings-medic
+  - type: PdaBorderColor
+    borderColor: "#36664c"
+    accentHColor: "#731611"
+    accentVColor: "#393c59"
+  - type: Sprite
+    layers:
+    - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda"
+    - state: "screen-medic"
+      shader: "unshaded"
+    - state: "light_overlay"
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: "unshaded"
+      visible: false
+    - state: "id_overlay"
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      visible: false
+  - type: Icon
+    state: pda-red-wings-medic
+  - type: CartridgeLoader
+    preinstalled:
+    - CrewManifestCartridge
+    - NotekeeperCartridge
+    - NewsReaderCartridge
+    - AstroNavCartridge
+    - MessengerCartridgeClient
+    - MedTekCartridge
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+
+- type: entity
+  parent: BasePDA
+  id: RedWingsPilotPDA
+  name: red wings pilot PDA
+  description: The cartridge port is pretty worn.
+  components:
+  - type: Pda
+    id: RedWingsPilotIDCard
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-red-wings
+  - type: PdaBorderColor
+    borderColor: "#36664c"
+    accentHColor: "#731611"
+  - type: Sprite
+    layers:
+    - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda" #ss220 fix
+    - state: "screen-security"
+      shader: "unshaded"
+    - state: "light_overlay"
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: "unshaded"
+      visible: false
+    - state: "id_overlay"
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      visible: false
+  - type: Icon
+    state: pda-red-wings
+  - type: CartridgeLoader
+    preinstalled:
+    - CrewManifestCartridge
+    - NotekeeperCartridge
+    - NewsReaderCartridge
+    - AstroNavCartridge
+    - MessengerCartridgeClient
+  #ss220 add pdaidpainter start
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonPDA
+
+- type: entity
+  parent: RedWingsPilotPDA
+  id: RedWingsSecurityPDA
+  name: red wings security PDA
+  description: Small blood stains are visible on the PDA
+  components:
+  - type: Pda
+    id: RedWingsOfficerIDCard

@@ -26,9 +26,9 @@ public sealed partial class IdCardConsoleComponent : Component
         public readonly string FullName;
         public readonly string JobTitle;
         public readonly List<ProtoId<AccessLevelPrototype>> AccessList;
-        public readonly ProtoId<JobPrototype> JobPrototype;
+        public readonly ProtoId<JobPrototype>? JobPrototype;
 
-        public WriteToTargetIdMessage(string fullName, string jobTitle, List<ProtoId<AccessLevelPrototype>> accessList, ProtoId<JobPrototype> jobPrototype)
+        public WriteToTargetIdMessage(string fullName, string jobTitle, List<ProtoId<AccessLevelPrototype>> accessList, ProtoId<JobPrototype>? jobPrototype)
         {
             FullName = fullName;
             JobTitle = jobTitle;
@@ -60,6 +60,8 @@ public sealed partial class IdCardConsoleComponent : Component
         "Clown", //SS220 New_accesses_and_some_tweaks
         "Engineering",
         "External",
+        "GenpopEnter",
+        "GenpopLeave",
         "HeadOfPersonnel",
         "HeadOfSecurity",
         "Hydroponics",
@@ -67,6 +69,7 @@ public sealed partial class IdCardConsoleComponent : Component
         "Kitchen",
         "Lawyer",
         "Librarian", //SS220 New_accesses_and_some_tweaks
+        //"NanoTrasenRepresentative", //SS220 TODO NanoTraisen Representative
         "Maintenance",
         "Medical",
         "Psychologist", //SS220 New_accesses_and_some_tweaks
@@ -78,7 +81,7 @@ public sealed partial class IdCardConsoleComponent : Component
         "Security",
         "Service",
         "Theatre",
-        "Magistrate", //SS220-Magistrate Access Fix
+        "Magistrate", //SS220 TODO NanoTraisen Representative
         "Mime", //SS220 New_accesses_and_some_tweaks
         "Musician", //SS220 New_accesses_and_some_tweaks
     };

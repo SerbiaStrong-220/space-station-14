@@ -11,25 +11,30 @@
   - !type:PlantAdjustWater
     amount: 0.5
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 1.5
     # Dragon doesn't require airloss healing, so omnizine is still best for humans.
-    Medicine:
+    Bloodstream:
       effects:
       - !type:HealthChange
         damage:
-          groups:
-            Burn: -20
-            Brute: -20
-            Toxin: -20
-            Airloss: -20
+          types:
+            Blunt: -6.67
+            Slash: -6.67
+            Piercing: -6.66
+            Heat: -5
+            Shock: -5
+            Cold: -5
+            Caustic: -5
+            Poison: -10
+            Radiation: -10
+            Asphyxiation: -10
+            Bloodloss: -10
       - !type:GenericStatusEffect
         key: Stutter
         component: ScrambledAccent
-    Narcotic:
-      effects:
       - !type:MovementSpeedModifier
         walkSpeedModifier: 1.35
         sprintSpeedModifier: 1.35

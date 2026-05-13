@@ -2,6 +2,22 @@
 
 #! Юридический (Начало)
 
+  # Представитель НаноТрейзен
+- type: roleLoadout
+  id: JobNanoTrasenRepresentative #SS220 TODO NanoTraisen Representative
+  groups:
+  - IAAHead
+  - IAAHeadset
+  - IAAGlasses
+  - IAANeck
+  - IAAJumpsuit
+  - IAAOuterclothing
+  - IAABackpacks #ss220 iaa loadout fix
+  - Survival
+  - Trinkets
+  - Gloves
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+
   # Магистрат
 - type: roleLoadout
   id: JobMagistrate
@@ -15,6 +31,7 @@
   - Trinkets
   - Survival
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 
   # Агент внутренних дел
 - type: roleLoadout
@@ -31,6 +48,7 @@
   - Trinkets
   - Gloves
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 
   # Офицер "Синий Щит"
 - type: roleLoadout
@@ -38,14 +56,17 @@
   groups:
   - BlueShieldHead
   - BlueShieldGlasses
+  - BlueShieldMask
   - BlueShieldNeck
   - BlueShieldJumpsuit
   - BlueShieldOuterclothing
   - BlueShieldBelt
   - BlueShieldBackpack
+  - BlueShieldShoes
   - Survival
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 
 #! Служба безопасности (Начало)
 
@@ -66,6 +87,7 @@
   - SecurityBelt
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 
   # Пилот
 - type: roleLoadout
@@ -82,6 +104,7 @@
   - SecurityShoes
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - WorkerCash #SS220-Cash-personal
 #! Служба безопасности (Конец)
 
 #! Медицинский отдел (Начало)
@@ -94,7 +117,7 @@
   - MedicalNeck
 # - MedicalGlasses #SS220-TwoOne-Floppa-Iteration
   - SeniorMedicalJumpsuit
-  - MedicalGloves
+  - MedicalsGloves
   - MedicalsBackpack
   - MedicalsMask
   - SeniorMedicalOuterClothing
@@ -104,6 +127,25 @@
 #  - Glasses #SS220-TwoOne-Floppa-Iteration
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
+
+  # Бригемдик
+- type: roleLoadout
+  id: JobBrigmedic
+  groups:
+  - BrigmedicHead
+  - MedicalNeck #SS220-WhiteScarf
+  - BrigmedicGlasses #SS220-TwoOne-Floppa-Iteration
+  - BrigmedicMask
+  - BrigmedicJumpsuit
+  - MedicalsGloves
+  - BrigmedicBackpack
+  - SurvivalBrigMedic #SS220-Brigmedic SurvivalBox Fix
+  - BrigmedicOuterClothing
+  - BrigmedicShoes
+  - Trinkets
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - WorkerCash #SS220-Cash-personal
 #! Медицинский отдел (Конец)
 
 #! Инженерный отдел (Начало)
@@ -121,6 +163,7 @@
   - StationEngineerShoes
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 #! Инженерный отдел (Конец)
 
 #! Исследовательский отдел (Начало)
@@ -141,6 +184,7 @@
 #  - Glasses #SS220-TwoOne-Floppa-Iteration
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 #! Исследовательский отдел (Конец)
 
 #! Сервис (Начало)
@@ -154,6 +198,37 @@
   - CommonBackpack
   - Survival
   - Glasses
+  - SeniorServiceShoes
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - SeniorStaffCash #SS220-Cash-personal
 #! Сервис (Конец)
+
+#! Эксклюзивы карт (Начало)
+
+  #Зоотех
+- type: roleLoadout
+  id: JobZookeeper
+  groups:
+  - GroupTankHarness
+  - CommonBackpack
+  - Glasses
+  - Survival
+  - Trinkets
+  - GroupSpeciesBreathTool
+  - WorkerCash #SS220-Cash-personal
+
+  #Боксер
+- type: roleLoadout
+  id: JobBoxer
+  groups:
+  - GroupTankHarness
+  - BoxerJumpsuit
+  - BoxerGloves
+  - CommonBackpack
+  - Glasses
+  - Survival
+  - Trinkets
+  - GroupSpeciesBreathTool
+  - WorkerCash #SS220-Cash-personal
+#! Эксклюзивы карт (Конец)

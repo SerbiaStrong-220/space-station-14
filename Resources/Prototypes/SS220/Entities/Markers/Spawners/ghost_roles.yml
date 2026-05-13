@@ -1,10 +1,10 @@
-#Used by gamerule
+# Used by gamerule
 - type: entity
   categories: [ HideSpawnMenu, Spawner ]
   parent: BaseAntagSpawner
   id: SpawnPointGhostSpaceQueen
-  name: спавнер роли королевы-пауков
-  suffix: паук-королева
+  name: spider queen role spawner
+  suffix: spider-queen
   components:
   - type: GhostRole
     name: spider-royQueen-name
@@ -16,6 +16,35 @@
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:
-      - state: green
-      - sprite: Mobs/Animals/spider.rsi
-        state: midwife
+    - state: green
+    - sprite: Mobs/Animals/spider.rsi
+      state: midwife
+
+- type: entity
+  id: SpawnMobBearSpaceGhostRole
+  parent: MarkerBase
+  name: the spawner Bear Space
+  suffix: Ghost Role
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: bear
+      sprite: Mobs/Animals/bear.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobBearSpaceGhostRole
+
+- type: entity
+  id: SpawnMobBearSpaceGhostRoleGoal
+  parent: SpawnMobBearSpaceGhostRole
+  suffix: Ghost Role, With Goal
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: bear
+      sprite: Mobs/Animals/bear.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobBearSpaceGhostRoleGoal

@@ -19,10 +19,11 @@
   - type: HeldSpeedModifier
   - type: RestrictedStorage
     whitelist:
-      requireAll: true
       components:
       - CultYogg
+      - MiGo
   - type: StuckOnEquip
   - type: Tag
     tags:
     - CultYoggStealthProvidable
+    - WhitelistChameleon

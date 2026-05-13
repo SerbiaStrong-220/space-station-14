@@ -101,10 +101,10 @@ public sealed partial class JobIconChangerWindow : DefaultWindow
         }
     }
 
-    private string GetStyleBase(int counter)
+    private static string GetStyleBase(int counter)
     {
         var modulo = counter % JobIconColumnCount;
-        return (modulo == 0) ? StyleBase.ButtonOpenRight :
-            (modulo == JobIconColumnCount - 1) ? StyleBase.ButtonOpenLeft : StyleBase.ButtonOpenBoth;
+        return (modulo == 0) ? StyleClass.ButtonOpenRight :
+            (modulo == JobIconColumnCount - 1) ? StyleClass.ButtonOpenLeft : StyleClass.ButtonOpenBoth;
     }
 }
