@@ -44,7 +44,7 @@ public sealed partial class TTSSystem : EntitySystem
                     ttsMetadata.Subkind = TtsMetadata.NullChannel;
 
                 if (_playDifferentRadioSourcesTogether)
-                    ttsMetadata.Subkind = string.Join(':', ttsMetadata.Subkind, GetNetEntity(source).Id);
+                    ttsMetadata.Subkind = string.Join(':', new string[] { ttsMetadata.Subkind, GetNetEntity(source).Id.ToString() });
 
                 break;
 
@@ -53,7 +53,7 @@ public sealed partial class TTSSystem : EntitySystem
                     ttsMetadata.Subkind = TtsMetadata.NullChannel;
 
                 if (_playDifferentRadioSourcesTogether)
-                    ttsMetadata.Subkind = string.Join(':', ttsMetadata.Subkind, GetNetEntity(source).Id);
+                    ttsMetadata.Subkind = string.Join(':', new string[] { ttsMetadata.Subkind, GetNetEntity(source).Id.ToString() });
 
                 break;
         }
