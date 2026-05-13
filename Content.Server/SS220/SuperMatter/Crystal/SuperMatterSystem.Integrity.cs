@@ -90,7 +90,7 @@ public sealed partial class SuperMatterSystem
 
     private float TemperatureDamageFactorFunction(float normalizedTemperature)
     {
-        var normalizedMaxTemperature = Atmospherics.Tmax / SuperMatterFunctions.SuperMatterTriplePointTemperature;
+        const float normalizedMaxTemperature = Atmospherics.Tmax / SuperMatterFunctions.SuperMatterTriplePointTemperature;
 
         var maxFuncValue = MathF.Pow(normalizedMaxTemperature, 1.5f) /
                 (normalizedMaxTemperature + TemperatureDamageFactorSlowerOffset);
