@@ -38,13 +38,17 @@ public sealed partial class TTSSystem : EntitySystem
                 break;
 
             case TtsKind.Radio:
-                if (!_playDifferentRadioTogether)
+                if (_playDifferentRadioTogether)
+                    ttsMetadata.Subkind = string.Join(':', ttsMetadata.Subkind, GetNetEntity(source).Id);
+                else
                     ttsMetadata.Subkind = TtsMetadata.NullChannel;
 
                 break;
 
             case TtsKind.Telepathy:
-                if (!_playDifferentRadioTogether)
+                if (_playDifferentRadioTogether)
+                    ttsMetadata.Subkind = string.Join(':', ttsMetadata.Subkind, GetNetEntity(source).Id);
+                else
                     ttsMetadata.Subkind = TtsMetadata.NullChannel;
 
                 break;
