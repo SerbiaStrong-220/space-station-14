@@ -39,3 +39,6 @@
     - type: Storage
       grid:
       - 0,0,9,5
+    - type: MagnetPickup
+      workOutOfSlot: true
+

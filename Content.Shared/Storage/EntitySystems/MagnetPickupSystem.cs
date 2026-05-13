@@ -1,7 +1,6 @@
 using Content.Shared.Inventory;
 using Content.Shared.Storage.Components;
 using Content.Shared.Whitelist;
-using Content.Shared.Silicons.Borgs.Components; //SS220-OreBagBorgMagnet
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Timing;
 
@@ -53,7 +52,7 @@ public sealed class MagnetPickupSystem : EntitySystem
             if (!_inventory.TryGetContainingSlot((uid, xform, meta), out var slotDef))
             {
 
-             if (!HasComp<BorgChassisComponent>(xform.ParentUid))
+             if (!comp.WorkOutOfSlot)
                 continue;
             }
             else
@@ -96,7 +95,7 @@ public sealed class MagnetPickupSystem : EntitySystem
 
             //SS220-OreBagBorgMagnet begin
             //Animation of picking up ore from borgs causes the client to crash.
-            if (!HasComp<BorgChassisComponent>(xform.ParentUid))
+            if (!comp.WorkOutOfSlot)
             {
                 // Play pickup animation for either the stack entity or the original entity.
                 if (stacked != null)
