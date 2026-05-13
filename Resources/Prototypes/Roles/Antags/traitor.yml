@@ -60,6 +60,7 @@
 
 - type: startingGear
   id: SyndicateReinforcementMedic
+  experienceDefinition: MedicalDoctorRoleExperience # SS220-experience-update
   equipment:
     jumpsuit: ClothingUniformJumpsuitOperative
     shoes: ClothingShoesColorRed
@@ -83,9 +84,10 @@
     - WeaponPistolViper
     - Syringe
     - Syringe
-    
+
 - type: startingGear
   id: SyndicateReinforcementSpy
+  experienceDefinition: VisitorRoleExperience # SS220-experience-update
   equipment:
     jumpsuit: ClothingUniformJumpsuitOperative
     back: ClothingBackpack
@@ -95,8 +97,10 @@
     pocket2: VoiceMaskImplanter
   inhand:
     - ClothingBackpackChameleonFillAgent
+
 - type: startingGear
   id: SyndicateReinforcementThief
+  experienceDefinition: StationEngineerRoleExperience # SS220-experience-update
   parent: SyndicateOperativeClothing
   equipment:
     pocket1: WeaponPistolViper
