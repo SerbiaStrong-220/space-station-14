@@ -23,7 +23,21 @@ public sealed partial class SuperMatterSystem
     public float GetInternalEnergyToMatterDamageFactor(float internalEnergy, float matter)
     {
         var safeInternalEnergyForModes = GetSafeInternalEnergyToMatterValue(matter);
-        var delta = safeInternalEnergyForModes.Select(x => x.Energy - internalEnergy).OrderBy(x => x * x).First();
+
+        float delta = 0;
+        var minMagnitude = float.MaxValue;
+        foreach (var item in safeInternalEnergyForModes)
+        {
+            var currentDelta = item.Energy - internalEnergy;
+            var magnitude = currentDelta * currentDelta;
+
+            if (magnitude > minMagnitude)
+                continue;
+
+            minMagnitude = magnitude;
+            delta = currentDelta;
+        }
+
         var damageFromDelta = SuperMatterFunctions.EnergyToMatterDamageFactorFunction(delta, matter / MatterNondimensionalization);
         return damageFromDelta;
     }

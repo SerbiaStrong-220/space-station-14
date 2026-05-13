@@ -1,5 +1,6 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using System.Linq;
 using Content.Shared.Atmos;
 
 namespace Content.Shared.SS220.SuperMatter.Functions;
@@ -137,6 +138,18 @@ public static class SuperMatterFunctions
         if (normalizedMatter > MaxMassToAchieveMaxWide)
             return 1f;
         return MinimalWideCoeff + (1f - MinimalWideCoeff) * normalizedMatter / MaxMassToAchieveMaxWide;
+    }
+
+    // UI methods
+
+    public static float GetIntegrityDamageMap(float matter, float internalEnergy)
+    {
+        var nonDimensionMatter = matter / MatterNondimensionalization;
+
+        var safeInternalEnergyForModes = SafeInternalEnergyToMatterFunction(nonDimensionMatter);
+        var delta = safeInternalEnergyForModes.Select(x => x.Energy - internalEnergy).OrderBy(x => x * x).First();
+        var damageFromDelta = EnergyToMatterDamageFactorFunction(delta, nonDimensionMatter);
+        return damageFromDelta;
     }
 }
 
