@@ -87,7 +87,7 @@ public sealed partial class SuperMatterSystem
     private const float TemperatureDamageFactorSlowerOffset = 1f;
     private const float MinDamageFactor = 1e-2f;
 
-    private float TemperatureDamageFactorFunction(float normalizedTemperature)
+    public static float TemperatureDamageFactorFunction(float normalizedTemperature)
     {
         const float normalizedMaxTemperature = Atmospherics.Tmax / SuperMatterFunctions.SuperMatterTriplePointTemperature;
 
