@@ -18,7 +18,7 @@
   # SS220-experience-update-begin
   - type: AntagAddKnowledge
     knowledgesToAdd:
-    - SyndicateAgent
+    - SyndicateAgentKnowledge
   # SS220-experience-update-end
 
 - type: entity
