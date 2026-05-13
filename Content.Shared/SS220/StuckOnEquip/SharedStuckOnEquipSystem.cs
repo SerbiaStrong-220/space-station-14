@@ -47,7 +47,7 @@ public sealed partial class SharedStuckOnEquipSystem : EntitySystem
 
     private void GotEquipped(Entity<StuckOnEquipComponent> ent, ref GotEquippedEvent args)
     {
-        if (_adminManager.IsAdmin(args.Equipee))
+        if (_adminManager.IsAdmin(args.EquipTarget))
             return;
 
         if (args.SlotFlags == SlotFlags.POCKET)

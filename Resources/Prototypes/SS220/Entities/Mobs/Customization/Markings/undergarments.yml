@@ -1,8 +1,7 @@
 - type: marking
   id: UndergarmentBottomBoxersPolkadot
   bodyPart: UndergarmentBottom
-  markingCategory: UndergarmentBottom
-  speciesRestriction: [Arachnid, Diona, Human, Dwarf, Moth, SlimePerson]
+  groupWhitelist: [Arachnid, Diona, Human, Moth, Slime]
   coloring:
     default:
       type: null
@@ -16,8 +15,7 @@
 - type: marking
   id: UndergarmentBottomBoxersPolkadotReptilian
   bodyPart: UndergarmentBottom
-  markingCategory: UndergarmentBottom
-  speciesRestriction: [Reptilian]
+  groupWhitelist: [Reptilian]
   coloring:
     default:
       type: null
@@ -30,9 +28,8 @@
 
 - type: marking
   id: UndergarmentBottomBoxersStriped
-  bodyPart: UndergarmentBottom 
-  markingCategory: UndergarmentBottom
-  speciesRestriction: [Arachnid, Diona, Human, Dwarf, Moth, SlimePerson]
+  bodyPart: UndergarmentBottom
+  groupWhitelist: [Arachnid, Diona, Human, Moth, Slime]
   coloring:
     default:
       type: null
@@ -45,9 +42,8 @@
 
 - type: marking
   id: UndergarmentBottomBoxersStripedReptilian
-  bodyPart: UndergarmentBottom 
-  markingCategory: UndergarmentBottom
-  speciesRestriction: [Reptilian]
+  bodyPart: UndergarmentBottom
+  groupWhitelist: [Reptilian]
   coloring:
     default:
       type: null
@@ -60,9 +56,8 @@
 
 - type: marking
   id: UndergarmentBottomShorts
-  bodyPart: UndergarmentBottom 
-  markingCategory: UndergarmentBottom
-  speciesRestriction: [Arachnid, Diona, Human, Dwarf, Moth, SlimePerson]
+  bodyPart: UndergarmentBottom
+  groupWhitelist: [Arachnid, Diona, Human, Moth, Slime]
   coloring:
     default:
       type: null
@@ -73,9 +68,8 @@
 
 - type: marking
   id: UndergarmentBottomShortsReptilian
-  bodyPart: UndergarmentBottom 
-  markingCategory: UndergarmentBottom
-  speciesRestriction: [Reptilian]
+  bodyPart: UndergarmentBottom
+  groupWhitelist: [Reptilian]
   coloring:
     default:
       type: null
@@ -86,9 +80,8 @@
 
 - type: marking
   id: UndergarmentBottomTights
-  bodyPart: UndergarmentBottom 
-  markingCategory: UndergarmentBottom
-  speciesRestriction: [Arachnid, Diona, Human, Dwarf, Moth, SlimePerson]
+  bodyPart: UndergarmentBottom
+  groupWhitelist: [Arachnid, Diona, Human, Moth, Slime]
   coloring:
     default:
       type: null
@@ -100,8 +93,7 @@
 - type: marking
   id: UndergarmentTopTanktopHeart
   bodyPart: UndergarmentTop
-  markingCategory: UndergarmentTop
-  speciesRestriction: [Arachnid, Diona, Human, Dwarf, Moth, Reptilian, SlimePerson]
+  groupWhitelist: [Arachnid, Diona, Human, Moth, Reptilian, Slime]
   coloring:
     default:
       type: null
@@ -115,8 +107,7 @@
 - type: marking
   id: UndergarmentTopTanktopHeartVox
   bodyPart: UndergarmentTop
-  markingCategory: UndergarmentTop
-  speciesRestriction: [Vox]
+  groupWhitelist: [Vox]
   coloring:
     default:
       type: null
@@ -130,8 +121,7 @@
 - type: marking
   id: UndergarmentTopTanktopStriped
   bodyPart: UndergarmentTop
-  markingCategory: UndergarmentTop
-  speciesRestriction: [Arachnid, Diona, Human, Dwarf, Moth, Reptilian, SlimePerson]
+  groupWhitelist: [Arachnid, Diona, Human, Moth, Reptilian, Slime]
   coloring:
     default:
       type: null
@@ -145,8 +135,7 @@
 - type: marking
   id: UndergarmentTopTanktopStripedVox
   bodyPart: UndergarmentTop
-  markingCategory: UndergarmentTop
-  speciesRestriction: [Vox]
+  groupWhitelist: [Vox]
   coloring:
     default:
       type: null
@@ -160,8 +149,7 @@
 - type: marking
   id: UndergarmentTopTanktopNT
   bodyPart: UndergarmentTop
-  markingCategory: UndergarmentTop
-  speciesRestriction: [Arachnid, Diona, Human, Dwarf, Moth, Reptilian, SlimePerson]
+  groupWhitelist: [Arachnid, Diona, Human, Moth, Reptilian, Slime]
   coloring:
     default:
       type: null
@@ -175,8 +163,7 @@
 - type: marking
   id: UndergarmentTopTanktopNTVox
   bodyPart: UndergarmentTop
-  markingCategory: UndergarmentTop
-  speciesRestriction: [Vox]
+  groupWhitelist: [Vox]
   coloring:
     default:
       type: null
@@ -190,8 +177,7 @@
 - type: marking
   id: UndergarmentTopTanktopSkull
   bodyPart: UndergarmentTop
-  markingCategory: UndergarmentTop
-  speciesRestriction: [Arachnid, Diona, Human, Dwarf, Moth, Reptilian, SlimePerson]
+  groupWhitelist: [Arachnid, Diona, Human, Moth, Reptilian, Slime]
   coloring:
     default:
       type: null
@@ -205,8 +191,7 @@
 - type: marking
   id: UndergarmentTopTanktopSkullVox
   bodyPart: UndergarmentTop
-  markingCategory: UndergarmentTop
-  speciesRestriction: [Vox]
+  groupWhitelist: [Vox]
   coloring:
     default:
       type: null
@@ -220,8 +205,7 @@
 - type: marking
   id: UndergarmentTopTanktopUSSP
   bodyPart: UndergarmentTop
-  markingCategory: UndergarmentTop
-  speciesRestriction: [Arachnid, Diona, Human, Dwarf, Moth, Reptilian, SlimePerson]
+  groupWhitelist: [Arachnid, Diona, Human, Moth, Reptilian, Slime]
   sprites:
   - sprite: SS220/Mobs/Customization/undergarments.rsi
     state: tanktop_ussp
@@ -229,8 +213,7 @@
 - type: marking
   id: UndergarmentSocksSock
   bodyPart: RFoot
-  markingCategory: Legs
-  speciesRestriction: [Arachnid, Human, Dwarf, Reptilian, SlimePerson]
+  groupWhitelist: [Arachnid, Human, Reptilian, Slime]
   coloring:
     default:
       type: null
@@ -242,8 +225,7 @@
 - type: marking
   id: UndergarmentSocksSockPolkadot
   bodyPart: RFoot
-  markingCategory: Legs
-  speciesRestriction: [Arachnid, Human, Dwarf, Reptilian, SlimePerson]
+  groupWhitelist: [Arachnid, Human, Reptilian, Slime]
   coloring:
     default:
       type: null
@@ -257,8 +239,7 @@
 - type: marking
   id: UndergarmentSocksSockStriped
   bodyPart: RFoot
-  markingCategory: Legs
-  speciesRestriction: [Arachnid, Human, Dwarf, Reptilian, SlimePerson]
+  groupWhitelist: [Arachnid, Human, Reptilian, Slime]
   coloring:
     default:
       type: null
@@ -272,8 +253,7 @@
 - type: marking
   id: UndergarmentSocksNylonSock
   bodyPart: RFoot
-  markingCategory: Legs
-  speciesRestriction: [Arachnid, Human, Dwarf, Reptilian, SlimePerson]
+  groupWhitelist: [Arachnid, Human, Reptilian, Slime]
   coloring:
     default:
       type: null

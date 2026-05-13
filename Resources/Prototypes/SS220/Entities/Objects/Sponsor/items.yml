@@ -36,10 +36,12 @@
   name: пачка сигарет Shlep'a
   description: Медленная и дорогая смерть.
   components:
-  - type: StorageFill
-    contents:
-    - id: SponsorCig
-      amount: 12
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: SponsorCig
+          amount: 12
   - type: Storage
     grid:
     - 0,0,5,1
@@ -137,11 +139,13 @@
   - type: Storage
     grid:
     - 0,0,5,1
-  - type: StorageFill
-    contents:
-      - id: SponsorCigPack
-        amount: 5
-      - id: ExpensiveLighterSponsor
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: SponsorCigPack
+          amount: 5
+        - id: ExpensiveLighterSponsor
   - type: PhysicalComposition
     materialComposition:
       Plastic: 50
@@ -171,10 +175,12 @@
     sprite: SS220/Objects/Sponsor/Cigs/floppa-case.rsi
   - type: Item
     sprite: SS220/Objects/Sponsor/Cigs/floppa-case.rsi
-  - type: StorageFill
-    contents:
-    - id: FloppaCigar
-      amount: 8
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: FloppaCigar
+          amount: 8
 
 - type: entity
   parent: FlippoLighter
@@ -308,7 +314,7 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: true
   metabolisms:
-    Drink:
+    Digestion:
       effects:
       - !type:SatiateThirst
         factor: 3
@@ -357,10 +363,12 @@
       tags:
         - SponsorBeer
     hideStackVisualsWhenClosed: false
-  - type: StorageFill
-    contents:
-      - id: DrinkBeerCanSponsor
-        amount: 6
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: DrinkBeerCanSponsor
+          amount: 6
   - type: ItemCounter
     count:
       tags: [SponsorBeer]
@@ -626,10 +634,12 @@
   - type: Sprite
     sprite: SS220/Objects/Sponsor/Candy/box.rsi
     state: icon
-  - type: StorageFill
-    contents:
-    - id: SponsorFoodPackage
-      amount: 9
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: SponsorFoodPackage
+          amount: 9
 
 - type: entity
   parent: SponsorBoxBase

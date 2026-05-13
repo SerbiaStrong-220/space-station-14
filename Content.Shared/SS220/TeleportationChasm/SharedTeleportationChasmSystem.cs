@@ -48,7 +48,7 @@ public abstract class SharedTeleportationChasmSystem : EntitySystem
         if (playSound)
             _audio.PlayPredicted(ent.Comp.FallingSound, ent, target);
 
-        if (_whitelistSystem.IsBlacklistPass(ent.Comp.BlacklistToDelete, target))
+        if (_whitelistSystem.IsWhitelistPass(ent.Comp.BlacklistToDelete, target))
             falling.ShouldBeDeleted = true;
     }
 

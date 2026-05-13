@@ -23,6 +23,8 @@ public sealed class ButtScanBoundUserInterface : BoundUserInterface
     /// <inheritdoc/>
     protected override void Open()
     {
+        base.Open();
+
         _window = new ButtScanWindow();
         _window.OnClose += Close;
 
@@ -42,7 +44,7 @@ public sealed class ButtScanBoundUserInterface : BoundUserInterface
     protected override void Dispose(bool disposing)
     {
         base.Dispose(disposing);
-        if(disposing)
+        if (disposing)
             _window?.Dispose();
     }
 }

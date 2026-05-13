@@ -43,7 +43,6 @@ public sealed class TraitorDynamicsSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly CrewManifestSystem _crewManifest = default!;
-    [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly StoreDiscountSystem _discount = default!;
     [Dependency] private readonly StoreSystem _store = default!;
 

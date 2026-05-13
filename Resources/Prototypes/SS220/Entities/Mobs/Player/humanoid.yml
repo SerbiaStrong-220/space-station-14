@@ -21,7 +21,7 @@
         170: Critical
         220: Dead
     - type: Stamina
-      critThreshold: 200
+      baseCritThreshold: 200
       decay: 6
       cooldown: 1
     - type: SlowOnDamage
@@ -71,13 +71,19 @@
     - type: PassiveDamage
       allowedStates:
       - Alive
-      damageCap: 170
       damage:
-        groups:
-          Brute: -1
-          Burn: -1
-          Toxin: -1
-          Airloss: -0.5
+        types:
+          Blunt: -0.33
+          Slash: -0.33
+          Piercing: -0.33
+          Heat: -0.25
+          Shock: -0.25
+          Cold: -0.25
+          Caustic: -0.25
+          Poison: -0.5
+          Radiation: -0.5
+          Asphyxiation: -0.25
+          Bloodloss: -0.25
 
 - type: randomHumanoidSettings
   id: DeathSquadHealerRandom
@@ -92,13 +98,19 @@
     - type: PassiveDamage
       allowedStates:
       - Alive
-      damageCap: 170
       damage:
-        groups:
-          Brute: -0.8
-          Burn: -0.8
-          Toxin: -0.8
-          Airloss: -0.4
+        types:
+          Blunt: -0.27
+          Slash: -0.27
+          Piercing: -0.26
+          Heat: -0.2
+          Shock: -0.2
+          Cold: -0.2
+          Caustic: -0.2
+          Poison: -0.4
+          Radiation: -0.4
+          Asphyxiation: -0.2
+          Bloodloss: -0.2
 
 - type: randomHumanoidSettings
   id: DeathSquadOperativeRandom
@@ -113,13 +125,19 @@
     - type: PassiveDamage
       allowedStates:
       - Alive
-      damageCap: 150
       damage:
-        groups:
-          Brute: -0.6
-          Burn: -0.6
-          Toxin: -0.6
-          Airloss: -0.3
+        types:
+          Blunt: -0.2
+          Slash: -0.2
+          Piercing: -0.2
+          Heat: -0.15
+          Shock: -0.15
+          Cold: -0.15
+          Caustic: -0.15
+          Poison: -0.3
+          Radiation: -0.3
+          Asphyxiation: -0.15
+          Bloodloss: -0.15
 
 - type: entity
   name: commander of the Death Squadron

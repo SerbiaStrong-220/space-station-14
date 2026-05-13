@@ -41,7 +41,7 @@ public sealed class HandheldRadioBoundUserInterface : BoundUserInterface
             SendMessage(new SelectHandheldRadioChannelMessage(channel));
         };
         SetChannelBorders(_menu);
-        _menu.Opened = false;
+        _menu.MenuOpened = false;
 
         _menu.OnClose += Close;
         _menu.OpenCentered();

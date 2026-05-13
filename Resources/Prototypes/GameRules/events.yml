@@ -19,11 +19,11 @@
     - id: PowerGridCheck
     - id: GravityGeneratorAnomaly # SS220-add-gravity-anomaly
     - id: RandomSentience
-    - id: SlimesSpawn
+    - id: SlimesSpawnHorde
     - id: SolarFlare
-    - id: SnakeSpawn
-    - id: SpiderClownSpawn
-    - id: SpiderSpawn
+    - id: SnakeSpawnHorde
+    - id: SpiderClownSpawnHorde
+    - id: SpiderSpawnHorde
     - id: VentClog
     - id: RandomMindShieldCombustion #SS220 CombustedMindShieldEvent #3500
 
@@ -284,7 +284,7 @@
       startingGear: SpaceNinjaGear
       # SS220 Ninja Resprite Begin
       # roleLoadout:
-      # - RoleSurvivalEVA
+      # - RoleSurvivalSpaceNinja
       # SS220 Ninja Resprite End
       briefing:
         text: ninja-role-greeting
@@ -522,13 +522,15 @@
     duration: 60
   - type: VentClogRule
 
+# Critters
+
 - type: entity
-  id: SlimesSpawn
+  id: SlimesSpawnHorde
   parent: BaseStationEventShortDelay
   components:
   - type: StationEvent
     playTTS: false # SS220-fix-double-announce-audio
-    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAnnouncement: station-event-vent-creatures-start-horde-announcement
   # SS220 MoreAnonces (sound and alert upgrades) bgn
     startAudio:
       path: /Audio/SS220/Announcements/lifesigns.ogg
@@ -538,57 +540,22 @@
     earliestStart: 20
     minimumPlayers: 15
     weight: 5
-    duration: 60
-  - type: VentCrittersRule
-    entries:
-    - id: MobAdultSlimesBlueAngry
-      prob: 0.02
-    - id: MobAdultSlimesGreenAngry
-      prob: 0.02
-    - id: MobAdultSlimesYellowAngry
-      prob: 0.02
+    duration: 5
+    maxDuration: 20
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
+      children:
+      - id: MobAdultSlimesBlueAngry
+      - id: MobAdultSlimesGreenAngry
+      - id: MobAdultSlimesYellowAngry
 
 - type: entity
-  id: SnakeSpawn
+  id: SnakeSpawnHorde
   parent: BaseStationEventShortDelay
   components:
   - type: StationEvent
-    startAnnouncement: station-event-vent-creatures-start-announcement
-    playTTS: false # SS220-fix-double-announce-audio
-  # SS220 MoreAnonces (sound and alert upgrades) bgn
-    startAudio:
-      path: /Audio/SS220/Announcements/lifesigns.ogg
-      params:
-        volume: -4
-  # SS220 MoreAnonces (sound and alert upgrades) end
-    earliestStart: 20
-    minimumPlayers: 15
-    weight: 5
-    duration: 60
-  - type: VentCrittersRule
-    entries:
-    #SS220-snake-ghost-role (muted official entries)
-    #- id: MobPurpleSnake
-    #  prob: 0.02
-    #- id: MobSmallPurpleSnake
-    #  prob: 0.02
-    #- id: MobCobraSpace
-    #  prob: 0.02
-    #SS220-snake-ghost-role-entries
-    - id: MobPurpleSnakeGhostRole
-      prob: 0.02
-    - id: MobSmallPurpleSnakeGhostRole
-      prob: 0.02
-    - id: MobCobraSpaceGhostRole
-      prob: 0.02
-    #SS220-snake-ghost-role-entries-end
-
-- type: entity
-  id: SpiderSpawn
-  parent: BaseStationEventShortDelay
-  components:
-  - type: StationEvent
-    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAnnouncement: station-event-vent-creatures-start-horde-announcement
     playTTS: false # SS220-fix-double-announce-audio
   # SS220 MoreAnonces (sound and alert upgrades) bgn
     startAudio:
@@ -599,18 +566,48 @@
     earliestStart: 20
     minimumPlayers: 15
     weight: 5
-    duration: 60
-  - type: VentCrittersRule
-    entries:
-    - id: MobGiantSpiderAngry
-      prob: 0.05
+    duration: 5
+    maxDuration: 20
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
+      children:
+      #SS220-snake-ghost-role-entries
+      - id: MobPurpleSnakeGhostRole
+      - id: MobSmallPurpleSnakeGhostRole
+      - id: MobCobraSpaceGhostRole
+      #SS220-snake-ghost-role-entries-end
 
 - type: entity
-  id: SpiderClownSpawn
+  id: SpiderSpawnHorde
   parent: BaseStationEventShortDelay
   components:
   - type: StationEvent
-    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAnnouncement: station-event-vent-creatures-start-horde-announcement
+    playTTS: false # SS220-fix-double-announce-audio
+  # SS220 MoreAnonces (sound and alert upgrades) bgn
+    startAudio:
+      path: /Audio/SS220/Announcements/lifesigns.ogg
+      params:
+        volume: -4
+  # SS220 MoreAnonces (sound and alert upgrades) end
+    earliestStart: 20
+    minimumPlayers: 15
+    weight: 5
+    duration: 5
+    maxDuration: 20
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
+      children:
+      - id: MobGiantSpiderAngry
+
+- type: entity
+  id: SpiderClownSpawnHorde
+  parent: BaseStationEventShortDelay
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-horde-announcement
     playTTS: false # SS220-fix-double-announce-audio
   # SS220 MoreAnonces (sound and alert upgrades) bgn
     startAudio:
@@ -621,11 +618,13 @@
     earliestStart: 20
     minimumPlayers: 20
     weight: 1.5
-    duration: 60
-  - type: VentCrittersRule
-    entries:
-    - id: MobClownSpider
-      prob: 0.05
+    duration: 5
+    maxDuration: 20
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: 4, 8
+      children:
+      - id: MobClownSpider
 
 - type: entity
   id: ZombieOutbreak
@@ -636,6 +635,7 @@
     minimumPlayers: 30
     weight: 5 # ss220 upraise midround events
     duration: 1
+    occursDuringRoundEnd: false
   - type: ZombieRule
   - type: AntagSelection
     definitions:

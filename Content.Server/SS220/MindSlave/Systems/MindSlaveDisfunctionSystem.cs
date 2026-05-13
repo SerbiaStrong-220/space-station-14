@@ -5,6 +5,7 @@ using Content.Server.Mind;
 using Content.Server.Popups;
 using Content.Server.SS220.MindSlave.Components;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Implants;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;

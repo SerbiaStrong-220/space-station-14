@@ -20,7 +20,6 @@
   canBeAntag: false
   icon: JobIconRedWingsMedic
   setPreference: false
-  overrideConsoleVisibility: true
   access:
   - Medical
   - Brig
