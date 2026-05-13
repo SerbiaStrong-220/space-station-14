@@ -100,10 +100,7 @@
         - MopAdv
     #SS220-MopOnBack begin
     - type: Clothing
-      quickEquip: false
       sprite: SS220/Objects/Specific/mopequipped/advmop.rsi
-      slots:
-      - suitStorage
     #SS220-MopOnBack end
 
 - type: entity
