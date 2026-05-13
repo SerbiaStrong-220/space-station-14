@@ -15,6 +15,10 @@ uplink-clothing-briefcase-with-double-bottom-desc = Чемодан с двойн
 
 uplink-pinpointer-syndie-name = Пинпоинтер Cиндиката
 uplink-pinpointer-syndie-desc = Пинпоинтер, способный отследить любой ценный предмет на станции, а так же любое существо по ДНК.
+
+uplink-cqc-manual-name = Старый мануал
+uplink-cqc-manual-desc = Небольшое черное руководство. Внутри есть нарисованные инструкции по тактическому рукопашному бою.
+
 # Disruption
 
 uplink-syndicate-pen-signaller = Ручка-передатчик

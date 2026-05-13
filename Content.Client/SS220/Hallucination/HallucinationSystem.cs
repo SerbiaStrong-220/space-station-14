@@ -93,8 +93,7 @@ public sealed class HallucinationSystem : SharedHallucinationSystem
         if (!_prototypeManager.TryIndex<EntityPrototype>(randomWeightedPrototypes.Pick(_random), out var randomProto))
             return;
 
-        var spawnedEntityUid = EntityManager.SpawnAtPosition(randomProto.ID,
-                                                            Transform(_playerManager.LocalEntity!.Value).Coordinates);
+        var spawnedEntityUid = SpawnAtPosition(randomProto.ID, Transform(_playerManager.LocalEntity!.Value).Coordinates);
         var randomCoordinates = _transformSystem.GetWorldPosition(_playerManager.LocalEntity!.Value)
                                 + new Vector2(_random.NextFloat(-HallucinationRadius, HallucinationRadius), _random.NextFloat(-HallucinationRadius, HallucinationRadius));
         _transformSystem.SetWorldPosition(spawnedEntityUid, randomCoordinates);

@@ -110,8 +110,8 @@
     slots: WITHOUT_POCKET
   - type: Tag
     tags:
-    - CorgiWearable
     - WhitelistChameleon
+    - PressureProtectionSuit # SS220-add-atmos-suit-weightless-protection
   - type: HideLayerClothing
     slots:
     - Tail
@@ -203,6 +203,13 @@
     noPowerPopup: ninja-no-power
   # core ninja suit stuff
   - type: NinjaSuit
+  - type: EmpResistance
+    strengthMultiplier: 0
+  # SS220-add-tag-for-proper-skill-check-begin
+  - type: Tag
+    tags:
+    - PressureProtectionSuit
+  # SS220-add-tag-for-proper-skill-check-end
   - type: UseDelay
     delay: 5 # disable time
   - type: PowerCellSlot
@@ -323,7 +330,6 @@
     slots: WITHOUT_POCKET
   - type: Tag
     tags:
-    - CorgiWearable
     - WhitelistChameleon
   - type: AddAccentClothing
     accent: BarkAccent

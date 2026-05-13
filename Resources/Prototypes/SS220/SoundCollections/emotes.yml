@@ -1,247 +1,247 @@
 - type: soundCollection
   id: Fart
   files:
-    - /Audio/SS220/Emotes/fart.ogg
+  - /Audio/SS220/Emotes/fart.ogg
 
 - type: soundCollection
   id: Deathgasp
   files:
-    - /Audio/SS220/Emotes/deathgasp/deathgasp1.ogg
-    - /Audio/SS220/Emotes/deathgasp/deathgasp2.ogg
+  - /Audio/SS220/Emotes/deathgasp/deathgasp1.ogg
+  - /Audio/SS220/Emotes/deathgasp/deathgasp2.ogg
 
 - type: soundCollection
   id: Gasp
   files:
-    - /Audio/SS220/Emotes/gasp.ogg
+  - /Audio/SS220/Emotes/gasp.ogg
 
 - type: soundCollection
   id: FemaleCritGasp
   files:
-    - /Audio/SS220/Emotes/critgasp/choke_female_1.ogg
-    - /Audio/SS220/Emotes/critgasp/choke_female_2.ogg
-    - /Audio/SS220/Emotes/critgasp/choke_female_3.ogg
+  - /Audio/SS220/Emotes/critgasp/choke_female_1.ogg
+  - /Audio/SS220/Emotes/critgasp/choke_female_2.ogg
+  - /Audio/SS220/Emotes/critgasp/choke_female_3.ogg
 
 - type: soundCollection
   id: MaleCritGasp
   files:
-    - /Audio/SS220/Emotes/critgasp/choke_male_1.ogg
-    - /Audio/SS220/Emotes/critgasp/choke_male_2.ogg
-    - /Audio/SS220/Emotes/critgasp/choke_male_3.ogg
+  - /Audio/SS220/Emotes/critgasp/choke_male_1.ogg
+  - /Audio/SS220/Emotes/critgasp/choke_male_2.ogg
+  - /Audio/SS220/Emotes/critgasp/choke_male_3.ogg
 
 - type: soundCollection
   id: LizardGiggle
   files:
-    - /Audio/SS220/Emotes/lizardgiggle/lizard_giggle.ogg
-    - /Audio/SS220/Emotes/lizardgiggle/lizard_giggle_lower.ogg
+  - /Audio/SS220/Emotes/lizardgiggle/lizard_giggle.ogg
+  - /Audio/SS220/Emotes/lizardgiggle/lizard_giggle_lower.ogg
 
 - type: soundCollection
   id: LizardHiss
   files:
-    - /Audio/SS220/Emotes/lizardhissing/lizard_hissing_1.ogg
-    - /Audio/SS220/Emotes/lizardhissing/lizard_hissing_2.ogg
-    - /Audio/SS220/Emotes/lizardhissing/lizard_hissing_3.ogg
-    - /Audio/SS220/Emotes/lizardhissing/lizard_hissing_4.ogg
+  - /Audio/SS220/Emotes/lizardhissing/lizard_hissing_1.ogg
+  - /Audio/SS220/Emotes/lizardhissing/lizard_hissing_2.ogg
+  - /Audio/SS220/Emotes/lizardhissing/lizard_hissing_3.ogg
+  - /Audio/SS220/Emotes/lizardhissing/lizard_hissing_4.ogg
 
 - type: soundCollection
   id: LizardGrowl
   files:
-    - /Audio/SS220/Emotes/lizardgrowl/lizard_growl_1.ogg
-    - /Audio/SS220/Emotes/lizardgrowl/lizard_growl_2.ogg
+  - /Audio/SS220/Emotes/lizardgrowl/lizard_growl_1.ogg
+  - /Audio/SS220/Emotes/lizardgrowl/lizard_growl_2.ogg
 
 - type: soundCollection
   id: SlimeBubbles
   files:
-    - /Audio/SS220/Emotes/slimebubbles/slime_bubbles_1.ogg
-    - /Audio/SS220/Emotes/slimebubbles/slime_bubbles_2.ogg
+  - /Audio/SS220/Emotes/slimebubbles/slime_bubbles_1.ogg
+  - /Audio/SS220/Emotes/slimebubbles/slime_bubbles_2.ogg
 
 - type: soundCollection
   id: ArachnidHiss
   files:
-    - /Audio/SS220/Emotes/arachnidhiss/arachnid_hiss_1.ogg
-    - /Audio/SS220/Emotes/arachnidhiss/arachnid_hiss_2.ogg
-    - /Audio/SS220/Emotes/arachnidhiss/arachnid_hiss_3.ogg
+  - /Audio/SS220/Emotes/arachnidhiss/arachnid_hiss_1.ogg
+  - /Audio/SS220/Emotes/arachnidhiss/arachnid_hiss_2.ogg
+  - /Audio/SS220/Emotes/arachnidhiss/arachnid_hiss_3.ogg
 
 - type: soundCollection
   id: MaleBossLaugh
   files:
-    - /Audio/SS220/Voice/Boss/male_boss_laugh_1.ogg
-    - /Audio/SS220/Voice/Boss/male_boss_laugh_2.ogg
-    - /Audio/SS220/Voice/Boss/male_boss_laugh_3.ogg
+  - /Audio/SS220/Voice/Boss/male_boss_laugh_1.ogg
+  - /Audio/SS220/Voice/Boss/male_boss_laugh_2.ogg
+  - /Audio/SS220/Voice/Boss/male_boss_laugh_3.ogg
 
 - type: soundCollection
   id: MaleSantaLaugh
   files:
-    - /Audio/SS220/Voice/Santa/male_santa_laugh_1.ogg
-    - /Audio/SS220/Voice/Santa/male_santa_laugh_2.ogg
+  - /Audio/SS220/Voice/Santa/male_santa_laugh_1.ogg
+  - /Audio/SS220/Voice/Santa/male_santa_laugh_2.ogg
 
 - type: soundCollection
   id: MaleEvilLaugh
   files:
-    - /Audio/SS220/Voice/Evil/male_evil_laugh_1.ogg
-    - /Audio/SS220/Voice/Evil/male_evil_laugh_2.ogg
-    - /Audio/SS220/Voice/Evil/male_evil_laugh_3.ogg
+  - /Audio/SS220/Voice/Evil/male_evil_laugh_1.ogg
+  - /Audio/SS220/Voice/Evil/male_evil_laugh_2.ogg
+  - /Audio/SS220/Voice/Evil/male_evil_laugh_3.ogg
 
 - type: soundCollection
   id: FemaleEvilLaugh
   files:
-    - /Audio/SS220/Voice/Evil/female_evil_laugh_1.ogg
-    - /Audio/SS220/Voice/Evil/female_evil_laugh_2.ogg
-    - /Audio/SS220/Voice/Evil/female_evil_laugh_3.ogg
+  - /Audio/SS220/Voice/Evil/female_evil_laugh_1.ogg
+  - /Audio/SS220/Voice/Evil/female_evil_laugh_2.ogg
+  - /Audio/SS220/Voice/Evil/female_evil_laugh_3.ogg
 
 - type: soundCollection
   id: MaleScientistChoke
   files:
-    - /Audio/SS220/Voice/Scientist/male_scientist_choke_1.ogg
-    - /Audio/SS220/Voice/Scientist/male_scientist_choke_2.ogg
-    - /Audio/SS220/Voice/Scientist/male_scientist_choke_3.ogg
+  - /Audio/SS220/Voice/Scientist/male_scientist_choke_1.ogg
+  - /Audio/SS220/Voice/Scientist/male_scientist_choke_2.ogg
+  - /Audio/SS220/Voice/Scientist/male_scientist_choke_3.ogg
 
 - type: soundCollection
   id: MaleScientistScream
   files:
-    - /Audio/SS220/Voice/Scientist/male_scientist_scream_1.ogg
-    - /Audio/SS220/Voice/Scientist/male_scientist_scream_2.ogg
-    - /Audio/SS220/Voice/Scientist/male_scientist_scream_3.ogg
-    - /Audio/SS220/Voice/Scientist/male_scientist_scream_4.ogg
-    - /Audio/SS220/Voice/Scientist/male_scientist_scream_5.ogg
-    - /Audio/SS220/Voice/Scientist/male_scientist_scream_6.ogg
-    - /Audio/SS220/Voice/Scientist/male_scientist_scream_7.ogg
-    - /Audio/SS220/Voice/Scientist/male_scientist_scream_8.ogg
+  - /Audio/SS220/Voice/Scientist/male_scientist_scream_1.ogg
+  - /Audio/SS220/Voice/Scientist/male_scientist_scream_2.ogg
+  - /Audio/SS220/Voice/Scientist/male_scientist_scream_3.ogg
+  - /Audio/SS220/Voice/Scientist/male_scientist_scream_4.ogg
+  - /Audio/SS220/Voice/Scientist/male_scientist_scream_5.ogg
+  - /Audio/SS220/Voice/Scientist/male_scientist_scream_6.ogg
+  - /Audio/SS220/Voice/Scientist/male_scientist_scream_7.ogg
+  - /Audio/SS220/Voice/Scientist/male_scientist_scream_8.ogg
 
 - type: soundCollection
   id: MaleDoctorLaugh
   files:
-    - /Audio/SS220/Voice/Doctor/male_doctor_laugh_1.ogg
-    - /Audio/SS220/Voice/Doctor/male_doctor_laugh_2.ogg
-    - /Audio/SS220/Voice/Doctor/male_doctor_laugh_3.ogg
+  - /Audio/SS220/Voice/Doctor/male_doctor_laugh_1.ogg
+  - /Audio/SS220/Voice/Doctor/male_doctor_laugh_2.ogg
+  - /Audio/SS220/Voice/Doctor/male_doctor_laugh_3.ogg
 
 - type: soundCollection
   id: MaleBanditLaugh
   files:
-    - /Audio/SS220/Voice/Bandit/male_bandit_laugh_1.ogg
-    - /Audio/SS220/Voice/Bandit/male_bandit_laugh_2.ogg
-    - /Audio/SS220/Voice/Bandit/male_bandit_laugh_3.ogg
+  - /Audio/SS220/Voice/Bandit/male_bandit_laugh_1.ogg
+  - /Audio/SS220/Voice/Bandit/male_bandit_laugh_2.ogg
+  - /Audio/SS220/Voice/Bandit/male_bandit_laugh_3.ogg
 
 - type: soundCollection
   id: FemaleWhitemaneLaugh
   files:
-    - /Audio/SS220/Voice/Whitemane/whitemane_laugh_1.ogg
-    - /Audio/SS220/Voice/Whitemane/whitemane_laugh_2.ogg
-    - /Audio/SS220/Voice/Whitemane/whitemane_laugh_3.ogg
-    - /Audio/SS220/Voice/Whitemane/whitemane_laugh_4.ogg
+  - /Audio/SS220/Voice/Whitemane/whitemane_laugh_1.ogg
+  - /Audio/SS220/Voice/Whitemane/whitemane_laugh_2.ogg
+  - /Audio/SS220/Voice/Whitemane/whitemane_laugh_3.ogg
+  - /Audio/SS220/Voice/Whitemane/whitemane_laugh_4.ogg
 
 - type: soundCollection
   id: FemaleWhitemaneGiggle
   files:
-    - /Audio/SS220/Voice/Whitemane/whitemane_giggle_1.ogg
-    - /Audio/SS220/Voice/Whitemane/whitemane_giggle_2.ogg
+  - /Audio/SS220/Voice/Whitemane/whitemane_giggle_1.ogg
+  - /Audio/SS220/Voice/Whitemane/whitemane_giggle_2.ogg
 
 - type: soundCollection
   id: MaleEngineerLaugh
   files:
-    - /Audio/SS220/Voice/EngieTF2/engineer_laugh_1.ogg
-    - /Audio/SS220/Voice/EngieTF2/engineer_laugh_2.ogg
-    - /Audio/SS220/Voice/EngieTF2/engineer_laugh_3.ogg
-    - /Audio/SS220/Voice/EngieTF2/engineer_laugh_4.ogg
-    - /Audio/SS220/Voice/EngieTF2/engineer_laugh_5.ogg
+  - /Audio/SS220/Voice/EngieTF2/engineer_laugh_1.ogg
+  - /Audio/SS220/Voice/EngieTF2/engineer_laugh_2.ogg
+  - /Audio/SS220/Voice/EngieTF2/engineer_laugh_3.ogg
+  - /Audio/SS220/Voice/EngieTF2/engineer_laugh_4.ogg
+  - /Audio/SS220/Voice/EngieTF2/engineer_laugh_5.ogg
 
 - type: soundCollection
   id: MaleEngineerGiggle
   files:
-    - /Audio/SS220/Voice/EngieTF2/engineer_giggle_1.ogg
-    - /Audio/SS220/Voice/EngieTF2/engineer_giggle_2.ogg
-    - /Audio/SS220/Voice/EngieTF2/engineer_giggle_3.ogg
+  - /Audio/SS220/Voice/EngieTF2/engineer_giggle_1.ogg
+  - /Audio/SS220/Voice/EngieTF2/engineer_giggle_2.ogg
+  - /Audio/SS220/Voice/EngieTF2/engineer_giggle_3.ogg
 
 - type: soundCollection
   id: MaleEngineerScream
   files:
-    - /Audio/SS220/Voice/EngieTF2/engineer_scream_1.ogg
-    - /Audio/SS220/Voice/EngieTF2/engineer_scream_2.ogg
-    - /Audio/SS220/Voice/EngieTF2/engineer_scream_3.ogg
-    - /Audio/SS220/Voice/EngieTF2/engineer_scream_4.ogg
-    - /Audio/SS220/Voice/EngieTF2/engineer_scream_5.ogg
+  - /Audio/SS220/Voice/EngieTF2/engineer_scream_1.ogg
+  - /Audio/SS220/Voice/EngieTF2/engineer_scream_2.ogg
+  - /Audio/SS220/Voice/EngieTF2/engineer_scream_3.ogg
+  - /Audio/SS220/Voice/EngieTF2/engineer_scream_4.ogg
+  - /Audio/SS220/Voice/EngieTF2/engineer_scream_5.ogg
 
 - type: soundCollection
   id: MaleEngineerCritGasp
   files:
-    - /Audio/SS220/Voice/EngieTF2/engineer_critgasp_1.ogg
-    - /Audio/SS220/Voice/EngieTF2/engineer_critgasp_2.ogg
-    - /Audio/SS220/Voice/EngieTF2/engineer_critgasp_3.ogg
-    - /Audio/SS220/Voice/EngieTF2/engineer_critgasp_4.ogg
-    - /Audio/SS220/Voice/EngieTF2/engineer_critgasp_5.ogg
+  - /Audio/SS220/Voice/EngieTF2/engineer_critgasp_1.ogg
+  - /Audio/SS220/Voice/EngieTF2/engineer_critgasp_2.ogg
+  - /Audio/SS220/Voice/EngieTF2/engineer_critgasp_3.ogg
+  - /Audio/SS220/Voice/EngieTF2/engineer_critgasp_4.ogg
+  - /Audio/SS220/Voice/EngieTF2/engineer_critgasp_5.ogg
 
 - type: soundCollection
   id: MaleEngineerDeathGasp
   files:
-    - /Audio/SS220/Voice/EngieTF2/engineer_deathgasp_1.ogg
-    - /Audio/SS220/Voice/EngieTF2/engineer_deathgasp_2.ogg
+  - /Audio/SS220/Voice/EngieTF2/engineer_deathgasp_1.ogg
+  - /Audio/SS220/Voice/EngieTF2/engineer_deathgasp_2.ogg
 
 - type: soundCollection
   id: FemaleValeeraLaugh
   files:
-    - /Audio/SS220/Voice/Valeera/valeera_laugh_1.ogg
-    - /Audio/SS220/Voice/Valeera/valeera_laugh_2.ogg
-    - /Audio/SS220/Voice/Valeera/valeera_laugh_3.ogg
-    - /Audio/SS220/Voice/Valeera/valeera_laugh_4.ogg
-    - /Audio/SS220/Voice/Valeera/valeera_laugh_5.ogg
-    - /Audio/SS220/Voice/Valeera/valeera_laugh_6.ogg
-    - /Audio/SS220/Voice/Valeera/valeera_laugh_7.ogg
-    - /Audio/SS220/Voice/Valeera/valeera_laugh_8.ogg
-    - /Audio/SS220/Voice/Valeera/valeera_laugh_9.ogg
-    - /Audio/SS220/Voice/Valeera/valeera_laugh_10.ogg
-    - /Audio/SS220/Voice/Valeera/valeera_laugh_11.ogg
-    - /Audio/SS220/Voice/Valeera/valeera_laugh_12.ogg
-    - /Audio/SS220/Voice/Valeera/valeera_laugh_13.ogg
-    - /Audio/SS220/Voice/Valeera/valeera_laugh_14.ogg
+  - /Audio/SS220/Voice/Valeera/valeera_laugh_1.ogg
+  - /Audio/SS220/Voice/Valeera/valeera_laugh_2.ogg
+  - /Audio/SS220/Voice/Valeera/valeera_laugh_3.ogg
+  - /Audio/SS220/Voice/Valeera/valeera_laugh_4.ogg
+  - /Audio/SS220/Voice/Valeera/valeera_laugh_5.ogg
+  - /Audio/SS220/Voice/Valeera/valeera_laugh_6.ogg
+  - /Audio/SS220/Voice/Valeera/valeera_laugh_7.ogg
+  - /Audio/SS220/Voice/Valeera/valeera_laugh_8.ogg
+  - /Audio/SS220/Voice/Valeera/valeera_laugh_9.ogg
+  - /Audio/SS220/Voice/Valeera/valeera_laugh_10.ogg
+  - /Audio/SS220/Voice/Valeera/valeera_laugh_11.ogg
+  - /Audio/SS220/Voice/Valeera/valeera_laugh_12.ogg
+  - /Audio/SS220/Voice/Valeera/valeera_laugh_13.ogg
+  - /Audio/SS220/Voice/Valeera/valeera_laugh_14.ogg
 
 - type: soundCollection
   id: FemaleValeeraGiggle
   files:
-    - /Audio/SS220/Voice/Valeera/valeera_giggle_1.ogg
-    - /Audio/SS220/Voice/Valeera/valeera_giggle_2.ogg
-    - /Audio/SS220/Voice/Valeera/valeera_giggle_3.ogg
-    - /Audio/SS220/Voice/Valeera/valeera_giggle_4.ogg
-    - /Audio/SS220/Voice/Valeera/valeera_giggle_5.ogg
-    - /Audio/SS220/Voice/Valeera/valeera_giggle_6.ogg
+  - /Audio/SS220/Voice/Valeera/valeera_giggle_1.ogg
+  - /Audio/SS220/Voice/Valeera/valeera_giggle_2.ogg
+  - /Audio/SS220/Voice/Valeera/valeera_giggle_3.ogg
+  - /Audio/SS220/Voice/Valeera/valeera_giggle_4.ogg
+  - /Audio/SS220/Voice/Valeera/valeera_giggle_5.ogg
+  - /Audio/SS220/Voice/Valeera/valeera_giggle_6.ogg
 
 - type: soundCollection
   id: FemaleValeeraDeathGasp
   files:
-    - /Audio/SS220/Voice/Valeera/valeera_deathgasp_1.ogg
-    - /Audio/SS220/Voice/Valeera/valeera_deathgasp_2.ogg
-    - /Audio/SS220/Voice/Valeera/valeera_deathgasp_3.ogg
+  - /Audio/SS220/Voice/Valeera/valeera_deathgasp_1.ogg
+  - /Audio/SS220/Voice/Valeera/valeera_deathgasp_2.ogg
+  - /Audio/SS220/Voice/Valeera/valeera_deathgasp_3.ogg
 
 - type: soundCollection
   id: MaleMedicLaugh
   files:
-   - /Audio/SS220/Voice/MedicTF2/medic_laugh_1.ogg
-   - /Audio/SS220/Voice/MedicTF2/medic_laugh_2.ogg
-   - /Audio/SS220/Voice/MedicTF2/medic_laugh_3.ogg
-   - /Audio/SS220/Voice/MedicTF2/medic_laugh_4.ogg
-   - /Audio/SS220/Voice/MedicTF2/medic_laugh_5.ogg
+  - /Audio/SS220/Voice/MedicTF2/medic_laugh_1.ogg
+  - /Audio/SS220/Voice/MedicTF2/medic_laugh_2.ogg
+  - /Audio/SS220/Voice/MedicTF2/medic_laugh_3.ogg
+  - /Audio/SS220/Voice/MedicTF2/medic_laugh_4.ogg
+  - /Audio/SS220/Voice/MedicTF2/medic_laugh_5.ogg
 
 - type: soundCollection
   id: MaleMedicGiggle
   files:
-    - /Audio/SS220/Voice/MedicTF2/medic_giggle_1.ogg
-    - /Audio/SS220/Voice/MedicTF2/medic_giggle_1.ogg
+  - /Audio/SS220/Voice/MedicTF2/medic_giggle_1.ogg
+  - /Audio/SS220/Voice/MedicTF2/medic_giggle_1.ogg
 
 - type: soundCollection
   id: MaleMedicScream
   files:
-    - /Audio/SS220/Voice/MedicTF2/medic_scream_1.ogg
-    - /Audio/SS220/Voice/MedicTF2/medic_scream_2.ogg
-    - /Audio/SS220/Voice/MedicTF2/medic_scream_3.ogg
-    - /Audio/SS220/Voice/MedicTF2/medic_scream_4.ogg
+  - /Audio/SS220/Voice/MedicTF2/medic_scream_1.ogg
+  - /Audio/SS220/Voice/MedicTF2/medic_scream_2.ogg
+  - /Audio/SS220/Voice/MedicTF2/medic_scream_3.ogg
+  - /Audio/SS220/Voice/MedicTF2/medic_scream_4.ogg
 
 - type: soundCollection
   id: MaleGiggle
   files:
-    - /Audio/SS220/Emotes/giggles/malegiggle.ogg
+  - /Audio/SS220/Emotes/giggles/malegiggle.ogg
 
 - type: soundCollection
   id: FemaleGiggle
   files:
-    - /Audio/SS220/Emotes/giggles/femalegiggle.ogg
+  - /Audio/SS220/Emotes/giggles/femalegiggle.ogg
 
 - type: soundCollection
   id: GrowlVulpin
@@ -312,3 +312,8 @@
   id: TajaranAnnoyedMeows
   files:
   - /Audio/SS220/Emotes/Tajaran/annoyed_tajaran_meow.ogg
+
+- type: soundCollection
+  id: MaleGachiScream
+  files:
+  - /Audio/SS220/Voice/Gachi/aaaaaaaaaaaaaah.ogg

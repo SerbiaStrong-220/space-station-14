@@ -7,6 +7,7 @@ using Content.Shared.Paper;
 using Content.Shared.SS220.Paper;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Language.Systems;
 
@@ -39,7 +40,7 @@ public abstract partial class SharedLanguageSystem : EntitySystem
     /// Adds languages to <see cref="LanguageComponent.AvailableLanguages"/> from <paramref name="languageIds"/>.
     /// </summary>
     /// <param name="canSpeak">Will entity be able to speak this language</param>
-    public void AddLanguages(Entity<LanguageComponent> ent, IEnumerable<string> languageIds, bool canSpeak = false)
+    public void AddLanguages(Entity<LanguageComponent> ent, IEnumerable<ProtoId<LanguagePrototype>> languageIds, bool canSpeak = false)
     {
         foreach (var language in languageIds)
             AddLanguage(ent, language, canSpeak);
@@ -48,7 +49,7 @@ public abstract partial class SharedLanguageSystem : EntitySystem
     /// <summary>
     /// Adds a <see cref="LanguageDefinition"/> from list to <see cref="LanguageComponent.AvailableLanguages"/>
     /// </summary>
-    public void AddLanguages(Entity<LanguageComponent> ent, List<LanguageDefinition> definitions)
+    public void AddLanguages(Entity<LanguageComponent> ent, IEnumerable<LanguageDefinition> definitions)
     {
         foreach (var def in definitions)
             AddLanguage(ent, def);

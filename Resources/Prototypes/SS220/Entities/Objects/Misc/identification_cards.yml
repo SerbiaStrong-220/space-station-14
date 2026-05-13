@@ -254,6 +254,60 @@
       job: CIOffcier
 
 - type: entity
+  parent: IDCardStandard
+  id: RedWingsPilotIDCard
+  name: Red Wings Pilot ID Card
+  components:
+  - type: Sprite
+    layers:
+    - state: redwings
+    - state: idredwingspilot
+  - type: PresetIdCard
+    job: RedWingsPilot
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+
+- type: entity
+  parent: IDCardStandard
+  id: RedWingsOfficerIDCard
+  name: Red Wings Officer ID Card
+  components:
+  - type: Sprite
+    layers:
+    - state: redwings
+    - state: idredwingsofficer
+  - type: PresetIdCard
+    job: RedWingsOfficer
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+
+- type: entity
+  parent: IDCardStandard
+  id: RedWingsMedicIDCard
+  name: Red Wings Medic IDCard
+  components:
+  - type: Sprite
+    layers:
+    - state: redwings
+    - state: idredwingsmedic
+  - type: PresetIdCard
+    job: RedWingsMedic
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+
+- type: entity
   parent: [Clothing]
   id: FakeCaptainIDCard
   name: captain ID card

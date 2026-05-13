@@ -627,6 +627,7 @@
   plantLogImpact: High
   harvestLogImpact: High
   packetPrototype: KillerTomatoSeeds
+  autoSpawnMob: true #SS220-Mob-Spawn-Nerf
   productPrototypes:
     - MobTomatoKiller
   harvestRepeat: Repeat

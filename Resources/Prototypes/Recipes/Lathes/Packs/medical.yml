@@ -15,7 +15,8 @@
   - Syringe
   - PillCanister
   - HandLabeler
-  - BaseChemistryEmptyVial
+  - ChemistryEmptyVial
+  - ChemistryEmptyVialSmall
   - Dropper
 
 - type: latheRecipePack
@@ -50,6 +51,7 @@
   - ClothingEyesGlasses #SS220 add glasses to medfab
   - OffsetCane
   - OffsetCaneWood
+  - JetInjector
 
 - type: latheRecipePack
   id: RollerBedsStatic
@@ -101,6 +103,7 @@
   - SyringeBluespace
   - LauncherSyringe
   - MiniSyringe
+  - AdvancedJetInjector
   - AdvancedMiniSyringe #ss220 advanced mini syringe reaearch
 
 - type: latheRecipePack

@@ -30,7 +30,7 @@ public sealed partial class AutoinjectorSystem : EntitySystem
 
     private void OnAfterHypo(Entity<AutoinjectorComponent> entity, ref AfterHypoEvent ev)
     {
-        if (!TryComp<HyposprayComponent>(entity, out var hypoComp)
+        if (!TryComp<InjectorComponent>(entity, out var hypoComp)
             || !_solutionContainerSystem.TryGetSolution(entity.Owner, hypoComp.SolutionName, out _, out _))
             return;
 

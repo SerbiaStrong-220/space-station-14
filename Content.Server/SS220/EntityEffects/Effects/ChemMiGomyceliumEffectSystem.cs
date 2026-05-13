@@ -28,7 +28,7 @@ public sealed partial class ChemMiGomyceliumEffectSystem : EntityEffectSystem<Me
         }
 
         //if its an animal -- corrupt it
-        if (!HasComp<HumanoidAppearanceComponent>(entity))
+        if (!HasComp<HumanoidProfileComponent>(entity))
         {
             _cultYoggAnimalCorruption.AnimalCorruption(entity);
         }

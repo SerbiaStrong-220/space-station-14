@@ -11,3 +11,45 @@
   - type: RandomSpawner
     prototypes:
     - RandomHumanoidVisitorTourist
+
+- type: entity
+  name: red wings officer 
+  id: RedWingsOfficerSpawner
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+      - state: red
+      - sprite: Structures/Decoration/banner.rsi
+        state: banner
+  - type: RandomSpawner
+    prototypes:
+    - RandomHumanoidRedWingsOfficer
+
+- type: entity
+  name: red wings medic 
+  id: RedWingsMedicSpawner
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+      - state: red
+      - sprite: Structures/Decoration/banner.rsi
+        state: banner
+  - type: RandomSpawner
+    prototypes:
+    - RandomHumanoidRedWingsMedic
+
+- type: entity
+  name: red wings pilot
+  id: RedWingsPilotSpawner
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+      - state: red
+      - sprite: Structures/Decoration/banner.rsi
+        state: banner
+  - type: RandomSpawner
+    prototypes:
+    - RandomHumanoidRedWingsPilot

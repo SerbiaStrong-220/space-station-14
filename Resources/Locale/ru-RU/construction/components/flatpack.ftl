@@ -9,3 +9,5 @@ flatpacker-ui-cost-label = Стоимость запаковки
 flatpacker-ui-no-board-label = Отсутствует машинная плата!
 flatpacker-ui-insert-board = Для начала вставьте машинную плату.
 flatpacker-ui-pack-button = Упаковать
+
+flatpacker-ui-board-invalid-label = [color=red]Недействительная плата! Невозможно распечатать![/color]

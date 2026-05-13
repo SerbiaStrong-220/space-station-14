@@ -108,6 +108,16 @@
     - AdditionalClown
 
 - type: listing
+  id: PigrenadeSet
+  name: uplink-clown-pigrenade-name
+  description: uplink-clown-pigrenade-desc
+  productEntity: Pigrenade
+  cost:
+    TrashBananaPeel: 50
+  categories:
+    - AdditionalClown
+
+- type: listing
   id: ClownStampBoxSet
   name: uplink-clown-stampbox-name
   description: uplink-clown-stampbox-desc
@@ -142,6 +152,19 @@
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 2
+
+- type: listing
+  id: NinjaSetFake
+  name: uplink-clown-ninja-set-fake-name
+  description: uplink-clown-ninja-set-fake-desc
+  productEntity: ClothingBackpackNinjaSetFake
+  cost:
+    TrashBananaPeel: 175
+  categories:
+  - AdditionalClown
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
 
 - type: listing
   id: CluwneCommsComputerCircuitboardUnconvertible

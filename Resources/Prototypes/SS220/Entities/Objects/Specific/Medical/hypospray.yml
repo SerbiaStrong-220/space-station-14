@@ -16,9 +16,13 @@
     maxFillLevels: 1
     changeColor: false
     emptySpriteName: holypen_empty
-  - type: Hypospray
+  - type: Injector
     solutionName: pen
-    transferAmount: 95
+    currentTransferAmount: null
+    activeModeProtoId: HyposprayDynamicMode
+    allowedModes:
+    - HyposprayDynamicMode
+    - HyposprayInjectMode
   - type: Sprite
     sprite: SS220/Objects/Specific/Medical/medipen.rsi
     netsync: false
@@ -67,11 +71,12 @@
     maxFillLevels: 1
     changeColor: false
     emptySpriteName: stimpen_empty
-  - type: Hypospray
+  - type: Injector
     solutionName: pen
-    transferAmount: 24
-    onlyAffectsMobs: false
-    injectOnly: true
+    currentTransferAmount: null
+    activeModeProtoId: HyposprayInjectMode
+    allowedModes:
+    - HyposprayInjectMode
 
 - type: entity
   parent: ChemicalMedipen
@@ -110,11 +115,12 @@
     maxFillLevels: 1
     changeColor: false
     emptySpriteName: stimpen_empty
-  - type: Hypospray
+  - type: Injector
     solutionName: pen
-    transferAmount: 20
-    onlyAffectsMobs: false
-    injectOnly: true
+    currentTransferAmount: null
+    activeModeProtoId: HyposprayInjectMode
+    allowedModes:
+    - HyposprayInjectMode
 
 - type: entity
   name: autoinjector
@@ -134,11 +140,12 @@
         maxVol: 15
   - type: ExaminableSolution
     solution: pen
-  - type: Hypospray
+  - type: Injector
     solutionName: pen
-    onlyAffectsMobs: false
-    injectOnly: true
-    transferAmount: 15
+    currentTransferAmount: null
+    activeModeProtoId: HyposprayInjectMode
+    allowedModes:
+    - HyposprayInjectMode
     ignoreProtection: false
   - type: RefillableSolution
     solution: pen
@@ -156,9 +163,10 @@
         maxVol: 10
   - type: ExaminableSolution
     solution: pen
-  - type: Hypospray
+  - type: Injector
     solutionName: pen
-    onlyAffectsMobs: false
-    injectOnly: true
-    transferAmount: 10
+    currentTransferAmount: null
+    activeModeProtoId: HyposprayInjectMode
+    allowedModes:
+    - HyposprayInjectMode
   - type: Autoinjector
