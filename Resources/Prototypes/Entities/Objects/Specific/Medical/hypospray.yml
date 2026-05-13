@@ -129,6 +129,12 @@
     solutions:
       hypospray:
         maxVol: 15
+  # SS220-injector-skill-begin
+  - type: LearningOnDoAfterEndWith
+    progress:
+      Medicine:
+        baseLearning: 0.05
+  # SS220-injector-skill-end
   - type: SolutionContainerVisuals
     maxFillLevels: 3
     fillBaseName: jetinjector_filled
