@@ -8,3 +8,4 @@ research-technology-energy-transformer = Полеобразователь эне
 research-technology-heavy-ballistics = Крупнокалиберное баллистическое вооружение
 research-clothing-eyes-hud-medichem = Адаптивная оптохемодинамика 
 research-technology-hollow-point-ammunition = Экспансивные боеприпасы
+research-technology-automated-defence-systems = Автоматические системы защиты
