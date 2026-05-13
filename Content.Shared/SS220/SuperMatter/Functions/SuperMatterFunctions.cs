@@ -147,7 +147,20 @@ public static class SuperMatterFunctions
         var nonDimensionMatter = matter / MatterNondimensionalization;
 
         var safeInternalEnergyForModes = SafeInternalEnergyToMatterFunction(nonDimensionMatter);
-        var delta = safeInternalEnergyForModes.Select(x => x.Energy - internalEnergy).OrderBy(x => x * x).First();
+
+        var delta = 0f;
+        var minDistanceSq = float.MaxValue;
+        foreach (var item in safeInternalEnergyForModes)
+        {
+            var currentDelta = item.Energy - internalEnergy;
+            var deltaSquared = currentDelta * currentDelta;
+            if (deltaSquared < minDistanceSq)
+            {
+                minDistanceSq = deltaSquared;
+                delta = currentDelta;
+            }
+        }
+
         var damageFromDelta = EnergyToMatterDamageFactorFunction(delta, nonDimensionMatter);
         return damageFromDelta;
     }
