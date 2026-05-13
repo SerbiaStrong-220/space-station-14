@@ -41,6 +41,6 @@
       - 0,0,9,5
     #SS220-OreBagBorgMagnet begin
     - type: MagnetPickup
-      workOutOfSlot: true
+      worksOutsideSlot: true
     #SS220-OreBagBorgMagnet end
 
