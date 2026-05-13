@@ -48,7 +48,7 @@ public sealed class MagnetPickupSystem : EntitySystem
             comp.NextScan += ScanDelay;
             Dirty(uid, comp);
 
-            //SS220-OreBagBorgMagnet begin
+            // SS220-OreBagBorgMagnet begin
             if (!_inventory.TryGetContainingSlot((uid, xform, meta), out var slotDef))
             {
 
@@ -60,7 +60,7 @@ public sealed class MagnetPickupSystem : EntitySystem
             if ((slotDef.SlotFlags & comp.SlotFlags) == 0x0)
                 continue;
             }
-            //SS220-OreBagBorgMagnet end
+            // SS220-OreBagBorgMagnet end
 
             // No space
             if (!_storage.HasSpace((uid, storage)))
@@ -93,8 +93,8 @@ public sealed class MagnetPickupSystem : EntitySystem
                 if (!_storage.Insert(uid, near, out var stacked, storageComp: storage, playSound: !playedSound))
                     continue;
 
-            //SS220-OreBagBorgMagnet begin
-            //Animation of picking up ore from borgs causes the client to crash.
+            // SS220-OreBagBorgMagnet begin
+            // Animation of picking up ore from borgs causes the client to crash.
             if (!comp.WorkOutOfSlot)
             {
                 // Play pickup animation for either the stack entity or the original entity.
@@ -103,7 +103,7 @@ public sealed class MagnetPickupSystem : EntitySystem
                 else
                     _storage.PlayPickupAnimation(near, nearCoords, finalCoords, nearXform.LocalRotation);
             }
-            //SS220-OreBagBorgMagnet end
+            // SS220-OreBagBorgMagnet end
 
                 playedSound = true;
             }

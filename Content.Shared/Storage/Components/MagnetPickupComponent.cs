@@ -24,7 +24,8 @@ public sealed partial class MagnetPickupComponent : Component
 
     [ViewVariables(VVAccess.ReadWrite), DataField("range")]
     public float Range = 1f;
-
+    //SS220-OreBagBorgMagnet begin
     [DataField("workOutOfSlot"), AutoNetworkedField]
     public bool WorkOutOfSlot = false;
+    //SS220-OreBagBorgMagnet end
 }
