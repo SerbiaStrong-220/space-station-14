@@ -81,12 +81,14 @@
   - type: Armor #This is intentionally not spaceproof, when the time comes to port the values from SS13 this should be buffed from what it was.
     modifiers:
       coefficients:
-        Blunt: 0.80
-        Slash: 0.80
-        Piercing: 0.80
-        Heat: 0.80
-        Radiation: 0.80
+      #SS220 armor tweaks begin
+        Blunt: 0.85
+        Slash: 0.85
+        Piercing: 0.85
+        Heat: 0.9
+        Radiation: 0.85
         Caustic: 0.95
+      #SS220 armor tweaks end
   - type: ExplosionResistance
     damageCoefficient: 0.75
   - type: HideLayerClothing

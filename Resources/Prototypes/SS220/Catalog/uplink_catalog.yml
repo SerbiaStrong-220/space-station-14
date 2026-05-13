@@ -332,15 +332,15 @@
   discountDownTo:
     Telecrystal: 2 #ss220-uplink-discounts
   cost:
-    Telecrystal: 3 #ss220-uplink-discounts
+    Telecrystal: 2 #ss220-uplink-discounts
   categories:
   - UplinkWearables
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 4
-    MediumDynamic:
       Telecrystal: 3
+    MediumDynamic:
+      Telecrystal: 2
     HardDynamic:
       Telecrystal: 2
 #ss220 dynamic-price end
@@ -395,6 +395,42 @@
   productEntity: ClothingUniformJumpsuitElectricity
   cost:
     Telecrystal: 5
+  categories:
+  - UplinkWearables
+
+- type: listing
+  id: ClothingClothingAssaultSuit
+  name: uplink-assault-suit-name
+  description: uplink-assault-suit-desc
+  icon: {sprite: /Textures/Clothing/OuterClothing/Vests/webvest.rsi, state: icon}
+  productEntity: ClothingBackpackDuffelSyndicateFilledAssaultSuit
+  cost:
+    Telecrystal: 8
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 16
+    MediumDynamic:
+      Telecrystal: 11
+    HardDynamic:
+      Telecrystal: 8
+  categories:
+  - UplinkWearables
+
+- type: listing
+  id: ClothingClothingChameleonVest
+  name: uplink-chameleon-vest-name
+  description: uplink-chameleon-vest-desc
+  icon: {sprite: /Textures/Clothing/OuterClothing/Vests/vest.rsi, state: icon}
+  productEntity: ClothingOuterVestWebChameleon
+  cost:
+    Telecrystal: 8
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 7
+    MediumDynamic:
+      Telecrystal: 7
+    HardDynamic:
+      Telecrystal: 12
   categories:
   - UplinkWearables
 

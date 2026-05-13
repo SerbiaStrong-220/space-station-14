@@ -88,4 +88,10 @@ uplink-fake-captain-id-card-name = Фальшивая ID карта капита
 uplink-fake-captain-id-card-desc = ID карта со сломанным модулем доступов, внешне неотличимая от ID карты капитана. Они не заметят подмены.
 
 uplink-clothing-outer-vest-web-elite-name = Огнеупорный тактический жилет
-uplink-clothing-outer-vest-web-elite-desc = Бронежилет класса 3A с дополнительными огнеупорными элементами.
+uplink-clothing-outer-vest-web-elite-desc = Бронежилет класса IIIA с дополнительными огнеупорными элементами.
+
+uplink-assault-suit-name = Штурмовой бронекостюм
+uplink-assault-suit-desc = Костюм,состоящий из бронежилета IV класса, несъёмного встроенного шлема и комплектов защиты для предплечий, шеи и паха.
+
+uplink-chameleon-vest-name = Бронежилет-хамелеон
+uplink-chameleon-vest-desc = Бронежилет III класса, имеющий встроеную маскировку.

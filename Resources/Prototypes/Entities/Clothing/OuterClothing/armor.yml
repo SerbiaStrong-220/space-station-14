@@ -213,7 +213,7 @@
       coefficients:
         Blunt: 0.5
         Slash: 0.5
-        Piercing: 0.5 # ss220 - post upstream - syndie web vest tweak
+        Piercing: 0.6 # ss220 - post upstream - syndie web vest tweak
         Heat: 0.3
         Radiation: 0.5
         Caustic: 0.5
@@ -252,7 +252,7 @@
         Blunt: 0.7 #slightly better overall protection but slightly worse than bulletproof armor against bullets seems sensible
         Slash: 0.7
         Piercing: 0.5
-        Heat: 0.9
+        Heat: 0.7 # SS220 mercenary vest buff
   # ss220 add radio slot start
   - type: ContainerContainer
     containers:

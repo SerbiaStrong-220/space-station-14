@@ -100,6 +100,87 @@
   - type: ExplosionResistance
     damageCoefficient: 0.65
 
+# Syndicate
+- type: entity
+  parent: [ClothingOuterArmorBase, ClothingOuterStorageBase, BaseSyndicateContraband]
+  id: ClothingOuterVestWebHeavy
+  name: assault armor suit
+  description: Heavy armor suit with neck, shoulders and groin protection. Contains IV class silicon carbide armor plating. It has integrated undetachable helmet on it.
+  components:
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Vests/webvest.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Vests/webvest.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.4
+        Slash: 0.4
+        Piercing: 0.3
+        Heat: 0.5
+        Caustic: 0.5
+        Radiation: 0.6
+  - type: StaticPrice
+    price: 1500
+  - type: IntegratedClothing
+    clothingPrototype: ClothingHeadHelmetAssault
+  - type: ClothingSpeedModifier
+    walkModifier: 1
+    sprintModifier: 0.75
+  - type: NeedleProtection
+  - type: ContainerContainer
+    containers:
+      item_radio: !type:ContainerSlot { }
+      storagebase: !type:Container
+        ents: [ ]
+
+- type: entity
+  parent: [ClothingOuterArmorBase, ClothingOuterStorageBase, BaseSyndicateContraband]
+  id: ClothingOuterVestWebHeavy
+  name: assault armor suit
+  description: Heavy armor suit with neck, shoulders and groin protection. Contains IV class silicon carbide armor plating. It has integrated undetachable helmet on it.
+  components:
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Vests/webvest.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Vests/webvest.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.4
+        Slash: 0.4
+        Piercing: 0.3
+        Heat: 0.5
+        Caustic: 0.5
+        Radiation: 0.6
+  - type: StaticPrice
+    price: 1500
+  - type: IntegratedClothing
+    clothingPrototype: ClothingHeadHelmetAssault
+  - type: ClothingSpeedModifier
+    walkModifier: 1
+    sprintModifier: 0.75
+  - type: NeedleProtection
+  - type: ContainerContainer
+    containers:
+      item_radio: !type:ContainerSlot { }
+      storagebase: !type:Container
+        ents: [ ]
+
+- type: entity
+  parent: [ClothingOuterArmorBulletproof, BaseSyndicateContraband, ClothingOuterChameleon]
+  id: ClothingOuterVestWebChameleon
+  name: chameleon armor vest
+  description: Class III armor vest with integrated chameleon system.
+  components:
+  - type: StaticPrice
+    price: 1500
+  - type: ContainerContainer
+    containers:
+      item_radio: !type:ContainerSlot { }
+      storagebase: !type:Container
+        ents: [ ]
+
 # OTHER
 
 - type: entity

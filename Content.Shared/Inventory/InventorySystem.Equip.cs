@@ -232,6 +232,9 @@ public abstract partial class InventorySystem
         if (TryComp(itemUid, out AttachedClothingComponent? attachedComp))
             itemUid = attachedComp.AttachedUid;
 
+        if (TryComp(itemUid, out IntegratedToClothingComponent? integratedComp)) //SS220 add integrated clothing
+            itemUid = integratedComp.AttachedUid; //SS220 add integrated clothing
+
         // Can the actor reach the target?
         if (actor != target && !(_interactionSystem.InRangeUnobstructed(actor, target) && _containerSystem.IsInSameOrParentContainer(actor, target)))
             return false;
