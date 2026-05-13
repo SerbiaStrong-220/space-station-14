@@ -384,3 +384,49 @@ ui-options-enable-overlay-starting-job = Показывать начальную
 ui-options-overlay-merge-distance = Stack merge distance
 ui-options-overlay-ghost-fade-distance = Ghost overlay fade range from mouse
 ui-options-overlay-ghost-hide-distance = Ghost overlay hide range from mouse
+
+ui-options-ahelp-volume = Громкость AHelp:
+
+ui-options-scale-80 = 80%
+
+ui-options-scale-85 = 85%
+
+ui-options-scale-90 = 90%
+
+ui-options-scale-95 = 95%
+
+ui-options-scale-105 = 105%
+
+ui-options-scale-110 = 110%
+
+ui-options-scale-115 = 115%
+
+ui-options-scale-120 = 120%
+
+ui-options-scale-130 = 130%
+
+ui-options-scale-135 = 135%
+
+ui-options-scale-140 = 140%
+
+ui-options-scale-145 = 145%
+
+ui-options-scale-155 = 155%
+
+ui-options-scale-160 = 160%
+
+ui-options-scale-165 = 165%
+
+ui-options-scale-170 = 170%
+
+ui-options-scale-180 = 180%
+
+ui-options-scale-185 = 185%
+
+ui-options-scale-190 = 190%
+
+ui-options-scale-195 = 195%
+
+ui-options-hold-to-attack-melee = Удерживать для атаки (ближний бой)
+
+ui-options-hold-to-attack-ranged = Удерживать для атаки (дальний бой)

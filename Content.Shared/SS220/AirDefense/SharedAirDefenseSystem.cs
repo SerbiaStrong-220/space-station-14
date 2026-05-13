@@ -1,5 +1,6 @@
 using Content.Shared.Interaction;
 using Content.Shared.Physics;
+using Content.Shared.PowerCell;
 using Content.Shared.PowerCell.Components;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Components;
@@ -80,7 +81,7 @@ public sealed partial class SharedAirDefenseSystem : EntitySystem
 
         var targetCoords = Transform(target).Coordinates;
 
-        if (!_gun.AttemptShoot(ent, ent, gun, targetCoords))
+        if (!_gun.AttemptShoot(ent, (ent.Owner, gun), targetCoords))
             return;
 
         RotateToTarget(ent, target);

@@ -33,7 +33,9 @@ public sealed class RoundEndSummaryUIController : UIController,
 
     private RoundEndSummaryWindow? _window;
     private RoundEndTitlesWindow? _titles;
-    private RoundEndMessageEvent? _message; // DEBUG 
+#if DEBUG
+    private RoundEndMessageEvent? _message; // DEBUG
+#endif
 
     public void OnSystemLoaded(ClientGameTicker system)
     {

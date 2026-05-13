@@ -51,8 +51,4 @@ device-net-id-apc = ЛКП
 device-net-id-atmos-devices = Атмос-устройства
 device-net-id-reserved = Резерв
 
-#Messenger
-device-frequency-prototype-name-msg-client = МесенжерК
-device-frequency-prototype-name-msg-server = МесенжерС
-device-address-prefix-msg-client = мснк-
-device-address-prefix-msg-server = мснc-
+device-address-unknown = ????-????

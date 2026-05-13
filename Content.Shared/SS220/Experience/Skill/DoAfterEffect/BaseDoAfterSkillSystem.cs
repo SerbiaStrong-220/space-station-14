@@ -96,7 +96,7 @@ public abstract partial class BaseDoAfterSkillSystem<TComp, TEvent> : SkillEntit
 
     protected virtual void OnDoAfterEnd(Entity<TComp> entity, ref BeforeDoAfterCompleteEvent args)
     {
-        if (!GetPredictedRandomOnCurTick(new() { GetNetEntity(entity).Id, GetNetEntity(args.Args.User).Id }).Prob(entity.Comp.FailureChance))
+        if (!GetPredictedRandomOnCurTick(GetNetEntity(entity), GetNetEntity(args.Args.User)).Prob(entity.Comp.FailureChance))
             return;
 
         args.Cancel = true;

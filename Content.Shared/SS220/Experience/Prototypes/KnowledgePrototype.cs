@@ -5,7 +5,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared.SS220.Experience;
 
 [Prototype]
-public sealed class KnowledgePrototype : IPrototype
+public sealed partial class KnowledgePrototype : IPrototype
 {
     [ViewVariables]
     [IdDataField]
@@ -15,17 +15,17 @@ public sealed class KnowledgePrototype : IPrototype
     /// Some knowledges should give access to other knowledge's information, but should really be shown to player
     /// </summary>
     [DataField]
-    public HashSet<ProtoId<KnowledgePrototype>> AdditionalKnowledges = new();
+    public HashSet<ProtoId<KnowledgePrototype>> AdditionalKnowledges { get; private set; } = new();
 
     [DataField(required: true)]
-    public LocId KnowledgeName = default;
+    public LocId KnowledgeName { get; private set; } = default;
 
     [DataField(required: true)]
-    public LocId KnowledgeDescription = default;
+    public LocId KnowledgeDescription { get; private set; } = default;
 
     [DataField]
-    public LocId? MessageOnAcquiring = null;
+    public LocId? MessageOnAcquiring { get; private set; } = null;
 
     [DataField]
-    public LocId? MessageOnLosing = null;
+    public LocId? MessageOnLosing { get; private set; } = null;
 }

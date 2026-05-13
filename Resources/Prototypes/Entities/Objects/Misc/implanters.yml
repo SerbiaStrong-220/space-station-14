@@ -46,10 +46,12 @@
     - DeathAcidifierImplant
     - MindSlaveImplant # SS220 implant-removing fix
     - DeathRattleImplant
+    - DeathRattleImplantInterdyne # SS220 Interdyne-death-rattle-removing fix
     - MindShieldImplant
     - FakeMindShieldImplant
     - RadioImplant
     - ChameleonControllerImplant
+    - VoiceMaskImplant
     deimplantFailureDamage:
       types:
         Cellular: 50
@@ -130,7 +132,7 @@
   id: BaseImplantOnlyImplanterSyndi
   parent: [BaseImplantOnlyImplanter]
   name: syndicate implanter
-  description: A compact disposable syringe exclusively designed for the injection of subdermal implants. Make sure to scrub it with soap or a rag to remove residual DNA after use!
+  description: A compact disposable syringe exclusively designed for the injection of subdermal implants. Make sure to scrub it with soap to remove residual DNA after use!
   abstract: true
   components:
     - type: Item
@@ -260,6 +262,14 @@
   components:
   - type: Implanter
     implant: ChameleonControllerImplant
+
+- type: entity
+  id: VoiceMaskImplanter
+  name: identity mask implanter
+  parent: BaseImplantOnlyImplanterSyndi
+  components:
+  - type: Implanter
+    implant: VoiceMaskImplant
 
 #Nuclear Operative/Special implanters
 
