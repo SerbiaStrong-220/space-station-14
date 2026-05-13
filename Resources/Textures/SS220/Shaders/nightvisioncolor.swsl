@@ -27,7 +27,7 @@ void fragment()
     boosted = clamp(boosted, 0.0, 1.0);
 
     highp vec3 col = VisionColor * boosted;
-    highp float noise = (rand(UV * 1100.0) - 0.5) * NoiseAmount;
+    highp float noise = (rand(UV + fract(TIME)) - 0.5) * NoiseAmount;
     col += noise;
     col = clamp(col, 0.0, 1.0);
 

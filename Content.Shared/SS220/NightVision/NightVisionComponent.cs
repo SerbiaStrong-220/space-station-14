@@ -49,7 +49,7 @@ public sealed partial class NightVisionComponent : Component
     /// </summary>
     [DataField]
     [AutoNetworkedField]
-    public float NoiseAmount = 0.01f;
+    public float NoiseAmount = 0.025f;
 
     /// <summary>
     /// Minimum light intensity applied after the light render target.
