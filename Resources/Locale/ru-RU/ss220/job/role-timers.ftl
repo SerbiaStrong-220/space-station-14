@@ -13,3 +13,5 @@ AntagHedRev = Глава революции
 AntagTraitor = Агент Синдиката
 AntagThief = Вор
 AntagInitialInfected = Нулевой заражённый
+AntagXenoborg = Ксеноборг
+AntagXenoborgMothershipCore = Материнское ядро ксеноборгов

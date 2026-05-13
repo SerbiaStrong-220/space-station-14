@@ -177,6 +177,9 @@
   - type: UIRequiresLock
     userInterfaceKeys:
     - enum.BorgUiKey.Key
+    blacklist:
+      tags:
+      - NoConsoleSound
   - type: LockedWiresPanel
   - type: Damageable
     damageContainer: Silicon
