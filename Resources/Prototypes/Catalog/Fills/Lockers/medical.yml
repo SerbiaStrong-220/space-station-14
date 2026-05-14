@@ -45,7 +45,7 @@
     children:
     - id: ClothingEyesHudMedical
     - id: ClothingBeltMedicalFilled
-    - id: JetInjector
+    # - id: JetInjector # ss220 - post upstream - jetInjector & MedAutoinjector tweaks
     - id: HandheldHealthAnalyzer
     - id: ChemistryBottleLaughter # Widely recognized as the best medicine :o)
       prob: 0.01
@@ -122,7 +122,7 @@
     - id: ClothingEyesHudMedical
     - id: ClothingOuterHardsuitVoidParamed
     - id: ClothingBeltMedicalEMTFilled
-    - id: JetInjector
+    # - id: JetInjector # ss220 - post upstream - jetInjector & MedAutoinjector tweaks
     - id: HandheldHealthAnalyzer
     - id: BoxBodyBag
     - id: OxygenTankFilled # SS220 - Changing the contents of the paramedic closet

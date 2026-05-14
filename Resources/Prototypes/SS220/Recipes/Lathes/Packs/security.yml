@@ -9,3 +9,9 @@
   - MagazineMagnum
   - MagazinePistolHighCapacityEmpty
   - MagazinePistolHighCapacity
+
+- type: latheRecipePack
+  id: SecurityBoardsTurrets
+  recipes:
+  - WeaponEnergyTurretSecurityControlPanelElectronics #Who the fuck makes IDs like those
+  - WeaponEnergyTurretSecurityMachineCircuitboard
