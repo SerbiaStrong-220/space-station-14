@@ -28,8 +28,7 @@ public sealed partial class AltBlockingInputSystem : EntitySystem
 
         if (_inputSystem.CmdStates.GetState(useKey) == BoundKeyState.Up)
         {
-            if (!ShouldReact)
-                ShouldReact = true;
+            ShouldReact = true;
             return;
         }
 
