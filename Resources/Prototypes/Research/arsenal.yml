@@ -40,6 +40,7 @@
   - MagazinePistolSubMachineGunIncendiary
   - MagazineShotgunHEI
   - BoxShotgunHEI
+  - MagazineFullRifleIncendiary
   #ss220 more recipies begin
 
 - type: technology
@@ -53,6 +54,7 @@
   cost: 10000 # ss220ttkUpdate
   recipeUnlocks:
   - WeaponLaserCarbine
+  - WeaponLaserPistol
 
 - type: technology
   id: NonlethalAmmunition
@@ -91,6 +93,9 @@
   #ss220 more recipies begin
   - MagazineMagnumUranium
   - MagazinePistolSubMachineGunUranium
+  - MagazineFullRifleAP
+  - MagazineAntiMaterialAP
+  - MagazineBoxAntiMaterielAP
   #ss220 more recipies end
 
 - type: technology

@@ -32,6 +32,23 @@
   - SpeedLoaderMagnumHP
   - BoxShotgunHP
   - MagazineShotgunHP
+  - MagazineFullRifleHP
+  - MagazineAntiMaterialHP
+
+- type: technology
+  id: ExplosiveAmmunition
+  name: research-technology-explosive-ammunition
+  icon:
+    sprite: Objects/Weapons/Guns/Ammunition/Boxes/pistol.rsi
+    state: incendiarydisplay
+  discipline: Arsenal
+  tier: 2
+  cost: 12000
+  recipeUnlocks:
+  - BoxShotgunHE
+  - MagazineBoxAntiMaterielHE
+  - MagazineAntiMaterialExplosive
+  - MagazineShotgunExplosive
 
 - type: technology
   id: AutomatedDefenceSystems

@@ -38,7 +38,11 @@ public sealed class IntegratedClothingSystem : EntitySystem
     private void OnEquipAttempt(Entity<IntegratedClothingComponent> ent, ref BeingEquippedAttemptEvent args)
     {
         if (_inventorySystem.TryGetSlotEntity(args.EquipTarget, ent.Comp.Slot, out var wornEnt) && wornEnt != null)
+        {
+            _popupSystem.PopupClient(Loc.GetString("integrated-clothing-cannot-put-on", ("entity", wornEnt)),
+                args.User);
             args.Cancel();
+        }
     }
 
     private void OnGotEquipped(Entity<IntegratedClothingComponent> ent, ref ClothingGotEquippedEvent args)

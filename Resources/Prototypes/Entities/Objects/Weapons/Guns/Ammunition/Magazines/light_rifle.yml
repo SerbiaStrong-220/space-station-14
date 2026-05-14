@@ -113,17 +113,17 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
     - state: stripe
-      color: "#dbdbdb"
+      color: "#ffa200" #SS220 weapon overhaul
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left-mag
       - state: inhand-left-stripe
-        color: "#dbdbdb"
+        color: "#ffa200" #SS220 weapon overhaul
       right:
       - state: inhand-right-mag
       - state: inhand-right-stripe
-        color: "#dbdbdb"
+        color: "#ffa200" #SS220 weapon overhaul
 
 - type: entity
   parent: BaseMagazineLightRifle

@@ -10,12 +10,6 @@
   - MagazinePistolHighCapacityEmpty
   - MagazinePistolHighCapacity
 
-# LessLethal
-- type: latheRecipePack
-  id: SecurityAmmoRubberStatic
-  recipes:
-  - TaserCartridge
-
 - type: latheRecipePack
   id: SecurityBoardsTurrets
   recipes:

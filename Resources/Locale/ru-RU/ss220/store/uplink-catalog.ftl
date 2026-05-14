@@ -8,6 +8,16 @@ uplink-origami-desc = В этой коробке заключено забыто
 uplink-sniper-bundle-name = Набор с антиматериальной винтовкой
 uplink-sniper-bundle-desc = Вещмешок с винтовкой модели Христова и тремя запасными магазинами к ней.
 
+# Ammunition
+
+uplink-hollow-point-ammo-desc = Эти патроны с экспансивными пулями очень эффективны против небронированых целей.
+
+uplink-armor-piercing-ammo-desc = Эти патроны с бронебойными пулями эффективны против защищённых целей.
+
+uplink-full-metal-jacket-ammo-desc = Патроны с цельнометаллической оболочкой. Хороши против всего.
+
+uplink-smg-magazine-name = Магазин 9x20мм авто для ПП.
+
 # Misc
 
 uplink-clothing-eyes-hud-syndicate-agent-name = Визор агента Синдиката

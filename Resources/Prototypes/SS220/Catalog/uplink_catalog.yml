@@ -410,9 +410,9 @@
     LightDynamic:
       Telecrystal: 16
     MediumDynamic:
-      Telecrystal: 11
+      Telecrystal: 14
     HardDynamic:
-      Telecrystal: 8
+      Telecrystal: 11
   categories:
   - UplinkWearables
 

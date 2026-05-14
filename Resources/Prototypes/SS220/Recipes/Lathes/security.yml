@@ -77,6 +77,15 @@
     Plasma: 1000
 
 - type: latheRecipe
+  id: WeaponLaserPistol
+  result: WeaponLaserPistol
+  completetime: 5
+  materials:
+    Steel: 1000
+    Glass: 200
+    Plastic: 1200
+
+- type: latheRecipe
   id: LaserSMGPowerCell
   result: LaserSMGPowerCell
   completetime: 5
@@ -85,6 +94,15 @@
     Glass: 200
     Plastic: 300
     Gold: 50
+
+- type: latheRecipe
+  id: WeaponPowerCell
+  result: WeaponPowerCell
+  completetime: 5
+  materials:
+    Steel: 300
+    Glass: 200
+    Plastic: 300
 
 - type: latheRecipe
   id: RiotLaserShield
@@ -230,8 +248,9 @@
   id: MagazineShotgunExplosive
   result: MagazineShotgunExplosive
   materials:
-    Steel: 100
-    Plastic: 190
+    Steel: 50
+    Plastic: 90
+    Plasma: 80
 
 - type: latheRecipe
   parent: BaseAmmoBoxRecipe
@@ -240,8 +259,83 @@
   materials:
     Steel: 240
     Plastic: 160
-    Gold: 200
-    Silver: 200
+    Plasma: 150
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazineBoxAntiMaterielHE
+  result: MagazineBoxAntiMaterielHE
+  materials:
+    Steel: 240
+    Plastic: 160
+    Plasma: 150
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazineAntiMaterialFMJ
+  result: MagazineAntiMaterialFMJ
+  materials:
+    Steel: 120
+    Plastic: 160
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazineAntiMaterialExplosive
+  result: MagazineAntiMaterialExplosive
+  materials:
+    Steel: 240
+    Plastic: 160
+    Plasma: 80
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazineAntiMaterialAP
+  result: MagazineAntiMaterialAP
+  materials:
+    Steel: 240
+    Plastic: 160
+    Uranium: 100
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazineAntiMaterialHP
+  result: MagazineAntiMaterialHP
+  materials:
+    Steel: 90
+    Plastic: 80
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazineFullRifleFMJ
+  result: MagazineFullRifleFMJ
+  materials:
+    Steel: 90
+    Plastic: 80
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazineFullRifleAP
+  result: MagazineFullRifleAP
+  materials:
+    Steel: 90
+    Plastic: 80
+    Uranium: 100
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazineFullRifleHP
+  result: MagazineFullRifleHP
+  materials:
+    Steel: 90
+    Plastic: 80
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: MagazineFullRifleIncendiary
+  result: MagazineFullRifleIncendiary
+  materials:
+    Steel: 90
+    Plastic: 80
 
 - type: latheRecipe
   parent: [ BaseGoldCircuitboardRecipe, BaseMachineRecipeCategory ]
