@@ -1,5 +1,7 @@
 ## UI
 
+cargo-console-menu-flavor-left = Заказывайте ещё больше коробок с пиццей, чем обычно!
+cargo-console-menu-flavor-right = v2.1
 cargo-console-menu-title = Консоль заказа грузов
 cargo-console-menu-account-name-label = Аккаунт:{ " " }
 cargo-console-menu-account-name-none-text = Нет
@@ -17,11 +19,15 @@ cargo-console-menu-categories-label = Категории:{ " " }
 cargo-console-menu-search-bar-placeholder = Поиск
 cargo-console-menu-requests-label = Запросы
 cargo-console-menu-orders-label = Заказы
+cargo-console-menu-order-row-product-description = Причина: { $orderReason }
 cargo-console-menu-order-reason-description = Причина: { $reason }
+cargo-console-menu-order-row-alerts-reason-absent = Причина не указана
+cargo-console-menu-order-row-alerts-requester-unknown = Неизвестно
 cargo-console-menu-populate-categories-all-text = Все
-cargo-console-menu-populate-orders-cargo-order-row-product-name-text = { $productName } (x{ $orderAmount }) от { $orderRequester } со счёта [color={ $accountColor }]{ $account }[/color]
-cargo-console-menu-cargo-order-row-approve-button = Одобрить
-cargo-console-menu-cargo-order-row-cancel-button = Отменить
+cargo-console-menu-populate-orders-cargo-order-row-product-name-text = Запросил: { $orderRequester } со счёта [color={ $accountColor }]{ $account }[/color]
+cargo-console-menu-order-row-title = {$productName} (x{$orderAmount} за {$orderPrice}$)
+cargo-console-menu-order-row-button-approve = Одобрить
+cargo-console-menu-order-row-button-cancel = Отменить
 cargo-console-menu-tab-title-orders = Заказы
 cargo-console-menu-tab-title-funds = Переводы
 cargo-console-menu-account-action-transfer-limit = [bold]Лимит перевода:[/bold] ${ $limit }
@@ -87,19 +93,3 @@ cargo-acquisition-slip-body = [head=3]Детали актива[/head]
     { "[head=3]Детали покупки[/head]" }
     { "[bold]Заказчик:[/bold]" } { $orderer }
     { "[bold]Причина:[/bold]" } { $reason }
-
-cargo-console-menu-flavor-left = Заказывайте ещё больше коробок с пиццей, чем обычно!
-
-cargo-console-menu-flavor-right = v2.1
-
-cargo-console-menu-order-row-title = { $productName } (x{ $orderAmount } за { $orderPrice }$)
-
-cargo-console-menu-order-row-product-description = Причина: { $orderReason }
-
-cargo-console-menu-order-row-button-approve = Одобрить
-
-cargo-console-menu-order-row-button-cancel = Отменить
-
-cargo-console-menu-order-row-alerts-reason-absent = Причина не указана
-
-cargo-console-menu-order-row-alerts-requester-unknown = Неизвестно
