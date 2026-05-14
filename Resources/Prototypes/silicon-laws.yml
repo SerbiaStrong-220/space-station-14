@@ -126,6 +126,13 @@
   order: 3
   lawString: law-syndicate-3
 
+# ss220 - post upstream tweaks - fixing non visiual 4th law - bgn
+- type: siliconLaw
+  id: Syndicate4
+  order: 4
+  lawString: law-syndicate-4
+# ss220 - post upstream tweaks - fixing non visiual 4th law - end
+
 # Syndicate cyborg laws
 # intentionally excluded from IonStormLawsets
 - type: siliconLawset
@@ -135,6 +142,7 @@
   - Syndicate1
   - Syndicate2
   - Syndicate3
+  - Syndicate4 # ss220 - post upstream tweaks - fixing non visiual 4th law
   obeysTo: laws-owner-syndicate
 
 # Ninja conversion laws
