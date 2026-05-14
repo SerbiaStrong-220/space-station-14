@@ -62,10 +62,10 @@ namespace Content.Shared.Speech
 
         public TimeSpan LastTimeSoundPlayed = TimeSpan.Zero;
 
-        // SS220-fix-chat-problems-begin
+        // SS220-fix-chat-spam-begin
         [DataField]
         public TimeSpan SpeechCooldownTime { get; set; } = TimeSpan.FromSeconds(0.5f);
-        // SS220-fix-chat-problems-begin
+        // SS220-fix-chat-spam-end
 
         public TimeSpan LastTimeSpoke = TimeSpan.Zero;
 

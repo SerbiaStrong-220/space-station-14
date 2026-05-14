@@ -62,7 +62,7 @@ namespace Content.Server.Speech
             // SS220-speech-cooldown-begin
             DebugTools.Assert( _gameTiming.CurTime > component.LastTimeSpoke + component.SpeechCooldownTime);
             component.LastTimeSpoke = _gameTiming.CurTime;
-            // SS220-speech-cooldown-begin
+            // SS220-speech-cooldown-end
 
             if (component.SpeechSounds == null)
                 return;
