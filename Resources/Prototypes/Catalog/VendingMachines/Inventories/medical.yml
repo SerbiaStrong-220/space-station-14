@@ -35,7 +35,7 @@
     ClothingBeltMedicalFilled: 2
     # Shared Essential
     HandheldHealthAnalyzer: 3
-    JetInjector: 3
+    JetInjector: 2 # ss220 - post upstream - jetInjector & MedAutoinjector tweaks
     # Paramed Essential Gear
     ClothingBeltMedicalEMTFilled: 1
     EmergencyRollerBedSpawnFolded: 1
