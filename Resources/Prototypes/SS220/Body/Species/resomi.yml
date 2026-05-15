@@ -210,7 +210,10 @@
   - type: LimitationRevive
     reviveLimit: 3
   - type: Bloodstream
-    bloodReagent: ResomiBlood
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: ResomiBlood
+        Quantity: 300
 
 
 - type: entity
