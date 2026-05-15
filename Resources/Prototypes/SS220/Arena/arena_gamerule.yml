@@ -3,7 +3,6 @@
   parent: BaseGameRule
   components:
   - type: TwoPlayerArenaRule
-    countdownDuration: 10
     resetDelay: 5
     deleteBarriers: true
     selectionMode: Random

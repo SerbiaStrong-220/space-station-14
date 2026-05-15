@@ -1,9 +1,8 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.Roles;
-using Content.Shared.SS220.Arena;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.Manager.Attributes;
 
 namespace Content.Server.SS220.Arena;
 
@@ -15,9 +14,6 @@ public sealed partial class TwoPlayerArenaRuleComponent : Component
 
     [DataField]
     public ArenaSelectionMode SelectionMode = ArenaSelectionMode.Rotation;
-
-    [DataField]
-    public float CountdownDuration = 60f;
 
     [DataField]
     public float ResetDelay = 5f;
@@ -34,7 +30,10 @@ public sealed partial class TwoPlayerArenaRuleComponent : Component
     public MapId? ArenaMapId;
     public EntityUid? ArenaGridUid;
 
+    [ViewVariables]
     public EntityUid? PlayerOne;
+
+    [ViewVariables]
     public EntityUid? PlayerTwo;
 
     public TimeSpan? CountdownEnd;
@@ -60,7 +59,7 @@ public sealed partial class ArenaMapEntry
     public ProtoId<StartingGearPrototype>? Loadout;
 
     [DataField]
-    public float? CountdownDuration;
+    public float CountdownDuration = 10f;
 }
 
 public enum ArenaPhase : byte

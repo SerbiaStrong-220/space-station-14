@@ -1,5 +1,6 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Server.Chat.Managers;
-using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
 using Content.Server.Popups;
 using Content.Shared.Chat;
@@ -8,10 +9,7 @@ using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
-using Content.Shared.Roles;
-using Content.Shared.SS220.Arena;
 using Content.Shared.Station;
-using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.EntitySerialization.Systems;
@@ -42,6 +40,12 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
     [Dependency] private readonly ISharedPlayerManager _players = default!;
 
     private static readonly SoundSpecifier PingSound = new SoundPathSpecifier("/Audio/Effects/newplayerping.ogg");
+    private static readonly EntProtoId EffectSparks = "EffectSparks";
+
+    private const int VictorySparkCount = 6;
+    private const float VictorySparkOffsetRange = 0.6f;
+    private const float VictoryLightRadius = 5f;
+    private const float VictoryLightEnergy = 4f;
 
     private ISawmill _sawmill = default!;
 
@@ -62,7 +66,7 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
 
     protected override void Ended(EntityUid uid, TwoPlayerArenaRuleComponent comp, GameRuleComponent gameRule, GameRuleEndedEvent args)
     {
-        if (comp.ArenaMapUid is { } mapUid && Exists(mapUid) && !Terminating(mapUid))
+        if (comp.ArenaMapUid is { } mapUid && !TerminatingOrDeleted(mapUid))
             QueueDel(mapUid);
 
         ResetState(comp);
@@ -100,7 +104,7 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
 
         var entry = SelectNextMap(comp);
         comp.CurrentLoadout = entry.Loadout;
-        comp.CurrentCountdown = entry.CountdownDuration ?? comp.CountdownDuration;
+        comp.CurrentCountdown = entry.CountdownDuration;
 
         EntityUid mapUid;
         MapId mapId;
@@ -116,7 +120,7 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
             return false;
         }
 
-        if (!_loader.TryLoadGrid(mapId, new ResPath(entry.Path), out var gridRef) || gridRef == null)
+        if (!_loader.TryLoadGrid(mapId, new ResPath(entry.Path), out var gridRef))
         {
             _sawmill.Error($"Failed to load arena grid from '{entry.Path}'.");
             QueueDel(mapUid);
@@ -323,7 +327,7 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
 
     private void PlayPingTo(EntityUid? uid)
     {
-        if (uid is { } fighter && Exists(fighter) && !Terminating(fighter))
+        if (uid is { } fighter && !TerminatingOrDeleted(fighter))
             _audio.PlayGlobal(PingSound, fighter);
     }
 
@@ -331,17 +335,17 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
     {
         var light = _light.EnsureLight(winner);
         _light.SetColor(winner, Color.Gold, light);
-        _light.SetRadius(winner, 5f, light);
-        _light.SetEnergy(winner, 4f, light);
+        _light.SetRadius(winner, VictoryLightRadius, light);
+        _light.SetEnergy(winner, VictoryLightEnergy, light);
         _light.SetEnabled(winner, true, light);
 
         var coords = Transform(winner).Coordinates;
-        for (var i = 0; i < 6; i++)
+        for (var i = 0; i < VictorySparkCount; i++)
         {
             var offset = new System.Numerics.Vector2(
-                _random.NextFloat(-0.6f, 0.6f),
-                _random.NextFloat(-0.6f, 0.6f));
-            Spawn("EffectSparks", coords.Offset(offset));
+                _random.NextFloat(-VictorySparkOffsetRange, VictorySparkOffsetRange),
+                _random.NextFloat(-VictorySparkOffsetRange, VictorySparkOffsetRange));
+            Spawn(EffectSparks, coords.Offset(offset));
         }
     }
 
@@ -376,7 +380,7 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
     {
         foreach (var b in rule.Barriers)
         {
-            if (!Exists(b) || Terminating(b))
+            if (TerminatingOrDeleted(b))
                 continue;
 
             QueueDel(b);
@@ -392,7 +396,7 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
         rule.ResetReadyAt = _timing.CurTime + TimeSpan.FromSeconds(rule.ResetDelay);
         rule.PendingSpawn = false;
 
-        if (winner.HasValue && Exists(winner.Value) && !Terminating(winner.Value))
+        if (winner.HasValue && !TerminatingOrDeleted(winner.Value))
         {
             SendToFighter(winner, Loc.GetString("arena-winner-popup"));
             PlayPingTo(winner);
@@ -411,7 +415,7 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
         if (!rule.PendingSpawn)
         {
             rule.InReset = true;
-            if (rule.ArenaMapUid is { } mapUid && Exists(mapUid) && !Terminating(mapUid))
+            if (rule.ArenaMapUid is { } mapUid && !TerminatingOrDeleted(mapUid))
                 QueueDel(mapUid);
 
             ResetState(rule);
@@ -438,11 +442,6 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
         rule.Barriers.Clear();
     }
 
-    private int CountAlive(TwoPlayerArenaRuleComponent rule, bool requireActor)
-    {
-        return CountAlive(rule, requireActor, out _);
-    }
-
     private int CountAlive(TwoPlayerArenaRuleComponent rule, bool requireActor, out EntityUid lastAlive)
     {
         lastAlive = default;
@@ -464,7 +463,7 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
     {
         if (!uid.HasValue)
             return false;
-        if (!Exists(uid.Value) || Terminating(uid.Value))
+        if (TerminatingOrDeleted(uid.Value))
             return false;
         if (_mobState.IsDead(uid.Value))
             return false;
@@ -481,7 +480,7 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
 
     private void SendToFighter(EntityUid? uid, string msg)
     {
-        if (uid is not { } fighter || !Exists(fighter) || Terminating(fighter))
+        if (uid is not { } fighter || TerminatingOrDeleted(fighter))
             return;
 
         _popup.PopupEntity(msg, fighter, fighter, PopupType.Large);
