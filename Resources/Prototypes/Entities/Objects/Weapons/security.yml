@@ -130,7 +130,7 @@
     damageContainer: Invulnerable
   - type: ArmorBlock
   - type: AltArmor
-    tresholddict:
+    tresholdDict:
       Piercing: 10
       Blunt: 25
       Heat: 15
@@ -214,7 +214,7 @@
     damageContainer: Invulnerable
   - type: ArmorBlock
   - type: AltArmor
-    tresholddict:
+    tresholdDict:
       Piercing: 10
       Blunt: 25
       Heat: 15

@@ -20,14 +20,14 @@
     - type: InstastunResistOnActiveBlocking
     - type: ArmorBlock
     - type: AltArmor
-      tresholddict:
+      tresholdDict:
           Radiation: 1000
           Poison: 1000
           Asphyxiation: 1000
           Bloodloss: 1000
           Caustic: 1000
           Shock: 30
-      durabilitytresholddict:
+      durabilityTresholdDict:
           Radiation: 1000
           Poison: 1000
           Asphyxiation: 1000
@@ -81,7 +81,7 @@
       activeRangeBlockProb: 0.60
       activeMeleeBlockProb: 0.75
     - type: AltArmor
-      tresholddict:
+      tresholdDict:
           Piercing: 6
           Blunt: 20
           Heat: 10
@@ -93,7 +93,7 @@
           Caustic: 1000
           Shock: 30
           Cold: 20
-      durabilitytresholddict:
+      durabilityTresholdDict:
           Piercing: 7
           Blunt: 15
           Heat: 7
@@ -122,7 +122,7 @@
       activeRangeBlockProb: 0.60
       activeMeleeBlockProb: 0.75
     - type: AltArmor
-      tresholddict:
+      tresholdDict:
           Radiation: 1000
           Poison: 1000
           Asphyxiation: 1000
@@ -134,7 +134,7 @@
           Slash: 7
           Shock: 30
           Cold: 50
-      durabilitytresholddict:
+      durabilityTresholdDict:
           Radiation: 1000
           Poison: 1000
           Asphyxiation: 1000
@@ -163,7 +163,7 @@
       activeRangeBlockProb: 0.65
       activeMeleeBlockProb: 0.37
     - type: AltArmor
-      tresholddict:
+      tresholdDict:
           Radiation: 1000
           Poison: 1000
           Asphyxiation: 1000
@@ -175,7 +175,7 @@
           Slash: 35
           Shock: 30
           Cold: 40
-      durabilitytresholddict:
+      durabilityTresholdDict:
           Radiation: 1000
           Poison: 1000
           Asphyxiation: 1000
@@ -211,7 +211,7 @@
       activeRangeBlockProb: 0.50
       activeMeleeBlockProb: 0.70
     - type: AltArmor
-      tresholddict:
+      tresholdDict:
           Piercing: 6
           Slash: 15
           Blunt: 20
@@ -223,7 +223,7 @@
           Caustic: 1000
           Shock: 30
           Cold: 20
-      durabilitytresholddict:
+      durabilityTresholdDict:
           Piercing: 5
           Slash: 9
           Blunt: 10
@@ -279,7 +279,7 @@
       activeRangeBlockProb: 0.60
       activeMeleeBlockProb: 0.65
     - type: AltArmor
-      tresholddict:
+      tresholdDict:
           Piercing: 1
           Blunt: 1
           Heat: 1
@@ -288,7 +288,7 @@
           Poison: 1000
           Asphyxiation: 1000
           Bloodloss: 1000
-      durabilitytresholddict:
+      durabilityTresholdDict:
           Piercing: 0
           Blunt: 0
           Heat: 0
@@ -340,7 +340,7 @@
       activeRangeBlockProb: 0.60
       activeMeleeBlockProb: 0.65
     - type: AltArmor
-      tresholddict:
+      tresholdDict:
           Piercing: 6
           Blunt: 20
           Heat: 10
@@ -352,7 +352,7 @@
           Caustic: 1000
           Shock: 10
           Cold: 20
-      durabilitytresholddict:
+      durabilityTresholdDict:
           Piercing: 5
           Blunt: 15
           Heat: 7
@@ -408,7 +408,7 @@
       activeRangeBlockProb: 0.60
       activeMeleeBlockProb: 0.65
     - type: AltArmor
-      tresholddict:
+      tresholdDict:
           Piercing: 4
           Blunt: 7
           Heat: 7
@@ -420,7 +420,7 @@
           Caustic: 1000
           Shock: 30
           Cold: 10
-      durabilitytresholddict:
+      durabilityTresholdDict:
           Piercing: 4
           Blunt: 4
           Heat: 4
@@ -476,7 +476,7 @@
       activeRangeBlockProb: 0.40
       activeMeleeBlockProb: 0.70
     - type: AltArmor
-      tresholddict:
+      tresholdDict:
           Piercing: 17
           Blunt: 25
           Heat: 25
@@ -487,7 +487,7 @@
           Bloodloss: 1000
           Caustic: 1000
           Shock: 10
-      durabilitytresholddict:
+      durabilityTresholdDict:
           Piercing: 12
           Blunt: 20
           Heat: 20
@@ -522,7 +522,7 @@
       blockSound: !type:SoundPathSpecifier
         path: /Audio/Effects/glass_step.ogg
     - type: AltArmor
-      tresholddict:
+      tresholdDict:
           Piercing: 7
           Blunt: 10
           Heat: 60
@@ -534,7 +534,7 @@
           Caustic: 1000
           Shock: 30
           Cold: 30
-      durabilitytresholddict:
+      durabilityTresholdDict:
           Piercing: 4
           Blunt: 5
           Heat: 35
@@ -626,7 +626,7 @@
       toggledMeleeBlockProb: 0.65 #No more stunbatons
     - type: Appearance
     - type: AltArmor
-      tresholddict:
+      tresholdDict:
         Piercing: 55
         Blunt: 30
         Heat: 26
@@ -639,7 +639,7 @@
         Shock: 30
         Cold: 50
       #Blocks effectively anything station normally uses
-      durabilitytresholddict:
+      durabilityTresholdDict:
         Piercing: 40
         Blunt: 40
         Heat: 40
@@ -709,7 +709,7 @@
       toggledRangeBlockProb: 0.50
       toggledMeleeBlockProb: 0.65
     - type: AltArmor
-      tresholddict:
+      tresholdDict:
           Piercing: 15
           Blunt: 20
           Heat: 10
@@ -721,7 +721,7 @@
           Caustic: 1000
           Shock: 30
           Cold: 20
-      durabilitytresholddict:
+      durabilityTresholdDict:
           Piercing: 12
           Blunt: 15
           Heat: 7

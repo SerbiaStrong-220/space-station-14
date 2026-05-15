@@ -30,6 +30,7 @@ using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
+using Lidgren.Network;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameObjects;
@@ -576,19 +577,12 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         if (TryComp<AltBlockingUserComponent>(target, out var blockcomp))
         {
-            var attackerPos = TransformSystem.GetWorldPosition(user);
-            var targetPos = TransformSystem.GetWorldPosition(target.Value);
-
-            Angle HitAngle = new Angle(new Vector2(targetPos.X - attackerPos.X, targetPos.Y - attackerPos.Y)) - new Angle(Math.PI / 2);
-
-            var meleeBlockEvent = new MeleeHitBlockAttemptEvent();
-
-            meleeBlockEvent.HitAngle = HitAngle.Reduced();
+            var meleeBlockEvent = new MeleeHitBlockAttemptEvent(user);
 
             RaiseLocalEvent(targetEntity, ref meleeBlockEvent);
 
-            if (meleeBlockEvent.CancelledHit && TryGetEntity(meleeBlockEvent.blocker, out EntityUid? shield))
-                targetEntity = (EntityUid)shield;
+            if (meleeBlockEvent.CancelledHit && meleeBlockEvent.Blocker is { Valid: true } blockerUid)
+                targetEntity = blockerUid;
         }
         //SS220 shield rework end
 
@@ -748,20 +742,13 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             //SS220 shield rework begin
             if (TryComp<AltBlockingUserComponent>(entity, out var blockcomp))
             {
-                var attackerPos = TransformSystem.GetWorldPosition(user);
-                var targetPos = TransformSystem.GetWorldPosition(entity);
-
-                Angle HitAngle = new Angle(new Vector2(targetPos.X - attackerPos.X, targetPos.Y - attackerPos.Y)) - new Angle(Math.PI / 2);
-
-                var meleeBlockEvent = new MeleeHitBlockAttemptEvent();
-
-                meleeBlockEvent.HitAngle = HitAngle.Reduced();
+                var meleeBlockEvent = new MeleeHitBlockAttemptEvent(user);
 
                 RaiseLocalEvent(entity, ref meleeBlockEvent);
 
-                if (meleeBlockEvent.CancelledHit && TryGetEntity(meleeBlockEvent.blocker, out EntityUid? shield))
+                if (meleeBlockEvent.CancelledHit && meleeBlockEvent.Blocker is { Valid: true } blockerUid)
                 {
-                    var shield1 = (EntityUid)shield;
+                    var shield1 = blockerUid;
                     targets.Add(shield1);
                     AdminLogger.Add(LogType.MeleeHit, LogImpact.High,
                     $"{ToPrettyString(user):actor} melee attacked (heavy) {ToPrettyString(entity):actor}");
@@ -1034,23 +1021,16 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             return false;
 
         //SS220 shield rework begin
-        var attackerPos = TransformSystem.GetWorldPosition(user);
-        var targetPos = TransformSystem.GetWorldPosition(target.Value);
-
-        Angle HitAngle = new Angle(new Vector2(targetPos.X - attackerPos.X, targetPos.Y - attackerPos.Y)) - new Angle(Math.PI / 2);
-
         EntityUid targetEntity = target.Value;
         if (TryComp<AltBlockingUserComponent>(target, out var blockcomp))
         {
-            var meleeBlockEvent = new MeleeHitBlockAttemptEvent();
-
-            meleeBlockEvent.HitAngle = HitAngle.Reduced();
+            var meleeBlockEvent = new MeleeHitBlockAttemptEvent(user);
 
             RaiseLocalEvent(targetEntity, ref meleeBlockEvent);
-            if (meleeBlockEvent.CancelledHit && TryGetEntity(meleeBlockEvent.blocker, out EntityUid? shield))
+            if (meleeBlockEvent.CancelledHit && meleeBlockEvent.Blocker is { Valid: true } blockerUid)
             {
                 PopupSystem.PopupEntity(Loc.GetString("block-shot"), targetEntity);
-                targetEntity = (EntityUid)shield;
+                targetEntity = blockerUid;
             }
         }
         //SS220 shield rework end

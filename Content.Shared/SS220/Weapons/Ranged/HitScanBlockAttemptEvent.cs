@@ -5,13 +5,9 @@ namespace Content.Shared.SS220.Weapons.Ranged.Events;
 
 
 [ByRefEvent]
-public record struct HitscanBlockAttemptEvent(DamageSpecifier? damage, Angle HitAngle)
+public record struct HitscanBlockAttemptEvent(DamageSpecifier? Damage, EntityUid Shooter)
 {
     public bool CancelledHit = false;
 
-    public DamageSpecifier? Damage = damage;
-
     public Color? hitColor = Color.Red;
-
-    public Angle HitScanRotation = HitAngle;
 }

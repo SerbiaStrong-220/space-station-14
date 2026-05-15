@@ -5,11 +5,9 @@ namespace Content.Shared.SS220.Weapons.Ranged.Events;
 
 
 [ByRefEvent]
-public record struct ThrowableProjectileBlockAttemptEvent(DamageSpecifier? damage, Angle HitAngle)
+public record struct ThrowableProjectileBlockAttemptEvent(DamageSpecifier? Damage, EntityUid DamageDealer)
 {
     public bool CancelledHit = false;
 
-    public Angle HitAngle = HitAngle;
-
-    public DamageSpecifier? Damage = damage;
+    public DamageSpecifier? Damage = Damage;
 }

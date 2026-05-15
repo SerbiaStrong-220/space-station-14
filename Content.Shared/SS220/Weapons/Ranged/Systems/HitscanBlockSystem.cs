@@ -20,9 +20,7 @@ public sealed class HitscanBlockSystem : EntitySystem
         if (args.Data.HitEntity == null || args.Data.Shooter == null)
             return;
 
-        var vector = _transform.GetWorldPosition((EntityUid)args.Data.HitEntity) - _transform.GetWorldPosition((EntityUid)args.Data.Shooter);
-
-        var ev = new HitscanBlockAttemptEvent(ent.Comp.Damage, vector.ToAngle() - new Angle(Math.PI/2));
+        var ev = new HitscanBlockAttemptEvent(ent.Comp.Damage, (EntityUid)args.Data.Shooter);
 
         RaiseLocalEvent((EntityUid)args.Data.HitEntity, ref ev);
 

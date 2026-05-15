@@ -24,7 +24,6 @@ public sealed class DamageOtherOnHitSystem : SharedDamageOtherOnHitSystem
     [Dependency] private readonly Shared.Damage.Systems.DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedCameraRecoilSystem _sharedCameraRecoil = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!; // SS220 shield rework
 
     public override void Initialize()
     {
@@ -47,9 +46,7 @@ public sealed class DamageOtherOnHitSystem : SharedDamageOtherOnHitSystem
         // SS220-add-miss-chance-?-end
 
         //SS220 shield rework begin
-        var itemPos = _transformSystem.GetWorldPosition(uid);
-        var targetPos = _transformSystem.GetWorldPosition(args.Target);
-        var blockEv = new ThrowableProjectileBlockAttemptEvent(component.Damage, new Angle(new Vector2(targetPos.X - itemPos.X, targetPos.Y - itemPos.Y)) - new Angle(Math.PI / 2));
+        var blockEv = new ThrowableProjectileBlockAttemptEvent(component.Damage, uid);
 
         RaiseLocalEvent(args.Target, ref blockEv);
         if (blockEv.CancelledHit)

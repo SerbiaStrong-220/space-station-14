@@ -12,7 +12,7 @@ public sealed partial class SharedChangeAppearanceOnActiveBlockingSystem : Entit
     {
         base.Initialize();
         SubscribeLocalEvent<ChangeAppearanceOnActiveBlockingComponent, ComponentInit>(OnInit);
-        SubscribeLocalEvent<ChangeAppearanceOnActiveBlockingComponent, ActiveBlockingEvent>(OnActiveBlock);
+        SubscribeLocalEvent<ChangeAppearanceOnActiveBlockingComponent, ActiveBlockingStateChanged>(OnActiveBlock);
     }
 
     private void OnInit(Entity<ChangeAppearanceOnActiveBlockingComponent> ent, ref ComponentInit args)
@@ -26,9 +26,9 @@ public sealed partial class SharedChangeAppearanceOnActiveBlockingSystem : Entit
         _appearanceSystem.SetData(ent, ActiveBlockingVisuals.Enabled, ent.Comp.Toggled);
     }
 
-    public void OnActiveBlock(Entity<ChangeAppearanceOnActiveBlockingComponent> ent, ref ActiveBlockingEvent args)
+    public void OnActiveBlock(Entity<ChangeAppearanceOnActiveBlockingComponent> ent, ref ActiveBlockingStateChanged args)
     {
-        ent.Comp.Toggled = args.Active;
+        ent.Comp.Toggled = args.State;
         Dirty(ent);
         UpdateVisuals((ent.Owner, ent.Comp));
     }

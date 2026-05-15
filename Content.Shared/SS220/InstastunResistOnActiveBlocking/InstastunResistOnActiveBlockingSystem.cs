@@ -9,14 +9,14 @@ public sealed partial class InstastunResistOnActiveBlockingSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<InstastunResistOnActiveBlockingComponent, ActiveBlockingEvent>(OnActiveBlock);
+        SubscribeLocalEvent<InstastunResistOnActiveBlockingComponent, ActiveBlockingStateChanged>(OnActiveBlock);
     }
 
-    public void OnActiveBlock(Entity<InstastunResistOnActiveBlockingComponent> ent, ref ActiveBlockingEvent args)
+    public void OnActiveBlock(Entity<InstastunResistOnActiveBlockingComponent> ent, ref ActiveBlockingStateChanged args)
     {
         if (!TryComp<InstastunResistComponent>(ent.Owner, out var resistComp))
             return;
 
-        resistComp.Active = args.Active;
+        resistComp.Active = args.State;
     }
 }
