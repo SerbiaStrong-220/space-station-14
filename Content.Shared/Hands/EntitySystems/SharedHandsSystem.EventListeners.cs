@@ -39,8 +39,7 @@ public abstract partial class SharedHandsSystem
         float totalHands = GetHandCount(ent.AsNullable()); // SS220-legs-add
 
         // SS220-legs-add-begin
-        // I am not proud of it but it let me sleep calm (zero hands f.e. etc)
-        var freeHandsModifiers = totalHands == 0 ? 0f :  freeHands / totalHands;
+        var freeHandsModifiers = totalHands == 0 ? 0f : freeHands / totalHands;
         args.SpeedModifier *= SpeedWithZeroFreeHands + (SpeedWithAllFreeHands - SpeedWithZeroFreeHands) * freeHandsModifiers;
         // SS220-legs-add-end
     }
