@@ -126,19 +126,12 @@
     species: Resomi
   - type: ScaleVisuals
     scale: 0.9, 0.9
-  - type: DamageVisuals
-    damageOverlayGroups:
-      Brute:
-        sprite: SS220/Mobs/Effects/resomi_brute_damage.rsi
-        color: "#ff05ff"
-      Burn:
-        sprite: SS220/Mobs/Effects/resomi_burn_damage.rsi
 
 - type: entity
   name: Urist McResomi
   parent:
   - AppearanceResomi
-  - BaseMobSpeciesOrganic
+  - BaseSpeciesMobOrganic
   id: MobResomi
   components:
   - type: Damageable
@@ -186,6 +179,13 @@
     damage:
       types:
         Slash: 5
+  - type: DamageVisuals
+    damageOverlayGroups:
+      Brute:
+        sprite: SS220/Mobs/Effects/resomi_brute_damage.rsi
+        color: "#ff05ff"
+      Burn:
+        sprite: SS220/Mobs/Effects/resomi_burn_damage.rsi
   - type: TemperatureDamage # Пошаманить потом
     heatDamageThreshold: 320
     coldDamageThreshold: 230
@@ -211,6 +211,7 @@
     reviveLimit: 3
   - type: Bloodstream
     bloodReagent: ResomiBlood
+
 
 - type: entity
   parent: OrganBase
