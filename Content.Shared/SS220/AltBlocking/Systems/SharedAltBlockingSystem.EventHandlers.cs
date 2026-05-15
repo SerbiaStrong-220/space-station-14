@@ -9,10 +9,7 @@ using Content.Shared.SS220.Weapons.Melee.Events;
 using Content.Shared.SS220.Weapons.Ranged.Events;
 //using Content.Shared.Weapons.Hitscan.Components;
 //using Content.Shared.Weapons.Hitscan.Events;
-using Robust.Shared.Random;
-using Robust.Shared.Toolshed.Commands.Math;
 using System.Numerics;
-using System.Security.Cryptography;
 
 namespace Content.Shared.SS220.AltBlocking;
 
@@ -43,16 +40,16 @@ public sealed partial class SharedAltBlockingSystem
         var targetPos = _transform.GetWorldPosition(ent);
         var attackerPos = _transform.GetWorldPosition(args.Attacker);
 
-        Angle HitAngle = new Angle(new Vector2(targetPos.X - attackerPos.X, targetPos.Y - attackerPos.Y)) - new Angle(Math.PI / 2);
+        Angle hitAngle = new Angle(new Vector2(targetPos.X - attackerPos.X, targetPos.Y - attackerPos.Y)) - new Angle(Math.PI / 2);
 
-        HitAngle = HitAngle.Reduced();
+        hitAngle = hitAngle.Reduced();
 
         foreach (var item in ent.Comp.BlockingItemsShields)
         {
             if (!TryComp<AltBlockingComponent>(item, out var blockComp))
                 continue;
 
-            if (!IsCovered(HitAngle, blockComp.CoveredZones, _transform.GetWorldRotation(ent.Owner)))
+            if (!IsCovered(hitAngle, blockComp.CoveredZones, _transform.GetWorldRotation(ent.Owner)))
                 continue;
 
             if (TryComp<ToggleBlockingChanceComponent>(item, out var toggleComp))
