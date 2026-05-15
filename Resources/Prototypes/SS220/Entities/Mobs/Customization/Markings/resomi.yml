@@ -3,7 +3,6 @@
   id: ResomiTail
   bodyPart: Tail
   groupWhitelist: [Resomi]
-  forcedColoring: true
   sprites:
   - sprite: SS220/Mobs/Customization/Resomi/resomi_tail.rsi
     state: tail
