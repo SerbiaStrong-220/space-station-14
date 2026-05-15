@@ -1,5 +1,36 @@
 - type: entity
   parent: BaseRailing
+  id: CurbWoodBase
+  abstract: true
+  components:
+  - type: Construction
+    graph: CurbWood
+  - type: RCDDeconstructable
+    cost: 3
+    delay: 4
+    fx: EffectRCDDeconstruct2
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 450
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WoodDestroy
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialWoodPlank:
+            min: 0
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Wood
+
+- type: entity
+  parent: CurbWoodBase
   id: CurbWood
   suffix: For mapping
   components:
@@ -21,34 +52,11 @@
         - TableMask
         layer:
         - TableLayer
-  - type: Damageable
-    damageContainer: StructuralInorganic
-    damageModifierSet: Wood
-  - type: RCDDeconstructable
-    cost: 3
-    delay: 4
-    fx: EffectRCDDeconstruct2
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 450
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: WoodDestroy
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          MaterialWoodPlank:
-            min: 1
-            max: 2
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
   - type: Construction
-    node: railing
+    node: curbWood
 
 - type: entity
-  parent: CurbWood
+  parent: CurbWoodBase
   id: CurbWoodCorner
   components:
   - type: Sprite
@@ -79,10 +87,10 @@
         layer:
         - TableLayer
   - type: Construction
-    node: railing
+    node: curbWoodCorner
 
 - type: entity
-  parent: CurbWood
+  parent: CurbWoodBase
   id: CurbWoodCornerSmall
   components:
   - type: Sprite
@@ -96,10 +104,10 @@
     bodyType: Static
     canCollide: false
   - type: Construction
-    node: railing
+    node: curbWoodCornerSmall
 
 - type: entity
-  parent: CurbWood
+  parent: CurbWoodBase
   id: CurbWoodRound
   components:
   - type: Sprite
@@ -139,11 +147,38 @@
         layer:
         - TableLayer
   - type: Construction
-    node: railing
-
+    node: curbWoodRound
 
 - type: entity
   parent: BaseRailing
+  id: CurbSteelBase
+  abstract: true
+  components:
+  - type: Construction
+    graph: CurbSteel
+  - type: RCDDeconstructable
+    cost: 3
+    delay: 4
+    fx: EffectRCDDeconstruct2
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 450
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 0
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: CurbSteelBase
   id: CurbSteel
   suffix: For mapping
   components:
@@ -165,34 +200,11 @@
         - TableMask
         layer:
         - TableLayer
-  - type: Damageable
-    damageContainer: StructuralInorganic
-    damageModifierSet: FlimsyMetallic
-  - type: RCDDeconstructable
-    cost: 3
-    delay: 4
-    fx: EffectRCDDeconstruct2
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 450
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalBreak
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          SheetSteel1:
-            min: 1
-            max: 2
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
   - type: Construction
-    node: railing
+    node: curbSteel
 
 - type: entity
-  parent: CurbSteel
+  parent: CurbSteelBase
   id: CurbSteelCorner
   components:
   - type: Sprite
@@ -223,10 +235,10 @@
         layer:
         - TableLayer
   - type: Construction
-    node: railing
+    node: curbSteelCorner
 
 - type: entity
-  parent: CurbSteel
+  parent: CurbSteelBase
   id: CurbSteelCornerSmall
   components:
   - type: Sprite
@@ -240,10 +252,10 @@
     bodyType: Static
     canCollide: false
   - type: Construction
-    node: railing
+    node: curbSteelCornerSmall
 
 - type: entity
-  parent: CurbSteel
+  parent: CurbSteelBase
   id: CurbSteelRound
   components:
   - type: Sprite
@@ -283,11 +295,38 @@
         layer:
         - TableLayer
   - type: Construction
-    node: railing
-
+    node: curbSteelRound
 
 - type: entity
   parent: BaseRailing
+  id: CurbDarkSteelBase
+  abstract: true
+  components:
+  - type: Construction
+    graph: CurbDarkSteel
+  - type: RCDDeconstructable
+    cost: 3
+    delay: 4
+    fx: EffectRCDDeconstruct2
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 450
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 0
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: CurbDarkSteelBase
   id: CurbDarkSteel
   suffix: For mapping
   components:
@@ -309,35 +348,12 @@
         - TableMask
         layer:
         - TableLayer
-  - type: Damageable
-    damageContainer: StructuralInorganic
-    damageModifierSet: FlimsyMetallic
-  - type: RCDDeconstructable
-    cost: 3
-    delay: 4
-    fx: EffectRCDDeconstruct2
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 450
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalBreak
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          SheetSteel1:
-            min: 1
-            max: 2
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
   - type: Construction
-    node: railing
+    node: curbDarkSteel
 
 
 - type: entity
-  parent: CurbDarkSteel
+  parent: CurbDarkSteelBase
   id: CurbDarkSteelCorner
   components:
   - type: Sprite
@@ -368,10 +384,10 @@
         layer:
         - TableLayer
   - type: Construction
-    node: railing
+    node: curbDarkSteelCorner
 
 - type: entity
-  parent: CurbDarkSteel
+  parent: CurbDarkSteelBase
   id: CurbDarkSteelCornerSmall
   components:
   - type: Sprite
@@ -385,10 +401,10 @@
     bodyType: Static
     canCollide: false
   - type: Construction
-    node: railing
+    node: curbDarkSteelCornerSmall
 
 - type: entity
-  parent: CurbDarkSteel
+  parent: CurbDarkSteelBase
   id: CurbDarkSteelRound
   components:
   - type: Sprite
@@ -428,7 +444,7 @@
         layer:
         - TableLayer
   - type: Construction
-    node: railing
+    node: curbDarkSteelRound
 
 - type: entity
   parent: CurbWood
