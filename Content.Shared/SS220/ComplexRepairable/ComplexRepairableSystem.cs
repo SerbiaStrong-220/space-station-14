@@ -32,7 +32,7 @@ public sealed partial class ComplexRepairableSystem : EntitySystem
     {
         var damageTaken = args.DamageDelta?.GetTotal() ?? FixedPoint2.Zero;
 
-        if (damageTaken > 0)
+        if (damageTaken > 0 && ent.Comp.MaterialRepairTreshold != 0)
             ent.Comp.LeftToInsert += (damageTaken / ent.Comp.MaterialRepairTreshold).Int();
 
         Dirty(ent);
