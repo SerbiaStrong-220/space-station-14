@@ -11,6 +11,7 @@ using Content.Shared.Actions.Components;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Database;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.Gibbing;
 using Content.Shared.SS220.CultYogg.Altar;
 using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.SS220.CultYogg.MiGo;
@@ -23,10 +24,11 @@ public sealed partial class CultYoggAltarSystem : SharedCultYoggAltarSystem
 {
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
-    [Dependency] private readonly BodySystem _body = default!;
+    [Dependency] private readonly GibbingSystem _gibbing = default!;
     [Dependency] private readonly IGameTiming _time = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly NavMapSystem _navMap = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -54,7 +56,7 @@ public sealed partial class CultYoggAltarSystem : SharedCultYoggAltarSystem
             return;
 
         _adminLog.Add(LogType.RoundFlow, LogImpact.Medium, $"Cult Yogg sacrificed {ToPrettyString(sacrificial.Value):target}");
-        _body.GibBody(sacrificial.Value, true);
+        _gibbing.Gib(sacrificial.Value);
         ent.Comp.Used = true;
 
         RemComp<StrapComponent>(ent);
@@ -102,10 +104,17 @@ public sealed partial class CultYoggAltarSystem : SharedCultYoggAltarSystem
                 continue;
 
             var msg = Loc.GetString("cult-yogg-sacrifice-warning",
-    ("location", FormattedMessage.RemoveMarkupOrThrow(_navMap.GetNearestBeaconString((ent, xform)))));
+    ("location", FormattedMessage.RemoveMarkupOrThrow(_navMap.GetNearestBeaconString((ent, xform)))),
+    ("coords", GetCoords(ent)));
             _chat.DispatchGlobalAnnouncement(msg, announcementSound: altarComp.Sound, colorOverride: Color.Red);
 
             altarComp.AnnounceTime = null;
         }
+    }
+
+    private string GetCoords(EntityUid ent)
+    {
+        var coordinates = _transform.GetWorldPosition(ent);
+        return $"({Math.Round(coordinates.X)}, {Math.Round(coordinates.Y)})";
     }
 }

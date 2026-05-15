@@ -14,14 +14,6 @@ ent-AirlockLawSecurityGlass = { ent-AirlockSecurityGlass }
     .suffix = Безопасность/Юридический
     .desc = { ent-AirlockSecurityGlass.desc }
 
-ent-AirlockSalvage = { ent-AirlockCargo }
-    .suffix = Утилизаторы
-    .desc = { ent-AirlockCargo.desc }
-
-ent-AirlockSalvageGlass = { ent-AirlockCargoGlass }
-    .suffix = Утилизаторы
-    .desc = { ent-AirlockCargoGlass.desc }
-
 ent-AirlockLaw = { ent-AirlockServiceLocked }
     .suffix = Юридический
     .desc = { ent-AirlockServiceLocked.desc }
@@ -34,33 +26,9 @@ ent-AirlockExternalSecGlass = { ent-AirlockExternal }
     .desc = { ent-AirlockExternal.desc }
     .suffix = Внешний, Безопасность, Стекло, Закрыто
 
-ent-AirlockBarKitchenLocked = { ent-AirlockServiceLocked }
-    .suffix = Бар и Кухня, Закрыт
-    .desc = { ent-AirlockServiceLocked.desc }
-
-ent-AirlockMaintBarKitchenLocked = { ent-AirlockMaintServiceLocked }
-    .suffix = Бар и Кухня, Закрыт
-    .desc = { ent-AirlockMaintServiceLocked.desc }
-
-ent-AirlockBarKitchenGlassLocked = { ent-AirlockServiceGlassLocked }
-    .suffix = Бар и Кухня, Закрыт
-    .desc = { ent-AirlockServiceGlassLocked.desc }
-
-ent-AirlockMaintKitchenHydroLocked = { ent-AirlockMaintServiceLocked }
-    .suffix = Кухня и Ботаника, Закрыт
-    .desc = { ent-AirlockMaintServiceLocked.desc }
-
 ent-AirlockExternalEngGlass = { ent-AirlockExternal }
     .desc = { ent-AirlockExternal.desc }
     .suffix = Внешний, Инженерный, Стекло, Закрыто
-
-ent-AirlockHatchMaintenanceLocked = { ent-AirlockMaint }
-    .desc = { ent-AirlockMaint.desc }
-    .suffix = Техобслуживание, Закрыто
-
-ent-AirlockMaintQuartermasterLocked = { ent-AirlockMaint }
-    .desc = { ent-AirlockMaint.desc }
-    .suffix = Квартирмейстер, Закрыто
 
 ent-AirlockBlueshield = { ent-AirlockCommand }
     .desc = { ent-AirlockCommand.desc }
@@ -69,26 +37,6 @@ ent-AirlockBlueshield = { ent-AirlockCommand }
 ent-AirlockBlueshieldGlass = { ent-AirlockCommandGlass }
     .desc = { ent-AirlockCommandGlass.desc }
     .suffix = ОСЩ, Закрыто
-
-ent-AirlockStandardGlass = { ent-AirlockServiceGlassLocked }
-    .desc = { ent-AirlockServiceGlassLocked.desc }
-    .suffix = Сервис
-
-ent-AirlockMaintServiceTheatreLocked = { ent-AirlockMaint }
-    .desc = { ent-AirlockMaint.desc }
-    .suffix = Сервис, Театр, Закрыто
-
-ent-AirlockServiceTheatreLocked = { ent-AirlockServiceLocked }
-    .desc = { ent-AirlockServiceLocked.desc }
-    .suffix = Сервис, Театр, Закрыто
-
-ent-AirlockServiceTheatreGlassLocked = { ent-AirlockServiceGlassLocked }
-    .desc = { ent-AirlockServiceGlassLocked.desc }
-    .suffix = Сервис, Театр, Закрыто
-
-ent-AirlockChapelStandardGlassLocked = { ent-AirlockServiceGlassLocked }
-    .desc = { ent-AirlockServiceGlassLocked.desc }
-    .suffix = Церковь, Закрыто
 
 ent-AirlockLibrarianLocked = { ent-AirlockServiceLocked }
     .suffix = Библиотекарь, Закрыт
@@ -174,13 +122,13 @@ ent-AirlockGlassCentcommLocked = { ent-AirlockCommandGlass }
     .desc = { ent-AirlockCommandGlass.desc }
     .suffix = ЦК, Закрыто
 
-ent-AirlockCentcommLockedBSO = { ent-AirlockCommand }
+ent-AirlockCentcommLockedSRT = { ent-AirlockCommand }
     .desc = { ent-AirlockCommand.desc }
-    .suffix = ЦК, Закрыто, Оперативник "Синий Щит"
+    .suffix = ЦК, Закрыто, Оперативник ГСН
 
-ent-AirlockGlassCentcommLockedBlueShieldOperative = { ent-AirlockCommandGlass }
+ent-AirlockGlassCentcommLockedSRTOperative = { ent-AirlockCommandGlass }
     .desc = { ent-AirlockCommandGlass.desc }
-    .suffix = ЦК, Закрыто, Оперативник "Синий Щит"
+    .suffix = ЦК, Закрыто, Оперативник ГСН
 
 ent-AirlockCentcommLockedERT = { ent-AirlockCommand }
     .desc = { ent-AirlockCommand.desc }
@@ -206,9 +154,9 @@ ent-AirlockGlassCentcommLockedDeathSquad = { ent-AirlockCommandGlass }
     .desc = { ent-AirlockCommandGlass.desc }
     .suffix = ЦК, Закрыто, Эскадрон Смерти
 
-ent-HighSecCentcommLockedBSO = { ent-HighSecDoor }
+ent-HighSecCentcommLockedSRT = { ent-HighSecDoor }
     .desc = { ent-HighSecDoor.desc }
-    .suffix = ЦК, Закрыто, Оперативник "Синий Щит"
+    .suffix = ЦК, Закрыто, Оперативник ГСН
 
 ent-HighSecCentcommLockedERT = { ent-HighSecDoor }
     .desc = { ent-HighSecDoor.desc }
@@ -281,3 +229,15 @@ ent-AirlockShuttleUsspLocked = { ent-AirlockShuttleUssp }
 ent-AirlockNoPassenger = { ent-AirlockGlass }
     .desc = { ent-AirlockMaint.desc }
     .suffix = Без пассажиров, Закрыто
+
+ent-AirlockNanoTrasenRepresentativeGlassLocked = { ent-AirlockCommandGlass }
+    .desc = { ent-AirlockCommandGlass.desc }
+    .suffix = Представитель НТ, Закрыто
+
+ent-AirlockNanoTrasenRepresentativeLocked = { ent-AirlockCommand }
+    .desc = { ent-AirlockCommand.desc }
+    .suffix = Представитель НТ, Закрыто
+
+ent-AirlockMaintNanoTrasenRepresentativeLocked = { ent-AirlockMaintCommandLocked }
+    .desc = { ent-AirlockMaintCommandLocked.desc }
+    .suffix = Представитель НТ, Закрыто

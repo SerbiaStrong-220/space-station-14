@@ -114,7 +114,7 @@ public sealed class EmergencyShuttleAutoVoteRuleSystem : GameRuleSystem<Emergenc
 
     private void CallUnRecallableEmergencyShuttle()
     {
-        _roundEnd.RequestRoundEnd(null, false, "round-end-system-shuttle-auto-called-announcement");
+        _roundEnd.RequestRoundEnd(null, null, false, "round-end-system-shuttle-auto-called-announcement");
 
         EvacCallTime.Observe(RoundTime.TotalHours);
 

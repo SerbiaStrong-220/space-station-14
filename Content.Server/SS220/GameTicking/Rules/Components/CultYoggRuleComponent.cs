@@ -41,7 +41,7 @@ public sealed partial class CultYoggRuleComponent : Component
     /// Time for the cultists before the whole station finds out about them
     /// </summary>
     [DataField]
-    public TimeSpan BeforeAlertTime = TimeSpan.FromSeconds(60);
+    public TimeSpan BeforeAlertTime = TimeSpan.FromSeconds(30);
 
     /// <summary>
     /// The time when the announcement will be made
@@ -105,6 +105,11 @@ public sealed partial class CultYoggRuleComponent : Component
     {
         Tags = ["CultYoggInnerHandToggleable"]
     };
+
+    /// <summary>
+    ///     Sleep effects that need to be removed.
+    /// </summary>
+    public List<EntProtoId> OnRemoveEffects = ["Muted", "StatusEffectForcedSleeping"];
     #endregion
 
     #region GodSummoning

@@ -29,6 +29,8 @@ public sealed partial class PlacerItemSystem : EntitySystem
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly SharedTransformSystem _xform = default!;
 
+    private static readonly ProtoId<TagPrototype> CatWalkTag = "CatWalk";
+
     public override void Initialize()
     {
         base.Initialize();
@@ -143,7 +145,7 @@ public sealed partial class PlacerItemSystem : EntitySystem
 
         prototype.TryGetComponent<TagComponent>(_factory.GetComponentName<TagComponent>(), out var tagComponent);
         var isWindow = tagComponent?.Tags != null && tagComponent.Tags.Contains("Window");
-        var isCatwalk = tagComponent?.Tags != null && tagComponent.Tags.Contains("Catwalk");
+        var isCatwalk = tagComponent?.Tags != null && tagComponent.Tags.Contains(CatWalkTag);
 
         var intersectingEntities = _lookup.GetLocalEntitiesIntersecting(grid, position, -0.05f, LookupFlags.Uncontained);
 
@@ -152,7 +154,7 @@ public sealed partial class PlacerItemSystem : EntitySystem
             if (isWindow && HasComp<SharedCanBuildWindowOnTopComponent>(ent))
                 continue;
 
-            if (isCatwalk && _tag.HasTag(ent, "Catwalk"))
+            if (isCatwalk && _tag.HasTag(ent, CatWalkTag))
             {
                 return false;
             }

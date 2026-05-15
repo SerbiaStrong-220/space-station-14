@@ -127,3 +127,13 @@
       seedId: meatwheat
     - type: Sprite
       sprite: SS220/Objects/Specific/Hydroponics/meatwheat.rsi
+
+- type: entity
+  parent: SeedBase
+  name: packet of watermelondog seeds
+  id: WatermelonDogSeeds
+  components:
+    - type: Seed
+      seedId: watermelondog
+    - type: Sprite
+      sprite: SS220/Objects/Specific/Hydroponics/watermelondog.rsi

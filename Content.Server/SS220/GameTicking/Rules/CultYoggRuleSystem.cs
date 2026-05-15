@@ -18,6 +18,7 @@ using Content.Server.SS220.CultYogg.Sacrificials;
 using Content.Server.SS220.GameTicking.Rules.Components;
 using Content.Server.Station.Systems;
 using Content.Shared.Audio;
+using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Database;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Humanoid;
@@ -32,6 +33,7 @@ using Content.Shared.SS220.CultYogg.Altar;
 using Content.Shared.SS220.CultYogg.Cultists;
 using Content.Shared.SS220.CultYogg.CultYoggIcons;
 using Content.Shared.SS220.CultYogg.MiGo;
+using Content.Shared.SS220.CultYogg.MiGoTeleport;
 using Content.Shared.SS220.CultYogg.Sacrificials;
 using Content.Shared.SS220.InnerHandToggleable;
 using Content.Shared.SS220.RestrictedItem;
@@ -75,7 +77,9 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly SharedRestrictedItemSystem _sharedRestrictedItemSystem = default!;
     [Dependency] private readonly SharedStuckOnEquipSystem _stuckOnEquip = default!;
-    [Dependency] private readonly SharedMiGoSystem _migo = default!;
+    [Dependency] private readonly MiGoTeleportSystem _migoTeleport = default!;
+    [Dependency] private readonly Shared.StatusEffect.StatusEffectsSystem _statusEffectsOld = default!;
+    [Dependency] private readonly Shared.StatusEffectNew.StatusEffectsSystem _statusEffectsNew = default!;
 
     public TimeSpan DefaultShuttleArriving { get; set; } = TimeSpan.FromSeconds(85);
 
@@ -124,7 +128,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
             SetSacrificeTarget(sacrificial.Value);
             return true;
         }
-        _chatManager.SendAdminAlert(Loc.GetString("CultYogg failed to pick any non cultist alive sacrificial on station, Game rule needs a manual admin picking"));
+        _chatManager.SendAdminAlert("CultYogg failed to pick any non cultist alive sacrificial on station, Game rule needs a manual admin picking");
         return false;
     }
 
@@ -194,7 +198,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
             return allHumans;
 
         // HumanoidAppearanceComponent is used to prevent mice, pAIs, etc from being chosen
-        var query = EntityQueryEnumerator<MindContainerComponent, MobStateComponent, HumanoidAppearanceComponent>();
+        var query = EntityQueryEnumerator<MindContainerComponent, MobStateComponent, HumanoidProfileComponent>();
         while (query.MoveNext(out var uid, out var mc, out var mobState, out _))
         {
             // the player needs to have a mind and not be the excluded one
@@ -333,6 +337,15 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
         EnsureComp<ShowCultYoggIconsComponent>(uid);//icons of cultists and sacrificials
         EnsureComp<ZombieImmuneComponent>(uid);//they are practically mushrooms
+
+        RemComp<PacifiedComponent>(uid);//ok lets try this
+
+        //Removing "common enslaving effects"
+        foreach (var effect in rule.Comp.OnRemoveEffects)
+        {
+            _statusEffectsOld.TryRemoveStatusEffect(uid, effect);//because some effects are in the old format
+            _statusEffectsNew.TryRemoveStatusEffect(uid, effect);
+        }
 
         var cultifiedEv = new GotCultifiedEvent();
         RaiseLocalEvent(uid, ref cultifiedEv);
@@ -549,7 +562,7 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
             stageDef.CultistsAmountRequired = count + (int)stage;
 
-            int percentAmount = (int)(rule.Comp.InitialCrewCount * stageDef.CultistsToCrewFraction);
+            int percentAmount = (int)(stageDef.CultistsToCrewFraction.Value * rule.Comp.InitialCrewCount);
 
             if (percentAmount <= stageDef.CultistsAmountRequired)
                 continue;
@@ -579,12 +592,6 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
         _adminLogger.Add(LogType.RoundFlow, LogImpact.High, $"Cult Yogg progressed to {stage}");
         _chatManager.SendAdminAlert(Loc.GetString("cult-yogg-stage-admin-alert", ("stage", stage)));
 
-        if (!TryGetNextStage(rule, out _, out var nextStageDefinition))
-            return;
-
-        //Adding Stage sacrificials for progressing for a next stage
-        TryInitializeNextStageSacrificials(rule, nextStageDefinition);
-
         //doing stage non-entity-related things
         DoStageEffects(rule, stage);
 
@@ -593,6 +600,11 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
         UpdateStageOnEnts<CultYoggComponent>(ref changeStageEvent, stageDefinition);
         UpdateStageOnEnts<MiGoComponent>(ref changeStageEvent, stageDefinition);
+
+        if (TryGetNextStage(rule, out _, out var nextStageDefinition))//No next stage = no new sacrificials
+        {
+            TryInitializeNextStageSacrificials(rule, nextStageDefinition);
+        }
     }
 
     private void UpdateStageOnEnts<T>(ref ChangeCultYoggStageEvent stageEvent, CultYoggStageDefinition stageDef) where T : IComponent
@@ -772,11 +784,11 @@ public sealed class CultYoggRuleSystem : GameRuleSystem<CultYoggRuleComponent>
 
     public void UpdateMiGoTeleportList()//i made this cause idk any other ways to properly trigger this like PrototypesReloadedEventArgs
     {
-        var queryMiGo = EntityQueryEnumerator<MiGoComponent>();
+        var queryMiGo = EntityQueryEnumerator<MiGoTeleportComponent>();
 
         while (queryMiGo.MoveNext(out var ent, out _))
         {
-            _migo.UpdateTeleportTargets(ent);
+            _migoTeleport.UpdateTeleportTargets(ent);
         }
     }
 

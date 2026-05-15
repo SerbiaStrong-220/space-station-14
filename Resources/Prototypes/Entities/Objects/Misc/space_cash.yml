@@ -52,6 +52,11 @@
         mask:
         - ItemMask
   - type: Appearance
+  # SS220-spesos_in_envelope start
+  - type: Tag
+    tags:
+    - EnvelopeWhitelist
+  # SS220-spesos_in_envelope ended
 
 - type: material
   id: Credit

@@ -267,6 +267,7 @@
   recipeUnlocks:
   - GrenadeEMP
   - PowerCageHigh
+  - ShuttleGunMLGSWCircuitboard #SS220-MLGSW-gun-research
 #  - ShuttleGunDusterCircuitboard #SS220-Duster-Resprite
   technologyPrerequisites:
   - BasicShuttleArmament

@@ -1,3 +1,12 @@
+firemode-name-kill = режим для убийства
+firemode-name-destroy = режим для УНИЧТОЖЕНИЯ
+firemode-name-heal = режим для лечения
+firemode-name-laser-alt = Лазер
+firemode-name-disabler-alt = Оглушение
+firemode-name-blaster = Бластер
+firemode-name-blaster-piercing-window = Пролетающий окна бластер
+firemode-name-enhanced = Сконцентрированный
+
 ent-WeaponPulseRifle2 = пульсовая винтовка
     .suffix = Винтовка, Эскадрон Смерти, dq
     .desc = Энергетическая винтовка тяжелого типа, способна аннигилировать любые структуры.
@@ -5,39 +14,29 @@ ent-WeaponPulseShotgun = пульсовый дробовик
     .suffix = Дробовик, Эскадрон Смерти, dq
     .desc = Энергетическая дробовик с новейшей технологией лечения.
 
-firemode-name-kill = режия для убийства
-firemode-name-destroy = режим для УНИЧТОЖЕНИЯ
-firemode-name-heal = режим для лечения
 
-
-ent-WeaponBlasterKRS = krs
-    .desc = Старая, но надежная бластерная винтовка. Оснащена только полуавтоматическим режимом стрельбы.
-    .suffix = Бластер
-
-ent-WeaponBlasterKRV = krv
+ent-WeaponBlasterKRS = бластерная винтовка КРС
+    .desc = Старая, но надежная бластерная винтовка.
+ent-WeaponBlasterKRV = бластерная винтовка КРВ
     .desc = Усовершенствованная бластерная винтовка. Используется особенными оперативниками.
-    .suffix = Бластер
 
-ent-BlasterPowerCellAlt = бластерная энергоячейка
+ent-PowerCellBlaster = энергоячейка бластерной винтовки
     .desc = Вмещает в себе гораздо больше боли, чем вы когда-либо мечтали.
-ent-BlasterPowerCellAltPrinted = бластерная энергоячейка
-    .desc = Вмещает в себе гораздо больше боли, чем вы когда-либо мечтали.
-    .suffix = Пустой
+ent-PowerCellBlasterPrinted = { ent-PowerCellBlaster }
+    .desc = { ent-PowerCellBlaster.desc }
+    .suffix = Разряженный, Напечатанный
+ent-PowerCellBlasterHighCapacity = высокоёмкая энергоячейка бластерной винтовки
+    .desc = { ent-PowerCellBlaster.desc }
 
-ent-BlasterPowerCellDisabler = бластерная энергоячейка (disabler)
-    .desc = Вмещает в себе гораздо больше боли, чем вы когда-либо мечтали.
-
-ent-BlasterPowerCellPulse = усовершенствованная бластерная энергоячейка
-    .desc = Вмещает в себе гораздо больше боли, чем вы когда-либо мечтали.
-
-firemode-name-laser-alt = Лазер
-firemode-name-disabler-alt = Оглушение
-firemode-name-blaster = Бластер
 
 ent-WeaponSynergisticEnergyGun = синергетический пистолет
     .desc = Инновационное оружие, объединяющее в себе передовые технологии и уникальный дизайн. Обладает двумя режимами стрельбы: стандартным и сконцентрированный.
 
-firemode-name-enhanced = Сконцентрированный
+ent-WeaponEnergyGunRevolver = лазерный револьвер
+    .desc = Стандартный лазерный револьвер производства NanoTrasen. Редко используется из-за сильно ограниченного боезапаса и поставляется, как правило, в какие-то глуши.
+ent-WeaponEnergyGunRevolverSelfRecharger = { ent-WeaponEnergyGunRevolver }
+    .desc = Стандартный лазерный револьвер производства NanoTrasen. Модифицирован модулем самозарядки.
+
 
 ent-LaserCarabinePowerCell = энергоячейка карабина
     .desc = Вмещает в себе гораздо больше боли, чем вы когда-либо мечтали.
@@ -48,7 +47,7 @@ ent-LaserSMGPowerCell = энергоячейка пистолета-пулемё
 ent-WeaponLaserSMG = лазерный пистолет-пулемёт ИК 40
     .suffix = Пистолет-пулемёт
     .desc = Слабый лазерный пистолет-пулемёт, прототип оружия ОБР, в большей степени полагающийся на аккумуляторные патроны, а не на встроенный элемент питания. Используется службой безопасности NanoTrasen.
-    
+
 ent-WeaponLaserCarabine = лазерный карабин ИК 60
     .suffix = Автомат
     .desc = Мощный лазерный карабин, похожий на винтовку, в большей степени полагающийся на аккумуляторные патроны, а не на встроенный элемент питания. Используется отрядами корпоративной безопасности NanoTrasen в боевых действиях.

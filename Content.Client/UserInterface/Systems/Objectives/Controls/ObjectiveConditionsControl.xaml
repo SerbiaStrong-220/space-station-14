@@ -5,8 +5,12 @@
     Orientation="Horizontal">
     <cc:ProgressTextureRect Name="ProgressTexture" VerticalAlignment="Top" Access="Public" Margin="0 8 0 0"/>
     <Control MinSize="10 0"/>
-    <BoxContainer Orientation="Vertical">
-        <RichTextLabel Name="Title" Access="Public" SetWidth="325" HorizontalAlignment="Left"/>
-        <RichTextLabel Name="Description" Access="Public" SetWidth="325" HorizontalAlignment="Left"/>
+    <!-- SS220 ADD CUSTOM GOALS x2 START -->
+    <BoxContainer Orientation="Horizontal" Name="ObjectiveContainer" HorizontalExpand="True" Access="Public">
+        <BoxContainer Orientation="Vertical">
+            <RichTextLabel Name="Title" Access="Public" SetWidth="325" HorizontalAlignment="Left"/>
+            <RichTextLabel Name="Description" Access="Public" SetWidth="325" HorizontalAlignment="Left"/>
+        </BoxContainer>
+    <!-- SS220 ADD CUSTOM GOALS x2 END -->
     </BoxContainer>
 </controls:ObjectiveConditionsControl>

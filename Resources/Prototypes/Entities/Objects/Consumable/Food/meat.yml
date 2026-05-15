@@ -42,6 +42,7 @@
   - type: AtmosExposed
   - type: Temperature
     currentTemperature: 290
+  - type: TemperatureDamage
   # required for cooking to work
   - type: InternalTemperature
     thickness: 0.19 #SS220-grill-update-2 (0.02 -> 0.19)
@@ -70,16 +71,6 @@
     entity: FoodMeatRotten
     # once it would say bloated, turn into the rotten prototype
     stage: 1
-
-# bruh
-- type: Tag
-  id: Raw
-
-- type: Tag
-  id: Cooked
-
-- type: Tag
-  id: Cutlet
 
 # Raw
 
@@ -626,40 +617,6 @@
     cookingResult: FoodMeatSpiderSteak
   #SS220-grill-update-2 end
 
-#SS220-grill-update-2 begin
-- type: entity
-  name: spider steak
-  parent: FoodMeatBase
-  id: FoodMeatSpiderSteak
-  description: A cooked spider. Smells primal.
-  components:
-  - type: Tag
-    tags:
-    - Cooked
-    - Meat
-    - Steak
-  - type: Sprite
-    sprite: SS220/Objects/Consumable/Food/meat.rsi
-    state: spider-grilled
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 10
-        - ReagentId: Protein
-          Quantity: 5
-  - type: SliceableFood
-    count: 3
-    slice: FoodMeatSpiderCutletCooked
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: spider-inhand-left-grilled
-      right:
-      - state: spider-inhand-right-grilled
-#SS220-grill-update-2 end
-
 - type: entity
   parent: FoodMeatBase
   id: FoodMeatSpiderLeg
@@ -758,38 +715,6 @@
     conductivity: 0.42
   #SS220-grill-update-2 end
 
-#SS220-grill-update-2 begin
-- type: entity
-  name: snake steak
-  parent: FoodMeatBase
-  id: FoodMeatSnakeSteak
-  components:
-  - type: Tag
-    tags:
-    - Cooked
-    - Meat
-    - Steak
-  - type: Sprite
-    sprite: SS220/Objects/Consumable/Food/meat.rsi
-    state: snake-grilled
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 4
-        - ReagentId: Protein
-          Quantity: 8
-        - ReagentId: Toxin
-          Quantity: 1
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: snake-inhand-left-grilled
-      right:
-      - state: snake-inhand-right-grilled
-#SS220-grill-update-2 end
-
 - type: entity
   # not raw since acid kills bacteria or something, same as xeno
   parent: FoodMeatBase
@@ -882,7 +807,6 @@
       right:
       - state: tomato-inhand-right
 
-# SS220-Salami-update begin
 - type: entity
   parent: FoodMeatBase
   id: FoodMeatSalami
@@ -893,11 +817,12 @@
     storedOffset: 0,1
   - type: Tag
     tags:
-    - Cooked
+    - Cooked #ss220 salami normal update
     - Meat
   - type: Sprite
     sprite: Objects/Consumable/Food/salami.rsi
     state: salami
+  #ss220 salami normal update start
   - type: SolutionContainerManager
     solutions:
       food:
@@ -909,14 +834,15 @@
           Quantity: 4
         - ReagentId: Protein
           Quantity: 16
+  #ss220 salami normal update end
   - type: SliceableFood
-    count: 25
+    count: 25 #ss220 salami normal update
     slice: FoodMeatSalamiSlice
   - type: MeleeWeapon
     wideAnimationRotation: 100
     damage:
       types:
-        Blunt: 12
+        Blunt: 12 #ss220 salami normal update
   - type: Wieldable
   - type: IncreaseDamageOnWield
     damage:
@@ -1810,16 +1736,6 @@
 
 # Raw
 
-#SS220-grill-update-2 begin
-- type: entity
-  parent: FoodMeatBase
-  id: FoodCutletBase
-  abstract: true
-  components:
-  - type: InternalTemperature
-    thickness: 0.06
-#SS220-grill-update-2 end
-
 - type: entity
   parent: FoodCutletBase #SS220-grill-update-2
   id: FoodMeatCutlet
@@ -1841,10 +1757,15 @@
           Quantity: 3
         - ReagentId: Fat
           Quantity: 2
-  - type: Construction
-    graph: Cutlet
-    node: start
-    defaultTarget: cutlet
+  #SS220-grilling-cutlets-tweaks begin
+#  - type: Construction
+#    graph: Cutlet
+#    node: start
+#    defaultTarget: cutlet
+  - type: Grillable
+    timeToCook: 10
+    cookingResult: FoodMeatCutletCooked
+  #SS220-grilling-cutlets-tweaks end
   - type: Item
     size: Tiny
     shape:
@@ -1879,10 +1800,15 @@
           Quantity: 3
         - ReagentId: Fat
           Quantity: 2
-  - type: Construction
-    graph: BearCutlet
-    node: start
-    defaultTarget: bear cutlet
+  #SS220-grilling-cutlets-tweaks begin
+#  - type: Construction
+#    graph: BearCutlet
+#    node: start
+#    defaultTarget: bear cutlet
+  - type: Grillable
+    timeToCook: 10
+    cookingResult: FoodMeatBearCutletCooked
+  #SS220-grilling-cutlets-tweaks end
   - type: Item
     size: Tiny
     shape:
@@ -1917,10 +1843,15 @@
           Quantity: 3
         - ReagentId: Fat
           Quantity: 2
-  - type: Construction
-    graph: PenguinCutlet
-    node: start
-    defaultTarget: penguin cutlet
+  #SS220-grilling-cutlets-tweaks begin
+#  - type: Construction
+#    graph: PenguinCutlet
+#    node: start
+#    defaultTarget: penguin cutlet
+  - type: Grillable
+    timeToCook: 10
+    cookingResult: FoodMeatPenguinCutletCooked
+  #SS220-grilling-cutlets-tweaks end
   - type: Item
     size: Tiny
     shape:
@@ -1955,10 +1886,15 @@
           Quantity: 3
         - ReagentId: Fat
           Quantity: 2
-  - type: Construction
-    graph: ChickenCutlet
-    node: start
-    defaultTarget: chicken cutlet
+  #SS220-grilling-cutlets-tweaks begin
+#  - type: Construction
+#    graph: ChickenCutlet
+#    node: start
+#    defaultTarget: chicken cutlet
+  - type: Grillable
+    timeToCook: 10
+    cookingResult: FoodMeatChickenCutletCooked
+  #SS220-grilling-cutlets-tweaks end
   - type: Item
     size: Tiny
     shape:
@@ -1991,10 +1927,15 @@
           Quantity: 3
         - ReagentId: Fat
           Quantity: 2
-  - type: Construction
-    graph: DuckCutlet
-    node: start
-    defaultTarget: duck cutlet
+  #SS220-grilling-cutlets-tweaks begin
+#  - type: Construction
+#    graph: DuckCutlet
+#    node: start
+#    defaultTarget: duck cutlet
+  - type: Grillable
+    timeToCook: 10
+    cookingResult: FoodMeatDuckCutletCooked
+  #SS220-grilling-cutlets-tweaks end
   - type: Item
     size: Tiny
     shape:
@@ -2030,10 +1971,15 @@
           Quantity: 3
         - ReagentId: Fat
           Quantity: 2
-  - type: Construction
-    graph: LizardCutlet
-    node: start
-    defaultTarget: lizard cutlet
+  #SS220-grilling-cutlets-tweaks begin
+#  - type: Construction
+#    graph: LizardCutlet
+#    node: start
+#    defaultTarget: lizard cutlet
+  - type: Grillable
+    timeToCook: 10
+    cookingResult: FoodMeatLizardCutletCooked
+  #SS220-grilling-cutlets-tweaks end
   - type: Item
     size: Tiny
     shape:
@@ -2067,10 +2013,15 @@
           Quantity: 3
         - ReagentId: Fat
           Quantity: 2
-  - type: Construction
-    graph: SpiderCutlet
-    node: start
-    defaultTarget: spider cutlet
+  #SS220-grilling-cutlets-tweaks begin
+#  - type: Construction
+#    graph: SpiderCutlet
+#    node: start
+#    defaultTarget: spider cutlet
+  - type: Grillable
+    timeToCook: 10
+    cookingResult: FoodMeatSpiderCutletCooked
+  #SS220-grilling-cutlets-tweaks end
   - type: Item
     size: Tiny
     shape:
@@ -2106,10 +2057,15 @@
         reagents:
         - ReagentId: SulfuricAcid
           Quantity: 20
-  - type: Construction
-    graph: XenoCutlet
-    node: start
-    defaultTarget: xeno cutlet
+  #SS220-grilling-cutlets-tweaks begin
+#  - type: Construction
+#    graph: XenoCutlet
+#    node: start
+#    defaultTarget: xeno cutlet
+  - type: Grillable
+    timeToCook: 10
+    cookingResult: FoodMeatXenoCutletCooked
+  #SS220-grilling-cutlets-tweaks end
   - type: Item
     size: Tiny
     shape:
@@ -2192,10 +2148,15 @@
         reagents:
         - ReagentId: Ichor
           Quantity: 3
-  - type: Construction
-    graph: DragonCutlet
-    node: start
-    defaultTarget: dragon cutlet
+  #SS220-grilling-cutlets-tweaks begin
+#  - type: Construction
+#    graph: DragonCutlet
+#    node: start
+#    defaultTarget: dragon cutlet
+  - type: Grillable
+    timeToCook: 10
+    cookingResult: FoodMeatDragonCutletCooked
+  #SS220-grilling-cutlets-tweaks end
   - type: Item
     size: Tiny
     shape:

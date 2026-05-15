@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Form>
+  <FormId>sec_den</FormId>
+  <PrototypeId>PaperNtFormSec</PrototypeId>
+  <EntityName>форма НТ-СБ-ОТК</EntityName>
+  <PhotocopierTitle>Отказ в удовлетворении ходатайства</PhotocopierTitle>
+  <Content><![CDATA[[bold]Форма НТ-СБ-ОТК[/bold]
+[head=2]Отказ в удовлетворении ходатайства[/head]
+
+Я, (ПОЛНОЕ ИМЯ), в (ДОЛЖНОСТИ) отказываю заявителю (ПОЛНОЕ ИМЯ) в удовлетворении ходатайства по следующим причинам:
+
+
+При следующих обстоятельствах:
+
+
+[italic]Место для печатей[/italic]]]></Content>
+</Form>

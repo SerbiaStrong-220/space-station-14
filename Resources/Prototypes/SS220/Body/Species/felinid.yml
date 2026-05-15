@@ -1,0 +1,240 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: markingsGroup
+  parent: Undergarments
+  id: Felinid
+  onlyGroupWhitelisted: true
+  limits:
+    enum.HumanoidVisualLayers.Hair:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.FacialHair:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.Tail:
+      limit: 1
+      required: true
+      default: [ FelinidTails ]
+    enum.HumanoidVisualLayers.HeadTop:
+      limit: 1
+      required: true
+      default: [ FelinidEars ]
+    enum.HumanoidVisualLayers.Chest:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LArm:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RArm:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LLeg:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RLeg:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LFoot:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RFoot:
+      limit: 1
+      required: false
+
+- type: entity
+  name: felinid appearance
+  parent: BaseSpeciesAppearance
+  id: AppearanceFelinid
+  components:
+  - type: Inventory
+    speciesId: Felinid
+  - type: InitialBody
+    organs:
+      Torso: OrganFelinidTorso
+      Head: OrganFelinidHead
+      ArmLeft: OrganFelinidArmLeft
+      ArmRight: OrganFelinidArmRight
+      HandRight: OrganFelinidHandRight
+      HandLeft: OrganFelinidHandLeft
+      LegLeft: OrganFelinidLegLeft
+      LegRight: OrganFelinidLegRight
+      FootLeft: OrganFelinidFootLeft
+      FootRight: OrganFelinidFootRight
+      Brain: OrganFelinidBrain
+      Eyes: OrganFelinidEyes
+      Tongue: OrganFelinidTongue
+      Appendix: OrganFelinidAppendix
+      Ears: OrganFelinidEars
+      Lungs: OrganFelinidLungs
+      Heart: OrganAnimalHeart
+      Stomach: OrganFelinidStomach
+      Liver: OrganAnimalLiver
+      Kidneys: OrganFelinidKidneys
+  - type: HumanoidProfile
+    species: Felinid
+  - type: ScaleVisuals
+    scale: 0.85, 0.85
+
+- type: entity
+  name: Urist McFelinid
+  parent:
+  - AppearanceFelinid
+  - BaseSpeciesMobOrganic
+  id: MobFelinid
+  components:
+  - type: InteractionPopup
+    successChance: 1
+    interactSuccessString: hugging-success-generic
+    interactSuccessSound: /Audio/Effects/thudswoosh.ogg
+    messagePerceivedByOthers: hugging-success-generic-others
+  - type: OwOAccent
+  - type: Vocal
+    wilhelm: "/Audio/Voice/Felinid/cat_wilhelm.ogg"
+    sounds:
+      Male: MaleFelinid
+      Female: FemaleFelinid
+      Unsexed: MaleFelinid
+  - type: CombatMode # remove disarm ability
+
+- type: entity
+  parent: OrganBase
+  id: OrganFelinid
+  abstract: true
+  suffix: Felinid
+
+- type: entity
+  id: OrganFelinidMetabolizer
+  abstract: true
+  components:
+  - type: Metabolizer
+    maxReagents: 3
+    metabolizerTypes: [ Animal ]
+    groups:
+    - id: Food
+    - id: Drink
+    - id: Omnivorous
+
+- type: entity
+  parent: OrganFelinid
+  id: OrganFelinidInternal
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: Mobs/Species/Human/organs.rsi
+
+- type: entity
+  parent: OrganFelinid
+  id: OrganFelinidExternal
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: Mobs/Species/Human/parts.rsi
+  - type: VisualOrgan
+    data:
+      sprite: Mobs/Species/Human/parts.rsi
+  - type: VisualOrganMarkings
+    markingData:
+      group: Felinid
+
+- type: entity
+  parent: [ OrganBaseTorsoSexed, OrganBaseTorso, OrganFelinidExternal ]
+  id: OrganFelinidTorso
+
+- type: entity
+  parent: [ OrganBaseHeadSexed, OrganBaseHead, OrganFelinidExternal ]
+  id: OrganFelinidHead
+  components:
+  - type: VisualOrganMarkings
+    hideableLayers:
+    - enum.HumanoidVisualLayers.HeadTop
+    - enum.HumanoidVisualLayers.Snout
+    - enum.HumanoidVisualLayers.HeadSide
+    - enum.HumanoidVisualLayers.Tail
+
+- type: entity
+  parent: [ OrganBaseArmLeft, OrganFelinidExternal ]
+  id: OrganFelinidArmLeft
+
+- type: entity
+  parent: [ OrganBaseArmRight, OrganFelinidExternal ]
+  id: OrganFelinidArmRight
+
+- type: entity
+  parent: [ OrganBaseHandLeft, OrganFelinidExternal ]
+  id: OrganFelinidHandLeft
+
+- type: entity
+  parent: [ OrganBaseHandRight, OrganFelinidExternal ]
+  id: OrganFelinidHandRight
+
+- type: entity
+  parent: [ OrganBaseLegLeft, OrganFelinidExternal ]
+  id: OrganFelinidLegLeft
+
+- type: entity
+  parent: [ OrganBaseLegRight, OrganFelinidExternal ]
+  id: OrganFelinidLegRight
+
+- type: entity
+  parent: [ OrganBaseFootLeft, OrganFelinidExternal ]
+  id: OrganFelinidFootLeft
+
+- type: entity
+  parent: [ OrganBaseFootRight, OrganFelinidExternal ]
+  id: OrganFelinidFootRight
+
+- type: entity
+  parent: [ OrganBaseBrain, OrganSpriteHumanInternal, OrganFelinidInternal ]
+  id: OrganFelinidBrain
+
+- type: entity
+  parent: [ OrganBaseEyes, OrganFelinidInternal, OrganFelinidExternal ]
+  id: OrganFelinidEyes
+  components:
+  - type: VisualOrgan
+    data:
+      sprite: Mobs/Customization/eyes.rsi
+
+- type: entity
+  parent: [ OrganBaseTongue, OrganFelinidInternal ]
+  id: OrganFelinidTongue
+
+- type: entity
+  parent: [ OrganBaseAppendix, OrganSpriteHumanInternal, OrganFelinidInternal ]
+  id: OrganFelinidAppendix
+
+- type: entity
+  parent: [ OrganBaseEars, OrganSpriteHumanInternal, OrganFelinidInternal ]
+  id: OrganFelinidEars
+
+- type: entity
+  parent: [ OrganBaseLungs, OrganFelinidInternal, OrganFelinidMetabolizer ]
+  id: OrganFelinidLungs
+
+- type: entity
+  parent: [ OrganBaseHeart, OrganFelinidInternal, OrganFelinidMetabolizer ]
+  id: OrganFelinidHeart
+
+- type: entity
+  parent: [ OrganBaseStomach, OrganFelinidInternal, OrganFelinidMetabolizer ]
+  id: OrganFelinidStomach
+  components:
+  - type: Stomach
+    specialDigestible:
+      tags:
+      - Fruit
+      - ReptilianFood
+      - Meat
+      - Pill
+      - Crayon
+      - Paper
+      - Bread
+      - Omnivorous #SS220 CultYoggs
+
+- type: entity
+  parent: [ OrganBaseLiver, OrganSpriteHumanInternal, OrganFelinidInternal, OrganFelinidMetabolizer ]
+  id: OrganFelinidLiver
+
+- type: entity
+  parent: [ OrganBaseKidneys, OrganSpriteHumanInternal, OrganFelinidInternal, OrganFelinidMetabolizer ]
+  id: OrganFelinidKidneys

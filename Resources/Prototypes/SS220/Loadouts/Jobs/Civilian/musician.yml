@@ -27,6 +27,20 @@
     proto: SeniorDevTeamTier
   - !type:GroupLoadoutEffect
     proto: AdministratorSponsorTier
+
+- type: loadoutEffectGroup
+  id: MusicianEveningDress
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobMusician
+      time: 18000 #5 часов
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
 # Head
 
 - type: loadout
@@ -47,6 +61,14 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitBard
 
+- type: loadout
+  id: EveningDress
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MusicianEveningDress
+  equipment:
+    jumpsuit: ClothingUniformEveningDressMusician
+  
 # Outer clothing
 
 - type: loadout

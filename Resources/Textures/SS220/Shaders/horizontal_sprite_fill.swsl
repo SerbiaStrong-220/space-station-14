@@ -1,0 +1,13 @@
+uniform highp float Fillness;
+uniform highp float Start;
+uniform highp float End;
+
+void fragment() {
+    highp vec4 color = zTexture(UV);
+
+    highp float cutoff = mix(Start, End, Fillness);
+
+    color.a *= step(UV.x, cutoff);
+
+    COLOR = color;
+}

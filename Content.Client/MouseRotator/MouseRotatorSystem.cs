@@ -28,6 +28,11 @@ public sealed class MouseRotatorSystem : SharedMouseRotatorSystem
         if (player == null || !TryComp<MouseRotatorComponent>(player, out var rotator))
             return;
 
+        // SS220-Grabs-Start
+        if (!rotator.Enabled)
+            return;
+        // SS220-Grabs-End
+
         var xform = Transform(player.Value);
 
         // Get mouse loc and convert to angle based on player location

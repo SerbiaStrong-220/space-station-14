@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "sprited by Dinazewwr (discord) for SS220",
+  "copyright": "sprited by Dinazewwr (discord) for SS220, Mullet sprited by koreusky_samovar (discord) for SS220",
   "size": {
     "x": 32,
     "y": 32
@@ -25,6 +25,10 @@
     },
     {
       "name": "shortwavy",
+      "directions": 4
+    },
+    {
+      "name": "mullet",
       "directions": 4
     },
     {

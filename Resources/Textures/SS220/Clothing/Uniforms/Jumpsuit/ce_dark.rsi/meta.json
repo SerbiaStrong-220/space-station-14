@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/c838ba21dae97db345e0113f99596decd1d66039. In hand sprite scaled down by potato1234_x, monkey made by SonicHDC (github) for ss14",
+  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/c838ba21dae97db345e0113f99596decd1d66039. In hand sprite scaled down by potato1234_x, monkey made by SonicHDC (github) for ss14, tie-equipped-INNERCLOTHING and icon_tie by dinazewwr for SS220",
   "size": {
     "x": 32,
     "y": 32
@@ -14,7 +14,14 @@
       "name": "s"
     },
     {
+      "name": "icon_tie"
+    },
+    {
       "name": "equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "tie-equipped-INNERCLOTHING",
       "directions": 4
     },
     {

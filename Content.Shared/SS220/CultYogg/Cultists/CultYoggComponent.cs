@@ -73,7 +73,7 @@ public sealed partial class CultYoggComponent : Component
     /// Entity the cultist will ascend into
     /// </summary>
     [ViewVariables]
-    public string AscendedEntity = "MiGo";
+    public EntProtoId AscendedEntity = "MobMiGo";
 
     [ViewVariables]
     public float AmountAscensionReagentAscend = 6f; // This is equal to 3 shrooms
@@ -87,7 +87,7 @@ public sealed partial class CultYoggComponent : Component
     public Color? PreviousEyeColor;
 
     [ViewVariables]
-    public Marking? PreviousTail;
+    public List<Marking>? PreviousTailMarkings;
 
     [ViewVariables, AutoNetworkedField]
     public CultYoggStage CurrentStage = CultYoggStage.Initial;

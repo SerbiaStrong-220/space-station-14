@@ -24,7 +24,7 @@ public abstract partial class SharedSubdermalImplantSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly TagSystem _tag = default!; // SS220-some-tag...
 
-    private readonly ProtoId<TagPrototype> ThermalImplantTag = "ThermalImplant";
+    private static readonly ProtoId<TagPrototype> ThermalImplantTag = "ThermalImplant";
 
     public override void Initialize()
     {
@@ -198,7 +198,14 @@ public abstract partial class SharedSubdermalImplantSystem : EntitySystem
 [ByRefEvent]
 public readonly record struct ImplantImplantedEvent
 {
+    /// <summary>
+    /// The implant itself
+    /// </summary>
     public readonly EntityUid Implant;
+
+    /// <summary>
+    /// The entity getting implanted
+    /// </summary>
     public readonly EntityUid Implanted;
 
     public ImplantImplantedEvent(EntityUid implant, EntityUid implanted)
