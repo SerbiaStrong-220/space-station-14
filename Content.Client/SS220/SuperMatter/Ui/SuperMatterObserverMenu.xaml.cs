@@ -20,8 +20,8 @@ public sealed partial class SuperMatterObserverMenu : FancyWindow
 {
     [Dependency] private readonly ILocalizationManager _localization = default!;
 
-    public event Action<BaseButton.ButtonEventArgs, SuperMatterObserverComponent>? OnServerButtonPressed;
-    public event Action<BaseButton.ButtonEventArgs, int>? OnCrystalButtonPressed;
+    public event Action<BaseButton.ButtonEventArgs?, SuperMatterObserverComponent>? OnServerButtonPressed;
+    public event Action<BaseButton.ButtonEventArgs?, int>? OnCrystalButtonPressed;
 
     public SuperMatterObserverComponent? Observer;
     public int? CrystalKey;
@@ -36,7 +36,7 @@ public sealed partial class SuperMatterObserverMenu : FancyWindow
 
         PlotValueOverTime.SetLabels(_localization.GetString("smObserver-plotXLabel-integrity"), _localization.GetString("smObserver-plotYLabel-integrity"), _localization.GetString("smObserver-plotTitle-integrity"));
 
-        ColorState.EvalFunctionOnMeshgrid(GetIntegrityDamageMap);
+        ColorState.EvalFunctionOnMeshgrid(SuperMatterFunctions.GetIntegrityDamageMap);
         ColorState.SetLabels(_localization.GetString("smObserver-plotXLabel-colorState"), _localization.GetString("smObserver-plotYLabel-colorState"), _localization.GetString("smObserver-plotTitle-colorState"));
         InitGasRatioBars();
     }
@@ -62,6 +62,12 @@ public sealed partial class SuperMatterObserverMenu : FancyWindow
             };
             ServerNavigationBar.AddChild(serverButton);
         }
+
+        if (ServerNavigationBar.ChildCount != 1 || ServerNavigationBar.Children[0] is not ServerButton { } onlyServerButton || onlyServerButton.ObserverComponent == null)
+            return;
+
+        onlyServerButton.Pressed = true;
+        OnServerButtonPressed?.Invoke(null, onlyServerButton.ObserverComponent);
     }
 
     public void LoadCrystal()
@@ -69,6 +75,7 @@ public sealed partial class SuperMatterObserverMenu : FancyWindow
         CrystalNavigationBar.RemoveAllChildren();
         if (Observer == null)
             return;
+
         foreach (var (crystalKey, name) in Observer.Names)
         {
             var crystalButton = new CrystalButton
@@ -85,8 +92,15 @@ public sealed partial class SuperMatterObserverMenu : FancyWindow
             {
                 OnCrystalButtonPressed?.Invoke(args, crystalButton.CrystalKey);
             };
+
             CrystalNavigationBar.AddChild(crystalButton);
         }
+
+        if (CrystalNavigationBar.ChildCount != 1 || CrystalNavigationBar.Children[0] is not CrystalButton { } onlyCrystalButton)
+            return;
+
+        onlyCrystalButton.Pressed = true;
+        OnCrystalButtonPressed?.Invoke(null, onlyCrystalButton.CrystalKey);
     }
 
     public void LoadCachedData()
@@ -106,12 +120,12 @@ public sealed partial class SuperMatterObserverMenu : FancyWindow
 
     public void UpdateState(SuperMatterObserverUpdateState msg)
     {
-        if (Observer == null
-            || CrystalKey == null)
+        if (Observer == null || CrystalKey == null)
         {
             SetMessageDataToTextInfo();
             return;
         }
+
         if (msg.Id != CrystalKey)
             return;
 
@@ -144,13 +158,6 @@ public sealed partial class SuperMatterObserverMenu : FancyWindow
         InternalEnergyLabel.SetMessage(_localization.GetString("smObserver-internalEnergy", ("value", noneString)));
         DelamStatus.SetMessage(_localization.GetString("smObserver-delamStatus", ("status", noneString)));
         MolesAmount.SetMessage(_localization.GetString("smObserver-molesAmount", ("value", noneString)));
-    }
-
-    private float GetIntegrityDamageMap(float matter, float internalEnergy)
-    {
-        return SuperMatterFunctions.EnergyToMatterDamageFactorFunction(internalEnergy
-                - SuperMatterFunctions.SafeInternalEnergyToMatterFunction(matter / SuperMatterFunctions.MatterNondimensionalization),
-            matter / SuperMatterFunctions.MatterNondimensionalization);
     }
 
     private void InitGasRatioBars()
