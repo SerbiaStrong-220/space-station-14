@@ -10,7 +10,6 @@ namespace Content.Shared.SS220.AltBlocking;
 /// </summary>
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState]
-
 public sealed partial class AltBlockingComponent : Component
 {
     /// <summary>
@@ -18,12 +17,6 @@ public sealed partial class AltBlockingComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntityUid? User;
-
-    /// <summary>
-    /// Is it currently blocking?
-    /// </summary>
-    [DataField]
-    public bool IsBlocking;
 
     /// <summary>
     /// The sound to be played when you get hit while actively blocking

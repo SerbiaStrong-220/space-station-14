@@ -14,10 +14,10 @@ public sealed partial class AltBlockingUserComponent : Component
     /// The entities that's being used to block and are shields
     /// </summary>
     [DataField("blockingItemsShields")]
-    public List<EntityUid?> BlockingItemsShields = new();
+    public List<EntityUid> BlockingItemsShields = new();
 
     [DataField, AutoNetworkedField]
-    public bool IsBlocking = false;
+    public bool Blocking = false;
 
     [DataField]
     public ProtoId<AlertPrototype> BlockingAlertProtoId = "ActiveBlocking";

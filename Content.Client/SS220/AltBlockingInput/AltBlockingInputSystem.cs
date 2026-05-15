@@ -12,12 +12,15 @@ namespace Content.Client.SS220.AltBlocking;
 
 public sealed partial class AltBlockingInputSystem : EntitySystem
 {
+    private static readonly string ActiveBlockingOwnerLocale = "actively-blocking-attack";
+    private static readonly string ActiveBlockingOthersLocale = "actively-blocking-others";
+
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly InputSystem _inputSystem = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
 
-    private bool ShouldReact = true;
+    private bool _shouldReact = true;
 
     public override void Update(float frameTime)
     {
@@ -28,27 +31,25 @@ public sealed partial class AltBlockingInputSystem : EntitySystem
 
         if (_inputSystem.CmdStates.GetState(useKey) == BoundKeyState.Up)
         {
-            if (!ShouldReact)
-                ShouldReact = true;
+            if (!_shouldReact)
+                _shouldReact = true;
             return;
         }
 
         var entityNull = _player.LocalEntity;
 
-        if (entityNull == null || !TryComp<AltBlockingUserComponent>(entityNull, out var userComp))
+        if (entityNull is not { } entity || !TryComp<AltBlockingUserComponent>(entity, out var userComp))
             return;
 
-        var entity = entityNull.Value;
-
-        if (!ShouldReact)
+        if (!_shouldReact)
             return;
 
-        var msgUser = Loc.GetString("actively-blocking-attack");
-        var msgOther = Loc.GetString("actively-blocking-others", ("blockerName", entity));
+        var msgUser = Loc.GetString(ActiveBlockingOwnerLocale);
+        var msgOther = Loc.GetString(ActiveBlockingOthersLocale, ("blockerName", entity));
         _popupSystem.PopupPredicted(msgUser, msgOther, entity, entity);
 
         RaiseNetworkEvent(new BlockAttemptEvent { User = GetNetEntity(entity) });
-        ShouldReact = false;
+        _shouldReact = false;
         return;
     }
 }

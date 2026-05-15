@@ -31,11 +31,11 @@ public sealed partial class SharedAltBlockingSystem
         if (!handQuery.TryGetComponent(localUser, out var hands))
             return;
 
-        if (blockingUserComp.IsBlocking)
+        if (blockingUserComp.Blocking)
             StopBlocking(((EntityUid)localUser, blockingUserComp));
 
         else
-            StartBlocking(((EntityUid)localUser, blockingUserComp));
+            TryStartBlocking(((EntityUid)localUser, blockingUserComp));
 
         Dirty((EntityUid)localUser, blockingUserComp);
         args.Handled = true;

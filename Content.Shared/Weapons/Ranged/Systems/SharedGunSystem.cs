@@ -278,7 +278,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         // ss220 add block heavy attack and shooting while user is down end
 
         //SS220 shield rework begin
-        if (TryComp<AltBlockingUserComponent>(user, out var blockComp) && blockComp.IsBlocking)
+        if (TryComp<AltBlockingUserComponent>(user, out var blockComp) && blockComp.Blocking)
         {
             PopupSystem.PopupPredictedCursor(Loc.GetString("actively-blocking-attack"), user);
             return false;

@@ -110,6 +110,7 @@ public abstract class SharedCreamPieSystem : EntitySystem
     {
         SplatCreamPie(ent);
     }
+
     private void OnCreamPieHit(Entity<CreamPieComponent> ent, ref ThrowDoHitEvent args)
     {
         SplatCreamPie(ent);

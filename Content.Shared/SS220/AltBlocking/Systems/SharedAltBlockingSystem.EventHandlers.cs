@@ -53,7 +53,7 @@ public sealed partial class SharedAltBlockingSystem
             if (!TryGetNetEntity(item, out var NetItem))
                 continue;
 
-            if (ent.Comp.IsBlocking)
+            if (ent.Comp.Blocking)
             {
                 if (SharedRandomExtensions.PredictedProb(_gameTiming, blockComp.ActiveMeleeBlockProb, (NetEntity)NetItem))
                 {
@@ -119,7 +119,7 @@ public sealed partial class SharedAltBlockingSystem
             StopBlockingHelper(ent, ent.Comp.User.Value);
     }
 
-    private bool TryBlock(List<EntityUid?> items, DamageSpecifier? damage, Entity<AltBlockingUserComponent> owner, Angle HitRotation)
+    private bool TryBlock(List<EntityUid> items, DamageSpecifier? damage, Entity<AltBlockingUserComponent> owner, Angle HitRotation)
     {
         foreach (var item in items)
         {
@@ -140,15 +140,15 @@ public sealed partial class SharedAltBlockingSystem
 
             var user = (EntityUid)blockComp.User;
 
-            if (!TryGetNetEntity(item, out var NetItem))
+            if (!TryGetNetEntity(item, out var netItem))
                 continue;
 
-            if (owner.Comp.IsBlocking)
+            if (owner.Comp.Blocking)
             {
-                if (SharedRandomExtensions.PredictedProb(_gameTiming, blockComp.ActiveRangeBlockProb, (NetEntity)NetItem))
+                if (SharedRandomExtensions.PredictedProb(_gameTiming, blockComp.ActiveRangeBlockProb, (NetEntity)netItem))
                 {
-                    _damageable.TryChangeDamage((EntityUid)item, damage);
-                    _audio.PlayPvs(blockComp.BlockSound, (EntityUid)item);
+                    _damageable.TryChangeDamage(item, damage);
+                    _audio.PlayPvs(blockComp.BlockSound, item);
                     _popupSystem.PopupEntity(Loc.GetString("block-shot"), user);
                     return true;
                 }
@@ -156,10 +156,10 @@ public sealed partial class SharedAltBlockingSystem
 
             else
             {
-                if (SharedRandomExtensions.PredictedProb(_gameTiming, blockComp.RangeBlockProb, (NetEntity)NetItem))
+                if (SharedRandomExtensions.PredictedProb(_gameTiming, blockComp.RangeBlockProb, (NetEntity)netItem))
                 {
-                    _damageable.TryChangeDamage((EntityUid)item, damage);
-                    _audio.PlayPvs(blockComp.BlockSound, (EntityUid)item);
+                    _damageable.TryChangeDamage(item, damage);
+                    _audio.PlayPvs(blockComp.BlockSound, item);
                     _popupSystem.PopupEntity(Loc.GetString("block-shot"), user);
                     return true;
                 }

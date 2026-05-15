@@ -220,7 +220,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             return;
 
         //SS220 shield rework begin
-        if (TryComp<AltBlockingUserComponent>(user, out var comp) && comp.IsBlocking)
+        if (TryComp<AltBlockingUserComponent>(user, out var comp) && comp.Blocking)
         {
             PopupSystem.PopupPredictedCursor(Loc.GetString("actively-blocking-attack"), user);
             return;
@@ -242,7 +242,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             return;
 
         //SS220 shield rework begin
-        if (TryComp<AltBlockingUserComponent>(user, out var comp) && comp.IsBlocking)
+        if (TryComp<AltBlockingUserComponent>(user, out var comp) && comp.Blocking)
         {
             PopupSystem.PopupPredictedCursor(Loc.GetString("actively-blocking-attack"), user);
             return;

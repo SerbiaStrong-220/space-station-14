@@ -18,11 +18,14 @@ public sealed class AltArmorSystem : EntitySystem
         resultDamage = new DamageSpecifier();
         resultArmorDamage = new DamageSpecifier();
 
-        if (!Resolve(ent.Owner, ref ent.Comp))
-            return;
-
         if (damage == null)
             return;
+
+        if (!Resolve(ent.Owner, ref ent.Comp))
+        {
+            resultDamage = damage;
+            return;
+        }
 
         FixedPoint2 maximalDamage = 0;
         string? maximalDamageType = null;
@@ -33,11 +36,7 @@ public sealed class AltArmorSystem : EntitySystem
         {
             durabilityCoefficient = 1 - (_damageable.GetTotalDamage(ent.Owner) / ent.Comp.ZeroProtectionThreshold);
 
-            if (durabilityCoefficient < 0)//Didn't use Math.Clamp because there is no override of this function for FixedPoint2 and i don't want to convert types 2 times every time we calculate this
-                durabilityCoefficient = 0;
-
-            if (durabilityCoefficient > 1)
-                durabilityCoefficient = 1;
+            FixedPoint2.Clamp(durabilityCoefficient, 0, 1);
         }
 
         foreach (var type in damage.DamageDict.Keys)//Here we start counting damage for each type
@@ -51,7 +50,6 @@ public sealed class AltArmorSystem : EntitySystem
                     piercing: damage.ArmourPiercing,
                     durabilityCoefficient: durabilityCoefficient
                 );//armor damage
-
             else
                 resultArmorDamage.DamageDict.Add(type, damage.DamageDict[type]);
 
@@ -88,7 +86,7 @@ public sealed class AltArmorSystem : EntitySystem
             CountDifference(resultDamage.DamageDict, damage.DamageDict[type], FixedPoint2.Zero, type, FixedPoint2.Zero, durabilityCoefficient: durabilityCoefficient);
         }
 
-        if(maximalDamageType != null)
+        if (maximalDamageType != null)
         {
             if (damage.ArmourPiercing > ent.Comp.TresholdDict[maximalDamageType])// A kostyl made to lower the piercing stat to prevent infinite/too good penetration of anything
             {

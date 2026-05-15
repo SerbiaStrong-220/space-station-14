@@ -31,7 +31,7 @@ public sealed class ToggleBlockingChanceSystem : EntitySystem
 
         if (TryComp<ChangeAppearanceOnActiveBlockingComponent>(ent.Owner, out var appearanceComp))
         {
-            var ev = new ActiveBlockingEvent(userComp.IsBlocking && args.Activated);
+            var ev = new ActiveBlockingStateChanged(userComp.Blocking && args.Activated);
             RaiseLocalEvent(ent.Owner, ref ev);
         }
 

@@ -56,9 +56,9 @@ public sealed class ProjectileSystem : SharedProjectileSystem
         RaiseLocalEvent(target, ref blockattemptEv);
         if (blockattemptEv.CancelledHit)
         {
-            if(TryGetNetEntity(target, out var netTarget))
+            if (TryGetNetEntity(target, out var netTarget))
             {
-                EnsureComp<BlockedProjectileComponent>(uid, out var blockedComp);
+                var blockedComp = EnsureComp<BlockedProjectileComponent>(uid);
                 blockedComp.BlockerEntity = netTarget;
                 Dirty(uid, blockedComp);
             }
