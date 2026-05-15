@@ -8,6 +8,7 @@ using Content.Server.SS220.Objectives.Components;
 using Content.Server.SS220.Trackers.Components;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
+using Content.Shared.Objectives.Systems;
 using Content.Shared.SSDIndicator;
 using Robust.Shared.Random;
 
@@ -18,7 +19,7 @@ public sealed class IntimidatePersonConditionSystem : EntitySystem
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly TargetObjectiveSystem _target = default!;
+    [Dependency] private readonly TargetObjectiveSystem _targetObjective = default!;
 
     public override void Initialize()
     {
@@ -32,7 +33,7 @@ public sealed class IntimidatePersonConditionSystem : EntitySystem
 
     private void OnGetProgress(Entity<IntimidatePersonConditionComponent> entity, ref ObjectiveGetProgressEvent args)
     {
-        if (!_target.GetTarget(entity.Owner, out _))
+        if (!_targetObjective.GetTarget(entity.Owner, out _))
             return;
 
         if (entity.Comp.ObjectiveIsDone)

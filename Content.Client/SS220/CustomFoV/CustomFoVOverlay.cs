@@ -24,6 +24,8 @@ public sealed class CustomFoVOverlay : Overlay
     private readonly ShaderInstance _shader;
     private readonly Dictionary<EntityUid, Dictionary<Vector2i, Entity<TransformComponent>>> _entMapDict = new();
 
+    private static readonly ProtoId<ShaderPrototype> ShaderProtoId = "unshaded";
+
     internal CustomFoVOverlay(EntityManager entMan, IPrototypeManager prototype)
     {
         _entMan = entMan;
@@ -32,7 +34,7 @@ public sealed class CustomFoVOverlay : Overlay
         _fovCorner = new SpriteSpecifier.Texture(new("SS220/Misc/fov_corner.png"));
         _sprite = _entMan.EntitySysManager.GetEntitySystem<SpriteSystem>();
         _transform = _entMan.EntitySysManager.GetEntitySystem<SharedTransformSystem>();
-        _shader = _prototype.Index<ShaderPrototype>("unshaded").InstanceUnique();
+        _shader = _prototype.Index<ShaderPrototype>(ShaderProtoId).InstanceUnique();
 
         ZIndex = (int) Shared.DrawDepth.DrawDepth.WallFovOverlay;
     }

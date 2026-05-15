@@ -1,11 +1,11 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using Content.Server.Gravity;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.SS220.StationEvents.Components;
 using Content.Server.StationEvents.Events;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.Gravity;
 using Content.Shared.Station.Components;
 
 namespace Content.Server.SS220.StationEvents.Events;

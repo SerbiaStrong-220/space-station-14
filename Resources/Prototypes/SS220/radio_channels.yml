@@ -183,14 +183,15 @@
   frequency: 1001
   color: "#9932CC"
   longRange: true
+
 - type: radioChannel
   id: ChannelXonk
   name: chat-radio-honk
-  keycode: 'ч'
+  keycode: 'ш'
   frequency: 1001
   color: "#FFB6C1"
   longRange: true
-# Admin memes end 
+# Admin memes end
 
 #Department Internal Affairs
 - type: radioChannel
@@ -200,7 +201,7 @@
   frequency: 1373
   color: "#5b65e2"
 
-# Interdyne 
+# Interdyne
 - type: radioChannel
   id: Interdyne
   name: chat-radio-interdyne

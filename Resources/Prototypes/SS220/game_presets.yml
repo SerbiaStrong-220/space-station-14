@@ -24,9 +24,10 @@
   rules:
   - CultYoggRuleMidPop
   - BasicRoundstartVariation
+  - SubModLowTraitorDynamic
   - SubGamemodesRule
   - BloodBrothers # ss220-blood-brothers
-  - NoNewCrewAntagsStationEventScheduler
+  #- NoNewCrewAntagsStationEventScheduler
   - SpaceTrafficControlFriendlyEventScheduler
   - EmergencyShuttleAutoVote
 
@@ -45,8 +46,10 @@
   - BasicRoundstartVariation
   - SubGamemodesRule
   - MeteorSwarmScheduler
+  - SubModLowTraitorDynamic
+  - SubGamemodesRule
+  #- NoNewCrewAntagsStationEventScheduler
   - BloodBrothers # ss220-blood-brothers
-  - NoNewCrewAntagsStationEventScheduler
   - SpaceTrafficControlFriendlyEventScheduler
   - EmergencyShuttleAutoVote
 

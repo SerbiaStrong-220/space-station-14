@@ -4,6 +4,7 @@ using Content.Server.Zombies;
 using Content.Shared.Body.Events;
 using Content.Shared.Cloning.Events;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Mobs;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
@@ -26,7 +27,6 @@ public sealed class LimitationReviveSystem : SharedLimitationReviveSystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly EntityManager _entityManager = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ISerializationManager _serialization = default!;
     [Dependency] private readonly IComponentFactory _componentFactory = default!;
 

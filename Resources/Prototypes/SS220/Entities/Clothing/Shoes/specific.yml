@@ -267,13 +267,32 @@
   - type: HiddenDescription
     entries:
       SyndicateAgentKnowledge:
-        - hidden-desc-SilentShoes-syndicate
         - corvax-hidden-desc-Chameleon-syndicate
+        - hidden-desc-SilentShoes-syndicate
       ScienceKnowledge:
-        - hidden-desc-SilentShoes-research
         - corvax-hidden-desc-Chameleon-research
+        - hidden-desc-SilentShoes-research
     nameEntries:
     - [SyndicateAgentKnowledge, null]
     - [ScienceKnowledge, null]
     hiddenName: null
-  # HiddenDesc-End
+# HiddenDesc-End
+
+- type: entity
+  parent: ClothingShoesBase
+  id: ClothingShoesSpaceNinjaFake
+  name: space ninja shoes
+  description: Stylish ninja boots from the popular anime.
+  suffix: Fake
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Specific/spaceninja.rsi 
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Specific/spaceninja.rsi 
+  - type: HiddenDescription
+    entries:
+      SyndicateAgentKnowledge: [ hidden-desc-toy-armour-syndicate ]
+      ServiceActorKnowledge: [ hidden-desc-toy-armour-clown ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ServiceActorKnowledge, null]

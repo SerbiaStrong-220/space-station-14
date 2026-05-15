@@ -11,12 +11,11 @@ public sealed partial class MakeSentientEntityEffectSystem : EntityEffectSystem<
 
     protected override void Effect(Entity<MetaDataComponent> entity, ref EntityEffectEvent<ChemicalAdaptationEffect> args)
     {
-        var modifier = args.Effect.Modifier;
         var duration = args.Effect.Duration;
         var refresh = args.Effect.Refresh;
 
         var chem = EnsureComp<ChemicalAdaptationComponent>(entity);
-        _adaptation.EnsureChemAdaptation((entity, chem), args.Effect.Reagent, duration, modifier, refresh);
+        _adaptation.EnsureChemAdaptation((entity, chem), args.Effect.Reagent, duration, refresh);
 
         DirtyEntity(entity);//not sure about this one
     }

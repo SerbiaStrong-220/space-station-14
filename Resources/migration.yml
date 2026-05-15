@@ -67,7 +67,7 @@ MagazineBoxLightRifleHighVelocity: MagazineBoxLightRifle
 MagazineBoxMagnumHighVelocity: MagazineBoxMagnum
 MagazineBoxPistolHighVelocity: MagazineBoxPistol
 MagazineBoxRifleHighVelocity: MagazineBoxRifle
-MagazineCaselessRifleHighVelocity: MagazineCaselessRifle
+MagazineCaselessRifleHighVelocity: MagazinePistolCaselessRifle
 MagazineCaselessRifleShortHighVelocity: null
 MagazineLightRifleHighVelocity: MagazineLightRifle
 MagazineMagnumSubMachineGunHighVelocity: null
@@ -77,7 +77,7 @@ MagazinePistolHighVelocity: MagazinePistol
 MagazinePistolSubMachineGunHighVelocity: MagazinePistolSubMachineGun
 MagazineRifleHighVelocity: MagazineRifle
 SpeedLoaderMagnumHighVelocity: SpeedLoaderMagnum
-SpeedLoaderPistolHighVelocity: SpeedLoaderPistol
+SpeedLoaderPistolHighVelocity: null
 
 # 2023-08-07
 #If the name is anything to go off of, these are presumably just CEV-Eris versions of the snow rock (which we already have.)
@@ -328,47 +328,44 @@ BriefcaseSyndieBase: null
 BodyBag_Container: BodyBag
 BodyBag_Folded: BodyBagFolded
 
-# 2024-04-26
-# SS220 Bring rubber back begin
-# BaseBulletRubber: null
-# BulletPistolRubber: BulletPistol
-# BulletMagnumRubber: BulletMagnum
-# BulletLightRifleRubber: BulletLightRifle
-# BulletRifleRubber: BulletRifle
-# BulletCaselessRifleRubber: BulletCaselessRifle
-# CartridgePistolRubber: CartridgePistol
-# CartridgeMagnumRubber: CartridgeMagnum
-# CartridgeLightRifleRubber: CartridgeLightRifle
-# CartridgeRifleRubber: CartridgeRifle
-# CartridgeCaselessRifleRubber: CartridgeCaselessRifle
-# MagazinePistolRubber: MagazinePistol
-# MagazinePistolSubMachineGunRubber: MagazinePistolSubMachineGun
-# MagazinePistolCaselessRifleRubber: MagazinePistolCaselessRifle
-# MagazineMagnumRubber: MagazineMagnum
-# MagazineMagnumSubMachineGunRubber: MagazineMagnumSubMachineGun
-# MagazineLightRifleRubber: MagazineLightRifle
-# MagazineRifleRubber: MagazineRifle
-# MagazineCaselessRifleRubber: MagazineCaselessRifle
-# MagazineCaselessRifleShortRubber: MagazineCaselessRifleShort
-# SpeedLoaderPistolRubber: SpeedLoaderPistol
-# SpeedLoaderMagnumRubber: SpeedLoaderMagnum
-# MagazineBoxPistolRubber: MagazineBoxPistol
-# # RIP box of magnum rubbers 202X to 2024
-# MagazineBoxMagnumRubber: MagazineBoxMagnum
-# MagazineBoxLightRifleRubber: MagazineBoxLightRifle
-# MagazineBoxRifleRubber: MagazineBoxRifle
-# MagazineBoxRifleBigRubber: MagazineBoxRifleBig
-# MagazineBoxCaselessRifleRubber: MagazineBoxCaselessRifle
-# MagazineBoxCaselessRifleBigRubber: MagazineBoxCaselessRifle10x24
-# BoxMagazinePistolRubber: BoxMagazinePistol
-# BoxMagazinePistolHighCapacityRubber: BoxMagazinePistolHighCapacity
-# BoxMagazinePistolSubMachineGunRubber: BoxMagazinePistolSubMachineGun
-# BoxMagazineLightRifleRubber: BoxMagazineLightRifle
-# BoxMagazineRifleRubber: BoxMagazineRifle
-# BoxMagazineCaselessRifleRubber: BoxMagazinePistolCaselessRifle
-# BoxMagazineMagnumSubMachineGunRubber: BoxMagazineMagnumSubMachineGun
-# WeaponPistolMk58Nonlethal: WeaponPistolMk58
-# SS220 Bring rubber back end
+#2024-04-26
+BaseBulletRubber: null
+BulletPistolRubber: BulletPistol
+BulletMagnumRubber: BulletMagnum
+BulletLightRifleRubber: BulletLightRifle
+BulletRifleRubber: BulletRifle
+BulletCaselessRifleRubber: BulletCaselessRifle
+CartridgePistolRubber: CartridgePistol
+CartridgeMagnumRubber: CartridgeMagnum
+CartridgeLightRifleRubber: CartridgeLightRifle
+CartridgeRifleRubber: CartridgeRifle
+CartridgeCaselessRifleRubber: CartridgeCaselessRifle
+MagazinePistolRubber: MagazinePistol
+MagazinePistolSubMachineGunRubber: MagazinePistolSubMachineGun
+MagazinePistolCaselessRifleRubber: MagazinePistolCaselessRifle
+MagazineMagnumRubber: MagazineMagnum
+MagazineMagnumSubMachineGunRubber: null
+MagazineLightRifleRubber: MagazineLightRifle
+MagazineRifleRubber: MagazineRifle
+MagazineCaselessRifleRubber: MagazinePistolCaselessRifle
+MagazineCaselessRifleShortRubber: null
+SpeedLoaderPistolRubber: null
+SpeedLoaderMagnumRubber: SpeedLoaderMagnum
+MagazineBoxPistolRubber: MagazineBoxPistol
+# RIP box of magnum rubbers 202X to 2024
+MagazineBoxMagnumRubber: MagazineBoxMagnum
+MagazineBoxLightRifleRubber: MagazineBoxLightRifle
+MagazineBoxRifleRubber: MagazineBoxRifle
+MagazineBoxRifleBigRubber: MagazineBoxRifleBig
+MagazineBoxCaselessRifleRubber: MagazineBoxCaselessRifle
+BoxMagazinePistolRubber: BoxMagazinePistol
+BoxMagazinePistolHighCapacityRubber: BoxMagazinePistolHighCapacity
+BoxMagazinePistolSubMachineGunRubber: BoxMagazinePistolSubMachineGun
+BoxMagazineLightRifleRubber: BoxMagazineLightRifle
+BoxMagazineRifleRubber: BoxMagazineRifle
+BoxMagazineCaselessRifleRubber: BoxMagazinePistolCaselessRifle
+BoxMagazineMagnumSubMachineGunRubber: null
+WeaponPistolMk58Nonlethal: WeaponPistolMk58
 WeaponPistolN1984Nonlethal: WeaponPistolN1984
 WeaponSubMachineGunDrozdRubber: WeaponSubMachineGunDrozd
 WeaponRifleLecterRubber: WeaponRifleLecter
@@ -843,10 +840,12 @@ FoodDonutJellySlugcat: FoodDonutJellyScurret
 # 2025-08-29
 PrefilledSyringe: Syringe
 
+# 2025-09-12
+BaseChemistryEmptyVial: ChemistryEmptyVial
+
 # 2025-10-6
 BibleTanakh: null
 BibleSatanic: null
-
 
 # 2025-10-08
 ClothingBeltAssault: ClothingBeltMilitaryWebbing
@@ -857,7 +856,75 @@ ToyGriffin: ToyFigurineGriffin
 ToyOwlman: ToyFigurineOwlman
 ToySkeleton: ToyFigurineSkeleton
 
+# 2025-10-24 - ss220 add-grid-auto-variantize
 BoxFolderYellow: null
+
+# 2025-10-28
+#DrinkKiraSpecialGlass: DrinkOrangeLimeSodaGlass #ss220 kira special return
+
+# 2025-11-08
+DebugSMES: SMESBasicEmpty
+DebugSubstation: SubstationBasicEmpty
+DebugSubstationWall: BaseSubstationWall
+DebugAPC: BaseAPC
+MagazineCaselessRifle: MagazinePistolCaselessRifle
+MagazineCaselessRiflePractice: MagazinePistolCaselessRiflePractice
+SpeedLoaderPistol: null
+SpeedLoaderPistolPractice: null
+
+# 2025-12-05
+GlowstickBase: GlowstickGreen
+
+# 2025-12-06
+#SpawnPointZookeeper: null
+#SpawnPointBoxer: null
+
+# 2025-12-07
+FigureSpawner: MechFigurineSpawner50
+ToySpawner: PlushieSpawner50
+SpacemenFigureSpawner: SpacemenFigurineSpawner90
+
+# 2026-01-07
+HandheldHealthAnalyzerUnpowered: HandheldHealthAnalyzer
+HandheldHealthAnalyzerEmpty: HandheldHealthAnalyzer
+
+#2026-01-09
+BorgModuleAdvancedChemical: BorgModuleAdvancedTopical
+
+# 2026-01-14
+HeadHuman: OrganHumanHead
+HeadSkeleton: OrganSkeletonPersonHead
+LeftArmHuman: OrganHumanArmLeft
+LeftArmSkeleton: OrganSkeletonPersonArmLeft
+LeftHandSkeleton: OrganSkeletonPersonHandLeft
+LeftLegHuman: OrganHumanLegLeft
+LeftLegSkeleton: OrganSkeletonPersonLegLeft
+RightArmHuman: OrganHumanArmRight
+RightHandSkeleton: OrganSkeletonPersonHandRight
+RightLegHuman: OrganHumanLegRight
+TorsoSkeleton: OrganSkeletonPersonTorso
+RightArmSkeleton: OrganSkeletonPersonArmRight
+
+# 2026-01-19
+TowelColorPurple: null
+TowelColorRed: null
+TowelColorBlue: null
+TowelColorDarkBlue: null
+TowelColorLightBlue: null
+TowelColorTeal: null
+TowelColorBrown: null
+TowelColorLightBrown: null
+TowelColorGray: null
+TowelColorGreen: null
+TowelColorDarkGreen: null
+TowelColorGold: null
+TowelColorOrange: null
+TowelColorBlack: null
+TowelColorPink: null
+TowelColorYellow: null
+TowelColorMaroon: null
+TowelColorSilver: null
+TowelColorMime: null
 
 # ss220 tweak proto part 1 start
 # 2026-02-14
@@ -865,7 +932,30 @@ WarderobePrisonSecureFilled: WardrobePrisonSecureFilled
 BlueShieldGasMask: ClothingMaskGasBlueShield
 # ss220 tweak proto part 1 end
 
-# 2026-02-21 - SS220 Blueshield
+# 2026-02-18
+# Replace cargo order crates which contain exactly one item with the item, parcel wrapped.
+CrateVendingMachineRestockBoozeFilled: VendingMachineRestockBooze
+CrateVendingMachineRestockChefvendFilled: VendingMachineRestockChefvend
+CrateVendingMachineRestockClothesFilled: VendingMachineRestockClothes
+CrateVendingMachineRestockAutoDrobeFilled: VendingMachineRestockCostumes
+CrateVendingMachineRestockCondimentStationFilled: VendingMachineRestockCondimentStation
+CrateVendingMachineRestockDinnerwareFilled: VendingMachineRestockDinnerware
+CrateVendingMachineRestockGamesFilled: VendingMachineRestockGames
+CrateVendingMachineRestockPTechFilled: VendingMachineRestockPTech
+CrateVendingMachineRestockSalvageEquipmentFilled: VendingMachineRestockSalvageEquipment
+CrateVendingMachineRestockVendomatFilled: VendingMachineRestockVendomat
+CrateVendingMachineRestockTankDispenserFilled: VendingMachineRestockTankDispenser
+# The crates below contained _two_ of the restock items, so these are technically not direct migrations. But eh.
+CrateVendingMachineRestockHotDrinksFilled: VendingMachineRestockHotDrinks
+CrateVendingMachineRestockRobustSoftdrinksFilled: VendingMachineRestockRobustSoftdrinks
+CrateVendingMachineRestockSmokesFilled: VendingMachineRestockSmokes
+CrateVendingMachineRestockHappyHonkFilled: VendingMachineRestockHappyHonk
+CrateVendingMachineRestockGetmoreChocolateCorpFilled: VendingMachineRestockGetmoreChocolateCorp
+CrateVendingMachineRestockChangFilled: VendingMachineRestockChang
+CrateVendingMachineRestockDiscountDansFilled: VendingMachineRestockDiscountDans
+CrateVendingMachineRestockDonutFilled: VendingMachineRestockDonut
+
+# 2026-02-21 - SS220 Blueshield begin
 ClothingOuterHardsuitBlueshield: null
 BlueShieldSWAT: null
 
@@ -877,7 +967,38 @@ HighSecCentcommLockedBSO: HighSecCentcommLockedSRT
 LockerBlueshieldOperativeFilled: LockerSRTOperativeFilled
 AirlockGlassCentcommLockedBlueShieldOperative: AirlockGlassCentcommLockedSRTOperative
 BlasterPowerCellPulse: PowerCellBlasterHighCapacity
+# SS220 Blueshield end
 
 # 2026-03-23 - SS220 new cqc
 cqc_nonlethal: CQCManual
 cqc_lethal: CQCManual
+# SS220 new cqc end
+
+# 2026-04-06 - SS220 remove necrosol
+JugNecrosol: JugArcryox
+
+# 2026-04-10 - SS220 old parts to new
+RightLegSkeleton: OrganSkeletonPersonLegRight
+HeadVulpkanin: OrganVulpkaninHead
+LeftArmVulpkanin: OrganVulpkaninArmLeft
+RightArmVulpkanin: OrganVulpkaninArmRight
+LeftHandVulpkanin: OrganVulpkaninHandLeft
+RightHandVulpkanin: OrganVulpkaninHandRight
+LeftLegVulpkanin: OrganVulpkaninLegLeft
+RightLegVulpkanin: OrganVulpkaninLegRight
+LeftFootVulpkanin: OrganVulpkaninFootLeft
+RightFootVulpkanin: OrganVulpkaninFootRight
+
+# 2026-04-12 - SS220 remove old parts
+LeftFootHuman: OrganHumanFootLeft
+RightFootHuman: OrganHumanFootRight
+RightHandHuman: OrganHumanHandRight
+LeftHandHuman: OrganHumanHandRight
+TorsoHuman: OrganHumanTorso
+HeadSlime: OrganSlimePersonHead
+LeftFootSkeleton: OrganSkeletonPersonFootLeft
+RightFootSkeleton: OrganSkeletonPersonFootRight
+
+# 2026-04-13 - SS220 remove gingerbread parts
+HeadGingerbread: OrganGingerbreadHead
+LeftLegGingerbread: OrganGingerbreadLegLeft

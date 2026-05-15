@@ -21,6 +21,12 @@ public sealed partial class BrainDamageTimerChange : EntityEffectBase<BrainDamag
     [DataField(required: true)]
     public ProtoId<ReagentPrototype> Reagent;
 
+    /// <summary>
+    /// How long will brain damage be delayed with one assimilation of the reagent?
+    /// </summary>
+    [DataField]
+    public float Decay = 1;
+
     public override string EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
         => Loc.GetString("reagent-effect-guidebook-ss220-brain-damage-slow", ("time", AddTime.TotalSeconds));
 

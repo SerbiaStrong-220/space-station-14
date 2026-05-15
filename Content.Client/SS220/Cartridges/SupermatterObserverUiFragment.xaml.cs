@@ -39,16 +39,10 @@ public sealed partial class SupermatterObserverUiFragment : BoxContainer
 
         PlotValueOverTime.SetLabels(_localization.GetString("smObserver-plotXLabel-integrity"), _localization.GetString("smObserver-plotYLabel-integrity"), _localization.GetString("smObserver-plotTitle-integrity"));
 
-        ColorState.EvalFunctionOnMeshgrid(GetIntegrityDamageMap);
+        ColorState.EvalFunctionOnMeshgrid(SuperMatterFunctions.GetIntegrityDamageMap);
         ColorState.SetLabels(_localization.GetString("smObserver-plotXLabel-colorState"), _localization.GetString("smObserver-plotYLabel-colorState"), _localization.GetString("smObserver-plotTitle-colorState"));
     }
 
-    private float GetIntegrityDamageMap(float matter, float internalEnergy)
-    {
-        return SuperMatterFunctions.EnergyToMatterDamageFactorFunction(internalEnergy
-                - SuperMatterFunctions.SafeInternalEnergyToMatterFunction(matter / SuperMatterFunctions.MatterNondimensionalization),
-            matter / SuperMatterFunctions.MatterNondimensionalization);
-    }
     public void LoadCrystal()
     {
         CrystalNavigationBar.RemoveAllChildren();
