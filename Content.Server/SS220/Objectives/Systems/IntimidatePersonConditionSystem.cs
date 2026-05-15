@@ -1,24 +1,19 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Linq;
-using Content.Server.Mind;
 using Content.Server.Objectives.Components;
 using Content.Server.Objectives.Systems;
 using Content.Server.SS220.Objectives.Components;
 using Content.Server.SS220.Trackers.Components;
-using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Objectives.Systems;
 using Content.Shared.SSDIndicator;
-using Robust.Shared.Random;
 
 namespace Content.Server.SS220.Objectives.Systems;
 
 public sealed class IntimidatePersonConditionSystem : EntitySystem
 {
     [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly TargetSystem _target = default!;
     [Dependency] private readonly TargetObjectiveSystem _targetObjective = default!;
 
     public override void Initialize()
@@ -74,7 +69,7 @@ public sealed class IntimidatePersonConditionSystem : EntitySystem
         if (targetObjectiveComponent.Target != null)
             return;
 
-        if (_mind.PickFromPool(entity.Comp.Pool, entity.Comp.Filters, args.MindId) is not { } picked)
+        if (_target.PickFromPool(entity.Comp.Pool, entity.Comp.Filters, args.MindId) is not { } picked)
             return;
 
         var target = picked.Comp.OwnedEntity;
@@ -83,7 +78,7 @@ public sealed class IntimidatePersonConditionSystem : EntitySystem
             return;
 
         args.Cancelled = false;
-        _target.SetTarget(uid, picked.Owner, targetObjectiveComponent);
+        _targetObjective.SetTarget(uid, picked.Owner, targetObjectiveComponent);
         var damageReceivedTracker = AddComp<DamageReceivedTrackerComponent>(target.Value);
         entity.Comp.TargetMob = target.Value;
         damageReceivedTracker.WhomDamageTrack = args.Mind.CurrentEntity.Value;

@@ -39,7 +39,7 @@ public sealed partial class IntimidatePersonConditionComponent : Component
     public string? SSDDescription;
 
     [DataField]
-    public IMindPool Pool = new AliveHumansPool();
+    public MindPool Pool = new AliveHumansPool();
 
     /// <summary>
     /// Filters to apply to <see cref="Pool"/>.
