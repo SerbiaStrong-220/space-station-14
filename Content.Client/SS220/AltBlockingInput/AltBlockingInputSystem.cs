@@ -33,6 +33,7 @@ public sealed partial class AltBlockingInputSystem : EntitySystem
         {
             if (!_shouldReact)
                 _shouldReact = true;
+
             return;
         }
 
