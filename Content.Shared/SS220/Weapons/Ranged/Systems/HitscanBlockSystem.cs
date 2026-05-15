@@ -7,7 +7,6 @@ namespace Content.Shared.SS220.Weapons.Ranged.Systems;
 
 public sealed class HitscanBlockSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
     public override void Initialize()
     {
         base.Initialize();
