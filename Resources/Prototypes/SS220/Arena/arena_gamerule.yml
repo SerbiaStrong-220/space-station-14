@@ -3,7 +3,6 @@
   parent: BaseGameRule
   components:
   - type: TwoPlayerArenaRule
-    resetDelay: 5
     deleteBarriers: true
     selectionMode: Random
     maps:

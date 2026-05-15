@@ -319,7 +319,7 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
 
         OpenFightBarriers(rule);
         rule.Phase = ArenaPhase.Fighting;
-        rule.FightEndAt = _timing.CurTime + TimeSpan.FromSeconds(rule.MaxFightDuration);
+        rule.FightEndAt = _timing.CurTime + rule.MaxFightDuration;
         SendToParticipants(rule, Loc.GetString("arena-fight-start"));
         PlayPingTo(rule.PlayerOne);
         PlayPingTo(rule.PlayerTwo);
@@ -393,7 +393,7 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
             return;
 
         rule.Phase = ArenaPhase.Resetting;
-        rule.ResetReadyAt = _timing.CurTime + TimeSpan.FromSeconds(rule.ResetDelay);
+        rule.ResetReadyAt = _timing.CurTime + rule.ResetDelay;
         rule.PendingSpawn = false;
 
         if (winner.HasValue && !TerminatingOrDeleted(winner.Value))
@@ -403,7 +403,7 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
             ApplyVictoryEffects(winner.Value);
         }
 
-        _sawmill.Info($"BeginReset: winner={winner}, delay={rule.ResetDelay}s.");
+        _sawmill.Info($"BeginReset: winner={winner}, delay={rule.ResetDelay.TotalSeconds}s.");
     }
 
     private void UpdateResetting(Entity<TwoPlayerArenaRuleComponent> ent)

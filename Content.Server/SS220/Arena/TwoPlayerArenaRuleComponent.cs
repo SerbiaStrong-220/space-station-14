@@ -16,10 +16,10 @@ public sealed partial class TwoPlayerArenaRuleComponent : Component
     public ArenaSelectionMode SelectionMode = ArenaSelectionMode.Rotation;
 
     [DataField]
-    public float ResetDelay = 5f;
+    public TimeSpan ResetDelay = TimeSpan.FromSeconds(5);
 
     [DataField]
-    public float MaxFightDuration = 300f;
+    public TimeSpan MaxFightDuration = TimeSpan.FromSeconds(300);
 
     [DataField]
     public bool DeleteBarriers = true;
