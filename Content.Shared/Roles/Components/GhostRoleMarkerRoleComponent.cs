@@ -8,9 +8,11 @@ namespace Content.Shared.Roles.Components;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class GhostRoleMarkerRoleComponent : BaseMindRoleComponent
 {
+    // ss220 add arena start
     /// <summary>
-    /// SS220: If false, this ghost role is hidden from the round-end summary manifest.
+    /// If false, this ghost role is hidden from the round-end summary manifest.
     /// </summary>
     [DataField]
     public bool ShowInSummary = true;
+    // ss220 add arena end
 }
