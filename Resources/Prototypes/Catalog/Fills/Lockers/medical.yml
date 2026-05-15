@@ -136,6 +136,7 @@
       - id: EmergencyRollerBedSpawnFolded
     - id: PlushieLizardJobParamedic
       prob: 0.02
+    - id: HandheldGPSBasic
 
 - type: entity
   parent: LockerParamedic
