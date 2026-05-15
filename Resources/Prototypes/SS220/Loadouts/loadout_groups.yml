@@ -498,6 +498,18 @@
   loadouts:
   - Glasses
   - CyberMedVisor
+
+- type: loadoutGroup
+  id: MedicalEyewear
+  name: loadout-group-medical-glasses
+  minLimit: 0
+  loadouts:
+  - MedicalHud
+  - MedicalEyePatchHud
+  - CyberMedVisor #SS220 II floppa iteration
+  - Glasses
+  - GlassesJamjar
+  - GlassesJensen
   # Врач (Конец)
 
   # Химик (Начало)
@@ -803,3 +815,23 @@
   - GlovesBlack
   - GlovesRed
   - GlovesBlue
+
+#! Эксклюзивы карт (Начало)
+
+  #Боксер
+- type: loadoutGroup
+  id: BoxerJumpsuit
+  name: loadout-group-boxer-jumpsuit
+  loadouts:
+  - BoxerShorts
+  - BoxerShortsWithTop
+
+- type: loadoutGroup
+  id: BoxerGloves
+  name: loadout-group-boxer-gloves
+  loadouts:
+  - RedBoxingGloves
+  - BlueBoxingGloves
+  - GreenBoxingGloves
+  - YellowBoxingGloves
+#! Эксклюзивы карт (Конец)

@@ -6,7 +6,7 @@ namespace Content.Shared.SS220.TTS;
 /// <summary>
 /// Prototype that contains a list of voices for randomize
 /// </summary>
-[Prototype("randomVoicesList")]
+[Prototype]
 public sealed partial class RandomVoicesListPrototype : IPrototype
 {
     [IdDataField]

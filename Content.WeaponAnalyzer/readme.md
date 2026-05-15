@@ -16,10 +16,10 @@
 
 ```bash
 # Запуск со стандартными значениями аргументом
-dotnet run --project Content.WeaponAnalyzer
+dotnet run --project Content.WeaponAnalyzer.csproj
 
 # Запуск с указанием конкретных целей и пути сохранения
-dotnet run --project Content.WeaponAnalyzer -- -t MobHuman MobHumanSyndicateAgentNukeops
+dotnet run --project Content.WeaponAnalyzer.csproj -- -t MobHuman MobHumanSyndicateAgentNukeops
 
 ```
 

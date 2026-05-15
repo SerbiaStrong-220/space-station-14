@@ -39,6 +39,8 @@ namespace Content.Client.Input
             common.AddFunction(ContentKeyFunctions.ZoomIn);
             common.AddFunction(ContentKeyFunctions.ResetZoom);
             common.AddFunction(ContentKeyFunctions.InspectEntity);
+            common.AddFunction(ContentKeyFunctions.InspectServerComponent);
+            common.AddFunction(ContentKeyFunctions.InspectClientComponent);
             common.AddFunction(ContentKeyFunctions.ToggleRoundEndSummaryWindow);
 
             // Not in engine, because engine cannot check for sanbox/admin status before starting placement.
@@ -63,6 +65,7 @@ namespace Content.Client.Input
             human.AddFunction(KeyFunctions220.ItemOffer); // SS220 ItemOffer bind
             human.AddFunction(ContentKeyFunctions.UseItemInHand);
             human.AddFunction(ContentKeyFunctions.AltUseItemInHand);
+            human.AddFunction(KeyFunctions220.OpenExperienceViewerMenu); // SS220-experience-update
             human.AddFunction(ContentKeyFunctions.OpenCharacterMenu);
             human.AddFunction(ContentKeyFunctions.OpenEmotesMenu);
             human.AddFunction(ContentKeyFunctions.ActivateItemInWorld);

@@ -266,24 +266,33 @@
   # HiddenDesc-Start
   - type: HiddenDescription
     entries:
-    - label: hidden-desc-SilentShoes-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: hidden-desc-SilentShoes-research
-      jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
-    - label: corvax-hidden-desc-Chameleon-syndicate
-      whitelistMindRoles:
-      - TraitorRole
-      - NukeOperative
-    - label: corvax-hidden-desc-Chameleon-research
-      jobRequired:
-        - ResearchAssistant
-        - ResearchDirector
-        - Scientist
-        - Borg
+      SyndicateAgentKnowledge:
+        - corvax-hidden-desc-Chameleon-syndicate
+        - hidden-desc-SilentShoes-syndicate
+      ScienceKnowledge:
+        - corvax-hidden-desc-Chameleon-research
+        - hidden-desc-SilentShoes-research
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ScienceKnowledge, null]
+    hiddenName: null
 # HiddenDesc-End
+
+- type: entity
+  parent: ClothingShoesBase
+  id: ClothingShoesSpaceNinjaFake
+  name: space ninja shoes
+  description: Stylish ninja boots from the popular anime.
+  suffix: Fake
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Specific/spaceninja.rsi 
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Specific/spaceninja.rsi 
+  - type: HiddenDescription
+    entries:
+      SyndicateAgentKnowledge: [ hidden-desc-toy-armour-syndicate ]
+      ServiceActorKnowledge: [ hidden-desc-toy-armour-clown ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ServiceActorKnowledge, null]

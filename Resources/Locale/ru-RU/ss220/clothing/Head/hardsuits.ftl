@@ -12,3 +12,12 @@ ent-ClothingHeadHelmetHardsuitCentcom = шлем скафандра Центра
 
 ent-ClothingHeadHelmetHardsuitQuartermaster = шлем скафандра квартирмейстера
     .desc = Прототип специального шлема для квартирмейстера, предназначенный для выполнения работ в опасных условиях и при низком давлении.
+
+ent-ClothingHeadHelmetHardsuitRedWingsMedic = шлем скафандра медика "Красных Крыльев"
+    .desc = Шлем от скафандра медика "Красных Крыльев"
+
+ent-ClothingHeadHelmetHardsuitRedWingsPilot = шлем скафандра пилота "Красных Крыльев"
+    .desc = Шлем от скафандра пилота "Красных Крыльев"
+
+ent-ClothingHeadHelmetHardsuitRedWingsSec = шлем скафандра офицера безопасности "Красных Крыльев"
+    .desc = Шлем от скафандра офицера безопасности "Красных Крыльев"

@@ -7,3 +7,10 @@ ent-NanoTrasenRepresentativePDA = КПК представителя НаноТр
     .desc = Пахнет документами.
 ent-BlueShieldPDA = КПК офицера "Синий Щит"
     .desc = Неповторимый стиль.
+
+ent-RedWingsSecurityPDA = КПК офицера безопасности "Красных крыльев"
+    .desc = На КПК видны небольшие пятна крови.
+ent-RedWingsMedicPDA = КПК медика "Красных крыльев"
+    .desc = Блестящий и стерильный
+ent-RedWingsPilotPDA = КПК пилота "Красных крыльев"
+    .desc = Слот для картриджа сильно изношен

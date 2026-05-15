@@ -49,7 +49,7 @@ public sealed class GavelStandSystem : EntitySystem
         StealthComponent? stealth = null;
         _audioSystem.PlayPredicted(component.Sound, gavelStand, owner);
         foreach (var iterator in
-            _entityLookup.GetEntitiesInRange<HumanoidAppearanceComponent>(_transform.GetMapCoordinates(gavelStand), component.Distance))
+            _entityLookup.GetEntitiesInRange<HumanoidProfileComponent>(_transform.GetMapCoordinates(gavelStand), component.Distance))
         {
             //Avoid pinging invisible entities
             if (TryComp(iterator, out stealth) && stealth.Enabled)

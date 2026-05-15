@@ -96,3 +96,12 @@
     icon:
       sprite: SS220/Objects/ChemicalImplants/implanters.rsi
       state: icon_empty
+
+- type: entity
+  id: DeathRattleImplanterInterdyne
+  name: interdyne death rattle implanter
+  description: Death rattle.
+  parent: BaseImplantOnlyImplanter
+  components:
+  - type: Implanter
+    implant: DeathRattleImplantInterdyne
