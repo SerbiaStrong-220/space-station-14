@@ -31,6 +31,14 @@
     PhysicalTraining:
       level: 4
 
+- type: entity
+  parent: MindRoleGhostRoleNeutral
+  id: MindRoleArenaFighter
+  name: arena-ghost-role-fighter-name
+  components:
+  - type: GhostRoleMarkerRole
+    showInSummary: false
+
 - type: ghostRoleRaffleSettings
   id: ArenaShort
   settings:
@@ -50,6 +58,8 @@
     rules: arena-ghost-role-fighter-rules
     raffle:
       settings: ArenaShort
+    mindRoles:
+    - MindRoleArenaFighter
     makeSentient: true
     allowMovement: true
     allowSpeech: true
@@ -72,6 +82,8 @@
     rules: arena-ghost-role-fighter-rules
     raffle:
       settings: ArenaShort
+    mindRoles:
+    - MindRoleArenaFighter
     makeSentient: true
     allowMovement: true
     allowSpeech: true
