@@ -24,8 +24,9 @@
   rules:
   - CultYoggRuleMidPop
   - BasicRoundstartVariation
+  - SubModLowTraitorDynamic
   - SubGamemodesRule
-  - NoNewCrewAntagsStationEventScheduler
+  #- NoNewCrewAntagsStationEventScheduler
   - SpaceTrafficControlFriendlyEventScheduler
   - EmergencyShuttleAutoVote
 
@@ -44,7 +45,9 @@
   - BasicRoundstartVariation
   - SubGamemodesRule
   - MeteorSwarmScheduler
-  - NoNewCrewAntagsStationEventScheduler
+  - SubModLowTraitorDynamic
+  - SubGamemodesRule
+  #- NoNewCrewAntagsStationEventScheduler
   - SpaceTrafficControlFriendlyEventScheduler
   - EmergencyShuttleAutoVote
 

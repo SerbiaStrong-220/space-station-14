@@ -99,3 +99,17 @@ reagent-desc-potassium-iodide = Снижает разрушительное во
 #SS220 Own haloperidol (comment out official)
 #reagent-name-haloperidol = галоперидол
 #reagent-desc-haloperidol = Выводит из организма большинство стимулирующих и галлюциногенных препаратов. Уменьшает наркотический эффект и дрожание. Вызывает сонливость.
+
+reagent-name-dexalin-plus-saline = дексалин плюс и физраствор
+
+reagent-name-puncturase-tranexamic = пунктураза и транексамовая кислота
+
+reagent-name-pyrazine-dermaline = пиразин и дермалин
+
+reagent-name-arcryox = аркриокс
+
+reagent-desc-arcryox = Тошнотворно синий криогенный химикат, способный исцелять тяжелейшие раны даже у мертвых. Однако вызывает трудности со стабилизацией пациентов.
+
+reagent-name-heparin = гепарин
+
+reagent-desc-heparin = Обычно используется в качестве антикоагулянта. Усложняет свертывание крови. Может вызвать внутреннее кровотечение при передозировке.

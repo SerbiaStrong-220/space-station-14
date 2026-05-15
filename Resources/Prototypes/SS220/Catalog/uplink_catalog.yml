@@ -593,3 +593,82 @@
     Telecrystal: 1
   categories:
   - UplinkDeception
+
+- type: listing
+  id: UplinkRevolverPython
+  name: uplink-revolver-python-name
+  description: uplink-revolver-python-desc
+  productEntity: WeaponRevolverPythonAP
+  discountCategory: rareDiscounts
+  discountDownTo:
+    Telecrystal: 2
+  cost:
+    Telecrystal: 4
+  categories:
+  - UplinkWeaponry
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 6
+    MediumDynamic:
+      Telecrystal: 3
+    HardDynamic:
+      Telecrystal: 3
+
+- type: listing
+  id: UplinkEmpKit
+  name: uplink-emp-kit-name
+  description: uplink-emp-kit-desc
+  productEntity: ElectricalDisruptionKit
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 4
+  cost:
+    Telecrystal: 6
+  categories:
+    - UplinkExplosives
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 6
+    MediumDynamic:
+      Telecrystal: 4
+    HardDynamic:
+      Telecrystal: 3
+
+  # For the Python
+- type: listing
+  id: UplinkSpeedLoaderMagnumAP
+  name: uplink-speedloader-magnum-name
+  description: uplink-speedloader-magnu-desc
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/SpeedLoaders/Magnum/magnum_speed_loader.rsi, state: icon }
+  productEntity: SpeedLoaderMagnumAP
+  cost:
+    Telecrystal: 4
+  categories:
+  - UplinkAmmo
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 4
+    MediumDynamic:
+      Telecrystal: 4
+    HardDynamic:
+      Telecrystal: 2
+
+- type: listing
+  id: UplinkUltrabrightLantern
+  name: uplink-ultrabright-lantern-name
+  description: uplink-ultrabright-lantern-desc
+  productEntity: LanternFlash
+  discountCategory: usualDiscounts
+  discountDownTo:
+    Telecrystal: 1
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkDeception
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1

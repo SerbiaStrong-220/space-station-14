@@ -31,9 +31,9 @@ public sealed partial class SuperMatterObserverGasBar : Control
     public void Initialize(Gas gas)
     {
         GasId = gas;
-        _prototypeManager.TryIndex<GasPrototype>(((int)GasId).ToString(), out var gasProto);
+        _prototypeManager.Resolve<GasPrototype>(GasId.ToString(), out var gasProto);
         LocalizedGasName = _localization.GetString(gasProto == null ? GasId.ToString() : gasProto.Name);
-        GasColor = gasProto == null ? Color.ForestGreen : Color.FromHex("#" + gasProto.Color);
+        GasColor = gasProto == null ? Color.ForestGreen : gasProto.Color;
         ApplyForeground();
         FillingBar.ToolTip = GetTooltip();
     }

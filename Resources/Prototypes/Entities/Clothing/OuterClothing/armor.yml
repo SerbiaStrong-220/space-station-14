@@ -182,7 +182,7 @@
       coefficients:
         Blunt: 0.6 #ballistic plates = better protection
         Slash: 0.6
-        Piercing: 0.3
+        Piercing: 0.7 # ss220 - post upstream - syndie web vest tweak
         Heat: 0.9
   - type: StaticPrice
     price: 1500
@@ -213,7 +213,7 @@
       coefficients:
         Blunt: 0.5
         Slash: 0.5
-        Piercing: 0.7
+        Piercing: 0.5 # ss220 - post upstream - syndie web vest tweak
         Heat: 0.3
         Radiation: 0.5
         Caustic: 0.5
