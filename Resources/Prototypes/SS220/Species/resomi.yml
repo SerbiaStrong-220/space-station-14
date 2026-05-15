@@ -5,10 +5,8 @@
   name: species-name-resomi
   roundStart: true
   prototype: MobResomi
-  sprites: MobResomiSprites
   defaultSkinTone: "#ffffff"
-  markingLimits: MobResomiMarkingLimits
-  dollPrototype: MobResomiDummy
+  dollPrototype: AppearanceResomi
   skinColoration: Hues
   maleFirstNames: NamesResomi
   femaleFirstNames: NamesResomi
@@ -43,27 +41,6 @@
   baseSprite:
     sprite: SS220/Mobs/Species/Resomi/parts.rsi
     state: eyes
-
-- type: markingPoints
-  id: MobResomiMarkingLimits
-  onlyWhitelisted: true
-  points:
-    Tail:
-      points: 1
-      required: true
-      defaultMarkings: [ ResomiTail ]
-    Chest:
-      points: 1
-      required: true
-      defaultMarkings: [ ResomiChestFeathers ]
-    Foots:
-      points: 2
-      required: false
-      defaultMarkings: [ ResomiLFootFeathers, ResomiRFootFeathers ]
-    Arms:
-      points: 2
-      required: false
-      defaultMarkings: [ ResomiLHandFeathers, ResomiRHandFeathers ]
 
 - type: humanoidBaseSprite
   id: MobResomiHead
