@@ -6,6 +6,7 @@ arena-winner-announcement = [Arena] A winner has been declared!
 arena-no-winner-announcement = [Arena] The fight ended without a winner.
 arena-fight-timeout = Time's up, it's a draw!
 arena-ghost-role-fighter-name = Arena Fighter
+ent-MindRoleArenaFighter = { arena-ghost-role-fighter-name }
 arena-ghost-role-fighter-description =
     A participant in a duel arena. The map and loadout are randomly assigned before each match.
     Once the countdown ends, the barriers come down and the one-on-one fight begins. The last fighter standing is declared the winner.

@@ -6,6 +6,7 @@ arena-winner-announcement = [Арена] Победитель определён
 arena-no-winner-announcement = [Арена] Бой завершился без победителя.
 arena-fight-timeout = Время вышло, ничья!
 arena-ghost-role-fighter-name = Боец арены
+ent-MindRoleArenaFighter = { arena-ghost-role-fighter-name }
 arena-ghost-role-fighter-description =
     Участник дуэльной арены. Карта и комплект снаряжения выдаются случайным образом перед каждым боем.
     После окончания отсчёта барьеры исчезают и начинается схватка один на один. Победителем считается последний оставшийся в живых.

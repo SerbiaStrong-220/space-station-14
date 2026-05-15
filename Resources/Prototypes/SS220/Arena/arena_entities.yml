@@ -34,7 +34,7 @@
 - type: entity
   parent: MindRoleGhostRoleNeutral
   id: MindRoleArenaFighter
-  name: arena-ghost-role-fighter-name
+  name: Arena Fighter
   components:
   - type: GhostRoleMarkerRole
     showInSummary: false
