@@ -1,9 +1,9 @@
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 
-namespace Content.Client.SS220.ResetLight;
+namespace Content.Client.SS220.ResetToggleCommands;
 
-public sealed class ResetLightSystem : EntitySystem
+public sealed class ResetToggleCommandsSystem : EntitySystem
 {
     [Dependency] private readonly ILightManager _light = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
@@ -35,5 +35,8 @@ public sealed class ResetLightSystem : EntitySystem
     private void ResetLight()
     {
         _light.Enabled = true;
+        _light.DrawHardFov = true;
+        _light.DrawLighting = true;
+        _light.DrawShadows = true;
     }
 }
