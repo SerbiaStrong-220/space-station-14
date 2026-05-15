@@ -548,8 +548,8 @@ public sealed partial class ShuttleSystem
 
         comp.State = FTLState.Cooldown;
         var cooldown = entity.Comp2.FTLCooldownOverride ?? (HasComp<ArrivalsShuttleComponent>(uid)
-                ? ArrivalsFTLCooldown
-                : TimeSpan.FromSeconds(entity.Comp2.FTLCooldown)); // SS220-make ftl cooldown a variable
+            ? ArrivalsFTLCooldown
+            : FTLCooldown);
         comp.StateTime = StartEndTime.FromCurTime(_gameTiming, cooldown);
         _console.RefreshShuttleConsoles(uid);
         _mapSystem.SetPaused(mapId, false);

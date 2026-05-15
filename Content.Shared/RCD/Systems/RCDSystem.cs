@@ -631,8 +631,8 @@ public sealed class RCDSystem : EntitySystem
                 }
 
                 // SS220 fix rcd rotation begin
-                var mapcords = _transform.ToMapCoordinates(_mapSystem.GridTileToLocal(gridUid, mapGrid, position));
-                var ent = Spawn(prototype.Prototype, mapcords, rotation: rotation);
+                var coords = _mapSystem.GridTileToLocal(gridUid, mapGrid, position);
+                var ent = SpawnAttachedTo(prototype.Prototype, coords, rotation: rotation);
                 // SS220 fix rcd rotation end
 
                 _adminLogger.Add(LogType.RCD, LogImpact.High, $"{ToPrettyString(user):user} used RCD to spawn {ToPrettyString(ent)} at {position} on grid {gridUid}");
