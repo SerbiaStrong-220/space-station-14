@@ -4,4 +4,8 @@ using Robust.Shared.GameStates;
 namespace Content.Shared.SS220.Trigger;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class AddReagentsOnTriggerComponent : BaseXOnTriggerComponent;
+public sealed partial class AddReagentsOnTriggerComponent : BaseXOnTriggerComponent
+{
+    [DataField]
+    public string ContainerName = "beaker";
+}
