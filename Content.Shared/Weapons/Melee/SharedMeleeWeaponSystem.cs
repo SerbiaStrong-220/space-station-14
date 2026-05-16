@@ -581,6 +581,8 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             if (meleeBlockEvent.Cancelled && meleeBlockEvent.Blocker is { Valid: true } blockerUid)
                 targetEntity = blockerUid;
         }
+
+        target = targetEntity;
         //SS220 shield rework end
 
         // Sawmill.Debug($"Melee damage is {damage.Total} out of {component.Damage.Total}");
