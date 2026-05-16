@@ -5,9 +5,7 @@ namespace Content.Shared.SS220.Weapons.Ranged.Events;
 
 
 [ByRefEvent]
-public record struct HitscanBlockAttemptEvent(DamageSpecifier? Damage, EntityUid Shooter)
+public record struct HitscanBlockAttemptEvent(DamageSpecifier? Damage, EntityUid Shooter, bool CancelledHit = false)
 {
-    public bool CancelledHit = false;
-
     public Color? hitColor = Color.Red;
 }

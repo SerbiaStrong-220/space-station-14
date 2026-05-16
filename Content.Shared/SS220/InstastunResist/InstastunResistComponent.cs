@@ -16,5 +16,5 @@ public sealed partial class InstastunResistComponent : Component
 
     [DataField]
     [AutoNetworkedField]
-    public List<StunSource> ResistedStunTypes = new List<StunSource>();
+    public HashSet<StunSource> ResistedStunTypes;
 }

@@ -3,10 +3,8 @@ namespace Content.Shared.SS220.Weapons.Melee.Events;
 
 
 [ByRefEvent]
-public record struct MeleeHitBlockAttemptEvent(EntityUid Attacker)
+public record struct MeleeHitBlockAttemptEvent(EntityUid Attacker, bool CancelledHit = false)
 {
-    public bool CancelledHit = false;
-
     public EntityUid Blocker;
 
     public Color? HitMarkColor = Color.Red;

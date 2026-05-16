@@ -13,7 +13,7 @@ public sealed partial class AltBlockingUserComponent : Component
     /// <summary>
     /// The entities that's being used to block and are shields
     /// </summary>
-    [DataField("blockingItemsShields")]
+    [AutoNetworkedField]
     public List<EntityUid> BlockingItemsShields = new();
 
     [DataField, AutoNetworkedField]
