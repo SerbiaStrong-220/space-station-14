@@ -12,7 +12,7 @@ namespace Content.Shared.SS220.Surgery.Graph.Requirements;
 public sealed partial class TotalDamageRequirement : SurgeryGraphRequirement
 {
     [DataField]
-    public ProtoId<DamageTypePrototype>? DamageGroup;
+    public ProtoId<DamageTypePrototype>? DamageType;
 
     [DataField(required: true)]
     public FixedPoint2 Damage;
@@ -23,9 +23,9 @@ public sealed partial class TotalDamageRequirement : SurgeryGraphRequirement
         if (!entityManager.TryGetComponent<DamageableComponent>(uid, out var damageableComponent))
             return false;
 
-        if (DamageGroup is not null)
-            return damageSystem.GetAllDamage(uid.Value)[DamageGroup] >= Damage;
+        if (DamageType is not null)
+            return damageSystem.GetAllDamage(uid.Value)[DamageType] > Damage;
         else
-            return damageSystem.GetTotalDamage(uid.Value) >= Damage;
+            return damageSystem.GetTotalDamage(uid.Value) > Damage;
     }
 }

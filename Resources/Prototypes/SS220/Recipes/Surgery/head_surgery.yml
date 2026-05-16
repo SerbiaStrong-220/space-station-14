@@ -181,7 +181,7 @@
       - !type:ApplyDamageAction
         damage:
           types:
-            Cerebral: -10
+            Cerebral: -5
       requirements:
       - !type:SurgeryToolRequirement
         subject: used
@@ -191,8 +191,8 @@
         failureMessage: surgery-requirement-tool-miss
       - !type:TotalDamageRequirement
         subject: target
-        damageGroup: Genetic
-        damage: 0.0001
+        DamageType: Cerebral
+        damage: 0
         description: surgery-requirement-total-damage-requirement-brain-damage-heal-description
         failureMessage: surgery-requirement-total-damage-requirement-brain-damage-no-damage
     # fix brain-related pathologies
