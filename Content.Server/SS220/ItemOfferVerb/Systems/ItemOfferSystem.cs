@@ -39,7 +39,7 @@ public sealed class ItemOfferSystem : SharedItemOfferSystem
 
     private bool HandleItemOfferKey(in PointerInputCmdHandler.PointerInputCmdArgs args)
     {
-        if (!args.EntityUid.IsValid() || !EntityManager.EntityExists(args.EntityUid))
+        if (!args.EntityUid.IsValid() || !Exists(args.EntityUid))
             return false;
 
         var user = args.Session?.AttachedEntity;
@@ -67,20 +67,17 @@ public sealed class ItemOfferSystem : SharedItemOfferSystem
         {
             var receiverPos = Transform(comp.Giver).Coordinates;
             var giverPos = Transform(uid).Coordinates;
-            receiverPos.TryDistance(EntityManager, giverPos, out var distance);
-            var giverHands = Comp<HandsComponent>(comp.Giver);
 
-            if (distance < comp.ReceiveRange)
-                continue;
-
-            if (distance > comp.ReceiveRange)
+            if (!receiverPos.TryDistance(EntityManager, giverPos, out var distance) || distance > comp.ReceiveRange)
             {
                 _alerts.ClearAlert(uid, _itemOfferAlert);
                 _entMan.RemoveComponent<ItemReceiverComponent>(uid);
+                continue;
             }
 
             //FunTust: added a new variable responsible for whether the object is still in the hand during transmission
 
+            var giverHands = Comp<HandsComponent>(comp.Giver);
             var foundInHand = _hands.IsHolding((comp.Giver, giverHands), comp.Item!.Value);
 
             if (!foundInHand)

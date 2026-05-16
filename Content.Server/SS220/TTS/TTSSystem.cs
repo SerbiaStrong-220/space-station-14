@@ -15,6 +15,8 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
+using Content.Shared.Chat;
+using Robust.Shared.Enums;
 
 namespace Content.Server.SS220.TTS;
 
@@ -22,7 +24,6 @@ namespace Content.Server.SS220.TTS;
 public sealed partial class TTSSystem : EntitySystem
 {
     [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly ILogManager _log = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -83,6 +84,9 @@ public sealed partial class TTSSystem : EntitySystem
     private void ServerSendMessage(NetMessage message, ICommonSession recipient)
     {
         if (_sessionsNotToSend.Contains(recipient))
+            return;
+
+        if (recipient.Status == SessionStatus.Disconnected)
             return;
 
         _netManager.ServerSendMessage(message, recipient.Channel);

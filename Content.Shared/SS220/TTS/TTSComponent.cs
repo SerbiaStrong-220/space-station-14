@@ -1,20 +1,20 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared.SS220.TTS;
 
 /// <summary>
 /// Apply TTS for entity chat say messages
 /// </summary>
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent]
+[NetworkedComponent, AutoGenerateComponentState(true)]
 // ReSharper disable once InconsistentNaming
 public sealed partial class TTSComponent : Component
 {
     /// <summary>
     /// Prototype of used voice for TTS.
     /// </summary>
-    [DataField("voice")]
+    [DataField("voice"), AutoNetworkedField]
     public ProtoId<TTSVoicePrototype>? VoicePrototypeId { get; set; }
 
     /// <summary>

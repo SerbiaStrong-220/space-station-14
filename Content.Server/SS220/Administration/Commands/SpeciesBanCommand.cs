@@ -34,6 +34,7 @@ public sealed class SpeciesBanCommand : LocalizedCommands
         string reason;
         uint minutes;
         var postBanInfo = true;
+
         if (!Enum.TryParse(_cfg.GetCVar(CCVars220.SpeciesBanDefaultSeverity), out NoteSeverity severity))
         {
             _sawmill ??= _log.GetSawmill("admin.species_ban");
@@ -123,17 +124,22 @@ public sealed class SpeciesBanCommand : LocalizedCommands
             return;
         }
 
-        _ban.CreateSpeciesBan(located.UserId,
-            located.Username,
-            shell.Player?.UserId,
-            null,
-            located.LastHWId,
-            speciesId,
-            minutes,
-            severity,
-            reason,
-            DateTimeOffset.UtcNow,
-            postBanInfo);
+        var targetUid = located.UserId;
+        var targetHWid = located.LastHWId;
+
+        var speciesBanInfo = new CreateSpeciesBanInfo(reason);
+        if (minutes > 0)
+            speciesBanInfo.WithMinutes(minutes);
+        speciesBanInfo.AddUser(targetUid, located.Username);
+        speciesBanInfo.WithBanningAdmin(shell.Player?.UserId);
+        speciesBanInfo.WithBanningAdminName(shell.Player?.Name);
+        speciesBanInfo.AddHWId(targetHWid);
+        speciesBanInfo.WithSeverity(severity);
+        speciesBanInfo.WithPostBanInfo(postBanInfo);
+
+        speciesBanInfo.AddSpecie(speciesId);
+
+        _ban.CreateSpeciesBan(speciesBanInfo);
     }
 
     public override CompletionResult GetCompletion(IConsoleShell shell, string[] args)

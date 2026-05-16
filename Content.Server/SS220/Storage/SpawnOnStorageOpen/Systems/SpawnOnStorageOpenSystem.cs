@@ -6,13 +6,10 @@ using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
-using static Content.Shared.Storage.EntitySpawnCollection;
-
 namespace Content.Server.SS220.Storage.SpawnOnStorageOpen.Systems;
 
 public sealed class SpawnOnStorageOpenSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly IEntityManager _entManager = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IPrototypeManager _protoManager = default!;

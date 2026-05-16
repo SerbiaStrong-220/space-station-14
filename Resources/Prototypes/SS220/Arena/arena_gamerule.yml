@@ -1,0 +1,27 @@
+- type: entity
+  id: TwoPlayerArena
+  parent: BaseGameRule
+  components:
+  - type: TwoPlayerArenaRule
+    deleteBarriers: true
+    selectionMode: Random
+    maps:
+    - path: /Maps/SS220/Arenas/two_player_arena.yml
+      loadout: ArenaLoadoutOperative
+      countdownDuration: 60
+    - path: /Maps/SS220/Arenas/mine_arena.yml
+      loadout: ArenaLoadoutSalvage
+    - path: /Maps/SS220/Arenas/forest_arena.yml
+      loadout: ArenaLoadoutMercenary
+    - path: /Maps/SS220/Arenas/frozen_arena.yml
+      loadout: ArenaLoadoutBlueShield
+    - path: /Maps/SS220/Arenas/ice_arena.yml
+      loadout: ArenaLoadoutWinter
+    - path: /Maps/SS220/Arenas/tunnel_arena.yml
+      loadout: ArenaLoadoutLawyerSniper
+    - path: /Maps/SS220/Arenas/byblik_arena.yml
+      loadout: ArenaLoadoutByblik
+    - path: /Maps/SS220/Arenas/lava_arena.yml
+      loadout: ArenaLoadoutLava
+    - path: /Maps/SS220/Arenas/dust_arena.yml
+      loadout: ArenaLoadoutDust

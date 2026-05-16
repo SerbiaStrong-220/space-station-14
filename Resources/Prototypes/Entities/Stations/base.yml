@@ -57,6 +57,8 @@
     - type: GridSpawn
       groups:
         trade: !type:GridSpawnGroup
+          minimumDistance: 100 # SS220 make more space in space
+          maximumDistance: 150 # SS220 make more space in space
           addComponents:
             - type: ProtectedGrid
             - type: TradeStation
@@ -67,15 +69,14 @@
           - /Maps/SS220/Shuttles/mining.yml # SS220 shuttle upd
         # Spawn last
         ruins: !type:GridSpawnGroup
-          hide: false #SS2200 IFF and Name Hide Reveal
-          nameGrid: false #SS2200 IFF and Name Hide Reveal
-          minCount: 2
-          maxCount: 3 # SS2200 Counter Ruins Update
+          hide: true #SS2200 IFF and Name Hide Reveal
+          nameGrid: true #SS2200 IFF and Name Hide Reveal
+          minCount: 8 # SS220-counter-ruin-rebalance
+          maxCount: 12 # SS220-counter-ruin-rebalance
           stationGrid: false
-          minimumDistance: 400 # SS220 Ruins distance
-          maximumDistance: 650 # SS220 Ruins distance
+          minimumDistance: 250 # SS220 Ruins distance
+          maximumDistance: 350 # SS220 Ruins distance
           paths:
-          # - /Maps/Ruins/chunked_tcomms.yml # SS220 Removed with Ruins Update (balance Tweak)
           - /Maps/Ruins/abandoned_outpost.yml
           - /Maps/Ruins/atmos_interchange.yml
           # - /Maps/Ruins/chunked_tcomms.yml # SS220 Removed with Ruins Update (balance Tweak)
@@ -91,16 +92,50 @@
           # - /Maps/Ruins/whiteship_bluespacejumper.yml # SS220 Removed with Ruins Update (balance Tweak)
           # - /Maps/Ruins/wrecklaimer.yml # SS220 Removed with Ruins Update (balance Tweak)
           - /Maps/Ruins/displaced_telescience.yml
-          # SS220 Ruins Update Map begin
+      # SS220 Ruins Update Map begin
           - /Maps/SS220/Ruins/Arena_SS220.yml
           - /Maps/SS220/Ruins/Broadaxe_SS220.yml
           - /Maps/SS220/Ruins/CargoOutpost_SS220.yml
           - /Maps/SS220/Ruins/Prison_SS220.yml
           - /Maps/SS220/Ruins/WarshuttleWreck_SS220.yml
-          # SS220 Ruins Update Map End
-        wrecks: !type:DungeonSpawnGroup
+          - /Maps/SS220/Ruins/Warehouse_SS220.yml
+          - /Maps/SS220/Ruins/Market_SS220.yml
+          - /Maps/SS220/Ruins/Scrapyard_SS220.yml
+          - /Maps/SS220/Ruins/TradeCenter_SS220.yml
+          - /Maps/SS220/Ruins/SyndiBase_SS220.yml
+          - /Maps/SS220/Ruins/Chapel_SS220_RuinVer.yml
+          - /Maps/SS220/Ruins/SmallJRBarge_SS220_RuinVer.yml
+          - /Maps/SS220/Ruins/EngineeringChunk_SS220_RuinVer.yml
+          - /Maps/SS220/Ruins/AsteroidBase_SS220_RuinVer.yml
+          - /Maps/SS220/Ruins/SmallCargoWreck_SS220_RuinVer.yml
+          addComponents:
+          - type: Shuttle
+            bodyModifier: 2
+          - type: IFF
+            flags: HideLabel
+            color: "#d1af88"
+        satellites: !type:GridSpawnGroup
+          hide: false
+          nameGrid: true
+          minCount: 1
+          maxCount: 1
+          stationGrid: false
           minimumDistance: 150
-          maximumDistance: 300
+          maximumDistance: 250
+          paths:
+          - /Maps/SS220/Ruins/CargoOutpost_SS220.yml
+          - /Maps/SS220/Ruins/Prison_SS220.yml
+          - /Maps/SS220/Ruins/BDDarkForest_SS220.yml
+          - /Maps/SS220/Ruins/BDGrass_SS220.yml
+          - /Maps/SS220/Ruins/GasStation_SS220.yml
+          addComponents:
+          - type: Shuttle
+            bodyModifier: 2
+        # SS220 Ruins Update Map End
+        wrecks: !type:DungeonSpawnGroup
+          hide: true #SS2200 IFF and Name Hide Reveal
+          minimumDistance: 150
+          maximumDistance: 250 # SS220-move-dungeon-closer
           stationGrid: false
           minCount: 12
           maxCount: 16
@@ -118,6 +153,7 @@
           - ChunkDebrisSmall
           - ChunkDebris
         vgroid: !type:DungeonSpawnGroup
+          hide: true #SS2200 IFF and Name Hide Reveal
           minimumDistance: 900 # SS220 VGroid distance
           maximumDistance: 1350 # SS220 VGroid distance
           nameDataset: NamesBorer

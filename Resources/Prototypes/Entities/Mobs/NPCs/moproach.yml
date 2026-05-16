@@ -7,6 +7,29 @@
   - type: GhostRole
     name: ghost-role-information-moproach-name
     description: ghost-role-information-moproach-description
+  #SS220 languages tweaks begin
+  - type: Speech
+    speechVerb: Moth
+    speechSounds: Squeak
+    allowedEmotes: ['Chitter', 'Squeak']
+  - type: MothAccent
+  - type: Language
+    availableLanguages:
+    - id: Tkachi
+      canSpeak: true
+    - id: Galactic
+      canSpeak: false
+    - id: Doggish
+      canSpeak: false
+    - id: Feline
+      canSpeak: false
+    - id: Reptilian
+      canSpeak: false
+    - id: Monkey
+      canSpeak: false
+    - id: Piggish
+      canSpeak: false
+  #SS220 languages tweaks end
   - type: Sprite
     sprite: Mobs/Animals/mothroach/moproach.rsi
   - type: Clothing

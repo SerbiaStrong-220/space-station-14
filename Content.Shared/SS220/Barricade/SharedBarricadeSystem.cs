@@ -1,8 +1,8 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Projectiles;
-using Content.Shared.SS220.Weapons.Ranged.Events;
 using Content.Shared.Throwing;
+using Content.Shared.Weapons.Hitscan.Events;
 using Content.Shared.Whitelist;
 using Robust.Shared.Physics.Events;
 
@@ -17,7 +17,7 @@ public abstract partial class SharedBarricadeSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<BarricadeComponent, PreventCollideEvent>(OnPreventCollide);
-        SubscribeLocalEvent<BarricadeComponent, HitscanAttempt>(OnHitscanAttempt);
+        SubscribeLocalEvent<BarricadeComponent, AttemptHitscanRaycastHitEvent>(OnHitscanAttempt);
 
         SubscribeLocalEvent<PassBarricadeComponent, LandEvent>(OnLand);
         SubscribeLocalEvent<PassBarricadeComponent, ProjectileHitEvent>(OnProjectileHit);
@@ -26,6 +26,9 @@ public abstract partial class SharedBarricadeSystem : EntitySystem
 
     private void OnPreventCollide(Entity<BarricadeComponent> entity, ref PreventCollideEvent args)
     {
+        if (args.Cancelled)
+            return;
+
         if (_entityWhitelist.IsWhitelistPass(entity.Comp.Whitelist, args.OtherEntity))
         {
             args.Cancelled = true;
@@ -39,9 +42,9 @@ public abstract partial class SharedBarricadeSystem : EntitySystem
         }
     }
 
-    private void OnHitscanAttempt(Entity<BarricadeComponent> entity, ref HitscanAttempt args)
+    private void OnHitscanAttempt(Entity<BarricadeComponent> entity, ref AttemptHitscanRaycastHitEvent args)
     {
-        if (HitscanTryPassBarricade(entity, args.User))
+        if (HitscanTryPassBarricade(entity, args.HitScanEntity))
             args.Cancelled = true;
     }
 
@@ -61,10 +64,7 @@ public abstract partial class SharedBarricadeSystem : EntitySystem
             entity.Comp.CollideBarricades.Remove(args.OtherEntity);
     }
 
-    protected virtual bool HitscanTryPassBarricade(Entity<BarricadeComponent> entity, EntityUid source, TransformComponent? sourceXform = null)
-    {
-        return false;
-    }
+    protected abstract bool HitscanTryPassBarricade(Entity<BarricadeComponent> entity, EntityUid source, TransformComponent? sourceXform = null);
 
     protected virtual bool ProjectileTryPassBarricade(Entity<BarricadeComponent> entity, Entity<ProjectileComponent> projEnt)
     {

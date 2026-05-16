@@ -1,0 +1,15 @@
+- type: entity
+  parent: SpaceCash100
+  id: SpaceCash250
+  suffix: 250
+  components:
+  - type: Stack
+    count: 250
+
+- type: entity
+  parent: SpaceCash500
+  id: SpaceCash700
+  suffix: 700
+  components:
+  - type: Stack
+    count: 700

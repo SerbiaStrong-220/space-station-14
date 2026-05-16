@@ -40,6 +40,7 @@
       - Librarian #SS220 New_accesses_and_some_tweaks
       - Maintenance
       - Medical
+      - NanoTrasenRepresentative
       - NuclearOperative
       - Paramedic
       - Psychologist #SS220 New_accesses_and_some_tweaks
@@ -52,14 +53,14 @@
       - Service
       - SyndicateAgent
       - Theatre
-      - Magistrate
+      - Magistrate #SS220 TODO NanoTraisen Representative
       - Mime #SS220 New_accesses_and_some_tweaks
       - Musician #SS220 New_accesses_and_some_tweaks
       #New centcomm accesses begin
       - CentralCommand
       - CentralCommandCBURN
       - CentralCommandERT
-      - CentralCommandBSO
+      - CentralCommandSRT
       - CentralCommandDeathSquad
       #New centcomm accesses end
       #Ussp accesses begin
@@ -68,3 +69,4 @@
       - UsspMedical
       - UsspEngineering
       #Ussp accesses end
+      - Interdyne

@@ -13,6 +13,7 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using System.Linq;
 using System.Numerics;
+using Content.Shared.Damage.Systems;
 
 namespace Content.Server.SS220.Forcefield.Systems;
 

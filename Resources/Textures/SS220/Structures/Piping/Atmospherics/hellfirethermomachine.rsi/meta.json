@@ -1,8 +1,8 @@
 {
     "version":1,
-    "size":{"x":32,"y":32},
-    "copyright":"Sprite by by AftrLite(Github)",
     "license":"CC-BY-SA-3.0",
+    "copyright":"Sprite by by AftrLite(Github)",
+    "size":{"x":32,"y":32},
     "states":[
         {
             "name":"freezerOff",

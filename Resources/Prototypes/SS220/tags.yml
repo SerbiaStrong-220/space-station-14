@@ -20,7 +20,7 @@
   id: MagazineGrenadeArta
 
 - type: Tag
-  id: KRSPowerCell
+  id: PowerCellBlaster
 
 - type: Tag
   id: LaserCarabinePowerCell
@@ -138,10 +138,6 @@
 
 - type: Tag
   id: SpiderLittle
-
- #Add Tourniquet to medic's belt
-- type: Tag
-  id: Tourniquet
 
 # SS220 Add lying action
 - type: Tag
@@ -367,3 +363,33 @@
 
 - type: Tag
   id: VoidTeleporationTarget
+
+- type: Tag
+  id: EnvelopeWhitelist
+
+- type: Tag
+  id: RabbitBnuuyWearable
+
+- type: Tag
+  id: AirDefenseTarget
+
+- type: Tag
+  id: CrystalPurple
+
+- type: Tag
+  id: LoneOpsUplink
+
+- type: Tag
+  id: JudgeGavel
+
+- type: Tag
+  id: Ian
+
+- type: Tag
+  id: CatWalk
+
+- type: Tag
+  id: PressureProtectionSuit
+
+- type: Tag
+  id: HookahCoal

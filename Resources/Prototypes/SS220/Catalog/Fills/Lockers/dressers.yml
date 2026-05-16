@@ -1,0 +1,16 @@
+- type: entity
+  id: DresserBlueShieldFilled
+  parent: Dresser
+  suffix: Filled, BlueShield
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingUniformJumpsuitBlueShieldCombez
+        - id: ClothingHeadBeretBlueshield
+        - id: ClothingHeadBeretBlue
+        - id: ClothingEyesGlassesCommand
+        - id: ClothingHandsGlovesColorBlack
+        - id: ClothingHandsGlovesColorWhite
+        - id: ClothingOuterSRTCoat

@@ -10,7 +10,7 @@
     - Wall
   components:
   - type: Anchorable
-    flags: 
+    flags:
     - Anchorable
   - type: Rotatable
   - type: RangedDamageSound
@@ -269,7 +269,6 @@
   - type: Tag
     tags:
       - Wall
-      - Debug
   - type: Sprite
     sprite: Structures/Walls/debug.rsi
   - type: Icon
@@ -1137,9 +1136,9 @@
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: Sprite
-    sprite: Structures/Walls/xeno.rsi
+    sprite: SS220/Structures/Walls/xeno.rsi # SS220 walls-sprite-update-v6
   - type: Icon
-    sprite: Structures/Walls/xeno.rsi
+    sprite: SS220/Structures/Walls/xeno.rsi # SS220 walls-sprite-update-v6
   - type: IconSmooth
     key: chitin
     base: solid
@@ -1157,9 +1156,9 @@
   name: reinforced chitin
   components:
   - type: Sprite
-    sprite: Structures/Walls/xeno.rsi
+    sprite: SS220/Structures/Walls/xeno.rsi # SS220 walls-sprite-update-v6
   - type: Icon
-    sprite: Structures/Walls/xeno.rsi
+    sprite: SS220/Structures/Walls/xeno.rsi # SS220 walls-sprite-update-v6
     state: rgeneric
   - type: Damageable
     damageContainer: StructuralInorganic
@@ -1673,6 +1672,40 @@
     key: cobblebricks
     base: cobblebrick
 
+- type: entity
+  parent: WallCobblebrick
+  id: WallIronsandCobblebrick
+  name: ironsand brick wall
+  description: The pale, rounded shapes that make up this wall look strikingly different from the iron sands they were allegedly made from.
+  components:
+  - type: Sprite
+    sprite: Structures/Walls/cobblebrick_ironsand.rsi
+  - type: Icon
+    sprite: Structures/Walls/cobblebrick_ironsand.rsi
+  - type: IconSmooth
+    key: cobblebricks
+    base: cobblebrick
+  - type: RCDDeconstructable
+    deconstructable: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/break_stone.ogg
+          params:
+            volume: -6
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SteelOre1:
+            min: 0
+            max: 2
+
 # Cardboard
 
 - type: entity
@@ -1695,9 +1728,9 @@
     - Wall
   - type: Sprite
     drawdepth: SmallObjects #so bullets pass 'through'
-    sprite: Structures/Walls/card.rsi
+    sprite: SS220/Structures/Walls/card.rsi # SS220 walls-sprite-update-v6
   - type: Icon
-    sprite: Structures/Walls/card.rsi
+    sprite: SS220/Structures/Walls/card.rsi # SS220 walls-sprite-update-v6
     state: full
   - type: Construction
     graph: Cardwall

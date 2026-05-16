@@ -79,7 +79,6 @@ public sealed class SurveillanceCameraRouterSystem : EntitySystem
                 SubnetPingResponse(uid, args.SenderAddress, router);
                 break;
             case SurveillanceCameraSystem.CameraDataMessage:
-                args.Data[SurveillanceCameraSystem.CameraSubnetData] = router.SubnetFrequencyId ?? "";
                 SendCameraInfo(uid, args.Data, router);
                 break;
         }
