@@ -2,7 +2,6 @@
 
 using Content.Shared.Damage;
 using Content.Shared.Random;
-using Content.Shared.SS220.LimitationRevive;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 

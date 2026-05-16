@@ -54,7 +54,6 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         });
 
         SubscribeLocalEvent<SurgeryPatientComponent, SurgeryDoAfterEvent>(OnSurgeryDoAfter);
-
         SubscribeLocalEvent<SurgeryPatientComponent, DoAfterAttemptEvent<SurgeryDoAfterEvent>>((uid, comp, ev) =>
         {
             OnDoAfterAttempt((uid, comp), ev.Event, ev);

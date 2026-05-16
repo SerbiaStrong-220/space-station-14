@@ -45,7 +45,7 @@
     skillDescription: anatomy-trained-desc
   components:
   - type: SurgeryDoAfterSkill
-    durationScale: 0.9
+    durationScale: 0.85
     failureChance: 0
   - type: PathologyHealerRemoveDamageSkill
     removeDamageModifier:
