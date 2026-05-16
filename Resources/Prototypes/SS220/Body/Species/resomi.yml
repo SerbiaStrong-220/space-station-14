@@ -160,20 +160,20 @@
       - id: FoodMeat
         amount: 5
   - type: ResomiAccent
-  # - type: Speech
-    # speechSounds: Resomi
-    # speechVerb: Resomi
+  - type: Speech
+    speechSounds: MaleResomi
+    speechVerb: Parrot
   # - type: TypingIndicator
   #   proto: resomi
   - type: CreamPied
     sprite:
       sprite: SS220/Effects/creampie.rsi
       state: creampie_resomi
-  # - type: Vocal
-    # sounds:
-    #   Male: Resomi
-    #   Female: Resomi
-    #   Unsexed: Resomi
+  - type: Vocal
+    sounds:
+      Male: MaleResomi
+      Female: FemaleResomi
+      Unsexed: MaleResomi
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: Resomi
