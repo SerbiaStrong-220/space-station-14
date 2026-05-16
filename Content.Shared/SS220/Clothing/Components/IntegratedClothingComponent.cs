@@ -16,7 +16,6 @@ public sealed partial class IntegratedClothingComponent : Component
     [DataField(required: true), AutoNetworkedField]
     public EntProtoId ClothingPrototype = default!;
 
-    [ViewVariables(VVAccess.ReadWrite)]
     [DataField, AutoNetworkedField]
     public string Slot = "head";
 
@@ -29,6 +28,6 @@ public sealed partial class IntegratedClothingComponent : Component
     [ViewVariables]
     public ContainerSlot? Container;
 
-    [DataField, AutoNetworkedField]
+    [AutoNetworkedField]
     public EntityUid? ClothingUid;
 }
