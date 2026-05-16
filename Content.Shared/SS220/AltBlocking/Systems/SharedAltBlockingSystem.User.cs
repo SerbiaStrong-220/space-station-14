@@ -8,6 +8,7 @@ namespace Content.Shared.SS220.AltBlocking;
 public sealed partial class SharedAltBlockingSystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    
     private void InitializeUser()
     {
         SubscribeLocalEvent<AltBlockingUserComponent, EntityTerminatingEvent>(OnEntityTerminating);
