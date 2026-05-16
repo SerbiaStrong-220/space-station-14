@@ -19,7 +19,7 @@
                     <Label Name="BalanceLabel" />
                 </BoxContainer>
                 <controls:HighDivider Name="Divider" Visible="False" Margin="0 10 0 10" />
-                <Label Name="StatusLabel"/>
+                <Label Name="StatusLabel" HorizontalAlignment="Center"/>
                 <SliderIntInput Name="WithdrawSlider" Margin="0 6 0 6" />
             </BoxContainer>
             <BoxContainer Name="InvalidCardOptionsBox"
