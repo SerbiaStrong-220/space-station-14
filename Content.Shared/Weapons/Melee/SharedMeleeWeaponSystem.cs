@@ -578,7 +578,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
             RaiseLocalEvent(targetEntity, ref meleeBlockEvent);
 
-            if (meleeBlockEvent.CancelledHit && meleeBlockEvent.Blocker is { Valid: true } blockerUid)
+            if (meleeBlockEvent.Cancelled && meleeBlockEvent.Blocker is { Valid: true } blockerUid)
                 targetEntity = blockerUid;
         }
         //SS220 shield rework end
@@ -743,7 +743,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
                 RaiseLocalEvent(entity, ref meleeBlockEvent);
 
-                if (meleeBlockEvent.CancelledHit && meleeBlockEvent.Blocker is { Valid: true } blockerUid)
+                if (meleeBlockEvent.Cancelled && meleeBlockEvent.Blocker is { Valid: true } blockerUid)
                 {
                     var shield1 = blockerUid;
                     targets.Add(shield1);
@@ -1024,7 +1024,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             var meleeBlockEvent = new MeleeHitBlockAttemptEvent(user);
 
             RaiseLocalEvent(targetEntity, ref meleeBlockEvent);
-            if (meleeBlockEvent.CancelledHit && meleeBlockEvent.Blocker is { Valid: true } blockerUid)
+            if (meleeBlockEvent.Cancelled && meleeBlockEvent.Blocker is { Valid: true } blockerUid)
             {
                 PopupSystem.PopupEntity(Loc.GetString("block-shot"), targetEntity);
                 targetEntity = blockerUid;

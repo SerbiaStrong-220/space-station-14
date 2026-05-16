@@ -9,7 +9,6 @@ using Content.Shared.SS220.Weapons.Melee.Events;
 using Content.Shared.SS220.Weapons.Ranged.Events;
 using System.Numerics;
 using Robust.Shared.Utility;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Content.Shared.SS220.AltBlocking;
 
@@ -18,7 +17,7 @@ public sealed partial class SharedAltBlockingSystem
     private void OnBlockUserCollide(Entity<AltBlockingUserComponent> ent, ref ProjectileBlockAttemptEvent args)
     {
         var projectileAngle = _transform.GetWorldRotation(args.ProjUid);
-        args.CancelledHit = TryBlock(ent.Comp.BlockingItemsShields, args.Damage, ent, projectileAngle + new Angle(Math.PI).Reduced());
+        args.Cancelled = TryBlock(ent.Comp.BlockingItemsShields, args.Damage, ent, projectileAngle + new Angle(Math.PI).Reduced());
     }
 
     private void OnBlockThrownProjectile(Entity<AltBlockingUserComponent> ent, ref ThrowableProjectileBlockAttemptEvent args)
@@ -26,13 +25,13 @@ public sealed partial class SharedAltBlockingSystem
         var itemPos = _transform.GetWorldPosition(args.DamageDealer);
         var targetPos = _transform.GetWorldPosition(ent);
         var angle = new Angle(new Vector2(targetPos.X - itemPos.X, targetPos.Y - itemPos.Y)) - new Angle(Math.PI / 2);
-        args.CancelledHit = TryBlock(ent.Comp.BlockingItemsShields, args.Damage, ent, angle);
+        args.Cancelled= TryBlock(ent.Comp.BlockingItemsShields, args.Damage, ent, angle);
     }
 
     private void OnBlockUserHitscan(Entity<AltBlockingUserComponent> ent, ref HitscanBlockAttemptEvent args)
     {
         var vector = _transform.GetWorldPosition(ent) - _transform.GetWorldPosition(args.Shooter);
-        args.CancelledHit = TryBlock(ent.Comp.BlockingItemsShields, args.Damage, ent, vector.ToAngle() - new Angle(Math.PI / 2));
+        args.Cancelled = TryBlock(ent.Comp.BlockingItemsShields, args.Damage, ent, vector.ToAngle() - new Angle(Math.PI / 2));
     }
 
     private void OnBlockUserMeleeHit(Entity<AltBlockingUserComponent> ent, ref MeleeHitBlockAttemptEvent args)

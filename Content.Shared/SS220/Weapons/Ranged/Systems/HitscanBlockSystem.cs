@@ -23,7 +23,7 @@ public sealed class HitscanBlockSystem : EntitySystem
 
         RaiseLocalEvent((EntityUid)args.Data.HitEntity, ref ev);
 
-        args.Cancelled = ev.CancelledHit;
+        args.Cancelled = ev.Cancelled;
     }
 
 }

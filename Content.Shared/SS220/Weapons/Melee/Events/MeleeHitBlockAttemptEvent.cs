@@ -3,7 +3,7 @@ namespace Content.Shared.SS220.Weapons.Melee.Events;
 
 
 [ByRefEvent]
-public record struct MeleeHitBlockAttemptEvent(EntityUid Attacker, bool CancelledHit = false)
+public record struct MeleeHitBlockAttemptEvent(EntityUid Attacker, bool Cancelled = false)
 {
     public EntityUid Blocker;
 

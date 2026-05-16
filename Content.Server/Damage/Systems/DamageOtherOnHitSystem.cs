@@ -49,7 +49,7 @@ public sealed class DamageOtherOnHitSystem : SharedDamageOtherOnHitSystem
         var blockEv = new ThrowableProjectileBlockAttemptEvent(component.Damage, uid);
 
         RaiseLocalEvent(args.Target, ref blockEv);
-        if (blockEv.CancelledHit)
+        if (blockEv.Cancelled)
         {
             _color.RaiseEffect(Color.Red, [args.Target], Filter.Pvs(args.Target, entityManager: EntityManager));
             return;
