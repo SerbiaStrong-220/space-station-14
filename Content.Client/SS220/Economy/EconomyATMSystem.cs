@@ -25,6 +25,7 @@ public sealed class EconomyATMSystem : SharedEconomyATMSystem
             Tool.UseTool(args.Used, args.User, ent, ent.Comp.ATMResetDelay, ent.Comp.ATMResetMethod, new EconomyATMResetEvent(), toolComponent: tool);
         }
     }
+
     protected override void OnATMReset(Entity<EconomyATMComponent> ent, ref EconomyATMResetEvent args)
     {
         if (args.Cancelled)

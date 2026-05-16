@@ -68,7 +68,7 @@ public sealed partial class EconomyEFTPOSWindow : FancyWindow
         var clearBtn = new Button
         {
             Text = "C",
-            StyleClasses = { StyleBase.ButtonCaution }
+            StyleClasses = { StyleClass.Negative },
         };
         clearBtn.OnPressed += _ => OnClearButtonPressed?.Invoke();
         KeypadGrid.AddChild(clearBtn);
@@ -87,9 +87,9 @@ public sealed partial class EconomyEFTPOSWindow : FancyWindow
 
     private void AddKeypadButton(int i)
     {
-        var btn = new Button()
+        var btn = new Button
         {
-            Text = i.ToString()
+            Text = i.ToString(),
         };
 
         btn.OnPressed += _ => OnKeypadButtonPressed?.Invoke(i);
@@ -116,17 +116,15 @@ public sealed partial class EconomyEFTPOSWindow : FancyWindow
             PaymentControls.Visible = true;
         }
 
-        if (eftposState.PayerBankAccountId == default)
-            PaymentButton.Text = Loc.GetString("economy-eftpos-ui-payment-await-card-text");
-        else
-            PaymentButton.Text = Loc.GetString("economy-eftpos-ui-payment-await-pin-text");
+        PaymentButton.Text = Loc.GetString(eftposState.PayerBankAccountId == default
+            ? "economy-eftpos-ui-payment-await-card-text"
+            : "economy-eftpos-ui-payment-await-pin-text");
 
         PayerPinInputText.Text = VisualizePinCode(eftposState.PayerPinInput.Length);
 
-        if (eftposState.PrintReceipt)
-            PrintReceiptButton.Text = Loc.GetString("economy-eftpos-ui-receipt-print-yes");
-        else
-            PrintReceiptButton.Text = Loc.GetString("economy-eftpos-ui-receipt-print-no");
+        PrintReceiptButton.Text = Loc.GetString(eftposState.PrintReceipt
+            ? "economy-eftpos-ui-receipt-print-yes"
+            : "economy-eftpos-ui-receipt-print-no");
 
         PrintReceiptButton.Pressed = eftposState.PrintReceipt;
 

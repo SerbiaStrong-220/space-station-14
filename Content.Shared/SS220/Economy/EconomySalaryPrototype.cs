@@ -4,13 +4,13 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.Economy;
 
-[Prototype("economySalary")]
-public sealed class EconomySalaryPrototype : IPrototype
+[Prototype]
+public sealed partial class EconomySalaryPrototype : IPrototype
 {
     [ViewVariables]
     [IdDataField]
     public string ID { get; private set; } = default!;
 
     [DataField]
-    public int Amount = default;
+    public int Amount;
 }

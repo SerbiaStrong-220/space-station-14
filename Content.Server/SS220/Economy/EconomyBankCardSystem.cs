@@ -10,6 +10,7 @@ using Content.Shared.Chat;
 using Content.Shared.GameTicking;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
+using Content.Shared.Kitchen;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Content.Shared.SS220.Economy;
@@ -38,6 +39,9 @@ public sealed class EconomyBankCardSystem : SharedEconomyBankCardSystem
     [Dependency] private readonly IChatManager _chatManager = default!;
 
     private static readonly EntProtoId SpaceCashProto = "SpaceCash";
+    private const string BackSlot = "back";
+    private const string Pocket1Slot = "pocket1";
+    private const string Pocket2Slot = "pocket2";
 
     public const int FlatEmaggedTax = 5;
     public const int PercentEmaggedTax = 1;
@@ -115,7 +119,7 @@ public sealed class EconomyBankCardSystem : SharedEconomyBankCardSystem
     /// 4 - give player withdrawn money.
     private void SpaceCashWithdrawalOnSpawn(EntityUid user)
     {
-        if (!_inventorySystem.TryGetSlotContainer(user, "back", out var backSlot, out _)
+        if (!_inventorySystem.TryGetSlotContainer(user, BackSlot, out var backSlot, out _)
             || !TryComp<StorageComponent>(backSlot.ContainedEntity, out var storageComponent)
             )
             return;
@@ -123,7 +127,9 @@ public sealed class EconomyBankCardSystem : SharedEconomyBankCardSystem
         var result = 0;
 
         foreach (var item in storageComponent.StoredItems)
+        {
             result += CashWithdrawalOnSpawn(item.Key);
+        }
 
         // No items found
         if (result <= 0)
@@ -139,24 +145,23 @@ public sealed class EconomyBankCardSystem : SharedEconomyBankCardSystem
         if (!HasComp<TransformComponent>(user))
             return;
 
-        var itemToSpawn = EntityManager.SpawnEntity(SpaceCashProto, Transform(user).Coordinates);
-
-        _stackSystem.SetCount(itemToSpawn, withdrawnAmount);
+        var itemToSpawn = Spawn(SpaceCashProto, Transform(user).Coordinates);
+        _stackSystem.SetCount((itemToSpawn, null), withdrawnAmount);
 
         // Try insert into the backpack
-        if (backSlot is not null
-            && backSlot.ContainedEntity.HasValue
-            && _storageSystem.Insert(backSlot.ContainedEntity.Value, itemToSpawn, out _, playSound: false)
-            )
+        if (backSlot.ContainedEntity.HasValue &&
+            _storageSystem.Insert(backSlot.ContainedEntity.Value, itemToSpawn, out _, playSound: false))
+        {
             return;
+        }
 
         // Try insert into pockets
-        if (_inventorySystem.TryGetSlotContainer(user, "pocket1", out var pocket1, out _)
+        if (_inventorySystem.TryGetSlotContainer(user, Pocket1Slot, out var pocket1, out _)
             && _containerSystem.Insert(itemToSpawn, pocket1)
             )
             return;
 
-        if (_inventorySystem.TryGetSlotContainer(user, "pocket2", out var pocket2, out _)
+        if (_inventorySystem.TryGetSlotContainer(user, Pocket2Slot, out var pocket2, out _)
             && _containerSystem.Insert(itemToSpawn, pocket2)
             )
             return;
@@ -277,13 +282,13 @@ public sealed class EconomyBankCardSystem : SharedEconomyBankCardSystem
 
     public static int GetEmaggedTax(int input)
     {
-        return (int)Math.Floor(FlatEmaggedTax + (float)(input / 100 * PercentEmaggedTax));
+        return (int)Math.Floor(FlatEmaggedTax + (input / 100f * PercentEmaggedTax));
     }
 
     public List<BankAccount>? GetBankAccounts()
     {
         var enumerator = EntityQueryEnumerator<EconomyDeCentralBankComponent>();
-        while (enumerator.MoveNext(out var _, out var deCentralBankComponent))
+        while (enumerator.MoveNext(out _, out var deCentralBankComponent))
         {
             if (deCentralBankComponent.IsCentralNode)
                 return deCentralBankComponent.Accounts;

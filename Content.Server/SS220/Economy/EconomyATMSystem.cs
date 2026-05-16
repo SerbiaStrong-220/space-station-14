@@ -144,7 +144,7 @@ public sealed class ATMSystem : SharedEconomyATMSystem
         var amountToWithdraw = isWithdrawingAll ? account.Balance : amount;
 
         _bankCardSystem.TryChangeBalance(account.AccountId, account.Balance - amountToWithdraw);
-        _stackSystem.Spawn(amountToWithdraw - emaggedTax, CashProto, Transform(ent.Owner).Coordinates);
+        _stackSystem.SpawnAtPosition(amountToWithdraw - emaggedTax, CashProto, Transform(ent.Owner).Coordinates);
         _audioSystem.PlayPvs(ent.Comp.SoundWithdrawCurrency, ent.Owner);
         ent.Comp.InfoMessage = Loc.GetString("economy-atm-ui-select-withdraw-amount");
         ent.Comp.PinInput = string.Empty;
@@ -183,7 +183,7 @@ public sealed class ATMSystem : SharedEconomyATMSystem
     private void OnCreateMessage(Entity<EconomyATMComponent> ent, ref EconomyATMBankAccountCreateMessage args)
     {
         if (HasComp<EconomySalaryReceiverComponent>(args.Actor)
-            || !HasComp<HumanoidAppearanceComponent>(args.Actor)
+            || !HasComp<HumanoidProfileComponent>(args.Actor)
             || ent.Comp.BankAccount.AccountId != default
             || !ent.Comp.UnemployedAlert
             )

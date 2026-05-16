@@ -6,11 +6,6 @@ namespace Content.Client.SS220.Economy;
 
 public sealed class EconomyBankCardSystem : SharedEconomyBankCardSystem
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-    }
-
     public override void PonderForData(Entity<EconomySalaryReceiverComponent> user)
     {
     }

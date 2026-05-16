@@ -51,7 +51,7 @@ public sealed partial class EconomyATMWindow : FancyWindow
         var clearBtn = new Button
         {
             Text = "C",
-            StyleClasses = { StyleBase.ButtonCaution }
+            StyleClasses = { StyleClass.Negative }
         };
         clearBtn.OnPressed += _ => OnClearButtonPressed?.Invoke();
         KeypadGrid.AddChild(clearBtn);
