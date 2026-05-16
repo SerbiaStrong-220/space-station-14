@@ -159,7 +159,7 @@
     spawned:
       - id: FoodMeat
         amount: 5
-  # - type: ResomiAccent
+  - type: ResomiAccent
   # - type: Speech
     # speechSounds: Resomi
     # speechVerb: Resomi
