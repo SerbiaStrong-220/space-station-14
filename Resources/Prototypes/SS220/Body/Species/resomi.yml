@@ -36,8 +36,8 @@
   id: AppearanceResomi
   components:
   - type: Inventory
-    speciesId: Resomi
-    femaleDisplacements: &ResomiInventoryDisplacement
+    speciesId: resomi
+    displacements:
       jumpsuit:
         sizeMaps:
           32:
@@ -88,7 +88,6 @@
           32:
             sprite: SS220/Mobs/Species/Resomi/displacement.rsi
             state: suitstorage
-    maleDisplacements: *ResomiInventoryDisplacement
   - type: Hands
     leftHandDisplacement:
       sizeMaps:
@@ -134,43 +133,56 @@
   - BaseSpeciesMobOrganic
   id: MobResomi
   components:
-  - type: Damageable
-    damageContainer: Biological
-    damageModifierSet: Resomi
-  # - type: TypingIndicator
-  #   proto: resomi
-#  - type: ResomiAccent
-  # - type: Vocal
-    # sounds:
-    #   Male: Resomi
-    #   Female: Resomi
-    #   Unsexed: Resomi
-  # - type: Speech
-    # speechSounds: Resomi
-    # speechVerb: Resomi
-  - type: DamageOnHighSpeedImpact
-    damage:
-      types:
-        Blunt: 0.9
-    soundHit:
-      path: /Audio/Effects/hit_kick.ogg
-  - type: Butcherable
-    butcheringType: Spike
-    spawned:
-      - id: FoodMeat
-        amount: 5
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 3.6
+    baseSprintSpeed : 4.5
   - type: Fixtures
     fixtures:
       fix1:
         shape:
           !type:PhysShapeCircle
           radius: 0.25
-        density: 185
+        density: 62
         restitution: 0.0
         mask:
         - MobMask
         layer:
         - MobLayer
+  - type: MobCollision
+    strength: 12
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+    # - id: Язык резоми
+  - type: Butcherable
+    butcheringType: Spike
+    spawned:
+      - id: FoodMeat
+        amount: 5
+  # - type: ResomiAccent
+  # - type: Speech
+    # speechSounds: Resomi
+    # speechVerb: Resomi
+  # - type: TypingIndicator
+  #   proto: resomi
+  - type: CreamPied
+    sprite:
+      sprite: SS220/Effects/creampie.rsi
+      state: creampie_resomi
+  # - type: Vocal
+    # sounds:
+    #   Male: Resomi
+    #   Female: Resomi
+    #   Unsexed: Resomi
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: Resomi
+  - type: DamageOnHighSpeedImpact
+    damage:
+      types:
+        Blunt: 0.9
+    soundHit:
+      path: /Audio/Effects/hit_kick.ogg
   - type: MeleeWeapon
     soundHit:
       collection: AlienClaw
@@ -182,11 +194,11 @@
   - type: DamageVisuals
     damageOverlayGroups:
       Brute:
-        sprite: SS220/Mobs/Effects/resomi_brute_damage.rsi
-        color: "#ff05ff"
+        sprite: Mobs/Effects/brute_damage.rsi
+        color: "#cfa7ff"
       Burn:
-        sprite: SS220/Mobs/Effects/resomi_burn_damage.rsi
-  - type: TemperatureDamage # Пошаманить потом
+        sprite: Mobs/Effects/burn_damage.rsi
+  - type: TemperatureDamage
     heatDamageThreshold: 320
     coldDamageThreshold: 230
     coldDamage:
@@ -196,24 +208,31 @@
       types:
         Heat: 2 #per second, scales with temperature & other constants
   - type: Temperature
-    currentTemperature: 310.15
+    heatDamageThreshold: 305.85    # 305.85 K = 31 °C
+    coldDamageThreshold: 205.15    # 205.15 K = -68 °C
+    currentTemperature: 253.15
     specificHeat: 42
   - type: TemperatureSpeed
     thresholds:
-      289: 0.8
-      275: 0.6
-      250: 0.4
-  - type: Language
-    availableLanguages:
-    - id: Galactic
-    # - id: Язык резоми
-  - type: LimitationRevive
-    reviveLimit: 3
+      155: 0.4
+      175: 0.6
+      200: 1.0
+      325: 1.0
+      350: 0.8
+      380: 0.6
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
       - ReagentId: ResomiBlood
         Quantity: 300
+    bloodlossDamage:
+      types:
+        Bloodloss: 0.5
+    bloodlossHealDamage:
+      types:
+        Bloodloss: -1
+    bloodMaxVolume: 180
+    chemicalMaxVolume: 150
 
 
 - type: entity
@@ -276,7 +295,7 @@
     - enum.HumanoidVisualLayers.HeadTop
     - enum.HumanoidVisualLayers.Snout
     - enum.HumanoidVisualLayers.HeadSide
-    - enum.HumanoidVisualLayers.Tail
+    # - enum.HumanoidVisualLayers.Tail
 
 - type: entity
   parent: [ OrganBaseArmLeft, OrganResomiExternal ]
@@ -320,7 +339,7 @@
   components:
   - type: VisualOrgan
     data:
-      sprite: Mobs/Customization/eyes.rsi
+      sprite: SS220/Mobs/Species/Resomi/parts.rsi
 
 - type: entity
   parent: [ OrganBaseTongue, OrganResomiInternal ]
@@ -357,6 +376,12 @@
       - Paper
       - Bread
       - Omnivorous #SS220 CultYoggs
+  - type: SolutionContainerManager
+    solutions:
+      stomach:
+        maxVol: 30
+  - type: Metabolizer
+    updateInterval: 0.75
 
 - type: entity
   parent: [ OrganBaseLiver, OrganSpriteHumanInternal, OrganResomiInternal, OrganResomiMetabolizer ]

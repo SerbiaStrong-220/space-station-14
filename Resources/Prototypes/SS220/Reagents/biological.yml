@@ -5,6 +5,6 @@
   group: Biological
   desc: reagent-desc-resomi-blood
   flavor: sharp
-  color: "#b61dae"
+  color: "#cfa7ff"
   recognizable: true
   physicalDesc: reagent-physical-desc-pungent

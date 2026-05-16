@@ -12,7 +12,8 @@
             "directions": 4
         },
         {
-            "name": "full"
+            "name": "full",
+            "directions": 4
         },
         {
             "name": "head_f",

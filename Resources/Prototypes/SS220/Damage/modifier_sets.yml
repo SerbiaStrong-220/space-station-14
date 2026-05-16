@@ -16,9 +16,13 @@
 - type: damageModifierSet
   id: Resomi
   coefficients:
-    Cold: 0.8
-    Heat: 1.15
+    Blunt: 1.2
+    Slash: 1.2
+    Piercing: 1.2
+    Heat: 1.2
+    Shock: 1.2
     Poison: 1.2
+    Cellular: 1.2
 
 - type: damageModifierSet
   id: TomatoKiller
