@@ -103,7 +103,7 @@ public sealed partial class SharedAltBlockingSystem
     {
         ent.Comp.User = args.User;
         Dirty(ent.Owner, ent.Comp);
-
+        DebugTools.Assert(userComp.BlockingItemsShields.Contains(ent.Owner))
         var userComp = EnsureComp<AltBlockingUserComponent>(args.User);
         userComp.BlockingItemsShields.Add(ent.Owner);
 
