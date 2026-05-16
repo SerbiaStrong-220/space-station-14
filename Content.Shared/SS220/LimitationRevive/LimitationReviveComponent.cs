@@ -13,7 +13,7 @@ namespace Content.Shared.SS220.LimitationRevive;
 /// </summary>
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class LimitationReviveComponent : SharedLimitationReviveComponent
+public sealed partial class LimitationReviveComponent : Component
 {
     /// <summary>
     /// Resurrection limit
@@ -52,11 +52,25 @@ public sealed partial class LimitationReviveComponent : SharedLimitationReviveCo
     /// </summary>
     [DataField]
     [AutoNetworkedField]
-    public float ChanceToAddTrait = 0.6f;
+    public float ChanceToAddPathology = 0.6f;
 
     /// <summary>
     /// Multiplier applied to <see cref="UpdateInterval"/> for adjusting based on metabolic rate multiplier.
     /// </summary>
     [ViewVariables(VVAccess.ReadOnly)]
     public float UpdateIntervalMultiplier = 1f;
+
+    /// <summary>
+    /// Delay before target takes brain damage
+    /// </summary>
+    [DataField]
+    [AutoNetworkedField]
+    public TimeSpan BeforeDamageDelay = TimeSpan.FromSeconds(180);
+
+    /// <summary>
+    /// The exact time when the target will take damage
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    [AutoNetworkedField]
+    public TimeSpan? DamageCountingTime;
 }

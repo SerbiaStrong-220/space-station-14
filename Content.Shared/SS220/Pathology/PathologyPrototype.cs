@@ -7,7 +7,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared.SS220.Pathology;
 
 [Prototype]
-public sealed class PathologyPrototype : IPrototype
+public sealed partial class PathologyPrototype : IPrototype
 {
     [IdDataField]
     public string ID { get; private set; } = default!;

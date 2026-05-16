@@ -64,7 +64,7 @@ public sealed partial class InternalBloodLossStatusEffectSystem : EntitySystem
             // Add some 'last stand' effect for ux
             if (bloodstreamComponent.BloodSolution is { } bloodSolution)
             {
-                var lostBloodPortion = bloodSolution.Comp.Solution.Volume / bloodstreamComponent.BloodMaxVolume;
+                var lostBloodPortion = bloodSolution.Comp.Solution.Volume / bloodSolution.Comp.Solution.MaxVolume;
                 bloodLoss = lostBloodPortion < DecreaseLoss ? bloodLoss * lostBloodPortion : bloodLoss;
             }
 

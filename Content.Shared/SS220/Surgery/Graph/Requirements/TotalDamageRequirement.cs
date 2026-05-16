@@ -2,8 +2,9 @@
 
 using Robust.Shared.Prototypes;
 using Content.Shared.FixedPoint;
-using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 
 namespace Content.Shared.SS220.Surgery.Graph.Requirements;
 
@@ -11,19 +12,20 @@ namespace Content.Shared.SS220.Surgery.Graph.Requirements;
 public sealed partial class TotalDamageRequirement : SurgeryGraphRequirement
 {
     [DataField]
-    public ProtoId<DamageGroupPrototype>? DamageGroup;
+    public ProtoId<DamageTypePrototype>? DamageGroup;
 
     [DataField(required: true)]
     public FixedPoint2 Damage;
 
     protected override bool Requirement(EntityUid? uid, IEntityManager entityManager)
     {
+        var damageSystem = entityManager.System<DamageableSystem>();
         if (!entityManager.TryGetComponent<DamageableComponent>(uid, out var damageableComponent))
             return false;
 
         if (DamageGroup is not null)
-            return damageableComponent.DamagePerGroup[DamageGroup] >= Damage;
+            return damageSystem.GetAllDamage(uid.Value)[DamageGroup] >= Damage;
         else
-            return damageableComponent.TotalDamage >= Damage;
+            return damageSystem.GetTotalDamage(uid.Value) >= Damage;
     }
 }

@@ -17,6 +17,7 @@ using Content.Shared.PowerCell;
 using Content.Shared.Random.Helpers;
 using Content.Shared.SS220.Experience.Skill.Components;
 using Content.Shared.SS220.LimitationRevive;
+using Content.Shared.SS220.Surgery.Components;
 using Content.Shared.Timing;
 using Content.Shared.Traits.Assorted;
 using Robust.Shared.Audio.Systems;
@@ -68,7 +69,7 @@ public abstract class SharedDefibrillatorSystem : EntitySystem
             return;
 
         //ss220-surgery-update-begin
-        if (HasComp<DirectCompactDefibrillatorComponent>(uid))
+        if (HasComp<DirectCompactDefibrillatorComponent>(ent))
         {
             _popup.PopupClient(Loc.GetString(_directCompactDefibrillatorNonSurgeryUse), args.User);
             return;

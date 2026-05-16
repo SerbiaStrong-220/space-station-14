@@ -28,13 +28,11 @@ public sealed class PathologyProviderSystem : EntitySystem
 
     private void OnProjectileHit(Entity<PathologyOnProjectileHitComponent> entity, ref ProjectileHitEvent args)
     {
-        var (key, _) = args.Damage.DamageDict.Where(x => !_damageTypesToIgnore.Contains(x.Key)).MaxBy(x => x.Value);
-
-        if (key is null)
+        var validDamages = args.Damage.DamageDict.Where(x => !_damageTypesToIgnore.Contains(x.Key));
+        if (!validDamages.Any())
             return;
 
-        if (!_prototype.HasIndex<DamageTypePrototype>(key))
-            return;
+        var (key, _) = validDamages.MaxBy(x => x.Value);
 
         if (!_prototype.Resolve(entity.Comp.WeightedRandomPathology, out var weightedRandomPrototype))
             return;

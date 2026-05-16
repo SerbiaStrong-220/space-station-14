@@ -1,6 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
 using Content.Shared.SS220.Surgery.Graph;
 
 namespace Content.Server.SS220.Surgery.Action;
@@ -9,7 +10,7 @@ namespace Content.Server.SS220.Surgery.Action;
 public sealed partial class ApplyDamageAction : ISurgeryGraphEdgeAction
 {
     [DataField(required: true)]
-    public DamageSpecifier Damage;
+    public DamageSpecifier Damage = new();
 
     [DataField]
     public bool IgnoreResistance = true;

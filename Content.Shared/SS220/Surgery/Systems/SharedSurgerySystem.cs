@@ -1,21 +1,21 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Administration.Logs;
+using Content.Shared.Damage.Systems;
+using Content.Shared.Database;
 using Content.Shared.DoAfter;
+using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
-using Content.Shared.SS220.Surgery.Graph;
 using Content.Shared.SS220.Surgery.Components;
+using Content.Shared.SS220.Surgery.Graph;
 using Content.Shared.SS220.Surgery.Ui;
-using Content.Shared.Examine;
+using Content.Shared.Weapons.Melee;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
-using Content.Shared.Database;
-using Content.Shared.Weapons.Melee;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using System.Linq;
-using Content.Shared.Damage;
-using Robust.Shared.Timing;
 
 namespace Content.Shared.SS220.Surgery.Systems;
 
@@ -335,12 +335,12 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
     private void OnSurgeryFailure(SurgeryDoAfterEvent args)
     {
-        if (args.Target is null)
+        if (args.Target is not { Valid: true } target)
             return;
 
         if (TryComp<MeleeWeaponComponent>(args.Used, out var meleeWeapon))
         {
-            if (!_meleeWeapon.AttemptLightAttack(args.User, args.Used.Value, meleeWeapon, args.Target.Value, checkCombatMode: false))
+            if (!_meleeWeapon.AttemptLightAttack(args.User, args.Used.Value, meleeWeapon, target, checkCombatMode: false))
                 return;
         }
         else if (TryComp<SurgeryToolComponent>(args.Used, out var surgeryTool) && surgeryTool.FailureDamage is not null)
@@ -349,7 +349,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
                 return;
 
             surgeryTool.NextFailureDamageTime = _gameTiming.CurTime + surgeryTool.FailureDamageDelay;
-            _damageable.TryChangeDamage(args.Target, surgeryTool.FailureDamage, origin: args.User);
+            _damageable.TryChangeDamage(target, surgeryTool.FailureDamage, origin: args.User);
         }
         else
             return;

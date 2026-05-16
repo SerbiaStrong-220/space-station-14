@@ -1,11 +1,12 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Client.Atmos.Rotting;
-using Content.Client.SS220.LimitationRevive;
 using Content.Shared.Atmos.Rotting;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
+using Content.Shared.SS220.LimitationRevive;
 using Content.Shared.SS220.Pathology;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -16,6 +17,7 @@ public sealed class SurgeryPatientAnalyzer : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly RottingSystem _rotting = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
 
     private const int MaxBrainRotPercentage = 100;
@@ -28,7 +30,7 @@ public sealed class SurgeryPatientAnalyzer : EntitySystem
             patientStatus.PatientState = mobStateComponent.CurrentState;
 
         if (TryComp<DamageableComponent>(target, out var damageableComponent))
-            patientStatus.OverallDamage = damageableComponent.Damage.GetTotal();
+            patientStatus.OverallDamage = _damageable.GetTotalDamage((target, damageableComponent));
 
         if (TryComp<RottingComponent>(target, out var rottingComponent))
             patientStatus.BodyDecayDegree = _rotting.RotStage(target, rottingComponent);
