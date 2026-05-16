@@ -69,7 +69,7 @@ public sealed class IntimidatePersonConditionSystem : EntitySystem
         if (targetObjectiveComponent.Target != null)
             return;
 
-        if (_target.PickFromPool(entity.Comp.Pool, entity.Comp.Filters, args.MindId) is not { } picked)
+        if (_target.PickFromPool(entity.Comp.Pool, entity.Comp.Filter, args.MindId) is not { } picked)
             return;
 
         var target = picked.Comp.OwnedEntity;

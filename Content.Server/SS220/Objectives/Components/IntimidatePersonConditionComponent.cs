@@ -45,7 +45,7 @@ public sealed partial class IntimidatePersonConditionComponent : Component
     /// Filters to apply to <see cref="Pool"/>.
     /// </summary>
     [DataField]
-    public List<MindFilter> Filters = new();
+    public List<MindFilter> Filter = new();
 }
 
 public enum IntimidatePersonDescriptionType
