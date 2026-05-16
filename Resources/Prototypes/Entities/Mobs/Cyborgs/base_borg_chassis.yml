@@ -171,6 +171,11 @@
   - type: UIRequiresLock
     userInterfaceKeys:
     - enum.BorgUiKey.Key
+    # ss220 prevent sound spam from ghost on borg start
+    blacklist:
+      tags:
+      - NoConsoleSound
+    # ss220 prevent sound spam from ghost on borg end
   - type: LockedWiresPanel
   - type: Damageable
     damageContainer: Silicon

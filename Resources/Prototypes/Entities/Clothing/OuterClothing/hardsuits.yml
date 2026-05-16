@@ -291,8 +291,8 @@
     damageCoefficient: 0.4
   # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
-    walkModifier: 0.75
-    sprintModifier: 0.75
+    walkModifier: 0.85 #SS220 sec hardsuit buff
+    sprintModifier: 0.85 #SS220 sec hardsuit buff
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSecurity
@@ -397,8 +397,8 @@
       coefficients:
         Blunt: 0.8
         Slash: 0.8
-        Piercing: 0.6
-        Heat: 0.5
+        Piercing: 0.55
+        Heat: 0.55
         Radiation: 0.5
         Caustic: 0.6
   # SS220 add stamina resistance begin
@@ -406,8 +406,8 @@
     damageCoefficient: 0.35
   # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
-    walkModifier: 0.8
-    sprintModifier: 0.8
+    walkModifier: 0.9 #SS220 crew hardsuit buff
+    sprintModifier: 0.9 #SS220 crew hardsuit buff
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitCap
@@ -576,7 +576,7 @@
         Blunt: 0.6
         Slash: 0.5
         Piercing: 0.5
-        Heat: 0.8
+        Heat: 0.6 #SS220 sec hardsuit buff
         Radiation: 0.5
         Caustic: 0.6
   # SS220 add stamina resistance begin
@@ -584,8 +584,8 @@
     damageCoefficient: 0.35
   # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
-    walkModifier: 0.8
-    sprintModifier: 0.8
+    walkModifier: 0.9 #SS220 sec hardsuit buff
+    sprintModifier: 0.9 #SS220 sec hardsuit buff
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSecurityRed

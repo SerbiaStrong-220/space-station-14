@@ -45,6 +45,8 @@
     - Omnivorous
     - CultYoggStealthProvidable
     - WhitelistChameleon
+  - type: FootstepModifier
+    footstepSoundCollection: null
 
 - type: entity
   parent: SeedBase

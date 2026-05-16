@@ -91,6 +91,7 @@
   - ShuttleGunFriendshipCircuitboard
   - ShuttleGunPerforatorCircuitboard
   - ShuttleGunSvalinnMachineGunCircuitboard
+  - ShuttleGunMLGSWCircuitboard #SS220-MLGSW-gun-research
 
 - type: latheRecipePack
   parent:

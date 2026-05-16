@@ -13,6 +13,7 @@ using Content.Shared.Interaction.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Item;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.MouseRotator;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Systems;
@@ -52,6 +53,7 @@ public abstract partial class SharedGrabSystem : EntitySystem
     [Dependency] private readonly SharedJointSystem _joints = default!;
     [Dependency] private readonly AlertsSystem _alerts = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
 
     protected EntityQuery<GrabbableComponent> _grabbableQuery;
     private EntityQuery<GrabberComponent> _grabberQuery;
@@ -386,6 +388,10 @@ public abstract partial class SharedGrabSystem : EntitySystem
 
         grabbable.Comp.GrabbedBy = null;
         Dirty(grabbable);
+
+        // TODO SS220 This shouldn't be handled here
+        if (_mobState.IsIncapacitated(grabbable))
+            _standing.Down(grabbable);
 
         ClearJoints((grabber, grabberComp), grabbable);
 

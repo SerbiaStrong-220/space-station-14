@@ -136,7 +136,7 @@
   cost: 5000
   recipeUnlocks:
   - BorgModuleAdvancedTopical
-  - AdvancedJetInjector
+  # - AdvancedJetInjector # ss220 - post upstream - jetInjector & MedAutoinjector tweaks
 
 - type: technology
   id: AdvancedCleaning
@@ -254,6 +254,7 @@
   - BluespaceBeaker
   - AdvancedMiniSyringe # SS220 Add advanced mini syringe
   - SyringeBluespace
+  - AdvancedJetInjector # ss220 - post upstream - jetInjector & MedAutoinjector tweaks
 
 # SS220 Change LauncherSyringe tier begin
 #- type: technology

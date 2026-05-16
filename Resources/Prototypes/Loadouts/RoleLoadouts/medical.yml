@@ -8,6 +8,7 @@
   - ChiefMedicalOfficerGlasses #SS220-TwoOne-Floppa-Iteration / ss220 cmo new
   - MedicalMask
   - ChiefMedicalOfficerJumpsuit
+  - MedicalsGloves #SS220 gloves-for-med
   - MedicalBackpack
   - ChiefMedicalOfficerOuterClothing
   - ChiefMedicalOfficerNeck
@@ -29,6 +30,7 @@
   - MedicalDoctorHead
   - MedicalMask
   - MedicalDoctorJumpsuit
+  - MedicalsGloves #SS220 gloves-for-med
   - MedicalBackpack
   - MedicalDoctorOuterClothing
   - MedicalShoes
@@ -50,6 +52,7 @@
   - GroupTankHarness
   - MedicalNeck #SS220-WhiteScarf
   - MedicalInternJumpsuit
+  - MedicalsGloves #SS220 gloves-for-med
   - MedicalBackpack
   - Glasses
   - SurvivalMedical
@@ -66,6 +69,7 @@
   - MedicalNeck #SS220-WhiteScarf
   - MedicalMask
   - ChemistJumpsuit
+  - MedicalsGloves #SS220 gloves-for-med
   - ChemistBackpack
   - ChemistOuterClothing
   - MedicalShoes
@@ -86,6 +90,7 @@
   - MedicalMask
 # - MedicalGlasses #SS220-Two Floppa Iteration
   - ParamedicJumpsuit
+  - MedicalsGloves #SS220 gloves-for-med
   - MedicalBackpack
   - ParamedicOuterClothing
   - ParamedicShoes

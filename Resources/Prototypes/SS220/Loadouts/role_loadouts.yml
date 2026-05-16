@@ -128,6 +128,24 @@
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
+
+  # Бригемдик
+- type: roleLoadout
+  id: JobBrigmedic
+  groups:
+  - BrigmedicHead
+  - MedicalNeck #SS220-WhiteScarf
+  - BrigmedicGlasses #SS220-TwoOne-Floppa-Iteration
+  - BrigmedicMask
+  - BrigmedicJumpsuit
+  - MedicalsGloves
+  - BrigmedicBackpack
+  - SurvivalBrigMedic #SS220-Brigmedic SurvivalBox Fix
+  - BrigmedicOuterClothing
+  - BrigmedicShoes
+  - Trinkets
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - WorkerCash #SS220-Cash-personal
 #! Медицинский отдел (Конец)
 
 #! Инженерный отдел (Начало)
@@ -185,3 +203,32 @@
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - SeniorStaffCash #SS220-Cash-personal
 #! Сервис (Конец)
+
+#! Эксклюзивы карт (Начало)
+
+  #Зоотех
+- type: roleLoadout
+  id: JobZookeeper
+  groups:
+  - GroupTankHarness
+  - CommonBackpack
+  - Glasses
+  - Survival
+  - Trinkets
+  - GroupSpeciesBreathTool
+  - WorkerCash #SS220-Cash-personal
+
+  #Боксер
+- type: roleLoadout
+  id: JobBoxer
+  groups:
+  - GroupTankHarness
+  - BoxerJumpsuit
+  - BoxerGloves
+  - CommonBackpack
+  - Glasses
+  - Survival
+  - Trinkets
+  - GroupSpeciesBreathTool
+  - WorkerCash #SS220-Cash-personal
+#! Эксклюзивы карт (Конец)
