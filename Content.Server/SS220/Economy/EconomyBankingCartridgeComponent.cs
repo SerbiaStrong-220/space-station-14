@@ -3,6 +3,4 @@
 namespace Content.Server.SS220.Economy;
 
 [RegisterComponent]
-public sealed partial class EconomyBankingCartridgeComponent : Component
-{
-}
+public sealed partial class EconomyBankingCartridgeComponent : Component;

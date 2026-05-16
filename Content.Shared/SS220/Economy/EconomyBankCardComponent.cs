@@ -11,5 +11,8 @@ namespace Content.Shared.SS220.Economy;
 public sealed partial class EconomyBankCardComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public int AccountId = default;
+    public int AccountId;
+
+    [DataField, AutoNetworkedField]
+    public float MicrowaveResetChance = 0.5f;
 }

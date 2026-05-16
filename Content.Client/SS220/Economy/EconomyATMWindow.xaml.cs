@@ -106,7 +106,6 @@ public sealed partial class EconomyATMWindow : FancyWindow
         switch (atmState.CardState)
         {
             case CardStateEnum.Default:
-                break;
             case CardStateEnum.Absent:
                 break;
             case CardStateEnum.Invalid:

@@ -31,7 +31,6 @@ public sealed class EconomyBankCardSystem : SharedEconomyBankCardSystem
     [Dependency] private readonly SharedStorageSystem _storageSystem = default!;
     [Dependency] private readonly ContainerSystem _containerSystem = default!;
     [Dependency] private readonly SharedStackSystem _stackSystem = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedIdCardSystem _idCardSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
@@ -59,9 +58,7 @@ public sealed class EconomyBankCardSystem : SharedEconomyBankCardSystem
         if (!TryComp<MicrowaveComponent>(args.Microwave, out var micro) || micro.Broken)
             return;
 
-        var randomPick = _random.NextFloat();
-
-        if (randomPick <= 0.5f)
+        if (_random.Prob(ent.Comp.MicrowaveResetChance))
             ent.Comp.AccountId = default;
     }
 
@@ -120,9 +117,10 @@ public sealed class EconomyBankCardSystem : SharedEconomyBankCardSystem
     private void SpaceCashWithdrawalOnSpawn(EntityUid user)
     {
         if (!_inventorySystem.TryGetSlotContainer(user, BackSlot, out var backSlot, out _)
-            || !TryComp<StorageComponent>(backSlot.ContainedEntity, out var storageComponent)
-            )
+            || !TryComp<StorageComponent>(backSlot.ContainedEntity, out var storageComponent))
+        {
             return;
+        }
 
         var result = 0;
 
@@ -157,14 +155,16 @@ public sealed class EconomyBankCardSystem : SharedEconomyBankCardSystem
 
         // Try insert into pockets
         if (_inventorySystem.TryGetSlotContainer(user, Pocket1Slot, out var pocket1, out _)
-            && _containerSystem.Insert(itemToSpawn, pocket1)
-            )
+            && _containerSystem.Insert(itemToSpawn, pocket1))
+        {
             return;
+        }
 
         if (_inventorySystem.TryGetSlotContainer(user, Pocket2Slot, out var pocket2, out _)
-            && _containerSystem.Insert(itemToSpawn, pocket2)
-            )
+            && _containerSystem.Insert(itemToSpawn, pocket2))
+        {
             return;
+        }
 
         // Try insert into hands or drop on the floor
         _handsSystem.PickupOrDrop(user, itemToSpawn, checkActionBlocker: false, animate: false, dropNear: true);
@@ -178,7 +178,7 @@ public sealed class EconomyBankCardSystem : SharedEconomyBankCardSystem
         if (!HasComp<EconomyCashWithdrawalOnSpawnComponent>(item))
             return 0;
 
-        _entityManager.QueueDeleteEntity(item);
+        QueueDel(item);
         return 1;
     }
 
@@ -206,7 +206,6 @@ public sealed class EconomyBankCardSystem : SharedEconomyBankCardSystem
         TryChangeBalance(account.AccountId, balance - amountToWithdraw);
 
         withdrawnAmount = amountToWithdraw;
-
         return true;
     }
 
@@ -252,7 +251,6 @@ public sealed class EconomyBankCardSystem : SharedEconomyBankCardSystem
             return false;
 
         var bankAccounts = GetBankAccounts();
-
         return bankAccounts is not null && bankAccounts.Any(x => x.AccountId == accountId);
     }
 

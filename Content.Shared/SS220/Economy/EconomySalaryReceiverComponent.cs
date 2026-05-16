@@ -14,8 +14,8 @@ namespace Content.Shared.SS220.Economy;
 public sealed partial class EconomySalaryReceiverComponent : Component
 {
     [DataField]
-    public int AccountId = default;
+    public int AccountId;
 
     [DataField]
-    public int AccountPin = default;
+    public int AccountPin;
 }

@@ -25,13 +25,14 @@ public sealed class EconomyEFTPOSSystem : SharedEconomyEFTPOSSystem
             || ent.Comp.PayerBankAccountId == default
             || ent.Comp.OwnerBankAccountId == ent.Comp.PayerBankAccountId
             || ent.Comp.PayerPinInput.Length != SharedEconomyBankCardSystem.PinCodeLength
-            || ent.Comp.Amount <= 0
-            )
+            || ent.Comp.Amount <= 0)
+        {
             return;
+        }
 
         if (_bankCardSystem.TryGetAccount(ent.Comp.PayerBankAccountId, out var payerBankAccount)
             && ent.Comp.PayerPinInput == payerBankAccount.AccountPin.ToString()
-            && _bankCardSystem.CashWithdrawal(ent.Comp.PayerBankAccountId, out var _, ent.Comp.Amount)
+            && _bankCardSystem.CashWithdrawal(ent.Comp.PayerBankAccountId, out _, ent.Comp.Amount)
             && _bankCardSystem.TryGetAccount(ent.Comp.OwnerBankAccountId, out var ownerBankAccount))
         {
             _bankCardSystem.TryChangeBalance(ent.Comp.OwnerBankAccountId, ownerBankAccount.Balance + ent.Comp.Amount);
@@ -79,18 +80,22 @@ public sealed class EconomyEFTPOSSystem : SharedEconomyEFTPOSSystem
         builder.AppendLine(Loc.GetString("economy-eftpos-receipt-account-id", ("accountId", ent.Comp.OwnerBankAccountId)));
 
         if (_bankCardSystem.TryGetAccount(ent.Comp.OwnerBankAccountId, out var ownerBankAccount)
-            && ownerBankAccount.AccountOwnerName != string.Empty
-            )
-            builder.AppendLine(Loc.GetString("economy-eftpos-receipt-account-name", ("name", ownerBankAccount.AccountOwnerName)));
+            && ownerBankAccount.AccountOwnerName != string.Empty)
+        {
+            builder.AppendLine(Loc.GetString("economy-eftpos-receipt-account-name",
+                ("name", ownerBankAccount.AccountOwnerName)));
+        }
 
         builder.AppendLine();
         builder.AppendLine(Loc.GetString("economy-eftpos-receipt-payer"));
         builder.AppendLine(Loc.GetString("economy-eftpos-receipt-account-id", ("accountId", ent.Comp.PayerBankAccountId)));
 
         if (_bankCardSystem.TryGetAccount(ent.Comp.PayerBankAccountId, out var payerBankAccount)
-            && payerBankAccount.AccountOwnerName != string.Empty
-            )
-            builder.AppendLine(Loc.GetString("economy-eftpos-receipt-account-name", ("name", payerBankAccount.AccountOwnerName)));
+            && payerBankAccount.AccountOwnerName != string.Empty)
+        {
+            builder.AppendLine(Loc.GetString("economy-eftpos-receipt-account-name",
+                ("name", payerBankAccount.AccountOwnerName)));
+        }
 
         _paperSystem.SetContent((printed, paperComp), builder.ToString());
         _handsSystem.PickupOrDrop(user, printed, checkActionBlocker: false);

@@ -60,8 +60,7 @@ public sealed class EconomyChangeBankBalanceCommand : IConsoleCommand
 
         _adminLogger.Add(LogType.AdminCommands,
             LogImpact.Medium,
-            $"{shell.Player!.Name} ({shell.Player!.UserId}) changed bank balance of {accountId} from {oldBalance} to {amount}"
-            );
+            $"{shell.Player!.Name} ({shell.Player!.UserId}) changed bank balance of {accountId} from {oldBalance} to {amount}");
     }
 
     public CompletionResult GetCompletion(IConsoleShell shell, string[] args)

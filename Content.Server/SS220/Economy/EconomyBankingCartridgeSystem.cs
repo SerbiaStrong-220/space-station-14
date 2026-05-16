@@ -9,7 +9,7 @@ namespace Content.Server.SS220.Economy;
 
 public sealed class EconomyBankingCartridgeSystem : EntitySystem
 {
-    [Dependency] private readonly CartridgeLoaderSystem? _cartridgeLoaderSystem = default!;
+    [Dependency] private readonly CartridgeLoaderSystem _cartridgeLoaderSystem = default!;
     [Dependency] private readonly EconomyBankCardSystem _bankCardSystem = default!;
 
     public override void Initialize()
@@ -29,12 +29,12 @@ public sealed class EconomyBankingCartridgeSystem : EntitySystem
             CardState = CardStateEnum.Absent,
             AccountId = default,
             OwnerName = string.Empty,
-            Balance = default
+            Balance = default,
         };
 
         if (!TryComp<PdaComponent>(loaderUid, out var pdaComponent) || !pdaComponent.ContainedId.HasValue)
         {
-            _cartridgeLoaderSystem?.UpdateCartridgeUiState(loaderUid, state);
+            _cartridgeLoaderSystem.UpdateCartridgeUiState(loaderUid, state);
             return;
         }
 
@@ -52,6 +52,6 @@ public sealed class EconomyBankingCartridgeSystem : EntitySystem
             }
         }
 
-        _cartridgeLoaderSystem?.UpdateCartridgeUiState(loaderUid, state);
+        _cartridgeLoaderSystem.UpdateCartridgeUiState(loaderUid, state);
     }
 }

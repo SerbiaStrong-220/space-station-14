@@ -1,6 +1,5 @@
 <controls:FancyWindow xmlns="https://spacestation14.io"
                       Title="{Loc 'economy-eftpos-ui-title'}"
-                      xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
                       xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
                       Resizable="False"
                       SetSize="380 420" >

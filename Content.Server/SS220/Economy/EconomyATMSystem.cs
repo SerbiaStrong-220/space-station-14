@@ -116,9 +116,10 @@ public sealed class ATMSystem : SharedEconomyATMSystem
             || !itemSlot.HasItem
             || !TryComp<EconomyBankCardComponent>(itemSlot.Item, out var bankCard)
             || ent.Comp.PinInput.Length != SharedEconomyBankCardSystem.PinCodeLength
-            || args.Amount <= 0
-            )
+            || args.Amount <= 0)
+        {
             return;
+        }
 
         var isATMEmagged = HasComp<EmaggedComponent>(ent.Owner);
 
@@ -185,9 +186,10 @@ public sealed class ATMSystem : SharedEconomyATMSystem
         if (HasComp<EconomySalaryReceiverComponent>(args.Actor)
             || !HasComp<HumanoidProfileComponent>(args.Actor)
             || ent.Comp.BankAccount.AccountId != default
-            || !ent.Comp.UnemployedAlert
-            )
+            || !ent.Comp.UnemployedAlert)
+        {
             return;
+        }
 
         var container = _container.GetContainer(ent.Owner, IdCardSlotName);
         foreach (var item in container.ContainedEntities)

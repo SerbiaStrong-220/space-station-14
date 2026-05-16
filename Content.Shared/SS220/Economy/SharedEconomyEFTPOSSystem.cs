@@ -51,7 +51,6 @@ public abstract partial class SharedEconomyEFTPOSSystem : EntitySystem
     private void OnPrintReceiptButtonPressed(Entity<EconomyEFTPOSComponent> ent, ref EconomyEFTPOSPrintReceiptMessage args)
     {
         ent.Comp.PrintReceipt = !ent.Comp.PrintReceipt;
-
         UpdateUiState(ent);
     }
 
@@ -83,9 +82,10 @@ public abstract partial class SharedEconomyEFTPOSSystem : EntitySystem
         var itemInHands = _handsSystem.GetActiveItem(args.Actor);
         if (!itemInHands.HasValue
             || !TryComp<EconomyBankCardComponent>(itemInHands, out var bankCard)
-            || bankCard.AccountId == default
-            )
+            || bankCard.AccountId == default)
+        {
             return;
+        }
 
         if (ent.Comp.OwnerBankAccountId == default)
         {
