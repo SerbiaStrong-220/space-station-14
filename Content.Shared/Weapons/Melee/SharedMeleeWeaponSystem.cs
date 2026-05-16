@@ -581,12 +581,14 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             if (meleeBlockEvent.CancelledHit && meleeBlockEvent.Blocker is { Valid: true } blockerUid)
                 targetEntity = blockerUid;
         }
+
+        target = targetEntity;
         //SS220 shield rework end
 
         // Sawmill.Debug($"Melee damage is {damage.Total} out of {component.Damage.Total}");
 
         // Raise event before doing damage so we can cancel damage if the event is handled
-        var hitEvent = new MeleeHitEvent(new List<EntityUid> { targetEntity }, user, meleeUid, damage, null);//SS220 shield rework  
+        var hitEvent = new MeleeHitEvent(new List<EntityUid> { target.Value }, user, meleeUid, damage, null);
         RaiseLocalEvent(meleeUid, hitEvent);
 
         if (hitEvent.Handled)
@@ -594,7 +596,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         var targets = new List<EntityUid>(1)
         {
-            targetEntity//SS220 shield rework
+            target.Value
         };
 
         var weapon = GetEntity(ev.Weapon);
@@ -608,10 +610,10 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         // For stuff that cares about it being attacked.
         var attackedEvent = new AttackedEvent(meleeUid, user, targetXform.Coordinates);
-        RaiseLocalEvent(targetEntity, attackedEvent);//SS220 shield rework
+        RaiseLocalEvent(target.Value, attackedEvent);//SS220 shield rework
 
         //ss220 extended weapon logic start
-        var weaponAttackEvent = new WeaponAttackEvent(user, targetEntity, AttackType.LIGHT);
+        var weaponAttackEvent = new WeaponAttackEvent(user, target.Value, AttackType.LIGHT);
         RaiseLocalEvent(meleeUid, weaponAttackEvent);
         //ss220 extended weapon logic end
 
@@ -622,12 +624,12 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEvent.BonusDamage, hitEvent.ModifiersList);
 
-        if (Damageable.TryChangeDamage(targetEntity, modifiedDamage, out var damageResult, origin:user, ignoreResistances:resistanceBypass)) //SS220 shield rework
+        if (Damageable.TryChangeDamage(target.Value, modifiedDamage, out var damageResult, origin:user, ignoreResistances:resistanceBypass))
         {
             // If the target has stamina and is taking blunt damage, they should also take stamina damage based on their blunt to stamina factor
             if (damageResult.DamageDict.TryGetValue("Blunt", out var bluntDamage))
             {
-                _stamina.TakeStaminaDamage(targetEntity, (bluntDamage * component.BluntStaminaDamageFactor).Float(), visual: false, source: user, with: meleeUid == user ? null : meleeUid);//SS220 shield rework
+                _stamina.TakeStaminaDamage(target.Value, (bluntDamage * component.BluntStaminaDamageFactor).Float(), visual: false, source: user, with: meleeUid == user ? null : meleeUid);
             }
 
             if (meleeUid == user)
@@ -643,14 +645,14 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         }
 
-        _meleeSound.PlayHitSound(targetEntity, user, GetHighestDamageSound(modifiedDamage, _protoManager), hitEvent.HitSoundOverride, component);//SS220 shield rework
+        _meleeSound.PlayHitSound(target.Value, user, GetHighestDamageSound(modifiedDamage, _protoManager), hitEvent.HitSoundOverride, component);
 
         if (damageResult.GetTotal() > FixedPoint2.Zero && !TerminatingOrDeleted(target.Value))
         {
             DoDamageEffect(targets, user, targetXform);
         }
 
-        RaiseLocalEvent(user, new LightAttackPerformedEvent(targetEntity, meleeUid, targetXform.Coordinates)); // SS220-MartialArts
+        RaiseLocalEvent(user, new LightAttackPerformedEvent(target.Value, meleeUid, targetXform.Coordinates)); // SS220-MartialArts
     }
 
     protected abstract void DoDamageEffect(List<EntityUid> targets, EntityUid? user,  TransformComponent targetXform);
@@ -1030,14 +1032,16 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
                 targetEntity = blockerUid;
             }
         }
+
+        target = targetEntity;
         //SS220 shield rework end
 
         // SS220-MartialArts-Begin
         // i'm struggling where to put this block, i hope it will fit here
-        RaiseLocalEvent(user, new DisarmAttackPerformedEvent(targetEntity, Transform(target.Value).Coordinates));
+        RaiseLocalEvent(user, new DisarmAttackPerformedEvent(target.Value, Transform(target.Value).Coordinates));
         // SS220-MartialArts-End
 
-        var chance = CalculateDisarmChance(user, targetEntity, inTargetHand, combatMode);//SS220 shield rework
+        var chance = CalculateDisarmChance(user, target.Value, inTargetHand, combatMode);
 
         // At this point we diverge
         if (_netMan.IsClient)
@@ -1068,7 +1072,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         AdminLogger.Add(LogType.DisarmedAction, $"{ToPrettyString(user):user} used disarm on {ToPrettyString(target):target}");
 
         _audio.PlayPvs(combatMode.DisarmSuccessSound, target.Value, AudioParams.Default.WithVariation(0.025f).WithVolume(5f));
-        var targetEnt = Identity.Entity(targetEntity, EntityManager);//SS220 shield rework
+        var targetEnt = Identity.Entity(target.Value, EntityManager);
         var userEnt = Identity.Entity(user, EntityManager);
 
         var msgOther = Loc.GetString(
@@ -1081,7 +1085,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         var filterOther = Filter.PvsExcept(user, entityManager: EntityManager);
 
         PopupSystem.PopupEntity(msgOther, user, filterOther, true);
-        PopupSystem.PopupEntity(msgUser, targetEntity, user);//SS220 shield rework
+        PopupSystem.PopupEntity(msgUser, target.Value, user);
 
         if (eventArgs.IsStunned)
         {
