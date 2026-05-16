@@ -14,6 +14,9 @@ namespace Content.Shared.SS220.ComplexRepairable;
 
 public sealed partial class ComplexRepairableSystem : EntitySystem
 {
+    private static readonly string MaterialRepair = "complex-repairable-material-repair";
+    private static readonly string RepairDone = "comp-repairable-repair";
+
     [Dependency] private readonly SharedToolSystem _toolSystem = default!;
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -35,7 +38,7 @@ public sealed partial class ComplexRepairableSystem : EntitySystem
         if (damageTaken > 0 && ent.Comp.MaterialRepairTreshold != 0)
             ent.Comp.LeftToInsert += (damageTaken / ent.Comp.MaterialRepairTreshold).Int();
 
-        Dirty(ent);
+        DirtyField(ent.AsNullable(), nameof(ComplexRepairableComponent.LeftToInsert));
     }
 
     private void OnRepairFinished(Entity<ComplexRepairableComponent> ent,  ref ComplexRepairFinishedEvent args)
@@ -59,7 +62,7 @@ public sealed partial class ComplexRepairableSystem : EntitySystem
             _adminLogger.Add(LogType.Healed, $"{ToPrettyString(args.User):user} repaired {ToPrettyString(ent.Owner):target} back to full health");
         }
 
-        var str = Loc.GetString("comp-repairable-repair", ("target", ent.Owner), ("tool", args.Used!));
+        var str = Loc.GetString(RepairDone, ("target", ent.Owner), ("tool", args.Used!));
         _popup.PopupClient(str, ent.Owner, args.User);
 
         var ev = new ComplexRepairedEvent(ent, args.User);
@@ -71,44 +74,40 @@ public sealed partial class ComplexRepairableSystem : EntitySystem
         if (args.Handled)
             return;
 
-        //if(args.Used.Proto)
-
         // Only try repair the target if it is damaged
         if (_damageableSystem.GetTotalDamage(ent.Owner) == 0)
             return;
 
-        if (ent.Comp.LeftToInsert > 0 )
+        if (ent.Comp.LeftToInsert > 0)
         {
-            var metaData = MetaData(args.Used);
-
-            if ( metaData == null || metaData.EntityPrototype == null)
+            if (MetaData(args.Used).EntityPrototype is not { } entityProto)
                 return;
 
-            if (ent.Comp.Material.Id != metaData.EntityPrototype.ID)
+            if (ent.Comp.Material.Id != entityProto.ID)
                 return;
 
-            if(!TryComp<StackComponent>(args.Used, out var stackComp))
+            if (!TryComp<StackComponent>(args.Used, out var stackComp))
             {
-                _transform.DetachEntity(args.Used, Transform(args.Used));
                 QueueDel(args.Used);
-                --ent.Comp.LeftToInsert;
-                Dirty(ent);
-                var str = Loc.GetString("complex-repairable-material-repair", ("target", ent.Owner), ("material", args.Used!));
-                _popup.PopupClient(str, ent.Owner, args.User);
-                return;
+                ent.Comp.LeftToInsert -= 1;
             }
 
-            if(stackComp.Count > ent.Comp.LeftToInsert)
+            if (stackComp != null)
             {
-                _stack.SetCount(args.Used, stackComp.Count - ent.Comp.LeftToInsert);
-                ent.Comp.LeftToInsert = 0;
-                Dirty(ent);
-                var str = Loc.GetString("complex-repairable-material-repair", ("target", ent.Owner), ("material", args.Used!));
-                _popup.PopupClient(str, ent.Owner, args.User);
-                return;
+                int toBeUsed = ent.Comp.LeftToInsert;
+
+                if (stackComp.Count < ent.Comp.LeftToInsert)
+                    toBeUsed = stackComp.Count;
+
+                _stack.TryUse(args.Used, toBeUsed);
+
+                ent.Comp.LeftToInsert -= toBeUsed;
             }
-            ent.Comp.LeftToInsert = ent.Comp.LeftToInsert - stackComp.Count;
-            _stack.SetCount(args.Used, 0);
+
+            Dirty(ent);
+            var str = Loc.GetString(MaterialRepair, ("target", ent.Owner), ("material", args.Used!));
+            _popup.PopupClient(str, ent.Owner, args.User);
+            return;
         }
 
         if (ent.Comp.LeftToInsert > 0)
@@ -117,7 +116,7 @@ public sealed partial class ComplexRepairableSystem : EntitySystem
             return;
         }
 
-        float delay = ent.Comp.DoAfterModifier * (_damageableSystem.GetTotalDamage(ent.Owner).Float() / 10f);
+        float delay = ent.Comp.DoAfterModifier.Float() * (_damageableSystem.GetTotalDamage(ent.Owner).Float() / 10f);
 
         // Add a penalty to how long it takes if the user is repairing itself
         if (args.User == args.Target)
@@ -129,7 +128,7 @@ public sealed partial class ComplexRepairableSystem : EntitySystem
         }
 
         // Run the repairing doafter
-        args.Handled = _toolSystem.UseTool(args.Used, args.User, ent.Owner, delay, ent.Comp.QualityNeeded, new ComplexRepairFinishedEvent(), ent.Comp.FuelCost);
+        args.Handled = _toolSystem.UseTool(args.Used, args.User, ent.Owner, delay, ent.Comp.QualityNeeded, new ComplexRepairFinishedEvent(), ent.Comp.FuelCost.Float());
     }
 }
 
