@@ -147,10 +147,8 @@ public sealed partial class SharedAltBlockingSystem
                     continue;
             }
 
-            if (blockComp.User == null)
-                return false;
-
-            var user = (EntityUid)blockComp.User;
+            if (blockComp.User is not { Valid: true } user)
+                continue;
 
             if (!TryGetNetEntity(item, out var netItem))
                 continue;

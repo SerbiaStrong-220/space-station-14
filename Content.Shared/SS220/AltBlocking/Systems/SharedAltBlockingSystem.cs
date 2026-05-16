@@ -76,7 +76,7 @@ public sealed partial class SharedAltBlockingSystem : EntitySystem
                 continue;
 
             ActiveBlockingStateChanged ev = new ActiveBlockingStateChanged(true);
-            RaiseLocalEvent((EntityUid)shield, ref ev);
+            RaiseLocalEvent(shield, ref ev);
         }
         return true;
     }
