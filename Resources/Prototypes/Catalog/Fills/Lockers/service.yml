@@ -27,6 +27,10 @@
       children:
       - id: BoxBeanbag
       - id: RagItem
+    - id: PlushieLizardJobBartender
+      prob: 0.02
+    - id: PlushieLizardJobServiceworker
+      prob: 0.02
 
 #- type: entity
 #  id: LockerFormalFilled
@@ -67,6 +71,10 @@
       children:
       - id: FoodCondimentPacketSalt
       - id: FoodCondimentPacketPepper
+    - id: PlushieLizardJobChef
+      prob: 0.02
+    - id: PlushieLizardJobServiceworker
+      prob: 0.02
 
 - type: entity
   id: ClosetJanitorFilled
@@ -87,6 +95,7 @@
     - id: LightReplacer
     - id: BoxLightMixed
     - id: Holoprojector
+    - id: WireBrush
     - !type:AllSelector
       rolls: 2
       children:
@@ -96,10 +105,11 @@
       - id: SoapNT
       - id: FlashlightLantern
       - id: Plunger
-        amount: 2
       - id: BearTrap #SS220 TrapSystem
         amount: 2 #SS220 TrapSystem
       - id: WireBrush
+    - id: PlushieLizardJobJanitor
+      prob: 0.02
 
 - type: entity
   id: ClosetLegalFilled
@@ -119,6 +129,8 @@
       prob: 0.80
     - id: EconomyEFTPOS # SS220 Economy
     - id: ClothingOuterRobesJudge
+    - id: PlushieLizardJobLawyer
+      prob: 0.02
 
 - type: entity
   id: LockerBotanistFilled
@@ -148,6 +160,10 @@
     - id: ClothingUniformOveralls
     - id: ClothingHeadHatTrucker
       prob: 0.1
+    - id: PlushieLizardJobBotanist
+      prob: 0.02
+    - id: PlushieLizardJobServiceworker
+      prob: 0.02
 
 - type: entity
   id: LockerBotanistLoot

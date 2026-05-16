@@ -102,7 +102,10 @@
     attributes:
       gender: epicene
   - type: Bloodstream
-    bloodMaxVolume: 200
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 200
   - type: Puller
     needsHands: false
   - type: MobPrice
@@ -149,7 +152,7 @@
       map: ["light"]
       visible: false
   - type: Stamina
-    critThreshold: 120
+    baseCritThreshold: 120
   - type: MobState
     allowedStates:
     - Alive
@@ -264,7 +267,8 @@
       startValue: 0.05
       endValue: 1.0
       isLooped: true
-  - type: ToggleableLightVisuals
+  - type: ToggleableVisuals
+    spriteLayer: light
   - type: PointLight
     color: red
     enabled: false
@@ -327,9 +331,8 @@
       250: Critical
       350: Dead
   - type: Stamina
-    critThreshold: 200
+    baseCritThreshold: 200
   - type: Bloodstream
-    bloodMaxVolume: 300
   - type: CombatMode
   - type: NoSlip
   - type: HTN
@@ -363,9 +366,10 @@
     accent: genericAggressive
   - type: Speech
     speechVerb: LargeMob
-  - type: Temperature
+  - type: TemperatureDamage
     heatDamageThreshold: 315
     coldDamageThreshold: 250
+  - type: Temperature
     currentTemperature: 300
   - type: InteractionPopup
     successChance: 0.3
@@ -454,7 +458,7 @@
 - type: entity
   name: Mousi
   id: MobMousi
-  parent: SimpleMobBase
+  parent: [ SimpleMobBase, BaseMobRuminant ]
   description: Peep?...
   components:
   - type: NameIdentifier
@@ -530,16 +534,16 @@
       100: Critical
       200: Dead
   - type: Stamina
-    critThreshold: 100
+    baseCritThreshold: 100
   - type: Bloodstream
-    bloodMaxVolume: 250
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 250
   - type: Hands
   - type: Speech
     speechSounds: Squeak
     speechVerb: SmallMob
-  - type: Body
-    prototype: Mousi
-    requiredLegs: 1
   - type: Butcherable
     butcheringType: Spike
     spawned:
@@ -561,7 +565,7 @@
   - type: GhostTakeoverAvailable
 
 - type: entity
-  parent: [ SimpleMobBase, MobCombat ]
+  parent: [ BaseMobRat, SimpleMobBase, MobCombat ]
   id: MobGigaHamlet
   name: gigahamlet
   description: A huge muscular hamster is an amazing phenomenon of nature. His massive body is decorated with thick, shiny fur that accentuates every contour of his impressive muscles. The strong paws of this hamster resemble powerful columns capable of supporting its impressive weight. His eyes sparkle with confidence and strength, and his smile expresses friendliness and unwavering strength. This hamster is undoubtedly admired and respected by all who are lucky enough to meet him.
@@ -617,7 +621,7 @@
       400: Critical
       500: Dead
   - type: Stamina
-    critThreshold: 300
+    baseCritThreshold: 300
   - type: SlowOnDamage
     speedModifierThresholds:
       250: 0.7
@@ -632,14 +636,14 @@
       types:
         Blunt: 80
   - type: Bloodstream
-    bloodMaxVolume: 750
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 750
   - type: Speech
     speechSounds: Squeak
     speechVerb: SmallMob
     allowedEmotes: ['Squeak']
-  - type: Body
-    prototype: Rat
-    requiredLegs: 1
   - type: Vocal
     sounds:
       Male: Mouse
@@ -681,11 +685,15 @@
   - type: PassiveDamage
     allowedStates:
     - Alive
-    damageCap: 599
     damage:
-      groups:
-        Brute: -0.1
-        Burn: -0.1
+      types:
+        Blunt: -0.033
+        Slash: -0.033
+        Piercing: -0.033
+        Heat: -0.025
+        Shock: -0.025
+        Cold: -0.025
+        Caustic: -0.025
   - type: GhostRole
     allowMovement: true
     allowSpeech: true

@@ -10,10 +10,12 @@ public sealed partial class TTSSystem : EntitySystem
 {
     private bool _playDifferentRadioTogether = true;
     private bool _playDifferentTalkingTogether = true;
+    private bool _playDifferentRadioSourcesTogether = true;
 
     private void InitializeMetadata()
     {
         _cfg.OnValueChanged(CCVars220.PlayDifferentRadioTogether, x => _playDifferentRadioTogether = x, true);
+        _cfg.OnValueChanged(CCVars220.PlayDifferentRadioSourcesTogether, x => _playDifferentRadioSourcesTogether = x, true);
         _cfg.OnValueChanged(CCVars220.PlayDifferentTalkingTogether, x => _playDifferentTalkingTogether = x, true);
     }
 
@@ -41,12 +43,17 @@ public sealed partial class TTSSystem : EntitySystem
                 if (!_playDifferentRadioTogether)
                     ttsMetadata.Subkind = TtsMetadata.NullChannel;
 
+                if (_playDifferentRadioSourcesTogether)
+                    ttsMetadata.Subkind = $"{ttsMetadata.Subkind}:{GetNetEntity(source).Id}";
+
                 break;
 
             case TtsKind.Telepathy:
                 if (!_playDifferentRadioTogether)
                     ttsMetadata.Subkind = TtsMetadata.NullChannel;
 
+                if (_playDifferentRadioSourcesTogether)
+                    ttsMetadata.Subkind = $"{ttsMetadata.Subkind}:{GetNetEntity(source).Id}";
                 break;
         }
     }

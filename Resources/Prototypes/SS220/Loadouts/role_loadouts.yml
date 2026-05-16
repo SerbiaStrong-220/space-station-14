@@ -118,7 +118,7 @@
   - MedicalNeck
 # - MedicalGlasses #SS220-TwoOne-Floppa-Iteration
   - SeniorMedicalJumpsuit
-  - MedicalGloves
+  - MedicalsGloves
   - MedicalsBackpack
   - MedicalsMask
   - SeniorMedicalOuterClothing
@@ -126,6 +126,24 @@
   - SeniorShoes
   - MedicalEyewear
 #  - Glasses #SS220-TwoOne-Floppa-Iteration
+  - Trinkets
+  - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - EconomyLoadout #SS220 Economy
+
+  # Бригемдик
+- type: roleLoadout
+  id: JobBrigmedic
+  groups:
+  - BrigmedicHead
+  - MedicalNeck #SS220-WhiteScarf
+  - BrigmedicGlasses #SS220-TwoOne-Floppa-Iteration
+  - BrigmedicMask
+  - BrigmedicJumpsuit
+  - MedicalsGloves
+  - BrigmedicBackpack
+  - SurvivalBrigMedic #SS220-Brigmedic SurvivalBox Fix
+  - BrigmedicOuterClothing
+  - BrigmedicShoes
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - EconomyLoadout #SS220 Economy
@@ -186,3 +204,32 @@
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
   - EconomyLoadout #SS220 Economy
 #! Сервис (Конец)
+
+#! Эксклюзивы карт (Начало)
+
+  #Зоотех
+- type: roleLoadout
+  id: JobZookeeper
+  groups:
+  - GroupTankHarness
+  - CommonBackpack
+  - Glasses
+  - Survival
+  - Trinkets
+  - GroupSpeciesBreathTool
+  - EconomyLoadout #SS220 Economy
+
+  #Боксер
+- type: roleLoadout
+  id: JobBoxer
+  groups:
+  - GroupTankHarness
+  - BoxerJumpsuit
+  - BoxerGloves
+  - CommonBackpack
+  - Glasses
+  - Survival
+  - Trinkets
+  - GroupSpeciesBreathTool
+  - EconomyLoadout #SS220 Economy
+#! Эксклюзивы карт (Конец)

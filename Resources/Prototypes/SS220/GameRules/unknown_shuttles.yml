@@ -22,16 +22,17 @@
   id: UnknownShuttleCivil
   components:
   - type: StationEvent
-    startAnnouncement: station-event-unknown-shuttle-incoming #!!
+    startAnnouncement: station-event-unknown-shuttle-incoming
     weight: 2
   - type: LoadMapRule
-    preloadedGrid: Civil
+    gridPath: /Maps/SS220/Shuttles/lostSoul/civil.yml
 
 - type: entity
   parent: BaseUnknownShuttleRule
   id: UnknownShuttleMimesLost
   components:
   - type: StationEvent
+    startAnnouncement: station-event-unknown-shuttle-incoming
     maxOccurrences: 1
     weight: 4
   - type: LoadMapRule
@@ -46,3 +47,53 @@
     weight: 1
   - type: LoadMapRule
     preloadedGrid: Redwings
+
+
+# --- ported from wizden ---
+
+- type: preloadedGrid
+  id: ShuttleCargoLost
+  path: /Maps/SS220/Shuttles/lostSoul/lost_cargo.yml # SS220 ReWork Soul Shuttle
+  copies: 1 #SS220 ReWork Soul Shuttle
+
+- type: preloadedGrid
+  id: TravelingCuisine
+  path: /Maps/SS220/Shuttles/lostSoul/traveling_china_cuisine.yml # SS220 ReWork Soul Shuttle
+  copies: 1 #SS220 ReWork Soul Shuttle
+
+- type: preloadedGrid
+  id: DisasterEvacPod
+  path: /Maps/SS220/Shuttles/lostSoul/disaster_evacpod.yml # SS220 ReWork Soul Shuttle
+  copies: 2 #SS220 ReWork Soul Shuttle
+
+- type: entity
+  parent: BaseUnknownShuttleRule
+  id: UnknownShuttleCargoLost
+  components:
+  - type: StationEvent
+    maxOccurrences: 1 # should be the same as [copies] in shuttle_incoming_event.yml
+    weight: 8 #SS220 ReWork Soul Shuttle
+  - type: LoadMapRule
+    preloadedGrid: ShuttleCargoLost
+
+- type: entity
+  parent: BaseUnknownShuttleRule
+  id: UnknownShuttleTravelingCuisine
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-unknown-shuttle-incoming
+    maxOccurrences: 1 # should be the same as [copies] in shuttle_incoming_event.yml
+    weight: 6 #SS220 ReWork Soul Shuttle
+  - type: LoadMapRule
+    preloadedGrid: TravelingCuisine
+
+- type: entity
+  parent: BaseUnknownShuttleRule
+  id: UnknownShuttleDisasterEvacPod
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-unknown-shuttle-incoming
+    maxOccurrences: 2 # should be the same as [copies] in shuttle_incoming_event.yml
+    weight: 4 #SS220 ReWork Soul Shuttle
+  - type: LoadMapRule
+    preloadedGrid: DisasterEvacPod

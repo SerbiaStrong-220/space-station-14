@@ -269,6 +269,8 @@
     - id: ClothingUniformJumpsuitChaplain
     - id: ClothingShoesColorBlack
     - id: ClothingUniformJumpskirtChaplain
+    - id: PlushieLizardJobChaplain
+      prob: 0.02
 
 - type: entity
   id: WardrobeSecurityFilled
@@ -317,6 +319,8 @@
     - id: AppraisalTool
     - id: EconomyEFTPOS # SS220 Economy
     - id: ClothingEyesHudSupply # SS220 ADD CARGO HUD
+    - id: PlushieLizardJobCargotechnician
+      prob: 0.02
 
 - type: entity
   id: WardrobeSalvageFilled

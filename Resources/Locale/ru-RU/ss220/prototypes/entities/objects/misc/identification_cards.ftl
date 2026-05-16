@@ -1,5 +1,3 @@
-ent-ServiceWorkerIDCard = ID карта сервисного работника
-    .desc = { ent-PassengerIDCard.desc }
 ent-CBURNIDLeadercard = ID карта лидера отряда РХБЗ
     .desc = { ent-CentcomIDCard.desc }
     .suffix = РХБЗ

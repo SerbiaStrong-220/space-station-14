@@ -68,14 +68,16 @@
   - Atmospherics
   - Medical
   - Paramedic #SS220 PaNfixes
-#SS220 New_accesses_and_some_tweaks start
+  #SS220 New_accesses_and_some_tweaks start
   - Clown
   - Librarian
   - Psychologist
   - Reporter
   - Mime
   - Musician
-#SS220 New_accesses_and_some_tweaks end
+  #SS220 New_accesses_and_some_tweaks end
+  - GenpopEnter
+  - GenpopLeave
   special:
   - !type:AddComponentSpecial
     components:

@@ -8,7 +8,6 @@ using Robust.Shared.Utility;
 namespace Content.Shared.SS220.CultYogg.Buildings;
 
 [Prototype]
-[Serializable]
 public sealed partial class CultYoggBuildingPrototype : IPrototype
 {
     [ViewVariables]
