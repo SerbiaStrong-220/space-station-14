@@ -11,7 +11,7 @@ namespace Content.Shared.SS220.ComplexRepairable;
 /// <summary>
 /// Use this component to mark a device as repairable.
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true)]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 
 public sealed partial class ComplexRepairableComponent : Component
 {
@@ -23,7 +23,7 @@ public sealed partial class ComplexRepairableComponent : Component
     ///     in order to heal/repair the damage values have to be negative.
     /// </remarks>
     [DataField, AutoNetworkedField]
-    public DamageSpecifier? Damage = null;
+    public DamageSpecifier? Damage;
 
     /// <summary>
     /// Cost of fuel used to repair this device.

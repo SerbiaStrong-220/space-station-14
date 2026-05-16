@@ -38,7 +38,7 @@ public sealed partial class ComplexRepairableSystem : EntitySystem
         if (damageTaken > 0 && ent.Comp.MaterialRepairTreshold != 0)
             ent.Comp.LeftToInsert += (damageTaken / ent.Comp.MaterialRepairTreshold).Int();
 
-        DirtyField(ent.AsNullable(), nameof(ComplexRepairableComponent.LeftToInsert));
+        Dirty(ent);
     }
 
     private void OnRepairFinished(Entity<ComplexRepairableComponent> ent,  ref ComplexRepairFinishedEvent args)
