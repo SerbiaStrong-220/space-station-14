@@ -1,0 +1,120 @@
+- type: startingGear
+  id: ArenaLoadoutDust
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorBrown
+    outerClothing: ClothingOuterCoatDetective
+    shoes: ClothingShoesBootsCowboyBrownFilled
+    head: ClothingHeadHatCowboyBrown
+    mask: ClothingMaskBandBrown
+    eyes: ClothingEyesGlassesSunglasses
+    gloves: ClothingHandsGlovesFingerless
+    belt: ClothingBeltHolster
+  inhand:
+  - WeaponRevolverInspector
+  storage:
+    belt:
+    - SpeedLoaderMagnum
+    - SpeedLoaderMagnum
+    - SpeedLoaderMagnum
+
+- type: startingGear
+  id: ArenaLoadoutLava
+  equipment:
+    neck: ClothingNeckCloakGoliathCloak
+    outerClothing: ClothingOuterHardsuitGoliath
+  inhand:
+  - WeaponEnergyMagnum
+  - WeaponEnergyMagnum
+
+- type: startingGear
+  id: ArenaLoadoutByblik
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitOperative
+    shoes: ClothingShoesBootsSyndieFilled
+    gloves: ClothingHandsGlovesColorBlack
+    outerClothing: ClothingOuterVestWebElite
+    back: ClothingBackpackSyndicate
+  inhand:
+  - WeaponRifleEstoc
+  storage:
+    outerClothing:
+    - MagazineRifle
+    - MagazineRifle
+
+- type: startingGear
+  id: ArenaLoadoutLawyerSniper
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitLawyerBlack
+    neck: ClothingNeckTieRed
+    gloves: ClothingHandsGlovesLatex
+    shoes: ClothingShoesBootsLaceup
+    back: ClothingBackpackSatchelLeather
+  inhand:
+  - WeaponSniperHristov
+  storage:
+    back:
+    - MagazineBoxAntiMateriel
+    - MagazineBoxAntiMateriel
+
+- type: startingGear
+  id: ArenaLoadoutWinter
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorWhite
+    outerClothing: ClothingOuterWinterColorWhite
+    shoes: ClothingShoesBootsSpeedArenaMicroreactor
+  inhand:
+  - WeaponMeleeKnockbackStick
+
+- type: startingGear
+  id: ArenaLoadoutBlueShield
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitBlueShieldCombat
+    outerClothing: ClothingOuterArmorBlueShieldScale
+    shoes: ClothingShoesBootsBlueShieldJack
+    mask: ClothingMaskGasBlueShield
+    belt: ClothingBeltWebbingBlueShield
+  inhand:
+  - WeaponRifleLecter
+  storage:
+    belt:
+    - MagazineRifle
+    - MagazineRifle
+    - MagazineRifle
+
+- type: startingGear
+  id: ArenaLoadoutMercenary
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitMercenary
+    shoes: ClothingShoesBootsMercFilled
+    head: ClothingHeadHelmetMerc
+    eyes: ClothingEyesGlassesMercenary
+    belt: ClothingBeltMercWebbing
+    pocket1: WeaponPistolCobra
+  inhand:
+  - WeaponRifleAk
+  storage:
+    belt:
+    - MagazineLightRifle
+    - MagazineLightRifle
+    - MagazineLightRifle
+
+- type: startingGear
+  id: ArenaLoadoutOperative
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitOperative
+    shoes: ClothingShoesBootsCombatFilled
+    gloves: ClothingHandsGlovesCombat
+    pocket1: ArenaUplinkRadio40TC
+
+- type: startingGear
+  id: ArenaLoadoutSalvage
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSalvageSpecialist
+    shoes: ClothingShoesBootsSalvage
+    head: ClothingHeadHatHardhatYellowDark
+    back: ClothingBackpackSalvage
+    pocket1: Brutepack
+    pocket2: Ointment
+  inhand:
+  - WeaponShotgunSawn
+  - WeaponMakeshiftLaser

@@ -35,7 +35,7 @@ public sealed partial class SuperMatterSystem
         _ambientSound.SetAmbience(entity.Owner, true);
 
         entity.Comp.Matter = entity.Comp.InitMatter * MatterNondimensionalization;
-        entity.Comp.InternalEnergy = GetSafeInternalEnergyToMatterValue(entity.Comp.Matter);
+        entity.Comp.InternalEnergy = GetSafeInternalEnergyToMatterValue(entity.Comp.Matter)[0].Energy;
         InitGasMolesAccumulator(entity.Comp);
     }
 

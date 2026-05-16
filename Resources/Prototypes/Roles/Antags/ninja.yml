@@ -9,7 +9,7 @@
 #Ninja Gear
 - type: startingGear
   id: SpaceNinjaGear
-  experienceDefinition: NinjaRoleExperience
+  experienceDefinition: NinjaRoleExperience # SS220-experience-update
   equipment:
     jumpsuit: ClothingUniformJumpsuitNinja
     back: ClothingBackpackSpaceNinja # SS220 Ninja Resprite

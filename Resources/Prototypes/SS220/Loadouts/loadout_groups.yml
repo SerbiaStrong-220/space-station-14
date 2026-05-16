@@ -815,3 +815,23 @@
   - GlovesBlack
   - GlovesRed
   - GlovesBlue
+
+#! Эксклюзивы карт (Начало)
+
+  #Боксер
+- type: loadoutGroup
+  id: BoxerJumpsuit
+  name: loadout-group-boxer-jumpsuit
+  loadouts:
+  - BoxerShorts
+  - BoxerShortsWithTop
+
+- type: loadoutGroup
+  id: BoxerGloves
+  name: loadout-group-boxer-gloves
+  loadouts:
+  - RedBoxingGloves
+  - BlueBoxingGloves
+  - GreenBoxingGloves
+  - YellowBoxingGloves
+#! Эксклюзивы карт (Конец)
