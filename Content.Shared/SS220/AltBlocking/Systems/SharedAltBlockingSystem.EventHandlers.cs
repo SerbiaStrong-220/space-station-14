@@ -153,26 +153,12 @@ public sealed partial class SharedAltBlockingSystem
             if (!TryGetNetEntity(item, out var netItem))
                 continue;
 
-            if (owner.Comp.Blocking)
+            if (SharedRandomExtensions.PredictedProb(_gameTiming, owner.Comp.Blocking ? blockComp.ActiveRangeBlockProb : blockComp.RangeBlockProb , (NetEntity)netItem))
             {
-                if (SharedRandomExtensions.PredictedProb(_gameTiming, blockComp.ActiveRangeBlockProb, (NetEntity)netItem))
-                {
-                    _damageable.TryChangeDamage(item, damage);
-                    _audio.PlayPvs(blockComp.BlockSound, item);
-                    _popupSystem.PopupEntity(Loc.GetString("block-shot"), user);
-                    return true;
-                }
-            }
-
-            else
-            {
-                if (SharedRandomExtensions.PredictedProb(_gameTiming, blockComp.RangeBlockProb, (NetEntity)netItem))
-                {
-                    _damageable.TryChangeDamage(item, damage);
-                    _audio.PlayPvs(blockComp.BlockSound, item);
-                    _popupSystem.PopupEntity(Loc.GetString("block-shot"), user);
-                    return true;
-                }
+                _damageable.TryChangeDamage(item, damage);
+                _audio.PlayPredicted(blockComp.BlockSound, item, user);
+                _popupSystem.PopupPredicted(Loc.GetString("block-shot"), user, user);
+                return true;
             }
         }
         return false;
