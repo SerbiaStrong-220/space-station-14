@@ -1,13 +1,14 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Robust.Server.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using System.Numerics;
 
 namespace Content.Server.SS220.Shitspawn.AshDrake;
 
-public sealed class AshDrakeGreatFireballLavaTrailSystem : EntitySystem
+public sealed partial class AshDrakeGreatFireballLavaTrailSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private MapSystem _map = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Update(float frameTime)
     {
@@ -30,16 +31,19 @@ public sealed class AshDrakeGreatFireballLavaTrailSystem : EntitySystem
 
     private void SpawnLavaAt(EntityUid uid, TransformComponent xform)
     {
-        if (xform.GridUid == null || !TryComp<MapGridComponent>(xform.GridUid, out var grid))
+        if (xform.GridUid is not { Valid: true } gridUid || !TryComp<MapGridComponent>(xform.GridUid, out var gridComponent))
             return;
 
         var pos = _transform.GetWorldPosition(xform);
-        var center = grid.TileIndicesFor(new MapCoordinates(pos, xform.MapID));
+        var center = _map.TileIndicesFor(gridUid, gridComponent, new MapCoordinates(pos, xform.MapID));
 
         for (var x = -1; x <= 1; x++)
-        for (var y = -1; y <= 1; y++)
         {
-            Spawn("AshDrakeFlyLava", grid.GridTileToLocal(new Vector2i(center.X + x, center.Y + y)));
+            for (var y = -1; y <= 1; y++)
+            {
+                var coordinates = _map.GridTileToLocal(gridUid, gridComponent, new Vector2i(center.X + x, center.Y + y));
+                Spawn("AshDrakeFlyLava", coordinates);
+            }
         }
     }
 }

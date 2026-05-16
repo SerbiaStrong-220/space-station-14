@@ -9,11 +9,12 @@ using Robust.Shared.Map.Enumerators;
 
 namespace Content.Server.SS220.Blinds;
 
-public sealed class BlindsSystem : EntitySystem
+public sealed partial class BlindsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
-    [Dependency] private readonly OccluderSystem _occluder = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private MapSystem _map = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private OccluderSystem _occluder = default!;
 
     private const int MaxConnectedBlinds = 64;
 
@@ -63,12 +64,12 @@ public sealed class BlindsSystem : EntitySystem
 
         if (transform.Anchored && TryComp<MapGridComponent>(transform.GridUid, out var grid)) //SS220-upstream-merge
         {
-            var pos = grid.CoordinatesToTile(transform.Coordinates);
+            var pos = _map.CoordinatesToTile(transform.GridUid.Value, grid, transform.Coordinates);
 
-            TrySetOpenAnchoredEntities(component.IsOpen, grid.GetAnchoredEntitiesEnumerator(pos + new Vector2i(1, 0)), processedEntities);
-            TrySetOpenAnchoredEntities(component.IsOpen, grid.GetAnchoredEntitiesEnumerator(pos + new Vector2i(-1, 0)), processedEntities);
-            TrySetOpenAnchoredEntities(component.IsOpen, grid.GetAnchoredEntitiesEnumerator(pos + new Vector2i(0, 1)), processedEntities);
-            TrySetOpenAnchoredEntities(component.IsOpen, grid.GetAnchoredEntitiesEnumerator(pos + new Vector2i(0, -1)), processedEntities);
+            TrySetOpenAnchoredEntities(component.IsOpen, _map.GetAnchoredEntitiesEnumerator(transform.GridUid.Value, grid, pos + new Vector2i(1, 0)), processedEntities);
+            TrySetOpenAnchoredEntities(component.IsOpen, _map.GetAnchoredEntitiesEnumerator(transform.GridUid.Value, grid, pos + new Vector2i(-1, 0)), processedEntities);
+            TrySetOpenAnchoredEntities(component.IsOpen, _map.GetAnchoredEntitiesEnumerator(transform.GridUid.Value, grid, pos + new Vector2i(0, 1)), processedEntities);
+            TrySetOpenAnchoredEntities(component.IsOpen, _map.GetAnchoredEntitiesEnumerator(transform.GridUid.Value, grid, pos + new Vector2i(0, -1)), processedEntities);
         }
     }
 
