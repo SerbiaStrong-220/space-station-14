@@ -1757,10 +1757,15 @@
           Quantity: 3
         - ReagentId: Fat
           Quantity: 2
-  - type: Construction
-    graph: Cutlet
-    node: start
-    defaultTarget: cutlet
+  #SS220-grilling-cutlets-tweaks begin
+#  - type: Construction
+#    graph: Cutlet
+#    node: start
+#    defaultTarget: cutlet
+  - type: Grillable
+    timeToCook: 10
+    cookingResult: FoodMeatCutletCooked
+  #SS220-grilling-cutlets-tweaks end
   - type: Item
     size: Tiny
     shape:
@@ -1795,10 +1800,15 @@
           Quantity: 3
         - ReagentId: Fat
           Quantity: 2
-  - type: Construction
-    graph: BearCutlet
-    node: start
-    defaultTarget: bear cutlet
+  #SS220-grilling-cutlets-tweaks begin
+#  - type: Construction
+#    graph: BearCutlet
+#    node: start
+#    defaultTarget: bear cutlet
+  - type: Grillable
+    timeToCook: 10
+    cookingResult: FoodMeatBearCutletCooked
+  #SS220-grilling-cutlets-tweaks end
   - type: Item
     size: Tiny
     shape:
@@ -1833,10 +1843,15 @@
           Quantity: 3
         - ReagentId: Fat
           Quantity: 2
-  - type: Construction
-    graph: PenguinCutlet
-    node: start
-    defaultTarget: penguin cutlet
+  #SS220-grilling-cutlets-tweaks begin
+#  - type: Construction
+#    graph: PenguinCutlet
+#    node: start
+#    defaultTarget: penguin cutlet
+  - type: Grillable
+    timeToCook: 10
+    cookingResult: FoodMeatPenguinCutletCooked
+  #SS220-grilling-cutlets-tweaks end
   - type: Item
     size: Tiny
     shape:
@@ -1871,10 +1886,15 @@
           Quantity: 3
         - ReagentId: Fat
           Quantity: 2
-  - type: Construction
-    graph: ChickenCutlet
-    node: start
-    defaultTarget: chicken cutlet
+  #SS220-grilling-cutlets-tweaks begin
+#  - type: Construction
+#    graph: ChickenCutlet
+#    node: start
+#    defaultTarget: chicken cutlet
+  - type: Grillable
+    timeToCook: 10
+    cookingResult: FoodMeatChickenCutletCooked
+  #SS220-grilling-cutlets-tweaks end
   - type: Item
     size: Tiny
     shape:
@@ -1907,10 +1927,15 @@
           Quantity: 3
         - ReagentId: Fat
           Quantity: 2
-  - type: Construction
-    graph: DuckCutlet
-    node: start
-    defaultTarget: duck cutlet
+  #SS220-grilling-cutlets-tweaks begin
+#  - type: Construction
+#    graph: DuckCutlet
+#    node: start
+#    defaultTarget: duck cutlet
+  - type: Grillable
+    timeToCook: 10
+    cookingResult: FoodMeatDuckCutletCooked
+  #SS220-grilling-cutlets-tweaks end
   - type: Item
     size: Tiny
     shape:
@@ -1946,10 +1971,15 @@
           Quantity: 3
         - ReagentId: Fat
           Quantity: 2
-  - type: Construction
-    graph: LizardCutlet
-    node: start
-    defaultTarget: lizard cutlet
+  #SS220-grilling-cutlets-tweaks begin
+#  - type: Construction
+#    graph: LizardCutlet
+#    node: start
+#    defaultTarget: lizard cutlet
+  - type: Grillable
+    timeToCook: 10
+    cookingResult: FoodMeatLizardCutletCooked
+  #SS220-grilling-cutlets-tweaks end
   - type: Item
     size: Tiny
     shape:
@@ -1983,10 +2013,15 @@
           Quantity: 3
         - ReagentId: Fat
           Quantity: 2
-  - type: Construction
-    graph: SpiderCutlet
-    node: start
-    defaultTarget: spider cutlet
+  #SS220-grilling-cutlets-tweaks begin
+#  - type: Construction
+#    graph: SpiderCutlet
+#    node: start
+#    defaultTarget: spider cutlet
+  - type: Grillable
+    timeToCook: 10
+    cookingResult: FoodMeatSpiderCutletCooked
+  #SS220-grilling-cutlets-tweaks end
   - type: Item
     size: Tiny
     shape:
@@ -2022,10 +2057,15 @@
         reagents:
         - ReagentId: SulfuricAcid
           Quantity: 20
-  - type: Construction
-    graph: XenoCutlet
-    node: start
-    defaultTarget: xeno cutlet
+  #SS220-grilling-cutlets-tweaks begin
+#  - type: Construction
+#    graph: XenoCutlet
+#    node: start
+#    defaultTarget: xeno cutlet
+  - type: Grillable
+    timeToCook: 10
+    cookingResult: FoodMeatXenoCutletCooked
+  #SS220-grilling-cutlets-tweaks end
   - type: Item
     size: Tiny
     shape:
@@ -2108,10 +2148,15 @@
         reagents:
         - ReagentId: Ichor
           Quantity: 3
-  - type: Construction
-    graph: DragonCutlet
-    node: start
-    defaultTarget: dragon cutlet
+  #SS220-grilling-cutlets-tweaks begin
+#  - type: Construction
+#    graph: DragonCutlet
+#    node: start
+#    defaultTarget: dragon cutlet
+  - type: Grillable
+    timeToCook: 10
+    cookingResult: FoodMeatDragonCutletCooked
+  #SS220-grilling-cutlets-tweaks end
   - type: Item
     size: Tiny
     shape:
