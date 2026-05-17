@@ -1,27 +1,232 @@
+# Hair
+- type: marking
+  id: ResomiHairBackstrafe
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair.rsi
+    state: ResomiBackstrafe
+
+- type: marking
+  id: ResomiHairBigears
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair.rsi
+    state: ResomiBigears
+
+- type: marking
+  id: ResomiHairBurst
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair.rsi
+    state: ResomiBurst
+
+- type: marking
+  id: ResomiHairBurstShort
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair.rsi
+    state: ResomiBurstShort
+
+- type: marking
+  id: ResomiHairDefault
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair.rsi
+    state: ResomiDefault
+
+- type: marking
+  id: ResomiHairDroopy
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair.rsi
+    state: ResomiDroopy
+
+- type: marking
+  id: ResomiHairDroppy
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair.rsi
+    state: ResomiDroppy
+
+- type: marking
+  id: ResomiHairEars
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair.rsi
+    state: ResomiEars
+
+- type: marking
+  id: ResomiHairFluffymoahawk
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair.rsi
+    state: ResomiFluffymoahawk
+
+- type: marking
+  id: ResomiHairFluffymohawk
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair.rsi
+    state: ResomiFluffymohawk
+
+- type: marking
+  id: ResomiHairHedge
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair.rsi
+    state: ResomiHedge
+
+- type: marking
+  id: ResomiHairLong
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair.rsi
+    state: ResomiLong
+
+- type: marking
+  id: ResomiHairLongway
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair.rsi
+    state: ResomiLongway
+
+- type: marking
+  id: ResomiHairMane
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair.rsi
+    state: ResomiMane
+
+- type: marking
+  id: ResomiHairManeBeardless
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair.rsi
+    state: ResomiManeBeardless
+
+- type: marking
+  id: ResomiHairMohawk
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair.rsi
+    state: ResomiMohawk
+
+- type: marking
+  id: ResomiHairMushroom
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair.rsi
+    state: ResomiMushroom
+
+- type: marking
+  id: ResomiHairNotree
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair.rsi
+    state: ResomiNotree
+
+- type: marking
+  id: ResomiHairPointy
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair.rsi
+    state: ResomiPointy
+
+- type: marking
+  id: ResomiHairSpiky
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair.rsi
+    state: ResomiSpiky
+
+- type: marking
+  id: ResomiHairTwies
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair.rsi
+    state: ResomiTwies
+
+- type: marking
+  id: ResomiHairUpright
+  bodyPart: Hair
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_hair.rsi
+    state: ResomiUpright
+
 # Tail
 - type: marking
   id: ResomiTail
   bodyPart: Tail
   groupWhitelist: [Resomi]
   sprites:
-  - sprite: SS220/Mobs/Customization/Resomi/resomi_tail.rsi
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_parts.rsi
     state: tail
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_parts.rsi
+    state: tail_feathers
+
+- type: marking
+  id: ResomiTailSmooth
+  bodyPart: Tail
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_parts.rsi
+    state: tail_smooth
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_parts.rsi
+    state: tail_feathers
 
 # Feathers
 - type: marking
-  id: ResomiChestFeathers
+  id: ResomiChestFluff
   bodyPart: Chest
   groupWhitelist: [Resomi]
   sprites:
-  - sprite: SS220/Mobs/Customization/Resomi/resomi_feathers.rsi
-    state: chest_feathers
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_parts.rsi
+    state: fluff
+
+- type: marking
+  id: ResomiSnoutFluff
+  bodyPart: Snout
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_parts.rsi
+    state: fluff_snout
+
+- type: marking
+  id: ResomiHeadFluff
+  bodyPart: Head
+  groupWhitelist: [Resomi]
+  sprites:
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_parts.rsi
+    state: fluff_head
 
 - type: marking
   id: ResomiLFootFeathers
   bodyPart: LFoot
   groupWhitelist: [Resomi]
   sprites:
-  - sprite: SS220/Mobs/Customization/Resomi/resomi_feathers.rsi
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_parts.rsi
     state: l_foot_feathers
 
 - type: marking
@@ -29,7 +234,7 @@
   bodyPart: RFoot
   groupWhitelist: [Resomi]
   sprites:
-  - sprite: SS220/Mobs/Customization/Resomi/resomi_feathers.rsi
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_parts.rsi
     state: r_foot_feathers
 
 - type: marking
@@ -37,7 +242,7 @@
   bodyPart: LHand
   groupWhitelist: [Resomi]
   sprites:
-  - sprite: SS220/Mobs/Customization/Resomi/resomi_feathers.rsi
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_parts.rsi
     state: l_hand_feathers
 
 - type: marking
@@ -45,5 +250,5 @@
   bodyPart: RHand
   groupWhitelist: [Resomi]
   sprites:
-  - sprite: SS220/Mobs/Customization/Resomi/resomi_feathers.rsi
+  - sprite: SS220/Mobs/Customization/Resomi/resomi_parts.rsi
     state: r_hand_feathers
