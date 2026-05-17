@@ -8,7 +8,8 @@
   },
   "states": [
     {
-      "name": "tail"
+      "name": "tail",
+      "directions": 4
     }
   ]
 }

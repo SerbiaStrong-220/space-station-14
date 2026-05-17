@@ -5,6 +5,10 @@
   id: Resomi
   onlyGroupWhitelisted: true
   limits:
+    enum.HumanoidVisualLayers.Tail:
+      limit: 1
+      required: true
+      default: [ ResomiTail ]
     enum.HumanoidVisualLayers.LHand:
       limit: 1
       required: false
@@ -25,10 +29,6 @@
       limit: 1
       required: true
       default: [ ResomiChestFeathers ]
-    enum.HumanoidVisualLayers.Tail:
-      limit: 1
-      required: true
-      default: [ ResomiTail ]
 
 - type: entity
   name: resomi appearance
@@ -285,6 +285,10 @@
 - type: entity
   parent: [ OrganBaseTorsoSexed, OrganBaseTorso, OrganResomiExternal ]
   id: OrganResomiTorso
+  components:
+  - type: VisualOrganMarkings
+    hideableLayers:
+    - enum.HumanoidVisualLayers.Tail
 
 - type: entity
   parent: [ OrganBaseHeadSexed, OrganBaseHead, OrganResomiExternal ]
@@ -295,7 +299,6 @@
     - enum.HumanoidVisualLayers.HeadTop
     - enum.HumanoidVisualLayers.Snout
     - enum.HumanoidVisualLayers.HeadSide
-    # - enum.HumanoidVisualLayers.Tail
 
 - type: entity
   parent: [ OrganBaseArmLeft, OrganResomiExternal ]
