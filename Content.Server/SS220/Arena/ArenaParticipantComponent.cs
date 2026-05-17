@@ -7,4 +7,7 @@ public sealed partial class ArenaParticipantComponent : Component
 {
     [DataField]
     public ArenaSlot Slot;
+
+    [ViewVariables]
+    public bool Equipped;
 }

@@ -5,6 +5,7 @@ arena-winner-popup = Ты победил на арене!
 arena-winner-announcement = [Арена] Победитель определён!
 arena-no-winner-announcement = [Арена] Бой завершился без победителя.
 arena-fight-timeout = Время вышло, ничья!
+arena-waiting-timeout = Недостаточно бойцов, выбираем другую арену...
 arena-ghost-role-fighter-name = Боец арены
 ent-MindRoleArenaFighter = { arena-ghost-role-fighter-name }
 arena-ghost-role-fighter-description =
