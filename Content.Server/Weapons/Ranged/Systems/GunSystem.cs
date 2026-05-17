@@ -19,6 +19,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Robust.Shared.Containers;
 using Robust.Shared.Random;
+using Content.Shared.SS220.FourChannelHearing;
 
 namespace Content.Server.Weapons.Ranged.Systems;
 
@@ -26,6 +27,7 @@ public sealed partial class GunSystem : SharedGunSystem
 {
     [Dependency] private readonly PricingSystem _pricing = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private readonly SharedFourChannelHearingSystem _fourChannelHearing = default!; // SS220 Resomi four-channel hearing
 
     private const float DamagePitchVariation = 0.05f;
 
@@ -190,7 +192,12 @@ public sealed partial class GunSystem : SharedGunSystem
             }
 
             MuzzleFlash(gun, ammoComp, mapDirection.ToAngle(), user);
-            Audio.PlayPredicted(gun.Comp.SoundGunshotModified, gun, user);
+
+            // SS220 Resomi four-channel hearing begin
+            var audio = Audio.PlayPredicted(gun.Comp.SoundGunshotModified, gun, user);
+            if (audio != null)
+                _fourChannelHearing.RegisterTarget(audio.Value);
+            // SS220 Resomi four-channel hearing end
         }
     }
 
