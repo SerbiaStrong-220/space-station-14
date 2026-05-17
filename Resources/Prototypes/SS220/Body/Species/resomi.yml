@@ -342,7 +342,7 @@
   components:
   - type: VisualOrgan
     data:
-      sprite: SS220/Mobs/Species/Resomi/parts.rsi
+      sprite: SS220/Mobs/Customization/Resomi/eyes.rsi
 
 - type: entity
   parent: [ OrganBaseTongue, OrganResomiInternal ]
