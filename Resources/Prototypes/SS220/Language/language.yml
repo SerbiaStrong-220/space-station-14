@@ -285,6 +285,33 @@
                 sam, mak, lich, gen, or, ag, eck, gec, stag, onn, bin, ket, jarl, vulf,
                 einech, cresthz, azunein, ghzth]
 
+- type: language
+  id: Schechi
+  key: sch
+  name: "language-schechi-name"
+  description: "language-schechi-desc"
+  color: "#7ed0c9"
+  scrambleMethod: !type:SyllablesScrambleMethod
+    specialCharacterChance: 0.45
+    specialCharacters:
+      - character: " "
+      - character: ". "
+        capitalize: true
+        weight: 0.3
+      - character: "'"
+        weight: 0.4
+      - character: "~"
+        weight: 0.15
+    syllables: [shi, schi, chi, shii, sii, she, sche, schii, si, xi,
+                tshi, tsi, chii, chee, kshi, skii, skie, szhi, zhi, zii,
+                kri, kii, ksh, tss, tsii, trr, chrr, skrr, sss, css,
+                rii, rili, remi, siimo, yeshi, tili, sshi, zhe, zhee,
+                hiss, hss, tchi, tchii, tshe, xii, xie, schee, kii'chi,
+                sii're, shi're, tsii, szhe, eii, aii, ii, ee, ae, ia,
+                chii, schae, szii, trii, skshi, chss, tschi, shee, zii~,
+                sii~, tsch, chch, srii, xshi, shei, tshi'a, sii'chi,
+                reshii, shili, siire, yeshii, rii'she]
+
 # Misc region:
 - type: language
   id: Binary

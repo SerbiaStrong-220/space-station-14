@@ -175,7 +175,7 @@
   - type: Language
     availableLanguages:
     - id: Galactic
-    # - id: Язык резоми
+    - id: Schechi
   - type: Butcherable
     butcheringType: Spike
     spawned:
