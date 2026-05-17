@@ -1,0 +1,31 @@
+- type: entity
+  parent: Multitool
+  id: FourChannelHearingTestYellow
+  suffix: Yellow
+  components:
+  - type: FourChannelHearingTarget
+    color: Yellow
+
+- type: entity
+  parent: Multitool
+  id: FourChannelHearingTestLightGreen
+  suffix: LightGreen
+  components:
+  - type: FourChannelHearingTarget
+    color: LightGreen
+
+- type: entity
+  parent: Multitool
+  id: FourChannelHearingTestLightBlue
+  suffix: LightBlue
+  components:
+  - type: FourChannelHearingTarget
+    color: LightBlue
+
+- type: entity
+  parent: Multitool
+  id: FourChannelHearingTestMediumPurple
+  suffix: MediumPurple
+  components:
+  - type: FourChannelHearingTarget
+    color: MediumPurple

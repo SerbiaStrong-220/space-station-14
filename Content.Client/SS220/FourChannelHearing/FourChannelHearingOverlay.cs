@@ -70,7 +70,6 @@ public sealed class FourChannelHearingOverlay : Overlay
         var playerMap = _transform.GetMap(player.Value);
         var playerPos = _transform.GetWorldPosition(player.Value);
 
-        var color = Color.LightBlue.WithAlpha(0.125f);
         var handle = args.WorldHandle;
         var query = _entity.EntityQueryEnumerator<FourChannelHearingTargetComponent>();
         while (query.MoveNext(out var uid, out var target))
@@ -82,10 +81,11 @@ public sealed class FourChannelHearingOverlay : Overlay
 
             var targetPos = _transform.GetWorldPosition(uid);
 
-            var toPlayerDir = playerPos - targetPos;
+            var toPlayerDir = targetPos - playerPos;
             var arcsAngle = toPlayerDir.ToAngle();
-            handle.SetTransform(targetPos, arcsAngle);
+            handle.SetTransform(playerPos, arcsAngle);
 
+            var color = target.Color.WithAlpha(0.125f);
             if (!_targetAminProgress.TryGetValue(uid, out var animProg))
             {
                 animProg = 0f;
