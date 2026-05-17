@@ -2,3 +2,9 @@
   id: Tajaran
   name: species-name-tajaran
   text: "/ServerInfo/SS220/Guidebook/Mobs/Tajaran.xml"
+
+- type: guideEntry
+  id: Resomi
+  name: species-name-resomi
+  text: "/ServerInfo/SS220/Guidebook/Mobs/Resomi.xml"
+
