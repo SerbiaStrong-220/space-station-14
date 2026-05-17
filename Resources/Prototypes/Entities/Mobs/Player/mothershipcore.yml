@@ -135,6 +135,13 @@
     speechSounds: Xenoborg
     allowedEmotes:
     - Laugh
+  # SS220-Add-Languages begin
+  - type: Language
+    availableLanguages:
+    - id: Galactic
+    - id: Binary
+    - id: Universal
+  # SS220-Add-Languages end
   - type: Vocal
     sounds:
       Unsexed: UnisexSiliconXenoborg

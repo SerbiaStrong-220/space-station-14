@@ -1,0 +1,157 @@
+- type: entity
+  parent: BaseUplinkRadio40TC
+  id: ArenaUplinkRadio40TC
+  suffix: Arena, 40 TC
+  components:
+  - type: Store
+    categories:
+    - UplinkWeaponry
+    - UplinkAmmo
+    - UplinkExplosives
+    - UplinkChemicals
+    - UplinkDeception
+    - UplinkDisruption
+    - UplinkWearables
+    - UplinkPointless
+    balance:
+      Telecrystal: 40
+    useDiscounts: true
+
+- type: experienceDefinition
+  id: ArenaFighterRoleExperience
+  skills:
+    CombatTraining:
+      level: 4
+    Construction:
+      level: 4
+    ExtravehicularActivity:
+      level: 4
+    Medicine:
+      level: 4
+    PhysicalTraining:
+      level: 4
+
+- type: entity
+  parent: MindRoleGhostRoleNeutral
+  id: MindRoleArenaFighter
+  name: Arena Fighter
+  components:
+  - type: GhostRoleMarkerRole
+    showInSummary: false
+
+- type: ghostRoleRaffleSettings
+  id: ArenaShort
+  settings:
+    initialDuration: 7
+    joinExtendsDurationBy: 5
+    maxDuration: 15
+
+- type: randomHumanoidSettings
+  id: ArenaFighterPlayerOne
+  speciesBlacklist: [Vox]
+  components:
+  - type: RandomHumanoidAppearance
+    randomizeName: false
+  - type: GhostRole
+    name: arena-ghost-role-fighter-name
+    description: arena-ghost-role-fighter-description
+    rules: arena-ghost-role-fighter-rules
+    raffle:
+      settings: ArenaShort
+    mindRoles:
+    - MindRoleArenaFighter
+    makeSentient: true
+    allowMovement: true
+    allowSpeech: true
+    reregister: true
+  - type: GhostTakeoverAvailable
+  - type: RoleExperienceAdd
+    definitionId: ArenaFighterRoleExperience
+  - type: ArenaParticipant
+    slot: PlayerOne
+
+- type: randomHumanoidSettings
+  id: ArenaFighterPlayerTwo
+  speciesBlacklist: [Vox]
+  components:
+  - type: RandomHumanoidAppearance
+    randomizeName: false
+  - type: GhostRole
+    name: arena-ghost-role-fighter-name
+    description: arena-ghost-role-fighter-description
+    rules: arena-ghost-role-fighter-rules
+    raffle:
+      settings: ArenaShort
+    mindRoles:
+    - MindRoleArenaFighter
+    makeSentient: true
+    allowMovement: true
+    allowSpeech: true
+    reregister: true
+  - type: GhostTakeoverAvailable
+  - type: RoleExperienceAdd
+    definitionId: ArenaFighterRoleExperience
+  - type: ArenaParticipant
+    slot: PlayerTwo
+
+- type: entity
+  id: ArenaGhostSpawnerPlayerOne
+  name: arena ghost role spawner (player one)
+  parent: MarkerBase
+  components:
+  - type: RandomHumanoidSpawner
+    settings: ArenaFighterPlayerOne
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    state: ertleader
+
+- type: entity
+  id: ArenaGhostSpawnerPlayerTwo
+  name: arena ghost role spawner (player two)
+  parent: MarkerBase
+  components:
+  - type: RandomHumanoidSpawner
+    settings: ArenaFighterPlayerTwo
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    state: ertleader
+
+- type: entity
+  parent: ClothingShoesBootsSpeed
+  id: ClothingShoesBootsSpeedArenaMicroreactor
+  suffix: Arena, Microreactor
+  components:
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellMicroreactor
+
+- type: entity
+  id: ArenaFightBarrierDoor
+  name: arena barrier
+  suffix: Arena Barrier
+  components:
+  - type: ArenaFightBarrier
+  - type: Tag
+    tags:
+    - Wall
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - SpecialWallLayer
+        layer:
+        - SpecialWallLayer
+  - type: Airtight
+  - type: Sprite
+    sprite: Structures/Magic/forcewall.rsi
+    state: forcewall
+  - type: Icon
+    sprite: Structures/Magic/forcewall.rsi
+    state: forcewall

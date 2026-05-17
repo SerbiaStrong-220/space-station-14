@@ -7,9 +7,11 @@ role-timer-antag-too-high = Требуется на [color=yellow]{ TOSTRING( $t
 
 # Antags timers
 AntagNukeops = Ядерный оперативник
-AntagNukeopsMedic = Командир ядерных оперативников
-AntagNukeopsCommander = Медик ядерных оперативников
+AntagNukeopsMedic = Медик ядерных оперативников
+AntagNukeopsCommander = Командир ядерных оперативников
 AntagHedRev = Глава революции
 AntagTraitor = Агент Синдиката
 AntagThief = Вор
 AntagInitialInfected = Нулевой заражённый
+AntagXenoborg = Ксеноборг
+AntagXenoborgMothershipCore = Материнское ядро ксеноборгов

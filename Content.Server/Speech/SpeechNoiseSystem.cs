@@ -5,6 +5,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Server.Speech
 {
@@ -58,6 +59,11 @@ namespace Content.Server.Speech
 
         private void OnEntitySpoke(EntityUid uid, SpeechComponent component, EntitySpokeEvent args)
         {
+            // SS220-speech-cooldown-begin
+            DebugTools.Assert( _gameTiming.CurTime > component.LastTimeSpoke + component.SpeechCooldownTime);
+            component.LastTimeSpoke = _gameTiming.CurTime;
+            // SS220-speech-cooldown-end
+
             if (component.SpeechSounds == null)
                 return;
 
