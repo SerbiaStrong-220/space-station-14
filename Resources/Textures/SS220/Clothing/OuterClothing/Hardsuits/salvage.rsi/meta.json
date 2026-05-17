@@ -17,19 +17,23 @@
       "directions": 4
     },
     {
-      "name": "equipped-OUTERCLOTHING-reptilian",
-      "directions": 4
-    },
-    {
-      "name": "equipped-OUTERCLOTHING-resomi",
-      "directions": 4
-    },
-    {
       "name": "equipped-OUTERCLOTHING-unshaded",
       "directions": 4
     },
     {
+      "name": "equipped-OUTERCLOTHING-reptilian",
+      "directions": 4
+    },
+    {
+      "name": "equipped-OUTERCLOTHING-unshaded-reptilian",
+      "directions": 4
+    },
+    {
       "name": "equipped-OUTERCLOTHING-resomi",
+      "directions": 4
+    },
+    {
+      "name": "equipped-OUTERCLOTHING-unshaded-resomi",
       "directions": 4
     },
     {
