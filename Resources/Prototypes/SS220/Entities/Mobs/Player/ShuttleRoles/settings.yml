@@ -1,6 +1,6 @@
 - type: randomHumanoidSettings
   id: VisitorTourist
-  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran]
+  speciesBlacklist: [ Arachnid, Skeleton, Felinid, Tajaran, Resomi]
   parent: VisitorCivilian
   components:
     - type: GhostRole
@@ -12,7 +12,7 @@
 - type: randomHumanoidSettings
   id: RedWings
   parent: EventHumanoid
-  speciesBlacklist: [ Felinid, Diona, Arachnid, Moth, Vox, Reptilian, Skeleton, SlimePerson, Vulpkanin, Tajaran, Dwarf]
+  speciesBlacklist: [ Felinid, Diona, Arachnid, Moth, Vox, Reptilian, Skeleton, SlimePerson, Vulpkanin, Tajaran, Dwarf, Resomi]
   components:
     - type: GhostRole
       raffle:
