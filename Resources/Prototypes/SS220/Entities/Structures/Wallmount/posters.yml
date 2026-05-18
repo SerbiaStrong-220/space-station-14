@@ -22,7 +22,7 @@
   parent: PosterBase
   id: PosterJRAnnualReport
   name: "JR ANNUAL REPORT"
-  description: "Someone is trying to draw public attention to the suspicious deaths of entire planets and link the corporation's activities to environmental disasters."
+  description: "Over the past space year, we have processed and disposed of ten teratonnes of various types of waste. More to come!"
   components:
     - type: Sprite
       sprite: SS220/Structures/Wallmounts/jr_posters.rsi
