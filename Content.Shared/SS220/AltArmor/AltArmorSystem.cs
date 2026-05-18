@@ -91,7 +91,6 @@ public sealed class AltArmorSystem : EntitySystem
             if (damage.ArmourPiercing > ent.Comp.TresholdDict[maximalDamageType])// A kostyl made to lower the piercing stat to prevent infinite/too good penetration of anything
             {
                 resultDamage.ArmourPiercing = damage.ArmourPiercing - ent.Comp.TresholdDict[maximalDamageType];
-                _damageable.TryChangeDamage(ent.Owner, resultDamage);
                 return;
             }
             resultDamage.ArmourPiercing = 0;
