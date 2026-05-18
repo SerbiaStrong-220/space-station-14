@@ -36,7 +36,7 @@ public sealed class AltArmorSystem : EntitySystem
         {
             durabilityCoefficient = 1 - (_damageable.GetTotalDamage(ent.Owner) / ent.Comp.ZeroProtectionThreshold);
 
-            FixedPoint2.Clamp(durabilityCoefficient, 0, 1);
+            durabilityCoefficient = FixedPoint2.Clamp(durabilityCoefficient, 0, 1);
         }
 
         foreach (var type in damage.DamageDict.Keys)//Here we start counting damage for each type

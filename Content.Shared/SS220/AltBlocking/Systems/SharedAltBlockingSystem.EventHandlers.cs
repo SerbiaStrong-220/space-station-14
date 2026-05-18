@@ -53,7 +53,7 @@ public sealed partial class SharedAltBlockingSystem
 
             if (TryComp<ToggleBlockingChanceComponent>(item, out var toggleComp))
             {
-                if (!toggleComp.IsToggled)
+                if (!toggleComp.Toggled)
                     continue;
             }
 
@@ -118,7 +118,7 @@ public sealed partial class SharedAltBlockingSystem
 
             if (TryComp<ToggleBlockingChanceComponent>(item, out var toggleComp))
             {
-                if (!toggleComp.IsToggled)
+                if (!toggleComp.Toggled)
                     continue;
             }
 

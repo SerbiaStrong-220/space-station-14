@@ -72,7 +72,7 @@ public sealed partial class SharedAltBlockingSystem : EntitySystem
         foreach (var shield in ent.Comp.BlockingItemsShields)
         {
             if (TryComp<ToggleBlockingChanceComponent>(shield, out var toggleComp)
-                && !toggleComp.IsToggled)
+                && !toggleComp.Toggled)
                 continue;
 
             ActiveBlockingStateChanged ev = new ActiveBlockingStateChanged(true);
