@@ -67,6 +67,8 @@ public sealed partial class SharedAltBlockingSystem
             {
                 _audio.PlayPredicted(blockComp.BlockSound, item, ent);
                 _popupSystem.PopupPredicted(Loc.GetString("block-shot"), ent, ent);
+                args.Blocker = item;
+                args.Cancelled = true;
                 return;
             }
         }
