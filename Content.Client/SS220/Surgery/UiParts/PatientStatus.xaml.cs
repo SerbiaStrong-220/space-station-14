@@ -20,18 +20,33 @@ public sealed partial class PatientStatus : Control
 
     public void ShowStatus(PatientStatusData data)
     {
+        DecayDegree.Visible = true;
+        OverallDamage.Visible = true;
+
         if (data.OverallDamage >= 0)
             OverallDamage.SetMarkup(Loc.GetString("patient-status-overall-damage", ("damage", data.OverallDamage.ToString())));
+        else
+            OverallDamage.Visible = false;
 
         MobStatus.SetMarkup(Loc.GetString($"patient-status-mob-state-{data.PatientState.ToString().ToLower()}"));
 
         if (data.BodyDecayDegree >= 0)
             DecayDegree.SetMarkup(_localizationManager.TryGetString($"patient-status-decay-degree-{data.BodyDecayDegree}", out var locStr)
                                 ? locStr : data.BodyDecayDegree.ToString());
+        else
+            DecayDegree.Visible = false;
 
         if (data.BrainRotDegree > 0)
             BrainRotStatus.SetMarkup(Loc.GetString($"patient-status-brain-rot-degree", ("degree", data.BrainRotDegree)));
         else
             BrainRotStatus.SetMarkup(Loc.GetString($"patient-status-brain-rot-none"));
+    }
+
+    public void ShowUnknownStatus()
+    {
+        OverallDamage.SetMarkup(Loc.GetString("patient-status-overall-damage", ("damage", "-")));
+        MobStatus.SetMarkup(Loc.GetString("patient-status-mob-state-invalid"));
+        DecayDegree.SetMarkup(Loc.GetString("patient-status-decay-degree--1"));
+        BrainRotStatus.SetMarkup(Loc.GetString($"patient-status-brain-rot-invalid"));
     }
 }

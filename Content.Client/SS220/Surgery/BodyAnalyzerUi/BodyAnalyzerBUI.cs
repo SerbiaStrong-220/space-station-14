@@ -26,7 +26,7 @@ public sealed class BodyAnalyzerBUI(EntityUid owner, Enum uiKey) : BoundUserInte
         {
             case BodyAnalyzerTargetUpdate msg:
                 var target = EntMan.GetEntity(msg.Target);
-                _menu?.ChangeTarget(target, EntMan.GetComponentOrNull<SurgeryPatientComponent>(target)?.OngoingSurgeries.FirstOrNull()?.Key);
+                _menu?.ChangeTarget(target);
                 break;
         }
     }

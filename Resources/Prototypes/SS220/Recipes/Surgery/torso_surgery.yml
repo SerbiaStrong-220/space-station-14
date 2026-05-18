@@ -64,6 +64,12 @@
         damage:
           groups:
             Brute: -45
+        skillTree: SkillGroupMedicine
+        damageBonuses:
+          MedicineInitial: 0.7
+          MedicineBase: 1
+          MedicineTrained: 1.2
+          MedicineProfessional: 1.5
       requirements:
       - !type:SurgeryToolRequirement
         subject: used

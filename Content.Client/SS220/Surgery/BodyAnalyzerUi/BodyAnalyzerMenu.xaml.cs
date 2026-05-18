@@ -34,17 +34,17 @@ public sealed partial class BodyAnalyzerMenu : FancyWindow
         };
     }
 
-    public void ChangeTarget(EntityUid? target, ProtoId<SurgeryGraphPrototype>? id = null)
+    public void ChangeTarget(EntityUid? target)
     {
         if (target is not { } patient)
+        {
+            PatientStatus.ShowUnknownStatus();
             return;
+        }
 
         var status = _surgeryPatientAnalyzer.GetStatus(patient);
         PatientStatus.ShowStatus(status);
         OperationDescription.UpdateNodeShowTarget(patient);
-
-        OperationDescription.Visible = id.HasValue;
-        OperationDescription.ShowDescription(id);
 
         TreatmentSuggestion.ShowSuggestion(_surgeryPatientAnalyzer.GetTreatmentRecommendation(status));
     }
@@ -52,5 +52,6 @@ public sealed partial class BodyAnalyzerMenu : FancyWindow
     public void UpdatePerformer()
     {
         OperationList.MakeList(false);
+        PatientStatus.ShowUnknownStatus();
     }
 }

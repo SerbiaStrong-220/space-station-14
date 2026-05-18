@@ -1,4 +1,4 @@
-surgery-head-complex-name = Нейрохирургия
+surgery-head-complex-name = Операции на голове
 surgery-head-complex-description = Комплексная операция на голове. Позволяет сканировать и извлекать импланты, а также проводить глубокое вмешательство в мозг.
 surgery-head-examine-start = Пациент готов к операции на голове.
 

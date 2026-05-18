@@ -14,3 +14,4 @@ patient-status-decay-degree--1 = #err
 
 patient-status-brain-rot-degree = Мозг пациента повреждён на [color=orange]{ $degree }%[/color]
 patient-status-brain-rot-none = Мозговая активность в норме
+patient-status-brain-rot-invalid = Мозг не найден!

@@ -53,7 +53,7 @@
     edges:
     # implant check
     - to: retract-head-skin
-      id: retract-head-skin
+      id: retract-head-skin-implant-check
       delay: 15
       edgeTooltip: to-head-check-implant
       actions:
@@ -66,6 +66,14 @@
         whitelist:
           components:
           - ImplantCheckInSurgery
+    # change tts
+    - to: retract-head-skin
+      id: retract-head-skin-change-tts
+      baseEdge: retract-skin
+      delay: 15
+      edgeTooltip: to-head-change-tts
+      actions:
+      - !type:ChangeTTSAction
     # deeper
     - to: saw-skull-bone
       id: saw-skull-bone
@@ -182,6 +190,12 @@
         damage:
           types:
             Cerebral: -5
+        skillTree: SkillGroupMedicine
+        damageBonuses:
+          MedicineInitial: 0.7
+          MedicineBase: 1
+          MedicineTrained: 1.2
+          MedicineProfessional: 1.5
       requirements:
       - !type:SurgeryToolRequirement
         subject: used
