@@ -7,7 +7,7 @@ ent-Contrposters = свёрток недопустимого постера
 ent-PosterJRSaviorsOfTheWorld = Junk Recycler — спасители мира
     .desc = Плакат, призывающий присоединиться к корпорации JR и вместе позаботиться о чистоте окружающего космоса.
 
-ent-PosterJRDestroyersOfTheWorld = Junk Recycler — спасители мира
+ent-PosterJRDestroyersOfTheWorld = Junk Recycler — разрушители мира
     .desc = Кто-то вcеми силами пытается обратить внимание общественности на подозрительные гибели целых планет и связать деятельность корпорации с возникновением экологических катастроф.
 
 ent-PosterJRAnnualReport = Junk Recycler — годовой отчёт
