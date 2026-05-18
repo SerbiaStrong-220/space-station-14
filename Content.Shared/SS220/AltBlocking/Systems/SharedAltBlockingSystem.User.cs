@@ -1,7 +1,10 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
-using Content.Shared.SS220.Weapons.Ranged.Events;
 using Content.Shared.Hands.Components;
+using Content.Shared.Input;
+using Content.Shared.SS220.Weapons.Ranged.Events;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Input.Binding;
+using Robust.Shared.Player;
 
 namespace Content.Shared.SS220.AltBlocking;
 
@@ -12,34 +15,34 @@ public sealed partial class SharedAltBlockingSystem
     private void InitializeUser()
     {
         SubscribeLocalEvent<AltBlockingUserComponent, EntityTerminatingEvent>(OnEntityTerminating);
-        SubscribeAllEvent<BlockAttemptEvent>(OnBlockToggleAttempt);
+
+        CommandBinds.Builder
+            .Bind(ContentKeyFunctions.ToggleActiveBlocking, InputCmdHandler.FromDelegate(OnBlockToggleAttempt, handle: false, outsidePrediction: false))
+            .Register<SharedAltBlockingSystem>();
     }
 
 
-    private void OnBlockToggleAttempt(BlockAttemptEvent args)
+    private void OnBlockToggleAttempt(ICommonSession? session)
     {
-        if (args.Handled)
+        if (session is not { } playerSession)
             return;
 
-        if (!TryGetEntity(args.User, out var localUser))
+        if (playerSession.AttachedEntity is not { Valid: true } user)
             return;
 
-        if (!TryComp<AltBlockingUserComponent>(localUser, out var blockingUserComp))
+        if (!TryComp<AltBlockingUserComponent>(user, out var blockingUserComp))
             return;
 
-        var handQuery = GetEntityQuery<HandsComponent>();
-
-        if (!handQuery.TryGetComponent(localUser, out var hands))
+        if (!TryComp<HandsComponent>(user, out var handsComp))
             return;
 
         if (blockingUserComp.Blocking)
-            StopBlocking(((EntityUid)localUser, blockingUserComp));
+            StopBlocking((user, blockingUserComp));
 
         else
-            TryStartBlocking(((EntityUid)localUser, blockingUserComp));
+            TryStartBlocking((user, blockingUserComp));
 
-        Dirty((EntityUid)localUser, blockingUserComp);
-        args.Handled = true;
+        Dirty(user, blockingUserComp);
     }
 
     private void OnEntityTerminating(Entity<AltBlockingUserComponent> ent, ref EntityTerminatingEvent args)
