@@ -770,6 +770,7 @@
   - JanitorGaloshes
   - JanitorOrangeShoes
   - JanitorJRShoes
+  - JanitorJRBoots
 
 - type: loadoutGroup
   id: JanitorBelt

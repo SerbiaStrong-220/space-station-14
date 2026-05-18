@@ -96,6 +96,14 @@
   equipment:
     shoes: ClothingShoesJanitorJR
 
+- type: loadout
+  id: JanitorJRBoots
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: JanitorJR
+  equipment:
+    shoes: ClothingBootsJanitorJR
+
 #Head
 - type: loadout
   id: JanitorOrangeHat
