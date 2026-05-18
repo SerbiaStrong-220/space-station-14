@@ -38,6 +38,7 @@ public sealed partial class BodyAnalyzerMenu : FancyWindow
     {
         if (target is not { } patient)
         {
+            TreatmentSuggestion.ShowEmptySuggestion();
             PatientStatus.ShowUnknownStatus();
             return;
         }
@@ -52,6 +53,7 @@ public sealed partial class BodyAnalyzerMenu : FancyWindow
     public void UpdatePerformer()
     {
         OperationList.MakeList(false);
+        TreatmentSuggestion.ShowEmptySuggestion();
         PatientStatus.ShowUnknownStatus();
     }
 }

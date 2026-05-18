@@ -34,20 +34,12 @@ public sealed class SurgeryGraphSystem : EntitySystem
         return GetList(edge, (x) => x.VisibilityRequirements);
     }
 
-    public string? ExamineDescription(SurgeryGraphNode node)
+    public LocId? ExamineDescription(SurgeryGraphNode node)
     {
         return Get(node, (x) => x.NodeText.ExamineDescription);
     }
 
-    /// <summary>
-    /// Loc path to description
-    /// </summary>
-    public string? Description(SurgeryGraphNode node)
-    {
-        return Get(node, (x) => x.NodeText.Description);
-    }
-
-    public string? Popup(SurgeryGraphNode node)
+    public LocId? Popup(SurgeryGraphNode node)
     {
         return Get(node, (x) => x.NodeText.Popup);
     }

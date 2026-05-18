@@ -17,6 +17,11 @@ public sealed partial class TreatmentSuggestion : Control
         RobustXamlLoader.Load(this);
     }
 
+    public void ShowEmptySuggestion()
+    {
+        TreatmentSuggestionText.Text = string.Empty;
+    }
+
     public void ShowSuggestion(TreatmentRecommendation recommendation)
     {
         StringBuilder builder = new();

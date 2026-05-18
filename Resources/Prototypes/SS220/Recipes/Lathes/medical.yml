@@ -25,3 +25,19 @@
   materials:
     Steel: 50
     Glass: 50
+
+- type: latheRecipe
+  id: SurgeryDrapes
+  result: SurgeryDrapes
+  completetime: 2
+  materials:
+    Cloth: 100
+
+
+- type: latheRecipe
+  id: SawElectric
+  result: SawElectric
+  completetime: 4
+  materials:
+    Steel: 400
+    Plastic: 50

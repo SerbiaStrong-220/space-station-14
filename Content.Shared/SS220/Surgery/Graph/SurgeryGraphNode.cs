@@ -39,11 +39,8 @@ public sealed partial class SurgeryGraphNode : ISerializationHooks
 public sealed partial class NodeTextDescription
 {
     [DataField]
-    public string? ExamineDescription;
+    public LocId? ExamineDescription;
 
     [DataField]
-    public string? Popup;
-
-    [DataField]
-    public string? Description;
+    public LocId? Popup;
 }
