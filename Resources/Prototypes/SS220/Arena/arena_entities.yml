@@ -68,7 +68,7 @@
   - type: RoleExperienceAdd
     definitionId: ArenaFighterRoleExperience
   - type: ArenaParticipant
-    slot: PlayerOne
+    slot: TeamA
   - type: AntagImmune
 
 - type: randomHumanoidSettings
@@ -93,7 +93,7 @@
   - type: RoleExperienceAdd
     definitionId: ArenaFighterRoleExperience
   - type: ArenaParticipant
-    slot: PlayerTwo
+    slot: TeamB
   - type: AntagImmune
 
 - type: entity
