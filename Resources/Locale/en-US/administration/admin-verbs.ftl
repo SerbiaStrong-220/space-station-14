@@ -63,3 +63,16 @@ admin-verbs-dialog-redescribe-description = Description
 admin-verbs-dialog-rename-and-redescribe-title = Rename & Redescribe
 admin-verbs-dialog-set-bullet-amount-title = Set Bullet Amount
 admin-verbs-dialog-set-bullet-amount-amount = Amount (standard {$cap})
+
+# Commands (Lives)
+admin-verbs-lives-title = Change health points
+admin-verbs-lives-health = Health (1 - { $maxHp })
+
+# Commands (Traits)
+admin-verbs-traits-title = Edit traits
+admin-verbs-traits-available = Available traits:
+admin-verbs-traits-active = Active traits:
+admin-verbs-traits-search-placeholder = Search...
+admin-verbs-traits-add-tooltip = Add selected trait
+admin-verbs-traits-remove-tooltip = Remove selected trait
+admin-verbs-traits-target-player = Player: { $player }

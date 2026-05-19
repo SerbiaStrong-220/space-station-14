@@ -59,3 +59,16 @@ admin-verbs-dialog-redescribe-description = Описание
 admin-verbs-dialog-rename-and-redescribe-title = Изменить имя и описание
 admin-verbs-dialog-set-bullet-amount-title = Установить кол-во патронов
 admin-verbs-dialog-set-bullet-amount-amount = Количество (стандарт { $cap })
+
+# Commands (Lives)
+admin-verbs-lives-title = Изменить кол-во жизней
+admin-verbs-lives-health = Здоровье (1 - { $maxHp })
+
+# Commands (Traits)
+admin-verbs-traits-title = Изменить трейты
+admin-verbs-traits-available = Доступные трейты:
+admin-verbs-traits-active = Активные трейты:
+admin-verbs-traits-search-placeholder = Поиск...
+admin-verbs-traits-add-tooltip = Добавить выбранный трейт
+admin-verbs-traits-remove-tooltip = Удалить выбранный трейт
+admin-verbs-traits-target-player = Игрок: { $player }

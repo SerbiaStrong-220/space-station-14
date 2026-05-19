@@ -80,4 +80,61 @@ public sealed class TraitSystem : EntitySystem
                 handsComp: handsComponent);
         }
     }
+
+    public List<string> GetActiveTraits(EntityUid uid)
+    {
+        var activeTraits = new List<string>();
+        foreach (var trait in _prototypeManager.EnumeratePrototypes<TraitPrototype>())
+        {
+            if (trait.Components == null || trait.Components.Count == 0) continue;
+            var hasAllComponents = true;
+            foreach (var entry in trait.Components.Values)
+            {
+                if (!HasComp(uid, entry.Component.GetType()))
+                {
+                    hasAllComponents = false;
+                    break;
+                }
+            }
+            if (hasAllComponents) activeTraits.Add(trait.ID);
+        }
+        return activeTraits;
+    }
+
+    public void AddTrait(EntityUid uid, string traitId)
+    {
+        if (!_prototypeManager.TryIndex<TraitPrototype>(traitId, out var traitPrototype)) return;
+
+        if (traitPrototype.Components?.Count > 0)
+            EntityManager.AddComponents(uid, traitPrototype.Components, false);
+
+        if (traitPrototype.LearnedLanguages.Count > 0)
+        {
+            var language = EnsureComp<LanguageComponent>(uid);
+            _language.AddLanguages((uid, language), traitPrototype.LearnedLanguages);
+        }
+
+        foreach (var special in traitPrototype.Specials)
+        {
+            special.AfterEquip(uid);
+        }
+
+        if (traitPrototype.TraitGear != null && TryComp(uid, out HandsComponent? handsComponent))
+        {
+            var coords = Transform(uid).Coordinates;
+            var inhandEntity = Spawn(traitPrototype.TraitGear, coords);
+            _sharedHandsSystem.TryPickup(uid, inhandEntity, checkActionBlocker: false, handsComp: handsComponent);
+        }
+    }
+
+    public void RemoveTrait(EntityUid uid, string traitId)
+    {
+        if (!_prototypeManager.TryIndex<TraitPrototype>(traitId, out var traitPrototype)) return;
+        if (traitPrototype.Components == null || traitPrototype.Components.Count == 0) return;
+
+        foreach (var entry in traitPrototype.Components.Values)
+        {
+            RemComp(uid, entry.Component.GetType());
+        }
+    }
 }

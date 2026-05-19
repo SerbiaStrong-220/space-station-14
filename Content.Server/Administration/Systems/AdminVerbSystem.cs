@@ -40,6 +40,11 @@ using Content.Shared.Buckle.Components;
 using Content.Shared.Construction;
 using static Content.Shared.Configurable.ConfigurationComponent;
 using Content.Shared.SS220.Experience;
+using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Systems;
 
 namespace Content.Server.Administration.Systems
 {
@@ -502,6 +507,65 @@ namespace Content.Server.Administration.Systems
                     Impact = LogImpact.Medium
                 };
                 args.Verbs.Add(verb);
+            }
+
+            if (_adminManager.HasAdminFlag(player, AdminFlags.Debug) && HasComp<DamageableComponent>(args.Target))
+            {
+                Verb setLivesVerb = new()
+                {
+                    Text = Loc.GetString("admin-verbs-lives-title"),
+                    Category = VerbCategory.Debug,
+                    // TODO need a proper icon here
+                    Icon = new SpriteSpecifier.Texture(new ("/Textures/Interface/VerbIcons/rejuvenate.svg.192dpi.png")),
+                    Act = () =>
+                    {
+                        var quickDialog = EntityManager.System<QuickDialogSystem>();
+                        var mobThresholdSystem = EntityManager.System<MobThresholdSystem>();
+                        var damageableSystem = EntityManager.System<DamageableSystem>();
+
+                        if (!mobThresholdSystem.TryGetThresholdForState(args.Target, MobState.Dead, out var deadThreshold))
+                            return;
+
+                        var maxHp = (int)deadThreshold.Value;
+
+                        quickDialog.OpenDialog(player,
+                            Loc.GetString("admin-verbs-lives-title"),
+                            Loc.GetString("admin-verbs-lives-health", ("maxHp", maxHp)),
+                            (int desiredHp) =>
+                            {
+                                if (Deleted(args.Target)) return;
+
+                                var targetHp = Math.Clamp(desiredHp, 0, maxHp);
+                                var targetDamage = maxHp - targetHp;
+                                var currentDamage = (int)damageableSystem.GetTotalDamage(args.Target);
+                                var damageDelta = targetDamage - currentDamage;
+
+                                if (damageDelta == 0) return;
+
+                                var damageSpec = new DamageSpecifier();
+                                damageSpec.DamageDict.Add("Blunt", damageDelta);
+                                damageableSystem.TryChangeDamage(args.Target, damageSpec, true);
+                            });
+                    }
+                };
+                args.Verbs.Add(setLivesVerb);
+            }
+
+            if (_adminManager.HasAdminFlag(player, AdminFlags.Debug))
+            {
+                Verb traitsVerb = new()
+                {
+                    Text = Loc.GetString("admin-verbs-traits-title"),
+                    Category = VerbCategory.Debug,
+                    // TODO need a proper icon here
+                    Icon = new SpriteSpecifier.Texture(new ("/Textures/Interface/VerbIcons/rejuvenate.svg.192dpi.png")),
+                    Act = () =>
+                    {
+                        var traitsEui = new UI.ManageTraitsEui(args.Target, Name(args.Target));
+                        _euiManager.OpenEui(traitsEui, player);
+                    }
+                };
+                args.Verbs.Add(traitsVerb);
             }
 
             // Control mob verb

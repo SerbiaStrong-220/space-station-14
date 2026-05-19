@@ -1,0 +1,25 @@
+﻿<DefaultWindow
+    xmlns="https://spacestation14.io"
+    Title="{Loc admin-verbs-traits-title}"
+    MinSize="550 400">
+    <BoxContainer Orientation="Vertical" Margin="5">
+        <Label Name="TargetLabel" Text="{Loc admin-verbs-traits-target-player}" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+        <BoxContainer Orientation="Horizontal" VerticalExpand="True">
+            <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                <Label Text="{Loc admin-verbs-traits-available}" HorizontalAlignment="Center"/>
+                <LineEdit Name="SearchAvailable" PlaceHolder="{Loc admin-verbs-traits-search-placeholder}"/>
+                <ItemList Name="AvailableTraitsList" VerticalExpand="True" SelectMode="Single"/>
+            </BoxContainer>
+            <BoxContainer Orientation="Vertical" VerticalAlignment="Center" Margin="10,0">
+                <Button Name="AddTraitButton" Text="&gt;&gt;" ToolTip="{Loc admin-verbs-traits-add-tooltip}" Disabled="True"/>
+                <Control MinHeight="10"/>
+                <Button Name="RemoveTraitButton" Text="&lt;&lt;" ToolTip="{Loc admin-verbs-traits-remove-tooltip}" Disabled="True"/>
+            </BoxContainer>
+            <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                <Label Text="{Loc admin-verbs-traits-active}" HorizontalAlignment="Center"/>
+                <LineEdit Name="SearchActive" PlaceHolder="{Loc admin-verbs-traits-search-placeholder}"/>
+                <ItemList Name="ActiveTraitsList" VerticalExpand="True" SelectMode="Single"/>
+            </BoxContainer>
+        </BoxContainer>
+    </BoxContainer>
+</DefaultWindow>
