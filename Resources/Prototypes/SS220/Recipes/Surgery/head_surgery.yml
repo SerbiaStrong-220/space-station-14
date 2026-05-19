@@ -151,9 +151,12 @@
         path: /Audio/SS220/Surgery/organ.ogg
         params:
           variation: 0.125
+      edgeIcon:
+        sprite: SS220/Interface/Actions/implants.rsi
+        state: mindslave_fixer
       visibilityRequirements:
       - !type:HaveKnowledgeRequirement
-        subject: target
+        subject: performer
         description: surgery-syndicate-agent-knowledge-requirement-description
         failureMessage: surgery-syndicate-agent-knowledge-requirement-failure
         knowledge: SyndicateAgentKnowledge
@@ -177,7 +180,7 @@
         failureMessage: surgery-requirement-slave-target
         whitelist:
           components:
-          - MindSlaveDisfunction
+          - MindSlave
       actions:
       - !type:FixMindSlaveDisfunctionAction
     # remove brain damage
