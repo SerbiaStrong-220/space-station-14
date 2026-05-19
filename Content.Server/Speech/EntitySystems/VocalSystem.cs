@@ -8,8 +8,8 @@ using Content.Shared.Speech.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Timing;// SS220-scream-cooldown
-using Content.Shared.SS220.Speech;// SS220 Chat-Special-Emote
+using Robust.Shared.Timing; // SS220-scream-cooldown
+using Content.Shared.SS220.Speech; // SS220 Chat-Special-Emote
 
 namespace Content.Server.Speech.EntitySystems;
 
@@ -20,8 +20,8 @@ public sealed class VocalSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly ActionsSystem _actions = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;// SS220-scream-cooldown
-    [Dependency] private readonly IEntityManager _entities = default!;// SS220 Chat-Special-Emote
+    [Dependency] private readonly IGameTiming _timing = default!; // SS220-scream-cooldown
+    [Dependency] private readonly IEntityManager _entities = default!; // SS220 Chat-Special-Emote
 
     public override void Initialize()
     {
@@ -32,8 +32,8 @@ public sealed class VocalSystem : EntitySystem
         SubscribeLocalEvent<VocalComponent, SexChangedEvent>(OnSexChanged);
         SubscribeLocalEvent<VocalComponent, EmoteEvent>(OnEmote);
         SubscribeLocalEvent<VocalComponent, ScreamActionEvent>(OnScreamAction);
-        SubscribeLocalEvent<VocalComponent, InitSpecialSoundsEvent>(InitSpecialSounds);// SS220 Chat-Special-Emote
-        SubscribeLocalEvent<VocalComponent, UnloadSpecialSoundsEvent>(UnloadSpecialSounds);// SS220 Chat-Special-Emote
+        SubscribeLocalEvent<VocalComponent, InitSpecialSoundsEvent>(InitSpecialSounds); // SS220 Chat-Special-Emote
+        SubscribeLocalEvent<VocalComponent, UnloadSpecialSoundsEvent>(UnloadSpecialSounds); // SS220 Chat-Special-Emote
     }
 
     /// <summary>
