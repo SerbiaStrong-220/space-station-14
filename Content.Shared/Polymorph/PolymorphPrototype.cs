@@ -90,6 +90,12 @@ public sealed partial record PolymorphConfiguration
     /// <summary>
     /// Whether or not the entity transfers its inventory and equipment between forms.
     /// </summary>
+    [DataField(serverOnly: true)] //SS220 Geras reagents fix
+    public bool TransferReagents; //SS220 Geras reagents fix
+
+    /// <summary>
+    /// Whether or not the entity transfers its inventory and equipment between forms.
+    /// </summary>
     [DataField(serverOnly: true)]
     public PolymorphInventoryChange Inventory = PolymorphInventoryChange.None;
 
