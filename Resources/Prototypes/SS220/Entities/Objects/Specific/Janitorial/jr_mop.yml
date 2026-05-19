@@ -1,0 +1,64 @@
+- type: entity
+  parent: BaseItem
+  name: jr mop
+  id: JRMopItem
+  description: The latest word in mop manufacturing. Incredible lightness, increased durability, and most importantly, eco-friendly production!
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Specific/jr_mop.rsi
+    layers:
+      - state: mopJR
+      - map: ["enum.SolutionContainerLayers.Fill"]
+        state: fill-3
+        visible: false
+  - type: Appearance
+  - type: SolutionContainerVisuals
+    maxFillLevels: 3
+    fillBaseName: fill-
+    inHandsFillBaseName: -fill-
+    inHandsMaxFillLevels: 2
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 10
+    soundHit:
+      collection: MetalThud
+  - type: Spillable
+    solution: absorbed
+    spillWhenThrown: false
+    preventMelee: false
+  - type: DrainableSolution
+    solution: absorbed
+  - type: Wieldable
+  - type: IncreaseDamageOnWield
+    damage:
+      types:
+        Blunt: 5
+  - type: Item
+    size: Large
+    sprite: SS220/Objects/Specific/jr_mop.rsi
+  - type: Absorbent
+    useAbsorberSolution: true
+  - type: SolutionContainerManager
+    solutions:
+      absorbed:
+        maxVol: 100
+  - type: UseDelay
+    delay: 1
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 50
+  - type: Tag
+    tags:
+      - Mop
+      - MopBasic
+  - type: GuideHelp
+    guides:
+    - Janitorial
+  - type: DnaSubstanceTrace
+  - type: Clothing
+    quickEquip: false
+    sprite: SS220/Objects/Specific/jr_mop.rsi
+    slots:
+    - suitStorage
+

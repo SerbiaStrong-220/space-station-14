@@ -104,6 +104,15 @@
   equipment:
     shoes: ClothingBootsJanitorJR
 
+- type: loadout
+  id: JRMopItem
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: JanitorJR
+  storage:
+    back: 
+    - JRMopItem
+
 #Head
 - type: loadout
   id: JanitorOrangeHat

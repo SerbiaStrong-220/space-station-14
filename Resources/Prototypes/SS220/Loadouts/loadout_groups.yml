@@ -778,6 +778,12 @@
   loadouts:
   - JanitorBaseBelt
   - JanitorJRBelt #SS220-JRBelt
+
+- type: loadoutGroup
+  id: JanitorEquipment
+  name: loadout-group-janitor-equipment
+  loadouts:
+  - JRMopItem
   # Уборщик (Конец)
 
  # Сервисный работник (Начало)
