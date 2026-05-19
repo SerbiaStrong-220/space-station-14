@@ -96,14 +96,28 @@
         },
         "copyright": {
             "$id": "#/properties/copyright",
-            "type": "string",
             "title": "Copyright Info",
             "description": "The copyright holder. This is typically a link to the commit of the codebase that the icon is pulled from.",
             "default": "",
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            ],
             "examples": [
-                "Taken from CODEBASE at COMMIT LINK"
+                "Taken from CODEBASE at COMMIT LINK",
+                [
+                    "(License-1) First Author",
+                    "(License-2) Second Author"
+                ]
             ]
-        },
+        }
         "size": {
             "$id": "#/properties/size",
             "default": {},
