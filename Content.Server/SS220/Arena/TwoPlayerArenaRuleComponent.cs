@@ -1,7 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Roles;
-using Robust.Shared.Map;
+using Content.Shared.StatusIcon;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.Arena;
@@ -22,29 +22,44 @@ public sealed partial class TwoPlayerArenaRuleComponent : Component
     public TimeSpan MaxFightDuration = TimeSpan.FromSeconds(300);
 
     [DataField]
-    public bool DeleteBarriers = true;
+    public TimeSpan WaitingTimeout = TimeSpan.FromMinutes(2);
+
+    [DataField]
+    public TimeSpan RespawnDelay = TimeSpan.FromSeconds(2);
+
+    [ViewVariables]
+    public int TeamASize;
+
+    [ViewVariables]
+    public int TeamBSize;
+
+    [DataField]
+    public ProtoId<FactionIconPrototype> TeamAIcon = "ArenaTeamAIcon";
+
+    [DataField]
+    public ProtoId<FactionIconPrototype> TeamBIcon = "ArenaTeamBIcon";
 
     public ArenaPhase Phase = ArenaPhase.Disabled;
 
     public EntityUid? ArenaMapUid;
-    public MapId? ArenaMapId;
-    public EntityUid? ArenaGridUid;
 
     [ViewVariables]
-    public EntityUid? PlayerOne;
+    public List<EntityUid> TeamA = new();
 
     [ViewVariables]
-    public EntityUid? PlayerTwo;
+    public List<EntityUid> TeamB = new();
 
     public TimeSpan? CountdownEnd;
     public TimeSpan? FightEndAt;
+    public TimeSpan? WaitingEndAt;
     public TimeSpan? ResetReadyAt;
     public bool PendingSpawn;
-    public bool InReset;
 
     public int CurrentMapIndex;
     public ProtoId<StartingGearPrototype>? CurrentLoadout;
-    public float CurrentCountdown;
+    public List<ProtoId<StartingGearPrototype>>? TeamALoadouts;
+    public List<ProtoId<StartingGearPrototype>>? TeamBLoadouts;
+    public TimeSpan CurrentCountdown;
 
     public readonly HashSet<EntityUid> Barriers = new();
 }
@@ -59,7 +74,10 @@ public sealed partial class ArenaMapEntry
     public ProtoId<StartingGearPrototype>? Loadout;
 
     [DataField]
-    public float CountdownDuration = 10f;
+    public List<ProtoId<StartingGearPrototype>>? Loadouts;
+
+    [DataField]
+    public TimeSpan CountdownDuration = TimeSpan.FromSeconds(10);
 }
 
 public enum ArenaPhase : byte
