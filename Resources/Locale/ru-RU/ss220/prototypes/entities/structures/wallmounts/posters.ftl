@@ -4,20 +4,20 @@ ent-Legalposters = свёрток постера
 ent-Contrposters = свёрток недопустимого постера
     .desc = ничем непримечательный постер
 
-ent-PosterJRSaviorsOfTheWorld = Junk Recycler — спасители мира
+ent-PosterJRSaviorsOfTheWorld = Junk Recyclers — спасители мира
     .desc = Плакат, призывающий присоединиться к корпорации JR и вместе позаботиться о чистоте окружающего космоса.
 
-ent-PosterJRDestroyersOfTheWorld = Junk Recycler — разрушители мира
+ent-PosterJRDestroyersOfTheWorld = Junk Recyclers — разрушители мира
     .desc = Кто-то вcеми силами пытается обратить внимание общественности на подозрительные гибели целых планет и связать деятельность корпорации с возникновением экологических катастроф.
 
-ent-PosterJRAnnualReport = Junk Recycler — годовой отчёт
+ent-PosterJRAnnualReport = Junk Recyclers — годовой отчёт
     .desc = За прошедший космический год мы переработали и утилизировали десять терра-тонн самого различного мусора. Дальше — больше!
 
-ent-PosterJRTragicAccident = Junk Recycler — трагическая случайность
+ent-PosterJRTragicAccident = Junk Recyclers — трагическая случайность
     .desc = Хватит замалчивать о несчастных случаях! На руках JR больше крови, чем у Синдиката! Куда делась целая раса?
 
-ent-PosterJRSpaceJunk = Junk Recycler — космический мусор 
+ent-PosterJRSpaceJunk = Junk Recyclers — космический мусор 
     .desc = Выбрасывая мусор в открытый космос помни, что загрязнение космического пространства уже достигло критической отметки. Ты же не хочешь, чтобы выкинутый стержень пробил какую-нибудь научно-исследовательскую станцию?
 
-ent-PosterJRCarpLivesImportant = Junk Recycler — жизни карпов важны
+ent-PosterJRCarpLivesImportant = Junk Recyclers — жизни карпов важны
     .desc = Из-за военных столкновений в космическом пространстве были уничтожены естественные места обитания космических карпов. Теперь они вынуждены жить среди космического мусора, который мы утилизируем, тем самым лишая их дома! Скажи нет войне — скажи нет мусору — спаси карпов!
