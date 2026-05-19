@@ -55,7 +55,7 @@ public sealed class VocalSystem : EntitySystem
         {
             BaseCooldown = source.Comp.ScreamCooldown.BaseCooldown,
             CooldownStep = source.Comp.ScreamCooldown.CooldownStep,
-            CountResetWindow = source.Comp.ScreamCooldown.CountResetWindow,
+            ResetDelay = source.Comp.ScreamCooldown.ResetDelay,
             Count = source.Comp.ScreamCooldown.Count,
             LastTime = source.Comp.ScreamCooldown.LastTime,
             CooldownEnd = source.Comp.ScreamCooldown.CooldownEnd,
@@ -146,7 +146,7 @@ public sealed class VocalSystem : EntitySystem
         var now = _timing.CurTime;
         var data = entity.Comp.ScreamCooldown;
 
-        if (now - data.LastTime > data.CountResetWindow)
+        if (now - data.LastTime > data.ResetDelay)
             data.Count = 0;
 
         data.Count++;

@@ -75,7 +75,7 @@ public sealed partial class ScreamCooldownData
     public TimeSpan CooldownStep = TimeSpan.FromSeconds(15);
 
     [DataField]
-    public TimeSpan CountResetWindow = TimeSpan.FromMinutes(10);
+    public TimeSpan ResetDelay = TimeSpan.FromMinutes(10);
 
     [ViewVariables(VVAccess.ReadWrite)]
     public int Count;
