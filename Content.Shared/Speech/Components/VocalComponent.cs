@@ -3,6 +3,7 @@ using Content.Shared.Humanoid;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;// SS220-scream-cooldown
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared.Speech.Components;
@@ -44,22 +45,7 @@ public sealed partial class VocalComponent : Component
 
     // SS220-scream-cooldown-begin
     [DataField]
-    public TimeSpan ScreamBaseCooldown = TimeSpan.FromSeconds(10);
-
-    [DataField]
-    public TimeSpan ScreamCooldownStep = TimeSpan.FromSeconds(15);
-
-    [DataField]
-    public TimeSpan ScreamCountResetWindow = TimeSpan.FromMinutes(10);
-
-    [DataField]
-    public int ScreamCount;
-
-    [DataField]
-    public TimeSpan LastScreamTime;
-
-    [DataField]
-    public TimeSpan ScreamCooldownEnd;
+    public ScreamCooldownData ScreamCooldown = new();
     // SS220-scream-cooldown-end
 
     /// <summary>
@@ -77,3 +63,27 @@ public sealed partial class VocalComponent : Component
     public Dictionary<EntityUid, EmoteSoundsPrototype>? SpecialEmoteSounds = null;
     // SS220 Chat-Special-Emote end
 }
+
+// SS220-scream-cooldown-begin
+[DataDefinition, Serializable]
+public sealed partial class ScreamCooldownData
+{
+    [DataField]
+    public TimeSpan BaseCooldown = TimeSpan.FromSeconds(10);
+
+    [DataField]
+    public TimeSpan CooldownStep = TimeSpan.FromSeconds(15);
+
+    [DataField]
+    public TimeSpan CountResetWindow = TimeSpan.FromMinutes(10);
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public int Count;
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public TimeSpan LastTime;
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public TimeSpan CooldownEnd;
+}
+// SS220-scream-cooldown-end

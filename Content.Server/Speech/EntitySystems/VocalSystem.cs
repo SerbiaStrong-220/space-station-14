@@ -21,7 +21,6 @@ public sealed class VocalSystem : EntitySystem
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly ActionsSystem _actions = default!;
     [Dependency] private readonly IGameTiming _timing = default!; // SS220-scream-cooldown
-    [Dependency] private readonly IEntityManager _entities = default!; // SS220 Chat-Special-Emote
 
     public override void Initialize()
     {
@@ -52,12 +51,15 @@ public sealed class VocalSystem : EntitySystem
         targetComp.WilhelmProbability = source.Comp.WilhelmProbability;
         // SS220-scream-cooldown-begin
         targetComp.ScreamAction = source.Comp.ScreamAction;
-        targetComp.ScreamBaseCooldown = source.Comp.ScreamBaseCooldown;
-        targetComp.ScreamCooldownStep = source.Comp.ScreamCooldownStep;
-        targetComp.ScreamCountResetWindow = source.Comp.ScreamCountResetWindow;
-        targetComp.ScreamCount = source.Comp.ScreamCount;
-        targetComp.LastScreamTime = source.Comp.LastScreamTime;
-        targetComp.ScreamCooldownEnd = source.Comp.ScreamCooldownEnd;
+        targetComp.ScreamCooldown = new ScreamCooldownData
+        {
+            BaseCooldown = source.Comp.ScreamCooldown.BaseCooldown,
+            CooldownStep = source.Comp.ScreamCooldown.CooldownStep,
+            CountResetWindow = source.Comp.ScreamCooldown.CountResetWindow,
+            Count = source.Comp.ScreamCooldown.Count,
+            LastTime = source.Comp.ScreamCooldown.LastTime,
+            CooldownEnd = source.Comp.ScreamCooldown.CooldownEnd,
+        };
         // SS220-scream-cooldown-end
         LoadSounds(target, targetComp);
 
@@ -93,7 +95,7 @@ public sealed class VocalSystem : EntitySystem
         // SS220-scream-cooldown-begin
         if (args.Emote.ID == component.ScreamId)
         {
-            if (_timing.CurTime < component.ScreamCooldownEnd)
+            if (_timing.CurTime < component.ScreamCooldown.CooldownEnd)
             {
                 args.Handled = true;
                 return;
@@ -142,16 +144,17 @@ public sealed class VocalSystem : EntitySystem
     private void RegisterScream(Entity<VocalComponent> entity)
     {
         var now = _timing.CurTime;
+        var data = entity.Comp.ScreamCooldown;
 
-        if (now - entity.Comp.LastScreamTime > entity.Comp.ScreamCountResetWindow)
-            entity.Comp.ScreamCount = 0;
+        if (now - data.LastTime > data.CountResetWindow)
+            data.Count = 0;
 
-        entity.Comp.ScreamCount++;
-        entity.Comp.LastScreamTime = now;
+        data.Count++;
+        data.LastTime = now;
 
-        var extra = (entity.Comp.ScreamCount - 1) * entity.Comp.ScreamCooldownStep;
-        var cooldown = entity.Comp.ScreamBaseCooldown + extra;
-        entity.Comp.ScreamCooldownEnd = now + cooldown;
+        var extra = (data.Count - 1) * data.CooldownStep;
+        var cooldown = data.BaseCooldown + extra;
+        data.CooldownEnd = now + cooldown;
 
         if (entity.Comp.ScreamActionEntity is not { } actionEnt)
             return;
@@ -228,7 +231,7 @@ public sealed class VocalSystem : EntitySystem
     }
     private void InitSpecialSounds(EntityUid uid, VocalComponent component, InitSpecialSoundsEvent args)
     {
-        _entities.TryGetComponent<VocalComponent>(args.Item, out var itemComponent);
+        TryComp<VocalComponent>(args.Item, out var itemComponent);
 
         if (itemComponent == null)
             return;
