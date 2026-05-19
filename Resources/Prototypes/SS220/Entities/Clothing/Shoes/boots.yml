@@ -92,7 +92,7 @@
 - type: entity
   parent: ClothingShoesBase
   id: ClothingBootsJanitorJR
-  name: standard Work Boots Junk Recycles
+  name: standard Work Boots Junk Recyclers
   description: They were made at the request of workers, as the rubber soles made it difficult to walk.
   suffix: JR, For playing time
   components:
