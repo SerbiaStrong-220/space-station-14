@@ -52,13 +52,13 @@ public sealed partial class VocalComponent : Component
     [DataField]
     public TimeSpan ScreamCountResetWindow = TimeSpan.FromMinutes(10);
 
-    [ViewVariables]
+    [DataField]
     public int ScreamCount;
 
-    [ViewVariables]
+    [DataField]
     public TimeSpan LastScreamTime;
 
-    [ViewVariables]
+    [DataField]
     public TimeSpan ScreamCooldownEnd;
     // SS220-scream-cooldown-end
 

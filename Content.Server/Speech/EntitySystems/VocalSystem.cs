@@ -99,7 +99,7 @@ public sealed class VocalSystem : EntitySystem
                 return;
             }
 
-            RegisterScream(uid, component);
+            RegisterScream((uid, component));
 
             // SS220 Chat-Special-Emote begin
             if (CheckSpecialSounds(uid, component, args.Emote))
@@ -139,21 +139,21 @@ public sealed class VocalSystem : EntitySystem
     }
 
     // SS220-scream-cooldown-begin
-    private void RegisterScream(EntityUid uid, VocalComponent component)
+    private void RegisterScream(Entity<VocalComponent> entity)
     {
         var now = _timing.CurTime;
 
-        if (now - component.LastScreamTime > component.ScreamCountResetWindow)
-            component.ScreamCount = 0;
+        if (now - entity.Comp.LastScreamTime > entity.Comp.ScreamCountResetWindow)
+            entity.Comp.ScreamCount = 0;
 
-        component.ScreamCount++;
-        component.LastScreamTime = now;
+        entity.Comp.ScreamCount++;
+        entity.Comp.LastScreamTime = now;
 
-        var extra = (component.ScreamCount - 1) * component.ScreamCooldownStep;
-        var cooldown = component.ScreamBaseCooldown + extra;
-        component.ScreamCooldownEnd = now + cooldown;
+        var extra = (entity.Comp.ScreamCount - 1) * entity.Comp.ScreamCooldownStep;
+        var cooldown = entity.Comp.ScreamBaseCooldown + extra;
+        entity.Comp.ScreamCooldownEnd = now + cooldown;
 
-        if (component.ScreamActionEntity is not { } actionEnt)
+        if (entity.Comp.ScreamActionEntity is not { } actionEnt)
             return;
 
         _actions.SetUseDelay(actionEnt, cooldown);
