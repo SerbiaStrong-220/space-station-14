@@ -116,8 +116,8 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitNTR
-  name: nanotrasen representative uniform
-  description: The uniform of the NanoTrasen representative. Carry the truth of the corporation with your own hands.
+  name: NanoTrasen Representative uniform
+  description: The uniform of the NanoTrasen Representative. Carry the truth of the corporation with your own hands.
   suffix: For playtime
   components:
   - type: Sprite
@@ -153,7 +153,7 @@
     sprite: SS220/Clothing/Uniforms/Jumpsuit/senior_service.rsi
 
 - type: entity
-  parent: ClothingUniformBase
+  parent: [ClothingUniformBase, ClothingUniformFoldableBaseSS220]
   id: ClothingUniformJumpsuitSeniorServiceDelux
   name: senior service uniform
   description: Stylish and practical uniform, made for a master of his craft.

@@ -14,38 +14,39 @@
 # SS220 resprite end
 
 - type: entity
-  parent: [ClothingOuterStorageBase, AllowSuitStorageClothing, ClothingOuterArmorBase]
+  parent: [ ClothingOuterArmorBase, ClothingOuterStorageBase, AllowSuitStorageClothing, BaseSecurityContraband ]
   id: ClothingOuterCoatDetective
-  name: detective trenchcoat
+  name: detective armored trenchcoat
   description: An 18th-century multi-purpose trenchcoat. Someone who wears this means serious business.
   components:
   - type: Sprite
     sprite: Clothing/OuterClothing/Coats/detective.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Coats/detective.rsi
-  - type: StorageFill
-    contents:
-    - id: SmokingPipeFilledTobacco
-    - id: ExpensiveLighterDetective #SS220-Zippo
-  - type: Armor #same as regular sec armor
-    modifiers:
-      coefficients:
-        Blunt: 0.70
-        Slash: 0.70
-        Piercing: 0.70
-        Heat: 0.80
-  - type: ExplosionResistance
-    damageCoefficient: 1 #its a coat. it doesnt do shit
-#SS220 Micro_fibers start
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: SmokingPipeFilledTobacco
+        - id: FlippoEngravedLighter
+        - id: ExpensiveLighterDetective #SS220-Zippo
+  #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-cotton
     microFiberColor: micro-fibers-brown
-#SS220 Micro_fibers end
+  #SS220 Micro_fibers end
+  # ss220 add radio slot start
+  - type: ContainerContainer
+    containers:
+      item_radio: !type:ContainerSlot { }
+      storagebase: !type:Container
+        ents: [ ]
+  # ss220 add radio slot end
 
 - type: entity
   parent: [ClothingOuterCoatDetectiveLoadout]
   id: ClothingOuterCoatDetectiveLoadoutGrey
-  name: noir trenchcoat
+  name: noir armored trenchcoat
   description: Ah, your trusty coat. There's a few tears here and there, giving it a more timely look. Or at least, that's what you told yourself when you found out gettin' it repaired would set you back 200 spesos.
   components:
   - type: Sprite
@@ -57,15 +58,31 @@
     microFiberMaterial: micro-fibers-cotton
     microFiberColor: micro-fibers-grey
 #SS220 Micro_fibers end
+  # ss220 add radio slot start
+  - type: ContainerContainer
+    containers:
+      item_radio: !type:ContainerSlot { }
+      storagebase: !type:Container
+        ents: [ ]
+  # ss220 add radio slot end
 
 - type: entity
   parent: ClothingOuterCoatDetective
   id: ClothingOuterCoatDetectiveLoadout
   components:
-  - type: StorageFill
-    contents:
-    - id: SmokingPipeFilledTobacco
-    - id: FlippoLighter #Not the steal objective, only difference from normal detective trenchcoat
+  # ss220 add radio slot start
+  - type: ContainerContainer
+    containers:
+      item_radio: !type:ContainerSlot { }
+      storagebase: !type:Container
+        ents: [ ]
+  # ss220 add radio slot end
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: SmokingPipeFilledTobacco
+        - id: FlippoLighter #Not the steal objective, only difference from normal detective trenchcoat
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -80,7 +97,7 @@
 
 - type: entity
   abstract: true
-  parent: AllowSuitStorageClothing
+  parent: [ ClothingOuterArmorBase, ClothingOuterStorageBase ]
   id: ClothingOuterArmorHoS
   components:
   - type: Armor
@@ -91,12 +108,10 @@
         Piercing: 0.6
         Heat: 0.7
         Caustic: 0.75 # not the full 90% from ss13 because of the head
-  - type: ExplosionResistance
-    damageCoefficient: 0.9
 
 - type: entity
   abstract: true
-  parent: AllowSuitStorageClothing
+  parent: [ ClothingOuterArmorBase, ClothingOuterStorageBase ]
   id: ClothingOuterArmorWarden
   components:
   - type: Armor
@@ -107,11 +122,9 @@
         Piercing: 0.7
         Heat: 0.7
         Caustic: 0.9
-  - type: ExplosionResistance
-    damageCoefficient: 0.9
 
 - type: entity
-  parent: [ClothingOuterArmorHoS, ClothingOuterStorageBase]
+  parent: [BaseSecurityCommandContraband, ClothingOuterArmorHoS]
   id: ClothingOuterCoatHoSTrench
   name: head of security's armored trenchcoat
   description: A greatcoat enhanced with a special alloy for some extra protection and style for those with a commanding presence.
@@ -125,6 +138,13 @@
     microFiberMaterial: micro-fibers-reinforced-cotton
     microFiberColor: micro-fibers-black
 #SS220 Micro_fibers end
+  # ss220 add radio slot start
+  - type: ContainerContainer
+    containers:
+      item_radio: !type:ContainerSlot { }
+      storagebase: !type:Container
+        ents: [ ]
+  # ss220 add radio slot end
 
 - type: entity
   parent: ClothingOuterStorageToggleableBase
@@ -138,11 +158,21 @@
     sprite: Clothing/OuterClothing/Coats/jensencoat.rsi
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHatHoodChaplainHood
-#SS220 Micro_fibers start
+  #SS220 Micro_fibers start
   - type: MicroFiber
     microFiberMaterial: micro-fibers-cotton
     microFiberColor: micro-fibers-black
-#SS220 Micro_fibers end
+  #SS220 Micro_fibers end
+
+- type: entity
+  parent: ClothingOuterCoatJensen
+  id: ClothingOuterCoatJensenSyndie
+  suffix: Syndie
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: SyndieHandyFlag
 
 - type: entity
   parent: ClothingOuterStorageBase
@@ -428,7 +458,7 @@
   # SS220 add-pirateaccent-tricord-and-coat END
 
 - type: entity
-  parent: [ClothingOuterArmorWarden, ClothingOuterStorageBase, BaseSecurityContraband]
+  parent: [ClothingOuterArmorWarden, BaseSecurityContraband]
   id: ClothingOuterCoatWarden
   name: warden's armored jacket
   description: A sturdy, utilitarian jacket designed to protect a warden from any brig-bound threats.
@@ -482,7 +512,7 @@
 - type: entity
   parent: ClothingOuterStorageBase
   id: ClothingOuterClownPriest
-  name: robes of the honkmother
+  name: honkmother coat
   description: Meant for a clown of the cloth.
   components:
   - type: Sprite
@@ -564,6 +594,13 @@
     microFiberMaterial: micro-fibers-reinforced-cotton
     microFiberColor: micro-fibers-red
 #SS220 Micro_fibers end
+  # ss220 add radio slot start
+  - type: ContainerContainer
+    containers:
+      item_radio: !type:ContainerSlot { }
+      storagebase: !type:Container
+        ents: [ ]
+  # ss220 add radio slot end
 
 - type: entity
   parent: ClothingOuterStorageBase

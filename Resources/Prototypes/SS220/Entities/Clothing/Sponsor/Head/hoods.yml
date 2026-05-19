@@ -10,3 +10,16 @@
     sprite: SS220/Clothing/Sponsor/Head/Hoods/wikihood.rsi
   - type: Clothing
     sprite: SS220/Clothing/Sponsor/Head/Hoods/wikihood.rsi
+
+# Капюшон для плаща лороведов
+- type: entity
+  parent: ClothingHeadHatHoodWinterBase
+  id: ClothingHeadHatLorovedCloak
+  name: the cloak of storytelling
+  description: A special cloak given to the guardians, whose purpose is to preserve the memory of the world.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Head/Hoods/lorovedhood.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Head/Hoods/lorovedhood.rsi

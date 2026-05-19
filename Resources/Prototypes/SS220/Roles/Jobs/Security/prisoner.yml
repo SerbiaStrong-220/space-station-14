@@ -3,5 +3,6 @@
   name: job-name-prisoner
   description: job-description-prisoner
   playTimeTracker: Prisoner
+  experienceDefinition: NoSpecialRoleExperience
   icon: "JobIconPrisoner"
   canBeAntag: true

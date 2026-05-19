@@ -26,3 +26,13 @@
     - tasks:
       - !type:HTNCompoundTask
         task: IdleCompound
+
+- type: htnCompound
+  id: WatermelonDogCompound
+  branches:
+    - tasks:
+        - !type:HTNCompoundTask
+          task: FollowCompound
+    - tasks:
+        - !type:HTNCompoundTask
+          task: IdleCompound

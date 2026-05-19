@@ -2,6 +2,7 @@
 
 using Content.Shared.Body.Systems;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -80,7 +81,7 @@ public abstract class SharedCultYoggHealSystem : EntitySystem
         if (!TryComp<DamageableComponent>(ent, out var damageableComp))
             return;
 
-        _damageable.TryChangeDamage(ent, ent.Comp.Heal, true, interruptsDoAfters: false, damageableComp);
+        _damageable.TryChangeDamage(ent.Owner, ent.Comp.Heal, true, interruptsDoAfters: false);
 
         _bloodstreamSystem.TryModifyBleedAmount(ent.Owner, ent.Comp.BloodlossModifier);
         _bloodstreamSystem.TryModifyBloodLevel(ent.Owner, ent.Comp.ModifyBloodLevel);
@@ -93,7 +94,7 @@ public abstract class SharedCultYoggHealSystem : EntitySystem
         if (!_mobThreshold.TryGetDeadThreshold(ent, out var threshold))
             return;
 
-        if (damageableComp.TotalDamage > threshold)
+        if (_damageable.GetTotalDamage((ent.Owner, damageableComp)) > threshold)
             return;
 
         _mobState.ChangeMobState(ent, MobState.Critical);

@@ -61,6 +61,7 @@
             SecurityCadet: [ 1, 2 ]
             Magistrate: [ 1, 1 ]
             IAA: [ 2, 2 ] # Corvax-IAA
+            # NanoTrasenRepresentative: [ 1, 1 ] #SS220 TODO NanoTraisen Representative
             Lawyer: [ 3, 3 ]
             BlueShield: [ 1, 1 ]
             Brigmedic: [ 1, 1 ]

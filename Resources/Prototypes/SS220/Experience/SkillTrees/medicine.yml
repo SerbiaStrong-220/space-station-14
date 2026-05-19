@@ -1,0 +1,9 @@
+- type: skillTree
+  id: Medicine
+  skillGroupId: SkillGroupMedicine
+  skillTreeName: medicine-skill-tree-name
+  skillTree:
+  - MedicineInitial
+  - MedicineBase
+  - MedicineTrained
+  - MedicineProfessional

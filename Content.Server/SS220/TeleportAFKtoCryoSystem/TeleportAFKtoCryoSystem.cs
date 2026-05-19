@@ -24,6 +24,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using System.Linq;
+using Content.Shared.Body;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.TeleportAFKtoCryoSystem;
@@ -253,6 +254,6 @@ public sealed class TeleportAFKtoCryoSystem : EntitySystem
         if (TryComp<AmbientSoundComponent>(portalEntity, out var ambientSoundComponent))
             _audioSystem.PlayPvs(ambientSoundComponent.Sound, portalEntity);
 
-        EntityManager.QueueDeleteEntity(portalEntity);
+        QueueDel(portalEntity);
     }
 }

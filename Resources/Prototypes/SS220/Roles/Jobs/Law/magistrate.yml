@@ -2,6 +2,7 @@
   id: Magistrate
   name: job-name-magistrate
   description: job-description-magistrate
+  #setPreference: false #SS220 TODO NanoTraisen Representative
   playTimeTracker: JobMagistrate
   requirements:
     - !type:DepartmentTimeRequirement
@@ -18,6 +19,7 @@
       - Felinid #SS220-jobbans end
   weight: 20
   startingGear: MagistrateGear
+  experienceDefinition: MagistrateRoleExperience
   icon: "JobIconMagistrate"
   requireAdminNotify: true
   joinNotifyCrew: true

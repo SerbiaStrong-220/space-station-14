@@ -46,6 +46,7 @@
       enum.MiGoTeleportUiKey.Teleport:
         type: MiGoTeleportBoundUserInterface
   - type: ShowCultYoggIcons #not sure
+  - type: ShowHealthBars
   - type: PolymorphTimer
     polymorphTimerAlert: MiGoAstralAlert
     #not sure about this one

@@ -1,5 +1,9 @@
 job-name-magistrate = магистрат
+job-name-nanotrasen-representative = представитель НаноТрейзен
 job-name-tourist = турист
+
+job-name-blueshield = офицер "Синий щит"
+JobBlueShield = офицер "Синий щит"
 
 job-name-cc-default = ЦК
 job-name-cc-agent = агент ЦК
@@ -29,6 +33,7 @@ job-name-death-squad-healer = медик Эскадрона Смерти
 job-name-migo = Ми-Го
 
 job-name-security-pet = питомец службы безопасности
+job-name-peaceful-pet = безобидный питомец
 
 job-name-aggressive-animals = агрессивная фауна
 

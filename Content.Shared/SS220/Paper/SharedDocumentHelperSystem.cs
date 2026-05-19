@@ -27,6 +27,8 @@ public abstract partial class SharedDocumentHelperSystem : EntitySystem
         {"%time", DocumentHelperOptions.Time},
     };
 
+    private static readonly Regex ParseTagRegex = new Regex("\\u0025\\b(\\w+)\\b", RegexOptions.Compiled);
+
     public override void Initialize()
     {
         base.Initialize();
@@ -47,7 +49,7 @@ public abstract partial class SharedDocumentHelperSystem : EntitySystem
     public virtual string ParseTags(Entity<PaperComponent> ent, string content)
     {
         // GenerateRegexAttribute cause errors on the client side and doesn't work
-        return Regex.Replace(content, "\\u0025\\b(\\w+)\\b", match =>
+        return ParseTagRegex.Replace(content, match =>
         {
             var word = match.Value.ToLower();
             if (!_allowedTags.TryGetValue(word, out var replacedData))
@@ -135,15 +137,14 @@ public abstract partial class SharedDocumentHelperSystem : EntitySystem
 
         var job = string.Empty;
         // PDA
-        if (EntityManager.TryGetComponent(idUid, out PdaComponent? pda) &&
+        if (TryComp(idUid, out PdaComponent? pda) &&
             TryComp<IdCardComponent>(pda.ContainedId, out var id) &&
             id.LocalizedJobTitle != null)
         {
             job = id.LocalizedJobTitle ?? string.Empty;
         }
         // ID Card
-        else if (EntityManager.TryGetComponent(idUid, out id) &&
-            id.LocalizedJobTitle != null)
+        else if (TryComp(idUid, out id) && id.LocalizedJobTitle != null)
         {
             job = id.LocalizedJobTitle ?? string.Empty;
         }

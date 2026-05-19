@@ -105,3 +105,20 @@
     sprite: SS220/Clothing/Sponsor/Uniform/Jumpsuit/nanamijumpsuit.rsi
   - type: Clothing
     sprite: SS220/Clothing/Sponsor/Uniform/Jumpsuit/nanamijumpsuit.rsi
+
+# Кожевенник
+- type: entity
+  parent: ClothingSponsorUniformBase
+  id: ClothingUniformJumpsuitJabroniOutfit
+  name: leather suit
+  description: Buddy, I think you got the wrong station.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Sponsor/Uniform/Jumpsuit/jabroni.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Sponsor/Uniform/Jumpsuit/jabroni.rsi
+  - type: SpecialSounds
+  - type: Vocal
+    sounds:
+      Male: MaleGachi
+      Unsexed: MaleGachi

@@ -16,7 +16,7 @@ public sealed class ClientPenScramblerSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        var query = EntityManager.EntityQueryEnumerator<SetScaleFromTargetComponent>();
+        var query = EntityQueryEnumerator<SetScaleFromTargetComponent>();
 
         while (query.MoveNext(out var uid, out var comp))
         {
@@ -45,7 +45,7 @@ public sealed class ClientPenScramblerSystem : EntitySystem
         if (!ent.Comp.Target.HasValue)
             return;
 
-        if (!EntityManager.TryGetEntity(ent.Comp.Target.Value, out var target))
+        if (!TryGetEntity(ent.Comp.Target.Value, out var target))
             return;
 
         if (!TryComp<SpriteComponent>(ent.Owner, out var spriteUser))
@@ -54,9 +54,9 @@ public sealed class ClientPenScramblerSystem : EntitySystem
         if (!TryComp<SpriteComponent>(target, out var spriteTarget))
             return;
 
-        spriteUser.Scale = spriteTarget.Scale;
+        _sprite.SetScale((ent.Owner, spriteUser), spriteTarget.Scale);
         ent.Comp.IsUpdated = true;
 
-        _sprite.QueueUpdateInert(ent.Owner, spriteUser);
+        _sprite.QueueUpdateIsInert((ent.Owner, spriteUser));
     }
 }
