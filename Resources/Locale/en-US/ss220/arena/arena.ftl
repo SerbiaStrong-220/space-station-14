@@ -5,6 +5,7 @@ arena-winner-popup = You won the arena!
 arena-winner-announcement = [Arena] A winner has been declared!
 arena-no-winner-announcement = [Arena] The fight ended without a winner.
 arena-fight-timeout = Time's up, it's a draw!
+arena-waiting-timeout = Not enough fighters joined, rerolling the arena...
 arena-ghost-role-fighter-name = Arena Fighter
 ent-MindRoleArenaFighter = { arena-ghost-role-fighter-name }
 arena-ghost-role-fighter-description =

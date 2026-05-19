@@ -107,6 +107,90 @@
     pocket1: ArenaUplinkRadio40TC
 
 - type: startingGear
+  id: ArenaLoadoutArcher
+  equipment:
+    jumpsuit: UniformScrubsColorGreen
+    mask: ClothingMaskBandGreen
+    gloves: ClothingHandsGlovesColorGreen
+    shoes: ClothingShoesBootsLaceupSeniorService
+    belt: ClothingBeltQuiver
+  inhand:
+  - BowImprovised
+  storage:
+    belt:
+    - ArrowRegular
+    - ArrowRegular
+    - ArrowRegular
+    - ArrowRegular
+    - ArrowRegular
+    - ArrowRegular
+    - ArrowRegular
+    - ArrowRegular
+    - ArrowRegular
+    - ArrowRegular
+    - ArrowRegular
+    - ArrowRegular
+    - ArrowRegular
+    - ArrowRegular
+    - ArrowRegular
+
+- type: startingGear
+  id: ArenaLoadoutKnight
+  equipment:
+    outerClothing: ClothingOuterArmorMagusred
+    neck: ClothingNeckCloakHerald
+    head: ClothingHeadHelmetTemplar
+  inhand:
+  - Claymore
+  - ClockworkShield
+
+- type: startingGear
+  id: ArenaLoadoutLaser
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorWhite
+    neck: ClothingNeckCloakLesbian
+    mask: ClothingMaskWeldingGas
+    gloves: ClothingHandsGlovesColorWhite
+    shoes: ClothingShoesBootsSpeedArenaMicroreactor
+  inhand:
+  - WeaponAntiqueLaser
+  - WeaponAntiqueLaser
+
+- type: startingGear
+  id: ArenaLoadoutPirate
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitPirate
+    outerClothing: ClothingOuterCoatGentle
+    shoes: ClothingShoesBootsLaceup
+    head: ClothingHeadHatPirateTricord
+    back: ClothingBackpackSatchelLeather
+  inhand:
+  - WeaponShotgunBlunderbuss
+  - WeaponLauncherPirateCannon
+  storage:
+    back:
+    - ShellShotgun
+    - ShellShotgun
+    - ShellShotgun
+    - ShellShotgun
+    - ShellShotgun
+    - ShellShotgun
+    - ShellShotgun
+    - ShellShotgun
+    - ShellShotgun
+    - ShellShotgun
+
+- type: startingGear
+  id: ArenaLoadoutLavaSec
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSec
+    outerClothing: ClothingOuterHardsuitMaxim
+    back: PortableRecharger
+  inhand:
+  - WeaponLaserCannon
+  - WeaponLaserSvalinn
+
+- type: startingGear
   id: ArenaLoadoutSalvage
   equipment:
     jumpsuit: ClothingUniformJumpsuitSalvageSpecialist
