@@ -1,13 +1,13 @@
 ent-BaseCartridgePistol = патрон (.35 авто)
     .desc = { ent-BaseCartridge.desc }
 ent-CartridgePistol = патрон (.35 авто)
-    .desc = Arguably the most popular caliber on the market, used by all manner of pistols and submachine guns. Standard kinetic ammunition is common and useful in most situations.
+    .desc = Пожалуй, самый популярный калибр на рынке, используемый всеми видами пистолетов и пистолетов-пулеметов. Стандартные кинетические патроны распространены и полезны в большинстве ситуаций.
 ent-CartridgePistolPractice = патрон (.35 авто учебный)
-    .desc = Arguably the most popular caliber on the market, used by all manner of pistols and submachine guns. Practice ammunition fires a chalk projectile that stings a little, but otherwise causes no lasting damage.
+    .desc = Пожалуй, самый популярный калибр на рынке, используемый всеми видами пистолетов и пистолетов-пулеметов. Учебные патроны стреляют меловым снарядом, который немного пощипывает, но в остальном не причиняет длительного вреда.
 ent-CartridgePistolIncendiary = патрон (.35 авто зажигательный)
-    .desc = Arguably the most popular caliber on the market, used by all manner of pistols and submachine guns. Incendiary ammunition contains a self-igniting compound that sets targets ablaze.
+    .desc = Пожалуй, самый популярный калибр на рынке, используемый всеми видами пистолетов и пистолетов-пулеметов. Зажигательные боеприпасы содержат самовоспламеняющееся соединение, которое поджигает цель.
 ent-CartridgePistolUranium = патрон (.35 авто урановый)
-    .desc = Arguably the most popular caliber on the market, used by all manner of pistols and submachine guns. Uranium ammunition replaces the lead core of the bullet with fissile material, irradiating targets from the inside.
+    .desc = Пожалуй, самый популярный калибр на рынке, используемый во всех видах пистолетов и пистолетов-пулеметов. Боеприпас заменён на уран, который облучает цель изнутри.
 ent-CartridgePistolSpent = патрон (.35 авто)
     .desc = { ent-BaseCartridgePistol.desc }
     .suffix = Использован
