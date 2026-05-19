@@ -1,5 +1,6 @@
 using Content.Shared.Body.Events;
 using Content.Shared.Emoting;
+using Content.Shared.SS220.AltBlocking;
 using Content.Shared.Hands;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
@@ -190,6 +191,10 @@ namespace Content.Shared.ActionBlocker
             // If target is in a container can we attack
             if (target != null && _container.IsEntityInContainer(target.Value))
             {
+                //SS220 shield rework begin
+                if (TryComp<AltBlockingComponent>(target, out var comp) && comp.User != null)
+                    return true;
+                //SS220 shield rework end
                 return false;
             }
 

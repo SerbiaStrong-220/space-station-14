@@ -199,7 +199,7 @@
     jumpsuit: ClothingUniformJumpsuitDeathSquad
     id: DeathsquadCommanderPDA
     pocket1: EnergySword
-    pocket2: EnergyShield
+    pocket2: EnergyShieldAlt
 
 - type: startingGear
   id: DeathSquadHealerGear
@@ -207,7 +207,7 @@
     jumpsuit: ClothingUniformJumpsuitDeathSquad
     id: DeathsquadHealerPDA
     pocket1: EnergySword
-    pocket2: EnergyShield
+    pocket2: EnergyShieldAlt
 
 - type: startingGear
   id: DeathSquadOperativeGear
@@ -215,7 +215,7 @@
     jumpsuit: ClothingUniformJumpsuitDeathSquad
     id: DeathsquadPDA
     pocket1: EnergySword
-    pocket2: EnergyShield
+    pocket2: EnergyShieldAlt
 
 ##Ert Gamma
 

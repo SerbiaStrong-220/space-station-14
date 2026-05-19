@@ -69,7 +69,6 @@
       right:
       - state: inhand-right-blade
         shader: unshaded
-  - type: Reflect
   - type: IgnitionSource
     temperature: 700
 # SS220-hidden-desc-begin
@@ -102,25 +101,6 @@
       map: [ "blade" ]
   - type: Item
     sprite: Objects/Weapons/Melee/e_sword-inhands.rsi
-    #ss220lowTTKUpdate
-  - type: Reflect
-    reflectProb: 0.45 #ss220 ttkTweaks
-    reflects:
-      - NonEnergy
-      - Energy #SS220-FixReflects
-    spread: 80
-    reflectProbProjectile: 0.40 #ss220 ttkTweaks
-    spreadProjectile: 180
-    #ss220lowTTKUpdate
-  #SS220 craftable desword start
-  - type: Tag
-    tags:
-    - EnergySword
-  - type: Construction
-    deconstructionTarget: null
-    graph: EnergyDoubleSwordGraph
-    node: esword
-  #SS220 craftable desword end
   - type: StaticPrice
     price: 2500
 
@@ -338,6 +318,51 @@
   id: EnergySwordDouble
   description: Syndicate Command Interns thought that having one blade on the energy sword was not enough. This can be stored in pockets.
   components:
+  #SS220 shield rework begin
+  - type: AltBlocking
+    rangeBlockProb: 0
+    meleeBlockProb: 0
+    activeRangeBlockProb: 0.85
+    activeMeleeBlockProb: 0.85
+  - type: ToggleBlockingChance
+    toggledRangeBlockProb: 0.3
+    toggledMeleeBlockProb: 0.35
+  - type: ChangeAppearanceOnActiveBlocking
+    spriteLayer: shield
+    inhandVisuals:
+      left:
+      - state: inhand-left-shield
+        shader: unshaded
+      right:
+      - state: inhand-right-shield
+        shader: unshaded
+  - type: Damageable
+    damageContainer: Invulnerable
+  - type: ArmorBlock
+  - type: AltArmor
+    tresholdDict:
+      Piercing: 48
+      Blunt: 30
+      Heat: 35
+      Slash: 30
+      Radiation: 1000
+      Poison: 1000
+      Caustic: 1000
+    durabilityTresholdDict:
+      Piercing: 10000
+      Blunt: 10000
+      Heat: 10000
+      Slash: 10000
+      Radiation: 10000
+      Poison: 1000
+      Caustic: 1000
+  - type: InstastunResist
+    resistedStunTypes:
+      - Creampie
+      - Projectile
+    active: false
+  - type: InstastunResistOnActiveBlocking
+  #SS220 shield rework end
   - type: ItemToggle
     onUse: false # wielding events control it instead
     onActivate: false # prevents the weapon from being able to be turned on when it is on the ground
@@ -393,23 +418,6 @@
   - type: Item
     size: Small
     sprite: Objects/Weapons/Melee/e_sword_double-inhands.rsi
-# ss220 FixESword
-  - type: Reflect
-    reflectProb: 0.65 #ss220 ttkTweaks
-    reflectProbBehind: 0.10 #ss220 add reflect in back
-    reflects:
-      - NonEnergy
-      - Energy #SS220-FixReflects
-    spread: 45
-    reflectProbProjectile: 0.65 #ss220lowTTKUpdate
-    spreadProjectile: 180
-# ss220 FixESword
-  #SS220 craftable desword start
-  - type: Construction
-    deconstructionTarget: null
-    graph: EnergyDoubleSwordGraph
-    node: desword
-  #SS220 craftable desword end
 
 # Item will look weird in handslot. Will need to adjust handstorage visuals in a future PR
 - type: entity
@@ -460,9 +468,6 @@
   - type: Item
     size: Small
     sprite: Objects/Weapons/Melee/hypereutactic_blade_inhands.rsi
-  - type: Reflect
-    reflectProb: 1.0
-    spread: 75
 
 # Borgs
 
@@ -473,13 +478,69 @@
   description: A very loud & dangerous sword with a beam made of pure, concentrated plasma. Specially designed for syndicate cyborgs.
 
 - type: entity
-  parent: EnergySwordDouble
+  parent: EnergySword #SS220 shield rework
   id: CyborgEnergySwordDouble # why is this invalid if ID is BorgEnergySwordDouble
   suffix: One-Handed, For Borgs
   description: Syndicate Command Interns thought that having one blade on the energy sword was not enough. Specially designed for syndicate cyborgs.
   components: # could add energy-draining like the L6C
-  - type: Wieldable
-    freeHandsRequired: 0 # because borg has no off-hand to wield with.  Without this, it will be unable to activate the esword
+   #Inheriting from usual double esword somehow and somewhy throwed the exeption(No, this is not related to shield rework in any way)
+  #SS220 shield rework begin
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    attackRate: 1.5
+    angle: 100
+    damage:
+      types:
+        Blunt: 4.5
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/e_sword_double.rsi
+    layers:
+      - state: e_sword_double
+      - state: e_sword_double_blade
+        color: "#FFFFFF"
+        visible: false
+        shader: unshaded
+        map: [ "blade" ]
+  - type: InstastunResist
+    resistedStunTypes:
+      - Creampie
+      - Projectile
+    active: false
+  - type: InstastunResistOnActiveBlocking
+  - type: AltBlocking
+    rangeBlockProb: 0
+    meleeBlockProb: 0
+    activeRangeBlockProb: 0.60 #As we have no indication of the double esword being turned on or off chance frameworks were shrinked
+    activeMeleeBlockProb: 0.65
+  - type: ToggleBlockingChance
+    toggledRangeBlockProb: 0.50
+    toggledMeleeBlockProb: 0.35
+  - type: ChangeAppearanceOnActiveBlocking
+    spriteLayer: shield
+    inhandVisuals:
+      left:
+      - state: inhand-left-shield
+        shader: unshaded
+      right:
+      - state: inhand-right-shield
+        shader: unshaded
+  - type: Damageable
+    damageContainer: Invulnerable
+  - type: ArmorBlock
+  - type: AltArmor
+    tresholdDict:
+      Piercing: 40
+      Blunt: 30
+      Heat: 35
+      Slash: 30
+      Radiation: 1000
+      Poison: 1000
+      Caustic: 1000
+      Asphyxiation: 1000
+      Bloodloss: 1000
+      Shock: 30
+      Cold: 20
+  #SS220 shield rework end
 
 - type: entity
   parent: [ EnergyDaggerLoud, BaseXenoborgContraband ]
