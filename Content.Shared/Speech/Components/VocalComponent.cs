@@ -42,6 +42,26 @@ public sealed partial class VocalComponent : Component
     [AutoNetworkedField]
     public EntityUid? ScreamActionEntity;
 
+    // SS220-scream-cooldown-begin
+    [DataField]
+    public TimeSpan ScreamBaseCooldown = TimeSpan.FromSeconds(10);
+
+    [DataField]
+    public TimeSpan ScreamCooldownStep = TimeSpan.FromSeconds(15);
+
+    [DataField]
+    public TimeSpan ScreamCountResetWindow = TimeSpan.FromMinutes(10);
+
+    [ViewVariables]
+    public int ScreamCount;
+
+    [ViewVariables]
+    public TimeSpan LastScreamTime;
+
+    [ViewVariables]
+    public TimeSpan ScreamCooldownEnd;
+    // SS220-scream-cooldown-end
+
     /// <summary>
     ///     Currently loaded emote sounds prototype, based on entity sex.
     ///     Null if no valid prototype for entity sex was found.

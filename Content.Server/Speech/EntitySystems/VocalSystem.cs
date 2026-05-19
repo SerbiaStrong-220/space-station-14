@@ -8,6 +8,7 @@ using Content.Shared.Speech.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;// SS220-scream-cooldown
 using Content.Shared.SS220.Speech;// SS220 Chat-Special-Emote
 
 namespace Content.Server.Speech.EntitySystems;
@@ -19,6 +20,7 @@ public sealed class VocalSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly ActionsSystem _actions = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;// SS220-scream-cooldown
     [Dependency] private readonly IEntityManager _entities = default!;// SS220 Chat-Special-Emote
 
     public override void Initialize()
@@ -48,6 +50,15 @@ public sealed class VocalSystem : EntitySystem
         targetComp.ScreamId = source.Comp.ScreamId;
         targetComp.Wilhelm = source.Comp.Wilhelm;
         targetComp.WilhelmProbability = source.Comp.WilhelmProbability;
+        // SS220-scream-cooldown-begin
+        targetComp.ScreamAction = source.Comp.ScreamAction;
+        targetComp.ScreamBaseCooldown = source.Comp.ScreamBaseCooldown;
+        targetComp.ScreamCooldownStep = source.Comp.ScreamCooldownStep;
+        targetComp.ScreamCountResetWindow = source.Comp.ScreamCountResetWindow;
+        targetComp.ScreamCount = source.Comp.ScreamCount;
+        targetComp.LastScreamTime = source.Comp.LastScreamTime;
+        targetComp.ScreamCooldownEnd = source.Comp.ScreamCooldownEnd;
+        // SS220-scream-cooldown-end
         LoadSounds(target, targetComp);
 
         Dirty(target, targetComp);
@@ -79,21 +90,37 @@ public sealed class VocalSystem : EntitySystem
         if (args.Handled || !args.Emote.Category.HasFlag(EmoteCategory.Vocal))
             return;
 
+        // SS220-scream-cooldown-begin
+        if (args.Emote.ID == component.ScreamId)
+        {
+            if (_timing.CurTime < component.ScreamCooldownEnd)
+            {
+                args.Handled = true;
+                return;
+            }
+
+            RegisterScream(uid, component);
+
+            // SS220 Chat-Special-Emote begin
+            if (CheckSpecialSounds(uid, component, args.Emote))
+            {
+                args.Handled = true;
+                return;
+            }
+            // SS220 Chat-Special-Emote end
+
+            args.Handled = TryPlayScreamSound(uid, component);
+            return;
+        }
+        // SS220-scream-cooldown-end
+
         // SS220 Chat-Special-Emote begin
-        //Will play special emote if it exists
-        if(CheckSpecialSounds(uid, component, args.Emote))
+        if (CheckSpecialSounds(uid, component, args.Emote))
         {
             args.Handled = true;
             return;
         }
         // SS220 Chat-Special-Emote end
-
-        // snowflake case for wilhelm scream easter egg
-        if (args.Emote.ID == component.ScreamId)
-        {
-            args.Handled = TryPlayScreamSound(uid, component);
-            return;
-        }
 
         if (component.EmoteSounds is not { } sounds)
             return;
@@ -110,6 +137,29 @@ public sealed class VocalSystem : EntitySystem
         _chat.TryEmoteWithChat(uid, component.ScreamId);
         args.Handled = true;
     }
+
+    // SS220-scream-cooldown-begin
+    private void RegisterScream(EntityUid uid, VocalComponent component)
+    {
+        var now = _timing.CurTime;
+
+        if (now - component.LastScreamTime > component.ScreamCountResetWindow)
+            component.ScreamCount = 0;
+
+        component.ScreamCount++;
+        component.LastScreamTime = now;
+
+        var extra = (component.ScreamCount - 1) * component.ScreamCooldownStep;
+        var cooldown = component.ScreamBaseCooldown + extra;
+        component.ScreamCooldownEnd = now + cooldown;
+
+        if (component.ScreamActionEntity is not { } actionEnt)
+            return;
+
+        _actions.SetUseDelay(actionEnt, cooldown);
+        _actions.SetIfBiggerCooldown(actionEnt, cooldown);
+    }
+    // SS220-scream-cooldown-end
 
     private bool TryPlayScreamSound(EntityUid uid, VocalComponent component)
     {
