@@ -117,7 +117,7 @@
                     "(License-2) Second Author"
                 ]
             ]
-        }
+        },
         "size": {
             "$id": "#/properties/size",
             "default": {},
