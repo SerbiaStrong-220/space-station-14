@@ -43,3 +43,7 @@ ent-MagazineShotgunSlugFoam = барабан (.50 пулевые)
 ent-MagazineLightRifleBoxCaps = короб патронов L6 SAW
     .desc = { ent-BaseMagazineLightRifle.desc }
     .suffix = Пистоны
+
+ent-MagazineFoamBox = короб патронов L6 SAW
+    .desc = { ent-MagazineLightRifleBox.desc }
+    .suffix = Поролон
