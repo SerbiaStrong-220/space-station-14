@@ -4,6 +4,6 @@ namespace Content.Server.SS220.Arena;
 
 public enum ArenaSlot : byte
 {
-    PlayerOne = 0,
-    PlayerTwo = 1,
+    TeamA = 0,
+    TeamB = 1,
 }
