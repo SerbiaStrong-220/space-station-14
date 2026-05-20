@@ -108,9 +108,9 @@
   description: Heavy armor suit with neck, shoulders and groin protection. Contains IV class silicon carbide armor plating. It has integrated undetachable helmet on it.
   components:
   - type: Sprite
-    sprite: Clothing/OuterClothing/Vests/webvest.rsi
+    sprite: SS220/Clothing/OuterClothing/Armor/syndie-assault.rsi
   - type: Clothing
-    sprite: Clothing/OuterClothing/Vests/webvest.rsi
+    sprite: SS220/Clothing/OuterClothing/Armor/syndie-assault.rsi
   - type: Armor
     modifiers:
       coefficients:
