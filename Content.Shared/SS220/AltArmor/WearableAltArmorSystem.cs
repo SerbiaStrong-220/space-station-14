@@ -17,14 +17,21 @@ public sealed class WearableAltArmorSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<WearableAltArmorComponent, InventoryRelayedEvent<DamageModifyEvent>>(OnDamageModify);
+
+        SubscribeLocalEvent<WearableAltArmorComponent, DamageModifyEvent>(OnDamageModifyDirect);
     }
 
     public void OnDamageModify(Entity<WearableAltArmorComponent> ent, ref InventoryRelayedEvent<DamageModifyEvent> args)
     {
         _altArmor.ModifyDamage(ent.Owner, args.Args.OriginalDamage, out var resultDamage, out var resultArmorDamage);
 
-        args.Args.Damage = resultDamage;
+        _damageable.TryChangeDamage(ent.Owner, args.Args.Damage);
 
-        _damageable.TryChangeDamage(ent.Owner, resultArmorDamage);
+        args.Args.Damage = resultDamage;
+    }
+
+    public void OnDamageModifyDirect(Entity<WearableAltArmorComponent> ent, ref DamageModifyEvent args)
+    {
+        _altArmor.ModifyDamage(ent.Owner, args.OriginalDamage, out var resultDamage, out args.Damage);
     }
 }
