@@ -9,6 +9,22 @@
   flavor: menacing
   color: "#afdd9a" #change color to a shroom color
   metabolisms:
+    Digestion:
+      effects:
+      - !type:ChemMiGomyceliumEffect
+      - !type:GenericStatusEffect
+        key: Rave
+        component: Rave
+        type: Add
+        time: 150
+        conditions:
+        - !type:ReagentCondition
+            reagent: TheBloodOfYogg
+            min: 2
+        - !type:ComponentCondition
+            inverted: true
+            components:
+            - CultYogg
     Bloodstream:
       effects:
       - !type:ChemMiGomyceliumEffect
@@ -106,6 +122,35 @@
   boilingPoint: 444.0
   meltingPoint: 128.0
   metabolisms:
+    Digestion:
+      effects:
+      - !type:ModifyStatusEffect
+        conditions:
+        - !type:ReagentCondition
+          reagent: EssenceOfTheAbyss
+          min: 8
+        - !type:ComponentCondition
+          inverted: true
+          components:
+          - BibleUser
+          - CultYogg
+        effectProto: StatusEffectForcedSleeping
+        time: 3
+        type: Add
+      - !type:GenericStatusEffect
+        key: Muted
+        component: Muted
+        type: Add
+        time: 15
+        conditions:
+        - !type:ReagentCondition
+          reagent: EssenceOfTheAbyss
+          min: 10
+        - !type:ComponentCondition
+          inverted: true
+          components:
+          - BibleUser
+          - CultYogg
     Bloodstream:
       effects:
       - !type:ModifyStatusEffect

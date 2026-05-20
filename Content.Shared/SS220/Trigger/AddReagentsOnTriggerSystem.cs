@@ -1,3 +1,4 @@
+using Content.Shared.Body.Components;
 using Content.Shared.Charges.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
@@ -9,9 +10,6 @@ namespace Content.Shared.SS220.Trigger;
 public sealed class AddReagentsOnTriggerSystem : EntitySystem
 {
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-
-    private const string BeakerSolution = "beaker";
-    private const string ChemicalSolution = "chemicals";
 
     public override void Initialize()
     {
@@ -34,10 +32,10 @@ public sealed class AddReagentsOnTriggerSystem : EntitySystem
         if (!TryComp<SolutionContainerManagerComponent>(target, out var solutionUserComp))
             return;
 
-        if (!_solution.TryGetSolution((ent.Owner, solutionTriggerComp), BeakerSolution, out var solutionTrigger))
+        if (!_solution.TryGetSolution((ent.Owner, solutionTriggerComp), ent.Comp.ContainerName, out var solutionTrigger))
             return;
 
-        if (!_solution.TryGetSolution((target.Value, solutionUserComp), ChemicalSolution, out var solutionUser))
+        if (!_solution.TryGetSolution((target.Value, solutionUserComp), BloodstreamComponent.DefaultBloodSolutionName, out var solutionUser))
             return;
 
         var quantity = solutionTrigger.Value.Comp.Solution.MaxVolume;
@@ -51,8 +49,6 @@ public sealed class AddReagentsOnTriggerSystem : EntitySystem
             quantity /= limitedCharges.MaxCharges;
         }
 
-        _solution.TryTransferSolution(solutionUser.Value,
-            solutionTrigger.Value.Comp.Solution,
-            quantity);
+        _solution.TryTransferSolution(solutionUser.Value, solutionTrigger.Value.Comp.Solution, quantity);
     }
 }

@@ -690,6 +690,7 @@
     - item: WelderExperimental
     - item: Multitool
     - item: RemoteSignallerAdvanced
+    - item: SprayPainterBorg #SS220-Self-ChargingSprayBorg
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: adv-tools-module }
 
