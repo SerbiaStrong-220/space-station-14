@@ -21,6 +21,10 @@
     BoxCandleSmall: 2
     Urn: 5
     Bible: 1
+    #SS220-AddCenser begin
+    ClothingNeckGoldenCross: 3
+    ClothingNeckSilverCross: 3
+    #SS220-AddCenser end
   contrabandInventory:
     FoodBakedBunHotX: 2
     DrinkWineBottleFull: 1
