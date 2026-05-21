@@ -68,7 +68,8 @@
   - type: RoleExperienceAdd
     definitionId: ArenaFighterRoleExperience
   - type: ArenaParticipant
-    slot: PlayerOne
+    slot: TeamA
+  - type: AntagImmune
 
 - type: randomHumanoidSettings
   id: ArenaFighterPlayerTwo
@@ -92,7 +93,8 @@
   - type: RoleExperienceAdd
     definitionId: ArenaFighterRoleExperience
   - type: ArenaParticipant
-    slot: PlayerTwo
+    slot: TeamB
+  - type: AntagImmune
 
 - type: entity
   id: ArenaGhostSpawnerPlayerOne
@@ -103,7 +105,7 @@
     settings: ArenaFighterPlayerOne
   - type: Sprite
     sprite: Markers/jobs.rsi
-    state: ertleader
+    state: ertsecurity
 
 - type: entity
   id: ArenaGhostSpawnerPlayerTwo
