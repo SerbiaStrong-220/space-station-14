@@ -1,0 +1,52 @@
+- type: entity
+  id: Censer
+  parent: BaseItem
+  name: censer
+  description: A metal censer. It makes a pleasant sound and has a soothing aroma. Don't forget to add holy water.
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Specific/censer.rsi
+    state: icon
+  - type: Item
+    heldPrefix: censer
+    size: Small
+  - type: Censer
+    gasType: WaterVapor
+    moles: 10
+    vaporAmount: 5
+    soundUse:
+      path: /Audio/SS220/Items/Censer/chain.ogg
+  - type: UseDelay
+    delay: 10.0
+  - type: SolutionContainerManager
+    solutions:
+      reagents:
+        maxVol: 30
+  - type: RefillableSolution
+    solution: reagents
+  - type: DrainableSolution
+    solution: reagents
+  - type: SolutionTransfer
+    canChangeTransferAmount: true
+    maxTransferAmount: 30
+  - type: ExaminableSolution
+    solution: reagents
+  - type: Spillable
+    solution: reagents
+  - type: PointLight
+    enabled: true
+    radius: 1.5
+    energy: 1 
+    color: "#FFC90C"
+  - type: AmbientSound
+    volume: -15
+    range: 2
+    sound:
+      path: /Audio/Ambience/Objects/fireplace.ogg
+  - type: MeleeWeapon
+    soundHit:
+      collection: Punch
+    damage:
+      types:
+        Holy: 25
+        Blunt: 1
