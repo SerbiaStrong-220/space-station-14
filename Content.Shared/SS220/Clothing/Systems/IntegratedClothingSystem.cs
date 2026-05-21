@@ -26,6 +26,7 @@ public sealed class IntegratedClothingSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<IntegratedClothingComponent, ComponentInit>(OnInit);
+        SubscribeLocalEvent<IntegratedClothingComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<IntegratedClothingComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<IntegratedClothingComponent, BeingEquippedAttemptEvent>(OnEquipAttempt);
         SubscribeLocalEvent<IntegratedClothingComponent, ClothingGotEquippedEvent>(OnGotEquipped);
@@ -125,6 +126,11 @@ public sealed class IntegratedClothingSystem : EntitySystem
     private void OnInit(Entity<IntegratedClothingComponent> ent, ref ComponentInit args)
     {
         ent.Comp.Container = _containerSystem.EnsureContainer<ContainerSlot>(ent.Owner, ent.Comp.ContainerId);
+    }
+
+    private void OnShutdown(Entity<IntegratedClothingComponent> ent, ref ComponentShutdown args)
+    {
+        QueueDel(ent.Comp.ClothingUid);
     }
 
     private void OnMapInit(Entity<IntegratedClothingComponent> ent, ref MapInitEvent args)
