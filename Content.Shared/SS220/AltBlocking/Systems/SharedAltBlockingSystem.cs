@@ -13,6 +13,7 @@ using Content.Shared.SS220.ArmorBlock;
 using Content.Shared.SS220.ToggleBlocking;
 using Content.Shared.SS220.Weapons.Melee.Events;
 using Content.Shared.SS220.Weapons.Ranged.Events;
+using Content.Shared.Throwing;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
@@ -52,7 +53,6 @@ public sealed partial class SharedAltBlockingSystem : EntitySystem
 
         SubscribeLocalEvent<AltBlockingComponent, ComponentShutdown>(OnShutdown);
 
-        //SubscribeLocalEvent<AltBlockingComponent, ThrowItemAttemptEvent>(OnThrowAttempt); // didn't remove these just in case i want to get them back
         //SubscribeLocalEvent<AltBlockingComponent, ContainerGettingRemovedAttemptEvent>(OnDropAttempt);
     }
 

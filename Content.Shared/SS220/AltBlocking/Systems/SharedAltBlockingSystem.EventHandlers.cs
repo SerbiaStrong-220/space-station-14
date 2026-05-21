@@ -7,8 +7,9 @@ using Content.Shared.SS220.ArmorBlock;
 using Content.Shared.SS220.ToggleBlocking;
 using Content.Shared.SS220.Weapons.Melee.Events;
 using Content.Shared.SS220.Weapons.Ranged.Events;
-using System.Numerics;
+using Content.Shared.Throwing;
 using Robust.Shared.Utility;
+using System.Numerics;
 
 namespace Content.Shared.SS220.AltBlocking;
 
@@ -63,7 +64,7 @@ public sealed partial class SharedAltBlockingSystem
             if (netItem is not { Valid: true } netItemUid)
                 continue;
 
-            if (SharedRandomExtensions.PredictedProb(_gameTiming, ent.Comp.Blocking ? blockComp.ActiveRangeBlockProb : blockComp.RangeBlockProb, (NetEntity)netItem))
+            if (SharedRandomExtensions.PredictedProb(_gameTiming, ent.Comp.Blocking ? blockComp.ActiveMeleeBlockProb : blockComp.MeleeBlockProb, (NetEntity)netItem))
             {
                 _audio.PlayPredicted(blockComp.BlockSound, item, ent);
                 _popupSystem.PopupPredicted(Loc.GetString("block-shot"), ent, ent);
@@ -99,6 +100,11 @@ public sealed partial class SharedAltBlockingSystem
     private void OnDrop(Entity<AltBlockingComponent> ent, ref DroppedEvent args)
     {
         StopBlockingHelper(ent, args.User);
+    }
+
+    private void OnThrowAttempt(Entity<AltBlockingComponent> ent, ref ThrowAttemptEvent args)
+    {
+       
     }
 
     private void OnShutdown(Entity<AltBlockingComponent> ent, ref ComponentShutdown args)

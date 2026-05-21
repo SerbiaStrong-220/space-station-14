@@ -2,6 +2,7 @@
 using Content.Shared.Hands.Components;
 using Content.Shared.Input;
 using Content.Shared.SS220.Weapons.Ranged.Events;
+using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Player;
@@ -15,6 +16,8 @@ public sealed partial class SharedAltBlockingSystem
     private void InitializeUser()
     {
         SubscribeLocalEvent<AltBlockingUserComponent, EntityTerminatingEvent>(OnEntityTerminating);
+
+        SubscribeLocalEvent<AltBlockingUserComponent, ThrowAttemptEvent>(OnThrowAttempt);
 
         CommandBinds.Builder
             .Bind(ContentKeyFunctions.ToggleActiveBlocking, InputCmdHandler.FromDelegate(OnBlockToggleAttempt, handle: false, outsidePrediction: false))
@@ -43,6 +46,12 @@ public sealed partial class SharedAltBlockingSystem
             TryStartBlocking((user, blockingUserComp));
 
         Dirty(user, blockingUserComp);
+    }
+
+    private void OnThrowAttempt(Entity<AltBlockingUserComponent> ent, ref ThrowAttemptEvent args)
+    {
+        if (ent.Comp.Blocking)
+            args.Cancel();
     }
 
     private void OnEntityTerminating(Entity<AltBlockingUserComponent> ent, ref EntityTerminatingEvent args)
