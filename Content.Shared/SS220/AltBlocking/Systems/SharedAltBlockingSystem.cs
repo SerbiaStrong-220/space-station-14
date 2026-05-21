@@ -28,6 +28,7 @@ public sealed partial class SharedAltBlockingSystem : EntitySystem
     private static readonly string ActiveBlockingOthersLocale = "actively-blocking-others";
     private static readonly string StopActiveBlockingOwnerLocale = "actively-blocking-stop";
     private static readonly string StopActiveBlockingOthersLocale = "actively-blocking-stop-others";
+    private static readonly string BlockShotLocale = "block-shot";
 
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;

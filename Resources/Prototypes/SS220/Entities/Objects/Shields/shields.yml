@@ -5,6 +5,8 @@
   description: A shield!
   abstract: true
   components:
+    - type: ExaminableDamage
+      messages: ShieldMessages
     - type: Sprite
       sprite: Objects/Weapons/Melee/shields.rsi
       state: riot-icon
@@ -570,6 +572,8 @@
   id: EnergyShieldAlt
   description: A piece of advanced tech made based on the technology used in the field shields. It is lightweight and can very effectively block any types of attacks.
   components:
+    - type: ExaminableDamage
+      messages: EnergyShieldMessages
     - type: ArmorBlock
     - type: ItemToggle
       soundActivate:
@@ -629,7 +633,7 @@
       tresholdDict:
         Piercing: 55
         Blunt: 30
-        Heat: 26
+        Heat: 35
         Slash: 30
         Radiation: 1000
         Poison: 1000

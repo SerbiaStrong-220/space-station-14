@@ -1027,10 +1027,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
             RaiseLocalEvent(targetEntity, ref meleeBlockEvent);
             if (meleeBlockEvent.Cancelled && meleeBlockEvent.Blocker is { Valid: true } blockerUid)
-            {
-                PopupSystem.PopupEntity(Loc.GetString("block-shot"), targetEntity);
                 targetEntity = blockerUid;
-            }
         }
 
         target = targetEntity;
