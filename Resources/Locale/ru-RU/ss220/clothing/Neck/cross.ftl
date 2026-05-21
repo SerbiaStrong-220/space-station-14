@@ -1,4 +1,4 @@
-ent-ClothingNeckGoldenCross = золотой крестик
-    .desc = Красивый золотой крестик.
-ent-ClothingNeckSilverCross = серебряный крестик
-    .desc = Красивый серебряный крестик.
+ent-ClothingNeckGoldenCross = золотой крест
+    .desc = Красивый золотой крест.
+ent-ClothingNeckSilverCross = серебряный крест
+    .desc = Красивый серебряный крест.
