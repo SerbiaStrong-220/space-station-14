@@ -65,7 +65,8 @@
         startValue: 0.1
         endValue: 2.0
         isLooped: true
-  - type: ToggleableLightVisuals
+  - type: ToggleableVisuals
+    spriteLayer: light
   - type: PowerCellSlot
     cellSlotId: cell_slot
   - type: ItemSlots
@@ -152,7 +153,7 @@
 
 #ninja
 - type: entity
-  parent: ClothingHeadBase
+  parent: ClothingHeadHardsuitWithLightFakeBase
   id: ClothingHeadHelmetSpaceNinjaFake
   name: space ninja helmet
   description: The helmet from the Samurai Vamplu costume, an essential part of cosplay.

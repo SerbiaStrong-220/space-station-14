@@ -17,7 +17,6 @@
   canBeAntag: false
   icon: JobIconRedWingsOfficer
   setPreference: false
-  overrideConsoleVisibility: true
   access:
   - Medical
   - Brig

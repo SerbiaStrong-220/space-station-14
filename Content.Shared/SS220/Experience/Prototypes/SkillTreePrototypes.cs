@@ -5,20 +5,20 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared.SS220.Experience;
 
 [Prototype]
-public sealed class SkillTreePrototype : IPrototype
+public sealed partial class SkillTreePrototype : IPrototype
 {
     [ViewVariables]
     [IdDataField]
     public string ID { get; private set; } = default!;
 
     [DataField(required: true)]
-    public List<ProtoId<SkillPrototype>> SkillTree = new();
+    public List<ProtoId<SkillPrototype>> SkillTree { get; private set; } = new();
 
     [DataField(required: true)]
-    public LocId SkillTreeName;
+    public LocId SkillTreeName { get; private set; }
 
     [DataField(required: true)]
-    public ProtoId<SkillTreeGroupPrototype> SkillGroupId;
+    public ProtoId<SkillTreeGroupPrototype> SkillGroupId { get; private set; }
 
     [DataField]
     public bool CanBeShownOnInit = true;
@@ -31,12 +31,12 @@ public sealed class SkillTreePrototype : IPrototype
 /// Just QoDevEx thing
 /// </summary>
 [Prototype]
-public sealed class SkillTreeGroupPrototype : IPrototype
+public sealed partial class SkillTreeGroupPrototype : IPrototype
 {
     [ViewVariables]
     [IdDataField]
     public string ID { get; private set; } = default!;
 
     [DataField(required: true)]
-    public LocId GroupName;
+    public LocId GroupName { get; private set; }
 }

@@ -77794,7 +77794,6 @@ entities:
   - uid: 9884
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 15.5,-9.5
       parent: 2
   - uid: 9885

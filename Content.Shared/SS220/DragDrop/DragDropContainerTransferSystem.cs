@@ -31,7 +31,7 @@ public sealed partial class DragDropContainerTransferSystem : EntitySystem
             return;
 
         if (_whitelist.IsWhitelistFail(ent.Comp.Whitelist, args.Target) ||
-            _whitelist.IsBlacklistPass(ent.Comp.Blacklist, args.Target))
+            _whitelist.IsWhitelistPass(ent.Comp.Blacklist, args.Target))
         {
             return;
         }

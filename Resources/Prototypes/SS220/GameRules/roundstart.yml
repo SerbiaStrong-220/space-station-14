@@ -118,3 +118,28 @@
       max: 1800 # 30 mins
     scheduledGameRules: !type:NestedSelector
       tableId: UnknownShuttlesNeutralTable
+
+- type: entity
+  id: SubModLowTraitorDynamic
+  parent: TraitorDynamic
+  components:
+  - type: AntagSelection
+    selectionTime: IntraPlayerSpawn
+    definitions:
+    - prefRoles: [ Traitor ]
+      max: 4
+      playerRatio: 15
+      blacklist:
+        components:
+        - AntagImmune
+      lateJoinAdditional: true # ss220 traitor latejoin back
+      mindRoles:
+      - MindRoleTraitor
+      # SS220-experience-update-begin
+      components:
+      - type: AntagFreeSublevelPointsAdd
+        addFreeSublevelPoints: 10
+      - type: AntagAddKnowledge
+        knowledgesToAdd:
+        - SyndicateAgentKnowledge
+      # SS220-experience-update-end

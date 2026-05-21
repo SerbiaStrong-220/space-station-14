@@ -1,83 +1,122 @@
 - type: lobbyBackground
   id: DeepInSpiders
-  background: /Textures/SS220/LobbyScreens/deep-in-spiders.png
+  background: /Textures/SS220/LobbyScreens/deep-in-spiders.webp
+  title: lobby-state-background-deepinspiders-title
 
 - type: lobbyBackground
   id: TiredShift
-  background: /Textures/SS220/LobbyScreens/tired-shift.png
+  background: /Textures/SS220/LobbyScreens/tired-shift.webp
+  title: lobby-state-background-tiredshift-title
 
 - type: lobbyBackground
   id: NukeArt
-  background: /Textures/SS220/LobbyScreens/nukeart.png
+  background: /Textures/SS220/LobbyScreens/nukeart.webp
+  title: lobby-state-background-nukeart-title
 
 - type: lobbyBackground
   id: DefaultRNDshift
-  background: /Textures/SS220/LobbyScreens/default-RND-shift.png
+  background: /Textures/SS220/LobbyScreens/default-RND-shift.webp
+  title: lobby-state-background-defaultrndshift-title
+  artist: lobby-state-background-defaultrndshift-artist
 
 - type: lobbyBackground
   id: SpaceFather
-  background: /Textures/SS220/LobbyScreens/SpaceFather.jpeg
+  background: /Textures/SS220/LobbyScreens/SpaceFather.webp
+  title: lobby-state-background-spacefather-title
+  artist: lobby-state-background-spacefather-artist
 
 - type: lobbyBackground
   id: Destruction
-  background: /Textures/SS220/LobbyScreens/Destruction.png
+  background: /Textures/SS220/LobbyScreens/Destruction.webp
+  title: lobby-state-background-destruction-title
+  artist: lobby-state-background-destruction-artist
 
 - type: lobbyBackground
   id: RatKing
-  background: /Textures/SS220/LobbyScreens/RatKing.png
+  background: /Textures/SS220/LobbyScreens/RatKing.webp
+  title: lobby-state-background-ratking-title
+  artist: lobby-state-background-ratking-artist
 
 - type: lobbyBackground
   id: SecGraduating
-  background: /Textures/SS220/LobbyScreens/secgraduating.png
+  background: /Textures/SS220/LobbyScreens/secgraduating.webp
+  title: lobby-state-background-secgraduating-title
+  artist: lobby-state-background-secgraduating-artist
 
 - type: lobbyBackground
   id: Sevastopol
-  background: /Textures/SS220/LobbyScreens/Sevastopol.png
+  background: /Textures/SS220/LobbyScreens/Sevastopol.webp
+  title: lobby-state-background-sevastopol-title
+  artist: lobby-state-background-sevastopol-artist
 
 - type: lobbyBackground
   id: SyndiLand
-  background: /Textures/SS220/LobbyScreens/SyndiLand.png
+  background: /Textures/SS220/LobbyScreens/SyndiLand.webp
+  title: lobby-state-background-syndiland-title
+  artist: lobby-state-background-syndiland-artist
 
 - type: lobbyBackground
   id: CardShowdown
-  background: /Textures/SS220/LobbyScreens/Card-showdown.png
+  background: /Textures/SS220/LobbyScreens/Card-showdown.webp
+  title: lobby-state-background-cardshowdown-title
+  artist: lobby-state-background-cardshowdown-artist
 
 - type: lobbyBackground
   id: PapersPlease
-  background: /Textures/SS220/LobbyScreens/PapersPlease.png
+  background: /Textures/SS220/LobbyScreens/PapersPlease.webp
+  title: lobby-state-background-papersplease-title
+  artist: lobby-state-background-papersplease-artist
 
 - type: lobbyBackground
   id: GloryToNanoTrasen
-  background: /Textures/SS220/LobbyScreens/GloryToNanoTrasen.png
+  background: /Textures/SS220/LobbyScreens/GloryToNanoTrasen.webp
+  title: lobby-state-background-glorytonanotrasen-title
+  artist: lobby-state-background-glorytonanotrasen-artist
 
 - type: lobbyBackground
   id: YouNoYou
-  background: /Textures/SS220/LobbyScreens/YouNoYou.png
+  background: /Textures/SS220/LobbyScreens/YouNoYou.webp
+  title: lobby-state-background-younoyou-title
+  artist: lobby-state-background-younoyou-artist
 
 - type: lobbyBackground
   id: KuoryCap
-  background: /Textures/SS220/LobbyScreens/KuoryCap.png
+  background: /Textures/SS220/LobbyScreens/KuoryCap.webp
+  title: lobby-state-background-kuorycap-title
+  artist: lobby-state-background-kuorycap-artist
 
 - type: lobbyBackground
   id: camping
-  background: /Textures/SS220/LobbyScreens/camping.png
+  background: /Textures/SS220/LobbyScreens/camping.webp
+  title: lobby-state-background-camping-title
+  artist: lobby-state-background-camping-artist
 
 - type: lobbyBackground
   id: BTB-Art
-  background: /Textures/SS220/LobbyScreens/BTB-Art.png
+  background: /Textures/SS220/LobbyScreens/BTB-Art.webp
+  title: lobby-state-background-btb-title
+  artist: lobby-state-background-btb-artist
 
 - type: lobbyBackground
   id: multiverse
-  background: /Textures/SS220/LobbyScreens/multiverse.png
+  background: /Textures/SS220/LobbyScreens/multiverse.webp
+  title: lobby-state-background-multiverse-title
+  artist: lobby-state-background-multiverse-artist
 
 - type: lobbyBackground
   id: undergate
-  background: /Textures/SS220/LobbyScreens/undergate.png
+  background: /Textures/SS220/LobbyScreens/undergate.webp
+  title: lobby-state-background-undergate-title
+  artist: lobby-state-background-undergate-artist
 
 - type: lobbyBackground
   id: MouseKiller
-  background: /Textures/SS220/LobbyScreens/MouseKiller.png
-  
+  background: /Textures/SS220/LobbyScreens/MouseKiller.webp
+  title: lobby-state-background-mousekiller-title
+  artist: lobby-state-background-mousekiller-artist
+
 - type: lobbyBackground
   id: WatermelonApocalypse
   background: /Textures/SS220/LobbyScreens/WatermelonApocalypse.webp
+  title: lobby-state-background-watermelonapocalypse-title
+  artist: lobby-state-background-watermelonapocalypse-artist

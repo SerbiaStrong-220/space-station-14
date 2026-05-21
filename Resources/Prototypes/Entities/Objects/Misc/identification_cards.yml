@@ -1323,8 +1323,6 @@
     #   offset: *icon-offset
     #   state: Boxer
     # SS220-own-sprites-end
-  - type: PresetIdCard
-    job: Boxer
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -1354,8 +1352,6 @@
     #   offset: *icon-offset
     #   state: Zookeeper
     # SS220-own-sprites-end
-  - type: PresetIdCard
-    job: Zookeeper
   #ss220 add pdaidpainter start
   - type: Tag
     tags:
@@ -1544,13 +1540,10 @@
 #Antags
 
 - type: entity
-  name: passenger ID card
-  parent: [IDCardStandard, BaseChameleon]
+  parent: [PassengerIDCard, BaseChameleon]
   id: AgentIDCard
   suffix: Agent
   components:
-  - type: PresetIdCard
-    job: TraitorPassenger #SS220 agentidcard-fix
   - type: Access
     tags:
     - Maintenance
@@ -1596,7 +1589,6 @@
 # SS220-hidden-desc-end
 
 - type: entity
-  name: passenger ID card
   parent: AgentIDCard
   id: NukieAgentIDCard
   suffix: Nukie
@@ -1625,6 +1617,8 @@
     # - sprite: *icon-rsi
     #   offset: *icon-offset
     #   state: Syndicate
+  - type: IdCard
+    jobIcon: JobIconSyndicate
     # SS220-own-sprites-end
   - type: Item
     heldPrefix: black
@@ -1651,13 +1645,15 @@
   #     state: SyndicateOperative
   # SS220-own-sprites-end
   - type: AgentIDCard
+  - type: IdCard
+    jobIcon: JobIconSyndicateOperative
 
 - type: entity
   parent: [ SyndiOperativeIDCard, BaseSyndicateContraband ]
   id: SyndiCorpsmanIDCard
   name: syndicate corpsman ID card
+  components:
   # SS220-own-sprites-begin
-  # components:
   # - type: Sprite
   #   layers:
   #   - state: black
@@ -1669,13 +1665,15 @@
   #     offset: *icon-offset
   #     state: SyndicateCorpsman
   # SS220-own-sprites-end
+  - type: IdCard
+    jobIcon: JobIconSyndicateCorpsman
 
 - type: entity
   parent: [ SyndiOperativeIDCard, BaseSyndicateContraband ]
   id: SyndiCommanderIDCard
   name: syndicate commander ID card
   # SS220-own-sprites-begin
-  # components:
+  components:
   # - type: Sprite
   #   layers:
   #   - state: black
@@ -1687,6 +1685,36 @@
   #     offset: *icon-offset
   #     state: SyndicateCommander
   # SS220-own-sprites-end
+  - type: IdCard
+    jobIcon: JobIconSyndicateCommander
+
+- type: entity
+  parent: [ IDCardStandard, BaseHighlyIllegalContraband ]
+  id: NinjaIDCard
+  name: ninja ID card
+  suffix: Ninja
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/id_cards.rsi
+    layers:
+    - state: ninja
+    - state: stripe_top
+      color: "#38D848"
+    - state: stripe_bottom
+      color: "#309000"
+# ss220 remove sprite layer start
+#    - sprite: icon-rsi
+#      offset: icon-offset
+#      state: Ninja
+# ss220 remove sprite layer end
+  - type: Item
+    heldPrefix: green
+  - type: AgentIDCard
+  - type: IdCard
+    jobIcon: JobIconNinja
+  - type: Access
+    tags:
+    - Maintenance
 
 - type: entity
   parent: [ IDCardStandard, BaseMajorContraband ]
@@ -1696,15 +1724,30 @@
   - type: Sprite
     layers:
     - state: pirate
+# ss220 remove sprite layer start
+#    - sprite: icon-rsi
+#      offset: icon-offset
+#      state: Pirate
+# ss220 remove sprite layer end
   - type: Item
     heldPrefix: orange #this is close enough to the weird puce color pirate IDs have going on
-  - type: Access
-    tags:
-    - NuclearOperative
-    - SyndicateAgent
+  - type: IdCard
+    jobIcon: JobIconPirate
 
 - type: entity
   parent: IDCardStandard
+  id: XenoborgIDCard
+  name: xenoborg ID card
+  components:
+  - type: Sprite
+    layers:
+    - state: default
+  - type: Access
+    tags:
+    - Xenoborg
+
+- type: entity
+  parent: [ IDCardStandard, BaseMagicalContraband ]
   id: WizardIDCard
   name: wizard ID card
   components:
@@ -1727,6 +1770,8 @@
     - Wizard
     - External
     - Maintenance
+  - type: IdCard
+    jobIcon: JobIconWizard
 
 #ERT/Centcomm
 

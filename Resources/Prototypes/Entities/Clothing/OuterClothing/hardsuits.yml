@@ -42,7 +42,6 @@
     clothingPrototype: ClothingHeadHelmetHardsuitAtmos
   - type: Tag
     tags:
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
 
@@ -92,7 +91,6 @@
   #ss220 special_sounds end
   - type: Tag
     tags:
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
 
@@ -140,7 +138,6 @@
     - Hardsuit
     - WhitelistChameleon
     - HardsuitSpatio
-    - CorgiWearable
 
 #Salvage Hardsuit
 - type: entity
@@ -186,7 +183,6 @@
     clothingPrototype: ClothingHeadHelmetHardsuitSalvage
   - type: Tag
     tags:
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
 
@@ -230,7 +226,6 @@
     node: hardsuitGoliath
   - type: Tag
     tags:
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
 
@@ -296,14 +291,13 @@
     damageCoefficient: 0.4
   # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
-    walkModifier: 0.75
-    sprintModifier: 0.75
+    walkModifier: 0.85 #SS220 sec hardsuit buff
+    sprintModifier: 0.85 #SS220 sec hardsuit buff
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSecurity
   - type: Tag
     tags:
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
 
@@ -403,8 +397,8 @@
       coefficients:
         Blunt: 0.8
         Slash: 0.8
-        Piercing: 0.6
-        Heat: 0.5
+        Piercing: 0.55
+        Heat: 0.55
         Radiation: 0.5
         Caustic: 0.6
   # SS220 add stamina resistance begin
@@ -412,14 +406,13 @@
     damageCoefficient: 0.35
   # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
-    walkModifier: 0.8
-    sprintModifier: 0.8
+    walkModifier: 0.9 #SS220 crew hardsuit buff
+    sprintModifier: 0.9 #SS220 crew hardsuit buff
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitCap
   - type: Tag
     tags:
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
 
@@ -471,7 +464,6 @@
   #ss220 special_sounds end
   - type: Tag
     tags:
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
 
@@ -507,7 +499,6 @@
     clothingPrototype: ClothingHeadHelmetHardsuitMedical
   - type: Tag
     tags:
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
 
@@ -552,7 +543,6 @@
     tags:
     - WhitelistChameleon
     - HighRiskItem
-    - CorgiWearable
     - Hardsuit
   #ss220 pinpointer ui add start
   - type: TrackedItem
@@ -586,7 +576,7 @@
         Blunt: 0.6
         Slash: 0.5
         Piercing: 0.5
-        Heat: 0.8
+        Heat: 0.6 #SS220 sec hardsuit buff
         Radiation: 0.5
         Caustic: 0.6
   # SS220 add stamina resistance begin
@@ -594,8 +584,8 @@
     damageCoefficient: 0.35
   # SS220 add stamina resistance end
   - type: ClothingSpeedModifier
-    walkModifier: 0.8
-    sprintModifier: 0.8
+    walkModifier: 0.9 #SS220 sec hardsuit buff
+    sprintModifier: 0.9 #SS220 sec hardsuit buff
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSecurityRed
@@ -713,7 +703,6 @@
     - MonkeyWearable
     - Hardsuit
     - WhitelistChameleon
-    - CorgiWearable
     - ScurretWearable
   - type: StaticPrice
     price: 5000
@@ -841,7 +830,6 @@
   #ss220 special_sounds end
   - type: Tag
     tags:
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
 
@@ -906,7 +894,6 @@
   #ss220 special_sounds end
   - type: Tag
     tags:
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
 
@@ -967,7 +954,6 @@
   - type: Tag
     tags:
     - MonkeyWearable
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
   #ss220 special_sounds start
@@ -1016,7 +1002,6 @@
     clothingPrototype: ClothingHeadHelmetHardsuitWizard
   - type: Tag
     tags:
-    - CorgiWearable
     - Hardsuit
     - WhitelistChameleon
 
@@ -1162,7 +1147,7 @@
 
 #ERT Chaplain Hardsuit
 - type: entity
-  parent: [ ClothingOuterHardsuitJuggernaut ]
+  parent: [ BaseCentcommContraband, ClothingOuterHardsuitSyndie ]
   id: ClothingOuterHardsuitERTChaplain
   name: ERT chaplain's hardsuit
   description: A protective hardsuit worn by the chaplains of an Emergency Response Team.
@@ -1176,7 +1161,7 @@
 
 #ERT Engineer Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitCBURN
+  parent: [ BaseCentcommContraband, ClothingOuterHardsuitSyndieElite ]
   id: ClothingOuterHardsuitERTEngineer
   name: ERT engineer's hardsuit
   description: A protective hardsuit worn by the engineers of an emergency response team.
@@ -1252,7 +1237,7 @@
 
 #ERT Janitor Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitCBURN
+  parent: [ BaseCentcommContraband, ClothingOuterHardsuitSyndieElite ]
   id: ClothingOuterHardsuitERTJanitor
   name: ERT janitor's hardsuit
   description: A protective hardsuit worn by the janitors of an emergency response team.

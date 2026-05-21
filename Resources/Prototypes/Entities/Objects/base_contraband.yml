@@ -27,9 +27,13 @@
 - type: entity
   id: BaseSyndicateContraband
   abstract: true
+  # SS220-remove-contraband-begin
   # components:
   # - type: Contraband
   #   severity: Syndicate
+  #   allowedDepartments: [  ]
+  #   allowedJobs: [  ]
+  # SS220-remove-contraband-end
 
 # minor contraband not departmentally restricted -- improvised weapons etc
 - type: entity
@@ -188,15 +192,6 @@
   # - type: Contraband
   #   allowedDepartments: [ Security ]
   #   allowedJobs: [ Bartender ]
-
-- type: entity
-  id: BaseSecurityBartenderZookeeperContraband
-  parent: BaseRestrictedContraband
-  abstract: true
-  # components:
-  # - type: Contraband
-  #   allowedDepartments: [ Security ]
-  #   allowedJobs: [ Bartender, Zookeeper ]
 
 - type: entity
   id: BaseSecurityLawyerContraband

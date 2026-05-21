@@ -109,7 +109,6 @@ public sealed partial class SuperMatterSystem
             {
                 case SuperMatterPhaseState.ResonanceRegion:
                     explosiveComponent.ExplosionType = crystal.Comp.ResonanceRegionExplosion;
-
                     break;
 
                 case SuperMatterPhaseState.SingularityRegion:
@@ -121,7 +120,6 @@ public sealed partial class SuperMatterSystem
                     break;
 
                 default:
-                    _explosion.TriggerExplosive(crystal.Owner);
                     break;
             }
             _explosion.TriggerExplosive(crystal.Owner);

@@ -6,13 +6,11 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Administration.Managers;
-using Content.Server.Database;
 using Content.Shared.CCVar;
 using Content.Shared.Players;
 using Content.Shared.SS220.CCVars;
@@ -29,7 +27,6 @@ public sealed class DiscordPlayerManager : IPostInjectInit, IDisposable
 {
     internal SponsorUsers? CachedSponsorUsers => _cachedSponsorUsers;
 
-    [Dependency] private readonly IServerDbManager _db = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IServerNetManager _netMgr = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;

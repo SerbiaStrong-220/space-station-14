@@ -44,6 +44,7 @@
     # - Revolutionary
     - Zombie
     - Wizard
+    - Xenoborgs
     - KesslerSyndromeScheduler
     - RampingStationEventScheduler
     # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
@@ -67,6 +68,7 @@
     - Revolutionary
     - Zombie
     - Wizard
+    - Xenoborgs
     - BasicStationEventScheduler
     - KesslerSyndromeScheduler
     - MeteorSwarmMildScheduler
@@ -160,7 +162,7 @@
   rules:
   - DummyNonAntagChance
   - Traitor
-  - SubGamemodesRule
+  - SubGamemodesRuleNoWizard
   - BasicStationEventScheduler
   - MeteorSwarmScheduler
   # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
@@ -191,7 +193,7 @@
   rules:
     - Nukeops
     - DummyNonAntagChance
-    # - SubGamemodesRule #SS220 no-thief-on-nukie-round-fix
+    # - SubGamemodesRuleNoWizard #SS220 no-thief-on-nukie-round-fix
     - BasicStationEventScheduler
     - MeteorSwarmScheduler
     # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
@@ -211,7 +213,7 @@
 #   rules:
 #   - DummyNonAntagChance
 #   - Revolutionary
-#   - SubGamemodesRule
+#   - SubGamemodesRuleNoWizard
 #   - BasicStationEventScheduler
 #   - MeteorSwarmScheduler
 #   - SpaceTrafficControlEventScheduler
@@ -229,6 +231,24 @@
   - Wizard
   - DummyNonAntagChance
   - SubGamemodesRuleNoWizard #No Dual Wizards at the start, midround is fine
+  - BasicStationEventScheduler
+  - MeteorSwarmScheduler
+  # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
+  - SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls
+  - BasicRoundstartVariation
+  - EmergencyShuttleAutoVote # SS220-evac-vote
+
+- type: gamePreset
+  id: Xenoborgs
+  alias:
+    - xenoborgs
+  name: xenoborgs-title
+  description: xenoborgs-description
+  showInVote: false
+  rules:
+  - Xenoborgs
+  - DummyNonAntagChance
+  - SubGamemodesRuleNoWizardNoXenoborg # no two motherships
   - BasicStationEventScheduler
   - MeteorSwarmScheduler
   # - SpaceTrafficControlEventScheduler # SS220-NoUnknownShuttles
