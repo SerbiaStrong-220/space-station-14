@@ -321,9 +321,9 @@
     LightDynamic:
       Telecrystal: 3
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 3
     HardDynamic:
-      Telecrystal: 2
+      Telecrystal: 3
 #ss220 dynamic-price end
 
 - type: listing
@@ -407,9 +407,9 @@
     Telecrystal: 8
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 7
+      Telecrystal: 8
     MediumDynamic:
-      Telecrystal: 7
+      Telecrystal: 10
     HardDynamic:
       Telecrystal: 12
   categories:
