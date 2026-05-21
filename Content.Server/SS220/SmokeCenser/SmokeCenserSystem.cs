@@ -1,6 +1,8 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.Interaction.Events;
 using Content.Shared.Timing;
-using Content.Shared.Censer;
+using Content.Shared.SS220.SmokeCenser;
 using Content.Shared.Atmos;
 using Content.Shared.FixedPoint;
 using Content.Shared.Chemistry.EntitySystems;
@@ -8,7 +10,7 @@ using Content.Server.Popups;
 using Content.Server.Atmos.EntitySystems;
 using Robust.Shared.Audio.Systems;
 
-namespace Content.Server.Censer;
+namespace Content.Server.SS220.SmokeCenser;
 
 public sealed class CenserSystem : EntitySystem
 {
