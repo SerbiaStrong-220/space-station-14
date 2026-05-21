@@ -1,9 +1,0 @@
-<BoxContainer xmlns="https://spacestation14.io"
-              xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
-              Orientation="Horizontal"
-              VerticalExpand="True"
-              HorizontalExpand="True">
-    <TextureRect Name="CurrentNodeIcon" Access="Public" Stretch="KeepAspectCentered" Margin="4"
-        TexturePath="/Textures/Interface/NavMap/beveled_circle.png" SetSize="8 8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-    <RichTextLabel Name="NodeRichTextLabel" Access="Public" MouseFilter="Stop"/>
-</BoxContainer>

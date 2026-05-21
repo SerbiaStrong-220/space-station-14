@@ -68,6 +68,8 @@ public sealed partial class OperationList : Control
 
             button.Group = buttonGroup;
 
+            button.ToolTip = Loc.GetString(proto.Description);
+
             OperationContainer.AddChild(button);
         }
 

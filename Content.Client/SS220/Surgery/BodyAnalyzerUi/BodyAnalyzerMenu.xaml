@@ -8,8 +8,7 @@
     xmlns:surgeryUiParts="clr-namespace:Content.Client.SS220.Surgery.UiParts"
     Title="{Loc 'surgery-observer-title'}"
     Resizable="True"
-    SetSize="920 470"
-    MinSize="920 470"
+    MinSize="1020 470"
     RectClipContent="False">
     <Control>
         <PanelContainer>
@@ -18,13 +17,13 @@
             </PanelContainer.PanelOverride>
         </PanelContainer>
         <BoxContainer Name="ContentBoxContainer" Orientation="Horizontal" Margin="10" HorizontalExpand="False" VerticalExpand="True">
-            <ScrollContainer HScrollEnabled="False" VerticalExpand="True" Margin="0 0 10 0" HorizontalExpand="True" SetSize="460 420">
+            <ScrollContainer HScrollEnabled="False" VerticalExpand="True" Margin="0 0 10 0" HorizontalExpand="True" MinSize="420 420">
                 <BoxContainer Name="PatientInfo" Orientation="Vertical">
                     <surgeryUiParts:PatientStatus Name="PatientStatus" HorizontalExpand="True" VerticalExpand="True"/>
                     <surgeryUiParts:TreatmentSuggestion Name="TreatmentSuggestion" HorizontalExpand="True"  VerticalExpand="True"/>
                 </BoxContainer>
             </ScrollContainer>
-            <BoxContainer Name="HandBook" Orientation="Vertical" SetSize="460 420" Margin="0 0 10 0"
+            <BoxContainer Name="HandBook" Orientation="Vertical" MinSize="620 420" Margin="0 0 10 0"
                     HorizontalExpand="True" VerticalExpand="True">
                 <surgeryUiParts:OperationList Name="OperationList" HorizontalExpand="True" VerticalExpand="True"/>
                 <surgeryUiParts:OperationDescription Name="OperationDescription" MinHeight="270" Visible ="False" HorizontalExpand="True" VerticalExpand="True"/>

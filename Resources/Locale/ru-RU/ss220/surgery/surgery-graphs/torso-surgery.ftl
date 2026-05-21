@@ -1,5 +1,7 @@
 surgery-torso-complex-name = Хирургия торса
-surgery-torso-complex-description = Комплексная операция на грудной клетке. Позволяет лечить внутренние повреждения, проводить массаж сердца или дефибрилляцию.
+surgery-torso-complex-description = Комплексная операция на грудной клетке.
+    Позволяет лечить внутренние повреждения,
+    проводить массаж сердца или дефибрилляцию.
 
 start-torso-surgery = Подготовка операции на торсе
 torso-skin-incision = Надрез на груди
@@ -12,7 +14,7 @@ open-heart-incision = Сердце открыто
 
 to-torso-skin-incision = Сделать надрез на туловище
 to-torso-skin-clamp-bleeders = Зажать сосуды
-to-retract-torso-skin = Оттянуть кожу
+to-retract-torso-skin = Расширить надрез
 to-torso-internal-healing = Обработать внутренние раны
 to-saw-rib-bone = Распилить ребра
 to-retract-torso-skin-after-gel = Завершить сращивание рёбер
@@ -36,6 +38,6 @@ direct-compact-defibrillator-cant-zap = Это оборудование долж
 surgery-requirement-direct-compact-defib-required = Контактный компактный дефибриллятор
 surgery-requirement-direct-compact-defib-failure = Вы не знаете что делать с этим
 
-remove-torso-bullet-fragments = убирает инородные тела в торсе пациента, например фрагменты пуль
+remove-torso-bullet-fragments = Убрать инородные тела в торсе пациента
 surgery-pathology-requirement-description-torso-fragments = Инородные тела в торсе пациента
 surgery-pathology-requirement-failure-torso-fragments = Вы внимательно осмотриваете торс пациента, но не находите в нём инородных тел.

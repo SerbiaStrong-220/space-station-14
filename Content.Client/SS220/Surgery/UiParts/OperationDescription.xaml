@@ -22,13 +22,11 @@
                 <RichTextLabel Name="Header" Text="{Loc 'operation-description-header'}" HorizontalExpand="True" HorizontalAlignment="Left"/>
             </BoxContainer>
             <BoxContainer Orientation="Vertical" VerticalExpand="True">
-                <RichTextLabel Name="OperationName" Text="operation-name" HorizontalExpand="True" HorizontalAlignment="Left" Margin="20 5 5 0"/>
-                <ScrollContainer Name="ScrollOperationContainer" HScrollEnabled="False" Margin="10 5 5 0"
+                <ScrollContainer Name="ScrollOperationContainer" HScrollEnabled="False"
                     HorizontalExpand="False" VerticalExpand="True" MouseFilter="Pass">
                     <BoxContainer Name="OperationContainer" Orientation="Vertical"
-                        SizeFlagsStretchRatio="1" HorizontalExpand="False" VerticalExpand="True">
+                        HorizontalExpand="False" VerticalExpand="True">
                         <!-- Added by code -->
-                        <RichTextLabel Name="Description" HorizontalExpand="False" Text="operation-description" VerticalExpand="True"/>
                     </BoxContainer>
                 </ScrollContainer>
             </BoxContainer>
