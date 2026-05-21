@@ -65,7 +65,7 @@
 - type: entity
   parent: ClothingNeckBase
   id: ClothingNeckSilverCross
-  name: silver gold
+  name: silver cross
   description: Beautiful silver cross.
   components: 
     - type: Sprite
