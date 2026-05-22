@@ -223,6 +223,16 @@
   - HoPJumpsuitTurtleneck #SS220 HoP Turtleneck
   - HoPJumpskirtTurtleneck #SS220 HoP Turtleneck
 
+#SS220 Headsetloadout begin
+- type: loadoutGroup
+  id: HoPHeadset
+  name: loadout-group-hop-headset
+  minLimit: 1
+  loadouts:
+  - HoPHeadset
+  - HoPHeadsetAlt
+#SS220 Headsetloadout end
+
 - type: loadoutGroup
   id: HoPNeck
   name: loadout-group-hop-neck
@@ -874,6 +884,16 @@
   - QuartermasterJumpsuitWarehouseman #SS220-QM-Trip
   - QuartermasterJumpskirtWarehouseman #SS220-QM-Trip
 
+#SS220 Headsetloadout begin
+- type: loadoutGroup
+  id: QuarterMasterHeadset
+  name: loadout-group-quartermaster-headset
+  minLimit: 1
+  loadouts:
+  - QuartermasterHeadset
+  - QuartermasterHeadsetAlt
+#SS220 Headsetloadout end
+
 - type: loadoutGroup
   id: QuartermasterNeck
   name: loadout-group-quartermaster-neck
@@ -1008,6 +1028,16 @@
   - DarkChiefEngineerTurtleneck
   - DarkChiefEngineerTurtleneckSkirt
 #ss220-loadout-chief-engineer-end
+
+#SS220 Headsetloadout begin
+- type: loadoutGroup
+  id: ChiefEngineerHeadset
+  name: loadout-group-chief-engineer-headset
+  minLimit: 1
+  loadouts:
+  - ChiefEngineerHeadset
+  - ChiefEngineerHeadsetAlt
+#SS220 Headsetloadout end
 
 - type: loadoutGroup
   id: ChiefEngineerNeck
@@ -1207,6 +1237,16 @@
   - ResearchDirectorJumpsuitProfessor #SS220-loadout-academy
   - ResearchDirectorJumpskirtProfessor #SS220-loadout-academy
   - ClothingUniformJumpsuitRDAlt
+
+#SS220 Headsetloadout begin
+- type: loadoutGroup
+  id: ResearchDirectorHeadset
+  name: loadout-group-research-director-headset
+  minLimit: 1
+  loadouts:
+  - ResearchDirectorHeadset
+  - ResearchDirectorHeadsetAlt
+#SS220 Headsetloadout end
 
 - type: loadoutGroup
   id: ResearchDirectorPDA

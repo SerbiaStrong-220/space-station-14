@@ -50,7 +50,7 @@
   equipment:
 #    id: CEPDA SS220-dark-chief-engineer-pda
 #    eyes: ClothingEyesGlassesMeson #SS220-TwoOne-Floppa-Iteration
-    ears: ClothingHeadsetCE
+#    ears: ClothingHeadsetCE #ss220 HeatsetLoadout
     belt: ClothingBeltUtilityEngineering
   storage:
     back:

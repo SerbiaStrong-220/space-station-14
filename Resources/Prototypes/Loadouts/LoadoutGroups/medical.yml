@@ -56,6 +56,16 @@
   - CMOCorpJumpsuit #SS220-CMOCorporate
   - CMOCorpJumpskirt #SS220-CMOCorporate
 
+  #SS220 Headsetloadout begin
+- type: loadoutGroup
+  id: ChiefMedicalOfficerHeadset
+  name: loadout-group-chief-medical-officer-headset
+  minLimit: 1
+  loadouts:
+  - ChiefMedicalOfficerHeadset
+  - ChiefMedicalOfficerHeadsetAlt
+#SS220 Headsetloadout end
+
 - type: loadoutGroup
   id: ChiefMedicalOfficerOuterClothing
   name: loadout-group-chief-medical-officer-outerclothing

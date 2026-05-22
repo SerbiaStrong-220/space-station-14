@@ -43,7 +43,7 @@
   id: CMOGear
   equipment:
     id: CMOPDA
-    ears: ClothingHeadsetCMO
+    #ears: ClothingHeadsetCMO
   storage:
     back:
     - Flash
