@@ -1,5 +1,8 @@
 treatment-suggestion-header = [head=4] АссистентВрача [/head]
 
+treatment-recommendation-target-less = Нету цели для анализа!
+treatment-recommendation-empty = У пациента известных проблем не обнаружено!
+
 treatment-recommendation-problem-section-name = [bold] Обнаруженные проблемы: [/bold]
 treatment-recommendation-operation-section-name = [bold] Рекомендованные процедуры: [/bold]
 treatment-recommendation-suggestion-section-name = [bold] Напоминание: [/bold]

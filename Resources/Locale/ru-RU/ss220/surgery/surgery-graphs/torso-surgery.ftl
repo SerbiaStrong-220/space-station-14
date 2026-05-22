@@ -5,7 +5,7 @@ surgery-torso-complex-description = Комплексная операция на
 
 start-torso-surgery = Подготовка операции на торсе
 torso-skin-incision = Надрез на груди
-torso-skin-clamp-bleeders = Остановить кровотечение
+torso-skin-clamp-bleeders = Остановлено кровотечение
 retract-torso-skin = Расширение разреза
 saw-rib-bone-gelled-fixed = Сращение костей
 saw-rib-bone-gelled = Восстановление костей

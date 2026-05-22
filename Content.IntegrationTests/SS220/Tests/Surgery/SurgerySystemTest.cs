@@ -171,7 +171,7 @@ public sealed class SurgerySystemTest
 
         await server.WaitAssertion(() =>
         {
-            var entityNull = new Entity<SurgeryPatientComponent?>(dummyPatient, patientComp);
+            var entityNull = new Entity<SurgeryPatientComponent>(dummyPatient, patientComp);
             surgerySystem.TryStartSurgery(entityNull, surgeryGraphId, dummyUser, dummyUser);
         });
 

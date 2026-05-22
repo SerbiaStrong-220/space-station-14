@@ -58,7 +58,7 @@ public sealed class PathologySystemTest
 
         await server.WaitAssertion(() =>
         {
-            var entity = new Entity<PathologyHolderComponent?>(dummy, holder);
+            var entity = new Entity<PathologyHolderComponent>(dummy, holder);
 
             // try add pathology
             var added = pathologySystem.TryAddPathology(entity, pathologyId);

@@ -12,25 +12,36 @@ public sealed partial class TreatmentSuggestion : Control
 {
     public string InSectionTextPrefix = "  - ";
 
+    private static readonly LocId EmptyTargetless = "treatment-recommendation-target-less";
+    private static readonly LocId EmptyTreatmentPlaceholder = "treatment-recommendation-empty";
+
+    private static readonly LocId ProblemSectionName = "treatment-recommendation-problem-section-name";
+    private static readonly LocId OperationSectionName = "treatment-recommendation-operation-section-name";
+    private static readonly LocId SuggestionSectionName = "treatment-recommendation-suggestion-section-name";
+
     public TreatmentSuggestion()
     {
         RobustXamlLoader.Load(this);
     }
 
-    public void ShowEmptySuggestion()
+    public void ShowTargetlessSuggestion()
     {
-        TreatmentSuggestionText.Text = string.Empty;
+        TreatmentSuggestionText.Text = Loc.GetString(EmptyTargetless);
     }
 
     public void ShowSuggestion(TreatmentRecommendation recommendation)
     {
         StringBuilder builder = new();
 
-        AddSection(recommendation.Problems, Loc.GetString("treatment-recommendation-problem-section-name"), builder);
-        AddSection(recommendation.Operations, Loc.GetString("treatment-recommendation-operation-section-name"), builder);
-        AddSection(recommendation.Suggestions, Loc.GetString("treatment-recommendation-suggestion-section-name"), builder);
+        AddSection(recommendation.Problems, Loc.GetString(ProblemSectionName), builder);
+        AddSection(recommendation.Operations, Loc.GetString(OperationSectionName), builder);
+        AddSection(recommendation.Suggestions, Loc.GetString(SuggestionSectionName), builder);
 
-        TreatmentSuggestionText.Text = builder.ToString();
+        if (builder.Length > 0)
+            TreatmentSuggestionText.Text = builder.ToString();
+        else
+            TreatmentSuggestionText.Text = Loc.GetString(EmptyTreatmentPlaceholder);
+
     }
 
     private void AddSection(List<string> dataLocPaths, string sectionName, StringBuilder builder)
