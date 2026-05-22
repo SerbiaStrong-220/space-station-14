@@ -225,7 +225,6 @@ public abstract class SharedDefibrillatorSystem : EntitySystem
 
         //SS220 LimitationRevive - start
         var defibChancesEvent = new GetDefibrillatorUseChances();
-
         RaiseLocalEvent(user, ref defibChancesEvent);
 
         var predictedRandom = SharedRandomExtensions.PredictedRandom(_gameTiming, GetNetEntity(target), GetNetEntity(user));
