@@ -1611,7 +1611,6 @@
   minLimit: 0
   loadouts:
   - ReporterPressFedora
-  - CapCMO #SS220-CMOParade
 
 - type: loadoutGroup
   id: ReporterOuterClothing
