@@ -265,7 +265,7 @@
   groups:
   - GroupTankHarness
   - QuartermasterHead
-  - QuarterMasterHeadset #SS220 HeatsetLoadout
+  - QuartermasterHeadset #SS220 HeadsetLoadout
   - QuartermasterNeck
   - QuartermasterJumpsuit
   - CargoTechnicianBackpack
@@ -319,7 +319,7 @@
   groups:
   - GroupTankHarness
   - ChiefEngineerHead
-  - ChiefEngineerHeadset #SS220 HeatsetLoadout
+  - ChiefEngineerHeadset #SS220 HeadsetLoadout
   - EngineerGlasses #SS220-TwoOne-Floppa-Iteration
   - ChiefEngineerJumpsuit
   - ChiefEngineerBack #ss220-ce-fix
@@ -386,7 +386,7 @@
   groups:
   - GroupTankHarness
   - ResearchDirectorHead
-  - ResearchDirectorHeadset #SS220 HeatsetLoadout
+  - ResearchDirectorHeadset #SS220 HeadsetLoadout
   - ScientistGlasses #SS220-TwoOne-Floppa-Iteration
   - ResearchDirectorNeck
   - ResearchDirectorJumpsuit

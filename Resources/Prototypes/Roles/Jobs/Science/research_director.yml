@@ -35,7 +35,7 @@
   id: ResearchDirectorGear
 #  equipment:
     #id: RnDPDA #SS220-RD-New-Loadout
-    #ears: ClothingHeadsetRD #SS220 HeatsetLoadout
+    #ears: ClothingHeadsetRD #SS220 HeadsetLoadout
   storage:
     back:
     - Flash

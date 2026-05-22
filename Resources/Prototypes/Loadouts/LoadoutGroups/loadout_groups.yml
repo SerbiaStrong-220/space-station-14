@@ -886,7 +886,7 @@
 
 #SS220 Headsetloadout begin
 - type: loadoutGroup
-  id: QuarterMasterHeadset
+  id: QuartermasterHeadset 
   name: loadout-group-quartermaster-headset
   minLimit: 1
   loadouts:
