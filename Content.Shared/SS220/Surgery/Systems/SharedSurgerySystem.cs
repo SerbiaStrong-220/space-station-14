@@ -16,6 +16,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Content.Shared.SS220.Surgery.Systems;
 
@@ -38,9 +39,9 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
     private const SurgeryEdgeSelectorUi EdgeSelectorBUIKey = SurgeryEdgeSelectorUi.Key;
 
-    private readonly LocId _surgeryCancelledOnStart = "surgery-cancelled-on-start";
-    private readonly LocId _surgeryCantCancelOnStart = "surgery-cant-be-cancelled-on-start";
-    private readonly LocId _surgeryToolFailureDamage = "surgery-tool-damage-on-failure";
+    private static readonly LocId SurgeryCancelledOnStart = "surgery-cancelled-on-start";
+    private static readonly LocId SurgeryCantCancelOnStart = "surgery-cant-be-cancelled-on-start";
+    private static readonly LocId SurgeryToolFailureDamage = "surgery-tool-damage-on-failure";
 
     public override void Initialize()
     {
@@ -82,6 +83,12 @@ public abstract partial class SharedSurgerySystem : EntitySystem
     {
         if (args.Handled)
             return;
+
+        if (HasComp<SurgeryStarterComponent>(args.Used) && entity.Comp.OngoingSurgeries.Where(x => _prototype.Index(x.Key).Start == x.Value).ToArray() is { Length: > 0 } startSurgeries)
+        {
+            EndOperation(entity!, startSurgeries[0].Key, args.User);
+            return;
+        }
 
         var edgeSelectorState = MakeSelectorState(entity, args.Used, args.User);
         switch (edgeSelectorState.Infos.Count)
@@ -238,12 +245,12 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         {
             if (OperationCanBeEnded(target, args.SurgeryGraphId))
             {
-                _popup.PopupPredicted(Loc.GetString(_surgeryCancelledOnStart, ("target", args.Target), ("user", args.User)), target, user);
+                _popup.PopupPredicted(Loc.GetString(SurgeryCancelledOnStart, ("target", args.Target), ("user", args.User)), target, user);
                 EndOperation(target, args.SurgeryGraphId, user);
             }
             else
             {
-                _popup.PopupCursor(Loc.GetString(_surgeryCantCancelOnStart));
+                _popup.PopupCursor(Loc.GetString(SurgeryCantCancelOnStart));
             }
 
             return;
@@ -353,7 +360,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         else
             return;
 
-        _popup.PopupPredicted(Loc.GetString(_surgeryToolFailureDamage, ("used", args.Used), ("target", args.Target)), args.Target.Value, args.User, PopupType.SmallCaution);
+        _popup.PopupPredicted(Loc.GetString(SurgeryToolFailureDamage, ("used", args.Used), ("target", args.Target)), args.Target.Value, args.User, PopupType.SmallCaution);
         _adminLogManager.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(args.User):user} failed performing edge of surgery and damaged {ToPrettyString(args.Target):target}!");
     }
 }

@@ -61,15 +61,15 @@
       edgeTooltip: to-torso-internal-healing
       actions:
       - !type:ApplyDamageAction
-        damage:
-          groups:
-            Brute: -45
-        skillTree: SkillGroupMedicine
+        damageGrouped:
+          Brute: -30
+          Burn: -30
+        skillTree: Anatomy
         damageBonuses:
-          MedicineInitial: 0.7
-          MedicineBase: 1
-          MedicineTrained: 1.2
-          MedicineProfessional: 1.5
+          AnatomyInitial: 0.7
+          AnatomyBase: 1
+          AnatomyTrained: 1.2
+          AnatomyProfessional: 1.5
       requirements:
       - !type:SurgeryToolRequirement
         subject: used

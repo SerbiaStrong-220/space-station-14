@@ -59,6 +59,7 @@ public sealed partial class OperationDescription : Control
 
     public void ShowDescription(ProtoId<SurgeryGraphPrototype>? id, bool force = false)
     {
+        this.Visible = true;
         if (id == _currentOperation)
             return;
 

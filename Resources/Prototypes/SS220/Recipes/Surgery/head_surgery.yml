@@ -193,12 +193,12 @@
         damage:
           types:
             Cerebral: -5
-        skillTree: SkillGroupMedicine
+        skillTree: Anatomy
         damageBonuses:
-          MedicineInitial: 0.7
-          MedicineBase: 1
-          MedicineTrained: 1.2
-          MedicineProfessional: 1.5
+          AnatomyInitial: 0.7
+          AnatomyBase: 1
+          AnatomyTrained: 1.2
+          AnatomyProfessional: 1.5
       requirements:
       - !type:SurgeryToolRequirement
         subject: used

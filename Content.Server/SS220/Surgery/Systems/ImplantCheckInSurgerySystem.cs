@@ -44,7 +44,7 @@ public sealed class ImplantCheckInSurgerySystem : EntitySystem
 
     private bool MakePaper(Entity<ImplantCheckInSurgeryComponent> entity, EntityUid user, EntityUid target, IReadOnlyList<EntityUid> implants)
     {
-        var printed = EntityManager.SpawnEntity(entity.Comp.OutputPaper, Transform(entity.Owner).Coordinates);
+        var printed = Spawn(entity.Comp.OutputPaper, Transform(entity.Owner).Coordinates);
         _handsSystem.PickupOrDrop(user, printed, checkActionBlocker: false);
 
         if (!TryComp<PaperComponent>(printed, out var paperComp))

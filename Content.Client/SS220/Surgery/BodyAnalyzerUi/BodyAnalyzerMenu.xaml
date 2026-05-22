@@ -8,7 +8,7 @@
     xmlns:surgeryUiParts="clr-namespace:Content.Client.SS220.Surgery.UiParts"
     Title="{Loc 'surgery-observer-title'}"
     Resizable="True"
-    MinSize="1020 470"
+    MinSize="920 470"
     RectClipContent="False">
     <Control>
         <PanelContainer>
@@ -23,7 +23,7 @@
                     <surgeryUiParts:TreatmentSuggestion Name="TreatmentSuggestion" HorizontalExpand="True"  VerticalExpand="True"/>
                 </BoxContainer>
             </ScrollContainer>
-            <BoxContainer Name="HandBook" Orientation="Vertical" MinSize="620 420" Margin="0 0 10 0"
+            <BoxContainer Name="HandBook" Orientation="Vertical" MinSize="520 420" Margin="0 0 10 0"
                     HorizontalExpand="True" VerticalExpand="True">
                 <surgeryUiParts:OperationList Name="OperationList" HorizontalExpand="True" VerticalExpand="True"/>
                 <surgeryUiParts:OperationDescription Name="OperationDescription" MinHeight="270" Visible ="False" HorizontalExpand="True" VerticalExpand="True"/>

@@ -23,6 +23,9 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
 
     private Dictionary<SurgeryPuppetPart, HashSet<Control>> _operations = new();
 
+    private static readonly LocId HeaderText = "surgery-start-ui-target";
+    private static readonly LocId FooterConfirm = "surgery-footer-confirm";
+
     private const SurgeryPuppetPart SelectedOnStartPart = SurgeryPuppetPart.Torso;
     private const int ControlsInitAllocateNumber = 8;
 
@@ -91,7 +94,7 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
     public void UpdateTarget(EntityUid target)
     {
         Target = target;
-        Title = Loc.GetString("surgery-start-ui-target", ("target", target));
+        Title = Loc.GetString(HeaderText, ("target", target));
     }
 
     private SurgeryPerformButton MakeOperationButton(SurgeryGraphPrototype surgeryGraph, bool canStart, string? reason)
@@ -109,7 +112,7 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
             if (!button.Pressed)
                 OnSurgeryConfirmClicked?.Invoke(button.GraphId, Target);
             else
-                FooterLeft.Text = Loc.GetString("surgery-footer-confirm");
+                FooterLeft.Text = Loc.GetString(FooterConfirm);
 
         };
 

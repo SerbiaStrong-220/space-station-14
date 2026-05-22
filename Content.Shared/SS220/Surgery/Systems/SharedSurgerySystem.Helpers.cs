@@ -11,8 +11,8 @@ namespace Content.Shared.SS220.Surgery.Systems;
 
 public abstract partial class SharedSurgerySystem
 {
-    private readonly LocId _cantStartUndefinedSurgery = "cant-start-surgery-while-on-surgery";
-    private readonly LocId _cantStartSurgeryWhileOneOngoing = "cant-start-surgery-while-on-surgery";
+    private static readonly LocId CantStartUndefinedSurgery = "cant-start-undefined-surgery";
+    private static readonly LocId CantStartSurgeryWhileOneOngoing = "cant-start-surgery-while-on-surgery";
 
     public bool OperationCanBeEnded(Entity<SurgeryPatientComponent?> entity, ProtoId<SurgeryGraphPrototype> surgeryGraph)
     {
@@ -47,7 +47,7 @@ public abstract partial class SharedSurgerySystem
             && TryComp<SurgeryPatientComponent>(target, out var surgeryPatient)
             && surgeryPatient.OngoingSurgeries.ContainsKey(surgeryGraph.ID))
         {
-            reason = Loc.GetString(_cantStartSurgeryWhileOneOngoing);
+            reason = Loc.GetString(CantStartSurgeryWhileOneOngoing);
             return reason is null;
         }
 
@@ -70,7 +70,7 @@ public abstract partial class SharedSurgerySystem
     {
         if (!_prototype.Resolve(surgeryId, out var surgeryGraph))
         {
-            reason = Loc.GetString(_cantStartUndefinedSurgery);
+            reason = Loc.GetString(CantStartUndefinedSurgery);
             return false;
         }
 
