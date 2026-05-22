@@ -1,5 +1,6 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 using Content.Shared.Alert;
+using Content.Shared.StatusIcon;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -21,4 +22,7 @@ public sealed partial class AltBlockingUserComponent : Component
 
     [DataField]
     public ProtoId<AlertPrototype> BlockingAlertProtoId = "ActiveBlocking";
+
+    [DataField]
+    public ProtoId<BlockingIconPrototype> Icon = "BlockingIcon";
 }

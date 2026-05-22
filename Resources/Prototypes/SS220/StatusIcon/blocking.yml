@@ -1,0 +1,6 @@
+- type: blockingIcon
+  id: BlockingIcon
+  icon:
+    sprite: /Textures/SS220/Effects/blocking.rsi
+    state: default0
+  locationPreference: Left
