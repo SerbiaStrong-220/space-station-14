@@ -7,7 +7,6 @@ using Content.Shared.SS220.ArmorBlock;
 using Content.Shared.SS220.ToggleBlocking;
 using Content.Shared.SS220.Weapons.Melee.Events;
 using Content.Shared.SS220.Weapons.Ranged.Events;
-using Content.Shared.Throwing;
 using Robust.Shared.Utility;
 using System.Numerics;
 

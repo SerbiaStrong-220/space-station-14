@@ -49,11 +49,12 @@ public sealed partial class SharedAltBlockingSystem
 
     private void OnThrowAttempt(Entity<AltBlockingUserComponent> ent, ref ThrowAttemptEvent args)
     {
-        if (ent.Comp.Blocking)
-        {
-            _popupSystem.PopupPredictedCursor(Loc.GetString(AttackingProhibited), ent.Owner);
-            args.Cancel();
-        }
+        if (!ent.Comp.Blocking)
+            return;
+
+        _popupSystem.PopupEntity(Loc.GetString(BlockThrowingLocale), ent);//client doesn't catch the event somewhy
+
+        args.Cancel();
     }
 
     private void OnEntityTerminating(Entity<AltBlockingUserComponent> ent, ref EntityTerminatingEvent args)
