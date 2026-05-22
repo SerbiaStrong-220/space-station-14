@@ -5,7 +5,7 @@
   groups:
   - GroupTankHarness
   - ChiefMedicalOfficerHead
-  - ChiefMedicalOfficerHeadset
+  - ChiefMedicalOfficerHeadset #SS220 Headsetloadout
   - ChiefMedicalOfficerGlasses #SS220-TwoOne-Floppa-Iteration / ss220 cmo new
   - MedicalMask
   - ChiefMedicalOfficerJumpsuit
