@@ -88,9 +88,6 @@ public sealed partial class ExperienceSystem : EntitySystem
         if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
             return false;
 
-        if (!entity.Comp.OverrideSkills.ContainsKey(skillTree) || !entity.Comp.Skills.ContainsKey(skillTree))
-            return false;
-
         var treeInfo = entity.Comp.OverrideSkills.TryGetValue(skillTree, out var overrideSkills) ? overrideSkills :
                         entity.Comp.Skills.TryGetValue(skillTree, out var skills) ? skills : null;
 
@@ -157,9 +154,6 @@ public sealed partial class ExperienceSystem : EntitySystem
         }
 
         if (!Resolve(entity.Owner, ref entity.Comp, logMissing: false))
-            return false;
-
-        if (!entity.Comp.OverrideSkills.ContainsKey(skillTree) && !entity.Comp.Skills.ContainsKey(skillTree))
             return false;
 
         var treeInfo = entity.Comp.OverrideSkills.TryGetValue(skillTree, out var overrideSkills) ? overrideSkills :
