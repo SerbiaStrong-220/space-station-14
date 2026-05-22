@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "license": "Custom",
+  "copyright": [
+      "jrposter_legal2 & jrposter_contraband2 taken from https://github.com/discordia-space/CEV-Eris/blob/01f7518e0f8177734a6579aba2bbf76024aa96c4/icons/obj/recycling.dmi, jrposter_legal4 Taken from https://github.com/tgstation/tgstation/commit/d3d351dea8d9420cee47514843a02158d0a7266f#diff-8dd94e19fdb2ff341b57e31bce101298, resprited by DaGo7393 for SS220. (license: CC-BY-SA-3.0)",
+      "jrposter_legal1, jrposter_legal3, and jrposter_contraband1 made by DaGo7393 for SS220 (license: EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt)"
+  ],
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "jrposter_legal1"
+    },
+    {
+      "name": "jrposter_legal2"
+    },
+    {
+      "name": "jrposter_legal3"
+    },
+    {
+      "name": "jrposter_legal4"
+    },
+    {
+      "name": "jrposter_contraband1"
+    },
+    {
+      "name": "jrposter_contraband2"
+    }
+  ]
+}
