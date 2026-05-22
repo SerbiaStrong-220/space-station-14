@@ -130,7 +130,7 @@ public sealed class IntegratedClothingSystem : EntitySystem
 
     private void OnShutdown(Entity<IntegratedClothingComponent> ent, ref ComponentShutdown args)
     {
-        QueueDel(ent.Comp.ClothingUid);
+        PredictedQueueDel(ent.Comp.ClothingUid);
     }
 
     private void OnMapInit(Entity<IntegratedClothingComponent> ent, ref MapInitEvent args)
