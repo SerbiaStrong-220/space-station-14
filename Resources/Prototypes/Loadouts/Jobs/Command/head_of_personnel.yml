@@ -84,6 +84,7 @@
     outerClothing: ClothingOuterWinterHoP
 
 # Headset
+#SS220 Headsetloadout begin
 - type: loadout
   id: HoPHeadset
   equipment:
@@ -93,4 +94,4 @@
   id: HoPHeadsetAlt
   equipment:
     ears: ClothingHeadsetAltCommand
-
+#SS220 Headsetloadout end

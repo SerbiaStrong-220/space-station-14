@@ -22,7 +22,7 @@
   groups:
   - GroupTankHarness
   - HoPHead
-  - HoPHeadset
+  - HoPHeadset #SS220 Headsetloadout
   - HoPNeck
   - HoPJumpsuit
   - HoPBackpack
