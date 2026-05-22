@@ -9,7 +9,7 @@
 - type: marking
   groupWhitelist: [Ipc]
   id: RobotHeadWires
-  bodyPart: Head
+  bodyPart: HeadTop
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/ipc_headtops.rsi
       state: ipc_wires
@@ -32,7 +32,7 @@
 
 - type: marking
   id: ShellguardShellguardMainRHand2
-  bodyPart: RArm
+  bodyPart: RHand
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/shellguard/shellguard_main.rsi
@@ -40,7 +40,7 @@
 
 - type: marking
   id: ShellguardShellguardMainLFoot1
-  bodyPart: LLeg
+  bodyPart: LFoot
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/shellguard/shellguard_main.rsi
@@ -48,7 +48,7 @@
 
 - type: marking
   id: ShellguardShellguardMainLHand1
-  bodyPart: LArm
+  bodyPart: LHand
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/shellguard/shellguard_main.rsi
@@ -88,7 +88,7 @@
 
 - type: marking
   id: ShellguardShellguardMainRHand1
-  bodyPart: RArm
+  bodyPart: RHand
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/shellguard/shellguard_main.rsi
@@ -120,7 +120,7 @@
 
 - type: marking
   id: ShellguardShellguardMainLHand2
-  bodyPart: LArm
+  bodyPart: LHand
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/shellguard/shellguard_main.rsi
@@ -136,7 +136,7 @@
 
 - type: marking
   id: ShellguardShellguardMainRFoot2
-  bodyPart: RLeg
+  bodyPart: RFoot
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/shellguard/shellguard_main.rsi
@@ -144,7 +144,7 @@
 
 - type: marking
   id: ShellguardShellguardMainRFoot1
-  bodyPart: RLeg
+  bodyPart: RFoot
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/shellguard/shellguard_main.rsi
@@ -152,7 +152,7 @@
 
 - type: marking
   id: ShellguardShellguardMainLFoot2
-  bodyPart: LLeg
+  bodyPart: LFoot
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/shellguard/shellguard_main.rsi
@@ -192,7 +192,7 @@
 
 - type: marking
   id: ZenghuZenghuMainRHand2
-  bodyPart: RArm
+  bodyPart: RHand
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/zenghu/zenghu_main.rsi
@@ -200,7 +200,7 @@
 
 - type: marking
   id: ZenghuZenghuMainLFoot1
-  bodyPart: LLeg
+  bodyPart: LFoot
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/zenghu/zenghu_main.rsi
@@ -208,7 +208,7 @@
 
 - type: marking
   id: ZenghuZenghuMainLHand1
-  bodyPart: LArm
+  bodyPart: LHand
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/zenghu/zenghu_main.rsi
@@ -248,7 +248,7 @@
 
 - type: marking
   id: ZenghuZenghuMainRHand1
-  bodyPart: RArm
+  bodyPart: RHand
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/zenghu/zenghu_main.rsi
@@ -296,7 +296,7 @@
 
 - type: marking
   id: ZenghuZenghuMainLHand2
-  bodyPart: LArm
+  bodyPart: LHand
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/zenghu/zenghu_main.rsi
@@ -312,7 +312,7 @@
 
 - type: marking
   id: ZenghuZenghuMainRFoot2
-  bodyPart: RLeg
+  bodyPart: RFoot
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/zenghu/zenghu_main.rsi
@@ -320,7 +320,7 @@
 
 - type: marking
   id: ZenghuZenghuMainRFoot1
-  bodyPart: RLeg
+  bodyPart: RFoot
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/zenghu/zenghu_main.rsi
@@ -328,7 +328,7 @@
 
 - type: marking
   id: ZenghuZenghuMainLFoot2
-  bodyPart: LLeg
+  bodyPart: LFoot
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/zenghu/zenghu_main.rsi
@@ -360,7 +360,7 @@
 
 - type: marking
   id: HesphiastosHesphiastosMainRHand2
-  bodyPart: RArm
+  bodyPart: RHand
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/hesphiastos/hesphiastos_main.rsi
@@ -368,7 +368,7 @@
 
 - type: marking
   id: HesphiastosHesphiastosMainLFoot1
-  bodyPart: LLeg
+  bodyPart: LFoot
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/hesphiastos/hesphiastos_main.rsi
@@ -376,7 +376,7 @@
 
 - type: marking
   id: HesphiastosHesphiastosMainLHand1
-  bodyPart: LArm
+  bodyPart: LHand
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/hesphiastos/hesphiastos_main.rsi
@@ -416,7 +416,7 @@
 
 - type: marking
   id: HesphiastosHesphiastosMainRHand1
-  bodyPart: RArm
+  bodyPart: RHand
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/hesphiastos/hesphiastos_main.rsi
@@ -448,7 +448,7 @@
 
 - type: marking
   id: HesphiastosHesphiastosMainLHand2
-  bodyPart: LArm
+  bodyPart: LHand
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/hesphiastos/hesphiastos_main.rsi
@@ -464,7 +464,7 @@
 
 - type: marking
   id: HesphiastosHesphiastosMainRFoot2
-  bodyPart: RLeg
+  bodyPart: RFoot
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/hesphiastos/hesphiastos_main.rsi
@@ -472,7 +472,7 @@
 
 - type: marking
   id: HesphiastosHesphiastosMainRFoot1
-  bodyPart: RLeg
+  bodyPart: RFoot
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/hesphiastos/hesphiastos_main.rsi
@@ -480,7 +480,7 @@
 
 - type: marking
   id: HesphiastosHesphiastosMainLFoot2
-  bodyPart: LLeg
+  bodyPart: LFoot
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/hesphiastos/hesphiastos_main.rsi
@@ -600,7 +600,7 @@
 
 - type: marking
   id: BishopBishopMainRHand
-  bodyPart: RArm
+  bodyPart: RHand
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/bishop/bishop_main.rsi
@@ -656,7 +656,7 @@
 
 - type: marking
   id: BishopBishopMainLFoot
-  bodyPart: LLeg
+  bodyPart: LFoot
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/bishop/bishop_main.rsi
@@ -688,7 +688,7 @@
 
 - type: marking
   id: BishopBishopMainLHand
-  bodyPart: LArm
+  bodyPart: LHand
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/bishop/bishop_main.rsi
@@ -704,7 +704,7 @@
 
 - type: marking
   id: BishopBishopMainRFoot
-  bodyPart: RLeg
+  bodyPart: RFoot
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/bishop/bishop_main.rsi
@@ -736,7 +736,7 @@
 
 - type: marking
   id: MorpheusMorpheusMainRHand
-  bodyPart: RArm
+  bodyPart: RHand
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/morpheus/morpheus_main.rsi
@@ -776,7 +776,7 @@
 
 - type: marking
   id: MorpheusMorpheusMainLFoot
-  bodyPart: LLeg
+  bodyPart: LFoot
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/morpheus/morpheus_main.rsi
@@ -784,7 +784,7 @@
 
 - type: marking
   id: MorpheusMorpheusMainLHand
-  bodyPart: LArm
+  bodyPart: LHand
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/morpheus/morpheus_main.rsi
@@ -800,7 +800,7 @@
 
 - type: marking
   id: MorpheusMorpheusMainRFoot
-  bodyPart: RLeg
+  bodyPart: RFoot
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/morpheus/morpheus_main.rsi
@@ -816,7 +816,7 @@
 
 - type: marking
   id: WardtakahashiWardtakahashiMainRHand
-  bodyPart: RArm
+  bodyPart: RHand
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/wardtakahashi/wardtakahashi_main.rsi
@@ -856,7 +856,7 @@
 
 - type: marking
   id: WardtakahashiWardtakahashiMainLFoot
-  bodyPart: LLeg
+  bodyPart: LFoot
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/wardtakahashi/wardtakahashi_main.rsi
@@ -864,7 +864,7 @@
 
 - type: marking
   id: WardtakahashiWardtakahashiMainLHand
-  bodyPart: LArm
+  bodyPart: LHand
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/wardtakahashi/wardtakahashi_main.rsi
@@ -880,7 +880,7 @@
 
 - type: marking
   id: WardtakahashiWardtakahashiMainRFoot
-  bodyPart: RLeg
+  bodyPart: RFoot
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/wardtakahashi/wardtakahashi_main.rsi
@@ -936,7 +936,7 @@
 
 - type: marking
   id: XionXionMainRHand2
-  bodyPart: RArm
+  bodyPart: RHand
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/xion/xion_main.rsi
@@ -944,7 +944,7 @@
 
 - type: marking
   id: XionXionMainLFoot1
-  bodyPart: LLeg
+  bodyPart: LFoot
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/xion/xion_main.rsi
@@ -952,7 +952,7 @@
 
 - type: marking
   id: XionXionMainLHand1
-  bodyPart: LArm
+  bodyPart: LHand
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/xion/xion_main.rsi
@@ -992,7 +992,7 @@
 
 - type: marking
   id: XionXionMainRHand1
-  bodyPart: RArm
+  bodyPart: RHand
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/xion/xion_main.rsi
@@ -1024,7 +1024,7 @@
 
 - type: marking
   id: XionXionMainLHand2
-  bodyPart: LArm
+  bodyPart: LHand
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/xion/xion_main.rsi
@@ -1040,7 +1040,7 @@
 
 - type: marking
   id: XionXionMainRFoot2
-  bodyPart: RLeg
+  bodyPart: RFoot
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/xion/xion_main.rsi
@@ -1048,7 +1048,7 @@
 
 - type: marking
   id: XionXionMainRFoot1
-  bodyPart: RLeg
+  bodyPart: RFoot
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/xion/xion_main.rsi
@@ -1056,7 +1056,7 @@
 
 - type: marking
   id: XionXionMainLFoot2
-  bodyPart: LLeg
+  bodyPart: LFoot
   groupWhitelist: [Ipc]
   sprites:
     - sprite: SS220/Mobs/Customization/Ipc/xion/xion_main.rsi
