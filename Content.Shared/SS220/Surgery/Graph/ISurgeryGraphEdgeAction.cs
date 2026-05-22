@@ -2,6 +2,7 @@
 
 namespace Content.Shared.SS220.Surgery.Graph;
 
+[ImplicitDataDefinitionForInheritors]
 public interface ISurgeryGraphEdgeAction
 {
     abstract void PerformAction(EntityUid targetUid, EntityUid userUid, EntityUid? usedUid, IEntityManager entityManager);
