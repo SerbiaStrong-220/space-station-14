@@ -87,7 +87,7 @@ public sealed class SurgerySystemTest
             {
                 Assert.That(started, Is.True);
                 Assert.That(patientComp.OngoingSurgeries.ContainsKey(surgeryGraphId), Is.True);
-                Assert.That(patientComp.OngoingSurgeries[surgeryGraphId], Is.EqualTo("start-node"));
+                Assert.That(patientComp.OngoingSurgeries[surgeryGraphId], Is.EqualTo("surgery-head-start"));
             });
 
             var canEnd = surgerySystem.OperationCanBeEnded(entity, surgeryGraphId);
@@ -180,15 +180,15 @@ public sealed class SurgerySystemTest
             var entity = new Entity<SurgeryPatientComponent>(dummyPatient, patientComp);
 
             Assert.That(protoManager.TryIndex<SurgeryGraphPrototype>(surgeryGraphId, out var graphProto), Is.True);
-            Assert.That(graphProto!.TryGetNode("start-node", out var startNode), Is.True);
+            Assert.That(graphProto.TryGetNode("surgery-head-start", out var startNode), Is.True);
 
-            var edgeToPerform = startNode.Edges.FirstOrDefault(e => e.Id == "edge-1");
+            var edgeToPerform = startNode.Edges.FirstOrDefault(e => e.Id == "head-skin-incision");
             Assert.That(edgeToPerform, Is.Not.Null);
 
             var stepStarted = surgerySystem.TryPerformOperationStep(entity, surgeryGraphId, edgeToPerform!, scalpel, dummyUser);
             Assert.That(stepStarted, Is.True);
 
-            Assert.That(patientComp.OngoingSurgeries[surgeryGraphId], Is.EqualTo("start-node"));
+            Assert.That(patientComp.OngoingSurgeries[surgeryGraphId], Is.EqualTo(startNode.Name));
         });
 
         await pair.RunSeconds(1.5f);
@@ -198,7 +198,7 @@ public sealed class SurgerySystemTest
             Assert.Multiple(() =>
             {
                 Assert.That(patientComp.OngoingSurgeries.ContainsKey(surgeryGraphId), Is.True);
-                Assert.That(patientComp.OngoingSurgeries[surgeryGraphId], Is.EqualTo("step-1"));
+                Assert.That(patientComp.OngoingSurgeries[surgeryGraphId], Is.EqualTo("head-skin-incision"));
             });
         });
 
