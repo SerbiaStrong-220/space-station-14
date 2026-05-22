@@ -1,7 +1,6 @@
 // © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 using Content.Shared.Hands.Components;
 using Content.Shared.Input;
-using Content.Shared.SS220.Weapons.Ranged.Events;
 using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Input.Binding;
@@ -51,7 +50,10 @@ public sealed partial class SharedAltBlockingSystem
     private void OnThrowAttempt(Entity<AltBlockingUserComponent> ent, ref ThrowAttemptEvent args)
     {
         if (ent.Comp.Blocking)
+        {
+            _popupSystem.PopupPredictedCursor(Loc.GetString(AttackingProhibited), ent.Owner);
             args.Cancel();
+        }
     }
 
     private void OnEntityTerminating(Entity<AltBlockingUserComponent> ent, ref EntityTerminatingEvent args)

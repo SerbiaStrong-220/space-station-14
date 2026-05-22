@@ -5,9 +5,6 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.AltBlocking;
 
-/// <summary>
-///     Handles displaying SSD indicator as status icon
-/// </summary>
 public sealed class AltBLockingIndicatorSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
