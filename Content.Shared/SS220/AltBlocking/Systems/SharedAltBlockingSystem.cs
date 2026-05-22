@@ -16,9 +16,11 @@ using Content.Shared.SS220.Weapons.Ranged.Events;
 using Content.Shared.Throwing;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using System.Linq;
+
 
 namespace Content.Shared.SS220.AltBlocking;
 
@@ -37,6 +39,7 @@ public sealed partial class SharedAltBlockingSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly AlertsSystem _alerts = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
 
     public override void Initialize()
     {

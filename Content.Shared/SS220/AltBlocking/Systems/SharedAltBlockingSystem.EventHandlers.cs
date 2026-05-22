@@ -26,7 +26,7 @@ public sealed partial class SharedAltBlockingSystem
         var itemPos = _transform.GetWorldPosition(args.DamageDealer);
         var targetPos = _transform.GetWorldPosition(ent);
         var angle = new Angle(new Vector2(targetPos.X - itemPos.X, targetPos.Y - itemPos.Y)) - new Angle(Math.PI / 2);
-        args.Cancelled= TryBlock(ent.Comp.BlockingItemsShields, args.Damage, ent, angle);
+        args.Cancelled = TryBlock(ent.Comp.BlockingItemsShields, args.Damage, ent, angle);
     }
 
     private void OnBlockUserHitscan(Entity<AltBlockingUserComponent> ent, ref HitscanBlockAttemptEvent args)
@@ -66,6 +66,11 @@ public sealed partial class SharedAltBlockingSystem
 
             if (SharedRandomExtensions.PredictedProb(_gameTiming, ent.Comp.Blocking ? blockComp.ActiveMeleeBlockProb : blockComp.MeleeBlockProb, (NetEntity)netItem))
             {
+                if (_playerManager.LocalEntity == ent.Owner && _gameTiming.IsFirstTimePredicted)
+                {
+                    _audio.PlayLocal(blockComp.BlockSound, item, ent.Owner);
+                    _popupSystem.PopupClient(Loc.GetString(BlockShotLocale), item);
+                }
                 if (_gameTiming.IsFirstTimePredicted)
                 {
                     _audio.PlayEntity(blockComp.BlockSound, ent.Owner, item);
@@ -137,6 +142,11 @@ public sealed partial class SharedAltBlockingSystem
 
             if (SharedRandomExtensions.PredictedProb(_gameTiming, owner.Comp.Blocking ? blockComp.ActiveRangeBlockProb : blockComp.RangeBlockProb, (NetEntity)netItem))
             {
+                if (_playerManager.LocalEntity == owner && _gameTiming.IsFirstTimePredicted)
+                {
+                    _audio.PlayLocal(blockComp.BlockSound, item, owner);
+                    _popupSystem.PopupClient(Loc.GetString(BlockShotLocale), item);
+                }
                 if (_gameTiming.IsFirstTimePredicted)
                 {
                     _audio.PlayEntity(blockComp.BlockSound, owner, item);
