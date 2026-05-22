@@ -10,7 +10,7 @@
     sprite: SS220/Objects/Specific/Medical/fragments_extractors.rsi
   - type: PowerCellDraw
     drawRate: 0
-    useRate: 70
+    useCharge: 70
 
 - type: entity
   name: shrapnel extractor

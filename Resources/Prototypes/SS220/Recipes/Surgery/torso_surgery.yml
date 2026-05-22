@@ -28,7 +28,6 @@
     nodeText:
       examineDescription: surgery-torso-examine-start
       popup: surgery-torso-popup-start
-      description: surgery-torso-node-start
     edges:
     - to: torso-skin-incision
       id: torso-skin-incision

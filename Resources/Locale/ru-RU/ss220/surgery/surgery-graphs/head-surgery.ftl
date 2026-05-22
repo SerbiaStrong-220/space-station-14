@@ -17,6 +17,7 @@ to-head-skin-incision = Сделать надрез на голове
 to-head-skin-clamp-bleeders = Зажать сосуды на голове
 to-retract-head-skin = Расширить надрез
 to-head-check-implant = Проверить наличие имплантов
+to-head-change-tts = Изменить структуру связок
 to-saw-skull-bone = Распилить череп
 to-retract-head-skin-after-gel = Завершить сращивание черепа
 to-saw-skull-bone-gelled-fixed = Срастить кости черепа

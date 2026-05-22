@@ -208,7 +208,7 @@
         failureMessage: surgery-requirement-tool-miss
       - !type:TotalDamageRequirement
         subject: target
-        DamageType: Cerebral
+        damageType: Cerebral
         damage: 0
         description: surgery-requirement-total-damage-requirement-brain-damage-heal-description
         failureMessage: surgery-requirement-total-damage-requirement-brain-damage-no-damage
