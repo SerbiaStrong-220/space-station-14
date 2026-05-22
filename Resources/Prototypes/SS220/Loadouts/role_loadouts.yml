@@ -6,12 +6,14 @@
 - type: roleLoadout
   id: JobNanoTrasenRepresentative
   groups:
-  - MagistrateHead
-  - MagistrateEyes
-  - MagistrateHeadset
-  - MagistrateJumpsuit
-  - MagistrateOuterClothing
-  - IAABackpacks
+  - NanoTrasenRepresentativeHead
+  - NanoTrasenRepresentativeEyes
+  - NanoTrasenRepresentativeNeck
+  - NanoTrasenRepresentativeHeadset
+  - NanoTrasenRepresentativeJumpsuit
+  - NanoTrasenRepresentativeOuterClothing
+  - NanoTrasenRepresentativeBackpacks
+  - NanoTrasenRepresentativeTrinket
   - Trinkets
   - Survival
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration

@@ -17,11 +17,40 @@
 - type: loadoutEffectGroup
   id: TrustedLawyerTime
   effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:RoleTimeRequirement
-      role: JobIAA
-      time: 180000 # 50 hrs
+  - !type:AnyLoadoutEffect
+    effects:
+    - !type:JobRequirementLoadoutEffect
+      requirement:
+        !type:DepartmentTimeRequirement
+        department: Law
+        time: 180000 # 50 hrs
+    - !type:JobRequirementLoadoutEffect
+      requirement:
+        !type:RoleTimeRequirement
+        role: JobIAA
+        time: 54000 # 15 hrs
+  sponsorTierLoadoutEffects:
+  - !type:GroupLoadoutEffect
+    proto: SeniorDevTeamTier
+  - !type:GroupLoadoutEffect
+    proto: AdministratorSponsorTier
+
+# IAA beret time
+- type: loadoutEffectGroup
+  id: BeretIAATime
+  effects:
+  - !type:AnyLoadoutEffect
+    effects:
+    - !type:JobRequirementLoadoutEffect
+      requirement:
+        !type:DepartmentTimeRequirement
+        department: Law
+        time: 90000 # 25 hrs
+    - !type:JobRequirementLoadoutEffect
+      requirement:
+        !type:RoleTimeRequirement
+        role: JobIAA
+        time: 54000 # 15 hrs
   sponsorTierLoadoutEffects:
   - !type:GroupLoadoutEffect
     proto: SeniorDevTeamTier
@@ -31,6 +60,9 @@
 # Head
 - type: loadout
   id: BeretIAA
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: BeretIAATime
   equipment:
     head: ClothingHeadHatBeretIAA
 
@@ -45,9 +77,9 @@
 # Jumpsuit
 - type: loadout
   id: JumpsuitNTR
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: NanoTrasenRepresentativeTime
+  # effects:
+  # - !type:GroupLoadoutEffect
+  #   proto: NanoTrasenRepresentativeTime
   equipment:
     jumpsuit: ClothingUniformJumpsuitNTR
 
