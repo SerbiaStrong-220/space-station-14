@@ -366,8 +366,10 @@ public sealed class ArenaLobbySystem : EntitySystem
     {
         if (!TryComp<MindContainerComponent>(body, out var container) || !container.HasMind)
             return false;
+
         if (!TryComp<MindComponent>(container.Mind, out var mind) || mind.IsVisitingEntity)
             return false;
+
         return mind.UserId.HasValue && _playerManager.TryGetSessionById(mind.UserId.Value, out _);
     }
 
