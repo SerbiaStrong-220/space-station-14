@@ -7,7 +7,7 @@ namespace Content.Shared.SS220.Clothing.Components;
 public sealed partial class IntegratedToClothingComponent : Component
 {
     /// <summary>
-    ///     The Id of the piece of clothing that this entity belongs to.
+    ///     The Uid of the piece of clothing that this entity belongs to.
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntityUid AttachedUid;
