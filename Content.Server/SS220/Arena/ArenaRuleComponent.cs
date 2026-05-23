@@ -28,7 +28,7 @@ public sealed partial class ArenaRuleComponent : Component
     public TimeSpan RespawnDelay = TimeSpan.FromSeconds(2);
 
     [DataField]
-    public bool OneShot;
+    public ArenaLifecycle Lifecycle = ArenaLifecycle.Rotation;
 
     [DataField]
     public ArenaGameMode Mode = ArenaGameMode.Duel;
@@ -97,4 +97,10 @@ public enum ArenaSelectionMode : byte
 {
     Rotation = 0,
     Random = 1,
+}
+
+public enum ArenaLifecycle : byte
+{
+    Rotation = 0,
+    DeleteOnKill = 1,
 }

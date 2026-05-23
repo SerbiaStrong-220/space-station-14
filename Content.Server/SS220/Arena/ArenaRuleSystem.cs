@@ -532,7 +532,7 @@ public sealed class ArenaRuleSystem : GameRuleSystem<ArenaRuleComponent>
         rule.PendingSpawn = false;
         rule.Phase = ArenaPhase.Disabled;
 
-        if (rule.OneShot)
+        if (rule.Lifecycle == ArenaLifecycle.DeleteOnKill)
         {
             GameTicker.EndGameRule(ent.Owner);
             QueueDel(ent.Owner);
