@@ -13,8 +13,8 @@ namespace Content.Shared.SS220.Clothing.Systems;
 
 public sealed class IntegratedClothingSystem : EntitySystem
 {
-    private static readonly string CannotPutIntegratedClothingOn = "integrated-clothing-cannot-put-on";
-    private static readonly string MustRemoveClothingFirst = "toggleable-clothing-remove-first";
+    private static readonly LocId CannotPutIntegratedClothingOn = "integrated-clothing-cannot-put-on";
+    private static readonly LocId MustRemoveClothingFirst = "toggleable-clothing-remove-first";
 
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
