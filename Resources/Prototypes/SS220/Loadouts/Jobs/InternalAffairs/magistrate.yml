@@ -22,7 +22,6 @@
   - !type:GroupLoadoutEffect
     proto: AdministratorSponsorTier
 
-
 - type: loadoutEffectGroup
   id: StreetJudge
   effects:
@@ -32,12 +31,12 @@
       requirement:
         !type:RoleTimeRequirement
         role: JobNanoTrasenRepresentative
-        time: 72000 # 5 hrs
+        time: 72000 # 20 hrs
     - !type:JobRequirementLoadoutEffect
       requirement:
         !type:RoleTimeRequirement
         role: JobMagistrate
-        time: 72000 # 5 hrs
+        time: 72000 # 20 hrs
   sponsorTierLoadoutEffects:
   - !type:GroupLoadoutEffect
     proto: SeniorDevTeamTier

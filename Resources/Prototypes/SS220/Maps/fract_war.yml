@@ -21,7 +21,7 @@
             #command
             Captain: [ 1, 1 ]
             BlueShield: [ 1, 1 ]
-            NanoTrasenRepresentative: [ 1, 1 ]
+            # NanoTrasenRepresentative: [ 1, 1 ]
             #service
             HeadOfPersonnel: [ 1, 1 ]
             SeniorService: [ 1, 1]
