@@ -182,6 +182,7 @@ public sealed class ArenaLobbySystem : EntitySystem
     {
         if (!_createCooldownUntil.TryGetValue(userId, out var until))
             return 0;
+
         var remaining = (until - _gameTiming.CurTime).TotalSeconds;
         return remaining > 0 ? (int)Math.Ceiling(remaining) : 0;
     }
