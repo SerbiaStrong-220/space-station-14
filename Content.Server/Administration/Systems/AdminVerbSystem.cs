@@ -73,6 +73,7 @@ namespace Content.Server.Administration.Systems
         [Dependency] private readonly SharedBuckleSystem _buckle = default!;
         [Dependency] private readonly SharedFlatpackSystem _flatpack = default!;
 
+
         private readonly Dictionary<ICommonSession, List<EditSolutionsEui>> _openSolutionUis = new();
 
         public override void Initialize()
