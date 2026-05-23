@@ -324,11 +324,13 @@ public sealed class ArenaLobbySystem : EntitySystem
     {
         if (!TryComp<MindContainerComponent>(body, out var container) || !container.HasMind)
             return;
+
         if (!TryComp<MindComponent>(container.Mind, out var mind))
             return;
 
         if (mind.VisitingEntity != null)
             _mindSystem.UnVisit(container.Mind.Value, mind);
+
         _mindSystem.WipeMind(container.Mind.Value, mind);
     }
 
