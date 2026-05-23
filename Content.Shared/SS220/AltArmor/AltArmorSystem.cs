@@ -32,7 +32,7 @@ public sealed class AltArmorSystem : EntitySystem
 
         FixedPoint2 durabilityCoefficient = 1;
         
-        if (TryComp<DamageableComponent>(ent, out var damageableComp) && ent.Comp.DamageAffectsProtection && ent.Comp.ZeroProtectionThreshold != 0)
+        if (TryComp<DamageableComponent>(ent, out var damageableComp) && ent.Comp.DamageAffectsProtection)
         {
             durabilityCoefficient = 1 - (_damageable.GetTotalDamage(ent.Owner) / ent.Comp.ZeroProtectionThreshold);
 
