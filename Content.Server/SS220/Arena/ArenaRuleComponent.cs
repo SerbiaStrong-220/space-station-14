@@ -1,13 +1,13 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Roles;
-using Content.Shared.StatusIcon;
+using Content.Shared.SS220.Arena.Lobby;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.Arena;
 
-[RegisterComponent, Access(typeof(TwoPlayerArenaRuleSystem))]
-public sealed partial class TwoPlayerArenaRuleComponent : Component
+[RegisterComponent, Access(typeof(ArenaRuleSystem), typeof(Lobby.ArenaLobbySystem))]
+public sealed partial class ArenaRuleComponent : Component
 {
     [DataField]
     public List<ArenaMapEntry> Maps = new();
@@ -27,27 +27,33 @@ public sealed partial class TwoPlayerArenaRuleComponent : Component
     [DataField]
     public TimeSpan RespawnDelay = TimeSpan.FromSeconds(2);
 
-    [ViewVariables]
-    public int TeamASize;
-
-    [ViewVariables]
-    public int TeamBSize;
+    [DataField]
+    public ArenaLifecycle Lifecycle = ArenaLifecycle.Rotation;
 
     [DataField]
-    public ProtoId<FactionIconPrototype> TeamAIcon = "ArenaTeamAIcon";
+    public ArenaGameMode Mode = ArenaGameMode.Duel;
 
     [DataField]
-    public ProtoId<FactionIconPrototype> TeamBIcon = "ArenaTeamBIcon";
+    public bool ShowInLobby;
+
+    [DataField]
+    public string DisplayName = string.Empty;
+
+    [DataField]
+    public string Description = string.Empty;
+
+    [DataField]
+    public string DisplayCategory = "duel";
+
+    [DataField]
+    public int MaxPlayers = 2;
+
+    [ViewVariables]
+    public Dictionary<string, ArenaTeam> Teams = new();
 
     public ArenaPhase Phase = ArenaPhase.Disabled;
 
     public EntityUid? ArenaMapUid;
-
-    [ViewVariables]
-    public List<EntityUid> TeamA = new();
-
-    [ViewVariables]
-    public List<EntityUid> TeamB = new();
 
     public TimeSpan? CountdownEnd;
     public TimeSpan? FightEndAt;
@@ -57,11 +63,17 @@ public sealed partial class TwoPlayerArenaRuleComponent : Component
 
     public int CurrentMapIndex;
     public ProtoId<StartingGearPrototype>? CurrentLoadout;
-    public List<ProtoId<StartingGearPrototype>>? TeamALoadouts;
-    public List<ProtoId<StartingGearPrototype>>? TeamBLoadouts;
+    public List<ProtoId<StartingGearPrototype>>? CurrentLoadouts;
     public TimeSpan CurrentCountdown;
 
     public readonly HashSet<EntityUid> Barriers = new();
+}
+
+public sealed class ArenaTeam
+{
+    public int Capacity;
+    public List<EntityUid> Members = new();
+    public List<ProtoId<StartingGearPrototype>>? Loadouts;
 }
 
 [DataDefinition]
@@ -80,17 +92,15 @@ public sealed partial class ArenaMapEntry
     public TimeSpan CountdownDuration = TimeSpan.FromSeconds(10);
 }
 
-public enum ArenaPhase : byte
-{
-    Disabled = 0,
-    WaitingForPlayers = 1,
-    Countdown = 2,
-    Fighting = 3,
-    Resetting = 4,
-}
 
 public enum ArenaSelectionMode : byte
 {
     Rotation = 0,
     Random = 1,
+}
+
+public enum ArenaLifecycle : byte
+{
+    Rotation = 0,
+    DeleteOnKill = 1,
 }
