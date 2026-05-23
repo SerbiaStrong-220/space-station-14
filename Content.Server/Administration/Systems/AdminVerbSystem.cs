@@ -1,4 +1,3 @@
-using System.Globalization;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Administration.UI;
@@ -41,10 +40,6 @@ using Content.Shared.Buckle.Components;
 using Content.Shared.Construction;
 using static Content.Shared.Configurable.ConfigurationComponent;
 using Content.Shared.SS220.Experience;
-using Content.Shared.Damage;
-using Content.Shared.Damage.Components;
-using Content.Shared.Mobs;
-using Content.Shared.Sprite;
 
 namespace Content.Server.Administration.Systems
 {
@@ -77,7 +72,6 @@ namespace Content.Server.Administration.Systems
         [Dependency] private readonly SiliconLawSystem _siliconLawSystem = default!;
         [Dependency] private readonly SharedBuckleSystem _buckle = default!;
         [Dependency] private readonly SharedFlatpackSystem _flatpack = default!;
-        [Dependency] private readonly SharedScaleVisualsSystem _scaleVisuals = default!;
 
         private const string HealthChangeDamageType = "Blunt";
         private readonly Dictionary<ICommonSession, List<EditSolutionsEui>> _openSolutionUis = new();
@@ -509,120 +503,6 @@ namespace Content.Server.Administration.Systems
                 };
                 args.Verbs.Add(verb);
             }
-
-            // SS220-traits-debug-begin
-            if (_adminManager.HasAdminFlag(player, AdminFlags.Debug) && HasComp<DamageableComponent>(args.Target))
-            {
-                Verb setLivesVerb = new()
-                {
-                    Text = Loc.GetString("admin-verbs-lives-title"),
-                    Category = VerbCategory.Debug,
-                    // TODO need a proper icon here
-                    Icon = new SpriteSpecifier.Texture(new ("/Textures/Interface/VerbIcons/rejuvenate.svg.192dpi.png")),
-                    Act = () =>
-                    {
-                        if (!_mobThresholdSystem.TryGetThresholdForState(args.Target, MobState.Dead, out var deadThreshold))
-                            return;
-
-                        var maxHp = (int)deadThreshold.Value;
-
-                        _quickDialog.OpenDialog(player,
-                            Loc.GetString("admin-verbs-lives-title"),
-                            Loc.GetString("admin-verbs-lives-health", ("maxHp", maxHp)),
-                            (int desiredHp) =>
-                            {
-                                if (Deleted(args.Target)) return;
-
-                                var targetHp = Math.Clamp(desiredHp, 0, maxHp);
-                                var targetDamage = maxHp - targetHp;
-                                var currentDamage = (int)_damageable.GetTotalDamage(args.Target);
-                                var damageDelta = targetDamage - currentDamage;
-
-                                if (damageDelta == 0) return;
-
-                                var damageSpec = new DamageSpecifier();
-                                damageSpec.DamageDict.Add(HealthChangeDamageType, damageDelta);
-                                _damageable.TryChangeDamage(args.Target, damageSpec, true);
-                            });
-                    }
-                };
-                args.Verbs.Add(setLivesVerb);
-            }
-
-            if (_adminManager.HasAdminFlag(player, AdminFlags.Debug))
-            {
-                Verb traitsVerb = new()
-                {
-                    Text = Loc.GetString("admin-verbs-traits-title"),
-                    Category = VerbCategory.Debug,
-                    // TODO need a proper icon here
-                    Act = () =>
-                    {
-                        var traitsEui = new UI.ManageTraitsEui(args.Target, Name(args.Target));
-                        _euiManager.OpenEui(traitsEui, player);
-                    }
-                };
-                args.Verbs.Add(traitsVerb);
-            }
-
-            if (_adminManager.HasAdminFlag(player, AdminFlags.Debug))
-            {
-                Verb statusesVerb = new()
-                {
-                    Text = Loc.GetString("admin-verbs-statuses-title"),
-                    Category = VerbCategory.Debug,
-                    // TODO need a proper icon here
-                    Act = () =>
-                    {
-                        var statusesEui = new Content.Server.Administration.UI.ManageStatusesEui(args.Target, Name(args.Target));
-                        _euiManager.OpenEui(statusesEui, player);
-                    }
-                };
-                args.Verbs.Add(statusesVerb);
-            }
-
-            if (_adminManager.HasAdminFlag(player, AdminFlags.Debug))
-            {
-                Verb scaleVerb = new()
-                {
-                    Text = Loc.GetString("admin-verbs-scale-title"),
-                    Category = VerbCategory.Debug,
-                    // TODO need a proper icon here
-                    Act = () =>
-                    {
-                        var curScale = _scaleVisuals.GetSpriteScale(args.Target);
-                        var curX = curScale.X.ToString("0.##");
-                        var curY = curScale.Y.ToString("0.##");
-
-                        _quickDialog.OpenDialog(player,
-                            Loc.GetString("admin-verbs-scale-title"),
-                            Loc.GetString("admin-verbs-scale-x-prompt", ("current", curX)),
-                            Loc.GetString("admin-verbs-scale-y-prompt", ("current", curY)),
-                            (string scaleXStr, string scaleYStr) =>
-                            {
-                                if (Deleted(args.Target))
-                                    return;
-
-                                scaleXStr = scaleXStr.Replace(',', '.');
-                                scaleYStr = scaleYStr.Replace(',', '.');
-
-                                if (!float.TryParse(scaleXStr, NumberStyles.Any, CultureInfo.InvariantCulture, out var scaleX) ||
-                                    !float.TryParse(scaleYStr, NumberStyles.Any, CultureInfo.InvariantCulture, out var scaleY))
-                                {
-                                    return;
-                                }
-
-                                if (scaleX <= 0f || scaleY <= 0f)
-                                    return;
-
-                                var newScale = new System.Numerics.Vector2(scaleX, scaleY);
-                                _scaleVisuals.SetSpriteScale(args.Target, newScale);
-                            });
-                    }
-                };
-                args.Verbs.Add(scaleVerb);
-            }
-            // SS220-traits-debug-end
 
             // Control mob verb
             if ((_toolshed.ActivePermissionController?.CheckInvokable(new CommandSpec(_toolshed.DefaultEnvironment.GetCommand("mind"), "control"), player, out _) ?? false) &&
