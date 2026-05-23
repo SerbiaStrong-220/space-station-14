@@ -4,7 +4,7 @@
   roundStart: true
   prototype: MobIpc
   defaultSkinTone: "#eb943d"
-  dollPrototype: MobIpcDummy
+  dollPrototype: AppearanceIpc
   skinColoration: Hues
   maleFirstNames: NamesIpcFirstMale
   femaleFirstNames: NamesIpcFirstFemale
