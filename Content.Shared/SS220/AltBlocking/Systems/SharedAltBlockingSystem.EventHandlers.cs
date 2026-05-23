@@ -66,15 +66,10 @@ public sealed partial class SharedAltBlockingSystem
             if (SharedRandomExtensions.PredictedProb(_gameTiming, ent.Comp.Blocking ? blockComp.ActiveMeleeBlockProb : blockComp.MeleeBlockProb, (NetEntity)netItem))
             {
                 if (_playerManager.LocalEntity == ent.Owner && _gameTiming.IsFirstTimePredicted)
-                {
                     _audio.PlayLocal(blockComp.BlockSound, item, ent.Owner);
-                    _popupSystem.PopupClient(Loc.GetString(BlockShotLocale), item);
-                }
+
                 if (_gameTiming.IsFirstTimePredicted)
-                {
                     _audio.PlayEntity(blockComp.BlockSound, ent.Owner, item);
-                    _popupSystem.PopupEntity(Loc.GetString(BlockShotLocale), item);
-                }
 
                 args.Blocker = item;
                 args.Cancelled = true;
@@ -142,15 +137,10 @@ public sealed partial class SharedAltBlockingSystem
             if (SharedRandomExtensions.PredictedProb(_gameTiming, owner.Comp.Blocking ? blockComp.ActiveRangeBlockProb : blockComp.RangeBlockProb, (NetEntity)netItem))
             {
                 if (_playerManager.LocalEntity == owner && _gameTiming.IsFirstTimePredicted)
-                {
                     _audio.PlayLocal(blockComp.BlockSound, item, owner);
-                    _popupSystem.PopupClient(Loc.GetString(BlockShotLocale), item);
-                }
+
                 if (_gameTiming.IsFirstTimePredicted)
-                {
                     _audio.PlayEntity(blockComp.BlockSound, owner, item);
-                    _popupSystem.PopupEntity(Loc.GetString(BlockShotLocale), item);
-                }
 
                 if (damage != null)
                     _damageable.TryChangeDamage(item, damage);
