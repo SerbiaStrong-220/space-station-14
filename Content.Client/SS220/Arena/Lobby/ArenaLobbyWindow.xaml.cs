@@ -7,6 +7,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.IoC;
+using Robust.Shared.Localization;
 using static Robust.Client.UserInterface.Controls.BoxContainer;
 
 namespace Content.Client.SS220.Arena.Lobby;
@@ -14,6 +15,8 @@ namespace Content.Client.SS220.Arena.Lobby;
 [GenerateTypedNameReferences]
 public sealed partial class ArenaLobbyWindow : DefaultWindow
 {
+    [Dependency] private readonly ILocalizationManager _loc = default!;
+
     private const string CategoryAll = "";
 
     public event Action<string>? OnCreateRequested;
@@ -76,7 +79,7 @@ public sealed partial class ArenaLobbyWindow : DefaultWindow
 
     private Button BuildCategoryButton(string category, string locKey)
     {
-        var label = Loc.TryGetString(locKey, out var text) ? text : category;
+        var label = _loc.TryGetString(locKey, out var text) ? text : category;
         var button = new Button
         {
             Text = label,
