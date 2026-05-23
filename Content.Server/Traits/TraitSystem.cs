@@ -81,6 +81,7 @@ public sealed class TraitSystem : EntitySystem
         }
     }
 
+    // SS220-traits-debug-begin
     public List<string> GetActiveTraits(EntityUid uid)
     {
         var activeTraits = new List<string>();
@@ -101,7 +102,7 @@ public sealed class TraitSystem : EntitySystem
         return activeTraits;
     }
 
-    public void AddTrait(EntityUid uid, string traitId)
+    public void AddTrait(EntityUid uid, string traitId, bool spawnGear = true)
     {
         if (!_prototypeManager.TryIndex<TraitPrototype>(traitId, out var traitPrototype)) return;
 
@@ -119,7 +120,7 @@ public sealed class TraitSystem : EntitySystem
             special.AfterEquip(uid);
         }
 
-        if (traitPrototype.TraitGear != null && TryComp(uid, out HandsComponent? handsComponent))
+        if (spawnGear && traitPrototype.TraitGear != null && TryComp(uid, out HandsComponent? handsComponent))
         {
             var coords = Transform(uid).Coordinates;
             var inhandEntity = Spawn(traitPrototype.TraitGear, coords);
@@ -137,4 +138,5 @@ public sealed class TraitSystem : EntitySystem
             RemComp(uid, entry.Component.GetType());
         }
     }
+    // SS220-traits-debug-end
 }

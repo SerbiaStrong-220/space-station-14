@@ -1,9 +1,15 @@
-﻿<DefaultWindow
+﻿<!-- © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt -->
+
+<DefaultWindow
     xmlns="https://spacestation14.io"
     Title="{Loc admin-verbs-traits-title}"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="Content.Client.Administration.UI.ManageTraits.ManageTraitsWindow"
     MinSize="550 400">
+
     <BoxContainer Orientation="Vertical" Margin="5">
         <Label Name="TargetLabel" Text="{Loc admin-verbs-traits-target-player}" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+
         <BoxContainer Orientation="Horizontal" VerticalExpand="True">
             <BoxContainer Orientation="Vertical" HorizontalExpand="True">
                 <Label Text="{Loc admin-verbs-traits-available}" HorizontalAlignment="Center"/>
@@ -14,6 +20,7 @@
                 <Button Name="AddTraitButton" Text="&gt;&gt;" ToolTip="{Loc admin-verbs-traits-add-tooltip}" Disabled="True"/>
                 <Control MinHeight="10"/>
                 <Button Name="RemoveTraitButton" Text="&lt;&lt;" ToolTip="{Loc admin-verbs-traits-remove-tooltip}" Disabled="True"/>
+                <CheckBox Name="SpawnGearCheckBox" Text="{Loc admin-verbs-traits-tools-checkbox}" Pressed="True" ToolTip="{Loc admin-verbs-traits-tools-checkbox-desc}"/>
             </BoxContainer>
             <BoxContainer Orientation="Vertical" HorizontalExpand="True">
                 <Label Text="{Loc admin-verbs-traits-active}" HorizontalAlignment="Center"/>

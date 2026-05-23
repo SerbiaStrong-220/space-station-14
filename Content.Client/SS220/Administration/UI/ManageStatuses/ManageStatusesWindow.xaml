@@ -1,0 +1,30 @@
+﻿<DefaultWindow
+    xmlns="https://spacestation14.io"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="Content.Client.Administration.UI.ManageStatuses.ManageStatusesWindow"
+    Title="{Loc admin-verbs-statuses-title}"
+    MinSize="550 400">
+    <BoxContainer Orientation="Vertical" Margin="5">
+        <Label Name="TargetLabel" Text="{Loc admin-verbs-traits-target-player}" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+
+        <BoxContainer Orientation="Horizontal" VerticalExpand="True">
+            <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                <Label Text="{Loc admin-verbs-statuses-available}" HorizontalAlignment="Center"/>
+                <LineEdit Name="SearchAvailable" PlaceHolder="{Loc admin-verbs-traits-search-placeholder}"/>
+                <ItemList Name="AvailableStatusesList" VerticalExpand="True" SelectMode="Single"/>
+            </BoxContainer>
+
+            <BoxContainer Orientation="Vertical" VerticalAlignment="Center" Margin="10,0">
+                <Button Name="AddStatusButton" Text="&gt;&gt;" ToolTip="{Loc admin-verbs-statuses-add-tooltip}" Disabled="True"/>
+                <Control MinHeight="10"/>
+                <Button Name="RemoveStatusButton" Text="&lt;&lt;" ToolTip="{Loc admin-verbs-statuses-remove-tooltip}" Disabled="True"/>
+            </BoxContainer>
+
+            <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                <Label Text="{Loc admin-verbs-statuses-active}" HorizontalAlignment="Center"/>
+                <LineEdit Name="SearchActive" PlaceHolder="{Loc admin-verbs-traits-search-placeholder}"/>
+                <ItemList Name="ActiveStatusesList" VerticalExpand="True" SelectMode="Single"/>
+            </BoxContainer>
+        </BoxContainer>
+    </BoxContainer>
+</DefaultWindow>
