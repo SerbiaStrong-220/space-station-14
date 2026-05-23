@@ -28,6 +28,7 @@ public sealed class ArenaLobbyGhostActionSystem : EntitySystem
     {
         if (Terminating(ent.Owner))
             return;
+
         _actions.RemoveAction(ent.Owner, ent.Comp.ActionEntity);
     }
 
