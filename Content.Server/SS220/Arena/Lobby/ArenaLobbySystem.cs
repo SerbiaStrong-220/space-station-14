@@ -67,6 +67,8 @@ public sealed class ArenaLobbySystem : EntitySystem
 
         _refreshAccumulator = 0f;
         EndEmptyCreativeArenas();
+        _refreshAccumulator = 0f;
+        EndEmptyCreativeArenas();
 
         if (_openUis.Count == 0)
             return;
