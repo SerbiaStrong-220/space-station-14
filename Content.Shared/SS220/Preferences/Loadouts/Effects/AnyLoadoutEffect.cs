@@ -28,7 +28,7 @@ public sealed partial class AnyLoadoutEffect : LoadoutEffect
             reasons.Add(effectReason.ToMarkup());
         }
 
-        reason = FormattedMessage.FromMarkupOrThrow(string.Join($"\n{Loc.GetString("group-requirement-or")}\n", reasons));
+        reason = FormattedMessage.FromMarkupOrThrow(string.Join($"\n{Loc.GetString("generic-or")}\n", reasons));
         return false;
     }
 }
