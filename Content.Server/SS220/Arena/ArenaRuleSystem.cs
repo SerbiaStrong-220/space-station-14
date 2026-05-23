@@ -214,7 +214,7 @@ public sealed class ArenaRuleSystem : GameRuleSystem<ArenaRuleComponent>
 
         if (isFirstTake)
         {
-            RegisterParticipant(ruleEnt, ent.Owner, team, ent.Comp.Team);
+            RegisterParticipant(ent.Owner, team, ent.Comp.Team);
             if (!ent.Comp.Equipped)
             {
                 EquipLoadout(ruleEnt, ent.Owner, team, team.Members.Count - 1);
@@ -252,7 +252,7 @@ public sealed class ArenaRuleSystem : GameRuleSystem<ArenaRuleComponent>
         return null;
     }
 
-    private void RegisterParticipant(Entity<ArenaRuleComponent> ent, EntityUid uid, ArenaTeam team, string teamId)
+    private void RegisterParticipant(EntityUid uid, ArenaTeam team, string teamId)
     {
         if (team.Members.Contains(uid))
             return;

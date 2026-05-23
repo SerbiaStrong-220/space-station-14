@@ -6,8 +6,8 @@ namespace Content.Shared.SS220.CCVars;
 
 public sealed partial class CCVars220
 {
-    public static readonly CVarDef<int> ArenaMaxActive =
-        CVarDef.Create("arena.max_active", 15, CVar.SERVERONLY | CVar.ARCHIVE);
+    public static readonly CVarDef<int> ArenaActiveLimit =
+        CVarDef.Create("arena.active_limit", 15, CVar.SERVERONLY | CVar.ARCHIVE);
 
     public static readonly CVarDef<int> ArenaCreateCooldown =
         CVarDef.Create("arena.create_cooldown", 60, CVar.SERVERONLY | CVar.ARCHIVE);

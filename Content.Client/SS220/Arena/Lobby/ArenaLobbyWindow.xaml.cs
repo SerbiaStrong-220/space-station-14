@@ -16,6 +16,7 @@ namespace Content.Client.SS220.Arena.Lobby;
 public sealed partial class ArenaLobbyWindow : DefaultWindow
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly IComponentFactory _factory = default!;
 
     private const string CategoryAll = "";
 
@@ -23,7 +24,14 @@ public sealed partial class ArenaLobbyWindow : DefaultWindow
     public event Action<uint>? OnJoinRequested;
     public event Action? OnRefreshRequested;
 
-    private readonly List<ArenaPrototype> _templates = new();
+    private readonly List<ArenaLobbyTemplate> _templates = new();
+
+    private sealed record ArenaLobbyTemplate(string Id, ArenaLobbyEntryComponent Entry);
+
+    private static readonly Vector2 ButtonMinSize = new(86, 0);
+    private static readonly Thickness RowMargin = new(8, 6);
+    private static readonly Thickness PlayersMargin = new(0, 0, 8, 0);
+    private static readonly Thickness NoArenasMargin = new(0, 18, 0, 0);
 
     private static readonly Color ColorWaiting = Color.FromHex("#5dadd8");
     private static readonly Color ColorCountdown = Color.FromHex("#e0c46d");
@@ -57,14 +65,20 @@ public sealed partial class ArenaLobbyWindow : DefaultWindow
     private void ReloadTemplates()
     {
         _templates.Clear();
-        foreach (var proto in _proto.EnumeratePrototypes<ArenaPrototype>())
-            _templates.Add(proto);
-        _templates.Sort((a, b) => string.CompareOrdinal(a.Name, b.Name));
+        foreach (var proto in _proto.EnumeratePrototypes<EntityPrototype>())
+        {
+            if (proto.Abstract)
+                continue;
+            if (!proto.TryGetComponent<ArenaLobbyEntryComponent>(out var entry, _factory))
+                continue;
+            _templates.Add(new ArenaLobbyTemplate(proto.ID, entry));
+        }
+        _templates.Sort((a, b) => string.CompareOrdinal(a.Entry.Name, b.Entry.Name));
     }
 
     private void RebuildCategories(ArenaLobbyEuiState state)
     {
-        var categories = _templates.Select(t => t.Category)
+        var categories = _templates.Select(t => t.Entry.Category)
             .Concat(state.Arenas.Select(a => a.Category))
             .Where(c => !string.IsNullOrEmpty(c))
             .Distinct()
@@ -132,7 +146,7 @@ public sealed partial class ArenaLobbyWindow : DefaultWindow
                 Text = Loc.GetString("arena-lobby-no-arenas"),
                 StyleClasses = { "LabelSubText" },
                 HorizontalAlignment = HAlignment.Center,
-                Margin = new Thickness(0, 18, 0, 0),
+                Margin = NoArenasMargin,
             });
         }
         else
@@ -148,9 +162,9 @@ public sealed partial class ArenaLobbyWindow : DefaultWindow
     }
 
     private bool MatchesCategory(ArenaLobbyEntry entry) => _selectedCategory == CategoryAll || entry.Category == _selectedCategory;
-    private bool MatchesCategory(ArenaPrototype tmpl) => _selectedCategory == CategoryAll || tmpl.Category == _selectedCategory;
+    private bool MatchesCategory(ArenaLobbyTemplate tmpl) => _selectedCategory == CategoryAll || tmpl.Entry.Category == _selectedCategory;
 
-    private Control BuildArenaRow(ArenaLobbyEntry entry)
+    private PanelContainer BuildArenaRow(ArenaLobbyEntry entry)
     {
         var (statusKey, statusColor) = entry.Status switch
         {
@@ -178,14 +192,14 @@ public sealed partial class ArenaLobbyWindow : DefaultWindow
             StyleClasses = { "LabelSubText" },
             HorizontalAlignment = HAlignment.Right,
             HorizontalExpand = true,
-            Margin = new Thickness(0, 0, 8, 0),
+            Margin = PlayersMargin,
         };
 
         var join = new Button
         {
             Text = Loc.GetString("arena-lobby-join"),
             Disabled = entry.Status == ArenaLobbyStatus.Finished || entry.Players >= entry.MaxPlayers,
-            MinSize = new Vector2(86, 0),
+            MinSize = ButtonMinSize,
         };
         var id = entry.ArenaId;
         join.OnPressed += _ => OnJoinRequested?.Invoke(id);
@@ -195,7 +209,7 @@ public sealed partial class ArenaLobbyWindow : DefaultWindow
             Orientation = LayoutOrientation.Horizontal,
             VerticalAlignment = VAlignment.Center,
             SeparationOverride = 8,
-            Margin = new Thickness(8, 6),
+            Margin = RowMargin,
             Children = { name, status, players, join },
         };
 
@@ -207,29 +221,30 @@ public sealed partial class ArenaLobbyWindow : DefaultWindow
         };
     }
 
-    private Control BuildTemplateRow(ArenaPrototype tmpl, bool canCreate)
+    private PanelContainer BuildTemplateRow(ArenaLobbyTemplate tmpl, bool canCreate)
     {
+        var entry = tmpl.Entry;
         var name = new Label
         {
-            Text = tmpl.Name,
+            Text = entry.Name,
             StyleClasses = { "LabelKeyText" },
             HorizontalExpand = true,
         };
 
         var size = new Label
         {
-            Text = Loc.GetString("arena-lobby-template-size", ("count", tmpl.MaxPlayers)),
+            Text = Loc.GetString("arena-lobby-template-size", ("count", entry.MaxPlayers)),
             StyleClasses = { "LabelSubText" },
-            Margin = new Thickness(0, 0, 8, 0),
+            Margin = PlayersMargin,
         };
 
         var create = new Button
         {
             Text = Loc.GetString("arena-lobby-create"),
             Disabled = !canCreate,
-            MinSize = new Vector2(86, 0),
+            MinSize = ButtonMinSize,
         };
-        var protoId = tmpl.ID;
+        var protoId = tmpl.Id;
         create.OnPressed += _ => OnCreateRequested?.Invoke(protoId);
 
         var top = new BoxContainer
@@ -243,16 +258,16 @@ public sealed partial class ArenaLobbyWindow : DefaultWindow
         var body = new BoxContainer
         {
             Orientation = LayoutOrientation.Vertical,
-            Margin = new Thickness(8, 6),
+            Margin = RowMargin,
             SeparationOverride = 2,
             Children = { top },
         };
 
-        if (!string.IsNullOrWhiteSpace(tmpl.Description))
+        if (!string.IsNullOrWhiteSpace(entry.Description))
         {
             body.AddChild(new Label
             {
-                Text = tmpl.Description,
+                Text = entry.Description,
                 StyleClasses = { "LabelSubText" },
                 FontColorOverride = ColorDescription,
             });

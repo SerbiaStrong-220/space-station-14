@@ -28,6 +28,7 @@ public sealed class ArenaLobbySystem : EntitySystem
     [Dependency] private readonly StationSpawningSystem _stationSpawning = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly IComponentFactory _factory = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
 
@@ -131,7 +132,7 @@ public sealed class ArenaLobbySystem : EntitySystem
             });
         }
 
-        return new ArenaLobbyEuiState(arenas, _arenas.Count, _cfg.GetCVar(CCVars220.ArenaMaxActive), hasOwnArena, GetCooldownRemaining(viewer.UserId));
+        return new ArenaLobbyEuiState(arenas, _arenas.Count, _cfg.GetCVar(CCVars220.ArenaActiveLimit), hasOwnArena, GetCooldownRemaining(viewer.UserId));
     }
 
     private int GetCooldownRemaining(NetUserId userId)
@@ -146,7 +147,7 @@ public sealed class ArenaLobbySystem : EntitySystem
     {
         Cleanup();
 
-        var max = _cfg.GetCVar(CCVars220.ArenaMaxActive);
+        var max = _cfg.GetCVar(CCVars220.ArenaActiveLimit);
         if (_arenas.Count >= max)
         {
             Log.Info($"Arena create denied: limit {max} reached.");
@@ -168,9 +169,10 @@ public sealed class ArenaLobbySystem : EntitySystem
             return;
         }
 
-        if (!_proto.TryIndex<ArenaPrototype>(arenaProtoId, out var arenaProto))
+        if (!_proto.TryIndex<EntityPrototype>(arenaProtoId, out var entryProto)
+            || !entryProto.TryGetComponent<ArenaLobbyEntryComponent>(out var entry, _factory))
         {
-            Log.Warning($"Unknown ArenaPrototype '{arenaProtoId}'.");
+            Log.Warning($"Unknown arena lobby entry '{arenaProtoId}'.");
             return;
         }
 
@@ -182,11 +184,11 @@ public sealed class ArenaLobbySystem : EntitySystem
             return;
         }
 
-        ConfigureRule(rule, arenaProto);
+        ConfigureRule(rule, entry);
 
         if (!_gameTicker.StartGameRule(ruleUid) || rule.Phase == ArenaPhase.Disabled)
         {
-            Log.Error($"Arena start failed: proto={arenaProto.ID}, map='{arenaProto.MapPath}'.");
+            Log.Error($"Arena start failed: proto={entryProto.ID}, map='{entry.MapPath}'.");
             _gameTicker.EndGameRule(ruleUid);
             QueueDel(ruleUid);
             return;
@@ -205,7 +207,7 @@ public sealed class ArenaLobbySystem : EntitySystem
         _arenaCreators[id] = session.UserId;
         _arenaWasJoined.Add(id);
         _createCooldownUntil[session.UserId] = _gameTiming.CurTime + TimeSpan.FromSeconds(_cfg.GetCVar(CCVars220.ArenaCreateCooldown));
-        Log.Info($"Arena created: id={id}, proto={arenaProto.ID}, host={session.Name}.");
+        Log.Info($"Arena created: id={id}, proto={entryProto.ID}, host={session.Name}.");
         CloseEuiFor(session);
         RefreshAll();
     }
@@ -262,21 +264,21 @@ public sealed class ArenaLobbySystem : EntitySystem
         };
     }
 
-    private static void ConfigureRule(ArenaRuleComponent rule, ArenaPrototype proto)
+    private static void ConfigureRule(ArenaRuleComponent rule, ArenaLobbyEntryComponent entry)
     {
         rule.OneShot = true;
         rule.WaitingTimeout = TimeSpan.FromSeconds(60);
-        rule.Mode = proto.Mode;
-        rule.DisplayName = proto.Name;
-        rule.DisplayCategory = proto.Category;
-        rule.MaxPlayers = proto.MaxPlayers;
+        rule.Mode = entry.Mode;
+        rule.DisplayName = entry.Name;
+        rule.DisplayCategory = entry.Category;
+        rule.MaxPlayers = entry.MaxPlayers;
         rule.Maps.Clear();
         rule.Maps.Add(new ArenaMapEntry
         {
-            Path = proto.MapPath,
-            Loadout = proto.Loadout,
-            Loadouts = proto.Loadouts,
-            CountdownDuration = proto.CountdownDuration,
+            Path = entry.MapPath,
+            Loadout = entry.Loadout,
+            Loadouts = entry.Loadouts,
+            CountdownDuration = entry.CountdownDuration,
         });
     }
 
