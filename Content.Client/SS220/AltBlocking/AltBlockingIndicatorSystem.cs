@@ -5,7 +5,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.AltBlocking;
 
-public sealed class AltBLockingIndicatorSystem : EntitySystem
+public sealed class AltBlockingIndicatorSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 

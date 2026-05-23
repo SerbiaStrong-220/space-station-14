@@ -26,12 +26,12 @@ namespace Content.Shared.SS220.AltBlocking;
 
 public sealed partial class SharedAltBlockingSystem : EntitySystem
 {
-    private static readonly string ActiveBlockingOwnerLocale = "actively-blocking-attack";
-    private static readonly string ActiveBlockingOthersLocale = "actively-blocking-others";
-    private static readonly string StopActiveBlockingOwnerLocale = "actively-blocking-stop";
-    private static readonly string StopActiveBlockingOthersLocale = "actively-blocking-stop-others";
-    private static readonly string BlockShotLocale = "block-shot";
-    private static readonly string BlockThrowingLocale = "adthrowing-block";
+    private static readonly LocId ActiveBlockingOwnerLocale = "actively-blocking-attack";
+    private static readonly LocId ActiveBlockingOthersLocale = "actively-blocking-others";
+    private static readonly LocId StopActiveBlockingOwnerLocale = "actively-blocking-stop";
+    private static readonly LocId StopActiveBlockingOthersLocale = "actively-blocking-stop-others";
+    private static readonly LocId BlockShotLocale = "block-shot";
+    private static readonly LocId BlockThrowingLocale = "adthrowing-block";
 
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;

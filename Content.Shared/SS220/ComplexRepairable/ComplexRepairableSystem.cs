@@ -14,8 +14,8 @@ namespace Content.Shared.SS220.ComplexRepairable;
 
 public sealed partial class ComplexRepairableSystem : EntitySystem
 {
-    private static readonly string MaterialRepair = "complex-repairable-material-repair";
-    private static readonly string RepairDone = "comp-repairable-repair";
+    private static readonly LocId MaterialRepair = "complex-repairable-material-repair";
+    private static readonly LocId RepairDone = "comp-repairable-repair";
 
     [Dependency] private readonly SharedToolSystem _toolSystem = default!;
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
