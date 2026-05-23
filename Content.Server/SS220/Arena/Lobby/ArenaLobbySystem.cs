@@ -380,16 +380,20 @@ public sealed class ArenaLobbySystem : EntitySystem
         {
             if (!_arenaWasJoined.Contains(id))
                 continue;
+
             if (!TryComp<ArenaRuleComponent>(ruleUid, out var rule) || rule.Mode != ArenaGameMode.Creative)
                 continue;
+
             if (CountOccupied(rule) > 0)
                 continue;
 
             toEnd ??= new List<EntityUid>();
             toEnd.Add(ruleUid);
         }
+
         if (toEnd == null)
             return;
+
         foreach (var uid in toEnd)
         {
             Log.Info($"Creative arena empty, ending: {ToPrettyString(uid)}.");
