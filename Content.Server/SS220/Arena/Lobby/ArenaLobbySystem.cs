@@ -295,8 +295,7 @@ public sealed class ArenaLobbySystem : EntitySystem
         if (rule.Mode == ArenaGameMode.Creative)
             body = ReplaceWithPlayerCharacter(session, body.Value);
 
-        var mind = _mindSystem.CreateMind(session.UserId, MetaData(body.Value).EntityName);
-        _mindSystem.SetUserId(mind, session.UserId);
+        var mind = _mindSystem.CreateMind(session.UserId, Name(body.Value));
         _mindSystem.MakeSentient(body.Value);
         _mindSystem.TransferTo(mind, body.Value);
 
@@ -333,7 +332,7 @@ public sealed class ArenaLobbySystem : EntitySystem
 
         if (mind.VisitingEntity != null)
             _mindSystem.UnVisit(container.Mind.Value, mind);
-        _mindSystem.WipeMind(container.Mind, mind);
+        _mindSystem.WipeMind(container.Mind.Value, mind);
     }
 
     private int CountOccupied(ArenaRuleComponent rule)
@@ -358,7 +357,7 @@ public sealed class ArenaLobbySystem : EntitySystem
         var query = AllEntityQuery<ArenaParticipantComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out _, out var xform))
         {
-            if (xform.MapUid == mapUid && !IsBodyOccupied(uid))
+            if (xform.MapUid == mapUid && !TerminatingOrDeleted(uid) && !IsBodyOccupied(uid))
                 return uid;
         }
         return null;
