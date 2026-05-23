@@ -32,7 +32,6 @@ public sealed class ArenaLobbySystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
 
-    private const string LobbyInstanceRule = "ArenaLobbyInstance";
     private const float RefreshIntervalSeconds = 3f;
 
     private uint _nextArenaId = 1;
@@ -48,6 +47,7 @@ public sealed class ArenaLobbySystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
+        SubscribeLocalEvent<ArenaRuleComponent, EntityTerminatingEvent>(OnArenaTerminating);
         _playerManager.PlayerStatusChanged += OnPlayerStatusChanged;
     }
 
@@ -67,8 +67,10 @@ public sealed class ArenaLobbySystem : EntitySystem
 
         _refreshAccumulator = 0f;
         EndEmptyCreativeArenas();
+
         if (_openUis.Count == 0)
             return;
+
         RefreshAll();
     }
 
@@ -82,6 +84,24 @@ public sealed class ArenaLobbySystem : EntitySystem
             eui.Close();
         _openUis.Clear();
         _nextArenaId = 1;
+    }
+
+    private void OnArenaTerminating(Entity<ArenaRuleComponent> ent, ref EntityTerminatingEvent args)
+    {
+        uint? toRemove = null;
+        foreach (var (id, uid) in _arenas)
+        {
+            if (uid != ent.Owner)
+                continue;
+            toRemove = id;
+            break;
+        }
+        if (toRemove is not { } id2)
+            return;
+
+        _arenas.Remove(id2);
+        _arenaCreators.Remove(id2);
+        _arenaWasJoined.Remove(id2);
     }
 
     private void OnPlayerStatusChanged(object? sender, SessionStatusEventArgs args)
@@ -119,7 +139,10 @@ public sealed class ArenaLobbySystem : EntitySystem
         foreach (var (id, ruleUid) in _arenas)
         {
             if (!TryComp<ArenaRuleComponent>(ruleUid, out var rule))
+            {
+                Log.Error($"Arena id={id} references {ToPrettyString(ruleUid)} without {nameof(ArenaRuleComponent)}; cleanup missed.");
                 continue;
+            }
 
             arenas.Add(new ArenaLobbyEntry
             {
@@ -127,12 +150,30 @@ public sealed class ArenaLobbySystem : EntitySystem
                 Name = rule.DisplayName,
                 Players = CountOccupied(rule),
                 MaxPlayers = rule.MaxPlayers,
-                Status = MapPhase(rule.Phase),
+                Phase = rule.Phase,
                 Category = rule.DisplayCategory,
             });
         }
 
-        return new ArenaLobbyEuiState(arenas, _arenas.Count, _cfg.GetCVar(CCVars220.ArenaActiveLimit), hasOwnArena, GetCooldownRemaining(viewer.UserId));
+        var templates = new List<ArenaLobbyTemplate>();
+        foreach (var proto in _proto.EnumeratePrototypes<EntityPrototype>())
+        {
+            if (proto.Abstract)
+                continue;
+            if (!proto.TryGetComponent<ArenaRuleComponent>(out var rule, _factory) || !rule.ShowInLobby)
+                continue;
+
+            templates.Add(new ArenaLobbyTemplate
+            {
+                Id = proto.ID,
+                Name = rule.DisplayName,
+                Description = rule.Description,
+                Category = rule.DisplayCategory,
+                MaxPlayers = rule.MaxPlayers,
+            });
+        }
+
+        return new ArenaLobbyEuiState(arenas, templates, _arenas.Count, _cfg.GetCVar(CCVars220.ArenaActiveLimit), hasOwnArena, GetCooldownRemaining(viewer.UserId));
     }
 
     private int GetCooldownRemaining(NetUserId userId)
@@ -145,50 +186,35 @@ public sealed class ArenaLobbySystem : EntitySystem
 
     public void TryCreateArena(ICommonSession session, string arenaProtoId)
     {
-        Cleanup();
-
         var max = _cfg.GetCVar(CCVars220.ArenaActiveLimit);
         if (_arenas.Count >= max)
-        {
-            Log.Info($"Arena create denied: limit {max} reached.");
-            RefreshAll();
             return;
-        }
 
         if (_arenaCreators.ContainsValue(session.UserId))
-        {
-            Log.Info($"Arena create denied: player {session.Name} already has an active arena.");
-            RefreshAll();
             return;
-        }
 
         if (GetCooldownRemaining(session.UserId) > 0)
-        {
-            Log.Info($"Arena create denied: player {session.Name} on cooldown.");
-            RefreshAll();
             return;
-        }
 
         if (!_proto.TryIndex<EntityPrototype>(arenaProtoId, out var entryProto)
-            || !entryProto.TryGetComponent<ArenaLobbyEntryComponent>(out var entry, _factory))
+            || !entryProto.TryGetComponent<ArenaRuleComponent>(out var protoRule, _factory)
+            || !protoRule.ShowInLobby)
         {
             Log.Warning($"Unknown arena lobby entry '{arenaProtoId}'.");
             return;
         }
 
-        var ruleUid = _gameTicker.AddGameRule(LobbyInstanceRule);
+        var ruleUid = _gameTicker.AddGameRule(arenaProtoId);
         if (!TryComp<ArenaRuleComponent>(ruleUid, out var rule))
         {
-            Log.Error($"'{LobbyInstanceRule}' prototype is missing {nameof(ArenaRuleComponent)}.");
+            Log.Error($"'{arenaProtoId}' prototype is missing {nameof(ArenaRuleComponent)}.");
             QueueDel(ruleUid);
             return;
         }
 
-        ConfigureRule(rule, entry);
-
         if (!_gameTicker.StartGameRule(ruleUid) || rule.Phase == ArenaPhase.Disabled)
         {
-            Log.Error($"Arena start failed: proto={entryProto.ID}, map='{entry.MapPath}'.");
+            Log.Error($"Arena start failed: proto={arenaProtoId}.");
             _gameTicker.EndGameRule(ruleUid);
             QueueDel(ruleUid);
             return;
@@ -207,7 +233,7 @@ public sealed class ArenaLobbySystem : EntitySystem
         _arenaCreators[id] = session.UserId;
         _arenaWasJoined.Add(id);
         _createCooldownUntil[session.UserId] = _gameTiming.CurTime + TimeSpan.FromSeconds(_cfg.GetCVar(CCVars220.ArenaCreateCooldown));
-        Log.Info($"Arena created: id={id}, proto={entryProto.ID}, host={session.Name}.");
+        Log.Info($"Arena created: id={id}, proto={arenaProtoId}, host={session.Name}.");
         CloseEuiFor(session);
         RefreshAll();
     }
@@ -217,21 +243,17 @@ public sealed class ArenaLobbySystem : EntitySystem
         if (!_arenas.TryGetValue(arenaId, out var ruleUid)
             || !TryComp<ArenaRuleComponent>(ruleUid, out var rule))
         {
-            RefreshAll();
             return;
         }
 
         if (!IsJoinablePhase(rule.Phase))
-        {
-            Log.Info($"Arena join denied (phase {rule.Phase}): id={arenaId}, player={session.Name}.");
             return;
-        }
 
-        if (JoinFreeSlot(session, ruleUid, rule))
-        {
-            _arenaWasJoined.Add(arenaId);
-            CloseEuiFor(session);
-        }
+        if (!JoinFreeSlot(session, ruleUid, rule))
+            return;
+
+        _arenaWasJoined.Add(arenaId);
+        CloseEuiFor(session);
         RefreshAll();
     }
 
@@ -243,7 +265,6 @@ public sealed class ArenaLobbySystem : EntitySystem
 
     public void RefreshAll()
     {
-        Cleanup();
         foreach (var eui in _openUis.Values)
             eui.StateDirty();
     }
@@ -251,35 +272,6 @@ public sealed class ArenaLobbySystem : EntitySystem
     private static bool IsJoinablePhase(ArenaPhase phase)
     {
         return phase is ArenaPhase.WaitingForPlayers;
-    }
-
-    private static ArenaLobbyStatus MapPhase(ArenaPhase phase)
-    {
-        return phase switch
-        {
-            ArenaPhase.WaitingForPlayers => ArenaLobbyStatus.Waiting,
-            ArenaPhase.Countdown => ArenaLobbyStatus.Countdown,
-            ArenaPhase.Fighting => ArenaLobbyStatus.Fighting,
-            _ => ArenaLobbyStatus.Finished,
-        };
-    }
-
-    private static void ConfigureRule(ArenaRuleComponent rule, ArenaLobbyEntryComponent entry)
-    {
-        rule.OneShot = true;
-        rule.WaitingTimeout = TimeSpan.FromSeconds(60);
-        rule.Mode = entry.Mode;
-        rule.DisplayName = entry.Name;
-        rule.DisplayCategory = entry.Category;
-        rule.MaxPlayers = entry.MaxPlayers;
-        rule.Maps.Clear();
-        rule.Maps.Add(new ArenaMapEntry
-        {
-            Path = entry.MapPath,
-            Loadout = entry.Loadout,
-            Loadouts = entry.Loadouts,
-            CountdownDuration = entry.CountdownDuration,
-        });
     }
 
     private bool JoinFreeSlot(ICommonSession session, EntityUid ruleUid, ArenaRuleComponent rule)
@@ -372,29 +364,6 @@ public sealed class ArenaLobbySystem : EntitySystem
         if (!TryComp<MindComponent>(container.Mind, out var mind) || mind.IsVisitingEntity)
             return false;
         return mind.UserId.HasValue && _playerManager.TryGetSessionById(mind.UserId.Value, out _);
-    }
-
-    private void Cleanup()
-    {
-        List<uint>? stale = null;
-        foreach (var (id, uid) in _arenas)
-        {
-            if (TerminatingOrDeleted(uid)
-                || !TryComp<ArenaRuleComponent>(uid, out var rule)
-                || rule.Phase == ArenaPhase.Disabled)
-            {
-                stale ??= new List<uint>();
-                stale.Add(id);
-            }
-        }
-        if (stale == null)
-            return;
-        foreach (var id in stale)
-        {
-            _arenas.Remove(id);
-            _arenaCreators.Remove(id);
-            _arenaWasJoined.Remove(id);
-        }
     }
 
     private void EndEmptyCreativeArenas()

@@ -35,9 +35,6 @@ public sealed class ArenaLobbyEui : BaseEui
             case ArenaLobbyRefreshMessage:
                 StateDirty();
                 break;
-            case ArenaLobbyCloseMessage:
-                Close();
-                break;
         }
     }
 

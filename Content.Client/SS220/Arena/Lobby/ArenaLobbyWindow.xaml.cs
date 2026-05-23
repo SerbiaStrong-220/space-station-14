@@ -7,7 +7,6 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.IoC;
-using Robust.Shared.Prototypes;
 using static Robust.Client.UserInterface.Controls.BoxContainer;
 
 namespace Content.Client.SS220.Arena.Lobby;
@@ -15,18 +14,11 @@ namespace Content.Client.SS220.Arena.Lobby;
 [GenerateTypedNameReferences]
 public sealed partial class ArenaLobbyWindow : DefaultWindow
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IComponentFactory _factory = default!;
-
     private const string CategoryAll = "";
 
     public event Action<string>? OnCreateRequested;
     public event Action<uint>? OnJoinRequested;
     public event Action? OnRefreshRequested;
-
-    private readonly List<ArenaLobbyTemplate> _templates = new();
-
-    private sealed record ArenaLobbyTemplate(string Id, ArenaLobbyEntryComponent Entry);
 
     private static readonly Vector2 ButtonMinSize = new(86, 0);
     private static readonly Thickness RowMargin = new(8, 6);
@@ -51,8 +43,6 @@ public sealed partial class ArenaLobbyWindow : DefaultWindow
 
         CooldownLabel.FontColorOverride = ColorCooldown;
         RefreshButton.OnPressed += _ => OnRefreshRequested?.Invoke();
-
-        ReloadTemplates();
     }
 
     public void Update(ArenaLobbyEuiState state)
@@ -62,23 +52,9 @@ public sealed partial class ArenaLobbyWindow : DefaultWindow
         RebuildLists(state);
     }
 
-    private void ReloadTemplates()
-    {
-        _templates.Clear();
-        foreach (var proto in _proto.EnumeratePrototypes<EntityPrototype>())
-        {
-            if (proto.Abstract)
-                continue;
-            if (!proto.TryGetComponent<ArenaLobbyEntryComponent>(out var entry, _factory))
-                continue;
-            _templates.Add(new ArenaLobbyTemplate(proto.ID, entry));
-        }
-        _templates.Sort((a, b) => string.CompareOrdinal(a.Entry.Name, b.Entry.Name));
-    }
-
     private void RebuildCategories(ArenaLobbyEuiState state)
     {
-        var categories = _templates.Select(t => t.Entry.Category)
+        var categories = state.Templates.Select(t => t.Category)
             .Concat(state.Arenas.Select(a => a.Category))
             .Where(c => !string.IsNullOrEmpty(c))
             .Distinct()
@@ -157,20 +133,23 @@ public sealed partial class ArenaLobbyWindow : DefaultWindow
 
         TemplatesList.RemoveAllChildren();
         var canCreate = state.ActiveCount < state.MaxArenas && !state.HasOwnArena && state.CreateCooldownRemaining <= 0;
-        foreach (var tmpl in _templates.Where(MatchesCategory))
+        var sortedTemplates = state.Templates.Where(MatchesCategory).OrderBy(t => t.Name, StringComparer.Ordinal);
+        foreach (var tmpl in sortedTemplates)
             TemplatesList.AddChild(BuildTemplateRow(tmpl, canCreate));
     }
 
+    private static bool IsJoinablePhase(ArenaPhase phase) => phase == ArenaPhase.WaitingForPlayers;
+
     private bool MatchesCategory(ArenaLobbyEntry entry) => _selectedCategory == CategoryAll || entry.Category == _selectedCategory;
-    private bool MatchesCategory(ArenaLobbyTemplate tmpl) => _selectedCategory == CategoryAll || tmpl.Entry.Category == _selectedCategory;
+    private bool MatchesCategory(ArenaLobbyTemplate tmpl) => _selectedCategory == CategoryAll || tmpl.Category == _selectedCategory;
 
     private PanelContainer BuildArenaRow(ArenaLobbyEntry entry)
     {
-        var (statusKey, statusColor) = entry.Status switch
+        var (statusKey, statusColor) = entry.Phase switch
         {
-            ArenaLobbyStatus.Waiting => ("arena-lobby-status-waiting", ColorWaiting),
-            ArenaLobbyStatus.Countdown => ("arena-lobby-status-countdown", ColorCountdown),
-            ArenaLobbyStatus.Fighting => ("arena-lobby-status-fighting", ColorFighting),
+            ArenaPhase.WaitingForPlayers => ("arena-lobby-status-waiting", ColorWaiting),
+            ArenaPhase.Countdown => ("arena-lobby-status-countdown", ColorCountdown),
+            ArenaPhase.Fighting => ("arena-lobby-status-fighting", ColorFighting),
             _ => ("arena-lobby-status-finished", ColorFinished),
         };
 
@@ -198,7 +177,7 @@ public sealed partial class ArenaLobbyWindow : DefaultWindow
         var join = new Button
         {
             Text = Loc.GetString("arena-lobby-join"),
-            Disabled = entry.Status == ArenaLobbyStatus.Finished || entry.Players >= entry.MaxPlayers,
+            Disabled = !IsJoinablePhase(entry.Phase) || entry.Players >= entry.MaxPlayers,
             MinSize = ButtonMinSize,
         };
         var id = entry.ArenaId;
@@ -223,17 +202,16 @@ public sealed partial class ArenaLobbyWindow : DefaultWindow
 
     private PanelContainer BuildTemplateRow(ArenaLobbyTemplate tmpl, bool canCreate)
     {
-        var entry = tmpl.Entry;
         var name = new Label
         {
-            Text = entry.Name,
+            Text = tmpl.Name,
             StyleClasses = { "LabelKeyText" },
             HorizontalExpand = true,
         };
 
         var size = new Label
         {
-            Text = Loc.GetString("arena-lobby-template-size", ("count", entry.MaxPlayers)),
+            Text = Loc.GetString("arena-lobby-template-size", ("count", tmpl.MaxPlayers)),
             StyleClasses = { "LabelSubText" },
             Margin = PlayersMargin,
         };
@@ -263,11 +241,11 @@ public sealed partial class ArenaLobbyWindow : DefaultWindow
             Children = { top },
         };
 
-        if (!string.IsNullOrWhiteSpace(entry.Description))
+        if (!string.IsNullOrWhiteSpace(tmpl.Description))
         {
             body.AddChild(new Label
             {
-                Text = entry.Description,
+                Text = tmpl.Description,
                 StyleClasses = { "LabelSubText" },
                 FontColorOverride = ColorDescription,
             });

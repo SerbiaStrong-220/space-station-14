@@ -33,11 +33,20 @@ public sealed partial class ArenaRuleComponent : Component
     [DataField]
     public ArenaGameMode Mode = ArenaGameMode.Duel;
 
+    [DataField]
+    public bool ShowInLobby;
+
+    [DataField]
     public string DisplayName = string.Empty;
 
-    public string DisplayCategory = string.Empty;
+    [DataField]
+    public string Description = string.Empty;
 
-    public int MaxPlayers;
+    [DataField]
+    public string DisplayCategory = "duel";
+
+    [DataField]
+    public int MaxPlayers = 2;
 
     [ViewVariables]
     public Dictionary<string, ArenaTeam> Teams = new();
@@ -83,14 +92,6 @@ public sealed partial class ArenaMapEntry
     public TimeSpan CountdownDuration = TimeSpan.FromSeconds(10);
 }
 
-public enum ArenaPhase : byte
-{
-    Disabled = 0,
-    WaitingForPlayers = 1,
-    Countdown = 2,
-    Fighting = 3,
-    Resetting = 4,
-}
 
 public enum ArenaSelectionMode : byte
 {
