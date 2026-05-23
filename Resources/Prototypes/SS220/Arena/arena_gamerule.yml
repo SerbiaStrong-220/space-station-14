@@ -2,7 +2,7 @@
   id: TwoPlayerArena
   parent: BaseGameRule
   components:
-  - type: TwoPlayerArenaRule
+  - type: ArenaRule
     selectionMode: Random
     maps:
     - path: /Maps/SS220/Arenas/two_player_arena.yml
@@ -39,3 +39,5 @@
       - ArenaLoadoutKnight
       - ArenaLoadoutArcher
       - ArenaLoadoutArcher
+    - path: /Maps/SS220/Arenas/abyss_arena.yml
+      loadout: ArenaLoadoutAbyss
