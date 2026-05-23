@@ -11,6 +11,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Content.Shared.SS220.AdmemeEvents.EventRole;
+using Content.Shared.SS220.Arena.Lobby;
 using Content.Shared.Station;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -27,7 +28,7 @@ using System.Numerics;
 
 namespace Content.Server.SS220.Arena;
 
-public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRuleComponent>
+public sealed class ArenaRuleSystem : GameRuleSystem<ArenaRuleComponent>
 {
     [Dependency] private readonly MapLoaderSystem _loader = default!;
     [Dependency] private readonly SharedMapSystem _maps = default!;
@@ -46,9 +47,6 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
     private static readonly SoundSpecifier PingSound = new SoundPathSpecifier("/Audio/Effects/newplayerping.ogg");
     private static readonly EntProtoId EffectSparks = "EffectSparks";
 
-    private const string TeamARoleGroupKey = "ArenaTeamA";
-    private const string TeamBRoleGroupKey = "ArenaTeamB";
-
     private const int VictorySparkCount = 6;
     private const float VictorySparkOffsetRange = 0.6f;
     private const float VictoryLightRadius = 5f;
@@ -64,12 +62,12 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
         SubscribeLocalEvent<ArenaParticipantComponent, ComponentRemove>(OnParticipantRemoved);
     }
 
-    protected override void Started(EntityUid uid, TwoPlayerArenaRuleComponent comp, GameRuleComponent gameRule, GameRuleStartedEvent args)
+    protected override void Started(EntityUid uid, ArenaRuleComponent comp, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {
         TryCreateArena((uid, comp));
     }
 
-    protected override void Ended(EntityUid uid, TwoPlayerArenaRuleComponent comp, GameRuleComponent gameRule, GameRuleEndedEvent args)
+    protected override void Ended(EntityUid uid, ArenaRuleComponent comp, GameRuleComponent gameRule, GameRuleEndedEvent args)
     {
         var ent = (uid, comp);
         if (comp.ArenaMapUid is { } mapUid && !TerminatingOrDeleted(mapUid))
@@ -79,7 +77,7 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
         comp.Phase = ArenaPhase.Disabled;
     }
 
-    protected override void ActiveTick(EntityUid uid, TwoPlayerArenaRuleComponent comp, GameRuleComponent gameRule, float frameTime)
+    protected override void ActiveTick(EntityUid uid, ArenaRuleComponent comp, GameRuleComponent gameRule, float frameTime)
     {
         var ent = (uid, comp);
         switch (comp.Phase)
@@ -99,22 +97,18 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
         }
     }
 
-    private bool TryCreateArena(Entity<TwoPlayerArenaRuleComponent> ent)
+    private bool TryCreateArena(Entity<ArenaRuleComponent> ent)
     {
         var comp = ent.Comp;
         if (comp.Phase != ArenaPhase.Disabled)
             return false;
 
         if (comp.Maps.Count == 0)
-        {
-            Log.Error("Arena rule has no maps configured.");
             return false;
-        }
 
         var entry = SelectNextMap(ent);
         comp.CurrentLoadout = entry.Loadout;
-        comp.TeamALoadouts = ShuffleLoadouts(entry.Loadouts);
-        comp.TeamBLoadouts = ShuffleLoadouts(entry.Loadouts);
+        comp.CurrentLoadouts = entry.Loadouts;
         comp.CurrentCountdown = entry.CountdownDuration;
 
         EntityUid mapUid;
@@ -122,7 +116,7 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
         try
         {
             mapUid = _maps.CreateMap(out mapId);
-            _metaData.SetEntityName(mapUid, "TwoPlayerArena");
+            _metaData.SetEntityName(mapUid, "ArenaMap");
         }
         catch (Exception e)
         {
@@ -140,14 +134,15 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
         }
 
         comp.ArenaMapUid = mapUid;
-        _metaData.SetEntityName(gridRef.Value.Owner, "TwoPlayerArenaGrid");
+        _metaData.SetEntityName(gridRef.Value.Owner, "ArenaGrid");
 
         CollectBarriers(ent);
-        CountTeamFighters(ent);
+        DiscoverTeams(ent);
 
-        if (comp.TeamASize == 0 || comp.TeamBSize == 0)
+        var needTeams = comp.Mode == ArenaGameMode.Creative ? 1 : 2;
+        if (comp.Teams.Count < needTeams || comp.Teams.Values.Any(t => t.Capacity == 0))
         {
-            Log.Error($"Arena grid '{entry.Path}' has no fighters for one of the teams (A={comp.TeamASize}, B={comp.TeamBSize}).");
+            Log.Error($"Arena grid '{entry.Path}' has insufficient teams (count={comp.Teams.Count}, mode={comp.Mode}).");
             QueueDel(mapUid);
             ResetState(ent);
             comp.Phase = ArenaPhase.Disabled;
@@ -157,15 +152,15 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
         comp.Phase = ArenaPhase.WaitingForPlayers;
         comp.WaitingEndAt = _timing.CurTime + comp.WaitingTimeout;
 
-        Log.Info($"Arena ready. Map='{entry.Path}', Loadout={comp.CurrentLoadout}, Teams={comp.TeamASize}v{comp.TeamBSize}, Barriers={comp.Barriers.Count}.");
+        var summary = string.Join("v", comp.Teams.OrderBy(kv => kv.Key).Select(kv => kv.Value.Capacity));
+        Log.Info($"Arena ready. Map='{entry.Path}', Loadout={comp.CurrentLoadout}, Teams={summary}, Barriers={comp.Barriers.Count}.");
         return true;
     }
 
-    private void CountTeamFighters(Entity<TwoPlayerArenaRuleComponent> ent)
+    private void DiscoverTeams(Entity<ArenaRuleComponent> ent)
     {
         var comp = ent.Comp;
-        comp.TeamASize = 0;
-        comp.TeamBSize = 0;
+        comp.Teams.Clear();
 
         var query = AllEntityQuery<ArenaParticipantComponent, TransformComponent>();
         while (query.MoveNext(out _, out var participant, out var xform))
@@ -173,14 +168,16 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
             if (xform.MapUid != comp.ArenaMapUid)
                 continue;
 
-            if (participant.Slot == ArenaSlot.TeamA)
-                comp.TeamASize++;
-            else
-                comp.TeamBSize++;
+            if (!comp.Teams.TryGetValue(participant.Team, out var team))
+            {
+                team = new ArenaTeam { Loadouts = ShuffleLoadouts(comp.CurrentLoadouts) };
+                comp.Teams[participant.Team] = team;
+            }
+            team.Capacity++;
         }
     }
 
-    private ArenaMapEntry SelectNextMap(Entity<TwoPlayerArenaRuleComponent> ent)
+    private ArenaMapEntry SelectNextMap(Entity<ArenaRuleComponent> ent)
     {
         var comp = ent.Comp;
         if (comp.SelectionMode == ArenaSelectionMode.Random)
@@ -191,7 +188,7 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
         return entry;
     }
 
-    private void CollectBarriers(Entity<TwoPlayerArenaRuleComponent> ent)
+    private void CollectBarriers(Entity<ArenaRuleComponent> ent)
     {
         var comp = ent.Comp;
         comp.Barriers.Clear();
@@ -210,36 +207,40 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
             return;
 
         var ruleEnt = rule.Value;
-        var team = GetTeam(ruleEnt, ent.Comp.Slot);
-        var isFirstTake = ruleEnt.Comp.Phase == ArenaPhase.WaitingForPlayers && !team.Contains(ent.Owner);
+        if (!ruleEnt.Comp.Teams.TryGetValue(ent.Comp.Team, out var team))
+            return;
+
+        var isFirstTake = ruleEnt.Comp.Phase == ArenaPhase.WaitingForPlayers && !team.Members.Contains(ent.Owner);
 
         if (isFirstTake)
         {
-            RegisterParticipant(ruleEnt, ent.Owner, ent.Comp.Slot);
+            RegisterParticipant(ruleEnt, ent.Owner, team, ent.Comp.Team);
             if (!ent.Comp.Equipped)
             {
-                EquipLoadout(ruleEnt, ent.Owner, ent.Comp.Slot, team.Count - 1);
+                EquipLoadout(ruleEnt, ent.Owner, team, team.Members.Count - 1);
                 ent.Comp.Equipped = true;
             }
-            AssignTeamIcon(ruleEnt, ent.Owner, ent.Comp.Slot);
+            if (ruleEnt.Comp.Mode != ArenaGameMode.Creative)
+                AssignTeamIcon(ent.Owner, ent.Comp);
         }
 
-        ApplyPlayerName(ent.Owner, args.Mind.Comp.UserId);
+        if (ruleEnt.Comp.Mode != ArenaGameMode.Creative)
+            ApplyPlayerName(ent.Owner, args.Mind.Comp.UserId);
 
-        if (ruleEnt.Comp.Phase == ArenaPhase.WaitingForPlayers
-            && ruleEnt.Comp.TeamA.Count >= ruleEnt.Comp.TeamASize
-            && ruleEnt.Comp.TeamB.Count >= ruleEnt.Comp.TeamBSize)
+        if (ruleEnt.Comp.Mode != ArenaGameMode.Creative
+            && ruleEnt.Comp.Phase == ArenaPhase.WaitingForPlayers
+            && ruleEnt.Comp.Teams.Values.All(t => t.Members.Count >= t.Capacity))
         {
             StartCountdown(ruleEnt);
         }
     }
 
-    private Entity<TwoPlayerArenaRuleComponent>? FindRuleForMap(EntityUid? mapUid)
+    private Entity<ArenaRuleComponent>? FindRuleForMap(EntityUid? mapUid)
     {
         if (mapUid == null)
             return null;
 
-        var ruleQuery = EntityQueryEnumerator<TwoPlayerArenaRuleComponent, GameRuleComponent>();
+        var ruleQuery = EntityQueryEnumerator<ArenaRuleComponent, GameRuleComponent>();
         while (ruleQuery.MoveNext(out var ruleUid, out var rule, out var gameRule))
         {
             if (!GameTicker.IsGameRuleActive(ruleUid, gameRule))
@@ -251,26 +252,18 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
         return null;
     }
 
-    private static List<EntityUid> GetTeam(Entity<TwoPlayerArenaRuleComponent> ent, ArenaSlot slot)
+    private void RegisterParticipant(Entity<ArenaRuleComponent> ent, EntityUid uid, ArenaTeam team, string teamId)
     {
-        return slot == ArenaSlot.TeamA ? ent.Comp.TeamA : ent.Comp.TeamB;
-    }
-
-    private void RegisterParticipant(Entity<TwoPlayerArenaRuleComponent> ent, EntityUid uid, ArenaSlot slot)
-    {
-        var team = GetTeam(ent, slot);
-        var capacity = slot == ArenaSlot.TeamA ? ent.Comp.TeamASize : ent.Comp.TeamBSize;
-
-        if (team.Contains(uid))
+        if (team.Members.Contains(uid))
             return;
-        if (team.Count >= capacity)
+        if (team.Members.Count >= team.Capacity)
         {
-            Log.Warning($"Team {slot} is already full ({team.Count}/{capacity}), ignoring extra fighter {ToPrettyString(uid)}.");
+            Log.Warning($"Team '{teamId}' is already full ({team.Members.Count}/{team.Capacity}), ignoring extra fighter {ToPrettyString(uid)}.");
             return;
         }
 
-        team.Add(uid);
-        Log.Info($"Player registered: team={slot}, entity={ToPrettyString(uid)} ({team.Count}/{capacity}).");
+        team.Members.Add(uid);
+        Log.Info($"Player registered: team={teamId}, entity={ToPrettyString(uid)} ({team.Members.Count}/{team.Capacity}).");
     }
 
     private void ApplyPlayerName(EntityUid fighter, NetUserId? userId)
@@ -283,9 +276,9 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
         _metaData.SetEntityName(fighter, session.Name);
     }
 
-    private void EquipLoadout(Entity<TwoPlayerArenaRuleComponent> ent, EntityUid fighter, ArenaSlot slot, int teamIndex)
+    private void EquipLoadout(Entity<ArenaRuleComponent> ent, EntityUid fighter, ArenaTeam team, int memberIndex)
     {
-        if (ResolveLoadout(ent, slot, teamIndex) is not { } loadoutId)
+        if (ResolveLoadout(ent, team, memberIndex) is not { } loadoutId)
             return;
 
         if (!_proto.TryIndex(loadoutId, out var gear))
@@ -297,11 +290,10 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
         _stationSpawning.EquipStartingGear(fighter, gear);
     }
 
-    private static ProtoId<StartingGearPrototype>? ResolveLoadout(Entity<TwoPlayerArenaRuleComponent> ent, ArenaSlot slot, int teamIndex)
+    private static ProtoId<StartingGearPrototype>? ResolveLoadout(Entity<ArenaRuleComponent> ent, ArenaTeam team, int memberIndex)
     {
-        var list = slot == ArenaSlot.TeamA ? ent.Comp.TeamALoadouts : ent.Comp.TeamBLoadouts;
-        if (list is { Count: > 0 })
-            return list[teamIndex % list.Count];
+        if (team.Loadouts is { Count: > 0 } list)
+            return list[memberIndex % list.Count];
 
         return ent.Comp.CurrentLoadout;
     }
@@ -316,11 +308,14 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
         return copy;
     }
 
-    private void AssignTeamIcon(Entity<TwoPlayerArenaRuleComponent> ent, EntityUid fighter, ArenaSlot slot)
+    private void AssignTeamIcon(EntityUid fighter, ArenaParticipantComponent participant)
     {
+        if (participant.Icon is not { } icon)
+            return;
+
         var eventRole = EnsureComp<EventRoleComponent>(fighter);
-        eventRole.StatusIcon = slot == ArenaSlot.TeamA ? ent.Comp.TeamAIcon : ent.Comp.TeamBIcon;
-        eventRole.RoleGroupKey = slot == ArenaSlot.TeamA ? TeamARoleGroupKey : TeamBRoleGroupKey;
+        eventRole.StatusIcon = icon;
+        eventRole.RoleGroupKey = $"ArenaTeam{participant.Team}";
         Dirty(fighter, eventRole);
     }
 
@@ -346,7 +341,8 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
         if (rule.Value.Comp.Phase != ArenaPhase.WaitingForPlayers)
             return;
 
-        GetTeam(rule.Value, ent.Comp.Slot).Remove(ent.Owner);
+        if (rule.Value.Comp.Teams.TryGetValue(ent.Comp.Team, out var team))
+            team.Members.Remove(ent.Owner);
         Log.Info($"Player ghosted out of arena before start, freeing slot: entity={ToPrettyString(ent.Owner)}.");
     }
 
@@ -356,30 +352,35 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
         if (rule == null)
             return;
 
-        if (rule.Value.Comp.Phase == ArenaPhase.WaitingForPlayers)
-        {
-            GetTeam(rule.Value, ent.Comp.Slot).Remove(ent.Owner);
-        }
-        else if (rule.Value.Comp.Phase == ArenaPhase.Fighting)
+        if (rule.Value.Comp.Teams.TryGetValue(ent.Comp.Team, out var team))
+            team.Members.Remove(ent.Owner);
+
+        if (rule.Value.Comp.Phase == ArenaPhase.Fighting)
         {
             CheckWinCondition(rule.Value);
         }
+        else if (rule.Value.Comp.Phase == ArenaPhase.Countdown)
+        {
+            var aliveTeams = CountAliveTeams(rule.Value, out var winningTeam);
+            if (aliveTeams < 2)
+                BeginReset(rule.Value, aliveTeams == 1 ? winningTeam : null);
+        }
     }
 
-    private Entity<TwoPlayerArenaRuleComponent>? FindRuleFor(EntityUid participant)
+    private Entity<ArenaRuleComponent>? FindRuleFor(EntityUid participant)
     {
-        var query = EntityQueryEnumerator<TwoPlayerArenaRuleComponent, GameRuleComponent>();
+        var query = EntityQueryEnumerator<ArenaRuleComponent, GameRuleComponent>();
         while (query.MoveNext(out var uid, out var rule, out var gameRule))
         {
             if (!GameTicker.IsGameRuleActive(uid, gameRule))
                 continue;
-            if (rule.TeamA.Contains(participant) || rule.TeamB.Contains(participant))
+            if (rule.Teams.Values.Any(t => t.Members.Contains(participant)))
                 return (uid, rule);
         }
         return null;
     }
 
-    private void StartCountdown(Entity<TwoPlayerArenaRuleComponent> ent)
+    private void StartCountdown(Entity<ArenaRuleComponent> ent)
     {
         var rule = ent.Comp;
         rule.Phase = ArenaPhase.Countdown;
@@ -390,16 +391,16 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
         Log.Info($"Countdown started ({rule.CurrentCountdown.TotalSeconds}s).");
     }
 
-    private void UpdateCountdown(Entity<TwoPlayerArenaRuleComponent> ent)
+    private void UpdateCountdown(Entity<ArenaRuleComponent> ent)
     {
         var rule = ent.Comp;
         if (_timing.CurTime < rule.CountdownEnd)
             return;
 
-        var aliveTeams = CountAliveTeams(ent, out var winningSlot);
+        var aliveTeams = CountAliveTeams(ent, out var winningTeam);
         if (aliveTeams < 2)
         {
-            BeginReset(ent, aliveTeams == 1 ? winningSlot : null);
+            BeginReset(ent, aliveTeams == 1 ? winningTeam : null);
             return;
         }
 
@@ -407,9 +408,7 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
         rule.Phase = ArenaPhase.Fighting;
         rule.FightEndAt = _timing.CurTime + rule.MaxFightDuration;
         SendToParticipants(ent, Loc.GetString("arena-fight-start"));
-        foreach (var fighter in rule.TeamA)
-            PlayPingTo(fighter);
-        foreach (var fighter in rule.TeamB)
+        foreach (var fighter in EnumerateMembers(rule))
             PlayPingTo(fighter);
     }
 
@@ -437,9 +436,11 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
         }
     }
 
-    private void UpdateWaitingTimeout(Entity<TwoPlayerArenaRuleComponent> ent)
+    private void UpdateWaitingTimeout(Entity<ArenaRuleComponent> ent)
     {
         var rule = ent.Comp;
+        if (rule.Mode == ArenaGameMode.Creative)
+            return;
         if (rule.WaitingEndAt is not { } end || _timing.CurTime < end)
             return;
 
@@ -448,7 +449,7 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
         BeginReset(ent, null);
     }
 
-    private void UpdateFightTimeout(Entity<TwoPlayerArenaRuleComponent> ent)
+    private void UpdateFightTimeout(Entity<ArenaRuleComponent> ent)
     {
         var rule = ent.Comp;
         if (rule.FightEndAt is not { } end || _timing.CurTime < end)
@@ -458,24 +459,24 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
         BeginReset(ent, null);
     }
 
-    private void CheckWinCondition(Entity<TwoPlayerArenaRuleComponent> ent)
+    private void CheckWinCondition(Entity<ArenaRuleComponent> ent)
     {
         if (ent.Comp.Phase != ArenaPhase.Fighting)
             return;
 
-        var alive = CountAliveTeams(ent, out var winningSlot);
+        var alive = CountAliveTeams(ent, out var winningTeam);
         switch (alive)
         {
             case 0:
                 BeginReset(ent, null);
                 break;
             case 1:
-                BeginReset(ent, winningSlot);
+                BeginReset(ent, winningTeam);
                 break;
         }
     }
 
-    private void OpenFightBarriers(Entity<TwoPlayerArenaRuleComponent> ent)
+    private void OpenFightBarriers(Entity<ArenaRuleComponent> ent)
     {
         foreach (var b in ent.Comp.Barriers)
         {
@@ -486,7 +487,7 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
         }
     }
 
-    private void BeginReset(Entity<TwoPlayerArenaRuleComponent> ent, ArenaSlot? winningSlot)
+    private void BeginReset(Entity<ArenaRuleComponent> ent, ArenaTeam? winningTeam)
     {
         var rule = ent.Comp;
         if (rule.Phase == ArenaPhase.Resetting)
@@ -496,10 +497,9 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
         rule.ResetReadyAt = _timing.CurTime + rule.ResetDelay;
         rule.PendingSpawn = false;
 
-        if (winningSlot.HasValue)
+        if (winningTeam != null)
         {
-            var winners = GetTeam(ent, winningSlot.Value);
-            foreach (var winner in winners)
+            foreach (var winner in winningTeam.Members)
             {
                 if (TerminatingOrDeleted(winner) || _mobState.IsDead(winner))
                     continue;
@@ -509,10 +509,10 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
             }
         }
 
-        Log.Info($"BeginReset: winningTeam={winningSlot}, delay={rule.ResetDelay.TotalSeconds}s.");
+        Log.Info($"BeginReset: winnerTeam={(winningTeam != null ? "yes" : "none")}, delay={rule.ResetDelay.TotalSeconds}s.");
     }
 
-    private void UpdateResetting(Entity<TwoPlayerArenaRuleComponent> ent)
+    private void UpdateResetting(Entity<ArenaRuleComponent> ent)
     {
         var rule = ent.Comp;
         if (_timing.CurTime < rule.ResetReadyAt)
@@ -531,37 +531,38 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
 
         rule.PendingSpawn = false;
         rule.Phase = ArenaPhase.Disabled;
+
+        if (rule.OneShot)
+        {
+            GameTicker.EndGameRule(ent.Owner);
+            QueueDel(ent.Owner);
+            return;
+        }
+
         TryCreateArena(ent);
     }
 
-    private static void ResetState(Entity<TwoPlayerArenaRuleComponent> ent)
+    private static void ResetState(Entity<ArenaRuleComponent> ent)
     {
         var rule = ent.Comp;
         rule.ArenaMapUid = null;
-        rule.TeamA.Clear();
-        rule.TeamB.Clear();
-        rule.TeamASize = 0;
-        rule.TeamBSize = 0;
+        rule.Teams.Clear();
         rule.CurrentLoadout = null;
-        rule.TeamALoadouts = null;
-        rule.TeamBLoadouts = null;
+        rule.CurrentLoadouts = null;
         rule.FightEndAt = null;
         rule.WaitingEndAt = null;
         rule.Barriers.Clear();
     }
 
-    private int CountAliveTeams(Entity<TwoPlayerArenaRuleComponent> ent, out ArenaSlot winningSlot)
+    private int CountAliveTeams(Entity<ArenaRuleComponent> ent, out ArenaTeam? winningTeam)
     {
-        winningSlot = default;
+        winningTeam = null;
         var alive = 0;
-        if (HasAnyAlive(ent.Comp.TeamA))
+        foreach (var team in ent.Comp.Teams.Values)
         {
-            winningSlot = ArenaSlot.TeamA;
-            alive++;
-        }
-        if (HasAnyAlive(ent.Comp.TeamB))
-        {
-            winningSlot = ArenaSlot.TeamB;
+            if (!HasAnyAlive(team.Members))
+                continue;
+            winningTeam = team;
             alive++;
         }
         return alive;
@@ -572,11 +573,16 @@ public sealed class TwoPlayerArenaRuleSystem : GameRuleSystem<TwoPlayerArenaRule
         return team.Any(uid => !TerminatingOrDeleted(uid) && _mobState.IsAlive(uid));
     }
 
-    private void SendToParticipants(Entity<TwoPlayerArenaRuleComponent> ent, string msg)
+    private static IEnumerable<EntityUid> EnumerateMembers(ArenaRuleComponent rule)
     {
-        foreach (var fighter in ent.Comp.TeamA)
-            SendToFighter(fighter, msg);
-        foreach (var fighter in ent.Comp.TeamB)
+        foreach (var team in rule.Teams.Values)
+            foreach (var member in team.Members)
+                yield return member;
+    }
+
+    private void SendToParticipants(Entity<ArenaRuleComponent> ent, string msg)
+    {
+        foreach (var fighter in EnumerateMembers(ent.Comp))
             SendToFighter(fighter, msg);
     }
 

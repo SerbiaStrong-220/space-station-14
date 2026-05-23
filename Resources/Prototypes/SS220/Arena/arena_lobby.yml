@@ -1,0 +1,149 @@
+- type: entity
+  id: ArenaLobbyInstance
+  parent: BaseGameRule
+  components:
+  - type: ArenaRule
+    oneShot: true
+    selectionMode: Rotation
+    maps: []
+
+- type: arena
+  id: ArenaLobbyOperative
+  name: Operative 2x2 (uplink)
+  description: Аплинк 40 ТК.
+  mapPath: /Maps/SS220/Arenas/uplink_arena_2v2.yml
+  maxPlayers: 4
+  loadout: ArenaLoadoutOperative
+
+- type: arena
+  id: ArenaLobbyMercenary
+  name: Mercenary forest 1x1
+  description: АК, Кобра, лесной бой.
+  mapPath: /Maps/SS220/Arenas/forest_arena.yml
+  maxPlayers: 2
+  loadout: ArenaLoadoutMercenary
+
+- type: arena
+  id: ArenaLobbyDust
+  name: Cowboy dust 1x1
+  description: Револьвер и дух Дикого Запада.
+  mapPath: /Maps/SS220/Arenas/dust_arena.yml
+  maxPlayers: 2
+  loadout: ArenaLoadoutDust
+
+- type: arena
+  id: ArenaLobbyKnight
+  name: Knights duel 1x1
+  description: Клеймор и щит. Честная дуэль.
+  mapPath: /Maps/SS220/Arenas/knights_arena.yml
+  maxPlayers: 2
+  loadout: ArenaLoadoutKnight
+
+- type: arena
+  id: ArenaLobbyKnight3x3
+  name: Knights 3x3
+  description: Рыцарь и два лучника.
+  mapPath: /Maps/SS220/Arenas/knights_arena_3v3.yml
+  maxPlayers: 6
+  loadouts:
+  - ArenaLoadoutKnight
+  - ArenaLoadoutArcher
+  - ArenaLoadoutArcher
+
+- type: arena
+  id: ArenaLobbyPirate
+  name: Pirates 2x2
+  description: Мушкетон и пиратская пушка.
+  mapPath: /Maps/SS220/Arenas/pirates_arena.yml
+  maxPlayers: 4
+  loadout: ArenaLoadoutPirate
+
+- type: arena
+  id: ArenaLobbyLavaSec
+  name: Lava sec 2x2
+  description: Хардсьют и тяжёлый лазер.
+  mapPath: /Maps/SS220/Arenas/lava_arena_2v2.yml
+  maxPlayers: 4
+  loadout: ArenaLoadoutLavaSec
+
+- type: arena
+  id: ArenaLobbyUplink1v1
+  name: Uplink 1x1
+  description: Дуэль на 40 ТК.
+  mapPath: /Maps/SS220/Arenas/two_player_arena.yml
+  maxPlayers: 2
+  loadout: ArenaLoadoutOperative
+
+- type: arena
+  id: ArenaLobbyMine1v1
+  name: Mine 1x1
+  description: Обрез и самопальный лазер.
+  mapPath: /Maps/SS220/Arenas/mine_arena.yml
+  maxPlayers: 2
+  loadout: ArenaLoadoutSalvage
+
+- type: arena
+  id: ArenaLobbyFrozen1v1
+  name: Frozen 1x1
+  description: Лектер и холодный расчёт.
+  mapPath: /Maps/SS220/Arenas/frozen_arena.yml
+  maxPlayers: 2
+  loadout: ArenaLoadoutBlueShield
+
+- type: arena
+  id: ArenaLobbyIce1v1
+  name: Ice 1x1
+  description: Лёд, скорость и кнокбэк.
+  mapPath: /Maps/SS220/Arenas/ice_arena.yml
+  maxPlayers: 2
+  loadout: ArenaLoadoutWinter
+
+- type: arena
+  id: ArenaLobbySniper1v1
+  name: Sniper 1x1
+  description: Один выстрел - один труп.
+  mapPath: /Maps/SS220/Arenas/tunnel_arena.yml
+  maxPlayers: 2
+  loadout: ArenaLoadoutLawyerSniper
+
+- type: arena
+  id: ArenaLobbyByblik1v1
+  name: Byblik 1x1
+  description: Эсток и два магазина.
+  mapPath: /Maps/SS220/Arenas/byblik_arena.yml
+  maxPlayers: 2
+  loadout: ArenaLoadoutByblik
+
+- type: arena
+  id: ArenaLobbyLava1v1
+  name: Lava 1x1
+  description: Голиаф и два магнума.
+  mapPath: /Maps/SS220/Arenas/lava_arena.yml
+  maxPlayers: 2
+  loadout: ArenaLoadoutLava
+
+- type: arena
+  id: ArenaLobbyLaser1v1
+  name: Laser 1x1
+  description: Лазерная дуэль.
+  mapPath: /Maps/SS220/Arenas/laser_arena.yml
+  maxPlayers: 2
+  loadout: ArenaLoadoutLaser
+
+- type: arena
+  id: ArenaLobbyAbyss
+  name: Abyss 2x2
+  description: Христов и мачете в бездне.
+  mapPath: /Maps/SS220/Arenas/abyss_arena.yml
+  maxPlayers: 4
+  loadout: ArenaLoadoutAbyss
+
+- type: arena
+  id: ArenaLobbyCanvas
+  name: Рисование
+  description: Холст и мелки. Никаких боёв.
+  mapPath: /Maps/SS220/Arenas/canvas_arena.yml
+  maxPlayers: 1
+  category: misc
+  mode: Creative
+  loadout: ArenaLoadoutCanvas
