@@ -35,8 +35,10 @@ public sealed class ArenaLobbyGhostActionSystem : EntitySystem
     {
         if (args.Handled)
             return;
+
         if (!TryComp<ActorComponent>(ent.Owner, out var actor))
             return;
+
         args.Handled = true;
         _lobby.OpenEuiFor(actor.PlayerSession);
     }
