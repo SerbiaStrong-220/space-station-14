@@ -27,9 +27,9 @@
       entity_storage: !type:NestedSelector
         tableId: LockerFillMagistrate
 
-# Magistrate
+# NTR (ex Magistrate lockers)
 - type: entityTable
-  id: LockerFillNanoTrasenRepresentative #SS220 TODO NanoTraisen Representative
+  id: LockerFillNanoTrasenRepresentative
   table: !type:AllSelector
     children:
     - id: ClothingHeadsetAltNanoTrasenRepresentative
