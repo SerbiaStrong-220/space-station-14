@@ -17,6 +17,7 @@
   - Psychologist #SS220 New_accesses_and_some_tweaks
   extendedAccess:
   - Chemistry
+  economySalaryPrototype: Worker # SS220 Economy
 
 - type: startingGear
   id: PsychologistGear

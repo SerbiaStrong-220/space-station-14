@@ -51,3 +51,11 @@
   materials:
     Steel: 150
     Glass: 350
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: EconomyEFTPOS
+  result: EconomyEFTPOS
+  materials:
+    Glass: 100
+    Plastic: 200

@@ -19,6 +19,7 @@
   - External
   extendedAccess:
   - Chemistry
+  economySalaryPrototype: Worker
 
 - type: startingGear
   id: BrigmedicGear

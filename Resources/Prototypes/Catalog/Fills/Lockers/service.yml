@@ -17,6 +17,7 @@
     - id: DrinkShaker
     - id: ClothingEyesHudBeer
     - id: HandLabeler
+    - id: EconomyEFTPOS # SS220 Economy
     - id: HookahBase        # SS220 hookah
     - id: DrinkBeerBottleFull
       amount: !type:BinomialNumberSelector
@@ -56,6 +57,7 @@
     - id: ReagentContainerSugar
     - id: FoodCondimentBottleEnzyme
     - id: DrinkSoyMilkCarton
+    - id: EconomyEFTPOS # SS220 Economy
     - !type:AllSelector
       rolls: 2
       children:
@@ -125,6 +127,7 @@
     children:
     - id: BriefcaseBrownFilled
       prob: 0.80
+    - id: EconomyEFTPOS # SS220 Economy
     - id: ClothingOuterRobesJudge
     - id: PlushieLizardJobLawyer
       prob: 0.02
@@ -153,6 +156,7 @@
     - id: BoxMouthSwab
     - id: Dropper
     - id: HandLabeler
+    - id: EconomyEFTPOS # SS220 Economy
     - id: ClothingUniformOveralls
     - id: ClothingHeadHatTrucker
       prob: 0.1

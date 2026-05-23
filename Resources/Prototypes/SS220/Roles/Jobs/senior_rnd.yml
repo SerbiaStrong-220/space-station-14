@@ -14,6 +14,7 @@
   access:
   - Research
   - Maintenance
+  economySalaryPrototype: SeniorStaff
 
 - type: startingGear
   id: SeniorResearcherGear

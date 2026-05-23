@@ -1,0 +1,102 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      Title="{Loc 'economy-eftpos-ui-title'}"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      Resizable="False"
+                      SetSize="380 420" >
+    <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True" Margin="15 5 15 0" >
+        <TabContainer Name="TabContainer" VerticalExpand="True" >
+            <!-- Payment tab -->
+            <BoxContainer Name="{Loc 'economy-eftpos-ui-payment-tab'}"
+                          Orientation="Vertical"
+                          Margin="6 6 6 0"
+                          HorizontalAlignment="Center" >
+                <Label Name="AmountToPayLabel"
+                       Text="{Loc 'economy-eftpos-ui-amount-default'}"
+                       HorizontalAlignment="Center" />
+                <Label Name="AmountToPay"
+                       HorizontalAlignment="Center"
+                       StyleClasses= "LabelBig" />
+                <BoxContainer Name="PaymentControls"
+                              Orientation="Vertical"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Bottom"
+                              VerticalExpand="True"
+                              Visible="False" >
+                    <Button Name="PaymentButton"
+                            Access="Public"
+                            SetSize="200 50"
+                            HorizontalAlignment="Center"
+                            Margin="0 0 0 14"
+                            Text="{Loc 'economy-eftpos-ui-payment-await-text'}" />
+                    <BoxContainer Orientation="Vertical"
+                                  HorizontalAlignment="Center" >
+                        <BoxContainer Orientation="Horizontal"
+                                    Margin="0 0 0 6"
+                                    HorizontalAlignment="Left" >
+                            <Label Name="PayerPinInputLabel"
+                                Text="{Loc 'economy-eftpos-ui-pin-code-label'}"
+                                Margin="0 0 4 0" />
+                            <Label Name="PayerPinInputText"
+                                Text="____" />
+                        </BoxContainer>
+                        <GridContainer Columns="3"
+                                    Name="KeypadGrid"
+                                    HorizontalAlignment="Center" >
+                        <!-- Keypad is filled by code -->
+                        </GridContainer>
+                    </BoxContainer>
+                    <BoxContainer Orientation="Horizontal"
+                                Margin="0 12"
+                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Center" >
+                        <Label Name="ReceiptPrintLabel"
+                            Text="{Loc 'economy-eftpos-ui-receipt-print-label'}"
+                            Margin="0 0 6 0" />
+                        <Button Name="PrintReceiptButton"
+                                Access="Public"
+                                SetSize="50 30"
+                                HorizontalAlignment="Right"
+                                Text="{Loc 'economy-eftpos-ui-receipt-print-no'}" />
+                    </BoxContainer>
+                </BoxContainer>
+            </BoxContainer>
+            <!-- Settings tab -->
+            <BoxContainer Name="{Loc 'economy-eftpos-ui-settings-tab'}"
+                          Orientation="Vertical"
+                          Margin="6 6 6 6" >
+                <Label Name="AmountLabel"
+                       Text="{Loc 'economy-eftpos-ui-amount-label'}"
+                       Margin="0 0 4 0" />
+                <LineEdit Name="AmountLineEdit"
+                          PlaceHolder="0"
+                          MinWidth="60"
+                          Access="Public"
+                          Margin="0 6 0 6"/>
+                <Button Name="CardLockButton"
+                        Access="Public"
+                        SetSize="160 30"
+                        HorizontalAlignment="Right"
+                        ToolTip="{Loc 'economy-eftpos-ui-card-lock-desc'}"
+                        Text="{Loc 'economy-eftpos-ui-card-lock-text'}" />
+                <BoxContainer Orientation="Horizontal"
+                              Margin="0 6 0 0">
+                    <Label Name="AccountIdLabel"
+                           Text="{Loc 'economy-eftpos-ui-account-id-label'}"
+                           Margin="0 0 4 0" />
+                    <Label Name="AccountIdText"
+                           Text="{Loc 'economy-eftpos-ui-account-id-empty'}" />
+                </BoxContainer>
+                <Label Name="AccountNameLabel" />
+            </BoxContainer>
+        </TabContainer>
+        <BoxContainer Orientation="Vertical">
+            <BoxContainer Orientation="Horizontal" Margin="10 2 5 0" VerticalAlignment="Bottom">
+                <Label Text="{Loc 'economy-eftpos-ui-window-flavor-left'}" StyleClasses="WindowFooterText" />
+                <Label Text="{Loc 'economy-eftpos-ui-window-flavor-right'}" StyleClasses="WindowFooterText"
+                       HorizontalAlignment="Right" HorizontalExpand="True"  Margin="0 0 5 0" />
+                <TextureRect StyleClasses="NTLogoDark" Stretch="KeepAspectCentered"
+                       VerticalAlignment="Center" HorizontalAlignment="Right" SetSize="19 19"/>
+            </BoxContainer>
+        </BoxContainer>
+    </BoxContainer>
+</controls:FancyWindow>

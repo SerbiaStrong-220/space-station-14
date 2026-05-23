@@ -30,6 +30,7 @@
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff
+  economySalaryPrototype: SeniorStaff # SS220 Economy
 
 - type: startingGear
   id: ResearchDirectorGear

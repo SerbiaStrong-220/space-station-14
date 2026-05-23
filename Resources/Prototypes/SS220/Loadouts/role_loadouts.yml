@@ -17,6 +17,7 @@
   - Trinkets
   - Gloves
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
+  - EconomyLoadout #SS220 Economy
 
   # Магистрат
 - type: roleLoadout
@@ -31,7 +32,7 @@
   - Trinkets
   - Survival
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - SeniorStaffCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
   # Агент внутренних дел
 - type: roleLoadout
@@ -48,7 +49,7 @@
   - Trinkets
   - Gloves
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - SeniorStaffCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
   # Офицер "Синий Щит"
 - type: roleLoadout
@@ -66,7 +67,7 @@
   - Survival
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - SeniorStaffCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
 #! Служба безопасности (Начало)
 
@@ -87,7 +88,7 @@
   - SecurityBelt
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - SeniorStaffCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
   # Пилот
 - type: roleLoadout
@@ -104,7 +105,7 @@
   - SecurityShoes
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - WorkerCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 #! Служба безопасности (Конец)
 
 #! Медицинский отдел (Начало)
@@ -127,7 +128,7 @@
 #  - Glasses #SS220-TwoOne-Floppa-Iteration
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - SeniorStaffCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
   # Бригемдик
 - type: roleLoadout
@@ -145,7 +146,7 @@
   - BrigmedicShoes
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - WorkerCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 #! Медицинский отдел (Конец)
 
 #! Инженерный отдел (Начало)
@@ -163,7 +164,7 @@
   - StationEngineerShoes
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - SeniorStaffCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 #! Инженерный отдел (Конец)
 
 #! Исследовательский отдел (Начало)
@@ -184,7 +185,7 @@
 #  - Glasses #SS220-TwoOne-Floppa-Iteration
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - SeniorStaffCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 #! Исследовательский отдел (Конец)
 
 #! Сервис (Начало)
@@ -201,7 +202,7 @@
   - SeniorServiceShoes
   - Trinkets
   - SponsorNeck #SS220-TwoOne-Floppa-Iteration
-  - SeniorStaffCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 #! Сервис (Конец)
 
 #! Эксклюзивы карт (Начало)
@@ -216,7 +217,7 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
-  - WorkerCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 
   #Боксер
 - type: roleLoadout
@@ -230,5 +231,5 @@
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
-  - WorkerCash #SS220-Cash-personal
+  - EconomyLoadout #SS220 Economy
 #! Эксклюзивы карт (Конец)

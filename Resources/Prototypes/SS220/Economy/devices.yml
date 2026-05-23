@@ -1,0 +1,163 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: BaseItem
+  id: SpaceCashWithdrawalOnSpawn
+  name: withdraw money from a bank account
+  description: You gotta have money.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Item
+    shape:
+    - 0,0,0,0
+    storedOffset: 0,-2
+  - type: Sprite
+    sprite: Objects/Economy/cash.rsi
+    state: cash_1000000
+  - type: EconomyCashWithdrawalOnSpawn
+
+- type: entity
+  parent: BaseItem
+  id: EconomyEFTPOS
+  name: EFTPOS
+  description: Swipe your card to make purchases without using cash.
+  components:
+    - type: Sprite
+      sprite: SS220/Objects/Devices/eftpos.rsi
+      state:
+      layers:
+        - state: eftpos
+        - state: eftpos-screen
+          shader: unshaded
+    - type: EconomyEFTPOS
+    - type: ActivatableUI
+      key: enum.EconomyEFTPOSKey.Key
+    - type: UserInterface
+      interfaces:
+        enum.EconomyEFTPOSKey.Key:
+          type: EconomyEFTPOSUi
+    - type: EmitSoundOnLand
+      sound:
+        path: /Audio/Items/multitool_drop.ogg
+    - type: Anchorable
+    - type: GuideHelp
+      guides:
+      - EconomyGuide
+
+- type: entity
+  parent: BaseItem
+  id: EconomyBankingCartridge
+  name: banking cartridge
+  description: A program for managing bank account.
+  components:
+  - type: Sprite
+    sprite: Objects/Devices/cartridge.rsi
+    state: cart-y
+  - type: Icon
+    sprite: Objects/Devices/cartridge.rsi
+    state: cart-y
+  - type: UIFragment
+    ui: !type:EconomyBankingUi
+  - type: Cartridge
+    programName: economy-banking-program-name
+    icon:
+      sprite: SS220/Structures/Machines/atm.rsi
+      state: icon
+  - type: EconomyBankingCartridge
+
+- type: entity
+  parent: BaseMachinePowered
+  id: EconomyATM
+  name: ATM
+  description: For some it takes money, for others — gives it away.
+  components:
+  - type: Sprite
+    sprite: SS220/Structures/Machines/atm.rsi
+    snapCardinals: true
+    state:
+    layers:
+    - state: "off"
+    - state: "on"
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      shader: unshaded
+  - type: EconomyATM
+  - type: ItemSlots
+    slots:
+      idCardSlot:
+        name: id-card-slot
+        insertVerbText: economy-atm-insert-verb
+        ejectVerbText: economy-atm-eject-verb
+        ejectSound: /Audio/Machines/id_swipe.ogg
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectOnBreak: true
+        swap: false
+        whitelist:
+          components:
+          - EconomyBankCard
+  - type: ContainerContainer
+    containers:
+      idCardSlot: !type:ContainerSlot
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+        enum.PowerDeviceVisuals.Powered:
+          enum.PowerDeviceVisualLayers.Powered:
+            True: {visible: true}
+            False: {visible: false}
+  - type: AmbientOnPowered
+  - type: AmbientSound
+    volume: -9
+    range: 3
+    enabled: false
+    sound:
+      path: /Audio/Ambience/Objects/vending_machine_hum.ogg
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 600
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+  - type: ActivatableUI
+    key: enum.EconomyATMUiKey.Key
+    singleUser: true
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.EconomyATMUiKey.Key:
+        type: EconomyATMUi
+  - type: PointLight
+    enabled: false
+    castShadows: false
+    radius: 1.5
+    color: "#44ce1a"
+  - type: LitOnPowered
+  - type: ApcPowerReceiver
+    powerLoad: 200
+    priority: Low
+  - type: ExtensionCableReceiver
+  - type: EmitSoundOnUIOpen
+    sound:
+      collection: Keyboard
+  - type: GuideHelp
+    guides:
+    - EconomyGuide
+
+- type: entity
+  parent: BaseFlatpack
+  id: EconomyATMFlatpack
+  name: ATM flatpack
+  description: A flatpack used for constructing an ATM.
+  components:
+  - type: Flatpack
+    entity: EconomyATM
+  - type: GuideHelp
+    guides:
+    - EconomyGuide

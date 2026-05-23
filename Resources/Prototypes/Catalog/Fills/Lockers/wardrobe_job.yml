@@ -317,6 +317,7 @@
     - id: ClothingUniformJumpskirtCargo
     - id: ClothingHandsGlovesFingerless
     - id: AppraisalTool
+    - id: EconomyEFTPOS # SS220 Economy
     - id: ClothingEyesHudSupply # SS220 ADD CARGO HUD
     - id: PlushieLizardJobCargotechnician
       prob: 0.02

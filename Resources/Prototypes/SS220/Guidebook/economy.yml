@@ -1,0 +1,4 @@
+- type: guideEntry
+  id: EconomyGuide
+  name: guide-entry-economy
+  text: "/ServerInfo/SS220/Guidebook/EconomyGuide.xml"
