@@ -128,11 +128,6 @@
     walkModifier: 1
     sprintModifier: 0.75
   - type: NeedleProtection
-  - type: ContainerContainer
-    containers:
-      item_radio: !type:ContainerSlot { }
-      storagebase: !type:Container
-        ents: [ ]
 
 - type: entity
   parent: [ClothingOuterArmorBulletproof, BaseSyndicateContraband, ClothingOuterChameleon]
@@ -142,11 +137,6 @@
   components:
   - type: StaticPrice
     price: 1500
-  - type: ContainerContainer
-    containers:
-      item_radio: !type:ContainerSlot { }
-      storagebase: !type:Container
-        ents: [ ]
 
 # OTHER
 
