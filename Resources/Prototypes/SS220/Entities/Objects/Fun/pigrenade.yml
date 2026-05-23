@@ -19,6 +19,8 @@
     velocity: 2
   - type: LandAtCursor
   - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
   - type: TimerTrigger
     delay: 3.0
     beepSound:
@@ -60,3 +62,6 @@
   components:
   - type: ScatteringGrenade
     fillPrototype: MobPig
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
