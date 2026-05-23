@@ -131,6 +131,7 @@
   - type: ContainerContainer
     containers:
       item_radio: !type:ContainerSlot { }
+      integrated-clothing: !type:ContainerSlot { }
       storagebase: !type:Container
         ents: [ ]
 
@@ -142,11 +143,6 @@
   components:
   - type: StaticPrice
     price: 1500
-  - type: ContainerContainer
-    containers:
-      item_radio: !type:ContainerSlot { }
-      storagebase: !type:Container
-        ents: [ ]
 
 # OTHER
 
