@@ -1,0 +1,22 @@
+
+
+void fragment() {
+    highp vec4 sprite = zTexture(UV);
+
+    highp float scale = 4.5;
+    highp float intensity = 1.0;
+
+    highp float grainSize = max(0.5, scale);
+
+    highp vec2 blockCoord = floor(FRAGCOORD.xy / grainSize);
+
+    // --- Блочная зернистость (квадратами) ---
+    // Масштабируем координаты, чтобы объединить пиксели в блоки
+
+    highp float seed = dot(blockCoord, vec2(12.9898, 78.233)) + floor(TIME * 60.0) * 0.1;
+    highp float noise = fract(sin(seed) * 43758.5453);
+
+    // Применяем мерцание
+    highp float brightness = mix(1.0, 0.4 + noise * 1.2, intensity);
+    COLOR = vec4(sprite.rgb * brightness, sprite.a);
+}

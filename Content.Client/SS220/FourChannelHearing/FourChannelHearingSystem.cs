@@ -7,7 +7,7 @@ public sealed class FourChannelHearingSystem : SharedFourChannelHearingSystem
 {
     [Dependency] private readonly IOverlayManager _overlayManager = default!;
 
-    private FourChannelHearingOverlay? _overlay;
+    private FourChannelHearingOverlayAlt? _overlay;
 
     public override void Initialize()
     {
@@ -22,7 +22,7 @@ public sealed class FourChannelHearingSystem : SharedFourChannelHearingSystem
         if (_overlay != null)
             return;
 
-        _overlay = new FourChannelHearingOverlay();
+        _overlay = new();
         _overlayManager.AddOverlay(_overlay);
     }
 
