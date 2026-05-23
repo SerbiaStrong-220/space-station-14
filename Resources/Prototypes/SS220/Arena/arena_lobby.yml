@@ -1,0 +1,219 @@
+- type: entity
+  id: BaseArenaLobbyRule
+  abstract: true
+  parent: BaseGameRule
+  components:
+  - type: ArenaRule
+    lifecycle: DeleteOnKill
+    selectionMode: Rotation
+    waitingTimeout: 60
+    showInLobby: true
+
+- type: entity
+  id: ArenaLobbyOperative
+  parent: BaseArenaLobbyRule
+  components:
+  - type: ArenaRule
+    displayName: Operative 2x2 (uplink)
+    description: Аплинк 40 ТК.
+    maxPlayers: 4
+    maps:
+    - path: /Maps/SS220/Arenas/uplink_arena_2v2.yml
+      loadout: ArenaLoadoutOperative
+
+- type: entity
+  id: ArenaLobbyMercenary
+  parent: BaseArenaLobbyRule
+  components:
+  - type: ArenaRule
+    displayName: Mercenary forest 1x1
+    description: АК, Кобра, лесной бой.
+    maxPlayers: 2
+    maps:
+    - path: /Maps/SS220/Arenas/forest_arena.yml
+      loadout: ArenaLoadoutMercenary
+
+- type: entity
+  id: ArenaLobbyDust
+  parent: BaseArenaLobbyRule
+  components:
+  - type: ArenaRule
+    displayName: Cowboy dust 1x1
+    description: Револьвер и дух Дикого Запада.
+    maxPlayers: 2
+    maps:
+    - path: /Maps/SS220/Arenas/dust_arena.yml
+      loadout: ArenaLoadoutDust
+
+- type: entity
+  id: ArenaLobbyKnight
+  parent: BaseArenaLobbyRule
+  components:
+  - type: ArenaRule
+    displayName: Knights duel 1x1
+    description: Клеймор и щит. Честная дуэль.
+    maxPlayers: 2
+    maps:
+    - path: /Maps/SS220/Arenas/knights_arena.yml
+      loadout: ArenaLoadoutKnight
+
+- type: entity
+  id: ArenaLobbyKnight3x3
+  parent: BaseArenaLobbyRule
+  components:
+  - type: ArenaRule
+    displayName: Knights 3x3
+    description: Рыцарь и два лучника.
+    maxPlayers: 6
+    maps:
+    - path: /Maps/SS220/Arenas/knights_arena_3v3.yml
+      loadouts:
+      - ArenaLoadoutKnight
+      - ArenaLoadoutArcher
+      - ArenaLoadoutArcher
+
+- type: entity
+  id: ArenaLobbyPirate
+  parent: BaseArenaLobbyRule
+  components:
+  - type: ArenaRule
+    displayName: Pirates 2x2
+    description: Мушкетон и пиратская пушка.
+    maxPlayers: 4
+    maps:
+    - path: /Maps/SS220/Arenas/pirates_arena.yml
+      loadout: ArenaLoadoutPirate
+
+- type: entity
+  id: ArenaLobbyLavaSec
+  parent: BaseArenaLobbyRule
+  components:
+  - type: ArenaRule
+    displayName: Lava sec 2x2
+    description: Хардсьют и тяжёлый лазер.
+    maxPlayers: 4
+    maps:
+    - path: /Maps/SS220/Arenas/lava_arena_2v2.yml
+      loadout: ArenaLoadoutLavaSec
+
+- type: entity
+  id: ArenaLobbyUplink1v1
+  parent: BaseArenaLobbyRule
+  components:
+  - type: ArenaRule
+    displayName: Uplink 1x1
+    description: Дуэль на 40 ТК.
+    maxPlayers: 2
+    maps:
+    - path: /Maps/SS220/Arenas/two_player_arena.yml
+      loadout: ArenaLoadoutOperative
+
+- type: entity
+  id: ArenaLobbyMine1v1
+  parent: BaseArenaLobbyRule
+  components:
+  - type: ArenaRule
+    displayName: Mine 1x1
+    description: Обрез и самопальный лазер.
+    maxPlayers: 2
+    maps:
+    - path: /Maps/SS220/Arenas/mine_arena.yml
+      loadout: ArenaLoadoutSalvage
+
+- type: entity
+  id: ArenaLobbyFrozen1v1
+  parent: BaseArenaLobbyRule
+  components:
+  - type: ArenaRule
+    displayName: Frozen 1x1
+    description: Лектер и холодный расчёт.
+    maxPlayers: 2
+    maps:
+    - path: /Maps/SS220/Arenas/frozen_arena.yml
+      loadout: ArenaLoadoutBlueShield
+
+- type: entity
+  id: ArenaLobbyIce1v1
+  parent: BaseArenaLobbyRule
+  components:
+  - type: ArenaRule
+    displayName: Ice 1x1
+    description: Лёд, скорость и кнокбэк.
+    maxPlayers: 2
+    maps:
+    - path: /Maps/SS220/Arenas/ice_arena.yml
+      loadout: ArenaLoadoutWinter
+
+- type: entity
+  id: ArenaLobbySniper1v1
+  parent: BaseArenaLobbyRule
+  components:
+  - type: ArenaRule
+    displayName: Sniper 1x1
+    description: Один выстрел - один труп.
+    maxPlayers: 2
+    maps:
+    - path: /Maps/SS220/Arenas/tunnel_arena.yml
+      loadout: ArenaLoadoutLawyerSniper
+
+- type: entity
+  id: ArenaLobbyByblik1v1
+  parent: BaseArenaLobbyRule
+  components:
+  - type: ArenaRule
+    displayName: Byblik 1x1
+    description: Эсток и два магазина.
+    maxPlayers: 2
+    maps:
+    - path: /Maps/SS220/Arenas/byblik_arena.yml
+      loadout: ArenaLoadoutByblik
+
+- type: entity
+  id: ArenaLobbyLava1v1
+  parent: BaseArenaLobbyRule
+  components:
+  - type: ArenaRule
+    displayName: Lava 1x1
+    description: Голиаф и два магнума.
+    maxPlayers: 2
+    maps:
+    - path: /Maps/SS220/Arenas/lava_arena.yml
+      loadout: ArenaLoadoutLava
+
+- type: entity
+  id: ArenaLobbyLaser1v1
+  parent: BaseArenaLobbyRule
+  components:
+  - type: ArenaRule
+    displayName: Laser 1x1
+    description: Лазерная дуэль.
+    maxPlayers: 2
+    maps:
+    - path: /Maps/SS220/Arenas/laser_arena.yml
+      loadout: ArenaLoadoutLaser
+
+- type: entity
+  id: ArenaLobbyAbyss
+  parent: BaseArenaLobbyRule
+  components:
+  - type: ArenaRule
+    displayName: Abyss 2x2
+    description: Христов и мачете в бездне.
+    maxPlayers: 4
+    maps:
+    - path: /Maps/SS220/Arenas/abyss_arena.yml
+      loadout: ArenaLoadoutAbyss
+
+- type: entity
+  id: ArenaLobbyCanvas
+  parent: BaseArenaLobbyRule
+  components:
+  - type: ArenaRule
+    displayName: Рисование
+    description: Холст и мелки. Никаких боёв.
+    displayCategory: misc
+    mode: Creative
+    maxPlayers: 1
+    maps:
+    - path: /Maps/SS220/Arenas/canvas_arena.yml
+      loadout: ArenaLoadoutCanvas
