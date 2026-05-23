@@ -382,6 +382,8 @@
 - type: entity
   parent: [ OrganBaseBrain, OrganSpriteHumanInternal, OrganIpcExternal ]
   id: OrganIpcBrain
+  components:
+  - type: BorgBrain
 
 - type: entity
   parent: [ OrganIpcVisual, OrganBaseEyes, OrganIpcExternal ]
