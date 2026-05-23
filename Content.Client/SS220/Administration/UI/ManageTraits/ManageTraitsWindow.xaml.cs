@@ -12,8 +12,8 @@ public sealed partial class ManageTraitsWindow : DefaultWindow
 {
     public event Action<string, bool>? OnAddTrait;
     public event Action<string>? OnRemoveTrait;
-    private Dictionary<string, string> _allTraits = new();
-    private List<string> _activeTraits = new();
+    private List<KeyValuePair<string, string>> _allTraits = new();
+    private HashSet<string> _activeTraits = new();
 
     public ManageTraitsWindow()
     {
@@ -43,8 +43,8 @@ public sealed partial class ManageTraitsWindow : DefaultWindow
     public void UpdateState(string targetName, List<string> activeTraits, Dictionary<string, string> allTraits)
     {
         TargetLabel.Text = Loc.GetString("admin-verbs-traits-target-player", ("player", targetName));
-        _activeTraits = activeTraits;
-        _allTraits = allTraits;
+        _activeTraits = activeTraits.ToHashSet();
+        _allTraits = allTraits.OrderBy(x => x.Value).ToList();
         RefreshLists();
     }
 
@@ -58,7 +58,7 @@ public sealed partial class ManageTraitsWindow : DefaultWindow
         var searchAvailable = SearchAvailable.Text?.ToLowerInvariant() ?? "";
         var searchActive = SearchActive.Text?.ToLowerInvariant() ?? "";
 
-        foreach (var (id, name) in _allTraits.OrderBy(x => x.Value))
+        foreach (var (id, name) in _allTraits)
         {
             if (_activeTraits.Contains(id))
             {

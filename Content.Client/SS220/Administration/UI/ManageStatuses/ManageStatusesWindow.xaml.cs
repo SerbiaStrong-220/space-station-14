@@ -13,8 +13,8 @@ public sealed partial class ManageStatusesWindow : DefaultWindow
     public event Action<string>? OnAddStatus;
     public event Action<string>? OnRemoveStatus;
 
-    private Dictionary<string, string> _allStatuses = new();
-    private List<string> _activeStatuses = new();
+    private List<KeyValuePair<string, string>> _allStatuses = new();
+    private HashSet<string> _activeStatuses = new();
 
     public ManageStatusesWindow()
     {
@@ -44,8 +44,8 @@ public sealed partial class ManageStatusesWindow : DefaultWindow
     public void UpdateState(string targetName, List<string> activeStatuses, Dictionary<string, string> allStatuses)
     {
         TargetLabel.Text = Loc.GetString("admin-verbs-traits-target-player", ("player", targetName));
-        _activeStatuses = activeStatuses;
-        _allStatuses = allStatuses;
+        _activeStatuses = activeStatuses.ToHashSet();
+        _allStatuses = allStatuses.OrderBy(x => x.Value).ToList();
         RefreshLists();
     }
 

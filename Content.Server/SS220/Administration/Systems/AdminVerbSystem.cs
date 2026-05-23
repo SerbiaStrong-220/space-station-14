@@ -26,7 +26,7 @@ public sealed class AdminVerbSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedScaleVisualsSystem _scaleVisuals = default!;
 
-    private const string HealthChangeDamageType = "Blunt";
+    private const string HealthChangeDamageType = "Cellular";
 
     public override void Initialize()
     {
