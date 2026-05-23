@@ -77,9 +77,6 @@
 # Jumpsuit
 - type: loadout
   id: JumpsuitNTR
-  # effects:
-  # - !type:GroupLoadoutEffect
-  #   proto: NanoTrasenRepresentativeTime
   equipment:
     jumpsuit: ClothingUniformJumpsuitNTR
 
