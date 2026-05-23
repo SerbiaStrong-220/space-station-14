@@ -46,20 +46,22 @@ public sealed class AdminVerbSystem : EntitySystem
                 Act = () =>
                 {
                     var maxLimit = reviveComp.ReviveLimit;
-                    var currentDeaths = reviveComp.DeathCounter;
+                    var remainingLives = maxLimit - reviveComp.DeathCounter;
 
                     _quickDialog.OpenDialog(player,
                         Loc.GetString("admin-verbs-lives-title"),
                         Loc.GetString("admin-verbs-lives-prompt",
                             ("max", maxLimit),
-                            ("current", currentDeaths)),
-                        (int desiredDeaths) =>
+                            ("current", remainingLives)),
+                        (int desiredLives) =>
                         {
                             if (Deleted(args.Target)) return;
 
                             if (!TryComp<LimitationReviveComponent>(args.Target, out var comp)) return;
 
-                            comp.DeathCounter = Math.Clamp(desiredDeaths, 0, maxLimit);
+                            var targetLives = Math.Clamp(desiredLives, 0, maxLimit);
+
+                            comp.DeathCounter = maxLimit - targetLives;
 
                             Dirty(args.Target, comp);
                         });

@@ -65,8 +65,8 @@ admin-verbs-dialog-set-bullet-amount-title = Set Bullet Amount
 admin-verbs-dialog-set-bullet-amount-amount = Amount (standard {$cap})
 
 # Commands (Lives)
-admin-verbs-lives-title = Change lives count
-admin-verbs-lives-prompt = Deaths (0 - { $max }, current: { $current })
+admin-verbs-lives-title = Change remaining lives
+admin-verbs-lives-prompt = Lives left (0 - { $max }, current: { $current })
 
 # Commands (Traits)
 admin-verbs-traits-title = Edit traits
