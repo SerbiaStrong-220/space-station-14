@@ -26,10 +26,60 @@
   - CaptainHeadset
   - CaptainHeadsetAlt
   # Капитан (Конец)
+
+  # Глава персонала (Начало)
+- type: loadoutGroup
+  id: HoPHeadset
+  name: loadout-group-hop-headset
+  minLimit: 1
+  loadouts:
+  - HoPHeadset
+  - HoPHeadsetAlt
+  # Глава персонала (Конец)
+
+  # Старший Инженер (Начало)
+- type: loadoutGroup
+  id: ChiefEngineerHeadset
+  name: loadout-group-chief-engineer-headset
+  minLimit: 1
+  loadouts:
+  - ChiefEngineerHeadset
+  - ChiefEngineerHeadsetAlt
+  # Старший Инженер (Конец)
+
+  # Главный Врач (Начало)
+- type: loadoutGroup
+  id: ChiefMedicalOfficerHeadset
+  name: loadout-group-chief-medical-officer-headset
+  minLimit: 1
+  loadouts:
+  - ChiefMedicalOfficerHeadset
+  - ChiefMedicalOfficerHeadsetAlt
+  # Главный Врач (Конец)
+
+  # Квартирмейстер (Начало)
+- type: loadoutGroup
+  id: QuartermasterHeadset 
+  name: loadout-group-quartermaster-headset
+  minLimit: 1
+  loadouts:
+  - QuartermasterHeadset
+  - QuartermasterHeadsetAlt
+  # Квартирмейстер (Конец)
+
+  # Научный Руководитель (Начало)
+- type: loadoutGroup
+  id: ResearchDirectorHeadset
+  name: loadout-group-research-director-headset
+  minLimit: 1
+  loadouts:
+  - ResearchDirectorHeadset
+  - ResearchDirectorHeadsetAlt
+  # Научный Руководитель (Конец)
 #! Командование (Конец)
 
 #! Юридический (Начало)
-  # Магистрат
+  # Магистрат (Начало)
 - type: loadoutGroup
   id: MagistrateHead
   name: loadout-group-magistrate-head
@@ -70,6 +120,8 @@
   loadouts:
   - MagistrateHeadset
   - MagistrateHeadsetAlt
+  # Магистрат (Конец)
+
   # Агент Внутренних Дел (Начало)
 - type: loadoutGroup
   id: IAAHead

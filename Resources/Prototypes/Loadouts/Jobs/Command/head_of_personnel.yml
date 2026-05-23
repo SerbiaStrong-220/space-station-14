@@ -82,16 +82,3 @@
   id: HoPWintercoat
   equipment:
     outerClothing: ClothingOuterWinterHoP
-
-# Headset
-#SS220 Headsetloadout begin
-- type: loadout
-  id: HoPHeadset
-  equipment:
-    ears: ClothingHeadsetCommand
-
-- type: loadout
-  id: HoPHeadsetAlt
-  equipment:
-    ears: ClothingHeadsetAltCommand
-#SS220 Headsetloadout end
