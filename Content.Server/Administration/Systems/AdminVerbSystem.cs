@@ -587,7 +587,7 @@ namespace Content.Server.Administration.Systems
                 {
                     Text = Loc.GetString("admin-verbs-scale-title"),
                     Category = VerbCategory.Debug,
-                    Icon = new SpriteSpecifier.Texture(new ("/Textures/Interface/VerbIcons/refresh.svg.192dpi.png")),
+                    // TODO need a proper icon here
                     Act = () =>
                     {
                         var curScale = _scaleVisuals.GetSpriteScale(args.Target);

@@ -1,4 +1,6 @@
-﻿using Content.Shared.Administration;
+﻿// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+using Content.Shared.Administration;
 using Content.Shared.Eui;
 using Content.Client.Eui;
 using JetBrains.Annotations;
