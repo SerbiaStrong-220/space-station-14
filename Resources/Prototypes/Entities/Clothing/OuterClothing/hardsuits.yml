@@ -679,6 +679,9 @@
       color: "#D82000"
       radius: 1
       energy: 4
+  - type: ToggleClothing
+    action: ActionTogglePersonalShield
+    disableOnUnequip: true
   # SS220-MIT-add-field-shields-end
   # SS220 add stamina resistance begin
   - type: StaminaResistance
@@ -749,6 +752,9 @@
       color: "#D82000"
       radius: 1
       energy: 4
+  - type: ToggleClothing
+    action: ActionTogglePersonalShield
+    disableOnUnequip: true
   # SS220-MIT-add-field-shields-end
   - type: ClothingSpeedModifier
     walkModifier: 0.9 #ss-220 armReb
@@ -809,6 +815,9 @@
       color: "#D82000"
       radius: 1
       energy: 4
+  - type: ToggleClothing
+    action: ActionTogglePersonalShield
+    disableOnUnequip: true
   # SS220-MIT-add-field-shields-end
   - type: Item
     size: Huge
@@ -877,6 +886,9 @@
       color: "#D82000"
       radius: 1
       energy: 4
+  - type: ToggleClothing
+    action: ActionTogglePersonalShield
+    disableOnUnequip: true
   # SS220-MIT-add-field-shields-end
   - type: ClothingSpeedModifier
     walkModifier: 0.9
@@ -944,6 +956,9 @@
       color: "#D82000"
       radius: 1.5
       energy: 6
+  - type: ToggleClothing
+    action: ActionTogglePersonalShield
+    disableOnUnequip: true
   # SS220-MIT-add-field-shields-end
   - type: ClothingSpeedModifier
     walkModifier: 0.65
@@ -1143,6 +1158,9 @@
       color: "#0061d8"
       radius: 1
       energy: 4
+  - type: ToggleClothing
+    action: ActionTogglePersonalShield
+    disableOnUnequip: true
   # SS220-MIT-add-field-shields-end
 
 #ERT Chaplain Hardsuit
@@ -1201,6 +1219,9 @@
       color: "#0061d8"
       radius: 1
       energy: 4
+  - type: ToggleClothing
+    action: ActionTogglePersonalShield
+    disableOnUnequip: true
   # SS220-MIT-add-field-shields-end
 
 #ERT Security Hardsuit
@@ -1233,6 +1254,9 @@
       color: "#0061d8"
       radius: 1
       energy: 4
+  - type: ToggleClothing
+    action: ActionTogglePersonalShield
+    disableOnUnequip: true
   # SS220-MIT-add-field-shields-end
 
 #ERT Janitor Hardsuit
@@ -1309,7 +1333,7 @@
 
 #CBURN Hardsuit
 - type: entity
-  parent: [ ClothingOuterHardsuitBase ]
+  parent: [ ClothingOuterHardsuitBase, BaseToggleClothing ]
   id: ClothingOuterHardsuitCBURN
   name: CBURN exosuit
   description: A lightweight yet strong exosuit used for special cleanup operations.
@@ -1364,6 +1388,9 @@
       color: "#0061d8"
       radius: 1
       energy: 4
+  - type: ToggleClothing
+    action: ActionTogglePersonalShield
+    disableOnUnequip: true
   # SS220-MIT-add-field-shields-end
 
 #MISC. HARDSUITS
