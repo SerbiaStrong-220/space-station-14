@@ -186,7 +186,7 @@ public sealed class VisualBodySystem : SharedVisualBodySystem
             // SS220-fix-tail-showing-in-suit-after-wagging-begin
             if (!_sprite.TryGetLayer(target, proto.BodyPart, out var originalLayer, true))
                 continue;
-            // SS220-fix-tail-showing-in-suit-after-wagging-begin
+            // SS220-fix-tail-showing-in-suit-after-wagging-end
 
             ent.Comp.MarkingsDisplacement.TryGetValue(proto.BodyPart, out var displacement);
 
