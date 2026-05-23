@@ -18,8 +18,9 @@
     capacity: 6
     velocity: 2
   - type: LandAtCursor
+  - type: ContainerContainer
   - type: TimerTrigger
-    delay: 3
+    delay: 3.0
     beepSound:
       path: "/Audio/SS220/Effects/pigrenade/hru.ogg"
       params:
