@@ -62,7 +62,7 @@ admin-verbs-dialog-set-bullet-amount-amount = Количество (станда
 
 # Commands (Lives)
 admin-verbs-lives-title = Изменить кол-во жизней
-admin-verbs-lives-health = Здоровье (1 - { $maxHp })
+admin-verbs-lives-prompt = Смерти (0 - { $max }, сейчас: { $current })
 
 # Commands (Traits)
 admin-verbs-traits-title = Изменить трейты

@@ -6,12 +6,8 @@ using Content.Server.Administration.Managers;
 using Content.Server.EUI;
 using Content.Server.Administration.UI;
 using Content.Shared.Administration;
-using Content.Shared.Damage;
-using Content.Shared.Damage.Components;
-using Content.Shared.Damage.Systems;
-using Content.Shared.Mobs;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.Sprite;
+using Content.Shared.SS220.LimitationRevive;
 using Content.Shared.Verbs;
 using Robust.Shared.Player;
 
@@ -22,11 +18,7 @@ public sealed class AdminVerbSystem : EntitySystem
     [Dependency] private readonly IAdminManager _adminManager = default!;
     [Dependency] private readonly QuickDialogSystem _quickDialog = default!;
     [Dependency] private readonly EuiManager _euiManager = default!;
-    [Dependency] private readonly MobThresholdSystem _mobThresholdSystem = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedScaleVisualsSystem _scaleVisuals = default!;
-
-    private const string HealthChangeDamageType = "Cellular";
 
     public override void Initialize()
     {
@@ -44,7 +36,7 @@ public sealed class AdminVerbSystem : EntitySystem
         if (!_adminManager.HasAdminFlag(player, AdminFlags.Debug))
             return;
 
-        if (HasComp<DamageableComponent>(args.Target))
+        if (TryComp<LimitationReviveComponent>(args.Target, out var reviveComp))
         {
             Verb setLivesVerb = new()
             {
@@ -53,28 +45,23 @@ public sealed class AdminVerbSystem : EntitySystem
                 // TODO need a proper icon here
                 Act = () =>
                 {
-                    if (!_mobThresholdSystem.TryGetThresholdForState(args.Target, MobState.Dead, out var deadThreshold))
-                        return;
-
-                    var maxHp = (int)deadThreshold.Value;
+                    var maxLimit = reviveComp.ReviveLimit;
+                    var currentDeaths = reviveComp.DeathCounter;
 
                     _quickDialog.OpenDialog(player,
                         Loc.GetString("admin-verbs-lives-title"),
-                        Loc.GetString("admin-verbs-lives-health", ("maxHp", maxHp)),
-                        (int desiredHp) =>
+                        Loc.GetString("admin-verbs-lives-prompt",
+                            ("max", maxLimit),
+                            ("current", currentDeaths)),
+                        (int desiredDeaths) =>
                         {
                             if (Deleted(args.Target)) return;
 
-                            var targetHp = Math.Clamp(desiredHp, 0, maxHp);
-                            var targetDamage = maxHp - targetHp;
-                            var currentDamage = (int)_damageable.GetTotalDamage(args.Target);
-                            var damageDelta = targetDamage - currentDamage;
+                            if (!TryComp<LimitationReviveComponent>(args.Target, out var comp)) return;
 
-                            if (damageDelta == 0) return;
+                            comp.DeathCounter = Math.Clamp(desiredDeaths, 0, maxLimit);
 
-                            var damageSpec = new DamageSpecifier();
-                            damageSpec.DamageDict.Add(HealthChangeDamageType, damageDelta);
-                            _damageable.TryChangeDamage(args.Target, damageSpec, true);
+                            Dirty(args.Target, comp);
                         });
                 }
             };
