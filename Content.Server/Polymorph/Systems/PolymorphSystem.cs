@@ -357,9 +357,10 @@ public sealed partial class PolymorphSystem : EntitySystem
             _damageable.SetDamage((parent, damageParent), damage);
         }
 
-        //SS220 Geras reagents fix
+        // SS220 Geras reagents fix begin
         if (component.Configuration.TransferReagents)
             TransferSolutions(uid, parent);
+        // SS220 Geras reagents fix end
 
         if (component.Configuration.Inventory == PolymorphInventoryChange.Transfer)
         {
