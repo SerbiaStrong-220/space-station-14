@@ -151,9 +151,9 @@ public sealed class ArenaLobbySystem : EntitySystem
 
             var creatorName = string.Empty;
             if (_arenaCreators.TryGetValue(id, out var creatorId)
-                && _playerManager.TryGetSessionById(creatorId, out var creatorSession))
+                && _playerManager.TryGetPlayerData(creatorId, out var creatorData))
             {
-                creatorName = creatorSession.Name;
+                creatorName = creatorData.UserName;
             }
 
             arenas.Add(new ArenaLobbyEntry

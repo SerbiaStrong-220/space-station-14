@@ -28,6 +28,7 @@ public sealed partial class ArenaLobbyWindow : DefaultWindow
     private static readonly Thickness RowMargin = new(8, 6);
     private static readonly Thickness PlayersMargin = new(0, 0, 8, 0);
     private static readonly Thickness NoArenasMargin = new(0, 18, 0, 0);
+    private static readonly Thickness CreatorMargin = new(12, 0, 0, 4);
 
     private static readonly Color ColorWaiting = Color.FromHex("#5dadd8");
     private static readonly Color ColorCountdown = Color.FromHex("#e0c46d");
@@ -219,7 +220,7 @@ public sealed partial class ArenaLobbyWindow : DefaultWindow
                 Text = Loc.GetString("arena-lobby-creator", ("name", entry.Creator)),
                 StyleClasses = { "LabelSubText" },
                 FontColorOverride = ColorDescription,
-                Margin = new Thickness(12, 0, 0, 4),
+                Margin = CreatorMargin,
             });
         }
 
