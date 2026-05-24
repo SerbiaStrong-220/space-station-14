@@ -252,19 +252,28 @@ public sealed class ArenaLobbySystem : EntitySystem
         RefreshAll();
     }
 
-    public void TryObserveArena(ICommonSession session, uint arenaId)
+    public bool TryObserveArena(ICommonSession session, uint arenaId)
     {
         if (session.AttachedEntity is not { } ghost || !HasComp<GhostComponent>(ghost))
-            return;
+            return false;
 
-        if (!_arenas.TryGetValue(arenaId, out var ruleUid)
-            || !TryComp<ArenaRuleComponent>(ruleUid, out var rule)
-            || rule.ArenaMapUid is not { } mapUid)
+        if (!_arenas.TryGetValue(arenaId, out var ruleUid))
+            return false;
+
+        if (!TryComp<ArenaRuleComponent>(ruleUid, out var rule))
         {
-            return;
+            Log.Error($"Arena id={arenaId} references {ToPrettyString(ruleUid)} without {nameof(ArenaRuleComponent)}; cleanup missed.");
+            return false;
+        }
+
+        if (rule.ArenaMapUid is not { } mapUid || TerminatingOrDeleted(mapUid))
+        {
+            Log.Error($"Arena id={arenaId} has no usable map (uid={rule.ArenaMapUid}).");
+            return false;
         }
 
         _transform.SetCoordinates(ghost, new EntityCoordinates(mapUid, Vector2.Zero));
+        return true;
     }
 
     public void TryJoinArena(ICommonSession session, uint arenaId)
