@@ -266,6 +266,8 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         if (!TryStartSurgery(target, args.SurgeryGraphId, user, entity))
             return;
 
+        DebugTools.Assert(surgeryPatientComp.OngoingSurgeries.ContainsKey(args.SurgeryGraphId));
+
         _adminLogManager.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(args.User):user} started surgery {args.SurgeryGraphId}) on {ToPrettyString(args.Target):target}!");
     }
 

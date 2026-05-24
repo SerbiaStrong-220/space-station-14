@@ -13,14 +13,14 @@ saw-rib-bone = Вскрытие Грудной клетки
 open-heart-incision = Сердце открыто
 
 to-torso-skin-incision = Сделать надрез на туловище
-to-torso-skin-clamp-bleeders = Зажать сосуды
-to-retract-torso-skin = Расширить надрез
+to-torso-skin-clamp-bleeders = Зажать сосуды в разрезе на туловище
+to-retract-torso-skin = Расширить надрез на туловище
 to-torso-internal-healing = Обработать внутренние раны
 to-saw-rib-bone = Распилить ребра
 to-retract-torso-skin-after-gel = Завершить сращивание рёбер
 to-saw-rib-bone-gelled-fixed = Срастить рёбра
 to-saw-rib-bone-gelled = Обработать рёбра костным гелем
-to-seal-torso-incision = Зашить разрез
+to-seal-torso-incision = Зашить разрез на туловище
 to-open-heart-incision = Сделать надрез на сердце
 to-fix-rib-bone = Восстановить грудную клетку
 to-direct-heart-defib = Прямая дефибрилляция сердца

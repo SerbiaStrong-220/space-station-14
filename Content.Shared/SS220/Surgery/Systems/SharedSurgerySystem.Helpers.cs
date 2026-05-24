@@ -120,13 +120,6 @@ public abstract partial class SharedSurgerySystem
 
     protected void StartSurgeryNode(Entity<SurgeryPatientComponent> entity, ProtoId<SurgeryGraphPrototype> surgeryGraph, EntityUid performer, EntityUid? used)
     {
-        // here hardcoded one operation at a time (TODO: maybe add radial menu for possible interactions?)
-        if (entity.Comp.OngoingSurgeries.Count > 0)
-        {
-            Log.Fatal("Skill issue lol");
-            return;
-        }
-
         if (!_prototype.Resolve(surgeryGraph, out var surgeryProto))
             return;
 
