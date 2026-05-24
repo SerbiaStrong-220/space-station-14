@@ -28,5 +28,5 @@ public sealed partial class FieldShieldProviderComponent : Component
     [AutoNetworkedField]
     public FieldShieldLightData LightData;
 
-    public bool IsEquipped = false;
+    public bool Equipped = false;
 }

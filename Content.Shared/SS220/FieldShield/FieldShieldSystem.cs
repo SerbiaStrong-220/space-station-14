@@ -119,10 +119,7 @@ public sealed class FieldShieldProviderSystem : EntitySystem
 
     private void OnActivateAttempt(Entity<FieldShieldProviderComponent> ent, ref ItemToggleActivateAttemptEvent args)
     {
-        if (ent.Comp.IsEquipped)
-            return;
-
-        args.Cancelled = true;
+        args.Cancelled = !ent.Comp.Equipped;
     }
 
 
@@ -135,12 +132,11 @@ public sealed class FieldShieldProviderSystem : EntitySystem
             return;
 
         var user = args.User.Value;
-        var isEnabled = args.Activated;
 
         var message = Loc.GetString(args.Activated ? FieldShieldOn : FieldShieldOff);
         _popup.PopupClient(message, user, user);
 
-        if (isEnabled)
+        if (args.Activated)
         {
             var shieldComp = EnsureComp<FieldShieldComponent>(user);
             shieldComp.ShieldData = ent.Comp.ShieldData;
@@ -158,13 +154,13 @@ public sealed class FieldShieldProviderSystem : EntitySystem
 
     private void OnProviderEquipped(Entity<FieldShieldProviderComponent> ent, ref GotEquippedEvent args)
     {
-        ent.Comp.IsEquipped = true;
+        ent.Comp.Equipped = true;
     }
 
     private void OnProviderUnequipped(Entity<FieldShieldProviderComponent> entity, ref GotUnequippedEvent args)
     {
         RemCompDeferred<FieldShieldComponent>(args.EquipTarget);
-        entity.Comp.IsEquipped = false;
+        entity.Comp.Equipped = false;
     }
 
     private void OnFieldShieldBeforeDamage(Entity<FieldShieldComponent> entity, ref BeforeDamageChangedEvent args)
