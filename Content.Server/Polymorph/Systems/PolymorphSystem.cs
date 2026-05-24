@@ -290,9 +290,10 @@ public sealed partial class PolymorphSystem : EntitySystem
             _visualBody.CopyAppearanceFrom(uid, child);
         }
 
-        //SS220 Geras reagents fix
+        // SS220 Geras reagents fix begin
         if (configuration.TransferReagents)
             TransferSolutions(uid, child);
+        //SS220 Geras reagents fix end
 
         if (_mindSystem.TryGetMind(uid, out var mindId, out var mind))
             _mindSystem.TransferTo(mindId, child, mind: mind);
@@ -417,18 +418,21 @@ public sealed partial class PolymorphSystem : EntitySystem
     private void TransferSolutions(EntityUid from, EntityUid to)
     {
         if (!TryComp<SolutionContainerManagerComponent>(from, out var fromManager) ||
-            !TryComp<SolutionContainerManagerComponent>(to, out var ToManager))
+            !TryComp<SolutionContainerManagerComponent>(to, out var toManager))
             return;
+
         foreach (var (SolutionName, fromSolutionEnt ) in _solutionContainer.EnumerateSolutions((from, fromManager)))
         {
             if (fromSolutionEnt.Comp.Solution.Volume <= FixedPoint2.Zero)
                 continue;
+
             if (!_solutionContainer.TryGetSolution((to, ToManager), SolutionName, out var toSolutionEnt, out var toSolution ))
                 continue;
 
             var transferVolume = FixedPoint2.Min(fromSolutionEnt.Comp.Solution.Volume, toSolution.AvailableVolume);
             if (transferVolume < FixedPoint2.Zero)
                 continue;
+
             var movedSolution = _solutionContainer.SplitSolution(fromSolutionEnt, transferVolume);
             _solutionContainer.TryAddSolution(toSolutionEnt.Value, movedSolution);
         }
