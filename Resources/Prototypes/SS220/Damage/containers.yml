@@ -4,6 +4,9 @@
   - Forcefield
 
 - type: damageContainer
+  id: Invulnerable
+
+- type: damageContainer
   id: IpcContainer
   supportedGroups:
     - Brute

@@ -139,6 +139,7 @@
       enum.RadarConsoleUiKey.Key:
         toggleAction: ActionGhostShowRadar
   # ss220 add ghost's radar end
+  - type: ArenaLobbyGhostAction # SS220 Arena
 
 # proto for player ghosts specifically
 - type: entity
