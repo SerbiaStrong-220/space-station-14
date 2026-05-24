@@ -92,6 +92,7 @@
     - LaserSMGPowerCell
     - DefibrillatorSyndicate
     - EmergencyRollerBedSpawnFolded
+    - AdvancedJetInjector
 
 - type: startingGear
   id: RedWingsPilotGear
