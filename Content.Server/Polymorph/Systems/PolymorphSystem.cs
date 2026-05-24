@@ -427,7 +427,7 @@ public sealed partial class PolymorphSystem : EntitySystem
             if (fromSolutionEnt.Comp.Solution.Volume <= FixedPoint2.Zero)
                 continue;
 
-            if (!_solutionContainer.TryGetSolution((to, ToManager), SolutionName, out var toSolutionEnt, out var toSolution ))
+            if (!_solutionContainer.TryGetSolution((to, toManager), solutionName, out var toSolutionEnt, out var toSolution ))
                 continue;
 
             var transferVolume = FixedPoint2.Min(fromSolutionEnt.Comp.Solution.Volume, toSolution.AvailableVolume);
