@@ -1,5 +1,6 @@
 using Content.Shared.Administration.Logs;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
+using Content.Shared.Damage.Components;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
@@ -28,7 +29,7 @@ public sealed class MultiRepairableSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (!TryComp<DamageableComponent>(ent, out var damageable) || damageable.TotalDamage == 0)
+        if (_damageableSystem.GetTotalDamage(ent.Owner) == 0)
             return;
 
         foreach (var option in ent.Comp.Options)
@@ -39,21 +40,21 @@ public sealed class MultiRepairableSystem : EntitySystem
             var delay = option.DoAfterDelay;
             if (args.User == ent.Owner)
             {
-                if (!ent.Comp.AllowSelfRepair) 
+                if (!ent.Comp.AllowSelfRepair)
                     return;
                 delay *= ent.Comp.SelfRepairPenalty;
             }
 
             args.Handled = _toolSystem.UseTool(
-                args.Used, 
-                args.User, 
-                ent, 
-                delay, 
-                option.QualityNeeded, 
-                new MultiRepairDoAfterEvent(option), 
+                args.Used,
+                args.User,
+                ent,
+                delay,
+                option.QualityNeeded,
+                new MultiRepairDoAfterEvent(option),
                 option.FuelCost
             );
-            
+
             if (args.Handled)
                 break;
         }
@@ -61,15 +62,15 @@ public sealed class MultiRepairableSystem : EntitySystem
 
     private void OnDoAfter(Entity<MultiRepairableComponent> ent, ref MultiRepairDoAfterEvent args)
     {
-        if (args.Cancelled || args.Handled || args.Args.Used == null) 
+        if (args.Cancelled || args.Handled || args.Args.Used == null)
             return;
 
         var option = args.RepairOption;
 
         if (option.Damage != null)
         {
-            var damageChanged = _damageableSystem.TryChangeDamage(ent, option.Damage, true, origin: args.User);
-            _adminLogger.Add(LogType.Healed, $"{ToPrettyString(args.User):user} repaired {ToPrettyString(ent):target} by {damageChanged?.GetTotal()} using {ToPrettyString(args.Args.Used.Value):tool}");
+            _damageableSystem.TryChangeDamage(ent.Owner, option.Damage, true, origin: args.User);
+            _adminLogger.Add(LogType.Healed, $"{ToPrettyString(args.User):user} repaired {ToPrettyString(ent):target} by {_damageableSystem.GetTotalDamage(ent.Owner)} using {ToPrettyString(args.Args.Used.Value):tool}");
         }
 
         var str = Loc.GetString("comp-repairable-repair", ("target", ent), ("tool", args.Args.Used.Value));
