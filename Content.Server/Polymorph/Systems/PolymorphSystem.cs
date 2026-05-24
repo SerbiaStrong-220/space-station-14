@@ -420,8 +420,8 @@ public sealed partial class PolymorphSystem : EntitySystem
         if (!TryComp<SolutionContainerManagerComponent>(from, out var fromManager) ||
             !TryComp<SolutionContainerManagerComponent>(to, out var toManager))
             return;
-
-        foreach (var (SolutionName, fromSolutionEnt ) in _solutionContainer.EnumerateSolutions((from, fromManager)))
+            return;
+        foreach (var (solutionName, fromSolutionEnt ) in _solutionContainer.EnumerateSolutions((from, fromManager)))
         {
             if (fromSolutionEnt.Comp.Solution.Volume <= FixedPoint2.Zero)
                 continue;
