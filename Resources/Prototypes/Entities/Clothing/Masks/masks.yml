@@ -11,6 +11,11 @@
   - type: BreathMask
   - type: IngestionBlocker
   - type: IdentityBlocker
+  #SS220 shield rework begin
+  - type: WearableInstastunResist
+    resistedStunTypes:
+      - Creampie
+  #SS220 shield rework end
   - type: Tag
     tags:
     - HamsterWearable

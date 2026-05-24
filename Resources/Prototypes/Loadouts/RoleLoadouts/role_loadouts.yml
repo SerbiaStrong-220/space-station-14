@@ -130,6 +130,7 @@
 - type: roleLoadout
   id: JobLawyer
   groups:
+  - LawyerHead # ss220 - ntr add - transfer iaa cloths
   - LawyerHeadset #SS220-Law Department & SS220 add-iaa-command-key
   - GroupTankHarness
   - LawyerNeck
@@ -142,7 +143,6 @@
   - Trinkets
   #- LawyerJobTrinkets
   - GroupSpeciesBreathTool
-  - SponsorNeck #SS220-Two Floppa Iteration
   - WorkerCash #SS220-Cash-personal
 
 - type: roleLoadout

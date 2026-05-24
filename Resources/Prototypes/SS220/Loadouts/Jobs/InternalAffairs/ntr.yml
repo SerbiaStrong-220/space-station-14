@@ -1,0 +1,11 @@
+# Headset
+
+- type: loadout
+  id: NanoTrasenRepresentativeHeadset
+  equipment:
+    ears: ClothingHeadsetNanoTrasenRepresentative
+
+- type: loadout
+  id: NanoTrasenRepresentativeHeadsetAlt
+  equipment:
+    ears: ClothingHeadsetAltNanoTrasenRepresentative

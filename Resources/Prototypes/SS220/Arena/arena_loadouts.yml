@@ -1,4 +1,12 @@
 - type: startingGear
+  id: ArenaLoadoutCanvas
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorGrey
+    shoes: ClothingShoesColorBlack
+  inhand:
+  - CrayonInfinite
+
+- type: startingGear
   id: ArenaLoadoutDust
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorBrown
@@ -202,3 +210,17 @@
   inhand:
   - WeaponShotgunSawn
   - WeaponMakeshiftLaser
+
+- type: startingGear
+  id: ArenaLoadoutAbyss
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSalvageSpecialist
+    shoes: ClothingShoesBootsSalvage
+    back: ClothingBackpackSalvage
+  inhand:
+  - WeaponSniperHristov
+  - Machete
+  storage:
+    back:
+    - MagazineBoxAntiMateriel
+    - MagazineBoxAntiMateriel
