@@ -1,6 +1,5 @@
 ﻿// Taken from: Corvax https://github.com/space-syndicate/space-station-14
 
-using Content.Server.PowerCell;
 using Content.Shared.Actions;
 using Content.Shared.Alert;
 using Content.Shared.SS220.Ipc;
@@ -9,7 +8,10 @@ using Content.Shared.Ninja.Systems;
 using Content.Shared.Popups;
 using Content.Shared.PowerCell;
 using Content.Shared.PowerCell.Components;
+using Content.Shared.Power.EntitySystems;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Systems;
+using Content.Shared.Damage.Components;
 using Content.Shared.Emp;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Mobs;
@@ -26,6 +28,9 @@ using Content.Shared.Humanoid;
 using Content.Server.Humanoid;
 using Content.Shared.Humanoid.Markings;
 using Robust.Shared.Player;
+using Content.Shared.Body;
+using Content.Shared.MagicMirror;
+using Content.Shared.Body.Components;
 
 namespace Content.Server.SS220.Ipc;
 
@@ -36,13 +41,11 @@ public sealed partial class IpcSystem : EntitySystem
     [Dependency] private readonly SharedBatteryDrainerSystem _batteryDrainer = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PowerCellSystem _powerCell = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly SharedBatterySystem _battery = default!;
+    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifier = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
-    [Dependency] private readonly MarkingManager _markingManager = default!;
     [Dependency] private readonly MobThresholdSystem _mobThresholdSystem = default!;
 
     public override void Initialize()
@@ -58,11 +61,7 @@ public sealed partial class IpcSystem : EntitySystem
         SubscribeLocalEvent<IpcComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<IpcComponent, OpenIpcFaceActionEvent>(OnOpenFaceAction);
         SubscribeLocalEvent<IpcComponent, DamageChangedEvent>(OnDamageChanged);
-        SubscribeLocalEvent<IpcComponent, OnTemperatureChangeEvent>(OnTemperatureChanged);
-        Subs.BuiEvents<IpcComponent>(IpcFaceUiKey.Face, subs =>
-        {
-            subs.Event<IpcFaceSelectMessage>(OnFaceSelected);
-        });
+        //SubscribeLocalEvent<IpcComponent, OnTemperatureChangeEvent>(OnTemperatureChanged);
     }
 
     private void OnMapInit(Entity<IpcComponent> ent, ref MapInitEvent args)
@@ -71,14 +70,6 @@ public sealed partial class IpcSystem : EntitySystem
         _action.AddAction(ent, ref ent.Comp.DrainBatteryActionEntity, ent.Comp.DrainBatteryAction);
         _action.AddAction(ent, ref ent.Comp.ChangeFaceActionEntity, ent.Comp.ChangeFaceAction);
         _movementSpeedModifier.RefreshMovementSpeedModifiers(ent);
-
-        if (TryComp<HumanoidAppearanceComponent>(ent, out var appearance) &&
-            appearance.MarkingSet.TryGetCategory(MarkingCategories.Snout, out var markings) &&
-            markings.Count > ent.Comp.OnMapInitMarkCount)
-        {
-            ent.Comp.SelectedFace = markings[0].MarkingId;
-            Dirty(ent);
-        }
     }
 
     private void OnComponentShutdown(Entity<IpcComponent> ent, ref ComponentShutdown args)
@@ -105,7 +96,7 @@ public sealed partial class IpcSystem : EntitySystem
         _action.SetToggled(ent.Comp.DrainBatteryActionEntity, ent.Comp.DrainActivated);
         args.Handled = true;
 
-        if (ent.Comp.DrainActivated && _powerCell.TryGetBatteryFromSlot(ent, out var battery, out var _))
+        if (ent.Comp.DrainActivated && _powerCell.TryGetBatteryFromSlot(ent.Owner, out var battery))
         {
             EnsureComp<BatteryDrainerComponent>(ent);
             _batteryDrainer.SetBattery(ent.Owner, battery);
@@ -119,7 +110,7 @@ public sealed partial class IpcSystem : EntitySystem
 
     private void UpdateBatteryAlert(Entity<IpcComponent> ent, PowerCellSlotComponent? slot = null)
     {
-        if (!_powerCell.TryGetBatteryFromSlot(ent, out var battery, slot) || battery.CurrentCharge / battery.MaxCharge < 0.01f)
+        if (!_powerCell.TryGetBatteryFromSlot(ent.Owner, out var battery) || _battery.GetCharge(battery.Value.AsNullable()) / battery.Value.Comp.MaxCharge < 0.01f)
         {
             _alerts.ClearAlert(ent.Owner, ent.Comp.BatteryAlert);
             _alerts.ShowAlert(ent.Owner, ent.Comp.NoBatteryAlert);
@@ -128,9 +119,9 @@ public sealed partial class IpcSystem : EntitySystem
             return;
         }
 
-        var chargePercent = (short) MathF.Round(battery.CurrentCharge / battery.MaxCharge * 10f); //if 100f - crash
+        var chargePercent = (short) MathF.Round(_battery.GetCharge(battery.Value.AsNullable()) / battery.Value.Comp.MaxCharge * 10f); //if 100f - crash
 
-        if (chargePercent == 0 && _powerCell.HasDrawCharge(ent, cell: slot))
+        if (chargePercent == 0 && _powerCell.HasDrawCharge((ent.Owner, null, slot)))
             chargePercent = 1;
 
 
@@ -142,7 +133,7 @@ public sealed partial class IpcSystem : EntitySystem
 
     private void OnRefreshMovementSpeedModifiers(Entity<IpcComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
-        if (!_powerCell.TryGetBatteryFromSlot(ent, out var battery) || battery.CurrentCharge / battery.MaxCharge < 0.01f)
+        if (!_powerCell.TryGetBatteryFromSlot(ent.Owner, out var battery) || _battery.GetCharge(battery.Value.AsNullable()) / battery.Value.Comp.MaxCharge < 0.01f)
         {
             args.ModifySpeed(ent.Comp.LowChargeSpeed);
         }
@@ -153,33 +144,19 @@ public sealed partial class IpcSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (!TryComp<ActorComponent>(ent, out var actor))
+        if (!HasComp<MagicMirrorComponent>(ent))
             return;
 
-        _ui.SetUiState(ent.Owner, IpcFaceUiKey.Face, new IpcFaceBuiState(ent.Comp.FaceProfile, ent.Comp.SelectedFace));
-        _ui.TryToggleUi(ent.Owner, IpcFaceUiKey.Face, actor.PlayerSession);
         args.Handled = true;
-    }
 
-    private void OnFaceSelected(Entity<IpcComponent> ent, ref IpcFaceSelectMessage msg)
-    {
-        if (TryComp<HumanoidAppearanceComponent>(ent.Owner, out var appearance))
-        {
-            var category = MarkingCategories.Snout;
-            if (appearance.MarkingSet.TryGetCategory(category, out var markings) && markings.Count > 0)
-            {
-                _humanoid.SetMarkingId(ent.Owner, category, 0, msg.State, appearance);
-            }
-            else if (_markingManager.Markings.TryGetValue(msg.State, out var proto))
-            {
-                appearance.MarkingSet.AddBack(category, proto.AsMarking());
-                Dirty(ent.Owner, appearance);
-            }
-        }
+        // User open UI event.
+        var ev = new BeforeActivatableUIOpenEvent(args.Performer);
 
-        ent.Comp.SelectedFace = msg.State;
-        Dirty(ent);
-        _ui.CloseUi(ent.Owner, IpcFaceUiKey.Face);
+        // Raise event on ent. MagicMirrorSystem call UpdateInterface().
+        RaiseLocalEvent(ent.Owner, ev);
+
+        // Open magic mirror UI
+        _ui.TryOpenUi(ent.Owner, MagicMirrorUiKey.Key, args.Performer);
     }
 
     private void OnEmpPulse(Entity<IpcComponent> ent, ref EmpPulseEvent args)
@@ -188,7 +165,7 @@ public sealed partial class IpcSystem : EntitySystem
 
         var damage = new DamageSpecifier();
         damage.DamageDict.Add("Shock", ent.Comp.DamageFromEmp);
-        _damageable.TryChangeDamage(ent, damage);
+        _damageableSystem.TryChangeDamage(ent.Owner, damage);
 
     }
 
@@ -222,12 +199,12 @@ public sealed partial class IpcSystem : EntitySystem
         if (!_mobThresholdSystem.TryGetDeadThreshold(ent, out var threshold))
             return;
 
-        if (damageableComp.TotalDamage > threshold)
+        if (_damageableSystem.GetTotalDamage(ent.Owner) > threshold)
             return;
 
         _mobState.ChangeMobState(ent, MobState.Critical);
     }
-
+/*
     private void OnTemperatureChanged(Entity<IpcComponent> ent, ref OnTemperatureChangeEvent args)
     {
         if (!TryComp<PowerCellDrawComponent>(ent, out var draw))
@@ -247,5 +224,5 @@ public sealed partial class IpcSystem : EntitySystem
 
         draw.DrawRate = newDrawRate;
         Dirty(ent, draw);
-    }
+    }*/
 }

@@ -1,6 +1,7 @@
 ﻿- type: markingsGroup
   parent: Undergarments
   id: Ipc
+  onlyGroupWhitelisted: true
   limits:
     enum.HumanoidVisualLayers.Hair: #antennas
       limit: 1
@@ -62,11 +63,11 @@
       FootLeft: OrganIpcFootLeft
       FootRight: OrganIpcFootRight
       Brain: OrganIpcBrain
-      Eyes: OrganIpcEyes
+      #Eyes: OrganIpcEyes
   - type: HumanoidProfile
     species: Ipc
   - type: Inventory
-    templateId: ipc
+    templateId: human
     speciesId: ipc
 
 - type: entity
@@ -104,14 +105,24 @@
     - StaminaModifier
     - Flashed
     - RadiationProtection
+  - type: MagicMirror
+    organs:
+    - Head
+    layers:
+    - Snout
+    changeHairSound: null
+    modifyTime: 0
+  #- type: ActivatableUI
+  #  key: enum.MagicMirrorUiKey.Key
+  #  singleUser: true
   - type: UserInterface
     interfaces:
       enum.HumanoidMarkingModifierKey.Key:
         type: HumanoidMarkingModifierBoundUserInterface
       enum.StrippingUiKey.Key:
         type: StrippableBoundUserInterface
-      enum.IpcFaceUiKey.Face:
-        type: IpcFaceUserInterface
+      enum.MagicMirrorUiKey.Key:
+        type: MagicMirrorBoundUserInterface
   - type: Language
     availableLanguages:
     - id: Galactic
@@ -292,6 +303,8 @@
         damage:
           types:
              Caustic: -5
+  - type: Experience
+  - type: StunVisuals
 
 - type: entity
   parent: OrganBase
@@ -380,11 +393,11 @@
   id: OrganIpcFootRight
 
 - type: entity
-  parent: [ OrganBaseBrain, OrganSpriteHumanInternal, OrganIpcExternal ]
+  parent: [ OrganBaseBrain, OrganSpriteHumanInternal, OrganIpcInternal ]
   id: OrganIpcBrain
   components:
   - type: BorgBrain
 
-- type: entity
-  parent: [ OrganIpcVisual, OrganBaseEyes, OrganIpcExternal ]
-  id: OrganIpcEyes
+#- type: entity
+#  parent: [ OrganIpcVisual, OrganBaseEyes, OrganIpcInternal ]
+#  id: OrganIpcEyes

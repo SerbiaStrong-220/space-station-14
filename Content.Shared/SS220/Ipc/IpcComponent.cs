@@ -11,7 +11,6 @@ namespace Content.Shared.SS220.Ipc;
 /// This is used for...
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-[AutoGenerateComponentState]
 public sealed partial class IpcComponent : Component
 {
     [DataField]
@@ -32,12 +31,6 @@ public sealed partial class IpcComponent : Component
     [DataField]
     public EntityUid? ChangeFaceActionEntity;
 
-    [DataField, AutoNetworkedField]
-    public string SelectedFace = string.Empty;
-
-    [DataField, AutoNetworkedField]
-    public ProtoId<IpcFaceProfilePrototype> FaceProfile = "DefaultIpcFaces";
-
     public bool DrainActivated;
 
     /// <summary>
@@ -51,12 +44,6 @@ public sealed partial class IpcComponent : Component
     /// </summary>
     [DataField]
     public float DamageFromEmp = 30;
-
-    /// <summary>
-    /// Something for IPC faces...?
-    /// </summary>
-    [DataField]
-    public float OnMapInitMarkCount = 0;
 
     /// <summary>
     /// Ideal temp for IPC
