@@ -123,7 +123,6 @@
     - 0,0,2,3
   - type: StorageFill
     contents:
-    - id: GlowstickBase
     - id: WelderMini
     - id: PowerCellSmall
     - id: Flare
@@ -149,7 +148,6 @@
     - 0,0,2,3
   - type: StorageFill
     contents:
-    - id: GlowstickBase
     - id: WelderMini
     - id: PowerCellMedium
     - id: Flare
@@ -177,7 +175,6 @@
     - 0,0,2,3
   - type: StorageFill
     contents:
-    - id: GlowstickBase
     - id: WelderMini
     - id: PowerCellHigh
     - id: Flare
@@ -203,7 +200,6 @@
     - 0,0,2,3
   - type: StorageFill
     contents:
-    - id: GlowstickBase
     - id: WelderMini
     - id: PowerCellSmall
     - id: Flare
@@ -230,7 +226,6 @@
     - 0,0,2,3
   - type: StorageFill
     contents:
-    - id: GlowstickBase
     - id: WelderMini
     - id: PowerCellSmall
     - id: Flare
@@ -257,7 +252,6 @@
     - 0,0,2,3
   - type: StorageFill
     contents:
-    - id: GlowstickBase
     - id: WelderMini
     - id: PowerCellSmall
     - id: Flare
