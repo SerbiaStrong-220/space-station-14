@@ -114,11 +114,19 @@ public abstract partial class SharedHandsSystem
 
         TryDrop(ent, handName, null, false);
 
-        if (!ent.Comp.Hands.Remove(handName))
+        // SS220-fix-hand-sprites-begin
+        // [wizden-code]
+        // if (!ent.Comp.Hands.Remove(handName))
+        //     return;
+        // [wizden-code]
+        if (!ent.Comp.Hands.ContainsKey(handName))
             return;
+        // SS220-fix-hand-sprites-end
 
         if (ContainerSystem.TryGetContainer(ent, handName, out var container))
             ContainerSystem.ShutdownContainer(container);
+
+        ent.Comp.Hands.Remove(handName); // SS220-fix-hand-sprites
 
         ent.Comp.SortedHands.Remove(handName);
         if (ent.Comp.ActiveHandId == handName)

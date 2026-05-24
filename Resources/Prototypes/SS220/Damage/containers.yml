@@ -2,3 +2,6 @@
   id: Forcefield
   supportedTypes:
   - Forcefield
+
+- type: damageContainer
+  id: Invulnerable

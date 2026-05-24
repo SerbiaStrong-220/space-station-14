@@ -609,7 +609,8 @@ public abstract class SharedRoleSystem : EntitySystem
                 roleInfo.Add(new RoleInfo(name, comp.Antag, playTimeTracker, prototype));
 
             // SS220-add-ghost-role-tracker-begin
-            if (TryComp<GhostRoleMarkerRoleComponent>(role, out var _))
+            // ss220 add arena: also check ShowInSummary
+            if (TryComp<GhostRoleMarkerRoleComponent>(role, out var marker) && marker.ShowInSummary)
             {
                 roleInfo.Add(new RoleInfo(MetaData(role).EntityName, false, _ghostRoleTracker, _ghostRolePrototype));
             }
