@@ -15,8 +15,10 @@ using Robust.Shared.Enums;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Map;
 using Robust.Shared.Timing;
 using System.Linq;
+using System.Numerics;
 
 namespace Content.Server.SS220.Arena.Lobby;
 
@@ -31,6 +33,7 @@ public sealed class ArenaLobbySystem : EntitySystem
     [Dependency] private readonly IComponentFactory _factory = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private const float RefreshIntervalSeconds = 3f;
 
@@ -146,6 +149,13 @@ public sealed class ArenaLobbySystem : EntitySystem
                 continue;
             }
 
+            var creatorName = string.Empty;
+            if (_arenaCreators.TryGetValue(id, out var creatorId)
+                && _playerManager.TryGetSessionById(creatorId, out var creatorSession))
+            {
+                creatorName = creatorSession.Name;
+            }
+
             arenas.Add(new ArenaLobbyEntry
             {
                 ArenaId = id,
@@ -154,6 +164,7 @@ public sealed class ArenaLobbySystem : EntitySystem
                 MaxPlayers = rule.MaxPlayers,
                 Phase = rule.Phase,
                 Category = rule.DisplayCategory,
+                Creator = creatorName,
             });
         }
 
@@ -239,6 +250,21 @@ public sealed class ArenaLobbySystem : EntitySystem
         Log.Info($"Arena created: id={id}, proto={arenaProtoId}, host={session.Name}.");
         CloseEuiFor(session);
         RefreshAll();
+    }
+
+    public void TryObserveArena(ICommonSession session, uint arenaId)
+    {
+        if (session.AttachedEntity is not { } ghost || !HasComp<GhostComponent>(ghost))
+            return;
+
+        if (!_arenas.TryGetValue(arenaId, out var ruleUid)
+            || !TryComp<ArenaRuleComponent>(ruleUid, out var rule)
+            || rule.ArenaMapUid is not { } mapUid)
+        {
+            return;
+        }
+
+        _transform.SetCoordinates(ghost, new EntityCoordinates(mapUid, Vector2.Zero));
     }
 
     public void TryJoinArena(ICommonSession session, uint arenaId)
