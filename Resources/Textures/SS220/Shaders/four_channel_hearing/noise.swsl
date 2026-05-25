@@ -1,32 +1,30 @@
 
 uniform highp vec2 TargetPos;
 uniform highp vec2 PlayerPos;
-uniform highp vec2 RenderScale;
 
-const highp float waveThikness = 0.7;
-const highp float waveDist = 0.2;
-const highp float animLength = 0.7;
+uniform highp float WaveThikness;
+uniform highp float WaveInterval;
+
+uniform highp float CircleWaveRadius;
+uniform highp float CircleWaveDecreaseStart;
+
+uniform highp float NoDirectedWaveRange;
+
 const highp float hearingAngle = 15.0;
-const highp float testStart = 1.2;
-const highp float testEnd = 2.2;
+const highp float animLength = 0.7;
 
 highp float rand(highp vec2 p)
 {
     return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
 }
 
-highp vec2 scaledDir(highp vec2 p1, highp vec2 p2){
-    return (p1 - p2) / (RenderScale * 32.0);
-}
 
 highp vec3 applyNoise(highp vec2 p, highp vec3 rgb)
 {
     highp float noiseAmount = 10;
-
     highp float noise = (rand(p + fract(TIME)) - 0.5) * noiseAmount;
     rgb += noise;
     rgb = clamp(rgb, 0.0, 1.0);
-
     return rgb;
 }
 
@@ -40,45 +38,46 @@ bool isInSector(highp vec2 p){
     if (len2Pixel > len2Target)
         return false;
 
-    // Защита от нулевых векторов
+    if (len2Pixel < NoDirectedWaveRange * NoDirectedWaveRange)
+        return false;
+
     if (len2Pixel < 0.001 || len2Target < 0.001)
         return true;
 
     highp float cosHalfAngle = cos(radians(hearingAngle) * 0.5);
-
     highp float dotVal = dot(playerToPixel, playerToTarget);
 
-    return dotVal >= cosHalfAngle * sqrt(len2Pixel * len2Target);
+    return (dotVal * dotVal) >= (cosHalfAngle * cosHalfAngle * len2Pixel * len2Target);
 }
 
 bool isOnWave(highp vec2 p){
-    highp float sum = waveThikness + waveDist;
+    highp float sum = WaveThikness + WaveInterval;
     highp float animProg = mod(TIME, animLength) / animLength;
-    highp float pos = length(scaledDir(p, TargetPos)) + sum - sum * animProg;
+    highp float pos = length(p - TargetPos) + sum - sum * animProg;
 
     highp float rem = mod(pos, sum);
-    return rem >= waveDist;
+    return rem >= WaveInterval;
 }
 
 void fragment() {
-    highp vec2 p = FRAGCOORD.xy;
-    if (!isOnWave(p)){
+    highp vec2 point = FRAGCOORD.xy;
+    if (!isOnWave(point)){
         discard;
     }
 
-    highp vec4 sprite = zTexture(UV);
-    if (!isInSector(p)){
-        highp float l = length(scaledDir(p, TargetPos));
+    highp vec4 color = zTexture(UV);
+    if (!isInSector(point)){
+        highp float l = length(point - TargetPos);
 
-        if (l > testEnd){
+        if (l > CircleWaveRadius){
             discard;
         }
 
-        if (l > testStart){
-            highp float modif = (testEnd - l) / (testEnd - testStart);
-            sprite.a = sprite.a * modif;
+        if (l > CircleWaveDecreaseStart){
+            highp float modif = (CircleWaveRadius - l) / (CircleWaveRadius - CircleWaveDecreaseStart);
+            color.a = color.a * modif;
         }
     }
 
-    COLOR = vec4(applyNoise(UV, sprite.rgb), sprite.a);
+    COLOR = vec4(applyNoise(point, color.rgb), color.a);
 }

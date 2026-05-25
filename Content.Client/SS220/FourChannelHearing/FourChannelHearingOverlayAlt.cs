@@ -4,7 +4,6 @@ using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
-using System.Linq;
 using System.Numerics;
 
 namespace Content.Client.SS220.FourChannelHearing;
@@ -14,7 +13,6 @@ public sealed class FourChannelHearingOverlayAlt : Overlay
     [Dependency] private readonly IEntityManager _entity = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IClyde _clyde = default!;
 
     private readonly TransformSystem _transform;
 
@@ -33,6 +31,14 @@ public sealed class FourChannelHearingOverlayAlt : Overlay
         _noiseShader = _prototype.Index(NoiseShaderProtoId).InstanceUnique();
     }
 
+    const float _waveThikness = 0.7f;
+    const float _waveInterval = 0.2f;
+
+    const float _circleWaveRadius = 2.2f;
+    const float _circleWaveDecreaseStart = 1.2f;
+
+    const float _noDirectedWaveRange = 7f;
+
     protected override void Draw(in OverlayDrawArgs args)
     {
         var player = _player.LocalEntity;
@@ -48,7 +54,9 @@ public sealed class FourChannelHearingOverlayAlt : Overlay
         var handle = args.WorldHandle;
         var query = _entity.EntityQueryEnumerator<FourChannelHearingTargetComponent>();
 
-        _noiseShader.SetParameter("RenderScale", args.Viewport.RenderScale);
+        var zoom = args.Viewport.Eye?.Zoom ?? Vector2.One;
+        var renderScale = args.Viewport.RenderScale;
+        var worldToLocalMatrix = args.Viewport.GetWorldToLocalMatrix();
         while (query.MoveNext(out var uid, out var target))
         {
             if (playerMap != _transform.GetMap(uid))
@@ -61,23 +69,21 @@ public sealed class FourChannelHearingOverlayAlt : Overlay
 
             var targetPos = _transform.GetWorldPosition(uid);
 
+            shd.SetParameter("TargetPos", WorldToLocalPos(targetPos, args.Viewport, worldToLocalMatrix));
+            shd.SetParameter("PlayerPos", WorldToLocalPos(playerPos, args.Viewport, worldToLocalMatrix));
+            shd.SetParameter("WaveThikness", WorldToLocalLength(_waveThikness, renderScale.X, zoom.X));
+            shd.SetParameter("WaveInterval", WorldToLocalLength(_waveInterval, renderScale.X, zoom.X));
+            shd.SetParameter("CircleWaveRadius", WorldToLocalLength(_circleWaveRadius, renderScale.X, zoom.X));
+            shd.SetParameter("CircleWaveDecreaseStart", WorldToLocalLength(_circleWaveDecreaseStart, renderScale.X, zoom.X));
+            shd.SetParameter("NoDirectedWaveRange", WorldToLocalLength(_noDirectedWaveRange, renderScale.X));
+            handle.UseShader(shd);
+
             var toTargetDir = targetPos - playerPos;
             var angle = toTargetDir.ToAngle();
-
             var color = target.Color.WithAlpha(0.075f);
 
-            var temp = args.Viewport.WorldToLocal(targetPos);
-            temp.Y = args.Viewport.Size.Y - temp.Y;
-            shd.SetParameter("TargetPos", temp);
-
-            temp = args.Viewport.WorldToLocal(playerPos);
-            temp.Y = args.Viewport.Size.Y - temp.Y;
-            shd.SetParameter("PlayerPos", temp);
-
-            handle.UseShader(shd);
             handle.SetTransform(playerPos, angle);
             DrawRect();
-            // DrawTriangle();
 
             void DrawRect()
             {
@@ -88,22 +94,21 @@ public sealed class FourChannelHearingOverlayAlt : Overlay
 
                 handle.DrawRect(box, color);
             }
-
-            void DrawTriangle()
-            {
-                var p1 = Vector2.Zero;
-                var length = toTargetDir.Length() + 1f;
-                var p2 = new Vector2(length, 1.5f);
-                var p3 = new Vector2(length, -1.5f);
-
-                var points = new List<Vector2>() { p1, p2, p3 };
-
-                var drawVertex = points.Select(x => new DrawVertexUV2D(x, x));
-                handle.DrawPrimitives(DrawPrimitiveTopology.TriangleList, Texture.White, drawVertex.ToArray(), color);
-            }
         }
 
         handle.UseShader(null);
         handle.SetTransform(Matrix3x2.Identity);
+    }
+
+    private static float WorldToLocalLength(float length, float renderScale, float zoom = 1)
+    {
+        return length * renderScale / zoom * EyeManager.PixelsPerMeter;
+    }
+
+    private static Vector2 WorldToLocalPos(Vector2 pos, IClydeViewport viewport, Matrix3x2? worldToLocalMatrix = null)
+    {
+        worldToLocalMatrix ??= viewport.GetWorldToLocalMatrix();
+        var localPos = Vector2.Transform(pos, worldToLocalMatrix.Value);
+        return new Vector2(localPos.X, viewport.Size.Y - localPos.Y);
     }
 }
