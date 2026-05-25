@@ -27,6 +27,15 @@
         <GridContainer Margin="0 5 0 0" Columns="2">
             <Label Text="{Loc 'health-analyzer-window-entity-status-text'}" />
             <Label Name="StatusLabel" />
+            <!-- SS220 clinic death analyzer begin -->
+            <Label Name="ClinicalDeathLabel"
+                   Text="{Loc 'health-analyzer-window-clinical-death-text'}"
+                   Visible="False"
+                   FontColorOverride="LightGray" />
+            <Label Name="ClinicalDeathTimeLabel"
+                   Visible="False"
+                   StyleClasses="LabelBig" />
+            <!-- SS220 clinic death analyzer end -->
             <Label Text="{Loc 'health-analyzer-window-entity-temperature-text'}" />
             <Label Name="TemperatureLabel" />
             <Label Text="{Loc 'health-analyzer-window-entity-blood-level-text'}" />

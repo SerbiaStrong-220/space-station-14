@@ -88,7 +88,8 @@ public sealed class HealthAnalyzerPrintSystem : EntitySystem
         float bloodAmount,
         bool? bleeding,
         bool? unrevivable,
-        int? counterDeath)
+        int? counterDeath,
+        TimeSpan? clinicalDeathTimeRemaining)
     {
         var builder = new StringBuilder();
 
@@ -103,10 +104,38 @@ public sealed class HealthAnalyzerPrintSystem : EntitySystem
             : Loc.GetString("health-analyzer-window-entity-unknown-species-text");
         builder.AppendLine(Loc.GetString("health-analyzer-report-species", ("species", species)));
 
-        var status = TryComp<MobStateComponent>(target, out var mobState)
-            ? GetStatus(mobState.CurrentState)
-            : Loc.GetString("health-analyzer-window-entity-unknown-text");
+        string status;
+        if (TryComp<MobStateComponent>(target, out var mobState))
+        {
+            if (mobState.CurrentState == MobState.Dead &&
+                clinicalDeathTimeRemaining.HasValue &&
+                clinicalDeathTimeRemaining.Value > TimeSpan.Zero)
+            {
+                status = Loc.GetString("health-analyzer-window-entity-clinical-dead-text");
+            }
+            else
+            {
+                status = GetStatus(mobState.CurrentState);
+            }
+        }
+        else
+        {
+            status = Loc.GetString("health-analyzer-window-entity-unknown-text");
+        }
         builder.AppendLine(Loc.GetString("health-analyzer-report-status", ("value", status)));
+        if (clinicalDeathTimeRemaining.HasValue)
+        {
+            if (clinicalDeathTimeRemaining.Value <= TimeSpan.Zero)
+            {
+                builder.AppendLine(Loc.GetString("health-analyzer-window-clinical-death-expired"));
+            }
+            else
+            {
+                var timeString = $"{clinicalDeathTimeRemaining.Value.Minutes:D2}:{clinicalDeathTimeRemaining.Value.Seconds:D2}";
+                builder.AppendLine($"{Loc.GetString("health-analyzer-window-clinical-death-text")} {timeString}");
+            }
+        }
+        builder.AppendLine();
 
         var temperature = !float.IsNaN(bodyTemperature)
             ? $"{bodyTemperature - Atmospherics.T0C:F1} °C ({bodyTemperature:F1} K)"
