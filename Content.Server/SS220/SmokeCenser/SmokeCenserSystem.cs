@@ -39,31 +39,19 @@ public sealed class CenserSystem : EntitySystem
             return;
 
         var vaporCost = FixedPoint2.New(component.VaporAmount);
-        var hasHolyWater = false;
-        var holyWaterQuantity = FixedPoint2.Zero;
-        var isContaminated = false;
-
+        var holyWaterQuantity = 0; // или FixedPoint2 если не поймёт
         foreach (var reagent in solution.Contents)
         {
-            if (reagent.Reagent.Prototype == "Holywater")
+            if (reagent.Reagent.Prototype != PrivateStaticReadonlyProtoId<ReagentPrototype>WithMakesenseName)
             {
-                hasHolyWater = true;
-                holyWaterQuantity = reagent.Quantity;
+                _popupSystem.PopupEntity(Loc.GetString("censer-contaminated"), uid, args.User);
+                return;
             }
-            else
-            {
-                isContaminated = true;
-                break;
-            }
+            
+            holyWaterQuantity = reagent.Quantity;
         }
 
-        if (isContaminated)
-        {
-            _popupSystem.PopupEntity(Loc.GetString("censer-contaminated"), uid, args.User);
-            return;
-        }
-
-        if (!hasHolyWater || holyWaterQuantity < vaporCost)
+        if (holyWaterQuantity < vaporCost)
         {
             _popupSystem.PopupEntity(Loc.GetString("censer-empty"), uid, args.User);
             return;
