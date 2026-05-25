@@ -39,8 +39,6 @@ using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Shared.DoAfter;
-using Content.Shared.Standing;
-using Content.Shared.SS220.AltBlocking;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 

@@ -6,7 +6,7 @@ namespace Content.Shared.SS220.StaminaDamageConversion;
 
 public sealed partial class StaminaDamageConversionSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedStaminaSystem _stamina = default!;
+    [Dependency] private readonly SharedStaminaSystem _stamina = default!;
 
     public override void Initialize()
     {

@@ -135,24 +135,24 @@ public sealed class FieldShieldProviderSystem : EntitySystem
         if (!_gameTiming.IsFirstTimePredicted)
             return;
 
-        entity.Comp.Wearer = args.EquipTarget;
+        ent.Comp.Wearer = args.User;
 
-        var shieldComp = EnsureComp<FieldShieldComponent>(args.EquipTarget);
-
-        shieldComp.ShieldData = entity.Comp.ShieldData;
-        shieldComp.RechargeShieldData = entity.Comp.RechargeShieldData;
-        shieldComp.LightData = entity.Comp.LightData;
-        if (args.User == null)
+        if (args.User is not { Valid: true } user)
             return;
 
-        var user = args.User.Value;
+        var shieldComp = EnsureComp<FieldShieldComponent>(user);
+
+        shieldComp.ShieldData = ent.Comp.ShieldData;
+        shieldComp.RechargeShieldData = ent.Comp.RechargeShieldData;
+        shieldComp.LightData = ent.Comp.LightData;
+        if (args.User == null)
+            return;
 
         var message = Loc.GetString(args.Activated ? FieldShieldOn : FieldShieldOff);
         _popup.PopupClient(message, user, user);
 
         if (args.Activated)
         {
-            var shieldComp = EnsureComp<FieldShieldComponent>(user);
             shieldComp.ShieldData = ent.Comp.ShieldData;
             shieldComp.RechargeShieldData = ent.Comp.RechargeShieldData;
             shieldComp.LightData = ent.Comp.LightData;

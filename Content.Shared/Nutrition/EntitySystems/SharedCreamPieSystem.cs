@@ -119,14 +119,6 @@ public abstract class SharedCreamPieSystem : EntitySystem
 
     private void OnCreamPiedHitBy(Entity<CreamPiedComponent> creamPied, ref ThrowHitByEvent args)
     {
-        //SS220 instastun resist begin
-        var resistEv = new StunAttemptEvent(StunSource.Creampie);
-        RaiseLocalEvent(creamPied, ref resistEv);
-
-        if (resistEv.StunCancelled)
-            return;
-        //SS220 instastun resist end
-
         if (creamPied.Comp.CreamPied || !Exists(args.Thrown) || !TryComp<CreamPieComponent>(args.Thrown, out var creamPie))
             return;
 

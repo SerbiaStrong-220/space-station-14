@@ -103,10 +103,7 @@
           Asphyxiation: 1000
           Bloodloss: 1000
           Caustic: 1000
-<<<<<<< HEAD
           Shock: 40
-=======
-          Shock: 30
           Cold: 20
       durabilityTresholdDict:
           Piercing: 7
@@ -120,7 +117,6 @@
           Caustic: 1000
           Shock: 40
           Cold: 50
->>>>>>> shield_rework_finished
 
 - type: entity
   name: laser shield
@@ -644,17 +640,10 @@
       toggledMeleeBlockProb: 0.65 #No more stunbatons
     - type: Appearance
     - type: AltArmor
-<<<<<<< HEAD
       tresholddict:
         Piercing: 65
         Blunt: 30
         Heat: 40
-=======
-      tresholdDict:
-        Piercing: 55
-        Blunt: 30
-        Heat: 35
->>>>>>> shield_rework_finished
         Slash: 30
         Radiation: 1000
         Poison: 1000
