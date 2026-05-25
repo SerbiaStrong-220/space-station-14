@@ -2,7 +2,7 @@
   id: Magistrate
   name: job-name-magistrate
   description: job-description-magistrate
-  #setPreference: false #SS220 TODO NanoTraisen Representative
+  setPreference: false # Роль отключена
   playTimeTracker: JobMagistrate
   requirements:
     - !type:DepartmentTimeRequirement

@@ -1,17 +1,19 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared.Camera;
-using System.Numerics;
+using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.Effects;
 using Content.Shared.Mobs.Components;
-using Content.Shared.SS220.Damage;
-using Content.Shared.SS220.Weapons.Ranged.Events;
 using Content.Shared.Throwing;
+using Content.Shared.SS220.Damage;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
+using Content.Shared.CombatMode.Pacification;
+using System.Numerics;
+using Content.Shared.SS220.Weapons.Ranged.Events;
 
 namespace Content.Server.Damage.Systems;
 
@@ -22,7 +24,6 @@ public sealed class DamageOtherOnHitSystem : SharedDamageOtherOnHitSystem
     [Dependency] private readonly Shared.Damage.Systems.DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedCameraRecoilSystem _sharedCameraRecoil = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!; // SS220 shield rework
 
     public override void Initialize()
     {
@@ -45,12 +46,10 @@ public sealed class DamageOtherOnHitSystem : SharedDamageOtherOnHitSystem
         // SS220-add-miss-chance-?-end
 
         //SS220 shield rework begin
-        var itemPos = _transformSystem.GetWorldPosition(uid);
-        var targetPos = _transformSystem.GetWorldPosition(args.Target);
-        var blockEv = new ThrowableProjectileBlockAttemptEvent(component.Damage, new Angle(new Vector2(targetPos.X - itemPos.X, targetPos.Y - itemPos.Y)) - new Angle(Math.PI / 2));
+        var blockEv = new ThrowableProjectileBlockAttemptEvent(component.Damage, uid);
 
         RaiseLocalEvent(args.Target, ref blockEv);
-        if (blockEv.CancelledHit)
+        if (blockEv.Cancelled)
         {
             _color.RaiseEffect(Color.Red, [args.Target], Filter.Pvs(args.Target, entityManager: EntityManager));
             return;

@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+using System.Numerics;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
@@ -5,7 +7,6 @@ using Content.Shared.Audio;
 using Content.Shared.CombatMode;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Damage;
-using Content.Shared.DoAfter;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Hands;
@@ -37,7 +38,9 @@ using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using System.Numerics;
+using Content.Shared.DoAfter;
+using Content.Shared.Standing;
+using Content.Shared.SS220.AltBlocking;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -301,7 +304,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         }
 
         //SS220 shield rework begin
-        if (TryComp<AltBlockingUserComponent>(user, out var blockComp) && blockComp.IsBlocking)
+        if (TryComp<AltBlockingUserComponent>(user, out var blockComp) && blockComp.Blocking)
         {
             PopupSystem.PopupPredictedCursor(Loc.GetString("actively-blocking-attack"), user);
             return false;

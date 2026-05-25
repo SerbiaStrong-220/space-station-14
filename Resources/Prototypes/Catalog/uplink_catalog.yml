@@ -75,20 +75,20 @@
   icon: { sprite: /Textures/Objects/Weapons/Melee/e_sword.rsi, state: icon }
   discountCategory: veryRareDiscounts
   discountDownTo:
-    Telecrystal: 6 #ss220-uplink-discounts
+    Telecrystal: 4 #ss220-uplink-discounts
   productEntity: EnergySword
   cost:
-    Telecrystal: 8 #ss220-uplink-discounts
+    Telecrystal: 5 #ss220-uplink-discounts
   categories:
   - UplinkWeaponry
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 11
+      Telecrystal: 7
     MediumDynamic:
-      Telecrystal: 8
+      Telecrystal: 5
     HardDynamic:
-      Telecrystal: 6
+      Telecrystal: 4
 #ss220 dynamic-price end
 
 - type: listing
@@ -98,10 +98,8 @@
   icon: { sprite: /Textures/Objects/Weapons/Melee/e_dagger.rsi, state: icon }
   productEntity: EnergyDaggerBox
   discountCategory: rareDiscounts
-  discountDownTo:
-    Telecrystal: 1
   cost:
-    Telecrystal: 2
+    Telecrystal: 1 #SS220 shield rework
   categories:
   - UplinkWeaponry
 #ss220 dynamic-price bgn
@@ -109,9 +107,9 @@
     LightDynamic:
       Telecrystal: 1
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
     HardDynamic:
-      Telecrystal: 2
+      Telecrystal: 1
 #ss220 dynamic-price end
 
 # ss220 - post upstream - uplink tweaks - bgn

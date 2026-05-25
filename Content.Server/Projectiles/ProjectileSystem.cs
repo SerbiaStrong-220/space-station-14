@@ -25,7 +25,6 @@ public sealed class ProjectileSystem : SharedProjectileSystem
     [Dependency] private readonly DestructibleSystem _destructibleSystem = default!;
     [Dependency] private readonly GunSystem _guns = default!;
     [Dependency] private readonly SharedCameraRecoilSystem _sharedCameraRecoil = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!; //SS220 shield rework
 
     public override void Initialize()
     {
@@ -51,14 +50,13 @@ public sealed class ProjectileSystem : SharedProjectileSystem
         }
 
         //SS220 shield rework begin
-        var projectileAngle = _transform.GetWorldRotation(uid);
-        var blockattemptEv = new ProjectileBlockAttemptEvent(uid, false, component.Damage, (projectileAngle + new Angle(Math.PI)).Reduced());
+        var blockattemptEv = new ProjectileBlockAttemptEvent(uid, component.Damage);
         RaiseLocalEvent(target, ref blockattemptEv);
-        if (blockattemptEv.CancelledHit)
+        if (blockattemptEv.Cancelled)
         {
-            if(TryGetNetEntity(target, out var netTarget))
+            if (TryGetNetEntity(target, out var netTarget))
             {
-                EnsureComp<BlockedProjectileComponent>(uid, out var blockedComp);
+                var blockedComp = EnsureComp<BlockedProjectileComponent>(uid);
                 blockedComp.BlockerEntity = netTarget;
                 Dirty(uid, blockedComp);
             }

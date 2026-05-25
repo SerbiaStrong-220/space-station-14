@@ -1,9 +1,9 @@
 using Content.Server.Stunnable.Components;
-using Content.Shared.SS220.InstastunResist;
 using Content.Shared.Movement.Systems;
-using Content.Shared.Throwing;
 using JetBrains.Annotations;
+using Content.Shared.Throwing;
 using Robust.Shared.Physics.Events;
+using Content.Shared.SS220.InstastunResist;
 
 namespace Content.Server.Stunnable.Systems;
 

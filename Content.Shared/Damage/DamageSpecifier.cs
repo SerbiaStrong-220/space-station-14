@@ -26,8 +26,8 @@ namespace Content.Shared.Damage
         [DataField("types")]
         public Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2> DamageDict { get; set; } = new();
 
-        [DataField]//SS220 armour piercing added
-        public FixedPoint2 ArmourPiercing = 0;//SS220 armour piercing added
+        [DataField] //SS220 armour piercing added
+        public FixedPoint2 ArmourPiercing = 0; //SS220 armour piercing added
 
         /// <summary>
         ///     Returns a sum of the damage values.
@@ -150,20 +150,14 @@ namespace Content.Shared.Damage
 
                 float newValue = value.Float();
 
-                //SS220 armor piercing added begin
                 if (modifierSet.FlatReduction.TryGetValue(key, out var reduction))
                     newValue = Math.Max(0f, newValue - Math.Max(reduction - damageSpec.ArmourPiercing.Float(), 0f)); // flat reductions can't heal you
 
+                //SS220 armor piercing added begin
                 if (modifierSet.Coefficients.TryGetValue(key, out var coefficient))
                 {
-                    var upperCap = 1f;
-                    var lowerCap = 0f;
-
-                    if (coefficient > 1f)
-                        upperCap = coefficient;
-
-                    if (coefficient < 0f)
-                        lowerCap = coefficient;
+                    var lowerCap = Math.Min(0f, coefficient);
+                    var upperCap = Math.Max(1f, coefficient);
 
                     newValue *= Math.Clamp(coefficient + damageSpec.ArmourPiercing.Float() / 100f, lowerCap, upperCap);
                     minCoefficient = Math.Min(minCoefficient, coefficient);

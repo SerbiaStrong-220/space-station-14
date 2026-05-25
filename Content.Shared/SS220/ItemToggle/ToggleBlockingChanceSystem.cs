@@ -1,4 +1,4 @@
-// © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
+// © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 using Content.Shared.SS220.AltBlocking;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.SS220.ChangeAppearanceOnActiveBlocking;
@@ -18,7 +18,7 @@ public sealed class ToggleBlockingChanceSystem : EntitySystem
         if (!TryComp<AltBlockingComponent>(ent.Owner, out var blockingComponent))
             return;
 
-        DectivateBlock(ent, blockingComponent);
+        DeactivateBlock(ent, blockingComponent);
     }
 
     private void OnToggled(Entity<ToggleBlockingChanceComponent> ent, ref ItemToggledEvent args)
@@ -31,7 +31,7 @@ public sealed class ToggleBlockingChanceSystem : EntitySystem
 
         if (TryComp<ChangeAppearanceOnActiveBlockingComponent>(ent.Owner, out var appearanceComp))
         {
-            var ev = new ActiveBlockingEvent(userComp.IsBlocking && args.Activated);
+            var ev = new ActiveBlockingStateChanged(userComp.Blocking && args.Activated);
             RaiseLocalEvent(ent.Owner, ref ev);
         }
 
@@ -43,14 +43,14 @@ public sealed class ToggleBlockingChanceSystem : EntitySystem
             return;
         }
 
-        DectivateBlock(ent, blockingComponent);
+        DeactivateBlock(ent, blockingComponent);
         Dirty(ent.Owner, blockingComponent);
         Dirty(ent);
     }
 
-    private void DectivateBlock(Entity<ToggleBlockingChanceComponent> ent, AltBlockingComponent blockingComponent)
+    private void DeactivateBlock(Entity<ToggleBlockingChanceComponent> ent, AltBlockingComponent blockingComponent)
     {
-        ent.Comp.IsToggled = false;
+        ent.Comp.Toggled = false;
 
         blockingComponent.RangeBlockProb = ent.Comp.BaseRangeBlockProb;
         blockingComponent.MeleeBlockProb = ent.Comp.BaseMeleeBlockProb;
@@ -58,7 +58,7 @@ public sealed class ToggleBlockingChanceSystem : EntitySystem
 
     private void ActivateBlock(Entity<ToggleBlockingChanceComponent> ent, AltBlockingComponent blockingComponent)
     {
-        ent.Comp.IsToggled = true;
+        ent.Comp.Toggled = true;
 
         blockingComponent.RangeBlockProb = ent.Comp.ToggledRangeBlockProb;
         blockingComponent.MeleeBlockProb = ent.Comp.ToggledMeleeBlockProb;

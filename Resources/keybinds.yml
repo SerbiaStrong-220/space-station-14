@@ -192,7 +192,7 @@ binds:
 #SS220 shield rework begin
 - function: ToggleActiveBlocking
   type: State
-  key: R
+  key: B
   mod1: Shift
 #SS220 shield rework end
 - function: AltActivateItemInHand

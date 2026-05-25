@@ -1,3 +1,4 @@
+
 #SS220-weapon-overhaul-begin
 ent-BaseMagazineCaselessRifle = магазин (8x18 безгильзовые)
     .desc = { ent-BaseItem.desc }

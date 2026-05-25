@@ -1,44 +1,60 @@
-// © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
-using Content.Shared.SS220.Weapons.Ranged.Events;
+// © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 using Content.Shared.Hands.Components;
+using Content.Shared.Input;
+using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Input.Binding;
+using Robust.Shared.Player;
 
 namespace Content.Shared.SS220.AltBlocking;
 
 public sealed partial class SharedAltBlockingSystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+
     private void InitializeUser()
     {
         SubscribeLocalEvent<AltBlockingUserComponent, EntityTerminatingEvent>(OnEntityTerminating);
-        SubscribeAllEvent<BlockAttemptEvent>(OnBlockToggleAttempt);
+
+        SubscribeLocalEvent<AltBlockingUserComponent, ThrowAttemptEvent>(OnThrowAttempt);
+
+        CommandBinds.Builder
+            .Bind(ContentKeyFunctions.ToggleActiveBlocking, InputCmdHandler.FromDelegate(OnBlockToggleAttempt, handle: false, outsidePrediction: false))
+            .Register<SharedAltBlockingSystem>();
     }
 
 
-    private void OnBlockToggleAttempt(BlockAttemptEvent args)
+    private void OnBlockToggleAttempt(ICommonSession? session)
     {
-        if (args.Handled)
+        if (session is not { } playerSession)
             return;
 
-        if (!TryGetEntity(args.User, out var localUser))
+        if (playerSession.AttachedEntity is not { Valid: true } user)
             return;
 
-        if (!TryComp<AltBlockingUserComponent>(localUser, out var blockingUserComp))
+        if (!TryComp<AltBlockingUserComponent>(user, out var blockingUserComp))
             return;
 
-        var handQuery = GetEntityQuery<HandsComponent>();
-
-        if (!handQuery.TryGetComponent(localUser, out var hands))
+        if (!TryComp<HandsComponent>(user, out var handsComp))
             return;
 
-        if (blockingUserComp.IsBlocking)
-            StopBlocking(((EntityUid)localUser, blockingUserComp));
+        if (blockingUserComp.Blocking)
+            StopBlocking((user, blockingUserComp));
 
         else
-            StartBlocking(((EntityUid)localUser, blockingUserComp));
+            TryStartBlocking((user, blockingUserComp));
 
-        Dirty((EntityUid)localUser, blockingUserComp);
-        args.Handled = true;
+        Dirty(user, blockingUserComp);
+    }
+
+    private void OnThrowAttempt(Entity<AltBlockingUserComponent> ent, ref ThrowAttemptEvent args)
+    {
+        if (!ent.Comp.Blocking)
+            return;
+
+        _popupSystem.PopupEntity(Loc.GetString(BlockThrowingLocale), ent);//client doesn't catch the event somewhy
+
+        args.Cancel();
     }
 
     private void OnEntityTerminating(Entity<AltBlockingUserComponent> ent, ref EntityTerminatingEvent args)

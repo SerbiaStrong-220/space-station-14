@@ -8,7 +8,7 @@ namespace Content.Shared.SS220.InstastunResist;
 /// </summary>
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState(true)]
-public sealed partial class InstastunResistComponent : Component
+public sealed partial class WearableInstastunResistComponent : Component
 {
     [DataField]
     [AutoNetworkedField]
@@ -16,5 +16,5 @@ public sealed partial class InstastunResistComponent : Component
 
     [DataField]
     [AutoNetworkedField]
-    public List<StunSource> ResistedStunTypes = new List<StunSource>();
+    public HashSet<StunSource> ResistedStunTypes;
 }

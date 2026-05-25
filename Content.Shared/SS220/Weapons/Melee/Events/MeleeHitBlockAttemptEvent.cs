@@ -1,15 +1,11 @@
-// © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
+// © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 namespace Content.Shared.SS220.Weapons.Melee.Events;
 
 
 [ByRefEvent]
-public record struct MeleeHitBlockAttemptEvent()
+public record struct MeleeHitBlockAttemptEvent(EntityUid Attacker, bool Cancelled = false)
 {
-    public bool CancelledHit = false;
+    public EntityUid Blocker;
 
-    public NetEntity? blocker = null;
-
-    public Color? hitMarkColor = Color.Red;
-
-    public Angle HitAngle;
+    public Color? HitMarkColor = Color.Red;
 }

@@ -63,6 +63,6 @@
     id: CentcomOperativeSRTPDA
     ears: ClothingHeadsetAltCentComm
     pocket1: WeaponEnergyGunRevolverSelfRecharger
-    pocket2: TelescopicShield
+    pocket2: TelescopicShieldAlt #SS220 shield rework
     belt: ClothingBeltBlueShieldFilled
     back: ClothingBackpackBlueShieldHightFilled

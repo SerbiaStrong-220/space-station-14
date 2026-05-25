@@ -1,16 +1,14 @@
-// © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
+// © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 using Content.Shared.Damage;
+using Content.Shared.Hands;
+using Content.Shared.Interaction.Events;
+using Content.Shared.Random.Helpers;
 using Content.Shared.SS220.ArmorBlock;
 using Content.Shared.SS220.ToggleBlocking;
 using Content.Shared.SS220.Weapons.Melee.Events;
 using Content.Shared.SS220.Weapons.Ranged.Events;
-using Content.Shared.Hands;
-using Content.Shared.Interaction.Events;
-using Content.Shared.Random.Helpers;
-//using Content.Shared.Weapons.Hitscan.Components;
-//using Content.Shared.Weapons.Hitscan.Events;
-using Robust.Shared.Random;
-using Robust.Shared.Toolshed.Commands.Math;
+using Robust.Shared.Utility;
+using System.Numerics;
 
 namespace Content.Shared.SS220.AltBlocking;
 
@@ -18,70 +16,64 @@ public sealed partial class SharedAltBlockingSystem
 {
     private void OnBlockUserCollide(Entity<AltBlockingUserComponent> ent, ref ProjectileBlockAttemptEvent args)
     {
-        args.CancelledHit = TryBlock(ent.Comp.BlockingItemsShields, args.Damage, ent, args.ProjectileRotation);
+        var projectileAngle = _transform.GetWorldRotation(args.ProjUid);
+        args.Cancelled = TryBlock(ent.Comp.BlockingItemsShields, args.Damage, ent, projectileAngle + new Angle(Math.PI).Reduced());
     }
 
     private void OnBlockThrownProjectile(Entity<AltBlockingUserComponent> ent, ref ThrowableProjectileBlockAttemptEvent args)
     {
-        args.CancelledHit = TryBlock(ent.Comp.BlockingItemsShields, args.Damage, ent, args.HitAngle);
+        var itemPos = _transform.GetWorldPosition(args.DamageDealer);
+        var targetPos = _transform.GetWorldPosition(ent);
+        var angle = new Angle(new Vector2(targetPos.X - itemPos.X, targetPos.Y - itemPos.Y)) - new Angle(Math.PI / 2);
+        args.Cancelled = TryBlock(ent.Comp.BlockingItemsShields, args.Damage, ent, angle);
     }
 
     private void OnBlockUserHitscan(Entity<AltBlockingUserComponent> ent, ref HitscanBlockAttemptEvent args)
     {
-        args.CancelledHit = TryBlock(ent.Comp.BlockingItemsShields, args.Damage, ent, args.HitAngle);
+        var vector = _transform.GetWorldPosition(ent) - _transform.GetWorldPosition(args.Shooter);
+        args.Cancelled = TryBlock(ent.Comp.BlockingItemsShields, args.Damage, ent, vector.ToAngle() - new Angle(Math.PI / 2));
     }
 
     private void OnBlockUserMeleeHit(Entity<AltBlockingUserComponent> ent, ref MeleeHitBlockAttemptEvent args)
     {
+        var targetPos = _transform.GetWorldPosition(ent);
+        var attackerPos = _transform.GetWorldPosition(args.Attacker);
+
+        Angle hitAngle = new Angle(new Vector2(targetPos.X - attackerPos.X, targetPos.Y - attackerPos.Y)) - new Angle(Math.PI / 2);
+
+        hitAngle = hitAngle.Reduced();
+
         foreach (var item in ent.Comp.BlockingItemsShields)
         {
             if (!TryComp<AltBlockingComponent>(item, out var blockComp))
                 continue;
 
-            if (!IsCovered(args.HitAngle, blockComp.CoveredZones, _transform.GetWorldRotation(ent.Owner)))
-                continue;
-
-            if (!TryGetNetEntity(item, out var netEnt))
+            if (!IsCovered(hitAngle, blockComp.CoveredZones, _transform.GetWorldRotation(ent.Owner)))
                 continue;
 
             if (TryComp<ToggleBlockingChanceComponent>(item, out var toggleComp))
             {
-                if (!toggleComp.IsToggled)
+                if (!toggleComp.Toggled)
                     continue;
             }
 
-            if (!TryGetNetEntity(item, out var NetItem))
+            if (!TryGetNetEntity(item, out var netItem))
                 continue;
 
-            if (ent.Comp.IsBlocking)
-            {
-                if (SharedRandomExtensions.PredictedProb(_gameTiming, blockComp.ActiveMeleeBlockProb, (NetEntity)NetItem))
-                {
-                    if (_net.IsServer)
-                    {
-                        _audio.PlayPvs(blockComp.BlockSound, (EntityUid)item);
-                        _popupSystem.PopupEntity(Loc.GetString("block-shot"), ent.Owner);
-                    }
+            if (netItem is not { Valid: true } netItemUid)
+                continue;
 
-                    args.CancelledHit = true;
-                    args.blocker = netEnt;
-                    return;
-                }
-            }
-
-            else
+            if (SharedRandomExtensions.PredictedProb(_gameTiming, ent.Comp.Blocking ? blockComp.ActiveMeleeBlockProb : blockComp.MeleeBlockProb, (NetEntity)netItem))
             {
-                if (SharedRandomExtensions.PredictedProb(_gameTiming, blockComp.MeleeBlockProb, (NetEntity)NetItem))
-                {
-                    if (_net.IsServer)
-                    {
-                        _audio.PlayPvs(blockComp.BlockSound, (EntityUid)item);
-                        _popupSystem.PopupEntity(Loc.GetString("block-shot"), ent.Owner);
-                    }
-                    args.CancelledHit = true;
-                    args.blocker = netEnt;
-                    return;
-                }
+                if (_playerManager.LocalEntity == ent.Owner && _gameTiming.IsFirstTimePredicted)
+                    _audio.PlayLocal(blockComp.BlockSound, item, ent.Owner);
+
+                if (_gameTiming.IsFirstTimePredicted)
+                    _audio.PlayEntity(blockComp.BlockSound, ent.Owner, item);
+
+                args.Blocker = item;
+                args.Cancelled = true;
+                return;
             }
         }
         return;
@@ -91,12 +83,13 @@ public sealed partial class SharedAltBlockingSystem
     {
         ent.Comp.User = args.User;
         Dirty(ent.Owner, ent.Comp);
-
         var userComp = EnsureComp<AltBlockingUserComponent>(args.User);
         userComp.BlockingItemsShields.Add(ent.Owner);
 
         if (TryComp<ArmorBlockComponent>(ent.Owner, out var armorComp))
             armorComp.User = args.User;
+
+        DebugTools.Assert(userComp.BlockingItemsShields.Contains(ent.Owner));
 
         Dirty(args.User, userComp);
     }
@@ -119,11 +112,11 @@ public sealed partial class SharedAltBlockingSystem
             StopBlockingHelper(ent, ent.Comp.User.Value);
     }
 
-    private bool TryBlock(List<EntityUid?> items, DamageSpecifier? damage, Entity<AltBlockingUserComponent> owner, Angle HitRotation)
+    private bool TryBlock(List<EntityUid> items, DamageSpecifier? damage, Entity<AltBlockingUserComponent> owner, Angle HitRotation)
     {
         foreach (var item in items)
         {
-            if (!TryComp<AltBlockingComponent>(item, out var blockComp) || damage == null)
+            if (!TryComp<AltBlockingComponent>(item, out var blockComp))
                 continue;
 
             if (!IsCovered(HitRotation, blockComp.CoveredZones, _transform.GetWorldRotation(owner.Owner)))
@@ -131,38 +124,28 @@ public sealed partial class SharedAltBlockingSystem
 
             if (TryComp<ToggleBlockingChanceComponent>(item, out var toggleComp))
             {
-                if (!toggleComp.IsToggled)
+                if (!toggleComp.Toggled)
                     continue;
             }
 
-            if (blockComp.User == null)
-                return false;
-
-            var user = (EntityUid)blockComp.User;
-
-            if (!TryGetNetEntity(item, out var NetItem))
+            if (blockComp.User is not { Valid: true } user)
                 continue;
 
-            if (owner.Comp.IsBlocking)
-            {
-                if (SharedRandomExtensions.PredictedProb(_gameTiming, blockComp.ActiveRangeBlockProb, (NetEntity)NetItem))
-                {
-                    _damageable.TryChangeDamage((EntityUid)item, damage);
-                    _audio.PlayPvs(blockComp.BlockSound, (EntityUid)item);
-                    _popupSystem.PopupEntity(Loc.GetString("block-shot"), user);
-                    return true;
-                }
-            }
+            if (!TryGetNetEntity(item, out var netItem))
+                continue;
 
-            else
+            if (SharedRandomExtensions.PredictedProb(_gameTiming, owner.Comp.Blocking ? blockComp.ActiveRangeBlockProb : blockComp.RangeBlockProb, (NetEntity)netItem))
             {
-                if (SharedRandomExtensions.PredictedProb(_gameTiming, blockComp.RangeBlockProb, (NetEntity)NetItem))
-                {
-                    _damageable.TryChangeDamage((EntityUid)item, damage);
-                    _audio.PlayPvs(blockComp.BlockSound, (EntityUid)item);
-                    _popupSystem.PopupEntity(Loc.GetString("block-shot"), user);
-                    return true;
-                }
+                if (_playerManager.LocalEntity == owner && _gameTiming.IsFirstTimePredicted)
+                    _audio.PlayLocal(blockComp.BlockSound, item, owner);
+
+                if (_gameTiming.IsFirstTimePredicted)
+                    _audio.PlayEntity(blockComp.BlockSound, owner, item);
+
+                if (damage != null)
+                    _damageable.TryChangeDamage(item, damage);
+
+                return true;
             }
         }
         return false;

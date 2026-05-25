@@ -51,7 +51,6 @@
   - OffsetCaneMime
   - OffsetCaneNT
   - Cane
-  #- ExpensiveCane #SS220 TODO NanoTraisen Representative
   - TowelColorWhite
   # SS220 Hand/FootWraps begin
   - ClothingHandWraps
@@ -453,6 +452,7 @@
   - LawyerJumpskirtRed
   - LawyerJumpsuitGood
   - LawyerJumpskirtGood
+  - JumpsuitTrustedLawyer #SS220 ntr add - transfer iaa cloths
   - JumpsuitJujutsuShlepa #SS220-Two Floppa Iteration
 
 - type: loadoutGroup
@@ -1607,7 +1607,6 @@
   minLimit: 0
   loadouts:
   - ReporterPressFedora
-  - CapCMO #SS220-CMOParade
 
 - type: loadoutGroup
   id: ReporterOuterClothing

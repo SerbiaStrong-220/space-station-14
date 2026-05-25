@@ -1,4 +1,4 @@
-// © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
+// © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 using Content.Shared.SS220.AltBlocking;
 using Robust.Shared.Serialization;
 
@@ -12,7 +12,7 @@ public sealed partial class SharedChangeAppearanceOnActiveBlockingSystem : Entit
     {
         base.Initialize();
         SubscribeLocalEvent<ChangeAppearanceOnActiveBlockingComponent, ComponentInit>(OnInit);
-        SubscribeLocalEvent<ChangeAppearanceOnActiveBlockingComponent, ActiveBlockingEvent>(OnActiveBlock);
+        SubscribeLocalEvent<ChangeAppearanceOnActiveBlockingComponent, ActiveBlockingStateChanged>(OnActiveBlock);
     }
 
     private void OnInit(Entity<ChangeAppearanceOnActiveBlockingComponent> ent, ref ComponentInit args)
@@ -26,9 +26,9 @@ public sealed partial class SharedChangeAppearanceOnActiveBlockingSystem : Entit
         _appearanceSystem.SetData(ent, ActiveBlockingVisuals.Enabled, ent.Comp.Toggled);
     }
 
-    public void OnActiveBlock(Entity<ChangeAppearanceOnActiveBlockingComponent> ent, ref ActiveBlockingEvent args)
+    public void OnActiveBlock(Entity<ChangeAppearanceOnActiveBlockingComponent> ent, ref ActiveBlockingStateChanged args)
     {
-        ent.Comp.Toggled = args.Active;
+        ent.Comp.Toggled = args.State;
         Dirty(ent);
         UpdateVisuals((ent.Owner, ent.Comp));
     }

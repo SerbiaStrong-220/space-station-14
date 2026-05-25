@@ -77,16 +77,11 @@ namespace Content.Server.Shuttles.Components
         public float CruiseControlVelocityMultiplier = 1;
         // SS220 Cruise-Control end
 
-        // SS220 FTLCooldown outside CVar begin
-        [DataField, ViewVariables(VVAccess.ReadWrite)]
-        public float FTLCooldown = 10f;
-        // SS220 FTLCooldown outside CVar end
-
         /// <summary>
         /// Optional override for the FTL cooldown for this shuttle.
         /// If not null, then the value will be used instead of the shuttle.cooldown CCVar.
         /// </summary>
         [DataField]
-        public TimeSpan? FTLCooldownOverride = null;
+        public TimeSpan? FTLCooldownOverride = TimeSpan.FromSeconds(10); // SS220 FTLCooldown
     }
 }

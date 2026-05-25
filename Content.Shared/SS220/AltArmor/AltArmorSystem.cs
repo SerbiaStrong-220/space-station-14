@@ -1,4 +1,4 @@
-// © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
+// © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
@@ -18,26 +18,25 @@ public sealed class AltArmorSystem : EntitySystem
         resultDamage = new DamageSpecifier();
         resultArmorDamage = new DamageSpecifier();
 
-        if (!Resolve(ent.Owner, ref ent.Comp))
-            return;
-
         if (damage == null)
             return;
+
+        if (!Resolve(ent.Owner, ref ent.Comp))
+        {
+            resultDamage = damage;
+            return;
+        }
 
         FixedPoint2 maximalDamage = 0;
         string? maximalDamageType = null;
 
         FixedPoint2 durabilityCoefficient = 1;
-
+        
         if (TryComp<DamageableComponent>(ent, out var damageableComp) && ent.Comp.DamageAffectsProtection)
         {
             durabilityCoefficient = 1 - (_damageable.GetTotalDamage(ent.Owner) / ent.Comp.ZeroProtectionThreshold);
 
-            if (durabilityCoefficient < 0)//Didn't use Math.Clamp because there is no override of this function for FixedPoint2 and i don't want to convert types 2 times every time we calculate this
-                durabilityCoefficient = 0;
-
-            if (durabilityCoefficient > 1)
-                durabilityCoefficient = 1;
+            durabilityCoefficient = FixedPoint2.Clamp(durabilityCoefficient, 0, 1);
         }
 
         foreach (var type in damage.DamageDict.Keys)//Here we start counting damage for each type
@@ -51,7 +50,6 @@ public sealed class AltArmorSystem : EntitySystem
                     piercing: damage.ArmourPiercing,
                     durabilityCoefficient: durabilityCoefficient
                 );//armor damage
-
             else
                 resultArmorDamage.DamageDict.Add(type, damage.DamageDict[type]);
 
@@ -93,14 +91,13 @@ public sealed class AltArmorSystem : EntitySystem
             if (damage.ArmourPiercing > ent.Comp.TresholdDict[maximalDamageType])// A kostyl made to lower the piercing stat to prevent infinite/too good penetration of anything
             {
                 resultDamage.ArmourPiercing = damage.ArmourPiercing - ent.Comp.TresholdDict[maximalDamageType];
-                _damageable.TryChangeDamage(ent.Owner, resultDamage);
                 return;
             }
             resultDamage.ArmourPiercing = 0;
         }
     }
 
-    public FixedPoint2 CountDifference(Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2> dict, FixedPoint2 damage, FixedPoint2 resist,string type, FixedPoint2 piercing, FixedPoint2 durabilityCoefficient)
+    public FixedPoint2 CountDifference(Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2> dict, FixedPoint2 damage, FixedPoint2 resist, ProtoId<DamageTypePrototype> type, FixedPoint2 piercing, FixedPoint2 durabilityCoefficient)
     {
         resist *= durabilityCoefficient;
         resist = FixedPoint2.Max(resist - piercing, FixedPoint2.Zero);

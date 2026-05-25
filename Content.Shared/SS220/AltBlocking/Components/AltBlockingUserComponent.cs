@@ -1,5 +1,6 @@
-// © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
+// © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 using Content.Shared.Alert;
+using Content.Shared.StatusIcon;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -13,12 +14,15 @@ public sealed partial class AltBlockingUserComponent : Component
     /// <summary>
     /// The entities that's being used to block and are shields
     /// </summary>
-    [DataField("blockingItemsShields")]
-    public List<EntityUid?> BlockingItemsShields = new();
+    [AutoNetworkedField]
+    public List<EntityUid> BlockingItemsShields = new();
 
     [DataField, AutoNetworkedField]
-    public bool IsBlocking = false;
+    public bool Blocking = false;
 
     [DataField]
     public ProtoId<AlertPrototype> BlockingAlertProtoId = "ActiveBlocking";
+
+    [DataField]
+    public ProtoId<BlockingIconPrototype> Icon = "BlockingIcon";
 }

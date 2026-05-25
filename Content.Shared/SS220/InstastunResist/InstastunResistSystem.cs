@@ -14,6 +14,7 @@ public sealed partial class InstastunResistSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<InstastunResistComponent, StunAttemptEvent>(OnStunAttempt);
         SubscribeLocalEvent<InventoryComponent, StunAttemptEvent>(RelayInventoryEvent);
+        SubscribeLocalEvent<WearableInstastunResistComponent, InventoryRelayedEvent<StunAttemptEvent>>(RelayedClothingEvent);
         SubscribeLocalEvent<HandsComponent, StunAttemptEvent>(RelayToHeld);
     }
 
@@ -21,6 +22,12 @@ public sealed partial class InstastunResistSystem : EntitySystem
     {
         if (ent.Comp.ResistedStunTypes.Contains(args.Origin))
             args.StunCancelled = true;
+    }
+
+    public void RelayedClothingEvent(Entity<WearableInstastunResistComponent> ent, ref InventoryRelayedEvent<StunAttemptEvent> args)
+    {
+        if (ent.Comp.ResistedStunTypes.Contains(args.Args.Origin))
+            args.Args.StunCancelled = true;
     }
 
     public void RelayInventoryEvent(Entity<InventoryComponent> ent, ref StunAttemptEvent args)

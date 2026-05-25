@@ -1,4 +1,4 @@
-// © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
+// © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 using Content.Shared.Damage.Systems;
 using Content.Shared.Inventory;
 using Content.Shared.SS220.AltArmor;
@@ -16,14 +16,21 @@ public sealed class WearableAltArmorSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<WearableAltArmorComponent, InventoryRelayedEvent<DamageModifyEvent>>(OnDamageModify);
+
+        SubscribeLocalEvent<WearableAltArmorComponent, DamageModifyEvent>(OnDamageModifyDirect);
     }
 
     public void OnDamageModify(Entity<WearableAltArmorComponent> ent, ref InventoryRelayedEvent<DamageModifyEvent> args)
     {
         _altArmor.ModifyDamage(ent.Owner, args.Args.OriginalDamage, out var resultDamage, out var resultArmorDamage);
 
-        args.Args.Damage = resultDamage;
+        _damageable.TryChangeDamage(ent.Owner, args.Args.Damage);
 
-        _damageable.TryChangeDamage(ent.Owner, resultArmorDamage);
+        args.Args.Damage = resultDamage;
+    }
+
+    public void OnDamageModifyDirect(Entity<WearableAltArmorComponent> ent, ref DamageModifyEvent args)
+    {
+        _altArmor.ModifyDamage(ent.Owner, args.OriginalDamage, out var resultDamage, out args.Damage);
     }
 }

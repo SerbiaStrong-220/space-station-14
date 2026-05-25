@@ -1,4 +1,4 @@
-// © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
+// © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Stacks;
@@ -29,7 +29,7 @@ public sealed partial class ComplexRepairableComponent : Component
     /// Cost of fuel used to repair this device.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public int FuelCost = 5;
+    public FixedPoint2 FuelCost = 5;
 
     /// <summary>
     /// Material used to fix the owner of the component 
@@ -38,7 +38,7 @@ public sealed partial class ComplexRepairableComponent : Component
     public ProtoId<StackPrototype> Material;
 
     /// <summary>
-    /// How much of given material the user has to insert in order to repair mech
+    /// How much of given material the user has to insert in order to repair
     /// </summary>
     [AutoNetworkedField]
     public int LeftToInsert;
@@ -56,10 +56,10 @@ public sealed partial class ComplexRepairableComponent : Component
     public ProtoId<ToolQualityPrototype> QualityNeeded = "Welding";
 
     /// <summary>
-    /// This value multiplies the time needed to repair the entity
+    /// Time needed to repair the entity is multiplied by this value each time total damage passes the treshold
     /// </summary>
     [DataField, AutoNetworkedField]
-    public int DoAfterModifier = 1;
+    public FixedPoint2 DoAfterModifier = 1;
 
     /// <summary>
     /// A multiplier that will be applied to the above if an entity is repairing themselves.

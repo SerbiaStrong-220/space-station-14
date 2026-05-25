@@ -1,4 +1,4 @@
-// © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
+// © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 using Content.Shared.Damage;
 using Robust.Shared.GameStates;
 
@@ -13,7 +13,7 @@ public sealed partial class ToggleBlockingChanceComponent : Component
     public DamageModifierSet? OriginalActiveModifier;
 
     [DataField, AutoNetworkedField]
-    public bool IsToggled = false;
+    public bool Toggled = false;
 
     [DataField, AutoNetworkedField]
     public float ToggledRangeBlockProb = 0.5f;

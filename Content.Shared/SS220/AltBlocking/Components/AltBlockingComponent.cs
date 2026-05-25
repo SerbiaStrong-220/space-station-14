@@ -1,4 +1,4 @@
-// © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
+// © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
 using Content.Shared.Inventory;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -10,7 +10,6 @@ namespace Content.Shared.SS220.AltBlocking;
 /// </summary>
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState]
-
 public sealed partial class AltBlockingComponent : Component
 {
     /// <summary>
@@ -18,12 +17,6 @@ public sealed partial class AltBlockingComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntityUid? User;
-
-    /// <summary>
-    /// Is it currently blocking?
-    /// </summary>
-    [DataField]
-    public bool IsBlocking;
 
     /// <summary>
     /// The sound to be played when you get hit while actively blocking

@@ -40,8 +40,7 @@
         variation: 0.125
     activatedDamage:
       types:
-        Slash: 5 #SS220 weapon overhaul
-        Heat: 25 #SS220 weapon overhaul
+        Heat: 30 #SS220 shield rework
         Structural: 20
   - type: MeleeWeapon
     wideAnimationRotation: -135
@@ -106,11 +105,14 @@
 
 - type: entity
   name: energy dagger
-  parent: [BaseMeleeWeaponEnergy]
+  parent: BaseItem #SS220 shield rework
   id: EnergyDaggerLoud
   description: A not as loud and dangerous dagger with a beam made of pure, concentrated plasma. This one is completely undisguised.
   components:
+  #SS220 shield rework begin
+  - type: EnergySword
   - type: ItemToggle
+<<<<<<< HEAD
     soundActivate:
       path: /Audio/Weapons/ebladeon.ogg
       params:
@@ -135,6 +137,33 @@
       path: /Audio/Weapons/ebladehum.ogg
       params:
         volume: -3
+=======
+  - type: ItemToggleHot
+  - type: ItemToggleSize
+    activatedSize: Huge
+  - type: ItemTogglePointLight
+    toggleableVisualsColorModulatesLights: true
+  - type: UseDelay
+    delay: 1.0
+  - type: PointLight
+    enabled: false
+    radius: 2
+    energy: 2
+    color: white
+    netsync: false
+  - type: Appearance
+  - type: ToggleableVisuals # Add support for multiple layers
+    spriteLayer: blade
+    inhandVisuals:
+      left:
+      - state: inhand-left-blade
+        shader: unshaded
+      right:
+      - state: inhand-right-blade
+        shader: unshaded
+  - type: IgnitionSource
+    temperature: 700
+>>>>>>> shield_rework_finished
   - type: ComponentToggler
     components:
     - type: Sharp
@@ -142,6 +171,10 @@
       malus: 0.4
     - type: Execution
       doAfterDuration: 4.0
+  - type: ItemToggleMeleeWeapon
+    activatedDamage:
+        types:
+            Heat: 20 #SS220 shield rework
   - type: Sprite
     sprite: Objects/Weapons/Melee/e_dagger_loud.rsi
     layers:
@@ -158,57 +191,20 @@
     damage:
       types:
         Blunt: 1
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
   - type: Item
     size: Tiny
     sprite: Objects/Weapons/Melee/e_dagger_loud.rsi
-  - type: PointLight
-    enabled: false
-    radius: 1.5
-    energy: 2.7
-    color: white
-    netsync: false
+  #SS220 shield rework end
 
 - type: entity
   name: pen
-  parent: [BaseMeleeWeaponEnergy, SelectableLock]
+  parent: [EnergyDaggerLoud, SelectableLock] #SS220 shield rework
   id: EnergyDagger
   suffix: E-Dagger
   description: 'A dark ink pen.'
   components:
-  - type: ItemToggle
-    soundActivate:
-      path: /Audio/Weapons/ebladeon.ogg
-      params:
-        volume: -6
-    soundDeactivate:
-      path: /Audio/Weapons/ebladeoff.ogg
-      params:
-        volume: -6
-  - type: ItemToggleActiveSound
-    activeSound:
-      path: /Audio/Weapons/ebladehum.ogg
-      params:
-        volume: -6
-  - type: ItemToggleMeleeWeapon
-    activatedSoundOnSwing:
-      path: /Audio/Weapons/eblademiss.ogg
-      params:
-        volume: -3
-        variation: 0.250
-    activatedDamage:
-      types:
-        Slash: 10
-        Heat: 10
-        Structural: 15 #SS220-add-struct-damage
-  - type: ComponentToggler
-    components:
-    - type: Sharp
-    - type: DisarmMalus
-      malus: 0.4
-    - type: Execution
-      doAfterDuration: 4.0
-    - type: Contraband
-      severity: Syndicate
   - type: Sprite
     sprite: Objects/Weapons/Melee/e_dagger.rsi
     layers:
@@ -234,6 +230,8 @@
     damage:
       types:
         Blunt: 1
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
   - type: EmitSoundOnUse
     sound:
       path: /Audio/Items/pen_click.ogg
@@ -340,23 +338,21 @@
     damageContainer: Invulnerable
   - type: ArmorBlock
   - type: AltArmor
-    tresholddict:
+    tresholdDict:
       Piercing: 48
       Blunt: 30
       Heat: 35
       Slash: 30
       Radiation: 1000
       Poison: 1000
-      Airloss: 1000
       Caustic: 1000
-    durabilitytresholddict:
+    durabilityTresholdDict:
       Piercing: 10000
       Blunt: 10000
       Heat: 10000
       Slash: 10000
       Radiation: 10000
       Poison: 1000
-      Airloss: 1000
       Caustic: 1000
   - type: InstastunResist
     resistedStunTypes:
@@ -384,8 +380,12 @@
         variation: 0.250
     activatedDamage:
         types:
+<<<<<<< HEAD
             Slash: 5
             Heat: 20 #SS220 weapon overhaul
+=======
+            Heat: 24 #SS220 shield rework
+>>>>>>> shield_rework_finished
             Structural: 15
   - type: ItemToggleActiveSound
     activeSound:
@@ -514,6 +514,16 @@
         visible: false
         shader: unshaded
         map: [ "blade" ]
+  - type: ItemToggleMeleeWeapon
+    activatedSoundOnSwing:
+      path: /Audio/Weapons/eblademiss.ogg
+      params:
+        volume: 3
+        variation: 0.250
+    activatedDamage:
+        types:
+            Heat: 24
+            Structural: 15
   - type: InstastunResist
     resistedStunTypes:
       - Creampie
@@ -541,24 +551,18 @@
     damageContainer: Invulnerable
   - type: ArmorBlock
   - type: AltArmor
-    tresholddict:
+    tresholdDict:
       Piercing: 40
       Blunt: 30
       Heat: 35
       Slash: 30
       Radiation: 1000
       Poison: 1000
-      Airloss: 1000
       Caustic: 1000
-    durabilitytresholddict:
-      Piercing: 10000
-      Blunt: 10000
-      Heat: 10000
-      Slash: 10000
-      Radiation: 1000
-      Poison: 1000
-      Airloss: 1000
-      Caustic: 1000
+      Asphyxiation: 1000
+      Bloodloss: 1000
+      Shock: 30
+      Cold: 20
   #SS220 shield rework end
 
 - type: entity
