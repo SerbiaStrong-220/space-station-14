@@ -90,7 +90,6 @@
           Slash: 25
           Radiation: 1000
           Poison: 1000
-          Airloss: 1000
           Caustic: 1000
           Shock: 30
       durabilitytresholddict:
@@ -105,18 +104,6 @@
           Caustic: 1000
           Shock: 40
           Cold: 20
-      durabilityTresholdDict:
-          Piercing: 7
-          Blunt: 15
-          Heat: 7
-          Slash: 10
-          Radiation: 1000
-          Poison: 1000
-          Asphyxiation: 1000
-          Bloodloss: 1000
-          Caustic: 1000
-          Shock: 40
-          Cold: 50
 
 - type: entity
   name: laser shield

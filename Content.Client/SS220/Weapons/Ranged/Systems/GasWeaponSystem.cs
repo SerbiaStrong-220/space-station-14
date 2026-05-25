@@ -1,9 +1,7 @@
 // © FCB, MIT, full text: https://github.com/Free-code-base-14/space-station-14/blob/master/LICENSE.TXT
-using Content.Shared.Popups;
 using Content.Shared.SS220.Weapons.Components;
 using Content.Shared.SS220.Weapons.Ranged.Systems;
 using Content.Shared.Weapons.Ranged.Events;
-using Robust.Shared.Containers;
 
 namespace Content.Client.SS220.Weapons.Ranged.Systems;
 
