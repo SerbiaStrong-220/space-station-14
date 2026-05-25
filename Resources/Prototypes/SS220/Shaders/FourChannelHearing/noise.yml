@@ -1,4 +1,0 @@
-- type: shader
-  id: FourChannelHearingNoise
-  kind: source
-  path: "/Textures/SS220/Shaders/four_channel_hearing/noise.swsl"
