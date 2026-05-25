@@ -94,17 +94,19 @@
     maxItemSize: Small
     grid:
     - 0,0,3,3
-  - type: StorageFill
-    contents:
-    - id: ClothingMaskBreath
-    - id: DoubleEmergencyOxygenTankFilled
-    - id: CombatMedipen
-    - id: FlashlightSeclite
-    - id: FoodSnackNutribrick
-    - id: RadioHandheldCentcom
-    - id: CombatKnife
-    - id: Matchbox
-    - id: DrinkMREFlask
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: DoubleEmergencyOxygenTankFilled
+        - id: CombatKnife
+        - id: FlashlightSeclite
+        - id: RadioHandheldCentcom
+        - id: Matchbox
+        - id: DrinkMREFlask
+        - id: FoodSnackNutribrick
+        - id: ClothingMaskBreath
+        - id: CombatMedipen
 
 - type: entity
   parent: BoxCardboard
@@ -259,17 +261,3 @@
     layers:
     - state: internals
     - state: emergencytank
-    
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: DoubleEmergencyOxygenTankFilled
-        - id: CombatKnife
-        - id: FlashlightSeclite
-        - id: RadioHandheldCentcom
-        - id: Matchbox
-        - id: DrinkMREFlask
-        - id: FoodSnackNutribrick
-        - id: ClothingMaskBreath
-        - id: CombatMedipen
