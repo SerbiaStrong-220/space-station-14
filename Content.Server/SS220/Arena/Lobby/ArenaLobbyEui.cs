@@ -35,6 +35,9 @@ public sealed class ArenaLobbyEui : BaseEui
             case ArenaLobbyRefreshMessage:
                 StateDirty();
                 break;
+            case ArenaLobbyObserveMessage observe:
+                _system.TryObserveArena(Player, observe.ArenaId);
+                break;
         }
     }
 
