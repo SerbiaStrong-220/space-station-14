@@ -515,12 +515,16 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: Brutepack
-        - id: Ointment
         - id: Bloodpack
+          amount: 2
         - id: Gauze
-        - id: EmergencyMedipen
-          amount: 3
+        # Reagents focused on emergency response rather than outright healing
+        - id: ChemistryBottleInaprovaline
+          amount: 2
+        - id: ChemistryBottleHaloperidol
+        - id: ChemistryBottleEthylredoxrazine
+        - id: ChemistryBottleIpecac
+        - id: ChemistryBottleCharcoal
 
 - type: entity
   parent: ClothingBeltSecurityMedical
