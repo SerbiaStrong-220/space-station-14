@@ -300,6 +300,15 @@
     steps: 6
     zeroVisible: true
   - type: Appearance
+# SS220-sec-gear-size-fix-start
+  - type: Item
+    size: Normal
+    shape:
+    - 0,0,2,1
+  - type: Tag
+    tags:
+    - SecBeltEquip
+# SS220-sec-gear-size-fix-end
 
 - type: entity
   name: brown briefcase
