@@ -79,6 +79,13 @@
   id: MobIpc
   name: Urist McIPC
   components:
+  - type: RemoveComponentsOnTrigger
+    keysIn:
+      - RemoveInternalsOnly
+    components:
+      - type: Internals
+  - type: TriggerOnSpawn
+    keyOut: RemoveInternalsOnly
   - type: DamageVisuals
     damageOverlayGroups:
       Brute:
