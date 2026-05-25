@@ -80,8 +80,8 @@
         subject: performer
         reagentId: Tricordrazine
         consumedAmount: 5
-        description: surgery-requirement-reagent-in-hand
-        failureMessage: surgery-requirement-reagent-in-hand
+        description: surgery-requirement-reagent-in-hand-description
+        failureMessage: surgery-requirement-reagent-in-hand-failure-message
     # remove bullet fragments
     - to: retract-torso-skin
       id: retract-torso-skin-remove-fragments

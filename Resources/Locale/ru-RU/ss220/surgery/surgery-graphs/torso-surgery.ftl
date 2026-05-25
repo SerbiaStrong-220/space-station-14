@@ -36,8 +36,8 @@ surgery-torso-node-start = Начало операции.
 direct-compact-defibrillator-cant-zap = Это оборудование должно быть использовано непосредственно на сердце пациента
 
 surgery-requirement-direct-compact-defib-required = Контактный компактный дефибриллятор
-surgery-requirement-direct-compact-defib-failure = Вы не знаете что делать с этим
+surgery-requirement-direct-compact-defib-failure = Вы не знаете что делать с этим!
 
 remove-torso-bullet-fragments = Убрать инородные тела в торсе пациента
 surgery-pathology-requirement-description-torso-fragments = Инородные тела в торсе пациента
-surgery-pathology-requirement-failure-torso-fragments = Вы внимательно осмотриваете торс пациента, но не находите в нём инородных тел.
+surgery-pathology-requirement-failure-torso-fragments = Для этого действия требуется наличие инородных тел в теле пациента, но Вы их не находите.
