@@ -23,6 +23,7 @@ public sealed class CenserSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+        
         SubscribeLocalEvent<CenserComponent, UseInHandEvent>(OnUseInHand);
     }
 
