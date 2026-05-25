@@ -61,10 +61,9 @@ public sealed class CenserSystem : EntitySystem
 
         ReleaseCenserVapor(args.User, component);
 
-        if (component.SoundUse != null)
-        {
-            _audio.PlayPvs(component.SoundUse, uid);
-        }
+
+        _audio.PlayPvs(component.SoundUse, uid);
+
 
         _delay.TryResetDelay((uid, useDelay));
         args.Handled = true;
