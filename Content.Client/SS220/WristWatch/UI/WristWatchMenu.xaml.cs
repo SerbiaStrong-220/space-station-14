@@ -17,7 +17,6 @@ namespace Content.Client.SS220.WristWatch.UI;
 [GenerateTypedNameReferences]
 public sealed partial class WristWatchMenu : BaseWindow, IPinnableWindow
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
     [Dependency] private readonly IResourceCache _resourceCache = default!;
 
     private readonly StringBuilder _stringBuilder = new();

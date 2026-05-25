@@ -33,7 +33,7 @@ public sealed class NyarlathotepTargetSearcherSystem : EntitySystem
     /// </summary>
     private void SearchNearNyarlathotep(EntityUid user, float range)
     {
-        foreach (var target in _entityLookupSystem.GetEntitiesInRange<HumanoidAppearanceComponent>(_transform.GetMapCoordinates(user), range))
+        foreach (var target in _entityLookupSystem.GetEntitiesInRange<HumanoidProfileComponent>(_transform.GetMapCoordinates(user), range))
         {
             if (HasComp<MiGoComponent>(target.Owner))
                 continue;

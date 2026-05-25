@@ -1,0 +1,35 @@
+# rabbit steak
+- type: constructionGraph
+  id: RabbitSteak
+  start: start
+  graph:
+
+  - node: start
+    edges:
+    - to: cooked rabbit
+      completed:
+      - !type:PlaySound
+        sound: /Audio/Effects/sizzle.ogg
+      steps:
+      - minTemperature: 345
+
+  - node: cooked rabbit
+    entity: FoodMeatRabbitSteak
+
+# bnuuy steak
+- type: constructionGraph
+  id: RabbitBnuuySteak
+  start: start
+  graph:
+
+  - node: start
+    edges:
+    - to: cooked bnuuy
+      completed:
+      - !type:PlaySound
+        sound: /Audio/Effects/sizzle.ogg
+      steps:
+      - minTemperature: 345
+
+  - node: cooked bnuuy
+    entity: FoodMeatRabbitBnuuySteak

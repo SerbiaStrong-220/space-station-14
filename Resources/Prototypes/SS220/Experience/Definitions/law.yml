@@ -1,0 +1,54 @@
+- type: experienceDefinition
+  id: LawyerRoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    ExtravehicularActivity:
+      level: 1
+    CombatTraining:
+      level: 1
+    Construction:
+      level: 1
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 2
+  addSublevelPoints: 20
+
+- type: experienceDefinition
+  id: IAARoleExperience
+  skills:
+    Bureaucracy:
+      level: 2
+    ExtravehicularActivity:
+      level: 1
+    CombatTraining:
+      level: 2
+    Construction:
+      level: 1
+    Medicine:
+      level: 1
+    PhysicalTraining:
+      level: 2
+  addSublevelPoints: 15
+  knowledges:
+  - InformedPersonalKnowledge
+
+- type: experienceDefinition
+  id: MagistrateRoleExperience
+  skills:
+    Bureaucracy:
+      level: 3
+    ExtravehicularActivity:
+      level: 1
+    CombatTraining:
+      level: 2
+    Construction:
+      level: 1
+    Medicine:
+      level: 2
+    PhysicalTraining:
+      level: 2
+  addSublevelPoints: 10
+  knowledges:
+  - InformedPersonalKnowledge

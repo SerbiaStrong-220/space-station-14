@@ -1,8 +1,8 @@
 ent-ClothingBackpackArmy = армейский ранец
         .desc = Твердый ранец с спальным мешком. Помогает пережить длительные марши.
 
-ent-ClothingBackpackBlueShield = рюкзак "Синий Щит"
-    .desc = Рюкзак, специально разработанный для "Синий Щит", с уникальной технологией карманного скафандра.
+ent-ClothingBackpackBlueShield = рюкзак синего щита
+    .desc = Рюкзак, специально разработанный для синих щитов, с уникальной технологией карманного скафандра.
     .suffix = Лёгкий скафандр
 
 ent-ClothingBackpackWhiteCaptain = белый рюкзак капитана
@@ -17,6 +17,10 @@ ent-ClothingBackpackBlueShieldHightFilled = { ent-ClothingBackpackBlueShield }
 
 ent-ClothingBackpackSpaceNinja = рюкзак космического ниндзя
     .desc = Рюкзак для снаряжения космического ниндзя.
+    
+ent-ClothingBackpackSpaceNinjaFake = { ent-ClothingBackpackSpaceNinja }
+    .desc = { ent-ClothingBackpackSpaceNinja.desc }
+    .suffix = Поддельный
 
 ent-ClothingBackpackERTLeaderGammaFilled = { ent-ClothingBackpackERTLeader }
     .suffix = Гамма ОБР, заполненный

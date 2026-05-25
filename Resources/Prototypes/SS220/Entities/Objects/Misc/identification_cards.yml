@@ -83,14 +83,14 @@
 
 - type: entity
   parent: CentcomIDCard
-  id: OperativeBSOIDCard
-  name: ID карта Оперативника "Синий Щит"
+  id: OperativeSRTIDCard
+  name: ID карта Оперативника ГСН
   description: Карта, необходимая для доступа в различные части станций и кораблей.
   components:
     - type: IdCard
-      jobTitle: job-name-cc-bs-operative #SS220 (upstream 65 localization)
+      jobTitle: job-name-cc-srt-operative #SS220 (upstream 65 localization)
     - type: PresetIdCard
-      job: CentcomOperativeBSO
+      job: CentcomOperativeSRT
 
 - type: entity # SS220 - Security dog Roxi ID card
   parent: IDCardStandard
@@ -149,6 +149,24 @@
       - WhitelistChameleon
       - WhitelistChameleonIdCard
     #ss220 add pdaidpainter end
+
+- type: entity
+  parent: IDCardStandard
+  id: NanoTrasenRepresentativeIDCard
+  name: NanoTrasen Representative ID card
+  components:
+    - type: Sprite
+      layers:
+        - state: silver
+        - state: idmagistrate
+    - type: PresetIdCard
+      job: NanoTrasenRepresentative
+    - type: Tag
+      tags:
+      - WhitelistPdaIdPainter
+      - DoorBumpOpener
+      - WhitelistChameleon
+      - WhitelistChameleonIdCard
 
 # Deathsquad
 - type: entity
@@ -234,3 +252,88 @@
       jobTitle: job-name-cc-ci-officer
     - type: PresetIdCard
       job: CIOffcier
+
+- type: entity
+  parent: IDCardStandard
+  id: RedWingsPilotIDCard
+  name: Red Wings Pilot ID Card
+  components:
+  - type: Sprite
+    layers:
+    - state: redwings
+    - state: idredwingspilot
+  - type: PresetIdCard
+    job: RedWingsPilot
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+
+- type: entity
+  parent: IDCardStandard
+  id: RedWingsOfficerIDCard
+  name: Red Wings Officer ID Card
+  components:
+  - type: Sprite
+    layers:
+    - state: redwings
+    - state: idredwingsofficer
+  - type: PresetIdCard
+    job: RedWingsOfficer
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+
+- type: entity
+  parent: IDCardStandard
+  id: RedWingsMedicIDCard
+  name: Red Wings Medic IDCard
+  components:
+  - type: Sprite
+    layers:
+    - state: redwings
+    - state: idredwingsmedic
+  - type: PresetIdCard
+    job: RedWingsMedic
+  - type: Tag
+    tags:
+    - WhitelistPdaIdPainter
+    - DoorBumpOpener
+    - WhitelistChameleon
+    - WhitelistChameleonIdCard
+
+- type: entity
+  parent: [Clothing]
+  id: FakeCaptainIDCard
+  name: captain ID card
+  description: A card necessary to access various areas aboard the station.
+  suffix: fake
+  components:
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: SS220/Objects/Misc/id_cards.rsi
+  - type: Sprite
+    sprite: SS220/Objects/Misc/id_cards.rsi
+    layers:
+    - state: gold
+    - state: idcaptain
+  - type: Item
+    size: Small
+    storedRotation: -90
+    heldPrefix: gold
+  - type: IdCard
+    jobTitle: job-name-captain
+    jobIcon: JobIconCaptain
+    jobColor: '#2A4EF6FF'
+    radioBold: true
+  - type: Access
+    enabled: false
+  - type: Tag
+    tags:
+    - DoorBumpOpener

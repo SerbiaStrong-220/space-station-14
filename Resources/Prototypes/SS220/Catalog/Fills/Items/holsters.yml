@@ -6,10 +6,12 @@
   name: Legendary Marksman Holster
   suffix: Filled
   components:
-  - type: StorageFill
-    contents:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
         - id: WeaponRevolverLegendaryMarksman
-        - id: SpeedLoaderMagnumRubber
+        - id: SpeedLoaderMagnum
           amount: 2
 
 - type: entity
@@ -18,8 +20,10 @@
   name: Black Angel Holster
   suffix: Filled
   components:
-  - type: StorageFill
-    contents:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
         - id: WeaponRevolverBlackAngel
-        - id: SpeedLoaderMagnumRubber
+        - id: SpeedLoaderMagnum
           amount: 2

@@ -3,7 +3,6 @@
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.Popups;
-using Content.Shared.SS220.Teleport;
 using Content.Shared.SS220.Teleport.Components;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
@@ -32,6 +31,13 @@ public sealed class InteractionTeleportSystem : EntitySystem
             return;
 
         if (_whitelist.IsWhitelistFail(ent.Comp.UserWhitelist, args.User))
+        {
+            if (ent.Comp.WhitelistRejectedLoc != null)
+                _popup.PopupPredicted(Loc.GetString(ent.Comp.WhitelistRejectedLoc), ent, args.User, PopupType.MediumCaution);
+            return;
+        }
+
+        if (_whitelist.IsWhitelistPass(ent.Comp.UserBlacklist, args.User))
             return;
 
         var user = args.User;
@@ -65,6 +71,9 @@ public sealed class InteractionTeleportSystem : EntitySystem
             return;
         }
 
+        if (_whitelist.IsWhitelistPass(ent.Comp.UserBlacklist, args.User))
+            return;
+
         TryStartTeleport(ent, args.Dragged, args.User);
     }
 
@@ -84,7 +93,8 @@ public sealed class InteractionTeleportSystem : EntitySystem
 
         var teleportDoAfter = new DoAfterArgs(EntityManager, user, ent.Comp.TeleportDoAfterTime.Value, new InteractionTeleportDoAfterEvent(), ent, target)
         {
-            BreakOnDamage = false,
+            BreakOnDamage = ent.Comp.DamageThreshold != null,
+            DamageThreshold = ent.Comp.DamageThreshold ?? 0,
             BreakOnMove = true,
             BlockDuplicate = true,
             CancelDuplicate = true,

@@ -1,4 +1,5 @@
 using Content.Shared.ActionBlocker;
+using Content.Shared.Chat;
 using Content.Shared.Emoting;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
@@ -33,6 +34,8 @@ public sealed class AdminFrozenSystem : EntitySystem
         SubscribeLocalEvent<AdminFrozenComponent, EmoteAttemptEvent>(OnEmoteAttempt);
         SubscribeLocalEvent<AdminFrozenComponent, SpeakAttemptEvent>(OnSpeakAttempt);
         SubscribeLocalEvent<AdminFrozenComponent, TelepathySendAttemptEvent>(OnTelepathyAttempt); // SS220 Block telepathy on death
+        SubscribeLocalEvent<AdminFrozenComponent, InGameOocMessageAttemptEvent>(OnInGameOocMessageAttempt);
+        SubscribeLocalEvent<InGameOocMessageAttemptEvent>(OnInGameOocMessageAttemptBroadcast);
     }
 
     /// <summary>
@@ -56,6 +59,20 @@ public sealed class AdminFrozenSystem : EntitySystem
             return;
 
         args.Cancel();
+    }
+
+    private void OnInGameOocMessageAttempt(Entity<AdminFrozenComponent> ent, ref InGameOocMessageAttemptEvent args)
+    {
+        if (!ent.Comp.Muted)
+            return;
+
+        // Despite Type being available, Admin Mute does not care to differentiate. If you are out, you are out.
+        args.Cancelled = true;
+    }
+
+    private void OnInGameOocMessageAttemptBroadcast(ref InGameOocMessageAttemptEvent args)
+    {
+        //TODO Player LOOC mute/ban. Session is in the  args, but where to store/check the muted state?
     }
 
     private void OnAttempt(EntityUid uid, AdminFrozenComponent component, CancellableEntityEventArgs args)

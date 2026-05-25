@@ -14,7 +14,7 @@ public sealed partial class SpeciesRequirementsManager
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly INetManager _net = default!;
 
-    private readonly List<string> _speciesBans = [];
+    private readonly List<ProtoId<SpeciesPrototype>> _speciesBans = [];
 
     private ISawmill _sawmill = default!;
 

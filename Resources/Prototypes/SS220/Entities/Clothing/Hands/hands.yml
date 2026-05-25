@@ -98,6 +98,8 @@
       types:
         Blunt: 45
     animation: WeaponArcFist
+    soundHit:
+      path: /Audio/SS220/Weapons/Melee/Punches/punch_ds.ogg
   - type: Fiber
     fiberMaterial: fibers-insulative
   - type: FingerprintMask
@@ -148,7 +150,7 @@
   - type: MeleeWeapon
     damage:
       types:
-        Blunt: 7
+        Blunt: 12
     bluntStaminaDamageFactor: 2.0
     mustBeEquippedToUse: true
   - type: StaminaDamageOnHit
@@ -196,6 +198,8 @@
           False: {state: icon}
   - type: ToggleClothing
     action: ActionTogglePowergloveDisabler
+  - type: BatterySelfRecharger
+    autoRechargeRate: 50
 
 - type: entity
   id: ActionTogglePowergloveDisabler
@@ -222,3 +226,24 @@
   - type: Fiber
     fiberColor: fibers-brown
   - type: FingerprintMask
+
+- type: entity
+  parent: ClothingHandsGlovesSyntheticBase
+  id: ClothingHandsGlovesSpaceNinjaFake
+  name: space ninja gloves
+  suffix: Fake
+  description: Rubberized Fabric Gloves for Ninja Cosplay.
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Hands/Gloves/spaceninja.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Hands/Gloves/spaceninja.rsi
+  - type: Fiber
+    fiberColor: fibers-black
+  - type: HiddenDescription
+    entries:
+      SyndicateAgentKnowledge: [ hidden-desc-toy-armour-syndicate ]
+      ServiceActorKnowledge: [ hidden-desc-toy-armour-clown ]
+    nameEntries:
+    - [SyndicateAgentKnowledge, null]
+    - [ServiceActorKnowledge, null]

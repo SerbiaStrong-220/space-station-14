@@ -74,7 +74,9 @@
     - fullstatereset
     - exec # macro moment #SS220 exec-command-perms-change
     - dumpentities
+    - showwallmounts
     - showaccessreaders
+    - quickinspect
 
 - Flags: MAPPING
   Commands:
@@ -84,6 +86,7 @@
     - showsubfloorforever
     - toggleautosave
     - toggledecals
+    - showwallmounts
     - showaccessreaders
 
 - Flags: QUERY

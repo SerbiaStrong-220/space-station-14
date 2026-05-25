@@ -13,3 +13,5 @@ ent-ClothingShoesWandererBoots = сапоги странника
 ent-ClothingShoesBootsLaceupSeniorService = зелёные шнурованные туфли
     .desc = Для тех, кто действительно готов ко всему и сразу.
     .suffix = За время в игре
+ent-ClothingShoesBootsWinterSecMed = зимние ботинки бригмедика
+    .desc = Прочные утеплённые ботинки, созданные для медика, работающего в холодных коридорах бригa.

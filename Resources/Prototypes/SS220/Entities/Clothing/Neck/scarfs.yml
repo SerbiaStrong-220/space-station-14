@@ -13,8 +13,8 @@
 
 - type: entity
   parent: ClothingNeckBase
-  id: ClothingNeckScarfBSO
-  name: Blue Shield operative's scarf
+  id: ClothingNeckScarfSRT
+  name: SRT operative's scarf
   description: Black tones allow a glimpse into the farthest corners of the wearer's soul. Don't stare too long, it's better to walk away.
   components:
     - type: Sprite

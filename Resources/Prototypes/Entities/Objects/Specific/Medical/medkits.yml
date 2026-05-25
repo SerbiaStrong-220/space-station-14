@@ -24,13 +24,12 @@
         - DiscreteHealthAnalyzer
         - SurgeryTool
         - Dropper
-        - GasTank
         - MaskBreath
       components:
-        - Hypospray
         - Injector
         - Pill
         - HandLabeler
+        - GasTank #ss220 add gas tank to whitelist for aid kit
 # ss220 medkit fix end
     maxItemSize: Small
     grid:

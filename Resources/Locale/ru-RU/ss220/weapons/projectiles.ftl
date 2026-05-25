@@ -1,1 +1,1 @@
-ent-PoisonousAcid = ядовитый плевой
+ent-PoisonousAcid = ядовитый плевок

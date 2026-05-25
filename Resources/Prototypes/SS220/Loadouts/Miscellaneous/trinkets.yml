@@ -15,3 +15,16 @@
   storage:
     back:
     - ClothingEyesEyepatch
+
+- type: loadout
+  id: ClothingNeckUSSPPin
+  storage:
+    back:
+    - ClothingNeckUSSPPin
+  groupBy: "pin"
+
+- type: loadout
+  id: ExpensiveCane
+  storage:
+    back:
+    - ExpensiveCane

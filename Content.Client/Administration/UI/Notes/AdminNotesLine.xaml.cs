@@ -70,7 +70,7 @@ public sealed partial class AdminNotesLine : BoxContainer
 
         TimeLabel.Text = Note.CreatedAt.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss");
         ServerLabel.Text = Note.ServerName ?? "Unknown";
-        RoundLabel.Text = Note.Round == null ? "Unknown round" : "Round " + Note.Round;
+        RoundLabel.Text = Note.Rounds.Length == 0 ? "Unknown round" : "Round " + string.Join(',', Note.Rounds);
         AdminLabel.Text = Note.CreatedByName;
         PlaytimeLabel.Text = $"{Note.PlaytimeAtNote.TotalHours: 0.0}h";
 
@@ -120,11 +120,14 @@ public sealed partial class AdminNotesLine : BoxContainer
             case NoteType.RoleBan:
                 NoteLabel.SetMessage(FormatRoleBanMessage());
                 break;
-            // SS220 Species bans begin
+            // SS220 Species chat bans begin
             case NoteType.SpeciesBan:
                 NoteLabel.SetMessage(FormatSpeciesBanMessage());
                 break;
-            // SS220 Species bans end
+            case NoteType.ChatBan:
+                NoteLabel.SetMessage(FormatChatBanMessage());
+                break;
+            // SS220 Species chat bans end
             case NoteType.Note:
             case NoteType.Watchlist:
             case NoteType.Message:
@@ -148,14 +151,33 @@ public sealed partial class AdminNotesLine : BoxContainer
 
     private string FormatRoleBanMessage()
     {
-        var banMessage = new StringBuilder($"{Loc.GetString("admin-notes-banned-from")} {string.Join(", ", Note.BannedRoles ?? new[] { "unknown" })} ");
+        var rolesText = string.Join(
+            ", ",
+            // Explicit cast here to avoid sandbox violation.
+            (IEnumerable<BanRoleDef>?)Note.BannedRoles ?? [new BanRoleDef("what", "You should not be seeing this")]);
+
+        var banMessage = new StringBuilder($"{Loc.GetString("admin-notes-banned-from")} {rolesText} ");
         return FormatBanMessageCommon(banMessage);
     }
 
     // SS220 Species bans begin
     private string FormatSpeciesBanMessage()
     {
-        var banMessage = new StringBuilder($"{Loc.GetString("admin-notes-banned-from")} {string.Join(", ", Note.BannedSpecies ?? ["unknown"])} ");
+        var speciesText = string.Join(
+            ", ",
+            (IEnumerable<BanSpecieDef>?)Note.BannedSpecies ?? [new BanSpecieDef("unknown")]);
+
+        var banMessage = new StringBuilder($"{Loc.GetString("admin-notes-banned-from")} {speciesText} ");
+        return FormatBanMessageCommon(banMessage);
+    }
+
+    private string FormatChatBanMessage()
+    {
+        var chatsText = string.Join(
+            ", ",
+            (IEnumerable<BanChatDef>?)Note.BannedChats ?? [new BanChatDef(BannableChats.Invalid)]);
+
+        var banMessage = new StringBuilder($"{Loc.GetString("admin-notes-banned-from")} {chatsText} ");
         return FormatBanMessageCommon(banMessage);
     }
     // SS220 Species bans end
