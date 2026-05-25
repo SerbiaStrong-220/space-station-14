@@ -22,5 +22,5 @@
   - type: IncreaseDamageOnWield
     damage:
       types:
-        Blunt: -13
+        Blunt: 4
   - type: MobilityAid
