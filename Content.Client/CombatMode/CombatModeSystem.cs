@@ -22,7 +22,6 @@ public sealed class CombatModeSystem : SharedCombatModeSystem
     [Dependency] private readonly IInputManager _inputManager = default!;
     [Dependency] private readonly IEyeManager _eye = default!;
     [Dependency] private readonly GunSystem _gunSystem = default!;//SS220 weapon overhaul
-    [Dependency] private readonly SharedContentEyeSystem _eyeSystem = default!;//SS220 weapon overhaul
 
     /// <summary>
     /// Raised whenever combat mode changes.
