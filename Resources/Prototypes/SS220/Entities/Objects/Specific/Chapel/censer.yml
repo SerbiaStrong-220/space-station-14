@@ -14,7 +14,7 @@
   - type: Censer
     gasType: WaterVapor
     moles: 10
-    vaporAmount: 5
+    waterCost: 5
     soundUse:
       path: /Audio/SS220/Items/Censer/chain.ogg
   - type: UseDelay

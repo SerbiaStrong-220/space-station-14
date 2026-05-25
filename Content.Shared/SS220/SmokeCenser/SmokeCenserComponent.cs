@@ -2,6 +2,7 @@
 
 using Content.Shared.Atmos;
 using Robust.Shared.Audio;
+using Content.Shared.FixedPoint;
 namespace Content.Shared.SS220.SmokeCenser;
 
 [RegisterComponent]
@@ -11,10 +12,10 @@ public sealed partial class CenserComponent : Component
     public Gas GasType = Gas.WaterVapor;
 
     [DataField]
-    public float VaporAmount = 5.0f;
+    public FixedPoint2 WaterCost = 5.0;
 
     [DataField]
-    public float Moles = 100f;
+    public float Moles = 20f;
 
     [DataField]
     public float Temperature = 350f;

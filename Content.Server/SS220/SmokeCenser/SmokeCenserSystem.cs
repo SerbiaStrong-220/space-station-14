@@ -1,24 +1,30 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 using Content.Shared.Interaction.Events;
-using Content.Shared.Timing;
 using Content.Shared.SS220.SmokeCenser;
 using Content.Shared.Atmos;
 using Content.Shared.FixedPoint;
 using Content.Shared.Chemistry.EntitySystems;
+using Robust.Shared.Audio.Systems;
+using Content.Shared.Chemistry.Reagent;
+using Robust.Shared.Prototypes;
 using Content.Server.Popups;
 using Content.Server.Atmos.EntitySystems;
-using Robust.Shared.Audio.Systems;
 
 namespace Content.Server.SS220.SmokeCenser;
 
 public sealed class CenserSystem : EntitySystem
 {
-    [Dependency] private readonly UseDelaySystem _delay = default!;
+
     [Dependency] private readonly AtmosphereSystem _atmos = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly PopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+
+    private const string CenserSolutionName = "reagents";
+    
+    private static readonly ProtoId<ReagentPrototype> HolyWaterReagentId = "Holywater";
+
     
     public override void Initialize()
     {
@@ -32,40 +38,36 @@ public sealed class CenserSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (!TryComp(uid, out UseDelayComponent? useDelay) || _delay.IsDelayed((uid, useDelay)))
+        if (!_solutionContainer.TryGetSolution(entity.Owner, CenserSolutionName, out var soln, out var solution))
             return;
 
-        if (!_solutionContainer.TryGetSolution(uid, PrivateStaticReadonlyStringFieldWithMakesenseName, out var soln, out var solution))
-            return;
-
-        var vaporCost = FixedPoint2.New(component.VaporAmount);
-        var holyWaterQuantity = 0; // или FixedPoint2 если не поймёт
+        var waterCost = entity.Comp.WaterCost;
+        var holyWaterQuantity = FixedPoint2.Zero;
         foreach (var reagent in solution.Contents)
         {
-            if (reagent.Reagent.Prototype != PrivateStaticReadonlyProtoId<ReagentPrototype>WithMakesenseName)
+            if (reagent.Reagent.Prototype != HolyWaterReagentId)
             {
-                _popupSystem.PopupEntity(Loc.GetString("censer-contaminated"), uid, args.User);
+                _popupSystem.PopupEntity(Loc.GetString("censer-contaminated"), entity.Owner, args.User);
                 return;
             }
             
             holyWaterQuantity = reagent.Quantity;
         }
 
-        if (holyWaterQuantity < vaporCost)
+        if (holyWaterQuantity < waterCost)
         {
-            _popupSystem.PopupEntity(Loc.GetString("censer-empty"), uid, args.User);
+            _popupSystem.PopupEntity(Loc.GetString("censer-empty"), entity.Owner, args.User);
             return;
         }
 
-        _solutionContainer.SplitSolution(soln.Value, vaporCost);
+        _solutionContainer.SplitSolution(soln.Value, waterCost);
 
-        ReleaseCenserVapor(args.User, component);
-
-
-        _audio.PlayPvs(component.SoundUse, uid);
+        ReleaseCenserVapor(args.User, entity.Comp);
 
 
-        _delay.TryResetDelay((uid, useDelay));
+        _audio.PlayPvs(entity.Comp.SoundUse, entity.Owner);
+
+
         args.Handled = true;
     }
 
