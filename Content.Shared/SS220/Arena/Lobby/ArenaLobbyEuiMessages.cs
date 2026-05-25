@@ -35,6 +35,7 @@ public struct ArenaLobbyEntry
     public int MaxPlayers;
     public ArenaPhase Phase;
     public string Category;
+    public string Creator;
 }
 
 [NetSerializable, Serializable]
@@ -72,4 +73,15 @@ public sealed class ArenaLobbyJoinMessage : EuiMessageBase
 [NetSerializable, Serializable]
 public sealed class ArenaLobbyRefreshMessage : EuiMessageBase
 {
+}
+
+[NetSerializable, Serializable]
+public sealed class ArenaLobbyObserveMessage : EuiMessageBase
+{
+    public uint ArenaId;
+
+    public ArenaLobbyObserveMessage(uint arenaId)
+    {
+        ArenaId = arenaId;
+    }
 }

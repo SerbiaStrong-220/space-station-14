@@ -14,7 +14,7 @@
 
         <PanelContainer StyleClasses="LowDivider" />
 
-        <ScrollContainer HorizontalExpand="True" VerticalExpand="True" HScrollEnabled="False">
+        <ScrollContainer HorizontalExpand="True" VerticalExpand="True" HScrollEnabled="False" MinSize="0 120">
             <BoxContainer Name="ArenasList" Orientation="Vertical" VerticalExpand="True" SeparationOverride="4" />
         </ScrollContainer>
 
@@ -23,7 +23,7 @@
 
         <PanelContainer StyleClasses="LowDivider" />
 
-        <ScrollContainer HorizontalExpand="True" HScrollEnabled="False" MinSize="0 180">
+        <ScrollContainer HorizontalExpand="True" VerticalExpand="True" HScrollEnabled="False" MinSize="0 180">
             <BoxContainer Name="TemplatesList" Orientation="Vertical" SeparationOverride="4" />
         </ScrollContainer>
 

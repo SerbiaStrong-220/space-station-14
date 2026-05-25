@@ -258,13 +258,6 @@
     HardDynamic:
       Telecrystal: 7
   #ss220 dynamic-price end
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-      - LoneOpsUplink #SS220-uplink-fix
-      - DebugUplink #SS220-debug-uplink-fix
 
 - type: listing
   id: uplinkRiggedBoxingGloves
