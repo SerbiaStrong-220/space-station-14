@@ -170,7 +170,8 @@
   - type: Damageable
     damageContainer: IpcContainer
     damageModifierSet: Ipc
-  - type: ToggleableLightVisuals
+  - type: ToggleableVisuals
+    spriteLayer: light 
   - type: PointLight
     enabled: false
     mask: /Textures/Effects/LightMasks/cone.png
