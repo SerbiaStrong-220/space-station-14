@@ -1,8 +1,6 @@
 - type: entity
   id: LockerInterdyneFilled
   parent: LockerInterdyne
-  name: ent-LockerMedicine.desc
-  description: ent-CrateBaseSecure.desc
   suffix: Filled
   components:
   - type: EntityTableContainerFill
@@ -14,8 +12,6 @@
   id: LockerInterdyneArmoredFilled
   parent: LockerInterdyneArmored
   suffix: Filled
-  name: ent-LockerInterdyneArmored
-  description: ent-LockerMedicine.desc
   components:
   - type: EntityTableContainerFill
     containers:
