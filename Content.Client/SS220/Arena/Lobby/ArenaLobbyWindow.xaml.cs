@@ -21,12 +21,14 @@ public sealed partial class ArenaLobbyWindow : DefaultWindow
 
     public event Action<string>? OnCreateRequested;
     public event Action<uint>? OnJoinRequested;
+    public event Action<uint>? OnObserveRequested;
     public event Action? OnRefreshRequested;
 
     private static readonly Vector2 ButtonMinSize = new(86, 0);
     private static readonly Thickness RowMargin = new(8, 6);
     private static readonly Thickness PlayersMargin = new(0, 0, 8, 0);
     private static readonly Thickness NoArenasMargin = new(0, 18, 0, 0);
+    private static readonly Thickness CreatorMargin = new(12, 0, 0, 4);
 
     private static readonly Color ColorWaiting = Color.FromHex("#5dadd8");
     private static readonly Color ColorCountdown = Color.FromHex("#e0c46d");
@@ -142,6 +144,7 @@ public sealed partial class ArenaLobbyWindow : DefaultWindow
     }
 
     private static bool IsJoinablePhase(ArenaPhase phase) => phase == ArenaPhase.WaitingForPlayers;
+    private static bool IsObservablePhase(ArenaPhase phase) => phase is ArenaPhase.WaitingForPlayers or ArenaPhase.Countdown or ArenaPhase.Fighting;
 
     private bool MatchesCategory(ArenaLobbyEntry entry) => _selectedCategory == CategoryAll || entry.Category == _selectedCategory;
     private bool MatchesCategory(ArenaLobbyTemplate tmpl) => _selectedCategory == CategoryAll || tmpl.Category == _selectedCategory;
@@ -186,20 +189,46 @@ public sealed partial class ArenaLobbyWindow : DefaultWindow
         var id = entry.ArenaId;
         join.OnPressed += _ => OnJoinRequested?.Invoke(id);
 
+        var observe = new Button
+        {
+            Text = Loc.GetString("arena-lobby-observe"),
+            Disabled = !IsObservablePhase(entry.Phase),
+            MinSize = ButtonMinSize,
+        };
+        observe.OnPressed += _ => OnObserveRequested?.Invoke(id);
+
         var row = new BoxContainer
         {
             Orientation = LayoutOrientation.Horizontal,
             VerticalAlignment = VAlignment.Center,
             SeparationOverride = 8,
             Margin = RowMargin,
-            Children = { name, status, players, join },
+            Children = { name, status, players, join, observe },
         };
+
+        var body = new BoxContainer
+        {
+            Orientation = LayoutOrientation.Vertical,
+            SeparationOverride = 0,
+            Children = { row },
+        };
+
+        if (!string.IsNullOrWhiteSpace(entry.Creator))
+        {
+            body.AddChild(new Label
+            {
+                Text = Loc.GetString("arena-lobby-creator", ("name", entry.Creator)),
+                StyleClasses = { "LabelSubText" },
+                FontColorOverride = ColorDescription,
+                Margin = CreatorMargin,
+            });
+        }
 
         return new PanelContainer
         {
             StyleClasses = { "AngleRect" },
             HorizontalExpand = true,
-            Children = { row },
+            Children = { body },
         };
     }
 

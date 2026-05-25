@@ -66,12 +66,6 @@ public sealed partial class SharedAltBlockingSystem : EntitySystem
         if (ent.Comp.Blocking)
             return true;
 
-        var blockerName = Identity.Entity(ent.Owner, EntityManager);
-        var msgUser = Loc.GetString(ActiveBlockingOwnerLocale);
-        var msgOther = Loc.GetString(ActiveBlockingOthersLocale, ("blockerName", blockerName));
-
-        _popupSystem.PopupPredicted(msgUser, msgOther, ent.Owner, ent.Owner);
-
         ent.Comp.Blocking = true;
         Dirty(ent);
 
@@ -93,13 +87,6 @@ public sealed partial class SharedAltBlockingSystem : EntitySystem
     {
         if (!ent.Comp.Blocking)
             return false;
-
-        var blockerName = Identity.Entity(ent.Owner, EntityManager);
-
-        var msgUser = Loc.GetString(StopActiveBlockingOwnerLocale);
-        var msgOther = Loc.GetString(StopActiveBlockingOthersLocale, ("blockerName", blockerName));
-
-        _popupSystem.PopupPredicted(msgUser, msgOther, ent.Owner, ent.Owner);
 
         ent.Comp.Blocking = false;
         Dirty(ent);
