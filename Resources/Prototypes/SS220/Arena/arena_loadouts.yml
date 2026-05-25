@@ -218,7 +218,6 @@
     shoes: ClothingShoesBootsSalvage
     back: ClothingBackpackSalvage
   inhand:
-  - WeaponSniperHristov
   - Machete
   storage:
     back:

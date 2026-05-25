@@ -40,4 +40,6 @@ public sealed partial class FieldShieldProviderComponent : Component
     [DataField(required: true)]
     [AutoNetworkedField]
     public FieldShieldLightData LightData;
+
+    public bool Equipped = false;
 }
