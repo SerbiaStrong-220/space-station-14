@@ -19,6 +19,7 @@ public sealed class CenserSystem : EntitySystem
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly PopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    
     public override void Initialize()
     {
         base.Initialize();
