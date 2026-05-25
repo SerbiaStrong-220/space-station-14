@@ -4,6 +4,5 @@ using Content.Shared.Hands.EntitySystems;
 namespace Content.Shared.SS220.Weapons.Ranged.Systems;
 public sealed class SharedGunUseSystem : EntitySystem
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
 
 }

@@ -19,7 +19,6 @@ namespace Content.Shared.SS220.FieldShield;
 
 public sealed class FieldShieldProviderSystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;

@@ -86,10 +86,6 @@ public abstract partial class SharedGunSystem : EntitySystem
     /// </summary>
     public const string MagazineSlot = "gun_magazine";
 
-    // ss220 add block heavy attack and shooting while user is down start
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-    // ss220 add block heavy attack and shooting while user is down end
-
     private static readonly ProtoId<TagPrototype> TrashTag = "Trash";
 
     private const float InteractNextFire = 0.3f;
