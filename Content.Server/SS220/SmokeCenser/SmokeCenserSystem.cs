@@ -35,7 +35,7 @@ public sealed class CenserSystem : EntitySystem
         if (!TryComp(uid, out UseDelayComponent? useDelay) || _delay.IsDelayed((uid, useDelay)))
             return;
 
-        if (!_solutionContainer.TryGetSolution(uid, "reagents", out var soln, out var solution))
+        if (!_solutionContainer.TryGetSolution(uid, PrivateStaticReadonlyStringFieldWithMakesenseName, out var soln, out var solution))
             return;
 
         var vaporCost = FixedPoint2.New(component.VaporAmount);
