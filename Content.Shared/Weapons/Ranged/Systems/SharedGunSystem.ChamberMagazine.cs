@@ -12,7 +12,6 @@ namespace Content.Shared.Weapons.Ranged.Systems;
 
 public abstract partial class SharedGunSystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = null!;
 
     protected virtual void InitializeChamberMagazine()
     {
@@ -210,7 +209,7 @@ public abstract partial class SharedGunSystem
             }
 
             usedComp.UnspawnedCount--;
-            var newAmmoEntityChamber = Spawn(usedComp.Proto, _transform.GetMapCoordinates(ent));
+            var newAmmoEntityChamber = Spawn(usedComp.Proto, TransformSystem.GetMapCoordinates(ent));
 
             if (!CanInsertBallistic(((EntityUid)magEnt, magComp), newAmmoEntityChamber))
             {
@@ -261,7 +260,7 @@ public abstract partial class SharedGunSystem
         }
 
         usedComp.UnspawnedCount--;
-        var newAmmoEntity = Spawn(usedComp.Proto, _transform.GetMapCoordinates(ent));
+        var newAmmoEntity = Spawn(usedComp.Proto, TransformSystem.GetMapCoordinates(ent));
 
         if (!CanInsertBallistic(((EntityUid)magEnt, magComp), newAmmoEntity))
         {
