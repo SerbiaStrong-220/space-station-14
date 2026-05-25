@@ -92,7 +92,7 @@
           Poison: 1000
           Caustic: 1000
           Shock: 30
-      durabilitytresholddict:
+      durabilityTresholdDict:
           Piercing: 7
           Blunt: 15
           Heat: 7
@@ -627,7 +627,7 @@
       toggledMeleeBlockProb: 0.65 #No more stunbatons
     - type: Appearance
     - type: AltArmor
-      tresholddict:
+      tresholdDict:
         Piercing: 65
         Blunt: 30
         Heat: 40

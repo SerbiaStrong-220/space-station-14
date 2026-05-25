@@ -168,12 +168,12 @@
     minAngle: -14
     maxAngle: -3
     angleIncrease: -5
+    aimedSprintSpeedModifier: 0.4
   - type: Gun
     minAngle: 17
     maxAngle: 50 #Yes, i really don't want people to use this on close ranges
     angleIncrease: 10
     angleDecay: 4
-    aimedSprintSpeedModifier: 0.4
     fireRate: 1
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/sniper.ogg
