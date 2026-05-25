@@ -93,7 +93,6 @@
     mustBeLoadedThroughChamber: false
     soundRack:
       path: /Audio/Weapons/Guns/Cock/m41_cock.ogg
-      volume: 7
   - type: InternalMagazine
   - type: ItemSlots
     slots:

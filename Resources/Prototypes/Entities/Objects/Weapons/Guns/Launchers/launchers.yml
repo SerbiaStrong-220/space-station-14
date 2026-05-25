@@ -75,7 +75,6 @@
       path: /Audio/Weapons/Guns/Cock/shotgun_close.ogg
     soundRack:
       path: /Audio/Weapons/Guns/Cock/m41_cock.ogg
-      volume: 7
   - type: InternalMagazine
   - type: ItemSlots
     slots:
