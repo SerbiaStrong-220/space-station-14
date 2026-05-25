@@ -15,15 +15,6 @@
         color: "#65fe08"
 
 - type: entity
-  id: CartridgeRifleExplosive
-  name: cartridge (6,3x47 rifle incendiary)
-  parent: BaseCartridgeRifle
-  description: A modern intermediate cartridge for combat rifles. This one has 'incendiary' payload with a primer in it.
-  components:
-  - type: CartridgeAmmo
-    proto: BulletRifleExplosive
-
-- type: entity
   id: CartridgeRifleHP
   name: cartridge (6,3x47 rifle HPIB)
   parent: BaseCartridgeRifle
