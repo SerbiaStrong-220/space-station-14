@@ -1605,82 +1605,6 @@
   - SecStar
 
 # Medical
-- type: loadoutGroup
-  id: ChiefMedicalOfficerHead
-  name: loadout-group-chief-medical-officer-head
-  minLimit: 0
-  loadouts:
-  - ChiefMedicalOfficerBeret
-  - CMOMedicalHeadMirror
-  - CapCMO #SS220-CMOParade
-
-- type: loadoutGroup
-  id: ChiefMedicalOfficerJumpsuit
-  name: loadout-group-chief-medical-officer-jumpsuit
-  loadouts:
-  - ChiefMedicalOfficerJumpsuit
-  - ChiefMedicalOfficerJumpskirt
-  - ChiefMedicalOfficerTurtleneckJumpsuit
-  - ChiefMedicalOfficerTurtleneckJumpskirt
-  - CMOCorpJumpsuit #SS220-CMOCorporate
-  - CMOCorpJumpskirt #SS220-CMOCorporate
-
-- type: loadoutGroup
-  id: ChiefMedicalOfficerOuterClothing
-  name: loadout-group-chief-medical-officer-outerclothing
-  minLimit: 0
-  loadouts:
-  - ChiefMedicalOfficerLabCoat
-  - ChiefMedicalOfficerWintercoat
-  - CyberJacketMed #SS220-TwoOne-Floppa-Iteration
-
-- type: loadoutGroup
-  id: ChiefMedicalOfficerNeck
-  name: loadout-group-chief-medical-officer-neck
-  minLimit: 1 #SS220 Thief HeadCloak StealTarget Update
-  loadouts:
-  - ChiefMedicalOfficerCloak
-  - ChiefMedicalOfficerMantle
-  - ParadeCloakCMO #SS220-CMOParade
-  - CMOStethoscope #SS220-SethoscopeForAll
-
-- type: loadoutGroup
-  id: ChiefMedicalOfficerShoes
-  name: loadout-group-chief-medical-officer-shoes
-  loadouts:
-  - BrownShoes
-  - MedicalWinterBoots
-  - CMOCorpShoes #ss220 new cmo
-
-- type: loadoutGroup
-  id: MedicalDoctorHead
-  name: loadout-group-medical-doctor-head
-  minLimit: 0
-  loadouts:
-  - MedicalBeret
-  # - SeniorPhysicianBeret  #SS220 Seniors roles
-  - MedicalHeadMirror
-  - BlueSurgeryCap
-  - GreenSurgeryCap
-  - PurpleSurgeryCap
-  - NurseHat
-
-- type: loadoutGroup
-  id: MedicalDoctorJumpsuit
-  name: loadout-group-medical-doctor-jumpsuit
-  loadouts:
-  - MedicalDoctorJumpsuit
-  - MedicalDoctorJumpskirt
-  # - SeniorPhysicianJumpsuit  #SS220 Seniors roles
-  # - SeniorPhysicianJumpskirt  #SS220 Seniors roles
-  - MedicalBlueScrubs
-  - MedicalGreenScrubs
-  - MedicalPurpleScrubs
-  - MedicalDoctorJumpsuitTurtleneck #SS220-MoreTurtleneck-Begin
-  - MedicalDoctorJumpsuitTurtleneckAlt
-  - MedicalDoctorJumpskirtTurtleneck
-  - MedicalDoctorJumpskirtTurtleneckAlt #SS220-MoreTurtleneck-End
-  - MedicalDoctorJumpsuitResponsibility #SS220-Responsibility
 
 - type: loadoutGroup
   id: MedicalDoctorOuterClothing
@@ -1691,23 +1615,6 @@
   - MedicalDoctorWintercoat
   # - SeniorPhysicianLabCoat  #SS220 Seniors roles
   - CyberJacketMed #SS220-Two Floppa Iteration
-
-- type: loadoutGroup
-  id: MedicalBackpack
-  name: loadout-group-medical-doctor-backpack
-  loadouts:
-  - MedicalDoctorBackpack
-  - MedicalDoctorSatchel
-  - MedicalDoctorDuffel
-
-- type: loadoutGroup
-  id: MedicalShoes
-  name: loadout-group-medical-doctor-shoes
-  loadouts:
-  - WhiteShoes
-  - MedicalBlackShoes #ss220 add shoes for med
-  - MedicalWinterBoots
-  - MedicalDoctorShoesResponsibility #SS220-Responsibility
 
 - type: loadoutGroup
   id: MedicalDoctorPDA
@@ -1723,13 +1630,6 @@
   loadouts:
   - LatexGloves
   - NitrileGloves
-
-- type: loadoutGroup
-  id: MedicalMask
-  name: loadout-group-medical-mask
-  minLimit: 0
-  loadouts:
-  - SterileMask
 
 - type: loadoutGroup
   id: MedicalInternJumpsuit
@@ -1819,16 +1719,6 @@
   - GlassesJamjar
   - GlassesJensen
 
-- type: loadoutGroup
-  id: SurvivalMedical
-  name: loadout-group-survival-medical
-  minLimit: 2
-  hidden: true
-  loadouts:
-  - EmergencyNitrogenMedical
-  - EmergencyOxygenMedical
-  - LoadoutSpeciesVoxNitrogen
-  - LoadoutSpeciesMedicalIpc #SS220-add-ipc
 
 # Wildcards
 - type: loadoutGroup
