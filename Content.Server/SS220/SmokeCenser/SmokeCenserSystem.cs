@@ -27,7 +27,7 @@ public sealed class CenserSystem : EntitySystem
         SubscribeLocalEvent<CenserComponent, UseInHandEvent>(OnUseInHand);
     }
 
-    private void OnUseInHand(EntityUid uid, CenserComponent component, UseInHandEvent args)
+    private void OnUseInHand(Entity<CenserComponent> entity, ref UseInHandEvent args)
     {
         if (args.Handled)
             return;
