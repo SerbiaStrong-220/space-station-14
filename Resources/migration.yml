@@ -1008,3 +1008,15 @@ CurbDarckSteel: CurbDarkSteel
 CurbDarckSteelCorner: CurbDarkSteelCorner
 CurbDarckSteelCornerSmall: CurbDarkSteelCornerSmall
 CurbDarckSteelRound: CurbDarkSteelRound
+# 2026-05-24 - SS220 shield rework
+RiotShield: RiotShieldAlt
+RiotLaserShield: RiotLaserShieldAlt
+RiotBulletShield: RiotBulletShieldAlt
+WoodenBuckler: WoodenBucklerAlt
+CardShield: CardShieldAlt
+MakeshiftShield: MakeshiftShieldAlt
+WebShield: WebShieldAlt
+ClockworkShield: ClockworkShieldAlt
+MirrorShield: MirrorShieldAlt
+EnergyShield: EnergyShieldAlt
+TelescopicShield: TelescopicShieldAlt
