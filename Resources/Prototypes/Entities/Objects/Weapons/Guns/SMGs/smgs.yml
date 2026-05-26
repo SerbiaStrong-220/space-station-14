@@ -237,6 +237,12 @@
       steps: 1 # SS220-fix-for-our-sprites
       zeroVisible: true
     - type: Appearance
+# SS220-sec-gear-size-fix-start
+    - type: Item
+      size: Large
+      shape:
+      - 0,0,3,1
+# SS220-sec-gear-size-fix-end
 
 - type: entity
   name: WT550

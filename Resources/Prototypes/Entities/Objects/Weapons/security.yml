@@ -38,11 +38,6 @@
       path: /Audio/Machines/button.ogg
       params:
         variation: 0.250
-# SS220-sec-gear-size-fix-start
-  - type: ItemToggleSize
-    activatedShape:
-    - 0,0,2,1
-# SS220-sec-gear-size-fix-end
   - type: ItemTogglePrefix
     prefixOn: on
     prefixOff: off
