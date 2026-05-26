@@ -143,6 +143,8 @@
   components:
   - type: StaticPrice
     price: 1500
+  - type: Armor
+    showArmorOnExamine: true
 
 # OTHER
 
