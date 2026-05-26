@@ -27,7 +27,7 @@
         Piercing: 45
   # SS220-add-projectile-wounds-begin
   - type: PathologyOnProjectileHit
-    chanceToApply: 0.4
+    chanceToApply: 0.25
     weightedRandomProviderEntity: PelletFragment
   # SS220-add-projectile-wounds-end
   - type: TimedDespawn
@@ -59,7 +59,7 @@
   components:
   # SS220-add-projectile-wounds-begin
   - type: PathologyOnProjectileHit
-    chanceToApply: 0.2
+    chanceToApply: 0.1
     weightedRandomProviderEntity: PelletFragment
   # SS220-add-projectile-wounds-end
   - type: Projectile

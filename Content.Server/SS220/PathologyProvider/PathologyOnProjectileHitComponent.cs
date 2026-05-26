@@ -11,7 +11,7 @@ public sealed partial class PathologyOnProjectileHitComponent : Component
 {
     [DataField]
     [AutoNetworkedField]
-    public float ChanceToApply = 0.6f;
+    public float ChanceToApply = 0.4f;
 
     [DataField]
     [AutoNetworkedField]

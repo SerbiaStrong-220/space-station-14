@@ -6,7 +6,7 @@
   components:
   # SS220-add-projectile-wounds-begin
   - type: PathologyOnProjectileHit
-    chanceToApply: 0.8
+    chanceToApply: 0.5
   # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
@@ -21,7 +21,7 @@
   components:
   # SS220-add-projectile-wounds-begin
   - type: PathologyOnProjectileHit
-    chanceToApply: 0.4
+    chanceToApply: 0.15
   # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:

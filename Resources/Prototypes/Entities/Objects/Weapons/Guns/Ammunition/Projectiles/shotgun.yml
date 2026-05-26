@@ -30,7 +30,7 @@
     - state: bullet #just reapplying to here so it can be shaded
   # SS220-add-projectile-wounds-begin
   - type: PathologyOnProjectileHit
-    chanceToApply: 0.3
+    chanceToApply: 0.1
     weightedRandomProviderEntity: LargeHeavyCaliberFragment
   # SS220-add-projectile-wounds-end
   - type: Projectile
@@ -48,7 +48,7 @@
   components:
   # SS220-add-projectile-wounds-begin
   - type: PathologyOnProjectileHit
-    chanceToApply: 0.2
+    chanceToApply: 0.05
     weightedRandomProviderEntity: LargeHeavyCaliberFragment
   # SS220-add-projectile-wounds-end
   - type: Projectile
@@ -75,7 +75,7 @@
   components:
   # SS220-add-projectile-wounds-begin
   - type: PathologyOnProjectileHit
-    chanceToApply: 0.1
+    chanceToApply: 0.02
   # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
@@ -129,7 +129,7 @@
       shader: unshaded
   # SS220-add-projectile-wounds-begin
   - type: PathologyOnProjectileHit
-    chanceToApply: 0.1
+    chanceToApply: 0.05
     weightedRandomProviderEntity: PelletFragment
   # SS220-add-projectile-wounds-end
   - type: Projectile
@@ -221,7 +221,7 @@
   components:
   # SS220-add-projectile-wounds-begin
   - type: PathologyOnProjectileHit
-    chanceToApply: 0.1
+    chanceToApply: 0.05
     weightedRandomProviderEntity: PelletFragment
   # SS220-add-projectile-wounds-end
   - type: Projectile
@@ -254,7 +254,7 @@
       shader: unshaded
   # SS220-add-projectile-wounds-begin
   - type: PathologyOnProjectileHit
-    chanceToApply: 0.2
+    chanceToApply: 0.02
     weightedRandomProviderEntity: PelletFragment
   # SS220-add-projectile-wounds-end
   - type: Projectile
@@ -288,7 +288,7 @@
     deleteOnRemove: true
   # SS220-add-projectile-wounds-begin
   - type: PathologyOnProjectileHit
-    chanceToApply: 0.2
+    chanceToApply: 0.05
     weightedRandomProviderEntity: PelletFragment
   # SS220-add-projectile-wounds-end
   - type: Projectile

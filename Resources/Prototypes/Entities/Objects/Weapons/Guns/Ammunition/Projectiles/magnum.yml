@@ -6,7 +6,7 @@
   components:
   # SS220-add-projectile-wounds-begin
   - type: PathologyOnProjectileHit
-    chanceToApply: 0.9
+    chanceToApply: 0.6
     weightedRandomProviderEntity: 45ACPCaliberFragment
   # SS220-add-projectile-wounds-end
   - type: Projectile
@@ -49,7 +49,7 @@
   components:
   # SS220-add-projectile-wounds-begin
   - type: PathologyOnProjectileHit
-    chanceToApply: 0.3
+    chanceToApply: 0.15
   # SS220-add-projectile-wounds-end
   - type: Projectile
     damage:
