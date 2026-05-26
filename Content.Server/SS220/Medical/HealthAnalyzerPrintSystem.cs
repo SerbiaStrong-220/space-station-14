@@ -131,7 +131,7 @@ public sealed class HealthAnalyzerPrintSystem : EntitySystem
             }
             else
             {
-                var timeString = $"{clinicalDeathTimeRemaining.Value.Minutes:D2}:{clinicalDeathTimeRemaining.Value.Seconds:D2}";
+                var timeString = clinicalDeathTimeRemaining.Value.ToString(@"mm\:ss");
                 builder.AppendLine($"{Loc.GetString("health-analyzer-window-clinical-death-text")} {timeString}");
             }
         }

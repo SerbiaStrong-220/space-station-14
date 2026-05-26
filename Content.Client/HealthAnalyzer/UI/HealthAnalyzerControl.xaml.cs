@@ -127,7 +127,7 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
             if (timeLeft <= TimeSpan.Zero)
             {
                 ClinicalDeathTimeLabel.Text = Loc.GetString("health-analyzer-window-clinical-death-expired");
-                ClinicalDeathTimeLabel.FontColorOverride = Color.FromHex("#FF4444");
+                ClinicalDeathTimeLabel.FontColorOverride = Color.Red;
             }
             else
             {
@@ -135,15 +135,15 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
 
                 if (timeLeft.TotalMinutes >= 2)
                 {
-                    ClinicalDeathTimeLabel.FontColorOverride = Color.FromHex("#00FF00");
+                    ClinicalDeathTimeLabel.FontColorOverride = Color.Lime;
                 }
                 else if (timeLeft.TotalMinutes >= 1)
                 {
-                    ClinicalDeathTimeLabel.FontColorOverride = Color.FromHex("#FFFF00");
+                    ClinicalDeathTimeLabel.FontColorOverride = Color.Yellow;
                 }
                 else
                 {
-                    ClinicalDeathTimeLabel.FontColorOverride = Color.FromHex("#FF4444");
+                    ClinicalDeathTimeLabel.FontColorOverride = Color.Red;
                 }
             }
         }
