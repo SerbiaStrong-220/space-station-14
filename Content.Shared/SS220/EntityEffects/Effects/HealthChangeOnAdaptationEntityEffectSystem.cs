@@ -35,11 +35,7 @@ public sealed partial class HealthChangeOnAdaptationEntityEffectSystem : EntityE
             modifiedDamage.DamageDict.Add(type, value + metabolized * args.Effect.Decay);
 
         _damageable.TryChangeDamage(
-<<<<<<< HEAD
-                entity,
-=======
                 entity!,
->>>>>>> 0ba02f4e95b9262ee457ac85ba90acde4a975c2f
                 modifiedDamage,
                 args.Effect.IgnoreResistances,
                 interruptsDoAfters: false);
