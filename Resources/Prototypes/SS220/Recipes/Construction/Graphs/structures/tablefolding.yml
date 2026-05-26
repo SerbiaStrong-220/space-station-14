@@ -1,0 +1,37 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: constructionGraph
+  id: tableFoldingGraph
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: tableFoldingNode
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
+          steps:
+            - material: Plastic
+              amount: 2
+              doAfter: 2
+            - material: MetalRod
+              amount: 4
+              doAfter: 2
+
+    - node: tableFoldingNode
+      entity: TableFolding
+      edges:
+        - to: start
+          completed:
+          - !type:SpawnPrototype
+            prototype: SheetPlastic1
+            amount: 2
+          - !type:SpawnPrototype
+            prototype: PartRodMetal1
+            amount: 4
+          - !type:DeleteEntity {}
+          steps:
+            - tool: Screwing
+              doAfter: 3
+
+
