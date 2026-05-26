@@ -19,6 +19,7 @@ public sealed class ArenaLobbyEui : BaseEui
         _window.OnClose += () => SendMessage(new CloseEuiMessage());
         _window.OnCreateRequested += protoId => SendMessage(new ArenaLobbyCreateMessage(protoId));
         _window.OnJoinRequested += id => SendMessage(new ArenaLobbyJoinMessage(id));
+        _window.OnObserveRequested += id => SendMessage(new ArenaLobbyObserveMessage(id));
         _window.OnRefreshRequested += () => SendMessage(new ArenaLobbyRefreshMessage());
     }
 

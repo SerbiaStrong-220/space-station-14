@@ -69,7 +69,7 @@ public sealed partial class IdCardConsoleComponent : Component
         "Kitchen",
         "Lawyer",
         "Librarian", //SS220 New_accesses_and_some_tweaks
-        //"NanoTrasenRepresentative", //SS220 TODO NanoTraisen Representative
+        "NanoTrasenRepresentative", //SS220 ntr add
         "Maintenance",
         "Medical",
         "Psychologist", //SS220 New_accesses_and_some_tweaks
@@ -81,7 +81,6 @@ public sealed partial class IdCardConsoleComponent : Component
         "Security",
         "Service",
         "Theatre",
-        "Magistrate", //SS220 TODO NanoTraisen Representative
         "Mime", //SS220 New_accesses_and_some_tweaks
         "Musician", //SS220 New_accesses_and_some_tweaks
     };
