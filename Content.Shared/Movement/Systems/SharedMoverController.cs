@@ -355,10 +355,14 @@ public abstract partial class SharedMoverController : VirtualController
 
                 if (!mover.Sprinting)
                 {
-                    soundModifier -= 8f;
+                    const float softFootstepVolumeReduction = 8f;
+                    const float defaultMaxDistance = 15f;
+                    const float softFootstepDistanceMultiplier = 0.4f;
 
-                    var currentDist = (audioParams.MaxDistance > 0f) ? audioParams.MaxDistance : 15f;
-                    audioParams = audioParams.WithMaxDistance(currentDist * 0.4f);
+                    soundModifier -= softFootstepVolumeReduction;
+
+                    var currentDist = (audioParams.MaxDistance > 0f) ? audioParams.MaxDistance : defaultMaxDistance;
+                    audioParams = audioParams.WithMaxDistance(currentDist * softFootstepDistanceMultiplier);
                 }
 
                 audioParams = audioParams.WithVolume(sound.Params.Volume + soundModifier);
