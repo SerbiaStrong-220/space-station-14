@@ -80,6 +80,8 @@
   - TelescopicShield
   - ClothingEyesThermalGlassesSecurity #SS220 Thermals
   - ClothingBackpackHarmpack
+  - RiotBulletShield #SS220 Shield rework
+  - RiotLaserShield #SS220 Shield rework
   - FieldShieldGenerator #SS220 Energy shield
 
 - type: latheRecipePack
@@ -89,6 +91,7 @@
   - ShuttleGunFriendshipCircuitboard
   - ShuttleGunPerforatorCircuitboard
   - ShuttleGunSvalinnMachineGunCircuitboard
+  - ShuttleGunMLGSWCircuitboard #SS220-MLGSW-gun-research
 
 - type: latheRecipePack
   parent:

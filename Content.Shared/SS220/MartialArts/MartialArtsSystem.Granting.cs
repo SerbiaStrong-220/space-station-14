@@ -32,12 +32,12 @@ public sealed partial class MartialArtsSystem
         if (!_timing.IsFirstTimePredicted)
             return;
 
-        if (!CanHaveMartialArts(ev.Equipee))
+        if (!CanHaveMartialArts(ev.EquipTarget))
             return;
 
         DebugTools.Assert(entity.Comp.Granted == false, $"Tried to give martial art on equipped event but this item already is granting martial art; entity: {entity}");
 
-        entity.Comp.Granted = TryGrantMartialArt(ev.Equipee, entity.Comp.MartialArt, entity.Comp.OverrideExisting);
+        entity.Comp.Granted = TryGrantMartialArt(ev.EquipTarget, entity.Comp.MartialArt, entity.Comp.OverrideExisting);
     }
 
     private void OnUnequipped(Entity<MartialArtOnEquipComponent> entity, ref GotUnequippedEvent ev)
@@ -48,10 +48,10 @@ public sealed partial class MartialArtsSystem
         if (!entity.Comp.Granted)
             return;
 
-        if (!CanHaveMartialArts(ev.Equipee))
+        if (!CanHaveMartialArts(ev.EquipTarget))
             return;
 
-        RevokeMartialArt(ev.Equipee);
+        RevokeMartialArt(ev.EquipTarget);
 
         entity.Comp.Granted = false;
     }

@@ -16,9 +16,10 @@
         Heat: -140
         Cold: -140
         Holy: -80
-      groups:
-        Toxin: -140
-        Airloss: -140
+        Poison: -70
+        Radiation: -70
+        Asphyxiation: -70
+        Bloodloss: -70
   - type: NameIdentifier
     group: GenericNumber
   - type: Tag

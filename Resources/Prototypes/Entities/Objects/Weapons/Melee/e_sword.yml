@@ -40,8 +40,7 @@
         variation: 0.125
     activatedDamage:
       types:
-        Slash: 15
-        Heat: 15
+        Heat: 30 #SS220 shield rework
         Structural: 20
   - type: MeleeWeapon
     wideAnimationRotation: -135
@@ -69,7 +68,6 @@
       right:
       - state: inhand-right-blade
         shader: unshaded
-  - type: Reflect
   - type: IgnitionSource
     temperature: 700
 # SS220-hidden-desc-begin
@@ -102,59 +100,43 @@
       map: [ "blade" ]
   - type: Item
     sprite: Objects/Weapons/Melee/e_sword-inhands.rsi
-    #ss220lowTTKUpdate
-  - type: Reflect
-    reflectProb: 0.45 #ss220 ttkTweaks
-    reflects:
-      - NonEnergy
-      - Energy #SS220-FixReflects
-    spread: 80
-    reflectProbProjectile: 0.40 #ss220 ttkTweaks
-    spreadProjectile: 180
-    #ss220lowTTKUpdate
-  #SS220 craftable desword start
-  - type: Tag
-    tags:
-    - EnergySword
-  - type: Construction
-    deconstructionTarget: null
-    graph: EnergyDoubleSwordGraph
-    node: esword
-  #SS220 craftable desword end
   - type: StaticPrice
     price: 2500
 
 - type: entity
   name: energy dagger
-  parent: [BaseMeleeWeaponEnergy]
+  parent: BaseItem #SS220 shield rework
   id: EnergyDaggerLoud
   description: A not as loud and dangerous dagger with a beam made of pure, concentrated plasma. This one is completely undisguised.
   components:
+  #SS220 shield rework begin
+  - type: EnergySword
   - type: ItemToggle
-    soundActivate:
-      path: /Audio/Weapons/ebladeon.ogg
-      params:
-        volume: -3
-    soundDeactivate:
-      path: /Audio/Weapons/ebladeoff.ogg
-      params:
-        volume: -3
-  - type: ItemToggleMeleeWeapon
-    activatedSoundOnSwing:
-      path: /Audio/Weapons/eblademiss.ogg
-      params:
-        volume: -3
-        variation: 0.250
-    activatedDamage:
-        types:
-            Slash: 10
-            Heat: 10
-    deactivatedSecret: true
-  - type: ItemToggleActiveSound
-    activeSound:
-      path: /Audio/Weapons/ebladehum.ogg
-      params:
-        volume: -3
+  - type: ItemToggleHot
+  - type: ItemToggleSize
+    activatedSize: Huge
+  - type: ItemTogglePointLight
+    toggleableVisualsColorModulatesLights: true
+  - type: UseDelay
+    delay: 1.0
+  - type: PointLight
+    enabled: false
+    radius: 2
+    energy: 2
+    color: white
+    netsync: false
+  - type: Appearance
+  - type: ToggleableVisuals # Add support for multiple layers
+    spriteLayer: blade
+    inhandVisuals:
+      left:
+      - state: inhand-left-blade
+        shader: unshaded
+      right:
+      - state: inhand-right-blade
+        shader: unshaded
+  - type: IgnitionSource
+    temperature: 700
   - type: ComponentToggler
     components:
     - type: Sharp
@@ -162,6 +144,10 @@
       malus: 0.4
     - type: Execution
       doAfterDuration: 4.0
+  - type: ItemToggleMeleeWeapon
+    activatedDamage:
+        types:
+            Heat: 20 #SS220 shield rework
   - type: Sprite
     sprite: Objects/Weapons/Melee/e_dagger_loud.rsi
     layers:
@@ -178,57 +164,20 @@
     damage:
       types:
         Blunt: 1
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
   - type: Item
     size: Tiny
     sprite: Objects/Weapons/Melee/e_dagger_loud.rsi
-  - type: PointLight
-    enabled: false
-    radius: 1.5
-    energy: 1.5
-    color: white
-    netsync: false
+  #SS220 shield rework end
 
 - type: entity
   name: pen
-  parent: [BaseMeleeWeaponEnergy, SelectableLock]
+  parent: [EnergyDaggerLoud, SelectableLock] #SS220 shield rework
   id: EnergyDagger
   suffix: E-Dagger
   description: 'A dark ink pen.'
   components:
-  - type: ItemToggle
-    soundActivate:
-      path: /Audio/Weapons/ebladeon.ogg
-      params:
-        volume: -6
-    soundDeactivate:
-      path: /Audio/Weapons/ebladeoff.ogg
-      params:
-        volume: -6
-  - type: ItemToggleActiveSound
-    activeSound:
-      path: /Audio/Weapons/ebladehum.ogg
-      params:
-        volume: -6
-  - type: ItemToggleMeleeWeapon
-    activatedSoundOnSwing:
-      path: /Audio/Weapons/eblademiss.ogg
-      params:
-        volume: -3
-        variation: 0.250
-    activatedDamage:
-      types:
-        Slash: 10
-        Heat: 10
-        Structural: 15 #SS220-add-struct-damage
-  - type: ComponentToggler
-    components:
-    - type: Sharp
-    - type: DisarmMalus
-      malus: 0.4
-    - type: Execution
-      doAfterDuration: 4.0
-    - type: Contraband
-      severity: Syndicate
   - type: Sprite
     sprite: Objects/Weapons/Melee/e_dagger.rsi
     layers:
@@ -244,7 +193,7 @@
   - type: PointLight
     enabled: false
     radius: 1.5
-    energy: 1.5
+    energy: 2.7
     color: white
     netsync: false
   - type: MeleeWeapon
@@ -254,6 +203,8 @@
     damage:
       types:
         Blunt: 1
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
   - type: EmitSoundOnUse
     sound:
       path: /Audio/Items/pen_click.ogg
@@ -338,6 +289,51 @@
   id: EnergySwordDouble
   description: Syndicate Command Interns thought that having one blade on the energy sword was not enough. This can be stored in pockets.
   components:
+  #SS220 shield rework begin
+  - type: AltBlocking
+    rangeBlockProb: 0
+    meleeBlockProb: 0
+    activeRangeBlockProb: 0.85
+    activeMeleeBlockProb: 0.85
+  - type: ToggleBlockingChance
+    toggledRangeBlockProb: 0.3
+    toggledMeleeBlockProb: 0.35
+  - type: ChangeAppearanceOnActiveBlocking
+    spriteLayer: shield
+    inhandVisuals:
+      left:
+      - state: inhand-left-shield
+        shader: unshaded
+      right:
+      - state: inhand-right-shield
+        shader: unshaded
+  - type: Damageable
+    damageContainer: Invulnerable
+  - type: ArmorBlock
+  - type: AltArmor
+    tresholdDict:
+      Piercing: 48
+      Blunt: 30
+      Heat: 35
+      Slash: 30
+      Radiation: 1000
+      Poison: 1000
+      Caustic: 1000
+    durabilityTresholdDict:
+      Piercing: 10000
+      Blunt: 10000
+      Heat: 10000
+      Slash: 10000
+      Radiation: 10000
+      Poison: 1000
+      Caustic: 1000
+  - type: InstastunResist
+    resistedStunTypes:
+      - Creampie
+      - Projectile
+    active: false
+  - type: InstastunResistOnActiveBlocking
+  #SS220 shield rework end
   - type: ItemToggle
     onUse: false # wielding events control it instead
     onActivate: false # prevents the weapon from being able to be turned on when it is on the ground
@@ -357,8 +353,7 @@
         variation: 0.250
     activatedDamage:
         types:
-            Slash: 12
-            Heat: 12
+            Heat: 24 #SS220 shield rework
             Structural: 15
   - type: ItemToggleActiveSound
     activeSound:
@@ -393,23 +388,6 @@
   - type: Item
     size: Small
     sprite: Objects/Weapons/Melee/e_sword_double-inhands.rsi
-# ss220 FixESword
-  - type: Reflect
-    reflectProb: 0.65 #ss220 ttkTweaks
-    reflectProbBehind: 0.10 #ss220 add reflect in back
-    reflects:
-      - NonEnergy
-      - Energy #SS220-FixReflects
-    spread: 45
-    reflectProbProjectile: 0.65 #ss220lowTTKUpdate
-    spreadProjectile: 180
-# ss220 FixESword
-  #SS220 craftable desword start
-  - type: Construction
-    deconstructionTarget: null
-    graph: EnergyDoubleSwordGraph
-    node: desword
-  #SS220 craftable desword end
 
 # Item will look weird in handslot. Will need to adjust handstorage visuals in a future PR
 - type: entity
@@ -460,9 +438,6 @@
   - type: Item
     size: Small
     sprite: Objects/Weapons/Melee/hypereutactic_blade_inhands.rsi
-  - type: Reflect
-    reflectProb: 1.0
-    spread: 75
 
 # Borgs
 
@@ -473,13 +448,79 @@
   description: A very loud & dangerous sword with a beam made of pure, concentrated plasma. Specially designed for syndicate cyborgs.
 
 - type: entity
-  parent: EnergySwordDouble
+  parent: EnergySword #SS220 shield rework
   id: CyborgEnergySwordDouble # why is this invalid if ID is BorgEnergySwordDouble
   suffix: One-Handed, For Borgs
   description: Syndicate Command Interns thought that having one blade on the energy sword was not enough. Specially designed for syndicate cyborgs.
   components: # could add energy-draining like the L6C
-  - type: Wieldable
-    freeHandsRequired: 0 # because borg has no off-hand to wield with.  Without this, it will be unable to activate the esword
+   #Inheriting from usual double esword somehow and somewhy throwed the exeption(No, this is not related to shield rework in any way)
+  #SS220 shield rework begin
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    attackRate: 1.5
+    angle: 100
+    damage:
+      types:
+        Blunt: 4.5
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/e_sword_double.rsi
+    layers:
+      - state: e_sword_double
+      - state: e_sword_double_blade
+        color: "#FFFFFF"
+        visible: false
+        shader: unshaded
+        map: [ "blade" ]
+  - type: ItemToggleMeleeWeapon
+    activatedSoundOnSwing:
+      path: /Audio/Weapons/eblademiss.ogg
+      params:
+        volume: 3
+        variation: 0.250
+    activatedDamage:
+        types:
+            Heat: 24
+            Structural: 15
+  - type: InstastunResist
+    resistedStunTypes:
+      - Creampie
+      - Projectile
+    active: false
+  - type: InstastunResistOnActiveBlocking
+  - type: AltBlocking
+    rangeBlockProb: 0
+    meleeBlockProb: 0
+    activeRangeBlockProb: 0.60 #As we have no indication of the double esword being turned on or off chance frameworks were shrinked
+    activeMeleeBlockProb: 0.65
+  - type: ToggleBlockingChance
+    toggledRangeBlockProb: 0.50
+    toggledMeleeBlockProb: 0.35
+  - type: ChangeAppearanceOnActiveBlocking
+    spriteLayer: shield
+    inhandVisuals:
+      left:
+      - state: inhand-left-shield
+        shader: unshaded
+      right:
+      - state: inhand-right-shield
+        shader: unshaded
+  - type: Damageable
+    damageContainer: Invulnerable
+  - type: ArmorBlock
+  - type: AltArmor
+    tresholdDict:
+      Piercing: 40
+      Blunt: 30
+      Heat: 35
+      Slash: 30
+      Radiation: 1000
+      Poison: 1000
+      Caustic: 1000
+      Asphyxiation: 1000
+      Bloodloss: 1000
+      Shock: 30
+      Cold: 20
+  #SS220 shield rework end
 
 - type: entity
   parent: [ EnergyDaggerLoud, BaseXenoborgContraband ]

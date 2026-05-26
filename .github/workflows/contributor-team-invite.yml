@@ -1,18 +1,18 @@
 name: "NDA Team Contributor Inviting"
 
 on:
-  pull_request:
+  pull_request_target:
     types: [closed]
 
 jobs:
   invite-contributor:
-    if: github.event.pull_request.merged == true && contains(fromJson('["NONE","CONTRIBUTOR","FIRST_TIMER","FIRST_TIME_CONTRIBUTOR"]'), github.event.pull_request.author_association)
+    if: github.event.pull_request.merged == true && contains(fromJson('["NONE","FIRST_TIMER","FIRST_TIME_CONTRIBUTOR"]'), github.event.pull_request.author_association)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/create-github-app-token@v3
         id: app-token
         with:
-          client-id: ${{ vars.APP_CONTRIBUTOR_CLIENT_ID }}
+          client-id: ${{ secrets.APP_CONTRIBUTOR_CLIENT_ID }}
           private-key: ${{ secrets.APP_CONTRIBUTOR_PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
       - name: Inviting
@@ -20,6 +20,31 @@ jobs:
         with:
           github-token: ${{ steps.app-token.outputs.token }}
           script: |
+            const login       = context.payload.pull_request.user.login;
+            const merged      = context.payload.pull_request.merged;
+
+            console.log(`login=${login} | merged=${merged}`);
+
+            let isMember = false;
+            try {
+              const membership = await github.rest.orgs.checkMembershipForUser({
+                org: context.repo.owner,
+                username: login,
+              });
+
+              if (membership.status === 204) {
+                isMember = true;
+                console.log(`${login} is a member`);
+              }
+            } catch (error) {
+              console.log(`${login} is not a member`);
+            }
+
+            if (isMember) {
+              console.log(`Skipping invite;`);
+              return;
+            }
+
             const body = `🚀 **${context.payload.pull_request.user.login}, спасибо за твой вклад в проект! PR успешно принят.**
 
             В качестве благодарности мы хотим пригласить тебя в наш закрытый трекер задач. Он представляет собой приватный репозиторий, где хранятся задачи и сырые идеи с нашего трекера SS14. Для тебя это может быть полезно, если ты хочешь опробовать свои силы ещё в каких-либо задачах, но не желаешь брать на себя никаких обязательств.
@@ -46,3 +71,4 @@ jobs:
               repo: context.repo.repo,
               labels: ['nda-pending']
             });
+

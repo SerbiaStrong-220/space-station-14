@@ -338,10 +338,16 @@
       path: /Audio/Voice/Vox/shriek1.ogg
     Laugh:
       path: /Audio/Voice/Vox/vox_laugh.ogg
+    Sneeze:
+      path: /Audio/Voice/Vox/vox_sneeze.ogg
     Cough:
       path: /Audio/Voice/Vox/vox_cough.ogg
     Sigh:
       path: /Audio/Voice/Vox/vox_sigh.ogg
+    Click:
+      path: /Audio/Voice/Vox/vox_click.ogg
+    Chitter:
+      path: /Audio/Voice/Vox/vox_chitter.ogg
     Honk:
       collection: BikeHorn
     Crying:
@@ -365,6 +371,8 @@
       path: /Audio/Voice/Diona/diona_scream.ogg
     Laugh:
       collection: DionaLaugh
+    Sneeze:
+      collection: DionaSneeze
     Chirp:
       path: /Audio/Animals/nymph_chirp.ogg
     Honk:
@@ -622,13 +630,15 @@
     Laugh:
       collection: MaleLaugh
     Sneeze:
-      collection: MaleSneezes
+      collection: VulpkaninSneeze
     Cough:
       collection: MaleCoughs
     Whistle:
       collection: Whistles
     Sigh:
       collection: MaleSigh
+    Yawn:
+      collection: VulpkaninYawns
     Scream:
       collection: VulpkaninScreams
     # Growl:
@@ -643,10 +653,16 @@
       collection: BarkVulpin
     Whine:
       collection: VulpkaninWhines
-    # Howl:
-    #   collection: VulpkaninHowls
+    Crying:
+      collection: VulpkaninWhines
     Howl:
-      collection: HowlVulpin
+      collection: VulpkaninHowls
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Honk:
+      collection: BikeHorn
     Gasp:
       collection: MaleGasp
     DefaultDeathgasp:
@@ -657,20 +673,18 @@
   params:
     variation: 0.125
   sounds:
-  # SS220-port-vulpkanins-begin
-    Crying:
-      collection: FemaleCry
-  # SS220-port-vulpkanins-end
     Laugh:
       collection: FemaleLaugh
     Sneeze:
-      collection: FemaleSneezes
+      collection: VulpkaninSneeze
     Cough:
       collection: FemaleCoughs
     Whistle:
       collection: Whistles
     Sigh:
       collection: FemaleSigh
+    Yawn:
+      collection: VulpkaninYawns
     Scream:
       collection: VulpkaninScreams
     # SS220-port-vulpkanins-begin
@@ -689,12 +703,20 @@
     # SS220-port-vulpkanins-end
     Whine:
       collection: VulpkaninWhines
+    Crying:
+      collection: VulpkaninWhines
     # SS220-port-vulpkanins-begin
     # Howl:
     #   collection: VulpkaninHowls
     Howl:
       collection: HowlVulpin
     # SS220-port-vulpkanins-end
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Honk:
+      collection: BikeHorn
     Gasp:
       collection: FemaleGasp
     DefaultDeathgasp:
@@ -739,6 +761,22 @@
       path: /Audio/Voice/Reptilian/reptilian_tailthump.ogg
       params:
         variation: 0.125
+    Clap:
+      collection: Claps
+    ClapSingle:
+      collection: ClapSingle
+    Snap:
+      collection: Snaps
+      params:
+        volume: -6
+    Salute:
+      collection: Salutes
+
+- type: emoteSounds
+  id: MothBodyEmotes
+  sounds:
+    Flap:
+      path: /Audio/Voice/Moth/moth_flap.ogg
     Clap:
       collection: Claps
     ClapSingle:

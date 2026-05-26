@@ -3,7 +3,6 @@
 - type: marking
   id: HumanHairBob6
   bodyPart: Hair
-  markingCategory: Hair
   sprites:
     - sprite: SS220/Mobs/Customization/human_hair.rsi
       state: bob6
@@ -11,7 +10,6 @@
 - type: marking
   id: HumanHairFrieren
   bodyPart: Hair
-  markingCategory: Hair
   sprites:
     - sprite: SS220/Mobs/Customization/human_hair.rsi
       state: frieren
@@ -19,7 +17,6 @@
 - type: marking
   id: HumanHairFrieren2
   bodyPart: Hair
-  markingCategory: Hair
   sprites:
     - sprite: SS220/Mobs/Customization/human_hair.rsi
       state: frieren2
@@ -27,7 +24,6 @@
 - type: marking
   id: HumanHairLong5
   bodyPart: Hair
-  markingCategory: Hair
   sprites:
     - sprite: SS220/Mobs/Customization/human_hair.rsi
       state: long5
@@ -35,7 +31,6 @@
 - type: marking
   id: HumanHairLongWavy
   bodyPart: Hair
-  markingCategory: Hair
   sprites:
     - sprite: SS220/Mobs/Customization/human_hair.rsi
       state: longwavy
@@ -43,7 +38,6 @@
 - type: marking
   id: HumanHairShortWavy
   bodyPart: Hair
-  markingCategory: Hair
   sprites:
     - sprite: SS220/Mobs/Customization/human_hair.rsi
       state: shortwavy
@@ -51,7 +45,6 @@
 - type: marking
   id: HumanHairUraraka
   bodyPart: Hair
-  markingCategory: Hair
   sprites:
     - sprite: SS220/Mobs/Customization/human_hair.rsi
       state: uraraka
@@ -59,7 +52,6 @@
 - type: marking
   id: HumanHairPonytail8
   bodyPart: Hair
-  markingCategory: Hair
   sprites:
     - sprite: SS220/Mobs/Customization/human_hair.rsi
       state: ponytail8
@@ -67,7 +59,6 @@
 - type: marking
   id: HumanHairPonytail9
   bodyPart: Hair
-  markingCategory: Hair
   sprites:
     - sprite: SS220/Mobs/Customization/human_hair.rsi
       state: ponytail9
@@ -75,7 +66,6 @@
 - type: marking
   id: HumanHairMullet
   bodyPart: Hair
-  markingCategory: Hair
   sprites:
   - sprite: SS220/Mobs/Customization/human_hair.rsi
     state: mullet

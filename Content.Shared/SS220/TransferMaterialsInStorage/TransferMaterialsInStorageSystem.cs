@@ -6,6 +6,7 @@ using Content.Shared.Kitchen;
 using Content.Shared.Materials;
 using Content.Shared.Storage;
 using Content.Shared.Tag;
+using Content.Shared.Kitchen.Components;
 
 namespace Content.Shared.SS220.TransferMaterialsInStorage;
 
@@ -33,7 +34,7 @@ public sealed class TransferMaterialsInStorageSystem : EntitySystem
         var target = args.Target.Value;
 
         var isMaterialStorage = HasComp<MaterialStorageComponent>(target);
-        var isGrinder = _tag.HasTag(target, ReagentGrinderTag) && _container.TryGetContainer(target, SharedReagentGrinder.InputContainerId, out _);
+        var isGrinder = _tag.HasTag(target, ReagentGrinderTag) && _container.TryGetContainer(target, ReagentGrinderComponent.InputContainerId, out _);
 
         if (!isMaterialStorage && !isGrinder)
             return;

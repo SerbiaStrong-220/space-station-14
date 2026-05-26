@@ -184,6 +184,12 @@ binds:
 - function: ActivateItemInHand
   type: State
   key: Z
+#SS220 shield rework begin
+- function: ToggleActiveBlocking
+  type: State
+  key: B
+  mod1: Shift
+#SS220 shield rework end
 - function: AltActivateItemInHand
   type: State
   key: Z
@@ -291,6 +297,14 @@ binds:
 - function: InspectEntity
   type: State
   key: v
+  mod1: Alt
+- function: InspectServerComponent
+  type: State
+  key: b
+  mod1: Alt
+- function: InspectClientComponent
+  type: State
+  key: c
   mod1: Alt
 - function: MouseMiddle
   type: State

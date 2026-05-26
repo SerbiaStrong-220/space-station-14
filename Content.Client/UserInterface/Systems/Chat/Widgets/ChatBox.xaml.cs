@@ -1,3 +1,4 @@
+using Content.Client.SS220.ChatBans;
 using Content.Client.UserInterface.Systems.Chat.Controls;
 using Content.Shared.Chat;
 using Content.Shared.Input;
@@ -21,6 +22,7 @@ public partial class ChatBox : UIWidget
 {
     [Dependency] private readonly IEntityManager _entManager = default!;
     [Dependency] private readonly ILogManager _log = default!;
+    [Dependency] private readonly ChatRequirementsManager _chatRequirements = default!; // SS220 Chat bans
 
     private readonly ISawmill _sawmill;
     private readonly ChatUIController _controller;
@@ -46,10 +48,24 @@ public partial class ChatBox : UIWidget
         _controller.MessageAdded += OnMessageAdded;
         _controller.HighlightsUpdated += OnHighlightsUpdated;
         _controller.RegisterChat(this);
+
+        _chatRequirements.Updated += UpdateChatBan; // SS220 Chat bans
     }
+
+    // SS220 Chat bans begin
+    private void UpdateChatBan()
+    {
+        ChatInput.Input.Editable = !_chatRequirements.IsBanned(SelectedChannel);
+    }
+    // SS220 Chat bans end
 
     private void OnTextEntered(LineEditEventArgs args)
     {
+        // SS220 Chat bans begin
+        if (_chatRequirements.IsBanned(SelectedChannel))
+            return;
+        // SS220 Chat bans end
+
         _controller.SendMessage(this, SelectedChannel);
     }
 
@@ -117,7 +133,7 @@ public partial class ChatBox : UIWidget
         formatted.PushColor(color);
         formatted.AddMarkupOrThrow(message);
         formatted.Pop();
-        Contents.AddMessage(formatted);
+        Contents.AddMessage(formatted, tagsAllowed: null);
     }
 
     public void Focus(ChatSelectChannel? channel = null)
@@ -183,6 +199,11 @@ public partial class ChatBox : UIWidget
 
     private void OnTextChanged(LineEditEventArgs args)
     {
+        // SS220 Chat bans begin
+        if (_chatRequirements.IsBanned(SelectedChannel))
+            return;
+        // SS220 Chat bans end
+
         // Update channel select button to correct channel if we have a prefix.
         _controller.UpdateSelectedChannel(this);
 

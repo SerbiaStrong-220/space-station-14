@@ -23,3 +23,15 @@ action-speech-spell-summon-magicarp = AIE KHUSE EU
 action-name-spell-fireball = Огненный шар
 action-description-spell-fireball = Выпускает взрывающийся огненный шар в направлении кликнутого места.
 action-speech-spell-fireball = ONI'SOMA!
+
+action-speech-spell-summon-guns = ЙОР'НИ ВЕС-КОРФА
+
+action-speech-spell-summon-magic = РИГОИН ФЕМА-ВЕРЕКО
+
+action-speech-spell-mind-swap = ГИН'Ю КАПАН!
+
+action-speech-spell-cluwne = !КНОХ
+
+action-speech-spell-slip = СЛИ ПАРРИ!
+
+action-speech-spell-charge = ДИ'РИ СЕЛ!

@@ -139,7 +139,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
     {
         var performer = args.Performer;
         if (args.Handled ||
-            !TryComp<TransformComponent>(performer, out var transform) ||
+            !TryComp(performer, out TransformComponent? transform) ||
             !CheckEnoughBloodPoints(performer, args.Cost))
             return;
 
@@ -190,7 +190,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
         if (args.Cancelled || args.Target is not { } target)
             return;
 
-        if (!TryComp<TransformComponent>(target, out var transform) || !_mobState.IsDead(target))
+        if (!TryComp(target, out TransformComponent? transform) || !_mobState.IsDead(target))
             return;
 
         var targetCords = _transform.GetMoverCoordinates(target, transform);
@@ -328,7 +328,7 @@ public sealed partial class SpiderQueenSystem : SharedSpiderQueenSystem
     {
         if (!Resolve(uid, ref component) ||
             component.IsAnnouncedOnce ||
-            !TryComp<TransformComponent>(uid, out var xform))
+            !TryComp(uid, out TransformComponent? xform))
             return;
 
         var msg = Loc.GetString("spider-queen-warning",
