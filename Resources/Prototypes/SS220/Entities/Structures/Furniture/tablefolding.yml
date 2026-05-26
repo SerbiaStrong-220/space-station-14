@@ -43,8 +43,6 @@
     size: Huge
   - type: Foldable
     folded: true
-  - type: Strap
-    enabled: False
   - type: DeployFoldable
   - type: MeleeWeapon
     damage:
