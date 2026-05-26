@@ -52,23 +52,11 @@
   components:
   - type: RandomHumanoidAppearance
     randomizeName: false
-  - type: GhostRole
-    name: arena-ghost-role-fighter-name
-    description: arena-ghost-role-fighter-description
-    rules: arena-ghost-role-fighter-rules
-    raffle:
-      settings: ArenaShort
-    mindRoles:
-    - MindRoleArenaFighter
-    makeSentient: true
-    allowMovement: true
-    allowSpeech: true
-    reregister: true
-  - type: GhostTakeoverAvailable
   - type: RoleExperienceAdd
     definitionId: ArenaFighterRoleExperience
   - type: ArenaParticipant
-    slot: TeamA
+    team: a
+    icon: ArenaTeamAIcon
   - type: AntagImmune
 
 - type: randomHumanoidSettings
@@ -77,23 +65,11 @@
   components:
   - type: RandomHumanoidAppearance
     randomizeName: false
-  - type: GhostRole
-    name: arena-ghost-role-fighter-name
-    description: arena-ghost-role-fighter-description
-    rules: arena-ghost-role-fighter-rules
-    raffle:
-      settings: ArenaShort
-    mindRoles:
-    - MindRoleArenaFighter
-    makeSentient: true
-    allowMovement: true
-    allowSpeech: true
-    reregister: true
-  - type: GhostTakeoverAvailable
   - type: RoleExperienceAdd
     definitionId: ArenaFighterRoleExperience
   - type: ArenaParticipant
-    slot: TeamB
+    team: b
+    icon: ArenaTeamBIcon
   - type: AntagImmune
 
 - type: entity
