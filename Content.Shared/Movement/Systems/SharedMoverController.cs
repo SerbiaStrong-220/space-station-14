@@ -349,9 +349,20 @@ public abstract partial class SharedMoverController : VirtualController
             {
                 var soundModifier = mover.Sprinting ? InputMoverComponent.SprintingSoundModifier : InputMoverComponent.WalkingSoundModifier;
 
+                // SS220 - softy footsteps feature - start
                 var audioParams = sound.Params
-                    .WithVolume(sound.Params.Volume + soundModifier)
                     .WithVariation(sound.Params.Variation ?? mobMover.FootstepVariation);
+
+                if (!mover.Sprinting)
+                {
+                    soundModifier -= 8f;
+
+                    var currentDist = (audioParams.MaxDistance > 0f) ? audioParams.MaxDistance : 15f;
+                    audioParams = audioParams.WithMaxDistance(currentDist * 0.4f);
+                }
+
+                audioParams = audioParams.WithVolume(sound.Params.Volume + soundModifier);
+                // SS220 - softy footsteps feature - end
 
                 // If we're a relay target then predict the sound for all relays.
                 if (relaySource != null)
