@@ -42,9 +42,9 @@
   description: A heavy but really durable helmet made for assault squads. It is pretty outdated but half a centimeter of composite armor is still half a centimeter of composite armor.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/Head/Helmets/assault_syndicate.rsi
+    sprite: SS220/Clothing/Head/Helmets/assault.rsi
   - type: Clothing
-    sprite: SS220/Clothing/Head/Helmets/assault_syndicate.rsi
+    sprite: SS220/Clothing/Head/Helmets/assault.rsi
   - type: Armor
     modifiers:
       coefficients:
@@ -54,3 +54,5 @@
         Heat: 0.95
         Radiation: 0.85
         Caustic: 0.95
+  - type: ExplosionResistance
+    damageCoefficient: 0.9

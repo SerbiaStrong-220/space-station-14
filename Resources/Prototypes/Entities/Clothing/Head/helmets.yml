@@ -79,18 +79,19 @@
   - type: Clothing
     sprite: Clothing/Head/Helmets/swat.rsi
   - type: Armor #This is intentionally not spaceproof, when the time comes to port the values from SS13 this should be buffed from what it was.
+  #SS220 new armor begin
     modifiers:
       coefficients:
-      #SS220 armor tweaks begin
         Blunt: 0.85
         Slash: 0.85
         Piercing: 0.85
         Heat: 0.9
-        Radiation: 0.85
+        Radiation: 0.9
         Caustic: 0.95
       #SS220 armor tweaks end
   - type: ExplosionResistance
-    damageCoefficient: 0.75
+    damageCoefficient: 0.9
+  #SS220 new armor end
   - type: HideLayerClothing
     layers:
       Hair: HEAD

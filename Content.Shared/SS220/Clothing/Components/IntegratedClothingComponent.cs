@@ -11,12 +11,11 @@ namespace Content.Shared.SS220.Clothing.Components;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class IntegratedClothingComponent : Component
 {
-    public const string DefaultClothingContainerId = "toggleable-clothing";
+    public const string DefaultClothingContainerId = "integrated-clothing";
 
     [DataField(required: true), AutoNetworkedField]
     public EntProtoId ClothingPrototype = default!;
 
-    [ViewVariables(VVAccess.ReadWrite)]
     [DataField, AutoNetworkedField]
     public string Slot = "head";
 
@@ -29,6 +28,6 @@ public sealed partial class IntegratedClothingComponent : Component
     [ViewVariables]
     public ContainerSlot? Container;
 
-    [DataField, AutoNetworkedField]
+    [AutoNetworkedField]
     public EntityUid? ClothingUid;
 }

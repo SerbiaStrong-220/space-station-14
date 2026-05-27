@@ -19,6 +19,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Content.Shared.SS220.Speech;// SS220 Chat-Special-Emote
+using Content.Shared.SS220.Clothing.Components;// SS220 add integrated clothing
 
 namespace Content.Shared.Inventory;
 
