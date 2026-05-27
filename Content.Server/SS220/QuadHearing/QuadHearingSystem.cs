@@ -1,10 +1,10 @@
-using Content.Shared.SS220.FourChannelHearing;
+using Content.Shared.SS220.QuadHearing;
 using Robust.Shared.Map;
 using Robust.Shared.Timing;
 
-namespace Content.Server.SS220.FourChannelHearing;
+namespace Content.Server.SS220.QuadHearing;
 
-public sealed class FourChannelHearingSystem : SharedFourChannelHearingSystem
+public sealed class QuadHearingSystem : SharedQuadHearingSystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
 

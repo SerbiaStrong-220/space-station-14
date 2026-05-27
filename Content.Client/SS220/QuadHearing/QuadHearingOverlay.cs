@@ -1,4 +1,4 @@
-using Content.Shared.SS220.FourChannelHearing;
+using Content.Shared.SS220.QuadHearing;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
@@ -6,9 +6,9 @@ using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
 using System.Numerics;
 
-namespace Content.Client.SS220.FourChannelHearing;
+namespace Content.Client.SS220.QuadHearing;
 
-public sealed class FourChannelHearingOverlayAlt : Overlay
+public sealed class QuadHearingOverlay : Overlay
 {
     [Dependency] private readonly IEntityManager _entity = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
@@ -16,14 +16,14 @@ public sealed class FourChannelHearingOverlayAlt : Overlay
 
     private readonly TransformSystem _transform;
 
-    private static readonly ProtoId<ShaderPrototype> ShaderProtoId = "FourChannelHearing";
+    private static readonly ProtoId<ShaderPrototype> ShaderProtoId = "QuadHearing";
     private readonly ShaderInstance _shader = default!;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
 
     private readonly Dictionary<EntityUid, ShaderInstance> _existShaders = [];
 
-    public FourChannelHearingOverlayAlt()
+    public QuadHearingOverlay()
     {
         IoCManager.InjectDependencies(this);
 
@@ -38,9 +38,11 @@ public sealed class FourChannelHearingOverlayAlt : Overlay
     private const float _circleWaveRadius = 2.2f;
     private const float _circleWaveDecreaseStart = 1.2f;
 
-    private const float _noDirectedWaveRange = 5f;
+    private const float _directedWaveStartRange = 5f;
 
     private static readonly Angle _directedWaveAngle = Angle.FromDegrees(15);
+
+    private const float _noiseAmplitude = 10f;
 
     protected override void Draw(in OverlayDrawArgs args)
     {
@@ -48,7 +50,7 @@ public sealed class FourChannelHearingOverlayAlt : Overlay
         if (player == null)
             return;
 
-        if (!_entity.HasComponent<FourChannelHearingComponent>(player.Value))
+        if (!_entity.HasComponent<QuadHearingComponent>(player.Value))
             return;
 
         var playerPos = _transform.GetWorldPosition(player.Value);
@@ -58,7 +60,7 @@ public sealed class FourChannelHearingOverlayAlt : Overlay
         var renderScale = args.Viewport.RenderScale;
         var worldToLocalMatrix = args.Viewport.GetWorldToLocalMatrix();
 
-        var query = _entity.EntityQueryEnumerator<FourChannelHearingTargetComponent>();
+        var query = _entity.EntityQueryEnumerator<QuadHearingTargetComponent>();
         while (query.MoveNext(out var uid, out var target))
         {
             if (args.MapId != _transform.GetMapId(uid))
@@ -79,9 +81,10 @@ public sealed class FourChannelHearingOverlayAlt : Overlay
             shd.SetParameter("WaveSpeed", _waveSpeed);
             shd.SetParameter("CircleWaveRadius", WorldToLocalLength(_circleWaveRadius, renderScale.X, zoom.X));
             shd.SetParameter("CircleWaveDecreaseStart", WorldToLocalLength(_circleWaveDecreaseStart, renderScale.X, zoom.X));
-            shd.SetParameter("NoDirectedWaveRange", WorldToLocalLength(_noDirectedWaveRange, renderScale.X));
+            shd.SetParameter("DirectedWaveStartRange", WorldToLocalLength(_directedWaveStartRange, renderScale.X));
             shd.SetParameter("DrawDirectedWave", !args.WorldBounds.Contains(targetPos));
             shd.SetParameter("DirectedWaveAngle", (float)_directedWaveAngle.Theta);
+            shd.SetParameter("NoiseAmplitude", _noiseAmplitude);
             handle.UseShader(shd);
 
             var color = target.Color.WithAlpha(0.075f);

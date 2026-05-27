@@ -19,7 +19,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Robust.Shared.Containers;
 using Robust.Shared.Random;
-using Content.Shared.SS220.FourChannelHearing;
+using Content.Shared.SS220.QuadHearing;
 
 namespace Content.Server.Weapons.Ranged.Systems;
 
@@ -27,7 +27,7 @@ public sealed partial class GunSystem : SharedGunSystem
 {
     [Dependency] private readonly PricingSystem _pricing = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedFourChannelHearingSystem _fourChannelHearing = default!; // SS220 Resomi four-channel hearing
+    [Dependency] private readonly SharedQuadHearingSystem _fourChannelHearing = default!; // SS220 Resomi four-channel hearing
 
     private const float DamagePitchVariation = 0.05f;
 
