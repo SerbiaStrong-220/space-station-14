@@ -77,12 +77,15 @@
     belt:
     - MedicatedSuture
     - RegenerativeMesh
-    - CombatMedipen
-    - CombatMedipen
-    - PunctAutoInjector
-    - PyraAutoInjector
-    - AirlossAutoInjector
-    - AntiPoisonMedipen
+    - ChemistryBottleSaline
+    - ChemistryBottleBicaridine
+    - ChemistryBottleDexalinPlus
+    - ChemistryBottleDylovene
+    - ChemistryBottleHyronalin
+    - ChemistryBottleDermaline
+    - ChemistryBottleEpinephrine
+    - ChemistryBottleOmnizine
+    - AdvancedJetInjector
     back:
     - BoxSurvivalBrigmedic
     - CrowbarRed
