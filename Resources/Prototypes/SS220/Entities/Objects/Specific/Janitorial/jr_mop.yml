@@ -9,7 +9,7 @@
   - type: Sprite
     sprite: SS220/Objects/Specific/jr_mop.rsi
     layers:
-      - state: mopJR
+      - state: icon
       - map: ["enum.SolutionContainerLayers.Fill"]
         state: fill-3
         visible: false
