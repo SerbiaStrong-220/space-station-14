@@ -122,6 +122,7 @@
     containers:
       board: !type:Container
   - type: Door
+    pryTime: 0 # ss220 airlock insta open
     canCrush: false
     openingAnimationTime: 0.9
     closingAnimationTime: 0.9
