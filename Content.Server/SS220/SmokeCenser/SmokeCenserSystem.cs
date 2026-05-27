@@ -24,7 +24,6 @@ public sealed class CenserSystem : EntitySystem
     
     private static readonly ProtoId<ReagentPrototype> HolyWaterReagentId = "Holywater";
 
-    
     public override void Initialize()
     {
         base.Initialize();
