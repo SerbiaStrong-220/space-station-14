@@ -64,8 +64,6 @@ public sealed class CenserSystem : EntitySystem
 
 
         _audio.PlayPvs(entity.Comp.SoundUse, entity.Owner);
-
-
         args.Handled = true;
     }
 
