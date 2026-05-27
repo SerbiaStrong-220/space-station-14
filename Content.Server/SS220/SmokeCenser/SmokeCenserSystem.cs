@@ -15,7 +15,6 @@ namespace Content.Server.SS220.SmokeCenser;
 
 public sealed class CenserSystem : EntitySystem
 {
-
     [Dependency] private readonly AtmosphereSystem _atmos = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly PopupSystem _popupSystem = default!;
