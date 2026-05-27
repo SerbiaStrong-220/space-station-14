@@ -313,9 +313,14 @@
   discountDownTo:
     Telecrystal: 2 #ss220-uplink-discounts
   cost:
-    Telecrystal: 2 #ss220-uplink-discounts
+    Telecrystal: 3 #ss220-uplink-discounts
   categories:
   - UplinkWearables
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
@@ -325,6 +330,22 @@
     HardDynamic:
       Telecrystal: 3
 #ss220 dynamic-price end
+
+- type: listing
+  id: ClothingHeadHelmetSwatNukeops
+  name: uplink-helmet-swat-syndicate-name
+  description: uplink-helmet-swat-syndicate-desc
+  icon: {sprite: Clothing/Head/Helmets/swat_syndicate.rsi, state: icon}
+  productEntity: ClothingHeadHelmetSwatSyndicate
+  cost:
+    Telecrystal: 2 #ss220-uplink-discounts
+  categories:
+  - UplinkWearables
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
 
 - type: listing
   id: UplinkBorgModuleFlamingAxe
