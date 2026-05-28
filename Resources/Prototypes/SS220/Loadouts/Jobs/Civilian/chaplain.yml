@@ -24,3 +24,14 @@
     proto: ChaplainSenior
   equipment:
     neck: ClothingNeckCloakEnby
+
+- type: loadout
+  id: ChaplainNeckGoldenCross
+  equipment:
+    neck: ClothingNeckGoldenCross
+
+- type: loadout
+  id: ChaplainNeckSilverCross
+  equipment:
+    neck: ClothingNeckSilverCross
+
