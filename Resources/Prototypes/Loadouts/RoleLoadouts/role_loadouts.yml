@@ -182,6 +182,7 @@
   - JanitorJobTrinkets
   - GroupSpeciesBreathTool
   - WorkerCash #SS220-Cash-personal
+  - JanitorEquipment #SS220-JREquipmentUpdate
 
 - type: roleLoadout
   id: JobBotanist
