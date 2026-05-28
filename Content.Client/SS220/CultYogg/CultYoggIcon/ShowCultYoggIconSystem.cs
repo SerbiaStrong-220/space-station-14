@@ -34,7 +34,7 @@ public sealed class ShowCultYoggIconsSystem : EntitySystem
         if (_prototype.TryIndex(iconId, out var iconPrototype))
             ev.StatusIcons.Add(iconPrototype);
         else
-            Log.Error($"Invalid faction icon prototype: {iconPrototype}");
+            Log.Error($"Invalid faction icon prototype: {iconId}");
     }
 
     private void OnGetSacrificialIconsEvent(Entity<CultYoggSacrificialComponent> ent, ref GetStatusIconsEvent ev)
@@ -48,7 +48,7 @@ public sealed class ShowCultYoggIconsSystem : EntitySystem
         if (_prototype.TryIndex<FactionIconPrototype>(iconId, out var iconPrototype))
             ev.StatusIcons.Add(iconPrototype);
         else
-            Log.Error($"Invalid faction icon prototype: {iconPrototype}");
+            Log.Error($"Invalid faction icon prototype: {iconId}");
     }
 
     private void OnGetUnenslavableIconsEvent(Entity<UnenslavableComponent> ent, ref GetStatusIconsEvent ev)
@@ -62,6 +62,6 @@ public sealed class ShowCultYoggIconsSystem : EntitySystem
         if (_prototype.TryIndex<FactionIconPrototype>(iconId, out var iconPrototype))
             ev.StatusIcons.Add(iconPrototype);
         else
-            Log.Error($"Invalid faction icon prototype: {iconPrototype}");
+            Log.Error($"Invalid faction icon prototype: {iconId}");
     }
 }

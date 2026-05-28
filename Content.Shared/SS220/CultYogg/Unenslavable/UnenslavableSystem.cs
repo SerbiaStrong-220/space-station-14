@@ -21,6 +21,6 @@ public sealed class UnenslavableSystem : EntitySystem
             return;
 
         if (HasComp<MindShieldComponent>(ent))
-            args.PushMarkup(Loc.GetString("cult-yogg-unenslavable-mindshied"));
+            args.PushMarkup(Loc.GetString("cult-yogg-unenslavable-mindshield"));
     }
 }

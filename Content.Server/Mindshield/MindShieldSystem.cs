@@ -77,7 +77,7 @@ public sealed class MindShieldSystem : EntitySystem
     ////SS220-cult-update-3-1 start
     private void OnStartup(Entity<MindShieldComponent> ent, ref ComponentStartup args)
     {
-        AddComp<UnenslavableComponent>(ent);
+        EnsureComp<UnenslavableComponent>(ent);
     }
     ////SS220-cult-update-3-1 end
     //SS220 CombustedMindShieldEvent #3500 start
