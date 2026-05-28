@@ -64,36 +64,36 @@ public sealed class SurgeryPatientAnalyzer : EntitySystem
         if (status.OverallDamage > 200)
         {
             recommendation.Problems.Add(Loc.GetString("treatment-recommendation-more-200-damage"));
-            recommendation.Operations.Add("treatment-recommendation-more-200-damage-help");
+            recommendation.Operations.Add(Loc.GetString("treatment-recommendation-more-200-damage-help"));
         }
 
         if (status.PatientState == MobState.Dead)
         {
             recommendation.Problems.Add(Loc.GetString("treatment-recommendation-mob-state-dead"));
-            recommendation.Operations.Add("treatment-recommendation-mob-state-dead-help");
+            recommendation.Operations.Add(Loc.GetString("treatment-recommendation-mob-state-dead-help"));
         }
 
         if (status.BodyDecayDegree == 1)
         {
             recommendation.Problems.Add(Loc.GetString("treatment-recommendation-body-near-decay"));
-            recommendation.Suggestions.Add("treatment-recommendation-body-near-decay-help");
+            recommendation.Suggestions.Add(Loc.GetString("treatment-recommendation-body-near-decay-help"));
         }
 
         if (status.BodyDecayDegree >= 2)
         {
             recommendation.Problems.Add(Loc.GetString("treatment-recommendation-body-decay"));
-            recommendation.Suggestions.Add("treatment-recommendation-body-decay-help");
+            recommendation.Suggestions.Add(Loc.GetString("treatment-recommendation-body-decay-help"));
         }
 
         if (status.BrainRotDegree == 100)
         {
             recommendation.Problems.Add(Loc.GetString("treatment-recommendation-brain-rot"));
-            recommendation.Suggestions.Add("treatment-recommendation-brain-rot-help");
+            recommendation.Suggestions.Add(Loc.GetString("treatment-recommendation-brain-rot-help"));
         }
         else if (status.BrainRotDegree > 70)
         {
             recommendation.Problems.Add(Loc.GetString("treatment-recommendation-near-brain-rot"));
-            recommendation.Suggestions.Add("treatment-recommendation-near-brain-rot-help");
+            recommendation.Suggestions.Add(Loc.GetString("treatment-recommendation-near-brain-rot-help"));
         }
 
         foreach (var descLocId in status.PathologiesDescription)
@@ -112,7 +112,7 @@ public sealed class SurgeryPatientAnalyzer : EntitySystem
             if (delaySeconds <= 0)
                 return 0;
 
-            var result = (int)(MaxBrainRotPercentage * (_gameTiming.CurTime - damageCountingTime).TotalSeconds / delaySeconds);
+            var result = (int)(MaxBrainRotPercentage * (damageCountingTime.TotalSeconds / delaySeconds));
             return Math.Clamp(result, 0, MaxBrainRotPercentage);
         }
 

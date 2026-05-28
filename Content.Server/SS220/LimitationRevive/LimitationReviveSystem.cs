@@ -47,8 +47,7 @@ public sealed class LimitationReviveSystem : SharedLimitationReviveSystem
 
             limitationRevive.DamageCountingTime += TimeSpan.FromSeconds(frameTime / limitationRevive.UpdateIntervalMultiplier);
 
-            Dirty(ent, limitationRevive);
-
+            DirtyField<LimitationReviveComponent>((ent, limitationRevive), nameof(LimitationReviveComponent.DamageCountingTime));
             if (limitationRevive.DamageCountingTime < limitationRevive.BeforeDamageDelay)
                 continue;
 
@@ -94,20 +93,6 @@ public sealed class LimitationReviveSystem : SharedLimitationReviveSystem
     private void OnRejuvenate(Entity<LimitationReviveComponent> ent, ref RejuvenateEvent args)
     {
         ent.Comp.DeathCounter = 0;
-        ClearAllRecievedDebuffs(ent);
-    }
-
-    public void ClearAllRecievedDebuffs(Entity<LimitationReviveComponent> ent)
-    {
-        foreach (var debufName in ent.Comp.RecievedDebuffs)
-        {
-            var debufProto = _prototype.Index<TraitPrototype>(debufName);
-
-            if (debufProto.Components is not null)
-                EntityManager.RemoveComponents(ent, debufProto.Components);
-        }
-
-        ent.Comp.RecievedDebuffs = [];
     }
 
     private void OnApplyMetabolicMultiplier(Entity<LimitationReviveComponent> ent, ref ApplyMetabolicMultiplierEvent args)

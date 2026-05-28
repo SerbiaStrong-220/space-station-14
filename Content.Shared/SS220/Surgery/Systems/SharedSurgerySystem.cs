@@ -16,7 +16,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using System.Linq;
-using System.Linq.Expressions;
 
 namespace Content.Shared.SS220.Surgery.Systems;
 
@@ -42,6 +41,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
     private static readonly LocId SurgeryCancelledOnStart = "surgery-cancelled-on-start";
     private static readonly LocId SurgeryCantCancelOnStart = "surgery-cant-be-cancelled-on-start";
     private static readonly LocId SurgeryToolFailureDamage = "surgery-tool-damage-on-failure";
+    private static readonly LocId SurgeryNeedToBeStarted = "surgery-need-to-be-started-before-operating";
 
     public override void Initialize()
     {
@@ -94,6 +94,12 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         switch (edgeSelectorState.Infos.Count)
         {
             case 0:
+                if (entity.Comp.OngoingSurgeries.Count == 0 && HasComp<SurgeryToolComponent>(args.Used))
+                {
+                    _popup.PopupCursor(Loc.GetString(SurgeryNeedToBeStarted), args.User);
+                    break;
+                }
+
                 foreach (var (surgeryId, _) in entity.Comp.OngoingSurgeries)
                 {
                     PopupSurgeryGraphFailures(entity, surgeryId, args.Used, args.User);

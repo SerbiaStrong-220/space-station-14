@@ -11,7 +11,7 @@ namespace Content.Shared.SS220.LimitationRevive;
 /// This is used for limiting the number of defibrillator resurrections
 /// </summary>
 [RegisterComponent]
-[NetworkedComponent, AutoGenerateComponentState]
+[NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true)]
 public sealed partial class LimitationReviveComponent : Component
 {
     /// <summary>

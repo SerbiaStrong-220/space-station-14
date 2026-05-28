@@ -44,17 +44,17 @@ public sealed partial class TreatmentSuggestion : Control
 
     }
 
-    private void AddSection(List<string> dataLocPaths, string sectionName, StringBuilder builder)
+    private void AddSection(List<string> dataText, string sectionName, StringBuilder builder)
     {
-        if (dataLocPaths.Count == 0)
+        if (dataText.Count == 0)
             return;
 
         builder.AppendLine(sectionName);
 
-        foreach (var locPath in dataLocPaths)
+        foreach (var text in dataText)
         {
             builder.Append(InSectionTextPrefix);
-            builder.AppendLine(Loc.GetString(locPath));
+            builder.AppendLine(text);
         }
     }
 }
