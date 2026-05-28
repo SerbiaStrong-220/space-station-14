@@ -1,53 +1,48 @@
+using Content.Shared.Maps;
 using Content.Shared.SS220.QuadHearing;
+using Robust.Server.GameObjects;
+using Robust.Server.Player;
+using Robust.Shared.Enums;
 using Robust.Shared.Map;
-using Robust.Shared.Timing;
+using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
+using System.Linq;
 
 namespace Content.Server.SS220.QuadHearing;
 
 public sealed class QuadHearingSystem : SharedQuadHearingSystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private readonly MapSystem _map = default!;
 
-    private const float MergeRangeSquared = 1f;
-    private static readonly TimeSpan LifeTime = TimeSpan.FromSeconds(3);
-
-    private readonly Dictionary<string, List<VisualsData>> _visualsData = new();
-
-    public override void Update(float frameTime)
+    public override void RegisterTarget(ProtoId<QuadHearingTargetTypePrototype> protoId, EntityCoordinates coords, float? range, ICommonSession? predictedSession = null)
     {
-        base.Update(frameTime);
-
-        foreach (var datas in _visualsData.Values)
+        coords = ToMapOrGridCoordinated(coords);
+        QuadHearingRegisterTargetMessage? msg = null;
+        foreach (var session in _player.Sessions)
         {
-            var toRem = new List<VisualsData>();
-            foreach (var data in datas)
-                if (_timing.CurTime >= data.EndTime)
-                    toRem.Add(data);
+            if (session == predictedSession)
+                continue;
 
-            foreach (var value in toRem)
-                datas.Remove(value);
+            if (session.Status is not SessionStatus.InGame)
+                continue;
+
+            if (session.AttachedEntity is not { } player)
+                continue;
+
+            if (!TryComp<QuadHearingComponent>(player, out var quadHearing))
+                continue;
+
+            if (!CanRegisterTarget((player, quadHearing), coords, range))
+                continue;
+
+            msg ??= new QuadHearingRegisterTargetMessage
+            {
+                ProtoId = protoId,
+                Coordinates = GetNetCoordinates(coords)
+            };
+
+            RaiseNetworkEvent(msg, session);
         }
-    }
-
-    public void RegisterTarget(EntityCoordinates coords, string id)
-    {
-        if (!_visualsData.TryGetValue(id, out var datas))
-        {
-            datas = [];
-            _visualsData[id] = datas;
-        }
-
-        var data = datas
-            .Find(x => x.Coords.EntityId == coords.EntityId && (x.Coords.Position - coords.Position).LengthSquared() <= MergeRangeSquared);
-
-        data ??= new VisualsData() { Coords = coords };
-        data.EndTime = _timing.CurTime + LifeTime;
-    }
-
-    private sealed class VisualsData
-    {
-        public required EntityCoordinates Coords;
-
-        public TimeSpan EndTime;
     }
 }

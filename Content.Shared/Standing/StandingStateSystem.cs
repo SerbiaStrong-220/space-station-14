@@ -5,9 +5,11 @@ using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Rotation;
+using Content.Shared.SS220.QuadHearing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Standing;
 
@@ -16,9 +18,13 @@ public sealed class StandingStateSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly SharedQuadHearingSystem _quadHearing = default!; // SS220 Quad hearing
 
     // If StandingCollisionLayer value is ever changed to more than one layer, the logic needs to be edited.
     public const int StandingCollisionLayer = (int) CollisionGroup.MidImpassable;
+
+    private static readonly ProtoId<QuadHearingTargetTypePrototype> QuadHearingTargetProtoId = "FellDown"; // SS220 Quad hearing
+    private const float QuadHearingTargetRange = 20f; // SS220 Quad hearing
 
     public override void Initialize()
     {
@@ -129,6 +135,8 @@ public sealed class StandingStateSystem : EntitySystem
         {
             _audio.PlayPredicted(standingState.DownSound, uid, uid);
         }
+
+        _quadHearing.RegisterTarget(QuadHearingTargetProtoId, uid, QuadHearingTargetRange, uid); // SS220 Quad hearing
 
         return true;
     }

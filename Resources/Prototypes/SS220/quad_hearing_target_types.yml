@@ -1,0 +1,21 @@
+- type: quadHearingTargetType
+  id: GunShoot
+  color: '#ff00004d' # red
+  waveSpeed: 2.6
+
+- type: quadHearingTargetType
+  id: Explosion
+  color: '#ff00004d' # red
+  waveSpeed: 2.6
+
+- type: quadHearingTargetType
+  id: FellDown
+  color: '#add8e64d' # light blue
+
+- type: quadHearingTargetType
+  id: Speech
+  color: '#ffff004d' # yellow
+
+- type: quadHearingTargetType
+  id: Machine
+  color: '#9370db4d' # medium purple

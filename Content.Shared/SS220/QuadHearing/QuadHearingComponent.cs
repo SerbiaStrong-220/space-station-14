@@ -2,7 +2,13 @@ using Robust.Shared.GameStates;
 
 namespace Content.Shared.SS220.QuadHearing;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access([typeof(SharedQuadHearingSystem)], Other = AccessPermissions.Read)]
 public sealed partial class QuadHearingComponent : Component
 {
+    [DataField, AutoNetworkedField]
+    public bool ShowEffect = true;
+
+    [DataField, AutoNetworkedField]
+    public float MinDistance = 5f;
 }

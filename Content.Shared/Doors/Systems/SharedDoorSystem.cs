@@ -26,6 +26,7 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 using System.Linq;
 using Robust.Shared.Prototypes;
+using Content.Shared.SS220.QuadHearing;
 
 namespace Content.Shared.Doors.Systems;
 
@@ -49,6 +50,10 @@ public abstract partial class SharedDoorSystem : EntitySystem
     [Dependency] protected readonly SharedPopupSystem Popup = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly SharedPowerReceiverSystem _powerReceiver = default!;
+    [Dependency] private readonly SharedQuadHearingSystem _quadHearing = default!; // SS220 Quad hearing
+
+    private static readonly ProtoId<QuadHearingTargetTypePrototype> QuadHearingTargetProtoId = "Machine"; // SS220 Quad hearing
+    private const float QuadHearingTargetRange = 20f; // SS220 Quad hearing
 
     public static readonly ProtoId<TagPrototype> DoorBumpTag = "DoorBumpOpener";
 
@@ -380,6 +385,8 @@ public abstract partial class SharedDoorSystem : EntitySystem
                 Audio.PlayPredicted(door.OpenSound, uid, user, AudioParams.Default.WithVolume(-5));
             else if (_net.IsServer)
                 Audio.PlayPvs(door.OpenSound, uid, AudioParams.Default.WithVolume(-5));
+
+            _quadHearing.RegisterTarget(QuadHearingTargetProtoId, uid, QuadHearingTargetRange, user); // SS220 Quad hearing
         }
         // SS220 Add door lubrication (end)
 

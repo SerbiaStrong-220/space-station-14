@@ -45,6 +45,8 @@ using Robust.Shared.Map;
 using Content.Shared.SS220.Language.Systems;
 using Content.Shared.SS220.TTS;
 using Content.Shared.FixedPoint;
+using Content.Server.SS220.QuadHearing;
+using Content.Shared.SS220.QuadHearing;
 
 namespace Content.Server.Chat.Systems;
 
@@ -74,6 +76,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private readonly LanguageSystem _languageSystem = default!; // SS220-Add-Languages
     [Dependency] private readonly InventorySystem _inventory = default!; //ss220 add identity concealment for chat and radio messages
     [Dependency] private readonly HumanoidProfileSystem _humanoidAppearance = default!; //ss220 add identity concealment for chat and radio messages
+    [Dependency] private readonly QuadHearingSystem _quadHearing = default!; // SS220 Quad hearing
 
     public readonly TimeSpan CoolDown = TimeSpan.FromSeconds(2); //ss220 chat unique
     public const int MaximumLengthMsg = 5; //ss220 chat unique
@@ -82,6 +85,12 @@ public sealed partial class ChatSystem : SharedChatSystem
     private bool _deadLoocEnabled;
     private bool _critLoocEnabled;
     private readonly bool _adminLoocEnabled = true;
+
+    // SS220 Quad hearing begin
+    private static readonly ProtoId<QuadHearingTargetTypePrototype> QuadHearingTargetProtoId = "Speech";
+    private const float QuadHearingTargetSpeechRange = 20f;
+    private const float QuadHearingTargetWhisperRange = 14f;
+    // SS220 Quad hearing end
 
     public override void Initialize()
     {
@@ -541,6 +550,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         RaiseLocalEvent(source, ev, true);
         //SS220-Add-Languages end
 
+        _quadHearing.RegisterTarget(QuadHearingTargetProtoId, source, QuadHearingTargetSpeechRange); // SS220 Quad hearing
+
         // To avoid logging any messages sent by entities that are not players, like vendors, cloning, etc.
         // Also doesn't log if hideLog is true.
         if (!HasComp<ActorComponent>(source) || hideLog)
@@ -657,6 +668,8 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         var defaultLanguageId = _languageSystem.GetSelectedLanguage(source)?.ID ?? "none";
         // SS220 languages end
+        _quadHearing.RegisterTarget(QuadHearingTargetProtoId, source, QuadHearingTargetWhisperRange); // SS220 Quad hearing
+
         if (!hideLog)
             if (originalMessage == message)
             {

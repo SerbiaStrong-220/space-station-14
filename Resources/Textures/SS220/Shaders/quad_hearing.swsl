@@ -9,11 +9,13 @@ uniform highp float WaveSpeed;
 uniform highp float CircleWaveRadius;
 uniform highp float CircleWaveDecreaseStart;
 
-uniform bool DrawDirectedWave;
-uniform highp float DirectedWaveAngle;
-uniform highp float DirectedWaveStartRange;
+uniform bool DrawSectorWave;
+uniform highp float SectorWaveAngle;
+uniform highp float SectorWaveMinDistance;
 
 uniform highp float NoiseAmplitude;
+
+uniform highp vec4 Color;
 
 highp float rand(highp vec2 p)
 {
@@ -45,13 +47,13 @@ bool isInSector(highp vec2 p){
     if (distToPointSq > distToTargetSq)
         return false;
 
-    if (distToPointSq < DirectedWaveStartRange * DirectedWaveStartRange)
+    if (distToPointSq < SectorWaveMinDistance * SectorWaveMinDistance)
         return false;
 
     if (distToPointSq < 0.001 || distToTargetSq < 0.001)
         return true;
 
-    highp float cosHalfAngle = cos(DirectedWaveAngle * 0.5);
+    highp float cosHalfAngle = cos(SectorWaveAngle * 0.5);
     highp float dotVal = dot(toPoint, toTarget);
     if (dotVal < 0.0)
         return false;
@@ -64,8 +66,8 @@ void fragment() {
     if (!isOnWave(point))
         discard;
 
-    highp vec4 color = zTexture(UV);
-    if (DrawDirectedWave && isInSector(point)){
+    highp vec4 color = Color;
+    if (DrawSectorWave && isInSector(point)){
         COLOR = vec4(applyNoise(point, color.rgb), color.a);
     }
     else{

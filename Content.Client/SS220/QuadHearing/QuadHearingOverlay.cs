@@ -3,7 +3,10 @@ using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
+using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
+using System.Linq;
 using System.Numerics;
 
 namespace Content.Client.SS220.QuadHearing;
@@ -13,15 +16,16 @@ public sealed class QuadHearingOverlay : Overlay
     [Dependency] private readonly IEntityManager _entity = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     private readonly TransformSystem _transform;
 
     private static readonly ProtoId<ShaderPrototype> ShaderProtoId = "QuadHearing";
     private readonly ShaderInstance _shader = default!;
 
-    public override OverlaySpace Space => OverlaySpace.WorldSpace;
+    private readonly Dictionary<string, TargetsEntry> _targetsEntries = [];
 
-    private readonly Dictionary<EntityUid, ShaderInstance> _existShaders = [];
+    public override OverlaySpace Space => OverlaySpace.WorldSpace;
 
     public QuadHearingOverlay()
     {
@@ -31,18 +35,57 @@ public sealed class QuadHearingOverlay : Overlay
         _shader = _prototype.Index(ShaderProtoId).InstanceUnique();
     }
 
-    private const float _waveThikness = 0.7f;
-    private const float _waveInterval = 0.2f;
-    private const float _waveSpeed = 1.3f;
+    protected override void FrameUpdate(FrameEventArgs args)
+    {
+        base.FrameUpdate(args);
 
-    private const float _circleWaveRadius = 2.2f;
-    private const float _circleWaveDecreaseStart = 1.2f;
+        List<string> idToRem = [];
+        foreach (var (id, entry) in _targetsEntries)
+        {
+            if (entry.TargetsData.Count <= 0)
+            {
+                idToRem.Add(id);
+                continue;
+            }
 
-    private const float _directedWaveStartRange = 5f;
+            entry.FrameUpdate(args);
+        }
 
-    private static readonly Angle _directedWaveAngle = Angle.FromDegrees(15);
+        foreach (var id in idToRem)
+        {
+            if (_targetsEntries.TryGetValue(id, out var entry))
+                entry.Dispose();
 
-    private const float _noiseAmplitude = 10f;
+            _targetsEntries.Remove(id);
+        }
+    }
+
+    public void RegisterTarget(QuadHearingTargetTypePrototype proto, EntityCoordinates coords)
+    {
+        if (!_targetsEntries.TryGetValue(proto.ID, out var entry))
+        {
+            entry = new(proto);
+            _targetsEntries.Add(proto.ID, entry);
+        }
+
+        if (entry.TargetsData.TryGetValue(coords.EntityId, out var targets))
+        {
+            var exist = targets.FirstOrDefault(x =>
+                (x.Coords.Position - coords.Position).LengthSquared() <= proto.CircleWaveRadius * proto.CircleWaveRadius
+                && _timing.CurTime <= x.FadeTime);
+
+            if (exist != null)
+                return;
+        }
+
+        entry.AddData(new TargetData
+        {
+            Coords = coords,
+            Shader = _shader.Duplicate(),
+            FadeTime = _timing.CurTime + proto.FadeDelay,
+            DeleteTime = _timing.CurTime + proto.LifeTime
+        });
+    }
 
     protected override void Draw(in OverlayDrawArgs args)
     {
@@ -50,7 +93,10 @@ public sealed class QuadHearingOverlay : Overlay
         if (player == null)
             return;
 
-        if (!_entity.HasComponent<QuadHearingComponent>(player.Value))
+        if (!_entity.TryGetComponent<QuadHearingComponent>(player.Value, out var quadHearing))
+            return;
+
+        if (!quadHearing.ShowEffect)
             return;
 
         var playerPos = _transform.GetWorldPosition(player.Value);
@@ -60,50 +106,176 @@ public sealed class QuadHearingOverlay : Overlay
         var renderScale = args.Viewport.RenderScale;
         var worldToLocalMatrix = args.Viewport.GetWorldToLocalMatrix();
 
-        var query = _entity.EntityQueryEnumerator<QuadHearingTargetComponent>();
-        while (query.MoveNext(out var uid, out var target))
+        foreach (var entry in _targetsEntries.Values)
         {
-            if (args.MapId != _transform.GetMapId(uid))
-                continue;
+            var proto = entry.Proto;
+            var screenPlayerPos = WorldToScreenPos(playerPos, args.Viewport, worldToLocalMatrix);
+            var screenWaveThikness = WorldToScreenLength(proto.WaveThikness, renderScale.X, zoom.X);
+            var screenWaveInterval = WorldToScreenLength(proto.WaveInterval, renderScale.X, zoom.X);
+            var screenCircleWaveRadius = WorldToScreenLength(proto.CircleWaveRadius, renderScale.X, zoom.X);
+            var screenCircleWaveDecreaseStart = WorldToScreenLength(proto.CircleWaveDecreaseStart, renderScale.X, zoom.X);
+            var screenSectorWaveMinDistance = WorldToScreenLength(proto.SectorWaveMinDistance, renderScale.X);
 
-            if (!_existShaders.TryGetValue(uid, out var shd))
+            foreach (var (parent, targets) in entry.TargetsData)
             {
-                shd = _shader.Duplicate();
-                _existShaders.Add(uid, shd);
+                if (!_entity.EntityExists(parent))
+                    continue;
+
+                if (args.MapId != _transform.GetMapId(parent))
+                    continue;
+
+                foreach (var data in targets)
+                {
+                    var worldPos = _transform.ToWorldPosition(data.Coords);
+                    var delta = worldPos - playerPos;
+
+                    var color = proto.Color;
+                    if (_timing.CurTime > data.FadeTime)
+                    {
+                        var fadeProg = (_timing.CurTime - data.FadeTime) / (data.DeleteTime - data.FadeTime);
+                        color.A *= 1 - Math.Clamp((float)fadeProg, 0, 1); ;
+                    }
+
+                    var shd = data.Shader;
+                    shd.SetParameter("TargetPos", WorldToScreenPos(worldPos, args.Viewport, worldToLocalMatrix));
+                    shd.SetParameter("PlayerPos", screenPlayerPos);
+                    shd.SetParameter("WaveThikness", screenWaveThikness);
+                    shd.SetParameter("WaveInterval", screenWaveInterval);
+                    shd.SetParameter("WaveSpeed", proto.WaveSpeed);
+                    shd.SetParameter("CircleWaveRadius", screenCircleWaveRadius);
+                    shd.SetParameter("CircleWaveDecreaseStart", screenCircleWaveDecreaseStart);
+                    shd.SetParameter("DrawSectorWave", !args.WorldBounds.Contains(worldPos));
+                    shd.SetParameter("SectorWaveMinDistance", screenSectorWaveMinDistance);
+                    shd.SetParameter("SectorWaveAngle", GetSectorWaveAngle(delta.Length(), proto.CircleWaveRadius));
+                    shd.SetParameter("NoiseAmplitude", proto.NoiseAmplitude);
+                    shd.SetParameter("Color", color);
+                    handle.UseShader(shd);
+
+                    handle.DrawRect(args.WorldBounds, color);
+                }
             }
-
-            var targetPos = _transform.GetWorldPosition(uid);
-
-            shd.SetParameter("TargetPos", WorldToLocalPos(targetPos, args.Viewport, worldToLocalMatrix));
-            shd.SetParameter("PlayerPos", WorldToLocalPos(playerPos, args.Viewport, worldToLocalMatrix));
-            shd.SetParameter("WaveThikness", WorldToLocalLength(_waveThikness, renderScale.X, zoom.X));
-            shd.SetParameter("WaveInterval", WorldToLocalLength(_waveInterval, renderScale.X, zoom.X));
-            shd.SetParameter("WaveSpeed", _waveSpeed);
-            shd.SetParameter("CircleWaveRadius", WorldToLocalLength(_circleWaveRadius, renderScale.X, zoom.X));
-            shd.SetParameter("CircleWaveDecreaseStart", WorldToLocalLength(_circleWaveDecreaseStart, renderScale.X, zoom.X));
-            shd.SetParameter("DirectedWaveStartRange", WorldToLocalLength(_directedWaveStartRange, renderScale.X));
-            shd.SetParameter("DrawDirectedWave", !args.WorldBounds.Contains(targetPos));
-            shd.SetParameter("DirectedWaveAngle", (float)_directedWaveAngle.Theta);
-            shd.SetParameter("NoiseAmplitude", _noiseAmplitude);
-            handle.UseShader(shd);
-
-            var color = target.Color.WithAlpha(0.075f);
-            handle.DrawRect(args.WorldBounds, color);
         }
 
         handle.UseShader(null);
-        handle.SetTransform(Matrix3x2.Identity);
     }
 
-    private static float WorldToLocalLength(float length, float renderScale, float zoom = 1)
+    private static float WorldToScreenLength(float length, float renderScale, float zoom = 1)
     {
         return length * renderScale / zoom * EyeManager.PixelsPerMeter;
     }
 
-    private static Vector2 WorldToLocalPos(Vector2 pos, IClydeViewport viewport, Matrix3x2? worldToLocalMatrix = null)
+    private static Vector2 WorldToScreenPos(Vector2 pos, IClydeViewport viewport, Matrix3x2? worldToLocalMatrix = null)
     {
         worldToLocalMatrix ??= viewport.GetWorldToLocalMatrix();
         var localPos = Vector2.Transform(pos, worldToLocalMatrix.Value);
         return new Vector2(localPos.X, viewport.Size.Y - localPos.Y);
+    }
+
+    private static float GetSectorWaveAngle(float distanceToCenter, float waveRadius)
+    {
+        if (distanceToCenter <= waveRadius)
+            return MathF.PI * 2f;
+
+        return 2f * MathF.Asin(waveRadius / distanceToCenter);
+    }
+
+    private sealed class TargetsEntry : IDisposable
+    {
+        [Dependency] private readonly IEntityManager _entity = default!;
+        [Dependency] private readonly IGameTiming _timing = default!;
+
+        public readonly QuadHearingTargetTypePrototype Proto;
+
+        private readonly Dictionary<EntityUid, List<TargetData>> _targetsData = [];
+        public IReadOnlyDictionary<EntityUid, List<TargetData>> TargetsData => _targetsData;
+
+        private HashSet<TargetData> _datasQueueRem = [];
+        private HashSet<EntityUid> _parentsQueueRem = [];
+
+        public TargetsEntry(QuadHearingTargetTypePrototype proto)
+        {
+            IoCManager.InjectDependencies(this);
+            Proto = proto;
+        }
+
+        public void FrameUpdate(FrameEventArgs args)
+        {
+            foreach (var parent in _parentsQueueRem)
+                RemoveParent(parent);
+
+            _parentsQueueRem.Clear();
+
+            foreach (var data in _datasQueueRem)
+                RemoveData(data);
+
+            _datasQueueRem.Clear();
+
+            foreach (var (parent, targets) in _targetsData)
+            {
+                if (!_entity.EntityExists(parent) || targets.Count <= 0)
+                    _parentsQueueRem.Add(parent);
+
+                foreach (var target in targets)
+                    if (_timing.CurTime >= target.DeleteTime)
+                        _datasQueueRem.Add(target);
+            }
+        }
+
+        public bool RemoveParent(EntityUid parent)
+        {
+            if (!_targetsData.TryGetValue(parent, out var targets))
+                return false;
+
+            foreach (var data in targets)
+                data.Dispose();
+
+            targets.Clear();
+            return _targetsData.Remove(parent);
+        }
+
+        public void AddData(TargetData data)
+        {
+            var parent = data.Coords.EntityId;
+            if (!_targetsData.TryGetValue(parent, out var targets))
+            {
+                targets = [];
+                _targetsData.Add(parent, targets);
+            }
+
+            targets.Add(data);
+        }
+
+        public bool RemoveData(TargetData data)
+        {
+            if (!_targetsData.TryGetValue(data.Coords.EntityId, out var targets))
+                return false;
+
+            if (!targets.Remove(data))
+                return false;
+
+            data.Dispose();
+            return true;
+        }
+
+        public void Dispose()
+        {
+            foreach (var data in _targetsData.Values.SelectMany(x => x))
+                data.Dispose();
+
+            _targetsData.Clear();
+        }
+    }
+
+    private sealed class TargetData : IDisposable
+    {
+        public required EntityCoordinates Coords;
+        public required ShaderInstance Shader;
+        public TimeSpan FadeTime;
+        public TimeSpan DeleteTime;
+
+        public void Dispose()
+        {
+            Shader.Dispose();
+        }
     }
 }
