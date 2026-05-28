@@ -26,6 +26,56 @@
   - CaptainHeadset
   - CaptainHeadsetAlt
   # Капитан (Конец)
+
+  # Глава персонала (Начало)
+- type: loadoutGroup
+  id: HoPHeadset
+  name: loadout-group-hop-headset
+  minLimit: 1
+  loadouts:
+  - HoPHeadset
+  - HoPHeadsetAlt
+  # Глава персонала (Конец)
+
+  # Старший Инженер (Начало)
+- type: loadoutGroup
+  id: ChiefEngineerHeadset
+  name: loadout-group-chief-engineer-headset
+  minLimit: 1
+  loadouts:
+  - ChiefEngineerHeadset
+  - ChiefEngineerHeadsetAlt
+  # Старший Инженер (Конец)
+
+  # Главный Врач (Начало)
+- type: loadoutGroup
+  id: ChiefMedicalOfficerHeadset
+  name: loadout-group-chief-medical-officer-headset
+  minLimit: 1
+  loadouts:
+  - ChiefMedicalOfficerHeadset
+  - ChiefMedicalOfficerHeadsetAlt
+  # Главный Врач (Конец)
+
+  # Квартирмейстер (Начало)
+- type: loadoutGroup
+  id: QuartermasterHeadset 
+  name: loadout-group-quartermaster-headset
+  minLimit: 1
+  loadouts:
+  - QuartermasterHeadset
+  - QuartermasterHeadsetAlt
+  # Квартирмейстер (Конец)
+
+  # Научный Руководитель (Начало)
+- type: loadoutGroup
+  id: ResearchDirectorHeadset
+  name: loadout-group-research-director-headset
+  minLimit: 1
+  loadouts:
+  - ResearchDirectorHeadset
+  - ResearchDirectorHeadsetAlt
+  # Научный Руководитель (Конец)
 #! Командование (Конец)
 
 #! Юридический (Начало)
@@ -851,6 +901,7 @@
   - JanitorGaloshes
   - JanitorOrangeShoes
   - JanitorJRShoes
+  - JanitorJRBoots
 
 - type: loadoutGroup
   id: JanitorBelt
@@ -858,6 +909,12 @@
   loadouts:
   - JanitorBaseBelt
   - JanitorJRBelt #SS220-JRBelt
+
+- type: loadoutGroup
+  id: JanitorEquipment
+  name: loadout-group-janitor-equipment
+  loadouts:
+  - JRMopItem
   # Уборщик (Конец)
 
  # Сервисный работник (Начало)
