@@ -6,7 +6,7 @@
   - type: ArenaRule
     lifecycle: DeleteOnKill
     selectionMode: Rotation
-    waitingTimeout: 60
+    waitingTimeout: 120
     showInLobby: true
 
 - type: entity
