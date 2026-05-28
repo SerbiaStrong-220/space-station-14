@@ -17,3 +17,6 @@ ent-ClothingShoesResponsibility = обувь ответственного вра
 ent-ClothingShoesSpaceNinjaFake = { ent-ClothingShoesSpaceNinja }
     .desc = Стильные ботинки ниндзя из популярного аниме.
     .suffix = Поддельный
+ent-ClothingBootsJanitorJR = стандартные рабочие ботинки
+        .suffix = JR, За время в игре
+        .desc = Они были изготовлены по просьбе рабочих, так как резиновые подошвы затрудняли ходьбу.
