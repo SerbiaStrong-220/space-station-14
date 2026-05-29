@@ -74,6 +74,10 @@
     size: Small
     storedRotation: 90
   - type: DirectCompactDefibrillator
+  - type: Defibrillator
+    zapHeal:
+      types:
+        Asphyxiation: -40
 
 - type: entity
   name: implant scanner

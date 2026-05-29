@@ -151,25 +151,28 @@ public sealed partial class SurgeryDrapeMenu : FancyWindow
     /// <summary>
     /// Some helper function to easily set formatted message from locPath
     /// </summary>
-    private void SetFormattedText(Action<FormattedMessage> setterFormatted, Action<string> setterString, string locPath)
+    private void SetFormattedText(Action<FormattedMessage> setterFormatted, Action<string> setterString, string text)
     {
-        var loc = Loc.GetString(locPath);
-        if (FormattedMessage.TryFromMarkup(loc, out var msg))
+        if (FormattedMessage.TryFromMarkup(text, out var msg))
             setterFormatted(msg);
         else
-            setterString(loc);
+            setterString(text);
     }
 
     private void SetFormattedText(RichTextLabel richTextLabel, string locPath)
     {
-        SetFormattedText((x) => richTextLabel.SetMessage(x), (x) => richTextLabel.Text = x, locPath);
+        SetFormattedText((x) => richTextLabel.SetMessage(x), (x) => richTextLabel.Text = x, Loc.GetString(locPath));
+    }
+
+    private void SetFormattedTextFromLocId(Tooltip tooltip, string locPath)
+    {
+        SetFormattedText(tooltip.SetMessage, (x) => tooltip.Text = x, Loc.GetString(locPath));
     }
 
     private void SetFormattedText(Tooltip tooltip, string locPath)
     {
         SetFormattedText(tooltip.SetMessage, (x) => tooltip.Text = x, locPath);
     }
-
 }
 
 public readonly record struct SurgeryStartInfo(SurgeryGraphPrototype Surgery, bool CanStart, string? UnavailabilityReason);

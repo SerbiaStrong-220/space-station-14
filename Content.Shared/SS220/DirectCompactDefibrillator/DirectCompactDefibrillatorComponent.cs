@@ -2,7 +2,7 @@
 
 using Robust.Shared.GameStates;
 
-namespace Content.Shared.SS220.Surgery.Components;
+namespace Content.Shared.SS220.DirectCompactDefibrillator;
 
 /// <summary>
 /// This component just marks entity as direct defibrillator
