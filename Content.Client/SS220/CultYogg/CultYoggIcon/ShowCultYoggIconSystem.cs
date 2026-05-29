@@ -2,7 +2,6 @@
 
 using Content.Shared.SS220.CultYogg.CultYoggIcons;
 using Content.Shared.StatusIcon.Components;
-using Robust.Client.Player;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client.SS220.CultYogg.CultYoggIcon;
@@ -10,7 +9,6 @@ namespace Content.Client.SS220.CultYogg.CultYoggIcon;
 public sealed class ShowCultYoggIconsSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
 
     public override void Initialize()
     {
