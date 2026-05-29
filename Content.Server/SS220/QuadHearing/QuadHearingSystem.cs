@@ -1,19 +1,39 @@
-using Content.Shared.Maps;
+using Content.Server.Actions;
 using Content.Shared.SS220.QuadHearing;
-using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Enums;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using System.Linq;
 
 namespace Content.Server.SS220.QuadHearing;
 
 public sealed class QuadHearingSystem : SharedQuadHearingSystem
 {
     [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly MapSystem _map = default!;
+    [Dependency] private readonly ActionsSystem _actions = default!;
+
+    private static readonly EntProtoId ActionId = "ActionToggleQuadHearing";
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<QuadHearingComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<QuadHearingComponent, ComponentRemove>(OnRemove);
+    }
+
+    private void OnMapInit(Entity<QuadHearingComponent> ent, ref MapInitEvent args)
+    {
+        _actions.AddAction(ent, ref ent.Comp.ToggleActionEntity, ActionId);
+        Dirty(ent);
+    }
+
+    private void OnRemove(Entity<QuadHearingComponent> ent, ref ComponentRemove args)
+    {
+        _actions.RemoveAction(ent.Comp.ToggleActionEntity);
+        Dirty(ent);
+    }
 
     public override void RegisterTarget(ProtoId<QuadHearingTargetTypePrototype> protoId, EntityCoordinates coords, float? range, ICommonSession? predictedSession = null)
     {

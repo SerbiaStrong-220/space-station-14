@@ -3,12 +3,10 @@ using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Map;
-using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using System.Diagnostics;
 using System.Numerics;
 
 namespace Content.Client.SS220.QuadHearing;
@@ -33,7 +31,7 @@ public sealed class QuadHearingSystem : SharedQuadHearingSystem
         SubscribeNetworkEvent<QuadHearingRegisterTargetMessage>(OnRegisterTargetMessage);
     }
 
-    private void OnInit(Entity<QuadHearingComponent> entity, ref ComponentInit args)
+    private void OnInit(Entity<QuadHearingComponent> ent, ref ComponentInit args)
     {
         if (_overlay != null)
             return;
@@ -42,7 +40,7 @@ public sealed class QuadHearingSystem : SharedQuadHearingSystem
         _overlayManager.AddOverlay(_overlay);
     }
 
-    private void OnRemove(Entity<QuadHearingComponent> entity, ref ComponentRemove args)
+    private void OnRemove(Entity<QuadHearingComponent> ent, ref ComponentRemove args)
     {
         if (_overlay == null)
             return;

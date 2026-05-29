@@ -1,3 +1,4 @@
+using Content.Shared.Actions;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -12,6 +13,24 @@ public abstract class SharedQuadHearingSystem : EntitySystem
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<QuadHearingComponent, ToggleQuadHearingEvent>(OnToggleAction);
+    }
+
+    private void OnToggleAction(Entity<QuadHearingComponent> ent, ref ToggleQuadHearingEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        ent.Comp.ShowEffect = !ent.Comp.ShowEffect;
+        Dirty(ent);
+
+        args.Handled = true;
+    }
 
     public void RegisterTarget(ProtoId<QuadHearingTargetTypePrototype> protoId, EntityUid target, float? range, EntityUid? predictedUser)
     {
@@ -79,3 +98,6 @@ public sealed class QuadHearingRegisterTargetMessage : EntityEventArgs
     public required ProtoId<QuadHearingTargetTypePrototype> ProtoId;
     public required NetCoordinates Coordinates;
 }
+
+[DataDefinition]
+public sealed partial class ToggleQuadHearingEvent : InstantActionEvent { }

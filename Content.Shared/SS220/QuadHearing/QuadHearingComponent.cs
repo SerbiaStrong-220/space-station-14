@@ -11,4 +11,7 @@ public sealed partial class QuadHearingComponent : Component
 
     [DataField, AutoNetworkedField]
     public float MinDistance = 5f;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? ToggleActionEntity;
 }
