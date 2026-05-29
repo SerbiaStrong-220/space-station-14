@@ -148,7 +148,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
 
         var (banDef, expires) = await CreateBanDef(banInfo, BanType.Server, null, adminName); // SS220-save-admin-name
 
-        var createdBan = await _db.AddBanAsync(banDef);
+        var createdBan = await _db.AddBanAsync(banDef); // SS220-fix-ban-post-info
 
         if (_cfg.GetCVar(CCVars.ServerBanResetLastReadRules))
         {
@@ -274,7 +274,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
 
         var (banDef, expires) = await CreateBanDef(banInfo, BanType.Role, roleDefs, adminName); // SS220-save-admin-anme
 
-        var createdBan = await AddRoleBan(banDef);
+        var createdBan = await AddRoleBan(banDef); // SS220-fix-ban-post-info
 
         var length = expires == null
             ? Loc.GetString("cmd-roleban-inf")
@@ -393,7 +393,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
     }
 
     // private async Task AddRoleBan(BanDef banDef)
-    private async Task<BanDef> AddRoleBan(BanDef banDef) // SS220 return created ban entity
+    private async Task<BanDef> AddRoleBan(BanDef banDef) // SS220-fix-ban-post-info
     {
         banDef = await _db.AddBanAsync(banDef);
 
@@ -406,7 +406,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
             }
         }
 
-        return banDef; // SS220 return created ban entity
+        return banDef; // SS220-fix-ban-post-info
     }
 
     public async Task<string> PardonRoleBan(int banId, NetUserId? unbanningAdmin, DateTimeOffset unbanTime)
