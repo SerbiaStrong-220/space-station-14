@@ -148,7 +148,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
 
         var (banDef, expires) = await CreateBanDef(banInfo, BanType.Server, null, adminName); // SS220-save-admin-name
 
-        await _db.AddBanAsync(banDef);
+        var createdBan = await _db.AddBanAsync(banDef);
 
         if (_cfg.GetCVar(CCVars.ServerBanResetLastReadRules))
         {
@@ -195,7 +195,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
         _chat.SendAdminAlert(logMessage);
 
         // SS220 user ban info post start
-        if (banInfo.PostBanInfo && banDef.Id is { } banId)
+        if (banInfo.PostBanInfo && createdBan.Id is { } banId)
         {
             await _discordBanPostManager.PostUserBanInfo(banId);
         }
@@ -274,7 +274,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
 
         var (banDef, expires) = await CreateBanDef(banInfo, BanType.Role, roleDefs, adminName); // SS220-save-admin-anme
 
-        await AddRoleBan(banDef);
+        var createdBan = await AddRoleBan(banDef);
 
         var length = expires == null
             ? Loc.GetString("cmd-roleban-inf")
@@ -292,7 +292,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
             ("length", length)));
 
         // SS220 user ban info post start
-        if (banInfo.PostBanInfo && banDef.Id is { } banId)
+        if (banInfo.PostBanInfo && createdBan.Id is { } banId)
         {
             await _discordBanPostManager.PostUserBanInfo(banId);
         }
@@ -392,7 +392,8 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
         throw new ArgumentException($"Unknown prototype kind for role bans: {typeof(T)}");
     }
 
-    private async Task AddRoleBan(BanDef banDef)
+    // private async Task AddRoleBan(BanDef banDef)
+    private async Task<BanDef> AddRoleBan(BanDef banDef) // SS220 return created ban entity
     {
         banDef = await _db.AddBanAsync(banDef);
 
@@ -404,6 +405,8 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
                 cachedBans.Add(banDef);
             }
         }
+
+        return banDef; // SS220 return created ban entity
     }
 
     public async Task<string> PardonRoleBan(int banId, NetUserId? unbanningAdmin, DateTimeOffset unbanTime)
