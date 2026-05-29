@@ -32,7 +32,7 @@
 
 - type: entity
   name: survival box
-  parent: BoxSurvivalBrigmedic
+  parent: BoxCardboard
   id: BoxSurvivalBrigmedicNitrogen
   description: It's a box with basic internals inside.
   suffix: MedSec N2
@@ -49,6 +49,10 @@
         - id: FoodSnackNutribrick
         - id: DrinkWaterBottleFull
         - id: CrowbarRed
+  - type: Sprite
+    layers:
+    - state: internals
+    - state: nitrogentank
   - type: Label
     currentLabel: reagent-name-nitrogen
 
