@@ -24,6 +24,7 @@
         - id: Flare
         - id: FoodSnackNutribrick
         - id: DrinkWaterBottleFull
+        - id: CrowbarRed
   - type: Sprite
     layers:
     - state: internals
@@ -47,6 +48,7 @@
         - id: Flare
         - id: FoodSnackNutribrick
         - id: DrinkWaterBottleFull
+        - id: CrowbarRed
   - type: Label
     currentLabel: reagent-name-nitrogen
 
@@ -65,8 +67,8 @@
         - id: SpaceMedipen
         - id: Flare
         - id: FoodSnackNutribrick
-        - id: DrinkWaterBottleFull
         - id: DrinkBeerCan
+        - id: CrowbarRed
   - type: Sprite
     layers:
     - state: internals
