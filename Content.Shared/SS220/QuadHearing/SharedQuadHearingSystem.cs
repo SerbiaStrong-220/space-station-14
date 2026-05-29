@@ -32,28 +32,33 @@ public abstract class SharedQuadHearingSystem : EntitySystem
         args.Handled = true;
     }
 
+    /// <inheritdoc cref="RegisterTarget(ProtoId{QuadHearingTargetTypePrototype}, EntityCoordinates, float?, ICommonSession?)"/>
     public void RegisterTarget(ProtoId<QuadHearingTargetTypePrototype> protoId, EntityUid target, float? range, EntityUid? predictedUser)
     {
         RegisterTarget(protoId, new EntityCoordinates(target, Vector2.Zero), range, predictedUser);
     }
 
+    /// <inheritdoc cref="RegisterTarget(ProtoId{QuadHearingTargetTypePrototype}, EntityCoordinates, float?, ICommonSession?)"/>
     public void RegisterTarget(ProtoId<QuadHearingTargetTypePrototype> protoId, EntityUid target, float? range, ICommonSession? predictedSession = null)
     {
         RegisterTarget(protoId, new EntityCoordinates(target, Vector2.Zero), range, predictedSession);
     }
 
+    /// <inheritdoc cref="RegisterTarget(ProtoId{QuadHearingTargetTypePrototype}, EntityCoordinates, float?, ICommonSession?)"/>
     public void RegisterTarget(ProtoId<QuadHearingTargetTypePrototype> protoId, MapCoordinates coords, float? range, EntityUid? predictedUser)
     {
         var map = _map.GetMap(coords.MapId);
         RegisterTarget(protoId, new EntityCoordinates(map, coords.Position), range, predictedUser);
     }
 
+    /// <inheritdoc cref="RegisterTarget(ProtoId{QuadHearingTargetTypePrototype}, EntityCoordinates, float?, ICommonSession?)"/>
     public void RegisterTarget(ProtoId<QuadHearingTargetTypePrototype> protoId, MapCoordinates coords, float? range, ICommonSession? predictedSession = null)
     {
         var map = _map.GetMap(coords.MapId);
         RegisterTarget(protoId, new EntityCoordinates(map, coords.Position), range, predictedSession);
     }
 
+    /// <inheritdoc cref="RegisterTarget(ProtoId{QuadHearingTargetTypePrototype}, EntityCoordinates, float?, ICommonSession?)"/>
     public void RegisterTarget(ProtoId<QuadHearingTargetTypePrototype> protoId, EntityCoordinates coords, float? range, EntityUid? predictedUser)
     {
         ICommonSession? session = null;
@@ -63,6 +68,9 @@ public abstract class SharedQuadHearingSystem : EntitySystem
         RegisterTarget(protoId, coords, range, session);
     }
 
+    /// <summary>
+    /// Registers the coordinates of the overlay target.
+    /// </summary>
     public abstract void RegisterTarget(ProtoId<QuadHearingTargetTypePrototype> protoId, EntityCoordinates coords, float? range, ICommonSession? predictedSession = null);
 
     protected EntityCoordinates ToMapOrGridCoordinates(EntityCoordinates coords)

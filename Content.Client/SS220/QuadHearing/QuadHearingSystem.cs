@@ -55,6 +55,7 @@ public sealed class QuadHearingSystem : SharedQuadHearingSystem
         RegisterTarget(msg.ProtoId, GetCoordinates(msg.Coordinates), null);
     }
 
+    /// <inheritdoc/>
     public override void RegisterTarget(ProtoId<QuadHearingTargetTypePrototype> protoId, EntityCoordinates coords, float? range, ICommonSession? predictedSession = null)
     {
         if (!_timing.IsFirstTimePredicted)

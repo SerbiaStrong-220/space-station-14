@@ -9,6 +9,9 @@ public sealed partial class QuadHearingComponent : Component
     [DataField, AutoNetworkedField]
     public bool ShowEffect = true;
 
+    /// <summary>
+    /// Minimum distance from the player at which new overlay targets can be registered.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public float MinDistance = 5f;
 

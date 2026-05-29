@@ -111,7 +111,7 @@ public sealed class QuadHearingOverlay : Overlay
             var screenWaveThikness = WorldToScreenLength(proto.WaveThikness, renderScale.X, zoom.X);
             var screenWaveInterval = WorldToScreenLength(proto.WaveInterval, renderScale.X, zoom.X);
             var screenCircleWaveRadius = WorldToScreenLength(proto.CircleWaveRadius, renderScale.X, zoom.X);
-            var screenCircleWaveDecreaseStart = WorldToScreenLength(proto.CircleWaveDecreaseStart, renderScale.X, zoom.X);
+            var screenCircleWaveFadeRadius = WorldToScreenLength(proto.CircleWaveFadeRadius, renderScale.X, zoom.X);
             var screenSectorWaveMinDistance = WorldToScreenLength(proto.SectorWaveMinDistance, renderScale.X);
 
             foreach (var (parent, targets) in entry.TargetsData)
@@ -141,7 +141,7 @@ public sealed class QuadHearingOverlay : Overlay
                     shd.SetParameter("WaveInterval", screenWaveInterval);
                     shd.SetParameter("WaveSpeed", proto.WaveSpeed);
                     shd.SetParameter("CircleWaveRadius", screenCircleWaveRadius);
-                    shd.SetParameter("CircleWaveDecreaseStart", screenCircleWaveDecreaseStart);
+                    shd.SetParameter("CircleWaveFadeRadius", screenCircleWaveFadeRadius);
                     shd.SetParameter("DrawSectorWave", !args.WorldBounds.Contains(worldPos));
                     shd.SetParameter("SectorWaveMinDistance", screenSectorWaveMinDistance);
                     shd.SetParameter("SectorWaveAngle", GetSectorWaveAngle(delta.Length(), proto.CircleWaveRadius));

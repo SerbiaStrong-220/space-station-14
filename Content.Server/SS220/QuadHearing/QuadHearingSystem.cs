@@ -37,6 +37,7 @@ public sealed class QuadHearingSystem : SharedQuadHearingSystem
         Dirty(ent);
     }
 
+    /// <inheritdoc/>
     public override void RegisterTarget(ProtoId<QuadHearingTargetTypePrototype> protoId, EntityCoordinates coords, float? range, ICommonSession? predictedSession = null)
     {
         coords = ToMapOrGridCoordinates(coords);
