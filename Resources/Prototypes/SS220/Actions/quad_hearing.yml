@@ -1,7 +1,6 @@
 - type: entity
   id: ActionToggleQuadHearing
   name: Activate Quad Hearing
-  description:  Your hearing is sharp, but not for long.
   components:
   - type: Action
     itemIconStyle: BigAction

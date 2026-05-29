@@ -28,13 +28,13 @@ public sealed partial class QuadHearingTargetTypePrototype : IPrototype
 
     #region Shader params
     /// <summary>
-    /// Color of the wave shader.
+    /// Color of the waves.
     /// </summary>
     [DataField]
     public Color Color = Color.LightBlue.WithAlpha(0.3f);
 
     /// <summary>
-    /// Thickness of each wave ring.
+    /// Thickness of wave rings.
     /// </summary>
     [DataField]
     public float WaveThikness = 0.7f;
@@ -45,32 +45,29 @@ public sealed partial class QuadHearingTargetTypePrototype : IPrototype
     [DataField]
     public float WaveInterval = 0.2f;
 
-    /// <summary>
-    /// Wave propagation speed.
-    /// </summary>
     [DataField]
     public float WaveSpeed = 1.3f;
 
     /// <summary>
-    /// Radius of the circular wave.
+    /// Maximum radius of circular waves.
     /// </summary>
     [DataField]
     public float CircleWaveRadius = 2.2f;
 
     /// <summary>
-    /// Radius at which the circular wave begins to fade (alpha reduction).
+    /// Radius at which circular waves begin to fade (alpha reduction).
     /// </summary>
     [DataField]
     public float CircleWaveFadeRadius = 1.2f;
 
     /// <summary>
-    /// Minimum distance from the player at which the sector wave is drawn. 
+    /// Minimum distance from the player at which sector waves are drawn.
     /// </summary>
     [DataField]
     public float SectorWaveMinDistance = 5f;
 
     /// <summary>
-    /// Amplitude of the noise effect applied to the wave.  
+    /// Amplitude of the noise effect applied to the waves.  
     /// </summary>
     [DataField]
     public float NoiseAmplitude = 10f;

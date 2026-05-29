@@ -9,9 +9,9 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing; // SS220-scream-cooldown
-using Content.Shared.SS220.Speech;
+using Content.Shared.SS220.Speech; // SS220 Chat-Special-Emote
 using Content.Server.SS220.QuadHearing;
-using Content.Shared.SS220.QuadHearing; // SS220 Chat-Special-Emote
+using Content.Shared.SS220.QuadHearing;
 
 namespace Content.Server.Speech.EntitySystems;
 
