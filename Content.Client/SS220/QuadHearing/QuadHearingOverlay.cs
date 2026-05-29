@@ -24,6 +24,7 @@ public sealed class QuadHearingOverlay : Overlay
     private readonly ShaderInstance _shader = default!;
 
     private readonly Dictionary<string, TargetsEntry> _targetsEntries = [];
+    private readonly List<string> _idQueueRem = [];
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
 
@@ -39,32 +40,29 @@ public sealed class QuadHearingOverlay : Overlay
     {
         base.FrameUpdate(args);
 
-        List<string> idToRem = [];
         foreach (var (id, entry) in _targetsEntries)
         {
             if (entry.TargetsData.Count <= 0)
             {
-                idToRem.Add(id);
+                _idQueueRem.Add(id);
                 continue;
             }
 
             entry.FrameUpdate(args);
         }
 
-        foreach (var id in idToRem)
-        {
-            if (_targetsEntries.TryGetValue(id, out var entry))
+        foreach (var id in _idQueueRem)
+            if (_targetsEntries.Remove(id, out var entry))
                 entry.Dispose();
 
-            _targetsEntries.Remove(id);
-        }
+        _idQueueRem.Clear();
     }
 
     public void RegisterTarget(QuadHearingTargetTypePrototype proto, EntityCoordinates coords)
     {
         if (!_targetsEntries.TryGetValue(proto.ID, out var entry))
         {
-            entry = new(proto);
+            entry = new(proto, _entity, _timing);
             _targetsEntries.Add(proto.ID, entry);
         }
 
@@ -133,7 +131,7 @@ public sealed class QuadHearingOverlay : Overlay
                     if (_timing.CurTime > data.FadeTime)
                     {
                         var fadeProg = (_timing.CurTime - data.FadeTime) / (data.DeleteTime - data.FadeTime);
-                        color.A *= 1 - Math.Clamp((float)fadeProg, 0, 1); ;
+                        color.A *= 1 - Math.Clamp((float)fadeProg, 0, 1);
                     }
 
                     var shd = data.Shader;
@@ -179,37 +177,21 @@ public sealed class QuadHearingOverlay : Overlay
         return 2f * MathF.Asin(waveRadius / distanceToCenter);
     }
 
-    private sealed class TargetsEntry : IDisposable
+    private sealed class TargetsEntry(QuadHearingTargetTypePrototype proto, IEntityManager entityMng, IGameTiming gameTiming) : IDisposable
     {
-        [Dependency] private readonly IEntityManager _entity = default!;
-        [Dependency] private readonly IGameTiming _timing = default!;
+        private readonly IEntityManager _entity = entityMng;
+        private readonly IGameTiming _timing = gameTiming;
 
-        public readonly QuadHearingTargetTypePrototype Proto;
+        public readonly QuadHearingTargetTypePrototype Proto = proto;
 
         private readonly Dictionary<EntityUid, List<TargetData>> _targetsData = [];
         public IReadOnlyDictionary<EntityUid, List<TargetData>> TargetsData => _targetsData;
 
-        private HashSet<TargetData> _datasQueueRem = [];
-        private HashSet<EntityUid> _parentsQueueRem = [];
-
-        public TargetsEntry(QuadHearingTargetTypePrototype proto)
-        {
-            IoCManager.InjectDependencies(this);
-            Proto = proto;
-        }
+        private readonly HashSet<TargetData> _datasQueueRem = [];
+        private readonly HashSet<EntityUid> _parentsQueueRem = [];
 
         public void FrameUpdate(FrameEventArgs args)
         {
-            foreach (var parent in _parentsQueueRem)
-                RemoveParent(parent);
-
-            _parentsQueueRem.Clear();
-
-            foreach (var data in _datasQueueRem)
-                RemoveData(data);
-
-            _datasQueueRem.Clear();
-
             foreach (var (parent, targets) in _targetsData)
             {
                 if (!_entity.EntityExists(parent) || targets.Count <= 0)
@@ -219,6 +201,15 @@ public sealed class QuadHearingOverlay : Overlay
                     if (_timing.CurTime >= target.DeleteTime)
                         _datasQueueRem.Add(target);
             }
+
+            foreach (var parent in _parentsQueueRem)
+                RemoveParent(parent);
+
+            foreach (var data in _datasQueueRem)
+                RemoveData(data);
+
+            _datasQueueRem.Clear();
+            _parentsQueueRem.Clear();
         }
 
         public bool RemoveParent(EntityUid parent)

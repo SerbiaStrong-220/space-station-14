@@ -1,5 +1,6 @@
 using Content.Server.Actions;
 using Content.Shared.SS220.QuadHearing;
+using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Enums;
 using Robust.Shared.Map;
@@ -11,6 +12,7 @@ namespace Content.Server.SS220.QuadHearing;
 public sealed class QuadHearingSystem : SharedQuadHearingSystem
 {
     [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly ActionsSystem _actions = default!;
 
     private static readonly EntProtoId ActionId = "ActionToggleQuadHearing";
@@ -37,7 +39,8 @@ public sealed class QuadHearingSystem : SharedQuadHearingSystem
 
     public override void RegisterTarget(ProtoId<QuadHearingTargetTypePrototype> protoId, EntityCoordinates coords, float? range, ICommonSession? predictedSession = null)
     {
-        coords = ToMapOrGridCoordinated(coords);
+        coords = ToMapOrGridCoordinates(coords);
+        var mapCoords = _transform.ToMapCoordinates(coords);
         QuadHearingRegisterTargetMessage? msg = null;
         foreach (var session in _player.Sessions)
         {
@@ -53,7 +56,7 @@ public sealed class QuadHearingSystem : SharedQuadHearingSystem
             if (!TryComp<QuadHearingComponent>(player, out var quadHearing))
                 continue;
 
-            if (!CanRegisterTarget((player, quadHearing), coords, range))
+            if (!CanRegisterTarget((player, quadHearing), mapCoords, range))
                 continue;
 
             msg ??= new QuadHearingRegisterTargetMessage

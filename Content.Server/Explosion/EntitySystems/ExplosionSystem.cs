@@ -79,7 +79,7 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
     public const int MaxExplosionAudioRange = 30;
 
     private static readonly ProtoId<QuadHearingTargetTypePrototype> QuadHearingTargetProtoId = "Explosion"; // SS220 Quad hearing
-    private const float QuadHearingTargetRagne = 50f; // SS220 Quad hearing
+    private const float QuadHearingTargetRange = 50f; // SS220 Quad hearing
 
     public override void Initialize()
     {
@@ -381,7 +381,7 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
             : queued.Proto.Sound;
 
         _audio.PlayStatic(sound, filter, mapEntityCoords, true, sound.Params);
-        _quadHearing.RegisterTarget(QuadHearingTargetProtoId, mapEntityCoords, QuadHearingTargetRagne); // SS220 Quad hearing
+        _quadHearing.RegisterTarget(QuadHearingTargetProtoId, mapEntityCoords, QuadHearingTargetRange); // SS220 Quad hearing
 
         // play far sound
         // far sound should play for anyone who wasn't in range of any of the effects of the bomb

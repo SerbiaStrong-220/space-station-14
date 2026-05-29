@@ -65,7 +65,7 @@ public abstract class SharedQuadHearingSystem : EntitySystem
 
     public abstract void RegisterTarget(ProtoId<QuadHearingTargetTypePrototype> protoId, EntityCoordinates coords, float? range, ICommonSession? predictedSession = null);
 
-    protected EntityCoordinates ToMapOrGridCoordinated(EntityCoordinates coords)
+    protected EntityCoordinates ToMapOrGridCoordinates(EntityCoordinates coords)
     {
         var mapCoords = _transform.ToMapCoordinates(coords);
         if (_mapMng.TryFindGridAt(mapCoords, out var gridUid, out _) && !TerminatingOrDeleted(gridUid))
@@ -75,10 +75,9 @@ public abstract class SharedQuadHearingSystem : EntitySystem
         return new EntityCoordinates(map, mapCoords.Position);
     }
 
-    protected bool CanRegisterTarget(Entity<QuadHearingComponent> recepient, EntityCoordinates targetCoords, float? range)
+    protected bool CanRegisterTarget(Entity<QuadHearingComponent> recepient, MapCoordinates targetMapCoords, float? range)
     {
         var recepientMapCoords = _transform.GetMapCoordinates(recepient.Owner);
-        var targetMapCoords = _transform.ToMapCoordinates(targetCoords);
 
         if (recepientMapCoords.MapId != targetMapCoords.MapId)
             return false;

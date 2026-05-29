@@ -69,12 +69,13 @@ public sealed class QuadHearingSystem : SharedQuadHearingSystem
         if (!TryComp<QuadHearingComponent>(player, out var quadHearing))
             return;
 
-        coords = ToMapOrGridCoordinated(coords);
-        if (!CanRegisterTarget((player, quadHearing), coords, range))
+        coords = ToMapOrGridCoordinates(coords);
+        var mapCoords = _transform.ToMapCoordinates(coords);
+        if (!CanRegisterTarget((player, quadHearing), mapCoords, range))
             return;
 
         var proto = _prototype.Index(protoId);
-        var delta = _transform.GetMapCoordinates(player).Position - _transform.ToMapCoordinates(coords).Position;
+        var delta = _transform.GetMapCoordinates(player).Position - mapCoords.Position;
         var offset = GetRandomOffset(delta.Length() * proto.RandomOffsetCoefficient);
         coords = new EntityCoordinates(coords.EntityId, coords.Position + offset);
 
