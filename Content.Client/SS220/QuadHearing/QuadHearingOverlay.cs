@@ -108,7 +108,7 @@ public sealed class QuadHearingOverlay : Overlay
         {
             var proto = entry.Proto;
             var screenPlayerPos = WorldToScreenPos(playerPos, args.Viewport, worldToLocalMatrix);
-            var screenWaveThikness = WorldToScreenLength(proto.WaveThikness, renderScale.X, zoom.X);
+            var screenWaveThickness = WorldToScreenLength(proto.WaveThickness, renderScale.X, zoom.X);
             var screenWaveInterval = WorldToScreenLength(proto.WaveInterval, renderScale.X, zoom.X);
             var screenCircleWaveRadius = WorldToScreenLength(proto.CircleWaveRadius, renderScale.X, zoom.X);
             var screenCircleWaveFadeRadius = WorldToScreenLength(proto.CircleWaveFadeRadius, renderScale.X, zoom.X);
@@ -137,7 +137,7 @@ public sealed class QuadHearingOverlay : Overlay
                     var shd = data.Shader;
                     shd.SetParameter("TargetPos", WorldToScreenPos(worldPos, args.Viewport, worldToLocalMatrix));
                     shd.SetParameter("PlayerPos", screenPlayerPos);
-                    shd.SetParameter("WaveThikness", screenWaveThikness);
+                    shd.SetParameter("WaveThickness", screenWaveThickness);
                     shd.SetParameter("WaveInterval", screenWaveInterval);
                     shd.SetParameter("WaveSpeed", proto.WaveSpeed);
                     shd.SetParameter("CircleWaveRadius", screenCircleWaveRadius);

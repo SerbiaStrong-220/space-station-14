@@ -37,7 +37,7 @@ public sealed partial class QuadHearingTargetTypePrototype : IPrototype
     /// Thickness of wave rings.
     /// </summary>
     [DataField]
-    public float WaveThikness = 0.7f;
+    public float WaveThickness = 0.7f;
 
     /// <summary>
     /// Empty space (gap) between wave rings.

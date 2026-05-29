@@ -26,28 +26,22 @@ public sealed class QuadHearingSystem : SharedQuadHearingSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<QuadHearingComponent, ComponentInit>(OnInit);
-        SubscribeLocalEvent<QuadHearingComponent, ComponentRemove>(OnRemove);
+        _overlay = new();
+        _overlayManager.AddOverlay(_overlay);
+
         SubscribeNetworkEvent<QuadHearingRegisterTargetMessage>(OnRegisterTargetMessage);
     }
 
-    private void OnInit(Entity<QuadHearingComponent> ent, ref ComponentInit args)
+    public override void Shutdown()
     {
+        base.Shutdown();
+
         if (_overlay != null)
-            return;
-
-        _overlay = new();
-        _overlayManager.AddOverlay(_overlay);
-    }
-
-    private void OnRemove(Entity<QuadHearingComponent> ent, ref ComponentRemove args)
-    {
-        if (_overlay == null)
-            return;
-
-        _overlayManager.RemoveOverlay(_overlay);
-        _overlay.Dispose();
-        _overlay = null;
+        {
+            _overlayManager.RemoveOverlay(_overlay);
+            _overlay.Dispose();
+            _overlay = null;
+        }
     }
 
     private void OnRegisterTargetMessage(QuadHearingRegisterTargetMessage msg)

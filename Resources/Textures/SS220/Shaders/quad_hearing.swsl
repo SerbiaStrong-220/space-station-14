@@ -1,7 +1,7 @@
 uniform highp vec2 TargetPos;
 uniform highp vec2 PlayerPos;
 
-uniform highp float WaveThikness;
+uniform highp float WaveThickness;
 uniform highp float WaveInterval;
 uniform highp float WaveSpeed;
 
@@ -28,7 +28,7 @@ highp vec3 applyNoise(highp vec2 p, highp vec3 rgb)
 }
 
 bool isOnWave(highp vec2 p){
-    highp float fullInterval = WaveThikness + WaveInterval;
+    highp float fullInterval = WaveThickness + WaveInterval;
     highp float animProg = fract(TIME * WaveSpeed);
     highp float pos = length(p - TargetPos) + fullInterval - fullInterval * animProg;
 
