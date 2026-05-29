@@ -521,6 +521,10 @@
   loadouts:
   - ChaplainNeck
   - ChaplainNeckCloak #ss220-dress-cloak-tweak
+  #SS220-AddCenser begin
+  - ChaplainNeckGoldenCross
+  - ChaplainNeckSilverCross
+  #SS220-AddCenser end
 
 #- type: loadoutGroup
 #  id: ChaplainJobTrinkets
