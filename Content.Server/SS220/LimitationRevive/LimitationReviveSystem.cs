@@ -99,7 +99,6 @@ public sealed class LimitationReviveSystem : SharedLimitationReviveSystem
 
     private void OnRejuvenate(Entity<LimitationReviveComponent> ent, ref RejuvenateEvent args)
     {
-        ent.Comp.DeathCounter = 0;
         ClearAllRecievedDebuffs(ent);
     }
 
