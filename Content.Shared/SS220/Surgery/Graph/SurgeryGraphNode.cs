@@ -21,7 +21,7 @@ public sealed partial class SurgeryGraphNode : ISerializationHooks
     public NodeTextDescription NodeText = new();
 
     [DataField("edges")]
-    private SurgeryGraphEdge[] _edges= Array.Empty<SurgeryGraphEdge>();
+    private SurgeryGraphEdge[] _edges = Array.Empty<SurgeryGraphEdge>();
 
     [ViewVariables]
     public IReadOnlyList<SurgeryGraphEdge> Edges => _edges;

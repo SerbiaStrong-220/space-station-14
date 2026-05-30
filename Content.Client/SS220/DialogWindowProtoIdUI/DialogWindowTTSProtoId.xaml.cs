@@ -11,7 +11,7 @@ using Content.Shared.SS220.TTS;
 namespace Content.Client.SS220.DialogWindowProtoIdUI;
 
 /// <summary>
-/// A modified <see cref="DialogWindow"/> window in which you can send an additional description to explain a particular action being performed
+/// A modified <see cref="DialogWindow"/> window in which you can choose ProtoId for TTS voice
 /// </summary>
 [GenerateTypedNameReferences]
 public sealed partial class DialogWindowTTSProtoId : FancyWindow
