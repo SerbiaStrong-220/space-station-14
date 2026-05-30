@@ -4,4 +4,4 @@ using Content.Shared.SS220.Pathology;
 
 namespace Content.Client.SS220.Pathology;
 
-public sealed class PathologySystem : SharedPathologySystem { }
+public sealed class PathologySystem : SharedPathologySystem;

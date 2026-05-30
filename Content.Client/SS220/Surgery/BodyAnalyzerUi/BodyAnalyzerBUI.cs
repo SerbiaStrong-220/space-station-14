@@ -28,5 +28,4 @@ public sealed class BodyAnalyzerBUI(EntityUid owner, Enum uiKey) : BoundUserInte
                 break;
         }
     }
-
 }
