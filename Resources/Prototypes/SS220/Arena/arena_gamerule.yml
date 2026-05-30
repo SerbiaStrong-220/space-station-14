@@ -2,8 +2,7 @@
   id: TwoPlayerArena
   parent: BaseGameRule
   components:
-  - type: TwoPlayerArenaRule
-    deleteBarriers: true
+  - type: ArenaRule
     selectionMode: Random
     maps:
     - path: /Maps/SS220/Arenas/two_player_arena.yml
@@ -25,3 +24,20 @@
       loadout: ArenaLoadoutLava
     - path: /Maps/SS220/Arenas/dust_arena.yml
       loadout: ArenaLoadoutDust
+    - path: /Maps/SS220/Arenas/laser_arena.yml
+      loadout: ArenaLoadoutLaser
+    - path: /Maps/SS220/Arenas/knights_arena.yml
+      loadout: ArenaLoadoutKnight
+    - path: /Maps/SS220/Arenas/uplink_arena_2v2.yml
+      loadout: ArenaLoadoutOperative
+    - path: /Maps/SS220/Arenas/pirates_arena.yml
+      loadout: ArenaLoadoutPirate
+    - path: /Maps/SS220/Arenas/lava_arena_2v2.yml
+      loadout: ArenaLoadoutLavaSec
+    - path: /Maps/SS220/Arenas/knights_arena_3v3.yml
+      loadouts:
+      - ArenaLoadoutKnight
+      - ArenaLoadoutArcher
+      - ArenaLoadoutArcher
+    - path: /Maps/SS220/Arenas/abyss_arena.yml
+      loadout: ArenaLoadoutAbyss

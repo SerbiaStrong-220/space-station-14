@@ -89,6 +89,18 @@
   - type: Clothing
     sprite: SS220/Clothing/Shoes/Boots/janitor_jr.rsi
 
+- type: entity
+  parent: ClothingShoesBase
+  id: ClothingBootsJanitorJR
+  name: standard Work Boots Junk Recyclers
+  description: They were made at the request of workers, as the rubber soles made it difficult to walk.
+  suffix: JR, For playing time
+  components:
+  - type: Sprite
+    sprite: SS220/Clothing/Shoes/Boots/janitorboots_jr.rsi
+  - type: Clothing
+    sprite: SS220/Clothing/Shoes/Boots/janitorboots_jr.rsi
+
 # Врач
 
 - type: entity
