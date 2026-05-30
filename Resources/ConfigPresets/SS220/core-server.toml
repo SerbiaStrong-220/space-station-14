@@ -26,12 +26,12 @@ show_reason = true
 mob_pushing = true
 
 [vote]
-enabled=false
+enabled = false
 map_enabled = false
 auto_map_vote = true
 
 [chat]
-motd = "Билд SS14 проекта SS220 поддерживается сообщество! Заходите на наш дискорд сервер, участвуйте в жизни проекта!\nhttps://discord.gg/ss220"
+motd = "Билд SS14 проекта SS220 поддерживается сообществом! Заходите на наш дискорд сервер, участвуйте в жизни проекта!\nhttps://discord.gg/ss220"
 max_announcement_length = 300
 
 [admin]
