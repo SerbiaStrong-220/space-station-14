@@ -6,8 +6,6 @@
     species:
     - SlimePerson
     - Vox
-  - !type:SponsorTierRequirementLoadoutEffect
-    requirement: Shlopa
 
 - type: loadoutEffectGroup
   id: OxygenBreatherSponsor
@@ -21,8 +19,6 @@
     - Human
     - Moth
     - Reptilian
-  - !type:SponsorTierRequirementLoadoutEffect
-    requirement: Shlopa
 
 - type: loadoutEffectGroup
   id: EffectSpeciesVoxSponsor
@@ -106,3 +102,60 @@
   storage:
     back:
     - BoxSurvivalSecurityNitrogenSponsor
+
+# SEC-MED
+- type: loadout
+  id: EmergencyOxygenBrigmedicSponsor
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: OxygenBreatherSponsor
+  storage:
+    back:
+    - BoxSurvivalBrigmedicSponsor
+
+- type: loadout
+  id: EmergencyNitrogenBrigmedicSponsor
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: NitrogenBreatherSponsor
+  storage:
+    back:
+    - BoxSurvivalBrigmedicNitrogenSponsor
+
+# Clown
+- type: loadout
+  id: EmergencyOxygenClownSponsor
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: OxygenBreatherSponsor
+  storage:
+    back:
+    - BoxHugSponsor
+
+- type: loadout
+  id: EmergencyNitrogenClownSponsor
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: NitrogenBreatherSponsor
+  storage:
+    back:
+    - BoxHugNitrogenSponsor
+
+# Mime
+- type: loadout
+  id: EmergencyOxygenMimeSponsor
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: OxygenBreatherSponsor
+  storage:
+    back:
+    - BoxMimeSponsor
+
+- type: loadout
+  id: EmergencyNitrogenMimeSponsor
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: NitrogenBreatherSponsor
+  storage:
+    back:
+    - BoxMimeNitrogenSponsor

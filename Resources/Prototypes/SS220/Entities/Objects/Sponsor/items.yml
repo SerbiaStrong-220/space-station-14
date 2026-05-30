@@ -709,7 +709,33 @@
     state: floppa_box
     layers: [ ]
   - type: Item
-    sprite: SS220/Objects/Sponsor/floppa_box.rs
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+
+- type: entity
+  parent: BoxSurvivalBeerDrinker
+  name: элитный аварийный запас
+  description: Коробка с элитным набором для выживания.
+  id: BoxSurvivalBeerDrinkerSponsor
+  suffix: Стандартный Пиво, Шлёпа
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingMaskBreath
+        - id: EmergencyOxygenTankFilled
+        - id: EmergencyMedipen
+        - id: SpaceMedipen
+        - id: Flare
+        - id: FoodSnackNutribrick
+        - id: DrinkBeerCanSponsor
+        - id: CrowbarRed
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+    state: floppa_box
+    layers: [ ]
+  - type: Item
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
 
 - type: entity
   parent: BoxSurvivalEngineering
@@ -723,7 +749,7 @@
     state: floppa_box
     layers: [ ]
   - type: Item
-    sprite: SS220/Objects/Sponsor/floppa_box.rs
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
 
 - type: entity
   parent: BoxSurvivalEngineeringNitrogen
@@ -737,7 +763,7 @@
     state: floppa_box
     layers: [ ]
   - type: Item
-    sprite: SS220/Objects/Sponsor/floppa_box.rs
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
 
 - type: entity
   parent: BoxSurvivalSecurity
@@ -751,7 +777,7 @@
     state: floppa_box
     layers: [ ]
   - type: Item
-    sprite: SS220/Objects/Sponsor/floppa_box.rs
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
 
 - type: entity
   parent: BoxSurvivalBrigmedic
@@ -765,7 +791,21 @@
     state: floppa_box
     layers: [ ]
   - type: Item
-    sprite: SS220/Objects/Sponsor/floppa_box.rs
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+
+- type: entity
+  parent: BoxSurvivalBrigmedicNitrogen
+  id: BoxSurvivalBrigmedicNitrogenSponsor
+  name: элитный аварийный запас
+  description: Коробка с элитным набором для выживания.
+  suffix: Мед-СБ Азот N2, Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+    state: floppa_box
+    layers: [ ]
+  - type: Item
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
 
 - type: entity
   parent: BoxSurvivalSecurityNitrogen
@@ -779,7 +819,7 @@
     state: floppa_box
     layers: [ ]
   - type: Item
-    sprite: SS220/Objects/Sponsor/floppa_box.rs
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
 
 - type: entity
   parent: BoxSurvivalMedical
@@ -793,7 +833,7 @@
     state: floppa_box
     layers: [ ]
   - type: Item
-    sprite: SS220/Objects/Sponsor/floppa_box.rs
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
 
 - type: entity
   parent: BoxSurvivalMedicalNitrogen
@@ -807,4 +847,74 @@
     state: floppa_box
     layers: [ ]
   - type: Item
-    sprite: SS220/Objects/Sponsor/floppa_box.rs
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+
+- type: entity
+  parent: BoxMime
+  id: BoxMimeSponsor
+  name: элитный аварийный запас
+  description: Коробка с элитным набором для выживания.
+  suffix: Мим, Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+    state: floppa_box
+    layers: [ ]
+  - type: Item
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+
+- type: entity
+  parent: BoxMimeNitrogen
+  id: BoxMimeNitrogenSponsor
+  name: элитный аварийный запас
+  description: Коробка с элитным набором для выживания.
+  suffix: Мим Азот N2, Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+    state: floppa_box
+    layers: [ ]
+  - type: Item
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+
+- type: entity
+  parent: BoxMimeMoth
+  id: BoxMimeMothSponsor
+  name: элитный аварийный запас
+  description: Коробка с элитным набором для выживания.
+  suffix: Мим Моль, Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+    state: floppa_box
+    layers: [ ]
+  - type: Item
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+  
+- type: entity
+  parent: BoxHug
+  id: BoxHugSponsor
+  name: элитный аварийный запас
+  description: Коробка с элитным набором для выживания.
+  suffix: Клоун, Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+    state: floppa_box
+    layers: [ ]
+  - type: Item
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+
+- type: entity
+  parent: BoxHugNitrogen
+  id: BoxHugNitrogenSponsor
+  name: элитный аварийный запас
+  description: Коробка с элитным набором для выживания.
+  suffix: Клоун Азот N2, Шлёпа
+  components:
+  - type: Sprite
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
+    state: floppa_box
+    layers: [ ]
+  - type: Item
+    sprite: SS220/Objects/Sponsor/floppa_box.rsi
