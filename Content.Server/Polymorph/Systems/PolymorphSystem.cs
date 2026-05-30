@@ -18,6 +18,9 @@ using Content.Shared.Nutrition;
 using Content.Shared.Polymorph;
 using Content.Shared.Popups;
 using Content.Shared.SS220.PolymorphTimer;
+using Content.Shared.Chemistry.Components.SolutionManager;
+using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.FixedPoint;
 using Robust.Server.Audio;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
@@ -47,6 +50,7 @@ public sealed partial class PolymorphSystem : EntitySystem
     [Dependency] private readonly SharedMindSystem _mindSystem = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly AlertsSystem _alerts = default!;//SS220_cult_hotfix_23
+    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;//SS220_slime-to-geras_fix
 
     public const string EffectDesynchronizer = "EffectDesynchronizer"; //SS220-cryo-mobs-fix
 
@@ -286,6 +290,11 @@ public sealed partial class PolymorphSystem : EntitySystem
             _visualBody.CopyAppearanceFrom(uid, child);
         }
 
+        // SS220 Geras reagents fix begin
+        if (configuration.TransferReagents)
+            TransferSolutions(uid, child);
+        //SS220 Geras reagents fix end
+
         if (_mindSystem.TryGetMind(uid, out var mindId, out var mind))
             _mindSystem.TransferTo(mindId, child, mind: mind);
 
@@ -348,6 +357,11 @@ public sealed partial class PolymorphSystem : EntitySystem
             _damageable.SetDamage((parent, damageParent), damage);
         }
 
+        // SS220 Geras reagents fix begin
+        if (component.Configuration.TransferReagents)
+            TransferSolutions(uid, parent);
+        // SS220 Geras reagents fix end
+
         if (component.Configuration.Inventory == PolymorphInventoryChange.Transfer)
         {
             _inventory.TransferEntityInventories(uid, parent);
@@ -400,6 +414,31 @@ public sealed partial class PolymorphSystem : EntitySystem
 
         return parent;
     }
+
+    //SS220 Geras reagents fix start
+    private void TransferSolutions(EntityUid from, EntityUid to)
+    {
+        if (!TryComp<SolutionContainerManagerComponent>(from, out var fromManager) ||
+            !TryComp<SolutionContainerManagerComponent>(to, out var toManager))
+            return;
+        foreach (var (solutionName, fromSolutionEnt ) in _solutionContainer.EnumerateSolutions((from, fromManager)))
+        {
+            if (fromSolutionEnt.Comp.Solution.Volume <= FixedPoint2.Zero)
+                continue;
+
+            if (!_solutionContainer.TryGetSolution((to, toManager), solutionName, out var toSolutionEnt, out var toSolution ))
+                continue;
+
+            var transferVolume = FixedPoint2.Min(fromSolutionEnt.Comp.Solution.Volume, toSolution.AvailableVolume);
+            if (transferVolume < FixedPoint2.Zero)
+                continue;
+
+            var movedSolution = _solutionContainer.SplitSolution(fromSolutionEnt, transferVolume);
+            _solutionContainer.TryAddSolution(toSolutionEnt.Value, movedSolution);
+        }
+
+    }
+    //SS220 Geras reagents end
 
     /// <summary>
     /// Creates a sidebar action for an entity to be able to polymorph at will

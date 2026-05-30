@@ -6,7 +6,7 @@
   - type: ArenaRule
     lifecycle: DeleteOnKill
     selectionMode: Rotation
-    waitingTimeout: 60
+    waitingTimeout: 120
     showInLobby: true
 
 - type: entity
@@ -20,6 +20,7 @@
     maps:
     - path: /Maps/SS220/Arenas/uplink_arena_2v2.yml
       loadout: ArenaLoadoutOperative
+      countdownDuration: 60
 
 - type: entity
   id: ArenaLobbyMercenary
@@ -107,6 +108,7 @@
     maps:
     - path: /Maps/SS220/Arenas/two_player_arena.yml
       loadout: ArenaLoadoutOperative
+      countdownDuration: 60
 
 - type: entity
   id: ArenaLobbyMine1v1

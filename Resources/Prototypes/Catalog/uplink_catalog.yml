@@ -258,13 +258,6 @@
     HardDynamic:
       Telecrystal: 7
   #ss220 dynamic-price end
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-      - LoneOpsUplink #SS220-uplink-fix
-      - DebugUplink #SS220-debug-uplink-fix
 
 - type: listing
   id: uplinkRiggedBoxingGloves
@@ -2383,18 +2376,18 @@
   id: UplinkClothingOuterVestWeb
   name: uplink-clothing-outer-vest-web-name
   description: uplink-clothing-outer-vest-web-desc
-  productEntity: ClothingOuterVestWeb
+  productEntity: ClothingOuterVestWebMerc #SS220 syndie armor tweaks
   discountCategory: usualDiscounts
   discountDownTo:
-    Telecrystal: 3
+    Telecrystal: 3 #SS220 syndie armor tweaks
   cost:
-    Telecrystal: 5
+    Telecrystal: 3 #SS220 syndie armor tweaks
   categories:
   - UplinkWearables
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 6
+      Telecrystal: 4
     MediumDynamic:
       Telecrystal: 4
     HardDynamic:
@@ -2410,15 +2403,15 @@
   discountDownTo:
     Telecrystal: 6 # ss220 - post upstream - uplink tweaks
   cost:
-    Telecrystal: 8 # ss220 - post upstream - uplink tweaks
+    Telecrystal: 6 # ss220 - post upstream - uplink tweaks
   categories:
   - UplinkWearables
 #ss220 dynamic-price bgn
   dynamicsPrices:
     LightDynamic:
-      Telecrystal: 10
+      Telecrystal: 9
     MediumDynamic:
-      Telecrystal: 8
+      Telecrystal: 7
     HardDynamic:
       Telecrystal: 6
 #ss220 dynamic-price end
