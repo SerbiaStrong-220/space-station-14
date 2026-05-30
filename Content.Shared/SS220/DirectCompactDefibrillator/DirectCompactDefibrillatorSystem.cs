@@ -10,10 +10,10 @@ public sealed class DirectCompactDefibrillatorSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<DirectCompactDefibrillatorComponent, ComponentInit>(OnComponentInit);
+        SubscribeLocalEvent<DirectCompactDefibrillatorComponent, MapInitEvent>(OnMapInit);
     }
 
-    private void OnComponentInit(Entity<DirectCompactDefibrillatorComponent> entity, ref ComponentInit _)
+    private void OnMapInit(Entity<DirectCompactDefibrillatorComponent> entity, ref MapInitEvent _)
     {
         if (!HasComp<DefibrillatorComponent>(entity))
             Log.Error($"Entity {ToPrettyString(entity)} with {nameof(DirectCompactDefibrillatorComponent)} don't have {nameof(DefibrillatorComponent)}, so it wont work. Add it!");
