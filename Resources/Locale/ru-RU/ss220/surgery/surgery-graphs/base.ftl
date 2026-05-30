@@ -2,6 +2,8 @@
 surgery-null-used = руками
 surgery-invalid-target-buckle = Цель должна быть пристёгнута!
 
+surgery-cant-perform-on-yourself = Вы не можете провести операцию над собой!
+
 surgery-cancelled-on-start = {THE(CAPITALIZE($user))} убирает хирургические простыни с {THE(CAPITALIZE($target))}
 surgery-cant-be-cancelled-on-start = Вы не можете завершить операцию, чтобы начать новую. Закончите начатую операцию.
 

@@ -38,6 +38,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
     private const SurgeryEdgeSelectorUi EdgeSelectorBUIKey = SurgeryEdgeSelectorUi.Key;
 
+    private static readonly LocId SurgeryCantPerformOnYourself = "surgery-cant-perform-on-yourself";
     private static readonly LocId SurgeryCancelledOnStart = "surgery-cancelled-on-start";
     private static readonly LocId SurgeryCantCancelOnStart = "surgery-cant-be-cancelled-on-start";
     private static readonly LocId SurgeryToolFailureDamage = "surgery-tool-damage-on-failure";
@@ -90,19 +91,28 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             return;
         }
 
+        // TODO: maybe allow under heavy painkillers
+        if (HasComp<SurgeryToolComponent>(args.Used) && args.User == args.Target)
+        {
+            _popup.PopupPredictedCursor(Loc.GetString(SurgeryCantPerformOnYourself), args.User);
+            return;
+        }
+
         var edgeSelectorState = MakeSelectorState(entity, args.Used, args.User);
         switch (edgeSelectorState.Infos.Count)
         {
             case 0:
                 if (entity.Comp.OngoingSurgeries.Count == 0 && HasComp<SurgeryToolComponent>(args.Used))
                 {
-                    _popup.PopupCursor(Loc.GetString(SurgeryNeedToBeStarted), args.User);
+                    _popup.PopupPredictedCursor(Loc.GetString(SurgeryNeedToBeStarted), args.User);
+                    args.Handled = true;
                     break;
                 }
 
                 foreach (var (surgeryId, _) in entity.Comp.OngoingSurgeries)
                 {
                     PopupSurgeryGraphFailures(entity, surgeryId, args.Used, args.User);
+                    args.Handled = true;
                 }
                 break;
 
@@ -142,6 +152,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
                         return;
 
                     _userInterface.SetUiState(buiOwner, EdgeSelectorBUIKey, edgeSelectorState);
+                    args.Handled = true;
                 }
                 break;
         }
@@ -203,6 +214,12 @@ public abstract partial class SharedSurgerySystem : EntitySystem
     {
         if (args.Target == null || !args.CanReach || !TryComp<SurgeryPatientComponent>(args.Target, out var surgeryPatient))
             return;
+
+        if (args.Target == args.User)
+        {
+            _popup.PopupPredictedCursor(Loc.GetString(SurgeryCantPerformOnYourself), args.User);
+            return;
+        }
 
         if (!_userInterface.HasUi(entity, SurgeryDrapeUiKey.Key))
         {
