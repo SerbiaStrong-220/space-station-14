@@ -22,7 +22,6 @@ public sealed class LimitationReviveSystem : SharedLimitationReviveSystem
 {
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
     [Dependency] private readonly SharedPathologySystem _pathology = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly ISerializationManager _serialization = default!;
 
     public override void Initialize()
