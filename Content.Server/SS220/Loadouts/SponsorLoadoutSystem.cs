@@ -4,14 +4,14 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Content.Server.SS220.Discord;
 
-namespace Content.Server.SS220.Sponsors;
+namespace Content.Server.SS220.Loadouts;
 
 public sealed class SponsorLoadoutSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _protoMan = default!;
     [Dependency] private readonly DiscordPlayerManager _discordManager = default!;
 
-    private static readonly Dictionary<string, string[]> SurvivalReplacements = new()
+    private static readonly Dictionary<ProtoId<LoadoutGroupPrototype>, ProtoId<LoadoutPrototype>[]> SurvivalReplacements = new()
     {
         { "Survival",          ["EmergencyOxygenSponsor", "EmergencyNitrogenSponsor", "LoadoutSpeciesVoxNitrogen"]                   },
         { "SurvivalClown",     ["EmergencyOxygenClownSponsor", "EmergencyNitrogenClownSponsor", "LoadoutSpeciesVoxNitrogen"]         },
@@ -30,20 +30,16 @@ public sealed class SponsorLoadoutSystem : EntitySystem
         if (session == null || !_discordManager.TryGetSponsorTierFromCache(session.UserId, out _))
             return;
 
-        foreach (var (standardGroup, sponsorLoadouts) in SurvivalReplacements)
+        foreach (var (groupKey, sponsorLoadouts) in SurvivalReplacements)
         {
-            ProtoId<LoadoutGroupPrototype> groupKey = standardGroup;
-
             if (!loadout.SelectedLoadouts.ContainsKey(groupKey))
                 continue;
 
             var newSelections = new List<Loadout>();
 
-            foreach (var loadoutId in sponsorLoadouts)
+            foreach (var protoId in sponsorLoadouts)
             {
-                ProtoId<LoadoutPrototype> protoId = loadoutId;
-
-                if (!_protoMan.HasIndex<LoadoutPrototype>(protoId))
+                if (!_protoMan.HasIndex(protoId))
                     continue;
 
                 if (!loadout.IsValid(profile, session, protoId, collection, out _))

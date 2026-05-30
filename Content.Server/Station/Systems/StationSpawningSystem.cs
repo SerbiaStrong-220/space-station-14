@@ -45,7 +45,7 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
     [Dependency] private readonly PdaSystem _pdaSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly MindSystem _mindSystem = default!;
-    [Dependency] private readonly SS220.Sponsors.SponsorLoadoutSystem _sponsorLoadout = default!;
+    [Dependency] private readonly SS220.Loadouts.SponsorLoadoutSystem _sponsorLoadout = default!;
 
     /// <summary>
     /// Attempts to spawn a player character onto the given station.
@@ -150,9 +150,7 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
 
         if (loadout != null)
         {
-            // SS220 sponsor-loadout-begin
-            _sponsorLoadout.ApplySponsorSurvival(loadout, profile ?? new HumanoidCharacterProfile(), _actors.GetSession(entity));
-            // SS220-sponsor-loadout-end
+            _sponsorLoadout.ApplySponsorSurvival(loadout, profile ?? new HumanoidCharacterProfile(), _actors.GetSession(entity)); // SS220-sponsor-loadout
             EquipRoleLoadout(entity.Value, loadout, roleProto!);
         }
 
