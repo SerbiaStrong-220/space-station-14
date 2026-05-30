@@ -32,7 +32,7 @@ public sealed partial class SurgerySystem : SharedSurgerySystem
         if (entity.Comp.OngoingSurgeries.Count == 0)
             return;
 
-        var distance = (args.NewPosition.Position - args.OldPosition.Position).Length();
+        var distance = MathF.Min((args.NewPosition.Position - args.OldPosition.Position).Length(), 4f);
 
         _bloodstream.TryModifyBleedAmount(entity.Owner, entity.Comp.OnSurgeryMoveBleed * distance * entity.Comp.OngoingSurgeries.Count);
     }
