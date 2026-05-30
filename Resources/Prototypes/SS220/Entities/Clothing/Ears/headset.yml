@@ -61,6 +61,34 @@
       - EncryptionKeyCommand
 
 - type: entity
+  parent:  ClothingHeadsetAltLaw
+  id: ClothingHeadsetAltNanoTrasenRepresentative
+  name: full-size headset of the NanoTrasen Representative
+  description: It is used by representatives of the NanoTrasen.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyLaw
+      - EncryptionKeySecurity
+      - EncryptionKeyCommon
+      - EncryptionKeyCommand
+
+- type: entity
+  parent: ClothingHeadsetLaw
+  id: ClothingHeadsetNanoTrasenRepresentative
+  name: headset of the NanoTrasen Representative
+  description: It is used by representatives of the NanoTrasen.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyLaw
+      - EncryptionKeySecurity
+      - EncryptionKeyCommon
+      - EncryptionKeyCommand
+
+- type: entity
   parent: ClothingHeadsetAltLaw
   id: ClothingHeadsetAltIAA
   name: full-size headset of the iaa

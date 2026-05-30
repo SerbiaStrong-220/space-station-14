@@ -26,9 +26,131 @@
   - CaptainHeadset
   - CaptainHeadsetAlt
   # Капитан (Конец)
+
+  # Глава персонала (Начало)
+- type: loadoutGroup
+  id: HoPHeadset
+  name: loadout-group-hop-headset
+  minLimit: 1
+  loadouts:
+  - HoPHeadset
+  - HoPHeadsetAlt
+  # Глава персонала (Конец)
+
+  # Старший Инженер (Начало)
+- type: loadoutGroup
+  id: ChiefEngineerHeadset
+  name: loadout-group-chief-engineer-headset
+  minLimit: 1
+  loadouts:
+  - ChiefEngineerHeadset
+  - ChiefEngineerHeadsetAlt
+  # Старший Инженер (Конец)
+
+  # Главный Врач (Начало)
+- type: loadoutGroup
+  id: ChiefMedicalOfficerHeadset
+  name: loadout-group-chief-medical-officer-headset
+  minLimit: 1
+  loadouts:
+  - ChiefMedicalOfficerHeadset
+  - ChiefMedicalOfficerHeadsetAlt
+  # Главный Врач (Конец)
+
+  # Квартирмейстер (Начало)
+- type: loadoutGroup
+  id: QuartermasterHeadset 
+  name: loadout-group-quartermaster-headset
+  minLimit: 1
+  loadouts:
+  - QuartermasterHeadset
+  - QuartermasterHeadsetAlt
+  # Квартирмейстер (Конец)
+
+  # Научный Руководитель (Начало)
+- type: loadoutGroup
+  id: ResearchDirectorHeadset
+  name: loadout-group-research-director-headset
+  minLimit: 1
+  loadouts:
+  - ResearchDirectorHeadset
+  - ResearchDirectorHeadsetAlt
+  # Научный Руководитель (Конец)
 #! Командование (Конец)
 
 #! Юридический (Начало)
+
+  # НТР
+- type: loadoutGroup
+  id: NanoTrasenRepresentativeHead
+  name: loadout-group-ntr-head
+  minLimit: 0
+  loadouts:
+  - MagistratePwig
+  - MagistrateStreetJudge
+
+- type: loadoutGroup
+  id: NanoTrasenRepresentativeEyes
+  name: loadout-group-ntr-eyes
+  minLimit: 0
+  loadouts:
+  - EyesHudCommand
+  - GlassesCommand
+  - Glasses
+  - Sunglasses
+  - MagistrateMonocle
+
+- type: loadoutGroup
+  id: NanoTrasenRepresentativeNeck
+  name: loadout-group-ntr-neck
+  minLimit: 0
+  loadouts:
+  - LawyerNeck
+  - CloakJujutsuShlepa
+
+- type: loadoutGroup
+  id: NanoTrasenRepresentativeJumpsuit
+  name: loadout-group-ntr-jumpsuit
+  minLimit: 1
+  loadouts:
+  - JumpsuitNTR
+  - LawyerJumpsuitRed
+  - LawyerJumpskirtRed
+  - LawyerJumpsuitGood
+  - LawyerJumpskirtGood
+  - JumpsuitTrustedLawyer
+  - JumpsuitJujutsuShlepa
+
+- type: loadoutGroup
+  id: NanoTrasenRepresentativeBackpacks
+  name: loadout-group-ntr-backpack
+  hidden: true
+  loadouts:
+    - IAABackpackLeather
+
+- type: loadoutGroup
+  id: NanoTrasenRepresentativeTrinket
+  name: loadout-group-ntr-role-trinket
+  hidden: true
+  loadouts:
+    - ExpensiveCane
+
+- type: loadoutGroup
+  id: NanoTrasenRepresentativeOuterClothing
+  name: loadout-group-ntr-outerclothing
+  minLimit: 0
+  loadouts:
+  - MagistrateRobesJudge
+  - OuterClothingJujutsuShlepa
+
+- type: loadoutGroup
+  id: NanoTrasenRepresentativeHeadset
+  name: loadout-group-ntr-headset
+  minLimit: 1
+  loadouts:
+  - NanoTrasenRepresentativeHeadset
+  - NanoTrasenRepresentativeHeadsetAlt
+
   # Магистрат
 - type: loadoutGroup
   id: MagistrateHead
@@ -70,6 +192,7 @@
   loadouts:
   - MagistrateHeadset
   - MagistrateHeadsetAlt
+
   # Агент Внутренних Дел (Начало)
 - type: loadoutGroup
   id: IAAHead
@@ -146,6 +269,14 @@
   minLimit: 0
   loadouts:
   - OuterClothingJujutsuShlepa
+
+- type: loadoutGroup
+  id: LawyerHead
+  name: loadout-group-lawyer-head
+  minLimit: 0
+  loadouts:
+  - BeretIAA
+  - DevilHorns
 
 - type: loadoutGroup
   id: LawyerHeadset
@@ -770,6 +901,7 @@
   - JanitorGaloshes
   - JanitorOrangeShoes
   - JanitorJRShoes
+  - JanitorJRBoots
 
 - type: loadoutGroup
   id: JanitorBelt
@@ -777,6 +909,12 @@
   loadouts:
   - JanitorBaseBelt
   - JanitorJRBelt #SS220-JRBelt
+
+- type: loadoutGroup
+  id: JanitorEquipment
+  name: loadout-group-janitor-equipment
+  loadouts:
+  - JRMopItem
   # Уборщик (Конец)
 
  # Сервисный работник (Начало)

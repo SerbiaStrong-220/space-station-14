@@ -44,7 +44,7 @@
       - Librarian #SS220 New_accesses_and_some_tweaks
       - Maintenance
       - Medical
-      #- NanoTrasenRepresentative #SS220 TODO NanoTraisen Representative
+      - NanoTrasenRepresentative #SS220 ntr add
       - Psychologist #SS220 New_accesses_and_some_tweaks
       - Quartermaster
       - Research
@@ -54,7 +54,6 @@
       - Security
       - Service
       - Theatre
-      - Magistrate #SS220 TODO NanoTraisen Representative
       - Mime #SS220 New_accesses_and_some_tweaks
       - Musician #SS220 New_accesses_and_some_tweaks
       - GenpopEnter
@@ -127,7 +126,7 @@
     - Librarian #SS220 New_accesses_and_some_tweaks
     - Maintenance
     - Medical
-    #- NanoTrasenRepresentative #SS220 TODO NanoTraisen Representative
+    - NanoTrasenRepresentative #SS220 ntr add
     - Psychologist #SS220 New_accesses_and_some_tweaks
     - Quartermaster
     - Research
@@ -138,7 +137,6 @@
     - Service
     - StationAi
     - Theatre
-    - Magistrate #SS220 TODO NanoTraisen Representative
     - Mime #SS220 New_accesses_and_some_tweaks
     - Musician #SS220 New_accesses_and_some_tweaks
     - CentralCommand
