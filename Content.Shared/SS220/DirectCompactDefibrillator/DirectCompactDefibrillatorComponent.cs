@@ -8,4 +8,8 @@ namespace Content.Shared.SS220.DirectCompactDefibrillator;
 /// This component just marks entity as direct defibrillator
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class DirectCompactDefibrillatorComponent : Component;
+public sealed partial class DirectCompactDefibrillatorComponent : Component
+{
+    [DataField]
+    public bool ShowIncorrectUsagePopup = true;
+}

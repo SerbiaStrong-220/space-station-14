@@ -21,6 +21,10 @@
     interfaces:
       enum.SurgeryDrapeUiKey.Key:
         type: SurgeryDrapeBUI
+  - type: GuideHelp
+    guides:
+    - Surgery
+
 
 - type: entity
   parent: BaseToolSurgery
@@ -60,6 +64,9 @@
     interfaces:
       enum.BodyAnalyzerUiKey.Key:
         type: BodyAnalyzerBUI
+  - type: GuideHelp
+    guides:
+    - Surgery
 
 - type: entity
   name: compact direct defibrillator
@@ -78,6 +85,9 @@
     zapHeal:
       types:
         Asphyxiation: -40
+  - type: GuideHelp
+    guides:
+    - Surgery
 
 - type: entity
   name: implant scanner
@@ -92,6 +102,9 @@
     size: Small
     storedRotation: 90
   - type: ImplantCheckInSurgery
+  - type: GuideHelp
+    guides:
+    - Surgery
 
 - type: entity
   name: implant scanner report
@@ -117,9 +130,6 @@
     backgroundPatchMargin: 6.0, 0.0, 6.0, 0.0
     contentMargin: 12.0, 0.0, 6.0, 0.0
     maxWritableArea: 368.0, 256.0
-  - type: GuideHelp
-    guides:
-    - Forensics
 
 - type: entity
   parent: BaseItem
@@ -146,3 +156,6 @@
     - [SyndicateAgentKnowledge, null]
     - [ScienceKnowledge, null]
     hiddenName: ent-MindslaveFixerCerebralImplant
+  - type: GuideHelp
+    guides:
+    - Surgery

@@ -69,9 +69,11 @@ public abstract class SharedDefibrillatorSystem : EntitySystem
             return;
 
         //ss220-surgery-update-begin
-        if (HasComp<DirectCompactDefibrillatorComponent>(ent))
+        if (TryComp<DirectCompactDefibrillatorComponent>(ent, out var directCompactDefibrillator))
         {
-            _popup.PopupClient(Loc.GetString(_directCompactDefibrillatorNonSurgeryUse), args.User);
+            if (directCompactDefibrillator.ShowIncorrectUsagePopup)
+                _popup.PopupClient(Loc.GetString(_directCompactDefibrillatorNonSurgeryUse), args.User);
+
             return;
         }
         //ss220-surgery-update-end
