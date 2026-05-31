@@ -36,6 +36,8 @@
   - Drill
   - Saw
   - Hemostat
+  - SurgeryDrapes # SS220-surgery-update
+  - SawElectric # SS220-surgery-update
 
 - type: latheRecipePack
   id: MedicalStatic

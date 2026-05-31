@@ -30,6 +30,8 @@
       level: 1
     Medicine:
       level: 1
+    Anatomy:
+      level: 2
     PhysicalTraining:
       level: 2
   knowledges:
@@ -49,6 +51,8 @@
       level: 2
     Medicine:
       level: 1
+    Anatomy:
+      level: 2
     PhysicalTraining:
       level: 2
   knowledges:

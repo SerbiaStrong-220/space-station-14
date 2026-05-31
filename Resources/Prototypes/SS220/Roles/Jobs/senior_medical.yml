@@ -29,12 +29,18 @@
         Medicine:
           multiplier: 1.5
           maxBuffSkillLevel: 3
+        Anatomy:
+          multiplier: 1.5
+          maxBuffSkillLevel: 3
 
 - type: startingGear
   id: SeniorPhysicianGear
   equipment:
     id: SeniorPhysicianPDA
     ears: ClothingHeadsetMedical
+  storage:
+    back:
+    - FilledSurgeryMedkit
 
 - type: chameleonOutfit
   id: SeniorPhysicianChameleonOutfit
