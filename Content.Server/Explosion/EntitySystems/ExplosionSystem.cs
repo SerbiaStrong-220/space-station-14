@@ -1,11 +1,10 @@
-using System.Linq;
-using System.Numerics;
 using Content.Server.Administration.Logs;
 using Content.Server.Atmos.Components;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Destructible;
 using Content.Server.NodeContainer.EntitySystems;
 using Content.Server.NPC.Pathfinding;
+using Content.Server.SS220.QuadHearing;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Camera;
 using Content.Shared.CCVar;
@@ -19,6 +18,7 @@ using Content.Shared.GameTicking;
 using Content.Shared.Inventory;
 using Content.Shared.Maps;
 using Content.Shared.Projectiles;
+using Content.Shared.SS220.QuadHearing;
 using Content.Shared.Throwing;
 using Robust.Server.GameStates;
 using Robust.Server.Player;
@@ -31,6 +31,8 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using System.Linq;
+using System.Numerics;
 
 namespace Content.Server.Explosion.EntitySystems;
 
@@ -58,6 +60,7 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
     [Dependency] private readonly FlammableSystem _flammableSystem = default!;
     [Dependency] private readonly DestructibleSystem _destructibleSystem = default!;
     [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
+    [Dependency] private readonly QuadHearingSystem _quadHearing = default!; // SS220 Quad hearing
 
     private EntityQuery<FlammableComponent> _flammableQuery;
     private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -74,6 +77,8 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
     public const ushort DefaultTileSize = 1;
 
     public const int MaxExplosionAudioRange = 30;
+
+    private static readonly ProtoId<QuadHearingTargetPrototype> QuadHearingTargetProtoId = "Explosion"; // SS220 Quad hearing
 
     public override void Initialize()
     {
@@ -385,6 +390,7 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
             : queued.Proto.SoundFar;
 
         _audio.PlayGlobal(farSound, farFilter, true, farSound.Params);
+        _quadHearing.RegisterTarget(QuadHearingTargetProtoId, mapEntityCoords); // SS220 Quad hearing
 
         return new Explosion(this,
             queued.Proto,

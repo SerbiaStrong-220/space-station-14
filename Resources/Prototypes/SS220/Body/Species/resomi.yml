@@ -254,6 +254,7 @@
     bloodlossHealDamage:
       types:
         Bloodloss: -1
+  - type: QuadHearing
 
 
 - type: entity
