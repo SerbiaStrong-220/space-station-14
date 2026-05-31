@@ -19,6 +19,6 @@ public sealed partial class QuadHearingComponent : Component
     [DataField, AutoNetworkedField]
     public EntityUid? ToggleActionEntity;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public Dictionary<ProtoId<QuadHearingTargetPrototype>, float>? HearingRangeOverride = null;
 }

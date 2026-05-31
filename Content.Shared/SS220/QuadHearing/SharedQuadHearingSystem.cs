@@ -92,7 +92,7 @@ public abstract class SharedQuadHearingSystem : EntitySystem
 
         var delta = recepientMapCoords.Position - targetMapCoords.Position;
         var distance = delta.Length();
-        if (distance < recepient.Comp.MinDistance && distance > range)
+        if (distance < recepient.Comp.MinDistance || distance > range)
             return false;
 
         return true;

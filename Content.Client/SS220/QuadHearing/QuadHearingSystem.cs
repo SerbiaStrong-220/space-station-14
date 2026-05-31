@@ -83,11 +83,6 @@ public sealed class QuadHearingSystem : SharedQuadHearingSystem
     private Vector2 GetRandomOffset(float maxDistance)
     {
         var dist = _random.NextFloat(0, maxDistance);
-        var offset = new Vector2(dist, 0);
-
-        var angle = _random.NextAngle();
-        var rotMatrix = Matrix3x2.CreateRotation((float)angle.Theta);
-
-        return Vector2.Transform(offset, rotMatrix);
+        return _random.NextAngle().ToVec() * dist;
     }
 }

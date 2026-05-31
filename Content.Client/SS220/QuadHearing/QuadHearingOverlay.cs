@@ -87,27 +87,28 @@ public sealed class QuadHearingOverlay : Overlay
 
     protected override void Draw(in OverlayDrawArgs args)
     {
-        var player = _player.LocalEntity;
-        if (player == null)
+        if (_player.LocalEntity is not { } player)
             return;
 
-        if (!_entity.TryGetComponent<QuadHearingComponent>(player.Value, out var quadHearing))
+        if (!_entity.TryGetComponent<QuadHearingComponent>(player, out var quadHearing))
             return;
 
         if (!quadHearing.ShowEffect)
             return;
 
-        var playerPos = _transform.GetWorldPosition(player.Value);
+        
 
         var handle = args.WorldHandle;
         var zoom = args.Viewport.Eye?.Zoom ?? Vector2.One;
         var renderScale = args.Viewport.RenderScale;
         var worldToLocalMatrix = args.Viewport.GetWorldToLocalMatrix();
 
+        var playerPos = _transform.GetWorldPosition(player);
+        var screenPlayerPos = WorldToScreenPos(playerPos, args.Viewport, worldToLocalMatrix);
+
         foreach (var entry in _targetsEntries.Values)
         {
             var proto = entry.Proto;
-            var screenPlayerPos = WorldToScreenPos(playerPos, args.Viewport, worldToLocalMatrix);
             var screenWaveThickness = WorldToScreenLength(proto.WaveThickness, renderScale.X, zoom.X);
             var screenWaveInterval = WorldToScreenLength(proto.WaveInterval, renderScale.X, zoom.X);
             var screenCircleWaveRadius = WorldToScreenLength(proto.CircleWaveRadius, renderScale.X, zoom.X);
