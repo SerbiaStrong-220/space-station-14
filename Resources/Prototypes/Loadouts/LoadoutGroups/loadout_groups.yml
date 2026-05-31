@@ -167,6 +167,8 @@
   - CaptainMantle
   - CaptainFormalWhiteCloak #ss220-loadout-captain
   - CaptainWhiteMantle #ss220-loadout-fullwhitecap
+  - CaptainShoulderMantle # SS220 Add Shoulder Mantles
+  - CaptainWhiteShoulderMantle # SS220 Add Shoulder Mantles
 
 - type: loadoutGroup
   id: CaptainBackpack
@@ -1383,6 +1385,7 @@
   - HeadofSecurityMantle
   - SecurityHolster #SS220-HoS-Holster
   - MantleHOSShoulder #ss220 sec loadout update
+  - HOSShoulderMantle # SS220 Add Shoulder Mantles
 
 - type: loadoutGroup
   id: HeadofSecurityOuterClothing
