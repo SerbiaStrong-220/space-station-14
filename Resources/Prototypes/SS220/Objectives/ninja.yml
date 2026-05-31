@@ -40,6 +40,12 @@
       damageGroup: Brute
       allowedState: [Alive]
       targetAmount: 280
+    filter:
+    - !type:BodyMindFilter
+      inverted: true
+      whitelist:
+        components:
+        - DamageReceivedTracker
 
 - type: entity
   parent: BaseNinjaObjective
@@ -59,6 +65,12 @@
       damageGroup: Burn
       allowedState: [Alive]
       targetAmount: 160
+    filter:
+    - !type:BodyMindFilter
+      inverted: true
+      whitelist:
+        components:
+        - DamageReceivedTracker
 
 - type: entity
   parent: BaseNinjaObjective
@@ -78,6 +90,12 @@
       damageGroup: Toxin
       allowedState: [Alive]
       targetAmount: 120
+    filter:
+    - !type:BodyMindFilter
+      inverted: true
+      whitelist:
+        components:
+        - DamageReceivedTracker
 
 # Imperial/SS220 start
 - type: entity

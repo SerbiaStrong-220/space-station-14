@@ -8,6 +8,7 @@
   - type: RoleRequirement
     roles:
     - TraitorRole
+    - BloodBrothersRole # ss220-blood-brothers
 
 - type: entity
   abstract: true
@@ -46,6 +47,11 @@
       sprite: Structures/Furniture/chairs.rsi
       state: shuttle
   - type: EscapeShuttleCondition
+  # ss220-blood-brothers-begin
+  - type: RoleRequirement
+    roles:
+    - TraitorRole
+  # ss220-blood-brothers-end
 
 - type: entity
   parent: BaseTraitorObjective
@@ -66,6 +72,11 @@
   - type: DieCondition
   - type: ObjectiveLimit
     limit: 1
+  # ss220-blood-brothers-begin
+  - type: RoleRequirement
+    roles:
+    - TraitorRole
+  # ss220-blood-brothers-end
 
 #SS220 Return hijack objective begin
 - type: entity
@@ -101,6 +112,12 @@
       blacklist:
         components:
         - KillPersonCondition
+        - BloodBrothersRole # ss220-blood-brothers
+    - !type:HasRoleMindFilter
+      inverted: true
+      whitelist:
+        components:
+        - BloodBrothersRole # ss220-blood-brothers
   - type: KillPersonCondition
     requireMaroon: true
 
@@ -127,6 +144,11 @@
       blacklist:
         components:
         - KillPersonCondition
+    - !type:HasRoleMindFilter
+      inverted: true
+      whitelist:
+        components:
+        - BloodBrothersRole # ss220-blood-brothers
   - type: KillPersonCondition
     # don't count missing evac as killing as heads are higher profile, so you really need to do the dirty work
     # if ce flies a shittle to centcom you better find a way onto it
@@ -197,6 +219,7 @@
       whitelist:
         components:
         - TraitorRole
+        - BloodBrothersRole # ss220-blood-brothers
     # Can't help anyone who is tasked with helping:
     # 1. thats boring
     # 2. no cyclic progress dependencies!!!
