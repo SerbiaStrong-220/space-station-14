@@ -404,6 +404,9 @@
   parent: [ OrganBaseBrain, OrganSpriteHumanInternal, OrganIpcInternal ]
   id: OrganIpcBrain
   components:
+  - type: Sprite
+    sprite: SS220/Mobs/Species/Ipc/organs.rsi
+    state: brain
   - type: BorgBrain
 
 #- type: entity
