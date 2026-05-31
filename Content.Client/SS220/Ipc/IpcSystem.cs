@@ -91,7 +91,7 @@ public sealed partial class IpcSystem : EntitySystem
         if (curTime < _nextAlertUpdate)
             return;
 
-        _nextAlertUpdate = curTime + AlertUpdateDelay;
+        _nextAlertUpdate += AlertUpdateDelay;
 
         if (!_ipcQuery.TryComp(localPlayer, out var ipc) || !_slotQuery.TryComp(localPlayer, out var slot))
             return;
