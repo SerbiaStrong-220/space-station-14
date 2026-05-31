@@ -96,8 +96,6 @@ public sealed class QuadHearingOverlay : Overlay
         if (!quadHearing.ShowEffect)
             return;
 
-        
-
         var handle = args.WorldHandle;
         var zoom = args.Viewport.Eye?.Zoom ?? Vector2.One;
         var renderScale = args.Viewport.RenderScale;
