@@ -4,6 +4,8 @@
   parent: BaseBullet
   categories: [ HideSpawnMenu ]
   components:
+  - type: PathologyOnProjectileHit
+    weightedRandomProviderEntity: 45ACPCaliberFragment
   - type: Projectile
     damage:
       types:

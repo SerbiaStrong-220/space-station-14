@@ -39,6 +39,20 @@
 
 - type: entity
   parent: BaseImplantAction
+  id: ActionActivateNanoSurgeryMachinesImplant
+  components:
+  - type: Action
+    checkCanInteract: false
+    checkConsciousness: false
+    useDelay: 45
+    itemIconStyle: BigAction
+    priority: -20
+    icon:
+      sprite: /Textures/SS220/Interface/Actions/implants.rsi
+      state: surgery_nanomachines
+
+- type: entity
+  parent: BaseImplantAction
   id: ActionActivateAdrenalImplant
   components:
   - type: LimitedCharges

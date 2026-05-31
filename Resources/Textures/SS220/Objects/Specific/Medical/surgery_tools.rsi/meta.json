@@ -9,6 +9,15 @@
   "states": [
     {
       "name": "drape"
+    },
+    {
+      "name": "body-analyzer"
+    },
+    {
+      "name": "bone-gel"
+    },
+    {
+      "name": "cautery"
     }
   ]
 }

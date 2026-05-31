@@ -1,0 +1,6 @@
+[game]
+hostname = "[RU][TTS] SS220 Dev 🧑‍💻🛠️♻️"
+desc = "🛠️ Сервер для разработчиков проекта SS220 🛠️"
+
+[replay]
+auto_record = false
