@@ -1,0 +1,1 @@
+ent-ActionToggleQuadHearing = Четырехканальный слух
