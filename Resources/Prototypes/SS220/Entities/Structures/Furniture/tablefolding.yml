@@ -34,6 +34,12 @@
         density: 100
         mask:
         - TableMask
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 8
+    soundHit:
+      collection: MetalThud
 
 - type: entity
   parent: TableFolding
@@ -44,10 +50,4 @@
     size: Huge
   - type: Foldable
     folded: true
-  - type: MeleeWeapon
-    damage:
-      types:
-        Blunt: 8
-    soundHit:
-      collection: MetalThud
 
