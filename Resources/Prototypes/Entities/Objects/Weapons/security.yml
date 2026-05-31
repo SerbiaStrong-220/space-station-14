@@ -31,6 +31,9 @@
   # SS220-stunbaton-as-defib-end
   - type: ItemToggle
     predictable: false
+# SS220-sec-gear-size-fix-start
+    onActivate: false
+# SS220-sec-gear-size-fix-end
     soundActivate:
       collection: sparks
       params:
