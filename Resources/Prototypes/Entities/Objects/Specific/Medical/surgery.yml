@@ -21,8 +21,8 @@
   description: A surgical tool used to cauterize open wounds.
   components:
   - type: Sprite
-    sprite: Objects/Specific/Medical/Surgery/cautery.rsi
-    state: cautery
+    sprite: SS220/Objects/Specific/Medical/surgery_tools.rsi # SS220 resprite
+    state: cautery # SS220 resprite
   - type: Item
     sprite: Objects/Specific/Medical/Surgery/cautery.rsi
     storedRotation: 90
@@ -35,7 +35,10 @@
   # SS220 Surgery begin
   - type: SurgeryTool
     toolType: Cautery
-    sound: /Audio/SS220/Surgery/cautery.ogg
+    sound:
+      path: /Audio/SS220/Surgery/cautery.ogg
+      params:
+        variation: 0.125
   # SS220 Surgery end
 
 # Drill
@@ -104,7 +107,10 @@
   # SS220 Surgery begin
   - type: SurgeryTool
     toolType: Scalpel
-    sound: /Audio/SS220/Surgery/scalpel.ogg
+    sound:
+      path: /Audio/SS220/Surgery/scalpel.ogg
+      params:
+        variation: 0.125
   # SS220 Surgery end
 
 # SS220 Scalpel item begin
@@ -214,8 +220,14 @@
     storedRotation: 90
   # SS220 Surgery begin
   - type: SurgeryTool
+    failureDamage:
+      types:
+        Slash: 5
     toolType: Retractor
-    sound: /Audio/SS220/Surgery/retractor.ogg
+    sound:
+      path: /Audio/SS220/Surgery/retractor.ogg
+      params:
+        variation: 0.125
   # SS220 Surgery end
 
 - type: entity
@@ -231,8 +243,14 @@
     storedRotation: 90
   # SS220 Surgery begin
   - type: SurgeryTool
+    failureDamage:
+      types:
+        Slash: 5
     toolType: Hemostat
-    sound: /Audio/SS220/Surgery/hemostat.ogg
+    sound:
+      path: /Audio/SS220/Surgery/hemostat.ogg
+      params:
+        variation: 0.125
   # SS220 Surgery end
 
   # - type: entity
@@ -306,7 +324,10 @@
   # SS220 Surgery begin
   - type: SurgeryTool
     toolType: Saw
-    sound: /Audio/SS220/Surgery/saw.ogg
+    sound:
+      path: /Audio/SS220/Surgery/saw.ogg
+      params:
+        variation: 0.125
   # SS220 Surgery end
 
 - type: entity
