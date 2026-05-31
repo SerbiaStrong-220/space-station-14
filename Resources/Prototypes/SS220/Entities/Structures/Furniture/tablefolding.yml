@@ -19,8 +19,9 @@
   - type: PlaceableSurface
   - type: Climbable
   - type: Construction
-    graph: tableFoldingGraph
-    node: tableFoldingNode
+    graph: TableFoldingGraph
+    node: TableFoldingNode
+  - type: DeployFoldable
   - type: DamageExaminable
   - type: Anchorable
   - type: Pullable
@@ -43,7 +44,6 @@
     size: Huge
   - type: Foldable
     folded: true
-  - type: DeployFoldable
   - type: MeleeWeapon
     damage:
       types:

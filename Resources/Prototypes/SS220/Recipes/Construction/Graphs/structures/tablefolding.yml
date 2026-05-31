@@ -1,12 +1,12 @@
 # © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 - type: constructionGraph
-  id: tableFoldingGraph
+  id: TableFoldingGraph
   start: start
   graph:
     - node: start
       edges:
-        - to: tableFoldingNode
+        - to: TableFoldingNode
           completed:
             - !type:SnapToGrid
               southRotation: true
@@ -18,7 +18,7 @@
               amount: 4
               doAfter: 2
 
-    - node: tableFoldingNode
+    - node: TableFoldingNode
       entity: TableFolding
       edges:
         - to: start

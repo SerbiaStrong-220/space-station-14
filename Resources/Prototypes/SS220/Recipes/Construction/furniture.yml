@@ -299,9 +299,9 @@
 
 - type: construction
   id: TableFolding
-  graph: tableFoldingGraph
+  graph: TableFoldingGraph
   startNode: start
-  targetNode: tableFoldingNode
+  targetNode: TableFoldingNode
   category: construction-category-furniture
   objectType: Structure
   placementMode: SnapgridCenter
