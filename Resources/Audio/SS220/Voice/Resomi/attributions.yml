@@ -1,9 +1,9 @@
 - files: ["resomi_scream"]
   license: "CC-BY-NC-SA-3.0"
-  copyright: "Taken from Steam mod / Starbound. Made by Steam user: https://steamcommunity.com/id/wonky2 with permission."
-  source: "https://steamcommunity.com/sharedfiles/filedetails/?id=3001955034"
+  copyright: "Taken from Goob-Station. Original made by: https://steamcommunity.com/id/wonky2 (Steam)"
+  source: "https://github.com/Goob-Station/Goob-Station/tree/3a6aeae6b0ba166c8ae1c5558603cb3f05b4c1eb/Resources/Audio/_Floofstation/Voice/Avali"
 
 - files: ["resomi_1, resomi_1_ask, resomi_1_exclaim, resomi_2, resomi_2_ask, resomi_2_exclaim, resomi_laugh"]
   license: "CC-BY-NC-SA-3.0"
-  copyright: "Taken from Steam 'Avali sounds' mod / Starbound. Made by Steam user: https://steamcommunity.com/id/Nefuki with permission. - avali_laugh is RMC_14 edit of these sounds by Vermidia/@Randomposter (discord) with permission from original."
-  source: "https://steamcommunity.com/sharedfiles/filedetails/?id=3164757879"
+  copyright: "Taken from Goob-Station. Original made by: https://steamcommunity.com/id/wonky2 (Steam)"
+  source: "https://github.com/Goob-Station/Goob-Station/tree/3a6aeae6b0ba166c8ae1c5558603cb3f05b4c1eb/Resources/Audio/_Floofstation/Voice/Avali"
