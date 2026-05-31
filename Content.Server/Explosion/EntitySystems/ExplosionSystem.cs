@@ -1,3 +1,5 @@
+using System.Linq;
+using System.Numerics;
 using Content.Server.Administration.Logs;
 using Content.Server.Atmos.Components;
 using Content.Server.Atmos.EntitySystems;
@@ -31,8 +33,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using System.Linq;
-using System.Numerics;
 
 namespace Content.Server.Explosion.EntitySystems;
 
