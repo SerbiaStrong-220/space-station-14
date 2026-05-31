@@ -1,2 +1,7 @@
 ent-TableUraniumGlass = стол из уранового стекла
     .desc = Квадратный лист уранового стекла, стоящий на четырёх металлических ножках. Красивый!
+ent-TableFolding = раскладной стол
+    .desc = Отлично подходит для пикника!
+ent-TableFoldingSpawnFolded = { ent-TableFolding }
+    .suffix = Сложенный
+    .desc = { ent-TableFolding.desc }

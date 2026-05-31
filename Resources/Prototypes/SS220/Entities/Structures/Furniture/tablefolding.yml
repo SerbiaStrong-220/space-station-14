@@ -1,0 +1,53 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  parent: [BaseItem, BaseFoldable]
+  id: TableFolding
+  name: folding table
+  description: Great for a picnic!
+  components:
+  - type: Rotatable
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/folding_table.rsi
+    layers:
+    - state: folding
+      map: ["unfoldedLayer"]
+    - state: folding_folded
+      map: ["foldedLayer"]
+      visible: false
+  - type: Appearance
+  - type: PlaceableSurface
+  - type: Climbable
+  - type: Construction
+    graph: TableFoldingGraph
+    node: TableFoldingNode
+  - type: DeployFoldable
+  - type: DamageExaminable
+  - type: Anchorable
+  - type: Pullable
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 100
+        mask:
+        - TableMask
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 8
+    soundHit:
+      collection: MetalThud
+
+- type: entity
+  parent: TableFolding
+  id: TableFoldingSpawnFolded
+  suffix: folded
+  components:
+  - type: Item
+    size: Huge
+  - type: Foldable
+    folded: true
+
