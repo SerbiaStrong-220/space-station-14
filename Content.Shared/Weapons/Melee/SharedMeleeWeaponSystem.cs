@@ -590,6 +590,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         // Raise event before doing damage so we can cancel damage if the event is handled
         var hitEvent = new MeleeHitEvent(new List<EntityUid> { target.Value }, user, meleeUid, damage, null);
         RaiseLocalEvent(meleeUid, hitEvent);
+        RaiseLocalEvent(target.Value, hitEvent);//SS220 melee weapon logic extension
 
         if (hitEvent.Handled)
             return;

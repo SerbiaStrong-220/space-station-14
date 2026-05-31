@@ -8,12 +8,20 @@ using Content.Shared.Examine;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Popups;
+using Content.Shared.Random.Helpers;
+using Content.Shared.SS220.AltBlocking;
+using Content.Shared.SS220.ToggleBlocking;
+using Content.Shared.SS220.Weapons.Melee.Events;
+using Content.Shared.SS220.Weapons.Ranged.Events;
 using Content.Shared.Verbs;
+using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Network;
+using Robust.Shared.Physics;
 using Robust.Shared.Timing;
+using System.Numerics;
 
 namespace Content.Shared.SS220.FieldShield;
 
@@ -22,6 +30,7 @@ public sealed class FieldShieldProviderSystem : EntitySystem
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] protected readonly DamageableSystem _damageable = default!;
 
     private const int FieldShieldPushPriority = 2;
 
@@ -49,8 +58,10 @@ public sealed class FieldShieldProviderSystem : EntitySystem
 
         SubscribeLocalEvent<FieldShieldProviderComponent, GetVerbsEvent<AlternativeVerb>>(OnGetAltVerbs);
 
-        SubscribeLocalEvent<FieldShieldComponent, BeforeDamageChangedEvent>(OnFieldShieldBeforeDamage);
-        SubscribeLocalEvent<FieldShieldComponent, DamageModifyEvent>(OnShieldDamageModify);
+        SubscribeLocalEvent<FieldShieldComponent, ProjectileBlockAttemptEvent>(OnShieldUserCollide);
+        SubscribeLocalEvent<FieldShieldComponent, HitscanBlockAttemptEvent>(OnShieldUserHitscan);
+        SubscribeLocalEvent<FieldShieldComponent, MeleeHitEvent>(OnShieldUserMeleeHit);
+        SubscribeLocalEvent<FieldShieldComponent, ThrowableProjectileBlockAttemptEvent>(OnBlockThrownProjectile);
 
         SubscribeLocalEvent<FieldShieldProviderComponent, EmpPulseEvent>(OnFieldShieldProviderEmpPulse);
         SubscribeLocalEvent<FieldShieldComponent, EmpPulseEvent>(OnFieldShieldEmpPulse);
@@ -197,36 +208,44 @@ public sealed class FieldShieldProviderSystem : EntitySystem
         }
     }
 
-    private void OnFieldShieldBeforeDamage(Entity<FieldShieldComponent> entity, ref BeforeDamageChangedEvent args)
+    private void OnShieldUserCollide(Entity<FieldShieldComponent> ent, ref ProjectileBlockAttemptEvent args)
     {
-        if (args.Cancelled)
-            return;
-
-        if (args.Damage.GetTotal() + args.Damage.ArmourPiercing > entity.Comp.ShieldData.MaxDamageConsumable
-            || args.Damage.GetTotal() < entity.Comp.ShieldData.DamageThreshold)
-            return;
-
-        UpdateShieldTimer(entity);
-
-        if (entity.Comp.ShieldCharge <= 0)
-            return;
-
-        DecreaseShieldCharges(entity);
-        args.Cancelled = true;
+        if (TryBlockDamage(ent, ref args.Damage))
+            args.Cancelled = true;
     }
 
-    private void OnShieldDamageModify(Entity<FieldShieldComponent> entity, ref DamageModifyEvent args)
+    private void OnBlockThrownProjectile(Entity<FieldShieldComponent> ent, ref ThrowableProjectileBlockAttemptEvent args)
     {
-        if (args.OriginalDamage.GetTotal() < entity.Comp.ShieldData.DamageThreshold)
-            return;
+        if (args.Damage != null && TryBlockDamage(ent, ref args.Damage))
+            args.Cancelled = true;
+    }
 
+    private void OnShieldUserHitscan(Entity<FieldShieldComponent> ent, ref HitscanBlockAttemptEvent args)
+    {
+        if (args.Damage != null && TryBlockDamage(ent, ref args.Damage))
+            args.Cancelled = true;
+    }
+
+    private void OnShieldUserMeleeHit(Entity<FieldShieldComponent> ent, ref MeleeHitEvent args)
+    {
+        if (ent.Comp.ShieldCharge > 0)
+        {
+            args.ModifiersList.Add(ent.Comp.ShieldData.Modifiers);
+            DecreaseShieldCharges(ent);
+        }
+    }
+
+    private bool TryBlockDamage(Entity<FieldShieldComponent> entity, ref DamageSpecifier damage)
+    {
         UpdateShieldTimer(entity);
 
         if (entity.Comp.ShieldCharge <= 0)
-            return;
+            return false;
 
         DecreaseShieldCharges(entity);
-        args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, entity.Comp.ShieldData.Modifiers);
+        damage = DamageSpecifier.ApplyModifierSet(damage, entity.Comp.ShieldData.Modifiers);
+        _damageable.TryChangeDamage(entity.Owner, damage, out var damageResult);
+        return true;
     }
 
     private void DecreaseShieldCharges(Entity<FieldShieldComponent> entity)
