@@ -1,0 +1,103 @@
+- type: marking
+  groupWhitelist: [Ipc]
+  id: RobotAntennaTv
+  bodyPart: Hair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_antenna.rsi
+      state: ipc_antenna_tv
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: RobotAntennaTesla
+  bodyPart: Hair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_antenna.rsi
+      state: ipc_antenna_tesla
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: RobotAntennaCyberhead
+  bodyPart: Hair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_antenna.rsi
+      state: ipc_antenna_cyberhead
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: RobotAntennaAntlers
+  bodyPart: Hair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_antenna.rsi
+      state: ipc_antenna_antlers
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: RobotAntennaDroneeyes
+  bodyPart: Hair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_antenna.rsi
+      state: ipc_antenna_droneeyes
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: RobotAntennaCrowned
+  bodyPart: Hair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_antenna.rsi
+      state: ipc_antenna_crowned
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: RobotAntennaTowers
+  bodyPart: Hair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_antenna.rsi
+      state: ipc_antenna_towers
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: RobotAntennaDuality
+  bodyPart: Hair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_antenna.rsi
+      state: ipc_antenna_duality
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: RobotAntennaHoloaura
+  bodyPart: Hair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_antenna.rsi
+      state: ipc_antenna_holo_aura
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: RobotAntennaWireless
+  bodyPart: Hair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_antenna.rsi
+      state: ipc_antenna_wireless_connection
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: RobotAntennaSmallEye
+  bodyPart: Hair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_antenna.rsi
+      state: ipc_small_eye
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: RobotAntennaCat
+  bodyPart: Hair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_antenna.rsi
+      state: ipc_antenna_cat
+
+- type: marking
+  groupWhitelist: [Ipc]
+  id: RobotAntennaTvAlt
+  bodyPart: Hair
+  sprites:
+    - sprite: SS220/Mobs/Customization/Ipc/ipc_antenna.rsi
+      state: ipc_antenna_tvalt

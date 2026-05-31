@@ -96,6 +96,7 @@
   - EmergencyNitrogen
   - EmergencyOxygen
   - LoadoutSpeciesVoxNitrogen
+  - LoadoutSpeciesIpc #SS220-add-ipc
 
 # nitrogen or oxygen tank, depending on what your species needs
 - type: loadoutGroup
@@ -721,6 +722,7 @@
   - EmergencyNitrogenClown
   - EmergencyOxygenClown
   - LoadoutSpeciesVoxNitrogen
+  - LoadoutSpeciesClownIpc #SS220-add-ipc
 
 - type: loadoutGroup
   id: ClownJobTrinkets
@@ -788,6 +790,7 @@
   - EmergencyOxygenMime
   - EmergencySpeciesMothMime
   - LoadoutSpeciesVoxNitrogen
+  - LoadoutSpeciesMimeIpc #SS220-add-ipc
 
 #- type: loadoutGroup
 #  id: MimeJobTrinkets
@@ -1184,6 +1187,7 @@
   - EmergencyNitrogenExtended
   - EmergencyOxygenExtended
   - LoadoutSpeciesVoxNitrogen
+  - LoadoutSpeciesEngineerIpc #SS220-add-ipc
 
 # Science
 - type: loadoutGroup
@@ -1595,6 +1599,24 @@
   - EmergencyNitrogenSecurity
   - EmergencyOxygenSecurity
   - LoadoutSpeciesVoxNitrogen
+  - LoadoutSpeciesSecurityIpc #SS220-add-ipc
+
+- type: loadoutGroup
+  id: SecurityStar
+  name: loadout-group-security-star
+  minLimit: 0
+  loadouts:
+  - SecStar
+
+# Medical
+
+- type: loadoutGroup
+  id: MedicalGloves
+  name: loadout-group-medical-gloves
+  minLimit: 0
+  loadouts:
+  - LatexGloves
+  - NitrileGloves
 
 # Wildcards
 - type: loadoutGroup

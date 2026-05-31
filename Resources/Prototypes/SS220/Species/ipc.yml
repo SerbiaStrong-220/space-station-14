@@ -1,0 +1,13 @@
+- type: species
+  id: Ipc
+  name: species-name-ipc
+  roundStart: true
+  prototype: MobIpc
+  defaultSkinTone: "#eb943d"
+  dollPrototype: AppearanceIpc
+  skinColoration: Hues
+  maleFirstNames: NamesIpcFirstMale
+  femaleFirstNames: NamesIpcFirstFemale
+  maleLastNames: NamesIpcLast
+  femaleLastNames: NamesIpcLast
+  minAge: 0

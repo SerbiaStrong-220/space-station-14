@@ -5,3 +5,12 @@
 
 - type: damageContainer
   id: Invulnerable
+
+- type: damageContainer
+  id: IpcContainer
+  supportedGroups:
+    - Brute
+    - Burn
+  supportedTypes:
+    - Heat
+    - Shock
