@@ -147,20 +147,23 @@ public abstract partial class SharedGunSystem : EntitySystem
         if (!TryGetEntity(args.User, out var localUser) || !TryGetEntity(args.Gun, out var localGun))
             return;
 
+        if (localUser is not { Valid: true } user || localGun is not { Valid: true } gun)
+            return;
+
         if (TryComp<ChamberMagazineAmmoProviderComponent>(localGun, out var chamberMagComp))
         {
             args.Handled = true;
             if (chamberMagComp.CanRack)
-                UseChambered((EntityUid)localGun, chamberMagComp, (EntityUid)localUser);
+                UseChambered(gun, chamberMagComp, user);
             else
-                ToggleBolt((EntityUid)localGun, chamberMagComp, (EntityUid)localUser);
+                ToggleBolt(gun, chamberMagComp, user);
 
             return;
         }
 
-        if (TryComp<BallisticAmmoProviderComponent>(localGun, out var ballisticComp))
+        if (TryComp<BallisticAmmoProviderComponent>(gun, out var ballisticComp))
         {
-            ManualCycle(((EntityUid)localGun, ballisticComp), TransformSystem.GetMapCoordinates((EntityUid)localGun), (EntityUid)localUser);
+            ManualCycle((gun, ballisticComp), TransformSystem.GetMapCoordinates(gun), user);
             args.Handled = true;
 
             return;

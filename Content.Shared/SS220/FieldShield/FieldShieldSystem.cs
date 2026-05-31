@@ -294,13 +294,13 @@ public sealed class FieldShieldProviderSystem : EntitySystem
         if (!_gameTiming.IsFirstTimePredicted)
             return;
 
-        if (ent.Comp.Wearer == null)
+        if (ent.Comp.Wearer is not { Valid: true } wearer)
             return;
 
         if (!ent.Comp.Modes.ContainsKey(mode))
             return;
 
-        if (!TryComp<FieldShieldComponent>(ent.Comp.Wearer, out var shieldComp))
+        if (!TryComp<FieldShieldComponent>(wearer, out var shieldComp))
             return;
 
         shieldComp.ShieldData = ent.Comp.Modes[mode];
@@ -309,7 +309,7 @@ public sealed class FieldShieldProviderSystem : EntitySystem
 
         ent.Comp.Mode = mode;
 
-        Dirty((EntityUid)ent.Comp.Wearer, shieldComp);
+        Dirty(wearer, shieldComp);
 
         Dirty(ent);
     }
