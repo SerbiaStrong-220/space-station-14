@@ -1,0 +1,142 @@
+- type: entity
+  id: HookahElectric
+  name: электрический кальян
+  description: Современный кальян с электрическим нагревателем. Без углей, без огня - только табак и батарейка.
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: SS220/Objects/Specific/HookahElectric/hookah_electric.rsi
+    drawdepth: SmallObjects
+    noRot: true
+    layers:
+    - state: icon
+      map: ["enum.HookahElectricVisualLayers.Base"]
+    - state: left-hose
+      map: ["enum.HookahElectricVisualLayers.LeftHose"]
+    - state: right-hose
+      map: ["enum.HookahElectricVisualLayers.RightHose"]
+  - type: Appearance
+  - type: HookahElectricVisuals
+  - type: Pullable
+  - type: Damageable
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:EmptyAllContainersBehaviour
+      - !type:SpillBehavior
+        solution: hookah
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: HookahElectric
+    hosePrototype: HookahElectricHose
+    inhaleAmount: 2
+    useSound:
+      path: /Audio/SS220/Hookah/hookah_drag.ogg
+    ropeSprite:
+      sprite: SS220/Objects/Specific/HookahElectric/hookah_electric_rope.rsi
+      state: rope
+    toggleOnSound:
+      path: /Audio/Machines/button.ogg
+    toggleOffSound:
+      path: /Audio/Machines/button.ogg
+  - type: SmokingFuel
+    tobacco_slot:
+      name: hookah-tobacco-slot-name
+      whitelist:
+        components:
+        - Stack
+      insertSound:
+        path: /Audio/Weapons/Guns/Empty/empty.ogg
+  - type: PowerCellSlot
+    cellSlotId: cell_slot
+  - type: PowerCellDraw
+    drawRate: 1.5
+    enabled: false
+  - type: ContainerContainer
+    containers:
+      tobacco_slot: !type:ContainerSlot
+      cell_slot: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        disableEject: true
+  - type: SolutionContainerManager
+    solutions:
+      hookah:
+        maxVol: 150
+        reagents:
+        - ReagentId: Water
+          Quantity: 100
+  - type: RefillableSolution
+    solution: hookah
+  - type: ExaminableSolution
+    solution: hookah
+  - type: Physics
+    bodyType: Dynamic
+    fixedRotation: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 200
+        mask:
+        - ItemMask
+        restitution: 0.1
+        friction: 1.0
+
+- type: entity
+  parent: SponsorBoxBase
+  id: HookahElectricSponsorBox
+  name: коробка с электрическим кальяном
+  description: Внутри современный электрический кальян. Без углей, без огня - только табак и батарейка.
+  components:
+  - type: SpawnItemsOnUse
+    items:
+    - id: HookahElectric
+    - id: LeavesTobaccoDried
+      amount: 10
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  id: HookahElectricHose
+  name: трубка электрического кальяна
+  description: Гибкий шланг. Один конец - в кальян, другой - в лёгкие.
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: SS220/Objects/Specific/HookahElectric/hookah_electric_hose.rsi
+    drawdepth: Items
+    noRot: false
+    layers:
+    - state: icon
+  - type: Item
+    size: Ginormous
+    sprite: SS220/Objects/Specific/HookahElectric/hookah_electric_hose.rsi
+  - type: HookahElectricHose
+    maxDistance: 3.0
+  - type: UseDelay
+    delay: 5.0
+  - type: Physics
+    bodyType: Dynamic
+    canCollide: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.15,-0.15,0.15,0.15"
+        density: 10
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
