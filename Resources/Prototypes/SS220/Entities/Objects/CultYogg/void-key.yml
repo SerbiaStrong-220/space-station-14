@@ -75,6 +75,7 @@
       components:
       - HumanoidProfile
       - CultYogg
+      requireAll: true
   - type: RandomTeleport
     targetsComponent: "RandomTeleportTarget"
     whitelist:
