@@ -221,8 +221,8 @@
       Burn:
         sprite: Mobs/Effects/burn_damage.rsi
   - type: TemperatureDamage
-    heatDamageThreshold: 320
-    coldDamageThreshold: 230
+    heatDamageThreshold: 305.85    # 305.85 K = 31 °C
+    coldDamageThreshold: 205.15    # 205.15 K = -68 °C
     coldDamage:
       types:
         Cold: 0.05 #per second, scales with temperature & other constants
@@ -230,8 +230,6 @@
       types:
         Heat: 2 #per second, scales with temperature & other constants
   - type: Temperature
-    heatDamageThreshold: 305.85    # 305.85 K = 31 °C
-    coldDamageThreshold: 205.15    # 205.15 K = -68 °C
     currentTemperature: 253.15
     specificHeat: 42
   - type: TemperatureSpeed
@@ -246,15 +244,13 @@
     bloodReferenceSolution:
       reagents:
       - ReagentId: ResomiBlood
-        Quantity: 300
+        Quantity: 180
     bloodlossDamage:
       types:
         Bloodloss: 0.5
     bloodlossHealDamage:
       types:
         Bloodloss: -1
-    bloodMaxVolume: 180
-    chemicalMaxVolume: 150
 
 
 - type: entity
