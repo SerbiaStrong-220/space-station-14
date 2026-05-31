@@ -8,9 +8,10 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared.SS220.Ipc;
 
 /// <summary>
-/// This is used for...
+/// Component placed on a mob to make it a IPC.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState]
 public sealed partial class IpcComponent : Component
 {
     [DataField]
@@ -31,6 +32,7 @@ public sealed partial class IpcComponent : Component
     [DataField]
     public EntityUid? ChangeFaceActionEntity;
 
+    [DataField, AutoNetworkedField]
     public bool DrainActivated;
 
     /// <summary>

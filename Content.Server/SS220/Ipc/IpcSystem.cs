@@ -21,23 +21,13 @@ using Content.Shared.Sound.Components;
 using Content.Shared.UserInterface;
 using Content.Shared.Temperature;
 using Robust.Shared.Audio;
-using Robust.Shared.GameObjects;
-using Robust.Shared.Utility;
-using Robust.Shared.Prototypes;
-using Content.Shared.Humanoid;
-using Content.Server.Humanoid;
-using Content.Shared.Humanoid.Markings;
-using Robust.Shared.Player;
-using Content.Shared.Body;
 using Content.Shared.MagicMirror;
-using Content.Shared.Body.Components;
 
 namespace Content.Server.SS220.Ipc;
 
 public sealed partial class IpcSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _action = default!;
-    [Dependency] private readonly AlertsSystem _alerts = default!;
     [Dependency] private readonly SharedBatteryDrainerSystem _batteryDrainer = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PowerCellSystem _powerCell = default!;
@@ -55,21 +45,21 @@ public sealed partial class IpcSystem : EntitySystem
         SubscribeLocalEvent<IpcComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<IpcComponent, ComponentShutdown>(OnComponentShutdown);
         SubscribeLocalEvent<IpcComponent, PowerCellChangedEvent>(OnPowerCellChanged);
-        SubscribeLocalEvent<IpcComponent, ToggleDrainActionEvent>(OnToggleAction);
+        SubscribeLocalEvent<IpcComponent, ToggleDrainActionEvent>(OnToggleDrainAction);
         SubscribeLocalEvent<IpcComponent, EmpPulseEvent>(OnEmpPulse);
         SubscribeLocalEvent<IpcComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovementSpeedModifiers);
         SubscribeLocalEvent<IpcComponent, MobStateChangedEvent>(OnMobStateChanged);
-        SubscribeLocalEvent<IpcComponent, OpenIpcFaceActionEvent>(OnOpenFaceAction);
+        SubscribeLocalEvent<IpcComponent, OpenIpcFaceActionEvent>(OnOpenIpcFaceAction);
         SubscribeLocalEvent<IpcComponent, DamageChangedEvent>(OnDamageChanged);
-        //SubscribeLocalEvent<IpcComponent, OnTemperatureChangeEvent>(OnTemperatureChanged);
+        //SubscribeLocalEvent<IpcComponent, OnTemperatureChangeEvent>(OnTemperatureChange);
     }
 
     private void OnMapInit(Entity<IpcComponent> ent, ref MapInitEvent args)
     {
-        UpdateBatteryAlert((ent, ent.Comp));
         _action.AddAction(ent, ref ent.Comp.DrainBatteryActionEntity, ent.Comp.DrainBatteryAction);
         _action.AddAction(ent, ref ent.Comp.ChangeFaceActionEntity, ent.Comp.ChangeFaceAction);
         _movementSpeedModifier.RefreshMovementSpeedModifiers(ent);
+        Dirty(ent);
     }
 
     private void OnComponentShutdown(Entity<IpcComponent> ent, ref ComponentShutdown args)
@@ -83,11 +73,10 @@ public sealed partial class IpcSystem : EntitySystem
         if (MetaData(ent).EntityLifeStage >= EntityLifeStage.Terminating)
             return;
 
-        UpdateBatteryAlert((ent, ent.Comp));
-
+        _movementSpeedModifier.RefreshMovementSpeedModifiers(ent.Owner);
     }
 
-    private void OnToggleAction(Entity<IpcComponent> ent, ref ToggleDrainActionEvent args)
+    private void OnToggleDrainAction(Entity<IpcComponent> ent, ref ToggleDrainActionEvent args)
     {
         if (args.Handled)
             return;
@@ -106,29 +95,8 @@ public sealed partial class IpcSystem : EntitySystem
 
         var message = ent.Comp.DrainActivated ? "Ipc-component-ready" : "Ipc-component-disabled";
         _popup.PopupEntity(Loc.GetString(message), ent, ent);
-    }
 
-    private void UpdateBatteryAlert(Entity<IpcComponent> ent, PowerCellSlotComponent? slot = null)
-    {
-        if (!_powerCell.TryGetBatteryFromSlot(ent.Owner, out var battery) || _battery.GetCharge(battery.Value.AsNullable()) / battery.Value.Comp.MaxCharge < 0.01f)
-        {
-            _alerts.ClearAlert(ent.Owner, ent.Comp.BatteryAlert);
-            _alerts.ShowAlert(ent.Owner, ent.Comp.NoBatteryAlert);
-
-            _movementSpeedModifier.RefreshMovementSpeedModifiers(ent.Owner);
-            return;
-        }
-
-        var chargePercent = (short) MathF.Round(_battery.GetCharge(battery.Value.AsNullable()) / battery.Value.Comp.MaxCharge * 10f); //if 100f - crash
-
-        if (chargePercent == 0 && _powerCell.HasDrawCharge((ent.Owner, null, slot)))
-            chargePercent = 1;
-
-
-        _movementSpeedModifier.RefreshMovementSpeedModifiers(ent.Owner);
-
-        _alerts.ClearAlert(ent.Owner, ent.Comp.NoBatteryAlert);
-        _alerts.ShowAlert(ent.Owner, ent.Comp.BatteryAlert, chargePercent);
+        Dirty(ent);
     }
 
     private void OnRefreshMovementSpeedModifiers(Entity<IpcComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
@@ -139,7 +107,7 @@ public sealed partial class IpcSystem : EntitySystem
         }
     }
 
-    private void OnOpenFaceAction(Entity<IpcComponent> ent, ref OpenIpcFaceActionEvent args)
+    private void OnOpenIpcFaceAction(Entity<IpcComponent> ent, ref OpenIpcFaceActionEvent args)
     {
         if (args.Handled)
             return;
@@ -205,7 +173,7 @@ public sealed partial class IpcSystem : EntitySystem
         _mobState.ChangeMobState(ent, MobState.Critical);
     }
 /*
-    private void OnTemperatureChanged(Entity<IpcComponent> ent, ref OnTemperatureChangeEvent args)
+    private void OnTemperatureChange(Entity<IpcComponent> ent, ref OnTemperatureChangeEvent args)
     {
         if (!TryComp<PowerCellDrawComponent>(ent, out var draw))
             return;
