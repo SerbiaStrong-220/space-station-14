@@ -1003,6 +1003,11 @@ RightFootSkeleton: OrganSkeletonPersonFootRight
 HeadGingerbread: OrganGingerbreadHead
 LeftLegGingerbread: OrganGingerbreadLegLeft
 
+# 2026-05-07 - SS220 fix Dark Curb id
+CurbDarckSteel: CurbDarkSteel
+CurbDarckSteelCorner: CurbDarkSteelCorner
+CurbDarckSteelCornerSmall: CurbDarkSteelCornerSmall
+CurbDarckSteelRound: CurbDarkSteelRound
 # 2026-05-24 - SS220 shield rework
 RiotShield: RiotShieldAlt
 RiotLaserShield: RiotLaserShieldAlt
